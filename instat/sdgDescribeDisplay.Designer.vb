@@ -63,7 +63,7 @@ Partial Class sdgDescribeDisplay
         Me.ucrChkAddMargins.Location = New System.Drawing.Point(10, 18)
         Me.ucrChkAddMargins.Name = "ucrChkAddMargins"
         Me.ucrChkAddMargins.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkAddMargins.TabIndex = 3
+        Me.ucrChkAddMargins.TabIndex = 0
         '
         'ucrChkTranspose
         '
@@ -71,7 +71,7 @@ Partial Class sdgDescribeDisplay
         Me.ucrChkTranspose.Location = New System.Drawing.Point(127, 18)
         Me.ucrChkTranspose.Name = "ucrChkTranspose"
         Me.ucrChkTranspose.Size = New System.Drawing.Size(97, 20)
-        Me.ucrChkTranspose.TabIndex = 6
+        Me.ucrChkTranspose.TabIndex = 1
         '
         'ucrChkProportions
         '
@@ -79,7 +79,7 @@ Partial Class sdgDescribeDisplay
         Me.ucrChkProportions.Location = New System.Drawing.Point(10, 40)
         Me.ucrChkProportions.Name = "ucrChkProportions"
         Me.ucrChkProportions.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkProportions.TabIndex = 4
+        Me.ucrChkProportions.TabIndex = 2
         '
         'ucrChkPercentages
         '
@@ -87,7 +87,7 @@ Partial Class sdgDescribeDisplay
         Me.ucrChkPercentages.Location = New System.Drawing.Point(127, 40)
         Me.ucrChkPercentages.Name = "ucrChkPercentages"
         Me.ucrChkPercentages.Size = New System.Drawing.Size(97, 20)
-        Me.ucrChkPercentages.TabIndex = 5
+        Me.ucrChkPercentages.TabIndex = 3
         '
         'grpAnovaOptions
         '
@@ -108,7 +108,7 @@ Partial Class sdgDescribeDisplay
         Me.ucrChkMeans.Location = New System.Drawing.Point(10, 65)
         Me.ucrChkMeans.Name = "ucrChkMeans"
         Me.ucrChkMeans.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkMeans.TabIndex = 9
+        Me.ucrChkMeans.TabIndex = 2
         '
         'ucrChkSignifStars
         '
@@ -116,7 +116,7 @@ Partial Class sdgDescribeDisplay
         Me.ucrChkSignifStars.Location = New System.Drawing.Point(10, 19)
         Me.ucrChkSignifStars.Name = "ucrChkSignifStars"
         Me.ucrChkSignifStars.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkSignifStars.TabIndex = 7
+        Me.ucrChkSignifStars.TabIndex = 0
         '
         'ucrChkSignifLevel
         '
@@ -124,7 +124,7 @@ Partial Class sdgDescribeDisplay
         Me.ucrChkSignifLevel.Location = New System.Drawing.Point(10, 42)
         Me.ucrChkSignifLevel.Name = "ucrChkSignifLevel"
         Me.ucrChkSignifLevel.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkSignifLevel.TabIndex = 8
+        Me.ucrChkSignifLevel.TabIndex = 1
         '
         'sdgDescribeDisplay
         '

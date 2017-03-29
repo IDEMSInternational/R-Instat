@@ -167,7 +167,7 @@ Public Class dlgDescribeTwoVariable
             strSecondVarType = ""
         End If
 
-        If ((strVarType = "numeric" OrElse strVarType = "integer") And (strSecondVarType = "numeric" OrElse strSecondVarType = "integer")) Then
+        If ((strVarType = "numeric" OrElse strVarType = "integer") AndAlso (strSecondVarType = "numeric" OrElse strSecondVarType = "integer")) Then
             ucrChkSaveResult.Visible = False
             cmdSummaries.Visible = False
             cmdDisplayOptions.Visible = False
@@ -181,7 +181,7 @@ Public Class dlgDescribeTwoVariable
             ucrReceiverSecondVar.SetParameter(New RParameter("x", 0))
             ucrReceiverSecondVar.SetParameterIsRFunction()
 
-        ElseIf ((strVarType = "numeric" OrElse strVarType = "integer") And (strSecondVarType = "factor")) Then
+        ElseIf ((strVarType = "numeric" OrElse strVarType = "integer") AndAlso (strSecondVarType = "factor")) Then
             ucrChkSaveResult.Visible = False
             cmdSummaries.Visible = False
             cmdDisplayOptions.Visible = True
@@ -195,7 +195,7 @@ Public Class dlgDescribeTwoVariable
             ucrReceiverFirstVar.SetParameterIsString()
             ucrReceiverSecondVar.SetParameter(New RParameter("x_col_names", 1))
             ucrReceiverSecondVar.SetParameterIsString()
-        ElseIf ((strVarType = "factor") And (strSecondVarType = "numeric" OrElse strSecondVarType = "integer")) Then
+        ElseIf ((strVarType = "factor") AndAlso (strSecondVarType = "numeric" OrElse strSecondVarType = "integer")) Then
             ucrChkSaveResult.Visible = True
             cmdSummaries.Visible = True
             cmdDisplayOptions.Visible = False
@@ -209,7 +209,7 @@ Public Class dlgDescribeTwoVariable
             ucrBase.clsRsyntax.SetBaseRFunction(clsRCustomSummary)
             ucrReceiverSecondVar.SetParameter(New RParameter("columns_to_summarise", 1))
             ucrReceiverSecondVar.SetParameterIsString()
-        ElseIf ((strVarType = "factor") And (strSecondVarType = "factor")) Then
+        ElseIf ((strVarType = "factor") AndAlso (strSecondVarType = "factor")) Then
             ucrChkSaveResult.Visible = False
             cmdSummaries.Visible = False
             cmdDisplayOptions.Visible = True
