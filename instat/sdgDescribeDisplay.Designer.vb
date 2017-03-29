@@ -24,21 +24,21 @@ Partial Class sdgDescribeDisplay
     Private Sub InitializeComponent()
         Me.ucrButtonsDescribeDisplay = New instat.ucrButtonsSubdialogue()
         Me.grpFrequenciesOptions = New System.Windows.Forms.GroupBox()
-        Me.grpAnovaOptions = New System.Windows.Forms.GroupBox()
         Me.ucrChkAddMargins = New instat.ucrCheck()
+        Me.ucrChkTranspose = New instat.ucrCheck()
         Me.ucrChkProportions = New instat.ucrCheck()
         Me.ucrChkPercentages = New instat.ucrCheck()
-        Me.ucrChkTranspose = New instat.ucrCheck()
+        Me.grpAnovaOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrChkMeans = New instat.ucrCheck()
         Me.ucrChkSignifStars = New instat.ucrCheck()
         Me.ucrChkSignifLevel = New instat.ucrCheck()
-        Me.ucrChkMeans = New instat.ucrCheck()
         Me.grpFrequenciesOptions.SuspendLayout()
         Me.grpAnovaOptions.SuspendLayout()
         Me.SuspendLayout()
         '
         'ucrButtonsDescribeDisplay
         '
-        Me.ucrButtonsDescribeDisplay.Location = New System.Drawing.Point(32, 178)
+        Me.ucrButtonsDescribeDisplay.Location = New System.Drawing.Point(55, 186)
         Me.ucrButtonsDescribeDisplay.Name = "ucrButtonsDescribeDisplay"
         Me.ucrButtonsDescribeDisplay.Size = New System.Drawing.Size(142, 30)
         Me.ucrButtonsDescribeDisplay.TabIndex = 2
@@ -49,39 +49,34 @@ Partial Class sdgDescribeDisplay
         Me.grpFrequenciesOptions.Controls.Add(Me.ucrChkTranspose)
         Me.grpFrequenciesOptions.Controls.Add(Me.ucrChkProportions)
         Me.grpFrequenciesOptions.Controls.Add(Me.ucrChkPercentages)
-        Me.grpFrequenciesOptions.Location = New System.Drawing.Point(12, 12)
+        Me.grpFrequenciesOptions.Location = New System.Drawing.Point(10, 10)
         Me.grpFrequenciesOptions.Name = "grpFrequenciesOptions"
-        Me.grpFrequenciesOptions.Size = New System.Drawing.Size(218, 64)
+        Me.grpFrequenciesOptions.Size = New System.Drawing.Size(243, 68)
         Me.grpFrequenciesOptions.TabIndex = 0
         Me.grpFrequenciesOptions.TabStop = False
         Me.grpFrequenciesOptions.Tag = "Frequencies_Options"
         Me.grpFrequenciesOptions.Text = "Frequencies Options"
         '
-        'grpAnovaOptions
-        '
-        Me.grpAnovaOptions.Controls.Add(Me.ucrChkMeans)
-        Me.grpAnovaOptions.Controls.Add(Me.ucrChkSignifStars)
-        Me.grpAnovaOptions.Controls.Add(Me.ucrChkSignifLevel)
-        Me.grpAnovaOptions.Location = New System.Drawing.Point(12, 86)
-        Me.grpAnovaOptions.Name = "grpAnovaOptions"
-        Me.grpAnovaOptions.Size = New System.Drawing.Size(190, 86)
-        Me.grpAnovaOptions.TabIndex = 1
-        Me.grpAnovaOptions.TabStop = False
-        Me.grpAnovaOptions.Tag = "Anova_Options"
-        Me.grpAnovaOptions.Text = "Anova Options"
-        '
         'ucrChkAddMargins
         '
         Me.ucrChkAddMargins.Checked = False
-        Me.ucrChkAddMargins.Location = New System.Drawing.Point(6, 18)
+        Me.ucrChkAddMargins.Location = New System.Drawing.Point(10, 18)
         Me.ucrChkAddMargins.Name = "ucrChkAddMargins"
-        Me.ucrChkAddMargins.Size = New System.Drawing.Size(92, 20)
+        Me.ucrChkAddMargins.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkAddMargins.TabIndex = 3
+        '
+        'ucrChkTranspose
+        '
+        Me.ucrChkTranspose.Checked = False
+        Me.ucrChkTranspose.Location = New System.Drawing.Point(127, 18)
+        Me.ucrChkTranspose.Name = "ucrChkTranspose"
+        Me.ucrChkTranspose.Size = New System.Drawing.Size(97, 20)
+        Me.ucrChkTranspose.TabIndex = 6
         '
         'ucrChkProportions
         '
         Me.ucrChkProportions.Checked = False
-        Me.ucrChkProportions.Location = New System.Drawing.Point(10, 38)
+        Me.ucrChkProportions.Location = New System.Drawing.Point(10, 40)
         Me.ucrChkProportions.Name = "ucrChkProportions"
         Me.ucrChkProportions.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkProportions.TabIndex = 4
@@ -89,18 +84,31 @@ Partial Class sdgDescribeDisplay
         'ucrChkPercentages
         '
         Me.ucrChkPercentages.Checked = False
-        Me.ucrChkPercentages.Location = New System.Drawing.Point(115, 38)
+        Me.ucrChkPercentages.Location = New System.Drawing.Point(127, 40)
         Me.ucrChkPercentages.Name = "ucrChkPercentages"
-        Me.ucrChkPercentages.Size = New System.Drawing.Size(89, 20)
+        Me.ucrChkPercentages.Size = New System.Drawing.Size(97, 20)
         Me.ucrChkPercentages.TabIndex = 5
         '
-        'ucrChkTranspose
+        'grpAnovaOptions
         '
-        Me.ucrChkTranspose.Checked = False
-        Me.ucrChkTranspose.Location = New System.Drawing.Point(110, 19)
-        Me.ucrChkTranspose.Name = "ucrChkTranspose"
-        Me.ucrChkTranspose.Size = New System.Drawing.Size(97, 20)
-        Me.ucrChkTranspose.TabIndex = 6
+        Me.grpAnovaOptions.Controls.Add(Me.ucrChkMeans)
+        Me.grpAnovaOptions.Controls.Add(Me.ucrChkSignifStars)
+        Me.grpAnovaOptions.Controls.Add(Me.ucrChkSignifLevel)
+        Me.grpAnovaOptions.Location = New System.Drawing.Point(10, 84)
+        Me.grpAnovaOptions.Name = "grpAnovaOptions"
+        Me.grpAnovaOptions.Size = New System.Drawing.Size(243, 91)
+        Me.grpAnovaOptions.TabIndex = 1
+        Me.grpAnovaOptions.TabStop = False
+        Me.grpAnovaOptions.Tag = "Anova_Options"
+        Me.grpAnovaOptions.Text = "Anova Options"
+        '
+        'ucrChkMeans
+        '
+        Me.ucrChkMeans.Checked = False
+        Me.ucrChkMeans.Location = New System.Drawing.Point(10, 65)
+        Me.ucrChkMeans.Name = "ucrChkMeans"
+        Me.ucrChkMeans.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkMeans.TabIndex = 9
         '
         'ucrChkSignifStars
         '
@@ -113,24 +121,16 @@ Partial Class sdgDescribeDisplay
         'ucrChkSignifLevel
         '
         Me.ucrChkSignifLevel.Checked = False
-        Me.ucrChkSignifLevel.Location = New System.Drawing.Point(9, 39)
+        Me.ucrChkSignifLevel.Location = New System.Drawing.Point(10, 42)
         Me.ucrChkSignifLevel.Name = "ucrChkSignifLevel"
         Me.ucrChkSignifLevel.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkSignifLevel.TabIndex = 8
-        '
-        'ucrChkMeans
-        '
-        Me.ucrChkMeans.Checked = False
-        Me.ucrChkMeans.Location = New System.Drawing.Point(6, 60)
-        Me.ucrChkMeans.Name = "ucrChkMeans"
-        Me.ucrChkMeans.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkMeans.TabIndex = 9
         '
         'sdgDescribeDisplay
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(242, 213)
+        Me.ClientSize = New System.Drawing.Size(262, 222)
         Me.Controls.Add(Me.grpFrequenciesOptions)
         Me.Controls.Add(Me.grpAnovaOptions)
         Me.Controls.Add(Me.ucrButtonsDescribeDisplay)

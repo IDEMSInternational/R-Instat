@@ -122,7 +122,7 @@ Public Class dlgDescribeTwoVariable
         ucrChkOmitMissing.SetText("Omit Missing Values")
         ucrChkOmitMissing.SetParameter(New RParameter("na.rm"))
         ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        'ucrChkOmitMissing.bUpdateRCodeFromControl = True
+        ucrChkOmitMissing.bUpdateRCodeFromControl = True
 
         ucrChkSaveResult.SetText("Save Result")
         ucrChkSaveResult.SetParameter(New RParameter("store_results"))
@@ -151,7 +151,6 @@ Public Class dlgDescribeTwoVariable
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
         sdgDescribeDisplay.SetRFunction(clsRFreqTables, clsRAnova, bResetSubdialog)
         bResetSubdialog = False
-        sdgDescribeDisplay.GrpBoxEnable()
         sdgDescribeDisplay.ShowDialog()
         TestOKEnabled()
     End Sub
