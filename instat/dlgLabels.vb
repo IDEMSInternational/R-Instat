@@ -81,7 +81,6 @@ Public Class dlgLabels
         TestOKEnabled()
     End Sub
 
-
     Private Sub ucrSelectorForLabels_DataFrameChanged() Handles ucrSelectorForLabels.DataFrameChanged
         ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorForLabels.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
     End Sub
