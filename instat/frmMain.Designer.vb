@@ -3483,7 +3483,7 @@ Partial Class frmMain
         Me.splOverall.Panel2.Controls.Add(Me.splDataOutput)
         Me.splOverall.Size = New System.Drawing.Size(600, 236)
         Me.splOverall.SplitterDistance = 118
-        Me.splOverall.SplitterWidth = 10
+        Me.splOverall.SplitterWidth = 5
         Me.splOverall.TabIndex = 10
         '
         'splExtraWindows
@@ -3504,6 +3504,7 @@ Partial Class frmMain
         Me.splExtraWindows.Panel2.Controls.Add(Me.splLogScript)
         Me.splExtraWindows.Size = New System.Drawing.Size(600, 118)
         Me.splExtraWindows.SplitterDistance = 200
+        Me.splExtraWindows.SplitterWidth = 5
         Me.splExtraWindows.TabIndex = 0
         '
         'splMetadata
@@ -3523,6 +3524,7 @@ Partial Class frmMain
         Me.splMetadata.Panel2.Controls.Add(Me.ucrDataFrameMeta)
         Me.splMetadata.Size = New System.Drawing.Size(200, 118)
         Me.splMetadata.SplitterDistance = 66
+        Me.splMetadata.SplitterWidth = 5
         Me.splMetadata.TabIndex = 0
         '
         'splLogScript
@@ -3541,8 +3543,9 @@ Partial Class frmMain
         '
         Me.splLogScript.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splLogScript.Panel2.Controls.Add(Me.ucrScriptWindow)
-        Me.splLogScript.Size = New System.Drawing.Size(396, 118)
-        Me.splLogScript.SplitterDistance = 132
+        Me.splLogScript.Size = New System.Drawing.Size(395, 118)
+        Me.splLogScript.SplitterDistance = 131
+        Me.splLogScript.SplitterWidth = 5
         Me.splLogScript.TabIndex = 0
         '
         'splDataOutput
@@ -3561,8 +3564,9 @@ Partial Class frmMain
         '
         Me.splDataOutput.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splDataOutput.Panel2.Controls.Add(Me.ucrOutput)
-        Me.splDataOutput.Size = New System.Drawing.Size(600, 108)
+        Me.splDataOutput.Size = New System.Drawing.Size(600, 113)
         Me.splDataOutput.SplitterDistance = 300
+        Me.splDataOutput.SplitterWidth = 5
         Me.splDataOutput.TabIndex = 0
         '
         'ucrColumnMeta
@@ -3580,7 +3584,7 @@ Partial Class frmMain
         Me.ucrDataFrameMeta.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ucrDataFrameMeta.Location = New System.Drawing.Point(0, 0)
         Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
-        Me.ucrDataFrameMeta.Size = New System.Drawing.Size(130, 118)
+        Me.ucrDataFrameMeta.Size = New System.Drawing.Size(129, 118)
         Me.ucrDataFrameMeta.TabIndex = 0
         '
         'ucrLogWindow
@@ -3589,7 +3593,7 @@ Partial Class frmMain
         Me.ucrLogWindow.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ucrLogWindow.Location = New System.Drawing.Point(0, 0)
         Me.ucrLogWindow.Name = "ucrLogWindow"
-        Me.ucrLogWindow.Size = New System.Drawing.Size(132, 118)
+        Me.ucrLogWindow.Size = New System.Drawing.Size(131, 118)
         Me.ucrLogWindow.TabIndex = 0
         '
         'ucrScriptWindow
@@ -3598,7 +3602,7 @@ Partial Class frmMain
         Me.ucrScriptWindow.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ucrScriptWindow.Location = New System.Drawing.Point(0, 0)
         Me.ucrScriptWindow.Name = "ucrScriptWindow"
-        Me.ucrScriptWindow.Size = New System.Drawing.Size(260, 118)
+        Me.ucrScriptWindow.Size = New System.Drawing.Size(259, 118)
         Me.ucrScriptWindow.TabIndex = 0
         Me.ucrScriptWindow.Tag = "Script_Window"
         '
@@ -3609,7 +3613,7 @@ Partial Class frmMain
         Me.ucrDataViewer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ucrDataViewer.Location = New System.Drawing.Point(0, 0)
         Me.ucrDataViewer.Name = "ucrDataViewer"
-        Me.ucrDataViewer.Size = New System.Drawing.Size(300, 108)
+        Me.ucrDataViewer.Size = New System.Drawing.Size(300, 113)
         Me.ucrDataViewer.TabIndex = 0
         Me.ucrDataViewer.Tag = "Data_View"
         '
@@ -3619,7 +3623,7 @@ Partial Class frmMain
         Me.ucrOutput.Dock = System.Windows.Forms.DockStyle.Fill
         Me.ucrOutput.Location = New System.Drawing.Point(0, 0)
         Me.ucrOutput.Name = "ucrOutput"
-        Me.ucrOutput.Size = New System.Drawing.Size(296, 108)
+        Me.ucrOutput.Size = New System.Drawing.Size(295, 113)
         Me.ucrOutput.TabIndex = 0
         '
         'frmMain
