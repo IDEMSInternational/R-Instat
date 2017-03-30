@@ -48,7 +48,7 @@ Public Class ucrOutputWindow
         'End Using
     End Sub
 
-    Public Sub selectAllText()
+    Public Sub SelectAllText()
         ucrRichTextBox.rtbOutput.SelectAll()
     End Sub
 

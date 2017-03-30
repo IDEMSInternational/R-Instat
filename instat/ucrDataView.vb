@@ -265,7 +265,7 @@ Public Class ucrDataView
     '    End Try
     'End Sub
 
-    Public Sub copyRange()
+    Public Sub CopyRange()
         Try
             grdData.CurrentWorksheet.Copy()
         Catch
@@ -280,8 +280,10 @@ Public Class ucrDataView
     '        MessageBox.Show(ex.Message)
     '    End Try
     'End Sub
-    Public Sub selectAllText()
-        grdCurrSheet.SelectAll()
+    Public Sub SelectAllText()
+        If grdCurrSheet IsNot Nothing Then
+            grdCurrSheet.SelectAll()
+        End If
     End Sub
 
     Private Sub insertSheet_Click(sender As Object, e As EventArgs) Handles insertSheet.Click
