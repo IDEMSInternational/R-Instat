@@ -60,7 +60,6 @@ Public Class dlgExportToCPT
 
         ucrLocationDataFrame.SetParameter(New RParameter("lat_lon_data", 1))
         ucrLocationDataFrame.SetParameterIsRFunction()
-        ucrLocationDataFrame.lblDataFrame.AutoSize = True
         ucrLocationDataFrame.lblDataFrame.Text = "Location Data Frame:"
 
         ucrReceiverMultipleDataColumns.Selector = ucrSSTDataframe
