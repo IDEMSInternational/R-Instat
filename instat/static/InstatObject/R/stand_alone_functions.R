@@ -1,7 +1,7 @@
 get_default_decimal_places <- function(data) {
   if(is.numeric(data)) {
     min_data <- min(data, na.rm = TRUE)
-    if(class(data) %in% "integer" || min_data > 100) {
+    if(is.integer(data) || min_data > 100 || all((data %% 1) == 0, na.rm = TRUE)) {
       return(0)
     }
     else {
@@ -30,7 +30,7 @@ convert_to_character_matrix <- function(data, format_decimal_places = TRUE, deci
         out[,i] <- as.character(data[[i]])
       }
       else {
-        out[,i] <- as.character(format(data[[i]], nsmall = decimal_places[i]))
+        out[,i] <- as.character(format(data[[i]], nsmall = decimal_places[i], scientific = FALSE))
       }
       i = i + 1
     }
@@ -60,27 +60,29 @@ next_default_item = function(prefix, existing_names = c(), include_index = TRUE,
   return(out)
 }
 
-import_from_ODK = function(username, password, form_name, platform) {
-  if(platform == "kobo") {
-    url <- "https://kc.kobotoolbox.org/api/v1/data"
-  }
-  else if(platform == "ona") {
-    url <- "https://api.ona.io/api/v1/data"
-  }
-  else stop("Unrecognised platform.")
-  
-  if(!missing(username) && !missing(password)) {
-    has_authentication <- TRUE
-    user <- authenticate(username, password)
-    odk_data <- GET(url, user)
-  }
-  else {
-    has_authentication <- FALSE
-    odk_data <- GET(url)
-  }
-  
-  forms <- content(odk_data, "parse")
-  form_names <- sapply(forms, function(x) x$title)
+import_from_ODK = function(username, form_name, platform) {
+   if(platform == "kobo") {
+     url <- "https://kc.kobotoolbox.org/api/v1/data"
+   }
+   else if(platform == "ona") {
+     url <- "https://api.ona.io/api/v1/data"
+   }
+   else stop("Unrecognised platform.")
+   password <- getPass(paste0(username, " password:"))
+   if(!missing(username) && !missing(password)) {
+     has_authentication <- TRUE
+     user <- authenticate(username, password)
+     odk_data <- GET(url, user)
+   }
+   else {
+     has_authentication <- FALSE
+     odk_data <- GET(url)
+   }
+
+   forms <- content(odk_data, "parse")
+   form_names <- sapply(forms, function(x) x$title)    # get_odk_form_names_results <- get_odk_form_names(username, platform)
+  # form_names <- get_odk_form_names_results[1]
+  # forms <- get_odk_form_names_results[2]
   
   if(!form_name %in% form_names) stop(form_name, " not found in available forms:", paste(form_names, collapse = ", "))
   form_num <- which(form_names == form_name)
@@ -96,7 +98,7 @@ import_from_ODK = function(username, password, form_name, platform) {
   return(out)
 }
 
-get_odk_form_names = function(username, password, platform) {
+get_odk_form_names = function(username, platform) {
   #TODO This should not be repeated
   if(platform == "kobo") {
     url <- "https://kc.kobotoolbox.org/api/v1/data"
@@ -105,7 +107,7 @@ get_odk_form_names = function(username, password, platform) {
     url <- "https://api.ona.io/api/v1/data"
   }
   else stop("Unrecognised platform.")
-  
+  password <- getPass(paste0(username, " password:"))
   if(!missing(username) && !missing(password)) {
     has_authentication <- TRUE
     user <- authenticate(username, password)
@@ -236,60 +238,97 @@ dekade <- function(date) {
   return(temp_pentad)
   }
 
-open_NetCDF <- function(nc_data){
-  variables = names(nc_data$var)
-  lat <- as.numeric(ncvar_get(nc_data, "lat"))
-  lon <- as.numeric(ncvar_get(nc_data, "lon"))
-  time <- as.numeric(ncvar_get(nc_data, "time"))
-  period <- rep(time, each = (length(lat)*length(lon)))
-  lat_rep <- rep(lat, each = length(lon))
-  lon_rep <- rep(lon, length(lat))
-  lat_lon <- as.data.frame(cbind(lat_rep, lon_rep))
-  names(lat_lon) = c("lat","lon")
-  station <- c()
-  for (j in 1:nrow(lat_lon)){
-    if(lat_lon[j,1] >= 0 && lat_lon[j,2] >= 0){
-      station = append(station, paste(paste("N", lat_lon[j,1], sep = ""), paste("E", lat_lon[j,2], sep = ""), sep = "_"))
+  open_NetCDF <- function(nc_data){
+    variables = names(nc_data$var)
+    lat_lon_names = names(nc_data$dim)
+    lat_names = c("lat", "latitude","LAT","Lat", "LATITUDE")
+    lon_names = c("lon", "longitude","LON","Lon", "LONGITUDE")
+    time_names = c("time", "TIME","Time","period", "Period", "PERIOD")
+    lat_found = FALSE
+    lon_found = FALSE
+    time_found = FALSE
+    if (!lat_found){
+      for (i in lat_lon_names){
+        if(!is.na(match(i, lat_names))){
+          lat <- as.numeric(ncvar_get(nc_data, i))
+          lat_found = TRUE
+        }
+      }
     }
-    if(lat_lon[j,1] < 0 && lat_lon[j,2] >= 0){
-      station = append(station, paste(paste("S", abs(lat_lon[j,1]), sep = ""), paste("E", lat_lon[j,2], sep = ""), sep = "_"))
+    
+    if (!lon_found){
+      for (i in lat_lon_names){
+        if(!is.na(match(i, lon_names))){
+          lon <- as.numeric(ncvar_get(nc_data, i))
+          lon_found = TRUE
+        }
+      }
     }
-    if(lat_lon[j,1] >= 0 && lat_lon[j,2] < 0){
-      station = append(station, paste(paste("N", lat_lon[j,1], sep = ""), paste("W", abs(lat_lon[j,2]), sep = ""), sep = "_"))
+    
+    if (!time_found){
+      for (i in lat_lon_names){
+        if(!is.na(match(i, time_names))){
+          time <- as.numeric(ncvar_get(nc_data, i))
+          time_found = TRUE
+        }
+      }
     }
-    if(lat_lon[j,1] < 0 && lat_lon[j,2] < 0){
-      station = append(station, paste(paste("S", abs(lat_lon[j,1]), sep = ""), paste("W", abs(lat_lon[j,2]), sep = ""), sep = "_"))
+    
+    if(!lon_found || (!lat_found))stop("Latitude and longitude names could not be recognised.")
+    if(!time_found){
+      warning("Time variable could not be found/recognised. Time will be set to 1.")
+      time = 1
+    } 
+    period <- rep(time, each = (length(lat)*length(lon)))
+    lat_rep <- rep(lat, each = length(lon))
+    lon_rep <- rep(lon, length(lat))
+    lat_lon <- as.data.frame(cbind(lat_rep, lon_rep))
+    names(lat_lon) = c("lat","lon")
+    station <- c()
+    for (j in 1:nrow(lat_lon)){
+      if(lat_lon[j,1] >= 0 && lat_lon[j,2] >= 0){
+        station = append(station, paste(paste("N", lat_lon[j,1], sep = ""), paste("E", lat_lon[j,2], sep = ""), sep = "_"))
+      }
+      if(lat_lon[j,1] < 0 && lat_lon[j,2] >= 0){
+        station = append(station, paste(paste("S", abs(lat_lon[j,1]), sep = ""), paste("E", lat_lon[j,2], sep = ""), sep = "_"))
+      }
+      if(lat_lon[j,1] >= 0 && lat_lon[j,2] < 0){
+        station = append(station, paste(paste("N", lat_lon[j,1], sep = ""), paste("W", abs(lat_lon[j,2]), sep = ""), sep = "_"))
+      }
+      if(lat_lon[j,1] < 0 && lat_lon[j,2] < 0){
+        station = append(station, paste(paste("S", abs(lat_lon[j,1]), sep = ""), paste("W", abs(lat_lon[j,2]), sep = ""), sep = "_"))
+      }
     }
-  }
-  lat_lon_df <- cbind(lat_lon, station)
-  my_data <- cbind(period, lat_lon_df)
-  for (current_var in variables){
-    nc_value <- c()
-    dataset <- ncvar_get(nc_data, current_var)
-    if (length(dim(dataset))==1){
-      nc_value = dataset
-    }
-    else if (length(dim(dataset))==2){
-      year <- dataset[1:length(lat), 1:length(lon)]
-      year = as.data.frame(t(year))
-      year = stack(year)
-      g <- as.numeric(year$values)
-      nc_value = append(nc_value, g)
-    }
-    else if (length(dim(dataset))==3){
-      for (k in 1:length(time)){
-        year <- dataset[1:length(lat), 1:length(lon), k]
+    lat_lon_df <- cbind(lat_lon, station)
+    my_data <- cbind(period, lat_lon_df)
+    for (current_var in variables){
+      nc_value <- c()
+      dataset <- ncvar_get(nc_data, current_var)
+      
+      if (length(dim(dataset))==1){
+        nc_value = dataset
+      }
+      else if (length(dim(dataset))==2){
+        year <- dataset[1:length(lon), 1:length(lat)]
         year = as.data.frame(t(year))
         year = stack(year)
         g <- as.numeric(year$values)
         nc_value = append(nc_value, g)
       }
+      else if (length(dim(dataset))==3){
+        for (k in 1:length(time)){
+          year <- dataset[1:length(lon), 1:length(lat), k]
+          year = as.data.frame(t(year))
+          year = stack(year)
+          g <- as.numeric(year$values)
+          nc_value = append(nc_value, g)
+        }
+      }
+      else{
+        stop("The format of the data cannot be recognised")
+      }
+      my_data = cbind(my_data, nc_value)
+      names(my_data)[length(names(my_data))]<-current_var
     }
-    else{
-      stop("The format of the data cannot be recognised")
-    }
-    my_data = cbind(my_data, nc_value)
-    names(my_data)[length(names(my_data))]<-current_var
+    return(list(my_data, lat_lon_df))
   }
-  return(list(my_data, lat_lon_df))
-}
