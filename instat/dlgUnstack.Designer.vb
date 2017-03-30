@@ -93,22 +93,22 @@ Partial Class dlgUnstack
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 265)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 296)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 9
         '
         'ucrNewDFName
         '
-        Me.ucrNewDFName.Location = New System.Drawing.Point(10, 238)
+        Me.ucrNewDFName.Location = New System.Drawing.Point(10, 266)
         Me.ucrNewDFName.Name = "ucrNewDFName"
-        Me.ucrNewDFName.Size = New System.Drawing.Size(268, 24)
+        Me.ucrNewDFName.Size = New System.Drawing.Size(307, 24)
         Me.ucrNewDFName.TabIndex = 8
         '
         'ucrChkDropMissingCombinations
         '
         Me.ucrChkDropMissingCombinations.Checked = False
-        Me.ucrChkDropMissingCombinations.Location = New System.Drawing.Point(10, 210)
+        Me.ucrChkDropMissingCombinations.Location = New System.Drawing.Point(10, 238)
         Me.ucrChkDropMissingCombinations.Name = "ucrChkDropMissingCombinations"
         Me.ucrChkDropMissingCombinations.Size = New System.Drawing.Size(159, 20)
         Me.ucrChkDropMissingCombinations.TabIndex = 7
@@ -127,7 +127,7 @@ Partial Class dlgUnstack
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(417, 325)
+        Me.ClientSize = New System.Drawing.Size(417, 360)
         Me.Controls.Add(Me.ucrNewDFName)
         Me.Controls.Add(Me.ucrChkDropMissingCombinations)
         Me.Controls.Add(Me.ucrIDColumns)
