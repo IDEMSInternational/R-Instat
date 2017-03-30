@@ -4114,6 +4114,9 @@
     <EmbeddedResource Include="ucrColors.sw-KE.resx">
       <DependentUpon>ucrColors.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrColumnMetadata.resx">
+      <DependentUpon>ucrColumnMetadata.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrDataFrame.fr-FR.resx">
       <DependentUpon>ucrDataFrame.vb</DependentUpon>
     </EmbeddedResource>

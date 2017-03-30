@@ -38,19 +38,18 @@ Partial Class ucrColumnMetadata
         Me.grdVariables.SheetTabContextMenuStrip = Nothing
         Me.grdVariables.SheetTabNewButtonVisible = True
         Me.grdVariables.SheetTabVisible = True
-        Me.grdVariables.SheetTabWidth = 300
+        Me.grdVariables.SheetTabWidth = 200
         Me.grdVariables.Size = New System.Drawing.Size(344, 138)
         Me.grdVariables.TabIndex = 2
         Me.grdVariables.Text = "Variables"
         '
-        'frmVariables
+        'ucrColumnMetadata
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(344, 138)
         Me.Controls.Add(Me.grdVariables)
-        Me.Name = "ucrVariables"
-        Me.Text = "Column Metadata"
+        Me.Name = "ucrColumnMetadata"
+        Me.Size = New System.Drawing.Size(344, 138)
         Me.ResumeLayout(False)
 
     End Sub
