@@ -48,7 +48,7 @@ Partial Class dlgStack
         'lblStackDataInto
         '
         Me.lblStackDataInto.AutoSize = True
-        Me.lblStackDataInto.Location = New System.Drawing.Point(10, 258)
+        Me.lblStackDataInto.Location = New System.Drawing.Point(10, 263)
         Me.lblStackDataInto.Name = "lblStackDataInto"
         Me.lblStackDataInto.Size = New System.Drawing.Size(85, 13)
         Me.lblStackDataInto.TabIndex = 9
@@ -58,7 +58,7 @@ Partial Class dlgStack
         'lblFactorInto
         '
         Me.lblFactorInto.AutoSize = True
-        Me.lblFactorInto.Location = New System.Drawing.Point(10, 232)
+        Me.lblFactorInto.Location = New System.Drawing.Point(10, 234)
         Me.lblFactorInto.Name = "lblFactorInto"
         Me.lblFactorInto.Size = New System.Drawing.Size(61, 13)
         Me.lblFactorInto.TabIndex = 7
@@ -68,7 +68,7 @@ Partial Class dlgStack
         'ucrChkCarryColumns
         '
         Me.ucrChkCarryColumns.Checked = False
-        Me.ucrChkCarryColumns.Location = New System.Drawing.Point(285, 149)
+        Me.ucrChkCarryColumns.Location = New System.Drawing.Point(285, 147)
         Me.ucrChkCarryColumns.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrChkCarryColumns.Name = "ucrChkCarryColumns"
         Me.ucrChkCarryColumns.Size = New System.Drawing.Size(100, 20)
@@ -76,10 +76,9 @@ Partial Class dlgStack
         '
         'ucrStackDataInto
         '
-        Me.ucrStackDataInto.AddQuotesIfUnrecognised = True
         Me.ucrStackDataInto.IsMultiline = False
         Me.ucrStackDataInto.IsReadOnly = False
-        Me.ucrStackDataInto.Location = New System.Drawing.Point(131, 254)
+        Me.ucrStackDataInto.Location = New System.Drawing.Point(131, 259)
         Me.ucrStackDataInto.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrStackDataInto.Name = "ucrStackDataInto"
         Me.ucrStackDataInto.Size = New System.Drawing.Size(145, 21)
@@ -87,10 +86,9 @@ Partial Class dlgStack
         '
         'ucrFactorInto
         '
-        Me.ucrFactorInto.AddQuotesIfUnrecognised = True
         Me.ucrFactorInto.IsMultiline = False
         Me.ucrFactorInto.IsReadOnly = False
-        Me.ucrFactorInto.Location = New System.Drawing.Point(131, 228)
+        Me.ucrFactorInto.Location = New System.Drawing.Point(131, 230)
         Me.ucrFactorInto.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrFactorInto.Name = "ucrFactorInto"
         Me.ucrFactorInto.Size = New System.Drawing.Size(145, 21)
@@ -103,7 +101,7 @@ Partial Class dlgStack
         Me.ucrColumnsToCarryReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrColumnsToCarryReceiver.Name = "ucrColumnsToCarryReceiver"
         Me.ucrColumnsToCarryReceiver.Selector = Nothing
-        Me.ucrColumnsToCarryReceiver.Size = New System.Drawing.Size(120, 100)
+        Me.ucrColumnsToCarryReceiver.Size = New System.Drawing.Size(120, 107)
         Me.ucrColumnsToCarryReceiver.TabIndex = 4
         '
         'ucrSelectorStack
@@ -118,7 +116,7 @@ Partial Class dlgStack
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 280)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 286)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
@@ -136,16 +134,16 @@ Partial Class dlgStack
         '
         'ucrSaveNewDataName
         '
-        Me.ucrSaveNewDataName.Location = New System.Drawing.Point(10, 201)
+        Me.ucrSaveNewDataName.Location = New System.Drawing.Point(10, 200)
         Me.ucrSaveNewDataName.Name = "ucrSaveNewDataName"
-        Me.ucrSaveNewDataName.Size = New System.Drawing.Size(266, 27)
+        Me.ucrSaveNewDataName.Size = New System.Drawing.Size(266, 20)
         Me.ucrSaveNewDataName.TabIndex = 12
         '
         'dlgStack
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 339)
+        Me.ClientSize = New System.Drawing.Size(419, 349)
         Me.Controls.Add(Me.ucrSaveNewDataName)
         Me.Controls.Add(Me.ucrChkCarryColumns)
         Me.Controls.Add(Me.ucrStackDataInto)

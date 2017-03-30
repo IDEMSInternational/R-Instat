@@ -59,7 +59,7 @@ Public Class dlgStack
         ucrFactorInto.SetValidationTypeAsRVariable()
     End Sub
 
-    Private Sub StackDataFrame()
+    Private Sub SetDataFrameName()
         'TODO this is a work around for AssignTo not clearing in RSyntax
         If ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" AndAlso (Not ucrSaveNewDataName.bUserTyped) Then
             ucrSaveNewDataName.SetName(ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked")
@@ -97,6 +97,7 @@ Public Class dlgStack
         ucrStackDataInto.SetName("value")
         clsMelt.SetAssignTo(ucrSaveNewDataName.GetText(), strTempDataframe:=ucrSaveNewDataName.GetText())
         AddSuffix()
+        SetDataFrameName()
         clsMelt.AddParameter("variable.name", Chr(34) & ucrFactorInto.GetText() & Chr(34))
         clsMelt.SetRCommand("melt")
         ucrBase.clsRsyntax.SetBaseRFunction(clsMelt)
@@ -137,6 +138,6 @@ Public Class dlgStack
     End Sub
 
     Private Sub ucrSelectorStack_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorStack.ControlValueChanged
-        StackDataFrame()
+        SetDataFrameName()
     End Sub
 End Class
