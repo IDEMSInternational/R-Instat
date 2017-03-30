@@ -41,7 +41,7 @@ Partial Class dlgExportToCPT
         '
         'cmdBrowse
         '
-        Me.cmdBrowse.Location = New System.Drawing.Point(347, 252)
+        Me.cmdBrowse.Location = New System.Drawing.Point(347, 249)
         Me.cmdBrowse.Name = "cmdBrowse"
         Me.cmdBrowse.Size = New System.Drawing.Size(62, 23)
         Me.cmdBrowse.TabIndex = 11
@@ -70,7 +70,7 @@ Partial Class dlgExportToCPT
         'lblStations
         '
         Me.lblStations.AutoSize = True
-        Me.lblStations.Location = New System.Drawing.Point(280, 93)
+        Me.lblStations.Location = New System.Drawing.Point(280, 145)
         Me.lblStations.Name = "lblStations"
         Me.lblStations.Size = New System.Drawing.Size(48, 13)
         Me.lblStations.TabIndex = 6
@@ -80,7 +80,7 @@ Partial Class dlgExportToCPT
         'lblDataColumn
         '
         Me.lblDataColumn.AutoSize = True
-        Me.lblDataColumn.Location = New System.Drawing.Point(280, 149)
+        Me.lblDataColumn.Location = New System.Drawing.Point(280, 95)
         Me.lblDataColumn.Name = "lblDataColumn"
         Me.lblDataColumn.Size = New System.Drawing.Size(71, 13)
         Me.lblDataColumn.TabIndex = 6
@@ -90,7 +90,7 @@ Partial Class dlgExportToCPT
         'lblDataColumns
         '
         Me.lblDataColumns.AutoSize = True
-        Me.lblDataColumns.Location = New System.Drawing.Point(280, 96)
+        Me.lblDataColumns.Location = New System.Drawing.Point(280, 95)
         Me.lblDataColumns.Name = "lblDataColumns"
         Me.lblDataColumns.Size = New System.Drawing.Size(76, 13)
         Me.lblDataColumns.TabIndex = 4
@@ -116,7 +116,7 @@ Partial Class dlgExportToCPT
         'ucrReceiverMultipleDataColumns
         '
         Me.ucrReceiverMultipleDataColumns.frmParent = Me
-        Me.ucrReceiverMultipleDataColumns.Location = New System.Drawing.Point(280, 111)
+        Me.ucrReceiverMultipleDataColumns.Location = New System.Drawing.Point(280, 110)
         Me.ucrReceiverMultipleDataColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultipleDataColumns.Name = "ucrReceiverMultipleDataColumns"
         Me.ucrReceiverMultipleDataColumns.Selector = Nothing
@@ -126,7 +126,7 @@ Partial Class dlgExportToCPT
         'ucrReceiverDataColumn
         '
         Me.ucrReceiverDataColumn.frmParent = Me
-        Me.ucrReceiverDataColumn.Location = New System.Drawing.Point(280, 164)
+        Me.ucrReceiverDataColumn.Location = New System.Drawing.Point(280, 110)
         Me.ucrReceiverDataColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDataColumn.Name = "ucrReceiverDataColumn"
         Me.ucrReceiverDataColumn.Selector = Nothing
@@ -136,7 +136,7 @@ Partial Class dlgExportToCPT
         'ucrReceiverStations
         '
         Me.ucrReceiverStations.frmParent = Me
-        Me.ucrReceiverStations.Location = New System.Drawing.Point(280, 111)
+        Me.ucrReceiverStations.Location = New System.Drawing.Point(280, 160)
         Me.ucrReceiverStations.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverStations.Name = "ucrReceiverStations"
         Me.ucrReceiverStations.Selector = Nothing
@@ -165,9 +165,10 @@ Partial Class dlgExportToCPT
         '
         'ucrInputExportFile
         '
+        Me.ucrInputExportFile.AddQuotesIfUnrecognised = True
         Me.ucrInputExportFile.IsMultiline = False
         Me.ucrInputExportFile.IsReadOnly = False
-        Me.ucrInputExportFile.Location = New System.Drawing.Point(72, 251)
+        Me.ucrInputExportFile.Location = New System.Drawing.Point(72, 249)
         Me.ucrInputExportFile.Name = "ucrInputExportFile"
         Me.ucrInputExportFile.Size = New System.Drawing.Size(269, 21)
         Me.ucrInputExportFile.TabIndex = 10
