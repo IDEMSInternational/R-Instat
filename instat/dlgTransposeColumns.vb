@@ -13,7 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports instat
+
 Imports instat.Translations
 Public Class dlgTransposeColumns
     Private bFirstLoad As Boolean = True
@@ -49,29 +49,26 @@ Public Class dlgTransposeColumns
         ucrNewDataframe.SetLabelText("New Data Frame Name:")
 
         'chkbox
-        'checkbox not implemented as it wasn't on the old version
         'ucrChkNameNewColumns.SetParameter(New RParameter(""))
         ucrChkNameNewColumns.SetText("Name New Columns")
-        ucrChkNameNewColumns.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkNameNewColumns.SetRDefault("FALSE")
+        'ucrChkNameNewColumns.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        'ucrChkNameNewColumns.SetRDefault("FALSE")
         ucrChkNameNewColumns.Enabled = False
     End Sub
 
 
     Private Sub SetDefaults()
-        Dim clsTDefaultFunction As New RFunction
-        Dim clsOverallDefaultFunction As New RFunction
+        clsTFunction = New RFunction
+        clsOverallFunction = New RFunction
 
         ucrSelectorTransposeColumns.Reset()
         ucrNewDataframe.Reset()
         NewDefaultName()
 
-        clsOverallDefaultFunction.SetRCommand("as.data.frame")
-        clsOverallDefaultFunction.SetAssignTo(ucrNewDataframe.GetText(), strTempDataframe:=ucrNewDataframe.GetText())
-        clsTDefaultFunction.SetRCommand("t")
+        clsOverallFunction.SetRCommand("as.data.frame")
+        clsOverallFunction.SetAssignTo(ucrNewDataframe.GetText(), strTempDataframe:=ucrNewDataframe.GetText())
 
-        clsTFunction = clsTDefaultFunction.Clone()
-        clsOverallFunction = clsOverallDefaultFunction.Clone()
+        clsTFunction.SetRCommand("t")
 
         clsOverallFunction.AddParameter("x", clsRFunctionParameter:=clsTFunction)
         ucrBase.clsRsyntax.SetBaseRFunction(clsOverallFunction)
