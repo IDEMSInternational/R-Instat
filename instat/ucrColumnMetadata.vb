@@ -27,8 +27,8 @@ Public Class ucrColumnMetadata
 
     Private Sub loadForm()
         grdVariables.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, True)
-        'gridVariables.SheetTabNewButtonVisible = False
-        'gridVariables.SheetTabControlNewButtonVisible = False
+        grdVariables.SheetTabNewButtonVisible = False
+        grdVariables.SheetTabWidth = 250
         'grdVariables.CurrentWorksheet.Resize(5, 5)
         'grdVariables.ColumnHeaderContextMenuStrip = context.grdData.ColumnHeaderContextMenuStrip
         'grdVariables.RowHeaderContextMenuStrip = context.grdData.RowHeaderContextMenuStrip
