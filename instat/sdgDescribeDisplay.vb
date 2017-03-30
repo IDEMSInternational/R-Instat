@@ -30,8 +30,8 @@ Public Class sdgDescribeDisplay
         ucrChkPercentages.SetParameter(New RParameter("percentages"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkPercentages.SetRDefault("FALSE")
 
-        ucrChkProportions.SetText("Add Margins")
-        ucrChkProportions.SetParameter(New RParameter("addmargins"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkProportions.SetText("Proportions")
+        ucrChkProportions.SetParameter(New RParameter("proportions"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkProportions.SetRDefault("FALSE")
 
         ucrChkTranspose.SetText("Transpose")
@@ -42,7 +42,7 @@ Public Class sdgDescribeDisplay
         ucrChkSignifLevel.SetParameter(New RParameter("sign_level"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkSignifLevel.SetRDefault("FALSE")
 
-        ucrChkSignifStars.SetText("Significance stars")
+        ucrChkSignifStars.SetText("Significance Stars")
         ucrChkSignifStars.SetParameter(New RParameter("signif.stars"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkSignifStars.SetRDefault("FALSE")
 
