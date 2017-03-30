@@ -41,7 +41,7 @@ Partial Class dlgExportToCPT
         '
         'cmdBrowse
         '
-        Me.cmdBrowse.Location = New System.Drawing.Point(347, 249)
+        Me.cmdBrowse.Location = New System.Drawing.Point(347, 243)
         Me.cmdBrowse.Name = "cmdBrowse"
         Me.cmdBrowse.Size = New System.Drawing.Size(62, 23)
         Me.cmdBrowse.TabIndex = 11
@@ -168,7 +168,7 @@ Partial Class dlgExportToCPT
         Me.ucrInputExportFile.AddQuotesIfUnrecognised = True
         Me.ucrInputExportFile.IsMultiline = False
         Me.ucrInputExportFile.IsReadOnly = False
-        Me.ucrInputExportFile.Location = New System.Drawing.Point(72, 249)
+        Me.ucrInputExportFile.Location = New System.Drawing.Point(72, 245)
         Me.ucrInputExportFile.Name = "ucrInputExportFile"
         Me.ucrInputExportFile.Size = New System.Drawing.Size(269, 21)
         Me.ucrInputExportFile.TabIndex = 10
