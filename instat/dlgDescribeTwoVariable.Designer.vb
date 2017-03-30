@@ -57,7 +57,7 @@ Partial Class dlgDescribeTwoVariable
         'lblFirstVariable
         '
         Me.lblFirstVariable.AutoSize = True
-        Me.lblFirstVariable.Location = New System.Drawing.Point(285, 10)
+        Me.lblFirstVariable.Location = New System.Drawing.Point(285, 45)
         Me.lblFirstVariable.Name = "lblFirstVariable"
         Me.lblFirstVariable.Size = New System.Drawing.Size(70, 13)
         Me.lblFirstVariable.TabIndex = 1
@@ -66,7 +66,7 @@ Partial Class dlgDescribeTwoVariable
         '
         'lbMultipleVariables
         '
-        Me.lbMultipleVariables.Location = New System.Drawing.Point(285, 55)
+        Me.lbMultipleVariables.Location = New System.Drawing.Point(285, 90)
         Me.lbMultipleVariables.Name = "lbMultipleVariables"
         Me.lbMultipleVariables.Size = New System.Drawing.Size(100, 15)
         Me.lbMultipleVariables.TabIndex = 3
@@ -76,7 +76,7 @@ Partial Class dlgDescribeTwoVariable
         'ucrReceiverFirstVar
         '
         Me.ucrReceiverFirstVar.frmParent = Me
-        Me.ucrReceiverFirstVar.Location = New System.Drawing.Point(285, 25)
+        Me.ucrReceiverFirstVar.Location = New System.Drawing.Point(285, 60)
         Me.ucrReceiverFirstVar.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFirstVar.Name = "ucrReceiverFirstVar"
         Me.ucrReceiverFirstVar.Selector = Nothing
@@ -86,7 +86,7 @@ Partial Class dlgDescribeTwoVariable
         'ucrReceiverSecondVar
         '
         Me.ucrReceiverSecondVar.frmParent = Me
-        Me.ucrReceiverSecondVar.Location = New System.Drawing.Point(285, 70)
+        Me.ucrReceiverSecondVar.Location = New System.Drawing.Point(285, 105)
         Me.ucrReceiverSecondVar.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSecondVar.Name = "ucrReceiverSecondVar"
         Me.ucrReceiverSecondVar.Selector = Nothing
