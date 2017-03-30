@@ -37,7 +37,8 @@ Partial Class dlgOneWayFrequencies
         Me.ucrSelectorOneWayFreq = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrChkGraph = New instat.ucrCheck()
         Me.ucrChkTable = New instat.ucrCheck()
-        Me.ucrSaveGraph = New instat.ucrSave()
+        Me.ucrNudGroups = New instat.ucrNud()
+        Me.ucrChkGroupData = New instat.ucrCheck()
         Me.grpSort.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -133,7 +134,7 @@ Partial Class dlgOneWayFrequencies
         'ucrChkFlip
         '
         Me.ucrChkFlip.Checked = False
-        Me.ucrChkFlip.Location = New System.Drawing.Point(10, 227)
+        Me.ucrChkFlip.Location = New System.Drawing.Point(10, 297)
         Me.ucrChkFlip.Name = "ucrChkFlip"
         Me.ucrChkFlip.Size = New System.Drawing.Size(145, 20)
         Me.ucrChkFlip.TabIndex = 7
@@ -181,19 +182,33 @@ Partial Class dlgOneWayFrequencies
         Me.ucrChkTable.Size = New System.Drawing.Size(145, 20)
         Me.ucrChkTable.TabIndex = 13
         '
-        'ucrSaveGraph
+        'ucrNudGroups
         '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 297)
-        Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(294, 24)
-        Me.ucrSaveGraph.TabIndex = 14
+        Me.ucrNudGroups.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudGroups.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudGroups.Location = New System.Drawing.Point(132, 228)
+        Me.ucrNudGroups.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudGroups.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudGroups.Name = "ucrNudGroups"
+        Me.ucrNudGroups.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudGroups.TabIndex = 48
+        Me.ucrNudGroups.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkGroupData
+        '
+        Me.ucrChkGroupData.Checked = False
+        Me.ucrChkGroupData.Location = New System.Drawing.Point(10, 228)
+        Me.ucrChkGroupData.Name = "ucrChkGroupData"
+        Me.ucrChkGroupData.Size = New System.Drawing.Size(145, 20)
+        Me.ucrChkGroupData.TabIndex = 47
         '
         'dlgOneWayFrequencies
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(427, 381)
-        Me.Controls.Add(Me.ucrSaveGraph)
+        Me.Controls.Add(Me.ucrNudGroups)
+        Me.Controls.Add(Me.ucrChkGroupData)
         Me.Controls.Add(Me.ucrChkTable)
         Me.Controls.Add(Me.ucrChkGraph)
         Me.Controls.Add(Me.ucrReceiverWeights)
@@ -233,5 +248,6 @@ Partial Class dlgOneWayFrequencies
     Friend WithEvents ucrChkWeights As ucrCheck
     Friend WithEvents ucrChkTable As ucrCheck
     Friend WithEvents ucrChkGraph As ucrCheck
-    Friend WithEvents ucrSaveGraph As ucrSave
+    Friend WithEvents ucrNudGroups As ucrNud
+    Friend WithEvents ucrChkGroupData As ucrCheck
 End Class
