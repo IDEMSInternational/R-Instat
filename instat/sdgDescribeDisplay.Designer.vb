@@ -115,7 +115,7 @@ Partial Class sdgDescribeDisplay
         Me.ucrChkSignifStars.Checked = False
         Me.ucrChkSignifStars.Location = New System.Drawing.Point(10, 19)
         Me.ucrChkSignifStars.Name = "ucrChkSignifStars"
-        Me.ucrChkSignifStars.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkSignifStars.Size = New System.Drawing.Size(143, 20)
         Me.ucrChkSignifStars.TabIndex = 0
         '
         'ucrChkSignifLevel
@@ -123,7 +123,7 @@ Partial Class sdgDescribeDisplay
         Me.ucrChkSignifLevel.Checked = False
         Me.ucrChkSignifLevel.Location = New System.Drawing.Point(10, 42)
         Me.ucrChkSignifLevel.Name = "ucrChkSignifLevel"
-        Me.ucrChkSignifLevel.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkSignifLevel.Size = New System.Drawing.Size(143, 20)
         Me.ucrChkSignifLevel.TabIndex = 1
         '
         'sdgDescribeDisplay
