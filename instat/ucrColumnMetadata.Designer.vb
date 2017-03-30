@@ -49,7 +49,7 @@ Partial Class ucrColumnMetadata
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(344, 138)
         Me.Controls.Add(Me.grdVariables)
-        Me.Name = "frmVariables"
+        Me.Name = "ucrVariables"
         Me.Text = "Column Metadata"
         Me.ResumeLayout(False)
 

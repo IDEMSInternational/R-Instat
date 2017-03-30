@@ -23,7 +23,6 @@ Public Class ucrColumnMetadata
 
     Private Sub frmVariables_Load(sender As Object, e As EventArgs) Handles Me.Load
         loadForm()
-        frmMain.clsGrids.SetVariablesMetadata(grdVariables)
     End Sub
 
     Private Sub loadForm()
@@ -106,4 +105,17 @@ Public Class ucrColumnMetadata
         e.IsCancelled = True
     End Sub
 
+    Public Sub CopyRange()
+        Try
+            grdVariables.CurrentWorksheet.Copy()
+        Catch
+            MessageBox.Show("Cannot copy the current selection.")
+        End Try
+    End Sub
+
+    Public Sub SelectAllText()
+        If grdCurrSheet IsNot Nothing Then
+            grdCurrSheet.SelectAll()
+        End If
+    End Sub
 End Class
