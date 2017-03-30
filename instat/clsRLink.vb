@@ -258,9 +258,9 @@ Public Class RLink
             End If
         End If
 
-            'If strScript.Length > 2000 Then
-            '    MsgBox("The following command cannot be run because it exceeds the character limit of 2000 characters for a command in R-Instat." & vbNewLine & strScript & vbNewLine & vbNewLine & "It may be possible to run the command directly in R.", MsgBoxStyle.Critical, "Cannot run command")
-            If iCallType = 0 OrElse iCallType = 3 Then
+        'If strScript.Length > 2000 Then
+        '    MsgBox("The following command cannot be run because it exceeds the character limit of 2000 characters for a command in R-Instat." & vbNewLine & strScript & vbNewLine & vbNewLine & "It may be possible to run the command directly in R.", MsgBoxStyle.Critical, "Cannot run command")
+        If iCallType = 0 OrElse iCallType = 3 Then
             Try
                 If iCallType = 3 Then
                     If strGraphDisplayOption = "view_output_window" OrElse strGraphDisplayOption = "view_separate_window" Then
@@ -273,7 +273,7 @@ Public Class RLink
                         'need to boost resolution of the devices, it's not as good as with ggsave.
                     End If
                 End If
-                    clsEngine.Evaluate(strScript)
+                clsEngine.Evaluate(strScript)
                 If iCallType = 3 Then
                     If strGraphDisplayOption = "view_output_window" OrElse strGraphDisplayOption = "view_separate_window" Then
                         'add an R script (maybe in the form of one of our methods) that copies divices to the temp directory, using the default device production... use dev.list() and dev.copy() with arguments device = the devices in the list and which = jpeg devices with different paths leading to the temp directory, using a paste() method to find different names for the files
@@ -486,7 +486,7 @@ Public Class RLink
         bInstatObjectExists = True
     End Sub
 
-    Public Sub FillListView(lstView As ListView, strType As String, Optional lstIncludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional lstExcludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional strDataFrameName As String = "", Optional strHeading As String = "Variables", Optional strExcludedItems As String() = Nothing)
+    Public Sub FillListView(lstView As ListView, strType As String, Optional lstIncludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional lstExcludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional strDataFrameName As String = "", Optional strHeading As String = "Variables", Optional strExcludedItems As String() = Nothing, Optional strDatabaseQuery As String = "")
         Dim vecColumns As GenericVector
         Dim chrCurrColumns As CharacterVector
         Dim i As Integer
@@ -517,6 +517,9 @@ Public Class RLink
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_link_names")
                 Case "key"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_key_names")
+                Case "database_variables"
+                    clsGetItems.SetRCommand(strInstatDataObject & "$get_database_variable_names")
+                    clsGetItems.AddParameter("query", Chr(34) & strDatabaseQuery & Chr(34))
             End Select
             clsGetItems.AddParameter("as_list", "TRUE")
             lstView.Clear()
@@ -740,5 +743,30 @@ Public Class RLink
         clsMakeNames.AddParameter("names", Chr(34) & strText & Chr(34))
         strOut = RunInternalScriptGetValue(clsMakeNames.ToScript()).AsCharacter(0)
         Return strOut
+    End Function
+
+    'Corruption analysis functions
+    Public Function GetCorruptionContractDataFrameNames() As List(Of String)
+        Dim clsGetDataNames As New RFunction
+        Dim lstNames As New List(Of String)
+        Dim expDataNames As SymbolicExpression
+
+        clsGetDataNames.SetRCommand(strInstatDataObject & "$get_corruption_contract_data_names")
+        expDataNames = RunInternalScriptGetValue(clsGetDataNames.ToScript())
+        If Not expDataNames.Type = Internals.SymbolicExpressionType.Null Then
+            lstNames = expDataNames.AsCharacter.ToList()
+        End If
+        Return lstNames
+    End Function
+
+    Public Function GetCorruptionColumnOfType(strDataName As String, strType As String) As String
+        Dim clsGetColumnName As New RFunction
+        Dim strColumn As String
+
+        clsGetColumnName.SetRCommand(strInstatDataObject & "$get_corruption_column_name")
+        clsGetColumnName.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
+        clsGetColumnName.AddParameter("type", strType)
+        strColumn = RunInternalScriptGetValue(clsGetColumnName.ToScript()).AsCharacter(0)
+        Return strColumn
     End Function
 End Class
