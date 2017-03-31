@@ -39,14 +39,15 @@ Public Class dlgOneWayFrequencies
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverOneWayFreq.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverWeights.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrChkGraph.SetRCode(clsSjpFrq, bReset)
-        ucrChkTable.SetRCode(clsSjtFreq, bReset)
+        ucrChkGraph.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrChkTable.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
 
         ucrChkWeights.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrPnlSort.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrChkFlip.SetRCode(clsSjpFrq, bReset)
 
         ucrNudGroups.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrChkGroupData.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
 
     End Sub
 
@@ -84,9 +85,10 @@ Public Class dlgOneWayFrequencies
         ucrChkGroupData.SetText("Group Data")
         ucrNudGroups.SetMinMax(2, 100)
         ucrNudGroups.Increment = 5
+
         ucrNudGroups.SetParameter(New RParameter("auto.group"))
-        ucrChkGroupData.AddToLinkedControls(ucrNudGroups, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrChkGroupData.SetParameter(ucrNudGroups.GetParameter, bNewAddRemoveParameter:=False, bNewChangeParameterValue:=True)
+        ucrChkGroupData.SetParameter(ucrNudGroups.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkGroupData.AddToLinkedControls(ucrNudGroups, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
 
         ucrChkFlip.SetText("Flip Coordinates")
         ucrChkFlip.SetParameter(New RParameter("coord.flip", 1))
@@ -98,24 +100,30 @@ Public Class dlgOneWayFrequencies
         clsSjtFreq = New RFunction
         clsSjpFrq = New RFunction
         ucrSelectorOneWayFreq.Reset()
+        sdgOneWayFrequencies.ucrSaveGraph.Reset()
+        sdgOneWayFrequencies.ucrInputGraphTitle.SetName("")
+        sdgOneWayFrequencies.ucrInputHorizontalLabels.Reset()
+        sdgOneWayFrequencies.ucrInputVerticalLabels.Reset()
         ucrReceiverOneWayFreq.SetParameter(New RParameter("data", 1))
         ucrReceiverOneWayFreq.SetParameterIsRFunction()
         clsSjtFreq.SetRCommand("sjt.frq")
         clsSjtFreq.AddParameter("sort.frq", Chr(34) & "none" & Chr(34))
+        'parameter added to have the default to False (R default is TRUE)
         clsSjtFreq.AddParameter("show.summary", "FALSE")
-        clsSjtFreq.AddParameter("auto.group", 10)
+        clsSjtFreq.AddParameter("skip.zero", "FALSE")
+        'defining the digit default value
         clsSjtFreq.AddParameter("digits", 0)
 
         clsSjpFrq.SetRCommand("sjp.frq")
         clsSjpFrq.AddParameter("sort.frq", Chr(34) & "none" & Chr(34))
         clsSjpFrq.AddParameter("type", Chr(34) & "bar" & Chr(34))
-        clsSjpFrq.AddParameter("vjust", Chr(34) & "left" & Chr(34))
-        clsSjpFrq.AddParameter("hjust", Chr(34) & "left" & Chr(34))
+        clsSjpFrq.AddParameter("vjust", Chr(34) & "bottom" & Chr(34))
+        clsSjpFrq.AddParameter("hjust", Chr(34) & "center" & Chr(34))
+        'parameter added to have the check box checked on default
         clsSjpFrq.AddParameter("show.prc", "TRUE")
+        'parameter added to have the default to False (R default is TRUE)
         clsSjpFrq.AddParameter("show.n", "FALSE")
-
-        clsSjpFrq.AddParameter("auto.group", 10)
-        clsSjpFrq.SetAssignTo("onevar_graph", strTempDataframe:=ucrSelectorOneWayFreq.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="onevar_graph")
+        clsSjpFrq.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneWayFreq.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjtFreq)
         bResetSubdialog = True
 
@@ -141,10 +149,12 @@ Public Class dlgOneWayFrequencies
         If ucrChkTable.Checked Then
             ' ucrBase.clsRsyntax.bHTMLOutput = True
             ucrBase.clsRsyntax.iCallType = 0
-        ElseIf ucrChkGraph.Checked
+        End If
+        If ucrChkGraph.Checked Then
             ' ucrBase.clsRsyntax.bHTMLOutput = False
             ucrBase.clsRsyntax.iCallType = 3
-        Else 'temporary fix to ensure graphs are displayed in the output window before a wrapper for displaying both tables and graphs at the same time on the output window is implemented
+        End If
+        If Not (ucrChkGraph.Checked AndAlso ucrChkTable.Checked) Then 'temporary fix to ensure graphs are displayed in the output window before a wrapper for displaying both tables and graphs at the same time on the output window is implemented
             ucrBase.clsRsyntax.iCallType = 3
         End If
     End Sub
@@ -154,16 +164,17 @@ Public Class dlgOneWayFrequencies
             ucrReceiverOneWayFreq.SetParameter(New RParameter("data", 1))
             ucrReceiverOneWayFreq.SetParameterIsRFunction()
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjtFreq)
-        ElseIf ucrChkGraph.Checked Then
+        End If
+        If ucrChkGraph.Checked Then
             ucrReceiverOneWayFreq.SetParameter(New RParameter("var.cnt", 1))
             ucrReceiverOneWayFreq.SetParameterIsRFunction()
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjpFrq)
+        End If
 
-        Else
+        If ucrChkGraph.Checked = False AndAlso ucrChkTable.Checked = False Then
             ucrReceiverOneWayFreq.SetParameter(New RParameter("var.cnt", 1))
             ucrReceiverOneWayFreq.SetParameterIsRFunction()
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjpFrq)
-
         End If
         SetRCodeForControls(False)
     End Sub
