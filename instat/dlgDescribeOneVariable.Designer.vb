@@ -49,7 +49,7 @@ Partial Class dlgDescribeOneVariable
         Me.lblSelectedVariable.Size = New System.Drawing.Size(124, 14)
         Me.lblSelectedVariable.TabIndex = 1
         Me.lblSelectedVariable.Tag = "Selected_Variable"
-        Me.lblSelectedVariable.Text = "Selected Variable(s):"
+        Me.lblSelectedVariable.Text = "Variable(s) to Describe:"
         '
         'ucrBaseDescribeOneVar
         '
