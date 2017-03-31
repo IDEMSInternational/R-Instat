@@ -96,17 +96,10 @@ Public Class dlgStack
         ucrFactorInto.SetName("variable")
         ucrStackDataInto.SetName("value")
         clsMelt.SetAssignTo(ucrSaveNewDataName.GetText(), strTempDataframe:=ucrSaveNewDataName.GetText())
-        AddSuffix()
         SetDataFrameName()
         clsMelt.AddParameter("variable.name", Chr(34) & ucrFactorInto.GetText() & Chr(34))
         clsMelt.SetRCommand("melt")
         ucrBase.clsRsyntax.SetBaseRFunction(clsMelt)
-    End Sub
-
-    Private Sub AddSuffix()
-        If (Not ucrSaveNewDataName.bUserTyped) AndAlso ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
-            ucrSaveNewDataName.SetName(ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked")
-        End If
     End Sub
 
     Private Sub chkIDVariables_KeyPress(sender As Object, e As KeyPressEventArgs) Handles ucrChkCarryColumns.KeyPress
