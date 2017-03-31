@@ -13,7 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports instat
+
 Imports instat.Translations
 Public Class dlgAppend
     Public bFirstLoad As Boolean = True
@@ -48,7 +48,7 @@ Public Class dlgAppend
         ucrSaveGraph.SetIsTextBox()
         ucrSaveGraph.SetSaveTypeAsDataFrame()
         ucrSaveGraph.SetLabelText("New Data Frame Name:")
-
+        ucrSaveGraph.SetPrefix("Append")
 
         'chkID
         SetParameter({ucrChkIncludeIDColumn, ucrInputIDColName}, New RParameter(".id", 1))
@@ -57,24 +57,19 @@ Public Class dlgAppend
         ucrChkIncludeIDColumn.AddToLinkedControls(ucrLinked:=ucrInputIDColName, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputIDColName.bAddRemoveParameter = False
         ucrInputIDColName.SetLinkedDisplayControl(lblIDColName)
-
-
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultBindRows As New RFunction
+        clsBindRows = New RFunction
 
         ucrSelectorDataframes.Reset()
         ucrSaveGraph.Reset()
 
-        clsDefaultBindRows.SetRCommand("bind_rows")
-        clsDefaultBindRows.AddParameter(".id", Chr(34) & "id" & Chr(34))
-        clsDefaultBindRows.SetAssignTo(strTemp:="Append", strTempDataframe:="Append")
+        clsBindRows.SetRCommand("bind_rows")
+        clsBindRows.AddParameter(".id", Chr(34) & "id" & Chr(34))
+        clsBindRows.SetAssignTo(strTemp:="Append", strTempDataframe:="Append")
 
-        clsBindRows = clsDefaultBindRows.Clone()
         ucrBase.clsRsyntax.SetBaseRFunction(clsBindRows)
-
-        TestOKEnabled()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -99,10 +94,16 @@ Public Class dlgAppend
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrReceiverAppendDataframe_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverAppendDataframe.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrChkIncludeIDColumn.ControlContentsChanged, ucrInputIDColName.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
+    Private Sub ucrInputIDColName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputIDColName.ControlValueChanged
+        'If ucrInputIDColName.GetText = ucrSelectorDataframes.lstAvailableVariable.Then Then
+        '    MsgBox("")
+        'End If
+    End Sub
 End Class
