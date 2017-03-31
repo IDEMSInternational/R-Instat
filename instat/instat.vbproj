@@ -4135,6 +4135,9 @@
     <EmbeddedResource Include="ucrDataFrameLength.sw-KE.resx">
       <DependentUpon>ucrDataFrameLength.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrDataFrameMetadata.resx">
+      <DependentUpon>ucrDataFrameMetadata.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrDataSelection.fr-FR.resx">
       <DependentUpon>ucrDataSelection.vb</DependentUpon>
     </EmbeddedResource>
@@ -4264,6 +4267,9 @@
     <EmbeddedResource Include="ucrLayerParamsControls.sw-KE.resx">
       <DependentUpon>ucrLayerParamsControls.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrLog.resx">
+      <DependentUpon>ucrLog.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrMultipleInput.fr-FR.resx">
       <DependentUpon>ucrMultipleInput.vb</DependentUpon>
     </EmbeddedResource>
@@ -4284,6 +4290,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrNud.resx">
       <DependentUpon>ucrNud.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrOutputWindow.resx">
+      <DependentUpon>ucrOutputWindow.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrRadio.resx">
       <DependentUpon>ucrRadio.vb</DependentUpon>

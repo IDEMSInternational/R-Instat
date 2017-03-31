@@ -452,12 +452,12 @@ Partial Class frmMain
         Me.splOverall = New System.Windows.Forms.SplitContainer()
         Me.splExtraWindows = New System.Windows.Forms.SplitContainer()
         Me.splMetadata = New System.Windows.Forms.SplitContainer()
-        Me.splLogScript = New System.Windows.Forms.SplitContainer()
-        Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrColumnMeta = New instat.ucrColumnMetadata()
         Me.ucrDataFrameMeta = New instat.ucrDataFrameMetadata()
+        Me.splLogScript = New System.Windows.Forms.SplitContainer()
         Me.ucrLogWindow = New instat.ucrLog()
         Me.ucrScriptWindow = New instat.ucrScript()
+        Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
         Me.stsStrip.SuspendLayout()
@@ -3466,7 +3466,7 @@ Partial Class frmMain
         '
         'splOverall
         '
-        Me.splOverall.BackColor = System.Drawing.Color.DodgerBlue
+        Me.splOverall.BackColor = System.Drawing.Color.LightGray
         Me.splOverall.Dock = System.Windows.Forms.DockStyle.Fill
         Me.splOverall.Location = New System.Drawing.Point(0, 49)
         Me.splOverall.Name = "splOverall"
@@ -3488,7 +3488,7 @@ Partial Class frmMain
         '
         'splExtraWindows
         '
-        Me.splExtraWindows.BackColor = System.Drawing.Color.DodgerBlue
+        Me.splExtraWindows.BackColor = System.Drawing.Color.LightGray
         Me.splExtraWindows.Dock = System.Windows.Forms.DockStyle.Fill
         Me.splExtraWindows.Location = New System.Drawing.Point(0, 0)
         Me.splExtraWindows.Name = "splExtraWindows"
@@ -3509,7 +3509,7 @@ Partial Class frmMain
         '
         'splMetadata
         '
-        Me.splMetadata.BackColor = System.Drawing.Color.DodgerBlue
+        Me.splMetadata.BackColor = System.Drawing.Color.LightGray
         Me.splMetadata.Dock = System.Windows.Forms.DockStyle.Fill
         Me.splMetadata.Location = New System.Drawing.Point(0, 0)
         Me.splMetadata.Name = "splMetadata"
@@ -3526,48 +3526,6 @@ Partial Class frmMain
         Me.splMetadata.SplitterDistance = 66
         Me.splMetadata.SplitterWidth = 5
         Me.splMetadata.TabIndex = 0
-        '
-        'splLogScript
-        '
-        Me.splLogScript.BackColor = System.Drawing.Color.DodgerBlue
-        Me.splLogScript.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.splLogScript.Location = New System.Drawing.Point(0, 0)
-        Me.splLogScript.Name = "splLogScript"
-        '
-        'splLogScript.Panel1
-        '
-        Me.splLogScript.Panel1.BackColor = System.Drawing.SystemColors.Control
-        Me.splLogScript.Panel1.Controls.Add(Me.ucrLogWindow)
-        '
-        'splLogScript.Panel2
-        '
-        Me.splLogScript.Panel2.BackColor = System.Drawing.SystemColors.Control
-        Me.splLogScript.Panel2.Controls.Add(Me.ucrScriptWindow)
-        Me.splLogScript.Size = New System.Drawing.Size(395, 118)
-        Me.splLogScript.SplitterDistance = 131
-        Me.splLogScript.SplitterWidth = 5
-        Me.splLogScript.TabIndex = 0
-        '
-        'splDataOutput
-        '
-        Me.splDataOutput.BackColor = System.Drawing.Color.DodgerBlue
-        Me.splDataOutput.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.splDataOutput.Location = New System.Drawing.Point(0, 0)
-        Me.splDataOutput.Name = "splDataOutput"
-        '
-        'splDataOutput.Panel1
-        '
-        Me.splDataOutput.Panel1.BackColor = System.Drawing.SystemColors.Control
-        Me.splDataOutput.Panel1.Controls.Add(Me.ucrDataViewer)
-        '
-        'splDataOutput.Panel2
-        '
-        Me.splDataOutput.Panel2.BackColor = System.Drawing.SystemColors.Control
-        Me.splDataOutput.Panel2.Controls.Add(Me.ucrOutput)
-        Me.splDataOutput.Size = New System.Drawing.Size(600, 113)
-        Me.splDataOutput.SplitterDistance = 300
-        Me.splDataOutput.SplitterWidth = 5
-        Me.splDataOutput.TabIndex = 0
         '
         'ucrColumnMeta
         '
@@ -3587,6 +3545,27 @@ Partial Class frmMain
         Me.ucrDataFrameMeta.Size = New System.Drawing.Size(129, 118)
         Me.ucrDataFrameMeta.TabIndex = 0
         '
+        'splLogScript
+        '
+        Me.splLogScript.BackColor = System.Drawing.Color.LightGray
+        Me.splLogScript.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.splLogScript.Location = New System.Drawing.Point(0, 0)
+        Me.splLogScript.Name = "splLogScript"
+        '
+        'splLogScript.Panel1
+        '
+        Me.splLogScript.Panel1.BackColor = System.Drawing.SystemColors.Control
+        Me.splLogScript.Panel1.Controls.Add(Me.ucrLogWindow)
+        '
+        'splLogScript.Panel2
+        '
+        Me.splLogScript.Panel2.BackColor = System.Drawing.SystemColors.Control
+        Me.splLogScript.Panel2.Controls.Add(Me.ucrScriptWindow)
+        Me.splLogScript.Size = New System.Drawing.Size(395, 118)
+        Me.splLogScript.SplitterDistance = 131
+        Me.splLogScript.SplitterWidth = 5
+        Me.splLogScript.TabIndex = 0
+        '
         'ucrLogWindow
         '
         Me.ucrLogWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
@@ -3605,6 +3584,27 @@ Partial Class frmMain
         Me.ucrScriptWindow.Size = New System.Drawing.Size(259, 118)
         Me.ucrScriptWindow.TabIndex = 0
         Me.ucrScriptWindow.Tag = "Script_Window"
+        '
+        'splDataOutput
+        '
+        Me.splDataOutput.BackColor = System.Drawing.Color.LightGray
+        Me.splDataOutput.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.splDataOutput.Location = New System.Drawing.Point(0, 0)
+        Me.splDataOutput.Name = "splDataOutput"
+        '
+        'splDataOutput.Panel1
+        '
+        Me.splDataOutput.Panel1.BackColor = System.Drawing.SystemColors.Control
+        Me.splDataOutput.Panel1.Controls.Add(Me.ucrDataViewer)
+        '
+        'splDataOutput.Panel2
+        '
+        Me.splDataOutput.Panel2.BackColor = System.Drawing.SystemColors.Control
+        Me.splDataOutput.Panel2.Controls.Add(Me.ucrOutput)
+        Me.splDataOutput.Size = New System.Drawing.Size(600, 113)
+        Me.splDataOutput.SplitterDistance = 300
+        Me.splDataOutput.SplitterWidth = 5
+        Me.splDataOutput.TabIndex = 0
         '
         'ucrDataViewer
         '

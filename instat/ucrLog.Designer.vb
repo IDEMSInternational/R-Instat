@@ -23,32 +23,49 @@ Partial Class ucrLog
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.txtLog = New System.Windows.Forms.TextBox()
+        Me.lblHeader = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'txtLog
         '
-        Me.txtLog.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtLog.Location = New System.Drawing.Point(0, 0)
+        Me.txtLog.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtLog.Location = New System.Drawing.Point(0, 20)
         Me.txtLog.Multiline = True
         Me.txtLog.Name = "txtLog"
         Me.txtLog.ReadOnly = True
         Me.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtLog.Size = New System.Drawing.Size(531, 415)
+        Me.txtLog.Size = New System.Drawing.Size(531, 395)
         Me.txtLog.TabIndex = 0
         Me.txtLog.TabStop = False
         '
-        'frmLog
+        'lblHeader
+        '
+        Me.lblHeader.BackColor = System.Drawing.Color.Green
+        Me.lblHeader.Dock = System.Windows.Forms.DockStyle.Top
+        Me.lblHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblHeader.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblHeader.Location = New System.Drawing.Point(0, 0)
+        Me.lblHeader.Name = "lblHeader"
+        Me.lblHeader.Size = New System.Drawing.Size(531, 20)
+        Me.lblHeader.TabIndex = 8
+        Me.lblHeader.Text = "Log"
+        Me.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'ucrLog
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(531, 415)
+        Me.Controls.Add(Me.lblHeader)
         Me.Controls.Add(Me.txtLog)
         Me.Name = "ucrLog"
-        Me.Text = "Log Window"
+        Me.Size = New System.Drawing.Size(531, 415)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents txtLog As TextBox
+    Friend WithEvents lblHeader As Label
 End Class
