@@ -1146,10 +1146,28 @@
     <Compile Include="ucrColors.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrColumnMetadata.Designer.vb">
+      <DependentUpon>ucrColumnMetadata.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrColumnMetadata.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrCore.Designer.vb">
       <DependentUpon>ucrCore.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrCore.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrDataFrameMetadata.Designer.vb">
+      <DependentUpon>ucrDataFrameMetadata.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrDataFrameMetadata.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrDataView.Designer.vb">
+      <DependentUpon>ucrDataView.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrDataView.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrDialogDisabled.Designer.vb">
@@ -1934,6 +1952,12 @@
     <Compile Include="ucrLayerParamsControls.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrLog.Designer.vb">
+      <DependentUpon>ucrLog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrLog.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrMultipleInput.Designer.vb">
       <DependentUpon>ucrMultipleInput.vb</DependentUpon>
     </Compile>
@@ -1950,6 +1974,12 @@
       <DependentUpon>ucrNud.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrNud.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrOutputWindow.Designer.vb">
+      <DependentUpon>ucrOutputWindow.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrOutputWindow.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrRadio.Designer.vb">
@@ -2010,6 +2040,12 @@
       <DependentUpon>ucrSaveModel.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrSaveModel.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrScript.Designer.vb">
+      <DependentUpon>ucrScript.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrScript.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrSelector.designer.vb">
@@ -4096,6 +4132,9 @@
     <EmbeddedResource Include="ucrColors.sw-KE.resx">
       <DependentUpon>ucrColors.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrColumnMetadata.resx">
+      <DependentUpon>ucrColumnMetadata.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrDataFrame.fr-FR.resx">
       <DependentUpon>ucrDataFrame.vb</DependentUpon>
     </EmbeddedResource>
@@ -4114,6 +4153,9 @@
     <EmbeddedResource Include="ucrDataFrameLength.sw-KE.resx">
       <DependentUpon>ucrDataFrameLength.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrDataFrameMetadata.resx">
+      <DependentUpon>ucrDataFrameMetadata.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrDataSelection.fr-FR.resx">
       <DependentUpon>ucrDataSelection.vb</DependentUpon>
     </EmbeddedResource>
@@ -4122,6 +4164,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDataSelection.sw-KE.resx">
       <DependentUpon>ucrDataSelection.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrDataView.resx">
+      <DependentUpon>ucrDataView.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDialogDisabled.fr-FR.resx">
       <DependentUpon>ucrDialogDisabled.vb</DependentUpon>
@@ -4240,6 +4285,9 @@
     <EmbeddedResource Include="ucrLayerParamsControls.sw-KE.resx">
       <DependentUpon>ucrLayerParamsControls.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrLog.resx">
+      <DependentUpon>ucrLog.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrMultipleInput.fr-FR.resx">
       <DependentUpon>ucrMultipleInput.vb</DependentUpon>
     </EmbeddedResource>
@@ -4260,6 +4308,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrNud.resx">
       <DependentUpon>ucrNud.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrOutputWindow.resx">
+      <DependentUpon>ucrOutputWindow.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrRadio.resx">
       <DependentUpon>ucrRadio.vb</DependentUpon>
@@ -4330,6 +4381,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrSaveModel.sw-KE.resx">
       <DependentUpon>ucrSaveModel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrScript.resx">
+      <DependentUpon>ucrScript.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrSelector.fr-FR.resx">
       <DependentUpon>ucrSelector.vb</DependentUpon>
