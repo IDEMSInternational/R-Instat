@@ -359,12 +359,10 @@ Public Class ucrReceiver
         If clsParameter Is Nothing Then
             clsParameter = New RParameter
         End If
-        If Not IsEmpty() Then
-            If bParameterIsString Then
-                clsParameter.SetArgumentValue(GetVariableNames(bWithQuotes))
-            ElseIf bParameterIsRFunction Then
-                clsParameter.SetArgument(GetVariables(bForceAsDataFrame))
-            End If
+        If bParameterIsString Then
+            clsParameter.SetArgumentValue(GetVariableNames(bWithQuotes))
+        ElseIf bParameterIsRFunction Then
+            clsParameter.SetArgument(GetVariables(bForceAsDataFrame))
         End If
     End Sub
 
