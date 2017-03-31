@@ -33,8 +33,8 @@ Partial Class dlgRowStats
         Me.rdoNumberofMissing = New System.Windows.Forms.RadioButton()
         Me.rdoMedian = New System.Windows.Forms.RadioButton()
         Me.rdoSum = New System.Windows.Forms.RadioButton()
-        Me.ucrSaveResults = New instat.ucrSave()
         Me.ucrPanelStatistics = New instat.UcrPanel()
+        Me.ucrSaveResults = New instat.ucrSave()
         Me.ucrSelectorForRowStats = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForRowStatistics = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
@@ -44,19 +44,19 @@ Partial Class dlgRowStats
         'lblSelected
         '
         Me.lblSelected.AutoSize = True
-        Me.lblSelected.Location = New System.Drawing.Point(249, 46)
+        Me.lblSelected.Location = New System.Drawing.Point(247, 45)
         Me.lblSelected.Name = "lblSelected"
-        Me.lblSelected.Size = New System.Drawing.Size(104, 13)
+        Me.lblSelected.Size = New System.Drawing.Size(103, 13)
         Me.lblSelected.TabIndex = 1
-        Me.lblSelected.Tag = "Selected_Variable(s):"
-        Me.lblSelected.Text = "Selected Variable(s):"
+        Me.lblSelected.Tag = "Rows_to_Summarise:"
+        Me.lblSelected.Text = "Rows to Summarise:"
         '
         'cmdUserDefined
         '
-        Me.cmdUserDefined.Location = New System.Drawing.Point(277, 309)
+        Me.cmdUserDefined.Location = New System.Drawing.Point(309, 271)
         Me.cmdUserDefined.Name = "cmdUserDefined"
         Me.cmdUserDefined.Size = New System.Drawing.Size(100, 23)
-        Me.cmdUserDefined.TabIndex = 6
+        Me.cmdUserDefined.TabIndex = 5
         Me.cmdUserDefined.Tag = "User_Define"
         Me.cmdUserDefined.Text = "User Define"
         Me.cmdUserDefined.UseVisualStyleBackColor = True
@@ -72,10 +72,10 @@ Partial Class dlgRowStats
         Me.grpStatistic.Controls.Add(Me.rdoMedian)
         Me.grpStatistic.Controls.Add(Me.rdoSum)
         Me.grpStatistic.Controls.Add(Me.ucrPanelStatistics)
-        Me.grpStatistic.Location = New System.Drawing.Point(9, 205)
+        Me.grpStatistic.Location = New System.Drawing.Point(10, 195)
         Me.grpStatistic.Name = "grpStatistic"
-        Me.grpStatistic.Size = New System.Drawing.Size(401, 91)
-        Me.grpStatistic.TabIndex = 14
+        Me.grpStatistic.Size = New System.Drawing.Size(399, 70)
+        Me.grpStatistic.TabIndex = 3
         Me.grpStatistic.TabStop = False
         Me.grpStatistic.Tag = "Statistic"
         Me.grpStatistic.Text = "Statistic"
@@ -83,10 +83,10 @@ Partial Class dlgRowStats
         'rdoMinimum
         '
         Me.rdoMinimum.AutoSize = True
-        Me.rdoMinimum.Location = New System.Drawing.Point(126, 25)
+        Me.rdoMinimum.Location = New System.Drawing.Point(329, 19)
         Me.rdoMinimum.Name = "rdoMinimum"
         Me.rdoMinimum.Size = New System.Drawing.Size(66, 17)
-        Me.rdoMinimum.TabIndex = 10
+        Me.rdoMinimum.TabIndex = 7
         Me.rdoMinimum.TabStop = True
         Me.rdoMinimum.Tag = "Minimum"
         Me.rdoMinimum.Text = "Minimum"
@@ -95,10 +95,10 @@ Partial Class dlgRowStats
         'rdoMaximum
         '
         Me.rdoMaximum.AutoSize = True
-        Me.rdoMaximum.Location = New System.Drawing.Point(249, 56)
+        Me.rdoMaximum.Location = New System.Drawing.Point(329, 42)
         Me.rdoMaximum.Name = "rdoMaximum"
         Me.rdoMaximum.Size = New System.Drawing.Size(69, 17)
-        Me.rdoMaximum.TabIndex = 13
+        Me.rdoMaximum.TabIndex = 8
         Me.rdoMaximum.TabStop = True
         Me.rdoMaximum.Tag = "Maximum"
         Me.rdoMaximum.Text = "Maximum"
@@ -107,10 +107,10 @@ Partial Class dlgRowStats
         'rdoCount
         '
         Me.rdoCount.AutoSize = True
-        Me.rdoCount.Location = New System.Drawing.Point(327, 56)
+        Me.rdoCount.Location = New System.Drawing.Point(206, 19)
         Me.rdoCount.Name = "rdoCount"
         Me.rdoCount.Size = New System.Drawing.Size(53, 17)
-        Me.rdoCount.TabIndex = 15
+        Me.rdoCount.TabIndex = 5
         Me.rdoCount.TabStop = True
         Me.rdoCount.Tag = "Count"
         Me.rdoCount.Text = "Count"
@@ -119,10 +119,10 @@ Partial Class dlgRowStats
         'rdoMean
         '
         Me.rdoMean.AutoSize = True
-        Me.rdoMean.Location = New System.Drawing.Point(5, 25)
+        Me.rdoMean.Location = New System.Drawing.Point(6, 19)
         Me.rdoMean.Name = "rdoMean"
         Me.rdoMean.Size = New System.Drawing.Size(52, 17)
-        Me.rdoMean.TabIndex = 8
+        Me.rdoMean.TabIndex = 1
         Me.rdoMean.TabStop = True
         Me.rdoMean.Tag = "Mean"
         Me.rdoMean.Text = "Mean"
@@ -131,10 +131,10 @@ Partial Class dlgRowStats
         'rdoStandardDeviation
         '
         Me.rdoStandardDeviation.AutoSize = True
-        Me.rdoStandardDeviation.Location = New System.Drawing.Point(126, 56)
+        Me.rdoStandardDeviation.Location = New System.Drawing.Point(78, 42)
         Me.rdoStandardDeviation.Name = "rdoStandardDeviation"
         Me.rdoStandardDeviation.Size = New System.Drawing.Size(116, 17)
-        Me.rdoStandardDeviation.TabIndex = 11
+        Me.rdoStandardDeviation.TabIndex = 4
         Me.rdoStandardDeviation.TabStop = True
         Me.rdoStandardDeviation.Tag = "Standard_Deviation"
         Me.rdoStandardDeviation.Text = "Standard Deviation"
@@ -143,10 +143,10 @@ Partial Class dlgRowStats
         'rdoNumberofMissing
         '
         Me.rdoNumberofMissing.AutoSize = True
-        Me.rdoNumberofMissing.Location = New System.Drawing.Point(5, 56)
+        Me.rdoNumberofMissing.Location = New System.Drawing.Point(206, 42)
         Me.rdoNumberofMissing.Name = "rdoNumberofMissing"
         Me.rdoNumberofMissing.Size = New System.Drawing.Size(112, 17)
-        Me.rdoNumberofMissing.TabIndex = 9
+        Me.rdoNumberofMissing.TabIndex = 6
         Me.rdoNumberofMissing.TabStop = True
         Me.rdoNumberofMissing.Tag = "Number_of_Missing"
         Me.rdoNumberofMissing.Text = "Number of Missing"
@@ -155,10 +155,10 @@ Partial Class dlgRowStats
         'rdoMedian
         '
         Me.rdoMedian.AutoSize = True
-        Me.rdoMedian.Location = New System.Drawing.Point(327, 25)
+        Me.rdoMedian.Location = New System.Drawing.Point(6, 42)
         Me.rdoMedian.Name = "rdoMedian"
         Me.rdoMedian.Size = New System.Drawing.Size(60, 17)
-        Me.rdoMedian.TabIndex = 14
+        Me.rdoMedian.TabIndex = 2
         Me.rdoMedian.TabStop = True
         Me.rdoMedian.Tag = "Median"
         Me.rdoMedian.Text = "Median"
@@ -167,37 +167,31 @@ Partial Class dlgRowStats
         'rdoSum
         '
         Me.rdoSum.AutoSize = True
-        Me.rdoSum.Location = New System.Drawing.Point(249, 25)
+        Me.rdoSum.Location = New System.Drawing.Point(78, 19)
         Me.rdoSum.Name = "rdoSum"
         Me.rdoSum.Size = New System.Drawing.Size(46, 17)
-        Me.rdoSum.TabIndex = 12
+        Me.rdoSum.TabIndex = 3
         Me.rdoSum.TabStop = True
         Me.rdoSum.Tag = "Sum"
         Me.rdoSum.Text = "Sum"
         Me.rdoSum.UseVisualStyleBackColor = True
         '
-        'ucrSaveResults
-        '
-        Me.ucrSaveResults.bAddRemoveParameter = True
-        Me.ucrSaveResults.bChangeParameterValue = True
-        Me.ucrSaveResults.Location = New System.Drawing.Point(12, 309)
-        Me.ucrSaveResults.Name = "ucrSaveResults"
-        Me.ucrSaveResults.Size = New System.Drawing.Size(254, 24)
-        Me.ucrSaveResults.TabIndex = 15
-        '
         'ucrPanelStatistics
         '
-        Me.ucrPanelStatistics.bAddRemoveParameter = True
-        Me.ucrPanelStatistics.bChangeParameterValue = True
         Me.ucrPanelStatistics.Location = New System.Drawing.Point(3, 12)
         Me.ucrPanelStatistics.Name = "ucrPanelStatistics"
-        Me.ucrPanelStatistics.Size = New System.Drawing.Size(384, 69)
+        Me.ucrPanelStatistics.Size = New System.Drawing.Size(393, 56)
         Me.ucrPanelStatistics.TabIndex = 0
+        '
+        'ucrSaveResults
+        '
+        Me.ucrSaveResults.Location = New System.Drawing.Point(10, 271)
+        Me.ucrSaveResults.Name = "ucrSaveResults"
+        Me.ucrSaveResults.Size = New System.Drawing.Size(254, 24)
+        Me.ucrSaveResults.TabIndex = 4
         '
         'ucrSelectorForRowStats
         '
-        Me.ucrSelectorForRowStats.bAddRemoveParameter = True
-        Me.ucrSelectorForRowStats.bChangeParameterValue = True
         Me.ucrSelectorForRowStats.bShowHiddenColumns = False
         Me.ucrSelectorForRowStats.bUseCurrentFilter = True
         Me.ucrSelectorForRowStats.Location = New System.Drawing.Point(10, 10)
@@ -208,10 +202,8 @@ Partial Class dlgRowStats
         '
         'ucrReceiverForRowStatistics
         '
-        Me.ucrReceiverForRowStatistics.bAddRemoveParameter = True
-        Me.ucrReceiverForRowStatistics.bChangeParameterValue = True
         Me.ucrReceiverForRowStatistics.frmParent = Me
-        Me.ucrReceiverForRowStatistics.Location = New System.Drawing.Point(247, 61)
+        Me.ucrReceiverForRowStatistics.Location = New System.Drawing.Point(247, 60)
         Me.ucrReceiverForRowStatistics.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverForRowStatistics.Name = "ucrReceiverForRowStatistics"
         Me.ucrReceiverForRowStatistics.Selector = Nothing
@@ -220,16 +212,16 @@ Partial Class dlgRowStats
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 346)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 300)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 7
+        Me.ucrBase.TabIndex = 6
         '
         'dlgRowStats
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(418, 406)
+        Me.ClientSize = New System.Drawing.Size(418, 358)
         Me.Controls.Add(Me.ucrSaveResults)
         Me.Controls.Add(Me.grpStatistic)
         Me.Controls.Add(Me.cmdUserDefined)
@@ -242,8 +234,8 @@ Partial Class dlgRowStats
         Me.MinimizeBox = False
         Me.Name = "dlgRowStats"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "Row_statistics"
-        Me.Text = "Row Statistics"
+        Me.Tag = "Row_Summaries"
+        Me.Text = "Row Summaries"
         Me.grpStatistic.ResumeLayout(False)
         Me.grpStatistic.PerformLayout()
         Me.ResumeLayout(False)
