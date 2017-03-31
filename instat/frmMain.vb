@@ -35,6 +35,7 @@ Public Class frmMain
     Public dlgLastDialog As Form
     Public strSaveFilePath As String
     Private mnuItems As New List(Of Form)
+    Private ctrActive As Control
 
     'This is the default data frame to appear in the data frame selector
     'If "" the current worksheet will be used
@@ -42,23 +43,16 @@ Public Class frmMain
     '     User can choose a default data frame or set the default as the current worksheet
     Public strDefaultDataFrame As String = ""
 
-    Private Sub InitialiseOutputWindow()
-        frmOutputWindow.MdiParent = Me
-        frmOutputWindow.Show()
-        clsRLink.SetOutput(frmOutputWindow.ucrRichTextBox)
-        'TEST temporary : creating the temporary graphs 
-        clsRLink.rtbOutput.CreateTempDirectory()
-    End Sub
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         InitialiseOutputWindow()
 
         mnuHelpAboutRInstat.Visible = False
-        frmEditor.MdiParent = Me
-        frmLog.MdiParent = Me
-        frmScript.MdiParent = Me
-        frmVariables.MdiParent = Me
-        frmMetaData.MdiParent = Me
-        frmGraphDisplay.MdiParent = Me
+
+        clsGrids.SetDataViewer(ucrDataViewer)
+        clsGrids.SetMetadata(ucrDataFrameMeta.grdMetaData)
+        clsGrids.SetVariablesMetadata(ucrColumnMeta.grdVariables)
+
+        SetToDefaultLayout()
         strStaticPath = Path.GetFullPath("static")
         strHelpFilePath = "Help\R-Instat.chm"
         strAppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "RInstat\")
@@ -67,13 +61,8 @@ Public Class frmMain
 
         clsRLink.SetEngine()
 
-        frmEditor.Show()
-
-        Me.LayoutMdi(MdiLayout.TileVertical)
-
-
         'Setting the properties of R Interface
-        clsRLink.SetLog(frmLog.txtLog)
+        clsRLink.SetLog(ucrLogWindow.txtLog)
 
         'Do this before setting up R Link becuase setup edits Output window which is changed by Options
         LoadInstatOptions()
@@ -87,6 +76,12 @@ Public Class frmMain
         clsRecentItems.checkOnLoad()
     End Sub
 
+    Private Sub InitialiseOutputWindow()
+        clsRLink.SetOutput(ucrOutput.ucrRichTextBox)
+        'TEST temporary : creating the temporary graphs 
+        clsRLink.rtbOutput.CreateTempDirectory()
+    End Sub
+
     Private Sub LoadInstatOptions()
         If File.Exists(Path.Combine(strAppDataPath, strInstatOptionsFile)) Then
             LoadInstatOptionsFromFile(Path.Combine(strAppDataPath, strInstatOptionsFile))
@@ -94,6 +89,22 @@ Public Class frmMain
             clsInstatOptions = New InstatOptions
             'TODO Should these be here or in the constructor (New) of InstatOptions?
         End If
+    End Sub
+
+    Private Sub SetToDefaultLayout()
+        splOverall.SplitterDistance = splOverall.Height / 4
+        splDataOutput.SplitterDistance = splDataOutput.Width / 2
+        splExtraWindows.SplitterDistance = splExtraWindows.Width / 2
+        splLogScript.SplitterDistance = splLogScript.Width / 2
+        splMetadata.SplitterDistance = splMetadata.Width / 2
+
+        mnuViewDataView.Checked = True
+        mnuViewOutputWindow.Checked = True
+        mnuViewLog.Checked = False
+        mnuViewDataFrameMetadata.Checked = False
+        mnuViewColumnMetadata.Checked = False
+        mnuViewScriptWindow.Checked = False
+        UpdateLayout()
     End Sub
 
     Public Sub LoadInstatOptionsFromFile(strFilePath As String)
@@ -145,6 +156,14 @@ Public Class frmMain
         frmNewGraph.MdiParent = Me
         frmNewGraph.Show()
         frmNewGraph.BringToFront()
+    End Sub
+
+    Public Sub AddToScriptWindow(strText As String, Optional bMakeVisible As Boolean = True)
+        ucrScriptWindow.AppendText(strText)
+        If bMakeVisible Then
+            mnuViewScriptWindow.Checked = True
+            UpdateLayout()
+        End If
     End Sub
 
     Private Sub mnuFileNewDataFrame_Click(sender As Object, e As EventArgs) Handles mnuFileNewDataFrame.Click
@@ -259,40 +278,60 @@ Public Class frmMain
         dlgName.ShowDialog()
     End Sub
 
-    Private Sub mnuWindowVariable_Click(sender As Object, e As EventArgs) Handles mnuViewColumnMetadata.Click
-        If frmVariables.Visible Then
-            frmVariables.Visible = False
+    Private Sub UpdateLayout()
+        If Not mnuViewDataView.Checked AndAlso Not mnuViewOutputWindow.Checked AndAlso Not mnuViewColumnMetadata.Checked AndAlso Not mnuViewDataFrameMetadata.Checked AndAlso Not mnuViewLog.Checked AndAlso Not mnuViewScriptWindow.Checked Then
+            splOverall.Hide()
         Else
-            frmVariables.Visible = True
-            frmVariables.BringToFront()
+            splOverall.Show()
+            If mnuViewDataView.Checked OrElse mnuViewOutputWindow.Checked Then
+                splOverall.Panel2Collapsed = False
+                splDataOutput.Panel1Collapsed = Not mnuViewDataView.Checked
+                splDataOutput.Panel2Collapsed = Not mnuViewOutputWindow.Checked
+            Else
+                splOverall.Panel2Collapsed = True
+            End If
+            If mnuViewColumnMetadata.Checked OrElse mnuViewDataFrameMetadata.Checked OrElse mnuViewLog.Checked OrElse mnuViewScriptWindow.Checked Then
+                splOverall.Panel1Collapsed = False
+
+                If mnuViewColumnMetadata.Checked OrElse mnuViewDataFrameMetadata.Checked Then
+                    splExtraWindows.Panel1Collapsed = False
+                    splMetadata.Panel1Collapsed = Not mnuViewColumnMetadata.Checked
+                    splMetadata.Panel2Collapsed = Not mnuViewDataFrameMetadata.Checked
+                Else
+                    splExtraWindows.Panel1Collapsed = True
+                End If
+
+                If mnuViewLog.Checked OrElse mnuViewScriptWindow.Checked Then
+                    splExtraWindows.Panel2Collapsed = False
+                    splLogScript.Panel1Collapsed = Not mnuViewLog.Checked
+                    splLogScript.Panel2Collapsed = Not mnuViewScriptWindow.Checked
+                Else
+                    splExtraWindows.Panel2Collapsed = True
+                End If
+            Else
+                splOverall.Panel1Collapsed = True
+            End If
         End If
+    End Sub
+
+    Private Sub mnuWindowVariable_Click(sender As Object, e As EventArgs) Handles mnuViewColumnMetadata.Click
+        mnuViewColumnMetadata.Checked = Not mnuViewColumnMetadata.Checked
+        UpdateLayout()
     End Sub
 
     Private Sub mnuWindowDataFrame_Click(sender As Object, e As EventArgs) Handles mnuViewDataFrameMetadata.Click
-        If frmMetaData.Visible Then
-            frmMetaData.Visible = False
-        Else
-            frmMetaData.Visible = True
-            frmMetaData.BringToFront()
-        End If
+        mnuViewDataFrameMetadata.Checked = Not mnuViewDataFrameMetadata.Checked
+        UpdateLayout()
     End Sub
 
     Private Sub LogToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuViewLog.Click
-        If frmLog.Visible Then
-            frmLog.Visible = False
-        Else
-            frmLog.Visible = True
-            frmLog.BringToFront()
-        End If
+        mnuViewLog.Checked = Not mnuViewLog.Checked
+        UpdateLayout()
     End Sub
 
     Private Sub ScriptToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuViewScriptWindow.Click
-        If frmScript.Visible Then
-            frmScript.Visible = False
-        Else
-            frmScript.Visible = True
-            frmScript.BringToFront()
-        End If
+        mnuViewScriptWindow.Checked = Not mnuViewScriptWindow.Checked
+        UpdateLayout()
     End Sub
 
     Private Sub mnuManageReshapeMerge_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnReshapeMerge.Click
@@ -300,12 +339,8 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuWindowsEditor_Click(sender As Object, e As EventArgs) Handles mnuViewDataView.Click
-        If frmEditor.Visible Then
-            frmEditor.Visible = False
-        Else
-            frmEditor.Visible = True
-            frmEditor.BringToFront()
-        End If
+        mnuViewDataView.Checked = Not mnuViewDataView.Checked
+        UpdateLayout()
     End Sub
 
     Private Sub mnuFilePrint_Click(sender As Object, e As EventArgs) Handles mnuFilePrint.Click
@@ -530,26 +565,36 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuEditSelectAll_Click(sender As Object, e As EventArgs) Handles mnuEditSelectAll.Click
-        If ActiveMdiChild Is frmLog Then
-            frmLog.selectAllText()
-        ElseIf ActiveMdiChild Is frmOutputWindow Then
-            frmOutputWindow.selectAllText() 'To be tested
-        ElseIf ActiveMdiChild Is frmScript Then
-            frmScript.selectAllText()
-        ElseIf ActiveMdiChild Is frmEditor AndAlso frmEditor.grdData.Visible Then
-            frmEditor.selectAllText()
+        If ctrActive IsNot Nothing Then
+            If ctrActive.Equals(ucrDataViewer) Then
+                ucrDataViewer.SelectAllText()
+            ElseIf ctrActive.Equals(ucrOutput) Then
+                ucrOutput.SelectAllText()
+            ElseIf ctrActive.Equals(ucrColumnMeta) Then
+                ucrColumnMeta.SelectAllText()
+            ElseIf ctrActive.Equals(ucrDataFrameMeta) Then
+                ucrDataFrameMeta.SelectAllText()
+            ElseIf ctrActive.Equals(ucrLogWindow) Then
+                ucrLogWindow.SelectAllText()
+            ElseIf ctrActive.Equals(ucrScriptWindow) Then
+                ucrScriptWindow.SelectAllText()
+            End If
         End If
     End Sub
 
     Private Sub mnuEditCopy_Click(sender As Object, e As EventArgs) Handles mnuEditCopy.Click
-        If ActiveMdiChild Is frmLog Then
-            frmLog.copyText()
-        ElseIf ActiveMdiChild Is frmOutputWindow Then
-            frmOutputWindow.CopyContent() 'Question: should this be copying the whole content or just the selected content ? 
-        ElseIf ActiveMdiChild Is frmScript Then
-            frmScript.copyText()
-        ElseIf ActiveMdiChild Is frmEditor AndAlso frmEditor.grdData.Visible Then
-            frmEditor.copyRange()
+        If ctrActive.Equals(ucrDataViewer) Then
+            ucrDataViewer.CopyRange()
+        ElseIf ctrActive.Equals(ucrOutput) Then
+            ucrOutput.CopyContent()
+        ElseIf ctrActive.Equals(ucrColumnMeta) Then
+            ucrColumnMeta.CopyRange()
+        ElseIf ctrActive.Equals(ucrDataFrameMeta) Then
+            ucrDataFrameMeta.CopyRange()
+        ElseIf ctrActive.Equals(ucrLogWindow) Then
+            ucrLogWindow.CopyText()
+        ElseIf ctrActive.Equals(ucrScriptWindow) Then
+            ucrScriptWindow.CopyText()
         End If
     End Sub
 
@@ -618,12 +663,8 @@ Public Class frmMain
     End Sub
 
     Private Sub OutputWindowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuViewOutputWindow.Click
-        If frmOutputWindow.Visible Then
-            frmOutputWindow.Visible = False
-        Else
-            frmOutputWindow.Visible = True
-            frmOutputWindow.BringToFront()
-        End If
+        mnuViewOutputWindow.Checked = Not mnuViewOutputWindow.Checked
+        UpdateLayout()
     End Sub
 
     Private Sub mnuOrganiseColumnReshapeRandomSubset_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnReshapeRandomSubset.Click
@@ -632,9 +673,9 @@ Public Class frmMain
 
     Private Sub mnuToolsClearOutputWindow_Click(sender As Object, e As EventArgs) Handles mnuToolsClearOutputWindow.Click
         Dim dlgResponse As DialogResult
-        dlgResponse = MessageBox.Show("Are you sure you want to clear the " & frmOutputWindow.Text, "Clear " & frmOutputWindow.Text, MessageBoxButtons.YesNo)
+        dlgResponse = MessageBox.Show("Are you sure you want to clear the Output Window?", "Clear Output Window", MessageBoxButtons.YesNo)
         If dlgResponse = DialogResult.Yes Then
-            frmOutputWindow.ucrRichTextBox.rtbOutput.Document.Blocks.Clear() 'To b checked
+            ucrOutput.ucrRichTextBox.rtbOutput.Document.Blocks.Clear() 'To b checked
         End If
     End Sub
 
@@ -684,15 +725,15 @@ Public Class frmMain
         dlgColourbyProperty.ShowDialog()
     End Sub
 
-    Private Sub mnuViewCascade_Click(sender As Object, e As EventArgs) Handles mnuViewCascade.Click
+    Private Sub mnuViewCascade_Click(sender As Object, e As EventArgs)
         Me.LayoutMdi(MdiLayout.Cascade)
     End Sub
 
-    Private Sub mnuViewTileVertically_Click(sender As Object, e As EventArgs) Handles mnuViewTileVertically.Click
+    Private Sub mnuViewTileVertically_Click(sender As Object, e As EventArgs)
         Me.LayoutMdi(MdiLayout.TileVertical)
     End Sub
 
-    Private Sub mnuViewTileHorizontally_Click(sender As Object, e As EventArgs) Handles mnuViewTileHorizontally.Click
+    Private Sub mnuViewTileHorizontally_Click(sender As Object, e As EventArgs)
         Me.LayoutMdi(MdiLayout.TileHorizontal)
     End Sub
 
@@ -750,7 +791,7 @@ Public Class frmMain
             If dlgSaveFile.ShowDialog() = DialogResult.OK Then
                 Try
                     'Send file name string specifying the location to save the rtf in.
-                    frmOutputWindow.ucrRichTextBox.SaveRtf(dlgSaveFile.FileName)
+                    ucrOutput.ucrRichTextBox.SaveRtf(dlgSaveFile.FileName)
                 Catch
                     MsgBox("Could not save the output window." & vbNewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
                 End Try
@@ -1253,7 +1294,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuDescribeOneVariableFrequencies_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableFrequencies.Click
-        dlgOneWayFrequencies.showdialog()
+        dlgOneWayFrequencies.ShowDialog()
     End Sub
 
     Private Sub CalculateCRIToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CalculateCRIToolStripMenuItem.Click
@@ -1266,6 +1307,34 @@ Public Class frmMain
 
     Private Sub RecodeNumericIntoQuantilesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RecodeNumericIntoQuantilesToolStripMenuItem.Click
         dlgRecodeNumericIntoQuantiles.ShowDialog()
+    End Sub
+
+    Private Sub ResetToDefaultLayoutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ResetToDefaultLayoutToolStripMenuItem.Click
+        SetToDefaultLayout()
+    End Sub
+
+    Private Sub ucrDataViewer_Enter(sender As Object, e As EventArgs) Handles ucrDataViewer.Enter
+        ctrActive = ucrDataViewer
+    End Sub
+
+    Private Sub ucrOutput_Enter(sender As Object, e As EventArgs) Handles ucrOutput.Enter
+        ctrActive = ucrOutput
+    End Sub
+
+    Private Sub ucrScriptWindow_Enter(sender As Object, e As EventArgs) Handles ucrScriptWindow.Enter
+        ctrActive = ucrScriptWindow
+    End Sub
+
+    Private Sub ucrLogWindow_Enter(sender As Object, e As EventArgs) Handles ucrLogWindow.Enter
+        ctrActive = ucrLogWindow
+    End Sub
+
+    Private Sub ucrColumnMeta_Enter(sender As Object, e As EventArgs) Handles ucrColumnMeta.Enter
+        ctrActive = ucrColumnMeta
+    End Sub
+
+    Private Sub ucrDataFrameMeta_Enter(sender As Object, e As EventArgs) Handles ucrDataFrameMeta.Enter
+        ctrActive = ucrDataFrameMeta
     End Sub
 
     'Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click
