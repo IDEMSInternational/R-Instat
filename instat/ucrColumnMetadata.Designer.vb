@@ -23,15 +23,18 @@ Partial Class ucrColumnMetadata
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.grdVariables = New unvell.ReoGrid.ReoGridControl()
+        Me.lblHeader = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'grdVariables
         '
+        Me.grdVariables.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.grdVariables.BackColor = System.Drawing.Color.White
         Me.grdVariables.ColumnHeaderContextMenuStrip = Nothing
-        Me.grdVariables.Dock = System.Windows.Forms.DockStyle.Fill
         Me.grdVariables.LeadHeaderContextMenuStrip = Nothing
-        Me.grdVariables.Location = New System.Drawing.Point(0, 0)
+        Me.grdVariables.Location = New System.Drawing.Point(0, 20)
         Me.grdVariables.Name = "grdVariables"
         Me.grdVariables.RowHeaderContextMenuStrip = Nothing
         Me.grdVariables.Script = Nothing
@@ -39,14 +42,28 @@ Partial Class ucrColumnMetadata
         Me.grdVariables.SheetTabNewButtonVisible = True
         Me.grdVariables.SheetTabVisible = True
         Me.grdVariables.SheetTabWidth = 200
-        Me.grdVariables.Size = New System.Drawing.Size(344, 138)
+        Me.grdVariables.Size = New System.Drawing.Size(344, 118)
         Me.grdVariables.TabIndex = 2
         Me.grdVariables.Text = "Variables"
+        '
+        'lblHeader
+        '
+        Me.lblHeader.BackColor = System.Drawing.Color.Green
+        Me.lblHeader.Dock = System.Windows.Forms.DockStyle.Top
+        Me.lblHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblHeader.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblHeader.Location = New System.Drawing.Point(0, 0)
+        Me.lblHeader.Name = "lblHeader"
+        Me.lblHeader.Size = New System.Drawing.Size(344, 20)
+        Me.lblHeader.TabIndex = 6
+        Me.lblHeader.Text = "Column Metadata"
+        Me.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'ucrColumnMetadata
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblHeader)
         Me.Controls.Add(Me.grdVariables)
         Me.Name = "ucrColumnMetadata"
         Me.Size = New System.Drawing.Size(344, 138)
@@ -55,4 +72,5 @@ Partial Class ucrColumnMetadata
     End Sub
 
     Friend WithEvents grdVariables As unvell.ReoGrid.ReoGridControl
+    Friend WithEvents lblHeader As Label
 End Class

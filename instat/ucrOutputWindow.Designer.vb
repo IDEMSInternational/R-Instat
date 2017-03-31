@@ -28,16 +28,19 @@ Partial Class ucrOutputWindow
         Me.mnuContextRTB = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.CopyRTB = New System.Windows.Forms.ToolStripMenuItem()
         Me.CopyImageRTB = New System.Windows.Forms.ToolStripMenuItem()
+        Me.lblHeader = New System.Windows.Forms.Label()
         Me.mnuContextRTB.SuspendLayout()
         Me.SuspendLayout()
         '
         'ucrWPFrtfElementHost
         '
+        Me.ucrWPFrtfElementHost.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ucrWPFrtfElementHost.ContextMenuStrip = Me.mnuContextRTB
-        Me.ucrWPFrtfElementHost.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ucrWPFrtfElementHost.Location = New System.Drawing.Point(0, 0)
+        Me.ucrWPFrtfElementHost.Location = New System.Drawing.Point(0, 20)
         Me.ucrWPFrtfElementHost.Name = "ucrWPFrtfElementHost"
-        Me.ucrWPFrtfElementHost.Size = New System.Drawing.Size(722, 262)
+        Me.ucrWPFrtfElementHost.Size = New System.Drawing.Size(722, 242)
         Me.ucrWPFrtfElementHost.TabIndex = 0
         Me.ucrWPFrtfElementHost.Text = "ucrWPFrtfElementHost"
         Me.ucrWPFrtfElementHost.Child = Me.ucrRichTextBox
@@ -46,29 +49,42 @@ Partial Class ucrOutputWindow
         '
         Me.mnuContextRTB.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopyRTB, Me.CopyImageRTB})
         Me.mnuContextRTB.Name = "mnuContextRTB"
-        Me.mnuContextRTB.Size = New System.Drawing.Size(151, 48)
+        Me.mnuContextRTB.Size = New System.Drawing.Size(150, 48)
         '
         'CopyRTB
         '
         Me.CopyRTB.Name = "CopyRTB"
-        Me.CopyRTB.Size = New System.Drawing.Size(150, 22)
+        Me.CopyRTB.Size = New System.Drawing.Size(149, 22)
         Me.CopyRTB.Text = "Copy RichText"
         '
         'CopyImageRTB
         '
         Me.CopyImageRTB.Enabled = False
         Me.CopyImageRTB.Name = "CopyImageRTB"
-        Me.CopyImageRTB.Size = New System.Drawing.Size(150, 22)
+        Me.CopyImageRTB.Size = New System.Drawing.Size(149, 22)
         Me.CopyImageRTB.Text = "Copy Image"
         '
-        'frmOutputWindow
+        'lblHeader
+        '
+        Me.lblHeader.BackColor = System.Drawing.Color.Green
+        Me.lblHeader.Dock = System.Windows.Forms.DockStyle.Top
+        Me.lblHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblHeader.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblHeader.Location = New System.Drawing.Point(0, 0)
+        Me.lblHeader.Name = "lblHeader"
+        Me.lblHeader.Size = New System.Drawing.Size(722, 20)
+        Me.lblHeader.TabIndex = 6
+        Me.lblHeader.Text = "Output Window"
+        Me.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'ucrOutputWindow
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(722, 262)
+        Me.Controls.Add(Me.lblHeader)
         Me.Controls.Add(Me.ucrWPFrtfElementHost)
         Me.Name = "ucrOutputWindow"
-        Me.Text = "Output Window"
+        Me.Size = New System.Drawing.Size(722, 262)
         Me.mnuContextRTB.ResumeLayout(False)
         Me.ResumeLayout(False)
 
@@ -79,4 +95,5 @@ Partial Class ucrOutputWindow
     Friend WithEvents mnuContextRTB As ContextMenuStrip
     Friend WithEvents CopyRTB As ToolStripMenuItem
     Friend WithEvents CopyImageRTB As ToolStripMenuItem
+    Friend WithEvents lblHeader As Label
 End Class
