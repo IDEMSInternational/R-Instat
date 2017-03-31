@@ -186,7 +186,7 @@ Partial Class dlgOneWayFrequencies
         '
         Me.ucrNudGroups.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudGroups.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudGroups.Location = New System.Drawing.Point(132, 228)
+        Me.ucrNudGroups.Location = New System.Drawing.Point(130, 228)
         Me.ucrNudGroups.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudGroups.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudGroups.Name = "ucrNudGroups"

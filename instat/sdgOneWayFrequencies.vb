@@ -35,6 +35,7 @@ Public Class sdgOneWayFrequencies
         dctHorizontalPositionLabel.Add("Inward", Chr(34) & "inward" & Chr(34))
         dctHorizontalPositionLabel.Add("Outward", Chr(34) & "outward" & Chr(34))
         ucrInputHorizontalLabels.SetItems(dctHorizontalPositionLabel)
+        ucrInputHorizontalLabels.SetRDefault(Chr(34) & "center" & Chr(34))
 
         ucrInputVerticalLabels.SetParameter(New RParameter("vjust"))
         dctVerticalPositionLabel.Add("Left", Chr(34) & "left" & Chr(34))
@@ -45,12 +46,12 @@ Public Class sdgOneWayFrequencies
         dctVerticalPositionLabel.Add("Inward", Chr(34) & "inward" & Chr(34))
         dctVerticalPositionLabel.Add("Outward", Chr(34) & "outward" & Chr(34))
         ucrInputVerticalLabels.SetItems(dctVerticalPositionLabel)
+        ucrInputVerticalLabels.SetRDefault(Chr(34) & "bottom" & Chr(34))
 
         ucrChkMedian.SetText("Emphasise Median")
         ucrChkMedian.SetParameter(New RParameter("emph.md"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkMedian.SetRDefault("FALSE")
 
-        'Set to unchecked on default(Default is TRUE)
         ucrChkShowSummary.SetText("Show Summary")
         ucrChkShowSummary.SetParameter(New RParameter("show.summary"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
 
@@ -58,11 +59,7 @@ Public Class sdgOneWayFrequencies
         ucrChkOmitZero.SetText("Omit Zero Counts from Table")
         ucrChkOmitZero.SetParameter(New RParameter("skip.zero"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
 
-
-        ucrChkDecimalPlaces.SetText("Decimal places for percentages")
         ucrNudDecimalPlaces.SetParameter(New RParameter("digits"))
-        ucrChkDecimalPlaces.AddToLinkedControls(ucrNudDecimalPlaces, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkDecimalPlaces.SetParameter(ucrNudDecimalPlaces.GetParameter, bNewAddRemoveParameter:=True, bNewChangeParameterValue:=True)
         ucrNudDecimalPlaces.SetMinMax(0, 4)
 
         ucrChkHighlightedRows.SetText("Alternate Rows Coloured")
@@ -76,26 +73,7 @@ Public Class sdgOneWayFrequencies
         ucrChkShowPercentage.SetText("Show Percentage")
         ucrChkShowPercentage.SetParameter(New RParameter("show.prc"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
 
-        ucrChkVerticalLabelPosition.SetText("Vertical Label Positions")
-        ' ucrChkVerticalLabelPosition.SetParameter(ucrInputVerticalLabels.GetParameter, bNewAddRemoveParameter:=True, bNewChangeParameterValue:=True)
-        ucrChkVerticalLabelPosition.AddToLinkedControls(ucrInputVerticalLabels, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
-        ucrChkHorizontalLabelPosition.SetText("Horizontal Label Positions")
-        ' ucrChkHorizontalLabelPosition.SetParameter(ucrInputHorizontalLabels.GetParameter, bNewAddRemoveParameter:=True, bNewChangeParameterValue:=True)
-        ucrChkHorizontalLabelPosition.AddToLinkedControls(ucrInputHorizontalLabels, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
-        'not implemented
-        ucrChkColour.Enabled = False
-        ucrInputColour.Enabled = False
-        ucrInputColour.bAllowNonConditionValues = False
-        ucrChkColour.bAllowNonConditionValues = False
-        'ucrChkColour.SetText("Colour")
-        'ucrChkColour.AddToLinkedControls(ucrInputColour, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
-        ucrChkGraphTitle.SetText("Title")
         ucrInputGraphTitle.SetParameter(New RParameter("title"))
-        ' ucrChkGraphTitle.SetParameter(ucrInputGraphTitle.GetParameter(), bNewAddRemoveParameter:=True, bNewChangeParameterValue:=True)
-        ucrChkGraphTitle.AddToLinkedControls(ucrInputGraphTitle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkShowMissing.SetText("Show Missing")
         ucrChkShowMissing.SetParameter(New RParameter("show.na"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
@@ -131,15 +109,10 @@ Public Class sdgOneWayFrequencies
         ucrChkShowCount.SetRCode(clsOneWayGraphFreq, bReset)
         ucrChkShowPercentage.SetRCode(clsOneWayGraphFreq, bReset)
         ucrChkShowMissing.SetRCode(clsOneWayGraphFreq, bReset)
-        ucrChkVerticalLabelPosition.SetRCode(clsOneWayGraphFreq, bReset)
-        ucrChkHorizontalLabelPosition.SetRCode(clsOneWayGraphFreq, bReset)
-        'ucrChkColour.SetRCode(clsOneWayGraphFreq, bReset)
-        ucrChkGraphTitle.SetRCode(clsOneWayGraphFreq, bReset)
         ucrPnlGraphType.SetRCode(clsOneWayGraphFreq, bReset)
         ucrInputVerticalLabels.SetRCode(clsOneWayGraphFreq, bReset)
         ucrInputHorizontalLabels.SetRCode(clsOneWayGraphFreq, bReset)
-        ucrInputColour.SetRCode(clsOneWayGraphFreq, bReset)
-        ucrChkGraphTitle.SetRCode(clsOneWayGraphFreq, bReset)
+        ucrInputGraphTitle.SetRCode(clsOneWayGraphFreq, bReset)
         ucrSaveGraph.SetRCode(clsOneWayGraphFreq, bReset)
     End Sub
 End Class
