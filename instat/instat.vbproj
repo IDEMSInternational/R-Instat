@@ -299,6 +299,12 @@
     <Compile Include="dlgFitModel.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgFrequency.Designer.vb">
+      <DependentUpon>dlgFrequency.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgFrequency.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgImportFromCSPRO.Designer.vb">
       <DependentUpon>dlgImportFromCSPRO.vb</DependentUpon>
     </Compile>
@@ -558,6 +564,12 @@
     <Compile Include="sdgFitCorruptionModelDisplay.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgFrequency.Designer.vb">
+      <DependentUpon>sdgFrequency.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgFrequency.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgImportFromClimSoft.Designer.vb">
       <DependentUpon>sdgImportFromClimSoft.vb</DependentUpon>
     </Compile>
@@ -610,6 +622,12 @@
       <DependentUpon>sdgCalculationsSummmary.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgCalculationsSummmary.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgOneWayFrequencies.Designer.vb">
+      <DependentUpon>sdgOneWayFrequencies.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgOneWayFrequencies.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgWindrose.Designer.vb">
@@ -2380,6 +2398,9 @@
     <EmbeddedResource Include="dlgFreezeColumns.resx">
       <DependentUpon>dlgFreezeColumns.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgFrequency.resx">
+      <DependentUpon>dlgFrequency.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgFromLibrary.fr-FR.resx">
       <DependentUpon>dlgFromLibrary.vb</DependentUpon>
     </EmbeddedResource>
@@ -2985,6 +3006,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgFitCorruptionModelDisplay.resx">
       <DependentUpon>sdgFitCorruptionModelDisplay.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgFrequency.resx">
+      <DependentUpon>sdgFrequency.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgImportFromClimSoft.resx">
       <DependentUpon>sdgImportFromClimSoft.vb</DependentUpon>
