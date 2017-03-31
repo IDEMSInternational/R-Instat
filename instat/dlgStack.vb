@@ -34,6 +34,9 @@ Public Class dlgStack
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        If bReset Then
+            SetCarryColumnsOptions()
+        End If
     End Sub
 
     Private Sub InitialiseDialog()
@@ -46,17 +49,20 @@ Public Class dlgStack
         ucrReceiverColumnsToBeStack.SetParameter(New RParameter("measure.vars", 1))
         ucrReceiverColumnsToBeStack.SetParameterIsString()
 
-        ucrChkCarryColumns.SetText("Carry Columns")
-        ucrChkCarryColumns.AddParameterValuesCondition(True, "id.vars", "NULL", False)
-        ucrChkCarryColumns.AddParameterValuesCondition(False, "id.vars", "NULL")
-        ucrChkCarryColumns.AddToLinkedControls(ucrColumnsToCarryReceiver, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkCarryColumns.SetParameter(ucrColumnsToCarryReceiver.GetParameter())
-
         ucrColumnsToCarryReceiver.Selector = ucrSelectorStack
         ucrColumnsToCarryReceiver.SetParameter(New RParameter("id.vars", 2))
         ucrColumnsToCarryReceiver.SetParameterIsString()
         ucrColumnsToCarryReceiver.bAddRemoveParameter = False
         ucrColumnsToCarryReceiver.SetValuesToIgnore({"NULL"})
+
+        ucrChkCarryColumns.SetText("Carry Columns")
+        ucrChkCarryColumns.AddParameterValuesCondition(True, "id.vars", "NULL", False)
+        ucrChkCarryColumns.AddParameterValuesCondition(False, "id.vars", "NULL")
+        ' I would like to do this since the checkbox also controls the value of id.vars
+        ' but there is confusion with both controls setting the value of the same parameter at the same time. For now the writing is done manually in this dialog.
+        'ucrChkCarryColumns.SetParameter(ucrColumnsToCarryReceiver.GetParameter(), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="", strNewValueIfUnchecked:="NULL")
+        'We don't want the receiver to remove the parameter when the checkbox is unchecked since the id.vars parameter will always be given.
+        ucrChkCarryColumns.AddToLinkedControls(ucrColumnsToCarryReceiver, {True}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
 
         ucrFactorInto.SetParameter(New RParameter("variable.name", 3))
         ucrFactorInto.SetValidationTypeAsRVariable()
@@ -66,6 +72,8 @@ Public Class dlgStack
 
         ucrSaveNewDataName.SetIsTextBox()
         ucrSaveNewDataName.SetLabelText("New Data Frame Name:")
+        ucrSaveNewDataName.SetSaveTypeAsDataFrame()
+        ucrSaveNewDataName.SetDataFrameSelector(ucrSelectorStack.ucrAvailableDataFrames)
     End Sub
 
     Private Sub SetDataFrameName()
@@ -123,6 +131,10 @@ Public Class dlgStack
     End Sub
 
     Private Sub ucrChkCarryColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCarryColumns.ControlValueChanged
+        SetCarryColumnsOptions()
+    End Sub
+
+    Private Sub SetCarryColumnsOptions()
         If ucrChkCarryColumns.Checked Then
             ucrColumnsToCarryReceiver.SetMeAsReceiver()
             If Not ucrColumnsToCarryReceiver.IsEmpty() Then
@@ -136,5 +148,6 @@ Public Class dlgStack
 
     Private Sub ucrSelectorStack_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorStack.ControlValueChanged
         SetDataFrameName()
+        SetCarryColumnsOptions()
     End Sub
 End Class
