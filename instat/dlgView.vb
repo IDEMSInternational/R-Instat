@@ -72,9 +72,15 @@ Public Class dlgView
         ucrPnlDisplayFrom.AddFunctionNamesCondition(rdoTop, "head")
         ucrPnlDisplayFrom.AddFunctionNamesCondition(rdoBottom, "tail")
 
-        ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoDispOutputWindow, {"head", "tail"})
+        ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoDispOutputWindow, {"head", "tail", frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data"})
+
+        ucrChkSpecifyRows.AddFunctionNamesCondition(True, {"head", "tail"})
+        ucrChkSpecifyRows.AddFunctionNamesCondition(False, {frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data"})
+
         ucrPnlDisplayWindow.SetDefaultState(rdoTop)
 
+        ucrChkSpecifyRows.bAllowNonConditionValues = True
+        ucrPnlDisplayFrom.bAllowNonConditionValues = True
 
         ucrSelectorForView.SetParameter(New RParameter("title", 1))
         ucrSelectorForView.SetParameterIsString()
