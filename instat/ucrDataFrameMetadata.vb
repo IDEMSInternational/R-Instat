@@ -21,13 +21,12 @@ Public Class ucrDataFrameMetadata
     Public strPreviousCellText As String
 
     Private Sub frmMetaData_Load(sender As Object, e As EventArgs) Handles Me.Load
-        grdMetaData.Worksheets(0).Name = "metadata"
-        frmMain.clsGrids.SetMetadata(grdMetaData)
-        loadForm()
+        LoadForm()
     End Sub
 
     ' TODO this needs tidying up
-    Private Sub loadForm()
+    Private Sub LoadForm()
+        grdMetaData.Worksheets(0).Name = "metadata"
         grdMetaData.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, False)
         grdMetaData.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowHorScroll, False)
         grdMetaData.SheetTabNewButtonVisible = False
