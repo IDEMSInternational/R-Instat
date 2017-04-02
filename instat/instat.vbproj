@@ -317,6 +317,12 @@
     <Compile Include="dlgImportFromODK.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgImportGriddedData.Designer.vb">
+      <DependentUpon>dlgImportGriddedData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgImportGriddedData.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgImportOpenRefine.Designer.vb">
       <DependentUpon>dlgImportOpenRefine.vb</DependentUpon>
     </Compile>
@@ -2505,6 +2511,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgImportFromODK.resx">
       <DependentUpon>dlgImportFromODK.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgImportGriddedData.resx">
+      <DependentUpon>dlgImportGriddedData.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgImportOpenRefine.resx">
       <DependentUpon>dlgImportOpenRefine.vb</DependentUpon>
