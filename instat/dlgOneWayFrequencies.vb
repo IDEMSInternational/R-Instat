@@ -37,8 +37,7 @@ Public Class dlgOneWayFrequencies
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverOneWayFreq.SetRCode(clsSjpFrq, bReset)
-        ucrReceiverOneWayFreq.SetRCode(clsSjtFreq, bReset)
+        ucrReceiverOneWayFreq.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverWeights.SetRCode(clsSjpFrq, bReset)
         ucrReceiverWeights.SetRCode(clsSjtFreq, bReset)
 
