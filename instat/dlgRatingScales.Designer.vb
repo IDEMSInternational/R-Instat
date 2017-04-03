@@ -32,12 +32,6 @@ Partial Class dlgRatingScales
         Me.ucrChkWeights = New instat.ucrCheck()
         Me.ucrReceiverWeights = New instat.ucrReceiverSingle()
         Me.grpSort = New System.Windows.Forms.GroupBox()
-        Me.rdoHighDescending = New System.Windows.Forms.RadioButton()
-        Me.rdoHighAscending = New System.Windows.Forms.RadioButton()
-        Me.rdoLowDescending = New System.Windows.Forms.RadioButton()
-        Me.rdoLowAscending = New System.Windows.Forms.RadioButton()
-        Me.rdoNone = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlSort = New instat.UcrPanel()
         Me.ucrChkFlip = New instat.ucrCheck()
         Me.grpGraphType = New System.Windows.Forms.GroupBox()
         Me.ucrNudNeutralLevel = New instat.ucrNud()
@@ -45,6 +39,24 @@ Partial Class dlgRatingScales
         Me.rdoStacked = New System.Windows.Forms.RadioButton()
         Me.rdoLikert = New System.Windows.Forms.RadioButton()
         Me.ucrPnlGraphType = New instat.UcrPanel()
+        Me.ucrPnlSjtStackFrq = New instat.UcrPanel()
+        Me.rdoHighDescending = New System.Windows.Forms.RadioButton()
+        Me.rdoHighAscending = New System.Windows.Forms.RadioButton()
+        Me.rdoLowDescending = New System.Windows.Forms.RadioButton()
+        Me.rdoLowAscending = New System.Windows.Forms.RadioButton()
+        Me.rdoNone = New System.Windows.Forms.RadioButton()
+        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton3 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton4 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton5 = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlSjpStackFrq = New instat.UcrPanel()
+        Me.RadioButton6 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton7 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton8 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton9 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton10 = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlSjpLikert = New instat.UcrPanel()
         Me.grpSort.SuspendLayout()
         Me.grpGraphType.SuspendLayout()
         Me.SuspendLayout()
@@ -129,79 +141,29 @@ Partial Class dlgRatingScales
         'grpSort
         '
         Me.grpSort.Controls.Add(Me.rdoHighDescending)
+        Me.grpSort.Controls.Add(Me.RadioButton1)
         Me.grpSort.Controls.Add(Me.rdoHighAscending)
+        Me.grpSort.Controls.Add(Me.RadioButton6)
         Me.grpSort.Controls.Add(Me.rdoLowDescending)
+        Me.grpSort.Controls.Add(Me.RadioButton7)
         Me.grpSort.Controls.Add(Me.rdoLowAscending)
+        Me.grpSort.Controls.Add(Me.RadioButton8)
         Me.grpSort.Controls.Add(Me.rdoNone)
-        Me.grpSort.Controls.Add(Me.ucrPnlSort)
-        Me.grpSort.Location = New System.Drawing.Point(288, 176)
+        Me.grpSort.Controls.Add(Me.RadioButton2)
+        Me.grpSort.Controls.Add(Me.ucrPnlSjtStackFrq)
+        Me.grpSort.Controls.Add(Me.RadioButton5)
+        Me.grpSort.Controls.Add(Me.RadioButton9)
+        Me.grpSort.Controls.Add(Me.ucrPnlSjpLikert)
+        Me.grpSort.Controls.Add(Me.RadioButton3)
+        Me.grpSort.Controls.Add(Me.ucrPnlSjpStackFrq)
+        Me.grpSort.Controls.Add(Me.RadioButton4)
+        Me.grpSort.Controls.Add(Me.RadioButton10)
+        Me.grpSort.Location = New System.Drawing.Point(281, 173)
         Me.grpSort.Name = "grpSort"
-        Me.grpSort.Size = New System.Drawing.Size(120, 133)
+        Me.grpSort.Size = New System.Drawing.Size(126, 133)
         Me.grpSort.TabIndex = 22
         Me.grpSort.TabStop = False
         Me.grpSort.Text = "Sort"
-        '
-        'rdoHighDescending
-        '
-        Me.rdoHighDescending.AutoSize = True
-        Me.rdoHighDescending.Location = New System.Drawing.Point(10, 109)
-        Me.rdoHighDescending.Name = "rdoHighDescending"
-        Me.rdoHighDescending.Size = New System.Drawing.Size(107, 17)
-        Me.rdoHighDescending.TabIndex = 4
-        Me.rdoHighDescending.TabStop = True
-        Me.rdoHighDescending.Text = "High Descending"
-        Me.rdoHighDescending.UseVisualStyleBackColor = True
-        '
-        'rdoHighAscending
-        '
-        Me.rdoHighAscending.AutoSize = True
-        Me.rdoHighAscending.Location = New System.Drawing.Point(10, 87)
-        Me.rdoHighAscending.Name = "rdoHighAscending"
-        Me.rdoHighAscending.Size = New System.Drawing.Size(100, 17)
-        Me.rdoHighAscending.TabIndex = 3
-        Me.rdoHighAscending.TabStop = True
-        Me.rdoHighAscending.Text = "High Ascending"
-        Me.rdoHighAscending.UseVisualStyleBackColor = True
-        '
-        'rdoLowDescending
-        '
-        Me.rdoLowDescending.AutoSize = True
-        Me.rdoLowDescending.Location = New System.Drawing.Point(10, 65)
-        Me.rdoLowDescending.Name = "rdoLowDescending"
-        Me.rdoLowDescending.Size = New System.Drawing.Size(102, 17)
-        Me.rdoLowDescending.TabIndex = 2
-        Me.rdoLowDescending.TabStop = True
-        Me.rdoLowDescending.Text = "LowDescending"
-        Me.rdoLowDescending.UseVisualStyleBackColor = True
-        '
-        'rdoLowAscending
-        '
-        Me.rdoLowAscending.AutoSize = True
-        Me.rdoLowAscending.Location = New System.Drawing.Point(10, 43)
-        Me.rdoLowAscending.Name = "rdoLowAscending"
-        Me.rdoLowAscending.Size = New System.Drawing.Size(95, 17)
-        Me.rdoLowAscending.TabIndex = 1
-        Me.rdoLowAscending.TabStop = True
-        Me.rdoLowAscending.Text = "LowAscending"
-        Me.rdoLowAscending.UseVisualStyleBackColor = True
-        '
-        'rdoNone
-        '
-        Me.rdoNone.AutoSize = True
-        Me.rdoNone.Location = New System.Drawing.Point(10, 21)
-        Me.rdoNone.Name = "rdoNone"
-        Me.rdoNone.Size = New System.Drawing.Size(51, 17)
-        Me.rdoNone.TabIndex = 0
-        Me.rdoNone.TabStop = True
-        Me.rdoNone.Text = "None"
-        Me.rdoNone.UseVisualStyleBackColor = True
-        '
-        'ucrPnlSort
-        '
-        Me.ucrPnlSort.Location = New System.Drawing.Point(3, 16)
-        Me.ucrPnlSort.Name = "ucrPnlSort"
-        Me.ucrPnlSort.Size = New System.Drawing.Size(114, 111)
-        Me.ucrPnlSort.TabIndex = 0
         '
         'ucrChkFlip
         '
@@ -283,11 +245,197 @@ Partial Class dlgRatingScales
         Me.ucrPnlGraphType.Size = New System.Drawing.Size(133, 22)
         Me.ucrPnlGraphType.TabIndex = 2
         '
+        'ucrPnlSjtStackFrq
+        '
+        Me.ucrPnlSjtStackFrq.Location = New System.Drawing.Point(6, 16)
+        Me.ucrPnlSjtStackFrq.Name = "ucrPnlSjtStackFrq"
+        Me.ucrPnlSjtStackFrq.Size = New System.Drawing.Size(114, 111)
+        Me.ucrPnlSjtStackFrq.TabIndex = 25
+        '
+        'rdoHighDescending
+        '
+        Me.rdoHighDescending.AutoSize = True
+        Me.rdoHighDescending.Location = New System.Drawing.Point(8, 107)
+        Me.rdoHighDescending.Name = "rdoHighDescending"
+        Me.rdoHighDescending.Size = New System.Drawing.Size(107, 17)
+        Me.rdoHighDescending.TabIndex = 30
+        Me.rdoHighDescending.TabStop = True
+        Me.rdoHighDescending.Text = "High Descending"
+        Me.rdoHighDescending.UseVisualStyleBackColor = True
+        '
+        'rdoHighAscending
+        '
+        Me.rdoHighAscending.AutoSize = True
+        Me.rdoHighAscending.Location = New System.Drawing.Point(8, 85)
+        Me.rdoHighAscending.Name = "rdoHighAscending"
+        Me.rdoHighAscending.Size = New System.Drawing.Size(100, 17)
+        Me.rdoHighAscending.TabIndex = 29
+        Me.rdoHighAscending.TabStop = True
+        Me.rdoHighAscending.Text = "High Ascending"
+        Me.rdoHighAscending.UseVisualStyleBackColor = True
+        '
+        'rdoLowDescending
+        '
+        Me.rdoLowDescending.AutoSize = True
+        Me.rdoLowDescending.Location = New System.Drawing.Point(8, 63)
+        Me.rdoLowDescending.Name = "rdoLowDescending"
+        Me.rdoLowDescending.Size = New System.Drawing.Size(102, 17)
+        Me.rdoLowDescending.TabIndex = 28
+        Me.rdoLowDescending.TabStop = True
+        Me.rdoLowDescending.Text = "LowDescending"
+        Me.rdoLowDescending.UseVisualStyleBackColor = True
+        '
+        'rdoLowAscending
+        '
+        Me.rdoLowAscending.AutoSize = True
+        Me.rdoLowAscending.Location = New System.Drawing.Point(8, 41)
+        Me.rdoLowAscending.Name = "rdoLowAscending"
+        Me.rdoLowAscending.Size = New System.Drawing.Size(95, 17)
+        Me.rdoLowAscending.TabIndex = 27
+        Me.rdoLowAscending.TabStop = True
+        Me.rdoLowAscending.Text = "LowAscending"
+        Me.rdoLowAscending.UseVisualStyleBackColor = True
+        '
+        'rdoNone
+        '
+        Me.rdoNone.AutoSize = True
+        Me.rdoNone.Location = New System.Drawing.Point(8, 19)
+        Me.rdoNone.Name = "rdoNone"
+        Me.rdoNone.Size = New System.Drawing.Size(51, 17)
+        Me.rdoNone.TabIndex = 26
+        Me.rdoNone.TabStop = True
+        Me.rdoNone.Text = "None"
+        Me.rdoNone.UseVisualStyleBackColor = True
+        '
+        'RadioButton1
+        '
+        Me.RadioButton1.AutoSize = True
+        Me.RadioButton1.Location = New System.Drawing.Point(8, 107)
+        Me.RadioButton1.Name = "RadioButton1"
+        Me.RadioButton1.Size = New System.Drawing.Size(107, 17)
+        Me.RadioButton1.TabIndex = 36
+        Me.RadioButton1.TabStop = True
+        Me.RadioButton1.Text = "High Descending"
+        Me.RadioButton1.UseVisualStyleBackColor = True
+        '
+        'RadioButton2
+        '
+        Me.RadioButton2.AutoSize = True
+        Me.RadioButton2.Location = New System.Drawing.Point(8, 85)
+        Me.RadioButton2.Name = "RadioButton2"
+        Me.RadioButton2.Size = New System.Drawing.Size(100, 17)
+        Me.RadioButton2.TabIndex = 35
+        Me.RadioButton2.TabStop = True
+        Me.RadioButton2.Text = "High Ascending"
+        Me.RadioButton2.UseVisualStyleBackColor = True
+        '
+        'RadioButton3
+        '
+        Me.RadioButton3.AutoSize = True
+        Me.RadioButton3.Location = New System.Drawing.Point(8, 63)
+        Me.RadioButton3.Name = "RadioButton3"
+        Me.RadioButton3.Size = New System.Drawing.Size(102, 17)
+        Me.RadioButton3.TabIndex = 34
+        Me.RadioButton3.TabStop = True
+        Me.RadioButton3.Text = "LowDescending"
+        Me.RadioButton3.UseVisualStyleBackColor = True
+        '
+        'RadioButton4
+        '
+        Me.RadioButton4.AutoSize = True
+        Me.RadioButton4.Location = New System.Drawing.Point(8, 41)
+        Me.RadioButton4.Name = "RadioButton4"
+        Me.RadioButton4.Size = New System.Drawing.Size(95, 17)
+        Me.RadioButton4.TabIndex = 33
+        Me.RadioButton4.TabStop = True
+        Me.RadioButton4.Text = "LowAscending"
+        Me.RadioButton4.UseVisualStyleBackColor = True
+        '
+        'RadioButton5
+        '
+        Me.RadioButton5.AutoSize = True
+        Me.RadioButton5.Location = New System.Drawing.Point(8, 19)
+        Me.RadioButton5.Name = "RadioButton5"
+        Me.RadioButton5.Size = New System.Drawing.Size(51, 17)
+        Me.RadioButton5.TabIndex = 32
+        Me.RadioButton5.TabStop = True
+        Me.RadioButton5.Text = "None"
+        Me.RadioButton5.UseVisualStyleBackColor = True
+        '
+        'ucrPnlSjpStackFrq
+        '
+        Me.ucrPnlSjpStackFrq.Location = New System.Drawing.Point(6, 16)
+        Me.ucrPnlSjpStackFrq.Name = "ucrPnlSjpStackFrq"
+        Me.ucrPnlSjpStackFrq.Size = New System.Drawing.Size(114, 111)
+        Me.ucrPnlSjpStackFrq.TabIndex = 31
+        '
+        'RadioButton6
+        '
+        Me.RadioButton6.AutoSize = True
+        Me.RadioButton6.Location = New System.Drawing.Point(8, 107)
+        Me.RadioButton6.Name = "RadioButton6"
+        Me.RadioButton6.Size = New System.Drawing.Size(107, 17)
+        Me.RadioButton6.TabIndex = 42
+        Me.RadioButton6.TabStop = True
+        Me.RadioButton6.Text = "High Descending"
+        Me.RadioButton6.UseVisualStyleBackColor = True
+        '
+        'RadioButton7
+        '
+        Me.RadioButton7.AutoSize = True
+        Me.RadioButton7.Location = New System.Drawing.Point(8, 85)
+        Me.RadioButton7.Name = "RadioButton7"
+        Me.RadioButton7.Size = New System.Drawing.Size(100, 17)
+        Me.RadioButton7.TabIndex = 41
+        Me.RadioButton7.TabStop = True
+        Me.RadioButton7.Text = "High Ascending"
+        Me.RadioButton7.UseVisualStyleBackColor = True
+        '
+        'RadioButton8
+        '
+        Me.RadioButton8.AutoSize = True
+        Me.RadioButton8.Location = New System.Drawing.Point(8, 63)
+        Me.RadioButton8.Name = "RadioButton8"
+        Me.RadioButton8.Size = New System.Drawing.Size(102, 17)
+        Me.RadioButton8.TabIndex = 40
+        Me.RadioButton8.TabStop = True
+        Me.RadioButton8.Text = "LowDescending"
+        Me.RadioButton8.UseVisualStyleBackColor = True
+        '
+        'RadioButton9
+        '
+        Me.RadioButton9.AutoSize = True
+        Me.RadioButton9.Location = New System.Drawing.Point(8, 41)
+        Me.RadioButton9.Name = "RadioButton9"
+        Me.RadioButton9.Size = New System.Drawing.Size(95, 17)
+        Me.RadioButton9.TabIndex = 39
+        Me.RadioButton9.TabStop = True
+        Me.RadioButton9.Text = "LowAscending"
+        Me.RadioButton9.UseVisualStyleBackColor = True
+        '
+        'RadioButton10
+        '
+        Me.RadioButton10.AutoSize = True
+        Me.RadioButton10.Location = New System.Drawing.Point(8, 19)
+        Me.RadioButton10.Name = "RadioButton10"
+        Me.RadioButton10.Size = New System.Drawing.Size(51, 17)
+        Me.RadioButton10.TabIndex = 38
+        Me.RadioButton10.TabStop = True
+        Me.RadioButton10.Text = "None"
+        Me.RadioButton10.UseVisualStyleBackColor = True
+        '
+        'ucrPnlSjpLikert
+        '
+        Me.ucrPnlSjpLikert.Location = New System.Drawing.Point(6, 16)
+        Me.ucrPnlSjpLikert.Name = "ucrPnlSjpLikert"
+        Me.ucrPnlSjpLikert.Size = New System.Drawing.Size(114, 111)
+        Me.ucrPnlSjpLikert.TabIndex = 37
+        '
         'dlgRatingScales
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 410)
+        Me.ClientSize = New System.Drawing.Size(429, 410)
         Me.Controls.Add(Me.grpGraphType)
         Me.Controls.Add(Me.ucrChkFlip)
         Me.Controls.Add(Me.grpSort)
@@ -325,12 +473,6 @@ Partial Class dlgRatingScales
     Friend WithEvents ucrSaveGraph As ucrSave
     Friend WithEvents ucrReceiverWeights As ucrReceiverSingle
     Friend WithEvents grpSort As GroupBox
-    Friend WithEvents rdoLowDescending As RadioButton
-    Friend WithEvents rdoLowAscending As RadioButton
-    Friend WithEvents rdoNone As RadioButton
-    Friend WithEvents ucrPnlSort As UcrPanel
-    Friend WithEvents rdoHighDescending As RadioButton
-    Friend WithEvents rdoHighAscending As RadioButton
     Friend WithEvents ucrChkFlip As ucrCheck
     Friend WithEvents grpGraphType As GroupBox
     Friend WithEvents rdoStacked As RadioButton
@@ -338,4 +480,22 @@ Partial Class dlgRatingScales
     Friend WithEvents ucrPnlGraphType As UcrPanel
     Friend WithEvents ucrNudNeutralLevel As ucrNud
     Friend WithEvents lblNeutralLevel As Label
+    Friend WithEvents RadioButton1 As RadioButton
+    Friend WithEvents RadioButton2 As RadioButton
+    Friend WithEvents RadioButton3 As RadioButton
+    Friend WithEvents RadioButton4 As RadioButton
+    Friend WithEvents RadioButton5 As RadioButton
+    Friend WithEvents ucrPnlSjpStackFrq As UcrPanel
+    Friend WithEvents rdoHighDescending As RadioButton
+    Friend WithEvents rdoHighAscending As RadioButton
+    Friend WithEvents rdoLowDescending As RadioButton
+    Friend WithEvents rdoLowAscending As RadioButton
+    Friend WithEvents rdoNone As RadioButton
+    Friend WithEvents ucrPnlSjtStackFrq As UcrPanel
+    Friend WithEvents RadioButton6 As RadioButton
+    Friend WithEvents RadioButton7 As RadioButton
+    Friend WithEvents RadioButton8 As RadioButton
+    Friend WithEvents RadioButton9 As RadioButton
+    Friend WithEvents ucrPnlSjpLikert As UcrPanel
+    Friend WithEvents RadioButton10 As RadioButton
 End Class

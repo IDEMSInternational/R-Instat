@@ -37,6 +37,21 @@ Public Class dlgRatingScales
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrReceiverOrderedFactors.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrReceiverWeights.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+
+        ucrChkWeights.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrPnlSjpStackFrq.SetRCode(clsSjpStackFrq, bReset)
+        ucrPnlSjpLikert.SetRCode(clsSjplikert, bReset)
+        ucrPnlSjtStackFrq.SetRCode(clsSjtStackFrq, bReset)
+
+        ucrPnlGraphType.SetRCode(clsSjpStackFrq, bReset)
+        ucrPnlGraphType.SetRCode(clsSjplikert, bReset)
+
+        ucrChkFlip.SetRCode(clsSjplikert, bReset)
+        ucrChkFlip.SetRCode(clsSjpStackFrq, bReset)
+        ucrChkGraph.SetRCode(clsSjpStackFrq, bReset)
+        ucrChkGraph.SetRCode(clsSjplikert, bReset)
 
     End Sub
 
@@ -44,9 +59,57 @@ Public Class dlgRatingScales
         ucrReceiverOrderedFactors.Selector = ucrSelectorRatingScale
         ucrReceiverWeights.Selector = ucrSelectorRatingScale
 
+        ucrReceiverOrderedFactors.SetParameter(New RParameter("items", 1))
+        ucrReceiverOrderedFactors.SetParameterIsRFunction()
+
+        ucrReceiverWeights.SetParameter(New RParameter("weight.by", 2))
+        ucrReceiverWeights.SetParameterIsRFunction()
+        ucrReceiverWeights.SetDataType("numeric")
+
         ucrChkWeights.SetText("Weights")
         ucrChkWeights.SetParameter(ucrReceiverWeights.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkWeights.AddToLinkedControls(ucrReceiverWeights, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
+        ucrChkFlip.SetText("Flip Coordinates")
+        ucrChkFlip.SetParameter(New RParameter("coord.flip", 1))
+        ucrChkFlip.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkFlip.SetRDefault("FALSE")
+
+        ucrChkGraph.SetText("Graph")
+        ucrChkGraph.AddToLinkedControls(ucrPnlGraphType, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkFrequencyTable.SetText("Table")
+
+        ucrPnlGraphType.AddRadioButton(rdoLikert)
+        ucrPnlGraphType.AddRadioButton(rdoStacked)
+        ucrPnlGraphType.AddToLinkedControls(ucrNudNeutralLevel, {rdoLikert}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        'ucrPnlSortsjp.stackfrq
+        ucrPnlSjpStackFrq.SetParameter(New RParameter("sort.frq", 2))
+        ucrPnlSjpStackFrq.AddRadioButton(rdoNone, Chr(34) & "NULL" & Chr(34))
+        ucrPnlSjpStackFrq.AddRadioButton(rdoLowAscending, Chr(34) & "last.asc" & Chr(34))
+        ucrPnlSjpStackFrq.AddRadioButton(rdoLowDescending, Chr(34) & "last.desc" & Chr(34))
+        ucrPnlSjpStackFrq.AddRadioButton(rdoHighAscending, Chr(34) & "first.asc" & Chr(34))
+        ucrPnlSjpStackFrq.AddRadioButton(rdoHighDescending, Chr(34) & "first.desc" & Chr(34))
+        ucrPnlSjpStackFrq.SetRDefault(Chr(34) & "NULL" & Chr(34))
+
+        'ucrPnlSortsjt.stackfrq
+        ucrPnlSjpStackFrq.SetParameter(New RParameter("sort.frq", 3))
+        ucrPnlSjpStackFrq.AddRadioButton(rdoNone, Chr(34) & "NULL" & Chr(34))
+        ucrPnlSjpStackFrq.AddRadioButton(rdoLowAscending, Chr(34) & "last.asc" & Chr(34))
+        ucrPnlSjpStackFrq.AddRadioButton(rdoLowDescending, Chr(34) & "last.desc" & Chr(34))
+        ucrPnlSjpStackFrq.AddRadioButton(rdoHighAscending, Chr(34) & "first.asc" & Chr(34))
+        ucrPnlSjpStackFrq.AddRadioButton(rdoHighDescending, Chr(34) & "first.desc" & Chr(34))
+        ucrPnlSjpStackFrq.SetRDefault(Chr(34) & "NULL" & Chr(34))
+
+        'ucrPnlSortsjp.likert
+        ucrPnlSjpStackFrq.SetParameter(New RParameter("sort.frq", 3))
+        ucrPnlSjpStackFrq.AddRadioButton(rdoNone, Chr(34) & "NULL" & Chr(34))
+        ucrPnlSjpStackFrq.AddRadioButton(rdoLowAscending, Chr(34) & "neg.asc" & Chr(34))
+        ucrPnlSjpStackFrq.AddRadioButton(rdoLowDescending, Chr(34) & "neg.desc" & Chr(34))
+        ucrPnlSjpStackFrq.AddRadioButton(rdoHighAscending, Chr(34) & "posc.asc" & Chr(34))
+        ucrPnlSjpStackFrq.AddRadioButton(rdoHighDescending, Chr(34) & "posc.desc" & Chr(34))
+        ucrPnlSjpStackFrq.SetRDefault(Chr(34) & "NULL" & Chr(34))
+
     End Sub
+
 End Class
