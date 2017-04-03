@@ -116,7 +116,7 @@ Partial Class dlgOneWayFrequencies
         'ucrReceiverWeights
         '
         Me.ucrReceiverWeights.frmParent = Me
-        Me.ucrReceiverWeights.Location = New System.Drawing.Point(119, 205)
+        Me.ucrReceiverWeights.Location = New System.Drawing.Point(121, 205)
         Me.ucrReceiverWeights.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverWeights.Name = "ucrReceiverWeights"
         Me.ucrReceiverWeights.Selector = Nothing
@@ -186,7 +186,7 @@ Partial Class dlgOneWayFrequencies
         '
         Me.ucrNudGroups.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudGroups.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudGroups.Location = New System.Drawing.Point(130, 228)
+        Me.ucrNudGroups.Location = New System.Drawing.Point(131, 228)
         Me.ucrNudGroups.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudGroups.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudGroups.Name = "ucrNudGroups"

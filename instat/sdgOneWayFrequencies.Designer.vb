@@ -90,9 +90,9 @@ Partial Class sdgOneWayFrequencies
         Me.grpTableOptions.Controls.Add(Me.ucrChkHighlightedRows)
         Me.grpTableOptions.Controls.Add(Me.ucrChkMedian)
         Me.grpTableOptions.Controls.Add(Me.ucrChkShowSummary)
-        Me.grpTableOptions.Location = New System.Drawing.Point(17, 6)
+        Me.grpTableOptions.Location = New System.Drawing.Point(6, 7)
         Me.grpTableOptions.Name = "grpTableOptions"
-        Me.grpTableOptions.Size = New System.Drawing.Size(345, 172)
+        Me.grpTableOptions.Size = New System.Drawing.Size(327, 172)
         Me.grpTableOptions.TabIndex = 21
         Me.grpTableOptions.TabStop = False
         Me.grpTableOptions.Text = "More Options"
@@ -215,7 +215,7 @@ Partial Class sdgOneWayFrequencies
         Me.ucrChkCountName.Checked = False
         Me.ucrChkCountName.Location = New System.Drawing.Point(8, 114)
         Me.ucrChkCountName.Name = "ucrChkCountName"
-        Me.ucrChkCountName.Size = New System.Drawing.Size(103, 20)
+        Me.ucrChkCountName.Size = New System.Drawing.Size(94, 20)
         Me.ucrChkCountName.TabIndex = 60
         '
         'ucrInputCountsName
@@ -223,7 +223,7 @@ Partial Class sdgOneWayFrequencies
         Me.ucrInputCountsName.AddQuotesIfUnrecognised = True
         Me.ucrInputCountsName.IsMultiline = False
         Me.ucrInputCountsName.IsReadOnly = False
-        Me.ucrInputCountsName.Location = New System.Drawing.Point(108, 113)
+        Me.ucrInputCountsName.Location = New System.Drawing.Point(108, 114)
         Me.ucrInputCountsName.Name = "ucrInputCountsName"
         Me.ucrInputCountsName.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputCountsName.TabIndex = 59
@@ -232,7 +232,7 @@ Partial Class sdgOneWayFrequencies
         '
         Me.ucrNudDecimalPlaces.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDecimalPlaces.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudDecimalPlaces.Location = New System.Drawing.Point(171, 139)
+        Me.ucrNudDecimalPlaces.Location = New System.Drawing.Point(173, 140)
         Me.ucrNudDecimalPlaces.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudDecimalPlaces.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDecimalPlaces.Name = "ucrNudDecimalPlaces"
