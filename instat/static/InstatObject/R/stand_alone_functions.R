@@ -333,4 +333,19 @@ open_NetCDF <- function(nc_data){
   return(list(my_data, lat_lon_df))
 }
   
-  
+import_from_iri <- function(X1,X2,Y1,Y2){
+  gaugelocdir = getwd()
+  prexyaddress<-paste("https://iridl.ldeo.columbia.edu/SOURCES/.UCSB/.CHIRPS/.v2p0/.daily-improved/.global/.0p25/.prcp")
+  #xystuff<-paste("X",X1,X2,"RANGEEDGES/Y",Y1,Y2,"RANGEEDGES/[X+Y+]average",sep="/")
+  xystuff<-paste("X",X1,X2,"RANGEEDGES/Y",Y1,Y2,"RANGEEDGES",sep="/")
+  #postxyaddress<-"T+exch+table-+text+text+skipanyNaN+-table+.csv"    
+  postxyaddress<-"ngridtable+table-+skipanyNaN+4+-table+.csv" 
+  #postxyaddress=".csv"
+  address<-paste(prexyaddress,xystuff,postxyaddress,sep="/")
+  #print(address)    
+  file.name <- paste(gaugelocdir,"tmp.csv",sep="/")
+  download.file(address,file.name,quiet=FALSE)#,method="curl") # dan updated curl
+  dataout <- read.table( paste(gaugelocdir,"tmp.csv",sep="/"),sep=",",header=TRUE)
+  #file.remove(paste(gaugelocdir,"tmp.csv",sep="/"))
+  return(dataout)
+}
