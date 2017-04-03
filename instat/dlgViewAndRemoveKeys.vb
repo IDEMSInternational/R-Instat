@@ -28,13 +28,15 @@ Public Class dlgViewAndRemoveKeys
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrSelectorKeys = ucrReceiverSelectedKey.Selector
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$remove_key")
+        ucrSelectorKeys.SetItemType("key")
+        ucrReceiverSelectedKey.Selector = ucrSelectorKeys
         ucrReceiverSelectedKey.SetMeAsReceiver()
         ucrBase.iHelpTopicID = 505
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrReceiverSelectedKey.IsEmpty Then
+        If Not ucrReceiverSelectedKey.IsEmpty AndAlso chkRemoveKey.Checked Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -42,15 +44,29 @@ Public Class dlgViewAndRemoveKeys
     End Sub
 
     Private Sub SetDefaults()
+        ucrSelectorKeys.Reset()
         chkRemoveKey.Checked = False
     End Sub
 
     Private Sub ucrReceiverSelectedKey_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverSelectedKey.SelectionChanged
+        If Not ucrReceiverSelectedKey.IsEmpty Then
+            ucrBase.clsRsyntax.AddParameter("key_name", ucrReceiverSelectedKey.GetVariableNames())
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("key_name")
+        End If
         TestOKEnabled()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         TestOKEnabled()
+    End Sub
+
+    Private Sub chkRemoveKey_CheckedChanged(sender As Object, e As EventArgs) Handles chkRemoveKey.CheckedChanged
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrSelectorKeys_DataFrameChanged() Handles ucrSelectorKeys.DataFrameChanged
+        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorKeys.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
     End Sub
 End Class
