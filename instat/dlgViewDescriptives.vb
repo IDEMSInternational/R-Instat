@@ -13,7 +13,6 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports instat
 Imports instat.Translations
 Public Class dlgViewDescriptives
     Public bFirstLoad As Boolean = True
@@ -35,10 +34,6 @@ Public Class dlgViewDescriptives
 
     Private Sub SetRCodeforControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-    End Sub
-
-    Private Sub ReopenDialog()
-
     End Sub
 
     Private Sub InitialiseDialog()
@@ -67,7 +62,6 @@ Public Class dlgViewDescriptives
         rdoAllContents.Enabled = False
         rdoComponent.Enabled = False
         rdoViewGraph.Enabled = False
-
         '        clsDefaultFunction.AddParameter("", Chr(34) & "" & Chr(34)) ' rdoViewGraph option
     End Sub
 

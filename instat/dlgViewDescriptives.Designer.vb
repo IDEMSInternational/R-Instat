@@ -52,11 +52,11 @@ Partial Class dlgViewDescriptives
         '
         'lblSelectedObject
         '
-        Me.lblSelectedObject.Location = New System.Drawing.Point(249, 43)
+        Me.lblSelectedObject.Location = New System.Drawing.Point(250, 43)
         Me.lblSelectedObject.Name = "lblSelectedObject"
         Me.lblSelectedObject.Size = New System.Drawing.Size(100, 23)
         Me.lblSelectedObject.TabIndex = 1
-        Me.lblSelectedObject.Text = "Selected Object:"
+        Me.lblSelectedObject.Text = "Object to View:"
         '
         'ucrReceiverSelectedObject
         '
@@ -70,7 +70,7 @@ Partial Class dlgViewDescriptives
         '
         'rdoStructure
         '
-        Me.rdoStructure.Location = New System.Drawing.Point(12, 206)
+        Me.rdoStructure.Location = New System.Drawing.Point(10, 206)
         Me.rdoStructure.Name = "rdoStructure"
         Me.rdoStructure.Size = New System.Drawing.Size(88, 24)
         Me.rdoStructure.TabIndex = 4
@@ -81,7 +81,7 @@ Partial Class dlgViewDescriptives
         '
         'rdoAllContents
         '
-        Me.rdoAllContents.Location = New System.Drawing.Point(117, 206)
+        Me.rdoAllContents.Location = New System.Drawing.Point(104, 206)
         Me.rdoAllContents.Name = "rdoAllContents"
         Me.rdoAllContents.Size = New System.Drawing.Size(100, 24)
         Me.rdoAllContents.TabIndex = 5
@@ -92,7 +92,7 @@ Partial Class dlgViewDescriptives
         '
         'rdoComponent
         '
-        Me.rdoComponent.Location = New System.Drawing.Point(223, 206)
+        Me.rdoComponent.Location = New System.Drawing.Point(198, 206)
         Me.rdoComponent.Name = "rdoComponent"
         Me.rdoComponent.Size = New System.Drawing.Size(87, 24)
         Me.rdoComponent.TabIndex = 6
@@ -103,7 +103,7 @@ Partial Class dlgViewDescriptives
         '
         'rdoViewGraph
         '
-        Me.rdoViewGraph.Location = New System.Drawing.Point(316, 206)
+        Me.rdoViewGraph.Location = New System.Drawing.Point(292, 206)
         Me.rdoViewGraph.Name = "rdoViewGraph"
         Me.rdoViewGraph.Size = New System.Drawing.Size(80, 24)
         Me.rdoViewGraph.TabIndex = 7
