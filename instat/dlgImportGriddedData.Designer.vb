@@ -33,6 +33,8 @@ Partial Class dlgImportGriddedData
         Me.lblMaxLon = New System.Windows.Forms.Label()
         Me.lblDataName = New System.Windows.Forms.Label()
         Me.ucrInputDataName = New instat.ucrInputTextBox()
+        Me.ucrInputDownloadFrom = New instat.ucrInputComboBox()
+        Me.lblDownloadFrom = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -145,11 +147,31 @@ Partial Class dlgImportGriddedData
         Me.ucrInputDataName.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputDataName.TabIndex = 11
         '
+        'ucrInputDownloadFrom
+        '
+        Me.ucrInputDownloadFrom.AddQuotesIfUnrecognised = True
+        Me.ucrInputDownloadFrom.IsReadOnly = False
+        Me.ucrInputDownloadFrom.Location = New System.Drawing.Point(156, 48)
+        Me.ucrInputDownloadFrom.Name = "ucrInputDownloadFrom"
+        Me.ucrInputDownloadFrom.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputDownloadFrom.TabIndex = 12
+        '
+        'lblDownloadFrom
+        '
+        Me.lblDownloadFrom.AutoSize = True
+        Me.lblDownloadFrom.Location = New System.Drawing.Point(37, 48)
+        Me.lblDownloadFrom.Name = "lblDownloadFrom"
+        Me.lblDownloadFrom.Size = New System.Drawing.Size(84, 13)
+        Me.lblDownloadFrom.TabIndex = 13
+        Me.lblDownloadFrom.Text = "Download From:"
+        '
         'dlgImportGriddedData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(426, 261)
+        Me.Controls.Add(Me.lblDownloadFrom)
+        Me.Controls.Add(Me.ucrInputDownloadFrom)
         Me.Controls.Add(Me.ucrInputDataName)
         Me.Controls.Add(Me.lblDataName)
         Me.Controls.Add(Me.lblMaxLon)
@@ -183,4 +205,6 @@ Partial Class dlgImportGriddedData
     Friend WithEvents lblMaxLon As Label
     Friend WithEvents lblDataName As Label
     Friend WithEvents ucrInputDataName As ucrInputTextBox
+    Friend WithEvents ucrInputDownloadFrom As ucrInputComboBox
+    Friend WithEvents lblDownloadFrom As Label
 End Class
