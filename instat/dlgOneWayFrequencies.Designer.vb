@@ -169,7 +169,7 @@ Partial Class dlgOneWayFrequencies
         'ucrChkGraph
         '
         Me.ucrChkGraph.Checked = False
-        Me.ucrChkGraph.Location = New System.Drawing.Point(10, 271)
+        Me.ucrChkGraph.Location = New System.Drawing.Point(10, 274)
         Me.ucrChkGraph.Name = "ucrChkGraph"
         Me.ucrChkGraph.Size = New System.Drawing.Size(145, 20)
         Me.ucrChkGraph.TabIndex = 12
@@ -177,7 +177,7 @@ Partial Class dlgOneWayFrequencies
         'ucrChkTable
         '
         Me.ucrChkTable.Checked = False
-        Me.ucrChkTable.Location = New System.Drawing.Point(10, 249)
+        Me.ucrChkTable.Location = New System.Drawing.Point(10, 251)
         Me.ucrChkTable.Name = "ucrChkTable"
         Me.ucrChkTable.Size = New System.Drawing.Size(145, 20)
         Me.ucrChkTable.TabIndex = 13
