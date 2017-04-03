@@ -4,6 +4,7 @@
     Public ucrFactorReceiver As ucrReceiverSingle
     'The ucrVariablesAsFactor has an associated ucrFactorReceiver, set on the dialog it is living in. In multiple mode, the ucrVariablesAsFactor can receive multiple variables that are then stacked in one and distinguished using a factor variable called "variable". The associated factor receiver will then be set in StackedFactorMode and fix it's content to this "variable" factor. 
     Public WithEvents ucrVariableSelector As ucrSelectorByDataFrame
+    Public bForceAsDataFrame As Boolean = True
 
     Public Sub New()
         ' This call is required by the designer.
@@ -144,12 +145,13 @@
         If Not bSingleVariable Then
             SetMeasureVars()
         End If
-
         RaiseEvent SelectionChanged()
+        UpdateParameter()
     End Sub
 
     Private Sub ucrSingleVariable_SelectionChanged(sender As Object, e As EventArgs) Handles ucrSingleVariable.SelectionChanged
         RaiseEvent SelectionChanged()
+        UpdateParameter()
     End Sub
 
     Public Function IsEmpty() As Boolean
@@ -268,5 +270,16 @@
                 ucrMultipleVariables.SetMeAsReceiver()
             End If
         End If
+    End Sub
+
+    Public Sub SetParameterIsRFunction()
+        UpdateParameter()
+    End Sub
+    Public Sub UpdateParameter()
+        If clsParameter Is Nothing Then
+            clsParameter = New RParameter
+        End If
+        'we dont need parameter as string
+        clsParameter.SetArgument(GetVariables(bForceAsDataFrame = True))
     End Sub
 End Class
