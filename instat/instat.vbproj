@@ -630,6 +630,12 @@
     <Compile Include="sdgOneWayFrequencies.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgTwoWayFrequencies.Designer.vb">
+      <DependentUpon>sdgTwoWayFrequencies.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgTwoWayFrequencies.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgWindrose.Designer.vb">
       <DependentUpon>sdgWindrose.vb</DependentUpon>
     </Compile>
@@ -4068,6 +4074,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSimpleRegOptions.sw-KE.resx">
       <DependentUpon>sdgSimpleRegOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgTwoWayFrequencies.resx">
+      <DependentUpon>sdgTwoWayFrequencies.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgVariableTransformations.fr-FR.resx">
       <DependentUpon>sdgVariableTransformations.vb</DependentUpon>
