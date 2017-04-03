@@ -51,7 +51,7 @@ Partial Class dlgStack
         Me.lblStackDataInto.Location = New System.Drawing.Point(10, 263)
         Me.lblStackDataInto.Name = "lblStackDataInto"
         Me.lblStackDataInto.Size = New System.Drawing.Size(85, 13)
-        Me.lblStackDataInto.TabIndex = 9
+        Me.lblStackDataInto.TabIndex = 8
         Me.lblStackDataInto.Tag = "Stack_Data_Into"
         Me.lblStackDataInto.Text = "Stack Data Into:"
         '
@@ -61,7 +61,7 @@ Partial Class dlgStack
         Me.lblFactorInto.Location = New System.Drawing.Point(10, 234)
         Me.lblFactorInto.Name = "lblFactorInto"
         Me.lblFactorInto.Size = New System.Drawing.Size(61, 13)
-        Me.lblFactorInto.TabIndex = 7
+        Me.lblFactorInto.TabIndex = 6
         Me.lblFactorInto.Tag = "Factor_Into"
         Me.lblFactorInto.Text = "Factor Into:"
         '
@@ -76,23 +76,25 @@ Partial Class dlgStack
         '
         'ucrStackDataInto
         '
+        Me.ucrStackDataInto.AddQuotesIfUnrecognised = True
         Me.ucrStackDataInto.IsMultiline = False
         Me.ucrStackDataInto.IsReadOnly = False
         Me.ucrStackDataInto.Location = New System.Drawing.Point(131, 259)
         Me.ucrStackDataInto.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrStackDataInto.Name = "ucrStackDataInto"
         Me.ucrStackDataInto.Size = New System.Drawing.Size(145, 21)
-        Me.ucrStackDataInto.TabIndex = 10
+        Me.ucrStackDataInto.TabIndex = 9
         '
         'ucrFactorInto
         '
+        Me.ucrFactorInto.AddQuotesIfUnrecognised = True
         Me.ucrFactorInto.IsMultiline = False
         Me.ucrFactorInto.IsReadOnly = False
         Me.ucrFactorInto.Location = New System.Drawing.Point(131, 230)
         Me.ucrFactorInto.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrFactorInto.Name = "ucrFactorInto"
         Me.ucrFactorInto.Size = New System.Drawing.Size(145, 21)
-        Me.ucrFactorInto.TabIndex = 8
+        Me.ucrFactorInto.TabIndex = 7
         '
         'ucrColumnsToCarryReceiver
         '
@@ -120,7 +122,7 @@ Partial Class dlgStack
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 11
+        Me.ucrBase.TabIndex = 10
         '
         'ucrReceiverColumnsToBeStack
         '
@@ -137,7 +139,7 @@ Partial Class dlgStack
         Me.ucrSaveNewDataName.Location = New System.Drawing.Point(10, 200)
         Me.ucrSaveNewDataName.Name = "ucrSaveNewDataName"
         Me.ucrSaveNewDataName.Size = New System.Drawing.Size(266, 20)
-        Me.ucrSaveNewDataName.TabIndex = 12
+        Me.ucrSaveNewDataName.TabIndex = 5
         '
         'dlgStack
         '
