@@ -85,6 +85,11 @@ Public Class ucrCore
 
     Public bIsVisible As Boolean = True
 
+    ' Values which the parameter associated to the control may have but which shouldn't be used to set the control's value
+    ' Individual controls can determine what value to set when a parameter value is contained in strValuesToIgnore
+    ' (Currently only implemented for receivers)
+    Protected strValuesToIgnore As String()
+
     'Update the control based on the code in RCodeStructure
     'bReset : should the control reset to the default value if the parameter is not present in the code
     Public Overridable Sub UpdateControl(Optional bReset As Boolean = False)
@@ -163,13 +168,13 @@ Public Class ucrCore
             If ucrControl.bLinkedUpdateFunction AndAlso bTemp Then
                 ucrControl.SetRCode(clsRCode)
             End If
-            If ucrControl.bLinkedAddRemoveParameter Then
-                ucrControl.AddOrRemoveParameter(bTemp)
-            End If
             If ucrControl.bLinkedChangeToDefaultState AndAlso bReset Then
                 If ucrControl.clsRCode Is Nothing OrElse ucrControl.clsParameter Is Nothing OrElse (ucrControl.clsRCode IsNot Nothing AndAlso ucrControl.clsParameter IsNot Nothing AndAlso ucrControl.clsParameter.strArgumentName IsNot Nothing AndAlso (Not ucrControl.clsRCode.ContainsParameter(ucrControl.clsParameter.strArgumentName))) Then
                     ucrControl.SetToDefaultState()
                 End If
+            End If
+            If ucrControl.bLinkedAddRemoveParameter Then
+                ucrControl.AddOrRemoveParameter(bTemp)
             End If
             If ucrControl.bLinkedHideIfParameterMissing Then
                 ucrControl.SetVisible(bTemp)
@@ -183,7 +188,9 @@ Public Class ucrCore
 
     'Update the RCode based on the contents of the control (reverse of above)
     Public Overridable Sub UpdateRCode(Optional bReset As Boolean = False)
-        AddOrRemoveParameter(CanAddParameter())
+        If bAddRemoveParameter Then
+            AddOrRemoveParameter(CanAddParameter())
+        End If
         UpdateLinkedControls(bReset)
     End Sub
 
@@ -385,6 +392,27 @@ Public Class ucrCore
         AddCondition(objControlState, clsTempCond)
     End Sub
 
+    Public Sub AddParameterIsStringCondition(objControlState As Object, strParameterName As String, Optional bNewIsPositive As Boolean = True)
+        Dim clsTempCond As New Condition
+
+        clsTempCond.SetParameterType(strType:="string", strParamName:=strParameterName, bNewIsPositive:=bNewIsPositive)
+        AddCondition(objControlState, clsTempCond)
+    End Sub
+
+    Public Sub AddParameterIsRFunctionCondition(objControlState As Object, strParameterName As String, Optional bNewIsPositive As Boolean = True)
+        Dim clsTempCond As New Condition
+
+        clsTempCond.SetParameterType(strType:="RFunction", strParamName:=strParameterName, bNewIsPositive:=bNewIsPositive)
+        AddCondition(objControlState, clsTempCond)
+    End Sub
+
+    Public Sub AddParameterIsROperatorCondition(objControlState As Object, strParameterName As String, Optional bNewIsPositive As Boolean = True)
+        Dim clsTempCond As New Condition
+
+        clsTempCond.SetParameterType(strType:="ROperator", strParamName:=strParameterName, bNewIsPositive:=bNewIsPositive)
+        AddCondition(objControlState, clsTempCond)
+    End Sub
+
     Public Sub SetVisible(bVisible As Boolean)
         If ctrLinkedDisaplyControl IsNot Nothing AndAlso TypeOf ctrLinkedDisaplyControl Is GroupBox Then
             ctrLinkedDisaplyControl.Visible = bVisible
@@ -418,5 +446,9 @@ Public Class ucrCore
         If clsParameter IsNot Nothing Then
             clsParameter.SetArgumentValue(strNewValue)
         End If
+    End Sub
+
+    Public Sub SetValuesToIgnore(strValues() As String)
+        strValuesToIgnore = strValues
     End Sub
 End Class
