@@ -30,7 +30,7 @@ convert_to_character_matrix <- function(data, format_decimal_places = TRUE, deci
         out[,i] <- as.character(data[[i]])
       }
       else {
-        out[,i] <- as.character(format(data[[i]], nsmall = decimal_places[i], scientific = FALSE))
+        out[,i] <- format(data[[i]], digits = decimal_places[i], scientific = FALSE)
       }
       i = i + 1
     }

@@ -30,7 +30,8 @@ column_count_label="Column_Count"
 is_linkable="Is_Linkable"
 
 #variables_metadata labels
-display_decimal_label="Display_Decimal"
+display_decimal_label="SignifFigures"
+scientific_label="Scientific"
 name_label="Name"
 is_factor_label="Is_Factor"
 #changes because attributes default is class
