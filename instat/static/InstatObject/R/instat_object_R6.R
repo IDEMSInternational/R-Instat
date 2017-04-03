@@ -1322,9 +1322,9 @@ instat_object$set("public", "import_from_climsoft", function(stations = c(), ele
 }
 )
 
-instat_object$set("public", "import_from_iri", function(data_names, X1,X2,Y1,Y2){
+instat_object$set("public", "import_from_iri", function(data_names, download_from, X1,X2,Y1,Y2){
  
-  data_list <- list(import_from_iri(X1,X2,Y1,Y2))
+  data_list <- list(import_from_iri(download_from,X1,X2,Y1,Y2))
   data_names = "chirps"
   #if(length(data_list) != length(data_names))stop("data_names vector should be of length 2")
   #names(data_list) = c(data_names[1],next_default_item(prefix = data_names[2], existing_names = self$get_data_names(), include_index = FALSE))

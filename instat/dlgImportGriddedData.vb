@@ -42,6 +42,15 @@ Public Class dlgImportGriddedData
         ucrInputDataName.SetParameter(New RParameter("data_names", 0))
         ucrInputDataName.clsParameter.bIncludeArgumentName = False
 
+        Dim dctDownloadPairs As New Dictionary(Of String, String)
+
+        ucrInputDownloadFrom.SetParameter(New RParameter("download_from"))
+        dctDownloadPairs.Add("CHIRPS", Chr(34) & "CHIRPS" & Chr(34))
+
+        dctDownloadPairs.Add("Histogram", Chr(34) & "geom_histogram" & Chr(34))
+        dctDownloadPairs.Add("Dotplot", Chr(34) & "geom_dotplot" & Chr(34))
+        dctDownloadPairs.Add("Point Plot", Chr(34) & "geom_point" & Chr(34))
+
         ucrNudMinLat.SetParameter(New RParameter("X1", 1))
         ucrNudMaxLat.SetParameter(New RParameter("X2", 2))
         ucrNudMinLon.SetParameter(New RParameter("Y1", 3))
