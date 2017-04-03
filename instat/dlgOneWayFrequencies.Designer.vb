@@ -137,14 +137,14 @@ Partial Class dlgOneWayFrequencies
         Me.ucrChkFlip.Location = New System.Drawing.Point(10, 297)
         Me.ucrChkFlip.Name = "ucrChkFlip"
         Me.ucrChkFlip.Size = New System.Drawing.Size(145, 20)
-        Me.ucrChkFlip.TabIndex = 7
+        Me.ucrChkFlip.TabIndex = 11
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(10, 324)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 11
+        Me.ucrBase.TabIndex = 12
         '
         'ucrReceiverOneWayFreq
         '
@@ -172,7 +172,7 @@ Partial Class dlgOneWayFrequencies
         Me.ucrChkGraph.Location = New System.Drawing.Point(10, 274)
         Me.ucrChkGraph.Name = "ucrChkGraph"
         Me.ucrChkGraph.Size = New System.Drawing.Size(145, 20)
-        Me.ucrChkGraph.TabIndex = 12
+        Me.ucrChkGraph.TabIndex = 10
         '
         'ucrChkTable
         '
@@ -180,7 +180,7 @@ Partial Class dlgOneWayFrequencies
         Me.ucrChkTable.Location = New System.Drawing.Point(10, 251)
         Me.ucrChkTable.Name = "ucrChkTable"
         Me.ucrChkTable.Size = New System.Drawing.Size(145, 20)
-        Me.ucrChkTable.TabIndex = 13
+        Me.ucrChkTable.TabIndex = 9
         '
         'ucrNudGroups
         '
@@ -191,7 +191,7 @@ Partial Class dlgOneWayFrequencies
         Me.ucrNudGroups.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudGroups.Name = "ucrNudGroups"
         Me.ucrNudGroups.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudGroups.TabIndex = 48
+        Me.ucrNudGroups.TabIndex = 8
         Me.ucrNudGroups.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrChkGroupData
@@ -200,7 +200,7 @@ Partial Class dlgOneWayFrequencies
         Me.ucrChkGroupData.Location = New System.Drawing.Point(10, 228)
         Me.ucrChkGroupData.Name = "ucrChkGroupData"
         Me.ucrChkGroupData.Size = New System.Drawing.Size(145, 20)
-        Me.ucrChkGroupData.TabIndex = 47
+        Me.ucrChkGroupData.TabIndex = 7
         '
         'dlgOneWayFrequencies
         '
