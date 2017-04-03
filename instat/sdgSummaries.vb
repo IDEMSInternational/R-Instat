@@ -61,13 +61,14 @@ Public Class sdgSummaries
         ucrChkSum.SetParameter(New RParameter("summary_sum"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
         ucrChkVariance.SetText("Variance")
-        ucrChkVariance.SetParameter(New RParameter("summary_variance"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkVariance.SetParameter(New RParameter("summary_var"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
+        ucrChkQuartiles.Enabled = False 'To be enabled once quartiles summary function has is implemented in Instat object
         ucrChkQuartiles.SetText("Quartiles")
         ucrChkQuartiles.SetParameter(New RParameter("summary_quartiles"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
         lstCheckboxes = New List(Of ucrCheck)
-        lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkRange, ucrChkSum, ucrChkQuartiles})
+        lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkVariance, ucrChkRange, ucrChkSum, ucrChkQuartiles})
         For Each ctrTemp As ucrCheck In lstCheckboxes
             ctrTemp.clsParameter.SetArgumentValue(Chr(34) & ctrTemp.clsParameter.strArgumentName & Chr(34))
             ctrTemp.clsParameter.bIncludeArgumentName = False

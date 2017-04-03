@@ -34,33 +34,49 @@ Public Class dlgStack
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        If bReset Then
+            SetCarryColumnsOptions()
+        End If
     End Sub
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 57
-        ucrReceiverColumnsToBeStack.Selector = ucrSelectorStack
-        ucrColumnsToCarryReceiver.Selector = ucrSelectorStack
-        ucrReceiverColumnsToBeStack.SetMeAsReceiver()
+
         ucrSelectorStack.SetParameter(New RParameter("data", 0))
         ucrSelectorStack.SetParameterIsrfunction()
-        ucrChkCarryColumns.SetText("Carry Columns")
+
+        ucrReceiverColumnsToBeStack.Selector = ucrSelectorStack
         ucrReceiverColumnsToBeStack.SetParameter(New RParameter("measure.vars", 1))
         ucrReceiverColumnsToBeStack.SetParameterIsString()
-        ucrChkCarryColumns.AddToLinkedControls(ucrColumnsToCarryReceiver, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrColumnsToCarryReceiver.Selector = ucrSelectorStack
         ucrColumnsToCarryReceiver.SetParameter(New RParameter("id.vars", 2))
         ucrColumnsToCarryReceiver.SetParameterIsString()
-        ucrChkCarryColumns.SetParameter(ucrColumnsToCarryReceiver.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrColumnsToCarryReceiver.bAddRemoveParameter = False
+        ucrColumnsToCarryReceiver.SetValuesToIgnore({"NULL"})
+
+        ucrChkCarryColumns.SetText("Carry Columns")
+        ucrChkCarryColumns.AddParameterValuesCondition(True, "id.vars", "NULL", False)
+        ucrChkCarryColumns.AddParameterValuesCondition(False, "id.vars", "NULL")
+        ' I would like to do this since the checkbox also controls the value of id.vars
+        ' but there is confusion with both controls setting the value of the same parameter at the same time. For now the writing is done manually in this dialog.
+        'ucrChkCarryColumns.SetParameter(ucrColumnsToCarryReceiver.GetParameter(), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="", strNewValueIfUnchecked:="NULL")
+        'We don't want the receiver to remove the parameter when the checkbox is unchecked since the id.vars parameter will always be given.
+        ucrChkCarryColumns.AddToLinkedControls(ucrColumnsToCarryReceiver, {True}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
+
         ucrFactorInto.SetParameter(New RParameter("variable.name", 3))
+        ucrFactorInto.SetValidationTypeAsRVariable()
+
         ucrStackDataInto.SetParameter(New RParameter("value.name", 4))
-        'TODO Should this be enforced for column names?
+        ucrStackDataInto.SetValidationTypeAsRVariable()
+
         ucrSaveNewDataName.SetIsTextBox()
         ucrSaveNewDataName.SetLabelText("New Data Frame Name:")
-        ucrStackDataInto.SetValidationTypeAsRVariable()
-        ucrFactorInto.SetValidationTypeAsRVariable()
+        ucrSaveNewDataName.SetSaveTypeAsDataFrame()
+        ucrSaveNewDataName.SetDataFrameSelector(ucrSelectorStack.ucrAvailableDataFrames)
     End Sub
 
     Private Sub SetDataFrameName()
-        'TODO this is a work around for AssignTo not clearing in RSyntax
         If ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" AndAlso (Not ucrSaveNewDataName.bUserTyped) Then
             ucrSaveNewDataName.SetName(ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked")
         End If
@@ -88,24 +104,20 @@ Public Class dlgStack
 
     Private Sub SetDefaults()
         clsMelt = New RFunction
+
         ucrSelectorStack.Reset()
         ucrSaveNewDataName.Reset()
         ucrStackDataInto.Reset()
         ucrFactorInto.Reset()
         ucrReceiverColumnsToBeStack.SetMeAsReceiver()
-        ucrFactorInto.SetName("variable")
-        ucrStackDataInto.SetName("value")
-        clsMelt.SetAssignTo(ucrSaveNewDataName.GetText(), strTempDataframe:=ucrSaveNewDataName.GetText())
-        SetDataFrameName()
-        clsMelt.AddParameter("variable.name", Chr(34) & ucrFactorInto.GetText() & Chr(34))
-        clsMelt.SetRCommand("melt")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsMelt)
-    End Sub
 
-    Private Sub chkIDVariables_KeyPress(sender As Object, e As KeyPressEventArgs) Handles ucrChkCarryColumns.KeyPress
-        If e.KeyChar = vbCr Then
-            ucrChkCarryColumns.Checked = Not ucrChkCarryColumns.Checked
-        End If
+        clsMelt.SetRCommand("melt")
+        clsMelt.AddParameter("variable.name", Chr(34) & "variable" & Chr(34))
+        clsMelt.AddParameter("value.name", Chr(34) & "value" & Chr(34))
+        clsMelt.AddParameter("id.vars", "NULL")
+        clsMelt.SetAssignTo(ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked", strTempDataframe:=ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked")
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsMelt)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -118,19 +130,24 @@ Public Class dlgStack
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrsavenewdataname_cotrolvaluechanged(ucrchangedcontrol As ucrCore) Handles ucrSaveNewDataName.ControlValueChanged
-        clsMelt.SetAssignTo(ucrSaveNewDataName.GetText(), strTempDataframe:=ucrSaveNewDataName.GetText())
+    Private Sub ucrChkCarryColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCarryColumns.ControlValueChanged
+        SetCarryColumnsOptions()
     End Sub
 
-    Private Sub ucrChkCarryColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCarryColumns.ControlValueChanged
+    Private Sub SetCarryColumnsOptions()
         If ucrChkCarryColumns.Checked Then
             ucrColumnsToCarryReceiver.SetMeAsReceiver()
+            If Not ucrColumnsToCarryReceiver.IsEmpty() Then
+                clsMelt.AddParameter("id.vars", ucrColumnsToCarryReceiver.GetVariableNames())
+            End If
         Else
             ucrReceiverColumnsToBeStack.SetMeAsReceiver()
+            clsMelt.AddParameter("id.vars", "NULL")
         End If
     End Sub
 
     Private Sub ucrSelectorStack_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorStack.ControlValueChanged
         SetDataFrameName()
+        SetCarryColumnsOptions()
     End Sub
 End Class
