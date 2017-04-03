@@ -34,14 +34,14 @@ Public Class dlgView
         TestOKEnabled()
     End Sub
 
-    Public Sub SetRCodeForControls(bReset As Boolean)
+    Private Sub SetRCodeForControls(bReset As Boolean)
         ucrNudNumberRows.Maximum = Decimal.MaxValue
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
         DataFrameLength()
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsMainFunction = New RFunction
+        clsMainFunction = New RFunction
         ucrSelectorForView.Reset()
         ucrSelectorForView.Focus()
         clsMainFunction.SetRCommand("View")
