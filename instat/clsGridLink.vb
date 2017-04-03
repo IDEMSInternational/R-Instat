@@ -302,8 +302,8 @@ Public Class clsGridLink
                     fillWorkSheet.RowHeaders(i).TextColor = Color.DarkBlue
                 Next
             End If
+            FormatDataView(fillWorkSheet)
         End If
-        FormatDataView(fillWorkSheet)
         Try
             clsGetColumnNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_names")
             clsGetColumnNames.AddParameter("data_name", Chr(34) & strName & Chr(34))
