@@ -339,9 +339,24 @@ import_from_iri <- function(download_from, X1,X2,Y1,Y2){
     prexyaddress<-paste("https://iridl.ldeo.columbia.edu/SOURCES/.UCSB/.CHIRPS/.v2p0/.daily-improved/.global/.0p25/.prcp")
   }
   else if(download_from=="TAMSAT"){
-    prexyaddress<-paste("")
+    prexyaddress<-paste("http://iridl.ldeo.columbia.edu/home/.remic/.Reading/.Meteorology/.TAMSAT/.TAMSAT-RFE/.rfe/")
   }
-  
+  else if(download_from=="NOAA_ARC2"){
+    prexyaddress<-paste(" http://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP/.CPC/.FEWS/.Africa/.DAILY/.ARC2/.daily/.est_prcp/")
+  }
+  else if(download_from=="NOAA_RFE2"){
+    prexyaddress<-paste(" http://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP/.CPC/.FEWS/.Africa/.DAILY/.RFEv2/.est_prcp/")
+  }
+  else if(download_from=="NOAA_CMORPH"){
+    prexyaddress<-paste(" http://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP/.CPC/.CMORPH/.daily/?Set-Language=en")
+  }
+  else if(download_from==" NASA_TRMM_3B42"){
+    prexyaddress<-paste(" https://iridl.ldeo.columbia.edu/SOURCES/.NASA/.GES-DAAC/.TRMM_L3/.TRMM_3B42/.v7/.daily/.precipitation/")
+  }
+  else if(download_from=="vEGETATION_NDVI"){
+    prexyaddress<-paste("http://iridl.ldeo.columbia.edu/SOURCES/.USGS/.LandDAAC/.MODIS/.250m/.16day/")
+  }
+ 
   #xystuff<-paste("X",X1,X2,"RANGEEDGES/Y",Y1,Y2,"RANGEEDGES/[X+Y+]average",sep="/")
   xystuff<-paste("X",X1,X2,"RANGEEDGES/Y",Y1,Y2,"RANGEEDGES",sep="/")
   #postxyaddress<-"T+exch+table-+text+text+skipanyNaN+-table+.csv"    
