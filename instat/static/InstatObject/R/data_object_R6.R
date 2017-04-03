@@ -343,7 +343,7 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
         else out <- out[, property]
       }
     }
-    
+    if(is.data.frame(out)) row.names(out) <- NULL
     #TODO get convert_to_character_matrix to work on vectors
     if(convert_to_character && missing(property)) return(convert_to_character_matrix(out, FALSE))
     else return(out)
@@ -1112,15 +1112,17 @@ data_object$set("public", "get_column_names", function(as_list = FALSE, include 
   col_names = names(self$get_data_frame(use_current_filter = FALSE))
   var_metadata = self$get_variables_metadata()
   out = c()
+  i = 1
   for(col in col_names) {
     if(length(include) > 0 || length(exclude) > 0) {
-      curr_var_metadata = var_metadata[col, ]
+      curr_var_metadata = var_metadata[i, ]
       if(all(c(names(include), names(exclude)) %in% names(curr_var_metadata)) && all(sapply(names(include), function(prop) curr_var_metadata[[prop]] %in% include[[prop]]))
          && all(sapply(names(exclude), function(prop) !curr_var_metadata[[prop]] %in% exclude[[prop]]))) {
         out <- c(out, col)
       }
     }
     else out <- c(out, col)
+    i = i + 1
   }
   if(length(excluded_items) > 0) {
     ex_ind = which(out %in% excluded_items)
