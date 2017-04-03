@@ -13,11 +13,12 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 Public Class dlgViewDescriptives
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-
+    Private clsViewObject As New RFunction
     Private Sub dlgViewDescriptives_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -50,27 +51,24 @@ Public Class dlgViewDescriptives
         ucrReceiverSelectedObject.Selector = ucrSelectorForViewObject
         ucrReceiverSelectedObject.SetMeAsReceiver()
 
-        ' rdo's
-        ucrPnl.SetParameter(New RParameter("", 2))
-        ucrPnl.AddRadioButton(rdoStructure, Chr(34) & "" & Chr(34))
-        ucrPnl.AddRadioButton(rdoAllContents, Chr(34) & " " & Chr(34))
-        ucrPnl.AddRadioButton(rdoComponent, Chr(34) & " " & Chr(34))
-        ucrPnl.AddRadioButton(rdoViewGraph, Chr(34) & " " & Chr(34))
-        ucrPnl.SetRDefault(Chr(34) & "" & Chr(34)) ' rdoViewGraph
-
-        ucrBase.clsRsyntax.iCallType = 2
-        rdoAllContents.Enabled = False
-        rdoComponent.Enabled = False
-        rdoViewGraph.Enabled = False
-        '        clsDefaultFunction.AddParameter("", Chr(34) & "" & Chr(34)) ' rdoViewGraph option
+        ucrPnlContentsToView.bAllowNonConditionValues = True
+        ''' rdo's
+        'ucrPnlContentsToView.SetParameter(New RParameter("", 2))
+        'ucrPnlContentsToView.AddRadioButton(rdoStructure, Chr(34) & "" & Chr(34))
+        'ucrPnlContentsToView.AddRadioButton(rdoAllContents, Chr(34) & " " & Chr(34))
+        'ucrPnlContentsToView.AddRadioButton(rdoComponent, Chr(34) & " " & Chr(34))
+        'ucrPnlContentsToView.AddRadioButton(rdoViewGraph, Chr(34) & " " & Chr(34))
+        'ucrPnlContentsToView.SetRDefault(Chr(34) & "" & Chr(34))
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
-        ucrSelectorForViewObject.Reset()
+        clsViewObject = New RFunction
 
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_objects")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        ucrSelectorForViewObject.Reset()
+        rdoViewGraph.Checked = True
+        SetIcallType()
+        clsViewObject.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_objects")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsViewObject)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -87,7 +85,8 @@ Public Class dlgViewDescriptives
         TestOKEnabled()
     End Sub
 
-    Private Sub rdoViewGraph_CheckedChanged(sender As Object, e As EventArgs) Handles rdoViewGraph.CheckedChanged
+
+    Private Sub SetIcallType()
         If rdoViewGraph.Checked Then
             ucrBase.clsRsyntax.iCallType = 0
         Else
@@ -97,5 +96,9 @@ Public Class dlgViewDescriptives
 
     Private Sub ucrReceiverSelectedObject_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedObject.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrPnlContentsToReview_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlContentsToView.ControlContentsChanged
+        SetIcallType()
     End Sub
 End Class
