@@ -85,6 +85,12 @@ Public Class sdgOneWayFrequencies
         ucrPnlGraphType.AddRadioButton(rdoDot, Chr(34) & "dot" & Chr(34))
         ucrPnlGraphType.SetRDefault(Chr(34) & "bar" & Chr(34))
 
+        ucrInputCountsName.SetParameter(New RParameter("string.cnt"))
+        ucrInputCountsName.SetRDefault(Chr(34) & "N" & Chr(34))
+        ucrChkCountName.SetText("Count Name")
+        ucrChkCountName.SetParameter(ucrInputCountsName.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkCountName.AddToLinkedControls(ucrInputCountsName, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
         ucrSaveGraph.SetPrefix("one_way_freq")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(dlgOneWayFrequencies.ucrSelectorOneWayFreq.ucrAvailableDataFrames)
@@ -106,6 +112,8 @@ Public Class sdgOneWayFrequencies
         ucrChkHighlightedRows.SetRCode(clsOneWayTableFreq, bReset)
         ucrNudDecimalPlaces.SetRCode(clsOneWayTableFreq, bReset)
         ucrChkOmitZero.SetRCode(clsOneWayTableFreq, bReset)
+        ucrInputCountsName.SetRCode(clsOneWayTableFreq, bReset)
+        ucrChkCountName.SetRCode(clsOneWayTableFreq, bReset)
         ucrChkShowCount.SetRCode(clsOneWayGraphFreq, bReset)
         ucrChkShowPercentage.SetRCode(clsOneWayGraphFreq, bReset)
         ucrChkShowMissing.SetRCode(clsOneWayGraphFreq, bReset)

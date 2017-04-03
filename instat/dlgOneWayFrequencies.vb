@@ -37,17 +37,25 @@ Public Class dlgOneWayFrequencies
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverOneWayFreq.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrReceiverWeights.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrReceiverOneWayFreq.SetRCode(clsSjpFrq, bReset)
+        ucrReceiverOneWayFreq.SetRCode(clsSjtFreq, bReset)
+        ucrReceiverWeights.SetRCode(clsSjpFrq, bReset)
+        ucrReceiverWeights.SetRCode(clsSjtFreq, bReset)
+
         ucrChkGraph.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+
         ucrChkTable.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
 
-        ucrChkWeights.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrPnlSort.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrChkWeights.SetRCode(clsSjpFrq, bReset)
+        ucrChkWeights.SetRCode(clsSjtFreq, bReset)
+        ucrPnlSort.SetRCode(clsSjpFrq, bReset)
+        ucrPnlSort.SetRCode(clsSjtFreq, bReset)
         ucrChkFlip.SetRCode(clsSjpFrq, bReset)
 
-        ucrNudGroups.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrChkGroupData.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrNudGroups.SetRCode(clsSjpFrq, bReset)
+        ucrNudGroups.SetRCode(clsSjtFreq, bReset)
+        ucrChkGroupData.SetRCode(clsSjpFrq, bReset)
+        ucrChkGroupData.SetRCode(clsSjtFreq, bReset)
 
     End Sub
 
@@ -119,14 +127,10 @@ Public Class dlgOneWayFrequencies
         clsSjpFrq.AddParameter("type", Chr(34) & "bar" & Chr(34))
         clsSjpFrq.AddParameter("vjust", Chr(34) & "bottom" & Chr(34))
         clsSjpFrq.AddParameter("hjust", Chr(34) & "center" & Chr(34))
-        'parameter added to have the check box checked on default
         clsSjpFrq.AddParameter("show.prc", "TRUE")
-        'parameter added to have the default to False (R default is TRUE)
-        clsSjpFrq.AddParameter("show.n", "FALSE")
         clsSjpFrq.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneWayFreq.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjtFreq)
         bResetSubdialog = True
-
     End Sub
 
     Private Sub TestOkEnabled()
