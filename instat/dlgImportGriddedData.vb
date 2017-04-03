@@ -44,25 +44,30 @@ Public Class dlgImportGriddedData
 
         Dim dctDownloadPairs As New Dictionary(Of String, String)
 
-        ucrInputDownloadFrom.SetParameter(New RParameter("download_from"))
+        ucrInputDownloadFrom.SetParameter(New RParameter("download_from", 1))
         dctDownloadPairs.Add("CHIRPS", Chr(34) & "CHIRPS" & Chr(34))
+        dctDownloadPairs.Add("TAMSAT", Chr(34) & "TAMSAT" & Chr(34))
 
-        dctDownloadPairs.Add("Histogram", Chr(34) & "geom_histogram" & Chr(34))
-        dctDownloadPairs.Add("Dotplot", Chr(34) & "geom_dotplot" & Chr(34))
-        dctDownloadPairs.Add("Point Plot", Chr(34) & "geom_point" & Chr(34))
+        'dctDownloadPairs.Add("CHIRPS", Chr(34) & "CHIRPS" & Chr(34))
+        'dctDownloadPairs.Add("TAMSAT", Chr(34) & "TAMSAT" & Chr(34))
 
-        ucrNudMinLat.SetParameter(New RParameter("X1", 1))
-        ucrNudMaxLat.SetParameter(New RParameter("X2", 2))
-        ucrNudMinLon.SetParameter(New RParameter("Y1", 3))
-        ucrNudMaxLon.SetParameter(New RParameter("Y2", 4))
-
+        ucrNudMinLat.SetParameter(New RParameter("X1", 2))
+        ucrNudMaxLat.SetMinMax(-50, 50)
+        ucrNudMinLat.DecimalPlaces = 2
+        ucrNudMaxLat.SetParameter(New RParameter("X2", 3))
+        ucrNudMinLat.SetMinMax(-50, 50)
+        ucrNudMaxLat.DecimalPlaces = 2
+        ucrNudMinLon.SetParameter(New RParameter("Y1", 4))
+        ucrNudMinLon.SetMinMax(-180, 180)
+        ucrNudMinLon.DecimalPlaces = 2
+        ucrNudMaxLon.SetParameter(New RParameter("Y2", 5))
+        ucrNudMaxLon.SetMinMax(-180, 180)
+        ucrNudMaxLon.DecimalPlaces = 2
     End Sub
 
     Private Sub SetDefaults()
         clsRDefaultFunction = New RFunction
         clsRDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_from_iri")
-        'clsRDefaultFunction.AddParameter("nc_data", clsRFunctionParameter:=clsRCDF)
-        'clsRDefaultFunction.AddParameter("data_names", clsRFunctionParameter:=clsRDatanames)
         ucrBase.clsRsyntax.SetBaseRFunction(clsRDefaultFunction)
     End Sub
 
