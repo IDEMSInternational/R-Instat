@@ -339,7 +339,7 @@ import_from_iri <- function(download_from, X1,X2,Y1,Y2){
     prexyaddress<-paste("https://iridl.ldeo.columbia.edu/SOURCES/.UCSB/.CHIRPS/.v2p0/.daily-improved/.global/.0p25/.prcp")
   }
   else if(download_from=="TAMSAT"){
-    prexyaddress<-paste("https://iridl.ldeo.columbia.edu/SOURCES/.UCSB/.CHIRPS/.v2p0/.daily-improved/.global/.0p25/.prcp")
+    prexyaddress<-paste("")
   }
   
   #xystuff<-paste("X",X1,X2,"RANGEEDGES/Y",Y1,Y2,"RANGEEDGES/[X+Y+]average",sep="/")
