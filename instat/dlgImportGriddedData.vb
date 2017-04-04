@@ -47,9 +47,12 @@ Public Class dlgImportGriddedData
         Dim dctDownloadPairs As New Dictionary(Of String, String)
         dctDownloadPairs.Add("CHIRPS", Chr(34) & "CHIRPS" & Chr(34))
         dctDownloadPairs.Add("TAMSAT", Chr(34) & "TAMSAT" & Chr(34))
-
-        'dctDownloadPairs.Add("CHIRPS", Chr(34) & "CHIRPS" & Chr(34))
-        'dctDownloadPairs.Add("TAMSAT", Chr(34) & "TAMSAT" & Chr(34))
+        dctDownloadPairs.Add("NOAA_ARC2", Chr(34) & "NOAA_ARC2" & Chr(34))
+        dctDownloadPairs.Add("NOAA_RFE2", Chr(34) & "NOAA_RFE2" & Chr(34))
+        dctDownloadPairs.Add("NOAA_CMORPH", Chr(34) & "NOAA_CMORPH" & Chr(34))
+        dctDownloadPairs.Add("NASA_TRMM_3B42", Chr(34) & "NASA_TRMM_3B42" & Chr(34))
+        'this is for vegetation......not important at the moment exist for testing. can be removed
+        dctDownloadPairs.Add("VEGETATION_NDVI", Chr(34) & "VEGETATION_NDVI" & Chr(34))
         ucrInputDownloadFrom.SetItems(dctDownloadPairs)
 
 
