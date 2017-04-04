@@ -40,7 +40,7 @@ Public Class dlgOneWayFrequencies
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverOneWayFreq.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverWeights.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrPnlFrequencies.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrPnlFrequencies.SetRCode(ucrBase.clsRsyntax.clsBaseFunction)
         ucrChkWeights.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrPnlSort.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrChkFlip.SetRCode(clsSjpFrq, bReset)
@@ -73,9 +73,12 @@ Public Class dlgOneWayFrequencies
         ucrChkWeights.SetParameter(ucrReceiverWeights.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkWeights.AddToLinkedControls(ucrReceiverWeights, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
+        ucrPnlFrequencies.AddRadioButton(rdoTable)
+        ucrPnlFrequencies.AddRadioButton(rdoGraph)
 
         ucrPnlFrequencies.AddFunctionNamesCondition(rdoTable, "sjt.frq")
         ucrPnlFrequencies.AddFunctionNamesCondition(rdoGraph, "sjp.frq")
+        ucrPnlFrequencies.AddToLinkedControls(ucrChkFlip, {rdoGraph}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
         ucrChkGroupData.SetText("Group Data")
         ucrNudGroups.SetMinMax(2, 100)
@@ -84,7 +87,7 @@ Public Class dlgOneWayFrequencies
         ucrNudGroups.SetParameter(New RParameter("auto.group"))
         ucrChkGroupData.SetParameter(ucrNudGroups.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkGroupData.AddToLinkedControls(ucrNudGroups, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
-
+        ucrChkGroupData.AddFunctionNamesCondition(True, {"sjt.frq", "sjp.frq"})
         ucrChkFlip.SetText("Flip Coordinates")
         ucrChkFlip.SetParameter(New RParameter("coord.flip", 1))
         ucrChkFlip.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
@@ -94,17 +97,11 @@ Public Class dlgOneWayFrequencies
     Private Sub SetDefaults()
         clsSjtFreq = New RFunction
         clsSjpFrq = New RFunction
-        ' ucrPnlFrequencies.AddRadioButton(rdoTable)
-        ' ucrPnlFrequencies.AddRadioButton(rdoGraph)
-        ucrPnlFrequencies.AddToLinkedControls(ucrChkFlip, {rdoGraph}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-
         ucrSelectorOneWayFreq.Reset()
         sdgOneWayFrequencies.ucrSaveGraph.Reset()
         sdgOneWayFrequencies.ucrInputGraphTitle.SetName("")
         sdgOneWayFrequencies.ucrInputHorizontalLabels.Reset()
         sdgOneWayFrequencies.ucrInputVerticalLabels.Reset()
-        ucrReceiverOneWayFreq.SetParameter(New RParameter("data", 1))
-        ucrReceiverOneWayFreq.SetParameterIsRFunction()
         clsSjtFreq.SetRCommand("sjt.frq")
         clsSjtFreq.AddParameter("sort.frq", Chr(34) & "none" & Chr(34))
         'parameter added to have the default to False (R default is TRUE)
@@ -112,7 +109,6 @@ Public Class dlgOneWayFrequencies
         clsSjtFreq.AddParameter("skip.zero", "FALSE")
         'defining the digit default value
         clsSjtFreq.AddParameter("digits", 0)
-
         clsSjpFrq.SetRCommand("sjp.frq")
         clsSjpFrq.AddParameter("sort.frq", Chr(34) & "none" & Chr(34))
         clsSjpFrq.AddParameter("type", Chr(34) & "bar" & Chr(34))
@@ -124,10 +120,16 @@ Public Class dlgOneWayFrequencies
 
     Private Sub TestOkEnabled()
         If Not ucrReceiverOneWayFreq.IsEmpty() Then
-            If (Not ucrChkWeights.Checked) Then
+            If (Not ucrChkWeights.Checked) AndAlso (Not ucrChkGroupData.Checked) Then
                 ucrBase.OKEnabled(True)
-            Else
+            ElseIf ucrChkWeights.Checked Then
                 If Not ucrReceiverWeights.IsEmpty Then
+                    ucrBase.OKEnabled(True)
+                Else
+                    ucrBase.OKEnabled(False)
+                End If
+            ElseIf ucrChkGroupData.Checked
+                If ucrNudGroups.GetText <> "" Then
                     ucrBase.OKEnabled(True)
                 Else
                     ucrBase.OKEnabled(False)
@@ -181,7 +183,6 @@ Public Class dlgOneWayFrequencies
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        ' Link the base function to the sub dialog
         sdgOneWayFrequencies.SetRFunction(clsSjtFreq, clsSjpFrq, bResetSubdialog)
         bResetSubdialog = False
         sdgOneWayFrequencies.ShowDialog()
