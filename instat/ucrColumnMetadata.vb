@@ -30,7 +30,7 @@ Public Class ucrColumnMetadata
         grdVariables.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, True)
         grdVariables.SheetTabNewButtonVisible = False
         grdVariables.SheetTabWidth = 250
-        lstNonEditableColumns.AddRange({"class", "Is_Hidden", "Is_Key", "Is_Calculated", "Has_Dependants", "Dependent_Columns", "Calculated_By", "Dependencies", "Colour"})
+        lstNonEditableColumns.AddRange({"class", "Is_Hidden", "Is_Key", "Is_Calculated", "Has_Dependants", "Dependent_Columns", "Calculated_By", "Dependencies", "Colour", "Scientific"})
         'grdVariables.CurrentWorksheet.Resize(5, 5)
         'grdVariables.ColumnHeaderContextMenuStrip = context.grdData.ColumnHeaderContextMenuStrip
         'grdVariables.RowHeaderContextMenuStrip = context.grdData.RowHeaderContextMenuStrip

@@ -277,8 +277,8 @@ instat_object$set("public", "get_combined_metadata", function(convert_to_charact
       if(length(templist[[j]]) > 1) templist[[j]] <- paste(as.character(templist[[j]]), collapse = ",")
       retlist[i, names(templist[j])] = templist[[j]]
     }
-    if(all(c(name_label, label_label) %in% names(retlist))) retlist <- retlist[ ,c(c(name_label, label_label), setdiff(names(retlist), c(name_label, label_label)))]
-    else if(name_label %in% names(retlist)) retlist <- retlist[ ,c(name_label, setdiff(names(retlist), name_label))]
+    if(all(c(data_name_label, label_label) %in% names(retlist))) retlist <- retlist[ ,c(c(data_name_label, label_label), setdiff(names(retlist), c(data_name_label, label_label)))]
+    else if(data_name_label %in% names(retlist)) retlist <- retlist[ ,c(data_name_label, setdiff(names(retlist), data_name_label))]
     i = i + 1
   }
   if(convert_to_character) return(convert_to_character_matrix(retlist, FALSE))
