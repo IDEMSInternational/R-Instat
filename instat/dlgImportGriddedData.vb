@@ -39,12 +39,12 @@ Public Class dlgImportGriddedData
     End Sub
 
     Private Sub InitialiseDialog()
-        Dim dctDownloadPairs As New Dictionary(Of String, String)
 
         ucrInputDataName.SetParameter(New RParameter("data_names", 0))
         ucrInputDataName.clsParameter.bIncludeArgumentName = False
-
         ucrInputDownloadFrom.SetParameter(New RParameter("download_from", 1))
+
+        Dim dctDownloadPairs As New Dictionary(Of String, String)
         dctDownloadPairs.Add("CHIRPS", Chr(34) & "CHIRPS" & Chr(34))
         dctDownloadPairs.Add("TAMSAT", Chr(34) & "TAMSAT" & Chr(34))
 
@@ -57,26 +57,25 @@ Public Class dlgImportGriddedData
         ucrNudMinLat.SetMinMax(-50, 50)
         ucrNudMinLat.DecimalPlaces = 2
         ucrNudMinLat.Increment = 0.01
-        ucrNudMinLat.bAddRemoveParameter = False
+        'ucrNudMinLat.bAddRemoveParameter = False
         ucrNudMinLat.SetLinkedDisplayControl(lblMinLat)
-
         ucrNudMaxLat.SetParameter(New RParameter("X2", 3))
         ucrNudMaxLat.SetMinMax(-50, 50)
         ucrNudMaxLat.DecimalPlaces = 2
         ucrNudMaxLat.Increment = 0.01
-        ucrNudMaxLat.bAddRemoveParameter = False
+        'ucrNudMaxLat.bAddRemoveParameter = False
         ucrNudMaxLat.SetLinkedDisplayControl(lblMaxLat)
         ucrNudMinLon.SetParameter(New RParameter("Y1", 4))
         ucrNudMinLon.SetMinMax(-180, 180)
         ucrNudMinLon.DecimalPlaces = 2
         ucrNudMinLon.Increment = 0.01
-        ucrNudMinLon.bAddRemoveParameter = False
+        'ucrNudMinLon.bAddRemoveParameter = False
         ucrNudMinLon.SetLinkedDisplayControl(lblMinLon)
         ucrNudMaxLon.SetParameter(New RParameter("Y2", 5))
         ucrNudMaxLon.SetMinMax(-180, 180)
         ucrNudMaxLon.DecimalPlaces = 2
         ucrNudMaxLon.Increment = 0.01
-        ucrNudMaxLon.bAddRemoveParameter = False
+        'ucrNudMaxLon.bAddRemoveParameter = False
         ucrNudMaxLon.SetLinkedDisplayControl(lblMaxLon)
     End Sub
 
