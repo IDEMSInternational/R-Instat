@@ -30,14 +30,13 @@ Partial Class dlgTwoWayFrequencies
         Me.rdoCount = New System.Windows.Forms.RadioButton()
         Me.rdoCell = New System.Windows.Forms.RadioButton()
         Me.rdoRow = New System.Windows.Forms.RadioButton()
-        Me.rdoColumn = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlMargin = New instat.UcrPanel()
-        Me.UcrCheck4 = New instat.ucrCheck()
         Me.grpFrequencies = New System.Windows.Forms.GroupBox()
         Me.ucrChkCount = New instat.ucrCheck()
         Me.ucrChkCell = New instat.ucrCheck()
         Me.ucrChkRow = New instat.ucrCheck()
         Me.ucrChkColumn = New instat.ucrCheck()
+        Me.rdoColumn = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlMargin = New instat.UcrPanel()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.ucrChkFlip = New instat.ucrCheck()
         Me.ucrPnlFreqDisplay = New instat.UcrPanel()
@@ -98,8 +97,7 @@ Partial Class dlgTwoWayFrequencies
         Me.grpMarginType.Controls.Add(Me.rdoRow)
         Me.grpMarginType.Controls.Add(Me.rdoColumn)
         Me.grpMarginType.Controls.Add(Me.ucrPnlMargin)
-        Me.grpMarginType.Controls.Add(Me.UcrCheck4)
-        Me.grpMarginType.Location = New System.Drawing.Point(0, 2)
+        Me.grpMarginType.Location = New System.Drawing.Point(257, 141)
         Me.grpMarginType.Name = "grpMarginType"
         Me.grpMarginType.Size = New System.Drawing.Size(120, 125)
         Me.grpMarginType.TabIndex = 6
@@ -139,40 +137,13 @@ Partial Class dlgTwoWayFrequencies
         Me.rdoRow.Text = "Row (%)"
         Me.rdoRow.UseVisualStyleBackColor = True
         '
-        'rdoColumn
-        '
-        Me.rdoColumn.AutoSize = True
-        Me.rdoColumn.Location = New System.Drawing.Point(18, 72)
-        Me.rdoColumn.Name = "rdoColumn"
-        Me.rdoColumn.Size = New System.Drawing.Size(77, 17)
-        Me.rdoColumn.TabIndex = 2
-        Me.rdoColumn.TabStop = True
-        Me.rdoColumn.Text = "Column (%)"
-        Me.rdoColumn.UseVisualStyleBackColor = True
-        '
-        'ucrPnlMargin
-        '
-        Me.ucrPnlMargin.Location = New System.Drawing.Point(5, 17)
-        Me.ucrPnlMargin.Name = "ucrPnlMargin"
-        Me.ucrPnlMargin.Size = New System.Drawing.Size(109, 102)
-        Me.ucrPnlMargin.TabIndex = 15
-        '
-        'UcrCheck4
-        '
-        Me.UcrCheck4.Checked = False
-        Me.UcrCheck4.Location = New System.Drawing.Point(14, 43)
-        Me.UcrCheck4.Name = "UcrCheck4"
-        Me.UcrCheck4.Size = New System.Drawing.Size(100, 20)
-        Me.UcrCheck4.TabIndex = 24
-        '
         'grpFrequencies
         '
-        Me.grpFrequencies.Controls.Add(Me.grpMarginType)
         Me.grpFrequencies.Controls.Add(Me.ucrChkCount)
         Me.grpFrequencies.Controls.Add(Me.ucrChkCell)
         Me.grpFrequencies.Controls.Add(Me.ucrChkRow)
         Me.grpFrequencies.Controls.Add(Me.ucrChkColumn)
-        Me.grpFrequencies.Location = New System.Drawing.Point(257, 143)
+        Me.grpFrequencies.Location = New System.Drawing.Point(257, 141)
         Me.grpFrequencies.Name = "grpFrequencies"
         Me.grpFrequencies.Size = New System.Drawing.Size(120, 125)
         Me.grpFrequencies.TabIndex = 5
@@ -210,6 +181,24 @@ Partial Class dlgTwoWayFrequencies
         Me.ucrChkColumn.Name = "ucrChkColumn"
         Me.ucrChkColumn.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkColumn.TabIndex = 2
+        '
+        'rdoColumn
+        '
+        Me.rdoColumn.AutoSize = True
+        Me.rdoColumn.Location = New System.Drawing.Point(18, 72)
+        Me.rdoColumn.Name = "rdoColumn"
+        Me.rdoColumn.Size = New System.Drawing.Size(77, 17)
+        Me.rdoColumn.TabIndex = 2
+        Me.rdoColumn.TabStop = True
+        Me.rdoColumn.Text = "Column (%)"
+        Me.rdoColumn.UseVisualStyleBackColor = True
+        '
+        'ucrPnlMargin
+        '
+        Me.ucrPnlMargin.Location = New System.Drawing.Point(9, 17)
+        Me.ucrPnlMargin.Name = "ucrPnlMargin"
+        Me.ucrPnlMargin.Size = New System.Drawing.Size(103, 102)
+        Me.ucrPnlMargin.TabIndex = 15
         '
         'cmdOptions
         '
@@ -295,6 +284,7 @@ Partial Class dlgTwoWayFrequencies
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(418, 364)
+        Me.Controls.Add(Me.grpMarginType)
         Me.Controls.Add(Me.ucrChkFlip)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.grpFrequencies)
@@ -347,5 +337,4 @@ Partial Class dlgTwoWayFrequencies
     Friend WithEvents rdoRow As RadioButton
     Friend WithEvents rdoColumn As RadioButton
     Friend WithEvents ucrPnlMargin As UcrPanel
-    Friend WithEvents UcrCheck4 As ucrCheck
 End Class

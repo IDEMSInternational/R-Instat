@@ -66,15 +66,10 @@ Public Class dlgTwoWayFrequencies
         ucrReceiverWeights.SetParameter(New RParameter("weight.by", 2))
         ucrReceiverWeights.SetParameterIsRFunction()
 
-        'ucrPnlMargin.AddRadioButton(rdoCell)
-        'ucrPnlMargin.AddRadioButton(rdoColumn)
-        'ucrPnlMargin.AddRadioButton(rdoRow)
-
         ucrPnlMargin.SetParameter(New RParameter("margin", 3))
         ucrPnlMargin.AddRadioButton(rdoRow, Chr(34) & "row" & Chr(34))
         ucrPnlMargin.AddRadioButton(rdoColumn, Chr(34) & "col" & Chr(34))
         ucrPnlMargin.AddRadioButton(rdoCell, Chr(34) & "cell" & Chr(34))
-        ucrPnlMargin.SetRDefault(Chr(34) & "row" & Chr(34))
         ucrPnlMargin.bAllowNonConditionValues = False
 
         ucrChkRow.SetText("Row (%)")
@@ -84,7 +79,6 @@ Public Class dlgTwoWayFrequencies
         ucrChkCount.SetText("Count)")
         ucrChkCount.SetParameter(New RParameter("show.obs", 5), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkCount.SetRDefault("TRUE")
-        ' ucrChkCount.AddFunctionNamesCondition(True, "sjt.xtab")
 
         ucrChkColumn.SetText("Column (%)")
         ucrChkColumn.SetParameter(New RParameter("show.col.prc", 6), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
@@ -129,8 +123,8 @@ Public Class dlgTwoWayFrequencies
         ucrReceiverColumnFactor.SetParameter(New RParameter("var.col", 1))
         ucrReceiverColumnFactor.SetParameterIsRFunction()
         clsSjtXtab.SetRCommand("sjt.xtab")
+
         clsSjtXtab.AddParameter("show.obs", "TRUE")
-        clsSjtXtab.AddParameter("show.summary", "TRUE")
 
         clsSjpXtab.SetRCommand("sjp.xtab")
         clsSjpXtab.AddParameter("margin", Chr(34) & "row" & Chr(34))
@@ -215,4 +209,5 @@ Public Class dlgTwoWayFrequencies
         sdgTwoWayFrequencies.ShowDialog()
         TestOkEnabled()
     End Sub
+
 End Class
