@@ -25,7 +25,7 @@ Public Class sdgTwoWayFrequencies
         Dim dctVerticalPositionLabel As New Dictionary(Of String, String)
         Dim dctHorizontalPositionLabel As New Dictionary(Of String, String)
 
-        ucrInputHorizontalLabels.SetParameter(New RParameter("hjust"))
+        ucrInputHorizontalLabels.SetParameter(New RParameter("hjust", 12))
         dctHorizontalPositionLabel.Add("Left", Chr(34) & "left" & Chr(34))
         dctHorizontalPositionLabel.Add("Center", Chr(34) & "center" & Chr(34))
         dctHorizontalPositionLabel.Add("Right", Chr(34) & "right" & Chr(34))
@@ -36,7 +36,7 @@ Public Class sdgTwoWayFrequencies
         ucrInputHorizontalLabels.SetItems(dctHorizontalPositionLabel)
         ucrInputHorizontalLabels.SetRDefault(Chr(34) & "center" & Chr(34))
 
-        ucrInputVerticalLabels.SetParameter(New RParameter("vjust"))
+        ucrInputVerticalLabels.SetParameter(New RParameter("vjust", 11))
         dctVerticalPositionLabel.Add("Left", Chr(34) & "left" & Chr(34))
         dctVerticalPositionLabel.Add("Center", Chr(34) & "center" & Chr(34))
         dctVerticalPositionLabel.Add("Right", Chr(34) & "right" & Chr(34))
@@ -48,45 +48,49 @@ Public Class sdgTwoWayFrequencies
         ucrInputVerticalLabels.SetRDefault(Chr(34) & "bottom" & Chr(34))
 
         ucrChkShowValues.SetText("Show Values")
-        ucrChkShowValues.SetParameter(New RParameter("show.values"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkShowValues.SetParameter(New RParameter("show.values", 4), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkShowValues.SetRDefault("TRUE")
 
 
         ucrChkStack.SetText("Stack Bar Graph")
-        ucrChkStack.SetParameter(New RParameter("bar.pos"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "stack" & Chr(34), strNewValueIfUnchecked:=Chr(34) & "dodge" & Chr(34))
+        ucrChkStack.SetParameter(New RParameter("bar.pos", 10), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "stack" & Chr(34), strNewValueIfUnchecked:=Chr(34) & "dodge" & Chr(34))
         ucrChkStack.SetRDefault(Chr(34) & "dodge" & Chr(34))
 
         ucrChkShowSummary.SetText("Show Summary")
-        ucrChkShowSummary.SetParameter(New RParameter("show.summary"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkShowSummary.SetParameter(New RParameter("show.summary", 8), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
 
-        ucrNudDecimalPlaces.SetParameter(New RParameter("digits"))
+        ucrNudDecimalPlaces.SetParameter(New RParameter("digits", 9))
         ucrNudDecimalPlaces.SetMinMax(0, 4)
 
         ucrChkBackgroundColour.SetText("Totals Background Coloured")
-        ucrChkBackgroundColour.SetParameter(New RParameter("emph.total"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkBackgroundColour.SetParameter(New RParameter("emph.total", 10), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkBackgroundColour.SetRDefault("FALSE")
 
         ucrChkShowCount.SetText("Show Count")
-        ucrChkShowCount.SetParameter(New RParameter("show.n"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkShowCount.SetParameter(New RParameter("show.n", 5), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkShowCount.SetRDefault("TRUE")
 
         ucrChkShowPercentage.SetText("Show Percentage")
-        ucrChkShowPercentage.SetParameter(New RParameter("show.prc"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkShowPercentage.SetParameter(New RParameter("show.prc", 6), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkShowPercentage.SetRDefault("TRUE")
 
-        ucrInputGraphTitle.SetParameter(New RParameter("title"))
-        ucrInputTableTitle.SetParameter(New RParameter("title"))
+        ucrInputGraphTitle.SetParameter(New RParameter("title", 9))
+        ucrInputTableTitle.SetParameter(New RParameter("title", 13))
 
         ucrChkShowModelSummary.SetText("Show Model Summary")
-        ucrChkShowModelSummary.SetParameter(New RParameter("show.summary"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkShowModelSummary.SetParameter(New RParameter("show.summary", 7), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkShowModelSummary.SetRDefault("FALSE")
 
-        ucrPnlGraphType.SetParameter(New RParameter("type"))
+        ucrChkMissingValues.SetText("Missing Values")
+        ucrChkMissingValues.SetParameter(New RParameter("show.na", 11), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkMissingValues.SetRDefault("FALSE")
+
+        ucrPnlGraphType.SetParameter(New RParameter("type", 8))
         ucrPnlGraphType.AddRadioButton(rdoBar, Chr(34) & "bar" & Chr(34))
         ucrPnlGraphType.AddRadioButton(rdoLine, Chr(34) & "line" & Chr(34))
         ucrPnlGraphType.SetRDefault(Chr(34) & "bar" & Chr(34))
 
-        ucrInputCountsName.SetParameter(New RParameter("string.total"))
+        ucrInputCountsName.SetParameter(New RParameter("string.total", 12))
         ucrInputCountsName.SetRDefault(Chr(34) & "Total" & Chr(34))
         ucrChkTotalColumnName.SetText("Total Column Name")
 
