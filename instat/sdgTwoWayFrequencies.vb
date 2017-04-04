@@ -13,42 +13,21 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 Public Class sdgTwoWayFrequencies
-    Public bFirstload As Boolean = True
-    Public bReset As Boolean = True
+    Public bControlsInitialised As Boolean = False
     Private Sub sdgTwoWayFrequencies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-        If bFirstload Then
-            initialiseDialog()
-            bFirstload = False
-            If bReset Then
-                setDefaults()
-            End If
-            SetRCodeForControls(bReset)
-            bReset = False
-            TestOkEnabled()
-            autoTranslate(Me)
-
-        End If
+        autoTranslate(Me)
     End Sub
 
     Private Sub initialiseDialog()
 
     End Sub
-    Private Sub SetDefaults()
 
-    End Sub
-    Private Sub TestOkEnabled()
+    Public Sub SetRFunction(clsNewRFunction As RFunction, Optional bReset As Boolean = False)
 
-    End Sub
-    Private Sub SetRcodeForControls(bReset As Boolean)
 
     End Sub
 
-    Private Sub UcrBase_Load(sender As Object, e As EventArgs) Handles UcrBase.Load
-        SetDefaults()
-        SetRcodeForControls(True)
-        TestOkEnabled()
-    End Sub
 End Class
