@@ -137,7 +137,7 @@ Partial Class dlgViewDescriptives
         Me.MinimizeBox = False
         Me.Name = "dlgViewDescriptives"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "View"
+        Me.Tag = ""
         Me.Text = "View Object"
         Me.ResumeLayout(False)
 

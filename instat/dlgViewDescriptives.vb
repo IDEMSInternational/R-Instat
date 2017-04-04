@@ -13,12 +13,12 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports instat
 Imports instat.Translations
 Public Class dlgViewDescriptives
-    Public bFirstLoad As Boolean = True
+    Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsViewObject As New RFunction
+
     Private Sub dlgViewDescriptives_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -63,10 +63,9 @@ Public Class dlgViewDescriptives
 
     Private Sub SetDefaults()
         clsViewObject = New RFunction
-
         ucrSelectorForViewObject.Reset()
         rdoViewGraph.Checked = True
-        SetIcallType()
+        SetICallType()
         clsViewObject.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_objects")
         ucrBase.clsRsyntax.SetBaseRFunction(clsViewObject)
     End Sub
@@ -85,8 +84,7 @@ Public Class dlgViewDescriptives
         TestOKEnabled()
     End Sub
 
-
-    Private Sub SetIcallType()
+    Private Sub SetICallType()
         If rdoViewGraph.Checked Then
             ucrBase.clsRsyntax.iCallType = 0
         Else
@@ -99,6 +97,6 @@ Public Class dlgViewDescriptives
     End Sub
 
     Private Sub ucrPnlContentsToReview_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlContentsToView.ControlContentsChanged
-        SetIcallType()
+        SetICallType()
     End Sub
 End Class
