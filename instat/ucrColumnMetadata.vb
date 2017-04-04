@@ -30,7 +30,7 @@ Public Class ucrColumnMetadata
         grdVariables.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, True)
         grdVariables.SheetTabNewButtonVisible = False
         grdVariables.SheetTabWidth = 250
-        lstNonEditableColumns.AddRange({"class", "Is_Hidden"})
+        lstNonEditableColumns.AddRange({"class", "Is_Hidden", "Is_Key", "Is_Calculated", "Has_Dependants", "Dependent_Columns", "Calculated_By", "Dependencies", "Colour"})
         'grdVariables.CurrentWorksheet.Resize(5, 5)
         'grdVariables.ColumnHeaderContextMenuStrip = context.grdData.ColumnHeaderContextMenuStrip
         'grdVariables.RowHeaderContextMenuStrip = context.grdData.RowHeaderContextMenuStrip
@@ -49,7 +49,7 @@ Public Class ucrColumnMetadata
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrSheet.AfterCellEdit
         Dim strScript As String = ""
         Dim strComment As String = ""
-        Dim strSignifFiguresLabel As String = "SignifFigures"
+        Dim strSignifFiguresLabel As String = "Signif_Figures"
         Dim strNameLabel As String = "Name"
         Dim strDataTypeLabel As String = "DataType"
         Dim strProperty As String = grdCurrSheet.ColumnHeaders(e.Cell.Column).Text
@@ -57,6 +57,11 @@ Public Class ucrColumnMetadata
         Dim iTemp As Integer
         Dim iNameColumn As Integer = -1
         Dim strNewValue As String
+
+        If e.NewData.ToString() = strPreviousCellText Then
+            e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
+            Exit Sub
+        End If
 
         For i As Integer = 0 To grdCurrSheet.ColumnCount - 1
             If grdCurrSheet.ColumnHeaders(i).Text = strNameLabel Then
@@ -67,28 +72,30 @@ Public Class ucrColumnMetadata
         If iNameColumn <> -1 Then
             strColumn = grdCurrSheet(e.Cell.Row, iNameColumn).ToString()
             If strProperty = strSignifFiguresLabel Then
-                If Not (Integer.TryParse(e.NewData, iTemp) AndAlso iTemp >= 0 AndAlso iTemp <= 16) Then
-                    MsgBox("Significant Figures must be an integer between 0 and 16", MsgBoxStyle.Information, "Invalid Significant Figures")
+                If Not (Integer.TryParse(e.NewData, iTemp) AndAlso iTemp >= 0 AndAlso iTemp <= 22) Then
+                    MsgBox("Significant Figures must be an integer between 0 and 22", MsgBoxStyle.Information, "Invalid Significant Figures")
                     e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
                     Exit Sub
                 Else
                     strNewValue = iTemp
                 End If
             Else
-                strNewValue = Chr(34) & e.NewData & Chr(34)
+                If Decimal.TryParse(e.NewData, iTemp) Then
+                    strNewValue = e.NewData
+                Else
+                    strNewValue = Chr(34) & e.NewData & Chr(34)
+                End If
             End If
             If strProperty = strNameLabel Then
                 If frmMain.clsRLink.IsValidText(e.NewData) Then
-                    strScript = frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data(data_name =" & Chr(34) & grdCurrSheet.Name & Chr(34) & ",column_name = " & Chr(34) & strPreviousCellText & Chr(34) & ",new_val=" & strNewValue & ")"
-                    strComment = "Renamed column"
-                    'ElseIf grdCurrSheet.ColumnHeaders(e.Cell.Column).Text = strDataTypeLabel Then
-                    '    If e.NewData.ToString() <> "factor" AndAlso e.NewData.ToString() <> "numeric" AndAlso e.NewData.ToString() <> "character" Then
-                    '        e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
-                    '    Else
-                    '        strScript = frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type(data_name =" & Chr(34) & grdCurrSheet.Name & Chr(34) & ",col_names = " & Chr(34) & strColumn & Chr(34) & ",to_type=" & Chr(34) & e.NewData & Chr(34) & ")"
-                    '        strComment = "Converted column type"
-                    '        bRunScript = True
-                    '    End If
+                    If frmMain.clsRLink.GetColumnNames(grdCurrSheet.Name).Contains(e.NewData.ToString()) Then
+                        MsgBox(e.NewData.ToString() & " is an existing column name.", MsgBoxStyle.Information, "Invalid Column Name")
+                        e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
+                        Exit Sub
+                    Else
+                        strScript = frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data(data_name =" & Chr(34) & grdCurrSheet.Name & Chr(34) & ",column_name = " & Chr(34) & strPreviousCellText & Chr(34) & ",new_val=" & strNewValue & ")"
+                        strComment = "Renamed column"
+                    End If
                 Else
                     MsgBox(e.NewData & " is not a valid column name.", MsgBoxStyle.Information, "Invalid Column Name")
                     e.EndReason = unvell.ReoGrid.EndEditReason.Cancel

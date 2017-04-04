@@ -210,7 +210,7 @@ data_object$set("public", "set_keys", function(new_keys) {
 #    # }
 #   #}
 #   for(col in colnames(self$get_data_frame())) {
-#     if(!self$is_variables_metadata(display_decimal_label, col)) self$append_to_variables_metadata(col, display_decimal_label, get_default_decimal_places(self$get_columns_from_data(col, use_current_filter = FALSE)))
+#     if(!self$is_variables_metadata(signif_figures_label, col)) self$append_to_variables_metadata(col, signif_figures_label, get_default_significant_figures(self$get_columns_from_data(col, use_current_filter = FALSE)))
 #     #self$append_to_variables_metadata(col, data_type_label, class(private$data[[col]]))
 #     self$append_to_variables_metadata(col, name_label, col)
 #   }
@@ -274,7 +274,7 @@ data_object$set("public", "get_data_frame", function(convert_to_character = FALS
     }
     
     if(convert_to_character) {
-      decimal_places = self$get_variables_metadata(property = display_decimal_label, column = names(out))
+      decimal_places = self$get_variables_metadata(property = signif_figures_label, column = names(out))
       decimal_places[is.na(decimal_places)] <- 0
       return(convert_to_character_matrix(out, TRUE, decimal_places))
     }
@@ -318,6 +318,8 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
     #RLink crashes with bind_rows for data frames with ~50+ columns
     out <- rbind.fill(out)
     out <- as.data.frame(out)
+    if(all(c(name_label, label_label) %in% names(out))) out <- out[ ,c(c(name_label, label_label), setdiff(names(out), c(name_label, label_label)))]
+    else if(name_label %in% names(out)) out <- out[ ,c(name_label, setdiff(names(out), name_label))]
     row.names(out) <- names(self$get_data_frame(use_current_filter = FALSE))
     if(data_type != "all") {
       if(data_type == "numeric") {
@@ -468,7 +470,7 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
     self$data_changed <- TRUE
     self$append_to_variables_metadata(curr_col_name, is_hidden_label, hidden)
     self$append_to_variables_metadata(curr_col_name, name_label, curr_col_name)
-    self$append_to_variables_metadata(curr_col_name, display_decimal_label, get_default_decimal_places(self$get_columns_from_data(curr_col_name, use_current_filter = FALSE)))
+    self$append_to_variables_metadata(curr_col_name, signif_figures_label, get_default_significant_figures(self$get_columns_from_data(curr_col_name, use_current_filter = FALSE)))
     self$variables_metadata_changed <- TRUE
   }
   if(!replaced) {
@@ -803,6 +805,7 @@ data_object$set("public", "is_variables_metadata", function(str, col, return_vec
 
 data_object$set("public", "add_defaults_meta", function() {
   if(!self$is_metadata(is_calculated_label)) self$append_to_metadata(is_calculated_label, FALSE)
+  if(!self$is_metadata(label_label)) self$append_to_metadata(label_label, "")
 }
 )
 
@@ -822,7 +825,10 @@ data_object$set("public", "add_defaults_variables_metadata", function() {
       if(!self$is_variables_metadata(is_hidden_label, column)) self$append_to_variables_metadata(column, property = is_hidden_label, new_val = FALSE)
     }
     self$append_to_variables_metadata(column, name_label, column)
-    self$append_to_variables_metadata(column, display_decimal_label, get_default_decimal_places(self$get_columns_from_data(column, use_current_filter = FALSE)))
+    if(!self$is_variables_metadata(label_label, column)) {
+      self$append_to_variables_metadata(column, label_label, "")
+    }
+    self$append_to_variables_metadata(column, signif_figures_label, get_default_significant_figures(self$get_columns_from_data(column, use_current_filter = FALSE)))
   }
 }
 )
@@ -1023,7 +1029,7 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
     else if(to_type == "character") {
       self$add_columns_to_data(col_name = col_name, col_data = as.character(curr_col))
     }
-    self$append_to_variables_metadata(property = display_decimal_label, col_names = col_name, new_val = get_default_decimal_places(curr_col))
+    self$append_to_variables_metadata(property = signif_figures_label, col_names = col_name, new_val = get_default_significant_figures(curr_col))
   }
   self$data_changed <- TRUE
   self$variables_metadata_changed <- TRUE
