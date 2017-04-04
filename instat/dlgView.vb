@@ -121,7 +121,7 @@ Public Class dlgView
         ucrNudNumberRows.Maximum = ucrSelectorForView.ucrAvailableDataFrames.iDataFrameLength
     End Sub
 
-    Private Sub SetIcallType()
+    Private Sub SetICallType()
         If rdoDispOutputWindow.Checked Then
             ucrBase.clsRsyntax.iCallType = 2
             If ucrChkSpecifyRows.Checked Then
@@ -146,6 +146,6 @@ Public Class dlgView
     End Sub
 
     Private Sub FunctionControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDisplayFrom.ControlValueChanged, ucrPnlDisplayWindow.ControlValueChanged, ucrChkSpecifyRows.ControlValueChanged, ucrReceiverView.ControlValueChanged
-        SetIcallType()
+        SetICallType()
     End Sub
 End Class
