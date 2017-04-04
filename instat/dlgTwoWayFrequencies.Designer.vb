@@ -22,19 +22,17 @@ Partial Class dlgTwoWayFrequencies
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.grpMarginType = New System.Windows.Forms.GroupBox()
-        Me.ucrChkCount = New instat.ucrCheck()
-        Me.ucrChkCell = New instat.ucrCheck()
-        Me.ucrChkColumn = New instat.ucrCheck()
-        Me.ucrChkRow = New instat.ucrCheck()
         Me.lblRowFactor = New System.Windows.Forms.Label()
         Me.lblColumnFactor = New System.Windows.Forms.Label()
+        Me.rdoTable = New System.Windows.Forms.RadioButton()
+        Me.rdoGraph = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlFreqDisplay = New instat.UcrPanel()
         Me.ucrChkWeights = New instat.ucrCheck()
-        Me.ucrChkFlip = New instat.ucrCheck()
+        Me.ucrReceiverWeights = New instat.ucrReceiverSingle()
+        Me.ucrReceiverColumnFactor = New instat.ucrReceiverSingle()
+        Me.ucrReceiverRowFactor = New instat.ucrReceiverSingle()
+        Me.ucrSelectorTwoWayFrequencies = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrChkGraph = New instat.ucrCheck()
-        Me.ucrChkTable = New instat.ucrCheck()
-        Me.ucrSaveGraph = New instat.ucrSave()
         Me.grpFrequencies = New System.Windows.Forms.GroupBox()
         Me.rdoCount = New System.Windows.Forms.RadioButton()
         Me.rdoCell = New System.Windows.Forms.RadioButton()
@@ -42,58 +40,16 @@ Partial Class dlgTwoWayFrequencies
         Me.rdoColumn = New System.Windows.Forms.RadioButton()
         Me.ucrPnlFrequencies = New instat.UcrPanel()
         Me.UcrCheck4 = New instat.ucrCheck()
-        Me.ucrReceiverWeights = New instat.ucrReceiverSingle()
-        Me.ucrReceiverColumnFactor = New instat.ucrReceiverSingle()
-        Me.ucrReceiverRowFactor = New instat.ucrReceiverSingle()
-        Me.ucrSelectorTwoWayFrequencies = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.grpMarginType.SuspendLayout()
+        Me.grpMarginType = New System.Windows.Forms.GroupBox()
+        Me.ucrChkCount = New instat.ucrCheck()
+        Me.ucrChkCell = New instat.ucrCheck()
+        Me.ucrChkRow = New instat.ucrCheck()
+        Me.ucrChkColumn = New instat.ucrCheck()
+        Me.cmdOptions = New System.Windows.Forms.Button()
+        Me.ucrChkFlip = New instat.ucrCheck()
         Me.grpFrequencies.SuspendLayout()
+        Me.grpMarginType.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'grpMarginType
-        '
-        Me.grpMarginType.Controls.Add(Me.ucrChkCount)
-        Me.grpMarginType.Controls.Add(Me.ucrChkCell)
-        Me.grpMarginType.Controls.Add(Me.ucrChkRow)
-        Me.grpMarginType.Controls.Add(Me.ucrChkColumn)
-        Me.grpMarginType.Location = New System.Drawing.Point(257, 140)
-        Me.grpMarginType.Name = "grpMarginType"
-        Me.grpMarginType.Size = New System.Drawing.Size(120, 125)
-        Me.grpMarginType.TabIndex = 5
-        Me.grpMarginType.TabStop = False
-        Me.grpMarginType.Text = "Margin Type"
-        '
-        'ucrChkCount
-        '
-        Me.ucrChkCount.Checked = False
-        Me.ucrChkCount.Location = New System.Drawing.Point(14, 19)
-        Me.ucrChkCount.Name = "ucrChkCount"
-        Me.ucrChkCount.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkCount.TabIndex = 27
-        '
-        'ucrChkCell
-        '
-        Me.ucrChkCell.Checked = False
-        Me.ucrChkCell.Location = New System.Drawing.Point(14, 95)
-        Me.ucrChkCell.Name = "ucrChkCell"
-        Me.ucrChkCell.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkCell.TabIndex = 26
-        '
-        'ucrChkColumn
-        '
-        Me.ucrChkColumn.Checked = False
-        Me.ucrChkColumn.Location = New System.Drawing.Point(14, 69)
-        Me.ucrChkColumn.Name = "ucrChkColumn"
-        Me.ucrChkColumn.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkColumn.TabIndex = 25
-        '
-        'ucrChkRow
-        '
-        Me.ucrChkRow.Checked = False
-        Me.ucrChkRow.Location = New System.Drawing.Point(14, 43)
-        Me.ucrChkRow.Name = "ucrChkRow"
-        Me.ucrChkRow.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkRow.TabIndex = 24
         '
         'lblRowFactor
         '
@@ -113,51 +69,89 @@ Partial Class dlgTwoWayFrequencies
         Me.lblColumnFactor.TabIndex = 3
         Me.lblColumnFactor.Text = "Column Factor:"
         '
+        'rdoTable
+        '
+        Me.rdoTable.AutoSize = True
+        Me.rdoTable.Location = New System.Drawing.Point(12, 227)
+        Me.rdoTable.Name = "rdoTable"
+        Me.rdoTable.Size = New System.Drawing.Size(95, 17)
+        Me.rdoTable.TabIndex = 16
+        Me.rdoTable.TabStop = True
+        Me.rdoTable.Text = "Display (Table)"
+        Me.rdoTable.UseVisualStyleBackColor = True
+        '
+        'rdoGraph
+        '
+        Me.rdoGraph.AutoSize = True
+        Me.rdoGraph.Location = New System.Drawing.Point(12, 251)
+        Me.rdoGraph.Name = "rdoGraph"
+        Me.rdoGraph.Size = New System.Drawing.Size(97, 17)
+        Me.rdoGraph.TabIndex = 17
+        Me.rdoGraph.TabStop = True
+        Me.rdoGraph.Text = "Display (Graph)"
+        Me.rdoGraph.UseVisualStyleBackColor = True
+        '
+        'ucrPnlFreqDisplay
+        '
+        Me.ucrPnlFreqDisplay.Location = New System.Drawing.Point(12, 232)
+        Me.ucrPnlFreqDisplay.Name = "ucrPnlFreqDisplay"
+        Me.ucrPnlFreqDisplay.Size = New System.Drawing.Size(102, 46)
+        Me.ucrPnlFreqDisplay.TabIndex = 19
+        '
         'ucrChkWeights
         '
         Me.ucrChkWeights.Checked = False
-        Me.ucrChkWeights.Location = New System.Drawing.Point(10, 203)
+        Me.ucrChkWeights.Location = New System.Drawing.Point(12, 204)
         Me.ucrChkWeights.Name = "ucrChkWeights"
         Me.ucrChkWeights.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkWeights.TabIndex = 7
         '
-        'ucrChkFlip
+        'ucrReceiverWeights
         '
-        Me.ucrChkFlip.Checked = False
-        Me.ucrChkFlip.Location = New System.Drawing.Point(10, 226)
-        Me.ucrChkFlip.Name = "ucrChkFlip"
-        Me.ucrChkFlip.Size = New System.Drawing.Size(183, 20)
-        Me.ucrChkFlip.TabIndex = 9
+        Me.ucrReceiverWeights.frmParent = Me
+        Me.ucrReceiverWeights.Location = New System.Drawing.Point(114, 203)
+        Me.ucrReceiverWeights.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverWeights.Name = "ucrReceiverWeights"
+        Me.ucrReceiverWeights.Selector = Nothing
+        Me.ucrReceiverWeights.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverWeights.TabIndex = 8
+        '
+        'ucrReceiverColumnFactor
+        '
+        Me.ucrReceiverColumnFactor.frmParent = Me
+        Me.ucrReceiverColumnFactor.Location = New System.Drawing.Point(257, 105)
+        Me.ucrReceiverColumnFactor.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverColumnFactor.Name = "ucrReceiverColumnFactor"
+        Me.ucrReceiverColumnFactor.Selector = Nothing
+        Me.ucrReceiverColumnFactor.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverColumnFactor.TabIndex = 4
+        '
+        'ucrReceiverRowFactor
+        '
+        Me.ucrReceiverRowFactor.frmParent = Me
+        Me.ucrReceiverRowFactor.Location = New System.Drawing.Point(257, 60)
+        Me.ucrReceiverRowFactor.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverRowFactor.Name = "ucrReceiverRowFactor"
+        Me.ucrReceiverRowFactor.Selector = Nothing
+        Me.ucrReceiverRowFactor.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverRowFactor.TabIndex = 2
+        '
+        'ucrSelectorTwoWayFrequencies
+        '
+        Me.ucrSelectorTwoWayFrequencies.bShowHiddenColumns = False
+        Me.ucrSelectorTwoWayFrequencies.bUseCurrentFilter = True
+        Me.ucrSelectorTwoWayFrequencies.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorTwoWayFrequencies.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorTwoWayFrequencies.Name = "ucrSelectorTwoWayFrequencies"
+        Me.ucrSelectorTwoWayFrequencies.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorTwoWayFrequencies.TabIndex = 0
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 434)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 308)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 12
-        '
-        'ucrChkGraph
-        '
-        Me.ucrChkGraph.Checked = False
-        Me.ucrChkGraph.Location = New System.Drawing.Point(10, 278)
-        Me.ucrChkGraph.Name = "ucrChkGraph"
-        Me.ucrChkGraph.Size = New System.Drawing.Size(183, 20)
-        Me.ucrChkGraph.TabIndex = 13
-        '
-        'ucrChkTable
-        '
-        Me.ucrChkTable.Checked = False
-        Me.ucrChkTable.Location = New System.Drawing.Point(10, 252)
-        Me.ucrChkTable.Name = "ucrChkTable"
-        Me.ucrChkTable.Size = New System.Drawing.Size(183, 20)
-        Me.ucrChkTable.TabIndex = 14
-        '
-        'ucrSaveGraph
-        '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 404)
-        Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(294, 24)
-        Me.ucrSaveGraph.TabIndex = 15
         '
         'grpFrequencies
         '
@@ -167,10 +161,10 @@ Partial Class dlgTwoWayFrequencies
         Me.grpFrequencies.Controls.Add(Me.rdoColumn)
         Me.grpFrequencies.Controls.Add(Me.ucrPnlFrequencies)
         Me.grpFrequencies.Controls.Add(Me.UcrCheck4)
-        Me.grpFrequencies.Location = New System.Drawing.Point(257, 273)
+        Me.grpFrequencies.Location = New System.Drawing.Point(0, 0)
         Me.grpFrequencies.Name = "grpFrequencies"
         Me.grpFrequencies.Size = New System.Drawing.Size(120, 125)
-        Me.grpFrequencies.TabIndex = 28
+        Me.grpFrequencies.TabIndex = 32
         Me.grpFrequencies.TabStop = False
         Me.grpFrequencies.Text = "Frequencies"
         '
@@ -233,60 +227,83 @@ Partial Class dlgTwoWayFrequencies
         Me.UcrCheck4.Size = New System.Drawing.Size(100, 20)
         Me.UcrCheck4.TabIndex = 24
         '
-        'ucrReceiverWeights
+        'grpMarginType
         '
-        Me.ucrReceiverWeights.frmParent = Me
-        Me.ucrReceiverWeights.Location = New System.Drawing.Point(114, 203)
-        Me.ucrReceiverWeights.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverWeights.Name = "ucrReceiverWeights"
-        Me.ucrReceiverWeights.Selector = Nothing
-        Me.ucrReceiverWeights.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverWeights.TabIndex = 8
+        Me.grpMarginType.Controls.Add(Me.grpFrequencies)
+        Me.grpMarginType.Controls.Add(Me.ucrChkCount)
+        Me.grpMarginType.Controls.Add(Me.ucrChkCell)
+        Me.grpMarginType.Controls.Add(Me.ucrChkRow)
+        Me.grpMarginType.Controls.Add(Me.ucrChkColumn)
+        Me.grpMarginType.Location = New System.Drawing.Point(257, 147)
+        Me.grpMarginType.Name = "grpMarginType"
+        Me.grpMarginType.Size = New System.Drawing.Size(120, 125)
+        Me.grpMarginType.TabIndex = 31
+        Me.grpMarginType.TabStop = False
+        Me.grpMarginType.Text = "Margin Type"
         '
-        'ucrReceiverColumnFactor
+        'ucrChkCount
         '
-        Me.ucrReceiverColumnFactor.frmParent = Me
-        Me.ucrReceiverColumnFactor.Location = New System.Drawing.Point(257, 105)
-        Me.ucrReceiverColumnFactor.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverColumnFactor.Name = "ucrReceiverColumnFactor"
-        Me.ucrReceiverColumnFactor.Selector = Nothing
-        Me.ucrReceiverColumnFactor.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverColumnFactor.TabIndex = 4
+        Me.ucrChkCount.Checked = False
+        Me.ucrChkCount.Location = New System.Drawing.Point(14, 19)
+        Me.ucrChkCount.Name = "ucrChkCount"
+        Me.ucrChkCount.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkCount.TabIndex = 27
         '
-        'ucrReceiverRowFactor
+        'ucrChkCell
         '
-        Me.ucrReceiverRowFactor.frmParent = Me
-        Me.ucrReceiverRowFactor.Location = New System.Drawing.Point(257, 60)
-        Me.ucrReceiverRowFactor.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverRowFactor.Name = "ucrReceiverRowFactor"
-        Me.ucrReceiverRowFactor.Selector = Nothing
-        Me.ucrReceiverRowFactor.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverRowFactor.TabIndex = 2
+        Me.ucrChkCell.Checked = False
+        Me.ucrChkCell.Location = New System.Drawing.Point(14, 95)
+        Me.ucrChkCell.Name = "ucrChkCell"
+        Me.ucrChkCell.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkCell.TabIndex = 26
         '
-        'ucrSelectorTwoWayFrequencies
+        'ucrChkRow
         '
-        Me.ucrSelectorTwoWayFrequencies.bShowHiddenColumns = False
-        Me.ucrSelectorTwoWayFrequencies.bUseCurrentFilter = True
-        Me.ucrSelectorTwoWayFrequencies.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorTwoWayFrequencies.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorTwoWayFrequencies.Name = "ucrSelectorTwoWayFrequencies"
-        Me.ucrSelectorTwoWayFrequencies.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorTwoWayFrequencies.TabIndex = 0
+        Me.ucrChkRow.Checked = False
+        Me.ucrChkRow.Location = New System.Drawing.Point(14, 43)
+        Me.ucrChkRow.Name = "ucrChkRow"
+        Me.ucrChkRow.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkRow.TabIndex = 24
+        '
+        'ucrChkColumn
+        '
+        Me.ucrChkColumn.Checked = False
+        Me.ucrChkColumn.Location = New System.Drawing.Point(14, 69)
+        Me.ucrChkColumn.Name = "ucrChkColumn"
+        Me.ucrChkColumn.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkColumn.TabIndex = 25
+        '
+        'cmdOptions
+        '
+        Me.cmdOptions.Location = New System.Drawing.Point(308, 277)
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(69, 23)
+        Me.cmdOptions.TabIndex = 32
+        Me.cmdOptions.Text = " Options..."
+        Me.cmdOptions.UseVisualStyleBackColor = True
+        '
+        'ucrChkFlip
+        '
+        Me.ucrChkFlip.Checked = False
+        Me.ucrChkFlip.Location = New System.Drawing.Point(12, 275)
+        Me.ucrChkFlip.Name = "ucrChkFlip"
+        Me.ucrChkFlip.Size = New System.Drawing.Size(183, 20)
+        Me.ucrChkFlip.TabIndex = 33
         '
         'dlgTwoWayFrequencies
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(425, 490)
-        Me.Controls.Add(Me.grpFrequencies)
-        Me.Controls.Add(Me.ucrSaveGraph)
-        Me.Controls.Add(Me.ucrChkTable)
-        Me.Controls.Add(Me.ucrChkGraph)
+        Me.ClientSize = New System.Drawing.Size(425, 366)
+        Me.Controls.Add(Me.ucrChkFlip)
+        Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.grpMarginType)
+        Me.Controls.Add(Me.rdoTable)
+        Me.Controls.Add(Me.rdoGraph)
         Me.Controls.Add(Me.lblColumnFactor)
+        Me.Controls.Add(Me.ucrPnlFreqDisplay)
         Me.Controls.Add(Me.lblRowFactor)
         Me.Controls.Add(Me.ucrChkWeights)
-        Me.Controls.Add(Me.ucrChkFlip)
         Me.Controls.Add(Me.ucrReceiverWeights)
         Me.Controls.Add(Me.ucrReceiverColumnFactor)
         Me.Controls.Add(Me.ucrReceiverRowFactor)
@@ -298,9 +315,9 @@ Partial Class dlgTwoWayFrequencies
         Me.Name = "dlgTwoWayFrequencies"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Two Way Frequencies"
-        Me.grpMarginType.ResumeLayout(False)
         Me.grpFrequencies.ResumeLayout(False)
         Me.grpFrequencies.PerformLayout()
+        Me.grpMarginType.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -312,17 +329,11 @@ Partial Class dlgTwoWayFrequencies
     Friend WithEvents lblColumnFactor As Label
     Friend WithEvents lblRowFactor As Label
     Friend WithEvents ucrChkWeights As ucrCheck
-    Friend WithEvents ucrChkFlip As ucrCheck
     Friend WithEvents ucrReceiverWeights As ucrReceiverSingle
     Friend WithEvents ucrReceiverColumnFactor As ucrReceiverSingle
-    Friend WithEvents grpMarginType As GroupBox
-    Friend WithEvents ucrChkCell As ucrCheck
-    Friend WithEvents ucrChkColumn As ucrCheck
-    Friend WithEvents ucrChkRow As ucrCheck
-    Friend WithEvents ucrChkCount As ucrCheck
-    Friend WithEvents ucrChkTable As ucrCheck
-    Friend WithEvents ucrChkGraph As ucrCheck
-    Friend WithEvents ucrSaveGraph As ucrSave
+    Friend WithEvents rdoTable As RadioButton
+    Friend WithEvents rdoGraph As RadioButton
+    Friend WithEvents ucrPnlFreqDisplay As UcrPanel
     Friend WithEvents grpFrequencies As GroupBox
     Friend WithEvents rdoCount As RadioButton
     Friend WithEvents rdoCell As RadioButton
@@ -330,4 +341,11 @@ Partial Class dlgTwoWayFrequencies
     Friend WithEvents rdoColumn As RadioButton
     Friend WithEvents ucrPnlFrequencies As UcrPanel
     Friend WithEvents UcrCheck4 As ucrCheck
+    Friend WithEvents grpMarginType As GroupBox
+    Friend WithEvents ucrChkCount As ucrCheck
+    Friend WithEvents ucrChkCell As ucrCheck
+    Friend WithEvents ucrChkRow As ucrCheck
+    Friend WithEvents ucrChkColumn As ucrCheck
+    Friend WithEvents cmdOptions As Button
+    Friend WithEvents ucrChkFlip As ucrCheck
 End Class
