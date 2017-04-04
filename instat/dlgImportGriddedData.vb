@@ -53,26 +53,27 @@ Public Class dlgImportGriddedData
         dctDownloadPairs.Add("NASA_TRMM_3B42", Chr(34) & "NASA_TRMM_3B42" & Chr(34))
         ucrInputDownloadFrom.SetItems(dctDownloadPairs)
 
-        ucrNudMinLat.SetParameter(New RParameter("X1", 2))
-        ucrNudMinLat.SetMinMax(-50, 50)
-        ucrNudMinLat.DecimalPlaces = 2
-        ucrNudMinLat.Increment = 0.01
-        ucrNudMinLat.SetLinkedDisplayControl(lblMinLat)
-        ucrNudMaxLat.SetParameter(New RParameter("X2", 3))
-        ucrNudMaxLat.SetMinMax(-50, 50)
-        ucrNudMaxLat.DecimalPlaces = 2
-        ucrNudMaxLat.Increment = 0.01
-        ucrNudMaxLat.SetLinkedDisplayControl(lblMaxLat)
-        ucrNudMinLon.SetParameter(New RParameter("Y1", 4))
+        ucrNudMinLon.SetParameter(New RParameter("X1", 4))
         ucrNudMinLon.SetMinMax(-180, 180)
         ucrNudMinLon.DecimalPlaces = 2
         ucrNudMinLon.Increment = 0.01
         ucrNudMinLon.SetLinkedDisplayControl(lblMinLon)
-        ucrNudMaxLon.SetParameter(New RParameter("Y2", 5))
+        ucrNudMaxLon.SetParameter(New RParameter("X2", 5))
         ucrNudMaxLon.SetMinMax(-180, 180)
         ucrNudMaxLon.DecimalPlaces = 2
         ucrNudMaxLon.Increment = 0.01
         ucrNudMaxLon.SetLinkedDisplayControl(lblMaxLon)
+        ucrNudMinLat.SetParameter(New RParameter("Y1", 2))
+        ucrNudMinLat.SetMinMax(-50, 50)
+        ucrNudMinLat.DecimalPlaces = 2
+        ucrNudMinLat.Increment = 0.01
+        ucrNudMinLat.SetLinkedDisplayControl(lblMinLat)
+        ucrNudMaxLat.SetParameter(New RParameter("Y2", 3))
+        ucrNudMaxLat.SetMinMax(-50, 50)
+        ucrNudMaxLat.DecimalPlaces = 2
+        ucrNudMaxLat.Increment = 0.01
+        ucrNudMaxLat.SetLinkedDisplayControl(lblMaxLat)
+
     End Sub
 
     Private Sub SetDefaults()
@@ -100,5 +101,57 @@ Public Class dlgImportGriddedData
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputDataName.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub nudControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputDownloadFrom.ControlContentsChanged
+        nudRange()
+    End Sub
+    'Private Sub nudControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudMaxLat.ControlContentsChanged, ucrNudMaxLon.ControlContentsChanged, ucrNudMinLat.ControlContentsChanged, ucrNudMinLon.ControlContentsChanged
+    '    nudRange()
+    'End Sub
+
+    Private Sub nudRange()
+        If ucrInputDownloadFrom.cboInput.SelectedItem = "CHIRPS" Then
+            'ucrNudMinLon.SetParameter(New RParameter("X1", 4))
+            ucrNudMinLon.SetMinMax(-180, 180)
+            'ucrNudMinLon.DecimalPlaces = 2
+            'ucrNudMinLon.Increment = 0.01
+            'ucrNudMinLon.SetLinkedDisplayControl(lblMinLon)
+            'ucrNudMaxLon.SetParameter(New RParameter("X2", 5))
+            ucrNudMaxLon.SetMinMax(-180, 180)
+            'ucrNudMaxLon.DecimalPlaces = 2
+            'ucrNudMaxLon.Increment = 0.01
+            'ucrNudMaxLon.SetLinkedDisplayControl(lblMaxLon)
+            'ucrNudMinLat.SetParameter(New RParameter("Y1", 2))
+            ucrNudMinLat.SetMinMax(-50, 50)
+            'ucrNudMinLat.DecimalPlaces = 2
+            'ucrNudMinLat.Increment = 0.01
+            'ucrNudMinLat.SetLinkedDisplayControl(lblMinLat)
+            'ucrNudMaxLat.SetParameter(New RParameter("Y2", 3))
+            ucrNudMaxLat.SetMinMax(-50, 50)
+            'ucrNudMaxLat.DecimalPlaces = 2
+            'ucrNudMaxLat.Increment = 0.01
+        Else
+            'ucrNudMinLon.SetParameter(New RParameter("X1", 4))
+            ucrNudMinLon.SetMinMax(-20, 55)
+            'ucrNudMinLon.DecimalPlaces = 2
+            'ucrNudMinLon.Increment = 0.01
+            'ucrNudMinLon.SetLinkedDisplayControl(lblMinLon)
+            'ucrNudMaxLon.SetParameter(New RParameter("X2", 5))
+            ucrNudMaxLon.SetMinMax(-20, 55)
+            'ucrNudMaxLon.DecimalPlaces = 2
+            'ucrNudMaxLon.Increment = 0.01
+            'ucrNudMaxLon.SetLinkedDisplayControl(lblMaxLon)
+            'ucrNudMinLat.SetParameter(New RParameter("Y1", 2))
+            ucrNudMinLat.SetMinMax(-40, 40)
+            'ucrNudMinLat.DecimalPlaces = 2
+            'ucrNudMinLat.Increment = 0.01
+            'ucrNudMinLat.SetLinkedDisplayControl(lblMinLat)
+            'ucrNudMaxLat.SetParameter(New RParameter("Y2", 3))
+            ucrNudMaxLat.SetMinMax(-40, 40)
+            'ucrNudMaxLat.DecimalPlaces = 2
+            'ucrNudMaxLat.Increment = 0.01
+        End If
+
     End Sub
 End Class

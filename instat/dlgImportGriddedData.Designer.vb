@@ -48,7 +48,7 @@ Partial Class dlgImportGriddedData
         '
         Me.ucrNudMinLat.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMinLat.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMinLat.Location = New System.Drawing.Point(115, 89)
+        Me.ucrNudMinLat.Location = New System.Drawing.Point(115, 121)
         Me.ucrNudMinLat.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMinLat.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMinLat.Name = "ucrNudMinLat"
@@ -60,7 +60,7 @@ Partial Class dlgImportGriddedData
         '
         Me.ucrNudMinLon.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMinLon.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMinLon.Location = New System.Drawing.Point(115, 120)
+        Me.ucrNudMinLon.Location = New System.Drawing.Point(115, 88)
         Me.ucrNudMinLon.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMinLon.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMinLon.Name = "ucrNudMinLon"
@@ -72,7 +72,7 @@ Partial Class dlgImportGriddedData
         '
         Me.ucrNudMaxLon.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxLon.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMaxLon.Location = New System.Drawing.Point(304, 127)
+        Me.ucrNudMaxLon.Location = New System.Drawing.Point(304, 95)
         Me.ucrNudMaxLon.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMaxLon.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxLon.Name = "ucrNudMaxLon"
@@ -84,7 +84,7 @@ Partial Class dlgImportGriddedData
         '
         Me.ucrNudMaxLat.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxLat.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMaxLat.Location = New System.Drawing.Point(304, 96)
+        Me.ucrNudMaxLat.Location = New System.Drawing.Point(304, 128)
         Me.ucrNudMaxLat.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMaxLat.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxLat.Name = "ucrNudMaxLat"
@@ -95,7 +95,7 @@ Partial Class dlgImportGriddedData
         'lblMinLat
         '
         Me.lblMinLat.AutoSize = True
-        Me.lblMinLat.Location = New System.Drawing.Point(12, 89)
+        Me.lblMinLat.Location = New System.Drawing.Point(12, 121)
         Me.lblMinLat.Name = "lblMinLat"
         Me.lblMinLat.Size = New System.Drawing.Size(89, 13)
         Me.lblMinLat.TabIndex = 6
@@ -104,7 +104,7 @@ Partial Class dlgImportGriddedData
         'lblMaxLat
         '
         Me.lblMaxLat.AutoSize = True
-        Me.lblMaxLat.Location = New System.Drawing.Point(177, 96)
+        Me.lblMaxLat.Location = New System.Drawing.Point(177, 128)
         Me.lblMaxLat.Name = "lblMaxLat"
         Me.lblMaxLat.Size = New System.Drawing.Size(92, 13)
         Me.lblMaxLat.TabIndex = 7
@@ -113,7 +113,7 @@ Partial Class dlgImportGriddedData
         'lblMinLon
         '
         Me.lblMinLon.AutoSize = True
-        Me.lblMinLon.Location = New System.Drawing.Point(7, 127)
+        Me.lblMinLon.Location = New System.Drawing.Point(7, 95)
         Me.lblMinLon.Name = "lblMinLon"
         Me.lblMinLon.Size = New System.Drawing.Size(98, 13)
         Me.lblMinLon.TabIndex = 8
@@ -122,7 +122,7 @@ Partial Class dlgImportGriddedData
         'lblMaxLon
         '
         Me.lblMaxLon.AutoSize = True
-        Me.lblMaxLon.Location = New System.Drawing.Point(177, 127)
+        Me.lblMaxLon.Location = New System.Drawing.Point(177, 95)
         Me.lblMaxLon.Name = "lblMaxLon"
         Me.lblMaxLon.Size = New System.Drawing.Size(101, 13)
         Me.lblMaxLon.TabIndex = 9
