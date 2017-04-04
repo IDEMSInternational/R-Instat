@@ -72,7 +72,7 @@ Partial Class dlgTwoWayFrequencies
         'rdoTable
         '
         Me.rdoTable.AutoSize = True
-        Me.rdoTable.Location = New System.Drawing.Point(10, 227)
+        Me.rdoTable.Location = New System.Drawing.Point(10, 225)
         Me.rdoTable.Name = "rdoTable"
         Me.rdoTable.Size = New System.Drawing.Size(95, 17)
         Me.rdoTable.TabIndex = 16
@@ -190,7 +190,7 @@ Partial Class dlgTwoWayFrequencies
         'ucrChkFlip
         '
         Me.ucrChkFlip.Checked = False
-        Me.ucrChkFlip.Location = New System.Drawing.Point(10, 272)
+        Me.ucrChkFlip.Location = New System.Drawing.Point(10, 271)
         Me.ucrChkFlip.Name = "ucrChkFlip"
         Me.ucrChkFlip.Size = New System.Drawing.Size(183, 20)
         Me.ucrChkFlip.TabIndex = 33
@@ -229,9 +229,9 @@ Partial Class dlgTwoWayFrequencies
         '
         'ucrPnlFreqDisplay
         '
-        Me.ucrPnlFreqDisplay.Location = New System.Drawing.Point(10, 232)
+        Me.ucrPnlFreqDisplay.Location = New System.Drawing.Point(8, 225)
         Me.ucrPnlFreqDisplay.Name = "ucrPnlFreqDisplay"
-        Me.ucrPnlFreqDisplay.Size = New System.Drawing.Size(102, 46)
+        Me.ucrPnlFreqDisplay.Size = New System.Drawing.Size(102, 41)
         Me.ucrPnlFreqDisplay.TabIndex = 19
         '
         'ucrChkWeights
