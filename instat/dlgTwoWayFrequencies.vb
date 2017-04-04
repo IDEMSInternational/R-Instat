@@ -66,15 +66,17 @@ Public Class dlgTwoWayFrequencies
         ucrReceiverWeights.SetParameter(New RParameter("weight.by", 2))
         ucrReceiverWeights.SetParameterIsRFunction()
 
-        ucrPnlMargin.AddRadioButton(rdoCell)
-        ucrPnlMargin.AddRadioButton(rdoColumn)
-        ucrPnlMargin.AddRadioButton(rdoRow)
+        'ucrPnlMargin.AddRadioButton(rdoCell)
+        'ucrPnlMargin.AddRadioButton(rdoColumn)
+        'ucrPnlMargin.AddRadioButton(rdoRow)
 
         ucrPnlMargin.SetParameter(New RParameter("margin", 3))
         ucrPnlMargin.AddRadioButton(rdoRow, Chr(34) & "row" & Chr(34))
         ucrPnlMargin.AddRadioButton(rdoColumn, Chr(34) & "col" & Chr(34))
         ucrPnlMargin.AddRadioButton(rdoCell, Chr(34) & "cell" & Chr(34))
         ucrPnlMargin.SetRDefault(Chr(34) & "row" & Chr(34))
+        ucrPnlMargin.bAllowNonConditionValues = False
+
         ucrChkRow.SetText("Row (%)")
         ucrChkRow.SetParameter(New RParameter("show.row.prc", 4), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkRow.SetRDefault("FALSE")
