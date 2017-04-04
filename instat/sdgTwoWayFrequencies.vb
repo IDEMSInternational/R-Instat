@@ -58,6 +58,7 @@ Public Class sdgTwoWayFrequencies
 
         ucrChkShowSummary.SetText("Show Summary")
         ucrChkShowSummary.SetParameter(New RParameter("show.summary", 8), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkShowSummary.SetRDefault("TRUE")
 
         ucrNudDecimalPlaces.SetParameter(New RParameter("digits", 9))
         ucrNudDecimalPlaces.SetMinMax(0, 4)
