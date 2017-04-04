@@ -354,17 +354,17 @@ import_from_iri <- function(download_from, X1, X2,Y1,Y2){
   else if(download_from==" NASA_TRMM_3B42"){
     prexyaddress<-paste(" https://iridl.ldeo.columbia.edu/SOURCES/.NASA/.GES-DAAC/.TRMM_L3/.TRMM_3B42/.v7/.daily/.precipitation")
   }
-  else if(download_from=="vEGETATION_NDVI"){
+  else if(download_from=="VEGETATION_NDVI"){
     prexyaddress<-paste("http://iridl.ldeo.columbia.edu/SOURCES/.USGS/.LandDAAC/.MODIS/.250m/.16day")
+  } 
+  else{
+    stop("Source not specified correctly.")
   }
- 
-  #xystuff<-paste("X",X1,X2,"RANGEEDGES/Y",Y1,Y2,"RANGEEDGES/[X+Y+]average",sep="/")
+  
+  #we need to add time range to get the data
   xystuff<-paste("X",X1,X2,"RANGEEDGES/Y",Y1,Y2,"RANGEEDGES",sep="/")
-  #postxyaddress<-"T+exch+table-+text+text+skipanyNaN+-table+.csv"    
   postxyaddress<-"ngridtable+table-+skipanyNaN+4+-table+.csv" 
-  #postxyaddress=".csv"
   address<-paste(prexyaddress,xystuff,postxyaddress,sep="/")
-  #print(address)    
   file.name <- paste(gaugelocdir,"tmp_iri.csv",sep="/")
   download.file(address,file.name,quiet=FALSE)#,method="curl") # dan updated curl
   dataout <- read.table( paste(gaugelocdir,"tmp_iri.csv",sep="/"),sep=",",header=TRUE)
