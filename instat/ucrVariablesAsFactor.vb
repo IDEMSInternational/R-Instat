@@ -1,10 +1,14 @@
-﻿Public Class ucrVariablesAsFactor
+﻿Imports instat
+
+Public Class ucrVariablesAsFactor
     Public bSingleVariable As Boolean
     Public bFirstLoad As Boolean
     Public ucrFactorReceiver As ucrReceiverSingle
     'The ucrVariablesAsFactor has an associated ucrFactorReceiver, set on the dialog it is living in. In multiple mode, the ucrVariablesAsFactor can receive multiple variables that are then stacked in one and distinguished using a factor variable called "variable". The associated factor receiver will then be set in StackedFactorMode and fix it's content to this "variable" factor. 
     Public WithEvents ucrVariableSelector As ucrSelectorByDataFrame
     Public bForceAsDataFrame As Boolean = True
+    Private strColumnsParameterNameInRFunction As String = "col_names"
+    Public WithEvents Selector As ucrSelector
 
     Public Sub New()
         ' This call is required by the designer.
@@ -79,7 +83,7 @@
             Else strVariablesToStack = Chr(34) & "value" & Chr(34)
             End If
         End If
-            Return strVariablesToStack
+        Return strVariablesToStack
     End Function
 
     'Warning: The two following subs seem obsolete.
@@ -183,8 +187,9 @@
                 ucrFactorReceiver.SetStackedFactorMode(False)
             End If
             ucrSingleVariable.SetMeAsReceiver()
+
         Else
-            ucrSingleVariable.Visible = False
+                ucrSingleVariable.Visible = False
             ucrMultipleVariables.Visible = True
             'TODO need to translate correctly
             cmdVariables.Text = "Multiple Variables"
@@ -257,8 +262,8 @@
             SetSingleTypeStatus(True)
         Else
             SetReceiverStatus()
-            cmdVariables.show()
-            setsingletypestatus(False)
+            cmdVariables.Show()
+            SetSingleTypeStatus(False)
         End If
     End Sub
 
@@ -273,13 +278,27 @@
     End Sub
 
     Public Sub SetParameterIsRFunction()
-        UpdateParameter()
+        ucrSingleVariable.SetParameterIsRFunction()
+        ucrMultipleVariables.SetParameterIsRFunction()
     End Sub
+
+    Public Sub SetParameterIsString()
+        ucrSingleVariable.SetParameterIsString()
+        ucrMultipleVariables.SetParameterIsString()
+    End Sub
+
     Public Sub UpdateParameter()
         If clsParameter Is Nothing Then
             clsParameter = New RParameter
         End If
-        'we dont need parameter as string
         clsParameter.SetArgument(GetVariables(bForceAsDataFrame = True))
+    End Sub
+
+    Public Overrides Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False)
+        If bSingleVariable Then
+            ucrSingleVariable.SetRCode(clsNewCodeStructure, bReset)
+        Else
+            ucrMultipleVariables.SetRCode(clsNewCodeStructure, bReset)
+        End If
     End Sub
 End Class
