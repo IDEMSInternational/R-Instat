@@ -40,8 +40,7 @@ Public Class dlgOneWayFrequencies
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverOneWayFreq.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverWeights.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrPnlFrequencies.SetRCode(clsSjtFreq, bReset)
-        ucrPnlFrequencies.SetRCode(clsSjpFrq, bReset)
+        ucrPnlFrequencies.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrChkWeights.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrPnlSort.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrChkFlip.SetRCode(clsSjpFrq, bReset)
@@ -76,6 +75,7 @@ Public Class dlgOneWayFrequencies
 
 
         ucrPnlFrequencies.AddFunctionNamesCondition(rdoTable, "sjt.frq")
+        ucrPnlFrequencies.AddFunctionNamesCondition(rdoGraph, "sjp.frq")
 
         ucrChkGroupData.SetText("Group Data")
         ucrNudGroups.SetMinMax(2, 100)
