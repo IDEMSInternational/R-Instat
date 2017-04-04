@@ -71,7 +71,7 @@ Public Class dlgRugPlot
         ucrVariablesAsFactorForRugPlot.SetSelector(ucrRugPlotSelector)
         ucrVariablesAsFactorForRugPlot.SetIncludedDataType({"factor", "numeric"})
         ucrVariablesAsFactorForRugPlot.SetParameter(New RParameter("y"))
-        ' ucrVariablesAsFactorForRugPlot.SetParameterIsRFunction()
+        ucrVariablesAsFactorForRugPlot.SetParameterIsRFunction()
 
         ucrReceiverX.Selector = ucrRugPlotSelector
         ucrReceiverX.SetIncludedDataTypes({"factor", "numeric"})
