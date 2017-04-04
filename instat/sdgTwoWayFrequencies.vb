@@ -62,7 +62,7 @@ Public Class sdgTwoWayFrequencies
         ucrNudDecimalPlaces.SetParameter(New RParameter("digits", 9))
         ucrNudDecimalPlaces.SetMinMax(0, 4)
 
-        ucrChkBackgroundColour.SetText("Totals Background Coloured")
+        ucrChkBackgroundColour.SetText("Totals Column/Row Background Highlighted")
         ucrChkBackgroundColour.SetParameter(New RParameter("emph.total", 10), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkBackgroundColour.SetRDefault("FALSE")
 
@@ -81,7 +81,7 @@ Public Class sdgTwoWayFrequencies
         ucrChkShowModelSummary.SetParameter(New RParameter("show.summary", 7), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkShowModelSummary.SetRDefault("FALSE")
 
-        ucrChkMissingValues.SetText("Missing Values")
+        ucrChkMissingValues.SetText("Show Missing Values")
         ucrChkMissingValues.SetParameter(New RParameter("show.na", 11), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkMissingValues.SetRDefault("FALSE")
 
