@@ -270,12 +270,14 @@ instat_object$set("public", "get_variables_metadata", function(data_name, data_t
 
 instat_object$set("public", "get_combined_metadata", function(convert_to_character = FALSE) { 
   retlist <- data.frame()
+  i = 1
   for (curr_obj in private$.data_objects) {
     templist = curr_obj$get_metadata()
     for ( j in (1:length(templist)) ) {
       if(length(templist[[j]]) > 1) templist[[j]] <- paste(as.character(templist[[j]]), collapse = ",")
-      retlist[curr_obj$get_metadata(data_name_label), names(templist[j])] = templist[[j]]
+      retlist[i, names(templist[j])] = templist[[j]]
     }
+    i = i + 1
   }
   if(convert_to_character) return(convert_to_character_matrix(retlist, FALSE))
   else return(retlist)

@@ -33,7 +33,7 @@ Public Class dlgExportToOpenRefine
 
     Private Sub SetDefaults()
         Dim clsDefaultRefine, clsDefaultWrite As New RFunction
-
+        ucrBase.OKEnabled(False)
         ucrOpenRefineDataFrame.Reset()
         ucrInputDatasetName.Reset()
 
