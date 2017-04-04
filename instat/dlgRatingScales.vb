@@ -52,7 +52,7 @@ Public Class dlgRatingScales
         ucrChkFlip.SetRCode(clsSjpStackFrq, bReset)
         ucrChkGraph.SetRCode(clsSjpStackFrq, bReset)
         ucrChkGraph.SetRCode(clsSjplikert, bReset)
-
+        ucrNudNeutralLevel.SetRCode(clsSjplikert, bReset)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -109,6 +109,9 @@ Public Class dlgRatingScales
         ucrPnlSjpStackFrq.AddRadioButton(rdoHighAscending, Chr(34) & "posc.asc" & Chr(34))
         ucrPnlSjpStackFrq.AddRadioButton(rdoHighDescending, Chr(34) & "posc.desc" & Chr(34))
         ucrPnlSjpStackFrq.SetRDefault(Chr(34) & "NULL" & Chr(34))
+
+        ucrNudNeutralLevel.SetParameter(New RParameter("cat.neutral", 3))
+
 
     End Sub
 
