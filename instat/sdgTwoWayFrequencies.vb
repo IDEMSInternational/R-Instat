@@ -21,7 +21,7 @@ Public Class sdgTwoWayFrequencies
         autoTranslate(Me)
     End Sub
 
-    Private Sub initialiseDialog()
+    Private Sub InitialiseControls()
 
     End Sub
 
