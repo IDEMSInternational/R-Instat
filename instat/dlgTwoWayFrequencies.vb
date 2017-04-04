@@ -33,6 +33,7 @@ Public Class dlgTwoWayFrequencies
         End If
         SetRCodeForControls(bReset)
         bReset = False
+        TestOkEnabled()
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
@@ -106,11 +107,10 @@ Public Class dlgTwoWayFrequencies
         ucrPnlFreqDisplay.AddToLinkedControls(ucrChkRow, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFreqDisplay.AddToLinkedControls(ucrChkCell, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFreqDisplay.AddToLinkedControls(ucrChkColumn, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkCell.SetLinkedDisplayControl(grpFrequencies)
         ucrPnlFreqDisplay.AddToLinkedControls(ucrChkFlip, {rdoGraph}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrPnlFreqDisplay.AddToLinkedControls(ucrPnlMargin, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrPnlMargin.SetLinkedDisplayControl(grpMarginType)
+
     End Sub
 
     Private Sub SetDefaults()
