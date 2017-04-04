@@ -24,7 +24,7 @@ Partial Class dlgRegularSequence
     Private Sub InitializeComponent()
         Me.grpSequenceDefinition = New System.Windows.Forms.GroupBox()
         Me.ucrNudRepeatValues = New instat.ucrNud()
-        Me.ucrInputInStepsof = New instat.ucrInputTextBox()
+        Me.ucrInputInStepsOf = New instat.ucrInputTextBox()
         Me.ucrInputTo = New instat.ucrInputTextBox()
         Me.ucrInputFrom = New instat.ucrInputTextBox()
         Me.ucrDataFrameLengthForRegularSequence = New instat.ucrDataFrameLength()
@@ -34,7 +34,7 @@ Partial Class dlgRegularSequence
         Me.chkDefineAsFactor = New System.Windows.Forms.CheckBox()
         Me.lblTimes1 = New System.Windows.Forms.Label()
         Me.lblRepeatValues = New System.Windows.Forms.Label()
-        Me.lblSteps = New System.Windows.Forms.Label()
+        Me.lblInStepsOf = New System.Windows.Forms.Label()
         Me.lblTo = New System.Windows.Forms.Label()
         Me.lblFrom = New System.Windows.Forms.Label()
         Me.lblPreview = New System.Windows.Forms.Label()
@@ -54,7 +54,7 @@ Partial Class dlgRegularSequence
         'grpSequenceDefinition
         '
         Me.grpSequenceDefinition.Controls.Add(Me.ucrNudRepeatValues)
-        Me.grpSequenceDefinition.Controls.Add(Me.ucrInputInStepsof)
+        Me.grpSequenceDefinition.Controls.Add(Me.ucrInputInStepsOf)
         Me.grpSequenceDefinition.Controls.Add(Me.ucrInputTo)
         Me.grpSequenceDefinition.Controls.Add(Me.ucrInputFrom)
         Me.grpSequenceDefinition.Controls.Add(Me.ucrDataFrameLengthForRegularSequence)
@@ -64,11 +64,11 @@ Partial Class dlgRegularSequence
         Me.grpSequenceDefinition.Controls.Add(Me.chkDefineAsFactor)
         Me.grpSequenceDefinition.Controls.Add(Me.lblTimes1)
         Me.grpSequenceDefinition.Controls.Add(Me.lblRepeatValues)
-        Me.grpSequenceDefinition.Controls.Add(Me.lblSteps)
+        Me.grpSequenceDefinition.Controls.Add(Me.lblInStepsOf)
         Me.grpSequenceDefinition.Controls.Add(Me.lblTo)
         Me.grpSequenceDefinition.Controls.Add(Me.lblFrom)
         Me.grpSequenceDefinition.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.grpSequenceDefinition.Location = New System.Drawing.Point(10, 111)
+        Me.grpSequenceDefinition.Location = New System.Drawing.Point(10, 113)
         Me.grpSequenceDefinition.Name = "grpSequenceDefinition"
         Me.grpSequenceDefinition.Size = New System.Drawing.Size(205, 204)
         Me.grpSequenceDefinition.TabIndex = 4
@@ -81,23 +81,23 @@ Partial Class dlgRegularSequence
         '
         Me.ucrNudRepeatValues.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRepeatValues.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudRepeatValues.Location = New System.Drawing.Point(99, 100)
+        Me.ucrNudRepeatValues.Location = New System.Drawing.Point(99, 102)
         Me.ucrNudRepeatValues.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudRepeatValues.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRepeatValues.Name = "ucrNudRepeatValues"
-        Me.ucrNudRepeatValues.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudRepeatValues.Size = New System.Drawing.Size(50, 23)
         Me.ucrNudRepeatValues.TabIndex = 7
         Me.ucrNudRepeatValues.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrInputInStepsof
+        'ucrInputInStepsOf
         '
-        Me.ucrInputInStepsof.AddQuotesIfUnrecognised = True
-        Me.ucrInputInStepsof.IsMultiline = False
-        Me.ucrInputInStepsof.IsReadOnly = False
-        Me.ucrInputInStepsof.Location = New System.Drawing.Point(99, 75)
-        Me.ucrInputInStepsof.Name = "ucrInputInStepsof"
-        Me.ucrInputInStepsof.Size = New System.Drawing.Size(50, 20)
-        Me.ucrInputInStepsof.TabIndex = 5
+        Me.ucrInputInStepsOf.AddQuotesIfUnrecognised = True
+        Me.ucrInputInStepsOf.IsMultiline = False
+        Me.ucrInputInStepsOf.IsReadOnly = False
+        Me.ucrInputInStepsOf.Location = New System.Drawing.Point(99, 76)
+        Me.ucrInputInStepsOf.Name = "ucrInputInStepsOf"
+        Me.ucrInputInStepsOf.Size = New System.Drawing.Size(50, 23)
+        Me.ucrInputInStepsOf.TabIndex = 5
         '
         'ucrInputTo
         '
@@ -106,7 +106,7 @@ Partial Class dlgRegularSequence
         Me.ucrInputTo.IsReadOnly = False
         Me.ucrInputTo.Location = New System.Drawing.Point(99, 50)
         Me.ucrInputTo.Name = "ucrInputTo"
-        Me.ucrInputTo.Size = New System.Drawing.Size(50, 20)
+        Me.ucrInputTo.Size = New System.Drawing.Size(50, 23)
         Me.ucrInputTo.TabIndex = 3
         '
         'ucrInputFrom
@@ -114,14 +114,14 @@ Partial Class dlgRegularSequence
         Me.ucrInputFrom.AddQuotesIfUnrecognised = True
         Me.ucrInputFrom.IsMultiline = False
         Me.ucrInputFrom.IsReadOnly = False
-        Me.ucrInputFrom.Location = New System.Drawing.Point(99, 25)
+        Me.ucrInputFrom.Location = New System.Drawing.Point(99, 24)
         Me.ucrInputFrom.Name = "ucrInputFrom"
-        Me.ucrInputFrom.Size = New System.Drawing.Size(50, 20)
+        Me.ucrInputFrom.Size = New System.Drawing.Size(50, 23)
         Me.ucrInputFrom.TabIndex = 1
         '
         'ucrDataFrameLengthForRegularSequence
         '
-        Me.ucrDataFrameLengthForRegularSequence.Location = New System.Drawing.Point(98, 130)
+        Me.ucrDataFrameLengthForRegularSequence.Location = New System.Drawing.Point(98, 128)
         Me.ucrDataFrameLengthForRegularSequence.Name = "ucrDataFrameLengthForRegularSequence"
         Me.ucrDataFrameLengthForRegularSequence.Size = New System.Drawing.Size(51, 23)
         Me.ucrDataFrameLengthForRegularSequence.TabIndex = 10
@@ -129,7 +129,7 @@ Partial Class dlgRegularSequence
         '
         'dtpSelectorB
         '
-        Me.dtpSelectorB.Location = New System.Drawing.Point(98, 51)
+        Me.dtpSelectorB.Location = New System.Drawing.Point(98, 49)
         Me.dtpSelectorB.Name = "dtpSelectorB"
         Me.dtpSelectorB.Size = New System.Drawing.Size(87, 20)
         Me.dtpSelectorB.TabIndex = 5
@@ -144,7 +144,7 @@ Partial Class dlgRegularSequence
         'lblLength
         '
         Me.lblLength.AutoSize = True
-        Me.lblLength.Location = New System.Drawing.Point(10, 133)
+        Me.lblLength.Location = New System.Drawing.Point(10, 132)
         Me.lblLength.Name = "lblLength"
         Me.lblLength.Size = New System.Drawing.Size(43, 13)
         Me.lblLength.TabIndex = 9
@@ -177,40 +177,40 @@ Partial Class dlgRegularSequence
         'lblRepeatValues
         '
         Me.lblRepeatValues.AutoSize = True
-        Me.lblRepeatValues.Location = New System.Drawing.Point(10, 105)
+        Me.lblRepeatValues.Location = New System.Drawing.Point(10, 106)
         Me.lblRepeatValues.Name = "lblRepeatValues"
         Me.lblRepeatValues.Size = New System.Drawing.Size(80, 13)
         Me.lblRepeatValues.TabIndex = 6
         Me.lblRepeatValues.Tag = "Repeat_values"
         Me.lblRepeatValues.Text = "Repeat Values:"
         '
-        'lblSteps
+        'lblInStepsOf
         '
-        Me.lblSteps.AutoSize = True
-        Me.lblSteps.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSteps.Location = New System.Drawing.Point(10, 81)
-        Me.lblSteps.Name = "lblSteps"
-        Me.lblSteps.Size = New System.Drawing.Size(61, 13)
-        Me.lblSteps.TabIndex = 4
-        Me.lblSteps.Tag = "In_steps_of"
-        Me.lblSteps.Text = "In Steps of:"
+        Me.lblInStepsOf.AutoSize = True
+        Me.lblInStepsOf.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblInStepsOf.Location = New System.Drawing.Point(10, 80)
+        Me.lblInStepsOf.Name = "lblInStepsOf"
+        Me.lblInStepsOf.Size = New System.Drawing.Size(63, 13)
+        Me.lblInStepsOf.TabIndex = 4
+        Me.lblInStepsOf.Tag = "In_steps_Of"
+        Me.lblInStepsOf.Text = "In Steps Of:"
         '
         'lblTo
         '
         Me.lblTo.AutoSize = True
         Me.lblTo.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTo.Location = New System.Drawing.Point(10, 51)
+        Me.lblTo.Location = New System.Drawing.Point(10, 54)
         Me.lblTo.Name = "lblTo"
         Me.lblTo.Size = New System.Drawing.Size(23, 13)
         Me.lblTo.TabIndex = 2
-        Me.lblTo.Tag = "To"
+        Me.lblTo.Tag = ""
         Me.lblTo.Text = "To:"
         '
         'lblFrom
         '
         Me.lblFrom.AutoSize = True
         Me.lblFrom.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblFrom.Location = New System.Drawing.Point(10, 24)
+        Me.lblFrom.Location = New System.Drawing.Point(10, 28)
         Me.lblFrom.Name = "lblFrom"
         Me.lblFrom.Size = New System.Drawing.Size(33, 13)
         Me.lblFrom.TabIndex = 0
@@ -252,7 +252,7 @@ Partial Class dlgRegularSequence
         Me.grpSequenceType.Controls.Add(Me.ucrPnlSequenceType)
         Me.grpSequenceType.Location = New System.Drawing.Point(10, 60)
         Me.grpSequenceType.Name = "grpSequenceType"
-        Me.grpSequenceType.Size = New System.Drawing.Size(199, 52)
+        Me.grpSequenceType.Size = New System.Drawing.Size(205, 52)
         Me.grpSequenceType.TabIndex = 1
         Me.grpSequenceType.TabStop = False
         Me.grpSequenceType.Text = "Sequence Type"
@@ -292,7 +292,7 @@ Partial Class dlgRegularSequence
         '
         'ucrNewColumnName
         '
-        Me.ucrNewColumnName.Location = New System.Drawing.Point(11, 321)
+        Me.ucrNewColumnName.Location = New System.Drawing.Point(10, 321)
         Me.ucrNewColumnName.Name = "ucrNewColumnName"
         Me.ucrNewColumnName.Size = New System.Drawing.Size(294, 24)
         Me.ucrNewColumnName.TabIndex = 6
@@ -343,7 +343,7 @@ Partial Class dlgRegularSequence
 
     End Sub
     Friend WithEvents grpSequenceDefinition As GroupBox
-    Friend WithEvents lblSteps As Label
+    Friend WithEvents lblInStepsOf As Label
     Friend WithEvents lblTo As Label
     Friend WithEvents lblFrom As Label
     Friend WithEvents ucrBase As ucrButtons
@@ -363,7 +363,7 @@ Partial Class dlgRegularSequence
     Friend WithEvents rdoNumeric As RadioButton
     Friend WithEvents rdoDates As RadioButton
     Friend WithEvents ucrPnlSequenceType As UcrPanel
-    Friend WithEvents ucrInputInStepsof As ucrInputTextBox
+    Friend WithEvents ucrInputInStepsOf As ucrInputTextBox
     Friend WithEvents ucrInputTo As ucrInputTextBox
     Friend WithEvents ucrInputFrom As ucrInputTextBox
     Friend WithEvents ucrNudRepeatValues As ucrNud
