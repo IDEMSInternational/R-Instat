@@ -26,31 +26,31 @@ Partial Class sdgTwoWayFrequencies
         Me.tbTable = New System.Windows.Forms.TabPage()
         Me.grpTableOptions = New System.Windows.Forms.GroupBox()
         Me.lblNumberOfDecimals = New System.Windows.Forms.Label()
-        Me.lblGraphTitle = New System.Windows.Forms.Label()
-        Me.tbGraph = New System.Windows.Forms.TabPage()
-        Me.grpGraphOptions = New System.Windows.Forms.GroupBox()
-        Me.lblTitle = New System.Windows.Forms.Label()
-        Me.lblHjust = New System.Windows.Forms.Label()
-        Me.lblVjust = New System.Windows.Forms.Label()
-        Me.grpGraphType = New System.Windows.Forms.GroupBox()
-        Me.rdoLine = New System.Windows.Forms.RadioButton()
-        Me.rdoBar = New System.Windows.Forms.RadioButton()
         Me.ucrNudDecimalPlaces = New instat.ucrNud()
+        Me.lblGraphTitle = New System.Windows.Forms.Label()
         Me.ucrInputTableTitle = New instat.ucrInputTextBox()
         Me.ucrChkTotalColumnName = New instat.ucrCheck()
         Me.ucrInputCountsName = New instat.ucrInputTextBox()
         Me.ucrChkMissingValues = New instat.ucrCheck()
         Me.ucrChkBackgroundColour = New instat.ucrCheck()
         Me.ucrChkShowSummary = New instat.ucrCheck()
+        Me.tbGraph = New System.Windows.Forms.TabPage()
         Me.ucrSaveGraph = New instat.ucrSave()
+        Me.grpGraphOptions = New System.Windows.Forms.GroupBox()
         Me.ucrChkStack = New instat.ucrCheck()
         Me.ucrChkShowValues = New instat.ucrCheck()
+        Me.lblTitle = New System.Windows.Forms.Label()
+        Me.lblHjust = New System.Windows.Forms.Label()
+        Me.lblVjust = New System.Windows.Forms.Label()
         Me.ucrInputGraphTitle = New instat.ucrInputTextBox()
         Me.ucrInputHorizontalLabels = New instat.ucrInputComboBox()
         Me.ucrInputVerticalLabels = New instat.ucrInputComboBox()
         Me.ucrChkShowModelSummary = New instat.ucrCheck()
         Me.ucrChkShowPercentage = New instat.ucrCheck()
         Me.ucrChkShowCount = New instat.ucrCheck()
+        Me.grpGraphType = New System.Windows.Forms.GroupBox()
+        Me.rdoLine = New System.Windows.Forms.RadioButton()
+        Me.rdoBar = New System.Windows.Forms.RadioButton()
         Me.ucrPnlGraphType = New instat.UcrPanel()
         Me.ucrBaseSubDialogue = New instat.ucrButtonsSubdialogue()
         Me.tbOneWayFrequencies.SuspendLayout()
@@ -109,109 +109,6 @@ Partial Class sdgTwoWayFrequencies
         Me.lblNumberOfDecimals.TabIndex = 64
         Me.lblNumberOfDecimals.Text = "Decimal places for percentages:"
         '
-        'lblGraphTitle
-        '
-        Me.lblGraphTitle.AutoSize = True
-        Me.lblGraphTitle.Location = New System.Drawing.Point(3, 133)
-        Me.lblGraphTitle.Name = "lblGraphTitle"
-        Me.lblGraphTitle.Size = New System.Drawing.Size(62, 13)
-        Me.lblGraphTitle.TabIndex = 62
-        Me.lblGraphTitle.Text = "Graph Title:"
-        '
-        'tbGraph
-        '
-        Me.tbGraph.Controls.Add(Me.ucrSaveGraph)
-        Me.tbGraph.Controls.Add(Me.grpGraphOptions)
-        Me.tbGraph.Controls.Add(Me.grpGraphType)
-        Me.tbGraph.Location = New System.Drawing.Point(4, 22)
-        Me.tbGraph.Name = "tbGraph"
-        Me.tbGraph.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbGraph.Size = New System.Drawing.Size(313, 309)
-        Me.tbGraph.TabIndex = 1
-        Me.tbGraph.Text = "Graph"
-        Me.tbGraph.UseVisualStyleBackColor = True
-        '
-        'grpGraphOptions
-        '
-        Me.grpGraphOptions.Controls.Add(Me.ucrChkStack)
-        Me.grpGraphOptions.Controls.Add(Me.ucrChkShowValues)
-        Me.grpGraphOptions.Controls.Add(Me.lblTitle)
-        Me.grpGraphOptions.Controls.Add(Me.lblHjust)
-        Me.grpGraphOptions.Controls.Add(Me.lblVjust)
-        Me.grpGraphOptions.Controls.Add(Me.ucrInputGraphTitle)
-        Me.grpGraphOptions.Controls.Add(Me.ucrInputHorizontalLabels)
-        Me.grpGraphOptions.Controls.Add(Me.ucrInputVerticalLabels)
-        Me.grpGraphOptions.Controls.Add(Me.ucrChkShowModelSummary)
-        Me.grpGraphOptions.Controls.Add(Me.ucrChkShowPercentage)
-        Me.grpGraphOptions.Controls.Add(Me.ucrChkShowCount)
-        Me.grpGraphOptions.Location = New System.Drawing.Point(6, 59)
-        Me.grpGraphOptions.Name = "grpGraphOptions"
-        Me.grpGraphOptions.Size = New System.Drawing.Size(300, 213)
-        Me.grpGraphOptions.TabIndex = 37
-        Me.grpGraphOptions.TabStop = False
-        Me.grpGraphOptions.Text = "Graph Options"
-        '
-        'lblTitle
-        '
-        Me.lblTitle.AutoSize = True
-        Me.lblTitle.Location = New System.Drawing.Point(9, 190)
-        Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(62, 13)
-        Me.lblTitle.TabIndex = 58
-        Me.lblTitle.Text = "Graph Title:"
-        '
-        'lblHjust
-        '
-        Me.lblHjust.AutoSize = True
-        Me.lblHjust.Location = New System.Drawing.Point(9, 163)
-        Me.lblHjust.Name = "lblHjust"
-        Me.lblHjust.Size = New System.Drawing.Size(126, 13)
-        Me.lblHjust.TabIndex = 57
-        Me.lblHjust.Text = "Horizontal Label Position:"
-        '
-        'lblVjust
-        '
-        Me.lblVjust.AutoSize = True
-        Me.lblVjust.Location = New System.Drawing.Point(9, 138)
-        Me.lblVjust.Name = "lblVjust"
-        Me.lblVjust.Size = New System.Drawing.Size(114, 13)
-        Me.lblVjust.TabIndex = 55
-        Me.lblVjust.Text = "Vertical Label Position:"
-        '
-        'grpGraphType
-        '
-        Me.grpGraphType.Controls.Add(Me.rdoLine)
-        Me.grpGraphType.Controls.Add(Me.rdoBar)
-        Me.grpGraphType.Controls.Add(Me.ucrPnlGraphType)
-        Me.grpGraphType.Location = New System.Drawing.Point(6, 6)
-        Me.grpGraphType.Name = "grpGraphType"
-        Me.grpGraphType.Size = New System.Drawing.Size(300, 48)
-        Me.grpGraphType.TabIndex = 33
-        Me.grpGraphType.TabStop = False
-        Me.grpGraphType.Text = "Type of Graph"
-        '
-        'rdoLine
-        '
-        Me.rdoLine.AutoSize = True
-        Me.rdoLine.Location = New System.Drawing.Point(163, 19)
-        Me.rdoLine.Name = "rdoLine"
-        Me.rdoLine.Size = New System.Drawing.Size(77, 17)
-        Me.rdoLine.TabIndex = 7
-        Me.rdoLine.TabStop = True
-        Me.rdoLine.Text = "Line Graph"
-        Me.rdoLine.UseVisualStyleBackColor = True
-        '
-        'rdoBar
-        '
-        Me.rdoBar.AutoSize = True
-        Me.rdoBar.Location = New System.Drawing.Point(12, 19)
-        Me.rdoBar.Name = "rdoBar"
-        Me.rdoBar.Size = New System.Drawing.Size(73, 17)
-        Me.rdoBar.TabIndex = 5
-        Me.rdoBar.TabStop = True
-        Me.rdoBar.Text = "Bar Graph"
-        Me.rdoBar.UseVisualStyleBackColor = True
-        '
         'ucrNudDecimalPlaces
         '
         Me.ucrNudDecimalPlaces.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
@@ -223,6 +120,15 @@ Partial Class sdgTwoWayFrequencies
         Me.ucrNudDecimalPlaces.Size = New System.Drawing.Size(50, 20)
         Me.ucrNudDecimalPlaces.TabIndex = 63
         Me.ucrNudDecimalPlaces.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblGraphTitle
+        '
+        Me.lblGraphTitle.AutoSize = True
+        Me.lblGraphTitle.Location = New System.Drawing.Point(3, 133)
+        Me.lblGraphTitle.Name = "lblGraphTitle"
+        Me.lblGraphTitle.Size = New System.Drawing.Size(62, 13)
+        Me.lblGraphTitle.TabIndex = 62
+        Me.lblGraphTitle.Text = "Graph Title:"
         '
         'ucrInputTableTitle
         '
@@ -276,12 +182,45 @@ Partial Class sdgTwoWayFrequencies
         Me.ucrChkShowSummary.Size = New System.Drawing.Size(145, 20)
         Me.ucrChkShowSummary.TabIndex = 19
         '
+        'tbGraph
+        '
+        Me.tbGraph.Controls.Add(Me.ucrSaveGraph)
+        Me.tbGraph.Controls.Add(Me.grpGraphOptions)
+        Me.tbGraph.Controls.Add(Me.grpGraphType)
+        Me.tbGraph.Location = New System.Drawing.Point(4, 22)
+        Me.tbGraph.Name = "tbGraph"
+        Me.tbGraph.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbGraph.Size = New System.Drawing.Size(313, 309)
+        Me.tbGraph.TabIndex = 1
+        Me.tbGraph.Text = "Graph"
+        Me.tbGraph.UseVisualStyleBackColor = True
+        '
         'ucrSaveGraph
         '
         Me.ucrSaveGraph.Location = New System.Drawing.Point(18, 278)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
         Me.ucrSaveGraph.Size = New System.Drawing.Size(288, 24)
         Me.ucrSaveGraph.TabIndex = 39
+        '
+        'grpGraphOptions
+        '
+        Me.grpGraphOptions.Controls.Add(Me.ucrChkStack)
+        Me.grpGraphOptions.Controls.Add(Me.ucrChkShowValues)
+        Me.grpGraphOptions.Controls.Add(Me.lblTitle)
+        Me.grpGraphOptions.Controls.Add(Me.lblHjust)
+        Me.grpGraphOptions.Controls.Add(Me.lblVjust)
+        Me.grpGraphOptions.Controls.Add(Me.ucrInputGraphTitle)
+        Me.grpGraphOptions.Controls.Add(Me.ucrInputHorizontalLabels)
+        Me.grpGraphOptions.Controls.Add(Me.ucrInputVerticalLabels)
+        Me.grpGraphOptions.Controls.Add(Me.ucrChkShowModelSummary)
+        Me.grpGraphOptions.Controls.Add(Me.ucrChkShowPercentage)
+        Me.grpGraphOptions.Controls.Add(Me.ucrChkShowCount)
+        Me.grpGraphOptions.Location = New System.Drawing.Point(6, 59)
+        Me.grpGraphOptions.Name = "grpGraphOptions"
+        Me.grpGraphOptions.Size = New System.Drawing.Size(300, 213)
+        Me.grpGraphOptions.TabIndex = 37
+        Me.grpGraphOptions.TabStop = False
+        Me.grpGraphOptions.Text = "Graph Options"
         '
         'ucrChkStack
         '
@@ -298,6 +237,33 @@ Partial Class sdgTwoWayFrequencies
         Me.ucrChkShowValues.Name = "ucrChkShowValues"
         Me.ucrChkShowValues.Size = New System.Drawing.Size(145, 20)
         Me.ucrChkShowValues.TabIndex = 60
+        '
+        'lblTitle
+        '
+        Me.lblTitle.AutoSize = True
+        Me.lblTitle.Location = New System.Drawing.Point(9, 190)
+        Me.lblTitle.Name = "lblTitle"
+        Me.lblTitle.Size = New System.Drawing.Size(62, 13)
+        Me.lblTitle.TabIndex = 58
+        Me.lblTitle.Text = "Graph Title:"
+        '
+        'lblHjust
+        '
+        Me.lblHjust.AutoSize = True
+        Me.lblHjust.Location = New System.Drawing.Point(9, 163)
+        Me.lblHjust.Name = "lblHjust"
+        Me.lblHjust.Size = New System.Drawing.Size(126, 13)
+        Me.lblHjust.TabIndex = 57
+        Me.lblHjust.Text = "Horizontal Label Position:"
+        '
+        'lblVjust
+        '
+        Me.lblVjust.AutoSize = True
+        Me.lblVjust.Location = New System.Drawing.Point(9, 138)
+        Me.lblVjust.Name = "lblVjust"
+        Me.lblVjust.Size = New System.Drawing.Size(114, 13)
+        Me.lblVjust.TabIndex = 55
+        Me.lblVjust.Text = "Vertical Label Position:"
         '
         'ucrInputGraphTitle
         '
@@ -353,6 +319,40 @@ Partial Class sdgTwoWayFrequencies
         Me.ucrChkShowCount.Size = New System.Drawing.Size(145, 20)
         Me.ucrChkShowCount.TabIndex = 18
         '
+        'grpGraphType
+        '
+        Me.grpGraphType.Controls.Add(Me.rdoLine)
+        Me.grpGraphType.Controls.Add(Me.rdoBar)
+        Me.grpGraphType.Controls.Add(Me.ucrPnlGraphType)
+        Me.grpGraphType.Location = New System.Drawing.Point(6, 6)
+        Me.grpGraphType.Name = "grpGraphType"
+        Me.grpGraphType.Size = New System.Drawing.Size(300, 48)
+        Me.grpGraphType.TabIndex = 33
+        Me.grpGraphType.TabStop = False
+        Me.grpGraphType.Text = "Type of Graph"
+        '
+        'rdoLine
+        '
+        Me.rdoLine.AutoSize = True
+        Me.rdoLine.Location = New System.Drawing.Point(163, 19)
+        Me.rdoLine.Name = "rdoLine"
+        Me.rdoLine.Size = New System.Drawing.Size(77, 17)
+        Me.rdoLine.TabIndex = 7
+        Me.rdoLine.TabStop = True
+        Me.rdoLine.Text = "Line Graph"
+        Me.rdoLine.UseVisualStyleBackColor = True
+        '
+        'rdoBar
+        '
+        Me.rdoBar.AutoSize = True
+        Me.rdoBar.Location = New System.Drawing.Point(12, 19)
+        Me.rdoBar.Name = "rdoBar"
+        Me.rdoBar.Size = New System.Drawing.Size(73, 17)
+        Me.rdoBar.TabIndex = 5
+        Me.rdoBar.TabStop = True
+        Me.rdoBar.Text = "Bar Graph"
+        Me.rdoBar.UseVisualStyleBackColor = True
+        '
         'ucrPnlGraphType
         '
         Me.ucrPnlGraphType.Location = New System.Drawing.Point(6, 7)
@@ -379,7 +379,7 @@ Partial Class sdgTwoWayFrequencies
         Me.MinimizeBox = False
         Me.Name = "sdgTwoWayFrequencies"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Two Way Frequencies options"
+        Me.Text = "Two Way Frequencies Options"
         Me.tbOneWayFrequencies.ResumeLayout(False)
         Me.tbTable.ResumeLayout(False)
         Me.grpTableOptions.ResumeLayout(False)
