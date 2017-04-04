@@ -16,7 +16,6 @@
 
 Imports instat.Translations
 Imports RDotNet
-
 Public Class dlgRegularSequence
     Dim bIsExtended As Boolean = False
     Public bFirstLoad As Boolean = True
@@ -59,7 +58,7 @@ Public Class dlgRegularSequence
         ucrInputTo.AddQuotesIfUnrecognised = False
         ucrInputTo.SetValidationTypeAsNumeric()
         ucrNudRepeatValues.SetParameter(New RParameter("each", 1))
-        ucrNudRepeatValues.Minimum = 1
+        ucrNudRepeatValues.SetMinMax(1, Integer.MaxValue)
         ucrInputInStepsOf.SetParameter(New RParameter("by", 2))
         ucrInputInStepsOf.AddQuotesIfUnrecognised = False
         ucrInputInStepsOf.SetValidationTypeAsNumeric()
@@ -137,7 +136,6 @@ Public Class dlgRegularSequence
 
         End If
     End Sub
-
 
     Private Sub SetBaseFunction()
         If ucrNudRepeatValues.Value > 1 Then
@@ -219,7 +217,6 @@ Public Class dlgRegularSequence
 
     Private Sub ucrInputFrom_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFrom.ControlContentsChanged, ucrInputTo.ControlContentsChanged, ucrInputInStepsOf.ControlContentsChanged
         CheckSequenceLength()
-
     End Sub
 
     Private Sub ucrNewColumnName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewColumnName.ControlContentsChanged, ucrInputTo.ControlContentsChanged, ucrInputFrom.ControlContentsChanged, ucrInputInStepsOf.ControlContentsChanged, ucrNudRepeatValues.ControlContentsChanged, ucrPnlSequenceType.ControlContentsChanged, ucrSelectDataFrameRegularSequence.ControlContentsChanged

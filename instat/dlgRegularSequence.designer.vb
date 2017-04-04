@@ -129,14 +129,14 @@ Partial Class dlgRegularSequence
         '
         'dtpSelectorB
         '
-        Me.dtpSelectorB.Location = New System.Drawing.Point(98, 49)
+        Me.dtpSelectorB.Location = New System.Drawing.Point(99, 49)
         Me.dtpSelectorB.Name = "dtpSelectorB"
         Me.dtpSelectorB.Size = New System.Drawing.Size(87, 20)
         Me.dtpSelectorB.TabIndex = 5
         '
         'dtpSelectorA
         '
-        Me.dtpSelectorA.Location = New System.Drawing.Point(98, 24)
+        Me.dtpSelectorA.Location = New System.Drawing.Point(99, 24)
         Me.dtpSelectorA.Name = "dtpSelectorA"
         Me.dtpSelectorA.Size = New System.Drawing.Size(87, 20)
         Me.dtpSelectorA.TabIndex = 2
