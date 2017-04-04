@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgRatingScales
     Private bFirstLoad As Boolean = True
@@ -30,10 +31,27 @@ Public Class dlgRatingScales
         End If
         SetRCodeForControls(bReset)
         bReset = False
+        TestOkEnabled()
     End Sub
 
     Private Sub SetDefaults()
         ucrReceiverOrderedFactors.SetMeAsReceiver()
+        clsSjtStackFrq = New RFunction
+        clsSjplikert = New RFunction
+        clsSjpStackFrq = New RFunction
+        ucrSelectorRatingScale.Reset()
+        ucrReceiverOrderedFactors.SetParameter(New RParameter("items"))
+        ucrReceiverOrderedFactors.SetParameterIsRFunction()
+        clsSjplikert.SetRCommand("sjPlot::sjp.likert")
+        clsSjplikert.AddParameter("cat.neutral")
+        clsSjplikert.AddParameter("sort.frq", Chr(34) & "none" & Chr(34))
+        clsSjpStackFrq.SetRCommand("sjPlot::sjp.stackfrq")
+        clsSjpStackFrq.AddParameter("sort.frq", Chr(34) & "none" & Chr(34))
+        clsSjpStackFrq.AddParameter("coord.flip", "FALSE")
+        clsSjtStackFrq.SetRCommand("sjPlot::sjt.stackfrq")
+        clsSjtStackFrq.AddParameter("sort.frq", Chr(34) & "none" & Chr(34))
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsSjtStackFrq)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -82,37 +100,58 @@ Public Class dlgRatingScales
         ucrPnlGraphType.AddRadioButton(rdoLikert)
         ucrPnlGraphType.AddRadioButton(rdoStacked)
         ucrPnlGraphType.AddToLinkedControls(ucrNudNeutralLevel, {rdoLikert}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudNeutralLevel.SetLinkedDisplayControl(lblNeutralLevel)
 
         'ucrPnlSortsjp.stackfrq
         ucrPnlSjpStackFrq.SetParameter(New RParameter("sort.frq", 2))
-        ucrPnlSjpStackFrq.AddRadioButton(rdoNone, Chr(34) & "NULL" & Chr(34))
-        ucrPnlSjpStackFrq.AddRadioButton(rdoLowAscending, Chr(34) & "last.asc" & Chr(34))
-        ucrPnlSjpStackFrq.AddRadioButton(rdoLowDescending, Chr(34) & "last.desc" & Chr(34))
-        ucrPnlSjpStackFrq.AddRadioButton(rdoHighAscending, Chr(34) & "first.asc" & Chr(34))
-        ucrPnlSjpStackFrq.AddRadioButton(rdoHighDescending, Chr(34) & "first.desc" & Chr(34))
+        ucrPnlSjpStackFrq.AddRadioButton(rdoNoneStack, Chr(34) & "NULL" & Chr(34))
+        ucrPnlSjpStackFrq.AddRadioButton(rdoLowAscendingStack, Chr(34) & "last.asc" & Chr(34))
+        ucrPnlSjpStackFrq.AddRadioButton(rdoLowDescendingStack, Chr(34) & "last.desc" & Chr(34))
+        ucrPnlSjpStackFrq.AddRadioButton(rdoHighAscendingStack, Chr(34) & "first.asc" & Chr(34))
+        ucrPnlSjpStackFrq.AddRadioButton(rdoHighDescendingStack, Chr(34) & "first.desc" & Chr(34))
         ucrPnlSjpStackFrq.SetRDefault(Chr(34) & "NULL" & Chr(34))
 
         'ucrPnlSortsjt.stackfrq
-        ucrPnlSjpStackFrq.SetParameter(New RParameter("sort.frq", 3))
-        ucrPnlSjpStackFrq.AddRadioButton(rdoNone, Chr(34) & "NULL" & Chr(34))
-        ucrPnlSjpStackFrq.AddRadioButton(rdoLowAscending, Chr(34) & "last.asc" & Chr(34))
-        ucrPnlSjpStackFrq.AddRadioButton(rdoLowDescending, Chr(34) & "last.desc" & Chr(34))
-        ucrPnlSjpStackFrq.AddRadioButton(rdoHighAscending, Chr(34) & "first.asc" & Chr(34))
+        ucrPnlSjtStackFrq.SetParameter(New RParameter("sort.frq", 3))
+        ucrPnlSjtStackFrq.AddRadioButton(rdoNone, Chr(34) & "NULL" & Chr(34))
+        ucrPnlSjtStackFrq.AddRadioButton(rdoLowAscending, Chr(34) & "last.asc" & Chr(34))
+        ucrPnlSjtStackFrq.AddRadioButton(rdoLowDescending, Chr(34) & "last.desc" & Chr(34))
+        ucrPnlSjtStackFrq.AddRadioButton(rdoHighAscending, Chr(34) & "first.asc" & Chr(34))
         ucrPnlSjpStackFrq.AddRadioButton(rdoHighDescending, Chr(34) & "first.desc" & Chr(34))
         ucrPnlSjpStackFrq.SetRDefault(Chr(34) & "NULL" & Chr(34))
 
         'ucrPnlSortsjp.likert
-        ucrPnlSjpStackFrq.SetParameter(New RParameter("sort.frq", 3))
-        ucrPnlSjpStackFrq.AddRadioButton(rdoNone, Chr(34) & "NULL" & Chr(34))
-        ucrPnlSjpStackFrq.AddRadioButton(rdoLowAscending, Chr(34) & "neg.asc" & Chr(34))
-        ucrPnlSjpStackFrq.AddRadioButton(rdoLowDescending, Chr(34) & "neg.desc" & Chr(34))
-        ucrPnlSjpStackFrq.AddRadioButton(rdoHighAscending, Chr(34) & "posc.asc" & Chr(34))
-        ucrPnlSjpStackFrq.AddRadioButton(rdoHighDescending, Chr(34) & "posc.desc" & Chr(34))
-        ucrPnlSjpStackFrq.SetRDefault(Chr(34) & "NULL" & Chr(34))
+        ucrPnlSjpLikert.SetParameter(New RParameter("sort.frq", 3))
+        ucrPnlSjpLikert.AddRadioButton(rdoNoneLikert, Chr(34) & "NULL" & Chr(34))
+        ucrPnlSjpLikert.AddRadioButton(rdoLowAscendingLikert, Chr(34) & "neg.asc" & Chr(34))
+        ucrPnlSjpLikert.AddRadioButton(rdoLowDescendingLikert, Chr(34) & "neg.desc" & Chr(34))
+        ucrPnlSjpLikert.AddRadioButton(rdoHighAscendingLikert, Chr(34) & "posc.asc" & Chr(34))
+        ucrPnlSjpLikert.AddRadioButton(rdoHighDescendingLikert, Chr(34) & "posc.desc" & Chr(34))
+        ucrPnlSjpLikert.SetRDefault(Chr(34) & "NULL" & Chr(34))
 
         ucrNudNeutralLevel.SetParameter(New RParameter("cat.neutral", 3))
 
+        ucrPnlGraphType.AddToLinkedControls(ucrPnlSjpLikert, {rdoLikert}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlGraphType.AddToLinkedControls(ucrPnlSjpStackFrq, {rdoStacked}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkFrequencyTable.AddToLinkedControls(ucrPnlSjtStackFrq, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
     End Sub
 
+    Private Sub TestOkEnabled()
+        If (Not ucrReceiverOrderedFactors.IsEmpty OrElse Not ucrReceiverWeights.IsEmpty) AndAlso ucrNudNeutralLevel.GetText <> "" AndAlso (Not ucrChkWeights.Checked OrElse (ucrChkWeights.Checked AndAlso Not ucrReceiverWeights.IsEmpty)) AndAlso (ucrChkGraph.Checked OrElse ucrChkFrequencyTable.Checked) Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
+
+    Private Sub ucrNudNeutralLevel_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudNeutralLevel.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrChkGraph.ControlContentsChanged, ucrChkFrequencyTable.ControlContentsChanged, ucrReceiverOrderedFactors.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
+    End Sub
 End Class
