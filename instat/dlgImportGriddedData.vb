@@ -39,20 +39,20 @@ Public Class dlgImportGriddedData
     End Sub
 
     Private Sub InitialiseDialog()
+        'ucrBase.iHelpTopicID = 
 
         ucrInputDataName.SetParameter(New RParameter("data_names", 0))
         ucrInputDataName.clsParameter.bIncludeArgumentName = False
-        ucrInputDownloadFrom.SetParameter(New RParameter("download_from", 1))
+
 
         Dim dctDownloadPairs As New Dictionary(Of String, String)
+        ucrInputDownloadFrom.SetParameter(New RParameter("download_from", 1))
         dctDownloadPairs.Add("CHIRPS", Chr(34) & "CHIRPS" & Chr(34))
         dctDownloadPairs.Add("TAMSAT", Chr(34) & "TAMSAT" & Chr(34))
         dctDownloadPairs.Add("NOAA_ARC2", Chr(34) & "NOAA_ARC2" & Chr(34))
         dctDownloadPairs.Add("NOAA_RFE2", Chr(34) & "NOAA_RFE2" & Chr(34))
         dctDownloadPairs.Add("NOAA_CMORPH", Chr(34) & "NOAA_CMORPH" & Chr(34))
         dctDownloadPairs.Add("NASA_TRMM_3B42", Chr(34) & "NASA_TRMM_3B42" & Chr(34))
-        'this is for vegetation......not important at the moment exist for testing. can be removed
-        dctDownloadPairs.Add("VEGETATION_NDVI", Chr(34) & "VEGETATION_NDVI" & Chr(34))
         ucrInputDownloadFrom.SetItems(dctDownloadPairs)
 
 
@@ -86,8 +86,8 @@ Public Class dlgImportGriddedData
         clsRDefaultFunction = New RFunction
 
         clsRDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_from_iri")
-        clsRDefaultFunction.AddParameter("download_from", "CHIRPS")
-        clsRDefaultFunction.AddParameter("data_names", Chr(34) & "CHIRPS" & Chr(34))
+        clsRDefaultFunction.AddParameter("download_from", Chr(34) & "CHIRPS" & Chr(34))
+        clsRDefaultFunction.AddParameter("data_names", "CHIRPS")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRDefaultFunction)
     End Sub
 
