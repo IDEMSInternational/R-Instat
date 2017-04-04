@@ -129,9 +129,8 @@ Public Class dlgTwoWayFrequencies
         ucrReceiverColumnFactor.SetParameter(New RParameter("var.col", 1))
         ucrReceiverColumnFactor.SetParameterIsRFunction()
         clsSjtXtab.SetRCommand("sjt.xtab")
-        '  ucrChkCount.AddFunctionNamesCondition(True, "sjt.xtab")
-
         clsSjtXtab.AddParameter("show.obs", "TRUE")
+        clsSjtXtab.AddParameter("show.summary", "TRUE")
 
         clsSjpXtab.SetRCommand("sjp.xtab")
         clsSjpXtab.AddParameter("margin", Chr(34) & "row" & Chr(34))
