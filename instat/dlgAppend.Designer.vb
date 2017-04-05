@@ -54,7 +54,7 @@ Partial Class dlgAppend
         'lblIDColName
         '
         Me.lblIDColName.AutoSize = True
-        Me.lblIDColName.Location = New System.Drawing.Point(136, 202)
+        Me.lblIDColName.Location = New System.Drawing.Point(136, 203)
         Me.lblIDColName.Name = "lblIDColName"
         Me.lblIDColName.Size = New System.Drawing.Size(90, 13)
         Me.lblIDColName.TabIndex = 5
@@ -91,7 +91,7 @@ Partial Class dlgAppend
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 256)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 251)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(400, 52)
         Me.ucrBase.TabIndex = 8
@@ -115,7 +115,7 @@ Partial Class dlgAppend
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(417, 315)
+        Me.ClientSize = New System.Drawing.Size(417, 310)
         Me.Controls.Add(Me.ucrChkIncludeIDColumn)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrInputIDColName)
