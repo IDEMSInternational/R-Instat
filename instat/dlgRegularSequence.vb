@@ -18,6 +18,7 @@ Imports instat.Translations
 Imports RDotNet
 Public Class dlgRegularSequence
     Dim bIsExtended As Boolean = False
+    Protected bMinimumIncluded, bMaximumIncluded As Boolean
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsSeqFunction, clsRepFunction As New RFunction
@@ -61,7 +62,7 @@ Public Class dlgRegularSequence
         ucrNudRepeatValues.SetMinMax(1, Integer.MaxValue)
         ucrInputInStepsOf.SetParameter(New RParameter("by", 2))
         ucrInputInStepsOf.AddQuotesIfUnrecognised = False
-        ucrInputInStepsOf.SetValidationTypeAsNumeric()
+        ucrInputInStepsOf.SetValidationTypeAsNumeric(dcmMin:=0)
         ucrDataFrameLengthForRegularSequence.SetDataFrameSelector(ucrSelectDataFrameRegularSequence)
 
         ucrPnlSequenceType.AddToLinkedControls(ucrInputFrom, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=1)
