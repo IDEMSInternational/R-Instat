@@ -210,10 +210,4 @@ Public Class dlgRestrict
     Private Sub ucrNewDataFrameName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewDataFrameName.ControlContentsChanged
         TestOkEnabled()
     End Sub
-
-    Private Sub ucrNewDataFrameName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNewDataFrameName.ControlValueChanged
-        If ucrNewDataFrameName.GetText = ucrSelectorFilter.ucrAvailableDataFrames.cboAvailableDataFrames.Text Then ' this is not correct, i don't want .Text, I want the items in it!
-            MsgBox("There is already a Data Frame called " & ucrNewDataFrameName.GetText & "." & vbNewLine & "This will overwrite that Data Frame.")
-        End If
-    End Sub
 End Class

@@ -41,7 +41,7 @@ Partial Class dlgRestrict
         Me.cmdDefineNewFilter.Location = New System.Drawing.Point(250, 95)
         Me.cmdDefineNewFilter.Name = "cmdDefineNewFilter"
         Me.cmdDefineNewFilter.Size = New System.Drawing.Size(120, 23)
-        Me.cmdDefineNewFilter.TabIndex = 1
+        Me.cmdDefineNewFilter.TabIndex = 3
         Me.cmdDefineNewFilter.Tag = "Define_New_Filter"
         Me.cmdDefineNewFilter.Text = "Define New Filter"
         Me.cmdDefineNewFilter.UseVisualStyleBackColor = True
@@ -54,14 +54,14 @@ Partial Class dlgRestrict
         Me.ucrSelectorFilter.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorFilter.Name = "ucrSelectorFilter"
         Me.ucrSelectorFilter.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorFilter.TabIndex = 5
+        Me.ucrSelectorFilter.TabIndex = 0
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(10, 307)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.TabIndex = 8
         '
         'lblFilter
         '
@@ -69,7 +69,7 @@ Partial Class dlgRestrict
         Me.lblFilter.Location = New System.Drawing.Point(249, 45)
         Me.lblFilter.Name = "lblFilter"
         Me.lblFilter.Size = New System.Drawing.Size(32, 13)
-        Me.lblFilter.TabIndex = 10
+        Me.lblFilter.TabIndex = 1
         Me.lblFilter.Text = "Filter:"
         '
         'ucrReceiverFilter
@@ -80,15 +80,15 @@ Partial Class dlgRestrict
         Me.ucrReceiverFilter.Name = "ucrReceiverFilter"
         Me.ucrReceiverFilter.Selector = Nothing
         Me.ucrReceiverFilter.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverFilter.TabIndex = 11
+        Me.ucrReceiverFilter.TabIndex = 2
         '
         'lblFilterPreview
         '
         Me.lblFilterPreview.AutoSize = True
-        Me.lblFilterPreview.Location = New System.Drawing.Point(10, 284)
+        Me.lblFilterPreview.Location = New System.Drawing.Point(10, 285)
         Me.lblFilterPreview.Name = "lblFilterPreview"
         Me.lblFilterPreview.Size = New System.Drawing.Size(118, 13)
-        Me.lblFilterPreview.TabIndex = 12
+        Me.lblFilterPreview.TabIndex = 6
         Me.lblFilterPreview.Text = "Selected Filter Preview:"
         '
         'ucrInputFilterPreview
@@ -99,16 +99,16 @@ Partial Class dlgRestrict
         Me.ucrInputFilterPreview.Location = New System.Drawing.Point(135, 281)
         Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
         Me.ucrInputFilterPreview.Size = New System.Drawing.Size(273, 21)
-        Me.ucrInputFilterPreview.TabIndex = 13
+        Me.ucrInputFilterPreview.TabIndex = 7
         '
         'grpApplyOptions
         '
         Me.grpApplyOptions.Controls.Add(Me.rdoApplyAsSubset)
         Me.grpApplyOptions.Controls.Add(Me.rdoApplyAsFilter)
-        Me.grpApplyOptions.Location = New System.Drawing.Point(11, 197)
+        Me.grpApplyOptions.Location = New System.Drawing.Point(10, 197)
         Me.grpApplyOptions.Name = "grpApplyOptions"
         Me.grpApplyOptions.Size = New System.Drawing.Size(232, 53)
-        Me.grpApplyOptions.TabIndex = 14
+        Me.grpApplyOptions.TabIndex = 4
         Me.grpApplyOptions.TabStop = False
         Me.grpApplyOptions.Text = "Apply Options"
         '
@@ -139,13 +139,13 @@ Partial Class dlgRestrict
         Me.ucrNewDataFrameName.Location = New System.Drawing.Point(10, 256)
         Me.ucrNewDataFrameName.Name = "ucrNewDataFrameName"
         Me.ucrNewDataFrameName.Size = New System.Drawing.Size(278, 24)
-        Me.ucrNewDataFrameName.TabIndex = 2
+        Me.ucrNewDataFrameName.TabIndex = 5
         '
         'dlgRestrict
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(423, 367)
+        Me.ClientSize = New System.Drawing.Size(419, 366)
         Me.Controls.Add(Me.ucrNewDataFrameName)
         Me.Controls.Add(Me.grpApplyOptions)
         Me.Controls.Add(Me.ucrInputFilterPreview)
