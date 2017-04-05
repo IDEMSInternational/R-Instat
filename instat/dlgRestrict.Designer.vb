@@ -38,7 +38,7 @@ Partial Class dlgRestrict
         '
         'cmdDefineNewFilter
         '
-        Me.cmdDefineNewFilter.Location = New System.Drawing.Point(250, 95)
+        Me.cmdDefineNewFilter.Location = New System.Drawing.Point(259, 95)
         Me.cmdDefineNewFilter.Name = "cmdDefineNewFilter"
         Me.cmdDefineNewFilter.Size = New System.Drawing.Size(120, 23)
         Me.cmdDefineNewFilter.TabIndex = 3
@@ -79,7 +79,7 @@ Partial Class dlgRestrict
         Me.ucrReceiverFilter.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFilter.Name = "ucrReceiverFilter"
         Me.ucrReceiverFilter.Selector = Nothing
-        Me.ucrReceiverFilter.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverFilter.Size = New System.Drawing.Size(129, 20)
         Me.ucrReceiverFilter.TabIndex = 2
         '
         'lblFilterPreview
@@ -96,9 +96,9 @@ Partial Class dlgRestrict
         Me.ucrInputFilterPreview.AddQuotesIfUnrecognised = True
         Me.ucrInputFilterPreview.IsMultiline = False
         Me.ucrInputFilterPreview.IsReadOnly = False
-        Me.ucrInputFilterPreview.Location = New System.Drawing.Point(135, 281)
+        Me.ucrInputFilterPreview.Location = New System.Drawing.Point(131, 281)
         Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
-        Me.ucrInputFilterPreview.Size = New System.Drawing.Size(273, 21)
+        Me.ucrInputFilterPreview.Size = New System.Drawing.Size(277, 21)
         Me.ucrInputFilterPreview.TabIndex = 7
         '
         'grpApplyOptions
@@ -138,7 +138,7 @@ Partial Class dlgRestrict
         '
         Me.ucrNewDataFrameName.Location = New System.Drawing.Point(10, 256)
         Me.ucrNewDataFrameName.Name = "ucrNewDataFrameName"
-        Me.ucrNewDataFrameName.Size = New System.Drawing.Size(278, 24)
+        Me.ucrNewDataFrameName.Size = New System.Drawing.Size(291, 24)
         Me.ucrNewDataFrameName.TabIndex = 5
         '
         'dlgRestrict
