@@ -16,7 +16,7 @@
 
 Imports instat.Translations
 Public Class dlgAppend
-    Public bFirstLoad As Boolean = True
+    Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsBindRows As New RFunction
 
@@ -99,11 +99,5 @@ Public Class dlgAppend
 
     Private Sub ucrReceiverAppendDataframe_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverAppendDataframe.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrChkIncludeIDColumn.ControlContentsChanged, ucrInputIDColName.ControlContentsChanged
         TestOKEnabled()
-    End Sub
-
-    Private Sub ucrInputIDColName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputIDColName.ControlValueChanged
-        'If ucrInputIDColName.GetText = ucrSelectorDataframes.lstAvailableVariable.Then Then
-        '    MsgBox("")
-        'End If
     End Sub
 End Class
