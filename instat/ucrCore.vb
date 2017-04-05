@@ -22,7 +22,11 @@ Public Class ucrCore
     Protected clsRCode As RCodeStructure
     'Parameter that this control manages
     'Either by editing its value or adding/removing it from an RCodeStructure
-    Public clsParameter As RParameter
+    Private clsParameter As RParameter
+
+    'Additional pairs of (RCode, RParameter) which this control may also manage
+    'There may be duplicate values in here. For example, one parameter being added into multiple functions
+    Protected lstAdditionalCodeParameterPairs As New List(Of Tuple(Of RCodeStructure, RParameter))
 
     'Default value of the control
     'No specific type since it can be interpreted different by each control type
@@ -88,24 +92,31 @@ Public Class ucrCore
     'Update the control based on the code in RCodeStructure
     'bReset : should the control reset to the default value if the parameter is not present in the code
     Public Overridable Sub UpdateControl(Optional bReset As Boolean = False)
-        If clsRCode IsNot Nothing Then
-            If clsParameter IsNot Nothing Then
-                If Not clsRCode.ContainsParameter(clsParameter) Then
-                    If clsRCode.ContainsParameter(clsParameter.strArgumentName) Then
-                        clsParameter = clsRCode.GetParameter(clsParameter.strArgumentName)
-                    ElseIf bReset Then
-                        If objDefaultState Is Nothing Then
-                            SetToRDefault()
-                            'Exit Sub
+        Dim clsTempRCode As RCodeStructure
+        Dim clsTempRParameter As RParameter
+
+        For Each tplTemp In lstAllCodeParameterPairs
+            clsTempRCode = tplTemp.Item1
+            clsTempRParameter = tplTemp.Item2
+            If clsTempRCode IsNot Nothing Then
+                If clsTempRParameter IsNot Nothing Then
+                    If Not clsTempRCode.ContainsParameter(clsTempRParameter) Then
+                        If clsTempRCode.ContainsParameter(clsTempRParameter.strArgumentName) Then
+                            clsTempRParameter = clsTempRCode.GetParameter(clsTempRParameter.strArgumentName)
+                        ElseIf bReset Then
+                            If objDefaultState Is Nothing Then
+                                SetToRDefault()
+                                'Exit Sub
+                            End If
+                        Else
                         End If
-                    Else
                     End If
+                Else
                 End If
             Else
+                clsTempRCode = New RCodeStructure
             End If
-        Else
-            clsRCode = New RCodeStructure
-        End If
+        Next
         SetControlValue()
         UpdateLinkedControls(bReset)
     End Sub
@@ -238,6 +249,7 @@ Public Class ucrCore
 
     Public Sub OnControlValueChanged()
         OnControlContentsChanged()
+        UpdateAllParameters()
         UpdateRCode()
         RaiseEvent ControlValueChanged(Me)
     End Sub
@@ -263,13 +275,20 @@ Public Class ucrCore
     End Function
 
     Public Overridable Sub AddOrRemoveParameter(bAdd As Boolean)
-        If clsRCode IsNot Nothing AndAlso clsParameter IsNot Nothing Then
-            If bAdd Then
-                clsRCode.AddParameter(clsParameter)
-            Else
-                clsRCode.RemoveParameter(clsParameter)
+        Dim clsTempRCode As RCodeStructure
+        Dim clsTempRParameter As RParameter
+
+        For Each tplTemp In lstAllCodeParameterPairs
+            clsTempRCode = tplTemp.Item1
+            clsTempRParameter = tplTemp.Item2
+            If clsTempRCode IsNot Nothing AndAlso clsTempRParameter IsNot Nothing Then
+                If bAdd Then
+                    clsTempRCode.AddParameter(clsTempRParameter)
+                Else
+                    clsTempRCode.RemoveParameter(clsTempRParameter)
+                End If
             End If
-        End If
+        Next
     End Sub
 
     Public Sub AddToLinkedControls(lstLinked As ucrCore(), objValues As Object(), Optional bNewLinkedAddRemoveParameter As Boolean = False, Optional bNewLinkedUpdateFunction As Boolean = False, Optional bNewLinkedDisabledIfParameterMissing As Boolean = False, Optional bNewLinkedHideIfParameterMissing As Boolean = False, Optional bNewLinkedChangeToDefaultState As Boolean = False, Optional objNewDefaultState As Object = Nothing)
@@ -440,6 +459,34 @@ Public Class ucrCore
     Public Sub SetParameterValue(strNewValue As String)
         If clsParameter IsNot Nothing Then
             clsParameter.SetArgumentValue(strNewValue)
+        End If
+    End Sub
+
+    Protected ReadOnly Property lstAllCodeParameterPairs As List(Of Tuple(Of RCodeStructure, RParameter))
+        Get
+            Dim lstTemp As New List(Of Tuple(Of RCodeStructure, RParameter))
+            lstTemp.Add(New Tuple(Of RCodeStructure, RParameter)(clsRCode, clsParameter))
+            For Each tplTemp As Tuple(Of RCodeStructure, RParameter) In lstAdditionalCodeParameterPairs
+                lstTemp.Add(tplTemp)
+            Next
+            Return lstTemp
+        End Get
+    End Property
+
+    Public Sub AddAdditionalCodeParameterPair(clsNewRCode As RCodeStructure, clsNewRParameter As RParameter)
+        lstAdditionalCodeParameterPairs.Add(New Tuple(Of RCodeStructure, RParameter)(clsNewRCode, clsNewRParameter))
+    End Sub
+
+    Protected Sub UpdateAllParameters()
+        Dim tplTemp As Tuple(Of RCodeStructure, RParameter)
+        For Each tplTemp In lstAdditionalCodeParameterPairs
+            UpdateParameter(tplTemp.Item2)
+        Next
+    End Sub
+
+    Protected Overridable Sub UpdateParameter(clsTempParam As RParameter)
+        If GetValueToSet() IsNot Nothing Then
+            clsTempParam.SetArgumentValue(GetValueToSet().ToString())
         End If
     End Sub
 End Class

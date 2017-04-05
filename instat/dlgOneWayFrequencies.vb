@@ -23,6 +23,7 @@ Public Class dlgOneWayFrequencies
     Private bResetSubdialog As Boolean = False
     Private clsSjtFreq As New RFunction
     Private clsSjpFrq As New RFunction
+
     Private Sub dlgOneWayFrequencies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -44,10 +45,8 @@ Public Class dlgOneWayFrequencies
         ucrChkWeights.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrPnlSort.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrChkFlip.SetRCode(clsSjpFrq, bReset)
-
         ucrChkGroupData.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrNudGroups.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-
     End Sub
 
     Private Sub InitialiseDialog()
@@ -57,11 +56,13 @@ Public Class dlgOneWayFrequencies
         cmdOptions.Enabled = True
         ucrReceiverOneWayFreq.Selector = ucrSelectorOneWayFreq
         ucrReceiverOneWayFreq.SetMeAsReceiver()
+        ucrReceiverOneWayFreq.SetParameterIsRFunction()
 
         ucrReceiverWeights.Selector = ucrSelectorOneWayFreq
         ucrReceiverWeights.SetParameter(New RParameter("weight.by", 3))
         ucrReceiverWeights.SetParameterIsRFunction()
         ucrReceiverWeights.SetDataType("numeric")
+        ucrReceiverWeights.bUpdateRCodeFromControl = False
 
         ucrPnlSort.SetParameter(New RParameter("sort.frq", 2))
         ucrPnlSort.AddRadioButton(rdoNone, Chr(34) & "none" & Chr(34))
@@ -88,6 +89,7 @@ Public Class dlgOneWayFrequencies
         ucrChkGroupData.SetParameter(ucrNudGroups.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkGroupData.AddToLinkedControls(ucrNudGroups, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
         ucrChkGroupData.AddFunctionNamesCondition(True, {"sjt.frq", "sjp.frq"})
+        ucrChkGroupData.bUpdateRCodeFromControl = True
         ucrChkFlip.SetText("Flip Coordinates")
         ucrChkFlip.SetParameter(New RParameter("coord.flip", 1))
         ucrChkFlip.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
@@ -148,20 +150,21 @@ Public Class dlgOneWayFrequencies
             ' ucrBase.clsRsyntax.bHTMLOutput = False
             ucrBase.clsRsyntax.iCallType = 3
         End If
-
     End Sub
 
     Private Sub ChangeBaseFunction()
         If rdoTable.Checked Then
-            ucrReceiverOneWayFreq.SetParameter(New RParameter("data", 1))
-            ucrReceiverOneWayFreq.SetParameterIsRFunction()
+            ucrReceiverOneWayFreq.ChangeParameterName("data")
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjtFreq)
         Else
-            ucrReceiverOneWayFreq.SetParameter(New RParameter("var.cnt", 1))
-            ucrReceiverOneWayFreq.SetParameterIsRFunction()
+            ucrReceiverOneWayFreq.ChangeParameterName("var.cnt")
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjpFrq)
         End If
-        SetRCodeForControls(False)
+        If Not ucrReceiverOneWayFreq.IsEmpty Then
+            'TODO needs to be implemented if still needed?
+            'ucrReceiverOneWayFreq.SetParameterArgument(ucrReceiverOneWayFreq.GetVariables())
+        End If
+        SetRCodeForControls(bReset)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset

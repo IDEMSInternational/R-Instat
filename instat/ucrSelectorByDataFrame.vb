@@ -118,7 +118,7 @@ Public Class ucrSelectorByDataFrame
 
     Public Overrides Sub AddOrRemoveParameter(bAdd As Boolean)
         If bHasOwnParameter Then
-            AddOrRemoveParameter(bAdd)
+            MyBase.AddOrRemoveParameter(bAdd)
         Else
             ucrAvailableDataFrames.AddOrRemoveParameter(bAdd)
         End If
