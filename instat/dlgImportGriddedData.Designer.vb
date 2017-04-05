@@ -22,82 +22,27 @@ Partial Class dlgImportGriddedData
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrNudMinLat = New instat.ucrNud()
-        Me.ucrNudMinLon = New instat.ucrNud()
-        Me.ucrNudMaxLon = New instat.ucrNud()
-        Me.ucrNudMaxLat = New instat.ucrNud()
         Me.lblMinLat = New System.Windows.Forms.Label()
         Me.lblMaxLat = New System.Windows.Forms.Label()
         Me.lblMinLon = New System.Windows.Forms.Label()
         Me.lblMaxLon = New System.Windows.Forms.Label()
         Me.lblDataName = New System.Windows.Forms.Label()
-        Me.ucrInputDataName = New instat.ucrInputTextBox()
-        Me.ucrInputDownloadFrom = New instat.ucrInputComboBox()
         Me.lblDownloadFrom = New System.Windows.Forms.Label()
-        Me.ucrInputDataFile = New instat.ucrInputComboBox()
         Me.lblDataFile = New System.Windows.Forms.Label()
+        Me.ucrInputDataFile = New instat.ucrInputComboBox()
+        Me.ucrInputDownloadFrom = New instat.ucrInputComboBox()
+        Me.ucrInputDataName = New instat.ucrInputTextBox()
+        Me.ucrNudMaxLat = New instat.ucrNud()
+        Me.ucrNudMaxLon = New instat.ucrNud()
+        Me.ucrNudMinLon = New instat.ucrNud()
+        Me.ucrNudMinLat = New instat.ucrNud()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 197)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(402, 52)
-        Me.ucrBase.TabIndex = 0
-        '
-        'ucrNudMinLat
-        '
-        Me.ucrNudMinLat.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMinLat.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMinLat.Location = New System.Drawing.Point(115, 121)
-        Me.ucrNudMinLat.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudMinLat.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMinLat.Name = "ucrNudMinLat"
-        Me.ucrNudMinLat.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudMinLat.TabIndex = 2
-        Me.ucrNudMinLat.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudMinLon
-        '
-        Me.ucrNudMinLon.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMinLon.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMinLon.Location = New System.Drawing.Point(115, 88)
-        Me.ucrNudMinLon.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudMinLon.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMinLon.Name = "ucrNudMinLon"
-        Me.ucrNudMinLon.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudMinLon.TabIndex = 3
-        Me.ucrNudMinLon.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudMaxLon
-        '
-        Me.ucrNudMaxLon.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMaxLon.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMaxLon.Location = New System.Drawing.Point(304, 95)
-        Me.ucrNudMaxLon.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudMaxLon.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMaxLon.Name = "ucrNudMaxLon"
-        Me.ucrNudMaxLon.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudMaxLon.TabIndex = 4
-        Me.ucrNudMaxLon.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudMaxLat
-        '
-        Me.ucrNudMaxLat.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMaxLat.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMaxLat.Location = New System.Drawing.Point(304, 128)
-        Me.ucrNudMaxLat.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudMaxLat.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMaxLat.Name = "ucrNudMaxLat"
-        Me.ucrNudMaxLat.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudMaxLat.TabIndex = 5
-        Me.ucrNudMaxLat.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblMinLat
         '
         Me.lblMinLat.AutoSize = True
-        Me.lblMinLat.Location = New System.Drawing.Point(12, 121)
+        Me.lblMinLat.Location = New System.Drawing.Point(7, 128)
         Me.lblMinLat.Name = "lblMinLat"
         Me.lblMinLat.Size = New System.Drawing.Size(89, 13)
         Me.lblMinLat.TabIndex = 6
@@ -115,7 +60,7 @@ Partial Class dlgImportGriddedData
         'lblMinLon
         '
         Me.lblMinLon.AutoSize = True
-        Me.lblMinLon.Location = New System.Drawing.Point(7, 95)
+        Me.lblMinLon.Location = New System.Drawing.Point(7, 88)
         Me.lblMinLon.Name = "lblMinLon"
         Me.lblMinLon.Size = New System.Drawing.Size(98, 13)
         Me.lblMinLon.TabIndex = 8
@@ -124,7 +69,7 @@ Partial Class dlgImportGriddedData
         'lblMaxLon
         '
         Me.lblMaxLon.AutoSize = True
-        Me.lblMaxLon.Location = New System.Drawing.Point(177, 95)
+        Me.lblMaxLon.Location = New System.Drawing.Point(177, 88)
         Me.lblMaxLon.Name = "lblMaxLon"
         Me.lblMaxLon.Size = New System.Drawing.Size(101, 13)
         Me.lblMaxLon.TabIndex = 9
@@ -133,57 +78,112 @@ Partial Class dlgImportGriddedData
         'lblDataName
         '
         Me.lblDataName.AutoSize = True
-        Me.lblDataName.Location = New System.Drawing.Point(53, 162)
+        Me.lblDataName.Location = New System.Drawing.Point(20, 162)
         Me.lblDataName.Name = "lblDataName"
         Me.lblDataName.Size = New System.Drawing.Size(64, 13)
         Me.lblDataName.TabIndex = 10
         Me.lblDataName.Text = "Data Name:"
+        '
+        'lblDownloadFrom
+        '
+        Me.lblDownloadFrom.AutoSize = True
+        Me.lblDownloadFrom.Location = New System.Drawing.Point(12, 12)
+        Me.lblDownloadFrom.Name = "lblDownloadFrom"
+        Me.lblDownloadFrom.Size = New System.Drawing.Size(84, 13)
+        Me.lblDownloadFrom.TabIndex = 13
+        Me.lblDownloadFrom.Text = "Download From:"
+        '
+        'lblDataFile
+        '
+        Me.lblDataFile.AutoSize = True
+        Me.lblDataFile.Location = New System.Drawing.Point(12, 55)
+        Me.lblDataFile.Name = "lblDataFile"
+        Me.lblDataFile.Size = New System.Drawing.Size(52, 13)
+        Me.lblDataFile.TabIndex = 15
+        Me.lblDataFile.Text = "Data File:"
+        '
+        'ucrInputDataFile
+        '
+        Me.ucrInputDataFile.AddQuotesIfUnrecognised = True
+        Me.ucrInputDataFile.IsReadOnly = False
+        Me.ucrInputDataFile.Location = New System.Drawing.Point(94, 51)
+        Me.ucrInputDataFile.Name = "ucrInputDataFile"
+        Me.ucrInputDataFile.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputDataFile.TabIndex = 14
+        '
+        'ucrInputDownloadFrom
+        '
+        Me.ucrInputDownloadFrom.AddQuotesIfUnrecognised = True
+        Me.ucrInputDownloadFrom.IsReadOnly = False
+        Me.ucrInputDownloadFrom.Location = New System.Drawing.Point(115, 8)
+        Me.ucrInputDownloadFrom.Name = "ucrInputDownloadFrom"
+        Me.ucrInputDownloadFrom.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputDownloadFrom.TabIndex = 12
         '
         'ucrInputDataName
         '
         Me.ucrInputDataName.AddQuotesIfUnrecognised = True
         Me.ucrInputDataName.IsMultiline = False
         Me.ucrInputDataName.IsReadOnly = False
-        Me.ucrInputDataName.Location = New System.Drawing.Point(171, 154)
+        Me.ucrInputDataName.Location = New System.Drawing.Point(98, 158)
         Me.ucrInputDataName.Name = "ucrInputDataName"
         Me.ucrInputDataName.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputDataName.TabIndex = 11
         '
-        'ucrInputDownloadFrom
+        'ucrNudMaxLat
         '
-        Me.ucrInputDownloadFrom.AddQuotesIfUnrecognised = True
-        Me.ucrInputDownloadFrom.IsReadOnly = False
-        Me.ucrInputDownloadFrom.Location = New System.Drawing.Point(180, 12)
-        Me.ucrInputDownloadFrom.Name = "ucrInputDownloadFrom"
-        Me.ucrInputDownloadFrom.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputDownloadFrom.TabIndex = 12
+        Me.ucrNudMaxLat.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaxLat.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudMaxLat.Location = New System.Drawing.Point(284, 124)
+        Me.ucrNudMaxLat.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMaxLat.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaxLat.Name = "ucrNudMaxLat"
+        Me.ucrNudMaxLat.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudMaxLat.TabIndex = 5
+        Me.ucrNudMaxLat.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'lblDownloadFrom
+        'ucrNudMaxLon
         '
-        Me.lblDownloadFrom.AutoSize = True
-        Me.lblDownloadFrom.Location = New System.Drawing.Point(45, 20)
-        Me.lblDownloadFrom.Name = "lblDownloadFrom"
-        Me.lblDownloadFrom.Size = New System.Drawing.Size(84, 13)
-        Me.lblDownloadFrom.TabIndex = 13
-        Me.lblDownloadFrom.Text = "Download From:"
+        Me.ucrNudMaxLon.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaxLon.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudMaxLon.Location = New System.Drawing.Point(284, 84)
+        Me.ucrNudMaxLon.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMaxLon.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaxLon.Name = "ucrNudMaxLon"
+        Me.ucrNudMaxLon.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudMaxLon.TabIndex = 4
+        Me.ucrNudMaxLon.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrInputDataFile
+        'ucrNudMinLon
         '
-        Me.ucrInputDataFile.AddQuotesIfUnrecognised = True
-        Me.ucrInputDataFile.IsReadOnly = False
-        Me.ucrInputDataFile.Location = New System.Drawing.Point(171, 55)
-        Me.ucrInputDataFile.Name = "ucrInputDataFile"
-        Me.ucrInputDataFile.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputDataFile.TabIndex = 14
+        Me.ucrNudMinLon.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMinLon.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudMinLon.Location = New System.Drawing.Point(115, 84)
+        Me.ucrNudMinLon.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMinLon.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMinLon.Name = "ucrNudMinLon"
+        Me.ucrNudMinLon.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudMinLon.TabIndex = 3
+        Me.ucrNudMinLon.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'lblDataFile
+        'ucrNudMinLat
         '
-        Me.lblDataFile.AutoSize = True
-        Me.lblDataFile.Location = New System.Drawing.Point(53, 55)
-        Me.lblDataFile.Name = "lblDataFile"
-        Me.lblDataFile.Size = New System.Drawing.Size(52, 13)
-        Me.lblDataFile.TabIndex = 15
-        Me.lblDataFile.Text = "Data File:"
+        Me.ucrNudMinLat.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMinLat.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudMinLat.Location = New System.Drawing.Point(115, 124)
+        Me.ucrNudMinLat.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMinLat.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMinLat.Name = "ucrNudMinLat"
+        Me.ucrNudMinLat.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudMinLat.TabIndex = 2
+        Me.ucrNudMinLat.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(10, 197)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(402, 52)
+        Me.ucrBase.TabIndex = 0
         '
         'dlgImportGriddedData
         '
