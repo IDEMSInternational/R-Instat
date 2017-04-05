@@ -47,11 +47,6 @@ Public Class sdgTwoWayFrequencies
         ucrInputVerticalLabels.SetItems(dctVerticalPositionLabel)
         ucrInputVerticalLabels.SetRDefault(Chr(34) & "bottom" & Chr(34))
 
-        ucrChkShowValues.SetText("Show Values")
-        ucrChkShowValues.SetParameter(New RParameter("show.values", 4), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        ucrChkShowValues.SetRDefault("TRUE")
-
-
         ucrChkStack.SetText("Stack Bar Graph")
         ucrChkStack.SetParameter(New RParameter("bar.pos", 10), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "stack" & Chr(34), strNewValueIfUnchecked:=Chr(34) & "dodge" & Chr(34))
         ucrChkStack.SetRDefault(Chr(34) & "dodge" & Chr(34))
@@ -91,12 +86,12 @@ Public Class sdgTwoWayFrequencies
         ucrPnlGraphType.AddRadioButton(rdoLine, Chr(34) & "line" & Chr(34))
         ucrPnlGraphType.SetRDefault(Chr(34) & "bar" & Chr(34))
 
-        ucrInputCountsName.SetParameter(New RParameter("string.total", 12))
-        ucrInputCountsName.SetRDefault(Chr(34) & "Total" & Chr(34))
+        ucrInputTotalsName.SetParameter(New RParameter("string.total", 12))
+        ucrInputTotalsName.SetRDefault(Chr(34) & "Total" & Chr(34))
         ucrChkTotalColumnName.SetText("Total Column Name")
 
-        ucrChkTotalColumnName.SetParameter(ucrInputCountsName.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        ucrChkTotalColumnName.AddToLinkedControls(ucrInputCountsName, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkTotalColumnName.SetParameter(ucrInputTotalsName.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkTotalColumnName.AddToLinkedControls(ucrInputTotalsName, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrSaveGraph.SetPrefix("one_way_freq")
         ucrSaveGraph.SetSaveTypeAsGraph()
@@ -119,10 +114,9 @@ Public Class sdgTwoWayFrequencies
         ucrNudDecimalPlaces.SetRCode(clsTwoWayTableFreq, bReset)
         ucrChkMissingValues.SetRCode(clsTwoWayTableFreq, bReset)
         ucrInputTableTitle.SetRCode(clsTwoWayTableFreq, bReset)
-        ucrInputCountsName.SetRCode(clsTwoWayTableFreq, bReset)
+        ucrInputTotalsName.SetRCode(clsTwoWayTableFreq, bReset)
         ucrChkTotalColumnName.SetRCode(clsTwoWayTableFreq, bReset)
         ucrChkShowCount.SetRCode(clsTwoWayGraphFreq, bReset)
-        ucrChkShowValues.SetRCode(clsTwoWayGraphFreq, bReset)
         ucrChkStack.SetRCode(clsTwoWayGraphFreq, bReset)
         ucrChkShowPercentage.SetRCode(clsTwoWayGraphFreq, bReset)
         ucrChkShowModelSummary.SetRCode(clsTwoWayGraphFreq, bReset)
