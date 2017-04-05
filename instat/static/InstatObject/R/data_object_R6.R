@@ -303,7 +303,8 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
       col_attributes[[data_type_label]] <- class(col)
       for(att_name in names(col_attributes)) {
         #TODO Think how to do this more generally and cover all cases
-        if(is.list(col_attributes[[att_name]]) || length(col_attributes[[att_name]]) > 1) col_attributes[[att_name]] <- paste(unlist(col_attributes[[att_name]]), collapse = ",")
+        if(att_name == "labels") col_attributes[[att_name]] <- paste(names(col_attributes[[att_name]]), "=", col_attributes[[att_name]], collapse = ", ")
+        else if(is.list(col_attributes[[att_name]]) || length(col_attributes[[att_name]]) > 1) col_attributes[[att_name]] <- paste(unlist(col_attributes[[att_name]]), collapse = ",")
         # TODO Possible alternative to include names of list
         # TODO See how to have data frame properly containing lists
         #if(is.list(col_attributes[[att_name]]) || length(col_attributes[[att_name]]) > 1) col_attributes[[att_name]] <- paste(names(unlist(col_attributes[[att_name]])), unlist(col_attributes[[att_name]]), collapse = ",")
