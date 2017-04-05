@@ -10,6 +10,8 @@ Public Class ucrVariablesAsFactor
     Private strColumnsParameterNameInRFunction As String = "col_names"
     Public WithEvents Selector As ucrSelector
 
+    Public bWithQuotes As Boolean = True 'TODO  this is not implemented correctly yet
+
     Public Sub New()
         ' This call is required by the designer.
         InitializeComponent()
@@ -150,12 +152,12 @@ Public Class ucrVariablesAsFactor
             SetMeasureVars()
         End If
         RaiseEvent SelectionChanged()
-        UpdateParameter()
+
     End Sub
 
     Private Sub ucrSingleVariable_SelectionChanged(sender As Object, e As EventArgs) Handles ucrSingleVariable.SelectionChanged
         RaiseEvent SelectionChanged()
-        UpdateParameter()
+
     End Sub
 
     Public Function IsEmpty() As Boolean
@@ -183,13 +185,14 @@ Public Class ucrVariablesAsFactor
                 ucrVariableSelector.ucrAvailableDataFrames.clsCurrDataFrame.RemoveParameterByName("measure.vars")
                 ucrVariableSelector.ucrAvailableDataFrames.clsCurrDataFrame.RemoveParameterByName("id.vars")
             End If
-            If ucrFactorReceiver IsNot Nothing Then
-                ucrFactorReceiver.SetStackedFactorMode(False)
-            End If
             ucrSingleVariable.SetMeAsReceiver()
-
+            If clsParameter Is Nothing Then
+                'Update parameter here
+                clsParameter = New RParameter
+                clsParameter.SetArgumentValue(ucrSingleVariable.GetVariableNames())
+            End If
         Else
-                ucrSingleVariable.Visible = False
+            ucrSingleVariable.Visible = False
             ucrMultipleVariables.Visible = True
             'TODO need to translate correctly
             cmdVariables.Text = "Multiple Variables"
@@ -201,6 +204,11 @@ Public Class ucrVariablesAsFactor
                 ucrVariableSelector.ucrAvailableDataFrames.clsCurrDataFrame.AddParameter("id.vars", GetIDVarNamesFromSelector())
             End If
             ucrMultipleVariables.SetMeAsReceiver()
+            If clsParameter Is Nothing Then
+                'Update parameter here
+                clsParameter = New RParameter
+                clsParameter.SetArgumentValue(ucrMultipleVariables.GetVariableNames())
+            End If
         End If
     End Sub
 
@@ -288,10 +296,7 @@ Public Class ucrVariablesAsFactor
     End Sub
 
     Public Sub UpdateParameter()
-        If clsParameter Is Nothing Then
-            clsParameter = New RParameter
-        End If
-        clsParameter.SetArgument(GetVariables(bForceAsDataFrame = True))
+
     End Sub
 
     Public Overrides Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False)

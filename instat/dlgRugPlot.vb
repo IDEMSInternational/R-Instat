@@ -71,18 +71,21 @@ Public Class dlgRugPlot
         ucrVariablesAsFactorForRugPlot.SetSelector(ucrRugPlotSelector)
         ucrVariablesAsFactorForRugPlot.SetIncludedDataType({"factor", "numeric"})
         ucrVariablesAsFactorForRugPlot.SetParameter(New RParameter("y"))
-        ucrVariablesAsFactorForRugPlot.SetParameterIsRFunction()
+        ucrVariablesAsFactorForRugPlot.bWithQuotes = False
+        ucrVariablesAsFactorForRugPlot.SetParameterIsString()
 
         ucrReceiverX.Selector = ucrRugPlotSelector
         ucrReceiverX.SetIncludedDataTypes({"factor", "numeric"})
         ucrReceiverX.SetParameter(New RParameter("x"))
-        ucrReceiverX.SetParameterIsRFunction()
+        ucrReceiverX.bWithQuotes = False
+        ucrReceiverX.SetParameterIsString()
 
 
         ucrFactorOptionalReceiver.Selector = ucrRugPlotSelector
         ucrFactorOptionalReceiver.SetIncludedDataTypes({"factor", "numeric"})
         ucrFactorOptionalReceiver.SetParameter(New RParameter("colour"))
-        ucrFactorOptionalReceiver.SetParameterIsRFunction()
+        ucrFactorOptionalReceiver.bWithQuotes = False
+        ucrFactorOptionalReceiver.SetParameterIsString()
 
         ucrSaveGraph.SetPrefix("Rug")
         ucrSaveGraph.SetSaveTypeAsGraph()
