@@ -54,8 +54,6 @@ Public Class dlgImportGriddedData
         dctDownloadPairs.Add("NASA_TRMM_3B42", Chr(34) & "NASA_TRMM_3B42" & Chr(34))
         ucrInputDownloadFrom.SetItems(dctDownloadPairs)
 
-
-
         ucrNudMinLon.SetParameter(New RParameter("X1", 3))
         ucrNudMinLon.SetMinMax(-180, 180)
         ucrNudMinLon.DecimalPlaces = 2
@@ -76,12 +74,10 @@ Public Class dlgImportGriddedData
         ucrNudMaxLat.DecimalPlaces = 2
         ucrNudMaxLat.Increment = 0.01
         ucrNudMaxLat.SetLinkedDisplayControl(lblMaxLat)
-
     End Sub
 
     Private Sub SetDefaults()
         clsRDefaultFunction = New RFunction
-        'ucrInputDataFile = New ucrInputComboBox
         dctFiles = New Dictionary(Of String, String)
         ucrInputDataFile.SetText("")
         ucrInputDataFile.SetParameter(New RParameter("data_file", 2))
@@ -135,32 +131,26 @@ Public Class dlgImportGriddedData
             ucrNudMaxLon.SetMinMax(-180, 180)
             ucrNudMinLat.SetMinMax(-50, 50)
             ucrNudMaxLat.SetMinMax(-50, 50)
-            'ucrInputDataFile = New ucrInputComboBox
-            'clsRDefaultFunction = New RFunction
             dctFiles = New Dictionary(Of String, String)
             ucrInputDataFile.SetParameter(New RParameter("data_file", 2))
-            dctFiles.Add("Daily_0p05", Chr(34) & "Daily_0p05" & Chr(34))
-            dctFiles.Add("Daily_0p25", Chr(34) & "Daily_0p25" & Chr(34))
-            dctFiles.Add("Daily_Improved_0p05", Chr(34) & "Daily_improved_0p05" & Chr(34))
-            dctFiles.Add("Daily Improved 0p25(CHIRPS)", Chr(34) & "Daily_improved_0p25" & Chr(34))
-            dctFiles.Add("Dekad(CHIRPS)", Chr(34) & "Dekad" & Chr(34))
-            dctFiles.Add("Monthly c8113(CHIRPS)", Chr(34) & "Monthly_c8113" & Chr(34))
-            dctFiles.Add("Monthly deg1p0(CHIRPS)", Chr(34) & "Monthly_deg1p0" & Chr(34))
-            dctFiles.Add("Monthly NMME deg1p0(CHIRPS)", Chr(34) & "Monthly_NMME_deg1p0" & Chr(34))
-            dctFiles.Add("Monthly Precipitation(CHIRPS)", Chr(34) & "Monthly_prcp" & Chr(34))
+            dctFiles.Add("Daily 0p05", Chr(34) & "Daily_0p05" & Chr(34))
+            dctFiles.Add("Daily 0p25", Chr(34) & "Daily_0p25" & Chr(34))
+            dctFiles.Add("Daily Improved 0p05", Chr(34) & "Daily_improved_0p05" & Chr(34))
+            dctFiles.Add("Daily Improved 0p25", Chr(34) & "Daily_improved_0p25" & Chr(34))
+            dctFiles.Add("Dekad", Chr(34) & "Dekad" & Chr(34))
+            dctFiles.Add("Monthly c8113", Chr(34) & "Monthly_c8113" & Chr(34))
+            dctFiles.Add("Monthly deg1p0", Chr(34) & "Monthly_deg1p0" & Chr(34))
+            dctFiles.Add("Monthly NMME deg1p0", Chr(34) & "Monthly_NMME_deg1p0" & Chr(34))
+            dctFiles.Add("Monthly Precipitation", Chr(34) & "Monthly_prcp" & Chr(34))
             ucrInputDataFile.SetItems(dctFiles)
             ucrInputDataFile.cboInput.SelectedItem = "Daily_0p05"
-            'ucrInputDataFile.UpdateControl()
         Else
             ucrNudMinLon.SetMinMax(-20, 55)
             ucrNudMaxLon.SetMinMax(-20, 55)
             ucrNudMinLat.SetMinMax(-40, 40)
             ucrNudMaxLat.SetMinMax(-40, 40)
             If ucrInputDownloadFrom.cboInput.SelectedItem = "TAMSAT" Then
-                'clsRDefaultFunction = New RFunction
-                'ucrInputDataFile = New ucrInputComboBox
                 dctFiles = New Dictionary(Of String, String)
-                'dctFiles.Clear()
                 ucrInputDataFile.SetParameter(New RParameter("data_file", 2))
                 dctFiles.Add("Rainfall_Estimates", Chr(34) & "Rainfall_estimates" & Chr(34))
                 dctFiles.Add("Reconstructed Rainfall Anomaly(TAMSAT)", Chr(34) & "Reconstructed_rainfall_anomaly" & Chr(34))
@@ -169,13 +159,12 @@ Public Class dlgImportGriddedData
                 'monthly,climatology and TAMSAT RFE 0p1 are yet to be implemented.
                 ucrInputDataFile.SetItems(dctFiles)
                 ucrInputDataFile.cboInput.SelectedItem = "Rainfall_Estimates"
-                'ElseIf ucrInputDownloadFrom.cboInput.SelectedItem = "CHIRPS" Then
-                'ElseIf ucrInputDownloadFrom.cboInput.SelectedItem = "CHIRPS" Then
-                'ElseIf ucrInputDownloadFrom.cboInput.SelectedItem = "CHIRPS" Then
-                'ElseIf ucrInputDownloadFrom.cboInput.SelectedItem = "CHIRPS" Then
-                'ElseIf ucrInputDownloadFrom.cboInput.SelectedItem = "CHIRPS" Then
+            ElseIf ucrInputDownloadFrom.cboInput.SelectedItem = "CHIRPS" Then
+            ElseIf ucrInputDownloadFrom.cboInput.SelectedItem = "CHIRPS" Then
+            ElseIf ucrInputDownloadFrom.cboInput.SelectedItem = "CHIRPS" Then
+            ElseIf ucrInputDownloadFrom.cboInput.SelectedItem = "CHIRPS" Then
+            ElseIf ucrInputDownloadFrom.cboInput.SelectedItem = "CHIRPS" Then
             End If
         End If
-        'SetRCodeForControls(False)
     End Sub
 End Class
