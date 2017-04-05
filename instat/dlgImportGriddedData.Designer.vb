@@ -35,6 +35,8 @@ Partial Class dlgImportGriddedData
         Me.ucrInputDataName = New instat.ucrInputTextBox()
         Me.ucrInputDownloadFrom = New instat.ucrInputComboBox()
         Me.lblDownloadFrom = New System.Windows.Forms.Label()
+        Me.ucrInputDataFile = New instat.ucrInputComboBox()
+        Me.lblDataFile = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -131,7 +133,7 @@ Partial Class dlgImportGriddedData
         'lblDataName
         '
         Me.lblDataName.AutoSize = True
-        Me.lblDataName.Location = New System.Drawing.Point(45, 21)
+        Me.lblDataName.Location = New System.Drawing.Point(53, 162)
         Me.lblDataName.Name = "lblDataName"
         Me.lblDataName.Size = New System.Drawing.Size(64, 13)
         Me.lblDataName.TabIndex = 10
@@ -142,7 +144,7 @@ Partial Class dlgImportGriddedData
         Me.ucrInputDataName.AddQuotesIfUnrecognised = True
         Me.ucrInputDataName.IsMultiline = False
         Me.ucrInputDataName.IsReadOnly = False
-        Me.ucrInputDataName.Location = New System.Drawing.Point(115, 21)
+        Me.ucrInputDataName.Location = New System.Drawing.Point(171, 154)
         Me.ucrInputDataName.Name = "ucrInputDataName"
         Me.ucrInputDataName.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputDataName.TabIndex = 11
@@ -151,7 +153,7 @@ Partial Class dlgImportGriddedData
         '
         Me.ucrInputDownloadFrom.AddQuotesIfUnrecognised = True
         Me.ucrInputDownloadFrom.IsReadOnly = False
-        Me.ucrInputDownloadFrom.Location = New System.Drawing.Point(156, 48)
+        Me.ucrInputDownloadFrom.Location = New System.Drawing.Point(180, 12)
         Me.ucrInputDownloadFrom.Name = "ucrInputDownloadFrom"
         Me.ucrInputDownloadFrom.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputDownloadFrom.TabIndex = 12
@@ -159,17 +161,37 @@ Partial Class dlgImportGriddedData
         'lblDownloadFrom
         '
         Me.lblDownloadFrom.AutoSize = True
-        Me.lblDownloadFrom.Location = New System.Drawing.Point(37, 48)
+        Me.lblDownloadFrom.Location = New System.Drawing.Point(45, 20)
         Me.lblDownloadFrom.Name = "lblDownloadFrom"
         Me.lblDownloadFrom.Size = New System.Drawing.Size(84, 13)
         Me.lblDownloadFrom.TabIndex = 13
         Me.lblDownloadFrom.Text = "Download From:"
+        '
+        'ucrInputDataFile
+        '
+        Me.ucrInputDataFile.AddQuotesIfUnrecognised = True
+        Me.ucrInputDataFile.IsReadOnly = False
+        Me.ucrInputDataFile.Location = New System.Drawing.Point(171, 55)
+        Me.ucrInputDataFile.Name = "ucrInputDataFile"
+        Me.ucrInputDataFile.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputDataFile.TabIndex = 14
+        '
+        'lblDataFile
+        '
+        Me.lblDataFile.AutoSize = True
+        Me.lblDataFile.Location = New System.Drawing.Point(53, 55)
+        Me.lblDataFile.Name = "lblDataFile"
+        Me.lblDataFile.Size = New System.Drawing.Size(52, 13)
+        Me.lblDataFile.TabIndex = 15
+        Me.lblDataFile.Text = "Data File:"
         '
         'dlgImportGriddedData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(426, 261)
+        Me.Controls.Add(Me.lblDataFile)
+        Me.Controls.Add(Me.ucrInputDataFile)
         Me.Controls.Add(Me.lblDownloadFrom)
         Me.Controls.Add(Me.ucrInputDownloadFrom)
         Me.Controls.Add(Me.ucrInputDataName)
@@ -207,4 +229,6 @@ Partial Class dlgImportGriddedData
     Friend WithEvents ucrInputDataName As ucrInputTextBox
     Friend WithEvents ucrInputDownloadFrom As ucrInputComboBox
     Friend WithEvents lblDownloadFrom As Label
+    Friend WithEvents ucrInputDataFile As ucrInputComboBox
+    Friend WithEvents lblDataFile As Label
 End Class
