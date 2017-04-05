@@ -226,7 +226,16 @@ Public Class dlgTwoWayFrequencies
         sdgTwoWayFrequencies.SetRFunction(clsSjtXtab, clsSjpXtab, bResetSubdialog)
         bResetSubdialog = False
         sdgTwoWayFrequencies.ShowDialog()
+        ShowValueParameter()
         TestOkEnabled()
+    End Sub
+
+    Public Sub ShowValueParameter()
+        If (sdgTwoWayFrequencies.ucrChkShowPercentage.Checked = False AndAlso sdgTwoWayFrequencies.ucrChkShowCount.Checked = False) Then
+            ucrBase.clsRsyntax.AddParameter("show.values", "FALSE")
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("show.values")
+        End If
     End Sub
 
     Private Sub ucrChkFlip_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFlip.ControlValueChanged

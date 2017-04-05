@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class sdgTwoWayFrequencies
     Public bControlsInitialised As Boolean = False
@@ -125,5 +126,13 @@ Public Class sdgTwoWayFrequencies
         ucrInputHorizontalLabels.SetRCode(clsTwoWayGraphFreq, bReset)
         ucrInputGraphTitle.SetRCode(clsTwoWayGraphFreq, bReset)
         ucrSaveGraph.SetRCode(clsTwoWayGraphFreq, bReset)
+    End Sub
+
+    Private Sub ucrChkShowCount_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkShowCount.ControlValueChanged, ucrChkShowPercentage.ControlValueChanged
+        'If Not (ucrChkShowPercentage.Checked AndAlso ucrChkShowCount.Checked) Then
+        '    dlgTwoWayFrequencies.ucrBase.clsRsyntax.AddParameter("show.values", "FALSE")
+        'Else
+        '    dlgTwoWayFrequencies.ucrBase.clsRsyntax.AddParameter("show.values", "TRUE")
+        'End If
     End Sub
 End Class
