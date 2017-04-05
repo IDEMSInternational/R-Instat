@@ -18,7 +18,6 @@ Imports instat.Translations
 Imports RDotNet
 Public Class dlgRegularSequence
     Dim bIsExtended As Boolean = False
-    Protected bMinimumIncluded, bMaximumIncluded As Boolean
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsSeqFunction, clsRepFunction As New RFunction
@@ -90,9 +89,13 @@ Public Class dlgRegularSequence
         rdoDates.Enabled = False
         dtpSelectorB.Visible = False
         dtpSelectorA.Visible = False
-        chkDefineAsFactor.Visible = False
+        ucrChkDefineAsFactor.SetText("Define As Factor")
         'ucrInputFrom.Visible = False
         ' ucrInputTo.Visible = False
+    End Sub
+
+    Private Sub ucrChkDefineAsFactor_Load(sender As Object, e As EventArgs) Handles ucrChkDefineAsFactor.Load
+        ucrChkDefineAsFactor.Enabled = False
     End Sub
 
     Private Sub SetDefaults()
