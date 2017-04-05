@@ -31,6 +31,7 @@ Public Class ucrFactor
     Private bIsEditable As Boolean
     Private lstEditableColumns As List(Of String)
     Public bIncludeCopyOfLevels As Boolean
+    Public strExtraColumn As String = ""
 
     Public Sub New()
 
@@ -123,6 +124,10 @@ Public Class ucrFactor
                     shtCurrSheet(i, shtCurrSheet.ColumnCount - 1) = shtCurrSheet(i, 0)
                 Next
             End If
+            If strExtraColumn <> "" Then
+                shtCurrSheet.AppendCols(1)
+                shtCurrSheet.ColumnHeaders(shtCurrSheet.ColumnCount - 1).Text = strExtraColumn
+            End If
             If bIsSelector Then
                 iSelectorColumnIndex = shtCurrSheet.ColumnCount
                 shtCurrSheet.AppendCols(1)
@@ -152,6 +157,7 @@ Public Class ucrFactor
             shtCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
             shtCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
             ApplyColumnSettings()
+            RaiseEvent GridContentChanged()
         End If
     End Sub
 
