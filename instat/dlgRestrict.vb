@@ -13,6 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 Imports RDotNet
 Public Class dlgRestrict
@@ -152,7 +153,7 @@ Public Class dlgRestrict
     Private Sub SetFilterOptions()
         If ucrReceiverFilter.IsEmpty Then
             'TODO translate this
-            ucrInputFilterPreview.SetName("Current Filter will be removed.")
+            ucrInputFilterPreview.SetName("( )")
             clsSubset.RemoveParameterByName("filter_name")
             clsFilterView.RemoveParameterByName("filter_name")
             clsSetCurrentFilter.RemoveParameterByName("filter_name")
@@ -205,5 +206,9 @@ Public Class dlgRestrict
 
     Private Sub ucrNewDataFrameName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewDataFrameName.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrNewDataFrameName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNewDataFrameName.ControlValueChanged
+        SetBaseFunction()
     End Sub
 End Class
