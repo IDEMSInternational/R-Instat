@@ -45,7 +45,7 @@ Partial Class dlgAppend
         'lblDataframes
         '
         Me.lblDataframes.AutoSize = True
-        Me.lblDataframes.Location = New System.Drawing.Point(10, 13)
+        Me.lblDataframes.Location = New System.Drawing.Point(12, 17)
         Me.lblDataframes.Name = "lblDataframes"
         Me.lblDataframes.Size = New System.Drawing.Size(70, 13)
         Me.lblDataframes.TabIndex = 0
@@ -54,7 +54,7 @@ Partial Class dlgAppend
         'lblIDColName
         '
         Me.lblIDColName.AutoSize = True
-        Me.lblIDColName.Location = New System.Drawing.Point(136, 203)
+        Me.lblIDColName.Location = New System.Drawing.Point(136, 180)
         Me.lblIDColName.Name = "lblIDColName"
         Me.lblIDColName.Size = New System.Drawing.Size(90, 13)
         Me.lblIDColName.TabIndex = 5
@@ -65,7 +65,7 @@ Partial Class dlgAppend
         Me.ucrInputIDColName.AddQuotesIfUnrecognised = True
         Me.ucrInputIDColName.IsMultiline = False
         Me.ucrInputIDColName.IsReadOnly = False
-        Me.ucrInputIDColName.Location = New System.Drawing.Point(228, 199)
+        Me.ucrInputIDColName.Location = New System.Drawing.Point(228, 176)
         Me.ucrInputIDColName.Name = "ucrInputIDColName"
         Me.ucrInputIDColName.Size = New System.Drawing.Size(180, 21)
         Me.ucrInputIDColName.TabIndex = 6
@@ -83,22 +83,22 @@ Partial Class dlgAppend
         'ucrSelectorDataframes
         '
         Me.ucrSelectorDataframes.bShowHiddenColumns = False
-        Me.ucrSelectorDataframes.Location = New System.Drawing.Point(10, 28)
+        Me.ucrSelectorDataframes.Location = New System.Drawing.Point(10, 32)
         Me.ucrSelectorDataframes.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorDataframes.Name = "ucrSelectorDataframes"
-        Me.ucrSelectorDataframes.Size = New System.Drawing.Size(216, 182)
+        Me.ucrSelectorDataframes.Size = New System.Drawing.Size(216, 150)
         Me.ucrSelectorDataframes.TabIndex = 1
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 251)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 228)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(400, 52)
         Me.ucrBase.TabIndex = 8
         '
         'ucrSaveGraph
         '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 226)
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 203)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
         Me.ucrSaveGraph.Size = New System.Drawing.Size(305, 24)
         Me.ucrSaveGraph.TabIndex = 7
@@ -106,7 +106,7 @@ Partial Class dlgAppend
         'ucrChkIncludeIDColumn
         '
         Me.ucrChkIncludeIDColumn.Checked = False
-        Me.ucrChkIncludeIDColumn.Location = New System.Drawing.Point(10, 200)
+        Me.ucrChkIncludeIDColumn.Location = New System.Drawing.Point(10, 177)
         Me.ucrChkIncludeIDColumn.Name = "ucrChkIncludeIDColumn"
         Me.ucrChkIncludeIDColumn.Size = New System.Drawing.Size(116, 20)
         Me.ucrChkIncludeIDColumn.TabIndex = 4
@@ -115,7 +115,7 @@ Partial Class dlgAppend
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(417, 310)
+        Me.ClientSize = New System.Drawing.Size(417, 288)
         Me.Controls.Add(Me.ucrChkIncludeIDColumn)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrInputIDColName)
