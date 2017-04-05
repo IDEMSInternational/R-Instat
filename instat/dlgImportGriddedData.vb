@@ -40,6 +40,7 @@ Public Class dlgImportGriddedData
 
     Private Sub InitialiseDialog()
         dctDownloadPairs = New Dictionary(Of String, String)
+
         'ucrBase.iHelpTopicID = 
 
         ucrInputDataName.SetParameter(New RParameter("data_names", 0))
@@ -50,7 +51,12 @@ Public Class dlgImportGriddedData
         dctDownloadPairs.Add("TAMSAT", Chr(34) & "TAMSAT" & Chr(34))
         dctDownloadPairs.Add("NOAA_ARC2", Chr(34) & "NOAA_ARC2" & Chr(34))
         dctDownloadPairs.Add("NOAA_RFE2", Chr(34) & "NOAA_RFE2" & Chr(34))
-        dctDownloadPairs.Add("NOAA_CMORPH", Chr(34) & "NOAA_CMORPH" & Chr(34))
+        dctDownloadPairs.Add("NOAA_CMORPH_DAILY", Chr(34) & "NOAA_CMORPH_DAILY" & Chr(34))
+        'dctDownloadPairs.Add("NOAA_CMORPH_3HOURLY", Chr(34) & "NOAA_CMORPH_3HOURLY" & Chr(34))
+        'dctDownloadPairs.Add("NOAA_CMORPH_DAILY_CALCULATED", Chr(34) & "NOAA_CMORPH_DAILY_CALCULATED" & Chr(34))
+        'dctDownloadPairs.Add("NOAA_CMORPH_PENTAD", Chr(34) & "NOAA_CMORPH_PENTAD" & Chr(34))
+        'dctDownloadPairs.Add("NOAA_CMORPH_V0PX", Chr(34) & "NOAA_CMORPH_V0PX" & Chr(34))
+
         dctDownloadPairs.Add("NASA_TRMM_3B42", Chr(34) & "NASA_TRMM_3B42" & Chr(34))
         ucrInputDownloadFrom.SetItems(dctDownloadPairs)
 
@@ -92,14 +98,16 @@ Public Class dlgImportGriddedData
         dctFiles.Add("Monthly Precipitation(CHIRPS)", Chr(34) & "Monthly_prcp" & Chr(34))
         ucrInputDataFile.SetItems(dctFiles, bClearExisting:=False)
 
-
         clsRDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_from_iri")
         clsRDefaultFunction.AddParameter("download_from", Chr(34) & "CHIRPS_V2P0" & Chr(34))
         clsRDefaultFunction.AddParameter("data_file", Chr(34) & "Daily_0p05" & Chr(34))
-        clsRDefaultFunction.AddParameter("data_names", "CHIRPS")
-
+        clsRDefaultFunction.AddParameter("data_names", "IRI_Library_Data")
+        'opted to set this as default location since it has data for all sources
+        clsRDefaultFunction.AddParameter("X1", 10)
+        clsRDefaultFunction.AddParameter("X2", 10.5)
+        clsRDefaultFunction.AddParameter("Y1", 10)
+        clsRDefaultFunction.AddParameter("Y2", 10.5)
         ucrBase.clsRsyntax.SetBaseRFunction(clsRDefaultFunction)
-
     End Sub
 
     Private Sub TestOkEnabled()
@@ -152,19 +160,41 @@ Public Class dlgImportGriddedData
             If ucrInputDownloadFrom.cboInput.SelectedItem = "TAMSAT" Then
                 dctFiles = New Dictionary(Of String, String)
                 ucrInputDataFile.SetParameter(New RParameter("data_file", 2))
-                dctFiles.Add("Rainfall_Estimates", Chr(34) & "Rainfall_estimates" & Chr(34))
-                dctFiles.Add("Reconstructed Rainfall Anomaly(TAMSAT)", Chr(34) & "Reconstructed_rainfall_anomaly" & Chr(34))
-                dctFiles.Add("Sahel Dry Mask(TAMSAT)", Chr(34) & "Sahel_dry_mask" & Chr(34))
-                dctFiles.Add("Standard Precipitation Index 1-dekad(TAMSAT)", Chr(34) & "SPI_1_dekad" & Chr(34))
+                dctFiles.Add("Rainfall Estimates", Chr(34) & "Rainfall_estimates" & Chr(34))
+                dctFiles.Add("Reconstructed Rainfall Anomaly", Chr(34) & "Reconstructed_rainfall_anomaly" & Chr(34))
+                dctFiles.Add("Sahel Dry Mask", Chr(34) & "Sahel_dry_mask" & Chr(34))
+                dctFiles.Add("Standard Precipitation Index 1-dekad", Chr(34) & "SPI_1_dekad" & Chr(34))
                 'monthly,climatology and TAMSAT RFE 0p1 are yet to be implemented.
                 ucrInputDataFile.SetItems(dctFiles)
-                ucrInputDataFile.cboInput.SelectedItem = "Rainfall_Estimates"
-            ElseIf ucrInputDownloadFrom.cboInput.SelectedItem = "CHIRPS" Then
-            ElseIf ucrInputDownloadFrom.cboInput.SelectedItem = "CHIRPS" Then
-            ElseIf ucrInputDownloadFrom.cboInput.SelectedItem = "CHIRPS" Then
-            ElseIf ucrInputDownloadFrom.cboInput.SelectedItem = "CHIRPS" Then
-            ElseIf ucrInputDownloadFrom.cboInput.SelectedItem = "CHIRPS" Then
+                ucrInputDataFile.cboInput.SelectedItem = "Rainfall Estimates"
+            ElseIf ucrInputDownloadFrom.cboInput.SelectedItem = "NOAA_ARC2" Then
+                dctFiles = New Dictionary(Of String, String)
+                ucrInputDataFile.SetParameter(New RParameter("data_file", 2))
+                dctFiles.Add("Daily Estimated Precipitation", Chr(34) & "Daily_estimated_prcp" & Chr(34))
+                dctFiles.Add("Monthly Average Estimated Precipitation", Chr(34) & "Monthly_average_estimated_prcp" & Chr(34))
+                'monthly,climatology and TAMSAT RFE 0p1 are yet to be implemented.
+                ucrInputDataFile.SetItems(dctFiles)
+                ucrInputDataFile.cboInput.SelectedItem = "Daily Estimated Precipitation"
+            ElseIf ucrInputDownloadFrom.cboInput.SelectedItem = "NOAA_RFE2" Then
+                ucrInputDataFile.cboInput.SelectedItem = ""
+            ElseIf ucrInputDownloadFrom.cboInput.SelectedItem = "NOAA_CMORPH_DAILY" Then
+                dctFiles = New Dictionary(Of String, String)
+                ucrInputDataFile.SetParameter(New RParameter("data_file", 2))
+                dctFiles.Add("Daily Estimated Precipitation", Chr(34) & "Daily_estimated_prcp" & Chr(34))
+                dctFiles.Add("Monthly Average Estimated Precipitation", Chr(34) & "Monthly_average_estimated_prcp" & Chr(34))
+                'monthly,climatology and TAMSAT RFE 0p1 are yet to be implemented.
+                ucrInputDataFile.SetItems(dctFiles)
+                ucrInputDataFile.cboInput.SelectedItem = "Daily Estimated Precipitation"
+                'ElseIf ucrInputDownloadFrom.cboInput.SelectedItem = "NOAA_CMORPH_3HOURLY" Then
+                'ElseIf ucrInputDownloadFrom.cboInput.SelectedItem = "NOAA_CMORPH_DAILY_CALCULATED" Then
+                'ElseIf ucrInputDownloadFrom.cboInput.SelectedItem = "NOAA_CMORPH_PENTAD" Then
+                'ElseIf ucrInputDownloadFrom.cboInput.SelectedItem = "NOAA_CMORPH_V0PX" Then
+
+            ElseIf ucrInputDownloadFrom.cboInput.SelectedItem = "NASA_TRMM_3B42" Then
+
+
             End If
+            'other data sources to be added here.
         End If
     End Sub
 End Class

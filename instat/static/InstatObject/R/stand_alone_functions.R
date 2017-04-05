@@ -392,13 +392,41 @@ import_from_iri <- function(download_from, data_file, X1, X2,Y1,Y2){
     else stop("Data file does not exist for TAMSAT data")
   }
   else if(download_from=="NOAA_ARC2"){
-    prexyaddress<-paste("http://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP/.CPC/.FEWS/.Africa/.DAILY/.ARC2/.daily/.est_prcp")
+    prexyaddress<-paste("http://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP/.CPC/.FEWS/.Africa/.DAILY/.ARC2")
+    if(data_file == "Daily_estimated_prcp"){
+      prexyaddress = paste(prexyaddress, ".daily/.est_prcp", sep="/")
+    }
+    else if(data_file == "Monthly_average_estimated_prcp"){
+      prexyaddress = paste(prexyaddress, ".monthly/.est_prcp", sep="/")
+    }
+    else stop("Data file does not exist for NOAA_ARC2 data")
   }
   else if(download_from=="NOAA_RFE2"){
     prexyaddress<-paste("http://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP/.CPC/.FEWS/.Africa/.DAILY/.RFEv2/.est_prcp")
+    
   }
-  else if(download_from=="NOAA_CMORPH"){
-    prexyaddress<-paste("http://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP/.CPC/.CMORPH/.daily/?Set-Language=en")
+  else if(download_from=="NOAA_CMORPH_DAILY"){
+    prexyaddress<-paste("http://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP/.CPC/.CMORPH/.daily")
+    if(data_file == "mean_microwave_only_est_prcp"){
+      prexyaddress = paste(prexyaddress, ".mean/.microwave-only/.comb", sep="/")
+    }
+    else if(data_file == "mean_morphed_est_prcp"){
+      prexyaddress = paste(prexyaddress, ".mean/.morphed/.cmorph", sep="/")
+    }
+    if(data_file == "orignames_mean_microwave_only_est_prcp"){
+      prexyaddress = paste(prexyaddress, ".orignames/.mean/.microwave-only/.comb", sep="/")
+    }
+    else if(data_file == "orignames_mean_morphed_est_prcp"){
+      prexyaddress = paste(prexyaddress, ".orignames/.mean/.morphed/.cmorph", sep="/")
+    }
+    if(data_file == "renamed102015_mean_microwave_only_est_prcp"){
+      prexyaddress = paste(prexyaddress, ".renamed102015/.mean/.microwave-only/.comb", sep="/")
+    }
+    else if(data_file == "renamed102015_mean_morphed_est_prcp"){
+      prexyaddress = paste(prexyaddress, ".renamed102015/.mean/.morphed/.cmorph", sep="/")
+    }
+    else stop("Data file does not exist for NOAA_ARC2 data")
+    #
   }
   else if(download_from=="NASA_TRMM_3B42"){
     prexyaddress<-paste("https://iridl.ldeo.columbia.edu/SOURCES/.NASA/.GES-DAAC/.TRMM_L3/.TRMM_3B42/.v7/.daily/.precipitation")
