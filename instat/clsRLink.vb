@@ -592,6 +592,9 @@ Public Class RLink
             ucrCurrentReceiver.Clear()
             For i = 0 To vecColumns.Count - 1
                 chrCurrColumns = vecColumns(i).AsCharacter
+                If chrCurrColumns Is Nothing Then
+                    Continue For
+                End If
                 For Each strColumn As String In chrCurrColumns
                     lstItems.Add(New KeyValuePair(Of String, String)(strDataFrameName, strColumn))
                 Next
