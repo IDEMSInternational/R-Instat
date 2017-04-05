@@ -137,6 +137,20 @@ Public Class dlgRegularSequence
         End If
     End Sub
 
+    Private Sub SetInStepsOfParameter()
+        If rdoNumeric.Checked Then
+            If ucrInputInStepsOf.GetText <> "" Then
+                If (ucrInputInStepsOf.GetText = 1 AndAlso frmMain.clsInstatOptions.bIncludeRDefaultParameters) OrElse ucrInputInStepsOf.GetText <> 1 Then
+                    If ucrInputTo.GetText >= ucrInputFrom.GetText Then
+                        clsSeqFunction.AddParameter("by", ucrInputInStepsOf.GetText)
+                    Else
+                        clsSeqFunction.AddParameter("by", "-" & ucrInputInStepsOf.GetText)
+                    End If
+                End If
+            End If
+        End If
+    End Sub
+
     Private Sub SetBaseFunction()
         If ucrNudRepeatValues.Value > 1 Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsRepFunction)
@@ -221,6 +235,10 @@ Public Class dlgRegularSequence
 
     Private Sub ucrNewColumnName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewColumnName.ControlContentsChanged, ucrInputTo.ControlContentsChanged, ucrInputFrom.ControlContentsChanged, ucrInputInStepsOf.ControlContentsChanged, ucrNudRepeatValues.ControlContentsChanged, ucrPnlSequenceType.ControlContentsChanged, ucrSelectDataFrameRegularSequence.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrInputFrom_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputInStepsOf.ControlContentsChanged, ucrPnlSequenceType.ControlContentsChanged
+        SetInStepsOfParameter()
     End Sub
 
     Private Sub txtGetPreview_TextChanged(sender As Object, e As EventArgs) Handles txtGetPreview.TextChanged
