@@ -159,6 +159,7 @@ Partial Class frmMain
         Me.mnuClimatic = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticFileOpensst = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticFileImportGriddedData = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenNetCDFToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateFileClimSoft = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticFileCliData = New System.Windows.Forms.ToolStripMenuItem()
@@ -460,7 +461,7 @@ Partial Class frmMain
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
-        Me.mnuClimaticFileImportGriddedData = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RatingDataToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -496,7 +497,7 @@ Partial Class frmMain
         '
         'mnuDescribeOneVariable
         '
-        Me.mnuDescribeOneVariable.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeOneVariableSummarise, Me.mnuDescribeOneVariableGraph, Me.ToolStripSeparator33, Me.mnuDescribeOneVariableFrequencies})
+        Me.mnuDescribeOneVariable.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeOneVariableSummarise, Me.mnuDescribeOneVariableGraph, Me.ToolStripSeparator33, Me.mnuDescribeOneVariableFrequencies, Me.RatingDataToolStripMenuItem})
         Me.mnuDescribeOneVariable.Name = "mnuDescribeOneVariable"
         Me.mnuDescribeOneVariable.Size = New System.Drawing.Size(172, 22)
         Me.mnuDescribeOneVariable.Tag = "One_Variable"
@@ -505,26 +506,26 @@ Partial Class frmMain
         'mnuDescribeOneVariableSummarise
         '
         Me.mnuDescribeOneVariableSummarise.Name = "mnuDescribeOneVariableSummarise"
-        Me.mnuDescribeOneVariableSummarise.Size = New System.Drawing.Size(146, 22)
+        Me.mnuDescribeOneVariableSummarise.Size = New System.Drawing.Size(152, 22)
         Me.mnuDescribeOneVariableSummarise.Tag = "Summarise..."
         Me.mnuDescribeOneVariableSummarise.Text = "Summarise..."
         '
         'mnuDescribeOneVariableGraph
         '
         Me.mnuDescribeOneVariableGraph.Name = "mnuDescribeOneVariableGraph"
-        Me.mnuDescribeOneVariableGraph.Size = New System.Drawing.Size(146, 22)
+        Me.mnuDescribeOneVariableGraph.Size = New System.Drawing.Size(152, 22)
         Me.mnuDescribeOneVariableGraph.Tag = "Graph..."
         Me.mnuDescribeOneVariableGraph.Text = "Graph..."
         '
         'ToolStripSeparator33
         '
         Me.ToolStripSeparator33.Name = "ToolStripSeparator33"
-        Me.ToolStripSeparator33.Size = New System.Drawing.Size(143, 6)
+        Me.ToolStripSeparator33.Size = New System.Drawing.Size(149, 6)
         '
         'mnuDescribeOneVariableFrequencies
         '
         Me.mnuDescribeOneVariableFrequencies.Name = "mnuDescribeOneVariableFrequencies"
-        Me.mnuDescribeOneVariableFrequencies.Size = New System.Drawing.Size(146, 22)
+        Me.mnuDescribeOneVariableFrequencies.Size = New System.Drawing.Size(152, 22)
         Me.mnuDescribeOneVariableFrequencies.Text = "Frequencies..."
         '
         'mnuDescribeTwoVariables
@@ -1430,36 +1431,42 @@ Partial Class frmMain
         'mnuClimaticFileOpensst
         '
         Me.mnuClimaticFileOpensst.Name = "mnuClimaticFileOpensst"
-        Me.mnuClimaticFileOpensst.Size = New System.Drawing.Size(206, 22)
+        Me.mnuClimaticFileOpensst.Size = New System.Drawing.Size(215, 22)
         Me.mnuClimaticFileOpensst.Text = "Open SST..."
+        '
+        'mnuClimaticFileImportGriddedData
+        '
+        Me.mnuClimaticFileImportGriddedData.Name = "mnuClimaticFileImportGriddedData"
+        Me.mnuClimaticFileImportGriddedData.Size = New System.Drawing.Size(215, 22)
+        Me.mnuClimaticFileImportGriddedData.Text = "Import Gridded Data (IRI)..."
         '
         'OpenNetCDFToolStripMenuItem
         '
         Me.OpenNetCDFToolStripMenuItem.Name = "OpenNetCDFToolStripMenuItem"
-        Me.OpenNetCDFToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.OpenNetCDFToolStripMenuItem.Size = New System.Drawing.Size(215, 22)
         Me.OpenNetCDFToolStripMenuItem.Text = "Open NetCDF..."
         '
         'mnuClimateFileClimSoft
         '
         Me.mnuClimateFileClimSoft.Name = "mnuClimateFileClimSoft"
-        Me.mnuClimateFileClimSoft.Size = New System.Drawing.Size(206, 22)
+        Me.mnuClimateFileClimSoft.Size = New System.Drawing.Size(215, 22)
         Me.mnuClimateFileClimSoft.Text = "ClimSoft..."
         '
         'mnuClimaticFileCliData
         '
         Me.mnuClimaticFileCliData.Name = "mnuClimaticFileCliData"
-        Me.mnuClimaticFileCliData.Size = New System.Drawing.Size(206, 22)
+        Me.mnuClimaticFileCliData.Size = New System.Drawing.Size(215, 22)
         Me.mnuClimaticFileCliData.Text = "CliData..."
         '
         'ToolStripSeparator15
         '
         Me.ToolStripSeparator15.Name = "ToolStripSeparator15"
-        Me.ToolStripSeparator15.Size = New System.Drawing.Size(203, 6)
+        Me.ToolStripSeparator15.Size = New System.Drawing.Size(212, 6)
         '
         'mnuClimaticFileExportToCPT
         '
         Me.mnuClimaticFileExportToCPT.Name = "mnuClimaticFileExportToCPT"
-        Me.mnuClimaticFileExportToCPT.Size = New System.Drawing.Size(206, 22)
+        Me.mnuClimaticFileExportToCPT.Size = New System.Drawing.Size(215, 22)
         Me.mnuClimaticFileExportToCPT.Tag = "Export_to_CPT"
         Me.mnuClimaticFileExportToCPT.Text = "Export to CPT..."
         '
@@ -3627,11 +3634,11 @@ Partial Class frmMain
         Me.ucrOutput.Size = New System.Drawing.Size(295, 113)
         Me.ucrOutput.TabIndex = 0
         '
-        'mnuClimaticFileImportGriddedData
+        'RatingDataToolStripMenuItem
         '
-        Me.mnuClimaticFileImportGriddedData.Name = "mnuClimaticFileImportGriddedData"
-        Me.mnuClimaticFileImportGriddedData.Size = New System.Drawing.Size(215, 22)
-        Me.mnuClimaticFileImportGriddedData.Text = "Import Gridded Data (IRI)..."
+        Me.RatingDataToolStripMenuItem.Name = "RatingDataToolStripMenuItem"
+        Me.RatingDataToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.RatingDataToolStripMenuItem.Text = "Rating Data..."
         '
         'frmMain
         '
@@ -4118,4 +4125,5 @@ Partial Class frmMain
     Friend WithEvents ucrLogWindow As ucrLog
     Friend WithEvents ucrScriptWindow As ucrScript
     Friend WithEvents mnuClimaticFileImportGriddedData As ToolStripMenuItem
+    Friend WithEvents RatingDataToolStripMenuItem As ToolStripMenuItem
 End Class
