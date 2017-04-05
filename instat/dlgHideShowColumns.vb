@@ -30,7 +30,16 @@ Public Class dlgHideShowColumns
         SetHiddenColumnsInReceiver()
         SetRCodeForControls(bReset)
         bReset = False
+        TestOKEnabled()
         autoTranslate(Me)
+    End Sub
+
+    Private Sub TestOKEnabled()
+        If ucrSelectorForHiddenColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub InitialiseDialog()
@@ -69,5 +78,10 @@ Public Class dlgHideShowColumns
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrSelectorForHiddenColumns_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForHiddenColumns.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class
