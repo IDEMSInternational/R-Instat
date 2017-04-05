@@ -180,10 +180,6 @@ Public Class dlgRestrict
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrNewDataFrameName_NameChanged()
-        SetBaseFunction()
-    End Sub
-
     Private Sub SetBaseFunction()
         If rdoApplyAsFilter.Checked Then
             If ucrReceiverFilter.IsEmpty Then
