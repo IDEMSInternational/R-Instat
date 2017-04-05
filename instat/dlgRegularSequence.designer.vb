@@ -23,15 +23,9 @@ Partial Class dlgRegularSequence
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.grpSequenceDefinition = New System.Windows.Forms.GroupBox()
-        Me.ucrNudRepeatValues = New instat.ucrNud()
-        Me.ucrInputInStepsOf = New instat.ucrInputTextBox()
-        Me.ucrInputTo = New instat.ucrInputTextBox()
-        Me.ucrInputFrom = New instat.ucrInputTextBox()
-        Me.ucrDataFrameLengthForRegularSequence = New instat.ucrDataFrameLength()
         Me.dtpSelectorB = New System.Windows.Forms.DateTimePicker()
         Me.dtpSelectorA = New System.Windows.Forms.DateTimePicker()
         Me.lblLength = New System.Windows.Forms.Label()
-        Me.chkDefineAsFactor = New System.Windows.Forms.CheckBox()
         Me.lblTimes1 = New System.Windows.Forms.Label()
         Me.lblRepeatValues = New System.Windows.Forms.Label()
         Me.lblInStepsOf = New System.Windows.Forms.Label()
@@ -45,6 +39,12 @@ Partial Class dlgRegularSequence
         Me.rdoDates = New System.Windows.Forms.RadioButton()
         Me.ucrPnlSequenceType = New instat.UcrPanel()
         Me.ucrNewColumnName = New instat.ucrSave()
+        Me.ucrChkDefineAsFactor = New instat.ucrCheck()
+        Me.ucrNudRepeatValues = New instat.ucrNud()
+        Me.ucrInputInStepsOf = New instat.ucrInputTextBox()
+        Me.ucrInputTo = New instat.ucrInputTextBox()
+        Me.ucrInputFrom = New instat.ucrInputTextBox()
+        Me.ucrDataFrameLengthForRegularSequence = New instat.ucrDataFrameLength()
         Me.ucrSelectDataFrameRegularSequence = New instat.ucrDataFrame()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpSequenceDefinition.SuspendLayout()
@@ -53,6 +53,7 @@ Partial Class dlgRegularSequence
         '
         'grpSequenceDefinition
         '
+        Me.grpSequenceDefinition.Controls.Add(Me.ucrChkDefineAsFactor)
         Me.grpSequenceDefinition.Controls.Add(Me.ucrNudRepeatValues)
         Me.grpSequenceDefinition.Controls.Add(Me.ucrInputInStepsOf)
         Me.grpSequenceDefinition.Controls.Add(Me.ucrInputTo)
@@ -61,7 +62,6 @@ Partial Class dlgRegularSequence
         Me.grpSequenceDefinition.Controls.Add(Me.dtpSelectorB)
         Me.grpSequenceDefinition.Controls.Add(Me.dtpSelectorA)
         Me.grpSequenceDefinition.Controls.Add(Me.lblLength)
-        Me.grpSequenceDefinition.Controls.Add(Me.chkDefineAsFactor)
         Me.grpSequenceDefinition.Controls.Add(Me.lblTimes1)
         Me.grpSequenceDefinition.Controls.Add(Me.lblRepeatValues)
         Me.grpSequenceDefinition.Controls.Add(Me.lblInStepsOf)
@@ -76,56 +76,6 @@ Partial Class dlgRegularSequence
         Me.grpSequenceDefinition.Tag = "Sequence_definition"
         Me.grpSequenceDefinition.Text = "Sequence Definition"
         Me.grpSequenceDefinition.UseCompatibleTextRendering = True
-        '
-        'ucrNudRepeatValues
-        '
-        Me.ucrNudRepeatValues.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRepeatValues.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudRepeatValues.Location = New System.Drawing.Point(99, 102)
-        Me.ucrNudRepeatValues.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudRepeatValues.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRepeatValues.Name = "ucrNudRepeatValues"
-        Me.ucrNudRepeatValues.Size = New System.Drawing.Size(50, 23)
-        Me.ucrNudRepeatValues.TabIndex = 7
-        Me.ucrNudRepeatValues.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrInputInStepsOf
-        '
-        Me.ucrInputInStepsOf.AddQuotesIfUnrecognised = True
-        Me.ucrInputInStepsOf.IsMultiline = False
-        Me.ucrInputInStepsOf.IsReadOnly = False
-        Me.ucrInputInStepsOf.Location = New System.Drawing.Point(99, 76)
-        Me.ucrInputInStepsOf.Name = "ucrInputInStepsOf"
-        Me.ucrInputInStepsOf.Size = New System.Drawing.Size(50, 23)
-        Me.ucrInputInStepsOf.TabIndex = 5
-        '
-        'ucrInputTo
-        '
-        Me.ucrInputTo.AddQuotesIfUnrecognised = True
-        Me.ucrInputTo.IsMultiline = False
-        Me.ucrInputTo.IsReadOnly = False
-        Me.ucrInputTo.Location = New System.Drawing.Point(99, 50)
-        Me.ucrInputTo.Name = "ucrInputTo"
-        Me.ucrInputTo.Size = New System.Drawing.Size(50, 23)
-        Me.ucrInputTo.TabIndex = 3
-        '
-        'ucrInputFrom
-        '
-        Me.ucrInputFrom.AddQuotesIfUnrecognised = True
-        Me.ucrInputFrom.IsMultiline = False
-        Me.ucrInputFrom.IsReadOnly = False
-        Me.ucrInputFrom.Location = New System.Drawing.Point(99, 24)
-        Me.ucrInputFrom.Name = "ucrInputFrom"
-        Me.ucrInputFrom.Size = New System.Drawing.Size(50, 23)
-        Me.ucrInputFrom.TabIndex = 1
-        '
-        'ucrDataFrameLengthForRegularSequence
-        '
-        Me.ucrDataFrameLengthForRegularSequence.Location = New System.Drawing.Point(98, 128)
-        Me.ucrDataFrameLengthForRegularSequence.Name = "ucrDataFrameLengthForRegularSequence"
-        Me.ucrDataFrameLengthForRegularSequence.Size = New System.Drawing.Size(51, 23)
-        Me.ucrDataFrameLengthForRegularSequence.TabIndex = 10
-        Me.ucrDataFrameLengthForRegularSequence.ucrDataFrameSelector = Nothing
         '
         'dtpSelectorB
         '
@@ -150,19 +100,6 @@ Partial Class dlgRegularSequence
         Me.lblLength.TabIndex = 9
         Me.lblLength.Tag = "Length"
         Me.lblLength.Text = "Length:"
-        '
-        'chkDefineAsFactor
-        '
-        Me.chkDefineAsFactor.AutoSize = True
-        Me.chkDefineAsFactor.Checked = True
-        Me.chkDefineAsFactor.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkDefineAsFactor.Location = New System.Drawing.Point(10, 159)
-        Me.chkDefineAsFactor.Name = "chkDefineAsFactor"
-        Me.chkDefineAsFactor.Size = New System.Drawing.Size(104, 17)
-        Me.chkDefineAsFactor.TabIndex = 11
-        Me.chkDefineAsFactor.Tag = "Define_as_factor"
-        Me.chkDefineAsFactor.Text = "Define as Factor"
-        Me.chkDefineAsFactor.UseVisualStyleBackColor = True
         '
         'lblTimes1
         '
@@ -297,6 +234,64 @@ Partial Class dlgRegularSequence
         Me.ucrNewColumnName.Size = New System.Drawing.Size(294, 24)
         Me.ucrNewColumnName.TabIndex = 6
         '
+        'ucrChkDefineAsFactor
+        '
+        Me.ucrChkDefineAsFactor.Checked = False
+        Me.ucrChkDefineAsFactor.Location = New System.Drawing.Point(10, 159)
+        Me.ucrChkDefineAsFactor.Name = "ucrChkDefineAsFactor"
+        Me.ucrChkDefineAsFactor.Size = New System.Drawing.Size(176, 20)
+        Me.ucrChkDefineAsFactor.TabIndex = 8
+        '
+        'ucrNudRepeatValues
+        '
+        Me.ucrNudRepeatValues.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRepeatValues.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudRepeatValues.Location = New System.Drawing.Point(99, 102)
+        Me.ucrNudRepeatValues.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudRepeatValues.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRepeatValues.Name = "ucrNudRepeatValues"
+        Me.ucrNudRepeatValues.Size = New System.Drawing.Size(50, 23)
+        Me.ucrNudRepeatValues.TabIndex = 7
+        Me.ucrNudRepeatValues.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputInStepsOf
+        '
+        Me.ucrInputInStepsOf.AddQuotesIfUnrecognised = True
+        Me.ucrInputInStepsOf.IsMultiline = False
+        Me.ucrInputInStepsOf.IsReadOnly = False
+        Me.ucrInputInStepsOf.Location = New System.Drawing.Point(99, 76)
+        Me.ucrInputInStepsOf.Name = "ucrInputInStepsOf"
+        Me.ucrInputInStepsOf.Size = New System.Drawing.Size(50, 23)
+        Me.ucrInputInStepsOf.TabIndex = 5
+        '
+        'ucrInputTo
+        '
+        Me.ucrInputTo.AddQuotesIfUnrecognised = True
+        Me.ucrInputTo.IsMultiline = False
+        Me.ucrInputTo.IsReadOnly = False
+        Me.ucrInputTo.Location = New System.Drawing.Point(99, 50)
+        Me.ucrInputTo.Name = "ucrInputTo"
+        Me.ucrInputTo.Size = New System.Drawing.Size(50, 23)
+        Me.ucrInputTo.TabIndex = 3
+        '
+        'ucrInputFrom
+        '
+        Me.ucrInputFrom.AddQuotesIfUnrecognised = True
+        Me.ucrInputFrom.IsMultiline = False
+        Me.ucrInputFrom.IsReadOnly = False
+        Me.ucrInputFrom.Location = New System.Drawing.Point(99, 24)
+        Me.ucrInputFrom.Name = "ucrInputFrom"
+        Me.ucrInputFrom.Size = New System.Drawing.Size(50, 23)
+        Me.ucrInputFrom.TabIndex = 1
+        '
+        'ucrDataFrameLengthForRegularSequence
+        '
+        Me.ucrDataFrameLengthForRegularSequence.Location = New System.Drawing.Point(98, 128)
+        Me.ucrDataFrameLengthForRegularSequence.Name = "ucrDataFrameLengthForRegularSequence"
+        Me.ucrDataFrameLengthForRegularSequence.Size = New System.Drawing.Size(51, 23)
+        Me.ucrDataFrameLengthForRegularSequence.TabIndex = 10
+        Me.ucrDataFrameLengthForRegularSequence.ucrDataFrameSelector = Nothing
+        '
         'ucrSelectDataFrameRegularSequence
         '
         Me.ucrSelectDataFrameRegularSequence.bUseCurrentFilter = True
@@ -352,7 +347,6 @@ Partial Class dlgRegularSequence
     Friend WithEvents lblLength As Label
     Friend WithEvents lblTimes1 As Label
     Friend WithEvents lblRepeatValues As Label
-    Friend WithEvents chkDefineAsFactor As CheckBox
     Friend WithEvents dtpSelectorA As DateTimePicker
     Friend WithEvents dtpSelectorB As DateTimePicker
     Friend WithEvents txtGetPreview As RichTextBox
@@ -367,4 +361,5 @@ Partial Class dlgRegularSequence
     Friend WithEvents ucrInputTo As ucrInputTextBox
     Friend WithEvents ucrInputFrom As ucrInputTextBox
     Friend WithEvents ucrNudRepeatValues As ucrNud
+    Friend WithEvents ucrChkDefineAsFactor As ucrCheck
 End Class
