@@ -333,14 +333,63 @@ open_NetCDF <- function(nc_data){
   return(list(my_data, lat_lon_df))
 }
   
-import_from_iri <- function(download_from, X1, X2,Y1,Y2){
+import_from_iri <- function(download_from, data_file, X1, X2,Y1,Y2){
   gaugelocdir = getwd()
   
-  if(download_from=="CHIRPS"){
-    prexyaddress<-paste("https://iridl.ldeo.columbia.edu/SOURCES/.UCSB/.CHIRPS/.v2p0/.daily-improved/.global/.0p25/.prcp")
+  if(download_from == "CHIRPS_V2P0"){
+    prexyaddress <- paste("https://iridl.ldeo.columbia.edu/SOURCES/.UCSB/.CHIRPS/.v2p0")
+    if(data_file == "Daily_0p05"){
+      prexyaddress = paste(prexyaddress, ".daily/.global/.0p05/.prcp", sep="/")
+    }
+    else if(data_file == "Daily_0p25"){
+      prexyaddress = paste(prexyaddress, ".daily/.global/.0p25/.prcp", sep="/")
+    }
+    else if(data_file == "Daily_improved_0p05"){
+      prexyaddress = paste(prexyaddress, ".daily-improved/.global/.0p05/.prcp", sep="/")
+    }
+    else if(data_file == "Daily_improved_0p25"){
+      prexyaddress = paste(prexyaddress, ".daily-improved/.global/.0p25/.prcp", sep="/")
+    }
+    else if(data_file == "Dekad"){
+      prexyaddress = paste(prexyaddress, ".dekad/.prcp", sep="/")
+      
+    }
+    else if(data_file == "Monthly_c8113"){
+      prexyaddress = paste(prexyaddress, ".monthly/.global/.c8113/.precipitation", sep="/")
+    }
+    else if(data_file == "Monthly_deg1p0"){
+      prexyaddress = paste(prexyaddress, ".monthly/.global/.deg1p0/.precipitation", sep="/")
+      
+    }
+    else if(data_file == "Monthly_NMME_deg1p0"){
+      prexyaddress = paste(prexyaddress, ".monthly/.global/.NMME_deg1p0/.precipitation", sep="/")
+    }
+    else if(data_file == "Monthly_prcp"){
+      prexyaddress = paste(prexyaddress, ".monthly/.global/.precipitation", sep="/")
+      
+    }
+    else stop("Data file does not exist for CHIRPS_V2P0")
+  #Annual and 2Monthly and 3monthly does not exist for CHIRPS_V2P0
   }
-  else if(download_from=="TAMSAT"){
-    prexyaddress<-paste("http://iridl.ldeo.columbia.edu/home/.remic/.Reading/.Meteorology/.TAMSAT/.TAMSAT-RFE/.rfe")
+  else if(download_from == "TAMSAT"){
+    prexyaddress<-paste("http://iridl.ldeo.columbia.edu/home/.remic/.Reading/.Meteorology/.TAMSAT")
+    if(data_file == "Rainfall_estimates"){
+      prexyaddress = paste(prexyaddress, ".TAMSAT-RFE/.rfe", sep="/")
+    }
+    else if(data_file == "Reconstructed_rainfall_anomaly"){
+      prexyaddress = paste(prexyaddress, ".TAMSAT-RFE/.rfediff", sep="/")
+      
+    }
+    else if(data_file == "Sahel_dry_mask"){
+      prexyaddress = paste(prexyaddress, ".TAMSAT-RFE/.sahel_drymask", sep="/")
+      
+    }
+    else if(data_file == "SPI_1_dekad"){
+      prexyaddress = paste(prexyaddress, ".TAMSAT-RFE/.SPI-rfe_1-dekad_Sahel", sep="/")
+      
+    }
+    #monthly,climatology and TAMSAT RFE 0p1 are yet to be implemented.
+    else stop("Data file does not exist for TAMSAT data")
   }
   else if(download_from=="NOAA_ARC2"){
     prexyaddress<-paste("http://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP/.CPC/.FEWS/.Africa/.DAILY/.ARC2/.daily/.est_prcp")
