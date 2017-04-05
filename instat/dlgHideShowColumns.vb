@@ -33,9 +33,6 @@ Public Class dlgHideShowColumns
         autoTranslate(Me)
     End Sub
 
-    Private Sub TestOKEnabled()
-    End Sub
-
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 167
 
@@ -72,10 +69,5 @@ Public Class dlgHideShowColumns
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
-        TestOKEnabled()
-    End Sub
-
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForHiddenColumns.ControlContentsChanged, ucrReceiverHiddenColumns.ControlContentsChanged
-        TestOKEnabled()
     End Sub
 End Class
