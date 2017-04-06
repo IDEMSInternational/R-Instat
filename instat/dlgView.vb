@@ -51,6 +51,11 @@ Public Class dlgView
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 32
 
+        ucrReceiverView.SetParameter(New RParameter("x", 0))
+        ucrReceiverView.SetParameterIsRFunction()
+        ucrReceiverView.Selector = ucrSelectorForView
+        ucrReceiverView.SetMeAsReceiver()
+
         ucrPnlDisplayWindow.AddRadioButton(rdoDispOutputWindow)
         ucrPnlDisplayWindow.AddRadioButton(rdoDispSepOutputWindow)
         ucrPnlDisplayWindow.AddToLinkedControls(ucrChkSpecifyRows, {rdoDispOutputWindow}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=True)
@@ -64,11 +69,6 @@ Public Class dlgView
         ucrPnlDisplayFrom.AddFunctionNamesCondition(rdoTop, "head")
         ucrPnlDisplayFrom.AddFunctionNamesCondition(rdoBottom, "tail")
         ucrPnlDisplayFrom.bAllowNonConditionValues = True
-
-        ucrReceiverView.Selector = ucrSelectorForView
-        ucrReceiverView.SetMeAsReceiver()
-        ucrReceiverView.SetParameter(New RParameter("x", 0))
-        ucrReceiverView.SetParameterIsRFunction()
 
         ucrChkSpecifyRows.SetText("Specify Rows")
         ucrChkSpecifyRows.AddToLinkedControls(ucrPnlDisplayFrom, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoTop)
@@ -121,7 +121,7 @@ Public Class dlgView
         ucrNudNumberRows.Maximum = ucrSelectorForView.ucrAvailableDataFrames.iDataFrameLength
     End Sub
 
-    Private Sub SetICallType()
+    Private Sub SetiCallType()
         If rdoDispOutputWindow.Checked Then
             ucrBase.clsRsyntax.iCallType = 2
             If ucrChkSpecifyRows.Checked Then
@@ -146,6 +146,6 @@ Public Class dlgView
     End Sub
 
     Private Sub FunctionControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDisplayFrom.ControlValueChanged, ucrPnlDisplayWindow.ControlValueChanged, ucrChkSpecifyRows.ControlValueChanged, ucrReceiverView.ControlValueChanged
-        SetICallType()
+        SetiCallType()
     End Sub
 End Class
