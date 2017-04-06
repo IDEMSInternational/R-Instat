@@ -33,6 +33,7 @@ Public Class dlgTwoWayFrequencies
         End If
         SetRCodeForControls(bReset)
         bReset = False
+        TestOkEnabled()
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
