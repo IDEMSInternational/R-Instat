@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports RDotNet
+Imports unvell.ReoGrid
 
 Public Class RLink
     ' R interface class. Each instance of the class has its own REngine instance
@@ -44,6 +45,8 @@ Public Class RLink
 
     Public strGraphDisplayOption As String = "view_output_window"
 
+    Private grdDataView As ReoGridControl
+
     Public Sub New(Optional bWithInstatObj As Boolean = False, Optional bWithClimsoft As Boolean = False)
 
     End Sub
@@ -62,6 +65,10 @@ Public Class RLink
             Application.Exit()
         End Try
         clsEngine.Initialize()
+    End Sub
+
+    Public Sub SetDataViewGrid(grdNewDataGrid As ReoGridControl)
+        grdDataView = grdNewDataGrid
     End Sub
 
     Public Sub setFormatOutput(tempFont As Font, tempColor As Color)
@@ -127,8 +134,8 @@ Public Class RLink
             cboDataFrames.Items.AddRange(GetDataFrameNames().ToArray)
             AdjustComboBoxWidth(cboDataFrames)
             'Task/Question: From what I understood, if bSetDefault is true or if the strCurrentDataFrame (given as an argument) is actually not in cboDataFrames (is this case generic or should it never happen ?), then the selected Index should be the current worksheet.
-            If (bSetDefault OrElse cboDataFrames.Items.IndexOf(strCurrentDataFrame) = -1) AndAlso (frmEditor.grdData IsNot Nothing) AndAlso (frmEditor.grdData.CurrentWorksheet IsNot Nothing) Then
-                cboDataFrames.SelectedIndex = cboDataFrames.Items.IndexOf(frmEditor.grdData.CurrentWorksheet.Name)
+            If (bSetDefault OrElse cboDataFrames.Items.IndexOf(strCurrentDataFrame) = -1) AndAlso (grdDataView IsNot Nothing) AndAlso (grdDataView.CurrentWorksheet IsNot Nothing) Then
+                cboDataFrames.SelectedIndex = cboDataFrames.Items.IndexOf(grdDataView.CurrentWorksheet.Name)
             ElseIf cboDataFrames.Items.IndexOf(strCurrentDataFrame) <> -1 Then
                 cboDataFrames.SelectedIndex = cboDataFrames.Items.IndexOf(strCurrentDataFrame)
             End If
@@ -139,7 +146,7 @@ Public Class RLink
     ' Then this can be removed
     Public Shared Sub AdjustComboBoxWidth(cboCurrent As ComboBox)
         Dim iWidth As Integer = cboCurrent.DropDownWidth
-        Dim graTemp As Graphics = cboCurrent.CreateGraphics()
+        Dim graTemp As System.Drawing.Graphics = cboCurrent.CreateGraphics()
         Dim font As Font = cboCurrent.Font
         Dim iScrollBarWidth As Integer
         Dim iNewWidth As Integer
@@ -233,7 +240,7 @@ Public Class RLink
         Dim strTempGraphsDirectory As String
         Dim clsPNGFunction As New RFunction
 
-        strTempGraphsDirectory = IO.Path.Combine(IO.Path.GetTempPath() & "R_Instat_Temp_Graphs")
+        strTempGraphsDirectory = System.IO.Path.Combine(System.IO.Path.GetTempPath() & "R_Instat_Temp_Graphs")
         strOutput = ""
 
         If strComment <> "" Then
@@ -258,14 +265,14 @@ Public Class RLink
             End If
         End If
 
-            'If strScript.Length > 2000 Then
-            '    MsgBox("The following command cannot be run because it exceeds the character limit of 2000 characters for a command in R-Instat." & vbNewLine & strScript & vbNewLine & vbNewLine & "It may be possible to run the command directly in R.", MsgBoxStyle.Critical, "Cannot run command")
-            If iCallType = 0 OrElse iCallType = 3 Then
+        'If strScript.Length > 2000 Then
+        '    MsgBox("The following command cannot be run because it exceeds the character limit of 2000 characters for a command in R-Instat." & vbNewLine & strScript & vbNewLine & vbNewLine & "It may be possible to run the command directly in R.", MsgBoxStyle.Critical, "Cannot run command")
+        If iCallType = 0 OrElse iCallType = 3 Then
             Try
                 If iCallType = 3 Then
                     If strGraphDisplayOption = "view_output_window" OrElse strGraphDisplayOption = "view_separate_window" Then
                         clsPNGFunction.SetRCommand("png")
-                        clsPNGFunction.AddParameter("filename", Chr(34) & IO.Path.Combine(strTempGraphsDirectory & "/Graph.png").Replace("\", "/") & Chr(34))
+                        clsPNGFunction.AddParameter("filename", Chr(34) & System.IO.Path.Combine(strTempGraphsDirectory & "/Graph.png").Replace("\", "/") & Chr(34))
                         clsPNGFunction.AddParameter("width", 4000)
                         clsPNGFunction.AddParameter("height", 4000)
                         clsPNGFunction.AddParameter("res", 500)
@@ -273,7 +280,7 @@ Public Class RLink
                         'need to boost resolution of the devices, it's not as good as with ggsave.
                     End If
                 End If
-                    clsEngine.Evaluate(strScript)
+                clsEngine.Evaluate(strScript)
                 If iCallType = 3 Then
                     If strGraphDisplayOption = "view_output_window" OrElse strGraphDisplayOption = "view_separate_window" Then
                         'add an R script (maybe in the form of one of our methods) that copies divices to the temp directory, using the default device production... use dev.list() and dev.copy() with arguments device = the devices in the list and which = jpeg devices with different paths leading to the temp directory, using a paste() method to find different names for the files
@@ -284,7 +291,7 @@ Public Class RLink
                         'It is called from RLink at the end of RunScript.
                         Dim lstTempGraphFiles As ObjectModel.ReadOnlyCollection(Of String)
                         Dim iNumberOfFiles As Integer = -1
-                        strTempGraphsDirectory = IO.Path.Combine(IO.Path.GetTempPath(), "R_Instat_Temp_Graphs")
+                        strTempGraphsDirectory = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "R_Instat_Temp_Graphs")
                         Try
                             lstTempGraphFiles = FileIO.FileSystem.GetFiles(strTempGraphsDirectory)
                         Catch e As Exception
@@ -748,13 +755,22 @@ Public Class RLink
         Return strOut
     End Function
 
+    Public Function IsValidText(strText As String) As String
+        Dim bValid As Boolean
+        Dim strValidText As String
+        Dim clsMakeNames As New RFunction
+
+        strValidText = MakeValidText(strText)
+        Return (strText = strValidText)
+    End Function
+
     'Corruption analysis functions
-    Public Function GetCorruptionDataFrameNames() As List(Of String)
+    Public Function GetCorruptionContractDataFrameNames() As List(Of String)
         Dim clsGetDataNames As New RFunction
         Dim lstNames As New List(Of String)
         Dim expDataNames As SymbolicExpression
 
-        clsGetDataNames.SetRCommand(strInstatDataObject & "$get_corruption_data_names")
+        clsGetDataNames.SetRCommand(strInstatDataObject & "$get_corruption_contract_data_names")
         expDataNames = RunInternalScriptGetValue(clsGetDataNames.ToScript())
         If Not expDataNames.Type = Internals.SymbolicExpressionType.Null Then
             lstNames = expDataNames.AsCharacter.ToList()
@@ -768,7 +784,7 @@ Public Class RLink
 
         clsGetColumnName.SetRCommand(strInstatDataObject & "$get_corruption_column_name")
         clsGetColumnName.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
-        clsGetColumnName.AddParameter("type", Chr(34) & strType & Chr(34))
+        clsGetColumnName.AddParameter("type", strType)
         strColumn = RunInternalScriptGetValue(clsGetColumnName.ToScript()).AsCharacter(0)
         Return strColumn
     End Function

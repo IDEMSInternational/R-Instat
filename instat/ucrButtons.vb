@@ -71,7 +71,7 @@ Public Class ucrButtons
         bToBeAssigned = clsRsyntax.GetbToBeAssigned()
         strAssignTo = clsRsyntax.GetstrAssignTo()
         'Also need to be getting strAssignToColumn, strAssignToDataFrame etc. maybe one method to get all as a list
-        frmMain.clsRLink.RunScript(clsRsyntax.GetScript(), clsRsyntax.iCallType, strComment:=strComments)
+        frmMain.clsRLink.RunScript(clsRsyntax.GetScript(), clsRsyntax.iCallType, bHtmlOutput:=clsRsyntax.bHTMLOutput, strComment:=strComments)
 
         'This clears the script after it has been run, but leave the function and parameters in the base function
         'so that it can be run exactly the same when reopened.
@@ -129,11 +129,8 @@ Public Class ucrButtons
     End Sub
 
     Private Sub cmdPaste_Click(sender As Object, e As EventArgs) Handles cmdPaste.Click
-        frmScript.txtScript.Text = frmScript.txtScript.Text & vbCrLf & "# " & txtComment.Text
-        frmScript.txtScript.Text = frmScript.txtScript.Text & vbCrLf & clsRsyntax.GetScript()
         'here we getscript but we don't reinitialise the AssignTo etc. for when pressing OK button ? ...
-        frmScript.Visible = True
-        frmScript.BringToFront()
+        frmMain.AddToScriptWindow("# " & txtComment.Text & vbCrLf & clsRsyntax.GetScript())
     End Sub
 
     Private Sub chkComment_CheckedChanged(sender As Object, e As EventArgs) Handles chkComment.CheckedChanged

@@ -44,7 +44,7 @@ Partial Class dlgView
         Me.lblSelected.Location = New System.Drawing.Point(248, 45)
         Me.lblSelected.Name = "lblSelected"
         Me.lblSelected.Size = New System.Drawing.Size(97, 13)
-        Me.lblSelected.TabIndex = 2
+        Me.lblSelected.TabIndex = 1
         Me.lblSelected.Tag = ""
         Me.lblSelected.Text = "Variable(s) to View:"
         '
@@ -54,7 +54,7 @@ Partial Class dlgView
         Me.rdoDispSepOutputWindow.Location = New System.Drawing.Point(10, 200)
         Me.rdoDispSepOutputWindow.Name = "rdoDispSepOutputWindow"
         Me.rdoDispSepOutputWindow.Size = New System.Drawing.Size(158, 17)
-        Me.rdoDispSepOutputWindow.TabIndex = 4
+        Me.rdoDispSepOutputWindow.TabIndex = 3
         Me.rdoDispSepOutputWindow.TabStop = True
         Me.rdoDispSepOutputWindow.Text = "Display in Separate Window"
         Me.rdoDispSepOutputWindow.UseVisualStyleBackColor = True
@@ -62,10 +62,10 @@ Partial Class dlgView
         'rdoDispOutputWindow
         '
         Me.rdoDispOutputWindow.AutoSize = True
-        Me.rdoDispOutputWindow.Location = New System.Drawing.Point(10, 222)
+        Me.rdoDispOutputWindow.Location = New System.Drawing.Point(10, 223)
         Me.rdoDispOutputWindow.Name = "rdoDispOutputWindow"
         Me.rdoDispOutputWindow.Size = New System.Drawing.Size(147, 17)
-        Me.rdoDispOutputWindow.TabIndex = 5
+        Me.rdoDispOutputWindow.TabIndex = 4
         Me.rdoDispOutputWindow.TabStop = True
         Me.rdoDispOutputWindow.Text = "Display in Output Window"
         Me.rdoDispOutputWindow.UseVisualStyleBackColor = True
@@ -73,10 +73,10 @@ Partial Class dlgView
         'rdoBottom
         '
         Me.rdoBottom.AutoSize = True
-        Me.rdoBottom.Location = New System.Drawing.Point(299, 265)
+        Me.rdoBottom.Location = New System.Drawing.Point(325, 266)
         Me.rdoBottom.Name = "rdoBottom"
         Me.rdoBottom.Size = New System.Drawing.Size(58, 17)
-        Me.rdoBottom.TabIndex = 11
+        Me.rdoBottom.TabIndex = 10
         Me.rdoBottom.TabStop = True
         Me.rdoBottom.Text = "Bottom"
         Me.rdoBottom.UseVisualStyleBackColor = True
@@ -84,10 +84,10 @@ Partial Class dlgView
         'rdoTop
         '
         Me.rdoTop.AutoSize = True
-        Me.rdoTop.Location = New System.Drawing.Point(299, 243)
+        Me.rdoTop.Location = New System.Drawing.Point(325, 243)
         Me.rdoTop.Name = "rdoTop"
         Me.rdoTop.Size = New System.Drawing.Size(44, 17)
-        Me.rdoTop.TabIndex = 10
+        Me.rdoTop.TabIndex = 9
         Me.rdoTop.TabStop = True
         Me.rdoTop.Text = "Top"
         Me.rdoTop.UseVisualStyleBackColor = True
@@ -95,20 +95,20 @@ Partial Class dlgView
         'lblDisplayFrom
         '
         Me.lblDisplayFrom.AutoSize = True
-        Me.lblDisplayFrom.Location = New System.Drawing.Point(223, 244)
+        Me.lblDisplayFrom.Location = New System.Drawing.Point(248, 244)
         Me.lblDisplayFrom.Name = "lblDisplayFrom"
         Me.lblDisplayFrom.Size = New System.Drawing.Size(70, 13)
-        Me.lblDisplayFrom.TabIndex = 9
+        Me.lblDisplayFrom.TabIndex = 8
         Me.lblDisplayFrom.Tag = ""
         Me.lblDisplayFrom.Text = "Display From:"
         '
         'lblNumberofRows
         '
         Me.lblNumberofRows.AutoSize = True
-        Me.lblNumberofRows.Location = New System.Drawing.Point(223, 221)
+        Me.lblNumberofRows.Location = New System.Drawing.Point(248, 223)
         Me.lblNumberofRows.Name = "lblNumberofRows"
         Me.lblNumberofRows.Size = New System.Drawing.Size(89, 13)
-        Me.lblNumberofRows.TabIndex = 7
+        Me.lblNumberofRows.TabIndex = 6
         Me.lblNumberofRows.Tag = "Number_of_rows"
         Me.lblNumberofRows.Text = "Number of Rows:"
         '
@@ -116,17 +116,17 @@ Partial Class dlgView
         '
         Me.ucrNudNumberRows.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberRows.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNumberRows.Location = New System.Drawing.Point(318, 217)
+        Me.ucrNudNumberRows.Location = New System.Drawing.Point(343, 219)
         Me.ucrNudNumberRows.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNumberRows.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberRows.Name = "ucrNudNumberRows"
         Me.ucrNudNumberRows.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudNumberRows.TabIndex = 8
+        Me.ucrNudNumberRows.TabIndex = 7
         Me.ucrNudNumberRows.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrPnlDisplayFrom
         '
-        Me.ucrPnlDisplayFrom.Location = New System.Drawing.Point(299, 243)
+        Me.ucrPnlDisplayFrom.Location = New System.Drawing.Point(325, 243)
         Me.ucrPnlDisplayFrom.Name = "ucrPnlDisplayFrom"
         Me.ucrPnlDisplayFrom.Size = New System.Drawing.Size(66, 40)
         Me.ucrPnlDisplayFrom.TabIndex = 16
@@ -134,10 +134,10 @@ Partial Class dlgView
         'ucrChkSpecifyRows
         '
         Me.ucrChkSpecifyRows.Checked = False
-        Me.ucrChkSpecifyRows.Location = New System.Drawing.Point(223, 195)
+        Me.ucrChkSpecifyRows.Location = New System.Drawing.Point(248, 200)
         Me.ucrChkSpecifyRows.Name = "ucrChkSpecifyRows"
         Me.ucrChkSpecifyRows.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkSpecifyRows.TabIndex = 6
+        Me.ucrChkSpecifyRows.TabIndex = 5
         '
         'ucrPnlDisplayWindow
         '
@@ -153,8 +153,8 @@ Partial Class dlgView
         Me.ucrReceiverView.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverView.Name = "ucrReceiverView"
         Me.ucrReceiverView.Selector = Nothing
-        Me.ucrReceiverView.Size = New System.Drawing.Size(120, 130)
-        Me.ucrReceiverView.TabIndex = 3
+        Me.ucrReceiverView.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverView.TabIndex = 2
         '
         'ucrSelectorForView
         '
@@ -171,7 +171,7 @@ Partial Class dlgView
         Me.ucrBase.Location = New System.Drawing.Point(10, 289)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
-        Me.ucrBase.TabIndex = 12
+        Me.ucrBase.TabIndex = 11
         '
         'dlgView
         '
