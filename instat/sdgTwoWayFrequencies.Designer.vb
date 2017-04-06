@@ -22,7 +22,7 @@ Partial Class sdgTwoWayFrequencies
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.tbOneWayFrequencies = New System.Windows.Forms.TabControl()
+        Me.tbTwoWayFrequencies = New System.Windows.Forms.TabControl()
         Me.tbTable = New System.Windows.Forms.TabPage()
         Me.grpTableOptions = New System.Windows.Forms.GroupBox()
         Me.lblNumberOfDecimals = New System.Windows.Forms.Label()
@@ -52,7 +52,7 @@ Partial Class sdgTwoWayFrequencies
         Me.rdoBar = New System.Windows.Forms.RadioButton()
         Me.ucrPnlGraphType = New instat.UcrPanel()
         Me.ucrBaseSubDialogue = New instat.ucrButtonsSubdialogue()
-        Me.tbOneWayFrequencies.SuspendLayout()
+        Me.tbTwoWayFrequencies.SuspendLayout()
         Me.tbTable.SuspendLayout()
         Me.grpTableOptions.SuspendLayout()
         Me.tbGraph.SuspendLayout()
@@ -60,15 +60,15 @@ Partial Class sdgTwoWayFrequencies
         Me.grpGraphType.SuspendLayout()
         Me.SuspendLayout()
         '
-        'tbOneWayFrequencies
+        'tbTwoWayFrequencies
         '
-        Me.tbOneWayFrequencies.Controls.Add(Me.tbTable)
-        Me.tbOneWayFrequencies.Controls.Add(Me.tbGraph)
-        Me.tbOneWayFrequencies.Location = New System.Drawing.Point(12, 12)
-        Me.tbOneWayFrequencies.Name = "tbOneWayFrequencies"
-        Me.tbOneWayFrequencies.SelectedIndex = 0
-        Me.tbOneWayFrequencies.Size = New System.Drawing.Size(321, 315)
-        Me.tbOneWayFrequencies.TabIndex = 4
+        Me.tbTwoWayFrequencies.Controls.Add(Me.tbTable)
+        Me.tbTwoWayFrequencies.Controls.Add(Me.tbGraph)
+        Me.tbTwoWayFrequencies.Location = New System.Drawing.Point(8, 8)
+        Me.tbTwoWayFrequencies.Name = "tbTwoWayFrequencies"
+        Me.tbTwoWayFrequencies.SelectedIndex = 0
+        Me.tbTwoWayFrequencies.Size = New System.Drawing.Size(321, 315)
+        Me.tbTwoWayFrequencies.TabIndex = 0
         '
         'tbTable
         '
@@ -92,41 +92,41 @@ Partial Class sdgTwoWayFrequencies
         Me.grpTableOptions.Controls.Add(Me.ucrChkMissingValues)
         Me.grpTableOptions.Controls.Add(Me.ucrChkBackgroundColour)
         Me.grpTableOptions.Controls.Add(Me.ucrChkShowSummary)
-        Me.grpTableOptions.Location = New System.Drawing.Point(6, 7)
+        Me.grpTableOptions.Location = New System.Drawing.Point(6, 6)
         Me.grpTableOptions.Name = "grpTableOptions"
-        Me.grpTableOptions.Size = New System.Drawing.Size(304, 177)
-        Me.grpTableOptions.TabIndex = 21
+        Me.grpTableOptions.Size = New System.Drawing.Size(304, 189)
+        Me.grpTableOptions.TabIndex = 0
         Me.grpTableOptions.TabStop = False
         Me.grpTableOptions.Text = "More Options"
         '
         'lblNumberOfDecimals
         '
         Me.lblNumberOfDecimals.AutoSize = True
-        Me.lblNumberOfDecimals.Location = New System.Drawing.Point(3, 85)
+        Me.lblNumberOfDecimals.Location = New System.Drawing.Point(10, 101)
         Me.lblNumberOfDecimals.Name = "lblNumberOfDecimals"
-        Me.lblNumberOfDecimals.Size = New System.Drawing.Size(159, 13)
-        Me.lblNumberOfDecimals.TabIndex = 64
-        Me.lblNumberOfDecimals.Text = "Decimal places for percentages:"
+        Me.lblNumberOfDecimals.Size = New System.Drawing.Size(161, 13)
+        Me.lblNumberOfDecimals.TabIndex = 3
+        Me.lblNumberOfDecimals.Text = "Decimal Places for Percentages:"
         '
         'ucrNudDecimalPlaces
         '
         Me.ucrNudDecimalPlaces.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDecimalPlaces.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudDecimalPlaces.Location = New System.Drawing.Point(170, 84)
+        Me.ucrNudDecimalPlaces.Location = New System.Drawing.Point(173, 99)
         Me.ucrNudDecimalPlaces.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudDecimalPlaces.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDecimalPlaces.Name = "ucrNudDecimalPlaces"
         Me.ucrNudDecimalPlaces.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudDecimalPlaces.TabIndex = 63
+        Me.ucrNudDecimalPlaces.TabIndex = 4
         Me.ucrNudDecimalPlaces.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblGraphTitle
         '
         Me.lblGraphTitle.AutoSize = True
-        Me.lblGraphTitle.Location = New System.Drawing.Point(3, 133)
+        Me.lblGraphTitle.Location = New System.Drawing.Point(10, 157)
         Me.lblGraphTitle.Name = "lblGraphTitle"
         Me.lblGraphTitle.Size = New System.Drawing.Size(62, 13)
-        Me.lblGraphTitle.TabIndex = 62
+        Me.lblGraphTitle.TabIndex = 7
         Me.lblGraphTitle.Text = "Graph Title:"
         '
         'ucrInputTableTitle
@@ -134,52 +134,52 @@ Partial Class sdgTwoWayFrequencies
         Me.ucrInputTableTitle.AddQuotesIfUnrecognised = True
         Me.ucrInputTableTitle.IsMultiline = False
         Me.ucrInputTableTitle.IsReadOnly = False
-        Me.ucrInputTableTitle.Location = New System.Drawing.Point(127, 133)
+        Me.ucrInputTableTitle.Location = New System.Drawing.Point(106, 153)
         Me.ucrInputTableTitle.Name = "ucrInputTableTitle"
         Me.ucrInputTableTitle.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputTableTitle.TabIndex = 61
+        Me.ucrInputTableTitle.TabIndex = 8
         '
         'ucrChkTotalColumnName
         '
         Me.ucrChkTotalColumnName.Checked = False
-        Me.ucrChkTotalColumnName.Location = New System.Drawing.Point(6, 107)
+        Me.ucrChkTotalColumnName.Location = New System.Drawing.Point(10, 126)
         Me.ucrChkTotalColumnName.Name = "ucrChkTotalColumnName"
         Me.ucrChkTotalColumnName.Size = New System.Drawing.Size(94, 20)
-        Me.ucrChkTotalColumnName.TabIndex = 60
+        Me.ucrChkTotalColumnName.TabIndex = 5
         '
         'ucrInputTotalsName
         '
         Me.ucrInputTotalsName.AddQuotesIfUnrecognised = True
         Me.ucrInputTotalsName.IsMultiline = False
         Me.ucrInputTotalsName.IsReadOnly = False
-        Me.ucrInputTotalsName.Location = New System.Drawing.Point(127, 106)
+        Me.ucrInputTotalsName.Location = New System.Drawing.Point(106, 126)
         Me.ucrInputTotalsName.Name = "ucrInputTotalsName"
         Me.ucrInputTotalsName.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputTotalsName.TabIndex = 59
+        Me.ucrInputTotalsName.TabIndex = 6
         '
         'ucrChkMissingValues
         '
         Me.ucrChkMissingValues.Checked = False
-        Me.ucrChkMissingValues.Location = New System.Drawing.Point(6, 41)
+        Me.ucrChkMissingValues.Location = New System.Drawing.Point(10, 45)
         Me.ucrChkMissingValues.Name = "ucrChkMissingValues"
         Me.ucrChkMissingValues.Size = New System.Drawing.Size(147, 20)
-        Me.ucrChkMissingValues.TabIndex = 23
+        Me.ucrChkMissingValues.TabIndex = 1
         '
         'ucrChkBackgroundColour
         '
         Me.ucrChkBackgroundColour.Checked = False
-        Me.ucrChkBackgroundColour.Location = New System.Drawing.Point(6, 63)
+        Me.ucrChkBackgroundColour.Location = New System.Drawing.Point(10, 71)
         Me.ucrChkBackgroundColour.Name = "ucrChkBackgroundColour"
         Me.ucrChkBackgroundColour.Size = New System.Drawing.Size(290, 20)
-        Me.ucrChkBackgroundColour.TabIndex = 22
+        Me.ucrChkBackgroundColour.TabIndex = 2
         '
         'ucrChkShowSummary
         '
         Me.ucrChkShowSummary.Checked = False
-        Me.ucrChkShowSummary.Location = New System.Drawing.Point(6, 19)
+        Me.ucrChkShowSummary.Location = New System.Drawing.Point(10, 19)
         Me.ucrChkShowSummary.Name = "ucrChkShowSummary"
         Me.ucrChkShowSummary.Size = New System.Drawing.Size(145, 20)
-        Me.ucrChkShowSummary.TabIndex = 19
+        Me.ucrChkShowSummary.TabIndex = 0
         '
         'tbGraph
         '
@@ -196,10 +196,10 @@ Partial Class sdgTwoWayFrequencies
         '
         'ucrSaveGraph
         '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(17, 260)
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(6, 260)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
         Me.ucrSaveGraph.Size = New System.Drawing.Size(288, 24)
-        Me.ucrSaveGraph.TabIndex = 39
+        Me.ucrSaveGraph.TabIndex = 2
         '
         'grpGraphOptions
         '
@@ -216,43 +216,43 @@ Partial Class sdgTwoWayFrequencies
         Me.grpGraphOptions.Location = New System.Drawing.Point(6, 59)
         Me.grpGraphOptions.Name = "grpGraphOptions"
         Me.grpGraphOptions.Size = New System.Drawing.Size(300, 195)
-        Me.grpGraphOptions.TabIndex = 37
+        Me.grpGraphOptions.TabIndex = 1
         Me.grpGraphOptions.TabStop = False
         Me.grpGraphOptions.Text = "Graph Options"
         '
         'ucrChkStack
         '
         Me.ucrChkStack.Checked = False
-        Me.ucrChkStack.Location = New System.Drawing.Point(11, 92)
+        Me.ucrChkStack.Location = New System.Drawing.Point(10, 92)
         Me.ucrChkStack.Name = "ucrChkStack"
         Me.ucrChkStack.Size = New System.Drawing.Size(145, 20)
-        Me.ucrChkStack.TabIndex = 61
+        Me.ucrChkStack.TabIndex = 3
         '
         'lblTitle
         '
         Me.lblTitle.AutoSize = True
-        Me.lblTitle.Location = New System.Drawing.Point(8, 167)
+        Me.lblTitle.Location = New System.Drawing.Point(10, 169)
         Me.lblTitle.Name = "lblTitle"
         Me.lblTitle.Size = New System.Drawing.Size(62, 13)
-        Me.lblTitle.TabIndex = 58
+        Me.lblTitle.TabIndex = 9
         Me.lblTitle.Text = "Graph Title:"
         '
         'lblHjust
         '
         Me.lblHjust.AutoSize = True
-        Me.lblHjust.Location = New System.Drawing.Point(8, 140)
+        Me.lblHjust.Location = New System.Drawing.Point(10, 143)
         Me.lblHjust.Name = "lblHjust"
         Me.lblHjust.Size = New System.Drawing.Size(126, 13)
-        Me.lblHjust.TabIndex = 57
+        Me.lblHjust.TabIndex = 7
         Me.lblHjust.Text = "Horizontal Label Position:"
         '
         'lblVjust
         '
         Me.lblVjust.AutoSize = True
-        Me.lblVjust.Location = New System.Drawing.Point(8, 115)
+        Me.lblVjust.Location = New System.Drawing.Point(10, 117)
         Me.lblVjust.Name = "lblVjust"
         Me.lblVjust.Size = New System.Drawing.Size(114, 13)
-        Me.lblVjust.TabIndex = 55
+        Me.lblVjust.TabIndex = 4
         Me.lblVjust.Text = "Vertical Label Position:"
         '
         'ucrInputGraphTitle
@@ -263,17 +263,17 @@ Partial Class sdgTwoWayFrequencies
         Me.ucrInputGraphTitle.Location = New System.Drawing.Point(140, 165)
         Me.ucrInputGraphTitle.Name = "ucrInputGraphTitle"
         Me.ucrInputGraphTitle.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputGraphTitle.TabIndex = 54
+        Me.ucrInputGraphTitle.TabIndex = 0
         '
         'ucrInputHorizontalLabels
         '
         Me.ucrInputHorizontalLabels.AddQuotesIfUnrecognised = True
         Me.ucrInputHorizontalLabels.IsReadOnly = False
-        Me.ucrInputHorizontalLabels.Location = New System.Drawing.Point(140, 138)
+        Me.ucrInputHorizontalLabels.Location = New System.Drawing.Point(140, 139)
         Me.ucrInputHorizontalLabels.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputHorizontalLabels.Name = "ucrInputHorizontalLabels"
         Me.ucrInputHorizontalLabels.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputHorizontalLabels.TabIndex = 51
+        Me.ucrInputHorizontalLabels.TabIndex = 8
         '
         'ucrInputVerticalLabels
         '
@@ -283,31 +283,31 @@ Partial Class sdgTwoWayFrequencies
         Me.ucrInputVerticalLabels.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputVerticalLabels.Name = "ucrInputVerticalLabels"
         Me.ucrInputVerticalLabels.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputVerticalLabels.TabIndex = 50
+        Me.ucrInputVerticalLabels.TabIndex = 6
         '
         'ucrChkShowModelSummary
         '
         Me.ucrChkShowModelSummary.Checked = False
-        Me.ucrChkShowModelSummary.Location = New System.Drawing.Point(11, 68)
+        Me.ucrChkShowModelSummary.Location = New System.Drawing.Point(10, 68)
         Me.ucrChkShowModelSummary.Name = "ucrChkShowModelSummary"
         Me.ucrChkShowModelSummary.Size = New System.Drawing.Size(145, 20)
-        Me.ucrChkShowModelSummary.TabIndex = 28
+        Me.ucrChkShowModelSummary.TabIndex = 2
         '
         'ucrChkShowPercentage
         '
         Me.ucrChkShowPercentage.Checked = False
-        Me.ucrChkShowPercentage.Location = New System.Drawing.Point(11, 20)
+        Me.ucrChkShowPercentage.Location = New System.Drawing.Point(10, 20)
         Me.ucrChkShowPercentage.Name = "ucrChkShowPercentage"
         Me.ucrChkShowPercentage.Size = New System.Drawing.Size(145, 20)
-        Me.ucrChkShowPercentage.TabIndex = 20
+        Me.ucrChkShowPercentage.TabIndex = 0
         '
         'ucrChkShowCount
         '
         Me.ucrChkShowCount.Checked = False
-        Me.ucrChkShowCount.Location = New System.Drawing.Point(11, 44)
+        Me.ucrChkShowCount.Location = New System.Drawing.Point(10, 44)
         Me.ucrChkShowCount.Name = "ucrChkShowCount"
         Me.ucrChkShowCount.Size = New System.Drawing.Size(145, 20)
-        Me.ucrChkShowCount.TabIndex = 18
+        Me.ucrChkShowCount.TabIndex = 1
         '
         'grpGraphType
         '
@@ -317,17 +317,17 @@ Partial Class sdgTwoWayFrequencies
         Me.grpGraphType.Location = New System.Drawing.Point(6, 6)
         Me.grpGraphType.Name = "grpGraphType"
         Me.grpGraphType.Size = New System.Drawing.Size(300, 48)
-        Me.grpGraphType.TabIndex = 33
+        Me.grpGraphType.TabIndex = 0
         Me.grpGraphType.TabStop = False
         Me.grpGraphType.Text = "Type of Graph"
         '
         'rdoLine
         '
         Me.rdoLine.AutoSize = True
-        Me.rdoLine.Location = New System.Drawing.Point(163, 19)
+        Me.rdoLine.Location = New System.Drawing.Point(167, 19)
         Me.rdoLine.Name = "rdoLine"
         Me.rdoLine.Size = New System.Drawing.Size(77, 17)
-        Me.rdoLine.TabIndex = 7
+        Me.rdoLine.TabIndex = 2
         Me.rdoLine.TabStop = True
         Me.rdoLine.Text = "Line Graph"
         Me.rdoLine.UseVisualStyleBackColor = True
@@ -338,7 +338,7 @@ Partial Class sdgTwoWayFrequencies
         Me.rdoBar.Location = New System.Drawing.Point(12, 19)
         Me.rdoBar.Name = "rdoBar"
         Me.rdoBar.Size = New System.Drawing.Size(73, 17)
-        Me.rdoBar.TabIndex = 5
+        Me.rdoBar.TabIndex = 1
         Me.rdoBar.TabStop = True
         Me.rdoBar.Text = "Bar Graph"
         Me.rdoBar.UseVisualStyleBackColor = True
@@ -348,21 +348,22 @@ Partial Class sdgTwoWayFrequencies
         Me.ucrPnlGraphType.Location = New System.Drawing.Point(6, 7)
         Me.ucrPnlGraphType.Name = "ucrPnlGraphType"
         Me.ucrPnlGraphType.Size = New System.Drawing.Size(288, 35)
-        Me.ucrPnlGraphType.TabIndex = 4
+        Me.ucrPnlGraphType.TabIndex = 0
         '
         'ucrBaseSubDialogue
         '
-        Me.ucrBaseSubDialogue.Location = New System.Drawing.Point(89, 335)
+        Me.ucrBaseSubDialogue.Location = New System.Drawing.Point(98, 329)
         Me.ucrBaseSubDialogue.Name = "ucrBaseSubDialogue"
+        Me.ucrBaseSubDialogue.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.ucrBaseSubDialogue.Size = New System.Drawing.Size(142, 30)
-        Me.ucrBaseSubDialogue.TabIndex = 3
+        Me.ucrBaseSubDialogue.TabIndex = 0
         '
         'sdgTwoWayFrequencies
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(341, 369)
-        Me.Controls.Add(Me.tbOneWayFrequencies)
+        Me.ClientSize = New System.Drawing.Size(339, 363)
+        Me.Controls.Add(Me.tbTwoWayFrequencies)
         Me.Controls.Add(Me.ucrBaseSubDialogue)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -370,7 +371,7 @@ Partial Class sdgTwoWayFrequencies
         Me.Name = "sdgTwoWayFrequencies"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Two Way Frequencies Options"
-        Me.tbOneWayFrequencies.ResumeLayout(False)
+        Me.tbTwoWayFrequencies.ResumeLayout(False)
         Me.tbTable.ResumeLayout(False)
         Me.grpTableOptions.ResumeLayout(False)
         Me.grpTableOptions.PerformLayout()
@@ -383,7 +384,7 @@ Partial Class sdgTwoWayFrequencies
 
     End Sub
     Friend WithEvents ucrBaseSubDialogue As ucrButtonsSubdialogue
-    Friend WithEvents tbOneWayFrequencies As TabControl
+    Friend WithEvents tbTwoWayFrequencies As TabControl
     Friend WithEvents tbTable As TabPage
     Friend WithEvents grpTableOptions As GroupBox
     Friend WithEvents ucrChkTotalColumnName As ucrCheck
