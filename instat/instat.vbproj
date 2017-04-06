@@ -317,6 +317,12 @@
     <Compile Include="dlgImportFromODK.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgImportGriddedData.Designer.vb">
+      <DependentUpon>dlgImportGriddedData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgImportGriddedData.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgImportOpenRefine.Designer.vb">
       <DependentUpon>dlgImportOpenRefine.vb</DependentUpon>
     </Compile>
@@ -628,6 +634,12 @@
       <DependentUpon>sdgOneWayFrequencies.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgOneWayFrequencies.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgTwoWayFrequencies.Designer.vb">
+      <DependentUpon>sdgTwoWayFrequencies.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgTwoWayFrequencies.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgWindrose.Designer.vb">
@@ -2506,6 +2518,9 @@
     <EmbeddedResource Include="dlgImportFromODK.resx">
       <DependentUpon>dlgImportFromODK.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgImportGriddedData.resx">
+      <DependentUpon>dlgImportGriddedData.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgImportOpenRefine.resx">
       <DependentUpon>dlgImportOpenRefine.vb</DependentUpon>
     </EmbeddedResource>
@@ -4068,6 +4083,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSimpleRegOptions.sw-KE.resx">
       <DependentUpon>sdgSimpleRegOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgTwoWayFrequencies.resx">
+      <DependentUpon>sdgTwoWayFrequencies.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgVariableTransformations.fr-FR.resx">
       <DependentUpon>sdgVariableTransformations.vb</DependentUpon>
