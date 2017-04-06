@@ -1,5 +1,4 @@
-﻿
-' Instat-R
+﻿' Instat-R
 ' Copyright (C) 2015
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -20,6 +19,8 @@ Public Class dlgColumnStats
     Private bReset As Boolean = True
     Private clsSummariesList As New RFunction
     Private bResetSubdialog As Boolean = False
+    Private clsDefaultFunction As New RFunction
+
     Private Sub dlgColumnStats_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -34,7 +35,6 @@ Public Class dlgColumnStats
         TestOKEnabled()
     End Sub
 
-
     Public Sub SetRCodeForControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
@@ -48,17 +48,16 @@ Public Class dlgColumnStats
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
-
+        clsDefaultFunction = New RFunction
         clsSummariesList = New RFunction
+
+        ucrSelectorForColumnStatistics.Reset()
+        ucrReceiverSelectedVariables.SetMeAsReceiver()
 
         clsSummariesList.SetRCommand("c")
         clsSummariesList.AddParameter("summary_count_non_missing", Chr(34) & "summary_count_non_missing" & Chr(34), bIncludeArgumentName:=False)
         clsSummariesList.AddParameter("summary_count", Chr(34) & "summary_count" & Chr(34), bIncludeArgumentName:=False)
         clsSummariesList.AddParameter("summary_sum", Chr(34) & "summary_sum" & Chr(34), bIncludeArgumentName:=False)
-
-        ucrSelectorForColumnStatistics.Reset()
-        ucrReceiverSelectedVariables.SetMeAsReceiver()
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
         clsDefaultFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList)
