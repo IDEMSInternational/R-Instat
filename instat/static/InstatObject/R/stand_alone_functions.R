@@ -327,56 +327,50 @@ import_from_iri <- function(download_from, data_file, X1, X2,Y1,Y2){
   gaugelocdir = getwd()
   
   if(download_from == "CHIRPS_V2P0"){
-    prexyaddress <- paste("https://iridl.ldeo.columbia.edu/SOURCES/.UCSB/.CHIRPS/.v2p0")
+    prexyaddress <- "https://iridl.ldeo.columbia.edu/SOURCES/.UCSB/.CHIRPS/.v2p0"
     if(data_file == "daily_0p05"){
-      prexyaddress = paste(prexyaddress, ".daily/.global/.0p05/.prcp", sep="/")
+      extension <- ".daily/.global/.0p05/.prcp"
     }
     else if(data_file == "daily_0p25"){
-      prexyaddress = paste(prexyaddress, ".daily/.global/.0p25/.prcp", sep="/")
+      extension <- ".daily/.global/.0p25/.prcp"
     }
     else if(data_file == "daily_improved_0p05"){
-      prexyaddress = paste(prexyaddress, ".daily-improved/.global/.0p05/.prcp", sep="/")
+      extension <- ".daily-improved/.global/.0p05/.prcp"
     }
     else if(data_file == "daily_improved_0p25"){
-      prexyaddress = paste(prexyaddress, ".daily-improved/.global/.0p25/.prcp", sep="/")
+      extension <- ".daily-improved/.global/.0p25/.prcp"
     }
     else if(data_file == "dekad"){
-      prexyaddress = paste(prexyaddress, ".dekad/.prcp", sep="/")
-      
+      extension <- ".dekad/.prcp"
     }
     else if(data_file == "monthly_c8113"){
-      prexyaddress = paste(prexyaddress, ".monthly/.global/.c8113/.precipitation", sep="/")
+      extension <- ".monthly/.global/.c8113/.precipitation"
     }
     else if(data_file == "monthly_deg1p0"){
-      prexyaddress = paste(prexyaddress, ".monthly/.global/.deg1p0/.precipitation", sep="/")
-      
+      extension <- ".monthly/.global/.deg1p0/.precipitation"
     }
     else if(data_file == "monthly_NMME_deg1p0"){
-      prexyaddress = paste(prexyaddress, ".monthly/.global/.NMME_deg1p0/.precipitation", sep="/")
+      extension <- ".monthly/.global/.NMME_deg1p0/.precipitation"
     }
     else if(data_file == "monthly_prcp"){
-      prexyaddress = paste(prexyaddress, ".monthly/.global/.precipitation", sep="/")
-      
+      extension <- ".monthly/.global/.precipitation"
     }
     else stop("Data file does not exist for CHIRPS V2P0 data")
   #Annual and 2Monthly and 3monthly does not exist for CHIRPS_V2P0
   }
   else if(download_from == "TAMSAT"){
-    prexyaddress<-paste("http://iridl.ldeo.columbia.edu/home/.remic/.Reading/.Meteorology/.TAMSAT")
+    prexyaddress <- "http://iridl.ldeo.columbia.edu/home/.remic/.Reading/.Meteorology/.TAMSAT"
     if(data_file == "rainfall_estimates"){
-      prexyaddress = paste(prexyaddress, ".TAMSAT-RFE/.rfe", sep="/")
+      extension <- ".TAMSAT-RFE/.rfe"
     }
     else if(data_file == "reconstructed_rainfall_anomaly"){
-      prexyaddress = paste(prexyaddress, ".TAMSAT-RFE/.rfediff", sep="/")
-      
+      extension <- ".TAMSAT-RFE/.rfediff"
     }
     else if(data_file == "sahel_dry_mask"){
-      prexyaddress = paste(prexyaddress, ".TAMSAT-RFE/.sahel_drymask", sep="/")
-      
+      extension <- ".TAMSAT-RFE/.sahel_drymask"
     }
     else if(data_file == "SPI_1_dekad"){
-      prexyaddress = paste(prexyaddress, ".TAMSAT-RFE/.SPI-rfe_1-dekad_Sahel", sep="/")
-      
+      extension <- ".TAMSAT-RFE/.SPI-rfe_1-dekad_Sahel"
     }
     #monthly,climatology and TAMSAT RFE 0p1 are yet to be implemented.
     else stop("Data file does not exist for TAMSAT data")
@@ -384,66 +378,66 @@ import_from_iri <- function(download_from, data_file, X1, X2,Y1,Y2){
   else if(download_from=="NOAA_ARC2"){
     prexyaddress<-paste("http://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP/.CPC/.FEWS/.Africa/.DAILY/.ARC2")
     if(data_file == "daily_estimated_prcp"){
-      prexyaddress = paste(prexyaddress, ".daily/.est_prcp", sep="/")
+      extension <- ".daily/.est_prcp"
     }
     else if(data_file == "monthly_average_estimated_prcp"){
-      prexyaddress = paste(prexyaddress, ".monthly/.est_prcp", sep="/")
+      extension <- ".monthly/.est_prcp"
     }
     else stop("Data file does not exist for NOAA ARC2 data")
   }
   else if(download_from=="NOAA_RFE2"){
-    prexyaddress<-paste("http://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP/.CPC/.FEWS/.Africa")
+    prexyaddress <- "http://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP/.CPC/.FEWS/.Africa"
     if(data_file == "daily_estimated_prcp"){
-      prexyaddress = paste(prexyaddress, ".DAILY/.RFEv2/.est_prcp", sep="/")
+      extension <- ".DAILY/.RFEv2/.est_prcp"
     }
     
     else stop("Data file does not exist for NOAA RFE2 data")
   }
   else if(download_from=="NOAA_CMORPH_DAILY" || download_from=="NOAA_CMORPH_3HOURLY" || download_from=="NOAA_CMORPH_DAILY_CALCULATED"){
     if(download_from=="NOAA_CMORPH_DAILY"){
-      prexyaddress<-paste("http://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP/.CPC/.CMORPH/.daily")
+      prexyaddress <- "http://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP/.CPC/.CMORPH/.daily"
     }
-    else if(download_from=="NOAA_CMORPH_3HOURLY"){
-      prexyaddress<-paste("http://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP/.CPC/.CMORPH/.3-hourly")
+    else if(download_from == "NOAA_CMORPH_3HOURLY"){
+      prexyaddress <- "http://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP/.CPC/.CMORPH/.3-hourly"
     }
-    if(download_from=="NOAA_CMORPH_DAILY_CALCULATED"){
-      prexyaddress<-paste("http://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP/.CPC/.CMORPH/.daily_calculated")
+    if(download_from == "NOAA_CMORPH_DAILY_CALCULATED"){
+      prexyaddress <- "http://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP/.CPC/.CMORPH/.daily_calculated"
     }
     
     if(data_file == "mean_microwave_only_est_prcp"){
-      prexyaddress = paste(prexyaddress, ".mean/.microwave-only/.comb", sep="/")
+      extension <- ".mean/.microwave-only/.comb"
     }
     else if(data_file == "mean_morphed_est_prcp"){
-      prexyaddress = paste(prexyaddress, ".mean/.morphed/.cmorph", sep="/")
+      extension <- ".mean/.morphed/.cmorph"
     }
     if(data_file == "orignames_mean_microwave_only_est_prcp"){
-      prexyaddress = paste(prexyaddress, ".orignames/.mean/.microwave-only/.comb", sep="/")
+      extension <- ".orignames/.mean/.microwave-only/.comb"
     }
     else if(data_file == "orignames_mean_morphed_est_prcp"){
-      prexyaddress = paste(prexyaddress, ".orignames/.mean/.morphed/.cmorph", sep="/")
+      extension <- ".orignames/.mean/.morphed/.cmorph"
     }
     if(data_file == "renamed102015_mean_microwave_only_est_prcp"){
-      prexyaddress = paste(prexyaddress, ".renamed102015/.mean/.microwave-only/.comb", sep="/")
+      extension <- ".renamed102015/.mean/.microwave-only/.comb"
     }
     else if(data_file == "renamed102015_mean_morphed_est_prcp"){
-      prexyaddress = paste(prexyaddress, ".renamed102015/.mean/.morphed/.cmorph", sep="/")
+      extension <- ".renamed102015/.mean/.morphed/.cmorph"
     }
     else stop("Data file does not exist for NOAA CMORPH data")
     #
   }
   else if(download_from=="NASA_TRMM_3B42"){
-    prexyaddress<-paste("https://iridl.ldeo.columbia.edu/SOURCES/.NASA/.GES-DAAC/.TRMM_L3/.TRMM_3B42/.v7")
+    prexyaddress <- "https://iridl.ldeo.columbia.edu/SOURCES/.NASA/.GES-DAAC/.TRMM_L3/.TRMM_3B42/.v7"
     if(data_file == "daily_estimated_prcp"){
-      prexyaddress = paste(prexyaddress, ".daily/.precipitation", sep="/")
+      extension <- ".daily/.precipitation"
     }
     else if(data_file == "3_hourly_estimated_prcp"){
-      prexyaddress = paste(prexyaddress, ".three-hourly/.precipitation", sep="/")
+      extension <- ".three-hourly/.precipitation"
     }
     else if(data_file == "3_hourly_pre_gauge_adjusted_infrared_est_prcp"){
-      prexyaddress = paste(prexyaddress, ".three-hourly/.IRprecipitation", sep="/")
+      extension <- ".three-hourly/.IRprecipitation"
     }
     else if(data_file == "3_hourly_pre_gauge_adjusted_microwave_est_prcp"){
-      prexyaddress = paste(prexyaddress, ".three-hourly/.HQprecipitation", sep="/")
+      extension <- ".three-hourly/.HQprecipitation"
     }
     else stop("Data file does not exist for NASA TRMM 3B42 data")
   }
@@ -451,12 +445,13 @@ import_from_iri <- function(download_from, data_file, X1, X2,Y1,Y2){
     stop("Source not specified correctly.")
   }
   
+  prexyaddress = paste(prexyaddress, extension, sep="/")
   #we need to add time range to get the data
   xystuff<-paste("X",X1,X2,"RANGEEDGES/Y",Y1,Y2,"RANGEEDGES",sep="/")
   postxyaddress<-"ngridtable+table-+skipanyNaN+4+-table+.csv" 
   address<-paste(prexyaddress,xystuff,postxyaddress,sep="/")
   file.name <- paste(gaugelocdir,"tmp_iri.csv",sep="/")
-  download.file(address,file.name,quiet=FALSE)#,method="curl") # dan updated curl
+  download.file(address,file.name,quiet=FALSE)
   dataout <- read.table( paste(gaugelocdir,"tmp_iri.csv",sep="/"),sep=",",header=TRUE)
   file.remove(paste(gaugelocdir,"tmp_iri.csv",sep="/"))
   return(dataout)
