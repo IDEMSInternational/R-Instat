@@ -71,9 +71,9 @@ Partial Class dlgTwoWayFrequencies
         'rdoTable
         '
         Me.rdoTable.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoTable.Location = New System.Drawing.Point(26, 12)
+        Me.rdoTable.Location = New System.Drawing.Point(16, 13)
         Me.rdoTable.Name = "rdoTable"
-        Me.rdoTable.Size = New System.Drawing.Size(171, 23)
+        Me.rdoTable.Size = New System.Drawing.Size(192, 23)
         Me.rdoTable.TabIndex = 1
         Me.rdoTable.TabStop = True
         Me.rdoTable.Text = "Table"
@@ -83,9 +83,9 @@ Partial Class dlgTwoWayFrequencies
         'rdoGraph
         '
         Me.rdoGraph.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoGraph.Location = New System.Drawing.Point(220, 12)
+        Me.rdoGraph.Location = New System.Drawing.Point(211, 13)
         Me.rdoGraph.Name = "rdoGraph"
-        Me.rdoGraph.Size = New System.Drawing.Size(171, 23)
+        Me.rdoGraph.Size = New System.Drawing.Size(188, 23)
         Me.rdoGraph.TabIndex = 2
         Me.rdoGraph.TabStop = True
         Me.rdoGraph.Text = "Graph"
@@ -221,9 +221,9 @@ Partial Class dlgTwoWayFrequencies
         '
         'ucrPnlFreqDisplay
         '
-        Me.ucrPnlFreqDisplay.Location = New System.Drawing.Point(10, 6)
+        Me.ucrPnlFreqDisplay.Location = New System.Drawing.Point(16, 12)
         Me.ucrPnlFreqDisplay.Name = "ucrPnlFreqDisplay"
-        Me.ucrPnlFreqDisplay.Size = New System.Drawing.Size(398, 35)
+        Me.ucrPnlFreqDisplay.Size = New System.Drawing.Size(384, 23)
         Me.ucrPnlFreqDisplay.TabIndex = 0
         '
         'ucrChkWeights
