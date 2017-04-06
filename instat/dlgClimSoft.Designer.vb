@@ -22,26 +22,21 @@ Partial Class dlgClimSoft
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
+        Me.components = New System.ComponentModel.Container()
         Me.cmdEstablishConnection = New System.Windows.Forms.Button()
-        Me.ucrReceiverMultipleStations = New instat.ucrReceiverMultiple()
         Me.lblElements = New System.Windows.Forms.Label()
         Me.lblStations = New System.Windows.Forms.Label()
-        Me.ucrReceiverMultipleElements = New instat.ucrReceiverMultiple()
         Me.lblStartDate = New System.Windows.Forms.Label()
-        Me.ucrSelectorForClimSoft = New instat.ucrSelectorAddRemove()
-        Me.ucrChkObservationData = New instat.ucrCheck()
-        Me.ucrInputStartDate = New instat.ucrInputTextBox()
-        Me.ucrInputEndDate = New instat.ucrInputTextBox()
         Me.lblEndDate = New System.Windows.Forms.Label()
+        Me.ttClimsoft = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ucrInputEndDate = New instat.ucrInputTextBox()
+        Me.ucrInputStartDate = New instat.ucrInputTextBox()
+        Me.ucrChkObservationData = New instat.ucrCheck()
+        Me.ucrSelectorForClimSoft = New instat.ucrSelectorAddRemove()
+        Me.ucrReceiverMultipleElements = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverMultipleStations = New instat.ucrReceiverMultiple()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 337)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 11
         '
         'cmdEstablishConnection
         '
@@ -51,16 +46,6 @@ Partial Class dlgClimSoft
         Me.cmdEstablishConnection.TabIndex = 0
         Me.cmdEstablishConnection.Text = "Establish Connection"
         Me.cmdEstablishConnection.UseVisualStyleBackColor = True
-        '
-        'ucrReceiverMultipleStations
-        '
-        Me.ucrReceiverMultipleStations.frmParent = Me
-        Me.ucrReceiverMultipleStations.Location = New System.Drawing.Point(260, 60)
-        Me.ucrReceiverMultipleStations.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverMultipleStations.Name = "ucrReceiverMultipleStations"
-        Me.ucrReceiverMultipleStations.Selector = Nothing
-        Me.ucrReceiverMultipleStations.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverMultipleStations.TabIndex = 3
         '
         'lblElements
         '
@@ -81,16 +66,6 @@ Partial Class dlgClimSoft
         Me.lblStations.Text = "Stations:"
         Me.lblStations.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'ucrReceiverMultipleElements
-        '
-        Me.ucrReceiverMultipleElements.frmParent = Me
-        Me.ucrReceiverMultipleElements.Location = New System.Drawing.Point(260, 193)
-        Me.ucrReceiverMultipleElements.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverMultipleElements.Name = "ucrReceiverMultipleElements"
-        Me.ucrReceiverMultipleElements.Selector = Nothing
-        Me.ucrReceiverMultipleElements.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverMultipleElements.TabIndex = 5
-        '
         'lblStartDate
         '
         Me.lblStartDate.AutoSize = True
@@ -100,32 +75,14 @@ Partial Class dlgClimSoft
         Me.lblStartDate.TabIndex = 7
         Me.lblStartDate.Text = "Start Date:"
         '
-        'ucrSelectorForClimSoft
+        'lblEndDate
         '
-        Me.ucrSelectorForClimSoft.bShowHiddenColumns = False
-        Me.ucrSelectorForClimSoft.Location = New System.Drawing.Point(10, 57)
-        Me.ucrSelectorForClimSoft.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorForClimSoft.Name = "ucrSelectorForClimSoft"
-        Me.ucrSelectorForClimSoft.Size = New System.Drawing.Size(201, 147)
-        Me.ucrSelectorForClimSoft.TabIndex = 1
-        '
-        'ucrChkObservationData
-        '
-        Me.ucrChkObservationData.Checked = False
-        Me.ucrChkObservationData.Location = New System.Drawing.Point(10, 207)
-        Me.ucrChkObservationData.Name = "ucrChkObservationData"
-        Me.ucrChkObservationData.Size = New System.Drawing.Size(178, 20)
-        Me.ucrChkObservationData.TabIndex = 6
-        '
-        'ucrInputStartDate
-        '
-        Me.ucrInputStartDate.AddQuotesIfUnrecognised = True
-        Me.ucrInputStartDate.IsMultiline = False
-        Me.ucrInputStartDate.IsReadOnly = False
-        Me.ucrInputStartDate.Location = New System.Drawing.Point(10, 255)
-        Me.ucrInputStartDate.Name = "ucrInputStartDate"
-        Me.ucrInputStartDate.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputStartDate.TabIndex = 8
+        Me.lblEndDate.AutoSize = True
+        Me.lblEndDate.Location = New System.Drawing.Point(10, 288)
+        Me.lblEndDate.Name = "lblEndDate"
+        Me.lblEndDate.Size = New System.Drawing.Size(55, 13)
+        Me.lblEndDate.TabIndex = 9
+        Me.lblEndDate.Text = "End Date:"
         '
         'ucrInputEndDate
         '
@@ -137,14 +94,59 @@ Partial Class dlgClimSoft
         Me.ucrInputEndDate.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputEndDate.TabIndex = 10
         '
-        'lblEndDate
+        'ucrInputStartDate
         '
-        Me.lblEndDate.AutoSize = True
-        Me.lblEndDate.Location = New System.Drawing.Point(10, 288)
-        Me.lblEndDate.Name = "lblEndDate"
-        Me.lblEndDate.Size = New System.Drawing.Size(55, 13)
-        Me.lblEndDate.TabIndex = 9
-        Me.lblEndDate.Text = "End Date:"
+        Me.ucrInputStartDate.AddQuotesIfUnrecognised = True
+        Me.ucrInputStartDate.IsMultiline = False
+        Me.ucrInputStartDate.IsReadOnly = False
+        Me.ucrInputStartDate.Location = New System.Drawing.Point(10, 255)
+        Me.ucrInputStartDate.Name = "ucrInputStartDate"
+        Me.ucrInputStartDate.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputStartDate.TabIndex = 8
+        '
+        'ucrChkObservationData
+        '
+        Me.ucrChkObservationData.Checked = False
+        Me.ucrChkObservationData.Location = New System.Drawing.Point(10, 207)
+        Me.ucrChkObservationData.Name = "ucrChkObservationData"
+        Me.ucrChkObservationData.Size = New System.Drawing.Size(178, 20)
+        Me.ucrChkObservationData.TabIndex = 6
+        '
+        'ucrSelectorForClimSoft
+        '
+        Me.ucrSelectorForClimSoft.bShowHiddenColumns = False
+        Me.ucrSelectorForClimSoft.Location = New System.Drawing.Point(10, 57)
+        Me.ucrSelectorForClimSoft.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorForClimSoft.Name = "ucrSelectorForClimSoft"
+        Me.ucrSelectorForClimSoft.Size = New System.Drawing.Size(201, 147)
+        Me.ucrSelectorForClimSoft.TabIndex = 1
+        '
+        'ucrReceiverMultipleElements
+        '
+        Me.ucrReceiverMultipleElements.frmParent = Me
+        Me.ucrReceiverMultipleElements.Location = New System.Drawing.Point(260, 193)
+        Me.ucrReceiverMultipleElements.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverMultipleElements.Name = "ucrReceiverMultipleElements"
+        Me.ucrReceiverMultipleElements.Selector = Nothing
+        Me.ucrReceiverMultipleElements.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverMultipleElements.TabIndex = 5
+        '
+        'ucrReceiverMultipleStations
+        '
+        Me.ucrReceiverMultipleStations.frmParent = Me
+        Me.ucrReceiverMultipleStations.Location = New System.Drawing.Point(260, 60)
+        Me.ucrReceiverMultipleStations.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverMultipleStations.Name = "ucrReceiverMultipleStations"
+        Me.ucrReceiverMultipleStations.Selector = Nothing
+        Me.ucrReceiverMultipleStations.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverMultipleStations.TabIndex = 3
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(10, 337)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 11
         '
         'dlgClimSoft
         '
@@ -186,4 +188,5 @@ Partial Class dlgClimSoft
     Friend WithEvents ucrInputEndDate As ucrInputTextBox
     Friend WithEvents ucrInputStartDate As ucrInputTextBox
     Friend WithEvents lblEndDate As Label
+    Friend WithEvents ttClimsoft As ToolTip
 End Class

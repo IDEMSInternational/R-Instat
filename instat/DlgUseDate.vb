@@ -19,6 +19,9 @@ Imports instat.Translations
 Public Class dlgUseDate
     Private bReset As Boolean = True
     Public bFirstLoad As Boolean = True
+    Public strDefaultDataFrame As String = ""
+    Public strDefaultColumn As String = ""
+
     Private Sub dlgUseDate_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -28,6 +31,7 @@ Public Class dlgUseDate
             SetDefaults()
         End If
         SetRCodeforControls(bReset)
+        SetDefaultColumn()
         bReset = False
         autoTranslate(Me)
     End Sub
@@ -49,6 +53,7 @@ Public Class dlgUseDate
         ucrReceiverUseDate.SetMeAsReceiver()
         ucrReceiverUseDate.bUseFilteredData = False
         ucrReceiverUseDate.SetIncludedDataTypes({"Date"})
+        ucrReceiverUseDate.bAutoFill = True
         ucrReceiverUseDate.SetParameterIsString()
 
         'Check boxes
@@ -115,6 +120,17 @@ Public Class dlgUseDate
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$split_date")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+    End Sub
+
+    Private Sub SetDefaultColumn()
+        If strDefaultDataFrame <> "" Then
+            ucrSelectorUseDate.SetDataframe(strDefaultDataFrame)
+        End If
+        If strDefaultColumn <> "" Then
+            ucrReceiverUseDate.Add(strDefaultColumn, strDefaultDataFrame)
+        End If
+        strDefaultDataFrame = ""
+        strDefaultColumn = ""
     End Sub
 
     Private Sub TestOKEnabled()

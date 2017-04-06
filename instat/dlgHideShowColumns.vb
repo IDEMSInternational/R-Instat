@@ -56,7 +56,6 @@ Public Class dlgHideShowColumns
         ucrReceiverHiddenColumns.SetRDefault("c()")
         ucrReceiverHiddenColumns.SetParameterIsString()
         ucrReceiverHiddenColumns.bExcludeFromSelector = True
-
     End Sub
 
     Private Sub SetHiddenColumnsInReceiver()
