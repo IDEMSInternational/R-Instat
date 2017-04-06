@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class sdgTwoWayFrequencies
     Public bControlsInitialised As Boolean = False
@@ -22,6 +21,7 @@ Public Class sdgTwoWayFrequencies
     Private Sub sdgTwoWayFrequencies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
+
     Public Sub InitialiseControls()
         Dim dctVerticalPositionLabel As New Dictionary(Of String, String)
         Dim dctHorizontalPositionLabel As New Dictionary(Of String, String)
@@ -48,38 +48,38 @@ Public Class sdgTwoWayFrequencies
         ucrInputVerticalLabels.SetItems(dctVerticalPositionLabel)
         ucrInputVerticalLabels.SetRDefault(Chr(34) & "bottom" & Chr(34))
 
-        ucrChkStack.SetText("Stack Bar Graph")
         ucrChkStack.SetParameter(New RParameter("bar.pos", 10), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "stack" & Chr(34), strNewValueIfUnchecked:=Chr(34) & "dodge" & Chr(34))
+        ucrChkStack.SetText("Stack Bar Graph")
         ucrChkStack.SetRDefault(Chr(34) & "dodge" & Chr(34))
 
-        ucrChkShowSummary.SetText("Show Summary")
         ucrChkShowSummary.SetParameter(New RParameter("show.summary", 8), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkShowSummary.SetText("Show Summary")
         ucrChkShowSummary.SetRDefault("TRUE")
 
         ucrNudDecimalPlaces.SetParameter(New RParameter("digits", 9))
         ucrNudDecimalPlaces.SetMinMax(0, 4)
 
-        ucrChkBackgroundColour.SetText("Totals Column/Row Background Highlighted")
         ucrChkBackgroundColour.SetParameter(New RParameter("emph.total", 10), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkBackgroundColour.SetText("Totals Column/Row Background Highlighted")
         ucrChkBackgroundColour.SetRDefault("FALSE")
 
-        ucrChkShowCount.SetText("Show Count")
         ucrChkShowCount.SetParameter(New RParameter("show.n", 5), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkShowCount.SetText("Show Count")
         ucrChkShowCount.SetRDefault("TRUE")
 
-        ucrChkShowPercentage.SetText("Show Percentage")
         ucrChkShowPercentage.SetParameter(New RParameter("show.prc", 6), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkShowPercentage.SetText("Show Percentage")
         ucrChkShowPercentage.SetRDefault("TRUE")
 
         ucrInputGraphTitle.SetParameter(New RParameter("title", 9))
         ucrInputTableTitle.SetParameter(New RParameter("title", 13))
 
-        ucrChkShowModelSummary.SetText("Show Model Summary")
         ucrChkShowModelSummary.SetParameter(New RParameter("show.summary", 7), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkShowModelSummary.SetText("Show Model Summary")
         ucrChkShowModelSummary.SetRDefault("FALSE")
 
-        ucrChkMissingValues.SetText("Show Missing Values")
         ucrChkMissingValues.SetParameter(New RParameter("show.na", 11), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkMissingValues.SetText("Show Missing Values")
         ucrChkMissingValues.SetRDefault("FALSE")
 
         ucrPnlGraphType.SetParameter(New RParameter("type", 8))
@@ -128,5 +128,4 @@ Public Class sdgTwoWayFrequencies
         ucrInputGraphTitle.SetRCode(clsTwoWayGraphFreq, bReset)
         ucrSaveGraph.SetRCode(clsTwoWayGraphFreq, bReset)
     End Sub
-
 End Class
