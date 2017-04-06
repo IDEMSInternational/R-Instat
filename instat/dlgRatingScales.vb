@@ -39,6 +39,9 @@ Public Class dlgRatingScales
         clsSjtStackFrq = New RFunction
         clsSjplikert = New RFunction
         clsSjpStackFrq = New RFunction
+
+
+
         ucrSelectorRatingScale.Reset()
         ucrReceiverOrderedFactors.SetParameter(New RParameter("items"))
         ucrReceiverOrderedFactors.SetParameterIsRFunction()
@@ -51,7 +54,7 @@ Public Class dlgRatingScales
         clsSjtStackFrq.SetRCommand("sjPlot::sjt.stackfrq")
         clsSjtStackFrq.AddParameter("sort.frq", Chr(34) & "none" & Chr(34))
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsSjtStackFrq)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsSjpStackFrq)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -59,7 +62,7 @@ Public Class dlgRatingScales
         ucrReceiverWeights.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
 
         ucrChkWeights.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrPnlSjpStackFrq.SetRCode(clsSjpStackFrq, bReset)
+        ' ucrPnlSjpStackFrq.SetRCode(clsSjpStackFrq, bReset)
         ucrPnlSjpLikert.SetRCode(clsSjplikert, bReset)
         ucrPnlSjtStackFrq.SetRCode(clsSjtStackFrq, bReset)
 
@@ -97,29 +100,17 @@ Public Class dlgRatingScales
         ucrChkGraph.AddToLinkedControls(ucrPnlGraphType, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkFrequencyTable.SetText("Table")
 
-        ucrPnlGraphType.AddRadioButton(rdoLikert)
-        ucrPnlGraphType.AddRadioButton(rdoStacked)
-        ucrPnlGraphType.AddToLinkedControls(ucrNudNeutralLevel, {rdoLikert}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrNudNeutralLevel.SetLinkedDisplayControl(lblNeutralLevel)
-
-        'ucrPnlSortsjp.stackfrq
-        ucrPnlSjpStackFrq.AddRadioButton(rdoNoneStack, Chr(34) & "NULL" & Chr(34))
-        ucrPnlSjpStackFrq.AddRadioButton(rdoLowAscendingStack, Chr(34) & "last.asc" & Chr(34))
-        ucrPnlSjpStackFrq.AddRadioButton(rdoLowDescendingStack, Chr(34) & "last.desc" & Chr(34))
-        ucrPnlSjpStackFrq.AddRadioButton(rdoHighAscendingStack, Chr(34) & "first.asc" & Chr(34))
-        ucrPnlSjpStackFrq.AddRadioButton(rdoHighDescendingStack, Chr(34) & "first.desc" & Chr(34))
-        ucrPnlSjpStackFrq.SetRDefault(Chr(34) & "NULL" & Chr(34))
-
         'ucrPnlSortsjt.stackfrq
         ucrPnlSjtStackFrq.SetParameter(New RParameter("sort.frq", 3))
         ucrPnlSjtStackFrq.AddRadioButton(rdoNone, Chr(34) & "NULL" & Chr(34))
         ucrPnlSjtStackFrq.AddRadioButton(rdoLowAscending, Chr(34) & "last.asc" & Chr(34))
         ucrPnlSjtStackFrq.AddRadioButton(rdoLowDescending, Chr(34) & "last.desc" & Chr(34))
         ucrPnlSjtStackFrq.AddRadioButton(rdoHighAscending, Chr(34) & "first.asc" & Chr(34))
-        ucrPnlSjpStackFrq.AddRadioButton(rdoHighDescending, Chr(34) & "first.desc" & Chr(34))
-        ucrPnlSjpStackFrq.SetRDefault(Chr(34) & "NULL" & Chr(34))
+        ucrPnlSjtStackFrq.AddRadioButton(rdoHighDescending, Chr(34) & "first.desc" & Chr(34))
+        ucrPnlSjtStackFrq.SetRDefault(Chr(34) & "NULL" & Chr(34))
 
         'ucrPnlSortsjp.likert
+        ucrPnlSjpLikert.SetParameter(New RParameter("sort.frq", 3))
         ucrPnlSjpLikert.AddRadioButton(rdoNoneLikert, Chr(34) & "NULL" & Chr(34))
         ucrPnlSjpLikert.AddRadioButton(rdoLowAscendingLikert, Chr(34) & "neg.asc" & Chr(34))
         ucrPnlSjpLikert.AddRadioButton(rdoLowDescendingLikert, Chr(34) & "neg.desc" & Chr(34))
@@ -127,9 +118,15 @@ Public Class dlgRatingScales
         ucrPnlSjpLikert.AddRadioButton(rdoHighDescendingLikert, Chr(34) & "posc.desc" & Chr(34))
         ucrPnlSjpLikert.SetRDefault(Chr(34) & "NULL" & Chr(34))
 
+
+        ucrPnlGraphType.AddRadioButton(rdoLikert)
+        ucrPnlGraphType.AddRadioButton(rdoStacked)
+        ucrPnlGraphType.AddToLinkedControls(ucrNudNeutralLevel, {rdoLikert}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudNeutralLevel.SetLinkedDisplayControl(lblNeutralLevel)
+
         ucrPnlGraphType.AddToLinkedControls(ucrPnlSjpLikert, {rdoLikert}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlGraphType.AddToLinkedControls(ucrPnlSjpStackFrq, {rdoStacked}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkFrequencyTable.AddToLinkedControls(ucrPnlSjtStackFrq, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlGraphType.AddToLinkedControls(ucrPnlSjtStackFrq, {rdoStacked}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        'ucrChkFrequencyTable.AddToLinkedControls(ucrPnlSjtStackFrq, {False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
     End Sub
 
@@ -142,13 +139,13 @@ Public Class dlgRatingScales
     End Sub
 
     Private Sub ChangeBaseFunction()
-        If ucrChkFrequencyTable.Checked Then
+        If ucrChkGraph.Checked Then
             If rdoLikert.Checked Then
                 ucrPnlSjpLikert.SetParameter(New RParameter("sort.frq", 2))
                 ucrNudNeutralLevel.SetParameter(New RParameter("cat.neutral", 3))
                 ucrBase.clsRsyntax.SetBaseRFunction(clsSjplikert)
             Else
-                ucrPnlSjpStackFrq.SetParameter(New RParameter("sort.frq", 2))
+                ucrPnlSjtStackFrq.SetParameter(New RParameter("sort.frq", 2))
                 ucrBase.clsRsyntax.SetBaseRFunction(clsSjpStackFrq)
             End If
         Else
