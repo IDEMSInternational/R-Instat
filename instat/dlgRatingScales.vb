@@ -40,8 +40,6 @@ Public Class dlgRatingScales
         clsSjplikert = New RFunction
         clsSjpStackFrq = New RFunction
 
-
-
         ucrSelectorRatingScale.Reset()
         ucrReceiverOrderedFactors.SetParameter(New RParameter("items"))
         ucrReceiverOrderedFactors.SetParameterIsRFunction()
@@ -141,27 +139,44 @@ Public Class dlgRatingScales
     Private Sub ChangeBaseFunction()
         If ucrChkGraph.Checked Then
             If rdoLikert.Checked Then
-                ucrPnlSjpLikert.SetParameter(New RParameter("sort.frq", 2))
-                ucrNudNeutralLevel.SetParameter(New RParameter("cat.neutral", 3))
+                ' ucrPnlSjpLikert.SetParameter(New RParameter("sort.frq", 2))
+                ' ucrNudNeutralLevel.SetParameter(New RParameter("cat.neutral", 3))
                 ucrBase.clsRsyntax.SetBaseRFunction(clsSjplikert)
             Else
-                ucrPnlSjtStackFrq.SetParameter(New RParameter("sort.frq", 2))
+                'ucrPnlSjtStackFrq.SetParameter(New RParameter("sort.frqt", 2))
                 ucrBase.clsRsyntax.SetBaseRFunction(clsSjpStackFrq)
             End If
-        Else
-            ucrPnlSjtStackFrq.SetParameter(New RParameter("sort.frq", 2))
+        ElseIf ucrChkFrequencyTable.Checked Then
+            'ucrPnlSjtStackFrq.SetParameter(New RParameter("sort.frq", 2))
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjtStackFrq)
         End If
         SetRCodeForControls(False)
     End Sub
 
+
     Private Sub ucrNudNeutralLevel_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudNeutralLevel.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrChkGraph.ControlContentsChanged, ucrChkFrequencyTable.ControlContentsChanged, ucrReceiverOrderedFactors.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged
         TestOkEnabled()
     End Sub
+
+    Private Sub ICalltype()
+        If ucrChkGraph.Checked AndAlso (rdoLikert.Checked OrElse rdoStacked.Checked) Then
+            ucrBase.clsRsyntax.iCallType = 3
+        ElseIf ucrChkFrequencyTable.Checked Then
+            ucrBase.clsRsyntax.iCallType = 0
+        End If
+
+    End Sub
+
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
+
+    Private Sub ucrChkGraph_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkGraph.ControlValueChanged, ucrChkFrequencyTable.ControlValueChanged, ucrPnlGraphType.ControlContentsChanged
+        ChangeBaseFunction()
+        ICalltype()
+    End Sub
+
 End Class
