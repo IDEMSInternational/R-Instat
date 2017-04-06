@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgTwoWayFrequencies
     Private bFirstLoad As Boolean = True
@@ -137,6 +136,8 @@ Public Class dlgTwoWayFrequencies
         clsSjtXtab.AddParameter("digits", 0)
         clsSjpXtab.SetRCommand("sjp.xtab")
         clsSjpXtab.AddParameter("margin", Chr(34) & "row" & Chr(34))
+        clsSjpXtab.AddParameter("vjust", Chr(34) & "bottom" & Chr(34))
+        clsSjpXtab.AddParameter("hjust", Chr(34) & "center" & Chr(34))
         clsSjpXtab.AddParameter("show.prc", "TRUE")
         clsSjpXtab.AddParameter("show.n", "TRUE")
         clsSjpXtab.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorTwoWayFrequencies.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
@@ -177,20 +178,18 @@ Public Class dlgTwoWayFrequencies
 
     Private Sub ChangeBaseFunction()
         If rdoTable.Checked AndAlso (Not ucrChkFlip.Checked) Then
-            'ucrSelectorTwoWayFrequencies.Reset()
-            ucrReceiverRowFactor.ChangeParameterName("var.row")
+            ucrReceiverRowFactor.ChangeParameterName("var.row", 0)
             ucrReceiverRowFactor.SetParameterIsRFunction()
-            ucrReceiverColumnFactor.ChangeParameterName("var.col")
+            ucrReceiverColumnFactor.ChangeParameterName("var.col", 1)
             ucrReceiverColumnFactor.SetParameterIsRFunction()
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjtXtab)
         ElseIf rdoGraph.Checked Then
-            ucrReceiverRowFactor.SetParameter(New RParameter("x", 0))
+            ucrReceiverRowFactor.ChangeParameterName("x", 0)
             ucrReceiverRowFactor.SetParameterIsRFunction()
-            ucrReceiverColumnFactor.SetParameter(New RParameter("grp", 1))
+            ucrReceiverColumnFactor.ChangeParameterName("grp", 1)
             ucrReceiverColumnFactor.SetParameterIsRFunction()
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjpXtab)
         ElseIf rdoTable.Checked AndAlso ucrChkFlip.Checked Then
-            'ucrSelectorTwoWayFrequencies.Reset()
             ucrReceiverRowFactor.ChangeParameterName("var.col",)
             ucrReceiverRowFactor.SetParameterIsRFunction()
             ucrReceiverColumnFactor.ChangeParameterName("var.row")
