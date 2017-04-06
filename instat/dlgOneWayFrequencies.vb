@@ -39,7 +39,7 @@ Public Class dlgOneWayFrequencies
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverOneWayFreq.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrReceiverOneWayFreq.SetRCode(clsSjtFreq, bReset)
         ucrReceiverWeights.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrPnlFrequencies.SetRCode(ucrBase.clsRsyntax.clsBaseFunction)
         ucrChkWeights.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
@@ -56,6 +56,7 @@ Public Class dlgOneWayFrequencies
         cmdOptions.Enabled = True
         ucrReceiverOneWayFreq.Selector = ucrSelectorOneWayFreq
         ucrReceiverOneWayFreq.SetMeAsReceiver()
+        ucrReceiverOneWayFreq.SetParameter(New RParameter("data", 1))
         ucrReceiverOneWayFreq.SetParameterIsRFunction()
 
         ucrReceiverWeights.Selector = ucrSelectorOneWayFreq
@@ -116,6 +117,12 @@ Public Class dlgOneWayFrequencies
         clsSjpFrq.AddParameter("type", Chr(34) & "bar" & Chr(34))
         clsSjpFrq.AddParameter("show.prc", "TRUE")
         clsSjpFrq.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneWayFreq.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+
+        ucrReceiverOneWayFreq.AddAdditionalCodeParameterPair(clsSjpFrq, New RParameter("var.cnt", 1))
+        ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjpFrq, New RParameter("weight.by", 3))
+        ucrPnlSort.AddAdditionalCodeParameterPair(clsSjpFrq, New RParameter("sort.frq", 2))
+        ucrNudGroups.AddAdditionalCodeParameterPair(clsSjpFrq, New RParameter("auto.group"))
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjtFreq)
         bResetSubdialog = True
     End Sub
@@ -154,15 +161,11 @@ Public Class dlgOneWayFrequencies
 
     Private Sub ChangeBaseFunction()
         If rdoTable.Checked Then
-            ucrReceiverOneWayFreq.ChangeParameterName("data")
+            'ucrReceiverOneWayFreq.ChangeParameterName("data")
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjtFreq)
         Else
-            ucrReceiverOneWayFreq.ChangeParameterName("var.cnt")
+            'ucrReceiverOneWayFreq.ChangeParameterName("var.cnt")
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjpFrq)
-        End If
-        If Not ucrReceiverOneWayFreq.IsEmpty Then
-            'TODO needs to be implemented if still needed?
-            'ucrReceiverOneWayFreq.SetParameterArgument(ucrReceiverOneWayFreq.GetVariables())
         End If
         SetRCodeForControls(bReset)
     End Sub
