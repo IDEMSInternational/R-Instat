@@ -94,6 +94,7 @@ Public Class sdgTwoWayFrequencies
         ucrChkTotalColumnName.SetParameter(ucrInputTotalsName.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkTotalColumnName.AddToLinkedControls(ucrInputTotalsName, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
+        ucrPnlGraphType.AddToLinkedControls(ucrChkStack, {rdoBar}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
         ucrSaveGraph.SetPrefix("one_way_freq")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(dlgOneWayFrequencies.ucrSelectorOneWayFreq.ucrAvailableDataFrames)
@@ -128,11 +129,4 @@ Public Class sdgTwoWayFrequencies
         ucrSaveGraph.SetRCode(clsTwoWayGraphFreq, bReset)
     End Sub
 
-    Private Sub ucrChkShowCount_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkShowCount.ControlValueChanged, ucrChkShowPercentage.ControlValueChanged
-        'If Not (ucrChkShowPercentage.Checked AndAlso ucrChkShowCount.Checked) Then
-        '    dlgTwoWayFrequencies.ucrBase.clsRsyntax.AddParameter("show.values", "FALSE")
-        'Else
-        '    dlgTwoWayFrequencies.ucrBase.clsRsyntax.AddParameter("show.values", "TRUE")
-        'End If
-    End Sub
 End Class
