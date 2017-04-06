@@ -52,8 +52,8 @@ Public Class dlgImportGriddedData
         dctDownloadPairs.Add("NOAA_ARC2", Chr(34) & "NOAA_ARC2" & Chr(34))
         dctDownloadPairs.Add("NOAA_RFE2", Chr(34) & "NOAA_RFE2" & Chr(34))
         dctDownloadPairs.Add("NOAA_CMORPH_DAILY", Chr(34) & "NOAA_CMORPH_DAILY" & Chr(34))
-        'dctDownloadPairs.Add("NOAA_CMORPH_3HOURLY", Chr(34) & "NOAA_CMORPH_3HOURLY" & Chr(34))
-        'dctDownloadPairs.Add("NOAA_CMORPH_DAILY_CALCULATED", Chr(34) & "NOAA_CMORPH_DAILY_CALCULATED" & Chr(34))
+        dctDownloadPairs.Add("NOAA_CMORPH_3HOURLY", Chr(34) & "NOAA_CMORPH_3HOURLY" & Chr(34))
+        dctDownloadPairs.Add("NOAA_CMORPH_DAILY_CALCULATED", Chr(34) & "NOAA_CMORPH_DAILY_CALCULATED" & Chr(34))
         'dctDownloadPairs.Add("NOAA_CMORPH_PENTAD", Chr(34) & "NOAA_CMORPH_PENTAD" & Chr(34))
         'dctDownloadPairs.Add("NOAA_CMORPH_V0PX", Chr(34) & "NOAA_CMORPH_V0PX" & Chr(34))
 
@@ -85,22 +85,22 @@ Public Class dlgImportGriddedData
     Private Sub SetDefaults()
         clsRDefaultFunction = New RFunction
         dctFiles = New Dictionary(Of String, String)
-        ucrInputDataFile.SetText("")
+        'ucrInputDataFile.SetText("")
         ucrInputDataFile.SetParameter(New RParameter("data_file", 2))
-        dctFiles.Add("Daily_0p05", Chr(34) & "Daily_0p05" & Chr(34))
-        dctFiles.Add("Daily_0p25", Chr(34) & "Daily_0p25" & Chr(34))
-        dctFiles.Add("Daily Improved 0p05(CHIRPS)", Chr(34) & "Daily_improved_0p05" & Chr(34))
-        dctFiles.Add("Daily Improved 0p25(CHIRPS)", Chr(34) & "Daily_improved_0p25" & Chr(34))
-        dctFiles.Add("Dekad(CHIRPS)", Chr(34) & "Dekad" & Chr(34))
-        dctFiles.Add("Monthly c8113(CHIRPS)", Chr(34) & "Monthly_c8113" & Chr(34))
-        dctFiles.Add("Monthly deg1p0(CHIRPS)", Chr(34) & "Monthly_deg1p0" & Chr(34))
-        dctFiles.Add("Monthly NMME deg1p0(CHIRPS)", Chr(34) & "Monthly_NMME_deg1p0" & Chr(34))
-        dctFiles.Add("Monthly Precipitation(CHIRPS)", Chr(34) & "Monthly_prcp" & Chr(34))
+        dctFiles.Add("Daily 0p05", Chr(34) & "daily_0p05" & Chr(34))
+        dctFiles.Add("Daily 0p25", Chr(34) & "daily_0p25" & Chr(34))
+        dctFiles.Add("Daily Improved 0p05", Chr(34) & "daily_improved_0p05" & Chr(34))
+        dctFiles.Add("Daily Improved 0p25", Chr(34) & "daily_improved_0p25" & Chr(34))
+        dctFiles.Add("Dekad", Chr(34) & "dekad" & Chr(34))
+        dctFiles.Add("Monthly c8113", Chr(34) & "monthly_c8113" & Chr(34))
+        dctFiles.Add("Monthly deg1p0", Chr(34) & "monthly_deg1p0" & Chr(34))
+        dctFiles.Add("Monthly NMME deg1p0", Chr(34) & "monthly_NMME_deg1p0" & Chr(34))
+        dctFiles.Add("Monthly Precipitation", Chr(34) & "monthly_prcp" & Chr(34))
         ucrInputDataFile.SetItems(dctFiles, bClearExisting:=False)
 
         clsRDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_from_iri")
         clsRDefaultFunction.AddParameter("download_from", Chr(34) & "CHIRPS_V2P0" & Chr(34))
-        clsRDefaultFunction.AddParameter("data_file", Chr(34) & "Daily_0p05" & Chr(34))
+        clsRDefaultFunction.AddParameter("data_file", Chr(34) & "daily_0p05" & Chr(34))
         clsRDefaultFunction.AddParameter("data_names", "IRI_Library_Data")
         'opted to set this as default location since it has data for all sources
         clsRDefaultFunction.AddParameter("X1", 10)
@@ -140,18 +140,18 @@ Public Class dlgImportGriddedData
             ucrNudMinLat.SetMinMax(-50, 50)
             ucrNudMaxLat.SetMinMax(-50, 50)
             dctFiles = New Dictionary(Of String, String)
-            ucrInputDataFile.SetParameter(New RParameter("data_file", 2))
-            dctFiles.Add("Daily 0p05", Chr(34) & "Daily_0p05" & Chr(34))
-            dctFiles.Add("Daily 0p25", Chr(34) & "Daily_0p25" & Chr(34))
-            dctFiles.Add("Daily Improved 0p05", Chr(34) & "Daily_improved_0p05" & Chr(34))
-            dctFiles.Add("Daily Improved 0p25", Chr(34) & "Daily_improved_0p25" & Chr(34))
+            'ucrInputDataFile.SetParameter(New RParameter("data_file", 2))
+            dctFiles.Add("Daily 0p05", Chr(34) & "daily_0p05" & Chr(34))
+            dctFiles.Add("Daily 0p25", Chr(34) & "daily_0p25" & Chr(34))
+            dctFiles.Add("Daily Improved 0p05", Chr(34) & "daily_improved_0p05" & Chr(34))
+            dctFiles.Add("Daily Improved 0p25", Chr(34) & "daily_improved_0p25" & Chr(34))
             dctFiles.Add("Dekad", Chr(34) & "Dekad" & Chr(34))
-            dctFiles.Add("Monthly c8113", Chr(34) & "Monthly_c8113" & Chr(34))
-            dctFiles.Add("Monthly deg1p0", Chr(34) & "Monthly_deg1p0" & Chr(34))
-            dctFiles.Add("Monthly NMME deg1p0", Chr(34) & "Monthly_NMME_deg1p0" & Chr(34))
-            dctFiles.Add("Monthly Precipitation", Chr(34) & "Monthly_prcp" & Chr(34))
+            dctFiles.Add("Monthly c8113", Chr(34) & "monthly_c8113" & Chr(34))
+            dctFiles.Add("Monthly deg1p0", Chr(34) & "monthly_deg1p0" & Chr(34))
+            dctFiles.Add("Monthly NMME deg1p0", Chr(34) & "monthly_NMME_deg1p0" & Chr(34))
+            dctFiles.Add("Monthly Precipitation", Chr(34) & "monthly_prcp" & Chr(34))
             ucrInputDataFile.SetItems(dctFiles)
-            ucrInputDataFile.cboInput.SelectedItem = "Daily_0p05"
+            ucrInputDataFile.cboInput.SelectedItem = "Daily 0p05"
         Else
             ucrNudMinLon.SetMinMax(-20, 55)
             ucrNudMaxLon.SetMinMax(-20, 55)
@@ -159,40 +159,51 @@ Public Class dlgImportGriddedData
             ucrNudMaxLat.SetMinMax(-40, 40)
             If ucrInputDownloadFrom.cboInput.SelectedItem = "TAMSAT" Then
                 dctFiles = New Dictionary(Of String, String)
-                ucrInputDataFile.SetParameter(New RParameter("data_file", 2))
-                dctFiles.Add("Rainfall Estimates", Chr(34) & "Rainfall_estimates" & Chr(34))
-                dctFiles.Add("Reconstructed Rainfall Anomaly", Chr(34) & "Reconstructed_rainfall_anomaly" & Chr(34))
-                dctFiles.Add("Sahel Dry Mask", Chr(34) & "Sahel_dry_mask" & Chr(34))
+                'ucrInputDataFile.SetParameter(New RParameter("data_file", 2))
+                dctFiles.Add("Rainfall Estimates", Chr(34) & "rainfall_estimates" & Chr(34))
+                dctFiles.Add("Reconstructed Rainfall Anomaly", Chr(34) & "reconstructed_rainfall_anomaly" & Chr(34))
+                dctFiles.Add("Sahel Dry Mask", Chr(34) & "sahel_dry_mask" & Chr(34))
                 dctFiles.Add("Standard Precipitation Index 1-dekad", Chr(34) & "SPI_1_dekad" & Chr(34))
                 'monthly,climatology and TAMSAT RFE 0p1 are yet to be implemented.
                 ucrInputDataFile.SetItems(dctFiles)
                 ucrInputDataFile.cboInput.SelectedItem = "Rainfall Estimates"
             ElseIf ucrInputDownloadFrom.cboInput.SelectedItem = "NOAA_ARC2" Then
                 dctFiles = New Dictionary(Of String, String)
-                ucrInputDataFile.SetParameter(New RParameter("data_file", 2))
-                dctFiles.Add("Daily Estimated Precipitation", Chr(34) & "Daily_estimated_prcp" & Chr(34))
-                dctFiles.Add("Monthly Average Estimated Precipitation", Chr(34) & "Monthly_average_estimated_prcp" & Chr(34))
+                'ucrInputDataFile.SetParameter(New RParameter("data_file", 2))
+                dctFiles.Add("Daily Est. Prcp.", Chr(34) & "daily_estimated_prcp" & Chr(34))
+                dctFiles.Add("Monthly Average Est. Prcp.", Chr(34) & "monthly_average_estimated_prcp" & Chr(34))
                 'monthly,climatology and TAMSAT RFE 0p1 are yet to be implemented.
                 ucrInputDataFile.SetItems(dctFiles)
-                ucrInputDataFile.cboInput.SelectedItem = "Daily Estimated Precipitation"
+                ucrInputDataFile.cboInput.SelectedItem = "Daily Est. Prcp."
             ElseIf ucrInputDownloadFrom.cboInput.SelectedItem = "NOAA_RFE2" Then
-                ucrInputDataFile.cboInput.SelectedItem = ""
-            ElseIf ucrInputDownloadFrom.cboInput.SelectedItem = "NOAA_CMORPH_DAILY" Then
                 dctFiles = New Dictionary(Of String, String)
-                ucrInputDataFile.SetParameter(New RParameter("data_file", 2))
-                dctFiles.Add("Daily Estimated Precipitation", Chr(34) & "Daily_estimated_prcp" & Chr(34))
-                dctFiles.Add("Monthly Average Estimated Precipitation", Chr(34) & "Monthly_average_estimated_prcp" & Chr(34))
-                'monthly,climatology and TAMSAT RFE 0p1 are yet to be implemented.
+                'ucrInputDataFile.SetParameter(New RParameter("data_file", 2))
+                dctFiles.Add("Daily Est. Prcp.", Chr(34) & "daily_estimated_prcp" & Chr(34))
                 ucrInputDataFile.SetItems(dctFiles)
-                ucrInputDataFile.cboInput.SelectedItem = "Daily Estimated Precipitation"
-                'ElseIf ucrInputDownloadFrom.cboInput.SelectedItem = "NOAA_CMORPH_3HOURLY" Then
-                'ElseIf ucrInputDownloadFrom.cboInput.SelectedItem = "NOAA_CMORPH_DAILY_CALCULATED" Then
+                ucrInputDataFile.cboInput.SelectedItem = "Daily Est. Prcp."
+            ElseIf (ucrInputDownloadFrom.cboInput.SelectedItem = "NOAA_CMORPH_DAILY" OrElse ucrInputDownloadFrom.cboInput.SelectedItem = "NOAA_CMORPH_3HOURLY" OrElse ucrInputDownloadFrom.cboInput.SelectedItem = "NOAA_CMORPH_DAILY_CALCULATED") Then
+                dctFiles = New Dictionary(Of String, String)
+                'ucrInputDataFile.SetParameter(New RParameter("data_file", 2))
+                dctFiles.Add("Mean Microwave Only Est. Prcp.", Chr(34) & "mean_microwave_only_est_prcp" & Chr(34))
+                dctFiles.Add("Mean Morphed Est. Prcp.", Chr(34) & "mean_morphed_est_prcp" & Chr(34))
+                dctFiles.Add("Orignames Mean Microwave Only Est. Prcp.", Chr(34) & "orignames_mean_microwave_only_est_prcp" & Chr(34))
+                dctFiles.Add("Orignames Mean Morphed Est. Prcp.", Chr(34) & "orignames_mean_morphed_est_prcp" & Chr(34))
+                dctFiles.Add("Renamed102015 Mean Microwave Only Est. Prcp.", Chr(34) & "renamed102015_mean_microwave_only_est_prcp" & Chr(34))
+                dctFiles.Add("Renamed102015 Mean Morphed Est. Prcp.", Chr(34) & "renamed102015_mean_morphed_est_prcp" & Chr(34))
+                ucrInputDataFile.SetItems(dctFiles)
+                ucrInputDataFile.cboInput.SelectedItem = "Mean Morphed Est. Prcp."
+
                 'ElseIf ucrInputDownloadFrom.cboInput.SelectedItem = "NOAA_CMORPH_PENTAD" Then
                 'ElseIf ucrInputDownloadFrom.cboInput.SelectedItem = "NOAA_CMORPH_V0PX" Then
-
             ElseIf ucrInputDownloadFrom.cboInput.SelectedItem = "NASA_TRMM_3B42" Then
-
-
+                dctFiles = New Dictionary(Of String, String)
+                'ucrInputDataFile.SetParameter(New RParameter("data_file", 2))
+                dctFiles.Add("Daily Est. Prcp.", Chr(34) & "daily_estimated_prcp" & Chr(34))
+                dctFiles.Add("3-Hourly Est. Prcp.", Chr(34) & "3_hourly_estimated_prcp" & Chr(34))
+                dctFiles.Add("3-Hourly Pre-gauge Adjusted Infrared Est. Prcp.", Chr(34) & "3_hourly_pre_gauge_adjusted_infrared_est_prcp" & Chr(34))
+                dctFiles.Add("3-Hourly Pre-gauge Adjusted Microwave Est. Prcp.", Chr(34) & "3_hourly_pre_gauge_adjusted_microwave_est_prcp" & Chr(34))
+                ucrInputDataFile.SetItems(dctFiles)
+                ucrInputDataFile.cboInput.SelectedItem = "Daily Est. Prcp."
             End If
             'other data sources to be added here.
         End If

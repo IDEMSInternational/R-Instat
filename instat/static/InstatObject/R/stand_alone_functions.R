@@ -338,49 +338,49 @@ import_from_iri <- function(download_from, data_file, X1, X2,Y1,Y2){
   
   if(download_from == "CHIRPS_V2P0"){
     prexyaddress <- paste("https://iridl.ldeo.columbia.edu/SOURCES/.UCSB/.CHIRPS/.v2p0")
-    if(data_file == "Daily_0p05"){
+    if(data_file == "daily_0p05"){
       prexyaddress = paste(prexyaddress, ".daily/.global/.0p05/.prcp", sep="/")
     }
-    else if(data_file == "Daily_0p25"){
+    else if(data_file == "daily_0p25"){
       prexyaddress = paste(prexyaddress, ".daily/.global/.0p25/.prcp", sep="/")
     }
-    else if(data_file == "Daily_improved_0p05"){
+    else if(data_file == "daily_improved_0p05"){
       prexyaddress = paste(prexyaddress, ".daily-improved/.global/.0p05/.prcp", sep="/")
     }
-    else if(data_file == "Daily_improved_0p25"){
+    else if(data_file == "daily_improved_0p25"){
       prexyaddress = paste(prexyaddress, ".daily-improved/.global/.0p25/.prcp", sep="/")
     }
-    else if(data_file == "Dekad"){
+    else if(data_file == "dekad"){
       prexyaddress = paste(prexyaddress, ".dekad/.prcp", sep="/")
       
     }
-    else if(data_file == "Monthly_c8113"){
+    else if(data_file == "monthly_c8113"){
       prexyaddress = paste(prexyaddress, ".monthly/.global/.c8113/.precipitation", sep="/")
     }
-    else if(data_file == "Monthly_deg1p0"){
+    else if(data_file == "monthly_deg1p0"){
       prexyaddress = paste(prexyaddress, ".monthly/.global/.deg1p0/.precipitation", sep="/")
       
     }
-    else if(data_file == "Monthly_NMME_deg1p0"){
+    else if(data_file == "monthly_NMME_deg1p0"){
       prexyaddress = paste(prexyaddress, ".monthly/.global/.NMME_deg1p0/.precipitation", sep="/")
     }
-    else if(data_file == "Monthly_prcp"){
+    else if(data_file == "monthly_prcp"){
       prexyaddress = paste(prexyaddress, ".monthly/.global/.precipitation", sep="/")
       
     }
-    else stop("Data file does not exist for CHIRPS_V2P0")
+    else stop("Data file does not exist for CHIRPS V2P0 data")
   #Annual and 2Monthly and 3monthly does not exist for CHIRPS_V2P0
   }
   else if(download_from == "TAMSAT"){
     prexyaddress<-paste("http://iridl.ldeo.columbia.edu/home/.remic/.Reading/.Meteorology/.TAMSAT")
-    if(data_file == "Rainfall_estimates"){
+    if(data_file == "rainfall_estimates"){
       prexyaddress = paste(prexyaddress, ".TAMSAT-RFE/.rfe", sep="/")
     }
-    else if(data_file == "Reconstructed_rainfall_anomaly"){
+    else if(data_file == "reconstructed_rainfall_anomaly"){
       prexyaddress = paste(prexyaddress, ".TAMSAT-RFE/.rfediff", sep="/")
       
     }
-    else if(data_file == "Sahel_dry_mask"){
+    else if(data_file == "sahel_dry_mask"){
       prexyaddress = paste(prexyaddress, ".TAMSAT-RFE/.sahel_drymask", sep="/")
       
     }
@@ -393,20 +393,33 @@ import_from_iri <- function(download_from, data_file, X1, X2,Y1,Y2){
   }
   else if(download_from=="NOAA_ARC2"){
     prexyaddress<-paste("http://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP/.CPC/.FEWS/.Africa/.DAILY/.ARC2")
-    if(data_file == "Daily_estimated_prcp"){
+    if(data_file == "daily_estimated_prcp"){
       prexyaddress = paste(prexyaddress, ".daily/.est_prcp", sep="/")
     }
-    else if(data_file == "Monthly_average_estimated_prcp"){
+    else if(data_file == "monthly_average_estimated_prcp"){
       prexyaddress = paste(prexyaddress, ".monthly/.est_prcp", sep="/")
     }
-    else stop("Data file does not exist for NOAA_ARC2 data")
+    else stop("Data file does not exist for NOAA ARC2 data")
   }
   else if(download_from=="NOAA_RFE2"){
-    prexyaddress<-paste("http://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP/.CPC/.FEWS/.Africa/.DAILY/.RFEv2/.est_prcp")
+    prexyaddress<-paste("http://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP/.CPC/.FEWS/.Africa")
+    if(data_file == "daily_estimated_prcp"){
+      prexyaddress = paste(prexyaddress, ".DAILY/.RFEv2/.est_prcp", sep="/")
+    }
     
+    else stop("Data file does not exist for NOAA RFE2 data")
   }
-  else if(download_from=="NOAA_CMORPH_DAILY"){
-    prexyaddress<-paste("http://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP/.CPC/.CMORPH/.daily")
+  else if(download_from=="NOAA_CMORPH_DAILY" || download_from=="NOAA_CMORPH_3HOURLY" || download_from=="NOAA_CMORPH_DAILY_CALCULATED"){
+    if(download_from=="NOAA_CMORPH_DAILY"){
+      prexyaddress<-paste("http://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP/.CPC/.CMORPH/.daily")
+    }
+    else if(download_from=="NOAA_CMORPH_3HOURLY"){
+      prexyaddress<-paste("http://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP/.CPC/.CMORPH/.3-hourly")
+    }
+    if(download_from=="NOAA_CMORPH_DAILY_CALCULATED"){
+      prexyaddress<-paste("http://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP/.CPC/.CMORPH/.daily_calculated")
+    }
+    
     if(data_file == "mean_microwave_only_est_prcp"){
       prexyaddress = paste(prexyaddress, ".mean/.microwave-only/.comb", sep="/")
     }
@@ -425,11 +438,24 @@ import_from_iri <- function(download_from, data_file, X1, X2,Y1,Y2){
     else if(data_file == "renamed102015_mean_morphed_est_prcp"){
       prexyaddress = paste(prexyaddress, ".renamed102015/.mean/.morphed/.cmorph", sep="/")
     }
-    else stop("Data file does not exist for NOAA_ARC2 data")
+    else stop("Data file does not exist for NOAA CMORPH data")
     #
   }
   else if(download_from=="NASA_TRMM_3B42"){
-    prexyaddress<-paste("https://iridl.ldeo.columbia.edu/SOURCES/.NASA/.GES-DAAC/.TRMM_L3/.TRMM_3B42/.v7/.daily/.precipitation")
+    prexyaddress<-paste("https://iridl.ldeo.columbia.edu/SOURCES/.NASA/.GES-DAAC/.TRMM_L3/.TRMM_3B42/.v7")
+    if(data_file == "daily_estimated_prcp"){
+      prexyaddress = paste(prexyaddress, ".daily/.precipitation", sep="/")
+    }
+    else if(data_file == "3_hourly_estimated_prcp"){
+      prexyaddress = paste(prexyaddress, ".three-hourly/.precipitation", sep="/")
+    }
+    else if(data_file == "3_hourly_pre_gauge_adjusted_infrared_est_prcp"){
+      prexyaddress = paste(prexyaddress, ".three-hourly/.IRprecipitation", sep="/")
+    }
+    else if(data_file == "3_hourly_pre_gauge_adjusted_microwave_est_prcp"){
+      prexyaddress = paste(prexyaddress, ".three-hourly/.HQprecipitation", sep="/")
+    }
+    else stop("Data file does not exist for NASA TRMM 3B42 data")
   }
   else{
     stop("Source not specified correctly.")
