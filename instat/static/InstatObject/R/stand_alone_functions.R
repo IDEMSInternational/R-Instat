@@ -244,36 +244,26 @@ open_NetCDF <- function(nc_data){
   lat_names = c("lat", "latitude","LAT","Lat", "LATITUDE")
   lon_names = c("lon", "longitude","LON","Lon", "LONGITUDE")
   time_names = c("time", "TIME","Time","period", "Period", "PERIOD")
-  lat_found = FALSE
-  lon_found = FALSE
-  time_found = FALSE
-  if (!lat_found){
-    for (i in lat_lon_names){
-      if(!is.na(match(i, lat_names))){
-        lat <- as.numeric(ncvar_get(nc_data, i))
-        lat_found = TRUE
-      }
-    }
+  
+  lat_in <- which(lat_lon_names %in% lat_names)
+  print(lat_in)
+  lat_found <- (length(lat_in) == 1)
+  if(lat_found) {
+    lat <- as.numeric(ncvar_get(nc_data, lat_lon_names[lat_in]))
   }
   
-  if (!lon_found){
-    for (i in lat_lon_names){
-      if(!is.na(match(i, lon_names))){
-        lon <- as.numeric(ncvar_get(nc_data, i))
-        lon_found = TRUE
-      }
-    }
+  lon_in <- which(lat_lon_names %in% lon_names)
+  lon_found <- (length(lon_in) == 1)
+  if(lon_found) {
+    lon <- as.numeric(ncvar_get(nc_data, lat_lon_names[lon_in]))
   }
   
-  if (!time_found){
-    for (i in lat_lon_names){
-      if(!is.na(match(i, time_names))){
-        time <- as.numeric(ncvar_get(nc_data, i))
-        time_found = TRUE
-      }
-    }
+  time_in <- which(lat_lon_names %in% time_names)
+  time_found <- (length(time_in) == 1)
+  if(time_found) {
+    time <- as.numeric(ncvar_get(nc_data, lat_lon_names[time_in]))
   }
-  
+
   if(!lon_found || (!lat_found))stop("Latitude and longitude names could not be recognised.")
   if(!time_found){
     warning("Time variable could not be found/recognised. Time will be set to 1.")
