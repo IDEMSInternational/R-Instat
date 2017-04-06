@@ -77,7 +77,7 @@ Public Class dlgAppend
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverAppendDataframe.IsEmpty AndAlso ucrSaveGraph.IsComplete() Then
+        If ucrReceiverAppendDataframe.lstSelectedVariables.Items.Count > 1 AndAlso ucrSaveGraph.IsComplete() Then
             If ucrChkIncludeIDColumn.Checked AndAlso ucrInputIDColName.IsEmpty Then
                 ucrBase.OKEnabled(False)
             Else
