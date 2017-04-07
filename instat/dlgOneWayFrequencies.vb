@@ -132,7 +132,8 @@ Public Class dlgOneWayFrequencies
                 Else
                     ucrBase.OKEnabled(False)
                 End If
-            ElseIf ucrChkGroupData.Checked
+            ElseIf ucrChkGroupData.Checked Then
+
                 If ucrNudGroups.GetText <> "" Then
                     ucrBase.OKEnabled(True)
                 Else
@@ -144,25 +145,26 @@ Public Class dlgOneWayFrequencies
         End If
     End Sub
 
-    Public Sub ICallType()
+    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         If rdoTable.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSjtFreq)
             'ucrBase.clsRsyntax.bHTMLOutput = True
             ucrBase.clsRsyntax.iCallType = 0
-        Else
+        ElseIf rdoGraph.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSjpFrq)
             ' ucrBase.clsRsyntax.bHTMLOutput = False
             ucrBase.clsRsyntax.iCallType = 3
         End If
     End Sub
 
-    Private Sub ChangeBaseFunction()
-        If rdoTable.Checked Then
-            'ucrReceiverOneWayFreq.ChangeParameterName("data")
-            ucrBase.clsRsyntax.SetBaseRFunction(clsSjtFreq)
-        Else
-            'ucrReceiverOneWayFreq.ChangeParameterName("var.cnt")
-            ucrBase.clsRsyntax.SetBaseRFunction(clsSjpFrq)
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        Dim strGraph As String
+        Dim strTempScript As String = ""
+
+        If rdoTable.Checked AndAlso rdoGraph.Checked Then
+            strGraph = clsSjpFrq.ToScript(strTempScript)
+            frmMain.clsRLink.RunScript(strTempScript & strGraph, iCallType:=3)
         End If
-        'SetRCodeForControls(bReset)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -188,10 +190,5 @@ Public Class dlgOneWayFrequencies
         bResetSubdialog = False
         sdgOneWayFrequencies.ShowDialog()
         TestOkEnabled()
-    End Sub
-
-    Private Sub ucrPnlFrequencies_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFrequencies.ControlValueChanged
-        ChangeBaseFunction()
-        ICallType()
     End Sub
 End Class
