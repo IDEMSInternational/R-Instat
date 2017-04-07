@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgRatingScales
     Private bFirstLoad As Boolean = True
@@ -43,14 +42,14 @@ Public Class dlgRatingScales
         ucrSelectorRatingScale.Reset()
         ucrReceiverOrderedFactors.SetParameter(New RParameter("items"))
         ucrReceiverOrderedFactors.SetParameterIsRFunction()
-        clsSjplikert.SetRCommand("sjPlot::sjp.likert")
+        clsSjplikert.SetRCommand("sjp.likert")
         clsSjplikert.AddParameter("cat.neutral")
-        clsSjplikert.AddParameter("sort.frq", Chr(34) & "none" & Chr(34))
-        clsSjpStackFrq.SetRCommand("sjPlot::sjp.stackfrq")
-        clsSjpStackFrq.AddParameter("sort.frq", Chr(34) & "none" & Chr(34))
+        clsSjplikert.AddParameter("sort.frq", Chr(34) & "NULL" & Chr(34))
+        clsSjpStackFrq.SetRCommand("sjp.stackfrq")
+        clsSjpStackFrq.AddParameter("sort.frq", Chr(34) & "NULL" & Chr(34))
         clsSjpStackFrq.AddParameter("coord.flip", "FALSE")
-        clsSjtStackFrq.SetRCommand("sjPlot::sjt.stackfrq")
-        clsSjtStackFrq.AddParameter("sort.frq", Chr(34) & "none" & Chr(34))
+        clsSjtStackFrq.SetRCommand("sjt.stackfrq")
+        clsSjtStackFrq.AddParameter("sort.frq", Chr(34) & "NULL" & Chr(34))
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjpStackFrq)
     End Sub
@@ -124,7 +123,7 @@ Public Class dlgRatingScales
 
         ucrPnlGraphType.AddToLinkedControls(ucrPnlSjpLikert, {rdoLikert}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGraphType.AddToLinkedControls(ucrPnlSjtStackFrq, {rdoStacked}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrChkFrequencyTable.AddToLinkedControls(ucrPnlSjtStackFrq, {False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkFrequencyTable.AddToLinkedControls(ucrPnlSjtStackFrq, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
     End Sub
 
