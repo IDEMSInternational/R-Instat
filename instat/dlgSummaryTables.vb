@@ -42,7 +42,7 @@ Public Class dlgSummaryTables
         Else
             ucrBase.OKEnabled(False)
         End If
-
+        ucrBase.OKEnabled(False)
     End Sub
 
     Private Sub ucrReceiverFactor_Leave(sender As Object, e As EventArgs) Handles ucrReceiverFactor.Leave
