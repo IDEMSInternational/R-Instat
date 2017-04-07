@@ -67,9 +67,13 @@ Public Class ucrCheck
     Protected Overrides Sub UpdateParameter(clsTempParam As RParameter)
         If bChangeParameterValue AndAlso clsTempParam IsNot Nothing Then
             If chkCheck.Checked Then
-                clsTempParam.SetArgumentValue(strValueIfChecked)
+                If strValueIfChecked <> "" Then
+                    clsParameter.SetArgumentValue(strValueIfChecked)
+                End If
             Else
-                clsTempParam.SetArgumentValue(strValueIfUnchecked)
+                If strValueIfUnchecked <> "" Then
+                    clsParameter.SetArgumentValue(strValueIfUnchecked)
+                End If
             End If
         End If
     End Sub
