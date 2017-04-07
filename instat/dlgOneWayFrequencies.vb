@@ -53,20 +53,16 @@ Public Class dlgOneWayFrequencies
         'HelpID
         ' ucrBase.iHelpTopicID = 
 
-        cmdOptions.Enabled = True
-        ucrReceiverOneWayFreq.Selector = ucrSelectorOneWayFreq
-        ucrReceiverOneWayFreq.SetMeAsReceiver()
         ucrReceiverOneWayFreq.SetParameter(New RParameter("data", 1))
         ucrReceiverOneWayFreq.SetParameterIsRFunction()
+        ucrReceiverOneWayFreq.Selector = ucrSelectorOneWayFreq
 
         ucrReceiverWeights.Selector = ucrSelectorOneWayFreq
-        ucrReceiverWeights.SetParameter(New RParameter("weight.by", 3))
+        ucrReceiverWeights.SetParameter(New RParameter("weight.by", 2))
         ucrReceiverWeights.SetParameterIsRFunction()
         ucrReceiverWeights.SetDataType("numeric")
-        ucrReceiverWeights.bUpdateRCodeFromControl = False
-        ucrReceiverWeights.bAddRemoveParameter = False
 
-        ucrPnlSort.SetParameter(New RParameter("sort.frq", 2))
+        ucrPnlSort.SetParameter(New RParameter("sort.frq", 6))
         ucrPnlSort.AddRadioButton(rdoNone, Chr(34) & "none" & Chr(34))
         ucrPnlSort.AddRadioButton(rdoAscending, Chr(34) & "asc" & Chr(34))
         ucrPnlSort.AddRadioButton(rdoDescending, Chr(34) & "desc" & Chr(34))
@@ -78,22 +74,22 @@ Public Class dlgOneWayFrequencies
 
         ucrPnlFrequencies.AddRadioButton(rdoTable)
         ucrPnlFrequencies.AddRadioButton(rdoGraph)
-
         ucrPnlFrequencies.AddFunctionNamesCondition(rdoTable, "sjt.frq")
         ucrPnlFrequencies.AddFunctionNamesCondition(rdoGraph, "sjp.frq")
         ucrPnlFrequencies.AddToLinkedControls(ucrChkFlip, {rdoGraph}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
-        ucrChkGroupData.SetText("Group Data")
+        ucrNudGroups.SetParameter(New RParameter("auto.group"))
         ucrNudGroups.SetMinMax(2, 100)
         ucrNudGroups.Increment = 5
 
-        ucrNudGroups.SetParameter(New RParameter("auto.group"))
         ucrChkGroupData.SetParameter(ucrNudGroups.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkGroupData.SetText("Group Data")
         ucrChkGroupData.AddToLinkedControls(ucrNudGroups, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
         ucrChkGroupData.AddFunctionNamesCondition(True, {"sjt.frq", "sjp.frq"})
         ucrChkGroupData.bUpdateRCodeFromControl = True
-        ucrChkFlip.SetText("Flip Coordinates")
+
         ucrChkFlip.SetParameter(New RParameter("coord.flip", 1))
+        ucrChkFlip.SetText("Flip Coordinates")
         ucrChkFlip.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkFlip.SetRDefault("FALSE")
     End Sub
@@ -101,18 +97,15 @@ Public Class dlgOneWayFrequencies
     Private Sub SetDefaults()
         clsSjtFreq = New RFunction
         clsSjpFrq = New RFunction
+
         ucrSelectorOneWayFreq.Reset()
-        sdgOneWayFrequencies.ucrSaveGraph.Reset()
-        sdgOneWayFrequencies.ucrInputGraphTitle.SetName("")
-        sdgOneWayFrequencies.ucrInputHorizontalLabels.Reset()
-        sdgOneWayFrequencies.ucrInputVerticalLabels.Reset()
+        ucrReceiverOneWayFreq.SetMeAsReceiver()
+
         clsSjtFreq.SetRCommand("sjt.frq")
-        clsSjtFreq.AddParameter("sort.frq", Chr(34) & "none" & Chr(34))
-        'parameter added to have the default to False (R default is TRUE)
         clsSjtFreq.AddParameter("show.summary", "FALSE")
         clsSjtFreq.AddParameter("skip.zero", "FALSE")
-        'defining the digit default value
         clsSjtFreq.AddParameter("digits", 0)
+
         clsSjpFrq.SetRCommand("sjp.frq")
         clsSjpFrq.AddParameter("sort.frq", Chr(34) & "none" & Chr(34))
         clsSjpFrq.AddParameter("type", Chr(34) & "bar" & Chr(34))
@@ -121,7 +114,7 @@ Public Class dlgOneWayFrequencies
 
         ucrReceiverOneWayFreq.AddAdditionalCodeParameterPair(clsSjpFrq, New RParameter("var.cnt", 1))
         ucrChkWeights.AddAdditionalCodeParameterPair(clsSjpFrq, New RParameter("weight.by", 3))
-        ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjpFrq, New RParameter("weight.by", 3))
+        ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjpFrq, ucrChkWeights.GetParameter())
         ucrPnlSort.AddAdditionalCodeParameterPair(clsSjpFrq, New RParameter("sort.frq", 5))
         ucrNudGroups.AddAdditionalCodeParameterPair(clsSjpFrq, New RParameter("auto.group", 35))
 
