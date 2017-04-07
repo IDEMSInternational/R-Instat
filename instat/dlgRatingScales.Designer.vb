@@ -25,12 +25,12 @@ Partial Class dlgRatingScales
         Me.lblOrderedFactor = New System.Windows.Forms.Label()
         Me.grpSort = New System.Windows.Forms.GroupBox()
         Me.rdoHighAscending = New System.Windows.Forms.RadioButton()
+        Me.rdoLowAscending = New System.Windows.Forms.RadioButton()
         Me.rdoHighDescending = New System.Windows.Forms.RadioButton()
+        Me.rdoLowDescending = New System.Windows.Forms.RadioButton()
         Me.rdoNone = New System.Windows.Forms.RadioButton()
         Me.rdoHighDescendingLikert = New System.Windows.Forms.RadioButton()
         Me.rdoHighAscendingLikert = New System.Windows.Forms.RadioButton()
-        Me.rdoLowDescending = New System.Windows.Forms.RadioButton()
-        Me.rdoLowAscending = New System.Windows.Forms.RadioButton()
         Me.rdoLowDescendingLikert = New System.Windows.Forms.RadioButton()
         Me.rdoNoneLikert = New System.Windows.Forms.RadioButton()
         Me.rdoLowAscendingLikert = New System.Windows.Forms.RadioButton()
@@ -41,16 +41,17 @@ Partial Class dlgRatingScales
         Me.ucrNudNeutralLevel = New instat.ucrNud()
         Me.ucrPnlGraphType = New instat.UcrPanel()
         Me.ucrChkFlip = New instat.ucrCheck()
+        Me.ucrPnlSjtStackFrq = New instat.UcrPanel()
         Me.ucrReceiverWeights = New instat.ucrReceiverSingle()
         Me.ucrChkWeights = New instat.ucrCheck()
-        Me.ucrChkFrequencyTable = New instat.ucrCheck()
-        Me.ucrChkGraph = New instat.ucrCheck()
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrReceiverOrderedFactors = New instat.ucrReceiverMultiple()
-        Me.ucrPnlSjtStackFrq = New instat.UcrPanel()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorRatingScale = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrPnlSjpLikert = New instat.UcrPanel()
+        Me.rdoGraph = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlType = New instat.UcrPanel()
+        Me.rdoTable = New System.Windows.Forms.RadioButton()
         Me.grpSort.SuspendLayout()
         Me.grpGraphType.SuspendLayout()
         Me.SuspendLayout()
@@ -90,6 +91,17 @@ Partial Class dlgRatingScales
         Me.rdoHighAscending.Text = "High Ascending"
         Me.rdoHighAscending.UseVisualStyleBackColor = True
         '
+        'rdoLowAscending
+        '
+        Me.rdoLowAscending.AutoSize = True
+        Me.rdoLowAscending.Location = New System.Drawing.Point(13, 41)
+        Me.rdoLowAscending.Name = "rdoLowAscending"
+        Me.rdoLowAscending.Size = New System.Drawing.Size(95, 17)
+        Me.rdoLowAscending.TabIndex = 27
+        Me.rdoLowAscending.TabStop = True
+        Me.rdoLowAscending.Text = "LowAscending"
+        Me.rdoLowAscending.UseVisualStyleBackColor = True
+        '
         'rdoHighDescending
         '
         Me.rdoHighDescending.AutoSize = True
@@ -100,6 +112,17 @@ Partial Class dlgRatingScales
         Me.rdoHighDescending.TabStop = True
         Me.rdoHighDescending.Text = "High Descending"
         Me.rdoHighDescending.UseVisualStyleBackColor = True
+        '
+        'rdoLowDescending
+        '
+        Me.rdoLowDescending.AutoSize = True
+        Me.rdoLowDescending.Location = New System.Drawing.Point(13, 65)
+        Me.rdoLowDescending.Name = "rdoLowDescending"
+        Me.rdoLowDescending.Size = New System.Drawing.Size(102, 17)
+        Me.rdoLowDescending.TabIndex = 28
+        Me.rdoLowDescending.TabStop = True
+        Me.rdoLowDescending.Text = "LowDescending"
+        Me.rdoLowDescending.UseVisualStyleBackColor = True
         '
         'rdoNone
         '
@@ -133,28 +156,6 @@ Partial Class dlgRatingScales
         Me.rdoHighAscendingLikert.TabStop = True
         Me.rdoHighAscendingLikert.Text = "High Ascending"
         Me.rdoHighAscendingLikert.UseVisualStyleBackColor = True
-        '
-        'rdoLowDescending
-        '
-        Me.rdoLowDescending.AutoSize = True
-        Me.rdoLowDescending.Location = New System.Drawing.Point(13, 65)
-        Me.rdoLowDescending.Name = "rdoLowDescending"
-        Me.rdoLowDescending.Size = New System.Drawing.Size(102, 17)
-        Me.rdoLowDescending.TabIndex = 28
-        Me.rdoLowDescending.TabStop = True
-        Me.rdoLowDescending.Text = "LowDescending"
-        Me.rdoLowDescending.UseVisualStyleBackColor = True
-        '
-        'rdoLowAscending
-        '
-        Me.rdoLowAscending.AutoSize = True
-        Me.rdoLowAscending.Location = New System.Drawing.Point(13, 41)
-        Me.rdoLowAscending.Name = "rdoLowAscending"
-        Me.rdoLowAscending.Size = New System.Drawing.Size(95, 17)
-        Me.rdoLowAscending.TabIndex = 27
-        Me.rdoLowAscending.TabStop = True
-        Me.rdoLowAscending.Text = "LowAscending"
-        Me.rdoLowAscending.UseVisualStyleBackColor = True
         '
         'rdoLowDescendingLikert
         '
@@ -269,6 +270,13 @@ Partial Class dlgRatingScales
         Me.ucrChkFlip.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkFlip.TabIndex = 23
         '
+        'ucrPnlSjtStackFrq
+        '
+        Me.ucrPnlSjtStackFrq.Location = New System.Drawing.Point(6, 12)
+        Me.ucrPnlSjtStackFrq.Name = "ucrPnlSjtStackFrq"
+        Me.ucrPnlSjtStackFrq.Size = New System.Drawing.Size(126, 127)
+        Me.ucrPnlSjtStackFrq.TabIndex = 44
+        '
         'ucrReceiverWeights
         '
         Me.ucrReceiverWeights.frmParent = Me
@@ -287,22 +295,6 @@ Partial Class dlgRatingScales
         Me.ucrChkWeights.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkWeights.TabIndex = 20
         '
-        'ucrChkFrequencyTable
-        '
-        Me.ucrChkFrequencyTable.Checked = False
-        Me.ucrChkFrequencyTable.Location = New System.Drawing.Point(10, 282)
-        Me.ucrChkFrequencyTable.Name = "ucrChkFrequencyTable"
-        Me.ucrChkFrequencyTable.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkFrequencyTable.TabIndex = 19
-        '
-        'ucrChkGraph
-        '
-        Me.ucrChkGraph.Checked = False
-        Me.ucrChkGraph.Location = New System.Drawing.Point(10, 256)
-        Me.ucrChkGraph.Name = "ucrChkGraph"
-        Me.ucrChkGraph.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkGraph.TabIndex = 18
-        '
         'ucrSaveGraph
         '
         Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 323)
@@ -319,13 +311,6 @@ Partial Class dlgRatingScales
         Me.ucrReceiverOrderedFactors.Selector = Nothing
         Me.ucrReceiverOrderedFactors.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverOrderedFactors.TabIndex = 13
-        '
-        'ucrPnlSjtStackFrq
-        '
-        Me.ucrPnlSjtStackFrq.Location = New System.Drawing.Point(6, 12)
-        Me.ucrPnlSjtStackFrq.Name = "ucrPnlSjtStackFrq"
-        Me.ucrPnlSjtStackFrq.Size = New System.Drawing.Size(126, 127)
-        Me.ucrPnlSjtStackFrq.TabIndex = 44
         '
         'ucrBase
         '
@@ -351,11 +336,46 @@ Partial Class dlgRatingScales
         Me.ucrPnlSjpLikert.Size = New System.Drawing.Size(126, 127)
         Me.ucrPnlSjpLikert.TabIndex = 45
         '
+        'rdoGraph
+        '
+        Me.rdoGraph.AutoSize = True
+        Me.rdoGraph.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.rdoGraph.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rdoGraph.Location = New System.Drawing.Point(20, 262)
+        Me.rdoGraph.Name = "rdoGraph"
+        Me.rdoGraph.Size = New System.Drawing.Size(60, 18)
+        Me.rdoGraph.TabIndex = 46
+        Me.rdoGraph.Tag = ""
+        Me.rdoGraph.Text = "Graph"
+        Me.rdoGraph.UseVisualStyleBackColor = True
+        '
+        'ucrPnlType
+        '
+        Me.ucrPnlType.Location = New System.Drawing.Point(10, 258)
+        Me.ucrPnlType.Name = "ucrPnlType"
+        Me.ucrPnlType.Size = New System.Drawing.Size(82, 55)
+        Me.ucrPnlType.TabIndex = 47
+        '
+        'rdoTable
+        '
+        Me.rdoTable.AutoSize = True
+        Me.rdoTable.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.rdoTable.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.rdoTable.Location = New System.Drawing.Point(20, 283)
+        Me.rdoTable.Name = "rdoTable"
+        Me.rdoTable.Size = New System.Drawing.Size(58, 18)
+        Me.rdoTable.TabIndex = 49
+        Me.rdoTable.Tag = ""
+        Me.rdoTable.Text = "Table"
+        Me.rdoTable.UseVisualStyleBackColor = True
+        '
         'dlgRatingScales
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(698, 410)
+        Me.Controls.Add(Me.rdoTable)
+        Me.Controls.Add(Me.rdoGraph)
         Me.Controls.Add(Me.rdoHighDescendingLikert)
         Me.Controls.Add(Me.rdoLowDescendingLikert)
         Me.Controls.Add(Me.rdoLowAscendingLikert)
@@ -366,14 +386,13 @@ Partial Class dlgRatingScales
         Me.Controls.Add(Me.ucrReceiverWeights)
         Me.Controls.Add(Me.ucrChkWeights)
         Me.Controls.Add(Me.rdoHighAscendingLikert)
-        Me.Controls.Add(Me.ucrChkFrequencyTable)
-        Me.Controls.Add(Me.ucrChkGraph)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.lblOrderedFactor)
         Me.Controls.Add(Me.ucrReceiverOrderedFactors)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSelectorRatingScale)
         Me.Controls.Add(Me.ucrPnlSjpLikert)
+        Me.Controls.Add(Me.ucrPnlType)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -394,8 +413,6 @@ Partial Class dlgRatingScales
     Friend WithEvents ucrReceiverOrderedFactors As ucrReceiverMultiple
     Friend WithEvents lblOrderedFactor As Label
     Friend WithEvents ucrChkWeights As ucrCheck
-    Friend WithEvents ucrChkFrequencyTable As ucrCheck
-    Friend WithEvents ucrChkGraph As ucrCheck
     Friend WithEvents ucrSaveGraph As ucrSave
     Friend WithEvents ucrReceiverWeights As ucrReceiverSingle
     Friend WithEvents grpSort As GroupBox
@@ -418,4 +435,7 @@ Partial Class dlgRatingScales
     Friend WithEvents rdoNone As RadioButton
     Friend WithEvents ucrPnlSjtStackFrq As UcrPanel
     Friend WithEvents ucrPnlSjpLikert As UcrPanel
+    Friend WithEvents rdoGraph As RadioButton
+    Friend WithEvents rdoTable As RadioButton
+    Friend WithEvents ucrPnlType As UcrPanel
 End Class
