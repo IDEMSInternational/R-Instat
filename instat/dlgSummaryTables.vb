@@ -13,11 +13,20 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports instat
 Imports instat.Translations
 
 Public Class dlgSummaryTables
+    Private bFirstload As Boolean = True
     Private Sub dlgSummaryTables_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autoTranslate(Me)
+        If bFirstload Then
+            InitialiseDialog()
+            bFirstload = False
+        End If
+        TestOkEnabled()
+    End Sub
+
+    Private Sub InitialiseDialog()
         cboWeights.Visible = False
         ucrBase.clsRsyntax.SetFunction("summary")
         ucrBase.clsRsyntax.iCallType = 2
@@ -25,6 +34,12 @@ Public Class dlgSummaryTables
         ucrReceiverFactor.Selector = ucrSelectorSummaryTables
         ucrReceiverFactor.SetMeAsReceiver()
         ucrReceiverVariate.Selector = ucrSelectorSummaryTables
+
+        ucrChkDisplayMargins.SetText("Display Margins")
+        ucrChkMeans.SetText("Means")
+        ucrChkTotals.SetText("Totals")
+        ucrChkTrtSCFactor.SetText("Treat Summary Column as Factor")
+        ucrChkWeights.SetText("Weights")
     End Sub
 
     Private Sub chkWeights_CheckedChanged(sender As Object, e As EventArgs)
