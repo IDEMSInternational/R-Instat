@@ -465,9 +465,19 @@ Public Class ucrCore
         strValuesToIgnore = strValues
     End Sub
 
-    Public Sub AddAdditionalCodeParameterPair(clsNewRCode As RCodeStructure, clsNewRParameter As RParameter)
-        lstAllRCodes.Add(clsNewRCode)
-        lstAllRParameters.Add(clsNewRParameter)
+    Public Sub AddAdditionalCodeParameterPair(clsNewRCode As RCodeStructure, clsNewRParameter As RParameter, Optional iAdditionalPairNo As Integer = -1)
+        If iAdditionalPairNo = -1 Then
+            iAdditionalPairNo = lstAllRCodes.Count
+        End If
+        If iAdditionalPairNo < lstAllRCodes.Count Then
+            lstAllRCodes(iAdditionalPairNo) = clsNewRCode
+            lstAllRParameters(iAdditionalPairNo) = clsNewRParameter
+        ElseIf iAdditionalPairNo = lstAllRCodes.Count Then
+            lstAllRCodes.Add(clsNewRCode)
+            lstAllRParameters.Add(clsNewRParameter)
+        Else
+            MsgBox("Developer error: Cannot add additional RCode and RParameter pair because the addional pair number is out of bounds of the current pairs.")
+        End If
     End Sub
 
     'In general this should not be overrided. Only for controls which use parameters in very different way e.g. ucrSave

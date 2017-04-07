@@ -38,17 +38,6 @@ Public Class dlgOneWayFrequencies
         TestOkEnabled()
     End Sub
 
-    Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverOneWayFreq.SetRCode(clsSjtFreq, bReset)
-        ucrReceiverWeights.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrPnlFrequencies.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrChkWeights.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrPnlSort.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrChkFlip.SetRCode(clsSjpFrq, bReset)
-        ucrChkGroupData.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrNudGroups.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-    End Sub
-
     Private Sub InitialiseDialog()
         'HelpID
         ' ucrBase.iHelpTopicID = 
@@ -112,14 +101,25 @@ Public Class dlgOneWayFrequencies
         clsSjpFrq.AddParameter("show.prc", "TRUE")
         clsSjpFrq.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneWayFreq.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
-        ucrReceiverOneWayFreq.AddAdditionalCodeParameterPair(clsSjpFrq, New RParameter("var.cnt", 1))
-        ucrChkWeights.AddAdditionalCodeParameterPair(clsSjpFrq, New RParameter("weight.by", 3))
-        ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjpFrq, ucrChkWeights.GetParameter())
-        ucrPnlSort.AddAdditionalCodeParameterPair(clsSjpFrq, New RParameter("sort.frq", 5))
-        ucrNudGroups.AddAdditionalCodeParameterPair(clsSjpFrq, New RParameter("auto.group", 35))
-
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjtFreq)
         bResetSubdialog = True
+    End Sub
+
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        ucrReceiverOneWayFreq.AddAdditionalCodeParameterPair(clsSjpFrq, New RParameter("var.cnt", 1), iAdditionalPairNo:=1)
+        ucrChkWeights.AddAdditionalCodeParameterPair(clsSjpFrq, New RParameter("weight.by", 3), iAdditionalPairNo:=1)
+        ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjpFrq, ucrChkWeights.GetParameter(), iAdditionalPairNo:=1)
+        ucrPnlSort.AddAdditionalCodeParameterPair(clsSjpFrq, New RParameter("sort.frq", 5), iAdditionalPairNo:=1)
+        ucrNudGroups.AddAdditionalCodeParameterPair(clsSjpFrq, New RParameter("auto.group", 35), iAdditionalPairNo:=1)
+
+        ucrReceiverOneWayFreq.SetRCode(clsSjtFreq, bReset)
+        ucrReceiverWeights.SetRCode(clsSjtFreq, bReset)
+        ucrPnlFrequencies.SetRCode(clsSjtFreq, bReset)
+        ucrChkWeights.SetRCode(clsSjtFreq, bReset)
+        ucrPnlSort.SetRCode(clsSjtFreq, bReset)
+        ucrChkFlip.SetRCode(clsSjpFrq, bReset)
+        ucrChkGroupData.SetRCode(clsSjtFreq, bReset)
+        ucrNudGroups.SetRCode(clsSjtFreq, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
