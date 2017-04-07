@@ -50,12 +50,14 @@ Public Class dlgSummaryTables
         End If
     End Sub
 
+    'Temporary test ok disabled.
     Private Sub TestOkEnabled()
-        If Not ucrReceiverFactor.IsEmpty AndAlso Not ucrReceiverVariate.IsEmpty Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+        'If Not ucrReceiverFactor.IsEmpty AndAlso Not ucrReceiverVariate.IsEmpty Then
+        '    ucrBase.OKEnabled(True)
+        'Else
+        '    ucrBase.OKEnabled(False)
+        'End If
+
         ucrBase.OKEnabled(False)
     End Sub
 
