@@ -18,6 +18,7 @@ Imports instat.Translations
 Public Class dlgRatingScales
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private NULL As Integer
     Private clsSjplikert, clsSjpStackFrq, clsSjtStackFrq As New RFunction
     Private Sub dlgRatingScales_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -44,12 +45,13 @@ Public Class dlgRatingScales
         ucrReceiverOrderedFactors.SetParameterIsRFunction()
         clsSjplikert.SetRCommand("sjp.likert")
         clsSjplikert.AddParameter("cat.neutral")
-        clsSjplikert.AddParameter("sort.frq", Chr(34) & "NULL" & Chr(34))
+        clsSjplikert.AddParameter("catcount")
+        clsSjplikert.AddParameter("sort.frq", Chr(34) & NULL & Chr(34))
         clsSjpStackFrq.SetRCommand("sjp.stackfrq")
-        clsSjpStackFrq.AddParameter("sort.frq", Chr(34) & "NULL" & Chr(34))
+        clsSjpStackFrq.AddParameter("sort.frq", Chr(34) & NULL & Chr(34))
         clsSjpStackFrq.AddParameter("coord.flip", "FALSE")
         clsSjtStackFrq.SetRCommand("sjt.stackfrq")
-        clsSjtStackFrq.AddParameter("sort.frq", Chr(34) & "NULL" & Chr(34))
+        clsSjtStackFrq.AddParameter("sort.frq", Chr(34) & NULL & Chr(34))
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjpStackFrq)
     End Sub
@@ -61,8 +63,7 @@ Public Class dlgRatingScales
         ucrChkWeights.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         'ucrPnlSjpStackFrq.SetRCode(clsSjpStackFrq, bReset)
         ucrPnlSjpLikert.SetRCode(clsSjplikert, bReset)
-        ucrPnlSjtStackFrq.SetRCode(clsSjtStackFrq, bReset)
-        ucrPnlSjtStackFrq.SetRCode(clsSjpStackFrq, bReset)
+        ucrPnlSjtStackFrq.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
 
         ucrPnlGraphType.SetRCode(clsSjpStackFrq, bReset)
         ucrPnlGraphType.SetRCode(clsSjplikert, bReset)
@@ -99,7 +100,7 @@ Public Class dlgRatingScales
 
         'ucrPnlSortsjt.stackfrq
         ucrPnlSjtStackFrq.SetParameter(New RParameter("sort.frq", 3))
-        ucrPnlSjtStackFrq.AddRadioButton(rdoNone, Chr(34) & "NULL" & Chr(34))
+        ucrPnlSjtStackFrq.AddRadioButton(rdoNone, Chr(34) & NULL & Chr(34))
         ucrPnlSjtStackFrq.AddRadioButton(rdoLowAscending, Chr(34) & "last.asc" & Chr(34))
         ucrPnlSjtStackFrq.AddRadioButton(rdoLowDescending, Chr(34) & "last.desc" & Chr(34))
         ucrPnlSjtStackFrq.AddRadioButton(rdoHighAscending, Chr(34) & "first.asc" & Chr(34))
@@ -108,7 +109,7 @@ Public Class dlgRatingScales
 
         'ucrPnlSortsjp.likert
         ucrPnlSjpLikert.SetParameter(New RParameter("sort.frq", 3))
-        ucrPnlSjpLikert.AddRadioButton(rdoNoneLikert, Chr(34) & "NULL" & Chr(34))
+        ucrPnlSjpLikert.AddRadioButton(rdoNoneLikert, Chr(34) & NULL & Chr(34))
         ucrPnlSjpLikert.AddRadioButton(rdoLowAscendingLikert, Chr(34) & "neg.asc" & Chr(34))
         ucrPnlSjpLikert.AddRadioButton(rdoLowDescendingLikert, Chr(34) & "neg.desc" & Chr(34))
         ucrPnlSjpLikert.AddRadioButton(rdoHighAscendingLikert, Chr(34) & "posc.asc" & Chr(34))
@@ -143,15 +144,15 @@ Public Class dlgRatingScales
     Private Sub ChangeBaseFunction()
         If rdoGraph.Checked Then
             If rdoLikert.Checked Then
-                ' ucrPnlSjpLikert.SetParameter(New RParameter("sort.frq", 2))
-                ' ucrNudNeutralLevel.SetParameter(New RParameter("cat.neutral", 3))
+                ucrPnlSjpLikert.SetParameter(New RParameter("sort.frq", 2))
+                ucrNudNeutralLevel.SetParameter(New RParameter("cat.neutral", 3))
                 ucrBase.clsRsyntax.SetBaseRFunction(clsSjplikert)
             Else
-                'ucrPnlSjtStackFrq.SetParameter(New RParameter("sort.frqt", 2))
+                ucrPnlSjtStackFrq.SetParameter(New RParameter("sort.frqt", 2))
                 ucrBase.clsRsyntax.SetBaseRFunction(clsSjpStackFrq)
             End If
         ElseIf rdoTable.Checked Then
-            'ucrPnlSjtStackFrq.SetParameter(New RParameter("sort.frq", 2))
+            ucrPnlSjtStackFrq.SetParameter(New RParameter("sort.frq", 2))
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjtStackFrq)
         End If
         SetRCodeForControls(False)
