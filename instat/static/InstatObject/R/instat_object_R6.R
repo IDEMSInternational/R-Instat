@@ -1322,15 +1322,15 @@ instat_object$set("public", "import_from_climsoft", function(stations = c(), ele
 }
 )
 
-instat_object$set("public", "import_from_iri", function(data_names, download_from, data_file, X1,X2,Y1,Y2){
+instat_object$set("public", "import_from_iri", function(download_from, data_file, data_frame_name, location_data_name, X1,X2,Y1,Y2){
  
-  data_list <- list(import_from_iri(download_from, data_file, X1, X2, Y1, Y2))
+  data_list <- import_from_iri(download_from, data_file, X1, X2, Y1, Y2)
   #if(length(data_list) != length(data_names))stop("data_names vector should be of length 2")
   #names(data_list) = c(data_names[1],next_default_item(prefix = data_names[2], existing_names = self$get_data_names(), include_index = FALSE))
-  names(data_list) = data_names
+  names(data_list) = c(data_frame_name, location_data_name)
   self$import_data(data_tables = data_list)
-  #self$add_key(data_names[2], c("lat", "lon"))
-  #self$add_link(from_data_frame = data_names[1], to_data_frame = data_names[2], link_pairs = c(lat = "lat", lon = "lon"), type = keyed_link_label)
+  self$add_key(location_data_name, c("Latitude", "Longitude"))
+  self$add_link(from_data_frame = data_frame_name, to_data_frame = location_data_name, link_pairs = c(Latitude = "Latitude", Longitude = "Longitude"), type = keyed_link_label)
 } 
 )
 

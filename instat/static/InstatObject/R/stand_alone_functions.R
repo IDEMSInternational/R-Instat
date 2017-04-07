@@ -453,6 +453,7 @@ import_from_iri <- function(download_from, data_file, X1, X2,Y1,Y2){
   file.name <- paste(gaugelocdir,"tmp_iri.csv",sep="/")
   download.file(address,file.name,quiet=FALSE)
   dataout <- read.table( paste(gaugelocdir,"tmp_iri.csv",sep="/"),sep=",",header=TRUE)
+  lat_lon_dataframe = unique(dataout[,c("Latitude", "Longitude")])
   file.remove(paste(gaugelocdir,"tmp_iri.csv",sep="/"))
-  return(dataout)
+  return(list(dataout,lat_lon_dataframe))
 }
