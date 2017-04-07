@@ -68,11 +68,11 @@ Public Class ucrCheck
         If bChangeParameterValue AndAlso clsTempParam IsNot Nothing Then
             If chkCheck.Checked Then
                 If strValueIfChecked <> "" Then
-                    clsParameter.SetArgumentValue(strValueIfChecked)
+                    clsTempParam.SetArgumentValue(strValueIfChecked)
                 End If
             Else
                 If strValueIfUnchecked <> "" Then
-                    clsParameter.SetArgumentValue(strValueIfUnchecked)
+                    clsTempParam.SetArgumentValue(strValueIfUnchecked)
                 End If
             End If
         End If
