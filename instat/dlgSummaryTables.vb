@@ -22,14 +22,13 @@ Public Class dlgSummaryTables
         ucrBase.clsRsyntax.SetFunction("summary")
         ucrBase.clsRsyntax.iCallType = 2
         autoTranslate(Me)
-        ucrReceiverFactor.Selector = ucrAddRemove
+        ucrReceiverFactor.Selector = ucrSelectorSummaryTables
         ucrReceiverFactor.SetMeAsReceiver()
-        ucrReceiverVariate.Selector = ucrAddRemove
-
+        ucrReceiverVariate.Selector = ucrSelectorSummaryTables
     End Sub
 
-    Private Sub chkWeights_CheckedChanged(sender As Object, e As EventArgs) Handles chkWeights.CheckedChanged
-        If chkWeights.Checked = True Then
+    Private Sub chkWeights_CheckedChanged(sender As Object, e As EventArgs)
+        If ucrChkWeights.Checked = True Then
             cboWeights.Visible = True
         Else
             cboWeights.Visible = False
@@ -45,15 +44,15 @@ Public Class dlgSummaryTables
 
     End Sub
 
-    Private Sub ucrReceiverFactor_Leave(sender As Object, e As EventArgs) Handles ucrReceiverFactor.Leave
+    Private Sub ucrReceiverFactor_Leave(sender As Object, e As EventArgs)
         ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverFactor.GetVariables())
     End Sub
 
-    Private Sub ucrReceiverVariate_Leave(sender As Object, e As EventArgs) Handles ucrReceiverVariate.Leave
+    Private Sub ucrReceiverVariate_Leave(sender As Object, e As EventArgs)
         ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariate.GetVariables())
     End Sub
 
-    Private Sub ucrReceiverFactor_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged, ucrReceiverVariate.ControlContentsChanged
+    Private Sub ucrReceiverFactor_ControlContentsChanged(ucrChangedControl As ucrCore)
         TestOkEnabled()
     End Sub
 End Class
