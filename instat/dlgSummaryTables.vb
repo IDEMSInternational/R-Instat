@@ -13,6 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 
 Public Class dlgSummaryTables
@@ -35,6 +36,15 @@ Public Class dlgSummaryTables
         End If
     End Sub
 
+    Private Sub TestOkEnabled()
+        If Not ucrReceiverFactor.IsEmpty AndAlso Not ucrReceiverVariate.IsEmpty Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+
+    End Sub
+
     Private Sub ucrReceiverFactor_Leave(sender As Object, e As EventArgs) Handles ucrReceiverFactor.Leave
         ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverFactor.GetVariables())
     End Sub
@@ -43,4 +53,7 @@ Public Class dlgSummaryTables
         ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariate.GetVariables())
     End Sub
 
+    Private Sub ucrReceiverFactor_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged, ucrReceiverVariate.ControlContentsChanged
+        TestOkEnabled()
+    End Sub
 End Class
