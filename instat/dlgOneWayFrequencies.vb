@@ -41,7 +41,7 @@ Public Class dlgOneWayFrequencies
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverOneWayFreq.SetRCode(clsSjtFreq, bReset)
         ucrReceiverWeights.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrPnlFrequencies.SetRCode(ucrBase.clsRsyntax.clsBaseFunction)
+        ucrPnlFrequencies.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrChkWeights.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrPnlSort.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrChkFlip.SetRCode(clsSjpFrq, bReset)
@@ -64,6 +64,7 @@ Public Class dlgOneWayFrequencies
         ucrReceiverWeights.SetParameterIsRFunction()
         ucrReceiverWeights.SetDataType("numeric")
         ucrReceiverWeights.bUpdateRCodeFromControl = False
+        ucrReceiverWeights.bAddRemoveParameter = False
 
         ucrPnlSort.SetParameter(New RParameter("sort.frq", 2))
         ucrPnlSort.AddRadioButton(rdoNone, Chr(34) & "none" & Chr(34))
@@ -119,9 +120,10 @@ Public Class dlgOneWayFrequencies
         clsSjpFrq.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneWayFreq.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
         ucrReceiverOneWayFreq.AddAdditionalCodeParameterPair(clsSjpFrq, New RParameter("var.cnt", 1))
+        ucrChkWeights.AddAdditionalCodeParameterPair(clsSjpFrq, New RParameter("weight.by", 3))
         ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjpFrq, New RParameter("weight.by", 3))
-        ucrPnlSort.AddAdditionalCodeParameterPair(clsSjpFrq, New RParameter("sort.frq", 2))
-        ucrNudGroups.AddAdditionalCodeParameterPair(clsSjpFrq, New RParameter("auto.group"))
+        ucrPnlSort.AddAdditionalCodeParameterPair(clsSjpFrq, New RParameter("sort.frq", 5))
+        ucrNudGroups.AddAdditionalCodeParameterPair(clsSjpFrq, New RParameter("auto.group", 35))
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjtFreq)
         bResetSubdialog = True
@@ -167,7 +169,7 @@ Public Class dlgOneWayFrequencies
             'ucrReceiverOneWayFreq.ChangeParameterName("var.cnt")
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjpFrq)
         End If
-        SetRCodeForControls(bReset)
+        'SetRCodeForControls(bReset)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
