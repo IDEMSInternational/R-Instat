@@ -454,4 +454,13 @@ Public Class ucrInput
             End If
         End Set
     End Property
+
+    Public Overrides Function ControlValueContainedIn(lstTemp() As Object) As Boolean
+        For Each objTemp As Object In lstTemp
+            If objTemp.ToString() = GetText() Then
+                Return True
+            End If
+        Next
+        Return False
+    End Function
 End Class

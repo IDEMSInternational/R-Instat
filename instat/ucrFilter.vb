@@ -21,6 +21,8 @@ Public Class ucrFilter
     Private clsConditionsList As RFunction
     Public bFilterDefined As Boolean
     Public Event FilterChanged()
+    Public strDefaultColumn = ""
+    Public strDefaultDataFrame = ""
 
     Public Sub New()
         ' This call is required by the designer.
@@ -45,6 +47,13 @@ Public Class ucrFilter
             bFirstLoad = False
         End If
         ClearConditions()
+        If strDefaultDataFrame <> "" Then
+            ucrSelectorForFitler.SetDataframe(strDefaultDataFrame)
+        End If
+        If strDefaultColumn <> "" Then
+            ucrFilterByReceiver.Add(strDefaultColumn)
+            SetDefaultColumn("")
+        End If
     End Sub
 
     Private Sub InitialiseControl()
@@ -218,4 +227,12 @@ Public Class ucrFilter
         Next
         Return lstVariables
     End Function
+
+    Public Sub SetDefaultColumn(strColumn As String)
+        strDefaultColumn = strColumn
+    End Sub
+
+    Public Sub SetDefaultDataFrame(strDataFrame As String)
+        strDefaultDataFrame = strDataFrame
+    End Sub
 End Class
