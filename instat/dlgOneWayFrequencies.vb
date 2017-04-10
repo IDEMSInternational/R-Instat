@@ -73,8 +73,9 @@ Public Class dlgOneWayFrequencies
         ucrChkGroupData.SetParameter(ucrNudGroups.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkGroupData.SetText("Group Data")
         ucrChkGroupData.AddToLinkedControls(ucrNudGroups, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
-        ucrChkGroupData.AddFunctionNamesCondition(True, {"sjt.frq", "sjp.frq"})
-        ucrChkGroupData.bUpdateRCodeFromControl = True
+        ucrChkGroupData.AddParameterPresentCondition(True, "auto.group")
+        ucrChkGroupData.AddParameterPresentCondition(False, "auto.group", False)
+        'ucrChkGroupData.bUpdateRCodeFromControl = True
 
         ucrChkFlip.SetParameter(New RParameter("coord.flip", 10))
         ucrChkFlip.SetText("Flip Coordinates")
@@ -95,9 +96,7 @@ Public Class dlgOneWayFrequencies
         clsSjtFreq.AddParameter("digits", 0)
 
         clsSjpFrq.SetRCommand("sjp.frq")
-        clsSjpFrq.AddParameter("sort.frq", Chr(34) & "none" & Chr(34))
         clsSjpFrq.AddParameter("type", Chr(34) & "bar" & Chr(34))
-        clsSjpFrq.AddParameter("show.prc", "TRUE")
         clsSjpFrq.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneWayFreq.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjtFreq)
