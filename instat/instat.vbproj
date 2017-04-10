@@ -3091,6 +3091,9 @@
     <EmbeddedResource Include="sdgOneVarUseModFit.resx">
       <DependentUpon>sdgOneVarUseModFit.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgOneWayFrequencies.resx">
+      <DependentUpon>sdgOneWayFrequencies.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgSummaries.fr-FR.resx">
       <DependentUpon>sdgSummaries.vb</DependentUpon>
     </EmbeddedResource>
