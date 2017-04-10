@@ -70,8 +70,8 @@ Public Class sdgSummaries
         lstCheckboxes = New List(Of ucrCheck)
         lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkVariance, ucrChkRange, ucrChkSum, ucrChkQuartiles})
         For Each ctrTemp As ucrCheck In lstCheckboxes
-            ctrTemp.clsParameter.SetArgumentValue(Chr(34) & ctrTemp.clsParameter.strArgumentName & Chr(34))
-            ctrTemp.clsParameter.bIncludeArgumentName = False
+            ctrTemp.SetParameterValue(Chr(34) & ctrTemp.GetParameter().strArgumentName & Chr(34))
+            ctrTemp.SetParameterIncludeArgumentName(False)
         Next
         bControlsInitialised = True
     End Sub
