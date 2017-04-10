@@ -19,6 +19,7 @@ Public Class dlgView
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsMainFunction As New RFunction
+    Private bControlsUpdated As Boolean = False
 
     Private Sub dlgView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -35,9 +36,11 @@ Public Class dlgView
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        bControlsUpdated = False
         ucrNudNumberRows.Maximum = Decimal.MaxValue
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
         DataFrameLength()
+        bControlsUpdated = True
     End Sub
 
     Private Sub SetDefaults()
@@ -145,7 +148,9 @@ Public Class dlgView
         TestOKEnabled()
     End Sub
 
-    Private Sub FunctionControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDisplayFrom.ControlValueChanged, ucrPnlDisplayWindow.ControlValueChanged, ucrChkSpecifyRows.ControlValueChanged, ucrReceiverView.ControlValueChanged
-        SetiCallType()
+    Private Sub FunctionControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDisplayFrom.ControlValueChanged, ucrPnlDisplayWindow.ControlValueChanged, ucrChkSpecifyRows.ControlValueChanged
+        If bControlsUpdated Then
+            SetiCallType()
+        End If
     End Sub
 End Class
