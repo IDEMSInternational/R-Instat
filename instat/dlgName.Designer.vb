@@ -91,9 +91,9 @@ Partial Class dlgName
         Me.lblVariableLabel.AutoSize = True
         Me.lblVariableLabel.Location = New System.Drawing.Point(255, 141)
         Me.lblVariableLabel.Name = "lblVariableLabel"
-        Me.lblVariableLabel.Size = New System.Drawing.Size(77, 13)
+        Me.lblVariableLabel.Size = New System.Drawing.Size(74, 13)
         Me.lblVariableLabel.TabIndex = 6
-        Me.lblVariableLabel.Text = "Variable Label:"
+        Me.lblVariableLabel.Text = "Column Label:"
         '
         'ucrInputVariableLabel
         '
