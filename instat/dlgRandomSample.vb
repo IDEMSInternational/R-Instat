@@ -13,6 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 
 Public Class dlgRandomSample
@@ -54,6 +55,7 @@ Public Class dlgRandomSample
     End Sub
 
     Private Sub SetDefaults()
+        ucrSelectorRandomSamples.Reset()
         ucrPrefixNewColumns.SetName("Rand")
         SetDataFrameandDistributionParameters()
         nudNumberOfSamples.Value = 1
@@ -70,11 +72,6 @@ Public Class dlgRandomSample
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-    End Sub
-
-    Private Sub ucrDataFrameSelector_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrSelectorRandomSamples.DataFrameChanged
-        SetDataFrameandDistributionParameters()
-        TestOKEnabled()
     End Sub
 
     Private Sub SetSeedParameters()
@@ -186,5 +183,10 @@ Public Class dlgRandomSample
 
     Private Sub ucrDistWithParameters_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrDistWithParameters.cboDistributionsIndexChanged
         SetDataFrameandDistributionParameters()
+    End Sub
+
+    Private Sub ucrSelectorRandomSamples_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorRandomSamples.ControlValueChanged
+        SetDataFrameandDistributionParameters()
+        TestOKEnabled()
     End Sub
 End Class
