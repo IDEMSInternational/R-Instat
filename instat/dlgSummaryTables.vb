@@ -16,31 +16,60 @@
 Imports instat.Translations
 
 Public Class dlgSummaryTables
+    Private bFirstload As Boolean = True
     Private Sub dlgSummaryTables_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autoTranslate(Me)
+        If bFirstload Then
+            InitialiseDialog()
+            bFirstload = False
+        End If
+        TestOkEnabled()
+    End Sub
+
+    Private Sub InitialiseDialog()
         cboWeights.Visible = False
         ucrBase.clsRsyntax.SetFunction("summary")
         ucrBase.clsRsyntax.iCallType = 2
         autoTranslate(Me)
-        ucrReceiverFactor.Selector = ucrAddRemove
+        ucrReceiverFactor.Selector = ucrSelectorSummaryTables
         ucrReceiverFactor.SetMeAsReceiver()
-        ucrReceiverVariate.Selector = ucrAddRemove
+        ucrReceiverVariate.Selector = ucrSelectorSummaryTables
 
+        ucrChkDisplayMargins.SetText("Display Margins")
+        ucrChkMeans.SetText("Means")
+        ucrChkTotals.SetText("Totals")
+        ucrChkTrtSCFactor.SetText("Treat Summary Column as Factor")
+        ucrChkWeights.SetText("Weights")
     End Sub
 
-    Private Sub chkWeights_CheckedChanged(sender As Object, e As EventArgs) Handles chkWeights.CheckedChanged
-        If chkWeights.Checked = True Then
+    Private Sub chkWeights_CheckedChanged(sender As Object, e As EventArgs)
+        If ucrChkWeights.Checked = True Then
             cboWeights.Visible = True
         Else
             cboWeights.Visible = False
         End If
     End Sub
 
-    Private Sub ucrReceiverFactor_Leave(sender As Object, e As EventArgs) Handles ucrReceiverFactor.Leave
+    'Temporary test ok disabled.
+    Private Sub TestOkEnabled()
+        'If Not ucrReceiverFactor.IsEmpty AndAlso Not ucrReceiverVariate.IsEmpty Then
+        '    ucrBase.OKEnabled(True)
+        'Else
+        '    ucrBase.OKEnabled(False)
+        'End If
+
+        ucrBase.OKEnabled(False)
+    End Sub
+
+    Private Sub ucrReceiverFactor_Leave(sender As Object, e As EventArgs)
         ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverFactor.GetVariables())
     End Sub
 
-    Private Sub ucrReceiverVariate_Leave(sender As Object, e As EventArgs) Handles ucrReceiverVariate.Leave
+    Private Sub ucrReceiverVariate_Leave(sender As Object, e As EventArgs)
         ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariate.GetVariables())
     End Sub
 
+    Private Sub ucrReceiverFactor_ControlContentsChanged(ucrChangedControl As ucrCore)
+        TestOkEnabled()
+    End Sub
 End Class
