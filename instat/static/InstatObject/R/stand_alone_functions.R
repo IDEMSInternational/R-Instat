@@ -233,7 +233,7 @@ open_NetCDF <- function(nc_data){
   time_names = c("time", "TIME","Time","period", "Period", "PERIOD")
   
   lat_in <- which(lat_lon_names %in% lat_names)
-  print(lat_in)
+ 
   lat_found <- (length(lat_in) == 1)
   if(lat_found) {
     lat <- as.numeric(ncvar_get(nc_data, lat_lon_names[lat_in]))
@@ -260,7 +260,8 @@ open_NetCDF <- function(nc_data){
   lat_rep <- rep(lat, each = length(lon))
   lon_rep <- rep(lon, length(lat))
   lat_lon <- as.data.frame(cbind(lat_rep, lon_rep))
-  names(lat_lon) = c("lat","lon")
+  #names(lat_lon) = c("lat","lon")
+  names(lat_lon) = c(lat_lon_names[lat_in], lat_lon_names[lon_in])
   station <- c()
   for (j in 1:nrow(lat_lon)){
     if(lat_lon[j,1] >= 0 && lat_lon[j,2] >= 0){
@@ -278,6 +279,7 @@ open_NetCDF <- function(nc_data){
   }
   lat_lon_df <- cbind(lat_lon, station)
   my_data <- cbind(period, lat_lon_df)
+  
   for (current_var in variables){
     nc_value <- c()
     dataset <- ncvar_get(nc_data, current_var)
