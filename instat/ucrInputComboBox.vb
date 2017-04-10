@@ -133,7 +133,8 @@ Public Class ucrInputComboBox
 
         If bClearExisting Then
             cboInput.Items.Clear()
-            dctDisplayParameterValues.Clear()
+            dctDisplayParameterValues = New Dictionary(Of String, String)
+            'dctDisplayParameterValues.Clear()
         End If
         If clsParameter Is Nothing Then
             MsgBox("Developer error: Parameter must be set before items can be set. Modify setup for " & Name & " so that the parameter is set first.")

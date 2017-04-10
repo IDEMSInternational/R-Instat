@@ -310,11 +310,20 @@ open_NetCDF <- function(nc_data){
   return(list(my_data, lat_lon_df))
 }
   
-import_from_iri <- function(download_from, data_file, X1, X2,Y1,Y2){
-  gaugelocdir = getwd()
-  
+import_from_iri <- function(download_from, data_file, path, X1, X2,Y1,Y2){
+  if(path == ""){
+    gaugelocdir = getwd()
+  }
+  else{
+    if(!dir.exists(path)){
+      dir.create(path)
+    }
+    gaugelocdir = path
+  }
+
   if(download_from == "CHIRPS_V2P0"){
     prexyaddress <- "https://iridl.ldeo.columbia.edu/SOURCES/.UCSB/.CHIRPS/.v2p0"
+    print(data_file)
     if(data_file == "daily_0p05"){
       extension <- ".daily/.global/.0p05/.prcp"
     }
@@ -342,6 +351,7 @@ import_from_iri <- function(download_from, data_file, X1, X2,Y1,Y2){
     else if(data_file == "monthly_prcp"){
       extension <- ".monthly/.global/.precipitation"
     }
+   
     else stop("Data file does not exist for CHIRPS V2P0 data")
   #Annual and 2Monthly and 3monthly does not exist for CHIRPS_V2P0
   }
