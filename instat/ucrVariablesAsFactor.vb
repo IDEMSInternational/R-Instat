@@ -2,15 +2,9 @@
 
 Public Class ucrVariablesAsFactor
     Public bSingleVariable As Boolean
-    Public bFirstLoad As Boolean
     Public ucrFactorReceiver As ucrReceiverSingle
     'The ucrVariablesAsFactor has an associated ucrFactorReceiver, set on the dialog it is living in. In multiple mode, the ucrVariablesAsFactor can receive multiple variables that are then stacked in one and distinguished using a factor variable called "variable". The associated factor receiver will then be set in StackedFactorMode and fix it's content to this "variable" factor. 
     Public WithEvents ucrVariableSelector As ucrSelectorByDataFrame
-    Public bForceAsDataFrame As Boolean = True
-    Private strColumnsParameterNameInRFunction As String = "col_names"
-    Public WithEvents Selector As ucrSelector
-
-    Public bWithQuotes As Boolean = True 'TODO  this is not implemented correctly yet
 
     Public Sub New()
         ' This call is required by the designer.
@@ -19,8 +13,6 @@ Public Class ucrVariablesAsFactor
         ' Add any initialization after the InitializeComponent() call.
         bFirstLoad = True
     End Sub
-
-    Public Event SelectionChanged()
 
     Private Sub ucrVariablesAsFactor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -43,25 +35,8 @@ Public Class ucrVariablesAsFactor
         ucrFactorReceiver = ucrReceiverToSet
     End Sub
 
-    'Question to be discussed: what are the differences between the following three ?
-    Public Sub SetDataType(strTemp As String)
-        ucrSingleVariable.SetDataType(strTemp)
-        ucrMultipleVariables.SetDataType(strTemp)
-    End Sub
-    Public Sub SetIncludedDataType(strInclude As String())
-        ucrSingleVariable.SetIncludedDataTypes(strInclude)
-        ucrMultipleVariables.SetIncludedDataTypes(strInclude)
-    End Sub
-
-    Public Sub SetExcludedDataTypes(strExclude As String())
-        ucrMultipleVariables.SetExcludedDataTypes(strExclude)
-        ucrSingleVariable.SetExcludedDataTypes(strExclude)
-    End Sub
-
     Public Sub SetSelector(ucrSelectorToSet As ucrSelectorByDataFrame)
-        ucrVariableSelector = ucrSelectorToSet
-        ucrSingleVariable.Selector = ucrSelectorToSet
-        ucrMultipleVariables.Selector = ucrSelectorToSet
+        Selector = ucrSelectorToSet
     End Sub
 
 
@@ -70,10 +45,10 @@ Public Class ucrVariablesAsFactor
         bSingleVariable = Not bSingleVariable
         SetReceiverStatus()
         'After setting the receiver status, the SelectionChanged event is raised for the dlg's that contain the ucrVariablesAsFactors to adapt to the changes operated locally. For instance in the dlgBoxPlot, the sub UcrVariablesAsFactor1_SelectionChanged() is then called and updates it's aesthetics receivers. 
-        RaiseEvent SelectionChanged()
+        OnSelectionChanged()
     End Sub
 
-    Public Function GetVariableNames(Optional bWithQuotes As Boolean = True) As String
+    Public Overrides Function GetVariableNames(Optional bWithQuotes As Boolean = True) As String
         'This sub provides the name of the variable that should be used by external components that want to access the "content" of this receiver. If it is in single mode, this is simply providing the name of the variable in use. 
         'However in multiple mode, a New variable will be created using the "stack" And "measure.vars" explained in SetReceiverStatus.
         Dim strVariablesToStack As String = ""
@@ -97,7 +72,7 @@ Public Class ucrVariablesAsFactor
         Return strVariablesToStack
     End Function
 
-    Public Function GetVariables(Optional bForceAsDataFrame As Boolean = False) As RFunction
+    Public Overrides Function GetVariables(Optional bForceAsDataFrame As Boolean = False) As RFunction
         Dim clsVariables As New RFunction
         If bSingleVariable Then
             clsVariables = ucrSingleVariable.GetVariables(bForceAsDataFrame)
@@ -151,16 +126,14 @@ Public Class ucrVariablesAsFactor
         If Not bSingleVariable Then
             SetMeasureVars()
         End If
-        RaiseEvent SelectionChanged()
-
+        OnSelectionChanged()
     End Sub
 
     Private Sub ucrSingleVariable_SelectionChanged(sender As Object, e As EventArgs) Handles ucrSingleVariable.SelectionChanged
-        RaiseEvent SelectionChanged()
-
+        OnSelectionChanged()
     End Sub
 
-    Public Function IsEmpty() As Boolean
+    Public Overrides Function IsEmpty() As Boolean
         If bSingleVariable Then
             Return ucrSingleVariable.IsEmpty()
         Else
@@ -235,15 +208,15 @@ Public Class ucrVariablesAsFactor
         SetDefaults()
     End Sub
 
-    Public Sub Add(strVar As String)
+    Public Overrides Sub Add(strVar As String, Optional strDataFrame As String = "")
         If bSingleVariable Then
-            ucrSingleVariable.Add(strVar)
+            ucrSingleVariable.Add(strVar, strDataFrame)
         Else
-            ucrMultipleVariables.Add(strVar)
+            ucrMultipleVariables.Add(strVar, strDataFrame)
         End If
     End Sub
 
-    Public Sub Clear()
+    Public Overrides Sub Clear()
         If bSingleVariable Then
             ucrSingleVariable.Clear()
         Else
@@ -275,7 +248,7 @@ Public Class ucrVariablesAsFactor
         End If
     End Sub
 
-    Public Sub SetMeAsReceiver()
+    Public Overrides Sub SetMeAsReceiver()
         If ucrVariableSelector IsNot Nothing Then
             If bSingleVariable Then
                 ucrSingleVariable.SetMeAsReceiver()
@@ -285,17 +258,17 @@ Public Class ucrVariablesAsFactor
         End If
     End Sub
 
-    Public Sub SetParameterIsRFunction()
+    Public Overrides Sub SetParameterIsRFunction()
         ucrSingleVariable.SetParameterIsRFunction()
         ucrMultipleVariables.SetParameterIsRFunction()
     End Sub
 
-    Public Sub SetParameterIsString()
+    Public Overrides Sub SetParameterIsString()
         ucrSingleVariable.SetParameterIsString()
         ucrMultipleVariables.SetParameterIsString()
     End Sub
 
-    Public Sub UpdateParameter()
+    Public Overrides Sub UpdateParameter()
 
     End Sub
 

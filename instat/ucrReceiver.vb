@@ -106,7 +106,7 @@ Public Class ucrReceiver
         Return strVarNames
     End Function
 
-    Public Sub SetMeAsReceiver()
+    Public Overridable Sub SetMeAsReceiver()
         If Selector IsNot Nothing Then
             Selector.SetCurrentReceiver(Me)
         End If
@@ -366,13 +366,13 @@ Public Class ucrReceiver
         End If
     End Sub
 
-    Public Sub SetParameterIsString()
+    Public Overridable Sub SetParameterIsString()
         bParameterIsString = True
         bParameterIsRFunction = False
         UpdateParameter()
     End Sub
 
-    Public Sub SetParameterIsRFunction()
+    Public Overridable Sub SetParameterIsRFunction()
         bParameterIsRFunction = True
         bParameterIsString = False
         UpdateParameter()
