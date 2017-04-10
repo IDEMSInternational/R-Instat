@@ -99,6 +99,9 @@ Public Class dlgRatingScales
         ucrChkFlip.SetRDefault("FALSE")
 
         'ucrPnlSortsjt.stackfrq
+        ucrPnlSjtStackFrq.AddFunctionNamesCondition(rdoTable, "sjPlot::sjt.stackfrq")
+        ucrPnlSjtStackFrq.AddFunctionNamesCondition(rdoStacked, "sjPlot::sjp.stackfrq")
+
         ucrPnlSjtStackFrq.SetParameter(New RParameter("sort.frq", 3))
         ucrPnlSjtStackFrq.AddRadioButton(rdoNone, Chr(34) & NULL & Chr(34))
         ucrPnlSjtStackFrq.AddRadioButton(rdoLowAscending, Chr(34) & "last.asc" & Chr(34))
@@ -108,6 +111,7 @@ Public Class dlgRatingScales
         ucrPnlSjtStackFrq.SetRDefault(Chr(34) & "NULL" & Chr(34))
 
         'ucrPnlSortsjp.likert
+        ucrPnlSjpLikert.AddFunctionNamesCondition(rdoLikert, "sjPlot::sjp.likert")
         ucrPnlSjpLikert.SetParameter(New RParameter("sort.frq", 3))
         ucrPnlSjpLikert.AddRadioButton(rdoNoneLikert, Chr(34) & NULL & Chr(34))
         ucrPnlSjpLikert.AddRadioButton(rdoLowAscendingLikert, Chr(34) & "neg.asc" & Chr(34))
@@ -116,6 +120,9 @@ Public Class dlgRatingScales
         ucrPnlSjpLikert.AddRadioButton(rdoHighDescendingLikert, Chr(34) & "posc.desc" & Chr(34))
         ucrPnlSjpLikert.SetRDefault(Chr(34) & "NULL" & Chr(34))
 
+        ucrPnlGraphType.AddFunctionNamesCondition(rdoGraph, "sjPlot::sjp.stackfrq")
+        ucrPnlGraphType.AddFunctionNamesCondition(rdoGraph, "sjPlot::sjp.likert")
+        ucrPnlGraphType.AddFunctionNamesCondition(rdoTable, "sjPlot::sjt.stackfrq")
 
         ucrPnlGraphType.AddRadioButton(rdoLikert)
         ucrPnlGraphType.AddRadioButton(rdoStacked)
@@ -148,7 +155,7 @@ Public Class dlgRatingScales
                 ucrNudNeutralLevel.SetParameter(New RParameter("cat.neutral", 3))
                 ucrBase.clsRsyntax.SetBaseRFunction(clsSjplikert)
             Else
-                ucrPnlSjtStackFrq.SetParameter(New RParameter("sort.frqt", 2))
+                ucrPnlSjtStackFrq.SetParameter(New RParameter("sort.frq", 2))
                 ucrBase.clsRsyntax.SetBaseRFunction(clsSjpStackFrq)
             End If
         ElseIf rdoTable.Checked Then
