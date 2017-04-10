@@ -25,12 +25,12 @@ Partial Class dlgNewSummaryTables
         Me.lblFactors = New System.Windows.Forms.Label()
         Me.lblSummaryColumns = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.lblDecimals = New System.Windows.Forms.Label()
-        Me.lblColumnFactors = New System.Windows.Forms.Label()
-        Me.cmdSummaries = New System.Windows.Forms.Button()
         Me.ucrNudDecimals = New instat.ucrNud()
+        Me.lblDecimals = New System.Windows.Forms.Label()
         Me.ucrNudColumnFactors = New instat.ucrNud()
+        Me.lblColumnFactors = New System.Windows.Forms.Label()
         Me.ucrchkCheckDisplayMargins = New instat.ucrCheck()
+        Me.cmdSummaries = New System.Windows.Forms.Button()
         Me.ucrchkCheckSummaries = New instat.ucrCheck()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverNumeric = New instat.ucrReceiverMultiple()
@@ -44,7 +44,7 @@ Partial Class dlgNewSummaryTables
         'lblFactors
         '
         Me.lblFactors.AutoSize = True
-        Me.lblFactors.Location = New System.Drawing.Point(265, 45)
+        Me.lblFactors.Location = New System.Drawing.Point(264, 45)
         Me.lblFactors.Name = "lblFactors"
         Me.lblFactors.Size = New System.Drawing.Size(45, 13)
         Me.lblFactors.TabIndex = 1
@@ -54,7 +54,7 @@ Partial Class dlgNewSummaryTables
         'lblSummaryColumns
         '
         Me.lblSummaryColumns.AutoSize = True
-        Me.lblSummaryColumns.Location = New System.Drawing.Point(266, 170)
+        Me.lblSummaryColumns.Location = New System.Drawing.Point(264, 170)
         Me.lblSummaryColumns.Name = "lblSummaryColumns"
         Me.lblSummaryColumns.Size = New System.Drawing.Size(96, 13)
         Me.lblSummaryColumns.TabIndex = 3
@@ -75,35 +75,6 @@ Partial Class dlgNewSummaryTables
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Layout:"
         '
-        'lblDecimals
-        '
-        Me.lblDecimals.AutoSize = True
-        Me.lblDecimals.Location = New System.Drawing.Point(5, 65)
-        Me.lblDecimals.Name = "lblDecimals"
-        Me.lblDecimals.Size = New System.Drawing.Size(53, 13)
-        Me.lblDecimals.TabIndex = 3
-        Me.lblDecimals.Tag = "Decimals"
-        Me.lblDecimals.Text = "Decimals:"
-        '
-        'lblColumnFactors
-        '
-        Me.lblColumnFactors.AutoSize = True
-        Me.lblColumnFactors.Location = New System.Drawing.Point(5, 42)
-        Me.lblColumnFactors.Name = "lblColumnFactors"
-        Me.lblColumnFactors.Size = New System.Drawing.Size(83, 13)
-        Me.lblColumnFactors.TabIndex = 1
-        Me.lblColumnFactors.Tag = "Column_Factors"
-        Me.lblColumnFactors.Text = "Column Factors:"
-        '
-        'cmdSummaries
-        '
-        Me.cmdSummaries.Location = New System.Drawing.Point(309, 288)
-        Me.cmdSummaries.Name = "cmdSummaries"
-        Me.cmdSummaries.Size = New System.Drawing.Size(75, 23)
-        Me.cmdSummaries.TabIndex = 9
-        Me.cmdSummaries.Text = "Summaries"
-        Me.cmdSummaries.UseVisualStyleBackColor = True
-        '
         'ucrNudDecimals
         '
         Me.ucrNudDecimals.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
@@ -115,6 +86,16 @@ Partial Class dlgNewSummaryTables
         Me.ucrNudDecimals.Size = New System.Drawing.Size(50, 20)
         Me.ucrNudDecimals.TabIndex = 4
         Me.ucrNudDecimals.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblDecimals
+        '
+        Me.lblDecimals.AutoSize = True
+        Me.lblDecimals.Location = New System.Drawing.Point(5, 65)
+        Me.lblDecimals.Name = "lblDecimals"
+        Me.lblDecimals.Size = New System.Drawing.Size(53, 13)
+        Me.lblDecimals.TabIndex = 3
+        Me.lblDecimals.Tag = "Decimals"
+        Me.lblDecimals.Text = "Decimals:"
         '
         'ucrNudColumnFactors
         '
@@ -128,6 +109,16 @@ Partial Class dlgNewSummaryTables
         Me.ucrNudColumnFactors.TabIndex = 2
         Me.ucrNudColumnFactors.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
+        'lblColumnFactors
+        '
+        Me.lblColumnFactors.AutoSize = True
+        Me.lblColumnFactors.Location = New System.Drawing.Point(5, 42)
+        Me.lblColumnFactors.Name = "lblColumnFactors"
+        Me.lblColumnFactors.Size = New System.Drawing.Size(83, 13)
+        Me.lblColumnFactors.TabIndex = 1
+        Me.lblColumnFactors.Tag = "Column_Factors"
+        Me.lblColumnFactors.Text = "Column Factors:"
+        '
         'ucrchkCheckDisplayMargins
         '
         Me.ucrchkCheckDisplayMargins.Checked = False
@@ -135,6 +126,15 @@ Partial Class dlgNewSummaryTables
         Me.ucrchkCheckDisplayMargins.Name = "ucrchkCheckDisplayMargins"
         Me.ucrchkCheckDisplayMargins.Size = New System.Drawing.Size(104, 20)
         Me.ucrchkCheckDisplayMargins.TabIndex = 0
+        '
+        'cmdSummaries
+        '
+        Me.cmdSummaries.Location = New System.Drawing.Point(309, 288)
+        Me.cmdSummaries.Name = "cmdSummaries"
+        Me.cmdSummaries.Size = New System.Drawing.Size(75, 23)
+        Me.cmdSummaries.TabIndex = 9
+        Me.cmdSummaries.Text = "Summaries..."
+        Me.cmdSummaries.UseVisualStyleBackColor = True
         '
         'ucrchkCheckSummaries
         '
