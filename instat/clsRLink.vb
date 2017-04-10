@@ -752,6 +752,15 @@ Public Class RLink
         Return strOut
     End Function
 
+    Public Function IsValidText(strText As String) As String
+        Dim bValid As Boolean
+        Dim strValidText As String
+        Dim clsMakeNames As New RFunction
+
+        strValidText = MakeValidText(strText)
+        Return (strText = strValidText)
+    End Function
+
     'Corruption analysis functions
     Public Function GetCorruptionContractDataFrameNames() As List(Of String)
         Dim clsGetDataNames As New RFunction
