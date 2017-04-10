@@ -13,7 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+Imports System.IO
 Imports instat.Translations
 Public Class dlgImportGriddedData
     Private bFirstLoad As Boolean = True
@@ -43,10 +43,7 @@ Public Class dlgImportGriddedData
 
         'ucrBase.iHelpTopicID = 
 
-        ucrInputDataName.SetParameter(New RParameter("data_names", 0))
-        ucrInputDataName.clsParameter.bIncludeArgumentName = False
-
-        ucrInputDownloadFrom.SetParameter(New RParameter("download_from", 1))
+        ucrInputDownloadFrom.SetParameter(New RParameter("download_from", 0))
         dctDownloadPairs.Add("CHIRPS_V2P0", Chr(34) & "CHIRPS_V2P0" & Chr(34))
         dctDownloadPairs.Add("TAMSAT", Chr(34) & "TAMSAT" & Chr(34))
         dctDownloadPairs.Add("NOAA_ARC2", Chr(34) & "NOAA_ARC2" & Chr(34))
@@ -59,24 +56,31 @@ Public Class dlgImportGriddedData
         dctDownloadPairs.Add("NASA_TRMM_3B42", Chr(34) & "NASA_TRMM_3B42" & Chr(34))
         ucrInputDownloadFrom.SetItems(dctDownloadPairs)
 
-        ucrInputDataFile.SetParameter(New RParameter("data_file", 2))
+        ucrInputDataFile.SetParameter(New RParameter("data_file", 1))
 
-        ucrNudMinLon.SetParameter(New RParameter("X1", 3))
+        ucrInputMainDataName.SetParameter(New RParameter("data_frame_name", 2))
+        ucrInputMainDataName.clsParameter.bIncludeArgumentName = False
+        ucrInputLocDataName.SetParameter(New RParameter("location_data_name", 3))
+        ucrInputLocDataName.clsParameter.bIncludeArgumentName = False
+
+
+        ucrInputExportFile.SetParameter(New RParameter("path", 4))
+        ucrNudMinLon.SetParameter(New RParameter("X1", 5))
         ucrNudMinLon.SetMinMax(-180, 180)
         ucrNudMinLon.DecimalPlaces = 2
         ucrNudMinLon.Increment = 0.01
         ucrNudMinLon.SetLinkedDisplayControl(lblMinLon)
-        ucrNudMaxLon.SetParameter(New RParameter("X2", 4))
+        ucrNudMaxLon.SetParameter(New RParameter("X2", 6))
         ucrNudMaxLon.SetMinMax(-180, 180)
         ucrNudMaxLon.DecimalPlaces = 2
         ucrNudMaxLon.Increment = 0.01
         ucrNudMaxLon.SetLinkedDisplayControl(lblMaxLon)
-        ucrNudMinLat.SetParameter(New RParameter("Y1", 5))
+        ucrNudMinLat.SetParameter(New RParameter("Y1", 7))
         ucrNudMinLat.SetMinMax(-50, 50)
         ucrNudMinLat.DecimalPlaces = 2
         ucrNudMinLat.Increment = 0.01
         ucrNudMinLat.SetLinkedDisplayControl(lblMinLat)
-        ucrNudMaxLat.SetParameter(New RParameter("Y2", 6))
+        ucrNudMaxLat.SetParameter(New RParameter("Y2", 8))
         ucrNudMaxLat.SetMinMax(-50, 50)
         ucrNudMaxLat.DecimalPlaces = 2
         ucrNudMaxLat.Increment = 0.01
@@ -85,6 +89,10 @@ Public Class dlgImportGriddedData
 
     Private Sub SetDefaults()
         clsRDefaultFunction = New RFunction
+
+        ucrInputExportFile.IsReadOnly = True
+        ucrInputExportFile.SetName("")
+
         dctFiles = New Dictionary(Of String, String)
         dctFiles.Add("Daily 0p05", Chr(34) & "daily_0p05" & Chr(34))
         dctFiles.Add("Daily 0p25", Chr(34) & "daily_0p25" & Chr(34))
@@ -95,12 +103,13 @@ Public Class dlgImportGriddedData
         dctFiles.Add("Monthly deg1p0", Chr(34) & "monthly_deg1p0" & Chr(34))
         dctFiles.Add("Monthly NMME deg1p0", Chr(34) & "monthly_NMME_deg1p0" & Chr(34))
         dctFiles.Add("Monthly Precipitation", Chr(34) & "monthly_prcp" & Chr(34))
-        ucrInputDataFile.SetItems(dctFiles, bClearExisting:=False)
+        ucrInputDataFile.SetItems(dctFiles)
 
         clsRDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_from_iri")
         clsRDefaultFunction.AddParameter("download_from", Chr(34) & "CHIRPS_V2P0" & Chr(34))
         clsRDefaultFunction.AddParameter("data_file", Chr(34) & "daily_0p05" & Chr(34))
-        clsRDefaultFunction.AddParameter("data_names", "IRI_Library_Data")
+        clsRDefaultFunction.AddParameter("data_frame_name", "IRI_Library_Data")
+        clsRDefaultFunction.AddParameter("location_data_name", "Lat_Lon_Data")
         'opted to set this as default location since it has data for all sources
         clsRDefaultFunction.AddParameter("X1", 10)
         clsRDefaultFunction.AddParameter("X2", 10.5)
@@ -111,7 +120,7 @@ Public Class dlgImportGriddedData
 
     Private Sub TestOkEnabled()
         'download from and datafile should be added to test ok
-        If (ucrInputDataName.Text <> "") Then
+        If (ucrInputMainDataName.Text <> "") Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -124,7 +133,7 @@ Public Class dlgImportGriddedData
         TestOkEnabled()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputDataName.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputMainDataName.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -200,5 +209,21 @@ Public Class dlgImportGriddedData
             End If
             'other data sources to be added here.
         End If
+    End Sub
+
+    Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
+        Dim dlgSave As New SaveFileDialog
+        dlgSave.Title = "Create Temporary Directory"
+        dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
+        'dlgSave.Filter = "Text separated file (*.txt)|*.txt"
+        If dlgSave.ShowDialog = DialogResult.OK Then
+            If dlgSave.FileName <> "" Then
+                ucrInputExportFile.SetName(Path.GetFullPath(dlgSave.FileName).ToString.Replace("\", "/"))
+            End If
+        End If
+    End Sub
+
+    Private Sub ucrInputExportFile_Click(sender As Object, e As EventArgs) Handles ucrInputExportFile.Click
+        cmdBrowse_Click(sender, e)
     End Sub
 End Class
