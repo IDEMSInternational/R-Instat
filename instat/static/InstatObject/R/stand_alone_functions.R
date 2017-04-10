@@ -260,8 +260,9 @@ open_NetCDF <- function(nc_data){
   lat_rep <- rep(lat, each = length(lon))
   lon_rep <- rep(lon, length(lat))
   lat_lon <- as.data.frame(cbind(lat_rep, lon_rep))
-  #names(lat_lon) = c("lat","lon")
-  names(lat_lon) = c(lat_lon_names[lat_in], lat_lon_names[lon_in])
+  
+  names(lat_lon) = c("lat","lon")
+  #names(lat_lon) = c(lat_lon_names[lat_in], lat_lon_names[lon_in])
   station <- c()
   for (j in 1:nrow(lat_lon)){
     if(lat_lon[j,1] >= 0 && lat_lon[j,2] >= 0){
@@ -277,37 +278,31 @@ open_NetCDF <- function(nc_data){
       station = append(station, paste(paste("S", abs(lat_lon[j,1]), sep = ""), paste("W", abs(lat_lon[j,2]), sep = ""), sep = "_"))
     }
   }
+  
   lat_lon_df <- cbind(lat_lon, station)
   my_data <- cbind(period, lat_lon_df)
   
   for (current_var in variables){
-    nc_value <- c()
     dataset <- ncvar_get(nc_data, current_var)
-    
     if (length(dim(dataset))==1){
       nc_value = dataset
     }
     else if (length(dim(dataset))==2){
-      year <- dataset[1:length(lon), 1:length(lat)]
-      year = as.data.frame(t(year))
-      year = stack(year)
-      g <- as.numeric(year$values)
-      nc_value = append(nc_value, g)
+      nc_value = as.vector(t(dataset))
     }
     else if (length(dim(dataset))==3){
-      for (k in 1:length(time)){
-        year <- dataset[1:length(lon), 1:length(lat), k]
-        year = as.data.frame(t(year))
-        year = stack(year)
-        g <- as.numeric(year$values)
-        nc_value = append(nc_value, g)
-      }
+      lonIdx <- which( !is.na(lon))
+      latIdx <- which( !is.na(lat))
+      timeIdx <- which( !is.na(time))
+      
+      new_dataset <- dataset[lonIdx, latIdx, timeIdx]
+      nc_value = as.vector(new_dataset)
     }
     else{
       stop("The format of the data cannot be recognised")
     }
     my_data = cbind(my_data, nc_value)
-    names(my_data)[length(names(my_data))]<-current_var
+    names(my_data)[length(names(my_data))] <- current_var
   }
   return(list(my_data, lat_lon_df))
 }
