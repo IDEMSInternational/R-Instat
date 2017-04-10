@@ -1,9 +1,16 @@
-﻿Public Class ucrVariablesAsFactor
+﻿Imports instat
+
+Public Class ucrVariablesAsFactor
     Public bSingleVariable As Boolean
     Public bFirstLoad As Boolean
     Public ucrFactorReceiver As ucrReceiverSingle
     'The ucrVariablesAsFactor has an associated ucrFactorReceiver, set on the dialog it is living in. In multiple mode, the ucrVariablesAsFactor can receive multiple variables that are then stacked in one and distinguished using a factor variable called "variable". The associated factor receiver will then be set in StackedFactorMode and fix it's content to this "variable" factor. 
     Public WithEvents ucrVariableSelector As ucrSelectorByDataFrame
+    Public bForceAsDataFrame As Boolean = True
+    Private strColumnsParameterNameInRFunction As String = "col_names"
+    Public WithEvents Selector As ucrSelector
+
+    Public bWithQuotes As Boolean = True 'TODO  this is not implemented correctly yet
 
     Public Sub New()
         ' This call is required by the designer.
@@ -78,7 +85,7 @@
             Else strVariablesToStack = Chr(34) & "value" & Chr(34)
             End If
         End If
-            Return strVariablesToStack
+        Return strVariablesToStack
     End Function
 
     'Warning: The two following subs seem obsolete.
@@ -144,12 +151,13 @@
         If Not bSingleVariable Then
             SetMeasureVars()
         End If
-
         RaiseEvent SelectionChanged()
+
     End Sub
 
     Private Sub ucrSingleVariable_SelectionChanged(sender As Object, e As EventArgs) Handles ucrSingleVariable.SelectionChanged
         RaiseEvent SelectionChanged()
+
     End Sub
 
     Public Function IsEmpty() As Boolean
@@ -177,10 +185,12 @@
                 ucrVariableSelector.ucrAvailableDataFrames.clsCurrDataFrame.RemoveParameterByName("measure.vars")
                 ucrVariableSelector.ucrAvailableDataFrames.clsCurrDataFrame.RemoveParameterByName("id.vars")
             End If
-            If ucrFactorReceiver IsNot Nothing Then
-                ucrFactorReceiver.SetStackedFactorMode(False)
-            End If
             ucrSingleVariable.SetMeAsReceiver()
+            If clsParameter Is Nothing Then
+                'Update parameter here
+                clsParameter = New RParameter
+                clsParameter.SetArgumentValue(ucrSingleVariable.GetVariableNames())
+            End If
         Else
             ucrSingleVariable.Visible = False
             ucrMultipleVariables.Visible = True
@@ -194,6 +204,11 @@
                 ucrVariableSelector.ucrAvailableDataFrames.clsCurrDataFrame.AddParameter("id.vars", GetIDVarNamesFromSelector())
             End If
             ucrMultipleVariables.SetMeAsReceiver()
+            If clsParameter Is Nothing Then
+                'Update parameter here
+                clsParameter = New RParameter
+                clsParameter.SetArgumentValue(ucrMultipleVariables.GetVariableNames())
+            End If
         End If
     End Sub
 
@@ -255,8 +270,8 @@
             SetSingleTypeStatus(True)
         Else
             SetReceiverStatus()
-            cmdVariables.show()
-            setsingletypestatus(False)
+            cmdVariables.Show()
+            SetSingleTypeStatus(False)
         End If
     End Sub
 
@@ -267,6 +282,28 @@
             Else
                 ucrMultipleVariables.SetMeAsReceiver()
             End If
+        End If
+    End Sub
+
+    Public Sub SetParameterIsRFunction()
+        ucrSingleVariable.SetParameterIsRFunction()
+        ucrMultipleVariables.SetParameterIsRFunction()
+    End Sub
+
+    Public Sub SetParameterIsString()
+        ucrSingleVariable.SetParameterIsString()
+        ucrMultipleVariables.SetParameterIsString()
+    End Sub
+
+    Public Sub UpdateParameter()
+
+    End Sub
+
+    Public Overrides Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False)
+        If bSingleVariable Then
+            ucrSingleVariable.SetRCode(clsNewCodeStructure, bReset)
+        Else
+            ucrMultipleVariables.SetRCode(clsNewCodeStructure, bReset)
         End If
     End Sub
 End Class
