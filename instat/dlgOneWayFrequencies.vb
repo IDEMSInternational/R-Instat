@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 
 Public Class dlgOneWayFrequencies
@@ -42,16 +41,16 @@ Public Class dlgOneWayFrequencies
         'HelpID
         ' ucrBase.iHelpTopicID = 
 
-        ucrReceiverOneWayFreq.SetParameter(New RParameter("data", 1))
+        ucrReceiverOneWayFreq.SetParameter(New RParameter("data", 0))
         ucrReceiverOneWayFreq.SetParameterIsRFunction()
         ucrReceiverOneWayFreq.Selector = ucrSelectorOneWayFreq
 
-        ucrReceiverWeights.Selector = ucrSelectorOneWayFreq
-        ucrReceiverWeights.SetParameter(New RParameter("weight.by", 2))
+        ucrReceiverWeights.SetParameter(New RParameter("weight.by", 1))
         ucrReceiverWeights.SetParameterIsRFunction()
+        ucrReceiverWeights.Selector = ucrSelectorOneWayFreq
         ucrReceiverWeights.SetDataType("numeric")
 
-        ucrPnlSort.SetParameter(New RParameter("sort.frq", 6))
+        ucrPnlSort.SetParameter(New RParameter("sort.frq", 3))
         ucrPnlSort.AddRadioButton(rdoNone, Chr(34) & "none" & Chr(34))
         ucrPnlSort.AddRadioButton(rdoAscending, Chr(34) & "asc" & Chr(34))
         ucrPnlSort.AddRadioButton(rdoDescending, Chr(34) & "desc" & Chr(34))
@@ -67,7 +66,7 @@ Public Class dlgOneWayFrequencies
         ucrPnlFrequencies.AddFunctionNamesCondition(rdoGraph, "sjp.frq")
         ucrPnlFrequencies.AddToLinkedControls(ucrChkFlip, {rdoGraph}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
-        ucrNudGroups.SetParameter(New RParameter("auto.group"))
+        ucrNudGroups.SetParameter(New RParameter("auto.group", 9))
         ucrNudGroups.SetMinMax(2, 100)
         ucrNudGroups.Increment = 5
 
@@ -77,7 +76,7 @@ Public Class dlgOneWayFrequencies
         ucrChkGroupData.AddFunctionNamesCondition(True, {"sjt.frq", "sjp.frq"})
         ucrChkGroupData.bUpdateRCodeFromControl = True
 
-        ucrChkFlip.SetParameter(New RParameter("coord.flip", 1))
+        ucrChkFlip.SetParameter(New RParameter("coord.flip", 10))
         ucrChkFlip.SetText("Flip Coordinates")
         ucrChkFlip.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkFlip.SetRDefault("FALSE")
@@ -106,11 +105,11 @@ Public Class dlgOneWayFrequencies
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverOneWayFreq.AddAdditionalCodeParameterPair(clsSjpFrq, New RParameter("var.cnt", 1), iAdditionalPairNo:=1)
-        ucrChkWeights.AddAdditionalCodeParameterPair(clsSjpFrq, New RParameter("weight.by", 3), iAdditionalPairNo:=1)
+        ucrReceiverOneWayFreq.AddAdditionalCodeParameterPair(clsSjpFrq, New RParameter("var.cnt", 0), iAdditionalPairNo:=1)
+        ucrChkWeights.AddAdditionalCodeParameterPair(clsSjpFrq, New RParameter("weight.by", 1), iAdditionalPairNo:=1)
         ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjpFrq, ucrChkWeights.GetParameter(), iAdditionalPairNo:=1)
-        ucrPnlSort.AddAdditionalCodeParameterPair(clsSjpFrq, New RParameter("sort.frq", 5), iAdditionalPairNo:=1)
-        ucrNudGroups.AddAdditionalCodeParameterPair(clsSjpFrq, New RParameter("auto.group", 35), iAdditionalPairNo:=1)
+        ucrPnlSort.AddAdditionalCodeParameterPair(clsSjpFrq, New RParameter("sort.frq", 3), iAdditionalPairNo:=1)
+        ucrNudGroups.AddAdditionalCodeParameterPair(clsSjpFrq, New RParameter("auto.group", 9), iAdditionalPairNo:=1)
 
         ucrReceiverOneWayFreq.SetRCode(clsSjtFreq, bReset)
         ucrReceiverWeights.SetRCode(clsSjtFreq, bReset)
@@ -123,22 +122,15 @@ Public Class dlgOneWayFrequencies
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverOneWayFreq.IsEmpty() Then
-            If (Not ucrChkWeights.Checked) AndAlso (Not ucrChkGroupData.Checked) Then
-                ucrBase.OKEnabled(True)
-            ElseIf ucrChkWeights.Checked Then
+        If Not ucrReceiverOneWayFreq.IsEmpty() AndAlso ((ucrChkGroupData.Checked AndAlso ucrNudGroups.GetText <> "") OrElse Not ucrChkGroupData.Checked) Then
+            If ucrChkWeights.Checked Then
                 If Not ucrReceiverWeights.IsEmpty Then
                     ucrBase.OKEnabled(True)
                 Else
                     ucrBase.OKEnabled(False)
                 End If
-            ElseIf ucrChkGroupData.Checked Then
-
-                If ucrNudGroups.GetText <> "" Then
-                    ucrBase.OKEnabled(True)
-                Else
-                    ucrBase.OKEnabled(False)
-                End If
+            Else
+                ucrBase.OKEnabled(True)
             End If
         Else
             ucrBase.OKEnabled(False)

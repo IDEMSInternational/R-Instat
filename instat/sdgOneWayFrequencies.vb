@@ -16,7 +16,6 @@
 
 Imports instat.Translations
 Public Class sdgOneWayFrequencies
-
     Public bControlsInitialised As Boolean = False
     Public clsOneWayTableFreq, clsOneWayGraphFreq As New RFunction
 
@@ -28,7 +27,62 @@ Public Class sdgOneWayFrequencies
         Dim dctVerticalPositionLabel As New Dictionary(Of String, String)
         Dim dctHorizontalPositionLabel As New Dictionary(Of String, String)
 
-        ucrInputHorizontalLabels.SetParameter(New RParameter("hjust", 38))
+        ucrInputGraphTitle.SetParameter(New RParameter("title", 2))
+
+        'Table Only
+        ucrChkHighlightedRows.SetParameter(New RParameter("altr.row.col", 4), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkHighlightedRows.SetRDefault("FALSE")
+        ucrChkHighlightedRows.SetText("Alternate Rows Coloured")
+
+        'Table Only
+        ucrInputCountsName.SetParameter(New RParameter("string.cnt", 5))
+        ucrInputCountsName.SetRDefault(Chr(34) & "N" & Chr(34))
+        ucrChkCountName.SetParameter(ucrInputCountsName.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkCountName.SetText("Count Name")
+        ucrChkCountName.AddToLinkedControls(ucrInputCountsName, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        'Table Only
+        ucrChkMedian.SetParameter(New RParameter("emph.md", 6), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkMedian.SetRDefault("FALSE")
+        ucrChkMedian.SetText("Emphasise Median")
+
+        'Table Only
+        ucrChkShowSummary.SetParameter(New RParameter("show.summary", 7), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkShowSummary.SetText("Show Summary")
+
+        'Table Only
+        'Default is auto
+        'skip.zero has three options: "auto", TRUE, FALSE so this could be a combobox instead
+        ucrChkOmitZero.SetParameter(New RParameter("skip.zero", 8), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkOmitZero.SetText("Omit Zero Counts from Table")
+
+        'Table Only
+        ucrNudDecimalPlaces.SetParameter(New RParameter("digits", 10))
+        ucrNudDecimalPlaces.SetMinMax(0, 4)
+
+        'Graph Only
+        ucrPnlGraphType.SetParameter(New RParameter("type", 4))
+        ucrPnlGraphType.AddRadioButton(rdoBar, Chr(34) & "bar" & Chr(34))
+        ucrPnlGraphType.AddRadioButton(rdoLine, Chr(34) & "line" & Chr(34))
+        ucrPnlGraphType.AddRadioButton(rdoDot, Chr(34) & "dot" & Chr(34))
+        ucrPnlGraphType.SetRDefault(Chr(34) & "bar" & Chr(34))
+
+        'Graph Only
+        ucrChkShowCount.SetParameter(New RParameter("show.n", 5), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkShowCount.SetRDefault("FALSE")
+        ucrChkShowCount.SetText("Show Count")
+
+        'Graph Only
+        ucrChkShowPercentage.SetParameter(New RParameter("show.prc", 6), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkShowPercentage.SetText("Show Percentage")
+
+        'Graph Only
+        ucrChkShowMissing.SetParameter(New RParameter("show.na", 7), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkShowMissing.SetText("Show Missing")
+        ucrChkShowMissing.SetRDefault("FALSE")
+
+        'Graph Only
+        ucrInputHorizontalLabels.SetParameter(New RParameter("hjust", 11))
         dctHorizontalPositionLabel.Add("Left", Chr(34) & "left" & Chr(34))
         dctHorizontalPositionLabel.Add("Center", Chr(34) & "center" & Chr(34))
         dctHorizontalPositionLabel.Add("Right", Chr(34) & "right" & Chr(34))
@@ -39,7 +93,8 @@ Public Class sdgOneWayFrequencies
         ucrInputHorizontalLabels.SetItems(dctHorizontalPositionLabel)
         ucrInputHorizontalLabels.SetRDefault(Chr(34) & "center" & Chr(34))
 
-        ucrInputVerticalLabels.SetParameter(New RParameter("vjust", 37))
+        'Graph Only
+        ucrInputVerticalLabels.SetParameter(New RParameter("vjust", 12))
         dctVerticalPositionLabel.Add("Left", Chr(34) & "left" & Chr(34))
         dctVerticalPositionLabel.Add("Center", Chr(34) & "center" & Chr(34))
         dctVerticalPositionLabel.Add("Right", Chr(34) & "right" & Chr(34))
@@ -50,63 +105,7 @@ Public Class sdgOneWayFrequencies
         ucrInputVerticalLabels.SetItems(dctVerticalPositionLabel)
         ucrInputVerticalLabels.SetRDefault(Chr(34) & "bottom" & Chr(34))
 
-        'TODO Parameter position needed
-        ucrChkMedian.SetParameter(New RParameter("emph.md"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        ucrChkMedian.SetRDefault("FALSE")
-        ucrChkMedian.SetText("Emphasise Median")
-
-        ucrChkShowSummary.SetText("Show Summary")
-        'TODO Parameter position needed
-        ucrChkShowSummary.SetParameter(New RParameter("show.summary"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-
-        'Default is auto
-        ucrChkOmitZero.SetText("Omit Zero Counts from Table")
-        'TODO Parameter position needed
-        'skip.zero has three options: "auto", TRUE, FALSE so this could be a combobox instead
-        ucrChkOmitZero.SetParameter(New RParameter("skip.zero"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-
-        'TODO Parameter position needed
-        ucrNudDecimalPlaces.SetParameter(New RParameter("digits"))
-        ucrNudDecimalPlaces.SetMinMax(0, 4)
-
-        'TODO Parameter position needed
-        ucrChkHighlightedRows.SetParameter(New RParameter("altr.row.col"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        ucrChkHighlightedRows.SetRDefault("FALSE")
-        ucrChkHighlightedRows.SetText("Alternate Rows Coloured")
-
-        'TODO Parameter position needed
-        ucrChkShowCount.SetParameter(New RParameter("show.n"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        ucrChkShowCount.SetRDefault("FALSE")
-        ucrChkShowCount.SetText("Show Count")
-
-        'TODO Parameter position needed
-        ucrChkShowPercentage.SetParameter(New RParameter("show.prc"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        ucrChkShowPercentage.SetText("Show Percentage")
-
-        'TODO Parameter position needed
-        ucrInputGraphTitle.SetParameter(New RParameter("title"))
-
-        ucrChkShowMissing.SetText("Show Missing")
-        'TODO Parameter position needed
-        ucrChkShowMissing.SetParameter(New RParameter("show.na"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        ucrChkShowMissing.SetRDefault("FALSE")
-
-        'TODO Parameter position needed
-        ucrPnlGraphType.SetParameter(New RParameter("type"))
-        ucrPnlGraphType.AddRadioButton(rdoBar, Chr(34) & "bar" & Chr(34))
-        ucrPnlGraphType.AddRadioButton(rdoLine, Chr(34) & "line" & Chr(34))
-        ucrPnlGraphType.AddRadioButton(rdoDot, Chr(34) & "dot" & Chr(34))
-        ucrPnlGraphType.SetRDefault(Chr(34) & "bar" & Chr(34))
-
-        'TODO Parameter position needed
-        ucrInputCountsName.SetParameter(New RParameter("string.cnt"))
-        ucrInputCountsName.SetRDefault(Chr(34) & "N" & Chr(34))
-
-        'TODO Parameter position needed
-        ucrChkCountName.SetParameter(ucrInputCountsName.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        ucrChkCountName.SetText("Count Name")
-        ucrChkCountName.AddToLinkedControls(ucrInputCountsName, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
+        'Graph Only
         ucrSaveGraph.SetPrefix("one_way_freq")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(dlgOneWayFrequencies.ucrSelectorOneWayFreq.ucrAvailableDataFrames)
