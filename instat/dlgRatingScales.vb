@@ -38,9 +38,9 @@ Public Class dlgRatingScales
         ucrReceiverWeights.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
 
         ucrChkWeights.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrPnlSjpLikert.SetRCode(clsSjplikert, bReset)
+        ucrPnlSjpLikert.AddAdditionalCodeParameterPair(clsSjtStackFrq, New RParameter("sort.frq", 3), iAdditionalPairNo:=1)
         ucrPnlSjtStackFrq.AddAdditionalCodeParameterPair(clsSjtStackFrq, New RParameter("sort.frq", 3), iAdditionalPairNo:=1)
-
+        ucrPnlSjpLikert.SetRCode(clsSjplikert)
         ucrPnlSjtStackFrq.SetRCode(clsSjpStackFrq, bReset)
         ucrPnlGraphType.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ' ucrPnlGraphType.SetRCode(clsSjplikert, bReset)
