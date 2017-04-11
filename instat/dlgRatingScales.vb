@@ -39,16 +39,16 @@ Public Class dlgRatingScales
 
         ucrChkWeights.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrPnlSjpLikert.SetRCode(clsSjplikert, bReset)
-        ucrPnlSjtStackFrq.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrPnlSjtStackFrq.AddAdditionalCodeParameterPair(clsSjtStackFrq, New RParameter("sort.frq", 3), iAdditionalPairNo:=1)
 
-        ucrPnlGraphType.SetRCode(clsSjpStackFrq, bReset)
-        ucrPnlGraphType.SetRCode(clsSjplikert, bReset)
-        ucrPnlType.SetRCode(clsSjtStackFrq, bReset)
+        ucrPnlSjtStackFrq.SetRCode(clsSjpStackFrq, bReset)
+        ucrPnlGraphType.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ' ucrPnlGraphType.SetRCode(clsSjplikert, bReset)
+        ucrPnlType.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
 
         ucrChkFlip.SetRCode(clsSjplikert, bReset)
         ucrChkFlip.SetRCode(clsSjpStackFrq, bReset)
-        ucrPnlType.SetRCode(clsSjpStackFrq, bReset)
-        ucrPnlType.SetRCode(clsSjplikert, bReset)
+        ' ucrPnlType.SetRCode(clsSjplikert, bReset)
         ucrNudNeutralLevel.SetRCode(clsSjplikert, bReset)
 
 
@@ -67,6 +67,7 @@ Public Class dlgRatingScales
         clsSjplikert.AddParameter("cat.neutral", "NULL")
         clsSjplikert.AddParameter("catcount")
         clsSjplikert.AddParameter("sort.frq", "NULL")
+        clsSjplikert.AddParameter("coord.flip", "FALSE")
 
         clsSjpStackFrq.SetRCommand("sjp.stackfrq")
         clsSjpStackFrq.AddParameter("sort.frq", "NULL")
