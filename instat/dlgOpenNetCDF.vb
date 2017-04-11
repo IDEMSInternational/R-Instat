@@ -55,17 +55,24 @@ Public Class dlgOpenNetCDF
         ucrInputDataName.SetRCode(clsRDatanames, bReset)
         ucrInputLocDataName.SetRCode(clsRDatanames, bReset)
         ucrInputFilePath.SetRCode(clsRCDF, bReset)
+        ucrInputLatColName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrInputLonColName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrCheckDefaultLocNames.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub SetDefaults()
         clsRDefaultFunction = New RFunction
         ucrInputLocDataName.SetName("lat_lon_data")
         ucrInputDataName.SetName("")
+        ucrInputLatColName.SetName("")
+        ucrInputLonColName.SetName("")
         ucrInputFilePath.IsReadOnly = True
         ucrInputFilePath.SetName("")
         clsRDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_NetCDF")
         clsRDefaultFunction.AddParameter("nc_data", clsRFunctionParameter:=clsRCDF)
+        clsRDefaultFunction.AddParameter("default_names", "TRUE")
         clsRDefaultFunction.AddParameter("data_names", clsRFunctionParameter:=clsRDatanames)
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsRDefaultFunction)
     End Sub
 
@@ -80,6 +87,15 @@ Public Class dlgOpenNetCDF
         ucrInputLocDataName.SetParameter(New RParameter("location_df_name", 1))
         ucrInputLocDataName.clsParameter.bIncludeArgumentName = False
         ucrInputFilePath.SetParameter(New RParameter("filename", 0))
+
+        ucrInputLatColName.SetParameter(New RParameter("latitude_col_name"))
+        ucrInputLatColName.SetLinkedDisplayControl(lblLatColName)
+        ucrInputLonColName.SetParameter(New RParameter("longitude_col_name"))
+        ucrInputLonColName.SetLinkedDisplayControl(lblLonColName)
+
+        ucrCheckDefaultLocNames.SetParameter(New RParameter("default_names"))
+        ucrCheckDefaultLocNames.SetText("Use Default Location Names")
+        ucrCheckDefaultLocNames.AddToLinkedControls({ucrInputLatColName, ucrInputLonColName}, {False}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
