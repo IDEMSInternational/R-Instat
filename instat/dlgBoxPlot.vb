@@ -83,8 +83,8 @@ Public Class dlgBoxplot
         sdgPlots.SetGgplotFunction(clsRggplotFunction)
 
         ucrVariablesAsFactorForBoxplot.SetFactorReceiver(ucrByFactorsReceiver)
-        ucrVariablesAsFactorForBoxplot.SetSelector(ucrSelectorBoxPlot)
-        ucrVariablesAsFactorForBoxplot.SetIncludedDataType({"numeric"})
+        ucrVariablesAsFactorForBoxplot.Selector = ucrSelectorBoxPlot
+        ucrVariablesAsFactorForBoxplot.SetIncludedDataTypes({"numeric"})
 
 
         ucrSaveBoxplot.SetDataFrameSelector(ucrSelectorBoxPlot.ucrAvailableDataFrames)

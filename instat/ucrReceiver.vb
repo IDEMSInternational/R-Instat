@@ -17,7 +17,7 @@
 Imports instat
 Imports instat.Translations
 Public Class ucrReceiver
-    Public WithEvents Selector As ucrSelector
+    Public WithEvents ucrSelector As ucrSelector
     Public lstIncludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
     Public lstExcludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
     Public bFirstLoad As Boolean
@@ -34,11 +34,11 @@ Public Class ucrReceiver
 
     Public bAddParameterIfEmpty As Boolean = False
     'If the control is used to set a parameter that is a string i.e. column = "ID"
-    Private bParameterIsString As Boolean = False
+    Protected bParameterIsString As Boolean = False
     'If the control is used to set a parameter that is an RFunction i.e. x = InstatDataObject$get_columns_from_data()
-    Private bParameterIsRFunction As Boolean = False
+    Protected bParameterIsRFunction As Boolean = False
     'The name of the data parameter in the get columns instat object method (should always be the same)
-    Private strColumnsParameterNameInRFunction As String = "col_names"
+    Protected strColumnsParameterNameInRFunction As String = "col_names"
 
     'Should quotes be used when bParameterIsString = False
     Public bWithQuotes As Boolean = True
@@ -276,7 +276,7 @@ Public Class ucrReceiver
         End If
     End Sub
 
-    Protected Overridable Sub Selector_ResetAll() Handles Selector.ResetReceivers
+    Protected Overridable Sub Selector_ResetAll() Handles ucrSelector.ResetReceivers
         Clear()
     End Sub
 
@@ -388,4 +388,13 @@ Public Class ucrReceiver
     Public Sub SetClimaticType(strTemp As String)
         AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & strTemp & Chr(34)})
     End Sub
+
+    Public Overridable Property Selector As ucrSelector
+        Get
+            Return ucrSelector
+        End Get
+        Set(ucrNewSelector As ucrSelector)
+            ucrSelector = ucrNewSelector
+        End Set
+    End Property
 End Class
