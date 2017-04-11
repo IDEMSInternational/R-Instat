@@ -139,8 +139,9 @@ Public Class dlgView
             Else
                 ucrBase.clsRsyntax.SetBaseRFunction(ucrReceiverView.GetVariables())
             End If
-        ElseIf rdoDispSepOutputWindow.Checked Then
+        Else
             clsMainFunction.SetRCommand("View")
+            ucrBase.clsRsyntax.SetBaseRFunction(clsMainFunction)
         End If
     End Sub
 
