@@ -59,9 +59,9 @@ Public Class dlgImportGriddedData
         ucrInputDataFile.SetParameter(New RParameter("data_file", 1))
 
         ucrInputMainDataName.SetParameter(New RParameter("data_frame_name", 2))
-        ucrInputMainDataName.clsParameter.bIncludeArgumentName = False
+        ucrInputMainDataName.SetParameterIncludeArgumentName(False)
         ucrInputLocDataName.SetParameter(New RParameter("location_data_name", 3))
-        ucrInputLocDataName.clsParameter.bIncludeArgumentName = False
+        ucrInputLocDataName.SetParameterIncludeArgumentName(False)
 
 
         ucrInputExportFile.SetParameter(New RParameter("path", 4))

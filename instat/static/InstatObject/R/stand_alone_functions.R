@@ -225,15 +225,16 @@ pentad <- function(date) {
   return(temp_pentad)
 }
 
-open_NetCDF <- function(nc_data){
+open_NetCDF <- function(nc_data, latitude_col_name, longitude_col_name, default_names){
   variables = names(nc_data$var)
   lat_lon_names = names(nc_data$dim)
-  lat_names = c("lat", "latitude","LAT","Lat", "LATITUDE")
-  lon_names = c("lon", "longitude","LON","Lon", "LONGITUDE")
-  time_names = c("time", "TIME","Time","period", "Period", "PERIOD")
+  #we may need to add latitude_col_name, longitude_col_name to the character vector of valid names
+  lat_names = c("lat", "latitude", "LAT", "Lat", "LATITUDE")
+  lon_names = c("lon", "longitude", "LON", "Lon", "LONGITUDE")
+  time_names = c("time", "TIME", "Time", "period", "Period", "PERIOD")
   
   lat_in <- which(lat_lon_names %in% lat_names)
- 
+  
   lat_found <- (length(lat_in) == 1)
   if(lat_found) {
     lat <- as.numeric(ncvar_get(nc_data, lat_lon_names[lat_in]))
@@ -250,36 +251,52 @@ open_NetCDF <- function(nc_data){
   if(time_found) {
     time <- as.numeric(ncvar_get(nc_data, lat_lon_names[time_in]))
   }
-
+  
   if(!lon_found || (!lat_found))stop("Latitude and longitude names could not be recognised.")
   if(!time_found){
     warning("Time variable could not be found/recognised. Time will be set to 1.")
     time = 1
   } 
   period <- rep(time, each = (length(lat)*length(lon)))
-  lat_rep <- rep(lat, each = length(lon))
-  lon_rep <- rep(lon, length(lat))
-  lat_lon <- as.data.frame(cbind(lat_rep, lon_rep))
-  
-  names(lat_lon) = c("lat","lon")
-  #names(lat_lon) = c(lat_lon_names[lat_in], lat_lon_names[lon_in])
-  station <- c()
-  for (j in 1:nrow(lat_lon)){
-    if(lat_lon[j,1] >= 0 && lat_lon[j,2] >= 0){
-      station = append(station, paste(paste("N", lat_lon[j,1], sep = ""), paste("E", lat_lon[j,2], sep = ""), sep = "_"))
-    }
-    if(lat_lon[j,1] < 0 && lat_lon[j,2] >= 0){
-      station = append(station, paste(paste("S", abs(lat_lon[j,1]), sep = ""), paste("E", lat_lon[j,2], sep = ""), sep = "_"))
-    }
-    if(lat_lon[j,1] >= 0 && lat_lon[j,2] < 0){
-      station = append(station, paste(paste("N", lat_lon[j,1], sep = ""), paste("W", abs(lat_lon[j,2]), sep = ""), sep = "_"))
-    }
-    if(lat_lon[j,1] < 0 && lat_lon[j,2] < 0){
-      station = append(station, paste(paste("S", abs(lat_lon[j,1]), sep = ""), paste("W", abs(lat_lon[j,2]), sep = ""), sep = "_"))
-    }
+  lat_rep <- as.numeric(rep(lat, each = length(lon)))
+  lon_rep <- as.numeric(rep(lon, length(lat)))
+  if (!default_names){
+    #we need to check if the names are valid
+    new_lat_lon_column_names <- c(latitude_col_name, longitude_col_name)
   }
+  else{
+    new_lat_lon_column_names <- c(lat_lon_names[lat_in], lat_lon_names[lon_in])
+  }
+  new_column_names <- c(new_lat_lon_column_names, "station")
+  #lat_lon <- as.data.frame(cbind(lat_rep, lon_rep))
   
-  lat_lon_df <- cbind(lat_lon, station)
+  #names(lat_lon) = c("lat","lon")
+  
+  station <- c()
+  #col1 <- lat_lon[ ,1]
+  #col2 <- lat_lon[ ,2]
+  station = ifelse(lat_rep >= 0 & lon_rep >= 0, paste(paste("N", lat_rep, sep = ""), paste("E", lon_rep, sep = ""), sep = "_"), 
+                   ifelse(lat_rep < 0 & lon_rep >= 0, paste(paste("S", abs(lat_rep), sep = ""), paste("E", lon_rep, sep = ""), sep = "_"), 
+                          ifelse(lat_rep >= 0 & lon_rep < 0, paste(paste("N", lat_rep, sep = ""), paste("W", abs(lon_rep), sep = ""), sep = "_") , 
+                                 paste(paste("S", abs(lat_rep), sep = ""), paste("W", abs(lon_rep), sep = ""), sep = "_"))))
+  # for (j in 1:nrow(lat_lon)){
+  #   if(lat_lon[j,1] >= 0 && lat_lon[j,2] >= 0){
+  #     station = append(station, paste(paste("N", lat_lon[j,1], sep = ""), paste("E", lat_lon[j,2], sep = ""), sep = "_"))
+  #   }
+  #   if(lat_lon[j,1] < 0 && lat_lon[j,2] >= 0){
+  #     station = append(station, paste(paste("S", abs(lat_lon[j,1]), sep = ""), paste("E", lat_lon[j,2], sep = ""), sep = "_"))
+  #   }
+  #   if(lat_lon[j,1] >= 0 && lat_lon[j,2] < 0){
+  #     station = append(station, paste(paste("N", lat_lon[j,1], sep = ""), paste("W", abs(lat_lon[j,2]), sep = ""), sep = "_"))
+  #   }
+  #   if(lat_lon[j,1] < 0 && lat_lon[j,2] < 0){
+  #     station = append(station, paste(paste("S", abs(lat_lon[j,1]), sep = ""), paste("W", abs(lat_lon[j,2]), sep = ""), sep = "_"))
+  #   }
+  # }
+  # 
+  
+  lat_lon_df <- as.data.frame(cbind(lat_rep, lon_rep, station))
+  names(lat_lon_df) <- new_column_names
   my_data <- cbind(period, lat_lon_df)
   
   for (current_var in variables){
@@ -304,8 +321,9 @@ open_NetCDF <- function(nc_data){
     my_data = cbind(my_data, nc_value)
     names(my_data)[length(names(my_data))] <- current_var
   }
-  return(list(my_data, lat_lon_df))
+  return(list(my_data, lat_lon_df, new_lat_lon_column_names))
 }
+
   
 import_from_iri <- function(download_from, data_file, path, X1, X2,Y1,Y2){
   if(path == ""){
