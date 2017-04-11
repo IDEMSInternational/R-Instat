@@ -3,8 +3,9 @@
 Public Class ucrVariablesAsFactor
     Public bSingleVariable As Boolean
     Public ucrFactorReceiver As ucrReceiverSingle
-    'The ucrVariablesAsFactor has an associated ucrFactorReceiver, set on the dialog it is living in. In multiple mode, the ucrVariablesAsFactor can receive multiple variables that are then stacked in one and distinguished using a factor variable called "variable". The associated factor receiver will then be set in StackedFactorMode and fix it's content to this "variable" factor. 
     Public WithEvents ucrVariableSelector As ucrSelectorByDataFrame
+
+    'The ucrVariablesAsFactor has an associated ucrFactorReceiver, set on the dialog it is living in. In multiple mode, the ucrVariablesAsFactor can receive multiple variables that are then stacked in one and distinguished using a factor variable called "variable". The associated factor receiver will then be set in StackedFactorMode and fix it's content to this "variable" factor. 
 
     Public Sub New()
         ' This call is required by the designer.
@@ -35,11 +36,6 @@ Public Class ucrVariablesAsFactor
         ucrFactorReceiver = ucrReceiverToSet
     End Sub
 
-    Public Sub SetSelector(ucrSelectorToSet As ucrSelectorByDataFrame)
-        Selector = ucrSelectorToSet
-    End Sub
-
-
     Private Sub cmdVariables_Click(sender As Object, e As EventArgs) Handles cmdVariables.Click
         'Switching from single to multiple receiver.
         bSingleVariable = Not bSingleVariable
@@ -52,6 +48,7 @@ Public Class ucrVariablesAsFactor
         'This sub provides the name of the variable that should be used by external components that want to access the "content" of this receiver. If it is in single mode, this is simply providing the name of the variable in use. 
         'However in multiple mode, a New variable will be created using the "stack" And "measure.vars" explained in SetReceiverStatus.
         Dim strVariablesToStack As String = ""
+
         If bSingleVariable Then
             strVariablesToStack = ucrSingleVariable.GetVariableNames(bWithQuotes)
         Else
@@ -66,6 +63,7 @@ Public Class ucrVariablesAsFactor
     'Warning: The two following subs seem obsolete.
     Public Function GetStackedVariableNames(Optional bWithQuotes As Boolean = True) As String
         Dim strVariablesToStack As String = ""
+
         If Not bSingleVariable Then
             strVariablesToStack = ucrMultipleVariables.GetVariableNames(bWithQuotes)
         End If
@@ -74,21 +72,21 @@ Public Class ucrVariablesAsFactor
 
     Public Overrides Function GetVariables(Optional bForceAsDataFrame As Boolean = False) As RFunction
         Dim clsVariables As New RFunction
+
         If bSingleVariable Then
             clsVariables = ucrSingleVariable.GetVariables(bForceAsDataFrame)
         Else
-            'TODO fix this case if needed
-            'clsVariables = ucrMultipleVariables.GetVariables(bForceAsDataFrame)
+            clsVariables = ucrMultipleVariables.GetVariables(bForceAsDataFrame)
         End If
         Return clsVariables
     End Function
 
     Public Function GetIDVarNamesFromSelector(Optional bWithQuotes As Boolean = True) As String
         Dim strIDVars As String
-        Dim arrTemp(ucrVariableSelector.lstVariablesInReceivers.Count - 1) As String
+        Dim arrTemp(Selector.lstVariablesInReceivers.Count - 1) As String
         Dim lstVariablesFromSelector As List(Of String)
 
-        Array.Copy(ucrVariableSelector.lstVariablesInReceivers.ToArray, arrTemp, arrTemp.Length)
+        Array.Copy(Selector.lstVariablesInReceivers.ToArray, arrTemp, arrTemp.Length)
         lstVariablesFromSelector = arrTemp.ToList()
 
         For i = 0 To ucrMultipleVariables.lstSelectedVariables.Items.Count - 1
@@ -158,12 +156,10 @@ Public Class ucrVariablesAsFactor
                 ucrVariableSelector.ucrAvailableDataFrames.clsCurrDataFrame.RemoveParameterByName("measure.vars")
                 ucrVariableSelector.ucrAvailableDataFrames.clsCurrDataFrame.RemoveParameterByName("id.vars")
             End If
-            ucrSingleVariable.SetMeAsReceiver()
-            If clsParameter Is Nothing Then
-                'Update parameter here
-                clsParameter = New RParameter
-                clsParameter.SetArgumentValue(ucrSingleVariable.GetVariableNames())
+            If ucrFactorReceiver IsNot Nothing Then
+                ucrFactorReceiver.SetStackedFactorMode(False)
             End If
+            ucrSingleVariable.SetMeAsReceiver()
         Else
             ucrSingleVariable.Visible = False
             ucrMultipleVariables.Visible = True
@@ -177,12 +173,8 @@ Public Class ucrVariablesAsFactor
                 ucrVariableSelector.ucrAvailableDataFrames.clsCurrDataFrame.AddParameter("id.vars", GetIDVarNamesFromSelector())
             End If
             ucrMultipleVariables.SetMeAsReceiver()
-            If clsParameter Is Nothing Then
-                'Update parameter here
-                clsParameter = New RParameter
-                clsParameter.SetArgumentValue(ucrMultipleVariables.GetVariableNames())
-            End If
         End If
+        OnControlValueChanged()
     End Sub
 
     Private Sub ucrVariableSelector_VariablesInReceiversChanged() Handles ucrVariableSelector.VariablesInReceiversChanged
@@ -249,7 +241,7 @@ Public Class ucrVariablesAsFactor
     End Sub
 
     Public Overrides Sub SetMeAsReceiver()
-        If ucrVariableSelector IsNot Nothing Then
+        If Selector IsNot Nothing Then
             If bSingleVariable Then
                 ucrSingleVariable.SetMeAsReceiver()
             Else
@@ -258,25 +250,76 @@ Public Class ucrVariablesAsFactor
         End If
     End Sub
 
-    Public Overrides Sub SetParameterIsRFunction()
-        ucrSingleVariable.SetParameterIsRFunction()
-        ucrMultipleVariables.SetParameterIsRFunction()
-    End Sub
+    Protected Overrides Sub SetControlValue()
+        Dim clsTempDataParameter As RParameter
+        Dim lstCurrentVariables As String() = Nothing
+        Dim lstMeasureVars As String() = Nothing
+        Dim clsTempParameter As RParameter
+        Dim clsTempRCode As RCodeStructure
+        Dim clsMeasureVarsParam As RParameter
 
-    Public Overrides Sub SetParameterIsString()
-        ucrSingleVariable.SetParameterIsString()
-        ucrMultipleVariables.SetParameterIsString()
-    End Sub
+        clsTempParameter = GetParameter()
+        clsTempRCode = GetRCode()
 
-    Public Overrides Sub UpdateParameter()
-
-    End Sub
-
-    Public Overrides Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False)
-        If bSingleVariable Then
-            ucrSingleVariable.SetRCode(clsNewCodeStructure, bReset)
-        Else
-            ucrMultipleVariables.SetRCode(clsNewCodeStructure, bReset)
+        If clsTempParameter IsNot Nothing Then
+            If bChangeParameterValue Then
+                If bParameterIsString AndAlso clsTempParameter.bIsString Then
+                    If strValuesToIgnore Is Nothing OrElse (Not strValuesToIgnore.Contains(clsTempParameter.strArgumentValue)) Then
+                        lstCurrentVariables = ExtractItemsFromRList(clsTempParameter.strArgumentValue)
+                    End If
+                ElseIf bParameterIsRFunction AndAlso clsTempParameter.bIsFunction Then
+                    clsTempDataParameter = clsTempParameter.clsArgumentCodeStructure.GetParameter(strColumnsParameterNameInRFunction)
+                    If clsTempDataParameter IsNot Nothing Then
+                        lstCurrentVariables = ExtractItemsFromRList(clsTempParameter.clsArgumentCodeStructure.GetParameter(strColumnsParameterNameInRFunction).strArgumentValue)
+                    End If
+                End If
+                Clear()
+                If lstCurrentVariables IsNot Nothing Then
+                    If lstCurrentVariables.Count = 1 Then
+                        If lstCurrentVariables(0) = "value" Then
+                            bSingleVariable = False
+                            If clsTempRCode.ContainsParameter("data") Then
+                                clsMeasureVarsParam = clsTempRCode.GetParameter("data").clsArgumentCodeStructure.GetParameter("measure.vars")
+                                If clsMeasureVarsParam IsNot Nothing Then
+                                    lstMeasureVars = ExtractItemsFromRList(clsMeasureVarsParam.strArgumentValue)
+                                End If
+                                If lstMeasureVars IsNot Nothing Then
+                                    For Each strTemp As String In lstMeasureVars
+                                        'TODO This only works if the selector is updated before receivers!
+                                        '     Needs to change eventually.
+                                        If Selector IsNot Nothing AndAlso strTemp <> "" Then
+                                            ucrMultipleVariables.Add(strTemp, Selector.strCurrentDataFrame)
+                                        End If
+                                    Next
+                                End If
+                            End If
+                        Else
+                            bSingleVariable = True
+                            If Selector IsNot Nothing Then
+                                ucrSingleVariable.Add(lstCurrentVariables(0), Selector.strCurrentDataFrame)
+                            End If
+                        End If
+                    Else
+                        MsgBox("Developer error: Only expected one item for ucrVariablesAsFactor parameter. It must be either a single column or 'value' when multiple columns.")
+                    End If
+                End If
+            End If
         End If
+        SetReceiverStatus()
     End Sub
+
+    Public Overrides Property Selector As ucrSelector
+        Get
+            Return MyBase.Selector
+        End Get
+        Set(ucrNewSelector As ucrSelector)
+            MyBase.Selector = ucrNewSelector
+            ucrSingleVariable.Selector = ucrNewSelector
+            ucrMultipleVariables.Selector = ucrNewSelector
+            ucrVariableSelector = TryCast(ucrNewSelector, ucrSelectorByDataFrame)
+            If ucrVariableSelector Is Nothing Then
+                MsgBox("Developer error: ucrVariablesAsFactor must be associated with a ucrSelectorByDataFrame not a base ucrSelector.")
+            End If
+        End Set
+    End Property
 End Class

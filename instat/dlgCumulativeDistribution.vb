@@ -48,8 +48,8 @@ Public Class dlgCumulativeDistribution
 
 
         ucrVariablesAsFactorforCumDist.SetFactorReceiver(ucrFactorReceiver)
-        ucrVariablesAsFactorforCumDist.SetSelector(ucrCumDistSelector)
-        ucrVariablesAsFactorforCumDist.SetIncludedDataType({"numeric"})
+        ucrVariablesAsFactorforCumDist.Selector = ucrCumDistSelector
+        ucrVariablesAsFactorforCumDist.SetIncludedDataTypes({"numeric"})
 
 
         ucrSaveCumDist.SetDataFrameSelector(ucrCumDistSelector.ucrAvailableDataFrames)

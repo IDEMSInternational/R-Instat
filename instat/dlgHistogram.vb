@@ -52,8 +52,8 @@ Public Class dlgHistogram
 
 
         ucrVariablesAsFactorforHist.SetFactorReceiver(ucrFactorReceiver)
-        ucrVariablesAsFactorforHist.SetSelector(ucrHistogramSelector)
-        ucrVariablesAsFactorforHist.SetIncludedDataType({"numeric"})
+        ucrVariablesAsFactorforHist.Selector = ucrHistogramSelector
+        ucrVariablesAsFactorforHist.SetIncludedDataTypes({"numeric"})
 
         ucrSaveHist.SetDataFrameSelector(ucrHistogramSelector.ucrAvailableDataFrames)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False

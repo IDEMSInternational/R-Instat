@@ -55,8 +55,8 @@ Public Class dlgDotPlot
         'The ucrVariablesAsFactorDotPlot could be called the ucrBinAxis in spirit.
         'On the next line, the ucrOtherAxisReceiver receiver is used as the aesthetics to factor by when different variables are grouped into a single column in the multiple variables method. 
         ucrVariablesAsFactorDotPlot.SetFactorReceiver(ucrOtherAxisReceiver) 'Could choose the ucrFactorReceiver for this purpose... 
-        ucrVariablesAsFactorDotPlot.SetSelector(ucrDotPlotSelector)
-        ucrVariablesAsFactorDotPlot.SetIncludedDataType({"numeric", "factor"})
+        ucrVariablesAsFactorDotPlot.Selector = ucrDotPlotSelector
+        ucrVariablesAsFactorDotPlot.SetIncludedDataTypes({"numeric", "factor"})
         ucrBase.iHelpTopicID = 437
 
         ucrSaveDotPlot.SetDataFrameSelector(ucrDotPlotSelector.ucrAvailableDataFrames)
