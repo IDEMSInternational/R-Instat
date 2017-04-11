@@ -44,18 +44,18 @@ Public Class dlgDuplicateColumns
         ucrBase.iHelpTopicID = 512
 
         ' For ucrSelector
-        ucrSelectorForDuplicateColumn.SetParameter(New RParameter("data_name"))
+        ucrSelectorForDuplicateColumn.SetParameter(New RParameter("data_name", 0))
         ucrSelectorForDuplicateColumn.SetParameterIsString()
 
         ' For ucrReceiver
-        ucrReceiverForCopyColumns.SetParameter(New RParameter("col_data"))
+        ucrReceiverForCopyColumns.SetParameter(New RParameter("col_data", 1))
         ucrReceiverForCopyColumns.SetParameterIsRFunction()
         ucrReceiverForCopyColumns.Selector = ucrSelectorForDuplicateColumn
         ucrReceiverForCopyColumns.SetMeAsReceiver()
         ucrReceiverForCopyColumns.bUseFilteredData = False
 
         ' radio buttons
-        ucrPnlColPosition.SetParameter(New RParameter("before"))
+        ucrPnlColPosition.SetParameter(New RParameter("before", 3))
         ucrPnlColPosition.AddRadioButton(rdoBefore, "TRUE")
         ucrPnlColPosition.AddRadioButton(rdoAfter, "FALSE")
         ucrPnlColPosition.AddRadioButton(rdoBeginning, "TRUE")
@@ -66,7 +66,7 @@ Public Class dlgDuplicateColumns
         ucrPnlColPosition.AddParameterPresentCondition(rdoEnd, "adjacent_column", False)
 
         ' For ucrSaveColumn
-        ucrInputColumnName.SetParameter(New RParameter("col_name"))
+        ucrInputColumnName.SetParameter(New RParameter("col_name", 2))
         ucrInputColumnName.SetDataFrameSelector(ucrSelectorForDuplicateColumn.ucrAvailableDataFrames)
         ucrInputColumnName.SetItemsTypeAsColumns()
         ucrInputColumnName.SetDefaultTypeAsColumn()
@@ -78,6 +78,7 @@ Public Class dlgDuplicateColumns
 
         ucrSelectorForDuplicateColumn.Reset()
         ucrInputColumnName.bAllowNonConditionValues = True
+        ucrInputColumnName.Reset()
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
         clsDefaultFunction.AddParameter("before", "FALSE")
@@ -143,10 +144,14 @@ Public Class dlgDuplicateColumns
         PositionOfDuplicatedCols()
     End Sub
 
-    Private Sub ucrReceiverForCopyColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForCopyColumns.ControlValueChanged
-        If Not ucrInputColumnName.bUserTyped Then
+    Private Sub DefaultNewName()
+        If Not ucrInputColumnName.bUserTyped AndAlso Not ucrReceiverForCopyColumns.IsEmpty Then
             ucrInputColumnName.SetPrefix(ucrReceiverForCopyColumns.GetVariableNames(False))
         End If
+    End Sub
+
+    Private Sub ucrReceiverForCopyColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForCopyColumns.ControlValueChanged
+        DefaultNewName()
         PositionOfDuplicatedCols()
     End Sub
 End Class
