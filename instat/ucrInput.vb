@@ -58,20 +58,22 @@ Public Class ucrInput
 
     Public Sub OnNameChanged()
         Me.Text = Me.GetText()
-        If bChangeParameterValue AndAlso clsParameter IsNot Nothing Then
+        RaiseEvent NameChanged()
+        OnControlValueChanged()
+    End Sub
+
+    Protected Overrides Sub UpdateParameter(clsTempParam As RParameter)
+        If bChangeParameterValue AndAlso clsTempParam IsNot Nothing Then
             If dctDisplayParameterValues.ContainsKey(GetText()) Then
-                clsParameter.SetArgumentValue(dctDisplayParameterValues(GetText()))
+                clsTempParam.SetArgumentValue(dctDisplayParameterValues(GetText()))
             Else
                 If AddQuotesIfUnrecognised Then
-                    clsParameter.SetArgumentValue(Chr(34) & GetText() & Chr(34))
+                    clsTempParam.SetArgumentValue(Chr(34) & GetText() & Chr(34))
                 Else
-                    clsParameter.SetArgumentValue(GetText())
+                    clsTempParam.SetArgumentValue(GetText())
                 End If
             End If
         End If
-        UpdateRCode()
-        RaiseEvent NameChanged()
-        OnControlValueChanged()
     End Sub
 
     Public Sub OnContentsChanged()
@@ -408,19 +410,22 @@ Public Class ucrInput
     End Sub
 
     Public Overrides Function GetValueToSet() As Object
-        If clsParameter IsNot Nothing Then
-            If clsParameter.bIsString Then
-                If dctDisplayParameterValues.ContainsKey(clsParameter.strArgumentValue) Then
-                    Return clsParameter.strArgumentValue
+        Dim clsMainParameter As RParameter
+
+        clsMainParameter = GetParameter()
+        If clsMainParameter IsNot Nothing Then
+            If clsMainParameter.bIsString Then
+                If dctDisplayParameterValues.ContainsKey(clsMainParameter.strArgumentValue) Then
+                    Return clsMainParameter.strArgumentValue
                 Else
                     If AddQuotesIfUnrecognised Then
-                        Return clsParameter.strArgumentValue.Trim(Chr(34))
+                        Return clsMainParameter.strArgumentValue.Trim(Chr(34))
                     Else
-                        Return clsParameter.strArgumentValue
+                        Return clsMainParameter.strArgumentValue
                     End If
                 End If
-            ElseIf clsParameter.bIsFunction OrElse clsParameter.bIsOperator Then
-                Return clsParameter.clsArgumentCodeStructure
+            ElseIf clsMainParameter.bIsFunction OrElse clsMainParameter.bIsOperator Then
+                Return clsMainParameter.clsArgumentCodeStructure
             Else
                 Return ""
             End If
