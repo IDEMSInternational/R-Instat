@@ -1098,13 +1098,13 @@ instat_object$set("public","make_inventory_plot", function(data_name, date_col, 
 }
 )
 
-instat_object$set("public", "import_NetCDF", function(nc_data, data_names = c(), latitude_col_name="", longitude_col_name="", default_names = TRUE) {
-  nc_result <- open_NetCDF(nc_data = nc_data, latitude_col_name = latitude_col_name, longitude_col_name = longitude_col_name, default_names = default_names)
+instat_object$set("public", "import_NetCDF", function(nc_data, main_data_name, loc_data_name, latitude_col_name = "", longitude_col_name = "") {
+  nc_result <- open_NetCDF(nc_data = nc_data, latitude_col_name = latitude_col_name, longitude_col_name = longitude_col_name)
   if(length(nc_result) != 3)stop("Output from open_NetCDF should be a list of length 3")
   
   data_list = nc_result[c(1,2)]
   
-  names(data_list) = c(data_names[1],next_default_item(prefix = data_names[2], existing_names = self$get_data_names(), include_index = FALSE))
+  names(data_list) = c(main_data_name, next_default_item(prefix = loc_data_name, existing_names = self$get_data_names(), include_index = FALSE))
   self$import_data(data_tables = data_list)
   self$add_key(names(data_list)[2], nc_result[3][[1]])
   named_char_vec  <- nc_result[3][[1]]
@@ -1331,9 +1331,9 @@ instat_object$set("public", "import_from_climsoft", function(stations = c(), ele
 }
 )
 
-instat_object$set("public", "import_from_iri", function(download_from, data_file, data_frame_name, location_data_name, path, X1,X2,Y1,Y2){
+instat_object$set("public", "import_from_iri", function(download_from, data_file, data_frame_name, location_data_name, path, X1, X2 = NA, Y1, Y2 = NA, get_area = TRUE){
  
-  data_list <- import_from_iri(download_from, data_file, path, X1, X2, Y1, Y2)
+  data_list <- import_from_iri(download_from  = download_from, data_file = data_file, path = path, X1 = X1, X2 = X2, Y1 = Y1, Y2 = Y2, get_area = get_area)
   #if(length(data_list) != length(data_names))stop("data_names vector should be of length 2")
   #names(data_list) = c(data_names[1],next_default_item(prefix = data_names[2], existing_names = self$get_data_names(), include_index = FALSE))
   names(data_list) = c(data_frame_name, location_data_name)

@@ -19,7 +19,7 @@ Imports System.IO
 Public Class dlgOpenNetCDF
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsRDefaultFunction, clsRCDF, clsRDatanames As New RFunction
+    Private clsRDefaultFunction, clsRCDF As New RFunction
     Dim strFileType As String
     Dim bComponentsInitialised As Boolean
     Public bStartOpenDialog As Boolean
@@ -52,12 +52,12 @@ Public Class dlgOpenNetCDF
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrInputDataName.SetRCode(clsRDatanames, bReset)
-        ucrInputLocDataName.SetRCode(clsRDatanames, bReset)
+        ucrInputDataName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrInputLocDataName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrInputFilePath.SetRCode(clsRCDF, bReset)
         ucrInputLatColName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrInputLonColName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrCheckDefaultLocNames.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        'ucrCheckDefaultLocNames.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub SetDefaults()
@@ -70,8 +70,8 @@ Public Class dlgOpenNetCDF
         ucrInputFilePath.SetName("")
         clsRDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_NetCDF")
         clsRDefaultFunction.AddParameter("nc_data", clsRFunctionParameter:=clsRCDF)
-        clsRDefaultFunction.AddParameter("default_names", "TRUE")
-        clsRDefaultFunction.AddParameter("data_names", clsRFunctionParameter:=clsRDatanames)
+        'clsRDefaultFunction.AddParameter("default_names", "TRUE")
+        'clsRDefaultFunction.AddParameter("data_names", clsRFunctionParameter:=clsRDatanames)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsRDefaultFunction)
     End Sub
@@ -81,11 +81,11 @@ Public Class dlgOpenNetCDF
         ucrInputLocDataName.SetDefaultTypeAsDataFrame()
         ucrInputDataName.SetValidationTypeAsRVariable()
         ucrInputLocDataName.SetValidationTypeAsRVariable()
-        clsRDatanames.SetRCommand("c")
-        ucrInputDataName.SetParameter(New RParameter("data_df_name", 0))
-        ucrInputDataName.SetParameterIncludeArgumentName(False)
-        ucrInputLocDataName.SetParameter(New RParameter("location_df_name", 1))
-        ucrInputLocDataName.SetParameterIncludeArgumentName(False)
+        'clsRDatanames.SetRCommand("c")
+        ucrInputDataName.SetParameter(New RParameter("main_data_name"))
+        'ucrInputDataName.SetParameterIncludeArgumentName(False)
+        ucrInputLocDataName.SetParameter(New RParameter("loc_data_name"))
+        'ucrInputLocDataName.SetParameterIncludeArgumentName(False)
         ucrInputFilePath.SetParameter(New RParameter("filename", 0))
 
         ucrInputLatColName.SetParameter(New RParameter("latitude_col_name"))
@@ -93,9 +93,9 @@ Public Class dlgOpenNetCDF
         ucrInputLonColName.SetParameter(New RParameter("longitude_col_name"))
         ucrInputLonColName.SetLinkedDisplayControl(lblLonColName)
 
-        ucrCheckDefaultLocNames.SetParameter(New RParameter("default_names"))
-        ucrCheckDefaultLocNames.SetText("Use Default Location Names")
-        ucrCheckDefaultLocNames.AddToLinkedControls({ucrInputLatColName, ucrInputLonColName}, {False}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
+        'ucrCheckDefaultLocNames.SetParameter(New RParameter("default_names"))
+        'ucrCheckDefaultLocNames.SetText("Use Default Location Names")
+        'ucrCheckDefaultLocNames.AddToLinkedControls({ucrInputLatColName, ucrInputLonColName}, {False}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
