@@ -102,7 +102,6 @@ Public Class dlgRugPlot
 
         ucrSaveGraph.Reset()
         ucrRugPlotSelector.Reset()
-        ucrVariablesAsFactorForRugPlot.ResetControl()
 
         clsRaesFunction.ClearParameters()
         clsRgeom_RugPlotFunction.ClearParameters()

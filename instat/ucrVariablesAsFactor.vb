@@ -47,17 +47,21 @@ Public Class ucrVariablesAsFactor
     Public Overrides Function GetVariableNames(Optional bWithQuotes As Boolean = True) As String
         'This sub provides the name of the variable that should be used by external components that want to access the "content" of this receiver. If it is in single mode, this is simply providing the name of the variable in use. 
         'However in multiple mode, a New variable will be created using the "stack" And "measure.vars" explained in SetReceiverStatus.
-        Dim strVariablesToStack As String = ""
+        Dim strVariables As String = ""
 
         If bSingleVariable Then
-            strVariablesToStack = ucrSingleVariable.GetVariableNames(bWithQuotes)
+            strVariables = ucrSingleVariable.GetVariableNames(bWithQuotes)
         Else
-            If Not bWithQuotes Then
-                strVariablesToStack = "value"
-            Else strVariablesToStack = Chr(34) & "value" & Chr(34)
+            If ucrMultipleVariables.IsEmpty Then
+                strVariables = ""
+            Else
+                strVariables = "value"
+                If bWithQuotes Then
+                    strVariables = Chr(34) & strVariables & Chr(34)
+                End If
             End If
         End If
-        Return strVariablesToStack
+        Return strVariables
     End Function
 
     'Warning: The two following subs seem obsolete.
@@ -195,11 +199,6 @@ Public Class ucrVariablesAsFactor
         End If
     End Sub
 
-    Public Sub ResetControl()
-        'this resets the ucrReceiverFactor
-        SetDefaults()
-    End Sub
-
     Public Overrides Sub Add(strVar As String, Optional strDataFrame As String = "")
         If bSingleVariable Then
             ucrSingleVariable.Add(strVar, strDataFrame)
@@ -214,6 +213,12 @@ Public Class ucrVariablesAsFactor
         Else
             ucrMultipleVariables.Clear()
         End If
+    End Sub
+
+    Protected Overrides Sub Selector_ResetAll()
+        ucrSingleVariable.Clear()
+        ucrMultipleVariables.Clear()
+        'SetDefaults()
     End Sub
 
     Public Sub SetSingleReceiverStatus(bSingle As Boolean)
@@ -295,7 +300,7 @@ Public Class ucrVariablesAsFactor
                             End If
                         Else
                             bSingleVariable = True
-                            If Selector IsNot Nothing Then
+                            If Selector IsNot Nothing AndAlso lstCurrentVariables(0) <> "" Then
                                 ucrSingleVariable.Add(lstCurrentVariables(0), Selector.strCurrentDataFrame)
                             End If
                         End If

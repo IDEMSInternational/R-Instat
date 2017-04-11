@@ -133,7 +133,6 @@ Public Class dlgHistogram
         clsRgeom_FPolygon.ClearParameters()
         clsRgeom_histogramFunction.ClearParameters()
         ucrHistogramSelector.Reset()
-        ucrVariablesAsFactorforHist.ResetControl()
         rdoHistogram.Checked = True
         cmdHistogramOptions.Visible = True
         cmdDensityOptions.Visible = False

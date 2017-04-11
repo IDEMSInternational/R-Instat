@@ -62,7 +62,6 @@ Public Class dlgCumulativeDistribution
         ucrSaveCumDist.strPrefix = "Graph"
         ucrCumDistSelector.Reset()
         ucrCumDistSelector.Focus()
-        ucrVariablesAsFactorforCumDist.ResetControl()
         chkCountsOnYAxis.Checked = False
         chkExceedancePlots.Checked = True
         chkIncludePoints.Checked = False

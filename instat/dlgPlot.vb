@@ -75,7 +75,6 @@ Public Class dlgPlot
         ucrSaveLinePlot.strPrefix = "Line"
         ucrVariablesAsFactorForLinePlot.SetMeAsReceiver()
         ucrLinePlotSelector.Reset()
-        ucrVariablesAsFactorForLinePlot.ResetControl()
         ucrSaveLinePlot.Reset()
         sdgPlots.Reset()
         SetXParameter()
