@@ -30,11 +30,6 @@ Partial Class dlgOpenNetCDF
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
         Me.ucrInputDataName = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrInputLatColName = New instat.ucrInputTextBox()
-        Me.ucrInputLonColName = New instat.ucrInputTextBox()
-        Me.lblLatColName = New System.Windows.Forms.Label()
-        Me.lblLonColName = New System.Windows.Forms.Label()
-        Me.ucrCheckDefaultLocNames = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblLocDataNamePrefix
@@ -108,67 +103,16 @@ Partial Class dlgOpenNetCDF
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 109)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 116)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 7
-        '
-        'ucrInputLatColName
-        '
-        Me.ucrInputLatColName.AddQuotesIfUnrecognised = True
-        Me.ucrInputLatColName.IsMultiline = False
-        Me.ucrInputLatColName.IsReadOnly = False
-        Me.ucrInputLatColName.Location = New System.Drawing.Point(171, 150)
-        Me.ucrInputLatColName.Name = "ucrInputLatColName"
-        Me.ucrInputLatColName.Size = New System.Drawing.Size(142, 21)
-        Me.ucrInputLatColName.TabIndex = 8
-        '
-        'ucrInputLonColName
-        '
-        Me.ucrInputLonColName.AddQuotesIfUnrecognised = True
-        Me.ucrInputLonColName.IsMultiline = False
-        Me.ucrInputLonColName.IsReadOnly = False
-        Me.ucrInputLonColName.Location = New System.Drawing.Point(171, 177)
-        Me.ucrInputLonColName.Name = "ucrInputLonColName"
-        Me.ucrInputLonColName.Size = New System.Drawing.Size(142, 21)
-        Me.ucrInputLonColName.TabIndex = 9
-        '
-        'lblLatColName
-        '
-        Me.lblLatColName.AutoSize = True
-        Me.lblLatColName.Location = New System.Drawing.Point(23, 148)
-        Me.lblLatColName.Name = "lblLatColName"
-        Me.lblLatColName.Size = New System.Drawing.Size(117, 13)
-        Me.lblLatColName.TabIndex = 10
-        Me.lblLatColName.Text = "Latitude Column Name:"
-        '
-        'lblLonColName
-        '
-        Me.lblLonColName.AutoSize = True
-        Me.lblLonColName.Location = New System.Drawing.Point(23, 177)
-        Me.lblLonColName.Name = "lblLonColName"
-        Me.lblLonColName.Size = New System.Drawing.Size(126, 13)
-        Me.lblLonColName.TabIndex = 11
-        Me.lblLonColName.Text = "Longitude Column Name:"
-        '
-        'ucrCheckDefaultLocNames
-        '
-        Me.ucrCheckDefaultLocNames.Checked = False
-        Me.ucrCheckDefaultLocNames.Location = New System.Drawing.Point(32, 114)
-        Me.ucrCheckDefaultLocNames.Name = "ucrCheckDefaultLocNames"
-        Me.ucrCheckDefaultLocNames.Size = New System.Drawing.Size(100, 20)
-        Me.ucrCheckDefaultLocNames.TabIndex = 12
         '
         'dlgOpenNetCDF
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 171)
-        Me.Controls.Add(Me.ucrCheckDefaultLocNames)
-        Me.Controls.Add(Me.lblLonColName)
-        Me.Controls.Add(Me.lblLatColName)
-        Me.Controls.Add(Me.ucrInputLonColName)
-        Me.Controls.Add(Me.ucrInputLatColName)
+        Me.ClientSize = New System.Drawing.Size(434, 181)
         Me.Controls.Add(Me.ucrInputLocDataName)
         Me.Controls.Add(Me.lblLocDataNamePrefix)
         Me.Controls.Add(Me.ucrInputFilePath)
@@ -196,9 +140,4 @@ Partial Class dlgOpenNetCDF
     Friend WithEvents cmdOpenDataSet As Button
     Friend WithEvents lblFileOpenPath As Label
     Friend WithEvents lblMainDataName As Label
-    Friend WithEvents ucrInputLatColName As ucrInputTextBox
-    Friend WithEvents ucrInputLonColName As ucrInputTextBox
-    Friend WithEvents lblLatColName As Label
-    Friend WithEvents lblLonColName As Label
-    Friend WithEvents ucrCheckDefaultLocNames As ucrCheck
 End Class
