@@ -47,7 +47,6 @@ Public Class dlgBoxplot
         clsRgeom_boxplotFunction.ClearParameters()
         ucrSelectorBoxPlot.Reset()
         ucrSelectorBoxPlot.Focus()
-        ucrVariablesAsFactorForBoxplot.ResetControl()
         ucrSaveBoxplot.strPrefix = "Boxplot"
         chkHorizontalBoxplot.Checked = False
         chkVarwidth.Checked = False

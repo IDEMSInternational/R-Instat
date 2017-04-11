@@ -79,7 +79,6 @@ Public Class dlgDotPlot
         clsRgeom_dotplot.ClearParameters()
         ucrDotPlotSelector.Reset()
         ucrSaveDotPlot.strPrefix = "Dotplot"
-        ucrVariablesAsFactorDotPlot.ResetControl()
         ucrSaveDotPlot.Reset()
         sdgPlots.Reset()
         rdoXBinAxis.Checked = True 'If it was already True, no need to change anything, else it will raise event rdoBinAxis_CheckChanged
