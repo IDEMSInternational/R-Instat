@@ -135,13 +135,13 @@ Public Class ucrInputComboBox
             cboInput.Items.Clear()
             dctDisplayParameterValues.Clear()
         End If
-        If clsParameter Is Nothing Then
+        If GetParameter() Is Nothing Then
             MsgBox("Developer error: Parameter must be set before items can be set. Modify setup for " & Name & " so that the parameter is set first.")
         End If
         For Each kvpTemp In dctItemParameterValuePairs
             cboInput.Items.Add(kvpTemp.Key)
             dctDisplayParameterValues.Add(kvpTemp.Key, kvpTemp.Value)
-            AddParameterValuesCondition(kvpTemp.Key, clsParameter.strArgumentName, kvpTemp.Value)
+            AddParameterValuesCondition(kvpTemp.Key, GetParameter().strArgumentName, kvpTemp.Value)
         Next
         AdjustComboBoxWidth(cboInput)
     End Sub
