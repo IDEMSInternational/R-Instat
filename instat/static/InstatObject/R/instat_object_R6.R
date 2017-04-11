@@ -1103,13 +1103,13 @@ instat_object$set("public", "import_NetCDF", function(nc_data, data_names = c(),
   if(length(nc_result) != 3)stop("Output from open_NetCDF should be a list of length 3")
   
   data_list = nc_result[c(1,2)]
-  names(data_list) = c(data_names[1],next_default_item(prefix = data_names[2], existing_names = self$get_data_names(), include_index = FALSE))
   
+  names(data_list) = c(data_names[1],next_default_item(prefix = data_names[2], existing_names = self$get_data_names(), include_index = FALSE))
   self$import_data(data_tables = data_list)
-  self$add_key(data_names[2], nc_result[3])
-  named_char_vec  <- nc_result[3]
+  self$add_key(names(data_list)[2], nc_result[3][[1]])
+  named_char_vec  <- nc_result[3][[1]]
   names(named_char_vec) <- named_char_vec
-  self$add_link(from_data_frame = data_names[1], to_data_frame = data_names[2], link_pairs = named_char_vec, type = keyed_link_label)
+  self$add_link(from_data_frame = names(data_list)[1], to_data_frame = names(data_list)[2], link_pairs = named_char_vec, type = keyed_link_label)
 }
 )
 
