@@ -324,17 +324,19 @@ Public Class ucrReceiver
     Protected Overrides Sub SetControlValue()
         Dim clsTempDataParameter As RParameter
         Dim lstCurrentVariables As String() = Nothing
+        Dim clsTempParameter As RParameter
 
-        If clsParameter IsNot Nothing Then
+        clsTempParameter = GetParameter()
+        If clsTempParameter IsNot Nothing Then
             If bChangeParameterValue Then
-                If bParameterIsString AndAlso clsParameter.bIsString Then
-                    If strValuesToIgnore Is Nothing OrElse (Not strValuesToIgnore.Contains(clsParameter.strArgumentValue)) Then
-                        lstCurrentVariables = ExtractItemsFromRList(clsParameter.strArgumentValue)
+                If bParameterIsString AndAlso clsTempParameter.bIsString Then
+                    If strValuesToIgnore Is Nothing OrElse (Not strValuesToIgnore.Contains(clsTempParameter.strArgumentValue)) Then
+                        lstCurrentVariables = ExtractItemsFromRList(clsTempParameter.strArgumentValue)
                     End If
-                ElseIf bParameterIsRFunction AndAlso clsParameter.bIsFunction Then
-                        clsTempDataParameter = clsParameter.clsArgumentCodeStructure.GetParameter(strColumnsParameterNameInRFunction)
+                ElseIf bParameterIsRFunction AndAlso clsTempParameter.bIsFunction Then
+                    clsTempDataParameter = clsTempParameter.clsArgumentCodeStructure.GetParameter(strColumnsParameterNameInRFunction)
                     If clsTempDataParameter IsNot Nothing Then
-                        lstCurrentVariables = ExtractItemsFromRList(clsParameter.clsArgumentCodeStructure.GetParameter(strColumnsParameterNameInRFunction).strArgumentValue)
+                        lstCurrentVariables = ExtractItemsFromRList(clsTempParameter.clsArgumentCodeStructure.GetParameter(strColumnsParameterNameInRFunction).strArgumentValue)
                     End If
                 End If
                 Clear()
@@ -351,31 +353,28 @@ Public Class ucrReceiver
         End If
     End Sub
 
-    Private Sub ucrReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles Me.SelectionChanged
-        UpdateParameter()
-    End Sub
-
-    Public Sub UpdateParameter()
-        If clsParameter Is Nothing Then
-            clsParameter = New RParameter
+    Protected Overrides Sub UpdateParameter(clsTempParam As RParameter)
+        If clsTempParam Is Nothing Then
+            clsTempParam = New RParameter
         End If
+        'Could need bParameterIsString and bParameterIsRFunction to be properties of RParameter if two functions need string/function
         If bParameterIsString Then
-            clsParameter.SetArgumentValue(GetVariableNames(bWithQuotes))
+            clsTempParam.SetArgumentValue(GetVariableNames(bWithQuotes))
         ElseIf bParameterIsRFunction Then
-            clsParameter.SetArgument(GetVariables(bForceAsDataFrame))
+            clsTempParam.SetArgument(GetVariables(bForceAsDataFrame))
         End If
     End Sub
 
     Public Sub SetParameterIsString()
         bParameterIsString = True
         bParameterIsRFunction = False
-        UpdateParameter()
+        UpdateAllParameters()
     End Sub
 
     Public Sub SetParameterIsRFunction()
         bParameterIsRFunction = True
         bParameterIsString = False
-        UpdateParameter()
+        UpdateAllParameters()
     End Sub
 
     Public Overrides Function IsRDefault() As Boolean
