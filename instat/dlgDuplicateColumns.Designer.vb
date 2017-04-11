@@ -93,7 +93,7 @@ Partial Class dlgDuplicateColumns
         Me.grpDuplicatedColumn.Controls.Add(Me.ucrPnlColPosition)
         Me.grpDuplicatedColumn.Location = New System.Drawing.Point(225, 80)
         Me.grpDuplicatedColumn.Name = "grpDuplicatedColumn"
-        Me.grpDuplicatedColumn.Size = New System.Drawing.Size(185, 110)
+        Me.grpDuplicatedColumn.Size = New System.Drawing.Size(183, 110)
         Me.grpDuplicatedColumn.TabIndex = 3
         Me.grpDuplicatedColumn.TabStop = False
         Me.grpDuplicatedColumn.Text = "Position of Duplicated Column"
