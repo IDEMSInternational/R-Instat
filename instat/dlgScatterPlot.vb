@@ -49,12 +49,16 @@ Public Class dlgScatterPlot
         ucrVariablesAsFactorForScatter.Selector = ucrSelectorForScatter
         ucrVariablesAsFactorForScatter.SetFactorReceiver(ucrFactorOptionalReceiver)
         ucrVariablesAsFactorForScatter.SetIncludedDataTypes({"factor", "numeric"})
+        ucrVariablesAsFactorForScatter.SetValuesToIgnore({Chr(34) & Chr(34)})
+        ucrVariablesAsFactorForScatter.bAddParameterIfEmpty = True
 
         ucrReceiverX.SetParameter(New RParameter("x", 0))
         ucrReceiverX.SetParameterIsString()
         ucrReceiverX.bWithQuotes = False
         ucrReceiverX.Selector = ucrSelectorForScatter
         ucrReceiverX.SetIncludedDataTypes({"factor", "numeric"})
+        ucrReceiverX.SetValuesToIgnore({Chr(34) & Chr(34)})
+        ucrReceiverX.bAddParameterIfEmpty = True
 
         ucrFactorOptionalReceiver.SetParameter(New RParameter("colour", 2))
         ucrFactorOptionalReceiver.SetParameterIsString()
@@ -89,6 +93,8 @@ Public Class dlgScatterPlot
 
         clsRaesFunction.SetPackageName("ggplot2")
         clsRaesFunction.SetRCommand("aes")
+        clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
+        clsRaesFunction.AddParameter("y", Chr(34) & Chr(34))
 
         clsRScatterGeomFunction.SetRCommand("geom_point")
         clsRScatterGeomFunction.SetPackageName("ggplot2")

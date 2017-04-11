@@ -359,7 +359,13 @@ Public Class ucrReceiver
         End If
         'Could need bParameterIsString and bParameterIsRFunction to be properties of RParameter if two functions need string/function
         If bParameterIsString Then
-            clsTempParam.SetArgumentValue(GetVariableNames(bWithQuotes))
+            'TODO this currently only works with one value to ignore. Also may need option not to set parameter value to strValuesToIgnore
+            '     although this currently can be done with bAddParameterIfEmpty = True
+            If IsEmpty() AndAlso strValuesToIgnore IsNot Nothing AndAlso strValuesToIgnore.Count = 1 Then
+                clsTempParam.SetArgumentValue(strValuesToIgnore(0))
+            Else
+                clsTempParam.SetArgumentValue(GetVariableNames(bWithQuotes))
+            End If
         ElseIf bParameterIsRFunction Then
             clsTempParam.SetArgument(GetVariables(bForceAsDataFrame))
         End If
