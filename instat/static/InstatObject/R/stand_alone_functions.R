@@ -258,8 +258,8 @@ open_NetCDF <- function(nc_data, latitude_col_name, longitude_col_name, default_
     time = 1
   } 
   period <- rep(time, each = (length(lat)*length(lon)))
-  lat_rep <- as.numeric(rep(lat, each = length(lon)))
-  lon_rep <- as.numeric(rep(lon, length(lat)))
+  lat_rep <- rep(lat, each = length(lon))
+  lon_rep <- rep(lon, length(lat))
   if (!default_names){
     #we need to check if the names are valid
     new_lat_lon_column_names <- c(latitude_col_name, longitude_col_name)
@@ -267,36 +267,14 @@ open_NetCDF <- function(nc_data, latitude_col_name, longitude_col_name, default_
   else{
     new_lat_lon_column_names <- c(lat_lon_names[lat_in], lat_lon_names[lon_in])
   }
-  new_column_names <- c(new_lat_lon_column_names, "station")
-  #lat_lon <- as.data.frame(cbind(lat_rep, lon_rep))
-  
-  #names(lat_lon) = c("lat","lon")
-  
-  station <- c()
-  #col1 <- lat_lon[ ,1]
-  #col2 <- lat_lon[ ,2]
+  lat_lon <- as.data.frame(cbind(lat_rep, lon_rep))
+  names(lat_lon) = new_lat_lon_column_names
   station = ifelse(lat_rep >= 0 & lon_rep >= 0, paste(paste("N", lat_rep, sep = ""), paste("E", lon_rep, sep = ""), sep = "_"), 
                    ifelse(lat_rep < 0 & lon_rep >= 0, paste(paste("S", abs(lat_rep), sep = ""), paste("E", lon_rep, sep = ""), sep = "_"), 
                           ifelse(lat_rep >= 0 & lon_rep < 0, paste(paste("N", lat_rep, sep = ""), paste("W", abs(lon_rep), sep = ""), sep = "_") , 
                                  paste(paste("S", abs(lat_rep), sep = ""), paste("W", abs(lon_rep), sep = ""), sep = "_"))))
-  # for (j in 1:nrow(lat_lon)){
-  #   if(lat_lon[j,1] >= 0 && lat_lon[j,2] >= 0){
-  #     station = append(station, paste(paste("N", lat_lon[j,1], sep = ""), paste("E", lat_lon[j,2], sep = ""), sep = "_"))
-  #   }
-  #   if(lat_lon[j,1] < 0 && lat_lon[j,2] >= 0){
-  #     station = append(station, paste(paste("S", abs(lat_lon[j,1]), sep = ""), paste("E", lat_lon[j,2], sep = ""), sep = "_"))
-  #   }
-  #   if(lat_lon[j,1] >= 0 && lat_lon[j,2] < 0){
-  #     station = append(station, paste(paste("N", lat_lon[j,1], sep = ""), paste("W", abs(lat_lon[j,2]), sep = ""), sep = "_"))
-  #   }
-  #   if(lat_lon[j,1] < 0 && lat_lon[j,2] < 0){
-  #     station = append(station, paste(paste("S", abs(lat_lon[j,1]), sep = ""), paste("W", abs(lat_lon[j,2]), sep = ""), sep = "_"))
-  #   }
-  # }
-  # 
   
-  lat_lon_df <- as.data.frame(cbind(lat_rep, lon_rep, station))
-  names(lat_lon_df) <- new_column_names
+  lat_lon_df <- cbind(lat_lon, station)
   my_data <- cbind(period, lat_lon_df)
   
   for (current_var in variables){
