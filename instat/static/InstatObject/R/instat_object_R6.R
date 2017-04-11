@@ -1098,12 +1098,15 @@ instat_object$set("public","make_inventory_plot", function(data_name, date_col, 
 }
 )
 
-instat_object$set("public", "import_NetCDF", function(nc_data, data_names = c()) {
-  data_list <- open_NetCDF(nc_data)
-  if(length(data_list) != length(data_names))stop("data_names vector should be of length 2")
+instat_object$set("public", "import_NetCDF", function(nc_data, data_names = c(), latitude_col_name="", longitude_col_name="", default_names = TRUE) {
+  nc_result <- open_NetCDF(nc_data = nc_data, latitude_col_name = latitude_col_name, longitude_col_name = longitude_col_name, default_names = default_names)
+  if(length(nc_result) != 3)stop("Output from open_NetCDF should be a list of length 3")
+  
+  data_list = nc_result[c(1,2)]
   names(data_list) = c(data_names[1],next_default_item(prefix = data_names[2], existing_names = self$get_data_names(), include_index = FALSE))
+  
   self$import_data(data_tables = data_list)
-  self$add_key(data_names[2], c("lat", "lon"))
+  self$add_key(data_names[2], nc_result[3])
   self$add_link(from_data_frame = data_names[1], to_data_frame = data_names[2], link_pairs = c(lat = "lat", lon = "lon"), type = keyed_link_label)
 }
 )
