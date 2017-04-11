@@ -110,38 +110,6 @@ Public Class dlgScatterPlot
         ucrFactorOptionalReceiver.SetRCode(clsRaesFunction, bReset)
     End Sub
 
-    'Private Sub ucrSelectorForScatter_DataFrameChanged() Handles ucrSelectorForScatter.DataFrameChanged
-    '    clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorForScatter.ucrAvailableDataFrames.clsCurrDataFrame)
-    'End Sub
-
-    'Private Sub SetXParameter()
-    '    If Not ucrReceiverX.IsEmpty Then
-    '        clsRaesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False))
-    '    Else
-    '        clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
-    '    End If
-    'End Sub
-
-    'Private Sub SetYParameter()
-    '    If Not ucrVariablesAsFactorForScatter.IsEmpty Then
-    '        clsRaesFunction.AddParameter("y", ucrVariablesAsFactorForScatter.GetVariableNames(False))
-    '    Else
-    '        clsRaesFunction.AddParameter("y", Chr(34) & Chr(34))
-    '    End If
-    'End Sub
-    'Private Sub ucrReceiverX_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverX.SelectionChanged
-    '    SetXParameter()
-    '    TestOkEnabled()
-    'End Sub
-
-    'Private Sub ucrFactorOptionalReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactorOptionalReceiver.SelectionChanged
-    '    If Not ucrFactorOptionalReceiver.IsEmpty Then
-    '        clsRaesFunction.AddParameter("colour", ucrFactorOptionalReceiver.GetVariableNames(False))
-    '    Else
-    '        clsRaesFunction.RemoveParameterByName("colour")
-    '    End If
-    'End Sub
-
     Private Sub TestOkEnabled()
         'tests when okay Is enable. Both x and y aesthetics are mandatory but can be set to x="" or(exclusive) y="" in case the other one is filled. 
         If (ucrReceiverX.IsEmpty() AndAlso ucrVariablesAsFactorForScatter.IsEmpty) OrElse (ucrSaveScatterPlot.chkSaveGraph.Checked AndAlso ucrSaveScatterPlot.ucrInputGraphName.IsEmpty) Then
@@ -161,11 +129,6 @@ Public Class dlgScatterPlot
         sdgPlots.SetDataFrame(strNewDataFrame:=ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         sdgPlots.ShowDialog()
     End Sub
-
-    'Private Sub ucrVariablesAsFactor_SelectionChanged() Handles ucrVariablesAsFactorForScatter.SelectionChanged
-    '    SetYParameter()
-    '    TestOkEnabled()
-    'End Sub
 
     Private Sub cmdScatterPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdScatterPlotOptions.Click
         'SetupLayer sends the components storing the plot info (clsRaesFunction, clsRggplotFunction, ...) of dlgScatteredPlot through to sdgLayerOptions where these will be edited.
