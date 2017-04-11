@@ -30,7 +30,6 @@ Partial Class dlgOpenNetCDF
         Me.lblLonColName = New System.Windows.Forms.Label()
         Me.ucrInputLonColName = New instat.ucrInputTextBox()
         Me.ucrInputLatColName = New instat.ucrInputTextBox()
-        Me.ucrCheckDefaultLocNames = New instat.ucrCheck()
         Me.ucrInputLocDataName = New instat.ucrInputTextBox()
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
         Me.ucrInputDataName = New instat.ucrInputTextBox()
@@ -114,14 +113,6 @@ Partial Class dlgOpenNetCDF
         Me.ucrInputLatColName.Size = New System.Drawing.Size(142, 21)
         Me.ucrInputLatColName.TabIndex = 9
         '
-        'ucrCheckDefaultLocNames
-        '
-        Me.ucrCheckDefaultLocNames.Checked = False
-        Me.ucrCheckDefaultLocNames.Location = New System.Drawing.Point(10, 110)
-        Me.ucrCheckDefaultLocNames.Name = "ucrCheckDefaultLocNames"
-        Me.ucrCheckDefaultLocNames.Size = New System.Drawing.Size(182, 20)
-        Me.ucrCheckDefaultLocNames.TabIndex = 8
-        '
         'ucrInputLocDataName
         '
         Me.ucrInputLocDataName.AddQuotesIfUnrecognised = True
@@ -168,7 +159,6 @@ Partial Class dlgOpenNetCDF
         Me.Controls.Add(Me.lblLatColName)
         Me.Controls.Add(Me.ucrInputLonColName)
         Me.Controls.Add(Me.ucrInputLatColName)
-        Me.Controls.Add(Me.ucrCheckDefaultLocNames)
         Me.Controls.Add(Me.ucrInputLocDataName)
         Me.Controls.Add(Me.lblLocDataNamePrefix)
         Me.Controls.Add(Me.ucrInputFilePath)
@@ -196,7 +186,6 @@ Partial Class dlgOpenNetCDF
     Friend WithEvents cmdOpenDataSet As Button
     Friend WithEvents lblFileOpenPath As Label
     Friend WithEvents lblMainDataName As Label
-    Friend WithEvents ucrCheckDefaultLocNames As ucrCheck
     Friend WithEvents ucrInputLatColName As ucrInputTextBox
     Friend WithEvents ucrInputLonColName As ucrInputTextBox
     Friend WithEvents lblLatColName As Label

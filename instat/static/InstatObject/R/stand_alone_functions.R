@@ -232,9 +232,14 @@ open_NetCDF <- function(nc_data, latitude_col_name, longitude_col_name, default_
   lat_names = c("lat", "latitude", "LAT", "Lat", "LATITUDE")
   lon_names = c("lon", "longitude", "LON", "Lon", "LONGITUDE")
   time_names = c("time", "TIME", "Time", "period", "Period", "PERIOD")
+  if (latitude_col_name != ""){
+    lat_names <- c(lat_names, latitude_col_name)
+  }
+  if (longitude_col_name != ""){
+    lon_names <- c(lon_names, longitude_col_name)
+  }
   
   lat_in <- which(lat_lon_names %in% lat_names)
-  
   lat_found <- (length(lat_in) == 1)
   if(lat_found) {
     lat <- as.numeric(ncvar_get(nc_data, lat_lon_names[lat_in]))
@@ -260,13 +265,13 @@ open_NetCDF <- function(nc_data, latitude_col_name, longitude_col_name, default_
   period <- rep(time, each = (length(lat)*length(lon)))
   lat_rep <- rep(lat, each = length(lon))
   lon_rep <- rep(lon, length(lat))
-  if (!default_names){
-    #we need to check if the names are valid
-    new_lat_lon_column_names <- c(latitude_col_name, longitude_col_name)
-  }
-  else{
-    new_lat_lon_column_names <- c(lat_lon_names[lat_in], lat_lon_names[lon_in])
-  }
+  # if (!default_names){
+  #   #we need to check if the names are valid
+  #   new_lat_lon_column_names <- c(latitude_col_name, longitude_col_name)
+  # }
+  # else{
+  new_lat_lon_column_names <- c(lat_lon_names[lat_in], lat_lon_names[lon_in])
+  #}
   lat_lon <- as.data.frame(cbind(lat_rep, lon_rep))
   names(lat_lon) = new_lat_lon_column_names
   station = ifelse(lat_rep >= 0 & lon_rep >= 0, paste(paste("N", lat_rep, sep = ""), paste("E", lon_rep, sep = ""), sep = "_"), 
@@ -303,7 +308,7 @@ open_NetCDF <- function(nc_data, latitude_col_name, longitude_col_name, default_
 }
 
   
-import_from_iri <- function(download_from, data_file, path, X1, X2,Y1,Y2){
+import_from_iri <- function(download_from, data_file, path, X1, X2,Y1,Y2, get_area){
   if(path == ""){
     gaugelocdir = getwd()
   }
@@ -437,7 +442,13 @@ import_from_iri <- function(download_from, data_file, path, X1, X2,Y1,Y2){
   
   prexyaddress = paste(prexyaddress, extension, sep="/")
   #we need to add time range to get the data
-  xystuff<-paste("X",X1,X2,"RANGEEDGES/Y",Y1,Y2,"RANGEEDGES",sep="/")
+  if(get_area){
+    xystuff<-paste("X", X1, X2, "RANGEEDGES/Y", Y1, Y2, "RANGEEDGES", sep = "/")
+  }
+  else{
+    xystuff<-paste("X", X1, "VALUES/Y", Y1, "VALUES", sep = "/")
+  }
+  
   postxyaddress<-"ngridtable+table-+skipanyNaN+4+-table+.csv" 
   address<-paste(prexyaddress,xystuff,postxyaddress,sep="/")
   file.name <- paste(gaugelocdir,"tmp_iri.csv",sep="/")
