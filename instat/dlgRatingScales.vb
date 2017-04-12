@@ -44,6 +44,7 @@ Public Class dlgRatingScales
         ucrChkFlip.SetRCode(clsSjpStackFrq, bReset)
         ' ucrPnlType.SetRCode(clsSjplikert, bReset)
         ucrNudNeutralLevel.SetRCode(clsSjplikert, bReset)
+        ucrNudNeutralLevel.SetMinMax(1, Integer.MaxValue)
 
         ucrReceiverOrderedFactors.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverWeights.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
@@ -63,7 +64,7 @@ Public Class dlgRatingScales
         ucrReceiverOrderedFactors.SetParameter(New RParameter("items"))
         ucrReceiverOrderedFactors.SetParameterIsRFunction()
         clsSjplikert.SetRCommand("sjp.likert")
-        clsSjplikert.AddParameter("cat.neutral", "NULL")
+        clsSjplikert.AddParameter("cat.neutral")
         clsSjplikert.AddParameter("catcount", "NULL")
         clsSjplikert.AddParameter("sort.frq", "NULL")
         clsSjplikert.AddParameter("coord.flip", "FALSE")
@@ -102,6 +103,8 @@ Public Class dlgRatingScales
         ucrPnlSjtStackFrq.AddFunctionNamesCondition(rdoTable, "sjPlot::sjt.stackfrq")
         ucrPnlSjtStackFrq.AddFunctionNamesCondition(rdoStacked, "sjPlot::sjp.stackfrq")
 
+        ucrPnlGraphType.bAllowNonConditionValues = True
+        ucrPnlType.bAllowNonConditionValues = True
         ucrPnlSjtStackFrq.SetParameter(New RParameter("sort.frq", 3))
         ucrPnlSjtStackFrq.AddRadioButton(rdoNone, "NULL")
         ucrPnlSjtStackFrq.AddRadioButton(rdoLowAscending, Chr(34) & "last.asc" & Chr(34))
