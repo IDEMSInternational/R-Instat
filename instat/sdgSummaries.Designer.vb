@@ -52,7 +52,7 @@ Partial Class sdgSummaries
         Me.grpCommon.Controls.Add(Me.ucrChkNonMissing)
         Me.grpCommon.Location = New System.Drawing.Point(12, 8)
         Me.grpCommon.Name = "grpCommon"
-        Me.grpCommon.Size = New System.Drawing.Size(244, 65)
+        Me.grpCommon.Size = New System.Drawing.Size(243, 65)
         Me.grpCommon.TabIndex = 0
         Me.grpCommon.TabStop = False
         Me.grpCommon.Tag = "Common"
@@ -193,7 +193,7 @@ Partial Class sdgSummaries
         '
         'ucrButtonsSummaries
         '
-        Me.ucrButtonsSummaries.Location = New System.Drawing.Point(62, 236)
+        Me.ucrButtonsSummaries.Location = New System.Drawing.Point(61, 236)
         Me.ucrButtonsSummaries.Name = "ucrButtonsSummaries"
         Me.ucrButtonsSummaries.Size = New System.Drawing.Size(142, 30)
         Me.ucrButtonsSummaries.TabIndex = 3
@@ -202,7 +202,7 @@ Partial Class sdgSummaries
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(270, 266)
+        Me.ClientSize = New System.Drawing.Size(264, 266)
         Me.Controls.Add(Me.grpNumeric)
         Me.Controls.Add(Me.grpCommon)
         Me.Controls.Add(Me.grpNotOrderedFactor)
