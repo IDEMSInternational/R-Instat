@@ -37,7 +37,7 @@ Public Class dlgTransposeColumns
         ucrBase.iHelpTopicID = 277
 
         ' ucrReceiver
-        ucrReceiverColumsToTranspose.SetParameter(New RParameter("x"))
+        ucrReceiverColumsToTranspose.SetParameter(New RParameter("x", 0))
         ucrReceiverColumsToTranspose.SetParameterIsRFunction()
         ucrReceiverColumsToTranspose.Selector = ucrSelectorTransposeColumns
         ucrReceiverColumsToTranspose.SetMeAsReceiver()
@@ -48,8 +48,8 @@ Public Class dlgTransposeColumns
         ucrNewDataframe.SetDataFrameSelector(ucrSelectorTransposeColumns.ucrAvailableDataFrames)
         ucrNewDataframe.SetLabelText("New Data Frame Name:")
 
-        'chkbox
-        'ucrChkNameNewColumns.SetParameter(New RParameter(""))
+        'The checkbox is not yet implemented in the updated code as it was not implemented in pre-updated code
+        'ucrChkNameNewColumns.SetParameter(New RParameter("", 1))
         ucrChkNameNewColumns.SetText("Name New Columns")
         'ucrChkNameNewColumns.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         'ucrChkNameNewColumns.SetRDefault("FALSE")
