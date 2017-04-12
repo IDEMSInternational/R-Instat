@@ -765,7 +765,7 @@ instat_object$set("public", "sort_dataframe", function(data_name, col_names = c(
 } 
 )
 
-instat_object$set("public", "rename_dataframe", function(data_name, new_value = "", label_label = "") {
+instat_object$set("public", "rename_dataframe", function(data_name, new_value = "", value = "") {
   data_obj = self$get_data_objects(data_name)
   names(private$.data_objects)[names(private$.data_objects) == data_name] <- new_value
   data_obj$append_to_metadata(data_name_label, new_value)
@@ -778,8 +778,8 @@ instat_object$set("public", "rename_dataframe", function(data_name, new_value = 
     }
   }
   data_obj$set_data_changed(TRUE)
+  self$get_data_objects(data_name)$append_to_variables_metadata(property= "label" , new_val = value)
  } 
- #self$get_data_objects(data_name)$append_to_variables_metadata(label_label, "")
 )
 
 instat_object$set("public", "convert_column_to_type", function(data_name, col_names = c(), to_type, factor_numeric = "by_levels", set_digits, set_decimals = FALSE) {
