@@ -34,7 +34,7 @@ Partial Class dlgName
         '
         'lblName
         '
-        Me.lblName.Location = New System.Drawing.Point(255, 90)
+        Me.lblName.Location = New System.Drawing.Point(258, 91)
         Me.lblName.Name = "lblName"
         Me.lblName.Size = New System.Drawing.Size(100, 23)
         Me.lblName.TabIndex = 3
@@ -43,9 +43,9 @@ Partial Class dlgName
         '
         'lblCurrentName
         '
-        Me.lblCurrentName.Location = New System.Drawing.Point(255, 39)
+        Me.lblCurrentName.Location = New System.Drawing.Point(258, 45)
         Me.lblCurrentName.Name = "lblCurrentName"
-        Me.lblCurrentName.Size = New System.Drawing.Size(100, 23)
+        Me.lblCurrentName.Size = New System.Drawing.Size(100, 21)
         Me.lblCurrentName.TabIndex = 1
         Me.lblCurrentName.Text = "Current Name:"
         '
@@ -54,7 +54,7 @@ Partial Class dlgName
         Me.ucrInputNewName.AddQuotesIfUnrecognised = True
         Me.ucrInputNewName.IsMultiline = False
         Me.ucrInputNewName.IsReadOnly = False
-        Me.ucrInputNewName.Location = New System.Drawing.Point(257, 108)
+        Me.ucrInputNewName.Location = New System.Drawing.Point(258, 107)
         Me.ucrInputNewName.Name = "ucrInputNewName"
         Me.ucrInputNewName.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputNewName.TabIndex = 4
@@ -71,28 +71,29 @@ Partial Class dlgName
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 210)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 199)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 5
+        Me.ucrBase.TabIndex = 7
         '
         'ucrReceiverName
         '
         Me.ucrReceiverName.frmParent = Me
-        Me.ucrReceiverName.Location = New System.Drawing.Point(257, 57)
+        Me.ucrReceiverName.Location = New System.Drawing.Point(258, 60)
         Me.ucrReceiverName.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverName.Name = "ucrReceiverName"
         Me.ucrReceiverName.Selector = Nothing
         Me.ucrReceiverName.Size = New System.Drawing.Size(137, 21)
         Me.ucrReceiverName.TabIndex = 2
+        Me.ucrReceiverName.ucrSelector = Nothing
         '
         'lblVariableLabel
         '
         Me.lblVariableLabel.AutoSize = True
-        Me.lblVariableLabel.Location = New System.Drawing.Point(255, 141)
+        Me.lblVariableLabel.Location = New System.Drawing.Point(258, 139)
         Me.lblVariableLabel.Name = "lblVariableLabel"
         Me.lblVariableLabel.Size = New System.Drawing.Size(74, 13)
-        Me.lblVariableLabel.TabIndex = 6
+        Me.lblVariableLabel.TabIndex = 5
         Me.lblVariableLabel.Text = "Column Label:"
         '
         'ucrInputVariableLabel
@@ -100,16 +101,16 @@ Partial Class dlgName
         Me.ucrInputVariableLabel.AddQuotesIfUnrecognised = True
         Me.ucrInputVariableLabel.IsMultiline = False
         Me.ucrInputVariableLabel.IsReadOnly = False
-        Me.ucrInputVariableLabel.Location = New System.Drawing.Point(257, 159)
+        Me.ucrInputVariableLabel.Location = New System.Drawing.Point(258, 154)
         Me.ucrInputVariableLabel.Name = "ucrInputVariableLabel"
         Me.ucrInputVariableLabel.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputVariableLabel.TabIndex = 7
+        Me.ucrInputVariableLabel.TabIndex = 6
         '
         'dlgName
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(417, 263)
+        Me.ClientSize = New System.Drawing.Size(418, 256)
         Me.Controls.Add(Me.ucrInputVariableLabel)
         Me.Controls.Add(Me.lblVariableLabel)
         Me.Controls.Add(Me.ucrReceiverName)
