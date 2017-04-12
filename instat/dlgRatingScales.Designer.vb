@@ -25,15 +25,10 @@ Partial Class dlgRatingScales
         Me.lblOrderedFactor = New System.Windows.Forms.Label()
         Me.grpSort = New System.Windows.Forms.GroupBox()
         Me.rdoHighDescendingLikert = New System.Windows.Forms.RadioButton()
-        Me.rdoHighDescending = New System.Windows.Forms.RadioButton()
         Me.rdoLowDescendingLikert = New System.Windows.Forms.RadioButton()
-        Me.rdoLowDescending = New System.Windows.Forms.RadioButton()
         Me.rdoLowAscendingLikert = New System.Windows.Forms.RadioButton()
         Me.rdoNoneLikert = New System.Windows.Forms.RadioButton()
         Me.rdoHighAscendingLikert = New System.Windows.Forms.RadioButton()
-        Me.rdoHighAscending = New System.Windows.Forms.RadioButton()
-        Me.rdoNone = New System.Windows.Forms.RadioButton()
-        Me.rdoLowAscending = New System.Windows.Forms.RadioButton()
         Me.grpGraphType = New System.Windows.Forms.GroupBox()
         Me.lblNeutralLevel = New System.Windows.Forms.Label()
         Me.rdoStacked = New System.Windows.Forms.RadioButton()
@@ -43,7 +38,6 @@ Partial Class dlgRatingScales
         Me.ucrNudNeutralLevel = New instat.ucrNud()
         Me.ucrPnlGraphType = New instat.UcrPanel()
         Me.ucrChkFlip = New instat.ucrCheck()
-        Me.ucrPnlSjtStackFrq = New instat.UcrPanel()
         Me.ucrPnlSjpLikert = New instat.UcrPanel()
         Me.ucrReceiverWeights = New instat.ucrReceiverSingle()
         Me.ucrChkWeights = New instat.ucrCheck()
@@ -68,16 +62,10 @@ Partial Class dlgRatingScales
         'grpSort
         '
         Me.grpSort.Controls.Add(Me.rdoHighDescendingLikert)
-        Me.grpSort.Controls.Add(Me.rdoHighDescending)
         Me.grpSort.Controls.Add(Me.rdoLowDescendingLikert)
-        Me.grpSort.Controls.Add(Me.rdoLowDescending)
         Me.grpSort.Controls.Add(Me.rdoLowAscendingLikert)
         Me.grpSort.Controls.Add(Me.rdoNoneLikert)
         Me.grpSort.Controls.Add(Me.rdoHighAscendingLikert)
-        Me.grpSort.Controls.Add(Me.rdoHighAscending)
-        Me.grpSort.Controls.Add(Me.rdoNone)
-        Me.grpSort.Controls.Add(Me.rdoLowAscending)
-        Me.grpSort.Controls.Add(Me.ucrPnlSjtStackFrq)
         Me.grpSort.Controls.Add(Me.ucrPnlSjpLikert)
         Me.grpSort.Location = New System.Drawing.Point(295, 166)
         Me.grpSort.Name = "grpSort"
@@ -97,17 +85,6 @@ Partial Class dlgRatingScales
         Me.rdoHighDescendingLikert.Text = "High Descending"
         Me.rdoHighDescendingLikert.UseVisualStyleBackColor = True
         '
-        'rdoHighDescending
-        '
-        Me.rdoHighDescending.AutoSize = True
-        Me.rdoHighDescending.Location = New System.Drawing.Point(13, 115)
-        Me.rdoHighDescending.Name = "rdoHighDescending"
-        Me.rdoHighDescending.Size = New System.Drawing.Size(107, 17)
-        Me.rdoHighDescending.TabIndex = 30
-        Me.rdoHighDescending.TabStop = True
-        Me.rdoHighDescending.Text = "High Descending"
-        Me.rdoHighDescending.UseVisualStyleBackColor = True
-        '
         'rdoLowDescendingLikert
         '
         Me.rdoLowDescendingLikert.AutoSize = True
@@ -118,17 +95,6 @@ Partial Class dlgRatingScales
         Me.rdoLowDescendingLikert.TabStop = True
         Me.rdoLowDescendingLikert.Text = "LowDescending"
         Me.rdoLowDescendingLikert.UseVisualStyleBackColor = True
-        '
-        'rdoLowDescending
-        '
-        Me.rdoLowDescending.AutoSize = True
-        Me.rdoLowDescending.Location = New System.Drawing.Point(13, 67)
-        Me.rdoLowDescending.Name = "rdoLowDescending"
-        Me.rdoLowDescending.Size = New System.Drawing.Size(102, 17)
-        Me.rdoLowDescending.TabIndex = 7
-        Me.rdoLowDescending.TabStop = True
-        Me.rdoLowDescending.Text = "LowDescending"
-        Me.rdoLowDescending.UseVisualStyleBackColor = True
         '
         'rdoLowAscendingLikert
         '
@@ -162,39 +128,6 @@ Partial Class dlgRatingScales
         Me.rdoHighAscendingLikert.TabStop = True
         Me.rdoHighAscendingLikert.Text = "High Ascending"
         Me.rdoHighAscendingLikert.UseVisualStyleBackColor = True
-        '
-        'rdoHighAscending
-        '
-        Me.rdoHighAscending.AutoSize = True
-        Me.rdoHighAscending.Location = New System.Drawing.Point(13, 91)
-        Me.rdoHighAscending.Name = "rdoHighAscending"
-        Me.rdoHighAscending.Size = New System.Drawing.Size(100, 17)
-        Me.rdoHighAscending.TabIndex = 9
-        Me.rdoHighAscending.TabStop = True
-        Me.rdoHighAscending.Text = "High Ascending"
-        Me.rdoHighAscending.UseVisualStyleBackColor = True
-        '
-        'rdoNone
-        '
-        Me.rdoNone.AutoSize = True
-        Me.rdoNone.Location = New System.Drawing.Point(13, 19)
-        Me.rdoNone.Name = "rdoNone"
-        Me.rdoNone.Size = New System.Drawing.Size(51, 17)
-        Me.rdoNone.TabIndex = 2
-        Me.rdoNone.TabStop = True
-        Me.rdoNone.Text = "None"
-        Me.rdoNone.UseVisualStyleBackColor = True
-        '
-        'rdoLowAscending
-        '
-        Me.rdoLowAscending.AutoSize = True
-        Me.rdoLowAscending.Location = New System.Drawing.Point(13, 43)
-        Me.rdoLowAscending.Name = "rdoLowAscending"
-        Me.rdoLowAscending.Size = New System.Drawing.Size(95, 17)
-        Me.rdoLowAscending.TabIndex = 5
-        Me.rdoLowAscending.TabStop = True
-        Me.rdoLowAscending.Text = "LowAscending"
-        Me.rdoLowAscending.UseVisualStyleBackColor = True
         '
         'grpGraphType
         '
@@ -301,13 +234,6 @@ Partial Class dlgRatingScales
         Me.ucrChkFlip.Name = "ucrChkFlip"
         Me.ucrChkFlip.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkFlip.TabIndex = 5
-        '
-        'ucrPnlSjtStackFrq
-        '
-        Me.ucrPnlSjtStackFrq.Location = New System.Drawing.Point(7, 15)
-        Me.ucrPnlSjtStackFrq.Name = "ucrPnlSjtStackFrq"
-        Me.ucrPnlSjtStackFrq.Size = New System.Drawing.Size(126, 127)
-        Me.ucrPnlSjtStackFrq.TabIndex = 0
         '
         'ucrPnlSjpLikert
         '
@@ -425,15 +351,9 @@ Partial Class dlgRatingScales
     Friend WithEvents lblNeutralLevel As Label
     Friend WithEvents rdoHighDescendingLikert As RadioButton
     Friend WithEvents rdoNoneLikert As RadioButton
-    Friend WithEvents rdoHighDescending As RadioButton
-    Friend WithEvents rdoHighAscending As RadioButton
-    Friend WithEvents rdoLowDescending As RadioButton
-    Friend WithEvents rdoLowAscending As RadioButton
     Friend WithEvents rdoHighAscendingLikert As RadioButton
     Friend WithEvents rdoLowDescendingLikert As RadioButton
     Friend WithEvents rdoLowAscendingLikert As RadioButton
-    Friend WithEvents rdoNone As RadioButton
-    Friend WithEvents ucrPnlSjtStackFrq As UcrPanel
     Friend WithEvents ucrPnlSjpLikert As UcrPanel
     Friend WithEvents rdoGraph As RadioButton
     Friend WithEvents rdoTable As RadioButton
