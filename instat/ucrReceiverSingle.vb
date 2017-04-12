@@ -248,7 +248,7 @@ Public Class ucrReceiverSingle
         MyBase.UpdateControl(bReset)
     End Sub
 
-    Private Sub Selector_DataFrameChanged() Handles Selector.DataFrameChanged
+    Private Sub Selector_DataFrameChanged() Handles ucrSelector.DataFrameChanged
         CheckAutoFill()
     End Sub
 
