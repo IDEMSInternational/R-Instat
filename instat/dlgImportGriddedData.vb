@@ -74,23 +74,23 @@ Public Class dlgImportGriddedData
 
         ucrNudMinLon.SetParameter(New RParameter("X1", 6))
         ucrNudMinLon.SetMinMax(-180, 180)
-        ucrNudMinLon.DecimalPlaces = 2
-        ucrNudMinLon.Increment = 0.01
+        ucrNudMinLon.DecimalPlaces = 4
+        ucrNudMinLon.Increment = 0.0001
         ucrNudMinLon.SetLinkedDisplayControl(lblMinLon)
         ucrNudMaxLon.SetParameter(New RParameter("X2", 7))
         ucrNudMaxLon.SetMinMax(-180, 180)
-        ucrNudMaxLon.DecimalPlaces = 2
-        ucrNudMaxLon.Increment = 0.01
+        ucrNudMaxLon.DecimalPlaces = 4
+        ucrNudMaxLon.Increment = 0.0001
         ucrNudMaxLon.SetLinkedDisplayControl(lblMaxLon)
         ucrNudMinLat.SetParameter(New RParameter("Y1", 8))
         ucrNudMinLat.SetMinMax(-50, 50)
-        ucrNudMinLat.DecimalPlaces = 2
-        ucrNudMinLat.Increment = 0.01
+        ucrNudMinLat.DecimalPlaces = 4
+        ucrNudMinLat.Increment = 0.0001
         ucrNudMinLat.SetLinkedDisplayControl(lblMinLat)
         ucrNudMaxLat.SetParameter(New RParameter("Y2", 9))
         ucrNudMaxLat.SetMinMax(-50, 50)
-        ucrNudMaxLat.DecimalPlaces = 2
-        ucrNudMaxLat.Increment = 0.01
+        ucrNudMaxLat.DecimalPlaces = 4
+        ucrNudMaxLat.Increment = 0.0001
         ucrNudMaxLat.SetLinkedDisplayControl(lblMaxLat)
     End Sub
 
