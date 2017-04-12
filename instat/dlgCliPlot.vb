@@ -13,53 +13,41 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 Imports instat.Translations
+
 Public Class dlgCliPlot
+    Private bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
 
     Private Sub dlgCliPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strClimateObject & "$cliplot")
-        ucrBase.clsRsyntax.iCallType = 0
-    End Sub
-
-
-
-    Private Sub chkStationName_Leave(sender As Object, e As EventArgs) Handles chkStationName.Leave
-        If chkStationName.Checked Then
-            ucrBase.clsRsyntax.AddParameter("station_name", chkStationName.Checked.ToString().ToUpper())
+        If bFirstLoad Then
+            InitialiseDialog()
+            bFirstLoad = False
         End If
-
-    End Sub
-
-    Private Sub chkRemoveNA_Leave(sender As Object, e As EventArgs) Handles chkRemoveNA.Leave
-        If chkRemoveNA.Checked Then
-            ucrBase.clsRsyntax.AddParameter("na.rm", chkRemoveNA.Checked.ToString().ToUpper())
+        If bReset Then
+            SetDefaults()
         End If
-
+        SetRCodeForControls(bReset)
+        bReset = False
+        ReopenDialog()
+        TestOkEnabled()
     End Sub
 
-    Private Sub chkByfactor_Leave(sender As Object, e As EventArgs) Handles chkByfactor.Leave
-        If chkByfactor.Checked Then
-            ucrBase.clsRsyntax.AddParameter("by_factor", chkByfactor.Checked.ToString().ToUpper())
-        End If
+    Private Sub InitialiseDialog()
+        'ucrChks
+        ucrChkStationName.SetText("Station Name")
+        ucrChkStationName.SetParameter(New RParameter("station_name"))
+        ucrChkRemoveNA.SetText("Remove Missing Values")
+        ucrChkRemoveNA.SetParameter(New RParameter("na.rm"))
+        ucrChkInheritAES.SetText("Inherit AES")
+        ucrChkInheritAES.SetParameter(New RParameter("inherit.aes"))
+        ucrChkByFactor.SetText("By Factor")
+        ucrChkByFactor.SetParameter(New RParameter("by_factor"))
 
-    End Sub
-
-    Private Sub chkInheritAES_Leave(sender As Object, e As EventArgs) Handles chkInheritAES.Leave
-        If chkInheritAES.Checked Then
-            ucrBase.clsRsyntax.AddParameter("inherit.aes", chkInheritAES.Checked.ToString().ToUpper())
-        End If
-
-    End Sub
-
-    Private Sub nudSize_Leave(sender As Object, e As EventArgs) Handles nudSize.Leave
-        ucrBase.clsRsyntax.AddParameter("size", nudSize.Value.ToString())
-
-    End Sub
-
-    Private Sub nudLineType_Leave(sender As Object, e As EventArgs) Handles nudLineType.Leave
-        ucrBase.clsRsyntax.AddParameter("linetype", nudLineType.Value.ToString())
+        'ucrNud
+        ucrNudLineType.SetParameter(New RParameter("linetype"))
+        ucrNudSize.SetParameter(New RParameter("size"))
 
     End Sub
 
@@ -69,8 +57,6 @@ Public Class dlgCliPlot
 
     Private Sub txtFactorVariable_Leave(sender As Object, e As EventArgs) Handles txtFactorVariable.Leave
         ucrBase.clsRsyntax.AddParameter("factor_var", Chr(34) & txtFactorVariable.Text.ToString() & Chr(34))
-
-
     End Sub
 
     Private Sub txtXAxis_Leave(sender As Object, e As EventArgs) Handles txtXAxis.Leave
@@ -124,6 +110,36 @@ Public Class dlgCliPlot
 
     Private Sub txtVariableName_TextTe(sender As Object, e As EventArgs) Handles txtVariableName.Leave
         ucrBase.clsRsyntax.AddParameter("variable.name", Chr(34) & txtVariableName.Text.ToString() & Chr(34))
+    End Sub
+
+    Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
+
+        'Define the default RFunction
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strClimateObject & "$cliplot")
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+    End Sub
+
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
+    Private Sub ReopenDialog()
+    End Sub
+
+    Private Sub TestOkEnabled()
 
     End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
+    End Sub
+
+    '    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ...
+    '        TestOkEnabled()
+    '    End Sub
+
 End Class
