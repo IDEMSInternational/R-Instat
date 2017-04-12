@@ -92,6 +92,7 @@ Public Class sdgOneWayFrequencies
         dctHorizontalPositionLabel.Add("Outward", Chr(34) & "outward" & Chr(34))
         ucrInputHorizontalLabels.SetItems(dctHorizontalPositionLabel)
         ucrInputHorizontalLabels.SetRDefault(Chr(34) & "center" & Chr(34))
+        ucrInputHorizontalLabels.bUpdateRCodeFromControl = False
 
         'Graph Only
         ucrInputVerticalLabels.SetParameter(New RParameter("vjust", 12))
@@ -104,6 +105,7 @@ Public Class sdgOneWayFrequencies
         dctVerticalPositionLabel.Add("Outward", Chr(34) & "outward" & Chr(34))
         ucrInputVerticalLabels.SetItems(dctVerticalPositionLabel)
         ucrInputVerticalLabels.SetRDefault(Chr(34) & "bottom" & Chr(34))
+        ucrInputVerticalLabels.bUpdateRCodeFromControl = False
 
         'Graph Only
         ucrSaveGraph.SetPrefix("one_way_freq")
