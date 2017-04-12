@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgImportGriddedData
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class dlgImportGriddedData
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblMinLat = New System.Windows.Forms.Label()
         Me.lblMaxLat = New System.Windows.Forms.Label()
@@ -42,12 +42,17 @@ Partial Class dlgImportGriddedData
         Me.lblExport = New System.Windows.Forms.Label()
         Me.ucrInputLocDataName = New instat.ucrInputTextBox()
         Me.lblLocationData = New System.Windows.Forms.Label()
+        Me.grpGetArea = New System.Windows.Forms.GroupBox()
+        Me.rdoPoint = New System.Windows.Forms.RadioButton()
+        Me.rdoArea = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlGetArea = New instat.UcrPanel()
+        Me.grpGetArea.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblMinLat
         '
         Me.lblMinLat.AutoSize = True
-        Me.lblMinLat.Location = New System.Drawing.Point(11, 150)
+        Me.lblMinLat.Location = New System.Drawing.Point(11, 203)
         Me.lblMinLat.Name = "lblMinLat"
         Me.lblMinLat.Size = New System.Drawing.Size(89, 13)
         Me.lblMinLat.TabIndex = 10
@@ -56,7 +61,7 @@ Partial Class dlgImportGriddedData
         'lblMaxLat
         '
         Me.lblMaxLat.AutoSize = True
-        Me.lblMaxLat.Location = New System.Drawing.Point(178, 150)
+        Me.lblMaxLat.Location = New System.Drawing.Point(178, 203)
         Me.lblMaxLat.Name = "lblMaxLat"
         Me.lblMaxLat.Size = New System.Drawing.Size(92, 13)
         Me.lblMaxLat.TabIndex = 12
@@ -65,7 +70,7 @@ Partial Class dlgImportGriddedData
         'lblMinLon
         '
         Me.lblMinLon.AutoSize = True
-        Me.lblMinLon.Location = New System.Drawing.Point(11, 118)
+        Me.lblMinLon.Location = New System.Drawing.Point(11, 171)
         Me.lblMinLon.Name = "lblMinLon"
         Me.lblMinLon.Size = New System.Drawing.Size(98, 13)
         Me.lblMinLon.TabIndex = 6
@@ -74,7 +79,7 @@ Partial Class dlgImportGriddedData
         'lblMaxLon
         '
         Me.lblMaxLon.AutoSize = True
-        Me.lblMaxLon.Location = New System.Drawing.Point(178, 118)
+        Me.lblMaxLon.Location = New System.Drawing.Point(178, 171)
         Me.lblMaxLon.Name = "lblMaxLon"
         Me.lblMaxLon.Size = New System.Drawing.Size(101, 13)
         Me.lblMaxLon.TabIndex = 8
@@ -139,7 +144,7 @@ Partial Class dlgImportGriddedData
         '
         Me.ucrNudMaxLat.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxLat.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMaxLat.Location = New System.Drawing.Point(285, 146)
+        Me.ucrNudMaxLat.Location = New System.Drawing.Point(285, 199)
         Me.ucrNudMaxLat.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMaxLat.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxLat.Name = "ucrNudMaxLat"
@@ -151,7 +156,7 @@ Partial Class dlgImportGriddedData
         '
         Me.ucrNudMaxLon.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxLon.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMaxLon.Location = New System.Drawing.Point(285, 114)
+        Me.ucrNudMaxLon.Location = New System.Drawing.Point(285, 167)
         Me.ucrNudMaxLon.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMaxLon.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxLon.Name = "ucrNudMaxLon"
@@ -163,7 +168,7 @@ Partial Class dlgImportGriddedData
         '
         Me.ucrNudMinLon.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMinLon.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMinLon.Location = New System.Drawing.Point(116, 114)
+        Me.ucrNudMinLon.Location = New System.Drawing.Point(116, 167)
         Me.ucrNudMinLon.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMinLon.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMinLon.Name = "ucrNudMinLon"
@@ -175,7 +180,7 @@ Partial Class dlgImportGriddedData
         '
         Me.ucrNudMinLat.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMinLat.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMinLat.Location = New System.Drawing.Point(116, 146)
+        Me.ucrNudMinLat.Location = New System.Drawing.Point(116, 199)
         Me.ucrNudMinLat.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMinLat.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMinLat.Name = "ucrNudMinLat"
@@ -185,7 +190,7 @@ Partial Class dlgImportGriddedData
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(11, 206)
+        Me.ucrBase.Location = New System.Drawing.Point(11, 259)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(416, 52)
         Me.ucrBase.TabIndex = 14
@@ -195,14 +200,14 @@ Partial Class dlgImportGriddedData
         Me.ucrInputExportFile.AddQuotesIfUnrecognised = True
         Me.ucrInputExportFile.IsMultiline = False
         Me.ucrInputExportFile.IsReadOnly = False
-        Me.ucrInputExportFile.Location = New System.Drawing.Point(132, 171)
+        Me.ucrInputExportFile.Location = New System.Drawing.Point(132, 224)
         Me.ucrInputExportFile.Name = "ucrInputExportFile"
         Me.ucrInputExportFile.Size = New System.Drawing.Size(227, 21)
         Me.ucrInputExportFile.TabIndex = 16
         '
         'cmdBrowse
         '
-        Me.cmdBrowse.Location = New System.Drawing.Point(365, 169)
+        Me.cmdBrowse.Location = New System.Drawing.Point(365, 222)
         Me.cmdBrowse.Name = "cmdBrowse"
         Me.cmdBrowse.Size = New System.Drawing.Size(62, 23)
         Me.cmdBrowse.TabIndex = 17
@@ -212,7 +217,7 @@ Partial Class dlgImportGriddedData
         'lblExport
         '
         Me.lblExport.AutoSize = True
-        Me.lblExport.Location = New System.Drawing.Point(10, 175)
+        Me.lblExport.Location = New System.Drawing.Point(10, 228)
         Me.lblExport.Name = "lblExport"
         Me.lblExport.Size = New System.Drawing.Size(116, 13)
         Me.lblExport.TabIndex = 15
@@ -237,11 +242,53 @@ Partial Class dlgImportGriddedData
         Me.lblLocationData.TabIndex = 18
         Me.lblLocationData.Text = "Location Data Name:"
         '
+        'grpGetArea
+        '
+        Me.grpGetArea.Controls.Add(Me.rdoPoint)
+        Me.grpGetArea.Controls.Add(Me.rdoArea)
+        Me.grpGetArea.Controls.Add(Me.ucrPnlGetArea)
+        Me.grpGetArea.Location = New System.Drawing.Point(14, 118)
+        Me.grpGetArea.Name = "grpGetArea"
+        Me.grpGetArea.Size = New System.Drawing.Size(256, 47)
+        Me.grpGetArea.TabIndex = 20
+        Me.grpGetArea.TabStop = False
+        Me.grpGetArea.Text = "Download Type"
+        '
+        'rdoPoint
+        '
+        Me.rdoPoint.AutoSize = True
+        Me.rdoPoint.Location = New System.Drawing.Point(120, 19)
+        Me.rdoPoint.Name = "rdoPoint"
+        Me.rdoPoint.Size = New System.Drawing.Size(49, 17)
+        Me.rdoPoint.TabIndex = 2
+        Me.rdoPoint.TabStop = True
+        Me.rdoPoint.Text = "Point"
+        Me.rdoPoint.UseVisualStyleBackColor = True
+        '
+        'rdoArea
+        '
+        Me.rdoArea.AutoSize = True
+        Me.rdoArea.Location = New System.Drawing.Point(10, 19)
+        Me.rdoArea.Name = "rdoArea"
+        Me.rdoArea.Size = New System.Drawing.Size(47, 17)
+        Me.rdoArea.TabIndex = 1
+        Me.rdoArea.TabStop = True
+        Me.rdoArea.Text = "Area"
+        Me.rdoArea.UseVisualStyleBackColor = True
+        '
+        'ucrPnlGetArea
+        '
+        Me.ucrPnlGetArea.Location = New System.Drawing.Point(7, 13)
+        Me.ucrPnlGetArea.Name = "ucrPnlGetArea"
+        Me.ucrPnlGetArea.Size = New System.Drawing.Size(232, 25)
+        Me.ucrPnlGetArea.TabIndex = 0
+        '
         'dlgImportGriddedData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(452, 270)
+        Me.ClientSize = New System.Drawing.Size(452, 313)
+        Me.Controls.Add(Me.grpGetArea)
         Me.Controls.Add(Me.ucrInputLocDataName)
         Me.Controls.Add(Me.lblLocationData)
         Me.Controls.Add(Me.ucrInputExportFile)
@@ -268,6 +315,8 @@ Partial Class dlgImportGriddedData
         Me.Name = "dlgImportGriddedData"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Import Gridded Data"
+        Me.grpGetArea.ResumeLayout(False)
+        Me.grpGetArea.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -293,4 +342,8 @@ Partial Class dlgImportGriddedData
     Friend WithEvents lblExport As Label
     Friend WithEvents ucrInputLocDataName As ucrInputTextBox
     Friend WithEvents lblLocationData As Label
+    Friend WithEvents grpGetArea As GroupBox
+    Friend WithEvents rdoPoint As RadioButton
+    Friend WithEvents rdoArea As RadioButton
+    Friend WithEvents ucrPnlGetArea As UcrPanel
 End Class

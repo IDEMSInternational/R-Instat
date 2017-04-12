@@ -63,24 +63,29 @@ Public Class dlgImportGriddedData
         ucrInputLocDataName.SetParameter(New RParameter("location_data_name", 3))
         ucrInputLocDataName.SetParameterIncludeArgumentName(False)
 
-
         ucrInputExportFile.SetParameter(New RParameter("path", 4))
-        ucrNudMinLon.SetParameter(New RParameter("X1", 5))
+
+        ucrPnlGetArea.SetParameter(New RParameter("get_area_point", 5))
+        ucrPnlGetArea.AddRadioButton(rdoArea, Chr(34) & "area" & Chr(34))
+        ucrPnlGetArea.AddRadioButton(rdoPoint, Chr(34) & "point" & Chr(34))
+        ucrPnlGetArea.SetRDefault(Chr(34) & "area" & Chr(34))
+
+        ucrNudMinLon.SetParameter(New RParameter("X1", 6))
         ucrNudMinLon.SetMinMax(-180, 180)
         ucrNudMinLon.DecimalPlaces = 2
         ucrNudMinLon.Increment = 0.01
         ucrNudMinLon.SetLinkedDisplayControl(lblMinLon)
-        ucrNudMaxLon.SetParameter(New RParameter("X2", 6))
+        ucrNudMaxLon.SetParameter(New RParameter("X2", 7))
         ucrNudMaxLon.SetMinMax(-180, 180)
         ucrNudMaxLon.DecimalPlaces = 2
         ucrNudMaxLon.Increment = 0.01
         ucrNudMaxLon.SetLinkedDisplayControl(lblMaxLon)
-        ucrNudMinLat.SetParameter(New RParameter("Y1", 7))
+        ucrNudMinLat.SetParameter(New RParameter("Y1", 8))
         ucrNudMinLat.SetMinMax(-50, 50)
         ucrNudMinLat.DecimalPlaces = 2
         ucrNudMinLat.Increment = 0.01
         ucrNudMinLat.SetLinkedDisplayControl(lblMinLat)
-        ucrNudMaxLat.SetParameter(New RParameter("Y2", 8))
+        ucrNudMaxLat.SetParameter(New RParameter("Y2", 9))
         ucrNudMaxLat.SetMinMax(-50, 50)
         ucrNudMaxLat.DecimalPlaces = 2
         ucrNudMaxLat.Increment = 0.01
