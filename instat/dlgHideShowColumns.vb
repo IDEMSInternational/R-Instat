@@ -64,6 +64,7 @@ Public Class dlgHideShowColumns
 
     Private Sub SetDefaults()
         Dim clsHiddenColumns = New RFunction
+        ucrSelectorForHiddenColumns.Reset()
         SetHiddenColumnsInReceiver()
         clsHiddenColumns.AddParameter("col_names", "c()")
         clsHiddenColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_hidden_columns")
