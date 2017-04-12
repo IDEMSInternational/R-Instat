@@ -91,7 +91,6 @@ Public Class dlgRecodeNumeric
     End Sub
 
     Private Sub ReopenDialog()
-
     End Sub
 
     Private Sub SetDefaultColumn()
@@ -138,7 +137,6 @@ Public Class dlgRecodeNumeric
 
     Private Sub ValidateBreakPointLabelCount()
         Dim iTemp As Integer
-
         If Not ucrMultipleNumericRecode.IsEmpty() AndAlso (Not ucrMultipleLabels.IsEmpty()) Then
             If ucrMultipleNumericRecode.clsRList.clsParameters.Count > 1 AndAlso ucrMultipleLabels.clsRList.clsParameters.Count <> ucrMultipleNumericRecode.clsRList.clsParameters.Count - 1 Then
                 MsgBox("There must be one less label than the number of break points. Ok will not be enabled until this is resolved.", vbOKOnly, "Validation Error")
