@@ -307,7 +307,7 @@ open_NetCDF <- function(nc_data, latitude_col_name, longitude_col_name, default_
 }
 
   
-import_from_iri <- function(download_from, data_file, path, X1, X2,Y1,Y2, get_area){
+import_from_iri <- function(download_from, data_file, path, X1, X2,Y1,Y2, get_area_point){
   if(path == ""){
     gaugelocdir = getwd()
   }
@@ -441,12 +441,13 @@ import_from_iri <- function(download_from, data_file, path, X1, X2,Y1,Y2, get_ar
   
   prexyaddress = paste(prexyaddress, extension, sep="/")
   #we need to add time range to get the data
-  if(get_area){
+  if(get_area_point == "area"){
     xystuff<-paste("X", X1, X2, "RANGEEDGES/Y", Y1, Y2, "RANGEEDGES", sep = "/")
   }
-  else{
+  else if(get_area_point == "point"){
     xystuff<-paste("X", X1, "VALUES/Y", Y1, "VALUES", sep = "/")
   }
+  else stop("Unrecognised download type.")
   
   postxyaddress<-"ngridtable+table-+skipanyNaN+4+-table+.csv" 
   address<-paste(prexyaddress,xystuff,postxyaddress,sep="/")
