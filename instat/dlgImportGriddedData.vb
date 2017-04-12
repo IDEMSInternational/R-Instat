@@ -70,6 +70,8 @@ Public Class dlgImportGriddedData
         ucrPnlGetArea.AddRadioButton(rdoPoint, Chr(34) & "point" & Chr(34))
         ucrPnlGetArea.SetRDefault(Chr(34) & "area" & Chr(34))
 
+        ucrPnlGetArea.AddToLinkedControls({ucrNudMaxLat, ucrNudMaxLon}, {rdoArea}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
         ucrNudMinLon.SetParameter(New RParameter("X1", 6))
         ucrNudMinLon.SetMinMax(-180, 180)
         ucrNudMinLon.DecimalPlaces = 2
@@ -140,6 +142,16 @@ Public Class dlgImportGriddedData
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputMainDataName.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub pnlControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlGetArea.ControlContentsChanged
+        If rdoArea.Checked Then
+            lblMinLat.Text = "Minimum Latitude"
+            lblMinLon.Text = "Minimum Longitude"
+        ElseIf rdoPoint.Checked Then
+            lblMinLat.Text = "Latitude"
+            lblMinLon.Text = "Longitude"
+        End If
     End Sub
 
     Private Sub nudControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputDownloadFrom.ControlContentsChanged
