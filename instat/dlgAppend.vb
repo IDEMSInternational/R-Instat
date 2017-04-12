@@ -38,17 +38,11 @@ Public Class dlgAppend
 
         ' ucrReceiver
         ucrReceiverAppendDataframe.SetParameter(New RParameter("x", 0))
-        ucrReceiverAppendDataframe.GetParameter().bIncludeArgumentName = False
         ucrReceiverAppendDataframe.SetParameterIsRFunction()
+        ucrReceiverAppendDataframe.GetParameter().bIncludeArgumentName = False
         ucrReceiverAppendDataframe.Selector = ucrSelectorDataframes
         ucrReceiverAppendDataframe.SetMeAsReceiver()
         ucrReceiverAppendDataframe.SetItemType("dataframe")
-
-        ' ucrSave
-        ucrSaveGraph.SetIsTextBox()
-        ucrSaveGraph.SetSaveTypeAsDataFrame()
-        ucrSaveGraph.SetLabelText("New Data Frame Name:")
-        ucrSaveGraph.SetPrefix("Append")
 
         'chkID
         SetParameter({ucrChkIncludeIDColumn, ucrInputIDColName}, New RParameter(".id", 1))
@@ -57,6 +51,12 @@ Public Class dlgAppend
         ucrChkIncludeIDColumn.AddToLinkedControls(ucrLinked:=ucrInputIDColName, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputIDColName.bAddRemoveParameter = False
         ucrInputIDColName.SetLinkedDisplayControl(lblIDColName)
+
+        ' ucrSave
+        ucrSaveGraph.SetIsTextBox()
+        ucrSaveGraph.SetSaveTypeAsDataFrame()
+        ucrSaveGraph.SetLabelText("New Data Frame Name:")
+        ucrSaveGraph.SetPrefix("Append")
     End Sub
 
     Private Sub SetDefaults()
@@ -67,7 +67,7 @@ Public Class dlgAppend
 
         clsBindRows.SetRCommand("bind_rows")
         clsBindRows.AddParameter(".id", Chr(34) & "id" & Chr(34))
-        clsBindRows.SetAssignTo(strTemp:="Append", strTempDataframe:="Append")
+        clsBindRows.SetAssignTo(ucrSaveGraph.GetText(), strTempDataframe:=ucrSaveGraph.GetText())
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsBindRows)
     End Sub
