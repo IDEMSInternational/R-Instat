@@ -25,6 +25,33 @@ Public Class sdgOneVarCompareModels
         autoTranslate(Me)
     End Sub
 
+    Public Sub InitialiseControls()
+        'ucrSaveGOF
+        ucrSaveGOF.SetName("GOF")
+        ucrSaveGOF.SetSaveTypeAsModel() ' or graph?
+        ucrSaveGOF.SetCheckBoxText("Save Fit")
+        ucrSaveGOF.SetIsComboBox()
+        ucrSaveGOF.SetAssignToIfUncheckedValue("last_model")
+
+        'ucrInputChiSquareBreaks
+        ucrChkInputChiSquareBreakpoints.SetText("Input Chi-Square Breakpoints")
+
+        'ucrChkPlots
+        ucrChkCDF.SetText("CDF")
+        ucrChkDensity.SetText("Density")
+        ucrChkPP.SetText("PP")
+        ucrChkQQ.SetText("QQ")
+
+        'ucrSavePlot
+        ucrSavePlots.SetPrefix("plots")
+        ucrSavePlots.SetSaveTypeAsModel()
+        ucrSavePlots.SetCheckBoxText("Save Plot")
+        ucrSavePlots.SetIsComboBox()
+        ucrSavePlots.SetAssignToIfUncheckedValue("last_model")
+    End Sub
+
+
+
     Public Sub InitialiseDialog()
         clsRcdfcompFunction.SetRCommand("cdfcomp")
         clsRdenscompFunction.SetRCommand("denscomp")
@@ -34,17 +61,12 @@ Public Class sdgOneVarCompareModels
     End Sub
 
     Public Sub SetDefaults()
-        chkCDF.Checked = True
-        chkDensity.Checked = False
-        chkPP.Checked = False
-        chkQQ.Checked = False
+        ucrChkCDF.Checked = True
+        ucrChkDensity.Checked = False
+        ucrChkPP.Checked = False
+        ucrChkQQ.Checked = False
         chkSaveChi.Checked = True
-        chkSaveObjects.Checked = True
-        ucrSavePlots.chkSaveGraph.Checked = False
         ucrSavePlots.Enabled = False ' disabled for now
-        ucrSavePlots.ucrInputGraphName.SetPrefix("plots")
-        ucrObjectName.SetValidationTypeAsRVariable()
-        ucrObjectName.SetName("gof")
         ucrDisplayChiData.Reset()
         If dlgOneVarCompareModels.ucrSelectorOneVarCompModels.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
             ucrDisplayChiData.SetName(dlgOneVarCompareModels.ucrSelectorOneVarCompModels.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_ChiSquare")
@@ -88,31 +110,22 @@ Public Class sdgOneVarCompareModels
         ucrRecs = ucrNewReceiver
     End Sub
 
-    Private Sub chkSaveObjects_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveObjects.CheckedChanged
-        If Not chkSaveObjects.Checked Then
-            ucrObjectName.Visible = False
-        Else
-            ucrObjectName.Visible = True
-        End If
-    End Sub
-
-
     Public Sub CreateGraphs()
         Dim strTemp As String = ""
 
-        If chkCDF.Checked Then
+        If ucrChkCDF.Checked Then
             clsRcdfcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
             frmMain.clsRLink.RunScript(clsRcdfcompFunction.ToScript(), 2)
         End If
-        If chkPP.Checked Then
+        If ucrChkPP.Checked Then
             clsRppcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
             frmMain.clsRLink.RunScript(clsRppcompFunction.ToScript(), 2)
         End If
-        If chkQQ.Checked Then
+        If ucrChkQQ.Checked Then
             clsRqqcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
             frmMain.clsRLink.RunScript(clsRqqcompFunction.ToScript(), 2)
         End If
-        If chkDensity.Checked Then
+        If ucrChkDensity.Checked Then
             clsRdenscompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
             frmMain.clsRLink.RunScript(clsRdenscompFunction.ToScript(), 2)
         End If
@@ -121,17 +134,17 @@ Public Class sdgOneVarCompareModels
             clsRAsDataFrame.ToScript(strTemp)
             frmMain.clsRLink.RunScript(strTemp, 0)
         End If
-        If chkInputBreakpoints.Checked Then
+        If ucrChkInputChiSquareBreakpoints.Checked Then
             frmMain.clsRLink.RunScript(clsOperatorForBreaks.ToScript(), 2)
         End If
     End Sub
 
-    Private Sub chkInputBreakpoints_Checked_Changed(sender As Object, e As EventArgs) Handles chkInputBreakpoints.CheckedChanged
+    Private Sub chkInputBreakpoints_Checked_Changed(sender As Object, e As EventArgs)
         DisplayChiBreaks()
     End Sub
 
     Public Sub DisplayChiBreaks()
-        If chkInputBreakpoints.Checked Then
+        If ucrChkInputChiSquareBreakpoints.Checked Then
             clsOperatorForBreaks.SetOperation("$")
             clsOperatorForBreaks.AddParameter(iPosition:=0, clsRFunctionParameter:=clsModel)
             clsOperatorForBreaks.AddParameter(strParameterValue:="chisqbreaks")
@@ -148,7 +161,7 @@ Public Class sdgOneVarCompareModels
 
     Public Function TestOkEnabled() As Boolean
         Dim bOkEnabled As Boolean
-        If (chkSaveObjects.Checked AndAlso Not ucrObjectName.IsEmpty OrElse Not chkSaveObjects.Checked) AndAlso (chkSaveChi.Checked AndAlso Not ucrDisplayChiData.IsEmpty OrElse Not chkSaveChi.Checked) Then
+        If (ucrSaveGOF.IsComplete()) AndAlso (chkSaveChi.Checked AndAlso Not ucrDisplayChiData.IsEmpty OrElse Not chkSaveChi.Checked) Then
             bOkEnabled = True
         Else
             bOkEnabled = False
@@ -157,3 +170,31 @@ Public Class sdgOneVarCompareModels
     End Function
 
 End Class
+
+
+' if in main dialog:
+' How does this change here?
+
+'Private clsCDF As New RFunction
+
+'Public Sub SetRCodeForControls(bReset As Boolean)
+'    ucrreceiverinDLG.SetRCode(clsCDF, bReset)
+'End Sub
+
+'Private Sub SetDefaults()
+'Dim clsCDFDefault As New RFunction
+'ucrChkSetSeed.Checked = False
+'clsCDFDefault.SetRCommand("cdfcomp")
+
+'clsCDF = clsCDFDefault.Clone
+'End Sub
+
+'    Private Sub InitialiseDialog()
+'ucrReceiverinDLG.SetParameter(New RParameter ("ft"))
+'    End Sub
+
+'Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk'
+'If ucrChkCDF.Checked Then 
+'frmMain.clsRLink.RunScript(clsCDF.ToScript, strComment:="")
+'End If
+'End Sub
