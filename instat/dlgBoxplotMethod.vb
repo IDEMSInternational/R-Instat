@@ -16,22 +16,43 @@
 
 Imports instat.Translations
 Public Class dlgBoxplotMethod
+    Private bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
+
     Private Sub ucrBase_Load(sender As Object, e As EventArgs) Handles ucrBase.Load
         autoTranslate(Me)
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strClimateObject & "$boxplot_method")
+        If bFirstLoad Then
+            InitialiseDialog()
+            bFirstLoad = False
+        End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        ReopenDialog()
+        TestOkEnabled()
+    End Sub
+
+    Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.iCallType = 0
+
+        'ucrChk
+        ucrChkConvert.SetText("Convert")
+        ucrChkConvert.SetParameter(New RParameter("convert"))
+        'ucrChk
+        ucrChkConvert.SetText("Horizontal")
+        ucrChkHorizontal.SetParameter(New RParameter("horizontal"))
+        'ucrNud
+        ucrNudWhiskerLty.SetParameter(New RParameter("whisklty"))
     End Sub
 
-    Private Sub chkConvert_CheckedChanged(sender As Object, e As EventArgs) Handles chkConvert.CheckedChanged
-        If chkConvert.Checked Then
-            ucrBase.clsRsyntax.AddParameter("convert", chkConvert.Checked.ToString().ToUpper())
-        End If
-    End Sub
-    Private Sub chkHorizontal_CheckedChanged(sender As Object, e As EventArgs) Handles chkHorizontal.CheckedChanged
-        If chkHorizontal.Checked Then
-            ucrBase.clsRsyntax.AddParameter("horizontal", chkHorizontal.Checked.ToString().ToUpper())
-        End If
+    Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
 
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strClimateObject & "$boxplot_method")
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
     End Sub
 
     Private Sub txtDataPeriodLabel_Leave(sender As Object, e As EventArgs) Handles txtDataPeriodLabel.Leave
@@ -58,11 +79,23 @@ Public Class dlgBoxplotMethod
         ucrBase.clsRsyntax.AddParameter("fill_col", Chr(34) & txtFillColour.Text.ToString() & Chr(34))
     End Sub
 
-    Private Sub nudWhisklty_Leave(sender As Object, e As EventArgs) Handles nudWhisklty.Leave
-        ucrBase.clsRsyntax.AddParameter("whisklty", nudWhisklty.Value.ToString())
-    End Sub
-
     Private Sub txtTitle_Leave(sender As Object, e As EventArgs) Handles txtTitle.Leave
         ucrBase.clsRsyntax.AddParameter("title", Chr(34) & txtTitle.Text.ToString() & Chr(34))
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOKEnabled()
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
+    Private Sub TestOKEnabled()
+    End Sub
+
+    Private Sub ReOpenDialog()
     End Sub
 End Class
