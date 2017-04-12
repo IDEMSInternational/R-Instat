@@ -22,7 +22,7 @@ Public Class ucrCore
     Protected clsRCode As RCodeStructure
     'Parameter that this control manages
     'Either by editing its value or adding/removing it from an RCodeStructure
-    Protected clsParameter As RParameter
+    Public clsParameter As RParameter
 
     'Default value of the control
     'No specific type since it can be interpreted different by each control type
@@ -401,5 +401,22 @@ Public Class ucrCore
 
     Protected Overridable Sub SetToDefaultState()
         SetToValue(objDefaultState)
+    End Sub
+
+    'This should be used very cautiously, only if you want to change the parameter name and keep all other properties the same.
+    'Setting a new parameter is usually a much safer option.
+    Public Overridable Sub ChangeParameterName(strNewName As String, Optional bClearConditions As Boolean = True)
+        If clsParameter IsNot Nothing Then
+            clsParameter.SetArgumentName(strNewName)
+        End If
+        If bClearConditions Then
+            dctConditions.Clear()
+        End If
+    End Sub
+
+    Public Sub SetParameterValue(strNewValue As String)
+        If clsParameter IsNot Nothing Then
+            clsParameter.SetArgumentValue(strNewValue)
+        End If
     End Sub
 End Class
