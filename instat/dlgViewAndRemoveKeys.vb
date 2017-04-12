@@ -39,42 +39,41 @@ Public Class dlgViewAndRemoveKeys
         ucrSelectorKeys.Reset()
     End Sub
 
-    Private Sub SetDefaults()
-        'reset
-        ucrSelectorKeys.Reset()
+    Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 505
+        ucrBase.clsRsyntax.iCallType = 2
 
+        'Selector
+        ucrSelectorKeys.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorKeys.SetParameterIsString()
+
+        'Receiver
+        ucrReceiverSelectedKey.SetParameter(New RParameter("key_name", 1))
+        ucrReceiverSelectedKey.SetParameterIsString()
+        ucrReceiverSelectedKey.Selector = ucrSelectorKeys
+        ucrReceiverSelectedKey.SetMeAsReceiver()
+        ucrReceiverSelectedKey.SetItemType("key")
+
+        'Checkbox
+        ucrChkRemoveKey.SetText("Remove Key")
+        ucrChkRemoveKey.AddFunctionNamesCondition(True, frmMain.clsRLink.strInstatDataObject & "$remove_key")
+        ucrChkRemoveKey.AddFunctionNamesCondition(False, frmMain.clsRLink.strInstatDataObject & "$get_keys")
+    End Sub
+
+    Private Sub SetDefaults()
         clsGetKey = New RFunction
         clsRemoveKey = New RFunction
+
+        ucrSelectorKeys.Reset()
+
         ' Set default RFunction as the base function
         clsGetKey.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_keys")
         clsRemoveKey.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_key")
         ucrBase.clsRsyntax.SetBaseRFunction(clsGetKey)
-
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-    End Sub
-
-    Private Sub InitialiseDialog()
-
-        ucrBase.iHelpTopicID = 505
-        ucrBase.clsRsyntax.iCallType = 2
-
-        'Setting Receiver
-        ucrReceiverSelectedKey.Selector = ucrSelectorKeys
-        ucrReceiverSelectedKey.SetMeAsReceiver()
-        ucrReceiverSelectedKey.SetItemType("key")
-        ucrReceiverSelectedKey.SetParameter(New RParameter("key_name", 1))
-        ucrReceiverSelectedKey.SetParameterIsString()
-
-        ucrSelectorKeys.SetParameter(New RParameter("data_name", 0))
-        ucrSelectorKeys.SetParameterIsString()
-
-        ucrChkRemoveKey.AddFunctionNamesCondition(True, frmMain.clsRLink.strInstatDataObject & "$remove_key")
-        ucrChkRemoveKey.AddFunctionNamesCondition(False, frmMain.clsRLink.strInstatDataObject & "$get_keys")
-        ucrChkRemoveKey.SetText("Remove Key")
-
     End Sub
 
     Private Sub TestOKEnabled()
