@@ -41,10 +41,10 @@ Partial Class dlgOpenNetCDF
         Me.lblLocDataNamePrefix.AutoSize = True
         Me.lblLocDataNamePrefix.Location = New System.Drawing.Point(10, 86)
         Me.lblLocDataNamePrefix.Name = "lblLocDataNamePrefix"
-        Me.lblLocDataNamePrefix.Size = New System.Drawing.Size(134, 13)
+        Me.lblLocDataNamePrefix.Size = New System.Drawing.Size(105, 13)
         Me.lblLocDataNamePrefix.TabIndex = 5
-        Me.lblLocDataNamePrefix.Tag = "Lat_Lon_Data_Name_Prefix:"
-        Me.lblLocDataNamePrefix.Text = "Lat/Lon Data Name Prefix:"
+        Me.lblLocDataNamePrefix.Tag = "Lat_Lon_Data_Name:"
+        Me.lblLocDataNamePrefix.Text = "Lat/Lon Data Name:"
         '
         'cmdOpenDataSet
         '
@@ -78,19 +78,19 @@ Partial Class dlgOpenNetCDF
         'lblLatColName
         '
         Me.lblLatColName.AutoSize = True
-        Me.lblLatColName.Location = New System.Drawing.Point(43, 136)
+        Me.lblLatColName.Location = New System.Drawing.Point(10, 118)
         Me.lblLatColName.Name = "lblLatColName"
         Me.lblLatColName.Size = New System.Drawing.Size(117, 13)
-        Me.lblLatColName.TabIndex = 11
+        Me.lblLatColName.TabIndex = 7
         Me.lblLatColName.Text = "Latitude Column Name:"
         '
         'lblLonColName
         '
         Me.lblLonColName.AutoSize = True
-        Me.lblLonColName.Location = New System.Drawing.Point(43, 170)
+        Me.lblLonColName.Location = New System.Drawing.Point(10, 152)
         Me.lblLonColName.Name = "lblLonColName"
         Me.lblLonColName.Size = New System.Drawing.Size(126, 13)
-        Me.lblLonColName.TabIndex = 12
+        Me.lblLonColName.TabIndex = 9
         Me.lblLonColName.Text = "Longitude Column Name:"
         '
         'ucrInputLonColName
@@ -98,7 +98,7 @@ Partial Class dlgOpenNetCDF
         Me.ucrInputLonColName.AddQuotesIfUnrecognised = True
         Me.ucrInputLonColName.IsMultiline = False
         Me.ucrInputLonColName.IsReadOnly = False
-        Me.ucrInputLonColName.Location = New System.Drawing.Point(187, 166)
+        Me.ucrInputLonColName.Location = New System.Drawing.Point(150, 148)
         Me.ucrInputLonColName.Name = "ucrInputLonColName"
         Me.ucrInputLonColName.Size = New System.Drawing.Size(142, 21)
         Me.ucrInputLonColName.TabIndex = 10
@@ -108,10 +108,10 @@ Partial Class dlgOpenNetCDF
         Me.ucrInputLatColName.AddQuotesIfUnrecognised = True
         Me.ucrInputLatColName.IsMultiline = False
         Me.ucrInputLatColName.IsReadOnly = False
-        Me.ucrInputLatColName.Location = New System.Drawing.Point(187, 132)
+        Me.ucrInputLatColName.Location = New System.Drawing.Point(150, 114)
         Me.ucrInputLatColName.Name = "ucrInputLatColName"
         Me.ucrInputLatColName.Size = New System.Drawing.Size(142, 21)
-        Me.ucrInputLatColName.TabIndex = 9
+        Me.ucrInputLatColName.TabIndex = 8
         '
         'ucrInputLocDataName
         '
@@ -145,16 +145,16 @@ Partial Class dlgOpenNetCDF
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(3, 199)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 181)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 7
+        Me.ucrBase.TabIndex = 11
         '
         'dlgOpenNetCDF
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 255)
+        Me.ClientSize = New System.Drawing.Size(420, 236)
         Me.Controls.Add(Me.lblLonColName)
         Me.Controls.Add(Me.lblLatColName)
         Me.Controls.Add(Me.ucrInputLonColName)
