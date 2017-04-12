@@ -126,10 +126,11 @@ data_object$set("public", "set_data", function(new_data, messages=TRUE, check_na
 )
 
 data_object$set("public", "set_meta", function(new_meta) {
+  meta_data_copy <- new_meta
   self$clear_metadata()
-  if(!is.list(new_meta)) stop("new_meta must be of type: list")
-  for(name in names(new_meta)) {
-    self$append_to_metadata(name, new_meta[[name]])
+  if(!is.list(meta_data_copy)) stop("new_meta must be of type: list")
+  for(name in names(meta_data_copy)) {
+    self$append_to_metadata(name, meta_data_copy[[name]])
   }
   self$metadata_changed <- TRUE
   self$append_to_changes(list(Set_property, "meta data"))
@@ -209,7 +210,7 @@ data_object$set("public", "set_keys", function(new_keys) {
 #    # }
 #   #}
 #   for(col in colnames(self$get_data_frame())) {
-#     if(!self$is_variables_metadata(display_decimal_label, col)) self$append_to_variables_metadata(col, display_decimal_label, get_default_decimal_places(self$get_columns_from_data(col, use_current_filter = FALSE)))
+#     if(!self$is_variables_metadata(signif_figures_label, col)) self$append_to_variables_metadata(col, signif_figures_label, get_default_significant_figures(self$get_columns_from_data(col, use_current_filter = FALSE)))
 #     #self$append_to_variables_metadata(col, data_type_label, class(private$data[[col]]))
 #     self$append_to_variables_metadata(col, name_label, col)
 #   }
@@ -273,7 +274,7 @@ data_object$set("public", "get_data_frame", function(convert_to_character = FALS
     }
     
     if(convert_to_character) {
-      decimal_places = self$get_variables_metadata(property = display_decimal_label, column = names(out))
+      decimal_places = self$get_variables_metadata(property = signif_figures_label, column = names(out))
       decimal_places[is.na(decimal_places)] <- 0
       return(convert_to_character_matrix(out, TRUE, decimal_places))
     }
@@ -317,6 +318,8 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
     #RLink crashes with bind_rows for data frames with ~50+ columns
     out <- rbind.fill(out)
     out <- as.data.frame(out)
+    if(all(c(name_label, label_label) %in% names(out))) out <- out[ ,c(c(name_label, label_label), setdiff(names(out), c(name_label, label_label)))]
+    else if(name_label %in% names(out)) out <- out[ ,c(name_label, setdiff(names(out), name_label))]
     row.names(out) <- names(self$get_data_frame(use_current_filter = FALSE))
     if(data_type != "all") {
       if(data_type == "numeric") {
@@ -342,7 +345,7 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
         else out <- out[, property]
       }
     }
-    
+    if(is.data.frame(out)) row.names(out) <- NULL
     #TODO get convert_to_character_matrix to work on vectors
     if(convert_to_character && missing(property)) return(convert_to_character_matrix(out, FALSE))
     else return(out)
@@ -467,7 +470,7 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
     self$data_changed <- TRUE
     self$append_to_variables_metadata(curr_col_name, is_hidden_label, hidden)
     self$append_to_variables_metadata(curr_col_name, name_label, curr_col_name)
-    self$append_to_variables_metadata(curr_col_name, display_decimal_label, get_default_decimal_places(self$get_columns_from_data(curr_col_name, use_current_filter = FALSE)))
+    self$append_to_variables_metadata(curr_col_name, signif_figures_label, get_default_significant_figures(self$get_columns_from_data(curr_col_name, use_current_filter = FALSE)))
     self$variables_metadata_changed <- TRUE
   }
   if(!replaced) {
@@ -540,8 +543,8 @@ data_object$set("public", "rename_column_in_data", function(curr_col_name = "", 
   
   else {
     if(sum(names(curr_data) == curr_col_name) > 1) {
-      warning(paste0("Multiple columns have name: '", curr_col_name,"'. All such columns will be 
-                     renamed."))
+      # Should never happen since column names must be unique
+      warning(paste0("Multiple columns have name: '", curr_col_name,"'. All such columns will be renamed."))
     }
     # Need to use private$data here because changing names of data field
     names(private$data)[names(curr_data) == curr_col_name] <- new_col_name
@@ -802,6 +805,7 @@ data_object$set("public", "is_variables_metadata", function(str, col, return_vec
 
 data_object$set("public", "add_defaults_meta", function() {
   if(!self$is_metadata(is_calculated_label)) self$append_to_metadata(is_calculated_label, FALSE)
+  if(!self$is_metadata(label_label)) self$append_to_metadata(label_label, "")
 }
 )
 
@@ -821,7 +825,13 @@ data_object$set("public", "add_defaults_variables_metadata", function() {
       if(!self$is_variables_metadata(is_hidden_label, column)) self$append_to_variables_metadata(column, property = is_hidden_label, new_val = FALSE)
     }
     self$append_to_variables_metadata(column, name_label, column)
-    self$append_to_variables_metadata(column, display_decimal_label, get_default_decimal_places(self$get_columns_from_data(column, use_current_filter = FALSE)))
+    if(!self$is_variables_metadata(label_label, column)) {
+      self$append_to_variables_metadata(column, label_label, "")
+    }
+    if(!self$is_variables_metadata(scientific_label, column)) {
+      self$append_to_variables_metadata(column, scientific_label, FALSE)
+    }
+    self$append_to_variables_metadata(column, signif_figures_label, get_default_significant_figures(self$get_columns_from_data(column, use_current_filter = FALSE)))
   }
 }
 )
@@ -1022,7 +1032,7 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
     else if(to_type == "character") {
       self$add_columns_to_data(col_name = col_name, col_data = as.character(curr_col))
     }
-    self$append_to_variables_metadata(property = display_decimal_label, col_names = col_name, new_val = get_default_decimal_places(curr_col))
+    self$append_to_variables_metadata(property = signif_figures_label, col_names = col_name, new_val = get_default_significant_figures(curr_col))
   }
   self$data_changed <- TRUE
   self$variables_metadata_changed <- TRUE
@@ -1111,15 +1121,17 @@ data_object$set("public", "get_column_names", function(as_list = FALSE, include 
   col_names = names(self$get_data_frame(use_current_filter = FALSE))
   var_metadata = self$get_variables_metadata()
   out = c()
+  i = 1
   for(col in col_names) {
     if(length(include) > 0 || length(exclude) > 0) {
-      curr_var_metadata = var_metadata[col, ]
+      curr_var_metadata = var_metadata[i, ]
       if(all(c(names(include), names(exclude)) %in% names(curr_var_metadata)) && all(sapply(names(include), function(prop) curr_var_metadata[[prop]] %in% include[[prop]]))
          && all(sapply(names(exclude), function(prop) !curr_var_metadata[[prop]] %in% exclude[[prop]]))) {
         out <- c(out, col)
       }
     }
     else out <- c(out, col)
+    i = i + 1
   }
   if(length(excluded_items) > 0) {
     ex_ind = which(out %in% excluded_items)
@@ -1430,7 +1442,7 @@ data_object$set("public", "data_clone", function(include_objects = TRUE, include
   else new_filters <- list()
   if(include_calculations) new_calculations <- lapply(private$calculations, function(x) x$data_clone())
   else new_calculations <- list()
-  
+
   ret <- data_object$new(data = private$data, data_name = self$get_metadata(data_name_label), filters = new_filters, objects = new_objects, calculations = new_calculations, keys = private$keys, keep_attributes = include_metadata)
   if(include_logs) ret$set_changes(private$changes)
   else ret$set_changes(list())
@@ -1787,7 +1799,7 @@ data_object$set("public","set_contrasts_of_factor", function(col_name, new_contr
   }
 )
 #This method gets a date column and extracts part of the information such as year, month, week, weekday etc(depending on which parameters are set) and creates their respective new column(s)
-data_object$set("public","split_date", function(data_name, col_name = "", week = FALSE, month_val = FALSE, month_abbr = FALSE, month_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE, year = FALSE, day = FALSE, day_in_month = FALSE, day_in_year = FALSE, leap_year = FALSE, day_in_year_366 = FALSE, dekade = FALSE, pentad = FALSE) {
+data_object$set("public","split_date", function(col_name = "", week = FALSE, month_val = FALSE, month_abbr = FALSE, month_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE, year = FALSE, day = FALSE, day_in_month = FALSE, day_in_year = FALSE, leap_year = FALSE, day_in_year_366 = FALSE, dekade = FALSE, pentad = FALSE) {
   col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
   if(!is.Date(col_data)) stop("This column must be a date or time!")
   if(day) {
@@ -1935,26 +1947,65 @@ data_object$set("public","set_climatic_types", function(types) {
 )
 
 #Method for creating inventory plot
-data_object$set("public","make_inventory_plot", function(year, doy, col_name, add_to_data = FALSE, coord_flip = FALSE, threshold, facets) {
-  curr_data <- self$get_data_frame()
-  col_data <- self$get_columns_from_data(col_name)
-  if(!is.numeric(col_data)) stop("The rainfall column should be numeric")
-  recode <- ifelse(is.na(col_data), "missing", ifelse(col_data>threshold, "rain", "dry"))
-  recode <- as.factor(recode)
-  new_col <- next_default_item(prefix = "recode", existing_names = self$get_column_names(), include_index = FALSE)
-  curr_data[[new_col]] <- recode
-  if(add_to_data) {
-    self$add_columns_to_data(col_name = new_col, col_data = recode)
+data_object$set("public","make_inventory_plot", function(date_col, station_col = c(), elements_cols, add_to_data = FALSE, coord_flip = FALSE, graph_title = "Inventory plot") {
+  if(!self$get_metadata(is_climatic_label))stop("Define data as climatic.")
+  if(!is.Date(self$get_columns_from_data(date_col))) stop(paste(date_col, " must be of type date/time."))#this will not work!!!
+  if(missing(date_col)||missing(elements_cols))stop("Date and elements columns must be specified.")
+  if(!all(elements_cols %in% self$get_column_names())) {
+    stop("Not all elements columns found in the data")
   }
-  
-  g <- ggplot(data = curr_data, mapping = aes_(x = as.name(year), y = as.name(doy), colour = as.name(new_col), group = as.name(year))) + geom_point() + xlab(year) + ylab(col_name) + labs(color="Recode")
-  if(!missing(facets)) {
-    g <- g + facet_wrap(as.name(facets))
+  #add year and doy columns if missing in data
+  if(is.null(self$get_climatic_column_name(year_label))){
+    self$split_date(col_name = date_col, year = TRUE)
+    self$set_climatic_types(types = c(year = "year")) #calling year column by name is just a temporary fix.
+  }
+  if(is.null(self$get_climatic_column_name(doy_label))){
+    self$split_date(col_name = date_col, day_in_year = TRUE)
+    self$set_climatic_types(types = c(doy = "day_in_year"))
+  }
+  year_col_name = self$get_climatic_column_name(year_label)
+  doy_col_name = self$get_climatic_column_name(doy_label)
+
+  curr_data <- self$get_data_frame()
+  #ggplot fails to get column names hence the need to rename
+  colnames(curr_data)[colnames(curr_data) == year_col_name] <- "year_column" 
+  colnames(curr_data)[colnames(curr_data) == doy_col_name] <- "doy_column"
+  if(length(elements_cols)!=1){
+    if(!is.null(station_col)){
+      col_data <- self$get_data_frame(stack_data = TRUE, measure.vars = elements_cols, id.vars=c(date_col, station_col, year_col_name, doy_col_name))
+    }
+    else{
+      col_data <- self$get_data_frame(stack_data = TRUE, measure.vars = elements_cols, id.vars=c(date_col, year_col_name, doy_col_name))
+    }
+    colnames(col_data)[colnames(col_data) == year_col_name] <- "year_column"
+    colnames(col_data)[colnames(col_data) == doy_col_name] <- "doy_column"
+    recode <- ifelse(is.na(col_data$value), "missing", "present")
+    recode <- as.factor(recode)
+    new_col <- next_default_item(prefix = "recode", existing_names = names(col_data), include_index = FALSE)
+    col_data[[new_col]] <- recode
+    g <- ggplot(data = col_data, mapping = aes(x = year_column, y = doy_column , colour = recode, group = year_column)) + geom_point() + xlab("Year") + ylab("DOY") + labs(color="Recode")
+    if(!is.null(station_col)){
+      g <- g + facet_wrap(as.formula(paste0(as.name(station_col),"~ variable")))
+    }
+    else{
+      g <- g + facet_wrap(~variable)
+    }
+  }
+  else{
+    col_data <- self$get_columns_from_data(elements_cols)
+    recode <- ifelse(is.na(col_data),"missing", "present")
+    recode <- as.factor(recode)
+    new_col <- next_default_item(prefix = "recode", existing_names = self$get_column_names(), include_index = FALSE)
+    curr_data[[new_col]] <- recode
+    g <- ggplot(data = curr_data, mapping = aes(x = year_column, y = doy_column , colour = recode, group = year_column)) + geom_point() + xlab("Year") + ylab("DOY") + labs(color="Recode")
+    if(!is.null(station_col)){
+      g <- g + facet_wrap(as.name(station_col))
+    }
   }
   if(coord_flip) {
     g <- g + coord_flip()
   }
-  return(g)
+  return(g+ggtitle(graph_title) + theme(plot.title = element_text(hjust = 0.5)))
 }
 )
 
@@ -2130,16 +2181,15 @@ all_calculated_corruption_column_types <- c(corruption_award_year_label,
 
 corruption_ctry_iso2_label="iso2"
 corruption_ctry_iso3_label="iso3"
-corruption_ctry_wb_ppp_label="wb_ppp"
 corruption_ctry_ss_2009_label="ss_2009"
 corruption_ctry_ss_2011_label="ss_2011"
 corruption_ctry_ss_2013_label="ss_2013"
 corruption_ctry_ss_2015_label="ss_2015"
 corruption_ctry_small_state_label="small_state"
 
-all_primary_corruption_country_level_column_types <- c(corruption_ctry_iso2_label,
+all_primary_corruption_country_level_column_types <- c(corruption_country_label,
+                                                       corruption_ctry_iso2_label,
                                                        corruption_ctry_iso3_label,
-                                                       corruption_ctry_wb_ppp_label,
                                                        corruption_ctry_ss_2009_label,
                                                        corruption_ctry_ss_2011_label,
                                                        corruption_ctry_ss_2013_label,
@@ -2151,9 +2201,10 @@ all_primary_corruption_country_level_column_types <- c(corruption_ctry_iso2_labe
 corruption_type_label = "Corruption_Type"
 corruption_output_label = "Is_Corruption_Output"
 corruption_red_flag_label = "Is_Corruption_Red_Flag"
+corruption_index_label = "Is_Corruption_Index"
 
 # Data frame metadata for corruption dataframes
-corruption_data_label = "Corruption_Data"
+corruption_data_label = "Is_Corruption_Data"
 corruption_contract_level_label = "Contract Level"
 corruption_country_level_label = "Country Level"
 
@@ -2168,6 +2219,7 @@ data_object$set("public","define_corruption_outputs", function(output_columns = 
     stop("Cannot define corruption outputs when data frame is not defined as corruption data.")
   }
   self$append_to_variables_metadata(output_columns, corruption_output_label, TRUE)
+  self$append_to_variables_metadata(output_columns, corruption_index_label, TRUE)
   other_cols <- self$get_column_names()[!self$get_column_names() %in% output_columns]
   self$append_to_variables_metadata(other_cols, corruption_output_label, FALSE)
 }
@@ -2182,8 +2234,9 @@ data_object$set("public","define_red_flags", function(red_flags = c()) {
   if(!self$is_metadata(corruption_data_label)) {
     stop("Cannot define corruption red flags when data frame is not defined as corruption data.")
   }
-  self$append_to_variables_metadata(output_columns, corruption_red_flag_label, TRUE)
-  other_cols <- self$get_column_names()[!self$get_column_names() %in% output_columns]
+  self$append_to_variables_metadata(red_flags, corruption_red_flag_label, TRUE)
+  self$append_to_variables_metadata(red_flags, corruption_index_label, TRUE)
+  other_cols <- self$get_column_names()[!self$get_column_names() %in% red_flags]
   self$append_to_variables_metadata(other_cols, corruption_red_flag_label, FALSE)
 }
 )
@@ -2200,17 +2253,17 @@ instat_object$set("public","define_as_corruption", function(data_name, primary_t
 instat_object$set("public","define_as_corruption_country_level_data", function(data_name, contract_level_data_name, types = c(), auto_generate = TRUE) {
   self$append_to_dataframe_metadata(data_name, corruption_data_label, corruption_country_level_label)
   self$get_data_objects(data_name)$define_as_corruption_country_level_data(types, auto_generate)
-  contract_level_country_name <- self$get_corruption_column_name(data_name, corruption_country_label)
-  country_level_country_name <- self$get_corruption_column_name(contract_level_data_name, corruption_country_label)
+  contract_level_country_name <- self$get_corruption_column_name(contract_level_data_name, corruption_country_label)
+  country_level_country_name <- self$get_corruption_column_name(data_name, corruption_country_label)
   if(contract_level_country_name == "" || country_level_country_name == "") stop("country column must be defined in the contract level data and country level data.")
   link_pairs <- country_level_country_name
   names(link_pairs) <- contract_level_country_name
-  self$add_link(from_data_name = contract_level_data_name, to_data_frame = data_name, link_pairs = link_pairs, type = keyed_link_label)
+  self$add_link(from_data_frame = contract_level_data_name, to_data_frame = data_name, link_pairs = link_pairs, type = keyed_link_label)
 }
 )
 
-data_object$set("public","define_as_corruption_country_level_data", function(contract_level_data_name, types = c(), auto_generate = TRUE) {
-  invisible(sapply(names(primary_types), function(x) self$append_to_variables_metadata(primary_types[[x]], corruption_type_label, x)))
+data_object$set("public","define_as_corruption_country_level_data", function(types = c(), auto_generate = TRUE) {
+  invisible(sapply(names(types), function(x) self$append_to_variables_metadata(types[[x]], corruption_type_label, x)))
 }
 )
 
@@ -2226,6 +2279,7 @@ instat_object$set("public","get_corruption_column_name", function(data_name, typ
 
 data_object$set("public","get_corruption_column_name", function(type) {
   if(self$is_corruption_type_present(type)) {
+    print("yes")
     var_metadata <- self$get_variables_metadata()
     col_name <- var_metadata[!is.na(var_metadata[[corruption_type_label]]) & var_metadata[[corruption_type_label]] == type, name_label]
     if(length(col_name >= 1)) return(col_name)
@@ -2686,7 +2740,7 @@ data_object$set("public","generate_all_bids_trimmed", function() {
 }
 )
 
-standard_country_names <- function(country) {
+standardise_country_names <- function(country) {
   country_names <- country
   country_names[country_names == "Antigua and Bar"] <- "Antigua and Barbuda"
   country_names[country_names == "Bosnia and Herz"] <- "Bosnia and Herzegovina"
@@ -2721,14 +2775,14 @@ standard_country_names <- function(country) {
   return(country_names)
 }
 
-instat_object$set("public","standard_country_names", function(data_name, country_columns = c()) {
-  self$get_data_objects(data_name)$standard_country_names(country_columns)
+instat_object$set("public","standardise_country_names", function(data_name, country_columns = c()) {
+  self$get_data_objects(data_name)$standardise_country_names(country_columns)
 }
 )
 
-data_object$set("public","standard_country_names", function(country_columns = c()) {
+data_object$set("public","standardise_country_names", function(country_columns = c()) {
   for(col_name in country_columns) {
-    corrected_col <- standard_country_names(self$get_columns_from_data(col_name))
+    corrected_col <- standardise_country_names(self$get_columns_from_data(col_name))
     new_col_name <- next_default_item(paste(col_name, "standardised", sep = "_"), self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(new_col_name, corrected_col)
     type <- self$get_variables_metadata(column = col_name, property = corruption_type_label)
@@ -2744,6 +2798,19 @@ data_object$set("public","standard_country_names", function(country_columns = c(
         self$append_to_variables_metadata(new_col_name, "label", "Winner country name - standardised")
       }
     }
+  }
+}
+)
+
+data_object$set("public", "get_climatic_column_name", function(col_name) {
+  if(!self$get_metadata(is_climatic_label))stop("Define data as climatic.")
+  if(col_name %in% self$get_variables_metadata()$Climatic_Type){
+    new_data = subset(self$get_variables_metadata(), Climatic_Type==col_name, select = Name)
+    return(as.character(new_data))
+  }
+  else{
+    warning(paste(col_name, " column cannot be found in the data."))
+    return()
   }
 }
 )
