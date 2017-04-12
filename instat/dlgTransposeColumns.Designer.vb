@@ -85,7 +85,7 @@ Partial Class dlgTransposeColumns
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 284)
+        Me.ClientSize = New System.Drawing.Size(416, 281)
         Me.Controls.Add(Me.ucrChkNameNewColumns)
         Me.Controls.Add(Me.ucrNewDataframe)
         Me.Controls.Add(Me.ucrReceiverColumsToTranspose)
