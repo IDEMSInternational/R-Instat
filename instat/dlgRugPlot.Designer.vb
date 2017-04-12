@@ -22,7 +22,6 @@ Partial Class dlgRugPlot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ucrSaveRugPlot = New instat.ucrSaveGraph()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.cmdRugPlotOptions = New System.Windows.Forms.Button()
         Me.ucrRugPlotSelector = New instat.ucrSelectorByDataFrameAddRemove()
@@ -32,14 +31,8 @@ Partial Class dlgRugPlot
         Me.lblFactorOptional = New System.Windows.Forms.Label()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.lblXVariable = New System.Windows.Forms.Label()
+        Me.ucrSaveGraph = New instat.ucrSave()
         Me.SuspendLayout()
-        '
-        'ucrSaveRugPlot
-        '
-        Me.ucrSaveRugPlot.Location = New System.Drawing.Point(10, 264)
-        Me.ucrSaveRugPlot.Name = "ucrSaveRugPlot"
-        Me.ucrSaveRugPlot.Size = New System.Drawing.Size(265, 20)
-        Me.ucrSaveRugPlot.TabIndex = 18
         '
         'cmdOptions
         '
@@ -73,9 +66,9 @@ Partial Class dlgRugPlot
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 290)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 308)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(410, 58)
         Me.ucrBase.TabIndex = 17
         '
         'ucrVariablesAsFactorForRugPlot
@@ -88,6 +81,7 @@ Partial Class dlgRugPlot
         '
         'ucrFactorOptionalReceiver
         '
+        Me.ucrFactorOptionalReceiver.frmParent = Me
         Me.ucrFactorOptionalReceiver.Location = New System.Drawing.Point(273, 238)
         Me.ucrFactorOptionalReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFactorOptionalReceiver.Name = "ucrFactorOptionalReceiver"
@@ -107,6 +101,7 @@ Partial Class dlgRugPlot
         '
         'ucrReceiverX
         '
+        Me.ucrReceiverX.frmParent = Me
         Me.ucrReceiverX.Location = New System.Drawing.Point(273, 197)
         Me.ucrReceiverX.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverX.Name = "ucrReceiverX"
@@ -124,17 +119,24 @@ Partial Class dlgRugPlot
         Me.lblXVariable.Tag = "X_Variable:"
         Me.lblXVariable.Text = "X Variable:"
         '
+        'ucrSaveGraph
+        '
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(13, 278)
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(258, 24)
+        Me.ucrSaveGraph.TabIndex = 24
+        '
         'dlgRugPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 349)
+        Me.ClientSize = New System.Drawing.Size(433, 364)
+        Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrVariablesAsFactorForRugPlot)
         Me.Controls.Add(Me.ucrFactorOptionalReceiver)
         Me.Controls.Add(Me.lblFactorOptional)
         Me.Controls.Add(Me.ucrReceiverX)
         Me.Controls.Add(Me.lblXVariable)
-        Me.Controls.Add(Me.ucrSaveRugPlot)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.cmdRugPlotOptions)
         Me.Controls.Add(Me.ucrRugPlotSelector)
@@ -149,7 +151,6 @@ Partial Class dlgRugPlot
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents ucrSaveRugPlot As ucrSaveGraph
     Friend WithEvents cmdOptions As Button
     Friend WithEvents cmdRugPlotOptions As Button
     Friend WithEvents ucrRugPlotSelector As ucrSelectorByDataFrameAddRemove
@@ -159,4 +160,5 @@ Partial Class dlgRugPlot
     Friend WithEvents lblFactorOptional As Label
     Friend WithEvents ucrReceiverX As ucrReceiverSingle
     Friend WithEvents lblXVariable As Label
+    Friend WithEvents ucrSaveGraph As ucrSave
 End Class
