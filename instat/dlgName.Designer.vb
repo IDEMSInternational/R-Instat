@@ -28,6 +28,8 @@ Partial Class dlgName
         Me.ucrSelectVariables = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverName = New instat.ucrReceiverSingle()
+        Me.lblVariableLabel = New System.Windows.Forms.Label()
+        Me.ucrInputVariableLabel = New instat.ucrInputTextBox()
         Me.SuspendLayout()
         '
         'lblName
@@ -49,19 +51,16 @@ Partial Class dlgName
         '
         'ucrInputNewName
         '
-        Me.ucrInputNewName.bAddRemoveParameter = True
-        Me.ucrInputNewName.bChangeParameterValue = True
+        Me.ucrInputNewName.AddQuotesIfUnrecognised = True
         Me.ucrInputNewName.IsMultiline = False
         Me.ucrInputNewName.IsReadOnly = False
-        Me.ucrInputNewName.Location = New System.Drawing.Point(257, 107)
+        Me.ucrInputNewName.Location = New System.Drawing.Point(257, 108)
         Me.ucrInputNewName.Name = "ucrInputNewName"
         Me.ucrInputNewName.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputNewName.TabIndex = 4
         '
         'ucrSelectVariables
         '
-        Me.ucrSelectVariables.bAddRemoveParameter = True
-        Me.ucrSelectVariables.bChangeParameterValue = True
         Me.ucrSelectVariables.bShowHiddenColumns = False
         Me.ucrSelectVariables.bUseCurrentFilter = True
         Me.ucrSelectVariables.Location = New System.Drawing.Point(10, 10)
@@ -79,21 +78,40 @@ Partial Class dlgName
         '
         'ucrReceiverName
         '
-        Me.ucrReceiverName.bAddRemoveParameter = True
-        Me.ucrReceiverName.bChangeParameterValue = True
         Me.ucrReceiverName.frmParent = Me
         Me.ucrReceiverName.Location = New System.Drawing.Point(257, 57)
         Me.ucrReceiverName.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverName.Name = "ucrReceiverName"
         Me.ucrReceiverName.Selector = Nothing
-        Me.ucrReceiverName.Size = New System.Drawing.Size(137, 20)
+        Me.ucrReceiverName.Size = New System.Drawing.Size(137, 21)
         Me.ucrReceiverName.TabIndex = 2
+        '
+        'lblVariableLabel
+        '
+        Me.lblVariableLabel.AutoSize = True
+        Me.lblVariableLabel.Location = New System.Drawing.Point(255, 141)
+        Me.lblVariableLabel.Name = "lblVariableLabel"
+        Me.lblVariableLabel.Size = New System.Drawing.Size(74, 13)
+        Me.lblVariableLabel.TabIndex = 6
+        Me.lblVariableLabel.Text = "Column Label:"
+        '
+        'ucrInputVariableLabel
+        '
+        Me.ucrInputVariableLabel.AddQuotesIfUnrecognised = True
+        Me.ucrInputVariableLabel.IsMultiline = False
+        Me.ucrInputVariableLabel.IsReadOnly = False
+        Me.ucrInputVariableLabel.Location = New System.Drawing.Point(257, 159)
+        Me.ucrInputVariableLabel.Name = "ucrInputVariableLabel"
+        Me.ucrInputVariableLabel.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputVariableLabel.TabIndex = 7
         '
         'dlgName
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(417, 263)
+        Me.Controls.Add(Me.ucrInputVariableLabel)
+        Me.Controls.Add(Me.lblVariableLabel)
         Me.Controls.Add(Me.ucrReceiverName)
         Me.Controls.Add(Me.ucrInputNewName)
         Me.Controls.Add(Me.lblCurrentName)
@@ -108,6 +126,7 @@ Partial Class dlgName
         Me.Tag = "Rename_Data_Column"
         Me.Text = "Rename Column"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents ucrReceiverName As ucrReceiverSingle
@@ -116,4 +135,6 @@ Partial Class dlgName
     Friend WithEvents ucrSelectVariables As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblCurrentName As Label
     Friend WithEvents ucrInputNewName As ucrInputTextBox
+    Friend WithEvents ucrInputVariableLabel As ucrInputTextBox
+    Friend WithEvents lblVariableLabel As Label
 End Class

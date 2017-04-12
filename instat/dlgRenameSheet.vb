@@ -48,6 +48,7 @@ Public Class dlgRenameSheet
         ucrDataFrameToRename.SetParameter(New RParameter("data_name"))
         ucrDataFrameToRename.SetParameterIsString()
 
+        ucrInputLabel.SetParameter(New RParameter("label"))
     End Sub
 
     ' check how changing dataframes affects it
