@@ -1253,8 +1253,8 @@ instat_object$set("public", "has_database_connection", function() {
 }
 )
 
-instat_object$set("public", "database_connect", function(dbname, user, host, port, drv = MySQL(), password) {
-  #password <- getPass(paste0(username, " password:"))
+instat_object$set("public", "database_connect", function(dbname, user, host, port, drv = MySQL()) {
+  password <- getPass(paste0(user, " password:"))
   out <- NULL
   out <- dbConnect(drv = drv, dbname = dbname, user = user, password = password, host = host, port = port)
   if(!is.null(out)) {
