@@ -232,13 +232,12 @@ open_NetCDF <- function(nc_data, latitude_col_name, longitude_col_name, default_
   lat_names = c("lat", "latitude", "LAT", "Lat", "LATITUDE")
   lon_names = c("lon", "longitude", "LON", "Lon", "LONGITUDE")
   time_names = c("time", "TIME", "Time", "period", "Period", "PERIOD")
-  if (latitude_col_name != ""){
+  if (str_trim(latitude_col_name) != ""){
     lat_names <- c(lat_names, latitude_col_name)
   }
-  if (longitude_col_name != ""){
+  if (str_trim(longitude_col_name) != ""){
     lon_names <- c(lon_names, longitude_col_name)
   }
-  
   lat_in <- which(lat_lon_names %in% lat_names)
   lat_found <- (length(lat_in) == 1)
   if(lat_found) {
