@@ -57,7 +57,6 @@ Public Class dlgOpenNetCDF
         ucrInputFilePath.SetRCode(clsRCDF, bReset)
         ucrInputLatColName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrInputLonColName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        'ucrCheckDefaultLocNames.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub SetDefaults()
@@ -70,9 +69,6 @@ Public Class dlgOpenNetCDF
         ucrInputFilePath.SetName("")
         clsRDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_NetCDF")
         clsRDefaultFunction.AddParameter("nc_data", clsRFunctionParameter:=clsRCDF)
-        'clsRDefaultFunction.AddParameter("default_names", "TRUE")
-        'clsRDefaultFunction.AddParameter("data_names", clsRFunctionParameter:=clsRDatanames)
-
         ucrBase.clsRsyntax.SetBaseRFunction(clsRDefaultFunction)
     End Sub
 
@@ -81,21 +77,13 @@ Public Class dlgOpenNetCDF
         ucrInputLocDataName.SetDefaultTypeAsDataFrame()
         ucrInputDataName.SetValidationTypeAsRVariable()
         ucrInputLocDataName.SetValidationTypeAsRVariable()
-        'clsRDatanames.SetRCommand("c")
-        ucrInputDataName.SetParameter(New RParameter("main_data_name"))
-        'ucrInputDataName.SetParameterIncludeArgumentName(False)
-        ucrInputLocDataName.SetParameter(New RParameter("loc_data_name"))
-        'ucrInputLocDataName.SetParameterIncludeArgumentName(False)
         ucrInputFilePath.SetParameter(New RParameter("filename", 0))
-
-        ucrInputLatColName.SetParameter(New RParameter("latitude_col_name"))
+        ucrInputDataName.SetParameter(New RParameter("main_data_name", 1))
+        ucrInputLocDataName.SetParameter(New RParameter("loc_data_name", 2))
+        ucrInputLatColName.SetParameter(New RParameter("latitude_col_name", 3))
         ucrInputLatColName.SetLinkedDisplayControl(lblLatColName)
-        ucrInputLonColName.SetParameter(New RParameter("longitude_col_name"))
+        ucrInputLonColName.SetParameter(New RParameter("longitude_col_name", 4))
         ucrInputLonColName.SetLinkedDisplayControl(lblLonColName)
-
-        'ucrCheckDefaultLocNames.SetParameter(New RParameter("default_names"))
-        'ucrCheckDefaultLocNames.SetText("Use Default Location Names")
-        'ucrCheckDefaultLocNames.AddToLinkedControls({ucrInputLatColName, ucrInputLonColName}, {False}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
