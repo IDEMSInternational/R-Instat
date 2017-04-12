@@ -526,9 +526,9 @@ data_object$set("public", "anova_tables", function(x_col_names, y_col_name, sign
 }
 )
 
-data_object$set("public", "rename_column_in_data", function(curr_col_name = "", new_col_name="") {
+data_object$set("public", "rename_column_in_data", function(curr_col_name = "", new_col_name = "", value = "") {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
-  # Column name must be character
+   # Column name must be character
   if (new_col_name %in% names(curr_data)){
     stop("Cannot rename this column. A column named: ",new_col_name," already exists in the data.")
   }
@@ -555,9 +555,11 @@ data_object$set("public", "rename_column_in_data", function(curr_col_name = "", 
     # TODO decide if we need to do these 2 lines
     self$append_to_changes(list(Renamed_col, curr_col_name, new_col_name))
     self$data_changed <- TRUE
-    self$variables_metadata_changed <- TRUE
-    }
+   self$variables_metadata_changed <- TRUE
+  }
+   self$append_to_variables_metadata(col_name=new_col_name, property = "label", new_val = value)
 }
+
 )
 
 data_object$set("public", "remove_columns_in_data", function(cols=c()) {

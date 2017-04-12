@@ -68,6 +68,7 @@ Public Class dlgName
         DefaultNewName()
         ucrInputNewName.SetParameter(New RParameter("new_val", 2))
         ucrInputNewName.SetValidationTypeAsRVariable()
+        ucrInputVariableLabel.SetParameter(New RParameter("value", 3))
     End Sub
 
     Private Sub DefaultNewName()
