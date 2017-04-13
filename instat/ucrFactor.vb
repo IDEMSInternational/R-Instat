@@ -157,6 +157,7 @@ Public Class ucrFactor
             shtCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
             shtCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
             ApplyColumnSettings()
+            RaiseEvent GridContentChanged()
         End If
     End Sub
 
