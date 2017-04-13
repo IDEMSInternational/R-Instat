@@ -69,8 +69,8 @@ Public Class dlgRegularSequence
         ucrPnlSequenceType.AddRadioButton(rdoNumeric)
         ucrPnlSequenceType.AddRadioButton(rdoDates)
         ucrPnlSequenceType.bAllowNonConditionValues = True
-        ucrPnlSequenceType.AddFunctionNamesCondition(rdoNumeric, "seq")
-        ucrPnlSequenceType.AddFunctionNamesCondition(rdoDates, "as.date")
+        ucrPnlSequenceType.AddFunctionNamesCondition(rdoNumeric, {"seq", "rep"})
+        'ucrPnlSequenceType.AddFunctionNamesCondition(rdoDates, "as.date")
 
         ucrPnlSequenceType.AddToLinkedControls(ucrInputFrom, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=1)
         ucrInputFrom.SetLinkedDisplayControl(lblFrom)
@@ -107,8 +107,6 @@ Public Class dlgRegularSequence
         clsSeqFunction = New RFunction
         ucrSelectDataFrameRegularSequence.Reset()
         ucrNewColumnName.Reset()
-
-        rdoNumeric.Checked = True
 
         clsSeqFunction.SetRCommand("seq")
         clsSeqFunction.AddParameter("from", 1)
