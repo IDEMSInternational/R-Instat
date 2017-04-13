@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgOpenNetCDF
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,12 +20,16 @@ Partial Class dlgOpenNetCDF
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblLocDataNamePrefix = New System.Windows.Forms.Label()
         Me.cmdOpenDataSet = New System.Windows.Forms.Button()
         Me.lblFileOpenPath = New System.Windows.Forms.Label()
         Me.lblMainDataName = New System.Windows.Forms.Label()
+        Me.lblLatColName = New System.Windows.Forms.Label()
+        Me.lblLonColName = New System.Windows.Forms.Label()
+        Me.ucrInputLonColName = New instat.ucrInputTextBox()
+        Me.ucrInputLatColName = New instat.ucrInputTextBox()
         Me.ucrInputLocDataName = New instat.ucrInputTextBox()
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
         Me.ucrInputDataName = New instat.ucrInputTextBox()
@@ -35,21 +39,21 @@ Partial Class dlgOpenNetCDF
         'lblLocDataNamePrefix
         '
         Me.lblLocDataNamePrefix.AutoSize = True
-        Me.lblLocDataNamePrefix.Location = New System.Drawing.Point(10, 86)
+        Me.lblLocDataNamePrefix.Location = New System.Drawing.Point(10, 88)
         Me.lblLocDataNamePrefix.Name = "lblLocDataNamePrefix"
-        Me.lblLocDataNamePrefix.Size = New System.Drawing.Size(134, 13)
+        Me.lblLocDataNamePrefix.Size = New System.Drawing.Size(105, 13)
         Me.lblLocDataNamePrefix.TabIndex = 5
-        Me.lblLocDataNamePrefix.Tag = "Lat_Lon_Data_Name_Prefix:"
-        Me.lblLocDataNamePrefix.Text = "Lat/Lon Data Name Prefix:"
+        Me.lblLocDataNamePrefix.Tag = "Lat_Lon_Data_Name:"
+        Me.lblLocDataNamePrefix.Text = "Lat/Lon Data Name:"
         '
         'cmdOpenDataSet
         '
-        Me.cmdOpenDataSet.Location = New System.Drawing.Point(226, 18)
+        Me.cmdOpenDataSet.Location = New System.Drawing.Point(303, 19)
         Me.cmdOpenDataSet.Name = "cmdOpenDataSet"
-        Me.cmdOpenDataSet.Size = New System.Drawing.Size(66, 23)
+        Me.cmdOpenDataSet.Size = New System.Drawing.Size(77, 23)
         Me.cmdOpenDataSet.TabIndex = 2
-        Me.cmdOpenDataSet.Tag = "select_file"
-        Me.cmdOpenDataSet.Text = "Select File"
+        Me.cmdOpenDataSet.Tag = "Select_File..."
+        Me.cmdOpenDataSet.Text = "Select File..."
         Me.cmdOpenDataSet.UseVisualStyleBackColor = True
         '
         'lblFileOpenPath
@@ -64,19 +68,57 @@ Partial Class dlgOpenNetCDF
         'lblMainDataName
         '
         Me.lblMainDataName.AutoSize = True
-        Me.lblMainDataName.Location = New System.Drawing.Point(10, 55)
+        Me.lblMainDataName.Location = New System.Drawing.Point(10, 56)
         Me.lblMainDataName.Name = "lblMainDataName"
         Me.lblMainDataName.Size = New System.Drawing.Size(122, 13)
         Me.lblMainDataName.TabIndex = 3
         Me.lblMainDataName.Tag = "Main_Data_Frame_Name:"
         Me.lblMainDataName.Text = "Main Data Frame Name:"
         '
+        'lblLatColName
+        '
+        Me.lblLatColName.AutoSize = True
+        Me.lblLatColName.Location = New System.Drawing.Point(10, 120)
+        Me.lblLatColName.Name = "lblLatColName"
+        Me.lblLatColName.Size = New System.Drawing.Size(117, 13)
+        Me.lblLatColName.TabIndex = 7
+        Me.lblLatColName.Text = "Latitude Column Name:"
+        '
+        'lblLonColName
+        '
+        Me.lblLonColName.AutoSize = True
+        Me.lblLonColName.Location = New System.Drawing.Point(10, 152)
+        Me.lblLonColName.Name = "lblLonColName"
+        Me.lblLonColName.Size = New System.Drawing.Size(126, 13)
+        Me.lblLonColName.TabIndex = 9
+        Me.lblLonColName.Text = "Longitude Column Name:"
+        '
+        'ucrInputLonColName
+        '
+        Me.ucrInputLonColName.AddQuotesIfUnrecognised = True
+        Me.ucrInputLonColName.IsMultiline = False
+        Me.ucrInputLonColName.IsReadOnly = False
+        Me.ucrInputLonColName.Location = New System.Drawing.Point(150, 148)
+        Me.ucrInputLonColName.Name = "ucrInputLonColName"
+        Me.ucrInputLonColName.Size = New System.Drawing.Size(142, 21)
+        Me.ucrInputLonColName.TabIndex = 10
+        '
+        'ucrInputLatColName
+        '
+        Me.ucrInputLatColName.AddQuotesIfUnrecognised = True
+        Me.ucrInputLatColName.IsMultiline = False
+        Me.ucrInputLatColName.IsReadOnly = False
+        Me.ucrInputLatColName.Location = New System.Drawing.Point(150, 116)
+        Me.ucrInputLatColName.Name = "ucrInputLatColName"
+        Me.ucrInputLatColName.Size = New System.Drawing.Size(142, 21)
+        Me.ucrInputLatColName.TabIndex = 8
+        '
         'ucrInputLocDataName
         '
         Me.ucrInputLocDataName.AddQuotesIfUnrecognised = True
         Me.ucrInputLocDataName.IsMultiline = False
         Me.ucrInputLocDataName.IsReadOnly = False
-        Me.ucrInputLocDataName.Location = New System.Drawing.Point(150, 82)
+        Me.ucrInputLocDataName.Location = New System.Drawing.Point(150, 84)
         Me.ucrInputLocDataName.Name = "ucrInputLocDataName"
         Me.ucrInputLocDataName.Size = New System.Drawing.Size(142, 21)
         Me.ucrInputLocDataName.TabIndex = 6
@@ -88,7 +130,7 @@ Partial Class dlgOpenNetCDF
         Me.ucrInputFilePath.IsReadOnly = False
         Me.ucrInputFilePath.Location = New System.Drawing.Point(52, 20)
         Me.ucrInputFilePath.Name = "ucrInputFilePath"
-        Me.ucrInputFilePath.Size = New System.Drawing.Size(161, 21)
+        Me.ucrInputFilePath.Size = New System.Drawing.Size(240, 21)
         Me.ucrInputFilePath.TabIndex = 1
         '
         'ucrInputDataName
@@ -96,23 +138,27 @@ Partial Class dlgOpenNetCDF
         Me.ucrInputDataName.AddQuotesIfUnrecognised = True
         Me.ucrInputDataName.IsMultiline = False
         Me.ucrInputDataName.IsReadOnly = False
-        Me.ucrInputDataName.Location = New System.Drawing.Point(150, 51)
+        Me.ucrInputDataName.Location = New System.Drawing.Point(150, 52)
         Me.ucrInputDataName.Name = "ucrInputDataName"
         Me.ucrInputDataName.Size = New System.Drawing.Size(142, 21)
         Me.ucrInputDataName.TabIndex = 4
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 109)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 179)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 7
+        Me.ucrBase.TabIndex = 11
         '
         'dlgOpenNetCDF
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 171)
+        Me.ClientSize = New System.Drawing.Size(421, 237)
+        Me.Controls.Add(Me.lblLonColName)
+        Me.Controls.Add(Me.lblLatColName)
+        Me.Controls.Add(Me.ucrInputLonColName)
+        Me.Controls.Add(Me.ucrInputLatColName)
         Me.Controls.Add(Me.ucrInputLocDataName)
         Me.Controls.Add(Me.lblLocDataNamePrefix)
         Me.Controls.Add(Me.ucrInputFilePath)
@@ -140,4 +186,9 @@ Partial Class dlgOpenNetCDF
     Friend WithEvents cmdOpenDataSet As Button
     Friend WithEvents lblFileOpenPath As Label
     Friend WithEvents lblMainDataName As Label
+    Friend WithEvents ucrInputLatColName As ucrInputTextBox
+    Friend WithEvents ucrInputLonColName As ucrInputTextBox
+    Friend WithEvents lblLatColName As Label
+    Friend WithEvents lblLonColName As Label
 End Class
+
