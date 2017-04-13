@@ -39,6 +39,8 @@ Public Class dlgScatterPlot
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 433
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        ucrBase.clsRsyntax.iCallType = 3
 
         ucrSelectorForScatter.SetParameter(New RParameter("data", 0))
         ucrSelectorForScatter.SetParameterIsrfunction()
@@ -68,11 +70,12 @@ Public Class dlgScatterPlot
 
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
 
+        ucrSaveScatterPlot.SetPrefix("Scatter")
+        ucrSaveScatterPlot.SetSaveTypeAsGraph()
         ucrSaveScatterPlot.SetDataFrameSelector(ucrSelectorForScatter.ucrAvailableDataFrames)
-        ucrSaveScatterPlot.strPrefix = "Scatter"
-
-        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        ucrBase.clsRsyntax.iCallType = 3
+        ucrSaveScatterPlot.SetCheckBoxText("Save Graph")
+        ucrSaveScatterPlot.SetIsComboBox()
+        ucrSaveScatterPlot.SetAssignToIfUncheckedValue("last_graph")
     End Sub
 
     Private Sub SetDefaults()
@@ -82,6 +85,8 @@ Public Class dlgScatterPlot
         clsRaesFunction = New RFunction
 
         ucrSelectorForScatter.Reset()
+        ucrSaveScatterPlot.Reset()
+        sdgPlots.Reset()
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
@@ -96,10 +101,10 @@ Public Class dlgScatterPlot
         clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
         clsRaesFunction.AddParameter("y", Chr(34) & Chr(34))
 
-        clsRScatterGeomFunction.SetRCommand("geom_point")
         clsRScatterGeomFunction.SetPackageName("ggplot2")
+        clsRScatterGeomFunction.SetRCommand("geom_point")
 
-        sdgPlots.Reset()
+        clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
     End Sub
 
@@ -108,11 +113,13 @@ Public Class dlgScatterPlot
         ucrReceiverX.SetRCode(clsRaesFunction, bReset)
         ucrVariablesAsFactorForScatter.SetRCode(clsRaesFunction, bReset)
         ucrFactorOptionalReceiver.SetRCode(clsRaesFunction, bReset)
+        ucrSaveScatterPlot.SetRCode(clsBaseOperator, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        'tests when okay Is enable. Both x and y aesthetics are mandatory but can be set to x="" or(exclusive) y="" in case the other one is filled. 
-        If (ucrReceiverX.IsEmpty() AndAlso ucrVariablesAsFactorForScatter.IsEmpty) OrElse (ucrSaveScatterPlot.chkSaveGraph.Checked AndAlso ucrSaveScatterPlot.ucrInputGraphName.IsEmpty) Then
+        ' Either y or x can be empty but not both
+
+        If (Not ucrSaveScatterPlot.IsComplete) OrElse (ucrVariablesAsFactorForScatter.IsEmpty AndAlso ucrReceiverX.IsEmpty()) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -157,17 +164,7 @@ Public Class dlgScatterPlot
             End If
         Next
     End Sub
-
-    Private Sub ucrsavescatterplot_graphnamechanged() Handles ucrSaveScatterPlot.GraphNameChanged, ucrSaveScatterPlot.SaveGraphCheckedChanged
-        If ucrSaveScatterPlot.bSaveGraph Then
-            ucrBase.clsRsyntax.SetAssignTo(ucrSaveScatterPlot.strGraphName, strTempDataframe:=ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveScatterPlot.strGraphName)
-        Else
-            ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
-        End If
-        TestOkEnabled()
-    End Sub
-
-    Private Sub ucrSaveScatterPlot_ContentsChanged() Handles ucrSaveScatterPlot.ContentsChanged, ucrReceiverX.ControlContentsChanged, ucrVariablesAsFactorForScatter.ControlContentsChanged
+    Private Sub ucrSaveScatterPlot_ContentsChanged() Handles ucrSaveScatterPlot.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrVariablesAsFactorForScatter.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class

@@ -340,7 +340,7 @@ Public Class ucrCore
         Return clsParameter
     End Function
 
-    Public Overridable Function GetRCode() As RFunction
+    Public Overridable Function GetRCode() As RCodeStructure
         Return clsRCode
     End Function
 
