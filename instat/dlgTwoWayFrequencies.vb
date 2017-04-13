@@ -36,6 +36,12 @@ Public Class dlgTwoWayFrequencies
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
+        ucrReceiverRowFactor.AddAdditionalCodeParameterPair(clsSjpXtab, New RParameter("x", 0), iAdditionalPairNo:=1)
+        ucrReceiverRowFactor.AddAdditionalCodeParameterPair(clsSjpXtab, New RParameter("grp", 0), iAdditionalPairNo:=1)
+
+        ucrChkWeights.AddAdditionalCodeParameterPair(clsSjpFrq, New RParameter("weight.by", 1), iAdditionalPairNo:=1)
+        ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjpFrq, ucrChkWeights.GetParameter(), iAdditionalPairNo:=1)
+
         ucrReceiverRowFactor.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverColumnFactor.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverWeights.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
@@ -63,6 +69,10 @@ Public Class dlgTwoWayFrequencies
         ucrReceiverRowFactor.SetDataType("factor")
         ucrReceiverColumnFactor.SetDataType("factor")
         ucrReceiverWeights.SetDataType("numeric")
+        ucrReceiverRowFactor.ChangeParameterName("var.row", 0)
+        ucrReceiverRowFactor.SetParameterIsRFunction()
+        ucrReceiverColumnFactor.ChangeParameterName("var.col", 1)
+        ucrReceiverColumnFactor.SetParameterIsRFunction()
         ucrReceiverWeights.SetParameter(New RParameter("weight.by", 2))
         ucrReceiverWeights.SetParameterIsRFunction()
 
@@ -115,28 +125,18 @@ Public Class dlgTwoWayFrequencies
     Private Sub SetDefaults()
         clsSjtXtab = New RFunction
         clsSjpXtab = New RFunction
+
         ucrSelectorTwoWayFrequencies.Reset()
-        sdgTwoWayFrequencies.ucrSaveGraph.Reset()
-        sdgTwoWayFrequencies.ucrInputGraphTitle.SetName("")
-        sdgTwoWayFrequencies.ucrInputTableTitle.SetName("")
-        sdgTwoWayFrequencies.ucrInputTotalsName.SetName("")
-        sdgTwoWayFrequencies.ucrInputHorizontalLabels.Reset()
-        sdgTwoWayFrequencies.ucrInputVerticalLabels.Reset()
-
-        ucrReceiverRowFactor.SetParameter(New RParameter("var.row", 0))
-        ucrReceiverRowFactor.SetParameterIsRFunction()
         ucrReceiverRowFactor.SetMeAsReceiver()
-        ucrReceiverColumnFactor.SetParameter(New RParameter("var.col", 1))
-        ucrReceiverColumnFactor.SetParameterIsRFunction()
-        clsSjtXtab.SetRCommand("sjt.xtab")
 
+        clsSjtXtab.SetRCommand("sjt.xtab")
         clsSjtXtab.AddParameter("show.obs", "TRUE")
         clsSjtXtab.AddParameter("show.summary", "FALSE")
         clsSjtXtab.AddParameter("digits", 0)
+
         clsSjpXtab.SetRCommand("sjp.xtab")
         clsSjpXtab.AddParameter("margin", Chr(34) & "row" & Chr(34))
-        clsSjpXtab.AddParameter("vjust", Chr(34) & "bottom" & Chr(34))
-        clsSjpXtab.AddParameter("hjust", Chr(34) & "center" & Chr(34))
+
         clsSjpXtab.AddParameter("show.prc", "TRUE")
         clsSjpXtab.AddParameter("show.n", "TRUE")
         clsSjpXtab.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorTwoWayFrequencies.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
@@ -218,6 +218,16 @@ Public Class dlgTwoWayFrequencies
             ucrReceiverWeights.SetMeAsReceiver()
         Else
             ucrReceiverRowFactor.SetMeAsReceiver()
+        End If
+    End Sub
+
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        Dim strGraph As String
+        Dim strTempScript As String = ""
+
+        If rdoTable.Checked AndAlso rdoGraph.Checked Then
+            strGraph = clsSjpXtab.ToScript(strTempScript)
+            frmMain.clsRLink.RunScript(strTempScript & strGraph, iCallType:=3)
         End If
     End Sub
 
