@@ -28,11 +28,11 @@ Partial Class dlgDuplicateColumns
         Me.ucrReceiverForCopyColumns = New instat.ucrReceiverSingle()
         Me.ucrSelectorForDuplicateColumn = New instat.ucrSelectorByDataFrameAddRemove()
         Me.grpDuplicatedColumn = New System.Windows.Forms.GroupBox()
-        Me.ucrPnlColPosition = New instat.UcrPanel()
         Me.rdoBefore = New System.Windows.Forms.RadioButton()
         Me.rdoEnd = New System.Windows.Forms.RadioButton()
         Me.rdoAfter = New System.Windows.Forms.RadioButton()
         Me.rdoBeginning = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlColPosition = New instat.UcrPanel()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpDuplicatedColumn.SuspendLayout()
         Me.SuspendLayout()
@@ -40,7 +40,7 @@ Partial Class dlgDuplicateColumns
         'lblColumns
         '
         Me.lblColumns.AutoSize = True
-        Me.lblColumns.Location = New System.Drawing.Point(225, 37)
+        Me.lblColumns.Location = New System.Drawing.Point(225, 38)
         Me.lblColumns.Name = "lblColumns"
         Me.lblColumns.Size = New System.Drawing.Size(105, 13)
         Me.lblColumns.TabIndex = 1
@@ -49,7 +49,7 @@ Partial Class dlgDuplicateColumns
         'lblNewColumnName
         '
         Me.lblNewColumnName.AutoSize = True
-        Me.lblNewColumnName.Location = New System.Drawing.Point(9, 204)
+        Me.lblNewColumnName.Location = New System.Drawing.Point(10, 204)
         Me.lblNewColumnName.Name = "lblNewColumnName"
         Me.lblNewColumnName.Size = New System.Drawing.Size(101, 13)
         Me.lblNewColumnName.TabIndex = 4
@@ -57,6 +57,7 @@ Partial Class dlgDuplicateColumns
         '
         'ucrInputColumnName
         '
+        Me.ucrInputColumnName.AddQuotesIfUnrecognised = True
         Me.ucrInputColumnName.IsReadOnly = False
         Me.ucrInputColumnName.Location = New System.Drawing.Point(113, 201)
         Me.ucrInputColumnName.Name = "ucrInputColumnName"
@@ -70,7 +71,7 @@ Partial Class dlgDuplicateColumns
         Me.ucrReceiverForCopyColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverForCopyColumns.Name = "ucrReceiverForCopyColumns"
         Me.ucrReceiverForCopyColumns.Selector = Nothing
-        Me.ucrReceiverForCopyColumns.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverForCopyColumns.Size = New System.Drawing.Size(129, 20)
         Me.ucrReceiverForCopyColumns.TabIndex = 2
         '
         'ucrSelectorForDuplicateColumn
@@ -92,17 +93,10 @@ Partial Class dlgDuplicateColumns
         Me.grpDuplicatedColumn.Controls.Add(Me.ucrPnlColPosition)
         Me.grpDuplicatedColumn.Location = New System.Drawing.Point(225, 80)
         Me.grpDuplicatedColumn.Name = "grpDuplicatedColumn"
-        Me.grpDuplicatedColumn.Size = New System.Drawing.Size(185, 110)
+        Me.grpDuplicatedColumn.Size = New System.Drawing.Size(183, 110)
         Me.grpDuplicatedColumn.TabIndex = 3
         Me.grpDuplicatedColumn.TabStop = False
         Me.grpDuplicatedColumn.Text = "Position of Duplicated Column"
-        '
-        'ucrPnlColPosition
-        '
-        Me.ucrPnlColPosition.Location = New System.Drawing.Point(6, 19)
-        Me.ucrPnlColPosition.Name = "ucrPnlColPosition"
-        Me.ucrPnlColPosition.Size = New System.Drawing.Size(99, 85)
-        Me.ucrPnlColPosition.TabIndex = 7
         '
         'rdoBefore
         '
@@ -148,11 +142,18 @@ Partial Class dlgDuplicateColumns
         Me.rdoBeginning.Text = "Beginning"
         Me.rdoBeginning.UseVisualStyleBackColor = True
         '
+        'ucrPnlColPosition
+        '
+        Me.ucrPnlColPosition.Location = New System.Drawing.Point(6, 19)
+        Me.ucrPnlColPosition.Name = "ucrPnlColPosition"
+        Me.ucrPnlColPosition.Size = New System.Drawing.Size(99, 85)
+        Me.ucrPnlColPosition.TabIndex = 7
+        '
         'ucrBase
         '
         Me.ucrBase.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ucrBase.Location = New System.Drawing.Point(12, 228)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 228)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(398, 53)
         Me.ucrBase.TabIndex = 6
