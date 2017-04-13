@@ -21,6 +21,7 @@ Public Class dlgRegularSequence
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsSeqFunction, clsRepFunction As New RFunction
+    Private bUpdateBy As Boolean = False
     Private Sub dlgRegularSequence_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -35,13 +36,15 @@ Public Class dlgRegularSequence
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        bUpdateBy = False
         ucrNewColumnName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrPnlSequenceType.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrInputFrom.SetRCode(clsSeqFunction, bReset)
-        ucrInputTo.SetRCode(clsSeqFunction, bReset)
-        ucrNudRepeatValues.SetRCode(clsRepFunction, bReset)
-        ucrNudRepeatValues.SetRCode(clsSeqFunction, bReset)
-        ucrInputInStepsOf.SetRCode(clsSeqFunction, bReset)
+            ucrPnlSequenceType.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+            ucrInputFrom.SetRCode(clsSeqFunction, bReset)
+            ucrInputTo.SetRCode(clsSeqFunction, bReset)
+            ucrNudRepeatValues.SetRCode(clsRepFunction, bReset)
+            ucrNudRepeatValues.SetRCode(clsSeqFunction, bReset)
+            ucrInputInStepsOf.SetRCode(clsSeqFunction, bReset)
+        bUpdateBy = True
 
     End Sub
 
@@ -61,7 +64,7 @@ Public Class dlgRegularSequence
         ucrNudRepeatValues.SetMinMax(1, Integer.MaxValue)
         ucrInputInStepsOf.SetParameter(New RParameter("by", 2))
         ucrInputInStepsOf.AddQuotesIfUnrecognised = False
-        ucrInputInStepsOf.SetValidationTypeAsNumeric()
+        ucrInputInStepsOf.SetValidationTypeAsNumeric(dcmMin:=0)
         ucrDataFrameLengthForRegularSequence.SetDataFrameSelector(ucrSelectDataFrameRegularSequence)
 
         ucrPnlSequenceType.AddToLinkedControls(ucrInputFrom, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=1)
@@ -86,12 +89,16 @@ Public Class dlgRegularSequence
         ucrNewColumnName.SetLabelText("New Column Name:")
 
         'TODO complete dates option
-        rdoDates.Enabled = False
         dtpSelectorB.Visible = False
         dtpSelectorA.Visible = False
-        chkDefineAsFactor.Visible = False
+        ucrChkDefineAsFactor.SetText("Define As Factor")
         'ucrInputFrom.Visible = False
         ' ucrInputTo.Visible = False
+        CheckSequenceLength()
+    End Sub
+
+    Private Sub ucrChkDefineAsFactor_Load(sender As Object, e As EventArgs) Handles ucrChkDefineAsFactor.Load
+        ucrChkDefineAsFactor.Enabled = False
     End Sub
 
     Private Sub SetDefaults()
@@ -99,6 +106,8 @@ Public Class dlgRegularSequence
         clsSeqFunction = New RFunction
         ucrSelectDataFrameRegularSequence.Reset()
         ucrNewColumnName.Reset()
+        rdoNumeric.Checked = True
+        rdoDates.Enabled = False
         clsSeqFunction.SetRCommand("seq")
         clsSeqFunction.AddParameter("from", 1)
         clsSeqFunction.AddParameter("to", ucrSelectDataFrameRegularSequence.iDataFrameLength)
@@ -111,6 +120,7 @@ Public Class dlgRegularSequence
         'clsSeqFunction.SetAssignTo(ucrNewColumnName.GetText, strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText)
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnName.GetText, strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText)
         ucrBase.clsRsyntax.SetBaseRFunction(clsSeqFunction)
+        CheckSequenceLength()
 
     End Sub
 
@@ -138,17 +148,14 @@ Public Class dlgRegularSequence
     End Sub
 
     Private Sub SetInStepsOfParameter()
-        If rdoNumeric.Checked Then
-            If ucrInputInStepsOf.GetText <> "" Then
-                If (ucrInputInStepsOf.GetText = 1 AndAlso frmMain.clsInstatOptions.bIncludeRDefaultParameters) OrElse ucrInputInStepsOf.GetText <> 1 Then
-                    If ucrInputTo.GetText >= ucrInputFrom.GetText Then
-                        clsSeqFunction.AddParameter("by", ucrInputInStepsOf.GetText)
-                    Else
-                        clsSeqFunction.AddParameter("by", "-" & ucrInputInStepsOf.GetText)
-                    End If
-                End If
+        If Not ucrInputTo.IsEmpty AndAlso Not ucrInputFrom.IsEmpty Then
+            If Convert.ToDecimal(ucrInputTo.GetText) >= Convert.ToDecimal(ucrInputFrom.GetText) Then
+                clsSeqFunction.AddParameter("by", ucrInputInStepsOf.GetText)
+            Else
+                clsSeqFunction.AddParameter("by", "-" & ucrInputInStepsOf.GetText)
             End If
         End If
+        CheckSequenceLength()
     End Sub
 
     Private Sub SetBaseFunction()
@@ -229,16 +236,14 @@ Public Class dlgRegularSequence
         CheckSequenceLength()
     End Sub
 
-    Private Sub ucrInputFrom_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFrom.ControlContentsChanged, ucrInputTo.ControlContentsChanged, ucrInputInStepsOf.ControlContentsChanged
-        CheckSequenceLength()
+    Private Sub ucrInputFrom_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFrom.ControlValueChanged, ucrInputTo.ControlValueChanged, ucrInputInStepsOf.ControlValueChanged
+        If bUpdateBy Then
+            SetInStepsOfParameter()
+        End If
     End Sub
 
     Private Sub ucrNewColumnName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewColumnName.ControlContentsChanged, ucrInputTo.ControlContentsChanged, ucrInputFrom.ControlContentsChanged, ucrInputInStepsOf.ControlContentsChanged, ucrNudRepeatValues.ControlContentsChanged, ucrPnlSequenceType.ControlContentsChanged, ucrSelectDataFrameRegularSequence.ControlContentsChanged
         TestOKEnabled()
-    End Sub
-
-    Private Sub ucrInputFrom_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputInStepsOf.ControlContentsChanged, ucrPnlSequenceType.ControlContentsChanged
-        SetInStepsOfParameter()
     End Sub
 
     Private Sub txtGetPreview_TextChanged(sender As Object, e As EventArgs) Handles txtGetPreview.TextChanged
