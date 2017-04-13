@@ -1336,6 +1336,7 @@ instat_object$set("public", "import_from_iri", function(download_from, data_file
   data_list <- import_from_iri(download_from  = download_from, data_file = data_file, path = path, X1 = X1, X2 = X2, Y1 = Y1, Y2 = Y2, get_area_point = get_area_point)
   names(data_list) = c(data_frame_name, next_default_item(prefix = location_data_name , existing_names = self$get_data_names(), include_index = FALSE))
   self$import_data(data_tables = data_list)
+  loc_col_names <- names(data_list)[[2]]
   self$add_key(location_data_name, loc_col_names)
   names(loc_col_names) <- loc_col_names
   self$add_link(from_data_frame = names(data_list)[1], to_data_frame = names(data_list)[2], link_pairs = loc_col_names, type = keyed_link_label)
