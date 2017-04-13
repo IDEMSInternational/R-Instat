@@ -23,6 +23,12 @@ Partial Class dlgRegularSequence
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.grpSequenceDefinition = New System.Windows.Forms.GroupBox()
+        Me.ucrChkDefineAsFactor = New instat.ucrCheck()
+        Me.ucrNudRepeatValues = New instat.ucrNud()
+        Me.ucrInputInStepsOf = New instat.ucrInputTextBox()
+        Me.ucrInputTo = New instat.ucrInputTextBox()
+        Me.ucrInputFrom = New instat.ucrInputTextBox()
+        Me.ucrDataFrameLengthForRegularSequence = New instat.ucrDataFrameLength()
         Me.dtpSelectorB = New System.Windows.Forms.DateTimePicker()
         Me.dtpSelectorA = New System.Windows.Forms.DateTimePicker()
         Me.lblLength = New System.Windows.Forms.Label()
@@ -39,12 +45,6 @@ Partial Class dlgRegularSequence
         Me.rdoDates = New System.Windows.Forms.RadioButton()
         Me.ucrPnlSequenceType = New instat.UcrPanel()
         Me.ucrNewColumnName = New instat.ucrSave()
-        Me.ucrChkDefineAsFactor = New instat.ucrCheck()
-        Me.ucrNudRepeatValues = New instat.ucrNud()
-        Me.ucrInputInStepsOf = New instat.ucrInputTextBox()
-        Me.ucrInputTo = New instat.ucrInputTextBox()
-        Me.ucrInputFrom = New instat.ucrInputTextBox()
-        Me.ucrDataFrameLengthForRegularSequence = New instat.ucrDataFrameLength()
         Me.ucrSelectDataFrameRegularSequence = New instat.ucrDataFrame()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpSequenceDefinition.SuspendLayout()
@@ -70,12 +70,70 @@ Partial Class dlgRegularSequence
         Me.grpSequenceDefinition.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grpSequenceDefinition.Location = New System.Drawing.Point(10, 113)
         Me.grpSequenceDefinition.Name = "grpSequenceDefinition"
-        Me.grpSequenceDefinition.Size = New System.Drawing.Size(205, 204)
-        Me.grpSequenceDefinition.TabIndex = 4
+        Me.grpSequenceDefinition.Size = New System.Drawing.Size(205, 184)
+        Me.grpSequenceDefinition.TabIndex = 2
         Me.grpSequenceDefinition.TabStop = False
         Me.grpSequenceDefinition.Tag = "Sequence_definition"
         Me.grpSequenceDefinition.Text = "Sequence Definition"
         Me.grpSequenceDefinition.UseCompatibleTextRendering = True
+        '
+        'ucrChkDefineAsFactor
+        '
+        Me.ucrChkDefineAsFactor.Checked = False
+        Me.ucrChkDefineAsFactor.Location = New System.Drawing.Point(10, 158)
+        Me.ucrChkDefineAsFactor.Name = "ucrChkDefineAsFactor"
+        Me.ucrChkDefineAsFactor.Size = New System.Drawing.Size(176, 20)
+        Me.ucrChkDefineAsFactor.TabIndex = 13
+        '
+        'ucrNudRepeatValues
+        '
+        Me.ucrNudRepeatValues.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRepeatValues.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudRepeatValues.Location = New System.Drawing.Point(99, 102)
+        Me.ucrNudRepeatValues.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudRepeatValues.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRepeatValues.Name = "ucrNudRepeatValues"
+        Me.ucrNudRepeatValues.Size = New System.Drawing.Size(50, 23)
+        Me.ucrNudRepeatValues.TabIndex = 9
+        Me.ucrNudRepeatValues.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputInStepsOf
+        '
+        Me.ucrInputInStepsOf.AddQuotesIfUnrecognised = True
+        Me.ucrInputInStepsOf.IsMultiline = False
+        Me.ucrInputInStepsOf.IsReadOnly = False
+        Me.ucrInputInStepsOf.Location = New System.Drawing.Point(99, 76)
+        Me.ucrInputInStepsOf.Name = "ucrInputInStepsOf"
+        Me.ucrInputInStepsOf.Size = New System.Drawing.Size(50, 23)
+        Me.ucrInputInStepsOf.TabIndex = 7
+        '
+        'ucrInputTo
+        '
+        Me.ucrInputTo.AddQuotesIfUnrecognised = True
+        Me.ucrInputTo.IsMultiline = False
+        Me.ucrInputTo.IsReadOnly = False
+        Me.ucrInputTo.Location = New System.Drawing.Point(99, 50)
+        Me.ucrInputTo.Name = "ucrInputTo"
+        Me.ucrInputTo.Size = New System.Drawing.Size(50, 23)
+        Me.ucrInputTo.TabIndex = 4
+        '
+        'ucrInputFrom
+        '
+        Me.ucrInputFrom.AddQuotesIfUnrecognised = True
+        Me.ucrInputFrom.IsMultiline = False
+        Me.ucrInputFrom.IsReadOnly = False
+        Me.ucrInputFrom.Location = New System.Drawing.Point(99, 24)
+        Me.ucrInputFrom.Name = "ucrInputFrom"
+        Me.ucrInputFrom.Size = New System.Drawing.Size(50, 23)
+        Me.ucrInputFrom.TabIndex = 1
+        '
+        'ucrDataFrameLengthForRegularSequence
+        '
+        Me.ucrDataFrameLengthForRegularSequence.Location = New System.Drawing.Point(98, 128)
+        Me.ucrDataFrameLengthForRegularSequence.Name = "ucrDataFrameLengthForRegularSequence"
+        Me.ucrDataFrameLengthForRegularSequence.Size = New System.Drawing.Size(51, 23)
+        Me.ucrDataFrameLengthForRegularSequence.TabIndex = 12
+        Me.ucrDataFrameLengthForRegularSequence.ucrDataFrameSelector = Nothing
         '
         'dtpSelectorB
         '
@@ -97,17 +155,17 @@ Partial Class dlgRegularSequence
         Me.lblLength.Location = New System.Drawing.Point(10, 132)
         Me.lblLength.Name = "lblLength"
         Me.lblLength.Size = New System.Drawing.Size(43, 13)
-        Me.lblLength.TabIndex = 9
+        Me.lblLength.TabIndex = 11
         Me.lblLength.Tag = "Length"
         Me.lblLength.Text = "Length:"
         '
         'lblTimes1
         '
         Me.lblTimes1.AutoSize = True
-        Me.lblTimes1.Location = New System.Drawing.Point(155, 102)
+        Me.lblTimes1.Location = New System.Drawing.Point(152, 106)
         Me.lblTimes1.Name = "lblTimes1"
         Me.lblTimes1.Size = New System.Drawing.Size(41, 13)
-        Me.lblTimes1.TabIndex = 8
+        Me.lblTimes1.TabIndex = 10
         Me.lblTimes1.Tag = "Times"
         Me.lblTimes1.Text = "Time(s)"
         '
@@ -117,7 +175,7 @@ Partial Class dlgRegularSequence
         Me.lblRepeatValues.Location = New System.Drawing.Point(10, 106)
         Me.lblRepeatValues.Name = "lblRepeatValues"
         Me.lblRepeatValues.Size = New System.Drawing.Size(80, 13)
-        Me.lblRepeatValues.TabIndex = 6
+        Me.lblRepeatValues.TabIndex = 8
         Me.lblRepeatValues.Tag = "Repeat_values"
         Me.lblRepeatValues.Text = "Repeat Values:"
         '
@@ -128,7 +186,7 @@ Partial Class dlgRegularSequence
         Me.lblInStepsOf.Location = New System.Drawing.Point(10, 80)
         Me.lblInStepsOf.Name = "lblInStepsOf"
         Me.lblInStepsOf.Size = New System.Drawing.Size(63, 13)
-        Me.lblInStepsOf.TabIndex = 4
+        Me.lblInStepsOf.TabIndex = 6
         Me.lblInStepsOf.Tag = "In_steps_Of"
         Me.lblInStepsOf.Text = "In Steps Of:"
         '
@@ -139,7 +197,7 @@ Partial Class dlgRegularSequence
         Me.lblTo.Location = New System.Drawing.Point(10, 54)
         Me.lblTo.Name = "lblTo"
         Me.lblTo.Size = New System.Drawing.Size(23, 13)
-        Me.lblTo.TabIndex = 2
+        Me.lblTo.TabIndex = 3
         Me.lblTo.Tag = ""
         Me.lblTo.Text = "To:"
         '
@@ -157,25 +215,25 @@ Partial Class dlgRegularSequence
         'lblPreview
         '
         Me.lblPreview.AutoSize = True
-        Me.lblPreview.Location = New System.Drawing.Point(239, 45)
+        Me.lblPreview.Location = New System.Drawing.Point(221, 50)
         Me.lblPreview.Name = "lblPreview"
         Me.lblPreview.Size = New System.Drawing.Size(100, 13)
-        Me.lblPreview.TabIndex = 2
+        Me.lblPreview.TabIndex = 3
         Me.lblPreview.Tag = "Preview"
         Me.lblPreview.Text = "Sequence Preview:"
         '
         'txtGetPreview
         '
-        Me.txtGetPreview.Location = New System.Drawing.Point(239, 60)
+        Me.txtGetPreview.Location = New System.Drawing.Point(221, 65)
         Me.txtGetPreview.Name = "txtGetPreview"
         Me.txtGetPreview.Size = New System.Drawing.Size(171, 172)
-        Me.txtGetPreview.TabIndex = 3
+        Me.txtGetPreview.TabIndex = 4
         Me.txtGetPreview.Text = ""
         '
         'txtMessage
         '
         Me.txtMessage.Enabled = False
-        Me.txtMessage.Location = New System.Drawing.Point(239, 234)
+        Me.txtMessage.Location = New System.Drawing.Point(221, 239)
         Me.txtMessage.Multiline = True
         Me.txtMessage.Name = "txtMessage"
         Me.txtMessage.ReadOnly = True
@@ -202,7 +260,7 @@ Partial Class dlgRegularSequence
         Me.rdoNumeric.Location = New System.Drawing.Point(10, 19)
         Me.rdoNumeric.Name = "rdoNumeric"
         Me.rdoNumeric.Size = New System.Drawing.Size(70, 18)
-        Me.rdoNumeric.TabIndex = 0
+        Me.rdoNumeric.TabIndex = 1
         Me.rdoNumeric.Tag = "Numeric"
         Me.rdoNumeric.Text = "Numeric"
         Me.rdoNumeric.UseVisualStyleBackColor = True
@@ -215,7 +273,7 @@ Partial Class dlgRegularSequence
         Me.rdoDates.Location = New System.Drawing.Point(93, 20)
         Me.rdoDates.Name = "rdoDates"
         Me.rdoDates.Size = New System.Drawing.Size(59, 18)
-        Me.rdoDates.TabIndex = 1
+        Me.rdoDates.TabIndex = 2
         Me.rdoDates.Tag = "Dates"
         Me.rdoDates.Text = "Dates"
         Me.rdoDates.UseVisualStyleBackColor = True
@@ -229,68 +287,10 @@ Partial Class dlgRegularSequence
         '
         'ucrNewColumnName
         '
-        Me.ucrNewColumnName.Location = New System.Drawing.Point(10, 321)
+        Me.ucrNewColumnName.Location = New System.Drawing.Point(10, 304)
         Me.ucrNewColumnName.Name = "ucrNewColumnName"
         Me.ucrNewColumnName.Size = New System.Drawing.Size(294, 24)
         Me.ucrNewColumnName.TabIndex = 6
-        '
-        'ucrChkDefineAsFactor
-        '
-        Me.ucrChkDefineAsFactor.Checked = False
-        Me.ucrChkDefineAsFactor.Location = New System.Drawing.Point(10, 159)
-        Me.ucrChkDefineAsFactor.Name = "ucrChkDefineAsFactor"
-        Me.ucrChkDefineAsFactor.Size = New System.Drawing.Size(176, 20)
-        Me.ucrChkDefineAsFactor.TabIndex = 8
-        '
-        'ucrNudRepeatValues
-        '
-        Me.ucrNudRepeatValues.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRepeatValues.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudRepeatValues.Location = New System.Drawing.Point(99, 102)
-        Me.ucrNudRepeatValues.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudRepeatValues.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRepeatValues.Name = "ucrNudRepeatValues"
-        Me.ucrNudRepeatValues.Size = New System.Drawing.Size(50, 23)
-        Me.ucrNudRepeatValues.TabIndex = 7
-        Me.ucrNudRepeatValues.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrInputInStepsOf
-        '
-        Me.ucrInputInStepsOf.AddQuotesIfUnrecognised = True
-        Me.ucrInputInStepsOf.IsMultiline = False
-        Me.ucrInputInStepsOf.IsReadOnly = False
-        Me.ucrInputInStepsOf.Location = New System.Drawing.Point(99, 76)
-        Me.ucrInputInStepsOf.Name = "ucrInputInStepsOf"
-        Me.ucrInputInStepsOf.Size = New System.Drawing.Size(50, 23)
-        Me.ucrInputInStepsOf.TabIndex = 5
-        '
-        'ucrInputTo
-        '
-        Me.ucrInputTo.AddQuotesIfUnrecognised = True
-        Me.ucrInputTo.IsMultiline = False
-        Me.ucrInputTo.IsReadOnly = False
-        Me.ucrInputTo.Location = New System.Drawing.Point(99, 50)
-        Me.ucrInputTo.Name = "ucrInputTo"
-        Me.ucrInputTo.Size = New System.Drawing.Size(50, 23)
-        Me.ucrInputTo.TabIndex = 3
-        '
-        'ucrInputFrom
-        '
-        Me.ucrInputFrom.AddQuotesIfUnrecognised = True
-        Me.ucrInputFrom.IsMultiline = False
-        Me.ucrInputFrom.IsReadOnly = False
-        Me.ucrInputFrom.Location = New System.Drawing.Point(99, 24)
-        Me.ucrInputFrom.Name = "ucrInputFrom"
-        Me.ucrInputFrom.Size = New System.Drawing.Size(50, 23)
-        Me.ucrInputFrom.TabIndex = 1
-        '
-        'ucrDataFrameLengthForRegularSequence
-        '
-        Me.ucrDataFrameLengthForRegularSequence.Location = New System.Drawing.Point(98, 128)
-        Me.ucrDataFrameLengthForRegularSequence.Name = "ucrDataFrameLengthForRegularSequence"
-        Me.ucrDataFrameLengthForRegularSequence.Size = New System.Drawing.Size(51, 23)
-        Me.ucrDataFrameLengthForRegularSequence.TabIndex = 10
-        Me.ucrDataFrameLengthForRegularSequence.ucrDataFrameSelector = Nothing
         '
         'ucrSelectDataFrameRegularSequence
         '
@@ -303,7 +303,7 @@ Partial Class dlgRegularSequence
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 348)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 330)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 7
@@ -312,7 +312,7 @@ Partial Class dlgRegularSequence
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 412)
+        Me.ClientSize = New System.Drawing.Size(418, 387)
         Me.Controls.Add(Me.grpSequenceType)
         Me.Controls.Add(Me.ucrNewColumnName)
         Me.Controls.Add(Me.txtMessage)

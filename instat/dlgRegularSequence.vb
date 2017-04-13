@@ -44,42 +44,44 @@ Public Class dlgRegularSequence
             ucrNudRepeatValues.SetRCode(clsRepFunction, bReset)
         ucrInputInStepsOf.SetRCode(clsSeqFunction, bReset)
         bUpdateBy = True
-
     End Sub
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 30
 
-        ucrPnlSequenceType.AddRadioButton(rdoNumeric)
-        ucrPnlSequenceType.AddRadioButton(rdoDates)
-
         ucrInputFrom.SetParameter(New RParameter("from", 0))
         ucrInputFrom.AddQuotesIfUnrecognised = False
         ucrInputFrom.SetValidationTypeAsNumeric()
+
         ucrInputTo.SetParameter(New RParameter("to", 1))
         ucrInputTo.AddQuotesIfUnrecognised = False
         ucrInputTo.SetValidationTypeAsNumeric()
+
         ucrNudRepeatValues.SetParameter(New RParameter("each", 1))
         ucrNudRepeatValues.SetMinMax(1, Integer.MaxValue)
+
         ucrInputInStepsOf.SetParameter(New RParameter("by", 2))
         ucrInputInStepsOf.AddQuotesIfUnrecognised = False
         ucrInputInStepsOf.SetValidationTypeAsNumeric(dcmMin:=0)
+
         ucrDataFrameLengthForRegularSequence.SetDataFrameSelector(ucrSelectDataFrameRegularSequence)
+
+        ucrPnlSequenceType.AddRadioButton(rdoNumeric)
+        ucrPnlSequenceType.AddRadioButton(rdoDates)
+        ucrPnlSequenceType.bAllowNonConditionValues = True
+        ucrPnlSequenceType.AddFunctionNamesCondition(rdoNumeric, "seq")
+        ucrPnlSequenceType.AddFunctionNamesCondition(rdoDates, "as.date")
 
         ucrPnlSequenceType.AddToLinkedControls(ucrInputFrom, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=1)
         ucrInputFrom.SetLinkedDisplayControl(lblFrom)
         ucrPnlSequenceType.AddToLinkedControls(ucrInputTo, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=ucrSelectDataFrameRegularSequence.iDataFrameLength)
         ucrInputTo.SetLinkedDisplayControl(lblTo)
         ucrPnlSequenceType.AddToLinkedControls(ucrInputInStepsOf, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=1)
-        ucrNudRepeatValues.SetLinkedDisplayControl(lblRepeatValues)
-        ucrPnlSequenceType.AddToLinkedControls(ucrNudRepeatValues, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=1)
         ucrInputInStepsOf.SetLinkedDisplayControl(lblInStepsOf)
+        ucrPnlSequenceType.AddToLinkedControls(ucrNudRepeatValues, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=1)
+        ucrNudRepeatValues.SetLinkedDisplayControl(lblRepeatValues)
         'ucrPnlSequenceType.AddToLinkedControls(dtpSelectorA, {rdoDates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         'ucrPnlSequenceType.AddToLinkedControls(dtpSelectorB, {rdoDates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
-        ucrPnlSequenceType.bAllowNonConditionValues = True
-        ucrPnlSequenceType.AddFunctionNamesCondition(rdoNumeric, "seq")
-        ucrPnlSequenceType.AddFunctionNamesCondition(rdoDates, "as.date")
 
         ucrNewColumnName.SetPrefix("Regular")
         ucrNewColumnName.SetDataFrameSelector(ucrSelectDataFrameRegularSequence)
@@ -94,10 +96,10 @@ Public Class dlgRegularSequence
         'ucrInputFrom.Visible = False
         ' ucrInputTo.Visible = False
         CheckSequenceLength()
-    End Sub
 
-    Private Sub ucrChkDefineAsFactor_Load(sender As Object, e As EventArgs) Handles ucrChkDefineAsFactor.Load
+        'Temporarily disabled
         ucrChkDefineAsFactor.Enabled = False
+        rdoDates.Enabled = False
     End Sub
 
     Private Sub SetDefaults()
@@ -105,8 +107,9 @@ Public Class dlgRegularSequence
         clsSeqFunction = New RFunction
         ucrSelectDataFrameRegularSequence.Reset()
         ucrNewColumnName.Reset()
+
         rdoNumeric.Checked = True
-        rdoDates.Enabled = False
+
         clsSeqFunction.SetRCommand("seq")
         clsSeqFunction.AddParameter("from", 1)
         clsSeqFunction.AddParameter("to", ucrSelectDataFrameRegularSequence.iDataFrameLength)
@@ -120,7 +123,6 @@ Public Class dlgRegularSequence
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnName.GetText, strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText)
         ucrBase.clsRsyntax.SetBaseRFunction(clsRepFunction)
         CheckSequenceLength()
-
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -142,7 +144,6 @@ Public Class dlgRegularSequence
             Else
                 ucrBase.OKEnabled(False)
             End If
-
         End If
     End Sub
 
@@ -216,7 +217,7 @@ Public Class dlgRegularSequence
             ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned = bToBeAssigned
         Catch ex As Exception
             txtGetPreview.Text = ""
-            txtMessage.Text = "No preview avaiable"
+            txtMessage.Text = "No preview available."
         End Try
     End Sub
 
@@ -233,6 +234,7 @@ Public Class dlgRegularSequence
     Private Sub ucrNudRepeatValues_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudRepeatValues.ControlContentsChanged
         SetBaseFunction()
         CheckSequenceLength()
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrInputFrom_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFrom.ControlValueChanged, ucrInputTo.ControlValueChanged, ucrInputInStepsOf.ControlValueChanged
@@ -241,7 +243,7 @@ Public Class dlgRegularSequence
         End If
     End Sub
 
-    Private Sub ucrNewColumnName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewColumnName.ControlContentsChanged, ucrInputTo.ControlContentsChanged, ucrInputFrom.ControlContentsChanged, ucrInputInStepsOf.ControlContentsChanged, ucrNudRepeatValues.ControlContentsChanged, ucrPnlSequenceType.ControlContentsChanged, ucrSelectDataFrameRegularSequence.ControlContentsChanged
+    Private Sub ucrNewColumnName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewColumnName.ControlContentsChanged, ucrInputTo.ControlContentsChanged, ucrInputFrom.ControlContentsChanged, ucrInputInStepsOf.ControlContentsChanged, ucrPnlSequenceType.ControlContentsChanged, ucrSelectDataFrameRegularSequence.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
