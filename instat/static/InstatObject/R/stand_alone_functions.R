@@ -1,18 +1,5 @@
 get_default_significant_figures <- function(data) {
-  if(is.numeric(data)) {
-    min_data <- min(data, na.rm = TRUE)
-    if(is.integer(data) || min_data > 100 || all((data %% 1) == 0, na.rm = TRUE)) {
-      return(0)
-    }
-    else {
-      if(min_data > 10) {
-        return(1)
-      }
-      else {  
-        return(2) 
-      }
-    }
-  }
+  if(is.numeric(data)) return(3)
   else return(NA)  
 }
 

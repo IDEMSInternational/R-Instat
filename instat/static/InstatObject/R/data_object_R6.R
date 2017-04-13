@@ -274,7 +274,7 @@ data_object$set("public", "get_data_frame", function(convert_to_character = FALS
     }
     
     if(convert_to_character) {
-      decimal_places = self$get_variables_metadata(property = signif_figures_label, column = names(out))
+      decimal_places = self$get_variables_metadata(property = signif_figures_label, column = names(out), error_if_no_property = FALSE)
       decimal_places[is.na(decimal_places)] <- 0
       return(convert_to_character_matrix(out, TRUE, decimal_places))
     }
@@ -294,16 +294,17 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
   }
   else {
     i = 1
-    out = list()
+    out <- list()
     for(col in self$get_data_frame(use_current_filter = FALSE)) {
-      ind = which(names(attributes(col)) == "levels")
+      ind <- which(names(attributes(col)) == "levels")
       if(length(ind) > 0) col_attributes <- attributes(col)[-ind]
-      else col_attributes = attributes(col)
+      else col_attributes <- attributes(col)
       if(is.null(col_attributes)) col_attributes <- list()
       col_attributes[[data_type_label]] <- class(col)
       for(att_name in names(col_attributes)) {
         #TODO Think how to do this more generally and cover all cases
-        if(is.list(col_attributes[[att_name]]) || length(col_attributes[[att_name]]) > 1) col_attributes[[att_name]] <- paste(unlist(col_attributes[[att_name]]), collapse = ",")
+        if(att_name == "labels") col_attributes[[att_name]] <- paste(names(col_attributes[[att_name]]), "=", col_attributes[[att_name]], collapse = ", ")
+        else if(is.list(col_attributes[[att_name]]) || length(col_attributes[[att_name]]) > 1) col_attributes[[att_name]] <- paste(unlist(col_attributes[[att_name]]), collapse = ",")
         # TODO Possible alternative to include names of list
         # TODO See how to have data frame properly containing lists
         #if(is.list(col_attributes[[att_name]]) || length(col_attributes[[att_name]]) > 1) col_attributes[[att_name]] <- paste(names(unlist(col_attributes[[att_name]])), unlist(col_attributes[[att_name]]), collapse = ",")
@@ -320,13 +321,13 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
     out <- as.data.frame(out)
     if(all(c(name_label, label_label) %in% names(out))) out <- out[ ,c(c(name_label, label_label), setdiff(names(out), c(name_label, label_label)))]
     else if(name_label %in% names(out)) out <- out[ ,c(name_label, setdiff(names(out), name_label))]
-    row.names(out) <- names(self$get_data_frame(use_current_filter = FALSE))
+    row.names(out) <- self$get_column_names()
     if(data_type != "all") {
       if(data_type == "numeric") {
-        out = out[out[[data_type_label]] %in% c("numeric", "integer"), ]
+        out <- out[out[[data_type_label]] %in% c("numeric", "integer"), ]
       }
       else {
-        out = out[out[[data_type_label]] == data_type, ]        
+        out <- out[out[[data_type_label]] == data_type, ]        
       }
     }
     not_found <- FALSE
@@ -336,12 +337,12 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
         not_found <- TRUE
       }
       if(!missing(column)) {
-        if(!all(column %in% names(self$get_data_frame(use_current_filter = FALSE)))) stop(column, " not found in data")
+        if(!all(column %in% self$get_column_names())) stop(column, " not found in data")
         if(not_found) out <- rep(NA, length(column))
         else out <- out[column, property]
       }
       else {
-        if(not_found) out <- rep(NA, length(names(self$get_data_frame(use_current_filter = FALSE))))
+        if(not_found) out <- rep(NA, length(self$get_column_names()))
         else out <- out[, property]
       }
     }
@@ -458,7 +459,7 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
     if(is.matrix(curr_col) || is.data.frame(curr_col)) curr_col = curr_col[,1]
     if(use_col_name_as_prefix) curr_col_name = self$get_next_default_column_name(col_name)
     else curr_col_name = col_name[[i]]
-    if(curr_col_name %in% names(self$get_data_frame(use_current_filter = FALSE))) {
+    if(curr_col_name %in% self$get_column_names()) {
       message(paste("A column named", curr_col_name, "already exists. The column will be replaced in the data"))
       self$append_to_changes(list(Replaced_col, curr_col_name))
       replaced = TRUE
@@ -471,6 +472,8 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
     self$append_to_variables_metadata(curr_col_name, is_hidden_label, hidden)
     self$append_to_variables_metadata(curr_col_name, name_label, curr_col_name)
     self$append_to_variables_metadata(curr_col_name, signif_figures_label, get_default_significant_figures(self$get_columns_from_data(curr_col_name, use_current_filter = FALSE)))
+    self$append_to_variables_metadata(curr_col_name, label_label, "")
+    self$append_to_variables_metadata(curr_col_name, scientific_label, FALSE)
     self$variables_metadata_changed <- TRUE
   }
   if(!replaced) {
@@ -485,7 +488,7 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
 
 data_object$set("public", "get_columns_from_data", function(col_names, force_as_data_frame = FALSE, use_current_filter = TRUE) {
   if(missing(col_names)) stop("no col_names to return")
-  if(!all(col_names %in% names(self$get_data_frame(use_current_filter = FALSE)))) stop("Not all column names were found in data")
+  if(!all(col_names %in% self$get_column_names())) stop("Not all column names were found in data")
   
   if(length(col_names)==1) {
     if(force_as_data_frame) return(self$get_data_frame(use_current_filter = use_current_filter)[col_names])
@@ -564,7 +567,7 @@ data_object$set("public", "remove_columns_in_data", function(cols=c()) {
       stop("Column name must be of type: character")
     }
     
-    else if (!(col_name %in% names(self$get_data_frame(use_current_filter = FALSE)))) {
+    else if(!(col_name %in% self$get_column_names())) {
       stop(paste0("Column :'", col_name, " was not found in the data."))
     }
     
@@ -759,14 +762,14 @@ data_object$set("public", "append_to_variables_metadata", function(col_names, pr
   if(missing(property)) stop("property must be specified.")
   if(!is.character(property)) stop("property must be a character")
   if(!missing(col_names)) {
-    if(!all(col_names %in% names(self$get_data_frame(use_current_filter = FALSE)))) stop("Not all of ", paste(col_names, collapse = ","), " found in data.")
+    if(!all(col_names %in% self$get_column_names())) stop("Not all of ", paste(col_names, collapse = ","), " found in data.")
     for(curr_col in col_names) {
       attr(private$data[[curr_col]], property) <- new_val
       self$append_to_changes(list(Added_variables_metadata, curr_col, property))
     }
   }
   else {
-    for(col_name in names(self$get_data_frame(use_current_filter = FALSE))) {
+    for(col_name in self$get_column_names()) {
       attr(private$data[[col_name]], property) <- new_val
     }
     self$append_to_changes(list(Added_variables_metadata, property, new_val))
@@ -793,8 +796,10 @@ data_object$set("public", "is_metadata", function(str) {
 )
 
 data_object$set("public", "is_variables_metadata", function(str, col, return_vector = FALSE) {
-  if(!str %in% names(self$get_variables_metadata())) return(FALSE)
-  if(missing(col)) return(TRUE)
+  if(str == data_type_label) return(TRUE)
+  if(missing(col)) {
+    return(any(sapply(self$get_column_names(), function(x) str %in% names(attributes(self$get_columns_from_data(x, use_current_filter = FALSE)))), na.rm = TRUE))
+  }
   else {
     out <- sapply(col, function(x) str %in% names(attributes(self$get_columns_from_data(x, use_current_filter = FALSE))))
     if(return_vector) return(out)
@@ -810,28 +815,20 @@ data_object$set("public", "add_defaults_meta", function() {
 )
 
 data_object$set("public", "add_defaults_variables_metadata", function() {
-  invisible(sapply(colnames(self$get_data_frame(use_current_filter = FALSE)), function(x) self$append_to_variables_metadata(x, name_label, x)))
-  has_hidden <- self$is_variables_metadata(is_hidden_label) && !is.na(self$get_variables_metadata(property = is_hidden_label)) && self$get_variables_metadata(property = is_hidden_label)
-  if(has_hidden) {
-    for(column in colnames(self$get_data_frame(use_current_filter = FALSE))) {
-      if(!self$is_variables_metadata(is_hidden_label, column)) {
-        self$append_to_variables_metadata(column, property = is_hidden_label, new_val = FALSE)
-      }
-    }
-  }
-  else self$append_to_variables_metadata(property = is_hidden_label, new_val = FALSE)
-  for(column in colnames(self$get_data_frame(use_current_filter = FALSE))) {
-    if(has_hidden) {
-      if(!self$is_variables_metadata(is_hidden_label, column)) self$append_to_variables_metadata(column, property = is_hidden_label, new_val = FALSE)
-    }
+  for(column in self$get_column_names()) {
     self$append_to_variables_metadata(column, name_label, column)
+    if(!self$is_variables_metadata(is_hidden_label, column)) {
+      self$append_to_variables_metadata(column, property = is_hidden_label, new_val = FALSE)
+    }
     if(!self$is_variables_metadata(label_label, column)) {
       self$append_to_variables_metadata(column, label_label, "")
     }
     if(!self$is_variables_metadata(scientific_label, column)) {
       self$append_to_variables_metadata(column, scientific_label, FALSE)
     }
-    self$append_to_variables_metadata(column, signif_figures_label, get_default_significant_figures(self$get_columns_from_data(column, use_current_filter = FALSE)))
+    if(!self$is_variables_metadata(scientific_label, column)) {
+      self$append_to_variables_metadata(column, signif_figures_label, get_default_significant_figures(self$get_columns_from_data(column, use_current_filter = FALSE)))
+    }
   }
 }
 )
@@ -847,8 +844,8 @@ data_object$set("public", "remove_rows_in_data", function(row_names) {
 )
 
 data_object$set("public", "get_next_default_column_name", function(prefix) {
-  next_default_item(prefix = prefix, existing_names = names(self$get_data_frame(use_current_filter = FALSE)))
-} 
+  return(next_default_item(prefix = prefix, existing_names = self$get_column_names()))
+}
 )
 
 data_object$set("public", "reorder_columns_in_data", function(col_order) {
@@ -922,7 +919,7 @@ data_object$set("public", "get_data_frame_length", function(use_current_filter =
 )
 
 data_object$set("public", "get_factor_data_frame", function(col_name = "") {
-  if(!(col_name %in% names(self$get_data_frame(use_current_filter = FALSE)))){
+  if(!(col_name %in% self$get_column_names())) {
     stop(col_name, " is not a column in", get_metadata(data_name_label))
   }
   if(!(is.factor(self$get_columns_from_data(col_name, use_current_filter = FALSE)))){
@@ -936,7 +933,7 @@ data_object$set("public", "get_factor_data_frame", function(col_name = "") {
 )
 
 data_object$set("public", "get_column_factor_levels", function(col_name = "") {
-  if(!(col_name %in% names(self$get_data_frame(use_current_filter = FALSE)))){
+  if(!(col_name %in% self$get_column_names())) {
     stop(col_name, " is not a column in", get_metadata(data_name_label))
   }
   
@@ -980,7 +977,7 @@ data_object$set("public", "sort_dataframe", function(col_names = c(), decreasing
 
 data_object$set("public", "convert_column_to_type", function(col_names = c(), to_type, factor_numeric = "by_levels", set_digits, set_decimals = FALSE) {
   for(col_name in col_names){
-    if(!(col_name %in% names(self$get_data_frame(use_current_filter = FALSE)))){
+    if(!(col_name %in% self$get_column_names())) {
       stop(col_name, " is not a column in ", get_metadata(data_name_label))
     }
   }
@@ -1041,7 +1038,7 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
 
 data_object$set("public", "copy_columns", function(col_names = "") {
   for(col_name in col_names){
-    if(!(col_name %in% names(self$get_data_frame(use_current_filter = FALSE)))){
+    if(!(col_name %in% self$get_column_names())) {
       stop(col_name, " is not a column in ", get_metadata(data_name_label))
     }
   }
@@ -1057,7 +1054,7 @@ data_object$set("public", "copy_columns", function(col_names = "") {
 )
 
 data_object$set("public", "drop_unused_factor_levels", function(col_name) {
-  if(!col_name %in% names(self$get_data_frame(use_current_filter = FALSE))) stop(paste(col_name,"not found in data."))
+  if(!col_name %in% self$get_column_names()) stop(paste(col_name,"not found in data."))
   if(!is.factor(self$get_columns_from_data(col_name, use_current_filter = FALSE))) stop(paste(col_name,"is not a factor."))
   
   self$add_columns_to_data(col_name, droplevels(self$get_columns_from_data(col_name, use_current_filter = FALSE)))
@@ -1065,7 +1062,7 @@ data_object$set("public", "drop_unused_factor_levels", function(col_name) {
 )
 
 data_object$set("public", "set_factor_levels", function(col_name, new_levels) {
-  if(!col_name %in% names(self$get_data_frame(use_current_filter = FALSE))) stop(paste(col_name,"not found in data."))
+  if(!col_name %in% self$get_column_names()) stop(paste(col_name,"not found in data."))
   if(!is.factor(self$get_columns_from_data(col_name, use_current_filter = FALSE))) stop(paste(col_name,"is not a factor."))
   if(length(new_levels) < length(levels(self$get_columns_from_data(col_name, use_current_filter = FALSE)))) stop("There must be at least as many new levels as current levels.")
   
@@ -1077,7 +1074,7 @@ data_object$set("public", "set_factor_levels", function(col_name, new_levels) {
 )
 
 data_object$set("public", "edit_factor_level", function(col_name, old_level, new_level) {
-  if(!col_name %in% names(self$get_data_frame(use_current_filter = FALSE))) stop(paste(col_name,"not found in data."))
+  if(!col_name %in% self$get_column_names()) stop(paste(col_name,"not found in data."))
   if(!is.factor(self$get_columns_from_data(col_name, use_current_filter = FALSE))) stop(paste(col_name,"is not a factor."))
   self$add_columns_to_data(col_name, mapvalues(x = self$get_columns_from_data(col_name, use_current_filter = FALSE), from = old_level, to = new_level))
   self$data_changed <- TRUE
@@ -1087,7 +1084,7 @@ data_object$set("public", "edit_factor_level", function(col_name, old_level, new
 
 
 data_object$set("public", "set_factor_reference_level", function(col_name, new_ref_level) {
-  if(!col_name %in% names(self$get_data_frame(use_current_filter = FALSE))) stop(paste(col_name,"not found in data."))
+  if(!col_name %in% self$get_column_names()) stop(paste(col_name,"not found in data."))
   if(!is.factor(self$get_columns_from_data(col_name, use_current_filter = FALSE))) stop(paste(col_name,"is not a factor."))
   if(!new_ref_level %in% levels(self$get_columns_from_data(col_name, use_current_filter = FALSE))) stop(paste(new_ref_level, "is not a level of the factor"))
   
@@ -1096,7 +1093,7 @@ data_object$set("public", "set_factor_reference_level", function(col_name, new_r
 )
 
 data_object$set("public", "reorder_factor_levels", function(col_name, new_level_names) {
-  if(!col_name %in% names(self$get_data_frame(use_current_filter = FALSE))) stop(paste(col_name,"not found in data."))
+  if(!col_name %in% self$get_column_names()) stop(paste(col_name,"not found in data."))
   if(!is.factor(self$get_columns_from_data(col_name, use_current_filter = FALSE))) stop(paste(col_name,"is not a factor."))
   if(length(new_level_names)!=length(levels(self$get_columns_from_data(col_name, use_current_filter = FALSE)))) stop("Incorrect number of new level names given.")
   if(!all(new_level_names %in% levels(self$get_columns_from_data(col_name, use_current_filter = FALSE)))) stop(paste("new_level_names must be a reordering of the current levels:",paste(levels(data[[col_name]]), collapse = " ")))
@@ -1111,27 +1108,30 @@ data_object$set("public", "get_column_count", function(col_name, new_level_names
 )
 
 data_object$set("public", "get_column_names", function(as_list = FALSE, include = list(), exclude = list(), excluded_items = c()) {
-  if(data_type_label %in% names(include) && "numeric" %in% include[[data_type_label]]) {
-    include[[data_type_label]] = c(include[[data_type_label]], "integer")
-  }
-  if(data_type_label %in% names(exclude) && "numeric" %in% exclude[[data_type_label]]) {
-    exclude[[data_type_label]] = c(exclude[[data_type_label]], "integer")
-  }
-  
-  col_names = names(self$get_data_frame(use_current_filter = FALSE))
-  var_metadata = self$get_variables_metadata()
-  out = c()
-  i = 1
-  for(col in col_names) {
-    if(length(include) > 0 || length(exclude) > 0) {
-      curr_var_metadata = var_metadata[i, ]
-      if(all(c(names(include), names(exclude)) %in% names(curr_var_metadata)) && all(sapply(names(include), function(prop) curr_var_metadata[[prop]] %in% include[[prop]]))
-         && all(sapply(names(exclude), function(prop) !curr_var_metadata[[prop]] %in% exclude[[prop]]))) {
-        out <- c(out, col)
-      }
+  if(length(include) == 0 && length(exclude) == 0) out <- names(private$data)
+  else {
+    if(data_type_label %in% names(include) && "numeric" %in% include[[data_type_label]]) {
+      include[[data_type_label]] = c(include[[data_type_label]], "integer")
     }
-    else out <- c(out, col)
-    i = i + 1
+    if(data_type_label %in% names(exclude) && "numeric" %in% exclude[[data_type_label]]) {
+      exclude[[data_type_label]] = c(exclude[[data_type_label]], "integer")
+    }
+    
+    col_names <- self$get_column_names()
+    var_metadata <- self$get_variables_metadata()
+    out = c()
+    i = 1
+    for(col in col_names) {
+      if(length(include) > 0 || length(exclude) > 0) {
+        curr_var_metadata = var_metadata[i, ]
+        if(all(c(names(include), names(exclude)) %in% names(curr_var_metadata)) && all(sapply(names(include), function(prop) curr_var_metadata[[prop]] %in% include[[prop]]))
+           && all(sapply(names(exclude), function(prop) !curr_var_metadata[[prop]] %in% exclude[[prop]]))) {
+          out <- c(out, col)
+        }
+      }
+      else out <- c(out, col)
+      i = i + 1
+    }
   }
   if(length(excluded_items) > 0) {
     ex_ind = which(out %in% excluded_items)
@@ -1149,7 +1149,7 @@ data_object$set("public", "get_column_names", function(as_list = FALSE, include 
 
 #TODO: Are there other types needed here?
 data_object$set("public", "get_data_type", function(col_name = "") {
-  if(!(col_name %in% names(self$get_data_frame(use_current_filter = FALSE)))){
+  if(!(col_name %in% self$get_column_names())) {
     stop(paste(col_name, "is not a column in", get_metadata(data_name_label)))
   }
   type = ""
@@ -1221,20 +1221,13 @@ data_object$set("public", "set_col_names", function(col_names) {
 )
 
 data_object$set("public", "get_row_names", function() {
-  return(rownames(self$get_data_frame(use_current_filter = FALSE)))
+  return(rownames(private$data))
 }
-
 )
 
-data_object$set("public", "get_col_names", function() {
-  return(names(self$get_data_frame(use_current_filter = FALSE)))
-}
-
-)
 data_object$set("public", "get_dim_dataframe", function() {
   return(dim(self$get_data_frame(use_current_filter = FALSE)))
 }
-
 )
 
 data_object$set("public", "set_protected_columns", function(col_names) {
@@ -1254,7 +1247,7 @@ data_object$set("public", "add_filter", function(filter, filter_name = "", repla
     if(length(condition) != 3 || !all(sort(names(condition)) == c("column", "operation", "value"))) {
       stop("filter must be a list of conditions containing: column, operation and value")
     }
-    if(!condition[["column"]] %in% names(self$get_data_frame(use_current_filter = FALSE))) stop(condition[["column"]], " not found in data.")
+    if(!condition[["column"]] %in% self$get_column_names()) stop(condition[["column"]], " not found in data.")
   }
   if(filter_name %in% names(private$filters) && !replace) {
     warning("A filter named ", filter_name, " already exists. It will not be replaced.")
@@ -1522,7 +1515,7 @@ data_object$set("public", "remove_key", function(key_name) {
 )
 
 data_object$set("public", "set_structure_columns", function(struc_type_1, struc_type_2, struc_type_3) {
-  if(!all(c(struc_type_1,struc_type_2,struc_type_3) %in% names(self$get_data_frame(use_current_filter = FALSE)))) stop("Some column names not recognised.")
+  if(!all(c(struc_type_1,struc_type_2,struc_type_3) %in% self$get_column_names())) stop("Some column names not recognised.")
   if(length(intersect(struc_type_1,struc_type_2)) > 0 || length(intersect(struc_type_1,struc_type_3)) > 0 || length(intersect(struc_type_2,struc_type_3)) > 0) {
     stop("Each column can only be assign one structure type.")
   }
@@ -1530,7 +1523,7 @@ data_object$set("public", "set_structure_columns", function(struc_type_1, struc_
   if(length(struc_type_2) > 0) self$append_to_variables_metadata(struc_type_2, structure_label, structure_type_2_label)
   if(length(struc_type_3) > 0) self$append_to_variables_metadata(struc_type_3, structure_label, structure_type_3_label)
   all <- union(union(struc_type_1, struc_type_2), struc_type_3)
-  other <- setdiff(names(self$get_data_frame(use_current_filter = FALSE)), all)
+  other <- setdiff(self$get_column_names(), all)
   self$append_to_variables_metadata(other, structure_label, NA)
 }
 )
@@ -1555,7 +1548,7 @@ data_object$set("public", "add_dependent_columns", function(columns, dependent_c
 )
 
 data_object$set("public", "set_column_colours", function(columns, colours) {
-  if(missing(columns)) columns <- names(self$get_data_frame(use_current_filter = TRUE))
+  if(missing(columns)) columns <- self$get_column_names()
   if(length(columns) != length(colours)) stop("columns must be the same length as colours")
   
   for(i in 1:length(columns)) {
@@ -1780,7 +1773,7 @@ data_object$set("public","make_date_yeardoy", function(year, doy, year_format = 
 )
 
 data_object$set("public","set_contrasts_of_factor", function(col_name, new_contrasts, defined_contr_matrix) {
-  if(!col_name %in% names(self$get_data_frame())) stop(col_name, " not found in the data")
+  if(!col_name %in% self$get_column_names()) stop(col_name, " not found in the data")
   if(!is.factor(self$get_columns_from_data(col_name))) stop(factor, " is not a factor column.")
   factor_col <- self$get_columns_from_data(col_name)
   contr_col <- nlevels(factor_col) - 1

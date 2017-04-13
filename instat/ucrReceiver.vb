@@ -328,9 +328,11 @@ Public Class ucrReceiver
         If clsParameter IsNot Nothing Then
             If bChangeParameterValue Then
                 If bParameterIsString AndAlso clsParameter.bIsString Then
-                    lstCurrentVariables = ExtractItemsFromRList(clsParameter.strArgumentValue)
+                    If strValuesToIgnore Is Nothing OrElse (Not strValuesToIgnore.Contains(clsParameter.strArgumentValue)) Then
+                        lstCurrentVariables = ExtractItemsFromRList(clsParameter.strArgumentValue)
+                    End If
                 ElseIf bParameterIsRFunction AndAlso clsParameter.bIsFunction Then
-                    clsTempDataParameter = clsParameter.clsArgumentCodeStructure.GetParameter(strColumnsParameterNameInRFunction)
+                        clsTempDataParameter = clsParameter.clsArgumentCodeStructure.GetParameter(strColumnsParameterNameInRFunction)
                     If clsTempDataParameter IsNot Nothing Then
                         lstCurrentVariables = ExtractItemsFromRList(clsParameter.clsArgumentCodeStructure.GetParameter(strColumnsParameterNameInRFunction).strArgumentValue)
                     End If
