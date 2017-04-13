@@ -43,7 +43,6 @@ Public Class dlgName
 
     Private Sub ReopenDialog()
         ucrSelectVariables.Reset()
-        DefaultNewName()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -66,7 +65,6 @@ Public Class dlgName
         'Label Input
         ucrInputVariableLabel.SetParameter(New RParameter("label", 3))
 
-        DefaultNewName()
     End Sub
 
     Public Sub SetDefaults()
@@ -81,19 +79,9 @@ Public Class dlgName
 
     Private Sub TestOKEnabled()
         If Not ucrReceiverName.IsEmpty() AndAlso Not ucrInputNewName.IsEmpty() Then
-            If (ucrReceiverName.GetVariableNames(bWithQuotes:=False) <> ucrInputNewName.GetText) Then
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
-            End If
+            ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
-        End If
-    End Sub
-
-    Private Sub DefaultNewName()
-        If ((Not ucrInputNewName.bUserTyped) AndAlso (Not ucrReceiverName.IsEmpty)) Then
-            ucrInputNewName.SetName(ucrReceiverName.GetVariableNames(bWithQuotes:=False) & "1")
         End If
     End Sub
 
@@ -121,9 +109,5 @@ Public Class dlgName
 
     Private Sub ucrCoreControls_ControlContentsChanged() Handles ucrInputNewName.ControlContentsChanged, ucrReceiverName.ControlContentsChanged, ucrSelectVariables.ControlContentsChanged
         TestOKEnabled()
-    End Sub
-
-    Private Sub ucrReceiverName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverName.ControlValueChanged
-        DefaultNewName()
     End Sub
 End Class
