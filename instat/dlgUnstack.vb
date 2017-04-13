@@ -92,7 +92,7 @@ Public Class dlgUnstack
         NewDefaultName()
 
         clsDefaultFunction.SetRCommand("dcast")
-        clsDefaultFunction.AddParameter("drop", "TRUE")
+        clsDefaultFunction.AddParameter("drop", "TRUE") ' do i need this. check
         clsDefaultFunction.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
