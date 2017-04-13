@@ -61,9 +61,13 @@ Public Class ucrCheck
     Private Sub chkCheck_CheckedChanged(sender As Object, e As EventArgs) Handles chkCheck.CheckedChanged
         If bChangeParameterValue AndAlso clsParameter IsNot Nothing Then
             If chkCheck.Checked Then
-                clsParameter.SetArgumentValue(strValueIfChecked)
+                If strValueIfChecked <> "" Then
+                    clsParameter.SetArgumentValue(strValueIfChecked)
+                End If
             Else
-                clsParameter.SetArgumentValue(strValueIfUnchecked)
+                If strValueIfUnchecked <> "" Then
+                    clsParameter.SetArgumentValue(strValueIfUnchecked)
+                End If
             End If
         End If
         UpdateRCode()
