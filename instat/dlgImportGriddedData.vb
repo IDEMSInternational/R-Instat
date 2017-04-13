@@ -147,11 +147,11 @@ Public Class dlgImportGriddedData
 
     Private Sub pnlControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlGetArea.ControlContentsChanged
         If rdoArea.Checked Then
-            lblMinLat.Text = "Minimum Latitude"
-            lblMinLon.Text = "Minimum Longitude"
+            lblMinLat.Text = "Minimum Latitude:"
+            lblMinLon.Text = "Minimum Longitude:"
         ElseIf rdoPoint.Checked Then
-            lblMinLat.Text = "Latitude"
-            lblMinLon.Text = "Longitude"
+            lblMinLat.Text = "Latitude:"
+            lblMinLon.Text = "Longitude:"
         End If
     End Sub
 
