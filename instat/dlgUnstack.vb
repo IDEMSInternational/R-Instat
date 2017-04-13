@@ -55,32 +55,32 @@ Public Class dlgUnstack
         ucrSelectorForUnstack.SetParameterIsrfunction()
 
         'ucrID
-        ucrIDColumns.SetParameter(New RParameter("x"))
+        ucrIDColumns.SetParameter(New RParameter("x", 1))
         ucrIDColumns.SetParameterIsString()
         ucrIDColumns.Selector = ucrSelectorForUnstack
 
         'ucrColumn
-        ucrColumnToUnstackReceiver.SetParameter(New RParameter("value.var"))
+        ucrColumnToUnstackReceiver.SetParameter(New RParameter("value.var", 4))
         ucrColumnToUnstackReceiver.SetParameterIsString()
         ucrColumnToUnstackReceiver.Selector = ucrSelectorForUnstack
 
         'ucrFactor
-        ucrFactorToUnstackReceiver.SetParameter(New RParameter("y"))
+        ucrFactorToUnstackReceiver.SetParameter(New RParameter("y", 2))
         ucrFactorToUnstackReceiver.SetParameterIsString()
         ucrFactorToUnstackReceiver.Selector = ucrSelectorForUnstack
         ucrFactorToUnstackReceiver.SetDataType("factor")
+
+        'chkbox
+        ucrChkDropMissingCombinations.SetParameter(New RParameter("drop", 3))
+        ucrChkDropMissingCombinations.SetText("Drop Missing Combinations")
+        ucrChkDropMissingCombinations.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkDropMissingCombinations.SetRDefault("TRUE")
 
         'ucrSave
         ucrNewDFName.SetIsTextBox()
         ucrNewDFName.SetSaveTypeAsDataFrame()
         ucrNewDFName.SetDataFrameSelector(ucrSelectorForUnstack.ucrAvailableDataFrames)
         ucrNewDFName.SetLabelText("New Data Frame Name:")
-
-        'chkbox
-        ucrChkDropMissingCombinations.SetText("Drop Missing Combinations")
-        ucrChkDropMissingCombinations.SetParameter(New RParameter("drop"))
-        ucrChkDropMissingCombinations.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkDropMissingCombinations.SetRDefault("TRUE")
     End Sub
 
     Private Sub SetDefaults()
@@ -91,8 +91,8 @@ Public Class dlgUnstack
         ucrFactorToUnstackReceiver.SetMeAsReceiver()
         NewDefaultName()
 
+        clsDefaultFunction.SetPackageName("reshape2")
         clsDefaultFunction.SetRCommand("dcast")
-        clsDefaultFunction.AddParameter("drop", "TRUE") ' do i need this. check
         clsDefaultFunction.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
