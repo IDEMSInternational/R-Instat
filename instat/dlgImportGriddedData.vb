@@ -43,6 +43,10 @@ Public Class dlgImportGriddedData
 
         'ucrBase.iHelpTopicID = 
 
+        'temporary until working
+        cmdBrowse.Enabled = False
+        ucrInputExportFile.Enabled = False
+
         ucrInputDownloadFrom.SetParameter(New RParameter("download_from", 0))
         dctDownloadPairs.Add("CHIRPS_V2P0", Chr(34) & "CHIRPS_V2P0" & Chr(34))
         dctDownloadPairs.Add("TAMSAT", Chr(34) & "TAMSAT" & Chr(34))
