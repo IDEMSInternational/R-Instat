@@ -168,12 +168,12 @@ Public Class sdgClimdexIndices
         ucrNudMothlyMissingDays.SetMinMax(1, 31)
 
         ucrNudLowerBase.SetParameter(New RParameter("lower_base", 0))
-        ucrNudLowerBase.clsParameter.bIncludeArgumentName = False
+        ucrNudLowerBase.SetParameterIncludeArgumentName(False)
         ucrNudLowerBase.SetRDefault(1961)
         ucrNudLowerBase.SetMinMax(1900, 9999)
 
         ucrNudUpperBase.SetParameter(New RParameter("upper_base", 1))
-        ucrNudUpperBase.clsParameter.bIncludeArgumentName = False
+        ucrNudUpperBase.SetParameterIncludeArgumentName(False)
         ucrNudUpperBase.SetRDefault(1990)
         ucrNudUpperBase.SetMinMax(1900, 9999)
 
@@ -188,13 +188,13 @@ Public Class sdgClimdexIndices
         ucrInputTempQtiles.SetParameter(New RParameter("x"))
         ucrInputTempQtiles.SetValidationTypeAsNumericList()
         ucrInputTempQtiles.AddQuotesIfUnrecognised = False
-        ucrInputTempQtiles.clsParameter.bIncludeArgumentName = False
+        ucrInputTempQtiles.SetParameterIncludeArgumentName(False)
         ucrInputTempQtiles.SetRDefault("0.1, 0.9")
 
         ucrInputPrecQtiles.SetParameter(New RParameter("x"))
         ucrInputPrecQtiles.SetValidationTypeAsNumericList()
         ucrInputPrecQtiles.AddQuotesIfUnrecognised = False
-        ucrInputPrecQtiles.clsParameter.bIncludeArgumentName = False
+        ucrInputPrecQtiles.SetParameterIncludeArgumentName(False)
         ucrInputPrecQtiles.SetRDefault("0.95, 0.99")
 
         clsNewClimdexInput.AddParameter("temp.qtiles", clsRFunctionParameter:=clsRTempQTiles)

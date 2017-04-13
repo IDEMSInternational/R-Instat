@@ -32,9 +32,9 @@ Partial Class dlgRenameSheet
         '
         'lblNewName
         '
-        Me.lblNewName.Location = New System.Drawing.Point(196, 13)
+        Me.lblNewName.Location = New System.Drawing.Point(196, 14)
         Me.lblNewName.Name = "lblNewName"
-        Me.lblNewName.Size = New System.Drawing.Size(100, 15)
+        Me.lblNewName.Size = New System.Drawing.Size(100, 26)
         Me.lblNewName.TabIndex = 1
         Me.lblNewName.Tag = "New_Name"
         Me.lblNewName.Text = "New Name:"
@@ -44,17 +44,17 @@ Partial Class dlgRenameSheet
         Me.ucrInputNewName.AddQuotesIfUnrecognised = True
         Me.ucrInputNewName.IsMultiline = False
         Me.ucrInputNewName.IsReadOnly = False
-        Me.ucrInputNewName.Location = New System.Drawing.Point(196, 28)
+        Me.ucrInputNewName.Location = New System.Drawing.Point(196, 29)
         Me.ucrInputNewName.Name = "ucrInputNewName"
-        Me.ucrInputNewName.Size = New System.Drawing.Size(131, 22)
+        Me.ucrInputNewName.Size = New System.Drawing.Size(131, 33)
         Me.ucrInputNewName.TabIndex = 2
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 94)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 117)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 3
+        Me.ucrBase.TabIndex = 5
         '
         'ucrDataFrameToRename
         '
@@ -68,10 +68,10 @@ Partial Class dlgRenameSheet
         'lblLabel
         '
         Me.lblLabel.AutoSize = True
-        Me.lblLabel.Location = New System.Drawing.Point(196, 51)
+        Me.lblLabel.Location = New System.Drawing.Point(196, 64)
         Me.lblLabel.Name = "lblLabel"
         Me.lblLabel.Size = New System.Drawing.Size(94, 13)
-        Me.lblLabel.TabIndex = 4
+        Me.lblLabel.TabIndex = 3
         Me.lblLabel.Text = "Data Frame Label:"
         '
         'ucrInputLabel
@@ -79,16 +79,16 @@ Partial Class dlgRenameSheet
         Me.ucrInputLabel.AddQuotesIfUnrecognised = True
         Me.ucrInputLabel.IsMultiline = False
         Me.ucrInputLabel.IsReadOnly = False
-        Me.ucrInputLabel.Location = New System.Drawing.Point(196, 66)
+        Me.ucrInputLabel.Location = New System.Drawing.Point(196, 79)
         Me.ucrInputLabel.Name = "ucrInputLabel"
-        Me.ucrInputLabel.Size = New System.Drawing.Size(131, 21)
-        Me.ucrInputLabel.TabIndex = 5
+        Me.ucrInputLabel.Size = New System.Drawing.Size(131, 32)
+        Me.ucrInputLabel.TabIndex = 4
         '
         'dlgRenameSheet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(417, 151)
+        Me.ClientSize = New System.Drawing.Size(419, 178)
         Me.Controls.Add(Me.ucrInputLabel)
         Me.Controls.Add(Me.lblLabel)
         Me.Controls.Add(Me.ucrInputNewName)

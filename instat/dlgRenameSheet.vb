@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgRenameSheet
     Public bFirstLoad As Boolean = True
@@ -52,7 +51,6 @@ Public Class dlgRenameSheet
     End Sub
 
     ' check how changing dataframes affects it
-
     Private Sub SetDefaults()
         Dim clsDefaultFunction As New RFunction
         ucrInputNewName.Reset()
