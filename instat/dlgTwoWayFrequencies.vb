@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgTwoWayFrequencies
     Private bFirstLoad As Boolean = True
@@ -34,28 +33,6 @@ Public Class dlgTwoWayFrequencies
         SetRCodeForControls(bReset)
         bReset = False
         TestOkEnabled()
-    End Sub
-
-    Public Sub SetRCodeForControls(bReset As Boolean)
-
-        ucrReceiverRowFactor.AddAdditionalCodeParameterPair(clsSjpXtab, New RParameter("x", 0), iAdditionalPairNo:=1)
-        ucrReceiverColumnFactor.AddAdditionalCodeParameterPair(clsSjpXtab, New RParameter("grp", 1), iAdditionalPairNo:=1)
-        ucrChkWeights.AddAdditionalCodeParameterPair(clsSjpXtab, New RParameter("weight.by", 1), iAdditionalPairNo:=1)
-        ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjpXtab, ucrChkWeights.GetParameter(), iAdditionalPairNo:=1)
-
-        ucrReceiverRowFactor.SetRCode(clsSjtXtab, bReset)
-        ucrReceiverColumnFactor.SetRCode(clsSjtXtab, bReset)
-        ucrReceiverWeights.SetRCode(clsSjtXtab, bReset)
-        ucrChkWeights.SetRCode(clsSjtXtab, bReset)
-        ucrChkFlip.SetRCode(clsSjpXtab, bReset)
-
-        ucrPnlFreqType.SetRCode(clsSjpXtab, bReset)
-        ucrPnlFreqDisplay.SetRCode(clsSjtXtab, bReset)
-
-        ucrChkCell.SetRCode(clsSjtXtab, bReset)
-        ucrChkColumn.SetRCode(clsSjtXtab, bReset)
-        ucrChkRow.SetRCode(clsSjtXtab, bReset)
-        ucrChkCount.SetRCode(clsSjtXtab, bReset)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -143,6 +120,28 @@ Public Class dlgTwoWayFrequencies
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjtXtab)
         bResetSubdialog = True
     End Sub
+
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        ucrReceiverRowFactor.AddAdditionalCodeParameterPair(clsSjpXtab, New RParameter("x", 0), iAdditionalPairNo:=1)
+        ucrReceiverColumnFactor.AddAdditionalCodeParameterPair(clsSjpXtab, New RParameter("grp", 1), iAdditionalPairNo:=1)
+        ucrChkWeights.AddAdditionalCodeParameterPair(clsSjpXtab, New RParameter("weight.by", 1), iAdditionalPairNo:=1)
+        ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjpXtab, ucrChkWeights.GetParameter(), iAdditionalPairNo:=1)
+
+        ucrReceiverRowFactor.SetRCode(clsSjtXtab, bReset)
+        ucrReceiverColumnFactor.SetRCode(clsSjtXtab, bReset)
+        ucrReceiverWeights.SetRCode(clsSjtXtab, bReset)
+        ucrChkWeights.SetRCode(clsSjtXtab, bReset)
+        ucrChkFlip.SetRCode(clsSjpXtab, bReset)
+
+        ucrPnlFreqType.SetRCode(clsSjpXtab, bReset)
+        ucrPnlFreqDisplay.SetRCode(clsSjtXtab, bReset)
+
+        ucrChkCell.SetRCode(clsSjtXtab, bReset)
+        ucrChkColumn.SetRCode(clsSjtXtab, bReset)
+        ucrChkRow.SetRCode(clsSjtXtab, bReset)
+        ucrChkCount.SetRCode(clsSjtXtab, bReset)
+    End Sub
+
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         If rdoTable.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjtXtab)
@@ -171,7 +170,6 @@ Public Class dlgTwoWayFrequencies
         End If
 
     End Sub
-
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
