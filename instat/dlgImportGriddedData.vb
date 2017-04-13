@@ -63,7 +63,7 @@ Public Class dlgImportGriddedData
         ucrInputLocDataName.SetParameter(New RParameter("location_data_name", 3))
         ucrInputLocDataName.SetParameterIncludeArgumentName(False)
 
-        ucrInputExportFile.SetParameter(New RParameter("path", 4))
+        'ucrInputExportFile.SetParameter(New RParameter("path", 4))
 
         ucrPnlGetArea.SetParameter(New RParameter("get_area_point", 5))
         ucrPnlGetArea.AddRadioButton(rdoArea, Chr(34) & "area" & Chr(34))
@@ -97,8 +97,8 @@ Public Class dlgImportGriddedData
     Private Sub SetDefaults()
         clsRDefaultFunction = New RFunction
 
-        ucrInputExportFile.IsReadOnly = True
-        ucrInputExportFile.SetName("")
+        'ucrInputExportFile.IsReadOnly = True
+        'ucrInputExportFile.SetName("")
 
         dctFiles = New Dictionary(Of String, String)
         dctFiles.Add("Daily 0p05", Chr(34) & "daily_0p05" & Chr(34))
@@ -117,6 +117,7 @@ Public Class dlgImportGriddedData
         clsRDefaultFunction.AddParameter("data_file", Chr(34) & "daily_0p05" & Chr(34))
         clsRDefaultFunction.AddParameter("data_frame_name", "IRI_Library_Data")
         clsRDefaultFunction.AddParameter("location_data_name", "Lat_Lon_Data")
+        clsRDefaultFunction.AddParameter("path", Chr(34) & System.IO.Path.Combine(System.IO.Path.GetTempPath() & "R_Instat_Temp_IRI_Download").Replace("\", "/") & Chr(34))
         'opted to set this as default location since it has data for all sources
         clsRDefaultFunction.AddParameter("X1", 10)
         clsRDefaultFunction.AddParameter("X2", 10.5)
@@ -228,19 +229,22 @@ Public Class dlgImportGriddedData
         End If
     End Sub
 
-    Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
-        Dim dlgSave As New SaveFileDialog
-        dlgSave.Title = "Create Temporary Directory"
-        dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
-        'dlgSave.Filter = "Text separated file (*.txt)|*.txt"
-        If dlgSave.ShowDialog = DialogResult.OK Then
-            If dlgSave.FileName <> "" Then
-                ucrInputExportFile.SetName(Path.GetFullPath(dlgSave.FileName).ToString.Replace("\", "/"))
-            End If
-        End If
-    End Sub
+    'Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
+    '    Dim dlgSave As New FolderBrowserDialog
+    '    Dim strTempDownloadDirectory As String
+    '    'dlgSave. = "Create Temporary Directory"
+    '    strTempDownloadDirectory = System.IO.Path.Combine(System.IO.Path.GetTempPath() & "R_Instat_Temp_IRI_Download")
+    '    dlgSave.RootFolder = strTempDownloadDirectory
+    '    'frmMain.clsInstatOptions.strWorkingDirectory
+    '    'dlgSave.Filter = "Text separated file (*.txt)|*.txt"
+    '    If dlgSave.ShowDialog = DialogResult.OK Then
+    '        If dlgSave.RootFolder <> "" Then
+    '            ucrInputExportFile.SetName(Path.GetFullPath(dlgSave.RootFolder).ToString.Replace("\", "/"))
+    '        End If
+    '    End If
+    'End Sub
 
-    Private Sub ucrInputExportFile_Click(sender As Object, e As EventArgs) Handles ucrInputExportFile.Click
-        cmdBrowse_Click(sender, e)
-    End Sub
+    'Private Sub ucrInputExportFile_Click(sender As Object, e As EventArgs) Handles ucrInputExportFile.Click
+    '    cmdBrowse_Click(sender, e)
+    'End Sub
 End Class
