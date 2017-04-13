@@ -13,7 +13,6 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports instat
 Imports instat.Translations
 
 Public Class dlgDescribeOneVariable
@@ -29,7 +28,6 @@ Public Class dlgDescribeOneVariable
             InitialiseDialog()
             bFirstLoad = False
         End If
-
         If bReset Then
             SetDefaults()
         End If
@@ -100,6 +98,7 @@ Public Class dlgDescribeOneVariable
         ucrChkCustomise.AddFunctionNamesCondition(False, "summary")
 
         ucrChkSaveResult.SetText("Save Result") 'this is disabled in the initial implementation
+        ucrChkSaveResult.Enabled = False
         'ucrChkSaveResult.SetParameter(New RParameter("store_results"))
         'ucrChkSaveResult.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         'ucrChkSaveResult.SetRDefault("FALSE")
@@ -128,13 +127,11 @@ Public Class dlgDescribeOneVariable
             ucrReceiverDescribeOneVar.SetParameterIsString()
             'For the checkbox we just change the parameter name, because we want to keep the same value in the control for the new function.
             'Changing the parameter name should be used very cautiously. Normally it is safer to set a new parameter.
-            ucrChkOmitMissing.ChangeParameterName("drop")
             cmdSummaries.Enabled = True
         Else
             ucrBaseDescribeOneVar.clsRsyntax.SetBaseRFunction(clsSummaryFunction)
             ucrReceiverDescribeOneVar.SetParameter(New RParameter("object", 0))
             ucrReceiverDescribeOneVar.SetParameterIsRFunction()
-            ucrChkOmitMissing.ChangeParameterName("na.rm")
             cmdSummaries.Enabled = False
         End If
         'We need to update the base function to include the 
