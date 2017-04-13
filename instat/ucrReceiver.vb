@@ -17,7 +17,7 @@
 Imports instat
 Imports instat.Translations
 Public Class ucrReceiver
-    Public WithEvents Selector As ucrSelector
+    Public WithEvents ucrSelector As ucrSelector
     Public lstIncludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
     Public lstExcludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
     Public bFirstLoad As Boolean
@@ -34,11 +34,11 @@ Public Class ucrReceiver
 
     Public bAddParameterIfEmpty As Boolean = False
     'If the control is used to set a parameter that is a string i.e. column = "ID"
-    Private bParameterIsString As Boolean = False
+    Protected bParameterIsString As Boolean = False
     'If the control is used to set a parameter that is an RFunction i.e. x = InstatDataObject$get_columns_from_data()
-    Private bParameterIsRFunction As Boolean = False
+    Protected bParameterIsRFunction As Boolean = False
     'The name of the data parameter in the get columns instat object method (should always be the same)
-    Private strColumnsParameterNameInRFunction As String = "col_names"
+    Protected strColumnsParameterNameInRFunction As String = "col_names"
 
     'Should quotes be used when bParameterIsString = False
     Public bWithQuotes As Boolean = True
@@ -106,7 +106,7 @@ Public Class ucrReceiver
         Return strVarNames
     End Function
 
-    Public Sub SetMeAsReceiver()
+    Public Overridable Sub SetMeAsReceiver()
         If Selector IsNot Nothing Then
             Selector.SetCurrentReceiver(Me)
         End If
@@ -276,7 +276,7 @@ Public Class ucrReceiver
         End If
     End Sub
 
-    Protected Overridable Sub Selector_ResetAll() Handles Selector.ResetReceivers
+    Protected Overridable Sub Selector_ResetAll() Handles ucrSelector.ResetReceivers
         Clear()
     End Sub
 
@@ -359,19 +359,25 @@ Public Class ucrReceiver
         End If
         'Could need bParameterIsString and bParameterIsRFunction to be properties of RParameter if two functions need string/function
         If bParameterIsString Then
-            clsTempParam.SetArgumentValue(GetVariableNames(bWithQuotes))
+            'TODO this currently only works with one value to ignore. Also may need option not to set parameter value to strValuesToIgnore
+            '     although this currently can be done with bAddParameterIfEmpty = True
+            If IsEmpty() AndAlso strValuesToIgnore IsNot Nothing AndAlso strValuesToIgnore.Count = 1 Then
+                clsTempParam.SetArgumentValue(strValuesToIgnore(0))
+            Else
+                clsTempParam.SetArgumentValue(GetVariableNames(bWithQuotes))
+            End If
         ElseIf bParameterIsRFunction Then
             clsTempParam.SetArgument(GetVariables(bForceAsDataFrame))
         End If
     End Sub
 
-    Public Sub SetParameterIsString()
+    Public Overridable Sub SetParameterIsString()
         bParameterIsString = True
         bParameterIsRFunction = False
         UpdateAllParameters()
     End Sub
 
-    Public Sub SetParameterIsRFunction()
+    Public Overridable Sub SetParameterIsRFunction()
         bParameterIsRFunction = True
         bParameterIsString = False
         UpdateAllParameters()
@@ -388,4 +394,13 @@ Public Class ucrReceiver
     Public Sub SetClimaticType(strTemp As String)
         AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & strTemp & Chr(34)})
     End Sub
+
+    Public Overridable Property Selector As ucrSelector
+        Get
+            Return ucrSelector
+        End Get
+        Set(ucrNewSelector As ucrSelector)
+            ucrSelector = ucrNewSelector
+        End Set
+    End Property
 End Class
