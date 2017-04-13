@@ -321,10 +321,14 @@ Public Class ucrVariablesAsFactor
             MyBase.Selector = ucrNewSelector
             ucrSingleVariable.Selector = ucrNewSelector
             ucrMultipleVariables.Selector = ucrNewSelector
-            ucrVariableSelector = TryCast(ucrNewSelector, ucrSelectorByDataFrame)
-            If ucrVariableSelector Is Nothing Then
-                MsgBox("Developer error: ucrVariablesAsFactor must be associated with a ucrSelectorByDataFrame not a base ucrSelector.")
+
+            If ucrNewSelector IsNot Nothing Then
+                ucrVariableSelector = TryCast(ucrNewSelector, ucrSelectorByDataFrame)
+                If ucrVariableSelector Is Nothing Then
+                    MsgBox("Developer error: ucrVariablesAsFactor must be associated with a ucrSelectorByDataFrame not a base ucrSelector.")
+                End If
             End If
+
         End Set
     End Property
 End Class
