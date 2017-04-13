@@ -526,37 +526,43 @@ data_object$set("public", "anova_tables", function(x_col_names, y_col_name, sign
 }
 )
 
-data_object$set("public", "rename_column_in_data", function(curr_col_name = "", new_col_name="") {
+data_object$set("public", "rename_column_in_data", function(curr_col_name = "", new_col_name = "", label = "") {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
-  # Column name must be character
-  if (new_col_name %in% names(curr_data)){
-    stop("Cannot rename this column. A column named: ",new_col_name," already exists in the data.")
-  }
-  if(!is.character(curr_col_name)) {
-    stop("Current column name must be of type: character")
-  }
-  
-  else if (!(curr_col_name %in% names(curr_data))) {
-    stop(paste0("Cannot rename column: ",curr_col_name,". Column was not found in the data."))
-  }
-  
-  else if (!is.character(new_col_name)) {
-    stop("New column name must be of type: character")
-  }
-  
-  else {
-    if(sum(names(curr_data) == curr_col_name) > 1) {
-      # Should never happen since column names must be unique
-      warning(paste0("Multiple columns have name: '", curr_col_name,"'. All such columns will be renamed."))
+   # Column name must be character
+  if(new_col_name != curr_col_name) {
+    if (new_col_name %in% names(curr_data)){
+      stop("Cannot rename this column. A column named: ",new_col_name," already exists in the data.")
     }
-    # Need to use private$data here because changing names of data field
-    names(private$data)[names(curr_data) == curr_col_name] <- new_col_name
-    self$append_to_variables_metadata(new_col_name, name_label, new_col_name)
-    # TODO decide if we need to do these 2 lines
-    self$append_to_changes(list(Renamed_col, curr_col_name, new_col_name))
-    self$data_changed <- TRUE
+    if(!is.character(curr_col_name)) {
+      stop("Current column name must be of type: character")
+    }
+    
+    else if (!(curr_col_name %in% names(curr_data))) {
+      stop(paste0("Cannot rename column: ",curr_col_name,". Column was not found in the data."))
+    }
+    
+    else if (!is.character(new_col_name)) {
+      stop("New column name must be of type: character")
+    }
+    
+    else {
+      if(sum(names(curr_data) == curr_col_name) > 1) {
+        # Should never happen since column names must be unique
+        warning(paste0("Multiple columns have name: '", curr_col_name,"'. All such columns will be renamed."))
+      }
+      # Need to use private$data here because changing names of data field
+      names(private$data)[names(curr_data) == curr_col_name] <- new_col_name
+      self$append_to_variables_metadata(new_col_name, name_label, new_col_name)
+      # TODO decide if we need to do these 2 lines
+      self$append_to_changes(list(Renamed_col, curr_col_name, new_col_name))
+      self$data_changed <- TRUE
+      self$variables_metadata_changed <- TRUE
+    }
+  }
+  if(label != "") {
+   self$append_to_variables_metadata(col_name = new_col_name, property = "label", new_val = label)
     self$variables_metadata_changed <- TRUE
-    }
+  }
 }
 )
 
