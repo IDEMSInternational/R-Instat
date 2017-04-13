@@ -68,7 +68,6 @@ Public Class dlgRegularSequence
 
         ucrPnlSequenceType.AddRadioButton(rdoNumeric)
         ucrPnlSequenceType.AddRadioButton(rdoDates)
-        ucrPnlSequenceType.bAllowNonConditionValues = True
         ucrPnlSequenceType.AddFunctionNamesCondition(rdoNumeric, {"seq", "rep"})
         'ucrPnlSequenceType.AddFunctionNamesCondition(rdoDates, "as.date")
 
