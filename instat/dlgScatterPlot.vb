@@ -117,11 +117,12 @@ Public Class dlgScatterPlot
     End Sub
 
     Private Sub TestOkEnabled()
-        'tests when okay Is enable. Both x and y aesthetics are mandatory but can be set to x="" or(exclusive) y="" in case the other one is filled. 
-        If Not ucrVariablesAsFactorForScatter.IsEmpty AndAlso ucrSaveScatterPlot.IsComplete Then
-            ucrBase.OKEnabled(True)
-        Else
+        ' Either y or x can be empty but not both
+
+        If (Not ucrSaveScatterPlot.IsComplete) OrElse (ucrVariablesAsFactorForScatter.IsEmpty AndAlso ucrReceiverX.IsEmpty()) Then
             ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
         End If
     End Sub
 
