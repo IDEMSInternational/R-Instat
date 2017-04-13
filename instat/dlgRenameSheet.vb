@@ -55,7 +55,7 @@ Public Class dlgRenameSheet
         Dim clsDefaultFunction As New RFunction
         ucrInputNewName.Reset()
         ucrDataFrameToRename.Reset()
-
+        ucrInputLabel.Reset()
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_dataframe")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
 

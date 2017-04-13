@@ -43,6 +43,7 @@ Public Class dlgName
 
     Private Sub ReopenDialog()
         ucrSelectVariables.Reset()
+        DefaultNewName()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -69,12 +70,18 @@ Public Class dlgName
 
     Public Sub SetDefaults()
         clsDefaultRFunction = New RFunction
-
+        ucrInputVariableLabel.Reset()
         ucrSelectVariables.Reset()
         ucrInputNewName.Reset()
 
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
+    End Sub
+
+    Private Sub DefaultNewName()
+        If ((Not ucrInputNewName.bUserTyped) AndAlso (Not ucrReceiverName.IsEmpty)) Then
+            ucrInputNewName.SetName(ucrReceiverName.GetVariableNames(bWithQuotes:=False))
+        End If
     End Sub
 
     Private Sub TestOKEnabled()
@@ -109,5 +116,9 @@ Public Class dlgName
 
     Private Sub ucrCoreControls_ControlContentsChanged() Handles ucrInputNewName.ControlContentsChanged, ucrReceiverName.ControlContentsChanged, ucrSelectVariables.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrReceiverName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverName.ControlValueChanged
+        DefaultNewName()
     End Sub
 End Class
