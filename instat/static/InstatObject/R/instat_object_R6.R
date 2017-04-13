@@ -643,14 +643,6 @@ instat_object$set("public", "replace_value_in_data", function(data_name, col_nam
 
 instat_object$set("public", "rename_column_in_data", function(data_name, column_name, new_val, label) {
   self$get_data_objects(data_name)$rename_column_in_data(column_name, new_val, label)
-  for(i in seq_along(private$.links)) {
-    if(private$.links[[i]]$from_data_frame == data_name) {
-      private$.links[[i]]$from_data_frame <- new_value
-    }
-    if(private$.links[[i]]$to_data_frame == data_name) {
-      private$.links[[i]]$to_data_frame <- new_value
-    }
-  }
 } 
 )
 
