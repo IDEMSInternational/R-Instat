@@ -46,8 +46,8 @@ Public Class dlgRatingScales
         ucrNudNeutralLevel.SetRCode(clsSjplikert, bReset)
         ucrNudNeutralLevel.SetMinMax(1, Integer.MaxValue)
 
-        ucrChkWeights.AddAdditionalCodeParameterPair(clsSjplikert, New RParameter("weight.by", 1), iAdditionalPairNo:=1)
-        ucrChkWeights.AddAdditionalCodeParameterPair(clsSjtStackFrq, New RParameter("weight.by", 1), iAdditionalPairNo:=2)
+        ucrChkWeights.AddAdditionalCodeParameterPair(clsSjplikert, New RParameter("weight.by", 2), iAdditionalPairNo:=1)
+        ucrChkWeights.AddAdditionalCodeParameterPair(clsSjtStackFrq, New RParameter("weight.by", 2), iAdditionalPairNo:=2)
         ucrReceiverOrderedFactors.AddAdditionalCodeParameterPair(clsSjplikert, New RParameter("items", 1), iAdditionalPairNo:=1)
         ucrReceiverOrderedFactors.AddAdditionalCodeParameterPair(clsSjtStackFrq, New RParameter("items", 1), iAdditionalPairNo:=2)
         ucrReceiverWeights.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
@@ -105,10 +105,8 @@ Public Class dlgRatingScales
 
         'ucrPnlSortsjt.stackfrq
 
-
         ucrPnlGraphType.bAllowNonConditionValues = True
         ucrPnlType.bAllowNonConditionValues = True
-
 
         'ucrPnlSortsjp.likert
         ucrPnlSjpLikert.AddFunctionNamesCondition(rdoLikert, "sjPlot::sjp.likert")
@@ -152,31 +150,14 @@ Public Class dlgRatingScales
         End If
     End Sub
 
-    'Private Sub ChangeBaseFunction()
-    '    If rdoGraph.Checked Then
-    '        If rdoLikert.Checked Then
-    '            ucrPnlSjpLikert.SetParameter(New RParameter("sort.frq", 2))
-    '            ucrNudNeutralLevel.SetParameter(New RParameter("cat.neutral", 3))
-    '            ucrBase.clsRsyntax.SetBaseRFunction(clsSjplikert)
-    '        Else
-    '            ucrPnlSjpLikert.SetParameter(New RParameter("sort.frq", 2))
-    '            ucrBase.clsRsyntax.SetBaseRFunction(clsSjpStackFrq)
-    '        End If
-    '    ElseIf rdoTable.Checked Then
-    '        ucrPnlSjpLikert.SetParameter(New RParameter("sort.frq", 2))
-    '        ucrBase.clsRsyntax.SetBaseRFunction(clsSjtStackFrq)
-    '    End If
-    '    SetRCodeForControls(False)
-    'End Sub
-
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         If rdoGraph.Checked Then
             If rdoLikert.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsSjplikert)
-                'ucrBase.clsRsyntax.bHTMLOutput = True
+                'ucrBase.clsRsyntax.bHTMLOutput = False
             Else
                 ucrBase.clsRsyntax.SetBaseRFunction(clsSjpStackFrq)
-                ' ucrBase.clsRsyntax.bHTMLOutput = False
+                ' ucrBase.clsRsyntax.bHTMLOutput = True
             End If
             ucrBase.clsRsyntax.iCallType = 3
         ElseIf rdoTable.Checked Then
@@ -188,26 +169,12 @@ Public Class dlgRatingScales
         TestOkEnabled()
     End Sub
 
-    'Private Sub ICalltype()
-    '    If rdoGraph.Checked AndAlso (rdoLikert.Checked OrElse rdoStacked.Checked) Then
-    '        ucrBase.clsRsyntax.iCallType = 3
-    '    ElseIf rdoTable.Checked Then
-    '        ucrBase.clsRsyntax.iCallType = 0
-    '    End If
-
-    'End Sub
-
-
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrChkGraph_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGraphType.ControlValueChanged, ucrPnlType.ControlValueChanged
-        ' ChangeBaseFunction()
-        'ICalltype()
-    End Sub
     Private Sub ucrChkWeights_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWeights.ControlValueChanged
         If ucrChkWeights.Checked Then
             ucrReceiverWeights.SetMeAsReceiver()
