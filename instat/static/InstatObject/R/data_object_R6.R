@@ -1641,10 +1641,10 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
     }
     
     if(curr_geom_name == "box_jitter") {
-      g <- g + geom_boxplot() + geom_jitter() 
+      g <- g + geom_boxplot() + geom_jitter(width = 0.2, height = 0.2)
     }
     else if(curr_geom_name == "violin_jitter") {
-      g <- g + geom_violin() + geom_jitter() 
+      g <- g + geom_violin() + geom_jitter(width = 0.2, height = 0.2)
     }
     else if(curr_geom_name == "violin_box") {
       g <- g + geom_violin() + geom_boxplot() 
@@ -1693,10 +1693,10 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
         g <- g + coord_flip()
       } 
       if(curr_geom_name == "box_jitter") {
-        g <- g + geom_boxplot() + geom_jitter()
+        g <- g + geom_boxplot() + geom_jitter(width = 0.2, height = 0.2)
       }
       else if(curr_geom_name == "violin_jitter") {
-        g <- g + geom_violin() + geom_jitter()
+        g <- g + geom_violin() + geom_jitter(width = 0.2, height = 0.2)
       }
       else if(curr_geom_name == "violin_box") {
         g <- g + geom_violin() + geom_boxplot()
