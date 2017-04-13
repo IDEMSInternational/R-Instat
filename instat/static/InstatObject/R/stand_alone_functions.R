@@ -460,12 +460,12 @@ import_from_iri <- function(download_from, data_file, path, X1, X2,Y1,Y2, get_ar
   if (nrow(dataout)==0) stop("There is no data for the selected point/area.")
  
   if(get_area_point == "point"){
-    dataout$Longitude = X1
-    dataout$Latitude = Y1
+    Longitude <- rep(X1, nrow(dataout))
+    Latitude = rep(Y1, nrow(dataout))
+    dataout = cbind(Longitude, Latitude, dataout)
   }
   
-  lat_lon_dataframe = unique(dataout[,c("Longitude", "Latitude")])
- 
+  lat_lon_dataframe = unique(dataout[,c(1,2)])
   
   file.remove(paste(gaugelocdir,"tmp_iri.csv",sep="/"))
   return(list(dataout,lat_lon_dataframe))
