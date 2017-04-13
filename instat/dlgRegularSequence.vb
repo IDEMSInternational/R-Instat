@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Imports RDotNet
 Public Class dlgRegularSequence
@@ -21,6 +22,7 @@ Public Class dlgRegularSequence
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsSeqFunction, clsRepFunction As New RFunction
+    Private bUpdate As Boolean = False
     Private Sub dlgRegularSequence_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -41,7 +43,9 @@ Public Class dlgRegularSequence
         ucrInputTo.SetRCode(clsSeqFunction, bReset)
         ucrNudRepeatValues.SetRCode(clsRepFunction, bReset)
         ucrNudRepeatValues.SetRCode(clsSeqFunction, bReset)
+        bUpdate = True
         ucrInputInStepsOf.SetRCode(clsSeqFunction, bReset)
+        bUpdate = False
 
     End Sub
 
@@ -61,7 +65,7 @@ Public Class dlgRegularSequence
         ucrNudRepeatValues.SetMinMax(1, Integer.MaxValue)
         ucrInputInStepsOf.SetParameter(New RParameter("by", 2))
         ucrInputInStepsOf.AddQuotesIfUnrecognised = False
-        ucrInputInStepsOf.SetValidationTypeAsNumeric(dcmMin:=0)
+        ucrInputInStepsOf.SetValidationTypeAsNumeric()
         ucrDataFrameLengthForRegularSequence.SetDataFrameSelector(ucrSelectDataFrameRegularSequence)
 
         ucrPnlSequenceType.AddToLinkedControls(ucrInputFrom, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=1)
@@ -86,7 +90,6 @@ Public Class dlgRegularSequence
         ucrNewColumnName.SetLabelText("New Column Name:")
 
         'TODO complete dates option
-        rdoDates.Enabled = False
         dtpSelectorB.Visible = False
         dtpSelectorA.Visible = False
         ucrChkDefineAsFactor.SetText("Define As Factor")
@@ -103,6 +106,7 @@ Public Class dlgRegularSequence
         clsSeqFunction = New RFunction
         ucrSelectDataFrameRegularSequence.Reset()
         ucrNewColumnName.Reset()
+        rdoNumeric.Checked = True
         clsSeqFunction.SetRCommand("seq")
         clsSeqFunction.AddParameter("from", 1)
         clsSeqFunction.AddParameter("to", ucrSelectDataFrameRegularSequence.iDataFrameLength)
@@ -142,17 +146,14 @@ Public Class dlgRegularSequence
     End Sub
 
     Private Sub SetInStepsOfParameter()
-        If rdoNumeric.Checked Then
-            If ucrInputInStepsOf.GetText <> "" Then
-                If (ucrInputInStepsOf.GetText = 1 AndAlso frmMain.clsInstatOptions.bIncludeRDefaultParameters) OrElse ucrInputInStepsOf.GetText <> 1 Then
-                    If ucrInputTo.GetText >= ucrInputFrom.GetText Then
-                        clsSeqFunction.AddParameter("by", ucrInputInStepsOf.GetText)
-                    Else
-                        clsSeqFunction.AddParameter("by", "-" & ucrInputInStepsOf.GetText)
-                    End If
-                End If
+        If Not ucrInputTo.IsEmpty AndAlso Not ucrInputFrom.IsEmpty Then
+            If Convert.ToDecimal(ucrInputTo.GetText) >= Convert.ToDecimal(ucrInputFrom.GetText) Then
+                clsSeqFunction.AddParameter("by", ucrInputInStepsOf.GetText)
+            Else
+                clsSeqFunction.AddParameter("by", "-" & ucrInputInStepsOf.GetText)
             End If
         End If
+        CheckSequenceLength()
     End Sub
 
     Private Sub SetBaseFunction()
@@ -233,16 +234,12 @@ Public Class dlgRegularSequence
         CheckSequenceLength()
     End Sub
 
-    Private Sub ucrInputFrom_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFrom.ControlContentsChanged, ucrInputTo.ControlContentsChanged, ucrInputInStepsOf.ControlContentsChanged
-        CheckSequenceLength()
+    Private Sub ucrInputFrom_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFrom.ControlValueChanged, ucrInputTo.ControlValueChanged, ucrInputInStepsOf.ControlValueChanged
+        SetInStepsOfParameter()
     End Sub
 
     Private Sub ucrNewColumnName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewColumnName.ControlContentsChanged, ucrInputTo.ControlContentsChanged, ucrInputFrom.ControlContentsChanged, ucrInputInStepsOf.ControlContentsChanged, ucrNudRepeatValues.ControlContentsChanged, ucrPnlSequenceType.ControlContentsChanged, ucrSelectDataFrameRegularSequence.ControlContentsChanged
         TestOKEnabled()
-    End Sub
-
-    Private Sub ucrInputFrom_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputInStepsOf.ControlContentsChanged, ucrPnlSequenceType.ControlContentsChanged
-        SetInStepsOfParameter()
     End Sub
 
     Private Sub txtGetPreview_TextChanged(sender As Object, e As EventArgs) Handles txtGetPreview.TextChanged
