@@ -86,6 +86,7 @@ Public Class dlgScatterPlot
 
         ucrSelectorForScatter.Reset()
         ucrSaveScatterPlot.Reset()
+        sdgPlots.Reset()
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
@@ -100,10 +101,9 @@ Public Class dlgScatterPlot
         clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
         clsRaesFunction.AddParameter("y", Chr(34) & Chr(34))
 
-        clsRScatterGeomFunction.SetRCommand("geom_point")
         clsRScatterGeomFunction.SetPackageName("ggplot2")
+        clsRScatterGeomFunction.SetRCommand("geom_point")
 
-        sdgPlots.Reset()
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
     End Sub
