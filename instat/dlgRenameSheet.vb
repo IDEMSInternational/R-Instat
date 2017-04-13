@@ -23,7 +23,7 @@ Public Class dlgRenameSheet
             InitialiseDialog()
             bFirstLoad = False
         Else
-            ReopenDialog() ' Temp fix
+            ReopenDialog()
         End If
         If bReset Then
             SetDefaults()
@@ -58,7 +58,7 @@ Public Class dlgRenameSheet
         ucrInputLabel.Reset()
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_dataframe")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-
+        ucrInputLabel.SetName("")
         CheckAutoName()
     End Sub
 
