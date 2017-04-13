@@ -51,6 +51,13 @@ Public Class dlgPlot
     End Sub
 
     Private Sub InitialiseDialog()
+        Dim clsTempRFunc As New RFunction
+        Dim geom_point As New RParameter
+
+        clsTempRFunc.SetRCommand("geom_point")
+        clsTempRFunc.SetPackageName("ggplot2")
+        geom_point.clsArgumentCodeStructure = clsTempRFunc
+
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
@@ -82,9 +89,15 @@ Public Class dlgPlot
         ucrVariablesAsFactorForLinePlot.SetValuesToIgnore({Chr(34) & Chr(34)})
         ucrVariablesAsFactorForLinePlot.bAddParameterIfEmpty = True
 
+        ucrChkPoints.SetParameter(New RParameter("geom_point"))
         ucrChkPoints.SetText("Points")
+        ucrChkPoints.AddParameterPresentCondition(True, "geom_point")
+        ucrChkPoints.AddParameterPresentCondition(False, "geom_point", False)
+        'create parameter 
 
 
+        ucrChkPoints.AddParameterIsROperatorCondition(True, "geom_point")
+        ucrChkPoints.AddParameterIsROperatorCondition(False, "geom_point", False)
 
         ucrSave.SetPrefix("Line")
         ucrSave.SetIsComboBox()
@@ -97,7 +110,6 @@ Public Class dlgPlot
 
     End Sub
     Private Sub SetDefaults()
-
         clsRggplotFunction = New RFunction
         clsRgeom_lineplotFunction = New RFunction
         clsRaesFunction = New RFunction
