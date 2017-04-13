@@ -826,7 +826,7 @@ data_object$set("public", "add_defaults_variables_metadata", function() {
     if(!self$is_variables_metadata(scientific_label, column)) {
       self$append_to_variables_metadata(column, scientific_label, FALSE)
     }
-    if(!self$is_variables_metadata(scientific_label, column)) {
+    if(!self$is_variables_metadata(signif_figures_label, column)) {
       self$append_to_variables_metadata(column, signif_figures_label, get_default_significant_figures(self$get_columns_from_data(column, use_current_filter = FALSE)))
     }
   }
