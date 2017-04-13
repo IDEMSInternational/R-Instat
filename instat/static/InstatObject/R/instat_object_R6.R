@@ -641,16 +641,8 @@ instat_object$set("public", "replace_value_in_data", function(data_name, col_nam
 # } 
 # )
 
-instat_object$set("public", "rename_column_in_data", function(data_name, column_name, new_val) {
-  self$get_data_objects(data_name)$rename_column_in_data(column_name, new_val)
-  for(i in seq_along(private$.links)) {
-    if(private$.links[[i]]$from_data_frame == data_name) {
-      private$.links[[i]]$from_data_frame <- new_value
-    }
-    if(private$.links[[i]]$to_data_frame == data_name) {
-      private$.links[[i]]$to_data_frame <- new_value
-    }
-  }
+instat_object$set("public", "rename_column_in_data", function(data_name, column_name, new_val, label) {
+  self$get_data_objects(data_name)$rename_column_in_data(column_name, new_val, label)
 } 
 )
 
@@ -765,7 +757,7 @@ instat_object$set("public", "sort_dataframe", function(data_name, col_names = c(
 } 
 )
 
-instat_object$set("public", "rename_dataframe", function(data_name, new_value = "") {
+instat_object$set("public", "rename_dataframe", function(data_name, new_value = "", label = "") {
   data_obj = self$get_data_objects(data_name)
   names(private$.data_objects)[names(private$.data_objects) == data_name] <- new_value
   data_obj$append_to_metadata(data_name_label, new_value)
@@ -777,8 +769,9 @@ instat_object$set("public", "rename_dataframe", function(data_name, new_value = 
       private$.links[[i]]$to_data_frame <- new_value
     }
   }
-  data_obj$set_data_changed(TRUE)
- } 
+    data_obj$set_data_changed(TRUE)
+    data_obj$append_to_metadata(property = "label" , new_val = label)
+  } 
 )
 
 instat_object$set("public", "convert_column_to_type", function(data_name, col_names = c(), to_type, factor_numeric = "by_levels", set_digits, set_decimals = FALSE) {
@@ -1098,13 +1091,18 @@ instat_object$set("public","make_inventory_plot", function(data_name, date_col, 
 }
 )
 
-instat_object$set("public", "import_NetCDF", function(nc_data, data_names = c()) {
-  data_list <- open_NetCDF(nc_data)
-  if(length(data_list) != length(data_names))stop("data_names vector should be of length 2")
-  names(data_list) = c(data_names[1],next_default_item(prefix = data_names[2], existing_names = self$get_data_names(), include_index = FALSE))
+instat_object$set("public", "import_NetCDF", function(nc_data, main_data_name, loc_data_name, latitude_col_name = "", longitude_col_name = "") {
+  nc_result <- open_NetCDF(nc_data = nc_data, latitude_col_name = latitude_col_name, longitude_col_name = longitude_col_name)
+  if(length(nc_result) != 3)stop("Output from open_NetCDF should be a list of length 3")
+  
+  data_list = nc_result[c(1,2)]
+  
+  names(data_list) = c(main_data_name, next_default_item(prefix = loc_data_name, existing_names = self$get_data_names(), include_index = FALSE))
   self$import_data(data_tables = data_list)
-  self$add_key(data_names[2], c("lat", "lon"))
-  self$add_link(from_data_frame = data_names[1], to_data_frame = data_names[2], link_pairs = c(lat = "lat", lon = "lon"), type = keyed_link_label)
+  self$add_key(names(data_list)[2], nc_result[3][[1]])
+  named_char_vec  <- nc_result[3][[1]]
+  names(named_char_vec) <- named_char_vec
+  self$add_link(from_data_frame = names(data_list)[1], to_data_frame = names(data_list)[2], link_pairs = named_char_vec, type = keyed_link_label)
 }
 )
 
@@ -1325,3 +1323,16 @@ instat_object$set("public", "import_from_climsoft", function(stations = c(), ele
   if(include_observation_data)(self$add_link(from_data_frame = "station_data", to_data_frame = "station_info", link_pairs = c(recordedFrom = "stationId"), type = keyed_link_label))
 }
 )
+
+instat_object$set("public", "import_from_iri", function(download_from, data_file, data_frame_name, location_data_name, path, X1, X2 = NA, Y1, Y2 = NA, get_area_point = "area"){
+ 
+  data_list <- import_from_iri(download_from  = download_from, data_file = data_file, path = path, X1 = X1, X2 = X2, Y1 = Y1, Y2 = Y2, get_area_point = get_area_point)
+  names(data_list) = c(next_default_item(prefix = data_frame_name , existing_names = self$get_data_names(), include_index = FALSE), next_default_item(prefix = location_data_name , existing_names = self$get_data_names(), include_index = FALSE))
+  self$import_data(data_tables = data_list)
+  loc_col_names <- names(data_list[[2]])
+  self$add_key(location_data_name, loc_col_names)
+  names(loc_col_names) <- loc_col_names
+  self$add_link(from_data_frame = names(data_list)[1], to_data_frame = names(data_list)[2], link_pairs = loc_col_names, type = keyed_link_label)
+} 
+)
+
