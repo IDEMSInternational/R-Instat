@@ -65,7 +65,7 @@ Public Class dlgRegularSequence
         ucrNudRepeatValues.SetMinMax(1, Integer.MaxValue)
         ucrInputInStepsOf.SetParameter(New RParameter("by", 2))
         ucrInputInStepsOf.AddQuotesIfUnrecognised = False
-        ucrInputInStepsOf.SetValidationTypeAsNumeric()
+        ucrInputInStepsOf.SetValidationTypeAsNumeric(dcmMin:=0)
         ucrDataFrameLengthForRegularSequence.SetDataFrameSelector(ucrSelectDataFrameRegularSequence)
 
         ucrPnlSequenceType.AddToLinkedControls(ucrInputFrom, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=1)
@@ -95,6 +95,7 @@ Public Class dlgRegularSequence
         ucrChkDefineAsFactor.SetText("Define As Factor")
         'ucrInputFrom.Visible = False
         ' ucrInputTo.Visible = False
+        CheckSequenceLength()
     End Sub
 
     Private Sub ucrChkDefineAsFactor_Load(sender As Object, e As EventArgs) Handles ucrChkDefineAsFactor.Load
@@ -107,6 +108,7 @@ Public Class dlgRegularSequence
         ucrSelectDataFrameRegularSequence.Reset()
         ucrNewColumnName.Reset()
         rdoNumeric.Checked = True
+        rdoDates.Enabled = False
         clsSeqFunction.SetRCommand("seq")
         clsSeqFunction.AddParameter("from", 1)
         clsSeqFunction.AddParameter("to", ucrSelectDataFrameRegularSequence.iDataFrameLength)
