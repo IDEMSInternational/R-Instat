@@ -76,9 +76,9 @@ Public Class dlgOpenNetCDF
         ucrInputLocDataName.SetValidationTypeAsRVariable()
         clsRDatanames.SetRCommand("c")
         ucrInputDataName.SetParameter(New RParameter("data_df_name", 0))
-        ucrInputDataName.clsParameter.bIncludeArgumentName = False
+        ucrInputDataName.SetParameterIncludeArgumentName(False)
         ucrInputLocDataName.SetParameter(New RParameter("location_df_name", 1))
-        ucrInputLocDataName.clsParameter.bIncludeArgumentName = False
+        ucrInputLocDataName.SetParameterIncludeArgumentName(False)
         ucrInputFilePath.SetParameter(New RParameter("filename", 0))
     End Sub
 
@@ -123,7 +123,7 @@ Public Class dlgOpenNetCDF
                     strFileExt = Path.GetExtension(strFilePath)
                     ucrInputFilePath.SetName(strFilePath)
                     ucrInputDataName.Show()
-                    lblSSTName.Show()
+                    lblMainDataName.Show()
 
                     If strFileExt = ".nc" Then
                         clsRCDF.SetRCommand("nc_open")
