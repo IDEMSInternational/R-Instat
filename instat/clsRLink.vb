@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports RDotNet
+Imports unvell.ReoGrid
 
 Public Class RLink
     ' R interface class. Each instance of the class has its own REngine instance
@@ -44,6 +45,8 @@ Public Class RLink
 
     Public strGraphDisplayOption As String = "view_output_window"
 
+    Private grdDataView As ReoGridControl
+
     Public Sub New(Optional bWithInstatObj As Boolean = False, Optional bWithClimsoft As Boolean = False)
 
     End Sub
@@ -62,6 +65,10 @@ Public Class RLink
             Application.Exit()
         End Try
         clsEngine.Initialize()
+    End Sub
+
+    Public Sub SetDataViewGrid(grdNewDataGrid As ReoGridControl)
+        grdDataView = grdNewDataGrid
     End Sub
 
     Public Sub setFormatOutput(tempFont As Font, tempColor As Color)
@@ -127,8 +134,8 @@ Public Class RLink
             cboDataFrames.Items.AddRange(GetDataFrameNames().ToArray)
             AdjustComboBoxWidth(cboDataFrames)
             'Task/Question: From what I understood, if bSetDefault is true or if the strCurrentDataFrame (given as an argument) is actually not in cboDataFrames (is this case generic or should it never happen ?), then the selected Index should be the current worksheet.
-            If (bSetDefault OrElse cboDataFrames.Items.IndexOf(strCurrentDataFrame) = -1) AndAlso (frmEditor.grdData IsNot Nothing) AndAlso (frmEditor.grdData.CurrentWorksheet IsNot Nothing) Then
-                cboDataFrames.SelectedIndex = cboDataFrames.Items.IndexOf(frmEditor.grdData.CurrentWorksheet.Name)
+            If (bSetDefault OrElse cboDataFrames.Items.IndexOf(strCurrentDataFrame) = -1) AndAlso (grdDataView IsNot Nothing) AndAlso (grdDataView.CurrentWorksheet IsNot Nothing) Then
+                cboDataFrames.SelectedIndex = cboDataFrames.Items.IndexOf(grdDataView.CurrentWorksheet.Name)
             ElseIf cboDataFrames.Items.IndexOf(strCurrentDataFrame) <> -1 Then
                 cboDataFrames.SelectedIndex = cboDataFrames.Items.IndexOf(strCurrentDataFrame)
             End If
@@ -139,7 +146,7 @@ Public Class RLink
     ' Then this can be removed
     Public Shared Sub AdjustComboBoxWidth(cboCurrent As ComboBox)
         Dim iWidth As Integer = cboCurrent.DropDownWidth
-        Dim graTemp As Graphics = cboCurrent.CreateGraphics()
+        Dim graTemp As System.Drawing.Graphics = cboCurrent.CreateGraphics()
         Dim font As Font = cboCurrent.Font
         Dim iScrollBarWidth As Integer
         Dim iNewWidth As Integer
@@ -233,7 +240,7 @@ Public Class RLink
         Dim strTempGraphsDirectory As String
         Dim clsPNGFunction As New RFunction
 
-        strTempGraphsDirectory = IO.Path.Combine(IO.Path.GetTempPath() & "R_Instat_Temp_Graphs")
+        strTempGraphsDirectory = System.IO.Path.Combine(System.IO.Path.GetTempPath() & "R_Instat_Temp_Graphs")
         strOutput = ""
 
         If strComment <> "" Then
@@ -265,7 +272,7 @@ Public Class RLink
                 If iCallType = 3 Then
                     If strGraphDisplayOption = "view_output_window" OrElse strGraphDisplayOption = "view_separate_window" Then
                         clsPNGFunction.SetRCommand("png")
-                        clsPNGFunction.AddParameter("filename", Chr(34) & IO.Path.Combine(strTempGraphsDirectory & "/Graph.png").Replace("\", "/") & Chr(34))
+                        clsPNGFunction.AddParameter("filename", Chr(34) & System.IO.Path.Combine(strTempGraphsDirectory & "/Graph.png").Replace("\", "/") & Chr(34))
                         clsPNGFunction.AddParameter("width", 4000)
                         clsPNGFunction.AddParameter("height", 4000)
                         clsPNGFunction.AddParameter("res", 500)
@@ -284,7 +291,7 @@ Public Class RLink
                         'It is called from RLink at the end of RunScript.
                         Dim lstTempGraphFiles As ObjectModel.ReadOnlyCollection(Of String)
                         Dim iNumberOfFiles As Integer = -1
-                        strTempGraphsDirectory = IO.Path.Combine(IO.Path.GetTempPath(), "R_Instat_Temp_Graphs")
+                        strTempGraphsDirectory = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "R_Instat_Temp_Graphs")
                         Try
                             lstTempGraphFiles = FileIO.FileSystem.GetFiles(strTempGraphsDirectory)
                         Catch e As Exception
@@ -592,6 +599,9 @@ Public Class RLink
             ucrCurrentReceiver.Clear()
             For i = 0 To vecColumns.Count - 1
                 chrCurrColumns = vecColumns(i).AsCharacter
+                If chrCurrColumns Is Nothing Then
+                    Continue For
+                End If
                 For Each strColumn As String In chrCurrColumns
                     lstItems.Add(New KeyValuePair(Of String, String)(strDataFrameName, strColumn))
                 Next
@@ -743,6 +753,15 @@ Public Class RLink
         clsMakeNames.AddParameter("names", Chr(34) & strText & Chr(34))
         strOut = RunInternalScriptGetValue(clsMakeNames.ToScript()).AsCharacter(0)
         Return strOut
+    End Function
+
+    Public Function IsValidText(strText As String) As String
+        Dim bValid As Boolean
+        Dim strValidText As String
+        Dim clsMakeNames As New RFunction
+
+        strValidText = MakeValidText(strText)
+        Return (strText = strValidText)
     End Function
 
     'Corruption analysis functions
