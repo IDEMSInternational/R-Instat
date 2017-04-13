@@ -22,7 +22,7 @@ Public Class dlgRegularSequence
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsSeqFunction, clsRepFunction As New RFunction
-    Private bUpdate As Boolean = False
+    Private bUpdateBy As Boolean = False
     Private Sub dlgRegularSequence_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -37,15 +37,15 @@ Public Class dlgRegularSequence
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        bUpdateBy = False
         ucrNewColumnName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrPnlSequenceType.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrInputFrom.SetRCode(clsSeqFunction, bReset)
-        ucrInputTo.SetRCode(clsSeqFunction, bReset)
-        ucrNudRepeatValues.SetRCode(clsRepFunction, bReset)
-        ucrNudRepeatValues.SetRCode(clsSeqFunction, bReset)
-        bUpdate = True
-        ucrInputInStepsOf.SetRCode(clsSeqFunction, bReset)
-        bUpdate = False
+            ucrPnlSequenceType.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+            ucrInputFrom.SetRCode(clsSeqFunction, bReset)
+            ucrInputTo.SetRCode(clsSeqFunction, bReset)
+            ucrNudRepeatValues.SetRCode(clsRepFunction, bReset)
+            ucrNudRepeatValues.SetRCode(clsSeqFunction, bReset)
+            ucrInputInStepsOf.SetRCode(clsSeqFunction, bReset)
+        bUpdateBy = True
 
     End Sub
 
@@ -235,7 +235,9 @@ Public Class dlgRegularSequence
     End Sub
 
     Private Sub ucrInputFrom_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFrom.ControlValueChanged, ucrInputTo.ControlValueChanged, ucrInputInStepsOf.ControlValueChanged
-        SetInStepsOfParameter()
+        If bUpdateBy Then
+            SetInStepsOfParameter()
+        End If
     End Sub
 
     Private Sub ucrNewColumnName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewColumnName.ControlContentsChanged, ucrInputTo.ControlContentsChanged, ucrInputFrom.ControlContentsChanged, ucrInputInStepsOf.ControlContentsChanged, ucrNudRepeatValues.ControlContentsChanged, ucrPnlSequenceType.ControlContentsChanged, ucrSelectDataFrameRegularSequence.ControlContentsChanged
