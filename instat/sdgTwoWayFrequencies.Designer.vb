@@ -125,9 +125,9 @@ Partial Class sdgTwoWayFrequencies
         Me.lblGraphTitle.AutoSize = True
         Me.lblGraphTitle.Location = New System.Drawing.Point(10, 157)
         Me.lblGraphTitle.Name = "lblGraphTitle"
-        Me.lblGraphTitle.Size = New System.Drawing.Size(62, 13)
+        Me.lblGraphTitle.Size = New System.Drawing.Size(60, 13)
         Me.lblGraphTitle.TabIndex = 7
-        Me.lblGraphTitle.Text = "Graph Title:"
+        Me.lblGraphTitle.Text = "Table Title:"
         '
         'ucrInputTableTitle
         '
