@@ -42,8 +42,7 @@ Public Class dlgRegularSequence
             ucrInputFrom.SetRCode(clsSeqFunction, bReset)
             ucrInputTo.SetRCode(clsSeqFunction, bReset)
             ucrNudRepeatValues.SetRCode(clsRepFunction, bReset)
-            ucrNudRepeatValues.SetRCode(clsSeqFunction, bReset)
-            ucrInputInStepsOf.SetRCode(clsSeqFunction, bReset)
+        ucrInputInStepsOf.SetRCode(clsSeqFunction, bReset)
         bUpdateBy = True
 
     End Sub
@@ -119,7 +118,7 @@ Public Class dlgRegularSequence
         clsRepFunction.AddParameter("length.out", ucrSelectDataFrameRegularSequence.iDataFrameLength)
         'clsSeqFunction.SetAssignTo(ucrNewColumnName.GetText, strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText)
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnName.GetText, strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsSeqFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRepFunction)
         CheckSequenceLength()
 
     End Sub
