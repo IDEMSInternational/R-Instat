@@ -447,13 +447,12 @@ import_from_iri <- function(download_from, data_file, path, X1, X2,Y1,Y2, get_ar
   }
   else if(get_area_point == "point"){
     xystuff<-paste("X", X1, "VALUES/Y", Y1, "VALUES", sep = "/")
-    #xystuff<-paste("X", X1, X1, "RANGEEDGES/Y", Y1, Y1, "RANGEEDGES", sep = "/")
     postxyaddress<-"T+exch+table-+text+text+skipanyNaN+-table+.csv" 
   }
   else stop("Unrecognised download type.")
   
   address<-paste(prexyaddress,xystuff,postxyaddress,sep="/")
-  print(address)
+
   file.name <- paste(gaugelocdir,"tmp_iri.csv",sep="/")
   download.file(address,file.name,quiet=FALSE)
   dataout <- read.table( paste(gaugelocdir,"tmp_iri.csv",sep="/"),sep=",",header=TRUE)
