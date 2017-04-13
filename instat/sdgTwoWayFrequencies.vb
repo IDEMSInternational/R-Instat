@@ -36,6 +36,7 @@ Public Class sdgTwoWayFrequencies
         dctHorizontalPositionLabel.Add("Outward", Chr(34) & "outward" & Chr(34))
         ucrInputHorizontalLabels.SetItems(dctHorizontalPositionLabel)
         ucrInputHorizontalLabels.SetRDefault(Chr(34) & "center" & Chr(34))
+        ucrInputHorizontalLabels.bUpdateRCodeFromControl = False
 
         ucrInputVerticalLabels.SetParameter(New RParameter("vjust", 11))
         dctVerticalPositionLabel.Add("Left", Chr(34) & "left" & Chr(34))
@@ -47,7 +48,7 @@ Public Class sdgTwoWayFrequencies
         dctVerticalPositionLabel.Add("Outward", Chr(34) & "outward" & Chr(34))
         ucrInputVerticalLabels.SetItems(dctVerticalPositionLabel)
         ucrInputVerticalLabels.SetRDefault(Chr(34) & "bottom" & Chr(34))
-
+        ucrInputVerticalLabels.bUpdateRCodeFromControl = False
         ucrChkStack.SetParameter(New RParameter("bar.pos", 10), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "stack" & Chr(34), strNewValueIfUnchecked:=Chr(34) & "dodge" & Chr(34))
         ucrChkStack.SetText("Stack Bar Graph")
         ucrChkStack.SetRDefault(Chr(34) & "dodge" & Chr(34))
