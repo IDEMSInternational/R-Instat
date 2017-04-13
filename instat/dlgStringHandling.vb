@@ -60,15 +60,12 @@ Public Class dlgStringHandling
 
 
         ucrInputPattern.SetParameter(New RParameter("pattern", 1))
-
         ucrInputReplaceBy.SetParameter(New RParameter("replacement", 2))
 
 
         'disabling replaceby input text box
-        ucrPnlStringHandling.AddToLinkedControls(ucrInputReplaceBy, {rdoCount}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
-        ucrPnlStringHandling.AddToLinkedControls(ucrInputReplaceBy, {rdoDetect}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
-        ucrPnlStringHandling.AddToLinkedControls(ucrInputReplaceBy, {rdoExtract}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
-        ucrPnlStringHandling.AddToLinkedControls(ucrInputReplaceBy, {rdoLocate}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
+        ucrPnlStringHandling.AddToLinkedControls(ucrInputReplaceBy, {rdoReplace}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
+
 
     End Sub
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -86,10 +83,25 @@ Public Class dlgStringHandling
         clsReplaceFunction = New RFunction
 
         clsCountFunction.SetRCommand("str_count")
-        clsExtractFunction.SetRCommand("str_extract")
+        clsCountFunction.AddParameter("string")
+        clsCountFunction.AddParameter("pattern")
+
+        clsExtractFunction.SetRCommand(Chr(34) & "str_extract" & Chr(34))
+        clsExtractFunction.AddParameter(Chr(34) & "string" & Chr(34))
+        clsExtractFunction.AddParameter(Chr(34) & "pattern" & Chr(34))
+
         clsDetectFunction.SetRCommand("str_detect")
+        clsDetectFunction.AddParameter("string")
+        clsDetectFunction.AddParameter("pattern")
+
         clsLocateFunction.SetRCommand("str_locate")
+        clsLocateFunction.AddParameter("string")
+        clsLocateFunction.AddParameter("pattern")
+
         clsReplaceFunction.SetRCommand("str_replace")
+        clsReplaceFunction.AddParameter("string")
+        clsReplaceFunction.AddParameter("pattern")
+        clsReplaceFunction.AddParameter("replacement")
 
 
         ucrSave.SetPrefix("Count")
@@ -99,7 +111,7 @@ Public Class dlgStringHandling
         ucrSave.SetLabelText("Save Result to:")
 
 
-        'clsCountFunction.SetAssignTo(ucrSave.GetText(), strTempDataframe:=ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSave.GetText)
+        ucrBase.clsRsyntax.SetAssignTo(ucrSave.GetText(), strTempDataframe:=ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSave.GetText)
         ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
     End Sub
     Private Sub ChangeBaseFunction()
