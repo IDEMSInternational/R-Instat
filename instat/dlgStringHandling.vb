@@ -36,19 +36,18 @@ Public Class dlgStringHandling
         TestOkEnabled()
     End Sub
     Private Sub InitialiseDialogue()
-        'ucrBase.iHelpTopicID =
+        ' ucrBase.iHelpTopicID =
 
         'ucrReceiver
         ucrReceiverStringHandling.SetParameter(New RParameter("string", 0))
         ucrReceiverStringHandling.SetParameterIsRFunction()
         ucrReceiverStringHandling.Selector = ucrSelectorStringHandling
-        ucrReceiverStringHandling.bUseFilteredData = False
         ucrReceiverStringHandling.SetMeAsReceiver()
 
         'ucrRdoOptions
         ucrPnlStringHandling.AddRadioButton(rdoCount)
-        ucrPnlStringHandling.AddRadioButton(rdoDetect)
         ucrPnlStringHandling.AddRadioButton(rdoExtract)
+        ucrPnlStringHandling.AddRadioButton(rdoDetect)
         ucrPnlStringHandling.AddRadioButton(rdoLocate)
         ucrPnlStringHandling.AddRadioButton(rdoReplace)
 
@@ -66,13 +65,12 @@ Public Class dlgStringHandling
         'disabling replaceby input text box
         ucrPnlStringHandling.AddToLinkedControls(ucrInputReplaceBy, {rdoReplace}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
 
+        'ucrsave
+        ucrSave.SetSaveTypeAsColumn()
+        ucrSave.SetDataFrameSelector(ucrSelectorStringHandling.ucrAvailableDataFrames)
+        ucrSave.SetIsComboBox()
+        ucrSave.SetLabelText("Save Result to:")
 
-    End Sub
-    Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverStringHandling.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrInputPattern.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrInputReplaceBy.SetRCode(clsReplaceFunction, bReset)
-        ucrPnlStringHandling.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub SetDefaults()
@@ -82,48 +80,44 @@ Public Class dlgStringHandling
         clsLocateFunction = New RFunction
         clsReplaceFunction = New RFunction
 
+        ucrSelectorStringHandling.Reset()
+        ucrInputPattern.ResetText()
+        ucrInputReplaceBy.ResetText()
+        ucrSave.Reset()
+
         clsCountFunction.SetRCommand("str_count")
-        clsCountFunction.AddParameter("string")
-        clsCountFunction.AddParameter("pattern")
-
-        clsExtractFunction.SetRCommand(Chr(34) & "str_extract" & Chr(34))
-        clsExtractFunction.AddParameter(Chr(34) & "string" & Chr(34))
-        clsExtractFunction.AddParameter(Chr(34) & "pattern" & Chr(34))
-
+        clsExtractFunction.SetRCommand("str_extract")
         clsDetectFunction.SetRCommand("str_detect")
-        clsDetectFunction.AddParameter("string")
-        clsDetectFunction.AddParameter("pattern")
-
         clsLocateFunction.SetRCommand("str_locate")
-        clsLocateFunction.AddParameter("string")
-        clsLocateFunction.AddParameter("pattern")
-
         clsReplaceFunction.SetRCommand("str_replace")
-        clsReplaceFunction.AddParameter("string")
-        clsReplaceFunction.AddParameter("pattern")
-        clsReplaceFunction.AddParameter("replacement")
 
-
-        ucrSave.SetPrefix("Count")
-        ucrSave.SetDataFrameSelector(ucrSelectorStringHandling.ucrAvailableDataFrames)
-        ucrSave.SetSaveTypeAsColumn()
-        ucrSave.SetIsComboBox()
-        ucrSave.SetLabelText("Save Result to:")
-
-
-        ucrBase.clsRsyntax.SetAssignTo(ucrSave.GetText(), strTempDataframe:=ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSave.GetText)
+        clsCountFunction.SetAssignTo(ucrSave.GetText(), strTempDataframe:=ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSave.GetText)
         ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrReceiverStringHandling.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrInputPattern.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrInputReplaceBy.SetRCode(clsReplaceFunction, bReset)
+        ucrPnlStringHandling.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrSave.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+
     End Sub
     Private Sub ChangeBaseFunction()
         If rdoCount.Checked Then
+            ucrSave.SetPrefix("Count")
             ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
         ElseIf rdoDetect.Checked Then
+            ucrSave.SetPrefix("detect")
             ucrBase.clsRsyntax.SetBaseRFunction(clsDetectFunction)
         ElseIf rdoExtract.Checked Then
+            ucrSave.SetPrefix("extract")
             ucrBase.clsRsyntax.SetBaseRFunction(clsExtractFunction)
         ElseIf rdoLocate.Checked Then
+            ucrSave.SetPrefix("locate")
             ucrBase.clsRsyntax.SetBaseRFunction(clsLocateFunction)
         ElseIf rdoReplace.Checked Then
+            ucrSave.SetPrefix("replace")
             ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceFunction)
         End If
     End Sub
@@ -151,5 +145,6 @@ Public Class dlgStringHandling
 
     Private Sub ucrPnlStringHandling_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlStringHandling.ControlValueChanged
         ChangeBaseFunction()
+        'SetRCodeForControls(True)
     End Sub
 End Class
