@@ -14,87 +14,104 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 Public Class dlgDummyVariables
     Private bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
+    Private clsDummy As New RFunction
     Private Sub dlgIndicatorVariable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
-
         End If
-        autoTranslate(Me)
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        TestOkEnabled()
+    End Sub
+
+    Private Sub SetDefaults()
+        'reset
+        ucrSelectorDummyVariable.Reset()
+        'set default function
+        clsDummy.SetRCommand("dummy")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDummy)
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:="dummy_vars", strTempDataframe:=ucrSelectorDummyVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToColumnWithoutNames:=True)
+    End Sub
+
+    Public Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 41
+        'Set Receiver
+        ucrReceiverFactor.Selector = ucrSelectorDummyVariable
+        ucrVariateReceiver.Selector = ucrSelectorDummyVariable
+        ucrReceiverFactor.SetMeAsReceiver()
+        ucrReceiverFactor.SetIncludedDataTypes({"factor"})
+        ucrReceiverFactor.SetParameter(New RParameter("x", 0))
+        ucrReceiverFactor.SetParameterIsRFunction()
+
+        'Set RadioBattons : Parameters yet to be set up
+        'ucrPnlLevelOmitted.SetParameter(New RParameter(""))
+        'ucrPnlLevelOmitted.AddRadioButton(rdoNone, "")
+        'ucrPnlLevelOmitted.AddRadioButton(rdoFirst, "")
+        'ucrPnlLevelOmitted.AddRadioButton(rdoLast, "")
+        'ucrPnlLevelOmitted.AddRadioButton(rdoLevelNumber, "")
+        ucrPnlLevelOmitted.bAllowNonConditionValues = True
+        'currently disabled sice the functions and parameters are yet to be set
+        ucrChkWithXVariable.Enabled = False
+        lblVariate.Enabled = False
+        ucrVariateReceiver.Enabled = False
+        ucrChkWithXVariable.SetText("With X Variable")
+        ' ucrChkWithXVariable.SetParameter(New RParameter(""))
+        grpLevelOmitted.Enabled = False
+
+        'Note: This was not implemented (Additions of ucrInputColumns were added for appending new columns with prefix "dummy" ): Just added if incase it was to be added otherwise it can be deleted
+
+        'ucrSaveDummy.SetPrefix("dummy")
+        'ucrSaveDummy.SetSaveTypeAsColumn()
+        'ucrSaveDummy.SetDataFrameSelector(ucrSelectorDummyVariable.ucrAvailableDataFrames)
+        'ucrSaveDummy.SetCheckBoxText("Save Dummy:")
+        'ucrSaveDummy.SetIsComboBox()
+
+        ' ucrChkWithXVariable.AddToLinkedControls(ucrVariateReceiver, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
+        'ucrVariateReceiver.SetLinkedDisplayControl(lblVariate)
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverFactor.IsEmpty Then
+        If Not ucrReceiverFactor.IsEmpty AndAlso ((ucrChkWithXVariable.Checked AndAlso Not ucrVariateReceiver.IsEmpty) OrElse Not ucrChkWithXVariable.Checked) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
-    Private Sub SetDefaults()
-        ucrSelectorDummyVariable.Focus()
-        ucrSelectorDummyVariable.Reset()
-        ucrReceiverFactor.Selector = ucrSelectorDummyVariable
-        ucrReceiverFactor.SetMeAsReceiver()
-        chkXvariable.Checked = False
-        TestOkEnabled()
-        chkXvariable.Enabled = False
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
-    Public Sub InitialiseDialog()
+    'Private Sub SetMeAsReceiver()
+    '    If ucrChkWithXVariable.Checked Then
+    '        ucrVariateReceiver.SetMeAsReceiver()
+    '    Else
+    '        ucrReceiverFactor.SetMeAsReceiver()
+    '    End If
+    'End Sub
 
-        'ucrInputColumns.SetItemsTypeAsColumns()
-        'ucrInputColumns.SetDefaultTypeAsColumn()
-        'ucrInputColumns.SetPrefix("dummy")
-        'ucrInputColumns.SetDataFrameSelector(ucrSelectorDummyVariable.ucrAvailableDataFrames)
-
-        ucrBase.iHelpTopicID = 41
-        ucrReceiverFactor.Selector = ucrSelectorDummyVariable
-        ucrVariateReceiver.Selector = ucrSelectorDummyVariable
-        ucrReceiverFactor.SetMeAsReceiver()
-
-        ucrReceiverFactor.SetIncludedDataTypes({"factor"})
-
-        chkXvariable.Checked = False
-        ucrVariateReceiver.Visible = False
-        lblVariate.Visible = False
-        grpLevelOmitted.Enabled = False
-
-        ucrBase.clsRsyntax.SetFunction("dummy")
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:="dummy_vars", strTempDataframe:=ucrSelectorDummyVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToColumnWithoutNames:=True)
-    End Sub
-
-    Private Sub ReopenDialog()
-
-    End Sub
-
-    Private Sub chkXvariable_CheckedChanged(sender As Object, e As EventArgs) Handles chkXvariable.CheckedChanged
-        If chkXvariable.Checked Then
-            ucrVariateReceiver.Visible = True
-            lblVariate.Visible = True
-            ucrVariateReceiver.SetMeAsReceiver()
-        Else
-            ucrVariateReceiver.Visible = False
-            lblVariate.Visible = False
-            ucrReceiverFactor.SetMeAsReceiver()
-        End If
-    End Sub
+    'Private Sub ucrChkWithXVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWithXVariable.ControlValueChanged
+    '    VariateVisible()
+    ' SetReceiver()
+    'End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-    End Sub
-    Private Sub ucrReceiverFactor_Selectionchanged(sender As Object, e As EventArgs) Handles ucrReceiverFactor.SelectionChanged
-        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverFactor.GetVariables)
+        SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrSelectorDummyVariable_DataFrameChanged() Handles ucrSelectorDummyVariable.DataFrameChanged
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:="dummy_vars", strTempDataframe:=ucrSelectorDummyVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToColumnWithoutNames:=True)
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged, ucrChkWithXVariable.ControlContentsChanged, ucrVariateReceiver.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class

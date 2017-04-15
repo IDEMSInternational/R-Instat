@@ -13,31 +13,41 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 Public Class dlgReoderDescriptives
     Public bFirstLoad As Boolean = True
+    Public bReset As Boolean = True
+
     Private Sub dlgReoderDescriptives_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
-        'Checks if Ok can be enabled.
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeforControls(bReset)
+        bReset = False
+        autoTranslate(Me)
         TestOKEnabled()
     End Sub
 
-    Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$reorder_objects")
-        ucrReorderObjects.setDataType("object")
-        ucrReorderObjects.setDataframes(ucrDataFrameReoder)
-        ucrBase.iHelpTopicID = 351
-    End Sub
-    Private Sub ReopenDialog()
 
+    Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 351
+
+        ' ucrSelector DataFrame
+        ucrDataFrameReorder.SetParameter(New RParameter("data_name", 0))
+        ucrDataFrameReorder.SetParameterIsString()
+
+        ' ucrReorderObjects
+        ucrReorderObjects.SetParameter(New RParameter("new_order", 1))
+
+        ucrReorderObjects.setDataType("object")
+        ucrReorderObjects.setDataframes(ucrDataFrameReorder)
     End Sub
+
     Private Sub TestOKEnabled()
         If Not ucrReorderObjects.isEmpty Then
             ucrBase.OKEnabled(True)
@@ -45,25 +55,26 @@ Public Class dlgReoderDescriptives
             ucrBase.OKEnabled(False)
         End If
     End Sub
+
     Private Sub SetDefaults()
-        ucrDataFrameReoder.Reset()
+        Dim clsDefaultFunction As New RFunction
+        ucrDataFrameReorder.Reset()
+
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$reorder_objects")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeforControls(True)
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrReorderObjects_OrderChanged() Handles ucrReorderObjects.OrderChanged
-        If Not ucrReorderObjects.isEmpty Then
-            ucrBase.clsRsyntax.AddParameter("new_order", ucrReorderObjects.GetVariableNames)
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("new_order")
-        End If
-        TestOKEnabled()
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
-    Private Sub ucrDataFrameReoder_DataFrameChanged() Handles ucrDataFrameReoder.DataFrameChanged
-        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrDataFrameReoder.cboAvailableDataFrames.SelectedItem & Chr(34))
+    Private Sub ucrReorderObjects_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReorderObjects.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class
