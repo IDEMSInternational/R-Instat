@@ -36,13 +36,13 @@ Public Class dlgStringHandling
         TestOkEnabled()
     End Sub
     Private Sub InitialiseDialogue()
-        ' ucrBase.iHelpTopicID =
 
         'ucrReceiver
         ucrReceiverStringHandling.SetParameter(New RParameter("string", 0))
         ucrReceiverStringHandling.SetParameterIsRFunction()
         ucrReceiverStringHandling.Selector = ucrSelectorStringHandling
         ucrReceiverStringHandling.SetMeAsReceiver()
+
 
         'ucrRdoOptions
         ucrPnlStringHandling.AddRadioButton(rdoCount)
@@ -80,10 +80,12 @@ Public Class dlgStringHandling
         clsLocateFunction = New RFunction
         clsReplaceFunction = New RFunction
 
+
         ucrSelectorStringHandling.Reset()
         ucrInputPattern.ResetText()
         ucrInputReplaceBy.ResetText()
         ucrSave.Reset()
+
 
         clsCountFunction.SetRCommand("str_count")
         clsExtractFunction.SetRCommand("str_extract")
