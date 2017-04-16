@@ -1,5 +1,4 @@
-﻿
-' Instat-R
+﻿' Instat-R
 ' Copyright (C) 2015
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -20,6 +19,8 @@ Public Class dlgColumnStats
     Private bReset As Boolean = True
     Private clsSummariesList As New RFunction
     Private bResetSubdialog As Boolean = False
+    Private clsDefaultFunction As New RFunction
+
     Private Sub dlgColumnStats_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -34,13 +35,12 @@ Public Class dlgColumnStats
         TestOKEnabled()
     End Sub
 
-
     Public Sub SetRCodeForControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Public Sub TestOKEnabled()
-        If Not ucrReceiverSelectedVariables.IsEmpty() Then ' AndAlso Not sdgSummaries.strSummariesParameter = "c()") 
+        If Not ucrReceiverSelectedVariables.IsEmpty() AndAlso Not clsSummariesList.clsParameters.Count = 0 Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -48,21 +48,20 @@ Public Class dlgColumnStats
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
-
+        clsDefaultFunction = New RFunction
         clsSummariesList = New RFunction
+
+        ucrSelectorForColumnStatistics.Reset()
+        ucrReceiverSelectedVariables.SetMeAsReceiver()
 
         clsSummariesList.SetRCommand("c")
         clsSummariesList.AddParameter("summary_count_non_missing", Chr(34) & "summary_count_non_missing" & Chr(34), bIncludeArgumentName:=False)
         clsSummariesList.AddParameter("summary_count", Chr(34) & "summary_count" & Chr(34), bIncludeArgumentName:=False)
         clsSummariesList.AddParameter("summary_sum", Chr(34) & "summary_sum" & Chr(34), bIncludeArgumentName:=False)
 
-        ucrSelectorForColumnStatistics.Reset()
-        ucrReceiverSelectedVariables.SetMeAsReceiver()
-
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
         clsDefaultFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
         bResetSubdialog = True
     End Sub
 
@@ -110,12 +109,14 @@ Public Class dlgColumnStats
         SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
-    Private Sub cmdSummaries_Click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
+
+    Private Sub cmdSummaries_click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
         sdgSummaries.SetRFunction(clsSummariesList, bResetSubdialog)
         bResetSubdialog = False
         sdgSummaries.ShowDialog()
         TestOKEnabled()
     End Sub
+
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedVariables.ControlContentsChanged
         TestOKEnabled()
     End Sub
