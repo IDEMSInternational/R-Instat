@@ -18,12 +18,12 @@ Imports instat
 Imports instat.Translations
 
 Public Class dlgStringHandling
-    Private bFirstload = True
-    Private bReset = True
+    Private bFirstload As Boolean = True
+    Private bReset As Boolean = True
     Private clsCountFunction, clsExtractFunction, clsDetectFunction, clsLocateFunction, clsReplaceFunction As New RFunction
     Private Sub dlgStringHandling_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
-            InitialiseDialogue()
+            InitialiseDialog()
             bFirstload = False
         End If
 
@@ -35,7 +35,7 @@ Public Class dlgStringHandling
         autoTranslate(Me)
         TestOkEnabled()
     End Sub
-    Private Sub InitialiseDialogue()
+    Private Sub InitialiseDialog()
 
         'ucrReceiver
         ucrReceiverStringHandling.SetParameter(New RParameter("string", 0))
