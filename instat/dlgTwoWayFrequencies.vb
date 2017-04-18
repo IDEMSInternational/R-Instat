@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgTwoWayFrequencies
     Private bFirstLoad As Boolean = True
@@ -38,7 +39,6 @@ Public Class dlgTwoWayFrequencies
     Private Sub InitialiseDialog()
         'HelpID
         ' ucrBase.iHelpTopicID = 
-        rdoCount.Enabled = False
 
         ucrReceiverColumnFactor.Selector = ucrSelectorTwoWayFrequencies
         ucrReceiverRowFactor.Selector = ucrSelectorTwoWayFrequencies
@@ -58,11 +58,21 @@ Public Class dlgTwoWayFrequencies
         ucrReceiverWeights.SetParameter(New RParameter("weight.by", 2))
         ucrReceiverWeights.SetParameterIsRFunction()
 
-        ucrPnlFreqType.SetParameter(New RParameter("margin", 3))
-        ucrPnlFreqType.AddRadioButton(rdoRow, Chr(34) & "row" & Chr(34))
-        ucrPnlFreqType.AddRadioButton(rdoColumn, Chr(34) & "col" & Chr(34))
-        ucrPnlFreqType.AddRadioButton(rdoCell, Chr(34) & "cell" & Chr(34))
-        ucrPnlFreqType.bAllowNonConditionValues = False
+        ucrPnlFreqType.SetParameter(New RParameter("fun", 3))
+        ucrPnlFreqType.AddRadioButton(rdoCount, Chr(34) & "grpfrq" & Chr(34))
+        ucrPnlFreqType.AddRadioButton(rdoRow, Chr(34) & "xtab" & Chr(34))
+        ucrPnlFreqType.AddRadioButton(rdoColumn, Chr(34) & "xtab" & Chr(34))
+        ucrPnlFreqType.AddRadioButton(rdoCell, Chr(34) & "xtab" & Chr(34))
+        'ucrPnlFreqType.bAllowNonConditionValues = False
+
+        ucrPnlFreqType.AddParameterPresentCondition(rdoCount, "grpfrq")
+        ucrPnlFreqType.AddParameterPresentCondition(rdoCell, "fun")
+        ucrPnlFreqType.AddParameterPresentCondition(rdoCell, "margin")
+        ucrPnlFreqType.AddParameterPresentCondition(rdoColumn, "fun")
+        ucrPnlFreqType.AddParameterPresentCondition(rdoColumn, "margin")
+        ucrPnlFreqType.AddParameterPresentCondition(rdoRow, "fun")
+        ucrPnlFreqType.AddParameterPresentCondition(rdoRow, "margin")
+
 
         ucrChkRow.SetParameter(New RParameter("show.row.prc", 4), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkRow.SetText("Row (%)")
@@ -230,5 +240,18 @@ Public Class dlgTwoWayFrequencies
             ucrReceiverRowFactor.ChangeParameterName("var.row", 0)
             ucrReceiverColumnFactor.ChangeParameterName("var.col", 1)
         End If
+    End Sub
+
+    Private Sub ucrPnlFreqType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFreqType.ControlValueChanged
+        If rdoCell.Checked Then
+            ucrBase.clsRsyntax.AddParameter("margin", "cell")
+        ElseIf rdoColumn.Checked Then
+            ucrBase.clsRsyntax.AddParameter("margin", "col")
+        ElseIf rdoRow.Checked Then
+            ucrBase.clsRsyntax.AddParameter("margin", "row")
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("margin")
+        End If
+
     End Sub
 End Class
