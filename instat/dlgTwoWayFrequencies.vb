@@ -19,8 +19,8 @@ Public Class dlgTwoWayFrequencies
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
-    Private clsSjtXtab As New RFunction
-    Private clsSjpXtab As New RFunction
+    Private clsSjPlot As New RFunction
+    Private clsSjTab As New RFunction
     Private Sub dlgTwoWayFrequencies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -47,9 +47,12 @@ Public Class dlgTwoWayFrequencies
         ucrReceiverColumnFactor.SetDataType("factor")
         ucrReceiverWeights.SetDataType("numeric")
 
-        ucrReceiverRowFactor.SetParameter(New RParameter("var.row", 0))
+        'ucrSelectorTwoWayFrequencies.SetParameter(New RParameter("data_name"))
+        'ucrSelectorTwoWayFrequencies.SetParameterIsrfunction()
+
+        ucrReceiverRowFactor.SetParameter(New RParameter("x", 0))
         ucrReceiverRowFactor.SetParameterIsRFunction()
-        ucrReceiverColumnFactor.SetParameter(New RParameter("var.col", 1))
+        ucrReceiverColumnFactor.SetParameter(New RParameter("x", 1))
         ucrReceiverColumnFactor.SetParameterIsRFunction()
 
         ucrReceiverWeights.SetParameter(New RParameter("weight.by", 2))
@@ -88,8 +91,8 @@ Public Class dlgTwoWayFrequencies
         ucrPnlFreqDisplay.AddRadioButton(rdoTable)
         ucrPnlFreqDisplay.AddRadioButton(rdoGraph)
 
-        ucrPnlFreqDisplay.AddFunctionNamesCondition(rdoTable, "sjt.xtab")
-        ucrPnlFreqDisplay.AddFunctionNamesCondition(rdoGraph, "sjp.xtab")
+        ucrPnlFreqDisplay.AddFunctionNamesCondition(rdoTable, "sjtab")
+        ucrPnlFreqDisplay.AddFunctionNamesCondition(rdoGraph, "sjplot")
 
         ucrPnlFreqDisplay.AddToLinkedControls(ucrChkCount, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFreqDisplay.AddToLinkedControls(ucrChkRow, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -101,54 +104,58 @@ Public Class dlgTwoWayFrequencies
     End Sub
 
     Private Sub SetDefaults()
-        clsSjtXtab = New RFunction
-        clsSjpXtab = New RFunction
+        clsSjTab = New RFunction
+        clsSjPlot = New RFunction
         ucrSelectorTwoWayFrequencies.Reset()
         ucrReceiverRowFactor.SetMeAsReceiver()
 
-        clsSjtXtab.SetRCommand("sjt.xtab")
+        ucrSelectorTwoWayFrequencies.SetParameter(New RParameter("data"))
+        ucrSelectorTwoWayFrequencies.SetParameterIsrfunction()
 
-        clsSjtXtab.AddParameter("show.obs", "TRUE")
-        clsSjtXtab.AddParameter("show.summary", "FALSE")
-        clsSjtXtab.AddParameter("digits", 0)
-        clsSjpXtab.SetRCommand("sjp.xtab")
-        clsSjpXtab.AddParameter("margin", Chr(34) & "row" & Chr(34))
+        clsSjTab.SetRCommand("sjtab")
 
-        clsSjpXtab.AddParameter("show.prc", "TRUE")
-        clsSjpXtab.AddParameter("show.n", "TRUE")
-        clsSjpXtab.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorTwoWayFrequencies.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsSjtXtab)
+        clsSjTab.AddParameter("show.obs", "TRUE")
+        clsSjTab.AddParameter("show.summary", "FALSE")
+        clsSjTab.AddParameter("digits", 0)
+        clsSjPlot.SetRCommand("sjplot")
+        clsSjPlot.AddParameter("margin", Chr(34) & "row" & Chr(34))
+
+        clsSjPlot.AddParameter("show.prc", "TRUE")
+        clsSjPlot.AddParameter("show.n", "TRUE")
+        clsSjPlot.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorTwoWayFrequencies.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsSjTab)
         bResetSubdialog = True
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverRowFactor.AddAdditionalCodeParameterPair(clsSjpXtab, New RParameter("x", 0), iAdditionalPairNo:=1)
-        ucrReceiverColumnFactor.AddAdditionalCodeParameterPair(clsSjpXtab, New RParameter("grp", 1), iAdditionalPairNo:=1)
-        ucrChkWeights.AddAdditionalCodeParameterPair(clsSjpXtab, New RParameter("weight.by", 1), iAdditionalPairNo:=1)
-        ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjpXtab, ucrChkWeights.GetParameter(), iAdditionalPairNo:=1)
+        ucrReceiverRowFactor.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("x", 0), iAdditionalPairNo:=1)
+        ucrReceiverColumnFactor.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("grp", 1), iAdditionalPairNo:=1)
+        ucrChkWeights.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("weight.by", 1), iAdditionalPairNo:=1)
+        ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjPlot, ucrChkWeights.GetParameter(), iAdditionalPairNo:=1)
+        ucrSelectorTwoWayFrequencies.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("data"), iAdditionalPairNo:=1)
+        ucrReceiverRowFactor.SetRCode(clsSjTab, bReset)
+        ucrReceiverColumnFactor.SetRCode(clsSjTab, bReset)
+        ucrReceiverWeights.SetRCode(clsSjTab, bReset)
+        ucrChkWeights.SetRCode(clsSjTab, bReset)
+        ucrChkFlip.SetRCode(clsSjPlot, bReset)
 
-        ucrReceiverRowFactor.SetRCode(clsSjtXtab, bReset)
-        ucrReceiverColumnFactor.SetRCode(clsSjtXtab, bReset)
-        ucrReceiverWeights.SetRCode(clsSjtXtab, bReset)
-        ucrChkWeights.SetRCode(clsSjtXtab, bReset)
-        ucrChkFlip.SetRCode(clsSjpXtab, bReset)
+        ucrPnlFreqType.SetRCode(clsSjPlot, bReset)
+        ucrPnlFreqDisplay.SetRCode(clsSjTab, bReset)
 
-        ucrPnlFreqType.SetRCode(clsSjpXtab, bReset)
-        ucrPnlFreqDisplay.SetRCode(clsSjtXtab, bReset)
-
-        ucrChkCell.SetRCode(clsSjtXtab, bReset)
-        ucrChkColumn.SetRCode(clsSjtXtab, bReset)
-        ucrChkRow.SetRCode(clsSjtXtab, bReset)
-        ucrChkCount.SetRCode(clsSjtXtab, bReset)
+        ucrSelectorTwoWayFrequencies.SetRCode(clsSjTab, bReset)
+        ucrChkCell.SetRCode(clsSjTab, bReset)
+        ucrChkColumn.SetRCode(clsSjTab, bReset)
+        ucrChkRow.SetRCode(clsSjTab, bReset)
+        ucrChkCount.SetRCode(clsSjTab, bReset)
     End Sub
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         If rdoTable.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsSjtXtab)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSjTab)
             'ucrBase.clsRsyntax.bHTMLOutput = True
             ucrBase.clsRsyntax.iCallType = 0
         ElseIf rdoGraph.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsSjpXtab)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSjPlot)
             ' ucrBase.clsRsyntax.bHTMLOutput = False
             ucrBase.clsRsyntax.iCallType = 3
         End If
@@ -194,13 +201,13 @@ Public Class dlgTwoWayFrequencies
         Dim strTempScript As String = ""
 
         If rdoTable.Checked AndAlso rdoGraph.Checked Then
-            strGraph = clsSjpXtab.ToScript(strTempScript)
+            strGraph = clsSjPlot.ToScript(strTempScript)
             frmMain.clsRLink.RunScript(strTempScript & strGraph, iCallType:=3)
         End If
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgTwoWayFrequencies.SetRFunction(clsSjtXtab, clsSjpXtab, bResetSubdialog)
+        sdgTwoWayFrequencies.SetRFunction(clsSjTab, clsSjPlot, bResetSubdialog)
         bResetSubdialog = False
         sdgTwoWayFrequencies.ShowDialog()
         ShowValueParameter()
