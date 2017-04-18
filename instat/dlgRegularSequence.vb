@@ -61,7 +61,7 @@ Public Class dlgRegularSequence
         ucrInputInStepsOf.AddQuotesIfUnrecognised = False
         ucrInputInStepsOf.SetValidationTypeAsNumeric(dcmMin:=0)
 
-        ucrNudRepeatValues.SetParameter(New RParameter("each", 4))
+        ucrNudRepeatValues.SetParameter(New RParameter("each", 1))
         ucrNudRepeatValues.SetMinMax(1, Integer.MaxValue)
 
         ucrDataFrameLengthForRegularSequence.SetDataFrameSelector(ucrSelectDataFrameRegularSequence)
