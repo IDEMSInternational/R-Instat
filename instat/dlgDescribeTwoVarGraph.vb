@@ -48,7 +48,7 @@ Public Class dlgDescribeTwoVarGraph
         ucrBase.clsRsyntax.SetOperation("+")
         clsRGGplotFunction.SetRCommand("ggplot")
         ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRGGplotFunction)
-        ucrReceiverMultipleTwoVar.SetSelector(ucrSelectorTwoVarGraph)
+        ucrReceiverMultipleTwoVar.Selector = ucrSelectorTwoVarGraph
         ucrReceiverMultipleTwoVar.SetSingleTypeStatus(True)
         ucrReceiverMultipleTwoVar.SetMultipleOnlyStatus(True)
         ucrSecondVariableReceiver.Selector = ucrSelectorTwoVarGraph
