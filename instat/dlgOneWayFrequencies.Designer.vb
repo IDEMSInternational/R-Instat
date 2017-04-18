@@ -145,7 +145,7 @@ Partial Class dlgOneWayFrequencies
         Me.rdoBoth.FlatAppearance.BorderSize = 2
         Me.rdoBoth.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoBoth.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoBoth.Location = New System.Drawing.Point(260, 10)
+        Me.rdoBoth.Location = New System.Drawing.Point(259, 10)
         Me.rdoBoth.Name = "rdoBoth"
         Me.rdoBoth.Size = New System.Drawing.Size(100, 28)
         Me.rdoBoth.TabIndex = 14
