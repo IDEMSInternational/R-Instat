@@ -53,6 +53,7 @@ Public Class dlgUseDate
         ucrReceiverUseDate.SetMeAsReceiver()
         ucrReceiverUseDate.bUseFilteredData = False
         ucrReceiverUseDate.SetIncludedDataTypes({"Date"})
+        ucrReceiverUseDate.bAutoFill = True
         ucrReceiverUseDate.SetParameterIsString()
 
         'Check boxes

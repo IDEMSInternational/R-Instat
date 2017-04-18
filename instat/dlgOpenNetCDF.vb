@@ -19,7 +19,7 @@ Imports System.IO
 Public Class dlgOpenNetCDF
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsRDefaultFunction, clsRCDF, clsRDatanames As New RFunction
+    Private clsRDefaultFunction, clsRCDF As New RFunction
     Dim strFileType As String
     Dim bComponentsInitialised As Boolean
     Public bStartOpenDialog As Boolean
@@ -52,20 +52,23 @@ Public Class dlgOpenNetCDF
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrInputDataName.SetRCode(clsRDatanames, bReset)
-        ucrInputLocDataName.SetRCode(clsRDatanames, bReset)
+        ucrInputDataName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrInputLocDataName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrInputFilePath.SetRCode(clsRCDF, bReset)
+        ucrInputLatColName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrInputLonColName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub SetDefaults()
         clsRDefaultFunction = New RFunction
         ucrInputLocDataName.SetName("lat_lon_data")
         ucrInputDataName.SetName("")
+        ucrInputLatColName.SetName("")
+        ucrInputLonColName.SetName("")
         ucrInputFilePath.IsReadOnly = True
         ucrInputFilePath.SetName("")
         clsRDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_NetCDF")
         clsRDefaultFunction.AddParameter("nc_data", clsRFunctionParameter:=clsRCDF)
-        clsRDefaultFunction.AddParameter("data_names", clsRFunctionParameter:=clsRDatanames)
         ucrBase.clsRsyntax.SetBaseRFunction(clsRDefaultFunction)
     End Sub
 
@@ -74,12 +77,13 @@ Public Class dlgOpenNetCDF
         ucrInputLocDataName.SetDefaultTypeAsDataFrame()
         ucrInputDataName.SetValidationTypeAsRVariable()
         ucrInputLocDataName.SetValidationTypeAsRVariable()
-        clsRDatanames.SetRCommand("c")
-        ucrInputDataName.SetParameter(New RParameter("data_df_name", 0))
-        ucrInputDataName.clsParameter.bIncludeArgumentName = False
-        ucrInputLocDataName.SetParameter(New RParameter("location_df_name", 1))
-        ucrInputLocDataName.clsParameter.bIncludeArgumentName = False
         ucrInputFilePath.SetParameter(New RParameter("filename", 0))
+        ucrInputDataName.SetParameter(New RParameter("main_data_name", 1))
+        ucrInputLocDataName.SetParameter(New RParameter("loc_data_name", 2))
+        ucrInputLatColName.SetParameter(New RParameter("latitude_col_name", 3))
+        ucrInputLatColName.SetLinkedDisplayControl(lblLatColName)
+        ucrInputLonColName.SetParameter(New RParameter("longitude_col_name", 4))
+        ucrInputLonColName.SetLinkedDisplayControl(lblLonColName)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -123,7 +127,7 @@ Public Class dlgOpenNetCDF
                     strFileExt = Path.GetExtension(strFilePath)
                     ucrInputFilePath.SetName(strFilePath)
                     ucrInputDataName.Show()
-                    lblSSTName.Show()
+                    lblMainDataName.Show()
 
                     If strFileExt = ".nc" Then
                         clsRCDF.SetRCommand("nc_open")

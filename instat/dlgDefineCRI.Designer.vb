@@ -111,7 +111,7 @@ Partial Class dlgDefineCRI
         Me.lblModelPreview.Name = "lblModelPreview"
         Me.lblModelPreview.Size = New System.Drawing.Size(80, 13)
         Me.lblModelPreview.TabIndex = 15
-        Me.lblModelPreview.Text = "Model Preview:"
+        Me.lblModelPreview.Text = "Preview:"
         '
         'ucrSaveCRI
         '

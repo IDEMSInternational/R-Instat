@@ -129,11 +129,8 @@ Public Class ucrButtons
     End Sub
 
     Private Sub cmdPaste_Click(sender As Object, e As EventArgs) Handles cmdPaste.Click
-        frmScript.txtScript.Text = frmScript.txtScript.Text & vbCrLf & "# " & txtComment.Text
-        frmScript.txtScript.Text = frmScript.txtScript.Text & vbCrLf & clsRsyntax.GetScript()
         'here we getscript but we don't reinitialise the AssignTo etc. for when pressing OK button ? ...
-        frmScript.Visible = True
-        frmScript.BringToFront()
+        frmMain.AddToScriptWindow("# " & txtComment.Text & vbCrLf & clsRsyntax.GetScript())
     End Sub
 
     Private Sub chkComment_CheckedChanged(sender As Object, e As EventArgs) Handles chkComment.CheckedChanged
