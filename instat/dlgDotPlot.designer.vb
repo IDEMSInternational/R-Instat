@@ -27,7 +27,6 @@ Partial Class dlgDotPlot
         Me.lblOtherAxis = New System.Windows.Forms.Label()
         Me.lblFactor = New System.Windows.Forms.Label()
         Me.ucrVariablesAsFactorDotPlot = New instat.ucrVariablesAsFactor()
-        Me.ucrSaveDotPlot = New instat.ucrSaveGraph()
         Me.ucrDotPlotSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrFactorReceiver = New instat.ucrReceiverSingle()
         Me.ucrOtherAxisReceiver = New instat.ucrReceiverSingle()
@@ -35,12 +34,14 @@ Partial Class dlgDotPlot
         Me.grpBinAxis = New System.Windows.Forms.GroupBox()
         Me.rdoYBinAxis = New System.Windows.Forms.RadioButton()
         Me.rdoXBinAxis = New System.Windows.Forms.RadioButton()
+        Me.ucrSaveDotPlot = New instat.ucrSave()
+        Me.ucrPnlBinAxis = New instat.UcrPanel()
         Me.grpBinAxis.SuspendLayout()
         Me.SuspendLayout()
         '
         'cmdDotPlotOptions
         '
-        Me.cmdDotPlotOptions.Location = New System.Drawing.Point(12, 197)
+        Me.cmdDotPlotOptions.Location = New System.Drawing.Point(10, 198)
         Me.cmdDotPlotOptions.Name = "cmdDotPlotOptions"
         Me.cmdDotPlotOptions.Size = New System.Drawing.Size(120, 25)
         Me.cmdDotPlotOptions.TabIndex = 7
@@ -50,7 +51,7 @@ Partial Class dlgDotPlot
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(12, 228)
+        Me.cmdOptions.Location = New System.Drawing.Point(10, 228)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(120, 25)
         Me.cmdOptions.TabIndex = 8
@@ -80,18 +81,14 @@ Partial Class dlgDotPlot
         '
         'ucrVariablesAsFactorDotPlot
         '
+        Me.ucrVariablesAsFactorDotPlot.frmParent = Me
         Me.ucrVariablesAsFactorDotPlot.Location = New System.Drawing.Point(255, 36)
         Me.ucrVariablesAsFactorDotPlot.Name = "ucrVariablesAsFactorDotPlot"
+        Me.ucrVariablesAsFactorDotPlot.Selector = Nothing
         Me.ucrVariablesAsFactorDotPlot.Size = New System.Drawing.Size(125, 133)
         Me.ucrVariablesAsFactorDotPlot.TabIndex = 1
+        Me.ucrVariablesAsFactorDotPlot.ucrSelector = Nothing
         Me.ucrVariablesAsFactorDotPlot.ucrVariableSelector = Nothing
-        '
-        'ucrSaveDotPlot
-        '
-        Me.ucrSaveDotPlot.Location = New System.Drawing.Point(10, 308)
-        Me.ucrSaveDotPlot.Name = "ucrSaveDotPlot"
-        Me.ucrSaveDotPlot.Size = New System.Drawing.Size(265, 20)
-        Me.ucrSaveDotPlot.TabIndex = 10
         '
         'ucrDotPlotSelector
         '
@@ -105,25 +102,29 @@ Partial Class dlgDotPlot
         '
         'ucrFactorReceiver
         '
+        Me.ucrFactorReceiver.frmParent = Me
         Me.ucrFactorReceiver.Location = New System.Drawing.Point(255, 259)
         Me.ucrFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
         Me.ucrFactorReceiver.Selector = Nothing
         Me.ucrFactorReceiver.Size = New System.Drawing.Size(125, 20)
         Me.ucrFactorReceiver.TabIndex = 5
+        Me.ucrFactorReceiver.ucrSelector = Nothing
         '
         'ucrOtherAxisReceiver
         '
+        Me.ucrOtherAxisReceiver.frmParent = Me
         Me.ucrOtherAxisReceiver.Location = New System.Drawing.Point(255, 213)
         Me.ucrOtherAxisReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrOtherAxisReceiver.Name = "ucrOtherAxisReceiver"
         Me.ucrOtherAxisReceiver.Selector = Nothing
         Me.ucrOtherAxisReceiver.Size = New System.Drawing.Size(125, 20)
         Me.ucrOtherAxisReceiver.TabIndex = 3
+        Me.ucrOtherAxisReceiver.ucrSelector = Nothing
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 334)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 345)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
@@ -132,9 +133,10 @@ Partial Class dlgDotPlot
         '
         Me.grpBinAxis.Controls.Add(Me.rdoYBinAxis)
         Me.grpBinAxis.Controls.Add(Me.rdoXBinAxis)
-        Me.grpBinAxis.Location = New System.Drawing.Point(12, 259)
+        Me.grpBinAxis.Controls.Add(Me.ucrPnlBinAxis)
+        Me.grpBinAxis.Location = New System.Drawing.Point(10, 259)
         Me.grpBinAxis.Name = "grpBinAxis"
-        Me.grpBinAxis.Size = New System.Drawing.Size(120, 43)
+        Me.grpBinAxis.Size = New System.Drawing.Size(120, 50)
         Me.grpBinAxis.TabIndex = 9
         Me.grpBinAxis.TabStop = False
         Me.grpBinAxis.Tag = "Bin_Axis:"
@@ -142,34 +144,58 @@ Partial Class dlgDotPlot
         '
         'rdoYBinAxis
         '
-        Me.rdoYBinAxis.AutoSize = True
-        Me.rdoYBinAxis.Location = New System.Drawing.Point(66, 17)
+        Me.rdoYBinAxis.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoYBinAxis.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoYBinAxis.FlatAppearance.BorderSize = 2
+        Me.rdoYBinAxis.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoYBinAxis.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoYBinAxis.Location = New System.Drawing.Point(51, 17)
         Me.rdoYBinAxis.Name = "rdoYBinAxis"
-        Me.rdoYBinAxis.Size = New System.Drawing.Size(30, 17)
+        Me.rdoYBinAxis.Size = New System.Drawing.Size(45, 26)
         Me.rdoYBinAxis.TabIndex = 1
         Me.rdoYBinAxis.TabStop = True
         Me.rdoYBinAxis.Text = "y"
+        Me.rdoYBinAxis.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoYBinAxis.UseVisualStyleBackColor = True
         '
         'rdoXBinAxis
         '
-        Me.rdoXBinAxis.AutoSize = True
-        Me.rdoXBinAxis.Location = New System.Drawing.Point(15, 17)
+        Me.rdoXBinAxis.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoXBinAxis.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoXBinAxis.FlatAppearance.BorderSize = 2
+        Me.rdoXBinAxis.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoXBinAxis.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoXBinAxis.Location = New System.Drawing.Point(8, 17)
         Me.rdoXBinAxis.Name = "rdoXBinAxis"
-        Me.rdoXBinAxis.Size = New System.Drawing.Size(30, 17)
+        Me.rdoXBinAxis.Size = New System.Drawing.Size(45, 26)
         Me.rdoXBinAxis.TabIndex = 0
         Me.rdoXBinAxis.TabStop = True
         Me.rdoXBinAxis.Text = "x"
+        Me.rdoXBinAxis.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoXBinAxis.UseVisualStyleBackColor = True
+        '
+        'ucrSaveDotPlot
+        '
+        Me.ucrSaveDotPlot.Location = New System.Drawing.Point(10, 315)
+        Me.ucrSaveDotPlot.Name = "ucrSaveDotPlot"
+        Me.ucrSaveDotPlot.Size = New System.Drawing.Size(300, 24)
+        Me.ucrSaveDotPlot.TabIndex = 10
+        '
+        'ucrPnlBinAxis
+        '
+        Me.ucrPnlBinAxis.Location = New System.Drawing.Point(6, 16)
+        Me.ucrPnlBinAxis.Name = "ucrPnlBinAxis"
+        Me.ucrPnlBinAxis.Size = New System.Drawing.Size(91, 29)
+        Me.ucrPnlBinAxis.TabIndex = 11
         '
         'dlgDotPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(423, 393)
+        Me.ClientSize = New System.Drawing.Size(419, 410)
+        Me.Controls.Add(Me.ucrSaveDotPlot)
         Me.Controls.Add(Me.grpBinAxis)
         Me.Controls.Add(Me.ucrVariablesAsFactorDotPlot)
-        Me.Controls.Add(Me.ucrSaveDotPlot)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.cmdDotPlotOptions)
         Me.Controls.Add(Me.ucrDotPlotSelector)
@@ -186,7 +212,6 @@ Partial Class dlgDotPlot
         Me.Tag = "Dot_Plot"
         Me.Text = "Dot Plot"
         Me.grpBinAxis.ResumeLayout(False)
-        Me.grpBinAxis.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -200,9 +225,10 @@ Partial Class dlgDotPlot
     Friend WithEvents lblOtherAxis As Label
     Friend WithEvents ucrFactorReceiver As ucrReceiverSingle
     Friend WithEvents lblFactor As Label
-    Friend WithEvents ucrSaveDotPlot As ucrSaveGraph
     Friend WithEvents ucrVariablesAsFactorDotPlot As ucrVariablesAsFactor
     Friend WithEvents grpBinAxis As GroupBox
     Friend WithEvents rdoYBinAxis As RadioButton
     Friend WithEvents rdoXBinAxis As RadioButton
+    Friend WithEvents ucrSaveDotPlot As ucrSave
+    Friend WithEvents ucrPnlBinAxis As UcrPanel
 End Class
