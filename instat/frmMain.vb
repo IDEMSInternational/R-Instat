@@ -1345,6 +1345,10 @@ Public Class frmMain
         dlgRatingScales.ShowDialog()
     End Sub
 
+    Private Sub mnuPrepareColumnTextFindStringHandling_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnTextFindStringHandling.Click
+        dlgStringHandling.ShowDialog()
+    End Sub
+
     'Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click
     '    'TEST temporary 
     '    'TESTING TO BE ERASED !!!!!!!
