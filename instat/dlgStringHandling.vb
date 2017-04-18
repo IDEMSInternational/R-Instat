@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 
 Public Class dlgStringHandling
@@ -38,11 +37,11 @@ Public Class dlgStringHandling
     Private Sub InitialiseDialog()
 
         'ucrReceiver
-        ucrReceiverStringHandling.SetParameter(New RParameter("string", 0))
-        ucrReceiverStringHandling.SetParameterIsRFunction()
         ucrReceiverStringHandling.Selector = ucrSelectorStringHandling
         ucrReceiverStringHandling.SetMeAsReceiver()
 
+        ucrReceiverStringHandling.SetParameter(New RParameter("string", 0))
+        ucrReceiverStringHandling.SetParameterIsRFunction()
 
         'ucrRdoOptions
         ucrPnlStringHandling.AddRadioButton(rdoCount)
@@ -70,6 +69,7 @@ Public Class dlgStringHandling
         ucrSave.SetDataFrameSelector(ucrSelectorStringHandling.ucrAvailableDataFrames)
         ucrSave.SetIsComboBox()
         ucrSave.SetLabelText("Save Result to:")
+        ucrSave.SetPrefix("Count")
 
     End Sub
 
@@ -82,36 +82,39 @@ Public Class dlgStringHandling
 
 
         ucrSelectorStringHandling.Reset()
-        ucrInputPattern.ResetText()
-        ucrInputReplaceBy.ResetText()
+        ucrInputPattern.Reset()
+        ucrInputReplaceBy.Reset()
         ucrSave.Reset()
-
-
+        ucrInputReplaceBy.SetName("")
+        ucrInputPattern.SetName("")
         clsCountFunction.SetRCommand("str_count")
         clsExtractFunction.SetRCommand("str_extract")
         clsDetectFunction.SetRCommand("str_detect")
         clsLocateFunction.SetRCommand("str_locate")
         clsReplaceFunction.SetRCommand("str_replace")
 
-        clsCountFunction.SetAssignTo(ucrSave.GetText(), strTempDataframe:=ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSave.GetText)
+        clsCountFunction.SetAssignTo(ucrSave.GetText, strTempDataframe:=ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSave.GetText)
         ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverStringHandling.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrInputPattern.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrInputReplaceBy.SetRCode(clsReplaceFunction, bReset)
+
         ucrPnlStringHandling.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrSave.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrReceiverStringHandling.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrInputReplaceBy.SetRCode(clsReplaceFunction, bReset)
+
+        ucrInputPattern.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrInputReplaceBy.SetRCode(clsReplaceFunction, bReset)
 
     End Sub
     Private Sub ChangeBaseFunction()
         If rdoCount.Checked Then
-            ucrSave.SetPrefix("Count")
             ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
+            ucrSave.SetPrefix("Count")
         ElseIf rdoDetect.Checked Then
-            ucrSave.SetPrefix("detect")
             ucrBase.clsRsyntax.SetBaseRFunction(clsDetectFunction)
+            ucrSave.SetPrefix("detect")
         ElseIf rdoExtract.Checked Then
             ucrSave.SetPrefix("extract")
             ucrBase.clsRsyntax.SetBaseRFunction(clsExtractFunction)
@@ -147,6 +150,7 @@ Public Class dlgStringHandling
 
     Private Sub ucrPnlStringHandling_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlStringHandling.ControlValueChanged
         ChangeBaseFunction()
-        'SetRCodeForControls(True)
+        SetRCodeForControls(True)
     End Sub
+
 End Class
