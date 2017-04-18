@@ -48,20 +48,20 @@ Public Class dlgRugPlot
         ucrRugPlotSelector.SetParameter(New RParameter("data", 0))
         ucrRugPlotSelector.SetParameterIsrfunction()
 
-        ucrVariablesAsFactorForRugPlot.SetParameter(New RParameter("y"))
+        ucrVariablesAsFactorForRugPlot.SetParameter(New RParameter("y", 1))
         ucrVariablesAsFactorForRugPlot.SetParameterIsString()
         ucrVariablesAsFactorForRugPlot.SetFactorReceiver(ucrFactorOptionalReceiver)
         ucrVariablesAsFactorForRugPlot.Selector = ucrRugPlotSelector
         ucrVariablesAsFactorForRugPlot.SetIncludedDataTypes({"factor", "numeric"})
         ucrVariablesAsFactorForRugPlot.bWithQuotes = False
 
-        ucrReceiverX.SetParameter(New RParameter("x"))
+        ucrReceiverX.SetParameter(New RParameter("x", 0))
         ucrReceiverX.SetParameterIsString()
         ucrReceiverX.Selector = ucrRugPlotSelector
         ucrReceiverX.SetIncludedDataTypes({"factor", "numeric"})
         ucrReceiverX.bWithQuotes = False
 
-        ucrFactorOptionalReceiver.SetParameter(New RParameter("colour"))
+        ucrFactorOptionalReceiver.SetParameter(New RParameter("colour", 2))
         ucrFactorOptionalReceiver.Selector = ucrRugPlotSelector
         ucrFactorOptionalReceiver.SetIncludedDataTypes({"factor", "numeric"})
         ucrFactorOptionalReceiver.bWithQuotes = False
