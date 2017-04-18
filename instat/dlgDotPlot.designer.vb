@@ -34,8 +34,8 @@ Partial Class dlgDotPlot
         Me.grpBinAxis = New System.Windows.Forms.GroupBox()
         Me.rdoYBinAxis = New System.Windows.Forms.RadioButton()
         Me.rdoXBinAxis = New System.Windows.Forms.RadioButton()
-        Me.ucrSaveDotPlot = New instat.ucrSave()
         Me.ucrPnlBinAxis = New instat.UcrPanel()
+        Me.ucrSaveDotPlot = New instat.ucrSave()
         Me.grpBinAxis.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -44,7 +44,7 @@ Partial Class dlgDotPlot
         Me.cmdDotPlotOptions.Location = New System.Drawing.Point(10, 198)
         Me.cmdDotPlotOptions.Name = "cmdDotPlotOptions"
         Me.cmdDotPlotOptions.Size = New System.Drawing.Size(120, 25)
-        Me.cmdDotPlotOptions.TabIndex = 7
+        Me.cmdDotPlotOptions.TabIndex = 6
         Me.cmdDotPlotOptions.Tag = "Dot_Plot_Options"
         Me.cmdDotPlotOptions.Text = "Dot Plot Options"
         Me.cmdDotPlotOptions.UseVisualStyleBackColor = True
@@ -54,7 +54,7 @@ Partial Class dlgDotPlot
         Me.cmdOptions.Location = New System.Drawing.Point(10, 228)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(120, 25)
-        Me.cmdOptions.TabIndex = 8
+        Me.cmdOptions.TabIndex = 7
         Me.cmdOptions.Tag = "Options"
         Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
@@ -127,7 +127,7 @@ Partial Class dlgDotPlot
         Me.ucrBase.Location = New System.Drawing.Point(10, 345)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.TabIndex = 10
         '
         'grpBinAxis
         '
@@ -137,7 +137,7 @@ Partial Class dlgDotPlot
         Me.grpBinAxis.Location = New System.Drawing.Point(10, 259)
         Me.grpBinAxis.Name = "grpBinAxis"
         Me.grpBinAxis.Size = New System.Drawing.Size(120, 50)
-        Me.grpBinAxis.TabIndex = 9
+        Me.grpBinAxis.TabIndex = 8
         Me.grpBinAxis.TabStop = False
         Me.grpBinAxis.Tag = "Bin_Axis:"
         Me.grpBinAxis.Text = "Bin Axis:"
@@ -174,19 +174,19 @@ Partial Class dlgDotPlot
         Me.rdoXBinAxis.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoXBinAxis.UseVisualStyleBackColor = True
         '
-        'ucrSaveDotPlot
-        '
-        Me.ucrSaveDotPlot.Location = New System.Drawing.Point(10, 315)
-        Me.ucrSaveDotPlot.Name = "ucrSaveDotPlot"
-        Me.ucrSaveDotPlot.Size = New System.Drawing.Size(300, 24)
-        Me.ucrSaveDotPlot.TabIndex = 10
-        '
         'ucrPnlBinAxis
         '
         Me.ucrPnlBinAxis.Location = New System.Drawing.Point(6, 16)
         Me.ucrPnlBinAxis.Name = "ucrPnlBinAxis"
         Me.ucrPnlBinAxis.Size = New System.Drawing.Size(91, 29)
         Me.ucrPnlBinAxis.TabIndex = 11
+        '
+        'ucrSaveDotPlot
+        '
+        Me.ucrSaveDotPlot.Location = New System.Drawing.Point(10, 315)
+        Me.ucrSaveDotPlot.Name = "ucrSaveDotPlot"
+        Me.ucrSaveDotPlot.Size = New System.Drawing.Size(300, 24)
+        Me.ucrSaveDotPlot.TabIndex = 9
         '
         'dlgDotPlot
         '
