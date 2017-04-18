@@ -68,12 +68,12 @@ Public Class dlgRatingScales
         ucrReceiverOrderedFactors.SetParameterIsRFunction()
         clsSjplikert.SetRCommand("sjp.likert")
         clsSjplikert.AddParameter("cat.neutral")
-        clsSjplikert.AddParameter("catcount", "NULL")
-        clsSjplikert.AddParameter("sort.frq", "NULL")
+        'clsSjplikert.AddParameter("catcount", "NULL")
+        clsSjplikert.AddParameter("sort.frq", Chr(34) & "NULL" & Chr(34))
         clsSjplikert.AddParameter("coord.flip", "FALSE")
 
         clsSjpStackFrq.SetRCommand("sjp.stackfrq")
-        clsSjpStackFrq.AddParameter("sort.frq", "NULL")
+        clsSjpStackFrq.AddParameter("sort.frq", Chr(34) & "NULL" & Chr(34))
         clsSjpStackFrq.AddParameter("coord.flip", "FALSE")
 
         clsSjtStackFrq.SetRCommand("sjt.stackfrq")
@@ -114,12 +114,12 @@ Public Class dlgRatingScales
         ucrPnlSjpLikert.AddFunctionNamesCondition(rdoStacked, "sjPlot::sjp.stackfrq")
 
         ucrPnlSjpLikert.SetParameter(New RParameter("sort.frq", 3))
-        ucrPnlSjpLikert.AddRadioButton(rdoNoneLikert, "NULL")
+        ucrPnlSjpLikert.AddRadioButton(rdoNoneLikert, Chr(34) & "NULL" & Chr(34))
         ucrPnlSjpLikert.AddRadioButton(rdoLowAscendingLikert, Chr(34) & "neg.asc" & Chr(34))
         ucrPnlSjpLikert.AddRadioButton(rdoLowDescendingLikert, Chr(34) & "neg.desc" & Chr(34))
         ucrPnlSjpLikert.AddRadioButton(rdoHighAscendingLikert, Chr(34) & "posc.asc" & Chr(34))
         ucrPnlSjpLikert.AddRadioButton(rdoHighDescendingLikert, Chr(34) & "posc.desc" & Chr(34))
-        ucrPnlSjpLikert.SetRDefault("NULL")
+        ucrPnlSjpLikert.SetRDefault(Chr(34) & "NULL" & Chr(34))
 
         ucrPnlGraphType.AddFunctionNamesCondition(rdoGraph, "sjPlot::sjp.stackfrq")
         ucrPnlGraphType.AddFunctionNamesCondition(rdoGraph, "sjPlot::sjp.likert")
@@ -136,6 +136,19 @@ Public Class dlgRatingScales
         ucrPnlGraphType.AddToLinkedControls(ucrNudNeutralLevel, {rdoLikert}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudNeutralLevel.SetLinkedDisplayControl(lblNeutralLevel)
         ucrPnlGraphType.AddToLinkedControls(ucrPnlSjpLikert, {rdoLikert, rdoStacked, rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoNoneLikert)
+
+        ucrPnlType.AddToLinkedControls(ucrNudNeutralLevel, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudNeutralLevel.SetLinkedDisplayControl(lblNeutralLevel)
+        ucrPnlType.AddToLinkedControls(ucrPnlGraphType, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+
+        ' ucrPnlSjpLikert.SetLinkedDisplayControl(grpGraphType)
+
+        ucrSaveGraph.SetPrefix("Graph")
+        ucrSaveGraph.SetSaveTypeAsColumn()
+        ucrSaveGraph.SetDataFrameSelector(ucrSelectorRatingScale.ucrAvailableDataFrames)
+        ucrSaveGraph.SetLabelText("Save Graph:")
+        ucrSaveGraph.SetIsComboBox()
 
 
     End Sub
