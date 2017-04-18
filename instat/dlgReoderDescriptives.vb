@@ -30,6 +30,7 @@ Public Class dlgReoderDescriptives
         SetRCodeforControls(bReset)
         bReset = False
         autoTranslate(Me)
+        TestOKEnabled()
     End Sub
 
 

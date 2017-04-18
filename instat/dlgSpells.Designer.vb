@@ -30,7 +30,7 @@ Partial Class dlgSpells
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrReceiverRainfall = New instat.ucrReceiverSingle()
-        Me.ucrSelectorForStartofRains = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSelectorForSpells = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.chkConditionRain = New System.Windows.Forms.CheckBox()
         Me.lblTo = New System.Windows.Forms.Label()
@@ -42,6 +42,7 @@ Partial Class dlgSpells
         Me.NudConditionRight = New System.Windows.Forms.NumericUpDown()
         Me.ucrInputCondition = New instat.ucrInputComboBox()
         Me.grpRainParameters = New System.Windows.Forms.GroupBox()
+        Me.ucrSaveSpells = New instat.ucrSave()
         CType(Me.nudTo, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudFrom, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudConditionLeft, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -125,19 +126,19 @@ Partial Class dlgSpells
         Me.ucrReceiverRainfall.Size = New System.Drawing.Size(143, 20)
         Me.ucrReceiverRainfall.TabIndex = 4
         '
-        'ucrSelectorForStartofRains
+        'ucrSelectorForSpells
         '
-        Me.ucrSelectorForStartofRains.bShowHiddenColumns = False
-        Me.ucrSelectorForStartofRains.bUseCurrentFilter = True
-        Me.ucrSelectorForStartofRains.Location = New System.Drawing.Point(9, 9)
-        Me.ucrSelectorForStartofRains.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorForStartofRains.Name = "ucrSelectorForStartofRains"
-        Me.ucrSelectorForStartofRains.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorForStartofRains.TabIndex = 0
+        Me.ucrSelectorForSpells.bShowHiddenColumns = False
+        Me.ucrSelectorForSpells.bUseCurrentFilter = True
+        Me.ucrSelectorForSpells.Location = New System.Drawing.Point(9, 9)
+        Me.ucrSelectorForSpells.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorForSpells.Name = "ucrSelectorForSpells"
+        Me.ucrSelectorForSpells.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorForSpells.TabIndex = 0
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 295)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 318)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 11
@@ -248,11 +249,19 @@ Partial Class dlgSpells
         Me.grpRainParameters.TabIndex = 9
         Me.grpRainParameters.TabStop = False
         '
+        'ucrSaveSpells
+        '
+        Me.ucrSaveSpells.Location = New System.Drawing.Point(9, 295)
+        Me.ucrSaveSpells.Name = "ucrSaveSpells"
+        Me.ucrSaveSpells.Size = New System.Drawing.Size(290, 24)
+        Me.ucrSaveSpells.TabIndex = 14
+        '
         'dlgSpells
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(421, 352)
+        Me.ClientSize = New System.Drawing.Size(421, 375)
+        Me.Controls.Add(Me.ucrSaveSpells)
         Me.Controls.Add(Me.chkConditionRain)
         Me.Controls.Add(Me.ucrReceiverDayOfYear)
         Me.Controls.Add(Me.ucrReceiverYear)
@@ -263,7 +272,7 @@ Partial Class dlgSpells
         Me.Controls.Add(Me.grpRainParameters)
         Me.Controls.Add(Me.lblRainfall)
         Me.Controls.Add(Me.ucrReceiverRainfall)
-        Me.Controls.Add(Me.ucrSelectorForStartofRains)
+        Me.Controls.Add(Me.ucrSelectorForSpells)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -271,7 +280,7 @@ Partial Class dlgSpells
         Me.Name = "dlgSpells"
         Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Dry Spells"
+        Me.Text = "Spells"
         CType(Me.nudTo, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudFrom, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudConditionLeft, System.ComponentModel.ISupportInitialize).EndInit()
@@ -284,7 +293,7 @@ Partial Class dlgSpells
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrSelectorForStartofRains As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSelectorForSpells As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverRainfall As ucrReceiverSingle
     Friend WithEvents lblRainfall As Label
     Friend WithEvents lblDate As Label
@@ -303,4 +312,5 @@ Partial Class dlgSpells
     Friend WithEvents lblThreshold As Label
     Friend WithEvents lblFrom As Label
     Friend WithEvents lblTo As Label
+    Friend WithEvents ucrSaveSpells As ucrSave
 End Class
