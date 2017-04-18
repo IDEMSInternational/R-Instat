@@ -57,7 +57,7 @@ Partial Class dlgRugPlot
         'lblFactorOptional
         '
         Me.lblFactorOptional.AutoSize = True
-        Me.lblFactorOptional.Location = New System.Drawing.Point(276, 224)
+        Me.lblFactorOptional.Location = New System.Drawing.Point(273, 223)
         Me.lblFactorOptional.Name = "lblFactorOptional"
         Me.lblFactorOptional.Size = New System.Drawing.Size(111, 13)
         Me.lblFactorOptional.TabIndex = 4
@@ -67,7 +67,7 @@ Partial Class dlgRugPlot
         'lblXVariable
         '
         Me.lblXVariable.AutoSize = True
-        Me.lblXVariable.Location = New System.Drawing.Point(276, 183)
+        Me.lblXVariable.Location = New System.Drawing.Point(273, 181)
         Me.lblXVariable.Name = "lblXVariable"
         Me.lblXVariable.Size = New System.Drawing.Size(58, 13)
         Me.lblXVariable.TabIndex = 2
@@ -76,7 +76,7 @@ Partial Class dlgRugPlot
         '
         'ucrSaveGraph
         '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 278)
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 264)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
         Me.ucrSaveGraph.Size = New System.Drawing.Size(263, 24)
         Me.ucrSaveGraph.TabIndex = 8
@@ -84,7 +84,7 @@ Partial Class dlgRugPlot
         'ucrVariablesAsFactorForRugPlot
         '
         Me.ucrVariablesAsFactorForRugPlot.frmParent = Me
-        Me.ucrVariablesAsFactorForRugPlot.Location = New System.Drawing.Point(273, 31)
+        Me.ucrVariablesAsFactorForRugPlot.Location = New System.Drawing.Point(273, 30)
         Me.ucrVariablesAsFactorForRugPlot.Name = "ucrVariablesAsFactorForRugPlot"
         Me.ucrVariablesAsFactorForRugPlot.Selector = Nothing
         Me.ucrVariablesAsFactorForRugPlot.Size = New System.Drawing.Size(125, 136)
@@ -99,18 +99,18 @@ Partial Class dlgRugPlot
         Me.ucrFactorOptionalReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFactorOptionalReceiver.Name = "ucrFactorOptionalReceiver"
         Me.ucrFactorOptionalReceiver.Selector = Nothing
-        Me.ucrFactorOptionalReceiver.Size = New System.Drawing.Size(120, 20)
+        Me.ucrFactorOptionalReceiver.Size = New System.Drawing.Size(125, 20)
         Me.ucrFactorOptionalReceiver.TabIndex = 5
         Me.ucrFactorOptionalReceiver.ucrSelector = Nothing
         '
         'ucrReceiverX
         '
         Me.ucrReceiverX.frmParent = Me
-        Me.ucrReceiverX.Location = New System.Drawing.Point(273, 197)
+        Me.ucrReceiverX.Location = New System.Drawing.Point(273, 196)
         Me.ucrReceiverX.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverX.Name = "ucrReceiverX"
         Me.ucrReceiverX.Selector = Nothing
-        Me.ucrReceiverX.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverX.Size = New System.Drawing.Size(125, 20)
         Me.ucrReceiverX.TabIndex = 3
         Me.ucrReceiverX.ucrSelector = Nothing
         '
@@ -126,7 +126,7 @@ Partial Class dlgRugPlot
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 308)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 294)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 58)
         Me.ucrBase.TabIndex = 9
@@ -135,12 +135,12 @@ Partial Class dlgRugPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(433, 364)
+        Me.ClientSize = New System.Drawing.Size(421, 355)
+        Me.Controls.Add(Me.ucrReceiverX)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrVariablesAsFactorForRugPlot)
         Me.Controls.Add(Me.ucrFactorOptionalReceiver)
         Me.Controls.Add(Me.lblFactorOptional)
-        Me.Controls.Add(Me.ucrReceiverX)
         Me.Controls.Add(Me.lblXVariable)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.cmdRugPlotOptions)
