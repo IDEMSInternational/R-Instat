@@ -1639,7 +1639,7 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
       stop("Cannot plot columns of type:", column_types[i])
     }    
     curr_data <- self$get_data_frame(stack_data = TRUE, measure.vars = columns)
-    if(curr_geom_name == "geom_boxplot" || curr_geom_name == "geom_point" || curr_geom_name == "geom_jitter" || curr_geom_name == "box_jitter" || curr_geom_name == "violin_jitter" || curr_geom_name == "violin_box") {
+    if(curr_geom_name == "geom_boxplot" || curr_geom_name == "geom_point" || curr_geom_name == "geom_violin" || curr_geom_name == "geom_jitter" || curr_geom_name == "box_jitter" || curr_geom_name == "violin_jitter" || curr_geom_name == "violin_box") {
       g <- ggplot(data = curr_data, mapping = aes(x = "", y = value)) + xlab("")
     }
     else {
@@ -1647,10 +1647,10 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
     }
     
     if(curr_geom_name == "box_jitter") {
-      g <- g + geom_boxplot() + geom_jitter() 
+      g <- g + geom_boxplot() + geom_jitter(width = 0.2, height = 0.2)
     }
     else if(curr_geom_name == "violin_jitter") {
-      g <- g + geom_violin() + geom_jitter() 
+      g <- g + geom_violin() + geom_jitter(width = 0.2, height = 0.2)
     }
     else if(curr_geom_name == "violin_box") {
       g <- g + geom_violin() + geom_boxplot() 
@@ -1689,7 +1689,7 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
       else {
         stop("Cannot plot columns of type:", column_types[i])
       }
-      if(curr_geom_name == "geom_boxplot" || curr_geom_name == "geom_point" || curr_geom_name == "box_jitter" || curr_geom_name == "violin_jitter" || curr_geom_name == "violin_box") {
+      if(curr_geom_name == "geom_boxplot" || curr_geom_name == "geom_violin" || curr_geom_name == "geom_point" || curr_geom_name == "geom_jitter" || curr_geom_name == "box_jitter" || curr_geom_name == "violin_jitter" || curr_geom_name == "violin_box") {
         g <- ggplot(data = curr_data, mapping = aes_(x = "", y = as.name(column))) + xlab("")
       }
       else {
@@ -1699,10 +1699,10 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
         g <- g + coord_flip()
       } 
       if(curr_geom_name == "box_jitter") {
-        g <- g + geom_boxplot() + geom_jitter()
+        g <- g + geom_boxplot() + geom_jitter(width = 0.2, height = 0.2)
       }
       else if(curr_geom_name == "violin_jitter") {
-        g <- g + geom_violin() + geom_jitter()
+        g <- g + geom_violin() + geom_jitter(width = 0.2, height = 0.2)
       }
       else if(curr_geom_name == "violin_box") {
         g <- g + geom_violin() + geom_boxplot()
