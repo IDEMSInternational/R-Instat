@@ -71,6 +71,8 @@ Public Class dlgDotPlot
         ucrOtherAxisReceiver.SetIncludedDataTypes({"factor", "numeric"}) 'Warning: Even if having "factor" only could be more appropriate for the Axis that is not BinAxis, when coming back from the LayerOptions, where x and y can take both numeric and factor values, we would get bugs if numeric was not allowed.
         ucrOtherAxisReceiver.SetParameter(New RParameter(""))
         ucrOtherAxisReceiver.bWithQuotes = False
+        ucrOtherAxisReceiver.SetValuesToIgnore({Chr(34) & Chr(34)})
+        ucrOtherAxisReceiver.bAddParameterIfEmpty = True
         ucrOtherAxisReceiver.SetParameterIsString()
 
         ucrFactorReceiver.Selector = ucrDotPlotSelector
@@ -131,11 +133,12 @@ Public Class dlgDotPlot
         clsRaesFunction.SetPackageName("ggplot2")
         clsRaesFunction.SetRCommand("aes")
         clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
-        clsRaesFunction.AddParameter("y", Chr(34) & Chr(34))
+
 
         clsRgeom_dotplot.SetPackageName("ggplot2")
         clsRgeom_dotplot.SetRCommand("geom_dotplot")
 
+        clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrDotPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
 
@@ -154,7 +157,7 @@ Public Class dlgDotPlot
             strBinAxis = "x"
             strOtherAxis = "y"
         End If
-        clsRgeom_dotplot.AddParameter("binaxis", Chr(34) & strBinAxis & Chr(34))
+
         'The aes parameters for x and y in the AesFunction need to be updated, unless we are setting up the dialogue according to the content of AesFunction, when coming back from LayerOptions.
         If bEditAesFunction Then
             SetFactorAxisAes()
