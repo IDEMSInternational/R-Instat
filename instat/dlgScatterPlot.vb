@@ -36,11 +36,14 @@ Public Class dlgScatterPlot
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.SetOperation("+")
         clsRggplotFunction.SetRCommand("ggplot")
+        clsRggplotFunction.SetPackageName("ggplot2")
         clsRaesFunction.SetRCommand("aes")
+        clsRaesFunction.SetPackageName("ggplot2")
         clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
         ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
 
         clsRgeom_scatterplotFunction.SetRCommand("geom_point")
+        clsRgeom_scatterplotFunction.SetPackageName("ggplot2")
         ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_scatterplotFunction)
 
         ucrVariablesAsFactorForScatter.SetFactorReceiver(ucrFactorOptionalReceiver)
