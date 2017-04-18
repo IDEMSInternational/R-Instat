@@ -104,7 +104,7 @@ Public Class dlgRugPlot
         bResetSubdialog = True
     End Sub
 
-    Private Sub SetRCodeForControls(bReset As Boolean)
+    Public Sub SetRCodeForControls(bReset As Boolean)
         ucrSaveGraph.SetRCode(clsBaseOperator, bReset)
         ucrRugPlotSelector.SetRCode(clsDefaultFunction, bReset)
 
