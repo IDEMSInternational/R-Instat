@@ -40,28 +40,6 @@ Public Class dlgRugPlot
         TestOkEnabled()
     End Sub
 
-    Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrSaveGraph.SetRCode(clsBaseOperator, bReset)
-        ucrRugPlotSelector.SetRCode(clsDefaultFunction, bReset)
-
-        ucrReceiverX.SetRCode(clsRaesFunction, bReset)
-        ucrFactorOptionalReceiver.SetRCode(clsRaesFunction, bReset)
-        ucrVariablesAsFactorForRugPlot.SetRCode(clsRaesFunction, bReset)
-    End Sub
-
-    Private Sub TestOkEnabled()
-        ''tests when okay Is enable
-        If (Not ucrReceiverX.IsEmpty() AndAlso Not ucrVariablesAsFactorForRugPlot.IsEmpty) AndAlso ucrSaveGraph.IsComplete Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
-    End Sub
-
-    Private Sub AllControlsContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrVariablesAsFactorForRugPlot.ControlContentsChanged
-        TestOkEnabled()
-    End Sub
-
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 476
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
@@ -70,34 +48,33 @@ Public Class dlgRugPlot
         ucrRugPlotSelector.SetParameter(New RParameter("data", 0))
         ucrRugPlotSelector.SetParameterIsrfunction()
 
+        ucrVariablesAsFactorForRugPlot.SetParameter(New RParameter("y", 1))
+        ucrVariablesAsFactorForRugPlot.SetParameterIsString()
         ucrVariablesAsFactorForRugPlot.SetFactorReceiver(ucrFactorOptionalReceiver)
         ucrVariablesAsFactorForRugPlot.Selector = ucrRugPlotSelector
         ucrVariablesAsFactorForRugPlot.SetIncludedDataTypes({"factor", "numeric"})
-        ucrVariablesAsFactorForRugPlot.SetParameter(New RParameter("y"))
         ucrVariablesAsFactorForRugPlot.bWithQuotes = False
-        ucrVariablesAsFactorForRugPlot.SetParameterIsString()
 
+        ucrReceiverX.SetParameter(New RParameter("x", 0))
+        ucrReceiverX.SetParameterIsString()
         ucrReceiverX.Selector = ucrRugPlotSelector
         ucrReceiverX.SetIncludedDataTypes({"factor", "numeric"})
-        ucrReceiverX.SetParameter(New RParameter("x"))
         ucrReceiverX.bWithQuotes = False
-        ucrReceiverX.SetParameterIsString()
 
-
+        ucrFactorOptionalReceiver.SetParameter(New RParameter("colour", 2))
         ucrFactorOptionalReceiver.Selector = ucrRugPlotSelector
         ucrFactorOptionalReceiver.SetIncludedDataTypes({"factor", "numeric"})
-        ucrFactorOptionalReceiver.SetParameter(New RParameter("colour"))
         ucrFactorOptionalReceiver.bWithQuotes = False
         ucrFactorOptionalReceiver.SetParameterIsString()
 
         ucrSaveGraph.SetPrefix("Rug")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetIsComboBox()
-        ucrSaveGraph.SetCheckBoxText("Save graph")
+        ucrSaveGraph.SetCheckBoxText("Save Graph")
         ucrSaveGraph.SetDataFrameSelector(ucrRugPlotSelector.ucrAvailableDataFrames)
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
-
     End Sub
+
     Private Sub SetDefaults()
         clsRaesFunction = New RFunction
         clsDefaultFunction = New RFunction
@@ -125,7 +102,28 @@ Public Class dlgRugPlot
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrRugPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
         bResetSubdialog = True
+    End Sub
 
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        ucrSaveGraph.SetRCode(clsBaseOperator, bReset)
+        ucrRugPlotSelector.SetRCode(clsDefaultFunction, bReset)
+
+        ucrReceiverX.SetRCode(clsRaesFunction, bReset)
+        ucrFactorOptionalReceiver.SetRCode(clsRaesFunction, bReset)
+        ucrVariablesAsFactorForRugPlot.SetRCode(clsRaesFunction, bReset)
+    End Sub
+
+    Private Sub TestOkEnabled()
+        ' Tests when OK is enabled
+        If (Not ucrSaveGraph.IsComplete) OrElse (ucrVariablesAsFactorForRugPlot.IsEmpty AndAlso ucrReceiverX.IsEmpty()) Then
+            ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
+        End If
+    End Sub
+
+    Private Sub AllControlsContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrVariablesAsFactorForRugPlot.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -138,10 +136,9 @@ Public Class dlgRugPlot
         sdgPlots.SetDataFrame(strNewDataFrame:=ucrRugPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         sdgPlots.ShowDialog()
     End Sub
+
     Private Sub cmdRugPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdRugPlotOptions.Click
-
         ''''''' i wonder if all this will be needed for the new system
-
         sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsDefaultFunction, clsTempGeomFunc:=clsRgeom_RugPlotFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrRugPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True, bIgnoreGlobalAes:=False)
         sdgLayerOptions.ShowDialog()
 
@@ -154,9 +151,5 @@ Public Class dlgRugPlot
                 ucrFactorOptionalReceiver.Add(clsParam.strArgumentValue)
             End If
         Next
-    End Sub
-
-    Private Sub AllControlsContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForRugPlot.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrReceiverX.ControlContentsChanged
-
     End Sub
 End Class
