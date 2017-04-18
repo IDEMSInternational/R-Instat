@@ -29,13 +29,13 @@ Partial Class dlgConvertColumns
         Me.rdoNumeric = New System.Windows.Forms.RadioButton()
         Me.rdoOrderedFactor = New System.Windows.Forms.RadioButton()
         Me.rdoFactor = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlConvertTo = New instat.UcrPanel()
         Me.rdoConvertOrdinals = New System.Windows.Forms.RadioButton()
         Me.rdoConvertLevels = New System.Windows.Forms.RadioButton()
         Me.grpFactorToNumericOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrPnlFactorToNumericOptions = New instat.UcrPanel()
         Me.ucrNudDisplayDecimals = New instat.ucrNud()
         Me.ucrChkSpecifyDecimalsToDisplay = New instat.ucrCheck()
-        Me.ucrPnlConvertTo = New instat.UcrPanel()
-        Me.ucrPnlFactorToNumericOptions = New instat.UcrPanel()
         Me.ucrSelectorDataFrameColumns = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverColumnsToConvert = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
@@ -46,7 +46,7 @@ Partial Class dlgConvertColumns
         'lblColumnsToConvert
         '
         Me.lblColumnsToConvert.AutoSize = True
-        Me.lblColumnsToConvert.Location = New System.Drawing.Point(249, 17)
+        Me.lblColumnsToConvert.Location = New System.Drawing.Point(249, 44)
         Me.lblColumnsToConvert.Name = "lblColumnsToConvert"
         Me.lblColumnsToConvert.Size = New System.Drawing.Size(102, 13)
         Me.lblColumnsToConvert.TabIndex = 1
@@ -123,6 +123,13 @@ Partial Class dlgConvertColumns
         Me.rdoFactor.Text = "Factor"
         Me.rdoFactor.UseVisualStyleBackColor = True
         '
+        'ucrPnlConvertTo
+        '
+        Me.ucrPnlConvertTo.Location = New System.Drawing.Point(3, 16)
+        Me.ucrPnlConvertTo.Name = "ucrPnlConvertTo"
+        Me.ucrPnlConvertTo.Size = New System.Drawing.Size(328, 44)
+        Me.ucrPnlConvertTo.TabIndex = 0
+        '
         'rdoConvertOrdinals
         '
         Me.rdoConvertOrdinals.AutoSize = True
@@ -157,8 +164,16 @@ Partial Class dlgConvertColumns
         Me.grpFactorToNumericOptions.TabStop = False
         Me.grpFactorToNumericOptions.Text = "Factor Options"
         '
+        'ucrPnlFactorToNumericOptions
+        '
+        Me.ucrPnlFactorToNumericOptions.Location = New System.Drawing.Point(3, 16)
+        Me.ucrPnlFactorToNumericOptions.Name = "ucrPnlFactorToNumericOptions"
+        Me.ucrPnlFactorToNumericOptions.Size = New System.Drawing.Size(284, 24)
+        Me.ucrPnlFactorToNumericOptions.TabIndex = 0
+        '
         'ucrNudDisplayDecimals
         '
+        Me.ucrNudDisplayDecimals.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDisplayDecimals.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudDisplayDecimals.Location = New System.Drawing.Point(205, 264)
         Me.ucrNudDisplayDecimals.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
@@ -176,20 +191,6 @@ Partial Class dlgConvertColumns
         Me.ucrChkSpecifyDecimalsToDisplay.Size = New System.Drawing.Size(190, 20)
         Me.ucrChkSpecifyDecimalsToDisplay.TabIndex = 18
         '
-        'ucrPnlConvertTo
-        '
-        Me.ucrPnlConvertTo.Location = New System.Drawing.Point(3, 16)
-        Me.ucrPnlConvertTo.Name = "ucrPnlConvertTo"
-        Me.ucrPnlConvertTo.Size = New System.Drawing.Size(328, 44)
-        Me.ucrPnlConvertTo.TabIndex = 0
-        '
-        'ucrPnlFactorToNumericOptions
-        '
-        Me.ucrPnlFactorToNumericOptions.Location = New System.Drawing.Point(3, 16)
-        Me.ucrPnlFactorToNumericOptions.Name = "ucrPnlFactorToNumericOptions"
-        Me.ucrPnlFactorToNumericOptions.Size = New System.Drawing.Size(284, 24)
-        Me.ucrPnlFactorToNumericOptions.TabIndex = 0
-        '
         'ucrSelectorDataFrameColumns
         '
         Me.ucrSelectorDataFrameColumns.bShowHiddenColumns = False
@@ -203,7 +204,7 @@ Partial Class dlgConvertColumns
         'ucrReceiverColumnsToConvert
         '
         Me.ucrReceiverColumnsToConvert.frmParent = Me
-        Me.ucrReceiverColumnsToConvert.Location = New System.Drawing.Point(247, 32)
+        Me.ucrReceiverColumnsToConvert.Location = New System.Drawing.Point(247, 60)
         Me.ucrReceiverColumnsToConvert.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverColumnsToConvert.Name = "ucrReceiverColumnsToConvert"
         Me.ucrReceiverColumnsToConvert.Selector = Nothing

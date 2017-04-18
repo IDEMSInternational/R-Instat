@@ -1,18 +1,5 @@
-get_default_decimal_places <- function(data) {
-  if(is.numeric(data)) {
-    min_data <- min(data, na.rm = TRUE)
-    if(class(data) %in% "integer" || min_data > 100) {
-      return(0)
-    }
-    else {
-      if(min_data > 10) {
-        return(1)
-      }
-      else {  
-        return(2) 
-      }
-    }
-  }
+get_default_significant_figures <- function(data) {
+  if(is.numeric(data)) return(3)
   else return(NA)  
 }
 
@@ -23,14 +10,14 @@ convert_to_character_matrix <- function(data, format_decimal_places = TRUE, deci
   else {
     out = matrix(nrow = nrow(data), ncol = ncol(data))
     if(!format_decimal_places) decimal_places=rep(NA, ncol(data))
-    else if(missing(decimal_places)) decimal_places = sapply(data, get_default_decimal_places)
+    else if(missing(decimal_places)) decimal_places = sapply(data, get_default_significant_figures)
     i = 1
     for(curr_col in colnames(data)) {
       if(is.na(decimal_places[i])) {
         out[,i] <- as.character(data[[i]])
       }
       else {
-        out[,i] <- as.character(format(data[[i]], nsmall = decimal_places[i]))
+        out[,i] <- format(data[[i]], digits = decimal_places[i], scientific = FALSE)
       }
       i = i + 1
     }
@@ -60,27 +47,29 @@ next_default_item = function(prefix, existing_names = c(), include_index = TRUE,
   return(out)
 }
 
-import_from_ODK = function(username, password, form_name, platform) {
-  if(platform == "kobo") {
-    url <- "https://kc.kobotoolbox.org/api/v1/data"
-  }
-  else if(platform == "ona") {
-    url <- "https://api.ona.io/api/v1/data"
-  }
-  else stop("Unrecognised platform.")
-  
-  if(!missing(username) && !missing(password)) {
-    has_authentication <- TRUE
-    user <- authenticate(username, password)
-    odk_data <- GET(url, user)
-  }
-  else {
-    has_authentication <- FALSE
-    odk_data <- GET(url)
-  }
-  
-  forms <- content(odk_data, "parse")
-  form_names <- sapply(forms, function(x) x$title)
+import_from_ODK = function(username, form_name, platform) {
+   if(platform == "kobo") {
+     url <- "https://kc.kobotoolbox.org/api/v1/data"
+   }
+   else if(platform == "ona") {
+     url <- "https://api.ona.io/api/v1/data"
+   }
+   else stop("Unrecognised platform.")
+   password <- getPass(paste0(username, " password:"))
+   if(!missing(username) && !missing(password)) {
+     has_authentication <- TRUE
+     user <- authenticate(username, password)
+     odk_data <- GET(url, user)
+   }
+   else {
+     has_authentication <- FALSE
+     odk_data <- GET(url)
+   }
+
+   forms <- content(odk_data, "parse")
+   form_names <- sapply(forms, function(x) x$title)    # get_odk_form_names_results <- get_odk_form_names(username, platform)
+  # form_names <- get_odk_form_names_results[1]
+  # forms <- get_odk_form_names_results[2]
   
   if(!form_name %in% form_names) stop(form_name, " not found in available forms:", paste(form_names, collapse = ", "))
   form_num <- which(form_names == form_name)
@@ -96,7 +85,7 @@ import_from_ODK = function(username, password, form_name, platform) {
   return(out)
 }
 
-get_odk_form_names = function(username, password, platform) {
+get_odk_form_names = function(username, platform) {
   #TODO This should not be repeated
   if(platform == "kobo") {
     url <- "https://kc.kobotoolbox.org/api/v1/data"
@@ -105,7 +94,7 @@ get_odk_form_names = function(username, password, platform) {
     url <- "https://api.ona.io/api/v1/data"
   }
   else stop("Unrecognised platform.")
-  
+  password <- getPass(paste0(username, " password:"))
   if(!missing(username) && !missing(password)) {
     has_authentication <- TRUE
     user <- authenticate(username, password)
