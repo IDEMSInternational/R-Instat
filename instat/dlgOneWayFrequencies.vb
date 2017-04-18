@@ -62,7 +62,7 @@ Public Class dlgOneWayFrequencies
 
         ucrPnlFrequencies.AddRadioButton(rdoTable)
         ucrPnlFrequencies.AddRadioButton(rdoGraph)
-        ucrPnlFrequencies.AddRadioButton(rdoBoth)
+        'ucrPnlFrequencies.AddRadioButton(rdoBoth)
 
         ucrPnlFrequencies.AddFunctionNamesCondition(rdoTable, "sjtab")
         ucrPnlFrequencies.AddFunctionNamesCondition(rdoGraph, "sjplot")
@@ -97,6 +97,7 @@ Public Class dlgOneWayFrequencies
         clsSjTab.AddParameter("show.summary", "FALSE")
         clsSjTab.AddParameter("skip.zero", "FALSE")
         clsSjTab.AddParameter("digits", 0)
+        
 
         clsSjPlot.SetRCommand("sjplot")
         clsSjPlot.AddParameter("type", Chr(34) & "bar" & Chr(34))
