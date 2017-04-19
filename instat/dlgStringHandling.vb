@@ -23,7 +23,6 @@ Public Class dlgStringHandling
             InitialiseDialog()
             bFirstload = False
         End If
-
         If bReset Then
             SetDefaults()
         End If
@@ -35,11 +34,10 @@ Public Class dlgStringHandling
 
     Private Sub InitialiseDialog()
         'ucrReceiver
-        ucrReceiverStringHandling.Selector = ucrSelectorStringHandling
-        ucrReceiverStringHandling.SetMeAsReceiver()
-
         ucrReceiverStringHandling.SetParameter(New RParameter("string", 0))
         ucrReceiverStringHandling.SetParameterIsRFunction()
+        ucrReceiverStringHandling.Selector = ucrSelectorStringHandling
+        ucrReceiverStringHandling.SetMeAsReceiver()
 
         'ucrRdoOptions
         ucrPnlStringHandling.AddRadioButton(rdoCount)
@@ -60,15 +58,13 @@ Public Class dlgStringHandling
         'disabling replaceby input text box
         ucrPnlStringHandling.AddToLinkedControls(ucrInputReplaceBy, {rdoReplace}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
 
-        'ucrsave
+        'ucrSave
         ucrSaveStringHandling.SetSaveTypeAsColumn()
         ucrSaveStringHandling.SetDataFrameSelector(ucrSelectorStringHandling.ucrAvailableDataFrames)
         ucrSaveStringHandling.SetIsTextBox()
         ucrSaveStringHandling.SetLabelText("Save Result")
         ucrSaveStringHandling.SetName("count")
         ucrSaveStringHandling.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
-
-
     End Sub
 
     Private Sub SetDefaults()
@@ -84,15 +80,16 @@ Public Class dlgStringHandling
         ucrSaveStringHandling.Reset()
         ucrInputReplaceBy.SetName("")
         ucrInputPattern.SetName("")
+        clsCountFunction.SetPackageName("stringr")
         clsCountFunction.SetRCommand("str_count")
+        clsExtractFunction.SetPackageName("stringr")
         clsExtractFunction.SetRCommand("str_extract")
+        clsDetectFunction.SetPackageName("stringr")
         clsDetectFunction.SetRCommand("str_detect")
+        clsLocateFunction.SetPackageName("stringr")
         clsLocateFunction.SetRCommand("str_locate")
+        clsReplaceFunction.SetPackageName("stringr")
         clsReplaceFunction.SetRCommand("str_replace")
-
-
-        'ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
-
         clsCountFunction.SetAssignTo(ucrSaveStringHandling.GetText, strTempDataframe:=ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveStringHandling.GetText, bAssignToIsPrefix:=True)
         ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
     End Sub
@@ -138,7 +135,6 @@ Public Class dlgStringHandling
         Else
             ucrBase.OKEnabled(False)
         End If
-
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
