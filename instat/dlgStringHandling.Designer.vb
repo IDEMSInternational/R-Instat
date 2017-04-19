@@ -204,9 +204,9 @@ Partial Class dlgStringHandling
         '
         'ucrPnlStringHandling
         '
-        Me.ucrPnlStringHandling.Location = New System.Drawing.Point(82, 1)
+        Me.ucrPnlStringHandling.Location = New System.Drawing.Point(38, 1)
         Me.ucrPnlStringHandling.Name = "ucrPnlStringHandling"
-        Me.ucrPnlStringHandling.Size = New System.Drawing.Size(294, 51)
+        Me.ucrPnlStringHandling.Size = New System.Drawing.Size(338, 51)
         Me.ucrPnlStringHandling.TabIndex = 0
         '
         'dlgStringHandling
