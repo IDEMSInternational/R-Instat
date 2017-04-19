@@ -70,15 +70,16 @@ Public Class dlgRatingScales
         clsSjplikert.SetRCommand("sjp.likert")
         clsSjplikert.AddParameter("cat.neutral")
         'clsSjplikert.AddParameter("catcount", "NULL")
-        clsSjplikert.AddParameter("sort.frq", Chr(34) & "NULL" & Chr(34))
+        clsSjplikert.AddParameter("sort.frq", "NULL")
         clsSjplikert.AddParameter("coord.flip", "FALSE")
 
         clsSjpStackFrq.SetRCommand("sjp.stackfrq")
-        clsSjpStackFrq.AddParameter("sort.frq", Chr(34) & "NULL" & Chr(34))
+        clsSjpStackFrq.AddParameter("sort.frq", "NULL")
         clsSjpStackFrq.AddParameter("coord.flip", "FALSE")
 
         clsSjtStackFrq.SetRCommand("sjt.stackfrq")
-        clsSjtStackFrq.AddParameter("sort.frq", Chr(34) & "NULL" & Chr(34))
+        clsSjtStackFrq.AddParameter("sort.frq", "NULL")
+        ucrPnlSjpLikert.SetRDefault("NULL")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjpStackFrq)
     End Sub
@@ -121,13 +122,13 @@ Public Class dlgRatingScales
         ucrPnlType.AddFunctionNamesCondition(rdoGraph, "sjPlot::sjp.likert")
         ucrPnlType.AddFunctionNamesCondition(rdoTable, "sjPlot::sjt.stackfrq")
 
-        ucrPnlSjpLikert.SetParameter(New RParameter("sort.frq", 3))
-        ucrPnlSjpLikert.AddRadioButton(rdoNoneLikert, Chr(34) & "NULL" & Chr(34))
-        ucrPnlSjpLikert.AddRadioButton(rdoLowAscendingLikert, Chr(34) & "neg.asc" & Chr(34))
-        ucrPnlSjpLikert.AddRadioButton(rdoLowDescendingLikert, Chr(34) & "neg.desc" & Chr(34))
-        ucrPnlSjpLikert.AddRadioButton(rdoHighAscendingLikert, Chr(34) & "posc.asc" & Chr(34))
-        ucrPnlSjpLikert.AddRadioButton(rdoHighDescendingLikert, Chr(34) & "posc.desc" & Chr(34))
-        ucrPnlSjpLikert.SetRDefault(Chr(34) & "NULL" & Chr(34))
+        'ucrPnlSjpLikert.SetParameter(New RParameter("sort.frq", 3))
+        'ucrPnlSjpLikert.AddRadioButton(rdoNoneLikert, Chr(34) & "NULL" & Chr(34))
+        'ucrPnlSjpLikert.AddRadioButton(rdoLowAscendingLikert, Chr(34) & "neg.asc" & Chr(34))
+        'ucrPnlSjpLikert.AddRadioButton(rdoLowDescendingLikert, Chr(34) & "neg.desc" & Chr(34))
+        'ucrPnlSjpLikert.AddRadioButton(rdoHighAscendingLikert, Chr(34) & "posc.asc" & Chr(34))
+        'ucrPnlSjpLikert.AddRadioButton(rdoHighDescendingLikert, Chr(34) & "posc.desc" & Chr(34))
+        'ucrPnlSjpLikert.SetRDefault(Chr(34) & "NULL" & Chr(34))
 
         ucrPnlType.AddRadioButton(rdoGraph)
         ucrPnlType.AddRadioButton(rdoTable)
@@ -146,8 +147,6 @@ Public Class dlgRatingScales
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorRatingScale.ucrAvailableDataFrames)
         ucrSaveGraph.SetLabelText("Save Graph:")
         ucrSaveGraph.SetIsComboBox()
-
-
     End Sub
 
     Private Sub TestOkEnabled()
@@ -157,6 +156,26 @@ Public Class dlgRatingScales
             ucrBase.OKEnabled(False)
         End If
     End Sub
+
+    Private Sub changeofparameters()
+        If rdoGraph.Checked AndAlso rdoLikert.Checked Then
+            ucrPnlSjpLikert.SetParameter(New RParameter("sort.frq", 3))
+            ucrPnlSjpLikert.AddRadioButton(rdoNoneLikert, "NULL")
+            ucrPnlSjpLikert.AddRadioButton(rdoLowAscendingLikert, Chr(34) & "neg.asc" & Chr(34))
+            ucrPnlSjpLikert.AddRadioButton(rdoLowDescendingLikert, Chr(34) & "neg.desc" & Chr(34))
+            ucrPnlSjpLikert.AddRadioButton(rdoHighAscendingLikert, Chr(34) & "posc.asc" & Chr(34))
+            ucrPnlSjpLikert.AddRadioButton(rdoHighDescendingLikert, Chr(34) & "posc.desc" & Chr(34))
+
+        ElseIf ((rdoGraph.Checked AndAlso rdoStacked.Checked) OrElse (rdoTable.Checked)) Then
+            ucrPnlSjpLikert.SetParameter(New RParameter("sort.frq", 3))
+            ucrPnlSjpLikert.AddRadioButton(rdoNoneLikert, "NULL")
+            ucrPnlSjpLikert.AddRadioButton(rdoLowAscendingLikert, Chr(34) & "last.asc" & Chr(34))
+            ucrPnlSjpLikert.AddRadioButton(rdoLowDescendingLikert, Chr(34) & "last.desc" & Chr(34))
+            ucrPnlSjpLikert.AddRadioButton(rdoHighAscendingLikert, Chr(34) & "first.asc" & Chr(34))
+            ucrPnlSjpLikert.AddRadioButton(rdoHighDescendingLikert, Chr(34) & "first.desc" & Chr(34))
+        End If
+    End Sub
+
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         If rdoGraph.Checked Then
@@ -183,7 +202,9 @@ Public Class dlgRatingScales
         SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
-
+    Private Sub ucrPnlType_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlType.ControlContentsChanged, ucrPnlGraphType.ControlContentsChanged, ucrPnlSjpLikert.ControlContentsChanged
+        changeofparameters()
+    End Sub
     Private Sub ucrChkWeights_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWeights.ControlValueChanged
         If ucrChkWeights.Checked Then
             ucrReceiverWeights.SetMeAsReceiver()
