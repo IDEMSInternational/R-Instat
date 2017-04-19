@@ -2973,6 +2973,7 @@ Partial Class frmMain
         'mnuPrepareColumnTextFindReplace
         '
         Me.mnuPrepareColumnTextFindReplace.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnTextFindStringHandling})
+        Me.mnuPrepareColumnTextFindReplace.Enabled = False
         Me.mnuPrepareColumnTextFindReplace.Name = "mnuPrepareColumnTextFindReplace"
         Me.mnuPrepareColumnTextFindReplace.Size = New System.Drawing.Size(152, 22)
         Me.mnuPrepareColumnTextFindReplace.Tag = "Find/Replace..."
