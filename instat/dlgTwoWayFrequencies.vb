@@ -126,20 +126,13 @@ Public Class dlgTwoWayFrequencies
         ucrSelectorTwoWayFrequencies.SetParameter(New RParameter("data"))
         ucrSelectorTwoWayFrequencies.SetParameterIsString()
 
-        'clsVariablesList.SetRCommand("c")
-        'clsVariablesList.AddParameter(ucrReceiverRowFactor.GetVariableNames, bIncludeArgumentName:=False)
-        ' clsVariablesList.AddParameter(ucrReceiverRowFactor.GetVariableNames, bIncludeArgumentName:=False)
-        'clsSjPlot.AddParameter(ucrReceiverRowFactor.GetVariableNames, bIncludeArgumentName:=False)
-        'clsSjPlot.AddParameter(ucrReceiverRowFa.GetVariableNames, bIncludeArgumentName:=False)
-        'clsSjTab.AddParameter(clsRFunctionParameter:=clsVariablesList)
-        'temp
         clsSjTab.AddParameter("fun", Chr(34) & "xtab" & Chr(34))
 
         ucrSelectorTwoWayFrequencies.Reset()
         ucrReceiverRowFactor.SetMeAsReceiver()
 
         ucrSelectorTwoWayFrequencies.SetParameter(New RParameter("data"))
-        ucrSelectorTwoWayFrequencies.SetParameterIsrfunction()
+        ucrSelectorTwoWayFrequencies.SetParameterIsString()
 
         clsSjTab.SetRCommand("sjtab")
         clsSjTab.AddParameter("show.obs", "TRUE")
@@ -159,9 +152,7 @@ Public Class dlgTwoWayFrequencies
         'ucrReceiverColumnFactor.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("grp", 1), iAdditionalPairNo:=1)
         ucrChkWeights.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("weight.by", 1), iAdditionalPairNo:=1)
         ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjPlot, ucrChkWeights.GetParameter(), iAdditionalPairNo:=1)
-        'ucrSelectorTwoWayFrequencies.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("data"), iAdditionalPairNo:=1)
-        'ucrReceiverRowFactor.SetRCode(clsVariablesList, bReset)
-        'ucrReceiverColumnFactor.SetRCode(clsVariablesList, bReset)
+
         ucrReceiverRowFactor.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverColumnFactor.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverWeights.SetRCode(clsSjTab, bReset)
@@ -271,6 +262,6 @@ Public Class dlgTwoWayFrequencies
         Else
             ucrBase.clsRsyntax.RemoveParameter("margin")
         End If
-
+        SetRCodeForControls(True)
     End Sub
 End Class
