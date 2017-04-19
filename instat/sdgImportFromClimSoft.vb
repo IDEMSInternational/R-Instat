@@ -39,6 +39,11 @@ Public Class sdgImportFromClimSoft
         ucrInputPort.SetParameter(New RParameter("port", 2))
         ucrInputPort.AddQuotesIfUnrecognised = False
         ucrInputUserName.SetParameter(New RParameter("user", 3))
+        ucrInputDatabaseName.SetRDefault("mariadb_climsoft_test_db_v4")
+        ucrInputHost.SetRDefault("127.0.0.1")
+        'ucrInputPort.SetRDefault("3308")
+        ucrInputUserName.SetRDefault("root")
+
         bControlsInitialised = True
     End Sub
 
@@ -58,7 +63,7 @@ Public Class sdgImportFromClimSoft
 
     Private Sub cmdEnterPassword_Click(sender As Object, e As EventArgs) Handles cmdEnterPassword.Click
         Dim expTemp As SymbolicExpression
-        
+
         If bConnected Then
             frmMain.clsRLink.RunScript(clsRDatabaseDisconnect.ToScript(), strComment:="Disconnect database connection.")
         End If
@@ -75,6 +80,9 @@ Public Class sdgImportFromClimSoft
         Else
             lblConnection.Text = strNoConnection
         End If
-        dlgClimSoft.ucrReceiverMultipleStations.SetMeAsReceiver() 'this is necessary to refresh the selector in the main dialog. Should happen on click return from subdialog
+    End Sub
+
+    Private Sub ucrBaseSdgClimSoft_ClickReturn(sender As Object, e As EventArgs) Handles ucrBaseSdgClimSoft.ClickReturn
+        dlgClimSoft.ucrReceiverMultipleStations.SetMeAsReceiver()
     End Sub
 End Class
