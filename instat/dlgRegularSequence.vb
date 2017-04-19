@@ -38,10 +38,10 @@ Public Class dlgRegularSequence
     Private Sub SetRCodeForControls(bReset As Boolean)
         bUpdateBy = False
         ucrNewColumnName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-            ucrPnlSequenceType.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-            ucrInputFrom.SetRCode(clsSeqFunction, bReset)
-            ucrInputTo.SetRCode(clsSeqFunction, bReset)
-            ucrNudRepeatValues.SetRCode(clsRepFunction, bReset)
+        ucrPnlSequenceType.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrInputFrom.SetRCode(clsSeqFunction, bReset)
+        ucrInputTo.SetRCode(clsSeqFunction, bReset)
+        ucrNudRepeatValues.SetRCode(clsRepFunction, bReset)
         ucrInputInStepsOf.SetRCode(clsSeqFunction, bReset)
         bUpdateBy = True
     End Sub
@@ -131,7 +131,7 @@ Public Class dlgRegularSequence
     Private Sub TestOKEnabled()
         If ucrNewColumnName.IsComplete Then
             If rdoNumeric.Checked Then
-                If ucrInputFrom.GetText <> "" AndAlso ucrInputTo.GetText <> "" AndAlso ucrInputInStepsOf.GetText <> "" AndAlso ucrNudRepeatValues.GetText <> "" AndAlso ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text <> "" AndAlso txtGetPreview.Text <> "" Then
+                If ucrInputFrom.GetText <> "" AndAlso ucrInputTo.GetText <> "" AndAlso ucrInputInStepsOf.GetText <> "" AndAlso ucrNudRepeatValues.GetText <> "" AndAlso ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text <> "" Then
                     ucrBase.OKEnabled(True)
                 Else
                     ucrBase.OKEnabled(False)
@@ -241,10 +241,6 @@ Public Class dlgRegularSequence
     End Sub
 
     Private Sub ucrNewColumnName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewColumnName.ControlContentsChanged, ucrInputTo.ControlContentsChanged, ucrInputFrom.ControlContentsChanged, ucrInputInStepsOf.ControlContentsChanged, ucrPnlSequenceType.ControlContentsChanged, ucrSelectDataFrameRegularSequence.ControlContentsChanged
-        TestOKEnabled()
-    End Sub
-
-    Private Sub txtGetPreview_TextChanged(sender As Object, e As EventArgs) Handles txtGetPreview.TextChanged
         TestOKEnabled()
     End Sub
 End Class
