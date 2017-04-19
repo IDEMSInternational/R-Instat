@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgRenameSheet
     Public bFirstLoad As Boolean = True
@@ -24,7 +23,7 @@ Public Class dlgRenameSheet
             InitialiseDialog()
             bFirstLoad = False
         Else
-            ReopenDialog() ' Temp fix
+            ReopenDialog()
         End If
         If bReset Then
             SetDefaults()
@@ -48,18 +47,18 @@ Public Class dlgRenameSheet
         ucrDataFrameToRename.SetParameter(New RParameter("data_name"))
         ucrDataFrameToRename.SetParameterIsString()
 
+        ucrInputLabel.SetParameter(New RParameter("label"))
     End Sub
 
     ' check how changing dataframes affects it
-
     Private Sub SetDefaults()
         Dim clsDefaultFunction As New RFunction
         ucrInputNewName.Reset()
         ucrDataFrameToRename.Reset()
-
+        ucrInputLabel.Reset()
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_dataframe")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-
+        ucrInputLabel.SetName("")
         CheckAutoName()
     End Sub
 
@@ -74,7 +73,7 @@ Public Class dlgRenameSheet
     End Sub
 
     Private Sub TestOKEnabled()
-        If ((Not ucrInputNewName.IsEmpty) AndAlso (ucrDataFrameToRename.cboAvailableDataFrames.SelectedItem <> ucrInputNewName.GetText) AndAlso (ucrDataFrameToRename.cboAvailableDataFrames.Text <> "")) Then
+        If ((Not ucrInputNewName.IsEmpty) AndAlso (ucrDataFrameToRename.cboAvailableDataFrames.Text <> "")) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
