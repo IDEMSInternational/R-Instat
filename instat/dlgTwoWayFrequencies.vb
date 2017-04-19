@@ -60,7 +60,6 @@ Public Class dlgTwoWayFrequencies
         ucrPnlFreqType.AddRadioButton(rdoRow, Chr(34) & "xtab" & Chr(34))
         ucrPnlFreqType.AddRadioButton(rdoColumn, Chr(34) & "xtab" & Chr(34))
         ucrPnlFreqType.AddRadioButton(rdoCell, Chr(34) & "xtab" & Chr(34))
-        'ucrPnlFreqType.bAllowNonConditionValues = False
 
         ucrPnlFreqType.AddParameterPresentCondition(rdoCount, "grpfrq")
         ucrPnlFreqType.AddParameterPresentCondition(rdoCell, "fun")
@@ -69,7 +68,6 @@ Public Class dlgTwoWayFrequencies
         ucrPnlFreqType.AddParameterPresentCondition(rdoColumn, "margin")
         ucrPnlFreqType.AddParameterPresentCondition(rdoRow, "fun")
         ucrPnlFreqType.AddParameterPresentCondition(rdoRow, "margin")
-
 
         ucrChkRow.SetParameter(New RParameter("show.row.prc", 4), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkRow.SetText("Row (%)")
@@ -125,6 +123,7 @@ Public Class dlgTwoWayFrequencies
         clsSjTab.AddParameter(clsRFunctionParameter:=clsVariablesList)
         'temp
         clsSjTab.AddParameter("fun", Chr(34) & "xtab" & Chr(34))
+
         ucrSelectorTwoWayFrequencies.Reset()
         ucrReceiverRowFactor.SetMeAsReceiver()
 
@@ -132,12 +131,10 @@ Public Class dlgTwoWayFrequencies
         ucrSelectorTwoWayFrequencies.SetParameterIsrfunction()
 
         clsSjTab.SetRCommand("sjtab")
-
         clsSjTab.AddParameter("show.obs", "TRUE")
         clsSjTab.AddParameter("show.summary", "FALSE")
         clsSjTab.AddParameter("digits", 0)
         clsSjPlot.SetRCommand("sjplot")
-        clsSjPlot.AddParameter("margin", Chr(34) & "row" & Chr(34))
 
         clsSjPlot.AddParameter("show.prc", "TRUE")
         clsSjPlot.AddParameter("show.n", "TRUE")
