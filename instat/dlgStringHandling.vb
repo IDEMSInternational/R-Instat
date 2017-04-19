@@ -63,9 +63,12 @@ Public Class dlgStringHandling
         'ucrsave
         ucrSaveStringHandling.SetSaveTypeAsColumn()
         ucrSaveStringHandling.SetDataFrameSelector(ucrSelectorStringHandling.ucrAvailableDataFrames)
-        ucrSaveStringHandling.SetIsComboBox()
+        ucrSaveStringHandling.SetIsTextBox()
         ucrSaveStringHandling.SetLabelText("Save Result")
-        ucrSaveStringHandling.SetPrefix("count")
+        ucrSaveStringHandling.SetName("count")
+        ucrSaveStringHandling.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
+
+
     End Sub
 
     Private Sub SetDefaults()
@@ -87,7 +90,10 @@ Public Class dlgStringHandling
         clsLocateFunction.SetRCommand("str_locate")
         clsReplaceFunction.SetRCommand("str_replace")
 
-        clsCountFunction.SetAssignTo(ucrSaveStringHandling.GetText, strTempDataframe:=ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveStringHandling.GetText)
+
+        'ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
+
+        clsCountFunction.SetAssignTo(ucrSaveStringHandling.GetText, strTempDataframe:=ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveStringHandling.GetText, bAssignToIsPrefix:=True)
         ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
     End Sub
 
@@ -104,22 +110,24 @@ Public Class dlgStringHandling
     End Sub
 
     Private Sub ChangeBaseFunction()
+        ucrSaveStringHandling.SetPrefix("")
         If rdoCount.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
-            ucrSaveStringHandling.SetPrefix("count")
+            ucrSaveStringHandling.SetName("count")
         ElseIf rdoDetect.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsDetectFunction)
-            ucrSaveStringHandling.SetPrefix("detect")
+            ucrSaveStringHandling.SetName("detect")
         ElseIf rdoExtract.Checked Then
-            ucrSaveStringHandling.SetPrefix("extract")
+            ucrSaveStringHandling.SetName("extract")
             ucrBase.clsRsyntax.SetBaseRFunction(clsExtractFunction)
         ElseIf rdoLocate.Checked Then
-            ucrSaveStringHandling.SetPrefix("locate")
+            ucrSaveStringHandling.SetName("Locate")
             ucrBase.clsRsyntax.SetBaseRFunction(clsLocateFunction)
         ElseIf rdoReplace.Checked Then
-            ucrSaveStringHandling.SetPrefix("replace")
+            ucrSaveStringHandling.SetName("replace")
             ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceFunction)
         End If
+        SetRCodeForControls(True)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -130,6 +138,7 @@ Public Class dlgStringHandling
         Else
             ucrBase.OKEnabled(False)
         End If
+
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -144,6 +153,5 @@ Public Class dlgStringHandling
 
     Private Sub ucrPnlStringHandling_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlStringHandling.ControlValueChanged
         ChangeBaseFunction()
-        SetRCodeForControls(True)
     End Sub
 End Class
