@@ -377,7 +377,6 @@ Partial Class frmMain
         Me.mnuPrepareColumnFactorFactorDataFrame = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnText = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnTextFindReplace = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuPrepareColumnTextFindStringHandling = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnTextTransform = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnTextSplit = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnTextCombine = New System.Windows.Forms.ToolStripMenuItem()
@@ -463,6 +462,7 @@ Partial Class frmMain
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
+        Me.mnuPrepareColumnTextFindStringHandling = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -2973,16 +2973,11 @@ Partial Class frmMain
         'mnuPrepareColumnTextFindReplace
         '
         Me.mnuPrepareColumnTextFindReplace.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnTextFindStringHandling})
+        Me.mnuPrepareColumnTextFindReplace.Enabled = False
         Me.mnuPrepareColumnTextFindReplace.Name = "mnuPrepareColumnTextFindReplace"
         Me.mnuPrepareColumnTextFindReplace.Size = New System.Drawing.Size(152, 22)
         Me.mnuPrepareColumnTextFindReplace.Tag = "Find/Replace..."
         Me.mnuPrepareColumnTextFindReplace.Text = "Find/Replace..."
-        '
-        'mnuPrepareColumnTextFindStringHandling
-        '
-        Me.mnuPrepareColumnTextFindStringHandling.Name = "mnuPrepareColumnTextFindStringHandling"
-        Me.mnuPrepareColumnTextFindStringHandling.Size = New System.Drawing.Size(166, 22)
-        Me.mnuPrepareColumnTextFindStringHandling.Text = "String Handling..."
         '
         'mnuPrepareColumnTextTransform
         '
@@ -3646,6 +3641,12 @@ Partial Class frmMain
         Me.ucrOutput.Name = "ucrOutput"
         Me.ucrOutput.Size = New System.Drawing.Size(295, 113)
         Me.ucrOutput.TabIndex = 0
+        '
+        'mnuPrepareColumnTextFindStringHandling
+        '
+        Me.mnuPrepareColumnTextFindStringHandling.Name = "mnuPrepareColumnTextFindStringHandling"
+        Me.mnuPrepareColumnTextFindStringHandling.Size = New System.Drawing.Size(166, 22)
+        Me.mnuPrepareColumnTextFindStringHandling.Text = "String Handling..."
         '
         'frmMain
         '
