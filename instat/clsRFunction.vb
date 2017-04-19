@@ -18,6 +18,7 @@ Public Class RFunction
     Inherits RCodeStructure
 
     Public strRCommand As String
+    Private strPackageName As String = ""
 
     Public Sub New()
         OnParametersChanged()
@@ -28,6 +29,10 @@ Public Class RFunction
         bIsAssigned = False
     End Sub
 
+    Public Sub SetPackageName(strName As String)
+        strPackageName = strName
+    End Sub
+
     Public Overrides Function ToScript(Optional ByRef strScript As String = "", Optional strTemp As String = "") As String
         'Converting the RFunction into a string that when run in R gives the appropriate output
         Dim i As Integer
@@ -35,7 +40,10 @@ Public Class RFunction
 
         'Parameters are sorted in the appropriate order and then the script is built.
         SortParameters()
-        strTemp = strRCommand & "("
+        If strPackageName <> "" Then
+            strTemp = strPackageName & "::"
+        End If
+        strTemp = strTemp & strRCommand & "("
         For i = 0 To clsParameters.Count - 1
             If i > 0 Then
                 strTemp = strTemp & ", "
