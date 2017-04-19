@@ -1,4 +1,4 @@
-﻿' Instat-R
+﻿'' Instat-R
 ' Copyright (C) 2015
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -8,14 +8,12 @@
 '
 ' This program is distributed in the hope that it will be useful,
 ' but WITHOUT ANY WARRANTY; without even the implied warranty of
-' MERCHANTABILITY or FITNESS FOR A URPOSE.  See the
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 Imports instat.Translations
-
 Public Class dlgStringHandling
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
@@ -34,8 +32,8 @@ Public Class dlgStringHandling
         autoTranslate(Me)
         TestOkEnabled()
     End Sub
-    Private Sub InitialiseDialog()
 
+    Private Sub InitialiseDialog()
         'ucrReceiver
         ucrReceiverStringHandling.Selector = ucrSelectorStringHandling
         ucrReceiverStringHandling.SetMeAsReceiver()
@@ -56,21 +54,18 @@ Public Class dlgStringHandling
         ucrPnlStringHandling.AddFunctionNamesCondition(rdoLocate, "str_locate")
         ucrPnlStringHandling.AddFunctionNamesCondition(rdoReplace, "str_replace")
 
-
         ucrInputPattern.SetParameter(New RParameter("pattern", 1))
         ucrInputReplaceBy.SetParameter(New RParameter("replacement", 2))
-
 
         'disabling replaceby input text box
         ucrPnlStringHandling.AddToLinkedControls(ucrInputReplaceBy, {rdoReplace}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
 
         'ucrsave
-        ucrSave.SetSaveTypeAsColumn()
-        ucrSave.SetDataFrameSelector(ucrSelectorStringHandling.ucrAvailableDataFrames)
-        ucrSave.SetIsComboBox()
-        ucrSave.SetLabelText("Save Result to:")
-        ucrSave.SetPrefix("Count")
-
+        ucrSaveStringHandling.SetSaveTypeAsColumn()
+        ucrSaveStringHandling.SetDataFrameSelector(ucrSelectorStringHandling.ucrAvailableDataFrames)
+        ucrSaveStringHandling.SetIsComboBox()
+        ucrSaveStringHandling.SetLabelText("Save Result")
+        ucrSaveStringHandling.SetPrefix("count")
     End Sub
 
     Private Sub SetDefaults()
@@ -80,11 +75,10 @@ Public Class dlgStringHandling
         clsLocateFunction = New RFunction
         clsReplaceFunction = New RFunction
 
-
         ucrSelectorStringHandling.Reset()
         ucrInputPattern.Reset()
         ucrInputReplaceBy.Reset()
-        ucrSave.Reset()
+        ucrSaveStringHandling.Reset()
         ucrInputReplaceBy.SetName("")
         ucrInputPattern.SetName("")
         clsCountFunction.SetRCommand("str_count")
@@ -93,14 +87,14 @@ Public Class dlgStringHandling
         clsLocateFunction.SetRCommand("str_locate")
         clsReplaceFunction.SetRCommand("str_replace")
 
-        clsCountFunction.SetAssignTo(ucrSave.GetText, strTempDataframe:=ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSave.GetText)
+        clsCountFunction.SetAssignTo(ucrSaveStringHandling.GetText, strTempDataframe:=ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveStringHandling.GetText)
         ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
 
         ucrPnlStringHandling.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrSave.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrSaveStringHandling.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverStringHandling.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrInputReplaceBy.SetRCode(clsReplaceFunction, bReset)
 
@@ -108,30 +102,30 @@ Public Class dlgStringHandling
         ucrInputReplaceBy.SetRCode(clsReplaceFunction, bReset)
 
     End Sub
+
     Private Sub ChangeBaseFunction()
         If rdoCount.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
-            ucrSave.SetPrefix("Count")
+            ucrSaveStringHandling.SetPrefix("count")
         ElseIf rdoDetect.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsDetectFunction)
-            ucrSave.SetPrefix("detect")
+            ucrSaveStringHandling.SetPrefix("detect")
         ElseIf rdoExtract.Checked Then
-            ucrSave.SetPrefix("extract")
+            ucrSaveStringHandling.SetPrefix("extract")
             ucrBase.clsRsyntax.SetBaseRFunction(clsExtractFunction)
         ElseIf rdoLocate.Checked Then
-            ucrSave.SetPrefix("locate")
+            ucrSaveStringHandling.SetPrefix("locate")
             ucrBase.clsRsyntax.SetBaseRFunction(clsLocateFunction)
         ElseIf rdoReplace.Checked Then
-            ucrSave.SetPrefix("replace")
+            ucrSaveStringHandling.SetPrefix("replace")
             ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceFunction)
         End If
     End Sub
 
-
     Private Sub TestOkEnabled()
-        If rdoReplace.Checked AndAlso ucrSave.IsComplete() AndAlso Not ucrReceiverStringHandling.IsEmpty() AndAlso Not ucrInputPattern.IsEmpty AndAlso Not ucrInputReplaceBy.IsEmpty Then
+        If rdoReplace.Checked AndAlso ucrSaveStringHandling.IsComplete() AndAlso Not ucrReceiverStringHandling.IsEmpty() AndAlso Not ucrInputPattern.IsEmpty AndAlso Not ucrInputReplaceBy.IsEmpty Then
             ucrBase.OKEnabled(True)
-        ElseIf (rdoCount.Checked OrElse rdoDetect.Checked OrElse rdoExtract.Checked OrElse rdoLocate.Checked) AndAlso ucrSave.IsComplete() AndAlso Not ucrReceiverStringHandling.IsEmpty() AndAlso Not ucrInputPattern.IsEmpty() Then
+        ElseIf (rdoCount.Checked OrElse rdoDetect.Checked OrElse rdoExtract.Checked OrElse rdoLocate.Checked) AndAlso ucrSaveStringHandling.IsComplete() AndAlso Not ucrReceiverStringHandling.IsEmpty() AndAlso Not ucrInputPattern.IsEmpty() Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -152,5 +146,4 @@ Public Class dlgStringHandling
         ChangeBaseFunction()
         SetRCodeForControls(True)
     End Sub
-
 End Class
