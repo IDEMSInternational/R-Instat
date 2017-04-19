@@ -41,29 +41,41 @@ Partial Class dlgAddComment
         Me.ucrBase.Location = New System.Drawing.Point(9, 260)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
-        Me.ucrBase.TabIndex = 1
+        Me.ucrBase.TabIndex = 10
         '
         'rdoRow
         '
-        Me.rdoRow.AutoSize = True
-        Me.rdoRow.Location = New System.Drawing.Point(266, 16)
+        Me.rdoRow.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoRow.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoRow.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoRow.FlatAppearance.BorderSize = 2
+        Me.rdoRow.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoRow.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoRow.Location = New System.Drawing.Point(206, 10)
         Me.rdoRow.Name = "rdoRow"
-        Me.rdoRow.Size = New System.Drawing.Size(47, 17)
-        Me.rdoRow.TabIndex = 5
+        Me.rdoRow.Size = New System.Drawing.Size(100, 28)
+        Me.rdoRow.TabIndex = 2
         Me.rdoRow.TabStop = True
         Me.rdoRow.Text = "Row"
-        Me.rdoRow.UseVisualStyleBackColor = True
+        Me.rdoRow.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoRow.UseVisualStyleBackColor = False
         '
         'rdoCell
         '
-        Me.rdoCell.AutoSize = True
-        Me.rdoCell.Location = New System.Drawing.Point(31, 16)
+        Me.rdoCell.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoCell.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoCell.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoCell.FlatAppearance.BorderSize = 2
+        Me.rdoCell.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoCell.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoCell.Location = New System.Drawing.Point(107, 10)
         Me.rdoCell.Name = "rdoCell"
-        Me.rdoCell.Size = New System.Drawing.Size(42, 17)
-        Me.rdoCell.TabIndex = 6
+        Me.rdoCell.Size = New System.Drawing.Size(100, 28)
+        Me.rdoCell.TabIndex = 1
         Me.rdoCell.TabStop = True
         Me.rdoCell.Text = "Cell"
-        Me.rdoCell.UseVisualStyleBackColor = True
+        Me.rdoCell.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoCell.UseVisualStyleBackColor = False
         '
         'ucrDataFrame
         '
@@ -82,7 +94,7 @@ Partial Class dlgAddComment
         Me.ucrSelectorAddComment.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorAddComment.Name = "ucrSelectorAddComment"
         Me.ucrSelectorAddComment.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorAddComment.TabIndex = 8
+        Me.ucrSelectorAddComment.TabIndex = 3
         '
         'ucrReceiverRow
         '
@@ -92,7 +104,8 @@ Partial Class dlgAddComment
         Me.ucrReceiverRow.Name = "ucrReceiverRow"
         Me.ucrReceiverRow.Selector = Nothing
         Me.ucrReceiverRow.Size = New System.Drawing.Size(137, 20)
-        Me.ucrReceiverRow.TabIndex = 9
+        Me.ucrReceiverRow.TabIndex = 5
+        Me.ucrReceiverRow.ucrSelector = Nothing
         '
         'lblRow
         '
@@ -100,7 +113,7 @@ Partial Class dlgAddComment
         Me.lblRow.Location = New System.Drawing.Point(266, 83)
         Me.lblRow.Name = "lblRow"
         Me.lblRow.Size = New System.Drawing.Size(32, 13)
-        Me.lblRow.TabIndex = 10
+        Me.lblRow.TabIndex = 4
         Me.lblRow.Text = "Row:"
         '
         'ucrReceiverColumn
@@ -111,7 +124,8 @@ Partial Class dlgAddComment
         Me.ucrReceiverColumn.Name = "ucrReceiverColumn"
         Me.ucrReceiverColumn.Selector = Nothing
         Me.ucrReceiverColumn.Size = New System.Drawing.Size(137, 20)
-        Me.ucrReceiverColumn.TabIndex = 11
+        Me.ucrReceiverColumn.TabIndex = 7
+        Me.ucrReceiverColumn.ucrSelector = Nothing
         '
         'lblColumn
         '
@@ -119,7 +133,7 @@ Partial Class dlgAddComment
         Me.lblColumn.Location = New System.Drawing.Point(266, 134)
         Me.lblColumn.Name = "lblColumn"
         Me.lblColumn.Size = New System.Drawing.Size(45, 13)
-        Me.lblColumn.TabIndex = 12
+        Me.lblColumn.TabIndex = 6
         Me.lblColumn.Text = "Column:"
         '
         'lblComment
@@ -128,29 +142,31 @@ Partial Class dlgAddComment
         Me.lblComment.Location = New System.Drawing.Point(266, 184)
         Me.lblComment.Name = "lblComment"
         Me.lblComment.Size = New System.Drawing.Size(54, 13)
-        Me.lblComment.TabIndex = 14
+        Me.lblComment.TabIndex = 8
         Me.lblComment.Text = "Comment:"
         '
         'ucrInputComment
         '
+        Me.ucrInputComment.AddQuotesIfUnrecognised = True
         Me.ucrInputComment.IsMultiline = False
         Me.ucrInputComment.IsReadOnly = False
         Me.ucrInputComment.Location = New System.Drawing.Point(266, 200)
         Me.ucrInputComment.Name = "ucrInputComment"
         Me.ucrInputComment.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputComment.TabIndex = 15
+        Me.ucrInputComment.TabIndex = 9
         '
         'ucrPnlCellOrRow
         '
-        Me.ucrPnlCellOrRow.Location = New System.Drawing.Point(12, 12)
+        Me.ucrPnlCellOrRow.Location = New System.Drawing.Point(101, 10)
         Me.ucrPnlCellOrRow.Name = "ucrPnlCellOrRow"
-        Me.ucrPnlCellOrRow.Size = New System.Drawing.Size(383, 32)
-        Me.ucrPnlCellOrRow.TabIndex = 16
+        Me.ucrPnlCellOrRow.Size = New System.Drawing.Size(210, 32)
+        Me.ucrPnlCellOrRow.TabIndex = 0
         '
         'dlgAddComment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.ClientSize = New System.Drawing.Size(410, 320)
         Me.Controls.Add(Me.ucrInputComment)
         Me.Controls.Add(Me.lblComment)

@@ -50,6 +50,9 @@ Public Class dlgAddComment
     End Sub
 
     Private Sub SetDefaultColumn()
+        ucrSelectorAddComment.Reset()
+        ucrInputComment.Reset()
+        ucrInputComment.SetName("")
         ucrSelectorAddComment.SetDataframe(strSelectedDataFrame)
         ucrReceiverColumn.Add(strSelectedColumn, strSelectedDataFrame)
         bUseSelectedColumn = False
