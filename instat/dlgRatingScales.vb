@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgRatingScales
     Private bFirstLoad As Boolean = True
@@ -77,7 +78,7 @@ Public Class dlgRatingScales
         clsSjpStackFrq.AddParameter("coord.flip", "FALSE")
 
         clsSjtStackFrq.SetRCommand("sjt.stackfrq")
-        clsSjtStackFrq.AddParameter("sort.frq", "NULL")
+        clsSjtStackFrq.AddParameter("sort.frq", Chr(34) & "NULL" & Chr(34))
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjpStackFrq)
     End Sub
@@ -102,9 +103,6 @@ Public Class dlgRatingScales
         ucrChkFlip.SetParameter(New RParameter("coord.flip", 1))
         ucrChkFlip.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkFlip.SetRDefault("FALSE")
-
-        'ucrPnlSortsjt.stackfrq
-
         ucrPnlGraphType.bAllowNonConditionValues = True
         ucrPnlType.bAllowNonConditionValues = True
 
@@ -112,14 +110,6 @@ Public Class dlgRatingScales
         ucrPnlSjpLikert.AddFunctionNamesCondition(rdoLikert, "sjPlot::sjp.likert")
         ucrPnlSjpLikert.AddFunctionNamesCondition(rdoTable, "sjPlot::sjt.stackfrq")
         ucrPnlSjpLikert.AddFunctionNamesCondition(rdoStacked, "sjPlot::sjp.stackfrq")
-
-        ucrPnlSjpLikert.SetParameter(New RParameter("sort.frq", 3))
-        ucrPnlSjpLikert.AddRadioButton(rdoNoneLikert, Chr(34) & "NULL" & Chr(34))
-        ucrPnlSjpLikert.AddRadioButton(rdoLowAscendingLikert, Chr(34) & "neg.asc" & Chr(34))
-        ucrPnlSjpLikert.AddRadioButton(rdoLowDescendingLikert, Chr(34) & "neg.desc" & Chr(34))
-        ucrPnlSjpLikert.AddRadioButton(rdoHighAscendingLikert, Chr(34) & "posc.asc" & Chr(34))
-        ucrPnlSjpLikert.AddRadioButton(rdoHighDescendingLikert, Chr(34) & "posc.desc" & Chr(34))
-        ucrPnlSjpLikert.SetRDefault(Chr(34) & "NULL" & Chr(34))
 
         ucrPnlGraphType.AddFunctionNamesCondition(rdoGraph, "sjPlot::sjp.stackfrq")
         ucrPnlGraphType.AddFunctionNamesCondition(rdoGraph, "sjPlot::sjp.likert")
@@ -130,6 +120,15 @@ Public Class dlgRatingScales
         ucrPnlType.AddFunctionNamesCondition(rdoGraph, "sjPlot::sjp.stackfrq")
         ucrPnlType.AddFunctionNamesCondition(rdoGraph, "sjPlot::sjp.likert")
         ucrPnlType.AddFunctionNamesCondition(rdoTable, "sjPlot::sjt.stackfrq")
+
+        ucrPnlSjpLikert.SetParameter(New RParameter("sort.frq", 3))
+        ucrPnlSjpLikert.AddRadioButton(rdoNoneLikert, Chr(34) & "NULL" & Chr(34))
+        ucrPnlSjpLikert.AddRadioButton(rdoLowAscendingLikert, Chr(34) & "neg.asc" & Chr(34))
+        ucrPnlSjpLikert.AddRadioButton(rdoLowDescendingLikert, Chr(34) & "neg.desc" & Chr(34))
+        ucrPnlSjpLikert.AddRadioButton(rdoHighAscendingLikert, Chr(34) & "posc.asc" & Chr(34))
+        ucrPnlSjpLikert.AddRadioButton(rdoHighDescendingLikert, Chr(34) & "posc.desc" & Chr(34))
+        ucrPnlSjpLikert.SetRDefault(Chr(34) & "NULL" & Chr(34))
+
         ucrPnlType.AddRadioButton(rdoGraph)
         ucrPnlType.AddRadioButton(rdoTable)
 
@@ -141,9 +140,6 @@ Public Class dlgRatingScales
         ucrNudNeutralLevel.SetLinkedDisplayControl(lblNeutralLevel)
         ucrPnlType.AddToLinkedControls(ucrPnlGraphType, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlType.AddToLinkedControls(ucrPnlSjpLikert, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
-
-        ' ucrPnlSjpLikert.SetLinkedDisplayControl(grpGraphType)
 
         ucrSaveGraph.SetPrefix("Graph")
         ucrSaveGraph.SetSaveTypeAsColumn()
@@ -177,6 +173,7 @@ Public Class dlgRatingScales
             ucrBase.clsRsyntax.iCallType = 0
         End If
     End Sub
+
     Private Sub ucrNudNeutralLevel_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudNeutralLevel.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrReceiverOrderedFactors.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged
         TestOkEnabled()
     End Sub
@@ -194,4 +191,5 @@ Public Class dlgRatingScales
             ucrReceiverOrderedFactors.SetMeAsReceiver()
         End If
     End Sub
+
 End Class
