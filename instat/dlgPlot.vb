@@ -56,8 +56,7 @@ Public Class dlgPlot
 
         clsTempRFunc.SetRCommand("geom_point")
         clsTempRFunc.SetPackageName("ggplot2")
-        geom_point.clsArgumentCodeStructure = clsTempRFunc
-
+        geom_point.SetArgument(clsTempRFunc)
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
@@ -162,14 +161,14 @@ Public Class dlgPlot
     End Sub
 
     Private Sub ucrChkPoints_CheckedChanged() Handles ucrChkPoints.ControlValueChanged
-        Dim clsTempRFunc As New RFunction
-        If ucrChkPoints.Checked = True Then
-            clsTempRFunc.SetRCommand("geom_point")
-            clsTempRFunc.SetPackageName("ggplot2")
-            clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsTempRFunc)
-        Else
-            clsBaseOperator.RemoveParameterByName("geom_point")
-        End If
+        'Dim clsTempRFunc As New RFunction
+        'If ucrChkPoints.Checked = True Then
+        '    clsTempRFunc.SetRCommand("geom_point")
+        '    clsTempRFunc.SetPackageName("ggplot2")
+        '    clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsTempRFunc)
+        'Else
+        '    clsBaseOperator.RemoveParameterByName("geom_point")
+        'End If
     End Sub
 
     Private Sub UcrVariablesAsFactor_ControlValueChanged() Handles ucrVariablesAsFactorForLinePlot.ControlValueChanged
