@@ -139,12 +139,24 @@ Public Class dlgTwoWayFrequencies
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        'ucrReceiverRowFactor.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("x", 0), iAdditionalPairNo:=1)
-        'ucrReceiverColumnFactor.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("grp", 1), iAdditionalPairNo:=1)
-        ucrReceiverColumnFactor.SetParameterIncludeArgumentName(False)
+        Dim clsTempParamOne As RParameter
+        Dim clsTempParamTwo As RParameter
+        Dim clsTempParamData As RParameter
+
+        clsTempParamOne = New RParameter("x", 0)
+        ucrReceiverRowFactor.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("clsTempParamOne", 0), iAdditionalPairNo:=1)
+        clsTempParamOne.bIncludeArgumentName = False
+
+        clsTempParamTwo = New RParameter("grp", 0)
+        ucrReceiverColumnFactor.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("clsTempParamTwo", 1), iAdditionalPairNo:=1)
+        clsTempParamTwo.bIncludeArgumentName = False
+
+        clsTempParamData = New RParameter("data", 0)
+        ucrSelectorTwoWayFrequencies.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("clsTempParamData", 1), iAdditionalPairNo:=1)
+        clsTempParamTwo.bIncludeArgumentName = False
+
         ucrChkWeights.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("weight.by", 1), iAdditionalPairNo:=1)
-        ' ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjPlot, ucrChkWeights.GetParameter(), iAdditionalPairNo:=1)
-        ' ucrSelectorTwoWayFrequencies.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("data", 1), iAdditionalPairNo:=1)
+        ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjPlot, ucrChkWeights.GetParameter(), iAdditionalPairNo:=1)
 
         ucrReceiverRowFactor.SetRCode(clsSjTab, bReset)
         ucrReceiverColumnFactor.SetRCode(clsSjTab, bReset)
@@ -152,17 +164,9 @@ Public Class dlgTwoWayFrequencies
         ucrReceiverWeights.SetRCode(clsSjTab, bReset)
         ucrChkWeights.SetRCode(clsSjTab, bReset)
         ucrChkFlip.SetRCode(clsSjPlot, bReset)
-
         ucrPnlFreqType.SetRCode(clsSjPlot, bReset)
         ucrPnlFreqDisplay.SetRCode(clsSjTab, bReset)
-
         ucrSelectorTwoWayFrequencies.SetRCode(clsSjTab, bReset)
-
-        'temporary fix
-        ucrSelectorTwoWayFrequencies.SetRCode(clsSjPlot, bReset)
-        ucrReceiverRowFactor.SetRCode(clsSjPlot, bReset)
-        ucrReceiverColumnFactor.SetRCode(clsSjPlot, bReset)
-
         ucrChkCell.SetRCode(clsSjTab, bReset)
         ucrChkColumn.SetRCode(clsSjTab, bReset)
         ucrChkRow.SetRCode(clsSjTab, bReset)
