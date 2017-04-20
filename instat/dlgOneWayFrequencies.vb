@@ -60,15 +60,16 @@ Public Class dlgOneWayFrequencies
         ucrChkWeights.SetText("Weights")
         ucrChkWeights.SetParameter(ucrReceiverWeights.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkWeights.AddToLinkedControls(ucrReceiverWeights, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
+        'setting rdoGraph and rdoTable
         ucrPnlFrequencies.AddRadioButton(rdoTable)
         ucrPnlFrequencies.AddRadioButton(rdoGraph)
         ucrPnlFrequencies.AddRadioButton(rdoBoth)
-
         ucrPnlFrequencies.AddFunctionNamesCondition(rdoTable, "sjtab")
         ucrPnlFrequencies.AddFunctionNamesCondition(rdoGraph, "sjplot")
-       
-        ucrPnlFrequencies.AddToLinkedControls(ucrChkFlip, {rdoGraph}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        'setting rdoBoth 
+        ucrPnlFrequencies.AddFunctionNamesCondition(rdoBoth, "sjplot")
+        ucrPnlFrequencies.AddFunctionNamesCondition(rdoBoth, "sjtab")
+        ucrPnlFrequencies.AddToLinkedControls(ucrChkFlip, {rdoGraph, rdoBoth}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
         ucrNudGroups.SetParameter(New RParameter("auto.group", 9))
         ucrNudGroups.SetMinMax(2, 100)
