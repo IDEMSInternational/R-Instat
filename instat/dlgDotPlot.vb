@@ -253,10 +253,8 @@ Public Class dlgDotPlot
         Next
 
         bEditAesFunction = True
-
         TestOkEnabled()
     End Sub
-
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         'This sub handles the call of PLot Options. It opens sdgPlots. Need to work on the link.
@@ -268,13 +266,5 @@ Public Class dlgDotPlot
 
     Private Sub AllControlChanged() Handles ucrVariablesAsFactorDotPlot.ControlContentsChanged, ucrSaveDotPlot.ControlContentsChanged
         TestOkEnabled()
-    End Sub
-
-    Private Sub ucrVariablesAsFactorDotPlot_SelectionChanged(sender As Object, e As EventArgs) Handles ucrVariablesAsFactorDotPlot.SelectionChanged
-
-    End Sub
-
-    Private Sub ucrDotPlotSelector_DataFrameChanged()
-
     End Sub
 End Class
