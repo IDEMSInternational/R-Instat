@@ -1986,10 +1986,10 @@ data_object$set("public","make_inventory_plot", function(date_col, station_col =
     g <- ggplot(data = col_data, mapping = aes(x = year_column, y = doy_column, colour = recode, group = year_column)) + geom_point(size=5, shape=22) + xlab("Year") + ylab("DOY") + labs(color="Recode")
     if(!is.null(station_col)){
       #g <- g + facet_grid(paste0(as.name(station_col), "~ variable"), ncol=1, scales = "free_y", switch = "both") + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(),strip.background = element_blank(), strip.text.y = element_text(angle = 180))
-      g <- g + facet_wrap(as.formula(paste0(as.name(station_col),"~ variable")), ncol=1)
+      g <- g + facet_grid(as.formula(paste0(as.name(station_col),"+variable ~.")))
     }
     else{
-      g <- g + facet_wrap(~variable)
+      g <- g + facet_grid(variable~.)
     }
   }
   else{
@@ -2010,8 +2010,8 @@ data_object$set("public","make_inventory_plot", function(date_col, station_col =
     #g <- ggplot(data = curr_data, mapping = aes(x = year_column, y="" , colour = recode)) + geom_point() + xlab("Year") + ylab("DOY") + labs(color="Recode")
     g <- ggplot(data = curr_data, mapping = aes(x = year_column, y = doy_column, colour = recode, group = year_column)) + geom_point(size=5, shape=22) + xlab("Year") + ylab("DOY") + labs(color="Recode")
     if(!is.null(station_col)){
-      g <- g + facet_grid(paste0(as.name(station_col), "~ ."), scales = "free_y", switch = "both") + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(),strip.background = element_blank(), strip.text.y = element_text(angle = 180))
-      #g <- g + facet_wrap(as.name(station_col))
+      #g <- g + facet_grid(paste0(as.name(station_col), "~ ."), scales = "free_y", switch = "both") + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(),strip.background = element_blank(), strip.text.y = element_text(angle = 180))
+      g <- g + facet_grid(paste0(as.name(station_col), "~ ."))
       
     }
   }
