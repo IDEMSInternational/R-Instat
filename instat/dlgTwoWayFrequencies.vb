@@ -104,9 +104,12 @@ Public Class dlgTwoWayFrequencies
 
         ucrPnlFreqDisplay.AddRadioButton(rdoTable)
         ucrPnlFreqDisplay.AddRadioButton(rdoGraph)
+        ucrPnlFreqDisplay.AddRadioButton(rdoBoth)
 
         ucrPnlFreqDisplay.AddFunctionNamesCondition(rdoTable, "sjtab")
         ucrPnlFreqDisplay.AddFunctionNamesCondition(rdoGraph, "sjplot")
+        ucrPnlFreqDisplay.AddFunctionNamesCondition(rdoBoth, "sjtab")
+        ucrPnlFreqDisplay.AddFunctionNamesCondition(rdoBoth, "sjplot")
 
         ucrPnlFreqDisplay.AddToLinkedControls(ucrChkCount, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFreqDisplay.AddToLinkedControls(ucrChkRow, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -246,18 +249,18 @@ Public Class dlgTwoWayFrequencies
         End If
     End Sub
 
-    Private Sub ucrChkFlip_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFlip.ControlValueChanged
-        'If rdoTable.Checked AndAlso ucrChkFlip.Checked Then
-        '    ucrReceiverRowFactor.ChangeParameterName("var.col", 1)
-        '    ucrReceiverRowFactor.SetParameterIncludeArgumentName(False)
-        '    ucrReceiverColumnFactor.ChangeParameterName("var.row", 0)
-        '    ucrReceiverColumnFactor.SetParameterIncludeArgumentName(False)
-        'ElseIf rdoTable.Checked AndAlso Not ucrChkFlip.Checked Then
-        '    ucrReceiverRowFactor.ChangeParameterName("var.row", 0)
-        '    ucrReceiverRowFactor.SetParameterIncludeArgumentName(False)
-        '    ucrReceiverColumnFactor.ChangeParameterName("var.col", 1)
-        '    ucrReceiverColumnFactor.SetParameterIncludeArgumentName(False)
-        'End If
+    Private Sub ucrChkFlip_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFlip.ControlValueChanged, ucrPnlFreqDisplay.ControlValueChanged
+        If rdoTable.Checked AndAlso ucrChkFlip.Checked Then
+            ucrReceiverRowFactor.ChangeParameterName("var.col", 1)
+            ucrReceiverRowFactor.SetParameterIncludeArgumentName(False)
+            ucrReceiverColumnFactor.ChangeParameterName("var.row", 0)
+            ucrReceiverColumnFactor.SetParameterIncludeArgumentName(False)
+        ElseIf rdoTable.Checked AndAlso Not ucrChkFlip.Checked Then
+            ucrReceiverRowFactor.ChangeParameterName("var.row", 0)
+            ucrReceiverRowFactor.SetParameterIncludeArgumentName(False)
+            ucrReceiverColumnFactor.ChangeParameterName("var.col", 1)
+            ucrReceiverColumnFactor.SetParameterIncludeArgumentName(False)
+        End If
     End Sub
 
     Private Sub ucrPnlFreqType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFreqType.ControlValueChanged, ucrPnlFreqDisplay.ControlValueChanged
