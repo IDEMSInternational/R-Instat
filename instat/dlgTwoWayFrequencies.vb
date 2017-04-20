@@ -147,15 +147,15 @@ Public Class dlgTwoWayFrequencies
         Dim clsTempParamData As RParameter
 
         clsTempParamOne = New RParameter("x", 0)
-        ucrReceiverRowFactor.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("clsTempParamOne", 0), iAdditionalPairNo:=1)
+        ucrReceiverRowFactor.AddAdditionalCodeParameterPair(clsSjPlot, clsTempParamOne, iAdditionalPairNo:=1)
         clsTempParamOne.bIncludeArgumentName = False
 
-        clsTempParamTwo = New RParameter("grp", 0)
-        ucrReceiverColumnFactor.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("clsTempParamTwo", 1), iAdditionalPairNo:=1)
+        clsTempParamTwo = New RParameter("grp", 1)
+        ucrReceiverColumnFactor.AddAdditionalCodeParameterPair(clsSjPlot, clsTempParamTwo, iAdditionalPairNo:=1)
         clsTempParamTwo.bIncludeArgumentName = False
 
         clsTempParamData = New RParameter("data", 0)
-        ucrSelectorTwoWayFrequencies.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("clsTempParamData", 1), iAdditionalPairNo:=1)
+        ucrSelectorTwoWayFrequencies.AddAdditionalCodeParameterPair(clsSjPlot, clsTempParamData, iAdditionalPairNo:=1)
         clsTempParamTwo.bIncludeArgumentName = False
 
         ucrChkWeights.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("weight.by", 1), iAdditionalPairNo:=1)
