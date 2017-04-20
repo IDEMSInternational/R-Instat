@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgRatingScales
     Private bFirstLoad As Boolean = True
@@ -36,19 +35,19 @@ Public Class dlgRatingScales
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrChkWeights.AddAdditionalCodeParameterPair(clsSjplikert, New RParameter("weight.by", 2), iAdditionalPairNo:=1)
-        ucrChkWeights.AddAdditionalCodeParameterPair(clsSjtStackFrq, New RParameter("weight.by", 2), iAdditionalPairNo:=2)
+        ucrChkWeights.AddAdditionalCodeParameterPair(clsSjpStackFrq, New RParameter("weight.by", 2), iAdditionalPairNo:=2)
         ucrReceiverOrderedFactors.AddAdditionalCodeParameterPair(clsSjplikert, New RParameter("items", 1), iAdditionalPairNo:=1)
-        ucrReceiverOrderedFactors.AddAdditionalCodeParameterPair(clsSjtStackFrq, New RParameter("items", 1), iAdditionalPairNo:=2)
+        ucrReceiverOrderedFactors.AddAdditionalCodeParameterPair(clsSjpStackFrq, New RParameter("items", 1), iAdditionalPairNo:=2)
         ucrReceiverWeights.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrPnlSjpLikert.AddAdditionalCodeParameterPair(clsSjpStackFrq, New RParameter("sort.frq", 3), iAdditionalPairNo:=1)
-        ucrPnlSjpLikert.AddAdditionalCodeParameterPair(clsSjtStackFrq, New RParameter("sort.frq", 3), iAdditionalPairNo:=2)
+        ucrPnlSjpLikert.AddAdditionalCodeParameterPair(clsSjplikert, New RParameter("sort.frq", 3), iAdditionalPairNo:=2)
 
-        ucrReceiverOrderedFactors.SetRCode(clsSjpStackFrq)
-        ucrPnlSjpLikert.SetRCode(clsSjplikert)
+        ucrReceiverOrderedFactors.SetRCode(clsSjtStackFrq)
+        ucrPnlSjpLikert.SetRCode(clsSjtStackFrq)
         ucrPnlGraphType.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ' ucrPnlGraphType.SetRCode(clsSjplikert, bReset)
         ucrPnlType.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrChkWeights.SetRCode(clsSjpStackFrq, bReset)
+        ucrChkWeights.SetRCode(clsSjtStackFrq, bReset)
         ucrChkFlip.SetRCode(clsSjplikert, bReset)
         ucrChkFlip.SetRCode(clsSjpStackFrq, bReset)
         ' ucrPnlType.SetRCode(clsSjplikert, bReset)
@@ -62,16 +61,16 @@ Public Class dlgRatingScales
         clsSjtStackFrq = New RFunction
         clsSjplikert = New RFunction
         clsSjpStackFrq = New RFunction
-
+        ChangeOfParameters()
         ucrSelectorRatingScale.Reset()
         clsSjplikert.SetRCommand("sjp.likert")
-        clsSjplikert.AddParameter("cat.neutral")
+        clsSjplikert.AddParameter("catcount", "NULL")
+        'clsSjplikert.AddParameter("cat.neutral")
         clsSjplikert.AddParameter("coord.flip", "FALSE")
         clsSjpStackFrq.SetRCommand("sjp.stackfrq")
         clsSjpStackFrq.AddParameter("coord.flip", "FALSE")
 
         clsSjtStackFrq.SetRCommand("sjt.stackfrq")
-        clsSjplikert.AddParameter("catcount", "NULL")
         clsSjtStackFrq.AddParameter("sort.frq", "NULL")
 
 
@@ -90,12 +89,14 @@ Public Class dlgRatingScales
         ucrReceiverWeights.SetParameterIsRFunction()
         ucrReceiverWeights.SetDataType("numeric")
 
+        ' ucrNudNeutralLevel.SetParameter(New RParameter("catcount", 4))
+
         ucrChkWeights.SetText("Weights")
         ucrChkWeights.SetParameter(ucrReceiverWeights.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkWeights.AddToLinkedControls(ucrReceiverWeights, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkFlip.SetText("Flip Coordinates")
-        ucrChkFlip.SetParameter(New RParameter("coord.flip", 1))
+        ucrChkFlip.SetParameter(New RParameter("coord.flip"))
         ucrChkFlip.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkFlip.SetRDefault("FALSE")
         ucrPnlGraphType.bAllowNonConditionValues = True
@@ -152,28 +153,51 @@ Public Class dlgRatingScales
         End If
     End Sub
 
-    Private Sub changeofparameters()
+    Private Sub ChangeOfParameters()
 
         If rdoGraph.Checked AndAlso rdoLikert.Checked Then
-            If rdoLowAscendingLikert.Checked Then
-                clsSjplikert.AddParameter("sort.frq", Chr(34) & "neg.asc" & Chr(34))
+            clsSjtStackFrq.RemoveParameterByName("sort.frq")
+            clsSjpStackFrq.RemoveParameterByName("sort.frq")
+            If rdoNoneLikert.Checked Then
+                clsSjplikert.AddParameter("sort.frq", "NULL")
             ElseIf rdoLowAscendingLikert.Checked Then
-
-            ElseIf rdoNoneLikert.Checked
-
-
+                clsSjplikert.AddParameter("sort.frq", Chr(34) & "neg.asc" & Chr(34))
+            ElseIf rdoLowDescendingLikert.Checked Then
+                clsSjplikert.AddParameter("sort.frq", Chr(34) & "neg.desc" & Chr(34))
+            ElseIf rdoHighAscendingLikert.Checked Then
+                clsSjplikert.AddParameter("sort.frq", Chr(34) & "posc.asc" & Chr(34))
+            ElseIf rdoHighDescendingLikert.Checked Then
+                clsSjplikert.AddParameter("sort.frq", Chr(34) & "posc.desc" & Chr(34))
             End If
-            ucrPnlSjpLikert.AddRadioButton(rdoLowAscendingLikert, Chr(34) & "neg.asc" & Chr(34))
-            ucrPnlSjpLikert.AddRadioButton(rdoLowDescendingLikert, Chr(34) & "neg.desc" & Chr(34))
-            ucrPnlSjpLikert.AddRadioButton(rdoHighAscendingLikert, Chr(34) & "posc.asc" & Chr(34))
-            ucrPnlSjpLikert.AddRadioButton(rdoHighDescendingLikert, Chr(34) & "posc.desc" & Chr(34))
 
-        ElseIf ((rdoGraph.Checked AndAlso rdoStacked.Checked) OrElse (rdoTable.Checked)) Then
-
-            ucrPnlSjpLikert.AddRadioButton(rdoLowAscendingLikert, Chr(34) & "last.asc" & Chr(34))
-            ucrPnlSjpLikert.AddRadioButton(rdoLowDescendingLikert, Chr(34) & "last.desc" & Chr(34))
-            ucrPnlSjpLikert.AddRadioButton(rdoHighAscendingLikert, Chr(34) & "first.asc" & Chr(34))
-            ucrPnlSjpLikert.AddRadioButton(rdoHighDescendingLikert, Chr(34) & "first.desc" & Chr(34))
+        ElseIf rdoGraph.Checked AndAlso rdoStacked.Checked Then
+            clsSjtStackFrq.RemoveParameterByName("sort.frq")
+            clsSjtStackFrq.RemoveParameterByName("sort.frq")
+            If rdoNoneLikert.Checked Then
+                clsSjpStackFrq.AddParameter("sort.frq", "NULL")
+            ElseIf rdoLowAscendingLikert.Checked Then
+                clsSjpStackFrq.AddParameter("sort.frq", Chr(34) & "last.asc" & Chr(34))
+            ElseIf rdoLowDescendingLikert.Checked Then
+                clsSjpStackFrq.AddParameter("sort.frq", Chr(34) & "last.desc" & Chr(34))
+            ElseIf rdoHighAscendingLikert.Checked Then
+                clsSjpStackFrq.AddParameter("sort.frq", Chr(34) & "first.asc" & Chr(34))
+            ElseIf rdoHighDescendingLikert.Checked Then
+                clsSjpStackFrq.AddParameter("sort.frq", Chr(34) & "first.desc" & Chr(34))
+            End If
+        ElseIf rdoTable.Checked Then
+            clsSjplikert.RemoveParameterByName("sort.frq")
+            clsSjpStackFrq.RemoveParameterByName("sort.frq")
+            If rdoNoneLikert.Checked Then
+                clsSjtStackFrq.AddParameter("sort.frq", "NULL")
+            ElseIf rdoLowAscendingLikert.Checked Then
+                clsSjtStackFrq.AddParameter("sort.frq", Chr(34) & "last.asc" & Chr(34))
+            ElseIf rdoLowDescendingLikert.Checked Then
+                clsSjtStackFrq.AddParameter("sort.frq", Chr(34) & "last.desc" & Chr(34))
+            ElseIf rdoHighAscendingLikert.Checked Then
+                clsSjtStackFrq.AddParameter("sort.frq", Chr(34) & "first.asc" & Chr(34))
+            ElseIf rdoHighDescendingLikert.Checked Then
+                clsSjtStackFrq.AddParameter("sort.frq", Chr(34) & "first.desc" & Chr(34))
+            End If
         End If
     End Sub
 
@@ -204,7 +228,7 @@ Public Class dlgRatingScales
         TestOkEnabled()
     End Sub
     Private Sub ucrPnlType_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlType.ControlContentsChanged, ucrPnlGraphType.ControlContentsChanged, ucrPnlSjpLikert.ControlContentsChanged
-        '   changeofparameters()
+        ChangeOfParameters()
     End Sub
     Private Sub ucrChkWeights_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWeights.ControlValueChanged
         If ucrChkWeights.Checked Then
