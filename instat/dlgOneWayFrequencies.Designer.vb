@@ -53,7 +53,7 @@ Partial Class dlgOneWayFrequencies
         Me.grpSort.Location = New System.Drawing.Point(269, 203)
         Me.grpSort.Name = "grpSort"
         Me.grpSort.Size = New System.Drawing.Size(120, 95)
-        Me.grpSort.TabIndex = 6
+        Me.grpSort.TabIndex = 9
         Me.grpSort.TabStop = False
         Me.grpSort.Text = "Sort"
         '
@@ -102,7 +102,7 @@ Partial Class dlgOneWayFrequencies
         Me.cmdOptions.Location = New System.Drawing.Point(320, 303)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(69, 23)
-        Me.cmdOptions.TabIndex = 12
+        Me.cmdOptions.TabIndex = 13
         Me.cmdOptions.Text = " Options..."
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
@@ -112,7 +112,7 @@ Partial Class dlgOneWayFrequencies
         Me.lblSelectedVariable.Location = New System.Drawing.Point(266, 81)
         Me.lblSelectedVariable.Name = "lblSelectedVariable"
         Me.lblSelectedVariable.Size = New System.Drawing.Size(93, 13)
-        Me.lblSelectedVariable.TabIndex = 4
+        Me.lblSelectedVariable.TabIndex = 5
         Me.lblSelectedVariable.Text = "Selected Variable:"
         '
         'rdoGraph
@@ -155,7 +155,7 @@ Partial Class dlgOneWayFrequencies
         Me.rdoBoth.Location = New System.Drawing.Point(259, 10)
         Me.rdoBoth.Name = "rdoBoth"
         Me.rdoBoth.Size = New System.Drawing.Size(100, 28)
-        Me.rdoBoth.TabIndex = 14
+        Me.rdoBoth.TabIndex = 3
         Me.rdoBoth.Text = "Both"
         Me.rdoBoth.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoBoth.UseVisualStyleBackColor = True
@@ -169,7 +169,7 @@ Partial Class dlgOneWayFrequencies
         Me.ucrNudGroups.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudGroups.Name = "ucrNudGroups"
         Me.ucrNudGroups.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudGroups.TabIndex = 10
+        Me.ucrNudGroups.TabIndex = 11
         Me.ucrNudGroups.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrPnlFrequencies
@@ -185,7 +185,7 @@ Partial Class dlgOneWayFrequencies
         Me.ucrChkGroupData.Location = New System.Drawing.Point(10, 266)
         Me.ucrChkGroupData.Name = "ucrChkGroupData"
         Me.ucrChkGroupData.Size = New System.Drawing.Size(145, 20)
-        Me.ucrChkGroupData.TabIndex = 9
+        Me.ucrChkGroupData.TabIndex = 10
         '
         'ucrReceiverWeights
         '
@@ -212,14 +212,14 @@ Partial Class dlgOneWayFrequencies
         Me.ucrChkFlip.Location = New System.Drawing.Point(10, 290)
         Me.ucrChkFlip.Name = "ucrChkFlip"
         Me.ucrChkFlip.Size = New System.Drawing.Size(145, 20)
-        Me.ucrChkFlip.TabIndex = 11
+        Me.ucrChkFlip.TabIndex = 12
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(10, 331)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 13
+        Me.ucrBase.TabIndex = 14
         '
         'ucrSelectorOneWayFreq
         '
@@ -229,7 +229,7 @@ Partial Class dlgOneWayFrequencies
         Me.ucrSelectorOneWayFreq.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorOneWayFreq.Name = "ucrSelectorOneWayFreq"
         Me.ucrSelectorOneWayFreq.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorOneWayFreq.TabIndex = 3
+        Me.ucrSelectorOneWayFreq.TabIndex = 4
         '
         'ucrReceiverOneWayFreq
         '
@@ -239,7 +239,7 @@ Partial Class dlgOneWayFrequencies
         Me.ucrReceiverOneWayFreq.Name = "ucrReceiverOneWayFreq"
         Me.ucrReceiverOneWayFreq.Selector = Nothing
         Me.ucrReceiverOneWayFreq.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverOneWayFreq.TabIndex = 15
+        Me.ucrReceiverOneWayFreq.TabIndex = 6
         Me.ucrReceiverOneWayFreq.ucrSelector = Nothing
         '
         'dlgOneWayFrequencies
