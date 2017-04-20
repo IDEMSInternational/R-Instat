@@ -58,7 +58,6 @@ Public Class dlgView
         ucrReceiverView.SetParameter(New RParameter("x", 0))
         ucrReceiverView.SetParameterIsRFunction()
         ucrReceiverView.Selector = ucrSelectorForView
-        '        ucrReceiverView.SetMeAsReceiver()
 
         ucrPnlDisplayWindow.AddRadioButton(rdoDispOutputWindow)
         ucrPnlDisplayWindow.AddRadioButton(rdoDispSepOutputWindow)
