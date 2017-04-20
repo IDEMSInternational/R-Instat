@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 
 Public Class dlgOneWayFrequencies
@@ -145,14 +144,14 @@ Public Class dlgOneWayFrequencies
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrChkWeights.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("weight.by", 1), iAdditionalPairNo:=1)
-        ' ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjPlot, ucrChkWeights.GetParameter(), iAdditionalPairNo:=1)
+        ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjPlot, ucrChkWeights.GetParameter(), iAdditionalPairNo:=1)
         ucrPnlSort.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("sort.frq", 3), iAdditionalPairNo:=1)
         ucrNudGroups.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("auto.group", 9), iAdditionalPairNo:=1)
-        ucrSelectorOneWayFreq.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("data"), iAdditionalPairNo:=1)
+        ucrSelectorOneWayFreq.AddAdditionalCodeParameterPair(clsGraphBaseOperator, New RParameter("data"), iAdditionalPairNo:=1)
 
         ucrReceiverWeights.SetRCode(clsSjTab, bReset)
         ucrSelectorOneWayFreq.SetRCode(clsTableBaseOperator, bReset)
-        ucrSelectorOneWayFreq.SetRCode(clsGraphBaseOperator, bReset)
+        'ucrSelectorOneWayFreq.SetRCode(clsGraphBaseOperator, bReset)
         ucrReceiverOneWayFreq.SetRCode(clsSelect, bReset)
         ucrPnlFrequencies.SetRCode(clsSjTab, bReset)
         ucrChkWeights.SetRCode(clsSjTab, bReset)
@@ -161,7 +160,7 @@ Public Class dlgOneWayFrequencies
         ucrChkGroupData.SetRCode(clsSjTab, bReset)
         ucrNudGroups.SetRCode(clsSjTab, bReset)
         ucrNudGroups.SetRCode(clsSjPlot, bReset)
-        ucrReceiverWeights.SetRCode(clsSjPlot, bReset)
+        ' ucrReceiverWeights.SetRCode(clsSjPlot, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -228,6 +227,6 @@ Public Class dlgOneWayFrequencies
     End Sub
 
     Private Sub ucrPnlFrequencies_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFrequencies.ControlValueChanged
-        SetRCodeForControls(True)
+        'SetRCodeForControls(True)
     End Sub
 End Class
