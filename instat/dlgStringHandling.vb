@@ -118,7 +118,7 @@ Public Class dlgStringHandling
             ucrSaveStringHandling.SetName("extract")
             ucrBase.clsRsyntax.SetBaseRFunction(clsExtractFunction)
         ElseIf rdoLocate.Checked Then
-            ucrSaveStringHandling.SetName("Locate")
+            ucrSaveStringHandling.SetName("locate")
             ucrBase.clsRsyntax.SetBaseRFunction(clsLocateFunction)
         ElseIf rdoReplace.Checked Then
             ucrSaveStringHandling.SetName("replace")
@@ -149,5 +149,5 @@ Public Class dlgStringHandling
 
     Private Sub ucrPnlStringHandling_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlStringHandling.ControlValueChanged
         ChangeBaseFunction()
-    End Sub
+        End
 End Class
