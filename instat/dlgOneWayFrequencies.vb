@@ -44,7 +44,8 @@ Public Class dlgOneWayFrequencies
         ucrReceiverOneWayFreq.SetParameter(New RParameter("data", 0))
         ucrReceiverOneWayFreq.SetParameterIsRFunction()
         ucrReceiverOneWayFreq.Selector = ucrSelectorOneWayFreq
-
+        ucrReceiverOneWayFreq.bForceAsDataFrame = True
+        ucrReceiverOneWayFreq.SetIncludedDataTypes({"integer", "factor", "numeric", "ordered"})
         ucrReceiverWeights.SetParameter(New RParameter("weight.by", 1))
         ucrReceiverWeights.SetParameterIsRFunction()
         ucrReceiverWeights.Selector = ucrSelectorOneWayFreq
@@ -62,11 +63,11 @@ Public Class dlgOneWayFrequencies
 
         ucrPnlFrequencies.AddRadioButton(rdoTable)
         ucrPnlFrequencies.AddRadioButton(rdoGraph)
-        'ucrPnlFrequencies.AddRadioButton(rdoBoth)
+        ucrPnlFrequencies.AddRadioButton(rdoBoth)
 
         ucrPnlFrequencies.AddFunctionNamesCondition(rdoTable, "sjtab")
         ucrPnlFrequencies.AddFunctionNamesCondition(rdoGraph, "sjplot")
-        ucrPnlFrequencies.AddFunctionNamesCondition(rdoBoth, {"sjplot", "sjtab"})
+       
         ucrPnlFrequencies.AddToLinkedControls(ucrChkFlip, {rdoGraph}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
         ucrNudGroups.SetParameter(New RParameter("auto.group", 9))
@@ -78,7 +79,6 @@ Public Class dlgOneWayFrequencies
         ucrChkGroupData.AddToLinkedControls(ucrNudGroups, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
         ucrChkGroupData.AddParameterPresentCondition(True, "auto.group")
         ucrChkGroupData.AddParameterPresentCondition(False, "auto.group", False)
-        'ucrChkGroupData.bUpdateRCodeFromControl = True
 
         ucrChkFlip.SetParameter(New RParameter("coord.flip", 10))
         ucrChkFlip.SetText("Flip Coordinates")
