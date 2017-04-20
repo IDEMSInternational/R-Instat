@@ -26,6 +26,7 @@ Partial Class dlgOneWayFrequencies
         Me.rdoDescending = New System.Windows.Forms.RadioButton()
         Me.rdoAscending = New System.Windows.Forms.RadioButton()
         Me.rdoNone = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlSort = New instat.UcrPanel()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.lblSelectedVariable = New System.Windows.Forms.Label()
         Me.rdoGraph = New System.Windows.Forms.RadioButton()
@@ -37,7 +38,6 @@ Partial Class dlgOneWayFrequencies
         Me.ucrReceiverWeights = New instat.ucrReceiverSingle()
         Me.ucrChkWeights = New instat.ucrCheck()
         Me.ucrChkFlip = New instat.ucrCheck()
-        Me.ucrPnlSort = New instat.UcrPanel()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorOneWayFreq = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverOneWayFreq = New instat.ucrReceiverMultiple()
@@ -50,7 +50,7 @@ Partial Class dlgOneWayFrequencies
         Me.grpSort.Controls.Add(Me.rdoAscending)
         Me.grpSort.Controls.Add(Me.rdoNone)
         Me.grpSort.Controls.Add(Me.ucrPnlSort)
-        Me.grpSort.Location = New System.Drawing.Point(269, 200)
+        Me.grpSort.Location = New System.Drawing.Point(269, 203)
         Me.grpSort.Name = "grpSort"
         Me.grpSort.Size = New System.Drawing.Size(120, 95)
         Me.grpSort.TabIndex = 6
@@ -90,9 +90,16 @@ Partial Class dlgOneWayFrequencies
         Me.rdoNone.Text = "None"
         Me.rdoNone.UseVisualStyleBackColor = True
         '
+        'ucrPnlSort
+        '
+        Me.ucrPnlSort.Location = New System.Drawing.Point(3, 16)
+        Me.ucrPnlSort.Name = "ucrPnlSort"
+        Me.ucrPnlSort.Size = New System.Drawing.Size(114, 69)
+        Me.ucrPnlSort.TabIndex = 0
+        '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(320, 301)
+        Me.cmdOptions.Location = New System.Drawing.Point(320, 303)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(69, 23)
         Me.cmdOptions.TabIndex = 12
@@ -207,16 +214,9 @@ Partial Class dlgOneWayFrequencies
         Me.ucrChkFlip.Size = New System.Drawing.Size(145, 20)
         Me.ucrChkFlip.TabIndex = 11
         '
-        'ucrPnlSort
-        '
-        Me.ucrPnlSort.Location = New System.Drawing.Point(3, 16)
-        Me.ucrPnlSort.Name = "ucrPnlSort"
-        Me.ucrPnlSort.Size = New System.Drawing.Size(114, 69)
-        Me.ucrPnlSort.TabIndex = 0
-        '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 337)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 331)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 13
@@ -246,7 +246,7 @@ Partial Class dlgOneWayFrequencies
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 396)
+        Me.ClientSize = New System.Drawing.Size(420, 391)
         Me.Controls.Add(Me.ucrReceiverOneWayFreq)
         Me.Controls.Add(Me.rdoBoth)
         Me.Controls.Add(Me.rdoGraph)
