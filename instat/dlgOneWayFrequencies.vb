@@ -49,8 +49,8 @@ Public Class dlgOneWayFrequencies
         ucrReceiverOneWayFreq.SetParameterIncludeArgumentName(False)
 
         ucrReceiverOneWayFreq.Selector = ucrSelectorOneWayFreq
-        ucrReceiverOneWayFreq.bForceAsDataFrame = True
-        ucrReceiverOneWayFreq.SetIncludedDataTypes({"integer", "factor", "numeric", "ordered"})
+        ' ucrReceiverOneWayFreq.bForceAsDataFrame = True
+        ' ucrReceiverOneWayFreq.SetIncludedDataTypes({"integer", "factor", "numeric", "ordered"})
 
         ucrSelectorOneWayFreq.SetParameter(New RParameter("data", 0))
         ucrSelectorOneWayFreq.SetParameterIsrfunction()
@@ -105,7 +105,8 @@ Public Class dlgOneWayFrequencies
         clsTableBaseOperator = New ROperator
         clsGraphBaseOperator = New ROperator
         clsSelect = New RFunction
-
+        ucrNudGroups.SetParameterIncludeArgumentName(True)
+        ucrReceiverWeights.SetParameterIncludeArgumentName(True)
         ucrSelectorOneWayFreq.Reset()
         ucrReceiverOneWayFreq.SetMeAsReceiver()
 
@@ -142,27 +143,21 @@ Public Class dlgOneWayFrequencies
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        'Dim clsTempParamOne As RParameter
-
-        'clsTempParamOne = New RParameter("x", 0)
-        'ucrReceiverOneWayFreq.AddAdditionalCodeParameterPair(clsSelect, clsTempParamOne, iAdditionalPairNo:=1)
-        'clsTempParamOne.bIsString = False
-        'clsTempParamOne.bIncludeArgumentName = False
-        ucrChkWeights.AddAdditionalCodeParameterPair(clsSelect, New RParameter("weight.by", 1), iAdditionalPairNo:=1)
+        ucrChkWeights.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("weight.by", 1), iAdditionalPairNo:=1)
         ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjPlot, ucrChkWeights.GetParameter(), iAdditionalPairNo:=1)
         ucrPnlSort.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("sort.frq", 3), iAdditionalPairNo:=1)
         ucrNudGroups.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("auto.group", 9), iAdditionalPairNo:=1)
         ucrSelectorOneWayFreq.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("data"), iAdditionalPairNo:=1)
 
+        ucrReceiverWeights.SetRCode(clsSjTab, bReset)
         ucrSelectorOneWayFreq.SetRCode(ucrBase.clsRsyntax.clsBaseOperator, bReset)
         ucrReceiverOneWayFreq.SetRCode(clsSelect, bReset)
-        ucrReceiverWeights.SetRCode(clsSelect, bReset)
         ucrPnlFrequencies.SetRCode(clsTableBaseOperator, bReset)
-        ucrChkWeights.SetRCode(clsTableBaseOperator, bReset)
-        ucrPnlSort.SetRCode(clsTableBaseOperator, bReset)
+        ucrChkWeights.SetRCode(clsSjTab, bReset)
+        ucrPnlSort.SetRCode(clsSjTab, bReset)
         ucrChkFlip.SetRCode(clsSjPlot, bReset)
-        ucrChkGroupData.SetRCode(clsTableBaseOperator, bReset)
-        ucrNudGroups.SetRCode(clsTableBaseOperator, bReset)
+        ucrChkGroupData.SetRCode(clsSjTab, bReset)
+        ucrNudGroups.SetRCode(clsSjTab, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
