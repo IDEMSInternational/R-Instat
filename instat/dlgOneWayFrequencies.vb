@@ -46,6 +46,7 @@ Public Class dlgOneWayFrequencies
         ucrReceiverOneWayFreq.Selector = ucrSelectorOneWayFreq
         ucrReceiverOneWayFreq.bForceAsDataFrame = True
         ucrReceiverOneWayFreq.SetIncludedDataTypes({"integer", "factor", "numeric", "ordered"})
+
         ucrReceiverWeights.SetParameter(New RParameter("weight.by", 1))
         ucrReceiverWeights.SetParameterIsRFunction()
         ucrReceiverWeights.Selector = ucrSelectorOneWayFreq
@@ -60,10 +61,11 @@ Public Class dlgOneWayFrequencies
         ucrChkWeights.SetText("Weights")
         ucrChkWeights.SetParameter(ucrReceiverWeights.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkWeights.AddToLinkedControls(ucrReceiverWeights, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'setting rdoGraph and rdoTable
+
         ucrPnlFrequencies.AddRadioButton(rdoTable)
         ucrPnlFrequencies.AddRadioButton(rdoGraph)
         ucrPnlFrequencies.AddRadioButton(rdoBoth)
+        'setting rdoGraph and rdoTable
         ucrPnlFrequencies.AddFunctionNamesCondition(rdoTable, "sjtab")
         ucrPnlFrequencies.AddFunctionNamesCondition(rdoGraph, "sjplot")
         'setting rdoBoth 
@@ -94,12 +96,13 @@ Public Class dlgOneWayFrequencies
         ucrSelectorOneWayFreq.Reset()
         ucrReceiverOneWayFreq.SetMeAsReceiver()
 
+        clsSjTab.SetPackageName("sjPlot")
         clsSjTab.SetRCommand("sjtab")
         clsSjTab.AddParameter("show.summary", "FALSE")
         clsSjTab.AddParameter("skip.zero", "FALSE")
         clsSjTab.AddParameter("digits", 0)
-        
 
+        clsSjPlot.SetPackageName("sjPlot")
         clsSjPlot.SetRCommand("sjplot")
         clsSjPlot.AddParameter("type", Chr(34) & "bar" & Chr(34))
         clsSjPlot.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneWayFreq.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
