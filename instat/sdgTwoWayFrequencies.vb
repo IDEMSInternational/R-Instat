@@ -26,6 +26,7 @@ Public Class sdgTwoWayFrequencies
         Dim dctVerticalPositionLabel As New Dictionary(Of String, String)
         Dim dctHorizontalPositionLabel As New Dictionary(Of String, String)
 
+        'Setting Table parameter
         ucrInputHorizontalLabels.SetParameter(New RParameter("hjust", 13))
         dctHorizontalPositionLabel.Add("Left", Chr(34) & "left" & Chr(34))
         dctHorizontalPositionLabel.Add("Center", Chr(34) & "center" & Chr(34))
@@ -38,6 +39,7 @@ Public Class sdgTwoWayFrequencies
         ucrInputHorizontalLabels.SetRDefault(Chr(34) & "center" & Chr(34))
         ucrInputHorizontalLabels.bUpdateRCodeFromControl = False
 
+        'Setting Table parameter
         ucrInputVerticalLabels.SetParameter(New RParameter("vjust", 12))
         dctVerticalPositionLabel.Add("Left", Chr(34) & "left" & Chr(34))
         dctVerticalPositionLabel.Add("Center", Chr(34) & "center" & Chr(34))
@@ -53,48 +55,59 @@ Public Class sdgTwoWayFrequencies
         ucrChkStack.SetText("Stack Bar Graph")
         ucrChkStack.SetRDefault(Chr(34) & "dodge" & Chr(34))
 
+        'Setting Table parameter
         ucrChkShowSummary.SetParameter(New RParameter("show.summary", 9), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkShowSummary.SetText("Show Summary")
         ucrChkShowSummary.SetRDefault("TRUE")
 
+        'Setting Table parameter
         ucrNudDecimalPlaces.SetParameter(New RParameter("digits", 10))
         ucrNudDecimalPlaces.SetMinMax(0, 4)
 
+        'Setting Table parameter
         ucrChkBackgroundColour.SetParameter(New RParameter("emph.total", 11), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkBackgroundColour.SetText("Totals Column/Row Background Highlighted")
         ucrChkBackgroundColour.SetRDefault("FALSE")
-
+        'Setting Plot parameter
         ucrChkShowCount.SetParameter(New RParameter("show.n", 5), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkShowCount.SetText("Show Count")
         ucrChkShowCount.SetRDefault("TRUE")
 
+        'Setting Plot parameter
         ucrChkShowPercentage.SetParameter(New RParameter("show.prc", 6), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkShowPercentage.SetText("Show Percentage")
         ucrChkShowPercentage.SetRDefault("TRUE")
 
+        'Setting Plot & Table parameter
         ucrInputGraphTitle.SetParameter(New RParameter("title", 9))
         ucrInputTableTitle.SetParameter(New RParameter("title", 14))
 
+        'Setting Plot parameter
         ucrChkShowModelSummary.SetParameter(New RParameter("show.summary", 7), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkShowModelSummary.SetText("Show Model Summary")
         ucrChkShowModelSummary.SetRDefault("FALSE")
 
+        'Setting Plot parameter
         ucrChkMissingValues.SetParameter(New RParameter("show.na", 11), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkMissingValues.SetText("Show Missing Values")
         ucrChkMissingValues.SetRDefault("FALSE")
 
+        'Setting Plot parameter
         ucrPnlGraphType.SetParameter(New RParameter("type", 8))
         ucrPnlGraphType.AddRadioButton(rdoBar, Chr(34) & "bar" & Chr(34))
         ucrPnlGraphType.AddRadioButton(rdoLine, Chr(34) & "line" & Chr(34))
         ucrPnlGraphType.SetRDefault(Chr(34) & "bar" & Chr(34))
 
+        'Setting Plot parameter
         ucrInputTotalsName.SetParameter(New RParameter("string.total", 12))
         ucrInputTotalsName.SetRDefault(Chr(34) & "Total" & Chr(34))
         ucrChkTotalColumnName.SetText("Total Column Name")
 
+        'Setting Plot parameter
         ucrChkTotalColumnName.SetParameter(ucrInputTotalsName.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkTotalColumnName.AddToLinkedControls(ucrInputTotalsName, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
+        'Setting Plot parameter
         ucrPnlGraphType.AddToLinkedControls(ucrChkStack, {rdoBar}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
         ucrSaveGraph.SetPrefix("one_way_freq")
         ucrSaveGraph.SetSaveTypeAsGraph()
@@ -105,7 +118,7 @@ Public Class sdgTwoWayFrequencies
         rdoLine.Enabled = False
         bControlsInitialised = True
     End Sub
-
+    'Linking the subdialogue to the functions main dialogue
     Public Sub SetRFunction(clsNewSjtFreq As RFunction, clsNewSjpFrq As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
@@ -113,6 +126,7 @@ Public Class sdgTwoWayFrequencies
         clsTwoWayTableFreq = clsNewSjtFreq
         clsTwoWayGraphFreq = clsNewSjpFrq
 
+        'Setting Rcode for the sub dialogue
         ucrChkShowSummary.SetRCode(clsTwoWayTableFreq, bReset)
         ucrChkBackgroundColour.SetRCode(clsTwoWayTableFreq, bReset)
         ucrNudDecimalPlaces.SetRCode(clsTwoWayTableFreq, bReset)
