@@ -46,6 +46,8 @@ Public Class dlgBoxplot
 
         ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
         ucrChkVarwidth.SetRCode(clsRgeom_boxplotFunction, bReset)
+        'passes in +cordflip
+        ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
 
         ucrVariablesAsFactorForBoxplot.SetRCode(clsRaesFunction, bReset)
         ucrByFactorsReceiver.SetRCode(clsRaesFunction, bReset)
@@ -109,6 +111,10 @@ Public Class dlgBoxplot
         ucrSelectorBoxPlot.SetParameter(New RParameter("data"), 0)
         ucrSelectorBoxPlot.SetParameterIsrfunction()
 
+        ucrPnlPlots.AddRadioButton(rdoViolin)
+        ucrPnlPlots.AddRadioButton(rdoBoxplot)
+        ucrPnlPlots.AddRadioButton(rdoJitter)
+
         ucrByFactorsReceiver.Selector = ucrSelectorBoxPlot
         ucrByFactorsReceiver.SetIncludedDataTypes({"factor"})
         ucrByFactorsReceiver.SetParameter(New RParameter("x"))
@@ -151,13 +157,13 @@ Public Class dlgBoxplot
     Private Sub ChangeSavePrefixAndChkText()
         If rdoBoxplot.Checked Then
             ucrSaveBoxplot.SetPrefix("Boxplot")
-            ucrChkHorizontalBoxplot.Text = "Horizontal Boxplot"
+            ucrChkHorizontalBoxplot.SetText("Horizontal Boxplot")
         ElseIf rdoJitter.Checked Then
             ucrSaveBoxplot.SetPrefix("Jitter")
-            ucrChkHorizontalBoxplot.Text = "Horizontal Jitter Plot"
+            ucrChkHorizontalBoxplot.SetText("Horizontal Jitter Plot")
         ElseIf rdoViolin.Checked Then
             ucrSaveBoxplot.SetPrefix("Violin")
-            ucrChkHorizontalBoxplot.Text = "Horizontal Violin Plot"
+            ucrChkHorizontalBoxplot.SetText("Horizontal Violin Plot")
         End If
     End Sub
 
@@ -175,7 +181,7 @@ Public Class dlgBoxplot
         'Task: work on the link.
     End Sub
 
-    Private Sub ucrSecondFactorReceiver_ControlContentsChanged() Handles ucrSecondFactorReceiver.ControlContentsChanged
+    Private Sub ucrSecondFactorReceiver_ControlContentsChanged() Handles ucrSecondFactorReceiver.ControlValueChanged
         FillColourAes()
     End Sub
     Private Sub cmdBoxPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdBoxPlotOptions.Click
@@ -234,7 +240,7 @@ Public Class dlgBoxplot
             cmdOptions.Enabled = False
         End If
     End Sub
-    
+
     Private Sub rdoBoxplot_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBoxplot.CheckedChanged, rdoJitter.CheckedChanged, rdoViolin.CheckedChanged
         'Sets appropriate geom function depending with selection 
         If rdoBoxplot.Checked Then
@@ -265,7 +271,10 @@ Public Class dlgBoxplot
         End If
     End Sub
 
-    Private Sub ucrPnlPlots_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlPlots.ControlContentsChanged
+    Private Sub ucrPnlPlots_ControlContentsChanged() Handles rdoBoxplot.CheckedChanged, rdoJitter.CheckedChanged, rdoViolin.CheckedChanged
         ChangeSavePrefixAndChkText()
+    End Sub
+    Private Sub ucrSaveBoxplot_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveBoxplot.ControlContentsChanged, ucrVariablesAsFactorForBoxplot.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class
