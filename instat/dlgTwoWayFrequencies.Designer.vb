@@ -26,18 +26,20 @@ Partial Class dlgTwoWayFrequencies
         Me.lblColumnFactor = New System.Windows.Forms.Label()
         Me.rdoTable = New System.Windows.Forms.RadioButton()
         Me.rdoGraph = New System.Windows.Forms.RadioButton()
-        Me.grpFreqType = New System.Windows.Forms.GroupBox()
+        Me.grpFreqTypeTable = New System.Windows.Forms.GroupBox()
+        Me.cmdOptions = New System.Windows.Forms.Button()
+        Me.rdoBoth = New System.Windows.Forms.RadioButton()
+        Me.grpFreqTypeGraph = New System.Windows.Forms.GroupBox()
+        Me.rdoCell = New System.Windows.Forms.RadioButton()
+        Me.rdoColumn = New System.Windows.Forms.RadioButton()
+        Me.rdoRow = New System.Windows.Forms.RadioButton()
+        Me.rdoCount = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlFreqType = New instat.UcrPanel()
+        Me.ucrSelectorTwoWayFrequencies = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrChkCount = New instat.ucrCheck()
         Me.ucrChkCell = New instat.ucrCheck()
-        Me.rdoCount = New System.Windows.Forms.RadioButton()
-        Me.ucrChkRow = New instat.ucrCheck()
-        Me.rdoCell = New System.Windows.Forms.RadioButton()
         Me.ucrChkColumn = New instat.ucrCheck()
-        Me.rdoRow = New System.Windows.Forms.RadioButton()
-        Me.rdoColumn = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlFreqType = New instat.UcrPanel()
-        Me.cmdOptions = New System.Windows.Forms.Button()
-        Me.ucrSelectorTwoWayFrequencies = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrChkRow = New instat.ucrCheck()
         Me.ucrChkFlip = New instat.ucrCheck()
         Me.ucrPnlFreqDisplay = New instat.UcrPanel()
         Me.ucrChkWeights = New instat.ucrCheck()
@@ -45,8 +47,8 @@ Partial Class dlgTwoWayFrequencies
         Me.ucrReceiverColumnFactor = New instat.ucrReceiverSingle()
         Me.ucrReceiverRowFactor = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
-        Me.rdoBoth = New System.Windows.Forms.RadioButton()
-        Me.grpFreqType.SuspendLayout()
+        Me.grpFreqTypeTable.SuspendLayout()
+        Me.grpFreqTypeGraph.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblRowFactor
@@ -103,88 +105,70 @@ Partial Class dlgTwoWayFrequencies
         Me.rdoGraph.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.rdoGraph.UseVisualStyleBackColor = True
         '
-        'grpFreqType
+        'grpFreqTypeTable
         '
-        Me.grpFreqType.Controls.Add(Me.ucrChkCount)
-        Me.grpFreqType.Controls.Add(Me.ucrChkCell)
-        Me.grpFreqType.Controls.Add(Me.rdoCount)
-        Me.grpFreqType.Controls.Add(Me.ucrChkRow)
-        Me.grpFreqType.Controls.Add(Me.rdoCell)
-        Me.grpFreqType.Controls.Add(Me.ucrChkColumn)
-        Me.grpFreqType.Controls.Add(Me.rdoRow)
-        Me.grpFreqType.Controls.Add(Me.rdoColumn)
-        Me.grpFreqType.Controls.Add(Me.ucrPnlFreqType)
-        Me.grpFreqType.Location = New System.Drawing.Point(263, 179)
-        Me.grpFreqType.Name = "grpFreqType"
-        Me.grpFreqType.Size = New System.Drawing.Size(121, 125)
-        Me.grpFreqType.TabIndex = 8
-        Me.grpFreqType.TabStop = False
-        Me.grpFreqType.Text = "Frequencies"
+        Me.grpFreqTypeTable.Controls.Add(Me.ucrChkCount)
+        Me.grpFreqTypeTable.Controls.Add(Me.ucrChkCell)
+        Me.grpFreqTypeTable.Controls.Add(Me.ucrChkColumn)
+        Me.grpFreqTypeTable.Controls.Add(Me.ucrChkRow)
+        Me.grpFreqTypeTable.Location = New System.Drawing.Point(240, 166)
+        Me.grpFreqTypeTable.Name = "grpFreqTypeTable"
+        Me.grpFreqTypeTable.Size = New System.Drawing.Size(98, 125)
+        Me.grpFreqTypeTable.TabIndex = 8
+        Me.grpFreqTypeTable.TabStop = False
+        Me.grpFreqTypeTable.Text = "Frequencies"
         '
-        'ucrChkCount
+        'cmdOptions
         '
-        Me.ucrChkCount.Checked = False
-        Me.ucrChkCount.Location = New System.Drawing.Point(12, 17)
-        Me.ucrChkCount.Name = "ucrChkCount"
-        Me.ucrChkCount.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkCount.TabIndex = 0
+        Me.cmdOptions.Location = New System.Drawing.Point(10, 233)
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(83, 23)
+        Me.cmdOptions.TabIndex = 9
+        Me.cmdOptions.Text = " Options..."
+        Me.cmdOptions.UseVisualStyleBackColor = True
         '
-        'ucrChkCell
+        'rdoBoth
         '
-        Me.ucrChkCell.Checked = False
-        Me.ucrChkCell.Location = New System.Drawing.Point(12, 93)
-        Me.ucrChkCell.Name = "ucrChkCell"
-        Me.ucrChkCell.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkCell.TabIndex = 3
+        Me.rdoBoth.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoBoth.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.rdoBoth.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoBoth.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoBoth.FlatAppearance.BorderSize = 2
+        Me.rdoBoth.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoBoth.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoBoth.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoBoth.Location = New System.Drawing.Point(262, 12)
+        Me.rdoBoth.Name = "rdoBoth"
+        Me.rdoBoth.Size = New System.Drawing.Size(100, 28)
+        Me.rdoBoth.TabIndex = 14
+        Me.rdoBoth.Text = "Both"
+        Me.rdoBoth.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.rdoBoth.UseVisualStyleBackColor = True
         '
-        'rdoCount
+        'grpFreqTypeGraph
         '
-        Me.rdoCount.AutoSize = True
-        Me.rdoCount.Location = New System.Drawing.Point(14, 19)
-        Me.rdoCount.Name = "rdoCount"
-        Me.rdoCount.Size = New System.Drawing.Size(53, 17)
-        Me.rdoCount.TabIndex = 0
-        Me.rdoCount.TabStop = True
-        Me.rdoCount.Text = "Count"
-        Me.rdoCount.UseVisualStyleBackColor = True
-        '
-        'ucrChkRow
-        '
-        Me.ucrChkRow.Checked = False
-        Me.ucrChkRow.Location = New System.Drawing.Point(12, 41)
-        Me.ucrChkRow.Name = "ucrChkRow"
-        Me.ucrChkRow.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkRow.TabIndex = 1
+        Me.grpFreqTypeGraph.Controls.Add(Me.rdoCount)
+        Me.grpFreqTypeGraph.Controls.Add(Me.rdoCell)
+        Me.grpFreqTypeGraph.Controls.Add(Me.rdoRow)
+        Me.grpFreqTypeGraph.Controls.Add(Me.rdoColumn)
+        Me.grpFreqTypeGraph.Controls.Add(Me.ucrPnlFreqType)
+        Me.grpFreqTypeGraph.Location = New System.Drawing.Point(339, 166)
+        Me.grpFreqTypeGraph.Name = "grpFreqTypeGraph"
+        Me.grpFreqTypeGraph.Size = New System.Drawing.Size(100, 125)
+        Me.grpFreqTypeGraph.TabIndex = 9
+        Me.grpFreqTypeGraph.TabStop = False
+        Me.grpFreqTypeGraph.Text = "Frequencies"
         '
         'rdoCell
         '
         Me.rdoCell.AutoSize = True
-        Me.rdoCell.Location = New System.Drawing.Point(14, 95)
+        Me.rdoCell.Location = New System.Drawing.Point(14, 94)
         Me.rdoCell.Name = "rdoCell"
         Me.rdoCell.Size = New System.Drawing.Size(59, 17)
         Me.rdoCell.TabIndex = 3
         Me.rdoCell.TabStop = True
         Me.rdoCell.Text = "Cell (%)"
         Me.rdoCell.UseVisualStyleBackColor = True
-        '
-        'ucrChkColumn
-        '
-        Me.ucrChkColumn.Checked = False
-        Me.ucrChkColumn.Location = New System.Drawing.Point(12, 67)
-        Me.ucrChkColumn.Name = "ucrChkColumn"
-        Me.ucrChkColumn.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkColumn.TabIndex = 2
-        '
-        'rdoRow
-        '
-        Me.rdoRow.AutoSize = True
-        Me.rdoRow.Location = New System.Drawing.Point(14, 43)
-        Me.rdoRow.Name = "rdoRow"
-        Me.rdoRow.Size = New System.Drawing.Size(64, 17)
-        Me.rdoRow.TabIndex = 1
-        Me.rdoRow.TabStop = True
-        Me.rdoRow.Text = "Row (%)"
-        Me.rdoRow.UseVisualStyleBackColor = True
         '
         'rdoColumn
         '
@@ -197,21 +181,34 @@ Partial Class dlgTwoWayFrequencies
         Me.rdoColumn.Text = "Column (%)"
         Me.rdoColumn.UseVisualStyleBackColor = True
         '
+        'rdoRow
+        '
+        Me.rdoRow.AutoSize = True
+        Me.rdoRow.Location = New System.Drawing.Point(14, 44)
+        Me.rdoRow.Name = "rdoRow"
+        Me.rdoRow.Size = New System.Drawing.Size(64, 17)
+        Me.rdoRow.TabIndex = 1
+        Me.rdoRow.TabStop = True
+        Me.rdoRow.Text = "Row (%)"
+        Me.rdoRow.UseVisualStyleBackColor = True
+        '
+        'rdoCount
+        '
+        Me.rdoCount.AutoSize = True
+        Me.rdoCount.Location = New System.Drawing.Point(14, 19)
+        Me.rdoCount.Name = "rdoCount"
+        Me.rdoCount.Size = New System.Drawing.Size(53, 17)
+        Me.rdoCount.TabIndex = 0
+        Me.rdoCount.TabStop = True
+        Me.rdoCount.Text = "Count"
+        Me.rdoCount.UseVisualStyleBackColor = True
+        '
         'ucrPnlFreqType
         '
         Me.ucrPnlFreqType.Location = New System.Drawing.Point(9, 17)
         Me.ucrPnlFreqType.Name = "ucrPnlFreqType"
-        Me.ucrPnlFreqType.Size = New System.Drawing.Size(103, 102)
+        Me.ucrPnlFreqType.Size = New System.Drawing.Size(82, 102)
         Me.ucrPnlFreqType.TabIndex = 4
-        '
-        'cmdOptions
-        '
-        Me.cmdOptions.Location = New System.Drawing.Point(10, 233)
-        Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(83, 23)
-        Me.cmdOptions.TabIndex = 9
-        Me.cmdOptions.Text = " Options..."
-        Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'ucrSelectorTwoWayFrequencies
         '
@@ -222,6 +219,38 @@ Partial Class dlgTwoWayFrequencies
         Me.ucrSelectorTwoWayFrequencies.Name = "ucrSelectorTwoWayFrequencies"
         Me.ucrSelectorTwoWayFrequencies.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorTwoWayFrequencies.TabIndex = 3
+        '
+        'ucrChkCount
+        '
+        Me.ucrChkCount.Checked = False
+        Me.ucrChkCount.Location = New System.Drawing.Point(6, 20)
+        Me.ucrChkCount.Name = "ucrChkCount"
+        Me.ucrChkCount.Size = New System.Drawing.Size(82, 20)
+        Me.ucrChkCount.TabIndex = 15
+        '
+        'ucrChkCell
+        '
+        Me.ucrChkCell.Checked = False
+        Me.ucrChkCell.Location = New System.Drawing.Point(6, 95)
+        Me.ucrChkCell.Name = "ucrChkCell"
+        Me.ucrChkCell.Size = New System.Drawing.Size(82, 20)
+        Me.ucrChkCell.TabIndex = 18
+        '
+        'ucrChkColumn
+        '
+        Me.ucrChkColumn.Checked = False
+        Me.ucrChkColumn.Location = New System.Drawing.Point(6, 70)
+        Me.ucrChkColumn.Name = "ucrChkColumn"
+        Me.ucrChkColumn.Size = New System.Drawing.Size(82, 20)
+        Me.ucrChkColumn.TabIndex = 17
+        '
+        'ucrChkRow
+        '
+        Me.ucrChkRow.Checked = False
+        Me.ucrChkRow.Location = New System.Drawing.Point(6, 45)
+        Me.ucrChkRow.Name = "ucrChkRow"
+        Me.ucrChkRow.Size = New System.Drawing.Size(82, 20)
+        Me.ucrChkRow.TabIndex = 16
         '
         'ucrChkFlip
         '
@@ -286,32 +315,15 @@ Partial Class dlgTwoWayFrequencies
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 13
         '
-        'rdoBoth
-        '
-        Me.rdoBoth.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoBoth.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.rdoBoth.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoBoth.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoBoth.FlatAppearance.BorderSize = 2
-        Me.rdoBoth.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoBoth.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoBoth.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoBoth.Location = New System.Drawing.Point(262, 12)
-        Me.rdoBoth.Name = "rdoBoth"
-        Me.rdoBoth.Size = New System.Drawing.Size(100, 28)
-        Me.rdoBoth.TabIndex = 14
-        Me.rdoBoth.Text = "Both"
-        Me.rdoBoth.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.rdoBoth.UseVisualStyleBackColor = True
-        '
         'dlgTwoWayFrequencies
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(418, 375)
+        Me.ClientSize = New System.Drawing.Size(410, 372)
+        Me.Controls.Add(Me.grpFreqTypeGraph)
         Me.Controls.Add(Me.rdoBoth)
         Me.Controls.Add(Me.ucrSelectorTwoWayFrequencies)
-        Me.Controls.Add(Me.grpFreqType)
+        Me.Controls.Add(Me.grpFreqTypeTable)
         Me.Controls.Add(Me.ucrChkFlip)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.rdoTable)
@@ -330,8 +342,9 @@ Partial Class dlgTwoWayFrequencies
         Me.Name = "dlgTwoWayFrequencies"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Two Way Frequencies"
-        Me.grpFreqType.ResumeLayout(False)
-        Me.grpFreqType.PerformLayout()
+        Me.grpFreqTypeTable.ResumeLayout(False)
+        Me.grpFreqTypeGraph.ResumeLayout(False)
+        Me.grpFreqTypeGraph.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -348,9 +361,11 @@ Partial Class dlgTwoWayFrequencies
     Friend WithEvents rdoTable As RadioButton
     Friend WithEvents rdoGraph As RadioButton
     Friend WithEvents ucrPnlFreqDisplay As UcrPanel
-    Friend WithEvents grpFreqType As GroupBox
+    Friend WithEvents grpFreqTypeTable As GroupBox
     Friend WithEvents cmdOptions As Button
     Friend WithEvents ucrChkFlip As ucrCheck
+    Friend WithEvents rdoBoth As RadioButton
+    Friend WithEvents grpFreqTypeGraph As GroupBox
     Friend WithEvents rdoCount As RadioButton
     Friend WithEvents rdoCell As RadioButton
     Friend WithEvents rdoRow As RadioButton
@@ -358,7 +373,6 @@ Partial Class dlgTwoWayFrequencies
     Friend WithEvents ucrPnlFreqType As UcrPanel
     Friend WithEvents ucrChkCount As ucrCheck
     Friend WithEvents ucrChkCell As ucrCheck
-    Friend WithEvents ucrChkRow As ucrCheck
     Friend WithEvents ucrChkColumn As ucrCheck
-    Friend WithEvents rdoBoth As RadioButton
+    Friend WithEvents ucrChkRow As ucrCheck
 End Class
