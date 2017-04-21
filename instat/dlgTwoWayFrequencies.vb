@@ -39,6 +39,8 @@ Public Class dlgTwoWayFrequencies
     Private Sub InitialiseDialog()
         'HelpID
         ' ucrBase.iHelpTopicID = 
+        'TODO after discussion.
+        rdoBoth.Enabled = False
 
         ucrReceiverColumnFactor.Selector = ucrSelectorTwoWayFrequencies
         ucrReceiverRowFactor.Selector = ucrSelectorTwoWayFrequencies
@@ -68,15 +70,18 @@ Public Class dlgTwoWayFrequencies
         ucrPnlFreqType.AddRadioButton(rdoColumn, Chr(34) & "xtab" & Chr(34))
         ucrPnlFreqType.AddRadioButton(rdoCell, Chr(34) & "xtab" & Chr(34))
 
-        'ucrPnlFreqType.AddParameterPresentCondition(rdoCount, "fun")
-        'ucrPnlFreqType.AddParameterPresentCondition(rdoCell, "fun")
-        'ucrPnlFreqType.AddParameterPresentCondition(rdoCell, "margin")
-        'ucrPnlFreqType.AddParameterPresentCondition(rdoColumn, "fun")
+        'To be uncommented with slight adjustment after rdoBoth is agreed on (Dependent on it)
+        ' ucrPnlFreqType.AddParameterPresentCondition(rdoCount, "fun")
+        ' ucrPnlFreqType.AddParameterPresentCondition(rdoCount, "margin", False)
+        ' ucrPnlFreqType.AddParameterPresentCondition(rdoCell, "fun")
+        ' ucrPnlFreqType.AddParameterPresentCondition(rdoCell, "margin")
+        ' ucrPnlFreqType.AddParameterPresentCondition(rdoColumn, "fun")
         'ucrPnlFreqType.AddParameterPresentCondition(rdoColumn, "margin")
         'ucrPnlFreqType.AddParameterPresentCondition(rdoRow, "fun")
         'ucrPnlFreqType.AddParameterPresentCondition(rdoRow, "margin")
 
-        ' ucrPnlFreqDisplay.AddParameterPresentCondition(rdoGraph, "fun")
+        'temporary fix for the above(To be deleted)
+        ucrPnlFreqType.bAllowNonConditionValues = True
 
         ucrChkRow.SetParameter(New RParameter("show.row.prc", 5), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkRow.SetText("Row (%)")
@@ -127,6 +132,8 @@ Public Class dlgTwoWayFrequencies
 
         ucrSelectorTwoWayFrequencies.Reset()
         ucrReceiverRowFactor.SetMeAsReceiver()
+        sdgTwoWayFrequencies.ucrInputTableTitle.SetName("")
+        sdgTwoWayFrequencies.ucrInputGraphTitle.SetName("")
 
         clsSjTab.SetRCommand("sjtab")
         clsSjTab.AddParameter("show.obs", "TRUE")
