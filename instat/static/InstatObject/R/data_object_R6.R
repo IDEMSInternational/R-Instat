@@ -981,18 +981,12 @@ data_object$set("public", "sort_dataframe", function(col_names = c(), decreasing
 }
 )
 
-data_object$set("public", "convert_column_to_type", function(col_names = c(), to_type, factor_numeric = "by_levels", set_digits, set_decimals = FALSE) {
-  for(col_name in col_names){
-    if(!(col_name %in% self$get_column_names())) {
-      stop(col_name, " is not a column in ", get_metadata(data_name_label))
-    }
+data_object$set("public", "convert_column_to_type", function(col_names = c(), to_type, factor_numeric = "by_levels", set_digits, set_decimals = FALSE, keep_attr = TRUE) {
+  if(!all(col_names %in% self$get_column_names())) stop("Some column names not found in the data")
+
+  if(length(to_type) !=1 ) {
+    stop("to_type must be a character of length one")
   }
-  
-  if(length(to_type)>1){
-    warning("Column(s) will be converted to type ", to_type[1])
-    to_type = to_type[1]
-  }
-  
   
   if(!(to_type %in% c("integer", "factor", "numeric", "character", "ordered_factor"))){
     stop(to_type, " is not a valid type to convert to")
@@ -1004,24 +998,27 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
   
   for(col_name in col_names) {
     curr_col <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
+    if(keep_attr) {
+      tmp_attr <- attributes(curr_col)
+      #TODO are these the only attributes we don't want to transfer?
+      tmp_attr <- tmp_attr[!names(tmp_attr) %in% c("class", "levels")]
+    }
     if(to_type=="factor") {
       # Warning: this is different from expected R behaviour
       # Any ordered columns would become unordered factors
-	  if(!set_decimals){
-	   self$add_columns_to_data(col_name = col_name, col_data = factor(curr_col, ordered = FALSE))
-	  } 
-	  else {self$add_columns_to_data(col_name = col_name, col_data = factor(round(curr_col, digits = set_digits), ordered = FALSE))
+      if(!set_decimals) {
+       self$add_columns_to_data(col_name = col_name, col_data = factor(curr_col, ordered = FALSE))
       }
+      else self$add_columns_to_data(col_name = col_name, col_data = factor(round(curr_col, digits = set_digits), ordered = FALSE))
     }
     else if(to_type =="integer") {
       self$add_columns_to_data(col_name = col_name, col_data = as.integer(curr_col))
     }
     else if(to_type == "ordered_factor") {
-	   if(!set_decimals){
-	   self$add_columns_to_data(col_name = col_name, col_data = factor(curr_col, ordered = TRUE))
-	  } 
-	  else {self$add_columns_to_data(col_name = col_name, col_data = factor(round(curr_col, digits = set_digits), ordered = TRUE))
-	  }
+	   if(!set_decimals) {
+	    self$add_columns_to_data(col_name = col_name, col_data = factor(curr_col, ordered = TRUE))
+	   } 
+	   else self$add_columns_to_data(col_name = col_name, col_data = factor(round(curr_col, digits = set_digits), ordered = TRUE))
     }
     else if(to_type == "integer") {
       self$add_columns_to_data(col_name = col_name, col_data = as.integer(curr_col))
@@ -1035,7 +1032,11 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
     else if(to_type == "character") {
       self$add_columns_to_data(col_name = col_name, col_data = as.character(curr_col))
     }
-    self$append_to_variables_metadata(property = signif_figures_label, col_names = col_name, new_val = get_default_significant_figures(curr_col))
+    if(keep_attr) {
+      for(att_name in names(tmp_attr)) {
+        self$append_to_variables_metadata(property = att_name, col_names = col_name, new_val = tmp_attr[[att_name]])
+      }
+    }
   }
   self$data_changed <- TRUE
   self$variables_metadata_changed <- TRUE
