@@ -128,13 +128,12 @@ Public Class dlgOneWayFrequencies
         clsSjTab.SetRCommand("sjtab")
 
         clsSjTab.AddParameter("show.summary", "FALSE")
-        clsSjTab.AddParameter("skip.zero", "FALSE")
         clsSjTab.AddParameter("digits", 0)
 
         clsSjPlot.SetPackageName("sjPlot")
         clsSjPlot.SetRCommand("sjplot")
 
-        'clsSjPlot.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneWayFreq.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        clsPlotGrid.SetAssignTo(sdgOneWayFrequencies.ucrSaveGraph.GetText, strTempDataframe:=ucrSelectorOneWayFreq.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
 
         ucrBase.clsRsyntax.SetBaseROperator(clsTableBaseOperator)
         bResetSubdialog = True
@@ -145,12 +144,12 @@ Public Class dlgOneWayFrequencies
         ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjPlot, ucrChkWeights.GetParameter(), iAdditionalPairNo:=1)
         ucrPnlSort.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("sort.frq", 3), iAdditionalPairNo:=1)
         ucrNudGroups.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("auto.group", 9), iAdditionalPairNo:=1)
-        ' ucrSelectorOneWayFreq.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("data"), iAdditionalPairNo:=1)
-        'ucrSelectorOneWayFreq.SetParameterIncludeArgumentName(True)
+        ucrSelectorOneWayFreq.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("data"), iAdditionalPairNo:=1)
+        ucrSelectorOneWayFreq.SetParameterIncludeArgumentName(True)
 
         ucrReceiverWeights.SetRCode(clsSjTab, bReset)
         ucrSelectorOneWayFreq.SetRCode(clsTableBaseOperator, bReset)
-        ucrSelectorOneWayFreq.SetRCode(clsSjPlot, bReset)
+        '  ucrSelectorOneWayFreq.SetRCode(clsSjPlot, bReset)
         ucrReceiverOneWayFreq.SetRCode(clsSelect, bReset)
         ucrPnlFrequencies.SetRCode(clsSjTab, bReset)
         ucrChkWeights.SetRCode(clsSjTab, bReset)
@@ -158,7 +157,7 @@ Public Class dlgOneWayFrequencies
         ucrChkFlip.SetRCode(clsSjPlot, bReset)
         ucrChkGroupData.SetRCode(clsSjTab, bReset)
         ucrNudGroups.SetRCode(clsSjTab, bReset)
-        ucrNudGroups.SetRCode(clsSjPlot, bReset)
+        ' ucrNudGroups.SetRCode(clsSjPlot, bReset)
         ' ucrReceiverWeights.SetRCode(clsSjPlot, bReset)
     End Sub
 

@@ -27,6 +27,7 @@ Public Class sdgOneWayFrequencies
         Dim dctVerticalPositionLabel As New Dictionary(Of String, String)
         Dim dctHorizontalPositionLabel As New Dictionary(Of String, String)
         Dim dctOmitZero As New Dictionary(Of String, String)
+
         ucrInputGraphTitle.SetParameter(New RParameter("title", 2))
 
         'Table Only
@@ -110,12 +111,12 @@ Public Class sdgOneWayFrequencies
         ucrInputVerticalLabels.bUpdateRCodeFromControl = False
 
         'Graph Only
-        ' ucrSaveGraph.SetPrefix("one_way_freq")
-        'ucrSaveGraph.SetSaveTypeAsGraph()
-        ' ucrSaveGraph.SetDataFrameSelector(dlgOneWayFrequencies.ucrSelectorOneWayFreq.ucrAvailableDataFrames)
-        'ucrSaveGraph.SetCheckBoxText("Save Graph")
-        ' ucrSaveGraph.SetIsComboBox()
-        ' ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
+        ucrSaveGraph.SetPrefix("one_way_freq")
+        ucrSaveGraph.SetSaveTypeAsGraph()
+        ucrSaveGraph.SetDataFrameSelector(dlgOneWayFrequencies.ucrSelectorOneWayFreq.ucrAvailableDataFrames)
+        ucrSaveGraph.SetCheckBoxText("Save Graph")
+        ucrSaveGraph.SetIsComboBox()
+        ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
 
         bControlsInitialised = True
     End Sub
@@ -142,6 +143,6 @@ Public Class sdgOneWayFrequencies
         ucrInputVerticalLabels.SetRCode(clsOneWayGraphFreq, bReset)
         ucrInputHorizontalLabels.SetRCode(clsOneWayGraphFreq, bReset)
         ucrInputGraphTitle.SetRCode(clsOneWayGraphFreq, bReset)
-        ' ucrSaveGraph.SetRCode(clsOneWayGraphFreq, bReset)
+        ucrSaveGraph.SetRCode(clsOneWayGraphFreq, bReset)
     End Sub
 End Class
