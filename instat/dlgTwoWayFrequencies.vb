@@ -59,10 +59,10 @@ Public Class dlgTwoWayFrequencies
         ucrSelectorTwoWayFrequencies.SetParameterIsrfunction()
         ucrSelectorTwoWayFrequencies.SetParameterIncludeArgumentName(False)
 
-        ucrReceiverWeights.SetParameter(New RParameter("weight.by", 2))
+        ucrReceiverWeights.SetParameter(New RParameter("weight.by", 3))
         ucrReceiverWeights.SetParameterIsRFunction()
 
-        ucrPnlFreqType.SetParameter(New RParameter("fun", 3))
+        ucrPnlFreqType.SetParameter(New RParameter("fun", 4))
         ucrPnlFreqType.AddRadioButton(rdoCount, Chr(34) & "grpfrq" & Chr(34))
         ucrPnlFreqType.AddRadioButton(rdoRow, Chr(34) & "xtab" & Chr(34))
         ucrPnlFreqType.AddRadioButton(rdoColumn, Chr(34) & "xtab" & Chr(34))
@@ -78,19 +78,19 @@ Public Class dlgTwoWayFrequencies
 
         ' ucrPnlFreqDisplay.AddParameterPresentCondition(rdoGraph, "fun")
 
-        ucrChkRow.SetParameter(New RParameter("show.row.prc", 4), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkRow.SetParameter(New RParameter("show.row.prc", 5), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkRow.SetText("Row (%)")
         ucrChkRow.SetRDefault("FALSE")
 
-        ucrChkCount.SetParameter(New RParameter("show.obs", 5), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkCount.SetParameter(New RParameter("show.obs", 6), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkCount.SetText("Count")
         ucrChkCount.SetRDefault("TRUE")
 
-        ucrChkColumn.SetParameter(New RParameter("show.col.prc", 6), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkColumn.SetParameter(New RParameter("show.col.prc", 7), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkColumn.SetText("Column (%)")
         ucrChkColumn.SetRDefault("FALSE")
 
-        ucrChkCell.SetParameter(New RParameter("show.cell.prc", 7), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkCell.SetParameter(New RParameter("show.cell.prc", 8), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkCell.SetText("Cell (%)")
         ucrChkCell.SetRDefault("FALSE")
 
@@ -98,7 +98,7 @@ Public Class dlgTwoWayFrequencies
         ucrChkWeights.SetParameter(ucrReceiverWeights.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkWeights.AddToLinkedControls(ucrReceiverWeights, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChkFlip.SetParameter(New RParameter("coord.flip", 3), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkFlip.SetParameter(New RParameter("coord.flip", 4), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkFlip.SetText("Flip Coordinates")
         ucrChkFlip.SetRDefault("FALSE")
 
@@ -144,7 +144,7 @@ Public Class dlgTwoWayFrequencies
     Public Sub SetRCodeForControls(bReset As Boolean)
         Dim clsTempParamOne As RParameter
         Dim clsTempParamTwo As RParameter
-        Dim clsTempParamData As RParameter
+        ' Dim clsTempParamData As RParameter
 
         clsTempParamOne = New RParameter("x", 0)
         ucrReceiverRowFactor.AddAdditionalCodeParameterPair(clsSjPlot, clsTempParamOne, iAdditionalPairNo:=1)
@@ -154,12 +154,12 @@ Public Class dlgTwoWayFrequencies
         ucrReceiverColumnFactor.AddAdditionalCodeParameterPair(clsSjPlot, clsTempParamTwo, iAdditionalPairNo:=1)
         clsTempParamTwo.bIncludeArgumentName = False
 
-        clsTempParamData = New RParameter("data", 0)
-        ucrSelectorTwoWayFrequencies.AddAdditionalCodeParameterPair(clsSjPlot, clsTempParamData, iAdditionalPairNo:=1)
-        clsTempParamTwo.bIncludeArgumentName = False
+        'clsTempParamData = New RParameter("data", 0)
+        'ucrSelectorTwoWayFrequencies.AddAdditionalCodeParameterPair(clsSjPlot, clsTempParamData, iAdditionalPairNo:=1)
+        'clsTempParamTwo.bIncludeArgumentName = False
 
-        ucrChkWeights.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("weight.by", 1), iAdditionalPairNo:=1)
-        ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjPlot, ucrChkWeights.GetParameter(), iAdditionalPairNo:=1)
+        ' ucrChkWeights.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("weight.by", 1), iAdditionalPairNo:=1)
+        ' ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjPlot, ucrChkWeights.GetParameter(), iAdditionalPairNo:=1)
 
         ucrReceiverRowFactor.SetRCode(clsSjTab, bReset)
         ucrReceiverColumnFactor.SetRCode(clsSjTab, bReset)
@@ -170,10 +170,12 @@ Public Class dlgTwoWayFrequencies
         ucrPnlFreqType.SetRCode(clsSjPlot, bReset)
         ucrPnlFreqDisplay.SetRCode(clsSjTab, bReset)
         ucrSelectorTwoWayFrequencies.SetRCode(clsSjTab, bReset)
+        ucrSelectorTwoWayFrequencies.SetRCode(clsSjPlot, bReset)
         ucrChkCell.SetRCode(clsSjTab, bReset)
         ucrChkColumn.SetRCode(clsSjTab, bReset)
         ucrChkRow.SetRCode(clsSjTab, bReset)
         ucrChkCount.SetRCode(clsSjTab, bReset)
+        ucrReceiverWeights.SetRCode(clsSjPlot, bReset)
     End Sub
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
