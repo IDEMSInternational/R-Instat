@@ -14,11 +14,13 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
+Imports RDotNet
 Public Class dlgRatingScales
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsSjplikert, clsSjpStackFrq, clsSjtStackFrq As New RFunction
+    Private clsSjplikert, clsSjpStackFrq, clsSjtStackFrq, clsLevelofFactor, clsFactorColumn As New RFunction
     Private Sub dlgRatingScales_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -52,7 +54,7 @@ Public Class dlgRatingScales
         ucrChkFlip.SetRCode(clsSjpStackFrq, bReset)
         ' ucrPnlType.SetRCode(clsSjplikert, bReset)
         ucrNudNeutralLevel.SetRCode(clsSjplikert, bReset)
-        ucrNudNeutralLevel.SetMinMax(1, Integer.MaxValue)
+
 
     End Sub
 
@@ -72,7 +74,6 @@ Public Class dlgRatingScales
 
         clsSjtStackFrq.SetRCommand("sjt.stackfrq")
         clsSjtStackFrq.AddParameter("sort.frq", "NULL")
-
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjtStackFrq)
     End Sub
@@ -218,6 +219,37 @@ Public Class dlgRatingScales
         End If
     End Sub
 
+    Private Function IsOdd(iNumb As Integer) As Boolean
+        If ((iNumb >= 2 Or iNumb <= -2) AndAlso (iNumb Mod 2 <> 0)) Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
+    Private Sub NumberOfLevels()
+        Dim iLevels As Integer
+        Dim iMedLevel As Integer
+
+        clsLevelofFactor.SetRCommand("nlevels")
+        clsFactorColumn.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+        clsFactorColumn.AddParameter("col_name", ucrReceiverOrderedFactors.GetVariableNames())
+        clsFactorColumn.AddParameter("data_name", Chr(34) & ucrSelectorRatingScale.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+        clsLevelofFactor.AddParameter("x", clsRFunctionParameter:=clsFactorColumn)
+
+        iLevels = frmMain.clsRLink.RunInternalScriptGetValue(clsLevelofFactor.ToScript).AsNumeric(0)
+
+        'to check it its even you can do this - see if you divide by two has a remeinder 
+        iMedLevel = (iLevels + 1) / 2
+        If IsOdd(iLevels) = True Then
+            ucrNudNeutralLevel.Visible = True
+            ucrNudNeutralLevel.Value = iMedLevel
+        Else
+            ucrNudNeutralLevel.Visible = False
+        End If
+        ucrNudNeutralLevel.SetMinMax(1, iLevels)
+    End Sub
+
     Private Sub ucrNudNeutralLevel_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudNeutralLevel.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrReceiverOrderedFactors.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged
         TestOkEnabled()
     End Sub
@@ -238,4 +270,13 @@ Public Class dlgRatingScales
         End If
     End Sub
 
+    Private Sub ucrReceiverOrderedFactors_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOrderedFactors.ControlValueChanged, ucrPnlGraphType.ControlValueChanged, ucrPnlType.ControlValueChanged
+        If Not ucrReceiverOrderedFactors.IsEmpty AndAlso rdoGraph.Checked Then
+            If rdoLikert.Checked Then
+                NumberOfLevels()
+            End If
+        Else
+            ucrNudNeutralLevel.SetMinMax(1, Integer.MaxValue)
+        End If
+    End Sub
 End Class
