@@ -14,7 +14,7 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
+
 Imports instat.Translations
 Imports RDotNet
 Public Class dlgRatingScales
@@ -36,24 +36,23 @@ Public Class dlgRatingScales
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrChkWeights.AddAdditionalCodeParameterPair(clsSjplikert, New RParameter("weight.by", 2), iAdditionalPairNo:=1)
-        ucrChkWeights.AddAdditionalCodeParameterPair(clsSjpStackFrq, New RParameter("weight.by", 2), iAdditionalPairNo:=2)
+        ucrReceiverOrderedFactors.SetRCode(clsSjtStackFrq)
+        ucrPnlSjpLikert.SetRCode(clsSjtStackFrq)
+        ucrChkFlip.SetRCode(clsSjpStackFrq, bReset)
+        ucrNudNeutralLevel.SetRCode(clsSjplikert, bReset)
+        ucrReceiverWeights.SetRCode(clsSjtStackFrq, bReset)
+        ucrPnlGraphType.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrPnlType.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+
+        ucrChkFlip.AddAdditionalCodeParameterPair(clsSjplikert, New RParameter("coord.flip", 3), iAdditionalPairNo:=1)
+        ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjplikert, New RParameter("weight.by", 2), iAdditionalPairNo:=1)
+        ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjpStackFrq, New RParameter("weight.by", 2), iAdditionalPairNo:=2)
         ucrReceiverOrderedFactors.AddAdditionalCodeParameterPair(clsSjplikert, New RParameter("items", 1), iAdditionalPairNo:=1)
         ucrReceiverOrderedFactors.AddAdditionalCodeParameterPair(clsSjpStackFrq, New RParameter("items", 1), iAdditionalPairNo:=2)
-        ucrReceiverWeights.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrPnlSjpLikert.AddAdditionalCodeParameterPair(clsSjpStackFrq, New RParameter("sort.frq", 3), iAdditionalPairNo:=1)
         ucrPnlSjpLikert.AddAdditionalCodeParameterPair(clsSjplikert, New RParameter("sort.frq", 3), iAdditionalPairNo:=2)
 
-        ucrReceiverOrderedFactors.SetRCode(clsSjtStackFrq)
-        ucrPnlSjpLikert.SetRCode(clsSjtStackFrq)
-        ucrPnlGraphType.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ' ucrPnlGraphType.SetRCode(clsSjplikert, bReset)
-        ucrPnlType.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrChkWeights.SetRCode(clsSjtStackFrq, bReset)
-        ucrChkFlip.SetRCode(clsSjplikert, bReset)
-        ucrChkFlip.SetRCode(clsSjpStackFrq, bReset)
-        ' ucrPnlType.SetRCode(clsSjplikert, bReset)
-        ucrNudNeutralLevel.SetRCode(clsSjplikert, bReset)
+
 
 
     End Sub
@@ -90,7 +89,7 @@ Public Class dlgRatingScales
         ucrReceiverWeights.SetParameterIsRFunction()
         ucrReceiverWeights.SetDataType("numeric")
 
-        ' ucrNudNeutralLevel.SetParameter(New RParameter("catcount", 4))
+        ucrNudNeutralLevel.SetParameter(New RParameter("catcount", 4))
 
         ucrChkWeights.SetText("Weights")
         ucrChkWeights.SetParameter(ucrReceiverWeights.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
