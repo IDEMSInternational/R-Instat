@@ -26,7 +26,7 @@ Public Class sdgOneWayFrequencies
     Public Sub InitialiseControls()
         Dim dctVerticalPositionLabel As New Dictionary(Of String, String)
         Dim dctHorizontalPositionLabel As New Dictionary(Of String, String)
-
+        Dim dctOmitZero As New Dictionary(Of String, String)
         ucrInputGraphTitle.SetParameter(New RParameter("title", 2))
 
         'Table Only
@@ -51,11 +51,13 @@ Public Class sdgOneWayFrequencies
         ucrChkShowSummary.SetText("Show Summary")
 
         'Table Only
-        'Default is auto
-        'skip.zero has three options: "auto", TRUE, FALSE so this could be a combobox instead
-        ucrChkOmitZero.SetParameter(New RParameter("skip.zero", 8), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        ucrChkOmitZero.SetText("Omit Zero Counts from Table")
-
+        ucrInputOmitZero.SetParameter(New RParameter("skip.zero", 8))
+        dctOmitZero.Add("Auto", Chr(34) & "auto" & Chr(34))
+        dctOmitZero.Add("True", Chr(34) & "TRUE" & Chr(34))
+        dctOmitZero.Add("False", Chr(34) & "FALSE" & Chr(34))
+        ucrInputOmitZero.SetItems(dctOmitZero)
+        ucrInputOmitZero.SetRDefault(Chr(34) & "auto" & Chr(34))
+        ucrInputOmitZero.bUpdateRCodeFromControl = False
         'Table Only
         ucrNudDecimalPlaces.SetParameter(New RParameter("digits", 10))
         ucrNudDecimalPlaces.SetMinMax(0, 4)
@@ -66,7 +68,7 @@ Public Class sdgOneWayFrequencies
         ucrPnlGraphType.AddRadioButton(rdoLine, Chr(34) & "line" & Chr(34))
         ucrPnlGraphType.AddRadioButton(rdoDot, Chr(34) & "dot" & Chr(34))
         ucrPnlGraphType.SetRDefault(Chr(34) & "bar" & Chr(34))
-
+        ucrPnlGraphType.bUpdateRCodeFromControl = False
         'Graph Only
         ucrChkShowCount.SetParameter(New RParameter("show.n", 5), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkShowCount.SetRDefault("FALSE")
@@ -108,12 +110,12 @@ Public Class sdgOneWayFrequencies
         ucrInputVerticalLabels.bUpdateRCodeFromControl = False
 
         'Graph Only
-        ucrSaveGraph.SetPrefix("one_way_freq")
-        ucrSaveGraph.SetSaveTypeAsGraph()
-        ucrSaveGraph.SetDataFrameSelector(dlgOneWayFrequencies.ucrSelectorOneWayFreq.ucrAvailableDataFrames)
-        ucrSaveGraph.SetCheckBoxText("Save Graph")
-        ucrSaveGraph.SetIsComboBox()
-        ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
+        ' ucrSaveGraph.SetPrefix("one_way_freq")
+        'ucrSaveGraph.SetSaveTypeAsGraph()
+        ' ucrSaveGraph.SetDataFrameSelector(dlgOneWayFrequencies.ucrSelectorOneWayFreq.ucrAvailableDataFrames)
+        'ucrSaveGraph.SetCheckBoxText("Save Graph")
+        ' ucrSaveGraph.SetIsComboBox()
+        ' ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
 
         bControlsInitialised = True
     End Sub
@@ -129,7 +131,7 @@ Public Class sdgOneWayFrequencies
         ucrChkShowSummary.SetRCode(clsOneWayTableFreq, bReset)
         ucrChkHighlightedRows.SetRCode(clsOneWayTableFreq, bReset)
         ucrNudDecimalPlaces.SetRCode(clsOneWayTableFreq, bReset)
-        ucrChkOmitZero.SetRCode(clsOneWayTableFreq, bReset)
+        ucrInputOmitZero.SetRCode(clsOneWayTableFreq, bReset)
         ucrInputCountsName.SetRCode(clsOneWayTableFreq, bReset)
         ucrChkCountName.SetRCode(clsOneWayTableFreq, bReset)
 
@@ -140,6 +142,6 @@ Public Class sdgOneWayFrequencies
         ucrInputVerticalLabels.SetRCode(clsOneWayGraphFreq, bReset)
         ucrInputHorizontalLabels.SetRCode(clsOneWayGraphFreq, bReset)
         ucrInputGraphTitle.SetRCode(clsOneWayGraphFreq, bReset)
-        ucrSaveGraph.SetRCode(clsOneWayGraphFreq, bReset)
+        ' ucrSaveGraph.SetRCode(clsOneWayGraphFreq, bReset)
     End Sub
 End Class
