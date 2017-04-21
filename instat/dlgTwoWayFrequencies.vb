@@ -74,13 +74,14 @@ Public Class dlgTwoWayFrequencies
 
         'Adding ucrPnlFreqType conditions
         ucrPnlFreqType.AddParameterValuesCondition(rdoCount, "fun", "grpfrq")
+        ucrPnlFreqType.AddParameterValuesCondition(rdoCount, "margin", False)
         ucrPnlFreqType.AddParameterValuesCondition(rdoRow, "fun", "xtab")
         ucrPnlFreqType.AddParameterValuesCondition(rdoRow, "margin", "row")
         ucrPnlFreqType.AddParameterValuesCondition(rdoCell, "fun", "xtab")
         ucrPnlFreqType.AddParameterValuesCondition(rdoCell, "margin", "cell")
         ucrPnlFreqType.AddParameterValuesCondition(rdoColumn, "fun", "xtab")
         ucrPnlFreqType.AddParameterValuesCondition(rdoColumn, "margin", "col")
-
+        ucrPnlFreqType.bAllowNonConditionValues = True
         ucrChkRow.SetParameter(New RParameter("show.row.prc", 5), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkRow.SetText("Row (%)")
         ucrChkRow.SetRDefault("FALSE")
@@ -139,10 +140,10 @@ Public Class dlgTwoWayFrequencies
         clsSjTab.AddParameter("show.obs", "TRUE")
         clsSjTab.AddParameter("show.summary", "FALSE")
         clsSjTab.AddParameter("digits", 0)
-        clsSjPlot.SetRCommand("sjplot")
         clsSjTab.AddParameter("fun", Chr(34) & "xtab" & Chr(34))
 
         'Defining Plot functions and default functions
+        clsSjPlot.SetRCommand("sjplot")
         clsSjPlot.AddParameter("show.prc", "TRUE")
         clsSjPlot.AddParameter("show.n", "TRUE")
         clsSjPlot.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorTwoWayFrequencies.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
@@ -172,7 +173,7 @@ Public Class dlgTwoWayFrequencies
         ucrChkWeights.SetRCode(clsSjTab, bReset)
         ucrChkFlip.SetRCode(clsSjPlot, bReset)
         ucrPnlFreqType.SetRCode(clsSjPlot, bReset)
-        ucrPnlFreqDisplay.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrPnlFreqDisplay.SetRCode(clsSjTab, bReset)
         ucrSelectorTwoWayFrequencies.SetRCode(clsSjTab, bReset)
         ucrChkCell.SetRCode(clsSjTab, bReset)
         ucrChkColumn.SetRCode(clsSjTab, bReset)
