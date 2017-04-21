@@ -1946,7 +1946,7 @@ data_object$set("public","set_climatic_types", function(types) {
 )
 
 #Method for creating inventory plot
-data_object$set("public","make_inventory_plot", function(date_col, station_col = c(), elements_cols, add_to_data = FALSE, coord_flip = FALSE, graph_title = "Inventory plot") {
+data_object$set("public","make_inventory_plot", function(date_col, station_col = c(), elements_cols, add_to_data = FALSE, coord_flip = FALSE, graph_title = "Data Availability") {
   if(!self$get_metadata(is_climatic_label))stop("Define data as climatic.")
   if(!is.Date(self$get_columns_from_data(date_col))) stop(paste(date_col, " must be of type date/time."))#this will not work!!!
   if(missing(date_col)||missing(elements_cols))stop("Date and elements columns must be specified.")
@@ -1999,26 +1999,15 @@ data_object$set("public","make_inventory_plot", function(date_col, station_col =
     new_col <- next_default_item(prefix = "recode", existing_names = self$get_column_names(), include_index = FALSE)
     curr_data[[new_col]] <- recode
     
-    curr_data$sequ <- seq(1:nrow(curr_data))
-    #ggplot(dt.df, aes(x = time, y = value)) +
-    #  geom_line(aes(color = variable)) +
-    #  facet_grid(variable ~ ., scales = "free_") +
-    #  # Suppress the legend since color isn't actually providing any information
-    #  opts(legend.position = "none")
-    
-    #g <- ggplot(data = curr_data, mapping = aes(x = year_column, colour = recode, group=doy_column)) + geom_histogram(stat = "count") + xlab("Year") + labs(color="Recode")
-    #g <- ggplot(data = curr_data, mapping = aes(x = year_column, y="" , colour = recode)) + geom_point() + xlab("Year") + ylab("DOY") + labs(color="Recode")
     g <- ggplot(data = curr_data, mapping = aes(x = year_column, y = doy_column, colour = recode, group = year_column)) + geom_point(size=5, shape=22) + xlab("Year") + ylab("DOY") + labs(color="Recode")
     if(!is.null(station_col)){
-      #g <- g + facet_grid(paste0(as.name(station_col), "~ ."), scales = "free_y", switch = "both") + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(),strip.background = element_blank(), strip.text.y = element_text(angle = 180))
       g <- g + facet_grid(paste0(as.name(station_col), "~ ."))
-      
     }
   }
   if(coord_flip) {
     g <- g + coord_flip()
   }
-  return(g+ggtitle(graph_title) + theme(plot.title = element_text(hjust = 0.5)))
+  return(g+ggtitle(graph_title) + theme(plot.title = element_text(hjust = 0.5), axis.text.y = element_blank(), axis.ticks.y = element_blank(),strip.background = element_blank(), strip.text.y = element_text(angle = 180)))
 }
 )
 
