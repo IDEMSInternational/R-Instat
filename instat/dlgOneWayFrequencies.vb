@@ -134,9 +134,7 @@ Public Class dlgOneWayFrequencies
         clsSjPlot.SetPackageName("sjPlot")
         clsSjPlot.SetRCommand("sjplot")
 
-
-        clsSjPlot.AddParameter("type", Chr(34) & "bar" & Chr(34))
-        clsSjPlot.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneWayFreq.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        'clsSjPlot.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneWayFreq.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
         ucrBase.clsRsyntax.SetBaseROperator(clsTableBaseOperator)
         bResetSubdialog = True
