@@ -26,7 +26,7 @@ Public Class sdgTwoWayFrequencies
         Dim dctVerticalPositionLabel As New Dictionary(Of String, String)
         Dim dctHorizontalPositionLabel As New Dictionary(Of String, String)
 
-        ucrInputHorizontalLabels.SetParameter(New RParameter("hjust", 12))
+        ucrInputHorizontalLabels.SetParameter(New RParameter("hjust", 13))
         dctHorizontalPositionLabel.Add("Left", Chr(34) & "left" & Chr(34))
         dctHorizontalPositionLabel.Add("Center", Chr(34) & "center" & Chr(34))
         dctHorizontalPositionLabel.Add("Right", Chr(34) & "right" & Chr(34))
@@ -38,7 +38,7 @@ Public Class sdgTwoWayFrequencies
         ucrInputHorizontalLabels.SetRDefault(Chr(34) & "center" & Chr(34))
         ucrInputHorizontalLabels.bUpdateRCodeFromControl = False
 
-        ucrInputVerticalLabels.SetParameter(New RParameter("vjust", 11))
+        ucrInputVerticalLabels.SetParameter(New RParameter("vjust", 12))
         dctVerticalPositionLabel.Add("Left", Chr(34) & "left" & Chr(34))
         dctVerticalPositionLabel.Add("Center", Chr(34) & "center" & Chr(34))
         dctVerticalPositionLabel.Add("Right", Chr(34) & "right" & Chr(34))
@@ -53,14 +53,14 @@ Public Class sdgTwoWayFrequencies
         ucrChkStack.SetText("Stack Bar Graph")
         ucrChkStack.SetRDefault(Chr(34) & "dodge" & Chr(34))
 
-        ucrChkShowSummary.SetParameter(New RParameter("show.summary", 8), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkShowSummary.SetParameter(New RParameter("show.summary", 9), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkShowSummary.SetText("Show Summary")
         ucrChkShowSummary.SetRDefault("TRUE")
 
-        ucrNudDecimalPlaces.SetParameter(New RParameter("digits", 9))
+        ucrNudDecimalPlaces.SetParameter(New RParameter("digits", 10))
         ucrNudDecimalPlaces.SetMinMax(0, 4)
 
-        ucrChkBackgroundColour.SetParameter(New RParameter("emph.total", 10), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkBackgroundColour.SetParameter(New RParameter("emph.total", 11), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkBackgroundColour.SetText("Totals Column/Row Background Highlighted")
         ucrChkBackgroundColour.SetRDefault("FALSE")
 
@@ -73,7 +73,7 @@ Public Class sdgTwoWayFrequencies
         ucrChkShowPercentage.SetRDefault("TRUE")
 
         ucrInputGraphTitle.SetParameter(New RParameter("title", 9))
-        ucrInputTableTitle.SetParameter(New RParameter("title", 13))
+        ucrInputTableTitle.SetParameter(New RParameter("title", 14))
 
         ucrChkShowModelSummary.SetParameter(New RParameter("show.summary", 7), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkShowModelSummary.SetText("Show Model Summary")
