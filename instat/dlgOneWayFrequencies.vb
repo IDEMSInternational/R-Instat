@@ -104,25 +104,25 @@ Public Class dlgOneWayFrequencies
         clsSjPlot = New RFunction
         clsPlotGrid = New RFunction
         clsTableBaseOperator = New ROperator
-        clsGraphBaseOperator = New ROperator
+        'clsGraphBaseOperator = New ROperator
         clsSelect = New RFunction
 
         ucrSelectorOneWayFreq.Reset()
         ucrReceiverOneWayFreq.SetMeAsReceiver()
 
+        clsPlotGrid.SetPackageName("sjPlot")
+        clsPlotGrid.SetRCommand("plot_grid")
+
         clsTableBaseOperator.SetOperation("%>%")
-        clsGraphBaseOperator.SetOperation("%>%")
+        'clsGraphBaseOperator.SetOperation("%>%")
         clsTableBaseOperator.AddParameter("select", clsRFunctionParameter:=clsSelect, iPosition:=1)
-        clsGraphBaseOperator.AddParameter("select", clsRFunctionParameter:=clsSelect, iPosition:=1)
+        'clsGraphBaseOperator.AddParameter("select", clsRFunctionParameter:=clsSelect, iPosition:=1)
         clsTableBaseOperator.AddParameter("sjtab", clsRFunctionParameter:=clsSjTab, iPosition:=2)
-        clsGraphBaseOperator.AddParameter("sjplot", clsRFunctionParameter:=clsSjPlot, iPosition:=2)
-        clsGraphBaseOperator.AddParameter("plot_grid", clsRFunctionParameter:=clsPlotGrid, iPosition:=3)
+        'clsGraphBaseOperator.AddParameter("sjplot", clsRFunctionParameter:=clsSjPlot, iPosition:=2)
+        clsPlotGrid.AddParameter("x", clsRFunctionParameter:=clsSjPlot)
 
         clsSelect.SetPackageName("dplyr")
         clsSelect.SetRCommand("select")
-
-        clsPlotGrid.SetPackageName("sjPlot")
-        clsPlotGrid.SetRCommand("plot_grid")
 
         clsSjTab.SetPackageName("sjPlot")
         clsSjTab.SetRCommand("sjtab")
@@ -136,7 +136,7 @@ Public Class dlgOneWayFrequencies
 
 
         clsSjPlot.AddParameter("type", Chr(34) & "bar" & Chr(34))
-        clsGraphBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneWayFreq.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        clsSjPlot.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneWayFreq.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
         ucrBase.clsRsyntax.SetBaseROperator(clsTableBaseOperator)
         bResetSubdialog = True
@@ -147,11 +147,12 @@ Public Class dlgOneWayFrequencies
         ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjPlot, ucrChkWeights.GetParameter(), iAdditionalPairNo:=1)
         ucrPnlSort.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("sort.frq", 3), iAdditionalPairNo:=1)
         ucrNudGroups.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("auto.group", 9), iAdditionalPairNo:=1)
-        ucrSelectorOneWayFreq.AddAdditionalCodeParameterPair(clsGraphBaseOperator, New RParameter("data"), iAdditionalPairNo:=1)
+        ' ucrSelectorOneWayFreq.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("data"), iAdditionalPairNo:=1)
+        'ucrSelectorOneWayFreq.SetParameterIncludeArgumentName(True)
 
         ucrReceiverWeights.SetRCode(clsSjTab, bReset)
         ucrSelectorOneWayFreq.SetRCode(clsTableBaseOperator, bReset)
-        'ucrSelectorOneWayFreq.SetRCode(clsGraphBaseOperator, bReset)
+        ucrSelectorOneWayFreq.SetRCode(clsSjPlot, bReset)
         ucrReceiverOneWayFreq.SetRCode(clsSelect, bReset)
         ucrPnlFrequencies.SetRCode(clsSjTab, bReset)
         ucrChkWeights.SetRCode(clsSjTab, bReset)
@@ -185,7 +186,7 @@ Public Class dlgOneWayFrequencies
             'ucrBase.clsRsyntax.bHTMLOutput = True
             ucrBase.clsRsyntax.iCallType = 0
         ElseIf rdoGraph.Checked Then
-            ucrBase.clsRsyntax.SetBaseROperator(clsGraphBaseOperator)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsPlotGrid)
             ' ucrBase.clsRsyntax.bHTMLOutput = False
             ucrBase.clsRsyntax.iCallType = 3
         End If
@@ -196,7 +197,7 @@ Public Class dlgOneWayFrequencies
         Dim strTempScript As String = ""
 
         If rdoBoth.Checked Then
-            strGraph = clsGraphBaseOperator.ToScript(strTempScript)
+            strGraph = clsPlotGrid.ToScript(strTempScript)
             frmMain.clsRLink.RunScript(strTempScript & strGraph, iCallType:=3)
         End If
     End Sub
