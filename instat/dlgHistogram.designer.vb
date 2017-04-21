@@ -38,7 +38,7 @@ Partial Class dlgHistogram
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(10, 330)
+        Me.cmdOptions.Location = New System.Drawing.Point(10, 276)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(120, 25)
         Me.cmdOptions.TabIndex = 8
@@ -48,7 +48,7 @@ Partial Class dlgHistogram
         '
         'cmdHistogramOptions
         '
-        Me.cmdHistogramOptions.Location = New System.Drawing.Point(9, 299)
+        Me.cmdHistogramOptions.Location = New System.Drawing.Point(9, 245)
         Me.cmdHistogramOptions.Name = "cmdHistogramOptions"
         Me.cmdHistogramOptions.Size = New System.Drawing.Size(120, 25)
         Me.cmdHistogramOptions.TabIndex = 8
@@ -110,7 +110,7 @@ Partial Class dlgHistogram
         'lblfactor
         '
         Me.lblfactor.AutoSize = True
-        Me.lblfactor.Location = New System.Drawing.Point(255, 267)
+        Me.lblfactor.Location = New System.Drawing.Point(247, 193)
         Me.lblfactor.Name = "lblfactor"
         Me.lblfactor.Size = New System.Drawing.Size(85, 13)
         Me.lblfactor.TabIndex = 5
@@ -120,7 +120,7 @@ Partial Class dlgHistogram
         'ucrVariablesAsFactorforHist
         '
         Me.ucrVariablesAsFactorforHist.frmParent = Me
-        Me.ucrVariablesAsFactorforHist.Location = New System.Drawing.Point(255, 117)
+        Me.ucrVariablesAsFactorforHist.Location = New System.Drawing.Point(250, 53)
         Me.ucrVariablesAsFactorforHist.Name = "ucrVariablesAsFactorforHist"
         Me.ucrVariablesAsFactorforHist.Selector = Nothing
         Me.ucrVariablesAsFactorforHist.Size = New System.Drawing.Size(125, 136)
@@ -131,7 +131,7 @@ Partial Class dlgHistogram
         'ucrFactorReceiver
         '
         Me.ucrFactorReceiver.frmParent = Me
-        Me.ucrFactorReceiver.Location = New System.Drawing.Point(255, 283)
+        Me.ucrFactorReceiver.Location = New System.Drawing.Point(247, 208)
         Me.ucrFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
         Me.ucrFactorReceiver.Selector = Nothing
@@ -143,7 +143,7 @@ Partial Class dlgHistogram
         '
         Me.ucrHistogramSelector.bShowHiddenColumns = False
         Me.ucrHistogramSelector.bUseCurrentFilter = True
-        Me.ucrHistogramSelector.Location = New System.Drawing.Point(9, 100)
+        Me.ucrHistogramSelector.Location = New System.Drawing.Point(9, 53)
         Me.ucrHistogramSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrHistogramSelector.Name = "ucrHistogramSelector"
         Me.ucrHistogramSelector.Size = New System.Drawing.Size(210, 180)
@@ -151,7 +151,7 @@ Partial Class dlgHistogram
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 391)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 337)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 10
@@ -165,7 +165,7 @@ Partial Class dlgHistogram
         '
         'ucrSaveHist
         '
-        Me.ucrSaveHist.Location = New System.Drawing.Point(13, 362)
+        Me.ucrSaveHist.Location = New System.Drawing.Point(10, 307)
         Me.ucrSaveHist.Name = "ucrSaveHist"
         Me.ucrSaveHist.Size = New System.Drawing.Size(362, 24)
         Me.ucrSaveHist.TabIndex = 12
@@ -174,7 +174,7 @@ Partial Class dlgHistogram
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(432, 446)
+        Me.ClientSize = New System.Drawing.Size(419, 399)
         Me.Controls.Add(Me.ucrSaveHist)
         Me.Controls.Add(Me.ucrVariablesAsFactorforHist)
         Me.Controls.Add(Me.ucrFactorReceiver)

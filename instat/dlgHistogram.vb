@@ -30,14 +30,12 @@ Public Class dlgHistogram
             'setdefaults
             InitialiseDialog()
             bFirstLoad = False
-        Else
-            'todo what happens when it reopens
-            ReopenDialog()
         End If
 
-        If breset Then
+        If bReset Then
             SetDefaults()
         End If
+
         SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
@@ -175,11 +173,6 @@ Public Class dlgHistogram
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
 
         TestOkEnabled()
-
-    End Sub
-
-    Private Sub ReopenDialog()
-        'TODO what happens on reopening
 
     End Sub
 
