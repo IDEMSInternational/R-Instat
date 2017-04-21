@@ -1982,10 +1982,8 @@ data_object$set("public","make_inventory_plot", function(date_col, station_col =
     recode <- as.factor(recode)
     new_col <- next_default_item(prefix = "recode", existing_names = names(col_data), include_index = FALSE)
     col_data[[new_col]] <- recode
-    #g <- ggplot(data = col_data, mapping = aes(x = year_column, y = doy_column , colour = recode, group = year_column)) + geom_point() + xlab("Year") + ylab("DOY") + labs(color="Recode")
-    g <- ggplot(data = col_data, mapping = aes(x = year_column, y = doy_column, colour = recode, group = year_column)) + geom_point(size=5, shape=22) + xlab("Year") + ylab("DOY") + labs(color="Recode")
+    g <- ggplot(data = col_data, mapping = aes(x = year_column, y = doy_column, colour = recode, group = year_column)) + geom_point(size=5, shape=15) + xlab("Year") + ylab("DOY") + labs(color="Recode")
     if(!is.null(station_col)){
-      #g <- g + facet_grid(paste0(as.name(station_col), "~ variable"), ncol=1, scales = "free_y", switch = "both") + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(),strip.background = element_blank(), strip.text.y = element_text(angle = 180))
       g <- g + facet_grid(as.formula(paste0(as.name(station_col),"+variable ~.")))
     }
     else{
@@ -1999,7 +1997,7 @@ data_object$set("public","make_inventory_plot", function(date_col, station_col =
     new_col <- next_default_item(prefix = "recode", existing_names = self$get_column_names(), include_index = FALSE)
     curr_data[[new_col]] <- recode
     
-    g <- ggplot(data = curr_data, mapping = aes(x = year_column, y = doy_column, colour = recode, group = year_column)) + geom_point(size=5, shape=22) + xlab("Year") + ylab("DOY") + labs(color="Recode")
+    g <- ggplot(data = curr_data, mapping = aes(x = year_column, y = doy_column, colour = recode, group = year_column)) + geom_point(size=5, shape=15) + xlab("Year") + ylab("DOY") + labs(color="Recode")
     if(!is.null(station_col)){
       g <- g + facet_grid(paste0(as.name(station_col), "~ ."))
     }
@@ -2007,7 +2005,7 @@ data_object$set("public","make_inventory_plot", function(date_col, station_col =
   if(coord_flip) {
     g <- g + coord_flip()
   }
-  return(g+ggtitle(graph_title) + theme(plot.title = element_text(hjust = 0.5), axis.text.y = element_blank(), axis.ticks.y = element_blank(),strip.background = element_blank(), strip.text.y = element_text(angle = 180)))
+  return(g+ggtitle(graph_title) + theme(plot.title = element_text(hjust = 0.5), axis.text.y = element_blank(), axis.ticks.y = element_blank(),strip.background = element_blank(), strip.text.y = element_text(angle = 0)))
 }
 )
 
