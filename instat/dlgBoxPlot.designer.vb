@@ -182,7 +182,7 @@ Partial Class dlgBoxplot
         '
         Me.ucrPnlPlots.Location = New System.Drawing.Point(100, 11)
         Me.ucrPnlPlots.Name = "ucrPnlPlots"
-        Me.ucrPnlPlots.Size = New System.Drawing.Size(274, 34)
+        Me.ucrPnlPlots.Size = New System.Drawing.Size(266, 26)
         Me.ucrPnlPlots.TabIndex = 15
         '
         'ucrChkVarwidth
