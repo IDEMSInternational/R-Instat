@@ -39,8 +39,6 @@ Public Class dlgTwoWayFrequencies
     Private Sub InitialiseDialog()
         'HelpID
         ' ucrBase.iHelpTopicID = 
-        'TODO after discussion.
-        rdoBoth.Enabled = False
 
         ucrReceiverColumnFactor.Selector = ucrSelectorTwoWayFrequencies
         ucrReceiverRowFactor.Selector = ucrSelectorTwoWayFrequencies
@@ -70,7 +68,6 @@ Public Class dlgTwoWayFrequencies
         ucrPnlFreqType.AddRadioButton(rdoColumn, Chr(34) & "xtab" & Chr(34))
         ucrPnlFreqType.AddRadioButton(rdoCell, Chr(34) & "xtab" & Chr(34))
 
-        'To be uncommented with slight adjustment after rdoBoth is agreed on (Dependent on it)
         ' ucrPnlFreqType.AddParameterPresentCondition(rdoCount, "fun")
         ' ucrPnlFreqType.AddParameterPresentCondition(rdoCount, "margin", False)
         ' ucrPnlFreqType.AddParameterPresentCondition(rdoCell, "fun")
@@ -120,7 +117,9 @@ Public Class dlgTwoWayFrequencies
         ucrPnlFreqDisplay.AddToLinkedControls(ucrChkRow, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFreqDisplay.AddToLinkedControls(ucrChkCell, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFreqDisplay.AddToLinkedControls(ucrChkColumn, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkColumn.SetLinkedDisplayControl(grpFreqTypeTable)
         ucrPnlFreqDisplay.AddToLinkedControls(ucrPnlFreqType, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoCount)
+        ucrPnlFreqType.SetLinkedDisplayControl(grpFreqTypeGraph)
 
     End Sub
 
@@ -128,6 +127,13 @@ Public Class dlgTwoWayFrequencies
         clsSjTab = New RFunction
         clsSjPlot = New RFunction
 
+        ucrPnlFreqDisplay.AddToLinkedControls(ucrPnlFreqType, {rdoBoth}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoCount)
+        ucrPnlFreqType.SetLinkedDisplayControl(grpFreqTypeGraph)
+        ucrPnlFreqDisplay.AddToLinkedControls(ucrChkCount, {rdoGraph, rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFreqDisplay.AddToLinkedControls(ucrChkRow, {rdoGraph, rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFreqDisplay.AddToLinkedControls(ucrChkCell, {rdoGraph, rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFreqDisplay.AddToLinkedControls(ucrChkColumn, {rdoGraph, rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkColumn.SetLinkedDisplayControl(grpFreqTypeTable)
         clsSjTab.AddParameter("fun", Chr(34) & "xtab" & Chr(34))
 
         ucrSelectorTwoWayFrequencies.Reset()
@@ -272,7 +278,7 @@ Public Class dlgTwoWayFrequencies
         End If
     End Sub
 
-    Private Sub ucrPnlFreqType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFreqType.ControlValueChanged, ucrPnlFreqDisplay.ControlValueChanged
+    Private Sub ucrPnlFreqType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFreqDisplay.ControlValueChanged
         If rdoCell.Checked Then
             ucrBase.clsRsyntax.AddParameter("margin", Chr(34) & "cell" & Chr(34))
         ElseIf rdoColumn.Checked Then
@@ -281,6 +287,18 @@ Public Class dlgTwoWayFrequencies
             ucrBase.clsRsyntax.AddParameter("margin", Chr(34) & "row" & Chr(34))
         Else
             ucrBase.clsRsyntax.RemoveParameter("margin")
+        End If
+        changelocation()
+    End Sub
+    Private Sub changelocation()
+        If rdoBoth.Checked Then
+            grpFreqTypeTable.Location = New Point(240, 166)
+            grpFreqTypeGraph.Location = New Point(341, 166)
+            Me.Size = New Size(459, 411)
+        Else
+            grpFreqTypeTable.Location = New Point(262, 159)
+            grpFreqTypeGraph.Location = New Point(262, 159)
+            Me.Size = New Size(426, 411)
         End If
     End Sub
 End Class
