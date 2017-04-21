@@ -107,21 +107,20 @@ Public Class dlgStringHandling
     End Sub
 
     Private Sub ChangeBaseFunction()
-        ucrSaveStringHandling.SetPrefix("")
         If rdoCount.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
-            ucrSaveStringHandling.SetName("count")
+            ucrSaveStringHandling.SetPrefix("count")
         ElseIf rdoDetect.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsDetectFunction)
-            ucrSaveStringHandling.SetName("detect")
+            ucrSaveStringHandling.SetPrefix("detect")
         ElseIf rdoExtract.Checked Then
-            ucrSaveStringHandling.SetName("extract")
+            ucrSaveStringHandling.SetPrefix("extract")
             ucrBase.clsRsyntax.SetBaseRFunction(clsExtractFunction)
         ElseIf rdoLocate.Checked Then
-            ucrSaveStringHandling.SetName("locate")
+            ucrSaveStringHandling.SetPrefix("locate")
             ucrBase.clsRsyntax.SetBaseRFunction(clsLocateFunction)
         ElseIf rdoReplace.Checked Then
-            ucrSaveStringHandling.SetName("replace")
+            ucrSaveStringHandling.SetPrefix("replace")
             ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceFunction)
         End If
         SetRCodeForControls(True)
