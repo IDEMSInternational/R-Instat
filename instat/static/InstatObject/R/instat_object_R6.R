@@ -758,6 +758,7 @@ instat_object$set("public", "sort_dataframe", function(data_name, col_names = c(
 )
 
 instat_object$set("public", "rename_dataframe", function(data_name, new_value = "", label = "") {
+  if(new_value %in% names(private$.data_objects)) stop("Cannot rename data frame since ", new_value, " is an existing data frame.")
   data_obj = self$get_data_objects(data_name)
   names(private$.data_objects)[names(private$.data_objects) == data_name] <- new_value
   data_obj$append_to_metadata(data_name_label, new_value)
