@@ -32,27 +32,17 @@ Public Class dlgImportFromODK
         TestOKEnabled()
     End Sub
 
-    Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-    End Sub
-
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 468
 
         ucrPnlPlatform.SetParameter(New RParameter("platform", 0))
         ucrPnlPlatform.AddRadioButton(rdoKobo, Chr(34) & "kobo" & Chr(34))
         ucrPnlPlatform.AddRadioButton(rdoOna, Chr(34) & "ona" & Chr(34))
+
         ucrInputChooseForm.SetParameter(New RParameter("form_name", 3))
         ucrInputChooseForm.bAllowNonConditionValues = True
-        ucrInputUsername.SetParameter(New RParameter("username", 1))
-    End Sub
 
-    Private Sub TestOKEnabled()
-        If Not ucrInputChooseForm.IsEmpty AndAlso Not ucrInputUsername.IsEmpty Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+        ucrInputUsername.SetParameter(New RParameter("username", 1))
     End Sub
 
     Private Sub SetDefaults()
@@ -68,6 +58,18 @@ Public Class dlgImportFromODK
         clsGetFormsFunction.SetRCommand("get_odk_form_names")
         clsGetFormsFunction.AddParameter("platform", Chr(34) & "kobo" & Chr(34))
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
+    End Sub
+
+    Private Sub TestOKEnabled()
+        If Not ucrInputChooseForm.IsEmpty AndAlso Not ucrInputUsername.IsEmpty Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
