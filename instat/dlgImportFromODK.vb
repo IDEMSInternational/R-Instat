@@ -95,7 +95,16 @@ Public Class dlgImportFromODK
         TestOKEnabled()
     End Sub
 
-    Private Sub AllControls_ContentsChnaged(ucrChangedControl As ucrCore) Handles ucrInputChooseForm.ControlContentsChanged, ucrInputUsername.ControlContentsChanged ', ucrInputPassword.ControlContentsChanged 
+    Private Sub ucrInputUsername_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputUsername.ControlContentsChanged
+        If ucrInputUsername.IsEmpty() Then
+            cmdFindForms.Enabled = False
+        Else
+            cmdFindForms.Enabled = True
+        End If
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrInputChooseForm_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputChooseForm.ControlContentsChanged, ucrInputUsername.ControlContentsChanged ', ucrInputPassword.ControlContentsChanged 
         TestOKEnabled()
     End Sub
 
