@@ -181,7 +181,7 @@ Partial Class dlgViewFactorLabels
         Me.MinimizeBox = False
         Me.Name = "dlgViewFactorLabels"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "View Factor Labels/Levels"
+        Me.Text = "View Variable(s) Levels/Labels"
         Me.grpFactorLabels.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
