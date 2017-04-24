@@ -63,7 +63,6 @@ Public Class dlgClimSoft
         ucrChkObservationData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkObservationData.SetRDefault("FALSE")
 
-
         ucrInputStartDate.SetParameter(New RParameter("start_date", 3))
         ucrInputStartDate.SetLinkedDisplayControl(lblStartDate)
         ttClimsoft.SetToolTip(ucrInputStartDate.txtInput, "yyyy-mm-dd")
