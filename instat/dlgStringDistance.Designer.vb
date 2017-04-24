@@ -39,7 +39,7 @@ Partial Class dlgStringDistance
         Me.lblColumn.Location = New System.Drawing.Point(199, 35)
         Me.lblColumn.Name = "lblColumn"
         Me.lblColumn.Size = New System.Drawing.Size(45, 13)
-        Me.lblColumn.TabIndex = 5
+        Me.lblColumn.TabIndex = 1
         Me.lblColumn.Text = "Column:"
         '
         'lblPattern
@@ -48,7 +48,7 @@ Partial Class dlgStringDistance
         Me.lblPattern.Location = New System.Drawing.Point(199, 93)
         Me.lblPattern.Name = "lblPattern"
         Me.lblPattern.Size = New System.Drawing.Size(44, 13)
-        Me.lblPattern.TabIndex = 6
+        Me.lblPattern.TabIndex = 3
         Me.lblPattern.Text = "Pattern:"
         '
         'lblMethod
@@ -57,7 +57,7 @@ Partial Class dlgStringDistance
         Me.lblMethod.Location = New System.Drawing.Point(199, 156)
         Me.lblMethod.Name = "lblMethod"
         Me.lblMethod.Size = New System.Drawing.Size(46, 13)
-        Me.lblMethod.TabIndex = 8
+        Me.lblMethod.TabIndex = 5
         Me.lblMethod.Text = "Method:"
         '
         'ucrInputComboBoxMethod
@@ -67,14 +67,14 @@ Partial Class dlgStringDistance
         Me.ucrInputComboBoxMethod.Location = New System.Drawing.Point(202, 172)
         Me.ucrInputComboBoxMethod.Name = "ucrInputComboBoxMethod"
         Me.ucrInputComboBoxMethod.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputComboBoxMethod.TabIndex = 7
+        Me.ucrInputComboBoxMethod.TabIndex = 6
         '
         'ucrSaveStringDistance
         '
         Me.ucrSaveStringDistance.Location = New System.Drawing.Point(10, 218)
         Me.ucrSaveStringDistance.Name = "ucrSaveStringDistance"
         Me.ucrSaveStringDistance.Size = New System.Drawing.Size(398, 24)
-        Me.ucrSaveStringDistance.TabIndex = 4
+        Me.ucrSaveStringDistance.TabIndex = 7
         '
         'ucrInputPatternStringDistance
         '
@@ -84,7 +84,7 @@ Partial Class dlgStringDistance
         Me.ucrInputPatternStringDistance.Location = New System.Drawing.Point(202, 109)
         Me.ucrInputPatternStringDistance.Name = "ucrInputPatternStringDistance"
         Me.ucrInputPatternStringDistance.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputPatternStringDistance.TabIndex = 3
+        Me.ucrInputPatternStringDistance.TabIndex = 4
         '
         'ucrReceiverStringDistance
         '
@@ -105,14 +105,14 @@ Partial Class dlgStringDistance
         Me.ucrSelectorStringDistance.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorStringDistance.Name = "ucrSelectorStringDistance"
         Me.ucrSelectorStringDistance.Size = New System.Drawing.Size(120, 180)
-        Me.ucrSelectorStringDistance.TabIndex = 1
+        Me.ucrSelectorStringDistance.TabIndex = 0
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(10, 264)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.TabIndex = 8
         '
         'dlgStringDistance
         '

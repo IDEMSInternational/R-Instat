@@ -66,14 +66,8 @@ Public Class dlgStringDistance
         ucrSaveStringDistance.SetIsTextBox()
         ucrSaveStringDistance.SetLabelText("Save Result")
 
-
         clsStringDistFunction.SetAssignTo(ucrSaveStringDistance.GetText, strTempDataframe:=ucrSelectorStringDistance.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveStringDistance.GetText, bAssignToIsPrefix:=True)
         ucrBase.clsRsyntax.SetBaseRFunction(clsStringDistFunction)
-
-
-
-
-
 
     End Sub
 
