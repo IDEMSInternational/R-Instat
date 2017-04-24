@@ -2984,6 +2984,12 @@ Partial Class frmMain
         Me.mnuPrepareColumnTextFindStringHandling.Size = New System.Drawing.Size(166, 22)
         Me.mnuPrepareColumnTextFindStringHandling.Text = "String Handling..."
         '
+        'mnuPrepareColumnTextFindStringHandling
+        '
+        Me.mnuPrepareColumnTextFindStringHandling.Name = "mnuPrepareColumnTextFindStringHandling"
+        Me.mnuPrepareColumnTextFindStringHandling.Size = New System.Drawing.Size(166, 22)
+        Me.mnuPrepareColumnTextFindStringHandling.Text = "String Handling..."
+        '
         'mnuPrepareColumnTextTransform
         '
         Me.mnuPrepareColumnTextTransform.Name = "mnuPrepareColumnTextTransform"
@@ -3015,11 +3021,10 @@ Partial Class frmMain
         '
         'mnuPrepareColumnTextDistance
         '
-        Me.mnuPrepareColumnTextDistance.Enabled = False
         Me.mnuPrepareColumnTextDistance.Name = "mnuPrepareColumnTextDistance"
         Me.mnuPrepareColumnTextDistance.Size = New System.Drawing.Size(152, 22)
         Me.mnuPrepareColumnTextDistance.Tag = "Distance..."
-        Me.mnuPrepareColumnTextDistance.Text = "Distance..."
+        Me.mnuPrepareColumnTextDistance.Text = "Distance"
         '
         'mnuPrepareColumnDate
         '
