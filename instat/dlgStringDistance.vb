@@ -74,6 +74,7 @@ Public Class dlgStringDistance
 
         clsStringDistFunction = New RFunction
         ucrSelectorStringDistance.Reset()
+        ucrInputComboBoxMethod.Reset()
         ucrInputPatternStringDistance.Reset()
         ucrSaveStringDistance.Reset()
         clsStringDistFunction.SetPackageName("stringdist")
@@ -95,14 +96,13 @@ Public Class dlgStringDistance
         End If
     End Sub
 
-
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
 
-    Private Sub UcrReceiverStringDistance_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStringDistance.ControlContentsChanged, ucrSaveStringDistance.ControlContentsChanged
+    Private Sub UcrReceiverStringDistance_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStringDistance.ControlContentsChanged, ucrSaveStringDistance.ControlContentsChanged, ucrInputComboBoxMethod.ControlContentsChanged, ucrInputPatternStringDistance.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
