@@ -90,4 +90,16 @@ Module mdlCoreControl
         Next
         Return bTemp
     End Function
+
+    Public Function ExtractItemsFromRList(strTemp As String) As String()
+        Dim lstVariables As String()
+        If strTemp.StartsWith("c(") Then
+            strTemp = strTemp.Substring(2)
+        End If
+        lstVariables = strTemp.Split(",")
+        For i As Integer = 0 To lstVariables.Count - 1
+            lstVariables(i) = lstVariables(i).Trim(Chr(34), " ", Chr(39), ")")
+        Next
+        Return lstVariables
+    End Function
 End Module

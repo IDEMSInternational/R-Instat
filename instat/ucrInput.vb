@@ -32,7 +32,7 @@ Public Class ucrInput
     Protected bIsReadOnly As Boolean = False
     Public bAutoChangeOnLeave As Boolean = False
     Private bLastSilent As Boolean = False
-    Public bAddQuotesIfUnrecognised As Boolean = True
+    Private bPrivateAddQuotesIfUnrecognised As Boolean = True
     Protected dctDisplayParameterValues As New Dictionary(Of String, String)
 
     Public Sub New()
@@ -58,20 +58,22 @@ Public Class ucrInput
 
     Public Sub OnNameChanged()
         Me.Text = Me.GetText()
-        If bChangeParameterValue AndAlso clsParameter IsNot Nothing Then
+        RaiseEvent NameChanged()
+        OnControlValueChanged()
+    End Sub
+
+    Protected Overrides Sub UpdateParameter(clsTempParam As RParameter)
+        If bChangeParameterValue AndAlso clsTempParam IsNot Nothing Then
             If dctDisplayParameterValues.ContainsKey(GetText()) Then
-                clsParameter.SetArgumentValue(dctDisplayParameterValues(GetText()))
+                clsTempParam.SetArgumentValue(dctDisplayParameterValues(GetText()))
             Else
-                If bAddQuotesIfUnrecognised Then
-                    clsParameter.SetArgumentValue(Chr(34) & GetText() & Chr(34))
+                If AddQuotesIfUnrecognised Then
+                    clsTempParam.SetArgumentValue(Chr(34) & GetText() & Chr(34))
                 Else
-                    clsParameter.SetArgumentValue(GetText())
+                    clsTempParam.SetArgumentValue(GetText())
                 End If
             End If
         End If
-        UpdateRCode()
-        RaiseEvent NameChanged()
-        OnControlValueChanged()
     End Sub
 
     Public Sub OnContentsChanged()
@@ -402,28 +404,33 @@ Public Class ucrInput
     End Property
 
     Protected Overrides Sub SetToValue(objTemp As Object)
-        SetName(objTemp.ToString())
+        If objTemp IsNot Nothing Then
+            SetName(objTemp.ToString())
+        End If
     End Sub
 
     Public Overrides Function GetValueToSet() As Object
-        If clsParameter IsNot Nothing Then
-            If clsParameter.bIsString Then
-                If dctDisplayParameterValues.ContainsKey(clsParameter.strArgumentValue) Then
-                    Return clsParameter.strArgumentValue
+        Dim clsMainParameter As RParameter
+
+        clsMainParameter = GetParameter()
+        If clsMainParameter IsNot Nothing Then
+            If clsMainParameter.bIsString Then
+                If dctDisplayParameterValues.ContainsKey(clsMainParameter.strArgumentValue) Then
+                    Return clsMainParameter.strArgumentValue
                 Else
-                    If bAddQuotesIfUnrecognised Then
-                        Return clsParameter.strArgumentValue.Trim(Chr(34))
+                    If AddQuotesIfUnrecognised Then
+                        Return clsMainParameter.strArgumentValue.Trim(Chr(34))
                     Else
-                        Return clsParameter.strArgumentValue
+                        Return clsMainParameter.strArgumentValue
                     End If
                 End If
-            ElseIf clsParameter.bIsFunction OrElse clsParameter.bIsOperator Then
-                Return clsParameter.clsArgumentCodeStructure
-                Else
-                    Return Nothing
+            ElseIf clsMainParameter.bIsFunction OrElse clsMainParameter.bIsOperator Then
+                Return clsMainParameter.clsArgumentCodeStructure
+            Else
+                Return ""
             End If
         Else
-            Return Nothing
+            Return ""
         End If
     End Function
 
@@ -440,4 +447,25 @@ Public Class ucrInput
     Public Sub AddToParameterValueItemsPairs(strDisplayValue As String, strParameterValue As String)
         dctDisplayParameterValues.Add(strDisplayValue, strParameterValue)
     End Sub
+
+    Public Property AddQuotesIfUnrecognised As Boolean
+        Get
+            Return bPrivateAddQuotesIfUnrecognised
+        End Get
+        Set(bValue As Boolean)
+            bPrivateAddQuotesIfUnrecognised = bValue
+            If GetText() IsNot Nothing Then
+                SetName(GetText().Trim(Chr(34)))
+            End If
+        End Set
+    End Property
+
+    Public Overrides Function ControlValueContainedIn(lstTemp() As Object) As Boolean
+        For Each objTemp As Object In lstTemp
+            If objTemp.ToString() = GetText() Then
+                Return True
+            End If
+        Next
+        Return False
+    End Function
 End Class

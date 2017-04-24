@@ -102,6 +102,7 @@ Partial Class dlgCumulativeDistribution
         '
         'ucrFactorReceiver
         '
+        Me.ucrFactorReceiver.frmParent = Me
         Me.ucrFactorReceiver.Location = New System.Drawing.Point(255, 188)
         Me.ucrFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
@@ -163,7 +164,7 @@ Partial Class dlgCumulativeDistribution
         Me.Name = "dlgCumulativeDistribution"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Cumulative_Distribution"
-        Me.Text = "Cumulative Distribution"
+        Me.Text = "Cumulative/Exceedance Graphs"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

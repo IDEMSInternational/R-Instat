@@ -131,7 +131,7 @@ Public Class ucrReceiverSingle
             Select Case strCurrentType
                 Case "column"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
-                    clsGetVariablesFunc.AddParameter("col_name", GetVariableNames())
+                    clsGetVariablesFunc.AddParameter("col_names", GetVariableNames())
                     If bForceAsDataFrame Then
                         clsGetVariablesFunc.AddParameter("force_as_data_frame", "TRUE")
                     Else
@@ -248,7 +248,7 @@ Public Class ucrReceiverSingle
         MyBase.UpdateControl(bReset)
     End Sub
 
-    Private Sub Selector_DataFrameChanged() Handles Selector.DataFrameChanged
+    Private Sub Selector_DataFrameChanged() Handles ucrSelector.DataFrameChanged
         CheckAutoFill()
     End Sub
 

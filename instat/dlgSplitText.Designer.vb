@@ -62,6 +62,8 @@ Partial Class dlgSplitText
         '
         'ucrInputPattern
         '
+        Me.ucrInputPattern.bAddRemoveParameter = True
+        Me.ucrInputPattern.bChangeParameterValue = True
         Me.ucrInputPattern.IsReadOnly = False
         Me.ucrInputPattern.Location = New System.Drawing.Point(272, 96)
         Me.ucrInputPattern.Name = "ucrInputPattern"
@@ -70,6 +72,8 @@ Partial Class dlgSplitText
         '
         'ucrReceiverSplitTextColumn
         '
+        Me.ucrReceiverSplitTextColumn.bAddRemoveParameter = True
+        Me.ucrReceiverSplitTextColumn.bChangeParameterValue = True
         Me.ucrReceiverSplitTextColumn.frmParent = Me
         Me.ucrReceiverSplitTextColumn.Location = New System.Drawing.Point(272, 53)
         Me.ucrReceiverSplitTextColumn.Margin = New System.Windows.Forms.Padding(0)
@@ -80,6 +84,8 @@ Partial Class dlgSplitText
         '
         'ucrSelectorSplitTextColumn
         '
+        Me.ucrSelectorSplitTextColumn.bAddRemoveParameter = True
+        Me.ucrSelectorSplitTextColumn.bChangeParameterValue = True
         Me.ucrSelectorSplitTextColumn.bShowHiddenColumns = False
         Me.ucrSelectorSplitTextColumn.bUseCurrentFilter = True
         Me.ucrSelectorSplitTextColumn.Location = New System.Drawing.Point(10, 10)
@@ -93,24 +99,30 @@ Partial Class dlgSplitText
         Me.ucrBase.Location = New System.Drawing.Point(10, 230)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 9
+        Me.ucrBase.TabIndex = 8
         '
         'ucrNudPieces
         '
+        Me.ucrNudPieces.bAddRemoveParameter = True
+        Me.ucrNudPieces.bChangeParameterValue = True
+        Me.ucrNudPieces.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPieces.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudPieces.Location = New System.Drawing.Point(274, 153)
         Me.ucrNudPieces.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudPieces.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPieces.Name = "ucrNudPieces"
         Me.ucrNudPieces.Size = New System.Drawing.Size(41, 20)
-        Me.ucrNudPieces.TabIndex = 10
+        Me.ucrNudPieces.TabIndex = 6
         Me.ucrNudPieces.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrSaveColumn
         '
+        Me.ucrSaveColumn.bAddRemoveParameter = True
+        Me.ucrSaveColumn.bChangeParameterValue = True
         Me.ucrSaveColumn.Location = New System.Drawing.Point(10, 200)
         Me.ucrSaveColumn.Name = "ucrSaveColumn"
         Me.ucrSaveColumn.Size = New System.Drawing.Size(305, 24)
-        Me.ucrSaveColumn.TabIndex = 11
+        Me.ucrSaveColumn.TabIndex = 7
         '
         'dlgSplitText
         '

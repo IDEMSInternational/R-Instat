@@ -15,13 +15,50 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgDisplayDailyDataRain
+    Public bFirstLoad As Boolean = True
+    Public bReset As Boolean = True
     Private Sub dlgDisplayDailyDataRain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        ucrBase.clsRsyntax.SetFunction("climate_obj$display_daily_rain()")
-        ucrBase.clsRsyntax.iCallType = 0
+        If bFirstLoad Then
+            InitialiseDialog()
+            bFirstLoad = False
+        End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        ReopenDialog()
+        TestOKEnabled()
     End Sub
 
 
+    Private Sub InitialiseDialog()
+        ucrBase.clsRsyntax.iCallType = 0
+    End Sub
 
+    Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
 
+        clsDefaultFunction.SetRCommand("climate_obj$display_daily_rain()")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+    End Sub
+
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
+    Private Sub ReopenDialog()
+
+    End Sub
+
+    Private Sub TestOKEnabled()
+
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOKEnabled()
+    End Sub
 End Class

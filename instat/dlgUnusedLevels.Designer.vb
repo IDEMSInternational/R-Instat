@@ -52,6 +52,7 @@ Partial Class dlgUnusedLevels
         '
         'ucrReceiverFactorColumn
         '
+        Me.ucrReceiverFactorColumn.frmParent = Me
         Me.ucrReceiverFactorColumn.Location = New System.Drawing.Point(239, 47)
         Me.ucrReceiverFactorColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFactorColumn.Name = "ucrReceiverFactorColumn"
