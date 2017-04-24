@@ -485,6 +485,12 @@
     <Compile Include="dlgTemperature.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgThreeVariableFrequencies.Designer.vb">
+      <DependentUpon>dlgThreeVariableFrequencies.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgThreeVariableFrequencies.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgTwoVariableUseModel.Designer.vb">
       <DependentUpon>dlgTwoVariableUseModel.vb</DependentUpon>
     </Compile>
@@ -2871,6 +2877,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgThemes.sw-KE.resx">
       <DependentUpon>dlgThemes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgThreeVariableFrequencies.resx">
+      <DependentUpon>dlgThreeVariableFrequencies.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTransformText.fr-FR.resx">
       <DependentUpon>dlgTransformText.vb</DependentUpon>
