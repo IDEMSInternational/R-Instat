@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class dlgFactorLabels
+Partial Class dlgViewFactorLabels
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -24,7 +24,7 @@ Partial Class dlgFactorLabels
     Private Sub InitializeComponent()
         Me.SuspendLayout()
         '
-        'dlgFactorLabels
+        'dlgViewFactorLabels
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -32,9 +32,9 @@ Partial Class dlgFactorLabels
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgFactorLabels"
+        Me.Name = "dlgViewFactorLabels"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Factor Labels"
+        Me.Text = "View Factor Labels"
         Me.ResumeLayout(False)
 
     End Sub
