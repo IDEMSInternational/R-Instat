@@ -73,7 +73,7 @@ Partial Class dlgStringDistance
         '
         Me.ucrSaveStringDistance.Location = New System.Drawing.Point(10, 218)
         Me.ucrSaveStringDistance.Name = "ucrSaveStringDistance"
-        Me.ucrSaveStringDistance.Size = New System.Drawing.Size(398, 24)
+        Me.ucrSaveStringDistance.Size = New System.Drawing.Size(262, 24)
         Me.ucrSaveStringDistance.TabIndex = 7
         '
         'ucrInputPatternStringDistance
@@ -111,7 +111,7 @@ Partial Class dlgStringDistance
         '
         Me.ucrBase.Location = New System.Drawing.Point(10, 264)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(399, 52)
         Me.ucrBase.TabIndex = 8
         '
         'dlgStringDistance

@@ -67,7 +67,6 @@ Public Class dlgStringDistance
         ucrSaveStringDistance.SetLabelText("Save Result")
 
         clsStringDistFunction.SetAssignTo(ucrSaveStringDistance.GetText, strTempDataframe:=ucrSelectorStringDistance.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveStringDistance.GetText, bAssignToIsPrefix:=True)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsStringDistFunction)
 
     End Sub
 
@@ -94,7 +93,6 @@ Public Class dlgStringDistance
         Else
             ucrBase.OKEnabled(False)
         End If
-
     End Sub
 
 
@@ -104,8 +102,7 @@ Public Class dlgStringDistance
         TestOkEnabled()
     End Sub
 
-    Private Sub UcrReceiverStringDistance_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStringDistance.ControlContentsChanged
+    Private Sub UcrReceiverStringDistance_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStringDistance.ControlContentsChanged, ucrSaveStringDistance.ControlContentsChanged
         TestOkEnabled()
     End Sub
-
 End Class
