@@ -142,4 +142,9 @@ Public Class ucrSelectorByDataFrame
             MyBase.UpdateParameter(clsTempParam)
         End If
     End Sub
+
+    Public Overrides Sub AddAdditionalCodeParameterPair(clsNewRCode As RCodeStructure, clsNewRParameter As RParameter, Optional iAdditionalPairNo As Integer = -1)
+        MyBase.AddAdditionalCodeParameterPair(clsNewRCode, clsNewRParameter, iAdditionalPairNo)
+        ucrAvailableDataFrames.AddAdditionalCodeParameterPair(clsNewRCode, clsNewRParameter, iAdditionalPairNo)
+    End Sub
 End Class
