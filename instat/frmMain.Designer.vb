@@ -369,6 +369,7 @@ Partial Class frmMain
         Me.mnuPrepareColumnFactorDummyVariables = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator14 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuPrepareColumnFactorLevelsLabels = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnFactorReorderLevels = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnFactorReferenceLevel = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnFactorUnusedLevels = New System.Windows.Forms.ToolStripMenuItem()
@@ -377,7 +378,6 @@ Partial Class frmMain
         Me.mnuPrepareColumnFactorFactorDataFrame = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnText = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnTextFindReplace = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuPrepareColumnTextFindStringHandling = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnTextTransform = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnTextSplit = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnTextCombine = New System.Windows.Forms.ToolStripMenuItem()
@@ -580,24 +580,24 @@ Partial Class frmMain
         'mnuDescribeThreeVariableSummarise
         '
         Me.mnuDescribeThreeVariableSummarise.Name = "mnuDescribeThreeVariableSummarise"
-        Me.mnuDescribeThreeVariableSummarise.Size = New System.Drawing.Size(142, 22)
+        Me.mnuDescribeThreeVariableSummarise.Size = New System.Drawing.Size(152, 22)
         Me.mnuDescribeThreeVariableSummarise.Text = "Summarise..."
         '
         'mnuDescribeThreeVariableGraph
         '
         Me.mnuDescribeThreeVariableGraph.Name = "mnuDescribeThreeVariableGraph"
-        Me.mnuDescribeThreeVariableGraph.Size = New System.Drawing.Size(142, 22)
+        Me.mnuDescribeThreeVariableGraph.Size = New System.Drawing.Size(152, 22)
         Me.mnuDescribeThreeVariableGraph.Text = "Graph..."
         '
         'ToolStripSeparator36
         '
         Me.ToolStripSeparator36.Name = "ToolStripSeparator36"
-        Me.ToolStripSeparator36.Size = New System.Drawing.Size(139, 6)
+        Me.ToolStripSeparator36.Size = New System.Drawing.Size(149, 6)
         '
         'mnuDescribeThreeVariableFrequencies
         '
         Me.mnuDescribeThreeVariableFrequencies.Name = "mnuDescribeThreeVariableFrequencies"
-        Me.mnuDescribeThreeVariableFrequencies.Size = New System.Drawing.Size(142, 22)
+        Me.mnuDescribeThreeVariableFrequencies.Size = New System.Drawing.Size(152, 22)
         Me.mnuDescribeThreeVariableFrequencies.Text = "Frequencies"
         '
         'mnuDescribeSpecific
@@ -780,7 +780,6 @@ Partial Class frmMain
         '
         'mnuDescribeOtherGraphicsDialogsInventoryPlot
         '
-        Me.mnuDescribeOtherGraphicsDialogsInventoryPlot.Enabled = False
         Me.mnuDescribeOtherGraphicsDialogsInventoryPlot.Name = "mnuDescribeOtherGraphicsDialogsInventoryPlot"
         Me.mnuDescribeOtherGraphicsDialogsInventoryPlot.Size = New System.Drawing.Size(209, 22)
         Me.mnuDescribeOtherGraphicsDialogsInventoryPlot.Tag = "Inventory_Plot..."
@@ -2864,7 +2863,7 @@ Partial Class frmMain
         '
         'mnuPrepareColumnFactor
         '
-        Me.mnuPrepareColumnFactor.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnFactorConvertToFactor, Me.mnuPrepareColumnFactorRecodeNumeric, Me.ToolStripSeparator12, Me.mnuPrepareColumnFactorRecodeFactor, Me.mnuPrepareColumnFactorCombineFactors, Me.mnuPrepareColumnFactorDummyVariables, Me.ToolStripSeparator14, Me.mnuPrepareColumnFactorLevelsLabels, Me.mnuPrepareColumnFactorReorderLevels, Me.mnuPrepareColumnFactorReferenceLevel, Me.mnuPrepareColumnFactorUnusedLevels, Me.mnuPrepareColumnFactorContrasts, Me.ToolStripSeparator19, Me.mnuPrepareColumnFactorFactorDataFrame})
+        Me.mnuPrepareColumnFactor.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnFactorConvertToFactor, Me.mnuPrepareColumnFactorRecodeNumeric, Me.ToolStripSeparator12, Me.mnuPrepareColumnFactorRecodeFactor, Me.mnuPrepareColumnFactorCombineFactors, Me.mnuPrepareColumnFactorDummyVariables, Me.ToolStripSeparator14, Me.mnuPrepareColumnFactorLevelsLabels, Me.ToolStripMenuItem2, Me.mnuPrepareColumnFactorReorderLevels, Me.mnuPrepareColumnFactorReferenceLevel, Me.mnuPrepareColumnFactorUnusedLevels, Me.mnuPrepareColumnFactorContrasts, Me.ToolStripSeparator19, Me.mnuPrepareColumnFactorFactorDataFrame})
         Me.mnuPrepareColumnFactor.Name = "mnuPrepareColumnFactor"
         Me.mnuPrepareColumnFactor.Size = New System.Drawing.Size(172, 22)
         Me.mnuPrepareColumnFactor.Tag = "Column:_Factor"
@@ -2922,6 +2921,12 @@ Partial Class frmMain
         Me.mnuPrepareColumnFactorLevelsLabels.Tag = "Levels/Labels..."
         Me.mnuPrepareColumnFactorLevelsLabels.Text = "Levels/Labels..."
         '
+        'ToolStripMenuItem2
+        '
+        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(179, 22)
+        Me.ToolStripMenuItem2.Text = "View Labels..."
+        '
         'mnuPrepareColumnFactorReorderLevels
         '
         Me.mnuPrepareColumnFactorReorderLevels.Name = "mnuPrepareColumnFactorReorderLevels"
@@ -2972,36 +2977,29 @@ Partial Class frmMain
         '
         'mnuPrepareColumnTextFindReplace
         '
-        Me.mnuPrepareColumnTextFindReplace.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnTextFindStringHandling})
         Me.mnuPrepareColumnTextFindReplace.Name = "mnuPrepareColumnTextFindReplace"
-        Me.mnuPrepareColumnTextFindReplace.Size = New System.Drawing.Size(152, 22)
+        Me.mnuPrepareColumnTextFindReplace.Size = New System.Drawing.Size(143, 22)
         Me.mnuPrepareColumnTextFindReplace.Tag = "Find/Replace..."
         Me.mnuPrepareColumnTextFindReplace.Text = "Find/Replace"
-        '
-        'mnuPrepareColumnTextFindStringHandling
-        '
-        Me.mnuPrepareColumnTextFindStringHandling.Name = "mnuPrepareColumnTextFindStringHandling"
-        Me.mnuPrepareColumnTextFindStringHandling.Size = New System.Drawing.Size(166, 22)
-        Me.mnuPrepareColumnTextFindStringHandling.Text = "String Handling..."
         '
         'mnuPrepareColumnTextTransform
         '
         Me.mnuPrepareColumnTextTransform.Name = "mnuPrepareColumnTextTransform"
-        Me.mnuPrepareColumnTextTransform.Size = New System.Drawing.Size(152, 22)
+        Me.mnuPrepareColumnTextTransform.Size = New System.Drawing.Size(143, 22)
         Me.mnuPrepareColumnTextTransform.Tag = "Transform..."
         Me.mnuPrepareColumnTextTransform.Text = "Transform..."
         '
         'mnuPrepareColumnTextSplit
         '
         Me.mnuPrepareColumnTextSplit.Name = "mnuPrepareColumnTextSplit"
-        Me.mnuPrepareColumnTextSplit.Size = New System.Drawing.Size(152, 22)
+        Me.mnuPrepareColumnTextSplit.Size = New System.Drawing.Size(143, 22)
         Me.mnuPrepareColumnTextSplit.Tag = "Split..."
         Me.mnuPrepareColumnTextSplit.Text = "Split..."
         '
         'mnuPrepareColumnTextCombine
         '
         Me.mnuPrepareColumnTextCombine.Name = "mnuPrepareColumnTextCombine"
-        Me.mnuPrepareColumnTextCombine.Size = New System.Drawing.Size(152, 22)
+        Me.mnuPrepareColumnTextCombine.Size = New System.Drawing.Size(143, 22)
         Me.mnuPrepareColumnTextCombine.Tag = "Combine..."
         Me.mnuPrepareColumnTextCombine.Text = "Combine..."
         '
@@ -3009,17 +3007,16 @@ Partial Class frmMain
         '
         Me.mnuPrepareColumnTextMatch.Enabled = False
         Me.mnuPrepareColumnTextMatch.Name = "mnuPrepareColumnTextMatch"
-        Me.mnuPrepareColumnTextMatch.Size = New System.Drawing.Size(152, 22)
+        Me.mnuPrepareColumnTextMatch.Size = New System.Drawing.Size(143, 22)
         Me.mnuPrepareColumnTextMatch.Tag = "Match..."
         Me.mnuPrepareColumnTextMatch.Text = "Match..."
         '
         'mnuPrepareColumnTextDistance
         '
-        Me.mnuPrepareColumnTextDistance.Enabled = False
         Me.mnuPrepareColumnTextDistance.Name = "mnuPrepareColumnTextDistance"
-        Me.mnuPrepareColumnTextDistance.Size = New System.Drawing.Size(152, 22)
+        Me.mnuPrepareColumnTextDistance.Size = New System.Drawing.Size(143, 22)
         Me.mnuPrepareColumnTextDistance.Tag = "Distance..."
-        Me.mnuPrepareColumnTextDistance.Text = "Distance..."
+        Me.mnuPrepareColumnTextDistance.Text = "Distance"
         '
         'mnuPrepareColumnDate
         '
@@ -4133,5 +4130,5 @@ Partial Class frmMain
     Friend WithEvents ucrScriptWindow As ucrScript
     Friend WithEvents mnuClimaticFileImportGriddedData As ToolStripMenuItem
     Friend WithEvents RatingDataToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents mnuPrepareColumnTextFindStringHandling As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem2 As ToolStripMenuItem
 End Class
