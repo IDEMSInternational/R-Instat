@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class dlgFactorLabels
+Public Class dlgViewFactorLabels
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private Sub dlgFactorLabels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
