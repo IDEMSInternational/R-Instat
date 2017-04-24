@@ -33,6 +33,7 @@ Public Class dlgStringDistance
 
     Private Sub InitialiseDialog()
 
+
     End Sub
 
     Private Sub SetDefaults()
