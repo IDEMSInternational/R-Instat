@@ -377,7 +377,6 @@ Partial Class frmMain
         Me.mnuPrepareColumnFactorFactorDataFrame = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnText = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnTextFindReplace = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuPrepareColumnTextFindStringHandling = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnTextTransform = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnTextSplit = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnTextCombine = New System.Windows.Forms.ToolStripMenuItem()
@@ -780,7 +779,6 @@ Partial Class frmMain
         '
         'mnuDescribeOtherGraphicsDialogsInventoryPlot
         '
-        Me.mnuDescribeOtherGraphicsDialogsInventoryPlot.Enabled = False
         Me.mnuDescribeOtherGraphicsDialogsInventoryPlot.Name = "mnuDescribeOtherGraphicsDialogsInventoryPlot"
         Me.mnuDescribeOtherGraphicsDialogsInventoryPlot.Size = New System.Drawing.Size(209, 22)
         Me.mnuDescribeOtherGraphicsDialogsInventoryPlot.Tag = "Inventory_Plot..."
@@ -2972,23 +2970,10 @@ Partial Class frmMain
         '
         'mnuPrepareColumnTextFindReplace
         '
-        Me.mnuPrepareColumnTextFindReplace.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnTextFindStringHandling})
         Me.mnuPrepareColumnTextFindReplace.Name = "mnuPrepareColumnTextFindReplace"
         Me.mnuPrepareColumnTextFindReplace.Size = New System.Drawing.Size(152, 22)
         Me.mnuPrepareColumnTextFindReplace.Tag = "Find/Replace..."
         Me.mnuPrepareColumnTextFindReplace.Text = "Find/Replace"
-        '
-        'mnuPrepareColumnTextFindStringHandling
-        '
-        Me.mnuPrepareColumnTextFindStringHandling.Name = "mnuPrepareColumnTextFindStringHandling"
-        Me.mnuPrepareColumnTextFindStringHandling.Size = New System.Drawing.Size(166, 22)
-        Me.mnuPrepareColumnTextFindStringHandling.Text = "String Handling..."
-        '
-        'mnuPrepareColumnTextFindStringHandling
-        '
-        Me.mnuPrepareColumnTextFindStringHandling.Name = "mnuPrepareColumnTextFindStringHandling"
-        Me.mnuPrepareColumnTextFindStringHandling.Size = New System.Drawing.Size(166, 22)
-        Me.mnuPrepareColumnTextFindStringHandling.Text = "String Handling..."
         '
         'mnuPrepareColumnTextTransform
         '
@@ -4138,5 +4123,4 @@ Partial Class frmMain
     Friend WithEvents ucrScriptWindow As ucrScript
     Friend WithEvents mnuClimaticFileImportGriddedData As ToolStripMenuItem
     Friend WithEvents RatingDataToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents mnuPrepareColumnTextFindStringHandling As ToolStripMenuItem
 End Class
