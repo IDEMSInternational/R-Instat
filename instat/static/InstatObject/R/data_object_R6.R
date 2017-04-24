@@ -1946,7 +1946,7 @@ data_object$set("public","set_climatic_types", function(types) {
 )
 
 #Method for creating inventory plot
-data_object$set("public","make_inventory_plot", function(date_col, station_col = c(), elements_cols, add_to_data = FALSE, coord_flip = FALSE, graph_title = "Inventory plot") {
+data_object$set("public","make_inventory_plot", function(date_col, station_col = c(), elements_cols, add_to_data = FALSE, coord_flip = FALSE, graph_title = "Data Availability") {
   if(!self$get_metadata(is_climatic_label))stop("Define data as climatic.")
   if(!is.Date(self$get_columns_from_data(date_col))) stop(paste(date_col, " must be of type date/time."))#this will not work!!!
   if(missing(date_col)||missing(elements_cols))stop("Date and elements columns must be specified.")
@@ -1982,12 +1982,12 @@ data_object$set("public","make_inventory_plot", function(date_col, station_col =
     recode <- as.factor(recode)
     new_col <- next_default_item(prefix = "recode", existing_names = names(col_data), include_index = FALSE)
     col_data[[new_col]] <- recode
-    g <- ggplot(data = col_data, mapping = aes(x = year_column, y = doy_column , colour = recode, group = year_column)) + geom_point() + xlab("Year") + ylab("DOY") + labs(color="Recode")
+    g <- ggplot(data = col_data, mapping = aes(x = year_column, y = doy_column, colour = recode, group = year_column)) + geom_point(size=5, shape=15) + xlab("Year") + ylab("DOY") + labs(color="Recode")
     if(!is.null(station_col)){
-      g <- g + facet_wrap(as.formula(paste0(as.name(station_col),"~ variable")))
+      g <- g + facet_grid(as.formula(paste0(as.name(station_col),"+variable ~.")))
     }
     else{
-      g <- g + facet_wrap(~variable)
+      g <- g + facet_grid(variable~.)
     }
   }
   else{
@@ -1996,15 +1996,16 @@ data_object$set("public","make_inventory_plot", function(date_col, station_col =
     recode <- as.factor(recode)
     new_col <- next_default_item(prefix = "recode", existing_names = self$get_column_names(), include_index = FALSE)
     curr_data[[new_col]] <- recode
-    g <- ggplot(data = curr_data, mapping = aes(x = year_column, y = doy_column , colour = recode, group = year_column)) + geom_point() + xlab("Year") + ylab("DOY") + labs(color="Recode")
+    
+    g <- ggplot(data = curr_data, mapping = aes(x = year_column, y = doy_column, colour = recode, group = year_column)) + geom_point(size=5, shape=15) + xlab("Year") + ylab("DOY") + labs(color="Recode")
     if(!is.null(station_col)){
-      g <- g + facet_wrap(as.name(station_col))
+      g <- g + facet_grid(paste0(as.name(station_col), "~ ."))
     }
   }
   if(coord_flip) {
     g <- g + coord_flip()
   }
-  return(g+ggtitle(graph_title) + theme(plot.title = element_text(hjust = 0.5)))
+  return(g+ggtitle(graph_title) + theme(plot.title = element_text(hjust = 0.5), axis.text.y = element_blank(), axis.ticks.y = element_blank(),strip.background = element_blank(), strip.text.y = element_text(angle = 0)))
 }
 )
 
