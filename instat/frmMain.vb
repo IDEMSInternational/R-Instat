@@ -473,6 +473,10 @@ Public Class frmMain
         dlgLabels.ShowDialog()
     End Sub
 
+    Private Sub mnuManageFactorViewLabels_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.Click
+        dlgViewFactorLabels.ShowDialog()
+    End Sub
+
     Private Sub mnuManageFactorConvertToFactor_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorConvertToFactor.Click
         dlgConvertColumns.bToFactorOnly = True
         dlgConvertColumns.ShowDialog()
