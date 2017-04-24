@@ -1357,6 +1357,10 @@ Public Class frmMain
         dlgInventoryPlot.ShowDialog()
     End Sub
 
+    Private Sub mnuDescribeThreeVariableFrequencies_Click(sender As Object, e As EventArgs) Handles mnuDescribeThreeVariableFrequencies.Click
+        dlgThreeVariableFrequencies.ShowDialog()
+    End Sub
+
     'Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click
     '    'TEST temporary 
     '    'TESTING TO BE ERASED !!!!!!!
