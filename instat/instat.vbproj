@@ -455,6 +455,12 @@
     <Compile Include="dlgStandardiseCountryNames.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgStringDistance.Designer.vb">
+      <DependentUpon>dlgStringDistance.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgStringDistance.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgStringHandling.Designer.vb">
       <DependentUpon>dlgStringHandling.vb</DependentUpon>
     </Compile>
@@ -2817,6 +2823,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgStandardiseCountryNames.resx">
       <DependentUpon>dlgStandardiseCountryNames.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgStringDistance.resx">
+      <DependentUpon>dlgStringDistance.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgStringHandling.resx">
       <DependentUpon>dlgStringHandling.vb</DependentUpon>
