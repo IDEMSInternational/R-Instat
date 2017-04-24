@@ -38,8 +38,8 @@ Public Class dlgTwoWayFrequencies
 
     Private Sub InitialiseDialog()
         'HelpID
-        ' ucrBase.iHelpTopicID = 
-
+        'ucrBase.iHelpTopicID = 
+        Me.Size = New Size(426, 411)
         ucrReceiverColumnFactor.Selector = ucrSelectorTwoWayFrequencies
         ucrReceiverRowFactor.Selector = ucrSelectorTwoWayFrequencies
         ucrReceiverWeights.Selector = ucrSelectorTwoWayFrequencies
@@ -156,11 +156,11 @@ Public Class dlgTwoWayFrequencies
         Dim clsTempParamTwo As RParameter
 
         'Adding additional pair of fuction and parameters in various controls and setting up Rcode
-        clsTempParamOne = New RParameter("x", 0)
+        clsTempParamOne = New RParameter("x", 1)
         ucrReceiverRowFactor.AddAdditionalCodeParameterPair(clsSjPlot, clsTempParamOne, iAdditionalPairNo:=1)
         clsTempParamOne.bIncludeArgumentName = False
 
-        clsTempParamTwo = New RParameter("grp", 1)
+        clsTempParamTwo = New RParameter("grp", 2)
         ucrReceiverColumnFactor.AddAdditionalCodeParameterPair(clsSjPlot, clsTempParamTwo, iAdditionalPairNo:=1)
         clsTempParamTwo.bIncludeArgumentName = False
         ucrSelectorTwoWayFrequencies.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("data", 0), iAdditionalPairNo:=1)
@@ -295,11 +295,11 @@ Public Class dlgTwoWayFrequencies
     Private Sub changelocation()
         If rdoBoth.Checked Then
             grpFreqTypeTable.Location = New Point(240, 166)
-            grpFreqTypeGraph.Location = New Point(341, 166)
-            Me.Size = New Size(467, 411)
+            grpFreqTypeGraph.Location = New Point(358, 166)
+            Me.Size = New Size(498, 411)
         Else
-            grpFreqTypeTable.Location = New Point(262, 159)
-            grpFreqTypeGraph.Location = New Point(262, 159)
+            grpFreqTypeTable.Location = New Point(263, 166)
+            grpFreqTypeGraph.Location = New Point(263, 166)
             Me.Size = New Size(426, 411)
         End If
     End Sub
