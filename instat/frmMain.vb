@@ -738,7 +738,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuOrganiseColumnTextFindReplace_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnTextFindReplace.Click
-        'dlgReplace.ShowDialog()
+        dlgStringHandling.ShowDialog()
     End Sub
 
     Private Sub mnuDescribeOneVariableSummarise_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableSummarise.Click
@@ -1345,12 +1345,12 @@ Public Class frmMain
         dlgRatingScales.ShowDialog()
     End Sub
 
-    Private Sub mnuPrepareColumnTextFindStringHandling_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnTextFindStringHandling.Click
-        dlgStringHandling.ShowDialog()
-    End Sub
-
     Private Sub mnuPrepareColumnTextDistance_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnTextDistance.Click
         dlgStringDistance.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeOtherGraphicsDialogsInventoryPlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsInventoryPlot.Click
+        dlgInventoryPlot.ShowDialog()
     End Sub
 
     'Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click
