@@ -40,7 +40,6 @@ Public Class dlgViewFactorLabels
 
     End Sub
 
-
     Private Sub TestOkEnabled()
 
     End Sub
