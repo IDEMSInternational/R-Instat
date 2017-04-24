@@ -47,7 +47,7 @@ Public Class dlgStringDistance
 
     End Sub
 
-    Private Sub UcrBaseStringDistance_Load(sender As Object, e As EventArgs) Handles UcrBaseStringDistance.Load
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles UcrBaseStringDistance.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
