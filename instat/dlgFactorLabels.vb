@@ -97,7 +97,7 @@ Public Class dlgViewFactorLabels
         If (Not (ucrReceiverFactorColumns.IsEmpty) AndAlso (ucrChkAlternateColour.Checked OrElse ucrChkShowFrequencies.Checked OrElse ucrChkShowId.Checked OrElse ucrChkShowLabels.Checked OrElse ucrChkShowMissingValues.Checked OrElse ucrChkShowPercentage.Checked OrElse ucrChkShowType.Checked OrElse ucrChkShowValues.Checked OrElse ucrChkSortByName.Checked)) Then
             ucrBase.OKEnabled(True)
         Else
-            ucrBase.OKEnabled(True)
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 

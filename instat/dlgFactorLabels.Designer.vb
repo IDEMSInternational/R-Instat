@@ -61,7 +61,7 @@ Partial Class dlgViewFactorLabels
         Me.grpFactorLabels.Controls.Add(Me.ucrChkAlternateColour)
         Me.grpFactorLabels.Location = New System.Drawing.Point(10, 202)
         Me.grpFactorLabels.Name = "grpFactorLabels"
-        Me.grpFactorLabels.Size = New System.Drawing.Size(410, 104)
+        Me.grpFactorLabels.Size = New System.Drawing.Size(398, 104)
         Me.grpFactorLabels.TabIndex = 18
         Me.grpFactorLabels.TabStop = False
         Me.grpFactorLabels.Text = "View Variable(s) Options"
@@ -79,7 +79,7 @@ Partial Class dlgViewFactorLabels
         Me.ucrChkShowPercentage.Checked = False
         Me.ucrChkShowPercentage.Location = New System.Drawing.Point(238, 79)
         Me.ucrChkShowPercentage.Name = "ucrChkShowPercentage"
-        Me.ucrChkShowPercentage.Size = New System.Drawing.Size(163, 20)
+        Me.ucrChkShowPercentage.Size = New System.Drawing.Size(154, 20)
         Me.ucrChkShowPercentage.TabIndex = 25
         '
         'ucrChkSortByName
@@ -103,7 +103,7 @@ Partial Class dlgViewFactorLabels
         Me.ucrChkShowFrequencies.Checked = False
         Me.ucrChkShowFrequencies.Location = New System.Drawing.Point(238, 53)
         Me.ucrChkShowFrequencies.Name = "ucrChkShowFrequencies"
-        Me.ucrChkShowFrequencies.Size = New System.Drawing.Size(163, 20)
+        Me.ucrChkShowFrequencies.Size = New System.Drawing.Size(154, 20)
         Me.ucrChkShowFrequencies.TabIndex = 22
         '
         'ucrChkShowLabels
@@ -135,7 +135,7 @@ Partial Class dlgViewFactorLabels
         Me.ucrChkAlternateColour.Checked = False
         Me.ucrChkAlternateColour.Location = New System.Drawing.Point(238, 22)
         Me.ucrChkAlternateColour.Name = "ucrChkAlternateColour"
-        Me.ucrChkAlternateColour.Size = New System.Drawing.Size(163, 20)
+        Me.ucrChkAlternateColour.Size = New System.Drawing.Size(154, 20)
         Me.ucrChkAlternateColour.TabIndex = 18
         '
         'ucrBase
@@ -170,7 +170,7 @@ Partial Class dlgViewFactorLabels
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(430, 374)
+        Me.ClientSize = New System.Drawing.Size(424, 374)
         Me.Controls.Add(Me.grpFactorLabels)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblFactorColumns)
