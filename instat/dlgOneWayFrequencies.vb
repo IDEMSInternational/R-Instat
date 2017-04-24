@@ -20,8 +20,9 @@ Public Class dlgOneWayFrequencies
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
-    Private clsSjtFreq As New RFunction
-    Private clsSjpFrq As New RFunction
+    Private clsSjTab As New RFunction
+    Private clsSjPlot, clsPlotGrid, clsSelect As New RFunction
+    Private clsTableBaseOperator, clsGraphBaseOperator As New ROperator
 
     Private Sub dlgOneWayFrequencies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -41,12 +42,18 @@ Public Class dlgOneWayFrequencies
         'HelpID
         ' ucrBase.iHelpTopicID = 
 
-        ucrReceiverOneWayFreq.SetParameter(New RParameter("data", 0))
-        ucrReceiverOneWayFreq.SetParameterIsRFunction()
+        ucrReceiverOneWayFreq.SetParameter(New RParameter("data"))
+        ucrReceiverOneWayFreq.SetParameterIsString()
+        ucrReceiverOneWayFreq.bWithQuotes = False
+        ucrReceiverOneWayFreq.SetParameterIncludeArgumentName(False)
         ucrReceiverOneWayFreq.Selector = ucrSelectorOneWayFreq
+
+        ucrSelectorOneWayFreq.SetParameter(New RParameter("data", 0))
+        ucrSelectorOneWayFreq.SetParameterIsrfunction()
 
         ucrReceiverWeights.SetParameter(New RParameter("weight.by", 1))
         ucrReceiverWeights.SetParameterIsRFunction()
+        ucrReceiverWeights.SetParameterIncludeArgumentName(True)
         ucrReceiverWeights.Selector = ucrSelectorOneWayFreq
         ucrReceiverWeights.SetDataType("numeric")
 
@@ -62,11 +69,19 @@ Public Class dlgOneWayFrequencies
 
         ucrPnlFrequencies.AddRadioButton(rdoTable)
         ucrPnlFrequencies.AddRadioButton(rdoGraph)
-        ucrPnlFrequencies.AddFunctionNamesCondition(rdoTable, "sjt.frq")
-        ucrPnlFrequencies.AddFunctionNamesCondition(rdoGraph, "sjp.frq")
-        ucrPnlFrequencies.AddToLinkedControls(ucrChkFlip, {rdoGraph}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlFrequencies.AddRadioButton(rdoBoth)
+
+        'setting rdoGraph and rdoTable
+        ucrPnlFrequencies.AddFunctionNamesCondition(rdoTable, "sjtab")
+        ucrPnlFrequencies.AddFunctionNamesCondition(rdoGraph, "sjplot")
+
+        'setting rdoBoth 
+        ucrPnlFrequencies.AddFunctionNamesCondition(rdoBoth, "sjplot")
+        ucrPnlFrequencies.AddFunctionNamesCondition(rdoBoth, "sjtab")
+        ucrPnlFrequencies.AddToLinkedControls(ucrChkFlip, {rdoGraph, rdoBoth}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
         ucrNudGroups.SetParameter(New RParameter("auto.group", 9))
+        ucrNudGroups.SetParameterIncludeArgumentName(True)
         ucrNudGroups.SetMinMax(2, 100)
         ucrNudGroups.Increment = 5
 
@@ -75,7 +90,6 @@ Public Class dlgOneWayFrequencies
         ucrChkGroupData.AddToLinkedControls(ucrNudGroups, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
         ucrChkGroupData.AddParameterPresentCondition(True, "auto.group")
         ucrChkGroupData.AddParameterPresentCondition(False, "auto.group", False)
-        'ucrChkGroupData.bUpdateRCodeFromControl = True
 
         ucrChkFlip.SetParameter(New RParameter("coord.flip", 10))
         ucrChkFlip.SetText("Flip Coordinates")
@@ -84,40 +98,59 @@ Public Class dlgOneWayFrequencies
     End Sub
 
     Private Sub SetDefaults()
-        clsSjtFreq = New RFunction
-        clsSjpFrq = New RFunction
+        clsSjTab = New RFunction
+        clsSjPlot = New RFunction
+        clsPlotGrid = New RFunction
+        clsTableBaseOperator = New ROperator
+        clsSelect = New RFunction
 
         ucrSelectorOneWayFreq.Reset()
         ucrReceiverOneWayFreq.SetMeAsReceiver()
 
-        clsSjtFreq.SetRCommand("sjt.frq")
-        clsSjtFreq.AddParameter("show.summary", "FALSE")
-        clsSjtFreq.AddParameter("skip.zero", "FALSE")
-        clsSjtFreq.AddParameter("digits", 0)
+        clsPlotGrid.SetPackageName("sjPlot")
+        clsPlotGrid.SetRCommand("plot_grid")
 
-        clsSjpFrq.SetRCommand("sjp.frq")
-        clsSjpFrq.AddParameter("type", Chr(34) & "bar" & Chr(34))
-        clsSjpFrq.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneWayFreq.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        clsTableBaseOperator.SetOperation("%>%")
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsSjtFreq)
+        clsTableBaseOperator.AddParameter("select", clsRFunctionParameter:=clsSelect, iPosition:=1)
+        clsTableBaseOperator.AddParameter("sjtab", clsRFunctionParameter:=clsSjTab, iPosition:=2)
+        clsPlotGrid.AddParameter("x", clsRFunctionParameter:=clsSjPlot)
+
+        clsSelect.SetPackageName("dplyr")
+        clsSelect.SetRCommand("select")
+
+        clsSjTab.SetPackageName("sjPlot")
+        clsSjTab.SetRCommand("sjtab")
+
+        clsSjTab.AddParameter("show.summary", "FALSE")
+        clsSjTab.AddParameter("digits", 0)
+
+        clsSjPlot.SetPackageName("sjPlot")
+        clsSjPlot.SetRCommand("sjplot")
+
+        clsPlotGrid.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneWayFreq.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+
+        ucrBase.clsRsyntax.SetBaseROperator(clsTableBaseOperator)
         bResetSubdialog = True
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverOneWayFreq.AddAdditionalCodeParameterPair(clsSjpFrq, New RParameter("var.cnt", 0), iAdditionalPairNo:=1)
-        ucrChkWeights.AddAdditionalCodeParameterPair(clsSjpFrq, New RParameter("weight.by", 1), iAdditionalPairNo:=1)
-        ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjpFrq, ucrChkWeights.GetParameter(), iAdditionalPairNo:=1)
-        ucrPnlSort.AddAdditionalCodeParameterPair(clsSjpFrq, New RParameter("sort.frq", 3), iAdditionalPairNo:=1)
-        ucrNudGroups.AddAdditionalCodeParameterPair(clsSjpFrq, New RParameter("auto.group", 9), iAdditionalPairNo:=1)
+        ucrChkWeights.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("weight.by", 1), iAdditionalPairNo:=1)
+        ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjPlot, ucrChkWeights.GetParameter(), iAdditionalPairNo:=1)
+        ucrPnlSort.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("sort.frq", 3), iAdditionalPairNo:=1)
+        ucrNudGroups.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("auto.group", 9), iAdditionalPairNo:=1)
+        ucrSelectorOneWayFreq.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("data", 0), iAdditionalPairNo:=1)
+        ucrSelectorOneWayFreq.SetParameterIncludeArgumentName(True)
 
-        ucrReceiverOneWayFreq.SetRCode(clsSjtFreq, bReset)
-        ucrReceiverWeights.SetRCode(clsSjtFreq, bReset)
-        ucrPnlFrequencies.SetRCode(clsSjtFreq, bReset)
-        ucrChkWeights.SetRCode(clsSjtFreq, bReset)
-        ucrPnlSort.SetRCode(clsSjtFreq, bReset)
-        ucrChkFlip.SetRCode(clsSjpFrq, bReset)
-        ucrChkGroupData.SetRCode(clsSjtFreq, bReset)
-        ucrNudGroups.SetRCode(clsSjtFreq, bReset)
+        ucrReceiverWeights.SetRCode(clsSjTab, bReset)
+        ucrSelectorOneWayFreq.SetRCode(clsTableBaseOperator, bReset)
+        ucrReceiverOneWayFreq.SetRCode(clsSelect, bReset)
+        ucrPnlFrequencies.SetRCode(clsSjTab, bReset)
+        ucrChkWeights.SetRCode(clsSjTab, bReset)
+        ucrPnlSort.SetRCode(clsSjTab, bReset)
+        ucrChkFlip.SetRCode(clsSjPlot, bReset)
+        ucrChkGroupData.SetRCode(clsSjTab, bReset)
+        ucrNudGroups.SetRCode(clsSjTab, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -138,11 +171,11 @@ Public Class dlgOneWayFrequencies
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         If rdoTable.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsSjtFreq)
+            ucrBase.clsRsyntax.SetBaseROperator(clsTableBaseOperator)
             'ucrBase.clsRsyntax.bHTMLOutput = True
             ucrBase.clsRsyntax.iCallType = 0
         ElseIf rdoGraph.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsSjpFrq)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsPlotGrid)
             ' ucrBase.clsRsyntax.bHTMLOutput = False
             ucrBase.clsRsyntax.iCallType = 3
         End If
@@ -152,8 +185,8 @@ Public Class dlgOneWayFrequencies
         Dim strGraph As String
         Dim strTempScript As String = ""
 
-        If rdoTable.Checked AndAlso rdoGraph.Checked Then
-            strGraph = clsSjpFrq.ToScript(strTempScript)
+        If rdoBoth.Checked Then
+            strGraph = clsPlotGrid.ToScript(strTempScript)
             frmMain.clsRLink.RunScript(strTempScript & strGraph, iCallType:=3)
         End If
     End Sub
@@ -172,14 +205,15 @@ Public Class dlgOneWayFrequencies
         End If
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOneWayFreq.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrNudGroups.ControlValueChanged, ucrChkGroupData.ControlValueChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWeights.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrNudGroups.ControlContentsChanged, ucrChkGroupData.ControlContentsChanged, ucrReceiverOneWayFreq.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgOneWayFrequencies.SetRFunction(clsSjtFreq, clsSjpFrq, bResetSubdialog)
+        sdgOneWayFrequencies.SetRFunction(clsSjTab, clsSjPlot, clsPlotGrid, bResetSubdialog)
         bResetSubdialog = False
         sdgOneWayFrequencies.ShowDialog()
         TestOkEnabled()
     End Sub
+
 End Class
