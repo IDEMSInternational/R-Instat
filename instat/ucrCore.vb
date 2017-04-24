@@ -280,7 +280,7 @@ Public Class ucrCore
                 If bAdd Then
                     lstAllRCodes(i).AddParameter(lstAllRParameters(i))
                 Else
-                    lstAllRCodes(i).RemoveParameter(lstAllRParameters(i))
+                    lstAllRCodes(i).RemoveParameterByName(lstAllRParameters(i).strArgumentName)
                 End If
             End If
         Next
@@ -465,7 +465,7 @@ Public Class ucrCore
         strValuesToIgnore = strValues
     End Sub
 
-    Public Sub AddAdditionalCodeParameterPair(clsNewRCode As RCodeStructure, clsNewRParameter As RParameter, Optional iAdditionalPairNo As Integer = -1)
+    Public Overridable Sub AddAdditionalCodeParameterPair(clsNewRCode As RCodeStructure, clsNewRParameter As RParameter, Optional iAdditionalPairNo As Integer = -1)
         If iAdditionalPairNo = -1 Then
             iAdditionalPairNo = lstAllRCodes.Count
         End If
