@@ -41,7 +41,6 @@ Public Class dlgStringDistance
         ucrReceiverStringDistance.SetParameter(New RParameter("a", 0))
         ucrReceiverStringDistance.SetParameterIsRFunction()
         ucrInputPatternStringDistance.SetParameter(New RParameter("b", 1))
-        ucrInputPatternStringDistance.AddQuotesIfUnrecognised = True
         ucrInputComboBoxMethod.SetParameter(New RParameter("method", 2))
 
         Dim dctMethod As New Dictionary(Of String, String)
@@ -56,6 +55,7 @@ Public Class dlgStringDistance
         dctMethod.Add("Jaro ,or Jaro-Winker distance", Chr(34) & "jw" & Chr(34))
         dctMethod.Add("Distance based on soundex encoding", Chr(34) & "soundex" & Chr(34))
         ucrInputComboBoxMethod.SetItems(dctMethod)
+
         'ucrSave
         ucrSaveStringDistance.SetPrefix("Dist")
         ucrSaveStringDistance.SetSaveTypeAsColumn()
@@ -66,18 +66,19 @@ Public Class dlgStringDistance
 
     Private Sub SetDefaults()
         clsStringDistFunction = New RFunction
+        ucrInputPatternStringDistance.SetName("")
         ucrSelectorStringDistance.Reset()
         ucrSaveStringDistance.Reset()
+        ucrInputComboBoxMethod.Reset()
+        ucrInputPatternStringDistance.Reset()
+        clsStringDistFunction.AddParameter("method", Chr(34) & "hamming" & Chr(34))
         clsStringDistFunction.SetPackageName("stringdist")
         clsStringDistFunction.SetRCommand("stringdist")
         ucrBase.clsRsyntax.SetBaseRFunction(clsStringDistFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrInputComboBoxMethod.SetRCode(clsStringDistFunction, bReset)
-        ucrInputPatternStringDistance.SetRCode(clsStringDistFunction, bReset)
-        ucrReceiverStringDistance.SetRCode(clsStringDistFunction, bReset)
-        ucrSaveStringDistance.SetRCode(clsStringDistFunction, bReset)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
