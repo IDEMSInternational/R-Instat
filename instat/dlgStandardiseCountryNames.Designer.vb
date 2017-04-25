@@ -31,7 +31,7 @@ Partial Class dlgStandardiseCountryNames
         'lblCountryNames
         '
         Me.lblCountryNames.AutoSize = True
-        Me.lblCountryNames.Location = New System.Drawing.Point(267, 43)
+        Me.lblCountryNames.Location = New System.Drawing.Point(267, 45)
         Me.lblCountryNames.Name = "lblCountryNames"
         Me.lblCountryNames.Size = New System.Drawing.Size(82, 13)
         Me.lblCountryNames.TabIndex = 1
@@ -39,7 +39,7 @@ Partial Class dlgStandardiseCountryNames
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 220)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 198)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 3
@@ -47,12 +47,13 @@ Partial Class dlgStandardiseCountryNames
         'ucrReceiverCountryNames
         '
         Me.ucrReceiverCountryNames.frmParent = Me
-        Me.ucrReceiverCountryNames.Location = New System.Drawing.Point(270, 60)
+        Me.ucrReceiverCountryNames.Location = New System.Drawing.Point(267, 60)
         Me.ucrReceiverCountryNames.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverCountryNames.Name = "ucrReceiverCountryNames"
         Me.ucrReceiverCountryNames.Selector = Nothing
         Me.ucrReceiverCountryNames.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverCountryNames.TabIndex = 2
+        Me.ucrReceiverCountryNames.ucrSelector = Nothing
         '
         'ucrSelectorStandardiseCountry
         '
@@ -68,7 +69,7 @@ Partial Class dlgStandardiseCountryNames
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 283)
+        Me.ClientSize = New System.Drawing.Size(418, 257)
         Me.Controls.Add(Me.lblCountryNames)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrReceiverCountryNames)

@@ -29,13 +29,14 @@ Partial Class dlgConvertColumns
         Me.rdoNumeric = New System.Windows.Forms.RadioButton()
         Me.rdoOrderedFactor = New System.Windows.Forms.RadioButton()
         Me.rdoFactor = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlConvertTo = New instat.UcrPanel()
         Me.rdoConvertOrdinals = New System.Windows.Forms.RadioButton()
         Me.rdoConvertLevels = New System.Windows.Forms.RadioButton()
         Me.grpFactorToNumericOptions = New System.Windows.Forms.GroupBox()
-        Me.ucrPnlFactorToNumericOptions = New instat.UcrPanel()
+        Me.ucrChkKeepAttributes = New instat.ucrCheck()
         Me.ucrNudDisplayDecimals = New instat.ucrNud()
         Me.ucrChkSpecifyDecimalsToDisplay = New instat.ucrCheck()
+        Me.ucrPnlConvertTo = New instat.UcrPanel()
+        Me.ucrPnlFactorToNumericOptions = New instat.UcrPanel()
         Me.ucrSelectorDataFrameColumns = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverColumnsToConvert = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
@@ -46,7 +47,7 @@ Partial Class dlgConvertColumns
         'lblColumnsToConvert
         '
         Me.lblColumnsToConvert.AutoSize = True
-        Me.lblColumnsToConvert.Location = New System.Drawing.Point(249, 44)
+        Me.lblColumnsToConvert.Location = New System.Drawing.Point(249, 45)
         Me.lblColumnsToConvert.Name = "lblColumnsToConvert"
         Me.lblColumnsToConvert.Size = New System.Drawing.Size(102, 13)
         Me.lblColumnsToConvert.TabIndex = 1
@@ -63,18 +64,18 @@ Partial Class dlgConvertColumns
         Me.grpConvertTo.Controls.Add(Me.ucrPnlConvertTo)
         Me.grpConvertTo.Location = New System.Drawing.Point(10, 193)
         Me.grpConvertTo.Name = "grpConvertTo"
-        Me.grpConvertTo.Size = New System.Drawing.Size(349, 68)
-        Me.grpConvertTo.TabIndex = 16
+        Me.grpConvertTo.Size = New System.Drawing.Size(357, 68)
+        Me.grpConvertTo.TabIndex = 3
         Me.grpConvertTo.TabStop = False
         Me.grpConvertTo.Text = "Convert To"
         '
         'rdoCharacter
         '
         Me.rdoCharacter.AutoSize = True
-        Me.rdoCharacter.Location = New System.Drawing.Point(126, 43)
+        Me.rdoCharacter.Location = New System.Drawing.Point(119, 43)
         Me.rdoCharacter.Name = "rdoCharacter"
         Me.rdoCharacter.Size = New System.Drawing.Size(71, 17)
-        Me.rdoCharacter.TabIndex = 3
+        Me.rdoCharacter.TabIndex = 5
         Me.rdoCharacter.TabStop = True
         Me.rdoCharacter.Text = "Character"
         Me.rdoCharacter.UseVisualStyleBackColor = True
@@ -82,7 +83,7 @@ Partial Class dlgConvertColumns
         'rdoInteger
         '
         Me.rdoInteger.AutoSize = True
-        Me.rdoInteger.Location = New System.Drawing.Point(220, 21)
+        Me.rdoInteger.Location = New System.Drawing.Point(237, 21)
         Me.rdoInteger.Name = "rdoInteger"
         Me.rdoInteger.Size = New System.Drawing.Size(58, 17)
         Me.rdoInteger.TabIndex = 3
@@ -93,10 +94,10 @@ Partial Class dlgConvertColumns
         'rdoNumeric
         '
         Me.rdoNumeric.AutoSize = True
-        Me.rdoNumeric.Location = New System.Drawing.Point(126, 21)
+        Me.rdoNumeric.Location = New System.Drawing.Point(119, 21)
         Me.rdoNumeric.Name = "rdoNumeric"
         Me.rdoNumeric.Size = New System.Drawing.Size(64, 17)
-        Me.rdoNumeric.TabIndex = 3
+        Me.rdoNumeric.TabIndex = 2
         Me.rdoNumeric.TabStop = True
         Me.rdoNumeric.Text = "Numeric"
         Me.rdoNumeric.UseVisualStyleBackColor = True
@@ -107,7 +108,7 @@ Partial Class dlgConvertColumns
         Me.rdoOrderedFactor.Location = New System.Drawing.Point(10, 43)
         Me.rdoOrderedFactor.Name = "rdoOrderedFactor"
         Me.rdoOrderedFactor.Size = New System.Drawing.Size(96, 17)
-        Me.rdoOrderedFactor.TabIndex = 2
+        Me.rdoOrderedFactor.TabIndex = 4
         Me.rdoOrderedFactor.TabStop = True
         Me.rdoOrderedFactor.Text = "Ordered Factor"
         Me.rdoOrderedFactor.UseVisualStyleBackColor = True
@@ -123,20 +124,13 @@ Partial Class dlgConvertColumns
         Me.rdoFactor.Text = "Factor"
         Me.rdoFactor.UseVisualStyleBackColor = True
         '
-        'ucrPnlConvertTo
-        '
-        Me.ucrPnlConvertTo.Location = New System.Drawing.Point(3, 16)
-        Me.ucrPnlConvertTo.Name = "ucrPnlConvertTo"
-        Me.ucrPnlConvertTo.Size = New System.Drawing.Size(328, 44)
-        Me.ucrPnlConvertTo.TabIndex = 0
-        '
         'rdoConvertOrdinals
         '
         Me.rdoConvertOrdinals.AutoSize = True
         Me.rdoConvertOrdinals.Location = New System.Drawing.Point(126, 23)
         Me.rdoConvertOrdinals.Name = "rdoConvertOrdinals"
         Me.rdoConvertOrdinals.Size = New System.Drawing.Size(103, 17)
-        Me.rdoConvertOrdinals.TabIndex = 3
+        Me.rdoConvertOrdinals.TabIndex = 2
         Me.rdoConvertOrdinals.TabStop = True
         Me.rdoConvertOrdinals.Text = "Convert Ordinals"
         Me.rdoConvertOrdinals.UseVisualStyleBackColor = True
@@ -157,12 +151,47 @@ Partial Class dlgConvertColumns
         Me.grpFactorToNumericOptions.Controls.Add(Me.rdoConvertOrdinals)
         Me.grpFactorToNumericOptions.Controls.Add(Me.rdoConvertLevels)
         Me.grpFactorToNumericOptions.Controls.Add(Me.ucrPnlFactorToNumericOptions)
-        Me.grpFactorToNumericOptions.Location = New System.Drawing.Point(10, 290)
+        Me.grpFactorToNumericOptions.Location = New System.Drawing.Point(10, 319)
         Me.grpFactorToNumericOptions.Name = "grpFactorToNumericOptions"
         Me.grpFactorToNumericOptions.Size = New System.Drawing.Size(293, 46)
-        Me.grpFactorToNumericOptions.TabIndex = 17
+        Me.grpFactorToNumericOptions.TabIndex = 7
         Me.grpFactorToNumericOptions.TabStop = False
         Me.grpFactorToNumericOptions.Text = "Factor Options"
+        '
+        'ucrChkKeepAttributes
+        '
+        Me.ucrChkKeepAttributes.Checked = False
+        Me.ucrChkKeepAttributes.Location = New System.Drawing.Point(10, 267)
+        Me.ucrChkKeepAttributes.Name = "ucrChkKeepAttributes"
+        Me.ucrChkKeepAttributes.Size = New System.Drawing.Size(190, 20)
+        Me.ucrChkKeepAttributes.TabIndex = 4
+        '
+        'ucrNudDisplayDecimals
+        '
+        Me.ucrNudDisplayDecimals.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDisplayDecimals.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudDisplayDecimals.Location = New System.Drawing.Point(205, 292)
+        Me.ucrNudDisplayDecimals.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudDisplayDecimals.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDisplayDecimals.Name = "ucrNudDisplayDecimals"
+        Me.ucrNudDisplayDecimals.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudDisplayDecimals.TabIndex = 6
+        Me.ucrNudDisplayDecimals.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkSpecifyDecimalsToDisplay
+        '
+        Me.ucrChkSpecifyDecimalsToDisplay.Checked = False
+        Me.ucrChkSpecifyDecimalsToDisplay.Location = New System.Drawing.Point(10, 293)
+        Me.ucrChkSpecifyDecimalsToDisplay.Name = "ucrChkSpecifyDecimalsToDisplay"
+        Me.ucrChkSpecifyDecimalsToDisplay.Size = New System.Drawing.Size(190, 20)
+        Me.ucrChkSpecifyDecimalsToDisplay.TabIndex = 5
+        '
+        'ucrPnlConvertTo
+        '
+        Me.ucrPnlConvertTo.Location = New System.Drawing.Point(3, 16)
+        Me.ucrPnlConvertTo.Name = "ucrPnlConvertTo"
+        Me.ucrPnlConvertTo.Size = New System.Drawing.Size(328, 44)
+        Me.ucrPnlConvertTo.TabIndex = 0
         '
         'ucrPnlFactorToNumericOptions
         '
@@ -170,26 +199,6 @@ Partial Class dlgConvertColumns
         Me.ucrPnlFactorToNumericOptions.Name = "ucrPnlFactorToNumericOptions"
         Me.ucrPnlFactorToNumericOptions.Size = New System.Drawing.Size(284, 24)
         Me.ucrPnlFactorToNumericOptions.TabIndex = 0
-        '
-        'ucrNudDisplayDecimals
-        '
-        Me.ucrNudDisplayDecimals.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudDisplayDecimals.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudDisplayDecimals.Location = New System.Drawing.Point(205, 264)
-        Me.ucrNudDisplayDecimals.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudDisplayDecimals.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudDisplayDecimals.Name = "ucrNudDisplayDecimals"
-        Me.ucrNudDisplayDecimals.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudDisplayDecimals.TabIndex = 19
-        Me.ucrNudDisplayDecimals.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkSpecifyDecimalsToDisplay
-        '
-        Me.ucrChkSpecifyDecimalsToDisplay.Checked = False
-        Me.ucrChkSpecifyDecimalsToDisplay.Location = New System.Drawing.Point(10, 265)
-        Me.ucrChkSpecifyDecimalsToDisplay.Name = "ucrChkSpecifyDecimalsToDisplay"
-        Me.ucrChkSpecifyDecimalsToDisplay.Size = New System.Drawing.Size(190, 20)
-        Me.ucrChkSpecifyDecimalsToDisplay.TabIndex = 18
         '
         'ucrSelectorDataFrameColumns
         '
@@ -210,19 +219,21 @@ Partial Class dlgConvertColumns
         Me.ucrReceiverColumnsToConvert.Selector = Nothing
         Me.ucrReceiverColumnsToConvert.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverColumnsToConvert.TabIndex = 2
+        Me.ucrReceiverColumnsToConvert.ucrSelector = Nothing
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 342)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 371)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 5
+        Me.ucrBase.TabIndex = 8
         '
         'dlgConvertColumns
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(413, 396)
+        Me.ClientSize = New System.Drawing.Size(421, 426)
+        Me.Controls.Add(Me.ucrChkKeepAttributes)
         Me.Controls.Add(Me.ucrNudDisplayDecimals)
         Me.Controls.Add(Me.ucrChkSpecifyDecimalsToDisplay)
         Me.Controls.Add(Me.grpConvertTo)
@@ -264,4 +275,5 @@ Partial Class dlgConvertColumns
     Friend WithEvents rdoConvertLevels As RadioButton
     Friend WithEvents ucrPnlFactorToNumericOptions As UcrPanel
     Friend WithEvents ucrNudDisplayDecimals As ucrNud
+    Friend WithEvents ucrChkKeepAttributes As ucrCheck
 End Class

@@ -21,8 +21,7 @@ Public Class dlgOneWayFrequencies
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
     Private clsSjTab As New RFunction
-    Private clsSjPlot, clsPlotGrid, clsSelect As New RFunction
-    Private clsTableBaseOperator, clsGraphBaseOperator As New ROperator
+    Private clsSjPlot, clsPlotGrid As New RFunction
 
     Private Sub dlgOneWayFrequencies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -43,17 +42,12 @@ Public Class dlgOneWayFrequencies
         ' ucrBase.iHelpTopicID = 
 
         ucrReceiverOneWayFreq.SetParameter(New RParameter("data"))
-        ucrReceiverOneWayFreq.SetParameterIsString()
-        ucrReceiverOneWayFreq.bWithQuotes = False
-        ucrReceiverOneWayFreq.SetParameterIncludeArgumentName(False)
+        ucrReceiverOneWayFreq.SetParameterIsRFunction()
+        ucrReceiverOneWayFreq.bForceAsDataFrame = True
         ucrReceiverOneWayFreq.Selector = ucrSelectorOneWayFreq
-
-        ucrSelectorOneWayFreq.SetParameter(New RParameter("data", 0))
-        ucrSelectorOneWayFreq.SetParameterIsrfunction()
 
         ucrReceiverWeights.SetParameter(New RParameter("weight.by", 1))
         ucrReceiverWeights.SetParameterIsRFunction()
-        ucrReceiverWeights.SetParameterIncludeArgumentName(True)
         ucrReceiverWeights.Selector = ucrSelectorOneWayFreq
         ucrReceiverWeights.SetDataType("numeric")
 
@@ -81,7 +75,6 @@ Public Class dlgOneWayFrequencies
         ucrPnlFrequencies.AddToLinkedControls(ucrChkFlip, {rdoGraph, rdoBoth}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
         ucrNudGroups.SetParameter(New RParameter("auto.group", 9))
-        ucrNudGroups.SetParameterIncludeArgumentName(True)
         ucrNudGroups.SetMinMax(2, 100)
         ucrNudGroups.Increment = 5
 
@@ -101,8 +94,6 @@ Public Class dlgOneWayFrequencies
         clsSjTab = New RFunction
         clsSjPlot = New RFunction
         clsPlotGrid = New RFunction
-        clsTableBaseOperator = New ROperator
-        clsSelect = New RFunction
 
         ucrSelectorOneWayFreq.Reset()
         ucrReceiverOneWayFreq.SetMeAsReceiver()
@@ -110,14 +101,7 @@ Public Class dlgOneWayFrequencies
         clsPlotGrid.SetPackageName("sjPlot")
         clsPlotGrid.SetRCommand("plot_grid")
 
-        clsTableBaseOperator.SetOperation("%>%")
-
-        clsTableBaseOperator.AddParameter("select", clsRFunctionParameter:=clsSelect, iPosition:=1)
-        clsTableBaseOperator.AddParameter("sjtab", clsRFunctionParameter:=clsSjTab, iPosition:=2)
         clsPlotGrid.AddParameter("x", clsRFunctionParameter:=clsSjPlot)
-
-        clsSelect.SetPackageName("dplyr")
-        clsSelect.SetRCommand("select")
 
         clsSjTab.SetPackageName("sjPlot")
         clsSjTab.SetRCommand("sjtab")
@@ -130,21 +114,20 @@ Public Class dlgOneWayFrequencies
 
         clsPlotGrid.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneWayFreq.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
-        ucrBase.clsRsyntax.SetBaseROperator(clsTableBaseOperator)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsSjTab)
         bResetSubdialog = True
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrChkWeights.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("weight.by", 1), iAdditionalPairNo:=1)
-        ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjPlot, ucrChkWeights.GetParameter(), iAdditionalPairNo:=1)
+        ucrChkWeights.AddAdditionalCodeParameterPair(clsSjPlot, ucrReceiverWeights.GetParameter(), iAdditionalPairNo:=1)
+        ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjPlot, ucrReceiverWeights.GetParameter(), iAdditionalPairNo:=1)
         ucrPnlSort.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("sort.frq", 3), iAdditionalPairNo:=1)
-        ucrNudGroups.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("auto.group", 9), iAdditionalPairNo:=1)
-        ucrSelectorOneWayFreq.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("data", 0), iAdditionalPairNo:=1)
-        ucrSelectorOneWayFreq.SetParameterIncludeArgumentName(True)
+        ucrNudGroups.AddAdditionalCodeParameterPair(clsSjPlot, ucrNudGroups.GetParameter(), iAdditionalPairNo:=1)
+        ucrChkGroupData.AddAdditionalCodeParameterPair(clsSjPlot, ucrNudGroups.GetParameter(), iAdditionalPairNo:=1)
+        ucrReceiverOneWayFreq.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("data", 0), iAdditionalPairNo:=1)
 
         ucrReceiverWeights.SetRCode(clsSjTab, bReset)
-        ucrSelectorOneWayFreq.SetRCode(clsTableBaseOperator, bReset)
-        ucrReceiverOneWayFreq.SetRCode(clsSelect, bReset)
+        ucrReceiverOneWayFreq.SetRCode(clsSjTab, bReset)
         ucrPnlFrequencies.SetRCode(clsSjTab, bReset)
         ucrChkWeights.SetRCode(clsSjTab, bReset)
         ucrPnlSort.SetRCode(clsSjTab, bReset)
@@ -170,8 +153,8 @@ Public Class dlgOneWayFrequencies
     End Sub
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        If rdoTable.Checked Then
-            ucrBase.clsRsyntax.SetBaseROperator(clsTableBaseOperator)
+        If rdoTable.Checked OrElse rdoBoth.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSjTab)
             'ucrBase.clsRsyntax.bHTMLOutput = True
             ucrBase.clsRsyntax.iCallType = 0
         ElseIf rdoGraph.Checked Then
@@ -184,10 +167,21 @@ Public Class dlgOneWayFrequencies
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         Dim strGraph As String
         Dim strTempScript As String = ""
+        Dim bIsAssigned As Boolean
+        Dim bToBeAssigned As Boolean
+        Dim strAssignTo As String
 
         If rdoBoth.Checked Then
+            bIsAssigned = clsPlotGrid.bIsAssigned
+            bToBeAssigned = clsPlotGrid.bToBeAssigned
+            strAssignTo = clsPlotGrid.strAssignTo
+
             strGraph = clsPlotGrid.ToScript(strTempScript)
             frmMain.clsRLink.RunScript(strTempScript & strGraph, iCallType:=3)
+
+            clsPlotGrid.bIsAssigned = bIsAssigned
+            clsPlotGrid.bToBeAssigned = bToBeAssigned
+            clsPlotGrid.strAssignTo = strAssignTo
         End If
     End Sub
 
@@ -215,5 +209,4 @@ Public Class dlgOneWayFrequencies
         sdgOneWayFrequencies.ShowDialog()
         TestOkEnabled()
     End Sub
-
 End Class
