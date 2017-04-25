@@ -35,6 +35,7 @@ Partial Class dlgBarAndPieChart
         Me.rdoBarChart = New System.Windows.Forms.RadioButton()
         Me.ucrChkFlipCoordinates = New instat.ucrCheck()
         Me.ucrSaveBar = New instat.ucrSave()
+        Me.ucrPnlOptions = New instat.UcrPanel()
         Me.SuspendLayout()
         '
         'lblFactor
@@ -177,6 +178,13 @@ Partial Class dlgBarAndPieChart
         Me.ucrSaveBar.Size = New System.Drawing.Size(313, 24)
         Me.ucrSaveBar.TabIndex = 12
         '
+        'ucrPnlOptions
+        '
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(65, 6)
+        Me.ucrPnlOptions.Name = "ucrPnlOptions"
+        Me.ucrPnlOptions.Size = New System.Drawing.Size(211, 36)
+        Me.ucrPnlOptions.TabIndex = 13
+        '
         'dlgBarAndPieChart
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -195,6 +203,7 @@ Partial Class dlgBarAndPieChart
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.cmdBarChartOptions)
         Me.Controls.Add(Me.cmdPieChartOptions)
+        Me.Controls.Add(Me.ucrPnlOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -220,4 +229,5 @@ Partial Class dlgBarAndPieChart
     Friend WithEvents ucrChkFlipCoordinates As ucrCheck
     Friend WithEvents rdoBarChart As RadioButton
     Friend WithEvents rdoPieChart As RadioButton
+    Friend WithEvents ucrPnlOptions As UcrPanel
 End Class
