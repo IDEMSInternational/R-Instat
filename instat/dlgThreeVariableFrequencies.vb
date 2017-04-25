@@ -81,9 +81,11 @@ Public Class dlgThreeVariableFrequencies
         clsTableBaseOperator = New ROperator
 
         clsTableBaseOperator.SetOperation("%>%")
+        clsTableBaseOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupBy, iPosition:=1)
         clsTableBaseOperator.AddParameter("select", clsRFunctionParameter:=clsSelect, iPosition:=2)
         clsTableBaseOperator.AddParameter("sjtab", clsRFunctionParameter:=clsSjTab, iPosition:=3)
-        clsTableBaseOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupBy, iPosition:=1)
+        'clsSjPlot.AddParameter("sjplot", clsRFunctionParameter:=clsSjPlot, iPosition:=0)
+
 
         clsGroupBy.SetPackageName("dplyr")
         clsGroupBy.SetRCommand("group_by")
@@ -99,16 +101,17 @@ Public Class dlgThreeVariableFrequencies
         ucrReceiverGroups.SetMeAsReceiver()
 
         clsSjTab.SetPackageName("sjPlot")
+
         clsSjTab.SetRCommand("sjtab")
         clsSjTab.AddParameter("show.obs", "TRUE")
         clsSjTab.AddParameter("show.summary", "FALSE")
         clsSjTab.AddParameter("digits", 0)
         clsSjTab.AddParameter("fun", Chr(34) & "xtab" & Chr(34))
 
-        '  clsSjPlot.SetRCommand("sjplot")
-        'clsSjPlot.AddParameter("show.prc", "TRUE")
-        'clsSjPlot.AddParameter("show.n", "TRUE")
-        'clsSjPlot.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorThreeVariableFrequencies.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        clsSjPlot.SetRCommand("sjplot")
+        clsSjPlot.AddParameter("show.prc", "TRUE")
+        clsSjPlot.AddParameter("show.n", "TRUE")
+        clsSjPlot.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorThreeVariableFrequencies.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsTableBaseOperator)
 
     End Sub
@@ -169,19 +172,10 @@ Public Class dlgThreeVariableFrequencies
         ucrPnlFreqType.AddRadioButton(rdoColumn, Chr(34) & "xtab" & Chr(34))
         ucrPnlFreqType.AddRadioButton(rdoCell, Chr(34) & "xtab" & Chr(34))
         ucrPnlFreqType.bAllowNonConditionValues = True
-        'Adding ucrPnlFreqType conditions
-        ucrPnlFreqType.AddParameterValuesCondition(rdoCount, "fun", "grpfrq")
-        ucrPnlFreqType.AddParameterValuesCondition(rdoCount, "margin", False)
-        ucrPnlFreqType.AddParameterValuesCondition(rdoRow, "fun", "xtab")
-        ucrPnlFreqType.AddParameterValuesCondition(rdoRow, "margin", "row")
-        ucrPnlFreqType.AddParameterValuesCondition(rdoCell, "fun", "xtab")
-        ucrPnlFreqType.AddParameterValuesCondition(rdoCell, "margin", "cell")
-        ucrPnlFreqType.AddParameterValuesCondition(rdoColumn, "fun", "xtab")
-        ucrPnlFreqType.AddParameterValuesCondition(rdoColumn, "margin", "col")
-
 
         ucrPnlFrequencyDisplay.AddRadioButton(rdoTable)
         ucrPnlFrequencyDisplay.AddRadioButton(rdoGraph)
+
         ucrPnlFrequencyDisplay.AddFunctionNamesCondition(rdoTable, "sjtab")
         ucrPnlFrequencyDisplay.AddFunctionNamesCondition(rdoGraph, "sjplot")
 
