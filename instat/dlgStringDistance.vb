@@ -43,6 +43,7 @@ Public Class dlgStringDistance
         ucrInputPatternStringDistance.SetParameter(New RParameter("b", 1))
         ucrInputPatternStringDistance.AddQuotesIfUnrecognised = True
         ucrInputComboBoxMethod.SetParameter(New RParameter("method", 2))
+
         Dim dctMethod As New Dictionary(Of String, String)
         dctMethod.Add("Optimal string aligment", Chr(34) & "osa" & Chr(34))
         dctMethod.Add("Levenshtein distance", Chr(34) & "lv" & Chr(34))
@@ -61,14 +62,11 @@ Public Class dlgStringDistance
         ucrSaveStringDistance.SetDataFrameSelector(ucrSelectorStringDistance.ucrAvailableDataFrames)
         ucrSaveStringDistance.SetIsTextBox()
         ucrSaveStringDistance.SetLabelText("Save Result")
-
     End Sub
 
     Private Sub SetDefaults()
         clsStringDistFunction = New RFunction
         ucrSelectorStringDistance.Reset()
-        'ucrInputComboBoxMethod.Reset()
-        ucrInputPatternStringDistance.Reset()
         ucrSaveStringDistance.Reset()
         clsStringDistFunction.SetPackageName("stringdist")
         clsStringDistFunction.SetRCommand("stringdist")
@@ -76,8 +74,10 @@ Public Class dlgStringDistance
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrInputComboBoxMethod.SetRCode(clsStringDistFunction, bReset)
+        ucrInputPatternStringDistance.SetRCode(clsStringDistFunction, bReset)
+        ucrReceiverStringDistance.SetRCode(clsStringDistFunction, bReset)
+        ucrSaveStringDistance.SetRCode(clsStringDistFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
