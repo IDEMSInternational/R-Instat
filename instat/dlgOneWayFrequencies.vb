@@ -209,5 +209,4 @@ Public Class dlgOneWayFrequencies
         sdgOneWayFrequencies.ShowDialog()
         TestOkEnabled()
     End Sub
-
 End Class
