@@ -336,8 +336,8 @@ Public Class ucrCore
         Return bTemp
     End Function
 
-    Public Overridable Function GetParameter() As RParameter
-        Return clsParameter
+    Public Overridable Function GetParameter(Optional iIndex As Integer = 0) As RParameter
+        Return lstAllRParameters(iIndex)
     End Function
 
     Public Overridable Function GetRCode() As RCodeStructure

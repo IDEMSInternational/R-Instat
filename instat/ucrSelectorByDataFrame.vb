@@ -124,7 +124,7 @@ Public Class ucrSelectorByDataFrame
         End If
     End Sub
 
-    Public Overrides Function GetParameter() As RParameter
+    Public Overrides Function GetParameter(Optional iIndex As Integer = 0) As RParameter
         If bHasOwnParameter Then
             Return MyBase.GetParameter()
         Else
