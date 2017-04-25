@@ -34,18 +34,15 @@ Public Class dlgStringDistance
     End Sub
 
     Private Sub InitialiseDialog()
-
         'ucrReceiver
         ucrReceiverStringDistance.SetParameterIsRFunction()
         ucrReceiverStringDistance.Selector = ucrSelectorStringDistance
         ucrReceiverStringDistance.SetMeAsReceiver()
         ucrReceiverStringDistance.SetParameter(New RParameter("a", 0))
-        ucrReceiverStringDistance.SetParameterIsString()
+        ucrReceiverStringDistance.SetParameterIsRFunction()
         ucrInputPatternStringDistance.SetParameter(New RParameter("b", 1))
         ucrInputPatternStringDistance.AddQuotesIfUnrecognised = True
-
         ucrInputComboBoxMethod.SetParameter(New RParameter("method", 2))
-
         Dim dctMethod As New Dictionary(Of String, String)
         dctMethod.Add("Optimal string aligment", Chr(34) & "osa" & Chr(34))
         dctMethod.Add("Levenshtein distance", Chr(34) & "lv" & Chr(34))
@@ -53,39 +50,34 @@ Public Class dlgStringDistance
         dctMethod.Add("Hamming distance", Chr(34) & "hamming" & Chr(34))
         dctMethod.Add("Longest common substring distance", Chr(34) & "lcs" & Chr(34))
         dctMethod.Add("q-gram distance", Chr(34) & "qgram" & Chr(34))
-        dctMethod.Add("cosine distance", Chr(34) & "cosine" & Chr(34))
-        dctMethod.Add("jaccard Distance", Chr(34) & "jaccard" & Chr(34))
+        dctMethod.Add("cosine distance between q-gram profiles", Chr(34) & "cosine" & Chr(34))
+        dctMethod.Add("Jaccard distance between q-gram profiles", Chr(34) & "jaccard" & Chr(34))
         dctMethod.Add("Jaro ,or Jaro-Winker distance", Chr(34) & "jw" & Chr(34))
-        dctMethod.Add("soundex encoding", Chr(34) & "soundex" & Chr(34))
+        dctMethod.Add("Distance based on soundex encoding", Chr(34) & "soundex" & Chr(34))
         ucrInputComboBoxMethod.SetItems(dctMethod)
-
         'ucrSave
-        ucrSaveStringDistance.SetPrefix("string_distance")
+        ucrSaveStringDistance.SetPrefix("Dist")
         ucrSaveStringDistance.SetSaveTypeAsColumn()
         ucrSaveStringDistance.SetDataFrameSelector(ucrSelectorStringDistance.ucrAvailableDataFrames)
         ucrSaveStringDistance.SetIsTextBox()
         ucrSaveStringDistance.SetLabelText("Save Result")
 
-        clsStringDistFunction.SetAssignTo(ucrSaveStringDistance.GetText, strTempDataframe:=ucrSelectorStringDistance.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveStringDistance.GetText, bAssignToIsPrefix:=True)
-
     End Sub
 
     Private Sub SetDefaults()
-
         clsStringDistFunction = New RFunction
         ucrSelectorStringDistance.Reset()
-        ucrInputComboBoxMethod.Reset()
+        'ucrInputComboBoxMethod.Reset()
         ucrInputPatternStringDistance.Reset()
         ucrSaveStringDistance.Reset()
         clsStringDistFunction.SetPackageName("stringdist")
         clsStringDistFunction.SetRCommand("stringdist")
         ucrBase.clsRsyntax.SetBaseRFunction(clsStringDistFunction)
-
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-
+        ucrInputComboBoxMethod.SetRCode(clsStringDistFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
