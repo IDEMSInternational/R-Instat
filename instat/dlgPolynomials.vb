@@ -40,6 +40,11 @@ Public Class dlgPolynomials
         ucrReceiverPolynomial.SetParameter(New RParameter("x"))
         ucrReceiverPolynomial.SetParameterIsRFunction()
 
+        'ucrReceiverCentre.Selector = ucrSelectorForPolynomial
+        'ucrReceiverCentre.bUseFilteredData = False
+        'ucrReceiverCentre.SetMeAsReceiver()
+        'ucrReceiverCentre.SetIncludedDataTypes({"numeric"})
+
         ucrPnlType.SetParameter(New RParameter("raw", 1))
         ucrPnlType.AddRadioButton(rdoSimple, "TRUE")
         ucrPnlType.AddRadioButton(rdoCentered, "TRUE")
@@ -62,11 +67,10 @@ Public Class dlgPolynomials
         'Reset the selector
         ucrSelectorForPolynomial.Reset()
 
-        ucrPnlType.AddParameterValuesCondition(rdoSimple, "raw", "TRUE")
-        ucrPnlType.bAllowNonConditionValues = True
+        'ucrPnlType.AddParameterValuesCondition(rdoSimple, "raw", "TRUE")
+        ucrPnlType.bAllowNonConditionValues = False
         clsPolynomial.SetRCommand("poly")
         clsPolynomial.AddParameter("degree", 2)
-        clsPolynomial.AddParameter("raw", "TRUE")
 
         clsPolynomial.SetAssignTo(strTemp:=ucrSavePoly.GetText, strTempDataframe:=ucrSelectorForPolynomial.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSavePoly.GetText(), bAssignToIsPrefix:=True)
         ucrBase.clsRsyntax.SetBaseRFunction(clsPolynomial)
@@ -88,7 +92,7 @@ Public Class dlgPolynomials
         If (rdoSimple.Checked OrElse rdoOrthogonal.Checked) Then
             ucrReceiverPolynomial.SetRCode(clsPolynomial, bReset)
         ElseIf rdoCentered.Checked Then
-            ucrReceiverPolynomial.SetRCode(clsScale, bReset)
+            ' ucrReceiverCentre.SetRCode(clsScale, bReset)
         End If
 
     End Sub
@@ -108,11 +112,12 @@ Public Class dlgPolynomials
             clsScale.SetRCommand("scale")
             clsScale.AddParameter("center", "TRUE")
             clsScale.AddParameter("scale", "FALSE")
-            clsPolynomial.AddParameter("x", clsRFunctionParameter:=clsScale)
+            ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=clsScale)
+            clsScale.AddParameter("x", clsRFunctionParameter:=ucrReceiverPolynomial.GetVariables)
         Else
-            clsPolynomial.RemoveParameterByName("x")
+            ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverPolynomial.GetVariables)
+            ucrReceiverPolynomial.SetMeAsReceiver()
         End If
-
     End Sub
 
 End Class
