@@ -119,10 +119,11 @@ Public Class dlgOneWayFrequencies
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrChkWeights.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("weight.by", 1), iAdditionalPairNo:=1)
-        ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("weight.by", 1), iAdditionalPairNo:=1)
+        ucrChkWeights.AddAdditionalCodeParameterPair(clsSjPlot, ucrReceiverWeights.GetParameter(), iAdditionalPairNo:=1)
+        ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjPlot, ucrReceiverWeights.GetParameter(), iAdditionalPairNo:=1)
         ucrPnlSort.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("sort.frq", 3), iAdditionalPairNo:=1)
-        ucrNudGroups.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("auto.group", 9), iAdditionalPairNo:=1)
+        ucrNudGroups.AddAdditionalCodeParameterPair(clsSjPlot, ucrNudGroups.GetParameter(), iAdditionalPairNo:=1)
+        ucrChkGroupData.AddAdditionalCodeParameterPair(clsSjPlot, ucrNudGroups.GetParameter(), iAdditionalPairNo:=1)
         ucrReceiverOneWayFreq.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("data", 0), iAdditionalPairNo:=1)
 
         ucrReceiverWeights.SetRCode(clsSjTab, bReset)
