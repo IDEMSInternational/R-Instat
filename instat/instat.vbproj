@@ -269,6 +269,12 @@
     <Compile Include="dlgEnter.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgExportGraphAsImage.Designer.vb">
+      <DependentUpon>dlgExportGraphAsImage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExportGraphAsImage.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgExportToCPT.Designer.vb">
       <DependentUpon>dlgExportToCPT.vb</DependentUpon>
     </Compile>
@@ -2424,6 +2430,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExportDataset.sw-KE.resx">
       <DependentUpon>dlgExportDataset.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportGraphAsImage.resx">
+      <DependentUpon>dlgExportGraphAsImage.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExportToCPT.resx">
       <DependentUpon>dlgExportToCPT.vb</DependentUpon>
