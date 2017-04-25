@@ -52,7 +52,7 @@ Public Class dlgStringDistance
         dctMethod.Add("q-gram distance", Chr(34) & "qgram" & Chr(34))
         dctMethod.Add("cosine distance between q-gram profiles", Chr(34) & "cosine" & Chr(34))
         dctMethod.Add("Jaccard distance between q-gram profiles", Chr(34) & "jaccard" & Chr(34))
-        dctMethod.Add("Jaro ,or Jaro-Winker distance", Chr(34) & "jw" & Chr(34))
+        dctMethod.Add("Jaro or Jaro-Winker distance", Chr(34) & "jw" & Chr(34))
         dctMethod.Add("Distance based on soundex encoding", Chr(34) & "soundex" & Chr(34))
         ucrInputComboBoxMethod.SetItems(dctMethod)
 
@@ -61,7 +61,7 @@ Public Class dlgStringDistance
         ucrSaveStringDistance.SetSaveTypeAsColumn()
         ucrSaveStringDistance.SetDataFrameSelector(ucrSelectorStringDistance.ucrAvailableDataFrames)
         ucrSaveStringDistance.SetIsTextBox()
-        ucrSaveStringDistance.SetLabelText("Save Result")
+        ucrSaveStringDistance.SetLabelText("Save Result:")
     End Sub
 
     Private Sub SetDefaults()
