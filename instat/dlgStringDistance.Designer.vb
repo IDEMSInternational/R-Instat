@@ -36,7 +36,7 @@ Partial Class dlgStringDistance
         'lblColumn
         '
         Me.lblColumn.AutoSize = True
-        Me.lblColumn.Location = New System.Drawing.Point(248, 45)
+        Me.lblColumn.Location = New System.Drawing.Point(250, 45)
         Me.lblColumn.Name = "lblColumn"
         Me.lblColumn.Size = New System.Drawing.Size(45, 13)
         Me.lblColumn.TabIndex = 1
@@ -45,7 +45,7 @@ Partial Class dlgStringDistance
         'lblPattern
         '
         Me.lblPattern.AutoSize = True
-        Me.lblPattern.Location = New System.Drawing.Point(248, 98)
+        Me.lblPattern.Location = New System.Drawing.Point(250, 90)
         Me.lblPattern.Name = "lblPattern"
         Me.lblPattern.Size = New System.Drawing.Size(44, 13)
         Me.lblPattern.TabIndex = 3
@@ -54,7 +54,7 @@ Partial Class dlgStringDistance
         'lblMethod
         '
         Me.lblMethod.AutoSize = True
-        Me.lblMethod.Location = New System.Drawing.Point(250, 154)
+        Me.lblMethod.Location = New System.Drawing.Point(250, 136)
         Me.lblMethod.Name = "lblMethod"
         Me.lblMethod.Size = New System.Drawing.Size(46, 13)
         Me.lblMethod.TabIndex = 5
@@ -74,14 +74,14 @@ Partial Class dlgStringDistance
         '
         Me.ucrInputComboBoxMethod.AddQuotesIfUnrecognised = True
         Me.ucrInputComboBoxMethod.IsReadOnly = False
-        Me.ucrInputComboBoxMethod.Location = New System.Drawing.Point(252, 169)
+        Me.ucrInputComboBoxMethod.Location = New System.Drawing.Point(250, 151)
         Me.ucrInputComboBoxMethod.Name = "ucrInputComboBoxMethod"
         Me.ucrInputComboBoxMethod.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputComboBoxMethod.TabIndex = 6
         '
         'ucrSaveStringDistance
         '
-        Me.ucrSaveStringDistance.Location = New System.Drawing.Point(10, 209)
+        Me.ucrSaveStringDistance.Location = New System.Drawing.Point(10, 197)
         Me.ucrSaveStringDistance.Name = "ucrSaveStringDistance"
         Me.ucrSaveStringDistance.Size = New System.Drawing.Size(247, 24)
         Me.ucrSaveStringDistance.TabIndex = 7
@@ -91,7 +91,7 @@ Partial Class dlgStringDistance
         Me.ucrInputPatternStringDistance.AddQuotesIfUnrecognised = True
         Me.ucrInputPatternStringDistance.IsMultiline = False
         Me.ucrInputPatternStringDistance.IsReadOnly = False
-        Me.ucrInputPatternStringDistance.Location = New System.Drawing.Point(251, 113)
+        Me.ucrInputPatternStringDistance.Location = New System.Drawing.Point(250, 105)
         Me.ucrInputPatternStringDistance.Name = "ucrInputPatternStringDistance"
         Me.ucrInputPatternStringDistance.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputPatternStringDistance.TabIndex = 4
@@ -109,7 +109,7 @@ Partial Class dlgStringDistance
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 245)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 227)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(399, 52)
         Me.ucrBase.TabIndex = 8
@@ -118,7 +118,7 @@ Partial Class dlgStringDistance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(413, 301)
+        Me.ClientSize = New System.Drawing.Size(417, 285)
         Me.Controls.Add(Me.UcrSelectorStringDistance)
         Me.Controls.Add(Me.lblMethod)
         Me.Controls.Add(Me.ucrInputComboBoxMethod)
