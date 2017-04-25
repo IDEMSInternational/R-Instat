@@ -46,6 +46,7 @@ Public Class dlgHistogram
         ucrFactorReceiver.SetRCode(clsRaesFunction, bReset)
         ucrSaveHist.SetRCode(clsBaseOperator, bReset)
         ucrHistogramSelector.SetRCode(clsBaseOperator, bReset)
+        ucrHistogramSelector.SetRCode(clsBaseOperator, bReset)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -59,9 +60,10 @@ Public Class dlgHistogram
 
         ucrFactorReceiver.Selector = ucrHistogramSelector
         ucrFactorReceiver.SetIncludedDataTypes({"factor"})
-
         'can put in colour for density and polygon but fill for Histogram
-        ucrFactorReceiver.SetParameter(New RParameter(""))
+        ucrFactorReceiver.SetParameter(New RParameter("fill"))
+        ucrFactorReceiver.bWithQuotes = False
+        ucrFactorReceiver.SetParameterIsString()
 
         ucrHistogramSelector.SetParameter(New RParameter("data"))
         ucrHistogramSelector.SetParameterIsrfunction()
@@ -92,42 +94,19 @@ Public Class dlgHistogram
         If rdoHistogram.Checked = True Then
             clsRgeom_histogramFunction.SetRCommand("geom_histogram")
             ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_histogramFunction)
-
-            clsRaesFunction.RemoveParameterByName("colour")
-            cmdHistogramOptions.Visible = True
-            If Not ucrFactorReceiver.IsEmpty Then
-                clsRaesFunction.AddParameter("fill", ucrFactorReceiver.GetVariableNames(False))
-            Else
-                clsRaesFunction.RemoveParameterByName("fill")
-            End If
+            ucrFactorReceiver.ChangeParameterName("fill")
 
         ElseIf rdoDensity.Checked = True Then
             clsRgeom_densityFunction.SetRCommand("geom_density")
             ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_densityFunction)
+            ucrFactorReceiver.ChangeParameterName("colour")
 
-            clsRaesFunction.RemoveParameterByName("fill")
-            cmdHistogramOptions.Visible = False
-
-
-            If Not ucrFactorReceiver.IsEmpty Then
-                clsRaesFunction.AddParameter("colour", ucrFactorReceiver.GetVariableNames(False))
-            Else
-                clsRaesFunction.RemoveParameterByName("colour")
-            End If
         ElseIf rdoFreequencyPolygon.Checked = True Then
             clsRgeom_FPolygon.SetRCommand("geom_freqpoly")
             ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_FPolygon)
-
-            clsRaesFunction.RemoveParameterByName("fill")
-            cmdHistogramOptions.Visible = False
-
-
-            If Not ucrFactorReceiver.IsEmpty Then
-                clsRaesFunction.AddParameter("colour", ucrFactorReceiver.GetVariableNames(False))
-            Else
-                clsRaesFunction.RemoveParameterByName("colour")
-            End If
+            ucrFactorReceiver.ChangeParameterName("colour")
         End If
+
         TestOkEnabled()
     End Sub
 
@@ -153,8 +132,6 @@ Public Class dlgHistogram
         clsRgeom_histogramFunction = New RFunction
         clsRaesFunction = New RFunction
 
-
-
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
         clsBaseOperator.AddParameter("histogram", clsRFunctionParameter:=clsRgeom_histogramFunction)
@@ -173,7 +150,6 @@ Public Class dlgHistogram
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
 
         TestOkEnabled()
-
     End Sub
 
     Private Sub rdoHistogram_KeyPress(sender As Object, e As KeyPressEventArgs) Handles rdoHistogram.KeyPress
