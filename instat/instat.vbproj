@@ -287,6 +287,12 @@
     <Compile Include="dlgCorruptionFile.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgFactorLabels.Designer.vb">
+      <DependentUpon>dlgFactorLabels.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgFactorLabels.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgFitCorruptionModel.Designer.vb">
       <DependentUpon>dlgFitCorruptionModel.vb</DependentUpon>
     </Compile>
@@ -455,6 +461,12 @@
     <Compile Include="dlgStandardiseCountryNames.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgStringDistance.Designer.vb">
+      <DependentUpon>dlgStringDistance.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgStringDistance.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgStringHandling.Designer.vb">
       <DependentUpon>dlgStringHandling.vb</DependentUpon>
     </Compile>
@@ -471,6 +483,12 @@
       <DependentUpon>dlgTemperature.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgTemperature.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgThreeVariableFrequencies.Designer.vb">
+      <DependentUpon>dlgThreeVariableFrequencies.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgThreeVariableFrequencies.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgTwoVariableUseModel.Designer.vb">
@@ -2428,6 +2446,9 @@
     <EmbeddedResource Include="dlgCorruptionFile.resx">
       <DependentUpon>dlgCorruptionFile.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgFactorLabels.resx">
+      <DependentUpon>dlgFactorLabels.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgFitCorruptionModel.resx">
       <DependentUpon>dlgFitCorruptionModel.vb</DependentUpon>
     </EmbeddedResource>
@@ -2818,6 +2839,9 @@
     <EmbeddedResource Include="dlgStandardiseCountryNames.resx">
       <DependentUpon>dlgStandardiseCountryNames.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgStringDistance.resx">
+      <DependentUpon>dlgStringDistance.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgStringHandling.resx">
       <DependentUpon>dlgStringHandling.vb</DependentUpon>
     </EmbeddedResource>
@@ -2853,6 +2877,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgThemes.sw-KE.resx">
       <DependentUpon>dlgThemes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgThreeVariableFrequencies.resx">
+      <DependentUpon>dlgThreeVariableFrequencies.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTransformText.fr-FR.resx">
       <DependentUpon>dlgTransformText.vb</DependentUpon>
