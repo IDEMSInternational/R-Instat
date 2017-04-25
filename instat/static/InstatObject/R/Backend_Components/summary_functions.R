@@ -83,13 +83,41 @@ instat_object$set("public", "append_summaries_to_data_object", function(out, dat
 } 
 )
 
-instat_object$set("public", "calculate_summary", function(data_name, columns_to_summarise, summaries, factors = c(), store_results = TRUE, drop = FALSE, return_output = FALSE, summary_name = NA, add_cols = c(), filter_names = c(), ...) {
-  calculated_from = list()
-  calculated_from[[1]] <- list(data_name = data_name, columns = columns_to_summarise)
-  #TODO Change this to store sub_calculations for each column
-  calc <- calculation$new(type = "summary", parameters = list(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = factors, store_results = store_results, drop = drop, return_output = return_output, summary_name = summary_name, add_cols = add_cols, ... = ...),  filters = filter_names, calculated_from = calculated_from)
-  results <- self$apply_calculation(calc)
-  if(!is.null(results)) return(results)
+instat_object$set("public", "calculate_summary", function(data_name, columns_to_summarise, summaries, factors = c(), store_results = TRUE, drop = TRUE, na.rm = FALSE, return_output = FALSE, summary_name = NA, ...) {
+  if(!store_results) {
+    save <- 0
+  }
+  else {
+    save <- 2
+  }
+  calculated_from <- list(factors)
+  names(calculated_from) <- rep(data_name, length(factors))
+  calculated_from <- as.list(calculated_from)
+  factor_by <- instat_calculation$new(type = "by", calculated_from = calculated_from)
+  
+  sub_calculations <- list()
+  if(missing(columns_to_summarise)) {
+    for(summary_type in summaries) {
+      summary_calculation <- instat_calculation$new(type = "calculation", result_name = summary_type,
+                                                    function_exp = paste0(summary_type, "()"), save = save)
+      sub_calculations[[length(sub_calculations) + 1]] <- summary_calculation
+    }
+  }
+  else {
+    for(column_name in columns_to_summarise) {
+      calculated_from <- list(column_name)
+      names(calculated_from) <- data_name
+      for(summary_type in summaries) {
+        summary_calculation <- instat_calculation$new(type = "calculation", result_name = paste0(summary_type, "_", column_name),
+                                                      function_exp = paste0(summary_type, "(", column_name, ", na.rm =", na.rm, ")"),
+                                                      calculated_from = calculated_from, save = save)
+        sub_calculations[[length(sub_calculations) + 1]] <- summary_calculation
+      }
+    }
+  }
+  combined_calc_sum <- instat_calculation$new(type="combination", sub_calculations = sub_calculations, manipulations = list(factor_by))
+  out <- self$apply_instat_calculation(combined_calc_sum)
+  if(return_output) return(out$data)
 }
 )
 
@@ -158,7 +186,6 @@ data_object$set("public", "calculate_summary", function(calc, ...) {
   if("na.rm" %in% names(calc[["parameters"]])) na.rm = calc[["parameters"]][["na.rm"]]
   else na.rm = FALSE
   filter_names = calc[["filters"]]
-  if(missing(columns_to_summarise)) stop("columns_to_summarise must be specified")
   if(missing(summaries)) stop("summaries must be specified")
   # Removed since curr_data_filter has same columns
   # curr_data_full <- self$get_data_frame(use_current_filter = FALSE)
