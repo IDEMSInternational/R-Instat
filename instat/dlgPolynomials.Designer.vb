@@ -111,6 +111,8 @@ Partial Class dlgPolynomials
         '
         'ucrPnlType
         '
+        Me.ucrPnlType.bAddRemoveParameter = True
+        Me.ucrPnlType.bChangeParameterValue = True
         Me.ucrPnlType.Location = New System.Drawing.Point(6, 12)
         Me.ucrPnlType.Name = "ucrPnlType"
         Me.ucrPnlType.Size = New System.Drawing.Size(111, 88)
@@ -118,6 +120,8 @@ Partial Class dlgPolynomials
         '
         'ucrNudDegree
         '
+        Me.ucrNudDegree.bAddRemoveParameter = True
+        Me.ucrNudDegree.bChangeParameterValue = True
         Me.ucrNudDegree.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDegree.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudDegree.Location = New System.Drawing.Point(308, 77)
@@ -130,6 +134,8 @@ Partial Class dlgPolynomials
         '
         'ucrSavePoly
         '
+        Me.ucrSavePoly.bAddRemoveParameter = True
+        Me.ucrSavePoly.bChangeParameterValue = True
         Me.ucrSavePoly.Location = New System.Drawing.Point(9, 223)
         Me.ucrSavePoly.Name = "ucrSavePoly"
         Me.ucrSavePoly.Size = New System.Drawing.Size(254, 24)
@@ -137,6 +143,8 @@ Partial Class dlgPolynomials
         '
         'ucrSelectorForPolynomial
         '
+        Me.ucrSelectorForPolynomial.bAddRemoveParameter = True
+        Me.ucrSelectorForPolynomial.bChangeParameterValue = True
         Me.ucrSelectorForPolynomial.bShowHiddenColumns = False
         Me.ucrSelectorForPolynomial.bUseCurrentFilter = True
         Me.ucrSelectorForPolynomial.Location = New System.Drawing.Point(10, 10)
@@ -147,6 +155,8 @@ Partial Class dlgPolynomials
         '
         'ucrReceiverPolynomial
         '
+        Me.ucrReceiverPolynomial.bAddRemoveParameter = True
+        Me.ucrReceiverPolynomial.bChangeParameterValue = True
         Me.ucrReceiverPolynomial.frmParent = Me
         Me.ucrReceiverPolynomial.Location = New System.Drawing.Point(258, 49)
         Me.ucrReceiverPolynomial.Margin = New System.Windows.Forms.Padding(0)
@@ -154,7 +164,6 @@ Partial Class dlgPolynomials
         Me.ucrReceiverPolynomial.Selector = Nothing
         Me.ucrReceiverPolynomial.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverPolynomial.TabIndex = 2
-        Me.ucrReceiverPolynomial.ucrSelector = Nothing
         '
         'ucrBase
         '
