@@ -30,7 +30,7 @@ Partial Class dlgDefineRedFlags
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 206)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 202)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 3
@@ -44,6 +44,7 @@ Partial Class dlgDefineRedFlags
         Me.ucrReceiverRedFlag.Selector = Nothing
         Me.ucrReceiverRedFlag.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverRedFlag.TabIndex = 2
+        Me.ucrReceiverRedFlag.ucrSelector = Nothing
         '
         'ucrSelectorDefineRedFlag
         '
@@ -58,7 +59,7 @@ Partial Class dlgDefineRedFlags
         'lblRedFlags
         '
         Me.lblRedFlags.AutoSize = True
-        Me.lblRedFlags.Location = New System.Drawing.Point(268, 44)
+        Me.lblRedFlags.Location = New System.Drawing.Point(271, 45)
         Me.lblRedFlags.Name = "lblRedFlags"
         Me.lblRedFlags.Size = New System.Drawing.Size(58, 13)
         Me.lblRedFlags.TabIndex = 1
@@ -68,7 +69,7 @@ Partial Class dlgDefineRedFlags
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(417, 266)
+        Me.ClientSize = New System.Drawing.Size(420, 260)
         Me.Controls.Add(Me.lblRedFlags)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrReceiverRedFlag)
