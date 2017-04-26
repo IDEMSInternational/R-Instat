@@ -73,7 +73,7 @@ Public Class dlgStringDistance
         ucrInputPatternStringDistance.Reset()
         clsStringDistFunction.SetPackageName("stringdist")
         clsStringDistFunction.SetRCommand("stringdist")
-        clsStringDistFunction.AddParameter("method", Chr(34) & "hamming" & Chr(34))
+        clsStringDistFunction.AddParameter("method", Chr(34) & "osa" & Chr(34))
         ucrBase.clsRsyntax.SetBaseRFunction(clsStringDistFunction)
     End Sub
 
