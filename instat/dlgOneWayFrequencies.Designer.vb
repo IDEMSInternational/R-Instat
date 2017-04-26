@@ -246,7 +246,7 @@ Partial Class dlgOneWayFrequencies
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(416, 388)
+        Me.ClientSize = New System.Drawing.Size(420, 388)
         Me.Controls.Add(Me.ucrReceiverOneWayFreq)
         Me.Controls.Add(Me.rdoBoth)
         Me.Controls.Add(Me.rdoGraph)

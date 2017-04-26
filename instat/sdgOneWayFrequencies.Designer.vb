@@ -25,6 +25,8 @@ Partial Class sdgOneWayFrequencies
         Me.tbOneWayFrequencies = New System.Windows.Forms.TabControl()
         Me.tbTable = New System.Windows.Forms.TabPage()
         Me.grpTableOptions = New System.Windows.Forms.GroupBox()
+        Me.lblOmitZero = New System.Windows.Forms.Label()
+        Me.ucrInputOmitZero = New instat.ucrInputComboBox()
         Me.ucrChkCountName = New instat.ucrCheck()
         Me.ucrInputCountsName = New instat.ucrInputTextBox()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -50,8 +52,6 @@ Partial Class sdgOneWayFrequencies
         Me.rdoBar = New System.Windows.Forms.RadioButton()
         Me.ucrPnlGraphType = New instat.UcrPanel()
         Me.ucrBaseOneWayFrequencies = New instat.ucrButtonsSubdialogue()
-        Me.lblOmitZero = New System.Windows.Forms.Label()
-        Me.ucrInputOmitZero = New instat.ucrInputComboBox()
         Me.tbOneWayFrequencies.SuspendLayout()
         Me.tbTable.SuspendLayout()
         Me.grpTableOptions.SuspendLayout()
@@ -99,13 +99,32 @@ Partial Class sdgOneWayFrequencies
         Me.grpTableOptions.TabStop = False
         Me.grpTableOptions.Text = "More Options"
         '
+        'lblOmitZero
+        '
+        Me.lblOmitZero.AutoSize = True
+        Me.lblOmitZero.Location = New System.Drawing.Point(9, 121)
+        Me.lblOmitZero.Name = "lblOmitZero"
+        Me.lblOmitZero.Size = New System.Drawing.Size(145, 13)
+        Me.lblOmitZero.TabIndex = 5
+        Me.lblOmitZero.Text = "Omit Zero Counts from Table:"
+        '
+        'ucrInputOmitZero
+        '
+        Me.ucrInputOmitZero.AddQuotesIfUnrecognised = True
+        Me.ucrInputOmitZero.IsReadOnly = False
+        Me.ucrInputOmitZero.Location = New System.Drawing.Point(164, 116)
+        Me.ucrInputOmitZero.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputOmitZero.Name = "ucrInputOmitZero"
+        Me.ucrInputOmitZero.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputOmitZero.TabIndex = 6
+        '
         'ucrChkCountName
         '
         Me.ucrChkCountName.Checked = False
         Me.ucrChkCountName.Location = New System.Drawing.Point(12, 93)
         Me.ucrChkCountName.Name = "ucrChkCountName"
         Me.ucrChkCountName.Size = New System.Drawing.Size(94, 20)
-        Me.ucrChkCountName.TabIndex = 4
+        Me.ucrChkCountName.TabIndex = 3
         '
         'ucrInputCountsName
         '
@@ -115,7 +134,7 @@ Partial Class sdgOneWayFrequencies
         Me.ucrInputCountsName.Location = New System.Drawing.Point(112, 92)
         Me.ucrInputCountsName.Name = "ucrInputCountsName"
         Me.ucrInputCountsName.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputCountsName.TabIndex = 5
+        Me.ucrInputCountsName.TabIndex = 4
         '
         'Label1
         '
@@ -123,7 +142,7 @@ Partial Class sdgOneWayFrequencies
         Me.Label1.Location = New System.Drawing.Point(9, 145)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(161, 13)
-        Me.Label1.TabIndex = 6
+        Me.Label1.TabIndex = 7
         Me.Label1.Text = "Decimal Places for Percentages:"
         '
         'ucrNudDecimalPlaces
@@ -135,7 +154,7 @@ Partial Class sdgOneWayFrequencies
         Me.ucrNudDecimalPlaces.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDecimalPlaces.Name = "ucrNudDecimalPlaces"
         Me.ucrNudDecimalPlaces.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudDecimalPlaces.TabIndex = 7
+        Me.ucrNudDecimalPlaces.TabIndex = 8
         Me.ucrNudDecimalPlaces.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrChkHighlightedRows
@@ -340,25 +359,6 @@ Partial Class sdgOneWayFrequencies
         Me.ucrBaseOneWayFrequencies.Name = "ucrBaseOneWayFrequencies"
         Me.ucrBaseOneWayFrequencies.Size = New System.Drawing.Size(142, 30)
         Me.ucrBaseOneWayFrequencies.TabIndex = 1
-        '
-        'lblOmitZero
-        '
-        Me.lblOmitZero.AutoSize = True
-        Me.lblOmitZero.Location = New System.Drawing.Point(9, 121)
-        Me.lblOmitZero.Name = "lblOmitZero"
-        Me.lblOmitZero.Size = New System.Drawing.Size(142, 13)
-        Me.lblOmitZero.TabIndex = 8
-        Me.lblOmitZero.Text = "Omit Zero Counts from Table"
-        '
-        'ucrInputOmitZero
-        '
-        Me.ucrInputOmitZero.AddQuotesIfUnrecognised = True
-        Me.ucrInputOmitZero.IsReadOnly = False
-        Me.ucrInputOmitZero.Location = New System.Drawing.Point(164, 116)
-        Me.ucrInputOmitZero.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.ucrInputOmitZero.Name = "ucrInputOmitZero"
-        Me.ucrInputOmitZero.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputOmitZero.TabIndex = 9
         '
         'sdgOneWayFrequencies
         '
