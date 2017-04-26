@@ -13,7 +13,6 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports instat
 Imports instat.Translations
 Public Class dlgStringDistance
     Private bFirstload As Boolean = True
@@ -35,25 +34,26 @@ Public Class dlgStringDistance
 
     Private Sub InitialiseDialog()
         'ucrReceiver
+        ucrReceiverStringDistance.SetParameter(New RParameter("a", 0))
         ucrReceiverStringDistance.SetParameterIsRFunction()
         ucrReceiverStringDistance.Selector = ucrSelectorStringDistance
         ucrReceiverStringDistance.SetMeAsReceiver()
-        ucrReceiverStringDistance.SetParameter(New RParameter("a", 0))
-        ucrReceiverStringDistance.SetParameterIsRFunction()
+
         ucrInputPatternStringDistance.SetParameter(New RParameter("b", 1))
+
         ucrInputComboBoxMethod.SetParameter(New RParameter("method", 2))
 
         Dim dctMethod As New Dictionary(Of String, String)
-        dctMethod.Add("Optimal string aligment", Chr(34) & "osa" & Chr(34))
-        dctMethod.Add("Levenshtein distance", Chr(34) & "lv" & Chr(34))
-        dctMethod.Add("Full Damerau-Levenshtein distance", Chr(34) & "dl" & Chr(34))
-        dctMethod.Add("Hamming distance", Chr(34) & "hamming" & Chr(34))
-        dctMethod.Add("Longest common substring distance", Chr(34) & "lcs" & Chr(34))
-        dctMethod.Add("q-gram distance", Chr(34) & "qgram" & Chr(34))
-        dctMethod.Add("cosine distance between q-gram profiles", Chr(34) & "cosine" & Chr(34))
-        dctMethod.Add("Jaccard distance between q-gram profiles", Chr(34) & "jaccard" & Chr(34))
-        dctMethod.Add("Jaro or Jaro-Winker distance", Chr(34) & "jw" & Chr(34))
-        dctMethod.Add("Distance based on soundex encoding", Chr(34) & "soundex" & Chr(34))
+        dctMethod.Add("Optimal String Alignment", Chr(34) & "osa" & Chr(34))
+        dctMethod.Add("Levenshtein Distance", Chr(34) & "lv" & Chr(34))
+        dctMethod.Add("Full Damerau-Levenshtein Distance", Chr(34) & "dl" & Chr(34))
+        dctMethod.Add("Hamming Distance", Chr(34) & "hamming" & Chr(34))
+        dctMethod.Add("Longest Common Substring Distance", Chr(34) & "lcs" & Chr(34))
+        dctMethod.Add("q-Gram Distance", Chr(34) & "qgram" & Chr(34))
+        dctMethod.Add("Cosine Distance between q-Gram Profiles", Chr(34) & "cosine" & Chr(34))
+        dctMethod.Add("Jaccard Distance between q-Gram Profiles", Chr(34) & "jaccard" & Chr(34))
+        dctMethod.Add("Jaro or Jaro-Winker Distance", Chr(34) & "jw" & Chr(34))
+        dctMethod.Add("Distance based on Soundex Encoding", Chr(34) & "soundex" & Chr(34))
         ucrInputComboBoxMethod.SetItems(dctMethod)
 
         'ucrSave
@@ -71,9 +71,9 @@ Public Class dlgStringDistance
         ucrSaveStringDistance.Reset()
         ucrInputComboBoxMethod.Reset()
         ucrInputPatternStringDistance.Reset()
-        clsStringDistFunction.AddParameter("method", Chr(34) & "hamming" & Chr(34))
         clsStringDistFunction.SetPackageName("stringdist")
         clsStringDistFunction.SetRCommand("stringdist")
+        clsStringDistFunction.AddParameter("method", Chr(34) & "hamming" & Chr(34))
         ucrBase.clsRsyntax.SetBaseRFunction(clsStringDistFunction)
     End Sub
 
