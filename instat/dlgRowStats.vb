@@ -17,6 +17,7 @@ Imports instat.Translations
 Public Class dlgRowStats
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private clsDefaultFunction As New RFunction
 
     Private Sub dlgRowStats_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -29,11 +30,11 @@ Public Class dlgRowStats
         SetRCodeforControls(bReset)
         bReset = False
         autoTranslate(Me)
-
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
+        clsDefaultFunction = New RFunction
+
         ucrSelectorForRowStats.Reset()
         ucrSaveResults.Reset()
 
@@ -43,7 +44,7 @@ Public Class dlgRowStats
         clsDefaultFunction.AddParameter("MARGIN", 1)
         clsDefaultFunction.SetAssignTo(ucrSaveResults.GetText, strTempDataframe:=ucrSelectorForRowStats.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
@@ -99,5 +100,4 @@ Public Class dlgRowStats
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForRowStatistics.ControlContentsChanged, ucrSaveResults.ControlContentsChanged
         TestOKEnabled()
     End Sub
-
 End Class
