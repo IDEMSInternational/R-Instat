@@ -17,7 +17,7 @@
 Imports instat.Translations
 Public Class sdgOneWayFrequencies
     Public bControlsInitialised As Boolean = False
-    Public clsOneWayTableFreq, clsOneWayGraphFreq, clsOneWayPlotGrid As New RFunction
+    Public clsOneWayTableFreq, clsOneWayGraphFreq, clsPlotGrid As New RFunction
 
     Private Sub sdgOneWayFrequencies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -127,7 +127,7 @@ Public Class sdgOneWayFrequencies
         End If
         clsOneWayTableFreq = clsNewSjtFreq
         clsOneWayGraphFreq = clsNewSjpFrq
-        clsOneWayPlotGrid = clsNewPlotGrid
+        clsPlotGrid = clsNewPlotGrid
 
         ucrChkMedian.SetRCode(clsOneWayTableFreq, bReset)
         ucrChkShowSummary.SetRCode(clsOneWayTableFreq, bReset)
@@ -144,6 +144,6 @@ Public Class sdgOneWayFrequencies
         ucrInputVerticalLabels.SetRCode(clsOneWayGraphFreq, bReset)
         ucrInputHorizontalLabels.SetRCode(clsOneWayGraphFreq, bReset)
         ucrInputGraphTitle.SetRCode(clsOneWayGraphFreq, bReset)
-        ucrSaveGraph.SetRCode(clsOneWayPlotGrid, bReset)
+        ucrSaveGraph.SetRCode(clsPlotGrid, bReset)
     End Sub
 End Class
