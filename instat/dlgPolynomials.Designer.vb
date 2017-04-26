@@ -65,7 +65,7 @@ Partial Class dlgPolynomials
         Me.grpType.Controls.Add(Me.ucrPnlType)
         Me.grpType.Location = New System.Drawing.Point(258, 111)
         Me.grpType.Name = "grpType"
-        Me.grpType.Size = New System.Drawing.Size(123, 106)
+        Me.grpType.Size = New System.Drawing.Size(123, 97)
         Me.grpType.TabIndex = 17
         Me.grpType.TabStop = False
         Me.grpType.Text = "Type"
@@ -75,7 +75,7 @@ Partial Class dlgPolynomials
         Me.rdoCentered.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.rdoCentered.AutoSize = True
-        Me.rdoCentered.Location = New System.Drawing.Point(23, 69)
+        Me.rdoCentered.Location = New System.Drawing.Point(23, 40)
         Me.rdoCentered.Name = "rdoCentered"
         Me.rdoCentered.Size = New System.Drawing.Size(68, 17)
         Me.rdoCentered.TabIndex = 9
@@ -88,7 +88,7 @@ Partial Class dlgPolynomials
         Me.rdoOrthogonal.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.rdoOrthogonal.AutoSize = True
-        Me.rdoOrthogonal.Location = New System.Drawing.Point(23, 42)
+        Me.rdoOrthogonal.Location = New System.Drawing.Point(23, 63)
         Me.rdoOrthogonal.Name = "rdoOrthogonal"
         Me.rdoOrthogonal.Size = New System.Drawing.Size(77, 17)
         Me.rdoOrthogonal.TabIndex = 8
@@ -113,7 +113,7 @@ Partial Class dlgPolynomials
         '
         Me.ucrPnlType.Location = New System.Drawing.Point(6, 12)
         Me.ucrPnlType.Name = "ucrPnlType"
-        Me.ucrPnlType.Size = New System.Drawing.Size(111, 88)
+        Me.ucrPnlType.Size = New System.Drawing.Size(111, 77)
         Me.ucrPnlType.TabIndex = 0
         '
         'ucrNudDegree
