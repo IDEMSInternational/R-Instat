@@ -989,7 +989,7 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
     stop(to_type, " is not a valid type to convert to")
   }
   
-  if(!is.null(factor_values) && !(factor_values %in% c("by_levels", "by_ordinals"))) {
+  if(!is.null(factor_values) && !(factor_values %in% c("force_ordinals", "force_values"))) {
     stop(factor_values, " can either be by_levels or by_ordinals.")
   }
   
@@ -1001,8 +1001,8 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
       tmp_attr <- tmp_attr[!names(tmp_attr) %in% c("class", "levels")]
     }
     if(!is.null(factor_values) && is.factor(curr_col) && to_type %in% c("integer", "numeric")) {
-      if(factor_values == "by_levels") curr_col <- as.numeric(curr_col)
-      else if(factor_values == "by_ordinals") curr_col <- as.numeric(levels(curr_col))[curr_col]
+      if(factor_values == "force_ordinals") curr_col <- as.numeric(curr_col)
+      else if(factor_values == "force_values") curr_col <- as.numeric(levels(curr_col))[curr_col]
     }
     if(to_type %in% c("factor", "ordered_factor")) {
       ordered <- (to_type == "ordered_factor")
