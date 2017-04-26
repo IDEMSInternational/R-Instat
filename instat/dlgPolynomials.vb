@@ -47,25 +47,20 @@ Public Class dlgPolynomials
         ucrPnlType.AddRadioButton(rdoOrthogonal, "FALSE")
         ucrPnlType.SetRDefault("FALSE")
 
+        'ucrPnlType.AddParameterValuesCondition(rdoSimple, "raw", "TRUE")
+        'ucrPnlType.AddParameterValuesCondition(rdoOrthogonal, "raw", "FALSE")
+
         ucrNudDegree.SetParameter(New RParameter("degree", 2))
         ucrNudDegree.Minimum = 1
-        'Set ucrSave 
-        'ucrSavePoly.SetPrefix("poly")
-        'ucrSavePoly.SetIsComboBox()
-        'ucrSavePoly.SetSaveTypeAsColumn()
-        'ucrSavePoly.SetLabelText("Save Poly")
-        'ucrSavePoly.SetDataFrameSelector(ucrSelectorForPolynomial.ucrAvailableDataFrames)
     End Sub
 
     Private Sub SetDefaults()
         clsPolynomial = New RFunction
-        'Reset the selector
+
+        'Reset 
         ucrSelectorForPolynomial.Reset()
         ucrSavePoly.Reset()
         SetNewColumName()
-
-        'ucrPnlType.AddParameterValuesCondition(rdoSimple, "raw", "TRUE")
-        'ucrPnlType.AddParameterValuesCondition(rdoOrthogonal, "raw", "FALSE")
 
         clsPolynomial.SetRCommand("poly")
         clsPolynomial.AddParameter("degree", 2)
@@ -138,4 +133,5 @@ Public Class dlgPolynomials
     Private Sub ucrNudDegree_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudDegree.ControlValueChanged
         SetNewColumName()
     End Sub
+
 End Class
