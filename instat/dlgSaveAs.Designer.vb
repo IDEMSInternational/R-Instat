@@ -61,7 +61,7 @@ Partial Class dlgSaveAs
         Me.cmdChooseFile.Name = "cmdChooseFile"
         Me.cmdChooseFile.Size = New System.Drawing.Size(65, 21)
         Me.cmdChooseFile.TabIndex = 17
-        Me.cmdChooseFile.Text = "Browse"
+        Me.cmdChooseFile.Text = "Browse..."
         Me.cmdChooseFile.UseVisualStyleBackColor = True
         '
         'lblConfirm
