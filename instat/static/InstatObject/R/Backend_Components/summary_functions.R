@@ -3,7 +3,7 @@ data_object$set("public", "merge_data", function(new_data, by = NULL, type = "le
   #TODO how to use match argument with dplyr join functions
   old_metadata <- attributes(private$data)
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
-
+  
   if(type == "left") {
     new_data <- left_join(curr_data, new_data, by)
   }
@@ -83,22 +83,23 @@ instat_object$set("public", "append_summaries_to_data_object", function(out, dat
 } 
 )
 
-instat_object$set("public", "calculate_summary", function(data_name, columns_to_summarise, summaries, factors = c(), store_results = TRUE, drop = TRUE, na.rm = FALSE, return_output = FALSE, summary_name = NA, ...) {
+instat_object$set("public", "calculate_summary", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), store_results = TRUE, drop = TRUE, na.rm = FALSE, return_output = FALSE, summary_name = NA, ...) {
   if(!store_results) {
     save <- 0
   }
   else {
     save <- 2
-  }
-  calculated_from <- list(factors)
+  } 
+  calculated_from <- as.list(factors)
   names(calculated_from) <- rep(data_name, length(factors))
   calculated_from <- as.list(calculated_from)
   factor_by <- instat_calculation$new(type = "by", calculated_from = calculated_from)
-  
+    
   sub_calculations <- list()
-  if(missing(columns_to_summarise)) {
+  
+  if(is.null(columns_to_summarise)) {
     for(summary_type in summaries) {
-      summary_calculation <- instat_calculation$new(type = "calculation", result_name = summary_type,
+      summary_calculation <- instat_calculation$new(type = "summary", result_name = summary_type,
                                                     function_exp = paste0(summary_type, "()"), save = save)
       sub_calculations[[length(sub_calculations) + 1]] <- summary_calculation
     }
@@ -108,7 +109,7 @@ instat_object$set("public", "calculate_summary", function(data_name, columns_to_
       calculated_from <- list(column_name)
       names(calculated_from) <- data_name
       for(summary_type in summaries) {
-        summary_calculation <- instat_calculation$new(type = "calculation", result_name = paste0(summary_type, "_", column_name),
+        summary_calculation <- instat_calculation$new(type = "summary", result_name = paste0(summary_type, "_", column_name),
                                                       function_exp = paste0(summary_type, "(", column_name, ", na.rm =", na.rm, ")"),
                                                       calculated_from = calculated_from, save = save)
         sub_calculations[[length(sub_calculations) + 1]] <- summary_calculation
@@ -334,3 +335,36 @@ summary_range <- function(x, na.rm = FALSE, ...){
 summary_median <- function(x, na.rm = FALSE,...) {
   return(median(x, na.rm = na.rm))
 }
+
+
+
+
+
+instat_object$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, row_factors = c(), column_factors = c(), store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = TRUE, ...) {
+  
+  factors <- c(column_factors, row_factors)
+  cell_values <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = factors, store_results = store_results, drop = drop, na.rm = na.rm, return_output = TRUE)
+  
+  if(include_margins) {
+    margin_tables <- list()
+    power_sets <- powerSet(factors)
+    for(facts in head(power_sets, -1)) { # OR power_sets[-length(power_sets)])
+      margin_tables[[length(margin_tables) + 1]] <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = facts, store_results = store_results, drop = drop, na.rm = na.rm, return_output = return_output)
+      # How to save that calculate_margins bit
+    }
+  }
+  column_factor_margin <- margin_tables[2]   # in long term where is [[2]], e.g. which(powerSet(c(1,2,3, 4)) == "1"
+  
+  # which will then be which(powerSet(c(1,2,3,4)) == "column_factors")?
+  # which(power_sets == "column_factors")
+  
+  row_factor_margin <- margin_tables[length(margin_tables)] # last one. (last is usually 1,2,3 but here it is not because we have removed the last term)
+  
+  
+  overall_value <- margin_tables[1]
+  # unstack cell data by column factor
+  # get the three margins (row, column, overall)
+  # make them into 2 vectors (one row and one column)
+  # do rbind and cbind to add them???
+}
+)
