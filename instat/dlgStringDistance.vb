@@ -55,7 +55,7 @@ Public Class dlgStringDistance
         dctMethod.Add("Jaro or Jaro-Winker Distance", Chr(34) & "jw" & Chr(34))
         dctMethod.Add("Distance based on Soundex Encoding", Chr(34) & "soundex" & Chr(34))
         ucrInputComboBoxMethod.SetItems(dctMethod)
-
+        ucrInputComboBoxMethod.SetRDefault(Chr(34) & "osa" & Chr(34))
         'ucrSave
         ucrSaveStringDistance.SetPrefix("Dist")
         ucrSaveStringDistance.SetSaveTypeAsColumn()
