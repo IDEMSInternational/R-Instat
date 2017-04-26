@@ -51,6 +51,16 @@ Public Class dlgPolynomials
 
         ucrNudDegree.SetParameter(New RParameter("degree", 2))
         ucrNudDegree.Minimum = 1
+
+        ucrSavePoly.SetSaveTypeAsColumn()
+        ucrSavePoly.SetDataFrameSelector(ucrSelectorForPolynomial.ucrAvailableDataFrames)
+        ucrSavePoly.SetIsComboBox()
+        ucrSavePoly.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
+        ucrSavePoly.SetLabelText("Prefix for New Columns:")
+        If Not ucrSavePoly.bUserTyped Then
+            ucrSavePoly.SetPrefix("")
+            ucrSavePoly.SetName("poly")
+        End If
     End Sub
 
     Private Sub SetDefaults()
@@ -59,11 +69,9 @@ Public Class dlgPolynomials
         'Reset 
         ucrSelectorForPolynomial.Reset()
         ucrSavePoly.Reset()
-        SetNewColumName()
-
-        clsPolynomial.SetRCommand("poly")
         clsPolynomial.AddParameter("degree", 2)
 
+        clsPolynomial.SetRCommand("poly")
         clsPolynomial.SetAssignTo(ucrSavePoly.GetText, strTempDataframe:=ucrSelectorForPolynomial.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSavePoly.GetText, bAssignToIsPrefix:=True)
         ucrBase.clsRsyntax.SetBaseRFunction(clsPolynomial)
     End Sub
@@ -100,13 +108,13 @@ Public Class dlgPolynomials
     End Sub
 
     Private Sub SetNewColumName()
-        If ucrNudDegree.Value = 1 Then
+        If ucrNudDegree.GetText = 1 Then
             ucrSavePoly.SetAssignToBooleans(bTempAssignToIsPrefix:=False)
             ucrSavePoly.SetLabelText("New Column Name:")
             If Not ucrSavePoly.bUserTyped Then
                 ucrSavePoly.SetPrefix("poly")
             End If
-        Else
+        ElseIf ucrNudDegree.GetText > 1
             ucrSavePoly.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
             ucrSavePoly.SetLabelText("Prefix for New Columns:")
             If Not ucrSavePoly.bUserTyped Then
