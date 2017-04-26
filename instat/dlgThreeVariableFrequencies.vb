@@ -42,15 +42,15 @@ Public Class dlgThreeVariableFrequencies
         Dim clsTempParamThree As RParameter
 
         clsTempParamOne = New RParameter("x", 1)
-        ucrReceiverRowFactor.AddAdditionalCodeParameterPair(clsSjPlot, clsTempParamOne, iAdditionalPairNo:=1)
+        ucrReceiverRowFactor.AddAdditionalCodeParameterPair(clsSjTab, clsTempParamOne, iAdditionalPairNo:=1)
         clsTempParamOne.bIncludeArgumentName = False
 
         clsTempParamTwo = New RParameter("grp", 2)
-        ucrReceiverColumnFactor.AddAdditionalCodeParameterPair(clsSjPlot, clsTempParamTwo, iAdditionalPairNo:=1)
+        ucrReceiverColumnFactor.AddAdditionalCodeParameterPair(clsSjTab, clsTempParamTwo, iAdditionalPairNo:=1)
         clsTempParamTwo.bIncludeArgumentName = False
 
         clsTempParamThree = New RParameter("x", 3)
-        ucrReceiverGroups.AddAdditionalCodeParameterPair(clsSjPlot, clsTempParamThree, iAdditionalPairNo:=1)
+        ucrReceiverGroups.AddAdditionalCodeParameterPair(clsSelect, clsTempParamThree, iAdditionalPairNo:=1)
         clsTempParamThree.bIncludeArgumentName = False
 
         ucrSelectorThreeVariableFrequencies.AddAdditionalCodeParameterPair(clsSjTab, New RParameter("data", 0), iAdditionalPairNo:=1)
@@ -104,12 +104,6 @@ Public Class dlgThreeVariableFrequencies
 
         ucrSelectorThreeVariableFrequencies.Reset()
         ucrReceiverGroups.SetMeAsReceiver()
-
-        ucrPnlFreqType.SetParameter(New RParameter("fun", 4))
-        ucrPnlFreqType.AddRadioButton(rdoCount, Chr(34) & "grpfrq" & Chr(34))
-        ucrPnlFreqType.AddRadioButton(rdoRow, Chr(34) & "xtab" & Chr(34))
-        ucrPnlFreqType.AddRadioButton(rdoColumn, Chr(34) & "xtab" & Chr(34))
-        ucrPnlFreqType.AddRadioButton(rdoCell, Chr(34) & "xtab" & Chr(34))
 
         clsSjTab.SetPackageName("sjPlot")
         clsSjTab.SetRCommand("sjtab")
@@ -191,6 +185,12 @@ Public Class dlgThreeVariableFrequencies
         ucrPnlFreqType.AddParameterValuesCondition(rdoColumn, "fun", "xtab")
         ucrPnlFreqType.AddParameterValuesCondition(rdoColumn, "margin", "col")
         ucrPnlFreqType.bAllowNonConditionValues = True
+
+        ucrPnlFreqType.SetParameter(New RParameter("fun", 4))
+        ucrPnlFreqType.AddRadioButton(rdoCount, Chr(34) & "grpfrq" & Chr(34))
+        ucrPnlFreqType.AddRadioButton(rdoRow, Chr(34) & "xtab" & Chr(34))
+        ucrPnlFreqType.AddRadioButton(rdoColumn, Chr(34) & "xtab" & Chr(34))
+        ucrPnlFreqType.AddRadioButton(rdoCell, Chr(34) & "xtab" & Chr(34))
 
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkCount, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkRow, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
