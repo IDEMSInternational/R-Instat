@@ -182,7 +182,7 @@ Partial Class dlgOneWayFrequencies
         'ucrChkGroupData
         '
         Me.ucrChkGroupData.Checked = False
-        Me.ucrChkGroupData.Location = New System.Drawing.Point(10, 262)
+        Me.ucrChkGroupData.Location = New System.Drawing.Point(10, 263)
         Me.ucrChkGroupData.Name = "ucrChkGroupData"
         Me.ucrChkGroupData.Size = New System.Drawing.Size(145, 20)
         Me.ucrChkGroupData.TabIndex = 10
@@ -209,7 +209,7 @@ Partial Class dlgOneWayFrequencies
         'ucrChkFlip
         '
         Me.ucrChkFlip.Checked = False
-        Me.ucrChkFlip.Location = New System.Drawing.Point(10, 288)
+        Me.ucrChkFlip.Location = New System.Drawing.Point(10, 287)
         Me.ucrChkFlip.Name = "ucrChkFlip"
         Me.ucrChkFlip.Size = New System.Drawing.Size(145, 20)
         Me.ucrChkFlip.TabIndex = 12
