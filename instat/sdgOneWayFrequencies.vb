@@ -59,6 +59,7 @@ Public Class sdgOneWayFrequencies
         ucrInputOmitZero.SetItems(dctOmitZero)
         ucrInputOmitZero.SetRDefault(Chr(34) & "auto" & Chr(34))
         ucrInputOmitZero.bUpdateRCodeFromControl = False
+
         'Table Only
         ucrNudDecimalPlaces.SetParameter(New RParameter("digits", 10))
         ucrNudDecimalPlaces.SetMinMax(0, 4)
@@ -70,6 +71,7 @@ Public Class sdgOneWayFrequencies
         ucrPnlGraphType.AddRadioButton(rdoDot, Chr(34) & "dot" & Chr(34))
         ucrPnlGraphType.SetRDefault(Chr(34) & "bar" & Chr(34))
         ucrPnlGraphType.bUpdateRCodeFromControl = False
+
         'Graph Only
         ucrChkShowCount.SetParameter(New RParameter("show.n", 5), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkShowCount.SetRDefault("FALSE")
@@ -77,6 +79,7 @@ Public Class sdgOneWayFrequencies
 
         'Graph Only
         ucrChkShowPercentage.SetParameter(New RParameter("show.prc", 6), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkShowPercentage.SetRDefault("TRUE")
         ucrChkShowPercentage.SetText("Show Percentage")
 
         'Graph Only
