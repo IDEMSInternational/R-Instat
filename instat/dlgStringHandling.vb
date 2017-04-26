@@ -59,11 +59,11 @@ Public Class dlgStringHandling
         ucrPnlStringHandling.AddToLinkedControls(ucrInputReplaceBy, {rdoReplace}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
 
         'ucrSave
+        ucrSaveStringHandling.SetPrefix("count")
         ucrSaveStringHandling.SetSaveTypeAsColumn()
         ucrSaveStringHandling.SetDataFrameSelector(ucrSelectorStringHandling.ucrAvailableDataFrames)
         ucrSaveStringHandling.SetIsTextBox()
-        ucrSaveStringHandling.SetLabelText("Save Result")
-        ucrSaveStringHandling.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
+        ucrSaveStringHandling.SetLabelText("Save Result:")
     End Sub
 
     Private Sub SetDefaults()
@@ -77,8 +77,6 @@ Public Class dlgStringHandling
         ucrInputPattern.Reset()
         ucrInputReplaceBy.Reset()
         ucrSaveStringHandling.Reset()
-        ucrInputReplaceBy.SetName("")
-        ucrInputPattern.SetName("")
         clsCountFunction.SetPackageName("stringr")
         clsCountFunction.SetRCommand("str_count")
         clsExtractFunction.SetPackageName("stringr")
@@ -89,6 +87,7 @@ Public Class dlgStringHandling
         clsLocateFunction.SetRCommand("str_locate")
         clsReplaceFunction.SetPackageName("stringr")
         clsReplaceFunction.SetRCommand("str_replace")
+        'clsCountFunction.AddParameter("")
         clsCountFunction.SetAssignTo(ucrSaveStringHandling.GetText, strTempDataframe:=ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveStringHandling.GetText, bAssignToIsPrefix:=True)
         ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
     End Sub
@@ -108,11 +107,7 @@ Public Class dlgStringHandling
         ucrInputPattern.SetRCode(clsCountFunction, bReset)
         ucrInputReplaceBy.SetRCode(clsReplaceFunction, bReset)
         ucrSaveStringHandling.SetRCode(clsCountFunction, bReset)
-        'ucrSaveStringHandling.SetRCode(clsExtractFunction, bReset)
-        'ucrSaveStringHandling.SetRCode(clsDetectFunction, bReset)
-        'ucrSaveStringHandling.SetRCode(clsLocateFunction, bReset)
-        'ucrSaveStringHandling.SetRCode(clsReplaceFunction, bReset)
-
+        ucrPnlStringHandling.SetRCode(clsCountFunction, bReset)
     End Sub
 
     Private Sub ChangePrefixName()
