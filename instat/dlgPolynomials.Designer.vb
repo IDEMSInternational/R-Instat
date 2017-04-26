@@ -66,7 +66,7 @@ Partial Class dlgPolynomials
         Me.grpType.Location = New System.Drawing.Point(258, 126)
         Me.grpType.Name = "grpType"
         Me.grpType.Size = New System.Drawing.Size(120, 97)
-        Me.grpType.TabIndex = 17
+        Me.grpType.TabIndex = 5
         Me.grpType.TabStop = False
         Me.grpType.Text = "Type"
         '
@@ -78,7 +78,7 @@ Partial Class dlgPolynomials
         Me.rdoCentered.Location = New System.Drawing.Point(13, 43)
         Me.rdoCentered.Name = "rdoCentered"
         Me.rdoCentered.Size = New System.Drawing.Size(68, 17)
-        Me.rdoCentered.TabIndex = 9
+        Me.rdoCentered.TabIndex = 2
         Me.rdoCentered.Tag = "Centered"
         Me.rdoCentered.Text = "Centered"
         Me.rdoCentered.UseVisualStyleBackColor = True
@@ -91,7 +91,7 @@ Partial Class dlgPolynomials
         Me.rdoOrthogonal.Location = New System.Drawing.Point(13, 66)
         Me.rdoOrthogonal.Name = "rdoOrthogonal"
         Me.rdoOrthogonal.Size = New System.Drawing.Size(77, 17)
-        Me.rdoOrthogonal.TabIndex = 8
+        Me.rdoOrthogonal.TabIndex = 3
         Me.rdoOrthogonal.Tag = "Orthogonal"
         Me.rdoOrthogonal.Text = "Orthogonal"
         Me.rdoOrthogonal.UseVisualStyleBackColor = True
@@ -104,7 +104,7 @@ Partial Class dlgPolynomials
         Me.rdoSimple.Location = New System.Drawing.Point(13, 20)
         Me.rdoSimple.Name = "rdoSimple"
         Me.rdoSimple.Size = New System.Drawing.Size(56, 17)
-        Me.rdoSimple.TabIndex = 7
+        Me.rdoSimple.TabIndex = 1
         Me.rdoSimple.Tag = "Simple"
         Me.rdoSimple.Text = "Simple"
         Me.rdoSimple.UseVisualStyleBackColor = True
@@ -125,7 +125,7 @@ Partial Class dlgPolynomials
         Me.ucrNudDegree.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDegree.Name = "ucrNudDegree"
         Me.ucrNudDegree.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudDegree.TabIndex = 16
+        Me.ucrNudDegree.TabIndex = 4
         Me.ucrNudDegree.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrSavePoly
@@ -133,7 +133,7 @@ Partial Class dlgPolynomials
         Me.ucrSavePoly.Location = New System.Drawing.Point(10, 230)
         Me.ucrSavePoly.Name = "ucrSavePoly"
         Me.ucrSavePoly.Size = New System.Drawing.Size(254, 24)
-        Me.ucrSavePoly.TabIndex = 15
+        Me.ucrSavePoly.TabIndex = 6
         '
         'ucrSelectorForPolynomial
         '
@@ -161,7 +161,7 @@ Partial Class dlgPolynomials
         Me.ucrBase.Location = New System.Drawing.Point(10, 262)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 8
+        Me.ucrBase.TabIndex = 7
         '
         'dlgPolynomials
         '
