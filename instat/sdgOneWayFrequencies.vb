@@ -79,6 +79,7 @@ Public Class sdgOneWayFrequencies
 
         'Graph Only
         ucrChkShowPercentage.SetParameter(New RParameter("show.prc", 6), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkShowPercentage.SetRDefault("TRUE")
         ucrChkShowPercentage.SetText("Show Percentage")
 
         'Graph Only
