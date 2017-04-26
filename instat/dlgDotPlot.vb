@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgDotPlot
     'In order, the global ggplot function, the geom_dotplot function and the aes function, used as parameter in the ggplot function.
     Private clsRggPlotFunction As New RFunction
-    Private clsRgeom_DotPlot As New RFunction
+    Private clsRDotplotGeomFunction As New RFunction
     Private clsRaesFunction As New RFunction
     Private clsBaseOperator As New ROperator
     'bFirstload is used to determine whether the dlg still needs setup or not.
@@ -47,7 +47,7 @@ Public Class dlgDotPlot
     Public Sub SetRCodeForContorls(bReset As Boolean)
         ucrDotPlotSelector.SetRCode(clsRggPlotFunction, bReset)
         ucrSaveDotPlot.SetRCode(clsBaseOperator, bReset)
-        ucrPnlBinAxis.SetRCode(clsRgeom_DotPlot, bReset)
+        ucrPnlBinAxis.SetRCode(clsRDotplotGeomFunction, bReset)
 
         ucrVariablesAsFactorDotPlot.SetRCode(clsRaesFunction, bReset)
         ucrOtherAxisReceiver.SetRCode(clsRaesFunction, bReset)
@@ -108,7 +108,7 @@ Public Class dlgDotPlot
     Private Sub SetDefaults()
         clsBaseOperator = New ROperator
         clsRggPlotFunction = New RFunction
-        clsRgeom_DotPlot = New RFunction
+        clsRDotplotGeomFunction = New RFunction
         clsRaesFunction = New RFunction
 
         ucrDotPlotSelector.Reset()
@@ -120,7 +120,7 @@ Public Class dlgDotPlot
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggPlotFunction, iPosition:=0)
-        clsBaseOperator.AddParameter("dotplot", clsRFunctionParameter:=clsRgeom_DotPlot)
+        clsBaseOperator.AddParameter("dotplot", clsRFunctionParameter:=clsRDotplotGeomFunction)
 
         clsRggPlotFunction.SetPackageName("ggplot2")
         clsRggPlotFunction.SetRCommand("ggplot")
@@ -130,9 +130,9 @@ Public Class dlgDotPlot
         clsRaesFunction.SetRCommand("aes")
         clsRaesFunction.AddParameter("y", Chr(34) & Chr(34))
 
-        clsRgeom_DotPlot.SetPackageName("ggplot2")
-        clsRgeom_DotPlot.SetRCommand("geom_dotplot")
-        clsRgeom_DotPlot.AddParameter("binaxis", Chr(34) & "x" & Chr(34))
+        clsRDotplotGeomFunction.SetPackageName("ggplot2")
+        clsRDotplotGeomFunction.SetRCommand("geom_dotplot")
+        clsRDotplotGeomFunction.AddParameter("binaxis", Chr(34) & "x" & Chr(34))
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrDotPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
 
@@ -148,10 +148,10 @@ Public Class dlgDotPlot
         Dim iIndex As Integer
         bEditAesFunction = False 'The content of the AesFunction should not be edited when we are setting up the dialogue according to the content of AesFunction, when coming back from LayerOptions.
 
-        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggPlotFunction, clsTempGeomFunc:=clsRgeom_DotPlot, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrDotPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True, bIgnoreGlobalAes:=False)
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggPlotFunction, clsTempGeomFunc:=clsRDotplotGeomFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrDotPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True, bIgnoreGlobalAes:=False)
         sdgLayerOptions.ShowDialog()
-        iIndex = clsRgeom_DotPlot.clsParameters.FindIndex(Function(x) x.strArgumentName = "binaxis")
-        If iIndex <> -1 AndAlso clsRgeom_DotPlot.clsParameters(iIndex).strArgumentValue = Chr(34) & "y" & Chr(34) Then
+        iIndex = clsRDotplotGeomFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "binaxis")
+        If iIndex <> -1 AndAlso clsRDotplotGeomFunction.clsParameters(iIndex).strArgumentValue = Chr(34) & "y" & Chr(34) Then
             rdoYBinAxis.Checked = True
         Else
             rdoXBinAxis.Checked = True 'Note: the default value of "binaxis" is "x"
