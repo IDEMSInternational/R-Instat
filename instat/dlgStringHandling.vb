@@ -77,6 +77,8 @@ Public Class dlgStringHandling
         ucrInputPattern.Reset()
         ucrInputReplaceBy.Reset()
         ucrSaveStringHandling.Reset()
+        ucrInputReplaceBy.SetName("")
+        ucrInputPattern.SetName("")
         clsCountFunction.SetPackageName("stringr")
         clsCountFunction.SetRCommand("str_count")
         clsExtractFunction.SetPackageName("stringr")
@@ -87,7 +89,6 @@ Public Class dlgStringHandling
         clsLocateFunction.SetRCommand("str_locate")
         clsReplaceFunction.SetPackageName("stringr")
         clsReplaceFunction.SetRCommand("str_replace")
-        'clsCountFunction.AddParameter("")
         clsCountFunction.SetAssignTo(ucrSaveStringHandling.GetText, strTempDataframe:=ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveStringHandling.GetText, bAssignToIsPrefix:=True)
         ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
     End Sub
