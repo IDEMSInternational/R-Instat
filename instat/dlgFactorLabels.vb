@@ -36,6 +36,7 @@ Public Class dlgViewFactorLabels
 
     Private Sub InitialiseDialog()
         'TODO: HElP ID
+
         ucrReceiverFactorColumns.SetParameter(New RParameter("x", 0))
         ucrReceiverFactorColumns.SetParameterIsRFunction()
         ucrReceiverFactorColumns.SetIncludedDataTypes({"factor", "ordered"})
@@ -43,40 +44,40 @@ Public Class dlgViewFactorLabels
         ucrReceiverFactorColumns.Selector = ucrSelectorViewFactorLabels
         ucrReceiverFactorColumns.SetMeAsReceiver()
 
-        ucrChkShowLabels.SetText("Show Variable Labels")
         ucrChkShowLabels.SetParameter(New RParameter("show.labels", 1))
+        ucrChkShowLabels.SetText("Show Variable Labels")
         ucrChkShowLabels.SetRDefault("TRUE")
 
-        ucrChkShowType.SetText("Show Variable Type")
         ucrChkShowType.SetParameter(New RParameter("show.type", 2))
+        ucrChkShowType.SetText("Show Variable Type")
         ucrChkShowType.SetRDefault("FALSE")
 
-        ucrChkShowValues.SetText("Show Variable Values")
         ucrChkShowValues.SetParameter(New RParameter("show.values", 3))
+        ucrChkShowValues.SetText("Show Variable Values")
         ucrChkShowValues.SetRDefault("TRUE")
 
-        ucrChkShowMissingValues.SetText("Show Missing Values")
         ucrChkShowMissingValues.SetParameter(New RParameter("show.na", 4))
+        ucrChkShowMissingValues.SetText("Show Missing Values")
         ucrChkShowMissingValues.SetRDefault("FALSE")
 
-        ucrChkShowId.SetText("Show Id")
         ucrChkShowId.SetParameter(New RParameter("show.id", 5))
+        ucrChkShowId.SetText("Show ID")
         ucrChkShowId.SetRDefault("TRUE")
 
-        ucrChkShowPercentage.SetText("Add Percentage Column")
         ucrChkShowPercentage.SetParameter(New RParameter("show.prc", 6))
+        ucrChkShowPercentage.SetText("Add Percentage Column")
         ucrChkShowPercentage.SetRDefault("FALSE")
 
-        ucrChkShowFrequencies.SetText("Add Frequencies Column")
         ucrChkShowFrequencies.SetParameter(New RParameter("show.frq", 7))
+        ucrChkShowFrequencies.SetText("Add Frequencies Column")
         ucrChkShowFrequencies.SetRDefault("FALSE")
 
-        ucrChkAlternateColour.SetText("Highlight Alternate Rows")
         ucrChkAlternateColour.SetParameter(New RParameter("altr.row.col", 8))
+        ucrChkAlternateColour.SetText("Highlight Alternate Rows")
         ucrChkAlternateColour.SetRDefault("TRUE")
 
-        ucrChkSortByName.SetText("Sort by Name")
         ucrChkSortByName.SetParameter(New RParameter("sort.by.name", 9))
+        ucrChkSortByName.SetText("Sort by Name")
         ucrChkSortByName.SetRDefault("FALSE")
     End Sub
 
