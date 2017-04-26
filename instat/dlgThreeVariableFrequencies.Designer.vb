@@ -216,7 +216,7 @@ Partial Class dlgThreeVariableFrequencies
         'rdoColumn
         '
         Me.rdoColumn.AutoSize = True
-        Me.rdoColumn.Location = New System.Drawing.Point(12, 69)
+        Me.rdoColumn.Location = New System.Drawing.Point(12, 71)
         Me.rdoColumn.Name = "rdoColumn"
         Me.rdoColumn.Size = New System.Drawing.Size(77, 17)
         Me.rdoColumn.TabIndex = 2
@@ -227,7 +227,7 @@ Partial Class dlgThreeVariableFrequencies
         'rdoRow
         '
         Me.rdoRow.AutoSize = True
-        Me.rdoRow.Location = New System.Drawing.Point(12, 43)
+        Me.rdoRow.Location = New System.Drawing.Point(12, 45)
         Me.rdoRow.Name = "rdoRow"
         Me.rdoRow.Size = New System.Drawing.Size(64, 17)
         Me.rdoRow.TabIndex = 1
@@ -238,7 +238,7 @@ Partial Class dlgThreeVariableFrequencies
         'rdoCell
         '
         Me.rdoCell.AutoSize = True
-        Me.rdoCell.Location = New System.Drawing.Point(12, 95)
+        Me.rdoCell.Location = New System.Drawing.Point(12, 97)
         Me.rdoCell.Name = "rdoCell"
         Me.rdoCell.Size = New System.Drawing.Size(59, 17)
         Me.rdoCell.TabIndex = 3
@@ -249,7 +249,7 @@ Partial Class dlgThreeVariableFrequencies
         'rdoCount
         '
         Me.rdoCount.AutoSize = True
-        Me.rdoCount.Location = New System.Drawing.Point(12, 19)
+        Me.rdoCount.Location = New System.Drawing.Point(12, 21)
         Me.rdoCount.Name = "rdoCount"
         Me.rdoCount.Size = New System.Drawing.Size(53, 17)
         Me.rdoCount.TabIndex = 0
