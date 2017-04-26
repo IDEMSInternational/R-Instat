@@ -25,7 +25,7 @@ Partial Class dlgStringDistance
         Me.lblColumn = New System.Windows.Forms.Label()
         Me.lblPattern = New System.Windows.Forms.Label()
         Me.lblMethod = New System.Windows.Forms.Label()
-        Me.UcrSelectorStringDistance = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSelectorStringDistance = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrInputComboBoxMethod = New instat.ucrInputComboBox()
         Me.ucrSaveStringDistance = New instat.ucrSave()
         Me.ucrInputPatternStringDistance = New instat.ucrInputTextBox()
@@ -60,15 +60,15 @@ Partial Class dlgStringDistance
         Me.lblMethod.TabIndex = 5
         Me.lblMethod.Text = "Method:"
         '
-        'UcrSelectorStringDistance
+        'ucrSelectorStringDistance
         '
-        Me.UcrSelectorStringDistance.bShowHiddenColumns = False
-        Me.UcrSelectorStringDistance.bUseCurrentFilter = True
-        Me.UcrSelectorStringDistance.Location = New System.Drawing.Point(10, 10)
-        Me.UcrSelectorStringDistance.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrSelectorStringDistance.Name = "UcrSelectorStringDistance"
-        Me.UcrSelectorStringDistance.Size = New System.Drawing.Size(210, 180)
-        Me.UcrSelectorStringDistance.TabIndex = 0
+        Me.ucrSelectorStringDistance.bShowHiddenColumns = False
+        Me.ucrSelectorStringDistance.bUseCurrentFilter = True
+        Me.ucrSelectorStringDistance.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorStringDistance.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorStringDistance.Name = "ucrSelectorStringDistance"
+        Me.ucrSelectorStringDistance.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorStringDistance.TabIndex = 0
         '
         'ucrInputComboBoxMethod
         '
@@ -119,7 +119,7 @@ Partial Class dlgStringDistance
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(417, 285)
-        Me.Controls.Add(Me.UcrSelectorStringDistance)
+        Me.Controls.Add(Me.ucrSelectorStringDistance)
         Me.Controls.Add(Me.lblMethod)
         Me.Controls.Add(Me.ucrInputComboBoxMethod)
         Me.Controls.Add(Me.lblPattern)
@@ -147,5 +147,5 @@ Partial Class dlgStringDistance
     Friend WithEvents lblColumn As Label
     Friend WithEvents ucrSaveStringDistance As ucrSave
     Friend WithEvents ucrInputPatternStringDistance As ucrInputTextBox
-    Friend WithEvents UcrSelectorStringDistance As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSelectorStringDistance As ucrSelectorByDataFrameAddRemove
 End Class
