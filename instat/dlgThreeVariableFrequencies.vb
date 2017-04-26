@@ -90,6 +90,7 @@ Public Class dlgThreeVariableFrequencies
 
         clsGroupBy.SetPackageName("dplyr")
         clsGroupBy.SetRCommand("group_by")
+        '  clsGroupBy.AddParameter("add", "TRUE")
         clsSelect.SetPackageName("dplyr")
         clsSelect.SetRCommand("select")
 
@@ -110,10 +111,10 @@ Public Class dlgThreeVariableFrequencies
 
         clsSjPlot.SetPackageName("sjPlot")
         clsSjPlot.SetRCommand("sjplot")
-        'clsSjPlot.AddParameter("show.prc", "TRUE")
-        'clsSjPlot.AddParameter("show.n", "TRUE")
+        clsSjPlot.AddParameter("show.prc", "TRUE")
+        clsSjPlot.AddParameter("show.n", "TRUE")
         ucrBase.clsRsyntax.SetBaseROperator(clsTableBaseOperator)
-
+        bResetSubdialog = True
     End Sub
 
     Private Sub InitialiseDialog()
@@ -196,12 +197,12 @@ Public Class dlgThreeVariableFrequencies
 
     End Sub
     'Still in progress
-    'Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-    '    sdgTwoWayFrequencies.SetRFunction(clsSjTab, clsSjPlot, bResetSubdialog)
-    '    bResetSubdialog = False
-    '    sdgTwoWayFrequencies.ShowDialog()
-    '    TestOkEnabled()
-    'End Sub
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgTwoWayFrequencies.SetRFunction(clsSjTab, clsSjPlot, bResetSubdialog)
+        bResetSubdialog = False
+        sdgTwoWayFrequencies.ShowDialog()
+        TestOkEnabled()
+    End Sub
 
     Private Sub TestOkEnabled()
         If Not ucrReceiverGroups.IsEmpty() AndAlso Not ucrReceiverRowFactor.IsEmpty() AndAlso Not ucrReceiverColumnFactor.IsEmpty Then
