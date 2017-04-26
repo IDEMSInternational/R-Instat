@@ -54,7 +54,6 @@ Public Class dlgClimSoft
         ucrReceiverMultipleElements.SetParameterIsString()
         ucrReceiverMultipleElements.Selector = ucrSelectorForClimSoft
         ucrReceiverMultipleElements.SetItemType("database_variables")
-        'ucrReceiverMultipleElements.strDatabaseQuery = "SELECT obselement.elementName FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy AND observationfinal.recordedFrom in (102,104) GROUP BY observationfinal.describedBy;"
         ucrReceiverMultipleElements.strDatabaseQuery = "SELECT obselement.elementName FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy GROUP BY observationfinal.describedBy;"
         ucrReceiverMultipleElements.SetLinkedDisplayControl(lblElements)
 
@@ -73,7 +72,6 @@ Public Class dlgClimSoft
     End Sub
 
     Private Sub TestOKEnabled()
-        ' If (Not ucrReceiverMultipleStations.IsEmpty() AndAlso Not ucrChkObservationData.Checked) OrElse (Not ucrReceiverMultipleStations.IsEmpty() AndAlso Not ucrReceiverMultipleElements.IsEmpty() AndAlso ucrChkObservationData.Checked) Then
         If (Not ucrReceiverMultipleStations.IsEmpty() AndAlso Not ucrChkObservationData.Checked) OrElse (Not ucrReceiverMultipleElements.IsEmpty() AndAlso ucrChkObservationData.Checked) Then
             ucrBase.OKEnabled(True)
         Else
@@ -124,9 +122,9 @@ Public Class dlgClimSoft
 
     Private Sub ucrReceiverMultipleStations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleStations.ControlValueChanged
         If ucrReceiverMultipleStations.IsEmpty Then
-            'Danny needs to clarify this.
             ucrReceiverMultipleElements.strDatabaseQuery = "SELECT obselement.elementName FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy GROUP BY observationfinal.describedBy;"
         Else
+            ucrReceiverMultipleElements.Clear()
             ucrReceiverMultipleElements.strDatabaseQuery = "SELECT obselement.elementName FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy AND observationfinal.recordedFrom IN (" & String.Join(",", ucrReceiverMultipleStations.GetVariableNamesList(bWithQuotes:=False)) & ") GROUP BY observationfinal.describedBy;"
         End If
         TestOKEnabled()
