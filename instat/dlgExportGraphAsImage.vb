@@ -17,6 +17,8 @@ Imports instat.Translations
 Public Class dlgExportGraphAsImage
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
+    Private clsGgsave As New RFunction
+
     Private Sub dlgExportGraphAsImage_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             InitialiseDialog()
@@ -31,24 +33,57 @@ Public Class dlgExportGraphAsImage
         TestOkEnabled()
     End Sub
     Private Sub InitialiseDialog()
+        ucrSelectorGraphAsImage.SetItemType("graph")
+        ucrSelectedGraphReceiver.strSelectorHeading = "Graphs"
+
+        ucrSelectedGraphReceiver.Selector = ucrSelectorGraphAsImage
+        ucrSelectedGraphReceiver.SetParameter(New RParameter("filename"))
+        ucrSelectedGraphReceiver.SetParameterIsString()
+        ucrSelectedGraphReceiver.SetMeAsReceiver()
+        ucrInputFile.SetParameter(New RParameter("path"))
 
     End Sub
 
     Private Sub SetDefaults()
+        ucrInputFile.Reset()
+        ucrSelectorGraphAsImage.Reset()
 
+        clsGgsave = New RFunction
+        clsGgsave.SetRCommand("ggsave")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsGgsave)
     End Sub
 
     Private Sub SetRcodeForControls(bReset As Boolean)
-
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-
+        If ucrSelectedGraphReceiver.IsEmpty AndAlso ucrInputFile.IsEmpty Then
+            ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRcodeForControls(True)
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrInputFile_ControlContentsChanged() Handles ucrInputFile.ControlContentsChanged, ucrSelectedGraphReceiver.ControlContentsChanged
+        TestOkEnabled()
+    End Sub
+
+    Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
+        Dim dlgSelectFile As New FolderBrowserDialog
+        dlgSelectFile.Description = "Save Graph As Image"
+        If dlgSelectFile.ShowDialog() = DialogResult.OK Then
+            ucrInputFile.SetName(dlgSelectFile.SelectedPath.Replace("\", "/"))
+        End If
+    End Sub
+
+    Private Sub ucrInputFile_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectedGraphReceiver.ControlContentsChanged, ucrInputFile.ControlContentsChanged
+
     End Sub
 End Class
