@@ -41,7 +41,7 @@ Public Class dlgOneWayFrequencies
         'HelpID
         ' ucrBase.iHelpTopicID = 
 
-        ucrReceiverOneWayFreq.SetParameter(New RParameter("data"))
+        ucrReceiverOneWayFreq.SetParameter(New RParameter("data", 0))
         ucrReceiverOneWayFreq.SetParameterIsRFunction()
         ucrReceiverOneWayFreq.bForceAsDataFrame = True
         ucrReceiverOneWayFreq.Selector = ucrSelectorOneWayFreq
