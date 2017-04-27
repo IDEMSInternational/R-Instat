@@ -13,6 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 
 Public Class dlgConvertColumns
@@ -58,13 +59,20 @@ Public Class dlgConvertColumns
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 67
 
+        ucrSelectorDataFrameColumns.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorDataFrameColumns.SetParameterIsString()
+
+        ucrReceiverColumnsToConvert.SetParameter(New RParameter("col_names", 1))
+        ucrReceiverColumnsToConvert.Selector = ucrSelectorDataFrameColumns
+        ucrReceiverColumnsToConvert.SetMeAsReceiver()
+        ucrReceiverColumnsToConvert.SetParameterIsString()
+
         ucrPnlConvertTo.SetParameter(New RParameter("to_type", 2))
         ucrPnlConvertTo.AddRadioButton(rdoFactor, Chr(34) & "factor" & Chr(34))
         ucrPnlConvertTo.AddRadioButton(rdoOrderedFactor, Chr(34) & "ordered_factor" & Chr(34))
         ucrPnlConvertTo.AddRadioButton(rdoNumeric, Chr(34) & "numeric" & Chr(34))
         ucrPnlConvertTo.AddRadioButton(rdoCharacter, Chr(34) & "character" & Chr(34))
         ucrPnlConvertTo.AddRadioButton(rdoInteger, Chr(34) & "integer" & Chr(34))
-
         ucrPnlConvertTo.AddToLinkedControls(ucrChkSpecifyDecimalsToDisplay, {rdoFactor, rdoOrderedFactor}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrPnlFactorToNumericOptions.SetParameter(New RParameter("factor_numeric", 3))
@@ -75,16 +83,8 @@ Public Class dlgConvertColumns
 
         ucrPnlConvertTo.AddToLinkedControls(ucrPnlFactorToNumericOptions, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrSelectorDataFrameColumns.SetParameter(New RParameter("data_name", 0))
-        ucrSelectorDataFrameColumns.SetParameterIsString()
-
-        ucrReceiverColumnsToConvert.Selector = ucrSelectorDataFrameColumns
-        ucrReceiverColumnsToConvert.SetMeAsReceiver()
-        ucrReceiverColumnsToConvert.SetParameter(New RParameter("col_names", 1))
-        ucrReceiverColumnsToConvert.SetParameterIsString()
-
-        ucrChkSpecifyDecimalsToDisplay.SetText("Specify Decimals (from Numeric)")
         ucrChkSpecifyDecimalsToDisplay.SetParameter(New RParameter("set_digits", 4))
+        ucrChkSpecifyDecimalsToDisplay.SetText("Specify Decimals (from Numeric)")
         ucrChkSpecifyDecimalsToDisplay.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkSpecifyDecimalsToDisplay.SetRDefault("FALSE")
         ucrChkSpecifyDecimalsToDisplay.AddToLinkedControls(ucrLinked:=ucrNudDisplayDecimals, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -93,6 +93,10 @@ Public Class dlgConvertColumns
         ucrNudDisplayDecimals.Minimum = 1
         ucrNudDisplayDecimals.Increment = 1
         ucrNudDisplayDecimals.SetRDefault("4")
+
+        ucrChkKeepAttributes.SetParameter(New RParameter("keep_attr", 6))
+        ucrChkKeepAttributes.SetText("Keep Attributes")
+        ucrChkKeepAttributes.SetRDefault("TRUE")
     End Sub
 
     Private Sub SetDefaults()
@@ -114,7 +118,7 @@ Public Class dlgConvertColumns
 
     Private Sub TestOKEnabled()
         If Not ucrReceiverColumnsToConvert.IsEmpty() Then
-            If (rdoFactor.Checked OrElse rdoOrderedFactor.Checked) AndAlso ucrChkSpecifyDecimalsToDisplay.Checked AndAlso ucrNudDisplayDecimals.GetText() = "" Then
+            If (rdoFactor.Checked OrElse rdoOrderedFactor.Checked) AndAlso ucrChkSpecifyDecimalsToDisplay.Checked AndAlso ucrNudDisplayDecimals.GetText = "" Then
                 ucrBase.OKEnabled(False)
             Else
                 ucrBase.OKEnabled(True)
@@ -124,7 +128,15 @@ Public Class dlgConvertColumns
         End If
     End Sub
 
-    Private Sub Controls_ControlContentsChanged() Handles ucrReceiverColumnsToConvert.ControlContentsChanged, ucrPnlConvertTo.ControlContentsChanged, ucrChkSpecifyDecimalsToDisplay.ControlContentsChanged, ucrNudDisplayDecimals.ControlContentsChanged
+    Private Sub ucrChkSpecifyDecimalsToDisplay_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSpecifyDecimalsToDisplay.ControlValueChanged
+        If ucrChkSpecifyDecimalsToDisplay.Checked Then
+            ucrReceiverColumnsToConvert.SetDataType("numeric")
+        Else
+            ucrReceiverColumnsToConvert.SetIncludedDataTypes({"integer", "numeric", "character", "ordered", "factor"})
+        End If
+    End Sub
+
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnsToConvert.ControlContentsChanged, ucrPnlConvertTo.ControlContentsChanged, ucrNudDisplayDecimals.ControlContentsChanged, ucrChkSpecifyDecimalsToDisplay.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
