@@ -240,6 +240,7 @@ Public Class dlgDefineCRI
         i = i + 1
     End Sub
 
+    ' This is currently empty, but will be coded in the future
     Private Sub cmdEdit_Click(sender As Object, e As EventArgs) Handles cmdEdit.Click
 
     End Sub
