@@ -20,6 +20,8 @@ Public Class dlgViewGraph
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsGgplotly, clsGetGraphs As New RFunction
+    Private strGraphDisplayOption As String
+
     Private Sub dlgViewGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -38,17 +40,17 @@ Public Class dlgViewGraph
         clsGgplotly = New RFunction
 
         ucrGraphsSelector.Reset()
-        ucrSaveGraph.Reset()
 
         clsGgplotly.SetPackageName("plotly")
         clsGgplotly.SetRCommand("ggplotly")
 
         clsGetGraphs.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
-        clsGetGraphs.SetAssignTo("last_graph", strTempDataframe:=ucrGraphsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsGetGraphs)
+        clsGgplotly.AddParameter("p", clsRFunctionParameter:=clsGetGraphs)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsGgplotly)
     End Sub
 
     Private Sub InitialiseDialog()
+
         'TODO HELPID
         rdoDisplaySeparateWindow.Enabled = False
         'Selector
@@ -71,34 +73,21 @@ Public Class dlgViewGraph
 
         ucrPnlDisplayOptions.AddFunctionNamesCondition(rdoDisplayOutputWindow, frmMain.clsRLink.strInstatDataObject & "$get_graphs")
         ucrPnlDisplayOptions.AddFunctionNamesCondition(rdoDisplayRViewer, frmMain.clsRLink.strInstatDataObject & "$get_graphs")
-        'ucrPnlDisplayOptions.AddFunctionNamesCondition(rdoDisplaySeparateWindow)
-        ucrPnlDisplayOptions.AddFunctionNamesCondition(rdoDisplayInteractiveView, "plotly::ggplotly")
-
-        'ucrSave
-        ucrSaveGraph.SetPrefix("UseGraph")
-        ucrSaveGraph.SetSaveTypeAsGraph()
-        ucrSaveGraph.SetDataFrameSelector(ucrGraphsSelector.ucrAvailableDataFrames)
-        ucrSaveGraph.SetCheckBoxText("Save Graph")
-        ucrSaveGraph.SetIsComboBox()
-        ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
+        'ucrPnlDisplayOptions.AddFunctionNamesCondition(rdoDisplaySeparateWindow, frmMain.clsRLink.strInstatDataObject & "$get_graphs")
+        ucrPnlDisplayOptions.AddFunctionNamesCondition(rdoDisplayInteractiveView, "ggplotly")
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        Dim clsParam As RParameter
-        clsParam = New RParameter("p", 0)
-        ucrGraphReceiver.AddAdditionalCodeParameterPair(clsGgplotly, clsParam, iAdditionalPairNo:=1)
-
         ucrGraphReceiver.SetRCode(clsGetGraphs, bReset)
-        ucrSaveGraph.SetRCode(clsGetGraphs, bReset)
         ucrGraphsSelector.SetRCode(clsGetGraphs, bReset)
-        ucrPnlDisplayOptions.SetRCode(clsGetGraphs, bReset)
+        ucrPnlDisplayOptions.SetRCode(clsGgplotly, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrGraphReceiver.IsEmpty OrElse ucrSaveGraph.IsComplete() Then
-            ucrBase.OKEnabled(True)
-        Else
+        If ucrGraphReceiver.IsEmpty Then
             ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
         End If
     End Sub
 
@@ -109,20 +98,30 @@ Public Class dlgViewGraph
     End Sub
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
+        strGraphDisplayOption = frmMain.clsInstatOptions.strGraphDisplayOption
         If rdoDisplayOutputWindow.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsGetGraphs)
+            frmMain.clsInstatOptions.SetGraphDisplayOption("view_output_window")
             ucrBase.clsRsyntax.iCallType = 3
         ElseIf rdoDisplayRViewer.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsGetGraphs)
-            ucrBase.clsRsyntax.iCallType = 2
+            frmMain.clsInstatOptions.SetGraphDisplayOption("view_R_viewer")
+            ucrBase.clsRsyntax.iCallType = 3
+        ElseIf rdoDisplaySeparateWindow.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsGetGraphs)
+            frmMain.clsInstatOptions.SetGraphDisplayOption("view_separate_window")
+            ucrBase.clsRsyntax.iCallType = 3
         ElseIf rdoDisplayInteractiveView.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsGgplotly)
-            ucrBase.clsRsyntax.bHTMLOutput = True
-            ucrBase.clsRsyntax.iCallType = 3
+            ucrBase.clsRsyntax.iCallType = 0
         End If
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrGraphReceiver.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        frmMain.clsInstatOptions.SetGraphDisplayOption(strGraphDisplayOption)
     End Sub
 End Class
