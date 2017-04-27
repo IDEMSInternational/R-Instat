@@ -46,6 +46,7 @@ Public Class dlgExportGraphAsImage
 
     Private Sub SetDefaults()
         ucrInputFile.Reset()
+        ucrInputFile.SetName("")
         ucrSelectorGraphAsImage.Reset()
 
         clsGgsave = New RFunction
@@ -84,6 +85,6 @@ Public Class dlgExportGraphAsImage
     End Sub
 
     Private Sub ucrInputFile_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectedGraphReceiver.ControlContentsChanged, ucrInputFile.ControlContentsChanged
-
+        TestOkEnabled()
     End Sub
 End Class
