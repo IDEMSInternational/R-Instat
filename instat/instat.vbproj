@@ -527,6 +527,12 @@
     <Compile Include="dlgViewAndRemoveLinks.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgViewGraph.Designer.vb">
+      <DependentUpon>dlgViewGraph.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgViewGraph.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmGraphDisplay.Designer.vb">
       <DependentUpon>frmGraphDisplay.vb</DependentUpon>
     </Compile>
@@ -2967,6 +2973,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgViewDescriptives.sw-KE.resx">
       <DependentUpon>dlgViewDescriptives.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgViewGraph.resx">
+      <DependentUpon>dlgViewGraph.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgWindrose.fr-FR.resx">
       <DependentUpon>dlgWindrose.vb</DependentUpon>
