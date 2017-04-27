@@ -269,6 +269,12 @@
     <Compile Include="dlgEnter.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgExportGraphAsImage.Designer.vb">
+      <DependentUpon>dlgExportGraphAsImage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExportGraphAsImage.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgExportToCPT.Designer.vb">
       <DependentUpon>dlgExportToCPT.vb</DependentUpon>
     </Compile>
@@ -519,6 +525,12 @@
       <DependentUpon>dlgViewAndRemoveLinks.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgViewAndRemoveLinks.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgViewGraph.Designer.vb">
+      <DependentUpon>dlgViewGraph.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgViewGraph.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmGraphDisplay.Designer.vb">
@@ -2437,6 +2449,9 @@
     <EmbeddedResource Include="dlgExportDataset.sw-KE.resx">
       <DependentUpon>dlgExportDataset.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportGraphAsImage.resx">
+      <DependentUpon>dlgExportGraphAsImage.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgExportToCPT.resx">
       <DependentUpon>dlgExportToCPT.vb</DependentUpon>
     </EmbeddedResource>
@@ -2958,6 +2973,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgViewDescriptives.sw-KE.resx">
       <DependentUpon>dlgViewDescriptives.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgViewGraph.resx">
+      <DependentUpon>dlgViewGraph.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgWindrose.fr-FR.resx">
       <DependentUpon>dlgWindrose.vb</DependentUpon>
