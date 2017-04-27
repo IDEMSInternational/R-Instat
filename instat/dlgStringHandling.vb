@@ -107,8 +107,13 @@ Public Class dlgStringHandling
         ucrReceiverStringHandling.SetRCode(clsCountFunction, bReset)
         ucrInputPattern.SetRCode(clsCountFunction, bReset)
         ucrInputReplaceBy.SetRCode(clsReplaceFunction, bReset)
-        ucrSaveStringHandling.SetRCode(clsCountFunction, bReset)
         ucrPnlStringHandling.SetRCode(clsCountFunction, bReset)
+        ucrSaveStringHandling.SetRCode(clsCountFunction, bReset)
+
+        ucrSaveStringHandling.AddAdditionalRCode(clsDetectFunction, iAdditionalPairNo:=1)
+        ucrSaveStringHandling.AddAdditionalRCode(clsExtractFunction, iAdditionalPairNo:=2)
+        ucrSaveStringHandling.AddAdditionalRCode(clsLocateFunction, iAdditionalPairNo:=3)
+        ucrSaveStringHandling.AddAdditionalRCode(clsReplaceFunction, iAdditionalPairNo:=4)
     End Sub
 
     Private Sub ChangePrefixName()
@@ -119,7 +124,7 @@ Public Class dlgStringHandling
         ElseIf rdoExtract.Checked Then
             ucrSaveStringHandling.SetPrefix("extract")
         ElseIf rdoLocate.Checked Then
-            ucrSaveStringHandling.SetPrefix("locate")
+            ucrSaveStringHandling.SetName("locate")
         ElseIf rdoReplace.Checked Then
             ucrSaveStringHandling.SetPrefix("replace")
         End If
