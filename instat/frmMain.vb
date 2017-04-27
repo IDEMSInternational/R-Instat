@@ -473,6 +473,10 @@ Public Class frmMain
         dlgLabels.ShowDialog()
     End Sub
 
+    Private Sub mnuManageFactorViewLabels_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.Click
+        dlgViewFactorLabels.ShowDialog()
+    End Sub
+
     Private Sub mnuManageFactorConvertToFactor_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorConvertToFactor.Click
         dlgConvertColumns.bToFactorOnly = True
         dlgConvertColumns.ShowDialog()
@@ -738,7 +742,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuOrganiseColumnTextFindReplace_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnTextFindReplace.Click
-        'dlgReplace.ShowDialog()
+        dlgStringHandling.ShowDialog()
     End Sub
 
     Private Sub mnuDescribeOneVariableSummarise_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableSummarise.Click
@@ -1345,12 +1349,16 @@ Public Class frmMain
         dlgRatingScales.ShowDialog()
     End Sub
 
-    Private Sub mnuPrepareColumnTextFindStringHandling_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnTextFindStringHandling.Click
-        dlgStringHandling.ShowDialog()
-    End Sub
-
     Private Sub mnuPrepareColumnTextDistance_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnTextDistance.Click
         dlgStringDistance.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeOtherGraphicsDialogsInventoryPlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsInventoryPlot.Click
+        dlgInventoryPlot.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeThreeVariableFrequencies_Click(sender As Object, e As EventArgs) Handles mnuDescribeThreeVariableFrequencies.Click
+        dlgThreeVariableFrequencies.ShowDialog()
     End Sub
 
     'Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click
