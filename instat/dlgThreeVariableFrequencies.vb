@@ -22,7 +22,7 @@ Public Class dlgThreeVariableFrequencies
     Private clsSjTab, clsSelect, clsSjPlot, clsGroupBy As New RFunction
     Private clsTableBaseOperator, clsGraphBaseOperator As New ROperator
 
-    Private Sub dlgTwoWayFrequencies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub dlgThreeVariableFrequencies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
@@ -38,18 +38,12 @@ Public Class dlgThreeVariableFrequencies
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         Dim clsTempParamOne As RParameter
-        Dim clsTempParamTwo As RParameter
-        Dim clsTempParamThree As RParameter
 
-        clsTempParamOne = New RParameter("x", 1)
+        clsTempParamOne = New RParameter("x", 3)
+        ucrReceiverGroups.AddAdditionalCodeParameterPair(clsSelect, clsTempParamOne, iAdditionalPairNo:=1)
+        clsTempParamOne.bIncludeArgumentName = False
 
-        clsTempParamTwo = New RParameter("grp", 2)
-
-        clsTempParamThree = New RParameter("x", 3)
-        ucrReceiverGroups.AddAdditionalCodeParameterPair(clsSelect, clsTempParamThree, iAdditionalPairNo:=1)
-        clsTempParamThree.bIncludeArgumentName = False
-
-        ucrSelectorThreeVariableFrequencies.AddAdditionalCodeParameterPair(clsTableBaseOperator, New RParameter("data", 0), iAdditionalPairNo:=1)
+        ucrSelectorThreeVariableFrequencies.AddAdditionalCodeParameterPair(clsGraphBaseOperator, New RParameter("data", 0), iAdditionalPairNo:=1)
         ucrChkWeights.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("weight.by", 1), iAdditionalPairNo:=1)
         ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjPlot, ucrChkWeights.GetParameter(), iAdditionalPairNo:=1)
 
@@ -87,10 +81,8 @@ Public Class dlgThreeVariableFrequencies
         clsGraphBaseOperator.AddParameter("select", clsRFunctionParameter:=clsSelect, iPosition:=2)
         clsGraphBaseOperator.AddParameter("sjplot", clsRFunctionParameter:=clsSjPlot, iPosition:=3)
 
-
         clsGroupBy.SetPackageName("dplyr")
         clsGroupBy.SetRCommand("group_by")
-        '  clsGroupBy.AddParameter("add", "TRUE")
         clsSelect.SetPackageName("dplyr")
         clsSelect.SetRCommand("select")
 
@@ -198,7 +190,7 @@ Public Class dlgThreeVariableFrequencies
     End Sub
     'Still in progress
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgTwoWayFrequencies.SetRFunction(clsSjTab, clsSjPlot, bResetSubdialog)
+        sdgTwoWayFrequencies.SetRFunction(clsSjPlot, clsSjTab, bResetSubdialog)
         bResetSubdialog = False
         sdgTwoWayFrequencies.ShowDialog()
         TestOkEnabled()
