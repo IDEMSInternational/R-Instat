@@ -128,8 +128,14 @@ Public Class ucrNud
 
     Public Function GetText() As String
         Return nudUpDown.Text
+    End Functio Polynomial
+    Public Function IsEmpty() As Boolean
+        If nudUpDown.Text <> "" Then
+            Return False
+        Else
+            Return True
+        End If
     End Function
-
     Protected Overrides Sub SetToValue(objTemp As Object)
         Dim dNewValue As Decimal
 
