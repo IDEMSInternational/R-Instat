@@ -66,6 +66,7 @@ Public Class dlgViewGraph
 
     Private Sub SetDefaults()
         clsggPlotly = New RFunction
+        clsGetGraphs = New RFunction
 
         ucrGraphsSelector.Reset()
 

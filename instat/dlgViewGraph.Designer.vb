@@ -105,9 +105,9 @@ Partial Class dlgViewGraph
         Me.lblGraphtoUse.AutoSize = True
         Me.lblGraphtoUse.Location = New System.Drawing.Point(250, 45)
         Me.lblGraphtoUse.Name = "lblGraphtoUse"
-        Me.lblGraphtoUse.Size = New System.Drawing.Size(73, 13)
+        Me.lblGraphtoUse.Size = New System.Drawing.Size(77, 13)
         Me.lblGraphtoUse.TabIndex = 1
-        Me.lblGraphtoUse.Text = "Graph to Use:"
+        Me.lblGraphtoUse.Text = "Graph to View:"
         '
         'ucrGraphReceiver
         '
@@ -141,7 +141,7 @@ Partial Class dlgViewGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(432, 276)
+        Me.ClientSize = New System.Drawing.Size(430, 276)
         Me.Controls.Add(Me.ucrGraphReceiver)
         Me.Controls.Add(Me.lblGraphtoUse)
         Me.Controls.Add(Me.grpDisplayOptions)
