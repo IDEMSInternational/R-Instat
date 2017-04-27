@@ -113,7 +113,6 @@ Public Class dlgViewGraph
             ucrBase.clsRsyntax.iCallType = 3
         ElseIf rdoDisplayInteractiveView.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsGgplotly)
-            ucrBase.clsRsyntax.iCallType = 0
         End If
     End Sub
 
