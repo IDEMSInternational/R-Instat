@@ -79,7 +79,7 @@ Public Class dlgBoxplot
         'These chk boxes add features to the BoxPlot when ticked. See SetCorrdFlip and chkVarwidth_CheckedChanged. By default they are unticked.
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
-        clsBaseOperator.AddParameter("boxplot", clsRFunctionParameter:=clsRgeom_boxplotFunction)
+        clsBaseOperator.AddParameter("geomfunc", clsRFunctionParameter:=clsRgeom_boxplotFunction)
 
         clsRggplotFunction.SetPackageName("ggplot2")
         clsRggplotFunction.SetRCommand("ggplot")
@@ -108,11 +108,13 @@ Public Class dlgBoxplot
         ucrSelectorBoxPlot.SetParameter(New RParameter("data"), 0)
         ucrSelectorBoxPlot.SetParameterIsrfunction()
 
-        ucrPnlPlots.SetParameter(New RParameter("geom_boxplot"))
-        ucrPnlPlots.AddRadioButton(rdoViolin, "violin")
-        ucrPnlPlots.AddRadioButton(rdoBoxplot, "boxplot")
-        ucrPnlPlots.AddRadioButton(rdoJitter, "jittter")
-        ucrPnlPlots.SetParameterIncludeArgumentName(False)
+        ucrPnlPlots.SetParameter(New RParameter("geomfunc"))
+        ucrPnlPlots.AddRadioButton(rdoViolin, "geomfunc")
+        ucrPnlPlots.AddRadioButton(rdoBoxplot, "geomfunc") '
+        ucrPnlPlots.AddRadioButton(rdoJitter, "geomfunc")
+        ucrPnlPlots.AddFunctionNamesCondition(rdoBoxplot, "geom_boxplot")
+        ucrPnlPlots.AddFunctionNamesCondition(rdoJitter, "geom_jitter")
+        ucrPnlPlots.AddFunctionNamesCondition(rdoJitter, "geom_violin")
 
         ucrByFactorsReceiver.Selector = ucrSelectorBoxPlot
         ucrByFactorsReceiver.SetIncludedDataTypes({"factor"})
@@ -221,6 +223,8 @@ Public Class dlgBoxplot
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
     End Sub
 
     Private Sub ucrVariablesAsFactorForBoxplot_ControlContentsChanged() Handles ucrVariablesAsFactorForBoxplot.ControlContentsChanged
