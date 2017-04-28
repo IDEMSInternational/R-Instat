@@ -17,7 +17,7 @@ Imports instat.Translations
 Public Class dlgExportGraphAsImage
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
-    Private clsGgsave As New RFunction
+    Private clsggSave As New RFunction
 
     Private Sub dlgExportGraphAsImage_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -32,28 +32,32 @@ Public Class dlgExportGraphAsImage
         autoTranslate(Me)
         TestOkEnabled()
     End Sub
+
     Private Sub InitialiseDialog()
+        ' TODO: Help ID
+        ucrInputFile.SetParameter(New RParameter("filename", 0))
+
+        ucrSelectedGraphReceiver.SetParameter(New RParameter("plot", 1))
+        ucrSelectedGraphReceiver.SetParameterIsRFunction()
         ucrSelectorGraphAsImage.SetItemType("graph")
         ucrSelectedGraphReceiver.strSelectorHeading = "Graphs"
-
         ucrSelectedGraphReceiver.Selector = ucrSelectorGraphAsImage
-        ucrSelectedGraphReceiver.SetParameter(New RParameter("plot"))
-        ucrSelectedGraphReceiver.SetParameterIsRFunction()
         ucrSelectedGraphReceiver.SetMeAsReceiver()
-        ucrInputFile.SetParameter(New RParameter("filename"))
     End Sub
 
     Private Sub SetDefaults()
-        ucrInputFile.Reset()
-        ucrInputFile.SetName("")
-        ucrSelectorGraphAsImage.Reset()
+        clsggSave = New RFunction
 
-        clsGgsave = New RFunction
-        clsGgsave.SetRCommand("ggsave")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsGgsave)
+        ucrInputFile.Reset()
+        ucrSelectorGraphAsImage.Reset()
+        ucrInputFile.SetName("")
+
+        clsggSave.SetPackageName("ggplot2")
+        clsggSave.SetRCommand("ggsave")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsggSave)
     End Sub
 
-    Private Sub SetRcodeForControls(bReset As Boolean)
+    Private Sub SetRCodeForControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
@@ -67,11 +71,7 @@ Public Class dlgExportGraphAsImage
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        SetRcodeForControls(True)
-        TestOkEnabled()
-    End Sub
-
-    Private Sub ucrInputFile_ControlContentsChanged() Handles ucrInputFile.ControlContentsChanged, ucrSelectedGraphReceiver.ControlContentsChanged
+        SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
 
@@ -85,7 +85,7 @@ Public Class dlgExportGraphAsImage
         End If
     End Sub
 
-    Private Sub ucrInputFile_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectedGraphReceiver.ControlContentsChanged, ucrInputFile.ControlContentsChanged
+    Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectedGraphReceiver.ControlContentsChanged, ucrInputFile.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
