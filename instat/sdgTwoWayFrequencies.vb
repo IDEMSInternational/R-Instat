@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class sdgTwoWayFrequencies
     Public bControlsInitialised As Boolean = False
@@ -143,5 +144,20 @@ Public Class sdgTwoWayFrequencies
         ucrInputHorizontalLabels.SetRCode(clsTwoWayGraphFreq, bReset)
         ucrInputGraphTitle.SetRCode(clsTwoWayGraphFreq, bReset)
         ucrSaveGraph.SetRCode(clsTwoWayGraphFreq, bReset)
+    End Sub
+
+    'This is a temporary solution to a known bug with sjPlot package
+    'Issue posted here https://github.com/strengejacke/sjPlot/issues/227
+    'This sub can be removed when this issue is resolved in sjPlot
+    Public Sub ShowValueParameter()
+        If (ucrChkShowPercentage.Checked = False AndAlso ucrChkShowCount.Checked = False) Then
+            clsTwoWayGraphFreq.AddParameter("show.values", "FALSE")
+        Else
+            clsTwoWayGraphFreq.RemoveParameterByName("show.values")
+        End If
+    End Sub
+
+    Private Sub CheckboxesForShowValues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkShowPercentage.ControlValueChanged, ucrChkShowCount.ControlValueChanged
+        ShowValueParameter()
     End Sub
 End Class
