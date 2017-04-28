@@ -19,7 +19,7 @@ Imports instat.Translations
 Public Class dlgViewGraph
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsGgplotly, clsGetGraphs As New RFunction
+    Private clsggPlotly, clsGetGraphs As New RFunction
     Private strGraphDisplayOption As String
 
     Private Sub dlgViewGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -36,23 +36,10 @@ Public Class dlgViewGraph
         TestOkEnabled()
     End Sub
 
-    Private Sub SetDefaults()
-        clsGgplotly = New RFunction
-
-        ucrGraphsSelector.Reset()
-
-        clsGgplotly.SetPackageName("plotly")
-        clsGgplotly.SetRCommand("ggplotly")
-
-        clsGetGraphs.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
-        clsGgplotly.AddParameter("p", clsRFunctionParameter:=clsGetGraphs)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsGgplotly)
-    End Sub
-
     Private Sub InitialiseDialog()
-
         'TODO HELPID
         rdoDisplaySeparateWindow.Enabled = False
+
         'Selector
         ucrGraphsSelector.SetParameter(New RParameter("data_name", 0))
         ucrGraphsSelector.SetParameterIsString()
@@ -68,7 +55,7 @@ Public Class dlgViewGraph
         'Group Options panel
         ucrPnlDisplayOptions.AddRadioButton(rdoDisplayOutputWindow)
         ucrPnlDisplayOptions.AddRadioButton(rdoDisplayRViewer)
-        'ucrPnlDisplayOptions.AddRadioButton(rdoDisplaySeparateWindow)
+        'ucrPnlDisplayOptions.AddRadioButton(rdoDisplaySeparateWindow) ' TODO: Add code for this
         ucrPnlDisplayOptions.AddRadioButton(rdoDisplayInteractiveView)
 
         ucrPnlDisplayOptions.AddFunctionNamesCondition(rdoDisplayOutputWindow, frmMain.clsRLink.strInstatDataObject & "$get_graphs")
@@ -77,10 +64,24 @@ Public Class dlgViewGraph
         ucrPnlDisplayOptions.AddFunctionNamesCondition(rdoDisplayInteractiveView, "ggplotly")
     End Sub
 
-    Public Sub SetRCodeForControls(bReset As Boolean)
+    Private Sub SetDefaults()
+        clsggPlotly = New RFunction
+        clsGetGraphs = New RFunction
+
+        ucrGraphsSelector.Reset()
+
+        clsggPlotly.SetPackageName("plotly")
+        clsggPlotly.SetRCommand("ggplotly")
+        clsggPlotly.AddParameter("p", clsRFunctionParameter:=clsGetGraphs)
+
+        clsGetGraphs.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsggPlotly)
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
         ucrGraphReceiver.SetRCode(clsGetGraphs, bReset)
         ucrGraphsSelector.SetRCode(clsGetGraphs, bReset)
-        ucrPnlDisplayOptions.SetRCode(clsGgplotly, bReset)
+        ucrPnlDisplayOptions.SetRCode(clsggPlotly, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -112,16 +113,16 @@ Public Class dlgViewGraph
             frmMain.clsInstatOptions.SetGraphDisplayOption("view_separate_window")
             ucrBase.clsRsyntax.iCallType = 3
         ElseIf rdoDisplayInteractiveView.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsGgplotly)
+      ucrBase.clsRsyntax.SetBaseRFunction(clsggPlotly)
             ucrBase.clsRsyntax.iCallType = 0
         End If
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrGraphReceiver.ControlContentsChanged
-        TestOkEnabled()
-    End Sub
-
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         frmMain.clsInstatOptions.SetGraphDisplayOption(strGraphDisplayOption)
+    End Sub
+
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrGraphReceiver.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class
