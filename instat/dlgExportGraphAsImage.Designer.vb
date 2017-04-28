@@ -41,11 +41,11 @@ Partial Class dlgExportGraphAsImage
         '
         'cmdBrowse
         '
-        Me.cmdBrowse.Location = New System.Drawing.Point(299, 212)
+        Me.cmdBrowse.Location = New System.Drawing.Point(310, 194)
         Me.cmdBrowse.Name = "cmdBrowse"
         Me.cmdBrowse.Size = New System.Drawing.Size(75, 23)
-        Me.cmdBrowse.TabIndex = 11
-        Me.cmdBrowse.Text = "Browse"
+        Me.cmdBrowse.TabIndex = 4
+        Me.cmdBrowse.Text = "Browse..."
         Me.cmdBrowse.UseVisualStyleBackColor = True
         '
         'ucrInputFile
@@ -53,10 +53,10 @@ Partial Class dlgExportGraphAsImage
         Me.ucrInputFile.AddQuotesIfUnrecognised = True
         Me.ucrInputFile.IsMultiline = False
         Me.ucrInputFile.IsReadOnly = False
-        Me.ucrInputFile.Location = New System.Drawing.Point(10, 214)
+        Me.ucrInputFile.Location = New System.Drawing.Point(10, 196)
         Me.ucrInputFile.Name = "ucrInputFile"
-        Me.ucrInputFile.Size = New System.Drawing.Size(287, 21)
-        Me.ucrInputFile.TabIndex = 10
+        Me.ucrInputFile.Size = New System.Drawing.Size(294, 21)
+        Me.ucrInputFile.TabIndex = 3
         '
         'ucrSelectedGraphReceiver
         '
@@ -81,16 +81,16 @@ Partial Class dlgExportGraphAsImage
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 241)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 223)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(404, 52)
-        Me.ucrBase.TabIndex = 12
+        Me.ucrBase.TabIndex = 5
         '
         'dlgExportGraphAsImage
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(423, 296)
+        Me.ClientSize = New System.Drawing.Size(416, 277)
         Me.Controls.Add(Me.cmdBrowse)
         Me.Controls.Add(Me.ucrInputFile)
         Me.Controls.Add(Me.lblSelectedGraph)
