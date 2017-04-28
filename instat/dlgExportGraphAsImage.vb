@@ -36,21 +36,11 @@ Public Class dlgExportGraphAsImage
         ucrSelectorGraphAsImage.SetItemType("graph")
         ucrSelectedGraphReceiver.strSelectorHeading = "Graphs"
 
-        ucrPnlImageFormats.SetParameter(New RParameter("device"))
-        ucrPnlImageFormats.AddRadioButton(rdoBmp, Chr(34) & "bmp" & Chr(34))
-        ucrPnlImageFormats.AddRadioButton(rdoJpeg, Chr(34) & "jpeg" & Chr(34))
-        ucrPnlImageFormats.AddRadioButton(rdoPng, Chr(34) & "png" & Chr(34))
-        ucrPnlImageFormats.AddRadioButton(rdoSvg, Chr(34) & "svg" & Chr(34))
-        ucrPnlImageFormats.AddRadioButton(rdoTex, Chr(34) & "tex" & Chr(34))
-        ucrPnlImageFormats.AddRadioButton(rdoWmf, Chr(34) & "wmf" & Chr(34))
-
         ucrSelectedGraphReceiver.Selector = ucrSelectorGraphAsImage
-        ucrSelectedGraphReceiver.SetParameter(New RParameter("filename"))
-        ucrSelectedGraphReceiver.SetParameterIsString()
+        ucrSelectedGraphReceiver.SetParameter(New RParameter("plot"))
+        ucrSelectedGraphReceiver.SetParameterIsRFunction()
         ucrSelectedGraphReceiver.SetMeAsReceiver()
-        ucrInputFile.SetParameter(New RParameter("path"))
-
-
+        ucrInputFile.SetParameter(New RParameter("filename"))
     End Sub
 
     Private Sub SetDefaults()
@@ -60,7 +50,6 @@ Public Class dlgExportGraphAsImage
 
         clsGgsave = New RFunction
         clsGgsave.SetRCommand("ggsave")
-        clsGgsave.AddParameter("device", Chr(34) & "png" & Chr(34))
         ucrBase.clsRsyntax.SetBaseRFunction(clsGgsave)
     End Sub
 
@@ -69,10 +58,10 @@ Public Class dlgExportGraphAsImage
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrSelectedGraphReceiver.IsEmpty AndAlso ucrInputFile.IsEmpty Then
-            ucrBase.OKEnabled(False)
-        Else
+        If Not ucrSelectedGraphReceiver.IsEmpty AndAlso Not ucrInputFile.IsEmpty Then
             ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
@@ -87,10 +76,12 @@ Public Class dlgExportGraphAsImage
     End Sub
 
     Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
-        Dim dlgSelectFile As New FolderBrowserDialog
-        dlgSelectFile.Description = "Save Graph As Image"
+        Dim dlgSelectFile As New SaveFileDialog
+        dlgSelectFile.Title = "Save Graph As Image"
+        dlgSelectFile.Filter = "Joint Photographic Experts Group (*.jpeg)|*.jpeg|Portable Network Graphics(*.png)|*.png|BitMaP(*.bmp)|*.bmp|Encapsulated PostScript(*.eps)|*.eps|PostScript(*.ps)|*.ps|Scalable Vector Graphics(*.svg)|*.svg|Windows Meta File(*.wmf)|*.wmf|Portable Document Format(*.pdf)|*.pdf"
+        dlgSelectFile.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
         If dlgSelectFile.ShowDialog() = DialogResult.OK Then
-            ucrInputFile.SetName(dlgSelectFile.SelectedPath.Replace("\", "/"))
+            ucrInputFile.SetName(dlgSelectFile.FileName.Replace("\", "/"))
         End If
     End Sub
 
