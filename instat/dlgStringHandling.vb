@@ -13,6 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 Public Class dlgStringHandling
     Private bFirstload As Boolean = True
@@ -59,12 +60,11 @@ Public Class dlgStringHandling
         ucrPnlStringHandling.AddToLinkedControls(ucrInputReplaceBy, {rdoReplace}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
 
         'ucrSave
+        ucrSaveStringHandling.SetPrefix("count")
         ucrSaveStringHandling.SetSaveTypeAsColumn()
         ucrSaveStringHandling.SetDataFrameSelector(ucrSelectorStringHandling.ucrAvailableDataFrames)
         ucrSaveStringHandling.SetIsTextBox()
-        ucrSaveStringHandling.SetLabelText("Save Result")
-        ucrSaveStringHandling.SetName("count")
-        ucrSaveStringHandling.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
+        ucrSaveStringHandling.SetLabelText("Save Result:")
     End Sub
 
     Private Sub SetDefaults()
@@ -90,40 +90,58 @@ Public Class dlgStringHandling
         clsLocateFunction.SetRCommand("str_locate")
         clsReplaceFunction.SetPackageName("stringr")
         clsReplaceFunction.SetRCommand("str_replace")
+        ChangePrefixName()
         clsCountFunction.SetAssignTo(ucrSaveStringHandling.GetText, strTempDataframe:=ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveStringHandling.GetText, bAssignToIsPrefix:=True)
         ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
+        NewColumnName()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsDetectFunction, New RParameter("string", 0), iAdditionalPairNo:=1)
+        ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsExtractFunction, New RParameter("string", 0), iAdditionalPairNo:=2)
+        ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsLocateFunction, New RParameter("string", 0), iAdditionalPairNo:=3)
+        ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsReplaceFunction, New RParameter("string", 0), iAdditionalPairNo:=4)
 
-        ucrPnlStringHandling.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrSaveStringHandling.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrReceiverStringHandling.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrInputPattern.AddAdditionalCodeParameterPair(clsDetectFunction, New RParameter("pattern", 1), iAdditionalPairNo:=1)
+        ucrInputPattern.AddAdditionalCodeParameterPair(clsExtractFunction, New RParameter("pattern", 1), iAdditionalPairNo:=2)
+        ucrInputPattern.AddAdditionalCodeParameterPair(clsLocateFunction, New RParameter("pattern", 1), iAdditionalPairNo:=3)
+        ucrInputPattern.AddAdditionalCodeParameterPair(clsReplaceFunction, New RParameter("pattern", 1), iAdditionalPairNo:=4)
+
+        ucrReceiverStringHandling.SetRCode(clsCountFunction, bReset)
+        ucrInputPattern.SetRCode(clsCountFunction, bReset)
         ucrInputReplaceBy.SetRCode(clsReplaceFunction, bReset)
+        ucrPnlStringHandling.SetRCode(clsCountFunction, bReset)
+        ucrSaveStringHandling.SetRCode(clsCountFunction, bReset)
 
-        ucrInputPattern.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrInputReplaceBy.SetRCode(clsReplaceFunction, bReset)
-
+        ucrSaveStringHandling.AddAdditionalRCode(clsDetectFunction, iAdditionalPairNo:=1)
+        ucrSaveStringHandling.AddAdditionalRCode(clsExtractFunction, iAdditionalPairNo:=2)
+        ucrSaveStringHandling.AddAdditionalRCode(clsLocateFunction, iAdditionalPairNo:=3)
+        ucrSaveStringHandling.AddAdditionalRCode(clsReplaceFunction, iAdditionalPairNo:=4)
     End Sub
 
-    Private Sub ChangeBaseFunction()
-        If rdoCount.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
-            ucrSaveStringHandling.SetPrefix("count")
-        ElseIf rdoDetect.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsDetectFunction)
-            ucrSaveStringHandling.SetPrefix("detect")
-        ElseIf rdoExtract.Checked Then
-            ucrSaveStringHandling.SetPrefix("extract")
-            ucrBase.clsRsyntax.SetBaseRFunction(clsExtractFunction)
-        ElseIf rdoLocate.Checked Then
-            ucrSaveStringHandling.SetPrefix("locate")
-            ucrBase.clsRsyntax.SetBaseRFunction(clsLocateFunction)
-        ElseIf rdoReplace.Checked Then
-            ucrSaveStringHandling.SetPrefix("replace")
-            ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceFunction)
+    Private Sub ChangePrefixName()
+        If Not ucrSaveStringHandling.bUserTyped Then
+            If rdoCount.Checked Then
+                ucrSaveStringHandling.SetPrefix("count")
+            ElseIf rdoDetect.Checked Then
+                ucrSaveStringHandling.SetPrefix("detect")
+            ElseIf rdoExtract.Checked Then
+                ucrSaveStringHandling.SetPrefix("extract")
+            ElseIf rdoLocate.Checked Then
+                ucrSaveStringHandling.SetPrefix("")
+                ucrSaveStringHandling.SetName("locate")
+            ElseIf rdoReplace.Checked Then
+                ucrSaveStringHandling.SetPrefix("replace")
+            End If
         End If
-        SetRCodeForControls(True)
+    End Sub
+
+    Private Sub NewColumnName()
+        If rdoLocate.Checked Then
+            ucrSaveStringHandling.SetLabelText("New Column Name:")
+        Else
+            ucrSaveStringHandling.SetLabelText("Save Result:")
+        End If
     End Sub
 
     Private Sub TestOkEnabled()
@@ -147,6 +165,19 @@ Public Class dlgStringHandling
     End Sub
 
     Private Sub ucrPnlStringHandling_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlStringHandling.ControlValueChanged
-        ChangeBaseFunction()
+        If rdoCount.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
+        ElseIf rdoDetect.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsDetectFunction)
+        ElseIf rdoExtract.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsExtractFunction)
+        ElseIf rdoLocate.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsLocateFunction)
+        ElseIf rdoReplace.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceFunction)
+        End If
+        NewColumnName()
+        ChangePrefixName()
     End Sub
+
 End Class
