@@ -111,10 +111,11 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub SetTTest()
-        clsRTTest.SetRCommand("t.test")
+        clsRTTest.SetRCommand("stats::t.test")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRTTest)
         clsRTTest.AddParameter("conf.level", nudCI.Value.ToString())
-        clsRTTest.AddParameter("mu", nudHypothesis.Value.ToString())
+        clsRTTest.AddParameter("data", ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        'clsRTTest.AddParameter("mu", nudHypothesis.Value.ToString())
         '        If ucrExplanatory.strCurrDataType = "numeric" OrElse ucrExplanatory.strCurrDataType = "integer" Then
         '        clsRTTest.AddParameter("x", clsRFunctionParameter:=ucrResponse.GetVariables())
         '        clsRTTest.AddParameter("y", clsRFunctionParameter:=ucrExplanatory.GetVariables())
@@ -122,7 +123,7 @@ Public Class dlgRegressionSimple
         clsModel.SetOperation("~")
         clsModel.AddParameter(iPosition:=0, clsRFunctionParameter:=ucrResponse.GetVariables())
         clsModel.AddParameter(clsRFunctionParameter:=ucrExplanatory.GetVariables())
-        clsRTTest.AddParameter("x", clsROperatorParameter:=clsModel)
+        clsRTTest.AddParameter("formula", clsROperatorParameter:=clsModel)
         '        End If
         If chkPaired.Checked Then
             clsRTTest.AddParameter("paired", "TRUE")
@@ -135,11 +136,12 @@ Public Class dlgRegressionSimple
         clsRFTest.SetRCommand("var.test")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRFTest)
         clsRFTest.AddParameter("conf.level", nudCI.Value.ToString())
-        clsRFTest.AddParameter("mu", nudHypothesis.Value.ToString())
+        clsRFTest.AddParameter("data", ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        'clsRFTest.AddParameter("mu", nudHypothesis.Value.ToString())
         clsModel.SetOperation("~")
         clsModel.AddParameter(iPosition:=0, clsRFunctionParameter:=ucrResponse.GetVariables())
         clsModel.AddParameter(clsRFunctionParameter:=ucrExplanatory.GetVariables())
-        clsRFTest.AddParameter("", clsROperatorParameter:=clsModel)
+        clsRFTest.AddParameter("formula", clsROperatorParameter:=clsModel)
     End Sub
 
     Private Sub SetWilcoxTest()
@@ -364,6 +366,7 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub ucrSelectorSimpleReg_DataFrameChanged() Handles ucrSelectorSimpleReg.DataFrameChanged
+
         AssignModelName()
         SetRCode()
     End Sub
