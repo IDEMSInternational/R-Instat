@@ -63,7 +63,7 @@ Public Class dlgStringHandling
         ucrSaveStringHandling.SetSaveTypeAsColumn()
         ucrSaveStringHandling.SetDataFrameSelector(ucrSelectorStringHandling.ucrAvailableDataFrames)
         ucrSaveStringHandling.SetIsTextBox()
-        ucrSaveStringHandling.SetLabelText("Save Result:")
+        'ucrSaveStringHandling.SetLabelText("Save Result:")
     End Sub
 
     Private Sub SetDefaults()
@@ -91,6 +91,8 @@ Public Class dlgStringHandling
         clsReplaceFunction.SetRCommand("str_replace")
         clsCountFunction.SetAssignTo(ucrSaveStringHandling.GetText, strTempDataframe:=ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveStringHandling.GetText, bAssignToIsPrefix:=True)
         ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
+        NewColumnName()
+        ChangePrefixName()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -117,19 +119,28 @@ Public Class dlgStringHandling
     End Sub
 
     Private Sub ChangePrefixName()
-        If rdoCount.Checked Then
-            ucrSaveStringHandling.SetPrefix("count")
-        ElseIf rdoDetect.Checked Then
-            ucrSaveStringHandling.SetPrefix("detect")
-        ElseIf rdoExtract.Checked Then
-            ucrSaveStringHandling.SetPrefix("extract")
-        ElseIf rdoLocate.Checked Then
-            ucrSaveStringHandling.SetName("locate")
-        ElseIf rdoReplace.Checked Then
-            ucrSaveStringHandling.SetPrefix("replace")
+        If Not ucrSaveStringHandling.bUserTyped Then
+            If rdoCount.Checked Then
+                ucrSaveStringHandling.SetPrefix("count")
+            ElseIf rdoDetect.Checked Then
+                ucrSaveStringHandling.SetPrefix("detect")
+            ElseIf rdoExtract.Checked Then
+                ucrSaveStringHandling.SetPrefix("extract")
+            ElseIf rdoLocate.Checked Then
+                ucrSaveStringHandling.SetName("locate")
+            ElseIf rdoReplace.Checked Then
+                ucrSaveStringHandling.SetPrefix("replace")
+            End If
         End If
     End Sub
 
+    Private Sub NewColumnName()
+        If rdoLocate.Checked Then
+            ucrSaveStringHandling.SetLabelText("New Column Name:")
+        Else
+            ucrSaveStringHandling.SetLabelText("Save Result:")
+        End If
+    End Sub
     Private Sub TestOkEnabled()
         If rdoReplace.Checked AndAlso ucrSaveStringHandling.IsComplete() AndAlso Not ucrReceiverStringHandling.IsEmpty() AndAlso Not ucrInputPattern.IsEmpty AndAlso Not ucrInputReplaceBy.IsEmpty Then
             ucrBase.OKEnabled(True)
@@ -152,6 +163,7 @@ Public Class dlgStringHandling
 
     Private Sub ucrPnlStringHandling_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlStringHandling.ControlValueChanged
         ChangePrefixName()
+        NewColumnName()
     End Sub
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
