@@ -55,52 +55,23 @@ Public Class dlgBoxplot
     End Sub
 
     Public Sub SetCoordFlip()
-        Dim clsTempRFunc As New RFunction
-        If ucrChkHorizontalBoxplot.Checked Then
-            clsTempRFunc.SetRCommand("coord_flip")
-            ucrBase.clsRsyntax.AddOperatorParameter("coord_flip", clsRFunc:=clsTempRFunc)
-        Else
-            ucrBase.clsRsyntax.RemoveOperatorParameter("coord_flip")
-        End If
+        'Dim clsTempRFunc As New RFunction
+        'If ucrChkHorizontalBoxplot.Checked Then
+        '    clsTempRFunc.SetRCommand("coord_flip")
+        '    ucrBase.clsRsyntax.AddOperatorParameter("coord_flip", clsRFunc:=clsTempRFunc)
+        'Else
+        '    ucrBase.clsRsyntax.RemoveOperatorParameter("coord_flip")
+        'End If
     End Sub
-
-    Private Sub SetDefaults()
-        clsBaseOperator = New ROperator
-        clsRggplotFunction = New RFunction
-        clsRgeom_boxplotFunction = New RFunction
-        clsRaesFunction = New RFunction
-
-        ucrSelectorBoxPlot.Reset()
-        ucrSelectorBoxPlot.Focus()
-        ucrSaveBoxplot.Reset()
-        sdgPlots.Reset()
-
-        'rdoBoxplot.Checked = True
-        'These chk boxes add features to the BoxPlot when ticked. See SetCorrdFlip and chkVarwidth_CheckedChanged. By default they are unticked.
-        clsBaseOperator.SetOperation("+")
-        clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
-        clsBaseOperator.AddParameter("geomfunc", clsRFunctionParameter:=clsRgeom_boxplotFunction)
-
-        clsRggplotFunction.SetPackageName("ggplot2")
-        clsRggplotFunction.SetRCommand("ggplot")
-        clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction, iPosition:=1)
-
-        clsRaesFunction.SetPackageName("ggplot2")
-        clsRaesFunction.SetRCommand("aes")
-        clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
-
-
-        clsRgeom_boxplotFunction.SetPackageName("ggplot2")
-        clsRgeom_boxplotFunction.SetRCommand("geom_boxplot")
-
-        clsRgeom_boxplotFunction.AddParameter("varwidth", "FALSE")
-        clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
-        ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
-        TempOptionsDisabledInMultipleVariablesCase()
-        TestOkEnabled()
-    End Sub
-
     Private Sub InitialiseDialog()
+
+        Dim clsTempRFunc As New RFunction
+        Dim coord_flip As New RParameter
+
+        clsTempRFunc.SetRCommand("coord_flip")
+        clsTempRFunc.SetPackageName("ggplot2")
+        coord_flip.SetArgument(clsTempRFunc)
+
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.iHelpTopicID = 436
         ucrBase.clsRsyntax.iCallType = 3
@@ -109,9 +80,10 @@ Public Class dlgBoxplot
         ucrSelectorBoxPlot.SetParameterIsrfunction()
 
         ucrPnlPlots.SetParameter(New RParameter("geomfunc"))
-        ucrPnlPlots.AddRadioButton(rdoViolin, "geomfunc")
-        ucrPnlPlots.AddRadioButton(rdoBoxplot, "geomfunc") '
-        ucrPnlPlots.AddRadioButton(rdoJitter, "geomfunc")
+        ucrPnlPlots.AddRadioButton(rdoViolin, "geom_violin")
+        ucrPnlPlots.AddRadioButton(rdoBoxplot, "geom_boxplot")
+        ucrPnlPlots.AddRadioButton(rdoJitter, "geom_jitter")
+
         ucrPnlPlots.AddFunctionNamesCondition(rdoBoxplot, "geom_boxplot")
         ucrPnlPlots.AddFunctionNamesCondition(rdoJitter, "geom_jitter")
         ucrPnlPlots.AddFunctionNamesCondition(rdoJitter, "geom_violin")
@@ -143,6 +115,10 @@ Public Class dlgBoxplot
         ucrChkVarwidth.SetRDefault("FALSE")
 
         ucrChkHorizontalBoxplot.SetText("Horizontal Boxplot")
+        ucrChkHorizontalBoxplot.AddParameterPresentCondition(True, "coord_flip")
+        ucrChkHorizontalBoxplot.AddParameterPresentCondition(False, "coord_flip", False)
+        ucrChkHorizontalBoxplot.AddFunctionNamesCondition(ucrChkHorizontalBoxplot, "coord_flip")
+
         ucrPnlPlots.AddToLinkedControls(ucrChkVarwidth, {rdoBoxplot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrSaveBoxplot.SetPrefix("Boxplot")
@@ -154,6 +130,37 @@ Public Class dlgBoxplot
 
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         sdgPlots.SetGgplotFunction(clsRggplotFunction)
+    End Sub
+    Private Sub SetDefaults()
+        clsBaseOperator = New ROperator
+        clsRggplotFunction = New RFunction
+        clsRgeom_boxplotFunction = New RFunction
+        clsRaesFunction = New RFunction
+
+        ucrSelectorBoxPlot.Reset()
+        ucrSelectorBoxPlot.Focus()
+        ucrSaveBoxplot.Reset()
+        sdgPlots.Reset()
+
+        'rdoBoxplot.Checked = True
+        'These chk boxes add features to the BoxPlot when ticked. See SetCorrdFlip and chkVarwidth_CheckedChanged. By default they are unticked.
+        clsBaseOperator.SetOperation("+")
+        clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
+        clsBaseOperator.AddParameter("geomfunc", clsRFunctionParameter:=clsRgeom_boxplotFunction)
+
+        clsRggplotFunction.SetPackageName("ggplot2")
+        clsRggplotFunction.SetRCommand("ggplot")
+        clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction, iPosition:=1)
+
+        clsRaesFunction.SetPackageName("ggplot2")
+        clsRaesFunction.SetRCommand("aes")
+        clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
+
+        clsRgeom_boxplotFunction.AddParameter("varwidth", "FALSE")
+        clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
+        TempOptionsDisabledInMultipleVariablesCase()
+        TestOkEnabled()
     End Sub
 
     Private Sub ChangeSavePrefixAndChkText()
@@ -241,17 +248,17 @@ Public Class dlgBoxplot
         End If
     End Sub
 
-    'Private Sub rdoBoxplot_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBoxplot.CheckedChanged, rdoJitter.CheckedChanged, rdoViolin.CheckedChanged
-    '    'Sets appropriate geom function depending with selection 
-    '    If rdoBoxplot.Checked Then
-    '        clsRgeom_boxplotFunction.SetRCommand("geom_boxplot")
-    '    ElseIf rdoJitter.Checked
-    '        clsRgeom_boxplotFunction.SetRCommand("geom_jitter")
-    '    Else
-    '        clsRgeom_boxplotFunction.SetRCommand("geom_violin")
-    '    End If
-    '    FillColourAes()
-    'End Sub
+    Private Sub rdoBoxplot_CheckedChanged() Handles ucrPnlPlots.ControlValueChanged ' rdoBoxplot.CheckedChanged, rdoJitter.CheckedChanged, rdoViolin.CheckedChanged
+        'Sets appropriate geom function depending with selection 
+        If rdoBoxplot.Checked Then
+            clsRgeom_boxplotFunction.SetRCommand("geom_boxplot")
+        ElseIf rdoJitter.Checked
+            clsRgeom_boxplotFunction.SetRCommand("geom_jitter")
+        Else
+            clsRgeom_boxplotFunction.SetRCommand("geom_violin")
+        End If
+        FillColourAes()
+    End Sub
 
     Private Sub FillColourAes()
         If (rdoBoxplot.Checked AndAlso Not ucrSecondFactorReceiver.IsEmpty) OrElse (rdoViolin.Checked AndAlso Not ucrSecondFactorReceiver.IsEmpty) Then
