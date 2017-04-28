@@ -27,9 +27,9 @@ Partial Class dlgThreeVariableFrequencies
         Me.ucrPnlFrequencyDisplay = New instat.UcrPanel()
         Me.rdoTable = New System.Windows.Forms.RadioButton()
         Me.rdoGraph = New System.Windows.Forms.RadioButton()
-        Me.lblGroupBy = New System.Windows.Forms.Label()
-        Me.lblColumnFactor = New System.Windows.Forms.Label()
-        Me.lblRowFactor = New System.Windows.Forms.Label()
+        Me.lblGroupby = New System.Windows.Forms.Label()
+        Me.lblColumnfactor = New System.Windows.Forms.Label()
+        Me.lblRowfactor = New System.Windows.Forms.Label()
         Me.ucrReceiverColumnFactor = New instat.ucrReceiverSingle()
         Me.ucrReceiverRowFactor = New instat.ucrReceiverSingle()
         Me.cmdOptions = New System.Windows.Forms.Button()
@@ -110,32 +110,32 @@ Partial Class dlgThreeVariableFrequencies
         Me.rdoGraph.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.rdoGraph.UseVisualStyleBackColor = True
         '
-        'lblGroupBy
+        'lblGroupby
         '
-        Me.lblGroupBy.AutoSize = True
-        Me.lblGroupBy.Location = New System.Drawing.Point(260, 90)
-        Me.lblGroupBy.Name = "lblGroupBy"
-        Me.lblGroupBy.Size = New System.Drawing.Size(54, 13)
-        Me.lblGroupBy.TabIndex = 4
-        Me.lblGroupBy.Text = "Group By:"
+        Me.lblGroupby.AutoSize = True
+        Me.lblGroupby.Location = New System.Drawing.Point(260, 90)
+        Me.lblGroupby.Name = "lblGroupby"
+        Me.lblGroupby.Size = New System.Drawing.Size(53, 13)
+        Me.lblGroupby.TabIndex = 4
+        Me.lblGroupby.Text = "Group by:"
         '
-        'lblColumnFactor
+        'lblColumnfactor
         '
-        Me.lblColumnFactor.AutoSize = True
-        Me.lblColumnFactor.Location = New System.Drawing.Point(260, 176)
-        Me.lblColumnFactor.Name = "lblColumnFactor"
-        Me.lblColumnFactor.Size = New System.Drawing.Size(78, 13)
-        Me.lblColumnFactor.TabIndex = 8
-        Me.lblColumnFactor.Text = "Column Factor:"
+        Me.lblColumnfactor.AutoSize = True
+        Me.lblColumnfactor.Location = New System.Drawing.Point(260, 176)
+        Me.lblColumnfactor.Name = "lblColumnfactor"
+        Me.lblColumnfactor.Size = New System.Drawing.Size(75, 13)
+        Me.lblColumnfactor.TabIndex = 8
+        Me.lblColumnfactor.Text = "Column factor:"
         '
-        'lblRowFactor
+        'lblRowfactor
         '
-        Me.lblRowFactor.AutoSize = True
-        Me.lblRowFactor.Location = New System.Drawing.Point(260, 133)
-        Me.lblRowFactor.Name = "lblRowFactor"
-        Me.lblRowFactor.Size = New System.Drawing.Size(65, 13)
-        Me.lblRowFactor.TabIndex = 6
-        Me.lblRowFactor.Text = "Row Factor:"
+        Me.lblRowfactor.AutoSize = True
+        Me.lblRowfactor.Location = New System.Drawing.Point(260, 133)
+        Me.lblRowfactor.Name = "lblRowfactor"
+        Me.lblRowfactor.Size = New System.Drawing.Size(62, 13)
+        Me.lblRowfactor.TabIndex = 6
+        Me.lblRowfactor.Text = "Row factor:"
         '
         'ucrReceiverColumnFactor
         '
@@ -317,11 +317,11 @@ Partial Class dlgThreeVariableFrequencies
         Me.Controls.Add(Me.ucrReceiverWeights)
         Me.Controls.Add(Me.ucrChkWeights)
         Me.Controls.Add(Me.cmdOptions)
-        Me.Controls.Add(Me.lblColumnFactor)
-        Me.Controls.Add(Me.lblRowFactor)
+        Me.Controls.Add(Me.lblColumnfactor)
+        Me.Controls.Add(Me.lblRowfactor)
         Me.Controls.Add(Me.ucrReceiverColumnFactor)
         Me.Controls.Add(Me.ucrReceiverRowFactor)
-        Me.Controls.Add(Me.lblGroupBy)
+        Me.Controls.Add(Me.lblGroupby)
         Me.Controls.Add(Me.rdoTable)
         Me.Controls.Add(Me.rdoGraph)
         Me.Controls.Add(Me.ucrPnlFrequencyDisplay)
@@ -346,9 +346,9 @@ Partial Class dlgThreeVariableFrequencies
     Friend WithEvents ucrPnlFrequencyDisplay As UcrPanel
     Friend WithEvents rdoTable As RadioButton
     Friend WithEvents rdoGraph As RadioButton
-    Friend WithEvents lblGroupBy As Label
-    Friend WithEvents lblColumnFactor As Label
-    Friend WithEvents lblRowFactor As Label
+    Friend WithEvents lblGroupby As Label
+    Friend WithEvents lblColumnfactor As Label
+    Friend WithEvents lblRowfactor As Label
     Friend WithEvents ucrReceiverColumnFactor As ucrReceiverSingle
     Friend WithEvents ucrReceiverRowFactor As ucrReceiverSingle
     Friend WithEvents cmdOptions As Button
