@@ -111,7 +111,8 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub SetTTest()
-        clsRTTest.SetRCommand("stats::t.test")
+        clsRTTest.SetRCommand("t.test")
+        clsRTTest.SetPackageName("stats")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRTTest)
         clsRTTest.AddParameter("conf.level", nudCI.Value.ToString())
         clsRTTest.AddParameter("data", ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
@@ -134,6 +135,7 @@ Public Class dlgRegressionSimple
 
     Private Sub SetFTest()
         clsRFTest.SetRCommand("var.test")
+        clsRFTest.SetPackageName("stats")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRFTest)
         clsRFTest.AddParameter("conf.level", nudCI.Value.ToString())
         clsRFTest.AddParameter("data", ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
