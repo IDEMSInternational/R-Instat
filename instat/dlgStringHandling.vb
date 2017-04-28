@@ -13,6 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 Public Class dlgStringHandling
     Private bFirstload As Boolean = True
@@ -63,7 +64,7 @@ Public Class dlgStringHandling
         ucrSaveStringHandling.SetSaveTypeAsColumn()
         ucrSaveStringHandling.SetDataFrameSelector(ucrSelectorStringHandling.ucrAvailableDataFrames)
         ucrSaveStringHandling.SetIsTextBox()
-        'ucrSaveStringHandling.SetLabelText("Save Result:")
+        ucrSaveStringHandling.SetLabelText("Save Result:")
     End Sub
 
     Private Sub SetDefaults()
@@ -89,10 +90,10 @@ Public Class dlgStringHandling
         clsLocateFunction.SetRCommand("str_locate")
         clsReplaceFunction.SetPackageName("stringr")
         clsReplaceFunction.SetRCommand("str_replace")
+        ChangePrefixName()
         clsCountFunction.SetAssignTo(ucrSaveStringHandling.GetText, strTempDataframe:=ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveStringHandling.GetText, bAssignToIsPrefix:=True)
         ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
         NewColumnName()
-        ChangePrefixName()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -111,6 +112,7 @@ Public Class dlgStringHandling
         ucrInputReplaceBy.SetRCode(clsReplaceFunction, bReset)
         ucrPnlStringHandling.SetRCode(clsCountFunction, bReset)
         ucrSaveStringHandling.SetRCode(clsCountFunction, bReset)
+
 
         ucrSaveStringHandling.AddAdditionalRCode(clsDetectFunction, iAdditionalPairNo:=1)
         ucrSaveStringHandling.AddAdditionalRCode(clsExtractFunction, iAdditionalPairNo:=2)
@@ -158,15 +160,12 @@ Public Class dlgStringHandling
     End Sub
 
     Private Sub ucrReceiverStringHandling_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStringHandling.ControlContentsChanged, ucrPnlStringHandling.ControlContentsChanged, ucrInputPattern.ControlContentsChanged, ucrInputReplaceBy.ControlContentsChanged
+        NewColumnName()
+        ChangePrefixName()
         TestOkEnabled()
     End Sub
 
     Private Sub ucrPnlStringHandling_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlStringHandling.ControlValueChanged
-        ChangePrefixName()
-        NewColumnName()
-    End Sub
-
-    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         If rdoCount.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
         ElseIf rdoDetect.Checked Then
