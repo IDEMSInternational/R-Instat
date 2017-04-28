@@ -78,7 +78,7 @@ Public Class dlgExportGraphAsImage
     Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
         Dim dlgSelectFile As New SaveFileDialog
         dlgSelectFile.Title = "Save Graph As Image"
-        dlgSelectFile.Filter = "Joint Photographic Experts Group (*.jpeg)|*.jpeg|Portable Network Graphics(*.png)|*.png|BitMaP(*.bmp)|*.bmp|Encapsulated PostScript(*.eps)|*.eps|PostScript(*.ps)|*.ps|Scalable Vector Graphics(*.svg)|*.svg|Windows Meta File(*.wmf)|*.wmf|Portable Document Format(*.pdf)|*.pdf"
+        dlgSelectFile.Filter = "JPEG (*.jpeg)|*.jpeg|PNG(*.png)|*.png|BitMaP(*.bmp)|*.bmp|EPS(*.eps)|*.eps|PostScript(*.ps)|*.ps|SVG(*.svg)|*.svg|WMF(*.wmf)|*.wmf|PDF(*.pdf)|*.pdf"
         dlgSelectFile.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
         If dlgSelectFile.ShowDialog() = DialogResult.OK Then
             ucrInputFile.SetName(dlgSelectFile.FileName.Replace("\", "/"))
