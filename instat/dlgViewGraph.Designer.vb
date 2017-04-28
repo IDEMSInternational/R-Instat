@@ -27,10 +27,9 @@ Partial Class dlgViewGraph
         Me.rdoDisplaySeparateWindow = New System.Windows.Forms.RadioButton()
         Me.rdoDisplayRViewer = New System.Windows.Forms.RadioButton()
         Me.rdoDisplayOutputWindow = New System.Windows.Forms.RadioButton()
-        Me.lblRowFactor = New System.Windows.Forms.Label()
+        Me.ucrPnlDisplayOptions = New instat.UcrPanel()
         Me.lblGraphtoUse = New System.Windows.Forms.Label()
         Me.ucrGraphReceiver = New instat.ucrReceiverSingle()
-        Me.ucrPnlDisplayOptions = New instat.UcrPanel()
         Me.ucrGraphsSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpDisplayOptions.SuspendLayout()
@@ -43,10 +42,10 @@ Partial Class dlgViewGraph
         Me.grpDisplayOptions.Controls.Add(Me.rdoDisplayRViewer)
         Me.grpDisplayOptions.Controls.Add(Me.rdoDisplayOutputWindow)
         Me.grpDisplayOptions.Controls.Add(Me.ucrPnlDisplayOptions)
-        Me.grpDisplayOptions.Location = New System.Drawing.Point(253, 92)
+        Me.grpDisplayOptions.Location = New System.Drawing.Point(250, 90)
         Me.grpDisplayOptions.Name = "grpDisplayOptions"
         Me.grpDisplayOptions.Size = New System.Drawing.Size(171, 124)
-        Me.grpDisplayOptions.TabIndex = 4
+        Me.grpDisplayOptions.TabIndex = 3
         Me.grpDisplayOptions.TabStop = False
         Me.grpDisplayOptions.Text = "Display Options"
         '
@@ -56,7 +55,7 @@ Partial Class dlgViewGraph
         Me.rdoDisplayInteractiveView.Location = New System.Drawing.Point(9, 22)
         Me.rdoDisplayInteractiveView.Name = "rdoDisplayInteractiveView"
         Me.rdoDisplayInteractiveView.Size = New System.Drawing.Size(158, 17)
-        Me.rdoDisplayInteractiveView.TabIndex = 0
+        Me.rdoDisplayInteractiveView.TabIndex = 1
         Me.rdoDisplayInteractiveView.TabStop = True
         Me.rdoDisplayInteractiveView.Text = "Display in Interactive Viewer"
         Me.rdoDisplayInteractiveView.UseVisualStyleBackColor = True
@@ -94,40 +93,32 @@ Partial Class dlgViewGraph
         Me.rdoDisplayOutputWindow.Text = "Display in Output Window"
         Me.rdoDisplayOutputWindow.UseVisualStyleBackColor = True
         '
-        'lblRowFactor
-        '
-        Me.lblRowFactor.AutoSize = True
-        Me.lblRowFactor.Location = New System.Drawing.Point(265, 58)
-        Me.lblRowFactor.Name = "lblRowFactor"
-        Me.lblRowFactor.Size = New System.Drawing.Size(0, 13)
-        Me.lblRowFactor.TabIndex = 2
-        '
-        'lblGraphtoUse
-        '
-        Me.lblGraphtoUse.AutoSize = True
-        Me.lblGraphtoUse.Location = New System.Drawing.Point(260, 45)
-        Me.lblGraphtoUse.Name = "lblGraphtoUse"
-        Me.lblGraphtoUse.Size = New System.Drawing.Size(73, 13)
-        Me.lblGraphtoUse.TabIndex = 1
-        Me.lblGraphtoUse.Text = "Graph to Use:"
-        '
-        'ucrGraphReceiver
-        '
-        Me.ucrGraphReceiver.frmParent = Me
-        Me.ucrGraphReceiver.Location = New System.Drawing.Point(263, 60)
-        Me.ucrGraphReceiver.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrGraphReceiver.Name = "ucrGraphReceiver"
-        Me.ucrGraphReceiver.Selector = Nothing
-        Me.ucrGraphReceiver.Size = New System.Drawing.Size(120, 20)
-        Me.ucrGraphReceiver.TabIndex = 3
-        Me.ucrGraphReceiver.ucrSelector = Nothing
-        '
         'ucrPnlDisplayOptions
         '
         Me.ucrPnlDisplayOptions.Location = New System.Drawing.Point(6, 19)
         Me.ucrPnlDisplayOptions.Name = "ucrPnlDisplayOptions"
         Me.ucrPnlDisplayOptions.Size = New System.Drawing.Size(159, 99)
-        Me.ucrPnlDisplayOptions.TabIndex = 1
+        Me.ucrPnlDisplayOptions.TabIndex = 0
+        '
+        'lblGraphtoUse
+        '
+        Me.lblGraphtoUse.AutoSize = True
+        Me.lblGraphtoUse.Location = New System.Drawing.Point(250, 45)
+        Me.lblGraphtoUse.Name = "lblGraphtoUse"
+        Me.lblGraphtoUse.Size = New System.Drawing.Size(77, 13)
+        Me.lblGraphtoUse.TabIndex = 1
+        Me.lblGraphtoUse.Text = "Graph to View:"
+        '
+        'ucrGraphReceiver
+        '
+        Me.ucrGraphReceiver.frmParent = Me
+        Me.ucrGraphReceiver.Location = New System.Drawing.Point(250, 60)
+        Me.ucrGraphReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrGraphReceiver.Name = "ucrGraphReceiver"
+        Me.ucrGraphReceiver.Selector = Nothing
+        Me.ucrGraphReceiver.Size = New System.Drawing.Size(120, 20)
+        Me.ucrGraphReceiver.TabIndex = 2
+        Me.ucrGraphReceiver.ucrSelector = Nothing
         '
         'ucrGraphsSelector
         '
@@ -141,19 +132,18 @@ Partial Class dlgViewGraph
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 231)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 220)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 5
+        Me.ucrBase.TabIndex = 4
         '
         'dlgViewGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(436, 290)
+        Me.ClientSize = New System.Drawing.Size(430, 276)
         Me.Controls.Add(Me.ucrGraphReceiver)
         Me.Controls.Add(Me.lblGraphtoUse)
-        Me.Controls.Add(Me.lblRowFactor)
         Me.Controls.Add(Me.grpDisplayOptions)
         Me.Controls.Add(Me.ucrGraphsSelector)
         Me.Controls.Add(Me.ucrBase)
@@ -178,7 +168,6 @@ Partial Class dlgViewGraph
     Friend WithEvents rdoDisplayOutputWindow As RadioButton
     Friend WithEvents ucrPnlDisplayOptions As UcrPanel
     Friend WithEvents rdoDisplayInteractiveView As RadioButton
-    Friend WithEvents lblRowFactor As Label
     Friend WithEvents lblGraphtoUse As Label
     Friend WithEvents ucrGraphReceiver As ucrReceiverSingle
 End Class
