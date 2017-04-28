@@ -487,7 +487,7 @@ Public Class ucrCore
         Next
     End Sub
 
-    Protected Overridable Sub UpdateParameter(clsTempParam As RParameter)
+    Public Overridable Sub UpdateParameter(clsTempParam As RParameter)
         If GetValueToSet() IsNot Nothing Then
             clsTempParam.SetArgumentValue(GetValueToSet().ToString())
         End If
