@@ -125,6 +125,7 @@ Public Class dlgThreeVariableFrequencies
         ucrPnlFrequencyDisplay.AddFunctionNamesCondition(rdoGraph, "sjplot")
 
         ucrPnlFreqType.AddParameterValuesCondition(rdoCount, "fun", "grpfrq")
+        ucrPnlFreqType.AddParameterPresentCondition(rdoCount, "margin", False)
         ucrPnlFreqType.AddParameterValuesCondition(rdoRow, "fun", "xtab")
         ucrPnlFreqType.AddParameterValuesCondition(rdoRow, "margin", "row")
         ucrPnlFreqType.AddParameterValuesCondition(rdoCell, "fun", "xtab")
