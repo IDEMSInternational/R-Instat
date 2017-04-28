@@ -112,10 +112,12 @@ Public Class dlgTwoWayFrequencies
 
         ucrPnlFreqDisplay.AddFunctionNamesCondition(rdoTable, "sjtab")
         ucrPnlFreqDisplay.AddFunctionNamesCondition(rdoGraph, "sjplot")
+
         'Conditions for both requires checks on multiple functions
         'Not yet implemented so this can cause a bug
-        ucrPnlFreqDisplay.AddFunctionNamesCondition(rdoBoth, "sjtab")
-        ucrPnlFreqDisplay.AddFunctionNamesCondition(rdoBoth, "sjplot")
+
+        'ucrPnlFreqDisplay.AddFunctionNamesCondition(rdoBoth, "sjtab")
+        'ucrPnlFreqDisplay.AddFunctionNamesCondition(rdoBoth, "sjplot")
 
         'Setting Display of the group boxes in the dialogue
         ucrPnlFreqDisplay.AddToLinkedControls(ucrChkCount, {rdoTable, rdoBoth}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -131,7 +133,7 @@ Public Class dlgTwoWayFrequencies
     Private Sub SetDefaults()
         clsSjTab = New RFunction
         clsSjPlot = New RFunction
-
+       
         'Reset
         ucrSelectorTwoWayFrequencies.Reset()
         ucrReceiverRowFactor.SetMeAsReceiver()
@@ -143,12 +145,16 @@ Public Class dlgTwoWayFrequencies
         clsSjTab.AddParameter("show.summary", "FALSE")
         clsSjTab.AddParameter("digits", 0)
         clsSjTab.AddParameter("fun", Chr(34) & "xtab" & Chr(34))
+        clsSjTab.AddParameter("title", Chr(34) & "" & Chr(34))
+        clsSjTab.AddParameter("string.total", Chr(34) & "Total" & Chr(34))
 
         'Defining Plot functions and default functions
         clsSjPlot.SetPackageName("sjPlot")
         clsSjPlot.SetRCommand("sjplot")
+        clsSjPlot.AddParameter("fun", Chr(34) & "grpfrq" & Chr(34))
         clsSjPlot.AddParameter("show.prc", "TRUE")
         clsSjPlot.AddParameter("show.n", "TRUE")
+        clsSjPlot.AddParameter("title", Chr(34) & "" & Chr(34))
         clsSjPlot.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorTwoWayFrequencies.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjTab)
         bResetSubdialog = True
@@ -177,7 +183,7 @@ Public Class dlgTwoWayFrequencies
         ucrChkWeights.SetRCode(clsSjTab, bReset)
         ucrChkFlip.SetRCode(clsSjPlot, bReset)
         ucrPnlFreqType.SetRCode(clsSjPlot, bReset)
-        ucrPnlFreqDisplay.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrPnlFreqDisplay.SetRCode(clsSjTab, bReset)
         ucrSelectorTwoWayFrequencies.SetRCode(clsSjTab, bReset)
         ucrChkCell.SetRCode(clsSjTab, bReset)
         ucrChkColumn.SetRCode(clsSjTab, bReset)
