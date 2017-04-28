@@ -75,7 +75,7 @@ Partial Class dlgPolynomials
         Me.rdoCentered.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.rdoCentered.AutoSize = True
-        Me.rdoCentered.Location = New System.Drawing.Point(13, 43)
+        Me.rdoCentered.Location = New System.Drawing.Point(13, 65)
         Me.rdoCentered.Name = "rdoCentered"
         Me.rdoCentered.Size = New System.Drawing.Size(68, 17)
         Me.rdoCentered.TabIndex = 2
@@ -88,7 +88,7 @@ Partial Class dlgPolynomials
         Me.rdoOrthogonal.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.rdoOrthogonal.AutoSize = True
-        Me.rdoOrthogonal.Location = New System.Drawing.Point(13, 66)
+        Me.rdoOrthogonal.Location = New System.Drawing.Point(13, 19)
         Me.rdoOrthogonal.Name = "rdoOrthogonal"
         Me.rdoOrthogonal.Size = New System.Drawing.Size(77, 17)
         Me.rdoOrthogonal.TabIndex = 3
@@ -101,7 +101,7 @@ Partial Class dlgPolynomials
         Me.rdoSimple.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.rdoSimple.AutoSize = True
-        Me.rdoSimple.Location = New System.Drawing.Point(13, 20)
+        Me.rdoSimple.Location = New System.Drawing.Point(13, 42)
         Me.rdoSimple.Name = "rdoSimple"
         Me.rdoSimple.Size = New System.Drawing.Size(56, 17)
         Me.rdoSimple.TabIndex = 1
