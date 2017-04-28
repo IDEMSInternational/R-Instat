@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgViewFactorLabels
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsViewFunc As RFunction
+    Private clsViewFunc, clsSelect As RFunction
 
     Private Sub dlgFactorLabels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -37,12 +37,17 @@ Public Class dlgViewFactorLabels
     Private Sub InitialiseDialog()
         'TODO: HElP ID
 
-        ucrReceiverFactorColumns.SetParameter(New RParameter("x", 0))
-        ucrReceiverFactorColumns.SetParameterIsRFunction()
+        ucrReceiverFactorColumns.SetParameter(New RParameter("x", 1))
+        ucrReceiverFactorColumns.SetParameterIsString()
+        ucrReceiverFactorColumns.SetParameterIncludeArgumentName(False)
+        ucrReceiverFactorColumns.bWithQuotes = False
+
         ucrReceiverFactorColumns.SetIncludedDataTypes({"factor", "ordered"})
-        ucrReceiverFactorColumns.bForceAsDataFrame = True
         ucrReceiverFactorColumns.Selector = ucrSelectorViewFactorLabels
         ucrReceiverFactorColumns.SetMeAsReceiver()
+
+        ucrSelectorViewFactorLabels.SetParameter(New RParameter(".data", 0))
+        ucrSelectorViewFactorLabels.SetParameterIsrfunction()
 
         ucrChkShowLabels.SetParameter(New RParameter("show.labels", 1))
         ucrChkShowLabels.SetText("Show Variable Labels")
@@ -83,13 +88,18 @@ Public Class dlgViewFactorLabels
 
     Private Sub SetDefaults()
         clsViewFunc = New RFunction
+        clsSelect = New RFunction
 
         'Reset
         ucrSelectorViewFactorLabels.Reset()
-
         'Defining the function
         clsViewFunc.SetPackageName("sjPlot")
         clsViewFunc.SetRCommand("view_df")
+
+        clsSelect.SetPackageName("dplyr")
+        clsSelect.SetRCommand("select")
+
+        clsViewFunc.AddParameter("x", clsRFunctionParameter:=clsSelect)
         clsViewFunc.AddParameter("show.id", "FALSE")
         ucrBase.clsRsyntax.SetBaseRFunction(clsViewFunc)
     End Sub
@@ -103,7 +113,17 @@ Public Class dlgViewFactorLabels
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrChkAlternateColour.SetRCode(clsViewFunc, bReset)
+        ucrChkShowFrequencies.SetRCode(clsViewFunc, bReset)
+        ucrChkShowId.SetRCode(clsViewFunc, bReset)
+        ucrChkShowLabels.SetRCode(clsViewFunc, bReset)
+        ucrChkShowMissingValues.SetRCode(clsViewFunc, bReset)
+        ucrChkSortByName.SetRCode(clsViewFunc, bReset)
+        ucrChkShowPercentage.SetRCode(clsViewFunc, bReset)
+        ucrChkShowType.SetRCode(clsViewFunc, bReset)
+        ucrChkShowValues.SetRCode(clsViewFunc, bReset)
+        ucrReceiverFactorColumns.SetRCode(clsSelect, bReset)
+        ucrSelectorViewFactorLabels.SetRCode(clsSelect, bReset)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
