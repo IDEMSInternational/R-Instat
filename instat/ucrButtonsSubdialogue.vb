@@ -18,6 +18,7 @@ Imports instat.Translations
 
 Public Class ucrButtonsSubdialogue
     Public Event ClickReturn(sender As Object, e As EventArgs)
+    Public iHelpTopicID As Integer
 
     Private Sub cmdCancel_Click(sender As Object, e As EventArgs) Handles cmdCancel.Click
         Me.ParentForm.Close()
@@ -30,5 +31,18 @@ Public Class ucrButtonsSubdialogue
 
     Private Sub ucrButtonsSubdialogue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         translateEach(Controls)
+    End Sub
+
+    Private Sub HelpContent()
+        ' (1) Use HelpNDoc's Help Context number. Not dependent on HelpNDoc.
+        If iHelpTopicID > 0 Then
+            Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, iHelpTopicID.ToString())
+        Else
+            Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TableOfContents)
+        End If
+    End Sub
+
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
+        HelpContent()
     End Sub
 End Class

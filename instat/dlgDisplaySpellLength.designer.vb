@@ -23,112 +23,122 @@ Partial Class dlgDisplaySpellLength
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
-        Me.chkMonthAbbreviations = New System.Windows.Forms.CheckBox()
-        Me.chkRemoveNA = New System.Windows.Forms.CheckBox()
         Me.lblColunmName = New System.Windows.Forms.Label()
         Me.lblDayDisplay = New System.Windows.Forms.Label()
         Me.lblThreshold = New System.Windows.Forms.Label()
-        Me.nudThreshold = New System.Windows.Forms.NumericUpDown()
         Me.ucrInputColumnName = New instat.ucrInputTextBox()
         Me.ucrInputDisplayDay = New instat.ucrInputTextBox()
-        CType(Me.nudThreshold, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ucrNudThreshold = New instat.ucrNud()
+        Me.ucrChkMonthAbbreviations = New instat.ucrCheck()
+        Me.ucrChkRemoveMissingValues = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 115)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 144)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 60)
         Me.ucrBase.TabIndex = 0
-        '
-        'chkMonthAbbreviations
-        '
-        Me.chkMonthAbbreviations.AutoSize = True
-        Me.chkMonthAbbreviations.Location = New System.Drawing.Point(12, 92)
-        Me.chkMonthAbbreviations.Name = "chkMonthAbbreviations"
-        Me.chkMonthAbbreviations.Size = New System.Drawing.Size(123, 17)
-        Me.chkMonthAbbreviations.TabIndex = 1
-        Me.chkMonthAbbreviations.Tag = "Month_Abbreviations"
-        Me.chkMonthAbbreviations.Text = "Month Abbreviations"
-        Me.chkMonthAbbreviations.UseVisualStyleBackColor = True
-        '
-        'chkRemoveNA
-        '
-        Me.chkRemoveNA.AutoSize = True
-        Me.chkRemoveNA.Location = New System.Drawing.Point(141, 92)
-        Me.chkRemoveNA.Name = "chkRemoveNA"
-        Me.chkRemoveNA.Size = New System.Drawing.Size(139, 17)
-        Me.chkRemoveNA.TabIndex = 2
-        Me.chkRemoveNA.Tag = "Remove_Missing_Values"
-        Me.chkRemoveNA.Text = "Remove Missing Values"
-        Me.chkRemoveNA.UseVisualStyleBackColor = True
         '
         'lblColunmName
         '
         Me.lblColunmName.AutoSize = True
         Me.lblColunmName.Location = New System.Drawing.Point(9, 20)
         Me.lblColunmName.Name = "lblColunmName"
-        Me.lblColunmName.Size = New System.Drawing.Size(73, 13)
+        Me.lblColunmName.Size = New System.Drawing.Size(76, 13)
         Me.lblColunmName.TabIndex = 6
         Me.lblColunmName.Tag = "Colunm_Name"
-        Me.lblColunmName.Text = "Column Name"
+        Me.lblColunmName.Text = "Column Name:"
         '
         'lblDayDisplay
         '
         Me.lblDayDisplay.AutoSize = True
         Me.lblDayDisplay.Location = New System.Drawing.Point(9, 47)
         Me.lblDayDisplay.Name = "lblDayDisplay"
-        Me.lblDayDisplay.Size = New System.Drawing.Size(63, 13)
+        Me.lblDayDisplay.Size = New System.Drawing.Size(66, 13)
         Me.lblDayDisplay.TabIndex = 7
         Me.lblDayDisplay.Tag = "Day_Display"
-        Me.lblDayDisplay.Text = "Display Day"
+        Me.lblDayDisplay.Text = "Display Day:"
         '
         'lblThreshold
         '
         Me.lblThreshold.AutoSize = True
-        Me.lblThreshold.Location = New System.Drawing.Point(9, 73)
+        Me.lblThreshold.Location = New System.Drawing.Point(9, 70)
         Me.lblThreshold.Name = "lblThreshold"
-        Me.lblThreshold.Size = New System.Drawing.Size(54, 13)
+        Me.lblThreshold.Size = New System.Drawing.Size(57, 13)
         Me.lblThreshold.TabIndex = 8
         Me.lblThreshold.Tag = "Threshold"
-        Me.lblThreshold.Text = "Threshold"
-        '
-        'nudThreshold
-        '
-        Me.nudThreshold.Increment = New Decimal(New Integer() {1, 0, 0, 131072})
-        Me.nudThreshold.Location = New System.Drawing.Point(89, 66)
-        Me.nudThreshold.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
-        Me.nudThreshold.Name = "nudThreshold"
-        Me.nudThreshold.Size = New System.Drawing.Size(56, 20)
-        Me.nudThreshold.TabIndex = 9
+        Me.lblThreshold.Text = "Threshold:"
         '
         'ucrInputColumnName
         '
-        Me.ucrInputColumnName.Location = New System.Drawing.Point(89, 12)
+        Me.ucrInputColumnName.bAddRemoveParameter = True
+        Me.ucrInputColumnName.bChangeParameterValue = True
+        Me.ucrInputColumnName.IsMultiline = False
+        Me.ucrInputColumnName.IsReadOnly = False
+        Me.ucrInputColumnName.Location = New System.Drawing.Point(89, 17)
         Me.ucrInputColumnName.Name = "ucrInputColumnName"
         Me.ucrInputColumnName.Size = New System.Drawing.Size(142, 21)
         Me.ucrInputColumnName.TabIndex = 10
         '
         'ucrInputDisplayDay
         '
-        Me.ucrInputDisplayDay.Location = New System.Drawing.Point(89, 39)
+        Me.ucrInputDisplayDay.bAddRemoveParameter = True
+        Me.ucrInputDisplayDay.bChangeParameterValue = True
+        Me.ucrInputDisplayDay.IsMultiline = False
+        Me.ucrInputDisplayDay.IsReadOnly = False
+        Me.ucrInputDisplayDay.Location = New System.Drawing.Point(89, 43)
         Me.ucrInputDisplayDay.Name = "ucrInputDisplayDay"
         Me.ucrInputDisplayDay.Size = New System.Drawing.Size(142, 21)
         Me.ucrInputDisplayDay.TabIndex = 11
+        '
+        'ucrNudThreshold
+        '
+        Me.ucrNudThreshold.bAddRemoveParameter = True
+        Me.ucrNudThreshold.bChangeParameterValue = True
+        Me.ucrNudThreshold.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudThreshold.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudThreshold.Location = New System.Drawing.Point(89, 68)
+        Me.ucrNudThreshold.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudThreshold.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudThreshold.Name = "ucrNudThreshold"
+        Me.ucrNudThreshold.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudThreshold.TabIndex = 12
+        Me.ucrNudThreshold.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkMonthAbbreviations
+        '
+        Me.ucrChkMonthAbbreviations.bAddRemoveParameter = True
+        Me.ucrChkMonthAbbreviations.bChangeParameterValue = True
+        Me.ucrChkMonthAbbreviations.Checked = False
+        Me.ucrChkMonthAbbreviations.Location = New System.Drawing.Point(9, 92)
+        Me.ucrChkMonthAbbreviations.Name = "ucrChkMonthAbbreviations"
+        Me.ucrChkMonthAbbreviations.Size = New System.Drawing.Size(178, 20)
+        Me.ucrChkMonthAbbreviations.TabIndex = 13
+        '
+        'ucrChkRemoveMissingValues
+        '
+        Me.ucrChkRemoveMissingValues.bAddRemoveParameter = True
+        Me.ucrChkRemoveMissingValues.bChangeParameterValue = True
+        Me.ucrChkRemoveMissingValues.Checked = False
+        Me.ucrChkRemoveMissingValues.Location = New System.Drawing.Point(9, 118)
+        Me.ucrChkRemoveMissingValues.Name = "ucrChkRemoveMissingValues"
+        Me.ucrChkRemoveMissingValues.Size = New System.Drawing.Size(178, 20)
+        Me.ucrChkRemoveMissingValues.TabIndex = 14
         '
         'dlgDisplaySpellLength
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(431, 179)
+        Me.ClientSize = New System.Drawing.Size(419, 202)
+        Me.Controls.Add(Me.ucrChkRemoveMissingValues)
+        Me.Controls.Add(Me.ucrChkMonthAbbreviations)
+        Me.Controls.Add(Me.ucrNudThreshold)
         Me.Controls.Add(Me.ucrInputDisplayDay)
         Me.Controls.Add(Me.ucrInputColumnName)
-        Me.Controls.Add(Me.nudThreshold)
         Me.Controls.Add(Me.lblThreshold)
         Me.Controls.Add(Me.lblDayDisplay)
         Me.Controls.Add(Me.lblColunmName)
-        Me.Controls.Add(Me.chkRemoveNA)
-        Me.Controls.Add(Me.chkMonthAbbreviations)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -137,19 +147,18 @@ Partial Class dlgDisplaySpellLength
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Display_Spell_Length"
         Me.Text = "Display Spell Length"
-        CType(Me.nudThreshold, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents chkMonthAbbreviations As CheckBox
-    Friend WithEvents chkRemoveNA As CheckBox
     Friend WithEvents lblColunmName As Label
     Friend WithEvents lblDayDisplay As Label
     Friend WithEvents lblThreshold As Label
-    Friend WithEvents nudThreshold As NumericUpDown
     Friend WithEvents ucrInputColumnName As ucrInputTextBox
     Friend WithEvents ucrInputDisplayDay As ucrInputTextBox
+    Friend WithEvents ucrNudThreshold As ucrNud
+    Friend WithEvents ucrChkMonthAbbreviations As ucrCheck
+    Friend WithEvents ucrChkRemoveMissingValues As ucrCheck
 End Class

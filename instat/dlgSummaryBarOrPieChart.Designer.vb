@@ -42,7 +42,7 @@ Partial Class dlgSummaryBarOrPieChart
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 321)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 316)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 11
@@ -50,7 +50,7 @@ Partial Class dlgSummaryBarOrPieChart
         'rdoBarChart
         '
         Me.rdoBarChart.AutoSize = True
-        Me.rdoBarChart.Location = New System.Drawing.Point(5, 9)
+        Me.rdoBarChart.Location = New System.Drawing.Point(10, 10)
         Me.rdoBarChart.Name = "rdoBarChart"
         Me.rdoBarChart.Size = New System.Drawing.Size(69, 17)
         Me.rdoBarChart.TabIndex = 0
@@ -62,7 +62,7 @@ Partial Class dlgSummaryBarOrPieChart
         'rdoPieChart
         '
         Me.rdoPieChart.AutoSize = True
-        Me.rdoPieChart.Location = New System.Drawing.Point(95, 9)
+        Me.rdoPieChart.Location = New System.Drawing.Point(280, 10)
         Me.rdoPieChart.Name = "rdoPieChart"
         Me.rdoPieChart.Size = New System.Drawing.Size(68, 17)
         Me.rdoPieChart.TabIndex = 1
@@ -72,26 +72,26 @@ Partial Class dlgSummaryBarOrPieChart
         '
         'ucrYReceiver
         '
-        Me.ucrYReceiver.Location = New System.Drawing.Point(255, 78)
+        Me.ucrYReceiver.Location = New System.Drawing.Point(255, 85)
         Me.ucrYReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrYReceiver.Name = "ucrYReceiver"
         Me.ucrYReceiver.Selector = Nothing
-        Me.ucrYReceiver.Size = New System.Drawing.Size(106, 26)
+        Me.ucrYReceiver.Size = New System.Drawing.Size(120, 20)
         Me.ucrYReceiver.TabIndex = 3
         '
         'ucrFactorReceiver
         '
-        Me.ucrFactorReceiver.Location = New System.Drawing.Point(255, 133)
+        Me.ucrFactorReceiver.Location = New System.Drawing.Point(255, 131)
         Me.ucrFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
         Me.ucrFactorReceiver.Selector = Nothing
-        Me.ucrFactorReceiver.Size = New System.Drawing.Size(106, 26)
+        Me.ucrFactorReceiver.Size = New System.Drawing.Size(120, 20)
         Me.ucrFactorReceiver.TabIndex = 5
         '
         'lblYvariable
         '
         Me.lblYvariable.AutoSize = True
-        Me.lblYvariable.Location = New System.Drawing.Point(256, 63)
+        Me.lblYvariable.Location = New System.Drawing.Point(256, 70)
         Me.lblYvariable.Name = "lblYvariable"
         Me.lblYvariable.Size = New System.Drawing.Size(58, 13)
         Me.lblYvariable.TabIndex = 2
@@ -101,7 +101,7 @@ Partial Class dlgSummaryBarOrPieChart
         'lblFactor
         '
         Me.lblFactor.AutoSize = True
-        Me.lblFactor.Location = New System.Drawing.Point(256, 118)
+        Me.lblFactor.Location = New System.Drawing.Point(256, 116)
         Me.lblFactor.Name = "lblFactor"
         Me.lblFactor.Size = New System.Drawing.Size(40, 13)
         Me.lblFactor.TabIndex = 4
@@ -130,17 +130,17 @@ Partial Class dlgSummaryBarOrPieChart
         '
         'ucrSecondFactorReceiver
         '
-        Me.ucrSecondFactorReceiver.Location = New System.Drawing.Point(255, 188)
+        Me.ucrSecondFactorReceiver.Location = New System.Drawing.Point(255, 178)
         Me.ucrSecondFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSecondFactorReceiver.Name = "ucrSecondFactorReceiver"
         Me.ucrSecondFactorReceiver.Selector = Nothing
-        Me.ucrSecondFactorReceiver.Size = New System.Drawing.Size(106, 26)
+        Me.ucrSecondFactorReceiver.Size = New System.Drawing.Size(120, 26)
         Me.ucrSecondFactorReceiver.TabIndex = 7
         '
         'lblSecondFactor
         '
         Me.lblSecondFactor.AutoSize = True
-        Me.lblSecondFactor.Location = New System.Drawing.Point(256, 173)
+        Me.lblSecondFactor.Location = New System.Drawing.Point(256, 163)
         Me.lblSecondFactor.Name = "lblSecondFactor"
         Me.lblSecondFactor.Size = New System.Drawing.Size(80, 13)
         Me.lblSecondFactor.TabIndex = 6
@@ -151,9 +151,9 @@ Partial Class dlgSummaryBarOrPieChart
         '
         Me.grpChartOptions.Controls.Add(Me.rdoPieChart)
         Me.grpChartOptions.Controls.Add(Me.rdoBarChart)
-        Me.grpChartOptions.Location = New System.Drawing.Point(7, 1)
+        Me.grpChartOptions.Location = New System.Drawing.Point(10, 4)
         Me.grpChartOptions.Name = "grpChartOptions"
-        Me.grpChartOptions.Size = New System.Drawing.Size(170, 34)
+        Me.grpChartOptions.Size = New System.Drawing.Size(397, 31)
         Me.grpChartOptions.TabIndex = 0
         Me.grpChartOptions.TabStop = False
         '
@@ -169,9 +169,9 @@ Partial Class dlgSummaryBarOrPieChart
         '
         'ucrSaveSummaryBar
         '
-        Me.ucrSaveSummaryBar.Location = New System.Drawing.Point(12, 288)
+        Me.ucrSaveSummaryBar.Location = New System.Drawing.Point(10, 286)
         Me.ucrSaveSummaryBar.Name = "ucrSaveSummaryBar"
-        Me.ucrSaveSummaryBar.Size = New System.Drawing.Size(265, 27)
+        Me.ucrSaveSummaryBar.Size = New System.Drawing.Size(265, 24)
         Me.ucrSaveSummaryBar.TabIndex = 10
         '
         'ucrSummarybarSelector
@@ -188,7 +188,7 @@ Partial Class dlgSummaryBarOrPieChart
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(425, 381)
+        Me.ClientSize = New System.Drawing.Size(425, 371)
         Me.Controls.Add(Me.ucrSaveSummaryBar)
         Me.Controls.Add(Me.grpChartOptions)
         Me.Controls.Add(Me.cmdOptions)
@@ -207,8 +207,8 @@ Partial Class dlgSummaryBarOrPieChart
         Me.MinimizeBox = False
         Me.Name = "dlgSummaryBarOrPieChart"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "Summary_Bar_Pie_Chart"
-        Me.Text = "Summary Bar or Pie Chart"
+        Me.Tag = "Bar_or_Pie_Chart_From_Summary"
+        Me.Text = "Bar or Pie Chart From Summary"
         Me.grpChartOptions.ResumeLayout(False)
         Me.grpChartOptions.PerformLayout()
         Me.ResumeLayout(False)

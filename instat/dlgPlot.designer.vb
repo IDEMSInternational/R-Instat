@@ -39,7 +39,7 @@ Partial Class dlgPlot
         'lblXVariable
         '
         Me.lblXVariable.AutoSize = True
-        Me.lblXVariable.Location = New System.Drawing.Point(255, 165)
+        Me.lblXVariable.Location = New System.Drawing.Point(249, 197)
         Me.lblXVariable.Name = "lblXVariable"
         Me.lblXVariable.Size = New System.Drawing.Size(58, 13)
         Me.lblXVariable.TabIndex = 2
@@ -59,7 +59,7 @@ Partial Class dlgPlot
         Me.cmdOptions.Location = New System.Drawing.Point(10, 196)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(119, 23)
-        Me.cmdOptions.TabIndex = 7
+        Me.cmdOptions.TabIndex = 6
         Me.cmdOptions.Tag = "Options"
         Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
@@ -69,7 +69,7 @@ Partial Class dlgPlot
         Me.cmdLineOptions.Location = New System.Drawing.Point(10, 225)
         Me.cmdLineOptions.Name = "cmdLineOptions"
         Me.cmdLineOptions.Size = New System.Drawing.Size(119, 23)
-        Me.cmdLineOptions.TabIndex = 8
+        Me.cmdLineOptions.TabIndex = 7
         Me.cmdLineOptions.Tag = "Line_Options"
         Me.cmdLineOptions.Text = "Line Options"
         Me.cmdLineOptions.UseVisualStyleBackColor = True
@@ -77,7 +77,7 @@ Partial Class dlgPlot
         'lblFactorOptional
         '
         Me.lblFactorOptional.AutoSize = True
-        Me.lblFactorOptional.Location = New System.Drawing.Point(255, 209)
+        Me.lblFactorOptional.Location = New System.Drawing.Point(249, 241)
         Me.lblFactorOptional.Name = "lblFactorOptional"
         Me.lblFactorOptional.Size = New System.Drawing.Size(88, 13)
         Me.lblFactorOptional.TabIndex = 4
@@ -90,21 +90,21 @@ Partial Class dlgPlot
         Me.chkPoints.Location = New System.Drawing.Point(10, 257)
         Me.chkPoints.Name = "chkPoints"
         Me.chkPoints.Size = New System.Drawing.Size(55, 17)
-        Me.chkPoints.TabIndex = 6
+        Me.chkPoints.TabIndex = 8
         Me.chkPoints.Tag = "Points"
         Me.chkPoints.Text = "Points"
         Me.chkPoints.UseVisualStyleBackColor = True
         '
         'ucrSaveLinePlot
         '
-        Me.ucrSaveLinePlot.Location = New System.Drawing.Point(10, 282)
+        Me.ucrSaveLinePlot.Location = New System.Drawing.Point(10, 281)
         Me.ucrSaveLinePlot.Name = "ucrSaveLinePlot"
         Me.ucrSaveLinePlot.Size = New System.Drawing.Size(265, 27)
         Me.ucrSaveLinePlot.TabIndex = 9
         '
         'ucrVariablesAsFactorForLinePlot
         '
-        Me.ucrVariablesAsFactorForLinePlot.Location = New System.Drawing.Point(255, 26)
+        Me.ucrVariablesAsFactorForLinePlot.Location = New System.Drawing.Point(249, 46)
         Me.ucrVariablesAsFactorForLinePlot.Name = "ucrVariablesAsFactorForLinePlot"
         Me.ucrVariablesAsFactorForLinePlot.Size = New System.Drawing.Size(125, 136)
         Me.ucrVariablesAsFactorForLinePlot.TabIndex = 1
@@ -122,14 +122,14 @@ Partial Class dlgPlot
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 310)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 308)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 10
         '
         'ucrFactorOptionalReceiver
         '
-        Me.ucrFactorOptionalReceiver.Location = New System.Drawing.Point(255, 225)
+        Me.ucrFactorOptionalReceiver.Location = New System.Drawing.Point(249, 257)
         Me.ucrFactorOptionalReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFactorOptionalReceiver.Name = "ucrFactorOptionalReceiver"
         Me.ucrFactorOptionalReceiver.Selector = Nothing
@@ -138,7 +138,7 @@ Partial Class dlgPlot
         '
         'ucrReceiverX
         '
-        Me.ucrReceiverX.Location = New System.Drawing.Point(255, 181)
+        Me.ucrReceiverX.Location = New System.Drawing.Point(249, 213)
         Me.ucrReceiverX.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverX.Name = "ucrReceiverX"
         Me.ucrReceiverX.Selector = Nothing

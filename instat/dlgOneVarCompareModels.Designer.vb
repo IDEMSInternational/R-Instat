@@ -88,7 +88,7 @@ Partial Class dlgOneVarCompareModels
         Me.MinimizeBox = False
         Me.Name = "dlgOneVarCompareModels"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Compare Models for One Variable"
+        Me.Text = "One Variable Compare Models"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

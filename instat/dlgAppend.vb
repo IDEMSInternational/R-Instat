@@ -13,35 +13,72 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 Public Class dlgAppend
-    Public bFirstLoad As Boolean = True
+    Private bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
+    Private clsBindRows As New RFunction
 
     Private Sub dlgAppend_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
-
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
-        TestOKEnabled()
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        autoTranslate(Me)
     End Sub
+
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 465
+
+        ' ucrReceiver
+        ucrReceiverAppendDataframe.SetParameter(New RParameter("x", 0))
+        ucrReceiverAppendDataframe.SetParameterIsRFunction()
+        ucrReceiverAppendDataframe.GetParameter().bIncludeArgumentName = False
         ucrReceiverAppendDataframe.Selector = ucrSelectorDataframes
         ucrReceiverAppendDataframe.SetMeAsReceiver()
-        ucrBase.clsRsyntax.SetFunction("bind_rows")
         ucrReceiverAppendDataframe.SetItemType("dataframe")
-        ucrInputIDColName.SetValidationTypeAsRVariable()
-        ucrInputNewDataframeName.SetValidationTypeAsRVariable()
+
+        'chkID
+        SetParameter({ucrChkIncludeIDColumn, ucrInputIDColName}, New RParameter(".id", 1))
+        ucrChkIncludeIDColumn.SetText("Include ID Column")
+        ucrChkIncludeIDColumn.bChangeParameterValue = False
+        ucrChkIncludeIDColumn.AddToLinkedControls(ucrLinked:=ucrInputIDColName, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputIDColName.bAddRemoveParameter = False
+        ucrInputIDColName.SetLinkedDisplayControl(lblIDColName)
+
+        ' ucrSave
+        ucrSaveGraph.SetIsTextBox()
+        ucrSaveGraph.SetSaveTypeAsDataFrame()
+        ucrSaveGraph.SetLabelText("New Data Frame Name:")
+        ucrSaveGraph.SetPrefix("Append")
+    End Sub
+
+    Private Sub SetDefaults()
+        clsBindRows = New RFunction
+
+        ucrSelectorDataframes.Reset()
+        ucrSaveGraph.Reset()
+
+        clsBindRows.SetRCommand("bind_rows")
+        clsBindRows.AddParameter(".id", Chr(34) & "id" & Chr(34))
+        clsBindRows.SetAssignTo(ucrSaveGraph.GetText(), strTempDataframe:=ucrSaveGraph.GetText())
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsBindRows)
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverAppendDataframe.IsEmpty AndAlso Not ucrInputNewDataframeName.IsEmpty Then
-            If chkIncludeIDColumn.Checked AndAlso ucrInputIDColName.IsEmpty Then
+        If ucrReceiverAppendDataframe.lstSelectedVariables.Items.Count > 1 AndAlso ucrSaveGraph.IsComplete() Then
+            If ucrChkIncludeIDColumn.Checked AndAlso ucrInputIDColName.IsEmpty Then
                 ucrBase.OKEnabled(False)
             Else
                 ucrBase.OKEnabled(True)
@@ -51,55 +88,16 @@ Public Class dlgAppend
         End If
     End Sub
 
-    Private Sub SetDefaults()
-        ucrSelectorDataframes.Reset()
-        ucrInputIDColName.SetName("id")
-        ucrInputNewDataframeName.SetName("Append")
-        chkIncludeIDColumn.Checked = False
-        TestOKEnabled()
-    End Sub
-
-
     Private Sub ReopenDialog()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-    End Sub
-
-    Private Sub ucrReceiverAppendDataframe_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverAppendDataframe.SelectionChanged
-        If ucrReceiverAppendDataframe.IsEmpty = False Then
-            ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverAppendDataframe.GetVariables, bIncludeArgumentName:=False)
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("x")
-        End If
+        SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
 
-    Private Sub chkIncludeIDColumn_CheckedChanged(sender As Object, e As EventArgs) Handles chkIncludeIDColumn.CheckedChanged
-        IncludeIDColumn()
-    End Sub
-
-    Private Sub ucrInputIDColName_NameChanged() Handles ucrInputIDColName.NameChanged
-        IncludeIDColumn()
-    End Sub
-
-    Private Sub IncludeIDColumn()
-        If chkIncludeIDColumn.Checked Then
-            ucrBase.clsRsyntax.AddParameter(".id", Chr(34) & ucrInputIDColName.GetText & Chr(34))
-            ucrInputIDColName.Visible = True
-            lblIDColNAme.Visible = True
-        Else
-            ucrBase.clsRsyntax.RemoveParameter(".id")
-            ucrInputIDColName.Visible = False
-            lblIDColNAme.Visible = False
-        End If
+    Private Sub ucrReceiverAppendDataframe_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverAppendDataframe.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrChkIncludeIDColumn.ControlContentsChanged, ucrInputIDColName.ControlContentsChanged
         TestOKEnabled()
     End Sub
-
-    Private Sub ucrInputNewDataframeName_NameChanged() Handles ucrInputNewDataframeName.NameChanged
-        ucrBase.clsRsyntax.SetAssignTo(ucrInputNewDataframeName.GetText(), strTempDataframe:=ucrInputNewDataframeName.GetText())
-        TestOKEnabled()
-    End Sub
-
 End Class

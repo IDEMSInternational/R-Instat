@@ -89,7 +89,7 @@ Public Class dlgFitModel
         End If
     End Sub
     Private Sub ucrReceiverExpressionFitModel_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverExpressionFitModel.SelectionChanged
-        clsModel.SetParameter(False, strValue:=ucrReceiverExpressionFitModel.GetVariableNames(False))
+        clsModel.AddParameter(strParameterValue:=ucrReceiverExpressionFitModel.GetVariableNames(False))
         TestOKEnabled()
     End Sub
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -199,10 +199,10 @@ Public Class dlgFitModel
             If chkConvertToVariate.Checked Then
                 clsRConvert.SetRCommand("as.numeric")
                 clsRConvert.AddParameter("x", ucrReceiverResponseVar.GetVariableNames(bWithQuotes:=False))
-                clsModel.SetParameter(True, clsRFunc:=clsRConvert)
+                clsModel.AddParameter(iPosition:=0, clsRFunctionParameter:=clsRConvert)
                 ucrFamily.RecieverDatatype("numeric")
             Else
-                clsModel.SetParameter(True, strValue:=ucrReceiverResponseVar.GetVariableNames(bWithQuotes:=False))
+                clsModel.AddParameter(iPosition:=0, strParameterValue:=ucrReceiverResponseVar.GetVariableNames(bWithQuotes:=False))
                 ucrFamily.RecieverDatatype(ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverResponseVar.GetVariableNames(bWithQuotes:=False))
             End If
             sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)

@@ -14,8 +14,9 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
+
 Public Class ucrSelectorByDataFrame
-    Public Event DataFrameChanged()
 
     Public Overrides Sub LoadList()
         If ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
@@ -30,7 +31,7 @@ Public Class ucrSelectorByDataFrame
         LoadList()
         If strPrevDataFrame <> ucrAvailableDataFrames.cboAvailableDataFrames.Text Then
             OnResetReceivers()
-            RaiseEvent DataFrameChanged()
+            OnDataFrameChanged()
         End If
     End Sub
 
@@ -69,4 +70,81 @@ Public Class ucrSelectorByDataFrame
             ucrAvailableDataFrames.bUseCurrentFilter = bValue
         End Set
     End Property
+
+    Public Sub SetParameterIsString()
+        ucrAvailableDataFrames.SetParameterIsString()
+    End Sub
+
+    Public Sub SetParameterIsrfunction()
+        ucrAvailableDataFrames.SetParameterIsRFunction()
+    End Sub
+
+    Private Sub ucrAvailableDataFrames_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrAvailableDataFrames.ControlContentsChanged
+        OnControlContentsChanged()
+    End Sub
+
+    Private Sub ucrAvailableDataFrames_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrAvailableDataFrames.ControlValueChanged
+        OnControlValueChanged()
+    End Sub
+
+    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
+        MyBase.UpdateControl(bReset)
+        ucrAvailableDataFrames.UpdateControl(bReset)
+    End Sub
+
+    Public Overrides Sub SetParameter(clsNewParameter As RParameter, Optional iIndex As Integer = 0)
+        If bHasOwnParameter Then
+            MyBase.SetParameter(clsNewParameter, iIndex)
+        Else
+            ucrAvailableDataFrames.SetParameter(clsNewParameter, iIndex)
+        End If
+    End Sub
+
+    Public Overrides Function GetParameterName() As String
+        If bHasOwnParameter Then
+            Return MyBase.GetParameterName()
+        Else
+            Return ucrAvailableDataFrames.GetParameterName()
+        End If
+    End Function
+
+    Public Overrides Function IsRDefault() As Boolean
+        If bHasOwnParameter Then
+            Return MyBase.IsRDefault()
+        Else
+            Return ucrAvailableDataFrames.IsRDefault()
+        End If
+    End Function
+
+    Public Overrides Sub AddOrRemoveParameter(bAdd As Boolean)
+        If bHasOwnParameter Then
+            MyBase.AddOrRemoveParameter(bAdd)
+        Else
+            ucrAvailableDataFrames.AddOrRemoveParameter(bAdd)
+        End If
+    End Sub
+
+    Public Overrides Function GetParameter(Optional iIndex As Integer = 0) As RParameter
+        If bHasOwnParameter Then
+            Return MyBase.GetParameter()
+        Else
+            Return ucrAvailableDataFrames.GetParameter()
+        End If
+    End Function
+
+    Public Overrides Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False)
+        MyBase.SetRCode(clsNewCodeStructure, bReset)
+        ucrAvailableDataFrames.SetRCode(clsNewCodeStructure, bReset)
+    End Sub
+
+    Protected Overrides Sub UpdateParameter(clsTempParam As RParameter)
+        If bHasOwnParameter Then
+            MyBase.UpdateParameter(clsTempParam)
+        End If
+    End Sub
+
+    Public Overrides Sub AddAdditionalCodeParameterPair(clsNewRCode As RCodeStructure, clsNewRParameter As RParameter, Optional iAdditionalPairNo As Integer = -1)
+        MyBase.AddAdditionalCodeParameterPair(clsNewRCode, clsNewRParameter, iAdditionalPairNo)
+        ucrAvailableDataFrames.AddAdditionalCodeParameterPair(clsNewRCode, clsNewRParameter, iAdditionalPairNo)
+    End Sub
 End Class

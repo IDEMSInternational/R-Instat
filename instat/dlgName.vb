@@ -17,49 +17,83 @@
 Imports instat.Translations
 Public Class dlgName
     Dim bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
     Dim bUseSelectedColumn As Boolean = False
     Dim strSelectedColumn As String = ""
     Dim strSelectedDataFrame As String = ""
+    Private clsDefaultRFunction As New RFunction
 
     Private Sub dlgName_Load(sender As Object, e As EventArgs) Handles Me.Load
-        ucrBase.iHelpTopicID = 33
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         Else
             ReopenDialog()
         End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        autoTranslate(Me)
         If bUseSelectedColumn Then
             SetDefaultColumn()
         End If
-        TestOKEnabled()
     End Sub
 
     Private Sub ReopenDialog()
-        ucrReceiverName.txtReceiverSingle.Clear()
-        ucrInputNewName.txtInput.Clear()
+        ucrSelectVariables.Reset()
+    End Sub
+
+    Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 33
+
+        'Selector
+        ucrSelectVariables.SetParameter(New RParameter("data_name", 0))
+        ucrSelectVariables.SetParameterIsString()
+
+        'Receiver
+        ucrReceiverName.SetParameter(New RParameter("column_name", 1))
+        ucrReceiverName.SetParameterIsString()
+        ucrReceiverName.Selector = ucrSelectVariables
+        ucrReceiverName.SetMeAsReceiver()
+
+        'New Name Input
+        ucrInputNewName.SetParameter(New RParameter("new_val", 2))
+        ucrInputNewName.SetValidationTypeAsRVariable()
+
+        'Label Input
+        ucrInputVariableLabel.SetParameter(New RParameter("label", 3))
+    End Sub
+
+    Public Sub SetDefaults()
+        clsDefaultRFunction = New RFunction
+        ucrInputVariableLabel.Reset()
+        ucrSelectVariables.Reset()
+        ucrInputNewName.Reset()
+
+        clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
+        ucrInputVariableLabel.SetName("")
+        ucrInputNewName.SetName("")
+    End Sub
+
+    Private Sub DefaultNewName()
+        If ((Not ucrInputNewName.bUserTyped) AndAlso (Not ucrReceiverName.IsEmpty)) Then
+            ucrInputNewName.SetName(ucrReceiverName.GetVariableNames(bWithQuotes:=False))
+        End If
     End Sub
 
     Private Sub TestOKEnabled()
-        If ((Not ucrReceiverName.IsEmpty()) And (Not ucrInputNewName.IsEmpty())) Then
+        If Not ucrReceiverName.IsEmpty() AndAlso Not ucrInputNewName.IsEmpty() Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
-    Private Sub InitialiseDialog()
-        ucrReceiverName.Selector = ucrSelectVariables
-        ucrReceiverName.SetMeAsReceiver()
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$rename_column_in_data")
-        ucrInputNewName.SetValidationTypeAsRVariable()
-    End Sub
-
-    Public Sub SetDefaults()
-        ucrSelectVariables.Reset()
-        ucrInputNewName.ResetText()
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
@@ -69,37 +103,22 @@ Public Class dlgName
     End Sub
 
     Private Sub SetDefaultColumn()
-        ucrSelectVariables.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem = strSelectedDataFrame
+        ucrSelectVariables.SetDataframe(strSelectedDataFrame)
         ucrReceiverName.Add(strSelectedColumn, strSelectedDataFrame)
         bUseSelectedColumn = False
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrReceiverName_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverName.SelectionChanged
-        If Not ucrReceiverName.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("column_name", ucrReceiverName.GetVariableNames)
-            ucrInputNewName.SetName(ucrReceiverName.GetVariableNames(bWithQuotes:=False))
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("column_name")
-        End If
+    Private Sub ucrCoreControls_ControlContentsChanged() Handles ucrInputNewName.ControlContentsChanged, ucrReceiverName.ControlContentsChanged, ucrSelectVariables.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
-    Private Sub UcrInputNewName_NameChanged() Handles ucrInputNewName.NameChanged
-        If Not ucrInputNewName.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("new_val", Chr(34) & ucrInputNewName.GetText & Chr(34))
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("new_val")
-        End If
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrSelectVariables_DataFrameChanged() Handles ucrSelectVariables.DataFrameChanged
-        ucrInputNewName.ResetText()
-        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectVariables.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+    Private Sub ucrReceiverName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverName.ControlValueChanged
+        DefaultNewName()
     End Sub
 End Class

@@ -19,49 +19,40 @@ Imports instat.Translations
 Public Class dlgSort
     'Define a boolean to check if the dialog is loading for the first time
     Public bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
 
     Private Sub dlgSort_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'Set the things that will always be constant for the dialog
-        ' e.g. function name, selectors and receivers
-        'If this is the first load, set the defaults and then change bFirstLoad to False
-        ' On future loads the dialog will keep previous values used
-        ' and not reset to defaults.
+        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
-        grpMissingValues.Enabled = False
-        'Checks if Ok can be enabled.
-        'Define this method for each dialog 
-        'depending on what parameters are neccessary for the function to run.
-        TestOKEnabled()
-        autoTranslate(Me)
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
     End Sub
 
-    ' Sub that runs only the first time the dialog loads
     Private Sub SetDefaults()
-        rdoLast.Checked = True
-        rdoAscending.Checked = True
+        Dim clsDefaultFunction As New RFunction
+        'Setting default Rfunction as the base function
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$sort_dataframe")
+
+        'Reset
         ucrSelectForSort.Reset()
+
+        ' Set default RFunction as the base function
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
     End Sub
 
-    'Currently we are not clearing the RSyntax after running script (only clearing strScript)
-    'so I don't think this is neccessary. Should we be clearing the RSyntax as well?
-    'Not clearing seems to be a good way to keep the parameters from the last call
-    'but will there be unwanted consequences of this?
-    Private Sub ReopenDialog()
-        SetOrderValue()
-        SetMissingValue()
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
-    'Sub that tests if the OK button can be enabled.
-    'This runs on load and after anything is changed on the dialog.
-    'No other place needs to set Ok enabled, always done through this sub
+    'Setting OKEnabled
     Private Sub TestOKEnabled()
-        If ucrReceiverSort.IsEmpty() = False Then
+        If Not ucrReceiverSort.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -69,69 +60,41 @@ Public Class dlgSort
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$sort_dataframe")
+        ucrBase.iHelpTopicID = 339
+        grpMissingValues.Enabled = False
+
+        'Setting Parameters
         ucrReceiverSort.Selector = ucrSelectForSort
         ucrReceiverSort.SetMeAsReceiver()
-        ucrBase.iHelpTopicID = 339
+        ucrReceiverSort.SetParameter(New RParameter("col_names", 1))
+        ucrReceiverSort.SetParameterIsString()
+
+        'Add dataframe paramater
+        ucrSelectForSort.SetParameter(New RParameter("data_name", 0))
+        ucrSelectForSort.SetParameterIsString()
+
+        'Set radiobutton parameters
+        ucrPnlOrder.SetParameter(New RParameter("decreasing", 2))
+        ucrPnlOrder.AddRadioButton(rdoAscending, "FALSE")
+        ucrPnlOrder.AddRadioButton(rdoDescending, "TRUE")
+        ucrPnlOrder.SetRDefault("FALSE")
+
+        'Currently Disabled
+        'ucrPanelMissingValues.SetParameter(New RParameter("na.last", 3))
+        'ucrPanelMissingValues.AddRadioButton(rdoFirst, "FALSE")
+        'ucrPanelMissingValues.AddRadioButton(rdoLast, "TRUE")
+        'ucrPanelMissingValues.SetRDefault("TRUE")
+        ucrPnlMissingValues.bAllowNonConditionValues = True
     End Sub
 
-    Private Sub ucrReceiverSort_SelectionChanged() Handles ucrReceiverSort.SelectionChanged
-        If Not ucrReceiverSort.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("col_names", ucrReceiverSort.GetVariableNames())
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("col_names")
-        End If
-        'Test ok enabled
-        TestOKEnabled()
-    End Sub
-
-    'For grouped radio buttons put all CheckedChanged events into one sub and check which is checked.
-    Private Sub grpOrder_CheckedChanged(sender As Object, e As EventArgs) Handles rdoAscending.CheckedChanged, rdoDescending.CheckedChanged
-        SetOrderValue()
-    End Sub
-
-    Private Sub SetOrderValue()
-        If rdoAscending.Checked Then
-            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                ucrBase.clsRsyntax.AddParameter("decreasing", "FALSE")
-            Else
-                ucrBase.clsRsyntax.RemoveParameter("decreasing")
-            End If
-        ElseIf rdoDescending.Checked Then
-            ucrBase.clsRsyntax.AddParameter("decreasing", "TRUE")
-        Else
-            'This case should never happen if the dialog has been designed correctly,
-            'but in case of problems it keeps the code stable
-            ucrBase.clsRsyntax.RemoveParameter("decreasing")
-        End If
-    End Sub
-
-    'Same here for this group of buttona
-    Private Sub grpMissingValues_ChekedChanged(sender As Object, e As EventArgs) Handles rdoFirst.CheckedChanged, rdoLast.CheckedChanged
-        SetMissingValue()
-    End Sub
-
-    Private Sub SetMissingValue()
-        If rdoFirst.Checked Then
-            ucrBase.clsRsyntax.AddParameter("na.last", "FALSE")
-        ElseIf rdoLast.Checked Then
-            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                ucrBase.clsRsyntax.AddParameter("na.last", "TRUE")
-            Else
-                ucrBase.clsRsyntax.RemoveParameter("na.last")
-            End If
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("na.last")
-        End If
-    End Sub
-
-    'When the reset button is clicked, set the defaults again
+    'Setting Defaults on Reset 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrSelectForSort_DataFrameChanged() Handles ucrSelectForSort.DataFrameChanged
-        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectForSort.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSort.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class

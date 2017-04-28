@@ -21,7 +21,9 @@ Imports instat.Translations
 Imports System.IO
 Public Class dlgOptions
     Public strCurrLanguageCulture As String
+    Public strOutputWindowDisplay As String
     Public strWorkingDirectory As String
+    Private strGraphDisplayOption As String
     Private Panels As New List(Of Panel)()
     Private VisiblePanel As Panel = Nothing
     'Define the Fonts dialog (only one)
@@ -29,7 +31,6 @@ Public Class dlgOptions
     Dim bFirstLoad As Boolean = True
     Dim fntOutput, fntCommand, fntComment, fntEditor As Font
     Dim clrOutput, clrCommand, clrComment, clrEditor As Color
-
 
     Private Sub dlgOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -55,6 +56,8 @@ Public Class dlgOptions
         rdoFrench.Enabled = False
         rdoKiswahili.Enabled = False
         rdoSpanish.Enabled = False
+        nudDigits.Minimum = 0
+        nudDigits.Maximum = 22
     End Sub
 
     Private Sub LoadInstatOptions()
@@ -67,34 +70,50 @@ Public Class dlgOptions
         nudPreviewRows.Value = frmMain.clsInstatOptions.iPreviewRows
         txtComment.Text = frmMain.clsInstatOptions.strComment
         ucrWorkingDirectory.SetName(frmMain.clsInstatOptions.strWorkingDirectory)
+        chkIncludeCommentsbyDefault.Checked = frmMain.clsInstatOptions.bIncludeCommentDefault
+        chkShowRCommandsinOutputWindow.Checked = frmMain.clsInstatOptions.bCommandsinOutput
+        nudDigits.Value = frmMain.clsInstatOptions.iDigits
+        chkShowSignifStars.Checked = frmMain.clsInstatOptions.bShowSignifStars
 
         Select Case frmMain.clsInstatOptions.strLanguageCultureCode
             Case "en-GB"
                 rdoEnglish.Checked = True
-                ' temp disabled as not functioning
-                'Case "fr-FR"
-                '    rdoFrench.Checked = True
-                'Case "sw-KE"
-                '    rdoKiswahili.Checked = True
-                'Case "es-ES"
-                '    rdoSpanish.Checked = True
+            ' temp disabled as not functioning
+            'Case "fr-FR"
+            '    rdoFrench.Checked = True
+            'Case "sw-KE"
+            '    rdoKiswahili.Checked = True
+            'Case "es-ES"
+            '    rdoSpanish.Checked = True
             Case Else
                 rdoEnglish.Checked = True
         End Select
+
+        If frmMain.clsInstatOptions.strGraphDisplayOption = "view_output_window" Then
+            rdoDisplayinOutputWindow.Checked = True
+        ElseIf frmMain.clsInstatOptions.strGraphDisplayOption = "view_separate_window" Then
+            rdoDisplayinSeparateWindows.Checked = True
+        ElseIf frmMain.clsInstatOptions.strGraphDisplayOption = "view_R_viewer" Then
+            rdoDisplayinRViewer.Checked = True
+        End If
     End Sub
 
     Private Sub SetInstatOptions()
         frmMain.clsInstatOptions.bIncludeRDefaultParameters = chkIncludeDefaultParams.Checked
         frmMain.clsInstatOptions.SetFormatOutput(fntOutput, clrOutput)
         frmMain.clsInstatOptions.SetFormatComment(fntComment, clrComment)
-        frmMain.clsInstatOptions.SetFormatCommand(fntCommand, clrCommand)
-        frmMain.clsInstatOptions.SetEditorFormat(fntEditor, clrEditor)
+        frmMain.clsInstatOptions.SetFormatScript(fntCommand, clrCommand)
+        frmMain.clsInstatOptions.SetFormatEditor(fntEditor, clrEditor)
         frmMain.clsInstatOptions.SetComment(txtComment.Text)
         frmMain.clsInstatOptions.SetPreviewRows(nudPreviewRows.Value)
         frmMain.clsInstatOptions.SetMaxRows(nudMaxRows.Value)
         frmMain.clsInstatOptions.SetLanguageCultureCode(strCurrLanguageCulture)
         frmMain.clsInstatOptions.SetWorkingDirectory(strWorkingDirectory)
-
+        frmMain.clsInstatOptions.SetGraphDisplayOption(strGraphDisplayOption)
+        frmMain.clsInstatOptions.bIncludeCommentDefault = chkIncludeCommentsbyDefault.Checked
+        frmMain.clsInstatOptions.SetCommandInOutpt(chkShowRCommandsinOutputWindow.Checked)
+        frmMain.clsInstatOptions.SetDigits(nudDigits.Value)
+        frmMain.clsInstatOptions.SetSignifStars(chkShowSignifStars.Checked)
     End Sub
 
     Private Sub SetView()
@@ -264,10 +283,30 @@ Public Class dlgOptions
     End Sub
 
     Private Sub chkIncludeDefaultParams_CheckedChanged(sender As Object, e As EventArgs) Handles chkIncludeDefaultParams.CheckedChanged
-        frmMain.clsInstatOptions.bIncludeRDefaultParameters = chkIncludeDefaultParams.Checked
+        ApplyEnabled(True)
     End Sub
 
     Private Sub nudMaxRows_TextChanged(sender As Object, e As EventArgs) Handles nudMaxRows.TextChanged
+        ApplyEnabled(True)
+    End Sub
+
+    Private Sub rdoDisplayinOutputWindow_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDisplayinOutputWindow.CheckedChanged, rdoDisplayinSeparateWindows.CheckedChanged, rdoDisplayinRViewer.CheckedChanged
+        If rdoDisplayinOutputWindow.Checked Then
+            strGraphDisplayOption = "view_output_window"
+        ElseIf rdoDisplayinSeparateWindows.Checked Then
+            strGraphDisplayOption = "view_separate_window"
+        ElseIf rdoDisplayinRViewer.Checked Then
+            strGraphDisplayOption = "view_R_viewer"
+        End If
+
+        ApplyEnabled(True)
+    End Sub
+
+    Private Sub chkDefault_CheckedChanged(sender As Object, e As EventArgs) Handles chkIncludeCommentsbyDefault.CheckedChanged
+        ApplyEnabled(True)
+    End Sub
+
+    Private Sub chkShowRCommandsinOutputWindow_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowRCommandsinOutputWindow.CheckedChanged
         ApplyEnabled(True)
     End Sub
 
@@ -283,6 +322,15 @@ Public Class dlgOptions
         rtbOutputPreview.Font = fntOutput
         rtbOutputPreview.SelectionColor = clrOutput
         rtbOutputPreview.SelectionLength = 0
+    End Sub
+
+    Private Sub cmdFactoryReset_Click(sender As Object, e As EventArgs) Handles cmdFactoryReset.Click
+        Dim msgFactoryReset = MsgBox("Are you sure you want to reset to factory defaults?", MessageBoxButtons.YesNo, "Factory Reset")
+        If msgFactoryReset = DialogResult.Yes Then
+            frmMain.clsInstatOptions = New InstatOptions(False)
+            LoadInstatOptions()
+            ApplyEnabled(True)
+        End If
     End Sub
 
     Private Sub SetCommandFont(fntNew As Font, clrNew As Color)
@@ -315,5 +363,13 @@ Public Class dlgOptions
             ucrWorkingDirectory.SetName(strWorkingDirectory)
             ApplyEnabled(True)
         End If
+    End Sub
+
+    Private Sub nudDigits_ValueChanged(sender As Object, e As EventArgs) Handles nudDigits.ValueChanged
+        ApplyEnabled(True)
+    End Sub
+
+    Private Sub chkShowSignifStars_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowSignifStars.CheckedChanged
+        ApplyEnabled(True)
     End Sub
 End Class

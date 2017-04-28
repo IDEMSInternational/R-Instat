@@ -188,7 +188,7 @@ Public Class dlgOneVarUseModel
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         If chkProduceBootstrap.Checked Then
-            frmMain.clsRLink.RunScript(clsRbootFunction.ToScript(), bReturnOutput:=2)
+            frmMain.clsRLink.RunScript(clsRbootFunction.ToScript(), iCallType:=2)
         End If
     End Sub
 

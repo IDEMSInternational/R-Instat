@@ -15,21 +15,59 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgViewDescriptives
-    Public bFirstLoad As Boolean = True
-    Private Sub dlgViewDescriptives_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
+    Private bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
+    Private clsViewObject As New RFunction
 
+    Private Sub dlgViewDescriptives_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog
         End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeforControls(bReset)
+        bReset = False
+        autoTranslate(Me)
+        TestOKEnabled()
     End Sub
 
-    Private Sub ReopenDialog()
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
 
+    Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 349
+
+        ' ucr selector
+        ucrSelectorForViewObject.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorForViewObject.SetParameterIsString()
+        ucrSelectorForViewObject.SetItemType("object")
+
+        ' ucr receiver
+        ucrReceiverSelectedObject.SetParameter(New RParameter("object_name", 1))
+        ucrReceiverSelectedObject.SetParameterIsString()
+        ucrReceiverSelectedObject.Selector = ucrSelectorForViewObject
+        ucrReceiverSelectedObject.SetMeAsReceiver()
+
+        ucrPnlContentsToView.bAllowNonConditionValues = True
+        ''' rdo's
+        'ucrPnlContentsToView.SetParameter(New RParameter("", 2))
+        'ucrPnlContentsToView.AddRadioButton(rdoStructure, Chr(34) & "" & Chr(34))
+        'ucrPnlContentsToView.AddRadioButton(rdoAllContents, Chr(34) & " " & Chr(34))
+        'ucrPnlContentsToView.AddRadioButton(rdoComponent, Chr(34) & " " & Chr(34))
+        'ucrPnlContentsToView.AddRadioButton(rdoViewGraph, Chr(34) & " " & Chr(34))
+        'ucrPnlContentsToView.SetRDefault(Chr(34) & "" & Chr(34))
+    End Sub
+
+    Private Sub SetDefaults()
+        clsViewObject = New RFunction
+        ucrSelectorForViewObject.Reset()
+        rdoViewGraph.Checked = True
+        SetICallType()
+        clsViewObject.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_objects")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsViewObject)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -38,65 +76,27 @@ Public Class dlgViewDescriptives
         Else
             ucrBase.OKEnabled(False)
         End If
-
-    End Sub
-
-    Private Sub InitialiseDialog()
-        ucrReceiverSelectedObject.Selector = ucrSelectorForViewObject
-        ucrReceiverSelectedObject.SetMeAsReceiver()
-        ucrSelectorForViewObject.SetItemType("object")
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$get_objects")
-        ucrBase.clsRsyntax.iCallType = 2
-        ucrBase.iHelpTopicID = 349
-        rdoAllContents.Enabled = False
-        rdoComponent.Enabled = False
-        rdoViewGraph.Enabled = False
-    End Sub
-
-    Private Sub SetDefaults()
-        ucrSelectorForViewObject.Reset()
-        rdoStructure.Checked = True
-        rdoAllContents.Enabled = False
-        ObjectParameters()
-        TestOKEnabled()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-    End Sub
-
-    Private Sub StructureComponentsAndAllContents_CheckedChanged(sender As Object, e As EventArgs) Handles rdoStructure.CheckedChanged, rdoAllContents.CheckedChanged, rdoComponent.CheckedChanged
-        ObjectParameters()
-    End Sub
-
-    Private Sub ObjectParameters()
-        If rdoStructure.Checked Then
-
-        ElseIf rdoAllContents.Checked Then
-
-        Else
-
-        End If
-    End Sub
-
-    Private Sub ucrSelectorForViewObject_DataFrameChaned() Handles ucrSelectorForViewObject.DataFrameChanged
-        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorForViewObject.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-    End Sub
-
-    Private Sub ucrReceiverSelectedObject_SelectionChnged(sender As Object, e As EventArgs) Handles ucrReceiverSelectedObject.SelectionChanged
-        If Not ucrReceiverSelectedObject.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("object_name", ucrReceiverSelectedObject.GetVariableNames())
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("object_name")
-        End If
+        SetRCodeforControls(True)
         TestOKEnabled()
     End Sub
 
-    Private Sub rdoViewGraph_CheckedChanged(sender As Object, e As EventArgs) Handles rdoViewGraph.CheckedChanged
+    Private Sub SetICallType()
         If rdoViewGraph.Checked Then
             ucrBase.clsRsyntax.iCallType = 0
         Else
             ucrBase.clsRsyntax.iCallType = 2
         End If
+    End Sub
+
+    Private Sub ucrReceiverSelectedObject_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedObject.ControlContentsChanged
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrPnlContentsToReview_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlContentsToView.ControlContentsChanged
+        SetICallType()
     End Sub
 End Class

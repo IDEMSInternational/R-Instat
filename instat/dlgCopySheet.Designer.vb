@@ -37,29 +37,30 @@ Partial Class dlgCopySheet
         '
         'ucrDataFrameCopySheets
         '
-        Me.ucrDataFrameCopySheets.bUseCurrentFilter = False
+        Me.ucrDataFrameCopySheets.bUseCurrentFilter = True
         Me.ucrDataFrameCopySheets.Location = New System.Drawing.Point(10, 10)
         Me.ucrDataFrameCopySheets.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataFrameCopySheets.Name = "ucrDataFrameCopySheets"
         Me.ucrDataFrameCopySheets.Size = New System.Drawing.Size(120, 40)
-        Me.ucrDataFrameCopySheets.TabIndex = 2
+        Me.ucrDataFrameCopySheets.TabIndex = 0
         '
         'lblNewSheetName
         '
-        Me.lblNewSheetName.Location = New System.Drawing.Point(194, 10)
+        Me.lblNewSheetName.Location = New System.Drawing.Point(194, 12)
         Me.lblNewSheetName.Name = "lblNewSheetName"
-        Me.lblNewSheetName.Size = New System.Drawing.Size(156, 23)
+        Me.lblNewSheetName.Size = New System.Drawing.Size(70, 13)
         Me.lblNewSheetName.TabIndex = 1
         Me.lblNewSheetName.Tag = "New_Sheet_Name"
-        Me.lblNewSheetName.Text = "New Data Frame Name:"
+        Me.lblNewSheetName.Text = "New Name:"
         '
         'ucrNewDataFrameName
         '
+        Me.ucrNewDataFrameName.IsMultiline = False
         Me.ucrNewDataFrameName.IsReadOnly = False
         Me.ucrNewDataFrameName.Location = New System.Drawing.Point(194, 28)
         Me.ucrNewDataFrameName.Name = "ucrNewDataFrameName"
         Me.ucrNewDataFrameName.Size = New System.Drawing.Size(137, 21)
-        Me.ucrNewDataFrameName.TabIndex = 0
+        Me.ucrNewDataFrameName.TabIndex = 2
         '
         'dlgCopySheet
         '

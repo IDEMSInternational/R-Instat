@@ -52,11 +52,12 @@ Public Class dlgHistogram
 
 
         ucrVariablesAsFactorforHist.SetFactorReceiver(ucrFactorReceiver)
-        ucrVariablesAsFactorforHist.SetSelector(ucrHistogramSelector)
-        ucrVariablesAsFactorforHist.SetIncludedDataType({"numeric"})
+        ucrVariablesAsFactorforHist.Selector = ucrHistogramSelector
+        ucrVariablesAsFactorforHist.SetIncludedDataTypes({"numeric"})
 
         ucrSaveHist.SetDataFrameSelector(ucrHistogramSelector.ucrAvailableDataFrames)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        ucrBase.clsRsyntax.iCallType = 3
 
     End Sub
     Private Sub ucrHistogramSelector_DataFrameChanged() Handles ucrHistogramSelector.DataFrameChanged
@@ -132,7 +133,6 @@ Public Class dlgHistogram
         clsRgeom_FPolygon.ClearParameters()
         clsRgeom_histogramFunction.ClearParameters()
         ucrHistogramSelector.Reset()
-        ucrVariablesAsFactorforHist.ResetControl()
         rdoHistogram.Checked = True
         cmdHistogramOptions.Visible = True
         cmdDensityOptions.Visible = False

@@ -424,26 +424,26 @@ Public Class sdgSimpleRegOptions
             ConfidenceInterval()
         End If
         If (rdoFourPlots.Checked Or rdoSixPlots2Rows.Checked Or rdoSixPlots3Rows.Checked Or rdoResidualsFitted.Checked Or rdoQQ.Checked Or rdoResidualsLeverage.Checked Or rdoScaleLocation.Checked Or rdoCooksDistance.Checked Or rdoCooksDistanceLeverage.Checked) Then
-            frmMain.clsRLink.RunScript(clsRGraphics.GetScript, 0)
+            frmMain.clsRLink.RunScript(clsRGraphics.GetScript, 3)
         End If
         If (chkFittedModel.Checked) Then
-            frmMain.clsRLink.RunScript(clsRggplotFunction.ToScript(), 0)
+            frmMain.clsRLink.RunScript(clsRggplotFunction.ToScript(), 3)
         End If
         If chkFittedValues.Checked Then
             FittedValues()
-            frmMain.clsRLink.RunScript(clsRWriteFitted.ToScript(), 0)
+            frmMain.clsRLink.RunScript(clsRWriteFitted.ToScript(), 3)
         End If
         If chkResiduals.Checked Then
             Residuals()
-            frmMain.clsRLink.RunScript(clsRWriteResiduals.ToScript(), 0)
+            frmMain.clsRLink.RunScript(clsRWriteResiduals.ToScript(), 3)
         End If
         If chkStdResiduals.Checked Then
             StdResiduals()
-            frmMain.clsRLink.RunScript(clsRWriteStdResiduals.ToScript(), 0)
+            frmMain.clsRLink.RunScript(clsRWriteStdResiduals.ToScript(), 3)
         End If
         If chkLeverage.Checked Then
             Leverage()
-            frmMain.clsRLink.RunScript(clsRWriteLeverage.ToScript(), 0)
+            frmMain.clsRLink.RunScript(clsRWriteLeverage.ToScript(), 3)
         End If
     End Sub
 

@@ -35,13 +35,6 @@ Partial Class dlgRegressionSimple
         Me.chkFunction = New System.Windows.Forms.CheckBox()
         Me.chkConvertToVariate = New System.Windows.Forms.CheckBox()
         Me.lblModelPreview = New System.Windows.Forms.Label()
-        Me.ucrModelName = New instat.ucrInputComboBox()
-        Me.ucrSelectorSimpleReg = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrFamily = New instat.ucrDistributions()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrResponse = New instat.ucrReceiverSingle()
-        Me.ucrExplanatory = New instat.ucrReceiverSingle()
-        Me.ucrModelPreview = New instat.ucrInputTextBox()
         Me.chkPaired = New System.Windows.Forms.CheckBox()
         Me.rdoGeneral = New System.Windows.Forms.RadioButton()
         Me.rdoSpecific = New System.Windows.Forms.RadioButton()
@@ -51,12 +44,24 @@ Partial Class dlgRegressionSimple
         Me.nudHypothesis = New System.Windows.Forms.NumericUpDown()
         Me.lblCI = New System.Windows.Forms.Label()
         Me.lblHyp1 = New System.Windows.Forms.Label()
-        Me.lblProbability2 = New System.Windows.Forms.Label()
-        Me.nudHyp2 = New System.Windows.Forms.NumericUpDown()
         Me.grpParameters = New System.Windows.Forms.GroupBox()
+        Me.ucrNud = New instat.ucrNud()
+        Me.lblSuccessIf = New System.Windows.Forms.Label()
+        Me.ucrLevel2 = New instat.ucrInputComboBox()
+        Me.ucrLevel1 = New instat.ucrInputComboBox()
+        Me.lblLevel2 = New System.Windows.Forms.Label()
+        Me.rdoCompareVar = New System.Windows.Forms.RadioButton()
+        Me.lblLevel1 = New System.Windows.Forms.Label()
+        Me.rdoCompareMeans = New System.Windows.Forms.RadioButton()
+        Me.ucrModelPreview = New instat.ucrInputTextBox()
+        Me.ucrExplanatory = New instat.ucrReceiverSingle()
+        Me.ucrResponse = New instat.ucrReceiverSingle()
+        Me.ucrModelName = New instat.ucrInputComboBox()
+        Me.ucrSelectorSimpleReg = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrFamily = New instat.ucrDistributions()
+        Me.ucrBase = New instat.ucrButtons()
         CType(Me.nudCI, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudHypothesis, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudHyp2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpParameters.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -133,47 +138,6 @@ Partial Class dlgRegressionSimple
         resources.ApplyResources(Me.lblModelPreview, "lblModelPreview")
         Me.lblModelPreview.Name = "lblModelPreview"
         '
-        'ucrModelName
-        '
-        Me.ucrModelName.IsReadOnly = False
-        resources.ApplyResources(Me.ucrModelName, "ucrModelName")
-        Me.ucrModelName.Name = "ucrModelName"
-        '
-        'ucrSelectorSimpleReg
-        '
-        Me.ucrSelectorSimpleReg.bShowHiddenColumns = False
-        Me.ucrSelectorSimpleReg.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorSimpleReg, "ucrSelectorSimpleReg")
-        Me.ucrSelectorSimpleReg.Name = "ucrSelectorSimpleReg"
-        '
-        'ucrFamily
-        '
-        resources.ApplyResources(Me.ucrFamily, "ucrFamily")
-        Me.ucrFamily.Name = "ucrFamily"
-        '
-        'ucrBase
-        '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrResponse
-        '
-        resources.ApplyResources(Me.ucrResponse, "ucrResponse")
-        Me.ucrResponse.Name = "ucrResponse"
-        Me.ucrResponse.Selector = Nothing
-        '
-        'ucrExplanatory
-        '
-        resources.ApplyResources(Me.ucrExplanatory, "ucrExplanatory")
-        Me.ucrExplanatory.Name = "ucrExplanatory"
-        Me.ucrExplanatory.Selector = Nothing
-        '
-        'ucrModelPreview
-        '
-        Me.ucrModelPreview.IsReadOnly = False
-        resources.ApplyResources(Me.ucrModelPreview, "ucrModelPreview")
-        Me.ucrModelPreview.Name = "ucrModelPreview"
-        '
         'chkPaired
         '
         resources.ApplyResources(Me.chkPaired, "chkPaired")
@@ -224,28 +188,114 @@ Partial Class dlgRegressionSimple
         resources.ApplyResources(Me.lblHyp1, "lblHyp1")
         Me.lblHyp1.Name = "lblHyp1"
         '
-        'lblProbability2
-        '
-        resources.ApplyResources(Me.lblProbability2, "lblProbability2")
-        Me.lblProbability2.Name = "lblProbability2"
-        '
-        'nudHyp2
-        '
-        resources.ApplyResources(Me.nudHyp2, "nudHyp2")
-        Me.nudHyp2.Name = "nudHyp2"
-        '
         'grpParameters
         '
+        Me.grpParameters.Controls.Add(Me.ucrNud)
+        Me.grpParameters.Controls.Add(Me.lblSuccessIf)
+        Me.grpParameters.Controls.Add(Me.ucrLevel2)
+        Me.grpParameters.Controls.Add(Me.ucrLevel1)
+        Me.grpParameters.Controls.Add(Me.lblLevel2)
+        Me.grpParameters.Controls.Add(Me.rdoCompareVar)
         Me.grpParameters.Controls.Add(Me.lblCI)
-        Me.grpParameters.Controls.Add(Me.nudHyp2)
+        Me.grpParameters.Controls.Add(Me.lblLevel1)
         Me.grpParameters.Controls.Add(Me.nudCI)
-        Me.grpParameters.Controls.Add(Me.lblProbability2)
         Me.grpParameters.Controls.Add(Me.nudHypothesis)
         Me.grpParameters.Controls.Add(Me.chkPaired)
         Me.grpParameters.Controls.Add(Me.lblHyp1)
+        Me.grpParameters.Controls.Add(Me.rdoCompareMeans)
         resources.ApplyResources(Me.grpParameters, "grpParameters")
         Me.grpParameters.Name = "grpParameters"
         Me.grpParameters.TabStop = False
+        '
+        'ucrNud
+        '
+        resources.ApplyResources(Me.ucrNud, "ucrNud")
+        Me.ucrNud.Maximum = 100
+        Me.ucrNud.Minimum = 0
+        Me.ucrNud.Name = "ucrNud"
+        Me.ucrNud.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblSuccessIf
+        '
+        resources.ApplyResources(Me.lblSuccessIf, "lblSuccessIf")
+        Me.lblSuccessIf.Name = "lblSuccessIf"
+        '
+        'ucrLevel2
+        '
+        Me.ucrLevel2.IsReadOnly = False
+        resources.ApplyResources(Me.ucrLevel2, "ucrLevel2")
+        Me.ucrLevel2.Name = "ucrLevel2"
+        '
+        'ucrLevel1
+        '
+        Me.ucrLevel1.IsReadOnly = False
+        resources.ApplyResources(Me.ucrLevel1, "ucrLevel1")
+        Me.ucrLevel1.Name = "ucrLevel1"
+        '
+        'lblLevel2
+        '
+        resources.ApplyResources(Me.lblLevel2, "lblLevel2")
+        Me.lblLevel2.Name = "lblLevel2"
+        '
+        'rdoCompareVar
+        '
+        resources.ApplyResources(Me.rdoCompareVar, "rdoCompareVar")
+        Me.rdoCompareVar.Name = "rdoCompareVar"
+        Me.rdoCompareVar.TabStop = True
+        Me.rdoCompareVar.UseVisualStyleBackColor = True
+        '
+        'lblLevel1
+        '
+        resources.ApplyResources(Me.lblLevel1, "lblLevel1")
+        Me.lblLevel1.Name = "lblLevel1"
+        '
+        'rdoCompareMeans
+        '
+        resources.ApplyResources(Me.rdoCompareMeans, "rdoCompareMeans")
+        Me.rdoCompareMeans.Name = "rdoCompareMeans"
+        Me.rdoCompareMeans.TabStop = True
+        Me.rdoCompareMeans.UseVisualStyleBackColor = True
+        '
+        'ucrModelPreview
+        '
+        Me.ucrModelPreview.IsReadOnly = False
+        resources.ApplyResources(Me.ucrModelPreview, "ucrModelPreview")
+        Me.ucrModelPreview.Name = "ucrModelPreview"
+        '
+        'ucrExplanatory
+        '
+        resources.ApplyResources(Me.ucrExplanatory, "ucrExplanatory")
+        Me.ucrExplanatory.Name = "ucrExplanatory"
+        Me.ucrExplanatory.Selector = Nothing
+        '
+        'ucrResponse
+        '
+        resources.ApplyResources(Me.ucrResponse, "ucrResponse")
+        Me.ucrResponse.Name = "ucrResponse"
+        Me.ucrResponse.Selector = Nothing
+        '
+        'ucrModelName
+        '
+        Me.ucrModelName.IsReadOnly = False
+        resources.ApplyResources(Me.ucrModelName, "ucrModelName")
+        Me.ucrModelName.Name = "ucrModelName"
+        '
+        'ucrSelectorSimpleReg
+        '
+        Me.ucrSelectorSimpleReg.bShowHiddenColumns = False
+        Me.ucrSelectorSimpleReg.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorSimpleReg, "ucrSelectorSimpleReg")
+        Me.ucrSelectorSimpleReg.Name = "ucrSelectorSimpleReg"
+        '
+        'ucrFamily
+        '
+        resources.ApplyResources(Me.ucrFamily, "ucrFamily")
+        Me.ucrFamily.Name = "ucrFamily"
+        '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
         '
         'dlgRegressionSimple
         '
@@ -281,7 +331,6 @@ Partial Class dlgRegressionSimple
         Me.Tag = "Simple_Regression"
         CType(Me.nudCI, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudHypothesis, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudHyp2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpParameters.ResumeLayout(False)
         Me.grpParameters.PerformLayout()
         Me.ResumeLayout(False)
@@ -317,7 +366,13 @@ Partial Class dlgRegressionSimple
     Friend WithEvents nudHypothesis As NumericUpDown
     Friend WithEvents lblCI As Label
     Friend WithEvents lblHyp1 As Label
-    Friend WithEvents lblProbability2 As Label
-    Friend WithEvents nudHyp2 As NumericUpDown
     Friend WithEvents grpParameters As GroupBox
+    Friend WithEvents rdoCompareMeans As RadioButton
+    Friend WithEvents rdoCompareVar As RadioButton
+    Friend WithEvents lblLevel1 As Label
+    Friend WithEvents lblLevel2 As Label
+    Friend WithEvents ucrLevel1 As ucrInputComboBox
+    Friend WithEvents ucrLevel2 As ucrInputComboBox
+    Friend WithEvents lblSuccessIf As Label
+    Friend WithEvents ucrNud As ucrNud
 End Class

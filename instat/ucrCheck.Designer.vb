@@ -27,6 +27,7 @@ Partial Class ucrCheck
         '
         'chkCheck
         '
+        Me.chkCheck.CheckAlign = System.Drawing.ContentAlignment.TopLeft
         Me.chkCheck.Dock = System.Windows.Forms.DockStyle.Fill
         Me.chkCheck.Location = New System.Drawing.Point(0, 0)
         Me.chkCheck.Name = "chkCheck"

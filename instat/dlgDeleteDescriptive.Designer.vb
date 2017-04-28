@@ -30,7 +30,7 @@ Partial Class dlgDeleteDescriptive
         '
         'lblObjectsToDelete
         '
-        Me.lblObjectsToDelete.Location = New System.Drawing.Point(270, 41)
+        Me.lblObjectsToDelete.Location = New System.Drawing.Point(270, 43)
         Me.lblObjectsToDelete.Name = "lblObjectsToDelete"
         Me.lblObjectsToDelete.Size = New System.Drawing.Size(100, 23)
         Me.lblObjectsToDelete.TabIndex = 1
@@ -39,22 +39,23 @@ Partial Class dlgDeleteDescriptive
         '
         'ucrReceiverObjectsToDelete
         '
+        Me.ucrReceiverObjectsToDelete.frmParent = Me
         Me.ucrReceiverObjectsToDelete.Location = New System.Drawing.Point(269, 60)
         Me.ucrReceiverObjectsToDelete.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverObjectsToDelete.Name = "ucrReceiverObjectsToDelete"
         Me.ucrReceiverObjectsToDelete.Selector = Nothing
         Me.ucrReceiverObjectsToDelete.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverObjectsToDelete.TabIndex = 0
+        Me.ucrReceiverObjectsToDelete.TabIndex = 2
         '
         'ucrSelectorDeleteObject
         '
         Me.ucrSelectorDeleteObject.bShowHiddenColumns = False
-        Me.ucrSelectorDeleteObject.bUseCurrentFilter = False
+        Me.ucrSelectorDeleteObject.bUseCurrentFilter = True
         Me.ucrSelectorDeleteObject.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorDeleteObject.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorDeleteObject.Name = "ucrSelectorDeleteObject"
         Me.ucrSelectorDeleteObject.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorDeleteObject.TabIndex = 2
+        Me.ucrSelectorDeleteObject.TabIndex = 0
         '
         'ucrBase
         '
@@ -77,8 +78,8 @@ Partial Class dlgDeleteDescriptive
         Me.MinimizeBox = False
         Me.Name = "dlgDeleteDescriptive"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "Delete_Object"
-        Me.Text = "Delete Object"
+        Me.Tag = "Delete_Objects"
+        Me.Text = "Delete Objects"
         Me.ResumeLayout(False)
 
     End Sub

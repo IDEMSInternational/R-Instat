@@ -17,40 +17,62 @@
 Imports instat.Translations
 Public Class dlgUnusedLevels
     Public bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
+
     Private Sub dlgUnusedLevels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
-            SetDefaultSettings()
             InitialiseDialog()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
-
-        TestOKEnabled()
-
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeforControls(bReset)
+        bReset = False
         autoTranslate(Me)
     End Sub
     Private Sub ReopenDialog()
 
     End Sub
-    Private Sub SetDefaultSettings()
+    Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
+
         ucrSelectorFactorColumn.Reset()
-        ucrSelectorFactorColumn.Focus()
-        TestOKEnabled()
+
+        ' Set default RFunction as the base function
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$drop_unused_factor_levels")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+
     End Sub
+
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
+
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$drop_unused_factor_levels")
+        ucrBase.iHelpTopicID = 40
+
+        'Set receiver
         ucrReceiverFactorColumn.Selector = ucrSelectorFactorColumn
         ucrReceiverFactorColumn.SetMeAsReceiver()
-        ucrBase.iHelpTopicID = 40
         ucrReceiverFactorColumn.SetIncludedDataTypes({"factor"})
         ucrRemoveUnusedFactorLevels.SetReceiver(ucrReceiverFactorColumn)
+        ucrReceiverFactorColumn.SetParameter(New RParameter("col_name", 1))
+        ucrReceiverFactorColumn.SetParameterIsString()
+
+        'Set selector data frame
+        ucrSelectorFactorColumn.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorFactorColumn.SetParameterIsString()
+
     End Sub
 
     Private Sub ucrBase_clickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaultSettings()
+        SetDefaults()
+        SetRCodeforControls(True)
         TestOKEnabled()
     End Sub
+
     Private Sub TestOKEnabled()
         If ucrReceiverFactorColumn.IsEmpty() Then
             ucrBase.OKEnabled(False)
@@ -59,16 +81,8 @@ Public Class dlgUnusedLevels
         End If
     End Sub
 
-    Private Sub ucrReceiverFactorColumn_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverFactorColumn.SelectionChanged
-        If Not ucrReceiverFactorColumn.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("col_name", ucrReceiverFactorColumn.GetVariableNames())
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("col_name")
-        End If
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactorColumn.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrSelectorFactorColumn_DataFrameChanged() Handles ucrSelectorFactorColumn.DataFrameChanged
-        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorFactorColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
-    End Sub
 End Class

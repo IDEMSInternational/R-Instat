@@ -48,12 +48,13 @@ Public Class dlgCumulativeDistribution
 
 
         ucrVariablesAsFactorforCumDist.SetFactorReceiver(ucrFactorReceiver)
-        ucrVariablesAsFactorforCumDist.SetSelector(ucrCumDistSelector)
-        ucrVariablesAsFactorforCumDist.SetIncludedDataType({"numeric"})
+        ucrVariablesAsFactorforCumDist.Selector = ucrCumDistSelector
+        ucrVariablesAsFactorforCumDist.SetIncludedDataTypes({"numeric"})
 
 
         ucrSaveCumDist.SetDataFrameSelector(ucrCumDistSelector.ucrAvailableDataFrames)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        ucrBase.clsRsyntax.iCallType = 3
     End Sub
 
     Private Sub SetDefaults()
@@ -61,9 +62,8 @@ Public Class dlgCumulativeDistribution
         ucrSaveCumDist.strPrefix = "Graph"
         ucrCumDistSelector.Reset()
         ucrCumDistSelector.Focus()
-        ucrVariablesAsFactorforCumDist.ResetControl()
         chkCountsOnYAxis.Checked = False
-        chkExceedancePlots.Checked = False
+        chkExceedancePlots.Checked = True
         chkIncludePoints.Checked = False
         ucrSaveCumDist.Reset()
         sdgPlots.Reset()

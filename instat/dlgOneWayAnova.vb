@@ -57,12 +57,12 @@ Public Class dlgOneWayANOVA
     End Sub
 
     Private Sub ucrYVariate_SelectionChanged(sender As Object, e As EventArgs) Handles ucrYVariate.SelectionChanged
-        clsModel.SetParameter(True, strValue:=ucrYVariate.GetVariableNames(bWithQuotes:=False))
+        clsModel.AddParameter(iPosition:=0, strParameterValue:=ucrYVariate.GetVariableNames(bWithQuotes:=False))
         TestOKEnabled()
     End Sub
 
     Private Sub ucrFactor_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactor.SelectionChanged
-        clsModel.SetParameter(False, strValue:=ucrFactor.GetVariableNames(bWithQuotes:=False))
+        clsModel.AddParameter(strParameterValue:=ucrFactor.GetVariableNames(bWithQuotes:=False))
         TestOKEnabled()
     End Sub
 

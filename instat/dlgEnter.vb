@@ -303,8 +303,8 @@ Public Class dlgEnter
         bIsAssigned = ucrBase.clsRsyntax.GetbIsAssigned()
         bToBeAssigned = ucrBase.clsRsyntax.GetbToBeAssigned()
         strAssignTo = ucrBase.clsRsyntax.GetstrAssignTo()
-        strAssignToColumn = ucrBase.clsRsyntax.strAssignToColumn
-        strAssignToDataFrame = ucrBase.clsRsyntax.strAssignToDataframe
+        strAssignToColumn = ucrBase.clsRsyntax.GetstrAssignToColumn()
+        strAssignToDataFrame = ucrBase.clsRsyntax.GetstrAssignToDataFrame()
 
         Try
             If ucrReceiverForEnterCalculation.IsEmpty Then
@@ -338,8 +338,8 @@ Public Class dlgEnter
             ucrBase.clsRsyntax.SetbIsAssigned(bIsAssigned)
             ucrBase.clsRsyntax.SetbToBeAssigned(bToBeAssigned)
             ucrBase.clsRsyntax.SetstrAssignTo(strAssignTo)
-            ucrBase.clsRsyntax.strAssignToColumn = strAssignToColumn
-            ucrBase.clsRsyntax.strAssignToDataframe = strAssignToDataFrame
+            ucrBase.clsRsyntax.SetstrAssignToColumn(strAssignToColumn)
+            ucrBase.clsRsyntax.SetstrAssignToDataFrame(strAssignToDataFrame)
         End Try
     End Sub
 

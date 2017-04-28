@@ -29,12 +29,11 @@ Partial Class ucrSelectorAddRemove
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lstAvailableVariable.Dock = System.Windows.Forms.DockStyle.None
-        Me.lstAvailableVariable.Size = New System.Drawing.Size(164, 187)
         '
         'btnAdd
         '
         Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnAdd.Location = New System.Drawing.Point(173, 49)
+        Me.btnAdd.Location = New System.Drawing.Point(123, 40)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(75, 23)
         Me.btnAdd.TabIndex = 83
@@ -45,7 +44,7 @@ Partial Class ucrSelectorAddRemove
         'cmdOptions
         '
         Me.cmdOptions.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.cmdOptions.Location = New System.Drawing.Point(173, 153)
+        Me.cmdOptions.Location = New System.Drawing.Point(123, 96)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(75, 34)
         Me.cmdOptions.TabIndex = 84
@@ -59,7 +58,7 @@ Partial Class ucrSelectorAddRemove
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.btnAdd)
         Me.Name = "ucrSelectorAddRemove"
-        Me.Size = New System.Drawing.Size(250, 187)
+        Me.Size = New System.Drawing.Size(201, 147)
         Me.Controls.SetChildIndex(Me.lstAvailableVariable, 0)
         Me.Controls.SetChildIndex(Me.btnAdd, 0)
         Me.Controls.SetChildIndex(Me.cmdOptions, 0)

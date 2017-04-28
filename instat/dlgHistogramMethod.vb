@@ -17,30 +17,40 @@
 Imports instat.Translations
 Public Class dlgHistogramMethod
     Public bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
     Private Sub dlgHistogramMethod_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
-
-
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         End If
-        TestOKEnabled()
-
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        autoTranslate(Me)
     End Sub
 
     Private Sub TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strClimateObject & "$histogram")
     End Sub
-    Private Sub SetDefaults()
 
+    Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
+
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strClimateObject & "$histogram")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(True)
+        TestOKEnabled()
+    End Sub
+
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 End Class

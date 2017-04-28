@@ -17,6 +17,8 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
+'Temporary fix for auto rescale on high resolution screens: enable rescale...
+<Assembly: System.Windows.Media.DisableDpiAwareness>
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
 <Assembly: Guid("439a7cc0-b11e-4e59-879d-98531a6750f3")>

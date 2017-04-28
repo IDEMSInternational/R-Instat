@@ -31,7 +31,7 @@ Partial Class ucrAdditionalLayers
         '
         'cmdDelete
         '
-        Me.cmdDelete.Location = New System.Drawing.Point(139, 126)
+        Me.cmdDelete.Location = New System.Drawing.Point(134, 121)
         Me.cmdDelete.Name = "cmdDelete"
         Me.cmdDelete.Size = New System.Drawing.Size(75, 23)
         Me.cmdDelete.TabIndex = 6
@@ -40,7 +40,7 @@ Partial Class ucrAdditionalLayers
         '
         'cmdEdit
         '
-        Me.cmdEdit.Location = New System.Drawing.Point(139, 97)
+        Me.cmdEdit.Location = New System.Drawing.Point(134, 92)
         Me.cmdEdit.Name = "cmdEdit"
         Me.cmdEdit.Size = New System.Drawing.Size(75, 23)
         Me.cmdEdit.TabIndex = 7
@@ -49,7 +49,7 @@ Partial Class ucrAdditionalLayers
         '
         'cmdAdd
         '
-        Me.cmdAdd.Location = New System.Drawing.Point(139, 68)
+        Me.cmdAdd.Location = New System.Drawing.Point(134, 63)
         Me.cmdAdd.Name = "cmdAdd"
         Me.cmdAdd.Size = New System.Drawing.Size(75, 23)
         Me.cmdAdd.TabIndex = 8
@@ -59,15 +59,15 @@ Partial Class ucrAdditionalLayers
         'lblLayers
         '
         Me.lblLayers.AutoSize = True
-        Me.lblLayers.Location = New System.Drawing.Point(5, 17)
+        Me.lblLayers.Location = New System.Drawing.Point(4, 13)
         Me.lblLayers.Name = "lblLayers"
-        Me.lblLayers.Size = New System.Drawing.Size(87, 13)
+        Me.lblLayers.Size = New System.Drawing.Size(90, 13)
         Me.lblLayers.TabIndex = 5
-        Me.lblLayers.Text = "Additional Layers"
+        Me.lblLayers.Text = "Additional Layers:"
         '
         'lstLayers
         '
-        Me.lstLayers.Location = New System.Drawing.Point(8, 33)
+        Me.lstLayers.Location = New System.Drawing.Point(3, 28)
         Me.lstLayers.Name = "lstLayers"
         Me.lstLayers.Size = New System.Drawing.Size(125, 149)
         Me.lstLayers.TabIndex = 4
@@ -84,7 +84,7 @@ Partial Class ucrAdditionalLayers
         Me.Controls.Add(Me.lblLayers)
         Me.Controls.Add(Me.lstLayers)
         Me.Name = "ucrAdditionalLayers"
-        Me.Size = New System.Drawing.Size(218, 191)
+        Me.Size = New System.Drawing.Size(213, 180)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

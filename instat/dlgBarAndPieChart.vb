@@ -68,6 +68,7 @@ Public Class dlgBarAndPieChart
         ucrSaveBar.SetDataFrameSelector(ucrBarChartSelector.ucrAvailableDataFrames)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrSaveBar.strPrefix = "Bar"
+        ucrBase.clsRsyntax.iCallType = 3
     End Sub
 
     Private Sub ReopenDialog()

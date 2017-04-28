@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports System.ComponentModel
+Imports instat
 
 Public Class ucrInputComboBox
     Dim strItemsType As String = ""
@@ -65,8 +66,6 @@ Public Class ucrInputComboBox
     End Sub
 
     Private Sub FillItemTypes()
-        Dim strItems As String()
-
         Select Case strItemsType
             Case "Columns"
                 If ucrDataFrameSelector IsNot Nothing Then
@@ -87,10 +86,7 @@ Public Class ucrInputComboBox
             Case "Filters"
                 If ucrDataFrameSelector IsNot Nothing Then
                     cboInput.Items.Clear()
-                    strItems = frmMain.clsRLink.GetFilterNames(ucrDataFrameSelector.cboAvailableDataFrames.Text).ToArray()
-                    If strItems.Count > 0 Then
-                        cboInput.Items.AddRange(strItems)
-                    End If
+                    cboInput.Items.AddRange(frmMain.clsRLink.GetFilterNames(ucrDataFrameSelector.cboAvailableDataFrames.Text).ToArray())
                 End If
         End Select
     End Sub
@@ -132,10 +128,36 @@ Public Class ucrInputComboBox
         AdjustComboBoxWidth(cboInput)
     End Sub
 
+    Public Sub SetItems(dctItemParameterValuePairs As Dictionary(Of String, String), Optional bClearExisting As Boolean = True)
+        Dim kvpTemp As KeyValuePair(Of String, String)
+
+        If bClearExisting Then
+            cboInput.Items.Clear()
+            dctDisplayParameterValues.Clear()
+        End If
+        If GetParameter() Is Nothing Then
+            MsgBox("Developer error: Parameter must be set before items can be set. Modify setup for " & Name & " so that the parameter is set first.")
+        End If
+        For Each kvpTemp In dctItemParameterValuePairs
+            cboInput.Items.Add(kvpTemp.Key)
+            dctDisplayParameterValues.Add(kvpTemp.Key, kvpTemp.Value)
+            AddParameterValuesCondition(kvpTemp.Key, GetParameter().strArgumentName, kvpTemp.Value)
+        Next
+        AdjustComboBoxWidth(cboInput)
+    End Sub
+
     Private Sub cboInput_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cboInput.KeyPress
         bUserTyped = True
     End Sub
 
+    'Public Sub SetEditable(bEditable As Boolean)
+
+    '    If bEditable Then
+    '        cboInput.DropDownStyle = ComboBoxStyle.DropDownList
+    '    Else
+    '        cboInput.DropDownStyle = ComboBoxStyle.DropDown
+    '    End If
+    'End Sub
     Public Overrides Function IsEmpty() As Boolean
         If cboInput.Text = "" Then
             Return True
@@ -145,6 +167,7 @@ Public Class ucrInputComboBox
     End Function
 
     Private Sub ucrInputComboBox_Load(sender As Object, e As EventArgs) Handles Me.Load
+        bAllowNonConditionValues = False
         FillItemTypes()
     End Sub
 
@@ -190,5 +213,9 @@ Public Class ucrInputComboBox
             iWidth = Math.Max(iWidth, iNewWidth)
         Next
         cboCurrent.DropDownWidth = iWidth
+    End Sub
+
+    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
+        MyBase.UpdateControl(bReset)
     End Sub
 End Class

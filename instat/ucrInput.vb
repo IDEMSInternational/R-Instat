@@ -14,6 +14,8 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
+
 Public Class ucrInput
     Public bUserTyped As Boolean = False
     Public Event NameChanged()
@@ -30,6 +32,17 @@ Public Class ucrInput
     Protected bIsReadOnly As Boolean = False
     Public bAutoChangeOnLeave As Boolean = False
     Private bLastSilent As Boolean = False
+    Private bPrivateAddQuotesIfUnrecognised As Boolean = True
+    Protected dctDisplayParameterValues As New Dictionary(Of String, String)
+
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        bUpdateRCodeFromControl = True
+    End Sub
 
     Public Overridable Sub SetName(strName As String, Optional bSilent As Boolean = False)
         bLastSilent = bSilent
@@ -46,10 +59,26 @@ Public Class ucrInput
     Public Sub OnNameChanged()
         Me.Text = Me.GetText()
         RaiseEvent NameChanged()
+        OnControlValueChanged()
+    End Sub
+
+    Protected Overrides Sub UpdateParameter(clsTempParam As RParameter)
+        If bChangeParameterValue AndAlso clsTempParam IsNot Nothing Then
+            If dctDisplayParameterValues.ContainsKey(GetText()) Then
+                clsTempParam.SetArgumentValue(dctDisplayParameterValues(GetText()))
+            Else
+                If AddQuotesIfUnrecognised Then
+                    clsTempParam.SetArgumentValue(Chr(34) & GetText() & Chr(34))
+                Else
+                    clsTempParam.SetArgumentValue(GetText())
+                End If
+            End If
+        End If
     End Sub
 
     Public Sub OnContentsChanged()
         RaiseEvent ContentsChanged()
+        OnControlContentsChanged()
     End Sub
 
     Public Function UserTyped() As Boolean
@@ -113,6 +142,7 @@ Public Class ucrInput
                     SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetModelNames()))
                 End If
             ElseIf strDefaultType = "Data Frame" Then
+                SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetDataFrameNames()))
             ElseIf strDefaultType = "Graph" Then
                 If ucrDataFrameSelector IsNot Nothing AndAlso ucrDataFrameSelector.cboAvailableDataFrames.Text <> "" Then
                     SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetGraphNames(ucrDataFrameSelector.cboAvailableDataFrames.Text)))
@@ -372,4 +402,70 @@ Public Class ucrInput
             bIsReadOnly = bReadOnly
         End Set
     End Property
+
+    Protected Overrides Sub SetToValue(objTemp As Object)
+        If objTemp IsNot Nothing Then
+            SetName(objTemp.ToString())
+        End If
+    End Sub
+
+    Public Overrides Function GetValueToSet() As Object
+        Dim clsMainParameter As RParameter
+
+        clsMainParameter = GetParameter()
+        If clsMainParameter IsNot Nothing Then
+            If clsMainParameter.bIsString Then
+                If dctDisplayParameterValues.ContainsKey(clsMainParameter.strArgumentValue) Then
+                    Return clsMainParameter.strArgumentValue
+                Else
+                    If AddQuotesIfUnrecognised Then
+                        Return clsMainParameter.strArgumentValue.Trim(Chr(34))
+                    Else
+                        Return clsMainParameter.strArgumentValue
+                    End If
+                End If
+            ElseIf clsMainParameter.bIsFunction OrElse clsMainParameter.bIsOperator Then
+                Return clsMainParameter.clsArgumentCodeStructure
+            Else
+                Return ""
+            End If
+        Else
+            Return ""
+        End If
+    End Function
+
+    ' key = parameter value
+    ' value = item text
+    Public Sub SetParameterValueItemsPairs(dctNewDisplayParameterValues As Dictionary(Of String, String))
+        dctDisplayParameterValues = dctNewDisplayParameterValues
+    End Sub
+
+    Public Sub AddToParameterValueItemsPairs(kvpNewPair As KeyValuePair(Of String, String))
+        AddToParameterValueItemsPairs(kvpNewPair.Key, kvpNewPair.Value)
+    End Sub
+
+    Public Sub AddToParameterValueItemsPairs(strDisplayValue As String, strParameterValue As String)
+        dctDisplayParameterValues.Add(strDisplayValue, strParameterValue)
+    End Sub
+
+    Public Property AddQuotesIfUnrecognised As Boolean
+        Get
+            Return bPrivateAddQuotesIfUnrecognised
+        End Get
+        Set(bValue As Boolean)
+            bPrivateAddQuotesIfUnrecognised = bValue
+            If GetText() IsNot Nothing Then
+                SetName(GetText().Trim(Chr(34)))
+            End If
+        End Set
+    End Property
+
+    Public Overrides Function ControlValueContainedIn(lstTemp() As Object) As Boolean
+        For Each objTemp As Object In lstTemp
+            If objTemp.ToString() = GetText() Then
+                Return True
+            End If
+        Next
+        Return False
+    End Function
 End Class

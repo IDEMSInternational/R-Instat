@@ -45,7 +45,6 @@ Public Class dlgJitter
         ucrInputMaximumDistanceFromZero.SetValidationTypeAsNumeric()
         ucrBase.iHelpTopicID = 396
         ucrInputNewColumnName.SetValidationTypeAsRVariable()
-
     End Sub
 
     Private Sub SetDefaults()
@@ -56,6 +55,7 @@ Public Class dlgJitter
         ucrInputMaximum.SetName(1)
         ucrInputMinimum.SetName(0)
         ucrSelectorForJitter.Reset()
+        LengthOfDataset()
     End Sub
 
     Private Sub ReopenDialog()
@@ -91,20 +91,15 @@ Public Class dlgJitter
 
     Private Sub MinAndMaxValue()
         If rdoMaximumDistanceFromZero.Checked Then
-            MaximumDistanceFromZero()
             ucrInputMaximum.Enabled = False
             ucrInputMinimum.Enabled = False
             ucrInputMaximumDistanceFromZero.Enabled = True
-            MinimumParam()
-            MaximumParam()
-
+            Distance()
         ElseIf rdoMinimumAndMaximum.Checked Then
-            MaximumDistanceFromZero()
             ucrInputMaximum.Enabled = True
             ucrInputMinimum.Enabled = True
             ucrInputMaximumDistanceFromZero.Enabled = False
-            MinimumParam()
-            MaximumParam()
+            Distance()
         End If
     End Sub
 
@@ -112,54 +107,34 @@ Public Class dlgJitter
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputNewColumnName.GetText, strTempDataframe:=ucrSelectorForJitter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputNewColumnName.GetText)
     End Sub
 
-    Private Sub ucrinputMaximumDistanceFromZero_NameCanged() Handles ucrInputMaximumDistanceFromZero.NameChanged
-        MaximumDistanceFromZero()
-    End Sub
-
-    Private Sub MaximumDistanceFromZero()
+    Private Sub Distance()
         If rdoMaximumDistanceFromZero.Checked Then
             If Not ucrInputMaximumDistanceFromZero.IsEmpty Then
                 clsRunif.AddParameter("min", -(ucrInputMaximumDistanceFromZero.GetText))
                 clsRunif.AddParameter("max", ucrInputMaximumDistanceFromZero.GetText)
             Else
+                clsRunif.RemoveParameterByName("min")
                 clsRunif.RemoveParameterByName("max")
             End If
-        Else
-            clsRunif.RemoveParameterByName("min")
-            clsRunif.RemoveParameterByName("max")
-        End If
-    End Sub
-
-    Private Sub ucrInputMinimum_NameChanged() Handles ucrInputMinimum.NameChanged
-        MinimumParam()
-    End Sub
-
-    Private Sub MinimumParam()
-        If rdoMinimumAndMaximum.Checked Then
+        ElseIf rdoMinimumAndMaximum.Checked Then
             If Not ucrInputMinimum.IsEmpty Then
                 clsRunif.AddParameter("min", ucrInputMinimum.GetText)
             Else
                 clsRunif.RemoveParameterByName("min")
             End If
-        Else
-            clsRunif.RemoveParameterByName("max")
-        End If
-    End Sub
-
-    Private Sub ucrInputMaximum_NameChanged() Handles ucrInputMaximum.NameChanged
-        MaximumParam()
-    End Sub
-
-    Private Sub MaximumParam()
-        If rdoMinimumAndMaximum.Checked Then
             If Not ucrInputMaximum.IsEmpty Then
                 clsRunif.AddParameter("max", ucrInputMaximum.GetText)
             Else
-                clsRunif.RemoveParameterByName("min")
+                clsRunif.RemoveParameterByName("max")
             End If
         Else
-                clsRunif.RemoveParameterByName("max")
+            clsRunif.RemoveParameterByName("max")
+            clsRunif.RemoveParameterByName("min")
         End If
+    End Sub
+
+    Private Sub ucrInputs_NameChanged() Handles ucrInputMinimum.NameChanged, ucrInputMaximum.NameChanged, ucrInputMaximumDistanceFromZero.NameChanged
+        Distance()
     End Sub
 
     Private Sub ucrReceiverJitter_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverJitter.SelectionChanged
@@ -167,9 +142,11 @@ Public Class dlgJitter
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrSelectorForJitter_DataFrameChanged() Handles ucrSelectorForJitter.DataFrameChanged
+    Private Sub LengthOfDataset()
         clsRunif.AddParameter("n", ucrSelectorForJitter.ucrAvailableDataFrames.iDataFrameLength)
     End Sub
 
-
+    Private Sub ucrSelectorForJitter_DataFrameChanged() Handles ucrSelectorForJitter.DataFrameChanged
+        LengthOfDataset()
+    End Sub
 End Class

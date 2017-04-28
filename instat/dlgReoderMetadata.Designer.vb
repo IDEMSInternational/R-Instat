@@ -37,8 +37,10 @@ Partial Class dlgReoderMetadata
         '
         'ucrDataFrameReoderMetadata
         '
-        Me.ucrDataFrameReoderMetadata.bUseCurrentFilter = False
-        Me.ucrDataFrameReoderMetadata.Location = New System.Drawing.Point(12, 9)
+        Me.ucrDataFrameReoderMetadata.bAddRemoveParameter = True
+        Me.ucrDataFrameReoderMetadata.bChangeParameterValue = True
+        Me.ucrDataFrameReoderMetadata.bUseCurrentFilter = True
+        Me.ucrDataFrameReoderMetadata.Location = New System.Drawing.Point(10, 10)
         Me.ucrDataFrameReoderMetadata.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataFrameReoderMetadata.Name = "ucrDataFrameReoderMetadata"
         Me.ucrDataFrameReoderMetadata.Size = New System.Drawing.Size(120, 50)
@@ -46,17 +48,17 @@ Partial Class dlgReoderMetadata
         '
         'lblMetataDataColumns
         '
-        Me.lblMetataDataColumns.Location = New System.Drawing.Point(178, 11)
+        Me.lblMetataDataColumns.Location = New System.Drawing.Point(187, 24)
         Me.lblMetataDataColumns.Name = "lblMetataDataColumns"
         Me.lblMetataDataColumns.Size = New System.Drawing.Size(100, 23)
         Me.lblMetataDataColumns.TabIndex = 1
-        Me.lblMetataDataColumns.Text = "Metadata Columns"
+        Me.lblMetataDataColumns.Text = "Metadata Columns:"
         '
         'ucrReorderMetadata
         '
-        Me.ucrReorderMetadata.Location = New System.Drawing.Point(181, 37)
+        Me.ucrReorderMetadata.Location = New System.Drawing.Point(181, 38)
         Me.ucrReorderMetadata.Name = "ucrReorderMetadata"
-        Me.ucrReorderMetadata.Size = New System.Drawing.Size(154, 139)
+        Me.ucrReorderMetadata.Size = New System.Drawing.Size(154, 113)
         Me.ucrReorderMetadata.TabIndex = 0
         Me.ucrReorderMetadata.ucrDataFrameList = Nothing
         Me.ucrReorderMetadata.ucrReceiver = Nothing

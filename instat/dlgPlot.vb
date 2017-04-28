@@ -59,12 +59,12 @@ Public Class dlgPlot
 
 
         ucrVariablesAsFactorForLinePlot.SetFactorReceiver(ucrFactorOptionalReceiver)
-        ucrVariablesAsFactorForLinePlot.SetSelector(ucrLinePlotSelector)
-        ucrVariablesAsFactorForLinePlot.SetIncludedDataType({"numeric", "factor"})
+        ucrVariablesAsFactorForLinePlot.Selector = ucrLinePlotSelector
+        ucrVariablesAsFactorForLinePlot.SetIncludedDataTypes({"numeric", "factor"})
 
         ucrSaveLinePlot.SetDataFrameSelector(ucrLinePlotSelector.ucrAvailableDataFrames)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-
+        ucrBase.clsRsyntax.iCallType = 3
 
     End Sub
     Private Sub SetDefaults()
@@ -75,7 +75,6 @@ Public Class dlgPlot
         ucrSaveLinePlot.strPrefix = "Line"
         ucrVariablesAsFactorForLinePlot.SetMeAsReceiver()
         ucrLinePlotSelector.Reset()
-        ucrVariablesAsFactorForLinePlot.ResetControl()
         ucrSaveLinePlot.Reset()
         sdgPlots.Reset()
         SetXParameter()

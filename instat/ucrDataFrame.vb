@@ -13,6 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 
 Public Class ucrDataFrame
@@ -25,6 +26,12 @@ Public Class ucrDataFrame
     Public strCurrDataFrame As String = ""
     Public bDataFrameFixed As Boolean = False
     Private strFixedDataFrame As String
+    'If the control is used to set a parameter that is a string i.e. data_name = "survey"
+    Private bParameterIsString As Boolean = False
+    'If the control is used to set a parameter that is an RFunction i.e. x = InstatDataObject$get_data_frame(data_name = "survey")
+    Private bParameterIsRFunction As Boolean = False
+    'The name of the data parameter in the get data frame instat object method (should always be the same)
+    Private strDataParameterNameInRFunction As String = "data_name"
 
     Private Sub ucrDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         FillComboBox()
@@ -37,6 +44,9 @@ Public Class ucrDataFrame
 
     Private Sub InitialiseControl()
         bUseCurrentFilter = True
+        SetRDefault("")
+        lblDataFrame.AutoSize = True
+        bUpdateRCodeFromControl = True
     End Sub
 
     Public Sub Reset()
@@ -70,16 +80,28 @@ Public Class ucrDataFrame
     Public Event DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String)
 
     Private Sub cboAvailableDataFrames_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboAvailableDataFrames.SelectedIndexChanged
-        SelectedDataFrameChanged(sender, e)
-    End Sub
-
-    Private Sub SelectedDataFrameChanged(sender As Object, e As EventArgs)
         If cboAvailableDataFrames.SelectedIndex = -1 Then
             cboAvailableDataFrames.Text = ""
         End If
-        SetDataFrameProperties()
-        RaiseEvent DataFrameChanged(sender, e, strCurrDataFrame)
-        strCurrDataFrame = cboAvailableDataFrames.Text
+        If strCurrDataFrame <> cboAvailableDataFrames.Text Then
+            RaiseEvent DataFrameChanged(sender, e, strCurrDataFrame)
+            strCurrDataFrame = cboAvailableDataFrames.Text
+            SetDataFrameProperties()
+            OnControlValueChanged()
+        End If
+    End Sub
+
+    Protected Overrides Sub UpdateParameter(clsTempParam As RParameter)
+        If clsTempParam IsNot Nothing Then
+            If bParameterIsString Then
+                clsTempParam.SetArgumentValue(Chr(34) & cboAvailableDataFrames.Text & Chr(34))
+            ElseIf bParameterIsRFunction Then
+                clsTempParam.SetArgument(clsCurrDataFrame)
+            End If
+        End If
+    End Sub
+
+    Private Sub SelectedDataFrameChanged(sender As Object, e As EventArgs)
     End Sub
 
     Public Sub SetDataFrameProperties()
@@ -146,4 +168,47 @@ Public Class ucrDataFrame
         'TODO Combo box should be replaced by ucrInput so that context menu done automatically
         Clipboard.SetText(cboAvailableDataFrames.SelectedText)
     End Sub
+
+    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
+        Dim clsTempDataParameter As RParameter
+        Dim strDataFrameName As String = ""
+        Dim clsMainParameter As RParameter
+
+        MyBase.UpdateControl()
+
+        clsMainParameter = GetParameter()
+        If clsMainParameter IsNot Nothing Then
+            If bChangeParameterValue Then
+                If bParameterIsString AndAlso clsMainParameter.bIsString Then
+                    strDataFrameName = clsMainParameter.strArgumentValue
+                ElseIf bParameterIsRFunction AndAlso clsMainParameter.bIsFunction Then
+                    clsTempDataParameter = clsMainParameter.clsArgumentCodeStructure.GetParameter(strDataParameterNameInRFunction)
+                    If clsTempDataParameter IsNot Nothing Then
+                        strDataFrameName = clsMainParameter.clsArgumentCodeStructure.GetParameter(strDataParameterNameInRFunction).strArgumentValue
+                    End If
+                End If
+            End If
+        End If
+        If strDataFrameName <> "" AndAlso strDataFrameName <> strCurrDataFrame Then
+            'Substring used to removed quotes on either side
+            strDataFrameName = strDataFrameName.Substring(1, strDataFrameName.Length - 2)
+            SetDataframe(strDataFrameName)
+        End If
+    End Sub
+
+    Public Sub SetParameterIsString()
+        bParameterIsString = True
+        bParameterIsRFunction = False
+        UpdateAllParameters()
+    End Sub
+
+    Public Sub SetParameterIsRFunction()
+        bParameterIsRFunction = True
+        bParameterIsString = False
+        UpdateAllParameters()
+    End Sub
+
+    Public Overrides Function IsRDefault() As Boolean
+        Return GetParameter() IsNot Nothing AndAlso objRDefault IsNot Nothing AndAlso objRDefault.Equals(cboAvailableDataFrames.Text)
+    End Function
 End Class
