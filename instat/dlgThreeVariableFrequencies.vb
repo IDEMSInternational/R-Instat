@@ -118,6 +118,9 @@ Public Class dlgThreeVariableFrequencies
         ucrPnlFrequencyDisplay.AddRadioButton(rdoTable)
         ucrPnlFrequencyDisplay.AddRadioButton(rdoGraph)
 
+        ucrChkWeights.Enabled = False
+        cmdOptions.Enabled = False
+
         ucrPnlFrequencyDisplay.AddFunctionNamesCondition(rdoTable, "sjtab")
         ucrPnlFrequencyDisplay.AddFunctionNamesCondition(rdoGraph, "sjplot")
 
