@@ -161,8 +161,6 @@ Public Class dlgStringHandling
     End Sub
 
     Private Sub ucrReceiverStringHandling_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStringHandling.ControlContentsChanged, ucrPnlStringHandling.ControlContentsChanged, ucrInputPattern.ControlContentsChanged, ucrInputReplaceBy.ControlContentsChanged
-        NewColumnName()
-        ChangePrefixName()
         TestOkEnabled()
     End Sub
 
@@ -178,5 +176,8 @@ Public Class dlgStringHandling
         ElseIf rdoReplace.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceFunction)
         End If
+        NewColumnName()
+        ChangePrefixName()
     End Sub
+
 End Class
