@@ -20,6 +20,7 @@ Public Class dlgConvertColumns
     Public bFirstLoad As Boolean = True
     Public bToFactorOnly As Boolean = False
     Private bReset As Boolean = True
+    Private clsDefaultFunction As New RFunction
 
     Private Sub dlgConvertColumns_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
@@ -37,10 +38,6 @@ Public Class dlgConvertColumns
 
     Private Sub ReopenDialog()
         SetToFactorStatus(bToFactorOnly)
-    End Sub
-
-    Public Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub SetToFactorStatus(bToFactorOnly As Boolean)
@@ -76,9 +73,10 @@ Public Class dlgConvertColumns
         ucrPnlConvertTo.AddToLinkedControls(ucrChkSpecifyDecimalsToDisplay, {rdoFactor, rdoOrderedFactor}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrPnlFactorToNumericOptions.SetParameter(New RParameter("factor_values", 3))
+        ucrPnlFactorToNumericOptions.AddRadioButton(rdoDefault, "NULL")
         ucrPnlFactorToNumericOptions.AddRadioButton(rdoConvertLevels, Chr(34) & "force_values" & Chr(34))
         ucrPnlFactorToNumericOptions.AddRadioButton(rdoConvertOrdinals, Chr(34) & "force_ordinals" & Chr(34))
-        ucrPnlFactorToNumericOptions.SetRDefault(Chr(34) & "by_levels" & Chr(34))
+        ucrPnlFactorToNumericOptions.SetRDefault("NULL")
         ucrPnlFactorToNumericOptions.SetLinkedDisplayControl(grpFactorToNumericOptions)
 
         ucrPnlConvertTo.AddToLinkedControls(ucrPnlFactorToNumericOptions, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -100,7 +98,7 @@ Public Class dlgConvertColumns
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
+        clsDefaultFunction = New RFunction
 
         ucrSelectorDataFrameColumns.Reset()
         SetToFactorStatus(bToFactorOnly)
@@ -110,10 +108,8 @@ Public Class dlgConvertColumns
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
     End Sub
 
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
-        SetRCodeForControls(True)
-        TestOKEnabled()
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -126,6 +122,12 @@ Public Class dlgConvertColumns
         Else
             ucrBase.OKEnabled(False)
         End If
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrChkSpecifyDecimalsToDisplay_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSpecifyDecimalsToDisplay.ControlValueChanged
