@@ -17,6 +17,7 @@ Imports instat.Translations
 Public Class dlgCopySheet
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private clsCopySheet As New RFunction
     Private Sub dlgCopySheet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -46,15 +47,15 @@ Public Class dlgCopySheet
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
+        clsCopySheet = New RFunction
 
         ucrNewDataFrameName.Reset()
         ucrDataFrameCopySheets.Reset()
         CheckAutoName()
 
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$copy_data_frame")
+        clsCopySheet.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$copy_data_frame")
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        ucrBase.clsRsyntax.SetBaseRFunction(clsCopySheet)
     End Sub
 
     Private Sub ReopenDialog()
