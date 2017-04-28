@@ -19,8 +19,8 @@ Public Class dlgTwoWayFrequencies
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
-    Private clsSjtXtab As New RFunction
-    Private clsSjpXtab As New RFunction
+    Private clsSjTab, clsSjPlot As New RFunction
+
     Private Sub dlgTwoWayFrequencies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -37,9 +37,8 @@ Public Class dlgTwoWayFrequencies
 
     Private Sub InitialiseDialog()
         'HelpID
-        ' ucrBase.iHelpTopicID = 
-        rdoCount.Enabled = False
-
+        'ucrBase.iHelpTopicID = 
+        Me.Size = New Size(426, 411)
         ucrReceiverColumnFactor.Selector = ucrSelectorTwoWayFrequencies
         ucrReceiverRowFactor.Selector = ucrSelectorTwoWayFrequencies
         ucrReceiverWeights.Selector = ucrSelectorTwoWayFrequencies
@@ -47,33 +46,54 @@ Public Class dlgTwoWayFrequencies
         ucrReceiverColumnFactor.SetDataType("factor")
         ucrReceiverWeights.SetDataType("numeric")
 
-        ucrReceiverRowFactor.SetParameter(New RParameter("var.row", 0))
-        ucrReceiverRowFactor.SetParameterIsRFunction()
-        ucrReceiverColumnFactor.SetParameter(New RParameter("var.col", 1))
-        ucrReceiverColumnFactor.SetParameterIsRFunction()
+        'setting receivers parameters
+        ucrReceiverRowFactor.SetParameter(New RParameter("var.row", 1))
+        ucrReceiverRowFactor.SetParameterIsString()
+        ucrReceiverRowFactor.bWithQuotes = False
+        ucrReceiverRowFactor.SetParameterIncludeArgumentName(False)
+        ucrReceiverColumnFactor.SetParameter(New RParameter("var.col", 2))
+        ucrReceiverColumnFactor.SetParameterIsString()
+        ucrReceiverColumnFactor.bWithQuotes = False
+        ucrReceiverColumnFactor.SetParameterIncludeArgumentName(False)
 
-        ucrReceiverWeights.SetParameter(New RParameter("weight.by", 2))
+        'setting selector
+        ucrSelectorTwoWayFrequencies.SetParameter(New RParameter("data", 0))
+        ucrSelectorTwoWayFrequencies.SetParameterIsrfunction()
+
+        'ucrReceiverWeights
+        ucrReceiverWeights.SetParameter(New RParameter("weight.by", 3))
         ucrReceiverWeights.SetParameterIsRFunction()
 
-        ucrPnlFreqType.SetParameter(New RParameter("margin", 3))
-        ucrPnlFreqType.AddRadioButton(rdoRow, Chr(34) & "row" & Chr(34))
-        ucrPnlFreqType.AddRadioButton(rdoColumn, Chr(34) & "col" & Chr(34))
-        ucrPnlFreqType.AddRadioButton(rdoCell, Chr(34) & "cell" & Chr(34))
-        ucrPnlFreqType.bAllowNonConditionValues = False
+        'setting ucrPnlFreqType
+        ucrPnlFreqType.SetParameter(New RParameter("fun", 4))
+        ucrPnlFreqType.AddRadioButton(rdoCount, Chr(34) & "grpfrq" & Chr(34))
+        ucrPnlFreqType.AddRadioButton(rdoRow, Chr(34) & "xtab" & Chr(34))
+        ucrPnlFreqType.AddRadioButton(rdoColumn, Chr(34) & "xtab" & Chr(34))
+        ucrPnlFreqType.AddRadioButton(rdoCell, Chr(34) & "xtab" & Chr(34))
 
-        ucrChkRow.SetParameter(New RParameter("show.row.prc", 4), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        'Adding ucrPnlFreqType conditions
+        ucrPnlFreqType.AddParameterValuesCondition(rdoCount, "fun", Chr(34) & "grpfrq" & Chr(34))
+        ucrPnlFreqType.AddParameterPresentCondition(rdoCount, "margin", False)
+        ucrPnlFreqType.AddParameterValuesCondition(rdoRow, "fun", Chr(34) & "xtab" & Chr(34))
+        ucrPnlFreqType.AddParameterValuesCondition(rdoRow, "margin", Chr(34) & "row" & Chr(34))
+        ucrPnlFreqType.AddParameterValuesCondition(rdoCell, "fun", Chr(34) & "xtab" & Chr(34))
+        ucrPnlFreqType.AddParameterValuesCondition(rdoCell, "margin", Chr(34) & "cell" & Chr(34))
+        ucrPnlFreqType.AddParameterValuesCondition(rdoColumn, "fun", Chr(34) & "xtab" & Chr(34))
+        ucrPnlFreqType.AddParameterValuesCondition(rdoColumn, "margin", Chr(34) & "col" & Chr(34))
+
+        ucrChkRow.SetParameter(New RParameter("show.row.prc", 5), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkRow.SetText("Row (%)")
         ucrChkRow.SetRDefault("FALSE")
 
-        ucrChkCount.SetParameter(New RParameter("show.obs", 5), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkCount.SetParameter(New RParameter("show.obs", 6), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkCount.SetText("Count")
         ucrChkCount.SetRDefault("TRUE")
 
-        ucrChkColumn.SetParameter(New RParameter("show.col.prc", 6), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkColumn.SetParameter(New RParameter("show.col.prc", 7), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkColumn.SetText("Column (%)")
         ucrChkColumn.SetRDefault("FALSE")
 
-        ucrChkCell.SetParameter(New RParameter("show.cell.prc", 7), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkCell.SetParameter(New RParameter("show.cell.prc", 8), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkCell.SetText("Cell (%)")
         ucrChkCell.SetRDefault("FALSE")
 
@@ -81,74 +101,103 @@ Public Class dlgTwoWayFrequencies
         ucrChkWeights.SetParameter(ucrReceiverWeights.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkWeights.AddToLinkedControls(ucrReceiverWeights, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChkFlip.SetParameter(New RParameter("coord.flip", 3), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkFlip.SetParameter(New RParameter("coord.flip", 4), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkFlip.SetText("Flip Coordinates")
         ucrChkFlip.SetRDefault("FALSE")
 
+        'Setting ucrPnlFreqDisplay
         ucrPnlFreqDisplay.AddRadioButton(rdoTable)
         ucrPnlFreqDisplay.AddRadioButton(rdoGraph)
+        ucrPnlFreqDisplay.AddRadioButton(rdoBoth)
 
-        ucrPnlFreqDisplay.AddFunctionNamesCondition(rdoTable, "sjt.xtab")
-        ucrPnlFreqDisplay.AddFunctionNamesCondition(rdoGraph, "sjp.xtab")
+        ucrPnlFreqDisplay.AddFunctionNamesCondition(rdoTable, "sjtab")
+        ucrPnlFreqDisplay.AddFunctionNamesCondition(rdoGraph, "sjplot")
 
-        ucrPnlFreqDisplay.AddToLinkedControls(ucrChkCount, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlFreqDisplay.AddToLinkedControls(ucrChkRow, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlFreqDisplay.AddToLinkedControls(ucrChkCell, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlFreqDisplay.AddToLinkedControls(ucrChkColumn, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkCell.SetLinkedDisplayControl(grpFrequencies)
-        ucrPnlFreqDisplay.AddToLinkedControls(ucrPnlFreqType, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlFreqType.SetLinkedDisplayControl(grpFreqType)
+        'Conditions for both requires checks on multiple functions
+        'Not yet implemented so this can cause a bug
+
+        'ucrPnlFreqDisplay.AddFunctionNamesCondition(rdoBoth, "sjtab")
+        'ucrPnlFreqDisplay.AddFunctionNamesCondition(rdoBoth, "sjplot")
+
+        'Setting Display of the group boxes in the dialogue
+        ucrPnlFreqDisplay.AddToLinkedControls(ucrChkCount, {rdoTable, rdoBoth}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFreqDisplay.AddToLinkedControls(ucrChkRow, {rdoTable, rdoBoth}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFreqDisplay.AddToLinkedControls(ucrChkCell, {rdoTable, rdoBoth}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFreqDisplay.AddToLinkedControls(ucrChkColumn, {rdoTable, rdoBoth}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFreqDisplay.AddToLinkedControls(ucrPnlFreqType, {rdoGraph, rdoBoth}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoCount)
+        ucrPnlFreqType.SetLinkedDisplayControl(grpFreqTypeGraph)
+
+        ucrChkColumn.SetLinkedDisplayControl(grpFreqTypeTable)
     End Sub
 
     Private Sub SetDefaults()
-        clsSjtXtab = New RFunction
-        clsSjpXtab = New RFunction
+        clsSjTab = New RFunction
+        clsSjPlot = New RFunction
+       
+        'Reset
         ucrSelectorTwoWayFrequencies.Reset()
         ucrReceiverRowFactor.SetMeAsReceiver()
 
-        clsSjtXtab.SetRCommand("sjt.xtab")
+        'Defining Table functions and default functions
+        clsSjTab.SetPackageName("sjPlot")
+        clsSjTab.SetRCommand("sjtab")
+        clsSjTab.AddParameter("show.obs", "TRUE")
+        clsSjTab.AddParameter("show.summary", "FALSE")
+        clsSjTab.AddParameter("digits", 0)
+        clsSjTab.AddParameter("fun", Chr(34) & "xtab" & Chr(34))
+        clsSjTab.AddParameter("title", Chr(34) & "" & Chr(34))
+        clsSjTab.AddParameter("string.total", Chr(34) & "Total" & Chr(34))
 
-        clsSjtXtab.AddParameter("show.obs", "TRUE")
-        clsSjtXtab.AddParameter("show.summary", "FALSE")
-        clsSjtXtab.AddParameter("digits", 0)
-        clsSjpXtab.SetRCommand("sjp.xtab")
-        clsSjpXtab.AddParameter("margin", Chr(34) & "row" & Chr(34))
-
-        clsSjpXtab.AddParameter("show.prc", "TRUE")
-        clsSjpXtab.AddParameter("show.n", "TRUE")
-        clsSjpXtab.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorTwoWayFrequencies.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsSjtXtab)
+        'Defining Plot functions and default functions
+        clsSjPlot.SetPackageName("sjPlot")
+        clsSjPlot.SetRCommand("sjplot")
+        clsSjPlot.AddParameter("fun", Chr(34) & "grpfrq" & Chr(34))
+        clsSjPlot.AddParameter("show.prc", "TRUE")
+        clsSjPlot.AddParameter("show.n", "TRUE")
+        clsSjPlot.AddParameter("title", Chr(34) & "" & Chr(34))
+        clsSjPlot.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorTwoWayFrequencies.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsSjTab)
         bResetSubdialog = True
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverRowFactor.AddAdditionalCodeParameterPair(clsSjpXtab, New RParameter("x", 0), iAdditionalPairNo:=1)
-        ucrReceiverColumnFactor.AddAdditionalCodeParameterPair(clsSjpXtab, New RParameter("grp", 1), iAdditionalPairNo:=1)
-        ucrChkWeights.AddAdditionalCodeParameterPair(clsSjpXtab, New RParameter("weight.by", 1), iAdditionalPairNo:=1)
-        ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjpXtab, ucrChkWeights.GetParameter(), iAdditionalPairNo:=1)
+        Dim clsTempParamOne As RParameter
+        Dim clsTempParamTwo As RParameter
 
-        ucrReceiverRowFactor.SetRCode(clsSjtXtab, bReset)
-        ucrReceiverColumnFactor.SetRCode(clsSjtXtab, bReset)
-        ucrReceiverWeights.SetRCode(clsSjtXtab, bReset)
-        ucrChkWeights.SetRCode(clsSjtXtab, bReset)
-        ucrChkFlip.SetRCode(clsSjpXtab, bReset)
+        'Adding additional pair of fuction and parameters in various controls and setting up Rcode
+        clsTempParamOne = New RParameter("x", 1)
+        clsTempParamOne.bIncludeArgumentName = False
+        ucrReceiverRowFactor.AddAdditionalCodeParameterPair(clsSjPlot, clsTempParamOne, iAdditionalPairNo:=1)
 
-        ucrPnlFreqType.SetRCode(clsSjpXtab, bReset)
-        ucrPnlFreqDisplay.SetRCode(clsSjtXtab, bReset)
+        clsTempParamTwo = New RParameter("grp", 2)
+        clsTempParamTwo.bIncludeArgumentName = False
+        ucrReceiverColumnFactor.AddAdditionalCodeParameterPair(clsSjPlot, clsTempParamTwo, iAdditionalPairNo:=1)
 
-        ucrChkCell.SetRCode(clsSjtXtab, bReset)
-        ucrChkColumn.SetRCode(clsSjtXtab, bReset)
-        ucrChkRow.SetRCode(clsSjtXtab, bReset)
-        ucrChkCount.SetRCode(clsSjtXtab, bReset)
+        ucrSelectorTwoWayFrequencies.AddAdditionalCodeParameterPair(clsSjPlot, ucrSelectorTwoWayFrequencies.GetParameter(), iAdditionalPairNo:=1)
+        ucrChkWeights.AddAdditionalCodeParameterPair(clsSjPlot, ucrReceiverWeights.GetParameter(), iAdditionalPairNo:=1)
+        ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjPlot, ucrReceiverWeights.GetParameter(), iAdditionalPairNo:=1)
+
+        ucrReceiverRowFactor.SetRCode(clsSjTab, bReset)
+        ucrReceiverColumnFactor.SetRCode(clsSjTab, bReset)
+        ucrReceiverWeights.SetRCode(clsSjTab, bReset)
+        ucrChkWeights.SetRCode(clsSjTab, bReset)
+        ucrChkFlip.SetRCode(clsSjPlot, bReset)
+        ucrPnlFreqType.SetRCode(clsSjPlot, bReset)
+        ucrPnlFreqDisplay.SetRCode(clsSjTab, bReset)
+        ucrSelectorTwoWayFrequencies.SetRCode(clsSjTab, bReset)
+        ucrChkCell.SetRCode(clsSjTab, bReset)
+        ucrChkColumn.SetRCode(clsSjTab, bReset)
+        ucrChkRow.SetRCode(clsSjTab, bReset)
+        ucrChkCount.SetRCode(clsSjTab, bReset)
     End Sub
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        If rdoTable.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsSjtXtab)
+        If rdoTable.Checked OrElse rdoBoth.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSjTab)
             'ucrBase.clsRsyntax.bHTMLOutput = True
             ucrBase.clsRsyntax.iCallType = 0
         ElseIf rdoGraph.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsSjpXtab)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSjPlot)
             ' ucrBase.clsRsyntax.bHTMLOutput = False
             ucrBase.clsRsyntax.iCallType = 3
         End If
@@ -192,36 +241,71 @@ Public Class dlgTwoWayFrequencies
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         Dim strGraph As String
         Dim strTempScript As String = ""
+        Dim bIsAssigned As Boolean
+        Dim bToBeAssigned As Boolean
+        Dim strAssignTo As String
 
-        If rdoTable.Checked AndAlso rdoGraph.Checked Then
-            strGraph = clsSjpXtab.ToScript(strTempScript)
+        If rdoBoth.Checked Then
+            bIsAssigned = clsSjPlot.bIsAssigned
+            bToBeAssigned = clsSjPlot.bToBeAssigned
+            strAssignTo = clsSjPlot.strAssignTo
+
+            strGraph = clsSjPlot.ToScript(strTempScript)
             frmMain.clsRLink.RunScript(strTempScript & strGraph, iCallType:=3)
+
+            clsSjPlot.bIsAssigned = bIsAssigned
+            clsSjPlot.bToBeAssigned = bToBeAssigned
+            clsSjPlot.strAssignTo = strAssignTo
         End If
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgTwoWayFrequencies.SetRFunction(clsSjtXtab, clsSjpXtab, bResetSubdialog)
+        sdgTwoWayFrequencies.SetRFunction(clsSjTab, clsSjPlot, bResetSubdialog)
         bResetSubdialog = False
         sdgTwoWayFrequencies.ShowDialog()
-        ShowValueParameter()
         TestOkEnabled()
     End Sub
 
-    Public Sub ShowValueParameter()
-        If (sdgTwoWayFrequencies.ucrChkShowPercentage.Checked = False AndAlso sdgTwoWayFrequencies.ucrChkShowCount.Checked = False) Then
-            ucrBase.clsRsyntax.AddParameter("show.values", "FALSE")
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("show.values")
+    Private Sub ucrChkFlip_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFlip.ControlValueChanged, ucrPnlFreqDisplay.ControlValueChanged
+        Dim clsRowParam As RParameter
+        Dim clsColumnParam As RParameter
+
+        clsRowParam = ucrReceiverRowFactor.GetParameter()
+        clsColumnParam = ucrReceiverColumnFactor.GetParameter()
+        If rdoTable.Checked OrElse rdoBoth.Checked Then
+            If ucrChkFlip.Checked Then
+                clsColumnParam.Position = 1
+                clsRowParam.Position = 2
+            Else
+                clsRowParam.Position = 1
+                clsColumnParam.Position = 2
+            End If
+            ucrReceiverRowFactor.SetParameter(clsRowParam)
+            ucrReceiverColumnFactor.SetParameter(clsColumnParam)
         End If
     End Sub
 
-    Private Sub ucrChkFlip_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFlip.ControlValueChanged
-        If rdoTable.Checked AndAlso ucrChkFlip.Checked Then
-            ucrReceiverRowFactor.ChangeParameterName("var.col", 1)
-            ucrReceiverColumnFactor.ChangeParameterName("var.row", 0)
-        ElseIf rdoTable.Checked AndAlso Not ucrChkFlip.Checked Then
-            ucrReceiverRowFactor.ChangeParameterName("var.row", 0)
-            ucrReceiverColumnFactor.ChangeParameterName("var.col", 1)
+    Private Sub ucrPnlFreqType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFreqDisplay.ControlValueChanged
+        If rdoCell.Checked Then
+            ucrBase.clsRsyntax.AddParameter("margin", Chr(34) & "cell" & Chr(34))
+        ElseIf rdoColumn.Checked Then
+            ucrBase.clsRsyntax.AddParameter("margin", Chr(34) & "col" & Chr(34))
+        ElseIf rdoRow.Checked Then
+            ucrBase.clsRsyntax.AddParameter("margin", Chr(34) & "row" & Chr(34))
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("margin")
+        End If
+        changelocation()
+    End Sub
+    Private Sub changelocation()
+        If rdoBoth.Checked Then
+            grpFreqTypeTable.Location = New Point(240, 166)
+            grpFreqTypeGraph.Location = New Point(358, 166)
+            Me.Size = New Size(498, 411)
+        Else
+            grpFreqTypeTable.Location = New Point(263, 166)
+            grpFreqTypeGraph.Location = New Point(263, 166)
+            Me.Size = New Size(426, 411)
         End If
     End Sub
 End Class

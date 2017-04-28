@@ -85,7 +85,6 @@ Partial Class dlgStringHandling
         'rdoReplace
         '
         Me.rdoReplace.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoReplace.AutoSize = True
         Me.rdoReplace.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoReplace.FlatAppearance.BorderSize = 2
         Me.rdoReplace.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
@@ -170,9 +169,9 @@ Partial Class dlgStringHandling
         '
         'ucrSaveStringHandling
         '
-        Me.ucrSaveStringHandling.Location = New System.Drawing.Point(10, 234)
+        Me.ucrSaveStringHandling.Location = New System.Drawing.Point(10, 233)
         Me.ucrSaveStringHandling.Name = "ucrSaveStringHandling"
-        Me.ucrSaveStringHandling.Size = New System.Drawing.Size(279, 24)
+        Me.ucrSaveStringHandling.Size = New System.Drawing.Size(255, 24)
         Me.ucrSaveStringHandling.TabIndex = 13
         '
         'ucrInputPattern
@@ -197,7 +196,7 @@ Partial Class dlgStringHandling
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 263)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 258)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(406, 52)
         Me.ucrBase.TabIndex = 14
@@ -213,7 +212,7 @@ Partial Class dlgStringHandling
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(417, 323)
+        Me.ClientSize = New System.Drawing.Size(417, 315)
         Me.Controls.Add(Me.rdoDetect)
         Me.Controls.Add(Me.rdoExtract)
         Me.Controls.Add(Me.rdoLocate)
