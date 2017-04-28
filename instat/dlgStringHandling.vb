@@ -113,7 +113,6 @@ Public Class dlgStringHandling
         ucrPnlStringHandling.SetRCode(clsCountFunction, bReset)
         ucrSaveStringHandling.SetRCode(clsCountFunction, bReset)
 
-
         ucrSaveStringHandling.AddAdditionalRCode(clsDetectFunction, iAdditionalPairNo:=1)
         ucrSaveStringHandling.AddAdditionalRCode(clsExtractFunction, iAdditionalPairNo:=2)
         ucrSaveStringHandling.AddAdditionalRCode(clsLocateFunction, iAdditionalPairNo:=3)
@@ -129,6 +128,7 @@ Public Class dlgStringHandling
             ElseIf rdoExtract.Checked Then
                 ucrSaveStringHandling.SetPrefix("extract")
             ElseIf rdoLocate.Checked Then
+                ucrSaveStringHandling.SetPrefix("")
                 ucrSaveStringHandling.SetName("locate")
             ElseIf rdoReplace.Checked Then
                 ucrSaveStringHandling.SetPrefix("replace")
@@ -143,6 +143,7 @@ Public Class dlgStringHandling
             ucrSaveStringHandling.SetLabelText("Save Result:")
         End If
     End Sub
+
     Private Sub TestOkEnabled()
         If rdoReplace.Checked AndAlso ucrSaveStringHandling.IsComplete() AndAlso Not ucrReceiverStringHandling.IsEmpty() AndAlso Not ucrInputPattern.IsEmpty AndAlso Not ucrInputReplaceBy.IsEmpty Then
             ucrBase.OKEnabled(True)
