@@ -110,7 +110,7 @@ Public Class sdgTwoWayFrequencies
 
         'Setting Plot parameter
         ucrPnlGraphType.AddToLinkedControls(ucrChkStack, {rdoBar}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
-        ucrSaveGraph.SetPrefix("one_way_freq")
+        ucrSaveGraph.SetPrefix("two_way_freq")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(dlgOneWayFrequencies.ucrSelectorOneWayFreq.ucrAvailableDataFrames)
         ucrSaveGraph.SetCheckBoxText("Save Graph")
