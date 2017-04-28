@@ -36,11 +36,20 @@ Public Class dlgExportGraphAsImage
         ucrSelectorGraphAsImage.SetItemType("graph")
         ucrSelectedGraphReceiver.strSelectorHeading = "Graphs"
 
+        ucrPnlImageFormats.SetParameter(New RParameter("device"))
+        ucrPnlImageFormats.AddRadioButton(rdoBmp, Chr(34) & "bmp" & Chr(34))
+        ucrPnlImageFormats.AddRadioButton(rdoJpeg, Chr(34) & "jpeg" & Chr(34))
+        ucrPnlImageFormats.AddRadioButton(rdoPng, Chr(34) & "png" & Chr(34))
+        ucrPnlImageFormats.AddRadioButton(rdoSvg, Chr(34) & "svg" & Chr(34))
+        ucrPnlImageFormats.AddRadioButton(rdoTex, Chr(34) & "tex" & Chr(34))
+        ucrPnlImageFormats.AddRadioButton(rdoWmf, Chr(34) & "wmf" & Chr(34))
+
         ucrSelectedGraphReceiver.Selector = ucrSelectorGraphAsImage
         ucrSelectedGraphReceiver.SetParameter(New RParameter("filename"))
         ucrSelectedGraphReceiver.SetParameterIsString()
         ucrSelectedGraphReceiver.SetMeAsReceiver()
         ucrInputFile.SetParameter(New RParameter("path"))
+
 
     End Sub
 
@@ -51,6 +60,7 @@ Public Class dlgExportGraphAsImage
 
         clsGgsave = New RFunction
         clsGgsave.SetRCommand("ggsave")
+        clsGgsave.AddParameter("device", Chr(34) & "png" & Chr(34))
         ucrBase.clsRsyntax.SetBaseRFunction(clsGgsave)
     End Sub
 

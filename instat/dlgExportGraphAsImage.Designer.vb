@@ -24,25 +24,27 @@ Partial Class dlgExportGraphAsImage
     Private Sub InitializeComponent()
         Me.lblSelectedGraph = New System.Windows.Forms.Label()
         Me.cmdBrowse = New System.Windows.Forms.Button()
-        Me.rdoPng = New System.Windows.Forms.RadioButton()
-        Me.rdoJpeg = New System.Windows.Forms.RadioButton()
-        Me.rdoBmp = New System.Windows.Forms.RadioButton()
-        Me.rdoSvg = New System.Windows.Forms.RadioButton()
-        Me.rdowmf = New System.Windows.Forms.RadioButton()
+        Me.grpImageFormats = New System.Windows.Forms.GroupBox()
         Me.rdoTex = New System.Windows.Forms.RadioButton()
+        Me.rdoWmf = New System.Windows.Forms.RadioButton()
+        Me.rdoSvg = New System.Windows.Forms.RadioButton()
+        Me.rdoBmp = New System.Windows.Forms.RadioButton()
+        Me.rdoJpeg = New System.Windows.Forms.RadioButton()
+        Me.rdoPng = New System.Windows.Forms.RadioButton()
         Me.ucrInputFile = New instat.ucrInputTextBox()
         Me.ucrSelectedGraphReceiver = New instat.ucrReceiverSingle()
         Me.ucrSelectorGraphAsImage = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrPnlImageFormats = New instat.UcrPanel()
         Me.SuspendLayout()
         '
         'lblSelectedGraph
         '
         Me.lblSelectedGraph.AutoSize = True
-        Me.lblSelectedGraph.Location = New System.Drawing.Point(265, 39)
+        Me.lblSelectedGraph.Location = New System.Drawing.Point(265, 34)
         Me.lblSelectedGraph.Name = "lblSelectedGraph"
         Me.lblSelectedGraph.Size = New System.Drawing.Size(84, 13)
-        Me.lblSelectedGraph.TabIndex = 3
+        Me.lblSelectedGraph.TabIndex = 1
         Me.lblSelectedGraph.Text = "Selected Graph:"
         '
         'cmdBrowse
@@ -50,47 +52,45 @@ Partial Class dlgExportGraphAsImage
         Me.cmdBrowse.Location = New System.Drawing.Point(299, 212)
         Me.cmdBrowse.Name = "cmdBrowse"
         Me.cmdBrowse.Size = New System.Drawing.Size(75, 23)
-        Me.cmdBrowse.TabIndex = 5
+        Me.cmdBrowse.TabIndex = 11
         Me.cmdBrowse.Text = "Browse"
         Me.cmdBrowse.UseVisualStyleBackColor = True
         '
-        'rdoPng
+        'grpImageFormats
         '
-        Me.rdoPng.AutoSize = True
-        Me.rdoPng.Location = New System.Drawing.Point(265, 90)
-        Me.rdoPng.Name = "rdoPng"
-        Me.rdoPng.Size = New System.Drawing.Size(43, 17)
-        Me.rdoPng.TabIndex = 7
-        Me.rdoPng.TabStop = True
-        Me.rdoPng.Text = "png"
-        Me.rdoPng.UseVisualStyleBackColor = True
+        Me.grpImageFormats.Location = New System.Drawing.Point(264, 71)
+        Me.grpImageFormats.Name = "grpImageFormats"
+        Me.grpImageFormats.Size = New System.Drawing.Size(128, 93)
+        Me.grpImageFormats.TabIndex = 3
+        Me.grpImageFormats.TabStop = False
+        Me.grpImageFormats.Text = "Image Formats"
         '
-        'rdoJpeg
+        'rdoTex
         '
-        Me.rdoJpeg.AutoSize = True
-        Me.rdoJpeg.Location = New System.Drawing.Point(265, 110)
-        Me.rdoJpeg.Name = "rdoJpeg"
-        Me.rdoJpeg.Size = New System.Drawing.Size(45, 17)
-        Me.rdoJpeg.TabIndex = 7
-        Me.rdoJpeg.TabStop = True
-        Me.rdoJpeg.Text = "jpeg"
-        Me.rdoJpeg.UseVisualStyleBackColor = True
+        Me.rdoTex.AutoSize = True
+        Me.rdoTex.Location = New System.Drawing.Point(340, 124)
+        Me.rdoTex.Name = "rdoTex"
+        Me.rdoTex.Size = New System.Drawing.Size(39, 17)
+        Me.rdoTex.TabIndex = 9
+        Me.rdoTex.TabStop = True
+        Me.rdoTex.Text = "tex"
+        Me.rdoTex.UseVisualStyleBackColor = True
         '
-        'rdoBmp
+        'rdoWmf
         '
-        Me.rdoBmp.AutoSize = True
-        Me.rdoBmp.Location = New System.Drawing.Point(265, 130)
-        Me.rdoBmp.Name = "rdoBmp"
-        Me.rdoBmp.Size = New System.Drawing.Size(45, 17)
-        Me.rdoBmp.TabIndex = 7
-        Me.rdoBmp.TabStop = True
-        Me.rdoBmp.Text = "bmp"
-        Me.rdoBmp.UseVisualStyleBackColor = True
+        Me.rdoWmf.AutoSize = True
+        Me.rdoWmf.Location = New System.Drawing.Point(340, 104)
+        Me.rdoWmf.Name = "rdoWmf"
+        Me.rdoWmf.Size = New System.Drawing.Size(44, 17)
+        Me.rdoWmf.TabIndex = 8
+        Me.rdoWmf.TabStop = True
+        Me.rdoWmf.Text = "wmf"
+        Me.rdoWmf.UseVisualStyleBackColor = True
         '
         'rdoSvg
         '
         Me.rdoSvg.AutoSize = True
-        Me.rdoSvg.Location = New System.Drawing.Point(265, 150)
+        Me.rdoSvg.Location = New System.Drawing.Point(340, 84)
         Me.rdoSvg.Name = "rdoSvg"
         Me.rdoSvg.Size = New System.Drawing.Size(42, 17)
         Me.rdoSvg.TabIndex = 7
@@ -98,27 +98,38 @@ Partial Class dlgExportGraphAsImage
         Me.rdoSvg.Text = "svg"
         Me.rdoSvg.UseVisualStyleBackColor = True
         '
-        'rdowmf
+        'rdoBmp
         '
-        Me.rdowmf.AutoSize = True
-        Me.rdowmf.Location = New System.Drawing.Point(265, 170)
-        Me.rdowmf.Name = "rdowmf"
-        Me.rdowmf.Size = New System.Drawing.Size(44, 17)
-        Me.rdowmf.TabIndex = 7
-        Me.rdowmf.TabStop = True
-        Me.rdowmf.Text = "wmf"
-        Me.rdowmf.UseVisualStyleBackColor = True
+        Me.rdoBmp.AutoSize = True
+        Me.rdoBmp.Location = New System.Drawing.Point(279, 124)
+        Me.rdoBmp.Name = "rdoBmp"
+        Me.rdoBmp.Size = New System.Drawing.Size(45, 17)
+        Me.rdoBmp.TabIndex = 6
+        Me.rdoBmp.TabStop = True
+        Me.rdoBmp.Text = "bmp"
+        Me.rdoBmp.UseVisualStyleBackColor = True
         '
-        'rdoTex
+        'rdoJpeg
         '
-        Me.rdoTex.AutoSize = True
-        Me.rdoTex.Location = New System.Drawing.Point(265, 190)
-        Me.rdoTex.Name = "rdoTex"
-        Me.rdoTex.Size = New System.Drawing.Size(39, 17)
-        Me.rdoTex.TabIndex = 7
-        Me.rdoTex.TabStop = True
-        Me.rdoTex.Text = "tex"
-        Me.rdoTex.UseVisualStyleBackColor = True
+        Me.rdoJpeg.AutoSize = True
+        Me.rdoJpeg.Location = New System.Drawing.Point(279, 104)
+        Me.rdoJpeg.Name = "rdoJpeg"
+        Me.rdoJpeg.Size = New System.Drawing.Size(45, 17)
+        Me.rdoJpeg.TabIndex = 5
+        Me.rdoJpeg.TabStop = True
+        Me.rdoJpeg.Text = "jpeg"
+        Me.rdoJpeg.UseVisualStyleBackColor = True
+        '
+        'rdoPng
+        '
+        Me.rdoPng.AutoSize = True
+        Me.rdoPng.Location = New System.Drawing.Point(279, 84)
+        Me.rdoPng.Name = "rdoPng"
+        Me.rdoPng.Size = New System.Drawing.Size(43, 17)
+        Me.rdoPng.TabIndex = 4
+        Me.rdoPng.TabStop = True
+        Me.rdoPng.Text = "png"
+        Me.rdoPng.UseVisualStyleBackColor = True
         '
         'ucrInputFile
         '
@@ -128,12 +139,12 @@ Partial Class dlgExportGraphAsImage
         Me.ucrInputFile.Location = New System.Drawing.Point(10, 214)
         Me.ucrInputFile.Name = "ucrInputFile"
         Me.ucrInputFile.Size = New System.Drawing.Size(287, 21)
-        Me.ucrInputFile.TabIndex = 4
+        Me.ucrInputFile.TabIndex = 10
         '
         'ucrSelectedGraphReceiver
         '
         Me.ucrSelectedGraphReceiver.frmParent = Me
-        Me.ucrSelectedGraphReceiver.Location = New System.Drawing.Point(265, 54)
+        Me.ucrSelectedGraphReceiver.Location = New System.Drawing.Point(265, 49)
         Me.ucrSelectedGraphReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectedGraphReceiver.Name = "ucrSelectedGraphReceiver"
         Me.ucrSelectedGraphReceiver.Selector = Nothing
@@ -149,14 +160,21 @@ Partial Class dlgExportGraphAsImage
         Me.ucrSelectorGraphAsImage.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorGraphAsImage.Name = "ucrSelectorGraphAsImage"
         Me.ucrSelectorGraphAsImage.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorGraphAsImage.TabIndex = 1
+        Me.ucrSelectorGraphAsImage.TabIndex = 0
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(10, 241)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(404, 52)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.TabIndex = 12
+        '
+        'ucrPnlImageFormats
+        '
+        Me.ucrPnlImageFormats.Location = New System.Drawing.Point(268, 84)
+        Me.ucrPnlImageFormats.Name = "ucrPnlImageFormats"
+        Me.ucrPnlImageFormats.Size = New System.Drawing.Size(116, 66)
+        Me.ucrPnlImageFormats.TabIndex = 14
         '
         'dlgExportGraphAsImage
         '
@@ -164,17 +182,19 @@ Partial Class dlgExportGraphAsImage
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(423, 296)
         Me.Controls.Add(Me.rdoTex)
-        Me.Controls.Add(Me.rdowmf)
-        Me.Controls.Add(Me.rdoSvg)
-        Me.Controls.Add(Me.rdoBmp)
-        Me.Controls.Add(Me.rdoJpeg)
-        Me.Controls.Add(Me.rdoPng)
+        Me.Controls.Add(Me.rdoWmf)
         Me.Controls.Add(Me.cmdBrowse)
+        Me.Controls.Add(Me.rdoSvg)
         Me.Controls.Add(Me.ucrInputFile)
+        Me.Controls.Add(Me.rdoBmp)
         Me.Controls.Add(Me.lblSelectedGraph)
+        Me.Controls.Add(Me.rdoJpeg)
         Me.Controls.Add(Me.ucrSelectedGraphReceiver)
+        Me.Controls.Add(Me.rdoPng)
         Me.Controls.Add(Me.ucrSelectorGraphAsImage)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.ucrPnlImageFormats)
+        Me.Controls.Add(Me.grpImageFormats)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -192,10 +212,12 @@ Partial Class dlgExportGraphAsImage
     Friend WithEvents cmdBrowse As Button
     Friend WithEvents ucrInputFile As ucrInputTextBox
     Friend WithEvents lblSelectedGraph As Label
+    Friend WithEvents grpImageFormats As GroupBox
     Friend WithEvents rdoTex As RadioButton
-    Friend WithEvents rdowmf As RadioButton
+    Friend WithEvents rdoWmf As RadioButton
     Friend WithEvents rdoSvg As RadioButton
     Friend WithEvents rdoBmp As RadioButton
     Friend WithEvents rdoJpeg As RadioButton
     Friend WithEvents rdoPng As RadioButton
+    Friend WithEvents ucrPnlImageFormats As UcrPanel
 End Class
