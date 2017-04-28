@@ -75,9 +75,9 @@ Public Class dlgConvertColumns
         ucrPnlConvertTo.AddRadioButton(rdoInteger, Chr(34) & "integer" & Chr(34))
         ucrPnlConvertTo.AddToLinkedControls(ucrChkSpecifyDecimalsToDisplay, {rdoFactor, rdoOrderedFactor}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrPnlFactorToNumericOptions.SetParameter(New RParameter("factor_numeric", 3))
-        ucrPnlFactorToNumericOptions.AddRadioButton(rdoConvertLevels, Chr(34) & "by_levels" & Chr(34))
-        ucrPnlFactorToNumericOptions.AddRadioButton(rdoConvertOrdinals, Chr(34) & "by_ordinals" & Chr(34))
+        ucrPnlFactorToNumericOptions.SetParameter(New RParameter("factor_values", 3))
+        ucrPnlFactorToNumericOptions.AddRadioButton(rdoConvertLevels, Chr(34) & "force_values" & Chr(34))
+        ucrPnlFactorToNumericOptions.AddRadioButton(rdoConvertOrdinals, Chr(34) & "force_ordinals" & Chr(34))
         ucrPnlFactorToNumericOptions.SetRDefault(Chr(34) & "by_levels" & Chr(34))
         ucrPnlFactorToNumericOptions.SetLinkedDisplayControl(grpFactorToNumericOptions)
 
