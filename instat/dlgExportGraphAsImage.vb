@@ -17,6 +17,8 @@ Imports instat.Translations
 Public Class dlgExportGraphAsImage
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
+    Private clsggSave As New RFunction
+
     Private Sub dlgExportGraphAsImage_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             InitialiseDialog()
@@ -30,25 +32,60 @@ Public Class dlgExportGraphAsImage
         autoTranslate(Me)
         TestOkEnabled()
     End Sub
-    Private Sub InitialiseDialog()
 
+    Private Sub InitialiseDialog()
+        ' TODO: Help ID
+        ucrInputFile.SetParameter(New RParameter("filename", 0))
+
+        ucrSelectedGraphReceiver.SetParameter(New RParameter("plot", 1))
+        ucrSelectedGraphReceiver.SetParameterIsRFunction()
+        ucrSelectorGraphAsImage.SetItemType("graph")
+        ucrSelectedGraphReceiver.strSelectorHeading = "Graphs"
+        ucrSelectedGraphReceiver.Selector = ucrSelectorGraphAsImage
+        ucrSelectedGraphReceiver.SetMeAsReceiver()
     End Sub
 
     Private Sub SetDefaults()
+        clsggSave = New RFunction
 
+        ucrInputFile.Reset()
+        ucrSelectorGraphAsImage.Reset()
+        ucrInputFile.SetName("")
+
+        clsggSave.SetPackageName("ggplot2")
+        clsggSave.SetRCommand("ggsave")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsggSave)
     End Sub
 
-    Private Sub SetRcodeForControls(bReset As Boolean)
-
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-
+        If Not ucrSelectedGraphReceiver.IsEmpty AndAlso Not ucrInputFile.IsEmpty Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        SetRcodeForControls(True)
+        SetRCodeForControls(True)
+        TestOkEnabled()
+    End Sub
+
+    Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
+        Dim dlgSelectFile As New SaveFileDialog
+        dlgSelectFile.Title = "Save Graph As Image"
+        dlgSelectFile.Filter = "JPEG (*.jpeg)|*.jpeg|PNG(*.png)|*.png|BitMaP(*.bmp)|*.bmp|EPS(*.eps)|*.eps|PostScript(*.ps)|*.ps|SVG(*.svg)|*.svg|WMF(*.wmf)|*.wmf|PDF(*.pdf)|*.pdf"
+        dlgSelectFile.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
+        If dlgSelectFile.ShowDialog() = DialogResult.OK Then
+            ucrInputFile.SetName(dlgSelectFile.FileName.Replace("\", "/"))
+        End If
+    End Sub
+
+    Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectedGraphReceiver.ControlContentsChanged, ucrInputFile.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
