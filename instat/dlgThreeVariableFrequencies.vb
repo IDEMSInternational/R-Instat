@@ -125,7 +125,6 @@ Public Class dlgThreeVariableFrequencies
         ucrPnlFrequencyDisplay.AddFunctionNamesCondition(rdoGraph, "sjplot")
 
         ucrPnlFreqType.AddParameterValuesCondition(rdoCount, "fun", "grpfrq")
-        ucrPnlFreqType.AddParameterValuesCondition(rdoCount, "margin", False)
         ucrPnlFreqType.AddParameterValuesCondition(rdoRow, "fun", "xtab")
         ucrPnlFreqType.AddParameterValuesCondition(rdoRow, "margin", "row")
         ucrPnlFreqType.AddParameterValuesCondition(rdoCell, "fun", "xtab")
@@ -181,7 +180,6 @@ Public Class dlgThreeVariableFrequencies
 
         clsSjTab.SetPackageName("sjPlot")
         clsSjTab.SetRCommand("sjtab")
-        clsSjTab.AddParameter("show.obs", "TRUE")
         clsSjTab.AddParameter("show.summary", "FALSE")
         clsSjTab.AddParameter("digits", 0)
         clsSjTab.AddParameter("fun", Chr(34) & "xtab" & Chr(34))
