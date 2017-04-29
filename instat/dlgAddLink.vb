@@ -14,12 +14,14 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Imports RDotNet
 Public Class dlgAddLink
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsGetKeyNames As RFunction
+    Private clsAddLink As RFunction
+
     Private Sub dlgAddLink_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -39,21 +41,15 @@ Public Class dlgAddLink
         ucrDataSelectorTo.SetParameter(New RParameter("data_name", 0))
         ucrBase.clsRsyntax.iCallType = 2
 
+        lvwLinkViewBox.Columns.Add("Name", 80, HorizontalAlignment.Left)
+        lvwLinkViewBox.Columns.Add("Columns", 160, HorizontalAlignment.Left)
+
     End Sub
 
     Private Sub SetDefaults()
-        Dim lstOutput As String
-        clsGetKeyNames = New RFunction
         ucrDataSelectorFrom.Reset()
         ucrDataSelectorTo.Reset()
-        clsGetKeyNames.AddParameter("data_name", Chr(34) & ucrDataSelectorTo.cboAvailableDataFrames.SelectedItem & Chr(34))
-        clsGetKeyNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_keys")
-        lstOutput = frmMain.clsRLink.RunInternalScriptGetValue(clsGetKeyNames.ToScript).AsCharacter(0)
-        lvwLinkViewBox.Items.Add(lstOutput)
-        lvwLinkViewBox.Columns.Add("Key", 50, HorizontalAlignment.Left)
-        lvwLinkViewBox.Columns.Add("Column Name", 100, HorizontalAlignment.Left)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsGetKeyNames)
-
+        UpdateKeys()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -70,5 +66,47 @@ Public Class dlgAddLink
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrDataSelectorTo_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDataSelectorTo.ControlValueChanged
+        UpdateKeys()
+    End Sub
+
+    Public Sub UpdateKeys()
+        Dim clsGetKeys As New RFunction
+        Dim clsColumnNames As New RFunction
+        Dim lstKeys As GenericVector
+        Dim chrKeyColumns As CharacterVector
+        Dim lviTemp As ListViewItem
+        Dim strKeyColumns As String
+        Dim bCanAutoLink As Boolean
+        Dim strColumnNames As String()
+
+        lvwLinkViewBox.Items.Clear()
+
+        lblKeys.Text = ucrDataSelectorTo.cboAvailableDataFrames.SelectedItem & " keys:"
+        clsGetKeys.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_keys")
+        clsGetKeys.AddParameter("data_name", Chr(34) & ucrDataSelectorTo.cboAvailableDataFrames.SelectedItem & Chr(34))
+        lstKeys = frmMain.clsRLink.RunInternalScriptGetValue(clsGetKeys.ToScript).AsList
+
+        clsColumnNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_names")
+        clsColumnNames.AddParameter("data_name", Chr(34) & ucrDataSelectorFrom.cboAvailableDataFrames.SelectedItem & Chr(34))
+        strColumnNames = frmMain.clsRLink.RunInternalScriptGetValue(clsColumnNames.ToScript).AsCharacter().ToArray
+
+        For i = 0 To lstKeys.Count - 1
+            chrKeyColumns = lstKeys(i).AsCharacter
+            strKeyColumns = String.Join(", ", chrKeyColumns.ToArray)
+            If chrKeyColumns IsNot Nothing Then
+                lviTemp = New ListViewItem({lstKeys.Names(i), strKeyColumns})
+                clsColumnNames.AddParameter("to_columns", "c(" & strKeyColumns & ")")
+                bCanAutoLink = strKeyColumns.All(Function(strCol) strColumnNames.Contains(strCol))
+                If bCanAutoLink Then
+                    lviTemp.ForeColor = Color.Green
+                Else
+                    lviTemp.ForeColor = Color.Red
+                End If
+                lvwLinkViewBox.Items.Add(lviTemp)
+            End If
+        Next
     End Sub
 End Class
