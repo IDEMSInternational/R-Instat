@@ -46,8 +46,12 @@ Public Class dlgPolynomials
         ucrPnlType.AddRadioButton(rdoOrthogonal, "FALSE")
         ucrPnlType.SetRDefault("FALSE")
 
-        'ucrPnlType.AddParameterValuesCondition(rdoSimple, "raw", "TRUE")
-        'ucrPnlType.AddParameterValuesCondition(rdoOrthogonal, "raw", "FALSE")
+        ucrPnlType.AddParameterValuesCondition(rdoOrthogonal, "raw", "FALSE")
+        ucrPnlType.AddParameterValueFunctionNamesCondition(rdoOrthogonal, "x", "scale", False)
+        ucrPnlType.AddParameterValuesCondition(rdoSimple, "raw", "TRUE")
+        ucrPnlType.AddParameterValueFunctionNamesCondition(rdoSimple, "x", "scale", False)
+        ucrPnlType.AddParameterValuesCondition(rdoCentered, "raw", "TRUE")
+        ucrPnlType.AddParameterValueFunctionNamesCondition(rdoCentered, "x", "scale")
 
         ucrNudDegree.SetParameter(New RParameter("degree", 2))
         ucrNudDegree.Minimum = 1
@@ -70,7 +74,11 @@ Public Class dlgPolynomials
         ucrSelectorForPolynomial.Reset()
         ucrSavePoly.Reset()
         clsPolynomial.AddParameter("degree", 2)
+        clsPolynomial.AddParameter("raw", "TRUE")
 
+        clsScale.SetRCommand("scale")
+        clsScale.AddParameter("center", "TRUE")
+        clsScale.AddParameter("scale", "FALSE")
         clsPolynomial.SetRCommand("poly")
         clsPolynomial.SetAssignTo(ucrSavePoly.GetText, strTempDataframe:=ucrSelectorForPolynomial.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSavePoly.GetText, bAssignToIsPrefix:=True)
         ucrBase.clsRsyntax.SetBaseRFunction(clsPolynomial)
@@ -88,13 +96,7 @@ Public Class dlgPolynomials
         ucrNudDegree.SetRCode(clsPolynomial, bReset)
         ucrPnlType.SetRCode(clsPolynomial, bReset)
         ucrSavePoly.SetRCode(clsPolynomial, bReset)
-
-        If (rdoSimple.Checked OrElse rdoOrthogonal.Checked) Then
-            ucrReceiverPolynomial.SetRCode(clsPolynomial, bReset)
-        Else
-
-        End If
-
+        ucrReceiverPolynomial.AddParameterIsRFuncti
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -126,14 +128,10 @@ Public Class dlgPolynomials
 
     Private Sub ucrPnl_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlType.ControlValueChanged
         If rdoCentered.Checked Then
-            clsScale.SetRCommand("scale")
-            clsScale.AddParameter("center", "TRUE")
-            clsScale.AddParameter("scale", "FALSE")
-            ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=clsScale)
             clsScale.AddParameter("x", clsRFunctionParameter:=ucrReceiverPolynomial.GetVariables)
+            ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=clsScale)
         Else
             ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverPolynomial.GetVariables)
-            ucrReceiverPolynomial.SetMeAsReceiver()
         End If
     End Sub
 

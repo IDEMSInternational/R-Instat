@@ -426,6 +426,20 @@ Public Class ucrCore
         AddCondition(objControlState, clsTempCond)
     End Sub
 
+    Public Sub AddParameterValueFunctionNamesCondition(objControlState As Object, strParameterName As String, strFunctionName As String, Optional bNewIsPositive As Boolean = True)
+        Dim clsTempCond As New Condition
+
+        clsTempCond.SetParameterValuesRFunctionNames(strParamName:=strParameterName, strRCodeNames:=strFunctionName, bNewIsPositive:=bNewIsPositive)
+        AddCondition(objControlState, clsTempCond)
+    End Sub
+
+    Public Sub AddParameterValueFunctionNamesCondition(objControlState As Object, strParameterName As String, strFunctionNames As String(), Optional bNewIsPositive As Boolean = True)
+        Dim clsTempCond As New Condition
+
+        clsTempCond.SetParameterValuesRFunctionNames(strParamName:=strParameterName, lstRCodeNames:=strFunctionNames.ToList(), bNewIsPositive:=bNewIsPositive)
+        AddCondition(objControlState, clsTempCond)
+    End Sub
+
     Public Sub SetVisible(bVisible As Boolean)
         If ctrLinkedDisaplyControl IsNot Nothing AndAlso TypeOf ctrLinkedDisaplyControl Is GroupBox Then
             ctrLinkedDisaplyControl.Visible = bVisible
