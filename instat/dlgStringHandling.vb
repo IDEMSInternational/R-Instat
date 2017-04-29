@@ -60,8 +60,8 @@ Public Class dlgStringHandling
         ucrInputReplaceBy.SetParameter(New RParameter("replacement", 2))
 
         'disabling replaceby input text box
-        ucrPnlStringHandling.AddToLinkedControls(ucrInputReplaceBy, {rdoReplace}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
-        ucrPnlStringHandling.AddToLinkedControls(ucrInputReplaceBy, {rdoReplaceAll}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
+        ucrPnlStringHandling.AddToLinkedControls(ucrInputReplaceBy, {rdoReplace, rdoReplaceAll}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputReplaceBy.SetLinkedDisplayControl(lblReplaceBy)
 
         'ucrSave
         ucrSaveStringHandling.SetPrefix("count")
@@ -78,6 +78,7 @@ Public Class dlgStringHandling
         clsLocateFunction = New RFunction
         clsReplaceFunction = New RFunction
         clsReplaceAllFunction = New RFunction
+
 
         ucrSelectorStringHandling.Reset()
         ucrInputPattern.Reset()
@@ -117,6 +118,8 @@ Public Class dlgStringHandling
         ucrInputPattern.AddAdditionalCodeParameterPair(clsReplaceFunction, New RParameter("pattern", 1), iAdditionalPairNo:=4)
         ucrInputPattern.AddAdditionalCodeParameterPair(clsReplaceAllFunction, New RParameter("pattern", 1), iAdditionalPairNo:=5)
 
+        ucrInputReplaceBy.AddAdditionalCodeParameterPair(clsReplaceAllFunction, New RParameter("replacement", 2), iAdditionalPairNo:=1)
+
 
         ucrReceiverStringHandling.SetRCode(clsCountFunction, bReset)
         ucrInputPattern.SetRCode(clsCountFunction, bReset)
@@ -147,7 +150,7 @@ Public Class dlgStringHandling
             ElseIf rdoReplace.Checked Then
                 ucrSaveStringHandling.SetPrefix("replace")
             ElseIf rdoReplaceAll.Checked Then
-                ucrSaveStringHandling.SetPrefix("replace all")
+                ucrSaveStringHandling.SetPrefix("replace_all")
             End If
         End If
         If rdoLocate.Checked Then
