@@ -30,6 +30,7 @@ Partial Class dlgStringHandling
         Me.rdoLocate = New System.Windows.Forms.RadioButton()
         Me.rdoExtract = New System.Windows.Forms.RadioButton()
         Me.rdoDetect = New System.Windows.Forms.RadioButton()
+        Me.rdoReplaceAll = New System.Windows.Forms.RadioButton()
         Me.ucrReceiverStringHandling = New instat.ucrReceiverSingle()
         Me.ucrInputReplaceBy = New instat.ucrInputTextBox()
         Me.ucrSaveStringHandling = New instat.ucrSave()
@@ -73,7 +74,7 @@ Partial Class dlgStringHandling
         Me.rdoCount.FlatAppearance.BorderSize = 2
         Me.rdoCount.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoCount.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoCount.Location = New System.Drawing.Point(58, 12)
+        Me.rdoCount.Location = New System.Drawing.Point(18, 12)
         Me.rdoCount.Name = "rdoCount"
         Me.rdoCount.Size = New System.Drawing.Size(61, 27)
         Me.rdoCount.TabIndex = 1
@@ -90,7 +91,7 @@ Partial Class dlgStringHandling
         Me.rdoReplace.FlatAppearance.BorderSize = 2
         Me.rdoReplace.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoReplace.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoReplace.Location = New System.Drawing.Point(294, 12)
+        Me.rdoReplace.Location = New System.Drawing.Point(254, 12)
         Me.rdoReplace.Name = "rdoReplace"
         Me.rdoReplace.Size = New System.Drawing.Size(61, 27)
         Me.rdoReplace.TabIndex = 5
@@ -106,7 +107,7 @@ Partial Class dlgStringHandling
         Me.rdoLocate.FlatAppearance.BorderSize = 2
         Me.rdoLocate.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoLocate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoLocate.Location = New System.Drawing.Point(235, 12)
+        Me.rdoLocate.Location = New System.Drawing.Point(195, 12)
         Me.rdoLocate.Name = "rdoLocate"
         Me.rdoLocate.Size = New System.Drawing.Size(61, 27)
         Me.rdoLocate.TabIndex = 4
@@ -122,7 +123,7 @@ Partial Class dlgStringHandling
         Me.rdoExtract.FlatAppearance.BorderSize = 2
         Me.rdoExtract.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoExtract.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoExtract.Location = New System.Drawing.Point(176, 12)
+        Me.rdoExtract.Location = New System.Drawing.Point(136, 12)
         Me.rdoExtract.Name = "rdoExtract"
         Me.rdoExtract.Size = New System.Drawing.Size(61, 27)
         Me.rdoExtract.TabIndex = 3
@@ -138,7 +139,7 @@ Partial Class dlgStringHandling
         Me.rdoDetect.FlatAppearance.BorderSize = 2
         Me.rdoDetect.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoDetect.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoDetect.Location = New System.Drawing.Point(117, 12)
+        Me.rdoDetect.Location = New System.Drawing.Point(77, 12)
         Me.rdoDetect.Name = "rdoDetect"
         Me.rdoDetect.Size = New System.Drawing.Size(61, 27)
         Me.rdoDetect.TabIndex = 2
@@ -146,6 +147,21 @@ Partial Class dlgStringHandling
         Me.rdoDetect.Text = "Detect"
         Me.rdoDetect.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoDetect.UseVisualStyleBackColor = True
+        '
+        'rdoReplaceAll
+        '
+        Me.rdoReplaceAll.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoReplaceAll.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoReplaceAll.FlatAppearance.BorderSize = 2
+        Me.rdoReplaceAll.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoReplaceAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoReplaceAll.Location = New System.Drawing.Point(313, 12)
+        Me.rdoReplaceAll.Name = "rdoReplaceAll"
+        Me.rdoReplaceAll.Size = New System.Drawing.Size(85, 27)
+        Me.rdoReplaceAll.TabIndex = 15
+        Me.rdoReplaceAll.TabStop = True
+        Me.rdoReplaceAll.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoReplaceAll.UseVisualStyleBackColor = True
         '
         'ucrReceiverStringHandling
         '
@@ -204,9 +220,9 @@ Partial Class dlgStringHandling
         '
         'ucrPnlStringHandling
         '
-        Me.ucrPnlStringHandling.Location = New System.Drawing.Point(38, 1)
+        Me.ucrPnlStringHandling.Location = New System.Drawing.Point(18, 1)
         Me.ucrPnlStringHandling.Name = "ucrPnlStringHandling"
-        Me.ucrPnlStringHandling.Size = New System.Drawing.Size(338, 51)
+        Me.ucrPnlStringHandling.Size = New System.Drawing.Size(379, 51)
         Me.ucrPnlStringHandling.TabIndex = 0
         '
         'dlgStringHandling
@@ -214,6 +230,7 @@ Partial Class dlgStringHandling
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(417, 323)
+        Me.Controls.Add(Me.rdoReplaceAll)
         Me.Controls.Add(Me.rdoDetect)
         Me.Controls.Add(Me.rdoExtract)
         Me.Controls.Add(Me.rdoLocate)
@@ -255,4 +272,5 @@ Partial Class dlgStringHandling
     Friend WithEvents rdoReplace As RadioButton
     Friend WithEvents rdoCount As RadioButton
     Friend WithEvents ucrPnlStringHandling As UcrPanel
+    Friend WithEvents rdoReplaceAll As RadioButton
 End Class
