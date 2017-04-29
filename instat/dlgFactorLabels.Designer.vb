@@ -61,7 +61,7 @@ Partial Class dlgViewFactorLabels
         Me.grpFactorLabels.Controls.Add(Me.ucrChkAlternateColour)
         Me.grpFactorLabels.Location = New System.Drawing.Point(10, 202)
         Me.grpFactorLabels.Name = "grpFactorLabels"
-        Me.grpFactorLabels.Size = New System.Drawing.Size(462, 104)
+        Me.grpFactorLabels.Size = New System.Drawing.Size(462, 96)
         Me.grpFactorLabels.TabIndex = 3
         Me.grpFactorLabels.TabStop = False
         Me.grpFactorLabels.Text = "View Variable(s) Options"
@@ -69,7 +69,7 @@ Partial Class dlgViewFactorLabels
         'ucrChkShowLabels
         '
         Me.ucrChkShowLabels.Checked = False
-        Me.ucrChkShowLabels.Location = New System.Drawing.Point(308, 17)
+        Me.ucrChkShowLabels.Location = New System.Drawing.Point(154, 71)
         Me.ucrChkShowLabels.Name = "ucrChkShowLabels"
         Me.ucrChkShowLabels.Size = New System.Drawing.Size(148, 20)
         Me.ucrChkShowLabels.TabIndex = 6
@@ -77,7 +77,7 @@ Partial Class dlgViewFactorLabels
         'ucrChkShowPercentage
         '
         Me.ucrChkShowPercentage.Checked = False
-        Me.ucrChkShowPercentage.Location = New System.Drawing.Point(11, 69)
+        Me.ucrChkShowPercentage.Location = New System.Drawing.Point(11, 45)
         Me.ucrChkShowPercentage.Name = "ucrChkShowPercentage"
         Me.ucrChkShowPercentage.Size = New System.Drawing.Size(137, 20)
         Me.ucrChkShowPercentage.TabIndex = 2
@@ -85,7 +85,7 @@ Partial Class dlgViewFactorLabels
         'ucrChkShowId
         '
         Me.ucrChkShowId.Checked = False
-        Me.ucrChkShowId.Location = New System.Drawing.Point(154, 17)
+        Me.ucrChkShowId.Location = New System.Drawing.Point(308, 19)
         Me.ucrChkShowId.Name = "ucrChkShowId"
         Me.ucrChkShowId.Size = New System.Drawing.Size(148, 20)
         Me.ucrChkShowId.TabIndex = 3
@@ -93,7 +93,7 @@ Partial Class dlgViewFactorLabels
         'ucrChkSortByName
         '
         Me.ucrChkSortByName.Checked = False
-        Me.ucrChkSortByName.Location = New System.Drawing.Point(308, 43)
+        Me.ucrChkSortByName.Location = New System.Drawing.Point(308, 45)
         Me.ucrChkSortByName.Name = "ucrChkSortByName"
         Me.ucrChkSortByName.Size = New System.Drawing.Size(148, 20)
         Me.ucrChkSortByName.TabIndex = 7
@@ -101,7 +101,7 @@ Partial Class dlgViewFactorLabels
         'ucrChkShowFrequencies
         '
         Me.ucrChkShowFrequencies.Checked = False
-        Me.ucrChkShowFrequencies.Location = New System.Drawing.Point(11, 43)
+        Me.ucrChkShowFrequencies.Location = New System.Drawing.Point(11, 19)
         Me.ucrChkShowFrequencies.Name = "ucrChkShowFrequencies"
         Me.ucrChkShowFrequencies.Size = New System.Drawing.Size(137, 20)
         Me.ucrChkShowFrequencies.TabIndex = 1
@@ -109,7 +109,7 @@ Partial Class dlgViewFactorLabels
         'ucrChkShowValues
         '
         Me.ucrChkShowValues.Checked = False
-        Me.ucrChkShowValues.Location = New System.Drawing.Point(11, 17)
+        Me.ucrChkShowValues.Location = New System.Drawing.Point(154, 19)
         Me.ucrChkShowValues.Name = "ucrChkShowValues"
         Me.ucrChkShowValues.Size = New System.Drawing.Size(148, 20)
         Me.ucrChkShowValues.TabIndex = 0
@@ -117,7 +117,7 @@ Partial Class dlgViewFactorLabels
         'ucrChkShowMissingValues
         '
         Me.ucrChkShowMissingValues.Checked = False
-        Me.ucrChkShowMissingValues.Location = New System.Drawing.Point(154, 69)
+        Me.ucrChkShowMissingValues.Location = New System.Drawing.Point(11, 71)
         Me.ucrChkShowMissingValues.Name = "ucrChkShowMissingValues"
         Me.ucrChkShowMissingValues.Size = New System.Drawing.Size(148, 20)
         Me.ucrChkShowMissingValues.TabIndex = 5
@@ -125,7 +125,7 @@ Partial Class dlgViewFactorLabels
         'ucrChkShowType
         '
         Me.ucrChkShowType.Checked = False
-        Me.ucrChkShowType.Location = New System.Drawing.Point(154, 43)
+        Me.ucrChkShowType.Location = New System.Drawing.Point(154, 45)
         Me.ucrChkShowType.Name = "ucrChkShowType"
         Me.ucrChkShowType.Size = New System.Drawing.Size(148, 20)
         Me.ucrChkShowType.TabIndex = 4
@@ -133,14 +133,14 @@ Partial Class dlgViewFactorLabels
         'ucrChkAlternateColour
         '
         Me.ucrChkAlternateColour.Checked = False
-        Me.ucrChkAlternateColour.Location = New System.Drawing.Point(308, 69)
+        Me.ucrChkAlternateColour.Location = New System.Drawing.Point(308, 71)
         Me.ucrChkAlternateColour.Name = "ucrChkAlternateColour"
         Me.ucrChkAlternateColour.Size = New System.Drawing.Size(148, 20)
         Me.ucrChkAlternateColour.TabIndex = 8
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 314)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 305)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 4
@@ -170,7 +170,7 @@ Partial Class dlgViewFactorLabels
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(482, 372)
+        Me.ClientSize = New System.Drawing.Size(481, 363)
         Me.Controls.Add(Me.grpFactorLabels)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblFactorColumns)
