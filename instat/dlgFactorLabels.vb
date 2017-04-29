@@ -18,6 +18,8 @@ Imports instat.Translations
 Public Class dlgViewFactorLabels
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private clsViewFunc, clsSelect As RFunction
+
     Private Sub dlgFactorLabels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -33,19 +35,104 @@ Public Class dlgViewFactorLabels
     End Sub
 
     Private Sub InitialiseDialog()
+        'TODO: HElP ID
 
+        ucrReceiverFactorColumns.SetParameter(New RParameter("x", 1))
+        ucrReceiverFactorColumns.SetParameterIsString()
+        ucrReceiverFactorColumns.SetParameterIncludeArgumentName(False)
+        ucrReceiverFactorColumns.bWithQuotes = False
+
+        ucrReceiverFactorColumns.SetIncludedDataTypes({"factor", "ordered"})
+        ucrReceiverFactorColumns.Selector = ucrSelectorViewFactorLabels
+        ucrReceiverFactorColumns.SetMeAsReceiver()
+
+        ucrSelectorViewFactorLabels.SetParameter(New RParameter(".data", 0))
+        ucrSelectorViewFactorLabels.SetParameterIsrfunction()
+
+        ucrChkShowLabels.SetParameter(New RParameter("show.labels", 1))
+        ucrChkShowLabels.SetText("Show Variable Labels")
+        ucrChkShowLabels.SetRDefault("TRUE")
+
+        ucrChkShowType.SetParameter(New RParameter("show.type", 2))
+        ucrChkShowType.SetText("Show Variable Type")
+        ucrChkShowType.SetRDefault("FALSE")
+
+        ucrChkShowValues.SetParameter(New RParameter("show.values", 3))
+        ucrChkShowValues.SetText("Show Variable Values")
+        ucrChkShowValues.SetRDefault("TRUE")
+
+        ucrChkShowMissingValues.SetParameter(New RParameter("show.na", 4))
+        ucrChkShowMissingValues.SetText("Show Missing Values")
+        ucrChkShowMissingValues.SetRDefault("FALSE")
+
+        ucrChkShowId.SetParameter(New RParameter("show.id", 5))
+        ucrChkShowId.SetText("Show ID")
+        ucrChkShowId.SetRDefault("TRUE")
+
+        ucrChkShowPercentage.SetParameter(New RParameter("show.prc", 6))
+        ucrChkShowPercentage.SetText("Add Percentage Column")
+        ucrChkShowPercentage.SetRDefault("FALSE")
+
+        ucrChkShowFrequencies.SetParameter(New RParameter("show.frq", 7))
+        ucrChkShowFrequencies.SetText("Add Frequencies Column")
+        ucrChkShowFrequencies.SetRDefault("FALSE")
+
+        ucrChkAlternateColour.SetParameter(New RParameter("altr.row.col", 8))
+        ucrChkAlternateColour.SetText("Highlight Alternate Rows")
+        ucrChkAlternateColour.SetRDefault("TRUE")
+
+        ucrChkSortByName.SetParameter(New RParameter("sort.by.name", 9))
+        ucrChkSortByName.SetText("Sort by Name")
+        ucrChkSortByName.SetRDefault("FALSE")
     End Sub
 
     Private Sub SetDefaults()
+        clsViewFunc = New RFunction
+        clsSelect = New RFunction
 
+        'Reset
+        ucrSelectorViewFactorLabels.Reset()
+        'Defining the function
+        clsViewFunc.SetPackageName("sjPlot")
+        clsViewFunc.SetRCommand("view_df")
+
+        clsSelect.SetPackageName("dplyr")
+        clsSelect.SetRCommand("select")
+
+        clsViewFunc.AddParameter("x", clsRFunctionParameter:=clsSelect)
+        clsViewFunc.AddParameter("show.id", "FALSE")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsViewFunc)
     End Sub
 
     Private Sub TestOkEnabled()
-
+        If (Not (ucrReceiverFactorColumns.IsEmpty) AndAlso (ucrChkAlternateColour.Checked OrElse ucrChkShowFrequencies.Checked OrElse ucrChkShowId.Checked OrElse ucrChkShowLabels.Checked OrElse ucrChkShowMissingValues.Checked OrElse ucrChkShowPercentage.Checked OrElse ucrChkShowType.Checked OrElse ucrChkShowValues.Checked OrElse ucrChkSortByName.Checked)) Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-
+        ucrChkAlternateColour.SetRCode(clsViewFunc, bReset)
+        ucrChkShowFrequencies.SetRCode(clsViewFunc, bReset)
+        ucrChkShowId.SetRCode(clsViewFunc, bReset)
+        ucrChkShowLabels.SetRCode(clsViewFunc, bReset)
+        ucrChkShowMissingValues.SetRCode(clsViewFunc, bReset)
+        ucrChkSortByName.SetRCode(clsViewFunc, bReset)
+        ucrChkShowPercentage.SetRCode(clsViewFunc, bReset)
+        ucrChkShowType.SetRCode(clsViewFunc, bReset)
+        ucrChkShowValues.SetRCode(clsViewFunc, bReset)
+        ucrReceiverFactorColumns.SetRCode(clsSelect, bReset)
+        ucrSelectorViewFactorLabels.SetRCode(clsSelect, bReset)
     End Sub
 
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrReceiverFactorColumns_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactorColumns.ControlContentsChanged, ucrChkAlternateColour.ControlContentsChanged, ucrChkShowFrequencies.ControlContentsChanged, ucrChkShowId.ControlContentsChanged, ucrChkShowLabels.ControlContentsChanged, ucrChkShowMissingValues.ControlContentsChanged, ucrChkShowPercentage.ControlContentsChanged, ucrChkShowType.ControlContentsChanged, ucrChkShowValues.ControlContentsChanged, ucrChkSortByName.ControlContentsChanged
+        TestOkEnabled()
+    End Sub
 End Class
