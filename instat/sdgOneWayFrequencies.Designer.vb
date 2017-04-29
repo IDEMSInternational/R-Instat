@@ -25,11 +25,12 @@ Partial Class sdgOneWayFrequencies
         Me.tbOneWayFrequencies = New System.Windows.Forms.TabControl()
         Me.tbTable = New System.Windows.Forms.TabPage()
         Me.grpTableOptions = New System.Windows.Forms.GroupBox()
+        Me.lblOmitZero = New System.Windows.Forms.Label()
+        Me.ucrInputOmitZero = New instat.ucrInputComboBox()
         Me.ucrChkCountName = New instat.ucrCheck()
         Me.ucrInputCountsName = New instat.ucrInputTextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ucrNudDecimalPlaces = New instat.ucrNud()
-        Me.ucrChkOmitZero = New instat.ucrCheck()
         Me.ucrChkHighlightedRows = New instat.ucrCheck()
         Me.ucrChkMedian = New instat.ucrCheck()
         Me.ucrChkShowSummary = New instat.ucrCheck()
@@ -82,11 +83,12 @@ Partial Class sdgOneWayFrequencies
         '
         'grpTableOptions
         '
+        Me.grpTableOptions.Controls.Add(Me.lblOmitZero)
+        Me.grpTableOptions.Controls.Add(Me.ucrInputOmitZero)
         Me.grpTableOptions.Controls.Add(Me.ucrChkCountName)
         Me.grpTableOptions.Controls.Add(Me.ucrInputCountsName)
         Me.grpTableOptions.Controls.Add(Me.Label1)
         Me.grpTableOptions.Controls.Add(Me.ucrNudDecimalPlaces)
-        Me.grpTableOptions.Controls.Add(Me.ucrChkOmitZero)
         Me.grpTableOptions.Controls.Add(Me.ucrChkHighlightedRows)
         Me.grpTableOptions.Controls.Add(Me.ucrChkMedian)
         Me.grpTableOptions.Controls.Add(Me.ucrChkShowSummary)
@@ -97,57 +99,68 @@ Partial Class sdgOneWayFrequencies
         Me.grpTableOptions.TabStop = False
         Me.grpTableOptions.Text = "More Options"
         '
+        'lblOmitZero
+        '
+        Me.lblOmitZero.AutoSize = True
+        Me.lblOmitZero.Location = New System.Drawing.Point(9, 121)
+        Me.lblOmitZero.Name = "lblOmitZero"
+        Me.lblOmitZero.Size = New System.Drawing.Size(145, 13)
+        Me.lblOmitZero.TabIndex = 5
+        Me.lblOmitZero.Text = "Omit Zero Counts from Table:"
+        '
+        'ucrInputOmitZero
+        '
+        Me.ucrInputOmitZero.AddQuotesIfUnrecognised = True
+        Me.ucrInputOmitZero.IsReadOnly = False
+        Me.ucrInputOmitZero.Location = New System.Drawing.Point(164, 116)
+        Me.ucrInputOmitZero.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputOmitZero.Name = "ucrInputOmitZero"
+        Me.ucrInputOmitZero.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputOmitZero.TabIndex = 6
+        '
         'ucrChkCountName
         '
         Me.ucrChkCountName.Checked = False
-        Me.ucrChkCountName.Location = New System.Drawing.Point(12, 123)
+        Me.ucrChkCountName.Location = New System.Drawing.Point(12, 93)
         Me.ucrChkCountName.Name = "ucrChkCountName"
         Me.ucrChkCountName.Size = New System.Drawing.Size(94, 20)
-        Me.ucrChkCountName.TabIndex = 4
+        Me.ucrChkCountName.TabIndex = 3
         '
         'ucrInputCountsName
         '
         Me.ucrInputCountsName.AddQuotesIfUnrecognised = True
         Me.ucrInputCountsName.IsMultiline = False
         Me.ucrInputCountsName.IsReadOnly = False
-        Me.ucrInputCountsName.Location = New System.Drawing.Point(112, 122)
+        Me.ucrInputCountsName.Location = New System.Drawing.Point(112, 92)
         Me.ucrInputCountsName.Name = "ucrInputCountsName"
         Me.ucrInputCountsName.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputCountsName.TabIndex = 5
+        Me.ucrInputCountsName.TabIndex = 4
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(10, 153)
+        Me.Label1.Location = New System.Drawing.Point(9, 145)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(161, 13)
-        Me.Label1.TabIndex = 6
+        Me.Label1.TabIndex = 7
         Me.Label1.Text = "Decimal Places for Percentages:"
         '
         'ucrNudDecimalPlaces
         '
         Me.ucrNudDecimalPlaces.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDecimalPlaces.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudDecimalPlaces.Location = New System.Drawing.Point(199, 149)
+        Me.ucrNudDecimalPlaces.Location = New System.Drawing.Point(199, 144)
         Me.ucrNudDecimalPlaces.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudDecimalPlaces.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDecimalPlaces.Name = "ucrNudDecimalPlaces"
         Me.ucrNudDecimalPlaces.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudDecimalPlaces.TabIndex = 7
+        Me.ucrNudDecimalPlaces.TabIndex = 8
         Me.ucrNudDecimalPlaces.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkOmitZero
-        '
-        Me.ucrChkOmitZero.Checked = False
-        Me.ucrChkOmitZero.Location = New System.Drawing.Point(12, 96)
-        Me.ucrChkOmitZero.Name = "ucrChkOmitZero"
-        Me.ucrChkOmitZero.Size = New System.Drawing.Size(262, 20)
-        Me.ucrChkOmitZero.TabIndex = 3
         '
         'ucrChkHighlightedRows
         '
         Me.ucrChkHighlightedRows.Checked = False
-        Me.ucrChkHighlightedRows.Location = New System.Drawing.Point(12, 44)
+        Me.ucrChkHighlightedRows.Location = New System.Drawing.Point(12, 43)
         Me.ucrChkHighlightedRows.Name = "ucrChkHighlightedRows"
         Me.ucrChkHighlightedRows.Size = New System.Drawing.Size(145, 20)
         Me.ucrChkHighlightedRows.TabIndex = 1
@@ -155,7 +168,7 @@ Partial Class sdgOneWayFrequencies
         'ucrChkMedian
         '
         Me.ucrChkMedian.Checked = False
-        Me.ucrChkMedian.Location = New System.Drawing.Point(12, 70)
+        Me.ucrChkMedian.Location = New System.Drawing.Point(12, 68)
         Me.ucrChkMedian.Name = "ucrChkMedian"
         Me.ucrChkMedian.Size = New System.Drawing.Size(145, 20)
         Me.ucrChkMedian.TabIndex = 2
@@ -388,7 +401,6 @@ Partial Class sdgOneWayFrequencies
     Friend WithEvents ucrInputHorizontalLabels As ucrInputComboBox
     Friend WithEvents ucrInputVerticalLabels As ucrInputComboBox
     Friend WithEvents ucrInputGraphTitle As ucrInputTextBox
-    Friend WithEvents ucrChkOmitZero As ucrCheck
     Friend WithEvents ucrNudDecimalPlaces As ucrNud
     Friend WithEvents grpGraphType As GroupBox
     Friend WithEvents ucrPnlGraphType As UcrPanel
@@ -402,4 +414,6 @@ Partial Class sdgOneWayFrequencies
     Friend WithEvents Label1 As Label
     Friend WithEvents ucrInputCountsName As ucrInputTextBox
     Friend WithEvents ucrChkCountName As ucrCheck
+    Friend WithEvents lblOmitZero As Label
+    Friend WithEvents ucrInputOmitZero As ucrInputComboBox
 End Class
