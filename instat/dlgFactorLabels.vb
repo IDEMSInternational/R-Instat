@@ -41,7 +41,6 @@ Public Class dlgViewFactorLabels
         ucrReceiverFactorColumns.SetParameterIsString()
         ucrReceiverFactorColumns.SetParameterIncludeArgumentName(False)
         ucrReceiverFactorColumns.bWithQuotes = False
-
         ucrReceiverFactorColumns.SetIncludedDataTypes({"factor", "ordered"})
         ucrReceiverFactorColumns.Selector = ucrSelectorViewFactorLabels
         ucrReceiverFactorColumns.SetMeAsReceiver()
@@ -70,11 +69,11 @@ Public Class dlgViewFactorLabels
         ucrChkShowId.SetRDefault("TRUE")
 
         ucrChkShowPercentage.SetParameter(New RParameter("show.prc", 6))
-        ucrChkShowPercentage.SetText("Add Percentage Column")
+        ucrChkShowPercentage.SetText("Show Percentages")
         ucrChkShowPercentage.SetRDefault("FALSE")
 
         ucrChkShowFrequencies.SetParameter(New RParameter("show.frq", 7))
-        ucrChkShowFrequencies.SetText("Add Frequencies Column")
+        ucrChkShowFrequencies.SetText("Show Frequencies")
         ucrChkShowFrequencies.SetRDefault("FALSE")
 
         ucrChkAlternateColour.SetParameter(New RParameter("altr.row.col", 8))
