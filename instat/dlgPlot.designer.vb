@@ -139,7 +139,7 @@ Partial Class dlgPlot
         Me.ucrSave.Location = New System.Drawing.Point(13, 281)
         Me.ucrSave.Name = "ucrSave"
         Me.ucrSave.Size = New System.Drawing.Size(280, 24)
-        Me.ucrSave.TabIndex = 11
+        Me.ucrSave.TabIndex = 9
         '
         'ucrChkPoints
         '
@@ -147,7 +147,7 @@ Partial Class dlgPlot
         Me.ucrChkPoints.Location = New System.Drawing.Point(13, 255)
         Me.ucrChkPoints.Name = "ucrChkPoints"
         Me.ucrChkPoints.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkPoints.TabIndex = 12
+        Me.ucrChkPoints.TabIndex = 8
         '
         'dlgPlot
         '
