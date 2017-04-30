@@ -67,7 +67,6 @@ Public Class dlgThreeVariableFrequencies
 
     Private Sub InitialiseDialog()
         ucrReceiverColumnFactor.Selector = ucrSelectorThreeVariableFrequencies
-        ucrReceiverRowFactor.Selector = ucrSelectorThreeVariableFrequencies
         ucrReceiverWeights.Selector = ucrSelectorThreeVariableFrequencies
         ucrReceiverGroups.Selector = ucrSelectorThreeVariableFrequencies
         ucrReceiverRowFactor.SetDataType("factor")
@@ -78,15 +77,16 @@ Public Class dlgThreeVariableFrequencies
         ucrSelectorThreeVariableFrequencies.SetParameter(New RParameter("data", 0))
         ucrSelectorThreeVariableFrequencies.SetParameterIsrfunction()
 
+        ucrReceiverRowFactor.Selector = ucrSelectorThreeVariableFrequencies
         ucrReceiverRowFactor.SetParameter(New RParameter("var.row", 1))
         ucrReceiverRowFactor.SetParameterIsString()
         ucrReceiverRowFactor.bWithQuotes = False
         ucrReceiverRowFactor.SetParameterIncludeArgumentName(False)
+
         ucrReceiverColumnFactor.SetParameter(New RParameter("var.col", 2))
         ucrReceiverColumnFactor.SetParameterIsString()
         ucrReceiverColumnFactor.bWithQuotes = False
         ucrReceiverColumnFactor.SetParameterIncludeArgumentName(False)
-
 
         ucrReceiverWeights.SetParameter(New RParameter("weight.by", 3))
         ucrReceiverWeights.SetParameterIsRFunction()
@@ -117,22 +117,16 @@ Public Class dlgThreeVariableFrequencies
 
         ucrPnlFrequencyDisplay.AddRadioButton(rdoTable)
         ucrPnlFrequencyDisplay.AddRadioButton(rdoGraph)
+        ucrPnlFrequencyDisplay.AddFunctionNamesCondition(rdoTable, "sjtab")
+        ucrPnlFrequencyDisplay.AddFunctionNamesCondition(rdoGraph, "sjplot")
+        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkCount, {rdoTable}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkRow, {rdoTable}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkCell, {rdoTable}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkColumn, {rdoTable}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrPnlFreqType, {rdoGraph}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkWeights.Enabled = False
         cmdOptions.Enabled = False
-
-        ucrPnlFrequencyDisplay.AddFunctionNamesCondition(rdoTable, "sjtab")
-        ucrPnlFrequencyDisplay.AddFunctionNamesCondition(rdoGraph, "sjplot")
-
-        ucrPnlFreqType.AddParameterValuesCondition(rdoCount, "fun", Chr(34) & "grpfrq" & Chr(34))
-        ucrPnlFreqType.AddParameterPresentCondition(rdoCount, "margin", False)
-        ucrPnlFreqType.AddParameterValuesCondition(rdoRow, "fun", Chr(34) & "xtab" & Chr(34))
-        ucrPnlFreqType.AddParameterValuesCondition(rdoRow, "margin", Chr(34) & "row" & Chr(34))
-        ucrPnlFreqType.AddParameterValuesCondition(rdoCell, "fun", Chr(34) & "xtab" & Chr(34))
-        ucrPnlFreqType.AddParameterValuesCondition(rdoCell, "margin", Chr(34) & "cell" & Chr(34))
-        ucrPnlFreqType.AddParameterValuesCondition(rdoColumn, "fun", Chr(34) & "xtab" & Chr(34))
-        ucrPnlFreqType.AddParameterValuesCondition(rdoColumn, "margin", Chr(34) & "col" & Chr(34))
-        'ucrPnlFreqType.bAllowNonConditionValues = True
 
         ucrPnlFreqType.SetParameter(New RParameter("fun", 4))
         ucrPnlFreqType.AddRadioButton(rdoCount, Chr(34) & "grpfrq" & Chr(34))
@@ -140,12 +134,10 @@ Public Class dlgThreeVariableFrequencies
         ucrPnlFreqType.AddRadioButton(rdoColumn, Chr(34) & "xtab" & Chr(34))
         ucrPnlFreqType.AddRadioButton(rdoCell, Chr(34) & "xtab" & Chr(34))
 
-        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkCount, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkRow, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkCell, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkColumn, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrPnlFreqType, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoCount)
-
+        ucrPnlFreqType.AddParameterPresentCondition(rdoCount, "margin", False)
+        ucrPnlFreqType.AddParameterValuesCondition(rdoRow, "margin", Chr(34) & "row" & Chr(34))
+        ucrPnlFreqType.AddParameterValuesCondition(rdoCell, "margin", Chr(34) & "cell" & Chr(34))
+        ucrPnlFreqType.AddParameterValuesCondition(rdoColumn, "margin", Chr(34) & "col" & Chr(34))
     End Sub
 
     Private Sub SetDefaults()
@@ -187,7 +179,7 @@ Public Class dlgThreeVariableFrequencies
 
         clsSjPlot.SetPackageName("sjPlot")
         clsSjPlot.SetRCommand("sjplot")
-        clsSjPlot.AddParameter("fun", "grp")
+        clsSjPlot.AddParameter("fun", Chr(34) & "grpfrq" & Chr(34))
         clsSjPlot.AddParameter("show.prc", "TRUE")
         clsSjPlot.AddParameter("show.n", "TRUE")
         ucrBase.clsRsyntax.SetBaseROperator(clsTableBaseOperator)
