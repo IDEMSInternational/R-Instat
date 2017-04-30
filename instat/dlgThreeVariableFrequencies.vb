@@ -124,15 +124,15 @@ Public Class dlgThreeVariableFrequencies
         ucrPnlFrequencyDisplay.AddFunctionNamesCondition(rdoTable, "sjtab")
         ucrPnlFrequencyDisplay.AddFunctionNamesCondition(rdoGraph, "sjplot")
 
-        ucrPnlFreqType.AddParameterValuesCondition(rdoCount, "fun", "grpfrq")
+        ucrPnlFreqType.AddParameterValuesCondition(rdoCount, "fun", Chr(34) & "grpfrq" & Chr(34))
         ucrPnlFreqType.AddParameterPresentCondition(rdoCount, "margin", False)
-        ucrPnlFreqType.AddParameterValuesCondition(rdoRow, "fun", "xtab")
-        ucrPnlFreqType.AddParameterValuesCondition(rdoRow, "margin", "row")
-        ucrPnlFreqType.AddParameterValuesCondition(rdoCell, "fun", "xtab")
-        ucrPnlFreqType.AddParameterValuesCondition(rdoCell, "margin", "cell")
-        ucrPnlFreqType.AddParameterValuesCondition(rdoColumn, "fun", "xtab")
-        ucrPnlFreqType.AddParameterValuesCondition(rdoColumn, "margin", "col")
-        ucrPnlFreqType.bAllowNonConditionValues = True
+        ucrPnlFreqType.AddParameterValuesCondition(rdoRow, "fun", Chr(34) & "xtab" & Chr(34))
+        ucrPnlFreqType.AddParameterValuesCondition(rdoRow, "margin", Chr(34) & "row" & Chr(34))
+        ucrPnlFreqType.AddParameterValuesCondition(rdoCell, "fun", Chr(34) & "xtab" & Chr(34))
+        ucrPnlFreqType.AddParameterValuesCondition(rdoCell, "margin", Chr(34) & "cell" & Chr(34))
+        ucrPnlFreqType.AddParameterValuesCondition(rdoColumn, "fun", Chr(34) & "xtab" & Chr(34))
+        ucrPnlFreqType.AddParameterValuesCondition(rdoColumn, "margin", Chr(34) & "col" & Chr(34))
+        'ucrPnlFreqType.bAllowNonConditionValues = True
 
         ucrPnlFreqType.SetParameter(New RParameter("fun", 4))
         ucrPnlFreqType.AddRadioButton(rdoCount, Chr(34) & "grpfrq" & Chr(34))
@@ -187,6 +187,7 @@ Public Class dlgThreeVariableFrequencies
 
         clsSjPlot.SetPackageName("sjPlot")
         clsSjPlot.SetRCommand("sjplot")
+        clsSjPlot.AddParameter("fun", "grp")
         clsSjPlot.AddParameter("show.prc", "TRUE")
         clsSjPlot.AddParameter("show.n", "TRUE")
         ucrBase.clsRsyntax.SetBaseROperator(clsTableBaseOperator)
