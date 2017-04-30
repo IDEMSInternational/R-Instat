@@ -3316,7 +3316,7 @@ Partial Class frmMain
         '
         Me.mnuCorruptionDefineCorruptionData.Name = "mnuCorruptionDefineCorruptionData"
         Me.mnuCorruptionDefineCorruptionData.Size = New System.Drawing.Size(248, 22)
-        Me.mnuCorruptionDefineCorruptionData.Text = "Define Corruption Data..."
+        Me.mnuCorruptionDefineCorruptionData.Text = "Define Procurement Data..."
         '
         'mnuCorruptionPrepare
         '
