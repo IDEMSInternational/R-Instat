@@ -118,6 +118,9 @@ Public Class dlgThreeVariableFrequencies
         clsTableBaseOperator = New ROperator
         clsGraphBaseOperator = New ROperator
 
+        ucrSelectorThreeVariableFrequencies.Reset()
+        ucrReceiverRowFactor.SetMeAsReceiver()
+
         clsTableBaseOperator.SetOperation("%>%")
         clsTableBaseOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupBy, iPosition:=1)
         clsTableBaseOperator.AddParameter("select", clsRFunctionParameter:=clsSelect, iPosition:=2)
@@ -137,9 +140,6 @@ Public Class dlgThreeVariableFrequencies
         ucrReceiverGroups.SetParameterIsString()
         ucrReceiverGroups.bWithQuotes = False
         ucrReceiverGroups.SetParameterIncludeArgumentName(False)
-
-        ucrSelectorThreeVariableFrequencies.Reset()
-        ucrReceiverGroups.SetMeAsReceiver()
 
         clsSjTab.SetPackageName("sjPlot")
         clsSjTab.SetRCommand("sjtab")
