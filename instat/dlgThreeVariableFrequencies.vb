@@ -189,7 +189,7 @@ Public Class dlgThreeVariableFrequencies
             If Not ucrChkWeights.Checked Then
                 ucrBase.OKEnabled(True)
             Else
-                If ucrChkWeights.Checked AndAlso Not ucrReceiverWeights.IsEmpty Then
+                If ucrReceiverWeights.IsEmpty Then
                     ucrBase.OKEnabled(True)
                 Else
                     ucrBase.OKEnabled(False)
@@ -242,7 +242,7 @@ Public Class dlgThreeVariableFrequencies
         End If
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnFactor.ControlContentsChanged, ucrReceiverRowFactor.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrChkWeights.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnFactor.ControlContentsChanged, ucrReceiverRowFactor.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrReceiverGroups.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
