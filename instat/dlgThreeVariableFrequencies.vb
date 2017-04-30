@@ -84,7 +84,7 @@ Public Class dlgThreeVariableFrequencies
         ucrChkCell.SetText("Cell (%)")
         ucrChkCell.SetRDefault("FALSE")
 
-        ucrChkWeights.SetText("Weights:")
+        ucrChkWeights.SetText("Weights")
         ucrChkWeights.SetParameter(ucrReceiverWeights.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkWeights.AddToLinkedControls(ucrReceiverWeights, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
