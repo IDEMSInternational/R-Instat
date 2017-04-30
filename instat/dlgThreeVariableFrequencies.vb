@@ -39,30 +39,30 @@ Public Class dlgThreeVariableFrequencies
     Private Sub InitialiseDialog()
         ucrChkWeights.Enabled = False ' temporary for now
 
-        ucrReceiverColumnFactor.Selector = ucrSelectorThreeVariableFrequencies
-        ucrReceiverWeights.Selector = ucrSelectorThreeVariableFrequencies
         ucrReceiverGroups.Selector = ucrSelectorThreeVariableFrequencies
-        ucrReceiverRowFactor.SetDataType("factor")
-        ucrReceiverColumnFactor.SetDataType("factor")
         ucrReceiverGroups.SetDataType("factor")
-        ucrReceiverWeights.SetDataType("numeric")
 
         ucrSelectorThreeVariableFrequencies.SetParameter(New RParameter("data", 0))
         ucrSelectorThreeVariableFrequencies.SetParameterIsrfunction()
 
         ucrReceiverRowFactor.SetParameter(New RParameter("var.row", 1))
         ucrReceiverRowFactor.Selector = ucrSelectorThreeVariableFrequencies
+        ucrReceiverRowFactor.SetDataType("factor")
         ucrReceiverRowFactor.SetParameterIsString()
         ucrReceiverRowFactor.bWithQuotes = False
         ucrReceiverRowFactor.SetParameterIncludeArgumentName(False)
 
         ucrReceiverColumnFactor.SetParameter(New RParameter("var.col", 2))
+        ucrReceiverColumnFactor.Selector = ucrSelectorThreeVariableFrequencies
+        ucrReceiverColumnFactor.SetDataType("factor")
         ucrReceiverColumnFactor.SetParameterIsString()
         ucrReceiverColumnFactor.bWithQuotes = False
         ucrReceiverColumnFactor.SetParameterIncludeArgumentName(False)
 
         ucrReceiverWeights.SetParameter(New RParameter("weight.by", 3))
         ucrReceiverWeights.SetParameterIsRFunction()
+        ucrReceiverWeights.Selector = ucrSelectorThreeVariableFrequencies
+        ucrReceiverWeights.SetDataType("numeric")
 
         ucrChkFlip.SetParameter(New RParameter("coord.flip", 4), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkFlip.SetText("Flip Coordinates")
