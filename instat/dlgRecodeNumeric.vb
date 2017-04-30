@@ -40,12 +40,13 @@ Public Class dlgRecodeNumeric
         ucrReceiverRecode.SetIncludedDataTypes({"numeric"})
         ucrBase.clsRsyntax.SetFunction("cut")
         ucrBase.clsRsyntax.AddParameter("include.lowest", "TRUE")
+        ucrBase.clsRsyntax.AddParameter("dig.lab", "10")
         ucrInputRecode.SetItemsTypeAsColumns()
         ucrInputRecode.SetDefaultTypeAsColumn()
         ucrInputRecode.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
         ucrInputRecode.SetValidationTypeAsRVariable()
         ucrMultipleLabels.SetValidationTypeAsList()
-        ucrMultipleNumericRecode.SetValidationTypeAsNumericList()
+        ucrMultipleNumericRecode.SetValidationTypeAsNumericList(bNewAllowInf:=True)
     End Sub
 
     Private Sub SetDefaults()
