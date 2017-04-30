@@ -17,7 +17,7 @@
 Imports instat.Translations
 Public Class dlgBarAndPieChart
     Private clsRggplotFunction As New RFunction
-    Private clsRgeom_barchart As New RFunction
+    Private clsRgeomPlotFunction As New RFunction
     Private clsRaesFunction As New RFunction
     Private clsBaseOperator As New ROperator
     Private clsTempRFunc As New RFunction
@@ -57,7 +57,7 @@ Public Class dlgBarAndPieChart
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
-        clsBaseOperator.AddParameter("barchart", clsRFunctionParameter:=clsRgeom_barchart)
+        clsBaseOperator.AddParameter("barchart", clsRFunctionParameter:=clsRgeomPlotFunction)
 
         clsRggplotFunction.SetPackageName("ggplot2")
         clsRggplotFunction.SetRCommand("ggplot")
@@ -66,8 +66,8 @@ Public Class dlgBarAndPieChart
         clsRaesFunction.SetPackageName("ggplot2")
         clsRaesFunction.SetRCommand("aes")
 
-        clsRgeom_barchart.SetPackageName("ggplot2")
-        clsRgeom_barchart.SetRCommand("geom_bar")
+        clsRgeomPlotFunction.SetPackageName("ggplot2")
+        clsRgeomPlotFunction.SetRCommand("geom_bar")
 
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
@@ -75,6 +75,8 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub InitialiseDialog()
+        Dim clsCoordFlipFunc As New RFunction
+        Dim clsCoordFlipParam As New RParameter
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
@@ -82,7 +84,6 @@ Public Class dlgBarAndPieChart
 
         ucrBarChartSelector.SetParameter(New RParameter("data"))
         ucrBarChartSelector.SetParameterIsrfunction()
-
 
         ucrFactorReceiver.Selector = ucrBarChartSelector
         ucrFactorReceiver.SetIncludedDataTypes({"factor"})
@@ -96,12 +97,18 @@ Public Class dlgBarAndPieChart
         ucrSecondReceiver.bWithQuotes = False
         ucrSecondReceiver.SetParameterIsString()
 
-
         ucrPnlOptions.AddRadioButton(rdoBarChart)
         ucrPnlOptions.AddRadioButton(rdoPieChart)
         ucrPnlOptions.AddToLinkedControls(ucrChkFlipCoordinates, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrSecondReceiver, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrSecondReceiver.SetLinkedDisplayControl(lblSecondFactor)
+
+        clsCoordFlipFunc.SetPackageName("ggplot2")
+        clsCoordFlipFunc.SetRCommand("coord_flip")
+        clsCoordFlipParam.SetArgumentName("coord_flip")
+        clsCoordFlipParam.SetArgument(clsCoordFlipFunc)
+        ucrChkFlipCoordinates.SetText("Flip Coordinates")
+        ucrChkFlipCoordinates.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
         ucrSaveBar.SetDataFrameSelector(ucrBarChartSelector.ucrAvailableDataFrames)
         ucrSaveBar.SetPrefix("Bar")
@@ -140,14 +147,12 @@ Public Class dlgBarAndPieChart
 
     Private Sub grpSelection_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBarChart.CheckedChanged, rdoPieChart.CheckedChanged
         If rdoBarChart.Checked = True Then
-            ' ucrSaveBar.strPrefix = "Bar"
-            clsRgeom_barchart.RemoveParameterByName("width")
-            ucrBase.clsRsyntax.RemoveOperatorParameter("polar")
-            SetCoordFlip()
+            ucrSaveBar.SetPrefix("Bar")
         ElseIf rdoPieChart.Checked = True Then
-            'ucrSaveBar.strPrefix = "Pie"
+            ucrSaveBar.SetPrefix("Pie")
             clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
-            clsRgeom_barchart.AddParameter("width", "1")
+            clsRgeomPlotFunction.AddParameter("width", "1")
+
             clsTempRFunc.SetRCommand("coord_polar")
             clsTempRFunc.AddParameter("theta", Chr(34) & "y" & Chr(34))
             ucrBase.clsRsyntax.AddOperatorParameter("polar", clsRFunc:=clsTempRFunc)
@@ -165,7 +170,7 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub cmdBarChartOptions_Click(sender As Object, e As EventArgs) Handles cmdBarChartOptions.Click
-        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_barchart, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True, bIgnoreGlobalAes:=False)
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeomPlotFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True, bIgnoreGlobalAes:=False)
         sdgLayerOptions.ShowDialog()
         For Each clsParam In clsRaesFunction.clsParameters
             If clsParam.strArgumentName = "x" Then
@@ -178,7 +183,7 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub cmdPieChartOptions_Click(sender As Object, e As EventArgs) Handles cmdPieChartOptions.Click
-        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_barchart, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True)
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeomPlotFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True)
         sdgLayerOptions.ShowDialog()
         For Each clsParam In clsRaesFunction.clsParameters
             If clsParam.strArgumentName = "x" Then
@@ -192,15 +197,6 @@ Public Class dlgBarAndPieChart
             End If
         Next
         TestOKEnabled()
-    End Sub
-    Public Sub SetCoordFlip()
-        Dim clsTempRFunc As New RFunction
-        If ucrChkFlipCoordinates.Checked Then
-            clsTempRFunc.SetRCommand("coord_flip")
-            ucrBase.clsRsyntax.AddOperatorParameter("coord_flip", clsRFunc:=clsTempRFunc)
-        Else
-            ucrBase.clsRsyntax.RemoveOperatorParameter("coord_flip")
-        End If
     End Sub
     Private Sub AllControlsChanged() Handles ucrSaveBar.ControlContentsChanged, ucrFactorReceiver.ControlContentsChanged
         TestOKEnabled()
