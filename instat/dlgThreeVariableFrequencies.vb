@@ -36,36 +36,9 @@ Public Class dlgThreeVariableFrequencies
         TestOkEnabled()
     End Sub
 
-    Private Sub SetRCodeForControls(bReset As Boolean)
-        Dim clsTempParamOne As RParameter
-
-        clsTempParamOne = New RParameter("x", 3)
-        ucrReceiverGroups.AddAdditionalCodeParameterPair(clsSelect, clsTempParamOne, iAdditionalPairNo:=1)
-        clsTempParamOne.bIncludeArgumentName = False
-
-        ucrSelectorThreeVariableFrequencies.AddAdditionalCodeParameterPair(clsGraphBaseOperator, ucrSelectorThreeVariableFrequencies.GetParameter, iAdditionalPairNo:=1)
-
-        ucrChkFlip.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("coord.flip", 1), iAdditionalPairNo:=1)
-        ucrChkWeights.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("weight.by", 1), iAdditionalPairNo:=1)
-        ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjPlot, ucrChkWeights.GetParameter(), iAdditionalPairNo:=1)
-
-        ucrReceiverRowFactor.SetRCode(clsSelect, bReset)
-        ucrReceiverColumnFactor.SetRCode(clsSelect, bReset)
-        ucrReceiverGroups.SetRCode(clsGroupBy, bReset)
-        ucrReceiverWeights.SetRCode(clsSjTab, bReset)
-        ucrChkWeights.SetRCode(clsSjTab, bReset)
-        ucrChkFlip.SetRCode(clsSjTab, bReset)
-        ucrPnlFreqType.SetRCode(clsSjPlot, bReset)
-        ucrPnlFrequencyDisplay.SetRCode(clsSjTab, bReset)
-        ucrSelectorThreeVariableFrequencies.SetRCode(clsTableBaseOperator, bReset)
-        ucrChkCell.SetRCode(clsSjTab, bReset)
-        ucrChkColumn.SetRCode(clsSjTab, bReset)
-        ucrChkRow.SetRCode(clsSjTab, bReset)
-        ucrChkCount.SetRCode(clsSjTab, bReset)
-
-    End Sub
-
     Private Sub InitialiseDialog()
+        ucrChkWeights.Enabled = False ' temporary for now
+
         ucrReceiverColumnFactor.Selector = ucrSelectorThreeVariableFrequencies
         ucrReceiverWeights.Selector = ucrSelectorThreeVariableFrequencies
         ucrReceiverGroups.Selector = ucrSelectorThreeVariableFrequencies
@@ -77,8 +50,8 @@ Public Class dlgThreeVariableFrequencies
         ucrSelectorThreeVariableFrequencies.SetParameter(New RParameter("data", 0))
         ucrSelectorThreeVariableFrequencies.SetParameterIsrfunction()
 
-        ucrReceiverRowFactor.Selector = ucrSelectorThreeVariableFrequencies
         ucrReceiverRowFactor.SetParameter(New RParameter("var.row", 1))
+        ucrReceiverRowFactor.Selector = ucrSelectorThreeVariableFrequencies
         ucrReceiverRowFactor.SetParameterIsString()
         ucrReceiverRowFactor.bWithQuotes = False
         ucrReceiverRowFactor.SetParameterIncludeArgumentName(False)
@@ -90,6 +63,10 @@ Public Class dlgThreeVariableFrequencies
 
         ucrReceiverWeights.SetParameter(New RParameter("weight.by", 3))
         ucrReceiverWeights.SetParameterIsRFunction()
+
+        ucrChkFlip.SetParameter(New RParameter("coord.flip", 4), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkFlip.SetText("Flip Coordinates")
+        ucrChkFlip.SetRDefault("FALSE")
 
         ucrChkRow.SetParameter(New RParameter("show.row.prc", 5), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkRow.SetText("Row (%)")
@@ -111,10 +88,6 @@ Public Class dlgThreeVariableFrequencies
         ucrChkWeights.SetParameter(ucrReceiverWeights.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkWeights.AddToLinkedControls(ucrReceiverWeights, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChkFlip.SetParameter(New RParameter("coord.flip", 4), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        ucrChkFlip.SetText("Flip Coordinates")
-        ucrChkFlip.SetRDefault("FALSE")
-
         ucrPnlFrequencyDisplay.AddRadioButton(rdoTable)
         ucrPnlFrequencyDisplay.AddRadioButton(rdoGraph)
         ucrPnlFrequencyDisplay.AddFunctionNamesCondition(rdoTable, "sjtab")
@@ -124,8 +97,6 @@ Public Class dlgThreeVariableFrequencies
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkCell, {rdoTable}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkColumn, {rdoTable}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrPnlFreqType, {rdoGraph}, bNewLinkedHideIfParameterMissing:=True)
-
-        ucrChkWeights.Enabled = False
 
         ucrPnlFreqType.SetParameter(New RParameter("fun", 4))
         ucrPnlFreqType.AddRadioButton(rdoCount, Chr(34) & "grpfrq" & Chr(34))
@@ -185,6 +156,66 @@ Public Class dlgThreeVariableFrequencies
         bResetSubdialog = True
     End Sub
 
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        Dim clsTempParamOne As RParameter
+
+        clsTempParamOne = New RParameter("x", 3)
+        ucrReceiverGroups.AddAdditionalCodeParameterPair(clsSelect, clsTempParamOne, iAdditionalPairNo:=1)
+        clsTempParamOne.bIncludeArgumentName = False
+
+        ucrSelectorThreeVariableFrequencies.AddAdditionalCodeParameterPair(clsGraphBaseOperator, ucrSelectorThreeVariableFrequencies.GetParameter, iAdditionalPairNo:=1)
+
+        ucrChkFlip.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("coord.flip", 1), iAdditionalPairNo:=1)
+        ucrChkWeights.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("weight.by", 1), iAdditionalPairNo:=1)
+        ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjPlot, ucrChkWeights.GetParameter(), iAdditionalPairNo:=1)
+
+        ucrReceiverRowFactor.SetRCode(clsSelect, bReset)
+        ucrReceiverColumnFactor.SetRCode(clsSelect, bReset)
+        ucrReceiverGroups.SetRCode(clsGroupBy, bReset)
+        ucrReceiverWeights.SetRCode(clsSjTab, bReset)
+        ucrChkWeights.SetRCode(clsSjTab, bReset)
+        ucrChkFlip.SetRCode(clsSjTab, bReset)
+        ucrPnlFreqType.SetRCode(clsSjPlot, bReset)
+        ucrPnlFrequencyDisplay.SetRCode(clsSjTab, bReset)
+        ucrSelectorThreeVariableFrequencies.SetRCode(clsTableBaseOperator, bReset)
+        ucrChkCell.SetRCode(clsSjTab, bReset)
+        ucrChkColumn.SetRCode(clsSjTab, bReset)
+        ucrChkRow.SetRCode(clsSjTab, bReset)
+        ucrChkCount.SetRCode(clsSjTab, bReset)
+    End Sub
+
+    Private Sub TestOkEnabled()
+        If Not ucrReceiverGroups.IsEmpty() AndAlso Not ucrReceiverRowFactor.IsEmpty() AndAlso Not ucrReceiverColumnFactor.IsEmpty Then
+            If Not ucrChkWeights.Checked Then
+                ucrBase.OKEnabled(True)
+            Else
+                If ucrChkWeights.Checked AndAlso Not ucrReceiverWeights.IsEmpty Then
+                    ucrBase.OKEnabled(True)
+                Else
+                    ucrBase.OKEnabled(False)
+                End If
+            End If
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
+
+    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
+        If rdoTable.Checked Then
+            ucrBase.clsRsyntax.SetBaseROperator(clsTableBaseOperator)
+            ucrBase.clsRsyntax.iCallType = 0
+        ElseIf rdoGraph.Checked Then
+            ucrBase.clsRsyntax.SetBaseROperator(clsGraphBaseOperator)
+            ucrBase.clsRsyntax.iCallType = 3
+        End If
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
+    End Sub
+
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgTwoWayFrequencies.SetRCode(clsSjTab, clsSjPlot, clsGraphBaseOperator, bResetSubdialog, bNewUseTitle:=False)
         bResetSubdialog = False
@@ -211,40 +242,7 @@ Public Class dlgThreeVariableFrequencies
         End If
     End Sub
 
-    Private Sub TestOkEnabled()
-        If Not ucrReceiverGroups.IsEmpty() AndAlso Not ucrReceiverRowFactor.IsEmpty() AndAlso Not ucrReceiverColumnFactor.IsEmpty Then
-            If Not ucrChkWeights.Checked Then
-                ucrBase.OKEnabled(True)
-            Else
-                If ucrChkWeights.Checked AndAlso Not ucrReceiverWeights.IsEmpty Then
-                    ucrBase.OKEnabled(True)
-                Else
-                    ucrBase.OKEnabled(False)
-                End If
-            End If
-        Else
-            ucrBase.OKEnabled(False)
-        End If
-    End Sub
-
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnFactor.ControlContentsChanged, ucrReceiverRowFactor.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrChkWeights.ControlContentsChanged
         TestOkEnabled()
     End Sub
-
-    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        If rdoTable.Checked Then
-            ucrBase.clsRsyntax.SetBaseROperator(clsTableBaseOperator)
-            ucrBase.clsRsyntax.iCallType = 0
-        ElseIf rdoGraph.Checked Then
-            ucrBase.clsRsyntax.SetBaseROperator(clsGraphBaseOperator)
-            ucrBase.clsRsyntax.iCallType = 3
-        End If
-    End Sub
-
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
-        SetRCodeForControls(True)
-        TestOkEnabled()
-    End Sub
-
 End Class
