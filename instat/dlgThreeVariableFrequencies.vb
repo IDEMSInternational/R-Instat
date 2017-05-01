@@ -312,7 +312,7 @@ Public Class dlgThreeVariableFrequencies
         Else
             grpFreqTypeTable.Location = New Point(260, 261)
             grpFreqTypeGraph.Location = New Point(260, 261)
-            Me.Size = New Size(426, 469)
+            Me.Size = New Size(431, 469)
         End If
     End Sub
 End Class
