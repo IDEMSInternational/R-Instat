@@ -39,15 +39,11 @@ Public Class dlgThreeVariableFrequencies
     Private Sub InitialiseDialog()
         ucrChkWeights.Enabled = False ' temporary for now
 
-        ucrReceiverGroups.Selector = ucrSelectorThreeVariableFrequencies
-        ucrReceiverGroups.SetDataType("factor")
-
         ucrSelectorThreeVariableFrequencies.SetParameter(New RParameter("data", 0))
         ucrSelectorThreeVariableFrequencies.SetParameterIsrfunction()
 
         ucrReceiverRowFactor.SetParameter(New RParameter("var.row", 1))
         ucrReceiverRowFactor.Selector = ucrSelectorThreeVariableFrequencies
-        ucrReceiverRowFactor.SetDataType("factor")
         ucrReceiverRowFactor.SetParameterIsString()
         ucrReceiverRowFactor.bWithQuotes = False
         ucrReceiverRowFactor.SetParameterIncludeArgumentName(False)
@@ -58,6 +54,21 @@ Public Class dlgThreeVariableFrequencies
         ucrReceiverColumnFactor.SetParameterIsString()
         ucrReceiverColumnFactor.bWithQuotes = False
         ucrReceiverColumnFactor.SetParameterIncludeArgumentName(False)
+
+
+        ucrReceiverGroupsBy1st.SetParameter(New RParameter("x"))
+        ucrReceiverGroupsBy1st.Selector = ucrSelectorThreeVariableFrequencies
+        ucrReceiverGroupsBy1st.SetDataType("factor")
+        ucrReceiverGroupsBy1st.SetParameterIsString()
+        ucrReceiverGroupsBy1st.bWithQuotes = False
+        ucrReceiverGroupsBy1st.SetParameterIncludeArgumentName(False)
+
+        ucrReceiverGroupBy2nd.SetParameter(New RParameter("y"))
+        ucrReceiverGroupBy2nd.Selector = ucrSelectorThreeVariableFrequencies
+        ucrReceiverGroupBy2nd.SetDataType("factor")
+        ucrReceiverGroupBy2nd.SetParameterIsString()
+        ucrReceiverGroupBy2nd.bWithQuotes = False
+        ucrReceiverGroupBy2nd.SetParameterIncludeArgumentName(False)
 
         ucrReceiverWeights.SetParameter(New RParameter("weight.by", 3))
         ucrReceiverWeights.SetParameterIsRFunction()
@@ -136,11 +147,6 @@ Public Class dlgThreeVariableFrequencies
         clsSelect.SetPackageName("dplyr")
         clsSelect.SetRCommand("select")
 
-        ucrReceiverGroups.SetParameter(New RParameter("x"))
-        ucrReceiverGroups.SetParameterIsString()
-        ucrReceiverGroups.bWithQuotes = False
-        ucrReceiverGroups.SetParameterIncludeArgumentName(False)
-
         clsSjTab.SetPackageName("sjPlot")
         clsSjTab.SetRCommand("sjtab")
         clsSjTab.AddParameter("show.summary", "FALSE")
@@ -158,10 +164,15 @@ Public Class dlgThreeVariableFrequencies
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         Dim clsTempParamOne As RParameter
+        Dim clsTempParamTwo As RParameter
 
         clsTempParamOne = New RParameter("x", 3)
-        ucrReceiverGroups.AddAdditionalCodeParameterPair(clsSelect, clsTempParamOne, iAdditionalPairNo:=1)
+        ucrReceiverGroupsBy1st.AddAdditionalCodeParameterPair(clsSelect, clsTempParamOne, iAdditionalPairNo:=1)
         clsTempParamOne.bIncludeArgumentName = False
+        clsTempParamTwo = New RParameter("y", 4)
+        ucrReceiverGroupBy2nd.AddAdditionalCodeParameterPair(clsSelect, clsTempParamTwo, iAdditionalPairNo:=1)
+        clsTempParamTwo.bIncludeArgumentName = False
+
 
         ucrSelectorThreeVariableFrequencies.AddAdditionalCodeParameterPair(clsGraphBaseOperator, ucrSelectorThreeVariableFrequencies.GetParameter, iAdditionalPairNo:=1)
 
@@ -171,7 +182,8 @@ Public Class dlgThreeVariableFrequencies
 
         ucrReceiverRowFactor.SetRCode(clsSelect, bReset)
         ucrReceiverColumnFactor.SetRCode(clsSelect, bReset)
-        ucrReceiverGroups.SetRCode(clsGroupBy, bReset)
+        ucrReceiverGroupsBy1st.SetRCode(clsGroupBy, bReset)
+        ucrReceiverGroupBy2nd.SetRCode(clsGroupBy, bReset)
         ucrReceiverWeights.SetRCode(clsSjTab, bReset)
         ucrChkWeights.SetRCode(clsSjTab, bReset)
         ucrChkFlip.SetRCode(clsSjTab, bReset)
@@ -185,7 +197,7 @@ Public Class dlgThreeVariableFrequencies
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverGroups.IsEmpty() AndAlso Not ucrReceiverRowFactor.IsEmpty() AndAlso Not ucrReceiverColumnFactor.IsEmpty Then
+        If (Not ucrReceiverGroupsBy1st.IsEmpty() OrElse Not ucrReceiverGroupBy2nd.IsEmpty) AndAlso Not ucrReceiverRowFactor.IsEmpty() AndAlso Not ucrReceiverColumnFactor.IsEmpty Then
             If Not ucrChkWeights.Checked Then
                 ucrBase.OKEnabled(True)
             Else
@@ -242,7 +254,7 @@ Public Class dlgThreeVariableFrequencies
         End If
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnFactor.ControlContentsChanged, ucrReceiverRowFactor.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrReceiverGroups.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnFactor.ControlContentsChanged, ucrReceiverRowFactor.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrReceiverGroupBy2nd.ControlContentsChanged, ucrReceiverGroupsBy1st.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
