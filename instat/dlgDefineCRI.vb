@@ -273,7 +273,7 @@ Public Class dlgDefineCRI
     End Sub
 
     Private Sub ucrSelectorCRI_DataFrameChanged() Handles ucrSelectorCRI.DataFrameChanged
-        lstIndexComponents.Clear() ' sort this
+        lstIndexComponents.Items.Clear()
         clsCalculation.ClearParameters()
         clsDefineFunction.RemoveParameterByName("function_expression")
         clsDefineFunction.RemoveParameterByName("calculated_from")
