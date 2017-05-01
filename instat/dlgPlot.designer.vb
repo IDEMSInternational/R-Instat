@@ -56,7 +56,7 @@ Partial Class dlgPlot
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(10, 199)
+        Me.cmdOptions.Location = New System.Drawing.Point(10, 227)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(119, 23)
         Me.cmdOptions.TabIndex = 6
@@ -66,7 +66,7 @@ Partial Class dlgPlot
         '
         'cmdLineOptions
         '
-        Me.cmdLineOptions.Location = New System.Drawing.Point(10, 228)
+        Me.cmdLineOptions.Location = New System.Drawing.Point(10, 198)
         Me.cmdLineOptions.Name = "cmdLineOptions"
         Me.cmdLineOptions.Size = New System.Drawing.Size(119, 23)
         Me.cmdLineOptions.TabIndex = 7
