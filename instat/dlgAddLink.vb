@@ -14,11 +14,10 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Imports RDotNet
 Public Class dlgAddLink
-    Public bFirstLoad As Boolean = True
+    Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsAddLink As RFunction
 
@@ -38,8 +37,13 @@ Public Class dlgAddLink
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 506
-        ucrDataSelectorTo.SetParameter(New RParameter("data_name", 0))
-        ucrBase.clsRsyntax.iCallType = 2
+        ucrDataSelectorFrom.SetParameter(New RParameter("from_data_frame", 0))
+        ucrDataSelectorFrom.SetParameterIsString()
+        ucrDataSelectorTo.SetParameter(New RParameter("to_data_frame", 0))
+        ucrDataSelectorTo.SetParameterIsString()
+        ucrInputLinkName.SetParameter(New RParameter("link_name", 0))
+        ucrInputSelectedKey.SetParameter(New RParameter("type", 3))
+        ucrInputSelectedKey.AddQuotesIfUnrecognised = True
 
         lvwLinkViewBox.Columns.Add("Name", 80, HorizontalAlignment.Left)
         lvwLinkViewBox.Columns.Add("Columns", 160, HorizontalAlignment.Left)
@@ -47,12 +51,16 @@ Public Class dlgAddLink
     End Sub
 
     Private Sub SetDefaults()
+        clsAddLink = New RFunction
         ucrDataSelectorFrom.Reset()
         ucrDataSelectorTo.Reset()
         UpdateKeys()
+        clsAddLink.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_link")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsAddLink)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ' ucrDataSelectorTo.AddAdditionalCodeParameterPair(clsGetKeys, New RParameter("data_name", 0), iAdditionalPairNo:=1)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
@@ -73,7 +81,6 @@ Public Class dlgAddLink
     End Sub
 
     Public Sub UpdateKeys()
-        Dim clsGetKeys As New RFunction
         Dim clsColumnNames As New RFunction
         Dim lstKeys As GenericVector
         Dim chrKeyColumns As CharacterVector
@@ -81,6 +88,7 @@ Public Class dlgAddLink
         Dim strKeyColumns As String
         Dim bCanAutoLink As Boolean
         Dim strColumnNames As String()
+        Dim clsGetKeys As New RFunction
 
         lvwLinkViewBox.Items.Clear()
 
@@ -99,7 +107,7 @@ Public Class dlgAddLink
             If chrKeyColumns IsNot Nothing Then
                 lviTemp = New ListViewItem({lstKeys.Names(i), strKeyColumns})
                 clsColumnNames.AddParameter("to_columns", "c(" & strKeyColumns & ")")
-                bCanAutoLink = strKeyColumns.All(Function(strCol) strColumnNames.Contains(strCol))
+                bCanAutoLink = chrKeyColumns.ToArray.All(Function(strCol) strColumnNames.Contains(strCol))
                 If bCanAutoLink Then
                     lviTemp.ForeColor = Color.Green
                 Else
@@ -108,5 +116,24 @@ Public Class dlgAddLink
                 lvwLinkViewBox.Items.Add(lviTemp)
             End If
         Next
+    End Sub
+
+    Private Sub lvwLinkViewBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lvwLinkViewBox.SelectedIndexChanged
+        Dim strColNames As String()
+        Dim clsPairs As New RFunction
+
+        clsPairs.SetRCommand("c")
+
+        If lvwLinkViewBox.SelectedIndices.Count = 1 Then
+            strColNames = lvwLinkViewBox.SelectedItems(0).SubItems(1).Text.Split(",")
+            For Each strTemp As String In strColNames
+                clsPairs.AddParameter(strTemp.Trim(" "), Chr(34) & strTemp.Trim(" ") & Chr(34))
+            Next
+            clsAddLink.AddParameter("link_pairs", clsRFunctionParameter:=clsPairs, iPosition:=2)
+            ucrInputSelectedKey.SetName(lvwLinkViewBox.SelectedItems(0).SubItems(0).Text)
+        Else
+            clsAddLink.RemoveParameterByName("link_pairs")
+            ucrInputSelectedKey.SetName("")
+        End If
     End Sub
 End Class
