@@ -302,7 +302,7 @@ Partial Class dlgThreeVariableFrequencies
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 383)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 376)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(403, 52)
         Me.ucrBase.TabIndex = 17
@@ -361,7 +361,7 @@ Partial Class dlgThreeVariableFrequencies
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(514, 437)
+        Me.ClientSize = New System.Drawing.Size(514, 427)
         Me.Controls.Add(Me.rdoBoth)
         Me.Controls.Add(Me.ucrReceiverGroupBy2nd)
         Me.Controls.Add(Me.lblGroupsby)
