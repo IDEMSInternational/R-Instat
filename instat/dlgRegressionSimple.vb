@@ -112,8 +112,10 @@ Public Class dlgRegressionSimple
 
     Private Sub SetTTest()
         clsRTTest.SetRCommand("t.test")
+        clsRTTest.SetPackageName("mosaic")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRTTest)
         clsRTTest.AddParameter("conf.level", nudCI.Value.ToString())
+        clsRTTest.AddParameter("data", clsRFunctionParameter:=ucrSelectorSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame)
         clsRTTest.AddParameter("mu", nudHypothesis.Value.ToString())
         '        If ucrExplanatory.strCurrDataType = "numeric" OrElse ucrExplanatory.strCurrDataType = "integer" Then
         '        clsRTTest.AddParameter("x", clsRFunctionParameter:=ucrResponse.GetVariables())
@@ -133,8 +135,10 @@ Public Class dlgRegressionSimple
 
     Private Sub SetFTest()
         clsRFTest.SetRCommand("var.test")
+        clsRFTest.SetPackageName("stats")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRFTest)
         clsRFTest.AddParameter("conf.level", nudCI.Value.ToString())
+        clsRFTest.AddParameter("data", clsRFunctionParameter:=ucrSelectorSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame)
         clsRFTest.AddParameter("mu", nudHypothesis.Value.ToString())
         clsModel.SetOperation("~")
         clsModel.AddParameter(iPosition:=0, clsRFunctionParameter:=ucrResponse.GetVariables())
