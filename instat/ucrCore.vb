@@ -280,7 +280,7 @@ Public Class ucrCore
                 If bAdd Then
                     lstAllRCodes(i).AddParameter(lstAllRParameters(i))
                 Else
-                    lstAllRCodes(i).RemoveParameter(lstAllRParameters(i))
+                    lstAllRCodes(i).RemoveParameterByName(lstAllRParameters(i).strArgumentName)
                 End If
             End If
         Next
@@ -336,8 +336,8 @@ Public Class ucrCore
         Return bTemp
     End Function
 
-    Public Overridable Function GetParameter() As RParameter
-        Return clsParameter
+    Public Overridable Function GetParameter(Optional iIndex As Integer = 0) As RParameter
+        Return lstAllRParameters(iIndex)
     End Function
 
     Public Overridable Function GetRCode() As RCodeStructure
@@ -465,7 +465,7 @@ Public Class ucrCore
         strValuesToIgnore = strValues
     End Sub
 
-    Public Sub AddAdditionalCodeParameterPair(clsNewRCode As RCodeStructure, clsNewRParameter As RParameter, Optional iAdditionalPairNo As Integer = -1)
+    Public Overridable Sub AddAdditionalCodeParameterPair(clsNewRCode As RCodeStructure, clsNewRParameter As RParameter, Optional iAdditionalPairNo As Integer = -1)
         If iAdditionalPairNo = -1 Then
             iAdditionalPairNo = lstAllRCodes.Count
         End If
@@ -487,7 +487,7 @@ Public Class ucrCore
         Next
     End Sub
 
-    Protected Overridable Sub UpdateParameter(clsTempParam As RParameter)
+    Public Overridable Sub UpdateParameter(clsTempParam As RParameter)
         If GetValueToSet() IsNot Nothing Then
             clsTempParam.SetArgumentValue(GetValueToSet().ToString())
         End If
