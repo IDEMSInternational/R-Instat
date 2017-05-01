@@ -32,21 +32,12 @@ Public Class dlgPlot
         If bReset Then
             SetDefaults()
         End If
-
         SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
         TestOkEnabled()
     End Sub
 
-    Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrLinePlotSelector.SetRCode(clsRggplotFunction, bReset)
-        ucrReceiverX.SetRCode(clsRaesFunction, bReset)
-        ucrVariablesAsFactorForLinePlot.SetRCode(clsRaesFunction, bReset)
-        ucrFactorOptionalReceiver.SetRCode(clsRaesFunction, bReset)
-        ucrSave.SetRCode(clsBaseOperator, bReset)
-        ucrChkPoints.SetRCode(clsBaseOperator, bReset)
-    End Sub
 
     Private Sub InitialiseDialog()
         Dim clsGeomPointFunc As New RFunction
@@ -132,6 +123,15 @@ Public Class dlgPlot
         TestOkEnabled()
     End Sub
 
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        ucrLinePlotSelector.SetRCode(clsRggplotFunction, bReset)
+        ucrReceiverX.SetRCode(clsRaesFunction, bReset)
+        ucrVariablesAsFactorForLinePlot.SetRCode(clsRaesFunction, bReset)
+        ucrFactorOptionalReceiver.SetRCode(clsRaesFunction, bReset)
+        ucrSave.SetRCode(clsBaseOperator, bReset)
+        ucrChkPoints.SetRCode(clsBaseOperator, bReset)
+    End Sub
+
     Private Sub TestOkEnabled()
         'Both x and y aesthetics are mandatory for geom_line. However, when not filled they will be automatically populated by "".
         If Not ucrSave.IsComplete OrElse (ucrReceiverX.IsEmpty AndAlso ucrVariablesAsFactorForLinePlot.IsEmpty) Then
@@ -140,18 +140,10 @@ Public Class dlgPlot
             ucrBase.OKEnabled(True)
         End If
     End Sub
-    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetDataFrame(strNewDataFrame:=ucrLinePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-        sdgPlots.ShowDialog()
-    End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
-    End Sub
-
-    Private Sub UcrVariablesAsFactor_ControlValueChanged() Handles ucrVariablesAsFactorForLinePlot.ControlValueChanged
-        TempOptionsDisabledInMultipleVariablesCase()
     End Sub
 
     Private Sub TempOptionsDisabledInMultipleVariablesCase()
@@ -163,6 +155,11 @@ Public Class dlgPlot
             cmdLineOptions.Enabled = False
             cmdOptions.Enabled = False
         End If
+    End Sub
+
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgPlots.SetDataFrame(strNewDataFrame:=ucrLinePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        sdgPlots.ShowDialog()
     End Sub
 
     Private Sub cmdLineOptions_Click(sender As Object, e As EventArgs) Handles cmdLineOptions.Click
@@ -193,19 +190,11 @@ Public Class dlgPlot
         TestOkEnabled()
     End Sub
 
+    Private Sub UcrVariablesAsFactor_ControlValueChanged() Handles ucrVariablesAsFactorForLinePlot.ControlValueChanged
+        TempOptionsDisabledInMultipleVariablesCase()
+    End Sub
+
     Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrVariablesAsFactorForLinePlot.ControlContentsChanged, ucrSave.ControlContentsChanged
         TestOkEnabled()
-    End Sub
-
-    Private Sub ucrChkPoints_CheckedChanged(ucrChangedControl As ucrCore)
-
-    End Sub
-
-    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForLinePlot.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrReceiverX.ControlContentsChanged
-
-    End Sub
-
-    Private Sub UcrVariablesAsFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForLinePlot.ControlValueChanged
-
     End Sub
 End Class
