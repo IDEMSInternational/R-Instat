@@ -38,7 +38,6 @@ Public Class dlgPlot
         TestOkEnabled()
     End Sub
 
-
     Private Sub InitialiseDialog()
         Dim clsGeomPointFunc As New RFunction
         Dim clsGeomPointParam As New RParameter
@@ -50,24 +49,24 @@ Public Class dlgPlot
         ucrLinePlotSelector.SetParameter(New RParameter("data"))
         ucrLinePlotSelector.SetParameterIsrfunction()
 
+        ucrReceiverX.SetParameter(New RParameter("x"))
         ucrReceiverX.Selector = ucrLinePlotSelector
         ucrReceiverX.SetIncludedDataTypes({"numeric", "factor"})
-        ucrReceiverX.SetParameter(New RParameter("x"))
         ucrReceiverX.bWithQuotes = False
         ucrReceiverX.SetParameterIsString()
         ucrReceiverX.SetValuesToIgnore({Chr(34) & Chr(34)})
         ucrReceiverX.bAddParameterIfEmpty = True
 
+        ucrFactorOptionalReceiver.SetParameter(New RParameter("colour"))
         ucrFactorOptionalReceiver.Selector = ucrLinePlotSelector
         ucrFactorOptionalReceiver.SetIncludedDataTypes({"factor"})
-        ucrFactorOptionalReceiver.SetParameter(New RParameter("colour"))
         ucrFactorOptionalReceiver.bWithQuotes = False
         ucrFactorOptionalReceiver.SetParameterIsString()
 
+        ucrVariablesAsFactorForLinePlot.SetParameter(New RParameter("y"))
         ucrVariablesAsFactorForLinePlot.SetFactorReceiver(ucrFactorOptionalReceiver)
         ucrVariablesAsFactorForLinePlot.Selector = ucrLinePlotSelector
         ucrVariablesAsFactorForLinePlot.SetIncludedDataTypes({"numeric", "factor"})
-        ucrVariablesAsFactorForLinePlot.SetParameter(New RParameter("y"))
         ucrVariablesAsFactorForLinePlot.SetParameterIsString()
         ucrVariablesAsFactorForLinePlot.bWithQuotes = False
         ucrVariablesAsFactorForLinePlot.SetValuesToIgnore({Chr(34) & Chr(34)})
@@ -89,6 +88,7 @@ Public Class dlgPlot
 
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
     End Sub
+
     Private Sub SetDefaults()
         clsRggplotFunction = New RFunction
         clsRgeomlineplotFunction = New RFunction
@@ -113,8 +113,8 @@ Public Class dlgPlot
         clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
         clsRaesFunction.AddParameter("y", Chr(34) & Chr(34))
 
-        clsRgeomlineplotFunction.SetRCommand("geom_line")
         clsRgeomlineplotFunction.SetPackageName("ggplot2")
+        clsRgeomlineplotFunction.SetRCommand("geom_line")
 
         clsBaseOperator.RemoveParameterByName("geom_point")
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrLinePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
