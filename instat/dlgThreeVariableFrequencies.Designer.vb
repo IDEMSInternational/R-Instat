@@ -64,10 +64,10 @@ Partial Class dlgThreeVariableFrequencies
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 389)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 378)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(403, 52)
-        Me.ucrBase.TabIndex = 15
+        Me.ucrBase.TabIndex = 17
         '
         'ucrPnlFrequencyDisplay
         '
@@ -113,7 +113,7 @@ Partial Class dlgThreeVariableFrequencies
         'lblGroupby
         '
         Me.lblGroupby.AutoSize = True
-        Me.lblGroupby.Location = New System.Drawing.Point(260, 178)
+        Me.lblGroupby.Location = New System.Drawing.Point(260, 168)
         Me.lblGroupby.Name = "lblGroupby"
         Me.lblGroupby.Size = New System.Drawing.Size(86, 13)
         Me.lblGroupby.TabIndex = 8
@@ -122,7 +122,7 @@ Partial Class dlgThreeVariableFrequencies
         'lblColumnfactor
         '
         Me.lblColumnfactor.AutoSize = True
-        Me.lblColumnfactor.Location = New System.Drawing.Point(260, 129)
+        Me.lblColumnfactor.Location = New System.Drawing.Point(260, 124)
         Me.lblColumnfactor.Name = "lblColumnfactor"
         Me.lblColumnfactor.Size = New System.Drawing.Size(78, 13)
         Me.lblColumnfactor.TabIndex = 6
@@ -133,14 +133,14 @@ Partial Class dlgThreeVariableFrequencies
         Me.lblRowfactor.AutoSize = True
         Me.lblRowfactor.Location = New System.Drawing.Point(260, 80)
         Me.lblRowfactor.Name = "lblRowfactor"
-        Me.lblRowfactor.Size = New System.Drawing.Size(109, 13)
+        Me.lblRowfactor.Size = New System.Drawing.Size(112, 13)
         Me.lblRowfactor.TabIndex = 4
-        Me.lblRowfactor.Text = "Row Variable(Factor):"
+        Me.lblRowfactor.Text = "Row Variable (Factor):"
         '
         'ucrReceiverColumnFactor
         '
         Me.ucrReceiverColumnFactor.frmParent = Me
-        Me.ucrReceiverColumnFactor.Location = New System.Drawing.Point(260, 144)
+        Me.ucrReceiverColumnFactor.Location = New System.Drawing.Point(260, 139)
         Me.ucrReceiverColumnFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverColumnFactor.Name = "ucrReceiverColumnFactor"
         Me.ucrReceiverColumnFactor.Selector = Nothing
@@ -164,41 +164,41 @@ Partial Class dlgThreeVariableFrequencies
         Me.cmdOptions.Location = New System.Drawing.Point(10, 230)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(83, 23)
-        Me.cmdOptions.TabIndex = 10
+        Me.cmdOptions.TabIndex = 13
         Me.cmdOptions.Text = " Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'ucrChkWeights
         '
         Me.ucrChkWeights.Checked = False
-        Me.ucrChkWeights.Location = New System.Drawing.Point(10, 259)
+        Me.ucrChkWeights.Location = New System.Drawing.Point(10, 261)
         Me.ucrChkWeights.Name = "ucrChkWeights"
         Me.ucrChkWeights.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkWeights.TabIndex = 11
+        Me.ucrChkWeights.TabIndex = 14
         '
         'ucrReceiverWeights
         '
         Me.ucrReceiverWeights.frmParent = Me
-        Me.ucrReceiverWeights.Location = New System.Drawing.Point(113, 259)
+        Me.ucrReceiverWeights.Location = New System.Drawing.Point(113, 261)
         Me.ucrReceiverWeights.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverWeights.Name = "ucrReceiverWeights"
         Me.ucrReceiverWeights.Selector = Nothing
         Me.ucrReceiverWeights.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverWeights.TabIndex = 12
+        Me.ucrReceiverWeights.TabIndex = 15
         Me.ucrReceiverWeights.ucrSelector = Nothing
         '
         'ucrChkFlip
         '
         Me.ucrChkFlip.Checked = False
-        Me.ucrChkFlip.Location = New System.Drawing.Point(10, 285)
+        Me.ucrChkFlip.Location = New System.Drawing.Point(10, 291)
         Me.ucrChkFlip.Name = "ucrChkFlip"
         Me.ucrChkFlip.Size = New System.Drawing.Size(183, 20)
-        Me.ucrChkFlip.TabIndex = 13
+        Me.ucrChkFlip.TabIndex = 16
         '
         'ucrReceiverGroupsBy1st
         '
         Me.ucrReceiverGroupsBy1st.frmParent = Me
-        Me.ucrReceiverGroupsBy1st.Location = New System.Drawing.Point(260, 193)
+        Me.ucrReceiverGroupsBy1st.Location = New System.Drawing.Point(260, 183)
         Me.ucrReceiverGroupsBy1st.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverGroupsBy1st.Name = "ucrReceiverGroupsBy1st"
         Me.ucrReceiverGroupsBy1st.Selector = Nothing
@@ -211,7 +211,7 @@ Partial Class dlgThreeVariableFrequencies
         Me.ucrPnlFreqType.Location = New System.Drawing.Point(6, 19)
         Me.ucrPnlFreqType.Name = "ucrPnlFreqType"
         Me.ucrPnlFreqType.Size = New System.Drawing.Size(103, 89)
-        Me.ucrPnlFreqType.TabIndex = 0
+        Me.ucrPnlFreqType.TabIndex = 3
         '
         'rdoColumn
         '
@@ -219,7 +219,7 @@ Partial Class dlgThreeVariableFrequencies
         Me.rdoColumn.Location = New System.Drawing.Point(10, 65)
         Me.rdoColumn.Name = "rdoColumn"
         Me.rdoColumn.Size = New System.Drawing.Size(77, 17)
-        Me.rdoColumn.TabIndex = 3
+        Me.rdoColumn.TabIndex = 4
         Me.rdoColumn.TabStop = True
         Me.rdoColumn.Text = "Column (%)"
         Me.rdoColumn.UseVisualStyleBackColor = True
@@ -241,7 +241,7 @@ Partial Class dlgThreeVariableFrequencies
         Me.rdoCell.Location = New System.Drawing.Point(10, 88)
         Me.rdoCell.Name = "rdoCell"
         Me.rdoCell.Size = New System.Drawing.Size(59, 17)
-        Me.rdoCell.TabIndex = 4
+        Me.rdoCell.TabIndex = 5
         Me.rdoCell.TabStop = True
         Me.rdoCell.Text = "Cell (%)"
         Me.rdoCell.UseVisualStyleBackColor = True
@@ -268,10 +268,10 @@ Partial Class dlgThreeVariableFrequencies
         Me.grpFreqType.Controls.Add(Me.ucrChkCount)
         Me.grpFreqType.Controls.Add(Me.ucrChkColumn)
         Me.grpFreqType.Controls.Add(Me.ucrChkCell)
-        Me.grpFreqType.Location = New System.Drawing.Point(263, 272)
+        Me.grpFreqType.Location = New System.Drawing.Point(260, 261)
         Me.grpFreqType.Name = "grpFreqType"
         Me.grpFreqType.Size = New System.Drawing.Size(121, 111)
-        Me.grpFreqType.TabIndex = 14
+        Me.grpFreqType.TabIndex = 12
         Me.grpFreqType.TabStop = False
         Me.grpFreqType.Text = "Frequencies"
         '
@@ -310,28 +310,28 @@ Partial Class dlgThreeVariableFrequencies
         'ucrReceiverGroupBy2nd
         '
         Me.ucrReceiverGroupBy2nd.frmParent = Me
-        Me.ucrReceiverGroupBy2nd.Location = New System.Drawing.Point(260, 240)
+        Me.ucrReceiverGroupBy2nd.Location = New System.Drawing.Point(260, 227)
         Me.ucrReceiverGroupBy2nd.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverGroupBy2nd.Name = "ucrReceiverGroupBy2nd"
         Me.ucrReceiverGroupBy2nd.Selector = Nothing
         Me.ucrReceiverGroupBy2nd.Size = New System.Drawing.Size(121, 20)
-        Me.ucrReceiverGroupBy2nd.TabIndex = 17
+        Me.ucrReceiverGroupBy2nd.TabIndex = 11
         Me.ucrReceiverGroupBy2nd.ucrSelector = Nothing
         '
         'lblGroupsby
         '
         Me.lblGroupsby.AutoSize = True
-        Me.lblGroupsby.Location = New System.Drawing.Point(260, 224)
+        Me.lblGroupsby.Location = New System.Drawing.Point(260, 212)
         Me.lblGroupsby.Name = "lblGroupsby"
-        Me.lblGroupsby.Size = New System.Drawing.Size(132, 13)
-        Me.lblGroupsby.TabIndex = 16
-        Me.lblGroupsby.Text = " Grouping Factor(optional):"
+        Me.lblGroupsby.Size = New System.Drawing.Size(134, 13)
+        Me.lblGroupsby.TabIndex = 10
+        Me.lblGroupsby.Text = "Grouping Factor (Optional):"
         '
         'dlgThreeVariableFrequencies
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(414, 443)
+        Me.ClientSize = New System.Drawing.Size(414, 434)
         Me.Controls.Add(Me.ucrReceiverGroupBy2nd)
         Me.Controls.Add(Me.lblGroupsby)
         Me.Controls.Add(Me.grpFreqType)
