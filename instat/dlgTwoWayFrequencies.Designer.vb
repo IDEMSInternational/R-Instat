@@ -56,9 +56,9 @@ Partial Class dlgTwoWayFrequencies
         Me.lblRowFactor.AutoSize = True
         Me.lblRowFactor.Location = New System.Drawing.Point(260, 78)
         Me.lblRowFactor.Name = "lblRowFactor"
-        Me.lblRowFactor.Size = New System.Drawing.Size(65, 13)
+        Me.lblRowFactor.Size = New System.Drawing.Size(109, 13)
         Me.lblRowFactor.TabIndex = 5
-        Me.lblRowFactor.Text = "Row Factor:"
+        Me.lblRowFactor.Text = "Row Variable(Factor):"
         '
         'lblColumnFactor
         '
