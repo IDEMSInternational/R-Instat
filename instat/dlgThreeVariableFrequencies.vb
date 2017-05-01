@@ -164,6 +164,7 @@ Public Class dlgThreeVariableFrequencies
         clsSjPlot.AddParameter("fun", Chr(34) & "grpfrq" & Chr(34))
         clsSjPlot.AddParameter("show.prc", "TRUE")
         clsSjPlot.AddParameter("show.n", "TRUE")
+        clsGraphBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorThreeVariableFrequencies.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsTableBaseOperator)
         bResetSubdialog = True
     End Sub
