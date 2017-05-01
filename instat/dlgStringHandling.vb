@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgStringHandling
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
-    Private clsCountFunction, clsExtractFunction, clsDetectFunction, clsLocateFunction, clsReplaceFunction, clsReplaceAllFunction As New RFunction
+    Private clsCountFunction, clsExtractFunction, clsDetectFunction, clsLocateFunction, clsReplaceFunction, clsReplaceAllFunction, clsFixedFunction As New RFunction
     Private Sub dlgStringHandling_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             InitialiseDialog()
@@ -69,6 +69,9 @@ Public Class dlgStringHandling
         ucrSaveStringHandling.SetDataFrameSelector(ucrSelectorStringHandling.ucrAvailableDataFrames)
         ucrSaveStringHandling.SetIsTextBox()
         ucrSaveStringHandling.SetLabelText("Prefix for New Column:")
+
+        'ucrChk
+        ucrChkIgnoreCase.SetText("Ignore Case")
     End Sub
 
     Private Sub SetDefaults()
@@ -78,6 +81,7 @@ Public Class dlgStringHandling
         clsLocateFunction = New RFunction
         clsReplaceFunction = New RFunction
         clsReplaceAllFunction = New RFunction
+        clsFixedFunction = New RFunction
 
 
         ucrSelectorStringHandling.Reset()
@@ -86,18 +90,29 @@ Public Class dlgStringHandling
         ucrSaveStringHandling.Reset()
         ucrInputReplaceBy.SetName("")
         ucrInputPattern.SetName("")
+        clsFixedFunction.SetRCommand("fixed")
+        clsFixedFunction.AddParameter("pattern")
+        clsFixedFunction.AddParameter("ignore_case")
+
         clsCountFunction.SetPackageName("stringr")
         clsCountFunction.SetRCommand("str_count")
+        clsCountFunction.AddParameter("pattern", clsRFunctionParameter:=clsFixedFunction)
         clsExtractFunction.SetPackageName("stringr")
         clsExtractFunction.SetRCommand("str_extract")
+        clsExtractFunction.AddParameter("pattern", clsRFunctionParameter:=clsFixedFunction)
         clsDetectFunction.SetPackageName("stringr")
         clsDetectFunction.SetRCommand("str_detect")
+        clsDetectFunction.AddParameter("pattern", clsRFunctionParameter:=clsFixedFunction)
         clsLocateFunction.SetPackageName("stringr")
         clsLocateFunction.SetRCommand("str_locate")
+        clsLocateFunction.AddParameter("pattern", clsRFunctionParameter:=clsFixedFunction)
         clsReplaceFunction.SetPackageName("stringr")
         clsReplaceFunction.SetRCommand("str_replace")
+        clsReplaceFunction.AddParameter("pattern", clsRFunctionParameter:=clsFixedFunction)
         clsReplaceAllFunction.SetPackageName("stringr")
         clsReplaceAllFunction.SetRCommand("str_replace_all")
+        clsReplaceAllFunction.AddParameter("pattern", clsRFunctionParameter:=clsFixedFunction)
+
 
         ChangePrefixName()
         clsCountFunction.SetAssignTo(ucrSaveStringHandling.GetText, strTempDataframe:=ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveStringHandling.GetText, bAssignToIsPrefix:=True)
@@ -117,6 +132,8 @@ Public Class dlgStringHandling
         ucrInputPattern.AddAdditionalCodeParameterPair(clsLocateFunction, New RParameter("pattern", 1), iAdditionalPairNo:=3)
         ucrInputPattern.AddAdditionalCodeParameterPair(clsReplaceFunction, New RParameter("pattern", 1), iAdditionalPairNo:=4)
         ucrInputPattern.AddAdditionalCodeParameterPair(clsReplaceAllFunction, New RParameter("pattern", 1), iAdditionalPairNo:=5)
+
+        ucrInputPattern.AddAdditionalCodeParameterPair(clsFixedFunction, New RParameter("pattern", 1), iAdditionalPairNo:=1)
 
         ucrInputReplaceBy.AddAdditionalCodeParameterPair(clsReplaceAllFunction, New RParameter("replacement", 2), iAdditionalPairNo:=1)
 
