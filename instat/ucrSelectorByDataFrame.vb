@@ -137,7 +137,7 @@ Public Class ucrSelectorByDataFrame
         ucrAvailableDataFrames.SetRCode(clsNewCodeStructure, bReset)
     End Sub
 
-    Protected Overrides Sub UpdateParameter(clsTempParam As RParameter)
+    Public Overrides Sub UpdateParameter(clsTempParam As RParameter)
         If bHasOwnParameter Then
             MyBase.UpdateParameter(clsTempParam)
         End If

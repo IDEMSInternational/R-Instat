@@ -527,6 +527,12 @@
     <Compile Include="dlgViewAndRemoveLinks.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgViewGraph.Designer.vb">
+      <DependentUpon>dlgViewGraph.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgViewGraph.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmGraphDisplay.Designer.vb">
       <DependentUpon>frmGraphDisplay.vb</DependentUpon>
     </Compile>
@@ -2968,6 +2974,9 @@
     <EmbeddedResource Include="dlgViewDescriptives.sw-KE.resx">
       <DependentUpon>dlgViewDescriptives.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgViewGraph.resx">
+      <DependentUpon>dlgViewGraph.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgWindrose.fr-FR.resx">
       <DependentUpon>dlgWindrose.vb</DependentUpon>
     </EmbeddedResource>
@@ -4837,7 +4846,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="static\Help\LICENSE" />
-    <Content Include="static\Library\Corruption\wb_ppp_1990-2014_long.dta">
+    <Content Include="static\Library\Procurement\wb_ppp_1990-2014_long.dta">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.3\abind_1.4-5.zip">
@@ -5345,19 +5354,19 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="static\Help\LICENSE" />
-    <Content Include="static\Library\Corruption\wb_ppp_1990-2014_long.dta">
+    <Content Include="static\Library\Procurement\wb_ppp_1990-2014_long.dta">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\Library\Corruption\country_level.csv">
+    <Content Include="static\Library\Procurement\country_level.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\Library\Corruption\country_level.RDS">
+    <Content Include="static\Library\Procurement\country_level.RDS">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\Library\Corruption\WB_raw_and_calculated_df.RDS">
+    <Content Include="static\Library\Procurement\WB_raw_and_calculated_df.RDS">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\Library\Corruption\wb_raw_calc_instat_obj.RDS">
+    <Content Include="static\Library\Procurement\wb_raw_calc_instat_obj.RDS">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.3\whisker_0.3-2.zip">
