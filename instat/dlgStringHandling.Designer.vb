@@ -31,6 +31,7 @@ Partial Class dlgStringHandling
         Me.rdoExtract = New System.Windows.Forms.RadioButton()
         Me.rdoDetect = New System.Windows.Forms.RadioButton()
         Me.rdoReplaceAll = New System.Windows.Forms.RadioButton()
+        Me.ucrChkIgnoreCase = New instat.ucrCheck()
         Me.ucrReceiverStringHandling = New instat.ucrReceiverSingle()
         Me.ucrInputReplaceBy = New instat.ucrInputTextBox()
         Me.ucrSaveStringHandling = New instat.ucrSave()
@@ -43,7 +44,7 @@ Partial Class dlgStringHandling
         'lblColumn
         '
         Me.lblColumn.AutoSize = True
-        Me.lblColumn.Location = New System.Drawing.Point(259, 80)
+        Me.lblColumn.Location = New System.Drawing.Point(256, 73)
         Me.lblColumn.Name = "lblColumn"
         Me.lblColumn.Size = New System.Drawing.Size(45, 13)
         Me.lblColumn.TabIndex = 7
@@ -52,7 +53,7 @@ Partial Class dlgStringHandling
         'lblReplaceBy
         '
         Me.lblReplaceBy.AutoSize = True
-        Me.lblReplaceBy.Location = New System.Drawing.Point(259, 167)
+        Me.lblReplaceBy.Location = New System.Drawing.Point(256, 196)
         Me.lblReplaceBy.Name = "lblReplaceBy"
         Me.lblReplaceBy.Size = New System.Drawing.Size(65, 13)
         Me.lblReplaceBy.TabIndex = 11
@@ -61,7 +62,7 @@ Partial Class dlgStringHandling
         'lblPattern
         '
         Me.lblPattern.AutoSize = True
-        Me.lblPattern.Location = New System.Drawing.Point(259, 123)
+        Me.lblPattern.Location = New System.Drawing.Point(257, 151)
         Me.lblPattern.Name = "lblPattern"
         Me.lblPattern.Size = New System.Drawing.Size(44, 13)
         Me.lblPattern.TabIndex = 9
@@ -164,10 +165,18 @@ Partial Class dlgStringHandling
         Me.rdoReplaceAll.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoReplaceAll.UseVisualStyleBackColor = True
         '
+        'ucrChkIgnoreCase
+        '
+        Me.ucrChkIgnoreCase.Checked = False
+        Me.ucrChkIgnoreCase.Location = New System.Drawing.Point(259, 123)
+        Me.ucrChkIgnoreCase.Name = "ucrChkIgnoreCase"
+        Me.ucrChkIgnoreCase.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkIgnoreCase.TabIndex = 16
+        '
         'ucrReceiverStringHandling
         '
         Me.ucrReceiverStringHandling.frmParent = Me
-        Me.ucrReceiverStringHandling.Location = New System.Drawing.Point(259, 95)
+        Me.ucrReceiverStringHandling.Location = New System.Drawing.Point(259, 87)
         Me.ucrReceiverStringHandling.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverStringHandling.Name = "ucrReceiverStringHandling"
         Me.ucrReceiverStringHandling.Selector = Nothing
@@ -180,7 +189,7 @@ Partial Class dlgStringHandling
         Me.ucrInputReplaceBy.AddQuotesIfUnrecognised = True
         Me.ucrInputReplaceBy.IsMultiline = False
         Me.ucrInputReplaceBy.IsReadOnly = False
-        Me.ucrInputReplaceBy.Location = New System.Drawing.Point(259, 182)
+        Me.ucrInputReplaceBy.Location = New System.Drawing.Point(259, 211)
         Me.ucrInputReplaceBy.Name = "ucrInputReplaceBy"
         Me.ucrInputReplaceBy.Size = New System.Drawing.Size(138, 21)
         Me.ucrInputReplaceBy.TabIndex = 12
@@ -197,7 +206,7 @@ Partial Class dlgStringHandling
         Me.ucrInputPattern.AddQuotesIfUnrecognised = True
         Me.ucrInputPattern.IsMultiline = False
         Me.ucrInputPattern.IsReadOnly = False
-        Me.ucrInputPattern.Location = New System.Drawing.Point(259, 138)
+        Me.ucrInputPattern.Location = New System.Drawing.Point(259, 167)
         Me.ucrInputPattern.Name = "ucrInputPattern"
         Me.ucrInputPattern.Size = New System.Drawing.Size(138, 21)
         Me.ucrInputPattern.TabIndex = 10
@@ -231,6 +240,7 @@ Partial Class dlgStringHandling
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(417, 323)
+        Me.Controls.Add(Me.ucrChkIgnoreCase)
         Me.Controls.Add(Me.rdoReplaceAll)
         Me.Controls.Add(Me.rdoDetect)
         Me.Controls.Add(Me.rdoExtract)
@@ -274,4 +284,5 @@ Partial Class dlgStringHandling
     Friend WithEvents rdoCount As RadioButton
     Friend WithEvents ucrPnlStringHandling As UcrPanel
     Friend WithEvents rdoReplaceAll As RadioButton
+    Friend WithEvents ucrChkIgnoreCase As ucrCheck
 End Class
