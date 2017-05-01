@@ -42,7 +42,6 @@ Public Class dlgTwoWayFrequencies
         ucrReceiverColumnFactor.Selector = ucrSelectorTwoWayFrequencies
         ucrReceiverRowFactor.Selector = ucrSelectorTwoWayFrequencies
         ucrReceiverWeights.Selector = ucrSelectorTwoWayFrequencies
-        ucrReceiverRowFactor.SetDataType("factor")
         ucrReceiverColumnFactor.SetDataType("factor")
         ucrReceiverWeights.SetDataType("numeric")
 
