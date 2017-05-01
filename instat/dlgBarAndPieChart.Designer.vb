@@ -27,14 +27,14 @@ Partial Class dlgBarAndPieChart
         Me.cmdBarChartOptions = New System.Windows.Forms.Button()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.cmdPieChartOptions = New System.Windows.Forms.Button()
+        Me.rdoPieChart = New System.Windows.Forms.RadioButton()
+        Me.rdoBarChart = New System.Windows.Forms.RadioButton()
+        Me.ucrSaveBar = New instat.ucrSave()
+        Me.ucrChkFlipCoordinates = New instat.ucrCheck()
         Me.ucrSecondReceiver = New instat.ucrReceiverSingle()
         Me.ucrFactorReceiver = New instat.ucrReceiverSingle()
         Me.ucrBarChartSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.rdoPieChart = New System.Windows.Forms.RadioButton()
-        Me.rdoBarChart = New System.Windows.Forms.RadioButton()
-        Me.ucrChkFlipCoordinates = New instat.ucrCheck()
-        Me.ucrSaveBar = New instat.ucrSave()
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.SuspendLayout()
         '
@@ -88,6 +88,57 @@ Partial Class dlgBarAndPieChart
         Me.cmdPieChartOptions.Text = "Pie Chart Options"
         Me.cmdPieChartOptions.UseVisualStyleBackColor = True
         '
+        'rdoPieChart
+        '
+        Me.rdoPieChart.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoPieChart.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoPieChart.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoPieChart.FlatAppearance.BorderSize = 2
+        Me.rdoPieChart.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoPieChart.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoPieChart.Location = New System.Drawing.Point(176, 12)
+        Me.rdoPieChart.Name = "rdoPieChart"
+        Me.rdoPieChart.Size = New System.Drawing.Size(100, 28)
+        Me.rdoPieChart.TabIndex = 1
+        Me.rdoPieChart.TabStop = True
+        Me.rdoPieChart.Tag = "Pie_Chart"
+        Me.rdoPieChart.Text = "Pie Chart"
+        Me.rdoPieChart.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoPieChart.UseVisualStyleBackColor = False
+        '
+        'rdoBarChart
+        '
+        Me.rdoBarChart.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoBarChart.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoBarChart.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoBarChart.FlatAppearance.BorderSize = 2
+        Me.rdoBarChart.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoBarChart.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoBarChart.Location = New System.Drawing.Point(78, 12)
+        Me.rdoBarChart.Name = "rdoBarChart"
+        Me.rdoBarChart.Size = New System.Drawing.Size(100, 28)
+        Me.rdoBarChart.TabIndex = 0
+        Me.rdoBarChart.TabStop = True
+        Me.rdoBarChart.Tag = "Bar_Chart"
+        Me.rdoBarChart.Text = "Bar Chart"
+        Me.rdoBarChart.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoBarChart.UseVisualStyleBackColor = False
+        '
+        'ucrSaveBar
+        '
+        Me.ucrSaveBar.Location = New System.Drawing.Point(10, 306)
+        Me.ucrSaveBar.Name = "ucrSaveBar"
+        Me.ucrSaveBar.Size = New System.Drawing.Size(313, 24)
+        Me.ucrSaveBar.TabIndex = 12
+        '
+        'ucrChkFlipCoordinates
+        '
+        Me.ucrChkFlipCoordinates.Checked = False
+        Me.ucrChkFlipCoordinates.Location = New System.Drawing.Point(255, 168)
+        Me.ucrChkFlipCoordinates.Name = "ucrChkFlipCoordinates"
+        Me.ucrChkFlipCoordinates.Size = New System.Drawing.Size(166, 20)
+        Me.ucrChkFlipCoordinates.TabIndex = 11
+        '
         'ucrSecondReceiver
         '
         Me.ucrSecondReceiver.frmParent = Me
@@ -126,57 +177,6 @@ Partial Class dlgBarAndPieChart
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 9
-        '
-        'rdoPieChart
-        '
-        Me.rdoPieChart.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoPieChart.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoPieChart.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoPieChart.FlatAppearance.BorderSize = 2
-        Me.rdoPieChart.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoPieChart.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoPieChart.Location = New System.Drawing.Point(176, 12)
-        Me.rdoPieChart.Name = "rdoPieChart"
-        Me.rdoPieChart.Size = New System.Drawing.Size(100, 28)
-        Me.rdoPieChart.TabIndex = 1
-        Me.rdoPieChart.TabStop = True
-        Me.rdoPieChart.Tag = "Pie_Chart"
-        Me.rdoPieChart.Text = "Pie Chart"
-        Me.rdoPieChart.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoPieChart.UseVisualStyleBackColor = False
-        '
-        'rdoBarChart
-        '
-        Me.rdoBarChart.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoBarChart.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoBarChart.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoBarChart.FlatAppearance.BorderSize = 2
-        Me.rdoBarChart.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoBarChart.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoBarChart.Location = New System.Drawing.Point(78, 12)
-        Me.rdoBarChart.Name = "rdoBarChart"
-        Me.rdoBarChart.Size = New System.Drawing.Size(100, 28)
-        Me.rdoBarChart.TabIndex = 0
-        Me.rdoBarChart.TabStop = True
-        Me.rdoBarChart.Tag = "Bar_Chart"
-        Me.rdoBarChart.Text = "Bar Chart"
-        Me.rdoBarChart.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoBarChart.UseVisualStyleBackColor = False
-        '
-        'ucrChkFlipCoordinates
-        '
-        Me.ucrChkFlipCoordinates.Checked = False
-        Me.ucrChkFlipCoordinates.Location = New System.Drawing.Point(255, 262)
-        Me.ucrChkFlipCoordinates.Name = "ucrChkFlipCoordinates"
-        Me.ucrChkFlipCoordinates.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkFlipCoordinates.TabIndex = 11
-        '
-        'ucrSaveBar
-        '
-        Me.ucrSaveBar.Location = New System.Drawing.Point(10, 306)
-        Me.ucrSaveBar.Name = "ucrSaveBar"
-        Me.ucrSaveBar.Size = New System.Drawing.Size(313, 24)
-        Me.ucrSaveBar.TabIndex = 12
         '
         'ucrPnlOptions
         '

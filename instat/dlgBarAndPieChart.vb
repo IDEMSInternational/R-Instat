@@ -44,6 +44,7 @@ Public Class dlgBarAndPieChart
         ucrChkFlipCoordinates.SetRCode(clsBaseOperator, bReset)
         ucrFactorReceiver.SetRCode(clsRaesFunction, bReset)
         ucrSecondReceiver.SetRCode(clsRaesFunction, bReset)
+        ucrPnlOptions.SetRCode(clsRggplotFunction, bReset)
     End Sub
 
     Private Sub SetDefaults()
@@ -99,6 +100,8 @@ Public Class dlgBarAndPieChart
 
         ucrPnlOptions.AddRadioButton(rdoBarChart)
         ucrPnlOptions.AddRadioButton(rdoPieChart)
+        ucrPnlOptions.AddFunctionNamesCondition(rdoPieChart, "coord_polar")
+
         ucrPnlOptions.AddToLinkedControls(ucrChkFlipCoordinates, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrSecondReceiver, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrSecondReceiver.SetLinkedDisplayControl(lblSecondFactor)
@@ -145,18 +148,18 @@ Public Class dlgBarAndPieChart
         TestOKEnabled()
     End Sub
 
-    Private Sub grpSelection_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBarChart.CheckedChanged, rdoPieChart.CheckedChanged
+    Private Sub grpSelection_CheckedChanged() Handles ucrPnlOptions.ControlValueChanged
         If rdoBarChart.Checked = True Then
             ucrSaveBar.SetPrefix("Bar")
         ElseIf rdoPieChart.Checked = True Then
             ucrSaveBar.SetPrefix("Pie")
+            Dim clsCoordPolarFunc As New RFunction
+            Dim clsCoordPolarParam As New RParameter
+            clsCoordPolarParam.SetArgument(clsCoordPolarFunc)
+            clsCoordPolarFunc.SetRCommand("coord_polar")
             clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
             clsRgeomPlotFunction.AddParameter("width", "1")
-
-            clsTempRFunc.SetRCommand("coord_polar")
-            clsTempRFunc.AddParameter("theta", Chr(34) & "y" & Chr(34))
-            ucrBase.clsRsyntax.AddOperatorParameter("polar", clsRFunc:=clsTempRFunc)
-            ucrBase.clsRsyntax.RemoveOperatorParameter("coord_flip")
+            clsCoordPolarFunc.AddParameter("theta", Chr(34) & "y" & Chr(34))
         End If
         'Warning: need to set second factor first, as in the pie chart case, it erases "fill" parameter (in clsRaesFunction), which is the parameter that takes the value in the first factor receiver.
         SetFactorReceiverParameter()
