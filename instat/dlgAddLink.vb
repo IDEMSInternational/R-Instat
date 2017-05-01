@@ -42,9 +42,6 @@ Public Class dlgAddLink
         ucrDataSelectorTo.SetParameter(New RParameter("to_data_frame", 0))
         ucrDataSelectorTo.SetParameterIsString()
         ucrInputLinkName.SetParameter(New RParameter("link_name", 0))
-        ucrInputSelectedKey.SetParameter(New RParameter("type", 3))
-        ucrInputSelectedKey.AddQuotesIfUnrecognised = True
-
         lvwLinkViewBox.Columns.Add("Name", 80, HorizontalAlignment.Left)
         lvwLinkViewBox.Columns.Add("Columns", 160, HorizontalAlignment.Left)
 
@@ -55,19 +52,16 @@ Public Class dlgAddLink
         ucrDataSelectorFrom.Reset()
         ucrDataSelectorTo.Reset()
         UpdateKeys()
+        clsAddLink.AddParameter("type", Chr(34) & "keyed_link" & Chr(34))
         clsAddLink.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_link")
         ucrBase.clsRsyntax.SetBaseRFunction(clsAddLink)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ' ucrDataSelectorTo.AddAdditionalCodeParameterPair(clsGetKeys, New RParameter("data_name", 0), iAdditionalPairNo:=1)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
-    End Sub
-
-    Private Sub ReopenDialog()
     End Sub
 
     Private Sub ucrBaseReplace_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
