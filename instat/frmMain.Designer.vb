@@ -3316,7 +3316,7 @@ Partial Class frmMain
         '
         Me.mnuCorruptionDefineCorruptionData.Name = "mnuCorruptionDefineCorruptionData"
         Me.mnuCorruptionDefineCorruptionData.Size = New System.Drawing.Size(248, 22)
-        Me.mnuCorruptionDefineCorruptionData.Text = "Define Corruption Data..."
+        Me.mnuCorruptionDefineCorruptionData.Text = "Define Procurement Data..."
         '
         'mnuCorruptionPrepare
         '
@@ -3359,7 +3359,7 @@ Partial Class frmMain
         '
         Me.DefineCorruptionFreeCategoriesToolStripMenuItem.Name = "DefineCorruptionFreeCategoriesToolStripMenuItem"
         Me.DefineCorruptionFreeCategoriesToolStripMenuItem.Size = New System.Drawing.Size(262, 22)
-        Me.DefineCorruptionFreeCategoriesToolStripMenuItem.Text = "Define Corruption Free Categories..."
+        Me.DefineCorruptionFreeCategoriesToolStripMenuItem.Text = "Set Reference Level..."
         '
         'DefineContractValueCategoriesToolStripMenuItem
         '
