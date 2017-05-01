@@ -929,7 +929,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuDescribeSpecificLinePlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificLinePlot.Click
-        dlgPlot.ShowDialog()
+        dlgLinePlot.ShowDialog()
     End Sub
 
     Private Sub mnuDescribeSpecificHistogram_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificHistogram.Click

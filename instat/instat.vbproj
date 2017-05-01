@@ -1602,10 +1602,10 @@
     <Compile Include="dlgOutputforCPT.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgPlot.designer.vb">
-      <DependentUpon>dlgPlot.vb</DependentUpon>
+    <Compile Include="dlgLinePlot.designer.vb">
+      <DependentUpon>dlgLinePlot.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgPlot.vb">
+    <Compile Include="dlgLinePlot.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgPolynomials.Designer.vb">
@@ -3717,14 +3717,14 @@
     <EmbeddedResource Include="dlgOutputforCPT.sw-KE.resx">
       <DependentUpon>dlgOutputforCPT.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgPlot.fr-FR.resx">
-      <DependentUpon>dlgPlot.vb</DependentUpon>
+    <EmbeddedResource Include="dlgLinePlot.fr-FR.resx">
+      <DependentUpon>dlgLinePlot.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgPlot.resx">
-      <DependentUpon>dlgPlot.vb</DependentUpon>
+    <EmbeddedResource Include="dlgLinePlot.resx">
+      <DependentUpon>dlgLinePlot.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgPlot.sw-KE.resx">
-      <DependentUpon>dlgPlot.vb</DependentUpon>
+    <EmbeddedResource Include="dlgLinePlot.sw-KE.resx">
+      <DependentUpon>dlgLinePlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPolynomials.fr-FR.resx">
       <DependentUpon>dlgPolynomials.vb</DependentUpon>
