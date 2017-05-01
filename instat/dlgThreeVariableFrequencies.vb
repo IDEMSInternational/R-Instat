@@ -124,9 +124,7 @@ Public Class dlgThreeVariableFrequencies
         ucrPnlFreqType.AddParameterValuesCondition(rdoCell, "margin", Chr(34) & "cell" & Chr(34))
         ucrPnlFreqType.AddParameterValuesCondition(rdoColumn, "margin", Chr(34) & "col" & Chr(34))
 
-
         ucrChkColumn.SetLinkedDisplayControl(grpFreqTypeTable)
-
     End Sub
 
     Private Sub SetDefaults()
@@ -180,7 +178,6 @@ Public Class dlgThreeVariableFrequencies
         clsTempParamTwo = New RParameter("y", 4)
         ucrReceiverGroupBy2nd.AddAdditionalCodeParameterPair(clsSelect, clsTempParamTwo, iAdditionalPairNo:=1)
         clsTempParamTwo.bIncludeArgumentName = False
-
 
         ucrSelectorThreeVariableFrequencies.AddAdditionalCodeParameterPair(clsGraphBaseOperator, ucrSelectorThreeVariableFrequencies.GetParameter, iAdditionalPairNo:=1)
 
@@ -263,7 +260,8 @@ Public Class dlgThreeVariableFrequencies
         sdgTwoWayFrequencies.ShowDialog()
         TestOkEnabled()
     End Sub
-    Private Sub ucrPnlFrequencyDisplay_controlvaluechanged(ucrChangedControl As ucrCore) Handles ucrChkFlip.ControlValueChanged, ucrPnlFrequencyDisplay.ControlValueChanged
+
+    Private Sub ucrPnlFrequencyDisplay_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFlip.ControlValueChanged, ucrPnlFrequencyDisplay.ControlValueChanged
         Dim clsRowParam As RParameter
         Dim clsColumnParam As RParameter
 
@@ -282,6 +280,7 @@ Public Class dlgThreeVariableFrequencies
         End If
         changelocation()
     End Sub
+
     Private Sub ucrChkFlip_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFlip.ControlValueChanged
         Dim clsRowParam As RParameter
         Dim clsColumnParam As RParameter
