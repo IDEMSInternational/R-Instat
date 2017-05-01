@@ -904,7 +904,19 @@ Public Class frmMain
         dlgSummary.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticOrganiseEventsEndoftheRains_Click(sender As Object, e As EventArgs)
+    Private Sub mnuClimaticOrganiseEventsStartoftheRains_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareEventsStartoftheRains.Click
+        dlgStartofRains.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticOrganiseEventsSpells_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareEventsSpells.Click
+        dlgSpells.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticOrganiseEventsWaterBalance_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareEventsWaterBalance.Click
+        dlgWaterBalance.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticOrganiseEventsEndoftheRains_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareEventsEndoftheRains.Click
         dlgEndofRains.ShowDialog()
     End Sub
 
@@ -1110,6 +1122,18 @@ Public Class frmMain
 
     Private Sub mnuPrepareKeysAndLinksAddKey_Click(sender As Object, e As EventArgs) Handles mnuPrepareKeysAndLinksAddKey.Click
         dlgAddKey.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticPrepareDatesMakeDate_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareDatesMakeDate.Click
+        dlgMakeDate.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticPrepareDatesUseDate_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareDatesUseDate.Click
+        dlgUseDate.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticPrepareInfillMissingDates_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareInfillMissingDates.Click
+        dlgInfill.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticDescribeTemperatures_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeTemperatures.Click
@@ -1335,30 +1359,6 @@ Public Class frmMain
 
     Private Sub mnuDescribeThreeVariableFrequencies_Click(sender As Object, e As EventArgs) Handles mnuDescribeThreeVariableFrequencies.Click
         dlgThreeVariableFrequencies.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimaticDatesMakeDate_Click(sender As Object, e As EventArgs) Handles mnuClimaticDatesMakeDate.Click
-        dlgMakeDate.Show()
-    End Sub
-
-    Private Sub mnuClimaticDatesUseDate_Click(sender As Object, e As EventArgs) Handles mnuClimaticDatesUseDate.Click
-        dlgUseDate.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimaticInfillMissingDates_Click(sender As Object, e As EventArgs) Handles mnuClimaticInfillMissingDates.Click
-        dlgInfill.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimaticPrepareStartoftheRains_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareStartoftheRains.Click
-        dlgStartofRains.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimaticPrepareSpells_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareSpells.Click
-        dlgSpells.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimaticPrepareWaterBalance_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareWaterBalance.Click
-        dlgWaterBalance.ShowDialog()
     End Sub
 
     'Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click
