@@ -101,13 +101,17 @@ Public Class dlgThreeVariableFrequencies
 
         ucrPnlFrequencyDisplay.AddRadioButton(rdoTable)
         ucrPnlFrequencyDisplay.AddRadioButton(rdoGraph)
+        ucrPnlFrequencyDisplay.AddRadioButton(rdoBoth)
+
         ucrPnlFrequencyDisplay.AddFunctionNamesCondition(rdoTable, "sjtab")
         ucrPnlFrequencyDisplay.AddFunctionNamesCondition(rdoGraph, "sjplot")
-        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkCount, {rdoTable}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkRow, {rdoTable}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkCell, {rdoTable}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkColumn, {rdoTable}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrPnlFreqType, {rdoGraph}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkCount, {rdoTable, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkRow, {rdoTable, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkCell, {rdoTable, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkColumn, {rdoTable, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrPnlFreqType, {rdoGraph, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFreqType.SetLinkedDisplayControl(grpFreqTypeGraph)
 
         ucrPnlFreqType.SetParameter(New RParameter("fun", 4))
         ucrPnlFreqType.AddRadioButton(rdoCount, Chr(34) & "grpfrq" & Chr(34))
@@ -119,6 +123,10 @@ Public Class dlgThreeVariableFrequencies
         ucrPnlFreqType.AddParameterValuesCondition(rdoRow, "margin", Chr(34) & "row" & Chr(34))
         ucrPnlFreqType.AddParameterValuesCondition(rdoCell, "margin", Chr(34) & "cell" & Chr(34))
         ucrPnlFreqType.AddParameterValuesCondition(rdoColumn, "margin", Chr(34) & "col" & Chr(34))
+
+
+        ucrChkColumn.SetLinkedDisplayControl(grpFreqTypeTable)
+
     End Sub
 
     Private Sub SetDefaults()
@@ -213,7 +221,7 @@ Public Class dlgThreeVariableFrequencies
     End Sub
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        If rdoTable.Checked Then
+        If rdoTable.Checked OrElse rdoBoth.Checked Then
             ucrBase.clsRsyntax.SetBaseROperator(clsTableBaseOperator)
             ucrBase.clsRsyntax.iCallType = 0
         ElseIf rdoGraph.Checked Then
@@ -228,13 +236,52 @@ Public Class dlgThreeVariableFrequencies
         TestOkEnabled()
     End Sub
 
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        Dim strGraph As String
+        Dim strTempScript As String = ""
+        Dim bIsAssigned As Boolean
+        Dim bToBeAssigned As Boolean
+        Dim strAssignTo As String
+
+        If rdoBoth.Checked Then
+            bIsAssigned = clsGraphBaseOperator.bIsAssigned
+            bToBeAssigned = clsGraphBaseOperator.bToBeAssigned
+            strAssignTo = clsGraphBaseOperator.strAssignTo
+
+            strGraph = clsGraphBaseOperator.ToScript(strTempScript)
+            frmMain.clsRLink.RunScript(strTempScript & strGraph, iCallType:=3)
+
+            clsGraphBaseOperator.bIsAssigned = bIsAssigned
+            clsGraphBaseOperator.bToBeAssigned = bToBeAssigned
+            clsGraphBaseOperator.strAssignTo = strAssignTo
+        End If
+    End Sub
+
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgTwoWayFrequencies.SetRCode(clsSjTab, clsSjPlot, clsGraphBaseOperator, bResetSubdialog, bNewUseTitle:=False)
         bResetSubdialog = False
         sdgTwoWayFrequencies.ShowDialog()
         TestOkEnabled()
     End Sub
+    Private Sub ucrPnlFrequencyDisplay_controlvaluechanged(ucrChangedControl As ucrCore) Handles ucrChkFlip.ControlValueChanged, ucrPnlFrequencyDisplay.ControlValueChanged
+        Dim clsRowParam As RParameter
+        Dim clsColumnParam As RParameter
 
+        clsRowParam = ucrReceiverRowFactor.GetParameter()
+        clsColumnParam = ucrReceiverColumnFactor.GetParameter()
+        If rdoTable.Checked OrElse rdoBoth.Checked Then
+            If ucrChkFlip.Checked Then
+                clsColumnParam.Position = 1
+                clsRowParam.Position = 2
+            Else
+                clsRowParam.Position = 1
+                clsColumnParam.Position = 2
+            End If
+            ucrReceiverRowFactor.SetParameter(clsRowParam)
+            ucrReceiverColumnFactor.SetParameter(clsColumnParam)
+        End If
+        changelocation()
+    End Sub
     Private Sub ucrChkFlip_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFlip.ControlValueChanged
         Dim clsRowParam As RParameter
         Dim clsColumnParam As RParameter
@@ -256,5 +303,17 @@ Public Class dlgThreeVariableFrequencies
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnFactor.ControlContentsChanged, ucrReceiverRowFactor.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrReceiverGroupBy2nd.ControlContentsChanged, ucrReceiverGroupsBy1st.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub changelocation()
+        If rdoBoth.Checked Then
+            grpFreqTypeTable.Location = New Point(260, 261)
+            grpFreqTypeGraph.Location = New Point(384, 261)
+            Me.Size = New Size(525, 469)
+        Else
+            grpFreqTypeTable.Location = New Point(260, 261)
+            grpFreqTypeGraph.Location = New Point(260, 261)
+            Me.Size = New Size(426, 469)
+        End If
     End Sub
 End Class
