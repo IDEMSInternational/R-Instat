@@ -15,115 +15,129 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+
 Public Class dlgPlot
     Private clsRggplotFunction As New RFunction
-    Private clsRgeom_lineplotFunction As New RFunction
+    Private clsRgeomlineplotFunction As New RFunction
     Private clsRaesFunction As New RFunction
-    Public bFirstLoad As Boolean = True
+    Private clsBaseOperator As New ROperator
+    Private bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
 
     Private Sub dlgPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
-
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
-            'SetDefaults
+        End If
+        If bReset Then
             SetDefaults()
-        Else
-            'reopendialog
         End If
 
+        SetRCodeForControls(bReset)
+        bReset = False
+        autoTranslate(Me)
         TestOkEnabled()
     End Sub
 
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrLinePlotSelector.SetRCode(clsRggplotFunction, bReset)
+        ucrReceiverX.SetRCode(clsRaesFunction, bReset)
+        ucrVariablesAsFactorForLinePlot.SetRCode(clsRaesFunction, bReset)
+        ucrFactorOptionalReceiver.SetRCode(clsRaesFunction, bReset)
+        ucrSave.SetRCode(clsBaseOperator, bReset)
+        ucrChkPoints.SetRCode(clsBaseOperator, bReset)
+    End Sub
+
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.SetOperation("+")
-        clsRggplotFunction.SetRCommand("ggplot")
-        clsRaesFunction.SetRCommand("aes")
-        clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
-        ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
+        Dim clsGeomPointFunc As New RFunction
+        Dim clsGeomPointParam As New RParameter
 
-        clsRgeom_lineplotFunction.SetRCommand("geom_line")
-        ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_lineplotFunction)
-
-        ucrBase.clsRsyntax.iCallType = 0
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        ucrBase.clsRsyntax.iCallType = 3
         ucrBase.iHelpTopicID = 434
 
+        ucrLinePlotSelector.SetParameter(New RParameter("data"))
+        ucrLinePlotSelector.SetParameterIsrfunction()
 
         ucrReceiverX.Selector = ucrLinePlotSelector
         ucrReceiverX.SetIncludedDataTypes({"numeric", "factor"})
+        ucrReceiverX.SetParameter(New RParameter("x"))
+        ucrReceiverX.bWithQuotes = False
+        ucrReceiverX.SetParameterIsString()
+        ucrReceiverX.SetValuesToIgnore({Chr(34) & Chr(34)})
+        ucrReceiverX.bAddParameterIfEmpty = True
+
         ucrFactorOptionalReceiver.Selector = ucrLinePlotSelector
         ucrFactorOptionalReceiver.SetIncludedDataTypes({"factor"})
-        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
-
-
+        ucrFactorOptionalReceiver.SetParameter(New RParameter("colour"))
+        ucrFactorOptionalReceiver.bWithQuotes = False
+        ucrFactorOptionalReceiver.SetParameterIsString()
 
         ucrVariablesAsFactorForLinePlot.SetFactorReceiver(ucrFactorOptionalReceiver)
         ucrVariablesAsFactorForLinePlot.Selector = ucrLinePlotSelector
         ucrVariablesAsFactorForLinePlot.SetIncludedDataTypes({"numeric", "factor"})
+        ucrVariablesAsFactorForLinePlot.SetParameter(New RParameter("y"))
+        ucrVariablesAsFactorForLinePlot.SetParameterIsString()
+        ucrVariablesAsFactorForLinePlot.bWithQuotes = False
+        ucrVariablesAsFactorForLinePlot.SetValuesToIgnore({Chr(34) & Chr(34)})
+        ucrVariablesAsFactorForLinePlot.bAddParameterIfEmpty = True
 
-        ucrSaveLinePlot.SetDataFrameSelector(ucrLinePlotSelector.ucrAvailableDataFrames)
-        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        ucrBase.clsRsyntax.iCallType = 3
+        clsGeomPointFunc.SetPackageName("ggplot2")
+        clsGeomPointFunc.SetRCommand("geom_point")
+        clsGeomPointParam.SetArgumentName("geom_point")
+        clsGeomPointParam.SetArgument(clsGeomPointFunc)
+        ucrChkPoints.SetText("Points")
+        ucrChkPoints.SetParameter(clsGeomPointParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
+        ucrSave.SetPrefix("Line")
+        ucrSave.SetIsComboBox()
+        ucrSave.SetSaveTypeAsGraph()
+        ucrSave.SetCheckBoxText("Save Graph")
+        ucrSave.SetDataFrameSelector(ucrLinePlotSelector.ucrAvailableDataFrames)
+        ucrSave.SetAssignToIfUncheckedValue("last_graph")
+
+        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
     End Sub
     Private Sub SetDefaults()
-        clsRaesFunction.ClearParameters()
-        clsRgeom_lineplotFunction.ClearParameters()
-        chkPoints.Checked = False
-        '        ucrLinePlotSelector.Focus()
-        ucrSaveLinePlot.strPrefix = "Line"
-        ucrVariablesAsFactorForLinePlot.SetMeAsReceiver()
+        clsRggplotFunction = New RFunction
+        clsRgeomlineplotFunction = New RFunction
+        clsRaesFunction = New RFunction
+        clsBaseOperator = New ROperator
+
         ucrLinePlotSelector.Reset()
-        ucrSaveLinePlot.Reset()
+        ucrSave.Reset()
+        ucrVariablesAsFactorForLinePlot.SetMeAsReceiver()
         sdgPlots.Reset()
-        SetXParameter()
-        SetYParameter()
+
+        clsBaseOperator.SetOperation("+")
+        clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
+        clsBaseOperator.AddParameter("lineplot", clsRFunctionParameter:=clsRgeomlineplotFunction)
+
+        clsRggplotFunction.SetPackageName("ggplot2")
+        clsRggplotFunction.SetRCommand("ggplot")
+        clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction, iPosition:=1)
+
+        clsRaesFunction.SetPackageName("ggplot2")
+        clsRaesFunction.SetRCommand("aes")
+        clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
+        clsRaesFunction.AddParameter("y", Chr(34) & Chr(34))
+
+        clsRgeomlineplotFunction.SetRCommand("geom_line")
+        clsRgeomlineplotFunction.SetPackageName("ggplot2")
+
+        clsBaseOperator.RemoveParameterByName("geom_point")
+        clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrLinePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
         TempOptionsDisabledInMultipleVariablesCase()
         TestOkEnabled()
     End Sub
 
-
-
-    Private Sub SetXParameter()
-        If Not ucrReceiverX.IsEmpty Then
-            clsRaesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False))
-            ucrFactorOptionalReceiver.SetMeAsReceiver()
-        Else
-            clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
-        End If
-    End Sub
-
-    Private Sub SetYParameter()
-        If Not ucrVariablesAsFactorForLinePlot.IsEmpty Then
-            clsRaesFunction.AddParameter("y", ucrVariablesAsFactorForLinePlot.GetVariableNames(False))
-        Else
-            clsRaesFunction.AddParameter("y", Chr(34) & Chr(34))
-        End If
-    End Sub
     Private Sub TestOkEnabled()
         'Both x and y aesthetics are mandatory for geom_line. However, when not filled they will be automatically populated by "".
-        If (ucrSaveLinePlot.chkSaveGraph.Checked AndAlso ucrSaveLinePlot.ucrInputGraphName.IsEmpty) Then
+        If Not ucrSave.IsComplete OrElse (ucrReceiverX.IsEmpty AndAlso ucrVariablesAsFactorForLinePlot.IsEmpty) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
-        End If
-    End Sub
-
-    Private Sub ucrPlotSelector_DataFrameChanged() Handles ucrLinePlotSelector.DataFrameChanged
-        clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrLinePlotSelector.ucrAvailableDataFrames.clsCurrDataFrame)
-    End Sub
-
-    Private Sub ucrReceiverX_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverX.SelectionChanged
-        SetXParameter()
-        TestOkEnabled()
-    End Sub
-
-    Private Sub ucrFactorOptionalReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactorOptionalReceiver.SelectionChanged
-        If ucrFactorOptionalReceiver.IsEmpty() = False Then
-            clsRaesFunction.AddParameter("colour", ucrFactorOptionalReceiver.GetVariableNames(False))
-        Else
-            clsRaesFunction.RemoveParameterByName("colour")
         End If
     End Sub
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
@@ -133,25 +147,15 @@ Public Class dlgPlot
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(True)
     End Sub
 
-    Private Sub chkPoints_CheckedChanged(sender As Object, e As EventArgs) Handles chkPoints.CheckedChanged
-        Dim clsTempRFunc As New RFunction
-        If chkPoints.Checked = True Then
-            clsTempRFunc.SetRCommand("geom_point")
-            ucrBase.clsRsyntax.AddOperatorParameter("geom_point", clsRFunc:=clsTempRFunc)
-        Else
-            ucrBase.clsRsyntax.RemoveOperatorParameter("geom_point")
-        End If
-    End Sub
-
-    Private Sub UcrVariablesAsFactor_SelectionChanged() Handles ucrVariablesAsFactorForLinePlot.SelectionChanged
-        SetYParameter()
+    Private Sub UcrVariablesAsFactor_ControlValueChanged() Handles ucrVariablesAsFactorForLinePlot.ControlValueChanged
         TempOptionsDisabledInMultipleVariablesCase()
-        TestOkEnabled()
     End Sub
 
     Private Sub TempOptionsDisabledInMultipleVariablesCase()
+        ' Why is this done??
         If ucrVariablesAsFactorForLinePlot.bSingleVariable Then
             cmdLineOptions.Enabled = True
             cmdOptions.Enabled = True
@@ -160,17 +164,9 @@ Public Class dlgPlot
             cmdOptions.Enabled = False
         End If
     End Sub
-    Private Sub ucrSaveLinePlot_GraphNameChanged() Handles ucrSaveLinePlot.GraphNameChanged, ucrSaveLinePlot.SaveGraphCheckedChanged
-        If ucrSaveLinePlot.bSaveGraph Then
-            ucrBase.clsRsyntax.SetAssignTo(ucrSaveLinePlot.strGraphName, strTempDataframe:=ucrLinePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveLinePlot.strGraphName)
-        Else
-            ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrLinePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
-        End If
-        TestOkEnabled()
-    End Sub
 
     Private Sub cmdLineOptions_Click(sender As Object, e As EventArgs) Handles cmdLineOptions.Click
-        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_lineplotFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrLinePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True, bIgnoreGlobalAes:=False)
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeomlineplotFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrLinePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True, bIgnoreGlobalAes:=False)
         sdgLayerOptions.ShowDialog()
         'Coming from the sdgLayerOptions, clsRaesFunction and others has been modified. One then needs to display these modifications on the dlgScatteredPlot.
 
@@ -197,7 +193,19 @@ Public Class dlgPlot
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrSaveLinePlot_ContentsChanged() Handles ucrSaveLinePlot.ContentsChanged
+    Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrVariablesAsFactorForLinePlot.ControlContentsChanged, ucrSave.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrChkPoints_CheckedChanged(ucrChangedControl As ucrCore)
+
+    End Sub
+
+    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForLinePlot.ControlContentsChanged, ucrSave.ControlContentsChanged, ucrReceiverX.ControlContentsChanged
+
+    End Sub
+
+    Private Sub UcrVariablesAsFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForLinePlot.ControlValueChanged
+
     End Sub
 End Class
