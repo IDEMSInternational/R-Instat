@@ -370,7 +370,7 @@ Partial Class sdgTwoWayFrequencies
         Me.MinimizeBox = False
         Me.Name = "sdgTwoWayFrequencies"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Two Way Frequencies Options"
+        Me.Text = "Frequency Table & Graph Options"
         Me.tbTwoWayFrequencies.ResumeLayout(False)
         Me.tbTable.ResumeLayout(False)
         Me.grpTableOptions.ResumeLayout(False)
