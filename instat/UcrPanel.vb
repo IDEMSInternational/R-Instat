@@ -51,7 +51,7 @@ Public Class UcrPanel
         OnControlValueChanged()
     End Sub
 
-    Protected Overrides Sub UpdateParameter(clsTempParam As RParameter)
+    Public Overrides Sub UpdateParameter(clsTempParam As RParameter)
         Dim strNewValue As String = ""
         Dim rdoTemp As RadioButton
 
