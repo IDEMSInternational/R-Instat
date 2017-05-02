@@ -2213,12 +2213,13 @@ instat_object$set("public","define_corruption_outputs", function(data_name, outp
 )
 
 data_object$set("public","define_corruption_outputs", function(output_columns = c()) {
+  all_cols <- self$get_column_names()
   if(!self$is_metadata(corruption_data_label)) {
     stop("Cannot define corruption outputs when data frame is not defined as corruption data.")
   }
   self$append_to_variables_metadata(output_columns, corruption_output_label, TRUE)
   self$append_to_variables_metadata(output_columns, corruption_index_label, TRUE)
-  other_cols <- self$get_column_names()[!self$get_column_names() %in% output_columns]
+  other_cols <- setdiff(all_cols, output_columns)
   self$append_to_variables_metadata(other_cols, corruption_output_label, FALSE)
 }
 )
