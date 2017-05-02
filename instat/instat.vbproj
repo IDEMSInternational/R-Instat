@@ -269,6 +269,12 @@
     <Compile Include="dlgEnter.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgExportGraphAsImage.Designer.vb">
+      <DependentUpon>dlgExportGraphAsImage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExportGraphAsImage.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgExportToCPT.Designer.vb">
       <DependentUpon>dlgExportToCPT.vb</DependentUpon>
     </Compile>
@@ -285,6 +291,12 @@
       <DependentUpon>dlgCorruptionFile.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgCorruptionFile.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgFactorLabels.Designer.vb">
+      <DependentUpon>dlgFactorLabels.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgFactorLabels.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgFitCorruptionModel.Designer.vb">
@@ -455,6 +467,12 @@
     <Compile Include="dlgStandardiseCountryNames.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgStringDistance.Designer.vb">
+      <DependentUpon>dlgStringDistance.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgStringDistance.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgStringHandling.Designer.vb">
       <DependentUpon>dlgStringHandling.vb</DependentUpon>
     </Compile>
@@ -471,6 +489,12 @@
       <DependentUpon>dlgTemperature.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgTemperature.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgThreeVariableFrequencies.Designer.vb">
+      <DependentUpon>dlgThreeVariableFrequencies.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgThreeVariableFrequencies.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgTwoVariableUseModel.Designer.vb">
@@ -501,6 +525,12 @@
       <DependentUpon>dlgViewAndRemoveLinks.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgViewAndRemoveLinks.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgViewGraph.Designer.vb">
+      <DependentUpon>dlgViewGraph.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgViewGraph.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmGraphDisplay.Designer.vb">
@@ -2419,6 +2449,9 @@
     <EmbeddedResource Include="dlgExportDataset.sw-KE.resx">
       <DependentUpon>dlgExportDataset.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportGraphAsImage.resx">
+      <DependentUpon>dlgExportGraphAsImage.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgExportToCPT.resx">
       <DependentUpon>dlgExportToCPT.vb</DependentUpon>
     </EmbeddedResource>
@@ -2427,6 +2460,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCorruptionFile.resx">
       <DependentUpon>dlgCorruptionFile.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgFactorLabels.resx">
+      <DependentUpon>dlgFactorLabels.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFitCorruptionModel.resx">
       <DependentUpon>dlgFitCorruptionModel.vb</DependentUpon>
@@ -2818,6 +2854,9 @@
     <EmbeddedResource Include="dlgStandardiseCountryNames.resx">
       <DependentUpon>dlgStandardiseCountryNames.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgStringDistance.resx">
+      <DependentUpon>dlgStringDistance.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgStringHandling.resx">
       <DependentUpon>dlgStringHandling.vb</DependentUpon>
     </EmbeddedResource>
@@ -2853,6 +2892,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgThemes.sw-KE.resx">
       <DependentUpon>dlgThemes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgThreeVariableFrequencies.resx">
+      <DependentUpon>dlgThreeVariableFrequencies.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTransformText.fr-FR.resx">
       <DependentUpon>dlgTransformText.vb</DependentUpon>
@@ -2931,6 +2973,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgViewDescriptives.sw-KE.resx">
       <DependentUpon>dlgViewDescriptives.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgViewGraph.resx">
+      <DependentUpon>dlgViewGraph.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgWindrose.fr-FR.resx">
       <DependentUpon>dlgWindrose.vb</DependentUpon>
@@ -4801,7 +4846,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="static\Help\LICENSE" />
-    <Content Include="static\Library\Corruption\wb_ppp_1990-2014_long.dta">
+    <Content Include="static\Library\Procurement\wb_ppp_1990-2014_long.dta">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.3\abind_1.4-5.zip">
@@ -5309,19 +5354,19 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="static\Help\LICENSE" />
-    <Content Include="static\Library\Corruption\wb_ppp_1990-2014_long.dta">
+    <Content Include="static\Library\Procurement\wb_ppp_1990-2014_long.dta">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\Library\Corruption\country_level.csv">
+    <Content Include="static\Library\Procurement\country_level.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\Library\Corruption\country_level.RDS">
+    <Content Include="static\Library\Procurement\country_level.RDS">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\Library\Corruption\WB_raw_and_calculated_df.RDS">
+    <Content Include="static\Library\Procurement\WB_raw_and_calculated_df.RDS">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\Library\Corruption\wb_raw_calc_instat_obj.RDS">
+    <Content Include="static\Library\Procurement\wb_raw_calc_instat_obj.RDS">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.3\whisker_0.3-2.zip">
