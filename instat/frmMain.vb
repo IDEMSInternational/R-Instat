@@ -1157,7 +1157,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuCimaticPrepareTransform_Click(sender As Object, e As EventArgs) Handles mnuCimaticPrepareTransform.Click
-        dlgTransform.ShowDialog()
+        dlgTransformClimatic.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticModelsExtremes_Click(sender As Object, e As EventArgs) Handles mnuClimaticModelsExtremes.Click
