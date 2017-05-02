@@ -1361,6 +1361,14 @@ Public Class frmMain
         dlgThreeVariableFrequencies.ShowDialog()
     End Sub
 
+    Private Sub ExportGraphToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeExportGraph.Click
+        dlgExportGraphAsImage.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeViewGraph_Click(sender As Object, e As EventArgs) Handles mnuDescribeViewGraph.Click
+        dlgViewGraph.ShowDialog()
+    End Sub
+
     'Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click
     '    'TEST temporary 
     '    'TESTING TO BE ERASED !!!!!!!
