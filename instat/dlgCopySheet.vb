@@ -13,16 +13,18 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 Public Class dlgCopySheet
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsCopySheet As New RFunction
-    Private Sub dlgCopySheet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
+    Private Sub dlgCopySheet_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
+        Else
+            ReopenDialogue()
         End If
         If bReset Then
             SetDefaults()
@@ -30,6 +32,12 @@ Public Class dlgCopySheet
         SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ReopenDialogue()
+        'Reseting ucrDataFrame to ensure that it displays the current data frame on the grid 
+        ucrDataFrameCopySheets.Reset()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -81,7 +89,7 @@ Public Class dlgCopySheet
         End If
     End Sub
 
-    Private Sub ucrInputNewName_ContentsChanged() Handles ucrDataFrameCopySheets.ControlContentsChanged, ucrNewDataFrameName.ControlContentsChanged
+    Private Sub Control_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameCopySheets.ControlContentsChanged, ucrNewDataFrameName.ControlValueChanged
         TestOKEnabled()
     End Sub
 
@@ -89,9 +97,14 @@ Public Class dlgCopySheet
         CheckAutoName()
     End Sub
 
+
     Private Sub CheckAutoName()
-        If Not ucrNewDataFrameName.bUserTyped AndAlso Not ucrNewDataFrameName.IsEmpty Then
-            ucrNewDataFrameName.SetName(ucrDataFrameCopySheets.cboAvailableDataFrames.SelectedItem & "_copy")
+        If Not ucrNewDataFrameName.bUserTyped Then
+            ucrNewDataFrameName.SetName(ucrDataFrameCopySheets.cboAvailableDataFrames.Text & "_copy")
         End If
+    End Sub
+
+    Private Sub ucrNewDataFrameName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNewDataFrameName.ControlValueChanged
+        'CheckAutoName()
     End Sub
 End Class
