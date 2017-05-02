@@ -1369,9 +1369,6 @@ Public Class frmMain
         dlgViewGraph.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticDatesMakeDate_Click(sender As Object, e As EventArgs) Handles mnuClimaticDatesMakeDate.Click
-
-    End Sub
 
     'Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click
     '    'TEST temporary 
