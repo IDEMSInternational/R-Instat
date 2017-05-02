@@ -26,7 +26,7 @@ Partial Class dlgHistogram
         Me.cmdHistogramOptions = New System.Windows.Forms.Button()
         Me.rdoHistogram = New System.Windows.Forms.RadioButton()
         Me.rdoDensity = New System.Windows.Forms.RadioButton()
-        Me.rdoFreequencyPolygon = New System.Windows.Forms.RadioButton()
+        Me.rdoFrequencyPolygon = New System.Windows.Forms.RadioButton()
         Me.lblfactor = New System.Windows.Forms.Label()
         Me.ucrVariablesAsFactorforHist = New instat.ucrVariablesAsFactor()
         Me.ucrFactorReceiver = New instat.ucrReceiverSingle()
@@ -90,22 +90,22 @@ Partial Class dlgHistogram
         Me.rdoDensity.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoDensity.UseVisualStyleBackColor = True
         '
-        'rdoFreequencyPolygon
+        'rdoFrequencyPolygon
         '
-        Me.rdoFreequencyPolygon.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoFreequencyPolygon.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoFreequencyPolygon.FlatAppearance.BorderSize = 2
-        Me.rdoFreequencyPolygon.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoFreequencyPolygon.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoFreequencyPolygon.Location = New System.Drawing.Point(263, 12)
-        Me.rdoFreequencyPolygon.Name = "rdoFreequencyPolygon"
-        Me.rdoFreequencyPolygon.Size = New System.Drawing.Size(111, 28)
-        Me.rdoFreequencyPolygon.TabIndex = 2
-        Me.rdoFreequencyPolygon.TabStop = True
-        Me.rdoFreequencyPolygon.Tag = "Frequency_Polygon"
-        Me.rdoFreequencyPolygon.Text = "Frequency Polygon"
-        Me.rdoFreequencyPolygon.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoFreequencyPolygon.UseVisualStyleBackColor = True
+        Me.rdoFrequencyPolygon.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoFrequencyPolygon.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoFrequencyPolygon.FlatAppearance.BorderSize = 2
+        Me.rdoFrequencyPolygon.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoFrequencyPolygon.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoFrequencyPolygon.Location = New System.Drawing.Point(263, 12)
+        Me.rdoFrequencyPolygon.Name = "rdoFrequencyPolygon"
+        Me.rdoFrequencyPolygon.Size = New System.Drawing.Size(111, 28)
+        Me.rdoFrequencyPolygon.TabIndex = 2
+        Me.rdoFrequencyPolygon.TabStop = True
+        Me.rdoFrequencyPolygon.Tag = "Frequency_Polygon"
+        Me.rdoFrequencyPolygon.Text = "Frequency Polygon"
+        Me.rdoFrequencyPolygon.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoFrequencyPolygon.UseVisualStyleBackColor = True
         '
         'lblfactor
         '
@@ -151,7 +151,7 @@ Partial Class dlgHistogram
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 328)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 324)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 10
@@ -167,18 +167,18 @@ Partial Class dlgHistogram
         '
         Me.ucrSaveHist.Location = New System.Drawing.Point(10, 300)
         Me.ucrSaveHist.Name = "ucrSaveHist"
-        Me.ucrSaveHist.Size = New System.Drawing.Size(362, 24)
+        Me.ucrSaveHist.Size = New System.Drawing.Size(254, 24)
         Me.ucrSaveHist.TabIndex = 12
         '
         'dlgHistogram
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 387)
+        Me.ClientSize = New System.Drawing.Size(418, 382)
         Me.Controls.Add(Me.ucrSaveHist)
         Me.Controls.Add(Me.ucrVariablesAsFactorforHist)
         Me.Controls.Add(Me.ucrFactorReceiver)
-        Me.Controls.Add(Me.rdoFreequencyPolygon)
+        Me.Controls.Add(Me.rdoFrequencyPolygon)
         Me.Controls.Add(Me.rdoDensity)
         Me.Controls.Add(Me.rdoHistogram)
         Me.Controls.Add(Me.cmdHistogramOptions)
@@ -204,7 +204,7 @@ Partial Class dlgHistogram
     Friend WithEvents cmdHistogramOptions As Button
     Friend WithEvents rdoHistogram As RadioButton
     Friend WithEvents rdoDensity As RadioButton
-    Friend WithEvents rdoFreequencyPolygon As RadioButton
+    Friend WithEvents rdoFrequencyPolygon As RadioButton
     Friend WithEvents ucrFactorReceiver As ucrReceiverSingle
     Friend WithEvents lblfactor As Label
     Friend WithEvents ucrVariablesAsFactorforHist As ucrVariablesAsFactor
