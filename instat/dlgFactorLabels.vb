@@ -105,7 +105,7 @@ Public Class dlgViewFactorLabels
     End Sub
 
     Private Sub TestOkEnabled()
-        If (Not (ucrReceiverFactorColumns.IsEmpty) AndAlso (ucrChkShowLabels.Checked OrElse ucrChkShowType.Checked OrElse ucrChkShowValues.Checked)) Then
+        If (Not (ucrReceiverFactorColumns.IsEmpty) AndAlso (ucrChkShowLabels.Checked OrElse ucrChkShowType.Checked OrElse ucrChkShowValues.Checked OrElse ucrChkShowFrequencies.Checked OrElse ucrChkShowPercentage.Checked)) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -132,7 +132,7 @@ Public Class dlgViewFactorLabels
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverFactorColumns_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactorColumns.ControlContentsChanged, ucrChkAlternateColour.ControlContentsChanged, ucrChkShowFrequencies.ControlContentsChanged, ucrChkShowId.ControlContentsChanged, ucrChkShowLabels.ControlContentsChanged, ucrChkShowMissingValues.ControlContentsChanged, ucrChkShowPercentage.ControlContentsChanged, ucrChkShowType.ControlContentsChanged, ucrChkShowValues.ControlContentsChanged, ucrChkSortByName.ControlContentsChanged
+    Private Sub ucrReceiverFactorColumns_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactorColumns.ControlContentsChanged, ucrChkShowFrequencies.ControlContentsChanged, ucrChkShowLabels.ControlContentsChanged, ucrChkShowPercentage.ControlContentsChanged, ucrChkShowType.ControlContentsChanged, ucrChkShowValues.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
