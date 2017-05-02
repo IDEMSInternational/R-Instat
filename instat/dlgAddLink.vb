@@ -37,10 +37,14 @@ Public Class dlgAddLink
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 506
+        cmdSpecifyLink.Enabled = False ' temporarily disabled
+
         ucrDataSelectorFrom.SetParameter(New RParameter("from_data_frame", 0))
         ucrDataSelectorFrom.SetParameterIsString()
+
         ucrDataSelectorTo.SetParameter(New RParameter("to_data_frame", 0))
         ucrDataSelectorTo.SetParameterIsString()
+
         ucrInputLinkName.SetParameter(New RParameter("link_name", 0))
         lvwLinkViewBox.Columns.Add("Name", 80, HorizontalAlignment.Left)
         lvwLinkViewBox.Columns.Add("Columns", 150, HorizontalAlignment.Left)
@@ -49,13 +53,14 @@ Public Class dlgAddLink
 
     Private Sub SetDefaults()
         clsAddLink = New RFunction
+
         ucrDataSelectorFrom.Reset()
         ucrDataSelectorTo.Reset()
         UpdateKeys()
+
         clsAddLink.AddParameter("type", Chr(34) & "keyed_link" & Chr(34))
         clsAddLink.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_link")
         ucrBase.clsRsyntax.SetBaseRFunction(clsAddLink)
-        cmdSpecifyLink.Enabled = False
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -73,11 +78,6 @@ Public Class dlgAddLink
     Private Sub ucrBaseReplace_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrDataSelectorTo_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDataSelectorTo.ControlValueChanged
-        UpdateKeys()
         TestOKEnabled()
     End Sub
 
@@ -139,6 +139,11 @@ Public Class dlgAddLink
     End Sub
 
     Private Sub ucrDataSelectorFrom_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataSelectorFrom.ControlContentsChanged, ucrInputLinkName.ControlContentsChanged, ucrInputSelectedKey.ControlContentsChanged
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrDataSelectorTo_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDataSelectorTo.ControlValueChanged
+        UpdateKeys()
         TestOKEnabled()
     End Sub
 End Class

@@ -38,56 +38,56 @@ Partial Class dlgAddLink
         '
         'cmdSpecifyLink
         '
-        Me.cmdSpecifyLink.Location = New System.Drawing.Point(160, 171)
+        Me.cmdSpecifyLink.Location = New System.Drawing.Point(287, 171)
         Me.cmdSpecifyLink.Name = "cmdSpecifyLink"
         Me.cmdSpecifyLink.Size = New System.Drawing.Size(121, 23)
-        Me.cmdSpecifyLink.TabIndex = 4
+        Me.cmdSpecifyLink.TabIndex = 6
         Me.cmdSpecifyLink.Text = "Specify Link"
         Me.cmdSpecifyLink.UseVisualStyleBackColor = True
         '
         'lblLinkName
         '
         Me.lblLinkName.AutoSize = True
-        Me.lblLinkName.Location = New System.Drawing.Point(12, 251)
+        Me.lblLinkName.Location = New System.Drawing.Point(10, 239)
         Me.lblLinkName.Name = "lblLinkName"
         Me.lblLinkName.Size = New System.Drawing.Size(61, 13)
-        Me.lblLinkName.TabIndex = 7
+        Me.lblLinkName.TabIndex = 9
         Me.lblLinkName.Text = "Link Name:"
         '
         'lblFrom
         '
         Me.lblFrom.AutoSize = True
-        Me.lblFrom.Location = New System.Drawing.Point(7, 10)
+        Me.lblFrom.Location = New System.Drawing.Point(10, 10)
         Me.lblFrom.Name = "lblFrom"
         Me.lblFrom.Size = New System.Drawing.Size(33, 13)
-        Me.lblFrom.TabIndex = 9
+        Me.lblFrom.TabIndex = 0
         Me.lblFrom.Text = "From:"
         '
         'lblTo
         '
         Me.lblTo.AutoSize = True
-        Me.lblTo.Location = New System.Drawing.Point(7, 71)
+        Me.lblTo.Location = New System.Drawing.Point(10, 76)
         Me.lblTo.Name = "lblTo"
         Me.lblTo.Size = New System.Drawing.Size(23, 13)
-        Me.lblTo.TabIndex = 10
+        Me.lblTo.TabIndex = 2
         Me.lblTo.Text = "To:"
         '
         'lblKeys
         '
         Me.lblKeys.AutoSize = True
-        Me.lblKeys.Location = New System.Drawing.Point(161, 26)
+        Me.lblKeys.Location = New System.Drawing.Point(168, 27)
         Me.lblKeys.Name = "lblKeys"
         Me.lblKeys.Size = New System.Drawing.Size(33, 13)
-        Me.lblKeys.TabIndex = 11
+        Me.lblKeys.TabIndex = 4
         Me.lblKeys.Text = "Keys:"
         '
         'lvwLinkViewBox
         '
         Me.lvwLinkViewBox.FullRowSelect = True
-        Me.lvwLinkViewBox.Location = New System.Drawing.Point(160, 42)
+        Me.lvwLinkViewBox.Location = New System.Drawing.Point(168, 42)
         Me.lvwLinkViewBox.Name = "lvwLinkViewBox"
         Me.lvwLinkViewBox.Size = New System.Drawing.Size(240, 123)
-        Me.lvwLinkViewBox.TabIndex = 8
+        Me.lvwLinkViewBox.TabIndex = 5
         Me.lvwLinkViewBox.UseCompatibleStateImageBehavior = False
         Me.lvwLinkViewBox.View = System.Windows.Forms.View.Details
         '
@@ -96,15 +96,15 @@ Partial Class dlgAddLink
         Me.ucrInputLinkName.AddQuotesIfUnrecognised = True
         Me.ucrInputLinkName.IsMultiline = False
         Me.ucrInputLinkName.IsReadOnly = False
-        Me.ucrInputLinkName.Location = New System.Drawing.Point(79, 248)
+        Me.ucrInputLinkName.Location = New System.Drawing.Point(92, 235)
         Me.ucrInputLinkName.Name = "ucrInputLinkName"
-        Me.ucrInputLinkName.Size = New System.Drawing.Size(321, 21)
-        Me.ucrInputLinkName.TabIndex = 6
+        Me.ucrInputLinkName.Size = New System.Drawing.Size(316, 21)
+        Me.ucrInputLinkName.TabIndex = 10
         '
         'ucrDataSelectorTo
         '
         Me.ucrDataSelectorTo.bUseCurrentFilter = True
-        Me.ucrDataSelectorTo.Location = New System.Drawing.Point(10, 84)
+        Me.ucrDataSelectorTo.Location = New System.Drawing.Point(15, 92)
         Me.ucrDataSelectorTo.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataSelectorTo.Name = "ucrDataSelectorTo"
         Me.ucrDataSelectorTo.Size = New System.Drawing.Size(120, 50)
@@ -113,26 +113,26 @@ Partial Class dlgAddLink
         'ucrDataSelectorFrom
         '
         Me.ucrDataSelectorFrom.bUseCurrentFilter = True
-        Me.ucrDataSelectorFrom.Location = New System.Drawing.Point(10, 23)
+        Me.ucrDataSelectorFrom.Location = New System.Drawing.Point(15, 26)
         Me.ucrDataSelectorFrom.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataSelectorFrom.Name = "ucrDataSelectorFrom"
         Me.ucrDataSelectorFrom.Size = New System.Drawing.Size(120, 50)
-        Me.ucrDataSelectorFrom.TabIndex = 2
+        Me.ucrDataSelectorFrom.TabIndex = 1
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(4, 282)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 262)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 1
+        Me.ucrBase.TabIndex = 11
         '
         'lblSelectedKey
         '
         Me.lblSelectedKey.AutoSize = True
-        Me.lblSelectedKey.Location = New System.Drawing.Point(12, 222)
+        Me.lblSelectedKey.Location = New System.Drawing.Point(10, 211)
         Me.lblSelectedKey.Name = "lblSelectedKey"
         Me.lblSelectedKey.Size = New System.Drawing.Size(73, 13)
-        Me.lblSelectedKey.TabIndex = 12
+        Me.lblSelectedKey.TabIndex = 7
         Me.lblSelectedKey.Text = "Selected Key:"
         '
         'ucrInputSelectedKey
@@ -140,16 +140,16 @@ Partial Class dlgAddLink
         Me.ucrInputSelectedKey.AddQuotesIfUnrecognised = True
         Me.ucrInputSelectedKey.IsMultiline = False
         Me.ucrInputSelectedKey.IsReadOnly = True
-        Me.ucrInputSelectedKey.Location = New System.Drawing.Point(90, 220)
+        Me.ucrInputSelectedKey.Location = New System.Drawing.Point(92, 208)
         Me.ucrInputSelectedKey.Name = "ucrInputSelectedKey"
         Me.ucrInputSelectedKey.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputSelectedKey.TabIndex = 13
+        Me.ucrInputSelectedKey.TabIndex = 8
         '
         'dlgAddLink
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(412, 339)
+        Me.ClientSize = New System.Drawing.Size(416, 320)
         Me.Controls.Add(Me.ucrInputSelectedKey)
         Me.Controls.Add(Me.lblSelectedKey)
         Me.Controls.Add(Me.lblKeys)
