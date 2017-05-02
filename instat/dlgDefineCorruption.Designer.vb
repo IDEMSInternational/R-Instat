@@ -432,7 +432,7 @@ Partial Class dlgDefineCorruption
         Me.MinimizeBox = False
         Me.Name = "dlgDefineCorruption"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Define Corruption"
+        Me.Text = "Define Procurement Data"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
