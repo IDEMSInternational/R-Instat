@@ -60,7 +60,7 @@ Partial Class dlgViewFactorLabels
         Me.grpSummaryStatistics.Location = New System.Drawing.Point(170, 199)
         Me.grpSummaryStatistics.Name = "grpSummaryStatistics"
         Me.grpSummaryStatistics.Size = New System.Drawing.Size(154, 90)
-        Me.grpSummaryStatistics.TabIndex = 5
+        Me.grpSummaryStatistics.TabIndex = 4
         Me.grpSummaryStatistics.TabStop = False
         Me.grpSummaryStatistics.Text = "Summary Statistics"
         '
@@ -172,7 +172,7 @@ Partial Class dlgViewFactorLabels
         Me.grpDisplayOptions.Location = New System.Drawing.Point(330, 199)
         Me.grpDisplayOptions.Name = "grpDisplayOptions"
         Me.grpDisplayOptions.Size = New System.Drawing.Size(154, 90)
-        Me.grpDisplayOptions.TabIndex = 4
+        Me.grpDisplayOptions.TabIndex = 5
         Me.grpDisplayOptions.TabStop = False
         Me.grpDisplayOptions.Text = "Display Options"
         '
