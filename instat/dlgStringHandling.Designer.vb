@@ -168,9 +168,9 @@ Partial Class dlgStringHandling
         'ucrChkIgnoreCase
         '
         Me.ucrChkIgnoreCase.Checked = False
-        Me.ucrChkIgnoreCase.Location = New System.Drawing.Point(261, 128)
+        Me.ucrChkIgnoreCase.Location = New System.Drawing.Point(261, 124)
         Me.ucrChkIgnoreCase.Name = "ucrChkIgnoreCase"
-        Me.ucrChkIgnoreCase.Size = New System.Drawing.Size(76, 20)
+        Me.ucrChkIgnoreCase.Size = New System.Drawing.Size(113, 20)
         Me.ucrChkIgnoreCase.TabIndex = 10
         '
         'ucrReceiverStringHandling
