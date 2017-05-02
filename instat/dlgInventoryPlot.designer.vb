@@ -46,7 +46,7 @@ Partial Class dlgInventoryPlot
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(121, 23)
         Me.cmdOptions.TabIndex = 7
-        Me.cmdOptions.Text = "Options.."
+        Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'lblDate
