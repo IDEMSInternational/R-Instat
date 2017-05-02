@@ -47,6 +47,7 @@ Public Class dlgThreeVariableFrequencies
         ucrReceiverRowFactor.SetParameterIsString()
         ucrReceiverRowFactor.bWithQuotes = False
         ucrReceiverRowFactor.SetParameterIncludeArgumentName(False)
+        ucrReceiverRowFactor.bExcludeFromSelector = True
 
         ucrReceiverColumnFactor.SetParameter(New RParameter("var.col", 2))
         ucrReceiverColumnFactor.Selector = ucrSelectorThreeVariableFrequencies
@@ -54,6 +55,7 @@ Public Class dlgThreeVariableFrequencies
         ucrReceiverColumnFactor.SetParameterIsString()
         ucrReceiverColumnFactor.bWithQuotes = False
         ucrReceiverColumnFactor.SetParameterIncludeArgumentName(False)
+        ucrReceiverColumnFactor.bExcludeFromSelector = True
 
         ucrReceiverGroupsBy1st.SetParameter(New RParameter("x", 0))
         ucrReceiverGroupsBy1st.Selector = ucrSelectorThreeVariableFrequencies
@@ -61,6 +63,7 @@ Public Class dlgThreeVariableFrequencies
         ucrReceiverGroupsBy1st.SetParameterIsString()
         ucrReceiverGroupsBy1st.bWithQuotes = False
         ucrReceiverGroupsBy1st.SetParameterIncludeArgumentName(False)
+        ucrReceiverGroupsBy1st.bExcludeFromSelector = True
 
         ucrReceiverGroupBy2nd.SetParameter(New RParameter("y", 0))
         ucrReceiverGroupBy2nd.Selector = ucrSelectorThreeVariableFrequencies
@@ -68,6 +71,7 @@ Public Class dlgThreeVariableFrequencies
         ucrReceiverGroupBy2nd.SetParameterIsString()
         ucrReceiverGroupBy2nd.bWithQuotes = False
         ucrReceiverGroupBy2nd.SetParameterIncludeArgumentName(False)
+        ucrReceiverGroupBy2nd.bExcludeFromSelector = True
 
         ucrReceiverWeights.SetParameter(New RParameter("weight.by", 3))
         ucrReceiverWeights.SetParameterIsRFunction()
