@@ -29,6 +29,7 @@ Partial Class dlgConvertColumns
         Me.rdoNumeric = New System.Windows.Forms.RadioButton()
         Me.rdoOrderedFactor = New System.Windows.Forms.RadioButton()
         Me.rdoFactor = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlConvertTo = New instat.UcrPanel()
         Me.rdoConvertOrdinals = New System.Windows.Forms.RadioButton()
         Me.grpFactorToNumericOptions = New System.Windows.Forms.GroupBox()
         Me.rdoDefault = New System.Windows.Forms.RadioButton()
@@ -37,7 +38,6 @@ Partial Class dlgConvertColumns
         Me.ucrChkKeepAttributes = New instat.ucrCheck()
         Me.ucrNudDisplayDecimals = New instat.ucrNud()
         Me.ucrChkSpecifyDecimalsToDisplay = New instat.ucrCheck()
-        Me.ucrPnlConvertTo = New instat.UcrPanel()
         Me.ucrSelectorDataFrameColumns = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverColumnsToConvert = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
@@ -125,6 +125,13 @@ Partial Class dlgConvertColumns
         Me.rdoFactor.Text = "Factor"
         Me.rdoFactor.UseVisualStyleBackColor = True
         '
+        'ucrPnlConvertTo
+        '
+        Me.ucrPnlConvertTo.Location = New System.Drawing.Point(3, 16)
+        Me.ucrPnlConvertTo.Name = "ucrPnlConvertTo"
+        Me.ucrPnlConvertTo.Size = New System.Drawing.Size(348, 67)
+        Me.ucrPnlConvertTo.TabIndex = 0
+        '
         'rdoConvertOrdinals
         '
         Me.rdoConvertOrdinals.AutoSize = True
@@ -205,13 +212,6 @@ Partial Class dlgConvertColumns
         Me.ucrChkSpecifyDecimalsToDisplay.Name = "ucrChkSpecifyDecimalsToDisplay"
         Me.ucrChkSpecifyDecimalsToDisplay.Size = New System.Drawing.Size(190, 20)
         Me.ucrChkSpecifyDecimalsToDisplay.TabIndex = 5
-        '
-        'ucrPnlConvertTo
-        '
-        Me.ucrPnlConvertTo.Location = New System.Drawing.Point(3, 16)
-        Me.ucrPnlConvertTo.Name = "ucrPnlConvertTo"
-        Me.ucrPnlConvertTo.Size = New System.Drawing.Size(348, 67)
-        Me.ucrPnlConvertTo.TabIndex = 0
         '
         'ucrSelectorDataFrameColumns
         '
