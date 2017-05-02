@@ -43,8 +43,8 @@ Public Class dlgAddLink
         ucrDataSelectorTo.SetParameterIsString()
         ucrInputLinkName.SetParameter(New RParameter("link_name", 0))
         lvwLinkViewBox.Columns.Add("Name", 80, HorizontalAlignment.Left)
-        lvwLinkViewBox.Columns.Add("Columns", 160, HorizontalAlignment.Left)
-
+        lvwLinkViewBox.Columns.Add("Columns", 150, HorizontalAlignment.Left)
+        ucrInputSelectedKey.IsReadOnly = True
     End Sub
 
     Private Sub SetDefaults()
@@ -55,6 +55,7 @@ Public Class dlgAddLink
         clsAddLink.AddParameter("type", Chr(34) & "keyed_link" & Chr(34))
         clsAddLink.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_link")
         ucrBase.clsRsyntax.SetBaseRFunction(clsAddLink)
+        cmdSpecifyLink.Enabled = False
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -62,6 +63,11 @@ Public Class dlgAddLink
     End Sub
 
     Private Sub TestOKEnabled()
+        If ucrDataSelectorFrom.cboAvailableDataFrames.Text <> "" AndAlso ucrDataSelectorTo.cboAvailableDataFrames.Text <> "" AndAlso Not ucrInputLinkName.IsEmpty AndAlso Not ucrInputSelectedKey.IsEmpty Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub ucrBaseReplace_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -72,6 +78,7 @@ Public Class dlgAddLink
 
     Private Sub ucrDataSelectorTo_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDataSelectorTo.ControlValueChanged
         UpdateKeys()
+        TestOKEnabled()
     End Sub
 
     Public Sub UpdateKeys()
@@ -129,5 +136,9 @@ Public Class dlgAddLink
             clsAddLink.RemoveParameterByName("link_pairs")
             ucrInputSelectedKey.SetName("")
         End If
+    End Sub
+
+    Private Sub ucrDataSelectorFrom_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataSelectorFrom.ControlContentsChanged, ucrInputLinkName.ControlContentsChanged, ucrInputSelectedKey.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class
