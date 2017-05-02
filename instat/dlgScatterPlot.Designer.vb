@@ -29,9 +29,9 @@ Partial Class dlgScatterPlot
         Me.ucrSaveScatterPlot = New instat.ucrSave()
         Me.ucrSelectorForScatter = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrVariablesAsFactorForScatter = New instat.ucrVariablesAsFactor()
+        Me.ucrBase = New instat.ucrButtons()
         Me.ucrFactorOptionalReceiver = New instat.ucrReceiverSingle()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
-        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -78,7 +78,7 @@ Partial Class dlgScatterPlot
         '
         Me.ucrSaveScatterPlot.Location = New System.Drawing.Point(10, 269)
         Me.ucrSaveScatterPlot.Name = "ucrSaveScatterPlot"
-        Me.ucrSaveScatterPlot.Size = New System.Drawing.Size(250, 24)
+        Me.ucrSaveScatterPlot.Size = New System.Drawing.Size(254, 24)
         Me.ucrSaveScatterPlot.TabIndex = 8
         '
         'ucrSelectorForScatter
@@ -102,6 +102,13 @@ Partial Class dlgScatterPlot
         Me.ucrVariablesAsFactorForScatter.ucrSelector = Nothing
         Me.ucrVariablesAsFactorForScatter.ucrVariableSelector = Nothing
         '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(10, 294)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 9
+        '
         'ucrFactorOptionalReceiver
         '
         Me.ucrFactorOptionalReceiver.frmParent = Me
@@ -109,8 +116,8 @@ Partial Class dlgScatterPlot
         Me.ucrFactorOptionalReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFactorOptionalReceiver.Name = "ucrFactorOptionalReceiver"
         Me.ucrFactorOptionalReceiver.Selector = Nothing
-        Me.ucrFactorOptionalReceiver.Size = New System.Drawing.Size(120, 20)
-        Me.ucrFactorOptionalReceiver.TabIndex = 5
+        Me.ucrFactorOptionalReceiver.Size = New System.Drawing.Size(125, 20)
+        Me.ucrFactorOptionalReceiver.TabIndex = 10
         Me.ucrFactorOptionalReceiver.ucrSelector = Nothing
         '
         'ucrReceiverX
@@ -120,30 +127,23 @@ Partial Class dlgScatterPlot
         Me.ucrReceiverX.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverX.Name = "ucrReceiverX"
         Me.ucrReceiverX.Selector = Nothing
-        Me.ucrReceiverX.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverX.TabIndex = 3
+        Me.ucrReceiverX.Size = New System.Drawing.Size(125, 20)
+        Me.ucrReceiverX.TabIndex = 11
         Me.ucrReceiverX.ucrSelector = Nothing
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 299)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 9
         '
         'dlgScatterPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(421, 357)
+        Me.ClientSize = New System.Drawing.Size(421, 350)
+        Me.Controls.Add(Me.ucrReceiverX)
+        Me.Controls.Add(Me.ucrFactorOptionalReceiver)
         Me.Controls.Add(Me.ucrSaveScatterPlot)
         Me.Controls.Add(Me.ucrSelectorForScatter)
         Me.Controls.Add(Me.ucrVariablesAsFactorForScatter)
         Me.Controls.Add(Me.cmdScatterPlotOptions)
         Me.Controls.Add(Me.cmdOptions)
-        Me.Controls.Add(Me.ucrFactorOptionalReceiver)
         Me.Controls.Add(Me.lblFactorOptional)
-        Me.Controls.Add(Me.ucrReceiverX)
         Me.Controls.Add(Me.lblXVariable)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -159,12 +159,12 @@ Partial Class dlgScatterPlot
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents cmdOptions As Button
-    Friend WithEvents ucrFactorOptionalReceiver As ucrReceiverSingle
     Friend WithEvents lblFactorOptional As Label
-    Friend WithEvents ucrReceiverX As ucrReceiverSingle
     Friend WithEvents lblXVariable As Label
     Friend WithEvents cmdScatterPlotOptions As Button
     Friend WithEvents ucrVariablesAsFactorForScatter As ucrVariablesAsFactor
     Friend WithEvents ucrSelectorForScatter As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrSaveScatterPlot As ucrSave
+    Friend WithEvents ucrReceiverX As ucrReceiverSingle
+    Friend WithEvents ucrFactorOptionalReceiver As ucrReceiverSingle
 End Class

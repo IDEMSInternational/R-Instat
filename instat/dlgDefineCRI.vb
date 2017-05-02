@@ -240,6 +240,7 @@ Public Class dlgDefineCRI
         i = i + 1
     End Sub
 
+    ' This is currently empty, but will be coded in the future
     Private Sub cmdEdit_Click(sender As Object, e As EventArgs) Handles cmdEdit.Click
 
     End Sub
@@ -272,7 +273,7 @@ Public Class dlgDefineCRI
     End Sub
 
     Private Sub ucrSelectorCRI_DataFrameChanged() Handles ucrSelectorCRI.DataFrameChanged
-        lstIndexComponents.Clear() ' sort this
+        lstIndexComponents.Items.Clear()
         clsCalculation.ClearParameters()
         clsDefineFunction.RemoveParameterByName("function_expression")
         clsDefineFunction.RemoveParameterByName("calculated_from")
