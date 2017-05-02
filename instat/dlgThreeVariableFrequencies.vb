@@ -158,6 +158,7 @@ Public Class dlgThreeVariableFrequencies
         clsSjTab.AddParameter("show.summary", "FALSE")
         clsSjTab.AddParameter("digits", 0)
         clsSjTab.AddParameter("fun", Chr(34) & "xtab" & Chr(34))
+        clsSjTab.AddParameter("string.total", Chr(34) & "Total" & Chr(34))
 
         clsSjPlot.SetPackageName("sjPlot")
         clsSjPlot.SetRCommand("sjplot")
