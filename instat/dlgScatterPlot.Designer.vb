@@ -104,7 +104,7 @@ Partial Class dlgScatterPlot
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 299)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 294)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 9
@@ -135,7 +135,7 @@ Partial Class dlgScatterPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(421, 357)
+        Me.ClientSize = New System.Drawing.Size(421, 350)
         Me.Controls.Add(Me.ucrReceiverX)
         Me.Controls.Add(Me.ucrFactorOptionalReceiver)
         Me.Controls.Add(Me.ucrSaveScatterPlot)
