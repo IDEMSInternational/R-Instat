@@ -41,7 +41,7 @@ Public Class dlgViewFactorLabels
         ucrReceiverFactorColumns.SetParameterIsString()
         ucrReceiverFactorColumns.SetParameterIncludeArgumentName(False)
         ucrReceiverFactorColumns.bWithQuotes = False
-        ucrReceiverFactorColumns.SetIncludedDataTypes({"factor", "ordered"})
+        ucrReceiverFactorColumns.SetDataType("factor")
         ucrReceiverFactorColumns.Selector = ucrSelectorViewFactorLabels
         ucrReceiverFactorColumns.SetMeAsReceiver()
 
@@ -104,7 +104,7 @@ Public Class dlgViewFactorLabels
     End Sub
 
     Private Sub TestOkEnabled()
-        If (Not (ucrReceiverFactorColumns.IsEmpty) AndAlso (ucrChkAlternateColour.Checked OrElse ucrChkShowFrequencies.Checked OrElse ucrChkShowId.Checked OrElse ucrChkShowLabels.Checked OrElse ucrChkShowMissingValues.Checked OrElse ucrChkShowPercentage.Checked OrElse ucrChkShowType.Checked OrElse ucrChkShowValues.Checked OrElse ucrChkSortByName.Checked)) Then
+        If (Not (ucrReceiverFactorColumns.IsEmpty) AndAlso (ucrChkShowLabels.Checked OrElse ucrChkShowType.Checked OrElse ucrChkShowValues.Checked)) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
