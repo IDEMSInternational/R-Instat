@@ -31,6 +31,7 @@ Public Class ucrInput
     Protected WithEvents ucrDataFrameSelector As ucrDataFrame
     Protected bIsReadOnly As Boolean = False
     Public bAutoChangeOnLeave As Boolean = False
+    Protected bAllowInf As Boolean = False
     Private bLastSilent As Boolean = False
     Private bPrivateAddQuotesIfUnrecognised As Boolean = True
     Protected dctDisplayParameterValues As New Dictionary(Of String, String)
@@ -199,8 +200,9 @@ Public Class ucrInput
         strValidationType = "List"
     End Sub
 
-    Public Sub SetValidationTypeAsNumericList()
+    Public Sub SetValidationTypeAsNumericList(Optional bNewAllowInf As Boolean = False)
         strValidationType = "NumericList"
+        bAllowInf = bNewAllowInf
     End Sub
 
     Public Function IsValid(strText As String) As Boolean
@@ -219,7 +221,7 @@ Public Class ucrInput
             Case "List"
                 iType = ValidateList(strText, False)
             Case "NumericList"
-                iType = ValidateList(strText, True)
+                iType = ValidateList(strText, True, bAllowInf)
         End Select
         Return iType
     End Function
@@ -343,10 +345,10 @@ Public Class ucrInput
     ' 0 : string is valid
     ' 1 : an item is empty
     ' 2 : an item is not numeric
-    Public Function ValidateList(strText As String, Optional bIsNumericInput As Boolean = False) As Integer
+    Public Function ValidateList(strText As String, Optional bIsNumericInput As Boolean = False, Optional bAllowInf As Boolean = False) As Integer
         Dim strItems As String()
         Dim strTemp As String
-
+        Dim i As Integer = 0
         If strText = "" Then Return 0
         clsRList.ClearParameters()
         clsRList.SetRCommand("c")
@@ -358,7 +360,7 @@ Public Class ucrInput
                 If strVal = "" Then Return 1
                 Dim clsTempParam As New RParameter
                 If bIsNumericInput Then
-                    If Not IsNumeric(strVal) Then
+                    If Not IsNumeric(strVal) AndAlso (Not (bAllowInf AndAlso ({"Inf", "-Inf"}.Contains(strVal)))) Then
                         Return 2
                         'MsgBox("Textbox requires a list of numbers separated by commas.", vbOKOnly, "Validation Error")
                         'txtNumericItems.Focus()
@@ -367,7 +369,9 @@ Public Class ucrInput
                 Else
                     clsTempParam.SetArgumentValue(Chr(34) & strVal & Chr(34))
                 End If
+                clsTempParam.Position = i
                 clsRList.AddParameter(clsTempParam)
+                i = i + 1
             Next
         End If
         Return 0
