@@ -13,7 +13,6 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports instat
 Imports instat.Translations
 Public Class dlgStringHandling
     Private bFirstload As Boolean = True
@@ -201,10 +200,6 @@ Public Class dlgStringHandling
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverStringHandling_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStringHandling.ControlContentsChanged, ucrPnlStringHandling.ControlContentsChanged, ucrInputPattern.ControlContentsChanged, ucrInputReplaceBy.ControlContentsChanged
-        TestOkEnabled()
-    End Sub
-
     Private Sub ucrPnlStringHandling_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlStringHandling.ControlValueChanged
         If rdoCount.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
@@ -223,4 +218,7 @@ Public Class dlgStringHandling
         ChangePrefixName()
     End Sub
 
+    Private Sub ucrReceiverStringHandling_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStringHandling.ControlContentsChanged, ucrPnlStringHandling.ControlContentsChanged, ucrInputPattern.ControlContentsChanged, ucrInputReplaceBy.ControlContentsChanged
+        TestOkEnabled()
+    End Sub
 End Class

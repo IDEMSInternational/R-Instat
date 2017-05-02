@@ -56,6 +56,7 @@ Public Class ucrWPFRichTextBox
             blkParagraph.Inlines.Add(run2)
         End If
         rtbOutput.Document.Blocks.Add(blkParagraph)
+        rtbOutput.ScrollToEnd()
     End Sub
 
     Public Sub CreateTempDirectory()
@@ -106,7 +107,7 @@ Public Class ucrWPFRichTextBox
         blkParagraph.Padding = thickness
         rtbOutput.Document.Blocks.Add(blkParagraph)
         rtbOutput.Document.Blocks.Add(New Windows.Documents.Paragraph)
-
+        rtbOutput.ScrollToEnd()
         'TESTING TO BE REMOVED
         'Dim strStargazer As String = "<table style=" & Chr(34) & "text-align:center" & Chr(34) & "><tr><td colspan=" & Chr(34) & "6" & Chr(34) & " style=" & Chr(34) & "border-bottom:  1px solid black" & Chr(34) & "></td></tr><tr><td style=" & Chr(34) & "text-align:Left" & Chr(34) & ">Statistic</td><td>N</td><td>Mean</td><td>St. Dev.</td><td>Min</td><td>Max</td></tr>
         '<tr><td colspan = " & Chr(34) & "6" & Chr(34) & " style=" & Chr(34) & "border-bottom:  1px solid black" & Chr(34) & "></td></tr><tr><td style=" & Chr(34) & "text-align:Left" & Chr(34) & ">rating</td><td>30</td><td>64.633</td><td>12.173</td><td>40</td><td>85</td></tr>
