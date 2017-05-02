@@ -186,7 +186,7 @@ Partial Class dlgViewFactorLabels
         Me.grpLabels.Size = New System.Drawing.Size(154, 90)
         Me.grpLabels.TabIndex = 3
         Me.grpLabels.TabStop = False
-        Me.grpLabels.Text = "Variable Labels"
+        Me.grpLabels.Text = "Variable Options"
         '
         'dlgViewFactorLabels
         '
