@@ -27,6 +27,7 @@ Public Class dlgPolynomials
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        ReopenDialog()
         bReset = False
     End Sub
 
@@ -55,16 +56,17 @@ Public Class dlgPolynomials
 
         ucrNudDegree.SetParameter(New RParameter("degree", 2))
         ucrNudDegree.Minimum = 1
+        ucrNudDegree.SetRDefault(1)
 
         ucrSavePoly.SetSaveTypeAsColumn()
         ucrSavePoly.SetDataFrameSelector(ucrSelectorForPolynomial.ucrAvailableDataFrames)
         ucrSavePoly.SetIsComboBox()
-        ucrSavePoly.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
-        ucrSavePoly.SetLabelText("Prefix for New Columns:")
-        If Not ucrSavePoly.bUserTyped Then
-            ucrSavePoly.SetPrefix("")
-            ucrSavePoly.SetName("poly")
-        End If
+        '        ucrSavePoly.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
+        '        ucrSavePoly.SetLabelText("Prefix for New Columns:")
+        'If Not ucrSavePoly.bUserTyped Then
+        '    ucrSavePoly.SetPrefix("")
+        '    ucrSavePoly.SetName("poly")
+        'End If
     End Sub
 
     Private Sub SetDefaults()
@@ -74,15 +76,25 @@ Public Class dlgPolynomials
         'Reset 
         ucrSelectorForPolynomial.Reset()
         ucrSavePoly.Reset()
+        SetNewColumName()
+
+        clsPolynomial.SetRCommand("poly")
         clsPolynomial.AddParameter("degree", 2)
         clsPolynomial.AddParameter("raw", "TRUE")
 
-        clsPolynomial.SetRCommand("poly")
         clsScale.SetRCommand("scale")
         clsScale.AddParameter("center", "TRUE")
         clsScale.AddParameter("scale", "FALSE")
         clsPolynomial.SetAssignTo(ucrSavePoly.GetText, strTempDataframe:=ucrSelectorForPolynomial.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSavePoly.GetText, bAssignToIsPrefix:=True)
         ucrBase.clsRsyntax.SetBaseRFunction(clsPolynomial)
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrNudDegree.SetRCode(clsPolynomial, bReset)
+        ucrPnlType.SetRCode(clsPolynomial, bReset)
+        ucrSavePoly.SetRCode(clsPolynomial, bReset)
+        ucrReceiverPolynomial.SetRCode(clsPolynomial, bReset)
+        ucrReceiverPolynomial.AddAdditionalCodeParameterPair(clsScale, New RParameter("x", 0), iAdditionalPairNo:=1)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -93,22 +105,14 @@ Public Class dlgPolynomials
         End If
     End Sub
 
-    Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrNudDegree.SetRCode(clsPolynomial, bReset)
-        ucrPnlType.SetRCode(clsPolynomial, bReset)
-        ucrSavePoly.SetRCode(clsPolynomial, bReset)
-        ucrReceiverPolynomial.SetRCode(clsPolynomial, bReset)
-        ucrReceiverPolynomial.AddAdditionalCodeParameterPair(clsScale, New RParameter("x", 0), iAdditionalPairNo:=1)
-    End Sub
-
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverPolynomial.ControlContentsChanged, ucrNudDegree.ControlContentsChanged
-        TestOKEnabled()
+    Private Sub ReopenDialog()
+        SetNewColumName()
     End Sub
 
     Private Sub SetNewColumName()
@@ -118,7 +122,7 @@ Public Class dlgPolynomials
             If Not ucrSavePoly.bUserTyped Then
                 ucrSavePoly.SetPrefix("poly")
             End If
-        ElseIf ucrNudDegree.GetText > 1
+        Else
             ucrSavePoly.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
             ucrSavePoly.SetLabelText("Prefix for New Columns:")
             If Not ucrSavePoly.bUserTyped Then
@@ -138,5 +142,9 @@ Public Class dlgPolynomials
 
     Private Sub ucrNudDegree_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudDegree.ControlValueChanged
         SetNewColumName()
+    End Sub
+
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverPolynomial.ControlContentsChanged, ucrNudDegree.ControlContentsChanged, ucrSavePoly.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class
