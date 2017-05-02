@@ -65,7 +65,7 @@ Public Class dlgViewFactorLabels
         ucrChkShowMissingValues.SetRDefault("FALSE")
 
         ucrChkShowId.SetParameter(New RParameter("show.id", 5))
-        ucrChkShowId.SetText("Show id")
+        ucrChkShowId.SetText("Show ID")
         ucrChkShowId.SetRDefault("TRUE")
 
         ucrChkShowPercentage.SetParameter(New RParameter("show.prc", 6))
