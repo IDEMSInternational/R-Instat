@@ -13,6 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 Public Class dlgStringHandling
     Private bFirstload As Boolean = True
@@ -71,6 +72,8 @@ Public Class dlgStringHandling
 
         'ucrChk
         ucrChkIgnoreCase.SetText("Ignore Case")
+        ucrChkIgnoreCase.AddParameterValueFunctionNamesCondition(True, "pattern", "fixed")
+        ucrChkIgnoreCase.AddParameterValueFunctionNamesCondition(False, "pattern", "fixed", False)
     End Sub
 
     Private Sub SetDefaults()
@@ -90,29 +93,20 @@ Public Class dlgStringHandling
         ucrInputReplaceBy.SetName("")
         ucrInputPattern.SetName("")
         clsFixedFunction.SetRCommand("fixed")
-        clsFixedFunction.AddParameter("pattern")
-        clsFixedFunction.AddParameter("ignore_case")
+        clsFixedFunction.AddParameter("ignore_case", "TRUE")
 
         clsCountFunction.SetPackageName("stringr")
         clsCountFunction.SetRCommand("str_count")
-        clsCountFunction.AddParameter("pattern", clsRFunctionParameter:=clsFixedFunction)
         clsExtractFunction.SetPackageName("stringr")
         clsExtractFunction.SetRCommand("str_extract")
-        clsExtractFunction.AddParameter("pattern", clsRFunctionParameter:=clsFixedFunction)
         clsDetectFunction.SetPackageName("stringr")
         clsDetectFunction.SetRCommand("str_detect")
-        clsDetectFunction.AddParameter("pattern", clsRFunctionParameter:=clsFixedFunction)
         clsLocateFunction.SetPackageName("stringr")
         clsLocateFunction.SetRCommand("str_locate")
-        clsLocateFunction.AddParameter("pattern", clsRFunctionParameter:=clsFixedFunction)
         clsReplaceFunction.SetPackageName("stringr")
         clsReplaceFunction.SetRCommand("str_replace")
-        clsReplaceFunction.AddParameter("pattern", clsRFunctionParameter:=clsFixedFunction)
         clsReplaceAllFunction.SetPackageName("stringr")
         clsReplaceAllFunction.SetRCommand("str_replace_all")
-        clsReplaceAllFunction.AddParameter("pattern", clsRFunctionParameter:=clsFixedFunction)
-
-
         ChangePrefixName()
         clsCountFunction.SetAssignTo(ucrSaveStringHandling.GetText, strTempDataframe:=ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveStringHandling.GetText, bAssignToIsPrefix:=True)
         ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
@@ -132,9 +126,11 @@ Public Class dlgStringHandling
         ucrInputPattern.AddAdditionalCodeParameterPair(clsReplaceFunction, New RParameter("pattern", 1), iAdditionalPairNo:=4)
         ucrInputPattern.AddAdditionalCodeParameterPair(clsReplaceAllFunction, New RParameter("pattern", 1), iAdditionalPairNo:=5)
 
-        ucrInputPattern.AddAdditionalCodeParameterPair(clsFixedFunction, New RParameter("pattern", 1), iAdditionalPairNo:=1)
+        ucrInputReplaceBy.AddAdditionalCodeParameterPair(clsReplaceFunction, New RParameter("replacement", 2), iAdditionalPairNo:=1)
 
-        ucrInputReplaceBy.AddAdditionalCodeParameterPair(clsReplaceAllFunction, New RParameter("replacement", 2), iAdditionalPairNo:=1)
+        ucrInputPattern.AddAdditionalCodeParameterPair(clsFixedFunction, New RParameter("pattern", 0), iAdditionalPairNo:=1)
+
+
 
 
         ucrReceiverStringHandling.SetRCode(clsCountFunction, bReset)
@@ -143,6 +139,7 @@ Public Class dlgStringHandling
         ucrInputReplaceBy.SetRCode(clsReplaceAllFunction, bReset)
         ucrPnlStringHandling.SetRCode(clsCountFunction, bReset)
         ucrSaveStringHandling.SetRCode(clsCountFunction, bReset)
+        ucrChkIgnoreCase.SetRCode(clsCountFunction, bReset)
 
         ucrSaveStringHandling.AddAdditionalRCode(clsDetectFunction, iAdditionalPairNo:=1)
         ucrSaveStringHandling.AddAdditionalRCode(clsExtractFunction, iAdditionalPairNo:=2)
@@ -220,5 +217,23 @@ Public Class dlgStringHandling
 
     Private Sub ucrReceiverStringHandling_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStringHandling.ControlContentsChanged, ucrPnlStringHandling.ControlContentsChanged, ucrInputPattern.ControlContentsChanged, ucrInputReplaceBy.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrChkIgnoreCase_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIgnoreCase.ControlValueChanged
+        If ucrChkIgnoreCase.Checked Then
+            clsCountFunction.AddParameter("pattern", clsRFunctionParameter:=clsFixedFunction)
+            clsDetectFunction.AddParameter("pattern", clsRFunctionParameter:=clsFixedFunction)
+            clsExtractFunction.AddParameter("pattern", clsRFunctionParameter:=clsFixedFunction)
+            clsLocateFunction.AddParameter("pattern", clsRFunctionParameter:=clsFixedFunction)
+            clsReplaceFunction.AddParameter("pattern", clsRFunctionParameter:=clsFixedFunction)
+            clsReplaceAllFunction.AddParameter("pattern", clsRFunctionParameter:=clsFixedFunction)
+        Else
+            clsCountFunction.AddParameter("pattern", Chr(34) & ucrInputPattern.GetText & Chr(34))
+            clsDetectFunction.AddParameter("pattern", Chr(34) & ucrInputPattern.GetText & Chr(34))
+            clsExtractFunction.AddParameter("pattern", Chr(34) & ucrInputPattern.GetText & Chr(34))
+            clsLocateFunction.AddParameter("pattern", Chr(34) & ucrInputPattern.GetText & Chr(34))
+            clsReplaceFunction.AddParameter("pattern", Chr(34) & ucrInputPattern.GetText & Chr(34))
+            clsReplaceAllFunction.AddParameter("pattern", Chr(34) & ucrInputPattern.GetText & Chr(34))
+        End If
     End Sub
 End Class
