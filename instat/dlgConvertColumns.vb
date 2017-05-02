@@ -40,19 +40,6 @@ Public Class dlgConvertColumns
         SetToFactorStatus(bToFactorOnly)
     End Sub
 
-    Private Sub SetToFactorStatus(bToFactorOnly As Boolean)
-        If bToFactorOnly Then
-            rdoFactor.Checked = True
-            rdoCharacter.Enabled = False
-            rdoInteger.Enabled = False
-            rdoNumeric.Enabled = False
-        Else
-            rdoCharacter.Enabled = True
-            rdoInteger.Enabled = True
-            rdoNumeric.Enabled = True
-        End If
-    End Sub
-
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 67
 
@@ -105,7 +92,7 @@ Public Class dlgConvertColumns
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
         clsDefaultFunction.AddParameter("to_type", Chr(34) & "factor" & Chr(34))
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -128,6 +115,19 @@ Public Class dlgConvertColumns
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
+    End Sub
+
+    Private Sub SetToFactorStatus(bToFactorOnly As Boolean)
+        If bToFactorOnly Then
+            rdoFactor.Checked = True
+            rdoCharacter.Enabled = False
+            rdoInteger.Enabled = False
+            rdoNumeric.Enabled = False
+        Else
+            rdoCharacter.Enabled = True
+            rdoInteger.Enabled = True
+            rdoNumeric.Enabled = True
+        End If
     End Sub
 
     Private Sub ucrChkSpecifyDecimalsToDisplay_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSpecifyDecimalsToDisplay.ControlValueChanged
