@@ -173,6 +173,10 @@ Public Class dlgStringHandling
         End If
     End Sub
 
+    Private Sub ucrChkRegex_ControlValueChanged(ucrChangedControl As ucrCore)
+
+    End Sub
+
     Private Sub NewColumnName()
         If rdoLocate.Checked Then
             ucrSaveStringHandling.SetLabelText("Prefix for New Column:")

@@ -47,7 +47,7 @@ Partial Class dlgStringHandling
         Me.lblColumn.Location = New System.Drawing.Point(256, 73)
         Me.lblColumn.Name = "lblColumn"
         Me.lblColumn.Size = New System.Drawing.Size(45, 13)
-        Me.lblColumn.TabIndex = 7
+        Me.lblColumn.TabIndex = 8
         Me.lblColumn.Text = "Column:"
         '
         'lblReplaceBy
@@ -56,7 +56,7 @@ Partial Class dlgStringHandling
         Me.lblReplaceBy.Location = New System.Drawing.Point(256, 196)
         Me.lblReplaceBy.Name = "lblReplaceBy"
         Me.lblReplaceBy.Size = New System.Drawing.Size(65, 13)
-        Me.lblReplaceBy.TabIndex = 11
+        Me.lblReplaceBy.TabIndex = 13
         Me.lblReplaceBy.Text = "Replace By:"
         '
         'lblPattern
@@ -65,7 +65,7 @@ Partial Class dlgStringHandling
         Me.lblPattern.Location = New System.Drawing.Point(257, 151)
         Me.lblPattern.Name = "lblPattern"
         Me.lblPattern.Size = New System.Drawing.Size(44, 13)
-        Me.lblPattern.TabIndex = 9
+        Me.lblPattern.TabIndex = 11
         Me.lblPattern.Text = "Pattern:"
         '
         'rdoCount
@@ -159,7 +159,7 @@ Partial Class dlgStringHandling
         Me.rdoReplaceAll.Location = New System.Drawing.Point(313, 12)
         Me.rdoReplaceAll.Name = "rdoReplaceAll"
         Me.rdoReplaceAll.Size = New System.Drawing.Size(84, 27)
-        Me.rdoReplaceAll.TabIndex = 15
+        Me.rdoReplaceAll.TabIndex = 6
         Me.rdoReplaceAll.TabStop = True
         Me.rdoReplaceAll.Text = "Replace All"
         Me.rdoReplaceAll.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -168,10 +168,10 @@ Partial Class dlgStringHandling
         'ucrChkIgnoreCase
         '
         Me.ucrChkIgnoreCase.Checked = False
-        Me.ucrChkIgnoreCase.Location = New System.Drawing.Point(259, 123)
+        Me.ucrChkIgnoreCase.Location = New System.Drawing.Point(261, 128)
         Me.ucrChkIgnoreCase.Name = "ucrChkIgnoreCase"
-        Me.ucrChkIgnoreCase.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkIgnoreCase.TabIndex = 16
+        Me.ucrChkIgnoreCase.Size = New System.Drawing.Size(76, 20)
+        Me.ucrChkIgnoreCase.TabIndex = 10
         '
         'ucrReceiverStringHandling
         '
@@ -181,7 +181,7 @@ Partial Class dlgStringHandling
         Me.ucrReceiverStringHandling.Name = "ucrReceiverStringHandling"
         Me.ucrReceiverStringHandling.Selector = Nothing
         Me.ucrReceiverStringHandling.Size = New System.Drawing.Size(138, 20)
-        Me.ucrReceiverStringHandling.TabIndex = 8
+        Me.ucrReceiverStringHandling.TabIndex = 9
         Me.ucrReceiverStringHandling.ucrSelector = Nothing
         '
         'ucrInputReplaceBy
@@ -192,14 +192,14 @@ Partial Class dlgStringHandling
         Me.ucrInputReplaceBy.Location = New System.Drawing.Point(259, 211)
         Me.ucrInputReplaceBy.Name = "ucrInputReplaceBy"
         Me.ucrInputReplaceBy.Size = New System.Drawing.Size(138, 21)
-        Me.ucrInputReplaceBy.TabIndex = 12
+        Me.ucrInputReplaceBy.TabIndex = 14
         '
         'ucrSaveStringHandling
         '
         Me.ucrSaveStringHandling.Location = New System.Drawing.Point(10, 234)
         Me.ucrSaveStringHandling.Name = "ucrSaveStringHandling"
         Me.ucrSaveStringHandling.Size = New System.Drawing.Size(279, 24)
-        Me.ucrSaveStringHandling.TabIndex = 13
+        Me.ucrSaveStringHandling.TabIndex = 15
         '
         'ucrInputPattern
         '
@@ -209,7 +209,7 @@ Partial Class dlgStringHandling
         Me.ucrInputPattern.Location = New System.Drawing.Point(259, 167)
         Me.ucrInputPattern.Name = "ucrInputPattern"
         Me.ucrInputPattern.Size = New System.Drawing.Size(138, 21)
-        Me.ucrInputPattern.TabIndex = 10
+        Me.ucrInputPattern.TabIndex = 12
         '
         'ucrSelectorStringHandling
         '
@@ -219,14 +219,14 @@ Partial Class dlgStringHandling
         Me.ucrSelectorStringHandling.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorStringHandling.Name = "ucrSelectorStringHandling"
         Me.ucrSelectorStringHandling.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorStringHandling.TabIndex = 6
+        Me.ucrSelectorStringHandling.TabIndex = 7
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(10, 263)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(406, 52)
-        Me.ucrBase.TabIndex = 14
+        Me.ucrBase.TabIndex = 16
         '
         'ucrPnlStringHandling
         '
