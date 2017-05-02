@@ -159,7 +159,7 @@ Partial Class dlgPolynomials
         Me.lblSelectedVariable.Location = New System.Drawing.Point(258, 45)
         Me.lblSelectedVariable.Name = "lblSelectedVariable"
         Me.lblSelectedVariable.Size = New System.Drawing.Size(93, 13)
-        Me.lblSelectedVariable.TabIndex = 4
+        Me.lblSelectedVariable.TabIndex = 1
         Me.lblSelectedVariable.Text = "Selected Variable:"
         '
         'dlgPolynomials
