@@ -139,7 +139,7 @@ Partial Class dlgInventoryPlot
         '
         Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 329)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(283, 24)
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(255, 24)
         Me.ucrSaveGraph.TabIndex = 13
         '
         'ucrChkFlipCoordinates
