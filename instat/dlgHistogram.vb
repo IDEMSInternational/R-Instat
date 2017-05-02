@@ -65,17 +65,17 @@ Public Class dlgHistogram
         ucrFactorReceiver.Selector = ucrHistogramSelector
         ucrFactorReceiver.SetIncludedDataTypes({"factor"})
         'can put in colour for density and polygon but fill for Histogram
-        ucrFactorReceiver.SetParameter(New RParameter("fill"))
+        ucrFactorReceiver.SetParameter(New RParameter("fill", 1))
         ucrFactorReceiver.bWithQuotes = False
         ucrFactorReceiver.SetParameterIsString()
 
-        ucrHistogramSelector.SetParameter(New RParameter("data"))
+        ucrHistogramSelector.SetParameter(New RParameter("data", 0))
         ucrHistogramSelector.SetParameterIsrfunction()
 
         ucrVariablesAsFactorforHist.SetFactorReceiver(ucrFactorReceiver)
         ucrVariablesAsFactorforHist.Selector = ucrHistogramSelector
         ucrVariablesAsFactorforHist.SetIncludedDataTypes({"numeric"})
-        ucrVariablesAsFactorforHist.SetParameter(New RParameter("x"))
+        ucrVariablesAsFactorforHist.SetParameter(New RParameter("x", 0))
         ucrVariablesAsFactorforHist.bWithQuotes = False
         ucrVariablesAsFactorforHist.SetParameterIsString()
 
