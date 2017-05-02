@@ -42,9 +42,9 @@ Public Class dlgHistogram
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
         ucrBase.iHelpTopicID = 435
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         ucrPnlOptions.AddRadioButton(rdoHistogram)
         ucrPnlOptions.AddRadioButton(rdoDensity)
@@ -54,23 +54,22 @@ Public Class dlgHistogram
         ucrPnlOptions.AddFunctionNamesCondition(rdoDensity, "geom_density")
         ucrPnlOptions.AddFunctionNamesCondition(rdoFrequencyPolygon, "geom_freqpoly")
 
-        ucrFactorReceiver.Selector = ucrHistogramSelector
-        ucrFactorReceiver.SetIncludedDataTypes({"factor"})
-        'can put in colour for density and polygon but fill for Histogram
-        ucrFactorReceiver.SetParameter(New RParameter("fill"))
-        ucrFactorReceiver.bWithQuotes = False
-        ucrFactorReceiver.SetParameterIsString()
-
         ucrHistogramSelector.SetParameter(New RParameter("data"))
         ucrHistogramSelector.SetParameterIsrfunction()
 
+        'can put in colour for density and polygon but fill for Histogram
+        ucrFactorReceiver.SetParameter(New RParameter("fill"))
+        ucrFactorReceiver.Selector = ucrHistogramSelector
+        ucrFactorReceiver.SetIncludedDataTypes({"factor"})
+        ucrFactorReceiver.bWithQuotes = False
+        ucrFactorReceiver.SetParameterIsString()
+
+        ucrVariablesAsFactorforHist.SetParameter(New RParameter("x"))
         ucrVariablesAsFactorforHist.SetFactorReceiver(ucrFactorReceiver)
         ucrVariablesAsFactorforHist.Selector = ucrHistogramSelector
         ucrVariablesAsFactorforHist.SetIncludedDataTypes({"numeric"})
-        ucrVariablesAsFactorforHist.SetParameter(New RParameter("x"))
         ucrVariablesAsFactorforHist.bWithQuotes = False
         ucrVariablesAsFactorforHist.SetParameterIsString()
-
 
         ucrSaveHist.SetPrefix("Histogram")
         ucrSaveHist.SetDataFrameSelector(ucrHistogramSelector.ucrAvailableDataFrames)
@@ -81,16 +80,15 @@ Public Class dlgHistogram
     End Sub
 
     Private Sub SetDefaults()
-        ucrHistogramSelector.Reset()
-        ucrSaveHist.Reset()
-
-        sdgPlots.Reset()
-        TempOptionsDisabledInMultipleVariablesCase()
-
         clsBaseOperator = New ROperator
         clsRggplotFunction = New RFunction
         clsRgeomPlotFunction = New RFunction
         clsRaesFunction = New RFunction
+
+        ucrHistogramSelector.Reset()
+        ucrSaveHist.Reset()
+        sdgPlots.Reset()
+        TempOptionsDisabledInMultipleVariablesCase()
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
@@ -112,7 +110,7 @@ Public Class dlgHistogram
         TestOkEnabled()
     End Sub
 
-    Private Sub SetRCodeForControls(bReset As Boolean)
+    Public Sub SetRCodeForControls(bReset As Boolean)
         ucrVariablesAsFactorforHist.SetRCode(clsRaesFunction, bReset)
         ucrFactorReceiver.SetRCode(clsRaesFunction, bReset)
         ucrSaveHist.SetRCode(clsBaseOperator, bReset)
@@ -152,13 +150,13 @@ Public Class dlgHistogram
             clsRgeomPlotFunction.SetRCommand("geom_freqpoly")
             ucrSaveHist.SetPrefix("FrequencyPolygon")
             ucrFactorReceiver.ChangeParameterName("colour")
-            cmdHistogramOptions.Text = "Freequency Polygon Options"
+            cmdHistogramOptions.Text = "Frequency Polygon Options"
             cmdHistogramOptions.Size = New Size(160, 25)
         End If
     End Sub
 
     Private Sub TempOptionsDisabledInMultipleVariablesCase()
-        'why was this done? What implications oes it have
+        'why was this done? What implications does it have
         If ucrVariablesAsFactorforHist.bSingleVariable Then
             cmdHistogramOptions.Enabled = True
             cmdOptions.Enabled = True
@@ -212,7 +210,7 @@ Public Class dlgHistogram
         SetDialogOptions()
     End Sub
 
-    Private Sub ControlsValueChanged() Handles ucrVariablesAsFactorforHist.ControlContentsChanged, ucrSaveHist.ControlContentsChanged
+    Private Sub CoreControlsContentsChanged() Handles ucrVariablesAsFactorforHist.ControlContentsChanged, ucrSaveHist.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
