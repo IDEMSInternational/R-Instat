@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgViewFactorLabels
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsViewFunc, clsSelect As RFunction
+    Private clsViewDataFrame, clsSelect As RFunction
 
     Private Sub dlgFactorLabels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -37,6 +37,7 @@ Public Class dlgViewFactorLabels
     Private Sub InitialiseDialog()
         'TODO: HElP ID
 
+        'Setting the receiver factor column
         ucrReceiverFactorColumns.SetParameter(New RParameter("x", 1))
         ucrReceiverFactorColumns.SetParameterIsString()
         ucrReceiverFactorColumns.SetParameterIncludeArgumentName(False)
@@ -45,9 +46,12 @@ Public Class dlgViewFactorLabels
         ucrReceiverFactorColumns.Selector = ucrSelectorViewFactorLabels
         ucrReceiverFactorColumns.SetMeAsReceiver()
 
+        'Setting the selector paramater: Special case: Using the dplyr select function to extract variables from the receiver, to avoid a bug with the view_df function of producing double output while extracting columns in the normal way
+        'TODO: Change this to the normal way after the issue is addressed by the view_df function
         ucrSelectorViewFactorLabels.SetParameter(New RParameter(".data", 0))
         ucrSelectorViewFactorLabels.SetParameterIsrfunction()
 
+        'Setting respective parameters to various check boxes in the dialogue
         ucrChkShowLabels.SetParameter(New RParameter("show.labels", 1))
         ucrChkShowLabels.SetText("Show Variable Labels")
         ucrChkShowLabels.SetRDefault("TRUE")
@@ -86,21 +90,22 @@ Public Class dlgViewFactorLabels
     End Sub
 
     Private Sub SetDefaults()
-        clsViewFunc = New RFunction
+        clsViewDataFrame = New RFunction
         clsSelect = New RFunction
 
         'Reset
         ucrSelectorViewFactorLabels.Reset()
+
         'Defining the function
-        clsViewFunc.SetPackageName("sjPlot")
-        clsViewFunc.SetRCommand("view_df")
+        clsViewDataFrame.SetPackageName("sjPlot")
+        clsViewDataFrame.SetRCommand("view_df")
 
         clsSelect.SetPackageName("dplyr")
         clsSelect.SetRCommand("select")
 
-        clsViewFunc.AddParameter("x", clsRFunctionParameter:=clsSelect)
-        clsViewFunc.AddParameter("show.id", "FALSE")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsViewFunc)
+        clsViewDataFrame.AddParameter("x", clsRFunctionParameter:=clsSelect)
+        clsViewDataFrame.AddParameter("show.id", "FALSE")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsViewDataFrame)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -112,15 +117,15 @@ Public Class dlgViewFactorLabels
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrChkAlternateColour.SetRCode(clsViewFunc, bReset)
-        ucrChkShowFrequencies.SetRCode(clsViewFunc, bReset)
-        ucrChkShowId.SetRCode(clsViewFunc, bReset)
-        ucrChkShowLabels.SetRCode(clsViewFunc, bReset)
-        ucrChkShowMissingValues.SetRCode(clsViewFunc, bReset)
-        ucrChkSortByName.SetRCode(clsViewFunc, bReset)
-        ucrChkShowPercentage.SetRCode(clsViewFunc, bReset)
-        ucrChkShowType.SetRCode(clsViewFunc, bReset)
-        ucrChkShowValues.SetRCode(clsViewFunc, bReset)
+        ucrChkAlternateColour.SetRCode(clsViewDataFrame, bReset)
+        ucrChkShowFrequencies.SetRCode(clsViewDataFrame, bReset)
+        ucrChkShowId.SetRCode(clsViewDataFrame, bReset)
+        ucrChkShowLabels.SetRCode(clsViewDataFrame, bReset)
+        ucrChkShowMissingValues.SetRCode(clsViewDataFrame, bReset)
+        ucrChkSortByName.SetRCode(clsViewDataFrame, bReset)
+        ucrChkShowPercentage.SetRCode(clsViewDataFrame, bReset)
+        ucrChkShowType.SetRCode(clsViewDataFrame, bReset)
+        ucrChkShowValues.SetRCode(clsViewDataFrame, bReset)
         ucrReceiverFactorColumns.SetRCode(clsSelect, bReset)
         ucrSelectorViewFactorLabels.SetRCode(clsSelect, bReset)
     End Sub
@@ -131,7 +136,7 @@ Public Class dlgViewFactorLabels
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverFactorColumns_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactorColumns.ControlContentsChanged, ucrChkAlternateColour.ControlContentsChanged, ucrChkShowFrequencies.ControlContentsChanged, ucrChkShowId.ControlContentsChanged, ucrChkShowLabels.ControlContentsChanged, ucrChkShowMissingValues.ControlContentsChanged, ucrChkShowPercentage.ControlContentsChanged, ucrChkShowType.ControlContentsChanged, ucrChkShowValues.ControlContentsChanged, ucrChkSortByName.ControlContentsChanged
+    Private Sub ucrReceiverFactorColumns_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactorColumns.ControlContentsChanged, ucrChkShowLabels.ControlContentsChanged, ucrChkShowType.ControlContentsChanged, ucrChkShowValues.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
