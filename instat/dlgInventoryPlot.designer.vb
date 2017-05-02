@@ -42,7 +42,7 @@ Partial Class dlgInventoryPlot
         'cmdOptions
         '
         Me.cmdOptions.Enabled = False
-        Me.cmdOptions.Location = New System.Drawing.Point(10, 193)
+        Me.cmdOptions.Location = New System.Drawing.Point(10, 222)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(121, 23)
         Me.cmdOptions.TabIndex = 7
@@ -70,7 +70,7 @@ Partial Class dlgInventoryPlot
         'cmdInventoryPlotOptions
         '
         Me.cmdInventoryPlotOptions.Enabled = False
-        Me.cmdInventoryPlotOptions.Location = New System.Drawing.Point(10, 222)
+        Me.cmdInventoryPlotOptions.Location = New System.Drawing.Point(10, 194)
         Me.cmdInventoryPlotOptions.Name = "cmdInventoryPlotOptions"
         Me.cmdInventoryPlotOptions.Size = New System.Drawing.Size(121, 23)
         Me.cmdInventoryPlotOptions.TabIndex = 8
