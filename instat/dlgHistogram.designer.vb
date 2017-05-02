@@ -167,7 +167,7 @@ Partial Class dlgHistogram
         '
         Me.ucrSaveHist.Location = New System.Drawing.Point(10, 300)
         Me.ucrSaveHist.Name = "ucrSaveHist"
-        Me.ucrSaveHist.Size = New System.Drawing.Size(254, 24)
+        Me.ucrSaveHist.Size = New System.Drawing.Size(255, 24)
         Me.ucrSaveHist.TabIndex = 12
         '
         'dlgHistogram

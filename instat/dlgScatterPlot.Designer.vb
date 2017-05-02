@@ -78,7 +78,7 @@ Partial Class dlgScatterPlot
         '
         Me.ucrSaveScatterPlot.Location = New System.Drawing.Point(10, 269)
         Me.ucrSaveScatterPlot.Name = "ucrSaveScatterPlot"
-        Me.ucrSaveScatterPlot.Size = New System.Drawing.Size(253, 24)
+        Me.ucrSaveScatterPlot.Size = New System.Drawing.Size(254, 24)
         Me.ucrSaveScatterPlot.TabIndex = 8
         '
         'ucrSelectorForScatter
