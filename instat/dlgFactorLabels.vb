@@ -49,39 +49,39 @@ Public Class dlgViewFactorLabels
         ucrSelectorViewFactorLabels.SetParameterIsrfunction()
 
         ucrChkShowLabels.SetParameter(New RParameter("show.labels", 1))
-        ucrChkShowLabels.SetText("Show variable labels")
+        ucrChkShowLabels.SetText("Show Variable Labels")
         ucrChkShowLabels.SetRDefault("TRUE")
 
         ucrChkShowType.SetParameter(New RParameter("show.type", 2))
-        ucrChkShowType.SetText("Show column types")
+        ucrChkShowType.SetText("Show Column Types")
         ucrChkShowType.SetRDefault("FALSE")
 
         ucrChkShowValues.SetParameter(New RParameter("show.values", 3))
-        ucrChkShowValues.SetText("Show numeric values")
+        ucrChkShowValues.SetText("Show Numeric Values")
         ucrChkShowValues.SetRDefault("TRUE")
 
         ucrChkShowMissingValues.SetParameter(New RParameter("show.na", 4))
-        ucrChkShowMissingValues.SetText("Show missing values")
+        ucrChkShowMissingValues.SetText("Show Missing Values")
         ucrChkShowMissingValues.SetRDefault("FALSE")
 
         ucrChkShowId.SetParameter(New RParameter("show.id", 5))
-        ucrChkShowId.SetText("Show id")
+        ucrChkShowId.SetText("Show ID")
         ucrChkShowId.SetRDefault("TRUE")
 
         ucrChkShowPercentage.SetParameter(New RParameter("show.prc", 6))
-        ucrChkShowPercentage.SetText("Show percentages")
+        ucrChkShowPercentage.SetText("Show Percentages")
         ucrChkShowPercentage.SetRDefault("FALSE")
 
         ucrChkShowFrequencies.SetParameter(New RParameter("show.frq", 7))
-        ucrChkShowFrequencies.SetText("Show frequencies")
+        ucrChkShowFrequencies.SetText("Show Frequencies")
         ucrChkShowFrequencies.SetRDefault("FALSE")
 
         ucrChkAlternateColour.SetParameter(New RParameter("altr.row.col", 8))
-        ucrChkAlternateColour.SetText("Highlight alternate rows")
+        ucrChkAlternateColour.SetText("Highlight Alternate Rows")
         ucrChkAlternateColour.SetRDefault("TRUE")
 
         ucrChkSortByName.SetParameter(New RParameter("sort.by.name", 9))
-        ucrChkSortByName.SetText("Sort by name")
+        ucrChkSortByName.SetText("Sort by Name")
         ucrChkSortByName.SetRDefault("FALSE")
     End Sub
 
