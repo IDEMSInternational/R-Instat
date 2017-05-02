@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgViewFactorLabels
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsViewFunc, clsSelect As RFunction
+    Private clsViewFunction, clsSelect As RFunction
 
     Private Sub dlgFactorLabels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -41,7 +41,7 @@ Public Class dlgViewFactorLabels
         ucrReceiverFactorColumns.SetParameterIsString()
         ucrReceiverFactorColumns.SetParameterIncludeArgumentName(False)
         ucrReceiverFactorColumns.bWithQuotes = False
-        ucrReceiverFactorColumns.SetIncludedDataTypes({"factor", "ordered"})
+        ucrReceiverFactorColumns.SetIncludedDataTypes({"factor", "numeric"})
         ucrReceiverFactorColumns.Selector = ucrSelectorViewFactorLabels
         ucrReceiverFactorColumns.SetMeAsReceiver()
 
@@ -49,62 +49,63 @@ Public Class dlgViewFactorLabels
         ucrSelectorViewFactorLabels.SetParameterIsrfunction()
 
         ucrChkShowLabels.SetParameter(New RParameter("show.labels", 1))
-        ucrChkShowLabels.SetText("Show Variable Labels")
+        ucrChkShowLabels.SetText("Show variable labels")
         ucrChkShowLabels.SetRDefault("TRUE")
 
         ucrChkShowType.SetParameter(New RParameter("show.type", 2))
-        ucrChkShowType.SetText("Show Variable Type")
+        ucrChkShowType.SetText("Show column types")
         ucrChkShowType.SetRDefault("FALSE")
 
         ucrChkShowValues.SetParameter(New RParameter("show.values", 3))
-        ucrChkShowValues.SetText("Show Variable Values")
+        ucrChkShowValues.SetText("Show numeric values")
         ucrChkShowValues.SetRDefault("TRUE")
 
         ucrChkShowMissingValues.SetParameter(New RParameter("show.na", 4))
-        ucrChkShowMissingValues.SetText("Show Missing Values")
+        ucrChkShowMissingValues.SetText("Show missing values")
         ucrChkShowMissingValues.SetRDefault("FALSE")
 
         ucrChkShowId.SetParameter(New RParameter("show.id", 5))
-        ucrChkShowId.SetText("Show ID")
+        ucrChkShowId.SetText("Show id")
         ucrChkShowId.SetRDefault("TRUE")
 
         ucrChkShowPercentage.SetParameter(New RParameter("show.prc", 6))
-        ucrChkShowPercentage.SetText("Show Percentages")
+        ucrChkShowPercentage.SetText("Show percentages")
         ucrChkShowPercentage.SetRDefault("FALSE")
 
         ucrChkShowFrequencies.SetParameter(New RParameter("show.frq", 7))
-        ucrChkShowFrequencies.SetText("Show Frequencies")
+        ucrChkShowFrequencies.SetText("Show frequencies")
         ucrChkShowFrequencies.SetRDefault("FALSE")
 
         ucrChkAlternateColour.SetParameter(New RParameter("altr.row.col", 8))
-        ucrChkAlternateColour.SetText("Highlight Alternate Rows")
+        ucrChkAlternateColour.SetText("Highlight alternate rows")
         ucrChkAlternateColour.SetRDefault("TRUE")
 
         ucrChkSortByName.SetParameter(New RParameter("sort.by.name", 9))
-        ucrChkSortByName.SetText("Sort by Name")
+        ucrChkSortByName.SetText("Sort by name")
         ucrChkSortByName.SetRDefault("FALSE")
     End Sub
 
     Private Sub SetDefaults()
-        clsViewFunc = New RFunction
+        clsViewFunction = New RFunction
         clsSelect = New RFunction
 
         'Reset
         ucrSelectorViewFactorLabels.Reset()
         'Defining the function
-        clsViewFunc.SetPackageName("sjPlot")
-        clsViewFunc.SetRCommand("view_df")
+        clsViewFunction.SetPackageName("sjPlot")
+        clsViewFunction.SetRCommand("view_df")
 
         clsSelect.SetPackageName("dplyr")
         clsSelect.SetRCommand("select")
 
-        clsViewFunc.AddParameter("x", clsRFunctionParameter:=clsSelect)
-        clsViewFunc.AddParameter("show.id", "FALSE")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsViewFunc)
+        clsViewFunction.AddParameter("x", clsRFunctionParameter:=clsSelect)
+        clsViewFunction.AddParameter("show.frq", "TRUE")
+        clsViewFunction.AddParameter("show.id", "FALSE")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsViewFunction)
     End Sub
 
     Private Sub TestOkEnabled()
-        If (Not (ucrReceiverFactorColumns.IsEmpty) AndAlso (ucrChkAlternateColour.Checked OrElse ucrChkShowFrequencies.Checked OrElse ucrChkShowId.Checked OrElse ucrChkShowLabels.Checked OrElse ucrChkShowMissingValues.Checked OrElse ucrChkShowPercentage.Checked OrElse ucrChkShowType.Checked OrElse ucrChkShowValues.Checked OrElse ucrChkSortByName.Checked)) Then
+        If (Not (ucrReceiverFactorColumns.IsEmpty) AndAlso (ucrChkShowLabels.Checked OrElse ucrChkShowType.Checked OrElse ucrChkShowValues.Checked OrElse ucrChkShowFrequencies.Checked OrElse ucrChkShowPercentage.Checked)) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -112,15 +113,15 @@ Public Class dlgViewFactorLabels
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrChkAlternateColour.SetRCode(clsViewFunc, bReset)
-        ucrChkShowFrequencies.SetRCode(clsViewFunc, bReset)
-        ucrChkShowId.SetRCode(clsViewFunc, bReset)
-        ucrChkShowLabels.SetRCode(clsViewFunc, bReset)
-        ucrChkShowMissingValues.SetRCode(clsViewFunc, bReset)
-        ucrChkSortByName.SetRCode(clsViewFunc, bReset)
-        ucrChkShowPercentage.SetRCode(clsViewFunc, bReset)
-        ucrChkShowType.SetRCode(clsViewFunc, bReset)
-        ucrChkShowValues.SetRCode(clsViewFunc, bReset)
+        ucrChkAlternateColour.SetRCode(clsViewFunction, bReset)
+        ucrChkShowFrequencies.SetRCode(clsViewFunction, bReset)
+        ucrChkShowId.SetRCode(clsViewFunction, bReset)
+        ucrChkShowLabels.SetRCode(clsViewFunction, bReset)
+        ucrChkShowMissingValues.SetRCode(clsViewFunction, bReset)
+        ucrChkSortByName.SetRCode(clsViewFunction, bReset)
+        ucrChkShowPercentage.SetRCode(clsViewFunction, bReset)
+        ucrChkShowType.SetRCode(clsViewFunction, bReset)
+        ucrChkShowValues.SetRCode(clsViewFunction, bReset)
         ucrReceiverFactorColumns.SetRCode(clsSelect, bReset)
         ucrSelectorViewFactorLabels.SetRCode(clsSelect, bReset)
     End Sub
@@ -131,7 +132,7 @@ Public Class dlgViewFactorLabels
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverFactorColumns_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactorColumns.ControlContentsChanged, ucrChkAlternateColour.ControlContentsChanged, ucrChkShowFrequencies.ControlContentsChanged, ucrChkShowId.ControlContentsChanged, ucrChkShowLabels.ControlContentsChanged, ucrChkShowMissingValues.ControlContentsChanged, ucrChkShowPercentage.ControlContentsChanged, ucrChkShowType.ControlContentsChanged, ucrChkShowValues.ControlContentsChanged, ucrChkSortByName.ControlContentsChanged
+    Private Sub ucrReceiverFactorColumns_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactorColumns.ControlContentsChanged, ucrChkShowFrequencies.ControlContentsChanged, ucrChkShowLabels.ControlContentsChanged, ucrChkShowPercentage.ControlContentsChanged, ucrChkShowType.ControlContentsChanged, ucrChkShowValues.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
