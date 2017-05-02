@@ -775,8 +775,8 @@ instat_object$set("public", "rename_dataframe", function(data_name, new_value = 
 } 
 )
 
-instat_object$set("public", "convert_column_to_type", function(data_name, col_names = c(), to_type, factor_numeric = "by_levels", set_digits, set_decimals = FALSE, keep_attr = TRUE) {
-  self$get_data_objects(data_name)$convert_column_to_type(col_names = col_names, to_type = to_type, factor_numeric = factor_numeric, set_digits = set_digits,set_decimals = set_decimals, keep_attr = keep_attr)
+instat_object$set("public", "convert_column_to_type", function(data_name, col_names = c(), to_type, factor_values = NULL, set_digits, set_decimals = FALSE, keep_attr = TRUE, use_labels = TRUE) {
+  self$get_data_objects(data_name)$convert_column_to_type(col_names = col_names, to_type = to_type, factor_values = factor_values, set_digits = set_digits,set_decimals = set_decimals, keep_attr = keep_attr, use_labels = use_labels)
 } 
 )
 
@@ -831,8 +831,8 @@ instat_object$set("public", "drop_unused_factor_levels", function(data_name, col
 } 
 )
 
-instat_object$set("public", "set_factor_levels", function(data_name, col_name, new_levels) {
-  self$get_data_objects(data_name)$set_factor_levels(col_name = col_name, new_levels = new_levels)
+instat_object$set("public", "set_factor_levels", function(data_name, col_name, new_levels, set_new_labels = TRUE) {
+  self$get_data_objects(data_name)$set_factor_levels(col_name = col_name, new_levels = new_levels, set_new_labels = set_new_labels)
 } 
 )
 
