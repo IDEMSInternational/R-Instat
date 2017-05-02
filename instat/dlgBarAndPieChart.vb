@@ -44,7 +44,7 @@ Public Class dlgBarAndPieChart
         ucrChkFlipCoordinates.SetRCode(clsBaseOperator, bReset)
         ucrFactorReceiver.SetRCode(clsRaesFunction, bReset)
         ucrSecondReceiver.SetRCode(clsRaesFunction, bReset)
-        ucrPnlOptions.SetRCode(clsRggplotFunction, bReset)
+        ucrPnlOptions.SetRCode(clsRgeomPlotFunction, bReset)
     End Sub
 
     Private Sub SetDefaults()
@@ -101,6 +101,7 @@ Public Class dlgBarAndPieChart
         ucrPnlOptions.AddRadioButton(rdoBarChart)
         ucrPnlOptions.AddRadioButton(rdoPieChart)
         ucrPnlOptions.AddFunctionNamesCondition(rdoPieChart, "coord_polar")
+        ucrPnlOptions.AddFunctionNamesCondition(rdoBarChart, "geom_bar")
 
         ucrPnlOptions.AddToLinkedControls(ucrChkFlipCoordinates, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrSecondReceiver, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -149,20 +150,31 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub grpSelection_CheckedChanged() Handles ucrPnlOptions.ControlValueChanged
+        Dim clsBarForPieFunc As New RFunction
+        Dim clsBarForPieParam As New RParameter
+
         If rdoBarChart.Checked = True Then
             ucrSaveBar.SetPrefix("Bar")
+            clsRgeomPlotFunction.SetPackageName("ggplot2")
+            clsRgeomPlotFunction.SetRCommand("geom_bar")
+            cmdPieChartOptions.Visible = False
+            cmdBarChartOptions.Visible = True
         ElseIf rdoPieChart.Checked = True Then
             ucrSaveBar.SetPrefix("Pie")
-            Dim clsCoordPolarFunc As New RFunction
-            Dim clsCoordPolarParam As New RParameter
-            clsCoordPolarParam.SetArgument(clsCoordPolarFunc)
-            clsCoordPolarFunc.SetRCommand("coord_polar")
-            clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
-            clsRgeomPlotFunction.AddParameter("width", "1")
-            clsCoordPolarFunc.AddParameter("theta", Chr(34) & "y" & Chr(34))
+            cmdPieChartOptions.Visible = True
+            cmdBarChartOptions.Visible = False
+            clsRgeomPlotFunction.SetPackageName("ggplot2")
+            clsRgeomPlotFunction.SetRCommand("coord_polar")
+            clsRgeomPlotFunction.AddParameter("theta", Chr(34) & "y" & Chr(34))
+
+            clsBarForPieParam.SetArgument(clsBarForPieFunc)
+            clsBarForPieFunc.SetPackageName("ggplot2")
+            clsBarForPieParam.SetArgumentName("geom_bar")
+            clsBarForPieFunc.SetRCommand("geom_bar")
+            clsBarForPieFunc.AddParameter("width", "1")
+            clsBaseOperator.AddParameter(clsBarForPieParam)
         End If
         'Warning: need to set second factor first, as in the pie chart case, it erases "fill" parameter (in clsRaesFunction), which is the parameter that takes the value in the first factor receiver.
-        SetFactorReceiverParameter()
         TestOKEnabled()
     End Sub
 
