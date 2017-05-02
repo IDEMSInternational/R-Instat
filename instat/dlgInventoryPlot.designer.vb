@@ -45,7 +45,7 @@ Partial Class dlgInventoryPlot
         Me.cmdOptions.Location = New System.Drawing.Point(10, 222)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(121, 23)
-        Me.cmdOptions.TabIndex = 7
+        Me.cmdOptions.TabIndex = 8
         Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
@@ -73,7 +73,7 @@ Partial Class dlgInventoryPlot
         Me.cmdInventoryPlotOptions.Location = New System.Drawing.Point(10, 194)
         Me.cmdInventoryPlotOptions.Name = "cmdInventoryPlotOptions"
         Me.cmdInventoryPlotOptions.Size = New System.Drawing.Size(121, 23)
-        Me.cmdInventoryPlotOptions.TabIndex = 8
+        Me.cmdInventoryPlotOptions.TabIndex = 7
         Me.cmdInventoryPlotOptions.Text = "Inventory Plot Options"
         Me.cmdInventoryPlotOptions.UseVisualStyleBackColor = True
         '
@@ -132,7 +132,7 @@ Partial Class dlgInventoryPlot
         Me.ucrChkShowNonMissing.Location = New System.Drawing.Point(10, 251)
         Me.ucrChkShowNonMissing.Name = "ucrChkShowNonMissing"
         Me.ucrChkShowNonMissing.Size = New System.Drawing.Size(151, 20)
-        Me.ucrChkShowNonMissing.TabIndex = 10
+        Me.ucrChkShowNonMissing.TabIndex = 9
         Me.ucrChkShowNonMissing.Visible = False
         '
         'ucrSaveGraph
@@ -148,7 +148,7 @@ Partial Class dlgInventoryPlot
         Me.ucrChkFlipCoordinates.Location = New System.Drawing.Point(10, 277)
         Me.ucrChkFlipCoordinates.Name = "ucrChkFlipCoordinates"
         Me.ucrChkFlipCoordinates.Size = New System.Drawing.Size(151, 20)
-        Me.ucrChkFlipCoordinates.TabIndex = 9
+        Me.ucrChkFlipCoordinates.TabIndex = 10
         '
         'ucrReceiverStation
         '
