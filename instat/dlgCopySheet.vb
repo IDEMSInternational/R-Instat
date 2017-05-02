@@ -89,7 +89,7 @@ Public Class dlgCopySheet
         End If
     End Sub
 
-    Private Sub Control_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameCopySheets.ControlContentsChanged, ucrNewDataFrameName.ControlValueChanged
+    Private Sub Control_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameCopySheets.ControlContentsChanged, ucrNewDataFrameName.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
@@ -103,8 +103,5 @@ Public Class dlgCopySheet
             ucrNewDataFrameName.SetName(ucrDataFrameCopySheets.cboAvailableDataFrames.Text & "_copy")
         End If
     End Sub
-
-    Private Sub ucrNewDataFrameName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNewDataFrameName.ControlValueChanged
-        'CheckAutoName()
-    End Sub
+    
 End Class
