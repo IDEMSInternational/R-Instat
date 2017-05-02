@@ -27,7 +27,6 @@ Public Class dlgPolynomials
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
-        ReopenDialog()
         bReset = False
     End Sub
 
@@ -76,7 +75,6 @@ Public Class dlgPolynomials
         'Reset 
         ucrSelectorForPolynomial.Reset()
         ucrSavePoly.Reset()
-        SetNewColumName()
 
         clsPolynomial.SetRCommand("poly")
         clsPolynomial.AddParameter("degree", 2)
@@ -95,6 +93,8 @@ Public Class dlgPolynomials
         ucrSavePoly.SetRCode(clsPolynomial, bReset)
         ucrReceiverPolynomial.SetRCode(clsPolynomial, bReset)
         ucrReceiverPolynomial.AddAdditionalCodeParameterPair(clsScale, New RParameter("x", 0), iAdditionalPairNo:=1)
+
+        SetNewColumName()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -109,10 +109,6 @@ Public Class dlgPolynomials
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
-    End Sub
-
-    Private Sub ReopenDialog()
-        SetNewColumName()
     End Sub
 
     Private Sub SetNewColumName()
