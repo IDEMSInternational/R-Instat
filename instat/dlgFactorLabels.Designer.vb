@@ -133,7 +133,7 @@ Partial Class dlgViewFactorLabels
         Me.ucrChkAlternateColour.Checked = False
         Me.ucrChkAlternateColour.Location = New System.Drawing.Point(6, 66)
         Me.ucrChkAlternateColour.Name = "ucrChkAlternateColour"
-        Me.ucrChkAlternateColour.Size = New System.Drawing.Size(140, 20)
+        Me.ucrChkAlternateColour.Size = New System.Drawing.Size(146, 20)
         Me.ucrChkAlternateColour.TabIndex = 2
         '
         'ucrBase
