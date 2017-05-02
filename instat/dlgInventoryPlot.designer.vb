@@ -102,9 +102,9 @@ Partial Class dlgInventoryPlot
         Me.ucrInputTitle.AddQuotesIfUnrecognised = True
         Me.ucrInputTitle.IsMultiline = False
         Me.ucrInputTitle.IsReadOnly = False
-        Me.ucrInputTitle.Location = New System.Drawing.Point(120, 303)
+        Me.ucrInputTitle.Location = New System.Drawing.Point(92, 302)
         Me.ucrInputTitle.Name = "ucrInputTitle"
-        Me.ucrInputTitle.Size = New System.Drawing.Size(259, 21)
+        Me.ucrInputTitle.Size = New System.Drawing.Size(204, 21)
         Me.ucrInputTitle.TabIndex = 12
         '
         'ucrChkTitle
