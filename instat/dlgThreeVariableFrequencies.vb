@@ -55,15 +55,14 @@ Public Class dlgThreeVariableFrequencies
         ucrReceiverColumnFactor.bWithQuotes = False
         ucrReceiverColumnFactor.SetParameterIncludeArgumentName(False)
 
-
-        ucrReceiverGroupsBy1st.SetParameter(New RParameter("x"))
+        ucrReceiverGroupsBy1st.SetParameter(New RParameter("x", 0))
         ucrReceiverGroupsBy1st.Selector = ucrSelectorThreeVariableFrequencies
         ucrReceiverGroupsBy1st.SetDataType("factor")
         ucrReceiverGroupsBy1st.SetParameterIsString()
         ucrReceiverGroupsBy1st.bWithQuotes = False
         ucrReceiverGroupsBy1st.SetParameterIncludeArgumentName(False)
 
-        ucrReceiverGroupBy2nd.SetParameter(New RParameter("y"))
+        ucrReceiverGroupBy2nd.SetParameter(New RParameter("y", 0))
         ucrReceiverGroupBy2nd.Selector = ucrSelectorThreeVariableFrequencies
         ucrReceiverGroupBy2nd.SetDataType("factor")
         ucrReceiverGroupBy2nd.SetParameterIsString()
@@ -219,6 +218,12 @@ Public Class dlgThreeVariableFrequencies
         End If
     End Sub
 
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
+    End Sub
+
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         If rdoTable.Checked OrElse rdoBoth.Checked Then
             ucrBase.clsRsyntax.SetBaseROperator(clsTableBaseOperator)
@@ -227,12 +232,6 @@ Public Class dlgThreeVariableFrequencies
             ucrBase.clsRsyntax.SetBaseROperator(clsGraphBaseOperator)
             ucrBase.clsRsyntax.iCallType = 3
         End If
-    End Sub
-
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
-        SetRCodeForControls(True)
-        TestOkEnabled()
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
@@ -263,6 +262,18 @@ Public Class dlgThreeVariableFrequencies
         TestOkEnabled()
     End Sub
 
+    Private Sub ChangeLocation()
+        If rdoBoth.Checked Then
+            grpFreqTypeTable.Location = New Point(260, 261)
+            grpFreqTypeGraph.Location = New Point(384, 261)
+            Me.Size = New Size(525, 469)
+        Else
+            grpFreqTypeTable.Location = New Point(260, 261)
+            grpFreqTypeGraph.Location = New Point(260, 261)
+            Me.Size = New Size(431, 469)
+        End If
+    End Sub
+
     Private Sub ucrPnlFrequencyDisplay_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFlip.ControlValueChanged, ucrPnlFrequencyDisplay.ControlValueChanged
         Dim clsRowParam As RParameter
         Dim clsColumnParam As RParameter
@@ -280,7 +291,7 @@ Public Class dlgThreeVariableFrequencies
             ucrReceiverRowFactor.SetParameter(clsRowParam)
             ucrReceiverColumnFactor.SetParameter(clsColumnParam)
         End If
-        changelocation()
+        ChangeLocation()
     End Sub
 
     Private Sub ucrChkFlip_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFlip.ControlValueChanged
@@ -304,17 +315,5 @@ Public Class dlgThreeVariableFrequencies
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnFactor.ControlContentsChanged, ucrReceiverRowFactor.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrReceiverGroupBy2nd.ControlContentsChanged, ucrReceiverGroupsBy1st.ControlContentsChanged
         TestOkEnabled()
-    End Sub
-
-    Private Sub changelocation()
-        If rdoBoth.Checked Then
-            grpFreqTypeTable.Location = New Point(260, 261)
-            grpFreqTypeGraph.Location = New Point(384, 261)
-            Me.Size = New Size(525, 469)
-        Else
-            grpFreqTypeTable.Location = New Point(260, 261)
-            grpFreqTypeGraph.Location = New Point(260, 261)
-            Me.Size = New Size(431, 469)
-        End If
     End Sub
 End Class
