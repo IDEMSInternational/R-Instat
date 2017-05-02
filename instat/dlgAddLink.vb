@@ -93,7 +93,7 @@ Public Class dlgAddLink
 
         lvwLinkViewBox.Items.Clear()
 
-        lblKeys.Text = ucrDataSelectorTo.cboAvailableDataFrames.SelectedItem & " keys:"
+        lblKeys.Text = ucrDataSelectorTo.cboAvailableDataFrames.SelectedItem & " Keys:"
         clsGetKeys.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_keys")
         clsGetKeys.AddParameter("data_name", Chr(34) & ucrDataSelectorTo.cboAvailableDataFrames.SelectedItem & Chr(34))
         lstKeys = frmMain.clsRLink.RunInternalScriptGetValue(clsGetKeys.ToScript).AsList
