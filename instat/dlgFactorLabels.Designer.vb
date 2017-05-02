@@ -23,7 +23,7 @@ Partial Class dlgViewFactorLabels
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblFactorColumns = New System.Windows.Forms.Label()
-        Me.grpFactorLabels = New System.Windows.Forms.GroupBox()
+        Me.grpSummaryStatistics = New System.Windows.Forms.GroupBox()
         Me.ucrChkShowLabels = New instat.ucrCheck()
         Me.ucrChkShowPercentage = New instat.ucrCheck()
         Me.ucrChkShowId = New instat.ucrCheck()
@@ -36,7 +36,11 @@ Partial Class dlgViewFactorLabels
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverFactorColumns = New instat.ucrReceiverMultiple()
         Me.ucrSelectorViewFactorLabels = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.grpFactorLabels.SuspendLayout()
+        Me.grpDisplayOptions = New System.Windows.Forms.GroupBox()
+        Me.grpLabels = New System.Windows.Forms.GroupBox()
+        Me.grpSummaryStatistics.SuspendLayout()
+        Me.grpDisplayOptions.SuspendLayout()
+        Me.grpLabels.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblFactorColumns
@@ -48,28 +52,22 @@ Partial Class dlgViewFactorLabels
         Me.lblFactorColumns.TabIndex = 1
         Me.lblFactorColumns.Text = "Factor Columns:"
         '
-        'grpFactorLabels
+        'grpSummaryStatistics
         '
-        Me.grpFactorLabels.Controls.Add(Me.ucrChkShowLabels)
-        Me.grpFactorLabels.Controls.Add(Me.ucrChkShowPercentage)
-        Me.grpFactorLabels.Controls.Add(Me.ucrChkShowId)
-        Me.grpFactorLabels.Controls.Add(Me.ucrChkSortByName)
-        Me.grpFactorLabels.Controls.Add(Me.ucrChkShowFrequencies)
-        Me.grpFactorLabels.Controls.Add(Me.ucrChkShowValues)
-        Me.grpFactorLabels.Controls.Add(Me.ucrChkShowMissingValues)
-        Me.grpFactorLabels.Controls.Add(Me.ucrChkShowType)
-        Me.grpFactorLabels.Controls.Add(Me.ucrChkAlternateColour)
-        Me.grpFactorLabels.Location = New System.Drawing.Point(10, 202)
-        Me.grpFactorLabels.Name = "grpFactorLabels"
-        Me.grpFactorLabels.Size = New System.Drawing.Size(462, 96)
-        Me.grpFactorLabels.TabIndex = 3
-        Me.grpFactorLabels.TabStop = False
-        Me.grpFactorLabels.Text = "View Variable(s) Options"
+        Me.grpSummaryStatistics.Controls.Add(Me.ucrChkShowPercentage)
+        Me.grpSummaryStatistics.Controls.Add(Me.ucrChkShowFrequencies)
+        Me.grpSummaryStatistics.Controls.Add(Me.ucrChkShowMissingValues)
+        Me.grpSummaryStatistics.Location = New System.Drawing.Point(372, 201)
+        Me.grpSummaryStatistics.Name = "grpSummaryStatistics"
+        Me.grpSummaryStatistics.Size = New System.Drawing.Size(165, 96)
+        Me.grpSummaryStatistics.TabIndex = 3
+        Me.grpSummaryStatistics.TabStop = False
+        Me.grpSummaryStatistics.Text = "Summary Statistics"
         '
         'ucrChkShowLabels
         '
         Me.ucrChkShowLabels.Checked = False
-        Me.ucrChkShowLabels.Location = New System.Drawing.Point(154, 71)
+        Me.ucrChkShowLabels.Location = New System.Drawing.Point(11, 63)
         Me.ucrChkShowLabels.Name = "ucrChkShowLabels"
         Me.ucrChkShowLabels.Size = New System.Drawing.Size(148, 20)
         Me.ucrChkShowLabels.TabIndex = 6
@@ -85,7 +83,7 @@ Partial Class dlgViewFactorLabels
         'ucrChkShowId
         '
         Me.ucrChkShowId.Checked = False
-        Me.ucrChkShowId.Location = New System.Drawing.Point(308, 19)
+        Me.ucrChkShowId.Location = New System.Drawing.Point(6, 18)
         Me.ucrChkShowId.Name = "ucrChkShowId"
         Me.ucrChkShowId.Size = New System.Drawing.Size(148, 20)
         Me.ucrChkShowId.TabIndex = 3
@@ -93,7 +91,7 @@ Partial Class dlgViewFactorLabels
         'ucrChkSortByName
         '
         Me.ucrChkSortByName.Checked = False
-        Me.ucrChkSortByName.Location = New System.Drawing.Point(308, 45)
+        Me.ucrChkSortByName.Location = New System.Drawing.Point(6, 44)
         Me.ucrChkSortByName.Name = "ucrChkSortByName"
         Me.ucrChkSortByName.Size = New System.Drawing.Size(148, 20)
         Me.ucrChkSortByName.TabIndex = 7
@@ -109,7 +107,7 @@ Partial Class dlgViewFactorLabels
         'ucrChkShowValues
         '
         Me.ucrChkShowValues.Checked = False
-        Me.ucrChkShowValues.Location = New System.Drawing.Point(154, 19)
+        Me.ucrChkShowValues.Location = New System.Drawing.Point(11, 11)
         Me.ucrChkShowValues.Name = "ucrChkShowValues"
         Me.ucrChkShowValues.Size = New System.Drawing.Size(148, 20)
         Me.ucrChkShowValues.TabIndex = 0
@@ -125,7 +123,7 @@ Partial Class dlgViewFactorLabels
         'ucrChkShowType
         '
         Me.ucrChkShowType.Checked = False
-        Me.ucrChkShowType.Location = New System.Drawing.Point(154, 45)
+        Me.ucrChkShowType.Location = New System.Drawing.Point(11, 37)
         Me.ucrChkShowType.Name = "ucrChkShowType"
         Me.ucrChkShowType.Size = New System.Drawing.Size(148, 20)
         Me.ucrChkShowType.TabIndex = 4
@@ -133,7 +131,7 @@ Partial Class dlgViewFactorLabels
         'ucrChkAlternateColour
         '
         Me.ucrChkAlternateColour.Checked = False
-        Me.ucrChkAlternateColour.Location = New System.Drawing.Point(308, 71)
+        Me.ucrChkAlternateColour.Location = New System.Drawing.Point(6, 70)
         Me.ucrChkAlternateColour.Name = "ucrChkAlternateColour"
         Me.ucrChkAlternateColour.Size = New System.Drawing.Size(148, 20)
         Me.ucrChkAlternateColour.TabIndex = 8
@@ -166,12 +164,38 @@ Partial Class dlgViewFactorLabels
         Me.ucrSelectorViewFactorLabels.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorViewFactorLabels.TabIndex = 0
         '
+        'grpDisplayOptions
+        '
+        Me.grpDisplayOptions.Controls.Add(Me.ucrChkSortByName)
+        Me.grpDisplayOptions.Controls.Add(Me.ucrChkAlternateColour)
+        Me.grpDisplayOptions.Controls.Add(Me.ucrChkShowId)
+        Me.grpDisplayOptions.Location = New System.Drawing.Point(199, 200)
+        Me.grpDisplayOptions.Name = "grpDisplayOptions"
+        Me.grpDisplayOptions.Size = New System.Drawing.Size(171, 96)
+        Me.grpDisplayOptions.TabIndex = 6
+        Me.grpDisplayOptions.TabStop = False
+        Me.grpDisplayOptions.Text = "Display Options"
+        '
+        'grpLabels
+        '
+        Me.grpLabels.Controls.Add(Me.ucrChkShowType)
+        Me.grpLabels.Controls.Add(Me.ucrChkShowValues)
+        Me.grpLabels.Controls.Add(Me.ucrChkShowLabels)
+        Me.grpLabels.Location = New System.Drawing.Point(10, 199)
+        Me.grpLabels.Name = "grpLabels"
+        Me.grpLabels.Size = New System.Drawing.Size(188, 96)
+        Me.grpLabels.TabIndex = 6
+        Me.grpLabels.TabStop = False
+        Me.grpLabels.Text = "Variable labels"
+        '
         'dlgViewFactorLabels
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(481, 363)
-        Me.Controls.Add(Me.grpFactorLabels)
+        Me.ClientSize = New System.Drawing.Size(555, 372)
+        Me.Controls.Add(Me.grpLabels)
+        Me.Controls.Add(Me.grpDisplayOptions)
+        Me.Controls.Add(Me.grpSummaryStatistics)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblFactorColumns)
         Me.Controls.Add(Me.ucrReceiverFactorColumns)
@@ -182,7 +206,9 @@ Partial Class dlgViewFactorLabels
         Me.Name = "dlgViewFactorLabels"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "View Variable(s) Levels/Labels"
-        Me.grpFactorLabels.ResumeLayout(False)
+        Me.grpSummaryStatistics.ResumeLayout(False)
+        Me.grpDisplayOptions.ResumeLayout(False)
+        Me.grpLabels.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -192,7 +218,7 @@ Partial Class dlgViewFactorLabels
     Friend WithEvents ucrReceiverFactorColumns As ucrReceiverMultiple
     Friend WithEvents lblFactorColumns As Label
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents grpFactorLabels As GroupBox
+    Friend WithEvents grpSummaryStatistics As GroupBox
     Friend WithEvents ucrChkShowId As ucrCheck
     Friend WithEvents ucrChkShowPercentage As ucrCheck
     Friend WithEvents ucrChkSortByName As ucrCheck
@@ -202,4 +228,6 @@ Partial Class dlgViewFactorLabels
     Friend WithEvents ucrChkShowType As ucrCheck
     Friend WithEvents ucrChkShowMissingValues As ucrCheck
     Friend WithEvents ucrChkAlternateColour As ucrCheck
+    Friend WithEvents grpLabels As GroupBox
+    Friend WithEvents grpDisplayOptions As GroupBox
 End Class
