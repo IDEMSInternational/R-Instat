@@ -17,13 +17,12 @@
 Imports instat.Translations
 Public Class dlgRenameSheet
     Public bFirstLoad As Boolean = True
+    Dim strSelectedDataFrame As String = ""
     Private bReset As Boolean = True
     Private Sub dlgRenameSheet_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
         If bReset Then
             SetDefaults()
@@ -31,11 +30,6 @@ Public Class dlgRenameSheet
         SetRCodeforControls(bReset)
         bReset = False
         autoTranslate(Me)
-    End Sub
-
-    Private Sub ReopenDialog()
-        'Reseting ucrDataFrame to ensure that it displays the current data frame on the grid 
-        ucrDataFrameToRename.Reset()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -50,7 +44,6 @@ Public Class dlgRenameSheet
         ucrInputLabel.SetParameter(New RParameter("label"))
     End Sub
 
-    ' check how changing dataframes affects it
     Private Sub SetDefaults()
         Dim clsDefaultFunction As New RFunction
         ucrInputNewName.Reset()
@@ -64,6 +57,11 @@ Public Class dlgRenameSheet
 
     Private Sub SetRCodeforControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
+    Public Sub SetCurrentDataframe(strDataFrame As String)
+        strSelectedDataFrame = strDataFrame
+        ucrDataFrameToRename.SetDataframe(strSelectedDataFrame)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -80,7 +78,7 @@ Public Class dlgRenameSheet
         End If
     End Sub
 
-    Private Sub ucrInputNewName_ContentsChanged() Handles ucrInputNewName.ControlContentsChanged, ucrDataFrameToRename.ControlContentsChanged
+    Private Sub ucrInputNewName_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputNewName.ControlContentsChanged, ucrDataFrameToRename.ControlContentsChanged
         TestOKEnabled()
     End Sub
 

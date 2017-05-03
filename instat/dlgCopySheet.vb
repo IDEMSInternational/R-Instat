@@ -60,6 +60,7 @@ Public Class dlgCopySheet
         ucrBase.clsRsyntax.SetBaseRFunction(clsCopySheet)
     End Sub
 
+
     Public Sub SetCurrentDataframe(strDataFrame As String)
         strSelectedDataFrame = strDataFrame
         ucrDataFrameCopySheets.SetDataframe(strSelectedDataFrame)
