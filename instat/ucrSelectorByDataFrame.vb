@@ -124,7 +124,7 @@ Public Class ucrSelectorByDataFrame
         End If
     End Sub
 
-    Public Overrides Function GetParameter() As RParameter
+    Public Overrides Function GetParameter(Optional iIndex As Integer = 0) As RParameter
         If bHasOwnParameter Then
             Return MyBase.GetParameter()
         Else
@@ -137,9 +137,14 @@ Public Class ucrSelectorByDataFrame
         ucrAvailableDataFrames.SetRCode(clsNewCodeStructure, bReset)
     End Sub
 
-    Protected Overrides Sub UpdateParameter(clsTempParam As RParameter)
+    Public Overrides Sub UpdateParameter(clsTempParam As RParameter)
         If bHasOwnParameter Then
             MyBase.UpdateParameter(clsTempParam)
         End If
+    End Sub
+
+    Public Overrides Sub AddAdditionalCodeParameterPair(clsNewRCode As RCodeStructure, clsNewRParameter As RParameter, Optional iAdditionalPairNo As Integer = -1)
+        MyBase.AddAdditionalCodeParameterPair(clsNewRCode, clsNewRParameter, iAdditionalPairNo)
+        ucrAvailableDataFrames.AddAdditionalCodeParameterPair(clsNewRCode, clsNewRParameter, iAdditionalPairNo)
     End Sub
 End Class
