@@ -292,27 +292,10 @@ Public Class dlgThreeVariableFrequencies
                 clsRowParam.Position = 1
                 clsColumnParam.Position = 2
             End If
-        End If
-        ChangeLocation()
-    End Sub
-
-    Private Sub ucrChkFlip_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFlip.ControlValueChanged
-        Dim clsRowParam As RParameter
-        Dim clsColumnParam As RParameter
-
-        clsRowParam = ucrReceiverRowFactor.GetParameter()
-        clsColumnParam = ucrReceiverColumnFactor.GetParameter()
-        If rdoTable.Checked Then
-            If ucrChkFlip.Checked Then
-                clsColumnParam.Position = 1
-                clsRowParam.Position = 2
-            Else
-                clsRowParam.Position = 1
-                clsColumnParam.Position = 2
-            End If
             ucrReceiverRowFactor.SetParameter(clsRowParam)
             ucrReceiverColumnFactor.SetParameter(clsColumnParam)
         End If
+        ChangeLocation()
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnFactor.ControlContentsChanged, ucrReceiverRowFactor.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrReceiverGroupBy2nd.ControlContentsChanged, ucrReceiverGroupsBy1st.ControlContentsChanged
