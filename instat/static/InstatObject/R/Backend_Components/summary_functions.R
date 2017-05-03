@@ -354,14 +354,34 @@ instat_object$set("public", "summary_table", function(data_name, columns_to_summ
     }
   }
   column_factor_margin <- margin_tables[2]   # in long term where is [[2]], e.g. which(powerSet(c(1,2,3, 4)) == "1"
+
+  # so I need to add this as a row for the column margins
+  # column_factor_margin <- looks like this:
+#  village count1 count2
+#  1   kesen      7      3
+#  2   nanda     14      3
+#  3    niko      5      3
+#  4   sabey     10      3
+
   
+    
   # which will then be which(powerSet(c(1,2,3,4)) == "column_factors")?
   # which(power_sets == "column_factors")
   
   row_factor_margin <- margin_tables[length(margin_tables)] # last one. (last is usually 1,2,3 but here it is not because we have removed the last term)
+  #  # want to get this last value in that list. This gives "[[1]]   [1] 2 3", I want just "2, 3" I assume?
+  # Okay so my question here is
+  # 1. Does this give me "[[1]]   [1] 2 3"
+  # 2. If yes, is this okay? Or do I just want 2,3 
+  # 3. Is 2,3 a dataframe yes?
   
   
-  overall_value <- margin_tables[1]
+  overall_value <- margin_tables[1]   # want to get this 1st value in that list. This gives "[[1]] numeric(0)", I want just "numeric(0)"
+  
+
+  
+  
+  
   # unstack cell data by column factor
   # get the three margins (row, column, overall)
   # make them into 2 vectors (one row and one column)
