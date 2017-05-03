@@ -66,10 +66,10 @@ Public Class dlgAddKey
 
     Private Sub SetDefaults()
         ucrSelectorKeyColumns.Reset()
+        ucrInputKeyName.SetName("")
         ucrInputKeyName.Reset()
         ucrInputCheckInput.Reset()
         bUniqueChecked = False
-
         clsDefaultRFunction = New RFunction
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
