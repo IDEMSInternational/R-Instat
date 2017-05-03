@@ -758,25 +758,29 @@ instat_object$set("public", "sort_dataframe", function(data_name, col_names = c(
 )
 
 instat_object$set("public", "rename_dataframe", function(data_name, new_value = "", label = "") {
-  if(new_value %in% names(private$.data_objects)) stop("Cannot rename data frame since ", new_value, " is an existing data frame.")
-  data_obj = self$get_data_objects(data_name)
-  names(private$.data_objects)[names(private$.data_objects) == data_name] <- new_value
-  data_obj$append_to_metadata(data_name_label, new_value)
-  for(i in seq_along(private$.links)) {
-    if(private$.links[[i]]$from_data_frame == data_name) {
-      private$.links[[i]]$from_data_frame <- new_value
+  data_obj <- self$get_data_objects(data_name)
+  if(new_value != data_name) {
+    names(private$.data_objects)[names(private$.data_objects) == data_name] <- new_value
+    data_obj$append_to_metadata(data_name_label, new_value)
+    for(i in seq_along(private$.links)) {
+      if(private$.links[[i]]$from_data_frame == data_name) {
+        private$.links[[i]]$from_data_frame <- new_value
+      }
+      if(private$.links[[i]]$to_data_frame == data_name) {
+        private$.links[[i]]$to_data_frame <- new_value
+      }
     }
-    if(private$.links[[i]]$to_data_frame == data_name) {
-      private$.links[[i]]$to_data_frame <- new_value
-    }
+    data_obj$set_data_changed(TRUE)
   }
-  data_obj$set_data_changed(TRUE)
-  if(label != "") data_obj$append_to_metadata(property = "label" , new_val = label)
+  if(label != "") {
+    data_obj$append_to_metadata(property = "label" , new_val = label)
+    data_obj$set_metadata_changed(TRUE)
+  }
 } 
 )
 
-instat_object$set("public", "convert_column_to_type", function(data_name, col_names = c(), to_type, factor_values = NULL, set_digits, set_decimals = FALSE, keep_attr = TRUE, use_labels = TRUE) {
-  self$get_data_objects(data_name)$convert_column_to_type(col_names = col_names, to_type = to_type, factor_values = factor_values, set_digits = set_digits,set_decimals = set_decimals, keep_attr = keep_attr, use_labels = use_labels)
+instat_object$set("public", "convert_column_to_type", function(data_name, col_names = c(), to_type, factor_numeric = "by_levels", set_digits, set_decimals = FALSE, keep_attr = TRUE) {
+  self$get_data_objects(data_name)$convert_column_to_type(col_names = col_names, to_type = to_type, factor_numeric = factor_numeric, set_digits = set_digits,set_decimals = set_decimals, keep_attr = keep_attr)
 } 
 )
 
@@ -831,8 +835,8 @@ instat_object$set("public", "drop_unused_factor_levels", function(data_name, col
 } 
 )
 
-instat_object$set("public", "set_factor_levels", function(data_name, col_name, new_levels, set_new_labels = TRUE) {
-  self$get_data_objects(data_name)$set_factor_levels(col_name = col_name, new_levels = new_levels, set_new_labels = set_new_labels)
+instat_object$set("public", "set_factor_levels", function(data_name, col_name, new_levels) {
+  self$get_data_objects(data_name)$set_factor_levels(col_name = col_name, new_levels = new_levels)
 } 
 )
 
@@ -862,15 +866,16 @@ instat_object$set("public","get_data_type", function(data_name, col_name) {
 )
 
 instat_object$set("public","copy_data_frame", function(data_name, new_name, label = "") {
-  curr_obj = self$get_data_objects(data_name)$clone(deep = TRUE)
+  curr_obj <- self$get_data_objects(data_name)$clone(deep = TRUE)
   
   if(missing(new_name)) new_name = next_default_item(data_name, self$get_data_names())
   self$append_data_object(new_name, curr_obj)
   curr_obj$data_changed <- TRUE
   
-  data_obj = self$get_data_objects(data_name)
-  data_obj$set_data_changed(TRUE)
-  if(label != "") data_obj$append_to_metadata(property = "label" , new_val = label)
+  if(label != "") {
+    curr_obj$append_to_metadata(property = "label" , new_val = label)
+    data_obj$set_metadata_changed(TRUE)
+  }
 } 
 )
 
