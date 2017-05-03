@@ -62,7 +62,7 @@ Public Class ucrInput
         OnControlValueChanged()
     End Sub
 
-    Protected Overrides Sub UpdateParameter(clsTempParam As RParameter)
+    Public Overrides Sub UpdateParameter(clsTempParam As RParameter)
         If bChangeParameterValue AndAlso clsTempParam IsNot Nothing Then
             If dctDisplayParameterValues.ContainsKey(GetText()) Then
                 clsTempParam.SetArgumentValue(dctDisplayParameterValues(GetText()))
