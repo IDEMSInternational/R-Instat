@@ -62,7 +62,7 @@ Partial Class dlgStringHandling
         'lblPattern
         '
         Me.lblPattern.AutoSize = True
-        Me.lblPattern.Location = New System.Drawing.Point(259, 158)
+        Me.lblPattern.Location = New System.Drawing.Point(259, 155)
         Me.lblPattern.Name = "lblPattern"
         Me.lblPattern.Size = New System.Drawing.Size(44, 13)
         Me.lblPattern.TabIndex = 11
@@ -75,7 +75,7 @@ Partial Class dlgStringHandling
         Me.rdoCount.FlatAppearance.BorderSize = 2
         Me.rdoCount.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoCount.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoCount.Location = New System.Drawing.Point(42, 12)
+        Me.rdoCount.Location = New System.Drawing.Point(25, 12)
         Me.rdoCount.Name = "rdoCount"
         Me.rdoCount.Size = New System.Drawing.Size(61, 27)
         Me.rdoCount.TabIndex = 1
@@ -91,7 +91,7 @@ Partial Class dlgStringHandling
         Me.rdoReplace.FlatAppearance.BorderSize = 2
         Me.rdoReplace.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoReplace.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoReplace.Location = New System.Drawing.Point(278, 12)
+        Me.rdoReplace.Location = New System.Drawing.Point(261, 12)
         Me.rdoReplace.Name = "rdoReplace"
         Me.rdoReplace.Size = New System.Drawing.Size(61, 27)
         Me.rdoReplace.TabIndex = 5
@@ -107,7 +107,7 @@ Partial Class dlgStringHandling
         Me.rdoLocate.FlatAppearance.BorderSize = 2
         Me.rdoLocate.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoLocate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoLocate.Location = New System.Drawing.Point(219, 12)
+        Me.rdoLocate.Location = New System.Drawing.Point(202, 12)
         Me.rdoLocate.Name = "rdoLocate"
         Me.rdoLocate.Size = New System.Drawing.Size(61, 27)
         Me.rdoLocate.TabIndex = 4
@@ -123,7 +123,7 @@ Partial Class dlgStringHandling
         Me.rdoExtract.FlatAppearance.BorderSize = 2
         Me.rdoExtract.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoExtract.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoExtract.Location = New System.Drawing.Point(160, 12)
+        Me.rdoExtract.Location = New System.Drawing.Point(143, 12)
         Me.rdoExtract.Name = "rdoExtract"
         Me.rdoExtract.Size = New System.Drawing.Size(61, 27)
         Me.rdoExtract.TabIndex = 3
@@ -139,7 +139,7 @@ Partial Class dlgStringHandling
         Me.rdoDetect.FlatAppearance.BorderSize = 2
         Me.rdoDetect.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoDetect.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoDetect.Location = New System.Drawing.Point(101, 12)
+        Me.rdoDetect.Location = New System.Drawing.Point(84, 12)
         Me.rdoDetect.Name = "rdoDetect"
         Me.rdoDetect.Size = New System.Drawing.Size(61, 27)
         Me.rdoDetect.TabIndex = 2
@@ -155,7 +155,7 @@ Partial Class dlgStringHandling
         Me.rdoReplaceAll.FlatAppearance.BorderSize = 2
         Me.rdoReplaceAll.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoReplaceAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoReplaceAll.Location = New System.Drawing.Point(337, 12)
+        Me.rdoReplaceAll.Location = New System.Drawing.Point(320, 12)
         Me.rdoReplaceAll.Name = "rdoReplaceAll"
         Me.rdoReplaceAll.Size = New System.Drawing.Size(74, 27)
         Me.rdoReplaceAll.TabIndex = 6
@@ -205,7 +205,7 @@ Partial Class dlgStringHandling
         Me.ucrInputPattern.AddQuotesIfUnrecognised = True
         Me.ucrInputPattern.IsMultiline = False
         Me.ucrInputPattern.IsReadOnly = False
-        Me.ucrInputPattern.Location = New System.Drawing.Point(259, 173)
+        Me.ucrInputPattern.Location = New System.Drawing.Point(259, 170)
         Me.ucrInputPattern.Name = "ucrInputPattern"
         Me.ucrInputPattern.Size = New System.Drawing.Size(138, 20)
         Me.ucrInputPattern.TabIndex = 12
@@ -222,14 +222,14 @@ Partial Class dlgStringHandling
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 272)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 273)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(406, 52)
         Me.ucrBase.TabIndex = 16
         '
         'ucrPnlStringHandling
         '
-        Me.ucrPnlStringHandling.Location = New System.Drawing.Point(1, 1)
+        Me.ucrPnlStringHandling.Location = New System.Drawing.Point(9, 1)
         Me.ucrPnlStringHandling.Name = "ucrPnlStringHandling"
         Me.ucrPnlStringHandling.Size = New System.Drawing.Size(410, 51)
         Me.ucrPnlStringHandling.TabIndex = 0
@@ -238,7 +238,7 @@ Partial Class dlgStringHandling
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(421, 330)
+        Me.ClientSize = New System.Drawing.Size(419, 331)
         Me.Controls.Add(Me.ucrChkIgnoreCase)
         Me.Controls.Add(Me.rdoReplaceAll)
         Me.Controls.Add(Me.rdoDetect)
