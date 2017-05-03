@@ -40,17 +40,17 @@ Public Class dlgStringHandling
         ucrReceiverStringHandling.Selector = ucrSelectorStringHandling
         ucrReceiverStringHandling.SetMeAsReceiver()
 
-        'ucrRdoOptions
+        'RdoOptions
         ucrPnlStringHandling.AddRadioButton(rdoCount)
-        ucrPnlStringHandling.AddRadioButton(rdoExtract)
         ucrPnlStringHandling.AddRadioButton(rdoDetect)
+        ucrPnlStringHandling.AddRadioButton(rdoExtract)
         ucrPnlStringHandling.AddRadioButton(rdoLocate)
         ucrPnlStringHandling.AddRadioButton(rdoReplace)
         ucrPnlStringHandling.AddRadioButton(rdoReplaceAll)
 
         ucrPnlStringHandling.AddFunctionNamesCondition(rdoCount, "str_count")
-        ucrPnlStringHandling.AddFunctionNamesCondition(rdoExtract, "str_extract")
         ucrPnlStringHandling.AddFunctionNamesCondition(rdoDetect, "str_detect")
+        ucrPnlStringHandling.AddFunctionNamesCondition(rdoExtract, "str_extract")
         ucrPnlStringHandling.AddFunctionNamesCondition(rdoLocate, "str_locate")
         ucrPnlStringHandling.AddFunctionNamesCondition(rdoReplace, "str_replace")
         ucrPnlStringHandling.AddFunctionNamesCondition(rdoReplaceAll, "str_replace_all")
@@ -77,8 +77,8 @@ Public Class dlgStringHandling
 
     Private Sub SetDefaults()
         clsCountFunction = New RFunction
-        clsExtractFunction = New RFunction
         clsDetectFunction = New RFunction
+        clsExtractFunction = New RFunction
         clsLocateFunction = New RFunction
         clsReplaceFunction = New RFunction
         clsReplaceAllFunction = New RFunction
@@ -97,10 +97,10 @@ Public Class dlgStringHandling
 
         clsCountFunction.SetPackageName("stringr")
         clsCountFunction.SetRCommand("str_count")
-        clsExtractFunction.SetPackageName("stringr")
-        clsExtractFunction.SetRCommand("str_extract")
         clsDetectFunction.SetPackageName("stringr")
         clsDetectFunction.SetRCommand("str_detect")
+        clsExtractFunction.SetPackageName("stringr")
+        clsExtractFunction.SetRCommand("str_extract")
         clsLocateFunction.SetPackageName("stringr")
         clsLocateFunction.SetRCommand("str_locate")
         clsReplaceFunction.SetPackageName("stringr")
