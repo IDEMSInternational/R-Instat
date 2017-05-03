@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgViewAndRemoveLinks
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class dlgViewAndRemoveLinks
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblLinks = New System.Windows.Forms.Label()
         Me.lblLink = New System.Windows.Forms.Label()
@@ -28,7 +28,7 @@ Partial Class dlgViewAndRemoveLinks
         Me.rdoDeleteLink = New System.Windows.Forms.RadioButton()
         Me.ucrReceiverViewLinks = New instat.ucrReceiverSingle()
         Me.ucrpnlDeleteView = New instat.UcrPanel()
-        Me.ucrSlelectorLinks = New instat.ucrSelector()
+        Me.ucrSelectorLinks = New instat.ucrSelector()
         Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
@@ -90,14 +90,14 @@ Partial Class dlgViewAndRemoveLinks
         Me.ucrpnlDeleteView.Size = New System.Drawing.Size(187, 41)
         Me.ucrpnlDeleteView.TabIndex = 13
         '
-        'ucrSlelectorLinks
+        'ucrSelectorLinks
         '
-        Me.ucrSlelectorLinks.bShowHiddenColumns = False
-        Me.ucrSlelectorLinks.Location = New System.Drawing.Point(16, 30)
-        Me.ucrSlelectorLinks.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSlelectorLinks.Name = "ucrSlelectorLinks"
-        Me.ucrSlelectorLinks.Size = New System.Drawing.Size(120, 98)
-        Me.ucrSlelectorLinks.TabIndex = 12
+        Me.ucrSelectorLinks.bShowHiddenColumns = False
+        Me.ucrSelectorLinks.Location = New System.Drawing.Point(16, 30)
+        Me.ucrSelectorLinks.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorLinks.Name = "ucrSelectorLinks"
+        Me.ucrSelectorLinks.Size = New System.Drawing.Size(120, 98)
+        Me.ucrSelectorLinks.TabIndex = 12
         '
         'ucrBase
         '
@@ -115,7 +115,7 @@ Partial Class dlgViewAndRemoveLinks
         Me.Controls.Add(Me.rdoDeleteLink)
         Me.Controls.Add(Me.rdoViewLink)
         Me.Controls.Add(Me.ucrpnlDeleteView)
-        Me.Controls.Add(Me.ucrSlelectorLinks)
+        Me.Controls.Add(Me.ucrSelectorLinks)
         Me.Controls.Add(Me.lblLink)
         Me.Controls.Add(Me.lblLinks)
         Me.Controls.Add(Me.ucrBase)
@@ -133,7 +133,7 @@ Partial Class dlgViewAndRemoveLinks
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents lblLinks As Label
     Friend WithEvents lblLink As Label
-    Friend WithEvents ucrSlelectorLinks As ucrSelector
+    Friend WithEvents ucrSelectorLinks As ucrSelector
     Friend WithEvents rdoDeleteLink As RadioButton
     Friend WithEvents rdoViewLink As RadioButton
     Friend WithEvents ucrpnlDeleteView As UcrPanel

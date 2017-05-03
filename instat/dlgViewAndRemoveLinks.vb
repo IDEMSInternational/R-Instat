@@ -42,14 +42,14 @@ Public Class dlgViewAndRemoveLinks
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 507
-        ucrReceiverViewLinks.Selector = ucrSlelectorLinks
+        ucrReceiverViewLinks.Selector = ucrSelectorLinks
         ucrReceiverViewLinks.SetMeAsReceiver()
         ucrReceiverViewLinks.SetParameter(New RParameter("link_name", 0))
         ucrReceiverViewLinks.SetParameterIsString()
-        ucrReceiverViewLinks.SetItemType("link")
+        ucrSelectorLinks.SetItemType("link")
         ucrpnlDeleteView.AddRadioButton(rdoDeleteLink)
         ucrpnlDeleteView.AddRadioButton(rdoViewLink)
-        ucrpnlDeleteView.AddFunctionNamesCondition(rdoDeleteLink, frmMain.clsRLink.strInstatDataObject & "c")
+        ucrpnlDeleteView.AddFunctionNamesCondition(rdoDeleteLink, frmMain.clsRLink.strInstatDataObject & "$remove_link")
         ucrpnlDeleteView.AddFunctionNamesCondition(rdoViewLink, frmMain.clsRLink.strInstatDataObject & "$view_link")
 
     End Sub
