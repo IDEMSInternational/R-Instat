@@ -39,7 +39,7 @@ Partial Class dlgReferenceLevel
         'lblFactorSelected
         '
         Me.lblFactorSelected.AutoSize = True
-        Me.lblFactorSelected.Location = New System.Drawing.Point(256, 19)
+        Me.lblFactorSelected.Location = New System.Drawing.Point(256, 22)
         Me.lblFactorSelected.Name = "lblFactorSelected"
         Me.lblFactorSelected.Size = New System.Drawing.Size(85, 13)
         Me.lblFactorSelected.TabIndex = 1
@@ -59,7 +59,7 @@ Partial Class dlgReferenceLevel
         'ucrReceiverReferenceLevels
         '
         Me.ucrReceiverReferenceLevels.frmParent = Me
-        Me.ucrReceiverReferenceLevels.Location = New System.Drawing.Point(255, 34)
+        Me.ucrReceiverReferenceLevels.Location = New System.Drawing.Point(255, 37)
         Me.ucrReceiverReferenceLevels.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverReferenceLevels.Name = "ucrReceiverReferenceLevels"
         Me.ucrReceiverReferenceLevels.Selector = Nothing
