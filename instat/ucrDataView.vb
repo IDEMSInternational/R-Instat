@@ -432,6 +432,7 @@ Public Class ucrDataView
     End Sub
 
     Private Sub renameSheet_Click(sender As Object, e As EventArgs) Handles renameSheet.Click
+        dlgRenameSheet.SetCurrentDataframe(grdCurrSheet.Name)
         dlgRenameSheet.ShowDialog()
     End Sub
 
