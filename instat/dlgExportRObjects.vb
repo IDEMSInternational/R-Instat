@@ -33,20 +33,50 @@ Public Class dlgExportRObjects
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub InitialiseDialog()
 
+        ucrSelectorObjects.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorObjects.ucrAvailableDataFrames.SetParameterIsRFunction()
+        ucrInputFile.SetParameter(New RParameter("file", 1))
+        ucrReceiverObjects.SetParameter(New RParameter("object_names", 2))
+        ucrReceiverObjects.SetParameterIsRFunction()
     End Sub
 
     Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
 
+        ucrSelectorObjects.Reset()
+        'clsDefaultFunction.SetRCommand("export_objects")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+    End Sub
+
+    Private Sub rdoBrowse_Click(sender As Object, e As EventArgs) Handles rdoBrowse.Click
+
+    End Sub
+
+    Private Sub ucrInputExportFile_Click(sender As Object, e As EventArgs) Handles ucrInputFile.Click
+        rdoBrowse_Click(sender, e)
     End Sub
 
     Private Sub TestOkEnabled()
-
+        If Not ucrInputFile.IsEmpty AndAlso Not ucrReceiverObjects.IsEmpty AndAlso ucrSelectorObjects.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
+    Private Sub ucrInputExportFile_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrInputFile.ControlContentsChanged, ucrReceiverObjects.ControlContentsChanged,ucrSelectorObjects.ControlContentsChanged
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
+    End Sub
 
 End Class
