@@ -38,14 +38,14 @@ Public Class dlgCopySheet
         ucrBase.iHelpTopicID = 263
 
         'ucrNewName
-        ucrNewDataFrameName.SetParameter(New RParameter("new_name"))
+        ucrNewDataFrameName.SetParameter(New RParameter("new_name", 1))
         ucrNewDataFrameName.SetValidationTypeAsRVariable()
 
         'ucrDataFrame
-        ucrDataFrameCopySheets.SetParameter(New RParameter("data_name"))
+        ucrDataFrameCopySheets.SetParameter(New RParameter("data_name", 0))
         ucrDataFrameCopySheets.SetParameterIsString()
 
-        'Default Function
+        ucrInputLabel.SetParameter(New RParameter("label", 2))
     End Sub
 
     Private Sub SetDefaults()
@@ -53,6 +53,8 @@ Public Class dlgCopySheet
 
         ucrNewDataFrameName.Reset()
         ucrDataFrameCopySheets.Reset()
+        ucrInputLabel.Reset()
+        ucrInputLabel.SetName("")
         CheckAutoName()
 
         clsCopySheet.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$copy_data_frame")
