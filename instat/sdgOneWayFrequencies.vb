@@ -17,7 +17,7 @@
 Imports instat.Translations
 Public Class sdgOneWayFrequencies
     Public bControlsInitialised As Boolean = False
-    Public clsOneWayTableFreq, clsOneWayGraphFreq As New RFunction
+    Public clsOneWayTableFreq, clsOneWayGraphFreq, clsOneWayPlotGrid As New RFunction
 
     Private Sub sdgOneWayFrequencies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -26,6 +26,7 @@ Public Class sdgOneWayFrequencies
     Public Sub InitialiseControls()
         Dim dctVerticalPositionLabel As New Dictionary(Of String, String)
         Dim dctHorizontalPositionLabel As New Dictionary(Of String, String)
+        Dim dctOmitZero As New Dictionary(Of String, String)
 
         ucrInputGraphTitle.SetParameter(New RParameter("title", 2))
 
@@ -51,10 +52,13 @@ Public Class sdgOneWayFrequencies
         ucrChkShowSummary.SetText("Show Summary")
 
         'Table Only
-        'Default is auto
-        'skip.zero has three options: "auto", TRUE, FALSE so this could be a combobox instead
-        ucrChkOmitZero.SetParameter(New RParameter("skip.zero", 8), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        ucrChkOmitZero.SetText("Omit Zero Counts from Table")
+        ucrInputOmitZero.SetParameter(New RParameter("skip.zero", 8))
+        dctOmitZero.Add("Auto", Chr(34) & "auto" & Chr(34))
+        dctOmitZero.Add("True", Chr(34) & "TRUE" & Chr(34))
+        dctOmitZero.Add("False", Chr(34) & "FALSE" & Chr(34))
+        ucrInputOmitZero.SetItems(dctOmitZero)
+        ucrInputOmitZero.SetRDefault(Chr(34) & "auto" & Chr(34))
+        ucrInputOmitZero.bUpdateRCodeFromControl = False
 
         'Table Only
         ucrNudDecimalPlaces.SetParameter(New RParameter("digits", 10))
@@ -66,6 +70,7 @@ Public Class sdgOneWayFrequencies
         ucrPnlGraphType.AddRadioButton(rdoLine, Chr(34) & "line" & Chr(34))
         ucrPnlGraphType.AddRadioButton(rdoDot, Chr(34) & "dot" & Chr(34))
         ucrPnlGraphType.SetRDefault(Chr(34) & "bar" & Chr(34))
+        ucrPnlGraphType.bUpdateRCodeFromControl = False
 
         'Graph Only
         ucrChkShowCount.SetParameter(New RParameter("show.n", 5), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
@@ -74,6 +79,7 @@ Public Class sdgOneWayFrequencies
 
         'Graph Only
         ucrChkShowPercentage.SetParameter(New RParameter("show.prc", 6), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkShowPercentage.SetRDefault("TRUE")
         ucrChkShowPercentage.SetText("Show Percentage")
 
         'Graph Only
@@ -118,18 +124,19 @@ Public Class sdgOneWayFrequencies
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRFunction(clsNewSjtFreq As RFunction, clsNewSjpFrq As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRFunction(clsNewSjtFreq As RFunction, clsNewSjpFrq As RFunction, clsNewPlotGrid As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
         clsOneWayTableFreq = clsNewSjtFreq
         clsOneWayGraphFreq = clsNewSjpFrq
+        clsOneWayPlotGrid = clsNewPlotGrid
 
         ucrChkMedian.SetRCode(clsOneWayTableFreq, bReset)
         ucrChkShowSummary.SetRCode(clsOneWayTableFreq, bReset)
         ucrChkHighlightedRows.SetRCode(clsOneWayTableFreq, bReset)
         ucrNudDecimalPlaces.SetRCode(clsOneWayTableFreq, bReset)
-        ucrChkOmitZero.SetRCode(clsOneWayTableFreq, bReset)
+        ucrInputOmitZero.SetRCode(clsOneWayTableFreq, bReset)
         ucrInputCountsName.SetRCode(clsOneWayTableFreq, bReset)
         ucrChkCountName.SetRCode(clsOneWayTableFreq, bReset)
 
@@ -140,6 +147,6 @@ Public Class sdgOneWayFrequencies
         ucrInputVerticalLabels.SetRCode(clsOneWayGraphFreq, bReset)
         ucrInputHorizontalLabels.SetRCode(clsOneWayGraphFreq, bReset)
         ucrInputGraphTitle.SetRCode(clsOneWayGraphFreq, bReset)
-        ucrSaveGraph.SetRCode(clsOneWayGraphFreq, bReset)
+        ucrSaveGraph.SetRCode(clsOneWayPlotGrid, bReset)
     End Sub
 End Class
