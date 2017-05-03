@@ -497,6 +497,12 @@
     <Compile Include="dlgThreeVariableFrequencies.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgTransformClimatic.Designer.vb">
+      <DependentUpon>dlgTransformClimatic.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTransformClimatic.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgTwoVariableUseModel.Designer.vb">
       <DependentUpon>dlgTwoVariableUseModel.vb</DependentUpon>
     </Compile>
@@ -2895,6 +2901,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgThreeVariableFrequencies.resx">
       <DependentUpon>dlgThreeVariableFrequencies.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTransformClimatic.resx">
+      <DependentUpon>dlgTransformClimatic.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTransformText.fr-FR.resx">
       <DependentUpon>dlgTransformText.vb</DependentUpon>
