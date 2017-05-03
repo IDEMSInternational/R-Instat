@@ -24,7 +24,7 @@ data_object <- R6Class("data_object",
     self$clear_variables_metadata()
   }
   self$add_defaults_meta()
-  self$add_defaults_variables_metadata()
+  self$add_defaults_variables_metadata(self$get_column_names())
   #self$update_variables_metadata()
   self$set_objects(objects)
   self$set_calculations(calculations)
@@ -360,7 +360,7 @@ data_object$set("public", "clear_variables_metadata", function() {
       if(!name  %in% c(data_type_label, data_name_label)) attr(self, name) <- NULL
     }
   }
-  self$add_defaults_variables_metadata()
+  self$add_defaults_variables_metadata(self$get_column_names())
 }
 )
 
@@ -450,7 +450,8 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
     if(!missing(adjacent_column)) ind = which(self$get_column_names() == adjacent_column) + 1
     else ind = previous_length + 1
   }
-
+  
+  new_col_names <- c()
   for(i in 1:num_cols) {
     if(num_cols == 1) {
       curr_col = col_data
@@ -459,6 +460,7 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
     if(is.matrix(curr_col) || is.data.frame(curr_col)) curr_col = curr_col[,1]
     if(use_col_name_as_prefix) curr_col_name = self$get_next_default_column_name(col_name)
     else curr_col_name = col_name[[i]]
+    new_col_names <- c(new_col_names, curr_col_name)
     if(curr_col_name %in% self$get_column_names()) {
       message(paste("A column named", curr_col_name, "already exists. The column will be replaced in the data"))
       self$append_to_changes(list(Replaced_col, curr_col_name))
@@ -469,13 +471,8 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
     
     private$data[[curr_col_name]] <- curr_col
     self$data_changed <- TRUE
-    self$append_to_variables_metadata(curr_col_name, is_hidden_label, hidden)
-    self$append_to_variables_metadata(curr_col_name, name_label, curr_col_name)
-    self$append_to_variables_metadata(curr_col_name, signif_figures_label, get_default_significant_figures(self$get_columns_from_data(curr_col_name, use_current_filter = FALSE)))
-    self$append_to_variables_metadata(curr_col_name, label_label, "")
-    self$append_to_variables_metadata(curr_col_name, scientific_label, FALSE)
-    self$variables_metadata_changed <- TRUE
   }
+  self$add_defaults_variables_metadata(new_col_names)
   if(!replaced) {
     if(before && ind == 1) self$set_data(dplyr::select(self$get_data_frame(use_current_filter = FALSE) , c((previous_length + 1):(previous_length + num_cols), 1:previous_length)))
     else if(before || ind != previous_length + 1) self$set_data(dplyr::select(self$get_data_frame(use_current_filter = FALSE) , c(1:(ind - 1), (previous_length + 1):(previous_length + num_cols), ind:previous_length)))
@@ -526,37 +523,43 @@ data_object$set("public", "anova_tables", function(x_col_names, y_col_name, sign
 }
 )
 
-data_object$set("public", "rename_column_in_data", function(curr_col_name = "", new_col_name="") {
+data_object$set("public", "rename_column_in_data", function(curr_col_name = "", new_col_name = "", label = "") {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
-  # Column name must be character
-  if (new_col_name %in% names(curr_data)){
-    stop("Cannot rename this column. A column named: ",new_col_name," already exists in the data.")
-  }
-  if(!is.character(curr_col_name)) {
-    stop("Current column name must be of type: character")
-  }
-  
-  else if (!(curr_col_name %in% names(curr_data))) {
-    stop(paste0("Cannot rename column: ",curr_col_name,". Column was not found in the data."))
-  }
-  
-  else if (!is.character(new_col_name)) {
-    stop("New column name must be of type: character")
-  }
-  
-  else {
-    if(sum(names(curr_data) == curr_col_name) > 1) {
-      # Should never happen since column names must be unique
-      warning(paste0("Multiple columns have name: '", curr_col_name,"'. All such columns will be renamed."))
+   # Column name must be character
+  if(new_col_name != curr_col_name) {
+    if (new_col_name %in% names(curr_data)){
+      stop("Cannot rename this column. A column named: ",new_col_name," already exists in the data.")
     }
-    # Need to use private$data here because changing names of data field
-    names(private$data)[names(curr_data) == curr_col_name] <- new_col_name
-    self$append_to_variables_metadata(new_col_name, name_label, new_col_name)
-    # TODO decide if we need to do these 2 lines
-    self$append_to_changes(list(Renamed_col, curr_col_name, new_col_name))
-    self$data_changed <- TRUE
+    if(!is.character(curr_col_name)) {
+      stop("Current column name must be of type: character")
+    }
+    
+    else if (!(curr_col_name %in% names(curr_data))) {
+      stop(paste0("Cannot rename column: ",curr_col_name,". Column was not found in the data."))
+    }
+    
+    else if (!is.character(new_col_name)) {
+      stop("New column name must be of type: character")
+    }
+    
+    else {
+      if(sum(names(curr_data) == curr_col_name) > 1) {
+        # Should never happen since column names must be unique
+        warning(paste0("Multiple columns have name: '", curr_col_name,"'. All such columns will be renamed."))
+      }
+      # Need to use private$data here because changing names of data field
+      names(private$data)[names(curr_data) == curr_col_name] <- new_col_name
+      self$append_to_variables_metadata(new_col_name, name_label, new_col_name)
+      # TODO decide if we need to do these 2 lines
+      self$append_to_changes(list(Renamed_col, curr_col_name, new_col_name))
+      self$data_changed <- TRUE
+      self$variables_metadata_changed <- TRUE
+    }
+  }
+  if(label != "") {
+   self$append_to_variables_metadata(col_name = new_col_name, property = "label", new_val = label)
     self$variables_metadata_changed <- TRUE
-    }
+  }
 }
 )
 
@@ -814,8 +817,8 @@ data_object$set("public", "add_defaults_meta", function() {
 }
 )
 
-data_object$set("public", "add_defaults_variables_metadata", function() {
-  for(column in self$get_column_names()) {
+data_object$set("public", "add_defaults_variables_metadata", function(column_names) {
+  for(column in column_names) {
     self$append_to_variables_metadata(column, name_label, column)
     if(!self$is_variables_metadata(is_hidden_label, column)) {
       self$append_to_variables_metadata(column, property = is_hidden_label, new_val = FALSE)
@@ -826,7 +829,7 @@ data_object$set("public", "add_defaults_variables_metadata", function() {
     if(!self$is_variables_metadata(scientific_label, column)) {
       self$append_to_variables_metadata(column, scientific_label, FALSE)
     }
-    if(!self$is_variables_metadata(scientific_label, column)) {
+    if(!self$is_variables_metadata(signif_figures_label, column)) {
       self$append_to_variables_metadata(column, signif_figures_label, get_default_significant_figures(self$get_columns_from_data(column, use_current_filter = FALSE)))
     }
   }
@@ -975,61 +978,61 @@ data_object$set("public", "sort_dataframe", function(col_names = c(), decreasing
 }
 )
 
-data_object$set("public", "convert_column_to_type", function(col_names = c(), to_type, factor_numeric = "by_levels", set_digits, set_decimals = FALSE) {
-  for(col_name in col_names){
-    if(!(col_name %in% self$get_column_names())) {
-      stop(col_name, " is not a column in ", get_metadata(data_name_label))
-    }
+data_object$set("public", "convert_column_to_type", function(col_names = c(), to_type, factor_values = NULL, set_digits, set_decimals = FALSE, keep_attr = TRUE, use_labels = TRUE) {
+  if(!all(col_names %in% self$get_column_names())) stop("Some column names not found in the data")
+
+  if(length(to_type) !=1 ) {
+    stop("to_type must be a character of length one")
   }
   
-  if(length(to_type)>1){
-    warning("Column(s) will be converted to type ", to_type[1])
-    to_type = to_type[1]
-  }
-  
-  
-  if(!(to_type %in% c("integer", "factor", "numeric", "character", "ordered_factor"))){
+  if(!(to_type %in% c("integer", "factor", "numeric", "character", "ordered_factor"))) {
     stop(to_type, " is not a valid type to convert to")
   }
   
-  if(!(factor_numeric %in% c("by_levels", "by_ordinals"))){
-    stop(factor_numeric, " can either be by_levels or by_ordinals.")
+  if(!is.null(factor_values) && !(factor_values %in% c("force_ordinals", "force_values"))) {
+    stop(factor_values, " can either be by_levels or by_ordinals.")
   }
   
   for(col_name in col_names) {
     curr_col <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
-    if(to_type=="factor") {
+    if(keep_attr) {
+      tmp_attr <- attributes(curr_col)
+      #TODO are these the only attributes we don't want to transfer?
+      tmp_attr <- tmp_attr[!names(tmp_attr) %in% c("class", "levels")]
+    }
+    if(!is.null(factor_values) && is.factor(curr_col) && to_type %in% c("integer", "numeric")) {
+      if(factor_values == "force_ordinals") curr_col <- as.numeric(curr_col)
+      else if(factor_values == "force_values") curr_col <- as.numeric(levels(curr_col))[curr_col]
+    }
+    if(to_type %in% c("factor", "ordered_factor")) {
+      ordered <- (to_type == "ordered_factor")
+      if(set_decimals) curr_col <- round(curr_col, digits = set_digits)
       # Warning: this is different from expected R behaviour
       # Any ordered columns would become unordered factors
-	  if(!set_decimals){
-	   self$add_columns_to_data(col_name = col_name, col_data = factor(curr_col, ordered = FALSE))
-	  } 
-	  else {self$add_columns_to_data(col_name = col_name, col_data = factor(round(curr_col, digits = set_digits), ordered = FALSE))
+      if(use_labels && self$is_variables_metadata("labels", col_name)) {
+        # TODO NA will be introduced if any values which do not have a label associated
+        curr_labels <- self$get_variables_metadata(property = "labels", column = col_name, direct_from_attributes = TRUE)
+        new_col <- factor(curr_col, ordered = ordered, levels = as.vector(curr_labels), labels = names(curr_labels))
       }
+      else new_col <- factor(curr_col, ordered = ordered)
     }
     else if(to_type =="integer") {
-      self$add_columns_to_data(col_name = col_name, col_data = as.integer(curr_col))
-    }
-    else if(to_type == "ordered_factor") {
-	   if(!set_decimals){
-	   self$add_columns_to_data(col_name = col_name, col_data = factor(curr_col, ordered = TRUE))
-	  } 
-	  else {self$add_columns_to_data(col_name = col_name, col_data = factor(round(curr_col, digits = set_digits), ordered = TRUE))
-	  }
-    }
-    else if(to_type == "integer") {
-      self$add_columns_to_data(col_name = col_name, col_data = as.integer(curr_col))
+      new_col = as.integer(curr_col)
     }
     else if(to_type == "numeric") {
-      if(is.factor(curr_col) && (factor_numeric == "by_levels")) {
-        self$add_columns_to_data(col_name = col_name, col_data = as.numeric(levels(curr_col))[curr_col])
-      }
-      else self$add_columns_to_data(col_name = col_name, col_data = as.numeric(curr_col))
+      new_col <- to_value(curr_col)
     }
     else if(to_type == "character") {
-      self$add_columns_to_data(col_name = col_name, col_data = as.character(curr_col))
+      new_col <- to_character(curr_col)
     }
-    self$append_to_variables_metadata(property = signif_figures_label, col_names = col_name, new_val = get_default_significant_figures(curr_col))
+    self$add_columns_to_data(col_name = col_name, col_data = new_col)
+    
+    if(keep_attr) {
+      tmp_names <- names(tmp_attr)
+      for(i in seq_along(tmp_attr)) {
+        self$append_to_variables_metadata(property = tmp_names[i], col_names = col_name, new_val = tmp_attr[[i]])
+      }
+    }
   }
   self$data_changed <- TRUE
   self$variables_metadata_changed <- TRUE
@@ -1061,13 +1064,19 @@ data_object$set("public", "drop_unused_factor_levels", function(col_name) {
 } 
 )
 
-data_object$set("public", "set_factor_levels", function(col_name, new_levels) {
+data_object$set("public", "set_factor_levels", function(col_name, new_levels, set_new_labels = TRUE) {
   if(!col_name %in% self$get_column_names()) stop(paste(col_name,"not found in data."))
   if(!is.factor(self$get_columns_from_data(col_name, use_current_filter = FALSE))) stop(paste(col_name,"is not a factor."))
-  if(length(new_levels) < length(levels(self$get_columns_from_data(col_name, use_current_filter = FALSE)))) stop("There must be at least as many new levels as current levels.")
+  old_levels <- levels(self$get_columns_from_data(col_name, use_current_filter = FALSE))
+  if(length(new_levels) < length(old_levels)) stop("There must be at least as many new levels as current levels.")
   
   # Must be private$data because setting an attribute
   levels(private$data[[col_name]]) <- new_levels
+  if(set_new_labels && self$is_variables_metadata("labels", col_name)) {
+    new_labels <- as.character(new_levels[1:length(old_levels)])
+    names(new_labels) <- names(self$get_variables_metadata(property = "labels", column = col_name))
+    self$append_to_variables_metadata(col_name, "labels", new_labels)
+  }
   self$data_changed <- TRUE
   self$variables_metadata_changed <- TRUE
 } 
@@ -1633,7 +1642,7 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
       stop("Cannot plot columns of type:", column_types[i])
     }    
     curr_data <- self$get_data_frame(stack_data = TRUE, measure.vars = columns)
-    if(curr_geom_name == "geom_boxplot" || curr_geom_name == "geom_point" || curr_geom_name == "geom_jitter" || curr_geom_name == "box_jitter" || curr_geom_name == "violin_jitter" || curr_geom_name == "violin_box") {
+    if(curr_geom_name == "geom_boxplot" || curr_geom_name == "geom_point" || curr_geom_name == "geom_violin" || curr_geom_name == "geom_jitter" || curr_geom_name == "box_jitter" || curr_geom_name == "violin_jitter" || curr_geom_name == "violin_box") {
       g <- ggplot(data = curr_data, mapping = aes(x = "", y = value)) + xlab("")
     }
     else {
@@ -1641,10 +1650,10 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
     }
     
     if(curr_geom_name == "box_jitter") {
-      g <- g + geom_boxplot() + geom_jitter() 
+      g <- g + geom_boxplot() + geom_jitter(width = 0.2, height = 0.2)
     }
     else if(curr_geom_name == "violin_jitter") {
-      g <- g + geom_violin() + geom_jitter() 
+      g <- g + geom_violin() + geom_jitter(width = 0.2, height = 0.2)
     }
     else if(curr_geom_name == "violin_box") {
       g <- g + geom_violin() + geom_boxplot() 
@@ -1683,7 +1692,7 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
       else {
         stop("Cannot plot columns of type:", column_types[i])
       }
-      if(curr_geom_name == "geom_boxplot" || curr_geom_name == "geom_point" || curr_geom_name == "box_jitter" || curr_geom_name == "violin_jitter" || curr_geom_name == "violin_box") {
+      if(curr_geom_name == "geom_boxplot" || curr_geom_name == "geom_violin" || curr_geom_name == "geom_point" || curr_geom_name == "geom_jitter" || curr_geom_name == "box_jitter" || curr_geom_name == "violin_jitter" || curr_geom_name == "violin_box") {
         g <- ggplot(data = curr_data, mapping = aes_(x = "", y = as.name(column))) + xlab("")
       }
       else {
@@ -1693,10 +1702,10 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
         g <- g + coord_flip()
       } 
       if(curr_geom_name == "box_jitter") {
-        g <- g + geom_boxplot() + geom_jitter()
+        g <- g + geom_boxplot() + geom_jitter(width = 0.2, height = 0.2)
       }
       else if(curr_geom_name == "violin_jitter") {
-        g <- g + geom_violin() + geom_jitter()
+        g <- g + geom_violin() + geom_jitter(width = 0.2, height = 0.2)
       }
       else if(curr_geom_name == "violin_box") {
         g <- g + geom_violin() + geom_boxplot()
@@ -1940,7 +1949,7 @@ data_object$set("public","set_climatic_types", function(types) {
 )
 
 #Method for creating inventory plot
-data_object$set("public","make_inventory_plot", function(date_col, station_col = c(), elements_cols, add_to_data = FALSE, coord_flip = FALSE, graph_title = "Inventory plot") {
+data_object$set("public","make_inventory_plot", function(date_col, station_col = c(), elements_cols, add_to_data = FALSE, coord_flip = FALSE, graph_title = "Data Availability") {
   if(!self$get_metadata(is_climatic_label))stop("Define data as climatic.")
   if(!is.Date(self$get_columns_from_data(date_col))) stop(paste(date_col, " must be of type date/time."))#this will not work!!!
   if(missing(date_col)||missing(elements_cols))stop("Date and elements columns must be specified.")
@@ -1976,12 +1985,12 @@ data_object$set("public","make_inventory_plot", function(date_col, station_col =
     recode <- as.factor(recode)
     new_col <- next_default_item(prefix = "recode", existing_names = names(col_data), include_index = FALSE)
     col_data[[new_col]] <- recode
-    g <- ggplot(data = col_data, mapping = aes(x = year_column, y = doy_column , colour = recode, group = year_column)) + geom_point() + xlab("Year") + ylab("DOY") + labs(color="Recode")
+    g <- ggplot(data = col_data, mapping = aes(x = year_column, y = doy_column, colour = recode, group = year_column)) + geom_point(size=5, shape=15) + xlab("Year") + ylab("DOY") + labs(color="Recode")
     if(!is.null(station_col)){
-      g <- g + facet_wrap(as.formula(paste0(as.name(station_col),"~ variable")))
+      g <- g + facet_grid(as.formula(paste0(as.name(station_col),"+variable ~.")))
     }
     else{
-      g <- g + facet_wrap(~variable)
+      g <- g + facet_grid(variable~.)
     }
   }
   else{
@@ -1990,15 +1999,16 @@ data_object$set("public","make_inventory_plot", function(date_col, station_col =
     recode <- as.factor(recode)
     new_col <- next_default_item(prefix = "recode", existing_names = self$get_column_names(), include_index = FALSE)
     curr_data[[new_col]] <- recode
-    g <- ggplot(data = curr_data, mapping = aes(x = year_column, y = doy_column , colour = recode, group = year_column)) + geom_point() + xlab("Year") + ylab("DOY") + labs(color="Recode")
+    
+    g <- ggplot(data = curr_data, mapping = aes(x = year_column, y = doy_column, colour = recode, group = year_column)) + geom_point(size=5, shape=15) + xlab("Year") + ylab("DOY") + labs(color="Recode")
     if(!is.null(station_col)){
-      g <- g + facet_wrap(as.name(station_col))
+      g <- g + facet_grid(paste0(as.name(station_col), "~ ."))
     }
   }
   if(coord_flip) {
     g <- g + coord_flip()
   }
-  return(g+ggtitle(graph_title) + theme(plot.title = element_text(hjust = 0.5)))
+  return(g+ggtitle(graph_title) + theme(plot.title = element_text(hjust = 0.5), axis.text.y = element_blank(), axis.ticks.y = element_blank(),strip.background = element_blank(), strip.text.y = element_text(angle = 0)))
 }
 )
 
@@ -2208,12 +2218,13 @@ instat_object$set("public","define_corruption_outputs", function(data_name, outp
 )
 
 data_object$set("public","define_corruption_outputs", function(output_columns = c()) {
+  all_cols <- self$get_column_names()
   if(!self$is_metadata(corruption_data_label)) {
     stop("Cannot define corruption outputs when data frame is not defined as corruption data.")
   }
   self$append_to_variables_metadata(output_columns, corruption_output_label, TRUE)
   self$append_to_variables_metadata(output_columns, corruption_index_label, TRUE)
-  other_cols <- self$get_column_names()[!self$get_column_names() %in% output_columns]
+  other_cols <- setdiff(all_cols, output_columns)
   self$append_to_variables_metadata(other_cols, corruption_output_label, FALSE)
 }
 )

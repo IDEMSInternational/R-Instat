@@ -76,6 +76,25 @@ Public Class dlgRecodeNumeric
 
         ucrChkAddLabels.Checked = False
         ucrMultipleLabels.Visible = False
+=======
+    Private Sub InitialiseDialog()
+        ucrReceiverRecode.Selector = ucrSelectorForRecode
+        ucrReceiverRecode.SetMeAsReceiver()
+        ucrReceiverRecode.SetIncludedDataTypes({"numeric"})
+        ucrBase.clsRsyntax.SetFunction("cut")
+        ucrBase.clsRsyntax.AddParameter("include.lowest", "TRUE")
+        ucrBase.clsRsyntax.AddParameter("dig.lab", "10")
+        ucrInputRecode.SetItemsTypeAsColumns()
+        ucrInputRecode.SetDefaultTypeAsColumn()
+        ucrInputRecode.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
+        ucrInputRecode.SetValidationTypeAsRVariable()
+        ucrMultipleLabels.SetValidationTypeAsList()
+        ucrMultipleNumericRecode.SetValidationTypeAsNumericList(bNewAllowInf:=True)
+    End Sub
+
+    Private Sub SetDefaults()
+        chkAddLabels.Checked = False
+        ucrMultipleLabels.Visible = False
         rdoRight.Checked = True
         ucrSelectorForRecode.Reset()
         ucrMultipleNumericRecode.Reset()
