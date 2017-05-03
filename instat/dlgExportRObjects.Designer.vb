@@ -26,9 +26,9 @@ Partial Class dlgExportRObjects
         Me.ucrSelectorObjects = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverObjects = New instat.ucrReceiverMultiple()
         Me.grpSaveOptions = New System.Windows.Forms.GroupBox()
-        Me.ucrInputFile = New instat.ucrInputTextBox()
-        Me.rdoBrowse = New System.Windows.Forms.Button()
-        Me.lblFile = New System.Windows.Forms.Label()
+        Me.ucrInputExportFile = New instat.ucrInputTextBox()
+        Me.cmdBrowse = New System.Windows.Forms.Button()
+        Me.lblExportFile = New System.Windows.Forms.Label()
         Me.lblObjects = New System.Windows.Forms.Label()
         Me.grpSaveOptions.SuspendLayout()
         Me.SuspendLayout()
@@ -63,42 +63,42 @@ Partial Class dlgExportRObjects
         '
         'grpSaveOptions
         '
-        Me.grpSaveOptions.Controls.Add(Me.ucrInputFile)
-        Me.grpSaveOptions.Controls.Add(Me.rdoBrowse)
-        Me.grpSaveOptions.Controls.Add(Me.lblFile)
+        Me.grpSaveOptions.Controls.Add(Me.ucrInputExportFile)
+        Me.grpSaveOptions.Controls.Add(Me.cmdBrowse)
+        Me.grpSaveOptions.Controls.Add(Me.lblExportFile)
         Me.grpSaveOptions.Location = New System.Drawing.Point(10, 204)
         Me.grpSaveOptions.Name = "grpSaveOptions"
         Me.grpSaveOptions.Size = New System.Drawing.Size(398, 56)
         Me.grpSaveOptions.TabIndex = 6
         Me.grpSaveOptions.TabStop = False
         '
-        'ucrInputFile
+        'ucrInputExportFile
         '
-        Me.ucrInputFile.AddQuotesIfUnrecognised = True
-        Me.ucrInputFile.IsMultiline = False
-        Me.ucrInputFile.IsReadOnly = False
-        Me.ucrInputFile.Location = New System.Drawing.Point(40, 24)
-        Me.ucrInputFile.Name = "ucrInputFile"
-        Me.ucrInputFile.Size = New System.Drawing.Size(251, 21)
-        Me.ucrInputFile.TabIndex = 1
+        Me.ucrInputExportFile.AddQuotesIfUnrecognised = True
+        Me.ucrInputExportFile.IsMultiline = False
+        Me.ucrInputExportFile.IsReadOnly = False
+        Me.ucrInputExportFile.Location = New System.Drawing.Point(71, 24)
+        Me.ucrInputExportFile.Name = "ucrInputExportFile"
+        Me.ucrInputExportFile.Size = New System.Drawing.Size(251, 21)
+        Me.ucrInputExportFile.TabIndex = 1
         '
-        'rdoBrowse
+        'cmdBrowse
         '
-        Me.rdoBrowse.Location = New System.Drawing.Point(296, 23)
-        Me.rdoBrowse.Name = "rdoBrowse"
-        Me.rdoBrowse.Size = New System.Drawing.Size(62, 23)
-        Me.rdoBrowse.TabIndex = 2
-        Me.rdoBrowse.Text = "Browse"
-        Me.rdoBrowse.UseVisualStyleBackColor = True
+        Me.cmdBrowse.Location = New System.Drawing.Point(327, 23)
+        Me.cmdBrowse.Name = "cmdBrowse"
+        Me.cmdBrowse.Size = New System.Drawing.Size(62, 23)
+        Me.cmdBrowse.TabIndex = 2
+        Me.cmdBrowse.Text = "Browse"
+        Me.cmdBrowse.UseVisualStyleBackColor = True
         '
-        'lblFile
+        'lblExportFile
         '
-        Me.lblFile.AutoSize = True
-        Me.lblFile.Location = New System.Drawing.Point(11, 27)
-        Me.lblFile.Name = "lblFile"
-        Me.lblFile.Size = New System.Drawing.Size(26, 13)
-        Me.lblFile.TabIndex = 0
-        Me.lblFile.Text = "File:"
+        Me.lblExportFile.AutoSize = True
+        Me.lblExportFile.Location = New System.Drawing.Point(11, 27)
+        Me.lblExportFile.Name = "lblExportFile"
+        Me.lblExportFile.Size = New System.Drawing.Size(59, 13)
+        Me.lblExportFile.TabIndex = 0
+        Me.lblExportFile.Text = "Export File:"
         '
         'lblObjects
         '
@@ -135,8 +135,8 @@ Partial Class dlgExportRObjects
     Friend WithEvents ucrSelectorObjects As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverObjects As ucrReceiverMultiple
     Friend WithEvents grpSaveOptions As GroupBox
-    Friend WithEvents ucrInputFile As ucrInputTextBox
-    Friend WithEvents rdoBrowse As Button
-    Friend WithEvents lblFile As Label
+    Friend WithEvents ucrInputExportFile As ucrInputTextBox
+    Friend WithEvents cmdBrowse As Button
+    Friend WithEvents lblExportFile As Label
     Friend WithEvents lblObjects As Label
 End Class

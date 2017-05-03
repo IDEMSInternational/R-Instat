@@ -13,7 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+Imports System.IO
 Imports instat.Translations
 Public Class dlgExportRObjects
     Private bFirstLoad As Boolean = True
@@ -37,39 +37,48 @@ Public Class dlgExportRObjects
     End Sub
 
     Private Sub InitialiseDialog()
-
+        ucrReceiverObjects.Selector = ucrSelectorObjects
         ucrSelectorObjects.SetParameter(New RParameter("data_name", 0))
         ucrSelectorObjects.ucrAvailableDataFrames.SetParameterIsRFunction()
-        ucrInputFile.SetParameter(New RParameter("file", 1))
+        ucrInputExportFile.SetParameter(New RParameter("file", 1))
         ucrReceiverObjects.SetParameter(New RParameter("object_names", 2))
         ucrReceiverObjects.SetParameterIsRFunction()
     End Sub
 
     Private Sub SetDefaults()
         Dim clsDefaultFunction As New RFunction
-
+        ucrReceiverObjects.SetMeAsReceiver()
         ucrSelectorObjects.Reset()
-        'clsDefaultFunction.SetRCommand("export_objects")
+        clsDefaultFunction.SetRCommand("export_objects")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
 
-    Private Sub rdoBrowse_Click(sender As Object, e As EventArgs) Handles rdoBrowse.Click
+    Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
+        Dim dlgSave As New SaveFileDialog
 
+        dlgSave.Title = "Export file dialog"
+        dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
+        dlgSave.Filter = "Comma separated file (*.csv)|*.csv|Excel files (*.xlsx)|*.xlsx|TAB-separated data (*.tsv)|*.tsv|Pipe-separated data (*.psv)|*.psv|Feather r / Python interchange format (*.feather)|*.feather|Fixed-Width format data (*.fwf)|*.fwf|Serialized r objects (*.rds)|*.rds|Saved r objects (*.RData)|*.RData|JSON(*.json)|*.json|YAML(*.yml)|*.yml|Stata(*.dta)|*.dta|SPSS(*.sav)|*.sav|XBASE database files (*.dbf)|*.dbf| Weka Attribute - Relation File Format (*.arff)|*.arff|r syntax object (*.R)|*.R|Xml(*.xml)|*.xml|HTML(*.html)|*.html"
+        If dlgSave.ShowDialog = DialogResult.OK Then
+            If dlgSave.FileName <> "" Then
+                ucrInputExportFile.SetName(Path.GetFullPath(dlgSave.FileName).ToString.Replace("\", "/"))
+            End If
+        End If
     End Sub
 
-    Private Sub ucrInputExportFile_Click(sender As Object, e As EventArgs) Handles ucrInputFile.Click
-        rdoBrowse_Click(sender, e)
+    Private Sub ucrInputExportFile_Click(sender As Object, e As EventArgs) Handles ucrInputExportFile.Click
+        cmdBrowse_Click(sender, e)
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrInputFile.IsEmpty AndAlso Not ucrReceiverObjects.IsEmpty AndAlso ucrSelectorObjects.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+        If Not ucrInputExportFile.IsEmpty AndAlso Not ucrReceiverObjects.IsEmpty AndAlso ucrSelectorObjects.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
-    Private Sub ucrInputExportFile_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrInputFile.ControlContentsChanged, ucrReceiverObjects.ControlContentsChanged,ucrSelectorObjects.ControlContentsChanged
+    Private Sub ucrInputExportFile_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrInputExportFile.ControlContentsChanged, ucrReceiverObjects.ControlContentsChanged, ucrSelectorObjects.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
