@@ -17,10 +17,12 @@
 Imports instat.Translations
 Public Class dlgDotPlot
     'In order, the global ggplot function, the geom_dotplot function and the aes function, used as parameter in the ggplot function.
-    Private clsRggplotFunction As New RFunction
-    Private clsRgeom_dotplot As New RFunction
+    Private clsRggPlotFunction As New RFunction
+    Private clsRDotplotGeomFunction As New RFunction
     Private clsRaesFunction As New RFunction
+    Private clsBaseOperator As New ROperator
     'bFirstload is used to determine whether the dlg still needs setup or not.
+    Private bReset As Boolean = True
     Private bFirstLoad As Boolean = True
     'strBinAxis stores the name of the axis along which the bins are made. Then strOtherAxis is the other axis (x or y)
     Private strBinAxis As String
@@ -29,44 +31,74 @@ Public Class dlgDotPlot
     Private bEditAesFunction As Boolean
 
     Private Sub dlgDotPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
-
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForContorls(bReset)
+        bReset = False
+        autoTranslate(Me)
         TestOkEnabled()
     End Sub
 
+    Public Sub SetRCodeForContorls(bReset As Boolean)
+        ucrDotPlotSelector.SetRCode(clsRggPlotFunction, bReset)
+        ucrSaveDotPlot.SetRCode(clsBaseOperator, bReset)
+        ucrPnlBinAxis.SetRCode(clsRDotplotGeomFunction, bReset)
+
+        ucrVariablesAsFactorDotPlot.SetRCode(clsRaesFunction, bReset)
+        ucrOtherAxisReceiver.SetRCode(clsRaesFunction, bReset)
+        ucrFactorReceiver.SetRCode(clsRaesFunction, bReset)
+    End Sub
+
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.SetOperation("+")
-        clsRggplotFunction.SetRCommand("ggplot")
-        clsRaesFunction.SetRCommand("aes")
-        clsRgeom_dotplot.SetRCommand("geom_dotplot")
-        clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
-        ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        ucrBase.iHelpTopicID = 437
+        ucrBase.clsRsyntax.iCallType = 3
+
+        ucrDotPlotSelector.SetParameter(New RParameter("data", 0))
+        ucrDotPlotSelector.SetParameterIsrfunction()
+
+        ucrPnlBinAxis.SetParameter(New RParameter("binaxis", 0))
+        ucrPnlBinAxis.AddRadioButton(rdoXBinAxis, Chr(34) & "x" & Chr(34))
+        ucrPnlBinAxis.AddRadioButton(rdoYBinAxis, Chr(34) & "y" & Chr(34))
+
+        ucrOtherAxisReceiver.SetParameter(New RParameter("y", 1))
+        ucrOtherAxisReceiver.SetParameterIsString()
         ucrOtherAxisReceiver.Selector = ucrDotPlotSelector
         ucrOtherAxisReceiver.SetIncludedDataTypes({"factor", "numeric"}) 'Warning: Even if having "factor" only could be more appropriate for the Axis that is not BinAxis, when coming back from the LayerOptions, where x and y can take both numeric and factor values, we would get bugs if numeric was not allowed.
+        ucrOtherAxisReceiver.bWithQuotes = False
+        ucrOtherAxisReceiver.SetValuesToIgnore({Chr(34) & Chr(34)})
+        ucrOtherAxisReceiver.bAddParameterIfEmpty = True
+
+        ucrFactorReceiver.SetParameter(New RParameter("fill", 2))
         ucrFactorReceiver.Selector = ucrDotPlotSelector
         ucrFactorReceiver.SetIncludedDataTypes({"factor"})
-        ucrBase.clsRsyntax.iCallType = 0
+        ucrFactorReceiver.bWithQuotes = False
+        ucrFactorReceiver.SetParameterIsString()
 
         'The ucrVariablesAsFactorDotPlot could be called the ucrBinAxis in spirit.
         'On the next line, the ucrOtherAxisReceiver receiver is used as the aesthetics to factor by when different variables are grouped into a single column in the multiple variables method. 
+        ucrVariablesAsFactorDotPlot.SetParameter(New RParameter("x"), 0)
         ucrVariablesAsFactorDotPlot.SetFactorReceiver(ucrOtherAxisReceiver) 'Could choose the ucrFactorReceiver for this purpose... 
-        ucrVariablesAsFactorDotPlot.SetSelector(ucrDotPlotSelector)
-        ucrVariablesAsFactorDotPlot.SetIncludedDataType({"numeric", "factor"})
-        ucrBase.iHelpTopicID = 437
+        ucrVariablesAsFactorDotPlot.Selector = ucrDotPlotSelector
+        ucrVariablesAsFactorDotPlot.SetIncludedDataTypes({"numeric", "factor"})
+        ucrVariablesAsFactorDotPlot.bWithQuotes = False
+        ucrVariablesAsFactorDotPlot.SetParameterIsString()
 
+        ucrSaveDotPlot.SetPrefix("DotPlot")
+        ucrSaveDotPlot.SetSaveTypeAsGraph()
+        ucrSaveDotPlot.SetIsComboBox()
+        ucrSaveDotPlot.SetCheckBoxText("Save Graph")
         ucrSaveDotPlot.SetDataFrameSelector(ucrDotPlotSelector.ucrAvailableDataFrames)
-        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        ucrBase.clsRsyntax.iCallType = 3
-
+        ucrSaveDotPlot.SetAssignToIfUncheckedValue("last_graph")
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrVariablesAsFactorDotPlot.IsEmpty OrElse (ucrSaveDotPlot.chkSaveGraph.Checked AndAlso ucrSaveDotPlot.ucrInputGraphName.IsEmpty) Then
+        If ucrVariablesAsFactorDotPlot.IsEmpty OrElse Not ucrSaveDotPlot.IsComplete Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -74,90 +106,41 @@ Public Class dlgDotPlot
     End Sub
 
     Private Sub SetDefaults()
-        bEditAesFunction = True
-        clsRaesFunction.ClearParameters()
-        clsRgeom_dotplot.ClearParameters()
+        clsBaseOperator = New ROperator
+        clsRggPlotFunction = New RFunction
+        clsRDotplotGeomFunction = New RFunction
+        clsRaesFunction = New RFunction
+
         ucrDotPlotSelector.Reset()
-        ucrSaveDotPlot.strPrefix = "Dotplot"
-        ucrVariablesAsFactorDotPlot.ResetControl()
         ucrSaveDotPlot.Reset()
         sdgPlots.Reset()
-        rdoXBinAxis.Checked = True 'If it was already True, no need to change anything, else it will raise event rdoBinAxis_CheckChanged
-        SetFactorAxisAes()
-        SetBinAxisAes() 'TestOk is done within this sub.
-    End Sub
 
-    Private Sub rdoBinAxis_CheckedChanged(sender As Object, e As EventArgs) Handles rdoXBinAxis.CheckedChanged, rdoYBinAxis.CheckedChanged
-        'This sub changes the choice of bin axis.
-        If rdoYBinAxis.Checked Then
-            strBinAxis = "y"
-            strOtherAxis = "x"
-        Else
-            strBinAxis = "x"
-            strOtherAxis = "y"
-        End If
-        clsRgeom_dotplot.AddParameter("binaxis", Chr(34) & strBinAxis & Chr(34))
-        'The aes parameters for x and y in the AesFunction need to be updated, unless we are setting up the dialogue according to the content of AesFunction, when coming back from LayerOptions.
-        If bEditAesFunction Then
-            SetFactorAxisAes()
-            SetBinAxisAes()
-        End If
-    End Sub
+        'I am not sure we need this
+        bEditAesFunction = True
 
+        clsBaseOperator.SetOperation("+")
+        clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggPlotFunction, iPosition:=0)
+        clsBaseOperator.AddParameter("dotplot", clsRFunctionParameter:=clsRDotplotGeomFunction)
 
-    Private Sub SetFactorAxisAes()
-        'This sets the mapping in the aesthetics for the axis that is not binaxis.
-        'Warning: when binaxis is "x", mapping any variable doesn't come out very well. stacks are not aligned with the factor value along the y axis like it does for the x axis when binaxis is y. 
-        'Question to be discussed: Should we always keep in binaxis y and add a coordinate flip instead of changing bin axis ? or on top of what's available ? Coordinate flip could be nice ? I Don't know if they intend to change things in the next ggplot2 version.
-        If ucrOtherAxisReceiver.IsEmpty() = False Then
-            clsRaesFunction.AddParameter(strOtherAxis, ucrOtherAxisReceiver.GetVariableNames(False))
-        Else
-            clsRaesFunction.AddParameter(strOtherAxis, Chr(34) & "" & Chr(34))
-        End If
-    End Sub
-    Private Sub SetBinAxisAes()
-        'Warning: need to name the geom_dotplot parameter of the RSyntax as other parameters could be added via plot options... when it comes to removing this particular parameter, we need to be able to identify it.
-        'Warning/Task: the preceding remark applies to other specific plot dlg's !! Should go through these and edit them. 
-        If ucrVariablesAsFactorDotPlot.IsEmpty() = False Then
-            ucrBase.clsRsyntax.SetOperatorParameter(False, strParameterName:="1.geom_dotplot", clsRFunc:=clsRgeom_dotplot)
-            clsRaesFunction.AddParameter(strBinAxis, ucrVariablesAsFactorDotPlot.GetVariableNames(False))
-        Else
-            clsRaesFunction.RemoveParameterByName(strBinAxis)
-            ucrBase.clsRsyntax.RemoveOperatorParameter("1.geom_dotplot")
-        End If
-        TestOkEnabled()
-    End Sub
+        clsRggPlotFunction.SetPackageName("ggplot2")
+        clsRggPlotFunction.SetRCommand("ggplot")
+        clsRggPlotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction, iPosition:=1)
 
-    'The following three subs call for setup of the aesthetics when the receivers are edited by the user.
-    Private Sub ucrOtherAxisReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrOtherAxisReceiver.SelectionChanged
-        If bEditAesFunction Then 'The content of the AesFunction should not be edited when we are setting up the dialogue according to the content of AesFunction, when coming back from LayerOptions.
-            SetFactorAxisAes()
-        End If
-    End Sub
+        clsRaesFunction.SetPackageName("ggplot2")
+        clsRaesFunction.SetRCommand("aes")
+        clsRaesFunction.AddParameter("y", Chr(34) & Chr(34))
 
-    Private Sub ucrVariablesAsFactorDotPlot_SelectionChanged() Handles ucrVariablesAsFactorDotPlot.SelectionChanged
-        If bEditAesFunction Then 'The content of the AesFunction should not be edited when we are setting up the dialogue according to the content of AesFunction, when coming back from LayerOptions.
-            SetBinAxisAes()
-        End If
-    End Sub
-    Private Sub ucrFactorReceiver_SelectonChanged(sender As Object, e As EventArgs) Handles ucrFactorReceiver.SelectionChanged
-        If bEditAesFunction Then 'The content of the AesFunction should not be edited when we are setting up the dialogue according to the content of AesFunction, when coming back from LayerOptions.
-            If ucrFactorReceiver.IsEmpty() = False Then
-                clsRaesFunction.AddParameter("fill", ucrFactorReceiver.GetVariableNames(False))
-            Else
-                clsRaesFunction.RemoveParameterByName("fill")
-            End If
-        End If
-    End Sub
+        clsRDotplotGeomFunction.SetPackageName("ggplot2")
+        clsRDotplotGeomFunction.SetRCommand("geom_dotplot")
+        clsRDotplotGeomFunction.AddParameter("binaxis", Chr(34) & "x" & Chr(34))
+        clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrDotPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
 
-    Private Sub ucrDotPlotSelector_DataFrameChanged() Handles ucrDotPlotSelector.DataFrameChanged
-        clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrDotPlotSelector.ucrAvailableDataFrames.clsCurrDataFrame)
-        'Warning Question to be discussed: this is quite tricky, should reset everything that is data related, also in the sdgPLotOptions, the global dataframe should be changed so I would reset the whole ucrAdditionalLayers and so delete all the layers that are still stored in the RSyntax as OperatorParameters... How do we do this ? Maybe use new clean link with Options when designed...
-        clsRaesFunction.ClearParameters() 'The aes parameters that can be edited on the dialogue will be cleared, but the parameters that have been edited on plots need to be removed here...
     End Sub
-
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForContorls(True)
+        TestOkEnabled()
     End Sub
 
     Private Sub cmdDotPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdDotPlotOptions.Click
@@ -165,10 +148,10 @@ Public Class dlgDotPlot
         Dim iIndex As Integer
         bEditAesFunction = False 'The content of the AesFunction should not be edited when we are setting up the dialogue according to the content of AesFunction, when coming back from LayerOptions.
 
-        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_dotplot, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrDotPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True, bIgnoreGlobalAes:=False)
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggPlotFunction, clsTempGeomFunc:=clsRDotplotGeomFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrDotPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True, bIgnoreGlobalAes:=False)
         sdgLayerOptions.ShowDialog()
-        iIndex = clsRgeom_dotplot.clsParameters.FindIndex(Function(x) x.strArgumentName = "binaxis")
-        If iIndex <> -1 AndAlso clsRgeom_dotplot.clsParameters(iIndex).strArgumentValue = Chr(34) & "y" & Chr(34) Then
+        iIndex = clsRDotplotGeomFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "binaxis")
+        If iIndex <> -1 AndAlso clsRDotplotGeomFunction.clsParameters(iIndex).strArgumentValue = Chr(34) & "y" & Chr(34) Then
             rdoYBinAxis.Checked = True
         Else
             rdoXBinAxis.Checked = True 'Note: the default value of "binaxis" is "x"
@@ -190,31 +173,19 @@ Public Class dlgDotPlot
                 ucrFactorReceiver.Add(clsParam.strArgumentValue)
             End If
         Next
-
         bEditAesFunction = True
-
-        TestOkEnabled()
-    End Sub
-
-
-    Private Sub ucrSaveDotPlot_GraphNameChanged() Handles ucrSaveDotPlot.GraphNameChanged, ucrSaveDotPlot.SaveGraphCheckedChanged
-        If ucrSaveDotPlot.bSaveGraph Then
-            ucrBase.clsRsyntax.SetAssignTo(ucrSaveDotPlot.strGraphName, strTempDataframe:=ucrDotPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveDotPlot.strGraphName)
-        Else
-            ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrDotPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
-        End If
         TestOkEnabled()
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         'This sub handles the call of PLot Options. It opens sdgPlots. Need to work on the link.
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
-        sdgPlots.SetGgplotFunction(clsRggplotFunction)
+        sdgPlots.SetGgplotFunction(clsRggPlotFunction)
         sdgPlots.SetDataFrame(strNewDataFrame:=ucrDotPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         sdgPlots.ShowDialog()
     End Sub
 
-    Private Sub ucrSaveDotPlot_ContentsChanged() Handles ucrSaveDotPlot.ContentsChanged
+    Private Sub AllControlChanged() Handles ucrVariablesAsFactorDotPlot.ControlContentsChanged, ucrSaveDotPlot.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class

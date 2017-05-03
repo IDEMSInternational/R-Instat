@@ -17,6 +17,7 @@ Imports RDotNet
 Imports unvell.ReoGrid
 
 Public Class clsGridLink
+    Public ucrDataViewer As ucrDataView
     Public grdData As ReoGridControl
     Public grdMetadata As ReoGridControl
     Public grdVariablesMetadata As ReoGridControl
@@ -104,7 +105,7 @@ Public Class clsGridLink
                     Else
                         FillSheet(dfTemp, strDataName, grdData, bInstatObjectDataFrame:=True, bIncludeDataTypes:=True, iNewPosition:=i, bFilterApplied:=False, bCheckFreezeColumns:=True)
                     End If
-                    frmEditor.SetColumnNames(strDataName, dfTemp.ColumnNames())
+                    ucrDataViewer.SetColumnNames(strDataName, dfTemp.ColumnNames())
                     clsSetDataFramesChanged.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
                     clsSetDataFramesChanged.AddParameter("new_val", "FALSE")
                     frmMain.clsRLink.RunInternalScript(clsSetDataFramesChanged.ToScript())
@@ -181,10 +182,7 @@ Public Class clsGridLink
             grdVariablesMetadata.Visible = True
             grdMetadata.Visible = True
         End If
-        'TODO TEMPORARY THIS MUST BE REMOVED
-        'Cannot refer to frmEditor directly
-        'Could fix by having user control for grid and here raising event handled in frmEditor
-        frmEditor.UpdateCurrentWorksheet()
+        ucrDataViewer.UpdateCurrentWorksheet()
     End Sub
 
     Public Sub SetMetadata(tmpStrMetadata As String)
@@ -209,8 +207,9 @@ Public Class clsGridLink
         End If
     End Sub
 
-    Public Sub SetData(grdTemp As ReoGridControl)
-        grdData = grdTemp
+    Public Sub SetDataViewer(ucrNewDataViewer As ucrDataView)
+        ucrDataViewer = ucrNewDataViewer
+        grdData = ucrNewDataViewer.grdData
         bGrdDataExists = True
         bGrdDataChanged = True
         UpdateGrids()
@@ -303,8 +302,8 @@ Public Class clsGridLink
                     fillWorkSheet.RowHeaders(i).TextColor = Color.DarkBlue
                 Next
             End If
+            FormatDataView(fillWorkSheet)
         End If
-        FormatDataView(fillWorkSheet)
         Try
             clsGetColumnNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_names")
             clsGetColumnNames.AddParameter("data_name", Chr(34) & strName & Chr(34))
