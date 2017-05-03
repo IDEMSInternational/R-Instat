@@ -54,7 +54,6 @@ Public Class dlgBarAndPieChart
         ucrFactorReceiver.SetMeAsReceiver()
         ucrSaveBar.Reset()
         sdgPlots.Reset()
-        ucrChkFlipCoordinates.Checked = False
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
@@ -83,18 +82,18 @@ Public Class dlgBarAndPieChart
         ucrBase.clsRsyntax.iCallType = 3
         ucrBase.iHelpTopicID = 438
 
-        ucrBarChartSelector.SetParameter(New RParameter("data"))
+        ucrBarChartSelector.SetParameter(New RParameter("data", 0))
         ucrBarChartSelector.SetParameterIsrfunction()
 
         ucrFactorReceiver.Selector = ucrBarChartSelector
         ucrFactorReceiver.SetIncludedDataTypes({"factor"})
-        ucrFactorReceiver.SetParameter(New RParameter("x"))
+        ucrFactorReceiver.SetParameter(New RParameter("x", 1))
         ucrFactorReceiver.bWithQuotes = False
         ucrFactorReceiver.SetParameterIsString()
 
         ucrSecondReceiver.Selector = ucrBarChartSelector
         ucrSecondReceiver.SetIncludedDataTypes({"factor"})
-        ucrSecondReceiver.SetParameter(New RParameter("fill"))
+        ucrSecondReceiver.SetParameter(New RParameter("fill", 2))
         ucrSecondReceiver.bWithQuotes = False
         ucrSecondReceiver.SetParameterIsString()
 
@@ -135,11 +134,6 @@ Public Class dlgBarAndPieChart
         SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
-
-    Private Sub ucrFactorReceiver_ControlContentsChanged() Handles ucrFactorReceiver.ControlContentsChanged
-        SetFactorReceiverParameter()
-    End Sub
-
     Private Sub SetFactorReceiverParameter()
         If rdoBarChart.Checked = True Then
             ucrFactorReceiver.ChangeParameterName("x")
@@ -149,13 +143,12 @@ Public Class dlgBarAndPieChart
         TestOKEnabled()
     End Sub
 
-    Private Sub grpSelection_CheckedChanged() Handles ucrPnlOptions.ControlValueChanged
+    Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged
         Dim clsBarForPieFunc As New RFunction
         Dim clsBarForPieParam As New RParameter
-
+        SetFactorReceiverParameter()
         If rdoBarChart.Checked = True Then
             ucrSaveBar.SetPrefix("Bar")
-            clsRgeomPlotFunction.SetPackageName("ggplot2")
             clsRgeomPlotFunction.SetRCommand("geom_bar")
             cmdPieChartOptions.Visible = False
             cmdBarChartOptions.Visible = True
@@ -163,7 +156,7 @@ Public Class dlgBarAndPieChart
             ucrSaveBar.SetPrefix("Pie")
             cmdPieChartOptions.Visible = True
             cmdBarChartOptions.Visible = False
-            clsRgeomPlotFunction.SetPackageName("ggplot2")
+            clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
             clsRgeomPlotFunction.SetRCommand("coord_polar")
             clsRgeomPlotFunction.AddParameter("theta", Chr(34) & "y" & Chr(34))
 
@@ -174,8 +167,8 @@ Public Class dlgBarAndPieChart
             clsBarForPieFunc.AddParameter("width", "1")
             clsBaseOperator.AddParameter(clsBarForPieParam)
         End If
+
         'Warning: need to set second factor first, as in the pie chart case, it erases "fill" parameter (in clsRaesFunction), which is the parameter that takes the value in the first factor receiver.
-        TestOKEnabled()
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
