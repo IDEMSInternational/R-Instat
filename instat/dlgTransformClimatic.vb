@@ -1,4 +1,4 @@
-﻿' Instat-R
+﻿'' Instat-R
 ' Copyright (C) 2015
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -13,17 +13,14 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 Imports instat.Translations
-
-Public Class dlgStemAndLeaf
-    Private bFirstLoad As Boolean = True
+Public Class dlgTransformClimatic
+    Private bFirstload As Boolean = True
     Private bReset As Boolean = True
-    Private clsStemAndLeaf As New RFunction
-    Private Sub dlgStemAndLeaf_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If bFirstLoad Then
+    Private Sub dlgTransformClimatic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If bFirstload Then
             InitialiseDialog()
-            bFirstLoad = False
+            bFirstload = False
         End If
         If bReset Then
             SetDefaults()
@@ -31,46 +28,28 @@ Public Class dlgStemAndLeaf
         SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
+        TestOkEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.iCallType = 2
-        ucrBase.iHelpTopicID = 326
 
-        'ucrReceiver
-        ucrReceiverStemAndLeaf.SetParameter(New RParameter("x", 0))
-        ucrReceiverStemAndLeaf.SetParameterIsRFunction()
-        ucrReceiverStemAndLeaf.Selector = ucrStemLeafSelector
-        ucrReceiverStemAndLeaf.SetIncludedDataTypes({"numeric"})
     End Sub
 
     Private Sub SetDefaults()
-        clsStemAndLeaf = New RFunction
 
-        ucrReceiverStemAndLeaf.SetMeAsReceiver()
-        clsStemAndLeaf.SetRCommand("stem")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsStemAndLeaf)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverStemAndLeaf.IsEmpty Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
-        TestOkEnabled()
-    End Sub
-
-    Private Sub ucrReceiverStemAndLeaf_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStemAndLeaf.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
