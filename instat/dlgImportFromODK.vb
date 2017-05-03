@@ -81,9 +81,11 @@ Public Class dlgImportFromODK
     Private Sub pnlPlatform_ControlContentsChanged() Handles ucrPnlPlatform.ControlValueChanged
         If rdoOna.Checked Then
             clsGetFormsFunction.AddParameter("platform", Chr(34) & "ona" & Chr(34))
+            ucrInputChooseForm.cboInput.Items.Clear()
             ucrInputChooseForm.SetText("")
         ElseIf rdoKobo.Checked Then
             clsGetFormsFunction.AddParameter("platform", Chr(34) & "kobo" & Chr(34))
+            ucrInputChooseForm.cboInput.Items.Clear()
             ucrInputChooseForm.SetText("")
         End If
     End Sub
@@ -103,6 +105,8 @@ Public Class dlgImportFromODK
         Else
             cmdFindForms.Enabled = True
         End If
+        ucrInputChooseForm.cboInput.Items.Clear()
+        ucrInputChooseForm.SetText("")
         TestOKEnabled()
     End Sub
 

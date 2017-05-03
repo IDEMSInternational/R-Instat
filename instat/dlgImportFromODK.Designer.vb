@@ -74,7 +74,7 @@ Partial Class dlgImportFromODK
         Me.ucrInputUsername.AddQuotesIfUnrecognised = True
         Me.ucrInputUsername.IsMultiline = False
         Me.ucrInputUsername.IsReadOnly = False
-        Me.ucrInputUsername.Location = New System.Drawing.Point(86, 54)
+        Me.ucrInputUsername.Location = New System.Drawing.Point(86, 56)
         Me.ucrInputUsername.Name = "ucrInputUsername"
         Me.ucrInputUsername.Size = New System.Drawing.Size(152, 21)
         Me.ucrInputUsername.TabIndex = 2
@@ -88,7 +88,7 @@ Partial Class dlgImportFromODK
         '
         'ucrPnlPlatform
         '
-        Me.ucrPnlPlatform.Location = New System.Drawing.Point(92, 12)
+        Me.ucrPnlPlatform.Location = New System.Drawing.Point(98, 12)
         Me.ucrPnlPlatform.Name = "ucrPnlPlatform"
         Me.ucrPnlPlatform.Size = New System.Drawing.Size(246, 28)
         Me.ucrPnlPlatform.TabIndex = 0
@@ -100,7 +100,7 @@ Partial Class dlgImportFromODK
         Me.rdoKobo.FlatAppearance.BorderSize = 2
         Me.rdoKobo.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoKobo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoKobo.Location = New System.Drawing.Point(110, 12)
+        Me.rdoKobo.Location = New System.Drawing.Point(116, 12)
         Me.rdoKobo.Name = "rdoKobo"
         Me.rdoKobo.Size = New System.Drawing.Size(100, 28)
         Me.rdoKobo.TabIndex = 0
@@ -116,7 +116,7 @@ Partial Class dlgImportFromODK
         Me.rdoOna.FlatAppearance.BorderSize = 2
         Me.rdoOna.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoOna.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoOna.Location = New System.Drawing.Point(208, 12)
+        Me.rdoOna.Location = New System.Drawing.Point(214, 12)
         Me.rdoOna.Name = "rdoOna"
         Me.rdoOna.Size = New System.Drawing.Size(100, 28)
         Me.rdoOna.TabIndex = 1
