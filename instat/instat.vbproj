@@ -275,6 +275,18 @@
     <Compile Include="dlgExportGraphAsImage.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgExportRObjects.Designer.vb">
+      <DependentUpon>dlgExportRObjects.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExportRObjects.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgExportRWorkspace.Designer.vb">
+      <DependentUpon>dlgExportRWorkspace.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExportRWorkspace.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgExportToCPT.Designer.vb">
       <DependentUpon>dlgExportToCPT.vb</DependentUpon>
     </Compile>
@@ -2457,6 +2469,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExportGraphAsImage.resx">
       <DependentUpon>dlgExportGraphAsImage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportRObjects.resx">
+      <DependentUpon>dlgExportRObjects.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportRWorkspace.resx">
+      <DependentUpon>dlgExportRWorkspace.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExportToCPT.resx">
       <DependentUpon>dlgExportToCPT.vb</DependentUpon>
