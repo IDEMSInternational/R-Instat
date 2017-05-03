@@ -55,10 +55,10 @@ Partial Class dlgViewAndRemoveLinks
         Me.rdoViewLink.AutoSize = True
         Me.rdoViewLink.Location = New System.Drawing.Point(163, 99)
         Me.rdoViewLink.Name = "rdoViewLink"
-        Me.rdoViewLink.Size = New System.Drawing.Size(90, 17)
+        Me.rdoViewLink.Size = New System.Drawing.Size(71, 17)
         Me.rdoViewLink.TabIndex = 14
         Me.rdoViewLink.TabStop = True
-        Me.rdoViewLink.Text = "RadioButton1"
+        Me.rdoViewLink.Text = "View Link"
         Me.rdoViewLink.UseVisualStyleBackColor = True
         '
         'rdoDeleteLink
@@ -66,10 +66,10 @@ Partial Class dlgViewAndRemoveLinks
         Me.rdoDeleteLink.AutoSize = True
         Me.rdoDeleteLink.Location = New System.Drawing.Point(259, 99)
         Me.rdoDeleteLink.Name = "rdoDeleteLink"
-        Me.rdoDeleteLink.Size = New System.Drawing.Size(90, 17)
+        Me.rdoDeleteLink.Size = New System.Drawing.Size(79, 17)
         Me.rdoDeleteLink.TabIndex = 15
         Me.rdoDeleteLink.TabStop = True
-        Me.rdoDeleteLink.Text = "RadioButton2"
+        Me.rdoDeleteLink.Text = "Delete Link"
         Me.rdoDeleteLink.UseVisualStyleBackColor = True
         '
         'ucrReceiverViewLinks
