@@ -24,7 +24,7 @@ data_object <- R6Class("data_object",
     self$clear_variables_metadata()
   }
   self$add_defaults_meta()
-  self$add_defaults_variables_metadata()
+  self$add_defaults_variables_metadata(self$get_column_names())
   #self$update_variables_metadata()
   self$set_objects(objects)
   self$set_calculations(calculations)
@@ -360,7 +360,7 @@ data_object$set("public", "clear_variables_metadata", function() {
       if(!name  %in% c(data_type_label, data_name_label)) attr(self, name) <- NULL
     }
   }
-  self$add_defaults_variables_metadata()
+  self$add_defaults_variables_metadata(self$get_column_names())
 }
 )
 
@@ -450,7 +450,8 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
     if(!missing(adjacent_column)) ind = which(self$get_column_names() == adjacent_column) + 1
     else ind = previous_length + 1
   }
-
+  
+  new_col_names <- c()
   for(i in 1:num_cols) {
     if(num_cols == 1) {
       curr_col = col_data
@@ -459,6 +460,7 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
     if(is.matrix(curr_col) || is.data.frame(curr_col)) curr_col = curr_col[,1]
     if(use_col_name_as_prefix) curr_col_name = self$get_next_default_column_name(col_name)
     else curr_col_name = col_name[[i]]
+    new_col_names <- c(new_col_names, curr_col_name)
     if(curr_col_name %in% self$get_column_names()) {
       message(paste("A column named", curr_col_name, "already exists. The column will be replaced in the data"))
       self$append_to_changes(list(Replaced_col, curr_col_name))
@@ -469,13 +471,8 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
     
     private$data[[curr_col_name]] <- curr_col
     self$data_changed <- TRUE
-    self$append_to_variables_metadata(curr_col_name, is_hidden_label, hidden)
-    self$append_to_variables_metadata(curr_col_name, name_label, curr_col_name)
-    self$append_to_variables_metadata(curr_col_name, signif_figures_label, get_default_significant_figures(self$get_columns_from_data(curr_col_name, use_current_filter = FALSE)))
-    self$append_to_variables_metadata(curr_col_name, label_label, "")
-    self$append_to_variables_metadata(curr_col_name, scientific_label, FALSE)
-    self$variables_metadata_changed <- TRUE
   }
+  self$add_defaults_variables_metadata(new_col_names)
   if(!replaced) {
     if(before && ind == 1) self$set_data(dplyr::select(self$get_data_frame(use_current_filter = FALSE) , c((previous_length + 1):(previous_length + num_cols), 1:previous_length)))
     else if(before || ind != previous_length + 1) self$set_data(dplyr::select(self$get_data_frame(use_current_filter = FALSE) , c(1:(ind - 1), (previous_length + 1):(previous_length + num_cols), ind:previous_length)))
@@ -820,8 +817,8 @@ data_object$set("public", "add_defaults_meta", function() {
 }
 )
 
-data_object$set("public", "add_defaults_variables_metadata", function() {
-  for(column in self$get_column_names()) {
+data_object$set("public", "add_defaults_variables_metadata", function(column_names) {
+  for(column in column_names) {
     self$append_to_variables_metadata(column, name_label, column)
     if(!self$is_variables_metadata(is_hidden_label, column)) {
       self$append_to_variables_metadata(column, property = is_hidden_label, new_val = FALSE)
@@ -981,61 +978,61 @@ data_object$set("public", "sort_dataframe", function(col_names = c(), decreasing
 }
 )
 
-data_object$set("public", "convert_column_to_type", function(col_names = c(), to_type, factor_numeric = "by_levels", set_digits, set_decimals = FALSE) {
-  for(col_name in col_names){
-    if(!(col_name %in% self$get_column_names())) {
-      stop(col_name, " is not a column in ", get_metadata(data_name_label))
-    }
+data_object$set("public", "convert_column_to_type", function(col_names = c(), to_type, factor_values = NULL, set_digits, set_decimals = FALSE, keep_attr = TRUE, use_labels = TRUE) {
+  if(!all(col_names %in% self$get_column_names())) stop("Some column names not found in the data")
+
+  if(length(to_type) !=1 ) {
+    stop("to_type must be a character of length one")
   }
   
-  if(length(to_type)>1){
-    warning("Column(s) will be converted to type ", to_type[1])
-    to_type = to_type[1]
-  }
-  
-  
-  if(!(to_type %in% c("integer", "factor", "numeric", "character", "ordered_factor"))){
+  if(!(to_type %in% c("integer", "factor", "numeric", "character", "ordered_factor"))) {
     stop(to_type, " is not a valid type to convert to")
   }
   
-  if(!(factor_numeric %in% c("by_levels", "by_ordinals"))){
-    stop(factor_numeric, " can either be by_levels or by_ordinals.")
+  if(!is.null(factor_values) && !(factor_values %in% c("force_ordinals", "force_values"))) {
+    stop(factor_values, " can either be by_levels or by_ordinals.")
   }
   
   for(col_name in col_names) {
     curr_col <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
-    if(to_type=="factor") {
+    if(keep_attr) {
+      tmp_attr <- attributes(curr_col)
+      #TODO are these the only attributes we don't want to transfer?
+      tmp_attr <- tmp_attr[!names(tmp_attr) %in% c("class", "levels")]
+    }
+    if(!is.null(factor_values) && is.factor(curr_col) && to_type %in% c("integer", "numeric")) {
+      if(factor_values == "force_ordinals") curr_col <- as.numeric(curr_col)
+      else if(factor_values == "force_values") curr_col <- as.numeric(levels(curr_col))[curr_col]
+    }
+    if(to_type %in% c("factor", "ordered_factor")) {
+      ordered <- (to_type == "ordered_factor")
+      if(set_decimals) curr_col <- round(curr_col, digits = set_digits)
       # Warning: this is different from expected R behaviour
       # Any ordered columns would become unordered factors
-	  if(!set_decimals){
-	   self$add_columns_to_data(col_name = col_name, col_data = factor(curr_col, ordered = FALSE))
-	  } 
-	  else {self$add_columns_to_data(col_name = col_name, col_data = factor(round(curr_col, digits = set_digits), ordered = FALSE))
+      if(use_labels && self$is_variables_metadata("labels", col_name)) {
+        # TODO NA will be introduced if any values which do not have a label associated
+        curr_labels <- self$get_variables_metadata(property = "labels", column = col_name, direct_from_attributes = TRUE)
+        new_col <- factor(curr_col, ordered = ordered, levels = as.vector(curr_labels), labels = names(curr_labels))
       }
+      else new_col <- factor(curr_col, ordered = ordered)
     }
     else if(to_type =="integer") {
-      self$add_columns_to_data(col_name = col_name, col_data = as.integer(curr_col))
-    }
-    else if(to_type == "ordered_factor") {
-	   if(!set_decimals){
-	   self$add_columns_to_data(col_name = col_name, col_data = factor(curr_col, ordered = TRUE))
-	  } 
-	  else {self$add_columns_to_data(col_name = col_name, col_data = factor(round(curr_col, digits = set_digits), ordered = TRUE))
-	  }
-    }
-    else if(to_type == "integer") {
-      self$add_columns_to_data(col_name = col_name, col_data = as.integer(curr_col))
+      new_col = as.integer(curr_col)
     }
     else if(to_type == "numeric") {
-      if(is.factor(curr_col) && (factor_numeric == "by_levels")) {
-        self$add_columns_to_data(col_name = col_name, col_data = as.numeric(levels(curr_col))[curr_col])
-      }
-      else self$add_columns_to_data(col_name = col_name, col_data = as.numeric(curr_col))
+      new_col <- to_value(curr_col)
     }
     else if(to_type == "character") {
-      self$add_columns_to_data(col_name = col_name, col_data = as.character(curr_col))
+      new_col <- to_character(curr_col)
     }
-    self$append_to_variables_metadata(property = signif_figures_label, col_names = col_name, new_val = get_default_significant_figures(curr_col))
+    self$add_columns_to_data(col_name = col_name, col_data = new_col)
+    
+    if(keep_attr) {
+      tmp_names <- names(tmp_attr)
+      for(i in seq_along(tmp_attr)) {
+        self$append_to_variables_metadata(property = tmp_names[i], col_names = col_name, new_val = tmp_attr[[i]])
+      }
+    }
   }
   self$data_changed <- TRUE
   self$variables_metadata_changed <- TRUE
@@ -1067,13 +1064,19 @@ data_object$set("public", "drop_unused_factor_levels", function(col_name) {
 } 
 )
 
-data_object$set("public", "set_factor_levels", function(col_name, new_levels) {
+data_object$set("public", "set_factor_levels", function(col_name, new_levels, set_new_labels = TRUE) {
   if(!col_name %in% self$get_column_names()) stop(paste(col_name,"not found in data."))
   if(!is.factor(self$get_columns_from_data(col_name, use_current_filter = FALSE))) stop(paste(col_name,"is not a factor."))
-  if(length(new_levels) < length(levels(self$get_columns_from_data(col_name, use_current_filter = FALSE)))) stop("There must be at least as many new levels as current levels.")
+  old_levels <- levels(self$get_columns_from_data(col_name, use_current_filter = FALSE))
+  if(length(new_levels) < length(old_levels)) stop("There must be at least as many new levels as current levels.")
   
   # Must be private$data because setting an attribute
   levels(private$data[[col_name]]) <- new_levels
+  if(set_new_labels && self$is_variables_metadata("labels", col_name)) {
+    new_labels <- as.character(new_levels[1:length(old_levels)])
+    names(new_labels) <- names(self$get_variables_metadata(property = "labels", column = col_name))
+    self$append_to_variables_metadata(col_name, "labels", new_labels)
+  }
   self$data_changed <- TRUE
   self$variables_metadata_changed <- TRUE
 } 
@@ -2215,12 +2218,13 @@ instat_object$set("public","define_corruption_outputs", function(data_name, outp
 )
 
 data_object$set("public","define_corruption_outputs", function(output_columns = c()) {
+  all_cols <- self$get_column_names()
   if(!self$is_metadata(corruption_data_label)) {
     stop("Cannot define corruption outputs when data frame is not defined as corruption data.")
   }
   self$append_to_variables_metadata(output_columns, corruption_output_label, TRUE)
   self$append_to_variables_metadata(output_columns, corruption_index_label, TRUE)
-  other_cols <- self$get_column_names()[!self$get_column_names() %in% output_columns]
+  other_cols <- setdiff(all_cols, output_columns)
   self$append_to_variables_metadata(other_cols, corruption_output_label, FALSE)
 }
 )
