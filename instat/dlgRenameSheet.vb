@@ -17,13 +17,13 @@
 Imports instat.Translations
 Public Class dlgRenameSheet
     Public bFirstLoad As Boolean = True
+    Dim strSelectedDataFrame As String = ""
     Private bReset As Boolean = True
+    Private clsRename As New RFunction
     Private Sub dlgRenameSheet_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
         If bReset Then
             SetDefaults()
@@ -33,37 +33,37 @@ Public Class dlgRenameSheet
         autoTranslate(Me)
     End Sub
 
-    Private Sub ReopenDialog()
-        'Reseting ucrDataFrame to ensure that it displays the current data frame on the grid 
-        ucrDataFrameToRename.Reset()
-    End Sub
-
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 61
 
-        ucrInputNewName.SetParameter(New RParameter("new_value"))
+        ucrInputNewName.SetParameter(New RParameter("new_value", 1))
         ucrInputNewName.SetValidationTypeAsRVariable()
 
-        ucrDataFrameToRename.SetParameter(New RParameter("data_name"))
+        ucrDataFrameToRename.SetParameter(New RParameter("data_name", 0))
         ucrDataFrameToRename.SetParameterIsString()
 
-        ucrInputLabel.SetParameter(New RParameter("label"))
+        ucrInputLabel.SetParameter(New RParameter("label", 2))
     End Sub
 
-    ' check how changing dataframes affects it
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
+        clsRename = New RFunction
+
         ucrInputNewName.Reset()
         ucrDataFrameToRename.Reset()
         ucrInputLabel.Reset()
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_dataframe")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        clsRename.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_dataframe")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRename)
         ucrInputLabel.SetName("")
         CheckAutoName()
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
+    Public Sub SetCurrentDataframe(strDataFrame As String)
+        strSelectedDataFrame = strDataFrame
+        ucrDataFrameToRename.SetDataframe(strSelectedDataFrame)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -73,14 +73,14 @@ Public Class dlgRenameSheet
     End Sub
 
     Private Sub TestOKEnabled()
-        If ((Not ucrInputNewName.IsEmpty) AndAlso (ucrDataFrameToRename.cboAvailableDataFrames.Text <> "")) Then
+        If ((Not ucrInputNewName.IsEmpty) AndAlso (ucrDataFrameToRename.cboAvailableDataFrames.Text <> "")) AndAlso (ucrDataFrameToRename.cboAvailableDataFrames.SelectedItem <> ucrInputNewName.GetText) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
-    Private Sub ucrInputNewName_ContentsChanged() Handles ucrInputNewName.ControlContentsChanged, ucrDataFrameToRename.ControlContentsChanged
+    Private Sub ucrInputNewName_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputNewName.ControlContentsChanged, ucrDataFrameToRename.ControlContentsChanged
         TestOKEnabled()
     End Sub
 

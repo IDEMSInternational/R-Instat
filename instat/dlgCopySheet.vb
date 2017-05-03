@@ -13,13 +13,14 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 Public Class dlgCopySheet
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Dim strSelectedDataFrame As String = ""
     Private clsCopySheet As New RFunction
-    Private Sub dlgCopySheet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
+    Private Sub dlgCopySheet_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -30,20 +31,21 @@ Public Class dlgCopySheet
         SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
+        TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 263
 
         'ucrNewName
-        ucrNewDataFrameName.SetParameter(New RParameter("new_name"))
+        ucrNewDataFrameName.SetParameter(New RParameter("new_name", 1))
         ucrNewDataFrameName.SetValidationTypeAsRVariable()
 
         'ucrDataFrame
-        ucrDataFrameCopySheets.SetParameter(New RParameter("data_name"))
+        ucrDataFrameCopySheets.SetParameter(New RParameter("data_name", 0))
         ucrDataFrameCopySheets.SetParameterIsString()
 
-        'Default Function
+        ucrInputLabel.SetParameter(New RParameter("label", 2))
     End Sub
 
     Private Sub SetDefaults()
@@ -51,6 +53,8 @@ Public Class dlgCopySheet
 
         ucrNewDataFrameName.Reset()
         ucrDataFrameCopySheets.Reset()
+        ucrInputLabel.Reset()
+        ucrInputLabel.SetName("")
         CheckAutoName()
 
         clsCopySheet.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$copy_data_frame")
@@ -58,9 +62,10 @@ Public Class dlgCopySheet
         ucrBase.clsRsyntax.SetBaseRFunction(clsCopySheet)
     End Sub
 
-    Private Sub ReopenDialog()
-        'Reseting ucrDataFrame to ensure that it displays the current data frame on the grid 
-        ucrDataFrameCopySheets.Reset()
+
+    Public Sub SetCurrentDataframe(strDataFrame As String)
+        strSelectedDataFrame = strDataFrame
+        ucrDataFrameCopySheets.SetDataframe(strSelectedDataFrame)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -81,7 +86,7 @@ Public Class dlgCopySheet
         End If
     End Sub
 
-    Private Sub ucrInputNewName_ContentsChanged() Handles ucrDataFrameCopySheets.ControlContentsChanged, ucrNewDataFrameName.ControlContentsChanged
+    Private Sub Control_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameCopySheets.ControlContentsChanged, ucrNewDataFrameName.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
@@ -89,9 +94,11 @@ Public Class dlgCopySheet
         CheckAutoName()
     End Sub
 
+
     Private Sub CheckAutoName()
-        If Not ucrNewDataFrameName.bUserTyped AndAlso Not ucrNewDataFrameName.IsEmpty Then
-            ucrNewDataFrameName.SetName(ucrDataFrameCopySheets.cboAvailableDataFrames.SelectedItem & "_copy")
+        If Not ucrNewDataFrameName.bUserTyped Then
+            ucrNewDataFrameName.SetName(ucrDataFrameCopySheets.cboAvailableDataFrames.Text & "_copy")
         End If
     End Sub
+
 End Class
