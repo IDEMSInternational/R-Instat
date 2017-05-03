@@ -436,6 +436,7 @@ Public Class ucrDataView
     End Sub
 
     Private Sub MoveOrCopySheet_Click(sender As Object, e As EventArgs) Handles CopySheet.Click
+        dlgCopySheet.SetCurrentDataframe(grdCurrSheet.Name)
         dlgCopySheet.ShowDialog()
     End Sub
 

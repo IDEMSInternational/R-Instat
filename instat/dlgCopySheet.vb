@@ -18,13 +18,12 @@ Imports instat.Translations
 Public Class dlgCopySheet
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Dim strSelectedDataFrame As String = ""
     Private clsCopySheet As New RFunction
     Private Sub dlgCopySheet_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
-        Else
-            ReopenDialogue()
         End If
         If bReset Then
             SetDefaults()
@@ -33,11 +32,6 @@ Public Class dlgCopySheet
         bReset = False
         autoTranslate(Me)
         TestOKEnabled()
-    End Sub
-
-    Private Sub ReopenDialogue()
-        'Reseting ucrDataFrame to ensure that it displays the current data frame on the grid 
-        ucrDataFrameCopySheets.Reset()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -66,9 +60,9 @@ Public Class dlgCopySheet
         ucrBase.clsRsyntax.SetBaseRFunction(clsCopySheet)
     End Sub
 
-    Private Sub ReopenDialog()
-        'Reseting ucrDataFrame to ensure that it displays the current data frame on the grid 
-        ucrDataFrameCopySheets.Reset()
+    Public Sub SetCurrentDataframe(strDataFrame As String)
+        strSelectedDataFrame = strDataFrame
+        ucrDataFrameCopySheets.SetDataframe(strSelectedDataFrame)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -103,5 +97,5 @@ Public Class dlgCopySheet
             ucrNewDataFrameName.SetName(ucrDataFrameCopySheets.cboAvailableDataFrames.Text & "_copy")
         End If
     End Sub
-    
+
 End Class
