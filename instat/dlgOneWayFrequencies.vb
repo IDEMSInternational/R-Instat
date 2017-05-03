@@ -38,8 +38,7 @@ Public Class dlgOneWayFrequencies
     End Sub
 
     Private Sub InitialiseDialog()
-        'HelpID
-        ' ucrBase.iHelpTopicID = 
+        ucrBase.iHelpTopicID = 518
 
         ucrReceiverOneWayFreq.SetParameter(New RParameter("data", 0))
         ucrReceiverOneWayFreq.SetParameterIsRFunction()
