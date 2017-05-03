@@ -473,6 +473,10 @@ Public Class frmMain
         dlgLabels.ShowDialog()
     End Sub
 
+    Private Sub mnuManageFactorViewLabels_Click(sender As Object, e As EventArgs) Handles ToolStripMenuItem2.Click
+        dlgViewFactorLabels.ShowDialog()
+    End Sub
+
     Private Sub mnuManageFactorConvertToFactor_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorConvertToFactor.Click
         dlgConvertColumns.bToFactorOnly = True
         dlgConvertColumns.ShowDialog()
@@ -738,7 +742,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuOrganiseColumnTextFindReplace_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnTextFindReplace.Click
-        'dlgReplace.ShowDialog()
+        dlgStringHandling.ShowDialog()
     End Sub
 
     Private Sub mnuDescribeOneVariableSummarise_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableSummarise.Click
@@ -900,19 +904,19 @@ Public Class frmMain
         dlgSummary.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticOrganiseEventsStartoftheRains_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareEventsStartoftheRains.Click
+    Private Sub mnuClimaticOrganiseEventsStartoftheRains_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareStartoftheRains.Click
         dlgStartofRains.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticOrganiseEventsSpells_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareEventsSpells.Click
+    Private Sub mnuClimaticOrganiseEventsSpells_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareSpells.Click
         dlgSpells.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticOrganiseEventsWaterBalance_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareEventsWaterBalance.Click
+    Private Sub mnuClimaticOrganiseEventsWaterBalance_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareEndOfRains.Click
         dlgWaterBalance.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticOrganiseEventsEndoftheRains_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareEventsEndoftheRains.Click
+    Private Sub mnuClimaticOrganiseEventsEndoftheRains_Click(sender As Object, e As EventArgs)
         dlgEndofRains.ShowDialog()
     End Sub
 
@@ -1120,15 +1124,15 @@ Public Class frmMain
         dlgAddKey.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticPrepareDatesMakeDate_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareDatesMakeDate.Click
+    Private Sub mnuClimaticPrepareDatesMakeDate_Click(sender As Object, e As EventArgs) Handles mnuClimaticDatesMakeDate.Click
         dlgMakeDate.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticPrepareDatesUseDate_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareDatesUseDate.Click
+    Private Sub mnuClimaticPrepareDatesUseDate_Click(sender As Object, e As EventArgs) Handles mnuClimaticDatesUseDate.Click
         dlgUseDate.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticPrepareInfillMissingDates_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareInfillMissingDates.Click
+    Private Sub mnuClimaticPrepareInfillMissingDates_Click(sender As Object, e As EventArgs) Handles mnuClimaticDatesInfillMissingDates.Click
         dlgInfill.ShowDialog()
     End Sub
 
@@ -1345,9 +1349,26 @@ Public Class frmMain
         dlgRatingScales.ShowDialog()
     End Sub
 
-    Private Sub mnuPrepareColumnTextFindStringHandling_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnTextFindStringHandling.Click
-        dlgStringHandling.ShowDialog()
+    Private Sub mnuPrepareColumnTextDistance_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnTextDistance.Click
+        dlgStringDistance.ShowDialog()
     End Sub
+
+    Private Sub mnuDescribeOtherGraphicsDialogsInventoryPlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsInventoryPlot.Click
+        dlgInventoryPlot.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeThreeVariableFrequencies_Click(sender As Object, e As EventArgs) Handles mnuDescribeThreeVariableFrequencies.Click
+        dlgThreeVariableFrequencies.ShowDialog()
+    End Sub
+
+    Private Sub ExportGraphToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeExportGraph.Click
+        dlgExportGraphAsImage.ShowDialog()
+    End Sub
+
+    Private Sub mnuDescribeViewGraph_Click(sender As Object, e As EventArgs) Handles mnuDescribeViewGraph.Click
+        dlgViewGraph.ShowDialog()
+    End Sub
+
 
     'Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click
     '    'TEST temporary 

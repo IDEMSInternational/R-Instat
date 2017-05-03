@@ -72,6 +72,8 @@ Partial Class frmMain
         Me.mnuDescribeUseGraph = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeCombineGraph = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeThemes = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeExportGraph = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeViewGraph = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModelProbabilityDistributions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuModelProbabilityDistributionsShowModel = New System.Windows.Forms.ToolStripMenuItem()
@@ -169,21 +171,8 @@ Partial Class frmMain
         Me.ToolStripSeparator18 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuCliDefineClimaticData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepare = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticPrepareDates = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticPrepareDatesGenerateDates = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticPrepareDatesMakeDate = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticPrepareDatesUseDate = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticPrepareInfillMissingDates = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticPrepareDatesMakeTime = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticPrepareDatesUseTime = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCimaticPrepareTransform = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepareClimaticSummaries = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticPrepareSpecificEvents = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticPrepareEventsStartoftheRains = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticPrepareEventsSpells = New System.Windows.Forms.ToolStripMenuItem()
-        Me.Extremes = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticPrepareEventsWaterBalance = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticPrepareEventsEndoftheRains = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepareSummary = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepareNewWorksheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepareImportDailyData = New System.Windows.Forms.ToolStripMenuItem()
@@ -369,6 +358,7 @@ Partial Class frmMain
         Me.mnuPrepareColumnFactorDummyVariables = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator14 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuPrepareColumnFactorLevelsLabels = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnFactorReorderLevels = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnFactorReferenceLevel = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareColumnFactorUnusedLevels = New System.Windows.Forms.ToolStripMenuItem()
@@ -462,7 +452,18 @@ Partial Class frmMain
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
-        Me.mnuPrepareColumnTextFindStringHandling = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticDates = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticDatesGenerateDates = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticDatesMakeDate = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticDatesUseDate = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticDatesInfillMissingDates = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticDatesMakeTime = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticDatesUseTime = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticPrepareStartoftheRains = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticPrepareSpells = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticPrepareExtremes = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticPrepareEndOfRains = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator37 = New System.Windows.Forms.ToolStripSeparator()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -490,7 +491,7 @@ Partial Class frmMain
         '
         'mnuDescribe
         '
-        Me.mnuDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeOneVariable, Me.mnuDescribeTwoVariables, Me.mnuDescribeThreeVariable, Me.mnuDescribeSpecific, Me.mnuDescribeGeneral, Me.ToolStripSeparator9, Me.mnuDescribeMultivariate, Me.mnuDescribeMoreGraphs, Me.ToolStripSeparator13, Me.mnuDescribeUseGraph, Me.mnuDescribeCombineGraph, Me.mnuDescribeThemes})
+        Me.mnuDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeOneVariable, Me.mnuDescribeTwoVariables, Me.mnuDescribeThreeVariable, Me.mnuDescribeSpecific, Me.mnuDescribeGeneral, Me.ToolStripSeparator9, Me.mnuDescribeMultivariate, Me.mnuDescribeMoreGraphs, Me.ToolStripSeparator13, Me.mnuDescribeUseGraph, Me.mnuDescribeCombineGraph, Me.mnuDescribeThemes, Me.mnuDescribeExportGraph, Me.mnuDescribeViewGraph})
         Me.mnuDescribe.Name = "mnuDescribe"
         Me.mnuDescribe.Size = New System.Drawing.Size(64, 20)
         Me.mnuDescribe.Tag = "Describe"
@@ -500,7 +501,7 @@ Partial Class frmMain
         '
         Me.mnuDescribeOneVariable.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeOneVariableSummarise, Me.mnuDescribeOneVariableGraph, Me.ToolStripSeparator33, Me.mnuDescribeOneVariableFrequencies, Me.RatingDataToolStripMenuItem})
         Me.mnuDescribeOneVariable.Name = "mnuDescribeOneVariable"
-        Me.mnuDescribeOneVariable.Size = New System.Drawing.Size(172, 22)
+        Me.mnuDescribeOneVariable.Size = New System.Drawing.Size(201, 22)
         Me.mnuDescribeOneVariable.Tag = "One_Variable"
         Me.mnuDescribeOneVariable.Text = "One Variable"
         '
@@ -539,7 +540,7 @@ Partial Class frmMain
         '
         Me.mnuDescribeTwoVariables.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeTwoVariablesSummarise, Me.mnuDescribeTwoVariablesGraph, Me.ToolStripSeparator34, Me.mnuDescribeTwoVariablesFrequencies})
         Me.mnuDescribeTwoVariables.Name = "mnuDescribeTwoVariables"
-        Me.mnuDescribeTwoVariables.Size = New System.Drawing.Size(172, 22)
+        Me.mnuDescribeTwoVariables.Size = New System.Drawing.Size(201, 22)
         Me.mnuDescribeTwoVariables.Tag = "Two_Variables"
         Me.mnuDescribeTwoVariables.Text = "Two Variables"
         '
@@ -574,7 +575,7 @@ Partial Class frmMain
         '
         Me.mnuDescribeThreeVariable.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeThreeVariableSummarise, Me.mnuDescribeThreeVariableGraph, Me.ToolStripSeparator36, Me.mnuDescribeThreeVariableFrequencies})
         Me.mnuDescribeThreeVariable.Name = "mnuDescribeThreeVariable"
-        Me.mnuDescribeThreeVariable.Size = New System.Drawing.Size(172, 22)
+        Me.mnuDescribeThreeVariable.Size = New System.Drawing.Size(201, 22)
         Me.mnuDescribeThreeVariable.Text = "Three Variables"
         '
         'mnuDescribeThreeVariableSummarise
@@ -604,7 +605,7 @@ Partial Class frmMain
         '
         Me.mnuDescribeSpecific.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeSpecificFrequency, Me.mnuDescribeSpecificSummary, Me.mnuDescribeSpecificMultipleResponse, Me.ToolStripSeparator26, Me.mnuDescribeSpecificScatterPlot, Me.mnuDescribeSpecificLinePlot, Me.mnuDescribeSpecificHistogram, Me.mnuDescribeSpecificBoxplot, Me.mnuDescribeSpecificDotPlot, Me.mnuDescribeSpecificRugPlot, Me.mnuDescribeSpecificBarChart, Me.mnuDescribeSpecificBarChartFromSummary, Me.SummaryToolStripMenuItem})
         Me.mnuDescribeSpecific.Name = "mnuDescribeSpecific"
-        Me.mnuDescribeSpecific.Size = New System.Drawing.Size(172, 22)
+        Me.mnuDescribeSpecific.Size = New System.Drawing.Size(201, 22)
         Me.mnuDescribeSpecific.Tag = "Table_Dialogs"
         Me.mnuDescribeSpecific.Text = "Specific"
         '
@@ -701,7 +702,7 @@ Partial Class frmMain
         '
         Me.mnuDescribeGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeGeneralColumnSummaries, Me.DescribeGeneralTabulation, Me.DescribeGeneralGraphics})
         Me.mnuDescribeGeneral.Name = "mnuDescribeGeneral"
-        Me.mnuDescribeGeneral.Size = New System.Drawing.Size(172, 22)
+        Me.mnuDescribeGeneral.Size = New System.Drawing.Size(201, 22)
         Me.mnuDescribeGeneral.Tag = "General"
         Me.mnuDescribeGeneral.Text = "General..."
         '
@@ -730,13 +731,13 @@ Partial Class frmMain
         'ToolStripSeparator9
         '
         Me.ToolStripSeparator9.Name = "ToolStripSeparator9"
-        Me.ToolStripSeparator9.Size = New System.Drawing.Size(169, 6)
+        Me.ToolStripSeparator9.Size = New System.Drawing.Size(198, 6)
         '
         'mnuDescribeMultivariate
         '
         Me.mnuDescribeMultivariate.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeMultivariateCorrelations, Me.mnuDescribeMultivariateprincipalComponents, Me.mnuDescribeMultivariateCanonicalCorrelations})
         Me.mnuDescribeMultivariate.Name = "mnuDescribeMultivariate"
-        Me.mnuDescribeMultivariate.Size = New System.Drawing.Size(172, 22)
+        Me.mnuDescribeMultivariate.Size = New System.Drawing.Size(201, 22)
         Me.mnuDescribeMultivariate.Text = "Multivariate"
         '
         'mnuDescribeMultivariateCorrelations
@@ -761,7 +762,7 @@ Partial Class frmMain
         '
         Me.mnuDescribeMoreGraphs.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeOtherGraphicsDialogsWindRose, Me.mnuDescribeOtherGraphicsDialogsCumulativeDistribution, Me.mnuDescribeOtherGraphicsDialogsInventoryPlot, Me.mnuDescribeOtherGraphicsDialogsPopulationPyramid})
         Me.mnuDescribeMoreGraphs.Name = "mnuDescribeMoreGraphs"
-        Me.mnuDescribeMoreGraphs.Size = New System.Drawing.Size(172, 22)
+        Me.mnuDescribeMoreGraphs.Size = New System.Drawing.Size(201, 22)
         Me.mnuDescribeMoreGraphs.Text = "Graphs"
         '
         'mnuDescribeOtherGraphicsDialogsWindRose
@@ -780,7 +781,6 @@ Partial Class frmMain
         '
         'mnuDescribeOtherGraphicsDialogsInventoryPlot
         '
-        Me.mnuDescribeOtherGraphicsDialogsInventoryPlot.Enabled = False
         Me.mnuDescribeOtherGraphicsDialogsInventoryPlot.Name = "mnuDescribeOtherGraphicsDialogsInventoryPlot"
         Me.mnuDescribeOtherGraphicsDialogsInventoryPlot.Size = New System.Drawing.Size(209, 22)
         Me.mnuDescribeOtherGraphicsDialogsInventoryPlot.Tag = "Inventory_Plot..."
@@ -797,26 +797,38 @@ Partial Class frmMain
         'ToolStripSeparator13
         '
         Me.ToolStripSeparator13.Name = "ToolStripSeparator13"
-        Me.ToolStripSeparator13.Size = New System.Drawing.Size(169, 6)
+        Me.ToolStripSeparator13.Size = New System.Drawing.Size(198, 6)
         '
         'mnuDescribeUseGraph
         '
         Me.mnuDescribeUseGraph.Name = "mnuDescribeUseGraph"
-        Me.mnuDescribeUseGraph.Size = New System.Drawing.Size(172, 22)
+        Me.mnuDescribeUseGraph.Size = New System.Drawing.Size(201, 22)
         Me.mnuDescribeUseGraph.Text = "Use Graph..."
         '
         'mnuDescribeCombineGraph
         '
         Me.mnuDescribeCombineGraph.Name = "mnuDescribeCombineGraph"
-        Me.mnuDescribeCombineGraph.Size = New System.Drawing.Size(172, 22)
+        Me.mnuDescribeCombineGraph.Size = New System.Drawing.Size(201, 22)
         Me.mnuDescribeCombineGraph.Text = "Combine Graphs..."
         '
         'mnuDescribeThemes
         '
         Me.mnuDescribeThemes.Enabled = False
         Me.mnuDescribeThemes.Name = "mnuDescribeThemes"
-        Me.mnuDescribeThemes.Size = New System.Drawing.Size(172, 22)
+        Me.mnuDescribeThemes.Size = New System.Drawing.Size(201, 22)
         Me.mnuDescribeThemes.Text = "Themes..."
+        '
+        'mnuDescribeExportGraph
+        '
+        Me.mnuDescribeExportGraph.Name = "mnuDescribeExportGraph"
+        Me.mnuDescribeExportGraph.Size = New System.Drawing.Size(201, 22)
+        Me.mnuDescribeExportGraph.Text = "Export Graph as Image..."
+        '
+        'mnuDescribeViewGraph
+        '
+        Me.mnuDescribeViewGraph.Name = "mnuDescribeViewGraph"
+        Me.mnuDescribeViewGraph.Size = New System.Drawing.Size(201, 22)
+        Me.mnuDescribeViewGraph.Text = "View Graph..."
         '
         'mnuModel
         '
@@ -1422,7 +1434,7 @@ Partial Class frmMain
         '
         'mnuClimatic
         '
-        Me.mnuClimatic.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFile, Me.ToolStripSeparator18, Me.mnuCliDefineClimaticData, Me.mnuClimaticPrepare, Me.mnuClimaticQualityControl, Me.ToolStripSeparator30, Me.mnuClimdex, Me.mnuClimaticDescribe, Me.mnuClimaticPICSA, Me.ToolStripSeparator16, Me.mnuClimaticModels, Me.mnuClimaticExamine, Me.mnuClimaticProcess, Me.ToolStripSeparator23, Me.mnuClimaticSCF, Me.mnuClimaticEvaporation, Me.mnuClimaticCrop, Me.mnuClimaticHeatSum, Me.mnuClimateMethods})
+        Me.mnuClimatic.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFile, Me.ToolStripSeparator18, Me.mnuClimaticDates, Me.mnuCliDefineClimaticData, Me.mnuClimaticPrepare, Me.mnuClimaticQualityControl, Me.ToolStripSeparator30, Me.mnuClimdex, Me.mnuClimaticDescribe, Me.mnuClimaticPICSA, Me.ToolStripSeparator16, Me.mnuClimaticModels, Me.mnuClimaticExamine, Me.mnuClimaticProcess, Me.ToolStripSeparator23, Me.mnuClimaticSCF, Me.mnuClimaticEvaporation, Me.mnuClimaticCrop, Me.mnuClimaticHeatSum, Me.mnuClimateMethods})
         Me.mnuClimatic.Name = "mnuClimatic"
         Me.mnuClimatic.Size = New System.Drawing.Size(63, 20)
         Me.mnuClimatic.Tag = "Climatic"
@@ -1490,55 +1502,11 @@ Partial Class frmMain
         '
         'mnuClimaticPrepare
         '
-        Me.mnuClimaticPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticPrepareDates, Me.mnuCimaticPrepareTransform, Me.mnuClimaticPrepareClimaticSummaries, Me.mnuClimaticPrepareSpecificEvents, Me.mnuClimaticPrepareSummary, Me.mnuClimaticPrepareNewWorksheet, Me.mnuClimaticPrepareImportDailyData, Me.mnuClimaticPrepareMakeFactor, Me.mnuClimaticPrepareShiftDailyData, Me.mnuClimaticPrepareUnstackDailyData, Me.mnuClimaticPrepareStackDailyData})
+        Me.mnuClimaticPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCimaticPrepareTransform, Me.mnuClimaticPrepareClimaticSummaries, Me.ToolStripSeparator37, Me.mnuClimaticPrepareStartoftheRains, Me.mnuClimaticPrepareSpells, Me.mnuClimaticPrepareExtremes, Me.mnuClimaticPrepareEndOfRains, Me.mnuClimaticPrepareSummary, Me.mnuClimaticPrepareNewWorksheet, Me.mnuClimaticPrepareImportDailyData, Me.mnuClimaticPrepareMakeFactor, Me.mnuClimaticPrepareShiftDailyData, Me.mnuClimaticPrepareUnstackDailyData, Me.mnuClimaticPrepareStackDailyData})
         Me.mnuClimaticPrepare.Name = "mnuClimaticPrepare"
         Me.mnuClimaticPrepare.Size = New System.Drawing.Size(191, 22)
         Me.mnuClimaticPrepare.Tag = "Prepare"
         Me.mnuClimaticPrepare.Text = "Prepare"
-        '
-        'mnuClimaticPrepareDates
-        '
-        Me.mnuClimaticPrepareDates.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticPrepareDatesGenerateDates, Me.mnuClimaticPrepareDatesMakeDate, Me.mnuClimaticPrepareDatesUseDate, Me.mnuClimaticPrepareInfillMissingDates, Me.mnuClimaticPrepareDatesMakeTime, Me.mnuClimaticPrepareDatesUseTime})
-        Me.mnuClimaticPrepareDates.Name = "mnuClimaticPrepareDates"
-        Me.mnuClimaticPrepareDates.Size = New System.Drawing.Size(189, 22)
-        Me.mnuClimaticPrepareDates.Text = "Dates"
-        '
-        'mnuClimaticPrepareDatesGenerateDates
-        '
-        Me.mnuClimaticPrepareDatesGenerateDates.Enabled = False
-        Me.mnuClimaticPrepareDatesGenerateDates.Name = "mnuClimaticPrepareDatesGenerateDates"
-        Me.mnuClimaticPrepareDatesGenerateDates.Size = New System.Drawing.Size(182, 22)
-        Me.mnuClimaticPrepareDatesGenerateDates.Text = "Generate Dates..."
-        '
-        'mnuClimaticPrepareDatesMakeDate
-        '
-        Me.mnuClimaticPrepareDatesMakeDate.Name = "mnuClimaticPrepareDatesMakeDate"
-        Me.mnuClimaticPrepareDatesMakeDate.Size = New System.Drawing.Size(182, 22)
-        Me.mnuClimaticPrepareDatesMakeDate.Text = "Make Date..."
-        '
-        'mnuClimaticPrepareDatesUseDate
-        '
-        Me.mnuClimaticPrepareDatesUseDate.Name = "mnuClimaticPrepareDatesUseDate"
-        Me.mnuClimaticPrepareDatesUseDate.Size = New System.Drawing.Size(182, 22)
-        Me.mnuClimaticPrepareDatesUseDate.Text = "Use Date..."
-        '
-        'mnuClimaticPrepareInfillMissingDates
-        '
-        Me.mnuClimaticPrepareInfillMissingDates.Name = "mnuClimaticPrepareInfillMissingDates"
-        Me.mnuClimaticPrepareInfillMissingDates.Size = New System.Drawing.Size(182, 22)
-        Me.mnuClimaticPrepareInfillMissingDates.Text = "Infill Missing Dates..."
-        '
-        'mnuClimaticPrepareDatesMakeTime
-        '
-        Me.mnuClimaticPrepareDatesMakeTime.Name = "mnuClimaticPrepareDatesMakeTime"
-        Me.mnuClimaticPrepareDatesMakeTime.Size = New System.Drawing.Size(182, 22)
-        Me.mnuClimaticPrepareDatesMakeTime.Text = "Make Time..."
-        '
-        'mnuClimaticPrepareDatesUseTime
-        '
-        Me.mnuClimaticPrepareDatesUseTime.Name = "mnuClimaticPrepareDatesUseTime"
-        Me.mnuClimaticPrepareDatesUseTime.Size = New System.Drawing.Size(182, 22)
-        Me.mnuClimaticPrepareDatesUseTime.Text = "Use Time..."
         '
         'mnuCimaticPrepareTransform
         '
@@ -1551,44 +1519,6 @@ Partial Class frmMain
         Me.mnuClimaticPrepareClimaticSummaries.Name = "mnuClimaticPrepareClimaticSummaries"
         Me.mnuClimaticPrepareClimaticSummaries.Size = New System.Drawing.Size(189, 22)
         Me.mnuClimaticPrepareClimaticSummaries.Text = "Climatic Summaries..."
-        '
-        'mnuClimaticPrepareSpecificEvents
-        '
-        Me.mnuClimaticPrepareSpecificEvents.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticPrepareEventsStartoftheRains, Me.mnuClimaticPrepareEventsSpells, Me.Extremes, Me.mnuClimaticPrepareEventsWaterBalance, Me.mnuClimaticPrepareEventsEndoftheRains})
-        Me.mnuClimaticPrepareSpecificEvents.Name = "mnuClimaticPrepareSpecificEvents"
-        Me.mnuClimaticPrepareSpecificEvents.Size = New System.Drawing.Size(189, 22)
-        Me.mnuClimaticPrepareSpecificEvents.Text = "Specific Events"
-        '
-        'mnuClimaticPrepareEventsStartoftheRains
-        '
-        Me.mnuClimaticPrepareEventsStartoftheRains.Name = "mnuClimaticPrepareEventsStartoftheRains"
-        Me.mnuClimaticPrepareEventsStartoftheRains.Size = New System.Drawing.Size(172, 22)
-        Me.mnuClimaticPrepareEventsStartoftheRains.Text = "Start of the Rains..."
-        '
-        'mnuClimaticPrepareEventsSpells
-        '
-        Me.mnuClimaticPrepareEventsSpells.Name = "mnuClimaticPrepareEventsSpells"
-        Me.mnuClimaticPrepareEventsSpells.Size = New System.Drawing.Size(172, 22)
-        Me.mnuClimaticPrepareEventsSpells.Text = "Dry Spells..."
-        '
-        'Extremes
-        '
-        Me.Extremes.Name = "Extremes"
-        Me.Extremes.Size = New System.Drawing.Size(172, 22)
-        Me.Extremes.Text = "Extremes..."
-        '
-        'mnuClimaticPrepareEventsWaterBalance
-        '
-        Me.mnuClimaticPrepareEventsWaterBalance.Name = "mnuClimaticPrepareEventsWaterBalance"
-        Me.mnuClimaticPrepareEventsWaterBalance.Size = New System.Drawing.Size(172, 22)
-        Me.mnuClimaticPrepareEventsWaterBalance.Text = "Water Balance..."
-        '
-        'mnuClimaticPrepareEventsEndoftheRains
-        '
-        Me.mnuClimaticPrepareEventsEndoftheRains.Enabled = False
-        Me.mnuClimaticPrepareEventsEndoftheRains.Name = "mnuClimaticPrepareEventsEndoftheRains"
-        Me.mnuClimaticPrepareEventsEndoftheRains.Size = New System.Drawing.Size(172, 22)
-        Me.mnuClimaticPrepareEventsEndoftheRains.Text = "End of the Rains..."
         '
         'mnuClimaticPrepareSummary
         '
@@ -2864,7 +2794,7 @@ Partial Class frmMain
         '
         'mnuPrepareColumnFactor
         '
-        Me.mnuPrepareColumnFactor.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnFactorConvertToFactor, Me.mnuPrepareColumnFactorRecodeNumeric, Me.ToolStripSeparator12, Me.mnuPrepareColumnFactorRecodeFactor, Me.mnuPrepareColumnFactorCombineFactors, Me.mnuPrepareColumnFactorDummyVariables, Me.ToolStripSeparator14, Me.mnuPrepareColumnFactorLevelsLabels, Me.mnuPrepareColumnFactorReorderLevels, Me.mnuPrepareColumnFactorReferenceLevel, Me.mnuPrepareColumnFactorUnusedLevels, Me.mnuPrepareColumnFactorContrasts, Me.ToolStripSeparator19, Me.mnuPrepareColumnFactorFactorDataFrame})
+        Me.mnuPrepareColumnFactor.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnFactorConvertToFactor, Me.mnuPrepareColumnFactorRecodeNumeric, Me.ToolStripSeparator12, Me.mnuPrepareColumnFactorRecodeFactor, Me.mnuPrepareColumnFactorCombineFactors, Me.mnuPrepareColumnFactorDummyVariables, Me.ToolStripSeparator14, Me.mnuPrepareColumnFactorLevelsLabels, Me.ToolStripMenuItem2, Me.mnuPrepareColumnFactorReorderLevels, Me.mnuPrepareColumnFactorReferenceLevel, Me.mnuPrepareColumnFactorUnusedLevels, Me.mnuPrepareColumnFactorContrasts, Me.ToolStripSeparator19, Me.mnuPrepareColumnFactorFactorDataFrame})
         Me.mnuPrepareColumnFactor.Name = "mnuPrepareColumnFactor"
         Me.mnuPrepareColumnFactor.Size = New System.Drawing.Size(172, 22)
         Me.mnuPrepareColumnFactor.Tag = "Column:_Factor"
@@ -2922,6 +2852,12 @@ Partial Class frmMain
         Me.mnuPrepareColumnFactorLevelsLabels.Tag = "Levels/Labels..."
         Me.mnuPrepareColumnFactorLevelsLabels.Text = "Levels/Labels..."
         '
+        'ToolStripMenuItem2
+        '
+        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(179, 22)
+        Me.ToolStripMenuItem2.Text = "View Labels..."
+        '
         'mnuPrepareColumnFactorReorderLevels
         '
         Me.mnuPrepareColumnFactorReorderLevels.Name = "mnuPrepareColumnFactorReorderLevels"
@@ -2972,31 +2908,29 @@ Partial Class frmMain
         '
         'mnuPrepareColumnTextFindReplace
         '
-        Me.mnuPrepareColumnTextFindReplace.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareColumnTextFindStringHandling})
-        Me.mnuPrepareColumnTextFindReplace.Enabled = False
         Me.mnuPrepareColumnTextFindReplace.Name = "mnuPrepareColumnTextFindReplace"
-        Me.mnuPrepareColumnTextFindReplace.Size = New System.Drawing.Size(152, 22)
+        Me.mnuPrepareColumnTextFindReplace.Size = New System.Drawing.Size(143, 22)
         Me.mnuPrepareColumnTextFindReplace.Tag = "Find/Replace..."
-        Me.mnuPrepareColumnTextFindReplace.Text = "Find/Replace..."
+        Me.mnuPrepareColumnTextFindReplace.Text = "Find/Replace"
         '
         'mnuPrepareColumnTextTransform
         '
         Me.mnuPrepareColumnTextTransform.Name = "mnuPrepareColumnTextTransform"
-        Me.mnuPrepareColumnTextTransform.Size = New System.Drawing.Size(152, 22)
+        Me.mnuPrepareColumnTextTransform.Size = New System.Drawing.Size(143, 22)
         Me.mnuPrepareColumnTextTransform.Tag = "Transform..."
         Me.mnuPrepareColumnTextTransform.Text = "Transform..."
         '
         'mnuPrepareColumnTextSplit
         '
         Me.mnuPrepareColumnTextSplit.Name = "mnuPrepareColumnTextSplit"
-        Me.mnuPrepareColumnTextSplit.Size = New System.Drawing.Size(152, 22)
+        Me.mnuPrepareColumnTextSplit.Size = New System.Drawing.Size(143, 22)
         Me.mnuPrepareColumnTextSplit.Tag = "Split..."
         Me.mnuPrepareColumnTextSplit.Text = "Split..."
         '
         'mnuPrepareColumnTextCombine
         '
         Me.mnuPrepareColumnTextCombine.Name = "mnuPrepareColumnTextCombine"
-        Me.mnuPrepareColumnTextCombine.Size = New System.Drawing.Size(152, 22)
+        Me.mnuPrepareColumnTextCombine.Size = New System.Drawing.Size(143, 22)
         Me.mnuPrepareColumnTextCombine.Tag = "Combine..."
         Me.mnuPrepareColumnTextCombine.Text = "Combine..."
         '
@@ -3004,17 +2938,16 @@ Partial Class frmMain
         '
         Me.mnuPrepareColumnTextMatch.Enabled = False
         Me.mnuPrepareColumnTextMatch.Name = "mnuPrepareColumnTextMatch"
-        Me.mnuPrepareColumnTextMatch.Size = New System.Drawing.Size(152, 22)
+        Me.mnuPrepareColumnTextMatch.Size = New System.Drawing.Size(143, 22)
         Me.mnuPrepareColumnTextMatch.Tag = "Match..."
         Me.mnuPrepareColumnTextMatch.Text = "Match..."
         '
         'mnuPrepareColumnTextDistance
         '
-        Me.mnuPrepareColumnTextDistance.Enabled = False
         Me.mnuPrepareColumnTextDistance.Name = "mnuPrepareColumnTextDistance"
-        Me.mnuPrepareColumnTextDistance.Size = New System.Drawing.Size(152, 22)
+        Me.mnuPrepareColumnTextDistance.Size = New System.Drawing.Size(143, 22)
         Me.mnuPrepareColumnTextDistance.Tag = "Distance..."
-        Me.mnuPrepareColumnTextDistance.Text = "Distance..."
+        Me.mnuPrepareColumnTextDistance.Text = "Distance"
         '
         'mnuPrepareColumnDate
         '
@@ -3312,7 +3245,7 @@ Partial Class frmMain
         '
         Me.mnuCorruptionDefineCorruptionData.Name = "mnuCorruptionDefineCorruptionData"
         Me.mnuCorruptionDefineCorruptionData.Size = New System.Drawing.Size(248, 22)
-        Me.mnuCorruptionDefineCorruptionData.Text = "Define Corruption Data..."
+        Me.mnuCorruptionDefineCorruptionData.Text = "Define Procurement Data..."
         '
         'mnuCorruptionPrepare
         '
@@ -3324,49 +3257,49 @@ Partial Class frmMain
         'CountryNamesCorrectionsToolStripMenuItem
         '
         Me.CountryNamesCorrectionsToolStripMenuItem.Name = "CountryNamesCorrectionsToolStripMenuItem"
-        Me.CountryNamesCorrectionsToolStripMenuItem.Size = New System.Drawing.Size(262, 22)
+        Me.CountryNamesCorrectionsToolStripMenuItem.Size = New System.Drawing.Size(256, 22)
         Me.CountryNamesCorrectionsToolStripMenuItem.Text = "Standardise Country Names..."
         '
         'MergeAdditionalDataToolStripMenuItem
         '
         Me.MergeAdditionalDataToolStripMenuItem.Name = "MergeAdditionalDataToolStripMenuItem"
-        Me.MergeAdditionalDataToolStripMenuItem.Size = New System.Drawing.Size(262, 22)
+        Me.MergeAdditionalDataToolStripMenuItem.Size = New System.Drawing.Size(256, 22)
         Me.MergeAdditionalDataToolStripMenuItem.Text = "Merge Additional Data..."
         '
         'FilterToolStripMenuItem
         '
         Me.FilterToolStripMenuItem.Name = "FilterToolStripMenuItem"
-        Me.FilterToolStripMenuItem.Size = New System.Drawing.Size(262, 22)
+        Me.FilterToolStripMenuItem.Size = New System.Drawing.Size(256, 22)
         Me.FilterToolStripMenuItem.Text = "Choose Countries for Analysis..."
         '
         'UseAwardDateToolStripMenuItem
         '
         Me.UseAwardDateToolStripMenuItem.Name = "UseAwardDateToolStripMenuItem"
-        Me.UseAwardDateToolStripMenuItem.Size = New System.Drawing.Size(262, 22)
+        Me.UseAwardDateToolStripMenuItem.Size = New System.Drawing.Size(256, 22)
         Me.UseAwardDateToolStripMenuItem.Text = "Use Award Date..."
         '
         'UseSignatureDateToolStripMenuItem
         '
         Me.UseSignatureDateToolStripMenuItem.Name = "UseSignatureDateToolStripMenuItem"
-        Me.UseSignatureDateToolStripMenuItem.Size = New System.Drawing.Size(262, 22)
+        Me.UseSignatureDateToolStripMenuItem.Size = New System.Drawing.Size(256, 22)
         Me.UseSignatureDateToolStripMenuItem.Text = "Use Signature Date..."
         '
         'DefineCorruptionFreeCategoriesToolStripMenuItem
         '
         Me.DefineCorruptionFreeCategoriesToolStripMenuItem.Name = "DefineCorruptionFreeCategoriesToolStripMenuItem"
-        Me.DefineCorruptionFreeCategoriesToolStripMenuItem.Size = New System.Drawing.Size(262, 22)
-        Me.DefineCorruptionFreeCategoriesToolStripMenuItem.Text = "Define Corruption Free Categories..."
+        Me.DefineCorruptionFreeCategoriesToolStripMenuItem.Size = New System.Drawing.Size(256, 22)
+        Me.DefineCorruptionFreeCategoriesToolStripMenuItem.Text = "Set Reference Level..."
         '
         'DefineContractValueCategoriesToolStripMenuItem
         '
         Me.DefineContractValueCategoriesToolStripMenuItem.Name = "DefineContractValueCategoriesToolStripMenuItem"
-        Me.DefineContractValueCategoriesToolStripMenuItem.Size = New System.Drawing.Size(262, 22)
+        Me.DefineContractValueCategoriesToolStripMenuItem.Size = New System.Drawing.Size(256, 22)
         Me.DefineContractValueCategoriesToolStripMenuItem.Text = "Define Contract Value Categories..."
         '
         'RecodeNumericIntoQuantilesToolStripMenuItem
         '
         Me.RecodeNumericIntoQuantilesToolStripMenuItem.Name = "RecodeNumericIntoQuantilesToolStripMenuItem"
-        Me.RecodeNumericIntoQuantilesToolStripMenuItem.Size = New System.Drawing.Size(262, 22)
+        Me.RecodeNumericIntoQuantilesToolStripMenuItem.Size = New System.Drawing.Size(256, 22)
         Me.RecodeNumericIntoQuantilesToolStripMenuItem.Text = "Recode Numeric into Quantiles..."
         '
         'mnuCorruptionDescribe
@@ -3642,11 +3575,78 @@ Partial Class frmMain
         Me.ucrOutput.Size = New System.Drawing.Size(295, 113)
         Me.ucrOutput.TabIndex = 0
         '
-        'mnuPrepareColumnTextFindStringHandling
+        'mnuClimaticDates
         '
-        Me.mnuPrepareColumnTextFindStringHandling.Name = "mnuPrepareColumnTextFindStringHandling"
-        Me.mnuPrepareColumnTextFindStringHandling.Size = New System.Drawing.Size(166, 22)
-        Me.mnuPrepareColumnTextFindStringHandling.Text = "String Handling..."
+        Me.mnuClimaticDates.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticDatesGenerateDates, Me.mnuClimaticDatesMakeDate, Me.mnuClimaticDatesUseDate, Me.mnuClimaticDatesInfillMissingDates, Me.mnuClimaticDatesMakeTime, Me.mnuClimaticDatesUseTime})
+        Me.mnuClimaticDates.Name = "mnuClimaticDates"
+        Me.mnuClimaticDates.Size = New System.Drawing.Size(191, 22)
+        Me.mnuClimaticDates.Text = "Dates"
+        '
+        'mnuClimaticDatesGenerateDates
+        '
+        Me.mnuClimaticDatesGenerateDates.Enabled = False
+        Me.mnuClimaticDatesGenerateDates.Name = "mnuClimaticDatesGenerateDates"
+        Me.mnuClimaticDatesGenerateDates.Size = New System.Drawing.Size(182, 22)
+        Me.mnuClimaticDatesGenerateDates.Text = "Generate Dates..."
+        '
+        'mnuClimaticDatesMakeDate
+        '
+        Me.mnuClimaticDatesMakeDate.Name = "mnuClimaticDatesMakeDate"
+        Me.mnuClimaticDatesMakeDate.Size = New System.Drawing.Size(182, 22)
+        Me.mnuClimaticDatesMakeDate.Text = "Make Date..."
+        '
+        'mnuClimaticDatesUseDate
+        '
+        Me.mnuClimaticDatesUseDate.Name = "mnuClimaticDatesUseDate"
+        Me.mnuClimaticDatesUseDate.Size = New System.Drawing.Size(182, 22)
+        Me.mnuClimaticDatesUseDate.Text = "Use Date..."
+        '
+        'mnuClimaticDatesInfillMissingDates
+        '
+        Me.mnuClimaticDatesInfillMissingDates.Name = "mnuClimaticDatesInfillMissingDates"
+        Me.mnuClimaticDatesInfillMissingDates.Size = New System.Drawing.Size(182, 22)
+        Me.mnuClimaticDatesInfillMissingDates.Text = "Infill Missing Dates..."
+        '
+        'mnuClimaticDatesMakeTime
+        '
+        Me.mnuClimaticDatesMakeTime.Name = "mnuClimaticDatesMakeTime"
+        Me.mnuClimaticDatesMakeTime.Size = New System.Drawing.Size(182, 22)
+        Me.mnuClimaticDatesMakeTime.Text = "Make Time..."
+        '
+        'mnuClimaticDatesUseTime
+        '
+        Me.mnuClimaticDatesUseTime.Name = "mnuClimaticDatesUseTime"
+        Me.mnuClimaticDatesUseTime.Size = New System.Drawing.Size(182, 22)
+        Me.mnuClimaticDatesUseTime.Text = "Use Time..."
+        '
+        'mnuClimaticPrepareStartoftheRains
+        '
+        Me.mnuClimaticPrepareStartoftheRains.Name = "mnuClimaticPrepareStartoftheRains"
+        Me.mnuClimaticPrepareStartoftheRains.Size = New System.Drawing.Size(189, 22)
+        Me.mnuClimaticPrepareStartoftheRains.Text = "Start of the Rains..."
+        '
+        'mnuClimaticPrepareSpells
+        '
+        Me.mnuClimaticPrepareSpells.Name = "mnuClimaticPrepareSpells"
+        Me.mnuClimaticPrepareSpells.Size = New System.Drawing.Size(189, 22)
+        Me.mnuClimaticPrepareSpells.Text = "Dry Spells..."
+        '
+        'mnuClimaticPrepareExtremes
+        '
+        Me.mnuClimaticPrepareExtremes.Name = "mnuClimaticPrepareExtremes"
+        Me.mnuClimaticPrepareExtremes.Size = New System.Drawing.Size(189, 22)
+        Me.mnuClimaticPrepareExtremes.Text = "Extremes..."
+        '
+        'mnuClimaticPrepareEndOfRains
+        '
+        Me.mnuClimaticPrepareEndOfRains.Name = "mnuClimaticPrepareEndOfRains"
+        Me.mnuClimaticPrepareEndOfRains.Size = New System.Drawing.Size(189, 22)
+        Me.mnuClimaticPrepareEndOfRains.Text = "End of Rains..."
+        '
+        'ToolStripSeparator37
+        '
+        Me.ToolStripSeparator37.Name = "ToolStripSeparator37"
+        Me.ToolStripSeparator37.Size = New System.Drawing.Size(186, 6)
         '
         'frmMain
         '
@@ -3990,11 +3990,6 @@ Partial Class frmMain
     Friend WithEvents mnuDescribeThemes As ToolStripMenuItem
     Friend WithEvents mnuClimaticDescribe As ToolStripMenuItem
     Friend WithEvents mnuClimaticPrepareSummary As ToolStripMenuItem
-    Friend WithEvents mnuClimaticPrepareSpecificEvents As ToolStripMenuItem
-    Friend WithEvents mnuClimaticPrepareEventsStartoftheRains As ToolStripMenuItem
-    Friend WithEvents mnuClimaticPrepareEventsSpells As ToolStripMenuItem
-    Friend WithEvents mnuClimaticPrepareEventsWaterBalance As ToolStripMenuItem
-    Friend WithEvents mnuClimaticPrepareEventsEndoftheRains As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator26 As ToolStripSeparator
     Friend WithEvents mnuDescribeSpecificScatterPlot As ToolStripMenuItem
     Friend WithEvents mnuDescribeSpecificLinePlot As ToolStripMenuItem
@@ -4035,12 +4030,6 @@ Partial Class frmMain
     Friend WithEvents mnuClimateFileClimSoft As ToolStripMenuItem
     Friend WithEvents mnuClimaticFileCliData As ToolStripMenuItem
     Friend WithEvents mnuCimaticPrepareTransform As ToolStripMenuItem
-    Friend WithEvents mnuClimaticPrepareDates As ToolStripMenuItem
-    Friend WithEvents mnuClimaticPrepareDatesGenerateDates As ToolStripMenuItem
-    Friend WithEvents mnuClimaticPrepareDatesMakeDate As ToolStripMenuItem
-    Friend WithEvents mnuClimaticPrepareDatesUseDate As ToolStripMenuItem
-    Friend WithEvents mnuClimaticPrepareDatesMakeTime As ToolStripMenuItem
-    Friend WithEvents mnuClimaticPrepareDatesUseTime As ToolStripMenuItem
     Friend WithEvents mnuClimaticQualityControl As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator30 As ToolStripSeparator
     Friend WithEvents mnuClimaticDescribeRainfall As ToolStripMenuItem
@@ -4083,13 +4072,11 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticModelsExtremes As ToolStripMenuItem
     Friend WithEvents mnuClimaticModelsCircular As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator15 As ToolStripSeparator
-    Friend WithEvents mnuClimaticPrepareInfillMissingDates As ToolStripMenuItem
     Friend WithEvents mnuClimaticPrepareClimaticSummaries As ToolStripMenuItem
     Friend WithEvents InventoryToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DisplayDailyToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents QCProceduresToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator18 As ToolStripSeparator
-    Friend WithEvents Extremes As ToolStripMenuItem
     Friend WithEvents mnuCorruptionDefineCorruptionData As ToolStripMenuItem
     Friend WithEvents mnuClimaticSCFSupportCumulativeExceedanceGraphs As ToolStripMenuItem
     Friend WithEvents CountryNamesCorrectionsToolStripMenuItem As ToolStripMenuItem
@@ -4134,5 +4121,19 @@ Partial Class frmMain
     Friend WithEvents ucrScriptWindow As ucrScript
     Friend WithEvents mnuClimaticFileImportGriddedData As ToolStripMenuItem
     Friend WithEvents RatingDataToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents mnuPrepareColumnTextFindStringHandling As ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem2 As ToolStripMenuItem
+    Friend WithEvents mnuDescribeExportGraph As ToolStripMenuItem
+    Friend WithEvents mnuDescribeViewGraph As ToolStripMenuItem
+    Friend WithEvents mnuClimaticDates As ToolStripMenuItem
+    Friend WithEvents mnuClimaticDatesGenerateDates As ToolStripMenuItem
+    Friend WithEvents mnuClimaticDatesMakeDate As ToolStripMenuItem
+    Friend WithEvents mnuClimaticDatesUseDate As ToolStripMenuItem
+    Friend WithEvents mnuClimaticDatesInfillMissingDates As ToolStripMenuItem
+    Friend WithEvents mnuClimaticDatesMakeTime As ToolStripMenuItem
+    Friend WithEvents mnuClimaticDatesUseTime As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator37 As ToolStripSeparator
+    Friend WithEvents mnuClimaticPrepareStartoftheRains As ToolStripMenuItem
+    Friend WithEvents mnuClimaticPrepareSpells As ToolStripMenuItem
+    Friend WithEvents mnuClimaticPrepareExtremes As ToolStripMenuItem
+    Friend WithEvents mnuClimaticPrepareEndOfRains As ToolStripMenuItem
 End Class
