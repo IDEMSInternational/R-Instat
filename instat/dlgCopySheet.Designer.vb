@@ -26,11 +26,13 @@ Partial Class dlgCopySheet
         Me.ucrDataFrameCopySheets = New instat.ucrDataFrame()
         Me.lblNewSheetName = New System.Windows.Forms.Label()
         Me.ucrNewDataFrameName = New instat.ucrInputTextBox()
+        Me.ucrInputLabel = New instat.ucrInputTextBox()
+        Me.lblLabel = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 74)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 118)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 3
@@ -55,6 +57,7 @@ Partial Class dlgCopySheet
         '
         'ucrNewDataFrameName
         '
+        Me.ucrNewDataFrameName.AddQuotesIfUnrecognised = True
         Me.ucrNewDataFrameName.IsMultiline = False
         Me.ucrNewDataFrameName.IsReadOnly = False
         Me.ucrNewDataFrameName.Location = New System.Drawing.Point(194, 28)
@@ -62,11 +65,32 @@ Partial Class dlgCopySheet
         Me.ucrNewDataFrameName.Size = New System.Drawing.Size(137, 21)
         Me.ucrNewDataFrameName.TabIndex = 2
         '
+        'ucrInputLabel
+        '
+        Me.ucrInputLabel.AddQuotesIfUnrecognised = True
+        Me.ucrInputLabel.IsMultiline = False
+        Me.ucrInputLabel.IsReadOnly = False
+        Me.ucrInputLabel.Location = New System.Drawing.Point(194, 80)
+        Me.ucrInputLabel.Name = "ucrInputLabel"
+        Me.ucrInputLabel.Size = New System.Drawing.Size(131, 22)
+        Me.ucrInputLabel.TabIndex = 6
+        '
+        'lblLabel
+        '
+        Me.lblLabel.AutoSize = True
+        Me.lblLabel.Location = New System.Drawing.Point(194, 64)
+        Me.lblLabel.Name = "lblLabel"
+        Me.lblLabel.Size = New System.Drawing.Size(94, 13)
+        Me.lblLabel.TabIndex = 5
+        Me.lblLabel.Text = "Data Frame Label:"
+        '
         'dlgCopySheet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(418, 134)
+        Me.ClientSize = New System.Drawing.Size(418, 176)
+        Me.Controls.Add(Me.ucrInputLabel)
+        Me.Controls.Add(Me.lblLabel)
         Me.Controls.Add(Me.ucrNewDataFrameName)
         Me.Controls.Add(Me.lblNewSheetName)
         Me.Controls.Add(Me.ucrDataFrameCopySheets)
@@ -78,6 +102,7 @@ Partial Class dlgCopySheet
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Copy Sheet"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -85,4 +110,6 @@ Partial Class dlgCopySheet
     Friend WithEvents ucrDataFrameCopySheets As ucrDataFrame
     Friend WithEvents lblNewSheetName As Label
     Friend WithEvents ucrNewDataFrameName As ucrInputTextBox
+    Friend WithEvents ucrInputLabel As ucrInputTextBox
+    Friend WithEvents lblLabel As Label
 End Class
