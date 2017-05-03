@@ -174,15 +174,15 @@ Public Class dlgThreeVariableFrequencies
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        Dim clsTempParamOne As RParameter
-        Dim clsTempParamTwo As RParameter
+        Dim clsTempParamX As RParameter
+        Dim clsTempParamY As RParameter
 
-        clsTempParamOne = New RParameter("x", 3)
-        ucrReceiverGroupsBy1st.AddAdditionalCodeParameterPair(clsSelect, clsTempParamOne, iAdditionalPairNo:=1)
-        clsTempParamOne.bIncludeArgumentName = False
-        clsTempParamTwo = New RParameter("y", 4)
-        ucrReceiverGroupBy2nd.AddAdditionalCodeParameterPair(clsSelect, clsTempParamTwo, iAdditionalPairNo:=1)
-        clsTempParamTwo.bIncludeArgumentName = False
+        clsTempParamX = New RParameter("x", 3)
+        ucrReceiverGroupsBy1st.AddAdditionalCodeParameterPair(clsSelect, clsTempParamX, iAdditionalPairNo:=1)
+        clsTempParamX.bIncludeArgumentName = False
+        clsTempParamY = New RParameter("y", 4)
+        ucrReceiverGroupBy2nd.AddAdditionalCodeParameterPair(clsSelect, clsTempParamY, iAdditionalPairNo:=1)
+        clsTempParamY.bIncludeArgumentName = False
 
         ucrSelectorThreeVariableFrequencies.AddAdditionalCodeParameterPair(clsGraphBaseOperator, ucrSelectorThreeVariableFrequencies.GetParameter, iAdditionalPairNo:=1)
 
@@ -292,8 +292,6 @@ Public Class dlgThreeVariableFrequencies
                 clsRowParam.Position = 1
                 clsColumnParam.Position = 2
             End If
-            ucrReceiverRowFactor.SetParameter(clsRowParam)
-            ucrReceiverColumnFactor.SetParameter(clsColumnParam)
         End If
         ChangeLocation()
     End Sub
