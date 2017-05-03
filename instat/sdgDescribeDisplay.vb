@@ -15,112 +15,64 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class sdgDescribeDisplay
+    Public bControlsInitialised As Boolean = False
     Public clsRAnovaDispOptions, clsRFreqDispOptions As New RFunction
-    Public bFirstLoad As Boolean = True
     Private Sub sdgDescribeDisplay_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        If bFirstLoad Then
-            SetDefaults()
-            bFirstLoad = False
-        End If
     End Sub
 
-    Public Sub SetAnovaDispOptions(clsRNewAnovaDispOptions As RFunction)
-        clsRAnovaDispOptions = clsRNewAnovaDispOptions
-    End Sub
-    Public Sub SetFreqDispOptions(clsRNewFreqDispOptions As RFunction)
-        clsRFreqDispOptions = clsRNewFreqDispOptions
+    Public Sub InitialiseControls()
+        ucrChkAddMargins.SetText("Add Margins")
+        ucrChkAddMargins.SetParameter(New RParameter("addmargins"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkAddMargins.SetRDefault("FALSE")
+
+        ucrChkPercentages.SetText("Percentages")
+        ucrChkPercentages.SetParameter(New RParameter("percentages"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkPercentages.SetRDefault("FALSE")
+
+        ucrChkProportions.SetText("Proportions")
+        ucrChkProportions.SetParameter(New RParameter("proportions"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkProportions.SetRDefault("FALSE")
+
+        ucrChkTranspose.SetText("Transpose")
+        ucrChkTranspose.SetParameter(New RParameter("transpose"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkTranspose.SetRDefault("FALSE")
+
+        ucrChkSignifLevel.SetText("Significance Level")
+        ucrChkSignifLevel.SetParameter(New RParameter("sign_level"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkSignifLevel.SetRDefault("FALSE")
+
+        ucrChkSignifStars.SetText("Significance Stars")
+        ucrChkSignifStars.SetParameter(New RParameter("signif.stars"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkSignifStars.SetRDefault("FALSE")
+
+        ucrChkMeans.SetText("Means")
+        ucrChkMeans.SetParameter(New RParameter("means"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkMeans.SetRDefault("FALSE")
     End Sub
 
-    Public Sub SetDefaults()
-        chkAddMargins.Checked = False
-        chkPercentages.Checked = False
-        chkProportions.Checked = False
-        chkTranspose.Checked = False
-        chkSignifLevel.Checked = False
-        chkSignifStars.Checked = False
-        chkMeans.Checked = False
-    End Sub
-
-    Private Sub chkAddMargins_CheckedChanged(sender As Object, e As EventArgs) Handles chkAddMargins.CheckedChanged
-        If chkAddMargins.Checked Then
-            clsRFreqDispOptions.AddParameter("addmargins", "TRUE")
-        Else
-            clsRFreqDispOptions.RemoveParameterByName("addmargins")
+    Public Sub SetRFunction(clsNewFreqRFunction As RFunction, clsNewAnovaRFunction As RFunction, Optional bReset As Boolean = False)
+        If Not bControlsInitialised Then
+            InitialiseControls()
         End If
-    End Sub
-
-    Private Sub chkPercentages_CheckedChanged(sender As Object, e As EventArgs) Handles chkPercentages.CheckedChanged
-        If chkPercentages.Checked Then
-            clsRFreqDispOptions.AddParameter("percentages", "TRUE")
-        Else
-            clsRFreqDispOptions.RemoveParameterByName("percentages")
-        End If
-        If chkProportions.Checked = False Then
-            MsgBox("Proportions should be checked to display percentages")
-        End If
-    End Sub
-
-    Private Sub chkTranspose_CheckedChanged(sender As Object, e As EventArgs) Handles chkTranspose.CheckedChanged
-        If chkTranspose.Checked Then
-            clsRFreqDispOptions.AddParameter("transpose", "TRUE")
-        Else
-            clsRFreqDispOptions.RemoveParameterByName("transpose")
-        End If
-    End Sub
-
-    Private Sub chkProportions_CheckedChanged(sender As Object, e As EventArgs) Handles chkProportions.CheckedChanged
-        If chkProportions.Checked Then
-            clsRFreqDispOptions.AddParameter("proportions", "TRUE")
-        Else
-            clsRFreqDispOptions.RemoveParameterByName("proportions")
-        End If
-    End Sub
-
-    Private Sub chkSignifLevel_CheckedChanged(sender As Object, e As EventArgs) Handles chkSignifLevel.CheckedChanged
-        If chkSignifLevel.Checked Then
-            clsRAnovaDispOptions.AddParameter("sign_level", "TRUE")
-        Else
-            clsRAnovaDispOptions.RemoveParameterByName("sign_level")
-        End If
-    End Sub
-
-    Private Sub chkSignifStars_CheckedChanged(sender As Object, e As EventArgs) Handles chkSignifStars.CheckedChanged
-        If chkSignifStars.Checked Then
-            clsRAnovaDispOptions.AddParameter("signif.stars", "TRUE")
-        Else
-            clsRAnovaDispOptions.RemoveParameterByName("sign.stars")
-        End If
-    End Sub
-
-    Private Sub chkMeans_CheckedChanged(sender As Object, e As EventArgs) Handles chkMeans.CheckedChanged
-        If chkMeans.Checked Then
-            clsRAnovaDispOptions.AddParameter("means", "TRUE")
-        Else
-            clsRAnovaDispOptions.RemoveParameterByName("means")
-        End If
+        clsRFreqDispOptions = clsNewFreqRFunction
+        clsRAnovaDispOptions = clsNewAnovaRFunction
+        ucrChkAddMargins.SetRCode(clsRFreqDispOptions, bReset)
+        ucrChkTranspose.SetRCode(clsRFreqDispOptions, bReset)
+        ucrChkProportions.SetRCode(clsRFreqDispOptions, bReset)
+        ucrChkPercentages.SetRCode(clsRFreqDispOptions, bReset)
+        ucrChkMeans.SetRCode(clsRAnovaDispOptions, bReset)
+        ucrChkSignifStars.SetRCode(clsRAnovaDispOptions, bReset)
+        ucrChkSignifLevel.SetRCode(clsRAnovaDispOptions, bReset)
+        GrpBoxEnable()
     End Sub
 
     Public Sub GrpBoxEnable()
-        If ((dlgDescribeTwoVariable.strVarType = "factor") And (dlgDescribeTwoVariable.strSecondVarType = "numeric" OrElse dlgDescribeTwoVariable.strSecondVarType = "integer")) Then
+        If ((dlgDescribeTwoVariable.strSecondVarType = "factor") And (dlgDescribeTwoVariable.strVarType = "numeric" OrElse dlgDescribeTwoVariable.strVarType = "integer")) Then
             grpAnovaOptions.Enabled = True
-            chkAddMargins.Enabled = False
-            chkPercentages.Enabled = False
-            chkProportions.Enabled = False
-            chkTranspose.Enabled = False
-            chkSignifLevel.Enabled = True
-            chkSignifStars.Enabled = True
-            chkMeans.Enabled = True
             grpFrequenciesOptions.Enabled = False
         ElseIf ((dlgDescribeTwoVariable.strVarType = "factor") And (dlgDescribeTwoVariable.strSecondVarType = "factor")) Then
             grpFrequenciesOptions.Enabled = True
-            chkAddMargins.Enabled = True
-            chkPercentages.Enabled = True
-            chkProportions.Enabled = True
-            chkTranspose.Enabled = True
-            chkSignifLevel.Enabled = False
-            chkSignifStars.Enabled = False
-            chkMeans.Enabled = False
             grpAnovaOptions.Enabled = False
         End If
     End Sub

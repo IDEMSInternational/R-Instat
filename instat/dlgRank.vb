@@ -53,20 +53,17 @@ Public Class dlgRank
         ucrPanelTies.AddRadioButton(rdoRandom, Chr(34) & "random" & Chr(34))
         ucrPanelTies.SetRDefault(Chr(34) & "average" & Chr(34))
 
-
         ucrPanelMissingValues.SetParameter(New RParameter("na.last", 2))
         ucrPanelMissingValues.AddRadioButton(rdoKeptAsMissing, Chr(34) & "keep" & Chr(34))
         ucrPanelMissingValues.AddRadioButton(rdoFirstMissingValues, Chr(34) & "FALSE" & Chr(34))
         ucrPanelMissingValues.AddRadioButton(rdoLast, Chr(34) & "TRUE" & Chr(34))
         ucrPanelMissingValues.SetRDefault("TRUE")
 
-
         ucrSaveRank.SetPrefix("rank")
         ucrSaveRank.SetSaveTypeAsColumn()
         ucrSaveRank.SetDataFrameSelector(ucrSelectorForRank.ucrAvailableDataFrames)
         ucrSaveRank.SetLabelText("Save Rank:")
         ucrSaveRank.SetIsComboBox()
-
     End Sub
 
     'Testing when to Enable the OK button
@@ -103,12 +100,10 @@ Public Class dlgRank
         TestOKEnabled()
     End Sub
 
-
     'When the reset button is clicked, set the defaults again
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
-
 End Class
