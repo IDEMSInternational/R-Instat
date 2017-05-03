@@ -75,9 +75,9 @@ Partial Class dlgStringHandling
         Me.rdoCount.FlatAppearance.BorderSize = 2
         Me.rdoCount.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoCount.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoCount.Location = New System.Drawing.Point(36, 12)
+        Me.rdoCount.Location = New System.Drawing.Point(42, 12)
         Me.rdoCount.Name = "rdoCount"
-        Me.rdoCount.Size = New System.Drawing.Size(61, 38)
+        Me.rdoCount.Size = New System.Drawing.Size(61, 27)
         Me.rdoCount.TabIndex = 1
         Me.rdoCount.TabStop = True
         Me.rdoCount.Text = "Count"
@@ -91,9 +91,9 @@ Partial Class dlgStringHandling
         Me.rdoReplace.FlatAppearance.BorderSize = 2
         Me.rdoReplace.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoReplace.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoReplace.Location = New System.Drawing.Point(272, 12)
+        Me.rdoReplace.Location = New System.Drawing.Point(278, 12)
         Me.rdoReplace.Name = "rdoReplace"
-        Me.rdoReplace.Size = New System.Drawing.Size(61, 38)
+        Me.rdoReplace.Size = New System.Drawing.Size(61, 27)
         Me.rdoReplace.TabIndex = 5
         Me.rdoReplace.TabStop = True
         Me.rdoReplace.Text = "Replace"
@@ -107,9 +107,9 @@ Partial Class dlgStringHandling
         Me.rdoLocate.FlatAppearance.BorderSize = 2
         Me.rdoLocate.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoLocate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoLocate.Location = New System.Drawing.Point(213, 12)
+        Me.rdoLocate.Location = New System.Drawing.Point(219, 12)
         Me.rdoLocate.Name = "rdoLocate"
-        Me.rdoLocate.Size = New System.Drawing.Size(61, 38)
+        Me.rdoLocate.Size = New System.Drawing.Size(61, 27)
         Me.rdoLocate.TabIndex = 4
         Me.rdoLocate.TabStop = True
         Me.rdoLocate.Text = "Locate"
@@ -123,9 +123,9 @@ Partial Class dlgStringHandling
         Me.rdoExtract.FlatAppearance.BorderSize = 2
         Me.rdoExtract.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoExtract.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoExtract.Location = New System.Drawing.Point(154, 12)
+        Me.rdoExtract.Location = New System.Drawing.Point(160, 12)
         Me.rdoExtract.Name = "rdoExtract"
-        Me.rdoExtract.Size = New System.Drawing.Size(61, 38)
+        Me.rdoExtract.Size = New System.Drawing.Size(61, 27)
         Me.rdoExtract.TabIndex = 3
         Me.rdoExtract.TabStop = True
         Me.rdoExtract.Text = "Extract"
@@ -139,9 +139,9 @@ Partial Class dlgStringHandling
         Me.rdoDetect.FlatAppearance.BorderSize = 2
         Me.rdoDetect.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoDetect.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoDetect.Location = New System.Drawing.Point(95, 12)
+        Me.rdoDetect.Location = New System.Drawing.Point(101, 12)
         Me.rdoDetect.Name = "rdoDetect"
-        Me.rdoDetect.Size = New System.Drawing.Size(61, 38)
+        Me.rdoDetect.Size = New System.Drawing.Size(61, 27)
         Me.rdoDetect.TabIndex = 2
         Me.rdoDetect.TabStop = True
         Me.rdoDetect.Text = "Detect"
@@ -155,9 +155,9 @@ Partial Class dlgStringHandling
         Me.rdoReplaceAll.FlatAppearance.BorderSize = 2
         Me.rdoReplaceAll.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoReplaceAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoReplaceAll.Location = New System.Drawing.Point(331, 12)
+        Me.rdoReplaceAll.Location = New System.Drawing.Point(337, 12)
         Me.rdoReplaceAll.Name = "rdoReplaceAll"
-        Me.rdoReplaceAll.Size = New System.Drawing.Size(61, 38)
+        Me.rdoReplaceAll.Size = New System.Drawing.Size(74, 27)
         Me.rdoReplaceAll.TabIndex = 6
         Me.rdoReplaceAll.TabStop = True
         Me.rdoReplaceAll.Text = "Replace All"
@@ -229,7 +229,7 @@ Partial Class dlgStringHandling
         '
         'ucrPnlStringHandling
         '
-        Me.ucrPnlStringHandling.Location = New System.Drawing.Point(-5, 1)
+        Me.ucrPnlStringHandling.Location = New System.Drawing.Point(1, 1)
         Me.ucrPnlStringHandling.Name = "ucrPnlStringHandling"
         Me.ucrPnlStringHandling.Size = New System.Drawing.Size(410, 51)
         Me.ucrPnlStringHandling.TabIndex = 0
