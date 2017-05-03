@@ -91,7 +91,7 @@ Public Class ucrDataFrame
         End If
     End Sub
 
-    Protected Overrides Sub UpdateParameter(clsTempParam As RParameter)
+    Public Overrides Sub UpdateParameter(clsTempParam As RParameter)
         If clsTempParam IsNot Nothing Then
             If bParameterIsString Then
                 clsTempParam.SetArgumentValue(Chr(34) & cboAvailableDataFrames.Text & Chr(34))

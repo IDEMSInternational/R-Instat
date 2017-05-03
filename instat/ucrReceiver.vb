@@ -353,7 +353,7 @@ Public Class ucrReceiver
         End If
     End Sub
 
-    Protected Overrides Sub UpdateParameter(clsTempParam As RParameter)
+    Public Overrides Sub UpdateParameter(clsTempParam As RParameter)
         If clsTempParam Is Nothing Then
             clsTempParam = New RParameter
         End If
