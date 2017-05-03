@@ -125,13 +125,9 @@ Public Class dlgStringHandling
         ucrInputPattern.AddAdditionalCodeParameterPair(clsLocateFunction, New RParameter("pattern", 1), iAdditionalPairNo:=3)
         ucrInputPattern.AddAdditionalCodeParameterPair(clsReplaceFunction, New RParameter("pattern", 1), iAdditionalPairNo:=4)
         ucrInputPattern.AddAdditionalCodeParameterPair(clsReplaceAllFunction, New RParameter("pattern", 1), iAdditionalPairNo:=5)
+        ucrInputPattern.AddAdditionalCodeParameterPair(clsFixedFunction, New RParameter("pattern", 1), iAdditionalPairNo:=6)
 
         ucrInputReplaceBy.AddAdditionalCodeParameterPair(clsReplaceFunction, New RParameter("replacement", 2), iAdditionalPairNo:=1)
-
-        ucrInputPattern.AddAdditionalCodeParameterPair(clsFixedFunction, New RParameter("pattern", 0), iAdditionalPairNo:=1)
-
-
-
 
         ucrReceiverStringHandling.SetRCode(clsCountFunction, bReset)
         ucrInputPattern.SetRCode(clsCountFunction, bReset)
