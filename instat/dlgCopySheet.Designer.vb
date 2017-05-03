@@ -24,18 +24,18 @@ Partial Class dlgCopySheet
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrDataFrameCopySheets = New instat.ucrDataFrame()
-        Me.lblNewSheetName = New System.Windows.Forms.Label()
-        Me.ucrNewDataFrameName = New instat.ucrInputTextBox()
         Me.ucrInputLabel = New instat.ucrInputTextBox()
         Me.lblLabel = New System.Windows.Forms.Label()
+        Me.ucrInputNewName = New instat.ucrInputTextBox()
+        Me.lblNewName = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 118)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 117)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 3
+        Me.ucrBase.TabIndex = 5
         '
         'ucrDataFrameCopySheets
         '
@@ -46,53 +46,53 @@ Partial Class dlgCopySheet
         Me.ucrDataFrameCopySheets.Size = New System.Drawing.Size(120, 40)
         Me.ucrDataFrameCopySheets.TabIndex = 0
         '
-        'lblNewSheetName
-        '
-        Me.lblNewSheetName.Location = New System.Drawing.Point(194, 12)
-        Me.lblNewSheetName.Name = "lblNewSheetName"
-        Me.lblNewSheetName.Size = New System.Drawing.Size(70, 13)
-        Me.lblNewSheetName.TabIndex = 1
-        Me.lblNewSheetName.Tag = "New_Sheet_Name"
-        Me.lblNewSheetName.Text = "New Name:"
-        '
-        'ucrNewDataFrameName
-        '
-        Me.ucrNewDataFrameName.AddQuotesIfUnrecognised = True
-        Me.ucrNewDataFrameName.IsMultiline = False
-        Me.ucrNewDataFrameName.IsReadOnly = False
-        Me.ucrNewDataFrameName.Location = New System.Drawing.Point(194, 28)
-        Me.ucrNewDataFrameName.Name = "ucrNewDataFrameName"
-        Me.ucrNewDataFrameName.Size = New System.Drawing.Size(137, 21)
-        Me.ucrNewDataFrameName.TabIndex = 2
-        '
         'ucrInputLabel
         '
         Me.ucrInputLabel.AddQuotesIfUnrecognised = True
         Me.ucrInputLabel.IsMultiline = False
         Me.ucrInputLabel.IsReadOnly = False
-        Me.ucrInputLabel.Location = New System.Drawing.Point(194, 80)
+        Me.ucrInputLabel.Location = New System.Drawing.Point(196, 79)
         Me.ucrInputLabel.Name = "ucrInputLabel"
-        Me.ucrInputLabel.Size = New System.Drawing.Size(131, 22)
-        Me.ucrInputLabel.TabIndex = 6
+        Me.ucrInputLabel.Size = New System.Drawing.Size(131, 32)
+        Me.ucrInputLabel.TabIndex = 4
         '
         'lblLabel
         '
         Me.lblLabel.AutoSize = True
-        Me.lblLabel.Location = New System.Drawing.Point(194, 64)
+        Me.lblLabel.Location = New System.Drawing.Point(196, 64)
         Me.lblLabel.Name = "lblLabel"
         Me.lblLabel.Size = New System.Drawing.Size(94, 13)
-        Me.lblLabel.TabIndex = 5
+        Me.lblLabel.TabIndex = 3
         Me.lblLabel.Text = "Data Frame Label:"
+        '
+        'ucrInputNewName
+        '
+        Me.ucrInputNewName.AddQuotesIfUnrecognised = True
+        Me.ucrInputNewName.IsMultiline = False
+        Me.ucrInputNewName.IsReadOnly = False
+        Me.ucrInputNewName.Location = New System.Drawing.Point(196, 29)
+        Me.ucrInputNewName.Name = "ucrInputNewName"
+        Me.ucrInputNewName.Size = New System.Drawing.Size(131, 33)
+        Me.ucrInputNewName.TabIndex = 2
+        '
+        'lblNewName
+        '
+        Me.lblNewName.Location = New System.Drawing.Point(196, 14)
+        Me.lblNewName.Name = "lblNewName"
+        Me.lblNewName.Size = New System.Drawing.Size(100, 26)
+        Me.lblNewName.TabIndex = 1
+        Me.lblNewName.Tag = "New_Name"
+        Me.lblNewName.Text = "New Name:"
         '
         'dlgCopySheet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(418, 176)
+        Me.ClientSize = New System.Drawing.Size(419, 175)
         Me.Controls.Add(Me.ucrInputLabel)
         Me.Controls.Add(Me.lblLabel)
-        Me.Controls.Add(Me.ucrNewDataFrameName)
-        Me.Controls.Add(Me.lblNewSheetName)
+        Me.Controls.Add(Me.ucrInputNewName)
+        Me.Controls.Add(Me.lblNewName)
         Me.Controls.Add(Me.ucrDataFrameCopySheets)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -108,8 +108,8 @@ Partial Class dlgCopySheet
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrDataFrameCopySheets As ucrDataFrame
-    Friend WithEvents lblNewSheetName As Label
-    Friend WithEvents ucrNewDataFrameName As ucrInputTextBox
     Friend WithEvents ucrInputLabel As ucrInputTextBox
     Friend WithEvents lblLabel As Label
+    Friend WithEvents ucrInputNewName As ucrInputTextBox
+    Friend WithEvents lblNewName As Label
 End Class
