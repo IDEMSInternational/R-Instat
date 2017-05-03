@@ -788,4 +788,18 @@ Public Class RLink
         strColumn = RunInternalScriptGetValue(clsGetColumnName.ToScript()).AsCharacter(0)
         Return strColumn
     End Function
+
+    Public Function IsBinary(strDataName As String, strColumn As String) As Boolean
+        Dim clsGetColumn As New RFunction
+        Dim clsIsBinary As New RFunction
+        Dim bIsBinary As Boolean
+
+        clsGetColumn.SetRCommand(strInstatDataObject & "$get_columns_from_data")
+        clsGetColumn.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
+        clsGetColumn.AddParameter("col_names", Chr(34) & strColumn & Chr(34))
+        clsIsBinary.SetRCommand("is.binary")
+        clsIsBinary.AddParameter("x", clsRFunctionParameter:=clsGetColumn)
+        bIsBinary = RunInternalScriptGetValue(clsIsBinary.ToScript()).AsLogical(0)
+        Return bIsBinary
+    End Function
 End Class
