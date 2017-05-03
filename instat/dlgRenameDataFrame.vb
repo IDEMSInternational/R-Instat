@@ -15,12 +15,12 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class dlgCopySheet
-    Private bFirstLoad As Boolean = True
-    Private bReset As Boolean = True
+Public Class dlgRenameDataFrame
+    Public bFirstLoad As Boolean = True
     Dim strSelectedDataFrame As String = ""
-    Private clsCopySheet As New RFunction
-    Private Sub dlgCopySheet_Load(sender As Object, e As EventArgs) Handles Me.Load
+    Private bReset As Boolean = True
+    Private clsRename As New RFunction
+    Private Sub dlgRenameDataFrame_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -28,46 +28,45 @@ Public Class dlgCopySheet
         If bReset Then
             SetDefaults()
         End If
-        SetRCodeForControls(bReset)
+        SetRCodeforControls(bReset)
         bReset = False
         autoTranslate(Me)
-        TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 263
+        ucrBase.iHelpTopicID = 61
 
         'ucrDataFrame
-        ucrDataFrameCopySheets.SetParameter(New RParameter("data_name", 0))
-        ucrDataFrameCopySheets.SetParameterIsString()
+        ucrDataFrameToRename.SetParameter(New RParameter("data_name", 0))
+        ucrDataFrameToRename.SetParameterIsString()
 
         'ucrNewName
-        ucrInputNewName.SetParameter(New RParameter("new_name", 1))
+        ucrInputNewName.SetParameter(New RParameter("new_value", 1))
         ucrInputNewName.SetValidationTypeAsRVariable()
 
         ucrInputLabel.SetParameter(New RParameter("label", 2))
     End Sub
 
     Private Sub SetDefaults()
-        clsCopySheet = New RFunction
+        clsRename = New RFunction
 
         ucrInputNewName.Reset()
-        ucrDataFrameCopySheets.Reset()
+        ucrDataFrameToRename.Reset()
         ucrInputLabel.Reset()
         ucrInputLabel.SetName("")
         CheckAutoName()
 
-        clsCopySheet.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$copy_data_frame")
+        clsRename.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$rename_dataframe")
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsCopySheet)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRename)
     End Sub
 
-    Private Sub SetRCodeForControls(bReset As Boolean)
+    Private Sub SetRCodeforControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
-        If ((Not ucrInputNewName.IsEmpty) AndAlso (ucrDataFrameCopySheets.cboAvailableDataFrames.SelectedItem <> ucrInputNewName.GetText) AndAlso (ucrDataFrameCopySheets.cboAvailableDataFrames.Text <> "")) Then
+        If ((Not ucrInputNewName.IsEmpty) AndAlso (ucrDataFrameToRename.cboAvailableDataFrames.Text <> "")) AndAlso (ucrDataFrameToRename.cboAvailableDataFrames.SelectedItem <> ucrInputNewName.GetText) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -76,26 +75,26 @@ Public Class dlgCopySheet
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        SetRCodeForControls(True)
+        SetRCodeforControls(True)
         TestOKEnabled()
     End Sub
 
     Private Sub CheckAutoName()
         If Not ucrInputNewName.bUserTyped Then
-            ucrInputNewName.SetName(ucrDataFrameCopySheets.cboAvailableDataFrames.Text & "_copy")
+            ucrInputNewName.SetName(ucrDataFrameToRename.cboAvailableDataFrames.SelectedItem)
         End If
     End Sub
 
     Public Sub SetCurrentDataframe(strDataFrame As String)
         strSelectedDataFrame = strDataFrame
-        ucrDataFrameCopySheets.SetDataframe(strSelectedDataFrame)
+        ucrDataFrameToRename.SetDataframe(strSelectedDataFrame)
     End Sub
 
-    Private Sub ucrDataFrameToRename_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameCopySheets.ControlValueChanged
+    Private Sub ucrDataFrameToRename_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameToRename.ControlValueChanged
         CheckAutoName()
     End Sub
 
-    Private Sub Control_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameCopySheets.ControlContentsChanged
+    Private Sub ucrInputNewName_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputNewName.ControlContentsChanged, ucrDataFrameToRename.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
