@@ -275,6 +275,18 @@
     <Compile Include="dlgExportGraphAsImage.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgExportRObjects.Designer.vb">
+      <DependentUpon>dlgExportRObjects.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExportRObjects.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgExportRWorkspace.Designer.vb">
+      <DependentUpon>dlgExportRWorkspace.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExportRWorkspace.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgExportToCPT.Designer.vb">
       <DependentUpon>dlgExportToCPT.vb</DependentUpon>
     </Compile>
@@ -291,6 +303,12 @@
       <DependentUpon>dlgCorruptionFile.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgCorruptionFile.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgExtremesClimatic.Designer.vb">
+      <DependentUpon>dlgExtremesClimatic.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExtremesClimatic.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgFactorLabels.Designer.vb">
@@ -495,6 +513,12 @@
       <DependentUpon>dlgThreeVariableFrequencies.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgThreeVariableFrequencies.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgTransformClimatic.Designer.vb">
+      <DependentUpon>dlgTransformClimatic.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTransformClimatic.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgTwoVariableUseModel.Designer.vb">
@@ -2452,6 +2476,12 @@
     <EmbeddedResource Include="dlgExportGraphAsImage.resx">
       <DependentUpon>dlgExportGraphAsImage.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportRObjects.resx">
+      <DependentUpon>dlgExportRObjects.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportRWorkspace.resx">
+      <DependentUpon>dlgExportRWorkspace.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgExportToCPT.resx">
       <DependentUpon>dlgExportToCPT.vb</DependentUpon>
     </EmbeddedResource>
@@ -2460,6 +2490,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCorruptionFile.resx">
       <DependentUpon>dlgCorruptionFile.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExtremesClimatic.resx">
+      <DependentUpon>dlgExtremesClimatic.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFactorLabels.resx">
       <DependentUpon>dlgFactorLabels.vb</DependentUpon>
@@ -2895,6 +2928,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgThreeVariableFrequencies.resx">
       <DependentUpon>dlgThreeVariableFrequencies.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTransformClimatic.resx">
+      <DependentUpon>dlgTransformClimatic.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTransformText.fr-FR.resx">
       <DependentUpon>dlgTransformText.vb</DependentUpon>
