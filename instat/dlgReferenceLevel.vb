@@ -36,15 +36,18 @@ Public Class dlgReferenceLevel
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 38
+
+        ucrSelectorForReferenceLevels.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorForReferenceLevels.SetParameterIsString()
+
+        ucrReceiverReferenceLevels.SetParameter(New RParameter("col_name", 1))
+        ucrReceiverReferenceLevels.SetParameterIsString()
         ucrReceiverReferenceLevels.Selector = ucrSelectorForReferenceLevels
         ucrReceiverReferenceLevels.SetMeAsReceiver()
         ucrReceiverReferenceLevels.SetIncludedDataTypes({"factor"})
         ucrReceiverReferenceLevels.SetExcludedDataTypes({"ordered,factor"})
+
         ucrFactorReferenceLevels.SetParameter(New RParameter("new_ref_level", 2))
-        ucrSelectorForReferenceLevels.SetParameter(New RParameter("data_name", 0))
-        ucrSelectorForReferenceLevels.SetParameterIsString()
-        ucrReceiverReferenceLevels.SetParameter(New RParameter("col_name", 1))
-        ucrReceiverReferenceLevels.SetParameterIsString()
         ucrFactorReferenceLevels.SetReceiver(ucrReceiverReferenceLevels)
         ucrFactorReferenceLevels.SetAsSingleSelector()
     End Sub
@@ -52,7 +55,7 @@ Public Class dlgReferenceLevel
     Private Sub SetDefaults()
         clsSetRefLevel = New RFunction
         ucrSelectorForReferenceLevels.Reset()
-        ucrSelectorForReferenceLevels.Focus()
+
         clsSetRefLevel.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_factor_reference_level")
         ucrBase.clsRsyntax.SetBaseRFunction(clsSetRefLevel)
     End Sub
@@ -62,7 +65,7 @@ Public Class dlgReferenceLevel
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrReceiverReferenceLevels.IsEmpty() = False Then
+        If Not ucrReceiverReferenceLevels.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
