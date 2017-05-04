@@ -95,7 +95,7 @@ Public Class dlgCopyDataFrame
         CheckAutoName()
     End Sub
 
-    Private Sub Control_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameCopySheets.ControlContentsChanged, ucrInputNewName.ControlContentsChanged
+    Private Sub Control_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameCopySheets.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
