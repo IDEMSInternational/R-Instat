@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgExtremesClimatic
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,40 +20,266 @@ Partial Class dlgExtremesClimatic
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSelectorClimaticExtremes = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrButtonMinMax = New System.Windows.Forms.Button()
-        Me.ucrButtonPeaks = New System.Windows.Forms.Button()
-        Me.UcrReceiverSingle1 = New instat.ucrReceiverSingle()
-        Me.UcrReceiverSingle2 = New instat.ucrReceiverSingle()
-        Me.UcrReceiverSingle3 = New instat.ucrReceiverSingle()
-        Me.UcrReceiverSingle4 = New instat.ucrReceiverSingle()
         Me.lblStations = New System.Windows.Forms.Label()
         Me.lblDate = New System.Windows.Forms.Label()
         Me.lblYear = New System.Windows.Forms.Label()
         Me.lblDayOfYear = New System.Windows.Forms.Label()
-        Me.ucrNudFrom = New instat.ucrNud()
-        Me.ucrNudTo = New instat.ucrNud()
         Me.lblFrom = New System.Windows.Forms.Label()
         Me.lblTo = New System.Windows.Forms.Label()
         Me.grpMaxMin = New System.Windows.Forms.GroupBox()
-        Me.ucrMaxima = New instat.ucrCheck()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.grpPeaks = New System.Windows.Forms.GroupBox()
         Me.lblThresh = New System.Windows.Forms.Label()
+        Me.rdoMinMax = New System.Windows.Forms.RadioButton()
+        Me.rdoPeaks = New System.Windows.Forms.RadioButton()
+        Me.ucrChkDayNumber = New instat.ucrCheck()
+        Me.ucrSaveExtremes = New instat.ucrSave()
+        Me.nudTo = New instat.ucrNud()
+        Me.ucrChkThreshold = New instat.ucrCheck()
         Me.ucrInputThreshhold = New instat.ucrInputTextBox()
-        Me.ucrValueThreshhold = New instat.ucrCheck()
+        Me.ucrChkMaxima = New instat.ucrCheck()
+        Me.nudFrom = New instat.ucrNud()
+        Me.ucrReceiverDOY = New instat.ucrReceiverSingle()
+        Me.ucrReceiverYear = New instat.ucrReceiverSingle()
+        Me.ucrReceiverDate = New instat.ucrReceiverSingle()
+        Me.ucrReceiverStations = New instat.ucrReceiverSingle()
+        Me.ucrSelectorClimaticExtremes = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrPnlMinMaxPeaks = New instat.UcrPanel()
+        Me.ucrReceiverData = New instat.ucrReceiverSingle()
+        Me.lblData = New System.Windows.Forms.Label()
         Me.grpMaxMin.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
+        Me.grpPeaks.SuspendLayout()
         Me.SuspendLayout()
         '
-        'ucrBase
+        'lblStations
         '
-        Me.ucrBase.Location = New System.Drawing.Point(5, 404)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(398, 52)
-        Me.ucrBase.TabIndex = 3
+        Me.lblStations.AutoSize = True
+        Me.lblStations.Location = New System.Drawing.Point(241, 46)
+        Me.lblStations.Name = "lblStations"
+        Me.lblStations.Size = New System.Drawing.Size(48, 13)
+        Me.lblStations.TabIndex = 11
+        Me.lblStations.Text = "Stations:"
+        '
+        'lblDate
+        '
+        Me.lblDate.AutoSize = True
+        Me.lblDate.Location = New System.Drawing.Point(240, 91)
+        Me.lblDate.Name = "lblDate"
+        Me.lblDate.Size = New System.Drawing.Size(33, 13)
+        Me.lblDate.TabIndex = 12
+        Me.lblDate.Text = "Date:"
+        '
+        'lblYear
+        '
+        Me.lblYear.AutoSize = True
+        Me.lblYear.Location = New System.Drawing.Point(240, 139)
+        Me.lblYear.Name = "lblYear"
+        Me.lblYear.Size = New System.Drawing.Size(32, 13)
+        Me.lblYear.TabIndex = 13
+        Me.lblYear.Text = "Year:"
+        '
+        'lblDayOfYear
+        '
+        Me.lblDayOfYear.AutoSize = True
+        Me.lblDayOfYear.Location = New System.Drawing.Point(244, 188)
+        Me.lblDayOfYear.Name = "lblDayOfYear"
+        Me.lblDayOfYear.Size = New System.Drawing.Size(68, 13)
+        Me.lblDayOfYear.TabIndex = 14
+        Me.lblDayOfYear.Text = "Day Of Year:"
+        '
+        'lblFrom
+        '
+        Me.lblFrom.AutoSize = True
+        Me.lblFrom.Location = New System.Drawing.Point(37, 246)
+        Me.lblFrom.Name = "lblFrom"
+        Me.lblFrom.Size = New System.Drawing.Size(33, 13)
+        Me.lblFrom.TabIndex = 17
+        Me.lblFrom.Text = "From:"
+        '
+        'lblTo
+        '
+        Me.lblTo.AutoSize = True
+        Me.lblTo.Location = New System.Drawing.Point(129, 247)
+        Me.lblTo.Name = "lblTo"
+        Me.lblTo.Size = New System.Drawing.Size(23, 13)
+        Me.lblTo.TabIndex = 18
+        Me.lblTo.Text = "To:"
+        '
+        'grpMaxMin
+        '
+        Me.grpMaxMin.Controls.Add(Me.ucrChkMaxima)
+        Me.grpMaxMin.Location = New System.Drawing.Point(10, 278)
+        Me.grpMaxMin.Name = "grpMaxMin"
+        Me.grpMaxMin.Size = New System.Drawing.Size(165, 100)
+        Me.grpMaxMin.TabIndex = 19
+        Me.grpMaxMin.TabStop = False
+        Me.grpMaxMin.Text = "Max/Min"
+        '
+        'grpPeaks
+        '
+        Me.grpPeaks.Controls.Add(Me.ucrChkThreshold)
+        Me.grpPeaks.Controls.Add(Me.lblThresh)
+        Me.grpPeaks.Controls.Add(Me.ucrInputThreshhold)
+        Me.grpPeaks.Location = New System.Drawing.Point(219, 280)
+        Me.grpPeaks.Name = "grpPeaks"
+        Me.grpPeaks.Size = New System.Drawing.Size(165, 100)
+        Me.grpPeaks.TabIndex = 20
+        Me.grpPeaks.TabStop = False
+        Me.grpPeaks.Text = "Peaks"
+        '
+        'lblThresh
+        '
+        Me.lblThresh.AutoSize = True
+        Me.lblThresh.Location = New System.Drawing.Point(6, 16)
+        Me.lblThresh.Name = "lblThresh"
+        Me.lblThresh.Size = New System.Drawing.Size(30, 13)
+        Me.lblThresh.TabIndex = 18
+        Me.lblThresh.Text = "From"
+        '
+        'rdoMinMax
+        '
+        Me.rdoMinMax.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoMinMax.AutoSize = True
+        Me.rdoMinMax.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMinMax.FlatAppearance.BorderSize = 2
+        Me.rdoMinMax.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMinMax.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoMinMax.Location = New System.Drawing.Point(143, 12)
+        Me.rdoMinMax.Name = "rdoMinMax"
+        Me.rdoMinMax.Size = New System.Drawing.Size(63, 27)
+        Me.rdoMinMax.TabIndex = 23
+        Me.rdoMinMax.TabStop = True
+        Me.rdoMinMax.Text = "Min/Max"
+        Me.rdoMinMax.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoMinMax.UseVisualStyleBackColor = True
+        '
+        'rdoPeaks
+        '
+        Me.rdoPeaks.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoPeaks.AutoSize = True
+        Me.rdoPeaks.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoPeaks.FlatAppearance.BorderSize = 2
+        Me.rdoPeaks.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoPeaks.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoPeaks.Location = New System.Drawing.Point(206, 12)
+        Me.rdoPeaks.Name = "rdoPeaks"
+        Me.rdoPeaks.Size = New System.Drawing.Size(51, 27)
+        Me.rdoPeaks.TabIndex = 24
+        Me.rdoPeaks.TabStop = True
+        Me.rdoPeaks.Text = "Peaks"
+        Me.rdoPeaks.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoPeaks.UseVisualStyleBackColor = True
+        '
+        'ucrChkDayNumber
+        '
+        Me.ucrChkDayNumber.Checked = False
+        Me.ucrChkDayNumber.Location = New System.Drawing.Point(10, 381)
+        Me.ucrChkDayNumber.Name = "ucrChkDayNumber"
+        Me.ucrChkDayNumber.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkDayNumber.TabIndex = 27
+        '
+        'ucrSaveExtremes
+        '
+        Me.ucrSaveExtremes.Location = New System.Drawing.Point(5, 409)
+        Me.ucrSaveExtremes.Name = "ucrSaveExtremes"
+        Me.ucrSaveExtremes.Size = New System.Drawing.Size(379, 32)
+        Me.ucrSaveExtremes.TabIndex = 25
+        '
+        'nudTo
+        '
+        Me.nudTo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.nudTo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudTo.Location = New System.Drawing.Point(154, 244)
+        Me.nudTo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.nudTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.nudTo.Name = "nudTo"
+        Me.nudTo.Size = New System.Drawing.Size(50, 20)
+        Me.nudTo.TabIndex = 21
+        Me.nudTo.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkThreshold
+        '
+        Me.ucrChkThreshold.Checked = False
+        Me.ucrChkThreshold.Location = New System.Drawing.Point(8, 65)
+        Me.ucrChkThreshold.Name = "ucrChkThreshold"
+        Me.ucrChkThreshold.Size = New System.Drawing.Size(143, 20)
+        Me.ucrChkThreshold.TabIndex = 19
+        '
+        'ucrInputThreshhold
+        '
+        Me.ucrInputThreshhold.AddQuotesIfUnrecognised = True
+        Me.ucrInputThreshhold.IsMultiline = False
+        Me.ucrInputThreshhold.IsReadOnly = False
+        Me.ucrInputThreshhold.Location = New System.Drawing.Point(8, 31)
+        Me.ucrInputThreshhold.Name = "ucrInputThreshhold"
+        Me.ucrInputThreshhold.Size = New System.Drawing.Size(101, 21)
+        Me.ucrInputThreshhold.TabIndex = 0
+        '
+        'ucrChkMaxima
+        '
+        Me.ucrChkMaxima.Checked = False
+        Me.ucrChkMaxima.Location = New System.Drawing.Point(7, 25)
+        Me.ucrChkMaxima.Name = "ucrChkMaxima"
+        Me.ucrChkMaxima.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkMaxima.TabIndex = 0
+        '
+        'nudFrom
+        '
+        Me.nudFrom.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.nudFrom.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudFrom.Location = New System.Drawing.Point(72, 243)
+        Me.nudFrom.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.nudFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.nudFrom.Name = "nudFrom"
+        Me.nudFrom.Size = New System.Drawing.Size(50, 20)
+        Me.nudFrom.TabIndex = 15
+        Me.nudFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrReceiverDOY
+        '
+        Me.ucrReceiverDOY.frmParent = Me
+        Me.ucrReceiverDOY.Location = New System.Drawing.Point(245, 204)
+        Me.ucrReceiverDOY.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverDOY.Name = "ucrReceiverDOY"
+        Me.ucrReceiverDOY.Selector = Nothing
+        Me.ucrReceiverDOY.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverDOY.TabIndex = 10
+        Me.ucrReceiverDOY.ucrSelector = Nothing
+        '
+        'ucrReceiverYear
+        '
+        Me.ucrReceiverYear.frmParent = Me
+        Me.ucrReceiverYear.Location = New System.Drawing.Point(245, 155)
+        Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverYear.Name = "ucrReceiverYear"
+        Me.ucrReceiverYear.Selector = Nothing
+        Me.ucrReceiverYear.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverYear.TabIndex = 9
+        Me.ucrReceiverYear.ucrSelector = Nothing
+        '
+        'ucrReceiverDate
+        '
+        Me.ucrReceiverDate.frmParent = Me
+        Me.ucrReceiverDate.Location = New System.Drawing.Point(243, 107)
+        Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverDate.Name = "ucrReceiverDate"
+        Me.ucrReceiverDate.Selector = Nothing
+        Me.ucrReceiverDate.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverDate.TabIndex = 8
+        Me.ucrReceiverDate.ucrSelector = Nothing
+        '
+        'ucrReceiverStations
+        '
+        Me.ucrReceiverStations.frmParent = Me
+        Me.ucrReceiverStations.Location = New System.Drawing.Point(243, 60)
+        Me.ucrReceiverStations.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverStations.Name = "ucrReceiverStations"
+        Me.ucrReceiverStations.Selector = Nothing
+        Me.ucrReceiverStations.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverStations.TabIndex = 7
+        Me.ucrReceiverStations.ucrSelector = Nothing
         '
         'ucrSelectorClimaticExtremes
         '
@@ -65,226 +291,68 @@ Partial Class dlgExtremesClimatic
         Me.ucrSelectorClimaticExtremes.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorClimaticExtremes.TabIndex = 4
         '
-        'ucrButtonMinMax
+        'ucrBase
         '
-        Me.ucrButtonMinMax.Location = New System.Drawing.Point(39, 12)
-        Me.ucrButtonMinMax.Name = "ucrButtonMinMax"
-        Me.ucrButtonMinMax.Size = New System.Drawing.Size(75, 23)
-        Me.ucrButtonMinMax.TabIndex = 5
-        Me.ucrButtonMinMax.Text = "Min/Max"
-        Me.ucrButtonMinMax.UseVisualStyleBackColor = True
+        Me.ucrBase.Location = New System.Drawing.Point(6, 448)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(398, 52)
+        Me.ucrBase.TabIndex = 3
         '
-        'ucrButtonPeaks
+        'ucrPnlMinMaxPeaks
         '
-        Me.ucrButtonPeaks.Location = New System.Drawing.Point(144, 12)
-        Me.ucrButtonPeaks.Name = "ucrButtonPeaks"
-        Me.ucrButtonPeaks.Size = New System.Drawing.Size(75, 23)
-        Me.ucrButtonPeaks.TabIndex = 6
-        Me.ucrButtonPeaks.Text = "Peaks"
-        Me.ucrButtonPeaks.UseVisualStyleBackColor = True
+        Me.ucrPnlMinMaxPeaks.Location = New System.Drawing.Point(131, 5)
+        Me.ucrPnlMinMaxPeaks.Name = "ucrPnlMinMaxPeaks"
+        Me.ucrPnlMinMaxPeaks.Size = New System.Drawing.Size(147, 42)
+        Me.ucrPnlMinMaxPeaks.TabIndex = 22
         '
-        'UcrReceiverSingle1
+        'ucrReceiverData
         '
-        Me.UcrReceiverSingle1.frmParent = Me
-        Me.UcrReceiverSingle1.Location = New System.Drawing.Point(272, 41)
-        Me.UcrReceiverSingle1.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiverSingle1.Name = "UcrReceiverSingle1"
-        Me.UcrReceiverSingle1.Selector = Nothing
-        Me.UcrReceiverSingle1.Size = New System.Drawing.Size(120, 20)
-        Me.UcrReceiverSingle1.TabIndex = 7
-        Me.UcrReceiverSingle1.ucrSelector = Nothing
+        Me.ucrReceiverData.frmParent = Me
+        Me.ucrReceiverData.Location = New System.Drawing.Point(244, 252)
+        Me.ucrReceiverData.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverData.Name = "ucrReceiverData"
+        Me.ucrReceiverData.Selector = Nothing
+        Me.ucrReceiverData.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverData.TabIndex = 28
+        Me.ucrReceiverData.ucrSelector = Nothing
         '
-        'UcrReceiverSingle2
+        'lblData
         '
-        Me.UcrReceiverSingle2.frmParent = Me
-        Me.UcrReceiverSingle2.Location = New System.Drawing.Point(272, 85)
-        Me.UcrReceiverSingle2.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiverSingle2.Name = "UcrReceiverSingle2"
-        Me.UcrReceiverSingle2.Selector = Nothing
-        Me.UcrReceiverSingle2.Size = New System.Drawing.Size(120, 20)
-        Me.UcrReceiverSingle2.TabIndex = 8
-        Me.UcrReceiverSingle2.ucrSelector = Nothing
-        '
-        'UcrReceiverSingle3
-        '
-        Me.UcrReceiverSingle3.frmParent = Me
-        Me.UcrReceiverSingle3.Location = New System.Drawing.Point(272, 128)
-        Me.UcrReceiverSingle3.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiverSingle3.Name = "UcrReceiverSingle3"
-        Me.UcrReceiverSingle3.Selector = Nothing
-        Me.UcrReceiverSingle3.Size = New System.Drawing.Size(120, 20)
-        Me.UcrReceiverSingle3.TabIndex = 9
-        Me.UcrReceiverSingle3.ucrSelector = Nothing
-        '
-        'UcrReceiverSingle4
-        '
-        Me.UcrReceiverSingle4.frmParent = Me
-        Me.UcrReceiverSingle4.Location = New System.Drawing.Point(272, 179)
-        Me.UcrReceiverSingle4.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiverSingle4.Name = "UcrReceiverSingle4"
-        Me.UcrReceiverSingle4.Selector = Nothing
-        Me.UcrReceiverSingle4.Size = New System.Drawing.Size(120, 20)
-        Me.UcrReceiverSingle4.TabIndex = 10
-        Me.UcrReceiverSingle4.ucrSelector = Nothing
-        '
-        'lblStations
-        '
-        Me.lblStations.AutoSize = True
-        Me.lblStations.Location = New System.Drawing.Point(269, 25)
-        Me.lblStations.Name = "lblStations"
-        Me.lblStations.Size = New System.Drawing.Size(45, 13)
-        Me.lblStations.TabIndex = 11
-        Me.lblStations.Text = "Stations"
-        '
-        'lblDate
-        '
-        Me.lblDate.AutoSize = True
-        Me.lblDate.Location = New System.Drawing.Point(269, 70)
-        Me.lblDate.Name = "lblDate"
-        Me.lblDate.Size = New System.Drawing.Size(30, 13)
-        Me.lblDate.TabIndex = 12
-        Me.lblDate.Text = "Date"
-        '
-        'lblYear
-        '
-        Me.lblYear.AutoSize = True
-        Me.lblYear.Location = New System.Drawing.Point(270, 113)
-        Me.lblYear.Name = "lblYear"
-        Me.lblYear.Size = New System.Drawing.Size(29, 13)
-        Me.lblYear.TabIndex = 13
-        Me.lblYear.Text = "Year"
-        '
-        'lblDayOfYear
-        '
-        Me.lblDayOfYear.AutoSize = True
-        Me.lblDayOfYear.Location = New System.Drawing.Point(269, 162)
-        Me.lblDayOfYear.Name = "lblDayOfYear"
-        Me.lblDayOfYear.Size = New System.Drawing.Size(65, 13)
-        Me.lblDayOfYear.TabIndex = 14
-        Me.lblDayOfYear.Text = "Day Of Year"
-        '
-        'ucrNudFrom
-        '
-        Me.ucrNudFrom.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFrom.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudFrom.Location = New System.Drawing.Point(259, 232)
-        Me.ucrNudFrom.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFrom.Name = "ucrNudFrom"
-        Me.ucrNudFrom.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudFrom.TabIndex = 15
-        Me.ucrNudFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudTo
-        '
-        Me.ucrNudTo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTo.Location = New System.Drawing.Point(322, 232)
-        Me.ucrNudTo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTo.Name = "ucrNudTo"
-        Me.ucrNudTo.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudTo.TabIndex = 16
-        Me.ucrNudTo.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblFrom
-        '
-        Me.lblFrom.AutoSize = True
-        Me.lblFrom.Location = New System.Drawing.Point(255, 219)
-        Me.lblFrom.Name = "lblFrom"
-        Me.lblFrom.Size = New System.Drawing.Size(30, 13)
-        Me.lblFrom.TabIndex = 17
-        Me.lblFrom.Text = "From"
-        '
-        'lblTo
-        '
-        Me.lblTo.AutoSize = True
-        Me.lblTo.Location = New System.Drawing.Point(318, 216)
-        Me.lblTo.Name = "lblTo"
-        Me.lblTo.Size = New System.Drawing.Size(20, 13)
-        Me.lblTo.TabIndex = 18
-        Me.lblTo.Text = "To"
-        '
-        'grpMaxMin
-        '
-        Me.grpMaxMin.Controls.Add(Me.ucrMaxima)
-        Me.grpMaxMin.Location = New System.Drawing.Point(19, 256)
-        Me.grpMaxMin.Name = "grpMaxMin"
-        Me.grpMaxMin.Size = New System.Drawing.Size(165, 100)
-        Me.grpMaxMin.TabIndex = 19
-        Me.grpMaxMin.TabStop = False
-        Me.grpMaxMin.Text = "Max/Min"
-        '
-        'ucrMaxima
-        '
-        Me.ucrMaxima.Checked = False
-        Me.ucrMaxima.Location = New System.Drawing.Point(7, 25)
-        Me.ucrMaxima.Name = "ucrMaxima"
-        Me.ucrMaxima.Size = New System.Drawing.Size(100, 20)
-        Me.ucrMaxima.TabIndex = 0
-        '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.ucrValueThreshhold)
-        Me.GroupBox1.Controls.Add(Me.lblThresh)
-        Me.GroupBox1.Controls.Add(Me.ucrInputThreshhold)
-        Me.GroupBox1.Location = New System.Drawing.Point(227, 258)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(165, 100)
-        Me.GroupBox1.TabIndex = 20
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Peaks"
-        '
-        'lblThresh
-        '
-        Me.lblThresh.AutoSize = True
-        Me.lblThresh.Location = New System.Drawing.Point(6, 16)
-        Me.lblThresh.Name = "lblThresh"
-        Me.lblThresh.Size = New System.Drawing.Size(30, 13)
-        Me.lblThresh.TabIndex = 18
-        Me.lblThresh.Text = "From"
-        '
-        'ucrInputThreshhold
-        '
-        Me.ucrInputThreshhold.AddQuotesIfUnrecognised = True
-        Me.ucrInputThreshhold.IsMultiline = False
-        Me.ucrInputThreshhold.IsReadOnly = False
-        Me.ucrInputThreshhold.Location = New System.Drawing.Point(8, 31)
-        Me.ucrInputThreshhold.Name = "ucrInputThreshhold"
-        Me.ucrInputThreshhold.Size = New System.Drawing.Size(50, 21)
-        Me.ucrInputThreshhold.TabIndex = 0
-        '
-        'ucrValueThreshhold
-        '
-        Me.ucrValueThreshhold.Checked = False
-        Me.ucrValueThreshhold.Location = New System.Drawing.Point(8, 74)
-        Me.ucrValueThreshhold.Name = "ucrValueThreshhold"
-        Me.ucrValueThreshhold.Size = New System.Drawing.Size(103, 20)
-        Me.ucrValueThreshhold.TabIndex = 19
+        Me.lblData.AutoSize = True
+        Me.lblData.Location = New System.Drawing.Point(243, 236)
+        Me.lblData.Name = "lblData"
+        Me.lblData.Size = New System.Drawing.Size(30, 13)
+        Me.lblData.TabIndex = 29
+        Me.lblData.Text = "Data"
         '
         'dlgExtremesClimatic
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(415, 464)
-        Me.Controls.Add(Me.GroupBox1)
+        Me.ClientSize = New System.Drawing.Size(410, 502)
+        Me.Controls.Add(Me.lblData)
+        Me.Controls.Add(Me.ucrReceiverData)
+        Me.Controls.Add(Me.ucrChkDayNumber)
+        Me.Controls.Add(Me.ucrSaveExtremes)
+        Me.Controls.Add(Me.rdoPeaks)
+        Me.Controls.Add(Me.rdoMinMax)
+        Me.Controls.Add(Me.nudTo)
+        Me.Controls.Add(Me.grpPeaks)
         Me.Controls.Add(Me.grpMaxMin)
         Me.Controls.Add(Me.lblTo)
         Me.Controls.Add(Me.lblFrom)
-        Me.Controls.Add(Me.ucrNudTo)
-        Me.Controls.Add(Me.ucrNudFrom)
+        Me.Controls.Add(Me.nudFrom)
         Me.Controls.Add(Me.lblDayOfYear)
         Me.Controls.Add(Me.lblYear)
         Me.Controls.Add(Me.lblDate)
         Me.Controls.Add(Me.lblStations)
-        Me.Controls.Add(Me.UcrReceiverSingle4)
-        Me.Controls.Add(Me.UcrReceiverSingle3)
-        Me.Controls.Add(Me.UcrReceiverSingle2)
-        Me.Controls.Add(Me.UcrReceiverSingle1)
-        Me.Controls.Add(Me.ucrButtonPeaks)
-        Me.Controls.Add(Me.ucrButtonMinMax)
+        Me.Controls.Add(Me.ucrReceiverDOY)
+        Me.Controls.Add(Me.ucrReceiverYear)
+        Me.Controls.Add(Me.ucrReceiverDate)
+        Me.Controls.Add(Me.ucrReceiverStations)
         Me.Controls.Add(Me.ucrSelectorClimaticExtremes)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.ucrPnlMinMaxPeaks)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -292,8 +360,8 @@ Partial Class dlgExtremesClimatic
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Extremes Climatic"
         Me.grpMaxMin.ResumeLayout(False)
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        Me.grpPeaks.ResumeLayout(False)
+        Me.grpPeaks.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -301,24 +369,29 @@ Partial Class dlgExtremesClimatic
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSelectorClimaticExtremes As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrButtonMinMax As Button
-    Friend WithEvents ucrButtonPeaks As Button
-    Friend WithEvents UcrReceiverSingle1 As ucrReceiverSingle
-    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents ucrReceiverStations As ucrReceiverSingle
+    Friend WithEvents grpPeaks As GroupBox
     Friend WithEvents lblThresh As Label
     Friend WithEvents ucrInputThreshhold As ucrInputTextBox
     Friend WithEvents grpMaxMin As GroupBox
-    Friend WithEvents ucrMaxima As ucrCheck
+    Friend WithEvents ucrChkMaxima As ucrCheck
     Friend WithEvents lblTo As Label
     Friend WithEvents lblFrom As Label
-    Friend WithEvents ucrNudTo As ucrNud
-    Friend WithEvents ucrNudFrom As ucrNud
+    Friend WithEvents nudFrom As ucrNud
     Friend WithEvents lblDayOfYear As Label
     Friend WithEvents lblYear As Label
     Friend WithEvents lblDate As Label
     Friend WithEvents lblStations As Label
-    Friend WithEvents UcrReceiverSingle4 As ucrReceiverSingle
-    Friend WithEvents UcrReceiverSingle3 As ucrReceiverSingle
-    Friend WithEvents UcrReceiverSingle2 As ucrReceiverSingle
-    Friend WithEvents ucrValueThreshhold As ucrCheck
+    Friend WithEvents ucrReceiverDOY As ucrReceiverSingle
+    Friend WithEvents ucrReceiverYear As ucrReceiverSingle
+    Friend WithEvents ucrReceiverDate As ucrReceiverSingle
+    Friend WithEvents ucrChkThreshold As ucrCheck
+    Friend WithEvents nudTo As ucrNud
+    Friend WithEvents ucrPnlMinMaxPeaks As UcrPanel
+    Friend WithEvents rdoPeaks As RadioButton
+    Friend WithEvents rdoMinMax As RadioButton
+    Friend WithEvents ucrSaveExtremes As ucrSave
+    Friend WithEvents ucrChkDayNumber As ucrCheck
+    Friend WithEvents lblData As Label
+    Friend WithEvents ucrReceiverData As ucrReceiverSingle
 End Class

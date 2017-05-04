@@ -32,6 +32,24 @@ Public Class dlgExtremesClimatic
     End Sub
 
     Private Sub InitialiseDialog()
+        'helpID
+        ucrBase.iHelpTopicID = 203
+
+        'ucrRdoOptions
+        ucrPnlMinMaxPeaks.AddRadioButton(rdoMinMax)
+        ucrPnlMinMaxPeaks.AddRadioButton(rdoPeaks)
+
+        nudFrom.Minimum = 0
+        nudTo.Minimum = 0
+
+
+        'ucrchk
+        ucrChkMaxima.SetText("Maxima")
+        ucrChkThreshold.SetText("Values above Threshold")
+        ucrChkDayNumber.SetText("Day Number")
+
+        'ursave
+        ucrSaveExtremes.SetLabelText("New Column Name")
 
     End Sub
 
