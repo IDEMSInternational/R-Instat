@@ -99,9 +99,9 @@ Partial Class dlgOneWayFrequencies
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(320, 303)
+        Me.cmdOptions.Location = New System.Drawing.Point(10, 228)
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(69, 23)
+        Me.cmdOptions.Size = New System.Drawing.Size(87, 23)
         Me.cmdOptions.TabIndex = 13
         Me.cmdOptions.Text = " Options..."
         Me.cmdOptions.UseVisualStyleBackColor = True
@@ -164,7 +164,7 @@ Partial Class dlgOneWayFrequencies
         '
         Me.ucrNudGroups.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudGroups.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudGroups.Location = New System.Drawing.Point(131, 262)
+        Me.ucrNudGroups.Location = New System.Drawing.Point(131, 279)
         Me.ucrNudGroups.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudGroups.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudGroups.Name = "ucrNudGroups"
@@ -182,7 +182,7 @@ Partial Class dlgOneWayFrequencies
         'ucrChkGroupData
         '
         Me.ucrChkGroupData.Checked = False
-        Me.ucrChkGroupData.Location = New System.Drawing.Point(10, 263)
+        Me.ucrChkGroupData.Location = New System.Drawing.Point(10, 280)
         Me.ucrChkGroupData.Name = "ucrChkGroupData"
         Me.ucrChkGroupData.Size = New System.Drawing.Size(145, 20)
         Me.ucrChkGroupData.TabIndex = 10
@@ -190,7 +190,7 @@ Partial Class dlgOneWayFrequencies
         'ucrReceiverWeights
         '
         Me.ucrReceiverWeights.frmParent = Me
-        Me.ucrReceiverWeights.Location = New System.Drawing.Point(131, 239)
+        Me.ucrReceiverWeights.Location = New System.Drawing.Point(131, 256)
         Me.ucrReceiverWeights.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverWeights.Name = "ucrReceiverWeights"
         Me.ucrReceiverWeights.Selector = Nothing
@@ -201,7 +201,7 @@ Partial Class dlgOneWayFrequencies
         'ucrChkWeights
         '
         Me.ucrChkWeights.Checked = False
-        Me.ucrChkWeights.Location = New System.Drawing.Point(10, 239)
+        Me.ucrChkWeights.Location = New System.Drawing.Point(10, 256)
         Me.ucrChkWeights.Name = "ucrChkWeights"
         Me.ucrChkWeights.Size = New System.Drawing.Size(114, 20)
         Me.ucrChkWeights.TabIndex = 7
@@ -209,14 +209,14 @@ Partial Class dlgOneWayFrequencies
         'ucrChkFlip
         '
         Me.ucrChkFlip.Checked = False
-        Me.ucrChkFlip.Location = New System.Drawing.Point(10, 287)
+        Me.ucrChkFlip.Location = New System.Drawing.Point(10, 304)
         Me.ucrChkFlip.Name = "ucrChkFlip"
         Me.ucrChkFlip.Size = New System.Drawing.Size(145, 20)
         Me.ucrChkFlip.TabIndex = 12
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 332)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 329)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 14
@@ -246,7 +246,7 @@ Partial Class dlgOneWayFrequencies
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 388)
+        Me.ClientSize = New System.Drawing.Size(420, 385)
         Me.Controls.Add(Me.ucrReceiverOneWayFreq)
         Me.Controls.Add(Me.rdoBoth)
         Me.Controls.Add(Me.rdoGraph)
