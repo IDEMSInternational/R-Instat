@@ -1369,6 +1369,18 @@ Public Class frmMain
         dlgViewGraph.ShowDialog()
     End Sub
 
+    Private Sub mnuClimaticPrepareExtremes_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareExtremes.Click
+        dlgExtremesClimatic.ShowDialog()
+    End Sub
+
+    Private Sub ExportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportToolStripMenuItem.Click
+        dlgExportRObjects.ShowDialog()
+    End Sub
+
+    Private Sub ExportRWorkSpaceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportRWorkSpaceToolStripMenuItem.Click
+        dlgExportRWorkspace.ShowDialog()
+    End Sub
+
 
     'Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click
     '    'TEST temporary 
