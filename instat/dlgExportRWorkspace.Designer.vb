@@ -22,79 +22,18 @@ Partial Class dlgExportRWorkspace
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSelectorForDataFrames = New instat.ucrSelector()
-        Me.ucrReceiverMultiple = New instat.ucrReceiverMultiple()
-        Me.ucrChkMetadata = New instat.ucrCheck()
-        Me.ucrChkModels = New instat.ucrCheck()
-        Me.ucrChkGraphs = New instat.ucrCheck()
-        Me.ucrInputExportFile = New instat.ucrInputTextBox()
         Me.cmdBrowse = New System.Windows.Forms.Button()
         Me.lblExport = New System.Windows.Forms.Label()
         Me.lblDataFrames = New System.Windows.Forms.Label()
         Me.lblSelectedDataFrames = New System.Windows.Forms.Label()
+        Me.ucrSelectorForDataFrames = New instat.ucrSelectorAddRemove()
+        Me.ucrInputExportFile = New instat.ucrInputTextBox()
+        Me.ucrChkGraphs = New instat.ucrCheck()
+        Me.ucrChkModels = New instat.ucrCheck()
+        Me.ucrChkMetadata = New instat.ucrCheck()
+        Me.ucrReceiverMultiple = New instat.ucrReceiverMultiple()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(5, 307)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(398, 52)
-        Me.ucrBase.TabIndex = 2
-        '
-        'ucrSelectorForDataFrames
-        '
-        Me.ucrSelectorForDataFrames.bShowHiddenColumns = False
-        Me.ucrSelectorForDataFrames.Location = New System.Drawing.Point(10, 60)
-        Me.ucrSelectorForDataFrames.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorForDataFrames.Name = "ucrSelectorForDataFrames"
-        Me.ucrSelectorForDataFrames.Size = New System.Drawing.Size(120, 130)
-        Me.ucrSelectorForDataFrames.TabIndex = 3
-        '
-        'ucrReceiverMultiple
-        '
-        Me.ucrReceiverMultiple.frmParent = Me
-        Me.ucrReceiverMultiple.Location = New System.Drawing.Point(237, 60)
-        Me.ucrReceiverMultiple.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverMultiple.Name = "ucrReceiverMultiple"
-        Me.ucrReceiverMultiple.Selector = Nothing
-        Me.ucrReceiverMultiple.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverMultiple.TabIndex = 4
-        Me.ucrReceiverMultiple.ucrSelector = Nothing
-        '
-        'ucrChkMetadata
-        '
-        Me.ucrChkMetadata.Checked = False
-        Me.ucrChkMetadata.Location = New System.Drawing.Point(10, 202)
-        Me.ucrChkMetadata.Name = "ucrChkMetadata"
-        Me.ucrChkMetadata.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkMetadata.TabIndex = 5
-        '
-        'ucrChkModels
-        '
-        Me.ucrChkModels.Checked = False
-        Me.ucrChkModels.Location = New System.Drawing.Point(10, 254)
-        Me.ucrChkModels.Name = "ucrChkModels"
-        Me.ucrChkModels.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkModels.TabIndex = 6
-        '
-        'ucrChkGraphs
-        '
-        Me.ucrChkGraphs.Checked = False
-        Me.ucrChkGraphs.Location = New System.Drawing.Point(10, 228)
-        Me.ucrChkGraphs.Name = "ucrChkGraphs"
-        Me.ucrChkGraphs.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkGraphs.TabIndex = 7
-        '
-        'ucrInputExportFile
-        '
-        Me.ucrInputExportFile.AddQuotesIfUnrecognised = True
-        Me.ucrInputExportFile.IsMultiline = False
-        Me.ucrInputExportFile.IsReadOnly = False
-        Me.ucrInputExportFile.Location = New System.Drawing.Point(64, 280)
-        Me.ucrInputExportFile.Name = "ucrInputExportFile"
-        Me.ucrInputExportFile.Size = New System.Drawing.Size(269, 21)
-        Me.ucrInputExportFile.TabIndex = 13
         '
         'cmdBrowse
         '
@@ -117,7 +56,7 @@ Partial Class dlgExportRWorkspace
         'lblDataFrames
         '
         Me.lblDataFrames.AutoSize = True
-        Me.lblDataFrames.Location = New System.Drawing.Point(12, 44)
+        Me.lblDataFrames.Location = New System.Drawing.Point(8, 36)
         Me.lblDataFrames.Name = "lblDataFrames"
         Me.lblDataFrames.Size = New System.Drawing.Size(70, 13)
         Me.lblDataFrames.TabIndex = 15
@@ -132,11 +71,73 @@ Partial Class dlgExportRWorkspace
         Me.lblSelectedDataFrames.TabIndex = 16
         Me.lblSelectedDataFrames.Text = "Selected Data Frames:"
         '
+        'ucrSelectorForDataFrames
+        '
+        Me.ucrSelectorForDataFrames.bShowHiddenColumns = False
+        Me.ucrSelectorForDataFrames.Location = New System.Drawing.Point(5, 52)
+        Me.ucrSelectorForDataFrames.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorForDataFrames.Name = "ucrSelectorForDataFrames"
+        Me.ucrSelectorForDataFrames.Size = New System.Drawing.Size(201, 147)
+        Me.ucrSelectorForDataFrames.TabIndex = 17
+        '
+        'ucrInputExportFile
+        '
+        Me.ucrInputExportFile.AddQuotesIfUnrecognised = True
+        Me.ucrInputExportFile.IsMultiline = False
+        Me.ucrInputExportFile.IsReadOnly = False
+        Me.ucrInputExportFile.Location = New System.Drawing.Point(64, 280)
+        Me.ucrInputExportFile.Name = "ucrInputExportFile"
+        Me.ucrInputExportFile.Size = New System.Drawing.Size(269, 21)
+        Me.ucrInputExportFile.TabIndex = 13
+        '
+        'ucrChkGraphs
+        '
+        Me.ucrChkGraphs.Checked = False
+        Me.ucrChkGraphs.Location = New System.Drawing.Point(10, 229)
+        Me.ucrChkGraphs.Name = "ucrChkGraphs"
+        Me.ucrChkGraphs.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkGraphs.TabIndex = 7
+        '
+        'ucrChkModels
+        '
+        Me.ucrChkModels.Checked = False
+        Me.ucrChkModels.Location = New System.Drawing.Point(10, 255)
+        Me.ucrChkModels.Name = "ucrChkModels"
+        Me.ucrChkModels.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkModels.TabIndex = 6
+        '
+        'ucrChkMetadata
+        '
+        Me.ucrChkMetadata.Checked = False
+        Me.ucrChkMetadata.Location = New System.Drawing.Point(10, 203)
+        Me.ucrChkMetadata.Name = "ucrChkMetadata"
+        Me.ucrChkMetadata.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkMetadata.TabIndex = 5
+        '
+        'ucrReceiverMultiple
+        '
+        Me.ucrReceiverMultiple.frmParent = Me
+        Me.ucrReceiverMultiple.Location = New System.Drawing.Point(237, 60)
+        Me.ucrReceiverMultiple.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverMultiple.Name = "ucrReceiverMultiple"
+        Me.ucrReceiverMultiple.Selector = Nothing
+        Me.ucrReceiverMultiple.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverMultiple.TabIndex = 4
+        Me.ucrReceiverMultiple.ucrSelector = Nothing
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(5, 307)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(398, 52)
+        Me.ucrBase.TabIndex = 2
+        '
         'dlgExportRWorkspace
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(408, 358)
+        Me.Controls.Add(Me.ucrSelectorForDataFrames)
         Me.Controls.Add(Me.lblSelectedDataFrames)
         Me.Controls.Add(Me.lblDataFrames)
         Me.Controls.Add(Me.ucrInputExportFile)
@@ -146,7 +147,6 @@ Partial Class dlgExportRWorkspace
         Me.Controls.Add(Me.ucrChkModels)
         Me.Controls.Add(Me.ucrChkMetadata)
         Me.Controls.Add(Me.ucrReceiverMultiple)
-        Me.Controls.Add(Me.ucrSelectorForDataFrames)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -160,7 +160,6 @@ Partial Class dlgExportRWorkspace
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrSelectorForDataFrames As ucrSelector
     Friend WithEvents ucrReceiverMultiple As ucrReceiverMultiple
     Friend WithEvents ucrChkGraphs As ucrCheck
     Friend WithEvents ucrChkModels As ucrCheck
@@ -170,4 +169,5 @@ Partial Class dlgExportRWorkspace
     Friend WithEvents lblExport As Label
     Friend WithEvents lblDataFrames As Label
     Friend WithEvents lblSelectedDataFrames As Label
+    Friend WithEvents ucrSelectorForDataFrames As ucrSelectorAddRemove
 End Class

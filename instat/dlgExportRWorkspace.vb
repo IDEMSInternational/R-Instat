@@ -39,24 +39,25 @@ Public Class dlgExportRWorkspace
 
     Private Sub InitialiseDialog()
 
-        ucrSelectorForDataFrames.SetParameter(New RParameter("x", 0))
-
+        ucrSelectorForDataFrames.SetItemType("dataframe")
         ucrReceiverMultiple.Selector = ucrSelectorForDataFrames
-        ucrReceiverMultiple.SetParameter(New RParameter("data_name", 1))
+
+        ucrReceiverMultiple.SetParameter(New RParameter("data_names", 0))
         ucrReceiverMultiple.SetParameterIsRFunction()
 
-        ucrChkMetadata.SetParameter(New RParameter("metadata", 2))
+        ucrInputExportFile.SetParameter(New RParameter("file", 1))
+
+        ucrChkMetadata.SetParameter(New RParameter("include_metadata", 2))
         ucrChkMetadata.SetText("Metadata")
         ucrChkMetadata.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkMetadata.SetRDefault("FALSE")
 
-
-        ucrChkGraphs.SetParameter(New RParameter("graphs", 3))
+        ucrChkGraphs.SetParameter(New RParameter("include_graphs", 3))
         ucrChkGraphs.SetText("Graphs")
         ucrChkGraphs.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkGraphs.SetRDefault("FALSE")
 
-        ucrChkModels.SetParameter(New RParameter("models", 4))
+        ucrChkModels.SetParameter(New RParameter("include_models", 4))
         ucrChkModels.SetText("Models")
         ucrChkModels.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkModels.SetRDefault("FALSE")
@@ -71,7 +72,7 @@ Public Class dlgExportRWorkspace
         ucrSelectorForDataFrames.Reset()
         ucrReceiverMultiple.SetMeAsReceiver()
 
-        clsDefaultFunction.SetRCommand("export_workspace")
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$export_workspace")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
 
@@ -93,14 +94,14 @@ Public Class dlgExportRWorkspace
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrInputExportFile.IsEmpty AndAlso Not ucrReceiverMultiple.IsEmpty AndAlso ucrSelectorForDataFrames.Text <> "" Then
+        If Not ucrInputExportFile.IsEmpty AndAlso Not ucrReceiverMultiple.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
-    Private Sub ucrInputExportFile_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrInputExportFile.ControlContentsChanged, ucrReceiverMultiple.ControlContentsChanged, ucrSelectorForDataFrames.ControlContentsChanged
+    Private Sub ucrInputExportFile_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrInputExportFile.ControlContentsChanged, ucrReceiverMultiple.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
