@@ -446,7 +446,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuManageDataFileCopySheet_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataObjectCopyDataFrame.Click
-        dlgCopyDataFrame.ShowDialog()
+        dlgCopySheet.ShowDialog()
     End Sub
 
     Private Sub mnuManageDataFileReorderSheets_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataObjectReorderDataFrames.Click
@@ -454,7 +454,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuManageDataFileRenameSheet_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataObjectRenameDataFrame.Click
-        dlgRenameDataFrame.ShowDialog()
+        dlgRenameSheet.ShowDialog()
     End Sub
 
     Private Sub mnuManageRechapeColumnSummaries_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnReshapeColumnSummaries.Click
