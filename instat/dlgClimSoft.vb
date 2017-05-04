@@ -91,9 +91,8 @@ Public Class dlgClimSoft
         clsRImportFromClimsoft = New RFunction
         ucrSelectorForClimSoft.Reset()
         ucrReceiverMultipleStations.SetMeAsReceiver()
-        ucrInputStartDate.SetText("")
-        ucrInputEndDate.SetText("")
-
+        ucrInputStartDate.SetName("")
+        ucrInputEndDate.SetName("")
         clsRDatabaseConnect.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$database_connect")
         clsRDatabaseDisconnect.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$database_disconnect")
         clsRImportFromClimsoft.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_from_climsoft")
