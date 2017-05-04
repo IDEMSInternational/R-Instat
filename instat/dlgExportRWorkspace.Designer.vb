@@ -31,11 +31,13 @@ Partial Class dlgExportRWorkspace
         Me.ucrInputExportFile = New instat.ucrInputTextBox()
         Me.cmdBrowse = New System.Windows.Forms.Button()
         Me.lblExport = New System.Windows.Forms.Label()
+        Me.lblDataFrames = New System.Windows.Forms.Label()
+        Me.lblSelectedDataFrames = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(5, 260)
+        Me.ucrBase.Location = New System.Drawing.Point(5, 307)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(398, 52)
         Me.ucrBase.TabIndex = 2
@@ -43,7 +45,7 @@ Partial Class dlgExportRWorkspace
         'ucrSelectorForDataFrames
         '
         Me.ucrSelectorForDataFrames.bShowHiddenColumns = False
-        Me.ucrSelectorForDataFrames.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorForDataFrames.Location = New System.Drawing.Point(10, 60)
         Me.ucrSelectorForDataFrames.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForDataFrames.Name = "ucrSelectorForDataFrames"
         Me.ucrSelectorForDataFrames.Size = New System.Drawing.Size(120, 130)
@@ -52,7 +54,7 @@ Partial Class dlgExportRWorkspace
         'ucrReceiverMultiple
         '
         Me.ucrReceiverMultiple.frmParent = Me
-        Me.ucrReceiverMultiple.Location = New System.Drawing.Point(230, 25)
+        Me.ucrReceiverMultiple.Location = New System.Drawing.Point(237, 60)
         Me.ucrReceiverMultiple.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultiple.Name = "ucrReceiverMultiple"
         Me.ucrReceiverMultiple.Selector = Nothing
@@ -63,7 +65,7 @@ Partial Class dlgExportRWorkspace
         'ucrChkMetadata
         '
         Me.ucrChkMetadata.Checked = False
-        Me.ucrChkMetadata.Location = New System.Drawing.Point(10, 155)
+        Me.ucrChkMetadata.Location = New System.Drawing.Point(10, 202)
         Me.ucrChkMetadata.Name = "ucrChkMetadata"
         Me.ucrChkMetadata.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkMetadata.TabIndex = 5
@@ -71,7 +73,7 @@ Partial Class dlgExportRWorkspace
         'ucrChkModels
         '
         Me.ucrChkModels.Checked = False
-        Me.ucrChkModels.Location = New System.Drawing.Point(10, 207)
+        Me.ucrChkModels.Location = New System.Drawing.Point(10, 254)
         Me.ucrChkModels.Name = "ucrChkModels"
         Me.ucrChkModels.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkModels.TabIndex = 6
@@ -79,7 +81,7 @@ Partial Class dlgExportRWorkspace
         'ucrChkGraphs
         '
         Me.ucrChkGraphs.Checked = False
-        Me.ucrChkGraphs.Location = New System.Drawing.Point(10, 181)
+        Me.ucrChkGraphs.Location = New System.Drawing.Point(10, 228)
         Me.ucrChkGraphs.Name = "ucrChkGraphs"
         Me.ucrChkGraphs.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkGraphs.TabIndex = 7
@@ -89,14 +91,14 @@ Partial Class dlgExportRWorkspace
         Me.ucrInputExportFile.AddQuotesIfUnrecognised = True
         Me.ucrInputExportFile.IsMultiline = False
         Me.ucrInputExportFile.IsReadOnly = False
-        Me.ucrInputExportFile.Location = New System.Drawing.Point(64, 233)
+        Me.ucrInputExportFile.Location = New System.Drawing.Point(64, 280)
         Me.ucrInputExportFile.Name = "ucrInputExportFile"
         Me.ucrInputExportFile.Size = New System.Drawing.Size(269, 21)
         Me.ucrInputExportFile.TabIndex = 13
         '
         'cmdBrowse
         '
-        Me.cmdBrowse.Location = New System.Drawing.Point(339, 231)
+        Me.cmdBrowse.Location = New System.Drawing.Point(339, 278)
         Me.cmdBrowse.Name = "cmdBrowse"
         Me.cmdBrowse.Size = New System.Drawing.Size(62, 23)
         Me.cmdBrowse.TabIndex = 14
@@ -106,17 +108,37 @@ Partial Class dlgExportRWorkspace
         'lblExport
         '
         Me.lblExport.AutoSize = True
-        Me.lblExport.Location = New System.Drawing.Point(2, 237)
+        Me.lblExport.Location = New System.Drawing.Point(2, 284)
         Me.lblExport.Name = "lblExport"
         Me.lblExport.Size = New System.Drawing.Size(56, 13)
         Me.lblExport.TabIndex = 12
         Me.lblExport.Text = "Export file:"
         '
+        'lblDataFrames
+        '
+        Me.lblDataFrames.AutoSize = True
+        Me.lblDataFrames.Location = New System.Drawing.Point(12, 44)
+        Me.lblDataFrames.Name = "lblDataFrames"
+        Me.lblDataFrames.Size = New System.Drawing.Size(70, 13)
+        Me.lblDataFrames.TabIndex = 15
+        Me.lblDataFrames.Text = "Data Frames:"
+        '
+        'lblSelectedDataFrames
+        '
+        Me.lblSelectedDataFrames.AutoSize = True
+        Me.lblSelectedDataFrames.Location = New System.Drawing.Point(234, 44)
+        Me.lblSelectedDataFrames.Name = "lblSelectedDataFrames"
+        Me.lblSelectedDataFrames.Size = New System.Drawing.Size(115, 13)
+        Me.lblSelectedDataFrames.TabIndex = 16
+        Me.lblSelectedDataFrames.Text = "Selected Data Frames:"
+        '
         'dlgExportRWorkspace
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(405, 316)
+        Me.ClientSize = New System.Drawing.Size(408, 358)
+        Me.Controls.Add(Me.lblSelectedDataFrames)
+        Me.Controls.Add(Me.lblDataFrames)
         Me.Controls.Add(Me.ucrInputExportFile)
         Me.Controls.Add(Me.cmdBrowse)
         Me.Controls.Add(Me.lblExport)
@@ -146,4 +168,6 @@ Partial Class dlgExportRWorkspace
     Friend WithEvents ucrInputExportFile As ucrInputTextBox
     Friend WithEvents cmdBrowse As Button
     Friend WithEvents lblExport As Label
+    Friend WithEvents lblDataFrames As Label
+    Friend WithEvents lblSelectedDataFrames As Label
 End Class
