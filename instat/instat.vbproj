@@ -275,6 +275,18 @@
     <Compile Include="dlgExportGraphAsImage.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgExportRObjects.Designer.vb">
+      <DependentUpon>dlgExportRObjects.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExportRObjects.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgExportRWorkspace.Designer.vb">
+      <DependentUpon>dlgExportRWorkspace.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExportRWorkspace.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgExportToCPT.Designer.vb">
       <DependentUpon>dlgExportToCPT.vb</DependentUpon>
     </Compile>
@@ -291,6 +303,12 @@
       <DependentUpon>dlgCorruptionFile.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgCorruptionFile.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgExtremesClimatic.Designer.vb">
+      <DependentUpon>dlgExtremesClimatic.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExtremesClimatic.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgFactorLabels.Designer.vb">
@@ -497,6 +515,12 @@
     <Compile Include="dlgThreeVariableFrequencies.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgTransformClimatic.Designer.vb">
+      <DependentUpon>dlgTransformClimatic.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTransformClimatic.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgTwoVariableUseModel.Designer.vb">
       <DependentUpon>dlgTwoVariableUseModel.vb</DependentUpon>
     </Compile>
@@ -525,6 +549,12 @@
       <DependentUpon>dlgViewAndRemoveLinks.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgViewAndRemoveLinks.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgViewGraph.Designer.vb">
+      <DependentUpon>dlgViewGraph.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgViewGraph.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmGraphDisplay.Designer.vb">
@@ -2446,6 +2476,12 @@
     <EmbeddedResource Include="dlgExportGraphAsImage.resx">
       <DependentUpon>dlgExportGraphAsImage.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportRObjects.resx">
+      <DependentUpon>dlgExportRObjects.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportRWorkspace.resx">
+      <DependentUpon>dlgExportRWorkspace.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgExportToCPT.resx">
       <DependentUpon>dlgExportToCPT.vb</DependentUpon>
     </EmbeddedResource>
@@ -2454,6 +2490,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCorruptionFile.resx">
       <DependentUpon>dlgCorruptionFile.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExtremesClimatic.resx">
+      <DependentUpon>dlgExtremesClimatic.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFactorLabels.resx">
       <DependentUpon>dlgFactorLabels.vb</DependentUpon>
@@ -2890,6 +2929,9 @@
     <EmbeddedResource Include="dlgThreeVariableFrequencies.resx">
       <DependentUpon>dlgThreeVariableFrequencies.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgTransformClimatic.resx">
+      <DependentUpon>dlgTransformClimatic.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgTransformText.fr-FR.resx">
       <DependentUpon>dlgTransformText.vb</DependentUpon>
     </EmbeddedResource>
@@ -2967,6 +3009,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgViewDescriptives.sw-KE.resx">
       <DependentUpon>dlgViewDescriptives.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgViewGraph.resx">
+      <DependentUpon>dlgViewGraph.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgWindrose.fr-FR.resx">
       <DependentUpon>dlgWindrose.vb</DependentUpon>
@@ -4837,7 +4882,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="static\Help\LICENSE" />
-    <Content Include="static\Library\Corruption\wb_ppp_1990-2014_long.dta">
+    <Content Include="static\Library\Procurement\wb_ppp_1990-2014_long.dta">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.3\abind_1.4-5.zip">
@@ -5345,19 +5390,19 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="static\Help\LICENSE" />
-    <Content Include="static\Library\Corruption\wb_ppp_1990-2014_long.dta">
+    <Content Include="static\Library\Procurement\wb_ppp_1990-2014_long.dta">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\Library\Corruption\country_level.csv">
+    <Content Include="static\Library\Procurement\country_level.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\Library\Corruption\country_level.RDS">
+    <Content Include="static\Library\Procurement\country_level.RDS">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\Library\Corruption\WB_raw_and_calculated_df.RDS">
+    <Content Include="static\Library\Procurement\WB_raw_and_calculated_df.RDS">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\Library\Corruption\wb_raw_calc_instat_obj.RDS">
+    <Content Include="static\Library\Procurement\wb_raw_calc_instat_obj.RDS">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.3\whisker_0.3-2.zip">
