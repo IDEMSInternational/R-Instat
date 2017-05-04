@@ -758,20 +758,19 @@ instat_object$set("public", "sort_dataframe", function(data_name, col_names = c(
 )
 
 instat_object$set("public", "rename_dataframe", function(data_name, new_value = "", label = "") {
+  if(new_value %in% names(private$.data_objects)) stop("Cannot rename data frame since ", new_value, " is an existing data frame.")
   data_obj <- self$get_data_objects(data_name)
-  if(new_value != data_name) {
-    names(private$.data_objects)[names(private$.data_objects) == data_name] <- new_value
-    data_obj$append_to_metadata(data_name_label, new_value)
-    for(i in seq_along(private$.links)) {
-      if(private$.links[[i]]$from_data_frame == data_name) {
-        private$.links[[i]]$from_data_frame <- new_value
-      }
-      if(private$.links[[i]]$to_data_frame == data_name) {
-        private$.links[[i]]$to_data_frame <- new_value
-      }
+  names(private$.data_objects)[names(private$.data_objects) == data_name] <- new_value
+  data_obj$append_to_metadata(data_name_label, new_value)
+  for(i in seq_along(private$.links)) {
+    if(private$.links[[i]]$from_data_frame == data_name) {
+      private$.links[[i]]$from_data_frame <- new_value
     }
-    data_obj$set_data_changed(TRUE)
+    if(private$.links[[i]]$to_data_frame == data_name) {
+      private$.links[[i]]$to_data_frame <- new_value
+    }
   }
+  data_obj$set_data_changed(TRUE)
   if(label != "") {
     data_obj$append_to_metadata(property = "label" , new_val = label)
     data_obj$set_metadata_changed(TRUE)
@@ -866,16 +865,17 @@ instat_object$set("public","get_data_type", function(data_name, col_name) {
 )
 
 instat_object$set("public","copy_data_frame", function(data_name, new_name, label = "") {
+  if(new_name %in% names(private$.data_objects)) stop("Cannot copy data frame since ", new_name, " is an existing data frame.")
   curr_obj <- self$get_data_objects(data_name)$clone(deep = TRUE)
   
   if(missing(new_name)) new_name = next_default_item(data_name, self$get_data_names())
   self$append_data_object(new_name, curr_obj)
-  curr_obj$data_changed <- TRUE
- 
-  curr_obj$set_data_changed(TRUE)
+  new_data_obj <- self$get_data_objects(new_name)
+  new_data_obj$data_changed <- TRUE
+  new_data_obj$set_data_changed(TRUE)
   if(label != "") {
-    curr_obj$append_to_metadata(property = "label" , new_val = label)
-    data_obj$set_metadata_changed(TRUE)
+    new_data_obj$append_to_metadata(property = "label" , new_val = label)
+    new_data_obj$set_metadata_changed(TRUE)
   }
 } 
 )
