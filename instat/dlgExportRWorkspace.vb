@@ -13,11 +13,12 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+Imports System.IO
 Imports instat.Translations
 Public Class dlgExportRWorkspace
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private clsDefaultFunction As New RFunction
     Private Sub dlgExportRWorkspace_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -38,10 +39,25 @@ Public Class dlgExportRWorkspace
 
     Private Sub InitialiseDialog()
 
+        ucrSelectorForDataFrames.SetParameter(New RParameter("x", 0))
+
+        ucrReceiverMultiple.Selector = ucrSelectorForDataFrames
+        ucrReceiverMultiple.SetParameter(New RParameter("data_name", 1))
+
+        ucrChkMetadata.SetParameter(New RParameter("metadata", 2))
+        ucrChkMetadata.SetText("Metadata")
+        ucrChkMetadata.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+
+
+
     End Sub
 
     Private Sub SetDefaults()
-
+        clsDefaultFunction = New RFunction
+        ucrInputExportFile.IsReadOnly = True
+        ucrInputExportFile.SetName("")
+        ucrSelectorForDataFrames.Reset()
+        ucrReceiverMultiple.SetMeAsReceiver()
     End Sub
 
     Private Sub TestOkEnabled()
