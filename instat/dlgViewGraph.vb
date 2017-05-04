@@ -37,7 +37,7 @@ Public Class dlgViewGraph
     End Sub
 
     Private Sub InitialiseDialog()
-        'TODO HELPID
+        ucrBase.iHelpTopicID = 525
         rdoDisplaySeparateWindow.Enabled = False
 
         'Selector
