@@ -17,33 +17,60 @@
 Imports instat.Translations
 Public Class dlgReorderColumns
     Dim bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
+    Private clsDefaultFunction As New RFunction
     Private Sub dlgReorderColumns_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
         If bFirstLoad Then
             initialiseDialog()
+            bFirstLoad = False
         End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        ReopenDialog()
         TestOkEnabled()
+    End Sub
+
+    Private Sub SetDefaults()
+        clsDefaultFunction = New RFunction
+        ucrReorderColumns.Reset()
+        ucrDataFrameSelector.Reset()
+        'ucrReorderColumns.SetRDefault("")
+        'ucrReorderColumns.Reset()
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$reorder_columns_in_data")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
 
     Private Sub initialiseDialog()
-        'sets the function
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$reorder_columns_in_data")
-        ucrReorderColumns.setDataType("column")
-        ucrReorderColumns.setDataframes(ucrDataFrameSelect)
         ucrBase.iHelpTopicID = 163
+        ucrBase.clsRsyntax.iCallType = 0
+
+        ucrDataFrameSelector.SetParameter(New RParameter("data_name", 0))
+        ucrDataFrameSelector.SetParameterIsString()
+
+        ucrReorderColumns.setDataframes(ucrDataFrameSelector)
+        ucrReorderColumns.SetParameter(New RParameter("col_order", 1))
+        ucrReorderColumns.setDataType("column")
+    End Sub
+
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
+    Private Sub ReopenDialog()
+        ucrDataFrameSelector.Reset()
+        If ucrDataFrameSelector.cboAvailableDataFrames.Text = "" Then
+            ucrReorderColumns.Reset()
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        ucrDataFrameSelect.Reset()
+        SetDefaults()
+        SetRCodeForControls(True)
         TestOkEnabled()
-    End Sub
-
-    Private Sub ucrReorderColumns_OrderChanged() Handles ucrReorderColumns.OrderChanged
-        If Not ucrReorderColumns.isEmpty Then
-            ucrBase.clsRsyntax.AddParameter("col_order", ucrReorderColumns.GetVariableNames)
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("col_order")
-        End If
     End Sub
 
     Private Sub TestOkEnabled()
@@ -54,8 +81,7 @@ Public Class dlgReorderColumns
         End If
     End Sub
 
-    Private Sub ucrDataFrameSelect_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrDataFrameSelect.DataFrameChanged
-        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrDataFrameSelect.cboAvailableDataFrames.Text & Chr(34))
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameSelector.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
