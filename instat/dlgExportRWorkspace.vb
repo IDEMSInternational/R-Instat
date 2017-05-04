@@ -34,7 +34,7 @@ Public Class dlgExportRWorkspace
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -43,11 +43,23 @@ Public Class dlgExportRWorkspace
 
         ucrReceiverMultiple.Selector = ucrSelectorForDataFrames
         ucrReceiverMultiple.SetParameter(New RParameter("data_name", 1))
+        ucrReceiverMultiple.SetParameterIsRFunction()
 
         ucrChkMetadata.SetParameter(New RParameter("metadata", 2))
         ucrChkMetadata.SetText("Metadata")
         ucrChkMetadata.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkMetadata.SetRDefault("FALSE")
 
+
+        ucrChkGraphs.SetParameter(New RParameter("graphs", 3))
+        ucrChkGraphs.SetText("Graphs")
+        ucrChkGraphs.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkGraphs.SetRDefault("FALSE")
+
+        ucrChkModels.SetParameter(New RParameter("models", 4))
+        ucrChkModels.SetText("Models")
+        ucrChkModels.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkModels.SetRDefault("FALSE")
 
 
     End Sub
@@ -58,10 +70,44 @@ Public Class dlgExportRWorkspace
         ucrInputExportFile.SetName("")
         ucrSelectorForDataFrames.Reset()
         ucrReceiverMultiple.SetMeAsReceiver()
+
+        clsDefaultFunction.SetRCommand("export_workspace")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+    End Sub
+
+    Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
+        Dim dlgSave As New SaveFileDialog
+
+        dlgSave.Title = "Export file dialog"
+        dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
+        dlgSave.Filter = "Saved r objects (*.RData)|*.RData"
+        If dlgSave.ShowDialog = DialogResult.OK Then
+            If dlgSave.FileName <> "" Then
+                ucrInputExportFile.SetName(Path.GetFullPath(dlgSave.FileName).ToString.Replace("\", "/"))
+            End If
+        End If
+    End Sub
+
+    Private Sub ucrInputExportFile_Click(sender As Object, e As EventArgs) Handles ucrInputExportFile.Click
+        cmdBrowse_Click(sender, e)
     End Sub
 
     Private Sub TestOkEnabled()
+        If Not ucrInputExportFile.IsEmpty AndAlso Not ucrReceiverMultiple.IsEmpty AndAlso ucrSelectorForDataFrames.Text <> "" Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
 
+    Private Sub ucrInputExportFile_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrInputExportFile.ControlContentsChanged, ucrReceiverMultiple.ControlContentsChanged, ucrSelectorForDataFrames.ControlContentsChanged
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
     End Sub
 
 End Class
