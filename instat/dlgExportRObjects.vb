@@ -58,7 +58,7 @@ Public Class dlgExportRObjects
 
         dlgSave.Title = "Export file dialog"
         dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
-        dlgSave.Filter = ""
+        dlgSave.Filter = "Saved r object (*.RData)|*.RData"
         If dlgSave.ShowDialog = DialogResult.OK Then
             If dlgSave.FileName <> "" Then
                 ucrInputExportFile.SetName(Path.GetFullPath(dlgSave.FileName).ToString.Replace("\", "/"))
