@@ -203,12 +203,6 @@
     <Compile Include="dlgCompareModels.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgCopyDataFrame.Designer.vb">
-      <DependentUpon>dlgCopyDataFrame.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgCopyDataFrame.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgCountinFactor.Designer.vb">
       <DependentUpon>dlgCountinFactor.vb</DependentUpon>
     </Compile>
@@ -471,12 +465,6 @@
       <DependentUpon>dlgRecodeNumericIntoQuantiles.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgRecodeNumericIntoQuantiles.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgRenameDataFrame.Designer.vb">
-      <DependentUpon>dlgRenameDataFrame.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgRenameDataFrame.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgRugPlot.Designer.vb">
@@ -828,6 +816,12 @@
     <Compile Include="dlgContrasts.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCopySheet.Designer.vb">
+      <DependentUpon>dlgCopySheet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCopySheet.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgCumulativeDistribution.Designer.vb">
       <DependentUpon>dlgCumulativeDistribution.vb</DependentUpon>
     </Compile>
@@ -1000,6 +994,12 @@
       <DependentUpon>dlgRenameMetadata.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgRenameMetadata.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgRenameSheet.Designer.vb">
+      <DependentUpon>dlgRenameSheet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRenameSheet.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgReoderDescriptives.Designer.vb">
@@ -2359,6 +2359,15 @@
     <EmbeddedResource Include="dlgContrasts.sw-KE.resx">
       <DependentUpon>dlgContrasts.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCopySheet.fr-FR.resx">
+      <DependentUpon>dlgCopySheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCopySheet.resx">
+      <DependentUpon>dlgCopySheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCopySheet.sw-KE.resx">
+      <DependentUpon>dlgCopySheet.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgCountinFactor.resx">
       <DependentUpon>dlgCountinFactor.vb</DependentUpon>
     </EmbeddedResource>
@@ -2775,6 +2784,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRenameMetadata.sw-KE.resx">
       <DependentUpon>dlgRenameMetadata.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRenameSheet.fr-FR.resx">
+      <DependentUpon>dlgRenameSheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRenameSheet.resx">
+      <DependentUpon>dlgRenameSheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgRenameSheet.sw-KE.resx">
+      <DependentUpon>dlgRenameSheet.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReoderDescriptives.fr-FR.resx">
       <DependentUpon>dlgReoderDescriptives.vb</DependentUpon>
