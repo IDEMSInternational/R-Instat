@@ -26,15 +26,20 @@ Partial Class sdgCorrPlot
         Me.tbPairwisePlot = New System.Windows.Forms.TabPage()
         Me.tbCorrelationPlot = New System.Windows.Forms.TabPage()
         Me.chkLabel = New System.Windows.Forms.CheckBox()
+        Me.nudAlphaCorr = New System.Windows.Forms.NumericUpDown()
+        Me.nudMaximumSize = New System.Windows.Forms.NumericUpDown()
+        Me.nudMinimunSize = New System.Windows.Forms.NumericUpDown()
         Me.lblMaximumSize = New System.Windows.Forms.Label()
         Me.cmbgeom = New System.Windows.Forms.ComboBox()
         Me.lblLabelAlpha = New System.Windows.Forms.Label()
         Me.lblMinimumSize = New System.Windows.Forms.Label()
         Me.lblgeom = New System.Windows.Forms.Label()
         Me.tbScatterplotMatrix = New System.Windows.Forms.TabPage()
+        Me.ucrSelectFactor = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblFactorVariable = New System.Windows.Forms.Label()
         Me.chkColour = New System.Windows.Forms.CheckBox()
         Me.lblAlpha = New System.Windows.Forms.Label()
+        Me.nudAlphaScatter = New System.Windows.Forms.NumericUpDown()
         Me.ucrReceiveFactor = New instat.ucrReceiverSingle()
         Me.rdoScatterplotMatrix = New System.Windows.Forms.RadioButton()
         Me.rdoCorrelationPlot = New System.Windows.Forms.RadioButton()
@@ -43,19 +48,14 @@ Partial Class sdgCorrPlot
         Me.grpGraphs = New System.Windows.Forms.GroupBox()
         Me.ucrBaseSdgCorrPlot = New instat.ucrButtonsSubdialogue()
         Me.ucrSaveGraph = New instat.ucrSaveGraph()
-        Me.ucrSelectFactor = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.nudAlphaScatter = New System.Windows.Forms.NumericUpDown()
-        Me.nudMinimunSize = New System.Windows.Forms.NumericUpDown()
-        Me.nudMaximumSize = New System.Windows.Forms.NumericUpDown()
-        Me.nudAlphaCorr = New System.Windows.Forms.NumericUpDown()
         Me.tbSaveGraphs.SuspendLayout()
         Me.tbCorrelationPlot.SuspendLayout()
-        Me.tbScatterplotMatrix.SuspendLayout()
-        Me.grpGraphs.SuspendLayout()
-        CType(Me.nudAlphaScatter, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudMinimunSize, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudMaximumSize, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudAlphaCorr, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudMaximumSize, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.nudMinimunSize, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tbScatterplotMatrix.SuspendLayout()
+        CType(Me.nudAlphaScatter, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.grpGraphs.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbSaveGraphs
@@ -110,6 +110,37 @@ Partial Class sdgCorrPlot
         Me.chkLabel.Tag = "Label"
         Me.chkLabel.Text = "Label"
         Me.chkLabel.UseVisualStyleBackColor = True
+        '
+        'nudAlphaCorr
+        '
+        Me.nudAlphaCorr.DecimalPlaces = 2
+        Me.nudAlphaCorr.Increment = New Decimal(New Integer() {1, 0, 0, 131072})
+        Me.nudAlphaCorr.Location = New System.Drawing.Point(239, 75)
+        Me.nudAlphaCorr.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudAlphaCorr.Name = "nudAlphaCorr"
+        Me.nudAlphaCorr.Size = New System.Drawing.Size(51, 20)
+        Me.nudAlphaCorr.TabIndex = 26
+        Me.nudAlphaCorr.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'nudMaximumSize
+        '
+        Me.nudMaximumSize.Location = New System.Drawing.Point(248, 47)
+        Me.nudMaximumSize.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.nudMaximumSize.Minimum = New Decimal(New Integer() {5, 0, 0, 0})
+        Me.nudMaximumSize.Name = "nudMaximumSize"
+        Me.nudMaximumSize.Size = New System.Drawing.Size(31, 20)
+        Me.nudMaximumSize.TabIndex = 25
+        Me.nudMaximumSize.Value = New Decimal(New Integer() {6, 0, 0, 0})
+        '
+        'nudMinimunSize
+        '
+        Me.nudMinimunSize.Location = New System.Drawing.Point(84, 47)
+        Me.nudMinimunSize.Maximum = New Decimal(New Integer() {5, 0, 0, 0})
+        Me.nudMinimunSize.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudMinimunSize.Name = "nudMinimunSize"
+        Me.nudMinimunSize.Size = New System.Drawing.Size(31, 20)
+        Me.nudMinimunSize.TabIndex = 24
+        Me.nudMinimunSize.Value = New Decimal(New Integer() {2, 0, 0, 0})
         '
         'lblMaximumSize
         '
@@ -177,6 +208,16 @@ Partial Class sdgCorrPlot
         Me.tbScatterplotMatrix.Text = "Scatterplot Matrix"
         Me.tbScatterplotMatrix.UseVisualStyleBackColor = True
         '
+        'ucrSelectFactor
+        '
+        Me.ucrSelectFactor.bShowHiddenColumns = False
+        Me.ucrSelectFactor.bUseCurrentFilter = True
+        Me.ucrSelectFactor.Location = New System.Drawing.Point(3, 59)
+        Me.ucrSelectFactor.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectFactor.Name = "ucrSelectFactor"
+        Me.ucrSelectFactor.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectFactor.TabIndex = 13
+        '
         'lblFactorVariable
         '
         Me.lblFactorVariable.AutoSize = True
@@ -208,8 +249,20 @@ Partial Class sdgCorrPlot
         Me.lblAlpha.Tag = "Alpha"
         Me.lblAlpha.Text = "Alpha:"
         '
+        'nudAlphaScatter
+        '
+        Me.nudAlphaScatter.DecimalPlaces = 2
+        Me.nudAlphaScatter.Increment = New Decimal(New Integer() {1, 0, 0, 131072})
+        Me.nudAlphaScatter.Location = New System.Drawing.Point(46, 11)
+        Me.nudAlphaScatter.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.nudAlphaScatter.Name = "nudAlphaScatter"
+        Me.nudAlphaScatter.Size = New System.Drawing.Size(51, 20)
+        Me.nudAlphaScatter.TabIndex = 7
+        Me.nudAlphaScatter.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
         'ucrReceiveFactor
         '
+        Me.ucrReceiveFactor.frmParent = Nothing
         Me.ucrReceiveFactor.Location = New System.Drawing.Point(213, 81)
         Me.ucrReceiveFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiveFactor.Name = "ucrReceiveFactor"
@@ -291,58 +344,6 @@ Partial Class sdgCorrPlot
         Me.ucrSaveGraph.Size = New System.Drawing.Size(236, 22)
         Me.ucrSaveGraph.TabIndex = 2
         '
-        'ucrSelectFactor
-        '
-        Me.ucrSelectFactor.bShowHiddenColumns = False
-        Me.ucrSelectFactor.bUseCurrentFilter = True
-        Me.ucrSelectFactor.Location = New System.Drawing.Point(3, 59)
-        Me.ucrSelectFactor.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectFactor.Name = "ucrSelectFactor"
-        Me.ucrSelectFactor.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectFactor.TabIndex = 13
-        '
-        'nudAlphaScatter
-        '
-        Me.nudAlphaScatter.DecimalPlaces = 2
-        Me.nudAlphaScatter.Increment = New Decimal(New Integer() {1, 0, 0, 131072})
-        Me.nudAlphaScatter.Location = New System.Drawing.Point(46, 11)
-        Me.nudAlphaScatter.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.nudAlphaScatter.Name = "nudAlphaScatter"
-        Me.nudAlphaScatter.Size = New System.Drawing.Size(51, 20)
-        Me.nudAlphaScatter.TabIndex = 7
-        Me.nudAlphaScatter.Value = New Decimal(New Integer() {1, 0, 0, 0})
-        '
-        'nudMinimunSize
-        '
-        Me.nudMinimunSize.Location = New System.Drawing.Point(84, 47)
-        Me.nudMinimunSize.Maximum = New Decimal(New Integer() {5, 0, 0, 0})
-        Me.nudMinimunSize.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.nudMinimunSize.Name = "nudMinimunSize"
-        Me.nudMinimunSize.Size = New System.Drawing.Size(31, 20)
-        Me.nudMinimunSize.TabIndex = 24
-        Me.nudMinimunSize.Value = New Decimal(New Integer() {2, 0, 0, 0})
-        '
-        'nudMaximumSize
-        '
-        Me.nudMaximumSize.Location = New System.Drawing.Point(248, 47)
-        Me.nudMaximumSize.Maximum = New Decimal(New Integer() {10, 0, 0, 0})
-        Me.nudMaximumSize.Minimum = New Decimal(New Integer() {5, 0, 0, 0})
-        Me.nudMaximumSize.Name = "nudMaximumSize"
-        Me.nudMaximumSize.Size = New System.Drawing.Size(31, 20)
-        Me.nudMaximumSize.TabIndex = 25
-        Me.nudMaximumSize.Value = New Decimal(New Integer() {6, 0, 0, 0})
-        '
-        'nudAlphaCorr
-        '
-        Me.nudAlphaCorr.DecimalPlaces = 2
-        Me.nudAlphaCorr.Increment = New Decimal(New Integer() {1, 0, 0, 131072})
-        Me.nudAlphaCorr.Location = New System.Drawing.Point(239, 75)
-        Me.nudAlphaCorr.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.nudAlphaCorr.Name = "nudAlphaCorr"
-        Me.nudAlphaCorr.Size = New System.Drawing.Size(51, 20)
-        Me.nudAlphaCorr.TabIndex = 26
-        Me.nudAlphaCorr.Value = New Decimal(New Integer() {1, 0, 0, 0})
-        '
         'sdgCorrPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -362,14 +363,14 @@ Partial Class sdgCorrPlot
         Me.tbSaveGraphs.ResumeLayout(False)
         Me.tbCorrelationPlot.ResumeLayout(False)
         Me.tbCorrelationPlot.PerformLayout()
+        CType(Me.nudAlphaCorr, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudMaximumSize, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.nudMinimunSize, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tbScatterplotMatrix.ResumeLayout(False)
         Me.tbScatterplotMatrix.PerformLayout()
+        CType(Me.nudAlphaScatter, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpGraphs.ResumeLayout(False)
         Me.grpGraphs.PerformLayout()
-        CType(Me.nudAlphaScatter, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudMinimunSize, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudMaximumSize, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudAlphaCorr, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
