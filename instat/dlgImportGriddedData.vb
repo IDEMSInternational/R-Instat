@@ -41,7 +41,7 @@ Public Class dlgImportGriddedData
     Private Sub InitialiseDialog()
         dctDownloadPairs = New Dictionary(Of String, String)
 
-        'ucrBase.iHelpTopicID = 
+        ucrBase.iHelpTopicID = 526
 
         'temporary until working
         cmdBrowse.Enabled = False
