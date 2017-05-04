@@ -1338,5 +1338,5 @@ instat_object$set("public", "import_from_iri", function(download_from, data_file
 )
 
 instat_object$set("public", "export_workspace", function(data_names, file, include_metadata = TRUE, include_graphs = TRUE, include_models = TRUE) {
-} 
+  save.image(file=file)} 
 )
