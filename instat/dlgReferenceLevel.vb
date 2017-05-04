@@ -34,21 +34,20 @@ Public Class dlgReferenceLevel
         TestOKEnabled()
     End Sub
 
-    Private Sub SetRCodeforControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-    End Sub
-
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 38
+
+        ucrSelectorForReferenceLevels.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorForReferenceLevels.SetParameterIsString()
+
+        ucrReceiverReferenceLevels.SetParameter(New RParameter("col_name", 1))
+        ucrReceiverReferenceLevels.SetParameterIsString()
         ucrReceiverReferenceLevels.Selector = ucrSelectorForReferenceLevels
         ucrReceiverReferenceLevels.SetMeAsReceiver()
         ucrReceiverReferenceLevels.SetIncludedDataTypes({"factor"})
         ucrReceiverReferenceLevels.SetExcludedDataTypes({"ordered,factor"})
+
         ucrFactorReferenceLevels.SetParameter(New RParameter("new_ref_level", 2))
-        ucrSelectorForReferenceLevels.SetParameter(New RParameter("data_name", 0))
-        ucrSelectorForReferenceLevels.SetParameterIsString()
-        ucrReceiverReferenceLevels.SetParameter(New RParameter("col_name", 1))
-        ucrReceiverReferenceLevels.SetParameterIsString()
         ucrFactorReferenceLevels.SetReceiver(ucrReceiverReferenceLevels)
         ucrFactorReferenceLevels.SetAsSingleSelector()
     End Sub
@@ -56,20 +55,17 @@ Public Class dlgReferenceLevel
     Private Sub SetDefaults()
         clsSetRefLevel = New RFunction
         ucrSelectorForReferenceLevels.Reset()
-        ucrSelectorForReferenceLevels.Focus()
+
         clsSetRefLevel.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_factor_reference_level")
         ucrBase.clsRsyntax.SetBaseRFunction(clsSetRefLevel)
     End Sub
 
-    Private Sub SetDefaultDataFrame()
-        If strDefaultDataFrame <> "" Then
-            ucrSelectorForReferenceLevels.SetDataframe(strDefaultDataFrame)
-        End If
-        strDefaultDataFrame = ""
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrReceiverReferenceLevels.IsEmpty() = False Then
+        If Not ucrReceiverReferenceLevels.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -80,6 +76,13 @@ Public Class dlgReferenceLevel
         SetDefaults()
         SetRCodeforControls(True)
         TestOKEnabled()
+    End Sub
+
+    Private Sub SetDefaultDataFrame()
+        If strDefaultDataFrame <> "" Then
+            ucrSelectorForReferenceLevels.SetDataframe(strDefaultDataFrame)
+        End If
+        strDefaultDataFrame = ""
     End Sub
 
     Private Sub ucrReceiverReferenceLevels_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverReferenceLevels.ControlContentsChanged
