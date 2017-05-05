@@ -41,21 +41,6 @@ Public Class dlgBoxplot
         TestOkEnabled()
     End Sub
 
-    Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrSaveBoxplot.SetRCode(clsBaseOperator, bReset)
-        ucrSelectorBoxPlot.SetRCode(clsRggplotFunction, bReset)
-
-        ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
-        ucrChkVarwidth.SetRCode(clsRgeomPlotFunction, bReset)
-        'passes in +cordflip
-        ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
-        ucrVariablesAsFactorForBoxplot.SetRCode(clsRaesFunction, bReset)
-        ucrByFactorsReceiver.SetRCode(clsRaesFunction, bReset)
-        ucrSecondFactorReceiver.SetRCode(clsRaesFunction, bReset)
-        ucrPnlPlots.SetRCode(clsRgeomPlotFunction, bReset)
-
-    End Sub
-
     Private Sub InitialiseDialog()
         Dim clsCoordFlipFunc As New RFunction
         Dim clsCoordFlipParam As New RParameter
@@ -156,12 +141,33 @@ Public Class dlgBoxplot
         TempOptionsDisabledInMultipleVariablesCase()
         TestOkEnabled()
     End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrSaveBoxplot.SetRCode(clsBaseOperator, bReset)
+        ucrSelectorBoxPlot.SetRCode(clsRggplotFunction, bReset)
+
+        ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
+        ucrChkVarwidth.SetRCode(clsRgeomPlotFunction, bReset)
+        'passes in +cordflip
+        ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
+        ucrVariablesAsFactorForBoxplot.SetRCode(clsRaesFunction, bReset)
+        ucrByFactorsReceiver.SetRCode(clsRaesFunction, bReset)
+        ucrSecondFactorReceiver.SetRCode(clsRaesFunction, bReset)
+        ucrPnlPlots.SetRCode(clsRgeomPlotFunction, bReset)
+    End Sub
+
     Private Sub TestOkEnabled()
         If ucrVariablesAsFactorForBoxplot.IsEmpty OrElse Not ucrSaveBoxplot.IsComplete Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
         End If
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
@@ -205,38 +211,14 @@ Public Class dlgBoxplot
         'ucrVariablesAsFactorForBoxplot.SetReceiverStatus()
     End Sub
 
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
-        SetRCodeForControls(True)
-        TestOkEnabled()
-    End Sub
-
-    Private Sub ucrVariablesAsFactorForBoxplot_ControlContentsChanged() Handles ucrVariablesAsFactorForBoxplot.ControlContentsChanged
-        TempOptionsDisabledInMultipleVariablesCase()
-    End Sub
-
-    Private Sub TempOptionsDisabledInMultipleVariablesCase()
-        If ucrVariablesAsFactorForBoxplot.bSingleVariable Then
-            cmdBoxPlotOptions.Enabled = True
-            cmdOptions.Enabled = True
-        Else
-            cmdBoxPlotOptions.Enabled = False
-            cmdOptions.Enabled = False
-        End If
-    End Sub
-
-    Private Sub ucrPnlPlots_ControlValueChanged() Handles ucrPnlPlots.ControlValueChanged
-        SetGeomprefixFillColourAes()
-    End Sub
-
-    Private Sub SetGeomprefixFillColourAes()
+    Private Sub SetGeomPrefixFillColourAes()
         'Sets geom function, fill and colour aesthetics and ucrsave prefix
         If rdoBoxplot.Checked Then
             clsRgeomPlotFunction.SetRCommand("geom_boxplot")
             ucrSaveBoxplot.SetPrefix("Boxplot")
             ucrSecondFactorReceiver.ChangeParameterName("fill")
             cmdBoxPlotOptions.Text = "Boxplot Options"
-        ElseIf rdoJitter.Checked
+        ElseIf rdoJitter.Checked Then
             clsRgeomPlotFunction.SetRCommand("geom_jitter")
             ucrSaveBoxplot.SetPrefix("Jitter")
             ucrSecondFactorReceiver.ChangeParameterName("colour")
@@ -249,8 +231,25 @@ Public Class dlgBoxplot
         End If
     End Sub
 
+    Private Sub TempOptionsDisabledInMultipleVariablesCase()
+        If ucrVariablesAsFactorForBoxplot.bSingleVariable Then
+            cmdBoxPlotOptions.Enabled = True
+            cmdOptions.Enabled = True
+        Else
+            cmdBoxPlotOptions.Enabled = False
+            cmdOptions.Enabled = False
+        End If
+    End Sub
+
+    Private Sub ucrVariablesAsFactorForBoxplot_ControlContentsChanged() Handles ucrVariablesAsFactorForBoxplot.ControlContentsChanged
+        TempOptionsDisabledInMultipleVariablesCase()
+    End Sub
+
+    Private Sub ucrPnlPlots_ControlValueChanged() Handles ucrPnlPlots.ControlValueChanged
+        SetGeomprefixFillColourAes()
+    End Sub
+
     Private Sub ucrSaveBoxplot_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveBoxplot.ControlContentsChanged, ucrVariablesAsFactorForBoxplot.ControlContentsChanged
         TestOkEnabled()
     End Sub
-
 End Class
