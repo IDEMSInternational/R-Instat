@@ -29,6 +29,8 @@ Public Class dlgBoxplot
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
+        Else
+            'SetGeomprefixFillColourAes()
         End If
         If bReset Then
             SetDefaults()
@@ -62,7 +64,7 @@ Public Class dlgBoxplot
         ucrBase.iHelpTopicID = 436
         ucrBase.clsRsyntax.iCallType = 3
 
-        ucrSelectorBoxPlot.SetParameter(New RParameter("data"), 0)
+        ucrSelectorBoxPlot.SetParameter(New RParameter("data", 0))
         ucrSelectorBoxPlot.SetParameterIsrfunction()
 
         ucrPnlPlots.AddRadioButton(rdoViolin)
@@ -74,26 +76,27 @@ Public Class dlgBoxplot
         ucrPnlPlots.AddFunctionNamesCondition(rdoViolin, "geom_violin")
         ucrPnlPlots.AddToLinkedControls(ucrChkVarwidth, {rdoBoxplot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrByFactorsReceiver.Selector = ucrSelectorBoxPlot
-        ucrByFactorsReceiver.SetIncludedDataTypes({"factor"})
-        ucrByFactorsReceiver.SetParameter(New RParameter("x"))
-        ucrByFactorsReceiver.SetParameterIsString()
-        ucrByFactorsReceiver.bWithQuotes = False
-
-        ucrSecondFactorReceiver.Selector = ucrSelectorBoxPlot
-        ucrSecondFactorReceiver.SetIncludedDataTypes({"factor"})
-        ucrSecondFactorReceiver.SetParameter(New RParameter("fill"))
-        ucrSecondFactorReceiver.SetParameterIsString()
-        ucrSecondFactorReceiver.bWithQuotes = False
-        ucrSecondFactorReceiver.SetValuesToIgnore({Chr(34) & Chr(34)})
-        ucrSecondFactorReceiver.bAddParameterIfEmpty = True
-
         ucrVariablesAsFactorForBoxplot.SetFactorReceiver(ucrByFactorsReceiver)
         ucrVariablesAsFactorForBoxplot.Selector = ucrSelectorBoxPlot
         ucrVariablesAsFactorForBoxplot.SetIncludedDataTypes({"numeric"})
-        ucrVariablesAsFactorForBoxplot.SetParameter(New RParameter("y"))
+        ucrVariablesAsFactorForBoxplot.SetParameter(New RParameter("y", 0))
         ucrVariablesAsFactorForBoxplot.SetParameterIsString()
         ucrVariablesAsFactorForBoxplot.bWithQuotes = False
+
+        ucrByFactorsReceiver.Selector = ucrSelectorBoxPlot
+        ucrByFactorsReceiver.SetIncludedDataTypes({"factor"})
+        ucrByFactorsReceiver.SetParameter(New RParameter("x", 1))
+        ucrByFactorsReceiver.SetParameterIsString()
+        ucrByFactorsReceiver.bWithQuotes = False
+        ucrByFactorsReceiver.SetValuesToIgnore({Chr(34) & Chr(34)})
+        ucrByFactorsReceiver.bAddParameterIfEmpty = True
+
+        ucrSecondFactorReceiver.Selector = ucrSelectorBoxPlot
+        ucrSecondFactorReceiver.SetIncludedDataTypes({"factor"})
+        ucrSecondFactorReceiver.SetParameter(New RParameter("fill", 2))
+        ucrSecondFactorReceiver.SetParameterIsString()
+        ucrSecondFactorReceiver.bWithQuotes = False
+
 
         ucrChkVarwidth.SetText("Variable Width")
         ucrChkVarwidth.SetParameter(New RParameter("varwidth"))
@@ -153,17 +156,6 @@ Public Class dlgBoxplot
         TempOptionsDisabledInMultipleVariablesCase()
         TestOkEnabled()
     End Sub
-
-    Private Sub ChangeSavePrefixAndChkText()
-        If rdoBoxplot.Checked Then
-            ucrSaveBoxplot.SetPrefix("Boxplot")
-        ElseIf rdoJitter.Checked Then
-            ucrSaveBoxplot.SetPrefix("Jitter")
-        ElseIf rdoViolin.Checked Then
-            ucrSaveBoxplot.SetPrefix("Violin")
-        End If
-    End Sub
-
     Private Sub TestOkEnabled()
         If ucrVariablesAsFactorForBoxplot.IsEmpty OrElse Not ucrSaveBoxplot.IsComplete Then
             ucrBase.OKEnabled(False)
@@ -176,10 +168,6 @@ Public Class dlgBoxplot
         sdgPlots.SetDataFrame(strNewDataFrame:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         sdgPlots.ShowDialog()
         'Task: work on the link.
-    End Sub
-
-    Private Sub ucrSecondFactorReceiver_ControlContentsChanged() Handles ucrSecondFactorReceiver.ControlValueChanged
-        FillColourAes()
     End Sub
 
     Private Sub cmdBoxPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdBoxPlotOptions.Click
@@ -238,27 +226,31 @@ Public Class dlgBoxplot
     End Sub
 
     Private Sub ucrPnlPlots_ControlValueChanged() Handles ucrPnlPlots.ControlValueChanged
-        'Sets appropriate geom function depending with selection 
-        If rdoBoxplot.Checked Then
-            clsRgeomPlotFunction.SetRCommand("geom_boxplot")
-        ElseIf rdoJitter.Checked
-            clsRgeomPlotFunction.SetRCommand("geom_jitter")
-        Else
-            clsRgeomPlotFunction.SetRCommand("geom_violin")
-        End If
-        FillColourAes()
-        ChangeSavePrefixAndChkText()
+        SetGeomprefixFillColourAes()
     End Sub
 
-    Private Sub FillColourAes()
-        If rdoBoxplot.Checked OrElse rdoViolin.Checked Then
+    Private Sub SetGeomprefixFillColourAes()
+        'Sets geom function, fill and colour aesthetics and ucrsave prefix
+        If rdoBoxplot.Checked Then
+            clsRgeomPlotFunction.SetRCommand("geom_boxplot")
+            ucrSaveBoxplot.SetPrefix("Boxplot")
             ucrSecondFactorReceiver.ChangeParameterName("fill")
-        ElseIf rdoJitter.Checked Then
+            cmdBoxPlotOptions.Text = "Boxplot Options"
+        ElseIf rdoJitter.Checked
+            clsRgeomPlotFunction.SetRCommand("geom_jitter")
+            ucrSaveBoxplot.SetPrefix("Jitter")
             ucrSecondFactorReceiver.ChangeParameterName("colour")
+            cmdBoxPlotOptions.Text = "Jitter Options"
+        Else
+            clsRgeomPlotFunction.SetRCommand("geom_violin")
+            ucrSaveBoxplot.SetPrefix("Violin")
+            ucrSecondFactorReceiver.ChangeParameterName("fill")
+            cmdBoxPlotOptions.Text = "Violin Options"
         End If
     End Sub
 
     Private Sub ucrSaveBoxplot_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveBoxplot.ControlContentsChanged, ucrVariablesAsFactorForBoxplot.ControlContentsChanged
         TestOkEnabled()
     End Sub
+
 End Class
