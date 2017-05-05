@@ -55,23 +55,22 @@ Public Class dlgHistogram
         ucrPnlOptions.AddFunctionNamesCondition(rdoDensity, "geom_density")
         ucrPnlOptions.AddFunctionNamesCondition(rdoFrequencyPolygon, "geom_freqpoly")
 
-        ucrFactorReceiver.Selector = ucrHistogramSelector
-        ucrFactorReceiver.SetIncludedDataTypes({"factor"})
-        'can put in colour for density and polygon but fill for Histogram
-        ucrFactorReceiver.SetParameter(New RParameter("fill", 1))
-        ucrFactorReceiver.bWithQuotes = False
-        ucrFactorReceiver.SetParameterIsString()
-
         ucrHistogramSelector.SetParameter(New RParameter("data", 0))
         ucrHistogramSelector.SetParameterIsrfunction()
 
+        ucrFactorReceiver.SetParameter(New RParameter("fill", 1))
+        ucrFactorReceiver.Selector = ucrHistogramSelector
+        ucrFactorReceiver.SetIncludedDataTypes({"factor"})
+        'can put in colour for density and polygon but fill for Histogram
+        ucrFactorReceiver.bWithQuotes = False
+        ucrFactorReceiver.SetParameterIsString()
+
+        ucrVariablesAsFactorforHist.SetParameter(New RParameter("x", 0))
         ucrVariablesAsFactorforHist.SetFactorReceiver(ucrFactorReceiver)
         ucrVariablesAsFactorforHist.Selector = ucrHistogramSelector
         ucrVariablesAsFactorforHist.SetIncludedDataTypes({"numeric"})
-        ucrVariablesAsFactorforHist.SetParameter(New RParameter("x", 0))
         ucrVariablesAsFactorforHist.bWithQuotes = False
         ucrVariablesAsFactorforHist.SetParameterIsString()
-
 
         ucrSaveHist.SetPrefix("Histogram")
         ucrSaveHist.SetDataFrameSelector(ucrHistogramSelector.ucrAvailableDataFrames)
@@ -82,16 +81,15 @@ Public Class dlgHistogram
     End Sub
 
     Private Sub SetDefaults()
-        ucrHistogramSelector.Reset()
-        ucrSaveHist.Reset()
-
-        sdgPlots.Reset()
-        TempOptionsDisabledInMultipleVariablesCase()
-
         clsBaseOperator = New ROperator
         clsRggplotFunction = New RFunction
         clsRgeomPlotFunction = New RFunction
         clsRaesFunction = New RFunction
+
+        ucrHistogramSelector.Reset()
+        ucrSaveHist.Reset()
+        sdgPlots.Reset()
+        TempOptionsDisabledInMultipleVariablesCase()
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
@@ -113,7 +111,7 @@ Public Class dlgHistogram
         TestOkEnabled()
     End Sub
 
-    Private Sub SetRCodeForControls(bReset As Boolean)
+    Public Sub SetRCodeForControls(bReset As Boolean)
         ucrVariablesAsFactorforHist.SetRCode(clsRaesFunction, bReset)
         ucrFactorReceiver.SetRCode(clsRaesFunction, bReset)
         ucrSaveHist.SetRCode(clsBaseOperator, bReset)
@@ -122,7 +120,7 @@ Public Class dlgHistogram
     End Sub
 
     Private Sub TestOkEnabled()
-        'tests when ok can be enabled
+        'Tests when ok can be enabled
         If ucrVariablesAsFactorforHist.IsEmpty OrElse Not ucrSaveHist.IsComplete Then
             ucrBase.OKEnabled(False)
         Else
@@ -190,6 +188,10 @@ Public Class dlgHistogram
         SetDialogOptions()
     End Sub
 
+    Private Sub ucrVariablesAsFactorforHist_SelectionChanged() Handles ucrVariablesAsFactorforHist.SelectionChanged
+        TempOptionsDisabledInMultipleVariablesCase()
+    End Sub
+
     Private Sub rdoHistogram_KeyPress(sender As Object, e As KeyPressEventArgs) Handles rdoHistogram.KeyPress
         If e.KeyChar = vbCr Then
             rdoHistogram.Checked = True
@@ -206,10 +208,6 @@ Public Class dlgHistogram
         If e.KeyChar = vbCr Then
             rdoFrequencyPolygon.Checked = True
         End If
-    End Sub
-
-    Private Sub ucrVariablesAsFactorforHist_SelectionChanged() Handles ucrVariablesAsFactorforHist.SelectionChanged
-        TempOptionsDisabledInMultipleVariablesCase()
     End Sub
 
     Private Sub ControlsValueChanged() Handles ucrVariablesAsFactorforHist.ControlContentsChanged, ucrSaveHist.ControlContentsChanged
