@@ -39,10 +39,10 @@ Public Class dlgTransformClimatic
         ucrPnlTransform.AddRadioButton(rdoSpell)
         ucrPnlTransform.AddRadioButton(rdoWaterBalance)
 
-        ucrPnlTransform.AddFunctionNamesCondition(rdoSum, "str_count")
-        ucrPnlTransform.AddFunctionNamesCondition(rdoCount, "str_extract")
-        ucrPnlTransform.AddFunctionNamesCondition(rdoSpell, "str_detect")
-        ucrPnlTransform.AddFunctionNamesCondition(rdoWaterBalance, "str_locate")
+        ucrPnlTransform.AddFunctionNamesCondition(rdoSum, "")
+        ucrPnlTransform.AddFunctionNamesCondition(rdoCount, "")
+        ucrPnlTransform.AddFunctionNamesCondition(rdoSpell, "")
+        ucrPnlTransform.AddFunctionNamesCondition(rdoWaterBalance, "")
 
     End Sub
 
