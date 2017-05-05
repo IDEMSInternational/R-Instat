@@ -38,7 +38,7 @@ Public Class dlgExportRWorkspace
         ucrSelectorForDataFrames.SetItemType("dataframe")
 
         ucrReceiverMultiple.SetParameter(New RParameter("data_names", 0))
-        ucrReceiverMultiple.SetParameterIsRFunction()
+        ucrReceiverMultiple.SetParameterIsString()
         ucrReceiverMultiple.Selector = ucrSelectorForDataFrames
 
         ucrInputExportFile.SetParameter(New RParameter("file", 1))
