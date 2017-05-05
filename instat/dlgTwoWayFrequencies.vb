@@ -37,7 +37,7 @@ Public Class dlgTwoWayFrequencies
 
     Private Sub InitialiseDialog()
         'HelpID
-        'ucrBase.iHelpTopicID = 
+        ucrBase.iHelpTopicID = 415
         Me.Size = New Size(426, 411)
         ucrReceiverColumnFactor.Selector = ucrSelectorTwoWayFrequencies
         ucrReceiverRowFactor.Selector = ucrSelectorTwoWayFrequencies
