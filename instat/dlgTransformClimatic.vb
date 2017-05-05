@@ -78,9 +78,21 @@ Public Class dlgTransformClimatic
         ucrInputSum.SetItems(dctInputSumPairs)
 
         ucrNudSumOver.SetParameter(New RParameter("sum_over"))
-        ucrNudSumOver.SetMinMax(1, 31)
+        ucrNudSumOver.SetMinMax(1, 366)
         ucrNudSumOver.Increment = 1
         'ucrNudSumOver.SetRDefault("3")
+        ucrNudCountOver.SetParameter(New RParameter("count_over"))
+        ucrNudCountOver.SetMinMax(1, 366)
+        ucrNudCountOver.Increment = 1
+
+        ucrInputSpellLower.SetValidationTypeAsNumeric()
+        ucrInputSpellLower.SetParameter(New RParameter("spell_lower"))
+
+        ucrInputSpellUpper.SetValidationTypeAsNumeric()
+        ucrInputSpellUpper.SetParameter(New RParameter("spell_upper"))
+
+        ucrInputEvaporation.SetValidationTypeAsNumeric()
+        ucrInputSpellUpper.SetParameter(New RParameter("spell_upper"))
 
         ucrSaveTransform.SetDataFrameSelector(ucrSelectorTransform.ucrAvailableDataFrames)
         ucrSaveTransform.SetLabelText("New Column Name:")
