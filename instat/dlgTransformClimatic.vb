@@ -17,6 +17,7 @@ Imports instat.Translations
 Public Class dlgTransformClimatic
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
+    Private clsSumFunction, clsCountFunction, clsSpellFunction, clsWaterBalanceFunction As New RFunction
     Private Sub dlgTransformClimatic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             InitialiseDialog()
@@ -60,9 +61,20 @@ Public Class dlgTransformClimatic
         ucrPnlTransform.AddFunctionNamesCondition(rdoSpell, "")
         ucrPnlTransform.AddFunctionNamesCondition(rdoWaterBalance, "")
 
+        ucrSaveTransform.SetDataFrameSelector(ucrSelectorTransform.ucrAvailableDataFrames)
+        ucrSaveTransform.SetLabelText("New Column Name:")
+        ucrSaveTransform.SetIsTextBox()
+        ucrSaveTransform.SetPrefix("Sum")
+        ucrSaveTransform.SetSaveTypeAsColumn()
     End Sub
 
     Private Sub SetDefaults()
+        clsSumFunction = New RFunction
+        clsCountFunction = New RFunction
+        clsSpellFunction = New RFunction
+        clsWaterBalanceFunction = New RFunction
+        ucrSaveTransform.Reset()
+        ucrSelectorTransform.Reset()
 
     End Sub
 
