@@ -20,7 +20,7 @@ Public Class dlgCopyDataFrame
     Private bReset As Boolean = True
     Dim strSelectedDataFrame As String = ""
     Private clsCopySheet As New RFunction
-    Private Sub dlgCopySheet_Load(sender As Object, e As EventArgs) Handles Me.Load
+    Private Sub dlgCopyDataFrame_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -42,8 +42,8 @@ Public Class dlgCopyDataFrame
         ucrDataFrameCopySheets.SetParameterIsString()
 
         'ucrNewName
-        ucrInputNewName.SetParameter(New RParameter("new_name", 1))
-        ucrInputNewName.SetValidationTypeAsRVariable()
+        ucrInputNewDataFrameName.SetParameter(New RParameter("new_name", 1))
+        ucrInputNewDataFrameName.SetValidationTypeAsRVariable()
 
         ucrInputLabel.SetParameter(New RParameter("label", 2))
     End Sub
@@ -51,7 +51,7 @@ Public Class dlgCopyDataFrame
     Private Sub SetDefaults()
         clsCopySheet = New RFunction
 
-        ucrInputNewName.Reset()
+        ucrInputNewDataFrameName.Reset()
         ucrDataFrameCopySheets.Reset()
         ucrInputLabel.Reset()
         ucrInputLabel.SetName("")
@@ -67,7 +67,7 @@ Public Class dlgCopyDataFrame
     End Sub
 
     Private Sub TestOKEnabled()
-        If ((Not ucrInputNewName.IsEmpty) AndAlso (ucrDataFrameCopySheets.cboAvailableDataFrames.Text <> "")) AndAlso (ucrDataFrameCopySheets.cboAvailableDataFrames.SelectedItem <> ucrInputNewName.GetText) Then
+        If ((Not ucrInputNewDataFrameName.IsEmpty) AndAlso (ucrDataFrameCopySheets.cboAvailableDataFrames.Text <> "")) AndAlso (ucrDataFrameCopySheets.cboAvailableDataFrames.SelectedItem <> ucrInputNewDataFrameName.GetText) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -81,8 +81,8 @@ Public Class dlgCopyDataFrame
     End Sub
 
     Private Sub CheckAutoName()
-        If Not ucrInputNewName.bUserTyped Then
-            ucrInputNewName.SetName(ucrDataFrameCopySheets.cboAvailableDataFrames.Text & "_copy")
+        If Not ucrInputNewDataFrameName.bUserTyped Then
+            ucrInputNewDataFrameName.SetName(ucrDataFrameCopySheets.cboAvailableDataFrames.Text & "_copy")
         End If
     End Sub
 
@@ -95,7 +95,7 @@ Public Class dlgCopyDataFrame
         CheckAutoName()
     End Sub
 
-    Private Sub Control_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameCopySheets.ControlContentsChanged, ucrInputNewName.ControlContentsChanged
+    Private Sub Control_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameCopySheets.ControlContentsChanged, ucrInputNewDataFrameName.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
