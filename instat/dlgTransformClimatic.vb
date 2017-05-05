@@ -33,6 +33,17 @@ Public Class dlgTransformClimatic
 
     Private Sub InitialiseDialog()
 
+        'ucrRdoOptions
+        ucrPnlTransform.AddRadioButton(rdoSum)
+        ucrPnlTransform.AddRadioButton(rdoCount)
+        ucrPnlTransform.AddRadioButton(rdoSpell)
+        ucrPnlTransform.AddRadioButton(rdoWaterBalance)
+
+        ucrPnlTransform.AddFunctionNamesCondition(rdoSum, "str_count")
+        ucrPnlTransform.AddFunctionNamesCondition(rdoCount, "str_extract")
+        ucrPnlTransform.AddFunctionNamesCondition(rdoSpell, "str_detect")
+        ucrPnlTransform.AddFunctionNamesCondition(rdoWaterBalance, "str_locate")
+
     End Sub
 
     Private Sub SetDefaults()

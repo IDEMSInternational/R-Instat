@@ -61,6 +61,7 @@ Partial Class dlgTransformClimatic
         Me.ucrInputEvaporation = New instat.ucrInputTextBox()
         Me.ucrInputSpellLower = New instat.ucrInputTextBox()
         Me.ucrInputSpellUpper = New instat.ucrInputTextBox()
+        Me.ucrSaveTransform = New instat.ucrSave()
         Me.grpsum.SuspendLayout()
         Me.grpWaterBalance.SuspendLayout()
         Me.grpSpell.SuspendLayout()
@@ -455,7 +456,7 @@ Partial Class dlgTransformClimatic
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(43, 412)
+        Me.ucrBase.Location = New System.Drawing.Point(38, 438)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(402, 52)
         Me.ucrBase.TabIndex = 0
@@ -500,11 +501,20 @@ Partial Class dlgTransformClimatic
         Me.ucrInputSpellUpper.Size = New System.Drawing.Size(63, 21)
         Me.ucrInputSpellUpper.TabIndex = 57
         '
+        'ucrSaveTransform
+        '
+        Me.ucrSaveTransform.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.ucrSaveTransform.Location = New System.Drawing.Point(43, 413)
+        Me.ucrSaveTransform.Name = "ucrSaveTransform"
+        Me.ucrSaveTransform.Size = New System.Drawing.Size(423, 24)
+        Me.ucrSaveTransform.TabIndex = 48
+        '
         'dlgTransformClimatic
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(650, 476)
+        Me.ClientSize = New System.Drawing.Size(650, 492)
+        Me.Controls.Add(Me.ucrSaveTransform)
         Me.Controls.Add(Me.grpWaterBalance)
         Me.Controls.Add(Me.grpSpell)
         Me.Controls.Add(Me.grpCount)
@@ -586,4 +596,5 @@ Partial Class dlgTransformClimatic
     Friend WithEvents lblWBEvaporation As Label
     Friend WithEvents ucrInputSpellUpper As ucrInputTextBox
     Friend WithEvents ucrInputSpellLower As ucrInputTextBox
+    Friend WithEvents ucrSaveTransform As ucrSave
 End Class
