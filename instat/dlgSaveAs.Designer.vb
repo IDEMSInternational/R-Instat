@@ -23,32 +23,23 @@ Partial Class dlgSaveAs
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
-        Me.cmdChooseFile = New System.Windows.Forms.Button()
         Me.lblSaveDataTo = New System.Windows.Forms.Label()
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
-        Me.txtConfirm = New System.Windows.Forms.TextBox()
+        Me.cmdChooseFile = New System.Windows.Forms.Button()
+        Me.lblConfirm = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 67)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 56)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
         '
-        'cmdChooseFile
-        '
-        Me.cmdChooseFile.Location = New System.Drawing.Point(415, 12)
-        Me.cmdChooseFile.Name = "cmdChooseFile"
-        Me.cmdChooseFile.Size = New System.Drawing.Size(91, 20)
-        Me.cmdChooseFile.TabIndex = 17
-        Me.cmdChooseFile.Text = "Choose File"
-        Me.cmdChooseFile.UseVisualStyleBackColor = True
-        '
         'lblSaveDataTo
         '
         Me.lblSaveDataTo.AutoSize = True
-        Me.lblSaveDataTo.Location = New System.Drawing.Point(8, 15)
+        Me.lblSaveDataTo.Location = New System.Drawing.Point(10, 15)
         Me.lblSaveDataTo.Name = "lblSaveDataTo"
         Me.lblSaveDataTo.Size = New System.Drawing.Size(77, 13)
         Me.lblSaveDataTo.TabIndex = 18
@@ -56,26 +47,37 @@ Partial Class dlgSaveAs
         '
         'ucrInputFilePath
         '
+        Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
+        Me.ucrInputFilePath.IsMultiline = False
         Me.ucrInputFilePath.IsReadOnly = False
         Me.ucrInputFilePath.Location = New System.Drawing.Point(91, 12)
         Me.ucrInputFilePath.Name = "ucrInputFilePath"
         Me.ucrInputFilePath.Size = New System.Drawing.Size(320, 21)
         Me.ucrInputFilePath.TabIndex = 19
         '
-        'txtConfirm
+        'cmdChooseFile
         '
-        Me.txtConfirm.Location = New System.Drawing.Point(91, 39)
-        Me.txtConfirm.Name = "txtConfirm"
-        Me.txtConfirm.ReadOnly = True
-        Me.txtConfirm.Size = New System.Drawing.Size(320, 20)
-        Me.txtConfirm.TabIndex = 21
+        Me.cmdChooseFile.Location = New System.Drawing.Point(415, 12)
+        Me.cmdChooseFile.Name = "cmdChooseFile"
+        Me.cmdChooseFile.Size = New System.Drawing.Size(65, 21)
+        Me.cmdChooseFile.TabIndex = 17
+        Me.cmdChooseFile.Text = "Browse..."
+        Me.cmdChooseFile.UseVisualStyleBackColor = True
+        '
+        'lblConfirm
+        '
+        Me.lblConfirm.AutoSize = True
+        Me.lblConfirm.Location = New System.Drawing.Point(91, 40)
+        Me.lblConfirm.Name = "lblConfirm"
+        Me.lblConfirm.Size = New System.Drawing.Size(0, 13)
+        Me.lblConfirm.TabIndex = 20
         '
         'dlgSaveAs
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(515, 125)
-        Me.Controls.Add(Me.txtConfirm)
+        Me.ClientSize = New System.Drawing.Size(482, 116)
+        Me.Controls.Add(Me.lblConfirm)
         Me.Controls.Add(Me.ucrInputFilePath)
         Me.Controls.Add(Me.lblSaveDataTo)
         Me.Controls.Add(Me.cmdChooseFile)
@@ -85,8 +87,8 @@ Partial Class dlgSaveAs
         Me.MinimizeBox = False
         Me.Name = "dlgSaveAs"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "Save_As"
-        Me.Text = "Save As"
+        Me.Tag = "Save_Data_As"
+        Me.Text = "Save  Data As"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -94,7 +96,7 @@ Partial Class dlgSaveAs
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents lblSaveDataTo As Label
-    Friend WithEvents cmdChooseFile As Button
     Friend WithEvents ucrInputFilePath As ucrInputTextBox
-    Friend WithEvents txtConfirm As TextBox
+    Friend WithEvents cmdChooseFile As Button
+    Friend WithEvents lblConfirm As Label
 End Class

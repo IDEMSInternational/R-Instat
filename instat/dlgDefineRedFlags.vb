@@ -22,6 +22,7 @@ Public Class dlgDefineRedFlags
     Dim strSelectedColumn As String = ""
     Dim strSelectedDataFrame As String = ""
     Private clsRedFlag As New RFunction
+
     Private Sub dlgDefineRedFlags_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -39,22 +40,26 @@ Public Class dlgDefineRedFlags
     End Sub
 
     Private Sub SetDefaults()
-        'Reset 
-        ucrSelectorDefineRedFlag.Reset()
         clsRedFlag = New RFunction
+
+        ucrSelectorDefineRedFlag.Reset()
+
         clsRedFlag.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$define_red_flags")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRedFlag)
     End Sub
 
     Private Sub InitialiseDialog()
-        'helpID
-        '  ucrBase.iHelpTopicID =
+        ucrBase.iHelpTopicID = 202
         'selector
         ucrSelectorDefineRedFlag.SetParameter(New RParameter("data_name", 0))
         ucrSelectorDefineRedFlag.SetParameterIsString()
+
         'ucrreceiver
         ucrReceiverRedFlag.SetParameter(New RParameter("red_flags", 1))
         ucrReceiverRedFlag.SetParameterIsString()
+
+        ucrReceiverRedFlag.Selector = ucrSelectorDefineRedFlag
+        ucrReceiverRedFlag.SetMeAsReceiver()
     End Sub
 
     Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
