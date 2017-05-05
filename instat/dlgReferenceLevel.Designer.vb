@@ -34,15 +34,15 @@ Partial Class dlgReferenceLevel
         Me.ucrBase.Location = New System.Drawing.Point(10, 250)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.TabIndex = 4
         '
         'lblFactorSelected
         '
         Me.lblFactorSelected.AutoSize = True
-        Me.lblFactorSelected.Location = New System.Drawing.Point(256, 19)
+        Me.lblFactorSelected.Location = New System.Drawing.Point(256, 22)
         Me.lblFactorSelected.Name = "lblFactorSelected"
         Me.lblFactorSelected.Size = New System.Drawing.Size(85, 13)
-        Me.lblFactorSelected.TabIndex = 4
+        Me.lblFactorSelected.TabIndex = 1
         Me.lblFactorSelected.Tag = "Factor_Selected:"
         Me.lblFactorSelected.Text = "Factor Selected:"
         '
@@ -54,16 +54,18 @@ Partial Class dlgReferenceLevel
         Me.ucrSelectorForReferenceLevels.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForReferenceLevels.Name = "ucrSelectorForReferenceLevels"
         Me.ucrSelectorForReferenceLevels.Size = New System.Drawing.Size(242, 194)
-        Me.ucrSelectorForReferenceLevels.TabIndex = 8
+        Me.ucrSelectorForReferenceLevels.TabIndex = 0
         '
         'ucrReceiverReferenceLevels
         '
-        Me.ucrReceiverReferenceLevels.Location = New System.Drawing.Point(255, 34)
+        Me.ucrReceiverReferenceLevels.frmParent = Me
+        Me.ucrReceiverReferenceLevels.Location = New System.Drawing.Point(255, 37)
         Me.ucrReceiverReferenceLevels.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverReferenceLevels.Name = "ucrReceiverReferenceLevels"
         Me.ucrReceiverReferenceLevels.Selector = Nothing
-        Me.ucrReceiverReferenceLevels.Size = New System.Drawing.Size(106, 26)
-        Me.ucrReceiverReferenceLevels.TabIndex = 9
+        Me.ucrReceiverReferenceLevels.Size = New System.Drawing.Size(127, 26)
+        Me.ucrReceiverReferenceLevels.TabIndex = 2
+        Me.ucrReceiverReferenceLevels.ucrSelector = Nothing
         '
         'ucrFactorReferenceLevels
         '
@@ -74,13 +76,13 @@ Partial Class dlgReferenceLevel
         Me.ucrFactorReferenceLevels.Name = "ucrFactorReferenceLevels"
         Me.ucrFactorReferenceLevels.shtCurrSheet = Nothing
         Me.ucrFactorReferenceLevels.Size = New System.Drawing.Size(267, 181)
-        Me.ucrFactorReferenceLevels.TabIndex = 7
+        Me.ucrFactorReferenceLevels.TabIndex = 3
         '
         'dlgReferenceLevel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(531, 309)
+        Me.ClientSize = New System.Drawing.Size(531, 305)
         Me.Controls.Add(Me.ucrReceiverReferenceLevels)
         Me.Controls.Add(Me.ucrSelectorForReferenceLevels)
         Me.Controls.Add(Me.ucrFactorReferenceLevels)

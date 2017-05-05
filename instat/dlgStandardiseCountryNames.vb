@@ -40,8 +40,7 @@ Public Class dlgStandardiseCountryNames
     End Sub
 
     Private Sub InitialiseDialog()
-        'helpID
-        '  ucrBase.iHelpTopicID =
+        ucrBase.iHelpTopicID = 530
 
         'selector
         ucrSelectorStandardiseCountry.SetParameter(New RParameter("data_name", 0))
