@@ -38,9 +38,13 @@ Partial Class dlgTransformClimatic
         Me.lblSumOver = New System.Windows.Forms.Label()
         Me.ucrInputSum = New instat.ucrInputComboBox()
         Me.grpWaterBalance = New System.Windows.Forms.GroupBox()
+        Me.ucrInputEvaporation = New instat.ucrInputTextBox()
+        Me.lblWBEvaporation = New System.Windows.Forms.Label()
         Me.ucrNudWBCapacity = New instat.ucrNud()
         Me.lblWBCapacity = New System.Windows.Forms.Label()
         Me.grpSpell = New System.Windows.Forms.GroupBox()
+        Me.ucrInputSpellUpper = New instat.ucrInputTextBox()
+        Me.ucrInputSpellLower = New instat.ucrInputTextBox()
         Me.lblSpellAnd = New System.Windows.Forms.Label()
         Me.lblValuesBetween = New System.Windows.Forms.Label()
         Me.grpCount = New System.Windows.Forms.GroupBox()
@@ -57,10 +61,6 @@ Partial Class dlgTransformClimatic
         Me.ucrReceiverDOY = New instat.ucrReceiverSingle()
         Me.ucrReceiverData = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblWBEvaporation = New System.Windows.Forms.Label()
-        Me.ucrInputEvaporation = New instat.ucrInputTextBox()
-        Me.ucrInputSpellLower = New instat.ucrInputTextBox()
-        Me.ucrInputSpellUpper = New instat.ucrInputTextBox()
         Me.ucrSaveTransform = New instat.ucrSave()
         Me.grpsum.SuspendLayout()
         Me.grpWaterBalance.SuspendLayout()
@@ -262,6 +262,26 @@ Partial Class dlgTransformClimatic
         Me.grpWaterBalance.TabStop = False
         Me.grpWaterBalance.Text = "Water Balance"
         '
+        'ucrInputEvaporation
+        '
+        Me.ucrInputEvaporation.AddQuotesIfUnrecognised = True
+        Me.ucrInputEvaporation.IsMultiline = False
+        Me.ucrInputEvaporation.IsReadOnly = False
+        Me.ucrInputEvaporation.Location = New System.Drawing.Point(210, 19)
+        Me.ucrInputEvaporation.Name = "ucrInputEvaporation"
+        Me.ucrInputEvaporation.Size = New System.Drawing.Size(63, 21)
+        Me.ucrInputEvaporation.TabIndex = 49
+        '
+        'lblWBEvaporation
+        '
+        Me.lblWBEvaporation.AutoSize = True
+        Me.lblWBEvaporation.Location = New System.Drawing.Point(140, 20)
+        Me.lblWBEvaporation.Name = "lblWBEvaporation"
+        Me.lblWBEvaporation.Size = New System.Drawing.Size(64, 13)
+        Me.lblWBEvaporation.TabIndex = 48
+        Me.lblWBEvaporation.Tag = "Evaporation"
+        Me.lblWBEvaporation.Text = "Evaporation"
+        '
         'ucrNudWBCapacity
         '
         Me.ucrNudWBCapacity.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
@@ -296,6 +316,26 @@ Partial Class dlgTransformClimatic
         Me.grpSpell.TabIndex = 47
         Me.grpSpell.TabStop = False
         Me.grpSpell.Text = "Spell"
+        '
+        'ucrInputSpellUpper
+        '
+        Me.ucrInputSpellUpper.AddQuotesIfUnrecognised = True
+        Me.ucrInputSpellUpper.IsMultiline = False
+        Me.ucrInputSpellUpper.IsReadOnly = False
+        Me.ucrInputSpellUpper.Location = New System.Drawing.Point(186, 12)
+        Me.ucrInputSpellUpper.Name = "ucrInputSpellUpper"
+        Me.ucrInputSpellUpper.Size = New System.Drawing.Size(63, 21)
+        Me.ucrInputSpellUpper.TabIndex = 57
+        '
+        'ucrInputSpellLower
+        '
+        Me.ucrInputSpellLower.AddQuotesIfUnrecognised = True
+        Me.ucrInputSpellLower.IsMultiline = False
+        Me.ucrInputSpellLower.IsReadOnly = False
+        Me.ucrInputSpellLower.Location = New System.Drawing.Point(88, 10)
+        Me.ucrInputSpellLower.Name = "ucrInputSpellLower"
+        Me.ucrInputSpellLower.Size = New System.Drawing.Size(63, 21)
+        Me.ucrInputSpellLower.TabIndex = 56
         '
         'lblSpellAnd
         '
@@ -460,46 +500,6 @@ Partial Class dlgTransformClimatic
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(402, 52)
         Me.ucrBase.TabIndex = 0
-        '
-        'lblWBEvaporation
-        '
-        Me.lblWBEvaporation.AutoSize = True
-        Me.lblWBEvaporation.Location = New System.Drawing.Point(140, 20)
-        Me.lblWBEvaporation.Name = "lblWBEvaporation"
-        Me.lblWBEvaporation.Size = New System.Drawing.Size(64, 13)
-        Me.lblWBEvaporation.TabIndex = 48
-        Me.lblWBEvaporation.Tag = "Evaporation"
-        Me.lblWBEvaporation.Text = "Evaporation"
-        '
-        'ucrInputEvaporation
-        '
-        Me.ucrInputEvaporation.AddQuotesIfUnrecognised = True
-        Me.ucrInputEvaporation.IsMultiline = False
-        Me.ucrInputEvaporation.IsReadOnly = False
-        Me.ucrInputEvaporation.Location = New System.Drawing.Point(210, 19)
-        Me.ucrInputEvaporation.Name = "ucrInputEvaporation"
-        Me.ucrInputEvaporation.Size = New System.Drawing.Size(63, 21)
-        Me.ucrInputEvaporation.TabIndex = 49
-        '
-        'ucrInputSpellLower
-        '
-        Me.ucrInputSpellLower.AddQuotesIfUnrecognised = True
-        Me.ucrInputSpellLower.IsMultiline = False
-        Me.ucrInputSpellLower.IsReadOnly = False
-        Me.ucrInputSpellLower.Location = New System.Drawing.Point(88, 10)
-        Me.ucrInputSpellLower.Name = "ucrInputSpellLower"
-        Me.ucrInputSpellLower.Size = New System.Drawing.Size(63, 21)
-        Me.ucrInputSpellLower.TabIndex = 56
-        '
-        'ucrInputSpellUpper
-        '
-        Me.ucrInputSpellUpper.AddQuotesIfUnrecognised = True
-        Me.ucrInputSpellUpper.IsMultiline = False
-        Me.ucrInputSpellUpper.IsReadOnly = False
-        Me.ucrInputSpellUpper.Location = New System.Drawing.Point(186, 12)
-        Me.ucrInputSpellUpper.Name = "ucrInputSpellUpper"
-        Me.ucrInputSpellUpper.Size = New System.Drawing.Size(63, 21)
-        Me.ucrInputSpellUpper.TabIndex = 57
         '
         'ucrSaveTransform
         '

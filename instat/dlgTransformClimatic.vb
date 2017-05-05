@@ -13,6 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 Public Class dlgTransformClimatic
     Private bFirstload As Boolean = True
@@ -78,6 +79,10 @@ Public Class dlgTransformClimatic
 
     End Sub
 
+    Private Sub ucrPnlTransform_Load(sender As Object, e As EventArgs) Handles ucrPnlTransform.Load
+
+    End Sub
+
     Private Sub SetRCodeForControls(bReset As Boolean)
 
     End Sub
@@ -92,4 +97,15 @@ Public Class dlgTransformClimatic
         TestOkEnabled()
     End Sub
 
+    Private Sub ucrPnlTransform_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlTransform.ControlContentsChanged
+        If rdoSum.Checked Then
+            ucrSaveTransform.SetPrefix("Sum")
+        ElseIf rdoCount.Checked Then
+            ucrSaveTransform.SetPrefix("Count")
+        ElseIf rdoSpell.Checked Then
+            ucrSaveTransform.SetPrefix("Spell")
+        ElseIf rdoWaterBalance.Checked Then
+            ucrSaveTransform.SetPrefix("Water_balance")
+        End If
+    End Sub
 End Class
