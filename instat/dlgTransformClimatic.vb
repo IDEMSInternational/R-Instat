@@ -32,8 +32,24 @@ Public Class dlgTransformClimatic
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrReceiverStation.Selector = ucrSelectorTransform
+        ucrReceiverYear.Selector = ucrSelectorTransform
+        ucrReceiverDate.Selector = ucrSelectorTransform
+        ucrReceiverDOY.Selector = ucrSelectorTransform
+        ucrReceiverData.Selector = ucrSelectorTransform
+        ucrReceiverDate.SetMeAsReceiver()
+        ucrReceiverStation.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "station" & Chr(34)})
+        ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
+        ucrReceiverDOY.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "doy" & Chr(34)})
+        'this is not right
+        ucrReceiverData.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "rain" & Chr(34)})
+        ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
+        ucrReceiverStation.bAutoFill = True
+        ucrReceiverDate.bAutoFill = True
+        ucrReceiverDOY.bAutoFill = True
+        ucrReceiverData.bAutoFill = True
+        ucrReceiverYear.bAutoFill = True
 
-        'ucrRdoOptions
         ucrPnlTransform.AddRadioButton(rdoSum)
         ucrPnlTransform.AddRadioButton(rdoCount)
         ucrPnlTransform.AddRadioButton(rdoSpell)
