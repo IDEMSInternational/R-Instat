@@ -33,10 +33,6 @@ Public Class dlgExportRWorkspace
         TestOkEnabled()
     End Sub
 
-    Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-    End Sub
-
     Private Sub InitialiseDialog()
 
         ucrSelectorForDataFrames.SetItemType("dataframe")
@@ -61,8 +57,6 @@ Public Class dlgExportRWorkspace
         ucrChkModels.SetText("Models")
         ucrChkModels.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkModels.SetRDefault("FALSE")
-
-
     End Sub
 
     Private Sub SetDefaults()
@@ -74,6 +68,24 @@ Public Class dlgExportRWorkspace
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$export_workspace")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
+    Private Sub TestOkEnabled()
+        If Not ucrInputExportFile.IsEmpty AndAlso Not ucrReceiverMultiple.IsEmpty Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
     End Sub
 
     Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
@@ -93,22 +105,7 @@ Public Class dlgExportRWorkspace
         cmdBrowse_Click(sender, e)
     End Sub
 
-    Private Sub TestOkEnabled()
-        If Not ucrInputExportFile.IsEmpty AndAlso Not ucrReceiverMultiple.IsEmpty Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
-    End Sub
-
     Private Sub ucrInputExportFile_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrInputExportFile.ControlContentsChanged, ucrReceiverMultiple.ControlContentsChanged
         TestOkEnabled()
     End Sub
-
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
-        SetRCodeForControls(True)
-        TestOkEnabled()
-    End Sub
-
 End Class
