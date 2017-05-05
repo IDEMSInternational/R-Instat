@@ -1,47 +1,47 @@
 instat_object <- R6Class("instat_object",
-                  public = list(
-                    initialize = function(data_tables = list(), instat_obj_metadata = list(), 
-                                          data_tables_variables_metadata = rep(list(data.frame()),length(data_tables)),
-                                          data_tables_metadata = rep(list(list()),length(data_tables)),
-                                          data_tables_filters = rep(list(list()),length(data_tables)),
-                                          imported_from = as.list(rep("",length(data_tables))),
-                                          messages=TRUE, convert=TRUE, create=TRUE)
-{ 
-    self$set_meta(instat_obj_metadata)
-    self$set_objects(list())
-                      
-    if (missing(data_tables) || length(data_tables) == 0) {
-    self$set_data_objects(list())
-    }
-                      
-    else {
-    self$import_data(data_tables=data_tables, data_tables_variables_metadata=data_tables_variables_metadata, 
-    data_tables_metadata=data_tables_metadata, 
-    imported_from=imported_from, messages=messages, convert=convert, create=create, data_tables_filters = data_tables_filters)
-    }
-                      
-    private$.data_objects_changed <- FALSE
-}
-                ),
-                private = list(
-                  .data_objects = list(),
-                  .metadata = list(),
-                  .objects = list(),
-                  .links = list(),
-                  .data_objects_changed = FALSE,
-                  .database_connection = NULL
-                ),
-                active = list(
-                  data_objects_changed = function(new_value) {
-                    if(missing(new_value)) return(private$.data_objects_changed)
-                    else {
-                      if(new_value != TRUE && new_value != FALSE) stop("new_value must be TRUE or FALSE")
-                      private$.data_objects_changed <- new_value
-                      #TODO is this behaviour we want?
-                      invisible(sapply(self$get_data_objects(), function(x) x$data_changed <- new_value))
-                    }
-                  }
-                )
+                         public = list(
+                           initialize = function(data_tables = list(), instat_obj_metadata = list(), 
+                                                 data_tables_variables_metadata = rep(list(data.frame()),length(data_tables)),
+                                                 data_tables_metadata = rep(list(list()),length(data_tables)),
+                                                 data_tables_filters = rep(list(list()),length(data_tables)),
+                                                 imported_from = as.list(rep("",length(data_tables))),
+                                                 messages=TRUE, convert=TRUE, create=TRUE)
+                           { 
+                             self$set_meta(instat_obj_metadata)
+                             self$set_objects(list())
+                             
+                             if (missing(data_tables) || length(data_tables) == 0) {
+                               self$set_data_objects(list())
+                             }
+                             
+                             else {
+                               self$import_data(data_tables=data_tables, data_tables_variables_metadata=data_tables_variables_metadata, 
+                                                data_tables_metadata=data_tables_metadata, 
+                                                imported_from=imported_from, messages=messages, convert=convert, create=create, data_tables_filters = data_tables_filters)
+                             }
+                             
+                             private$.data_objects_changed <- FALSE
+                           }
+                         ),
+                         private = list(
+                           .data_objects = list(),
+                           .metadata = list(),
+                           .objects = list(),
+                           .links = list(),
+                           .data_objects_changed = FALSE,
+                           .database_connection = NULL
+                         ),
+                         active = list(
+                           data_objects_changed = function(new_value) {
+                             if(missing(new_value)) return(private$.data_objects_changed)
+                             else {
+                               if(new_value != TRUE && new_value != FALSE) stop("new_value must be TRUE or FALSE")
+                               private$.data_objects_changed <- new_value
+                               #TODO is this behaviour we want?
+                               invisible(sapply(self$get_data_objects(), function(x) x$data_changed <- new_value))
+                             }
+                           }
+                         )
 )
 
 instat_object$set("public", "import_data", function(data_tables = list(), data_tables_variables_metadata = rep(list(data.frame()),length(data_tables)),
@@ -92,8 +92,8 @@ instat_object$set("public", "import_data", function(data_tables = list(), data_t
       # Add this new data object to our list of data objects
       self$append_data_object(new_data$get_metadata(data_name_label), new_data)
     }
+    }
   }
-}
 )
 
 instat_object$set("public", "replace_instat_object", function(new_instat_object) {
@@ -128,8 +128,8 @@ instat_object$set("public", "copy_data_object", function(data_name, new_name, fi
 
 
 instat_object$set("public", "import_RDS", function(data_RDS, keep_existing = TRUE, overwrite_existing = FALSE, include_objects = TRUE,
-                                         include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_calculations = TRUE)
-# TODO add include_calcuations options
+                                                   include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_calculations = TRUE)
+  # TODO add include_calcuations options
 {
   if("instat_object" %in% class(data_RDS)) {
     if(!keep_existing && include_objects && include_metadata && include_logs && include_filters && include_calculations) {
@@ -395,7 +395,7 @@ instat_object$set("public", "add_columns_to_data", function(data_name, col_name 
 )
 
 instat_object$set("public", "get_columns_from_data", function(data_name, col_names, from_stacked_data = FALSE,
-                                                    force_as_data_frame = FALSE, use_current_filter = TRUE) {
+                                                              force_as_data_frame = FALSE, use_current_filter = TRUE) {
   if(missing(data_name)) stop("data_name is required")
   if(!from_stacked_data) {
     if(!data_name %in% names(private$.data_objects)) stop(paste(data_name, "not found"))
@@ -445,7 +445,7 @@ instat_object$set("public", "get_objects", function(data_name, object_name, incl
       else out = curr_objects
     }
     else out = self$get_data_objects(data_name)$get_objects(object_name = object_name, type = type, force_as_list = force_as_list)
-	if(as_list) {
+    if(as_list) {
       lst = list()
       lst[[data_name]][[object_name]] <- out
       return(lst)
@@ -759,7 +759,7 @@ instat_object$set("public", "sort_dataframe", function(data_name, col_names = c(
 
 instat_object$set("public", "rename_dataframe", function(data_name, new_value = "", label = "") {
   if(new_value %in% names(private$.data_objects)) stop("Cannot rename data frame since ", new_value, " is an existing data frame.")
-  data_obj = self$get_data_objects(data_name)
+  data_obj <- self$get_data_objects(data_name)
   names(private$.data_objects)[names(private$.data_objects) == data_name] <- new_value
   data_obj$append_to_metadata(data_name_label, new_value)
   for(i in seq_along(private$.links)) {
@@ -771,13 +771,16 @@ instat_object$set("public", "rename_dataframe", function(data_name, new_value = 
     }
   }
   data_obj$set_data_changed(TRUE)
-  if(label != "") data_obj$append_to_metadata(property = "label" , new_val = label)
+  if(label != "") {
+    data_obj$append_to_metadata(property = "label" , new_val = label)
+    data_obj$set_metadata_changed(TRUE)
+  }
 } 
 )
 
 instat_object$set("public", "convert_column_to_type", function(data_name, col_names = c(), to_type, factor_values = NULL, set_digits, set_decimals = FALSE, keep_attr = TRUE, use_labels = TRUE) {
   self$get_data_objects(data_name)$convert_column_to_type(col_names = col_names, to_type = to_type, factor_values = factor_values, set_digits = set_digits,set_decimals = set_decimals, keep_attr = keep_attr, use_labels = use_labels)
-} 
+}
 )
 
 instat_object$set("public", "append_to_variables_metadata", function(data_name, col_names, property, new_val = "") {
@@ -815,7 +818,7 @@ instat_object$set("public", "add_metadata_field", function(data_name, property, 
 instat_object$set("public", "reorder_dataframes", function(data_frames_order) {
   if(length(data_frames_order) != length(names(private$.data_objects))) stop("number data frames to order should be equal to number of dataframes in the object")
   if(!setequal(data_frames_order,names(private$.data_objects))) stop("data_frames_order must be a permutation of the dataframe names.")
-
+  
   self$set_data_objects(private$.data_objects[data_frames_order])
   self$data_objects_changed <- TRUE
 } 
@@ -861,12 +864,19 @@ instat_object$set("public","get_data_type", function(data_name, col_name) {
 } 
 )
 
-instat_object$set("public","copy_data_frame", function(data_name, new_name) {
-  curr_obj = self$get_data_objects(data_name)$clone(deep = TRUE)
+instat_object$set("public","copy_data_frame", function(data_name, new_name, label = "") {
+  if(new_name %in% names(private$.data_objects)) stop("Cannot copy data frame since ", new_name, " is an existing data frame.")
+  curr_obj <- self$get_data_objects(data_name)$clone(deep = TRUE)
   
-  if(missing(new_name)) new_name = next_default_item(data_name, self$get_data_names())
+  if(missing(new_name)) new_name <- next_default_item(data_name, self$get_data_names())
   self$append_data_object(new_name, curr_obj)
-  curr_obj$data_changed <- TRUE
+  new_data_obj <- self$get_data_objects(new_name)
+  new_data_obj$data_changed <- TRUE
+  new_data_obj$set_data_changed(TRUE)
+  if(label != "") {
+    new_data_obj$append_to_metadata(property = "label" , new_val = label)
+    new_data_obj$set_metadata_changed(TRUE)
+  }
 } 
 )
 
@@ -1201,7 +1211,7 @@ instat_object$set("public", "is_metadata", function(data_name, str) {
 )
 
 instat_object$set("public", "get_climatic_column_name", function(data_name, col_name) {
-   self$get_data_objects(data_name)$get_climatic_column_name(col_name = col_name)
+  self$get_data_objects(data_name)$get_climatic_column_name(col_name = col_name)
 }
 )
 
@@ -1235,7 +1245,7 @@ instat_object$set("public", "get_corruption_contract_data_names", function() {
 instat_object$set("public", "get_database_variable_names", function(query, data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
   if(self$has_database_connection()) {
     temp_data <- dbGetQuery(self$get_database_connection(), query)
-   
+    
     if(as_list) {
       out <- list()
       out[["database"]] <- temp_data[[1]]
@@ -1326,7 +1336,7 @@ instat_object$set("public", "import_from_climsoft", function(stations = c(), ele
 )
 
 instat_object$set("public", "import_from_iri", function(download_from, data_file, data_frame_name, location_data_name, path, X1, X2 = NA, Y1, Y2 = NA, get_area_point = "area"){
- 
+  
   data_list <- import_from_iri(download_from  = download_from, data_file = data_file, path = path, X1 = X1, X2 = X2, Y1 = Y1, Y2 = Y2, get_area_point = get_area_point)
   names(data_list) = c(next_default_item(prefix = data_frame_name , existing_names = self$get_data_names(), include_index = FALSE), next_default_item(prefix = location_data_name , existing_names = self$get_data_names(), include_index = FALSE))
   self$import_data(data_tables = data_list)
