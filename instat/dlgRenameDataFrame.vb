@@ -66,7 +66,7 @@ Public Class dlgRenameDataFrame
     End Sub
 
     Private Sub TestOKEnabled()
-        If ((Not ucrInputNewName.IsEmpty) AndAlso (ucrDataFrameToRename.cboAvailableDataFrames.Text <> "")) AndAlso (ucrDataFrameToRename.cboAvailableDataFrames.SelectedItem <> ucrInputNewName.GetText) Then
+        If ((Not ucrInputNewName.IsEmpty) AndAlso (ucrDataFrameToRename.cboAvailableDataFrames.Text <> "")) AndAlso (Not ucrDataFrameToRename.cboAvailableDataFrames.Items.Contains(ucrInputNewName.GetText)) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
