@@ -18,6 +18,8 @@ Imports instat.Translations
 Public Class dlgExportRObjects
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private clsDefaultFunction As New RFunction
+
     Private Sub dlgExportRObjects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -49,7 +51,7 @@ Public Class dlgExportRObjects
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
+        clsDefaultFunction = New RFunction
 
         ucrInputExportFile.SetName("")
         ucrSelectorObjects.Reset()
