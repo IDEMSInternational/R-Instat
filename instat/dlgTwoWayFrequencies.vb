@@ -42,7 +42,6 @@ Public Class dlgTwoWayFrequencies
         ucrReceiverColumnFactor.Selector = ucrSelectorTwoWayFrequencies
         ucrReceiverRowFactor.Selector = ucrSelectorTwoWayFrequencies
         ucrReceiverWeights.Selector = ucrSelectorTwoWayFrequencies
-        ucrReceiverRowFactor.SetDataType("factor")
         ucrReceiverColumnFactor.SetDataType("factor")
         ucrReceiverWeights.SetDataType("numeric")
 
@@ -74,11 +73,8 @@ Public Class dlgTwoWayFrequencies
         'Adding ucrPnlFreqType conditions
         ucrPnlFreqType.AddParameterValuesCondition(rdoCount, "fun", Chr(34) & "grpfrq" & Chr(34))
         ucrPnlFreqType.AddParameterPresentCondition(rdoCount, "margin", False)
-        ucrPnlFreqType.AddParameterValuesCondition(rdoRow, "fun", Chr(34) & "xtab" & Chr(34))
         ucrPnlFreqType.AddParameterValuesCondition(rdoRow, "margin", Chr(34) & "row" & Chr(34))
-        ucrPnlFreqType.AddParameterValuesCondition(rdoCell, "fun", Chr(34) & "xtab" & Chr(34))
         ucrPnlFreqType.AddParameterValuesCondition(rdoCell, "margin", Chr(34) & "cell" & Chr(34))
-        ucrPnlFreqType.AddParameterValuesCondition(rdoColumn, "fun", Chr(34) & "xtab" & Chr(34))
         ucrPnlFreqType.AddParameterValuesCondition(rdoColumn, "margin", Chr(34) & "col" & Chr(34))
 
         ucrChkRow.SetParameter(New RParameter("show.row.prc", 5), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
@@ -133,7 +129,7 @@ Public Class dlgTwoWayFrequencies
     Private Sub SetDefaults()
         clsSjTab = New RFunction
         clsSjPlot = New RFunction
-       
+
         'Reset
         ucrSelectorTwoWayFrequencies.Reset()
         ucrReceiverRowFactor.SetMeAsReceiver()
@@ -283,9 +279,10 @@ Public Class dlgTwoWayFrequencies
             ucrReceiverRowFactor.SetParameter(clsRowParam)
             ucrReceiverColumnFactor.SetParameter(clsColumnParam)
         End If
+        changelocation()
     End Sub
 
-    Private Sub ucrPnlFreqType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFreqDisplay.ControlValueChanged
+    Private Sub ucrPnlFreqType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFreqType.ControlValueChanged
         If rdoCell.Checked Then
             ucrBase.clsRsyntax.AddParameter("margin", Chr(34) & "cell" & Chr(34))
         ElseIf rdoColumn.Checked Then
