@@ -74,7 +74,7 @@ Public Class sdgOneWayFrequencies
 
         'Graph Only
         ucrChkShowCount.SetParameter(New RParameter("show.n", 5), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        ucrChkShowCount.SetRDefault("FALSE")
+        ucrChkShowCount.SetRDefault("TRUE")
         ucrChkShowCount.SetText("Show Count")
 
         'Graph Only

@@ -33,17 +33,13 @@ Public Class dlgExportRWorkspace
         TestOkEnabled()
     End Sub
 
-    Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-    End Sub
-
     Private Sub InitialiseDialog()
-
+        ucrInputExportFile.IsReadOnly = True
         ucrSelectorForDataFrames.SetItemType("dataframe")
-        ucrReceiverMultiple.Selector = ucrSelectorForDataFrames
 
         ucrReceiverMultiple.SetParameter(New RParameter("data_names", 0))
-        ucrReceiverMultiple.SetParameterIsRFunction()
+        ucrReceiverMultiple.SetParameterIsString()
+        ucrReceiverMultiple.Selector = ucrSelectorForDataFrames
 
         ucrInputExportFile.SetParameter(New RParameter("file", 1))
 
@@ -61,19 +57,35 @@ Public Class dlgExportRWorkspace
         ucrChkModels.SetText("Models")
         ucrChkModels.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkModels.SetRDefault("FALSE")
-
-
     End Sub
 
     Private Sub SetDefaults()
         clsDefaultFunction = New RFunction
-        ucrInputExportFile.IsReadOnly = True
+
         ucrInputExportFile.SetName("")
         ucrSelectorForDataFrames.Reset()
         ucrReceiverMultiple.SetMeAsReceiver()
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$export_workspace")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
+    Private Sub TestOkEnabled()
+        If Not ucrInputExportFile.IsEmpty AndAlso Not ucrReceiverMultiple.IsEmpty Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
     End Sub
 
     Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
@@ -93,22 +105,7 @@ Public Class dlgExportRWorkspace
         cmdBrowse_Click(sender, e)
     End Sub
 
-    Private Sub TestOkEnabled()
-        If Not ucrInputExportFile.IsEmpty AndAlso Not ucrReceiverMultiple.IsEmpty Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
-    End Sub
-
     Private Sub ucrInputExportFile_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrInputExportFile.ControlContentsChanged, ucrReceiverMultiple.ControlContentsChanged
         TestOkEnabled()
     End Sub
-
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
-        SetRCodeForControls(True)
-        TestOkEnabled()
-    End Sub
-
 End Class
