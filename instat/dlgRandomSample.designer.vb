@@ -42,7 +42,7 @@ Partial Class dlgRandomSample
         'lblSampleSize
         '
         Me.lblSampleSize.AutoSize = True
-        Me.lblSampleSize.Location = New System.Drawing.Point(254, 124)
+        Me.lblSampleSize.Location = New System.Drawing.Point(257, 124)
         Me.lblSampleSize.Name = "lblSampleSize"
         Me.lblSampleSize.Size = New System.Drawing.Size(68, 13)
         Me.lblSampleSize.TabIndex = 10
@@ -52,7 +52,7 @@ Partial Class dlgRandomSample
         'lblNumberofSamples
         '
         Me.lblNumberofSamples.AutoSize = True
-        Me.lblNumberofSamples.Location = New System.Drawing.Point(254, 98)
+        Me.lblNumberofSamples.Location = New System.Drawing.Point(257, 98)
         Me.lblNumberofSamples.Name = "lblNumberofSamples"
         Me.lblNumberofSamples.Size = New System.Drawing.Size(102, 13)
         Me.lblNumberofSamples.TabIndex = 10
@@ -62,7 +62,7 @@ Partial Class dlgRandomSample
         'lblPrefixColumnName
         '
         Me.lblPrefixColumnName.AutoSize = True
-        Me.lblPrefixColumnName.Location = New System.Drawing.Point(6, 224)
+        Me.lblPrefixColumnName.Location = New System.Drawing.Point(10, 224)
         Me.lblPrefixColumnName.Name = "lblPrefixColumnName"
         Me.lblPrefixColumnName.Size = New System.Drawing.Size(122, 13)
         Me.lblPrefixColumnName.TabIndex = 15
@@ -99,7 +99,7 @@ Partial Class dlgRandomSample
         'lblNewColumnName
         '
         Me.lblNewColumnName.AutoSize = True
-        Me.lblNewColumnName.Location = New System.Drawing.Point(7, 224)
+        Me.lblNewColumnName.Location = New System.Drawing.Point(10, 224)
         Me.lblNewColumnName.Name = "lblNewColumnName"
         Me.lblNewColumnName.Size = New System.Drawing.Size(101, 13)
         Me.lblNewColumnName.TabIndex = 21
@@ -108,6 +108,7 @@ Partial Class dlgRandomSample
         '
         'ucrNewColumnName
         '
+        Me.ucrNewColumnName.AddQuotesIfUnrecognised = True
         Me.ucrNewColumnName.IsReadOnly = False
         Me.ucrNewColumnName.Location = New System.Drawing.Point(131, 221)
         Me.ucrNewColumnName.Name = "ucrNewColumnName"
@@ -116,6 +117,8 @@ Partial Class dlgRandomSample
         '
         'ucrPrefixNewColumns
         '
+        Me.ucrPrefixNewColumns.AddQuotesIfUnrecognised = True
+        Me.ucrPrefixNewColumns.IsMultiline = False
         Me.ucrPrefixNewColumns.IsReadOnly = False
         Me.ucrPrefixNewColumns.Location = New System.Drawing.Point(131, 222)
         Me.ucrPrefixNewColumns.Name = "ucrPrefixNewColumns"
@@ -124,11 +127,11 @@ Partial Class dlgRandomSample
         '
         'ucrSampleSize
         '
-        Me.ucrSampleSize.ucrDataFrameSelector = Nothing
         Me.ucrSampleSize.Location = New System.Drawing.Point(344, 120)
         Me.ucrSampleSize.Name = "ucrSampleSize"
         Me.ucrSampleSize.Size = New System.Drawing.Size(55, 23)
         Me.ucrSampleSize.TabIndex = 13
+        Me.ucrSampleSize.ucrDataFrameSelector = Nothing
         '
         'ucrSelectorRandomSamples
         '
