@@ -43,17 +43,22 @@ Public Class dlgExportRObjects
         ucrReceiverObjects.Selector = ucrSelectorObjects
         ucrSelectorObjects.SetParameter(New RParameter("data_name", 0))
         ucrSelectorObjects.ucrAvailableDataFrames.SetParameterIsRFunction()
-        ucrReceiverObjects.SetParameter(New RParameter("objects", 1))
-        ucrReceiverObjects.SetParameterIsRFunction()
+        ucrSelectorObjects.SetItemType("object")
+
+        ucrReceiverObjects.SetParameter(New RParameter("object_names", 1))
+        ucrReceiverObjects.SetParameterIsString()
         ucrInputExportFile.SetParameter(New RParameter("file", 2))
 
     End Sub
 
     Private Sub SetDefaults()
         Dim clsDefaultFunction As New RFunction
+
+        ucrInputExportFile.IsReadOnly = True
+        ucrInputExportFile.SetName("")
         ucrReceiverObjects.SetMeAsReceiver()
         ucrSelectorObjects.Reset()
-        clsDefaultFunction.SetRCommand("export_objects")
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$export_objects")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
 
@@ -62,7 +67,7 @@ Public Class dlgExportRObjects
 
         dlgSave.Title = "Export file dialog"
         dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
-        dlgSave.Filter = "Serialized r objects (*.rds)|*.rds"
+        dlgSave.Filter = "Saved r objects (*.RData)|*.RData"
         If dlgSave.ShowDialog = DialogResult.OK Then
             If dlgSave.FileName <> "" Then
                 ucrInputExportFile.SetName(Path.GetFullPath(dlgSave.FileName).ToString.Replace("\", "/"))
