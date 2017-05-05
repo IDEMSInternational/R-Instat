@@ -34,6 +34,7 @@ Public Class dlgStringHandling
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 406
         'ucrReceiver
         ucrReceiverStringHandling.SetParameter(New RParameter("string", 0))
         ucrReceiverStringHandling.SetParameterIsRFunction()
