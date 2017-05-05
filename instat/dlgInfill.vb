@@ -32,8 +32,7 @@ Public Class dlgInfill
     End Sub
 
     Private Sub InitialiseDialog()
-        'Task: Help ID for this dialogue need to be added.
-        ' ucrBase.iHelpTopicID=
+        ucrBase.iHelpTopicID = 497
 
         'Set receiver
         ucrReceiverDate.Selector = ucrInfillSelector
