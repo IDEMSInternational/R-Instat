@@ -169,7 +169,7 @@ Public Class dlgHistogram
             clsRgeomPlotFunction.SetRCommand("geom_freqpoly")
             ucrSaveHist.SetPrefix("FrequencyPolygon")
             ucrFactorReceiver.ChangeParameterName("colour")
-            cmdHistogramOptions.Text = "Freequency Polygon Options"
+            cmdHistogramOptions.Text = "Frequency Polygon Options"
             cmdHistogramOptions.Size = New Size(160, 25)
         End If
     End Sub
