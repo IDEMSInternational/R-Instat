@@ -84,6 +84,7 @@ Public Class dlgTransformClimatic
         ucrNudCountOver.SetParameter(New RParameter("count_over"))
         ucrNudCountOver.SetMinMax(1, 366)
         ucrNudCountOver.Increment = 1
+        'ucrNudCountOver.SetRDefault("3")
 
         ucrInputSpellLower.SetValidationTypeAsNumeric()
         ucrInputSpellLower.SetParameter(New RParameter("spell_lower"))
@@ -91,8 +92,12 @@ Public Class dlgTransformClimatic
         ucrInputSpellUpper.SetValidationTypeAsNumeric()
         ucrInputSpellUpper.SetParameter(New RParameter("spell_upper"))
 
+        ucrNudWBCapacity.SetParameter(New RParameter("capacity"))
+        ucrNudWBCapacity.SetMinMax(1, 366)
+        ucrNudWBCapacity.Increment = 1
+        'ucrNudWBCapacity.SetRDefault("60")
         ucrInputEvaporation.SetValidationTypeAsNumeric()
-        ucrInputSpellUpper.SetParameter(New RParameter("spell_upper"))
+        ucrInputEvaporation.SetParameter(New RParameter("evaporation"))
 
         ucrSaveTransform.SetDataFrameSelector(ucrSelectorTransform.ucrAvailableDataFrames)
         ucrSaveTransform.SetLabelText("New Column Name:")
