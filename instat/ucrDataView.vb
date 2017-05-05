@@ -432,11 +432,13 @@ Public Class ucrDataView
     End Sub
 
     Private Sub renameSheet_Click(sender As Object, e As EventArgs) Handles renameSheet.Click
-        dlgRenameSheet.ShowDialog()
+        dlgRenameDataFrame.SetCurrentDataframe(grdCurrSheet.Name)
+        dlgRenameDataFrame.ShowDialog()
     End Sub
 
     Private Sub MoveOrCopySheet_Click(sender As Object, e As EventArgs) Handles CopySheet.Click
-        dlgCopySheet.ShowDialog()
+        dlgCopyDataFrame.SetCurrentDataframe(grdCurrSheet.Name)
+        dlgCopyDataFrame.ShowDialog()
     End Sub
 
     Private Sub mnuConvertVariate_Click(sender As Object, e As EventArgs) Handles mnuConvertVariate.Click
