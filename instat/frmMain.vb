@@ -446,7 +446,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuManageDataFileCopySheet_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataObjectCopyDataFrame.Click
-        dlgCopySheet.ShowDialog()
+        dlgCopyDataFrame.ShowDialog()
     End Sub
 
     Private Sub mnuManageDataFileReorderSheets_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataObjectReorderDataFrames.Click
@@ -454,7 +454,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuManageDataFileRenameSheet_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataObjectRenameDataFrame.Click
-        dlgRenameSheet.ShowDialog()
+        dlgRenameDataFrame.ShowDialog()
     End Sub
 
     Private Sub mnuManageRechapeColumnSummaries_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnReshapeColumnSummaries.Click
@@ -929,7 +929,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuDescribeSpecificLinePlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificLinePlot.Click
-        dlgPlot.ShowDialog()
+        dlgLinePlot.ShowDialog()
     End Sub
 
     Private Sub mnuDescribeSpecificHistogram_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificHistogram.Click
@@ -1377,7 +1377,7 @@ Public Class frmMain
         dlgExportRObjects.ShowDialog()
     End Sub
 
-    Private Sub ExportRWorkSpaceToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportRWorkSpaceToolStripMenuItem.Click
+    Private Sub ExportRWorkSpaceToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgExportRWorkspace.ShowDialog()
     End Sub
 
