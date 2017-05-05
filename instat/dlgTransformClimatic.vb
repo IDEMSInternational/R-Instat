@@ -52,4 +52,5 @@ Public Class dlgTransformClimatic
         SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
+
 End Class
