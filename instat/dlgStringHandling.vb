@@ -55,7 +55,6 @@ Public Class dlgStringHandling
         ucrPnlStringHandling.AddFunctionNamesCondition(rdoReplace, "str_replace")
         ucrPnlStringHandling.AddFunctionNamesCondition(rdoReplaceAll, "str_replace_all")
 
-
         ucrInputPattern.SetParameter(New RParameter("pattern", 1))
         ucrInputReplaceBy.SetParameter(New RParameter("replacement", 2))
 
@@ -84,7 +83,6 @@ Public Class dlgStringHandling
         clsReplaceFunction = New RFunction
         clsReplaceAllFunction = New RFunction
         clsFixedFunction = New RFunction
-
 
         ucrSelectorStringHandling.Reset()
         ucrInputPattern.Reset()
@@ -167,10 +165,6 @@ Public Class dlgStringHandling
         Else
             ucrSaveStringHandling.SetAssignToBooleans(bTempAssignToIsPrefix:=False)
         End If
-    End Sub
-
-    Private Sub ucrChkRegex_ControlValueChanged(ucrChangedControl As ucrCore)
-
     End Sub
 
     Private Sub NewColumnName()
