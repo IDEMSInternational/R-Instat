@@ -67,7 +67,7 @@ Public Class dlgCopyDataFrame
     End Sub
 
     Private Sub TestOKEnabled()
-        If ((Not ucrInputNewDataFrameName.IsEmpty) AndAlso (ucrDataFrameCopySheets.cboAvailableDataFrames.Text <> "")) AndAlso (ucrDataFrameCopySheets.cboAvailableDataFrames.SelectedItem <> ucrInputNewDataFrameName.GetText) Then
+        If ((Not ucrInputNewDataFrameName.IsEmpty) AndAlso (ucrDataFrameCopySheets.cboAvailableDataFrames.Text <> "")) AndAlso (ucrDataFrameCopySheets.cboAvailableDataFrames.Text <> ucrInputNewDataFrameName.GetText) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
