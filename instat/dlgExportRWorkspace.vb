@@ -34,12 +34,12 @@ Public Class dlgExportRWorkspace
     End Sub
 
     Private Sub InitialiseDialog()
-
+        ucrInputExportFile.IsReadOnly = True
         ucrSelectorForDataFrames.SetItemType("dataframe")
-        ucrReceiverMultiple.Selector = ucrSelectorForDataFrames
 
         ucrReceiverMultiple.SetParameter(New RParameter("data_names", 0))
         ucrReceiverMultiple.SetParameterIsRFunction()
+        ucrReceiverMultiple.Selector = ucrSelectorForDataFrames
 
         ucrInputExportFile.SetParameter(New RParameter("file", 1))
 
@@ -61,7 +61,7 @@ Public Class dlgExportRWorkspace
 
     Private Sub SetDefaults()
         clsDefaultFunction = New RFunction
-        ucrInputExportFile.IsReadOnly = True
+
         ucrInputExportFile.SetName("")
         ucrSelectorForDataFrames.Reset()
         ucrReceiverMultiple.SetMeAsReceiver()
