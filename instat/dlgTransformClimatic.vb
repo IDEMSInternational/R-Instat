@@ -18,6 +18,7 @@ Imports instat.Translations
 Public Class dlgTransformClimatic
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
+
     Private clsSumFunction, clsCountFunction, clsSpellFunction, clsWaterBalanceFunction As New RFunction
     Private Sub dlgTransformClimatic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -34,6 +35,7 @@ Public Class dlgTransformClimatic
     End Sub
 
     Private Sub InitialiseDialog()
+        Dim dctInputSumPairs As New Dictionary(Of String, String)
         ucrReceiverStation.Selector = ucrSelectorTransform
         ucrReceiverYear.Selector = ucrSelectorTransform
         ucrReceiverDate.Selector = ucrSelectorTransform
@@ -61,6 +63,24 @@ Public Class dlgTransformClimatic
         ucrPnlTransform.AddFunctionNamesCondition(rdoCount, "")
         ucrPnlTransform.AddFunctionNamesCondition(rdoSpell, "")
         ucrPnlTransform.AddFunctionNamesCondition(rdoWaterBalance, "")
+
+        ucrNudThreshold.SetParameter(New RParameter("threshold"))
+        ucrNudThreshold.SetMinMax(0, 100)
+        ucrNudThreshold.Increment = 0.01
+        ucrNudThreshold.DecimalPlaces = 2
+        ucrNudThreshold.SetRDefault("0.85")
+
+        ucrInputSum.SetParameter(New RParameter("summary"))
+        dctInputSumPairs.Add("Sum", Chr(34) & "sum" & Chr(34))
+        dctInputSumPairs.Add("Max", Chr(34) & "max" & Chr(34))
+        dctInputSumPairs.Add("Min", Chr(34) & "min" & Chr(34))
+        dctInputSumPairs.Add("Mean", Chr(34) & "mean" & Chr(34))
+        ucrInputSum.SetItems(dctInputSumPairs)
+
+        ucrNudSumOver.SetParameter(New RParameter("sum_over"))
+        ucrNudSumOver.SetMinMax(1, 31)
+        ucrNudSumOver.Increment = 1
+        'ucrNudSumOver.SetRDefault("3")
 
         ucrSaveTransform.SetDataFrameSelector(ucrSelectorTransform.ucrAvailableDataFrames)
         ucrSaveTransform.SetLabelText("New Column Name:")
