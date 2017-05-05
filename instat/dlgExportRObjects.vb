@@ -42,7 +42,7 @@ Public Class dlgExportRObjects
 
         ucrReceiverObjects.Selector = ucrSelectorObjects
         ucrSelectorObjects.SetParameter(New RParameter("data_name", 0))
-        ucrSelectorObjects.ucrAvailableDataFrames.SetParameterIsRFunction()
+        ucrSelectorObjects.ucrAvailableDataFrames.SetParameterIsString()
         ucrSelectorObjects.SetItemType("object")
 
         ucrReceiverObjects.SetParameter(New RParameter("object_names", 1))
