@@ -14,7 +14,7 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
+
 Imports instat.Translations
 Public Class dlgThreeVariableFrequencies
     Private bFirstLoad As Boolean = True
@@ -189,7 +189,6 @@ Public Class dlgThreeVariableFrequencies
 
         ucrSelectorThreeVariableFrequencies.AddAdditionalCodeParameterPair(clsGraphBaseOperator, ucrSelectorThreeVariableFrequencies.GetParameter, iAdditionalPairNo:=1)
 
-        ucrChkFlip.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("coord.flip", 1), iAdditionalPairNo:=1)
         ucrChkWeights.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("weight.by", 1), iAdditionalPairNo:=1)
         ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjPlot, ucrChkWeights.GetParameter(), iAdditionalPairNo:=1)
 
@@ -199,7 +198,7 @@ Public Class dlgThreeVariableFrequencies
         ucrReceiverGroupBy2nd.SetRCode(clsGroupBy, bReset)
         ucrReceiverWeights.SetRCode(clsSjTab, bReset)
         ucrChkWeights.SetRCode(clsSjTab, bReset)
-        ucrChkFlip.SetRCode(clsSjTab, bReset)
+        ucrChkFlip.SetRCode(clsSjPlot, bReset)
         ucrPnlFreqType.SetRCode(clsSjPlot, bReset)
         ucrPnlFrequencyDisplay.SetRCode(clsSjTab, bReset)
         ucrSelectorThreeVariableFrequencies.SetRCode(clsTableBaseOperator, bReset)
