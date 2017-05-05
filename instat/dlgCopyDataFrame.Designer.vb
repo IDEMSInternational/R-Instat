@@ -26,7 +26,7 @@ Partial Class dlgCopyDataFrame
         Me.ucrDataFrameCopySheets = New instat.ucrDataFrame()
         Me.ucrInputLabel = New instat.ucrInputTextBox()
         Me.lblLabel = New System.Windows.Forms.Label()
-        Me.ucrInputNewName = New instat.ucrInputTextBox()
+        Me.ucrInputNewDataFrameName = New instat.ucrInputTextBox()
         Me.lblNewName = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
@@ -53,7 +53,7 @@ Partial Class dlgCopyDataFrame
         Me.ucrInputLabel.IsReadOnly = False
         Me.ucrInputLabel.Location = New System.Drawing.Point(196, 79)
         Me.ucrInputLabel.Name = "ucrInputLabel"
-        Me.ucrInputLabel.Size = New System.Drawing.Size(131, 32)
+        Me.ucrInputLabel.Size = New System.Drawing.Size(131, 22)
         Me.ucrInputLabel.TabIndex = 4
         '
         'lblLabel
@@ -65,15 +65,15 @@ Partial Class dlgCopyDataFrame
         Me.lblLabel.TabIndex = 3
         Me.lblLabel.Text = "Data Frame Label:"
         '
-        'ucrInputNewName
+        'ucrInputNewDataFrameName
         '
-        Me.ucrInputNewName.AddQuotesIfUnrecognised = True
-        Me.ucrInputNewName.IsMultiline = False
-        Me.ucrInputNewName.IsReadOnly = False
-        Me.ucrInputNewName.Location = New System.Drawing.Point(196, 29)
-        Me.ucrInputNewName.Name = "ucrInputNewName"
-        Me.ucrInputNewName.Size = New System.Drawing.Size(131, 33)
-        Me.ucrInputNewName.TabIndex = 2
+        Me.ucrInputNewDataFrameName.AddQuotesIfUnrecognised = True
+        Me.ucrInputNewDataFrameName.IsMultiline = False
+        Me.ucrInputNewDataFrameName.IsReadOnly = False
+        Me.ucrInputNewDataFrameName.Location = New System.Drawing.Point(196, 29)
+        Me.ucrInputNewDataFrameName.Name = "ucrInputNewDataFrameName"
+        Me.ucrInputNewDataFrameName.Size = New System.Drawing.Size(131, 21)
+        Me.ucrInputNewDataFrameName.TabIndex = 2
         '
         'lblNewName
         '
@@ -91,7 +91,7 @@ Partial Class dlgCopyDataFrame
         Me.ClientSize = New System.Drawing.Size(419, 175)
         Me.Controls.Add(Me.ucrInputLabel)
         Me.Controls.Add(Me.lblLabel)
-        Me.Controls.Add(Me.ucrInputNewName)
+        Me.Controls.Add(Me.ucrInputNewDataFrameName)
         Me.Controls.Add(Me.lblNewName)
         Me.Controls.Add(Me.ucrDataFrameCopySheets)
         Me.Controls.Add(Me.ucrBase)
@@ -110,6 +110,6 @@ Partial Class dlgCopyDataFrame
     Friend WithEvents ucrDataFrameCopySheets As ucrDataFrame
     Friend WithEvents ucrInputLabel As ucrInputTextBox
     Friend WithEvents lblLabel As Label
-    Friend WithEvents ucrInputNewName As ucrInputTextBox
+    Friend WithEvents ucrInputNewDataFrameName As ucrInputTextBox
     Friend WithEvents lblNewName As Label
 End Class
