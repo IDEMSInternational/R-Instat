@@ -1337,3 +1337,7 @@ instat_object$set("public", "import_from_iri", function(download_from, data_file
 } 
 )
 
+instat_object$set("public", "export_objects", function(data_name,file,object_names){save( list=object_names,file=file)}
+  )
+
+
