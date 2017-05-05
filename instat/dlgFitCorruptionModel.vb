@@ -41,10 +41,9 @@ Public Class dlgFitCorruptionModel
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 529
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
-        'helpID
-        '  ucrBase.iHelpTopicID =
         ucrInputModelPreview.IsReadOnly = True
 
         clsBinomialModel.SetRCommand("binomial")

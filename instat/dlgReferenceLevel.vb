@@ -13,37 +13,69 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 Public Class dlgReferenceLevel
-    Public bFirstLoad As Boolean = True
+    Private bFirstLoad As Boolean = True
     Public strDefaultDataFrame As String = ""
-
+    Private bReset As Boolean = True
+    Private clsSetRefLevel As New RFunction
     Private Sub dlgReferenceLevel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         End If
-        SetDefaultDataFrame()
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeforControls(bReset)
+        bReset = False
         TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_factor_reference_level")
         ucrBase.iHelpTopicID = 38
+
+        ucrSelectorForReferenceLevels.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorForReferenceLevels.SetParameterIsString()
+
+        ucrReceiverReferenceLevels.SetParameter(New RParameter("col_name", 1))
+        ucrReceiverReferenceLevels.SetParameterIsString()
         ucrReceiverReferenceLevels.Selector = ucrSelectorForReferenceLevels
         ucrReceiverReferenceLevels.SetMeAsReceiver()
         ucrReceiverReferenceLevels.SetIncludedDataTypes({"factor"})
         ucrReceiverReferenceLevels.SetExcludedDataTypes({"ordered,factor"})
+
+        ucrFactorReferenceLevels.SetParameter(New RParameter("new_ref_level", 2))
         ucrFactorReferenceLevels.SetReceiver(ucrReceiverReferenceLevels)
         ucrFactorReferenceLevels.SetAsSingleSelector()
     End Sub
 
     Private Sub SetDefaults()
+        clsSetRefLevel = New RFunction
         ucrSelectorForReferenceLevels.Reset()
-        ucrSelectorForReferenceLevels.Focus()
+
+        clsSetRefLevel.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_factor_reference_level")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsSetRefLevel)
+    End Sub
+
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
+    Private Sub TestOKEnabled()
+        If Not ucrReceiverReferenceLevels.IsEmpty Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeforControls(True)
+        TestOKEnabled()
     End Sub
 
     Private Sub SetDefaultDataFrame()
@@ -53,36 +85,7 @@ Public Class dlgReferenceLevel
         strDefaultDataFrame = ""
     End Sub
 
-    Private Sub TestOKEnabled()
-        If ucrReceiverReferenceLevels.IsEmpty() = False Then
-            ucrBase.OKEnabled(True)
-
-        Else
-            ucrBase.OKEnabled(False)
-
-        End If
-
-    End Sub
-
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
+    Private Sub ucrReceiverReferenceLevels_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverReferenceLevels.ControlContentsChanged
         TestOKEnabled()
-    End Sub
-
-    Private Sub ucrSelectorForReferenceLevels_DataFrameChanged() Handles ucrSelectorForReferenceLevels.DataFrameChanged
-        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorForReferenceLevels.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
-    End Sub
-
-    Private Sub ucrReceiverReferenceLevels_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverReferenceLevels.SelectionChanged
-        If Not ucrReceiverReferenceLevels.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("col_name", ucrReceiverReferenceLevels.GetVariableNames())
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("col_name")
-        End If
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrFactorReferenceLevels_SelectedLevelChanged() Handles ucrFactorReferenceLevels.SelectedLevelChanged
-        ucrBase.clsRsyntax.AddParameter("new_ref_level", ucrFactorReferenceLevels.GetSelectedLevels())
     End Sub
 End Class
