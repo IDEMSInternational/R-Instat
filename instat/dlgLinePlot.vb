@@ -147,7 +147,6 @@ Public Class dlgLinePlot
     End Sub
 
     Private Sub TempOptionsDisabledInMultipleVariablesCase()
-        ' Why is this done??
         If ucrVariablesAsFactorForLinePlot.bSingleVariable Then
             cmdLineOptions.Enabled = True
             cmdOptions.Enabled = True
