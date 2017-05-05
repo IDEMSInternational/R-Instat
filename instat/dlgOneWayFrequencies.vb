@@ -38,8 +38,7 @@ Public Class dlgOneWayFrequencies
     End Sub
 
     Private Sub InitialiseDialog()
-        'HelpID
-        ' ucrBase.iHelpTopicID = 
+        ucrBase.iHelpTopicID = 518
 
         ucrReceiverOneWayFreq.SetParameter(New RParameter("data", 0))
         ucrReceiverOneWayFreq.SetParameterIsRFunction()
@@ -111,7 +110,6 @@ Public Class dlgOneWayFrequencies
 
         clsSjPlot.SetPackageName("sjPlot")
         clsSjPlot.SetRCommand("sjplot")
-
         clsPlotGrid.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneWayFreq.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjTab)
