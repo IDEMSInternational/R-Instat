@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgThreeVariableFrequencies
     Private bFirstLoad As Boolean = True
@@ -302,5 +303,18 @@ Public Class dlgThreeVariableFrequencies
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnFactor.ControlContentsChanged, ucrReceiverRowFactor.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrReceiverGroupBy2nd.ControlContentsChanged, ucrReceiverGroupsBy1st.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrPnlFreqType_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlFreqType.ControlContentsChanged
+        If rdoCell.Checked Then
+            clsSjPlot.AddParameter("margin", Chr(34) & "cell" & Chr(34))
+        ElseIf rdoColumn.Checked Then
+            clsSjPlot.AddParameter("margin", Chr(34) & "col" & Chr(34))
+        ElseIf rdoRow.Checked Then
+            clsSjPlot.AddParameter("margin", Chr(34) & "row" & Chr(34))
+        Else
+            clsSjPlot.RemoveParameterByName("margin")
+        End If
+
     End Sub
 End Class

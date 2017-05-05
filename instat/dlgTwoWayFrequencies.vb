@@ -282,20 +282,21 @@ Public Class dlgTwoWayFrequencies
             ucrReceiverRowFactor.SetParameter(clsRowParam)
             ucrReceiverColumnFactor.SetParameter(clsColumnParam)
         End If
-    End Sub
-
-    Private Sub ucrPnlFreqType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFreqDisplay.ControlValueChanged
-        If rdoCell.Checked Then
-            ucrBase.clsRsyntax.AddParameter("margin", Chr(34) & "cell" & Chr(34))
-        ElseIf rdoColumn.Checked Then
-            ucrBase.clsRsyntax.AddParameter("margin", Chr(34) & "col" & Chr(34))
-        ElseIf rdoRow.Checked Then
-            ucrBase.clsRsyntax.AddParameter("margin", Chr(34) & "row" & Chr(34))
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("margin")
-        End If
         changelocation()
     End Sub
+
+    Private Sub ucrPnlFreqType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFreqType.ControlValueChanged
+        If rdoCell.Checked Then
+            clsSjPlot.AddParameter("margin", Chr(34) & "cell" & Chr(34))
+        ElseIf rdoColumn.Checked Then
+            clsSjPlot.AddParameter("margin", Chr(34) & "col" & Chr(34))
+        ElseIf rdoRow.Checked Then
+            clsSjPlot.AddParameter("margin", Chr(34) & "row" & Chr(34))
+        Else
+            clsSjPlot.RemoveParameterByName("margin")
+        End If
+    End Sub
+
     Private Sub changelocation()
         If rdoBoth.Checked Then
             grpFreqTypeTable.Location = New Point(240, 166)
