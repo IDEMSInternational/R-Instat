@@ -2359,9 +2359,6 @@
     <EmbeddedResource Include="dlgContrasts.sw-KE.resx">
       <DependentUpon>dlgContrasts.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgCopyDataFrame.resx">
-      <DependentUpon>dlgCopyDataFrame.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgCountinFactor.resx">
       <DependentUpon>dlgCountinFactor.vb</DependentUpon>
     </EmbeddedResource>
