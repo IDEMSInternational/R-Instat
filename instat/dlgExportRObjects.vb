@@ -18,6 +18,8 @@ Imports instat.Translations
 Public Class dlgExportRObjects
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private clsDefaultFunction As New RFunction
+
     Private Sub dlgExportRObjects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -32,34 +34,47 @@ Public Class dlgExportRObjects
         TestOkEnabled()
     End Sub
 
-    Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-    End Sub
-
     Private Sub InitialiseDialog()
-
         ucrBase.iHelpTopicID = 538
 
-        ucrReceiverObjects.Selector = ucrSelectorObjects
         ucrSelectorObjects.SetParameter(New RParameter("data_name", 0))
         ucrSelectorObjects.ucrAvailableDataFrames.SetParameterIsString()
         ucrSelectorObjects.SetItemType("object")
 
         ucrReceiverObjects.SetParameter(New RParameter("object_names", 1))
         ucrReceiverObjects.SetParameterIsString()
-        ucrInputExportFile.SetParameter(New RParameter("file", 2))
+        ucrReceiverObjects.Selector = ucrSelectorObjects
+        ucrReceiverObjects.SetMeAsReceiver()
 
+        ucrInputExportFile.SetParameter(New RParameter("file", 2))
+        ucrInputExportFile.IsReadOnly = True
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
+        clsDefaultFunction = New RFunction
 
-        ucrInputExportFile.IsReadOnly = True
         ucrInputExportFile.SetName("")
-        ucrReceiverObjects.SetMeAsReceiver()
         ucrSelectorObjects.Reset()
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$export_objects")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
+    Private Sub TestOkEnabled()
+        If Not ucrInputExportFile.IsEmpty AndAlso Not ucrReceiverObjects.IsEmpty AndAlso ucrSelectorObjects.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
     End Sub
 
     Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
@@ -79,22 +94,7 @@ Public Class dlgExportRObjects
         cmdBrowse_Click(sender, e)
     End Sub
 
-    Private Sub TestOkEnabled()
-        If Not ucrInputExportFile.IsEmpty AndAlso Not ucrReceiverObjects.IsEmpty AndAlso ucrSelectorObjects.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
-    End Sub
-
-    Private Sub ucrInputExportFile_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrInputExportFile.ControlContentsChanged, ucrReceiverObjects.ControlContentsChanged, ucrSelectorObjects.ControlContentsChanged
+    Private Sub ucrInputExportFile_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrReceiverObjects.ControlContentsChanged, ucrSelectorObjects.ControlContentsChanged, ucrInputExportFile.ControlContentsChanged
         TestOkEnabled()
     End Sub
-
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
-        SetRCodeForControls(True)
-        TestOkEnabled()
-    End Sub
-
 End Class
