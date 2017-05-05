@@ -49,9 +49,6 @@ Public Class dlgBoxplot
         ucrBase.iHelpTopicID = 436
         ucrBase.clsRsyntax.iCallType = 3
 
-        ucrSelectorBoxPlot.SetParameter(New RParameter("data", 0))
-        ucrSelectorBoxPlot.SetParameterIsrfunction()
-
         ucrPnlPlots.AddRadioButton(rdoViolin)
         ucrPnlPlots.AddRadioButton(rdoBoxplot)
         ucrPnlPlots.AddRadioButton(rdoJitter)
@@ -61,30 +58,32 @@ Public Class dlgBoxplot
         ucrPnlPlots.AddFunctionNamesCondition(rdoViolin, "geom_violin")
         ucrPnlPlots.AddToLinkedControls(ucrChkVarwidth, {rdoBoxplot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
+        ucrSelectorBoxPlot.SetParameter(New RParameter("data", 0))
+        ucrSelectorBoxPlot.SetParameterIsrfunction()
+
+        ucrVariablesAsFactorForBoxplot.SetParameter(New RParameter("y", 0))
         ucrVariablesAsFactorForBoxplot.SetFactorReceiver(ucrByFactorsReceiver)
         ucrVariablesAsFactorForBoxplot.Selector = ucrSelectorBoxPlot
         ucrVariablesAsFactorForBoxplot.SetIncludedDataTypes({"numeric"})
-        ucrVariablesAsFactorForBoxplot.SetParameter(New RParameter("y", 0))
         ucrVariablesAsFactorForBoxplot.SetParameterIsString()
         ucrVariablesAsFactorForBoxplot.bWithQuotes = False
 
+        ucrByFactorsReceiver.SetParameter(New RParameter("x", 1))
         ucrByFactorsReceiver.Selector = ucrSelectorBoxPlot
         ucrByFactorsReceiver.SetIncludedDataTypes({"factor"})
-        ucrByFactorsReceiver.SetParameter(New RParameter("x", 1))
         ucrByFactorsReceiver.SetParameterIsString()
         ucrByFactorsReceiver.bWithQuotes = False
         ucrByFactorsReceiver.SetValuesToIgnore({Chr(34) & Chr(34)})
         ucrByFactorsReceiver.bAddParameterIfEmpty = True
 
+        ucrSecondFactorReceiver.SetParameter(New RParameter("fill", 2))
         ucrSecondFactorReceiver.Selector = ucrSelectorBoxPlot
         ucrSecondFactorReceiver.SetIncludedDataTypes({"factor"})
-        ucrSecondFactorReceiver.SetParameter(New RParameter("fill", 2))
         ucrSecondFactorReceiver.SetParameterIsString()
         ucrSecondFactorReceiver.bWithQuotes = False
 
-
-        ucrChkVarwidth.SetText("Variable Width")
         ucrChkVarwidth.SetParameter(New RParameter("varwidth"))
+        ucrChkVarwidth.SetText("Variable Width")
         ucrChkVarwidth.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkVarwidth.SetRDefault("FALSE")
 
@@ -94,7 +93,6 @@ Public Class dlgBoxplot
         clsCoordFlipParam.SetArgument(clsCoordFlipFunc)
         ucrChkHorizontalBoxplot.SetText("Horizontal Plot")
         ucrChkHorizontalBoxplot.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-
 
         ucrSaveBoxplot.SetPrefix("Boxplot")
         ucrSaveBoxplot.SetIsComboBox()
@@ -142,7 +140,7 @@ Public Class dlgBoxplot
         TestOkEnabled()
     End Sub
 
-    Private Sub SetRCodeForControls(bReset As Boolean)
+    Public Sub SetRCodeForControls(bReset As Boolean)
         ucrSaveBoxplot.SetRCode(clsBaseOperator, bReset)
         ucrSelectorBoxPlot.SetRCode(clsRggplotFunction, bReset)
 
