@@ -89,10 +89,14 @@ Public Class dlgTransformClimatic
         ucrNudCountOver.Increment = 1
         ucrNudCountOver.SetLinkedDisplayControl(lblCountOver)
         ucrNudCountOver.SetLinkedDisplayControl(lblCountRows)
+
+
         'ucrNudCountOver.SetRDefault("3")
 
         ucrInputSpellLower.SetValidationTypeAsNumeric()
         ucrInputSpellLower.SetParameter(New RParameter("spell_lower"))
+        ucrInputSpellLower.SetLinkedDisplayControl(lblValuesBetween)
+        ucrInputSpellLower.SetLinkedDisplayControl(lblSpellAnd)
 
         ucrInputSpellUpper.SetValidationTypeAsNumeric()
         ucrInputSpellUpper.SetParameter(New RParameter("spell_upper"))
@@ -111,8 +115,8 @@ Public Class dlgTransformClimatic
         ucrSaveTransform.SetSaveTypeAsColumn()
 
         ucrPnlTransform.AddToLinkedControls({ucrInputSum, ucrNudSumOver}, {rdoSum}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlTransform.AddToLinkedControls({ucrNudCountOver}, {rdoCount}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlTransform.AddToLinkedControls({ucrInputSum, ucrNudSumOver}, {rdoSpell}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlTransform.AddToLinkedControls({ucrNudCountOver, ucrChkValuesUnderthreshold}, {rdoCount}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlTransform.AddToLinkedControls({ucrInputSpellLower, ucrInputSpellUpper}, {rdoSpell}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransform.AddToLinkedControls({ucrInputSum, ucrNudSumOver}, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
         'ucrChkLong.AddToLinkedControls(ucrReceiverDataColumn, {True}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
         'ucrChkLong.AddToLinkedControls(ucrReceiverStations, {True}, bNewLinkedHideIfParameterMissing:=True)
