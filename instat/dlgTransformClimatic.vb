@@ -35,6 +35,7 @@ Public Class dlgTransformClimatic
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 358
         Dim dctInputSumPairs As New Dictionary(Of String, String)
         ucrReceiverStation.Selector = ucrSelectorTransform
         ucrReceiverYear.Selector = ucrSelectorTransform
@@ -122,8 +123,6 @@ Public Class dlgTransformClimatic
         ucrPnlTransform.AddToLinkedControls({ucrNudCountOver, ucrChkValuesUnderthreshold}, {rdoCount}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransform.AddToLinkedControls({ucrInputSpellLower, ucrInputSpellUpper}, {rdoSpell}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransform.AddToLinkedControls({ucrNudWBCapacity, ucrInputEvaporation}, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
-        'ucrChkLong.AddToLinkedControls(ucrReceiverDataColumn, {True}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
-        'ucrChkLong.AddToLinkedControls(ucrReceiverStations, {True}, bNewLinkedHideIfParameterMissing:=True)
     End Sub
 
     Private Sub SetDefaults()
@@ -133,11 +132,7 @@ Public Class dlgTransformClimatic
         clsWaterBalanceFunction = New RFunction
         ucrSaveTransform.Reset()
         ucrSelectorTransform.Reset()
-
-    End Sub
-
-    Private Sub ucrPnlTransform_Load(sender As Object, e As EventArgs) Handles ucrPnlTransform.Load
-
+        ucrBase.clsRsyntax.SetBaseRFunction(clsSumFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
