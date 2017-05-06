@@ -82,11 +82,13 @@ Public Class dlgTransformClimatic
         ucrNudSumOver.SetMinMax(1, 366)
         ucrNudSumOver.Increment = 1
         ucrNudSumOver.SetLinkedDisplayControl(lblSumRows)
-
         'ucrNudSumOver.SetRDefault("3")
+
         ucrNudCountOver.SetParameter(New RParameter("count_over"))
         ucrNudCountOver.SetMinMax(1, 366)
         ucrNudCountOver.Increment = 1
+        ucrNudCountOver.SetLinkedDisplayControl(lblCountOver)
+        ucrNudCountOver.SetLinkedDisplayControl(lblCountRows)
         'ucrNudCountOver.SetRDefault("3")
 
         ucrInputSpellLower.SetValidationTypeAsNumeric()
@@ -108,8 +110,10 @@ Public Class dlgTransformClimatic
         ucrSaveTransform.SetPrefix("Sum")
         ucrSaveTransform.SetSaveTypeAsColumn()
 
-        ucrPnlTransform.AddToLinkedControls({ucrInputSum, ucrNudSumOver}, {rdoCount}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
-
+        ucrPnlTransform.AddToLinkedControls({ucrInputSum, ucrNudSumOver}, {rdoSum}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlTransform.AddToLinkedControls({ucrNudCountOver}, {rdoCount}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlTransform.AddToLinkedControls({ucrInputSum, ucrNudSumOver}, {rdoSpell}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlTransform.AddToLinkedControls({ucrInputSum, ucrNudSumOver}, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
         'ucrChkLong.AddToLinkedControls(ucrReceiverDataColumn, {True}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
         'ucrChkLong.AddToLinkedControls(ucrReceiverStations, {True}, bNewLinkedHideIfParameterMissing:=True)
     End Sub
