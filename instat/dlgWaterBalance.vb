@@ -113,6 +113,9 @@ Public Class dlgWaterBalance
         nudWBLessThan.Maximum = Integer.MaxValue
 
         ucrInputEvaporation.SetValidationTypeAsNumeric()
+
+        ucrPnlEndofRains.AddToLinkedControls({ucrNudTotalOverDays, ucrNudAmount}, {rdoRain}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlEndofRains.AddToLinkedControls({ucrInputEvaporation, ucrNudWBLessThan, ucrNudCapacity}, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
     End Sub
 
     Private Sub SetDefaults()
@@ -288,7 +291,7 @@ Public Class dlgWaterBalance
         TestOKEnabled()
     End Sub
 
-    Private Sub nudCapacity_ValueChanged(sender As Object, e As EventArgs) Handles nudCapacity.TextChanged
+    Private Sub nudCapacity_ValueChanged(sender As Object, e As EventArgs)
         WaterBalance()
         TestOKEnabled()
     End Sub

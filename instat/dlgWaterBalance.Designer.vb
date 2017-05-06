@@ -26,14 +26,12 @@ Partial Class dlgWaterBalance
         Me.lblDate = New System.Windows.Forms.Label()
         Me.lblDOY = New System.Windows.Forms.Label()
         Me.grpRainParameters = New System.Windows.Forms.GroupBox()
-        Me.lblWBLessthan = New System.Windows.Forms.Label()
-        Me.nudWBLessThan = New System.Windows.Forms.NumericUpDown()
-        Me.nudCapacity = New System.Windows.Forms.NumericUpDown()
-        Me.lblCapacity = New System.Windows.Forms.Label()
         Me.nudFrom = New System.Windows.Forms.NumericUpDown()
         Me.lblFrom = New System.Windows.Forms.Label()
         Me.nudTo = New System.Windows.Forms.NumericUpDown()
         Me.lblTo = New System.Windows.Forms.Label()
+        Me.lblWBLessthan = New System.Windows.Forms.Label()
+        Me.lblCapacity = New System.Windows.Forms.Label()
         Me.lblRainfall = New System.Windows.Forms.Label()
         Me.lblEvaporation = New System.Windows.Forms.Label()
         Me.ucrSaveWaterBalance = New instat.ucrSave()
@@ -47,18 +45,18 @@ Partial Class dlgWaterBalance
         Me.rdoBoth = New System.Windows.Forms.RadioButton()
         Me.rdoRain = New System.Windows.Forms.RadioButton()
         Me.rdoWaterBalance = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlFreqDisplay = New instat.UcrPanel()
+        Me.ucrPnlEndofRains = New instat.UcrPanel()
         Me.lblStation = New System.Windows.Forms.Label()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.grpRain = New System.Windows.Forms.GroupBox()
-        Me.grpWaterBalance = New System.Windows.Forms.GroupBox()
-        Me.ucrNudTotalOverDays = New instat.ucrNud()
-        Me.lblTotalOverDays = New System.Windows.Forms.Label()
         Me.lblAmount = New System.Windows.Forms.Label()
         Me.ucrNudAmount = New instat.ucrNud()
+        Me.lblTotalOverDays = New System.Windows.Forms.Label()
+        Me.ucrNudTotalOverDays = New instat.ucrNud()
+        Me.grpWaterBalance = New System.Windows.Forms.GroupBox()
+        Me.ucrNudCapacity = New instat.ucrNud()
+        Me.ucrNudWBLessThan = New instat.ucrNud()
         Me.grpRainParameters.SuspendLayout()
-        CType(Me.nudWBLessThan, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudCapacity, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudFrom, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudTo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpRain.SuspendLayout()
@@ -104,46 +102,6 @@ Partial Class dlgWaterBalance
         Me.grpRainParameters.TabIndex = 21
         Me.grpRainParameters.TabStop = False
         '
-        'lblWBLessthan
-        '
-        Me.lblWBLessthan.AutoSize = True
-        Me.lblWBLessthan.Location = New System.Drawing.Point(270, 16)
-        Me.lblWBLessthan.Name = "lblWBLessthan"
-        Me.lblWBLessthan.Size = New System.Drawing.Size(93, 13)
-        Me.lblWBLessthan.TabIndex = 7
-        Me.lblWBLessthan.Tag = "Water Balance <="
-        Me.lblWBLessthan.Text = "Water Balance <="
-        '
-        'nudWBLessThan
-        '
-        Me.nudWBLessThan.DecimalPlaces = 2
-        Me.nudWBLessThan.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.nudWBLessThan.Location = New System.Drawing.Point(369, 16)
-        Me.nudWBLessThan.Name = "nudWBLessThan"
-        Me.nudWBLessThan.Size = New System.Drawing.Size(53, 20)
-        Me.nudWBLessThan.TabIndex = 6
-        Me.nudWBLessThan.Value = New Decimal(New Integer() {85, 0, 0, 131072})
-        '
-        'nudCapacity
-        '
-        Me.nudCapacity.DecimalPlaces = 2
-        Me.nudCapacity.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.nudCapacity.Location = New System.Drawing.Point(211, 16)
-        Me.nudCapacity.Name = "nudCapacity"
-        Me.nudCapacity.Size = New System.Drawing.Size(53, 20)
-        Me.nudCapacity.TabIndex = 1
-        Me.nudCapacity.Value = New Decimal(New Integer() {85, 0, 0, 131072})
-        '
-        'lblCapacity
-        '
-        Me.lblCapacity.AutoSize = True
-        Me.lblCapacity.Location = New System.Drawing.Point(151, 18)
-        Me.lblCapacity.Name = "lblCapacity"
-        Me.lblCapacity.Size = New System.Drawing.Size(51, 13)
-        Me.lblCapacity.TabIndex = 0
-        Me.lblCapacity.Tag = "Capacity:"
-        Me.lblCapacity.Text = "Capacity:"
-        '
         'nudFrom
         '
         Me.nudFrom.Location = New System.Drawing.Point(62, 18)
@@ -185,6 +143,26 @@ Partial Class dlgWaterBalance
         Me.lblTo.TabIndex = 4
         Me.lblTo.Tag = ""
         Me.lblTo.Text = "To Day:"
+        '
+        'lblWBLessthan
+        '
+        Me.lblWBLessthan.AutoSize = True
+        Me.lblWBLessthan.Location = New System.Drawing.Point(270, 16)
+        Me.lblWBLessthan.Name = "lblWBLessthan"
+        Me.lblWBLessthan.Size = New System.Drawing.Size(93, 13)
+        Me.lblWBLessthan.TabIndex = 7
+        Me.lblWBLessthan.Tag = "Water Balance <="
+        Me.lblWBLessthan.Text = "Water Balance <="
+        '
+        'lblCapacity
+        '
+        Me.lblCapacity.AutoSize = True
+        Me.lblCapacity.Location = New System.Drawing.Point(151, 18)
+        Me.lblCapacity.Name = "lblCapacity"
+        Me.lblCapacity.Size = New System.Drawing.Size(51, 13)
+        Me.lblCapacity.TabIndex = 0
+        Me.lblCapacity.Tag = "Capacity:"
+        Me.lblCapacity.Text = "Capacity:"
         '
         'lblRainfall
         '
@@ -336,12 +314,12 @@ Partial Class dlgWaterBalance
         Me.rdoWaterBalance.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.rdoWaterBalance.UseVisualStyleBackColor = True
         '
-        'ucrPnlFreqDisplay
+        'ucrPnlEndofRains
         '
-        Me.ucrPnlFreqDisplay.Location = New System.Drawing.Point(22, 13)
-        Me.ucrPnlFreqDisplay.Name = "ucrPnlFreqDisplay"
-        Me.ucrPnlFreqDisplay.Size = New System.Drawing.Size(349, 29)
-        Me.ucrPnlFreqDisplay.TabIndex = 28
+        Me.ucrPnlEndofRains.Location = New System.Drawing.Point(22, 13)
+        Me.ucrPnlEndofRains.Name = "ucrPnlEndofRains"
+        Me.ucrPnlEndofRains.Size = New System.Drawing.Size(349, 29)
+        Me.ucrPnlEndofRains.TabIndex = 28
         '
         'lblStation
         '
@@ -376,42 +354,6 @@ Partial Class dlgWaterBalance
         Me.grpRain.TabStop = False
         Me.grpRain.Text = "Rain"
         '
-        'grpWaterBalance
-        '
-        Me.grpWaterBalance.Controls.Add(Me.lblWBLessthan)
-        Me.grpWaterBalance.Controls.Add(Me.nudWBLessThan)
-        Me.grpWaterBalance.Controls.Add(Me.ucrInputEvaporation)
-        Me.grpWaterBalance.Controls.Add(Me.lblEvaporation)
-        Me.grpWaterBalance.Controls.Add(Me.nudCapacity)
-        Me.grpWaterBalance.Controls.Add(Me.lblCapacity)
-        Me.grpWaterBalance.Location = New System.Drawing.Point(9, 345)
-        Me.grpWaterBalance.Name = "grpWaterBalance"
-        Me.grpWaterBalance.Size = New System.Drawing.Size(429, 48)
-        Me.grpWaterBalance.TabIndex = 35
-        Me.grpWaterBalance.TabStop = False
-        Me.grpWaterBalance.Text = "Water Balance"
-        '
-        'ucrNudTotalOverDays
-        '
-        Me.ucrNudTotalOverDays.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTotalOverDays.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTotalOverDays.Location = New System.Drawing.Point(106, 19)
-        Me.ucrNudTotalOverDays.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudTotalOverDays.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTotalOverDays.Name = "ucrNudTotalOverDays"
-        Me.ucrNudTotalOverDays.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudTotalOverDays.TabIndex = 0
-        Me.ucrNudTotalOverDays.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblTotalOverDays
-        '
-        Me.lblTotalOverDays.AutoSize = True
-        Me.lblTotalOverDays.Location = New System.Drawing.Point(10, 23)
-        Me.lblTotalOverDays.Name = "lblTotalOverDays"
-        Me.lblTotalOverDays.Size = New System.Drawing.Size(90, 13)
-        Me.lblTotalOverDays.TabIndex = 33
-        Me.lblTotalOverDays.Text = "Total Over Day(s)"
-        '
         'lblAmount
         '
         Me.lblAmount.AutoSize = True
@@ -433,6 +375,66 @@ Partial Class dlgWaterBalance
         Me.ucrNudAmount.TabIndex = 34
         Me.ucrNudAmount.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
+        'lblTotalOverDays
+        '
+        Me.lblTotalOverDays.AutoSize = True
+        Me.lblTotalOverDays.Location = New System.Drawing.Point(10, 23)
+        Me.lblTotalOverDays.Name = "lblTotalOverDays"
+        Me.lblTotalOverDays.Size = New System.Drawing.Size(90, 13)
+        Me.lblTotalOverDays.TabIndex = 33
+        Me.lblTotalOverDays.Text = "Total Over Day(s)"
+        '
+        'ucrNudTotalOverDays
+        '
+        Me.ucrNudTotalOverDays.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTotalOverDays.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudTotalOverDays.Location = New System.Drawing.Point(106, 19)
+        Me.ucrNudTotalOverDays.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudTotalOverDays.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTotalOverDays.Name = "ucrNudTotalOverDays"
+        Me.ucrNudTotalOverDays.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudTotalOverDays.TabIndex = 0
+        Me.ucrNudTotalOverDays.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'grpWaterBalance
+        '
+        Me.grpWaterBalance.Controls.Add(Me.ucrNudWBLessThan)
+        Me.grpWaterBalance.Controls.Add(Me.ucrNudCapacity)
+        Me.grpWaterBalance.Controls.Add(Me.lblWBLessthan)
+        Me.grpWaterBalance.Controls.Add(Me.ucrInputEvaporation)
+        Me.grpWaterBalance.Controls.Add(Me.lblEvaporation)
+        Me.grpWaterBalance.Controls.Add(Me.lblCapacity)
+        Me.grpWaterBalance.Location = New System.Drawing.Point(9, 345)
+        Me.grpWaterBalance.Name = "grpWaterBalance"
+        Me.grpWaterBalance.Size = New System.Drawing.Size(429, 48)
+        Me.grpWaterBalance.TabIndex = 35
+        Me.grpWaterBalance.TabStop = False
+        Me.grpWaterBalance.Text = "Water Balance"
+        '
+        'ucrNudCapacity
+        '
+        Me.ucrNudCapacity.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCapacity.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudCapacity.Location = New System.Drawing.Point(208, 15)
+        Me.ucrNudCapacity.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudCapacity.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCapacity.Name = "ucrNudCapacity"
+        Me.ucrNudCapacity.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudCapacity.TabIndex = 36
+        Me.ucrNudCapacity.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudWBLessThan
+        '
+        Me.ucrNudWBLessThan.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWBLessThan.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudWBLessThan.Location = New System.Drawing.Point(354, 9)
+        Me.ucrNudWBLessThan.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudWBLessThan.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWBLessThan.Name = "ucrNudWBLessThan"
+        Me.ucrNudWBLessThan.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudWBLessThan.TabIndex = 37
+        Me.ucrNudWBLessThan.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'dlgWaterBalance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -445,7 +447,7 @@ Partial Class dlgWaterBalance
         Me.Controls.Add(Me.rdoBoth)
         Me.Controls.Add(Me.rdoRain)
         Me.Controls.Add(Me.rdoWaterBalance)
-        Me.Controls.Add(Me.ucrPnlFreqDisplay)
+        Me.Controls.Add(Me.ucrPnlEndofRains)
         Me.Controls.Add(Me.ucrSaveWaterBalance)
         Me.Controls.Add(Me.ucrReceiverYear)
         Me.Controls.Add(Me.lblYear)
@@ -467,8 +469,6 @@ Partial Class dlgWaterBalance
         Me.Text = "End of Rains/Season"
         Me.grpRainParameters.ResumeLayout(False)
         Me.grpRainParameters.PerformLayout()
-        CType(Me.nudWBLessThan, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudCapacity, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudFrom, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudTo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpRain.ResumeLayout(False)
@@ -489,7 +489,6 @@ Partial Class dlgWaterBalance
     Friend WithEvents ucrReceiverDOY As ucrReceiverSingle
     Friend WithEvents lblDOY As Label
     Friend WithEvents grpRainParameters As GroupBox
-    Friend WithEvents nudCapacity As NumericUpDown
     Friend WithEvents lblCapacity As Label
     Friend WithEvents nudFrom As NumericUpDown
     Friend WithEvents lblFrom As Label
@@ -499,7 +498,6 @@ Partial Class dlgWaterBalance
     Friend WithEvents ucrReceiverRainfall As ucrReceiverSingle
     Friend WithEvents ucrSelectorForWaterBalance As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents nudWBLessThan As NumericUpDown
     Friend WithEvents lblWBLessthan As Label
     Friend WithEvents ucrSaveWaterBalance As ucrSave
     Friend WithEvents lblStation As Label
@@ -507,11 +505,13 @@ Partial Class dlgWaterBalance
     Friend WithEvents rdoBoth As RadioButton
     Friend WithEvents rdoRain As RadioButton
     Friend WithEvents rdoWaterBalance As RadioButton
-    Friend WithEvents ucrPnlFreqDisplay As UcrPanel
+    Friend WithEvents ucrPnlEndofRains As UcrPanel
     Friend WithEvents grpWaterBalance As GroupBox
     Friend WithEvents grpRain As GroupBox
     Friend WithEvents lblAmount As Label
     Friend WithEvents ucrNudAmount As ucrNud
     Friend WithEvents lblTotalOverDays As Label
     Friend WithEvents ucrNudTotalOverDays As ucrNud
+    Friend WithEvents ucrNudWBLessThan As ucrNud
+    Friend WithEvents ucrNudCapacity As ucrNud
 End Class
