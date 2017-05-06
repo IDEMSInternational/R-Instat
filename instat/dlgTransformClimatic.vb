@@ -76,10 +76,13 @@ Public Class dlgTransformClimatic
         dctInputSumPairs.Add("Min", Chr(34) & "min" & Chr(34))
         dctInputSumPairs.Add("Mean", Chr(34) & "mean" & Chr(34))
         ucrInputSum.SetItems(dctInputSumPairs)
+        ucrInputSum.SetLinkedDisplayControl(lblSumOver)
 
         ucrNudSumOver.SetParameter(New RParameter("sum_over"))
         ucrNudSumOver.SetMinMax(1, 366)
         ucrNudSumOver.Increment = 1
+        ucrNudSumOver.SetLinkedDisplayControl(lblSumRows)
+
         'ucrNudSumOver.SetRDefault("3")
         ucrNudCountOver.SetParameter(New RParameter("count_over"))
         ucrNudCountOver.SetMinMax(1, 366)
@@ -104,6 +107,11 @@ Public Class dlgTransformClimatic
         ucrSaveTransform.SetIsTextBox()
         ucrSaveTransform.SetPrefix("Sum")
         ucrSaveTransform.SetSaveTypeAsColumn()
+
+        ucrPnlTransform.AddToLinkedControls({ucrInputSum, ucrNudSumOver}, {rdoCount}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
+
+        'ucrChkLong.AddToLinkedControls(ucrReceiverDataColumn, {True}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
+        'ucrChkLong.AddToLinkedControls(ucrReceiverStations, {True}, bNewLinkedHideIfParameterMissing:=True)
     End Sub
 
     Private Sub SetDefaults()
@@ -136,13 +144,21 @@ Public Class dlgTransformClimatic
 
     Private Sub ucrPnlTransform_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlTransform.ControlContentsChanged
         If rdoSum.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSumFunction)
             ucrSaveTransform.SetPrefix("Sum")
         ElseIf rdoCount.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
             ucrSaveTransform.SetPrefix("Count")
         ElseIf rdoSpell.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSpellFunction)
             ucrSaveTransform.SetPrefix("Spell")
         ElseIf rdoWaterBalance.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsWaterBalanceFunction)
             ucrSaveTransform.SetPrefix("Water_balance")
         End If
+    End Sub
+
+    Private Sub ucrReceiverDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged ' add more teskok controls
+        TestOkEnabled()
     End Sub
 End Class
