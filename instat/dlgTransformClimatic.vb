@@ -88,28 +88,29 @@ Public Class dlgTransformClimatic
         ucrNudCountOver.SetMinMax(1, 366)
         ucrNudCountOver.Increment = 1
         ucrNudCountOver.SetLinkedDisplayControl(lblCountOver)
-        ucrNudCountOver.SetLinkedDisplayControl(lblCountRows)
-
-
         'ucrNudCountOver.SetRDefault("3")
+
+        ucrChkValuesUnderthreshold.SetParameter(New RParameter("values_under_threshold"))
+        ucrChkValuesUnderthreshold.SetText("Values Under Threshold")
+        ucrChkValuesUnderthreshold.SetLinkedDisplayControl(lblCountRows)
 
         ucrInputSpellLower.SetValidationTypeAsNumeric()
         ucrInputSpellLower.SetParameter(New RParameter("spell_lower"))
         ucrInputSpellLower.SetLinkedDisplayControl(lblValuesBetween)
-        ucrInputSpellLower.SetLinkedDisplayControl(lblSpellAnd)
 
         ucrInputSpellUpper.SetValidationTypeAsNumeric()
         ucrInputSpellUpper.SetParameter(New RParameter("spell_upper"))
+        ucrInputSpellUpper.SetLinkedDisplayControl(lblSpellAnd)
 
         ucrNudWBCapacity.SetParameter(New RParameter("capacity"))
         ucrNudWBCapacity.SetMinMax(1, 366)
         ucrNudWBCapacity.Increment = 1
         ucrNudWBCapacity.SetLinkedDisplayControl(lblWBCapacity)
-        ucrNudWBCapacity.SetLinkedDisplayControl(lblWBEvaporation)
         'ucrNudWBCapacity.SetRDefault("60")
 
         ucrInputEvaporation.SetValidationTypeAsNumeric()
         ucrInputEvaporation.SetParameter(New RParameter("evaporation"))
+        ucrInputEvaporation.SetLinkedDisplayControl(lblWBEvaporation)
 
         ucrSaveTransform.SetDataFrameSelector(ucrSelectorTransform.ucrAvailableDataFrames)
         ucrSaveTransform.SetLabelText("New Column Name:")
