@@ -104,7 +104,10 @@ Public Class dlgTransformClimatic
         ucrNudWBCapacity.SetParameter(New RParameter("capacity"))
         ucrNudWBCapacity.SetMinMax(1, 366)
         ucrNudWBCapacity.Increment = 1
+        ucrNudWBCapacity.SetLinkedDisplayControl(lblWBCapacity)
+        ucrNudWBCapacity.SetLinkedDisplayControl(lblWBEvaporation)
         'ucrNudWBCapacity.SetRDefault("60")
+
         ucrInputEvaporation.SetValidationTypeAsNumeric()
         ucrInputEvaporation.SetParameter(New RParameter("evaporation"))
 
@@ -117,7 +120,7 @@ Public Class dlgTransformClimatic
         ucrPnlTransform.AddToLinkedControls({ucrInputSum, ucrNudSumOver}, {rdoSum}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransform.AddToLinkedControls({ucrNudCountOver, ucrChkValuesUnderthreshold}, {rdoCount}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransform.AddToLinkedControls({ucrInputSpellLower, ucrInputSpellUpper}, {rdoSpell}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlTransform.AddToLinkedControls({ucrInputSum, ucrNudSumOver}, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlTransform.AddToLinkedControls({ucrNudWBCapacity, ucrInputEvaporation}, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
         'ucrChkLong.AddToLinkedControls(ucrReceiverDataColumn, {True}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
         'ucrChkLong.AddToLinkedControls(ucrReceiverStations, {True}, bNewLinkedHideIfParameterMissing:=True)
     End Sub
