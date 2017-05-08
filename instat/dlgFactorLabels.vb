@@ -35,7 +35,7 @@ Public Class dlgViewFactorLabels
     End Sub
 
     Private Sub InitialiseDialog()
-        'TODO: HElP ID
+        ucrBase.iHelpTopicID = 517
 
         ucrReceiverFactorColumns.SetParameter(New RParameter("x", 1))
         ucrReceiverFactorColumns.SetParameterIsString()
