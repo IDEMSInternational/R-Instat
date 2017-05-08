@@ -1355,3 +1355,29 @@ instat_object$set("public", "import_from_iri", function(download_from, data_file
 } 
 )
 
+instat_object$set("public", "export_workspace", function(data_names, file, include_graphs = TRUE, include_models = TRUE, include_metadata = TRUE) {
+  e <- new.env()
+  for(temp_name in data_names) {
+    e[[temp_name]] <- self$get_data_frame(temp_name, use_current_filter = FALSE)
+    if(include_graphs) {
+      graphs <- self$get_graphs(temp_name)
+      graph_names <- names(graphs)
+      for(i in seq_along(graphs)) {
+        e[[paste(temp_name, graph_names[i], sep = "_")]] <- graphs[i]
+      }
+    }
+    if(include_models) {
+      models <- self$get_models(temp_name)
+      model_names <- names(models)
+      for(i in seq_along(models)) {
+        e[[paste(temp_name, model_names[i], sep = "_")]] <- models[i]
+      }
+    }
+    if(include_metadata) {
+      var_metadata <- self$get_variables_metadata(temp_name)
+      e[[paste(temp_name, "variables_metadata", sep = "_")]] <- var_metadata
+    }
+  }
+  save(list = ls(all.names = TRUE, envir = e), envir = e, file = file)
+} 
+)
