@@ -66,6 +66,7 @@ Public Class dlgRecodeNumericIntoQuantiles
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 537
         ucrReceiverNumeric.Selector = ucrSelectorRecodeNumeric
         ucrReceiverNumeric.SetMeAsReceiver()
         ucrReceiverNumeric.SetDataType("numeric")
