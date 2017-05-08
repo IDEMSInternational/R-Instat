@@ -205,7 +205,7 @@ Partial Class dlgBoxplot
         '
         Me.ucrSaveBoxplot.Location = New System.Drawing.Point(10, 351)
         Me.ucrSaveBoxplot.Name = "ucrSaveBoxplot"
-        Me.ucrSaveBoxplot.Size = New System.Drawing.Size(257, 24)
+        Me.ucrSaveBoxplot.Size = New System.Drawing.Size(254, 24)
         Me.ucrSaveBoxplot.TabIndex = 14
         '
         'dlgBoxplot
