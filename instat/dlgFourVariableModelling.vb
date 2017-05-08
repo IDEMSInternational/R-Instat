@@ -267,7 +267,7 @@ Public Class dlgFourVariableModelling
         End If
     End Sub
 
-    Public Sub ucrFamily_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrFamily.cboDistributionsIndexChanged
+    Public Sub ucrFamily_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrFamily.ucrInputDistributionsIndexChanged
         ChooseRFunction()
     End Sub
 
