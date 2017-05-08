@@ -87,6 +87,14 @@ Public Class dlgOneWayFrequencies
         ucrChkFlip.SetText("Flip Coordinates")
         ucrChkFlip.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkFlip.SetRDefault("FALSE")
+
+        ucrSaveGraph.SetPrefix("Graph")
+        ucrSaveGraph.SetSaveTypeAsGraph()
+        ucrSaveGraph.SetDataFrameSelector(ucrSelectorOneWayFreq.ucrAvailableDataFrames)
+        ucrSaveGraph.SetCheckBoxText("Save Graph")
+        ucrSaveGraph.SetIsComboBox()
+        ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
+
     End Sub
 
     Private Sub SetDefaults()
@@ -132,10 +140,11 @@ Public Class dlgOneWayFrequencies
         ucrChkFlip.SetRCode(clsSjPlot, bReset)
         ucrChkGroupData.SetRCode(clsSjTab, bReset)
         ucrNudGroups.SetRCode(clsSjTab, bReset)
+        ucrSaveGraph.SetRCode(clsPlotGrid, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverOneWayFreq.IsEmpty() AndAlso ((ucrChkGroupData.Checked AndAlso ucrNudGroups.GetText <> "") OrElse Not ucrChkGroupData.Checked) Then
+        If Not ucrReceiverOneWayFreq.IsEmpty() AndAlso ((ucrChkGroupData.Checked AndAlso ucrNudGroups.GetText <> "") OrElse Not ucrChkGroupData.Checked) AndAlso ucrSaveGraph.IsComplete() Then
             If ucrChkWeights.Checked Then
                 If Not ucrReceiverWeights.IsEmpty Then
                     ucrBase.OKEnabled(True)
@@ -197,7 +206,7 @@ Public Class dlgOneWayFrequencies
         End If
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWeights.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrNudGroups.ControlContentsChanged, ucrChkGroupData.ControlContentsChanged, ucrReceiverOneWayFreq.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWeights.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrNudGroups.ControlContentsChanged, ucrChkGroupData.ControlContentsChanged, ucrReceiverOneWayFreq.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
