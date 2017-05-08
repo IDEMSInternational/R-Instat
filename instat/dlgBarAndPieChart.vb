@@ -5,7 +5,7 @@
 ' it under the terms of the GNU General Public License as published by
 ' the Free Software Foundation, either version 3 of the License, or
 ' (at your option) any later version.
-'
+
 ' This program is distributed in the hope that it will be useful,
 ' but WITHOUT ANY WARRANTY; without even the implied warranty of
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -48,7 +48,6 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub SetDefaults()
-        'Set main dialog defaults...
         ucrBarChartSelector.Reset()
         ucrBarChartSelector.Focus()
         ucrFactorReceiver.SetMeAsReceiver()
@@ -134,41 +133,40 @@ Public Class dlgBarAndPieChart
         SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
-    Private Sub SetFactorReceiverParameter()
-        If rdoBarChart.Checked = True Then
-            ucrFactorReceiver.ChangeParameterName("x")
-        Else
-            ucrFactorReceiver.ChangeParameterName("fill")
-        End If
-        TestOKEnabled()
-    End Sub
 
     Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged
+        SetDailogOptions()
+        'Warning: need to set second factor first, as in the pie chart case, it erases "fill" parameter (in clsRaesFunction), which is the parameter that takes the value in the first factor receiver.
+    End Sub
+
+    Private Sub SetDailogOptions()
         Dim clsBarForPieFunc As New RFunction
         Dim clsBarForPieParam As New RParameter
-        SetFactorReceiverParameter()
+
         If rdoBarChart.Checked = True Then
+            ucrFactorReceiver.ChangeParameterName("x")
             ucrSaveBar.SetPrefix("Bar")
             clsRgeomPlotFunction.SetRCommand("geom_bar")
             cmdPieChartOptions.Visible = False
             cmdBarChartOptions.Visible = True
+
         ElseIf rdoPieChart.Checked = True Then
-            ucrSaveBar.SetPrefix("Pie")
-            cmdPieChartOptions.Visible = True
-            cmdBarChartOptions.Visible = False
-            clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
-            clsRgeomPlotFunction.SetRCommand("coord_polar")
-            clsRgeomPlotFunction.AddParameter("theta", Chr(34) & "y" & Chr(34))
+            ucrFactorReceiver.ChangeParameterName("fill")
+                ucrSaveBar.SetPrefix("Pie")
+                cmdPieChartOptions.Visible = True
+                cmdBarChartOptions.Visible = False
+                clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
+                clsRgeomPlotFunction.SetRCommand("coord_polar")
+                clsRgeomPlotFunction.AddParameter("theta", Chr(34) & "y" & Chr(34))
 
-            clsBarForPieParam.SetArgument(clsBarForPieFunc)
-            clsBarForPieFunc.SetPackageName("ggplot2")
-            clsBarForPieParam.SetArgumentName("geom_bar")
-            clsBarForPieFunc.SetRCommand("geom_bar")
-            clsBarForPieFunc.AddParameter("width", "1")
-            clsBaseOperator.AddParameter(clsBarForPieParam)
-        End If
+                clsBarForPieParam.SetArgument(clsBarForPieFunc)
+                clsBarForPieFunc.SetPackageName("ggplot2")
+                clsBarForPieParam.SetArgumentName("geom_bar")
+                clsBarForPieFunc.SetRCommand("geom_bar")
+                clsBarForPieFunc.AddParameter("width", "1")
+                clsBaseOperator.AddParameter(clsBarForPieParam)
+            End If
 
-        'Warning: need to set second factor first, as in the pie chart case, it erases "fill" parameter (in clsRaesFunction), which is the parameter that takes the value in the first factor receiver.
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
