@@ -353,38 +353,52 @@ instat_object$set("public", "summary_table", function(data_name, columns_to_summ
       # How to save that calculate_margins bit
     }
   }
+  
+  # First, Unstack the general table (cell_values)
+  cell_values <- dcast(Row1 + ... + Rown ~ Col, value.var = "statistic of interest") # should run for every statistic?
+  # e.g. cell_values <- dcast(fertgrp. + variety. ~ village., value.var = "summary_count_Village")
+  
+  
+  # Now, let's take [[2]]
   column_factor_margin <- margin_tables[2]   # in long term where is [[2]], e.g. which(powerSet(c(1,2,3, 4)) == "1"
+  
+  #note column_factor_margin looks like this:
+    #  village count1 count2
+    #  1   kesen      7      3
+    #  2   nanda     14      3
+    #  3    niko      5      3
+    #  4   sabey     10      3
+  
+  # statistic of interest (e.g. count1/summary_count_Village)
+  Total_of_Col_Margin <- append(column_factor_margin$summary_count_Village, values = c(NA, NA), after = 0) 
+  # no. of NAs = number of Row Factors
+  # summary_count_village here as this is what we are interested in.
+  #add this in
+  cell_values <- rbind(cell_values, Total_Margin)
 
-  # so I need to add this as a row for the column margins
-  # column_factor_margin <- looks like this:
-#  village count1 count2
-#  1   kesen      7      3
-#  2   nanda     14      3
-#  3    niko      5      3
-#  4   sabey     10      3
-
+  # Finally, let's take [[7]] and [[1]]. Append [[1]]
   
-    
-  # which will then be which(powerSet(c(1,2,3,4)) == "column_factors")?
-  # which(power_sets == "column_factors")
+  overall_value <- margin_tables[1]   # want to get this 1st value in that list.
+  #This gives "[[1]] numeric(0)", I want just "numeric(0)"
   
-  row_factor_margin <- margin_tables[length(margin_tables)] # last one. (last is usually 1,2,3 but here it is not because we have removed the last term)
-  #  # want to get this last value in that list. This gives "[[1]]   [1] 2 3", I want just "2, 3" I assume?
-  # Okay so my question here is
-  # 1. Does this give me "[[1]]   [1] 2 3"
-  # 2. If yes, is this okay? Or do I just want 2,3 
-  # 3. Is 2,3 a dataframe yes?
+  row_factor_margin <- margin_tables[length(margin_tables)]
+  # last one. (last is usually 1,2,3 but here it is not because we have removed the last term)
+  # want to get this last value in that list. This gives "[[1]]   [1] 2 3", I want just "2, 3" I assume?
+  # Okay so my question here is what does this give me? Does this give me the dataframe:
+  #   Factor1 Factor2 summary_count_Village. summary_count_non_missing_Village.
+  #1       1       6                    4                              3
+  #2       2       7                    6                              3
+  #3       2       6                   10                              3
+  #4       2       5                    1                              3
+  #5       3       7                    4                              3
+  #6       3       6                    3                              3
+  #7       3       5                    8                              3
   
   
-  overall_value <- margin_tables[1]   # want to get this 1st value in that list. This gives "[[1]] numeric(0)", I want just "numeric(0)"
+  # append the vector for summary_count_Village with the overall_value
+  Total_Margin <- append(row_factor_margin$summary_count_Village., overall_value, after = 0)
+  ### cbind it to the main one.
+  cell_values <- cbind(cell_values, Total_Margin)
   
-
-  
-  
-  
-  # unstack cell data by column factor
-  # get the three margins (row, column, overall)
-  # make them into 2 vectors (one row and one column)
-  # do rbind and cbind to add them???
 }
 )
