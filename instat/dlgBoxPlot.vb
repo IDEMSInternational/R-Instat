@@ -56,7 +56,7 @@ Public Class dlgBoxplot
         ucrPnlPlots.AddFunctionNamesCondition(rdoBoxplot, "geom_boxplot")
         ucrPnlPlots.AddFunctionNamesCondition(rdoJitter, "geom_jitter")
         ucrPnlPlots.AddFunctionNamesCondition(rdoViolin, "geom_violin")
-        ucrPnlPlots.AddToLinkedControls(ucrChkVarwidth, {rdoBoxplot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlPlots.AddToLinkedControls(ucrChkVarWidth, {rdoBoxplot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrSelectorBoxPlot.SetParameter(New RParameter("data", 0))
         ucrSelectorBoxPlot.SetParameterIsrfunction()
@@ -82,10 +82,10 @@ Public Class dlgBoxplot
         ucrSecondFactorReceiver.SetParameterIsString()
         ucrSecondFactorReceiver.bWithQuotes = False
 
-        ucrChkVarwidth.SetParameter(New RParameter("varwidth"))
-        ucrChkVarwidth.SetText("Variable Width")
-        ucrChkVarwidth.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkVarwidth.SetRDefault("FALSE")
+        ucrChkVarWidth.SetParameter(New RParameter("varwidth", 1))
+        ucrChkVarWidth.SetText("Variable Width")
+        ucrChkVarWidth.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkVarWidth.SetRDefault("FALSE")
 
         clsCoordFlipFunc.SetPackageName("ggplot2")
         clsCoordFlipFunc.SetRCommand("coord_flip")
@@ -112,7 +112,6 @@ Public Class dlgBoxplot
         clsRaesFunction = New RFunction
 
         ucrSelectorBoxPlot.Reset()
-        ucrSelectorBoxPlot.Focus()
         ucrSaveBoxplot.Reset()
         sdgPlots.Reset()
 
@@ -132,8 +131,8 @@ Public Class dlgBoxplot
 
         clsRgeomPlotFunction.SetPackageName("ggplot2")
         clsRgeomPlotFunction.SetRCommand("geom_boxplot")
-
         clsRgeomPlotFunction.AddParameter("varwidth", "FALSE")
+
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
         TempOptionsDisabledInMultipleVariablesCase()
@@ -145,7 +144,7 @@ Public Class dlgBoxplot
         ucrSelectorBoxPlot.SetRCode(clsRggplotFunction, bReset)
 
         ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
-        ucrChkVarwidth.SetRCode(clsRgeomPlotFunction, bReset)
+        ucrChkVarWidth.SetRCode(clsRgeomPlotFunction, bReset)
         'passes in +cordflip
         ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
         ucrVariablesAsFactorForBoxplot.SetRCode(clsRaesFunction, bReset)
