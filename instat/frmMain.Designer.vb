@@ -317,6 +317,7 @@ Partial Class frmMain
         Me.mnuFileConvert = New System.Windows.Forms.ToolStripMenuItem()
         Me.tlSeparatorFile = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuExport = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExportRWorkspaceToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileCloseData = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuPrepare = New System.Windows.Forms.ToolStripMenuItem()
@@ -426,7 +427,6 @@ Partial Class frmMain
         Me.mnuPrepareRObjectsRename = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareRObjectsReorder = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareRObjectsDelete = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ExportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCorruption = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCorruptionDefineCorruptionData = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCorruptionPrepare = New System.Windows.Forms.ToolStripMenuItem()
@@ -454,6 +454,7 @@ Partial Class frmMain
         Me.mnuToolsSaveCurrentOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsLoadOptions = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsOptions = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.splOverall = New System.Windows.Forms.SplitContainer()
         Me.splExtraWindows = New System.Windows.Forms.SplitContainer()
         Me.splMetadata = New System.Windows.Forms.SplitContainer()
@@ -465,7 +466,6 @@ Partial Class frmMain
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
-        Me.ExportRWorkspaceToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -2571,6 +2571,12 @@ Partial Class frmMain
         Me.mnuExport.Size = New System.Drawing.Size(204, 22)
         Me.mnuExport.Text = "Export Data"
         '
+        'ExportRWorkspaceToolStripMenuItem1
+        '
+        Me.ExportRWorkspaceToolStripMenuItem1.Name = "ExportRWorkspaceToolStripMenuItem1"
+        Me.ExportRWorkspaceToolStripMenuItem1.Size = New System.Drawing.Size(204, 22)
+        Me.ExportRWorkspaceToolStripMenuItem1.Text = "Export R Workspace..."
+        '
         'mnuFileCloseData
         '
         Me.mnuFileCloseData.Enabled = False
@@ -3275,7 +3281,7 @@ Partial Class frmMain
         '
         'mnuPrepareRObjects
         '
-        Me.mnuPrepareRObjects.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareRObjectsView, Me.mnuPrepareRObjectsRename, Me.mnuPrepareRObjectsReorder, Me.mnuPrepareRObjectsDelete, Me.ExportToolStripMenuItem})
+        Me.mnuPrepareRObjects.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuPrepareRObjectsView, Me.mnuPrepareRObjectsRename, Me.mnuPrepareRObjectsReorder, Me.mnuPrepareRObjectsDelete})
         Me.mnuPrepareRObjects.Name = "mnuPrepareRObjects"
         Me.mnuPrepareRObjects.Size = New System.Drawing.Size(172, 22)
         Me.mnuPrepareRObjects.Tag = "R_Objects"
@@ -3308,12 +3314,6 @@ Partial Class frmMain
         Me.mnuPrepareRObjectsDelete.Size = New System.Drawing.Size(126, 22)
         Me.mnuPrepareRObjectsDelete.Tag = "Delete..."
         Me.mnuPrepareRObjectsDelete.Text = "Delete..."
-        '
-        'ExportToolStripMenuItem
-        '
-        Me.ExportToolStripMenuItem.Name = "ExportToolStripMenuItem"
-        Me.ExportToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
-        Me.ExportToolStripMenuItem.Text = "Export..."
         '
         'mnuCorruption
         '
@@ -3494,6 +3494,12 @@ Partial Class frmMain
         Me.mnuToolsOptions.Tag = "Options..."
         Me.mnuToolsOptions.Text = "Options..."
         '
+        'ExportToolStripMenuItem
+        '
+        Me.ExportToolStripMenuItem.Name = "ExportToolStripMenuItem"
+        Me.ExportToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
+        Me.ExportToolStripMenuItem.Text = "Export..."
+        '
         'splOverall
         '
         Me.splOverall.BackColor = System.Drawing.Color.LightGray
@@ -3655,12 +3661,6 @@ Partial Class frmMain
         Me.ucrOutput.Name = "ucrOutput"
         Me.ucrOutput.Size = New System.Drawing.Size(295, 113)
         Me.ucrOutput.TabIndex = 0
-        '
-        'ExportRWorkspaceToolStripMenuItem1
-        '
-        Me.ExportRWorkspaceToolStripMenuItem1.Name = "ExportRWorkspaceToolStripMenuItem1"
-        Me.ExportRWorkspaceToolStripMenuItem1.Size = New System.Drawing.Size(204, 22)
-        Me.ExportRWorkspaceToolStripMenuItem1.Text = "Export R Workspace..."
         '
         'frmMain
         '
