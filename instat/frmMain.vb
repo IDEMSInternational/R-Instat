@@ -1377,10 +1377,9 @@ Public Class frmMain
         dlgExportRObjects.ShowDialog()
     End Sub
 
-    Private Sub ExportRWorkSpaceToolStripMenuItem_Click(sender As Object, e As EventArgs)
+    Private Sub ExportRWorkspaceToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ExportRWorkspaceToolStripMenuItem1.Click
         dlgExportRWorkspace.ShowDialog()
     End Sub
-
 
     'Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click
     '    'TEST temporary 
