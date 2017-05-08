@@ -34,17 +34,6 @@ Public Class dlgExportRObjects
         TestOkEnabled()
     End Sub
 
-    Private Sub SetDefaults()
-        clsGetObjectsFunction = New RFunction
-        clsSaveRDS = New RFunction
-
-        ucrInputExportFile.SetName("")
-        ucrSelectorObjects.Reset()
-        clsGetObjectsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_objects")
-        clsSaveRDS.SetRCommand("saveRDS")
-        clsSaveRDS.AddParameter("object", clsRFunctionParameter:=clsGetObjectsFunction)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsSaveRDS)
-    End Sub
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 538
 
@@ -61,6 +50,17 @@ Public Class dlgExportRObjects
         ucrInputExportFile.IsReadOnly = True
     End Sub
 
+    Private Sub SetDefaults()
+        clsGetObjectsFunction = New RFunction
+        clsSaveRDS = New RFunction
+
+        ucrInputExportFile.SetName("")
+        ucrSelectorObjects.Reset()
+        clsGetObjectsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_objects")
+        clsSaveRDS.SetRCommand("saveRDS")
+        clsSaveRDS.AddParameter("object", clsRFunctionParameter:=clsGetObjectsFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsSaveRDS)
+    End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrSelectorObjects.SetRCode(clsGetObjectsFunction, bReset)
