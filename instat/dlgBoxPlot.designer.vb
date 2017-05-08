@@ -191,7 +191,7 @@ Partial Class dlgBoxplot
         Me.ucrChkVarWidth.Location = New System.Drawing.Point(10, 299)
         Me.ucrChkVarWidth.Name = "ucrChkVarWidth"
         Me.ucrChkVarWidth.Size = New System.Drawing.Size(135, 20)
-        Me.ucrChkVarWidth.TabIndex = 13
+        Me.ucrChkVarWidth.TabIndex = 12
         '
         'ucrChkHorizontalBoxplot
         '
@@ -199,7 +199,7 @@ Partial Class dlgBoxplot
         Me.ucrChkHorizontalBoxplot.Location = New System.Drawing.Point(10, 325)
         Me.ucrChkHorizontalBoxplot.Name = "ucrChkHorizontalBoxplot"
         Me.ucrChkHorizontalBoxplot.Size = New System.Drawing.Size(135, 20)
-        Me.ucrChkHorizontalBoxplot.TabIndex = 12
+        Me.ucrChkHorizontalBoxplot.TabIndex = 13
         '
         'ucrSaveBoxplot
         '
