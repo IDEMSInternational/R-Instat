@@ -88,7 +88,7 @@ Public Class dlgExportRObjects
 
         dlgSave.Title = "Export R Objects"
         dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
-        dlgSave.Filter = "Serialized R Objects (*.RDS)|*.RDS"
+        dlgSave.Filter = "Serialized R Objects (*.rds)|*.rds"
         If dlgSave.ShowDialog = DialogResult.OK Then
             If dlgSave.FileName <> "" Then
                 ucrInputExportFile.SetName(Path.GetFullPath(dlgSave.FileName).ToString.Replace("\", "/"))
