@@ -194,25 +194,21 @@ Public Class dlgTransformClimatic
     Private Sub ucrPnlTransform_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlTransform.ControlContentsChanged
         If rdoSum.Checked Then
             ucrBase.clsRsyntax.AddParameter("calc", clsRFunctionParameter:=clsRTrasform)
-            'ucrBase.clsRsyntax.SetBaseRFunction(clsSumFunction)
             'ucrSaveTransform.SetPrefix("Sum")
             UcrInputTextBox1.SetPrefix("Sum")
             UcrInputTextBox1.SetName("Sum")
             grpTransform.Text = "Sum"
         ElseIf rdoCount.Checked Then
-            'ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
             'ucrSaveTransform.SetPrefix("Count")
             UcrInputTextBox1.SetPrefix("Count")
             UcrInputTextBox1.SetName("Count")
             grpTransform.Text = "Count"
         ElseIf rdoSpell.Checked Then
-            'ucrBase.clsRsyntax.SetBaseRFunction(clsSpellFunction)
             'ucrSaveTransform.SetPrefix("Spell")
             UcrInputTextBox1.SetPrefix("Spell")
             UcrInputTextBox1.SetName("Spell")
             grpTransform.Text = "Spell"
         ElseIf rdoWaterBalance.Checked Then
-            'ucrBase.clsRsyntax.SetBaseRFunction(clsWaterBalanceFunction)
             'ucrSaveTransform.SetPrefix("Water_balance")
             UcrInputTextBox1.SetPrefix("Water_balance")
             UcrInputTextBox1.SetName("Water_balance")
@@ -227,32 +223,15 @@ Public Class dlgTransformClimatic
     Private Sub sum_over()
         If Not ucrReceiverData.IsEmpty Then
             clsRTrasform.AddParameter("function_exp", Chr(34) & clsRSumFuncExpr.ToScript.ToString & Chr(34))
-            'clsRSumOver.AddParameter("function_exp", Chr(34) & "rollapply(data = zoo(" & ucrReceiverData.GetVariableNames(bWithQuotes:=False) & "), width =4, FUN=sum, fill = NA, align= 'right')" & Chr(34))
-            'clsRSumOve.AddParameter("function_exp", Chr(34) & "rollapply(data = zoo(" & ucrReceiverData.GetVariableNames(bWithQuotes:=False) & "), width =4, FUN=sum, fill = NA, align= 'right')" & Chr(34))
-            'clsRTrasform.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames() & ")")
-            'clsRTrasform.AddParameter("type", Chr(34) & "calculation" & Chr(34))
-            ''This might not Beep right
-            'clsRTrasform.AddParameter("result_name", Chr(34) & ucrSaveTransform.ucrInputTextSave.GetText & Chr(34))
-            'clsRTrasform.AddParameter("save", 2)
-            'Else
-            '    clsDayFromAndTo.RemoveParameterByName("function_exp")
-            '    clsDayFromAndTo.RemoveParameterByName("calculated_from")
         End If
     End Sub
 
     Private Sub ucrSelectorTransform_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrSelectorTransform.ControlContentsChanged
         strCurrDataName = Chr(34) & ucrSelectorTransform.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34)
-        'sum_over()
         clsRTrasform.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames() & ")")
-        'clsAddKey.AddParameter("data_name", strCurrDataName)
-        'firstDayofTheYear()
     End Sub
 
     Private Sub ucrControls_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrReceiverData.ControlContentsChanged, ucrInputSum.ControlContentsChanged, ucrNudSumOver.ControlContentsChanged
-        'strCurrDataName = Chr(34) & ucrSelectorTransform.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34)
         sum_over()
-        'clsRTrasform.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames() & ")")
-        'clsAddKey.AddParameter("data_name", strCurrDataName)
-        'firstDayofTheYear()
     End Sub
 End Class
