@@ -94,7 +94,7 @@ instat_object$set("public", "calculate_summary", function(data_name, columns_to_
   names(calculated_from) <- rep(data_name, length(factors))
   calculated_from <- as.list(calculated_from)
   factor_by <- instat_calculation$new(type = "by", calculated_from = calculated_from)
-    
+  
   sub_calculations <- list()
   
   if(is.null(columns_to_summarise)) {
@@ -355,27 +355,37 @@ instat_object$set("public", "summary_table", function(data_name, columns_to_summ
   }
   
   # First, Unstack the general table (cell_values)
-  cell_values <- dcast(Row1 + ... + Rown ~ Col, value.var = "statistic of interest") # should run for every statistic?
-  # e.g. cell_values <- dcast(fertgrp. + variety. ~ village., value.var = "summary_count_Village")
+  # cell_values <- dcast(row_factors ~ column_factors, value.var = "statistic of interest") # 
+  # TODO: need + between row factors? Work this out.
+  # should run for every statistic? loop for summary_type: , paste0(summary_type, "()"
+  cell_values <- instat_calculation$new(type = "calculation", result_name = cell_values, calculated_from = list(row_factors, column_factors),
+                                        function_exp = "dcast(row_factors ~ column_factors, value.var = 'statistic_of_interest')", save = 1)
   
   
   # Now, let's take [[2]]
   column_factor_margin <- margin_tables[2]   # in long term where is [[2]], e.g. which(powerSet(c(1,2,3, 4)) == "1"
   
   #note column_factor_margin looks like this:
-    #  village count1 count2
-    #  1   kesen      7      3
-    #  2   nanda     14      3
-    #  3    niko      5      3
-    #  4   sabey     10      3
+  #  village count1 count2
+  #  1   kesen      7      3
+  #  2   nanda     14      3
+  #  3    niko      5      3
+  #  4   sabey     10      3
   
-  # statistic of interest (e.g. count1/summary_count_Village)
-  Total_of_Col_Margin <- append(column_factor_margin$summary_count_Village, values = c(NA, NA), after = 0) 
-  # no. of NAs = number of Row Factors
-  # summary_count_village here as this is what we are interested in.
+  #Total_of_Col_Margin <- append(column_factor_margin$summary_count_Village, values = c(NA, NA), after = 0) 
+  
+  # loop for summary of interest:
+  # add in ,paste0 etc.
+  Total_of_Col_Margin <- instat_calculation$new(type = "calculation", result_name = Total_of_Col_Margin, calculated_from = list(column_factor_margin = "summary_count_Village"),
+                                                function_exp = "append(summary_count_Village, values = c(rep(length.out=36, x='NA')), after = 0)", save = 1)
+  # I need to repeat NA for as many as the number of Row Factors we have hence rep function.
+  
   #add this in
-  cell_values <- rbind(cell_values, Total_Margin)
-
+  cell_values <- instat_calculation$new(type = "calculation", result_name = cell_values,
+                                        function_exp = "rbind(cell_values, Total_of_Col_Margin)", save = 1,
+                                        sub_calculations = list(Total_of_Col_Margin, cell_values))
+  
+  
   # Finally, let's take [[7]] and [[1]]. Append [[1]]
   
   overall_value <- margin_tables[1]   # want to get this 1st value in that list.
@@ -396,9 +406,15 @@ instat_object$set("public", "summary_table", function(data_name, columns_to_summ
   
   
   # append the vector for summary_count_Village with the overall_value
-  Total_Margin <- append(row_factor_margin$summary_count_Village., overall_value, after = 0)
-  ### cbind it to the main one.
-  cell_values <- cbind(cell_values, Total_Margin)
+  #Total_Margin <- append(row_factor_margin$summary_count_Village., overall_value, after = 0)
+  #cell_values <- cbind(cell_values, Total_Margin)
   
+  Total_of_Row_Margin <- instat_calculation$new(type = "calculation", result_name = Total_of_Col_Margin, calculated_from = list(row_factor_margin = "summary_count_Village"),
+                                                function_exp = "append(summary_count_Village., overall_value, after = 0)", save = 1)
+  
+  #add this in
+  cell_values <- instat_calculation$new(type = "calculation", result_name = cell_values,
+                                        function_exp = "cbind(cell_values, Total_of_Row_Margin)", save = 2,
+                                        sub_calculations = list(Total_of_Row_Margin, cell_values))
 }
 )
