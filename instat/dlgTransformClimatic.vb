@@ -153,15 +153,19 @@ Public Class dlgTransformClimatic
         If rdoSum.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSumFunction)
             ucrSaveTransform.SetPrefix("Sum")
+            grpTransform.Text = "Sum"
         ElseIf rdoCount.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
             ucrSaveTransform.SetPrefix("Count")
+            grpTransform.Text = "Count"
         ElseIf rdoSpell.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSpellFunction)
             ucrSaveTransform.SetPrefix("Spell")
+            grpTransform.Text = "Spell"
         ElseIf rdoWaterBalance.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsWaterBalanceFunction)
             ucrSaveTransform.SetPrefix("Water_balance")
+            grpTransform.Text = "Water_balance"
         End If
     End Sub
 
