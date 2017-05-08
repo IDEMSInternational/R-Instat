@@ -1347,11 +1347,6 @@ instat_object$set("public", "import_from_iri", function(download_from, data_file
 } 
 )
 
-instat_object$set("public", "export_objects", function(data_name,file,object_names) {
-  save(list=object_names,file=file)
-}
-)
-            
 instat_object$set("public", "export_workspace", function(data_names, file, include_graphs = TRUE, include_models = TRUE, include_metadata = TRUE) {
   e <- new.env()
   for(temp_name in data_names) {

@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgExportRObjects
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsDefaultFunction As New RFunction
+    Private clsGetObjectsFunction, clsSaveRDS As New RFunction
 
     Private Sub dlgExportRObjects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -34,33 +34,38 @@ Public Class dlgExportRObjects
         TestOkEnabled()
     End Sub
 
+    Private Sub SetDefaults()
+        clsGetObjectsFunction = New RFunction
+        clsSaveRDS = New RFunction
+
+        ucrInputExportFile.SetName("")
+        ucrSelectorObjects.Reset()
+        clsGetObjectsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_objects")
+        clsSaveRDS.SetRCommand("saveRDS")
+        clsSaveRDS.AddParameter("object", clsRFunctionParameter:=clsGetObjectsFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsSaveRDS)
+    End Sub
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 538
 
-        ucrSelectorObjects.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorObjects.SetParameter(New RParameter("data_name", 1))
         ucrSelectorObjects.ucrAvailableDataFrames.SetParameterIsString()
         ucrSelectorObjects.SetItemType("object")
 
-        ucrReceiverObjects.SetParameter(New RParameter("object_names", 1))
+        ucrReceiverObjects.SetParameter(New RParameter("object_name", 2))
         ucrReceiverObjects.SetParameterIsString()
         ucrReceiverObjects.Selector = ucrSelectorObjects
         ucrReceiverObjects.SetMeAsReceiver()
 
-        ucrInputExportFile.SetParameter(New RParameter("file", 2))
+        ucrInputExportFile.SetParameter(New RParameter("file", 0))
         ucrInputExportFile.IsReadOnly = True
     End Sub
 
-    Private Sub SetDefaults()
-        clsDefaultFunction = New RFunction
-
-        ucrInputExportFile.SetName("")
-        ucrSelectorObjects.Reset()
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$export_objects")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
-    End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrSelectorObjects.SetRCode(clsGetObjectsFunction, bReset)
+        ucrReceiverObjects.SetRCode(clsGetObjectsFunction, bReset)
+        ucrInputExportFile.SetRCode(clsSaveRDS, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -82,7 +87,7 @@ Public Class dlgExportRObjects
 
         dlgSave.Title = "Export file dialog"
         dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
-        dlgSave.Filter = "Saved r objects (*.RData)|*.RData"
+        dlgSave.Filter = "Serialized r objects (*.rds)|*.rds"
         If dlgSave.ShowDialog = DialogResult.OK Then
             If dlgSave.FileName <> "" Then
                 ucrInputExportFile.SetName(Path.GetFullPath(dlgSave.FileName).ToString.Replace("\", "/"))
