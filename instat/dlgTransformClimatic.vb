@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgTransformClimatic
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
-    Private clsRSumOver, clsRCalculatedFrom As New RFunction
+    Private clsRTrasform, clsRZoo, clsRSumFuncExpr As New RFunction
     Private clsSumFunction, clsCountFunction, clsSpellFunction, clsWaterBalanceFunction As New RFunction
     Private strCurrDataName As String = ""
     Private Sub dlgTransformClimatic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -59,9 +59,12 @@ Public Class dlgTransformClimatic
         'ucrSSTDataframe.SetParameter(New RParameter("data_name", 0))
         'ucrSSTDataframe.SetParameterIsrfunction()
 
-        clsRSumOver.SetRCommand("instat_calculation$new")
-        clsRSumOver.SetAssignTo("sum_over")
-        clsRCalculatedFrom.SetRCommand("list")
+        clsRTrasform.SetRCommand("instat_calculation$new")
+        clsRTrasform.SetAssignTo("transform_calculation")
+        clsRSumFuncExpr.SetRCommand("rollapply")
+        clsRZoo.SetRCommand("zoo")
+
+
 
 
         ucrPnlTransform.AddRadioButton(rdoSum)
@@ -88,7 +91,7 @@ Public Class dlgTransformClimatic
         ucrInputSum.SetItems(dctInputSumPairs)
         ucrInputSum.SetLinkedDisplayControl(lblSumOver)
 
-        ucrNudSumOver.SetParameter(New RParameter("sum_over"))
+        ucrNudSumOver.SetParameter(New RParameter("width"))
         ucrNudSumOver.SetMinMax(1, 366)
         ucrNudSumOver.Increment = 1
         ucrNudSumOver.SetLinkedDisplayControl(lblSumRows)
@@ -122,6 +125,9 @@ Public Class dlgTransformClimatic
         ucrInputEvaporation.SetParameter(New RParameter("evaporation"))
         ucrInputEvaporation.SetLinkedDisplayControl(lblWBEvaporation)
 
+        ucrSaveTransform.SetParameter(New RParameter("result_name"))
+
+
         ucrSaveTransform.SetDataFrameSelector(ucrSelectorTransform.ucrAvailableDataFrames)
         ucrSaveTransform.SetLabelText("New Column Name:")
         ucrSaveTransform.SetIsTextBox()
@@ -143,13 +149,27 @@ Public Class dlgTransformClimatic
         clsWaterBalanceFunction = New RFunction
         ucrSaveTransform.Reset()
         ucrSelectorTransform.Reset()
+
+        ucrReceiverData.SetParameter(New RParameter("x", 0))
+        ucrReceiverData.SetParameterIsString()
+        ucrReceiverData.bWithQuotes = False
+        ucrReceiverData.SetParameterIncludeArgumentName(False)
+
+        clsRSumFuncExpr.AddParameter("data", clsRFunctionParameter:=clsRZoo)
+        clsRTrasform.AddParameter("function_exp", clsRFunctionParameter:=clsRSumFuncExpr)
+        clsRTrasform.AddParameter("type", Chr(34) & "calculation" & Chr(34))
+        'This might not Beep right
+        clsRTrasform.AddParameter("result_name", Chr(34) & ucrSaveTransform.ucrInputTextSave.GetText & Chr(34))
+        clsRTrasform.AddParameter("save", 2)
         'ucrBase.clsRsyntax.SetBaseRFunction(clsSumFunction)
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$apply_instat_calculation")
-        ucrBase.clsRsyntax.AddParameter("calc", clsRFunctionParameter:=clsRSumOver)
+        ucrBase.clsRsyntax.AddParameter("calc", clsRFunctionParameter:=clsRTrasform)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-
+        ucrNudSumOver.SetRCode(clsRSumFuncExpr, bReset)
+        ucrReceiverData.SetRCode(clsRZoo, bReset)
+        ucrSaveTransform.SetRCode(clsRTrasform, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -164,7 +184,7 @@ Public Class dlgTransformClimatic
 
     Private Sub ucrPnlTransform_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlTransform.ControlContentsChanged
         If rdoSum.Checked Then
-            ucrBase.clsRsyntax.AddParameter("calc", clsRFunctionParameter:=clsRSumOver)
+            ucrBase.clsRsyntax.AddParameter("calc", clsRFunctionParameter:=clsRTrasform)
             'ucrBase.clsRsyntax.SetBaseRFunction(clsSumFunction)
             ucrSaveTransform.SetPrefix("Sum")
             grpTransform.Text = "Sum"
@@ -189,9 +209,13 @@ Public Class dlgTransformClimatic
 
     Private Sub sum_over()
         If Not ucrReceiverData.IsEmpty Then
-            'clsRSumOver.AddParameter("function_exp", Chr(34) & ucrReceiverDOY.GetVariableNames(False) & ">=" & nudFrom.Value & " & " & ucrReceiverDOY.GetVariableNames(False) & "<=" & nudTo.Value & Chr(34))
-            clsRSumOver.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")")
-            clsRSumOver.AddParameter("type", Chr(34) & "calculation" & Chr(34))
+            'clsRSumOver.AddParameter("function_exp", Chr(34) & "rollapply(data = zoo(" & ucrReceiverData.GetVariableNames(bWithQuotes:=False) & "), width =4, FUN=sum, fill = NA, align= 'right')" & Chr(34))
+            'clsRSumOve.AddParameter("function_exp", Chr(34) & "rollapply(data = zoo(" & ucrReceiverData.GetVariableNames(bWithQuotes:=False) & "), width =4, FUN=sum, fill = NA, align= 'right')" & Chr(34))
+            clsRTrasform.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames() & ")")
+            'clsRTrasform.AddParameter("type", Chr(34) & "calculation" & Chr(34))
+            ''This might not Beep right
+            'clsRTrasform.AddParameter("result_name", Chr(34) & ucrSaveTransform.ucrInputTextSave.GetText & Chr(34))
+            'clsRTrasform.AddParameter("save", 2)
             'Else
             '    clsDayFromAndTo.RemoveParameterByName("function_exp")
             '    clsDayFromAndTo.RemoveParameterByName("calculated_from")
