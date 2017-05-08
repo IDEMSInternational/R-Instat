@@ -35,23 +35,6 @@ Public Class dlgView
         TestOKEnabled()
     End Sub
 
-    Private Sub SetRCodeForControls(bReset As Boolean)
-        bControlsUpdated = False
-        ucrNudNumberRows.Maximum = Decimal.MaxValue
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        DataFrameLength()
-        bControlsUpdated = True
-    End Sub
-
-    Private Sub SetDefaults()
-        clsMainFunction = New RFunction
-        ucrSelectorForView.Reset()
-        ucrSelectorForView.Focus()
-        ucrReceiverView.SetMeAsReceiver()
-        clsMainFunction.SetRCommand("View")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsMainFunction)
-    End Sub
-
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 32
 
@@ -106,8 +89,21 @@ Public Class dlgView
         ucrNudNumberRows.SetLinkedDisplayControl(lblNumberofRows)
     End Sub
 
-    Private Sub ucrSelectorForView_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForView.ControlValueChanged
+    Private Sub SetDefaults()
+        clsMainFunction = New RFunction
+        ucrSelectorForView.Reset()
+        ucrSelectorForView.Focus()
+        ucrReceiverView.SetMeAsReceiver()
+        clsMainFunction.SetRCommand("View")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsMainFunction)
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        bControlsUpdated = False
+        ucrNudNumberRows.Maximum = Decimal.MaxValue
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
         DataFrameLength()
+        bControlsUpdated = True
     End Sub
 
     Private Sub TestOKEnabled()
@@ -138,10 +134,6 @@ Public Class dlgView
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
-    End Sub
-
-    Private Sub DataFrameLength()
-        ucrNudNumberRows.Maximum = ucrSelectorForView.ucrAvailableDataFrames.iDataFrameLength
     End Sub
 
     Private Sub SetiCallType()
@@ -185,8 +177,8 @@ Public Class dlgView
         End If
     End Sub
 
-    Private Sub ucrReceiverView_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverView.ControlContentsChanged, ucrPnlDisplayWindow.ControlContentsChanged, ucrChkSpecifyRows.ControlContentsChanged, ucrNudNumberRows.ControlContentsChanged, ucrPnlDisplayFrom.ControlContentsChanged, ucrChkSortColumn.ControlContentsChanged, ucrReceiverSortCol.ControlContentsChanged
-        TestOKEnabled()
+    Private Sub DataFrameLength()
+        ucrNudNumberRows.Maximum = ucrSelectorForView.ucrAvailableDataFrames.iDataFrameLength
     End Sub
 
     Private Sub FunctionControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDisplayFrom.ControlValueChanged, ucrPnlDisplayWindow.ControlValueChanged, ucrChkSpecifyRows.ControlValueChanged
@@ -201,5 +193,13 @@ Public Class dlgView
         Else
             ucrReceiverView.SetMeAsReceiver()
         End If
+    End Sub
+
+    Private Sub ucrSelectorForView_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForView.ControlValueChanged
+        DataFrameLength()
+    End Sub
+
+    Private Sub ucrReceiverView_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverView.ControlContentsChanged, ucrPnlDisplayWindow.ControlContentsChanged, ucrChkSpecifyRows.ControlContentsChanged, ucrNudNumberRows.ControlContentsChanged, ucrPnlDisplayFrom.ControlContentsChanged, ucrChkSortColumn.ControlContentsChanged, ucrReceiverSortCol.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class
