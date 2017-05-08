@@ -45,6 +45,7 @@ Public Class dlgExportRObjects
         ucrReceiverObjects.SetParameterIsString()
         ucrReceiverObjects.Selector = ucrSelectorObjects
         ucrReceiverObjects.SetMeAsReceiver()
+        ucrReceiverObjects.strSelectorHeading = "Objects"
 
         ucrInputExportFile.SetParameter(New RParameter("file", 0))
         ucrInputExportFile.IsReadOnly = True
