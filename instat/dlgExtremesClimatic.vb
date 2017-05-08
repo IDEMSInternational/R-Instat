@@ -18,16 +18,14 @@ Public Class dlgExtremesClimatic
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
     Private Sub dlgExtremesClimatic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autoTranslate(Me)
         If bFirstload Then
             InitialiseDialog()
-            bFirstload = False
-        End If
-        If bReset Then
             SetDefaults()
+            bFirstload = False
+        Else
+            ReopenDialog()
         End If
-        SetRCodeForControls(bReset)
-        bReset = False
-        autoTranslate(Me)
         TestOkEnabled()
     End Sub
 
@@ -40,6 +38,7 @@ Public Class dlgExtremesClimatic
         ucrReceiverDate.Selector = ucrSelectorClimaticExtremes
         ucrReceiverYear.Selector = ucrSelectorClimaticExtremes
         ucrReceiverDOY.Selector = ucrSelectorClimaticExtremes
+        ucrReceiverDate.SetMeAsReceiver()
 
         'ucrRdoOptions
         ucrPnlMinMaxPeaks.AddRadioButton(rdoMinMax)
@@ -54,6 +53,7 @@ Public Class dlgExtremesClimatic
         ucrChkMaxima.Checked = True
         ucrChkThreshold.SetText("Values above Threshold")
         ucrChkDayNumber.SetText("Day Number")
+        ucrInputThreshhold.SetValidationTypeAsNumeric()
 
         'ursaveExtremes       
         ucrSaveExtremes.SetSaveTypeAsColumn()
@@ -62,20 +62,28 @@ Public Class dlgExtremesClimatic
         ucrSaveExtremes.SetLabelText("New Column Name")
         ucrSaveExtremes.SetPrefix("Value")
 
+        ucrReceiverDate.bAutoFill = True
+        ucrReceiverDOY.bAutoFill = True
+        ucrReceiverData.bAutoFill = True
+        ucrReceiverYear.bAutoFill = True
+
         ucrPnlMinMaxPeaks.AddToLinkedControls(ucrInputThreshhold, {rdoPeaks}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputThreshhold.SetLinkedDisplayControl(lblThresh)
         ucrPnlMinMaxPeaks.AddToLinkedControls(ucrChkThreshold, {rdoPeaks}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMinMaxPeaks.AddToLinkedControls(ucrChkMaxima, {rdoMinMax}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
     End Sub
 
+    Private Sub ReopenDialog()
+
+    End Sub
+
     Private Sub SetDefaults()
+        ucrSelectorClimaticExtremes.Reset()
         ucrSaveExtremes.Reset()
         ucrInputThreshhold.ResetText()
         ucrChkMaxima.Checked = True
-    End Sub
-
-    Private Sub SetRcodeForControls(bReset As Boolean)
-
+        ucrChkDayNumber.Checked = True
+        ucrChkThreshold.Checked = True
     End Sub
 
     Private Sub TestOkEnabled()
@@ -89,7 +97,6 @@ Public Class dlgExtremesClimatic
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        SetRcodeForControls(True)
         TestOkEnabled()
     End Sub
 End Class
