@@ -254,7 +254,7 @@ Public Class dlgThreeVariableModelling
         End If
     End Sub
 
-    Public Sub ucrFamily_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrFamily.cboDistributionsIndexChanged
+    Public Sub ucrFamily_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrFamily.ucrInputDistributionsIndexChanged
         sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
         sdgModelOptions.ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = sdgModelOptions.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
         sdgModelOptions.RestrictLink()
