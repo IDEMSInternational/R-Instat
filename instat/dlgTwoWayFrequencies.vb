@@ -126,7 +126,15 @@ Public Class dlgTwoWayFrequencies
         ucrPnlFreqDisplay.AddToLinkedControls(ucrPnlFreqType, {rdoGraph, rdoBoth}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoCount)
         ucrPnlFreqType.SetLinkedDisplayControl(grpFreqTypeGraph)
 
+        ucrSaveGraph.SetPrefix("Graph")
+        ucrSaveGraph.SetSaveTypeAsGraph()
+        ucrSaveGraph.SetDataFrameSelector(ucrSelectorTwoWayFrequencies.ucrAvailableDataFrames)
+        ucrSaveGraph.SetCheckBoxText("Save Graph")
+        ucrSaveGraph.SetIsComboBox()
+        ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
         ucrChkColumn.SetLinkedDisplayControl(grpFreqTypeTable)
+
+        changelocation()
     End Sub
 
     Private Sub SetDefaults()
@@ -176,6 +184,7 @@ Public Class dlgTwoWayFrequencies
         ucrChkWeights.AddAdditionalCodeParameterPair(clsSjPlot, ucrReceiverWeights.GetParameter(), iAdditionalPairNo:=1)
         ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjPlot, ucrReceiverWeights.GetParameter(), iAdditionalPairNo:=1)
 
+        ucrSaveGraph.SetRCode(clsSjPlot, bReset)
         ucrReceiverRowFactor.SetRCode(clsSjTab, bReset)
         ucrReceiverColumnFactor.SetRCode(clsSjTab, bReset)
         ucrReceiverWeights.SetRCode(clsSjTab, bReset)
@@ -203,7 +212,7 @@ Public Class dlgTwoWayFrequencies
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverColumnFactor.IsEmpty() AndAlso Not ucrReceiverRowFactor.IsEmpty() Then
+        If Not ucrReceiverColumnFactor.IsEmpty() AndAlso Not ucrReceiverRowFactor.IsEmpty() AndAlso ucrSaveGraph.IsComplete Then
             If Not ucrChkWeights.Checked Then
                 ucrBase.OKEnabled(True)
             Else
@@ -225,7 +234,7 @@ Public Class dlgTwoWayFrequencies
         TestOkEnabled()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnFactor.ControlContentsChanged, ucrReceiverRowFactor.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrChkWeights.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnFactor.ControlContentsChanged, ucrReceiverRowFactor.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -301,11 +310,11 @@ Public Class dlgTwoWayFrequencies
         If rdoBoth.Checked Then
             grpFreqTypeTable.Location = New Point(240, 166)
             grpFreqTypeGraph.Location = New Point(358, 166)
-            Me.Size = New Size(498, 411)
+            Me.Size = New Size(500, 448)
         Else
             grpFreqTypeTable.Location = New Point(263, 166)
             grpFreqTypeGraph.Location = New Point(263, 166)
-            Me.Size = New Size(426, 411)
+            Me.Size = New Size(445, 448)
         End If
     End Sub
 End Class
