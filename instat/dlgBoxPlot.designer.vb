@@ -35,7 +35,7 @@ Partial Class dlgBoxplot
         Me.rdoJitter = New System.Windows.Forms.RadioButton()
         Me.rdoViolin = New System.Windows.Forms.RadioButton()
         Me.ucrPnlPlots = New instat.UcrPanel()
-        Me.ucrChkVarwidth = New instat.ucrCheck()
+        Me.ucrChkVarWidth = New instat.ucrCheck()
         Me.ucrChkHorizontalBoxplot = New instat.ucrCheck()
         Me.ucrSaveBoxplot = New instat.ucrSave()
         Me.SuspendLayout()
@@ -185,27 +185,27 @@ Partial Class dlgBoxplot
         Me.ucrPnlPlots.Size = New System.Drawing.Size(374, 35)
         Me.ucrPnlPlots.TabIndex = 0
         '
-        'ucrChkVarwidth
+        'ucrChkVarWidth
         '
-        Me.ucrChkVarwidth.Checked = False
-        Me.ucrChkVarwidth.Location = New System.Drawing.Point(10, 325)
-        Me.ucrChkVarwidth.Name = "ucrChkVarwidth"
-        Me.ucrChkVarwidth.Size = New System.Drawing.Size(135, 20)
-        Me.ucrChkVarwidth.TabIndex = 13
+        Me.ucrChkVarWidth.Checked = False
+        Me.ucrChkVarWidth.Location = New System.Drawing.Point(10, 299)
+        Me.ucrChkVarWidth.Name = "ucrChkVarWidth"
+        Me.ucrChkVarWidth.Size = New System.Drawing.Size(135, 20)
+        Me.ucrChkVarWidth.TabIndex = 12
         '
         'ucrChkHorizontalBoxplot
         '
         Me.ucrChkHorizontalBoxplot.Checked = False
-        Me.ucrChkHorizontalBoxplot.Location = New System.Drawing.Point(10, 299)
+        Me.ucrChkHorizontalBoxplot.Location = New System.Drawing.Point(10, 325)
         Me.ucrChkHorizontalBoxplot.Name = "ucrChkHorizontalBoxplot"
         Me.ucrChkHorizontalBoxplot.Size = New System.Drawing.Size(135, 20)
-        Me.ucrChkHorizontalBoxplot.TabIndex = 12
+        Me.ucrChkHorizontalBoxplot.TabIndex = 13
         '
         'ucrSaveBoxplot
         '
         Me.ucrSaveBoxplot.Location = New System.Drawing.Point(10, 351)
         Me.ucrSaveBoxplot.Name = "ucrSaveBoxplot"
-        Me.ucrSaveBoxplot.Size = New System.Drawing.Size(243, 24)
+        Me.ucrSaveBoxplot.Size = New System.Drawing.Size(254, 24)
         Me.ucrSaveBoxplot.TabIndex = 14
         '
         'dlgBoxplot
@@ -215,7 +215,7 @@ Partial Class dlgBoxplot
         Me.ClientSize = New System.Drawing.Size(425, 433)
         Me.Controls.Add(Me.ucrSaveBoxplot)
         Me.Controls.Add(Me.ucrChkHorizontalBoxplot)
-        Me.Controls.Add(Me.ucrChkVarwidth)
+        Me.Controls.Add(Me.ucrChkVarWidth)
         Me.Controls.Add(Me.rdoViolin)
         Me.Controls.Add(Me.rdoJitter)
         Me.Controls.Add(Me.rdoBoxplot)
@@ -256,6 +256,6 @@ Partial Class dlgBoxplot
     Friend WithEvents rdoViolin As RadioButton
     Friend WithEvents ucrSaveBoxplot As ucrSave
     Friend WithEvents ucrChkHorizontalBoxplot As ucrCheck
-    Friend WithEvents ucrChkVarwidth As ucrCheck
+    Friend WithEvents ucrChkVarWidth As ucrCheck
     Friend WithEvents ucrPnlPlots As UcrPanel
 End Class
