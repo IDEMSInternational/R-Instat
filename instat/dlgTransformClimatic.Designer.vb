@@ -32,7 +32,7 @@ Partial Class dlgTransformClimatic
         Me.rdoCount = New System.Windows.Forms.RadioButton()
         Me.rdoWaterBalance = New System.Windows.Forms.RadioButton()
         Me.lblThreshold = New System.Windows.Forms.Label()
-        Me.grpsum = New System.Windows.Forms.GroupBox()
+        Me.grpTransform = New System.Windows.Forms.GroupBox()
         Me.lblSumRows = New System.Windows.Forms.Label()
         Me.ucrNudSumOver = New instat.ucrNud()
         Me.lblSumOver = New System.Windows.Forms.Label()
@@ -62,7 +62,7 @@ Partial Class dlgTransformClimatic
         Me.ucrReceiverData = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSaveTransform = New instat.ucrSave()
-        Me.grpsum.SuspendLayout()
+        Me.grpTransform.SuspendLayout()
         Me.grpWaterBalance.SuspendLayout()
         Me.grpSpell.SuspendLayout()
         Me.grpCount.SuspendLayout()
@@ -195,18 +195,18 @@ Partial Class dlgTransformClimatic
         Me.lblThreshold.Tag = "Threshold <="
         Me.lblThreshold.Text = "Threshold <="
         '
-        'grpsum
+        'grpTransform
         '
-        Me.grpsum.Controls.Add(Me.lblSumRows)
-        Me.grpsum.Controls.Add(Me.ucrNudSumOver)
-        Me.grpsum.Controls.Add(Me.lblSumOver)
-        Me.grpsum.Controls.Add(Me.ucrInputSum)
-        Me.grpsum.Location = New System.Drawing.Point(27, 275)
-        Me.grpsum.Name = "grpsum"
-        Me.grpsum.Size = New System.Drawing.Size(289, 48)
-        Me.grpsum.TabIndex = 46
-        Me.grpsum.TabStop = False
-        Me.grpsum.Text = "Sum"
+        Me.grpTransform.Controls.Add(Me.lblSumRows)
+        Me.grpTransform.Controls.Add(Me.ucrNudSumOver)
+        Me.grpTransform.Controls.Add(Me.lblSumOver)
+        Me.grpTransform.Controls.Add(Me.ucrInputSum)
+        Me.grpTransform.Location = New System.Drawing.Point(27, 275)
+        Me.grpTransform.Name = "grpTransform"
+        Me.grpTransform.Size = New System.Drawing.Size(289, 48)
+        Me.grpTransform.TabIndex = 46
+        Me.grpTransform.TabStop = False
+        Me.grpTransform.Text = "Sum"
         '
         'lblSumRows
         '
@@ -518,7 +518,7 @@ Partial Class dlgTransformClimatic
         Me.Controls.Add(Me.grpWaterBalance)
         Me.Controls.Add(Me.grpSpell)
         Me.Controls.Add(Me.grpCount)
-        Me.Controls.Add(Me.grpsum)
+        Me.Controls.Add(Me.grpTransform)
         Me.Controls.Add(Me.ucrNudThreshold)
         Me.Controls.Add(Me.lblThreshold)
         Me.Controls.Add(Me.rdoWaterBalance)
@@ -544,8 +544,8 @@ Partial Class dlgTransformClimatic
         Me.Name = "dlgTransformClimatic"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Transform"
-        Me.grpsum.ResumeLayout(False)
-        Me.grpsum.PerformLayout()
+        Me.grpTransform.ResumeLayout(False)
+        Me.grpTransform.PerformLayout()
         Me.grpWaterBalance.ResumeLayout(False)
         Me.grpWaterBalance.PerformLayout()
         Me.grpSpell.ResumeLayout(False)
@@ -580,7 +580,7 @@ Partial Class dlgTransformClimatic
     Friend WithEvents lblCountRows As Label
     Friend WithEvents ucrNudCountOver As ucrNud
     Friend WithEvents lblCountOver As Label
-    Friend WithEvents grpsum As GroupBox
+    Friend WithEvents grpTransform As GroupBox
     Friend WithEvents lblSumRows As Label
     Friend WithEvents ucrNudSumOver As ucrNud
     Friend WithEvents lblSumOver As Label
