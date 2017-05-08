@@ -35,6 +35,12 @@ Public Class dlgExtremesClimatic
         'helpID
         ucrBase.iHelpTopicID = 203
 
+        ucrReceiverData.Selector = ucrSelectorClimaticExtremes
+        ucrReceiverStations.Selector = ucrSelectorClimaticExtremes
+        ucrReceiverDate.Selector = ucrSelectorClimaticExtremes
+        ucrReceiverYear.Selector = ucrSelectorClimaticExtremes
+        ucrReceiverDOY.Selector = ucrSelectorClimaticExtremes
+
         'ucrRdoOptions
         ucrPnlMinMaxPeaks.AddRadioButton(rdoMinMax)
         ucrPnlMinMaxPeaks.AddRadioButton(rdoPeaks)
@@ -45,16 +51,27 @@ Public Class dlgExtremesClimatic
 
         'ucrchk
         ucrChkMaxima.SetText("Maxima")
+        ucrChkMaxima.Checked = True
         ucrChkThreshold.SetText("Values above Threshold")
         ucrChkDayNumber.SetText("Day Number")
 
-        'ursave
+        'ursaveExtremes       
+        ucrSaveExtremes.SetSaveTypeAsColumn()
+        ucrSaveExtremes.SetDataFrameSelector(ucrSelectorClimaticExtremes.ucrAvailableDataFrames)
+        ucrSaveExtremes.SetIsTextBox()
         ucrSaveExtremes.SetLabelText("New Column Name")
+        ucrSaveExtremes.SetPrefix("Value")
 
+        ucrPnlMinMaxPeaks.AddToLinkedControls(ucrInputThreshhold, {rdoPeaks}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputThreshhold.SetLinkedDisplayControl(lblThresh)
+        ucrPnlMinMaxPeaks.AddToLinkedControls(ucrChkThreshold, {rdoPeaks}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlMinMaxPeaks.AddToLinkedControls(ucrChkMaxima, {rdoMinMax}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
     End Sub
 
     Private Sub SetDefaults()
-
+        ucrSaveExtremes.Reset()
+        ucrInputThreshhold.ResetText()
+        ucrChkMaxima.Checked = True
     End Sub
 
     Private Sub SetRcodeForControls(bReset As Boolean)
@@ -62,6 +79,11 @@ Public Class dlgExtremesClimatic
     End Sub
 
     Private Sub TestOkEnabled()
+        If ((rdoMinMax.Checked OrElse rdoPeaks.Checked) AndAlso Not ucrReceiverStations.IsEmpty() AndAlso Not ucrReceiverYear.IsEmpty() AndAlso Not ucrReceiverDate.IsEmpty() AndAlso Not ucrReceiverDOY.IsEmpty() AndAlso Not ucrReceiverData.IsEmpty() AndAlso ucrSaveExtremes.IsComplete()) Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
 
     End Sub
 
