@@ -18,8 +18,9 @@ Imports instat.Translations
 Public Class dlgTransformClimatic
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
-
+    Private clsRSumOver, clsRCalculatedFrom As New RFunction
     Private clsSumFunction, clsCountFunction, clsSpellFunction, clsWaterBalanceFunction As New RFunction
+    Private strCurrDataName As String = ""
     Private Sub dlgTransformClimatic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             InitialiseDialog()
@@ -54,6 +55,14 @@ Public Class dlgTransformClimatic
         ucrReceiverDOY.bAutoFill = True
         ucrReceiverData.bAutoFill = True
         ucrReceiverYear.bAutoFill = True
+
+        'ucrSSTDataframe.SetParameter(New RParameter("data_name", 0))
+        'ucrSSTDataframe.SetParameterIsrfunction()
+
+        clsRSumOver.SetRCommand("instat_calculation$new")
+        clsRSumOver.SetAssignTo("sum_over")
+        clsRCalculatedFrom.SetRCommand("list")
+
 
         ucrPnlTransform.AddRadioButton(rdoSum)
         ucrPnlTransform.AddRadioButton(rdoCount)
@@ -123,6 +132,8 @@ Public Class dlgTransformClimatic
         ucrPnlTransform.AddToLinkedControls({ucrNudCountOver, ucrChkValuesUnderthreshold}, {rdoCount}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransform.AddToLinkedControls({ucrInputSpellLower, ucrInputSpellUpper}, {rdoSpell}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransform.AddToLinkedControls({ucrNudWBCapacity, ucrInputEvaporation}, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
+
+
     End Sub
 
     Private Sub SetDefaults()
@@ -132,7 +143,9 @@ Public Class dlgTransformClimatic
         clsWaterBalanceFunction = New RFunction
         ucrSaveTransform.Reset()
         ucrSelectorTransform.Reset()
-        ucrBase.clsRsyntax.SetBaseRFunction(clsSumFunction)
+        'ucrBase.clsRsyntax.SetBaseRFunction(clsSumFunction)
+        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$apply_instat_calculation")
+        ucrBase.clsRsyntax.AddParameter("calc", clsRFunctionParameter:=clsRSumOver)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -151,19 +164,20 @@ Public Class dlgTransformClimatic
 
     Private Sub ucrPnlTransform_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlTransform.ControlContentsChanged
         If rdoSum.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsSumFunction)
+            ucrBase.clsRsyntax.AddParameter("calc", clsRFunctionParameter:=clsRSumOver)
+            'ucrBase.clsRsyntax.SetBaseRFunction(clsSumFunction)
             ucrSaveTransform.SetPrefix("Sum")
             grpTransform.Text = "Sum"
         ElseIf rdoCount.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
+            'ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
             ucrSaveTransform.SetPrefix("Count")
             grpTransform.Text = "Count"
         ElseIf rdoSpell.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsSpellFunction)
+            'ucrBase.clsRsyntax.SetBaseRFunction(clsSpellFunction)
             ucrSaveTransform.SetPrefix("Spell")
             grpTransform.Text = "Spell"
         ElseIf rdoWaterBalance.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsWaterBalanceFunction)
+            'ucrBase.clsRsyntax.SetBaseRFunction(clsWaterBalanceFunction)
             ucrSaveTransform.SetPrefix("Water_balance")
             grpTransform.Text = "Water_balance"
         End If
@@ -171,5 +185,23 @@ Public Class dlgTransformClimatic
 
     Private Sub ucrReceiverDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged ' add more teskok controls
         TestOkEnabled()
+    End Sub
+
+    Private Sub sum_over()
+        If Not ucrReceiverData.IsEmpty Then
+            'clsRSumOver.AddParameter("function_exp", Chr(34) & ucrReceiverDOY.GetVariableNames(False) & ">=" & nudFrom.Value & " & " & ucrReceiverDOY.GetVariableNames(False) & "<=" & nudTo.Value & Chr(34))
+            clsRSumOver.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")")
+            clsRSumOver.AddParameter("type", Chr(34) & "calculation" & Chr(34))
+            'Else
+            '    clsDayFromAndTo.RemoveParameterByName("function_exp")
+            '    clsDayFromAndTo.RemoveParameterByName("calculated_from")
+        End If
+    End Sub
+
+    Private Sub ucrSelectorTransform_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrSelectorTransform.ControlContentsChanged
+        strCurrDataName = Chr(34) & ucrSelectorTransform.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34)
+        sum_over()
+        'clsAddKey.AddParameter("data_name", strCurrDataName)
+        'firstDayofTheYear()
     End Sub
 End Class
