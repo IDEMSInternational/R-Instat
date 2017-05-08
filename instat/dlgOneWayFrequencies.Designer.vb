@@ -41,6 +41,7 @@ Partial Class dlgOneWayFrequencies
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorOneWayFreq = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverOneWayFreq = New instat.ucrReceiverMultiple()
+        Me.ucrSaveGraph = New instat.ucrSave()
         Me.grpSort.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -216,7 +217,7 @@ Partial Class dlgOneWayFrequencies
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 329)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 360)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 14
@@ -242,11 +243,19 @@ Partial Class dlgOneWayFrequencies
         Me.ucrReceiverOneWayFreq.TabIndex = 6
         Me.ucrReceiverOneWayFreq.ucrSelector = Nothing
         '
+        'ucrSaveGraph
+        '
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 330)
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(276, 24)
+        Me.ucrSaveGraph.TabIndex = 15
+        '
         'dlgOneWayFrequencies
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 385)
+        Me.ClientSize = New System.Drawing.Size(424, 421)
+        Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrReceiverOneWayFreq)
         Me.Controls.Add(Me.rdoBoth)
         Me.Controls.Add(Me.rdoGraph)
@@ -294,4 +303,5 @@ Partial Class dlgOneWayFrequencies
     Friend WithEvents ucrPnlFrequencies As UcrPanel
     Friend WithEvents rdoBoth As RadioButton
     Friend WithEvents ucrReceiverOneWayFreq As ucrReceiverMultiple
+    Friend WithEvents ucrSaveGraph As ucrSave
 End Class
