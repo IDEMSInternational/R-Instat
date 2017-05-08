@@ -26,9 +26,7 @@ Partial Class dlgWaterBalance
         Me.lblDate = New System.Windows.Forms.Label()
         Me.lblDOY = New System.Windows.Forms.Label()
         Me.grpRainParameters = New System.Windows.Forms.GroupBox()
-        Me.nudFrom = New System.Windows.Forms.NumericUpDown()
         Me.lblFrom = New System.Windows.Forms.Label()
-        Me.nudTo = New System.Windows.Forms.NumericUpDown()
         Me.lblTo = New System.Windows.Forms.Label()
         Me.lblWBLessthan = New System.Windows.Forms.Label()
         Me.lblCapacity = New System.Windows.Forms.Label()
@@ -54,11 +52,11 @@ Partial Class dlgWaterBalance
         Me.lblTotalOverDays = New System.Windows.Forms.Label()
         Me.ucrNudTotalOverDays = New instat.ucrNud()
         Me.grpWaterBalance = New System.Windows.Forms.GroupBox()
-        Me.ucrNudCapacity = New instat.ucrNud()
         Me.ucrNudWBLessThan = New instat.ucrNud()
+        Me.ucrNudCapacity = New instat.ucrNud()
+        Me.ucrNudFrom = New instat.ucrNud()
+        Me.ucrNudTo = New instat.ucrNud()
         Me.grpRainParameters.SuspendLayout()
-        CType(Me.nudFrom, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudTo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpRain.SuspendLayout()
         Me.grpWaterBalance.SuspendLayout()
         Me.SuspendLayout()
@@ -92,28 +90,15 @@ Partial Class dlgWaterBalance
         '
         'grpRainParameters
         '
-        Me.grpRainParameters.Controls.Add(Me.nudFrom)
+        Me.grpRainParameters.Controls.Add(Me.ucrNudTo)
+        Me.grpRainParameters.Controls.Add(Me.ucrNudFrom)
         Me.grpRainParameters.Controls.Add(Me.lblFrom)
-        Me.grpRainParameters.Controls.Add(Me.nudTo)
         Me.grpRainParameters.Controls.Add(Me.lblTo)
         Me.grpRainParameters.Location = New System.Drawing.Point(12, 253)
         Me.grpRainParameters.Name = "grpRainParameters"
         Me.grpRainParameters.Size = New System.Drawing.Size(318, 40)
         Me.grpRainParameters.TabIndex = 21
         Me.grpRainParameters.TabStop = False
-        '
-        'nudFrom
-        '
-        Me.nudFrom.Location = New System.Drawing.Point(62, 18)
-        Me.nudFrom.Maximum = New Decimal(New Integer() {366, 0, 0, 0})
-        Me.nudFrom.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.nudFrom.Name = "nudFrom"
-        Me.nudFrom.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.nudFrom.Size = New System.Drawing.Size(53, 20)
-        Me.nudFrom.TabIndex = 3
-        Me.nudFrom.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.nudFrom.UpDownAlign = System.Windows.Forms.LeftRightAlignment.Left
-        Me.nudFrom.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'lblFrom
         '
@@ -123,16 +108,6 @@ Partial Class dlgWaterBalance
         Me.lblFrom.Size = New System.Drawing.Size(55, 13)
         Me.lblFrom.TabIndex = 2
         Me.lblFrom.Text = "From Day:"
-        '
-        'nudTo
-        '
-        Me.nudTo.Location = New System.Drawing.Point(218, 19)
-        Me.nudTo.Maximum = New Decimal(New Integer() {366, 0, 0, 0})
-        Me.nudTo.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.nudTo.Name = "nudTo"
-        Me.nudTo.Size = New System.Drawing.Size(53, 20)
-        Me.nudTo.TabIndex = 5
-        Me.nudTo.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'lblTo
         '
@@ -411,6 +386,18 @@ Partial Class dlgWaterBalance
         Me.grpWaterBalance.TabStop = False
         Me.grpWaterBalance.Text = "Water Balance"
         '
+        'ucrNudWBLessThan
+        '
+        Me.ucrNudWBLessThan.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWBLessThan.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudWBLessThan.Location = New System.Drawing.Point(354, 9)
+        Me.ucrNudWBLessThan.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudWBLessThan.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWBLessThan.Name = "ucrNudWBLessThan"
+        Me.ucrNudWBLessThan.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudWBLessThan.TabIndex = 37
+        Me.ucrNudWBLessThan.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'ucrNudCapacity
         '
         Me.ucrNudCapacity.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
@@ -423,17 +410,29 @@ Partial Class dlgWaterBalance
         Me.ucrNudCapacity.TabIndex = 36
         Me.ucrNudCapacity.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrNudWBLessThan
+        'ucrNudFrom
         '
-        Me.ucrNudWBLessThan.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudWBLessThan.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudWBLessThan.Location = New System.Drawing.Point(354, 9)
-        Me.ucrNudWBLessThan.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudWBLessThan.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudWBLessThan.Name = "ucrNudWBLessThan"
-        Me.ucrNudWBLessThan.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudWBLessThan.TabIndex = 37
-        Me.ucrNudWBLessThan.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFrom.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFrom.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudFrom.Location = New System.Drawing.Point(56, 13)
+        Me.ucrNudFrom.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFrom.Name = "ucrNudFrom"
+        Me.ucrNudFrom.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudFrom.TabIndex = 36
+        Me.ucrNudFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudTo
+        '
+        Me.ucrNudTo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudTo.Location = New System.Drawing.Point(237, 13)
+        Me.ucrNudTo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTo.Name = "ucrNudTo"
+        Me.ucrNudTo.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudTo.TabIndex = 36
+        Me.ucrNudTo.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'dlgWaterBalance
         '
@@ -469,8 +468,6 @@ Partial Class dlgWaterBalance
         Me.Text = "End of Rains/Season"
         Me.grpRainParameters.ResumeLayout(False)
         Me.grpRainParameters.PerformLayout()
-        CType(Me.nudFrom, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudTo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpRain.ResumeLayout(False)
         Me.grpRain.PerformLayout()
         Me.grpWaterBalance.ResumeLayout(False)
@@ -490,9 +487,7 @@ Partial Class dlgWaterBalance
     Friend WithEvents lblDOY As Label
     Friend WithEvents grpRainParameters As GroupBox
     Friend WithEvents lblCapacity As Label
-    Friend WithEvents nudFrom As NumericUpDown
     Friend WithEvents lblFrom As Label
-    Friend WithEvents nudTo As NumericUpDown
     Friend WithEvents lblTo As Label
     Friend WithEvents lblRainfall As Label
     Friend WithEvents ucrReceiverRainfall As ucrReceiverSingle
@@ -514,4 +509,6 @@ Partial Class dlgWaterBalance
     Friend WithEvents ucrNudTotalOverDays As ucrNud
     Friend WithEvents ucrNudWBLessThan As ucrNud
     Friend WithEvents ucrNudCapacity As ucrNud
+    Friend WithEvents ucrNudTo As ucrNud
+    Friend WithEvents ucrNudFrom As ucrNud
 End Class

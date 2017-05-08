@@ -110,6 +110,9 @@ Public Class dlgWaterBalance
         ucrNudCapacity.Increment = 10
         'nudCapacity.DecimalPlaces = 0
 
+        ucrNudTo.Maximum = 366
+        'ucrNudTo.SetMinMax(ucrNudFrom.Value + 1, 366)
+        'ucrNudFrom.SetMinMax(1, ucrNudFrom.Value - 1)
         ucrNudWBLessThan.Increment = 10
         ucrNudWBLessThan.Maximum = Integer.MaxValue
 
@@ -123,8 +126,8 @@ Public Class dlgWaterBalance
         ucrSelectorForWaterBalance.Reset()
         ucrSaveWaterBalance.Reset()
 
-        nudFrom.Value = 1
-        nudTo.Value = 366
+        ucrNudFrom.Value = 1
+        ucrNudTo.Value = 366
         ucrNudCapacity.Value = 60
         ucrNudWBLessThan.Value = 40
         ucrInputEvaporation.SetName("5")
@@ -135,7 +138,7 @@ Public Class dlgWaterBalance
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverRainfall.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso ucrNudCapacity.Text <> "" AndAlso nudFrom.Text <> "" AndAlso nudTo.Text <> "" AndAlso Not ucrInputEvaporation.IsEmpty AndAlso ucrNudWBLessThan.Text <> "" AndAlso ucrSaveWaterBalance.IsComplete Then
+        If Not ucrReceiverRainfall.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso ucrNudCapacity.Text <> "" AndAlso ucrNudFrom.Text <> "" AndAlso ucrNudTo.Text <> "" AndAlso Not ucrInputEvaporation.IsEmpty AndAlso ucrNudWBLessThan.Text <> "" AndAlso ucrSaveWaterBalance.IsComplete Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -160,7 +163,7 @@ Public Class dlgWaterBalance
     End Sub
 
     Private Sub DayFromAndToMethod()
-        clsDayFromAndTo.AddParameter("function_exp", Chr(34) & ucrReceiverDOY.GetVariableNames(False) & ">=" & nudFrom.Value & " & " & ucrReceiverDOY.GetVariableNames(False) & "<=" & nudTo.Value & Chr(34))
+        clsDayFromAndTo.AddParameter("function_exp", Chr(34) & ucrReceiverDOY.GetVariableNames(False) & ">=" & ucrNudFrom.Value & " & " & ucrReceiverDOY.GetVariableNames(False) & "<=" & ucrNudTo.Value & Chr(34))
         clsDayFromAndTo.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")")
         clsDayFromAndTo.AddParameter("type", Chr(34) & "filter" & Chr(34))
     End Sub
@@ -262,44 +265,44 @@ Public Class dlgWaterBalance
 
     Private Sub ucrReceiverYear_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverYear.SelectionChanged
         YearGroupDaily()
-        TestOKEnabled()
+        'TestOKEnabled()
     End Sub
 
     Private Sub ucrReceiverRainfall_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverRainfall.SelectionChanged
         WaterBalance()
-        TestOKEnabled()
+        'TestOKEnabled()
     End Sub
 
     Private Sub ucrReceiverDOY_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverDOY.SelectionChanged
         DayFromAndToMethod()
         FirstWaterBalancePerYear()
-        TestOKEnabled()
+        ' TestOKEnabled()
     End Sub
 
     Private Sub ucrReceiverDate_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverDate.SelectionChanged
         AddKeyMethod()
-        TestOKEnabled()
+        'TestOKEnabled()
     End Sub
 
-    Private Sub DayFromAndTo(sender As Object, e As EventArgs) Handles nudFrom.TextChanged, nudTo.TextChanged
+    Private Sub DayFromAndTo(sender As Object, e As EventArgs)
         DayFromAndToMethod()
         nudValues()
-        TestOKEnabled()
+        'TestOKEnabled()
     End Sub
 
     Private Sub nudWBLessThan_ValueChanged(sender As Object, e As EventArgs) Handles ucrNudWBLessThan.TextChanged
         WaterBalance()
-        TestOKEnabled()
+        'TestOKEnabled()
     End Sub
 
     Private Sub nudCapacity_ValueChanged(sender As Object, e As EventArgs)
         WaterBalance()
-        TestOKEnabled()
+        'TestOKEnabled()
     End Sub
 
     Private Sub ucrInputEvaporation_NameChanged() Handles ucrInputEvaporation.NameChanged
         WaterBalance()
-        TestOKEnabled()
+        ' TestOKEnabled()
     End Sub
 
     Private Sub ucrSaveWaterBalance_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveWaterBalance.ControlValueChanged
@@ -307,7 +310,7 @@ Public Class dlgWaterBalance
         FirstWaterBalancePerYear()
     End Sub
 
-    Private Sub ucrSaveWaterBalance_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveWaterBalance.ControlContentsChanged
+    Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveWaterBalance.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverRainfall.ControlContentsChanged, ucrNudCapacity.ControlContentsChanged, ucrNudFrom.ControlContentsChanged, ucrNudTo.ControlContentsChanged, ucrInputEvaporation.ControlContentsChanged, ucrNudWBLessThan.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
