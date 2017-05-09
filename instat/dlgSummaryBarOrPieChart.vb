@@ -25,11 +25,22 @@ Public Class dlgSummaryBarOrPieChart
     Private Sub cmdOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
         autoTranslate(Me)
         TestOkEnabled()
+    End Sub
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrFactorReceiver.SetRCode(clsRaesFunction, bReset)
+        ucrYReceiver.SetRCode(clsRaesFunction, bReset)
+        ucrSecondFactorReceiver.SetRCode(clsRaesFunction, bReset)
+        ucrSaveSummaryBar.SetRCode(clsBaseOperator, bReset)
+        ucrSummarybarSelector.SetRCode(clsRggplotFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -38,6 +49,9 @@ Public Class dlgSummaryBarOrPieChart
         Else
             ucrBase.OKEnabled(True)
         End If
+    End Sub
+    Private Sub AllControls_ContenctsChanged() Handles ucrYReceiver.ControlContentsChanged, ucrFactorReceiver.ControlContentsChanged, ucrSaveSummaryBar.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -109,7 +123,6 @@ Public Class dlgSummaryBarOrPieChart
     Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged
 
         SummaryCheck()
-
         Dim clsBarForPieFunc As New RFunction
         Dim clsBarForPieParam As New RParameter
 
@@ -134,34 +147,25 @@ Public Class dlgSummaryBarOrPieChart
             clsRgeomPlotFunction.AddParameter("stat", Chr(34) & "identity" & Chr(34))
             clsBaseOperator.AddParameter(clsBarForPieParam)
         End If
-
-        TestOkEnabled()
-    End Sub
-    Private Sub ucrFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactorReceiver.SelectionChanged
-        SummaryCheck()
-        TestOkEnabled()
     End Sub
 
     Private Sub SummaryCheck()
         If rdoBarChart.Checked = True Then
             If ucrFactorReceiver.IsEmpty Then
-                clsRaesFunction.RemoveParameterByName("x")
-            Else
-                clsRaesFunction.AddParameter("x", ucrFactorReceiver.GetVariableNames(False))
+                ucrSecondFactorReceiver.ChangeParameterName("fill")
             End If
 
         ElseIf rdoPieChart.Checked = True Then
             If ucrFactorReceiver.IsEmpty Then
-                clsRaesFunction.RemoveParameterByName("fill")
-            Else
-                clsRaesFunction.AddParameter("fill", ucrSecondFactorReceiver.GetVariableNames(False))
+                ucrFactorReceiver.ChangeParameterName("x")
             End If
         End If
-        TestOkEnabled()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
         sdgPlots.Reset()
     End Sub
 
