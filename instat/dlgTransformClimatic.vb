@@ -149,6 +149,14 @@ Public Class dlgTransformClimatic
         ucrSelectorTransform.Reset()
         rdoSum.Checked = True 'this wil be fixed properly
 
+        'Temporary disable
+        rdoCount.Enabled = False
+        rdoSpell.Enabled = False
+        rdoWaterBalance.Enabled = False
+        grpCount.Enabled = False
+        grpSpells.Enabled = False
+        grpWaterbalance.Enabled = False
+
         clsRSumFuncExpr.AddParameter("data", ucrReceiverData.GetVariableNames(bWithQuotes:=False))
         clsRSumFuncExpr.AddParameter("fill", "NA")
         clsRSumFuncExpr.AddParameter("width", 1)
