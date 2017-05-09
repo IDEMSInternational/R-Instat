@@ -129,6 +129,7 @@ Public Class dlgThreeVariableFrequencies
         ucrPnlFreqType.AddParameterValuesCondition(rdoCell, "margin", Chr(34) & "cell" & Chr(34))
         ucrPnlFreqType.AddParameterValuesCondition(rdoColumn, "margin", Chr(34) & "col" & Chr(34))
 
+        ucrSaveGraph.Enabled = False 'temporary for now
         ucrSaveGraph.SetPrefix("three_way_freq")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorThreeVariableFrequencies.ucrAvailableDataFrames)
