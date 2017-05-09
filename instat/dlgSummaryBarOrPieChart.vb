@@ -60,6 +60,14 @@ Public Class dlgSummaryBarOrPieChart
         ucrBase.clsRsyntax.iCallType = 3
         ucrBase.iHelpTopicID = 439
 
+        ucrPnlOptions.AddRadioButton(rdoBarChart)
+        ucrPnlOptions.AddRadioButton(rdoPieChart)
+        ucrPnlOptions.AddFunctionNamesCondition(rdoPieChart, "coord_polar")
+        ucrPnlOptions.AddFunctionNamesCondition(rdoBarChart, "geom_bar")
+
+        ucrPnlOptions.AddToLinkedControls(ucrSecondFactorReceiver, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrSecondFactorReceiver.SetLinkedDisplayControl(lblSecondFactor)
+
         ucrSummarybarSelector.SetParameter(New RParameter("data", 0))
         ucrSummarybarSelector.SetParameterIsrfunction()
 
@@ -80,9 +88,6 @@ Public Class dlgSummaryBarOrPieChart
         ucrSecondFactorReceiver.bWithQuotes = False
         ucrSecondFactorReceiver.SetParameter(New RParameter("fill", 2))
         ucrSecondFactorReceiver.SetParameterIsString()
-
-        ucrPnlOptions.AddToLinkedControls(ucrSecondFactorReceiver, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrSecondFactorReceiver.SetLinkedDisplayControl(lblSecondFactor)
 
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         ucrSaveSummaryBar.SetIsComboBox()
@@ -122,20 +127,19 @@ Public Class dlgSummaryBarOrPieChart
     End Sub
     Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged
 
-        SummaryCheck()
         Dim clsBarForPieFunc As New RFunction
         Dim clsBarForPieParam As New RParameter
 
         If rdoBarChart.Checked = True Then
             ucrSaveSummaryBar.SetPrefix("Bar")
             clsRgeomPlotFunction.SetRCommand("geom_bar")
+            clsRgeomPlotFunction.AddParameter("stat", Chr(34) & "identity" & Chr(34))
             cmdPieChartOptions.Visible = False
             cmdBarChartOptions.Visible = True
         ElseIf rdoPieChart.Checked = True Then
             ucrSaveSummaryBar.SetPrefix("Pie")
             cmdPieChartOptions.Visible = True
             cmdBarChartOptions.Visible = False
-            clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
             clsRgeomPlotFunction.SetRCommand("coord_polar")
             clsRgeomPlotFunction.AddParameter("theta", Chr(34) & "y" & Chr(34))
 
@@ -144,22 +148,22 @@ Public Class dlgSummaryBarOrPieChart
             clsBarForPieParam.SetArgumentName("geom_bar")
             clsBarForPieFunc.SetRCommand("geom_bar")
             clsBarForPieFunc.AddParameter("width", "1")
-            clsRgeomPlotFunction.AddParameter("stat", Chr(34) & "identity" & Chr(34))
+            clsBarForPieFunc.AddParameter("stat", Chr(34) & "identity" & Chr(34))
             clsBaseOperator.AddParameter(clsBarForPieParam)
         End If
     End Sub
 
     Private Sub SummaryCheck()
-        If rdoBarChart.Checked = True Then
-            If ucrFactorReceiver.IsEmpty Then
-                ucrSecondFactorReceiver.ChangeParameterName("fill")
-            End If
+        'If rdoBarChart.Checked = True Then
+        '    If ucrFactorReceiver.IsEmpty Then
+        '        ucrSecondFactorReceiver.ChangeParameterName("fill")
+        '    End If
 
-        ElseIf rdoPieChart.Checked = True Then
-            If ucrFactorReceiver.IsEmpty Then
-                ucrFactorReceiver.ChangeParameterName("x")
-            End If
-        End If
+        'ElseIf rdoPieChart.Checked = True Then
+        '    If ucrFactorReceiver.IsEmpty Then
+        '        ucrFactorReceiver.ChangeParameterName("x")
+        '    End If
+        'End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
