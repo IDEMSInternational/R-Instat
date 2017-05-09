@@ -60,6 +60,7 @@ Public Class dlgPolynomials
         ucrSavePoly.SetSaveTypeAsColumn()
         ucrSavePoly.SetDataFrameSelector(ucrSelectorForPolynomial.ucrAvailableDataFrames)
         ucrSavePoly.SetIsComboBox()
+
     End Sub
 
     Private Sub SetDefaults()
@@ -68,6 +69,8 @@ Public Class dlgPolynomials
         'Reset 
         ucrSelectorForPolynomial.Reset()
         ucrSavePoly.Reset()
+
+        'ucrNudDegree.Value = 2
 
         clsPolynomial.SetRCommand("poly")
         clsPolynomial.AddParameter("degree", 2)
