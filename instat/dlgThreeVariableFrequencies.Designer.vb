@@ -265,7 +265,7 @@ Partial Class dlgThreeVariableFrequencies
         '
         'ucrSaveGraph
         '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 350)
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 308)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
         Me.ucrSaveGraph.Size = New System.Drawing.Size(250, 20)
         Me.ucrSaveGraph.TabIndex = 20
@@ -295,7 +295,7 @@ Partial Class dlgThreeVariableFrequencies
         'ucrReceiverWeights
         '
         Me.ucrReceiverWeights.frmParent = Me
-        Me.ucrReceiverWeights.Location = New System.Drawing.Point(113, 298)
+        Me.ucrReceiverWeights.Location = New System.Drawing.Point(113, 256)
         Me.ucrReceiverWeights.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverWeights.Name = "ucrReceiverWeights"
         Me.ucrReceiverWeights.Selector = Nothing
@@ -306,7 +306,7 @@ Partial Class dlgThreeVariableFrequencies
         'ucrChkWeights
         '
         Me.ucrChkWeights.Checked = False
-        Me.ucrChkWeights.Location = New System.Drawing.Point(10, 298)
+        Me.ucrChkWeights.Location = New System.Drawing.Point(10, 256)
         Me.ucrChkWeights.Name = "ucrChkWeights"
         Me.ucrChkWeights.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkWeights.TabIndex = 16
@@ -360,7 +360,7 @@ Partial Class dlgThreeVariableFrequencies
         'ucrChkFlip
         '
         Me.ucrChkFlip.Checked = False
-        Me.ucrChkFlip.Location = New System.Drawing.Point(10, 324)
+        Me.ucrChkFlip.Location = New System.Drawing.Point(10, 282)
         Me.ucrChkFlip.Name = "ucrChkFlip"
         Me.ucrChkFlip.Size = New System.Drawing.Size(183, 20)
         Me.ucrChkFlip.TabIndex = 18
