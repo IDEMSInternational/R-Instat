@@ -198,7 +198,6 @@ Public Class dlgThreeVariableFrequencies
 
         ucrChkWeights.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("weight.by", 1), iAdditionalPairNo:=1)
         ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjPlot, ucrChkWeights.GetParameter(), iAdditionalPairNo:=1)
-        ucrSaveGraph.AddAdditionalCodeParameterPair(clsSjPlot, ucrSaveGraph.GetParameter(), iAdditionalPairNo:=1)
 
         ucrReceiverRowFactor.SetRCode(clsSelect, bReset)
         ucrReceiverColumnFactor.SetRCode(clsSelect, bReset)
