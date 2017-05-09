@@ -153,11 +153,11 @@ Partial Class dlgTwoWayFrequencies
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(10, 233)
+        Me.cmdOptions.Location = New System.Drawing.Point(10, 229)
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(83, 23)
+        Me.cmdOptions.Size = New System.Drawing.Size(119, 23)
         Me.cmdOptions.TabIndex = 11
-        Me.cmdOptions.Text = " Options..."
+        Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'rdoBoth
@@ -245,7 +245,7 @@ Partial Class dlgTwoWayFrequencies
         '
         'ucrSaveGraph
         '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(9, 317)
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(9, 311)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
         Me.ucrSaveGraph.Size = New System.Drawing.Size(276, 24)
         Me.ucrSaveGraph.TabIndex = 16
@@ -263,7 +263,7 @@ Partial Class dlgTwoWayFrequencies
         'ucrChkFlip
         '
         Me.ucrChkFlip.Checked = False
-        Me.ucrChkFlip.Location = New System.Drawing.Point(10, 291)
+        Me.ucrChkFlip.Location = New System.Drawing.Point(9, 288)
         Me.ucrChkFlip.Name = "ucrChkFlip"
         Me.ucrChkFlip.Size = New System.Drawing.Size(183, 20)
         Me.ucrChkFlip.TabIndex = 14
@@ -278,7 +278,7 @@ Partial Class dlgTwoWayFrequencies
         'ucrChkWeights
         '
         Me.ucrChkWeights.Checked = False
-        Me.ucrChkWeights.Location = New System.Drawing.Point(10, 265)
+        Me.ucrChkWeights.Location = New System.Drawing.Point(9, 265)
         Me.ucrChkWeights.Name = "ucrChkWeights"
         Me.ucrChkWeights.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkWeights.TabIndex = 12
@@ -318,7 +318,7 @@ Partial Class dlgTwoWayFrequencies
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 351)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 337)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 15
@@ -327,7 +327,7 @@ Partial Class dlgTwoWayFrequencies
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(477, 409)
+        Me.ClientSize = New System.Drawing.Size(477, 391)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.grpFreqTypeGraph)
         Me.Controls.Add(Me.rdoBoth)
