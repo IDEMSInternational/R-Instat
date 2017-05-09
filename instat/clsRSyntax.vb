@@ -46,6 +46,17 @@ Public Class RSyntax
         bUseCommandString = False
     End Sub
 
+    Public Sub SetPackageName(strName As String)
+        If clsBaseFunction Is Nothing Then
+            MsgBox("Developer error: base function must be set before package name is set.")
+        Else
+            clsBaseFunction.SetPackageName(strName)
+            bUseBaseFunction = True
+            bUseBaseOperator = False
+            bUseCommandString = False
+        End If
+    End Sub
+
     Public Sub SetBaseRFunction(clsFunction As RFunction)
         clsBaseFunction = clsFunction
         bUseBaseFunction = True
