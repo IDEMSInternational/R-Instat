@@ -201,8 +201,9 @@ Public Class dlgThreeVariableFrequencies
 
         ucrChkWeights.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("weight.by", 1), iAdditionalPairNo:=1)
         ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjPlot, ucrChkWeights.GetParameter(), iAdditionalPairNo:=1)
+        ucrSaveGraph.AddAdditionalCodeParameterPair(clsSjPlot, ucrSaveGraph.GetParameter(), iAdditionalPairNo:=1)
 
-        ucrSaveGraph.SetRCode(clsGraphBaseOperator, bReset)
+
         ucrReceiverRowFactor.SetRCode(clsSelect, bReset)
         ucrReceiverColumnFactor.SetRCode(clsSelect, bReset)
         ucrReceiverGroupsBy1st.SetRCode(clsGroupBy, bReset)
@@ -217,6 +218,7 @@ Public Class dlgThreeVariableFrequencies
         ucrChkColumn.SetRCode(clsSjTab, bReset)
         ucrChkRow.SetRCode(clsSjTab, bReset)
         ucrChkCount.SetRCode(clsSjTab, bReset)
+        ucrSaveGraph.SetRCode(clsGraphBaseOperator, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
