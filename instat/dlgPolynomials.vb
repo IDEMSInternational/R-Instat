@@ -60,24 +60,18 @@ Public Class dlgPolynomials
         ucrSavePoly.SetSaveTypeAsColumn()
         ucrSavePoly.SetDataFrameSelector(ucrSelectorForPolynomial.ucrAvailableDataFrames)
         ucrSavePoly.SetIsComboBox()
-        '        ucrSavePoly.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
-        '        ucrSavePoly.SetLabelText("Prefix for New Columns:")
-        'If Not ucrSavePoly.bUserTyped Then
-        '    ucrSavePoly.SetPrefix("")
-        '    ucrSavePoly.SetName("poly")
-        'End If
     End Sub
 
     Private Sub SetDefaults()
         clsPolynomial = New RFunction
         clsScale = New RFunction
-
         'Reset 
         ucrSelectorForPolynomial.Reset()
         ucrSavePoly.Reset()
 
         clsPolynomial.SetRCommand("poly")
         clsPolynomial.AddParameter("degree", 2)
+        SetNewColumName()
         clsPolynomial.AddParameter("raw", "TRUE")
 
         clsScale.SetRCommand("scale")
@@ -93,8 +87,6 @@ Public Class dlgPolynomials
         ucrSavePoly.SetRCode(clsPolynomial, bReset)
         ucrReceiverPolynomial.SetRCode(clsPolynomial, bReset)
         ucrReceiverPolynomial.AddAdditionalCodeParameterPair(clsScale, New RParameter("x", 0), iAdditionalPairNo:=1)
-
-        SetNewColumName()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -112,7 +104,7 @@ Public Class dlgPolynomials
     End Sub
 
     Private Sub SetNewColumName()
-        If ucrNudDegree.GetText = 1 Then
+        If ucrNudDegree.Value = 1 Then
             ucrSavePoly.SetAssignToBooleans(bTempAssignToIsPrefix:=False)
             ucrSavePoly.SetLabelText("New Column Name:")
             If Not ucrSavePoly.bUserTyped Then
@@ -126,6 +118,7 @@ Public Class dlgPolynomials
                 ucrSavePoly.SetName("poly")
             End If
         End If
+
     End Sub
 
     Private Sub ucrPnl_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlType.ControlValueChanged
@@ -136,7 +129,7 @@ Public Class dlgPolynomials
         End If
     End Sub
 
-    Private Sub ucrNudDegree_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudDegree.ControlValueChanged
+    Private Sub ucrNudDegree_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudDegree.ControlContentsChanged
         SetNewColumName()
     End Sub
 
