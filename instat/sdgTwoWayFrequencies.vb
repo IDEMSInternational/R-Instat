@@ -54,6 +54,7 @@ Public Class sdgTwoWayFrequencies
         ucrInputVerticalLabels.SetItems(dctVerticalPositionLabel)
         ucrInputVerticalLabels.SetRDefault(Chr(34) & "bottom" & Chr(34))
         ucrInputVerticalLabels.bUpdateRCodeFromControl = False
+
         ucrChkStack.SetParameter(New RParameter("bar.pos", 10), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "stack" & Chr(34), strNewValueIfUnchecked:=Chr(34) & "dodge" & Chr(34))
         ucrChkStack.SetText("Stack Bar Graph")
         ucrChkStack.SetRDefault(Chr(34) & "dodge" & Chr(34))
@@ -71,6 +72,7 @@ Public Class sdgTwoWayFrequencies
         ucrChkBackgroundColour.SetParameter(New RParameter("emph.total", 11), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkBackgroundColour.SetText("Totals Column/Row Background Highlighted")
         ucrChkBackgroundColour.SetRDefault("FALSE")
+
         'Setting Plot parameter
         ucrChkShowCount.SetParameter(New RParameter("show.n", 5), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkShowCount.SetText("Show Count")
@@ -116,7 +118,7 @@ Public Class sdgTwoWayFrequencies
         rdoLine.Enabled = False
         bControlsInitialised = True
     End Sub
-    'Linking the subdialogue to the functions main dialogue
+    'Linking the subdialog to the functions main dialogue
     Public Sub SetRCode(clsNewSjtFreq As RFunction, clsNewSjpFrq As RFunction, Optional clsNewGraphOperator As ROperator = Nothing, Optional bReset As Boolean = False, Optional bNewUseTitle As Boolean = True)
         If Not bControlsInitialised Then
             InitialiseControls()
@@ -152,8 +154,6 @@ Public Class sdgTwoWayFrequencies
             ucrInputTableTitle.Enabled = False
             ucrInputGraphTitle.Enabled = False
         End If
-
-
     End Sub
 
     'This is a temporary solution to a known bug with sjPlot package
