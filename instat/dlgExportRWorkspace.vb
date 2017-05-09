@@ -91,9 +91,9 @@ Public Class dlgExportRWorkspace
     Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
         Dim dlgSave As New SaveFileDialog
 
-        dlgSave.Title = "Export file dialog"
+        dlgSave.Title = "Export R Workspace"
         dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
-        dlgSave.Filter = "Saved r objects (*.RData)|*.RData"
+        dlgSave.Filter = "Saved R Objects (*.RData)|*.RData"
         If dlgSave.ShowDialog = DialogResult.OK Then
             If dlgSave.FileName <> "" Then
                 ucrInputExportFile.SetName(Path.GetFullPath(dlgSave.FileName).ToString.Replace("\", "/"))
