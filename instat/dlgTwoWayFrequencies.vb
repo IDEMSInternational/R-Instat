@@ -186,7 +186,6 @@ Public Class dlgTwoWayFrequencies
         ucrChkWeights.AddAdditionalCodeParameterPair(clsSjPlot, ucrReceiverWeights.GetParameter(), iAdditionalPairNo:=1)
         ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjPlot, ucrReceiverWeights.GetParameter(), iAdditionalPairNo:=1)
 
-        ucrSaveGraph.SetRCode(clsSjPlot, bReset)
         ucrReceiverRowFactor.SetRCode(clsSjTab, bReset)
         ucrReceiverColumnFactor.SetRCode(clsSjTab, bReset)
         ucrReceiverWeights.SetRCode(clsSjTab, bReset)
@@ -199,6 +198,8 @@ Public Class dlgTwoWayFrequencies
         ucrChkColumn.SetRCode(clsSjTab, bReset)
         ucrChkRow.SetRCode(clsSjTab, bReset)
         ucrChkCount.SetRCode(clsSjTab, bReset)
+        ucrSaveGraph.SetRCode(clsSjPlot, bReset)
+
     End Sub
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
