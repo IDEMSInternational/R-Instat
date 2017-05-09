@@ -128,7 +128,7 @@ Public Class dlgTwoWayFrequencies
         ucrPnlFreqDisplay.AddToLinkedControls(ucrSaveGraph, {rdoGraph, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFreqType.SetLinkedDisplayControl(grpFreqTypeGraph)
 
-        ucrSaveGraph.SetPrefix("Graph")
+        ucrSaveGraph.SetPrefix("Two_way_freq")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorTwoWayFrequencies.ucrAvailableDataFrames)
         ucrSaveGraph.SetCheckBoxText("Save Graph")
