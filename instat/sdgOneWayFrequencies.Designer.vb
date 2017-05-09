@@ -35,7 +35,6 @@ Partial Class sdgOneWayFrequencies
         Me.ucrChkMedian = New instat.ucrCheck()
         Me.ucrChkShowSummary = New instat.ucrCheck()
         Me.tbGraph = New System.Windows.Forms.TabPage()
-        Me.ucrSaveGraph = New instat.ucrSave()
         Me.grpGraphOptions = New System.Windows.Forms.GroupBox()
         Me.lblTitle = New System.Windows.Forms.Label()
         Me.lblHjust = New System.Windows.Forms.Label()
@@ -67,7 +66,7 @@ Partial Class sdgOneWayFrequencies
         Me.tbOneWayFrequencies.Location = New System.Drawing.Point(7, 4)
         Me.tbOneWayFrequencies.Name = "tbOneWayFrequencies"
         Me.tbOneWayFrequencies.SelectedIndex = 0
-        Me.tbOneWayFrequencies.Size = New System.Drawing.Size(352, 308)
+        Me.tbOneWayFrequencies.Size = New System.Drawing.Size(352, 272)
         Me.tbOneWayFrequencies.TabIndex = 0
         '
         'tbTable
@@ -76,7 +75,7 @@ Partial Class sdgOneWayFrequencies
         Me.tbTable.Location = New System.Drawing.Point(4, 22)
         Me.tbTable.Name = "tbTable"
         Me.tbTable.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbTable.Size = New System.Drawing.Size(344, 282)
+        Me.tbTable.Size = New System.Drawing.Size(344, 246)
         Me.tbTable.TabIndex = 0
         Me.tbTable.Text = "Table"
         Me.tbTable.UseVisualStyleBackColor = True
@@ -183,23 +182,15 @@ Partial Class sdgOneWayFrequencies
         '
         'tbGraph
         '
-        Me.tbGraph.Controls.Add(Me.ucrSaveGraph)
         Me.tbGraph.Controls.Add(Me.grpGraphOptions)
         Me.tbGraph.Controls.Add(Me.grpGraphType)
         Me.tbGraph.Location = New System.Drawing.Point(4, 22)
         Me.tbGraph.Name = "tbGraph"
         Me.tbGraph.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbGraph.Size = New System.Drawing.Size(344, 282)
+        Me.tbGraph.Size = New System.Drawing.Size(344, 246)
         Me.tbGraph.TabIndex = 1
         Me.tbGraph.Text = "Graph"
         Me.tbGraph.UseVisualStyleBackColor = True
-        '
-        'ucrSaveGraph
-        '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(12, 249)
-        Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(294, 24)
-        Me.ucrSaveGraph.TabIndex = 2
         '
         'grpGraphOptions
         '
@@ -355,7 +346,7 @@ Partial Class sdgOneWayFrequencies
         '
         'ucrBaseOneWayFrequencies
         '
-        Me.ucrBaseOneWayFrequencies.Location = New System.Drawing.Point(111, 318)
+        Me.ucrBaseOneWayFrequencies.Location = New System.Drawing.Point(111, 288)
         Me.ucrBaseOneWayFrequencies.Name = "ucrBaseOneWayFrequencies"
         Me.ucrBaseOneWayFrequencies.Size = New System.Drawing.Size(142, 30)
         Me.ucrBaseOneWayFrequencies.TabIndex = 1
@@ -407,7 +398,6 @@ Partial Class sdgOneWayFrequencies
     Friend WithEvents rdoLine As RadioButton
     Friend WithEvents rdoDot As RadioButton
     Friend WithEvents rdoBar As RadioButton
-    Friend WithEvents ucrSaveGraph As ucrSave
     Friend WithEvents lblTitle As Label
     Friend WithEvents lblHjust As Label
     Friend WithEvents lblVjust As Label
