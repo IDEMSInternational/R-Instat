@@ -39,6 +39,7 @@ Partial Class dlgTwoWayFrequencies
         Me.rdoRow = New System.Windows.Forms.RadioButton()
         Me.rdoColumn = New System.Windows.Forms.RadioButton()
         Me.ucrPnlFreqType = New instat.UcrPanel()
+        Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrSelectorTwoWayFrequencies = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrChkFlip = New instat.ucrCheck()
         Me.ucrPnlFreqDisplay = New instat.UcrPanel()
@@ -242,6 +243,13 @@ Partial Class dlgTwoWayFrequencies
         Me.ucrPnlFreqType.Size = New System.Drawing.Size(82, 102)
         Me.ucrPnlFreqType.TabIndex = 0
         '
+        'ucrSaveGraph
+        '
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(9, 317)
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(276, 24)
+        Me.ucrSaveGraph.TabIndex = 16
+        '
         'ucrSelectorTwoWayFrequencies
         '
         Me.ucrSelectorTwoWayFrequencies.bShowHiddenColumns = False
@@ -310,7 +318,7 @@ Partial Class dlgTwoWayFrequencies
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 317)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 351)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 15
@@ -319,7 +327,8 @@ Partial Class dlgTwoWayFrequencies
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(482, 372)
+        Me.ClientSize = New System.Drawing.Size(477, 409)
+        Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.grpFreqTypeGraph)
         Me.Controls.Add(Me.rdoBoth)
         Me.Controls.Add(Me.ucrSelectorTwoWayFrequencies)
@@ -375,4 +384,5 @@ Partial Class dlgTwoWayFrequencies
     Friend WithEvents ucrChkCell As ucrCheck
     Friend WithEvents ucrChkColumn As ucrCheck
     Friend WithEvents ucrChkRow As ucrCheck
+    Friend WithEvents ucrSaveGraph As ucrSave
 End Class
