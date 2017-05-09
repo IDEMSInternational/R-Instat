@@ -269,11 +269,11 @@ Public Class dlgTwoWayFrequencies
         If rdoBoth.Checked Then
             grpFreqTypeTable.Location = New Point(240, 166)
             grpFreqTypeGraph.Location = New Point(358, 166)
-            Me.Size = New Size(494, 448)
+            Me.Size = New Size(496, 433)
         Else
             grpFreqTypeTable.Location = New Point(263, 166)
             grpFreqTypeGraph.Location = New Point(263, 166)
-            Me.Size = New Size(437, 448)
+            Me.Size = New Size(437, 433)
         End If
     End Sub
 
