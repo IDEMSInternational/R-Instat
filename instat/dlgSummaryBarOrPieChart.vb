@@ -36,26 +36,6 @@ Public Class dlgSummaryBarOrPieChart
         autoTranslate(Me)
         TestOkEnabled()
     End Sub
-    Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrFactorReceiver.SetRCode(clsRaesFunction, bReset)
-        ucrYReceiver.SetRCode(clsRaesFunction, bReset)
-        ucrSecondFactorReceiver.SetRCode(clsRaesFunction, bReset)
-        ucrSaveSummaryBar.SetRCode(clsBaseOperator, bReset)
-        ucrSummarybarSelector.SetRCode(clsRggplotFunction, bReset)
-        ucrPnlOptions.SetRCode(clsBaseOperator, bReset)
-    End Sub
-
-    Private Sub TestOkEnabled()
-        If Not ucrYReceiver.IsEmpty AndAlso Not ucrFactorReceiver.IsEmpty AndAlso ucrSaveSummaryBar.IsComplete Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
-    End Sub
-
-    Private Sub AllControls_ContenctsChanged() Handles ucrYReceiver.ControlContentsChanged, ucrFactorReceiver.ControlContentsChanged, ucrSaveSummaryBar.ControlContentsChanged
-        TestOkEnabled()
-    End Sub
 
     Private Sub InitialiseDialog()
         Dim clsRCoordPolarFunction As New RFunction
@@ -137,8 +117,21 @@ Public Class dlgSummaryBarOrPieChart
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
     End Sub
 
-    Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged
-        SetDailogOptions()
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrFactorReceiver.SetRCode(clsRaesFunction, bReset)
+        ucrYReceiver.SetRCode(clsRaesFunction, bReset)
+        ucrSecondFactorReceiver.SetRCode(clsRaesFunction, bReset)
+        ucrSaveSummaryBar.SetRCode(clsBaseOperator, bReset)
+        ucrSummarybarSelector.SetRCode(clsRggplotFunction, bReset)
+        ucrPnlOptions.SetRCode(clsBaseOperator, bReset)
+    End Sub
+
+    Private Sub TestOkEnabled()
+        If Not ucrYReceiver.IsEmpty AndAlso Not ucrFactorReceiver.IsEmpty AndAlso ucrSaveSummaryBar.IsComplete Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub SetDailogOptions()
@@ -194,6 +187,14 @@ Public Class dlgSummaryBarOrPieChart
                 ucrFactorReceiver.Add(clsParam.strArgumentValue)
             End If
         Next
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged
+        SetDailogOptions()
+    End Sub
+
+    Private Sub AllControls_ContenctsChanged() Handles ucrYReceiver.ControlContentsChanged, ucrFactorReceiver.ControlContentsChanged, ucrSaveSummaryBar.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class

@@ -42,7 +42,7 @@ Partial Class dlgSummaryBarOrPieChart
         'lblYvariable
         '
         Me.lblYvariable.AutoSize = True
-        Me.lblYvariable.Location = New System.Drawing.Point(256, 70)
+        Me.lblYvariable.Location = New System.Drawing.Point(253, 75)
         Me.lblYvariable.Name = "lblYvariable"
         Me.lblYvariable.Size = New System.Drawing.Size(58, 13)
         Me.lblYvariable.TabIndex = 4
@@ -52,7 +52,7 @@ Partial Class dlgSummaryBarOrPieChart
         'lblFactor
         '
         Me.lblFactor.AutoSize = True
-        Me.lblFactor.Location = New System.Drawing.Point(256, 116)
+        Me.lblFactor.Location = New System.Drawing.Point(253, 121)
         Me.lblFactor.Name = "lblFactor"
         Me.lblFactor.Size = New System.Drawing.Size(40, 13)
         Me.lblFactor.TabIndex = 6
@@ -82,7 +82,7 @@ Partial Class dlgSummaryBarOrPieChart
         'lblSecondFactor
         '
         Me.lblSecondFactor.AutoSize = True
-        Me.lblSecondFactor.Location = New System.Drawing.Point(256, 163)
+        Me.lblSecondFactor.Location = New System.Drawing.Point(253, 168)
         Me.lblSecondFactor.Name = "lblSecondFactor"
         Me.lblSecondFactor.Size = New System.Drawing.Size(80, 13)
         Me.lblSecondFactor.TabIndex = 8
@@ -106,7 +106,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.rdoBarChart.FlatAppearance.BorderSize = 2
         Me.rdoBarChart.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoBarChart.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoBarChart.Location = New System.Drawing.Point(92, 9)
+        Me.rdoBarChart.Location = New System.Drawing.Point(101, 9)
         Me.rdoBarChart.Name = "rdoBarChart"
         Me.rdoBarChart.Size = New System.Drawing.Size(100, 27)
         Me.rdoBarChart.TabIndex = 1
@@ -123,7 +123,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.rdoPieChart.FlatAppearance.BorderSize = 2
         Me.rdoPieChart.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoPieChart.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoPieChart.Location = New System.Drawing.Point(191, 9)
+        Me.rdoPieChart.Location = New System.Drawing.Point(199, 9)
         Me.rdoPieChart.Name = "rdoPieChart"
         Me.rdoPieChart.Size = New System.Drawing.Size(100, 27)
         Me.rdoPieChart.TabIndex = 2
@@ -134,15 +134,15 @@ Partial Class dlgSummaryBarOrPieChart
         '
         'ucrSaveSummaryBar
         '
-        Me.ucrSaveSummaryBar.Location = New System.Drawing.Point(10, 286)
+        Me.ucrSaveSummaryBar.Location = New System.Drawing.Point(10, 288)
         Me.ucrSaveSummaryBar.Name = "ucrSaveSummaryBar"
-        Me.ucrSaveSummaryBar.Size = New System.Drawing.Size(365, 24)
+        Me.ucrSaveSummaryBar.Size = New System.Drawing.Size(255, 24)
         Me.ucrSaveSummaryBar.TabIndex = 12
         '
         'ucrSecondFactorReceiver
         '
         Me.ucrSecondFactorReceiver.frmParent = Me
-        Me.ucrSecondFactorReceiver.Location = New System.Drawing.Point(255, 178)
+        Me.ucrSecondFactorReceiver.Location = New System.Drawing.Point(252, 183)
         Me.ucrSecondFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSecondFactorReceiver.Name = "ucrSecondFactorReceiver"
         Me.ucrSecondFactorReceiver.Selector = Nothing
@@ -153,7 +153,7 @@ Partial Class dlgSummaryBarOrPieChart
         'ucrFactorReceiver
         '
         Me.ucrFactorReceiver.frmParent = Me
-        Me.ucrFactorReceiver.Location = New System.Drawing.Point(255, 131)
+        Me.ucrFactorReceiver.Location = New System.Drawing.Point(252, 136)
         Me.ucrFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
         Me.ucrFactorReceiver.Selector = Nothing
@@ -164,7 +164,7 @@ Partial Class dlgSummaryBarOrPieChart
         'ucrYReceiver
         '
         Me.ucrYReceiver.frmParent = Me
-        Me.ucrYReceiver.Location = New System.Drawing.Point(255, 85)
+        Me.ucrYReceiver.Location = New System.Drawing.Point(252, 90)
         Me.ucrYReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrYReceiver.Name = "ucrYReceiver"
         Me.ucrYReceiver.Selector = Nothing
@@ -191,7 +191,7 @@ Partial Class dlgSummaryBarOrPieChart
         '
         'ucrPnlOptions
         '
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(80, 2)
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(88, 2)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         Me.ucrPnlOptions.Size = New System.Drawing.Size(216, 35)
         Me.ucrPnlOptions.TabIndex = 0
