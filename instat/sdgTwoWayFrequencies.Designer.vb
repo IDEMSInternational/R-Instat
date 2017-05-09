@@ -101,7 +101,7 @@ Partial Class sdgTwoWayFrequencies
         'lblNumberOfDecimals
         '
         Me.lblNumberOfDecimals.AutoSize = True
-        Me.lblNumberOfDecimals.Location = New System.Drawing.Point(10, 101)
+        Me.lblNumberOfDecimals.Location = New System.Drawing.Point(8, 101)
         Me.lblNumberOfDecimals.Name = "lblNumberOfDecimals"
         Me.lblNumberOfDecimals.Size = New System.Drawing.Size(161, 13)
         Me.lblNumberOfDecimals.TabIndex = 3
@@ -122,7 +122,7 @@ Partial Class sdgTwoWayFrequencies
         'lblGraphTitle
         '
         Me.lblGraphTitle.AutoSize = True
-        Me.lblGraphTitle.Location = New System.Drawing.Point(10, 157)
+        Me.lblGraphTitle.Location = New System.Drawing.Point(8, 157)
         Me.lblGraphTitle.Name = "lblGraphTitle"
         Me.lblGraphTitle.Size = New System.Drawing.Size(60, 13)
         Me.lblGraphTitle.TabIndex = 7

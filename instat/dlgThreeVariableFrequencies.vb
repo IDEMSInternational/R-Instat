@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
 Imports instat.Translations
 Public Class dlgThreeVariableFrequencies
     Private bFirstLoad As Boolean = True
@@ -38,7 +37,6 @@ Public Class dlgThreeVariableFrequencies
     End Sub
 
     Private Sub InitialiseDialog()
-
         ucrBase.iHelpTopicID = 523
         ucrChkWeights.Enabled = False ' temporary for now
 
@@ -131,7 +129,6 @@ Public Class dlgThreeVariableFrequencies
         ucrPnlFreqType.AddParameterValuesCondition(rdoCell, "margin", Chr(34) & "cell" & Chr(34))
         ucrPnlFreqType.AddParameterValuesCondition(rdoColumn, "margin", Chr(34) & "col" & Chr(34))
 
-
         ucrSaveGraph.SetPrefix("Graph")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorThreeVariableFrequencies.ucrAvailableDataFrames)
@@ -202,7 +199,6 @@ Public Class dlgThreeVariableFrequencies
         ucrChkWeights.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("weight.by", 1), iAdditionalPairNo:=1)
         ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjPlot, ucrChkWeights.GetParameter(), iAdditionalPairNo:=1)
         ucrSaveGraph.AddAdditionalCodeParameterPair(clsSjPlot, ucrSaveGraph.GetParameter(), iAdditionalPairNo:=1)
-
 
         ucrReceiverRowFactor.SetRCode(clsSelect, bReset)
         ucrReceiverColumnFactor.SetRCode(clsSelect, bReset)
@@ -313,10 +309,6 @@ Public Class dlgThreeVariableFrequencies
         ChangeLocation()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnFactor.ControlContentsChanged, ucrReceiverRowFactor.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrReceiverGroupBy2nd.ControlContentsChanged, ucrReceiverGroupsBy1st.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
-        TestOkEnabled()
-    End Sub
-
     Private Sub ucrPnlFreqType_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlFreqType.ControlContentsChanged
         If rdoCell.Checked Then
             clsSjPlot.AddParameter("margin", Chr(34) & "cell" & Chr(34))
@@ -327,6 +319,9 @@ Public Class dlgThreeVariableFrequencies
         Else
             clsSjPlot.RemoveParameterByName("margin")
         End If
+    End Sub
 
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnFactor.ControlContentsChanged, ucrReceiverRowFactor.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrReceiverGroupBy2nd.ControlContentsChanged, ucrReceiverGroupsBy1st.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class
