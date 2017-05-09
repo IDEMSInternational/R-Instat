@@ -60,7 +60,6 @@ Public Class dlgPolynomials
         ucrSavePoly.SetSaveTypeAsColumn()
         ucrSavePoly.SetDataFrameSelector(ucrSelectorForPolynomial.ucrAvailableDataFrames)
         ucrSavePoly.SetIsComboBox()
-
     End Sub
 
     Private Sub SetDefaults()
