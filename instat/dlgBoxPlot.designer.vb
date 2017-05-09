@@ -26,17 +26,18 @@ Partial Class dlgBoxplot
         Me.lblByFactors = New System.Windows.Forms.Label()
         Me.lblBySecondFactor = New System.Windows.Forms.Label()
         Me.cmdBoxPlotOptions = New System.Windows.Forms.Button()
-        Me.chkHorizontalBoxplot = New System.Windows.Forms.CheckBox()
-        Me.ucrSaveBoxplot = New instat.ucrSaveGraph()
         Me.ucrVariablesAsFactorForBoxplot = New instat.ucrVariablesAsFactor()
         Me.ucrSecondFactorReceiver = New instat.ucrReceiverSingle()
         Me.ucrSelectorBoxPlot = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrByFactorsReceiver = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
-        Me.chkVarwidth = New System.Windows.Forms.CheckBox()
         Me.rdoBoxplot = New System.Windows.Forms.RadioButton()
         Me.rdoJitter = New System.Windows.Forms.RadioButton()
         Me.rdoViolin = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlPlots = New instat.UcrPanel()
+        Me.ucrChkVarWidth = New instat.ucrCheck()
+        Me.ucrChkHorizontalBoxplot = New instat.ucrCheck()
+        Me.ucrSaveBoxplot = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -44,7 +45,7 @@ Partial Class dlgBoxplot
         Me.cmdOptions.Location = New System.Drawing.Point(10, 268)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(120, 25)
-        Me.cmdOptions.TabIndex = 8
+        Me.cmdOptions.TabIndex = 11
         Me.cmdOptions.Tag = "Options"
         Me.cmdOptions.Text = "Plot Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
@@ -52,20 +53,20 @@ Partial Class dlgBoxplot
         'lblByFactors
         '
         Me.lblByFactors.AutoSize = True
-        Me.lblByFactors.Location = New System.Drawing.Point(254, 199)
+        Me.lblByFactors.Location = New System.Drawing.Point(254, 205)
         Me.lblByFactors.Name = "lblByFactors"
         Me.lblByFactors.Size = New System.Drawing.Size(88, 13)
-        Me.lblByFactors.TabIndex = 2
+        Me.lblByFactors.TabIndex = 6
         Me.lblByFactors.Tag = "By_Factor:"
         Me.lblByFactors.Text = "Factor (Optional):"
         '
         'lblBySecondFactor
         '
         Me.lblBySecondFactor.AutoSize = True
-        Me.lblBySecondFactor.Location = New System.Drawing.Point(254, 243)
+        Me.lblBySecondFactor.Location = New System.Drawing.Point(254, 249)
         Me.lblBySecondFactor.Name = "lblBySecondFactor"
         Me.lblBySecondFactor.Size = New System.Drawing.Size(128, 13)
-        Me.lblBySecondFactor.TabIndex = 4
+        Me.lblBySecondFactor.TabIndex = 8
         Me.lblBySecondFactor.Tag = "By_Second_Factor:"
         Me.lblBySecondFactor.Text = "Second Factor (Optional):"
         '
@@ -74,45 +75,32 @@ Partial Class dlgBoxplot
         Me.cmdBoxPlotOptions.Location = New System.Drawing.Point(10, 237)
         Me.cmdBoxPlotOptions.Name = "cmdBoxPlotOptions"
         Me.cmdBoxPlotOptions.Size = New System.Drawing.Size(120, 25)
-        Me.cmdBoxPlotOptions.TabIndex = 7
+        Me.cmdBoxPlotOptions.TabIndex = 10
         Me.cmdBoxPlotOptions.Tag = "BoxPlot_Options"
         Me.cmdBoxPlotOptions.Text = "Boxplot Options"
         Me.cmdBoxPlotOptions.UseVisualStyleBackColor = True
         '
-        'chkHorizontalBoxplot
-        '
-        Me.chkHorizontalBoxplot.AutoSize = True
-        Me.chkHorizontalBoxplot.Location = New System.Drawing.Point(10, 308)
-        Me.chkHorizontalBoxplot.Name = "chkHorizontalBoxplot"
-        Me.chkHorizontalBoxplot.Size = New System.Drawing.Size(111, 17)
-        Me.chkHorizontalBoxplot.TabIndex = 6
-        Me.chkHorizontalBoxplot.Tag = "Horizontal_Boxplot"
-        Me.chkHorizontalBoxplot.Text = "Horizontal Boxplot"
-        Me.chkHorizontalBoxplot.UseVisualStyleBackColor = True
-        '
-        'ucrSaveBoxplot
-        '
-        Me.ucrSaveBoxplot.Location = New System.Drawing.Point(10, 334)
-        Me.ucrSaveBoxplot.Name = "ucrSaveBoxplot"
-        Me.ucrSaveBoxplot.Size = New System.Drawing.Size(268, 23)
-        Me.ucrSaveBoxplot.TabIndex = 10
-        '
         'ucrVariablesAsFactorForBoxplot
         '
-        Me.ucrVariablesAsFactorForBoxplot.Location = New System.Drawing.Point(254, 67)
+        Me.ucrVariablesAsFactorForBoxplot.frmParent = Me
+        Me.ucrVariablesAsFactorForBoxplot.Location = New System.Drawing.Point(254, 70)
         Me.ucrVariablesAsFactorForBoxplot.Name = "ucrVariablesAsFactorForBoxplot"
+        Me.ucrVariablesAsFactorForBoxplot.Selector = Nothing
         Me.ucrVariablesAsFactorForBoxplot.Size = New System.Drawing.Size(120, 130)
-        Me.ucrVariablesAsFactorForBoxplot.TabIndex = 1
+        Me.ucrVariablesAsFactorForBoxplot.TabIndex = 5
+        Me.ucrVariablesAsFactorForBoxplot.ucrSelector = Nothing
         Me.ucrVariablesAsFactorForBoxplot.ucrVariableSelector = Nothing
         '
         'ucrSecondFactorReceiver
         '
-        Me.ucrSecondFactorReceiver.Location = New System.Drawing.Point(254, 257)
+        Me.ucrSecondFactorReceiver.frmParent = Me
+        Me.ucrSecondFactorReceiver.Location = New System.Drawing.Point(254, 263)
         Me.ucrSecondFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSecondFactorReceiver.Name = "ucrSecondFactorReceiver"
         Me.ucrSecondFactorReceiver.Selector = Nothing
         Me.ucrSecondFactorReceiver.Size = New System.Drawing.Size(120, 20)
-        Me.ucrSecondFactorReceiver.TabIndex = 5
+        Me.ucrSecondFactorReceiver.TabIndex = 9
+        Me.ucrSecondFactorReceiver.ucrSelector = Nothing
         '
         'ucrSelectorBoxPlot
         '
@@ -122,80 +110,116 @@ Partial Class dlgBoxplot
         Me.ucrSelectorBoxPlot.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorBoxPlot.Name = "ucrSelectorBoxPlot"
         Me.ucrSelectorBoxPlot.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorBoxPlot.TabIndex = 0
+        Me.ucrSelectorBoxPlot.TabIndex = 4
         '
         'ucrByFactorsReceiver
         '
-        Me.ucrByFactorsReceiver.Location = New System.Drawing.Point(254, 214)
+        Me.ucrByFactorsReceiver.frmParent = Me
+        Me.ucrByFactorsReceiver.Location = New System.Drawing.Point(254, 220)
         Me.ucrByFactorsReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrByFactorsReceiver.Name = "ucrByFactorsReceiver"
         Me.ucrByFactorsReceiver.Selector = Nothing
         Me.ucrByFactorsReceiver.Size = New System.Drawing.Size(120, 20)
-        Me.ucrByFactorsReceiver.TabIndex = 3
+        Me.ucrByFactorsReceiver.TabIndex = 7
+        Me.ucrByFactorsReceiver.ucrSelector = Nothing
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 363)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 376)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 9
-        '
-        'chkVarwidth
-        '
-        Me.chkVarwidth.AutoSize = True
-        Me.chkVarwidth.Location = New System.Drawing.Point(166, 308)
-        Me.chkVarwidth.Name = "chkVarwidth"
-        Me.chkVarwidth.Size = New System.Drawing.Size(112, 17)
-        Me.chkVarwidth.TabIndex = 11
-        Me.chkVarwidth.Tag = "Vary_boxplot_width"
-        Me.chkVarwidth.Text = "Vary boxplot width"
-        Me.chkVarwidth.UseVisualStyleBackColor = True
+        Me.ucrBase.TabIndex = 15
         '
         'rdoBoxplot
         '
-        Me.rdoBoxplot.AutoSize = True
-        Me.rdoBoxplot.Location = New System.Drawing.Point(13, 13)
+        Me.rdoBoxplot.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoBoxplot.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoBoxplot.FlatAppearance.BorderSize = 2
+        Me.rdoBoxplot.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoBoxplot.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoBoxplot.Location = New System.Drawing.Point(67, 13)
         Me.rdoBoxplot.Name = "rdoBoxplot"
-        Me.rdoBoxplot.Size = New System.Drawing.Size(60, 17)
-        Me.rdoBoxplot.TabIndex = 12
+        Me.rdoBoxplot.Size = New System.Drawing.Size(98, 27)
+        Me.rdoBoxplot.TabIndex = 1
         Me.rdoBoxplot.TabStop = True
         Me.rdoBoxplot.Text = "Boxplot"
+        Me.rdoBoxplot.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoBoxplot.UseVisualStyleBackColor = True
         '
         'rdoJitter
         '
-        Me.rdoJitter.AutoSize = True
-        Me.rdoJitter.Location = New System.Drawing.Point(166, 13)
+        Me.rdoJitter.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoJitter.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoJitter.FlatAppearance.BorderSize = 2
+        Me.rdoJitter.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoJitter.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoJitter.Location = New System.Drawing.Point(163, 13)
         Me.rdoJitter.Name = "rdoJitter"
-        Me.rdoJitter.Size = New System.Drawing.Size(68, 17)
-        Me.rdoJitter.TabIndex = 13
+        Me.rdoJitter.Size = New System.Drawing.Size(98, 27)
+        Me.rdoJitter.TabIndex = 2
         Me.rdoJitter.TabStop = True
         Me.rdoJitter.Text = "Jitter Plot"
+        Me.rdoJitter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoJitter.UseVisualStyleBackColor = True
         '
         'rdoViolin
         '
-        Me.rdoViolin.AutoSize = True
-        Me.rdoViolin.Location = New System.Drawing.Point(314, 13)
+        Me.rdoViolin.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoViolin.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoViolin.FlatAppearance.BorderSize = 2
+        Me.rdoViolin.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoViolin.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoViolin.Location = New System.Drawing.Point(259, 13)
         Me.rdoViolin.Name = "rdoViolin"
-        Me.rdoViolin.Size = New System.Drawing.Size(71, 17)
-        Me.rdoViolin.TabIndex = 14
+        Me.rdoViolin.Size = New System.Drawing.Size(98, 27)
+        Me.rdoViolin.TabIndex = 3
         Me.rdoViolin.TabStop = True
         Me.rdoViolin.Text = "Violin Plot"
+        Me.rdoViolin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoViolin.UseVisualStyleBackColor = True
+        '
+        'ucrPnlPlots
+        '
+        Me.ucrPnlPlots.Location = New System.Drawing.Point(23, 12)
+        Me.ucrPnlPlots.Name = "ucrPnlPlots"
+        Me.ucrPnlPlots.Size = New System.Drawing.Size(374, 35)
+        Me.ucrPnlPlots.TabIndex = 0
+        '
+        'ucrChkVarWidth
+        '
+        Me.ucrChkVarWidth.Checked = False
+        Me.ucrChkVarWidth.Location = New System.Drawing.Point(10, 299)
+        Me.ucrChkVarWidth.Name = "ucrChkVarWidth"
+        Me.ucrChkVarWidth.Size = New System.Drawing.Size(135, 20)
+        Me.ucrChkVarWidth.TabIndex = 12
+        '
+        'ucrChkHorizontalBoxplot
+        '
+        Me.ucrChkHorizontalBoxplot.Checked = False
+        Me.ucrChkHorizontalBoxplot.Location = New System.Drawing.Point(10, 325)
+        Me.ucrChkHorizontalBoxplot.Name = "ucrChkHorizontalBoxplot"
+        Me.ucrChkHorizontalBoxplot.Size = New System.Drawing.Size(135, 20)
+        Me.ucrChkHorizontalBoxplot.TabIndex = 13
+        '
+        'ucrSaveBoxplot
+        '
+        Me.ucrSaveBoxplot.Location = New System.Drawing.Point(10, 351)
+        Me.ucrSaveBoxplot.Name = "ucrSaveBoxplot"
+        Me.ucrSaveBoxplot.Size = New System.Drawing.Size(254, 24)
+        Me.ucrSaveBoxplot.TabIndex = 14
         '
         'dlgBoxplot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(451, 418)
+        Me.ClientSize = New System.Drawing.Size(425, 433)
+        Me.Controls.Add(Me.ucrSaveBoxplot)
+        Me.Controls.Add(Me.ucrChkHorizontalBoxplot)
+        Me.Controls.Add(Me.ucrChkVarWidth)
         Me.Controls.Add(Me.rdoViolin)
         Me.Controls.Add(Me.rdoJitter)
         Me.Controls.Add(Me.rdoBoxplot)
-        Me.Controls.Add(Me.chkVarwidth)
-        Me.Controls.Add(Me.ucrSaveBoxplot)
         Me.Controls.Add(Me.ucrVariablesAsFactorForBoxplot)
-        Me.Controls.Add(Me.chkHorizontalBoxplot)
         Me.Controls.Add(Me.cmdBoxPlotOptions)
         Me.Controls.Add(Me.ucrSecondFactorReceiver)
         Me.Controls.Add(Me.ucrSelectorBoxPlot)
@@ -204,6 +228,7 @@ Partial Class dlgBoxplot
         Me.Controls.Add(Me.ucrByFactorsReceiver)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.ucrPnlPlots)
         Me.Cursor = System.Windows.Forms.Cursors.Default
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -225,11 +250,12 @@ Partial Class dlgBoxplot
     Friend WithEvents ucrSecondFactorReceiver As ucrReceiverSingle
     Friend WithEvents lblBySecondFactor As Label
     Friend WithEvents cmdBoxPlotOptions As Button
-    Friend WithEvents chkHorizontalBoxplot As CheckBox
     Friend WithEvents ucrVariablesAsFactorForBoxplot As ucrVariablesAsFactor
-    Friend WithEvents ucrSaveBoxplot As ucrSaveGraph
-    Friend WithEvents chkVarwidth As CheckBox
     Friend WithEvents rdoBoxplot As RadioButton
     Friend WithEvents rdoJitter As RadioButton
     Friend WithEvents rdoViolin As RadioButton
+    Friend WithEvents ucrSaveBoxplot As ucrSave
+    Friend WithEvents ucrChkHorizontalBoxplot As ucrCheck
+    Friend WithEvents ucrChkVarWidth As ucrCheck
+    Friend WithEvents ucrPnlPlots As UcrPanel
 End Class
