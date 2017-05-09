@@ -113,6 +113,7 @@ Public Class dlgThreeVariableFrequencies
         ucrPnlFrequencyDisplay.AddFunctionNamesCondition(rdoGraph, "sjplot")
 
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkCount, {rdoTable, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrSaveGraph, {rdoGraph, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkRow, {rdoTable, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkCell, {rdoTable, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkColumn, {rdoTable, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
@@ -130,6 +131,14 @@ Public Class dlgThreeVariableFrequencies
         ucrPnlFreqType.AddParameterValuesCondition(rdoCell, "margin", Chr(34) & "cell" & Chr(34))
         ucrPnlFreqType.AddParameterValuesCondition(rdoColumn, "margin", Chr(34) & "col" & Chr(34))
 
+
+        ucrSaveGraph.SetPrefix("Graph")
+        ucrSaveGraph.SetSaveTypeAsGraph()
+        ucrSaveGraph.SetDataFrameSelector(ucrSelectorThreeVariableFrequencies.ucrAvailableDataFrames)
+        ucrSaveGraph.SetCheckBoxText("Save Graph")
+        ucrSaveGraph.SetIsComboBox()
+        ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
+
         ucrChkColumn.SetLinkedDisplayControl(grpFreqTypeTable)
     End Sub
 
@@ -143,6 +152,7 @@ Public Class dlgThreeVariableFrequencies
 
         ucrSelectorThreeVariableFrequencies.Reset()
         ucrReceiverRowFactor.SetMeAsReceiver()
+        ucrSaveGraph.Reset()
 
         clsTableBaseOperator.SetOperation("%>%")
         clsTableBaseOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupBy, iPosition:=1)
@@ -192,6 +202,7 @@ Public Class dlgThreeVariableFrequencies
         ucrChkWeights.AddAdditionalCodeParameterPair(clsSjPlot, New RParameter("weight.by", 1), iAdditionalPairNo:=1)
         ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjPlot, ucrChkWeights.GetParameter(), iAdditionalPairNo:=1)
 
+        ucrSaveGraph.SetRCode(clsGraphBaseOperator, bReset)
         ucrReceiverRowFactor.SetRCode(clsSelect, bReset)
         ucrReceiverColumnFactor.SetRCode(clsSelect, bReset)
         ucrReceiverGroupsBy1st.SetRCode(clsGroupBy, bReset)
@@ -209,7 +220,7 @@ Public Class dlgThreeVariableFrequencies
     End Sub
 
     Private Sub TestOkEnabled()
-        If (Not ucrReceiverGroupsBy1st.IsEmpty() OrElse Not ucrReceiverGroupBy2nd.IsEmpty) AndAlso Not ucrReceiverRowFactor.IsEmpty() AndAlso Not ucrReceiverColumnFactor.IsEmpty Then
+        If (Not ucrReceiverGroupsBy1st.IsEmpty() OrElse Not ucrReceiverGroupBy2nd.IsEmpty) AndAlso Not ucrReceiverRowFactor.IsEmpty() AndAlso Not ucrReceiverColumnFactor.IsEmpty AndAlso ucrSaveGraph.IsComplete Then
             If Not ucrChkWeights.Checked Then
                 ucrBase.OKEnabled(True)
             Else
@@ -300,7 +311,7 @@ Public Class dlgThreeVariableFrequencies
         ChangeLocation()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnFactor.ControlContentsChanged, ucrReceiverRowFactor.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrReceiverGroupBy2nd.ControlContentsChanged, ucrReceiverGroupsBy1st.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnFactor.ControlContentsChanged, ucrReceiverRowFactor.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrReceiverGroupBy2nd.ControlContentsChanged, ucrReceiverGroupsBy1st.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
