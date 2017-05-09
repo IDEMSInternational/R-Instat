@@ -117,6 +117,7 @@ Public Class sdgTwoWayFrequencies
         ucrSaveGraph.SetCheckBoxText("Save Graph")
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
+        ucrSaveGraph.Enabled = False
         rdoLine.Enabled = False
         bControlsInitialised = True
     End Sub

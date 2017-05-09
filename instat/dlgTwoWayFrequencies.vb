@@ -124,6 +124,7 @@ Public Class dlgTwoWayFrequencies
         ucrPnlFreqDisplay.AddToLinkedControls(ucrChkCell, {rdoTable, rdoBoth}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFreqDisplay.AddToLinkedControls(ucrChkColumn, {rdoTable, rdoBoth}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFreqDisplay.AddToLinkedControls(ucrPnlFreqType, {rdoGraph, rdoBoth}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoCount)
+        ucrPnlFreqDisplay.AddToLinkedControls(ucrSaveGraph, {rdoGraph, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFreqType.SetLinkedDisplayControl(grpFreqTypeGraph)
 
         ucrSaveGraph.SetPrefix("Graph")
@@ -133,8 +134,8 @@ Public Class dlgTwoWayFrequencies
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
         ucrChkColumn.SetLinkedDisplayControl(grpFreqTypeTable)
-
         changelocation()
+
     End Sub
 
     Private Sub SetDefaults()
@@ -144,6 +145,7 @@ Public Class dlgTwoWayFrequencies
         'Reset
         ucrSelectorTwoWayFrequencies.Reset()
         ucrReceiverRowFactor.SetMeAsReceiver()
+        ucrSaveGraph.Reset()
 
         'Defining Table functions and default functions
         clsSjTab.SetPackageName("sjPlot")
@@ -310,11 +312,11 @@ Public Class dlgTwoWayFrequencies
         If rdoBoth.Checked Then
             grpFreqTypeTable.Location = New Point(240, 166)
             grpFreqTypeGraph.Location = New Point(358, 166)
-            Me.Size = New Size(500, 448)
+            Me.Size = New Size(494, 448)
         Else
             grpFreqTypeTable.Location = New Point(263, 166)
             grpFreqTypeGraph.Location = New Point(263, 166)
-            Me.Size = New Size(445, 448)
+            Me.Size = New Size(437, 448)
         End If
     End Sub
 End Class
