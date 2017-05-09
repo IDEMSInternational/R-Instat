@@ -345,76 +345,34 @@ instat_object$set("public", "summary_table", function(data_name, columns_to_summ
   factors <- c(column_factors, row_factors)
   cell_values <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = factors, store_results = store_results, drop = drop, na.rm = na.rm, return_output = TRUE)
   
+  #assume one summary for now
+  # should run for every statistic? loop for summary_type: , paste0(summary_type, "()"
+  cell_values <- dcast(row_factors ~ column_factors, value.var = "statistic of interest", data = data_name) 
+  
+  
   if(include_margins) {
     margin_tables <- list()
     power_sets <- powerSet(factors)
     for(facts in head(power_sets, -1)) { # OR power_sets[-length(power_sets)])
       margin_tables[[length(margin_tables) + 1]] <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = facts, store_results = store_results, drop = drop, na.rm = na.rm, return_output = return_output)
       # How to save that calculate_margins bit
+      
+      # Column Factor - add as row margin
+      column_factor_margin <- margin_tables[2]   # in long term where is [[2]], e.g. which(powerSet(c(1,2,3, 4)) == "1"
+      overall_col_margin <- append(column_factor_margin$summary_count_Village, values = c(rep(length.out=length(row_factors), x='NA')), after = 0) 
+      # not sure if I can have $ in this?
+      # I need to repeat NA for as many as the number of Row Factors we have hence rep function.
+      # add above into the unstacked data set
+      cell_values <- rbind(cell_values, overall_col_margin)
+      
+      # take [[7]] and [[1]]. Append [[1]]
+      overall_value <- margin_tables[1]   # want to get this 1st value in that list.
+      row_factor_margin <- margin_tables[length(margin_tables)]
+      # append the vector for the summary of interest in row_factor_margin with the overall_value
+      overall_row_margin <- append(row_factor_margin$summary_count_Village., overall_value, after = 0)
+      # add into the unstacked dataset
+      cell_values <- cbind(cell_values, Total_Margin)
     }
   }
-  
-  # First, Unstack the general table (cell_values)
-  # cell_values <- dcast(row_factors ~ column_factors, value.var = "statistic of interest") # 
-  # TODO: need + between row factors? Work this out.
-  # should run for every statistic? loop for summary_type: , paste0(summary_type, "()"
-  cell_values <- instat_calculation$new(type = "calculation", result_name = cell_values, calculated_from = list(row_factors, column_factors),
-                                        function_exp = "dcast(row_factors ~ column_factors, value.var = 'statistic_of_interest')", save = 1)
-  
-  
-  # Now, let's take [[2]]
-  column_factor_margin <- margin_tables[2]   # in long term where is [[2]], e.g. which(powerSet(c(1,2,3, 4)) == "1"
-  
-  #note column_factor_margin looks like this:
-  #  village count1 count2
-  #  1   kesen      7      3
-  #  2   nanda     14      3
-  #  3    niko      5      3
-  #  4   sabey     10      3
-  
-  #Total_of_Col_Margin <- append(column_factor_margin$summary_count_Village, values = c(NA, NA), after = 0) 
-  
-  # loop for summary of interest:
-  # add in ,paste0 etc.
-  Total_of_Col_Margin <- instat_calculation$new(type = "calculation", result_name = Total_of_Col_Margin, calculated_from = list(column_factor_margin = "summary_count_Village"),
-                                                function_exp = "append(summary_count_Village, values = c(rep(length.out=36, x='NA')), after = 0)", save = 1)
-  # I need to repeat NA for as many as the number of Row Factors we have hence rep function.
-  
-  #add this in
-  cell_values <- instat_calculation$new(type = "calculation", result_name = cell_values,
-                                        function_exp = "rbind(cell_values, Total_of_Col_Margin)", save = 1,
-                                        sub_calculations = list(Total_of_Col_Margin, cell_values))
-  
-  
-  # Finally, let's take [[7]] and [[1]]. Append [[1]]
-  
-  overall_value <- margin_tables[1]   # want to get this 1st value in that list.
-  #This gives "[[1]] numeric(0)", I want just "numeric(0)"
-  
-  row_factor_margin <- margin_tables[length(margin_tables)]
-  # last one. (last is usually 1,2,3 but here it is not because we have removed the last term)
-  # want to get this last value in that list. This gives "[[1]]   [1] 2 3", I want just "2, 3" I assume?
-  # Okay so my question here is what does this give me? Does this give me the dataframe:
-  #   Factor1 Factor2 summary_count_Village. summary_count_non_missing_Village.
-  #1       1       6                    4                              3
-  #2       2       7                    6                              3
-  #3       2       6                   10                              3
-  #4       2       5                    1                              3
-  #5       3       7                    4                              3
-  #6       3       6                    3                              3
-  #7       3       5                    8                              3
-  
-  
-  # append the vector for summary_count_Village with the overall_value
-  #Total_Margin <- append(row_factor_margin$summary_count_Village., overall_value, after = 0)
-  #cell_values <- cbind(cell_values, Total_Margin)
-  
-  Total_of_Row_Margin <- instat_calculation$new(type = "calculation", result_name = Total_of_Col_Margin, calculated_from = list(row_factor_margin = "summary_count_Village"),
-                                                function_exp = "append(summary_count_Village., overall_value, after = 0)", save = 1)
-  
-  #add this in
-  cell_values <- instat_calculation$new(type = "calculation", result_name = cell_values,
-                                        function_exp = "cbind(cell_values, Total_of_Row_Margin)", save = 2,
-                                        sub_calculations = list(Total_of_Row_Margin, cell_values))
 }
 )
