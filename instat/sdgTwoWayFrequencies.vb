@@ -112,12 +112,7 @@ Public Class sdgTwoWayFrequencies
 
         'Setting Plot parameter
         ucrPnlGraphType.AddToLinkedControls(ucrChkStack, {rdoBar}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
-        ucrSaveGraph.SetSaveTypeAsGraph()
-        ucrSaveGraph.SetDataFrameSelector(dlgOneWayFrequencies.ucrSelectorOneWayFreq.ucrAvailableDataFrames)
-        ucrSaveGraph.SetCheckBoxText("Save Graph")
-        ucrSaveGraph.SetIsComboBox()
-        ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
-        ucrSaveGraph.Enabled = False
+
         rdoLine.Enabled = False
         bControlsInitialised = True
     End Sub
@@ -158,13 +153,6 @@ Public Class sdgTwoWayFrequencies
             ucrInputGraphTitle.Enabled = False
         End If
 
-        If clsGraphOperator IsNot Nothing Then
-            ucrSaveGraph.SetPrefix("three_way_freq")
-            ucrSaveGraph.SetRCode(clsGraphOperator, bReset)
-        Else
-            ucrSaveGraph.SetPrefix("two_way_freq")
-            ucrSaveGraph.SetRCode(clsTwoWayGraphFreq, bReset)
-        End If
 
     End Sub
 
