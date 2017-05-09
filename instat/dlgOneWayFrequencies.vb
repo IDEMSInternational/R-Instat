@@ -104,6 +104,7 @@ Public Class dlgOneWayFrequencies
 
         ucrSelectorOneWayFreq.Reset()
         ucrReceiverOneWayFreq.SetMeAsReceiver()
+        ucrSaveGraph.Reset()
 
         clsPlotGrid.SetPackageName("sjPlot")
         clsPlotGrid.SetRCommand("plot_grid")
