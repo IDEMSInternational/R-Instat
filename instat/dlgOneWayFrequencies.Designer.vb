@@ -41,6 +41,7 @@ Partial Class dlgOneWayFrequencies
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorOneWayFreq = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverOneWayFreq = New instat.ucrReceiverMultiple()
+        Me.ucrSaveGraph = New instat.ucrSave()
         Me.grpSort.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -53,7 +54,7 @@ Partial Class dlgOneWayFrequencies
         Me.grpSort.Location = New System.Drawing.Point(269, 201)
         Me.grpSort.Name = "grpSort"
         Me.grpSort.Size = New System.Drawing.Size(120, 95)
-        Me.grpSort.TabIndex = 8
+        Me.grpSort.TabIndex = 7
         Me.grpSort.TabStop = False
         Me.grpSort.Text = "Sort"
         '
@@ -102,8 +103,8 @@ Partial Class dlgOneWayFrequencies
         Me.cmdOptions.Location = New System.Drawing.Point(10, 228)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(87, 23)
-        Me.cmdOptions.TabIndex = 7
-        Me.cmdOptions.Text = " Options..."
+        Me.cmdOptions.TabIndex = 8
+        Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'lblSelectedVariable
@@ -216,10 +217,10 @@ Partial Class dlgOneWayFrequencies
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 329)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 352)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 14
+        Me.ucrBase.TabIndex = 15
         '
         'ucrSelectorOneWayFreq
         '
@@ -242,11 +243,19 @@ Partial Class dlgOneWayFrequencies
         Me.ucrReceiverOneWayFreq.TabIndex = 6
         Me.ucrReceiverOneWayFreq.ucrSelector = Nothing
         '
+        'ucrSaveGraph
+        '
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 328)
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(255, 24)
+        Me.ucrSaveGraph.TabIndex = 14
+        '
         'dlgOneWayFrequencies
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 385)
+        Me.ClientSize = New System.Drawing.Size(419, 408)
+        Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrReceiverOneWayFreq)
         Me.Controls.Add(Me.rdoBoth)
         Me.Controls.Add(Me.rdoGraph)
@@ -294,4 +303,5 @@ Partial Class dlgOneWayFrequencies
     Friend WithEvents ucrPnlFrequencies As UcrPanel
     Friend WithEvents rdoBoth As RadioButton
     Friend WithEvents ucrReceiverOneWayFreq As ucrReceiverMultiple
+    Friend WithEvents ucrSaveGraph As ucrSave
 End Class
