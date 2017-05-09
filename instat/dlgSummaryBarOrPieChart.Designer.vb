@@ -34,7 +34,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.ucrSecondFactorReceiver = New instat.ucrReceiverSingle()
         Me.ucrFactorReceiver = New instat.ucrReceiverSingle()
         Me.ucrYReceiver = New instat.ucrReceiverSingle()
-        Me.ucrSummarybarSelector = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSummaryBarSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.SuspendLayout()
@@ -172,15 +172,15 @@ Partial Class dlgSummaryBarOrPieChart
         Me.ucrYReceiver.TabIndex = 5
         Me.ucrYReceiver.ucrSelector = Nothing
         '
-        'ucrSummarybarSelector
+        'ucrSummaryBarSelector
         '
-        Me.ucrSummarybarSelector.bShowHiddenColumns = False
-        Me.ucrSummarybarSelector.bUseCurrentFilter = True
-        Me.ucrSummarybarSelector.Location = New System.Drawing.Point(10, 40)
-        Me.ucrSummarybarSelector.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSummarybarSelector.Name = "ucrSummarybarSelector"
-        Me.ucrSummarybarSelector.Size = New System.Drawing.Size(242, 192)
-        Me.ucrSummarybarSelector.TabIndex = 3
+        Me.ucrSummaryBarSelector.bShowHiddenColumns = False
+        Me.ucrSummaryBarSelector.bUseCurrentFilter = True
+        Me.ucrSummaryBarSelector.Location = New System.Drawing.Point(10, 40)
+        Me.ucrSummaryBarSelector.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSummaryBarSelector.Name = "ucrSummaryBarSelector"
+        Me.ucrSummaryBarSelector.Size = New System.Drawing.Size(242, 192)
+        Me.ucrSummaryBarSelector.TabIndex = 3
         '
         'ucrBase
         '
@@ -213,7 +213,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.Controls.Add(Me.lblYvariable)
         Me.Controls.Add(Me.ucrFactorReceiver)
         Me.Controls.Add(Me.ucrYReceiver)
-        Me.Controls.Add(Me.ucrSummarybarSelector)
+        Me.Controls.Add(Me.ucrSummaryBarSelector)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrPnlOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -229,7 +229,7 @@ Partial Class dlgSummaryBarOrPieChart
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrSummarybarSelector As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSummaryBarSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrYReceiver As ucrReceiverSingle
     Friend WithEvents ucrFactorReceiver As ucrReceiverSingle
     Friend WithEvents lblYvariable As Label
