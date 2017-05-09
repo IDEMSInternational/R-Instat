@@ -39,7 +39,6 @@ Public Class dlgSummaryBarOrPieChart
 
     Private Sub InitialiseDialog()
         Dim clsRCoordPolarFunction As New RFunction
-
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
         ucrBase.iHelpTopicID = 439
@@ -52,31 +51,31 @@ Public Class dlgSummaryBarOrPieChart
         ucrPnlOptions.AddToLinkedControls(ucrSecondFactorReceiver, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrSecondFactorReceiver.SetLinkedDisplayControl(lblSecondFactor)
 
-        ucrSummarybarSelector.SetParameter(New RParameter("data", 0))
-        ucrSummarybarSelector.SetParameterIsrfunction()
+        ucrSummaryBarSelector.SetParameter(New RParameter("data", 0))
+        ucrSummaryBarSelector.SetParameterIsrfunction()
 
-        ucrYReceiver.Selector = ucrSummarybarSelector
+        ucrYReceiver.SetParameter(New RParameter("y", 1))
+        ucrYReceiver.Selector = ucrSummaryBarSelector
         ucrYReceiver.SetIncludedDataTypes({"numeric"})
         ucrYReceiver.bWithQuotes = False
-        ucrYReceiver.SetParameter(New RParameter("y", 1))
         ucrYReceiver.SetParameterIsString()
 
-        ucrFactorReceiver.Selector = ucrSummarybarSelector
+        ucrFactorReceiver.SetParameter(New RParameter("x", 0))
+        ucrFactorReceiver.Selector = ucrSummaryBarSelector
         ucrFactorReceiver.SetIncludedDataTypes({"factor"})
         ucrFactorReceiver.bWithQuotes = False
-        ucrFactorReceiver.SetParameter(New RParameter("x", 0))
         ucrFactorReceiver.SetParameterIsString()
 
-        ucrSecondFactorReceiver.Selector = ucrSummarybarSelector
+        ucrSecondFactorReceiver.SetParameter(New RParameter("fill", 2))
+        ucrSecondFactorReceiver.Selector = ucrSummaryBarSelector
         ucrSecondFactorReceiver.SetIncludedDataTypes({"factor"})
         ucrSecondFactorReceiver.bWithQuotes = False
-        ucrSecondFactorReceiver.SetParameter(New RParameter("fill", 2))
         ucrSecondFactorReceiver.SetParameterIsString()
 
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         ucrSaveSummaryBar.SetIsComboBox()
         ucrSaveSummaryBar.SetCheckBoxText("Save Graph")
-        ucrSaveSummaryBar.SetDataFrameSelector(ucrSummarybarSelector.ucrAvailableDataFrames)
+        ucrSaveSummaryBar.SetDataFrameSelector(ucrSummaryBarSelector.ucrAvailableDataFrames)
         ucrSaveSummaryBar.SetSaveTypeAsGraph()
         ucrSaveSummaryBar.SetPrefix("Bar")
         ucrSaveSummaryBar.SetAssignToIfUncheckedValue("last_graph")
@@ -94,7 +93,7 @@ Public Class dlgSummaryBarOrPieChart
         clsRgeomBarFunction = New RFunction
         clsRaesFunction = New RFunction
 
-        ucrSummarybarSelector.Reset()
+        ucrSummaryBarSelector.Reset()
         ucrYReceiver.SetMeAsReceiver()
         ucrSaveSummaryBar.Reset()
 
@@ -113,16 +112,16 @@ Public Class dlgSummaryBarOrPieChart
         clsRgeomBarFunction.SetRCommand("geom_bar")
         clsRgeomBarFunction.AddParameter("stat", Chr(34) & "identity" & Chr(34))
 
-        clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSummarybarSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSummaryBarSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
     End Sub
 
-    Private Sub SetRCodeForControls(bReset As Boolean)
+    Public Sub SetRCodeForControls(bReset As Boolean)
         ucrFactorReceiver.SetRCode(clsRaesFunction, bReset)
         ucrYReceiver.SetRCode(clsRaesFunction, bReset)
         ucrSecondFactorReceiver.SetRCode(clsRaesFunction, bReset)
         ucrSaveSummaryBar.SetRCode(clsBaseOperator, bReset)
-        ucrSummarybarSelector.SetRCode(clsRggplotFunction, bReset)
+        ucrSummaryBarSelector.SetRCode(clsRggplotFunction, bReset)
         ucrPnlOptions.SetRCode(clsBaseOperator, bReset)
     End Sub
 
@@ -134,7 +133,47 @@ Public Class dlgSummaryBarOrPieChart
         End If
     End Sub
 
-    Private Sub SetDailogOptions()
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
+        sdgPlots.Reset()
+    End Sub
+
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgPlots.SetDataFrame(strNewDataFrame:=ucrSummaryBarSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        sdgPlots.ShowDialog()
+    End Sub
+
+    Private Sub cmdBarChartOptions_Click(sender As Object, e As EventArgs) Handles cmdBarChartOptions.Click
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeomBarFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrSummaryBarSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True, bIgnoreGlobalAes:=False)
+        sdgLayerOptions.ShowDialog()
+        For Each clsParam In clsRaesFunction.clsParameters
+            If clsParam.strArgumentName = "x" Then
+                ucrFactorReceiver.Add(clsParam.strArgumentValue)
+            ElseIf clsParam.strArgumentName = "y" Then
+                ucrYReceiver.Add(clsParam.strArgumentValue)
+            ElseIf clsParam.strArgumentName = "fill" Then
+                ucrSecondFactorReceiver.Add(clsParam.strArgumentValue)
+            End If
+        Next
+        TestOkEnabled()
+    End Sub
+
+    Private Sub cmdPieChartOptions_Click(sender As Object, e As EventArgs) Handles cmdPieChartOptions.Click
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeomBarFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrSummaryBarSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True)
+        sdgLayerOptions.ShowDialog()
+        For Each clsParam In clsRaesFunction.clsParameters
+            If clsParam.strArgumentName = "y" Then
+                ucrYReceiver.Add(clsParam.strArgumentValue)
+            ElseIf clsParam.strArgumentName = "fill" Then
+                ucrFactorReceiver.Add(clsParam.strArgumentValue)
+            End If
+        Next
+        TestOkEnabled()
+    End Sub
+
+    Private Sub SetDialogOptions()
         If rdoBarChart.Checked Then
             ucrSaveSummaryBar.SetPrefix("Bar")
             cmdPieChartOptions.Visible = False
@@ -150,51 +189,11 @@ Public Class dlgSummaryBarOrPieChart
         End If
     End Sub
 
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
-        SetRCodeForControls(True)
-        TestOkEnabled()
-        sdgPlots.Reset()
-    End Sub
-
-    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetDataFrame(strNewDataFrame:=ucrSummarybarSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-        sdgPlots.ShowDialog()
-    End Sub
-
-    Private Sub cmdBarChartOptions_Click(sender As Object, e As EventArgs) Handles cmdBarChartOptions.Click
-        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeomBarFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrSummarybarSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True, bIgnoreGlobalAes:=False)
-        sdgLayerOptions.ShowDialog()
-        For Each clsParam In clsRaesFunction.clsParameters
-            If clsParam.strArgumentName = "x" Then
-                ucrFactorReceiver.Add(clsParam.strArgumentValue)
-            ElseIf clsParam.strArgumentName = "y" Then
-                ucrYReceiver.Add(clsParam.strArgumentValue)
-            ElseIf clsParam.strArgumentName = "fill" Then
-                ucrSecondFactorReceiver.Add(clsParam.strArgumentValue)
-            End If
-        Next
-        TestOkEnabled()
-    End Sub
-
-    Private Sub cmdPieChartOptions_Click(sender As Object, e As EventArgs) Handles cmdPieChartOptions.Click
-        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeomBarFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrSummarybarSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True)
-        sdgLayerOptions.ShowDialog()
-        For Each clsParam In clsRaesFunction.clsParameters
-            If clsParam.strArgumentName = "y" Then
-                ucrYReceiver.Add(clsParam.strArgumentValue)
-            ElseIf clsParam.strArgumentName = "fill" Then
-                ucrFactorReceiver.Add(clsParam.strArgumentValue)
-            End If
-        Next
-        TestOkEnabled()
-    End Sub
-
     Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged
-        SetDailogOptions()
+        SetDialogOptions()
     End Sub
 
-    Private Sub AllControls_ContenctsChanged() Handles ucrYReceiver.ControlContentsChanged, ucrFactorReceiver.ControlContentsChanged, ucrSaveSummaryBar.ControlContentsChanged
+    Private Sub CoreControls_ContenctsChanged() Handles ucrYReceiver.ControlContentsChanged, ucrFactorReceiver.ControlContentsChanged, ucrSaveSummaryBar.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
