@@ -61,7 +61,8 @@ Partial Class dlgTransformClimatic
         Me.ucrReceiverDOY = New instat.ucrReceiverSingle()
         Me.ucrReceiverData = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
-        Me.UcrInputTextBox1 = New instat.ucrInputTextBox()
+        Me.ucrInputColName = New instat.ucrInputTextBox()
+        Me.lblNewColName = New System.Windows.Forms.Label()
         Me.grpTransform.SuspendLayout()
         Me.grpWaterBalance.SuspendLayout()
         Me.grpSpell.SuspendLayout()
@@ -501,22 +502,33 @@ Partial Class dlgTransformClimatic
         Me.ucrBase.Size = New System.Drawing.Size(402, 52)
         Me.ucrBase.TabIndex = 0
         '
-        'UcrInputTextBox1
+        'ucrInputColName
         '
-        Me.UcrInputTextBox1.AddQuotesIfUnrecognised = True
-        Me.UcrInputTextBox1.IsMultiline = False
-        Me.UcrInputTextBox1.IsReadOnly = False
-        Me.UcrInputTextBox1.Location = New System.Drawing.Point(476, 157)
-        Me.UcrInputTextBox1.Name = "UcrInputTextBox1"
-        Me.UcrInputTextBox1.Size = New System.Drawing.Size(137, 21)
-        Me.UcrInputTextBox1.TabIndex = 49
+        Me.ucrInputColName.AddQuotesIfUnrecognised = True
+        Me.ucrInputColName.IsMultiline = False
+        Me.ucrInputColName.IsReadOnly = False
+        Me.ucrInputColName.Location = New System.Drawing.Point(153, 413)
+        Me.ucrInputColName.Name = "ucrInputColName"
+        Me.ucrInputColName.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputColName.TabIndex = 49
+        '
+        'lblNewColName
+        '
+        Me.lblNewColName.AutoSize = True
+        Me.lblNewColName.Location = New System.Drawing.Point(40, 417)
+        Me.lblNewColName.Name = "lblNewColName"
+        Me.lblNewColName.Size = New System.Drawing.Size(101, 13)
+        Me.lblNewColName.TabIndex = 50
+        Me.lblNewColName.Tag = "New Column Name:"
+        Me.lblNewColName.Text = "New Column Name:"
         '
         'dlgTransformClimatic
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(650, 492)
-        Me.Controls.Add(Me.UcrInputTextBox1)
+        Me.Controls.Add(Me.lblNewColName)
+        Me.Controls.Add(Me.ucrInputColName)
         Me.Controls.Add(Me.grpWaterBalance)
         Me.Controls.Add(Me.grpSpell)
         Me.Controls.Add(Me.grpCount)
@@ -598,5 +610,6 @@ Partial Class dlgTransformClimatic
     Friend WithEvents lblWBEvaporation As Label
     Friend WithEvents ucrInputSpellUpper As ucrInputTextBox
     Friend WithEvents ucrInputSpellLower As ucrInputTextBox
-    Friend WithEvents UcrInputTextBox1 As ucrInputTextBox
+    Friend WithEvents ucrInputColName As ucrInputTextBox
+    Friend WithEvents lblNewColName As Label
 End Class
