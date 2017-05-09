@@ -66,15 +66,12 @@ Public Class dlgPolynomials
     Private Sub SetDefaults()
         clsPolynomial = New RFunction
         clsScale = New RFunction
-        'Reset 
+
         ucrSelectorForPolynomial.Reset()
         ucrSavePoly.Reset()
 
-        'ucrNudDegree.Value = 2
-
         clsPolynomial.SetRCommand("poly")
         clsPolynomial.AddParameter("degree", 2)
-        SetNewColumName()
         clsPolynomial.AddParameter("raw", "TRUE")
 
         clsScale.SetRCommand("scale")
@@ -90,6 +87,7 @@ Public Class dlgPolynomials
         ucrSavePoly.SetRCode(clsPolynomial, bReset)
         ucrReceiverPolynomial.SetRCode(clsPolynomial, bReset)
         ucrReceiverPolynomial.AddAdditionalCodeParameterPair(clsScale, New RParameter("x", 0), iAdditionalPairNo:=1)
+        SetNewColumName()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -116,8 +114,8 @@ Public Class dlgPolynomials
         Else
             ucrSavePoly.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
             ucrSavePoly.SetLabelText("Prefix for New Columns:")
+            ucrSavePoly.SetPrefix("")
             If Not ucrSavePoly.bUserTyped Then
-                ucrSavePoly.SetPrefix("")
                 ucrSavePoly.SetName("poly")
             End If
         End If
