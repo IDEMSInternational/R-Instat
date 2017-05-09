@@ -92,7 +92,6 @@ Public Class dlgSummaryBarOrPieChart
         ucrSecondFactorReceiver.bWithQuotes = False
         ucrSecondFactorReceiver.SetParameter(New RParameter("fill", 2))
         ucrSecondFactorReceiver.SetParameterIsString()
-        ucrSecondFactorReceiver.bAddParameterIfEmpty = False
 
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         ucrSaveSummaryBar.SetIsComboBox()
