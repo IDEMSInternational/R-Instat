@@ -27,6 +27,10 @@ Partial Class dlgTwoWayFrequencies
         Me.rdoTable = New System.Windows.Forms.RadioButton()
         Me.rdoGraph = New System.Windows.Forms.RadioButton()
         Me.grpFreqTypeTable = New System.Windows.Forms.GroupBox()
+        Me.ucrChkCount = New instat.ucrCheck()
+        Me.ucrChkCell = New instat.ucrCheck()
+        Me.ucrChkColumn = New instat.ucrCheck()
+        Me.ucrChkRow = New instat.ucrCheck()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.rdoBoth = New System.Windows.Forms.RadioButton()
         Me.grpFreqTypeGraph = New System.Windows.Forms.GroupBox()
@@ -34,13 +38,9 @@ Partial Class dlgTwoWayFrequencies
         Me.rdoCell = New System.Windows.Forms.RadioButton()
         Me.rdoRow = New System.Windows.Forms.RadioButton()
         Me.rdoColumn = New System.Windows.Forms.RadioButton()
-        Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrPnlFreqType = New instat.UcrPanel()
+        Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrSelectorTwoWayFrequencies = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrChkCount = New instat.ucrCheck()
-        Me.ucrChkCell = New instat.ucrCheck()
-        Me.ucrChkColumn = New instat.ucrCheck()
-        Me.ucrChkRow = New instat.ucrCheck()
         Me.ucrChkFlip = New instat.ucrCheck()
         Me.ucrPnlFreqDisplay = New instat.UcrPanel()
         Me.ucrChkWeights = New instat.ucrCheck()
@@ -118,6 +118,38 @@ Partial Class dlgTwoWayFrequencies
         Me.grpFreqTypeTable.TabIndex = 9
         Me.grpFreqTypeTable.TabStop = False
         Me.grpFreqTypeTable.Text = "Table Frequencies"
+        '
+        'ucrChkCount
+        '
+        Me.ucrChkCount.Checked = False
+        Me.ucrChkCount.Location = New System.Drawing.Point(6, 20)
+        Me.ucrChkCount.Name = "ucrChkCount"
+        Me.ucrChkCount.Size = New System.Drawing.Size(82, 20)
+        Me.ucrChkCount.TabIndex = 0
+        '
+        'ucrChkCell
+        '
+        Me.ucrChkCell.Checked = False
+        Me.ucrChkCell.Location = New System.Drawing.Point(6, 95)
+        Me.ucrChkCell.Name = "ucrChkCell"
+        Me.ucrChkCell.Size = New System.Drawing.Size(82, 20)
+        Me.ucrChkCell.TabIndex = 3
+        '
+        'ucrChkColumn
+        '
+        Me.ucrChkColumn.Checked = False
+        Me.ucrChkColumn.Location = New System.Drawing.Point(6, 70)
+        Me.ucrChkColumn.Name = "ucrChkColumn"
+        Me.ucrChkColumn.Size = New System.Drawing.Size(82, 20)
+        Me.ucrChkColumn.TabIndex = 2
+        '
+        'ucrChkRow
+        '
+        Me.ucrChkRow.Checked = False
+        Me.ucrChkRow.Location = New System.Drawing.Point(6, 45)
+        Me.ucrChkRow.Name = "ucrChkRow"
+        Me.ucrChkRow.Size = New System.Drawing.Size(82, 20)
+        Me.ucrChkRow.TabIndex = 1
         '
         'cmdOptions
         '
@@ -204,19 +236,19 @@ Partial Class dlgTwoWayFrequencies
         Me.rdoColumn.Text = "Column (%)"
         Me.rdoColumn.UseVisualStyleBackColor = True
         '
-        'ucrSaveGraph
-        '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(9, 317)
-        Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(276, 24)
-        Me.ucrSaveGraph.TabIndex = 16
-        '
         'ucrPnlFreqType
         '
         Me.ucrPnlFreqType.Location = New System.Drawing.Point(9, 17)
         Me.ucrPnlFreqType.Name = "ucrPnlFreqType"
         Me.ucrPnlFreqType.Size = New System.Drawing.Size(82, 102)
         Me.ucrPnlFreqType.TabIndex = 0
+        '
+        'ucrSaveGraph
+        '
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(9, 317)
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(276, 24)
+        Me.ucrSaveGraph.TabIndex = 16
         '
         'ucrSelectorTwoWayFrequencies
         '
@@ -227,38 +259,6 @@ Partial Class dlgTwoWayFrequencies
         Me.ucrSelectorTwoWayFrequencies.Name = "ucrSelectorTwoWayFrequencies"
         Me.ucrSelectorTwoWayFrequencies.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorTwoWayFrequencies.TabIndex = 4
-        '
-        'ucrChkCount
-        '
-        Me.ucrChkCount.Checked = False
-        Me.ucrChkCount.Location = New System.Drawing.Point(6, 20)
-        Me.ucrChkCount.Name = "ucrChkCount"
-        Me.ucrChkCount.Size = New System.Drawing.Size(82, 20)
-        Me.ucrChkCount.TabIndex = 0
-        '
-        'ucrChkCell
-        '
-        Me.ucrChkCell.Checked = False
-        Me.ucrChkCell.Location = New System.Drawing.Point(6, 95)
-        Me.ucrChkCell.Name = "ucrChkCell"
-        Me.ucrChkCell.Size = New System.Drawing.Size(82, 20)
-        Me.ucrChkCell.TabIndex = 3
-        '
-        'ucrChkColumn
-        '
-        Me.ucrChkColumn.Checked = False
-        Me.ucrChkColumn.Location = New System.Drawing.Point(6, 70)
-        Me.ucrChkColumn.Name = "ucrChkColumn"
-        Me.ucrChkColumn.Size = New System.Drawing.Size(82, 20)
-        Me.ucrChkColumn.TabIndex = 2
-        '
-        'ucrChkRow
-        '
-        Me.ucrChkRow.Checked = False
-        Me.ucrChkRow.Location = New System.Drawing.Point(6, 45)
-        Me.ucrChkRow.Name = "ucrChkRow"
-        Me.ucrChkRow.Size = New System.Drawing.Size(82, 20)
-        Me.ucrChkRow.TabIndex = 1
         '
         'ucrChkFlip
         '
