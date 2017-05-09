@@ -112,7 +112,7 @@ Partial Class dlgTwoWayFrequencies
         Me.grpFreqTypeTable.Controls.Add(Me.ucrChkRow)
         Me.grpFreqTypeTable.Location = New System.Drawing.Point(263, 166)
         Me.grpFreqTypeTable.Name = "grpFreqTypeTable"
-        Me.grpFreqTypeTable.Size = New System.Drawing.Size(116, 125)
+        Me.grpFreqTypeTable.Size = New System.Drawing.Size(116, 116)
         Me.grpFreqTypeTable.TabIndex = 9
         Me.grpFreqTypeTable.TabStop = False
         Me.grpFreqTypeTable.Text = "Table Frequencies"
@@ -185,7 +185,7 @@ Partial Class dlgTwoWayFrequencies
         Me.grpFreqTypeGraph.Controls.Add(Me.ucrPnlFreqType)
         Me.grpFreqTypeGraph.Location = New System.Drawing.Point(358, 166)
         Me.grpFreqTypeGraph.Name = "grpFreqTypeGraph"
-        Me.grpFreqTypeGraph.Size = New System.Drawing.Size(117, 125)
+        Me.grpFreqTypeGraph.Size = New System.Drawing.Size(117, 116)
         Me.grpFreqTypeGraph.TabIndex = 10
         Me.grpFreqTypeGraph.TabStop = False
         Me.grpFreqTypeGraph.Text = "Graph Frequencies"
@@ -238,14 +238,14 @@ Partial Class dlgTwoWayFrequencies
         '
         Me.ucrPnlFreqType.Location = New System.Drawing.Point(9, 17)
         Me.ucrPnlFreqType.Name = "ucrPnlFreqType"
-        Me.ucrPnlFreqType.Size = New System.Drawing.Size(82, 102)
+        Me.ucrPnlFreqType.Size = New System.Drawing.Size(82, 93)
         Me.ucrPnlFreqType.TabIndex = 0
         '
         'ucrSaveGraph
         '
         Me.ucrSaveGraph.Location = New System.Drawing.Point(9, 314)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(276, 24)
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(255, 24)
         Me.ucrSaveGraph.TabIndex = 16
         '
         'ucrSelectorTwoWayFrequencies

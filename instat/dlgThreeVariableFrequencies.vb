@@ -281,11 +281,11 @@ Public Class dlgThreeVariableFrequencies
         If rdoBoth.Checked Then
             grpFreqTypeTable.Location = New Point(260, 261)
             grpFreqTypeGraph.Location = New Point(384, 261)
-            Me.Size = New Size(525, 469)
+            Me.Size = New Size(525, 492)
         Else
             grpFreqTypeTable.Location = New Point(260, 261)
             grpFreqTypeGraph.Location = New Point(260, 261)
-            Me.Size = New Size(431, 469)
+            Me.Size = New Size(431, 492)
         End If
     End Sub
 
