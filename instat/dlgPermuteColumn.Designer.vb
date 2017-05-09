@@ -36,7 +36,7 @@ Partial Class dlgPermuteColumn
         'lblSelected
         '
         Me.lblSelected.AutoSize = True
-        Me.lblSelected.Location = New System.Drawing.Point(246, 42)
+        Me.lblSelected.Location = New System.Drawing.Point(246, 45)
         Me.lblSelected.Name = "lblSelected"
         Me.lblSelected.Size = New System.Drawing.Size(93, 13)
         Me.lblSelected.TabIndex = 1
@@ -46,7 +46,7 @@ Partial Class dlgPermuteColumn
         'lblNumberOfColumns
         '
         Me.lblNumberOfColumns.AutoSize = True
-        Me.lblNumberOfColumns.Location = New System.Drawing.Point(244, 124)
+        Me.lblNumberOfColumns.Location = New System.Drawing.Point(246, 120)
         Me.lblNumberOfColumns.Name = "lblNumberOfColumns"
         Me.lblNumberOfColumns.Size = New System.Drawing.Size(102, 13)
         Me.lblNumberOfColumns.TabIndex = 5
@@ -56,7 +56,7 @@ Partial Class dlgPermuteColumn
         'ucrChkSetSeed
         '
         Me.ucrChkSetSeed.Checked = False
-        Me.ucrChkSetSeed.Location = New System.Drawing.Point(247, 90)
+        Me.ucrChkSetSeed.Location = New System.Drawing.Point(246, 88)
         Me.ucrChkSetSeed.Name = "ucrChkSetSeed"
         Me.ucrChkSetSeed.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkSetSeed.TabIndex = 3
@@ -77,7 +77,7 @@ Partial Class dlgPermuteColumn
         '
         Me.ucrNudNumberofColumns.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberofColumns.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNumberofColumns.Location = New System.Drawing.Point(352, 120)
+        Me.ucrNudNumberofColumns.Location = New System.Drawing.Point(352, 117)
         Me.ucrNudNumberofColumns.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNumberofColumns.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberofColumns.Name = "ucrNudNumberofColumns"
@@ -87,7 +87,7 @@ Partial Class dlgPermuteColumn
         '
         'ucrSavePermute
         '
-        Me.ucrSavePermute.Location = New System.Drawing.Point(10, 197)
+        Me.ucrSavePermute.Location = New System.Drawing.Point(10, 199)
         Me.ucrSavePermute.Name = "ucrSavePermute"
         Me.ucrSavePermute.Size = New System.Drawing.Size(294, 24)
         Me.ucrSavePermute.TabIndex = 7
@@ -95,12 +95,13 @@ Partial Class dlgPermuteColumn
         'ucrReceiverPermuteRows
         '
         Me.ucrReceiverPermuteRows.frmParent = Me
-        Me.ucrReceiverPermuteRows.Location = New System.Drawing.Point(247, 60)
+        Me.ucrReceiverPermuteRows.Location = New System.Drawing.Point(246, 60)
         Me.ucrReceiverPermuteRows.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverPermuteRows.Name = "ucrReceiverPermuteRows"
         Me.ucrReceiverPermuteRows.Selector = Nothing
         Me.ucrReceiverPermuteRows.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverPermuteRows.TabIndex = 2
+        Me.ucrReceiverPermuteRows.ucrSelector = Nothing
         '
         'ucrPermuteRowsSelector
         '
@@ -114,7 +115,7 @@ Partial Class dlgPermuteColumn
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 229)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 224)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 8
@@ -123,7 +124,7 @@ Partial Class dlgPermuteColumn
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 289)
+        Me.ClientSize = New System.Drawing.Size(419, 282)
         Me.Controls.Add(Me.ucrChkSetSeed)
         Me.Controls.Add(Me.ucrNudSetSeed)
         Me.Controls.Add(Me.ucrNudNumberofColumns)
