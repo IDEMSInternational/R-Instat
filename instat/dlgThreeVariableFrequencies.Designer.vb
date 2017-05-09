@@ -121,7 +121,7 @@ Partial Class dlgThreeVariableFrequencies
         '
         Me.cmdOptions.Location = New System.Drawing.Point(10, 227)
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(83, 23)
+        Me.cmdOptions.Size = New System.Drawing.Size(121, 23)
         Me.cmdOptions.TabIndex = 15
         Me.cmdOptions.Text = " Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
@@ -265,7 +265,7 @@ Partial Class dlgThreeVariableFrequencies
         '
         'ucrSaveGraph
         '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 313)
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 308)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
         Me.ucrSaveGraph.Size = New System.Drawing.Size(250, 20)
         Me.ucrSaveGraph.TabIndex = 20
@@ -295,18 +295,18 @@ Partial Class dlgThreeVariableFrequencies
         'ucrReceiverWeights
         '
         Me.ucrReceiverWeights.frmParent = Me
-        Me.ucrReceiverWeights.Location = New System.Drawing.Point(113, 261)
+        Me.ucrReceiverWeights.Location = New System.Drawing.Point(113, 256)
         Me.ucrReceiverWeights.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverWeights.Name = "ucrReceiverWeights"
         Me.ucrReceiverWeights.Selector = Nothing
-        Me.ucrReceiverWeights.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverWeights.Size = New System.Drawing.Size(128, 20)
         Me.ucrReceiverWeights.TabIndex = 17
         Me.ucrReceiverWeights.ucrSelector = Nothing
         '
         'ucrChkWeights
         '
         Me.ucrChkWeights.Checked = False
-        Me.ucrChkWeights.Location = New System.Drawing.Point(10, 261)
+        Me.ucrChkWeights.Location = New System.Drawing.Point(10, 256)
         Me.ucrChkWeights.Name = "ucrChkWeights"
         Me.ucrChkWeights.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkWeights.TabIndex = 16
@@ -360,7 +360,7 @@ Partial Class dlgThreeVariableFrequencies
         'ucrChkFlip
         '
         Me.ucrChkFlip.Checked = False
-        Me.ucrChkFlip.Location = New System.Drawing.Point(10, 287)
+        Me.ucrChkFlip.Location = New System.Drawing.Point(10, 282)
         Me.ucrChkFlip.Name = "ucrChkFlip"
         Me.ucrChkFlip.Size = New System.Drawing.Size(183, 20)
         Me.ucrChkFlip.TabIndex = 18
@@ -369,7 +369,7 @@ Partial Class dlgThreeVariableFrequencies
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(522, 427)
+        Me.ClientSize = New System.Drawing.Size(522, 432)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.rdoBoth)
         Me.Controls.Add(Me.ucrReceiverGroupBy2nd)

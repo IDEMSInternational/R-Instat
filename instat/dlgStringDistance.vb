@@ -33,6 +33,7 @@ Public Class dlgStringDistance
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 347
         'ucrReceiver
         ucrReceiverStringDistance.SetParameter(New RParameter("a", 0))
         ucrReceiverStringDistance.SetParameterIsRFunction()

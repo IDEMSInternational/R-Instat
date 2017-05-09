@@ -44,7 +44,7 @@ Public Class dlgDefineCorruption
     End Sub
 
     Private Sub InitialiseDialog()
-        'ucrBase.iHelpTopicID = ""
+        ucrBase.iHelpTopicID = 499
 
         Dim kvpCountry As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("country", {"country"}.ToList())
         Dim kvpRegion As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("region", {"region"}.ToList())

@@ -203,6 +203,12 @@
     <Compile Include="dlgCompareModels.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCopyDataFrame.Designer.vb">
+      <DependentUpon>dlgCopyDataFrame.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCopyDataFrame.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgCountinFactor.Designer.vb">
       <DependentUpon>dlgCountinFactor.vb</DependentUpon>
     </Compile>
@@ -275,6 +281,18 @@
     <Compile Include="dlgExportGraphAsImage.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgExportRObjects.Designer.vb">
+      <DependentUpon>dlgExportRObjects.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExportRObjects.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgExportRWorkspace.Designer.vb">
+      <DependentUpon>dlgExportRWorkspace.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExportRWorkspace.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgExportToCPT.Designer.vb">
       <DependentUpon>dlgExportToCPT.vb</DependentUpon>
     </Compile>
@@ -291,6 +309,12 @@
       <DependentUpon>dlgCorruptionFile.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgCorruptionFile.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgExtremesClimatic.Designer.vb">
+      <DependentUpon>dlgExtremesClimatic.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExtremesClimatic.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgFactorLabels.Designer.vb">
@@ -449,6 +473,12 @@
     <Compile Include="dlgRecodeNumericIntoQuantiles.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgRenameDataFrame.Designer.vb">
+      <DependentUpon>dlgRenameDataFrame.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgRenameDataFrame.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgRugPlot.Designer.vb">
       <DependentUpon>dlgRugPlot.vb</DependentUpon>
     </Compile>
@@ -495,6 +525,12 @@
       <DependentUpon>dlgThreeVariableFrequencies.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgThreeVariableFrequencies.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgTransformClimatic.Designer.vb">
+      <DependentUpon>dlgTransformClimatic.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTransformClimatic.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgTwoVariableUseModel.Designer.vb">
@@ -792,12 +828,6 @@
     <Compile Include="dlgContrasts.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgCopySheet.Designer.vb">
-      <DependentUpon>dlgCopySheet.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgCopySheet.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgCumulativeDistribution.Designer.vb">
       <DependentUpon>dlgCumulativeDistribution.vb</DependentUpon>
     </Compile>
@@ -970,12 +1000,6 @@
       <DependentUpon>dlgRenameMetadata.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgRenameMetadata.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgRenameSheet.Designer.vb">
-      <DependentUpon>dlgRenameSheet.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgRenameSheet.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgReoderDescriptives.Designer.vb">
@@ -1602,10 +1626,10 @@
     <Compile Include="dlgOutputforCPT.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgPlot.designer.vb">
-      <DependentUpon>dlgPlot.vb</DependentUpon>
+    <Compile Include="dlgLinePlot.designer.vb">
+      <DependentUpon>dlgLinePlot.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgPlot.vb">
+    <Compile Include="dlgLinePlot.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgPolynomials.Designer.vb">
@@ -2335,15 +2359,6 @@
     <EmbeddedResource Include="dlgContrasts.sw-KE.resx">
       <DependentUpon>dlgContrasts.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgCopySheet.fr-FR.resx">
-      <DependentUpon>dlgCopySheet.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgCopySheet.resx">
-      <DependentUpon>dlgCopySheet.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgCopySheet.sw-KE.resx">
-      <DependentUpon>dlgCopySheet.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgCountinFactor.resx">
       <DependentUpon>dlgCountinFactor.vb</DependentUpon>
     </EmbeddedResource>
@@ -2452,6 +2467,12 @@
     <EmbeddedResource Include="dlgExportGraphAsImage.resx">
       <DependentUpon>dlgExportGraphAsImage.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportRObjects.resx">
+      <DependentUpon>dlgExportRObjects.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportRWorkspace.resx">
+      <DependentUpon>dlgExportRWorkspace.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgExportToCPT.resx">
       <DependentUpon>dlgExportToCPT.vb</DependentUpon>
     </EmbeddedResource>
@@ -2460,6 +2481,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCorruptionFile.resx">
       <DependentUpon>dlgCorruptionFile.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExtremesClimatic.resx">
+      <DependentUpon>dlgExtremesClimatic.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFactorLabels.resx">
       <DependentUpon>dlgFactorLabels.vb</DependentUpon>
@@ -2752,15 +2776,6 @@
     <EmbeddedResource Include="dlgRenameMetadata.sw-KE.resx">
       <DependentUpon>dlgRenameMetadata.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgRenameSheet.fr-FR.resx">
-      <DependentUpon>dlgRenameSheet.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgRenameSheet.resx">
-      <DependentUpon>dlgRenameSheet.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgRenameSheet.sw-KE.resx">
-      <DependentUpon>dlgRenameSheet.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgReoderDescriptives.fr-FR.resx">
       <DependentUpon>dlgReoderDescriptives.vb</DependentUpon>
     </EmbeddedResource>
@@ -2895,6 +2910,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgThreeVariableFrequencies.resx">
       <DependentUpon>dlgThreeVariableFrequencies.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTransformClimatic.resx">
+      <DependentUpon>dlgTransformClimatic.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTransformText.fr-FR.resx">
       <DependentUpon>dlgTransformText.vb</DependentUpon>
@@ -3717,14 +3735,14 @@
     <EmbeddedResource Include="dlgOutputforCPT.sw-KE.resx">
       <DependentUpon>dlgOutputforCPT.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgPlot.fr-FR.resx">
-      <DependentUpon>dlgPlot.vb</DependentUpon>
+    <EmbeddedResource Include="dlgLinePlot.fr-FR.resx">
+      <DependentUpon>dlgLinePlot.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgPlot.resx">
-      <DependentUpon>dlgPlot.vb</DependentUpon>
+    <EmbeddedResource Include="dlgLinePlot.resx">
+      <DependentUpon>dlgLinePlot.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgPlot.sw-KE.resx">
-      <DependentUpon>dlgPlot.vb</DependentUpon>
+    <EmbeddedResource Include="dlgLinePlot.sw-KE.resx">
+      <DependentUpon>dlgLinePlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPolynomials.fr-FR.resx">
       <DependentUpon>dlgPolynomials.vb</DependentUpon>
@@ -5390,6 +5408,7 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.3\zoo_1.7-14.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="static\Help\R-Instat.pdf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
