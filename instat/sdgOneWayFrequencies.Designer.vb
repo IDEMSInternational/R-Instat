@@ -355,7 +355,7 @@ Partial Class sdgOneWayFrequencies
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(365, 350)
+        Me.ClientSize = New System.Drawing.Size(365, 323)
         Me.Controls.Add(Me.tbOneWayFrequencies)
         Me.Controls.Add(Me.ucrBaseOneWayFrequencies)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
