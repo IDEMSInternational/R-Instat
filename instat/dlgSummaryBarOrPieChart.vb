@@ -96,6 +96,7 @@ Public Class dlgSummaryBarOrPieChart
         ucrSummaryBarSelector.Reset()
         ucrYReceiver.SetMeAsReceiver()
         ucrSaveSummaryBar.Reset()
+        SetDialogOptions()
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
@@ -174,18 +175,20 @@ Public Class dlgSummaryBarOrPieChart
     End Sub
 
     Private Sub SetDialogOptions()
-        If rdoBarChart.Checked Then
-            ucrSaveSummaryBar.SetPrefix("Bar")
-            cmdPieChartOptions.Visible = False
-            cmdBarChartOptions.Visible = True
-            clsRgeomBarFunction.RemoveParameterByName("width")
-            clsBaseOperator.RemoveParameter(clsRCoordPolarParam)
-        ElseIf rdoPieChart.Checked Then
-            ucrSaveSummaryBar.SetPrefix("Pie")
-            cmdPieChartOptions.Visible = True
-            cmdBarChartOptions.Visible = False
-            clsRgeomBarFunction.AddParameter("width", "1")
-            clsBaseOperator.AddParameter(clsRCoordPolarParam)
+        If ucrSaveSummaryBar.bUserTyped = False Then
+            If rdoBarChart.Checked Then
+                ucrSaveSummaryBar.SetPrefix("Bar")
+                cmdPieChartOptions.Visible = False
+                cmdBarChartOptions.Visible = True
+                clsRgeomBarFunction.RemoveParameterByName("width")
+                clsBaseOperator.RemoveParameter(clsRCoordPolarParam)
+            ElseIf rdoPieChart.Checked Then
+                ucrSaveSummaryBar.SetPrefix("Pie")
+                cmdPieChartOptions.Visible = True
+                cmdBarChartOptions.Visible = False
+                clsRgeomBarFunction.AddParameter("width", "1")
+                clsBaseOperator.AddParameter(clsRCoordPolarParam)
+            End If
         End If
     End Sub
 
