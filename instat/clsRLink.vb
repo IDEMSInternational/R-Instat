@@ -599,6 +599,9 @@ Public Class RLink
             ucrCurrentReceiver.Clear()
             For i = 0 To vecColumns.Count - 1
                 chrCurrColumns = vecColumns(i).AsCharacter
+                If chrCurrColumns Is Nothing Then
+                    Continue For
+                End If
                 For Each strColumn As String In chrCurrColumns
                     lstItems.Add(New KeyValuePair(Of String, String)(strDataFrameName, strColumn))
                 Next
@@ -752,6 +755,15 @@ Public Class RLink
         Return strOut
     End Function
 
+    Public Function IsValidText(strText As String) As String
+        Dim bValid As Boolean
+        Dim strValidText As String
+        Dim clsMakeNames As New RFunction
+
+        strValidText = MakeValidText(strText)
+        Return (strText = strValidText)
+    End Function
+
     'Corruption analysis functions
     Public Function GetCorruptionContractDataFrameNames() As List(Of String)
         Dim clsGetDataNames As New RFunction
@@ -775,5 +787,19 @@ Public Class RLink
         clsGetColumnName.AddParameter("type", strType)
         strColumn = RunInternalScriptGetValue(clsGetColumnName.ToScript()).AsCharacter(0)
         Return strColumn
+    End Function
+
+    Public Function IsBinary(strDataName As String, strColumn As String) As Boolean
+        Dim clsGetColumn As New RFunction
+        Dim clsIsBinary As New RFunction
+        Dim bIsBinary As Boolean
+
+        clsGetColumn.SetRCommand(strInstatDataObject & "$get_columns_from_data")
+        clsGetColumn.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
+        clsGetColumn.AddParameter("col_names", Chr(34) & strColumn & Chr(34))
+        clsIsBinary.SetRCommand("is.binary")
+        clsIsBinary.AddParameter("x", clsRFunctionParameter:=clsGetColumn)
+        bIsBinary = RunInternalScriptGetValue(clsIsBinary.ToScript()).AsLogical(0)
+        Return bIsBinary
     End Function
 End Class
