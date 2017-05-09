@@ -131,7 +131,7 @@ Public Class dlgTransformClimatic
 
         ucrInputColName.SetParameter(New RParameter("result_name"))
 
-        ucrInputColName.SetPrefix("sum")
+        'ucrInputColName.SetPrefix("sum")
         ucrInputColName.SetName("sum")
 
         ucrPnlTransform.AddToLinkedControls({ucrInputSum, ucrNudSumOver}, {rdoSum}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
@@ -147,8 +147,7 @@ Public Class dlgTransformClimatic
         clsWaterBalanceFunction = New RFunction
         'ucrSaveTransform.Reset()
         ucrSelectorTransform.Reset()
-
-
+        rdoSum.Checked = True 'this wil be fixed properly
 
         clsRSumFuncExpr.AddParameter("data", ucrReceiverData.GetVariableNames(bWithQuotes:=False))
         clsRSumFuncExpr.AddParameter("fill", "NA")
@@ -191,25 +190,25 @@ Public Class dlgTransformClimatic
             ucrBase.clsRsyntax.SetBaseRFunction(clsSumFunction)
             'ucrBase.clsRsyntax.AddParameter("calc", clsRFunctionParameter:=clsRTrasform)
             'ucrSaveTransform.SetPrefix("Sum")
-            ucrInputColName.SetPrefix("Sum")
+            'ucrInputColName.SetPrefix("Sum")
             ucrInputColName.SetName("Sum")
             grpTransform.Text = "Sum"
         ElseIf rdoCount.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
             'ucrSaveTransform.SetPrefix("Count")
-            ucrInputColName.SetPrefix("Count")
+            'ucrInputColName.SetPrefix("Count")
             ucrInputColName.SetName("Count")
             grpTransform.Text = "Count"
         ElseIf rdoSpell.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSpellFunction)
             'ucrSaveTransform.SetPrefix("Spell")
-            ucrInputColName.SetPrefix("Spell")
+            'ucrInputColName.SetPrefix("Spell")
             ucrInputColName.SetName("Spell")
             grpTransform.Text = "Spell"
         ElseIf rdoWaterBalance.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsWaterBalanceFunction)
             'ucrSaveTransform.SetPrefix("Water_balance")
-            ucrInputColName.SetPrefix("Water_balance")
+            'ucrInputColName.SetPrefix("Water_balance")
             ucrInputColName.SetName("Water_balance")
             grpTransform.Text = "Water_balance"
         End If
@@ -236,6 +235,5 @@ Public Class dlgTransformClimatic
 
     Private Sub ucrControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlValueChanged, ucrInputSum.ControlValueChanged, ucrNudSumOver.ControlValueChanged
         sum_over()
-        'clsRTrasform.SetAssignTo("transform_calculation")
     End Sub
 End Class
