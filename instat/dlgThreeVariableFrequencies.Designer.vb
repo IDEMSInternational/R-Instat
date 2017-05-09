@@ -265,9 +265,9 @@ Partial Class dlgThreeVariableFrequencies
         '
         'ucrSaveGraph
         '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 308)
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 375)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(250, 20)
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(255, 20)
         Me.ucrSaveGraph.TabIndex = 20
         '
         'ucrReceiverGroupBy2nd
@@ -342,7 +342,7 @@ Partial Class dlgThreeVariableFrequencies
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 376)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 400)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(403, 52)
         Me.ucrBase.TabIndex = 19
@@ -369,7 +369,7 @@ Partial Class dlgThreeVariableFrequencies
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(522, 432)
+        Me.ClientSize = New System.Drawing.Size(521, 453)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.rdoBoth)
         Me.Controls.Add(Me.ucrReceiverGroupBy2nd)
