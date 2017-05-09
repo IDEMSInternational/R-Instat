@@ -507,7 +507,7 @@ Partial Class dlgTransformClimatic
         Me.ucrInputColName.AddQuotesIfUnrecognised = True
         Me.ucrInputColName.IsMultiline = False
         Me.ucrInputColName.IsReadOnly = False
-        Me.ucrInputColName.Location = New System.Drawing.Point(153, 413)
+        Me.ucrInputColName.Location = New System.Drawing.Point(144, 412)
         Me.ucrInputColName.Name = "ucrInputColName"
         Me.ucrInputColName.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputColName.TabIndex = 49
