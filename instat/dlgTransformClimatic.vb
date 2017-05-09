@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgTransformClimatic
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
-    Private clsRTrasform, clsRZoo, clsRSumFuncExpr As New RFunction
+    Private clsRTrasform, clsRSumFuncExpr As New RFunction
     Private clsSumFunction, clsCountFunction, clsSpellFunction, clsWaterBalanceFunction As New RFunction
     Private strCurrDataName As String = ""
     Private Sub dlgTransformClimatic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -56,26 +56,29 @@ Public Class dlgTransformClimatic
         ucrReceiverData.bAutoFill = True
         ucrReceiverYear.bAutoFill = True
 
+        ucrReceiverData.SetParameter(New RParameter("data", 0))
+        ucrReceiverData.SetParameterIsString()
+        ucrReceiverData.bWithQuotes = False
+        ucrReceiverData.SetParameterIncludeArgumentName(False)
+
         'ucrSSTDataframe.SetParameter(New RParameter("data_name", 0))
         'ucrSSTDataframe.SetParameterIsrfunction()
 
         clsRTrasform.SetRCommand("instat_calculation$new")
-        clsRTrasform.SetAssignTo("transform_calculation")
+        'clsRTrasform.SetAssignTo("transform_calculation")
         clsRSumFuncExpr.SetRCommand("rollapply")
-        clsRZoo.SetRCommand("zoo")
-
-
-
 
         ucrPnlTransform.AddRadioButton(rdoSum)
         ucrPnlTransform.AddRadioButton(rdoCount)
         ucrPnlTransform.AddRadioButton(rdoSpell)
         ucrPnlTransform.AddRadioButton(rdoWaterBalance)
 
-        ucrPnlTransform.AddFunctionNamesCondition(rdoSum, "")
-        ucrPnlTransform.AddFunctionNamesCondition(rdoCount, "")
-        ucrPnlTransform.AddFunctionNamesCondition(rdoSpell, "")
-        ucrPnlTransform.AddFunctionNamesCondition(rdoWaterBalance, "")
+        'ucrPnlTransform.AddParameterIsRFunctionCondition(rdoSum, "clsSumFunction")
+
+        'ucrPnlTransform.AddFunctionNamesCondition(rdoSum, "clsRSumFuncExpr")
+        'ucrPnlTransform.AddFunctionNamesCondition(rdoCount, "")
+        'ucrPnlTransform.AddFunctionNamesCondition(rdoSpell, "")
+        'ucrPnlTransform.AddFunctionNamesCondition(rdoWaterBalance, "")
 
         ucrNudThreshold.SetParameter(New RParameter("threshold"))
         ucrNudThreshold.SetMinMax(0, 100)
@@ -126,23 +129,15 @@ Public Class dlgTransformClimatic
 
         'ucrSaveTransform.SetParameter(New RParameter("result_name"))
 
-        UcrInputTextBox1.SetParameter(New RParameter("result_name"))
+        ucrInputColName.SetParameter(New RParameter("result_name"))
 
-        UcrInputTextBox1.SetPrefix("sum")
-        UcrInputTextBox1.SetName("sum")
-
-        'ucrSaveTransform.SetDataFrameSelector(ucrSelectorTransform.ucrAvailableDataFrames)
-        'ucrSaveTransform.SetLabelText("New Column Name:")
-        'ucrSaveTransform.SetIsTextBox()
-        'ucrSaveTransform.SetPrefix("Sum")
-        'ucrSaveTransform.SetSaveTypeAsColumn()
+        'ucrInputColName.SetPrefix("sum")
+        ucrInputColName.SetName("sum")
 
         ucrPnlTransform.AddToLinkedControls({ucrInputSum, ucrNudSumOver}, {rdoSum}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransform.AddToLinkedControls({ucrNudCountOver, ucrChkValuesUnderthreshold}, {rdoCount}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransform.AddToLinkedControls({ucrInputSpellLower, ucrInputSpellUpper}, {rdoSpell}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransform.AddToLinkedControls({ucrNudWBCapacity, ucrInputEvaporation}, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
-
-
     End Sub
 
     Private Sub SetDefaults()
@@ -152,13 +147,9 @@ Public Class dlgTransformClimatic
         clsWaterBalanceFunction = New RFunction
         'ucrSaveTransform.Reset()
         ucrSelectorTransform.Reset()
+        rdoSum.Checked = True 'this wil be fixed properly
 
-        ucrReceiverData.SetParameter(New RParameter("x", 0))
-        ucrReceiverData.SetParameterIsString()
-        ucrReceiverData.bWithQuotes = False
-        ucrReceiverData.SetParameterIncludeArgumentName(False)
-
-        clsRSumFuncExpr.AddParameter("data", clsRFunctionParameter:=clsRZoo)
+        clsRSumFuncExpr.AddParameter("data", ucrReceiverData.GetVariableNames(bWithQuotes:=False))
         clsRSumFuncExpr.AddParameter("fill", "NA")
         clsRSumFuncExpr.AddParameter("width", 1)
         clsRSumFuncExpr.AddParameter("FUN", "sum")
@@ -169,16 +160,19 @@ Public Class dlgTransformClimatic
         'This might not Beep right
         'clsRTrasform.AddParameter("result_name", Chr(34) & ucrSaveTransform.ucrInputTextSave.GetText & Chr(34))
         clsRTrasform.AddParameter("save", 2)
-        'ucrBase.clsRsyntax.SetBaseRFunction(clsSumFunction)
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$apply_instat_calculation")
-        ucrBase.clsRsyntax.AddParameter("calc", clsRFunctionParameter:=clsRTrasform)
+        clsSumFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
+        clsSumFunction.AddParameter("display", "FALSE")
+        clsSumFunction.AddParameter("calc", clsRFunctionParameter:=clsRTrasform)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsSumFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrNudSumOver.SetRCode(clsRSumFuncExpr, bReset)
-        ucrReceiverData.SetRCode(clsRZoo, bReset)
+        ucrReceiverData.SetRCode(clsRSumFuncExpr, bReset)
         'ucrSaveTransform.SetRCode(clsRTrasform, bReset)
         ucrInputSum.SetRCode(clsRSumFuncExpr, bReset)
+        ucrInputColName.SetRCode(clsRTrasform, bReset)
+        'ucrPnlTransform.SetRCode(clsRSumFuncExpr, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -193,25 +187,29 @@ Public Class dlgTransformClimatic
 
     Private Sub ucrPnlTransform_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlTransform.ControlContentsChanged
         If rdoSum.Checked Then
-            ucrBase.clsRsyntax.AddParameter("calc", clsRFunctionParameter:=clsRTrasform)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSumFunction)
+            'ucrBase.clsRsyntax.AddParameter("calc", clsRFunctionParameter:=clsRTrasform)
             'ucrSaveTransform.SetPrefix("Sum")
-            UcrInputTextBox1.SetPrefix("Sum")
-            UcrInputTextBox1.SetName("Sum")
+            'ucrInputColName.SetPrefix("Sum")
+            ucrInputColName.SetName("Sum")
             grpTransform.Text = "Sum"
         ElseIf rdoCount.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
             'ucrSaveTransform.SetPrefix("Count")
-            UcrInputTextBox1.SetPrefix("Count")
-            UcrInputTextBox1.SetName("Count")
+            'ucrInputColName.SetPrefix("Count")
+            ucrInputColName.SetName("Count")
             grpTransform.Text = "Count"
         ElseIf rdoSpell.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSpellFunction)
             'ucrSaveTransform.SetPrefix("Spell")
-            UcrInputTextBox1.SetPrefix("Spell")
-            UcrInputTextBox1.SetName("Spell")
+            'ucrInputColName.SetPrefix("Spell")
+            ucrInputColName.SetName("Spell")
             grpTransform.Text = "Spell"
         ElseIf rdoWaterBalance.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsWaterBalanceFunction)
             'ucrSaveTransform.SetPrefix("Water_balance")
-            UcrInputTextBox1.SetPrefix("Water_balance")
-            UcrInputTextBox1.SetName("Water_balance")
+            'ucrInputColName.SetPrefix("Water_balance")
+            ucrInputColName.SetName("Water_balance")
             grpTransform.Text = "Water_balance"
         End If
     End Sub
@@ -232,6 +230,10 @@ Public Class dlgTransformClimatic
     End Sub
 
     Private Sub ucrControls_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrReceiverData.ControlContentsChanged, ucrInputSum.ControlContentsChanged, ucrNudSumOver.ControlContentsChanged
+        sum_over()
+    End Sub
+
+    Private Sub ucrControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlValueChanged, ucrInputSum.ControlValueChanged, ucrNudSumOver.ControlValueChanged
         sum_over()
     End Sub
 End Class
