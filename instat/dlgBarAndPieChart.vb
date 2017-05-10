@@ -192,21 +192,23 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub SetDialogOptions()
-        If ucrSaveBar.bUserTyped = False Then
-            If rdoBarChart.Checked Then
-                clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsBarAesFunction, iPosition:=1)
+        If rdoBarChart.Checked Then
+            clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsBarAesFunction, iPosition:=1)
+            cmdPieChartOptions.Visible = False
+            cmdBarChartOptions.Visible = True
+            clsRgeomBarFunction.RemoveParameterByName("width")
+            clsBaseOperator.RemoveParameter(clsRCoordPolarParam)
+            If ucrSaveBar.bUserTyped = False Then
                 ucrSaveBar.SetPrefix("bar")
-                cmdPieChartOptions.Visible = False
-                cmdBarChartOptions.Visible = True
-                clsRgeomBarFunction.RemoveParameterByName("width")
-                clsBaseOperator.RemoveParameter(clsRCoordPolarParam)
-            ElseIf rdoPieChart.Checked Then
-                clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsPieAesFunction, iPosition:=1)
+            End If
+        ElseIf rdoPieChart.Checked Then
+            clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsPieAesFunction, iPosition:=1)
+            clsRgeomBarFunction.AddParameter("width", "1")
+            clsBaseOperator.AddParameter(clsRCoordPolarParam)
+            cmdPieChartOptions.Visible = True
+            cmdBarChartOptions.Visible = False
+            If ucrSaveBar.bUserTyped = False Then
                 ucrSaveBar.SetPrefix("pie")
-                clsRgeomBarFunction.AddParameter("width", "1")
-                clsBaseOperator.AddParameter(clsRCoordPolarParam)
-                cmdPieChartOptions.Visible = True
-                cmdBarChartOptions.Visible = False
             End If
         End If
     End Sub
