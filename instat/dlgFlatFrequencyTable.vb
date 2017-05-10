@@ -14,10 +14,12 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
 Imports instat.Translations
 Public Class dlgFlatFrequencyTable
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private clsFtable, clsTable, clsAddMargin As New RFunction
     Private Sub dlgFlatFrequencyTable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -33,19 +35,59 @@ Public Class dlgFlatFrequencyTable
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrChkAddMargins.Enabled = False 'for now
+        ucrBase.clsRsyntax.iCallType = 2
+
+        ucrRowReceiver.Selector = ucrSelectorDataFrame
+        ucrColumnVariable.Selector = ucrSelectorDataFrame
+        ucrColumnVariable.SetDataType("factor")
+
+
+        ucrRowReceiver.SetParameter(New RParameter("y", 1))
+        ucrRowReceiver.SetParameterIsRFunction()
+        ucrColumnVariable.SetParameter(New RParameter("col.vars", 2))
+        ucrColumnVariable.SetParameterIsString()
+        ucrChkAddMargins.SetText("Addmargins")
+        ucrChkAddMargins.SetParameter(New RParameter("margin", 1), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True)
 
     End Sub
 
     Private Sub SetDefaults()
+        clsFtable = New RFunction
+        clsTable = New RFunction
 
+        ucrRowReceiver.SetMeAsReceiver()
+        ucrSelectorDataFrame.Reset()
+
+        clsTable.SetRCommand("table")
+        clsAddMargin.SetRCommand("addmargins")
+        clsAddMargin.AddParameter(clsRFunctionParameter:=clsTable)
+        clsFtable.SetRCommand("ftable")
+        clsFtable.AddParameter(clsRFunctionParameter:=clsAddMargin)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsFtable)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-
+        ucrChkAddMargins.SetRCode(clsAddMargin, bReset)
+        ucrRowReceiver.SetRCode(clsTable, bReset)
+        ucrColumnVariable.SetRCode(clsFtable, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-
+        If Not ucrRowReceiver.IsEmpty AndAlso Not ucrColumnVariable.IsEmpty AndAlso ucrSelectorDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrRowReceiver_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrRowReceiver.ControlContentsChanged, ucrColumnVariable.ControlContentsChanged, ucrSelectorDataFrame.ControlContentsChanged
+        TestOkEnabled()
+    End Sub
 End Class
