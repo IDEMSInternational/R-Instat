@@ -35,7 +35,6 @@ Partial Class sdgTwoWayFrequencies
         Me.ucrChkBackgroundColour = New instat.ucrCheck()
         Me.ucrChkShowSummary = New instat.ucrCheck()
         Me.tbGraph = New System.Windows.Forms.TabPage()
-        Me.ucrSaveGraph = New instat.ucrSave()
         Me.grpGraphOptions = New System.Windows.Forms.GroupBox()
         Me.ucrChkStack = New instat.ucrCheck()
         Me.lblTitle = New System.Windows.Forms.Label()
@@ -67,7 +66,7 @@ Partial Class sdgTwoWayFrequencies
         Me.tbTwoWayFrequencies.Location = New System.Drawing.Point(8, 8)
         Me.tbTwoWayFrequencies.Name = "tbTwoWayFrequencies"
         Me.tbTwoWayFrequencies.SelectedIndex = 0
-        Me.tbTwoWayFrequencies.Size = New System.Drawing.Size(321, 315)
+        Me.tbTwoWayFrequencies.Size = New System.Drawing.Size(321, 283)
         Me.tbTwoWayFrequencies.TabIndex = 0
         '
         'tbTable
@@ -76,7 +75,7 @@ Partial Class sdgTwoWayFrequencies
         Me.tbTable.Location = New System.Drawing.Point(4, 22)
         Me.tbTable.Name = "tbTable"
         Me.tbTable.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbTable.Size = New System.Drawing.Size(313, 289)
+        Me.tbTable.Size = New System.Drawing.Size(313, 257)
         Me.tbTable.TabIndex = 0
         Me.tbTable.Text = "Table"
         Me.tbTable.UseVisualStyleBackColor = True
@@ -102,7 +101,7 @@ Partial Class sdgTwoWayFrequencies
         'lblNumberOfDecimals
         '
         Me.lblNumberOfDecimals.AutoSize = True
-        Me.lblNumberOfDecimals.Location = New System.Drawing.Point(10, 101)
+        Me.lblNumberOfDecimals.Location = New System.Drawing.Point(8, 101)
         Me.lblNumberOfDecimals.Name = "lblNumberOfDecimals"
         Me.lblNumberOfDecimals.Size = New System.Drawing.Size(161, 13)
         Me.lblNumberOfDecimals.TabIndex = 3
@@ -123,7 +122,7 @@ Partial Class sdgTwoWayFrequencies
         'lblGraphTitle
         '
         Me.lblGraphTitle.AutoSize = True
-        Me.lblGraphTitle.Location = New System.Drawing.Point(10, 157)
+        Me.lblGraphTitle.Location = New System.Drawing.Point(8, 157)
         Me.lblGraphTitle.Name = "lblGraphTitle"
         Me.lblGraphTitle.Size = New System.Drawing.Size(60, 13)
         Me.lblGraphTitle.TabIndex = 7
@@ -183,23 +182,15 @@ Partial Class sdgTwoWayFrequencies
         '
         'tbGraph
         '
-        Me.tbGraph.Controls.Add(Me.ucrSaveGraph)
         Me.tbGraph.Controls.Add(Me.grpGraphOptions)
         Me.tbGraph.Controls.Add(Me.grpGraphType)
         Me.tbGraph.Location = New System.Drawing.Point(4, 22)
         Me.tbGraph.Name = "tbGraph"
         Me.tbGraph.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbGraph.Size = New System.Drawing.Size(313, 289)
+        Me.tbGraph.Size = New System.Drawing.Size(313, 257)
         Me.tbGraph.TabIndex = 1
         Me.tbGraph.Text = "Graph"
         Me.tbGraph.UseVisualStyleBackColor = True
-        '
-        'ucrSaveGraph
-        '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(6, 260)
-        Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(288, 24)
-        Me.ucrSaveGraph.TabIndex = 2
         '
         'grpGraphOptions
         '
@@ -352,7 +343,7 @@ Partial Class sdgTwoWayFrequencies
         '
         'ucrBaseSubDialogue
         '
-        Me.ucrBaseSubDialogue.Location = New System.Drawing.Point(98, 329)
+        Me.ucrBaseSubDialogue.Location = New System.Drawing.Point(98, 297)
         Me.ucrBaseSubDialogue.Name = "ucrBaseSubDialogue"
         Me.ucrBaseSubDialogue.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.ucrBaseSubDialogue.Size = New System.Drawing.Size(142, 30)
@@ -362,7 +353,7 @@ Partial Class sdgTwoWayFrequencies
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(339, 363)
+        Me.ClientSize = New System.Drawing.Size(339, 328)
         Me.Controls.Add(Me.tbTwoWayFrequencies)
         Me.Controls.Add(Me.ucrBaseSubDialogue)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -370,7 +361,7 @@ Partial Class sdgTwoWayFrequencies
         Me.MinimizeBox = False
         Me.Name = "sdgTwoWayFrequencies"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Two Way Frequencies Options"
+        Me.Text = "Frequency Table & Graph Options"
         Me.tbTwoWayFrequencies.ResumeLayout(False)
         Me.tbTable.ResumeLayout(False)
         Me.grpTableOptions.ResumeLayout(False)
@@ -393,7 +384,6 @@ Partial Class sdgTwoWayFrequencies
     Friend WithEvents ucrChkBackgroundColour As ucrCheck
     Friend WithEvents ucrChkShowSummary As ucrCheck
     Friend WithEvents tbGraph As TabPage
-    Friend WithEvents ucrSaveGraph As ucrSave
     Friend WithEvents grpGraphOptions As GroupBox
     Friend WithEvents lblTitle As Label
     Friend WithEvents lblHjust As Label
