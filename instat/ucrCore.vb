@@ -180,7 +180,7 @@ Public Class ucrCore
                 End If
             End If
             If ucrControl.bLinkedAddRemoveParameter Then
-                ucrControl.AddOrRemoveParameter(bTemp)
+                ucrControl.AddOrRemoveParameter(bTemp AndAlso (ucrControl.CanAddParameter() OrElse Not ucrControl.bAddRemoveParameter))
             End If
             If ucrControl.bLinkedHideIfParameterMissing Then
                 ucrControl.SetVisible(bTemp)
