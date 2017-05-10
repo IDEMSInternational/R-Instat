@@ -1397,6 +1397,10 @@ Public Class frmMain
         dlgExportRObjects.ShowDialog()
     End Sub
 
+    Private Sub FrequencyTablesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FrequencyTablesToolStripMenuItem.Click
+        dlgFlatFrequencyTable.ShowDialog()
+    End Sub
+
 
 
 
