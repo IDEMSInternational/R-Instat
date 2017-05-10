@@ -362,19 +362,19 @@ instat_object$set("public", "summary_table", function(data_name, columns_to_summ
       
       # Column Factor - add as row margin
       column_factor_margin <- margin_tables[2]   # in long term where is [[2]], e.g. which(powerSet(c(1,2,3, 4)) == "1"
-      Overall_Col_Margin <- append(column_factor_margin$summary_count, values = c(rep(length.out=length(row_factors), x='NA')), after = 0) 
+      overall_col_margin <- append(column_factor_margin$summary_count, values = c(rep(length.out=length(row_factors), x='NA')), after = 0) 
       # summary_count - it won't always be this. Also if multiple values then loop?
       # I need to repeat NA for as many as the number of Row Factors we have hence rep function.
       # add above into the unstacked data set
-      cell_values <- rbind(cell_values, Overall_Col_Margin)
+      cell_values <- rbind(cell_values, overall_col_margin)
       
       # take [[7]] and [[1]]. Append [[1]]
       overall_value <- margin_tables[1]   # want to get this 1st value in that list.
       row_factor_margin <- margin_tables[length(margin_tables)]
       # append the vector for the summary of interest in row_factor_margin with the overall_value
-      Overall_Row_Margin <- append(row_factor_margin$summary_count, overall_value, after = 0)
+      overall_row_margin <- append(row_factor_margin$summary_count, overall_value, after = 0)
       # add into the unstacked dataset
-      cell_values <- cbind(cell_values, Total_Margin)
+      cell_values <- cbind(cell_values, overall_row_margin)
       
     }
   }
