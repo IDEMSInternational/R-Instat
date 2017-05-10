@@ -41,10 +41,9 @@ Public Class dlgFitCorruptionModel
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 529
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
-        'helpID
-        '  ucrBase.iHelpTopicID =
         ucrInputModelPreview.IsReadOnly = True
 
         clsBinomialModel.SetRCommand("binomial")
@@ -126,12 +125,14 @@ Public Class dlgFitCorruptionModel
     End Sub
 
     Private Sub ChangeBaseFunction()
-        If ucrReceiverOutput.strCurrDataType = "numeric" OrElse ucrReceiverOutput.strCurrDataType = "integer" Then
-            clsCorruptionModel.SetRCommand("lm")
-            clsCorruptionModel.RemoveParameterByName("family")
-        Else
-            clsCorruptionModel.SetRCommand("glm")
-            clsCorruptionModel.AddParameter("family", clsRFunctionParameter:=clsBinomialModel)
+        If Not ucrReceiverOutput.IsEmpty Then
+            If frmMain.clsRLink.IsBinary(ucrSelectorFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverOutput.GetVariableNames(False)) Then
+                clsCorruptionModel.SetRCommand("glm")
+                clsCorruptionModel.AddParameter("family", clsRFunctionParameter:=clsBinomialModel)
+            Else
+                clsCorruptionModel.SetRCommand("lm")
+                clsCorruptionModel.RemoveParameterByName("family")
+            End If
         End If
     End Sub
 
