@@ -25,23 +25,23 @@ Partial Class dlgStringDistance
         Me.lblColumn = New System.Windows.Forms.Label()
         Me.lblPattern = New System.Windows.Forms.Label()
         Me.lblMethod = New System.Windows.Forms.Label()
+        Me.rdoString = New System.Windows.Forms.RadioButton()
+        Me.rdoColumn = New System.Windows.Forms.RadioButton()
+        Me.lblColumnString = New System.Windows.Forms.Label()
+        Me.ucrReceiverColumn = New instat.ucrReceiverSingle()
         Me.ucrSelectorStringDistance = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrInputComboBoxMethod = New instat.ucrInputComboBox()
         Me.ucrSaveStringDistance = New instat.ucrSave()
         Me.ucrInputPatternStringDistance = New instat.ucrInputTextBox()
         Me.ucrReceiverStringDistance = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
-        Me.rdoString = New System.Windows.Forms.RadioButton()
-        Me.Column = New System.Windows.Forms.RadioButton()
         Me.ucrPnlStringDist = New instat.UcrPanel()
-        Me.UcrReceiverSingle1 = New instat.ucrReceiverSingle()
-        Me.lblColumnString = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblColumn
         '
         Me.lblColumn.AutoSize = True
-        Me.lblColumn.Location = New System.Drawing.Point(250, 45)
+        Me.lblColumn.Location = New System.Drawing.Point(250, 43)
         Me.lblColumn.Name = "lblColumn"
         Me.lblColumn.Size = New System.Drawing.Size(45, 13)
         Me.lblColumn.TabIndex = 1
@@ -50,7 +50,7 @@ Partial Class dlgStringDistance
         'lblPattern
         '
         Me.lblPattern.AutoSize = True
-        Me.lblPattern.Location = New System.Drawing.Point(250, 90)
+        Me.lblPattern.Location = New System.Drawing.Point(250, 85)
         Me.lblPattern.Name = "lblPattern"
         Me.lblPattern.Size = New System.Drawing.Size(44, 13)
         Me.lblPattern.TabIndex = 3
@@ -59,65 +59,11 @@ Partial Class dlgStringDistance
         'lblMethod
         '
         Me.lblMethod.AutoSize = True
-        Me.lblMethod.Location = New System.Drawing.Point(250, 136)
+        Me.lblMethod.Location = New System.Drawing.Point(248, 168)
         Me.lblMethod.Name = "lblMethod"
         Me.lblMethod.Size = New System.Drawing.Size(46, 13)
         Me.lblMethod.TabIndex = 5
         Me.lblMethod.Text = "Method:"
-        '
-        'ucrSelectorStringDistance
-        '
-        Me.ucrSelectorStringDistance.bShowHiddenColumns = False
-        Me.ucrSelectorStringDistance.bUseCurrentFilter = True
-        Me.ucrSelectorStringDistance.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorStringDistance.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorStringDistance.Name = "ucrSelectorStringDistance"
-        Me.ucrSelectorStringDistance.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorStringDistance.TabIndex = 0
-        '
-        'ucrInputComboBoxMethod
-        '
-        Me.ucrInputComboBoxMethod.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboBoxMethod.IsReadOnly = False
-        Me.ucrInputComboBoxMethod.Location = New System.Drawing.Point(250, 151)
-        Me.ucrInputComboBoxMethod.Name = "ucrInputComboBoxMethod"
-        Me.ucrInputComboBoxMethod.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputComboBoxMethod.TabIndex = 6
-        '
-        'ucrSaveStringDistance
-        '
-        Me.ucrSaveStringDistance.Location = New System.Drawing.Point(10, 197)
-        Me.ucrSaveStringDistance.Name = "ucrSaveStringDistance"
-        Me.ucrSaveStringDistance.Size = New System.Drawing.Size(247, 24)
-        Me.ucrSaveStringDistance.TabIndex = 7
-        '
-        'ucrInputPatternStringDistance
-        '
-        Me.ucrInputPatternStringDistance.AddQuotesIfUnrecognised = True
-        Me.ucrInputPatternStringDistance.IsMultiline = False
-        Me.ucrInputPatternStringDistance.IsReadOnly = False
-        Me.ucrInputPatternStringDistance.Location = New System.Drawing.Point(250, 105)
-        Me.ucrInputPatternStringDistance.Name = "ucrInputPatternStringDistance"
-        Me.ucrInputPatternStringDistance.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputPatternStringDistance.TabIndex = 4
-        '
-        'ucrReceiverStringDistance
-        '
-        Me.ucrReceiverStringDistance.frmParent = Me
-        Me.ucrReceiverStringDistance.Location = New System.Drawing.Point(250, 60)
-        Me.ucrReceiverStringDistance.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverStringDistance.Name = "ucrReceiverStringDistance"
-        Me.ucrReceiverStringDistance.Selector = Nothing
-        Me.ucrReceiverStringDistance.Size = New System.Drawing.Size(137, 20)
-        Me.ucrReceiverStringDistance.TabIndex = 2
-        Me.ucrReceiverStringDistance.ucrSelector = Nothing
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 227)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(399, 52)
-        Me.ucrBase.TabIndex = 8
         '
         'rdoString
         '
@@ -135,21 +81,95 @@ Partial Class dlgStringDistance
         Me.rdoString.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoString.UseVisualStyleBackColor = True
         '
-        'Column
+        'rdoColumn
         '
-        Me.Column.Appearance = System.Windows.Forms.Appearance.Button
-        Me.Column.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Column.FlatAppearance.BorderSize = 2
-        Me.Column.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Column.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Column.Location = New System.Drawing.Point(309, 11)
-        Me.Column.Name = "Column"
-        Me.Column.Size = New System.Drawing.Size(61, 27)
-        Me.Column.TabIndex = 10
-        Me.Column.TabStop = True
-        Me.Column.Text = "Column"
-        Me.Column.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.Column.UseVisualStyleBackColor = True
+        Me.rdoColumn.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoColumn.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoColumn.FlatAppearance.BorderSize = 2
+        Me.rdoColumn.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoColumn.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoColumn.Location = New System.Drawing.Point(309, 11)
+        Me.rdoColumn.Name = "rdoColumn"
+        Me.rdoColumn.Size = New System.Drawing.Size(61, 27)
+        Me.rdoColumn.TabIndex = 10
+        Me.rdoColumn.TabStop = True
+        Me.rdoColumn.Text = "Column"
+        Me.rdoColumn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoColumn.UseVisualStyleBackColor = True
+        '
+        'lblColumnString
+        '
+        Me.lblColumnString.AutoSize = True
+        Me.lblColumnString.Location = New System.Drawing.Point(248, 127)
+        Me.lblColumnString.Name = "lblColumnString"
+        Me.lblColumnString.Size = New System.Drawing.Size(51, 13)
+        Me.lblColumnString.TabIndex = 13
+        Me.lblColumnString.Text = "Column 2"
+        '
+        'ucrReceiverColumn
+        '
+        Me.ucrReceiverColumn.frmParent = Me
+        Me.ucrReceiverColumn.Location = New System.Drawing.Point(250, 143)
+        Me.ucrReceiverColumn.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverColumn.Name = "ucrReceiverColumn"
+        Me.ucrReceiverColumn.Selector = Nothing
+        Me.ucrReceiverColumn.Size = New System.Drawing.Size(137, 20)
+        Me.ucrReceiverColumn.TabIndex = 12
+        Me.ucrReceiverColumn.ucrSelector = Nothing
+        '
+        'ucrSelectorStringDistance
+        '
+        Me.ucrSelectorStringDistance.bShowHiddenColumns = False
+        Me.ucrSelectorStringDistance.bUseCurrentFilter = True
+        Me.ucrSelectorStringDistance.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorStringDistance.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorStringDistance.Name = "ucrSelectorStringDistance"
+        Me.ucrSelectorStringDistance.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorStringDistance.TabIndex = 0
+        '
+        'ucrInputComboBoxMethod
+        '
+        Me.ucrInputComboBoxMethod.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboBoxMethod.IsReadOnly = False
+        Me.ucrInputComboBoxMethod.Location = New System.Drawing.Point(250, 184)
+        Me.ucrInputComboBoxMethod.Name = "ucrInputComboBoxMethod"
+        Me.ucrInputComboBoxMethod.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputComboBoxMethod.TabIndex = 6
+        '
+        'ucrSaveStringDistance
+        '
+        Me.ucrSaveStringDistance.Location = New System.Drawing.Point(10, 197)
+        Me.ucrSaveStringDistance.Name = "ucrSaveStringDistance"
+        Me.ucrSaveStringDistance.Size = New System.Drawing.Size(234, 24)
+        Me.ucrSaveStringDistance.TabIndex = 7
+        '
+        'ucrInputPatternStringDistance
+        '
+        Me.ucrInputPatternStringDistance.AddQuotesIfUnrecognised = True
+        Me.ucrInputPatternStringDistance.IsMultiline = False
+        Me.ucrInputPatternStringDistance.IsReadOnly = False
+        Me.ucrInputPatternStringDistance.Location = New System.Drawing.Point(250, 101)
+        Me.ucrInputPatternStringDistance.Name = "ucrInputPatternStringDistance"
+        Me.ucrInputPatternStringDistance.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputPatternStringDistance.TabIndex = 4
+        '
+        'ucrReceiverStringDistance
+        '
+        Me.ucrReceiverStringDistance.frmParent = Me
+        Me.ucrReceiverStringDistance.Location = New System.Drawing.Point(250, 58)
+        Me.ucrReceiverStringDistance.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverStringDistance.Name = "ucrReceiverStringDistance"
+        Me.ucrReceiverStringDistance.Selector = Nothing
+        Me.ucrReceiverStringDistance.Size = New System.Drawing.Size(137, 20)
+        Me.ucrReceiverStringDistance.TabIndex = 2
+        Me.ucrReceiverStringDistance.ucrSelector = Nothing
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(10, 227)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(399, 52)
+        Me.ucrBase.TabIndex = 8
         '
         'ucrPnlStringDist
         '
@@ -158,34 +178,14 @@ Partial Class dlgStringDistance
         Me.ucrPnlStringDist.Size = New System.Drawing.Size(145, 42)
         Me.ucrPnlStringDist.TabIndex = 11
         '
-        'UcrReceiverSingle1
-        '
-        Me.UcrReceiverSingle1.frmParent = Me
-        Me.UcrReceiverSingle1.Location = New System.Drawing.Point(250, 106)
-        Me.UcrReceiverSingle1.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiverSingle1.Name = "UcrReceiverSingle1"
-        Me.UcrReceiverSingle1.Selector = Nothing
-        Me.UcrReceiverSingle1.Size = New System.Drawing.Size(137, 20)
-        Me.UcrReceiverSingle1.TabIndex = 12
-        Me.UcrReceiverSingle1.ucrSelector = Nothing
-        '
-        'lblColumnString
-        '
-        Me.lblColumnString.AutoSize = True
-        Me.lblColumnString.Location = New System.Drawing.Point(250, 90)
-        Me.lblColumnString.Name = "lblColumnString"
-        Me.lblColumnString.Size = New System.Drawing.Size(51, 13)
-        Me.lblColumnString.TabIndex = 13
-        Me.lblColumnString.Text = "Column 2"
-        '
         'dlgStringDistance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(417, 285)
         Me.Controls.Add(Me.lblColumnString)
-        Me.Controls.Add(Me.UcrReceiverSingle1)
-        Me.Controls.Add(Me.Column)
+        Me.Controls.Add(Me.ucrReceiverColumn)
+        Me.Controls.Add(Me.rdoColumn)
         Me.Controls.Add(Me.rdoString)
         Me.Controls.Add(Me.ucrSelectorStringDistance)
         Me.Controls.Add(Me.lblMethod)
@@ -218,8 +218,8 @@ Partial Class dlgStringDistance
     Friend WithEvents ucrInputPatternStringDistance As ucrInputTextBox
     Friend WithEvents ucrSelectorStringDistance As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblColumnString As Label
-    Friend WithEvents UcrReceiverSingle1 As ucrReceiverSingle
-    Friend WithEvents Column As RadioButton
+    Friend WithEvents ucrReceiverColumn As ucrReceiverSingle
+    Friend WithEvents rdoColumn As RadioButton
     Friend WithEvents rdoString As RadioButton
     Friend WithEvents ucrPnlStringDist As UcrPanel
 End Class
