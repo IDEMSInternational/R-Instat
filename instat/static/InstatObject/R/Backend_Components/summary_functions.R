@@ -27,7 +27,8 @@ data_object$set("public", "merge_data", function(new_data, by = NULL, type = "le
   }
   self$append_to_metadata(is_calculated_label, TRUE)
   self$add_defaults_meta()
-  self$add_defaults_variables_metadata()
+#todo FIGURE OUT WHAT SHOULD BE HERE
+  #  self$add_defaults_variables_metadata()
 }
 )
 
@@ -105,12 +106,12 @@ instat_object$set("public", "calculate_summary", function(data_name, columns_to_
     }
   }
   else {
-    for(column_name in columns_to_summarise) {
-      calculated_from <- list(column_name)
+    for(column_names in columns_to_summarise) {
+      calculated_from <- list(column_names)
       names(calculated_from) <- data_name
       for(summary_type in summaries) {
-        summary_calculation <- instat_calculation$new(type = "summary", result_name = paste0(summary_type, "_", column_name),
-                                                      function_exp = paste0(summary_type, "(", column_name, ", na.rm =", na.rm, ")"),
+        summary_calculation <- instat_calculation$new(type = "summary", result_name = paste0(summary_type, "_", column_names),
+                                                      function_exp = paste0(summary_type, "(", column_names, ", na.rm =", na.rm, ")"),
                                                       calculated_from = calculated_from, save = save)
         sub_calculations[[length(sub_calculations) + 1]] <- summary_calculation
       }
@@ -359,19 +360,20 @@ instat_object$set("public", "summary_table", function(data_name, columns_to_summ
       
       # Column Factor - add as row margin
       column_factor_margin <- margin_tables[2]   # in long term where is [[2]], e.g. which(powerSet(c(1,2,3, 4)) == "1"
-      overall_col_margin <- append(column_factor_margin$summary_count_Village, values = c(rep(length.out=length(row_factors), x='NA')), after = 0) 
+      Overall_Col_Margin <- append(column_factor_margin$summary_count_Village, values = c(rep(length.out=length(row_factors), x='NA')), after = 0) 
       # not sure if I can have $ in this?
       # I need to repeat NA for as many as the number of Row Factors we have hence rep function.
       # add above into the unstacked data set
-      cell_values <- rbind(cell_values, overall_col_margin)
+      cell_values <- rbind(cell_values, Overall_Col_Margin)
       
       # take [[7]] and [[1]]. Append [[1]]
       overall_value <- margin_tables[1]   # want to get this 1st value in that list.
       row_factor_margin <- margin_tables[length(margin_tables)]
       # append the vector for the summary of interest in row_factor_margin with the overall_value
-      overall_row_margin <- append(row_factor_margin$summary_count_Village., overall_value, after = 0)
+      Overall_Row_Margin <- append(row_factor_margin$summary_count_Village., overall_value, after = 0)
       # add into the unstacked dataset
       cell_values <- cbind(cell_values, Total_Margin)
+      
     }
   }
 }
