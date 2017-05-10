@@ -2564,10 +2564,10 @@ Partial Class frmMain
         '
         'mnuExport
         '
-        Me.mnuExport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExportDataSetToolStripMenuItem, Me.ExportGraphAsImageToolStripMenuItem, Me.ExportRObjectsToolStripMenuItem, Me.ExportRWorkspaceToolStripMenuItem})
+        Me.mnuExport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExportDataSetToolStripMenuItem, Me.ExportRObjectsToolStripMenuItem, Me.ExportRWorkspaceToolStripMenuItem, Me.ExportGraphAsImageToolStripMenuItem})
         Me.mnuExport.Name = "mnuExport"
         Me.mnuExport.Size = New System.Drawing.Size(204, 22)
-        Me.mnuExport.Text = "Export Data"
+        Me.mnuExport.Text = "Export"
         '
         'ExportDataSetToolStripMenuItem
         '
@@ -2578,8 +2578,8 @@ Partial Class frmMain
         'ExportGraphAsImageToolStripMenuItem
         '
         Me.ExportGraphAsImageToolStripMenuItem.Name = "ExportGraphAsImageToolStripMenuItem"
-        Me.ExportGraphAsImageToolStripMenuItem.Size = New System.Drawing.Size(197, 22)
-        Me.ExportGraphAsImageToolStripMenuItem.Text = "Export GraphAsImage..."
+        Me.ExportGraphAsImageToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
+        Me.ExportGraphAsImageToolStripMenuItem.Text = "Export Graph As Image..."
         '
         'ExportRObjectsToolStripMenuItem
         '
