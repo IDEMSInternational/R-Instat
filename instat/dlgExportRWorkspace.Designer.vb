@@ -41,7 +41,7 @@ Partial Class dlgExportRWorkspace
         Me.cmdBrowse.Name = "cmdBrowse"
         Me.cmdBrowse.Size = New System.Drawing.Size(62, 23)
         Me.cmdBrowse.TabIndex = 9
-        Me.cmdBrowse.Text = "Browse"
+        Me.cmdBrowse.Text = "Browse..."
         Me.cmdBrowse.UseVisualStyleBackColor = True
         '
         'lblExport

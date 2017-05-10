@@ -44,19 +44,19 @@ Public Class dlgExportRWorkspace
         ucrInputExportFile.SetParameter(New RParameter("file", 1))
 
         ucrChkMetadata.SetParameter(New RParameter("include_metadata", 2))
-        ucrChkMetadata.SetText("Metadata")
+        ucrChkMetadata.SetText("Include Metadata")
         ucrChkMetadata.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkMetadata.SetRDefault("FALSE")
+        ucrChkMetadata.SetRDefault("TRUE")
 
         ucrChkGraphs.SetParameter(New RParameter("include_graphs", 3))
-        ucrChkGraphs.SetText("Graphs")
+        ucrChkGraphs.SetText("Include Graphs")
         ucrChkGraphs.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkGraphs.SetRDefault("FALSE")
+        ucrChkGraphs.SetRDefault("TRUE")
 
         ucrChkModels.SetParameter(New RParameter("include_models", 4))
-        ucrChkModels.SetText("Models")
+        ucrChkModels.SetText("Include Models")
         ucrChkModels.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkModels.SetRDefault("FALSE")
+        ucrChkModels.SetRDefault("TRUE")
     End Sub
 
     Private Sub SetDefaults()
