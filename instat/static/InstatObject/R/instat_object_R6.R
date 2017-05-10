@@ -1355,14 +1355,14 @@ instat_object$set("public", "export_workspace", function(data_names, file, inclu
       graphs <- self$get_graphs(temp_name)
       graph_names <- names(graphs)
       for(i in seq_along(graphs)) {
-        e[[paste(temp_name, graph_names[i], sep = "_")]] <- graphs[i]
+        e[[paste(temp_name, graph_names[i], sep = "_")]] <- graphs[[i]]
       }
     }
     if(include_models) {
       models <- self$get_models(temp_name)
       model_names <- names(models)
       for(i in seq_along(models)) {
-        e[[paste(temp_name, model_names[i], sep = "_")]] <- models[i]
+        e[[paste(temp_name, model_names[i], sep = "_")]] <- models[[i]]
       }
     }
     if(include_metadata) {
