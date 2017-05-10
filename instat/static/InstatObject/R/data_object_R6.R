@@ -1484,7 +1484,7 @@ data_object$set("public", "add_key", function(col_names, key_name) {
     stop("key columns cannot have missing values")
   }
   if(self$is_key(col_names)) {
-    message("A key with these columns already exists. No action will be taken.")
+    warning("A key with these columns already exists. No action will be taken.")
   }
   else {
     if(missing(key_name)) key_name <- next_default_item("key", names(private$keys))
