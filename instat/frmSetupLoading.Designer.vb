@@ -82,7 +82,7 @@ Partial Class frmSetupLoading
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmSetupLoading"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "Setup Loading"
         Me.TopMost = True
         Me.UseWaitCursor = True
