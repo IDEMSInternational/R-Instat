@@ -78,7 +78,7 @@ Partial Class frmSetupLoading
         Me.Controls.Add(Me.lblLoading)
         Me.Cursor = System.Windows.Forms.Cursors.WaitCursor
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Location = New System.Drawing.Point(540, 50)
+        Me.Location = New System.Drawing.Point(540, 49)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmSetupLoading"
