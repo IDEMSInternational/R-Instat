@@ -119,7 +119,7 @@ instat_object$set("public", "calculate_summary", function(data_name, columns_to_
     }
     combined_calc_sum <- instat_calculation$new(type="combination", sub_calculations = sub_calculations, manipulations = list(factor_by))
     out <- self$apply_instat_calculation(combined_calc_sum)
-    if(return_output) return(out$data)
+#    if(return_output) return(out$data)
   }
 )
 
