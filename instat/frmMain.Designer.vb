@@ -317,9 +317,9 @@ Partial Class frmMain
         Me.tlSeparatorFile = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuExport = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExportDataSetToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ExportRWorkspaceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExportGraphAsImageToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExportRObjectsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExportRWorkspaceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileCloseData = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuPrepare = New System.Windows.Forms.ToolStripMenuItem()
@@ -468,6 +468,7 @@ Partial Class frmMain
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
+        Me.FrequencyTablesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -704,7 +705,7 @@ Partial Class frmMain
         '
         'mnuDescribeGeneral
         '
-        Me.mnuDescribeGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeGeneralColumnSummaries, Me.DescribeGeneralTabulation, Me.DescribeGeneralGraphics})
+        Me.mnuDescribeGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeGeneralColumnSummaries, Me.DescribeGeneralTabulation, Me.DescribeGeneralGraphics, Me.FrequencyTablesToolStripMenuItem})
         Me.mnuDescribeGeneral.Name = "mnuDescribeGeneral"
         Me.mnuDescribeGeneral.Size = New System.Drawing.Size(172, 22)
         Me.mnuDescribeGeneral.Tag = "General"
@@ -2563,10 +2564,10 @@ Partial Class frmMain
         '
         'mnuExport
         '
-        Me.mnuExport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExportDataSetToolStripMenuItem, Me.ExportGraphAsImageToolStripMenuItem, Me.ExportRObjectsToolStripMenuItem, Me.ExportRWorkspaceToolStripMenuItem})
+        Me.mnuExport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ExportDataSetToolStripMenuItem, Me.ExportRObjectsToolStripMenuItem, Me.ExportRWorkspaceToolStripMenuItem, Me.ExportGraphAsImageToolStripMenuItem})
         Me.mnuExport.Name = "mnuExport"
         Me.mnuExport.Size = New System.Drawing.Size(204, 22)
-        Me.mnuExport.Text = "Export Data"
+        Me.mnuExport.Text = "Export"
         '
         'ExportDataSetToolStripMenuItem
         '
@@ -2574,23 +2575,23 @@ Partial Class frmMain
         Me.ExportDataSetToolStripMenuItem.Size = New System.Drawing.Size(197, 22)
         Me.ExportDataSetToolStripMenuItem.Text = "Export Dataset..."
         '
-        'ExportRWorkspaceToolStripMenuItem
-        '
-        Me.ExportRWorkspaceToolStripMenuItem.Name = "ExportRWorkspaceToolStripMenuItem"
-        Me.ExportRWorkspaceToolStripMenuItem.Size = New System.Drawing.Size(197, 22)
-        Me.ExportRWorkspaceToolStripMenuItem.Text = "Export R Workspace..."
-        '
         'ExportGraphAsImageToolStripMenuItem
         '
         Me.ExportGraphAsImageToolStripMenuItem.Name = "ExportGraphAsImageToolStripMenuItem"
-        Me.ExportGraphAsImageToolStripMenuItem.Size = New System.Drawing.Size(197, 22)
-        Me.ExportGraphAsImageToolStripMenuItem.Text = "Export GraphAsImage..."
+        Me.ExportGraphAsImageToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
+        Me.ExportGraphAsImageToolStripMenuItem.Text = "Export Graph As Image..."
         '
         'ExportRObjectsToolStripMenuItem
         '
         Me.ExportRObjectsToolStripMenuItem.Name = "ExportRObjectsToolStripMenuItem"
         Me.ExportRObjectsToolStripMenuItem.Size = New System.Drawing.Size(197, 22)
         Me.ExportRObjectsToolStripMenuItem.Text = "Export R Objects..."
+        '
+        'ExportRWorkspaceToolStripMenuItem
+        '
+        Me.ExportRWorkspaceToolStripMenuItem.Name = "ExportRWorkspaceToolStripMenuItem"
+        Me.ExportRWorkspaceToolStripMenuItem.Size = New System.Drawing.Size(197, 22)
+        Me.ExportRWorkspaceToolStripMenuItem.Text = "Export R Workspace..."
         '
         'mnuFileCloseData
         '
@@ -3677,6 +3678,12 @@ Partial Class frmMain
         Me.ucrOutput.Size = New System.Drawing.Size(295, 113)
         Me.ucrOutput.TabIndex = 0
         '
+        'FrequencyTablesToolStripMenuItem
+        '
+        Me.FrequencyTablesToolStripMenuItem.Name = "FrequencyTablesToolStripMenuItem"
+        Me.FrequencyTablesToolStripMenuItem.Size = New System.Drawing.Size(188, 22)
+        Me.FrequencyTablesToolStripMenuItem.Text = "Frequency Tables..."
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -4169,4 +4176,5 @@ Partial Class frmMain
     Friend WithEvents ExportRWorkspaceToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ExportGraphAsImageToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ExportRObjectsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents FrequencyTablesToolStripMenuItem As ToolStripMenuItem
 End Class
