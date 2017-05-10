@@ -27,9 +27,8 @@ Partial Class dlgExportGraphAsImage
         Me.ucrSelectedGraphReceiver = New instat.ucrReceiverSingle()
         Me.ucrSelectorGraphAsImage = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblExportFile = New System.Windows.Forms.Label()
         Me.lblExport = New System.Windows.Forms.Label()
-        Me.ucrInputExportFile = New instat.ucrInputTextBox()
+        Me.ucrInputFile = New instat.ucrInputTextBox()
         Me.SuspendLayout()
         '
         'lblSelectedGraph
@@ -78,15 +77,6 @@ Partial Class dlgExportGraphAsImage
         Me.ucrBase.Size = New System.Drawing.Size(404, 52)
         Me.ucrBase.TabIndex = 5
         '
-        'lblExportFile
-        '
-        Me.lblExportFile.AutoSize = True
-        Me.lblExportFile.Location = New System.Drawing.Point(179, 132)
-        Me.lblExportFile.Name = "lblExportFile"
-        Me.lblExportFile.Size = New System.Drawing.Size(59, 13)
-        Me.lblExportFile.TabIndex = 6
-        Me.lblExportFile.Text = "Export File:"
-        '
         'lblExport
         '
         Me.lblExport.AutoSize = True
@@ -96,24 +86,23 @@ Partial Class dlgExportGraphAsImage
         Me.lblExport.TabIndex = 6
         Me.lblExport.Text = "Export File:"
         '
-        'ucrInputExportFile
+        'ucrInputFile
         '
-        Me.ucrInputExportFile.AddQuotesIfUnrecognised = True
-        Me.ucrInputExportFile.IsMultiline = False
-        Me.ucrInputExportFile.IsReadOnly = False
-        Me.ucrInputExportFile.Location = New System.Drawing.Point(70, 196)
-        Me.ucrInputExportFile.Name = "ucrInputExportFile"
-        Me.ucrInputExportFile.Size = New System.Drawing.Size(251, 21)
-        Me.ucrInputExportFile.TabIndex = 7
+        Me.ucrInputFile.AddQuotesIfUnrecognised = True
+        Me.ucrInputFile.IsMultiline = False
+        Me.ucrInputFile.IsReadOnly = False
+        Me.ucrInputFile.Location = New System.Drawing.Point(70, 196)
+        Me.ucrInputFile.Name = "ucrInputFile"
+        Me.ucrInputFile.Size = New System.Drawing.Size(251, 21)
+        Me.ucrInputFile.TabIndex = 7
         '
         'dlgExportGraphAsImage
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(418, 288)
-        Me.Controls.Add(Me.ucrInputExportFile)
+        Me.Controls.Add(Me.ucrInputFile)
         Me.Controls.Add(Me.lblExport)
-        Me.Controls.Add(Me.lblExportFile)
         Me.Controls.Add(Me.cmdBrowse)
         Me.Controls.Add(Me.lblSelectedGraph)
         Me.Controls.Add(Me.ucrSelectedGraphReceiver)
@@ -135,7 +124,6 @@ Partial Class dlgExportGraphAsImage
     Friend WithEvents ucrSelectedGraphReceiver As ucrReceiverSingle
     Friend WithEvents cmdBrowse As Button
     Friend WithEvents lblSelectedGraph As Label
-    Friend WithEvents lblExportFile As Label
     Friend WithEvents lblExport As Label
-    Friend WithEvents ucrInputExportFile As ucrInputTextBox
+    Friend WithEvents ucrInputFile As ucrInputTextBox
 End Class
