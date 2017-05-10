@@ -59,25 +59,17 @@ Public Class dlgBarAndPieChart
         ucrBarChartSelector.SetParameter(New RParameter("data", 0))
         ucrBarChartSelector.SetParameterIsrfunction()
 
+        ucrFactorReceiver.SetParameter(New RParameter("x", 0))
         ucrFactorReceiver.Selector = ucrBarChartSelector
         ucrFactorReceiver.SetIncludedDataTypes({"factor"})
-        ucrFactorReceiver.SetParameter(New RParameter("x", 0))
         ucrFactorReceiver.bWithQuotes = False
         ucrFactorReceiver.SetParameterIsString()
 
+        ucrSecondReceiver.SetParameter(New RParameter("fill", 1))
         ucrSecondReceiver.Selector = ucrBarChartSelector
         ucrSecondReceiver.SetIncludedDataTypes({"factor"})
-        ucrSecondReceiver.SetParameter(New RParameter("fill", 1))
         ucrSecondReceiver.bWithQuotes = False
         ucrSecondReceiver.SetParameterIsString()
-
-        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
-        ucrSaveBar.SetIsComboBox()
-        ucrSaveBar.SetCheckBoxText("Save Graph")
-        ucrSaveBar.SetDataFrameSelector(ucrBarChartSelector.ucrAvailableDataFrames)
-        ucrSaveBar.SetSaveTypeAsGraph()
-        ucrSaveBar.SetPrefix("Bar")
-        ucrSaveBar.SetAssignToIfUncheckedValue("last_graph")
 
         clsRCoordPolarFunction.SetPackageName("ggplot2")
         clsRCoordPolarFunction.SetRCommand("coord_polar")
@@ -91,6 +83,15 @@ Public Class dlgBarAndPieChart
         clsCoordFlipParam.SetArgument(clsCoordFlipFunc)
         ucrChkFlipCoordinates.SetText("Flip Coordinates")
         ucrChkFlipCoordinates.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
+        ucrSaveBar.SetIsComboBox()
+        ucrSaveBar.SetCheckBoxText("Save Graph")
+        ucrSaveBar.SetDataFrameSelector(ucrBarChartSelector.ucrAvailableDataFrames)
+        ucrSaveBar.SetSaveTypeAsGraph()
+        ucrSaveBar.SetPrefix("Bar")
+        ucrSaveBar.SetAssignToIfUncheckedValue("last_graph")
+
+        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
     End Sub
 
     Private Sub SetDefaults()
@@ -103,6 +104,7 @@ Public Class dlgBarAndPieChart
         ucrBarChartSelector.Reset()
         ucrFactorReceiver.SetMeAsReceiver()
         ucrSaveBar.Reset()
+        SetDialogOptions()
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
@@ -126,7 +128,7 @@ Public Class dlgBarAndPieChart
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
     End Sub
 
-    Private Sub SetRCodeForControls(bReset As Boolean)
+    Public Sub SetRCodeForControls(bReset As Boolean)
         ucrFactorReceiver.SetRCode(clsBarAesFunction, bReset)
         ucrFactorReceiver.AddAdditionalCodeParameterPair(clsPieAesFunction, New RParameter("fill", 0), iAdditionalPairNo:=1)
 
@@ -189,33 +191,31 @@ Public Class dlgBarAndPieChart
         TestOkEnabled()
     End Sub
 
-    Private Sub SetDailogOptions()
-        If rdoBarChart.Checked Then
-            clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsBarAesFunction, iPosition:=1)
-            ucrSaveBar.SetPrefix("Bar")
-            cmdPieChartOptions.Visible = False
-            cmdBarChartOptions.Visible = True
-            clsRgeomBarFunction.RemoveParameterByName("width")
-            clsBaseOperator.RemoveParameter(clsRCoordPolarParam)
-        ElseIf rdoPieChart.Checked Then
-            clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsPieAesFunction, iPosition:=1)
-            ucrSaveBar.SetPrefix("Pie")
-            clsRgeomBarFunction.AddParameter("width", "1")
-            clsBaseOperator.AddParameter(clsRCoordPolarParam)
-            cmdPieChartOptions.Visible = True
-            cmdBarChartOptions.Visible = False
+    Private Sub SetDialogOptions()
+        If ucrSaveBar.bUserTyped = False Then
+            If rdoBarChart.Checked Then
+                clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsBarAesFunction, iPosition:=1)
+                ucrSaveBar.SetPrefix("bar")
+                cmdPieChartOptions.Visible = False
+                cmdBarChartOptions.Visible = True
+                clsRgeomBarFunction.RemoveParameterByName("width")
+                clsBaseOperator.RemoveParameter(clsRCoordPolarParam)
+            ElseIf rdoPieChart.Checked Then
+                clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsPieAesFunction, iPosition:=1)
+                ucrSaveBar.SetPrefix("pie")
+                clsRgeomBarFunction.AddParameter("width", "1")
+                clsBaseOperator.AddParameter(clsRCoordPolarParam)
+                cmdPieChartOptions.Visible = True
+                cmdBarChartOptions.Visible = False
+            End If
         End If
     End Sub
 
     Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged
-        SetDailogOptions()
+        SetDialogOptions()
     End Sub
 
-    Private Sub AllControls_ContentsChanged() Handles ucrFactorReceiver.ControlContentsChanged, ucrSaveBar.ControlContentsChanged
-        TestOkEnabled()
-    End Sub
-
-    Private Sub AllControlsChanged() Handles ucrSaveBar.ControlContentsChanged, ucrFactorReceiver.ControlContentsChanged
+    Private Sub CoreControls_ContentsChanged() Handles ucrFactorReceiver.ControlContentsChanged, ucrSaveBar.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
