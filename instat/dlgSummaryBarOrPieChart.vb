@@ -180,7 +180,7 @@ Public Class dlgSummaryBarOrPieChart
             cmdBarChartOptions.Visible = True
             clsRgeomBarFunction.RemoveParameterByName("width")
             clsBaseOperator.RemoveParameter(clsRCoordPolarParam)
-            If ucrSaveSummaryBar.bUserTyped = False Then
+            If Not ucrSaveSummaryBar.bUserTyped Then
                 ucrSaveSummaryBar.SetPrefix("bar")
             End If
         ElseIf rdoPieChart.Checked Then
@@ -188,7 +188,7 @@ Public Class dlgSummaryBarOrPieChart
             cmdBarChartOptions.Visible = False
             clsRgeomBarFunction.AddParameter("width", "1")
             clsBaseOperator.AddParameter(clsRCoordPolarParam)
-            If ucrSaveSummaryBar.bUserTyped = False Then
+            If Not ucrSaveSummaryBar.bUserTyped Then
                 ucrSaveSummaryBar.SetPrefix("pie")
             End If
         End If
