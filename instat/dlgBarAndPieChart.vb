@@ -198,7 +198,7 @@ Public Class dlgBarAndPieChart
             cmdBarChartOptions.Visible = True
             clsRgeomBarFunction.RemoveParameterByName("width")
             clsBaseOperator.RemoveParameter(clsRCoordPolarParam)
-            If ucrSaveBar.bUserTyped = False Then
+            If Not ucrSaveBar.bUserTyped Then
                 ucrSaveBar.SetPrefix("bar")
             End If
         ElseIf rdoPieChart.Checked Then
@@ -207,7 +207,7 @@ Public Class dlgBarAndPieChart
             clsBaseOperator.AddParameter(clsRCoordPolarParam)
             cmdPieChartOptions.Visible = True
             cmdBarChartOptions.Visible = False
-            If ucrSaveBar.bUserTyped = False Then
+            If Not ucrSaveBar.bUserTyped Then
                 ucrSaveBar.SetPrefix("pie")
             End If
         End If
