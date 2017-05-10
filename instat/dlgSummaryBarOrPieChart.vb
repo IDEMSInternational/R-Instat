@@ -175,19 +175,21 @@ Public Class dlgSummaryBarOrPieChart
     End Sub
 
     Private Sub SetDialogOptions()
-        If ucrSaveSummaryBar.bUserTyped = False Then
-            If rdoBarChart.Checked Then
-                ucrSaveSummaryBar.SetPrefix("Bar")
-                cmdPieChartOptions.Visible = False
-                cmdBarChartOptions.Visible = True
-                clsRgeomBarFunction.RemoveParameterByName("width")
-                clsBaseOperator.RemoveParameter(clsRCoordPolarParam)
-            ElseIf rdoPieChart.Checked Then
-                ucrSaveSummaryBar.SetPrefix("Pie")
-                cmdPieChartOptions.Visible = True
-                cmdBarChartOptions.Visible = False
-                clsRgeomBarFunction.AddParameter("width", "1")
-                clsBaseOperator.AddParameter(clsRCoordPolarParam)
+        If rdoBarChart.Checked Then
+            cmdPieChartOptions.Visible = False
+            cmdBarChartOptions.Visible = True
+            clsRgeomBarFunction.RemoveParameterByName("width")
+            clsBaseOperator.RemoveParameter(clsRCoordPolarParam)
+            If ucrSaveSummaryBar.bUserTyped = False Then
+                ucrSaveSummaryBar.SetPrefix("bar")
+            End If
+        ElseIf rdoPieChart.Checked Then
+            cmdPieChartOptions.Visible = True
+            cmdBarChartOptions.Visible = False
+            clsRgeomBarFunction.AddParameter("width", "1")
+            clsBaseOperator.AddParameter(clsRCoordPolarParam)
+            If ucrSaveSummaryBar.bUserTyped = False Then
+                ucrSaveSummaryBar.SetPrefix("pie")
             End If
         End If
     End Sub
