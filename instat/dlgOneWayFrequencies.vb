@@ -71,8 +71,8 @@ Public Class dlgOneWayFrequencies
         'setting rdoBoth 
         ucrPnlFrequencies.AddFunctionNamesCondition(rdoBoth, "sjplot")
         ucrPnlFrequencies.AddFunctionNamesCondition(rdoBoth, "sjtab")
-        ucrPnlFrequencies.AddToLinkedControls(ucrChkFlip, {rdoGraph, rdoBoth}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrPnlFrequencies.AddToLinkedControls(ucrSaveGraph, {rdoGraph, rdoBoth}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlFrequencies.AddToLinkedControls(ucrChkFlip, {rdoGraph, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFrequencies.AddToLinkedControls(ucrSaveGraph, {rdoGraph, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrNudGroups.SetParameter(New RParameter("auto.group", 9))
         ucrNudGroups.SetMinMax(2, 100)
@@ -89,7 +89,7 @@ Public Class dlgOneWayFrequencies
         ucrChkFlip.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkFlip.SetRDefault("FALSE")
 
-        ucrSaveGraph.SetPrefix("Graph")
+        ucrSaveGraph.SetPrefix("one_way_freq")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorOneWayFreq.ucrAvailableDataFrames)
         ucrSaveGraph.SetCheckBoxText("Save Graph")
