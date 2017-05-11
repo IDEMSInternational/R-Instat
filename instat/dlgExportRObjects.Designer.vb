@@ -27,8 +27,8 @@ Partial Class dlgExportRObjects
         Me.ucrSelectorObjects = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrInputExportFile = New instat.ucrInputTextBox()
-        Me.cmdBrowse = New System.Windows.Forms.Button()
         Me.lblExportFile = New System.Windows.Forms.Label()
+        Me.cmdBrowse = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lblObjects
@@ -78,15 +78,6 @@ Partial Class dlgExportRObjects
         Me.ucrInputExportFile.Size = New System.Drawing.Size(251, 21)
         Me.ucrInputExportFile.TabIndex = 4
         '
-        'cmdBrowse
-        '
-        Me.cmdBrowse.Location = New System.Drawing.Point(346, 203)
-        Me.cmdBrowse.Name = "cmdBrowse"
-        Me.cmdBrowse.Size = New System.Drawing.Size(62, 23)
-        Me.cmdBrowse.TabIndex = 5
-        Me.cmdBrowse.Text = "Browse"
-        Me.cmdBrowse.UseVisualStyleBackColor = True
-        '
         'lblExportFile
         '
         Me.lblExportFile.AutoSize = True
@@ -95,6 +86,15 @@ Partial Class dlgExportRObjects
         Me.lblExportFile.Size = New System.Drawing.Size(59, 13)
         Me.lblExportFile.TabIndex = 3
         Me.lblExportFile.Text = "Export File:"
+        '
+        'cmdBrowse
+        '
+        Me.cmdBrowse.Location = New System.Drawing.Point(346, 203)
+        Me.cmdBrowse.Name = "cmdBrowse"
+        Me.cmdBrowse.Size = New System.Drawing.Size(62, 23)
+        Me.cmdBrowse.TabIndex = 5
+        Me.cmdBrowse.Text = "Browse..."
+        Me.cmdBrowse.UseVisualStyleBackColor = True
         '
         'dlgExportRObjects
         '
@@ -123,6 +123,6 @@ Partial Class dlgExportRObjects
     Friend WithEvents ucrReceiverObjects As ucrReceiverMultiple
     Friend WithEvents lblObjects As Label
     Friend WithEvents ucrInputExportFile As ucrInputTextBox
-    Friend WithEvents cmdBrowse As Button
     Friend WithEvents lblExportFile As Label
+    Friend WithEvents cmdBrowse As Button
 End Class
