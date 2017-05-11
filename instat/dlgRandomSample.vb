@@ -40,19 +40,19 @@ Public Class dlgRandomSample
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
-
+        ucrNudSeed.SetRCode(clsSetSeed, bReset)
+        ucrChkSetSeed.SetRCode(clsSetSeed, bReset)
+        ucrDistWithParameters.SetRCode(clsDistribtionFunction, bReset)
     End Sub
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 376
-
         ucrChkSetSeed.SetText("Set Seed:")
         ucrChkSetSeed.AddFunctionNamesCondition(False, "set.seed")
         ucrChkSetSeed.AddToLinkedControls(ucrNudSeed, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrNudSeed.SetParameter(New RParameter("seed", 0))
-        ucrNudSeed.Maximum = Integer.MaxValue
-        ucrNudSeed.Minimum = Integer.MinValue
+        ucrNudSeed.SetMinMax(Integer.MaxValue, Integer.MinValue)
 
         ucrSaveRandomSamples.SetSaveTypeAsColumn()
         ucrSaveRandomSamples.SetDataFrameSelector(ucrSelectorRandomSamples)
@@ -89,13 +89,19 @@ Public Class dlgRandomSample
     Private Sub SetDefaults()
         clsSetSeed = New RFunction
         clsMultipleSamplesFunction = New RFunction
+        clsDistribtionFunction = New RFunction
+        clsMultipleSamplesFunction = New RFunction
 
         ucrSelectorRandomSamples.Reset()
         clsMultipleSamplesFunction.SetRCommand("data.frame")
         clsSetSeed.SetRCommand("set.seed")
+        clsSetSeed.AddParameter("seed", 5)
 
-        SetDataFrameandDistributionParameters()
+        setnumberofsamplesparameters()
+        clsDistribtionFunction = ucrDistWithParameters.clsCurrRFunction
+        setdataframeanddistributionparameters()
         ucrDistWithParameters.SetParameters()
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDistribtionFunction)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -104,7 +110,7 @@ Public Class dlgRandomSample
         TestOKEnabled()
     End Sub
 
-    Private Sub SetDataFrameandDistributionParameters()
+    Private Sub setdataframeanddistributionparameters()
         If ucrDistWithParameters.clsCurrDistribution.strRName = "hyper" Then
             clsDistribtionFunction.AddParameter("nn", ucrSelectorRandomSamples.iDataFrameLength)
         Else
@@ -114,14 +120,14 @@ Public Class dlgRandomSample
         TestOKEnabled()
     End Sub
 
-    Private Sub SetNumberOfSamplesParameters()
+    Private Sub setnumberofsamplesparameters()
         If ucrNudNumberOfSamples.Text <> "" Then
             If ucrNudNumberOfSamples.Value = 1 Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsDistribtionFunction)
                 clsDistribtionFunction.RemoveAssignTo()
                 clsMultipleSamplesFunction.ClearParameters()
                 For i = 1 To ucrNudNumberOfSamples.Value
-                    clsMultipleSamplesFunction.AddParameter("X" & i, clsRFunctionParameter:=clsDistribtionFunction)
+                    clsMultipleSamplesFunction.AddParameter("x" & i, clsRFunctionParameter:=clsDistribtionFunction)
                 Next
                 ucrBase.clsRsyntax.SetBaseRFunction(clsMultipleSamplesFunction)
             End If
@@ -145,11 +151,11 @@ Public Class dlgRandomSample
     End Sub
 
     Private Sub ucrDistWithParameters_ucrInputDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrDistWithParameters.ucrInputDistributionsIndexChanged
-        SetDataFrameandDistributionParameters()
+        setdataframeanddistributionparameters()
     End Sub
 
     Private Sub ucrSelectorRandomSamples_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorRandomSamples.ControlValueChanged
-        SetDataFrameandDistributionParameters()
+        setdataframeanddistributionparameters()
         TestOKEnabled()
     End Sub
 
