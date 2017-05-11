@@ -296,7 +296,11 @@ summary_sum <- function (x, na.rm = FALSE,...) {
 }
 
 summary_count <- function(x,...) {
-  return(length(x))
+    return(length(x))
+}
+
+summary_dataframe_length <- function(...) {
+  return(n())
 }
 
 summary_count_missing <- function(x,...) {
@@ -351,7 +355,7 @@ instat_object$set("public", "summary_table", function(data_name, columns_to_summ
   # note: it is not always summary_count, it's any of the summary statistics used.
   # it's not data_name. It's the name given to the dataset, e.g., Survey_by_Village._Variety._Fertgrp.
   
-  cell_values <- dcast(formula = row_factors ~ column_factors, value.var = "summary_count", data = cell_values) 
+  cell_values <- dcast(formula = row_factors ~ column_factors, value.var = cell_values[0], data = cell_values[1]) 
   
   
   if(include_margins) {

@@ -113,7 +113,7 @@ data_object$set("public", "save_calculation", function(calc) {
 
 instat_calculation <- R6Class("instat_calculation",
                        public = list(
-                         initialize = function(function_exp = "", type = "", name = "calc", result_name = "", manipulations = list(),
+                         initialize = function(function_exp = "", type = "", name = "", result_name = "", manipulations = list(),
                                                sub_calculations = list(), calculated_from = list(), save = 0) {
                            if((type == "calculation" || type == "summary") && missing(result_name)) stop("result_name must be provided for calculation and summary types")
                            if(type == "combination" && save > 0) {
@@ -130,7 +130,7 @@ instat_calculation <- R6Class("instat_calculation",
                            self$calculated_from <- calculated_from
                            self$save <- save
                          },
-                         name = "calc",
+                         name = "",
                          result_name = "",
                          type = "",
                          manipulations = list(),
@@ -139,6 +139,16 @@ instat_calculation <- R6Class("instat_calculation",
                          calculated_from = list(),
                          save = 0
                        )
+)
+
+instat_calculation$set("public", "data_clone", function() {
+  ret <- calculation$new(function_exp = self$function_exp, type = self$type,
+                         name = self$name, result_name = self$result_name, 
+                         manipulations = lapply(self$manipulations, function(x) x$data_clone()), 
+                         sub_calculations = lapply(self$sub_calculations, function(x) x$data_clone()),
+                         calculated_from = self$calculated_from, save = self$save)
+  return(ret)
+}
 )
 
 # Calculation labels
