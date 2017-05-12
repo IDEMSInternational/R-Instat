@@ -17,108 +17,124 @@
 Imports instat.Translations
 Public Class dlgCumulativeDistribution
     Private clsRggplotFunction As New RFunction
-    Private clsRgeom_CumDistFunction As New RFunction
+    Private clsRgeomCumDistFunction As New RFunction
     Private clsRaesFunction As New RFunction
-    Public bFirstLoad As Boolean = True
+    Private clsBaseOperator As New ROperator
+    Private bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
+
     Private Sub dlgCumulativeDistribution_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitaliseDialog()
-            SetDefaults()
             bFirstLoad = False
         End If
+
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        autoTranslate(Me)
         TestOkEnabled()
     End Sub
-    Public Sub InitaliseDialog()
-        ucrBase.clsRsyntax.SetOperation("+")
-        clsRggplotFunction.SetRCommand("ggplot")
-        clsRaesFunction.SetRCommand("aes")
-        clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
-        ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
-        clsRgeom_CumDistFunction.SetRCommand("stat_ecdf")
-        ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_CumDistFunction)
 
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrFactorReceiver.SetRCode(clsRaesFunction, bReset)
+        ucrVariablesAsFactorforCumDist.SetRCode(clsRaesFunction, bReset)
+        ucrSaveCumDist.SetRCode(clsBaseOperator, bReset)
+        ucrCumDistSelector.SetRCode(clsRggplotFunction, bReset)
+        ucrChkExceedancePlots.SetRCode(clsBaseOperator, bReset)
+    End Sub
+
+    Public Sub InitaliseDialog()
+        Dim clsScaleyrverseFunc As New RFunction
+        Dim clsScaleyrversParam As New RParameter
+
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        ucrBase.clsRsyntax.iCallType = 3
+        ucrBase.iHelpTopicID = 453
+
+        ucrCumDistSelector.SetParameter(New RParameter("data", 0))
+        ucrCumDistSelector.SetParameterIsrfunction()
 
         ucrFactorReceiver.Selector = ucrCumDistSelector
         ucrFactorReceiver.SetIncludedDataTypes({"factor"})
-        ucrBase.clsRsyntax.iCallType = 0
-        ucrBase.iHelpTopicID = 453
+        ucrFactorReceiver.SetParameter(New RParameter("colour", 1))
+        ucrFactorReceiver.SetParameterIsString()
+        ucrFactorReceiver.bWithQuotes = False
 
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
-
 
         ucrVariablesAsFactorforCumDist.SetFactorReceiver(ucrFactorReceiver)
         ucrVariablesAsFactorforCumDist.Selector = ucrCumDistSelector
         ucrVariablesAsFactorforCumDist.SetIncludedDataTypes({"numeric"})
+        ucrVariablesAsFactorforCumDist.SetParameter(New RParameter("x", 0))
+        ucrVariablesAsFactorforCumDist.SetParameterIsString()
+        ucrVariablesAsFactorforCumDist.bWithQuotes = False
 
+        clsScaleyrverseFunc.SetPackageName("ggplot2")
+        clsScaleyrverseFunc.SetRCommand("scale_y_reverse")
+        clsScaleyrverseFunc.AddParameter("breaks", "seq(1,0,-0.25), labels = seq(0,1,0.25)")
+        clsScaleyrversParam.SetArgumentName("scale_y_reverse")
+        clsScaleyrversParam.SetArgument(clsScaleyrverseFunc)
 
+        ucrChkExceedancePlots.SetText("Exceedance Plots")
+        ucrChkExceedancePlots.SetParameter(clsScaleyrversParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
+        ucrSaveCumDist.SetPrefix("cumdist")
+        ucrSaveCumDist.SetSaveTypeAsGraph()
+        ucrSaveCumDist.SetIsComboBox()
+        ucrSaveCumDist.SetCheckBoxText("Save Graph")
+        ucrSaveCumDist.SetAssignToIfUncheckedValue("last_graph")
         ucrSaveCumDist.SetDataFrameSelector(ucrCumDistSelector.ucrAvailableDataFrames)
-        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        ucrBase.clsRsyntax.iCallType = 3
+
     End Sub
 
     Private Sub SetDefaults()
-        'set defaults here 
-        ucrSaveCumDist.strPrefix = "Graph"
+        clsBaseOperator = New ROperator
+        clsRaesFunction = New RFunction
+        clsRgeomCumDistFunction = New RFunction
+        clsRggplotFunction = New RFunction
+
         ucrCumDistSelector.Reset()
         ucrCumDistSelector.Focus()
-        chkCountsOnYAxis.Checked = False
-        chkExceedancePlots.Checked = True
-        chkIncludePoints.Checked = False
         ucrSaveCumDist.Reset()
         sdgPlots.Reset()
-        TestOkEnabled()
+
+        clsBaseOperator.SetOperation("+")
+        clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
+        clsBaseOperator.AddParameter("stat_ecdf", clsRFunctionParameter:=clsRgeomCumDistFunction, iPosition:=1)
+
+        clsRggplotFunction.SetPackageName("ggplot2")
+        clsRggplotFunction.SetRCommand("ggplot")
+
+        clsRaesFunction.SetPackageName("ggplot2")
+        clsRaesFunction.SetRCommand("aes")
+        clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction, iPosition:=1)
+
+        clsRgeomCumDistFunction.SetPackageName("ggplot2")
+        clsRgeomCumDistFunction.SetRCommand("stat_ecdf")
+
+        clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrCumDistSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
     End Sub
 
     Private Sub TestOkEnabled()
-        'TODO what enables ok
-        If ucrVariablesAsFactorforCumDist.IsEmpty OrElse (ucrSaveCumDist.chkSaveGraph.Checked AndAlso ucrSaveCumDist.ucrInputGraphName.IsEmpty) Then
+        If ucrVariablesAsFactorforCumDist.IsEmpty OrElse Not ucrSaveCumDist.IsComplete Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
         End If
     End Sub
-    Private Sub ucrCumDistSelector_DataFrameChanged() Handles ucrCumDistSelector.DataFrameChanged
-        clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrCumDistSelector.ucrAvailableDataFrames.clsCurrDataFrame)
-    End Sub
-    Private Sub ucrFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrFactorReceiver.SelectionChanged
-        If Not ucrFactorReceiver.IsEmpty Then
-            clsRaesFunction.AddParameter("colour", ucrFactorReceiver.GetVariableNames(False))
-        Else
-            clsRaesFunction.RemoveParameterByName("colour")
-        End If
+
+    Private Sub AllControls_ControlContentsChanged() Handles ucrVariablesAsFactorforCumDist.ControlContentsChanged, ucrSaveCumDist.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-    End Sub
-
-    Private Sub ucrVariablesAsFactorforCumDist_SelectionChanged() Handles ucrVariablesAsFactorforCumDist.SelectionChanged
-        If Not ucrVariablesAsFactorforCumDist.IsEmpty Then
-            clsRaesFunction.AddParameter("x", ucrVariablesAsFactorforCumDist.GetVariableNames(False))
-        Else
-            clsRaesFunction.RemoveParameterByName("x")
-        End If
+        SetRCodeForControls(True)
         TestOkEnabled()
-    End Sub
-
-    Private Sub chkExceedancePlots_CheckedChanged(sender As Object, e As EventArgs) Handles chkExceedancePlots.CheckedChanged
-        Dim clsTempRFunc As New RFunction
-        If chkExceedancePlots.Checked Then
-            clsTempRFunc.SetRCommand("scale_y_reverse")
-            clsTempRFunc.AddParameter("breaks", "seq(1,0,-0.25), labels = seq(0,1,0.25)")
-            ucrBase.clsRsyntax.AddOperatorParameter("scale_y_reverse", clsRFunc:=clsTempRFunc)
-        Else
-            ucrBase.clsRsyntax.RemoveOperatorParameter("scale_y_reverse")
-        End If
-    End Sub
-
-    Private Sub ucrSaveCumDist_GraphNameChanged() Handles ucrSaveCumDist.GraphNameChanged, ucrSaveCumDist.SaveGraphCheckedChanged
-        If ucrSaveCumDist.bSaveGraph Then
-            ucrBase.clsRsyntax.SetAssignTo(ucrSaveCumDist.strGraphName, strTempDataframe:=ucrCumDistSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveCumDist.strGraphName)
-        Else
-            ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrCumDistSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
-        End If
     End Sub
 
     Private Sub cmdPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdPlotOptions.Click
@@ -130,7 +146,7 @@ Public Class dlgCumulativeDistribution
         sdgLayerOptions.ShowDialog()
     End Sub
 
-    Private Sub ucrSaveCumDist_ContentsChanged() Handles ucrSaveCumDist.ContentsChanged
-        TestOkEnabled()
+    Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorforCumDist.ControlContentsChanged, ucrSaveCumDist.ControlContentsChanged
+
     End Sub
 End Class

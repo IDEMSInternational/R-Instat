@@ -23,16 +23,16 @@ Partial Class dlgCumulativeDistribution
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblFactors = New System.Windows.Forms.Label()
-        Me.chkExceedancePlots = New System.Windows.Forms.CheckBox()
         Me.chkCountsOnYAxis = New System.Windows.Forms.CheckBox()
         Me.chkIncludePoints = New System.Windows.Forms.CheckBox()
         Me.cmdLineOptions = New System.Windows.Forms.Button()
         Me.cmdPlotOptions = New System.Windows.Forms.Button()
+        Me.ucrChkExceedancePlots = New instat.ucrCheck()
+        Me.ucrSaveCumDist = New instat.ucrSave()
+        Me.ucrVariablesAsFactorforCumDist = New instat.ucrVariablesAsFactor()
         Me.ucrFactorReceiver = New instat.ucrReceiverSingle()
         Me.ucrCumDistSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSaveCumDist = New instat.ucrSaveGraph()
-        Me.ucrVariablesAsFactorforCumDist = New instat.ucrVariablesAsFactor()
         Me.SuspendLayout()
         '
         'lblFactors
@@ -41,20 +41,9 @@ Partial Class dlgCumulativeDistribution
         Me.lblFactors.Location = New System.Drawing.Point(255, 173)
         Me.lblFactors.Name = "lblFactors"
         Me.lblFactors.Size = New System.Drawing.Size(88, 13)
-        Me.lblFactors.TabIndex = 3
+        Me.lblFactors.TabIndex = 2
         Me.lblFactors.Tag = "Factors_Optional:"
         Me.lblFactors.Text = "Factor (Optional):"
-        '
-        'chkExceedancePlots
-        '
-        Me.chkExceedancePlots.AutoSize = True
-        Me.chkExceedancePlots.Location = New System.Drawing.Point(255, 217)
-        Me.chkExceedancePlots.Name = "chkExceedancePlots"
-        Me.chkExceedancePlots.Size = New System.Drawing.Size(112, 17)
-        Me.chkExceedancePlots.TabIndex = 5
-        Me.chkExceedancePlots.Tag = "Exceedance_Plots"
-        Me.chkExceedancePlots.Text = "Exceedance Plots"
-        Me.chkExceedancePlots.UseVisualStyleBackColor = True
         '
         'chkCountsOnYAxis
         '
@@ -63,7 +52,7 @@ Partial Class dlgCumulativeDistribution
         Me.chkCountsOnYAxis.Location = New System.Drawing.Point(255, 240)
         Me.chkCountsOnYAxis.Name = "chkCountsOnYAxis"
         Me.chkCountsOnYAxis.Size = New System.Drawing.Size(108, 17)
-        Me.chkCountsOnYAxis.TabIndex = 6
+        Me.chkCountsOnYAxis.TabIndex = 5
         Me.chkCountsOnYAxis.Tag = "Counts_On_YAxis"
         Me.chkCountsOnYAxis.Text = "Counts On Y-Axis"
         Me.chkCountsOnYAxis.UseVisualStyleBackColor = True
@@ -75,17 +64,18 @@ Partial Class dlgCumulativeDistribution
         Me.chkIncludePoints.Location = New System.Drawing.Point(255, 263)
         Me.chkIncludePoints.Name = "chkIncludePoints"
         Me.chkIncludePoints.Size = New System.Drawing.Size(93, 17)
-        Me.chkIncludePoints.TabIndex = 7
+        Me.chkIncludePoints.TabIndex = 6
         Me.chkIncludePoints.Tag = "Include Points"
         Me.chkIncludePoints.Text = "Include Points"
         Me.chkIncludePoints.UseVisualStyleBackColor = True
         '
         'cmdLineOptions
         '
+        Me.cmdLineOptions.Enabled = False
         Me.cmdLineOptions.Location = New System.Drawing.Point(10, 198)
         Me.cmdLineOptions.Name = "cmdLineOptions"
         Me.cmdLineOptions.Size = New System.Drawing.Size(120, 25)
-        Me.cmdLineOptions.TabIndex = 8
+        Me.cmdLineOptions.TabIndex = 7
         Me.cmdLineOptions.Tag = "Line_Options"
         Me.cmdLineOptions.Text = "Line Options"
         Me.cmdLineOptions.UseVisualStyleBackColor = True
@@ -95,10 +85,36 @@ Partial Class dlgCumulativeDistribution
         Me.cmdPlotOptions.Location = New System.Drawing.Point(10, 235)
         Me.cmdPlotOptions.Name = "cmdPlotOptions"
         Me.cmdPlotOptions.Size = New System.Drawing.Size(120, 25)
-        Me.cmdPlotOptions.TabIndex = 9
+        Me.cmdPlotOptions.TabIndex = 8
         Me.cmdPlotOptions.Tag = "Plot_Options"
         Me.cmdPlotOptions.Text = "Plot Options"
         Me.cmdPlotOptions.UseVisualStyleBackColor = True
+        '
+        'ucrChkExceedancePlots
+        '
+        Me.ucrChkExceedancePlots.Checked = False
+        Me.ucrChkExceedancePlots.Location = New System.Drawing.Point(255, 214)
+        Me.ucrChkExceedancePlots.Name = "ucrChkExceedancePlots"
+        Me.ucrChkExceedancePlots.Size = New System.Drawing.Size(152, 20)
+        Me.ucrChkExceedancePlots.TabIndex = 4
+        '
+        'ucrSaveCumDist
+        '
+        Me.ucrSaveCumDist.Location = New System.Drawing.Point(10, 284)
+        Me.ucrSaveCumDist.Name = "ucrSaveCumDist"
+        Me.ucrSaveCumDist.Size = New System.Drawing.Size(255, 24)
+        Me.ucrSaveCumDist.TabIndex = 9
+        '
+        'ucrVariablesAsFactorforCumDist
+        '
+        Me.ucrVariablesAsFactorforCumDist.frmParent = Me
+        Me.ucrVariablesAsFactorforCumDist.Location = New System.Drawing.Point(255, 25)
+        Me.ucrVariablesAsFactorforCumDist.Name = "ucrVariablesAsFactorforCumDist"
+        Me.ucrVariablesAsFactorforCumDist.Selector = Nothing
+        Me.ucrVariablesAsFactorforCumDist.Size = New System.Drawing.Size(125, 136)
+        Me.ucrVariablesAsFactorforCumDist.TabIndex = 1
+        Me.ucrVariablesAsFactorforCumDist.ucrSelector = Nothing
+        Me.ucrVariablesAsFactorforCumDist.ucrVariableSelector = Nothing
         '
         'ucrFactorReceiver
         '
@@ -108,7 +124,8 @@ Partial Class dlgCumulativeDistribution
         Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
         Me.ucrFactorReceiver.Selector = Nothing
         Me.ucrFactorReceiver.Size = New System.Drawing.Size(125, 26)
-        Me.ucrFactorReceiver.TabIndex = 4
+        Me.ucrFactorReceiver.TabIndex = 3
+        Me.ucrFactorReceiver.ucrSelector = Nothing
         '
         'ucrCumDistSelector
         '
@@ -125,36 +142,21 @@ Partial Class dlgCumulativeDistribution
         Me.ucrBase.Location = New System.Drawing.Point(12, 318)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 11
-        '
-        'ucrSaveCumDist
-        '
-        Me.ucrSaveCumDist.Location = New System.Drawing.Point(12, 292)
-        Me.ucrSaveCumDist.Name = "ucrSaveCumDist"
-        Me.ucrSaveCumDist.Size = New System.Drawing.Size(265, 20)
-        Me.ucrSaveCumDist.TabIndex = 10
-        '
-        'ucrVariablesAsFactorforCumDist
-        '
-        Me.ucrVariablesAsFactorforCumDist.Location = New System.Drawing.Point(255, 25)
-        Me.ucrVariablesAsFactorforCumDist.Name = "ucrVariablesAsFactorforCumDist"
-        Me.ucrVariablesAsFactorforCumDist.Size = New System.Drawing.Size(125, 136)
-        Me.ucrVariablesAsFactorforCumDist.TabIndex = 2
-        Me.ucrVariablesAsFactorforCumDist.ucrVariableSelector = Nothing
+        Me.ucrBase.TabIndex = 10
         '
         'dlgCumulativeDistribution
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(419, 379)
-        Me.Controls.Add(Me.ucrVariablesAsFactorforCumDist)
+        Me.Controls.Add(Me.ucrChkExceedancePlots)
         Me.Controls.Add(Me.ucrSaveCumDist)
+        Me.Controls.Add(Me.ucrVariablesAsFactorforCumDist)
         Me.Controls.Add(Me.ucrFactorReceiver)
         Me.Controls.Add(Me.cmdPlotOptions)
         Me.Controls.Add(Me.cmdLineOptions)
         Me.Controls.Add(Me.chkIncludePoints)
         Me.Controls.Add(Me.chkCountsOnYAxis)
-        Me.Controls.Add(Me.chkExceedancePlots)
         Me.Controls.Add(Me.lblFactors)
         Me.Controls.Add(Me.ucrCumDistSelector)
         Me.Controls.Add(Me.ucrBase)
@@ -173,12 +175,12 @@ Partial Class dlgCumulativeDistribution
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrCumDistSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblFactors As Label
-    Friend WithEvents chkExceedancePlots As CheckBox
     Friend WithEvents chkCountsOnYAxis As CheckBox
     Friend WithEvents chkIncludePoints As CheckBox
     Friend WithEvents cmdLineOptions As Button
     Friend WithEvents cmdPlotOptions As Button
     Friend WithEvents ucrFactorReceiver As ucrReceiverSingle
-    Friend WithEvents ucrSaveCumDist As ucrSaveGraph
     Friend WithEvents ucrVariablesAsFactorforCumDist As ucrVariablesAsFactor
+    Friend WithEvents ucrSaveCumDist As ucrSave
+    Friend WithEvents ucrChkExceedancePlots As ucrCheck
 End Class
