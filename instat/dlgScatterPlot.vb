@@ -70,7 +70,7 @@ Public Class dlgScatterPlot
 
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
 
-        ucrSaveScatterPlot.SetPrefix("Scatter")
+        ucrSaveScatterPlot.SetPrefix("scatterplot")
         ucrSaveScatterPlot.SetSaveTypeAsGraph()
         ucrSaveScatterPlot.SetDataFrameSelector(ucrSelectorForScatter.ucrAvailableDataFrames)
         ucrSaveScatterPlot.SetCheckBoxText("Save Graph")
