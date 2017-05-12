@@ -38,12 +38,26 @@ Public Class dlgStringDistance
         ucrReceiverStringDistance.SetParameter(New RParameter("a", 0))
         ucrReceiverStringDistance.SetParameterIsRFunction()
         ucrReceiverStringDistance.Selector = ucrSelectorStringDistance
+        ucrReceiverColumn.Selector = ucrSelectorStringDistance
         ucrReceiverStringDistance.SetMeAsReceiver()
 
+        ucrInputComboBoxMethod.cboInput.DropDownStyle = ComboBoxStyle.DropDownList
         ucrInputPatternStringDistance.SetParameter(New RParameter("b", 1))
+        ucrReceiverColumn.SetParameter(New RParameter("b", 1))
+        ucrReceiverColumn.SetParameterIsRFunction()
+
+        ucrPnlStringDist.AddRadioButton(rdoString)
+        ucrPnlStringDist.AddRadioButton(rdoColumn)
+
+        ucrPnlStringDist.AddToLinkedControls(ucrInputPatternStringDistance, {rdoString}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrReceiverColumn.SetLinkedDisplayControl(lblColumnString)
+        ucrPnlStringDist.AddToLinkedControls(ucrReceiverColumn, {rdoColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputPatternStringDistance.SetLinkedDisplayControl(lblPattern)
+
+        ucrPnlStringDist.AddParameterValuesCondition(rdoColumn, "b", ucrReceiverColumn.GetVariableNames.Trim(Chr(34)))
+        ucrPnlStringDist.AddParameterValuesCondition(rdoString, "b", Chr(34) & ucrInputPatternStringDistance.GetText & Chr(34))
 
         ucrInputComboBoxMethod.SetParameter(New RParameter("method", 2))
-
         Dim dctMethod As New Dictionary(Of String, String)
         dctMethod.Add("Optimal String Alignment", Chr(34) & "osa" & Chr(34))
         dctMethod.Add("Levenshtein Distance", Chr(34) & "lv" & Chr(34))
@@ -56,8 +70,8 @@ Public Class dlgStringDistance
         dctMethod.Add("Jaro or Jaro-Winker Distance", Chr(34) & "jw" & Chr(34))
         dctMethod.Add("Distance based on Soundex Encoding", Chr(34) & "soundex" & Chr(34))
         ucrInputComboBoxMethod.SetItems(dctMethod)
-        ucrInputComboBoxMethod.SetRDefault(Chr(34) & "osa" & Chr(34))
-        'ucrSave
+        'ucrInputComboBoxMethod.SetRDefault(Chr(34) & "osa" & Chr(34))
+
         ucrSaveStringDistance.SetPrefix("Dist")
         ucrSaveStringDistance.SetSaveTypeAsColumn()
         ucrSaveStringDistance.SetDataFrameSelector(ucrSelectorStringDistance.ucrAvailableDataFrames)
@@ -71,10 +85,12 @@ Public Class dlgStringDistance
         ucrSelectorStringDistance.Reset()
         ucrSaveStringDistance.Reset()
         ucrInputComboBoxMethod.Reset()
-        ucrInputPatternStringDistance.Reset()
+
         clsStringDistFunction.SetPackageName("stringdist")
         clsStringDistFunction.SetRCommand("stringdist")
+        ucrInputPatternStringDistance.Reset()
         clsStringDistFunction.AddParameter("method", Chr(34) & "osa" & Chr(34))
+        clsStringDistFunction.AddParameter("b", ucrInputPatternStringDistance.GetText)
         ucrBase.clsRsyntax.SetBaseRFunction(clsStringDistFunction)
     End Sub
 
@@ -83,7 +99,9 @@ Public Class dlgStringDistance
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverStringDistance.IsEmpty() AndAlso Not ucrInputPatternStringDistance.IsEmpty() AndAlso Not ucrInputComboBoxMethod.IsEmpty AndAlso ucrSaveStringDistance.IsComplete() Then
+        If rdoColumn.Checked AndAlso Not ucrReceiverColumn.IsEmpty() AndAlso Not ucrReceiverStringDistance.IsEmpty() AndAlso ucrSaveStringDistance.IsComplete() AndAlso Not ucrInputComboBoxMethod.IsEmpty Then
+            ucrBase.OKEnabled(True)
+        ElseIf rdoString.Checked AndAlso Not ucrReceiverStringDistance.IsEmpty() AndAlso Not ucrInputPatternStringDistance.IsEmpty() AndAlso ucrSaveStringDistance.IsComplete() AndAlso Not ucrInputComboBoxMethod.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -96,7 +114,7 @@ Public Class dlgStringDistance
         TestOkEnabled()
     End Sub
 
-    Private Sub UcrReceiverStringDistance_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStringDistance.ControlContentsChanged, ucrSaveStringDistance.ControlContentsChanged, ucrInputPatternStringDistance.ControlContentsChanged, ucrInputComboBoxMethod.ControlContentsChanged
+    Private Sub UcrReceiverStringDistance_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStringDistance.ControlContentsChanged, ucrReceiverColumn.ControlContentsChanged, ucrSaveStringDistance.ControlContentsChanged, ucrInputPatternStringDistance.ControlContentsChanged, ucrInputComboBoxMethod.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
