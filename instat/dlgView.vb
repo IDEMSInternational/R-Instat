@@ -104,11 +104,9 @@ Public Class dlgView
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrPnlDisplayFrom.SetRCode(clsMainFunction, bReset)
         ucrReceiverView.SetRCode(clsMainFunction, bReset)
-        ucrChkSpecifyRows.SetRCode(clsMainFunction, bReset)
         ucrPnlDisplayWindow.SetRCode(clsMainFunction, bReset)
-        ucrPnlDisplayFrom.SetRCode(clsMainFunction, bReset)
+    ucrPnlDisplayFrom.SetRCode(clsMainFunction, bReset)
         ucrNudNumberRows.SetRCode(clsMainFunction, bReset)
         ucrReceiverView.AddAdditionalCodeParameterPair(clsViewDataFrame, New RParameter("mydf"), iAdditionalPairNo:=1)
         ucrSelectorForView.SetRCode(clsMainFunction, bReset)
@@ -188,11 +186,12 @@ Public Class dlgView
     End Sub
 
     Private Sub ucrChkSortColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSortColumn.ControlValueChanged, ucrPnlDisplayWindow.ControlValueChanged
-        If rdoHTMLOutputWindow.Checked AndAlso ucrChkSortColumn.Checked Then
+        If rdoHTMLOutputWindow.Checked Then
             ucrReceiverSortCol.SetMeAsReceiver()
         Else
             ucrReceiverView.SetMeAsReceiver()
         End If
+        SetRCodeForControls(True)
     End Sub
 
     Private Sub ucrSelectorForView_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForView.ControlValueChanged
