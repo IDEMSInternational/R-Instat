@@ -145,6 +145,17 @@ Public Class dlgView
         TestOKEnabled()
     End Sub
 
+    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
+        If rdoDispOutputWindow.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsMainFunction)
+            ucrBase.clsRsyntax.iCallType = 2
+        ElseIf rdoDispSepOutputWindow.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsMainFunction)
+        Else
+            ucrBase.clsRsyntax.SetBaseRFunction(clsViewDataFrame)
+        End If
+    End Sub
+
     Private Sub ChangeFunctionParameters()
         If rdoDispOutputWindow.Checked Then
             If ucrChkSpecifyRows.Checked Then
@@ -174,17 +185,6 @@ Public Class dlgView
 
     Private Sub DataFrameLength()
         ucrNudNumberRows.Maximum = ucrSelectorForView.ucrAvailableDataFrames.iDataFrameLength
-    End Sub
-
-    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        If rdoDispOutputWindow.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsMainFunction)
-            ucrBase.clsRsyntax.iCallType = 2
-        ElseIf rdoDispSepOutputWindow.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsMainFunction)
-        Else
-            ucrBase.clsRsyntax.SetBaseRFunction(clsViewDataFrame)
-        End If
     End Sub
 
     Private Sub ucrChkSortColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSortColumn.ControlValueChanged, ucrPnlDisplayWindow.ControlValueChanged
