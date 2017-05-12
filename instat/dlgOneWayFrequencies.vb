@@ -116,6 +116,7 @@ Public Class dlgOneWayFrequencies
 
         clsSjTab.AddParameter("show.summary", "FALSE")
         clsSjTab.AddParameter("digits", 0)
+        clsSjTab.AddParameter("ignore.strings", "FALSE")
 
         clsSjPlot.SetPackageName("sjPlot")
         clsSjPlot.SetRCommand("sjplot")
