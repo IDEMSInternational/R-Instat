@@ -130,12 +130,12 @@ Public Class dlgThreeVariableFrequencies
         ucrPnlFreqType.AddParameterValuesCondition(rdoColumn, "margin", Chr(34) & "col" & Chr(34))
 
         ucrSaveGraph.Enabled = False 'temporary for now
-        ucrSaveGraph.SetPrefix("three_way_freq")
-        ucrSaveGraph.SetSaveTypeAsGraph()
-        ucrSaveGraph.SetDataFrameSelector(ucrSelectorThreeVariableFrequencies.ucrAvailableDataFrames)
-        ucrSaveGraph.SetCheckBoxText("Save Graph")
-        ucrSaveGraph.SetIsComboBox()
-        ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
+        'ucrSaveGraph.SetPrefix("three_way_freq")
+        'ucrSaveGraph.SetSaveTypeAsGraph()
+        'ucrSaveGraph.SetDataFrameSelector(ucrSelectorThreeVariableFrequencies.ucrAvailableDataFrames)
+        'ucrSaveGraph.SetCheckBoxText("Save Graph")
+        'ucrSaveGraph.SetIsComboBox()
+        'ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
 
         ucrChkColumn.SetLinkedDisplayControl(grpFreqTypeTable)
     End Sub
@@ -179,7 +179,7 @@ Public Class dlgThreeVariableFrequencies
         clsSjPlot.AddParameter("fun", Chr(34) & "grpfrq" & Chr(34))
         clsSjPlot.AddParameter("show.prc", "TRUE")
         clsSjPlot.AddParameter("show.n", "TRUE")
-        clsGraphBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorThreeVariableFrequencies.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        'clsGraphBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorThreeVariableFrequencies.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsTableBaseOperator)
         bResetSubdialog = True
     End Sub
