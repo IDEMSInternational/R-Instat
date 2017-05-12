@@ -13,90 +13,158 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 Public Class dlgBoxplot
     Private clsRggplotFunction As New RFunction
     'clsRggplotFunction is the global ggplot function, will be used as RFunction of the first RParameter of ucrBase.clsRSyntax (which has "+" as main command). It is emphasised as a public field as it is used/editted in the sdgLayerOptions. The link is operated via SetupLayer that sets sdgLayerOptions.clsGgplotFunction = dlgBoxPlot.clsRggplotFunction.
-    Private clsRgeom_boxplotFunction As New RFunction
+    Private clsRgeomPlotFunction As New RFunction
     Private clsRaesFunction As New RFunction
+    Private clsBaseOperator As New ROperator
     'Similarly clsRgeom_boxplotFunction and clsRaesFunction (respectively the geom_boxplot function and the global aes function) are given through SetupLayer to sdgLayerOptions for edit. 
     Private bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
 
     Private Sub dlgBoxPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         Else
-            ReopenDialog()
+            'SetGeomprefixFillColourAes()
         End If
-    End Sub
-    Public Sub SetCoordFlip()
-        Dim clsTempRFunc As New RFunction
-        If chkHorizontalBoxplot.Checked Then
-            clsTempRFunc.SetRCommand("coord_flip")
-            ucrBase.clsRsyntax.AddOperatorParameter("coord_flip", clsRFunc:=clsTempRFunc)
-        Else
-            ucrBase.clsRsyntax.RemoveOperatorParameter("coord_flip")
+        If bReset Then
+            SetDefaults()
         End If
-    End Sub
-
-    Private Sub SetDefaults()
-        clsRaesFunction.ClearParameters()
-        clsRgeom_boxplotFunction.ClearParameters()
-        ucrSelectorBoxPlot.Reset()
-        ucrSelectorBoxPlot.Focus()
-        ucrVariablesAsFactorForBoxplot.ResetControl()
-        ucrSaveBoxplot.strPrefix = "Boxplot"
-        chkHorizontalBoxplot.Checked = False
-        chkVarwidth.Checked = False
-        rdoBoxplot.Checked = True
-        'These chk boxes add features to the BoxPlot when ticked. See SetCorrdFlip and chkVarwidth_CheckedChanged. By default they are unticked.
-        ucrSaveBoxplot.Reset()
-        sdgPlots.Reset()
-        TempOptionsDisabledInMultipleVariablesCase()
+        SetRCodeForControls(bReset)
+        bReset = False
+        autoTranslate(Me)
         TestOkEnabled()
-        SetXParameter()
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.SetOperation("+")
-        clsRggplotFunction.SetRCommand("ggplot")
-        'clsRgeom_boxplotFunction.SetRCommand("geom_boxplot")
-        clsRaesFunction.SetRCommand("aes")
-        clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
-        ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
-        ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_boxplotFunction)
+        Dim clsCoordFlipFunc As New RFunction
+        Dim clsCoordFlipParam As New RParameter
+
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-
         ucrBase.iHelpTopicID = 436
+        ucrBase.clsRsyntax.iCallType = 3
 
+        ucrPnlPlots.AddRadioButton(rdoViolin)
+        ucrPnlPlots.AddRadioButton(rdoBoxplot)
+        ucrPnlPlots.AddRadioButton(rdoJitter)
+
+        ucrPnlPlots.AddFunctionNamesCondition(rdoBoxplot, "geom_boxplot")
+        ucrPnlPlots.AddFunctionNamesCondition(rdoJitter, "geom_jitter")
+        ucrPnlPlots.AddFunctionNamesCondition(rdoViolin, "geom_violin")
+        ucrPnlPlots.AddToLinkedControls(ucrChkVarWidth, {rdoBoxplot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrSelectorBoxPlot.SetParameter(New RParameter("data", 0))
+        ucrSelectorBoxPlot.SetParameterIsrfunction()
+
+        ucrVariablesAsFactorForBoxplot.SetParameter(New RParameter("y", 0))
+        ucrVariablesAsFactorForBoxplot.SetFactorReceiver(ucrByFactorsReceiver)
+        ucrVariablesAsFactorForBoxplot.Selector = ucrSelectorBoxPlot
+        ucrVariablesAsFactorForBoxplot.SetIncludedDataTypes({"numeric"})
+        ucrVariablesAsFactorForBoxplot.SetParameterIsString()
+        ucrVariablesAsFactorForBoxplot.bWithQuotes = False
+
+        ucrByFactorsReceiver.SetParameter(New RParameter("x", 1))
         ucrByFactorsReceiver.Selector = ucrSelectorBoxPlot
         ucrByFactorsReceiver.SetIncludedDataTypes({"factor"})
+        ucrByFactorsReceiver.SetParameterIsString()
+        ucrByFactorsReceiver.bWithQuotes = False
+        ucrByFactorsReceiver.SetValuesToIgnore({Chr(34) & Chr(34)})
+        ucrByFactorsReceiver.bAddParameterIfEmpty = True
 
+        ucrSecondFactorReceiver.SetParameter(New RParameter("fill", 2))
         ucrSecondFactorReceiver.Selector = ucrSelectorBoxPlot
         ucrSecondFactorReceiver.SetIncludedDataTypes({"factor"})
+        ucrSecondFactorReceiver.SetParameterIsString()
+        ucrSecondFactorReceiver.bWithQuotes = False
 
+        ucrChkVarWidth.SetParameter(New RParameter("varwidth", 1))
+        ucrChkVarWidth.SetText("Variable Width")
+        ucrChkVarWidth.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkVarWidth.SetRDefault("FALSE")
+
+        clsCoordFlipFunc.SetPackageName("ggplot2")
+        clsCoordFlipFunc.SetRCommand("coord_flip")
+        clsCoordFlipParam.SetArgumentName("coord_flip")
+        clsCoordFlipParam.SetArgument(clsCoordFlipFunc)
+        ucrChkHorizontalBoxplot.SetText("Horizontal Plot")
+        ucrChkHorizontalBoxplot.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
+        ucrSaveBoxplot.SetPrefix("Boxplot")
+        ucrSaveBoxplot.SetIsComboBox()
+        ucrSaveBoxplot.SetCheckBoxText("Save Graph")
+        ucrSaveBoxplot.SetSaveTypeAsGraph()
+        ucrSaveBoxplot.SetDataFrameSelector(ucrSelectorBoxPlot.ucrAvailableDataFrames)
+        ucrSaveBoxplot.SetAssignToIfUncheckedValue("last_graph")
 
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         sdgPlots.SetGgplotFunction(clsRggplotFunction)
+    End Sub
 
-        ucrVariablesAsFactorForBoxplot.SetFactorReceiver(ucrByFactorsReceiver)
-        ucrVariablesAsFactorForBoxplot.SetSelector(ucrSelectorBoxPlot)
-        ucrVariablesAsFactorForBoxplot.SetIncludedDataType({"numeric"})
+    Private Sub SetDefaults()
+        clsBaseOperator = New ROperator
+        clsRggplotFunction = New RFunction
+        clsRgeomPlotFunction = New RFunction
+        clsRaesFunction = New RFunction
 
+        ucrSelectorBoxPlot.Reset()
+        ucrSaveBoxplot.Reset()
+        sdgPlots.Reset()
 
-        ucrSaveBoxplot.SetDataFrameSelector(ucrSelectorBoxPlot.ucrAvailableDataFrames)
-        ucrBase.clsRsyntax.iCallType = 3
+        'rdoBoxplot.Checked = True
+        'These chk boxes add features to the BoxPlot when ticked. See SetCorrdFlip and chkVarwidth_CheckedChanged. By default they are unticked.
+        clsBaseOperator.SetOperation("+")
+        clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
+        clsBaseOperator.AddParameter("geomfunc", clsRFunctionParameter:=clsRgeomPlotFunction)
+
+        clsRggplotFunction.SetPackageName("ggplot2")
+        clsRggplotFunction.SetRCommand("ggplot")
+        clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction, iPosition:=1)
+
+        clsRaesFunction.SetPackageName("ggplot2")
+        clsRaesFunction.SetRCommand("aes")
+        clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
+
+        clsRgeomPlotFunction.SetPackageName("ggplot2")
+        clsRgeomPlotFunction.SetRCommand("geom_boxplot")
+        clsRgeomPlotFunction.AddParameter("varwidth", "FALSE")
+
+        clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
+        TempOptionsDisabledInMultipleVariablesCase()
+        TestOkEnabled()
+    End Sub
+
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        ucrSaveBoxplot.SetRCode(clsBaseOperator, bReset)
+        ucrSelectorBoxPlot.SetRCode(clsRggplotFunction, bReset)
+
+        ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
+        ucrChkVarWidth.SetRCode(clsRgeomPlotFunction, bReset)
+        'passes in +cordflip
+        ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
+        ucrVariablesAsFactorForBoxplot.SetRCode(clsRaesFunction, bReset)
+        ucrByFactorsReceiver.SetRCode(clsRaesFunction, bReset)
+        ucrSecondFactorReceiver.SetRCode(clsRaesFunction, bReset)
+        ucrPnlPlots.SetRCode(clsRgeomPlotFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrVariablesAsFactorForBoxplot.IsEmpty OrElse (ucrSaveBoxplot.chkSaveGraph.Checked AndAlso ucrSaveBoxplot.ucrInputGraphName.IsEmpty) Then
+        If ucrVariablesAsFactorForBoxplot.IsEmpty OrElse Not ucrSaveBoxplot.IsComplete Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
         End If
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
@@ -105,46 +173,18 @@ Public Class dlgBoxplot
         'Task: work on the link.
     End Sub
 
-    Private Sub ucrSelectorBoxPlot_DataFrameChanged() Handles ucrSelectorBoxPlot.DataFrameChanged
-        clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorBoxPlot.ucrAvailableDataFrames.clsCurrDataFrame)
-    End Sub
-
-    Private Sub ucrByFactorsReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrByFactorsReceiver.SelectionChanged
-        SetXParameter()
-    End Sub
-
-    Private Sub SetXParameter()
-        If Not ucrByFactorsReceiver.IsEmpty Then
-            clsRaesFunction.AddParameter("x", ucrByFactorsReceiver.GetVariableNames(False))
-        Else
-            clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
-        End If
-    End Sub
-
-    Private Sub ucrSecondFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrSecondFactorReceiver.SelectionChanged
-        FillColourAes()
-        'If Not ucrSecondFactorReceiver.IsEmpty Then
-        '    clsRaesFunction.AddParameter("fill", ucrSecondFactorReceiver.GetVariableNames(False))
-        'Else
-        '    clsRaesFunction.RemoveParameterByName("fill")
-        'End If
-    End Sub
-
-    Private Sub ReopenDialog()
-    End Sub
-
     Private Sub cmdBoxPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdBoxPlotOptions.Click
         'SetupLayer sends the components storing the plot info (clsRgeom_boxplotFunction, clsRggplotFunction, ...) of dlgBoxPlot through to sdgLayerOptions where these will be edited.
-        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_boxplotFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True, bIgnoreGlobalAes:=False)
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeomPlotFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True, bIgnoreGlobalAes:=False)
         sdgLayerOptions.ShowDialog()
         'Coming from the sdgLayerOptions, clsRgeom_boxplot and others has been modified. One then needs to display these modifications on the dlgBoxPlot.
-        If clsRgeom_boxplotFunction.GetParameter("varwidth") IsNot Nothing Then
-            If clsRgeom_boxplotFunction.GetParameter("varwidth").strArgumentValue = "TRUE" Then
-                chkVarwidth.Checked = True
+        If clsRgeomPlotFunction.GetParameter("varwidth") IsNot Nothing Then
+            If clsRgeomPlotFunction.GetParameter("varwidth").strArgumentValue = "TRUE" Then
+                ' chkVarwidth.Checked = True
                 'Observe that changing the check of the chkVarwidth here doesn't trigger the checkchanged event.
             End If
         Else
-            chkVarwidth.Checked = False
+            'chkVarwidth.Checked = False
         End If
 
         'The aesthetics parameters on the main dialog are repopulated as required. 
@@ -168,22 +208,24 @@ Public Class dlgBoxplot
         'ucrVariablesAsFactorForBoxplot.SetReceiverStatus()
     End Sub
 
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
-    End Sub
-
-    Private Sub chkHorizontalBoxplot_CheckedChanged(sender As Object, e As EventArgs) Handles chkHorizontalBoxplot.CheckedChanged
-        SetCoordFlip()
-    End Sub
-
-    Private Sub UcrVariablesAsFactor1_SelectionChanged() Handles ucrVariablesAsFactorForBoxplot.SelectionChanged
-        If Not ucrVariablesAsFactorForBoxplot.IsEmpty Then
-            clsRaesFunction.AddParameter("y", ucrVariablesAsFactorForBoxplot.GetVariableNames(False))
+    Private Sub SetGeomPrefixFillColourAes()
+        'Sets geom function, fill and colour aesthetics and ucrsave prefix
+        If rdoBoxplot.Checked Then
+            clsRgeomPlotFunction.SetRCommand("geom_boxplot")
+            ucrSaveBoxplot.SetPrefix("Boxplot")
+            ucrSecondFactorReceiver.ChangeParameterName("fill")
+            cmdBoxPlotOptions.Text = "Boxplot Options"
+        ElseIf rdoJitter.Checked Then
+            clsRgeomPlotFunction.SetRCommand("geom_jitter")
+            ucrSaveBoxplot.SetPrefix("Jitter")
+            ucrSecondFactorReceiver.ChangeParameterName("colour")
+            cmdBoxPlotOptions.Text = "Jitter Options"
         Else
-            clsRaesFunction.RemoveParameterByName("y")
+            clsRgeomPlotFunction.SetRCommand("geom_violin")
+            ucrSaveBoxplot.SetPrefix("Violin")
+            ucrSecondFactorReceiver.ChangeParameterName("fill")
+            cmdBoxPlotOptions.Text = "Violin Options"
         End If
-        TempOptionsDisabledInMultipleVariablesCase()
-        TestOkEnabled()
     End Sub
 
     Private Sub TempOptionsDisabledInMultipleVariablesCase()
@@ -195,61 +237,16 @@ Public Class dlgBoxplot
             cmdOptions.Enabled = False
         End If
     End Sub
-    Private Sub ucrSaveBoxplot_GraphNameChanged() Handles ucrSaveBoxplot.GraphNameChanged, ucrSaveBoxplot.SaveGraphCheckedChanged
-        If ucrSaveBoxplot.bSaveGraph Then
-            ucrBase.clsRsyntax.SetAssignTo(ucrSaveBoxplot.strGraphName, strTempDataframe:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveBoxplot.strGraphName)
-        Else
-            ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
-        End If
+
+    Private Sub ucrVariablesAsFactorForBoxplot_ControlContentsChanged() Handles ucrVariablesAsFactorForBoxplot.ControlContentsChanged
+        TempOptionsDisabledInMultipleVariablesCase()
+    End Sub
+
+    Private Sub ucrPnlPlots_ControlValueChanged() Handles ucrPnlPlots.ControlValueChanged
+        SetGeomprefixFillColourAes()
+    End Sub
+
+    Private Sub ucrSaveBoxplot_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveBoxplot.ControlContentsChanged, ucrVariablesAsFactorForBoxplot.ControlContentsChanged
         TestOkEnabled()
-    End Sub
-
-    Private Sub ucrSaveBoxplot_ContentsChanged() Handles ucrSaveBoxplot.ContentsChanged
-        TestOkEnabled()
-    End Sub
-
-    Private Sub chkVarwidth_CheckedChanged(sender As Object, e As EventArgs) Handles chkVarwidth.CheckedChanged
-        'If the Varwidth check box is ticked or unticked, the parameter "varwidth" is set to true or removed.
-        If chkVarwidth.Checked = True Then
-            clsRgeom_boxplotFunction.AddParameter("varwidth", "TRUE")
-        Else clsRgeom_boxplotFunction.RemoveParameterByName("varwidth")
-        End If
-    End Sub
-
-    Private Sub rdoBoxplot_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBoxplot.CheckedChanged, rdoJitter.CheckedChanged, rdoViolin.CheckedChanged
-        'Sets appropriate geom function depending with selection 
-        If rdoBoxplot.Checked Then
-            clsRgeom_boxplotFunction.SetRCommand("geom_boxplot")
-            chkHorizontalBoxplot.Text = "Horizontal Boxplot"
-        ElseIf rdoJitter.Checked
-            clsRgeom_boxplotFunction.SetRCommand("geom_jitter")
-            chkHorizontalBoxplot.Text = "Horizontal Jitter Plot"
-        Else
-            clsRgeom_boxplotFunction.SetRCommand("geom_violin")
-            chkHorizontalBoxplot.Text = "Horizontal Violin Plot"
-        End If
-        DisableVarWidth()
-        FillColourAes()
-    End Sub
-
-    Private Sub DisableVarWidth()
-        'Both vilon plot and Jitter plot can not have a varible width. User should not be able to check varible width
-        If rdoViolin.Checked OrElse rdoJitter.Checked Then
-            chkVarwidth.Visible = False
-        Else
-            chkVarwidth.Visible = True
-        End If
-    End Sub
-    Private Sub FillColourAes()
-        If (rdoBoxplot.Checked AndAlso Not ucrSecondFactorReceiver.IsEmpty) OrElse (rdoViolin.Checked AndAlso Not ucrSecondFactorReceiver.IsEmpty) Then
-
-            clsRaesFunction.AddParameter("fill", ucrSecondFactorReceiver.GetVariableNames(False))
-        ElseIf rdoJitter.Checked AndAlso Not ucrSecondFactorReceiver.IsEmpty Then
-
-            clsRaesFunction.AddParameter("colour", ucrSecondFactorReceiver.GetVariableNames(False))
-        Else
-            clsRaesFunction.RemoveParameterByName("fill")
-            clsRaesFunction.RemoveParameterByName("colour")
-        End If
     End Sub
 End Class
