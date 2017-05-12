@@ -38,17 +38,11 @@ Public Class dlgCumulativeDistribution
         TestOkEnabled()
     End Sub
 
-    Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrFactorReceiver.SetRCode(clsRaesFunction, bReset)
-        ucrVariablesAsFactorforCumDist.SetRCode(clsRaesFunction, bReset)
-        ucrSaveCumDist.SetRCode(clsBaseOperator, bReset)
-        ucrCumDistSelector.SetRCode(clsRggplotFunction, bReset)
-        ucrChkExceedancePlots.SetRCode(clsBaseOperator, bReset)
-    End Sub
-
-    Public Sub InitaliseDialog()
-        Dim clsScaleyrverseFunc As New RFunction
-        Dim clsScaleyrversParam As New RParameter
+    Private Sub InitaliseDialog()
+        Dim clsScaleYReverseFunc As New RFunction
+        Dim clsScaleYReverseParam As New RParameter
+        ucrChkIncludePoints.Enabled = False ' temporary
+        ucrChkCountsOnYAxis.Enabled = False ' temporary
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
@@ -57,29 +51,30 @@ Public Class dlgCumulativeDistribution
         ucrCumDistSelector.SetParameter(New RParameter("data", 0))
         ucrCumDistSelector.SetParameterIsrfunction()
 
+        ucrFactorReceiver.SetParameter(New RParameter("colour", 1))
         ucrFactorReceiver.Selector = ucrCumDistSelector
         ucrFactorReceiver.SetIncludedDataTypes({"factor"})
-        ucrFactorReceiver.SetParameter(New RParameter("colour", 1))
         ucrFactorReceiver.SetParameterIsString()
         ucrFactorReceiver.bWithQuotes = False
 
-        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
-
+        ucrVariablesAsFactorforCumDist.SetParameter(New RParameter("x", 0))
         ucrVariablesAsFactorforCumDist.SetFactorReceiver(ucrFactorReceiver)
         ucrVariablesAsFactorforCumDist.Selector = ucrCumDistSelector
         ucrVariablesAsFactorforCumDist.SetIncludedDataTypes({"numeric"})
-        ucrVariablesAsFactorforCumDist.SetParameter(New RParameter("x", 0))
         ucrVariablesAsFactorforCumDist.SetParameterIsString()
         ucrVariablesAsFactorforCumDist.bWithQuotes = False
 
-        clsScaleyrverseFunc.SetPackageName("ggplot2")
-        clsScaleyrverseFunc.SetRCommand("scale_y_reverse")
-        clsScaleyrverseFunc.AddParameter("breaks", "seq(1,0,-0.25), labels = seq(0,1,0.25)")
-        clsScaleyrversParam.SetArgumentName("scale_y_reverse")
-        clsScaleyrversParam.SetArgument(clsScaleyrverseFunc)
+        clsScaleYReverseFunc.SetPackageName("ggplot2")
+        clsScaleYReverseFunc.SetRCommand("scale_y_reverse")
+        clsScaleYReverseFunc.AddParameter("breaks", "seq(1,0,-0.25), labels = seq(0,1,0.25)")
+        clsScaleYReverseParam.SetArgumentName("scale_y_reverse")
+        clsScaleYReverseParam.SetArgument(clsScaleYReverseFunc)
 
         ucrChkExceedancePlots.SetText("Exceedance Plots")
-        ucrChkExceedancePlots.SetParameter(clsScaleyrversParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkExceedancePlots.SetParameter(clsScaleYReverseParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
+        ucrChkCountsOnYAxis.SetText("Counts on Y Axis")
+        ucrChkIncludePoints.SetText("Include Points")
 
         ucrSaveCumDist.SetPrefix("cumdist")
         ucrSaveCumDist.SetSaveTypeAsGraph()
@@ -88,6 +83,7 @@ Public Class dlgCumulativeDistribution
         ucrSaveCumDist.SetAssignToIfUncheckedValue("last_graph")
         ucrSaveCumDist.SetDataFrameSelector(ucrCumDistSelector.ucrAvailableDataFrames)
 
+        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
     End Sub
 
     Private Sub SetDefaults()
@@ -119,16 +115,20 @@ Public Class dlgCumulativeDistribution
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
     End Sub
 
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        ucrFactorReceiver.SetRCode(clsRaesFunction, bReset)
+        ucrVariablesAsFactorforCumDist.SetRCode(clsRaesFunction, bReset)
+        ucrSaveCumDist.SetRCode(clsBaseOperator, bReset)
+        ucrCumDistSelector.SetRCode(clsRggplotFunction, bReset)
+        ucrChkExceedancePlots.SetRCode(clsBaseOperator, bReset)
+    End Sub
+
     Private Sub TestOkEnabled()
         If ucrVariablesAsFactorforCumDist.IsEmpty OrElse Not ucrSaveCumDist.IsComplete Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
         End If
-    End Sub
-
-    Private Sub AllControls_ControlContentsChanged() Handles ucrVariablesAsFactorforCumDist.ControlContentsChanged, ucrSaveCumDist.ControlContentsChanged
-        TestOkEnabled()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -146,7 +146,7 @@ Public Class dlgCumulativeDistribution
         sdgLayerOptions.ShowDialog()
     End Sub
 
-    Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorforCumDist.ControlContentsChanged, ucrSaveCumDist.ControlContentsChanged
-
+    Private Sub AllControls_ControlContentsChanged() Handles ucrVariablesAsFactorforCumDist.ControlContentsChanged, ucrSaveCumDist.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class
