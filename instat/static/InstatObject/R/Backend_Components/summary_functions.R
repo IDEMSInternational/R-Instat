@@ -101,7 +101,7 @@ instat_object$set("public", "calculate_summary", function(data_name, columns_to_
     if(is.null(columns_to_summarise)) {
       for(summary_type in summaries) {
         summary_calculation <- instat_calculation$new(type = "summary", result_name = summary_type,
-                                                      function_exp = "n()", save = save) # I'm pretty sure this is not what we want to do as this is not using our system. # I need to understand more, so, line 298/299, we need an "x" which = nothing here so I'm not using it here. 
+                                                      function_exp = paste0(summary_type), save = save)
         sub_calculations[[length(sub_calculations) + 1]] <- summary_calculation
       }
     }
@@ -355,7 +355,7 @@ instat_object$set("public", "summary_table", function(data_name, columns_to_summ
   # note: it is not always summary_count, it's any of the summary statistics used.
   # it's not data_name. It's the name given to the dataset, e.g., Survey_by_Village._Variety._Fertgrp.
   
-  cell_values <- dcast(formula = row_factors ~ column_factors, value.var = cell_values[0], data = cell_values[1]) 
+  cell_values <- dcast(formula = row_factors ~ column_factors, value.var = colnames(cell_values)[-factors], data = cell_values) 
   
   
   if(include_margins) {
