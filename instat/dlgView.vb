@@ -109,6 +109,7 @@ Public Class dlgView
         ucrChkSpecifyRows.SetRCode(clsMainFunction, bReset)
         ucrPnlDisplayWindow.SetRCode(clsMainFunction, bReset)
         ucrPnlDisplayFrom.SetRCode(clsMainFunction, bReset)
+        ucrNudNumberRows.SetRCode(clsMainFunction, bReset)
         ucrReceiverView.AddAdditionalCodeParameterPair(clsViewDataFrame, New RParameter("mydf"), iAdditionalPairNo:=1)
         ucrSelectorForView.SetRCode(clsMainFunction, bReset)
         DataFrameLength()
