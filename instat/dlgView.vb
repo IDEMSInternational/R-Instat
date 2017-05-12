@@ -19,6 +19,7 @@ Public Class dlgView
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsMainFunction, clsViewDataFrame As New RFunction
+    Private bControlsUpdated As Boolean = False
 
     Private Sub dlgView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -86,7 +87,6 @@ Public Class dlgView
 
         ucrNudNumberRows.SetParameter(New RParameter("n", 1))
         ucrNudNumberRows.Minimum = 1
-        ucrNudNumberRows.Maximum = Decimal.MaxValue
         ucrNudNumberRows.SetLinkedDisplayControl(lblNumberofRows)
     End Sub
 
@@ -101,6 +101,8 @@ Public Class dlgView
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        bControlsUpdated = False
+        ucrNudNumberRows.Maximum = Decimal.MaxValue
         ucrReceiverView.SetRCode(clsMainFunction, bReset)
         ucrPnlDisplayWindow.SetRCode(clsMainFunction, bReset)
         ucrPnlDisplayFrom.SetRCode(clsMainFunction, bReset)
@@ -109,6 +111,7 @@ Public Class dlgView
         ucrReceiverView.AddAdditionalCodeParameterPair(clsViewDataFrame, New RParameter("mydf"), iAdditionalPairNo:=1)
         ucrSelectorForView.SetRCode(clsMainFunction, bReset)
         DataFrameLength()
+        bControlsUpdated = True
     End Sub
 
     Private Sub TestOKEnabled()
@@ -141,20 +144,11 @@ Public Class dlgView
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        If rdoDispOutputWindow.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsMainFunction)
-            ucrBase.clsRsyntax.iCallType = 2
-        ElseIf rdoDispSepOutputWindow.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsMainFunction)
-        Else
-            ucrBase.clsRsyntax.SetBaseRFunction(clsViewDataFrame)
-        End If
-    End Sub
-
     Private Sub ChangeFunctionParameters()
+        ucrBase.clsRsyntax.iCallType = 2
         If rdoDispOutputWindow.Checked Then
             If ucrChkSpecifyRows.Checked Then
+                ucrBase.clsRsyntax.SetBaseRFunction(clsMainFunction)
                 clsMainFunction.AddParameter("title", Chr(34) & ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
                 clsMainFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables)
                 If rdoTop.Checked Then
@@ -163,14 +157,13 @@ Public Class dlgView
                     clsMainFunction.SetRCommand("tail")
                 End If
             Else
-                ' clsMainFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
-                ' clsMainFunction.RemoveParameterByName("title")
-                ' clsMainFunction.AddParameter("data_name", clsRFunctionParameter:= )
                 ucrBase.clsRsyntax.SetBaseRFunction(ucrReceiverView.GetVariables())
             End If
         ElseIf rdoDispSepOutputWindow.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsMainFunction)
             clsMainFunction.SetRCommand("View")
         Else
+            ucrBase.clsRsyntax.SetBaseRFunction(clsViewDataFrame)
             clsViewDataFrame.SetPackageName("sjPlot")
             clsViewDataFrame.SetRCommand("sjt.df")
             clsViewDataFrame.RemoveParameterByName("x")
@@ -186,8 +179,14 @@ Public Class dlgView
         ucrNudNumberRows.Maximum = ucrSelectorForView.ucrAvailableDataFrames.iDataFrameLength
     End Sub
 
+    Private Sub FunctionControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDisplayFrom.ControlValueChanged, ucrPnlDisplayWindow.ControlValueChanged, ucrChkSpecifyRows.ControlValueChanged
+        If bControlsUpdated Then
+            ChangeFunctionParameters()
+        End If
+    End Sub
+
     Private Sub ucrChkSortColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSortColumn.ControlValueChanged, ucrPnlDisplayWindow.ControlValueChanged
-        If rdoHTMLOutputWindow.Checked Then
+        If rdoHTMLOutputWindow.Checked AndAlso ucrChkSortColumn.Checked Then
             ucrReceiverSortCol.SetMeAsReceiver()
         Else
             ucrReceiverView.SetMeAsReceiver()
