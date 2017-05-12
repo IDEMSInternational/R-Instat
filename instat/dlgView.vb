@@ -45,9 +45,6 @@ Public Class dlgView
         ucrPnlDisplayWindow.AddRadioButton(rdoDispSepOutputWindow)
         ucrPnlDisplayWindow.AddRadioButton(rdoHTMLOutputWindow)
         ucrPnlDisplayWindow.AddToLinkedControls(ucrChkSpecifyRows, {rdoDispOutputWindow}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=True)
-        ' TODO: If we want to give an option of number of columns to display then we want this ucrChk to be linked with rdoHTML
-        ' We do not want the "Display From: Options" to be linked to ucrChk if it is with rdoHTML
-        ' How do we select a certain number of columns in our system?
         ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoDispSepOutputWindow, "View")
         ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoHTMLOutputWindow, "sjt.df")
         ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoDispOutputWindow, {"head", "tail", frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data"})
@@ -106,8 +103,9 @@ Public Class dlgView
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverView.SetRCode(clsMainFunction, bReset)
         ucrPnlDisplayWindow.SetRCode(clsMainFunction, bReset)
-    ucrPnlDisplayFrom.SetRCode(clsMainFunction, bReset)
+        ucrPnlDisplayFrom.SetRCode(clsMainFunction, bReset)
         ucrNudNumberRows.SetRCode(clsMainFunction, bReset)
+        ucrChkSpecifyRows.SetRCode(clsMainFunction, bReset)
         ucrReceiverView.AddAdditionalCodeParameterPair(clsViewDataFrame, New RParameter("mydf"), iAdditionalPairNo:=1)
         ucrSelectorForView.SetRCode(clsMainFunction, bReset)
         DataFrameLength()
@@ -165,6 +163,9 @@ Public Class dlgView
                     clsMainFunction.SetRCommand("tail")
                 End If
             Else
+                ' clsMainFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+                ' clsMainFunction.RemoveParameterByName("title")
+                ' clsMainFunction.AddParameter("data_name", clsRFunctionParameter:= )
                 ucrBase.clsRsyntax.SetBaseRFunction(ucrReceiverView.GetVariables())
             End If
         ElseIf rdoDispSepOutputWindow.Checked Then
