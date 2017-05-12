@@ -79,7 +79,7 @@ Partial Class dlgView
         Me.rdoBottom.Location = New System.Drawing.Point(325, 266)
         Me.rdoBottom.Name = "rdoBottom"
         Me.rdoBottom.Size = New System.Drawing.Size(58, 17)
-        Me.rdoBottom.TabIndex = 15
+        Me.rdoBottom.TabIndex = 13
         Me.rdoBottom.TabStop = True
         Me.rdoBottom.Text = "Bottom"
         Me.rdoBottom.UseVisualStyleBackColor = True
@@ -205,7 +205,7 @@ Partial Class dlgView
         Me.ucrBase.Location = New System.Drawing.Point(10, 289)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
-        Me.ucrBase.TabIndex = 16
+        Me.ucrBase.TabIndex = 14
         '
         'dlgView
         '
