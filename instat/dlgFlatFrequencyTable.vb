@@ -15,6 +15,8 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
+Imports instat
 Imports instat.Translations
 Public Class dlgFlatFrequencyTable
     Private bFirstLoad As Boolean = True
@@ -25,6 +27,8 @@ Public Class dlgFlatFrequencyTable
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
+        Else
+
         End If
         If bReset Then
             SetDefaults()
@@ -84,8 +88,16 @@ Public Class dlgFlatFrequencyTable
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrRowReceiver.IsEmpty AndAlso Not ucrColumnVariable.IsEmpty AndAlso ucrSelectorDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
-            ucrBase.OKEnabled(True)
+        If Not ucrRowReceiver.IsEmpty AndAlso ucrRowReceiver.lstSelectedVariables.Items.Count >= 2 Then
+            If Not ucrColumnVariable.IsEmpty AndAlso
+        ucrSelectorDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
+        ElseIf Not ucrRowReceiver.IsEmpty AndAlso ucrRowReceiver.lstSelectedVariables.Items.Count < 2 Then
+            MessageBox.Show("Please enter two or more Row variables to continue")
+            ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(False)
         End If
@@ -97,7 +109,7 @@ Public Class dlgFlatFrequencyTable
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrRowReceiver_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrRowReceiver.ControlContentsChanged, ucrColumnVariable.ControlContentsChanged, ucrSelectorDataFrame.ControlContentsChanged
+    Private Sub ucrRowReceiver_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrRowReceiver.ControlValueChanged, ucrColumnVariable.ControlContentsChanged, ucrSelectorDataFrame.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
