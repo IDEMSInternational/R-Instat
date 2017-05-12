@@ -41,7 +41,7 @@ Partial Class dlgExportRWorkspace
         Me.cmdBrowse.Name = "cmdBrowse"
         Me.cmdBrowse.Size = New System.Drawing.Size(62, 23)
         Me.cmdBrowse.TabIndex = 9
-        Me.cmdBrowse.Text = "Browse"
+        Me.cmdBrowse.Text = "Browse..."
         Me.cmdBrowse.UseVisualStyleBackColor = True
         '
         'lblExport
@@ -95,7 +95,7 @@ Partial Class dlgExportRWorkspace
         Me.ucrChkGraphs.Checked = False
         Me.ucrChkGraphs.Location = New System.Drawing.Point(10, 199)
         Me.ucrChkGraphs.Name = "ucrChkGraphs"
-        Me.ucrChkGraphs.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkGraphs.Size = New System.Drawing.Size(119, 20)
         Me.ucrChkGraphs.TabIndex = 5
         '
         'ucrChkModels
@@ -103,7 +103,7 @@ Partial Class dlgExportRWorkspace
         Me.ucrChkModels.Checked = False
         Me.ucrChkModels.Location = New System.Drawing.Point(10, 225)
         Me.ucrChkModels.Name = "ucrChkModels"
-        Me.ucrChkModels.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkModels.Size = New System.Drawing.Size(128, 20)
         Me.ucrChkModels.TabIndex = 6
         '
         'ucrChkMetadata
@@ -111,7 +111,7 @@ Partial Class dlgExportRWorkspace
         Me.ucrChkMetadata.Checked = False
         Me.ucrChkMetadata.Location = New System.Drawing.Point(10, 173)
         Me.ucrChkMetadata.Name = "ucrChkMetadata"
-        Me.ucrChkMetadata.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkMetadata.Size = New System.Drawing.Size(145, 20)
         Me.ucrChkMetadata.TabIndex = 4
         '
         'ucrReceiverMultiple

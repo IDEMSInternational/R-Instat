@@ -335,6 +335,12 @@
     <Compile Include="dlgFitModel.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgFlatFrequencyTable.Designer.vb">
+      <DependentUpon>dlgFlatFrequencyTable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgFlatFrequencyTable.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgFrequency.Designer.vb">
       <DependentUpon>dlgFrequency.vb</DependentUpon>
     </Compile>
@@ -2499,6 +2505,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFitModel.sw-KE.resx">
       <DependentUpon>dlgFitModel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgFlatFrequencyTable.resx">
+      <DependentUpon>dlgFlatFrequencyTable.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFourVariableModelling.fr-FR.resx">
       <DependentUpon>dlgFourVariableModelling.vb</DependentUpon>
