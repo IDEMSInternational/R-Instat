@@ -49,9 +49,7 @@ Public Class dlgDefineRedFlags
     End Sub
 
     Private Sub InitialiseDialog()
-        'helpID
-        '  ucrBase.iHelpTopicID =
-
+        ucrBase.iHelpTopicID = 202
         'selector
         ucrSelectorDefineRedFlag.SetParameter(New RParameter("data_name", 0))
         ucrSelectorDefineRedFlag.SetParameterIsString()
