@@ -50,6 +50,7 @@ Public Class dlgLabels
         ucrSelectorForLabels.Reset()
         ucrSelectorForLabels.Focus()
         clsViewLabels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_factor_levels")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsViewLabels)
     End Sub
 
     Private Sub InitialiseDialog()
