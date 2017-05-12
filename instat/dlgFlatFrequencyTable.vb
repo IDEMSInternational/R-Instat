@@ -35,26 +35,27 @@ Public Class dlgFlatFrequencyTable
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrChkAddMargins.Enabled = False 'for now
+
         ucrBase.clsRsyntax.iCallType = 2
 
         ucrRowReceiver.Selector = ucrSelectorDataFrame
         ucrColumnVariable.Selector = ucrSelectorDataFrame
         ucrColumnVariable.SetDataType("factor")
 
-
-        ucrRowReceiver.SetParameter(New RParameter("y", 1))
+        ucrRowReceiver.SetParameter(New RParameter("x", 1))
         ucrRowReceiver.SetParameterIsRFunction()
         ucrColumnVariable.SetParameter(New RParameter("col.vars", 2))
         ucrColumnVariable.SetParameterIsString()
         ucrChkAddMargins.SetText("Addmargins")
-        ucrChkAddMargins.SetParameter(New RParameter("margin", 1), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True)
+        ucrChkAddMargins.AddParameterValueFunctionNamesCondition(True, "x", "addmargins", True)
+        ucrChkAddMargins.AddParameterValueFunctionNamesCondition(False, "x", "addmargins", False)
 
     End Sub
 
     Private Sub SetDefaults()
         clsFtable = New RFunction
         clsTable = New RFunction
+        clsAddMargin = New RFunction
 
         ucrRowReceiver.SetMeAsReceiver()
         ucrSelectorDataFrame.Reset()
@@ -63,8 +64,17 @@ Public Class dlgFlatFrequencyTable
         clsAddMargin.SetRCommand("addmargins")
         clsAddMargin.AddParameter(clsRFunctionParameter:=clsTable)
         clsFtable.SetRCommand("ftable")
-        clsFtable.AddParameter(clsRFunctionParameter:=clsAddMargin)
+        clsFtable.AddParameter(clsRFunctionParameter:=clsTable)
         ucrBase.clsRsyntax.SetBaseRFunction(clsFtable)
+    End Sub
+
+    Private Sub ucrChkAddMargins_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddMargins.ControlValueChanged
+        If ucrChkAddMargins.Checked Then
+            clsFtable.AddParameter("x", clsRFunctionParameter:=clsAddMargin)
+        Else
+            clsFtable.AddParameter(clsRFunctionParameter:=clsTable)
+            clsFtable.RemoveParameterByName("x")
+        End If
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
