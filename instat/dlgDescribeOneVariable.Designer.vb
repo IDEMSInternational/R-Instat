@@ -34,26 +34,26 @@ Partial Class dlgDescribeOneVariable
         '
         'cmdSummaries
         '
-        Me.cmdSummaries.Location = New System.Drawing.Point(306, 175)
+        Me.cmdSummaries.Location = New System.Drawing.Point(305, 189)
         Me.cmdSummaries.Name = "cmdSummaries"
-        Me.cmdSummaries.Size = New System.Drawing.Size(75, 23)
-        Me.cmdSummaries.TabIndex = 6
+        Me.cmdSummaries.Size = New System.Drawing.Size(76, 23)
+        Me.cmdSummaries.TabIndex = 4
         Me.cmdSummaries.Tag = "Summaries"
         Me.cmdSummaries.Text = "Summaries..."
         Me.cmdSummaries.UseVisualStyleBackColor = True
         '
         'lblSelectedVariable
         '
-        Me.lblSelectedVariable.Location = New System.Drawing.Point(262, 27)
+        Me.lblSelectedVariable.Location = New System.Drawing.Point(261, 45)
         Me.lblSelectedVariable.Name = "lblSelectedVariable"
         Me.lblSelectedVariable.Size = New System.Drawing.Size(124, 14)
         Me.lblSelectedVariable.TabIndex = 1
         Me.lblSelectedVariable.Tag = "Selected_Variable"
-        Me.lblSelectedVariable.Text = "Selected Variable(s):"
+        Me.lblSelectedVariable.Text = "Variable(s) to Describe:"
         '
         'ucrBaseDescribeOneVar
         '
-        Me.ucrBaseDescribeOneVar.Location = New System.Drawing.Point(10, 229)
+        Me.ucrBaseDescribeOneVar.Location = New System.Drawing.Point(10, 252)
         Me.ucrBaseDescribeOneVar.Name = "ucrBaseDescribeOneVar"
         Me.ucrBaseDescribeOneVar.Size = New System.Drawing.Size(410, 52)
         Me.ucrBaseDescribeOneVar.TabIndex = 7
@@ -61,7 +61,7 @@ Partial Class dlgDescribeOneVariable
         'ucrReceiverDescribeOneVar
         '
         Me.ucrReceiverDescribeOneVar.frmParent = Me
-        Me.ucrReceiverDescribeOneVar.Location = New System.Drawing.Point(261, 42)
+        Me.ucrReceiverDescribeOneVar.Location = New System.Drawing.Point(261, 60)
         Me.ucrReceiverDescribeOneVar.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDescribeOneVar.Name = "ucrReceiverDescribeOneVar"
         Me.ucrReceiverDescribeOneVar.Selector = Nothing
@@ -81,32 +81,32 @@ Partial Class dlgDescribeOneVariable
         'ucrChkOmitMissing
         '
         Me.ucrChkOmitMissing.Checked = False
-        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(172, 203)
+        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(10, 200)
         Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
         Me.ucrChkOmitMissing.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkOmitMissing.TabIndex = 8
+        Me.ucrChkOmitMissing.TabIndex = 5
         '
         'ucrChkSaveResult
         '
         Me.ucrChkSaveResult.Checked = False
-        Me.ucrChkSaveResult.Location = New System.Drawing.Point(12, 203)
+        Me.ucrChkSaveResult.Location = New System.Drawing.Point(10, 226)
         Me.ucrChkSaveResult.Name = "ucrChkSaveResult"
         Me.ucrChkSaveResult.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkSaveResult.TabIndex = 9
+        Me.ucrChkSaveResult.TabIndex = 6
         '
         'ucrChkCustomise
         '
         Me.ucrChkCustomise.Checked = False
-        Me.ucrChkCustomise.Location = New System.Drawing.Point(281, 149)
+        Me.ucrChkCustomise.Location = New System.Drawing.Point(261, 163)
         Me.ucrChkCustomise.Name = "ucrChkCustomise"
         Me.ucrChkCustomise.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkCustomise.TabIndex = 10
+        Me.ucrChkCustomise.TabIndex = 3
         '
         'dlgDescribeOneVariable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 290)
+        Me.ClientSize = New System.Drawing.Size(416, 310)
         Me.Controls.Add(Me.ucrChkCustomise)
         Me.Controls.Add(Me.ucrChkSaveResult)
         Me.Controls.Add(Me.ucrChkOmitMissing)

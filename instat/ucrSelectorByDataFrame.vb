@@ -92,11 +92,11 @@ Public Class ucrSelectorByDataFrame
         ucrAvailableDataFrames.UpdateControl(bReset)
     End Sub
 
-    Public Overrides Sub SetParameter(clsNewParameter As RParameter)
+    Public Overrides Sub SetParameter(clsNewParameter As RParameter, Optional iIndex As Integer = 0)
         If bHasOwnParameter Then
-            MyBase.SetParameter(clsNewParameter)
+            MyBase.SetParameter(clsNewParameter, iIndex)
         Else
-            ucrAvailableDataFrames.SetParameter(clsNewParameter)
+            ucrAvailableDataFrames.SetParameter(clsNewParameter, iIndex)
         End If
     End Sub
 
@@ -118,13 +118,13 @@ Public Class ucrSelectorByDataFrame
 
     Public Overrides Sub AddOrRemoveParameter(bAdd As Boolean)
         If bHasOwnParameter Then
-            AddOrRemoveParameter(bAdd)
+            MyBase.AddOrRemoveParameter(bAdd)
         Else
             ucrAvailableDataFrames.AddOrRemoveParameter(bAdd)
         End If
     End Sub
 
-    Public Overrides Function GetParameter() As RParameter
+    Public Overrides Function GetParameter(Optional iIndex As Integer = 0) As RParameter
         If bHasOwnParameter Then
             Return MyBase.GetParameter()
         Else
@@ -135,5 +135,16 @@ Public Class ucrSelectorByDataFrame
     Public Overrides Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False)
         MyBase.SetRCode(clsNewCodeStructure, bReset)
         ucrAvailableDataFrames.SetRCode(clsNewCodeStructure, bReset)
+    End Sub
+
+    Public Overrides Sub UpdateParameter(clsTempParam As RParameter)
+        If bHasOwnParameter Then
+            MyBase.UpdateParameter(clsTempParam)
+        End If
+    End Sub
+
+    Public Overrides Sub AddAdditionalCodeParameterPair(clsNewRCode As RCodeStructure, clsNewRParameter As RParameter, Optional iAdditionalPairNo As Integer = -1)
+        MyBase.AddAdditionalCodeParameterPair(clsNewRCode, clsNewRParameter, iAdditionalPairNo)
+        ucrAvailableDataFrames.AddAdditionalCodeParameterPair(clsNewRCode, clsNewRParameter, iAdditionalPairNo)
     End Sub
 End Class

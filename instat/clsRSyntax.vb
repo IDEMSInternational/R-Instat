@@ -33,6 +33,7 @@ Public Class RSyntax
     Public bUseCommandString As Boolean = False
     'Above, the three types of Base R-commands, and their associated "radio bottons booleans".
     Public iCallType As Integer = 0
+    Public bHTMLOutput As Boolean = False
     Public strScript As String
     Public i As Integer
     Public bExcludeAssignedFunctionOutput As Boolean = True
@@ -43,6 +44,17 @@ Public Class RSyntax
         bUseBaseFunction = True
         bUseBaseOperator = False
         bUseCommandString = False
+    End Sub
+
+    Public Sub SetPackageName(strName As String)
+        If clsBaseFunction Is Nothing Then
+            MsgBox("Developer error: base function must be set before package name is set.")
+        Else
+            clsBaseFunction.SetPackageName(strName)
+            bUseBaseFunction = True
+            bUseBaseOperator = False
+            bUseCommandString = False
+        End If
     End Sub
 
     Public Sub SetBaseRFunction(clsFunction As RFunction)

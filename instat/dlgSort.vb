@@ -20,7 +20,7 @@ Public Class dlgSort
     'Define a boolean to check if the dialog is loading for the first time
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-
+    Private clsSortDataFrame As New RFunction
     Private Sub dlgSort_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -35,15 +35,15 @@ Public Class dlgSort
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
+        clsSortDataFrame = New RFunction
         'Setting default Rfunction as the base function
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$sort_dataframe")
+        clsSortDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$sort_dataframe")
 
         'Reset
         ucrSelectForSort.Reset()
 
         ' Set default RFunction as the base function
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        ucrBase.clsRsyntax.SetBaseRFunction(clsSortDataFrame)
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
@@ -74,16 +74,17 @@ Public Class dlgSort
         ucrSelectForSort.SetParameterIsString()
 
         'Set radiobutton parameters
-        ucrPanelOrder.SetParameter(New RParameter("decreasing", 2))
-        ucrPanelOrder.AddRadioButton(rdoAscending, "FALSE")
-        ucrPanelOrder.AddRadioButton(rdoDescending, "TRUE")
-        ucrPanelOrder.SetRDefault("FALSE")
+        ucrPnlOrder.SetParameter(New RParameter("decreasing", 2))
+        ucrPnlOrder.AddRadioButton(rdoAscending, "FALSE")
+        ucrPnlOrder.AddRadioButton(rdoDescending, "TRUE")
+        ucrPnlOrder.SetRDefault("FALSE")
 
         'Currently Disabled
         'ucrPanelMissingValues.SetParameter(New RParameter("na.last", 3))
         'ucrPanelMissingValues.AddRadioButton(rdoFirst, "FALSE")
         'ucrPanelMissingValues.AddRadioButton(rdoLast, "TRUE")
         'ucrPanelMissingValues.SetRDefault("TRUE")
+        ucrPnlMissingValues.bAllowNonConditionValues = True
     End Sub
 
     'Setting Defaults on Reset 
