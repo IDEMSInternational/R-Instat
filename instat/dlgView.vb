@@ -37,7 +37,7 @@ Public Class dlgView
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 32
 
-        ucrReceiverView.SetParameter(New RParameter("mydf", 0))
+        ucrReceiverView.SetParameter(New RParameter("x", 0))
         ucrReceiverView.SetParameterIsRFunction()
         ucrReceiverView.Selector = ucrSelectorForView
 
@@ -103,9 +103,9 @@ Public Class dlgView
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverView.SetRCode(clsViewDataFrame, bReset)
+        ucrReceiverView.SetRCode(clsMainFunction, bReset)
         ucrPnlDisplayWindow.SetRCode(clsMainFunction, bReset)
-        ucrReceiverView.AddAdditionalCodeParameterPair(clsMainFunction, New RParameter("x"), iAdditionalPairNo:=1)
+        ucrReceiverView.AddAdditionalCodeParameterPair(clsViewDataFrame, New RParameter("mydf"), iAdditionalPairNo:=1)
         ucrSelectorForView.SetRCode(clsMainFunction, bReset)
         DataFrameLength()
     End Sub
@@ -187,11 +187,8 @@ Public Class dlgView
 
     Private Sub ucrChkSortColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSortColumn.ControlValueChanged, ucrPnlDisplayWindow.ControlValueChanged
         If rdoHTMLOutputWindow.Checked Then
-            ucrReceiverView.bForceAsDataFrame = True
             ucrReceiverSortCol.SetMeAsReceiver()
         Else
-            'not necesarily false
-            ucrReceiverView.bForceAsDataFrame = False
             ucrReceiverView.SetMeAsReceiver()
         End If
         SetRCodeForControls(True)
