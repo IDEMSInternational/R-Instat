@@ -70,16 +70,19 @@ Public Class dlgView
         ucrChkSpecifyRows.bAllowNonConditionValues = True
 
         ' Linking for when rdoHTML is checked
-        ucrPnlDisplayWindow.AddToLinkedControls(ucrChkSortColumn, {rdoHTMLOutputWindow}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=True)
-        ucrChkSortColumn.SetText("Sort by Column")
-        ucrChkSortColumn.AddToLinkedControls(ucrReceiverSortCol, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoTop)
-        ucrChkSortColumn.SetRDefault("NULL")
+        ucrChkSortColumn.Visible = False
+        'ucrPnlDisplayWindow.AddToLinkedControls(ucrChkSortColumn, {rdoHTMLOutputWindow}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=True)
+        'ucrChkSortColumn.SetText("Sort by Column")
+        ' ucrChkSortColumn.AddToLinkedControls(ucrReceiverSortCol, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoTop)
+        ' ucrChkSortColumn.SetRDefault("NULL")
 
-        ucrReceiverSortCol.SetParameter(New RParameter("sort.col", 3))
-        ucrReceiverSortCol.SetParameterIsString()
-        ucrReceiverSortCol.Selector = ucrSelectorForView
+        ucrReceiverSortCol.Visible = False
+        ' ucrReceiverSortCol.SetParameter(New RParameter("sort.col", 3))
+        ' ucrReceiverSortCol.SetParameterIsString()
+        ' ucrReceiverSortCol.Selector = ucrSelectorForView
+
         ' TODO: Options in this selector should be limited to options which are also in the other selector.
-        ucrChkSortColumn.SetParameter(ucrReceiverSortCol.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        'ucrChkSortColumn.SetParameter(ucrReceiverSortCol.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
         ucrSelectorForView.SetParameter(New RParameter("title", 1))
         ucrSelectorForView.SetParameterIsString()
