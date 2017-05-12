@@ -41,16 +41,16 @@ Partial Class dlgStringDistance
         'lblColumn
         '
         Me.lblColumn.AutoSize = True
-        Me.lblColumn.Location = New System.Drawing.Point(250, 43)
+        Me.lblColumn.Location = New System.Drawing.Point(247, 51)
         Me.lblColumn.Name = "lblColumn"
-        Me.lblColumn.Size = New System.Drawing.Size(45, 13)
+        Me.lblColumn.Size = New System.Drawing.Size(54, 13)
         Me.lblColumn.TabIndex = 1
-        Me.lblColumn.Text = "Column:"
+        Me.lblColumn.Text = "Column 1:"
         '
         'lblPattern
         '
         Me.lblPattern.AutoSize = True
-        Me.lblPattern.Location = New System.Drawing.Point(250, 85)
+        Me.lblPattern.Location = New System.Drawing.Point(248, 95)
         Me.lblPattern.Name = "lblPattern"
         Me.lblPattern.Size = New System.Drawing.Size(44, 13)
         Me.lblPattern.TabIndex = 3
@@ -59,7 +59,7 @@ Partial Class dlgStringDistance
         'lblMethod
         '
         Me.lblMethod.AutoSize = True
-        Me.lblMethod.Location = New System.Drawing.Point(248, 168)
+        Me.lblMethod.Location = New System.Drawing.Point(248, 144)
         Me.lblMethod.Name = "lblMethod"
         Me.lblMethod.Size = New System.Drawing.Size(46, 13)
         Me.lblMethod.TabIndex = 5
@@ -100,16 +100,16 @@ Partial Class dlgStringDistance
         'lblColumnString
         '
         Me.lblColumnString.AutoSize = True
-        Me.lblColumnString.Location = New System.Drawing.Point(248, 127)
+        Me.lblColumnString.Location = New System.Drawing.Point(248, 97)
         Me.lblColumnString.Name = "lblColumnString"
-        Me.lblColumnString.Size = New System.Drawing.Size(51, 13)
+        Me.lblColumnString.Size = New System.Drawing.Size(54, 13)
         Me.lblColumnString.TabIndex = 13
-        Me.lblColumnString.Text = "Column 2"
+        Me.lblColumnString.Text = "Column 2:"
         '
         'ucrReceiverColumn
         '
         Me.ucrReceiverColumn.frmParent = Me
-        Me.ucrReceiverColumn.Location = New System.Drawing.Point(250, 143)
+        Me.ucrReceiverColumn.Location = New System.Drawing.Point(250, 112)
         Me.ucrReceiverColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverColumn.Name = "ucrReceiverColumn"
         Me.ucrReceiverColumn.Selector = Nothing
@@ -131,7 +131,7 @@ Partial Class dlgStringDistance
         '
         Me.ucrInputComboBoxMethod.AddQuotesIfUnrecognised = True
         Me.ucrInputComboBoxMethod.IsReadOnly = False
-        Me.ucrInputComboBoxMethod.Location = New System.Drawing.Point(250, 184)
+        Me.ucrInputComboBoxMethod.Location = New System.Drawing.Point(250, 160)
         Me.ucrInputComboBoxMethod.Name = "ucrInputComboBoxMethod"
         Me.ucrInputComboBoxMethod.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputComboBoxMethod.TabIndex = 6
@@ -140,7 +140,7 @@ Partial Class dlgStringDistance
         '
         Me.ucrSaveStringDistance.Location = New System.Drawing.Point(10, 197)
         Me.ucrSaveStringDistance.Name = "ucrSaveStringDistance"
-        Me.ucrSaveStringDistance.Size = New System.Drawing.Size(234, 24)
+        Me.ucrSaveStringDistance.Size = New System.Drawing.Size(253, 24)
         Me.ucrSaveStringDistance.TabIndex = 7
         '
         'ucrInputPatternStringDistance
@@ -148,7 +148,7 @@ Partial Class dlgStringDistance
         Me.ucrInputPatternStringDistance.AddQuotesIfUnrecognised = True
         Me.ucrInputPatternStringDistance.IsMultiline = False
         Me.ucrInputPatternStringDistance.IsReadOnly = False
-        Me.ucrInputPatternStringDistance.Location = New System.Drawing.Point(250, 101)
+        Me.ucrInputPatternStringDistance.Location = New System.Drawing.Point(250, 112)
         Me.ucrInputPatternStringDistance.Name = "ucrInputPatternStringDistance"
         Me.ucrInputPatternStringDistance.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputPatternStringDistance.TabIndex = 4
@@ -156,7 +156,7 @@ Partial Class dlgStringDistance
         'ucrReceiverStringDistance
         '
         Me.ucrReceiverStringDistance.frmParent = Me
-        Me.ucrReceiverStringDistance.Location = New System.Drawing.Point(250, 58)
+        Me.ucrReceiverStringDistance.Location = New System.Drawing.Point(250, 65)
         Me.ucrReceiverStringDistance.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverStringDistance.Name = "ucrReceiverStringDistance"
         Me.ucrReceiverStringDistance.Selector = Nothing
@@ -173,9 +173,9 @@ Partial Class dlgStringDistance
         '
         'ucrPnlStringDist
         '
-        Me.ucrPnlStringDist.Location = New System.Drawing.Point(242, 2)
+        Me.ucrPnlStringDist.Location = New System.Drawing.Point(242, 5)
         Me.ucrPnlStringDist.Name = "ucrPnlStringDist"
-        Me.ucrPnlStringDist.Size = New System.Drawing.Size(145, 42)
+        Me.ucrPnlStringDist.Size = New System.Drawing.Size(145, 43)
         Me.ucrPnlStringDist.TabIndex = 11
         '
         'dlgStringDistance
