@@ -81,6 +81,7 @@ Public Class dlgView
         ' ucrReceiverSortCol.Selector = ucrSelectorForView
 
         ' TODO: Options in this selector should be limited to options which are also in the other selector.
+        'The sort column checkbox and receiver set to be invisible since the method for allowing variables in receiver1 to be strictly the same variables in receiver2 is yet to be implemented.
         'ucrChkSortColumn.SetParameter(ucrReceiverSortCol.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
         ucrSelectorForView.SetParameter(New RParameter("title", 1))
@@ -105,6 +106,8 @@ Public Class dlgView
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverView.SetRCode(clsMainFunction, bReset)
         ucrPnlDisplayWindow.SetRCode(clsMainFunction, bReset)
+    ucrPnlDisplayFrom.SetRCode(clsMainFunction, bReset)
+        ucrNudNumberRows.SetRCode(clsMainFunction, bReset)
         ucrReceiverView.AddAdditionalCodeParameterPair(clsViewDataFrame, New RParameter("mydf"), iAdditionalPairNo:=1)
         ucrSelectorForView.SetRCode(clsMainFunction, bReset)
         DataFrameLength()
@@ -140,6 +143,17 @@ Public Class dlgView
         TestOKEnabled()
     End Sub
 
+    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
+        If rdoDispOutputWindow.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsMainFunction)
+            ucrBase.clsRsyntax.iCallType = 2
+        ElseIf rdoDispSepOutputWindow.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsMainFunction)
+        Else
+            ucrBase.clsRsyntax.SetBaseRFunction(clsViewDataFrame)
+        End If
+    End Sub
+
     Private Sub ChangeFunctionParameters()
         If rdoDispOutputWindow.Checked Then
             If ucrChkSpecifyRows.Checked Then
@@ -171,20 +185,6 @@ Public Class dlgView
         ucrNudNumberRows.Maximum = ucrSelectorForView.ucrAvailableDataFrames.iDataFrameLength
     End Sub
 
-    Private Sub Controls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDisplayFrom.ControlValueChanged, ucrPnlDisplayWindow.ControlValueChanged, ucrChkSpecifyRows.ControlValueChanged
-        ChangeFunctionParameters()
-    End Sub
-    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        If rdoDispOutputWindow.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsMainFunction)
-            ucrBase.clsRsyntax.iCallType = 2
-        ElseIf rdoDispSepOutputWindow.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsMainFunction)
-        Else
-            ucrBase.clsRsyntax.SetBaseRFunction(clsViewDataFrame)
-        End If
-    End Sub
-
     Private Sub ucrChkSortColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSortColumn.ControlValueChanged, ucrPnlDisplayWindow.ControlValueChanged
         If rdoHTMLOutputWindow.Checked Then
             ucrReceiverSortCol.SetMeAsReceiver()
@@ -196,6 +196,10 @@ Public Class dlgView
 
     Private Sub ucrSelectorForView_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForView.ControlValueChanged
         DataFrameLength()
+    End Sub
+
+    Private Sub Controls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDisplayFrom.ControlValueChanged, ucrPnlDisplayWindow.ControlValueChanged, ucrChkSpecifyRows.ControlValueChanged
+        ChangeFunctionParameters()
     End Sub
 
     Private Sub ucrReceiverView_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverView.ControlContentsChanged, ucrPnlDisplayWindow.ControlContentsChanged, ucrChkSpecifyRows.ControlContentsChanged, ucrNudNumberRows.ControlContentsChanged, ucrPnlDisplayFrom.ControlContentsChanged, ucrChkSortColumn.ControlContentsChanged, ucrReceiverSortCol.ControlContentsChanged
