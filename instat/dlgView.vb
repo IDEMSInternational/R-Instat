@@ -105,7 +105,11 @@ Public Class dlgView
     Private Sub SetRCodeForControls(bReset As Boolean)
         bControlsUpdated = False
         ucrNudNumberRows.Maximum = Decimal.MaxValue
-
+        ucrPnlDisplayFrom.SetRCode(clsMainFunction, bReset)
+        ucrReceiverView.SetRCode(clsMainFunction, bReset)
+        ucrChkSpecifyRows.SetRCode(clsMainFunction, bReset)
+        ucrPnlDisplayWindow.SetRCode(clsMainFunction, bReset)
+        ucrPnlDisplayFrom.SetRCode(clsMainFunction, bReset)
         ucrReceiverView.AddAdditionalCodeParameterPair(clsViewDataFrame, New RParameter("mydf"), iAdditionalPairNo:=1)
         DataFrameLength()
         bControlsUpdated = True
