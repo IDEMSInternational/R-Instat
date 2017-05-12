@@ -103,16 +103,14 @@ Public Class dlgView
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        bControlsUpdated = False
         ucrNudNumberRows.Maximum = Decimal.MaxValue
         ucrPnlDisplayFrom.SetRCode(clsMainFunction, bReset)
         ucrReceiverView.SetRCode(clsMainFunction, bReset)
         ucrChkSpecifyRows.SetRCode(clsMainFunction, bReset)
         ucrPnlDisplayWindow.SetRCode(clsMainFunction, bReset)
         ucrPnlDisplayFrom.SetRCode(clsMainFunction, bReset)
-        ucrReceiverView.AddAdditionalCodeParameterPair(clsViewDataFrame, New RParameter("mydf"), iAdditionalPairNo:=1)
+        ucrReceiverView.AddAdditionalCodeParameterPair(clsViewDataFrame, New RParameter("x"), iAdditionalPairNo:=1)
         DataFrameLength()
-        bControlsUpdated = True
     End Sub
 
     Private Sub TestOKEnabled()
@@ -145,13 +143,11 @@ Public Class dlgView
         TestOKEnabled()
     End Sub
 
-    Private Sub SetiCallType()
+    Private Sub ChangeFunctionParameters()
         If rdoDispOutputWindow.Checked Then
-            ucrBase.clsRsyntax.iCallType = 2
             If ucrChkSpecifyRows.Checked Then
                 clsMainFunction.AddParameter("title", Chr(34) & ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
                 clsMainFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables)
-                ucrBase.clsRsyntax.SetBaseRFunction(clsMainFunction)
                 If rdoTop.Checked Then
                     clsMainFunction.SetRCommand("head")
                 Else
@@ -162,8 +158,8 @@ Public Class dlgView
             End If
         ElseIf rdoDispSepOutputWindow.Checked Then
             clsMainFunction.SetRCommand("View")
-            ucrBase.clsRsyntax.SetBaseRFunction(clsMainFunction)
         Else
+            clsViewDataFrame.SetPackageName("sjPlot")
             clsViewDataFrame.SetRCommand("sjt.df")
             clsViewDataFrame.RemoveParameterByName("x")
             clsViewDataFrame.RemoveParameterByName("title")
@@ -171,7 +167,6 @@ Public Class dlgView
             clsViewDataFrame.AddParameter("describe", "FALSE", iPosition:=1)
             clsViewDataFrame.AddParameter("altr.row.col", "TRUE", iPosition:=2)
             clsViewDataFrame.AddParameter("hide.progress", "TRUE", iPosition:=4)
-            ucrBase.clsRsyntax.SetBaseRFunction(clsViewDataFrame)
         End If
     End Sub
 
@@ -179,9 +174,20 @@ Public Class dlgView
         ucrNudNumberRows.Maximum = ucrSelectorForView.ucrAvailableDataFrames.iDataFrameLength
     End Sub
 
-    Private Sub FunctionControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDisplayFrom.ControlValueChanged, ucrPnlDisplayWindow.ControlValueChanged, ucrChkSpecifyRows.ControlValueChanged
-        If bControlsUpdated Then
-            SetiCallType()
+    Private Sub Controls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDisplayFrom.ControlValueChanged, ucrPnlDisplayWindow.ControlValueChanged, ucrChkSpecifyRows.ControlValueChanged
+        ChangeFunctionParameters()
+    End Sub
+
+    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
+        If rdoDispOutputWindow.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsMainFunction)
+            ucrBase.clsRsyntax.iCallType = 2
+        ElseIf rdoDispSepOutputWindow.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsMainFunction)
+            ucrBase.clsRsyntax.iCallType = 1
+        Else
+            ucrBase.clsRsyntax.SetBaseRFunction(clsViewDataFrame)
+            ucrBase.clsRsyntax.iCallType = 0
         End If
     End Sub
 
