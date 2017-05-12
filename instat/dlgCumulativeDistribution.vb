@@ -42,7 +42,7 @@ Public Class dlgCumulativeDistribution
         Dim clsScaleYReverseFunc As New RFunction
         Dim clsScaleYReverseParam As New RParameter
         ucrChkIncludePoints.Enabled = False ' temporary
-        ucrChkExceedancePlots.Enabled = False ' temporary
+        ucrChkCountsOnYAxis.Enabled = False ' temporary
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
