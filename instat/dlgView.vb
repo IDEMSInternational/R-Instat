@@ -19,7 +19,6 @@ Public Class dlgView
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsMainFunction, clsViewDataFrame As New RFunction
-    Private bControlsUpdated As Boolean = False
 
     Private Sub dlgView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -89,6 +88,7 @@ Public Class dlgView
 
         ucrNudNumberRows.SetParameter(New RParameter("n", 1))
         ucrNudNumberRows.Minimum = 1
+        ucrNudNumberRows.Maximum = Decimal.MaxValue
         ucrNudNumberRows.SetLinkedDisplayControl(lblNumberofRows)
     End Sub
 
@@ -103,13 +103,13 @@ Public Class dlgView
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrNudNumberRows.Maximum = Decimal.MaxValue
         ucrPnlDisplayFrom.SetRCode(clsMainFunction, bReset)
         ucrReceiverView.SetRCode(clsMainFunction, bReset)
         ucrChkSpecifyRows.SetRCode(clsMainFunction, bReset)
         ucrPnlDisplayWindow.SetRCode(clsMainFunction, bReset)
         ucrPnlDisplayFrom.SetRCode(clsMainFunction, bReset)
-        ucrReceiverView.AddAdditionalCodeParameterPair(clsViewDataFrame, New RParameter("x"), iAdditionalPairNo:=1)
+        ucrReceiverView.AddAdditionalCodeParameterPair(clsViewDataFrame, New RParameter("mydf"), iAdditionalPairNo:=1)
+        ucrSelectorForView.SetRCode(clsMainFunction, bReset)
         DataFrameLength()
     End Sub
 
@@ -177,17 +177,14 @@ Public Class dlgView
     Private Sub Controls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDisplayFrom.ControlValueChanged, ucrPnlDisplayWindow.ControlValueChanged, ucrChkSpecifyRows.ControlValueChanged
         ChangeFunctionParameters()
     End Sub
-
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         If rdoDispOutputWindow.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsMainFunction)
             ucrBase.clsRsyntax.iCallType = 2
         ElseIf rdoDispSepOutputWindow.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsMainFunction)
-            ucrBase.clsRsyntax.iCallType = 1
         Else
             ucrBase.clsRsyntax.SetBaseRFunction(clsViewDataFrame)
-            ucrBase.clsRsyntax.iCallType = 0
         End If
     End Sub
 
