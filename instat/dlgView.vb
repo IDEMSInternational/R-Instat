@@ -149,10 +149,6 @@ Public Class dlgView
         If rdoDispOutputWindow.Checked Then
             ucrBase.clsRsyntax.iCallType = 2
             If ucrChkSpecifyRows.Checked Then
-                'clsViewDataFrame.RemoveParameterByName("mydf")
-                'clsViewDataFrame.RemoveParameterByName("altr.row.col")
-                'clsViewDataFrame.RemoveParameterByName("describe")
-                'clsViewDataFrame.RemoveParameterByName("hide.progress")
                 clsMainFunction.AddParameter("title", Chr(34) & ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
                 clsMainFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsMainFunction)
@@ -165,13 +161,6 @@ Public Class dlgView
                 ucrBase.clsRsyntax.SetBaseRFunction(ucrReceiverView.GetVariables())
             End If
         ElseIf rdoDispSepOutputWindow.Checked Then
-            '            clsMainFunction.SetPackageName("")
-            'clsViewDataFrame.RemoveParameterByName("mydf")
-            'clsViewDataFrame.RemoveParameterByName("altr.row.col")
-            'clsViewDataFrame.RemoveParameterByName("describe")
-            'clsViewDataFrame.RemoveParameterByName("hide.progress")
-            'clsViewDataFrame.RemoveParameterByName("x")
-            'clsViewDataFrame.RemoveParameterByName("title")
             clsMainFunction.SetRCommand("View")
             ucrBase.clsRsyntax.SetBaseRFunction(clsMainFunction)
         Else
