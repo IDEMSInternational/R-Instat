@@ -29,6 +29,9 @@ Partial Class dlgView
         Me.rdoTop = New System.Windows.Forms.RadioButton()
         Me.lblDisplayFrom = New System.Windows.Forms.Label()
         Me.lblNumberofRows = New System.Windows.Forms.Label()
+        Me.rdoHTMLOutputWindow = New System.Windows.Forms.RadioButton()
+        Me.ucrReceiverSortCol = New instat.ucrReceiverSingle()
+        Me.ucrChkSortColumn = New instat.ucrCheck()
         Me.ucrNudNumberRows = New instat.ucrNud()
         Me.ucrPnlDisplayFrom = New instat.UcrPanel()
         Me.ucrChkSpecifyRows = New instat.ucrCheck()
@@ -36,9 +39,6 @@ Partial Class dlgView
         Me.ucrReceiverView = New instat.ucrReceiverMultiple()
         Me.ucrSelectorForView = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.rdoHTMLOutputWindow = New System.Windows.Forms.RadioButton()
-        Me.ucrChkSortColumn = New instat.ucrCheck()
-        Me.ucrReceiverSortCol = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
         '
         'lblSelected
@@ -54,10 +54,10 @@ Partial Class dlgView
         'rdoDispSepOutputWindow
         '
         Me.rdoDispSepOutputWindow.AutoSize = True
-        Me.rdoDispSepOutputWindow.Location = New System.Drawing.Point(10, 249)
+        Me.rdoDispSepOutputWindow.Location = New System.Drawing.Point(10, 203)
         Me.rdoDispSepOutputWindow.Name = "rdoDispSepOutputWindow"
         Me.rdoDispSepOutputWindow.Size = New System.Drawing.Size(158, 17)
-        Me.rdoDispSepOutputWindow.TabIndex = 6
+        Me.rdoDispSepOutputWindow.TabIndex = 4
         Me.rdoDispSepOutputWindow.TabStop = True
         Me.rdoDispSepOutputWindow.Text = "Display in Separate Window"
         Me.rdoDispSepOutputWindow.UseVisualStyleBackColor = True
@@ -65,10 +65,10 @@ Partial Class dlgView
         'rdoDispOutputWindow
         '
         Me.rdoDispOutputWindow.AutoSize = True
-        Me.rdoDispOutputWindow.Location = New System.Drawing.Point(10, 203)
+        Me.rdoDispOutputWindow.Location = New System.Drawing.Point(10, 226)
         Me.rdoDispOutputWindow.Name = "rdoDispOutputWindow"
         Me.rdoDispOutputWindow.Size = New System.Drawing.Size(147, 17)
-        Me.rdoDispOutputWindow.TabIndex = 4
+        Me.rdoDispOutputWindow.TabIndex = 5
         Me.rdoDispOutputWindow.TabStop = True
         Me.rdoDispOutputWindow.Text = "Display in Output Window"
         Me.rdoDispOutputWindow.UseVisualStyleBackColor = True
@@ -79,7 +79,7 @@ Partial Class dlgView
         Me.rdoBottom.Location = New System.Drawing.Point(325, 266)
         Me.rdoBottom.Name = "rdoBottom"
         Me.rdoBottom.Size = New System.Drawing.Size(58, 17)
-        Me.rdoBottom.TabIndex = 15
+        Me.rdoBottom.TabIndex = 13
         Me.rdoBottom.TabStop = True
         Me.rdoBottom.Text = "Bottom"
         Me.rdoBottom.UseVisualStyleBackColor = True
@@ -90,7 +90,7 @@ Partial Class dlgView
         Me.rdoTop.Location = New System.Drawing.Point(325, 243)
         Me.rdoTop.Name = "rdoTop"
         Me.rdoTop.Size = New System.Drawing.Size(44, 17)
-        Me.rdoTop.TabIndex = 13
+        Me.rdoTop.TabIndex = 12
         Me.rdoTop.TabStop = True
         Me.rdoTop.Text = "Top"
         Me.rdoTop.UseVisualStyleBackColor = True
@@ -101,7 +101,7 @@ Partial Class dlgView
         Me.lblDisplayFrom.Location = New System.Drawing.Point(248, 244)
         Me.lblDisplayFrom.Name = "lblDisplayFrom"
         Me.lblDisplayFrom.Size = New System.Drawing.Size(70, 13)
-        Me.lblDisplayFrom.TabIndex = 12
+        Me.lblDisplayFrom.TabIndex = 11
         Me.lblDisplayFrom.Tag = ""
         Me.lblDisplayFrom.Text = "Display From:"
         '
@@ -111,9 +111,39 @@ Partial Class dlgView
         Me.lblNumberofRows.Location = New System.Drawing.Point(248, 223)
         Me.lblNumberofRows.Name = "lblNumberofRows"
         Me.lblNumberofRows.Size = New System.Drawing.Size(89, 13)
-        Me.lblNumberofRows.TabIndex = 9
+        Me.lblNumberofRows.TabIndex = 8
         Me.lblNumberofRows.Tag = "Number_of_rows"
         Me.lblNumberofRows.Text = "Number of Rows:"
+        '
+        'rdoHTMLOutputWindow
+        '
+        Me.rdoHTMLOutputWindow.AutoSize = True
+        Me.rdoHTMLOutputWindow.Location = New System.Drawing.Point(10, 249)
+        Me.rdoHTMLOutputWindow.Name = "rdoHTMLOutputWindow"
+        Me.rdoHTMLOutputWindow.Size = New System.Drawing.Size(180, 17)
+        Me.rdoHTMLOutputWindow.TabIndex = 6
+        Me.rdoHTMLOutputWindow.TabStop = True
+        Me.rdoHTMLOutputWindow.Text = "Display HTML in Output Window"
+        Me.rdoHTMLOutputWindow.UseVisualStyleBackColor = True
+        '
+        'ucrReceiverSortCol
+        '
+        Me.ucrReceiverSortCol.frmParent = Me
+        Me.ucrReceiverSortCol.Location = New System.Drawing.Point(274, 221)
+        Me.ucrReceiverSortCol.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverSortCol.Name = "ucrReceiverSortCol"
+        Me.ucrReceiverSortCol.Selector = Nothing
+        Me.ucrReceiverSortCol.Size = New System.Drawing.Size(119, 20)
+        Me.ucrReceiverSortCol.TabIndex = 9
+        Me.ucrReceiverSortCol.ucrSelector = Nothing
+        '
+        'ucrChkSortColumn
+        '
+        Me.ucrChkSortColumn.Checked = False
+        Me.ucrChkSortColumn.Location = New System.Drawing.Point(248, 200)
+        Me.ucrChkSortColumn.Name = "ucrChkSortColumn"
+        Me.ucrChkSortColumn.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkSortColumn.TabIndex = 7
         '
         'ucrNudNumberRows
         '
@@ -124,7 +154,7 @@ Partial Class dlgView
         Me.ucrNudNumberRows.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberRows.Name = "ucrNudNumberRows"
         Me.ucrNudNumberRows.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudNumberRows.TabIndex = 11
+        Me.ucrNudNumberRows.TabIndex = 10
         Me.ucrNudNumberRows.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrPnlDisplayFrom
@@ -175,37 +205,7 @@ Partial Class dlgView
         Me.ucrBase.Location = New System.Drawing.Point(10, 289)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
-        Me.ucrBase.TabIndex = 16
-        '
-        'rdoHTMLOutputWindow
-        '
-        Me.rdoHTMLOutputWindow.AutoSize = True
-        Me.rdoHTMLOutputWindow.Location = New System.Drawing.Point(10, 226)
-        Me.rdoHTMLOutputWindow.Name = "rdoHTMLOutputWindow"
-        Me.rdoHTMLOutputWindow.Size = New System.Drawing.Size(180, 17)
-        Me.rdoHTMLOutputWindow.TabIndex = 5
-        Me.rdoHTMLOutputWindow.TabStop = True
-        Me.rdoHTMLOutputWindow.Text = "Display HTML in Output Window"
-        Me.rdoHTMLOutputWindow.UseVisualStyleBackColor = True
-        '
-        'ucrChkSortColumn
-        '
-        Me.ucrChkSortColumn.Checked = False
-        Me.ucrChkSortColumn.Location = New System.Drawing.Point(248, 200)
-        Me.ucrChkSortColumn.Name = "ucrChkSortColumn"
-        Me.ucrChkSortColumn.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkSortColumn.TabIndex = 8
-        '
-        'ucrReceiverSortCol
-        '
-        Me.ucrReceiverSortCol.frmParent = Me
-        Me.ucrReceiverSortCol.Location = New System.Drawing.Point(274, 221)
-        Me.ucrReceiverSortCol.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverSortCol.Name = "ucrReceiverSortCol"
-        Me.ucrReceiverSortCol.Selector = Nothing
-        Me.ucrReceiverSortCol.Size = New System.Drawing.Size(119, 20)
-        Me.ucrReceiverSortCol.TabIndex = 10
-        Me.ucrReceiverSortCol.ucrSelector = Nothing
+        Me.ucrBase.TabIndex = 14
         '
         'dlgView
         '
