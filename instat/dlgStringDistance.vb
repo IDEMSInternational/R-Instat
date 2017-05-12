@@ -72,7 +72,7 @@ Public Class dlgStringDistance
         dctMethod.Add("Optimal String Alignment", Chr(34) & "osa" & Chr(34))
         dctMethod.Add("q-Gram Distance", Chr(34) & "qgram" & Chr(34))
         ucrInputComboBoxMethod.SetItems(dctMethod)
-        'ucrInputComboBoxMethod.SetRDefault(Chr(34) & "osa" & Chr(34))
+        ucrInputComboBoxMethod.SetRDefault(Chr(34) & "osa" & Chr(34))
 
         ucrSaveStringDistance.SetPrefix("Dist")
         ucrSaveStringDistance.SetSaveTypeAsColumn()
