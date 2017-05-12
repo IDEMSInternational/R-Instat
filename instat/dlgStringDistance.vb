@@ -61,16 +61,16 @@ Public Class dlgStringDistance
         ucrInputComboBoxMethod.cboInput.DropDownStyle = ComboBoxStyle.DropDownList
 
         Dim dctMethod As New Dictionary(Of String, String)
-        dctMethod.Add("Optimal String Alignment", Chr(34) & "osa" & Chr(34))
-        dctMethod.Add("Levenshtein Distance", Chr(34) & "lv" & Chr(34))
+        dctMethod.Add("Cosine Distance between q-Gram Profiles", Chr(34) & "cosine" & Chr(34))
+        dctMethod.Add("Distance based on Soundex Encoding", Chr(34) & "soundex" & Chr(34))
         dctMethod.Add("Full Damerau-Levenshtein Distance", Chr(34) & "dl" & Chr(34))
         dctMethod.Add("Hamming Distance", Chr(34) & "hamming" & Chr(34))
-        dctMethod.Add("Longest Common Substring Distance", Chr(34) & "lcs" & Chr(34))
-        dctMethod.Add("q-Gram Distance", Chr(34) & "qgram" & Chr(34))
-        dctMethod.Add("Cosine Distance between q-Gram Profiles", Chr(34) & "cosine" & Chr(34))
         dctMethod.Add("Jaccard Distance between q-Gram Profiles", Chr(34) & "jaccard" & Chr(34))
         dctMethod.Add("Jaro or Jaro-Winker Distance", Chr(34) & "jw" & Chr(34))
-        dctMethod.Add("Distance based on Soundex Encoding", Chr(34) & "soundex" & Chr(34))
+        dctMethod.Add("Levenshtein Distance", Chr(34) & "lv" & Chr(34))
+        dctMethod.Add("Longest Common Substring Distance", Chr(34) & "lcs" & Chr(34))
+        dctMethod.Add("Optimal String Alignment", Chr(34) & "osa" & Chr(34))
+        dctMethod.Add("q-Gram Distance", Chr(34) & "qgram" & Chr(34))
         ucrInputComboBoxMethod.SetItems(dctMethod)
         'ucrInputComboBoxMethod.SetRDefault(Chr(34) & "osa" & Chr(34))
 
