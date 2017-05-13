@@ -40,8 +40,7 @@ Public Class dlgDefineCorruptionOutputs
     End Sub
 
     Private Sub InitialiseDialog()
-        'helpID
-        '  ucrBase.iHelpTopicID =
+        ucrBase.iHelpTopicID = 191
 
         'selector
         ucrSelectorCorruptionOutputs.SetParameter(New RParameter("data_name", 0))

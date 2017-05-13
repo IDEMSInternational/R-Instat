@@ -141,6 +141,8 @@ Public Class dlgRegularSequence
             Else
                 ucrBase.OKEnabled(False)
             End If
+        Else
+ ucrBase.OKEnabled(False)
         End If
     End Sub
 

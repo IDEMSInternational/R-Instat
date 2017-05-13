@@ -168,7 +168,7 @@ Public Class ucrReceiver
         AddIncludedMetadataProperty("class", {Chr(34) & strTemp & Chr(34)})
     End Sub
 
-    Public Sub SetIncludedDataTypes(strInclude As String())
+    Public Overridable Sub SetIncludedDataTypes(strInclude As String())
         Dim strTypes(strInclude.Count - 1) As String
 
         Array.Copy(strInclude, strTypes, strInclude.Length)
@@ -179,7 +179,7 @@ Public Class ucrReceiver
         AddIncludedMetadataProperty("class", strTypes)
     End Sub
 
-    Public Sub SetExcludedDataTypes(strExclude As String())
+    Public Overridable Sub SetExcludedDataTypes(strExclude As String())
         Dim strTypes(strExclude.Count - 1) As String
 
         Array.Copy(strExclude, strTypes, strExclude.Length)
@@ -353,7 +353,7 @@ Public Class ucrReceiver
         End If
     End Sub
 
-    Protected Overrides Sub UpdateParameter(clsTempParam As RParameter)
+    Public Overrides Sub UpdateParameter(clsTempParam As RParameter)
         If clsTempParam Is Nothing Then
             clsTempParam = New RParameter
         End If
