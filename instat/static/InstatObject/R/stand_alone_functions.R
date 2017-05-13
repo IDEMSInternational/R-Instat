@@ -225,18 +225,21 @@ pentad <- function(date) {
   return(temp_pentad)
 }
 
-open_NetCDF <- function(nc_data, latitude_col_name, longitude_col_name, default_names){
+open_NetCDF <- function(nc_data, latitude_col_name, longitude_col_name, time_col_name, default_names){
   variables = names(nc_data$var)
   lat_lon_names = names(nc_data$dim)
   #we may need to add latitude_col_name, longitude_col_name to the character vector of valid names
-  lat_names = c("lat", "latitude", "LAT", "Lat", "LATITUDE", "Y")
-  lon_names = c("lon", "longitude", "LON", "Lon", "LONGITUDE", "X")
-  time_names = c("time", "TIME", "Time", "period", "Period", "PERIOD", "T")
+  lat_names = c("lat", "latitude", "LAT", "Lat", "LATITUDE")
+  lon_names = c("lon", "longitude", "LON", "Lon", "LONGITUDE")
+  time_names = c("time", "TIME", "Time", "period", "Period", "PERIOD")
   if (str_trim(latitude_col_name) != ""){
     lat_names <- c(lat_names, latitude_col_name)
   }
   if (str_trim(longitude_col_name) != ""){
     lon_names <- c(lon_names, longitude_col_name)
+  }
+  if (str_trim(time_col_name) != ""){
+    time_names <- c(time_names, time_col_name)
   }
   lat_in <- which(lat_lon_names %in% lat_names)
   lat_found <- (length(lat_in) == 1)
