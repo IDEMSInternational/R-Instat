@@ -117,7 +117,7 @@ Public Class dlgOneWayFrequencies
         clsSjTab.AddParameter("show.summary", "FALSE")
         clsSjTab.AddParameter("digits", 0)
         clsSjTab.AddParameter("ignore.strings", "FALSE")
-
+        clsSjTab.AddParameter("auto.grp.strings ", "FALSE")
         clsSjPlot.SetPackageName("sjPlot")
         clsSjPlot.SetRCommand("sjplot")
         clsPlotGrid.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneWayFreq.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
