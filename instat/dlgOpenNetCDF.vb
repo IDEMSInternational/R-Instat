@@ -57,6 +57,7 @@ Public Class dlgOpenNetCDF
         ucrInputFilePath.SetRCode(clsRCDF, bReset)
         ucrInputLatColName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrInputLonColName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrInputTimeColName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub SetDefaults()
@@ -65,6 +66,7 @@ Public Class dlgOpenNetCDF
         ucrInputDataName.SetName("")
         ucrInputLatColName.SetName("")
         ucrInputLonColName.SetName("")
+        ucrInputTimeColName.SetName("")
         ucrInputFilePath.IsReadOnly = True
         ucrInputFilePath.SetName("")
         clsRDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_NetCDF")
@@ -84,6 +86,8 @@ Public Class dlgOpenNetCDF
         ucrInputLatColName.SetLinkedDisplayControl(lblLatColName)
         ucrInputLonColName.SetParameter(New RParameter("longitude_col_name", 4))
         ucrInputLonColName.SetLinkedDisplayControl(lblLonColName)
+        ucrInputTimeColName.SetParameter(New RParameter("time_col_name", 5))
+        ucrInputTimeColName.SetLinkedDisplayControl(lblTimeColName)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset

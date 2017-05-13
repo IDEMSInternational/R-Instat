@@ -34,6 +34,8 @@ Partial Class dlgOpenNetCDF
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
         Me.ucrInputDataName = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
+        Me.lblTimeColName = New System.Windows.Forms.Label()
+        Me.ucrInputTimeColName = New instat.ucrInputTextBox()
         Me.SuspendLayout()
         '
         'lblLocDataNamePrefix
@@ -145,16 +147,37 @@ Partial Class dlgOpenNetCDF
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 179)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 205)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 11
+        '
+        'lblTimeColName
+        '
+        Me.lblTimeColName.AutoSize = True
+        Me.lblTimeColName.Location = New System.Drawing.Point(10, 184)
+        Me.lblTimeColName.Name = "lblTimeColName"
+        Me.lblTimeColName.Size = New System.Drawing.Size(102, 13)
+        Me.lblTimeColName.TabIndex = 12
+        Me.lblTimeColName.Text = "Time Column Name:"
+        '
+        'ucrInputTimeColName
+        '
+        Me.ucrInputTimeColName.AddQuotesIfUnrecognised = True
+        Me.ucrInputTimeColName.IsMultiline = False
+        Me.ucrInputTimeColName.IsReadOnly = False
+        Me.ucrInputTimeColName.Location = New System.Drawing.Point(150, 180)
+        Me.ucrInputTimeColName.Name = "ucrInputTimeColName"
+        Me.ucrInputTimeColName.Size = New System.Drawing.Size(142, 21)
+        Me.ucrInputTimeColName.TabIndex = 13
         '
         'dlgOpenNetCDF
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(421, 237)
+        Me.ClientSize = New System.Drawing.Size(432, 263)
+        Me.Controls.Add(Me.lblTimeColName)
+        Me.Controls.Add(Me.ucrInputTimeColName)
         Me.Controls.Add(Me.lblLonColName)
         Me.Controls.Add(Me.lblLatColName)
         Me.Controls.Add(Me.ucrInputLonColName)
@@ -190,5 +213,7 @@ Partial Class dlgOpenNetCDF
     Friend WithEvents ucrInputLonColName As ucrInputTextBox
     Friend WithEvents lblLatColName As Label
     Friend WithEvents lblLonColName As Label
+    Friend WithEvents lblTimeColName As Label
+    Friend WithEvents ucrInputTimeColName As ucrInputTextBox
 End Class
 
