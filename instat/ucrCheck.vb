@@ -64,7 +64,7 @@ Public Class ucrCheck
         OnControlValueChanged()
     End Sub
 
-    Protected Overrides Sub UpdateParameter(clsTempParam As RParameter)
+    Public Overrides Sub UpdateParameter(clsTempParam As RParameter)
         If bChangeParameterValue AndAlso clsTempParam IsNot Nothing Then
             If chkCheck.Checked Then
                 If strValueIfChecked <> "" Then

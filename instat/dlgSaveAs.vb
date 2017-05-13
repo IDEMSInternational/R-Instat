@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports System.IO
 Imports instat.Translations
 Public Class dlgSaveAs
     Private bFirstLoad As Boolean = True
@@ -36,7 +35,7 @@ Public Class dlgSaveAs
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 332
         ucrInputFilePath.IsReadOnly = True
-        txtConfirm.Text = "Click Ok to confirm the save"
+        lblConfirm.Text = "Click Ok to confirm the save"
         ucrInputFilePath.SetParameter(New RParameter("file", 0))
     End Sub
 
@@ -56,11 +55,11 @@ Public Class dlgSaveAs
 
     Private Sub TestOKEnabled()
         If Not ucrInputFilePath.IsEmpty() Then
-            txtConfirm.Show()
+            lblConfirm.Show()
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
-            txtConfirm.Hide()
+            lblConfirm.Hide()
         End If
     End Sub
 
