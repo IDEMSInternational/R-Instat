@@ -41,6 +41,7 @@ Public Class dlgView
         ucrReceiverView.SetParameter(New RParameter("x", 0))
         ucrReceiverView.SetParameterIsRFunction()
         ucrReceiverView.Selector = ucrSelectorForView
+        ucrReceiverView.bForceAsDataFrame = True
 
         ucrPnlDisplayWindow.AddRadioButton(rdoDispOutputWindow)
         ucrPnlDisplayWindow.AddRadioButton(rdoDispSepOutputWindow)
@@ -198,7 +199,7 @@ Public Class dlgView
         DataFrameLength()
     End Sub
 
-    Private Sub Controls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDisplayFrom.ControlValueChanged, ucrPnlDisplayWindow.ControlValueChanged, ucrChkSpecifyRows.ControlValueChanged
+    Private Sub Controls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDisplayFrom.ControlValueChanged, ucrPnlDisplayWindow.ControlValueChanged, ucrChkSpecifyRows.ControlValueChanged, ucrReceiverView.ControlValueChanged
         ChangeFunctionParameters()
     End Sub
 
