@@ -20,7 +20,6 @@ Public Class dlgExtremesClimatic
     Private bReset As Boolean = True
     Private clsExtreme As New RFunction
     Private clsRunCalcFunc, clsMinMaxCalcFunction, clsMinMaxFilterFunc, clsMinMaxGroupByFunc, clsMinMaxManipulationsFunc, clsMinMaxSummariseFunc, clsMinMaxFuncExp, clsPeaksFunction As New RFunction
-    Private strCurrDataName As String = ""
 
     Private Sub dlgExtremesClimatic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -59,6 +58,9 @@ Public Class dlgExtremesClimatic
         ucrReceiverData.bAutoFill = True
         ucrReceiverYear.bAutoFill = True
 
+        ucrReceiverData.SetParameter(New RParameter("x", 0))
+        ucrReceiverData.bWithQuotes = False
+
         'ucrRdoOptions
         ucrPnlMinMaxPeaks.AddRadioButton(rdoMinMax)
         ucrPnlMinMaxPeaks.AddRadioButton(rdoPeaks)
@@ -93,7 +95,7 @@ Public Class dlgExtremesClimatic
     Private Sub SetRCodeForControls(bReset)
         'ucrNudFrom.SetRCode(clsMinMaxSummariseFunc, bReset)
         'ucrNudTo.SetRCode(clsMinMaxSummariseFunc, bReset)
-        ucrReceiverData.SetRCode(clsMinMaxSummariseFunc, bReset)
+        ucrReceiverData.SetRCode(clsMinMaxFuncExp, bReset)
         ucrInputSave.SetRCode(clsMinMaxSummariseFunc, bReset)
     End Sub
 
@@ -135,6 +137,8 @@ Public Class dlgExtremesClimatic
         clsMinMaxGroupByFunc.SetAssignTo("grouping")
 
         clsMinMaxFuncExp.SetRCommand("max")
+        'TODO Make option on dialog
+        clsMinMaxFuncExp.AddParameter("na.rm", "TRUE")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsRunCalcFunc)
     End Sub
@@ -154,12 +158,42 @@ Public Class dlgExtremesClimatic
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrNudControlsFromTo_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrNudFrom.ControlContentsChanged, ucrNudTo.ControlContentsChanged, ucrReceiverYear.ControlValueChanged, ucrReceiverStations.ControlValueChanged, ucrReceiverDOY.ControlValueChanged, ucrReceiverData.ControlValueChanged, ucrPnlMinMaxPeaks.ControlValueChanged
+    Private Sub ucrChkMaxima_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMaxima.ControlValueChanged
+        If ucrChkMaxima.Checked Then
+            clsMinMaxFuncExp.SetRCommand("max")
+        Else
+            clsMinMaxFuncExp.SetRCommand("min")
+        End If
+        SetMinMaxFunctionExp()
+    End Sub
+
+    Private Sub SetSummaryFuncCalcFrom()
+        Dim strCurrDataName As String = ""
+
+        If Not ucrReceiverData.IsEmpty() Then
+            clsMinMaxSummariseFunc.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames() & ")")
+        Else
+            clsMinMaxSummariseFunc.RemoveParameterByName("calculated_from")
+        End If
+    End Sub
+
+    Private Sub SetFilterFuncCalcFrom()
+        Dim strCurrDataName As String = ""
+
+        If Not ucrReceiverDOY.IsEmpty() Then
+            clsMinMaxFilterFunc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")")
+            clsMinMaxFilterFunc.AddParameter("function_exp", Chr(34) & ucrReceiverDOY.GetVariableNames(False) & ">=" & ucrNudFrom.Value & " & " & ucrReceiverDOY.GetVariableNames(False) & "<=" & ucrNudTo.Value & Chr(34))
+        Else
+            clsMinMaxFilterFunc.RemoveParameterByName("calculated_from")
+        End If
+    End Sub
+
+    Private Sub SetGroupByFuncCalcFrom()
+        Dim strCurrDataName As String = ""
         Dim strGroupByCalcFrom As String = ""
 
         strCurrDataName = Chr(34) & ucrSelectorClimaticExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34)
 
-        'Group By Parameters
         If Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverStations.IsEmpty Then
             strGroupByCalcFrom = "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames() & ", " & strCurrDataName & "=" & ucrReceiverStations.GetVariableNames() & ")"
         ElseIf Not ucrReceiverYear.IsEmpty Then
@@ -172,47 +206,39 @@ Public Class dlgExtremesClimatic
         Else
             clsMinMaxGroupByFunc.RemoveParameterByName("calculated_from")
         End If
-
-        'Filter parameters
-        If Not ucrReceiverDOY.IsEmpty() Then
-            clsMinMaxFilterFunc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")")
-            clsMinMaxFilterFunc.AddParameter("function_exp", Chr(34) & ucrReceiverDOY.GetVariableNames(False) & ">=" & ucrNudFrom.Value & " & " & ucrReceiverDOY.GetVariableNames(False) & "<=" & ucrNudTo.Value & Chr(34))
-        Else
-            clsMinMaxFilterFunc.RemoveParameterByName("calculated_from")
-        End If
-
-        'Summarise Paramerers
-        If Not ucrReceiverDOY.IsEmpty() Then
-            clsMinMaxSummariseFunc.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames() & ")")
-            If ucrChkMaxima.Checked Then
-                clsMinMaxSummariseFunc.AddParameter("function_exp", Chr(34) & "max(" & ucrReceiverData.GetVariableNames(False) & ")" & Chr(34))
-            Else
-                clsMinMaxSummariseFunc.AddParameter("function_exp", Chr(34) & "min(" & ucrReceiverData.GetVariableNames(False) & ")" & Chr(34))
-            End If
-        Else
-            clsMinMaxSummariseFunc.RemoveParameterByName("calculated_from")
-            clsMinMaxSummariseFunc.RemoveParameterByName("function_exp")
-        End If
-        If rdoMinMax.Checked Then
-            If ucrChkMaxima.Checked Then
-                ucrInputSave.SetName("max")
-            Else
-                ucrInputSave.SetName("min")
-            End If
-        ElseIf rdoPeaks.Checked Then
-            ucrInputSave.SetName("value")
-        End If
-    End Sub
-
-    Private Sub ucrChkMaxima_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMaxima.ControlValueChanged
-        If ucrChkMaxima.Checked Then
-            clsMinMaxFuncExp.SetRCommand("max")
-        Else
-            clsMinMaxFuncExp.SetRCommand("min")
-        End If
     End Sub
 
     Private Sub SetMinMaxFunctionExp()
         clsMinMaxSummariseFunc.AddParameter("function_exp", Chr(34) & clsMinMaxFuncExp.ToScript() & Chr(34))
+    End Sub
+
+    Private Sub ucrPnlMinMaxPeaks_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMinMaxPeaks.ControlValueChanged
+        If Not ucrInputSave.bUserTyped Then
+            If rdoMinMax.Checked Then
+                If ucrChkMaxima.Checked Then
+                    ucrInputSave.SetName("max")
+                Else
+                    ucrInputSave.SetName("min")
+                End If
+            ElseIf rdoPeaks.Checked Then
+                ucrInputSave.SetName("value")
+            End If
+        End If
+    End Sub
+
+    Private Sub ucrReceiverYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlValueChanged
+        SetGroupByFuncCalcFrom()
+    End Sub
+
+    Private Sub ucrReceiverStations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStations.ControlValueChanged
+        SetGroupByFuncCalcFrom()
+    End Sub
+
+    Private Sub ucrReceiverDOY_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDOY.ControlValueChanged
+        SetFilterFuncCalcFrom()
+    End Sub
+
+    Private Sub ucrReceiverData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlValueChanged
+        SetSummaryFuncCalcFrom()
     End Sub
 End Class
