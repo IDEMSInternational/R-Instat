@@ -114,10 +114,10 @@ Public Class dlgOneWayFrequencies
         clsSjTab.SetPackageName("sjPlot")
         clsSjTab.SetRCommand("sjtab")
 
-        clsSjTab.AddParameter("show.summary", "FALSE")
-        clsSjTab.AddParameter("digits", 0)
-        clsSjTab.AddParameter("ignore.strings", "FALSE")
-
+        clsSjTab.AddParameter("show.summary", "FALSE", iPosition:=7)
+        clsSjTab.AddParameter("digits", 0, iPosition:=10)
+        clsSjTab.AddParameter("ignore.strings", "FALSE", iPosition:=11)
+        clsSjTab.AddParameter("auto.grp.strings ", "FALSE", iPosition:=12)
         clsSjPlot.SetPackageName("sjPlot")
         clsSjPlot.SetRCommand("sjplot")
         clsPlotGrid.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneWayFreq.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")

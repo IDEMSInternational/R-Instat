@@ -1238,6 +1238,23 @@ instat_object$set("public", "get_database_variable_names", function(query, data_
 }
 )
 
+instat_object$set("public", "get_nc_variable_names", function(file = "", as_list = FALSE, ...) {
+  if(file == "") {
+    vars <- ""
+  }
+  else {
+    nc_file <- nc_open(file)
+    vars <- names(nc_file$dim)
+  }
+  if(as_list) {
+    out <- list()
+    out[["dim variables"]] <- vars
+    return(out)
+  }
+  else return(vars)
+}
+)
+
 instat_object$set("public", "has_database_connection", function() {
   return(!is.null(self$get_database_connection()))
 }
