@@ -37,7 +37,6 @@ Public Class dlgInventoryPlot
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.iHelpTopicID = 359
         ucrBase.clsRsyntax.iCallType = 3
-
         ucrInventoryPlotSelector.SetParameter(New RParameter("data_name", 0))
         ucrInventoryPlotSelector.SetParameterIsString()
 
@@ -72,7 +71,7 @@ Public Class dlgInventoryPlot
 
         ucrPnlPlotLayout.SetParameter(New RParameter("year_doy_plot"))
         ucrPnlPlotLayout.AddRadioButton(rdoyear_doy_plot, "TRUE")
-        ucrPnlPlotLayout.AddRadioButton(rdoDate, "FALSE")
+        ucrPnlPlotLayout.AddRadioButton(rdoDatePlot, "FALSE")
         ucrPnlPlotLayout.SetRDefault(Chr(34) & "FALSE" & Chr(34))
 
         Dim dctFacetByPairs As New Dictionary(Of String, String)
