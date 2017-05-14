@@ -55,18 +55,16 @@ Public Class dlgOpenNetCDF
         ucrInputDataName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrInputLocDataName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrInputFilePath.SetRCode(clsRCDF, bReset)
-        ucrInputLatColName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrInputLonColName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrInputTimeColName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrReceiverLatName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrReceiverLonName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrReceiverTimeName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub SetDefaults()
         clsRDefaultFunction = New RFunction
         ucrInputLocDataName.SetName("lat_lon_data")
         ucrInputDataName.SetName("")
-        ucrInputLatColName.SetName("")
-        ucrInputLonColName.SetName("")
-        ucrInputTimeColName.SetName("")
+        ucrSelectorNetCDF.Reset()
         ucrInputFilePath.IsReadOnly = True
         ucrInputFilePath.SetName("")
         clsRDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_NetCDF")
@@ -76,18 +74,31 @@ Public Class dlgOpenNetCDF
 
     Private Sub InitialiseDialog()
         'ucrBase.iHelpTopicID = 
+
+        ucrReceiverLatName.SetParameter(New RParameter("latitude_col_name", 3))
+        ucrReceiverLatName.SetParameterIsString()
+        ucrReceiverLatName.Selector = ucrSelectorNetCDF
+        ucrReceiverLatName.SetItemType("nc_dim_variables")
+        ucrReceiverLatName.strNcFilePath = ucrInputFilePath.GetText()
+
+        ucrReceiverLonName.SetParameter(New RParameter("longitude_col_name", 4))
+        ucrReceiverLonName.SetParameterIsString()
+        ucrReceiverLonName.Selector = ucrSelectorNetCDF
+        ucrReceiverLonName.SetItemType("nc_dim_variables")
+        ucrReceiverLonName.strNcFilePath = ucrInputFilePath.GetText()
+
+        ucrReceiverTimeName.SetParameter(New RParameter("time_col_name", 5))
+        ucrReceiverTimeName.SetParameterIsString()
+        ucrReceiverTimeName.Selector = ucrSelectorNetCDF
+        ucrReceiverTimeName.SetItemType("nc_dim_variables")
+        ucrReceiverTimeName.strNcFilePath = ucrInputFilePath.GetText()
+
         ucrInputLocDataName.SetDefaultTypeAsDataFrame()
         ucrInputDataName.SetValidationTypeAsRVariable()
         ucrInputLocDataName.SetValidationTypeAsRVariable()
         ucrInputFilePath.SetParameter(New RParameter("filename", 0))
         ucrInputDataName.SetParameter(New RParameter("main_data_name", 1))
         ucrInputLocDataName.SetParameter(New RParameter("loc_data_name", 2))
-        ucrInputLatColName.SetParameter(New RParameter("latitude_col_name", 3))
-        ucrInputLatColName.SetLinkedDisplayControl(lblLatColName)
-        ucrInputLonColName.SetParameter(New RParameter("longitude_col_name", 4))
-        ucrInputLonColName.SetLinkedDisplayControl(lblLonColName)
-        ucrInputTimeColName.SetParameter(New RParameter("time_col_name", 5))
-        ucrInputTimeColName.SetLinkedDisplayControl(lblTimeColName)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -152,5 +163,8 @@ Public Class dlgOpenNetCDF
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFilePath.ControlContentsChanged, ucrInputDataName.ControlContentsChanged, ucrInputLocDataName.ControlContentsChanged
         TestOkEnabled()
+        ucrReceiverLatName.strNcFilePath = ucrInputFilePath.GetText()
+        ucrReceiverLonName.strNcFilePath = ucrInputFilePath.GetText()
+        ucrReceiverTimeName.strNcFilePath = ucrInputFilePath.GetText()
     End Sub
 End Class
