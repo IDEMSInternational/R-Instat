@@ -981,7 +981,7 @@ instat_object$set("public","get_keys", function(data_name, key_name) {
 
 instat_object$set("public","get_links", function(link_name) {
   if(!missing(link_name)) {
-    if(!link_name %in% names(private$keys)) stop(link_name, " not found.")
+    if(!link_name %in% names(private$.links)) stop(link_name, " not found.")
     return(private$.links[[link_name]])
   }
   else return(private$.links)
@@ -1127,25 +1127,6 @@ instat_object$set("public", "get_key_names", function(data_name, include_overall
 }
 )
 
-instat_object$set("public", "get_link_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c(), exclude_self_links = TRUE) {
-  if(exclude_self_links) {
-    out <- c()
-    i <- 1
-    for(link in private$.links) {
-      if(link$from_data_frame != link$to_data_frame) out <- c(out, names(private$.links)[i])
-      i <- i + 1
-    }
-  }
-  else out <- names(private$.links)
-  if(as_list) {
-    lst <- list()
-    lst[[overall_label]] <- out
-    return(lst)
-  }
-  else return(out)
-}
-)
-
 instat_object$set("public", "remove_key", function(data_name, key_name) {
   self$get_data_objects(data_name)$remove_key(key_name)
 }
@@ -1257,6 +1238,23 @@ instat_object$set("public", "get_database_variable_names", function(query, data_
 }
 )
 
+instat_object$set("public", "get_nc_variable_names", function(file = "", as_list = FALSE, ...) {
+  if(file == "") {
+    vars <- ""
+  }
+  else {
+    nc_file <- nc_open(file)
+    vars <- names(nc_file$dim)
+  }
+  if(as_list) {
+    out <- list()
+    out[["dim variables"]] <- vars
+    return(out)
+  }
+  else return(vars)
+}
+)
+
 instat_object$set("public", "has_database_connection", function() {
   return(!is.null(self$get_database_connection()))
 }
@@ -1355,14 +1353,14 @@ instat_object$set("public", "export_workspace", function(data_names, file, inclu
       graphs <- self$get_graphs(temp_name)
       graph_names <- names(graphs)
       for(i in seq_along(graphs)) {
-        e[[paste(temp_name, graph_names[i], sep = "_")]] <- graphs[i]
+        e[[paste(temp_name, graph_names[i], sep = "_")]] <- graphs[[i]]
       }
     }
     if(include_models) {
       models <- self$get_models(temp_name)
       model_names <- names(models)
       for(i in seq_along(models)) {
-        e[[paste(temp_name, model_names[i], sep = "_")]] <- models[i]
+        e[[paste(temp_name, model_names[i], sep = "_")]] <- models[[i]]
       }
     }
     if(include_metadata) {
