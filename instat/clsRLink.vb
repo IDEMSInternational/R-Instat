@@ -493,7 +493,7 @@ Public Class RLink
         bInstatObjectExists = True
     End Sub
 
-    Public Sub FillListView(lstView As ListView, strType As String, Optional lstIncludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional lstExcludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional strDataFrameName As String = "", Optional strHeading As String = "Variables", Optional strExcludedItems As String() = Nothing, Optional strDatabaseQuery As String = "")
+    Public Sub FillListView(lstView As ListView, strType As String, Optional lstIncludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional lstExcludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional strDataFrameName As String = "", Optional strHeading As String = "Variables", Optional strExcludedItems As String() = Nothing, Optional strDatabaseQuery As String = "", Optional strNcFilePath As String = "")
         Dim vecColumns As GenericVector
         Dim chrCurrColumns As CharacterVector
         Dim i As Integer
@@ -527,6 +527,9 @@ Public Class RLink
                 Case "database_variables"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_database_variable_names")
                     clsGetItems.AddParameter("query", Chr(34) & strDatabaseQuery & Chr(34))
+                Case "nc_dim_variables"
+                    clsGetItems.SetRCommand(strInstatDataObject & "$get_nc_variable_names")
+                    clsGetItems.AddParameter("file", Chr(34) & strNcFilePath & Chr(34))
             End Select
             clsGetItems.AddParameter("as_list", "TRUE")
             lstView.Clear()
