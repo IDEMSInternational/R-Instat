@@ -50,7 +50,7 @@ Partial Class dlgInventoryPlot
         Me.cmdOptions.Location = New System.Drawing.Point(10, 222)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(121, 23)
-        Me.cmdOptions.TabIndex = 8
+        Me.cmdOptions.TabIndex = 9
         Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
@@ -60,7 +60,7 @@ Partial Class dlgInventoryPlot
         Me.lblDate.Location = New System.Drawing.Point(263, 46)
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(33, 13)
-        Me.lblDate.TabIndex = 1
+        Me.lblDate.TabIndex = 4
         Me.lblDate.Text = "Date:"
         '
         'lblStation
@@ -69,7 +69,7 @@ Partial Class dlgInventoryPlot
         Me.lblStation.Location = New System.Drawing.Point(263, 204)
         Me.lblStation.Name = "lblStation"
         Me.lblStation.Size = New System.Drawing.Size(91, 13)
-        Me.lblStation.TabIndex = 5
+        Me.lblStation.TabIndex = 10
         Me.lblStation.Text = "Station (Optional):"
         '
         'cmdInventoryPlotOptions
@@ -78,7 +78,7 @@ Partial Class dlgInventoryPlot
         Me.cmdInventoryPlotOptions.Location = New System.Drawing.Point(10, 194)
         Me.cmdInventoryPlotOptions.Name = "cmdInventoryPlotOptions"
         Me.cmdInventoryPlotOptions.Size = New System.Drawing.Size(121, 23)
-        Me.cmdInventoryPlotOptions.TabIndex = 7
+        Me.cmdInventoryPlotOptions.TabIndex = 8
         Me.cmdInventoryPlotOptions.Text = "Inventory Plot Options"
         Me.cmdInventoryPlotOptions.UseVisualStyleBackColor = True
         '
@@ -88,7 +88,7 @@ Partial Class dlgInventoryPlot
         Me.lblElement.Location = New System.Drawing.Point(263, 85)
         Me.lblElement.Name = "lblElement"
         Me.lblElement.Size = New System.Drawing.Size(59, 13)
-        Me.lblElement.TabIndex = 3
+        Me.lblElement.TabIndex = 6
         Me.lblElement.Text = "Element(s):"
         '
         'rdoDate
@@ -104,7 +104,7 @@ Partial Class dlgInventoryPlot
         Me.rdoDate.Location = New System.Drawing.Point(159, 12)
         Me.rdoDate.Name = "rdoDate"
         Me.rdoDate.Size = New System.Drawing.Size(100, 28)
-        Me.rdoDate.TabIndex = 17
+        Me.rdoDate.TabIndex = 2
         Me.rdoDate.Text = "Date"
         Me.rdoDate.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.rdoDate.UseVisualStyleBackColor = True
@@ -120,7 +120,7 @@ Partial Class dlgInventoryPlot
         Me.rdoyear_doy_plot.Location = New System.Drawing.Point(265, 12)
         Me.rdoyear_doy_plot.Name = "rdoyear_doy_plot"
         Me.rdoyear_doy_plot.Size = New System.Drawing.Size(100, 28)
-        Me.rdoyear_doy_plot.TabIndex = 16
+        Me.rdoyear_doy_plot.TabIndex = 3
         Me.rdoyear_doy_plot.Text = "Year - DOY Plot"
         Me.rdoyear_doy_plot.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoyear_doy_plot.UseVisualStyleBackColor = True
@@ -130,7 +130,7 @@ Partial Class dlgInventoryPlot
         Me.ucrPnlPlotLayout.Location = New System.Drawing.Point(139, 12)
         Me.ucrPnlPlotLayout.Name = "ucrPnlPlotLayout"
         Me.ucrPnlPlotLayout.Size = New System.Drawing.Size(236, 29)
-        Me.ucrPnlPlotLayout.TabIndex = 15
+        Me.ucrPnlPlotLayout.TabIndex = 1
         '
         'ucrReceiverDate
         '
@@ -140,7 +140,7 @@ Partial Class dlgInventoryPlot
         Me.ucrReceiverDate.Name = "ucrReceiverDate"
         Me.ucrReceiverDate.Selector = Nothing
         Me.ucrReceiverDate.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverDate.TabIndex = 2
+        Me.ucrReceiverDate.TabIndex = 5
         Me.ucrReceiverDate.ucrSelector = Nothing
         '
         'ucrInputTitle
@@ -151,7 +151,7 @@ Partial Class dlgInventoryPlot
         Me.ucrInputTitle.Location = New System.Drawing.Point(92, 302)
         Me.ucrInputTitle.Name = "ucrInputTitle"
         Me.ucrInputTitle.Size = New System.Drawing.Size(204, 21)
-        Me.ucrInputTitle.TabIndex = 12
+        Me.ucrInputTitle.TabIndex = 17
         '
         'ucrChkTitle
         '
@@ -159,7 +159,7 @@ Partial Class dlgInventoryPlot
         Me.ucrChkTitle.Location = New System.Drawing.Point(10, 303)
         Me.ucrChkTitle.Name = "ucrChkTitle"
         Me.ucrChkTitle.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkTitle.TabIndex = 11
+        Me.ucrChkTitle.TabIndex = 16
         '
         'ucrReceiverElements
         '
@@ -169,7 +169,7 @@ Partial Class dlgInventoryPlot
         Me.ucrReceiverElements.Name = "ucrReceiverElements"
         Me.ucrReceiverElements.Selector = Nothing
         Me.ucrReceiverElements.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverElements.TabIndex = 4
+        Me.ucrReceiverElements.TabIndex = 7
         Me.ucrReceiverElements.ucrSelector = Nothing
         '
         'ucrChkShowNonMissing
@@ -178,7 +178,7 @@ Partial Class dlgInventoryPlot
         Me.ucrChkShowNonMissing.Location = New System.Drawing.Point(10, 251)
         Me.ucrChkShowNonMissing.Name = "ucrChkShowNonMissing"
         Me.ucrChkShowNonMissing.Size = New System.Drawing.Size(151, 20)
-        Me.ucrChkShowNonMissing.TabIndex = 9
+        Me.ucrChkShowNonMissing.TabIndex = 12
         Me.ucrChkShowNonMissing.Visible = False
         '
         'ucrSaveGraph
@@ -186,7 +186,7 @@ Partial Class dlgInventoryPlot
         Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 329)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
         Me.ucrSaveGraph.Size = New System.Drawing.Size(255, 24)
-        Me.ucrSaveGraph.TabIndex = 13
+        Me.ucrSaveGraph.TabIndex = 18
         '
         'ucrChkFlipCoordinates
         '
@@ -194,7 +194,7 @@ Partial Class dlgInventoryPlot
         Me.ucrChkFlipCoordinates.Location = New System.Drawing.Point(10, 277)
         Me.ucrChkFlipCoordinates.Name = "ucrChkFlipCoordinates"
         Me.ucrChkFlipCoordinates.Size = New System.Drawing.Size(151, 20)
-        Me.ucrChkFlipCoordinates.TabIndex = 10
+        Me.ucrChkFlipCoordinates.TabIndex = 15
         '
         'ucrReceiverStation
         '
@@ -204,7 +204,7 @@ Partial Class dlgInventoryPlot
         Me.ucrReceiverStation.Name = "ucrReceiverStation"
         Me.ucrReceiverStation.Selector = Nothing
         Me.ucrReceiverStation.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverStation.TabIndex = 6
+        Me.ucrReceiverStation.TabIndex = 11
         Me.ucrReceiverStation.ucrSelector = Nothing
         '
         'ucrInventoryPlotSelector
@@ -222,7 +222,7 @@ Partial Class dlgInventoryPlot
         Me.ucrBase.Location = New System.Drawing.Point(10, 354)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 14
+        Me.ucrBase.TabIndex = 19
         '
         'ucrInputFacetBy
         '
@@ -231,7 +231,7 @@ Partial Class dlgInventoryPlot
         Me.ucrInputFacetBy.Location = New System.Drawing.Point(252, 249)
         Me.ucrInputFacetBy.Name = "ucrInputFacetBy"
         Me.ucrInputFacetBy.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputFacetBy.TabIndex = 18
+        Me.ucrInputFacetBy.TabIndex = 14
         '
         'lblFacetBy
         '
@@ -239,7 +239,7 @@ Partial Class dlgInventoryPlot
         Me.lblFacetBy.Location = New System.Drawing.Point(194, 251)
         Me.lblFacetBy.Name = "lblFacetBy"
         Me.lblFacetBy.Size = New System.Drawing.Size(52, 13)
-        Me.lblFacetBy.TabIndex = 19
+        Me.lblFacetBy.TabIndex = 13
         Me.lblFacetBy.Text = "Facet By:"
         '
         'dlgInventoryPlot
