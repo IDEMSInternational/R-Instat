@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports RDotNet
 Imports unvell.ReoGrid.CellTypes
 Imports unvell.ReoGrid.Events
@@ -26,11 +27,15 @@ Public Class ucrFactor
     Public WithEvents shtCurrSheet As unvell.ReoGrid.Worksheet
     Public bIsSelector As Boolean
     Public bIsMultipleSelector As Boolean
+    Public bIsGridColumn As Boolean
+    Public iColumnToGet As Integer
     Public iSelectorColumnIndex As Integer
     Public strSelectorColumnName As String
     Private bIsEditable As Boolean
     Private lstEditableColumns As List(Of String)
     Public bIncludeCopyOfLevels As Boolean
+    Public strExtraColumn As String = ""
+    Public strSelectedLevels As String()
 
     Public Sub New()
 
@@ -40,6 +45,8 @@ Public Class ucrFactor
         ' Add any initialization after the InitializeComponent() call.
         bIsSelector = False
         bIsMultipleSelector = False
+        bIsGridColumn = False
+        iColumnToGet = -1
         iSelectorColumnIndex = -1
         strSelectorColumnName = "Select Level"
         bIsEditable = False
@@ -65,12 +72,22 @@ Public Class ucrFactor
     Public Sub SetAsSingleSelector()
         bIsSelector = True
         bIsMultipleSelector = False
+        bIsGridColumn = False
         RefreshFactorData()
     End Sub
 
     Public Sub SetAsMultipleSelector()
         bIsSelector = True
         bIsMultipleSelector = True
+        bIsGridColumn = False
+        RefreshFactorData()
+    End Sub
+
+    Public Sub SetIsGridColumn(iColumnIndex As Integer)
+        bIsSelector = False
+        bIsMultipleSelector = False
+        bIsGridColumn = True
+        iColumnToGet = iColumnIndex
         RefreshFactorData()
     End Sub
 
@@ -123,6 +140,10 @@ Public Class ucrFactor
                     shtCurrSheet(i, shtCurrSheet.ColumnCount - 1) = shtCurrSheet(i, 0)
                 Next
             End If
+            If strExtraColumn <> "" Then
+                shtCurrSheet.AppendCols(1)
+                shtCurrSheet.ColumnHeaders(shtCurrSheet.ColumnCount - 1).Text = strExtraColumn
+            End If
             If bIsSelector Then
                 iSelectorColumnIndex = shtCurrSheet.ColumnCount
                 shtCurrSheet.AppendCols(1)
@@ -152,6 +173,7 @@ Public Class ucrFactor
             shtCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
             shtCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
             ApplyColumnSettings()
+            RaiseEvent GridContentChanged()
         End If
     End Sub
 
@@ -178,15 +200,19 @@ Public Class ucrFactor
         'sets the default as the reference level (always first level)
         'TODO are there other initial selections needed?
         Dim i As Integer
+        Dim bSelect As Boolean
+
         If iSelectorColumnIndex <> -1 Then
             For i = 0 To shtCurrSheet.RowCount - 1
-                If i = 0 Then
-                    shtCurrSheet(i, iSelectorColumnIndex) = True
+                If strSelectedLevels IsNot Nothing AndAlso strSelectedLevels.Count > 0 Then
+                    bSelect = strSelectedLevels.Contains(shtCurrSheet(i, 0))
                 Else
-                    shtCurrSheet(i, iSelectorColumnIndex) = False
+                    bSelect = (i = 0)
                 End If
+                shtCurrSheet(i, iSelectorColumnIndex) = bSelect
             Next
         End If
+        strSelectedLevels = Nothing
     End Sub
 
     Public Sub AddLevel()
@@ -353,6 +379,19 @@ Public Class ucrFactor
         End If
     End Sub
 
+    Public Sub SetColumn(strValues As String(), iColumnIndex As Integer)
+        Dim i As Integer
+        If shtCurrSheet IsNot Nothing Then
+            If strValues.Count <> shtCurrSheet.RowCount Then
+                MsgBox("Developer error: Cannot set value of control " & Name & " because the list of values does not match the number of levels.")
+            Else
+                For i = 0 To shtCurrSheet.RowCount - 1
+                    shtCurrSheet(i, iColumnIndex) = strValues(i)
+                Next
+            End If
+        End If
+    End Sub
+
     Private Sub grdFactorData_VisibleChanged(sender As Object, e As EventArgs) Handles grdFactorData.VisibleChanged
         RaiseEvent GridVisibleChanged()
     End Sub
@@ -389,5 +428,38 @@ Public Class ucrFactor
 
     Private Sub shtCurrSheet_BeforeCut(sender As Object, e As BeforeRangeOperationEventArgs) Handles shtCurrSheet.BeforeCut
         e.IsCancelled = True
+    End Sub
+
+    Public Overrides Sub UpdateParameter(clsTempParam As RParameter)
+        If clsTempParam IsNot Nothing Then
+            If bIsSelector Then
+                clsTempParam.SetArgumentValue(GetSelectedLevels())
+            ElseIf bIsGridColumn Then
+                If IsColumnComplete(iColumnToGet) Then
+                    clsTempParam.SetArgumentValue(GetColumnInFactorSheet(iColumn:=iColumnToGet))
+                End If
+            End If
+        End If
+    End Sub
+
+    Protected Overrides Sub SetControlValue()
+        Dim lstCurrentValues As String() = Nothing
+        Dim clsTempParameter As RParameter
+
+        clsTempParameter = GetParameter()
+        If clsTempParameter IsNot Nothing AndAlso clsTempParameter.bIsString Then
+            lstCurrentValues = ExtractItemsFromRList(clsTempParameter.strArgumentValue)
+            If bIsSelector Then
+                strSelectedLevels = lstCurrentValues
+                RefreshFactorData()
+            ElseIf bIsGridColumn Then
+                RefreshFactorData()
+                SetColumn(lstCurrentValues, iColumnToGet)
+            End If
+        End If
+    End Sub
+
+    Private Sub ucrFactor_GridContentChanged() Handles Me.GridContentChanged, Me.SelectedLevelChanged
+        OnControlValueChanged()
     End Sub
 End Class
