@@ -16,6 +16,7 @@ Imports instat.Translations
 Public Class dlgCombine
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private clsInteraction As New RFunction
 
     Private Sub dlgCombine_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -34,12 +35,11 @@ Public Class dlgCombine
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
-
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 39
 
         'ucrReceiver
-        ucrFactorsReceiver.SetParameter(New RParameter("x"))
+        ucrFactorsReceiver.SetParameter(New RParameter("x", 0))
         ucrFactorsReceiver.SetParameterIsRFunction()
         ucrFactorsReceiver.Selector = ucrSelectorCombineFactors
         ucrFactorsReceiver.SetMeAsReceiver()
@@ -54,25 +54,18 @@ Public Class dlgCombine
         ucrNewColName.SetLabelText("New Column Name:")
 
         'chkbox
-        ucrChkDropUnusedLevels.SetParameter(New RParameter("drop"))
+        ucrChkDropUnusedLevels.SetParameter(New RParameter("drop", 1))
         ucrChkDropUnusedLevels.SetText("Drop Unused Levels")
         ucrChkDropUnusedLevels.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkDropUnusedLevels.SetRDefault("FALSE")
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
+        clsInteraction = New RFunction
         ucrSelectorCombineFactors.Reset()
-
-        clsDefaultFunction.SetRCommand("interaction")
-        clsDefaultFunction.SetAssignTo(strTemp:=ucrNewColName.GetText(), strTempDataframe:=ucrSelectorCombineFactors.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText())
-
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
-    End Sub
-
-    Private Sub ReOpenDialog()
-
+        clsInteraction.SetRCommand("interaction")
+        clsInteraction.SetAssignTo(strTemp:=ucrNewColName.GetText(), strTempDataframe:=ucrSelectorCombineFactors.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText())
+        ucrBase.clsRsyntax.SetBaseRFunction(clsInteraction)
     End Sub
 
     Private Sub TestOkEnabled()
