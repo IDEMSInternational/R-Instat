@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgFactorDataFrame
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-
+    Private clsFactorDataframe As New RFunction
     Private Sub ucrSelectorFactorDataFrame_Load(sender As Object, e As EventArgs) Handles ucrSelectorFactorDataFrame.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -40,43 +40,38 @@ Public Class dlgFactorDataFrame
         ucrSelectorFactorDataFrame.SetParameterIsString()
 
         ' ucrreceiver
-        ucrReceiverFactorDataFrame.SetParameter(New RParameter("factor", 1))
+        ucrReceiverFactorDataFrame.SetParameter(New RParameter("factor", 0))
         ucrReceiverFactorDataFrame.SetParameterIsString()
         ucrReceiverFactorDataFrame.Selector = ucrSelectorFactorDataFrame
         ucrReceiverFactorDataFrame.SetMeAsReceiver()
         ucrReceiverFactorDataFrame.SetIncludedDataTypes({"factor"})
 
         'ucrnewname
-        ucrInputFactorNames.SetParameter(New RParameter("factor_data_frame_name", 2))
+        ucrInputFactorNames.SetParameter(New RParameter("factor_data_frame_name", 1))
         ucrInputFactorNames.SetValidationTypeAsRVariable()
 
         'chk boxes
         ucrChkAddCurrentContrasts.SetText("Add Current Contrasts")
-        ucrChkAddCurrentContrasts.SetParameter(New RParameter("include_contrasts", 3))
+        ucrChkAddCurrentContrasts.SetParameter(New RParameter("include_contrasts", 2))
         ucrChkAddCurrentContrasts.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkAddCurrentContrasts.SetRDefault("TRUE")
 
         ucrChkReplaceIfAlreadyExists.SetText("Replace if Already Exists")
-        ucrChkReplaceIfAlreadyExists.SetParameter(New RParameter("replace", 4))
+        ucrChkReplaceIfAlreadyExists.SetParameter(New RParameter("replace", 3))
         ucrChkReplaceIfAlreadyExists.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkReplaceIfAlreadyExists.SetRDefault("TRUE")
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
+        clsFactorDataframe = New RFunction
 
         ucrInputFactorNames.Reset()
         ucrSelectorFactorDataFrame.Reset()
         ucrInputFactorNames.ResetText()
 
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$create_factor_data_frame")
-
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-
         CheckAutoName()
-    End Sub
-
-    Private Sub ReopenDialog()
+        clsFactorDataframe.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$create_factor_data_frame")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsFactorDataframe)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)

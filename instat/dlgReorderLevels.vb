@@ -68,7 +68,7 @@ Public Class dlgReorderLevels
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverFactor.IsEmpty Then
+        If Not ucrReceiverFactor.IsEmpty AndAlso ucrSelectorFactorLevelsToReorder.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -81,7 +81,7 @@ Public Class dlgReorderLevels
         TestOKEnabled()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged, ucrSelectorFactorLevelsToReorder.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
