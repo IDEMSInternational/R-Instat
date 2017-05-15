@@ -79,7 +79,7 @@ Public Class dlgLinePlot
         ucrChkPoints.SetText("Points")
         ucrChkPoints.SetParameter(clsGeomPointParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
-        ucrSave.SetPrefix("Line")
+        ucrSave.SetPrefix("lineplot")
         ucrSave.SetIsComboBox()
         ucrSave.SetSaveTypeAsGraph()
         ucrSave.SetCheckBoxText("Save Graph")
