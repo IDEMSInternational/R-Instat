@@ -84,7 +84,7 @@ Partial Class dlgOpenNetCDF
         Me.lblLatColName.Location = New System.Drawing.Point(250, 122)
         Me.lblLatColName.Name = "lblLatColName"
         Me.lblLatColName.Size = New System.Drawing.Size(117, 13)
-        Me.lblLatColName.TabIndex = 7
+        Me.lblLatColName.TabIndex = 8
         Me.lblLatColName.Text = "Latitude Column Name:"
         '
         'lblLonColName
@@ -93,7 +93,7 @@ Partial Class dlgOpenNetCDF
         Me.lblLonColName.Location = New System.Drawing.Point(250, 165)
         Me.lblLonColName.Name = "lblLonColName"
         Me.lblLonColName.Size = New System.Drawing.Size(126, 13)
-        Me.lblLonColName.TabIndex = 9
+        Me.lblLonColName.TabIndex = 10
         Me.lblLonColName.Text = "Longitude Column Name:"
         '
         'ucrInputLocDataName
@@ -131,7 +131,7 @@ Partial Class dlgOpenNetCDF
         Me.ucrBase.Location = New System.Drawing.Point(13, 276)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 11
+        Me.ucrBase.TabIndex = 14
         '
         'lblTimeColName
         '
@@ -151,7 +151,7 @@ Partial Class dlgOpenNetCDF
         Me.ucrReceiverLatName.Selector = Nothing
         Me.ucrReceiverLatName.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverLatName.strNcFilePath = ""
-        Me.ucrReceiverLatName.TabIndex = 15
+        Me.ucrReceiverLatName.TabIndex = 9
         Me.ucrReceiverLatName.ucrSelector = Nothing
         '
         'ucrReceiverLonName
@@ -163,7 +163,7 @@ Partial Class dlgOpenNetCDF
         Me.ucrReceiverLonName.Selector = Nothing
         Me.ucrReceiverLonName.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverLonName.strNcFilePath = ""
-        Me.ucrReceiverLonName.TabIndex = 16
+        Me.ucrReceiverLonName.TabIndex = 11
         Me.ucrReceiverLonName.ucrSelector = Nothing
         '
         'ucrReceiverTimeName
@@ -175,7 +175,7 @@ Partial Class dlgOpenNetCDF
         Me.ucrReceiverTimeName.Selector = Nothing
         Me.ucrReceiverTimeName.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverTimeName.strNcFilePath = ""
-        Me.ucrReceiverTimeName.TabIndex = 17
+        Me.ucrReceiverTimeName.TabIndex = 13
         Me.ucrReceiverTimeName.ucrSelector = Nothing
         '
         'ucrSelectorNetCDF
@@ -185,7 +185,7 @@ Partial Class dlgOpenNetCDF
         Me.ucrSelectorNetCDF.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorNetCDF.Name = "ucrSelectorNetCDF"
         Me.ucrSelectorNetCDF.Size = New System.Drawing.Size(201, 147)
-        Me.ucrSelectorNetCDF.TabIndex = 18
+        Me.ucrSelectorNetCDF.TabIndex = 7
         '
         'dlgOpenNetCDF
         '
