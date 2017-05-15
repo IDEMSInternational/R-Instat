@@ -15,8 +15,6 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-
-Imports instat
 Imports instat.Translations
 Public Class dlgFlatFrequencyTable
     Private bFirstLoad As Boolean = True
@@ -51,6 +49,7 @@ Public Class dlgFlatFrequencyTable
         ucrColumnVariable.SetParameter(New RParameter("col.vars", 2))
         ucrColumnVariable.SetParameterIsString()
         ucrChkAddMargins.SetText("Addmargins")
+
         ucrChkAddMargins.AddParameterValueFunctionNamesCondition(True, "x", "addmargins", True)
         ucrChkAddMargins.AddParameterValueFunctionNamesCondition(False, "x", "addmargins", False)
 
@@ -68,16 +67,18 @@ Public Class dlgFlatFrequencyTable
         clsAddMargin.SetRCommand("addmargins")
         clsAddMargin.AddParameter(clsRFunctionParameter:=clsTable)
         clsFtable.SetRCommand("ftable")
-        clsFtable.AddParameter(clsRFunctionParameter:=clsTable)
+        clsFtable.AddParameter("table", clsRFunctionParameter:=clsTable)
         ucrBase.clsRsyntax.SetBaseRFunction(clsFtable)
     End Sub
 
-    Private Sub ucrChkAddMargins_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddMargins.ControlValueChanged
+    Private Sub ucrchkaddmargins_controlvaluechanged(ucrchangedcontrol As ucrCore) Handles ucrChkAddMargins.ControlValueChanged
         If ucrChkAddMargins.Checked Then
+            clsFtable.RemoveParameterByName("table")
             clsFtable.AddParameter("x", clsRFunctionParameter:=clsAddMargin)
         Else
-            clsFtable.AddParameter(clsRFunctionParameter:=clsTable)
             clsFtable.RemoveParameterByName("x")
+            clsFtable.AddParameter("table", clsRFunctionParameter:=clsTable)
+
         End If
     End Sub
 
