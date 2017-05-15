@@ -94,19 +94,16 @@ Public Class dlgOpenNetCDF
         ucrReceiverLatName.SetParameterIsString()
         ucrReceiverLatName.Selector = ucrSelectorNetCDF
         ucrReceiverLatName.SetItemType("nc_dim_variables")
-        'ucrReceiverLatName.strNcFilePath = ucrInputFilePath.GetText()
 
         ucrReceiverLonName.SetParameter(New RParameter("longitude_col_name", 4))
         ucrReceiverLonName.SetParameterIsString()
         ucrReceiverLonName.Selector = ucrSelectorNetCDF
         ucrReceiverLonName.SetItemType("nc_dim_variables")
-        'ucrReceiverLonName.strNcFilePath = ucrInputFilePath.GetText()
 
         ucrReceiverTimeName.SetParameter(New RParameter("time_col_name", 5))
         ucrReceiverTimeName.SetParameterIsString()
         ucrReceiverTimeName.Selector = ucrSelectorNetCDF
         ucrReceiverTimeName.SetItemType("nc_dim_variables")
-        'ucrReceiverTimeName.strNcFilePath = ucrInputFilePath.GetText()
 
         ucrInputLocDataName.SetDefaultTypeAsDataFrame()
         ucrInputDataName.SetValidationTypeAsRVariable()
@@ -138,10 +135,6 @@ Public Class dlgOpenNetCDF
         Else
             ucrBase.OKEnabled(False)
         End If
-    End Sub
-
-    Private Sub ucrInputFilePath_Load(sender As Object, e As EventArgs) Handles ucrInputFilePath.Load
-
     End Sub
 
     'Loads the open dialog on load and click
@@ -209,7 +202,6 @@ Public Class dlgOpenNetCDF
                 For Each lviTempVariable As ListViewItem In ucrSelectorNetCDF.lstAvailableVariable.Items
                     For Each strValue As String In lstRecognisedValues
                         If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]|_", String.Empty).Contains(strValue) Then
-                            ' ucrTempReceiver.Add(lviTempVariable.Text, ucrSelectorDefineClimaticData.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
                             ucrTempReceiver.Add(lviTempVariable.Text, ucrSelectorNetCDF.lstAvailableVariable.Text)
                             bFound = True
                             Exit For
@@ -239,8 +231,4 @@ Public Class dlgOpenNetCDF
         Next
         Return lstValues
     End Function
-
-    Private Sub ucrSelectorNetCDF_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorNetCDF.ControlContentsChanged
-        AutoFillReceivers()
-    End Sub
 End Class
