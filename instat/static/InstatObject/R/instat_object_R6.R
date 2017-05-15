@@ -1082,8 +1082,8 @@ instat_object$set("public","create_factor_data_frame", function(data_name, facto
 }
 )
 
-instat_object$set("public","split_date", function(data_name, col_name = "", year = FALSE, day = FALSE, week = FALSE,  month_val = FALSE, month_abbr = FALSE, month_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE, day_in_month = FALSE, day_in_year = FALSE,  leap_year = FALSE, day_in_year_366 = FALSE, dekade = FALSE, pentad = FALSE ) {
-  self$get_data_objects(data_name)$split_date(col_name = col_name , week = week, month_val = month_val,  month_abbr = month_abbr, month_name = month_name, weekday_val = weekday_val, weekday_abbr = weekday_abbr,  weekday_name =  weekday_name, day = day, year = year, day_in_month = day_in_month, day_in_year = day_in_year,  leap_year =  leap_year, day_in_year_366 = day_in_year_366, dekade = dekade, pentad = pentad)
+instat_object$set("public","split_date", function(data_name, col_name = "", year = FALSE, day = FALSE, week = FALSE,  month_val = FALSE, month_abbr = FALSE, month_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE, day_in_month = FALSE, day_in_year = FALSE,  leap_year = FALSE, day_in_year_366 = FALSE, dekade = FALSE, pentad = FALSE, shift_day = FALSE, shift_year = FALSE, shift_start_day) {
+  self$get_data_objects(data_name)$split_date(col_name = col_name , week = week, month_val = month_val,  month_abbr = month_abbr, month_name = month_name, weekday_val = weekday_val, weekday_abbr = weekday_abbr,  weekday_name =  weekday_name, day = day, year = year, day_in_month = day_in_month, day_in_year = day_in_year,  leap_year =  leap_year, day_in_year_366 = day_in_year_366, dekade = dekade, pentad = pentad, shift_day = shift_day, shift_year = shift_year, shift_start_day = shift_start_day)
 }
 )
 
@@ -1097,8 +1097,8 @@ instat_object$set("public", "import_SST", function(dataset, data_from = 5, data_
 }
 )
 
-instat_object$set("public","make_inventory_plot", function(data_name, date_col, station_col = c(), elements_cols, add_to_data = FALSE, coord_flip = FALSE, graph_title = "Data Availability") {
-  self$get_data_objects(data_name)$make_inventory_plot(date_col = date_col , station_col = station_col, elements_cols =elements_cols, add_to_data = add_to_data, coord_flip = coord_flip, graph_title = graph_title)
+instat_object$set("public","make_inventory_plot", function(data_name, date_col, station_col = NULL, year_col = NULL, doy_col = NULL, element_cols = NULL, add_to_data = FALSE, year_doy_plot = FALSE, coord_flip = FALSE, facet_by = NULL, graph_title = "Data Availability") {
+  self$get_data_objects(data_name)$make_inventory_plot(date_col = date_col, station_col = station_col, year_col = year_col, doy_col = doy_col, element_cols = element_cols, add_to_data = add_to_data, year_doy_plot = year_doy_plot, coord_flip = coord_flip, facet_by = facet_by, graph_title = graph_title)
 }
 )
 
