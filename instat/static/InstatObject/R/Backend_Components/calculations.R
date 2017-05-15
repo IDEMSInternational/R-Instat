@@ -142,7 +142,7 @@ instat_calculation <- R6Class("instat_calculation",
 )
 
 instat_calculation$set("public", "data_clone", function() {
-  ret <- calculation$new(function_exp = self$function_exp, type = self$type,
+  ret <- instat_calculation$new(function_exp = self$function_exp, type = self$type,
                          name = self$name, result_name = self$result_name, 
                          manipulations = lapply(self$manipulations, function(x) x$data_clone()), 
                          sub_calculations = lapply(self$sub_calculations, function(x) x$data_clone()),
