@@ -74,7 +74,7 @@ Public Class dlgUseGraph
         'ucrBase.clsRsyntax.SetOperation("+")
         'sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
 
-        ucrSaveGraph.SetPrefix("UseGraph")
+        ucrSaveGraph.SetPrefix("usegraph")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrGraphsSelector.ucrAvailableDataFrames)
         ucrSaveGraph.SetCheckBoxText("Save Graph")
