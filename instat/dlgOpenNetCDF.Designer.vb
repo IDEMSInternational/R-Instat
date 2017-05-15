@@ -81,7 +81,7 @@ Partial Class dlgOpenNetCDF
         'lblLatColName
         '
         Me.lblLatColName.AutoSize = True
-        Me.lblLatColName.Location = New System.Drawing.Point(250, 122)
+        Me.lblLatColName.Location = New System.Drawing.Point(260, 122)
         Me.lblLatColName.Name = "lblLatColName"
         Me.lblLatColName.Size = New System.Drawing.Size(117, 13)
         Me.lblLatColName.TabIndex = 8
@@ -90,7 +90,7 @@ Partial Class dlgOpenNetCDF
         'lblLonColName
         '
         Me.lblLonColName.AutoSize = True
-        Me.lblLonColName.Location = New System.Drawing.Point(250, 165)
+        Me.lblLonColName.Location = New System.Drawing.Point(260, 165)
         Me.lblLonColName.Name = "lblLonColName"
         Me.lblLonColName.Size = New System.Drawing.Size(126, 13)
         Me.lblLonColName.TabIndex = 10
@@ -128,7 +128,7 @@ Partial Class dlgOpenNetCDF
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(13, 276)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 265)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 14
@@ -136,7 +136,7 @@ Partial Class dlgOpenNetCDF
         'lblTimeColName
         '
         Me.lblTimeColName.AutoSize = True
-        Me.lblTimeColName.Location = New System.Drawing.Point(250, 208)
+        Me.lblTimeColName.Location = New System.Drawing.Point(260, 208)
         Me.lblTimeColName.Name = "lblTimeColName"
         Me.lblTimeColName.Size = New System.Drawing.Size(102, 13)
         Me.lblTimeColName.TabIndex = 12
@@ -145,7 +145,7 @@ Partial Class dlgOpenNetCDF
         'ucrReceiverLatName
         '
         Me.ucrReceiverLatName.frmParent = Me
-        Me.ucrReceiverLatName.Location = New System.Drawing.Point(269, 140)
+        Me.ucrReceiverLatName.Location = New System.Drawing.Point(260, 140)
         Me.ucrReceiverLatName.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverLatName.Name = "ucrReceiverLatName"
         Me.ucrReceiverLatName.Selector = Nothing
@@ -157,7 +157,7 @@ Partial Class dlgOpenNetCDF
         'ucrReceiverLonName
         '
         Me.ucrReceiverLonName.frmParent = Me
-        Me.ucrReceiverLonName.Location = New System.Drawing.Point(269, 184)
+        Me.ucrReceiverLonName.Location = New System.Drawing.Point(260, 184)
         Me.ucrReceiverLonName.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverLonName.Name = "ucrReceiverLonName"
         Me.ucrReceiverLonName.Selector = Nothing
@@ -169,7 +169,7 @@ Partial Class dlgOpenNetCDF
         'ucrReceiverTimeName
         '
         Me.ucrReceiverTimeName.frmParent = Me
-        Me.ucrReceiverTimeName.Location = New System.Drawing.Point(269, 226)
+        Me.ucrReceiverTimeName.Location = New System.Drawing.Point(260, 226)
         Me.ucrReceiverTimeName.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverTimeName.Name = "ucrReceiverTimeName"
         Me.ucrReceiverTimeName.Selector = Nothing
@@ -181,7 +181,7 @@ Partial Class dlgOpenNetCDF
         'ucrSelectorNetCDF
         '
         Me.ucrSelectorNetCDF.bShowHiddenColumns = False
-        Me.ucrSelectorNetCDF.Location = New System.Drawing.Point(13, 125)
+        Me.ucrSelectorNetCDF.Location = New System.Drawing.Point(10, 114)
         Me.ucrSelectorNetCDF.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorNetCDF.Name = "ucrSelectorNetCDF"
         Me.ucrSelectorNetCDF.Size = New System.Drawing.Size(201, 147)
@@ -191,7 +191,7 @@ Partial Class dlgOpenNetCDF
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(427, 334)
+        Me.ClientSize = New System.Drawing.Size(427, 323)
         Me.Controls.Add(Me.ucrSelectorNetCDF)
         Me.Controls.Add(Me.ucrReceiverTimeName)
         Me.Controls.Add(Me.ucrReceiverLonName)
