@@ -100,14 +100,11 @@ Public Class ucrReceiver
 
         Set(strFilePath As String)
             strPrvNcFilePath = strFilePath
+            Clear()
             If Selector IsNot Nothing Then
                 Selector.LoadList()
             End If
-            If strFilePath = "" Then
-                Me.Clear()
-            End If
         End Set
-
     End Property
 
     Public Overridable Function GetVariables(Optional bForceAsDataFrame As Boolean = False) As RFunction
