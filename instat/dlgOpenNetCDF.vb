@@ -130,7 +130,7 @@ Public Class dlgOpenNetCDF
     End Sub
 
     Private Sub TestOkEnabled()
-        If (ucrInputDataName.Text <> "" AndAlso ucrInputLocDataName.Text <> "" AndAlso ucrInputFilePath.Text <> "" AndAlso (Not ucrInputDataName.Text = ucrInputLocDataName.Text)) Then
+        If (ucrInputDataName.Text <> "" AndAlso ucrInputLocDataName.Text <> "" AndAlso ucrInputFilePath.Text <> "" AndAlso (Not ucrInputDataName.Text = ucrInputLocDataName.Text) AndAlso Not ucrReceiverLatName.IsEmpty() AndAlso Not ucrReceiverLonName.IsEmpty()) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -185,6 +185,10 @@ Public Class dlgOpenNetCDF
         ucrReceiverLatName.strNcFilePath = ucrInputFilePath.GetText()
         ucrReceiverLonName.strNcFilePath = ucrInputFilePath.GetText()
         ucrReceiverTimeName.strNcFilePath = ucrInputFilePath.GetText()
+    End Sub
+
+    Private Sub Receivers_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLatName.ControlContentsChanged, ucrReceiverLonName.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 
     Private Sub AutoFillReceivers()
