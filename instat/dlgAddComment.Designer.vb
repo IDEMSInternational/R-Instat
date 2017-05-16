@@ -23,8 +23,6 @@ Partial Class dlgAddComment
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
-        Me.rdoRow = New System.Windows.Forms.RadioButton()
-        Me.rdoCell = New System.Windows.Forms.RadioButton()
         Me.ucrDataFrame = New instat.ucrDataFrame()
         Me.ucrSelectorAddComment = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverRow = New instat.ucrReceiverSingle()
@@ -33,6 +31,8 @@ Partial Class dlgAddComment
         Me.lblColumn = New System.Windows.Forms.Label()
         Me.lblComment = New System.Windows.Forms.Label()
         Me.ucrInputComment = New instat.ucrInputTextBox()
+        Me.rdoCell = New System.Windows.Forms.RadioButton()
+        Me.rdoRow = New System.Windows.Forms.RadioButton()
         Me.ucrPnlCellOrRow = New instat.UcrPanel()
         Me.SuspendLayout()
         '
@@ -42,28 +42,6 @@ Partial Class dlgAddComment
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 1
-        '
-        'rdoRow
-        '
-        Me.rdoRow.AutoSize = True
-        Me.rdoRow.Location = New System.Drawing.Point(266, 16)
-        Me.rdoRow.Name = "rdoRow"
-        Me.rdoRow.Size = New System.Drawing.Size(47, 17)
-        Me.rdoRow.TabIndex = 5
-        Me.rdoRow.TabStop = True
-        Me.rdoRow.Text = "Row"
-        Me.rdoRow.UseVisualStyleBackColor = True
-        '
-        'rdoCell
-        '
-        Me.rdoCell.AutoSize = True
-        Me.rdoCell.Location = New System.Drawing.Point(31, 16)
-        Me.rdoCell.Name = "rdoCell"
-        Me.rdoCell.Size = New System.Drawing.Size(42, 17)
-        Me.rdoCell.TabIndex = 6
-        Me.rdoCell.TabStop = True
-        Me.rdoCell.Text = "Cell"
-        Me.rdoCell.UseVisualStyleBackColor = True
         '
         'ucrDataFrame
         '
@@ -92,7 +70,9 @@ Partial Class dlgAddComment
         Me.ucrReceiverRow.Name = "ucrReceiverRow"
         Me.ucrReceiverRow.Selector = Nothing
         Me.ucrReceiverRow.Size = New System.Drawing.Size(137, 20)
+        Me.ucrReceiverRow.strNcFilePath = ""
         Me.ucrReceiverRow.TabIndex = 9
+        Me.ucrReceiverRow.ucrSelector = Nothing
         '
         'lblRow
         '
@@ -111,7 +91,9 @@ Partial Class dlgAddComment
         Me.ucrReceiverColumn.Name = "ucrReceiverColumn"
         Me.ucrReceiverColumn.Selector = Nothing
         Me.ucrReceiverColumn.Size = New System.Drawing.Size(137, 20)
+        Me.ucrReceiverColumn.strNcFilePath = ""
         Me.ucrReceiverColumn.TabIndex = 11
+        Me.ucrReceiverColumn.ucrSelector = Nothing
         '
         'lblColumn
         '
@@ -133,6 +115,7 @@ Partial Class dlgAddComment
         '
         'ucrInputComment
         '
+        Me.ucrInputComment.AddQuotesIfUnrecognised = True
         Me.ucrInputComment.IsMultiline = False
         Me.ucrInputComment.IsReadOnly = False
         Me.ucrInputComment.Location = New System.Drawing.Point(266, 200)
@@ -140,18 +123,55 @@ Partial Class dlgAddComment
         Me.ucrInputComment.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputComment.TabIndex = 15
         '
+        'rdoCell
+        '
+        Me.rdoCell.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoCell.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoCell.FlatAppearance.BorderSize = 2
+        Me.rdoCell.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoCell.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoCell.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.rdoCell.Location = New System.Drawing.Point(100, 12)
+        Me.rdoCell.Name = "rdoCell"
+        Me.rdoCell.Size = New System.Drawing.Size(100, 28)
+        Me.rdoCell.TabIndex = 18
+        Me.rdoCell.Text = "Cell"
+        Me.rdoCell.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoCell.UseVisualStyleBackColor = True
+        '
+        'rdoRow
+        '
+        Me.rdoRow.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoRow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.rdoRow.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoRow.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoRow.FlatAppearance.BorderSize = 2
+        Me.rdoRow.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoRow.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoRow.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoRow.Location = New System.Drawing.Point(198, 12)
+        Me.rdoRow.Name = "rdoRow"
+        Me.rdoRow.Size = New System.Drawing.Size(100, 28)
+        Me.rdoRow.TabIndex = 19
+        Me.rdoRow.Text = "Row"
+        Me.rdoRow.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.rdoRow.UseVisualStyleBackColor = True
+        '
         'ucrPnlCellOrRow
         '
-        Me.ucrPnlCellOrRow.Location = New System.Drawing.Point(12, 12)
+        Me.ucrPnlCellOrRow.Location = New System.Drawing.Point(95, 11)
         Me.ucrPnlCellOrRow.Name = "ucrPnlCellOrRow"
-        Me.ucrPnlCellOrRow.Size = New System.Drawing.Size(383, 32)
-        Me.ucrPnlCellOrRow.TabIndex = 16
+        Me.ucrPnlCellOrRow.Size = New System.Drawing.Size(214, 29)
+        Me.ucrPnlCellOrRow.TabIndex = 17
         '
         'dlgAddComment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(410, 320)
+        Me.Controls.Add(Me.rdoCell)
+        Me.Controls.Add(Me.rdoRow)
+        Me.Controls.Add(Me.ucrPnlCellOrRow)
         Me.Controls.Add(Me.ucrInputComment)
         Me.Controls.Add(Me.lblComment)
         Me.Controls.Add(Me.lblColumn)
@@ -160,10 +180,7 @@ Partial Class dlgAddComment
         Me.Controls.Add(Me.ucrReceiverRow)
         Me.Controls.Add(Me.ucrSelectorAddComment)
         Me.Controls.Add(Me.ucrDataFrame)
-        Me.Controls.Add(Me.rdoCell)
-        Me.Controls.Add(Me.rdoRow)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.ucrPnlCellOrRow)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -176,8 +193,6 @@ Partial Class dlgAddComment
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents rdoRow As RadioButton
-    Friend WithEvents rdoCell As RadioButton
     Friend WithEvents ucrDataFrame As ucrDataFrame
     Friend WithEvents ucrSelectorAddComment As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverRow As ucrReceiverSingle
@@ -186,5 +201,7 @@ Partial Class dlgAddComment
     Friend WithEvents ucrReceiverColumn As ucrReceiverSingle
     Friend WithEvents lblComment As Label
     Friend WithEvents ucrInputComment As ucrInputTextBox
+    Friend WithEvents rdoCell As RadioButton
+    Friend WithEvents rdoRow As RadioButton
     Friend WithEvents ucrPnlCellOrRow As UcrPanel
 End Class
