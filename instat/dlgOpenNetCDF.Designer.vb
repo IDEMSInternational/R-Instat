@@ -46,8 +46,8 @@ Partial Class dlgOpenNetCDF
         Me.lblLocDataNamePrefix.Name = "lblLocDataNamePrefix"
         Me.lblLocDataNamePrefix.Size = New System.Drawing.Size(105, 13)
         Me.lblLocDataNamePrefix.TabIndex = 5
-        Me.lblLocDataNamePrefix.Tag = "Lat_Lon_Data_Name:"
-        Me.lblLocDataNamePrefix.Text = "Lat/Lon Data Name:"
+        Me.lblLocDataNamePrefix.Tag = "Location_Data_Name:"
+        Me.lblLocDataNamePrefix.Text = "Location Data Name:"
         '
         'cmdOpenDataSet
         '
