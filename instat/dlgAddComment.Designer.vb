@@ -22,57 +22,20 @@ Partial Class dlgAddComment
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrDataFrame = New instat.ucrDataFrame()
-        Me.ucrSelectorAddComment = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverRow = New instat.ucrReceiverSingle()
         Me.lblRow = New System.Windows.Forms.Label()
-        Me.ucrReceiverColumn = New instat.ucrReceiverSingle()
         Me.lblColumn = New System.Windows.Forms.Label()
         Me.lblComment = New System.Windows.Forms.Label()
-        Me.ucrInputComment = New instat.ucrInputTextBox()
         Me.rdoCell = New System.Windows.Forms.RadioButton()
         Me.rdoRow = New System.Windows.Forms.RadioButton()
         Me.ucrPnlCellOrRow = New instat.UcrPanel()
+        Me.ucrInputComment = New instat.ucrInputTextBox()
+        Me.ucrReceiverColumn = New instat.ucrReceiverSingle()
+        Me.ucrReceiverRow = New instat.ucrReceiverSingle()
+        Me.ucrSelectorAddComment = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrDataFrame = New instat.ucrDataFrame()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.UcrDialogDisabled1 = New instat.ucrDialogDisabled()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 260)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
-        Me.ucrBase.TabIndex = 1
-        '
-        'ucrDataFrame
-        '
-        Me.ucrDataFrame.bUseCurrentFilter = True
-        Me.ucrDataFrame.Location = New System.Drawing.Point(9, 55)
-        Me.ucrDataFrame.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrDataFrame.Name = "ucrDataFrame"
-        Me.ucrDataFrame.Size = New System.Drawing.Size(120, 50)
-        Me.ucrDataFrame.TabIndex = 7
-        '
-        'ucrSelectorAddComment
-        '
-        Me.ucrSelectorAddComment.bShowHiddenColumns = False
-        Me.ucrSelectorAddComment.bUseCurrentFilter = True
-        Me.ucrSelectorAddComment.Location = New System.Drawing.Point(9, 57)
-        Me.ucrSelectorAddComment.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorAddComment.Name = "ucrSelectorAddComment"
-        Me.ucrSelectorAddComment.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorAddComment.TabIndex = 8
-        '
-        'ucrReceiverRow
-        '
-        Me.ucrReceiverRow.frmParent = Me
-        Me.ucrReceiverRow.Location = New System.Drawing.Point(266, 105)
-        Me.ucrReceiverRow.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverRow.Name = "ucrReceiverRow"
-        Me.ucrReceiverRow.Selector = Nothing
-        Me.ucrReceiverRow.Size = New System.Drawing.Size(137, 20)
-        Me.ucrReceiverRow.strNcFilePath = ""
-        Me.ucrReceiverRow.TabIndex = 9
-        Me.ucrReceiverRow.ucrSelector = Nothing
         '
         'lblRow
         '
@@ -82,18 +45,6 @@ Partial Class dlgAddComment
         Me.lblRow.Size = New System.Drawing.Size(32, 13)
         Me.lblRow.TabIndex = 10
         Me.lblRow.Text = "Row:"
-        '
-        'ucrReceiverColumn
-        '
-        Me.ucrReceiverColumn.frmParent = Me
-        Me.ucrReceiverColumn.Location = New System.Drawing.Point(266, 154)
-        Me.ucrReceiverColumn.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverColumn.Name = "ucrReceiverColumn"
-        Me.ucrReceiverColumn.Selector = Nothing
-        Me.ucrReceiverColumn.Size = New System.Drawing.Size(137, 20)
-        Me.ucrReceiverColumn.strNcFilePath = ""
-        Me.ucrReceiverColumn.TabIndex = 11
-        Me.ucrReceiverColumn.ucrSelector = Nothing
         '
         'lblColumn
         '
@@ -112,16 +63,6 @@ Partial Class dlgAddComment
         Me.lblComment.Size = New System.Drawing.Size(54, 13)
         Me.lblComment.TabIndex = 14
         Me.lblComment.Text = "Comment:"
-        '
-        'ucrInputComment
-        '
-        Me.ucrInputComment.AddQuotesIfUnrecognised = True
-        Me.ucrInputComment.IsMultiline = False
-        Me.ucrInputComment.IsReadOnly = False
-        Me.ucrInputComment.Location = New System.Drawing.Point(266, 200)
-        Me.ucrInputComment.Name = "ucrInputComment"
-        Me.ucrInputComment.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputComment.TabIndex = 15
         '
         'rdoCell
         '
@@ -164,11 +105,80 @@ Partial Class dlgAddComment
         Me.ucrPnlCellOrRow.Size = New System.Drawing.Size(214, 29)
         Me.ucrPnlCellOrRow.TabIndex = 17
         '
+        'ucrInputComment
+        '
+        Me.ucrInputComment.AddQuotesIfUnrecognised = True
+        Me.ucrInputComment.IsMultiline = False
+        Me.ucrInputComment.IsReadOnly = False
+        Me.ucrInputComment.Location = New System.Drawing.Point(266, 200)
+        Me.ucrInputComment.Name = "ucrInputComment"
+        Me.ucrInputComment.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputComment.TabIndex = 15
+        '
+        'ucrReceiverColumn
+        '
+        Me.ucrReceiverColumn.frmParent = Me
+        Me.ucrReceiverColumn.Location = New System.Drawing.Point(266, 154)
+        Me.ucrReceiverColumn.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverColumn.Name = "ucrReceiverColumn"
+        Me.ucrReceiverColumn.Selector = Nothing
+        Me.ucrReceiverColumn.Size = New System.Drawing.Size(137, 20)
+        Me.ucrReceiverColumn.strNcFilePath = ""
+        Me.ucrReceiverColumn.TabIndex = 11
+        Me.ucrReceiverColumn.ucrSelector = Nothing
+        '
+        'ucrReceiverRow
+        '
+        Me.ucrReceiverRow.frmParent = Me
+        Me.ucrReceiverRow.Location = New System.Drawing.Point(266, 105)
+        Me.ucrReceiverRow.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverRow.Name = "ucrReceiverRow"
+        Me.ucrReceiverRow.Selector = Nothing
+        Me.ucrReceiverRow.Size = New System.Drawing.Size(137, 20)
+        Me.ucrReceiverRow.strNcFilePath = ""
+        Me.ucrReceiverRow.TabIndex = 9
+        Me.ucrReceiverRow.ucrSelector = Nothing
+        '
+        'ucrSelectorAddComment
+        '
+        Me.ucrSelectorAddComment.bShowHiddenColumns = False
+        Me.ucrSelectorAddComment.bUseCurrentFilter = True
+        Me.ucrSelectorAddComment.Location = New System.Drawing.Point(9, 57)
+        Me.ucrSelectorAddComment.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorAddComment.Name = "ucrSelectorAddComment"
+        Me.ucrSelectorAddComment.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorAddComment.TabIndex = 8
+        '
+        'ucrDataFrame
+        '
+        Me.ucrDataFrame.bUseCurrentFilter = True
+        Me.ucrDataFrame.Location = New System.Drawing.Point(9, 55)
+        Me.ucrDataFrame.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrDataFrame.Name = "ucrDataFrame"
+        Me.ucrDataFrame.Size = New System.Drawing.Size(120, 50)
+        Me.ucrDataFrame.TabIndex = 7
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(9, 260)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(408, 52)
+        Me.ucrBase.TabIndex = 1
+        '
+        'UcrDialogDisabled1
+        '
+        Me.UcrDialogDisabled1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.UcrDialogDisabled1.Location = New System.Drawing.Point(80, 154)
+        Me.UcrDialogDisabled1.Name = "UcrDialogDisabled1"
+        Me.UcrDialogDisabled1.Size = New System.Drawing.Size(240, 50)
+        Me.UcrDialogDisabled1.TabIndex = 20
+        '
         'dlgAddComment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(410, 320)
+        Me.ClientSize = New System.Drawing.Size(427, 320)
+        Me.Controls.Add(Me.UcrDialogDisabled1)
         Me.Controls.Add(Me.rdoCell)
         Me.Controls.Add(Me.rdoRow)
         Me.Controls.Add(Me.ucrPnlCellOrRow)
@@ -204,4 +214,5 @@ Partial Class dlgAddComment
     Friend WithEvents rdoCell As RadioButton
     Friend WithEvents rdoRow As RadioButton
     Friend WithEvents ucrPnlCellOrRow As UcrPanel
+    Friend WithEvents UcrDialogDisabled1 As ucrDialogDisabled
 End Class
