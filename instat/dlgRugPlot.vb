@@ -67,7 +67,7 @@ Public Class dlgRugPlot
         ucrFactorOptionalReceiver.bWithQuotes = False
         ucrFactorOptionalReceiver.SetParameterIsString()
 
-        ucrSaveGraph.SetPrefix("Rug")
+        ucrSaveGraph.SetPrefix("rugplot")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetCheckBoxText("Save Graph")
