@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgFlatFrequencyTable
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsFtable, clsTable, clsAddMargin As New RFunction
+    Private clsFTable, clsTable, clsAddMargin As New RFunction
     Private Sub dlgFlatFrequencyTable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -36,63 +36,53 @@ Public Class dlgFlatFrequencyTable
     End Sub
 
     Private Sub InitialiseDialog()
-
         ucrBase.clsRsyntax.iCallType = 2
 
-        ucrRowReceiver.Selector = ucrSelectorDataFrame
+        ucrRowVariable.SetParameter(New RParameter("row.vars", 0))
+        ucrRowVariable.SetParameterIsString()
+        ucrRowVariable.bExcludeFromSelector = True
+        ucrRowVariable.Selector = ucrSelectorDataFrame
+
+        ucrColumnVariable.SetParameter(New RParameter("col.vars", 1))
+        ucrColumnVariable.SetParameterIsString()
         ucrColumnVariable.Selector = ucrSelectorDataFrame
         ucrColumnVariable.SetDataType("factor")
-
-        ucrRowReceiver.SetParameter(New RParameter("row.vars", 1))
-        ucrRowReceiver.SetParameterIsString()
-        ucrRowReceiver.bExcludeFromSelector = True
-
-        ucrColumnVariable.SetParameter(New RParameter("col.vars", 2))
-        ucrColumnVariable.SetParameterIsString()
         ucrColumnVariable.bExcludeFromSelector = True
-        ucrChkAddMargins.SetText("Addmargins")
 
         ucrChkAddMargins.AddParameterValueFunctionNamesCondition(True, "x", "addmargins", True)
         ucrChkAddMargins.AddParameterValueFunctionNamesCondition(False, "x", "addmargins", False)
-
+        ucrChkAddMargins.SetText("Add Margins")
     End Sub
 
     Private Sub SetDefaults()
-        clsFtable = New RFunction
+        clsFTable = New RFunction
         clsTable = New RFunction
         clsAddMargin = New RFunction
 
-        ucrRowReceiver.SetMeAsReceiver()
+        ucrRowVariable.SetMeAsReceiver()
         ucrSelectorDataFrame.Reset()
 
         clsTable.SetRCommand("table")
+
+        clsAddMargin.SetPackageName("stats")
         clsAddMargin.SetRCommand("addmargins")
         clsAddMargin.AddParameter(clsRFunctionParameter:=clsTable)
-        clsFtable.SetRCommand("ftable")
-        clsFtable.AddParameter("table", clsRFunctionParameter:=clsTable)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsFtable)
-    End Sub
 
-    Private Sub ucrchkaddmargins_controlvaluechanged(ucrchangedcontrol As ucrCore) Handles ucrChkAddMargins.ControlValueChanged
-        If ucrChkAddMargins.Checked Then
-            clsFtable.RemoveParameterByName("table")
-            clsFtable.AddParameter("x", clsRFunctionParameter:=clsAddMargin)
-        Else
-            clsFtable.RemoveParameterByName("x")
-            clsFtable.AddParameter("table", clsRFunctionParameter:=clsTable)
-        End If
+        clsFTable.SetPackageName("stats")
+        clsFTable.SetRCommand("ftable")
+        clsFTable.AddParameter("table", clsRFunctionParameter:=clsTable)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsFTable)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrChkAddMargins.SetRCode(clsAddMargin, bReset)
-        ucrRowReceiver.SetRCode(clsFtable, bReset)
-        ucrColumnVariable.SetRCode(clsFtable, bReset)
+        ucrRowVariable.SetRCode(clsFTable, bReset)
+        ucrColumnVariable.SetRCode(clsFTable, bReset)
         ucrSelectorDataFrame.SetRCode(clsTable, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrRowReceiver.IsEmpty AndAlso Not ucrColumnVariable.IsEmpty AndAlso
-        ucrSelectorDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+        If Not ucrRowVariable.IsEmpty AndAlso Not ucrColumnVariable.IsEmpty AndAlso ucrSelectorDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -105,17 +95,27 @@ Public Class dlgFlatFrequencyTable
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrRowReceiver_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrRowReceiver.ControlContentsChanged, ucrColumnVariable.ControlContentsChanged, ucrSelectorDataFrame.ControlContentsChanged
-        TestOkEnabled()
+    Private Sub ucrChkAddMargins_ControlValueChanged(ucrchangedcontrol As ucrCore) Handles ucrChkAddMargins.ControlValueChanged
+        If ucrChkAddMargins.Checked Then
+            clsFTable.RemoveParameterByName("table")
+            clsFTable.AddParameter("x", clsRFunctionParameter:=clsAddMargin)
+        Else
+            clsFTable.RemoveParameterByName("x")
+            clsFTable.AddParameter("table", clsRFunctionParameter:=clsTable)
+        End If
     End Sub
 
-    Private Sub ucrRowReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrRowReceiver.ControlValueChanged, ucrColumnVariable.ControlValueChanged, ucrSelectorDataFrame.ControlValueChanged
+    Private Sub ucrRowReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrRowVariable.ControlValueChanged, ucrColumnVariable.ControlValueChanged, ucrSelectorDataFrame.ControlValueChanged
         Dim clsGetVar As New RFunction
-        If Not ucrRowReceiver.IsEmpty AndAlso Not ucrColumnVariable.IsEmpty Then
+        If Not ucrRowVariable.IsEmpty AndAlso Not ucrColumnVariable.IsEmpty Then
             clsGetVar.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
             clsGetVar.AddParameter("data_name", Chr(34) & ucrSelectorDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-            clsGetVar.AddParameter("col_names", "c(" & ucrColumnVariable.GetVariableNames & "," & ucrRowReceiver.GetVariableNames & ")")
+            clsGetVar.AddParameter("col_names", "c(" & ucrColumnVariable.GetVariableNames & "," & ucrRowVariable.GetVariableNames & ")")
             clsTable.AddParameter("y", clsRFunctionParameter:=clsGetVar)
         End If
+    End Sub
+
+    Private Sub ucrRowReceiver_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrRowVariable.ControlContentsChanged, ucrColumnVariable.ControlContentsChanged, ucrSelectorDataFrame.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class
