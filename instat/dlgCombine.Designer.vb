@@ -80,7 +80,7 @@ Partial Class dlgCombine
         '
         Me.ucrNewColName.Location = New System.Drawing.Point(10, 222)
         Me.ucrNewColName.Name = "ucrNewColName"
-        Me.ucrNewColName.Size = New System.Drawing.Size(294, 24)
+        Me.ucrNewColName.Size = New System.Drawing.Size(271, 24)
         Me.ucrNewColName.TabIndex = 4
         '
         'dlgCombine
