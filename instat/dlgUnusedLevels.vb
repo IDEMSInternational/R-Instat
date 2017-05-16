@@ -31,6 +31,7 @@ Public Class dlgUnusedLevels
         SetRCodeforControls(bReset)
         bReset = False
         autoTranslate(Me)
+        TestOKEnabled()
     End Sub
 
     Private Sub SetDefaults()
