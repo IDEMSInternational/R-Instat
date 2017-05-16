@@ -1848,6 +1848,7 @@ data_object$set("public","split_date", function(col_name = "", week = FALSE, mon
     year_vector <- year(col_data)
 	  col_name <- next_default_item(prefix = "year", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = year_vector)
+    if(self$is_climatic_data()) self$set_climatic_types(types = c(year = col_name))
   }
   if(day_in_month) {
     day_in_month_vector <- as.integer(mday(col_data))
@@ -1858,6 +1859,7 @@ data_object$set("public","split_date", function(col_name = "", week = FALSE, mon
     day_in_year_vector <- as.integer(yday(col_data))
 	  col_name <- next_default_item(prefix = "day_in_year", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = day_in_year_vector)
+    if(self$is_climatic_data()) self$set_climatic_types(types = c(doy = col_name))
 	}
 	if(day_in_year_366) {
     day_in_year_366_vector <- as.integer(yday_366(col_data))
@@ -1949,66 +1951,113 @@ data_object$set("public","set_climatic_types", function(types) {
 )
 
 #Method for creating inventory plot
-data_object$set("public","make_inventory_plot", function(date_col, station_col = c(), elements_cols, add_to_data = FALSE, coord_flip = FALSE, graph_title = "Data Availability") {
-  if(!self$get_metadata(is_climatic_label))stop("Define data as climatic.")
-  if(!is.Date(self$get_columns_from_data(date_col))) stop(paste(date_col, " must be of type date/time."))#this will not work!!!
-  if(missing(date_col)||missing(elements_cols))stop("Date and elements columns must be specified.")
-  if(!all(elements_cols %in% self$get_column_names())) {
+data_object$set("public","make_inventory_plot", function(date_col, station_col = NULL, year_col = NULL, doy_col = NULL, element_cols = NULL, add_to_data = FALSE, year_doy_plot = FALSE, coord_flip = FALSE, facet_by = NULL, graph_title = "Inventory Plot") {
+  if(!self$is_climatic_data()) stop("Data is not defined as climatic.")
+  if(missing(date_col)) stop("Date columns must be specified.")
+  if(missing(element_cols)) stop("Element column(s) must be specified.")
+  if(!is.Date(self$get_columns_from_data(date_col))) stop(paste(date_col, " must be of type Date."))
+  
+  if(!all(element_cols %in% self$get_column_names())) {
     stop("Not all elements columns found in the data")
   }
-  #add year and doy columns if missing in data
-  if(is.null(self$get_climatic_column_name(year_label))){
-    self$split_date(col_name = date_col, year = TRUE)
-    self$set_climatic_types(types = c(year = "year")) #calling year column by name is just a temporary fix.
-  }
-  if(is.null(self$get_climatic_column_name(doy_label))){
-    self$split_date(col_name = date_col, day_in_year = TRUE)
-    self$set_climatic_types(types = c(doy = "day_in_year"))
-  }
-  year_col_name = self$get_climatic_column_name(year_label)
-  doy_col_name = self$get_climatic_column_name(doy_label)
-
-  curr_data <- self$get_data_frame()
-  #ggplot fails to get column names hence the need to rename
-  colnames(curr_data)[colnames(curr_data) == year_col_name] <- "year_column" 
-  colnames(curr_data)[colnames(curr_data) == doy_col_name] <- "doy_column"
-  if(length(elements_cols)!=1){
-    if(!is.null(station_col)){
-      col_data <- self$get_data_frame(stack_data = TRUE, measure.vars = elements_cols, id.vars=c(date_col, station_col, year_col_name, doy_col_name))
+  
+  # Add year and doy columns if doing year_doy plot
+  if(year_doy_plot) {
+    if(is.null(year_col)) {
+      if(is.null(self$get_climatic_column_name(year_label))) {
+        self$split_date(col_name = date_col, year = TRUE)
+      }
+      year_col <- self$get_climatic_column_name(year_label)
     }
-    else{
-      col_data <- self$get_data_frame(stack_data = TRUE, measure.vars = elements_cols, id.vars=c(date_col, year_col_name, doy_col_name))
-    }
-    colnames(col_data)[colnames(col_data) == year_col_name] <- "year_column"
-    colnames(col_data)[colnames(col_data) == doy_col_name] <- "doy_column"
-    recode <- ifelse(is.na(col_data$value), "missing", "present")
-    recode <- as.factor(recode)
-    new_col <- next_default_item(prefix = "recode", existing_names = names(col_data), include_index = FALSE)
-    col_data[[new_col]] <- recode
-    g <- ggplot(data = col_data, mapping = aes(x = year_column, y = doy_column, colour = recode, group = year_column)) + geom_point(size=5, shape=15) + xlab("Year") + ylab("DOY") + labs(color="Recode")
-    if(!is.null(station_col)){
-      g <- g + facet_grid(as.formula(paste0(as.name(station_col),"+variable ~.")))
-    }
-    else{
-      g <- g + facet_grid(variable~.)
+    if(is.null(doy_col)) {
+      if(is.null(self$get_climatic_column_name(doy_label))) {
+        self$split_date(col_name = date_col, day_in_year = TRUE)
+      }
+      doy_col <- self$get_climatic_column_name(doy_label)
     }
   }
-  else{
-    col_data <- self$get_columns_from_data(elements_cols)
-    recode <- ifelse(is.na(col_data),"missing", "present")
-    recode <- as.factor(recode)
-    new_col <- next_default_item(prefix = "recode", existing_names = self$get_column_names(), include_index = FALSE)
-    curr_data[[new_col]] <- recode
-    
-    g <- ggplot(data = curr_data, mapping = aes(x = year_column, y = doy_column, colour = recode, group = year_column)) + geom_point(size=5, shape=15) + xlab("Year") + ylab("DOY") + labs(color="Recode")
-    if(!is.null(station_col)){
-      g <- g + facet_grid(paste0(as.name(station_col), "~ ."))
+  
+  blank_y_axis <- theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(), axis.line.y = element_blank())
+  if(length(element_cols) == 1) {
+    curr_data <- self$get_data_frame()
+    elements <- curr_data[[element_cols]]
+  }
+  else {
+    if(!is.null(station_col)) {
+      curr_data <- self$get_data_frame(stack_data = TRUE, measure.vars = element_cols, id.vars=c(date_col, station_col, year_col, doy_col))
+    }
+    else {
+      curr_data <- self$get_data_frame(stack_data = TRUE, measure.vars = element_cols, id.vars=c(date_col, year_col, doy_col))
+    }
+    elements <- curr_data[["value"]]
+  }
+  
+  key_name <- next_default_item(prefix = "key", existing_names = names(curr_data), include_index = FALSE)
+  curr_data[[key_name]] <- factor(ifelse(is.na(elements), "missing", "present"), levels = c("present", "missing"))
+  
+  if(year_doy_plot) {
+    g <- ggplot(data = curr_data, mapping = aes_(x = as.name(year_col), y = as.name(doy_col), colour = as.name(key_name))) + geom_point(size=5, shape=15)
+    if(!is.null(station_col) && length(element_cols) > 1) {
+      if(is.null(facet_by)) {
+        message("facet_by not specified. facets will be by stations-elements.")
+        facet_by <- "stations-elements"
+      }
+      else if(facet_by == "stations") {
+        warning("facet_by = stations. facet_by must be either stations-elements or elements-stations when there are multiple of both. Using stations-elements.")
+        facet_by <- "stations-elements"
+      }
+      else if(facet_by == "elements") {
+        warning("facet_by = elements. facet_by must be either stations-elements or elements-stations when there are multiple of both. Using elements-stations.")
+        facet_by <- "elements-stations"
+      }
+      
+      if(facet_by == "stations-elements") {
+        g <- g + facet_grid(facets = as.formula(paste(station_col, "+ variable~."))) + blank_y_axis + scale_y_continuous(breaks = NULL) + labs(y = "")
+      }
+      else if(facet_by == "elements-stations") {
+        g <- g + facet_grid(facets = as.formula(paste("variable +", station_col, "~."))) + blank_y_axis + scale_y_continuous(breaks = NULL) + labs(y = "")
+      }
+      else stop("invalid facet_by value:", facet_by)
+    }
+    else if(!is.null(station_col)) {
+      g <- g + facet_grid(facets = as.formula(paste(station_col, "~.")))
+    }
+    else if(length(element_cols) > 1) {
+      g <- g + facet_grid(facets = variable~.)
+    }
+  }
+  else {
+    if(!is.null(station_col) && length(element_cols) > 1) {
+      if(is.null(facet_by) || facet_by == "stations") {
+        if(is.null(facet_by)) message("facet_by not specified. facets will be by stations.")
+        g <- ggplot(data = curr_data, aes_(x = as.name(date_col), y = as.name("variable"), fill = as.name(key_name))) + geom_raster() + scale_colour_manual(values = c("Present" = "blue", "Missing" = "red")) + scale_x_date(date_minor_breaks = "1 year") + geom_hline(yintercept = seq(0.5, by = 1, length.out = length(levels(curr_data[["variable"]])) + 1)) + facet_grid(facets = as.formula(paste(station_col, "~."))) + labs(y = "Elements")
+      }
+      else if(facet_by == "elements") {
+        g <- ggplot(data = curr_data, aes_(x = as.name(date_col), y = as.name(station_col), fill = as.name(key_name))) + geom_raster() + scale_colour_manual(values = c("Present" = "blue", "Missing" = "red")) + scale_x_date(date_minor_breaks = "1 year") + geom_hline(yintercept = seq(0.5, by = 1, length.out = length(levels(curr_data[[station_col]])) + 1)) + facet_grid(facets = variable~.)
+      }
+      else if(facet_by == "stations-elements") {
+        g <- ggplot(data = curr_data, aes_(x = as.name(date_col), y = 1, fill = as.name(key_name))) + geom_raster() + scale_colour_manual(values = c("Present" = "blue", "Missing" = "red")) + scale_x_date(date_minor_breaks = "1 year") + facet_grid(facets = as.formula(paste(station_col, "+variable~."))) + blank_y_axis + scale_y_continuous(breaks = NULL) + labs(y = "")
+      }
+      else if(facet_by == "elements-stations") {
+        g <- ggplot(data = curr_data, aes_(x = as.name(date_col), y = 1, fill = as.name(key_name))) + geom_raster() + scale_colour_manual(values = c("Present" = "blue", "Missing" = "red")) + scale_x_date(date_minor_breaks = "1 year") + facet_grid(facets = as.formula(paste("variable +", station_col, "~."))) + blank_y_axis + scale_y_continuous(breaks = NULL) + labs(y = "")
+      }
+      else stop("invalid facet_by value:", facet_by)
+    }
+    else if(!is.null(station_col)) {
+      if(!is.factor(curr_data[[station_col]])) curr_data[[station_col]] <- factor(curr_data[[station_col]])
+      g <- ggplot(data = curr_data, aes_(x = as.name(date_col), y = as.name(station_col), fill = as.name(key_name))) + geom_raster() + scale_colour_manual(values = c("Present" = "blue", "Missing" = "red")) + scale_x_date(date_minor_breaks = "1 year") + geom_hline(yintercept = seq(0.5, by = 1, length.out = length(levels(curr_data[[station_col]])) + 1))
+    }
+    else if(length(element_cols) > 1) {
+      g <- ggplot(data = curr_data, aes_(x = as.name(date_col), y = as.name("variable"), fill = as.name(key_name))) + geom_raster() + scale_colour_manual(values = c("Present" = "blue", "Missing" = "red")) + scale_x_date(date_minor_breaks = "1 year") + geom_hline(yintercept = seq(0.5, by = 1, length.out = length(levels(curr_data[["variable"]])) + 1))
+    }
+    else {
+      g <- ggplot(data = curr_data, aes_(x = as.name(date_col), y = 1, fill = as.name(key_name))) + geom_raster() + scale_colour_manual(values = c("Present" = "blue", "Missing" = "red")) + scale_x_date(date_minor_breaks = "1 year") + geom_hline(yintercept = seq(0.5, by = 1, length.out = length(levels(curr_data[["variable"]])) + 1)) + blank_y_axis + scale_y_continuous(breaks = NULL) + labs(y = element_cols)
     }
   }
   if(coord_flip) {
     g <- g + coord_flip()
   }
-  return(g+ggtitle(graph_title) + theme(plot.title = element_text(hjust = 0.5), axis.text.y = element_blank(), axis.ticks.y = element_blank(),strip.background = element_blank(), strip.text.y = element_text(angle = 0)))
+  return(g + ggtitle(graph_title) + theme(plot.title = element_text(hjust = 0.5)))
 }
 )
 
@@ -2816,5 +2865,10 @@ data_object$set("public", "get_climatic_column_name", function(col_name) {
     warning(paste(col_name, " column cannot be found in the data."))
     return()
   }
+}
+)
+
+data_object$set("public", "is_climatic_data", function() {
+  return(self$is_metadata(is_climatic_label) &&  self$get_metadata(is_climatic_label))
 }
 )
