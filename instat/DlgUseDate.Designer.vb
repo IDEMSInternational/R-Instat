@@ -36,6 +36,7 @@ Partial Class dlgUseDate
         Me.ucrChkFullMonth = New instat.ucrCheck()
         Me.ucrChkAbbrMonth = New instat.ucrCheck()
         Me.ucrChkAbbrWeekday = New instat.ucrCheck()
+        Me.ucrChkShiftYear = New instat.ucrCheck()
         Me.ucrNudShiftStartDay = New instat.ucrNud()
         Me.ucrChkShiftDay = New instat.ucrCheck()
         Me.ucrChkDayYear366 = New instat.ucrCheck()
@@ -48,7 +49,6 @@ Partial Class dlgUseDate
         Me.ucrReceiverUseDate = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorUseDate = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrChkShiftYear = New instat.ucrCheck()
         Me.grpDateFunctions.SuspendLayout()
         Me.grpOthers.SuspendLayout()
         Me.grpFullName.SuspendLayout()
@@ -197,6 +197,14 @@ Partial Class dlgUseDate
         Me.ucrChkAbbrWeekday.Size = New System.Drawing.Size(94, 20)
         Me.ucrChkAbbrWeekday.TabIndex = 0
         '
+        'ucrChkShiftYear
+        '
+        Me.ucrChkShiftYear.Checked = False
+        Me.ucrChkShiftYear.Location = New System.Drawing.Point(6, 151)
+        Me.ucrChkShiftYear.Name = "ucrChkShiftYear"
+        Me.ucrChkShiftYear.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkShiftYear.TabIndex = 12
+        '
         'ucrNudShiftStartDay
         '
         Me.ucrNudShiftStartDay.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
@@ -301,14 +309,6 @@ Partial Class dlgUseDate
         Me.ucrSelectorUseDate.Name = "ucrSelectorUseDate"
         Me.ucrSelectorUseDate.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorUseDate.TabIndex = 0
-        '
-        'ucrChkShiftYear
-        '
-        Me.ucrChkShiftYear.Checked = False
-        Me.ucrChkShiftYear.Location = New System.Drawing.Point(6, 151)
-        Me.ucrChkShiftYear.Name = "ucrChkShiftYear"
-        Me.ucrChkShiftYear.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkShiftYear.TabIndex = 12
         '
         'dlgUseDate
         '
