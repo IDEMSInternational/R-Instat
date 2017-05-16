@@ -72,7 +72,6 @@ Public Class sdgImportFromClimSoft
         expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsHasConnection.ToScript())
         If Not expTemp.Type = Internals.SymbolicExpressionType.Null Then
             bConnected = expTemp.AsLogical(0)
-            'cmdEnterPassword.Enabled = True
         Else
             bConnected = False
         End If
@@ -83,17 +82,6 @@ Public Class sdgImportFromClimSoft
         End If
         cmdEnterPassword.Enabled = True
     End Sub
-
-    Private Sub ucrBaseSdgClimSoft_ClickReturn(sender As Object, e As EventArgs) Handles ucrBaseSdgClimSoft.ClickReturn
-        'dlgClimSoft.ucrReceiverMultipleStations.SetMeAsReceiver()
-    End Sub
-
-    'Private Sub ucrControlsValue_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputDatabaseName.ControlValueChanged, ucrInputHost.ControlValueChanged, ucrInputPort.ControlValueChanged, ucrInputUserName.ControlValueChanged
-    '    If bConnected Then
-    '        frmMain.clsRLink.RunScript(clsRDatabaseDisconnect.ToScript(), strComment:="Disconnect database connection.")
-    '        lblConnection.Text = strNoConnection
-    '    End If
-    'End Sub
 
     Private Sub ucrControlsContents_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputDatabaseName.ControlContentsChanged, ucrInputHost.ControlContentsChanged, ucrInputPort.ControlContentsChanged, ucrInputUserName.ControlContentsChanged
         Dim strHost As String = ""
