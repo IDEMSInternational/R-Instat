@@ -85,18 +85,25 @@ Public Class dlgUseDate
         ucrChkShiftDay.SetText("Shift Day")
         ucrChkShiftDay.SetRDefault("FALSE")
 
+        ucrNudShiftStartDay.SetDefaultState(1)
+        ucrNudShiftStartDay.SetMinMax(1, 31)
 
-        ucrNudShiftStartDay.SetParameter(New RParameter("shift_start_day"))
-        ucrNudShiftStartDay.SetDefaultState(2)
-        ucrNudShiftStartDay.SetMinMax(2, 366)
-
-        'ucrNudShiftStartDay.(New RParameter("shift_year"))
-        'ucrNudShiftStartDay.SetMinMax(1, 1)
-
-        'ucrChkShiftDay.AddToLinkedControls(ucrNudShiftDay, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
-        'ucrChkShiftDay.AddToLinkedControls(ucrNudShiftYear, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=8)
-        'ucrNudShiftDay.SetLinkedDisplayControl(lblMonth)
-        'ucrNudShiftYear.SetLinkedDisplayControl(lblYear)
+        ucrInputComboBoxMonth.SetParameter(New RParameter("shift_month"))
+        Dim dctMonth As New Dictionary(Of String, String)
+        dctMonth.Add("January", 1)
+        dctMonth.Add("February", 2)
+        dctMonth.Add("March", 3)
+        dctMonth.Add("April", 4)
+        dctMonth.Add("May", 5)
+        dctMonth.Add("June", 6)
+        dctMonth.Add("July", 7)
+        dctMonth.Add("August", 8)
+        dctMonth.Add("September", 9)
+        dctMonth.Add("October", 10)
+        dctMonth.Add("November", 11)
+        dctMonth.Add("December", 12)
+        ucrInputComboBoxMonth.SetItems(dctMonth)
+        ucrInputComboBoxMonth.SetRDefault(8)
 
         ucrChkDayInYear.SetParameter(New RParameter("day_in_year"))
         ucrChkDayInYear.SetText("Day in Year")
@@ -138,8 +145,6 @@ Public Class dlgUseDate
     Private Sub SetDefaults()
         Dim clsDefaultFunction As New RFunction
         ucrSelectorUseDate.Reset()
-        clsDefaultFunction.AddParameter("shift_start_day", 2)
-
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$split_date")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
     End Sub
@@ -156,7 +161,7 @@ Public Class dlgUseDate
     End Sub
 
     Private Sub TestOKEnabled()
-        If (Not (ucrReceiverUseDate.IsEmpty) AndAlso (ucrChkYear.Checked OrElse ucrChkWeekday.Checked OrElse ucrChkWeek.Checked OrElse ucrChkPentad.Checked OrElse ucrChkMonth.Checked OrElse ucrChkLeapYear.Checked OrElse ucrChkFullWeekday.Checked OrElse ucrChkFullMonth.Checked OrElse ucrChkDekad.Checked OrElse ucrChkDayYear366.Checked OrElse ucrChkDayInYear.Checked OrElse ucrChkDay.Checked OrElse ucrChkAbbrWeekday.Checked OrElse ucrChkAbbrMonth.Checked OrElse ucrChkShiftDay.Checked OrElse ucrChkShiftYear.Checked)) Then
+        If (Not (ucrReceiverUseDate.IsEmpty) AndAlso (ucrChkYear.Checked OrElse ucrChkWeekday.Checked OrElse ucrChkWeek.Checked OrElse ucrChkPentad.Checked OrElse ucrChkMonth.Checked OrElse ucrChkLeapYear.Checked OrElse ucrChkFullWeekday.Checked OrElse ucrChkFullMonth.Checked OrElse ucrChkDekad.Checked OrElse ucrChkDayYear366.Checked OrElse ucrChkDayInYear.Checked OrElse ucrChkDay.Checked OrElse ucrChkAbbrWeekday.Checked OrElse ucrChkAbbrMonth.Checked OrElse ucrChkShiftDay.Checked OrElse ucrChkShiftYear.Checked OrElse ucrChkShiftDay.Checked)) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -169,7 +174,7 @@ Public Class dlgUseDate
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrReceiverUseDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverUseDate.ControlContentsChanged, ucrChkYear.ControlContentsChanged, ucrChkWeekday.ControlContentsChanged, ucrChkWeek.ControlContentsChanged, ucrChkPentad.ControlContentsChanged, ucrChkMonth.ControlContentsChanged, ucrChkLeapYear.ControlContentsChanged, ucrChkFullWeekday.ControlContentsChanged, ucrChkFullMonth.ControlContentsChanged, ucrChkDekad.ControlContentsChanged, ucrChkDayYear366.ControlContentsChanged, ucrChkDayInYear.ControlContentsChanged, ucrChkDay.ControlContentsChanged, ucrChkAbbrWeekday.ControlContentsChanged, ucrChkAbbrMonth.ControlContentsChanged, ucrChkShiftDay.ControlContentsChanged, ucrChkShiftYear.ControlContentsChanged
+    Private Sub ucrReceiverUseDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverUseDate.ControlContentsChanged, ucrChkYear.ControlContentsChanged, ucrChkWeekday.ControlContentsChanged, ucrChkWeek.ControlContentsChanged, ucrChkPentad.ControlContentsChanged, ucrChkMonth.ControlContentsChanged, ucrChkLeapYear.ControlContentsChanged, ucrChkFullWeekday.ControlContentsChanged, ucrChkFullMonth.ControlContentsChanged, ucrChkDekad.ControlContentsChanged, ucrChkDayYear366.ControlContentsChanged, ucrChkDayInYear.ControlContentsChanged, ucrChkDay.ControlContentsChanged, ucrChkAbbrWeekday.ControlContentsChanged, ucrChkAbbrMonth.ControlContentsChanged, ucrChkShiftDay.ControlContentsChanged, ucrChkShiftYear.ControlContentsChanged, ucrChkShiftDay.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
