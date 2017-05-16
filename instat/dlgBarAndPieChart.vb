@@ -24,7 +24,7 @@ Public Class dlgBarAndPieChart
     Private clsRCoordPolarParam As New RParameter
     Private bReset As Boolean = True
     Private bFirstLoad As Boolean = True
-
+    Private bResetSubdialog As Boolean = False
     Private Sub cmdOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -127,6 +127,7 @@ Public Class dlgBarAndPieChart
         ucrBarChartSelector.Reset()
         ucrFactorReceiver.SetMeAsReceiver()
         ucrSaveBar.Reset()
+        bResetSubdialog = True
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
@@ -180,7 +181,9 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgPlots.SetRFunction(ucrBase.clsRsyntax.clsBaseOperator, bResetSubdialog)
         sdgPlots.SetDataFrame(strNewDataFrame:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        bResetSubdialog = False
         sdgPlots.ShowDialog()
         'Warning, when coordinate flip is added to coordinates tab on sdgPLots, then link with ucrChkFlipCoordinates...
     End Sub
