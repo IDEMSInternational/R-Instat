@@ -93,7 +93,7 @@ Partial Class dlgViewFactorLabels
         Me.ucrChkShowLabels.Checked = False
         Me.ucrChkShowLabels.Location = New System.Drawing.Point(11, 42)
         Me.ucrChkShowLabels.Name = "ucrChkShowLabels"
-        Me.ucrChkShowLabels.Size = New System.Drawing.Size(126, 20)
+        Me.ucrChkShowLabels.Size = New System.Drawing.Size(135, 20)
         Me.ucrChkShowLabels.TabIndex = 1
         '
         'ucrChkShowId
@@ -151,6 +151,7 @@ Partial Class dlgViewFactorLabels
         Me.ucrReceiverFactorColumns.Name = "ucrReceiverFactorColumns"
         Me.ucrReceiverFactorColumns.Selector = Nothing
         Me.ucrReceiverFactorColumns.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverFactorColumns.strNcFilePath = ""
         Me.ucrReceiverFactorColumns.TabIndex = 2
         Me.ucrReceiverFactorColumns.ucrSelector = Nothing
         '
