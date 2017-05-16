@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
+Imports RDotNet
 Imports instat.Translations
 Public Class dlgFlatFrequencyTable
     Private bFirstLoad As Boolean = True
@@ -44,10 +45,13 @@ Public Class dlgFlatFrequencyTable
         ucrColumnVariable.Selector = ucrSelectorDataFrame
         ucrColumnVariable.SetDataType("factor")
 
-        ucrRowReceiver.SetParameter(New RParameter("x", 1))
-        ucrRowReceiver.SetParameterIsRFunction()
+        ucrRowReceiver.SetParameter(New RParameter("row.vars", 1))
+        ucrRowReceiver.SetParameterIsString()
+        ucrRowReceiver.bExcludeFromSelector = True
+
         ucrColumnVariable.SetParameter(New RParameter("col.vars", 2))
         ucrColumnVariable.SetParameterIsString()
+        ucrColumnVariable.bExcludeFromSelector = True
         ucrChkAddMargins.SetText("Addmargins")
 
         ucrChkAddMargins.AddParameterValueFunctionNamesCondition(True, "x", "addmargins", True)
@@ -84,8 +88,9 @@ Public Class dlgFlatFrequencyTable
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrChkAddMargins.SetRCode(clsAddMargin, bReset)
-        ucrRowReceiver.SetRCode(clsTable, bReset)
+        ucrRowReceiver.SetRCode(clsFtable, bReset)
         ucrColumnVariable.SetRCode(clsFtable, bReset)
+        ucrSelectorDataFrame.SetRCode(clsTable, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -110,7 +115,17 @@ Public Class dlgFlatFrequencyTable
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrRowReceiver_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrRowReceiver.ControlValueChanged, ucrColumnVariable.ControlContentsChanged, ucrSelectorDataFrame.ControlContentsChanged
+    Private Sub ucrRowReceiver_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrRowReceiver.ControlContentsChanged, ucrColumnVariable.ControlContentsChanged, ucrSelectorDataFrame.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrRowReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrRowReceiver.ControlValueChanged, ucrColumnVariable.ControlValueChanged, ucrSelectorDataFrame.ControlValueChanged
+        Dim clsGetVar As New RFunction
+        If Not ucrRowReceiver.IsEmpty AndAlso Not ucrColumnVariable.IsEmpty Then
+            clsGetVar.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+            clsGetVar.AddParameter("data_name", Chr(34) & ucrSelectorDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+            clsGetVar.AddParameter("col_names", "c(" & ucrColumnVariable.GetVariableNames & "," & ucrRowReceiver.GetVariableNames & ")")
+                        clsTable.AddParameter("y", clsRFunctionParameter:=clsGetVar)
+        End If
     End Sub
 End Class
