@@ -94,7 +94,7 @@ Public Class dlgBoxplot
         ucrChkHorizontalBoxplot.SetText("Horizontal Plot")
         ucrChkHorizontalBoxplot.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
-        ucrSaveBoxplot.SetPrefix("Boxplot")
+        ucrSaveBoxplot.SetPrefix("boxplot")
         ucrSaveBoxplot.SetIsComboBox()
         ucrSaveBoxplot.SetCheckBoxText("Save Graph")
         ucrSaveBoxplot.SetSaveTypeAsGraph()
@@ -212,17 +212,17 @@ Public Class dlgBoxplot
         'Sets geom function, fill and colour aesthetics and ucrsave prefix
         If rdoBoxplot.Checked Then
             clsRgeomPlotFunction.SetRCommand("geom_boxplot")
-            ucrSaveBoxplot.SetPrefix("Boxplot")
+            ucrSaveBoxplot.SetPrefix("boxplot")
             ucrSecondFactorReceiver.ChangeParameterName("fill")
             cmdBoxPlotOptions.Text = "Boxplot Options"
         ElseIf rdoJitter.Checked Then
             clsRgeomPlotFunction.SetRCommand("geom_jitter")
-            ucrSaveBoxplot.SetPrefix("Jitter")
+            ucrSaveBoxplot.SetPrefix("jitter")
             ucrSecondFactorReceiver.ChangeParameterName("colour")
             cmdBoxPlotOptions.Text = "Jitter Options"
         Else
             clsRgeomPlotFunction.SetRCommand("geom_violin")
-            ucrSaveBoxplot.SetPrefix("Violin")
+            ucrSaveBoxplot.SetPrefix("violin")
             ucrSecondFactorReceiver.ChangeParameterName("fill")
             cmdBoxPlotOptions.Text = "Violin Options"
         End If
