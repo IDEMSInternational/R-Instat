@@ -27,6 +27,7 @@ Partial Class dlgAddComment
         Me.lblComment = New System.Windows.Forms.Label()
         Me.rdoCell = New System.Windows.Forms.RadioButton()
         Me.rdoRow = New System.Windows.Forms.RadioButton()
+        Me.UcrDialogDisabled1 = New instat.ucrDialogDisabled()
         Me.ucrPnlCellOrRow = New instat.UcrPanel()
         Me.ucrInputComment = New instat.ucrInputTextBox()
         Me.ucrReceiverColumn = New instat.ucrReceiverSingle()
@@ -34,7 +35,6 @@ Partial Class dlgAddComment
         Me.ucrSelectorAddComment = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrDataFrame = New instat.ucrDataFrame()
         Me.ucrBase = New instat.ucrButtons()
-        Me.UcrDialogDisabled1 = New instat.ucrDialogDisabled()
         Me.SuspendLayout()
         '
         'lblRow
@@ -98,11 +98,19 @@ Partial Class dlgAddComment
         Me.rdoRow.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.rdoRow.UseVisualStyleBackColor = True
         '
+        'UcrDialogDisabled1
+        '
+        Me.UcrDialogDisabled1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.UcrDialogDisabled1.Location = New System.Drawing.Point(80, 154)
+        Me.UcrDialogDisabled1.Name = "UcrDialogDisabled1"
+        Me.UcrDialogDisabled1.Size = New System.Drawing.Size(240, 50)
+        Me.UcrDialogDisabled1.TabIndex = 20
+        '
         'ucrPnlCellOrRow
         '
         Me.ucrPnlCellOrRow.Location = New System.Drawing.Point(108, 12)
         Me.ucrPnlCellOrRow.Name = "ucrPnlCellOrRow"
-        Me.ucrPnlCellOrRow.Size = New System.Drawing.Size(100, 29)
+        Me.ucrPnlCellOrRow.Size = New System.Drawing.Size(219, 29)
         Me.ucrPnlCellOrRow.TabIndex = 0
         '
         'ucrInputComment
@@ -164,14 +172,6 @@ Partial Class dlgAddComment
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 10
-        '
-        'UcrDialogDisabled1
-        '
-        Me.UcrDialogDisabled1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.UcrDialogDisabled1.Location = New System.Drawing.Point(80, 154)
-        Me.UcrDialogDisabled1.Name = "UcrDialogDisabled1"
-        Me.UcrDialogDisabled1.Size = New System.Drawing.Size(240, 50)
-        Me.UcrDialogDisabled1.TabIndex = 20
         '
         'dlgAddComment
         '
