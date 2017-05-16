@@ -66,7 +66,7 @@ Public Class dlgAddComment
         ucrPnlCellOrRow.AddRadioButton(rdoCell)
         ucrPnlCellOrRow.AddRadioButton(rdoRow)
         ucrPnlCellOrRow.AddToLinkedControls(ucrReceiverRow, {rdoRow}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-
+        ucrPnlCellOrRow.bAllowNonConditionValues = True
     End Sub
     Private Sub TestOKEnabled()
 
