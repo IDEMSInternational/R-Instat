@@ -45,8 +45,8 @@ Partial Class dlgInsertColumn
         Me.rdoAfter = New System.Windows.Forms.RadioButton()
         Me.rdoBefore = New System.Windows.Forms.RadioButton()
         Me.rdoInsertColumns = New System.Windows.Forms.RadioButton()
-        Me.rdoInsertRows = New System.Windows.Forms.RadioButton()
         Me.ucrPnlColumnsOrRows = New instat.UcrPanel()
+        Me.rdoInsertRows = New System.Windows.Forms.RadioButton()
         CType(Me.nudPos, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudNumCols, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpInsert.SuspendLayout()
@@ -185,7 +185,7 @@ Partial Class dlgInsertColumn
         'lblPrefixforInsertedColumns
         '
         Me.lblPrefixforInsertedColumns.AutoSize = True
-        Me.lblPrefixforInsertedColumns.Location = New System.Drawing.Point(10, 298)
+        Me.lblPrefixforInsertedColumns.Location = New System.Drawing.Point(10, 248)
         Me.lblPrefixforInsertedColumns.Name = "lblPrefixforInsertedColumns"
         Me.lblPrefixforInsertedColumns.Size = New System.Drawing.Size(141, 13)
         Me.lblPrefixforInsertedColumns.TabIndex = 15
@@ -196,9 +196,9 @@ Partial Class dlgInsertColumn
         Me.ucrInputPrefixForInsertedColumns.AddQuotesIfUnrecognised = True
         Me.ucrInputPrefixForInsertedColumns.IsMultiline = False
         Me.ucrInputPrefixForInsertedColumns.IsReadOnly = False
-        Me.ucrInputPrefixForInsertedColumns.Location = New System.Drawing.Point(156, 296)
+        Me.ucrInputPrefixForInsertedColumns.Location = New System.Drawing.Point(158, 246)
         Me.ucrInputPrefixForInsertedColumns.Name = "ucrInputPrefixForInsertedColumns"
-        Me.ucrInputPrefixForInsertedColumns.Size = New System.Drawing.Size(254, 21)
+        Me.ucrInputPrefixForInsertedColumns.Size = New System.Drawing.Size(250, 21)
         Me.ucrInputPrefixForInsertedColumns.TabIndex = 16
         '
         'ucrInputDefaultValue
@@ -214,15 +214,15 @@ Partial Class dlgInsertColumn
         'ucrSelectorInseertColumns
         '
         Me.ucrSelectorInseertColumns.bShowHiddenColumns = False
-        Me.ucrSelectorInseertColumns.Location = New System.Drawing.Point(10, 100)
+        Me.ucrSelectorInseertColumns.Location = New System.Drawing.Point(9, 97)
         Me.ucrSelectorInseertColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorInseertColumns.Name = "ucrSelectorInseertColumns"
-        Me.ucrSelectorInseertColumns.Size = New System.Drawing.Size(250, 189)
+        Me.ucrSelectorInseertColumns.Size = New System.Drawing.Size(202, 148)
         Me.ucrSelectorInseertColumns.TabIndex = 4
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 320)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 270)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 17
@@ -285,24 +285,6 @@ Partial Class dlgInsertColumn
         Me.rdoInsertColumns.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoInsertColumns.UseVisualStyleBackColor = True
         '
-        'rdoInsertRows
-        '
-        Me.rdoInsertRows.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoInsertRows.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.rdoInsertRows.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoInsertRows.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoInsertRows.FlatAppearance.BorderSize = 2
-        Me.rdoInsertRows.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoInsertRows.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoInsertRows.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoInsertRows.Location = New System.Drawing.Point(238, 12)
-        Me.rdoInsertRows.Name = "rdoInsertRows"
-        Me.rdoInsertRows.Size = New System.Drawing.Size(100, 28)
-        Me.rdoInsertRows.TabIndex = 2
-        Me.rdoInsertRows.Text = "Insert Rows"
-        Me.rdoInsertRows.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.rdoInsertRows.UseVisualStyleBackColor = True
-        '
         'ucrPnlColumnsOrRows
         '
         Me.ucrPnlColumnsOrRows.Location = New System.Drawing.Point(132, 11)
@@ -310,13 +292,29 @@ Partial Class dlgInsertColumn
         Me.ucrPnlColumnsOrRows.Size = New System.Drawing.Size(214, 29)
         Me.ucrPnlColumnsOrRows.TabIndex = 0
         '
+        'rdoInsertRows
+        '
+        Me.rdoInsertRows.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoInsertRows.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoInsertRows.FlatAppearance.BorderSize = 2
+        Me.rdoInsertRows.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoInsertRows.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoInsertRows.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.rdoInsertRows.Location = New System.Drawing.Point(238, 12)
+        Me.rdoInsertRows.Name = "rdoInsertRows"
+        Me.rdoInsertRows.Size = New System.Drawing.Size(100, 28)
+        Me.rdoInsertRows.TabIndex = 2
+        Me.rdoInsertRows.Text = "Insert Rows"
+        Me.rdoInsertRows.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoInsertRows.UseVisualStyleBackColor = True
+        '
         'dlgInsertColumn
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(492, 381)
-        Me.Controls.Add(Me.rdoInsertColumns)
+        Me.ClientSize = New System.Drawing.Size(682, 327)
         Me.Controls.Add(Me.rdoInsertRows)
+        Me.Controls.Add(Me.rdoInsertColumns)
         Me.Controls.Add(Me.ucrPnlColumnsOrRows)
         Me.Controls.Add(Me.grpOPtions)
         Me.Controls.Add(Me.ucrInputPrefixForInsertedColumns)
@@ -374,6 +372,6 @@ Partial Class dlgInsertColumn
     Friend WithEvents rdoAfter As RadioButton
     Friend WithEvents rdoBefore As RadioButton
     Friend WithEvents rdoInsertColumns As RadioButton
-    Friend WithEvents rdoInsertRows As RadioButton
     Friend WithEvents ucrPnlColumnsOrRows As UcrPanel
+    Friend WithEvents rdoInsertRows As RadioButton
 End Class
