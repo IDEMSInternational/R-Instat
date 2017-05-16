@@ -43,7 +43,7 @@ Partial Class dlgAddComment
         Me.lblRow.Location = New System.Drawing.Point(266, 83)
         Me.lblRow.Name = "lblRow"
         Me.lblRow.Size = New System.Drawing.Size(32, 13)
-        Me.lblRow.TabIndex = 10
+        Me.lblRow.TabIndex = 4
         Me.lblRow.Text = "Row:"
         '
         'lblColumn
@@ -52,7 +52,7 @@ Partial Class dlgAddComment
         Me.lblColumn.Location = New System.Drawing.Point(266, 134)
         Me.lblColumn.Name = "lblColumn"
         Me.lblColumn.Size = New System.Drawing.Size(45, 13)
-        Me.lblColumn.TabIndex = 12
+        Me.lblColumn.TabIndex = 6
         Me.lblColumn.Text = "Column:"
         '
         'lblComment
@@ -61,7 +61,7 @@ Partial Class dlgAddComment
         Me.lblComment.Location = New System.Drawing.Point(266, 184)
         Me.lblComment.Name = "lblComment"
         Me.lblComment.Size = New System.Drawing.Size(54, 13)
-        Me.lblComment.TabIndex = 14
+        Me.lblComment.TabIndex = 8
         Me.lblComment.Text = "Comment:"
         '
         'rdoCell
@@ -72,10 +72,10 @@ Partial Class dlgAddComment
         Me.rdoCell.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoCell.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoCell.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.rdoCell.Location = New System.Drawing.Point(100, 12)
+        Me.rdoCell.Location = New System.Drawing.Point(115, 12)
         Me.rdoCell.Name = "rdoCell"
         Me.rdoCell.Size = New System.Drawing.Size(100, 28)
-        Me.rdoCell.TabIndex = 18
+        Me.rdoCell.TabIndex = 1
         Me.rdoCell.Text = "Cell"
         Me.rdoCell.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoCell.UseVisualStyleBackColor = True
@@ -90,20 +90,20 @@ Partial Class dlgAddComment
         Me.rdoRow.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoRow.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoRow.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoRow.Location = New System.Drawing.Point(198, 12)
+        Me.rdoRow.Location = New System.Drawing.Point(213, 12)
         Me.rdoRow.Name = "rdoRow"
         Me.rdoRow.Size = New System.Drawing.Size(100, 28)
-        Me.rdoRow.TabIndex = 19
+        Me.rdoRow.TabIndex = 2
         Me.rdoRow.Text = "Row"
         Me.rdoRow.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.rdoRow.UseVisualStyleBackColor = True
         '
         'ucrPnlCellOrRow
         '
-        Me.ucrPnlCellOrRow.Location = New System.Drawing.Point(95, 11)
+        Me.ucrPnlCellOrRow.Location = New System.Drawing.Point(108, 12)
         Me.ucrPnlCellOrRow.Name = "ucrPnlCellOrRow"
-        Me.ucrPnlCellOrRow.Size = New System.Drawing.Size(214, 29)
-        Me.ucrPnlCellOrRow.TabIndex = 17
+        Me.ucrPnlCellOrRow.Size = New System.Drawing.Size(100, 29)
+        Me.ucrPnlCellOrRow.TabIndex = 0
         '
         'ucrInputComment
         '
@@ -113,7 +113,7 @@ Partial Class dlgAddComment
         Me.ucrInputComment.Location = New System.Drawing.Point(266, 200)
         Me.ucrInputComment.Name = "ucrInputComment"
         Me.ucrInputComment.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputComment.TabIndex = 15
+        Me.ucrInputComment.TabIndex = 9
         '
         'ucrReceiverColumn
         '
@@ -124,7 +124,7 @@ Partial Class dlgAddComment
         Me.ucrReceiverColumn.Selector = Nothing
         Me.ucrReceiverColumn.Size = New System.Drawing.Size(137, 20)
         Me.ucrReceiverColumn.strNcFilePath = ""
-        Me.ucrReceiverColumn.TabIndex = 11
+        Me.ucrReceiverColumn.TabIndex = 7
         Me.ucrReceiverColumn.ucrSelector = Nothing
         '
         'ucrReceiverRow
@@ -136,7 +136,7 @@ Partial Class dlgAddComment
         Me.ucrReceiverRow.Selector = Nothing
         Me.ucrReceiverRow.Size = New System.Drawing.Size(137, 20)
         Me.ucrReceiverRow.strNcFilePath = ""
-        Me.ucrReceiverRow.TabIndex = 9
+        Me.ucrReceiverRow.TabIndex = 5
         Me.ucrReceiverRow.ucrSelector = Nothing
         '
         'ucrSelectorAddComment
@@ -147,7 +147,7 @@ Partial Class dlgAddComment
         Me.ucrSelectorAddComment.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorAddComment.Name = "ucrSelectorAddComment"
         Me.ucrSelectorAddComment.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorAddComment.TabIndex = 8
+        Me.ucrSelectorAddComment.TabIndex = 3
         '
         'ucrDataFrame
         '
@@ -163,7 +163,7 @@ Partial Class dlgAddComment
         Me.ucrBase.Location = New System.Drawing.Point(9, 260)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
-        Me.ucrBase.TabIndex = 1
+        Me.ucrBase.TabIndex = 10
         '
         'UcrDialogDisabled1
         '

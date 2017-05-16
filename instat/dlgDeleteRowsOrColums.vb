@@ -117,7 +117,7 @@ Public Class dlgDeleteRowsOrColums
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrPnlRows_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlRows.ControlValueChanged
+    Private Sub ucrPnlRows_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumnsOrRows.ControlValueChanged
         If rdoColumns.Checked Then
             ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$remove_columns_in_data")
             ucrSelectorForDeleteColumns.SetVariablesVisible(True)
@@ -131,7 +131,7 @@ Public Class dlgDeleteRowsOrColums
         ucrNudRowsToDelete.Maximum = ucrSelectorForDeleteColumns.ucrAvailableDataFrames.iDataFrameLength
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForColumnsToDelete.ControlContentsChanged, ucrPnlRows.ControlContentsChanged, ucrNudRowsToDelete.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForColumnsToDelete.ControlContentsChanged, ucrNudRowsToDelete.ControlContentsChanged, ucrPnlColumnsOrRows.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
