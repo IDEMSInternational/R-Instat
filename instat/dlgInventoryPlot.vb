@@ -52,7 +52,6 @@ Public Class dlgInventoryPlot
 
         ucrReceiverStation.SetParameter(New RParameter("station_col", 3))
         ucrReceiverStation.Selector = ucrInventoryPlotSelector
-        ucrReceiverStation.SetIncludedDataTypes({"factor"})
         ucrReceiverStation.SetClimaticType("station")
         ucrReceiverStation.bAutoFill = True
         ucrReceiverStation.SetParameterIsString()
@@ -60,6 +59,7 @@ Public Class dlgInventoryPlot
         ucrChkFlipCoordinates.SetParameter(New RParameter("coord_flip", 4))
         ucrChkFlipCoordinates.SetText("Flip Coordinates")
         ucrChkFlipCoordinates.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkFlipCoordinates.SetRDefault("FALSE")
 
         ucrInputTitle.SetParameter(New RParameter("graph_title", 5))
         ucrChkTitle.SetParameter(ucrInputTitle.GetParameter(), bNewChangeParameterValue:=False)
@@ -72,16 +72,17 @@ Public Class dlgInventoryPlot
         ucrPnlPlotLayout.SetParameter(New RParameter("year_doy_plot"))
         ucrPnlPlotLayout.AddRadioButton(rdoyear_doy_plot, "TRUE")
         ucrPnlPlotLayout.AddRadioButton(rdoDatePlot, "FALSE")
-        ucrPnlPlotLayout.SetRDefault(Chr(34) & "FALSE" & Chr(34))
+        ucrPnlPlotLayout.SetRDefault("FALSE")
 
         Dim dctFacetByPairs As New Dictionary(Of String, String)
         ucrInputFacetBy.SetParameter(New RParameter("facet_by"))
-        dctFacetByPairs.Add("default", Chr(34) & "" & Chr(34))
-        dctFacetByPairs.Add("stations-elements", Chr(34) & "stations-elements" & Chr(34))
-        dctFacetByPairs.Add("elements-stations", Chr(34) & "elements-stations" & Chr(34))
-        dctFacetByPairs.Add("elements", Chr(34) & "elements" & Chr(34))
-        dctFacetByPairs.Add("stations", Chr(34) & "stations" & Chr(34)) 'is this an option?
+        dctFacetByPairs.Add("Default", "NULL")
+        dctFacetByPairs.Add("Elements", Chr(34) & "elements" & Chr(34))
+        dctFacetByPairs.Add("Stations", Chr(34) & "stations" & Chr(34))
+        dctFacetByPairs.Add("Stations-Elements", Chr(34) & "stations-elements" & Chr(34))
+        dctFacetByPairs.Add("Elements-Stations", Chr(34) & "elements-stations" & Chr(34))
         ucrInputFacetBy.SetItems(dctFacetByPairs)
+        ucrInputFacetBy.SetRDefault("NULL")
 
         ucrSaveGraph.SetPrefix("Inventory")
         ucrSaveGraph.SetSaveTypeAsGraph()
@@ -103,7 +104,7 @@ Public Class dlgInventoryPlot
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_inventory_plot")
         clsDefaultRFunction.AddParameter("coord_flip", "FALSE")
         clsDefaultRFunction.AddParameter("year_doy_plot", "FALSE")
-        clsDefaultRFunction.AddParameter("facet_by", Chr(34) & "" & Chr(34))
+        clsDefaultRFunction.AddParameter("facet_by", "NULL")
         clsDefaultRFunction.SetAssignTo("last_graph", strTempDataframe:=ucrInventoryPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
 
