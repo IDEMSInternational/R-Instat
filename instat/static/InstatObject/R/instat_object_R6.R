@@ -1238,6 +1238,23 @@ instat_object$set("public", "get_database_variable_names", function(query, data_
 }
 )
 
+instat_object$set("public", "get_nc_variable_names", function(file = "", as_list = FALSE, ...) {
+  if(file == "") {
+    vars <- ""
+  }
+  else {
+    nc_file <- nc_open(file)
+    vars <- names(nc_file$dim)
+  }
+  if(as_list) {
+    out <- list()
+    out[["dim variables"]] <- vars
+    return(out)
+  }
+  else return(vars)
+}
+)
+
 instat_object$set("public", "has_database_connection", function() {
   return(!is.null(self$get_database_connection()))
 }
@@ -1336,14 +1353,14 @@ instat_object$set("public", "export_workspace", function(data_names, file, inclu
       graphs <- self$get_graphs(temp_name)
       graph_names <- names(graphs)
       for(i in seq_along(graphs)) {
-        e[[paste(temp_name, graph_names[i], sep = "_")]] <- graphs[i]
+        e[[paste(temp_name, graph_names[i], sep = "_")]] <- graphs[[i]]
       }
     }
     if(include_models) {
       models <- self$get_models(temp_name)
       model_names <- names(models)
       for(i in seq_along(models)) {
-        e[[paste(temp_name, model_names[i], sep = "_")]] <- models[i]
+        e[[paste(temp_name, model_names[i], sep = "_")]] <- models[[i]]
       }
     }
     if(include_metadata) {
