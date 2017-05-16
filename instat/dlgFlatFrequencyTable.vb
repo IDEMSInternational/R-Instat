@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgFlatFrequencyTable
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsFtable, clsTable, clsAddMargin As New RFunction
+    Private clsFTable, clsTable, clsAddMargin As New RFunction
     Private Sub dlgFlatFrequencyTable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -55,7 +55,7 @@ Public Class dlgFlatFrequencyTable
     End Sub
 
     Private Sub SetDefaults()
-        clsFtable = New RFunction
+        clsFTable = New RFunction
         clsTable = New RFunction
         clsAddMargin = New RFunction
 
@@ -63,17 +63,21 @@ Public Class dlgFlatFrequencyTable
         ucrSelectorDataFrame.Reset()
 
         clsTable.SetRCommand("table")
+
+        clsAddMargin.SetPackageName("stats")
         clsAddMargin.SetRCommand("addmargins")
         clsAddMargin.AddParameter(clsRFunctionParameter:=clsTable)
-        clsFtable.SetRCommand("ftable")
-        clsFtable.AddParameter("table", clsRFunctionParameter:=clsTable)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsFtable)
+
+        clsFTable.SetPackageName("stats")
+        clsFTable.SetRCommand("ftable")
+        clsFTable.AddParameter("table", clsRFunctionParameter:=clsTable)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsFTable)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrChkAddMargins.SetRCode(clsAddMargin, bReset)
-        ucrRowVariable.SetRCode(clsFtable, bReset)
-        ucrColumnVariable.SetRCode(clsFtable, bReset)
+        ucrRowVariable.SetRCode(clsFTable, bReset)
+        ucrColumnVariable.SetRCode(clsFTable, bReset)
         ucrSelectorDataFrame.SetRCode(clsTable, bReset)
     End Sub
 
@@ -93,11 +97,11 @@ Public Class dlgFlatFrequencyTable
 
     Private Sub ucrChkAddMargins_ControlValueChanged(ucrchangedcontrol As ucrCore) Handles ucrChkAddMargins.ControlValueChanged
         If ucrChkAddMargins.Checked Then
-            clsFtable.RemoveParameterByName("table")
-            clsFtable.AddParameter("x", clsRFunctionParameter:=clsAddMargin)
+            clsFTable.RemoveParameterByName("table")
+            clsFTable.AddParameter("x", clsRFunctionParameter:=clsAddMargin)
         Else
-            clsFtable.RemoveParameterByName("x")
-            clsFtable.AddParameter("table", clsRFunctionParameter:=clsTable)
+            clsFTable.RemoveParameterByName("x")
+            clsFTable.AddParameter("table", clsRFunctionParameter:=clsTable)
         End If
     End Sub
 
