@@ -97,8 +97,10 @@ Public Class ucrReceiver
         Get
             Return strPrvNcFilePath
         End Get
+
         Set(strFilePath As String)
             strPrvNcFilePath = strFilePath
+            Clear()
             If Selector IsNot Nothing Then
                 Selector.LoadList()
             End If
