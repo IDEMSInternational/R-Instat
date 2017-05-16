@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgAddComment
     Public bUseSelectedColumn As Boolean = False
@@ -50,6 +51,8 @@ Public Class dlgAddComment
     End Sub
 
     Private Sub SetDefaultColumn()
+        rdoRow.Checked = True
+        SetRCodeForControls(True)
         ucrSelectorAddComment.SetDataframe(strSelectedDataFrame)
         ucrReceiverColumn.Add(strSelectedColumn, strSelectedDataFrame)
         bUseSelectedColumn = False
@@ -58,10 +61,12 @@ Public Class dlgAddComment
         ucrBase.iHelpTopicID = 508
         ucrReceiverColumn.Selector = ucrSelectorAddComment
         ucrReceiverColumn.SetMeAsReceiver()
+        ucrReceiverRow.Selector = ucrSelectorAddComment
+        ucrReceiverRow.SetMeAsReceiver()
         ucrPnlCellOrRow.AddRadioButton(rdoCell)
         ucrPnlCellOrRow.AddRadioButton(rdoRow)
         ucrPnlCellOrRow.AddToLinkedControls(ucrReceiverRow, {rdoRow}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-
+        ucrPnlCellOrRow.bAllowNonConditionValues = True
     End Sub
     Private Sub TestOKEnabled()
 
@@ -79,4 +84,7 @@ Public Class dlgAddComment
         TestOKEnabled()
     End Sub
 
+    Private Sub Control_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumn.ControlContentsChanged, ucrReceiverColumn.ControlContentsChanged, ucrInputComment.ControlContentsChanged, ucrPnlCellOrRow.ControlContentsChanged
+        TestOKEnabled()
+    End Sub
 End Class
