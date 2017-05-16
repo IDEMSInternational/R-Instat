@@ -42,13 +42,14 @@ Public Class ucrAxes
         ucrTickMarkers.SetName("Interval")
         TitleFunction()
         ucrOverwriteTitle.SetName("")
-        nudTickMarkersNoOfDecimalPlaces.Value = 0
-        nudFrom.Value = 0
-        nudTo.Value = 0
-        nudInStepsOf.Value = 0
-        nudLowerLimit.Value = 0
-        nudUpperLimit.Value = 0
-        nudScalesNoOfDecimalPlaces.Value = 0
+
+        ucrNudTickMarkersNoOfDecimalPlaces.Value = 0
+        ucrNudFrom.Value = 0
+        ucrNudTo.Value = 0
+        ucrNudInStepsOf.Value = 0
+        ucrNudLowerLimit.Value = 0
+        ucrNudUpperLimit.Value = 0
+        ucrNudScalesNoOfDecimalPlaces.Value = 0
     End Sub
 
     Public Sub Reset()
@@ -56,8 +57,36 @@ Public Class ucrAxes
     End Sub
 
     Private Sub InitialiseControl()
+        'Axis Section
+        ucrPnlAxisTitle.AddRadioButton(rdoTitleAuto)
+        ucrPnlAxisTitle.AddRadioButton(rdoTitleCustom)
+        ucrChkDisplayTitle.SetText("Diaplay")
+        ucrChkOverwriteTitle.SetText("Overwrite Title")
+
+        'Tick Markers section
+        ucrPnlTickmarkers.AddRadioButton(rdoTickMarkersAuto)
+        ucrPnlTickmarkers.AddRadioButton(rdoTickMarkersCustom)
+
+        'these add parameters to clsSeqFunction
+        ucrNudInStepsOf.SetParameter(New RParameter("by"))
+        ucrNudTo.SetParameter(New RParameter("to"))
+        ucrNudFrom.SetParameter(New RParameter("from"))
+
+        'Scales section
+        ucrPnlScales.AddRadioButton(rdoScalesAuto)
+        ucrPnlScales.AddRadioButton(rdoScalesCustom)
+        ucrPnlScales.AddToLinkedControls(ucrNudScalesNoOfDecimalPlaces, {rdoScalesCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudScalesNoOfDecimalPlaces.SetLinkedDisplayControl(lblScalesNoDecimalPlaces)
+
+        ucrPnlScales.AddToLinkedControls(ucrNudLowerLimit, {rdoScalesCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudLowerLimit.SetLinkedDisplayControl(lblLowerLimit)
+
+        ucrPnlScales.AddToLinkedControls(ucrNudUpperLimit, {rdoScalesCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudUpperLimit.SetLinkedDisplayControl(lblUpperLimit)
+
         ucrTickMarkers.cboInput.Items.Add("Interval")
         ucrTickMarkers.cboInput.Items.Add("Specific Values")
+
         TitleDefaults()
         ScalesDefaults()
         TickMarkersDefaults()
@@ -65,32 +94,32 @@ Public Class ucrAxes
 
     Private Sub TitleDefaults()
         If rdoTitleAuto.Checked Then
-            chkDisplayTitle.Visible = False
-            chkOverwriteTitle.Visible = False
+            ucrChkDisplayTitle.Visible = False
+            ucrChkOverwriteTitle.Visible = False
             ucrOverwriteTitle.Visible = False
         ElseIf rdoTitleCustom.Checked Then
-            chkDisplayTitle.Visible = True
-            chkDisplayTitle.Checked = True
-            chkOverwriteTitle.Visible = True
-            chkOverwriteTitle.Checked = False
+            ucrChkDisplayTitle.Visible = True
+            ucrChkDisplayTitle.Checked = True
+            ucrChkOverwriteTitle.Visible = True
+            ucrChkOverwriteTitle.Checked = False
         End If
     End Sub
 
     Private Sub ScalesDefaults()
         If rdoScalesAuto.Checked Then
             lblLowerLimit.Visible = False
-            nudLowerLimit.Visible = False
+            ucrNudLowerLimit.Visible = False
             lblUpperLimit.Visible = False
-            nudUpperLimit.Visible = False
+            ucrNudUpperLimit.Visible = False
             lblScalesNoDecimalPlaces.Visible = False
-            nudScalesNoOfDecimalPlaces.Visible = False
+            ucrNudScalesNoOfDecimalPlaces.Visible = False
         ElseIf rdoScalesCustom.Checked Then
             lblLowerLimit.Visible = True
-            nudLowerLimit.Visible = True
+            ucrNudLowerLimit.Visible = True
             lblUpperLimit.Visible = True
-            nudUpperLimit.Visible = True
+            ucrNudUpperLimit.Visible = True
             lblScalesNoDecimalPlaces.Visible = True
-            nudScalesNoOfDecimalPlaces.Visible = True
+            ucrNudScalesNoOfDecimalPlaces.Visible = True
         End If
     End Sub
 
@@ -98,24 +127,24 @@ Public Class ucrAxes
         If rdoTickMarkersAuto.Checked Then
             ucrTickMarkers.Visible = False
             lblFrom.Visible = False
-            nudFrom.Visible = False
+            ucrNudFrom.Visible = False
             lblTo.Visible = False
-            nudTo.Visible = False
+            ucrNudTo.Visible = False
             lblInStepsOf.Visible = False
-            nudInStepsOf.Visible = False
+            ucrNudInStepsOf.Visible = False
             lblTickMarkersNoOfDecimalPlaces.Visible = False
-            nudTickMarkersNoOfDecimalPlaces.Visible = False
+            ucrNudTickMarkersNoOfDecimalPlaces.Visible = False
             ucrSpecificValues.Visible = False
         ElseIf rdoTickMarkersCustom.Checked Then
             ucrTickMarkers.Visible = True
             lblFrom.Visible = True
-            nudFrom.Visible = True
+            ucrNudFrom.Visible = True
             lblTo.Visible = True
-            nudTo.Visible = True
+            ucrNudTo.Visible = True
             lblInStepsOf.Visible = True
-            nudInStepsOf.Visible = True
+            ucrNudInStepsOf.Visible = True
             lblTickMarkersNoOfDecimalPlaces.Visible = True
-            nudTickMarkersNoOfDecimalPlaces.Visible = True
+            ucrNudTickMarkersNoOfDecimalPlaces.Visible = True
             ucrSpecificValues.Visible = False
         End If
     End Sub
@@ -143,8 +172,8 @@ Public Class ucrAxes
     End Sub
 
     Private Sub TitleFunction()
-        If rdoTitleCustom.Checked AndAlso chkDisplayTitle.Checked Then
-            If chkOverwriteTitle.Checked AndAlso Not ucrOverwriteTitle.IsEmpty Then
+        If rdoTitleCustom.Checked AndAlso ucrChkDisplayTitle.Checked Then
+            If ucrChkOverwriteTitle.Checked AndAlso Not ucrOverwriteTitle.IsEmpty Then
                 clsTitleFunction.AddParameter("label", Chr(34) & ucrOverwriteTitle.GetText & Chr(34))
                 clsRsyntax.AddOperatorParameter(strAxis & "axistitle", clsRFunc:=clsTitleFunction)
             Else
@@ -158,7 +187,7 @@ Public Class ucrAxes
 
     Private Sub ScalesFunction()
         If rdoScalesCustom.Checked Then
-            clsScalecontinuousFunction.AddParameter("limits", "c(" & nudLowerLimit.Value & "," & nudUpperLimit.Value & ")")
+            clsScalecontinuousFunction.AddParameter("limits", "c(" & ucrNudLowerLimit.Value & "," & ucrNudUpperLimit.Value & ")")
             clsRsyntax.AddOperatorParameter("scale_" & strAxis & "_continuous", clsRFunc:=clsScalecontinuousFunction)
         Else
             clsRsyntax.RemoveOperatorParameter("scale_" & strAxis & "_continuous")
@@ -171,8 +200,8 @@ Public Class ucrAxes
         End If
     End Sub
 
-    Private Sub chkOverwriteTitle_CheckedChanged(sender As Object, e As EventArgs) Handles chkOverwriteTitle.CheckedChanged
-        If rdoTitleCustom.Checked AndAlso chkOverwriteTitle.Checked Then
+    Private Sub ucrChkOverwriteTitle_CheckedChanged(sender As Object, e As EventArgs)
+        If rdoTitleCustom.Checked AndAlso ucrChkOverwriteTitle.Checked Then
             ucrOverwriteTitle.Visible = True
         Else
             ucrOverwriteTitle.Visible = False
@@ -180,16 +209,16 @@ Public Class ucrAxes
         TitleFunction()
     End Sub
 
-    Private Sub chkDisplayTitle_CheckedChanged(sender As Object, e As EventArgs) Handles chkDisplayTitle.CheckedChanged
-        If rdoTitleCustom.Checked AndAlso chkDisplayTitle.Checked Then
-            chkOverwriteTitle.Visible = True
-            If chkOverwriteTitle.Checked Then
+    Private Sub ucrChkDisplayTitle_CheckedChanged(sender As Object, e As EventArgs)
+        If rdoTitleCustom.Checked AndAlso ucrChkDisplayTitle.Checked Then
+            ucrChkOverwriteTitle.Visible = True
+            If ucrChkOverwriteTitle.Checked Then
                 ucrOverwriteTitle.Visible = True
             Else
                 ucrOverwriteTitle.Visible = False
             End If
         Else
-            chkOverwriteTitle.Visible = False
+            ucrChkOverwriteTitle.Visible = False
             ucrOverwriteTitle.Visible = False
         End If
         TitleFunction()
@@ -219,18 +248,18 @@ Public Class ucrAxes
         TickMarkersDefaults()
     End Sub
 
-    Private Sub nudLowerLimit_TextChanged(sender As Object, e As EventArgs) Handles nudLowerLimit.TextChanged, nudUpperLimit.TextChanged
+    Private Sub ucrNudLowerLimit_TextChanged(sender As Object, e As EventArgs)
         ScalesFunction()
     End Sub
-    Private Sub nudScalesNoOfDecimalPlaces_TextChanged(sender As Object, e As EventArgs) Handles nudScalesNoOfDecimalPlaces.TextChanged
-        nudUpperLimit.DecimalPlaces = nudScalesNoOfDecimalPlaces.Value
-        nudLowerLimit.DecimalPlaces = nudScalesNoOfDecimalPlaces.Value
+    Private Sub ucrNudScalesNoOfDecimalPlaces_TextChanged(sender As Object, e As EventArgs)
+        ucrNudUpperLimit.DecimalPlaces = ucrNudScalesNoOfDecimalPlaces.Value
+        ucrNudLowerLimit.DecimalPlaces = ucrNudScalesNoOfDecimalPlaces.Value
     End Sub
 
-    Private Sub nudTickMarkersNoOfDecimalPlaces_TextChanged(sender As Object, e As EventArgs) Handles nudTickMarkersNoOfDecimalPlaces.TextChanged
-        nudFrom.DecimalPlaces = nudTickMarkersNoOfDecimalPlaces.Value
-        nudTo.DecimalPlaces = nudTickMarkersNoOfDecimalPlaces.Value
-        nudInStepsOf.DecimalPlaces = nudTickMarkersNoOfDecimalPlaces.Value
+    Private Sub ucrNudTickMarkersNoOfDecimalPlaces_TextChanged(sender As Object, e As EventArgs)
+        ucrNudFrom.DecimalPlaces = ucrNudTickMarkersNoOfDecimalPlaces.Value
+        ucrNudTo.DecimalPlaces = ucrNudTickMarkersNoOfDecimalPlaces.Value
+        ucrNudInStepsOf.DecimalPlaces = ucrNudTickMarkersNoOfDecimalPlaces.Value
     End Sub
 
     Private Sub ucrTickMarkers_NameChanged() Handles ucrTickMarkers.NameChanged
@@ -241,64 +270,27 @@ Public Class ucrAxes
 
                 ucrSpecificValues.Visible = False
                 lblFrom.Visible = True
-                nudFrom.Visible = True
+                ucrNudFrom.Visible = True
                 lblTo.Visible = True
-                nudTo.Visible = True
+                ucrNudTo.Visible = True
                 lblInStepsOf.Visible = True
-                nudInStepsOf.Visible = True
+                ucrNudInStepsOf.Visible = True
                 lblTickMarkersNoOfDecimalPlaces.Visible = True
-                nudTickMarkersNoOfDecimalPlaces.Visible = True
+                ucrNudTickMarkersNoOfDecimalPlaces.Visible = True
 
             ElseIf ucrTickMarkers.cboInput.SelectedItem = "Specific Values" Then
                 clsScalecontinuousFunction.RemoveParameterByName("breaks")
                 ucrSpecificValues.Visible = True
                 lblFrom.Visible = False
-                nudFrom.Visible = False
+                ucrNudFrom.Visible = False
                 lblTo.Visible = False
-                nudTo.Visible = False
+                ucrNudTo.Visible = False
                 lblInStepsOf.Visible = False
-                nudInStepsOf.Visible = False
+                ucrNudInStepsOf.Visible = False
                 lblTickMarkersNoOfDecimalPlaces.Visible = False
-                nudTickMarkersNoOfDecimalPlaces.Visible = False
+                ucrNudTickMarkersNoOfDecimalPlaces.Visible = False
             End If
         End If
     End Sub
-
-    Private Sub TickMarkersInterval()
-
-    End Sub
-
-    Private Sub ucrSpecificValues_NameChanged() Handles ucrSpecificValues.NameChanged
-        If Not ucrSpecificValues.IsEmpty Then
-            clsScalecontinuousFunction.AddParameter("breaks", "c(" & ucrSpecificValues.GetText & ")")
-        Else
-            clsScalecontinuousFunction.RemoveParameterByName("breaks")
-        End If
-    End Sub
-
-    Private Sub nudFrom_TextChanged(sender As Object, e As EventArgs) Handles nudFrom.TextChanged
-        If nudFrom.Text <> "" Then
-            clsSeqFunction.AddParameter("from", nudFrom.Value)
-        Else
-            clsSeqFunction.RemoveParameterByName("from")
-        End If
-    End Sub
-
-    Private Sub nudTo_TextChanged(sender As Object, e As EventArgs) Handles nudTo.TextChanged
-        If nudTo.Text <> "" Then
-            clsSeqFunction.AddParameter("to", nudTo.Value)
-        Else
-            clsSeqFunction.RemoveParameterByName("to")
-        End If
-    End Sub
-
-    Private Sub nudInStepsOf_TextChanged(sender As Object, e As EventArgs) Handles nudInStepsOf.TextChanged
-        If nudFrom.Text <> "" Then
-            clsSeqFunction.AddParameter("by", nudFrom.Value)
-        Else
-            clsSeqFunction.RemoveParameterByName("by")
-        End If
-    End Sub
-
 End Class
 

@@ -60,6 +60,17 @@ Public Class sdgPlots
     End Sub
 
     Public Sub InitialiseControls()
+
+        'facets tab 
+        'Links the factor receivers, used for creating facets, with the selector. The variables need to be factors.
+        ucr1stFactorReceiver.Selector = ucrFacetSelector
+        ucr1stFactorReceiver.SetIncludedDataTypes({"factor"})
+        ucr2ndFactorReceiver.Selector = ucrFacetSelector
+        ucr2ndFactorReceiver.SetIncludedDataTypes({"factor"})
+
+        'layers tab 
+
+        'titles tab
         Dim clsGraphTitleFunction As New RFunction
         Dim clsGraphTitleparam As New RParameter
 
@@ -69,8 +80,16 @@ Public Class sdgPlots
         clsGraphTitleparam.SetArgumentName("ggtitle")
         ucrInputGraphTitle.SetParameter(New RParameter("label"))
         clsBaseOperator.AddParameter(clsGraphTitleparam)
-        bControlsInitialised = True
 
+        'X Axis tab
+
+        'Y Axis tab
+
+        'themes tab
+
+        'Corodiantes tab
+
+        bControlsInitialised = True
     End Sub
 
     Public Sub DisableLayersTab()
@@ -81,22 +100,22 @@ Public Class sdgPlots
         tabLayers.Enabled = True
     End Sub
     Public Sub SetDefaults()
-        'TitleDefaults()
-        'chkIncludeFacets.Checked = False
-        'IncludeFacets()
-        'nudNumberofRows.Value = 1
-        'ucrFacetSelector.Reset()
+        TitleDefaults()
+        chkIncludeFacets.Checked = False
+        IncludeFacets()
+        nudNumberofRows.Value = 1
+        ucrFacetSelector.Reset()
 
-        'ucr1stFactorReceiver.SetMeAsReceiver()
-        'ucrInputGraphTitle.SetName("")
-        'ucrPlotsAdditionalLayers.Reset()
-        ''Note that the following two don't reset the bisX and RSyntaxAxis ... So no need to set these again.
-        'ucrXAxis.Reset()
-        'ucrYAxis.Reset()
-        'ucrInputThemes.SetName("theme_grey")
-        'rdoLegendTitleAuto.Checked = True
-        'LegendDefaults()
-        'bLayersDefaultIsGlobal = False
+        ucr1stFactorReceiver.SetMeAsReceiver()
+        ucrInputGraphTitle.SetName("")
+        ucrPlotsAdditionalLayers.Reset()
+        'Note that the following two don't reset the bisX and RSyntaxAxis ... So no need to set these again.
+        ucrXAxis.Reset()
+        ucrYAxis.Reset()
+        ucrInputThemes.SetName("theme_grey")
+        rdoLegendTitleAuto.Checked = True
+        LegendDefaults()
+        bLayersDefaultIsGlobal = False
 
     End Sub
 
@@ -114,7 +133,6 @@ Public Class sdgPlots
     Private Sub InitialiseDialog()
         InitialiseTabs()
         CreateThemes()
-        FacetsReceiversSetup()
         'The following sets up the clsGgplotAesFunction in ucrAdditionalLayers. Not sure this should happen in the initialise dialog... Not sure of the objective either... It is never linked to the main dlg anyway...
         ucrPlotsAdditionalLayers.SetAesFunction(clsAesFunction)
         'The following two setup the ucrAdditionalLayers on the sdgPlots. Shares the global ggplot function, as well as the whole PLots RSyntax.
@@ -148,14 +166,6 @@ Public Class sdgPlots
         'Task: Need to implement theme options. The "All Options" button is temporarily disabled.
         cmdAllOptions.Enabled = False
     End Sub
-    Private Sub FacetsReceiversSetup()
-        'Links the factor receivers, used for creating facets, with the selector. The variables need to be factors.
-        ucr1stFactorReceiver.Selector = ucrFacetSelector
-        ucr1stFactorReceiver.SetIncludedDataTypes({"factor"})
-        ucr2ndFactorReceiver.Selector = ucrFacetSelector
-        ucr2ndFactorReceiver.SetIncludedDataTypes({"factor"})
-    End Sub
-
     Private Sub IncludeFacets()
         'If the user wants facets, the facets options need to be shown, otherwise hide them.
         If chkIncludeFacets.Checked Then
@@ -496,9 +506,6 @@ Public Class sdgPlots
             clsRsyntax.RemoveOperatorParameter("labs")
         End If
     End Sub
-
-
-
     'Warning/Task to be discussed: need to disable ok on dlg's when layers are not complete on subdialogues + warning message... 
     'Warning: actually this will be very hard to implement until the global aes, set from the main layer are properly communicated to plots. Global aes might fill in missing mandatory aes...
 End Class
