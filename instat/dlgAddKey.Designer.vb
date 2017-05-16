@@ -34,7 +34,7 @@ Partial Class dlgAddKey
         '
         'cmdCheckUnique
         '
-        Me.cmdCheckUnique.Location = New System.Drawing.Point(10, 249)
+        Me.cmdCheckUnique.Location = New System.Drawing.Point(10, 230)
         Me.cmdCheckUnique.Name = "cmdCheckUnique"
         Me.cmdCheckUnique.Size = New System.Drawing.Size(98, 23)
         Me.cmdCheckUnique.TabIndex = 5
@@ -44,7 +44,7 @@ Partial Class dlgAddKey
         'lblKeyColumns
         '
         Me.lblKeyColumns.AutoSize = True
-        Me.lblKeyColumns.Location = New System.Drawing.Point(254, 47)
+        Me.lblKeyColumns.Location = New System.Drawing.Point(254, 45)
         Me.lblKeyColumns.Name = "lblKeyColumns"
         Me.lblKeyColumns.Size = New System.Drawing.Size(71, 13)
         Me.lblKeyColumns.TabIndex = 1
@@ -53,7 +53,7 @@ Partial Class dlgAddKey
         'lblKeyName
         '
         Me.lblKeyName.AutoSize = True
-        Me.lblKeyName.Location = New System.Drawing.Point(10, 218)
+        Me.lblKeyName.Location = New System.Drawing.Point(12, 208)
         Me.lblKeyName.Name = "lblKeyName"
         Me.lblKeyName.Size = New System.Drawing.Size(59, 13)
         Me.lblKeyName.TabIndex = 3
@@ -61,25 +61,27 @@ Partial Class dlgAddKey
         '
         'ucrInputKeyName
         '
+        Me.ucrInputKeyName.AddQuotesIfUnrecognised = True
         Me.ucrInputKeyName.IsMultiline = False
         Me.ucrInputKeyName.IsReadOnly = False
-        Me.ucrInputKeyName.Location = New System.Drawing.Point(114, 215)
+        Me.ucrInputKeyName.Location = New System.Drawing.Point(114, 204)
         Me.ucrInputKeyName.Name = "ucrInputKeyName"
-        Me.ucrInputKeyName.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputKeyName.Size = New System.Drawing.Size(182, 21)
         Me.ucrInputKeyName.TabIndex = 4
         '
         'ucrInputCheckInput
         '
+        Me.ucrInputCheckInput.AddQuotesIfUnrecognised = True
         Me.ucrInputCheckInput.IsMultiline = False
         Me.ucrInputCheckInput.IsReadOnly = False
-        Me.ucrInputCheckInput.Location = New System.Drawing.Point(114, 250)
+        Me.ucrInputCheckInput.Location = New System.Drawing.Point(114, 232)
         Me.ucrInputCheckInput.Name = "ucrInputCheckInput"
         Me.ucrInputCheckInput.Size = New System.Drawing.Size(294, 21)
         Me.ucrInputCheckInput.TabIndex = 6
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 285)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 261)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 7
@@ -97,18 +99,19 @@ Partial Class dlgAddKey
         'ucrReceiverKeyColumns
         '
         Me.ucrReceiverKeyColumns.frmParent = Me
-        Me.ucrReceiverKeyColumns.Location = New System.Drawing.Point(255, 62)
+        Me.ucrReceiverKeyColumns.Location = New System.Drawing.Point(254, 60)
         Me.ucrReceiverKeyColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverKeyColumns.Name = "ucrReceiverKeyColumns"
         Me.ucrReceiverKeyColumns.Selector = Nothing
-        Me.ucrReceiverKeyColumns.Size = New System.Drawing.Size(132, 133)
+        Me.ucrReceiverKeyColumns.Size = New System.Drawing.Size(129, 130)
         Me.ucrReceiverKeyColumns.TabIndex = 2
+        Me.ucrReceiverKeyColumns.ucrSelector = Nothing
         '
         'dlgAddKey
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(414, 340)
+        Me.ClientSize = New System.Drawing.Size(418, 321)
         Me.Controls.Add(Me.ucrInputKeyName)
         Me.Controls.Add(Me.lblKeyColumns)
         Me.Controls.Add(Me.ucrInputCheckInput)
