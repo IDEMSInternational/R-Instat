@@ -38,12 +38,12 @@ Public Class dlgFlatFrequencyTable
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.iCallType = 2
 
-        ucrRowVariable.SetParameter(New RParameter("row.vars", 1))
+        ucrRowVariable.SetParameter(New RParameter("row.vars", 0))
         ucrRowVariable.SetParameterIsString()
         ucrRowVariable.bExcludeFromSelector = True
         ucrRowVariable.Selector = ucrSelectorDataFrame
 
-        ucrColumnVariable.SetParameter(New RParameter("col.vars", 2))
+        ucrColumnVariable.SetParameter(New RParameter("col.vars", 1))
         ucrColumnVariable.SetParameterIsString()
         ucrColumnVariable.Selector = ucrSelectorDataFrame
         ucrColumnVariable.SetDataType("factor")
