@@ -14,8 +14,6 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
-Imports RDotNet
 Imports instat.Translations
 Public Class dlgFlatFrequencyTable
     Private bFirstLoad As Boolean = True
@@ -82,7 +80,6 @@ Public Class dlgFlatFrequencyTable
         Else
             clsFtable.RemoveParameterByName("x")
             clsFtable.AddParameter("table", clsRFunctionParameter:=clsTable)
-
         End If
     End Sub
 
@@ -94,16 +91,9 @@ Public Class dlgFlatFrequencyTable
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrRowReceiver.IsEmpty AndAlso ucrRowReceiver.lstSelectedVariables.Items.Count >= 2 Then
-            If Not ucrColumnVariable.IsEmpty AndAlso
+        If Not ucrRowReceiver.IsEmpty AndAlso Not ucrColumnVariable.IsEmpty AndAlso
         ucrSelectorDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
-            End If
-        ElseIf Not ucrRowReceiver.IsEmpty AndAlso ucrRowReceiver.lstSelectedVariables.Items.Count < 2 Then
-            MessageBox.Show("Please enter two or more Row variables to continue")
-            ucrBase.OKEnabled(False)
+            ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
@@ -125,7 +115,7 @@ Public Class dlgFlatFrequencyTable
             clsGetVar.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
             clsGetVar.AddParameter("data_name", Chr(34) & ucrSelectorDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
             clsGetVar.AddParameter("col_names", "c(" & ucrColumnVariable.GetVariableNames & "," & ucrRowReceiver.GetVariableNames & ")")
-                        clsTable.AddParameter("y", clsRFunctionParameter:=clsGetVar)
+            clsTable.AddParameter("y", clsRFunctionParameter:=clsGetVar)
         End If
     End Sub
 End Class
