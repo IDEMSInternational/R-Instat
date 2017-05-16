@@ -48,7 +48,7 @@ Partial Class dlgDeleteRowsOrColums
         'lblColumnsToDelete
         '
         Me.lblColumnsToDelete.AutoSize = True
-        Me.lblColumnsToDelete.Location = New System.Drawing.Point(267, 73)
+        Me.lblColumnsToDelete.Location = New System.Drawing.Point(254, 89)
         Me.lblColumnsToDelete.Name = "lblColumnsToDelete"
         Me.lblColumnsToDelete.Size = New System.Drawing.Size(96, 13)
         Me.lblColumnsToDelete.TabIndex = 4
@@ -81,7 +81,7 @@ Partial Class dlgDeleteRowsOrColums
         '
         Me.ucrSelectorForDeleteColumns.bShowHiddenColumns = False
         Me.ucrSelectorForDeleteColumns.bUseCurrentFilter = True
-        Me.ucrSelectorForDeleteColumns.Location = New System.Drawing.Point(10, 56)
+        Me.ucrSelectorForDeleteColumns.Location = New System.Drawing.Point(9, 54)
         Me.ucrSelectorForDeleteColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForDeleteColumns.Name = "ucrSelectorForDeleteColumns"
         Me.ucrSelectorForDeleteColumns.Size = New System.Drawing.Size(210, 180)
@@ -90,7 +90,7 @@ Partial Class dlgDeleteRowsOrColums
         'ucrReceiverForColumnsToDelete
         '
         Me.ucrReceiverForColumnsToDelete.frmParent = Me
-        Me.ucrReceiverForColumnsToDelete.Location = New System.Drawing.Point(264, 88)
+        Me.ucrReceiverForColumnsToDelete.Location = New System.Drawing.Point(254, 104)
         Me.ucrReceiverForColumnsToDelete.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverForColumnsToDelete.Name = "ucrReceiverForColumnsToDelete"
         Me.ucrReceiverForColumnsToDelete.Selector = Nothing
@@ -109,7 +109,7 @@ Partial Class dlgDeleteRowsOrColums
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(0, 261)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 243)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 10
@@ -159,7 +159,7 @@ Partial Class dlgDeleteRowsOrColums
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(408, 315)
+        Me.ClientSize = New System.Drawing.Size(415, 299)
         Me.Controls.Add(Me.rdoColumns)
         Me.Controls.Add(Me.rdoRows)
         Me.Controls.Add(Me.ucrPnlColumnsOrRows)
