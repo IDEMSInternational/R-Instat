@@ -25,21 +25,18 @@ Partial Class dlgUseDate
         Me.lblDateVariable = New System.Windows.Forms.Label()
         Me.grpDateFunctions = New System.Windows.Forms.GroupBox()
         Me.grpOthers = New System.Windows.Forms.GroupBox()
+        Me.grpFullName = New System.Windows.Forms.GroupBox()
+        Me.grpAbbreviation = New System.Windows.Forms.GroupBox()
+        Me.grpValues = New System.Windows.Forms.GroupBox()
+        Me.lblYear = New System.Windows.Forms.Label()
         Me.ucrChkLeapYear = New instat.ucrCheck()
         Me.ucrChkDekad = New instat.ucrCheck()
         Me.ucrChkPentad = New instat.ucrCheck()
-        Me.grpFullName = New System.Windows.Forms.GroupBox()
         Me.ucrChkFullWeekday = New instat.ucrCheck()
         Me.ucrChkFullMonth = New instat.ucrCheck()
-        Me.grpAbbreviation = New System.Windows.Forms.GroupBox()
         Me.ucrChkAbbrMonth = New instat.ucrCheck()
         Me.ucrChkAbbrWeekday = New instat.ucrCheck()
-        Me.grpValues = New System.Windows.Forms.GroupBox()
-        Me.ucrChkShift = New instat.ucrCheck()
-        Me.lblYear = New System.Windows.Forms.Label()
-        Me.lblMonth = New System.Windows.Forms.Label()
-        Me.ucrNudShiftDay = New instat.ucrNud()
-        Me.ucrNudShiftMonth = New instat.ucrNud()
+        Me.ucrNudShiftStartDay = New instat.ucrNud()
         Me.ucrChkShiftDay = New instat.ucrCheck()
         Me.ucrChkDayYear366 = New instat.ucrCheck()
         Me.ucrChkYear = New instat.ucrCheck()
@@ -51,6 +48,7 @@ Partial Class dlgUseDate
         Me.ucrReceiverUseDate = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorUseDate = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrChkShiftYear = New instat.ucrCheck()
         Me.grpDateFunctions.SuspendLayout()
         Me.grpOthers.SuspendLayout()
         Me.grpFullName.SuspendLayout()
@@ -92,6 +90,57 @@ Partial Class dlgUseDate
         Me.grpOthers.TabStop = False
         Me.grpOthers.Text = "Other Functions"
         '
+        'grpFullName
+        '
+        Me.grpFullName.Controls.Add(Me.ucrChkFullWeekday)
+        Me.grpFullName.Controls.Add(Me.ucrChkFullMonth)
+        Me.grpFullName.Location = New System.Drawing.Point(333, 19)
+        Me.grpFullName.Name = "grpFullName"
+        Me.grpFullName.Size = New System.Drawing.Size(106, 125)
+        Me.grpFullName.TabIndex = 2
+        Me.grpFullName.TabStop = False
+        Me.grpFullName.Text = "Full Name"
+        '
+        'grpAbbreviation
+        '
+        Me.grpAbbreviation.Controls.Add(Me.ucrChkAbbrMonth)
+        Me.grpAbbreviation.Controls.Add(Me.ucrChkAbbrWeekday)
+        Me.grpAbbreviation.Location = New System.Drawing.Point(227, 19)
+        Me.grpAbbreviation.Name = "grpAbbreviation"
+        Me.grpAbbreviation.Size = New System.Drawing.Size(105, 125)
+        Me.grpAbbreviation.TabIndex = 1
+        Me.grpAbbreviation.TabStop = False
+        Me.grpAbbreviation.Text = "Abbreviation"
+        '
+        'grpValues
+        '
+        Me.grpValues.Controls.Add(Me.ucrChkShiftYear)
+        Me.grpValues.Controls.Add(Me.lblYear)
+        Me.grpValues.Controls.Add(Me.ucrNudShiftStartDay)
+        Me.grpValues.Controls.Add(Me.ucrChkShiftDay)
+        Me.grpValues.Controls.Add(Me.ucrChkDayYear366)
+        Me.grpValues.Controls.Add(Me.ucrChkYear)
+        Me.grpValues.Controls.Add(Me.ucrChkDayInYear)
+        Me.grpValues.Controls.Add(Me.ucrChkMonth)
+        Me.grpValues.Controls.Add(Me.ucrChkDay)
+        Me.grpValues.Controls.Add(Me.ucrChkWeekday)
+        Me.grpValues.Controls.Add(Me.ucrChkWeek)
+        Me.grpValues.Location = New System.Drawing.Point(6, 19)
+        Me.grpValues.Name = "grpValues"
+        Me.grpValues.Size = New System.Drawing.Size(220, 179)
+        Me.grpValues.TabIndex = 0
+        Me.grpValues.TabStop = False
+        Me.grpValues.Text = "Values"
+        '
+        'lblYear
+        '
+        Me.lblYear.AutoSize = True
+        Me.lblYear.Location = New System.Drawing.Point(114, 125)
+        Me.lblYear.Name = "lblYear"
+        Me.lblYear.Size = New System.Drawing.Size(75, 13)
+        Me.lblYear.TabIndex = 11
+        Me.lblYear.Text = "Shift Start Day"
+        '
         'ucrChkLeapYear
         '
         Me.ucrChkLeapYear.Checked = False
@@ -116,17 +165,6 @@ Partial Class dlgUseDate
         Me.ucrChkPentad.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkPentad.TabIndex = 1
         '
-        'grpFullName
-        '
-        Me.grpFullName.Controls.Add(Me.ucrChkFullWeekday)
-        Me.grpFullName.Controls.Add(Me.ucrChkFullMonth)
-        Me.grpFullName.Location = New System.Drawing.Point(333, 19)
-        Me.grpFullName.Name = "grpFullName"
-        Me.grpFullName.Size = New System.Drawing.Size(106, 125)
-        Me.grpFullName.TabIndex = 2
-        Me.grpFullName.TabStop = False
-        Me.grpFullName.Text = "Full Name"
-        '
         'ucrChkFullWeekday
         '
         Me.ucrChkFullWeekday.Checked = False
@@ -142,17 +180,6 @@ Partial Class dlgUseDate
         Me.ucrChkFullMonth.Name = "ucrChkFullMonth"
         Me.ucrChkFullMonth.Size = New System.Drawing.Size(90, 20)
         Me.ucrChkFullMonth.TabIndex = 1
-        '
-        'grpAbbreviation
-        '
-        Me.grpAbbreviation.Controls.Add(Me.ucrChkAbbrMonth)
-        Me.grpAbbreviation.Controls.Add(Me.ucrChkAbbrWeekday)
-        Me.grpAbbreviation.Location = New System.Drawing.Point(227, 19)
-        Me.grpAbbreviation.Name = "grpAbbreviation"
-        Me.grpAbbreviation.Size = New System.Drawing.Size(105, 125)
-        Me.grpAbbreviation.TabIndex = 1
-        Me.grpAbbreviation.TabStop = False
-        Me.grpAbbreviation.Text = "Abbreviation"
         '
         'ucrChkAbbrMonth
         '
@@ -170,82 +197,22 @@ Partial Class dlgUseDate
         Me.ucrChkAbbrWeekday.Size = New System.Drawing.Size(94, 20)
         Me.ucrChkAbbrWeekday.TabIndex = 0
         '
-        'grpValues
+        'ucrNudShiftStartDay
         '
-        Me.grpValues.Controls.Add(Me.ucrChkShift)
-        Me.grpValues.Controls.Add(Me.lblYear)
-        Me.grpValues.Controls.Add(Me.lblMonth)
-        Me.grpValues.Controls.Add(Me.ucrNudShiftDay)
-        Me.grpValues.Controls.Add(Me.ucrNudShiftMonth)
-        Me.grpValues.Controls.Add(Me.ucrChkShiftDay)
-        Me.grpValues.Controls.Add(Me.ucrChkDayYear366)
-        Me.grpValues.Controls.Add(Me.ucrChkYear)
-        Me.grpValues.Controls.Add(Me.ucrChkDayInYear)
-        Me.grpValues.Controls.Add(Me.ucrChkMonth)
-        Me.grpValues.Controls.Add(Me.ucrChkDay)
-        Me.grpValues.Controls.Add(Me.ucrChkWeekday)
-        Me.grpValues.Controls.Add(Me.ucrChkWeek)
-        Me.grpValues.Location = New System.Drawing.Point(6, 19)
-        Me.grpValues.Name = "grpValues"
-        Me.grpValues.Size = New System.Drawing.Size(220, 179)
-        Me.grpValues.TabIndex = 0
-        Me.grpValues.TabStop = False
-        Me.grpValues.Text = "Values"
-        '
-        'ucrChkShift
-        '
-        Me.ucrChkShift.Checked = False
-        Me.ucrChkShift.Location = New System.Drawing.Point(6, 125)
-        Me.ucrChkShift.Name = "ucrChkShift"
-        Me.ucrChkShift.Size = New System.Drawing.Size(88, 20)
-        Me.ucrChkShift.TabIndex = 12
-        '
-        'lblYear
-        '
-        Me.lblYear.AutoSize = True
-        Me.lblYear.Location = New System.Drawing.Point(158, 124)
-        Me.lblYear.Name = "lblYear"
-        Me.lblYear.Size = New System.Drawing.Size(50, 13)
-        Me.lblYear.TabIndex = 11
-        Me.lblYear.Text = "Shift Day"
-        '
-        'lblMonth
-        '
-        Me.lblMonth.AutoSize = True
-        Me.lblMonth.Location = New System.Drawing.Point(96, 125)
-        Me.lblMonth.Name = "lblMonth"
-        Me.lblMonth.Size = New System.Drawing.Size(61, 13)
-        Me.lblMonth.TabIndex = 10
-        Me.lblMonth.Text = "Shift Month"
-        '
-        'ucrNudShiftDay
-        '
-        Me.ucrNudShiftDay.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudShiftDay.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudShiftDay.Location = New System.Drawing.Point(162, 141)
-        Me.ucrNudShiftDay.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudShiftDay.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudShiftDay.Name = "ucrNudShiftDay"
-        Me.ucrNudShiftDay.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudShiftDay.TabIndex = 9
-        Me.ucrNudShiftDay.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudShiftMonth
-        '
-        Me.ucrNudShiftMonth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudShiftMonth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudShiftMonth.Location = New System.Drawing.Point(100, 140)
-        Me.ucrNudShiftMonth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudShiftMonth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudShiftMonth.Name = "ucrNudShiftMonth"
-        Me.ucrNudShiftMonth.Size = New System.Drawing.Size(50, 23)
-        Me.ucrNudShiftMonth.TabIndex = 8
-        Me.ucrNudShiftMonth.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudShiftStartDay.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudShiftStartDay.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudShiftStartDay.Location = New System.Drawing.Point(119, 141)
+        Me.ucrNudShiftStartDay.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudShiftStartDay.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudShiftStartDay.Name = "ucrNudShiftStartDay"
+        Me.ucrNudShiftStartDay.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudShiftStartDay.TabIndex = 9
+        Me.ucrNudShiftStartDay.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrChkShiftDay
         '
         Me.ucrChkShiftDay.Checked = False
-        Me.ucrChkShiftDay.Location = New System.Drawing.Point(108, 95)
+        Me.ucrChkShiftDay.Location = New System.Drawing.Point(6, 125)
         Me.ucrChkShiftDay.Name = "ucrChkShiftDay"
         Me.ucrChkShiftDay.Size = New System.Drawing.Size(94, 20)
         Me.ucrChkShiftDay.TabIndex = 7
@@ -335,6 +302,14 @@ Partial Class dlgUseDate
         Me.ucrSelectorUseDate.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorUseDate.TabIndex = 0
         '
+        'ucrChkShiftYear
+        '
+        Me.ucrChkShiftYear.Checked = False
+        Me.ucrChkShiftYear.Location = New System.Drawing.Point(6, 151)
+        Me.ucrChkShiftYear.Name = "ucrChkShiftYear"
+        Me.ucrChkShiftYear.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkShiftYear.TabIndex = 12
+        '
         'dlgUseDate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -385,10 +360,8 @@ Partial Class dlgUseDate
     Friend WithEvents ucrChkLeapYear As ucrCheck
     Friend WithEvents ucrChkDekad As ucrCheck
     Friend WithEvents ucrChkPentad As ucrCheck
-    Friend WithEvents ucrNudShiftDay As ucrNud
-    Friend WithEvents ucrNudShiftMonth As ucrNud
+    Friend WithEvents ucrNudShiftStartDay As ucrNud
     Friend WithEvents ucrChkShiftDay As ucrCheck
     Friend WithEvents lblYear As Label
-    Friend WithEvents lblMonth As Label
-    Friend WithEvents ucrChkShift As ucrCheck
+    Friend WithEvents ucrChkShiftYear As ucrCheck
 End Class
