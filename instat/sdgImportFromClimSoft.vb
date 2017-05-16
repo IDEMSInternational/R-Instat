@@ -66,19 +66,22 @@ Public Class sdgImportFromClimSoft
         cmdEnterPassword.Enabled = False
         If bConnected Then
             frmMain.clsRLink.RunScript(clsRDatabaseDisconnect.ToScript(), strComment:="Disconnect database connection.")
-        End If
-        frmMain.clsRLink.RunScript(clsRDatabaseConnect.ToScript(), strComment:="Connect database connection.")
-
-        expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsHasConnection.ToScript())
-        If Not expTemp.Type = Internals.SymbolicExpressionType.Null Then
-            bConnected = expTemp.AsLogical(0)
-        Else
             bConnected = False
+        Else
+            frmMain.clsRLink.RunScript(clsRDatabaseConnect.ToScript(), strComment:="Connect database connection.")
+            expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsHasConnection.ToScript())
+            If Not expTemp.Type = Internals.SymbolicExpressionType.Null Then
+                bConnected = expTemp.AsLogical(0)
+            Else
+                bConnected = False
+            End If
         End If
         If bConnected Then
             lblConnection.Text = strConnected
+            cmdEnterPassword.Text = "Diconnnect"
         Else
             lblConnection.Text = strNoConnection
+            cmdEnterPassword.Text = "Enter Password"
         End If
         cmdEnterPassword.Enabled = True
     End Sub
@@ -107,6 +110,13 @@ Public Class sdgImportFromClimSoft
             frmMain.clsRLink.RunScript(clsRDatabaseDisconnect.ToScript(), strComment:="Disconnect database connection.")
             lblConnection.Text = strNoConnection
             bConnected = False
+        End If
+        If bConnected Then
+            lblConnection.Text = strConnected
+            cmdEnterPassword.Text = "Diconnnect"
+        Else
+            lblConnection.Text = strNoConnection
+            cmdEnterPassword.Text = "Enter Password"
         End If
     End Sub
 End Class
