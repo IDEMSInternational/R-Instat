@@ -40,7 +40,7 @@ Partial Class dlgAddComment
         'lblRow
         '
         Me.lblRow.AutoSize = True
-        Me.lblRow.Location = New System.Drawing.Point(266, 83)
+        Me.lblRow.Location = New System.Drawing.Point(266, 90)
         Me.lblRow.Name = "lblRow"
         Me.lblRow.Size = New System.Drawing.Size(32, 13)
         Me.lblRow.TabIndex = 4
@@ -49,7 +49,7 @@ Partial Class dlgAddComment
         'lblColumn
         '
         Me.lblColumn.AutoSize = True
-        Me.lblColumn.Location = New System.Drawing.Point(266, 134)
+        Me.lblColumn.Location = New System.Drawing.Point(266, 139)
         Me.lblColumn.Name = "lblColumn"
         Me.lblColumn.Size = New System.Drawing.Size(45, 13)
         Me.lblColumn.TabIndex = 6
@@ -58,7 +58,7 @@ Partial Class dlgAddComment
         'lblComment
         '
         Me.lblComment.AutoSize = True
-        Me.lblComment.Location = New System.Drawing.Point(266, 184)
+        Me.lblComment.Location = New System.Drawing.Point(12, 253)
         Me.lblComment.Name = "lblComment"
         Me.lblComment.Size = New System.Drawing.Size(54, 13)
         Me.lblComment.TabIndex = 8
@@ -101,9 +101,9 @@ Partial Class dlgAddComment
         'UcrDialogDisabled1
         '
         Me.UcrDialogDisabled1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.UcrDialogDisabled1.Location = New System.Drawing.Point(80, 154)
+        Me.UcrDialogDisabled1.Location = New System.Drawing.Point(66, 147)
         Me.UcrDialogDisabled1.Name = "UcrDialogDisabled1"
-        Me.UcrDialogDisabled1.Size = New System.Drawing.Size(240, 50)
+        Me.UcrDialogDisabled1.Size = New System.Drawing.Size(295, 96)
         Me.UcrDialogDisabled1.TabIndex = 20
         '
         'ucrPnlCellOrRow
@@ -118,9 +118,9 @@ Partial Class dlgAddComment
         Me.ucrInputComment.AddQuotesIfUnrecognised = True
         Me.ucrInputComment.IsMultiline = False
         Me.ucrInputComment.IsReadOnly = False
-        Me.ucrInputComment.Location = New System.Drawing.Point(266, 200)
+        Me.ucrInputComment.Location = New System.Drawing.Point(92, 249)
         Me.ucrInputComment.Name = "ucrInputComment"
-        Me.ucrInputComment.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputComment.Size = New System.Drawing.Size(316, 21)
         Me.ucrInputComment.TabIndex = 9
         '
         'ucrReceiverColumn
@@ -151,7 +151,7 @@ Partial Class dlgAddComment
         '
         Me.ucrSelectorAddComment.bShowHiddenColumns = False
         Me.ucrSelectorAddComment.bUseCurrentFilter = True
-        Me.ucrSelectorAddComment.Location = New System.Drawing.Point(9, 57)
+        Me.ucrSelectorAddComment.Location = New System.Drawing.Point(10, 55)
         Me.ucrSelectorAddComment.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorAddComment.Name = "ucrSelectorAddComment"
         Me.ucrSelectorAddComment.Size = New System.Drawing.Size(210, 180)
@@ -160,7 +160,7 @@ Partial Class dlgAddComment
         'ucrDataFrame
         '
         Me.ucrDataFrame.bUseCurrentFilter = True
-        Me.ucrDataFrame.Location = New System.Drawing.Point(9, 55)
+        Me.ucrDataFrame.Location = New System.Drawing.Point(10, 55)
         Me.ucrDataFrame.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataFrame.Name = "ucrDataFrame"
         Me.ucrDataFrame.Size = New System.Drawing.Size(120, 50)
@@ -168,7 +168,7 @@ Partial Class dlgAddComment
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 260)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 276)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(408, 52)
         Me.ucrBase.TabIndex = 10
@@ -177,7 +177,7 @@ Partial Class dlgAddComment
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(427, 320)
+        Me.ClientSize = New System.Drawing.Size(418, 330)
         Me.Controls.Add(Me.UcrDialogDisabled1)
         Me.Controls.Add(Me.rdoCell)
         Me.Controls.Add(Me.rdoRow)
