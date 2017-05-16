@@ -34,7 +34,7 @@ Partial Class dlgFlatFrequencyTable
         'lblRowvariable
         '
         Me.lblRowvariable.AutoSize = True
-        Me.lblRowvariable.Location = New System.Drawing.Point(247, 45)
+        Me.lblRowvariable.Location = New System.Drawing.Point(264, 150)
         Me.lblRowvariable.Name = "lblRowvariable"
         Me.lblRowvariable.Size = New System.Drawing.Size(84, 13)
         Me.lblRowvariable.TabIndex = 1
@@ -43,7 +43,7 @@ Partial Class dlgFlatFrequencyTable
         'lblColumnVariable
         '
         Me.lblColumnVariable.AutoSize = True
-        Me.lblColumnVariable.Location = New System.Drawing.Point(247, 157)
+        Me.lblColumnVariable.Location = New System.Drawing.Point(264, 43)
         Me.lblColumnVariable.Name = "lblColumnVariable"
         Me.lblColumnVariable.Size = New System.Drawing.Size(97, 13)
         Me.lblColumnVariable.TabIndex = 3
@@ -60,7 +60,7 @@ Partial Class dlgFlatFrequencyTable
         'ucrColumnVariable
         '
         Me.ucrColumnVariable.frmParent = Me
-        Me.ucrColumnVariable.Location = New System.Drawing.Point(247, 172)
+        Me.ucrColumnVariable.Location = New System.Drawing.Point(264, 58)
         Me.ucrColumnVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrColumnVariable.Name = "ucrColumnVariable"
         Me.ucrColumnVariable.Selector = Nothing
@@ -72,7 +72,7 @@ Partial Class dlgFlatFrequencyTable
         'ucrRowVariable
         '
         Me.ucrRowVariable.frmParent = Me
-        Me.ucrRowVariable.Location = New System.Drawing.Point(247, 60)
+        Me.ucrRowVariable.Location = New System.Drawing.Point(264, 165)
         Me.ucrRowVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrRowVariable.Name = "ucrRowVariable"
         Me.ucrRowVariable.Selector = Nothing
