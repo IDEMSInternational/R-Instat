@@ -72,7 +72,7 @@ Public Class sdgImportFromClimSoft
         expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsHasConnection.ToScript())
         If Not expTemp.Type = Internals.SymbolicExpressionType.Null Then
             bConnected = expTemp.AsLogical(0)
-            cmdEnterPassword.Enabled = True
+            'cmdEnterPassword.Enabled = True
         Else
             bConnected = False
         End If
@@ -81,16 +81,44 @@ Public Class sdgImportFromClimSoft
         Else
             lblConnection.Text = strNoConnection
         End If
+        cmdEnterPassword.Enabled = True
     End Sub
 
     Private Sub ucrBaseSdgClimSoft_ClickReturn(sender As Object, e As EventArgs) Handles ucrBaseSdgClimSoft.ClickReturn
-        dlgClimSoft.ucrReceiverMultipleStations.SetMeAsReceiver()
+        'dlgClimSoft.ucrReceiverMultipleStations.SetMeAsReceiver()
     End Sub
 
+    'Private Sub ucrControlsValue_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputDatabaseName.ControlValueChanged, ucrInputHost.ControlValueChanged, ucrInputPort.ControlValueChanged, ucrInputUserName.ControlValueChanged
+    '    If bConnected Then
+    '        frmMain.clsRLink.RunScript(clsRDatabaseDisconnect.ToScript(), strComment:="Disconnect database connection.")
+    '        lblConnection.Text = strNoConnection
+    '    End If
+    'End Sub
+
     Private Sub ucrControlsContents_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputDatabaseName.ControlContentsChanged, ucrInputHost.ControlContentsChanged, ucrInputPort.ControlContentsChanged, ucrInputUserName.ControlContentsChanged
-        If bConnected Then
+        Dim strHost As String = ""
+        Dim strUser As String = ""
+        Dim strPort As String = ""
+        Dim strDatabaseName As String = ""
+
+        If clsRDatabaseConnect IsNot Nothing Then
+            If clsRDatabaseConnect.ContainsParameter("host") Then
+                strHost = clsRDatabaseConnect.GetParameter("host").strArgumentValue
+            End If
+            If clsRDatabaseConnect.ContainsParameter("user") Then
+                strUser = clsRDatabaseConnect.GetParameter("user").strArgumentValue
+            End If
+            If clsRDatabaseConnect.ContainsParameter("port") Then
+                strPort = clsRDatabaseConnect.GetParameter("port").strArgumentValue
+            End If
+            If clsRDatabaseConnect.ContainsParameter("dbname") Then
+                strDatabaseName = clsRDatabaseConnect.GetParameter("dbname").strArgumentValue
+            End If
+        End If
+        If bConnected AndAlso (strPort <> ucrInputPort.GetText() OrElse strDatabaseName <> Chr(34) & ucrInputDatabaseName.GetText() & Chr(34) OrElse strHost <> Chr(34) & ucrInputHost.GetText() & Chr(34) OrElse strUser <> Chr(34) & ucrInputUserName.GetText() & Chr(34)) Then
             frmMain.clsRLink.RunScript(clsRDatabaseDisconnect.ToScript(), strComment:="Disconnect database connection.")
             lblConnection.Text = strNoConnection
+            bConnected = False
         End If
     End Sub
 End Class

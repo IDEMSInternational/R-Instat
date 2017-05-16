@@ -107,6 +107,7 @@ Public Class dlgClimSoft
         bResetSubdialog = False
         sdgImportFromClimSoft.ShowDialog()
         SetConnectionActiveStatus(sdgImportFromClimSoft.GetConnectionActiveStatus())
+        ucrReceiverMultipleStations.SetMeAsReceiver()
     End Sub
 
     Private Sub SetConnectionActiveStatus(bCurrentStatus As Boolean)
