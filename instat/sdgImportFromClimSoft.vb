@@ -39,6 +39,8 @@ Public Class sdgImportFromClimSoft
         ucrInputPort.SetParameter(New RParameter("port", 2))
         ucrInputPort.AddQuotesIfUnrecognised = False
         ucrInputUserName.SetParameter(New RParameter("user", 3))
+
+        'to be deleted once the dialog is ready
         ucrInputDatabaseName.SetRDefault("mariadb_climsoft_test_db_v4")
         ucrInputHost.SetRDefault("127.0.0.1")
         'ucrInputPort.SetRDefault("3308")
