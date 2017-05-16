@@ -67,7 +67,7 @@ Public Class dlgFactorDataFrame
 
         ucrInputFactorNames.Reset()
         ucrSelectorFactorDataFrame.Reset()
-        ucrInputFactorNames.ResetText()
+        ucrInputFactorNames.SetText("")
         CheckAutoName()
 
         clsFactorDataframe.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$create_factor_data_frame")
