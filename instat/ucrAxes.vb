@@ -37,8 +37,6 @@ Public Class ucrAxes
         rdoScalesAuto.Checked = True
         rdoTickMarkersAuto.Checked = True
         TitleDefaults()
-        ScalesDefaults()
-        TickMarkersDefaults()
         ucrTickMarkers.SetName("Interval")
         TitleFunction()
         ucrOverwriteTitle.SetName("")
@@ -66,6 +64,19 @@ Public Class ucrAxes
         'Tick Markers section
         ucrPnlTickmarkers.AddRadioButton(rdoTickMarkersAuto)
         ucrPnlTickmarkers.AddRadioButton(rdoTickMarkersCustom)
+        ucrPnlTickmarkers.AddToLinkedControls(ucrTickMarkers, {rdoTickMarkersCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrPnlTickmarkers.AddToLinkedControls(ucrNudFrom, {rdoTickMarkersCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudFrom.SetLinkedDisplayControl(lblFrom)
+
+        ucrPnlTickmarkers.AddToLinkedControls(ucrNudTo, {rdoTickMarkersCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudFrom.SetLinkedDisplayControl(lblTo)
+
+        ucrPnlTickmarkers.AddToLinkedControls(ucrNudInStepsOf, {rdoTickMarkersCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudFrom.SetLinkedDisplayControl(lblInStepsOf)
+
+        ucrPnlTickmarkers.AddToLinkedControls(ucrNudTickMarkersNoOfDecimalPlaces, {rdoTickMarkersCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudFrom.SetLinkedDisplayControl(lblTickMarkersNoOfDecimalPlaces)
 
         'these add parameters to clsSeqFunction
         ucrNudInStepsOf.SetParameter(New RParameter("by"))
@@ -84,12 +95,11 @@ Public Class ucrAxes
         ucrPnlScales.AddToLinkedControls(ucrNudUpperLimit, {rdoScalesCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudUpperLimit.SetLinkedDisplayControl(lblUpperLimit)
 
+
         ucrTickMarkers.cboInput.Items.Add("Interval")
         ucrTickMarkers.cboInput.Items.Add("Specific Values")
 
         TitleDefaults()
-        ScalesDefaults()
-        TickMarkersDefaults()
     End Sub
 
     Private Sub TitleDefaults()
@@ -102,50 +112,6 @@ Public Class ucrAxes
             ucrChkDisplayTitle.Checked = True
             ucrChkOverwriteTitle.Visible = True
             ucrChkOverwriteTitle.Checked = False
-        End If
-    End Sub
-
-    Private Sub ScalesDefaults()
-        If rdoScalesAuto.Checked Then
-            lblLowerLimit.Visible = False
-            ucrNudLowerLimit.Visible = False
-            lblUpperLimit.Visible = False
-            ucrNudUpperLimit.Visible = False
-            lblScalesNoDecimalPlaces.Visible = False
-            ucrNudScalesNoOfDecimalPlaces.Visible = False
-        ElseIf rdoScalesCustom.Checked Then
-            lblLowerLimit.Visible = True
-            ucrNudLowerLimit.Visible = True
-            lblUpperLimit.Visible = True
-            ucrNudUpperLimit.Visible = True
-            lblScalesNoDecimalPlaces.Visible = True
-            ucrNudScalesNoOfDecimalPlaces.Visible = True
-        End If
-    End Sub
-
-    Private Sub TickMarkersDefaults()
-        If rdoTickMarkersAuto.Checked Then
-            ucrTickMarkers.Visible = False
-            lblFrom.Visible = False
-            ucrNudFrom.Visible = False
-            lblTo.Visible = False
-            ucrNudTo.Visible = False
-            lblInStepsOf.Visible = False
-            ucrNudInStepsOf.Visible = False
-            lblTickMarkersNoOfDecimalPlaces.Visible = False
-            ucrNudTickMarkersNoOfDecimalPlaces.Visible = False
-            ucrSpecificValues.Visible = False
-        ElseIf rdoTickMarkersCustom.Checked Then
-            ucrTickMarkers.Visible = True
-            lblFrom.Visible = True
-            ucrNudFrom.Visible = True
-            lblTo.Visible = True
-            ucrNudTo.Visible = True
-            lblInStepsOf.Visible = True
-            ucrNudInStepsOf.Visible = True
-            lblTickMarkersNoOfDecimalPlaces.Visible = True
-            ucrNudTickMarkersNoOfDecimalPlaces.Visible = True
-            ucrSpecificValues.Visible = False
         End If
     End Sub
 
@@ -230,22 +196,6 @@ Public Class ucrAxes
 
     Private Sub rdoTitleAuto_CheckedChanged(sender As Object, e As EventArgs) Handles rdoTitleAuto.CheckedChanged
         TitleDefaults()
-    End Sub
-
-    Private Sub rdoScalesCustom_CheckedChanged(sender As Object, e As EventArgs) Handles rdoScalesCustom.CheckedChanged
-        ScalesDefaults()
-    End Sub
-
-    Private Sub rdoScalesAuto_CheckedChanged(sender As Object, e As EventArgs) Handles rdoScalesAuto.CheckedChanged
-        ScalesDefaults()
-    End Sub
-
-    Private Sub rdoTickMarkersAuto_CheckedChanged(sender As Object, e As EventArgs) Handles rdoTickMarkersAuto.CheckedChanged
-        TickMarkersDefaults()
-    End Sub
-
-    Private Sub rdoTickMarkersCustom_CheckedChanged(sender As Object, e As EventArgs) Handles rdoTickMarkersCustom.CheckedChanged
-        TickMarkersDefaults()
     End Sub
 
     Private Sub ucrNudLowerLimit_TextChanged(sender As Object, e As EventArgs)
