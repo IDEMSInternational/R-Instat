@@ -23,6 +23,10 @@ Public Class sdgPlots
     Public clsRsyntax As New RSyntax
     'This clsRSyntax is linked with the ucrBase.clsRSyntax from the dlg calling sdgPLotOptions...
     Public clsRggplotFunction As New RFunction
+
+    Public clsBaseOperator As New ROperator
+    Private bControlsInitialised As Boolean = False
+
     Public clsAesFunction As New RFunction 'Warning: I m not sure this field is useful... Will all be revised when changing links though...
     Public clsRFacetFunction As New RFunction
     Public clsXLabFunction As New RFunction
@@ -36,14 +40,37 @@ Public Class sdgPlots
     Public bFirstLoad As Boolean = True
     Public strDataFrame As String
     Private bAdditionalLayersSetGlobal As Boolean
+
     'See bLayersDefaultIsGolobal below.
     Private Sub sdgPlots_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If bFirstLoad Then
-            InitialiseDialog()
-            SetDefaults()
-            bFirstLoad = False
+        'If bFirstLoad Then
+        '    InitialiseDialog()
+        '    SetDefaults()
+        '    bFirstLoad = False
+        'End If
+        'autoTranslate(Me)
+    End Sub
+
+    Public Sub SetRFunction(clsNewOperator As ROperator, Optional bReset As Boolean = False)
+        If Not bControlsInitialised Then
+            InitialiseControls()
         End If
-        autoTranslate(Me)
+        clsBaseOperator = clsNewOperator
+        ucrInputGraphTitle.SetRCode(clsGraphTitleFunction, bReset)
+    End Sub
+
+    Public Sub InitialiseControls()
+        Dim clsGraphTitleFunction As New RFunction
+        Dim clsGraphTitleparam As New RParameter
+
+        clsGraphTitleFunction.SetPackageName("ggplot2")
+        clsGraphTitleFunction.SetRCommand("ggtitle")
+        clsGraphTitleparam.SetArgument(clsGraphTitleFunction)
+        clsGraphTitleparam.SetArgumentName("ggtitle")
+        ucrInputGraphTitle.SetParameter(New RParameter("label"))
+        clsBaseOperator.AddParameter(clsGraphTitleparam)
+        bControlsInitialised = True
+
     End Sub
 
     Public Sub DisableLayersTab()
@@ -54,30 +81,30 @@ Public Class sdgPlots
         tabLayers.Enabled = True
     End Sub
     Public Sub SetDefaults()
-        TitleDefaults()
-        chkIncludeFacets.Checked = False
-        IncludeFacets()
-        nudNumberofRows.Value = 1
-        ucrFacetSelector.Reset()
+        'TitleDefaults()
+        'chkIncludeFacets.Checked = False
+        'IncludeFacets()
+        'nudNumberofRows.Value = 1
+        'ucrFacetSelector.Reset()
 
-        ucr1stFactorReceiver.SetMeAsReceiver()
-        ucrInputGraphTitle.SetName("")
-        ucrPlotsAdditionalLayers.Reset()
-        'Note that the following two don't reset the bisX and RSyntaxAxis ... So no need to set these again.
-        ucrXAxis.Reset()
-        ucrYAxis.Reset()
-        ucrInputThemes.SetName("theme_grey")
-        rdoLegendTitleAuto.Checked = True
-        LegendDefaults()
-        bLayersDefaultIsGlobal = False
+        'ucr1stFactorReceiver.SetMeAsReceiver()
+        'ucrInputGraphTitle.SetName("")
+        'ucrPlotsAdditionalLayers.Reset()
+        ''Note that the following two don't reset the bisX and RSyntaxAxis ... So no need to set these again.
+        'ucrXAxis.Reset()
+        'ucrYAxis.Reset()
+        'ucrInputThemes.SetName("theme_grey")
+        'rdoLegendTitleAuto.Checked = True
+        'LegendDefaults()
+        'bLayersDefaultIsGlobal = False
 
     End Sub
 
     Private Sub TitleDefaults()
-        chkDisplayLegendTitle.Checked = True
-        chkOverwriteLegendTitle.Checked = False
-        ucrInputLegend.Visible = False
-        ucrInputGraphTitle.Reset()
+        'chkDisplayLegendTitle.Checked = True
+        'chkOverwriteLegendTitle.Checked = False
+        'ucrInputLegend.Visible = False
+        'ucrInputGraphTitle.Reset()
     End Sub
 
     Public Sub Reset()
