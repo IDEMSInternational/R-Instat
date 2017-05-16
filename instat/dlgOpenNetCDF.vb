@@ -16,7 +16,6 @@
 Imports instat.Translations
 Imports System.IO
 Imports System.Text.RegularExpressions
-Imports instat
 
 Public Class dlgOpenNetCDF
     Private bFirstLoad As Boolean = True
@@ -48,37 +47,6 @@ Public Class dlgOpenNetCDF
         SetRCodeForControls(bReset)
         bReset = False
         TestOkEnabled()
-    End Sub
-
-    Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrInputDataName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrInputLocDataName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrInputFilePath.SetRCode(clsOpenCDF, bReset)
-        ucrReceiverLatName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrReceiverLonName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrReceiverTimeName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-    End Sub
-
-    Private Sub SetDefaults()
-        clsImportCDF = New RFunction
-        clsOpenCDF = New RFunction
-
-        ucrSelectorNetCDF.Reset()
-        'Reset now optioanlly clears text in control
-        'System shouldn't require reset of input controls so this should be a temporary fix
-        ucrInputFilePath.Reset()
-        ucrInputLocDataName.Reset()
-        ucrInputDataName.Reset()
-
-        clsOpenCDF.SetRCommand("nc_open")
-
-        clsImportCDF.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_NetCDF")
-        clsImportCDF.AddParameter("nc_data", clsRFunctionParameter:=clsOpenCDF)
-        clsImportCDF.AddParameter("loc_data_name", Chr(34) & "location_data" & Chr(34))
-
-        ucrBase.clsRsyntax.SetBaseRFunction(clsImportCDF)
-        ucrReceiverLatName.SetMeAsReceiver()
-        AutoFillReceivers()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -117,14 +85,40 @@ Public Class dlgOpenNetCDF
         ucrInputDataName.SetValidationTypeAsRVariable()
         ucrInputDataName.bAutoChangeOnLeave = True
 
-        ucrInputFilePath.IsReadOnly = True
         ucrInputFilePath.SetParameter(New RParameter("filename", 0))
+        ucrInputFilePath.IsReadOnly = True
     End Sub
 
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
-        SetRCodeForControls(True)
-        TestOkEnabled()
+    Private Sub SetDefaults()
+        clsImportCDF = New RFunction
+        clsOpenCDF = New RFunction
+
+        ucrSelectorNetCDF.Reset()
+        'Reset now optioanlly clears text in control
+        'System shouldn't require reset of input controls so this should be a temporary fix
+        ucrInputFilePath.Reset()
+        ucrInputLocDataName.Reset()
+        ucrInputDataName.Reset()
+        ucrReceiverLatName.SetMeAsReceiver()
+        AutoFillReceivers()
+
+        clsOpenCDF.SetPackageName("ncdf4")
+        clsOpenCDF.SetRCommand("nc_open")
+
+        clsImportCDF.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_NetCDF")
+        clsImportCDF.AddParameter("nc_data", clsRFunctionParameter:=clsOpenCDF)
+        clsImportCDF.AddParameter("loc_data_name", Chr(34) & "location_data" & Chr(34))
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsImportCDF)
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrInputDataName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrInputLocDataName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrInputFilePath.SetRCode(clsOpenCDF, bReset)
+        ucrReceiverLatName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrReceiverLonName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrReceiverTimeName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -133,6 +127,17 @@ Public Class dlgOpenNetCDF
         Else
             ucrBase.OKEnabled(False)
         End If
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
+    End Sub
+
+    Private Sub cmdOpenDataSet_Click(sender As Object, e As EventArgs) Handles cmdOpenDataSet.Click
+        GetFileFromOpenDialog()
+        TestOkEnabled()
     End Sub
 
     'Loads the open dialog on load and click
@@ -161,15 +166,6 @@ Public Class dlgOpenNetCDF
                 End If
             End If
         End Using
-    End Sub
-
-    Private Sub cmdOpenDataSet_Click(sender As Object, e As EventArgs) Handles cmdOpenDataSet.Click
-        GetFileFromOpenDialog()
-        TestOkEnabled()
-    End Sub
-
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFilePath.ControlContentsChanged, ucrInputDataName.ControlContentsChanged, ucrInputLocDataName.ControlContentsChanged, ucrReceiverLatName.ControlContentsChanged, ucrReceiverLonName.ControlContentsChanged
-        TestOkEnabled()
     End Sub
 
     Private Sub AutoFillReceivers()
@@ -224,5 +220,9 @@ Public Class dlgOpenNetCDF
         ucrReceiverTimeName.strNcFilePath = ucrInputFilePath.GetText()
         AutoFillReceivers()
         strCurrentFile = ucrInputFilePath.GetText()
+    End Sub
+
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFilePath.ControlContentsChanged, ucrInputDataName.ControlContentsChanged, ucrInputLocDataName.ControlContentsChanged, ucrReceiverLatName.ControlContentsChanged, ucrReceiverLonName.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class
