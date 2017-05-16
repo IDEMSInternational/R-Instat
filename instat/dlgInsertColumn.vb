@@ -143,7 +143,7 @@ Public Class dlgInsertColumn
         End If
     End Sub
 
-    Private Sub RowsOrColumns_CheckedChanged(sender As Object, e As EventArgs) Handles rdoInsertColumns.CheckedChanged, rdoInsertRows.CheckedChanged
+    Private Sub RowsOrColumns_CheckedChanged(sender As Object, e As EventArgs)
         RowsOrColumns()
 
     End Sub
@@ -356,4 +356,9 @@ Public Class dlgInsertColumn
             ucrBase.clsRsyntax.RemoveParameter("num_cols")
         End If
     End Sub
+
+    Private Sub rdoInsertColumns_CheckedChanged(sender As Object, e As EventArgs) Handles rdoInsertColumns.CheckedChanged
+
+    End Sub
+
 End Class
