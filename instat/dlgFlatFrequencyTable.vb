@@ -24,8 +24,6 @@ Public Class dlgFlatFrequencyTable
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
-        Else
-
         End If
         If bReset Then
             SetDefaults()
@@ -59,7 +57,7 @@ Public Class dlgFlatFrequencyTable
         clsTable = New RFunction
         clsAddMargin = New RFunction
 
-        ucrRowVariable.SetMeAsReceiver()
+        ucrColumnVariable.SetMeAsReceiver()
         ucrSelectorDataFrame.Reset()
 
         clsTable.SetRCommand("table")
