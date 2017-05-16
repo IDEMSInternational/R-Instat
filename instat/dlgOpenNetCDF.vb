@@ -16,6 +16,7 @@
 Imports instat.Translations
 Imports System.IO
 Imports System.Text.RegularExpressions
+Imports instat
 
 Public Class dlgOpenNetCDF
     Private bFirstLoad As Boolean = True
@@ -79,9 +80,9 @@ Public Class dlgOpenNetCDF
 
     Private Sub InitialiseDialog()
         'ucrBase.iHelpTopicID = 
-        Dim kvpLat As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("lat", {"lat", "latitude", "LAT", "Lat", "LATITUDE", "Y"}.ToList())
-        Dim kvpLon As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("lon", {"lon", "longitude", "LON", "Lon", "LONGITUDE", "X"}.ToList())
-        Dim kvpTime As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("time", {"time", "TIME", "Time", "period", "Period", "PERIOD", "T"}.ToList())
+        Dim kvpLat As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("lat", {"lat", "Y"}.ToList())
+        Dim kvpLon As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("lon", {"lon", "X"}.ToList())
+        Dim kvpTime As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("time", {"time", "period", "T"}.ToList())
 
         lstRecognisedTypes.AddRange({kvpLat, kvpLon, kvpTime})
         lstReceivers.AddRange({ucrReceiverLatName, ucrReceiverLonName, ucrReceiverTimeName})
@@ -130,7 +131,7 @@ Public Class dlgOpenNetCDF
     End Sub
 
     Private Sub TestOkEnabled()
-        If (ucrInputDataName.Text <> "" AndAlso ucrInputLocDataName.Text <> "" AndAlso ucrInputFilePath.Text <> "" AndAlso (Not ucrInputDataName.Text = ucrInputLocDataName.Text)) Then
+        If Not ucrReceiverLatName.IsEmpty() AndAlso Not ucrReceiverLonName.IsEmpty() AndAlso ucrInputDataName.GetText() <> "" AndAlso ucrInputLocDataName.GetText() <> "" AndAlso ucrInputFilePath.GetText() <> "" AndAlso (Not ucrInputDataName.GetText() = ucrInputLocDataName.GetText()) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -179,12 +180,8 @@ Public Class dlgOpenNetCDF
         TestOkEnabled()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFilePath.ControlContentsChanged, ucrInputDataName.ControlContentsChanged, ucrInputLocDataName.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFilePath.ControlContentsChanged, ucrInputDataName.ControlContentsChanged, ucrInputLocDataName.ControlContentsChanged, ucrReceiverLatName.ControlContentsChanged, ucrReceiverLonName.ControlContentsChanged
         TestOkEnabled()
-        AutoFillReceivers()
-        ucrReceiverLatName.strNcFilePath = ucrInputFilePath.GetText()
-        ucrReceiverLonName.strNcFilePath = ucrInputFilePath.GetText()
-        ucrReceiverTimeName.strNcFilePath = ucrInputFilePath.GetText()
     End Sub
 
     Private Sub AutoFillReceivers()
@@ -231,4 +228,11 @@ Public Class dlgOpenNetCDF
         Next
         Return lstValues
     End Function
+
+    Private Sub ucrInputFilePath_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputFilePath.ControlValueChanged
+        ucrReceiverLatName.strNcFilePath = ucrInputFilePath.GetText()
+        ucrReceiverLonName.strNcFilePath = ucrInputFilePath.GetText()
+        ucrReceiverTimeName.strNcFilePath = ucrInputFilePath.GetText()
+        AutoFillReceivers()
+    End Sub
 End Class
