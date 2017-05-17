@@ -95,8 +95,8 @@ Public Class dlgView
         clsMainFunction = New RFunction
         clsViewDataFrame = New RFunction
         ucrSelectorForView.Reset()
-        ucrSelectorForView.Focus()
         ucrReceiverView.SetMeAsReceiver()
+        clsMainFunction.SetPackageName("utils")
         clsMainFunction.SetRCommand("View")
         ucrBase.clsRsyntax.SetBaseRFunction(clsMainFunction)
     End Sub
@@ -200,6 +200,10 @@ Public Class dlgView
     End Sub
 
     Private Sub Controls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDisplayFrom.ControlValueChanged, ucrPnlDisplayWindow.ControlValueChanged, ucrChkSpecifyRows.ControlValueChanged, ucrReceiverView.ControlValueChanged
+        ChangeFunctionParameters()
+    End Sub
+
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         ChangeFunctionParameters()
     End Sub
 
