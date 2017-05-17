@@ -39,7 +39,7 @@ Public Class dlgFactorDataFrame
         ucrSelectorFactorDataFrame.SetParameter(New RParameter("data_name", 0))
         ucrSelectorFactorDataFrame.SetParameterIsString()
 
-        ' ucrreceiver
+        'ucrreceiver
         ucrReceiverFactorDataFrame.SetParameter(New RParameter("factor", 0))
         ucrReceiverFactorDataFrame.SetParameterIsString()
         ucrReceiverFactorDataFrame.Selector = ucrSelectorFactorDataFrame
@@ -51,13 +51,13 @@ Public Class dlgFactorDataFrame
         ucrInputFactorNames.SetValidationTypeAsRVariable()
 
         'chk boxes
-        ucrChkAddCurrentContrasts.SetText("Add Current Contrasts")
         ucrChkAddCurrentContrasts.SetParameter(New RParameter("include_contrasts", 2))
+        ucrChkAddCurrentContrasts.SetText("Add Current Contrasts")
         ucrChkAddCurrentContrasts.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkAddCurrentContrasts.SetRDefault("TRUE")
 
-        ucrChkReplaceIfAlreadyExists.SetText("Replace if Already Exists")
         ucrChkReplaceIfAlreadyExists.SetParameter(New RParameter("replace", 3))
+        ucrChkReplaceIfAlreadyExists.SetText("Replace if Already Exists")
         ucrChkReplaceIfAlreadyExists.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkReplaceIfAlreadyExists.SetRDefault("TRUE")
     End Sub
@@ -67,9 +67,9 @@ Public Class dlgFactorDataFrame
 
         ucrInputFactorNames.Reset()
         ucrSelectorFactorDataFrame.Reset()
-        ucrInputFactorNames.ResetText()
-
+        ucrInputFactorNames.SetText("")
         CheckAutoName()
+
         clsFactorDataframe.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$create_factor_data_frame")
         ucrBase.clsRsyntax.SetBaseRFunction(clsFactorDataframe)
     End Sub
@@ -92,17 +92,17 @@ Public Class dlgFactorDataFrame
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrInputFactorNames_ContentsChanged() Handles ucrInputFactorNames.ControlContentsChanged, ucrReceiverFactorDataFrame.ControlContentsChanged, ucrSelectorFactorDataFrame.ControlContentsChanged
-        TestOKEnabled()
+    Private Sub CheckAutoName()
+        If Not ucrReceiverFactorDataFrame.IsEmpty AndAlso Not ucrInputFactorNames.bUserTyped Then
+            ucrInputFactorNames.SetName(ucrReceiverFactorDataFrame.GetVariableNames(False))
+        End If
     End Sub
 
     Private Sub ucrDataFrameToRename_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactorDataFrame.ControlValueChanged
         CheckAutoName()
     End Sub
 
-    Private Sub CheckAutoName()
-        If Not ucrReceiverFactorDataFrame.IsEmpty AndAlso Not ucrInputFactorNames.bUserTyped Then
-            ucrInputFactorNames.SetName(ucrReceiverFactorDataFrame.GetVariableNames(False))
-        End If
+    Private Sub ucrInputFactorNames_ContentsChanged() Handles ucrInputFactorNames.ControlContentsChanged, ucrReceiverFactorDataFrame.ControlContentsChanged, ucrSelectorFactorDataFrame.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class

@@ -43,16 +43,18 @@ Partial Class dlgCombine
         'ucrFactorsReceiver
         '
         Me.ucrFactorsReceiver.frmParent = Me
-        Me.ucrFactorsReceiver.Location = New System.Drawing.Point(273, 50)
+        Me.ucrFactorsReceiver.Location = New System.Drawing.Point(273, 60)
         Me.ucrFactorsReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFactorsReceiver.Name = "ucrFactorsReceiver"
         Me.ucrFactorsReceiver.Selector = Nothing
         Me.ucrFactorsReceiver.Size = New System.Drawing.Size(120, 100)
+        Me.ucrFactorsReceiver.strNcFilePath = ""
         Me.ucrFactorsReceiver.TabIndex = 2
+        Me.ucrFactorsReceiver.ucrSelector = Nothing
         '
         'lblFactors
         '
-        Me.lblFactors.Location = New System.Drawing.Point(273, 34)
+        Me.lblFactors.Location = New System.Drawing.Point(273, 44)
         Me.lblFactors.Name = "lblFactors"
         Me.lblFactors.Size = New System.Drawing.Size(100, 15)
         Me.lblFactors.TabIndex = 1
@@ -61,7 +63,7 @@ Partial Class dlgCombine
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 225)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 246)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 5
@@ -69,23 +71,23 @@ Partial Class dlgCombine
         'ucrChkDropUnusedLevels
         '
         Me.ucrChkDropUnusedLevels.Checked = False
-        Me.ucrChkDropUnusedLevels.Location = New System.Drawing.Point(273, 153)
+        Me.ucrChkDropUnusedLevels.Location = New System.Drawing.Point(10, 196)
         Me.ucrChkDropUnusedLevels.Name = "ucrChkDropUnusedLevels"
         Me.ucrChkDropUnusedLevels.Size = New System.Drawing.Size(133, 20)
         Me.ucrChkDropUnusedLevels.TabIndex = 3
         '
         'ucrNewColName
         '
-        Me.ucrNewColName.Location = New System.Drawing.Point(10, 197)
+        Me.ucrNewColName.Location = New System.Drawing.Point(10, 222)
         Me.ucrNewColName.Name = "ucrNewColName"
-        Me.ucrNewColName.Size = New System.Drawing.Size(294, 24)
+        Me.ucrNewColName.Size = New System.Drawing.Size(271, 24)
         Me.ucrNewColName.TabIndex = 4
         '
         'dlgCombine
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(418, 285)
+        Me.ClientSize = New System.Drawing.Size(418, 303)
         Me.Controls.Add(Me.ucrNewColName)
         Me.Controls.Add(Me.ucrChkDropUnusedLevels)
         Me.Controls.Add(Me.lblFactors)
