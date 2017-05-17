@@ -100,7 +100,7 @@ Public Class dlgBarAndPieChart
         ucrSaveBar.SetCheckBoxText("Save Graph")
         ucrSaveBar.SetDataFrameSelector(ucrBarChartSelector.ucrAvailableDataFrames)
         ucrSaveBar.SetSaveTypeAsGraph()
-        ucrSaveBar.SetPrefix("Bar")
+        ucrSaveBar.SetPrefix("bar")
         ucrSaveBar.SetAssignToIfUncheckedValue("last_graph")
 
         clsRCoordPolarFunction.SetPackageName("ggplot2")
@@ -157,14 +157,14 @@ Public Class dlgBarAndPieChart
     Private Sub SetDailogOptions()
         If rdoBarChart.Checked Then
             clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsBarAesFunction, iPosition:=1)
-            ucrSaveBar.SetPrefix("Bar")
+            ucrSaveBar.SetPrefix("bar")
             cmdPieChartOptions.Visible = False
             cmdBarChartOptions.Visible = True
             clsRgeomBarFunction.RemoveParameterByName("width")
             clsBaseOperator.RemoveParameter(clsRCoordPolarParam)
         ElseIf rdoPieChart.Checked Then
             clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsPieAesFunction, iPosition:=1)
-            ucrSaveBar.SetPrefix("Pie")
+            ucrSaveBar.SetPrefix("pie")
             clsRgeomBarFunction.AddParameter("width", "1")
             clsBaseOperator.AddParameter(clsRCoordPolarParam)
             cmdPieChartOptions.Visible = True
