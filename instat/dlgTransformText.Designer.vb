@@ -30,7 +30,6 @@ Partial Class dlgTransformText
         Me.lblLastWord = New System.Windows.Forms.Label()
         Me.lblFirstWord = New System.Windows.Forms.Label()
         Me.grpParameters = New System.Windows.Forms.GroupBox()
-        Me.pnlWords = New System.Windows.Forms.Panel()
         Me.rdoBothPad = New System.Windows.Forms.RadioButton()
         Me.ucrInputTo = New instat.ucrInputComboBox()
         Me.rdoLeftPad = New System.Windows.Forms.RadioButton()
@@ -61,7 +60,6 @@ Partial Class dlgTransformText
         Me.rdoWords = New System.Windows.Forms.RadioButton()
         Me.rdoTrim = New System.Windows.Forms.RadioButton()
         Me.grpParameters.SuspendLayout()
-        Me.pnlWords.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblColumnToTransform
@@ -83,7 +81,7 @@ Partial Class dlgTransformText
         'lblToSubstring
         '
         Me.lblToSubstring.AutoSize = True
-        Me.lblToSubstring.Location = New System.Drawing.Point(10, 41)
+        Me.lblToSubstring.Location = New System.Drawing.Point(11, 54)
         Me.lblToSubstring.Name = "lblToSubstring"
         Me.lblToSubstring.Size = New System.Drawing.Size(59, 13)
         Me.lblToSubstring.TabIndex = 24
@@ -92,7 +90,7 @@ Partial Class dlgTransformText
         'lblFrom
         '
         Me.lblFrom.AutoSize = True
-        Me.lblFrom.Location = New System.Drawing.Point(10, 15)
+        Me.lblFrom.Location = New System.Drawing.Point(10, 26)
         Me.lblFrom.Name = "lblFrom"
         Me.lblFrom.Size = New System.Drawing.Size(62, 13)
         Me.lblFrom.TabIndex = 22
@@ -101,7 +99,7 @@ Partial Class dlgTransformText
         'lblSeparator
         '
         Me.lblSeparator.AutoSize = True
-        Me.lblSeparator.Location = New System.Drawing.Point(10, 130)
+        Me.lblSeparator.Location = New System.Drawing.Point(21, 383)
         Me.lblSeparator.Name = "lblSeparator"
         Me.lblSeparator.Size = New System.Drawing.Size(56, 13)
         Me.lblSeparator.TabIndex = 18
@@ -110,7 +108,7 @@ Partial Class dlgTransformText
         'lblLastWord
         '
         Me.lblLastWord.AutoSize = True
-        Me.lblLastWord.Location = New System.Drawing.Point(10, 70)
+        Me.lblLastWord.Location = New System.Drawing.Point(11, 89)
         Me.lblLastWord.Name = "lblLastWord"
         Me.lblLastWord.Size = New System.Drawing.Size(59, 13)
         Me.lblLastWord.TabIndex = 15
@@ -119,7 +117,7 @@ Partial Class dlgTransformText
         'lblFirstWord
         '
         Me.lblFirstWord.AutoSize = True
-        Me.lblFirstWord.Location = New System.Drawing.Point(10, 15)
+        Me.lblFirstWord.Location = New System.Drawing.Point(11, 26)
         Me.lblFirstWord.Name = "lblFirstWord"
         Me.lblFirstWord.Size = New System.Drawing.Size(58, 13)
         Me.lblFirstWord.TabIndex = 14
@@ -127,49 +125,40 @@ Partial Class dlgTransformText
         '
         'grpParameters
         '
-        Me.grpParameters.Controls.Add(Me.pnlWords)
+        Me.grpParameters.Controls.Add(Me.ucrInputSeparator)
+        Me.grpParameters.Controls.Add(Me.ucrChkLastOr)
+        Me.grpParameters.Controls.Add(Me.ucrChkFirstOr)
+        Me.grpParameters.Controls.Add(Me.ucrReceiverLastWord)
+        Me.grpParameters.Controls.Add(Me.ucrNudLastWord)
+        Me.grpParameters.Controls.Add(Me.ucrInputPad)
+        Me.grpParameters.Controls.Add(Me.lblToSubstring)
+        Me.grpParameters.Controls.Add(Me.lblLastWord)
+        Me.grpParameters.Controls.Add(Me.lblPad)
+        Me.grpParameters.Controls.Add(Me.ucrNudTo)
+        Me.grpParameters.Controls.Add(Me.ucrReceiverFirstWord)
+        Me.grpParameters.Controls.Add(Me.rdoBothPad)
+        Me.grpParameters.Controls.Add(Me.ucrNudFirstWord)
+        Me.grpParameters.Controls.Add(Me.ucrNudFrom)
+        Me.grpParameters.Controls.Add(Me.rdoRightPad)
+        Me.grpParameters.Controls.Add(Me.rdoLeftPad)
+        Me.grpParameters.Controls.Add(Me.lblFrom)
+        Me.grpParameters.Controls.Add(Me.lblFirstWord)
+        Me.grpParameters.Controls.Add(Me.ucrNudWidth)
+        Me.grpParameters.Controls.Add(Me.ucrPnlPad)
+        Me.grpParameters.Controls.Add(Me.ucrInputTo)
+        Me.grpParameters.Controls.Add(Me.lblWidth)
+        Me.grpParameters.Controls.Add(Me.lblTo)
         Me.grpParameters.Location = New System.Drawing.Point(10, 238)
         Me.grpParameters.Name = "grpParameters"
-        Me.grpParameters.Size = New System.Drawing.Size(259, 181)
+        Me.grpParameters.Size = New System.Drawing.Size(397, 173)
         Me.grpParameters.TabIndex = 10
         Me.grpParameters.TabStop = False
         Me.grpParameters.Text = "Options"
         '
-        'pnlWords
-        '
-        Me.pnlWords.Controls.Add(Me.rdoBothPad)
-        Me.pnlWords.Controls.Add(Me.ucrInputTo)
-        Me.pnlWords.Controls.Add(Me.rdoLeftPad)
-        Me.pnlWords.Controls.Add(Me.lblTo)
-        Me.pnlWords.Controls.Add(Me.rdoRightPad)
-        Me.pnlWords.Controls.Add(Me.ucrNudTo)
-        Me.pnlWords.Controls.Add(Me.ucrPnlPad)
-        Me.pnlWords.Controls.Add(Me.ucrNudFrom)
-        Me.pnlWords.Controls.Add(Me.ucrInputPad)
-        Me.pnlWords.Controls.Add(Me.lblPad)
-        Me.pnlWords.Controls.Add(Me.lblToSubstring)
-        Me.pnlWords.Controls.Add(Me.ucrChkFirstOr)
-        Me.pnlWords.Controls.Add(Me.ucrNudWidth)
-        Me.pnlWords.Controls.Add(Me.ucrChkLastOr)
-        Me.pnlWords.Controls.Add(Me.ucrNudLastWord)
-        Me.pnlWords.Controls.Add(Me.lblWidth)
-        Me.pnlWords.Controls.Add(Me.lblFrom)
-        Me.pnlWords.Controls.Add(Me.lblSeparator)
-        Me.pnlWords.Controls.Add(Me.ucrNudFirstWord)
-        Me.pnlWords.Controls.Add(Me.lblLastWord)
-        Me.pnlWords.Controls.Add(Me.ucrInputSeparator)
-        Me.pnlWords.Controls.Add(Me.ucrReceiverLastWord)
-        Me.pnlWords.Controls.Add(Me.lblFirstWord)
-        Me.pnlWords.Controls.Add(Me.ucrReceiverFirstWord)
-        Me.pnlWords.Location = New System.Drawing.Point(6, 19)
-        Me.pnlWords.Name = "pnlWords"
-        Me.pnlWords.Size = New System.Drawing.Size(241, 152)
-        Me.pnlWords.TabIndex = 0
-        '
         'rdoBothPad
         '
         Me.rdoBothPad.AutoSize = True
-        Me.rdoBothPad.Location = New System.Drawing.Point(172, 14)
+        Me.rdoBothPad.Location = New System.Drawing.Point(212, 24)
         Me.rdoBothPad.Name = "rdoBothPad"
         Me.rdoBothPad.Size = New System.Drawing.Size(47, 17)
         Me.rdoBothPad.TabIndex = 40
@@ -181,7 +170,7 @@ Partial Class dlgTransformText
         '
         Me.ucrInputTo.AddQuotesIfUnrecognised = True
         Me.ucrInputTo.IsReadOnly = False
-        Me.ucrInputTo.Location = New System.Drawing.Point(84, 10)
+        Me.ucrInputTo.Location = New System.Drawing.Point(75, 22)
         Me.ucrInputTo.Name = "ucrInputTo"
         Me.ucrInputTo.Size = New System.Drawing.Size(136, 25)
         Me.ucrInputTo.TabIndex = 8
@@ -189,7 +178,7 @@ Partial Class dlgTransformText
         'rdoLeftPad
         '
         Me.rdoLeftPad.AutoSize = True
-        Me.rdoLeftPad.Location = New System.Drawing.Point(13, 14)
+        Me.rdoLeftPad.Location = New System.Drawing.Point(19, 24)
         Me.rdoLeftPad.Name = "rdoLeftPad"
         Me.rdoLeftPad.Size = New System.Drawing.Size(43, 17)
         Me.rdoLeftPad.TabIndex = 38
@@ -200,16 +189,16 @@ Partial Class dlgTransformText
         'lblTo
         '
         Me.lblTo.AutoSize = True
-        Me.lblTo.Location = New System.Drawing.Point(10, 15)
+        Me.lblTo.Location = New System.Drawing.Point(7, 26)
         Me.lblTo.Name = "lblTo"
-        Me.lblTo.Size = New System.Drawing.Size(23, 13)
+        Me.lblTo.Size = New System.Drawing.Size(59, 13)
         Me.lblTo.TabIndex = 7
-        Me.lblTo.Text = "To:"
+        Me.lblTo.Text = "Convert to:"
         '
         'rdoRightPad
         '
         Me.rdoRightPad.AutoSize = True
-        Me.rdoRightPad.Location = New System.Drawing.Point(89, 14)
+        Me.rdoRightPad.Location = New System.Drawing.Point(112, 24)
         Me.rdoRightPad.Name = "rdoRightPad"
         Me.rdoRightPad.Size = New System.Drawing.Size(50, 17)
         Me.rdoRightPad.TabIndex = 39
@@ -221,7 +210,7 @@ Partial Class dlgTransformText
         '
         Me.ucrNudTo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTo.Location = New System.Drawing.Point(84, 38)
+        Me.ucrNudTo.Location = New System.Drawing.Point(78, 50)
         Me.ucrNudTo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTo.Name = "ucrNudTo"
@@ -231,16 +220,16 @@ Partial Class dlgTransformText
         '
         'ucrPnlPad
         '
-        Me.ucrPnlPad.Location = New System.Drawing.Point(3, 8)
+        Me.ucrPnlPad.Location = New System.Drawing.Point(6, 14)
         Me.ucrPnlPad.Name = "ucrPnlPad"
-        Me.ucrPnlPad.Size = New System.Drawing.Size(217, 30)
+        Me.ucrPnlPad.Size = New System.Drawing.Size(298, 30)
         Me.ucrPnlPad.TabIndex = 9
         '
         'ucrNudFrom
         '
         Me.ucrNudFrom.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudFrom.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudFrom.Location = New System.Drawing.Point(84, 12)
+        Me.ucrNudFrom.Location = New System.Drawing.Point(78, 23)
         Me.ucrNudFrom.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudFrom.Name = "ucrNudFrom"
@@ -252,7 +241,7 @@ Partial Class dlgTransformText
         '
         Me.ucrInputPad.AddQuotesIfUnrecognised = True
         Me.ucrInputPad.IsReadOnly = False
-        Me.ucrInputPad.Location = New System.Drawing.Point(84, 126)
+        Me.ucrInputPad.Location = New System.Drawing.Point(78, 84)
         Me.ucrInputPad.Name = "ucrInputPad"
         Me.ucrInputPad.Size = New System.Drawing.Size(136, 25)
         Me.ucrInputPad.TabIndex = 13
@@ -260,7 +249,7 @@ Partial Class dlgTransformText
         'lblPad
         '
         Me.lblPad.AutoSize = True
-        Me.lblPad.Location = New System.Drawing.Point(10, 130)
+        Me.lblPad.Location = New System.Drawing.Point(11, 89)
         Me.lblPad.Name = "lblPad"
         Me.lblPad.Size = New System.Drawing.Size(29, 13)
         Me.lblPad.TabIndex = 14
@@ -269,7 +258,7 @@ Partial Class dlgTransformText
         'ucrChkFirstOr
         '
         Me.ucrChkFirstOr.Checked = False
-        Me.ucrChkFirstOr.Location = New System.Drawing.Point(13, 41)
+        Me.ucrChkFirstOr.Location = New System.Drawing.Point(19, 50)
         Me.ucrChkFirstOr.Name = "ucrChkFirstOr"
         Me.ucrChkFirstOr.Size = New System.Drawing.Size(75, 20)
         Me.ucrChkFirstOr.TabIndex = 42
@@ -278,7 +267,7 @@ Partial Class dlgTransformText
         '
         Me.ucrNudWidth.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudWidth.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudWidth.Location = New System.Drawing.Point(84, 38)
+        Me.ucrNudWidth.Location = New System.Drawing.Point(78, 50)
         Me.ucrNudWidth.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudWidth.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudWidth.Name = "ucrNudWidth"
@@ -289,7 +278,7 @@ Partial Class dlgTransformText
         'ucrChkLastOr
         '
         Me.ucrChkLastOr.Checked = False
-        Me.ucrChkLastOr.Location = New System.Drawing.Point(13, 95)
+        Me.ucrChkLastOr.Location = New System.Drawing.Point(19, 110)
         Me.ucrChkLastOr.Name = "ucrChkLastOr"
         Me.ucrChkLastOr.Size = New System.Drawing.Size(75, 20)
         Me.ucrChkLastOr.TabIndex = 43
@@ -298,7 +287,7 @@ Partial Class dlgTransformText
         '
         Me.ucrNudLastWord.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLastWord.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudLastWord.Location = New System.Drawing.Point(84, 66)
+        Me.ucrNudLastWord.Location = New System.Drawing.Point(78, 84)
         Me.ucrNudLastWord.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudLastWord.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLastWord.Name = "ucrNudLastWord"
@@ -309,7 +298,7 @@ Partial Class dlgTransformText
         'lblWidth
         '
         Me.lblWidth.AutoSize = True
-        Me.lblWidth.Location = New System.Drawing.Point(10, 41)
+        Me.lblWidth.Location = New System.Drawing.Point(10, 54)
         Me.lblWidth.Name = "lblWidth"
         Me.lblWidth.Size = New System.Drawing.Size(38, 13)
         Me.lblWidth.TabIndex = 11
@@ -319,7 +308,7 @@ Partial Class dlgTransformText
         '
         Me.ucrNudFirstWord.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudFirstWord.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudFirstWord.Location = New System.Drawing.Point(84, 12)
+        Me.ucrNudFirstWord.Location = New System.Drawing.Point(78, 23)
         Me.ucrNudFirstWord.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudFirstWord.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudFirstWord.Name = "ucrNudFirstWord"
@@ -331,7 +320,7 @@ Partial Class dlgTransformText
         '
         Me.ucrInputSeparator.AddQuotesIfUnrecognised = True
         Me.ucrInputSeparator.IsReadOnly = False
-        Me.ucrInputSeparator.Location = New System.Drawing.Point(84, 126)
+        Me.ucrInputSeparator.Location = New System.Drawing.Point(78, 139)
         Me.ucrInputSeparator.Name = "ucrInputSeparator"
         Me.ucrInputSeparator.Size = New System.Drawing.Size(136, 23)
         Me.ucrInputSeparator.TabIndex = 17
@@ -339,24 +328,22 @@ Partial Class dlgTransformText
         'ucrReceiverLastWord
         '
         Me.ucrReceiverLastWord.frmParent = Me
-        Me.ucrReceiverLastWord.Location = New System.Drawing.Point(84, 95)
+        Me.ucrReceiverLastWord.Location = New System.Drawing.Point(106, 110)
         Me.ucrReceiverLastWord.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverLastWord.Name = "ucrReceiverLastWord"
         Me.ucrReceiverLastWord.Selector = Nothing
         Me.ucrReceiverLastWord.Size = New System.Drawing.Size(136, 26)
-        Me.ucrReceiverLastWord.strNcFilePath = ""
         Me.ucrReceiverLastWord.TabIndex = 27
         Me.ucrReceiverLastWord.ucrSelector = Nothing
         '
         'ucrReceiverFirstWord
         '
         Me.ucrReceiverFirstWord.frmParent = Me
-        Me.ucrReceiverFirstWord.Location = New System.Drawing.Point(84, 38)
+        Me.ucrReceiverFirstWord.Location = New System.Drawing.Point(106, 50)
         Me.ucrReceiverFirstWord.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFirstWord.Name = "ucrReceiverFirstWord"
         Me.ucrReceiverFirstWord.Selector = Nothing
         Me.ucrReceiverFirstWord.Size = New System.Drawing.Size(136, 26)
-        Me.ucrReceiverFirstWord.strNcFilePath = ""
         Me.ucrReceiverFirstWord.TabIndex = 13
         Me.ucrReceiverFirstWord.ucrSelector = Nothing
         '
@@ -368,20 +355,19 @@ Partial Class dlgTransformText
         Me.ucrReceiverTransformText.Name = "ucrReceiverTransformText"
         Me.ucrReceiverTransformText.Selector = Nothing
         Me.ucrReceiverTransformText.Size = New System.Drawing.Size(135, 26)
-        Me.ucrReceiverTransformText.strNcFilePath = ""
         Me.ucrReceiverTransformText.TabIndex = 9
         Me.ucrReceiverTransformText.ucrSelector = Nothing
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 450)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 442)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 12
         '
         'ucrNewColName
         '
-        Me.ucrNewColName.Location = New System.Drawing.Point(10, 425)
+        Me.ucrNewColName.Location = New System.Drawing.Point(10, 417)
         Me.ucrNewColName.Name = "ucrNewColName"
         Me.ucrNewColName.Size = New System.Drawing.Size(272, 24)
         Me.ucrNewColName.TabIndex = 11
@@ -496,7 +482,8 @@ Partial Class dlgTransformText
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(423, 507)
+        Me.ClientSize = New System.Drawing.Size(418, 498)
+        Me.Controls.Add(Me.lblSeparator)
         Me.Controls.Add(Me.rdoTrim)
         Me.Controls.Add(Me.rdoWords)
         Me.Controls.Add(Me.rdoSubstring)
@@ -517,8 +504,7 @@ Partial Class dlgTransformText
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Transform Text Column"
         Me.grpParameters.ResumeLayout(False)
-        Me.pnlWords.ResumeLayout(False)
-        Me.pnlWords.PerformLayout()
+        Me.grpParameters.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -545,7 +531,6 @@ Partial Class dlgTransformText
     Friend WithEvents rdoBothPad As RadioButton
     Friend WithEvents rdoRightPad As RadioButton
     Friend WithEvents rdoLeftPad As RadioButton
-    Friend WithEvents pnlWords As Panel
     Friend WithEvents ucrChkFirstOr As ucrCheck
     Friend WithEvents ucrChkLastOr As ucrCheck
     Friend WithEvents ucrNudLastWord As ucrNud
