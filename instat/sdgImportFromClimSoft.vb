@@ -115,7 +115,7 @@ Public Class sdgImportFromClimSoft
         End If
         If bConnected Then
             lblConnection.Text = strConnected
-            cmdEnterPassword.Text = "Diconnnect"
+            cmdEnterPassword.Text = "Disconnnect"
         Else
             lblConnection.Text = strNoConnection
             cmdEnterPassword.Text = "Enter Password"
