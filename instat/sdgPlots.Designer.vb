@@ -24,30 +24,32 @@ Partial Class sdgPlots
     Private Sub InitializeComponent()
         Me.tabctrlBoxSubdialog = New System.Windows.Forms.TabControl()
         Me.tabFacet = New System.Windows.Forms.TabPage()
-        Me.chkFreeSpace = New System.Windows.Forms.CheckBox()
+        Me.ucrChkNoOfRowsOrColumns = New instat.ucrCheck()
+        Me.ucrChkIncludeFacets = New instat.ucrCheck()
+        Me.ucrChkFreeSpace = New instat.ucrCheck()
+        Me.ucrChkFreeScalesY = New instat.ucrCheck()
+        Me.ucrChkFreeScalesX = New instat.ucrCheck()
+        Me.ucrChkMargin = New instat.ucrCheck()
+        Me.nudNumberofRows = New System.Windows.Forms.NumericUpDown()
         Me.ucrFacetSelector = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.chkNoOfRowsOrColumns = New System.Windows.Forms.CheckBox()
-        Me.chkIncludeFacets = New System.Windows.Forms.CheckBox()
-        Me.chkFreeScalesY = New System.Windows.Forms.CheckBox()
-        Me.chkMargin = New System.Windows.Forms.CheckBox()
-        Me.chkFreeScalesX = New System.Windows.Forms.CheckBox()
         Me.rdoHorizontal = New System.Windows.Forms.RadioButton()
         Me.rdoVertical = New System.Windows.Forms.RadioButton()
         Me.lblFactor2 = New System.Windows.Forms.Label()
         Me.lblFactor1 = New System.Windows.Forms.Label()
         Me.ucr2ndFactorReceiver = New instat.ucrReceiverSingle()
         Me.ucr1stFactorReceiver = New instat.ucrReceiverSingle()
+        Me.ucrPnlHorizonatalVertical = New instat.UcrPanel()
         Me.tabLayers = New System.Windows.Forms.TabPage()
         Me.ucrPlotsAdditionalLayers = New instat.ucrAdditionalLayers()
         Me.tabTitles = New System.Windows.Forms.TabPage()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.ucrInputGraphTitle = New instat.ucrInputTextBox()
         Me.grpLegendTitle = New System.Windows.Forms.GroupBox()
         Me.ucrInputLegend = New instat.ucrInputTextBox()
         Me.rdoLegendTitleCustom = New System.Windows.Forms.RadioButton()
         Me.chkDisplayLegendTitle = New System.Windows.Forms.CheckBox()
         Me.chkOverwriteLegendTitle = New System.Windows.Forms.CheckBox()
         Me.rdoLegendTitleAuto = New System.Windows.Forms.RadioButton()
+        Me.ucrInputGraphTitle = New instat.ucrInputTextBox()
         Me.tbpXAxis = New System.Windows.Forms.TabPage()
         Me.ucrXAxis = New instat.ucrAxes()
         Me.tbpYAxis = New System.Windows.Forms.TabPage()
@@ -56,14 +58,14 @@ Partial Class sdgPlots
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.lblFont = New System.Windows.Forms.Label()
         Me.cmdAllOptions = New System.Windows.Forms.Button()
-        Me.ucrInputThemes = New instat.ucrInputComboBox()
         Me.lblTheme = New System.Windows.Forms.Label()
+        Me.ucrInputThemes = New instat.ucrInputComboBox()
         Me.tabCoordinates = New System.Windows.Forms.TabPage()
         Me.lblWarning = New System.Windows.Forms.Label()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.nudNumberofRows = New System.Windows.Forms.NumericUpDown()
         Me.tabctrlBoxSubdialog.SuspendLayout()
         Me.tabFacet.SuspendLayout()
+        CType(Me.nudNumberofRows, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabLayers.SuspendLayout()
         Me.tabTitles.SuspendLayout()
         Me.grpLegendTitle.SuspendLayout()
@@ -71,7 +73,6 @@ Partial Class sdgPlots
         Me.tbpYAxis.SuspendLayout()
         Me.tabTheme.SuspendLayout()
         Me.tabCoordinates.SuspendLayout()
-        CType(Me.nudNumberofRows, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'tabctrlBoxSubdialog
@@ -91,20 +92,21 @@ Partial Class sdgPlots
         '
         'tabFacet
         '
+        Me.tabFacet.Controls.Add(Me.ucrChkNoOfRowsOrColumns)
+        Me.tabFacet.Controls.Add(Me.ucrChkIncludeFacets)
+        Me.tabFacet.Controls.Add(Me.ucrChkFreeSpace)
+        Me.tabFacet.Controls.Add(Me.ucrChkFreeScalesY)
+        Me.tabFacet.Controls.Add(Me.ucrChkFreeScalesX)
+        Me.tabFacet.Controls.Add(Me.ucrChkMargin)
         Me.tabFacet.Controls.Add(Me.nudNumberofRows)
-        Me.tabFacet.Controls.Add(Me.chkFreeSpace)
         Me.tabFacet.Controls.Add(Me.ucrFacetSelector)
-        Me.tabFacet.Controls.Add(Me.chkNoOfRowsOrColumns)
-        Me.tabFacet.Controls.Add(Me.chkIncludeFacets)
-        Me.tabFacet.Controls.Add(Me.chkFreeScalesY)
-        Me.tabFacet.Controls.Add(Me.chkMargin)
-        Me.tabFacet.Controls.Add(Me.chkFreeScalesX)
         Me.tabFacet.Controls.Add(Me.rdoHorizontal)
         Me.tabFacet.Controls.Add(Me.rdoVertical)
         Me.tabFacet.Controls.Add(Me.lblFactor2)
         Me.tabFacet.Controls.Add(Me.lblFactor1)
         Me.tabFacet.Controls.Add(Me.ucr2ndFactorReceiver)
         Me.tabFacet.Controls.Add(Me.ucr1stFactorReceiver)
+        Me.tabFacet.Controls.Add(Me.ucrPnlHorizonatalVertical)
         Me.tabFacet.Location = New System.Drawing.Point(4, 22)
         Me.tabFacet.Name = "tabFacet"
         Me.tabFacet.Padding = New System.Windows.Forms.Padding(3)
@@ -114,16 +116,60 @@ Partial Class sdgPlots
         Me.tabFacet.Text = "Facets"
         Me.tabFacet.UseVisualStyleBackColor = True
         '
-        'chkFreeSpace
+        'ucrChkNoOfRowsOrColumns
         '
-        Me.chkFreeSpace.AutoSize = True
-        Me.chkFreeSpace.Location = New System.Drawing.Point(273, 252)
-        Me.chkFreeSpace.Name = "chkFreeSpace"
-        Me.chkFreeSpace.Size = New System.Drawing.Size(81, 17)
-        Me.chkFreeSpace.TabIndex = 21
-        Me.chkFreeSpace.Tag = "Free_scales"
-        Me.chkFreeSpace.Text = "Free Space"
-        Me.chkFreeSpace.UseVisualStyleBackColor = True
+        Me.ucrChkNoOfRowsOrColumns.Checked = False
+        Me.ucrChkNoOfRowsOrColumns.Location = New System.Drawing.Point(7, 254)
+        Me.ucrChkNoOfRowsOrColumns.Name = "ucrChkNoOfRowsOrColumns"
+        Me.ucrChkNoOfRowsOrColumns.Size = New System.Drawing.Size(133, 20)
+        Me.ucrChkNoOfRowsOrColumns.TabIndex = 29
+        '
+        'ucrChkIncludeFacets
+        '
+        Me.ucrChkIncludeFacets.Checked = False
+        Me.ucrChkIncludeFacets.Location = New System.Drawing.Point(8, 13)
+        Me.ucrChkIncludeFacets.Name = "ucrChkIncludeFacets"
+        Me.ucrChkIncludeFacets.Size = New System.Drawing.Size(121, 20)
+        Me.ucrChkIncludeFacets.TabIndex = 28
+        '
+        'ucrChkFreeSpace
+        '
+        Me.ucrChkFreeSpace.Checked = False
+        Me.ucrChkFreeSpace.Location = New System.Drawing.Point(273, 252)
+        Me.ucrChkFreeSpace.Name = "ucrChkFreeSpace"
+        Me.ucrChkFreeSpace.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkFreeSpace.TabIndex = 27
+        '
+        'ucrChkFreeScalesY
+        '
+        Me.ucrChkFreeScalesY.Checked = False
+        Me.ucrChkFreeScalesY.Location = New System.Drawing.Point(273, 229)
+        Me.ucrChkFreeScalesY.Name = "ucrChkFreeScalesY"
+        Me.ucrChkFreeScalesY.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkFreeScalesY.TabIndex = 26
+        '
+        'ucrChkFreeScalesX
+        '
+        Me.ucrChkFreeScalesX.Checked = False
+        Me.ucrChkFreeScalesX.Location = New System.Drawing.Point(273, 206)
+        Me.ucrChkFreeScalesX.Name = "ucrChkFreeScalesX"
+        Me.ucrChkFreeScalesX.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkFreeScalesX.TabIndex = 25
+        '
+        'ucrChkMargin
+        '
+        Me.ucrChkMargin.Checked = False
+        Me.ucrChkMargin.Location = New System.Drawing.Point(273, 183)
+        Me.ucrChkMargin.Name = "ucrChkMargin"
+        Me.ucrChkMargin.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkMargin.TabIndex = 24
+        '
+        'nudNumberofRows
+        '
+        Me.nudNumberofRows.Location = New System.Drawing.Point(146, 254)
+        Me.nudNumberofRows.Name = "nudNumberofRows"
+        Me.nudNumberofRows.Size = New System.Drawing.Size(51, 20)
+        Me.nudNumberofRows.TabIndex = 23
         '
         'ucrFacetSelector
         '
@@ -135,63 +181,10 @@ Partial Class sdgPlots
         Me.ucrFacetSelector.Size = New System.Drawing.Size(210, 180)
         Me.ucrFacetSelector.TabIndex = 20
         '
-        'chkNoOfRowsOrColumns
-        '
-        Me.chkNoOfRowsOrColumns.AutoSize = True
-        Me.chkNoOfRowsOrColumns.Location = New System.Drawing.Point(7, 257)
-        Me.chkNoOfRowsOrColumns.Name = "chkNoOfRowsOrColumns"
-        Me.chkNoOfRowsOrColumns.Size = New System.Drawing.Size(133, 17)
-        Me.chkNoOfRowsOrColumns.TabIndex = 18
-        Me.chkNoOfRowsOrColumns.Text = "Fixed Number of Rows"
-        Me.chkNoOfRowsOrColumns.UseVisualStyleBackColor = True
-        '
-        'chkIncludeFacets
-        '
-        Me.chkIncludeFacets.AutoSize = True
-        Me.chkIncludeFacets.Location = New System.Drawing.Point(8, 12)
-        Me.chkIncludeFacets.Name = "chkIncludeFacets"
-        Me.chkIncludeFacets.Size = New System.Drawing.Size(96, 17)
-        Me.chkIncludeFacets.TabIndex = 16
-        Me.chkIncludeFacets.Tag = "Include_Facets"
-        Me.chkIncludeFacets.Text = "Include Facets"
-        Me.chkIncludeFacets.UseVisualStyleBackColor = True
-        '
-        'chkFreeScalesY
-        '
-        Me.chkFreeScalesY.AutoSize = True
-        Me.chkFreeScalesY.Location = New System.Drawing.Point(273, 229)
-        Me.chkFreeScalesY.Name = "chkFreeScalesY"
-        Me.chkFreeScalesY.Size = New System.Drawing.Size(114, 17)
-        Me.chkFreeScalesY.TabIndex = 14
-        Me.chkFreeScalesY.Tag = "Free_scales"
-        Me.chkFreeScalesY.Text = "Free Scales Y-Axis"
-        Me.chkFreeScalesY.UseVisualStyleBackColor = True
-        '
-        'chkMargin
-        '
-        Me.chkMargin.AutoSize = True
-        Me.chkMargin.Location = New System.Drawing.Point(273, 183)
-        Me.chkMargin.Name = "chkMargin"
-        Me.chkMargin.Size = New System.Drawing.Size(63, 17)
-        Me.chkMargin.TabIndex = 13
-        Me.chkMargin.Text = "Margins"
-        Me.chkMargin.UseVisualStyleBackColor = True
-        '
-        'chkFreeScalesX
-        '
-        Me.chkFreeScalesX.AutoSize = True
-        Me.chkFreeScalesX.Location = New System.Drawing.Point(273, 206)
-        Me.chkFreeScalesX.Name = "chkFreeScalesX"
-        Me.chkFreeScalesX.Size = New System.Drawing.Size(114, 17)
-        Me.chkFreeScalesX.TabIndex = 12
-        Me.chkFreeScalesX.Tag = "Free_scales"
-        Me.chkFreeScalesX.Text = "Free Scales X-Axis"
-        Me.chkFreeScalesX.UseVisualStyleBackColor = True
-        '
         'rdoHorizontal
         '
         Me.rdoHorizontal.AutoSize = True
-        Me.rdoHorizontal.Location = New System.Drawing.Point(8, 231)
+        Me.rdoHorizontal.Location = New System.Drawing.Point(8, 230)
         Me.rdoHorizontal.Name = "rdoHorizontal"
         Me.rdoHorizontal.Size = New System.Drawing.Size(72, 17)
         Me.rdoHorizontal.TabIndex = 7
@@ -203,7 +196,7 @@ Partial Class sdgPlots
         'rdoVertical
         '
         Me.rdoVertical.AutoSize = True
-        Me.rdoVertical.Location = New System.Drawing.Point(104, 231)
+        Me.rdoVertical.Location = New System.Drawing.Point(104, 230)
         Me.rdoVertical.Name = "rdoVertical"
         Me.rdoVertical.Size = New System.Drawing.Size(60, 17)
         Me.rdoVertical.TabIndex = 6
@@ -233,21 +226,34 @@ Partial Class sdgPlots
         '
         'ucr2ndFactorReceiver
         '
+        Me.ucr2ndFactorReceiver.frmParent = Nothing
         Me.ucr2ndFactorReceiver.Location = New System.Drawing.Point(273, 148)
         Me.ucr2ndFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucr2ndFactorReceiver.Name = "ucr2ndFactorReceiver"
         Me.ucr2ndFactorReceiver.Selector = Nothing
         Me.ucr2ndFactorReceiver.Size = New System.Drawing.Size(106, 26)
+        Me.ucr2ndFactorReceiver.strNcFilePath = ""
         Me.ucr2ndFactorReceiver.TabIndex = 2
+        Me.ucr2ndFactorReceiver.ucrSelector = Nothing
         '
         'ucr1stFactorReceiver
         '
+        Me.ucr1stFactorReceiver.frmParent = Nothing
         Me.ucr1stFactorReceiver.Location = New System.Drawing.Point(273, 93)
         Me.ucr1stFactorReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucr1stFactorReceiver.Name = "ucr1stFactorReceiver"
         Me.ucr1stFactorReceiver.Selector = Nothing
         Me.ucr1stFactorReceiver.Size = New System.Drawing.Size(106, 26)
+        Me.ucr1stFactorReceiver.strNcFilePath = ""
         Me.ucr1stFactorReceiver.TabIndex = 1
+        Me.ucr1stFactorReceiver.ucrSelector = Nothing
+        '
+        'ucrPnlHorizonatalVertical
+        '
+        Me.ucrPnlHorizonatalVertical.Location = New System.Drawing.Point(8, 228)
+        Me.ucrPnlHorizonatalVertical.Name = "ucrPnlHorizonatalVertical"
+        Me.ucrPnlHorizonatalVertical.Size = New System.Drawing.Size(165, 20)
+        Me.ucrPnlHorizonatalVertical.TabIndex = 30
         '
         'tabLayers
         '
@@ -271,8 +277,8 @@ Partial Class sdgPlots
         'tabTitles
         '
         Me.tabTitles.Controls.Add(Me.Label1)
-        Me.tabTitles.Controls.Add(Me.ucrInputGraphTitle)
         Me.tabTitles.Controls.Add(Me.grpLegendTitle)
+        Me.tabTitles.Controls.Add(Me.ucrInputGraphTitle)
         Me.tabTitles.Location = New System.Drawing.Point(4, 22)
         Me.tabTitles.Name = "tabTitles"
         Me.tabTitles.Padding = New System.Windows.Forms.Padding(3)
@@ -291,14 +297,6 @@ Partial Class sdgPlots
         Me.Label1.TabIndex = 10
         Me.Label1.Text = "Graph Title:"
         '
-        'ucrInputGraphTitle
-        '
-        Me.ucrInputGraphTitle.IsReadOnly = False
-        Me.ucrInputGraphTitle.Location = New System.Drawing.Point(75, 14)
-        Me.ucrInputGraphTitle.Name = "ucrInputGraphTitle"
-        Me.ucrInputGraphTitle.Size = New System.Drawing.Size(166, 21)
-        Me.ucrInputGraphTitle.TabIndex = 9
-        '
         'grpLegendTitle
         '
         Me.grpLegendTitle.Controls.Add(Me.ucrInputLegend)
@@ -315,6 +313,8 @@ Partial Class sdgPlots
         '
         'ucrInputLegend
         '
+        Me.ucrInputLegend.AddQuotesIfUnrecognised = True
+        Me.ucrInputLegend.IsMultiline = False
         Me.ucrInputLegend.IsReadOnly = False
         Me.ucrInputLegend.Location = New System.Drawing.Point(104, 72)
         Me.ucrInputLegend.Name = "ucrInputLegend"
@@ -363,6 +363,16 @@ Partial Class sdgPlots
         Me.rdoLegendTitleAuto.Text = "Auto"
         Me.rdoLegendTitleAuto.UseVisualStyleBackColor = True
         '
+        'ucrInputGraphTitle
+        '
+        Me.ucrInputGraphTitle.AddQuotesIfUnrecognised = True
+        Me.ucrInputGraphTitle.IsMultiline = False
+        Me.ucrInputGraphTitle.IsReadOnly = False
+        Me.ucrInputGraphTitle.Location = New System.Drawing.Point(75, 14)
+        Me.ucrInputGraphTitle.Name = "ucrInputGraphTitle"
+        Me.ucrInputGraphTitle.Size = New System.Drawing.Size(166, 21)
+        Me.ucrInputGraphTitle.TabIndex = 9
+        '
         'tbpXAxis
         '
         Me.tbpXAxis.Controls.Add(Me.ucrXAxis)
@@ -404,8 +414,8 @@ Partial Class sdgPlots
         Me.tabTheme.Controls.Add(Me.GroupBox1)
         Me.tabTheme.Controls.Add(Me.lblFont)
         Me.tabTheme.Controls.Add(Me.cmdAllOptions)
-        Me.tabTheme.Controls.Add(Me.ucrInputThemes)
         Me.tabTheme.Controls.Add(Me.lblTheme)
+        Me.tabTheme.Controls.Add(Me.ucrInputThemes)
         Me.tabTheme.Location = New System.Drawing.Point(4, 22)
         Me.tabTheme.Name = "tabTheme"
         Me.tabTheme.Padding = New System.Windows.Forms.Padding(3)
@@ -441,14 +451,6 @@ Partial Class sdgPlots
         Me.cmdAllOptions.Text = "All Options"
         Me.cmdAllOptions.UseVisualStyleBackColor = True
         '
-        'ucrInputThemes
-        '
-        Me.ucrInputThemes.IsReadOnly = False
-        Me.ucrInputThemes.Location = New System.Drawing.Point(87, 19)
-        Me.ucrInputThemes.Name = "ucrInputThemes"
-        Me.ucrInputThemes.Size = New System.Drawing.Size(171, 21)
-        Me.ucrInputThemes.TabIndex = 1
-        '
         'lblTheme
         '
         Me.lblTheme.AutoSize = True
@@ -457,6 +459,15 @@ Partial Class sdgPlots
         Me.lblTheme.Size = New System.Drawing.Size(73, 13)
         Me.lblTheme.TabIndex = 0
         Me.lblTheme.Text = "Select Theme"
+        '
+        'ucrInputThemes
+        '
+        Me.ucrInputThemes.AddQuotesIfUnrecognised = True
+        Me.ucrInputThemes.IsReadOnly = False
+        Me.ucrInputThemes.Location = New System.Drawing.Point(87, 19)
+        Me.ucrInputThemes.Name = "ucrInputThemes"
+        Me.ucrInputThemes.Size = New System.Drawing.Size(171, 21)
+        Me.ucrInputThemes.TabIndex = 1
         '
         'tabCoordinates
         '
@@ -486,13 +497,6 @@ Partial Class sdgPlots
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(160, 41)
         Me.ucrBaseSubdialog.TabIndex = 1
         '
-        'nudNumberofRows
-        '
-        Me.nudNumberofRows.Location = New System.Drawing.Point(146, 254)
-        Me.nudNumberofRows.Name = "nudNumberofRows"
-        Me.nudNumberofRows.Size = New System.Drawing.Size(51, 20)
-        Me.nudNumberofRows.TabIndex = 23
-        '
         'sdgPlots
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -511,6 +515,7 @@ Partial Class sdgPlots
         Me.tabctrlBoxSubdialog.ResumeLayout(False)
         Me.tabFacet.ResumeLayout(False)
         Me.tabFacet.PerformLayout()
+        CType(Me.nudNumberofRows, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabLayers.ResumeLayout(False)
         Me.tabTitles.ResumeLayout(False)
         Me.tabTitles.PerformLayout()
@@ -522,7 +527,6 @@ Partial Class sdgPlots
         Me.tabTheme.PerformLayout()
         Me.tabCoordinates.ResumeLayout(False)
         Me.tabCoordinates.PerformLayout()
-        CType(Me.nudNumberofRows, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -533,19 +537,14 @@ Partial Class sdgPlots
     Friend WithEvents tabTitles As TabPage
     Friend WithEvents tabFacet As TabPage
     Friend WithEvents tabLayers As TabPage
-    Friend WithEvents chkFreeScalesX As CheckBox
     Friend WithEvents rdoHorizontal As RadioButton
     Friend WithEvents rdoVertical As RadioButton
     Friend WithEvents lblFactor2 As Label
     Friend WithEvents lblFactor1 As Label
     Friend WithEvents ucr2ndFactorReceiver As ucrReceiverSingle
     Friend WithEvents ucr1stFactorReceiver As ucrReceiverSingle
-    Friend WithEvents chkMargin As CheckBox
-    Friend WithEvents chkFreeScalesY As CheckBox
-    Friend WithEvents chkIncludeFacets As CheckBox
     Friend WithEvents tbpXAxis As TabPage
     Friend WithEvents tbpYAxis As TabPage
-    Friend WithEvents chkNoOfRowsOrColumns As CheckBox
     Friend WithEvents ucrInputThemes As ucrInputComboBox
     Friend WithEvents lblTheme As Label
     Friend WithEvents cmdAllOptions As Button
@@ -563,10 +562,16 @@ Partial Class sdgPlots
     Friend WithEvents ucrXAxis As ucrAxes
     Friend WithEvents ucrYAxis As ucrAxes
     Friend WithEvents ucrInputLegend As ucrInputTextBox
-    Friend WithEvents chkFreeSpace As CheckBox
     Friend WithEvents tabCoordinates As TabPage
     Friend WithEvents lblWarning As Label
     Friend WithEvents nudNumberofRows As NumericUpDown
+    Friend WithEvents ucrChkNoOfRowsOrColumns As ucrCheck
+    Friend WithEvents ucrChkIncludeFacets As ucrCheck
+    Friend WithEvents ucrChkFreeSpace As ucrCheck
+    Friend WithEvents ucrChkFreeScalesY As ucrCheck
+    Friend WithEvents ucrChkFreeScalesX As ucrCheck
+    Friend WithEvents ucrChkMargin As ucrCheck
+    Friend WithEvents ucrPnlHorizonatalVertical As UcrPanel
 End Class
 
 

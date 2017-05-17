@@ -116,7 +116,7 @@ Public Class ucrAxes
     End Sub
 
     Public Sub SetXorY(bIsXAxis As Boolean)
-        If bIsXAxis = True Then
+        If bIsXAxis Then
             bIsX = True
             strAxis = "x"
             clsTitleFunction.SetRCommand("xlab")
@@ -201,12 +201,12 @@ Public Class ucrAxes
     Private Sub ucrNudLowerLimit_TextChanged(sender As Object, e As EventArgs)
         ScalesFunction()
     End Sub
-    Private Sub ucrNudScalesNoOfDecimalPlaces_TextChanged(sender As Object, e As EventArgs)
+    Private Sub ucrNudScalesNoOfDecimalPlaces_TextChanged() Handles ucrNudScalesNoOfDecimalPlaces.ControlContentsChanged
         ucrNudUpperLimit.DecimalPlaces = ucrNudScalesNoOfDecimalPlaces.Value
         ucrNudLowerLimit.DecimalPlaces = ucrNudScalesNoOfDecimalPlaces.Value
     End Sub
 
-    Private Sub ucrNudTickMarkersNoOfDecimalPlaces_TextChanged(sender As Object, e As EventArgs)
+    Private Sub ucrNudTickMarkersNoOfDecimalPlaces_TextChanged() Handles ucrNudTickMarkersNoOfDecimalPlaces.ControlContentsChanged
         ucrNudFrom.DecimalPlaces = ucrNudTickMarkersNoOfDecimalPlaces.Value
         ucrNudTo.DecimalPlaces = ucrNudTickMarkersNoOfDecimalPlaces.Value
         ucrNudInStepsOf.DecimalPlaces = ucrNudTickMarkersNoOfDecimalPlaces.Value
@@ -218,27 +218,8 @@ Public Class ucrAxes
                 clsSeqFunction.SetRCommand("seq")
                 clsScalecontinuousFunction.AddParameter("breaks", clsRFunctionParameter:=clsSeqFunction)
 
-                ucrSpecificValues.Visible = False
-                lblFrom.Visible = True
-                ucrNudFrom.Visible = True
-                lblTo.Visible = True
-                ucrNudTo.Visible = True
-                lblInStepsOf.Visible = True
-                ucrNudInStepsOf.Visible = True
-                lblTickMarkersNoOfDecimalPlaces.Visible = True
-                ucrNudTickMarkersNoOfDecimalPlaces.Visible = True
-
             ElseIf ucrTickMarkers.cboInput.SelectedItem = "Specific Values" Then
                 clsScalecontinuousFunction.RemoveParameterByName("breaks")
-                ucrSpecificValues.Visible = True
-                lblFrom.Visible = False
-                ucrNudFrom.Visible = False
-                lblTo.Visible = False
-                ucrNudTo.Visible = False
-                lblInStepsOf.Visible = False
-                ucrNudInStepsOf.Visible = False
-                lblTickMarkersNoOfDecimalPlaces.Visible = False
-                ucrNudTickMarkersNoOfDecimalPlaces.Visible = False
             End If
         End If
     End Sub
