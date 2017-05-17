@@ -223,38 +223,50 @@ Public Class ucrSave
         UpdateLinkedControls(bReset)
     End Sub
 
+    Protected Overrides Sub UpdateAllParameters()
+        UpdateAssignTo()
+    End Sub
+
+    Public Overrides Sub UpdateLinkedControls(Optional bReset As Boolean = False)
+        MyBase.UpdateLinkedControls(bReset)
+    End Sub
+
     Private Sub UpdateAssignTo(Optional bRemove As Boolean = False)
         Dim strSaveName As String
         Dim strDataName As String = ""
+        Dim clsTempCode As RCodeStructure
 
-        If clsRCode IsNot Nothing Then
-            If bRemove Then
-                clsRCode.RemoveAssignTo()
-            Else
-                If ucrDataFrameSelector IsNot Nothing Then
-                    strDataName = ucrDataFrameSelector.cboAvailableDataFrames.Text
-                End If
-                If bShowCheckBox AndAlso Not ucrChkSave.Checked Then
-                    strSaveName = strAssignToIfUnchecked
+        For i As Integer = 0 To lstAllRCodes.Count - 1
+            clsTempCode = lstAllRCodes(i)
+            If clsTempCode IsNot Nothing Then
+                If bRemove Then
+                    clsTempCode.RemoveAssignTo()
                 Else
-                    strSaveName = GetText()
-                End If
-                If strSaveName <> "" Then
-                    Select Case strSaveType
-                        Case "column"
-                            clsRCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempColumn:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix, bAssignToColumnWithoutNames:=bAssignToColumnWithoutNames, bInsertColumnBefore:=bInsertColumnBefore)
-                        Case "dataframe"
-                            clsRCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
-                        Case "graph"
-                            clsRCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempGraph:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
-                        Case "model"
-                            clsRCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempModel:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
-                    End Select
-                Else
-                    clsRCode.RemoveAssignTo()
+                    If ucrDataFrameSelector IsNot Nothing Then
+                        strDataName = ucrDataFrameSelector.cboAvailableDataFrames.Text
+                    End If
+                    If bShowCheckBox AndAlso Not ucrChkSave.Checked Then
+                        strSaveName = strAssignToIfUnchecked
+                    Else
+                        strSaveName = GetText()
+                    End If
+                    If strSaveName <> "" Then
+                        Select Case strSaveType
+                            Case "column"
+                                clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempColumn:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix, bAssignToColumnWithoutNames:=bAssignToColumnWithoutNames, bInsertColumnBefore:=bInsertColumnBefore)
+                            Case "dataframe"
+                                clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
+                            Case "graph"
+                                clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempGraph:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
+                            Case "model"
+                                clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempModel:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
+                        End Select
+                    Else
+                        clsTempCode.RemoveAssignTo()
+                    End If
                 End If
             End If
-        End If
+        Next
     End Sub
 
     Private Sub ucrInputControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputComboSave.ControlContentsChanged, ucrInputTextSave.ControlContentsChanged
@@ -262,13 +274,16 @@ Public Class ucrSave
     End Sub
 
     Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
-        If clsRCode IsNot Nothing Then
-            If clsRCode.bToBeAssigned OrElse clsRCode.bIsAssigned Then
+        Dim clsMainRCode As RCodeStructure
+
+        clsMainRCode = GetRCode()
+        If clsMainRCode IsNot Nothing Then
+            If clsMainRCode.bToBeAssigned OrElse clsMainRCode.bIsAssigned Then
                 If bIsComboBox Then
-                    ucrInputComboSave.SetName(clsRCode.strAssignTo)
+                    ucrInputComboSave.SetName(clsMainRCode.strAssignTo)
                     ucrInputTextSave.SetName("")
                 Else
-                    ucrInputTextSave.SetName(clsRCode.strAssignTo)
+                    ucrInputTextSave.SetName(clsMainRCode.strAssignTo)
                     ucrInputComboSave.SetName("")
                 End If
             Else
@@ -279,7 +294,7 @@ Public Class ucrSave
                 If GetText() = strAssignToIfUnchecked Then
                     ucrChkSave.Checked = False
                 Else
-                    ucrChkSave.Checked = (clsRCode.bToBeAssigned OrElse clsRCode.bIsAssigned)
+                    ucrChkSave.Checked = (clsMainRCode.bToBeAssigned OrElse clsMainRCode.bIsAssigned)
                 End If
             End If
             UpdateLinkedControls()
@@ -321,10 +336,14 @@ Public Class ucrSave
     End Sub
 
     Protected Overrides Function CanUpdate() As Object
-        Return ((Not clsRCode.bIsAssigned AndAlso Not clsRCode.bToBeAssigned) AndAlso strSaveType <> "")
+        Return ((Not GetRCode().bIsAssigned AndAlso Not GetRCode().bToBeAssigned) AndAlso strSaveType <> "")
     End Function
 
     Public Overrides Sub AddOrRemoveParameter(bAdd As Boolean)
         UpdateAssignTo(Not bAdd)
+    End Sub
+
+    Public Sub AddAdditionalRCode(clsNewRCode As RCodeStructure, Optional iAdditionalPairNo As Integer = -1)
+        AddAdditionalCodeParameterPair(clsNewRCode, Nothing, iAdditionalPairNo)
     End Sub
 End Class
