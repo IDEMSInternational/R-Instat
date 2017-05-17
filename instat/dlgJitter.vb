@@ -19,6 +19,7 @@ Public Class dlgJitter
     Public bReset As Boolean = True
     Public bFirstLoad As Boolean = True
     Private clsRunif As New RFunction
+    Private clsRunifOperator As New ROperator
 
     Private Sub dlgJitter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -110,25 +111,24 @@ Public Class dlgJitter
 
     Private Sub SetDefaults()
         clsRunif = New RFunction
-
+        clsRunifOperator = New ROperator
         ucrSelectorForJitter.Reset()
 
         clsRunif.SetRCommand("runif")
-        clsRunif.AddParameter("min", "-1")
+        clsRunif.AddParameter("min", "0")
         clsRunif.AddParameter("max", "1")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsRunif)
         clsRunif.AddParameter("n", ucrSelectorForJitter.ucrAvailableDataFrames.iDataFrameLength)
 
         'Operations Set
-        ucrBase.clsRsyntax.SetOperation("+")
-        ucrBase.clsRsyntax.SetOperatorParameter(0, clsRFunc:=clsRunif)
+        clsRunifOperator.SetOperation("+")
+        clsRunifOperator.AddParameter("variable", clsRFunctionParameter:=clsRunif, iPosition:=1)
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputNewColName.GetText, strTempDataframe:=ucrSelectorForJitter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputNewColName.GetText)
-        ucrBase.clsRsyntax.SetBaseROperator(ucrBase.clsRsyntax.clsBaseOperator)
+        ucrBase.clsRsyntax.SetBaseROperator(clsRunifOperator)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
         'SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrInputMaximumDistanceFromZero.AddAdditionalCodeParameterPair(clsRunif, New RParameter("min"), iAdditionalPairNo:=1)
+        ' ucrInputMaximumDistanceFromZero.AddAdditionalCodeParameterPair(clsRunif, New RParameter("min"), iAdditionalPairNo:=1)
         ucrPnlDistance.SetRCode(clsRunif, bReset)
         ucrInputMaximum.SetRCode(clsRunif, bReset)
         ucrInputMinimum.SetRCode(clsRunif, bReset)
@@ -136,6 +136,7 @@ Public Class dlgJitter
         ucrSelectorForJitter.SetRCode(clsRunif, bReset)
         ucrInputNewColName.SetRCode(ucrBase.clsRsyntax.clsBaseOperator, bReset)
         ucrReceiverJitter.SetRCode(ucrBase.clsRsyntax.clsBaseOperator, bReset)
+        Distance()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
