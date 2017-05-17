@@ -67,6 +67,9 @@ Public Class sdgPlots
         ucr1stFactorReceiver.SetIncludedDataTypes({"factor"})
         ucr2ndFactorReceiver.Selector = ucrFacetSelector
         ucr2ndFactorReceiver.SetIncludedDataTypes({"factor"})
+        ucrChkIncludeFacets.SetText("Include Facets")
+        ucrChkNoOfRowsOrColumns.SetText("Fixed Number of Rows")
+        ucrChkMargin.SetText("Margins")
 
         'layers tab 
 
@@ -101,7 +104,7 @@ Public Class sdgPlots
     End Sub
     Public Sub SetDefaults()
         TitleDefaults()
-        chkIncludeFacets.Checked = False
+        ucrChkIncludeFacets.Checked = False
         IncludeFacets()
         nudNumberofRows.Value = 1
         ucrFacetSelector.Reset()
@@ -168,7 +171,7 @@ Public Class sdgPlots
     End Sub
     Private Sub IncludeFacets()
         'If the user wants facets, the facets options need to be shown, otherwise hide them.
-        If chkIncludeFacets.Checked Then
+        If ucrChkIncludeFacets.Checked Then
             ucrFacetSelector.Visible = True
             ucr1stFactorReceiver.Visible = True
             ucr2ndFactorReceiver.Visible = True
@@ -177,20 +180,20 @@ Public Class sdgPlots
             rdoHorizontal.Visible = True
             rdoHorizontal.Checked = True
             rdoVertical.Visible = True
-            chkNoOfRowsOrColumns.Checked = False
+            ucrChkNoOfRowsOrColumns.Checked = False
             nudNumberofRows.Visible = True
-            chkMargin.Checked = False
-            chkFreeScalesX.Checked = False
-            chkFreeScalesY.Checked = False
-            chkFreeSpace.Checked = False
-            chkMargin.Visible = True
-            chkFreeScalesX.Visible = True
-            chkFreeScalesY.Visible = True
-            chkFreeSpace.Visible = True
+            ucrChkMargin.Checked = False
+            ucrChkFreeScalesX.Checked = False
+            ucrChkFreeScalesY.Checked = False
+            ucrChkFreeSpace.Checked = False
+            ucrChkMargin.Visible = True
+            ucrChkFreeScalesX.Visible = True
+            ucrChkFreeScalesY.Visible = True
+            ucrChkFreeSpace.Visible = True
             'In case IncludeFacets is checked, the facets need to be set. Still might not be included as RSyntax parameter if no no variable has been set for faceting, but this is then decided in the IncludeFacetsParameter below.
             SetFacets()
             SecondFactorReceiverEnabled()
-            chkNoOfRowsOrColumns.Visible = True
+            ucrChkNoOfRowsOrColumns.Visible = True
         Else
             ucrFacetSelector.Visible = False
             ucr1stFactorReceiver.Visible = False
@@ -199,12 +202,12 @@ Public Class sdgPlots
             lblFactor2.Visible = False
             rdoHorizontal.Visible = False
             rdoVertical.Visible = False
-            chkMargin.Visible = False
-            chkFreeScalesX.Visible = False
-            chkFreeScalesY.Visible = False
-            chkNoOfRowsOrColumns.Visible = False
+            ucrChkMargin.Visible = False
+            ucrChkFreeScalesX.Visible = False
+            ucrChkFreeScalesY.Visible = False
+            ucrChkNoOfRowsOrColumns.Visible = False
             nudNumberofRows.Visible = False
-            chkFreeSpace.Visible = False
+            ucrChkFreeSpace.Visible = False
         End If
         'Then the RSyntax is populated with the appropriate facet parameter (as part of the whole ggplot script) or not.
         IncludeFacetsParameter()
@@ -228,7 +231,7 @@ Public Class sdgPlots
             'There are two types of fasceting provided by ggplot2: grid and wrap. Grid works like a contigency table, wrap just rearranges a long list of plots into a grid. 
             'If two receivers are filled, only grid can be used. In case only one receiver is filled, grid will still be in use if one of the grid parameters is set such as "margins" or "free space". In other cases, wrap will be used.
             'In the grid case, the place of the argument, left or right, in the facets parameter of the facets function is determined by/determines the choice "vertical" or "horizontal" faceting. In the wrap case, the argument "dir" is set to vertical or horizontal accordingly.
-            If rdoHorizontal.Checked AndAlso ((Not chkMargin.Checked AndAlso Not chkFreeSpace.Checked) OrElse chkNoOfRowsOrColumns.Checked) Then
+            If rdoHorizontal.Checked AndAlso ((Not ucrChkMargin.Checked AndAlso Not ucrChkFreeSpace.Checked) OrElse ucrChkNoOfRowsOrColumns.Checked) Then
                 clsRFacetFunction.SetRCommand("facet_wrap")
                 clsTempOp.AddParameter(iPosition:=0, strParameterValue:="")
                 clsTempOp.AddParameter(strParameterValue:=strSingleFactor)
@@ -236,7 +239,7 @@ Public Class sdgPlots
                 SetFixRowColumnParameter()
                 'As there are only a left and a right parameter for clsTempOp, no need to specify a parameter name, the default "right" will be used.
                 'The boolean argument "false" is there to indicate we don't want quotes.
-            ElseIf rdoVertical.Checked AndAlso ((Not chkMargin.Checked AndAlso Not chkFreeSpace.Checked) OrElse chkNoOfRowsOrColumns.Checked) Then
+            ElseIf rdoVertical.Checked AndAlso ((Not ucrChkMargin.Checked AndAlso Not ucrChkFreeSpace.Checked) OrElse ucrChkNoOfRowsOrColumns.Checked) Then
                 clsRFacetFunction.SetRCommand("facet_wrap")
                 clsTempOp.AddParameter(iPosition:=0, strParameterValue:="")
                 clsTempOp.AddParameter(strParameterValue:=strSingleFactor)
@@ -283,7 +286,7 @@ Public Class sdgPlots
 
     Private Sub SetFixRowColumnParameter()
         'This sub is called in the wrap case to set up the parameter fixing the number of rows or columns when working in the horizontal or vertical case.
-        If chkNoOfRowsOrColumns.Checked Then
+        If ucrChkNoOfRowsOrColumns.Checked Then
             If rdoHorizontal.Checked Then
                 clsRFacetFunction.AddParameter("nrow", nudNumberofRows.Value)
                 clsRFacetFunction.RemoveParameterByName("ncol")
@@ -298,14 +301,14 @@ Public Class sdgPlots
     End Sub
 
     Private Sub IncludeFacetsParameter()
-        If chkIncludeFacets.Checked AndAlso Not ucr1stFactorReceiver.IsEmpty() Then
+        If ucrChkIncludeFacets.Checked AndAlso Not ucr1stFactorReceiver.IsEmpty() Then
             clsRsyntax.AddOperatorParameter("facet", clsRFunc:=clsRFacetFunction)
         Else
             clsRsyntax.RemoveOperatorParameter("facet")
         End If
     End Sub
 
-    Private Sub chkIncludeFacets_CheckedChanged(sender As Object, e As EventArgs) Handles chkIncludeFacets.CheckedChanged
+    Private Sub ucrChkIncludeFacets_CheckedChanged() Handles ucrChkIncludeFacets.ControlValueChanged
         IncludeFacets()
         FacetsNumberOfRowsOrColumns()
     End Sub
@@ -314,32 +317,32 @@ Public Class sdgPlots
         'This sub is setting the right scale parameter in the clsRFacetFunctions, according to the scale chk boxes. 
         'It only needs to be called when these are modified, as this parameter is common to both facets_grid and facets_wrap. Although graphics on the same row or column in facets_grid share the y or x axis respectively. Still different rows might benefit from having different y-axis scales for instance.
         'Warning: ggplot allows the extra parameter "space" in the facet_grid case. That one takes as values "free" or "fixed" (with quotes). It determines whether the size of rows and columns should adapt to the range of the scale.
-        If chkFreeScalesX.Checked AndAlso chkFreeScalesY.Checked Then
+        If ucrChkFreeScalesX.Checked AndAlso ucrChkFreeScalesY.Checked Then
             clsRFacetFunction.AddParameter("scales", Chr(34) & "free" & Chr(34))
-        ElseIf chkFreeScalesX.Checked AndAlso Not chkFreeScalesY.Checked Then
+        ElseIf ucrChkFreeScalesX.Checked AndAlso Not ucrChkFreeScalesY.Checked Then
             clsRFacetFunction.AddParameter("scales", Chr(34) & "free_x" & Chr(34))
-        ElseIf Not chkFreeScalesX.Checked AndAlso chkFreeScalesY.Checked Then
+        ElseIf Not ucrChkFreeScalesX.Checked AndAlso ucrChkFreeScalesY.Checked Then
             clsRFacetFunction.AddParameter("scales", Chr(34) & "free_y" & Chr(34))
         Else
             clsRFacetFunction.RemoveParameterByName("scales")
         End If
     End Sub
 
-    Private Sub chkScales_CheckedChanged(sender As Object, e As EventArgs) Handles chkFreeScalesX.CheckedChanged, chkFreeScalesY.CheckedChanged
+    Private Sub chkScales_CheckedChanged() Handles ucrChkFreeScalesX.ControlValueChanged, ucrChkFreeScalesY.ControlValueChanged
         SetScaleOption()
         SetFacets()
     End Sub
     Private Sub FacetsNumberOfRowsOrColumns()
         'This sub decides whether the option to fix the number of rows or columns should be available or not.
-        'When chkMargin is checked, or when both receivers are used (i.e. the second optional is filled), facet_grid is used, and thus the number of rows or columns can't be fixed.
-        If chkIncludeFacets.Checked Then
-            If (chkMargin.Checked OrElse chkFreeSpace.Checked OrElse (Not ucr2ndFactorReceiver.IsEmpty)) Then
-                chkNoOfRowsOrColumns.Checked = False
-                chkNoOfRowsOrColumns.Visible = False
+        'When ucrChkMargin is checked, or when both receivers are used (i.e. the second optional is filled), facet_grid is used, and thus the number of rows or columns can't be fixed.
+        If ucrChkIncludeFacets.Checked Then
+            If (ucrChkMargin.Checked OrElse ucrChkFreeSpace.Checked OrElse (Not ucr2ndFactorReceiver.IsEmpty)) Then
+                ucrChkNoOfRowsOrColumns.Checked = False
+                ucrChkNoOfRowsOrColumns.Visible = False
                 nudNumberofRows.Visible = False
             Else
-                chkNoOfRowsOrColumns.Visible = True
-                nudNumberofRows.Visible = chkNoOfRowsOrColumns.Checked
+                ucrChkNoOfRowsOrColumns.Visible = True
+                nudNumberofRows.Visible = ucrChkNoOfRowsOrColumns.Checked
             End If
         End If
     End Sub
@@ -364,15 +367,15 @@ Public Class sdgPlots
 
     Private Sub rdoHorVer_CheckedChanged(sender As Object, e As EventArgs) Handles rdoHorizontal.CheckedChanged, rdoVertical.CheckedChanged
         If rdoHorizontal.Checked Then
-            chkNoOfRowsOrColumns.Text = "Fixed Number of Rows"
+            ucrChkNoOfRowsOrColumns.Text = "Fixed Number of Rows"
         ElseIf rdoVertical.Checked Then
-            chkNoOfRowsOrColumns.Text = "Fixed Number of Columns"
+            ucrChkNoOfRowsOrColumns.Text = "Fixed Number of Columns"
         End If
         SetFacets()
     End Sub
 
-    Private Sub chkNoOfRowsOrColumns_CheckedChanged(sender As Object, e As EventArgs) Handles chkNoOfRowsOrColumns.CheckedChanged
-        nudNumberofRows.Visible = chkNoOfRowsOrColumns.Checked
+    Private Sub ucrChkNoOfRowsOrColumns_CheckedChanged() Handles ucrChkNoOfRowsOrColumns.ControlValueChanged
+        nudNumberofRows.Visible = ucrChkNoOfRowsOrColumns.Checked
         SetFacets()
     End Sub
 
@@ -380,8 +383,8 @@ Public Class sdgPlots
         SetFacets()
     End Sub
 
-    Private Sub chkMargin_CheckedChanged(sender As Object, e As EventArgs) Handles chkMargin.CheckedChanged
-        If chkMargin.Checked Then
+    Private Sub ucrChkMargin_CheckedChanged() Handles ucrChkMargin.ControlValueChanged
+        If ucrChkMargin.Checked Then
             clsRFacetFunction.AddParameter("margins", "TRUE")
         Else
             clsRFacetFunction.RemoveParameterByName("margins")
@@ -390,8 +393,8 @@ Public Class sdgPlots
         SetFacets()
     End Sub
 
-    Private Sub chkFreeSpace_CheckedChanged(sender As Object, e As EventArgs) Handles chkFreeSpace.CheckedChanged
-        If chkMargin.Checked Then
+    Private Sub ucrChkFreeSpace_CheckedChanged() Handles ucrChkFreeSpace.ControlValueChanged
+        If ucrChkMargin.Checked Then
             clsRFacetFunction.AddParameter("space", Chr(34) & "free" & Chr(34))
         Else
             clsRFacetFunction.RemoveParameterByName("space")
@@ -505,6 +508,10 @@ Public Class sdgPlots
         ElseIf rdoLegendTitleAuto.Checked Then
             clsRsyntax.RemoveOperatorParameter("labs")
         End If
+    End Sub
+
+    Private Sub ucrChkNoOfRowsOrColumns_CheckedChanged(ucrChangedControl As ucrCore) Handles ucrChkNoOfRowsOrColumns.ControlValueChanged
+
     End Sub
     'Warning/Task to be discussed: need to disable ok on dlg's when layers are not complete on subdialogues + warning message... 
     'Warning: actually this will be very hard to implement until the global aes, set from the main layer are properly communicated to plots. Global aes might fill in missing mandatory aes...
