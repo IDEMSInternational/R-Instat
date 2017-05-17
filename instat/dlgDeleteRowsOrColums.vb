@@ -39,21 +39,21 @@ Public Class dlgDeleteRowsOrColums
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 165
 
-        ucrPnlRows.AddRadioButton(rdoColumns)
-        ucrPnlRows.AddRadioButton(rdoRows)
-        ucrPnlRows.AddFunctionNamesCondition(rdoColumns, frmMain.clsRLink.strInstatDataObject & "$remove_columns_in_data")
-        ucrPnlRows.AddFunctionNamesCondition(rdoRows, frmMain.clsRLink.strInstatDataObject & "$remove_rows_in_data")
+        ucrPnlColumnsOrRows.AddRadioButton(rdoColumns)
+        ucrPnlColumnsOrRows.AddRadioButton(rdoRows)
+        ucrPnlColumnsOrRows.AddFunctionNamesCondition(rdoColumns, frmMain.clsRLink.strInstatDataObject & "$remove_columns_in_data")
+        ucrPnlColumnsOrRows.AddFunctionNamesCondition(rdoRows, frmMain.clsRLink.strInstatDataObject & "$remove_rows_in_data")
 
-        ucrPnlRows.AddToLinkedControls(ucrReceiverForColumnsToDelete, {rdoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlRows.AddToLinkedControls(ucrNudRowsToDelete, {rdoRows}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlRows.AddToLinkedControls(ucrDataFrameLengthForDeleteRows, {rdoRows}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlColumnsOrRows.AddToLinkedControls(ucrReceiverForColumnsToDelete, {rdoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlColumnsOrRows.AddToLinkedControls(ucrNudRowsToDelete, {rdoRows}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlColumnsOrRows.AddToLinkedControls(ucrDataFrameLengthForDeleteRows, {rdoRows}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrSelectorForDeleteColumns.SetParameter(New RParameter("data_name", 0))
         ucrSelectorForDeleteColumns.SetParameterIsString()
 
+        ucrReceiverForColumnsToDelete.SetParameter(New RParameter("cols", 1))
         ucrReceiverForColumnsToDelete.Selector = ucrSelectorForDeleteColumns
         ucrReceiverForColumnsToDelete.SetMeAsReceiver()
-        ucrReceiverForColumnsToDelete.SetParameter(New RParameter("cols", 1))
         ucrReceiverForColumnsToDelete.SetParameterIsString()
         ucrReceiverForColumnsToDelete.SetLinkedDisplayControl(lblColumnsToDelete)
 
@@ -66,19 +66,16 @@ Public Class dlgDeleteRowsOrColums
         ucrDataFrameLengthForDeleteRows.SetDataFrameSelector(ucrSelectorForDeleteColumns.ucrAvailableDataFrames)
     End Sub
 
-    Public Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
+
+        ucrSelectorForDeleteColumns.Reset()
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_columns_in_data")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
     End Sub
 
-    Private Sub ReopenDialog()
-        If ucrSelectorForDeleteColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
-            Try
-                ucrNudRowsToDelete.Maximum = frmMain.clsRLink.GetDataFrameLength(ucrSelectorForDeleteColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-            Catch ex As Exception
-            End Try
-        End If
-        'temp fix to receiver containing deleted column on reopen
-        ucrReceiverForColumnsToDelete.Clear()
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -99,16 +96,15 @@ Public Class dlgDeleteRowsOrColums
         End If
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged() Handles ucrPnlRows.ControlContentsChanged, ucrReceiverForColumnsToDelete.ControlContentsChanged, ucrNudRowsToDelete.ControlContentsChanged
-        TestOKEnabled()
-    End Sub
-
-    Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
-
-        ucrSelectorForDeleteColumns.Reset()
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_columns_in_data")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+    Private Sub ReopenDialog()
+        If ucrSelectorForDeleteColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+            Try
+                ucrNudRowsToDelete.Maximum = frmMain.clsRLink.GetDataFrameLength(ucrSelectorForDeleteColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            Catch ex As Exception
+            End Try
+        End If
+        'temp fix to receiver containing deleted column on reopen
+        ucrReceiverForColumnsToDelete.Clear()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -117,7 +113,7 @@ Public Class dlgDeleteRowsOrColums
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrPnlRows_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlRows.ControlValueChanged
+    Private Sub ucrPnlColumnsOrRows_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumnsOrRows.ControlValueChanged
         If rdoColumns.Checked Then
             ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$remove_columns_in_data")
             ucrSelectorForDeleteColumns.SetVariablesVisible(True)
@@ -131,7 +127,7 @@ Public Class dlgDeleteRowsOrColums
         ucrNudRowsToDelete.Maximum = ucrSelectorForDeleteColumns.ucrAvailableDataFrames.iDataFrameLength
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForColumnsToDelete.ControlContentsChanged, ucrPnlRows.ControlContentsChanged, ucrNudRowsToDelete.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForColumnsToDelete.ControlContentsChanged, ucrNudRowsToDelete.ControlContentsChanged, ucrPnlColumnsOrRows.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class

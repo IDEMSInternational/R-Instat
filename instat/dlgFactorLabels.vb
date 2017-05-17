@@ -104,15 +104,7 @@ Public Class dlgViewFactorLabels
         ucrBase.clsRsyntax.SetBaseRFunction(clsViewFunction)
     End Sub
 
-    Private Sub TestOkEnabled()
-        If (Not (ucrReceiverFactorColumns.IsEmpty) AndAlso (ucrChkShowLabels.Checked OrElse ucrChkShowType.Checked OrElse ucrChkShowValues.Checked OrElse ucrChkShowFrequencies.Checked OrElse ucrChkShowPercentage.Checked)) Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
-    End Sub
-
-    Public Sub SetRCodeForControls(bReset As Boolean)
+    Private Sub SetRCodeForControls(bReset As Boolean)
         ucrChkAlternateColour.SetRCode(clsViewFunction, bReset)
         ucrChkShowFrequencies.SetRCode(clsViewFunction, bReset)
         ucrChkShowId.SetRCode(clsViewFunction, bReset)
@@ -124,6 +116,14 @@ Public Class dlgViewFactorLabels
         ucrChkShowValues.SetRCode(clsViewFunction, bReset)
         ucrReceiverFactorColumns.SetRCode(clsSelect, bReset)
         ucrSelectorViewFactorLabels.SetRCode(clsSelect, bReset)
+    End Sub
+
+    Private Sub TestOkEnabled()
+        If (Not (ucrReceiverFactorColumns.IsEmpty) AndAlso (ucrChkShowLabels.Checked OrElse ucrChkShowType.Checked OrElse ucrChkShowValues.Checked OrElse ucrChkShowFrequencies.Checked OrElse ucrChkShowPercentage.Checked)) Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
