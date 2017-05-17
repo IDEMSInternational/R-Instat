@@ -22,19 +22,9 @@ Public Class sdgPlots
     'Task: write an issue/proposal about this when ideas are a bit clearer.
     Public clsRsyntax As New RSyntax
     'This clsRSyntax is linked with the ucrBase.clsRSyntax from the dlg calling sdgPLotOptions...
-    Public clsRggplotFunction As New RFunction
-
+    Public clsRggplotFunction, clsAesFunction, clsRLegendFunction, clsLegendFunction, clsGraphTitleFunction, clsRFacetFunction, clsXLabFunction, clsYLabFunction, clsRThemeFunction As New RFunction 'Warning: I m not sure this field is useful... Will all be revised when changing links though...
     Public clsBaseOperator As New ROperator
     Private bControlsInitialised As Boolean = False
-
-    Public clsAesFunction As New RFunction 'Warning: I m not sure this field is useful... Will all be revised when changing links though...
-    Public clsRFacetFunction As New RFunction
-    Public clsXLabFunction As New RFunction
-    Public clsYLabFunction As New RFunction
-    Public clsRThemeFunction As New RFunction
-    Public clsRLegendFunction As New RFunction
-    Public clsGraphTitleFunction As New RFunction
-    Public clsLegendFunction As New RFunction
     'All the previous RFunctions will eventually be stored as parameters (or parameters of parameters) within the RSyntax building the big Ggplot command "ggplot(...) + geom_..(..) + ... + theme(...) + scales(...) ..."
     'They are treated separately from the RSyntax for the sake of clarity, then sinked in eventually.
     Public bFirstLoad As Boolean = True
@@ -58,6 +48,9 @@ Public Class sdgPlots
         clsBaseOperator = clsNewOperator
         ucrInputGraphTitle.SetRCode(clsGraphTitleFunction, bReset)
         ucrPnlHorizonatalVertical.SetRCode(clsRFacetFunction, bReset)
+        ucr1stFactorReceiver.SetRCode(clsRFacetFunction, bReset)
+        ucr2ndFactorReceiver.SetRCode(clsRFacetFunction, bReset)
+
     End Sub
 
     Public Sub InitialiseControls()
@@ -477,10 +470,6 @@ Public Class sdgPlots
         ElseIf rdoLegendTitleAuto.Checked Then
             clsRsyntax.RemoveOperatorParameter("labs")
         End If
-    End Sub
-
-    Private Sub grpLegendTitle_Enter(sender As Object, e As EventArgs) Handles grpLegendTitle.Enter
-
     End Sub
     'Warning/Task to be discussed: need to disable ok on dlg's when layers are not complete on subdialogues + warning message... 
     'Warning: actually this will be very hard to implement until the global aes, set from the main layer are properly communicated to plots. Global aes might fill in missing mandatory aes...
