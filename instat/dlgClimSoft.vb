@@ -54,7 +54,8 @@ Public Class dlgClimSoft
         ucrReceiverMultipleElements.SetParameterIsString()
         ucrReceiverMultipleElements.Selector = ucrSelectorForClimSoft
         ucrReceiverMultipleElements.SetItemType("database_variables")
-        ucrReceiverMultipleElements.strDatabaseQuery = "SELECT obselement.elementName FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy AND observationfinal.recordedFrom in (10202200,10306100) GROUP BY observationfinal.describedBy;"
+        ucrReceiverMultipleElements.strDatabaseQuery = "SELECT obselement.elementName FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy GROUP BY observationfinal.describedBy;"
+        ucrReceiverMultipleElements.SetLinkedDisplayControl(lblElements)
 
         ucrChkObservationData.SetText("Observation Data")
         ucrChkObservationData.SetParameter(New RParameter("include_observation_data", 2))
@@ -67,11 +68,11 @@ Public Class dlgClimSoft
         ucrInputEndDate.SetParameter(New RParameter("end_date", 4))
         ucrInputEndDate.SetLinkedDisplayControl(lblEndDate)
         ttClimsoft.SetToolTip(ucrInputEndDate.txtInput, "yyyy-mm-dd")
-        ucrChkObservationData.AddToLinkedControls({ucrInputStartDate, ucrInputEndDate}, {True}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkObservationData.AddToLinkedControls({ucrInputStartDate, ucrInputEndDate, ucrReceiverMultipleElements}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
     End Sub
 
     Private Sub TestOKEnabled()
-        If (Not ucrReceiverMultipleStations.IsEmpty() AndAlso Not ucrChkObservationData.Checked) OrElse (Not ucrReceiverMultipleStations.IsEmpty() AndAlso Not ucrReceiverMultipleElements.IsEmpty() AndAlso ucrChkObservationData.Checked) Then
+        If (Not ucrReceiverMultipleStations.IsEmpty() AndAlso Not ucrChkObservationData.Checked) OrElse (Not ucrReceiverMultipleElements.IsEmpty() AndAlso ucrChkObservationData.Checked) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -90,9 +91,8 @@ Public Class dlgClimSoft
         clsRImportFromClimsoft = New RFunction
         ucrSelectorForClimSoft.Reset()
         ucrReceiverMultipleStations.SetMeAsReceiver()
-        ucrInputStartDate.SetText("")
-        ucrInputEndDate.SetText("")
-
+        ucrInputStartDate.SetName("")
+        ucrInputEndDate.SetName("")
         clsRDatabaseConnect.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$database_connect")
         clsRDatabaseDisconnect.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$database_disconnect")
         clsRImportFromClimsoft.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_from_climsoft")
@@ -103,11 +103,11 @@ Public Class dlgClimSoft
     End Sub
 
     Private Sub cmdEstablishConnection_Click(sender As Object, e As EventArgs) Handles cmdEstablishConnection.Click
-
         sdgImportFromClimSoft.SetRDatabaseConnection(clsRDatabaseConnect, clsRDatabaseDisconnect, clsHasConnection, bConnectionActive, bResetSubdialog)
         bResetSubdialog = False
         sdgImportFromClimSoft.ShowDialog()
         SetConnectionActiveStatus(sdgImportFromClimSoft.GetConnectionActiveStatus())
+        ucrReceiverMultipleStations.SetMeAsReceiver()
     End Sub
 
     Private Sub SetConnectionActiveStatus(bCurrentStatus As Boolean)
@@ -124,6 +124,7 @@ Public Class dlgClimSoft
         If ucrReceiverMultipleStations.IsEmpty Then
             ucrReceiverMultipleElements.strDatabaseQuery = "SELECT obselement.elementName FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy GROUP BY observationfinal.describedBy;"
         Else
+            ucrReceiverMultipleElements.Clear()
             ucrReceiverMultipleElements.strDatabaseQuery = "SELECT obselement.elementName FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy AND observationfinal.recordedFrom IN (" & String.Join(",", ucrReceiverMultipleStations.GetVariableNamesList(bWithQuotes:=False)) & ") GROUP BY observationfinal.describedBy;"
         End If
         TestOKEnabled()
