@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgView
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsMainFunction, clsViewDataFrame As New RFunction
+    Private clsOutputWindowFunction, clsSeparateWindowFunction, clsHTMLFunction As New RFunction
     Private bControlsUpdated As Boolean = False
 
     Private Sub dlgView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -92,25 +92,29 @@ Public Class dlgView
     End Sub
 
     Private Sub SetDefaults()
-        clsMainFunction = New RFunction
-        clsViewDataFrame = New RFunction
+        clsOutputWindowFunction = New RFunction
+        clsSeparateWindowFunction = New RFunction
+        clsHTMLFunction = New RFunction
+
         ucrSelectorForView.Reset()
         ucrReceiverView.SetMeAsReceiver()
-        clsMainFunction.SetPackageName("utils")
-        clsMainFunction.SetRCommand("View")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsMainFunction)
+
+        clsSeparateWindowFunction.SetPackageName("utils")
+        clsSeparateWindowFunction.SetRCommand("View")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsSeparateWindowFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         bControlsUpdated = False
         ucrNudNumberRows.Maximum = Decimal.MaxValue
-        ucrReceiverView.SetRCode(clsMainFunction, bReset)
-        ucrPnlDisplayWindow.SetRCode(clsMainFunction, bReset)
-        ucrPnlDisplayFrom.SetRCode(clsMainFunction, bReset)
-        ucrNudNumberRows.SetRCode(clsMainFunction, bReset)
-        ucrChkSpecifyRows.SetRCode(clsMainFunction, bReset)
-        ucrReceiverView.AddAdditionalCodeParameterPair(clsViewDataFrame, New RParameter("mydf"), iAdditionalPairNo:=1)
-        ucrSelectorForView.SetRCode(clsMainFunction, bReset)
+        ucrReceiverView.SetRCode(clsSeparateWindowFunction, bReset)
+        ucrPnlDisplayWindow.SetRCode(clsSeparateWindowFunction, bReset)
+        ucrPnlDisplayFrom.SetRCode(clsOutputWindowFunction, bReset)
+        ucrNudNumberRows.SetRCode(clsOutputWindowFunction, bReset)
+        ucrChkSpecifyRows.SetRCode(clsOutputWindowFunction, bReset)
+        ucrReceiverView.AddAdditionalCodeParameterPair(clsHTMLFunction, New RParameter("mydf"), iAdditionalPairNo:=1)
+        ucrReceiverView.AddAdditionalCodeParameterPair(clsOutputWindowFunction, New RParameter("x"), iAdditionalPairNo:=2)
+        ucrSelectorForView.SetRCode(clsOutputWindowFunction, bReset)
         DataFrameLength()
         bControlsUpdated = True
     End Sub
@@ -149,30 +153,30 @@ Public Class dlgView
         ucrBase.clsRsyntax.iCallType = 2
         If rdoDispOutputWindow.Checked Then
             If ucrChkSpecifyRows.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsMainFunction)
-                clsMainFunction.AddParameter("title", Chr(34) & ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-                clsMainFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables(True))
+                ucrBase.clsRsyntax.SetBaseRFunction(clsOutputWindowFunction)
+                clsOutputWindowFunction.AddParameter("title", Chr(34) & ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+                clsOutputWindowFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables(True))
                 If rdoTop.Checked Then
-                    clsMainFunction.SetRCommand("head")
+                    clsOutputWindowFunction.SetRCommand("head")
                 Else
-                    clsMainFunction.SetRCommand("tail")
+                    clsOutputWindowFunction.SetRCommand("tail")
                 End If
             Else
                 ucrBase.clsRsyntax.SetBaseRFunction(ucrReceiverView.GetVariables(True))
             End If
         ElseIf rdoDispSepOutputWindow.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsMainFunction)
-            clsMainFunction.SetRCommand("View")
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSeparateWindowFunction)
+            clsSeparateWindowFunction.SetRCommand("View")
         Else
-            ucrBase.clsRsyntax.SetBaseRFunction(clsViewDataFrame)
-            clsViewDataFrame.SetPackageName("sjPlot")
-            clsViewDataFrame.SetRCommand("sjt.df")
-            clsViewDataFrame.RemoveParameterByName("x")
-            clsViewDataFrame.RemoveParameterByName("title")
-            clsViewDataFrame.AddParameter("mydf", clsRFunctionParameter:=ucrReceiverView.GetVariables(True))
-            clsViewDataFrame.AddParameter("describe", "FALSE", iPosition:=1)
-            clsViewDataFrame.AddParameter("altr.row.col", "TRUE", iPosition:=2)
-            clsViewDataFrame.AddParameter("hide.progress", "TRUE", iPosition:=4)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsHTMLFunction)
+            clsHTMLFunction.SetPackageName("sjPlot")
+            clsHTMLFunction.SetRCommand("sjt.df")
+            clsHTMLFunction.RemoveParameterByName("x")
+            clsHTMLFunction.RemoveParameterByName("title")
+            clsHTMLFunction.AddParameter("mydf", clsRFunctionParameter:=ucrReceiverView.GetVariables(True))
+            clsHTMLFunction.AddParameter("describe", "FALSE", iPosition:=1)
+            clsHTMLFunction.AddParameter("altr.row.col", "TRUE", iPosition:=2)
+            clsHTMLFunction.AddParameter("hide.progress", "TRUE", iPosition:=4)
         End If
     End Sub
 
