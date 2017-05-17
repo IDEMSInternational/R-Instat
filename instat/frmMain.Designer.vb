@@ -3689,7 +3689,7 @@ Partial Class frmMain
         '
         Me.DispalyClimaticDataToolStripMenuItem.Name = "DispalyClimaticDataToolStripMenuItem"
         Me.DispalyClimaticDataToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
-        Me.DispalyClimaticDataToolStripMenuItem.Text = "Dispaly Climatic Data..."
+        Me.DispalyClimaticDataToolStripMenuItem.Text = "Display Dailycorr Climatic Data..."
         '
         'frmMain
         '
