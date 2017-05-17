@@ -95,7 +95,7 @@ Public Class dlgBarAndPieChart
         ucrSecondReceiver.bWithQuotes = False
         ucrSecondReceiver.SetParameterIsString()
 
-        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
+        ' sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         ucrSaveBar.SetIsComboBox()
         ucrSaveBar.SetCheckBoxText("Save Graph")
         ucrSaveBar.SetDataFrameSelector(ucrBarChartSelector.ucrAvailableDataFrames)
@@ -181,7 +181,7 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetRFunction(ucrBase.clsRsyntax.clsBaseOperator, bResetSubdialog)
+        sdgPlots.SetRFunction(clsBaseOperator, bResetSubdialog)
         sdgPlots.SetDataFrame(strNewDataFrame:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         bResetSubdialog = False
         sdgPlots.ShowDialog()
