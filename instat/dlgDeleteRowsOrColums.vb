@@ -57,9 +57,8 @@ Public Class dlgDeleteRowsOrColums
         ucrReceiverForColumnsToDelete.SetLinkedDisplayControl(lblColumnsToDelete)
 
         ucrNudRowsToDelete.SetParameter(New RParameter("row_names", 1))
-        ucrNudRowsToDelete.Minimum = 1
+        ucrNudRowsToDelete.SetMinMax(1, ucrSelectorForDeleteColumns.ucrAvailableDataFrames.iDataFrameLength)
         ucrNudRowsToDelete.SetLinkedDisplayControl(lblRowNames)
-        ucrNudRowsToDelete.SetRDefault(1)
 
         ucrDataFrameLengthForDeleteRows.SetLinkedDisplayControl(lblNumberofRows)
         ucrDataFrameLengthForDeleteRows.SetDataFrameSelector(ucrSelectorForDeleteColumns.ucrAvailableDataFrames)
@@ -68,8 +67,8 @@ Public Class dlgDeleteRowsOrColums
     Private Sub SetDefaults()
         clsDeleteColumns = New RFunction
         clsDeleteRows = New RFunction
-
         ucrSelectorForDeleteColumns.Reset()
+        clsDeleteRows.AddParameter("row_names", 1)
         clsDeleteRows.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_rows_in_data")
         clsDeleteColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_columns_in_data")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDeleteColumns)
@@ -83,6 +82,7 @@ Public Class dlgDeleteRowsOrColums
         ucrReceiverForColumnsToDelete.SetRCode(clsDeleteColumns)
         ucrSelectorForDeleteColumns.SetRCode(clsDeleteRows)
     End Sub
+
     Private Sub TestOKEnabled()
         If rdoColumns.Checked Then
             If Not ucrReceiverForColumnsToDelete.IsEmpty() Then
