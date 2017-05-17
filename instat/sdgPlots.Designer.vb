@@ -30,7 +30,6 @@ Partial Class sdgPlots
         Me.ucrChkFreeScalesY = New instat.ucrCheck()
         Me.ucrChkFreeScalesX = New instat.ucrCheck()
         Me.ucrChkMargin = New instat.ucrCheck()
-        Me.nudNumberofRows = New System.Windows.Forms.NumericUpDown()
         Me.ucrFacetSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.rdoHorizontal = New System.Windows.Forms.RadioButton()
         Me.rdoVertical = New System.Windows.Forms.RadioButton()
@@ -63,9 +62,9 @@ Partial Class sdgPlots
         Me.tabCoordinates = New System.Windows.Forms.TabPage()
         Me.lblWarning = New System.Windows.Forms.Label()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
+        Me.ucrNudNumberofRows = New instat.ucrNud()
         Me.tabctrlBoxSubdialog.SuspendLayout()
         Me.tabFacet.SuspendLayout()
-        CType(Me.nudNumberofRows, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabLayers.SuspendLayout()
         Me.tabTitles.SuspendLayout()
         Me.grpLegendTitle.SuspendLayout()
@@ -92,13 +91,13 @@ Partial Class sdgPlots
         '
         'tabFacet
         '
+        Me.tabFacet.Controls.Add(Me.ucrNudNumberofRows)
         Me.tabFacet.Controls.Add(Me.ucrChkNoOfRowsOrColumns)
         Me.tabFacet.Controls.Add(Me.ucrChkIncludeFacets)
         Me.tabFacet.Controls.Add(Me.ucrChkFreeSpace)
         Me.tabFacet.Controls.Add(Me.ucrChkFreeScalesY)
         Me.tabFacet.Controls.Add(Me.ucrChkFreeScalesX)
         Me.tabFacet.Controls.Add(Me.ucrChkMargin)
-        Me.tabFacet.Controls.Add(Me.nudNumberofRows)
         Me.tabFacet.Controls.Add(Me.ucrFacetSelector)
         Me.tabFacet.Controls.Add(Me.rdoHorizontal)
         Me.tabFacet.Controls.Add(Me.rdoVertical)
@@ -163,13 +162,6 @@ Partial Class sdgPlots
         Me.ucrChkMargin.Name = "ucrChkMargin"
         Me.ucrChkMargin.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkMargin.TabIndex = 24
-        '
-        'nudNumberofRows
-        '
-        Me.nudNumberofRows.Location = New System.Drawing.Point(146, 254)
-        Me.nudNumberofRows.Name = "nudNumberofRows"
-        Me.nudNumberofRows.Size = New System.Drawing.Size(51, 20)
-        Me.nudNumberofRows.TabIndex = 23
         '
         'ucrFacetSelector
         '
@@ -497,6 +489,18 @@ Partial Class sdgPlots
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(160, 41)
         Me.ucrBaseSubdialog.TabIndex = 1
         '
+        'ucrNudNumberofRows
+        '
+        Me.ucrNudNumberofRows.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumberofRows.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudNumberofRows.Location = New System.Drawing.Point(171, 252)
+        Me.ucrNudNumberofRows.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudNumberofRows.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumberofRows.Name = "ucrNudNumberofRows"
+        Me.ucrNudNumberofRows.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudNumberofRows.TabIndex = 31
+        Me.ucrNudNumberofRows.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'sdgPlots
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -515,7 +519,6 @@ Partial Class sdgPlots
         Me.tabctrlBoxSubdialog.ResumeLayout(False)
         Me.tabFacet.ResumeLayout(False)
         Me.tabFacet.PerformLayout()
-        CType(Me.nudNumberofRows, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabLayers.ResumeLayout(False)
         Me.tabTitles.ResumeLayout(False)
         Me.tabTitles.PerformLayout()
@@ -564,7 +567,6 @@ Partial Class sdgPlots
     Friend WithEvents ucrInputLegend As ucrInputTextBox
     Friend WithEvents tabCoordinates As TabPage
     Friend WithEvents lblWarning As Label
-    Friend WithEvents nudNumberofRows As NumericUpDown
     Friend WithEvents ucrChkNoOfRowsOrColumns As ucrCheck
     Friend WithEvents ucrChkIncludeFacets As ucrCheck
     Friend WithEvents ucrChkFreeSpace As ucrCheck
@@ -572,6 +574,7 @@ Partial Class sdgPlots
     Friend WithEvents ucrChkFreeScalesX As ucrCheck
     Friend WithEvents ucrChkMargin As ucrCheck
     Friend WithEvents ucrPnlHorizonatalVertical As UcrPanel
+    Friend WithEvents ucrNudNumberofRows As ucrNud
 End Class
 
 

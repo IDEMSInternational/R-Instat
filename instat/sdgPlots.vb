@@ -57,19 +57,53 @@ Public Class sdgPlots
         End If
         clsBaseOperator = clsNewOperator
         ucrInputGraphTitle.SetRCode(clsGraphTitleFunction, bReset)
+        ucrPnlHorizonatalVertical.SetRCode(clsRFacetFunction, bReset)
     End Sub
 
     Public Sub InitialiseControls()
-
         'facets tab 
         'Links the factor receivers, used for creating facets, with the selector. The variables need to be factors.
         ucr1stFactorReceiver.Selector = ucrFacetSelector
         ucr1stFactorReceiver.SetIncludedDataTypes({"factor"})
         ucr2ndFactorReceiver.Selector = ucrFacetSelector
         ucr2ndFactorReceiver.SetIncludedDataTypes({"factor"})
+
         ucrChkIncludeFacets.SetText("Include Facets")
         ucrChkNoOfRowsOrColumns.SetText("Fixed Number of Rows")
+
         ucrChkMargin.SetText("Margins")
+        ucrChkMargin.SetParameter(New RParameter("margins"))
+        ucrChkMargin.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+
+        ucrChkFreeScalesX.SetText("Free Scales X")
+        ucrChkFreeScalesY.SetText("Free Scales Y")
+
+        'this passes in parameter only if margin is checked. 
+        'should be visible when margin is chacked
+        ucrChkFreeSpace.SetText("Free Scales")
+        ucrChkFreeSpace.SetParameter(New RParameter("space"))
+        ucrChkFreeSpace.SetValueIfChecked("free")
+
+        ucrPnlHorizonatalVertical.SetParameter(New RParameter("dir"))
+        ucrPnlHorizonatalVertical.AddRadioButton(rdoVertical, "v")
+        ucrPnlHorizonatalVertical.AddRadioButton(rdoHorizontal, "h")
+
+        ucrChkIncludeFacets.AddToLinkedControls(ucrFacetSelector, {True})
+        ucrChkIncludeFacets.AddToLinkedControls(ucr1stFactorReceiver, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucr1stFactorReceiver.SetLinkedDisplayControl(lblFactor1)
+
+        ucrChkIncludeFacets.AddToLinkedControls(ucr2ndFactorReceiver, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucr1stFactorReceiver.SetLinkedDisplayControl(lblFactor2)
+
+        ucrChkIncludeFacets.AddToLinkedControls(ucrPnlHorizonatalVertical, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkIncludeFacets.AddToLinkedControls(ucrChkMargin, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeFacets.AddToLinkedControls(ucrChkFreeScalesX, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeFacets.AddToLinkedControls(ucrChkFreeScalesY, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeFacets.AddToLinkedControls(ucrChkFreeSpace, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkIncludeFacets.AddToLinkedControls(ucrChkNoOfRowsOrColumns, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkNoOfRowsOrColumns.AddToLinkedControls(ucrNudNumberofRows, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         'layers tab 
 
@@ -106,7 +140,7 @@ Public Class sdgPlots
         TitleDefaults()
         ucrChkIncludeFacets.Checked = False
         IncludeFacets()
-        nudNumberofRows.Value = 1
+        ucrNudNumberofRows.Value = 1
         ucrFacetSelector.Reset()
 
         ucr1stFactorReceiver.SetMeAsReceiver()
@@ -142,7 +176,7 @@ Public Class sdgPlots
         ucrPlotsAdditionalLayers.SetGGplotFunction(clsRggplotFunction)
         ucrPlotsAdditionalLayers.SetRSyntax(clsRsyntax)
         'This is necessary to make sure the minimum number of fixed rows or columns is 1.
-        nudNumberofRows.Minimum = 1
+        ucrNudNumberofRows.Minimum = 1
 
         'Set's the X Axis tab to X mode and the YAxis tab to Y mode (each tab contains a generic ucrAxis with internal X or Y boolean setting).
         'Also carry the RSyntax through to these ucr's .
@@ -172,42 +206,47 @@ Public Class sdgPlots
     Private Sub IncludeFacets()
         'If the user wants facets, the facets options need to be shown, otherwise hide them.
         If ucrChkIncludeFacets.Checked Then
-            ucrFacetSelector.Visible = True
-            ucr1stFactorReceiver.Visible = True
-            ucr2ndFactorReceiver.Visible = True
-            lblFactor1.Visible = True
-            lblFactor2.Visible = True
-            rdoHorizontal.Visible = True
-            rdoHorizontal.Checked = True
-            rdoVertical.Visible = True
+            'ucrFacetSelector.Visible = True
+            'ucr1stFactorReceiver.Visible = True
+            'ucr2ndFactorReceiver.Visible = True
+            'lblFactor1.Visible = True
+            'lblFactor2.Visible = True
+
+            'rdoHorizontal.Visible = True
+            'rdoHorizontal.Checked = True
+            'rdoVertical.Visible = True
+
+            'ucrChkMargin.Visible = True
+            'ucrChkFreeScalesX.Visible = True
+            'ucrChkFreeScalesY.Visible = True
+            'ucrChkFreeSpace.Visible = True
+            'ucrNudNumberofRows.Visible = True
+            'ucrChkNoOfRowsOrColumns.Visible = True
+
             ucrChkNoOfRowsOrColumns.Checked = False
-            nudNumberofRows.Visible = True
             ucrChkMargin.Checked = False
             ucrChkFreeScalesX.Checked = False
             ucrChkFreeScalesY.Checked = False
             ucrChkFreeSpace.Checked = False
-            ucrChkMargin.Visible = True
-            ucrChkFreeScalesX.Visible = True
-            ucrChkFreeScalesY.Visible = True
-            ucrChkFreeSpace.Visible = True
+
             'In case IncludeFacets is checked, the facets need to be set. Still might not be included as RSyntax parameter if no no variable has been set for faceting, but this is then decided in the IncludeFacetsParameter below.
             SetFacets()
             SecondFactorReceiverEnabled()
-            ucrChkNoOfRowsOrColumns.Visible = True
+
         Else
-            ucrFacetSelector.Visible = False
-            ucr1stFactorReceiver.Visible = False
-            ucr2ndFactorReceiver.Visible = False
-            lblFactor1.Visible = False
-            lblFactor2.Visible = False
-            rdoHorizontal.Visible = False
-            rdoVertical.Visible = False
-            ucrChkMargin.Visible = False
-            ucrChkFreeScalesX.Visible = False
-            ucrChkFreeScalesY.Visible = False
-            ucrChkNoOfRowsOrColumns.Visible = False
-            nudNumberofRows.Visible = False
-            ucrChkFreeSpace.Visible = False
+            'ucrFacetSelector.Visible = False
+            'ucr1stFactorReceiver.Visible = False
+            'ucr2ndFactorReceiver.Visible = False
+            'lblFactor1.Visible = False
+            'lblFactor2.Visible = False
+            'rdoHorizontal.Visible = False
+            'rdoVertical.Visible = False
+            'ucrChkMargin.Visible = False
+            'ucrChkFreeScalesX.Visible = False
+            'ucrChkFreeScalesY.Visible = False
+            'ucrChkNoOfRowsOrColumns.Visible = False
+            'ucrNudNumberofRows.Visible = False
+            'ucrChkFreeSpace.Visible = False
         End If
         'Then the RSyntax is populated with the appropriate facet parameter (as part of the whole ggplot script) or not.
         IncludeFacetsParameter()
@@ -288,11 +327,11 @@ Public Class sdgPlots
         'This sub is called in the wrap case to set up the parameter fixing the number of rows or columns when working in the horizontal or vertical case.
         If ucrChkNoOfRowsOrColumns.Checked Then
             If rdoHorizontal.Checked Then
-                clsRFacetFunction.AddParameter("nrow", nudNumberofRows.Value)
+                clsRFacetFunction.AddParameter("nrow", ucrNudNumberofRows.Value)
                 clsRFacetFunction.RemoveParameterByName("ncol")
             Else
                 clsRFacetFunction.RemoveParameterByName("nrow")
-                clsRFacetFunction.AddParameter("ncol", nudNumberofRows.Value)
+                clsRFacetFunction.AddParameter("ncol", ucrNudNumberofRows.Value)
             End If
         Else
             clsRFacetFunction.RemoveParameterByName("ncol")
@@ -339,10 +378,10 @@ Public Class sdgPlots
             If (ucrChkMargin.Checked OrElse ucrChkFreeSpace.Checked OrElse (Not ucr2ndFactorReceiver.IsEmpty)) Then
                 ucrChkNoOfRowsOrColumns.Checked = False
                 ucrChkNoOfRowsOrColumns.Visible = False
-                nudNumberofRows.Visible = False
+                ucrNudNumberofRows.Visible = False
             Else
                 ucrChkNoOfRowsOrColumns.Visible = True
-                nudNumberofRows.Visible = ucrChkNoOfRowsOrColumns.Checked
+                ucrNudNumberofRows.Visible = ucrChkNoOfRowsOrColumns.Checked
             End If
         End If
     End Sub
@@ -365,7 +404,7 @@ Public Class sdgPlots
         SetFacets()
     End Sub
 
-    Private Sub rdoHorVer_CheckedChanged(sender As Object, e As EventArgs) Handles rdoHorizontal.CheckedChanged, rdoVertical.CheckedChanged
+    Private Sub ucrPnlHorizonatalVertical_ControlValueChanged() Handles ucrPnlHorizonatalVertical.ControlValueChanged
         If rdoHorizontal.Checked Then
             ucrChkNoOfRowsOrColumns.Text = "Fixed Number of Rows"
         ElseIf rdoVertical.Checked Then
@@ -375,11 +414,10 @@ Public Class sdgPlots
     End Sub
 
     Private Sub ucrChkNoOfRowsOrColumns_CheckedChanged() Handles ucrChkNoOfRowsOrColumns.ControlValueChanged
-        nudNumberofRows.Visible = ucrChkNoOfRowsOrColumns.Checked
         SetFacets()
     End Sub
 
-    Private Sub nudNumberofRows_TextChanged(sender As Object, e As EventArgs) Handles nudNumberofRows.TextChanged
+    Private Sub nudNumberofRows_TextChanged(sender As Object, e As EventArgs)
         SetFacets()
     End Sub
 
@@ -449,13 +487,13 @@ Public Class sdgPlots
 
 
     Private Sub ucrInputGraphTitle_NameChanged() Handles ucrInputGraphTitle.NameChanged
-        If Not ucrInputGraphTitle.IsEmpty Then
-            clsGraphTitleFunction.SetRCommand("ggtitle")
-            clsGraphTitleFunction.AddParameter("label", Chr(34) & ucrInputGraphTitle.GetText() & Chr(34))
-            clsRsyntax.AddOperatorParameter("ggtitle", clsRFunc:=clsGraphTitleFunction)
-        Else
-            clsRsyntax.RemoveOperatorParameter("ggtitle")
-        End If
+        'If Not ucrInputGraphTitle.IsEmpty Then
+        '    clsGraphTitleFunction.SetRCommand("ggtitle")
+        '    clsGraphTitleFunction.AddParameter("label", Chr(34) & ucrInputGraphTitle.GetText() & Chr(34))
+        '    clsRsyntax.AddOperatorParameter("ggtitle", clsRFunc:=clsGraphTitleFunction)
+        'Else
+        '    clsRsyntax.RemoveOperatorParameter("ggtitle")
+        'End If
     End Sub
 
     Private Sub chkOverwriteLegendTitle_CheckedChanged(sender As Object, e As EventArgs) Handles chkOverwriteLegendTitle.CheckedChanged
