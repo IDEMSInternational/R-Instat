@@ -118,6 +118,13 @@ Public Class sdgPlots
         ucrInputGraphTitle.SetParameter(New RParameter("label"))
         clsBaseOperator.AddParameter(clsGraphTitleparam)
 
+        ucrPnlLegendTitle.AddRadioButton(rdoLegendTitleAuto)
+        ucrPnlLegendTitle.AddRadioButton(rdoLegendTitleCustom)
+        ucrChkDisplayLegendTitle.SetText("Display")
+        ucrChkOverwriteLegendTitle.SetText("Overwrite Title")
+        ucrPnlLegendTitle.AddToLinkedControls(ucrChkDisplayLegendTitle, {rdoLegendTitleCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkDisplayLegendTitle.AddToLinkedControls(ucrChkOverwriteLegendTitle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkOverwriteLegendTitle.AddToLinkedControls(ucrInputLegend, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         'X Axis tab
 
         'Y Axis tab
@@ -137,7 +144,7 @@ Public Class sdgPlots
         tabLayers.Enabled = True
     End Sub
     Public Sub SetDefaults()
-        TitleDefaults()
+
         ucrChkIncludeFacets.Checked = False
         IncludeFacets()
         ucrNudNumberofRows.Value = 1
@@ -151,16 +158,7 @@ Public Class sdgPlots
         ucrYAxis.Reset()
         ucrInputThemes.SetName("theme_grey")
         rdoLegendTitleAuto.Checked = True
-        LegendDefaults()
         bLayersDefaultIsGlobal = False
-
-    End Sub
-
-    Private Sub TitleDefaults()
-        'chkDisplayLegendTitle.Checked = True
-        'chkOverwriteLegendTitle.Checked = False
-        'ucrInputLegend.Visible = False
-        'ucrInputGraphTitle.Reset()
     End Sub
 
     Public Sub Reset()
@@ -206,22 +204,6 @@ Public Class sdgPlots
     Private Sub IncludeFacets()
         'If the user wants facets, the facets options need to be shown, otherwise hide them.
         If ucrChkIncludeFacets.Checked Then
-            'ucrFacetSelector.Visible = True
-            'ucr1stFactorReceiver.Visible = True
-            'ucr2ndFactorReceiver.Visible = True
-            'lblFactor1.Visible = True
-            'lblFactor2.Visible = True
-
-            'rdoHorizontal.Visible = True
-            'rdoHorizontal.Checked = True
-            'rdoVertical.Visible = True
-
-            'ucrChkMargin.Visible = True
-            'ucrChkFreeScalesX.Visible = True
-            'ucrChkFreeScalesY.Visible = True
-            'ucrChkFreeSpace.Visible = True
-            'ucrNudNumberofRows.Visible = True
-            'ucrChkNoOfRowsOrColumns.Visible = True
 
             ucrChkNoOfRowsOrColumns.Checked = False
             ucrChkMargin.Checked = False
@@ -234,19 +216,7 @@ Public Class sdgPlots
             SecondFactorReceiverEnabled()
 
         Else
-            'ucrFacetSelector.Visible = False
-            'ucr1stFactorReceiver.Visible = False
-            'ucr2ndFactorReceiver.Visible = False
-            'lblFactor1.Visible = False
-            'lblFactor2.Visible = False
-            'rdoHorizontal.Visible = False
-            'rdoVertical.Visible = False
-            'ucrChkMargin.Visible = False
-            'ucrChkFreeScalesX.Visible = False
-            'ucrChkFreeScalesY.Visible = False
-            'ucrChkNoOfRowsOrColumns.Visible = False
-            'ucrNudNumberofRows.Visible = False
-            'ucrChkFreeSpace.Visible = False
+
         End If
         'Then the RSyntax is populated with the appropriate facet parameter (as part of the whole ggplot script) or not.
         IncludeFacetsParameter()
@@ -458,15 +428,6 @@ Public Class sdgPlots
         End If
     End Sub
 
-    Private Sub chkChangeLegendTitle_CheckedChanged(sender As Object, e As EventArgs) Handles chkDisplayLegendTitle.CheckedChanged
-        'The Overwrite Legend Title check box should only be available when the Display Legend Title is ticked.
-        If chkDisplayLegendTitle.Checked Then
-            chkOverwriteLegendTitle.Visible = True
-        Else
-            chkOverwriteLegendTitle.Visible = False
-        End If
-    End Sub
-
     'Question to be discussed/Task: This is the kind of subs that could go into a SetupPlotOptions procedure... also only called in two specific plots and not in the others ... Why ? (to be explored)
     Public Sub SetGgplotFunction(clsGgplotFunc As RFunction)
         'When the link for clsRggplotFunction has been changed, the ucrAdditionalLayers GgplotFunction needs to be updated.
@@ -496,36 +457,6 @@ Public Class sdgPlots
         'End If
     End Sub
 
-    Private Sub chkOverwriteLegendTitle_CheckedChanged(sender As Object, e As EventArgs) Handles chkOverwriteLegendTitle.CheckedChanged
-        If chkOverwriteLegendTitle.Checked Then
-            ucrInputLegend.Visible = True
-        Else
-            ucrInputLegend.Visible = False
-            ucrInputLegend.ResetText()
-        End If
-    End Sub
-
-    Public Sub LegendDefaults()
-        If rdoLegendTitleAuto.Checked Then
-            chkDisplayLegendTitle.Visible = False
-            chkOverwriteLegendTitle.Visible = False
-            chkOverwriteLegendTitle.Checked = False
-            ucrInputLegend.Visible = False
-            ucrInputLegend.ResetText()
-        ElseIf rdoLegendTitleCustom.Checked Then
-            chkDisplayLegendTitle.Visible = True
-            chkOverwriteLegendTitle.Visible = True
-        End If
-    End Sub
-
-    Private Sub rdoLegendTitleAuto_CheckedChanged(sender As Object, e As EventArgs) Handles rdoLegendTitleAuto.CheckedChanged
-        LegendDefaults()
-    End Sub
-
-    Private Sub rdoLegendTitleCustom_CheckedChanged(sender As Object, e As EventArgs) Handles rdoLegendTitleCustom.CheckedChanged
-        LegendDefaults()
-    End Sub
-
     Public Property bLayersDefaultIsGlobal As Boolean
         'Warning: This is used to decide whether the default setting of the first created layer should be to apply aes on all layers. Indeed, coming from plotoptions, it might be that the first layer is the "first additional layer" (don't want to ApplyOnAllLayers), whereas coming from generalforgraphics, the first layer is the first layer. This should be eliminated when the plotoptions sdg will be edited to have as first layer the non-editable layer coming from the main dlg. See issue #1948
         'It is only used in the set defaults here, which sets it to false
@@ -548,7 +479,7 @@ Public Class sdgPlots
         End If
     End Sub
 
-    Private Sub ucrChkNoOfRowsOrColumns_CheckedChanged(ucrChangedControl As ucrCore) Handles ucrChkNoOfRowsOrColumns.ControlValueChanged
+    Private Sub grpLegendTitle_Enter(sender As Object, e As EventArgs) Handles grpLegendTitle.Enter
 
     End Sub
     'Warning/Task to be discussed: need to disable ok on dlg's when layers are not complete on subdialogues + warning message... 
