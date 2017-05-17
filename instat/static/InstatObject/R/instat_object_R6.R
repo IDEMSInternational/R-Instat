@@ -1260,8 +1260,8 @@ instat_object$set("public", "has_database_connection", function() {
 }
 )
 
-instat_object$set("public", "database_connect", function(dbname, user, host, port, drv = MySQL(), password) {
-  #password <- getPass(paste0(username, " password:"))
+instat_object$set("public", "database_connect", function(dbname, user, host, port, drv = MySQL()) {
+  password <- getPass(paste0(user, " password:"))
   out <- NULL
   out <- dbConnect(drv = drv, dbname = dbname, user = user, password = password, host = host, port = port)
   if(!is.null(out)) {
@@ -1291,8 +1291,10 @@ instat_object$set("public", "database_disconnect", function() {
 instat_object$set("public", "import_from_climsoft", function(stations = c(), elements = c(), include_observation_data = FALSE, start_date = "", end_date = "") {
   #need to perform checks here
   con = self$get_database_connection()
-  my_stations = paste0("(", paste(as.character(stations), collapse=", "), ")")
-  station_info <- dbGetQuery(con, paste0("SELECT * FROM station WHERE stationID in ", my_stations, ";"))
+  if(!is.null(stations)){
+    my_stations = paste0("(", paste(as.character(stations), collapse=", "), ")")
+    station_info <- dbGetQuery(con, paste0("SELECT * FROM station WHERE stationID in ", my_stations, ";"))
+  }
   date_bounds=""
   if(start_date!=""){
     if(try(!is.na(as.Date( start_date, format= "%Y-%m-%d")))){
@@ -1302,7 +1304,6 @@ instat_object$set("public", "import_from_climsoft", function(stations = c(), ele
       stop("start_date format should be yyyy-mm-yy.")
     }
   }
-  
   if(end_date!=""){
     if(try(!is.na(as.Date(end_date, format= "%Y-%m-%d")))){
       date_bounds = paste0(date_bounds, " AND obsDatetime <",sQuote(end_date))
@@ -1318,7 +1319,14 @@ instat_object$set("public", "import_from_climsoft", function(stations = c(), ele
     element_id_vec = paste0("(", paste0(sprintf("%d", element_ids$elementID), collapse = ", "), ")")
   }
   if(include_observation_data){
-    station_data <- dbGetQuery(con, paste0("SELECT observationfinal.recordedFrom, observationfinal.describedBy, obselement.abbreviation, obselement.elementName,observationfinal.obsDatetime,observationfinal.obsValue FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy AND observationfinal.recordedFrom IN", my_stations, "AND observationfinal.describedBy IN", element_id_vec, date_bounds, " ORDER BY observationfinal.recordedFrom, observationfinal.describedBy;"))
+    if(!is.null(stations)){
+      station_data <- dbGetQuery(con, paste0("SELECT observationfinal.recordedFrom, observationfinal.describedBy, obselement.abbreviation, obselement.elementName,observationfinal.obsDatetime,observationfinal.obsValue FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy AND observationfinal.recordedFrom IN", my_stations, "AND observationfinal.describedBy IN", element_id_vec, date_bounds, " ORDER BY observationfinal.recordedFrom, observationfinal.describedBy;"))
+    }
+    else{
+      station_data <- dbGetQuery(con, paste0("SELECT observationfinal.recordedFrom, observationfinal.describedBy, obselement.abbreviation, obselement.elementName,observationfinal.obsDatetime,observationfinal.obsValue FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy AND observationfinal.describedBy IN", element_id_vec, date_bounds, " ORDER BY observationfinal.recordedFrom, observationfinal.describedBy;"))
+      my_stations = paste0("(", paste(as.character(unique(station_data$recordedFrom)), collapse=", "), ")")
+      station_info <- dbGetQuery(con, paste0("SELECT * FROM station WHERE stationID in ", my_stations, ";"))
+    }
     data_list <- list(station_info, station_data)
     names(data_list) = c("station_info","station_data")
   }

@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgClimSoft
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class dlgClimSoft
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.cmdEstablishConnection = New System.Windows.Forms.Button()
@@ -129,7 +129,9 @@ Partial Class dlgClimSoft
         Me.ucrReceiverMultipleElements.Name = "ucrReceiverMultipleElements"
         Me.ucrReceiverMultipleElements.Selector = Nothing
         Me.ucrReceiverMultipleElements.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverMultipleElements.strNcFilePath = ""
         Me.ucrReceiverMultipleElements.TabIndex = 5
+        Me.ucrReceiverMultipleElements.ucrSelector = Nothing
         '
         'ucrReceiverMultipleStations
         '
@@ -139,7 +141,9 @@ Partial Class dlgClimSoft
         Me.ucrReceiverMultipleStations.Name = "ucrReceiverMultipleStations"
         Me.ucrReceiverMultipleStations.Selector = Nothing
         Me.ucrReceiverMultipleStations.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverMultipleStations.strNcFilePath = ""
         Me.ucrReceiverMultipleStations.TabIndex = 3
+        Me.ucrReceiverMultipleStations.ucrSelector = Nothing
         '
         'ucrBase
         '
