@@ -14,12 +14,11 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgDeleteRowsOrColums
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-
+    Private clsDeleteRows, clsDeleteColumns As RFunction
     Private Sub dlgDeleteRows_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -67,17 +66,23 @@ Public Class dlgDeleteRowsOrColums
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
+        clsDeleteColumns = New RFunction
+        clsDeleteRows = New RFunction
 
         ucrSelectorForDeleteColumns.Reset()
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_columns_in_data")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        clsDeleteRows.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_rows_in_data")
+        clsDeleteColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_columns_in_data")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDeleteColumns)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrSelectorForDeleteColumns.AddAdditionalCodeParameterPair(clsDeleteColumns, ucrSelectorForDeleteColumns.GetParameter, iAdditionalPairNo:=1)
+        ucrPnlColumnsOrRows.SetRCode(clsDeleteRows)
+        ucrPnlColumnsOrRows.SetRCode(clsDeleteColumns)
+        ucrNudRowsToDelete.SetRCode(clsDeleteRows)
+        ucrReceiverForColumnsToDelete.SetRCode(clsDeleteColumns)
+        ucrSelectorForDeleteColumns.SetRCode(clsDeleteRows)
     End Sub
-
     Private Sub TestOKEnabled()
         If rdoColumns.Checked Then
             If Not ucrReceiverForColumnsToDelete.IsEmpty() Then
@@ -115,10 +120,10 @@ Public Class dlgDeleteRowsOrColums
 
     Private Sub ucrPnlColumnsOrRows_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumnsOrRows.ControlValueChanged
         If rdoColumns.Checked Then
-            ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$remove_columns_in_data")
+            ucrBase.clsRsyntax.SetBaseRFunction(clsDeleteColumns)
             ucrSelectorForDeleteColumns.SetVariablesVisible(True)
         ElseIf rdoRows.Checked Then
-            ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$remove_rows_in_data")
+            ucrBase.clsRsyntax.SetBaseRFunction(clsDeleteRows)
             ucrSelectorForDeleteColumns.SetVariablesVisible(False)
         End If
     End Sub
