@@ -163,6 +163,7 @@ Public Class dlgTransformText
         ucrNewColName.SetSaveTypeAsColumn()
         ucrNewColName.SetDataFrameSelector(ucrSelectorForTransformText.ucrAvailableDataFrames)
         ucrNewColName.SetLabelText("Column Name:")
+        DialogSize()
     End Sub
 
     Private Sub SetDefaults()
@@ -279,6 +280,39 @@ Public Class dlgTransformText
         End If
     End Sub
 
+    Private Sub DialogSize()
+        If rdoConvertCase.Checked OrElse rdoTrim.Checked Then
+            grpParameters.Visible = True
+            grpParameters.Size = New Size(397, 57)
+            ucrNewColName.Location = New Point(10, 301)
+            ucrBase.Location = New Point(10, 326)
+            Me.Size = New Size(435, 422)
+        ElseIf rdoLength.Checked Then
+            grpParameters.Visible = False
+            ucrNewColName.Location = New Point(10, 237)
+            ucrBase.Location = New Point(10, 262)
+            Me.Size = New Size(435, 357)
+        ElseIf rdoSubstring.Checked Then
+            grpParameters.Visible = True
+            grpParameters.Size = New Size(397, 81)
+            ucrNewColName.Location = New Point(10, 327)
+            ucrBase.Location = New Point(10, 352)
+            Me.Size = New Size(435, 448)
+        ElseIf rdoPad.Checked Then
+            grpParameters.Visible = True
+            grpParameters.Size = New Size(397, 121)
+            ucrNewColName.Location = New Point(10, 365)
+            ucrBase.Location = New Point(10, 390)
+            Me.Size = New Size(435, 486)
+        Else
+            grpParameters.Visible = True
+            grpParameters.Size = New Size(397, 173)
+            ucrNewColName.Location = New Point(10, 417)
+            ucrBase.Location = New Point(10, 442)
+            Me.Size = New Size(435, 537)
+        End If
+    End Sub
+
     Private Sub ucrPnl_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOperation.ControlValueChanged, ucrInputTo.ControlValueChanged
         If rdoLength.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsLengthFunction)
@@ -343,6 +377,7 @@ Public Class dlgTransformText
             ucrBase.clsRsyntax.RemoveParameter("start")
             ucrBase.clsRsyntax.RemoveParameter("end")
         End If
+        DialogSize()
     End Sub
 
     Private Sub ucrSelector_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForTransformText.ControlValueChanged
