@@ -46,11 +46,16 @@ Public Class sdgPlots
             InitialiseControls()
         End If
         clsBaseOperator = clsNewOperator
+
         ucrInputGraphTitle.SetRCode(clsGraphTitleFunction, bReset)
         ucrPnlHorizonatalVertical.SetRCode(clsRFacetFunction, bReset)
         ucr1stFactorReceiver.SetRCode(clsRFacetFunction, bReset)
         ucr2ndFactorReceiver.SetRCode(clsRFacetFunction, bReset)
-
+        ucrChkMargin.SetRCode(clsRFacetFunction, bReset)
+        ucrChkFreeSpace.SetRCode(clsRFacetFunction, bReset)
+        ucrChkFreeScalesX.SetRCode(clsRFacetFunction, bReset)
+        ucrChkFreeScalesY.SetRCode(clsRFacetFunction, bReset)
+        ucrNudNumberofRows.SetRCode(clsRFacetFunction, bReset)
     End Sub
 
     Public Sub InitialiseControls()
@@ -78,10 +83,10 @@ Public Class sdgPlots
         ucrChkFreeSpace.SetValueIfChecked("free")
 
         ucrPnlHorizonatalVertical.SetParameter(New RParameter("dir"))
-        ucrPnlHorizonatalVertical.AddRadioButton(rdoVertical, "v")
-        ucrPnlHorizonatalVertical.AddRadioButton(rdoHorizontal, "h")
+        ucrPnlHorizonatalVertical.AddRadioButton(rdoVertical, Chr(34) & "v" & Chr(34))
+        ucrPnlHorizonatalVertical.AddRadioButton(rdoHorizontal, Chr(34) & "h" & Chr(34))
 
-        ucrChkIncludeFacets.AddToLinkedControls(ucrFacetSelector, {True})
+        ucrChkIncludeFacets.AddToLinkedControls(ucrFacetSelector, {True}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=False)
         ucrChkIncludeFacets.AddToLinkedControls(ucr1stFactorReceiver, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucr1stFactorReceiver.SetLinkedDisplayControl(lblFactor1)
 
