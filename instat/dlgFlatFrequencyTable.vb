@@ -68,7 +68,7 @@ Public Class dlgFlatFrequencyTable
 
         clsFTable.SetPackageName("stats")
         clsFTable.SetRCommand("ftable")
-        clsFTable.AddParameter("table", clsRFunctionParameter:=clsTable)
+        clsFTable.AddParameter("x", clsRFunctionParameter:=clsTable)
         ucrBase.clsRsyntax.SetBaseRFunction(clsFTable)
     End Sub
 
@@ -95,11 +95,11 @@ Public Class dlgFlatFrequencyTable
 
     Private Sub ucrChkAddMargins_ControlValueChanged(ucrchangedcontrol As ucrCore) Handles ucrChkAddMargins.ControlValueChanged
         If ucrChkAddMargins.Checked Then
-            clsFTable.RemoveParameterByName("table")
+            clsFTable.RemoveParameterByName("x")
             clsFTable.AddParameter("x", clsRFunctionParameter:=clsAddMargin)
         Else
             clsFTable.RemoveParameterByName("x")
-            clsFTable.AddParameter("table", clsRFunctionParameter:=clsTable)
+            clsFTable.AddParameter("x", clsRFunctionParameter:=clsTable)
         End If
     End Sub
 
@@ -109,7 +109,7 @@ Public Class dlgFlatFrequencyTable
             clsGetVar.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
             clsGetVar.AddParameter("data_name", Chr(34) & ucrSelectorDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
             clsGetVar.AddParameter("col_names", "c(" & ucrColumnVariable.GetVariableNames & "," & ucrRowVariable.GetVariableNames & ")")
-            clsTable.AddParameter("y", clsRFunctionParameter:=clsGetVar)
+            clsTable.AddParameter("x", clsRFunctionParameter:=clsGetVar)
         End If
     End Sub
 
