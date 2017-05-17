@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgJitter
     Public bReset As Boolean = True
     Public bFirstLoad As Boolean = True
-    Private clsDefaultFunction As New RFunction
+    Private clsRunif As New RFunction
 
     Private Sub dlgJitter_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -63,8 +63,11 @@ Public Class dlgJitter
 
         ucrPnlDistance.AddParameterPresentCondition(rdoMaximumDistanceFromZero, "max")
         ucrPnlDistance.AddParameterPresentCondition(rdoMaximumDistanceFromZero, "min")
+        ucrPnlDistance.AddParameterPresentCondition(rdoMaximumDistanceFromZero, "n", True)
+
         ucrPnlDistance.AddParameterPresentCondition(rdoMinimumAndMaximum, "max")
         ucrPnlDistance.AddParameterPresentCondition(rdoMinimumAndMaximum, "min")
+        ucrPnlDistance.AddParameterPresentCondition(rdoMinimumAndMaximum, "n", False)
 
         ' link
         ucrPnlDistance.AddToLinkedControls(ucrInputMaximumDistanceFromZero, {rdoMaximumDistanceFromZero}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=1)
@@ -90,6 +93,12 @@ Public Class dlgJitter
         ucrInputMaximum.SetRDefault(1)
         ucrInputMaximum.AddQuotesIfUnrecognised = False
 
+        ucrInputMaximumDistanceFromZero.SetParameter(New RParameter("max"))
+        ucrInputMaximumDistanceFromZero.bAddRemoveParameter = False
+        ucrInputMaximumDistanceFromZero.SetValidationTypeAsNumeric()
+        ucrInputMaximumDistanceFromZero.SetRDefault(1)
+        ucrInputMaximumDistanceFromZero.AddQuotesIfUnrecognised = False
+
         'ucrInputNewColName
         ucrInputNewColName.SetIsComboBox()
         ucrInputNewColName.SetSaveTypeAsColumn()
@@ -97,33 +106,34 @@ Public Class dlgJitter
         ucrInputNewColName.SetLabelText("Column Name:")
         ucrInputNewColName.SetPrefix("Jitter_values")
 
-        clsDefaultFunction.AddParameter("n", ucrSelectorForJitter.ucrAvailableDataFrames.iDataFrameLength)
     End Sub
 
     Private Sub SetDefaults()
-        clsDefaultFunction = New RFunction
+        clsRunif = New RFunction
 
         ucrSelectorForJitter.Reset()
 
-        clsDefaultFunction.SetRCommand("runif")
-        clsDefaultFunction.AddParameter("min", "-1")
-        clsDefaultFunction.AddParameter("max", "1")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+        clsRunif.SetRCommand("runif")
+        clsRunif.AddParameter("min", "-1")
+        clsRunif.AddParameter("max", "1")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRunif)
+        clsRunif.AddParameter("n", ucrSelectorForJitter.ucrAvailableDataFrames.iDataFrameLength)
 
         'Operations Set
         ucrBase.clsRsyntax.SetOperation("+")
-        ucrBase.clsRsyntax.SetOperatorParameter(0, clsRFunc:=clsDefaultFunction)
+        ucrBase.clsRsyntax.SetOperatorParameter(0, clsRFunc:=clsRunif)
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrInputNewColName.GetText, strTempDataframe:=ucrSelectorForJitter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputNewColName.GetText)
         ucrBase.clsRsyntax.SetBaseROperator(ucrBase.clsRsyntax.clsBaseOperator)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
         'SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrPnlDistance.SetRCode(clsDefaultFunction, bReset)
-        ucrInputMaximum.SetRCode(clsDefaultFunction, bReset)
-        ucrInputMinimum.SetRCode(clsDefaultFunction, bReset)
-        ucrInputMaximumDistanceFromZero.SetRCode(clsDefaultFunction, bReset)
-        ucrSelectorForJitter.SetRCode(clsDefaultFunction, bReset)
+        ucrInputMaximumDistanceFromZero.AddAdditionalCodeParameterPair(clsRunif, New RParameter("min"), iAdditionalPairNo:=1)
+        ucrPnlDistance.SetRCode(clsRunif, bReset)
+        ucrInputMaximum.SetRCode(clsRunif, bReset)
+        ucrInputMinimum.SetRCode(clsRunif, bReset)
+        ucrInputMaximumDistanceFromZero.SetRCode(clsRunif, bReset)
+        ucrSelectorForJitter.SetRCode(clsRunif, bReset)
         ucrInputNewColName.SetRCode(ucrBase.clsRsyntax.clsBaseOperator, bReset)
         ucrReceiverJitter.SetRCode(ucrBase.clsRsyntax.clsBaseOperator, bReset)
     End Sub
@@ -145,28 +155,28 @@ Public Class dlgJitter
     Private Sub Distance()
         If rdoMaximumDistanceFromZero.Checked Then
             If Not ucrInputMaximumDistanceFromZero.IsEmpty Then
-                clsDefaultFunction.AddParameter("min", -(ucrInputMaximumDistanceFromZero.GetText))
-                clsDefaultFunction.AddParameter("max", ucrInputMaximumDistanceFromZero.GetText)
+                clsRunif.AddParameter("min", -(ucrInputMaximumDistanceFromZero.GetText))
+                clsRunif.AddParameter("max", ucrInputMaximumDistanceFromZero.GetText)
             Else
-                clsDefaultFunction.RemoveParameterByName("min")
-                clsDefaultFunction.RemoveParameterByName("max")
+                clsRunif.RemoveParameterByName("min")
+                clsRunif.RemoveParameterByName("max")
             End If
         Else
             If Not ucrInputMinimum.IsEmpty Then
-                clsDefaultFunction.AddParameter("min", ucrInputMinimum.GetText)
+                clsRunif.AddParameter("min", ucrInputMinimum.GetText)
             Else
-                clsDefaultFunction.RemoveParameterByName("min")
+                clsRunif.RemoveParameterByName("min")
             End If
             If Not ucrInputMaximum.IsEmpty Then
-                clsDefaultFunction.AddParameter("max", ucrInputMaximum.GetText) '
+                clsRunif.AddParameter("max", ucrInputMaximum.GetText) '
             Else
-                clsDefaultFunction.RemoveParameterByName("max")
+                clsRunif.RemoveParameterByName("max")
             End If
         End If
     End Sub
 
     Private Sub ucrSelectorForJitter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForJitter.ControlValueChanged
-        clsDefaultFunction.AddParameter("n", ucrSelectorForJitter.ucrAvailableDataFrames.iDataFrameLength)
+        clsRunif.AddParameter("n", ucrSelectorForJitter.ucrAvailableDataFrames.iDataFrameLength)
     End Sub
 
     Private Sub ucrForDistance_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputMaximum.ControlValueChanged, ucrInputMaximumDistanceFromZero.ControlValueChanged, ucrInputMinimum.ControlValueChanged, ucrPnlDistance.ControlValueChanged
