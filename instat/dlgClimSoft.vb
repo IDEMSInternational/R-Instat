@@ -14,8 +14,8 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
+
 Public Class dlgClimSoft
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
@@ -40,6 +40,7 @@ Public Class dlgClimSoft
         ReopenDialog()
         autoTranslate(Me)
     End Sub
+
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 329
 
@@ -57,18 +58,42 @@ Public Class dlgClimSoft
         ucrReceiverMultipleElements.strDatabaseQuery = "SELECT obselement.elementName FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy GROUP BY observationfinal.describedBy;"
         ucrReceiverMultipleElements.SetLinkedDisplayControl(lblElements)
 
-        ucrChkObservationData.SetText("Observation Data")
         ucrChkObservationData.SetParameter(New RParameter("include_observation_data", 2))
+        ucrChkObservationData.SetText("Observation Data")
         ucrChkObservationData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkObservationData.SetRDefault("FALSE")
 
         ucrInputStartDate.SetParameter(New RParameter("start_date", 3))
         ucrInputStartDate.SetLinkedDisplayControl(lblStartDate)
         ttClimsoft.SetToolTip(ucrInputStartDate.txtInput, "yyyy-mm-dd")
+
         ucrInputEndDate.SetParameter(New RParameter("end_date", 4))
         ucrInputEndDate.SetLinkedDisplayControl(lblEndDate)
         ttClimsoft.SetToolTip(ucrInputEndDate.txtInput, "yyyy-mm-dd")
+
         ucrChkObservationData.AddToLinkedControls({ucrInputStartDate, ucrInputEndDate, ucrReceiverMultipleElements}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+    End Sub
+
+    Private Sub SetDefaults()
+        clsRImportFromClimsoft = New RFunction
+
+        ucrSelectorForClimSoft.Reset()
+        ucrReceiverMultipleStations.SetMeAsReceiver()
+        ucrInputStartDate.SetName("")
+        ucrInputEndDate.SetName("")
+
+        clsRDatabaseConnect.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$database_connect")
+        clsRDatabaseDisconnect.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$database_disconnect")
+        clsRImportFromClimsoft.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_from_climsoft")
+        clsHasConnection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$has_database_connection")
+        ucrBase.clsRsyntax.AddParameter("include_observation_data", "FALSE")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRImportFromClimsoft)
+
+        bResetSubdialog = True
+    End Sub
+
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -83,23 +108,10 @@ Public Class dlgClimSoft
 
     End Sub
 
-    Public Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-    End Sub
-
-    Private Sub SetDefaults()
-        clsRImportFromClimsoft = New RFunction
-        ucrSelectorForClimSoft.Reset()
-        ucrReceiverMultipleStations.SetMeAsReceiver()
-        ucrInputStartDate.SetName("")
-        ucrInputEndDate.SetName("")
-        clsRDatabaseConnect.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$database_connect")
-        clsRDatabaseDisconnect.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$database_disconnect")
-        clsRImportFromClimsoft.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_from_climsoft")
-        clsHasConnection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$has_database_connection")
-        ucrBase.clsRsyntax.AddParameter("include_observation_data", "FALSE")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsRImportFromClimsoft)
-        bResetSubdialog = True
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOKEnabled()
     End Sub
 
     Private Sub cmdEstablishConnection_Click(sender As Object, e As EventArgs) Handles cmdEstablishConnection.Click
@@ -112,12 +124,6 @@ Public Class dlgClimSoft
 
     Private Sub SetConnectionActiveStatus(bCurrentStatus As Boolean)
         bConnectionActive = bCurrentStatus
-    End Sub
-
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
-        SetRCodeForControls(True)
-        TestOKEnabled()
     End Sub
 
     Private Sub ucrReceiverMultipleStations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleStations.ControlValueChanged
