@@ -51,7 +51,7 @@ Partial Class dlgFitCorruptionModel
         Me.ucrBase.Location = New System.Drawing.Point(10, 351)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 1
+        Me.ucrBase.TabIndex = 11
         '
         'ucrReceiverControlVariables
         '
@@ -61,7 +61,7 @@ Partial Class dlgFitCorruptionModel
         Me.ucrReceiverControlVariables.Name = "ucrReceiverControlVariables"
         Me.ucrReceiverControlVariables.Selector = Nothing
         Me.ucrReceiverControlVariables.Size = New System.Drawing.Size(120, 85)
-        Me.ucrReceiverControlVariables.TabIndex = 2
+        Me.ucrReceiverControlVariables.TabIndex = 4
         '
         'ucrReceiverIndicators
         '
@@ -71,7 +71,7 @@ Partial Class dlgFitCorruptionModel
         Me.ucrReceiverIndicators.Name = "ucrReceiverIndicators"
         Me.ucrReceiverIndicators.Selector = Nothing
         Me.ucrReceiverIndicators.Size = New System.Drawing.Size(120, 85)
-        Me.ucrReceiverIndicators.TabIndex = 3
+        Me.ucrReceiverIndicators.TabIndex = 6
         '
         'ucrReceiverOutput
         '
@@ -81,14 +81,14 @@ Partial Class dlgFitCorruptionModel
         Me.ucrReceiverOutput.Name = "ucrReceiverOutput"
         Me.ucrReceiverOutput.Selector = Nothing
         Me.ucrReceiverOutput.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverOutput.TabIndex = 4
+        Me.ucrReceiverOutput.TabIndex = 2
         '
         'cmdDisplayOptions
         '
         Me.cmdDisplayOptions.Location = New System.Drawing.Point(305, 293)
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
         Me.cmdDisplayOptions.Size = New System.Drawing.Size(105, 23)
-        Me.cmdDisplayOptions.TabIndex = 12
+        Me.cmdDisplayOptions.TabIndex = 9
         Me.cmdDisplayOptions.Text = "Display Options"
         Me.cmdDisplayOptions.UseVisualStyleBackColor = True
         '
@@ -100,7 +100,7 @@ Partial Class dlgFitCorruptionModel
         Me.ucrInputModelPreview.Location = New System.Drawing.Point(96, 294)
         Me.ucrInputModelPreview.Name = "ucrInputModelPreview"
         Me.ucrInputModelPreview.Size = New System.Drawing.Size(200, 21)
-        Me.ucrInputModelPreview.TabIndex = 11
+        Me.ucrInputModelPreview.TabIndex = 8
         '
         'lblModelPreview
         '
@@ -108,7 +108,7 @@ Partial Class dlgFitCorruptionModel
         Me.lblModelPreview.Location = New System.Drawing.Point(7, 297)
         Me.lblModelPreview.Name = "lblModelPreview"
         Me.lblModelPreview.Size = New System.Drawing.Size(80, 13)
-        Me.lblModelPreview.TabIndex = 10
+        Me.lblModelPreview.TabIndex = 7
         Me.lblModelPreview.Text = "Model Preview:"
         '
         'ucrSaveCorruptionModel
@@ -116,7 +116,7 @@ Partial Class dlgFitCorruptionModel
         Me.ucrSaveCorruptionModel.Location = New System.Drawing.Point(10, 323)
         Me.ucrSaveCorruptionModel.Name = "ucrSaveCorruptionModel"
         Me.ucrSaveCorruptionModel.Size = New System.Drawing.Size(288, 24)
-        Me.ucrSaveCorruptionModel.TabIndex = 13
+        Me.ucrSaveCorruptionModel.TabIndex = 10
         '
         'lblControlVariables
         '
@@ -124,7 +124,7 @@ Partial Class dlgFitCorruptionModel
         Me.lblControlVariables.Location = New System.Drawing.Point(266, 66)
         Me.lblControlVariables.Name = "lblControlVariables"
         Me.lblControlVariables.Size = New System.Drawing.Size(89, 13)
-        Me.lblControlVariables.TabIndex = 14
+        Me.lblControlVariables.TabIndex = 3
         Me.lblControlVariables.Text = "Control Variables:"
         '
         'lblCorruptionOutput
@@ -133,7 +133,7 @@ Partial Class dlgFitCorruptionModel
         Me.lblCorruptionOutput.Location = New System.Drawing.Point(266, 21)
         Me.lblCorruptionOutput.Name = "lblCorruptionOutput"
         Me.lblCorruptionOutput.Size = New System.Drawing.Size(93, 13)
-        Me.lblCorruptionOutput.TabIndex = 15
+        Me.lblCorruptionOutput.TabIndex = 1
         Me.lblCorruptionOutput.Text = "Corruption Output:"
         '
         'lblIndicators
@@ -142,7 +142,7 @@ Partial Class dlgFitCorruptionModel
         Me.lblIndicators.Location = New System.Drawing.Point(265, 176)
         Me.lblIndicators.Name = "lblIndicators"
         Me.lblIndicators.Size = New System.Drawing.Size(56, 13)
-        Me.lblIndicators.TabIndex = 16
+        Me.lblIndicators.TabIndex = 5
         Me.lblIndicators.Text = "Indicators:"
         '
         'dlgFitCorruptionModel
