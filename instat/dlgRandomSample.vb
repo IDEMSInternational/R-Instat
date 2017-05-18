@@ -44,9 +44,13 @@ Public Class dlgRandomSample
         ucrDistWithParameters.SetRDistributions()
         clsDistribtionFunction = ucrDistWithParameters.clsCurrRFunction
         ucrSampleSize.SetDataFrameSelector(ucrSelectorRandomSamples)
+        ucrSelectorRandomSamples.SetParameter(New RParameter("nn"))
 
         ucrChkSetSeed.SetText("Set Seed")
+        ucrChkSetSeed.AddFunctionNamesCondition(False, "set.seed")
 
+        ucrNudSetSeed.SetParameter(New RParameter("seed", 0))
+        ucrChkSetSeed.AddToLinkedControls(ucrLinked:=ucrNudSetSeed, objValues:={True}, bNewLinkedHideIfParameterMissing:=True)
         ucrNudSetSeed.SetMinMax(Integer.MaxValue, Integer.MinValue)
 
         ucrSaveRandomSample.SetSaveTypeAsColumn()
@@ -75,7 +79,12 @@ Public Class dlgRandomSample
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrChkSetSeed.SetRCode(clsSetSeed, bReset)
+        ucrNudSetSeed.SetRCode(clsSetSeed, bReset)
+        ucrNudNumberOfSamples.SetRCode(clsDistribtionFunction)
+        ucrSelectorRandomSamples.SetRCode(clsDistribtionFunction, bReset)
+        ucrSelectorRandomSamples.AddAdditionalCodeParameterPair(clsDistribtionFunction, New RParameter("n"), iAdditionalPairNo:=1)
+
     End Sub
 
     Private Sub SetNewColumName()
@@ -88,8 +97,8 @@ Public Class dlgRandomSample
         Else
             ucrSaveRandomSample.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
             ucrSaveRandomSample.SetLabelText("Prefix for New Columns:")
+            ucrSaveRandomSample.SetPrefix("")
             If Not ucrSaveRandomSample.bUserTyped Then
-                ucrSaveRandomSample.SetPrefix("")
                 ucrSaveRandomSample.SetName("Rand")
             End If
         End If
@@ -177,7 +186,6 @@ Public Class dlgRandomSample
         If ucrChkSetSeed.Checked Then
             frmMain.clsRLink.RunScript(clsSetSeed.ToScript(), strComment:="dlgRandomSample: Setting the seed for random number generator")
         End If
-        TestOKEnabled()
     End Sub
 
     Private Sub chkSetSeed_CheckedChanged(sender As Object, e As EventArgs)
