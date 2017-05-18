@@ -68,7 +68,6 @@ Public Class dlgRandomSample
         ucrSaveRandomSample.Reset()
         'ucrPrefixNewColumns.SetName("Rand")
         SetNewColumName()
-        clsMultipleSamplesFunction.SetRCommand("data.frame")
 
         'setseed fuction
         clsSetSeed.SetPackageName("base")
@@ -77,7 +76,6 @@ Public Class dlgRandomSample
 
         ucrNudNumberOfSamples.Value = 1
         SetDataFrameandDistributionParameters()
-        SetNumberOfSamplesParameters()
         ucrDistWithParameters.SetParameters()
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSaveRandomSample.GetText, strTempDataframe:=ucrSelectorRandomSamples.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveRandomSample.GetText)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDistribtionFunction)
@@ -86,7 +84,7 @@ Public Class dlgRandomSample
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrChkSetSeed.SetRCode(clsSetSeed, bReset)
         ucrNudSetSeed.SetRCode(clsSetSeed, bReset)
-        ucrNudNumberOfSamples.SetRCode(clsDistribtionFunction)
+        'ucrNudNumberOfSamples.SetRCode(clsDistribtionFunction)
         ucrSaveRandomSample.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
@@ -123,40 +121,39 @@ Public Class dlgRandomSample
         SetNewColumName()
     End Sub
 
-    'Private Sub SetAssignTo()
-    '    If ucrNudNumberOfSamples.Text <> "" Then
-    '        If ucrNudNumberOfSamples.Value = 1 Then
-    '            ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSaveRandomSample.GetText, strTempDataframe:=ucrSelectorRandomSamples.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveRandomSample.GetText)
-    '        Else
-    '            ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSaveRandomSample.GetText, strTempDataframe:=ucrSelectorRandomSamples.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveRandomSample.GetText)
-    '        End If
-    '    Else
-    '        ucrBase.clsRsyntax.RemoveAssignTo()
-    '    End If
-    'End Sub
 
     Private Sub SetNumberOfSamplesParameters()
-        'If ucrNudNumberOfSamples.Text <> "" Then
         If ucrNudNumberOfSamples.Value = 1 Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsDistribtionFunction)
-            Else
-                clsDistribtionFunction.RemoveAssignTo()
-                clsMultipleSamplesFunction.ClearParameters()
-                For i = 1 To ucrNudNumberOfSamples.Value
-                    clsMultipleSamplesFunction.AddParameter("X" & i, clsRFunctionParameter:=clsDistribtionFunction)
-                Next
-                ucrBase.clsRsyntax.SetBaseRFunction(clsMultipleSamplesFunction)
-            End If
-        '  End If
+            ucrBase.clsRsyntax.SetBaseRFunction(clsDistribtionFunction)
+        Else
+            clsMultipleSamplesFunction.ClearParameters()
+            For i = 1 To ucrNudNumberOfSamples.Value
+                clsMultipleSamplesFunction.AddParameter("X" & i, clsRFunctionParameter:=clsDistribtionFunction)
+            Next
+            ucrBase.clsRsyntax.SetBaseRFunction(clsMultipleSamplesFunction)
+        End If
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrDistWithParameters.bParametersFilled AndAlso ucrNudNumberOfSamples.Text <> "" AndAlso ucrNudNumberOfSamples.Text <> "" AndAlso (Not ucrChkSetSeed.Checked OrElse (ucrChkSetSeed.Checked AndAlso ucrNudSetSeed.Text <> "")) AndAlso ucrSaveRandomSample.IsComplete Then
-            ucrBase.OKEnabled(True)
+        'If ucrDistWithParameters.bParametersFilled AndAlso ucrNudNumberOfSamples.Text <> "" AndAlso ucrNudNumberOfSamples.Text <> "" AndAlso (Not ucrChkSetSeed.Checked OrElse (ucrChkSetSeed.Checked AndAlso ucrNudSetSeed.Text <> "")) AndAlso ucrSaveRandomSample.IsComplete Then
+        '    ucrBase.OKEnabled(True)
+        'Else
+        '    ucrBase.OKEnabled(False)
+        'End If
+        'ucrBase.OKEnabled(True)
+        If (ucrDistWithParameters.bParametersFilled AndAlso ucrNudNumberOfSamples.GetText() <> "" AndAlso ucrSaveRandomSample.IsComplete) Then
+            If ucrChkSetSeed.Checked Then
+                If ucrNudSetSeed.GetText <> "" Then
+                    ucrBase.OKEnabled(True)
+                Else
+                    ucrBase.OKEnabled(False)
+                End If
+            Else
+                ucrBase.OKEnabled(True)
+            End If
         Else
             ucrBase.OKEnabled(False)
         End If
-        ucrBase.OKEnabled(True)
     End Sub
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
