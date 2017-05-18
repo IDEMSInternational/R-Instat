@@ -136,8 +136,8 @@ Public Class dlgRandomSample
     'End Sub
 
     Private Sub SetNumberOfSamplesParameters()
-        If ucrNudNumberOfSamples.Text <> "" Then
-            If ucrNudNumberOfSamples.Value = 1 Then
+        'If ucrNudNumberOfSamples.Text <> "" Then
+        If ucrNudNumberOfSamples.Value = 1 Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsDistribtionFunction)
             Else
                 clsDistribtionFunction.RemoveAssignTo()
@@ -147,7 +147,7 @@ Public Class dlgRandomSample
                 Next
                 ucrBase.clsRsyntax.SetBaseRFunction(clsMultipleSamplesFunction)
             End If
-        End If
+        '  End If
     End Sub
 
     Private Sub TestOKEnabled()
@@ -156,7 +156,7 @@ Public Class dlgRandomSample
         Else
             ucrBase.OKEnabled(False)
         End If
-
+        ucrBase.OKEnabled(True)
     End Sub
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
