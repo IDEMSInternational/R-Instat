@@ -59,10 +59,10 @@ Public Class dlgExtremesClimatic
         ucrReceiverDate.bAutoFill = True
         ucrReceiverDOY.bAutoFill = True
 
-        ucrReceiverData.Selector = ucrSelectorClimaticExtremes
-        ucrReceiverData.SetParameter(New RParameter("x", 0))
-        ucrReceiverData.bWithQuotes = False
-        ucrReceiverData.bAutoFill = True
+        ucrReceiverElement.Selector = ucrSelectorClimaticExtremes
+        ucrReceiverElement.SetParameter(New RParameter("x", 0))
+        ucrReceiverElement.bWithQuotes = False
+        ucrReceiverElement.bAutoFill = True
 
         'ucrRdoOptions
         ucrPnlMinMaxPeaks.AddRadioButton(rdoMinMax)
@@ -92,7 +92,7 @@ Public Class dlgExtremesClimatic
     End Sub
 
     Private Sub SetRCodeForControls(bReset)
-        ucrReceiverData.SetRCode(clsMinMaxFuncExp, bReset)
+        ucrReceiverElement.SetRCode(clsMinMaxFuncExp, bReset)
         ucrInputSave.SetRCode(clsMinMaxSummariseFunc, bReset)
     End Sub
 
@@ -161,8 +161,8 @@ Public Class dlgExtremesClimatic
     Private Sub SetSummaryFuncCalcFrom()
         Dim strCurrDataName As String = ""
 
-        If Not ucrReceiverData.IsEmpty() Then
-            clsMinMaxSummariseFunc.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames() & ")")
+        If Not ucrReceiverElement.IsEmpty() Then
+            clsMinMaxSummariseFunc.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverElement.GetVariableNames() & ")")
         Else
             clsMinMaxSummariseFunc.RemoveParameterByName("calculated_from")
         End If
@@ -214,7 +214,7 @@ Public Class dlgExtremesClimatic
         SetGroupByFuncCalcFrom()
     End Sub
 
-    Private Sub ucrReceiverData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlValueChanged
+    Private Sub ucrReceiverData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlValueChanged
         SetSummaryFuncCalcFrom()
     End Sub
 End Class
