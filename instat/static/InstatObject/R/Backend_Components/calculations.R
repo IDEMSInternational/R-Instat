@@ -172,8 +172,13 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
   # If curr_data_list is not empty, (either an argument or from manipulations)
   # then this is passed in to apply_instat_calculation for each sub_calculation
   # sub_calculations are independant of each other (the order does not affect the output)
-  if(!missing(curr_data_list)) sub_calc_results <- curr_data_list
+  if(!missing(curr_data_list)) {
+    sub_calc_results <- curr_data_list
+    curr_groups <- groups(curr_data_list[[c_data_label]])
+  }
+  else curr_groups <- c()
   first_sub_calc <- TRUE
+  
   for(sub_calc in calc$sub_calculations) {
     curr_sub_calc <- self$apply_instat_calculation(sub_calc, curr_data_list, previous_manipulations)
     if(first_sub_calc) {
@@ -280,7 +285,9 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
           }
           if(length(by) > 0) break
         }
-        if(length(by) == 0) stop("Cannot find linking columns to merge output from sub calculations.")
+        if(length(by) == 0) {
+          stop("Cannot find linking columns to merge output from sub calculations.")
+        }
         
         # If the data frames are the same and filters have been used then need to subset before the join
         # so that we don't get duplicate columns
@@ -330,6 +337,13 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
   # Otherwise it is the output from the mainipulations
   if(!first_sub_calc) curr_data_list <- sub_calc_results
   
+  #TODO investigate better way to do this
+  #     Any case where we don't want this?
+  for(var in curr_groups) {
+    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% group_by_(var, add = TRUE)
+  }
+  
+
   # Names of the data frames required for the calculation
   data_names <- unique(as.vector(names(calc$calculated_from)))
   # If argument was missing and there were no manipulations or sub_calculations then it should be created.
@@ -360,7 +374,6 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
     data_frame_name <- names(calc$calculated_from)[i]
     overall_calc_from <- curr_data_list[[c_link_label]][["from_data_frame"]]
     # TODO Is this a good check?
-    #print(names(curr_data_list[[c_data_label]]))
     if(!(col_name %in% names(curr_data_list[[c_data_label]]))) {
       if(curr_data_list[[c_has_summary_label]]) {
         overall_links <- list()
@@ -375,18 +388,17 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
       new_data_links <- self$get_keys(data_frame_name)
       #TODO Make this it's own method?
       by <- NULL
-      #print(overall_links)
       for(temp_overall_link in overall_links) {
         for(temp_curr_link in new_data_links) {
           equ_curr_cols <- self$get_equivalent_columns(overall_calc_from, temp_overall_link, data_frame_name)
-          if(length(equ_curr_cols) > 0 && all(equ_curr_cols %in% temp_curr_link)) {
+          if(length(equ_curr_cols) > 0) { # && all(equ_curr_cols %in% temp_curr_link)) {
             by <- temp_overall_link
             names(by) <- equ_curr_cols
             join_into_overall <- FALSE
             break
           }
           equ_overall_cols <- self$get_equivalent_columns(data_frame_name, temp_curr_link, overall_calc_from)
-          if(length(equ_overall_cols) > 0 && all(equ_overall_cols %in% temp_overall_link)) {
+          if(length(equ_overall_cols) > 0) { #&& all(equ_overall_cols %in% temp_overall_link)) {
             by <- temp_curr_link
             names(by) <- equ_overall_cols
             join_into_overall <- TRUE
@@ -396,11 +408,18 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
         }
         if(length(by) > 0) break
       }
-      if(length(by) == 0) print(col_name)
-      if(length(by) == 0) stop("Cannot find linking columns to merge output from sub calculations with data for calculated_from.")
+      if(length(by) == 0) {
+        stop("Cannot find linking columns to merge output from sub calculations with data for calculated_from.")
+      }
       if(join_into_overall) curr_data_list[[c_data_label]] <- full_join(curr_data_list[[c_data_label]], self$get_data_frame(data_frame_name, use_current_filter = FALSE), by = by)
       else {
+        curr_groups <- groups(curr_data_list[[c_data_label]])
         curr_data_list[[c_data_label]] <- full_join(self$get_data_frame(data_frame_name, use_current_filter = FALSE), curr_data_list[[c_data_label]], by = by)
+        #TODO investigate better way to do this
+        #     Any case where we don't want this?
+        for(var in curr_groups) {
+          curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% group_by_(var, add = TRUE)
+        }
         # The overall data is joined into the current sub calc, so the curr_data_list is "reset" to default values
         curr_data_list[[c_link_label]] <- list(from_data_frame = data_frame_name, link_cols = c())
         curr_data_list[[c_has_summary_label]] <- FALSE
