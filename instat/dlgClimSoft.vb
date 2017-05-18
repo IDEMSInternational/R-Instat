@@ -83,6 +83,11 @@ Public Class dlgClimSoft
         ucrInputEndDate.SetName("")
 
         clsRDatabaseConnect.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$database_connect")
+        clsRDatabaseConnect.AddParameter("dbname", "hh")
+        clsRDatabaseConnect.AddParameter("host", "yy")
+        clsRDatabaseConnect.AddParameter("user", "kk")
+        clsRDatabaseConnect.AddParameter("port", "yy")
+
         clsRDatabaseDisconnect.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$database_disconnect")
         clsRImportFromClimsoft.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_from_climsoft")
         clsHasConnection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$has_database_connection")
