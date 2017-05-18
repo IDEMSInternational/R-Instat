@@ -26,8 +26,6 @@ Partial Class dlgExtremesClimatic
         Me.lblDate = New System.Windows.Forms.Label()
         Me.lblYear = New System.Windows.Forms.Label()
         Me.lblDayOfYear = New System.Windows.Forms.Label()
-        Me.lblFrom = New System.Windows.Forms.Label()
-        Me.lblTo = New System.Windows.Forms.Label()
         Me.grpMaxMin = New System.Windows.Forms.GroupBox()
         Me.grpPeaks = New System.Windows.Forms.GroupBox()
         Me.lblThresh = New System.Windows.Forms.Label()
@@ -36,11 +34,9 @@ Partial Class dlgExtremesClimatic
         Me.lblData = New System.Windows.Forms.Label()
         Me.ucrReceiverData = New instat.ucrReceiverSingle()
         Me.ucrChkDayNumber = New instat.ucrCheck()
-        Me.ucrNudTo = New instat.ucrNud()
         Me.ucrChkThreshold = New instat.ucrCheck()
         Me.ucrInputThreshhold = New instat.ucrInputTextBox()
         Me.ucrChkMaxima = New instat.ucrCheck()
-        Me.ucrNudFrom = New instat.ucrNud()
         Me.ucrReceiverDOY = New instat.ucrReceiverSingle()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
@@ -88,24 +84,6 @@ Partial Class dlgExtremesClimatic
         Me.lblDayOfYear.Size = New System.Drawing.Size(68, 13)
         Me.lblDayOfYear.TabIndex = 14
         Me.lblDayOfYear.Text = "Day Of Year:"
-        '
-        'lblFrom
-        '
-        Me.lblFrom.AutoSize = True
-        Me.lblFrom.Location = New System.Drawing.Point(37, 246)
-        Me.lblFrom.Name = "lblFrom"
-        Me.lblFrom.Size = New System.Drawing.Size(33, 13)
-        Me.lblFrom.TabIndex = 17
-        Me.lblFrom.Text = "From:"
-        '
-        'lblTo
-        '
-        Me.lblTo.AutoSize = True
-        Me.lblTo.Location = New System.Drawing.Point(129, 247)
-        Me.lblTo.Name = "lblTo"
-        Me.lblTo.Size = New System.Drawing.Size(23, 13)
-        Me.lblTo.TabIndex = 18
-        Me.lblTo.Text = "To:"
         '
         'grpMaxMin
         '
@@ -198,18 +176,6 @@ Partial Class dlgExtremesClimatic
         Me.ucrChkDayNumber.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkDayNumber.TabIndex = 27
         '
-        'ucrNudTo
-        '
-        Me.ucrNudTo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTo.Location = New System.Drawing.Point(154, 244)
-        Me.ucrNudTo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTo.Name = "ucrNudTo"
-        Me.ucrNudTo.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudTo.TabIndex = 21
-        Me.ucrNudTo.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'ucrChkThreshold
         '
         Me.ucrChkThreshold.Checked = False
@@ -235,18 +201,6 @@ Partial Class dlgExtremesClimatic
         Me.ucrChkMaxima.Name = "ucrChkMaxima"
         Me.ucrChkMaxima.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkMaxima.TabIndex = 0
-        '
-        'ucrNudFrom
-        '
-        Me.ucrNudFrom.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFrom.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudFrom.Location = New System.Drawing.Point(72, 243)
-        Me.ucrNudFrom.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFrom.Name = "ucrNudFrom"
-        Me.ucrNudFrom.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudFrom.TabIndex = 15
-        Me.ucrNudFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrReceiverDOY
         '
@@ -337,12 +291,8 @@ Partial Class dlgExtremesClimatic
         Me.Controls.Add(Me.ucrChkDayNumber)
         Me.Controls.Add(Me.rdoPeaks)
         Me.Controls.Add(Me.rdoMinMax)
-        Me.Controls.Add(Me.ucrNudTo)
         Me.Controls.Add(Me.grpPeaks)
         Me.Controls.Add(Me.grpMaxMin)
-        Me.Controls.Add(Me.lblTo)
-        Me.Controls.Add(Me.lblFrom)
-        Me.Controls.Add(Me.ucrNudFrom)
         Me.Controls.Add(Me.lblDayOfYear)
         Me.Controls.Add(Me.lblYear)
         Me.Controls.Add(Me.lblDate)
@@ -376,9 +326,6 @@ Partial Class dlgExtremesClimatic
     Friend WithEvents ucrInputThreshhold As ucrInputTextBox
     Friend WithEvents grpMaxMin As GroupBox
     Friend WithEvents ucrChkMaxima As ucrCheck
-    Friend WithEvents lblTo As Label
-    Friend WithEvents lblFrom As Label
-    Friend WithEvents ucrNudFrom As ucrNud
     Friend WithEvents lblDayOfYear As Label
     Friend WithEvents lblYear As Label
     Friend WithEvents lblDate As Label
@@ -387,7 +334,6 @@ Partial Class dlgExtremesClimatic
     Friend WithEvents ucrReceiverYear As ucrReceiverSingle
     Friend WithEvents ucrReceiverDate As ucrReceiverSingle
     Friend WithEvents ucrChkThreshold As ucrCheck
-    Friend WithEvents ucrNudTo As ucrNud
     Friend WithEvents ucrPnlMinMaxPeaks As UcrPanel
     Friend WithEvents rdoPeaks As RadioButton
     Friend WithEvents rdoMinMax As RadioButton
