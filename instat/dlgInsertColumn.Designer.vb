@@ -312,7 +312,7 @@ Partial Class dlgInsertColumn
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(682, 327)
+        Me.ClientSize = New System.Drawing.Size(492, 327)
         Me.Controls.Add(Me.rdoInsertRows)
         Me.Controls.Add(Me.rdoInsertColumns)
         Me.Controls.Add(Me.ucrPnlColumnsOrRows)
