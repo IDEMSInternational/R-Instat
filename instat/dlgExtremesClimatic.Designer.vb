@@ -31,8 +31,8 @@ Partial Class dlgExtremesClimatic
         Me.lblThresh = New System.Windows.Forms.Label()
         Me.rdoMinMax = New System.Windows.Forms.RadioButton()
         Me.rdoPeaks = New System.Windows.Forms.RadioButton()
-        Me.lblData = New System.Windows.Forms.Label()
-        Me.ucrReceiverData = New instat.ucrReceiverSingle()
+        Me.lblElement = New System.Windows.Forms.Label()
+        Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrChkDayNumber = New instat.ucrCheck()
         Me.ucrChkThreshold = New instat.ucrCheck()
         Me.ucrInputThreshhold = New instat.ucrInputTextBox()
@@ -148,25 +148,25 @@ Partial Class dlgExtremesClimatic
         Me.rdoPeaks.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoPeaks.UseVisualStyleBackColor = True
         '
-        'lblData
+        'lblElement
         '
-        Me.lblData.AutoSize = True
-        Me.lblData.Location = New System.Drawing.Point(243, 236)
-        Me.lblData.Name = "lblData"
-        Me.lblData.Size = New System.Drawing.Size(33, 13)
-        Me.lblData.TabIndex = 29
-        Me.lblData.Text = "Data:"
+        Me.lblElement.AutoSize = True
+        Me.lblElement.Location = New System.Drawing.Point(243, 236)
+        Me.lblElement.Name = "lblElement"
+        Me.lblElement.Size = New System.Drawing.Size(33, 13)
+        Me.lblElement.TabIndex = 29
+        Me.lblElement.Text = "Element:"
         '
-        'ucrReceiverData
+        'ucrReceiverElement
         '
-        Me.ucrReceiverData.frmParent = Me
-        Me.ucrReceiverData.Location = New System.Drawing.Point(244, 252)
-        Me.ucrReceiverData.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverData.Name = "ucrReceiverData"
-        Me.ucrReceiverData.Selector = Nothing
-        Me.ucrReceiverData.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverData.TabIndex = 28
-        Me.ucrReceiverData.ucrSelector = Nothing
+        Me.ucrReceiverElement.frmParent = Me
+        Me.ucrReceiverElement.Location = New System.Drawing.Point(244, 252)
+        Me.ucrReceiverElement.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverElement.Name = "ucrReceiverElement"
+        Me.ucrReceiverElement.Selector = Nothing
+        Me.ucrReceiverElement.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverElement.TabIndex = 28
+        Me.ucrReceiverElement.ucrSelector = Nothing
         '
         'ucrChkDayNumber
         '
@@ -286,8 +286,8 @@ Partial Class dlgExtremesClimatic
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(410, 493)
         Me.Controls.Add(Me.ucrInputSave)
-        Me.Controls.Add(Me.lblData)
-        Me.Controls.Add(Me.ucrReceiverData)
+        Me.Controls.Add(Me.lblElement)
+        Me.Controls.Add(Me.ucrReceiverElement)
         Me.Controls.Add(Me.ucrChkDayNumber)
         Me.Controls.Add(Me.rdoPeaks)
         Me.Controls.Add(Me.rdoMinMax)
@@ -338,7 +338,7 @@ Partial Class dlgExtremesClimatic
     Friend WithEvents rdoPeaks As RadioButton
     Friend WithEvents rdoMinMax As RadioButton
     Friend WithEvents ucrChkDayNumber As ucrCheck
-    Friend WithEvents lblData As Label
-    Friend WithEvents ucrReceiverData As ucrReceiverSingle
+    Friend WithEvents lblElement As Label
+    Friend WithEvents ucrReceiverElement As ucrReceiverSingle
     Friend WithEvents ucrInputSave As ucrInputTextBox
 End Class

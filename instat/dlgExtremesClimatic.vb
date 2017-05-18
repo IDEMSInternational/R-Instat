@@ -40,26 +40,29 @@ Public Class dlgExtremesClimatic
         'helpID
         ucrBase.iHelpTopicID = 203
 
-        ucrReceiverData.Selector = ucrSelectorClimaticExtremes
-        ucrReceiverStations.Selector = ucrSelectorClimaticExtremes
-        ucrReceiverDate.Selector = ucrSelectorClimaticExtremes
         ucrReceiverYear.Selector = ucrSelectorClimaticExtremes
-        ucrReceiverDOY.Selector = ucrSelectorClimaticExtremes
+
+        ucrReceiverStations.Selector = ucrSelectorClimaticExtremes
+        ucrReceiverStations.SetClimaticType("station")
+        ucrReceiverStations.bAutoFill = True
+
+        ucrReceiverDate.SetClimaticType("date")
         ucrReceiverDate.SetMeAsReceiver()
 
-        ucrReceiverStations.SetClimaticType("station")
-        ucrReceiverDate.SetClimaticType("date")
         ucrReceiverDOY.SetClimaticType("doy")
-        ucrReceiverYear.SetClimaticType("year")
+        ucrReceiverDOY.Selector = ucrSelectorClimaticExtremes
 
-        ucrReceiverStations.bAutoFill = True
-        ucrReceiverDate.bAutoFill = True
-        ucrReceiverDOY.bAutoFill = True
-        ucrReceiverData.bAutoFill = True
+        ucrReceiverYear.SetClimaticType("year")
         ucrReceiverYear.bAutoFill = True
 
+        ucrReceiverDate.Selector = ucrSelectorClimaticExtremes
+        ucrReceiverDate.bAutoFill = True
+        ucrReceiverDOY.bAutoFill = True
+
+        ucrReceiverData.Selector = ucrSelectorClimaticExtremes
         ucrReceiverData.SetParameter(New RParameter("x", 0))
         ucrReceiverData.bWithQuotes = False
+        ucrReceiverData.bAutoFill = True
 
         'ucrRdoOptions
         ucrPnlMinMaxPeaks.AddRadioButton(rdoMinMax)
@@ -74,6 +77,8 @@ Public Class dlgExtremesClimatic
 
         ucrInputSave.SetParameter(New RParameter("result_name"))
 
+        ucrInputThreshhold.SetLinkedDisplayControl(lblThresh)
+
         'ursaveExtremes       
         'ucrSaveExtremes.SetSaveTypeAsColumn()
         'ucrSaveExtremes.SetDataFrameSelector(ucrSelectorClimaticExtremes.ucrAvailableDataFrames)
@@ -82,14 +87,11 @@ Public Class dlgExtremesClimatic
         'ucrSaveExtremes.SetPrefix("Value")
 
         ucrPnlMinMaxPeaks.AddToLinkedControls(ucrInputThreshhold, {rdoPeaks}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputThreshhold.SetLinkedDisplayControl(lblThresh)
         ucrPnlMinMaxPeaks.AddToLinkedControls(ucrChkThreshold, {rdoPeaks}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMinMaxPeaks.AddToLinkedControls(ucrChkMaxima, {rdoMinMax}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
     End Sub
 
     Private Sub SetRCodeForControls(bReset)
-        'ucrNudFrom.SetRCode(clsMinMaxSummariseFunc, bReset)
-        'ucrNudTo.SetRCode(clsMinMaxSummariseFunc, bReset)
         ucrReceiverData.SetRCode(clsMinMaxFuncExp, bReset)
         ucrInputSave.SetRCode(clsMinMaxSummariseFunc, bReset)
     End Sub
