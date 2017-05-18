@@ -19,7 +19,7 @@ Public Class dlgExtremesClimatic
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
     Private clsExtreme As New RFunction
-    Private clsRunCalcFunc, clsMinMaxCalcFunction, clsMinMaxFilterFunc, clsMinMaxGroupByFunc, clsMinMaxManipulationsFunc, clsMinMaxSummariseFunc, clsMinMaxFuncExp, clsPeaksFunction As New RFunction
+    Private clsRunCalcFunc, clsMinMaxCalcFunction, clsMinMaxGroupByFunc, clsMinMaxManipulationsFunc, clsMinMaxSummariseFunc, clsMinMaxFuncExp, clsPeaksFunction As New RFunction
 
     Private Sub dlgExtremesClimatic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -65,11 +65,6 @@ Public Class dlgExtremesClimatic
         ucrPnlMinMaxPeaks.AddRadioButton(rdoMinMax)
         ucrPnlMinMaxPeaks.AddRadioButton(rdoPeaks)
 
-        ucrNudFrom.Minimum = 0
-        ucrNudFrom.Maximum = 366
-        ucrNudTo.Minimum = 0
-        ucrNudTo.Maximum = 366
-
         'ucrchk
         ucrChkMaxima.SetText("Maxima")
         ucrChkMaxima.Checked = True
@@ -102,7 +97,6 @@ Public Class dlgExtremesClimatic
     Private Sub SetDefaults()
         clsRunCalcFunc = New RFunction
         clsMinMaxCalcFunction = New RFunction
-        clsMinMaxFilterFunc = New RFunction
         clsMinMaxGroupByFunc = New RFunction
         clsMinMaxSummariseFunc = New RFunction
         clsMinMaxManipulationsFunc = New RFunction
@@ -125,12 +119,7 @@ Public Class dlgExtremesClimatic
         clsMinMaxSummariseFunc.AddParameter("manipulations", clsRFunctionParameter:=clsMinMaxManipulationsFunc)
 
         clsMinMaxManipulationsFunc.SetRCommand("list")
-        clsMinMaxManipulationsFunc.AddParameter("filter", clsRFunctionParameter:=clsMinMaxFilterFunc, bIncludeArgumentName:=False)
         clsMinMaxManipulationsFunc.AddParameter("group_by", clsRFunctionParameter:=clsMinMaxGroupByFunc, bIncludeArgumentName:=False)
-
-        clsMinMaxFilterFunc.SetRCommand("instat_calculation$new")
-        clsMinMaxFilterFunc.AddParameter("type", Chr(34) & "filter" & Chr(34))
-        clsMinMaxFilterFunc.SetAssignTo("day_of_year_filter")
 
         clsMinMaxGroupByFunc.SetRCommand("instat_calculation$new")
         clsMinMaxGroupByFunc.AddParameter("type", Chr(34) & "by" & Chr(34))
@@ -174,17 +163,6 @@ Public Class dlgExtremesClimatic
             clsMinMaxSummariseFunc.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames() & ")")
         Else
             clsMinMaxSummariseFunc.RemoveParameterByName("calculated_from")
-        End If
-    End Sub
-
-    Private Sub SetFilterFuncCalcFrom()
-        Dim strCurrDataName As String = ""
-
-        If Not ucrReceiverDOY.IsEmpty() Then
-            clsMinMaxFilterFunc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")")
-            clsMinMaxFilterFunc.AddParameter("function_exp", Chr(34) & ucrReceiverDOY.GetVariableNames(False) & ">=" & ucrNudFrom.Value & " & " & ucrReceiverDOY.GetVariableNames(False) & "<=" & ucrNudTo.Value & Chr(34))
-        Else
-            clsMinMaxFilterFunc.RemoveParameterByName("calculated_from")
         End If
     End Sub
 
@@ -232,10 +210,6 @@ Public Class dlgExtremesClimatic
 
     Private Sub ucrReceiverStations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStations.ControlValueChanged
         SetGroupByFuncCalcFrom()
-    End Sub
-
-    Private Sub ucrReceiverDOY_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDOY.ControlValueChanged
-        SetFilterFuncCalcFrom()
     End Sub
 
     Private Sub ucrReceiverData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlValueChanged
