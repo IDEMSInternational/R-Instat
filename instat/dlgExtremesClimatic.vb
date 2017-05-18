@@ -61,23 +61,27 @@ Public Class dlgExtremesClimatic
 
         ucrReceiverElement.Selector = ucrSelectorClimaticExtremes
         ucrReceiverElement.SetParameter(New RParameter("x", 0))
+        ucrReceiverElement.SetParameterIsString()
         ucrReceiverElement.bWithQuotes = False
         ucrReceiverElement.bAutoFill = True
 
         'ucrRdoOptions
-        ucrPnlMinMaxPeaks.AddRadioButton(rdoMinMax)
-        ucrPnlMinMaxPeaks.AddRadioButton(rdoPeaks)
+        ucrPnlExtremesType.AddRadioButton(rdoMinMax)
+        ucrPnlExtremesType.AddRadioButton(rdoPeaks)
 
-        'ucrchk
-        ucrChkMaxima.SetText("Maxima")
-        ucrChkMaxima.Checked = True
-        ucrChkThreshold.SetText("Values above Threshold")
-        ucrChkDayNumber.SetText("Day Number")
-        ucrInputThreshhold.SetValidationTypeAsNumeric()
+        ucrPnlMaxMin.AddRadioButton(rdoMax)
+        ucrPnlMaxMin.AddRadioButton(rdoMin)
+        ucrPnlMaxMin.AddFunctionNamesCondition(rdoMax, "max")
+        ucrPnlMaxMin.AddFunctionNamesCondition(rdoMin, "min")
+
+        ucrChkDayNumber.SetText("Include Day of Occurance")
+
+        ucrInputThresholdValue.SetValidationTypeAsNumeric()
+        ucrInputThresholdValue.SetLinkedDisplayControl(lblValues)
+
+        ucrInputThresholdOperator.SetItems({"Greater than", "Less than", "Greater than or equal to", "Less than or equal to"})
 
         ucrInputSave.SetParameter(New RParameter("result_name"))
-
-        ucrInputThreshhold.SetLinkedDisplayControl(lblThresh)
 
         'ursaveExtremes       
         'ucrSaveExtremes.SetSaveTypeAsColumn()
@@ -86,14 +90,14 @@ Public Class dlgExtremesClimatic
         'ucrSaveExtremes.SetLabelText("New Column Name")
         'ucrSaveExtremes.SetPrefix("Value")
 
-        ucrPnlMinMaxPeaks.AddToLinkedControls(ucrInputThreshhold, {rdoPeaks}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlMinMaxPeaks.AddToLinkedControls(ucrChkThreshold, {rdoPeaks}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlMinMaxPeaks.AddToLinkedControls(ucrChkMaxima, {rdoMinMax}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlExtremesType.AddToLinkedControls({ucrInputThresholdValue, ucrInputThresholdOperator}, {rdoPeaks}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlExtremesType.AddToLinkedControls(ucrPnlMaxMin, {rdoMinMax}, bNewLinkedHideIfParameterMissing:=True)
     End Sub
 
     Private Sub SetRCodeForControls(bReset)
         ucrReceiverElement.SetRCode(clsMinMaxFuncExp, bReset)
         ucrInputSave.SetRCode(clsMinMaxSummariseFunc, bReset)
+        ucrPnlMaxMin.SetRCode(clsMinMaxFuncExp)
     End Sub
 
     Private Sub SetDefaults()
@@ -105,10 +109,7 @@ Public Class dlgExtremesClimatic
         clsMinMaxFuncExp = New RFunction
 
         ucrSelectorClimaticExtremes.Reset()
-        ucrInputThreshhold.ResetText()
-        'ucrChkMaxima.Checked = True
-        'ucrChkDayNumber.Checked = True
-        'ucrChkThreshold.Checked = True
+        ucrInputThresholdValue.Reset()
 
         clsRunCalcFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         clsRunCalcFunc.AddParameter("display", "FALSE")
@@ -149,25 +150,6 @@ Public Class dlgExtremesClimatic
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrChkMaxima_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMaxima.ControlValueChanged
-        If ucrChkMaxima.Checked Then
-            clsMinMaxFuncExp.SetRCommand("max")
-        Else
-            clsMinMaxFuncExp.SetRCommand("min")
-        End If
-        SetMinMaxFunctionExp()
-    End Sub
-
-    Private Sub SetSummaryFuncCalcFrom()
-        Dim strCurrDataName As String = ""
-
-        If Not ucrReceiverElement.IsEmpty() Then
-            clsMinMaxSummariseFunc.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverElement.GetVariableNames() & ")")
-        Else
-            clsMinMaxSummariseFunc.RemoveParameterByName("calculated_from")
-        End If
-    End Sub
-
     Private Sub SetGroupByFuncCalcFrom()
         Dim strCurrDataName As String = ""
         Dim strGroupByCalcFrom As String = ""
@@ -188,14 +170,24 @@ Public Class dlgExtremesClimatic
         End If
     End Sub
 
-    Private Sub SetMinMaxFunctionExp()
-        clsMinMaxSummariseFunc.AddParameter("function_exp", Chr(34) & clsMinMaxFuncExp.ToScript() & Chr(34))
+    Private Sub SetMinMaxSummaryParams()
+        Dim strCurrDataName As String = ""
+
+        strCurrDataName = Chr(34) & ucrSelectorClimaticExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34)
+
+        If Not ucrReceiverElement.IsEmpty() Then
+            clsMinMaxSummariseFunc.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverElement.GetVariableNames() & ")")
+            clsMinMaxSummariseFunc.AddParameter("function_exp", Chr(34) & clsMinMaxFuncExp.ToScript() & Chr(34))
+        Else
+            clsMinMaxSummariseFunc.RemoveParameterByName("calculated_from")
+            clsMinMaxSummariseFunc.RemoveParameterByName("function_exp")
+        End If
     End Sub
 
-    Private Sub ucrPnlMinMaxPeaks_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMinMaxPeaks.ControlValueChanged
+    Private Sub ucrPnlMinMaxPeaks_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlExtremesType.ControlValueChanged
         If Not ucrInputSave.bUserTyped Then
             If rdoMinMax.Checked Then
-                If ucrChkMaxima.Checked Then
+                If rdoMax.Checked Then
                     ucrInputSave.SetName("max")
                 Else
                     ucrInputSave.SetName("min")
@@ -215,6 +207,15 @@ Public Class dlgExtremesClimatic
     End Sub
 
     Private Sub ucrReceiverData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlValueChanged
-        SetSummaryFuncCalcFrom()
+        SetMinMaxSummaryParams()
+    End Sub
+
+    Private Sub ucrPnlMaxMin_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMaxMin.ControlValueChanged
+        If rdoMax.Checked Then
+            clsMinMaxFuncExp.SetRCommand("max")
+        ElseIf rdoMin.Checked Then
+            clsMinMaxFuncExp.SetRCommand("min")
+        End If
+        SetMinMaxSummaryParams()
     End Sub
 End Class
