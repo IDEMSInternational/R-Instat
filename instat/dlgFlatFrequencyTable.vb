@@ -95,10 +95,8 @@ Public Class dlgFlatFrequencyTable
 
     Private Sub ucrChkAddMargins_ControlValueChanged(ucrchangedcontrol As ucrCore) Handles ucrChkAddMargins.ControlValueChanged
         If ucrChkAddMargins.Checked Then
-            clsFTable.RemoveParameterByName("x")
             clsFTable.AddParameter("x", clsRFunctionParameter:=clsAddMargin)
         Else
-            clsFTable.RemoveParameterByName("x")
             clsFTable.AddParameter("x", clsRFunctionParameter:=clsTable)
         End If
     End Sub
