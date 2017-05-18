@@ -22,22 +22,22 @@ Partial Class dlgReorderSheet
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.lblSheetsToReoder = New System.Windows.Forms.Label()
+        Me.lblDataFrameToReorder = New System.Windows.Forms.Label()
         Me.ucrSheetsToReorder = New instat.ucrReorder()
         Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
-        'lblSheetsToReoder
+        'lblDataFrameToReorder
         '
-        Me.lblSheetsToReoder.Location = New System.Drawing.Point(12, 21)
-        Me.lblSheetsToReoder.Name = "lblSheetsToReoder"
-        Me.lblSheetsToReoder.Size = New System.Drawing.Size(100, 23)
-        Me.lblSheetsToReoder.TabIndex = 0
-        Me.lblSheetsToReoder.Text = "Sheets to Reoder"
+        Me.lblDataFrameToReorder.Location = New System.Drawing.Point(10, 22)
+        Me.lblDataFrameToReorder.Name = "lblDataFrameToReorder"
+        Me.lblDataFrameToReorder.Size = New System.Drawing.Size(132, 12)
+        Me.lblDataFrameToReorder.TabIndex = 0
+        Me.lblDataFrameToReorder.Text = "Data Frames to Reorder:"
         '
         'ucrSheetsToReorder
         '
-        Me.ucrSheetsToReorder.Location = New System.Drawing.Point(15, 47)
+        Me.ucrSheetsToReorder.Location = New System.Drawing.Point(8, 35)
         Me.ucrSheetsToReorder.Name = "ucrSheetsToReorder"
         Me.ucrSheetsToReorder.Size = New System.Drawing.Size(154, 139)
         Me.ucrSheetsToReorder.TabIndex = 1
@@ -46,7 +46,7 @@ Partial Class dlgReorderSheet
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 206)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 180)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 2
@@ -55,8 +55,8 @@ Partial Class dlgReorderSheet
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 261)
-        Me.Controls.Add(Me.lblSheetsToReoder)
+        Me.ClientSize = New System.Drawing.Size(420, 238)
+        Me.Controls.Add(Me.lblDataFrameToReorder)
         Me.Controls.Add(Me.ucrSheetsToReorder)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -71,5 +71,5 @@ Partial Class dlgReorderSheet
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSheetsToReorder As ucrReorder
-    Friend WithEvents lblSheetsToReoder As Label
+    Friend WithEvents lblDataFrameToReorder As Label
 End Class
