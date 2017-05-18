@@ -45,7 +45,7 @@ Partial Class dlgDescribeTwoVarGraph
         'lblSecondVariable
         '
         Me.lblSecondVariable.AutoSize = True
-        Me.lblSecondVariable.Location = New System.Drawing.Point(260, 176)
+        Me.lblSecondVariable.Location = New System.Drawing.Point(261, 176)
         Me.lblSecondVariable.Name = "lblSecondVariable"
         Me.lblSecondVariable.Size = New System.Drawing.Size(88, 13)
         Me.lblSecondVariable.TabIndex = 14
@@ -54,7 +54,7 @@ Partial Class dlgDescribeTwoVarGraph
         'lblFirstVariables
         '
         Me.lblFirstVariables.AutoSize = True
-        Me.lblFirstVariables.Location = New System.Drawing.Point(263, 50)
+        Me.lblFirstVariables.Location = New System.Drawing.Point(261, 50)
         Me.lblFirstVariables.Name = "lblFirstVariables"
         Me.lblFirstVariables.Size = New System.Drawing.Size(81, 13)
         Me.lblFirstVariables.TabIndex = 16
