@@ -67,15 +67,17 @@ Public Class dlgRandomSample
         'ucrPrefixNewColumns.SetName("Rand")
         SetNewColumName()
         clsMultipleSamplesFunction.SetRCommand("data.frame")
+
+        'setseed fuction
+        clsSetSeed.SetPackageName("base")
         clsSetSeed.SetRCommand("set.seed")
+        clsSetSeed.AddParameter("seed", 1)
+
+        clsDistribtionFunction.AddParameter("n", 1)
 
         SetDataFrameandDistributionParameters()
-        'nudNumberOfSamples.Value = 1
         SetNumberOfSamplesParameters()
-        ' chkSetSeed.Checked = False
-        ' nudSeed.Value = 1
         ucrDistWithParameters.SetParameters()
-        SetSeedParameters()
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
@@ -112,20 +114,6 @@ Public Class dlgRandomSample
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
-    End Sub
-
-    Private Sub SetSeedParameters()
-        If ucrChkSetSeed.Checked Then
-            ' nudSeed.Visible = True
-            If ucrNudSetSeed.Text <> "" Then
-                clsSetSeed.AddParameter("seed", ucrNudSetSeed.Value)
-            Else
-                clsSetSeed.RemoveParameterByName("seed")
-            End If
-        Else
-            ' ucrNudSetSeed.Visible = False
-            clsSetSeed.RemoveParameterByName("seed")
-        End If
     End Sub
 
     Private Sub SetDataFrameandDistributionParameters()
@@ -188,11 +176,6 @@ Public Class dlgRandomSample
         End If
     End Sub
 
-    Private Sub chkSetSeed_CheckedChanged(sender As Object, e As EventArgs)
-        SetSeedParameters()
-        TestOKEnabled()
-    End Sub
-
     Private Sub nudNumberOfSamples_TextChanged(sender As Object, e As EventArgs)
         SetNumberOfSamplesParameters()
         TestOKEnabled()
@@ -203,25 +186,24 @@ Public Class dlgRandomSample
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrDistWithParameters_ParameterChanged() Handles ucrDistWithParameters.ParameterChanged
-        TestOKEnabled()
-    End Sub
-
-    Private Sub nudSeed_TextChanged(sender As Object, e As EventArgs)
-        SetSeedParameters()
-        TestOKEnabled()
-    End Sub
-
     Private Sub ucrDistWithParameters_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrDistWithParameters.cboDistributionsIndexChanged
         SetDataFrameandDistributionParameters()
     End Sub
 
     Private Sub ucrSelectorRandomSamples_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorRandomSamples.ControlValueChanged
         SetDataFrameandDistributionParameters()
-        TestOKEnabled()
     End Sub
 
     Private Sub ucrNudNumberOfSamples_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudNumberOfSamples.ControlValueChanged
         SetNewColumName()
     End Sub
+
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudNumberOfSamples.ControlContentsChanged, ucrNudSetSeed.ControlContentsChanged, ucrSaveRandomSample.ControlContentsChanged, ucrChkSetSeed.ControlContentsChanged
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrDistWithParameters_ParameterChanged() Handles ucrDistWithParameters.ParameterChanged
+        TestOKEnabled()
+    End Sub
+
 End Class
