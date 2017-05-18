@@ -24,20 +24,20 @@ Partial Class dlgRandomSample
     Private Sub InitializeComponent()
         Me.lblSampleSize = New System.Windows.Forms.Label()
         Me.lblNumberofSamples = New System.Windows.Forms.Label()
-        Me.chkSetSeed = New System.Windows.Forms.CheckBox()
         Me.ucrSampleSize = New instat.ucrDataFrameLength()
         Me.ucrSelectorRandomSamples = New instat.ucrDataFrame()
         Me.ucrDistWithParameters = New instat.ucrDistributionsWithParameters()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrNudRepeatValues = New instat.ucrNud()
-        Me.UcrNud1 = New instat.ucrNud()
-        Me.ucrSavePermute = New instat.ucrSave()
+        Me.ucrNudSetSeed = New instat.ucrNud()
+        Me.ucrNudNumberOfSamples = New instat.ucrNud()
+        Me.ucrSaveRandomSample = New instat.ucrSave()
+        Me.ucrChkSetSeed = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblSampleSize
         '
         Me.lblSampleSize.AutoSize = True
-        Me.lblSampleSize.Location = New System.Drawing.Point(257, 124)
+        Me.lblSampleSize.Location = New System.Drawing.Point(250, 123)
         Me.lblSampleSize.Name = "lblSampleSize"
         Me.lblSampleSize.Size = New System.Drawing.Size(68, 13)
         Me.lblSampleSize.TabIndex = 10
@@ -47,23 +47,12 @@ Partial Class dlgRandomSample
         'lblNumberofSamples
         '
         Me.lblNumberofSamples.AutoSize = True
-        Me.lblNumberofSamples.Location = New System.Drawing.Point(257, 98)
+        Me.lblNumberofSamples.Location = New System.Drawing.Point(250, 97)
         Me.lblNumberofSamples.Name = "lblNumberofSamples"
         Me.lblNumberofSamples.Size = New System.Drawing.Size(102, 13)
         Me.lblNumberofSamples.TabIndex = 10
         Me.lblNumberofSamples.Tag = "Number_of_Samples:"
         Me.lblNumberofSamples.Text = "Number of Samples:"
-        '
-        'chkSetSeed
-        '
-        Me.chkSetSeed.AutoSize = True
-        Me.chkSetSeed.Location = New System.Drawing.Point(257, 69)
-        Me.chkSetSeed.Name = "chkSetSeed"
-        Me.chkSetSeed.Size = New System.Drawing.Size(70, 17)
-        Me.chkSetSeed.TabIndex = 19
-        Me.chkSetSeed.Tag = "Set_Seed"
-        Me.chkSetSeed.Text = "Set Seed"
-        Me.chkSetSeed.UseVisualStyleBackColor = True
         '
         'ucrSampleSize
         '
@@ -96,46 +85,54 @@ Partial Class dlgRandomSample
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
         '
-        'ucrNudRepeatValues
+        'ucrNudSetSeed
         '
-        Me.ucrNudRepeatValues.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRepeatValues.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudRepeatValues.Location = New System.Drawing.Point(359, 65)
-        Me.ucrNudRepeatValues.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudRepeatValues.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRepeatValues.Name = "ucrNudRepeatValues"
-        Me.ucrNudRepeatValues.Size = New System.Drawing.Size(50, 23)
-        Me.ucrNudRepeatValues.TabIndex = 22
-        Me.ucrNudRepeatValues.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSetSeed.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSetSeed.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSetSeed.Location = New System.Drawing.Point(359, 65)
+        Me.ucrNudSetSeed.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSetSeed.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSetSeed.Name = "ucrNudSetSeed"
+        Me.ucrNudSetSeed.Size = New System.Drawing.Size(50, 23)
+        Me.ucrNudSetSeed.TabIndex = 22
+        Me.ucrNudSetSeed.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'UcrNud1
+        'ucrNudNumberOfSamples
         '
-        Me.UcrNud1.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNud1.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNud1.Location = New System.Drawing.Point(359, 94)
-        Me.UcrNud1.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.UcrNud1.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNud1.Name = "UcrNud1"
-        Me.UcrNud1.Size = New System.Drawing.Size(50, 23)
-        Me.UcrNud1.TabIndex = 23
-        Me.UcrNud1.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumberOfSamples.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumberOfSamples.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudNumberOfSamples.Location = New System.Drawing.Point(359, 94)
+        Me.ucrNudNumberOfSamples.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudNumberOfSamples.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumberOfSamples.Name = "ucrNudNumberOfSamples"
+        Me.ucrNudNumberOfSamples.Size = New System.Drawing.Size(50, 23)
+        Me.ucrNudNumberOfSamples.TabIndex = 23
+        Me.ucrNudNumberOfSamples.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrSavePermute
+        'ucrSaveRandomSample
         '
-        Me.ucrSavePermute.Location = New System.Drawing.Point(10, 218)
-        Me.ucrSavePermute.Name = "ucrSavePermute"
-        Me.ucrSavePermute.Size = New System.Drawing.Size(294, 24)
-        Me.ucrSavePermute.TabIndex = 24
+        Me.ucrSaveRandomSample.Location = New System.Drawing.Point(10, 218)
+        Me.ucrSaveRandomSample.Name = "ucrSaveRandomSample"
+        Me.ucrSaveRandomSample.Size = New System.Drawing.Size(294, 24)
+        Me.ucrSaveRandomSample.TabIndex = 24
+        '
+        'ucrChkSetSeed
+        '
+        Me.ucrChkSetSeed.Checked = False
+        Me.ucrChkSetSeed.Location = New System.Drawing.Point(253, 65)
+        Me.ucrChkSetSeed.Name = "ucrChkSetSeed"
+        Me.ucrChkSetSeed.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkSetSeed.TabIndex = 25
         '
         'dlgRandomSample
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(419, 300)
-        Me.Controls.Add(Me.ucrSavePermute)
-        Me.Controls.Add(Me.UcrNud1)
-        Me.Controls.Add(Me.ucrNudRepeatValues)
-        Me.Controls.Add(Me.chkSetSeed)
+        Me.Controls.Add(Me.ucrChkSetSeed)
+        Me.Controls.Add(Me.ucrSaveRandomSample)
+        Me.Controls.Add(Me.ucrNudNumberOfSamples)
+        Me.Controls.Add(Me.ucrNudSetSeed)
         Me.Controls.Add(Me.ucrSampleSize)
         Me.Controls.Add(Me.lblNumberofSamples)
         Me.Controls.Add(Me.lblSampleSize)
@@ -159,8 +156,8 @@ Partial Class dlgRandomSample
     Friend WithEvents lblSampleSize As Label
     Friend WithEvents lblNumberofSamples As Label
     Friend WithEvents ucrSampleSize As ucrDataFrameLength
-    Friend WithEvents chkSetSeed As CheckBox
-    Friend WithEvents ucrNudRepeatValues As ucrNud
-    Friend WithEvents UcrNud1 As ucrNud
-    Friend WithEvents ucrSavePermute As ucrSave
+    Friend WithEvents ucrNudSetSeed As ucrNud
+    Friend WithEvents ucrNudNumberOfSamples As ucrNud
+    Friend WithEvents ucrSaveRandomSample As ucrSave
+    Friend WithEvents ucrChkSetSeed As ucrCheck
 End Class
