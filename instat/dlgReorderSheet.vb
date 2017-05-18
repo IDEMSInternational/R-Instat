@@ -22,7 +22,7 @@ Public Class dlgReorderSheet
     Private Sub dlgReorderSheet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
-            initialiseDialog()
+            InitialiseDialog()
             bFirstLoad = False
         End If
         If bReset Then
@@ -33,20 +33,23 @@ Public Class dlgReorderSheet
         TestOkEnabled()
     End Sub
 
+    Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 62
+
+        ucrSheetsToReorder.SetParameter(New RParameter("data_frames_order", 0))
+        ucrSheetsToReorder.setDataType("data frame")
+    End Sub
+
     Private Sub SetDefaults()
         clsReorderDataFrame = New RFunction
+
         ucrSheetsToReorder.Reset()
+
         clsReorderDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$reorder_dataframes")
         ucrBase.clsRsyntax.SetBaseRFunction(clsReorderDataFrame)
     End Sub
 
-    Private Sub initialiseDialog()
-        ucrBase.iHelpTopicID = 62
-        ucrSheetsToReorder.setDataType("data frame")
-        ucrSheetsToReorder.SetParameter(New RParameter("data_frames_order", 0))
-    End Sub
-
-    Public Sub SetRCodeForControls(bReset As Boolean)
+    Private Sub SetRCodeForControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
