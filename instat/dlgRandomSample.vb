@@ -51,7 +51,7 @@ Public Class dlgRandomSample
 
         ucrNudSetSeed.SetParameter(New RParameter("seed", 0))
         ucrChkSetSeed.AddToLinkedControls(ucrLinked:=ucrNudSetSeed, objValues:={True}, bNewLinkedHideIfParameterMissing:=True)
-        ucrNudSetSeed.SetMinMax(Integer.MaxValue, Integer.MinValue)
+        ucrNudSetSeed.SetMinMax(1, Integer.MinValue)
 
         ucrSaveRandomSample.SetSaveTypeAsColumn()
         ucrSaveRandomSample.SetDataFrameSelector(ucrSelectorRandomSamples)
@@ -78,6 +78,8 @@ Public Class dlgRandomSample
         SetDataFrameandDistributionParameters()
         SetNumberOfSamplesParameters()
         ucrDistWithParameters.SetParameters()
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSaveRandomSample.GetText, strTempDataframe:=ucrSelectorRandomSamples.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveRandomSample.GetText)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDistribtionFunction)
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
@@ -106,10 +108,6 @@ Public Class dlgRandomSample
         End If
     End Sub
 
-    Private Sub ReopenDialog()
-        SetAssignTo()
-    End Sub
-
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
@@ -123,26 +121,19 @@ Public Class dlgRandomSample
             clsDistribtionFunction.RemoveParameterByName("nn")
             clsDistribtionFunction.AddParameter("n", ucrSelectorRandomSamples.iDataFrameLength)
         End If
-        SetAssignTo()
-        TestOKEnabled()
     End Sub
 
-    Private Sub ucrPrefixNewColumns_NameChanged()
-        SetAssignTo()
-        TestOKEnabled()
-    End Sub
-
-    Private Sub SetAssignTo()
-        If ucrNudNumberOfSamples.Text <> "" Then
-            If ucrNudNumberOfSamples.Value = 1 Then
-                ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSaveRandomSample.GetText, strTempDataframe:=ucrSelectorRandomSamples.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveRandomSample.GetText)
-            Else
-                ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSaveRandomSample.GetText, strTempDataframe:=ucrSelectorRandomSamples.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveRandomSample.GetText)
-            End If
-        Else
-            ucrBase.clsRsyntax.RemoveAssignTo()
-        End If
-    End Sub
+    'Private Sub SetAssignTo()
+    '    If ucrNudNumberOfSamples.Text <> "" Then
+    '        If ucrNudNumberOfSamples.Value = 1 Then
+    '            ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSaveRandomSample.GetText, strTempDataframe:=ucrSelectorRandomSamples.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveRandomSample.GetText)
+    '        Else
+    '            ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSaveRandomSample.GetText, strTempDataframe:=ucrSelectorRandomSamples.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveRandomSample.GetText)
+    '        End If
+    '    Else
+    '        ucrBase.clsRsyntax.RemoveAssignTo()
+    '    End If
+    'End Sub
 
     Private Sub SetNumberOfSamplesParameters()
         If ucrNudNumberOfSamples.Text <> "" Then
@@ -156,34 +147,22 @@ Public Class dlgRandomSample
                 Next
                 ucrBase.clsRsyntax.SetBaseRFunction(clsMultipleSamplesFunction)
             End If
-            SetAssignTo()
         End If
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrDistWithParameters.bParametersFilled AndAlso ucrNudNumberOfSamples.Text <> "" _
-            AndAlso ucrNudNumberOfSamples.Text <> "" AndAlso (Not ucrChkSetSeed.Checked OrElse (ucrChkSetSeed.Checked AndAlso ucrNudSetSeed.Text <> "")) _
-            AndAlso ((ucrNudNumberOfSamples.Value = 1 AndAlso ucrSaveRandomSample.IsComplete) OrElse (ucrNudNumberOfSamples.Value <> 1 AndAlso ucrSaveRandomSample.IsComplete)) Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+        'If ucrDistWithParameters.bParametersFilled AndAlso ucrNudNumberOfSamples.Text <> "" AndAlso (Not ucrChkSetSeed.Checked OrElse (ucrChkSetSeed.Checked AndAlso ucrNudSetSeed.Text <> "")) AndAlso ((ucrNudNumberOfSamples.Value = 1 AndAlso ucrSaveRandomSample.IsComplete) OrElse (ucrNudNumberOfSamples.Value <> 1 AndAlso ucrSaveRandomSample.IsComplete)) Then
+        '    ucrBase.OKEnabled(True)
+        'Else
+        '    ucrBase.OKEnabled(False)
+        'End If
+        ucrBase.OKEnabled(True)
     End Sub
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         If ucrChkSetSeed.Checked Then
             frmMain.clsRLink.RunScript(clsSetSeed.ToScript(), strComment:="dlgRandomSample: Setting the seed for random number generator")
         End If
-    End Sub
-
-    Private Sub nudNumberOfSamples_TextChanged(sender As Object, e As EventArgs)
-        SetNumberOfSamplesParameters()
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrNewColumnName_NameChanged()
-        SetAssignTo()
-        TestOKEnabled()
     End Sub
 
     Private Sub ucrDistWithParameters_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrDistWithParameters.cboDistributionsIndexChanged
@@ -195,6 +174,7 @@ Public Class dlgRandomSample
     End Sub
 
     Private Sub ucrNudNumberOfSamples_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudNumberOfSamples.ControlValueChanged
+        SetNumberOfSamplesParameters()
         SetNewColumName()
     End Sub
 
