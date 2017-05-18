@@ -43,7 +43,7 @@ Public Class dlgReorderSheet
     Private Sub initialiseDialog()
         ucrBase.iHelpTopicID = 62
         ucrSheetsToReorder.setDataType("data frame")
-        ucrSheetsToReorder.SetParameter(New RParameter("data_frames_order"))
+        ucrSheetsToReorder.SetParameter(New RParameter("data_frames_order", 0))
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
