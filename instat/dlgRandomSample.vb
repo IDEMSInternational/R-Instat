@@ -18,31 +18,34 @@ Imports instat.Translations
 
 Public Class dlgRandomSample
     Public bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
     Private clsMultipleSamplesFunction As New RFunction
     Public clsCurrentDistribution As New Distribution
     Private clsDistribtionFunction As New RFunction
     Private clsSetSeed As New RFunction
 
     Private Sub dlgRandomSample_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
         TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 376
+
         ucrDistWithParameters.SetRDistributions()
         clsDistribtionFunction = ucrDistWithParameters.clsCurrRFunction
         ucrSampleSize.SetDataFrameSelector(ucrSelectorRandomSamples)
-        clsMultipleSamplesFunction.SetRCommand("data.frame")
-        clsSetSeed.SetRCommand("set.seed")
+
+
         nudSeed.Minimum = Integer.MinValue
         nudSeed.Maximum = Integer.MaxValue
         ucrNewColumnName.SetPrefix("Rand")
@@ -57,6 +60,10 @@ Public Class dlgRandomSample
     Private Sub SetDefaults()
         ucrSelectorRandomSamples.Reset()
         ucrPrefixNewColumns.SetName("Rand")
+
+        clsMultipleSamplesFunction.SetRCommand("data.frame")
+        clsSetSeed.SetRCommand("set.seed")
+
         SetDataFrameandDistributionParameters()
         nudNumberOfSamples.Value = 1
         SetNumberOfSamplesParameters()
@@ -64,6 +71,10 @@ Public Class dlgRandomSample
         nudSeed.Value = 1
         ucrDistWithParameters.SetParameters()
         SetSeedParameters()
+    End Sub
+
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub ReopenDialog()
@@ -99,7 +110,7 @@ Public Class dlgRandomSample
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrPrefixNewColumns_NameChanged() Handles ucrPrefixNewColumns.NameChanged
+    Private Sub ucrPrefixNewColumns_NameChanged()
         SetAssignTo()
         TestOKEnabled()
     End Sub
@@ -162,12 +173,12 @@ Public Class dlgRandomSample
         TestOKEnabled()
     End Sub
 
-    Private Sub nudNumberOfSamples_TextChanged(sender As Object, e As EventArgs) Handles nudNumberOfSamples.TextChanged
+    Private Sub nudNumberOfSamples_TextChanged(sender As Object, e As EventArgs)
         SetNumberOfSamplesParameters()
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrNewColumnName_NameChanged() Handles ucrNewColumnName.NameChanged
+    Private Sub ucrNewColumnName_NameChanged()
         SetAssignTo()
         TestOKEnabled()
     End Sub
@@ -176,7 +187,7 @@ Public Class dlgRandomSample
         TestOKEnabled()
     End Sub
 
-    Private Sub nudSeed_TextChanged(sender As Object, e As EventArgs) Handles nudSeed.TextChanged
+    Private Sub nudSeed_TextChanged(sender As Object, e As EventArgs)
         SetSeedParameters()
         TestOKEnabled()
     End Sub
