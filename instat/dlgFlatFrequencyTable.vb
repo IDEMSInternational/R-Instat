@@ -80,10 +80,14 @@ Public Class dlgFlatFrequencyTable
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrRowVariable.IsEmpty AndAlso Not ucrColumnVariable.IsEmpty AndAlso ucrSelectorDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
-            ucrBase.OKEnabled(True)
+        If ucrSelectorDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+            If ((ucrRowVariable.lstSelectedVariables.Items.Count > 1 AndAlso ucrColumnVariable.IsEmpty) OrElse (ucrColumnVariable.lstSelectedVariables.Items.Count > 1 AndAlso ucrRowVariable.IsEmpty) OrElse (Not ucrRowVariable.IsEmpty AndAlso Not ucrColumnVariable.IsEmpty)) Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
         Else
-            ucrBase.OKEnabled(False)
+                ucrBase.OKEnabled(False)
         End If
     End Sub
 
