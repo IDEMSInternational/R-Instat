@@ -34,12 +34,12 @@ Partial Class dlgDescribeTwoVarGraph
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(280, 224)
+        Me.cmdOptions.Location = New System.Drawing.Point(10, 198)
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(101, 23)
+        Me.cmdOptions.Size = New System.Drawing.Size(120, 23)
         Me.cmdOptions.TabIndex = 11
         Me.cmdOptions.Tag = "Options..."
-        Me.cmdOptions.Text = "Options..."
+        Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'lblSecondVariable
@@ -54,21 +54,24 @@ Partial Class dlgDescribeTwoVarGraph
         'lblFirstVariables
         '
         Me.lblFirstVariables.AutoSize = True
-        Me.lblFirstVariables.Location = New System.Drawing.Point(282, 42)
+        Me.lblFirstVariables.Location = New System.Drawing.Point(263, 50)
         Me.lblFirstVariables.Name = "lblFirstVariables"
-        Me.lblFirstVariables.Size = New System.Drawing.Size(78, 13)
+        Me.lblFirstVariables.Size = New System.Drawing.Size(81, 13)
         Me.lblFirstVariables.TabIndex = 16
         Me.lblFirstVariables.Tag = "First_Variable(s)"
-        Me.lblFirstVariables.Text = "First Variable(s)"
+        Me.lblFirstVariables.Text = "First Variable(s):"
         '
         'ucrSecondVariableReceiver
         '
+        Me.ucrSecondVariableReceiver.frmParent = Me
         Me.ucrSecondVariableReceiver.Location = New System.Drawing.Point(261, 191)
         Me.ucrSecondVariableReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSecondVariableReceiver.Name = "ucrSecondVariableReceiver"
         Me.ucrSecondVariableReceiver.Selector = Nothing
         Me.ucrSecondVariableReceiver.Size = New System.Drawing.Size(120, 20)
+        Me.ucrSecondVariableReceiver.strNcFilePath = ""
         Me.ucrSecondVariableReceiver.TabIndex = 13
+        Me.ucrSecondVariableReceiver.ucrSelector = Nothing
         '
         'ucrBase
         '
@@ -79,10 +82,14 @@ Partial Class dlgDescribeTwoVarGraph
         '
         'ucrReceiverMultipleTwoVar
         '
+        Me.ucrReceiverMultipleTwoVar.frmParent = Me
         Me.ucrReceiverMultipleTwoVar.Location = New System.Drawing.Point(261, 35)
         Me.ucrReceiverMultipleTwoVar.Name = "ucrReceiverMultipleTwoVar"
-        Me.ucrReceiverMultipleTwoVar.Size = New System.Drawing.Size(120, 143)
+        Me.ucrReceiverMultipleTwoVar.Selector = Nothing
+        Me.ucrReceiverMultipleTwoVar.Size = New System.Drawing.Size(120, 138)
+        Me.ucrReceiverMultipleTwoVar.strNcFilePath = ""
         Me.ucrReceiverMultipleTwoVar.TabIndex = 15
+        Me.ucrReceiverMultipleTwoVar.ucrSelector = Nothing
         Me.ucrReceiverMultipleTwoVar.ucrVariableSelector = Nothing
         '
         'ucrTwoVarGraphSave
@@ -106,7 +113,7 @@ Partial Class dlgDescribeTwoVarGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(427, 314)
+        Me.ClientSize = New System.Drawing.Size(421, 313)
         Me.Controls.Add(Me.lblFirstVariables)
         Me.Controls.Add(Me.ucrReceiverMultipleTwoVar)
         Me.Controls.Add(Me.lblSecondVariable)
