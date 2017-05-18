@@ -60,12 +60,12 @@ Partial Class dlgDeleteRowsOrColums
         'lblFrom
         '
         Me.lblFrom.AutoSize = True
-        Me.lblFrom.Location = New System.Drawing.Point(9, 166)
+        Me.lblFrom.Location = New System.Drawing.Point(7, 168)
         Me.lblFrom.Name = "lblFrom"
-        Me.lblFrom.Size = New System.Drawing.Size(33, 13)
+        Me.lblFrom.Size = New System.Drawing.Size(67, 13)
         Me.lblFrom.TabIndex = 8
         Me.lblFrom.Tag = ""
-        Me.lblFrom.Text = "From:"
+        Me.lblFrom.Text = "Delete From:"
         '
         'rdoColumns
         '
@@ -120,7 +120,7 @@ Partial Class dlgDeleteRowsOrColums
         '
         Me.ucrNudFrom.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudFrom.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudFrom.Location = New System.Drawing.Point(48, 164)
+        Me.ucrNudFrom.Location = New System.Drawing.Point(100, 164)
         Me.ucrNudFrom.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudFrom.Name = "ucrNudFrom"
@@ -155,15 +155,15 @@ Partial Class dlgDeleteRowsOrColums
         Me.ucrBase.Location = New System.Drawing.Point(9, 243)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 10
+        Me.ucrBase.TabIndex = 12
         '
         'lblTo
         '
         Me.lblTo.AutoSize = True
-        Me.lblTo.Location = New System.Drawing.Point(104, 168)
+        Me.lblTo.Location = New System.Drawing.Point(51, 194)
         Me.lblTo.Name = "lblTo"
         Me.lblTo.Size = New System.Drawing.Size(23, 13)
-        Me.lblTo.TabIndex = 11
+        Me.lblTo.TabIndex = 10
         Me.lblTo.Tag = ""
         Me.lblTo.Text = "To:"
         '
@@ -171,12 +171,12 @@ Partial Class dlgDeleteRowsOrColums
         '
         Me.ucrNudTo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTo.Location = New System.Drawing.Point(143, 166)
+        Me.ucrNudTo.Location = New System.Drawing.Point(100, 190)
         Me.ucrNudTo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTo.Name = "ucrNudTo"
         Me.ucrNudTo.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudTo.TabIndex = 12
+        Me.ucrNudTo.TabIndex = 11
         Me.ucrNudTo.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'dlgDeleteRowsOrColums
