@@ -81,13 +81,13 @@ Public Class dlgFlatFrequencyTable
 
     Private Sub TestOkEnabled()
         If ucrSelectorDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
-            If ((ucrRowVariable.lstSelectedVariables.Items.Count > 1 AndAlso ucrColumnVariable.IsEmpty) OrElse (ucrColumnVariable.lstSelectedVariables.Items.Count > 1 AndAlso ucrRowVariable.IsEmpty) OrElse (Not ucrRowVariable.IsEmpty AndAlso Not ucrColumnVariable.IsEmpty)) Then
+            If ((ucrRowVariable.lstSelectedVariables.Items.Count + ucrColumnVariable.lstSelectedVariables.Items.Count > 1) OrElse (Not ucrRowVariable.IsEmpty AndAlso Not ucrColumnVariable.IsEmpty)) Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
             End If
         Else
-                ucrBase.OKEnabled(False)
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
@@ -111,6 +111,16 @@ Public Class dlgFlatFrequencyTable
             clsGetVar.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
             clsGetVar.AddParameter("data_name", Chr(34) & ucrSelectorDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
             clsGetVar.AddParameter("col_names", "c(" & ucrColumnVariable.GetVariableNames & "," & ucrRowVariable.GetVariableNames & ")")
+            clsTable.AddParameter("x", clsRFunctionParameter:=clsGetVar)
+        ElseIf Not ucrRowVariable.IsEmpty AndAlso ucrColumnVariable.IsEmpty Then
+            clsGetVar.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+            clsGetVar.AddParameter("data_name", Chr(34) & ucrSelectorDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+            clsGetVar.AddParameter("col_names", (ucrRowVariable.GetVariableNames))
+            clsTable.AddParameter("x", clsRFunctionParameter:=clsGetVar)
+        ElseIf ucrRowVariable.IsEmpty AndAlso Not ucrColumnVariable.IsEmpty Then
+            clsGetVar.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+            clsGetVar.AddParameter("data_name", Chr(34) & ucrSelectorDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+            clsGetVar.AddParameter("col_names", (ucrColumnVariable.GetVariableNames))
             clsTable.AddParameter("x", clsRFunctionParameter:=clsGetVar)
         End If
     End Sub
