@@ -61,7 +61,7 @@ Public Class dlgRandomSample
 
         ucrSelectorRandomSamples.Reset()
         'ucrPrefixNewColumns.SetName("Rand")
-
+        SetNewColumName()
         clsMultipleSamplesFunction.SetRCommand("data.frame")
         clsSetSeed.SetRCommand("set.seed")
 
@@ -78,6 +78,22 @@ Public Class dlgRandomSample
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
+    Private Sub SetNewColumName()
+        If ucrNudNumberOfSamples.Value = 1 Then
+            ucrSaveRandomSample.SetAssignToBooleans(bTempAssignToIsPrefix:=False)
+            ucrSaveRandomSample.SetLabelText("New Column Name:")
+            If Not ucrSaveRandomSample.bUserTyped Then
+                ucrSaveRandomSample.SetPrefix("Rand")
+            End If
+        Else
+            ucrSaveRandomSample.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
+            ucrSaveRandomSample.SetLabelText("Prefix for New Columns:")
+            If Not ucrSaveRandomSample.bUserTyped Then
+                ucrSaveRandomSample.SetPrefix("")
+                ucrSaveRandomSample.SetName("Rand")
+            End If
+        End If
+    End Sub
 
     Private Sub ReopenDialog()
         SetAssignTo()
@@ -197,4 +213,7 @@ Public Class dlgRandomSample
         TestOKEnabled()
     End Sub
 
+    Private Sub ucrNudNumberOfSamples_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudNumberOfSamples.ControlValueChanged
+        SetNewColumName()
+    End Sub
 End Class
