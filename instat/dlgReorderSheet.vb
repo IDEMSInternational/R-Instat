@@ -15,11 +15,11 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class dlgReorderSheet
+Public Class dlgReorderDataFrame
     Private bReset As Boolean = True
     Private bFirstLoad As Boolean = True
     Private clsReorderDataFrame As New RFunction
-    Private Sub dlgReorderSheet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub dlgReorderDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
@@ -36,14 +36,14 @@ Public Class dlgReorderSheet
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 62
 
-        ucrSheetsToReorder.SetParameter(New RParameter("data_frames_order", 0))
-        ucrSheetsToReorder.setDataType("data frame")
+        ucrDataFrameToReorder.SetParameter(New RParameter("data_frames_order", 0))
+        ucrDataFrameToReorder.setDataType("data frame")
     End Sub
 
     Private Sub SetDefaults()
         clsReorderDataFrame = New RFunction
 
-        ucrSheetsToReorder.Reset()
+        ucrDataFrameToReorder.Reset()
 
         clsReorderDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$reorder_dataframes")
         ucrBase.clsRsyntax.SetBaseRFunction(clsReorderDataFrame)
@@ -54,7 +54,7 @@ Public Class dlgReorderSheet
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrSheetsToReorder.isEmpty Then
+        If Not ucrDataFrameToReorder.isEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -67,7 +67,7 @@ Public Class dlgReorderSheet
         TestOkEnabled()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSheetsToReorder.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameToReorder.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
