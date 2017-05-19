@@ -17,7 +17,7 @@ Imports instat
 Imports instat.Translations
 Imports RDotNet
 
-Public Class dlgFileNew
+Public Class dlgNewDataFrame
     Private clsOverallFunction, clsMatrixFunction As New RFunction
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True

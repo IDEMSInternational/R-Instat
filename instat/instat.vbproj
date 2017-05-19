@@ -1888,10 +1888,10 @@
     <Compile Include="frmEditor.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgFileNew.Designer.vb">
-      <DependentUpon>dlgFileNew.vb</DependentUpon>
+    <Compile Include="dlgNewDataFrame.Designer.vb">
+      <DependentUpon>dlgNewDataFrame.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgFileNew.vb">
+    <Compile Include="dlgNewDataFrame.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmLog.Designer.vb">
@@ -4092,14 +4092,14 @@
       <DependentUpon>frmEditor.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgFileNew.fr-FR.resx">
-      <DependentUpon>dlgFileNew.vb</DependentUpon>
+    <EmbeddedResource Include="dlgNewDataFrame.fr-FR.resx">
+      <DependentUpon>dlgNewDataFrame.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgFileNew.resx">
-      <DependentUpon>dlgFileNew.vb</DependentUpon>
+    <EmbeddedResource Include="dlgNewDataFrame.resx">
+      <DependentUpon>dlgNewDataFrame.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgFileNew.sw-KE.resx">
-      <DependentUpon>dlgFileNew.vb</DependentUpon>
+    <EmbeddedResource Include="dlgNewDataFrame.sw-KE.resx">
+      <DependentUpon>dlgNewDataFrame.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmLog.fr-FR.resx">
       <DependentUpon>frmLog.vb</DependentUpon>
