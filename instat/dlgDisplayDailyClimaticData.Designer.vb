@@ -274,7 +274,7 @@ Partial Class dlgDisplayDailyClimaticData
         Me.ucrChkMissingRugPlot.Checked = False
         Me.ucrChkMissingRugPlot.Location = New System.Drawing.Point(10, 328)
         Me.ucrChkMissingRugPlot.Name = "ucrChkMissingRugPlot"
-        Me.ucrChkMissingRugPlot.Size = New System.Drawing.Size(242, 20)
+        Me.ucrChkMissingRugPlot.Size = New System.Drawing.Size(263, 20)
         Me.ucrChkMissingRugPlot.TabIndex = 57
         '
         'ucrChkValuesOutsideYrange
@@ -282,7 +282,7 @@ Partial Class dlgDisplayDailyClimaticData
         Me.ucrChkValuesOutsideYrange.Checked = False
         Me.ucrChkValuesOutsideYrange.Location = New System.Drawing.Point(10, 353)
         Me.ucrChkValuesOutsideYrange.Name = "ucrChkValuesOutsideYrange"
-        Me.ucrChkValuesOutsideYrange.Size = New System.Drawing.Size(242, 20)
+        Me.ucrChkValuesOutsideYrange.Size = New System.Drawing.Size(263, 20)
         Me.ucrChkValuesOutsideYrange.TabIndex = 58
         '
         'dlgDisplayDailyClimaticData
