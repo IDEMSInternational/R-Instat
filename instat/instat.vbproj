@@ -1704,10 +1704,10 @@
     <Compile Include="dlgRemoveUnusedLabels.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgReplace.Designer.vb">
-      <DependentUpon>dlgReplace.vb</DependentUpon>
+    <Compile Include="dlgReplaceValues.Designer.vb">
+      <DependentUpon>dlgReplaceValues.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgReplace.vb">
+    <Compile Include="dlgReplaceValues.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgRowStats.Designer.vb">
@@ -3854,14 +3854,14 @@
     <EmbeddedResource Include="dlgRemoveUnusedLabels.sw-KE.resx">
       <DependentUpon>dlgRemoveUnusedLabels.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgReplace.fr-FR.resx">
-      <DependentUpon>dlgReplace.vb</DependentUpon>
+    <EmbeddedResource Include="dlgReplaceValues.fr-FR.resx">
+      <DependentUpon>dlgReplaceValues.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgReplace.resx">
-      <DependentUpon>dlgReplace.vb</DependentUpon>
+    <EmbeddedResource Include="dlgReplaceValues.resx">
+      <DependentUpon>dlgReplaceValues.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgReplace.sw-KE.resx">
-      <DependentUpon>dlgReplace.vb</DependentUpon>
+    <EmbeddedResource Include="dlgReplaceValues.sw-KE.resx">
+      <DependentUpon>dlgReplaceValues.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRowStats.fr-FR.resx">
       <DependentUpon>dlgRowStats.vb</DependentUpon>
