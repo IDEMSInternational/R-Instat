@@ -34,10 +34,35 @@ Public Class dlgDisplayDailyClimaticData
 
     Private Sub InitialiseDialog()
 
+        ucrReceiverStation.Selector = ucrSelectorDisplayDailyClimaticData
+        ucrReceiverYear.Selector = ucrSelectorDisplayDailyClimaticData
+        ucrReceiverDate.Selector = ucrSelectorDisplayDailyClimaticData
+        ucrReceiverElements.Selector = ucrSelectorDisplayDailyClimaticData
+        ucrReceiverXaxis.Selector = ucrSelectorDisplayDailyClimaticData
+        ucrReceiverYaxisLower.Selector = ucrSelectorDisplayDailyClimaticData
+        ucrReceiverYaxisUpper.Selector = ucrSelectorDisplayDailyClimaticData
+        ucrReceiverStation.SetMeAsReceiver()
+
+        ucrReceiverStation.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "station" & Chr(34)})
+        ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
+        ucrReceiverXaxis.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "doy" & Chr(34)})
+        ucrReceiverElements.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "rain" & Chr(34)})
+        ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
+
+        ucrPnlFrequencyDisplay.AddRadioButton(rdoTable)
+        ucrPnlFrequencyDisplay.AddRadioButton(rdoGraph)
+        ucrPnlFrequencyDisplay.AddRadioButton(rdoBoth)
+
+        ucrChkMissingRugPlot.SetText("Missing Rug Plot")
+        ucrChkValuesOutsideYrange.SetText("Values Outside Y Range")
+
     End Sub
 
     Private Sub SetDefaults()
-
+        ucrSelectorDisplayDailyClimaticData.Reset()
+        'For now
+        rdoGraph.Enabled = False
+        rdoBoth.Enabled = False
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Object)
@@ -46,5 +71,11 @@ Public Class dlgDisplayDailyClimaticData
 
     Private Sub TestOkEnabled()
 
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
     End Sub
 End Class
