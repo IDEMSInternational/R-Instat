@@ -487,7 +487,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareFactorUnusedLevels_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnFactorUnusedLevels.Click
-        dlgUnusedLevels.ShowDialog()
+        dlgRemoveUnusedLevels.ShowDialog()
     End Sub
     Private Sub mnuPrepareDataSort_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameSort.Click
         dlgSort.ShowDialog()
