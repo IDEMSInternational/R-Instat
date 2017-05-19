@@ -22,7 +22,7 @@ Public Class dlgNewDataFrame
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
 
-    Private Sub dlgFileNew_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub dlgNewDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
