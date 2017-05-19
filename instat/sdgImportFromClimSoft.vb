@@ -39,7 +39,7 @@ Public Class sdgImportFromClimSoft
         ucrInputPort.SetParameter(New RParameter("port", 2))
         ucrInputPort.AddQuotesIfUnrecognised = False
         ucrInputUserName.SetParameter(New RParameter("user", 3))
-
+        cmdEnterPassword.Enabled = False
         bControlsInitialised = True
     End Sub
 
@@ -87,6 +87,12 @@ Public Class sdgImportFromClimSoft
         Dim strUser As String = ""
         Dim strPort As String = ""
         Dim strDatabaseName As String = ""
+
+        If ucrInputPort.GetText() <> "" AndAlso ucrInputUserName.GetText() <> "" AndAlso ucrInputHost.GetText() <> "" AndAlso ucrInputDatabaseName.GetText() <> "" Then
+            cmdEnterPassword.Enabled = True
+        Else
+            cmdEnterPassword.Enabled = False
+        End If
 
         If clsRDatabaseConnect IsNot Nothing Then
             If clsRDatabaseConnect.ContainsParameter("host") Then
