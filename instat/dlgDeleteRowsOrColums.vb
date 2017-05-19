@@ -90,7 +90,6 @@ Public Class dlgDeleteRowsOrColums
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrSelectorForDeleteColumns.AddAdditionalCodeParameterPair(clsDeleteColumns, ucrSelectorForDeleteColumns.GetParameter, iAdditionalPairNo:=1)
-        ucrPnlColumnsOrRows.SetRCode(clsDeleteRows)
         ucrPnlColumnsOrRows.SetRCode(clsDeleteColumns)
         ucrReceiverForColumnsToDelete.SetRCode(clsDeleteColumns)
         ucrSelectorForDeleteColumns.SetRCode(clsDeleteRows)
