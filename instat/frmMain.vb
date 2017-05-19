@@ -498,7 +498,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareReorderObjects_Click(sender As Object, e As EventArgs) Handles mnuPrepareRObjectsReorder.Click
-        dlgReoderObjects.ShowDialog()
+        dlgReorderObjects.ShowDialog()
     End Sub
 
     Private Sub mnuPrepareRenameObjects_Click(sender As Object, e As EventArgs) Handles mnuPrepareRObjectsRename.Click
@@ -694,7 +694,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuOrganiseDataObjectReorderMetadata_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataObjectReorderMetadata.Click
-        dlgReoderMetadata.ShowDialog()
+        dlgReorderMetadata.ShowDialog()
     End Sub
 
     Private Sub mnuOrganiseDataObjectRenameMetadata_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataObjectRenameMetadata.Click
