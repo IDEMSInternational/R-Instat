@@ -27,7 +27,7 @@ data_object$set("public", "merge_data", function(new_data, by = NULL, type = "le
   }
   self$append_to_metadata(is_calculated_label, TRUE)
   self$add_defaults_meta()
-  self$add_defaults_variables_metadata()
+  self$add_defaults_variables_metadata(setdiff(names(new_data), names(curr_data)))
 }
 )
 
