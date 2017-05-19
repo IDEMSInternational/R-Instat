@@ -1107,7 +1107,9 @@
     <Compile Include="dlgRemoveUnusedLevels.Designer.vb">
       <DependentUpon>dlgRemoveUnusedLevels.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgRemoveUnusedLevels.vb" />
+    <Compile Include="dlgRemoveUnusedLevels.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgUseGraph.Designer.vb">
       <DependentUpon>dlgUseGraph.vb</DependentUpon>
     </Compile>
