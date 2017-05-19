@@ -22,7 +22,7 @@ Partial Class dlgFlatFrequencyTable
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.lblRowvariable = New System.Windows.Forms.Label()
+        Me.lblRowVariable = New System.Windows.Forms.Label()
         Me.lblColumnVariable = New System.Windows.Forms.Label()
         Me.ucrChkAddMargins = New instat.ucrCheck()
         Me.ucrColumnVariable = New instat.ucrReceiverMultiple()
@@ -31,14 +31,14 @@ Partial Class dlgFlatFrequencyTable
         Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
-        'lblRowvariable
+        'lblRowVariable
         '
-        Me.lblRowvariable.AutoSize = True
-        Me.lblRowvariable.Location = New System.Drawing.Point(264, 150)
-        Me.lblRowvariable.Name = "lblRowvariable"
-        Me.lblRowvariable.Size = New System.Drawing.Size(84, 13)
-        Me.lblRowvariable.TabIndex = 1
-        Me.lblRowvariable.Text = "Row Variable(s):"
+        Me.lblRowVariable.AutoSize = True
+        Me.lblRowVariable.Location = New System.Drawing.Point(264, 150)
+        Me.lblRowVariable.Name = "lblRowVariable"
+        Me.lblRowVariable.Size = New System.Drawing.Size(84, 13)
+        Me.lblRowVariable.TabIndex = 1
+        Me.lblRowVariable.Text = "Row Variable(s):"
         '
         'lblColumnVariable
         '
@@ -105,7 +105,7 @@ Partial Class dlgFlatFrequencyTable
         Me.ClientSize = New System.Drawing.Size(418, 322)
         Me.Controls.Add(Me.ucrChkAddMargins)
         Me.Controls.Add(Me.lblColumnVariable)
-        Me.Controls.Add(Me.lblRowvariable)
+        Me.Controls.Add(Me.lblRowVariable)
         Me.Controls.Add(Me.ucrColumnVariable)
         Me.Controls.Add(Me.ucrRowVariable)
         Me.Controls.Add(Me.ucrSelectorDataFrame)
@@ -125,7 +125,7 @@ Partial Class dlgFlatFrequencyTable
     Friend WithEvents ucrSelectorDataFrame As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrRowVariable As ucrReceiverMultiple
     Friend WithEvents ucrColumnVariable As ucrReceiverMultiple
-    Friend WithEvents lblRowvariable As Label
+    Friend WithEvents lblRowVariable As Label
     Friend WithEvents lblColumnVariable As Label
     Friend WithEvents ucrChkAddMargins As ucrCheck
 End Class
