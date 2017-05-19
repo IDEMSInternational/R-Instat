@@ -846,10 +846,10 @@
     <Compile Include="dlgCumulativeDistribution.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgDeleteDescriptive.Designer.vb">
-      <DependentUpon>dlgDeleteDescriptive.vb</DependentUpon>
+    <Compile Include="dlgDeleteObjects.Designer.vb">
+      <DependentUpon>dlgDeleteObjects.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgDeleteDescriptive.vb">
+    <Compile Include="dlgDeleteObjects.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgDeleteMetadata.Designer.vb">
@@ -2396,14 +2396,14 @@
     <EmbeddedResource Include="dlgDefineRedFlags.resx">
       <DependentUpon>dlgDefineRedFlags.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgDeleteDescriptive.fr-FR.resx">
-      <DependentUpon>dlgDeleteDescriptive.vb</DependentUpon>
+    <EmbeddedResource Include="dlgDeleteObjects.fr-FR.resx">
+      <DependentUpon>dlgDeleteObjects.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgDeleteDescriptive.resx">
-      <DependentUpon>dlgDeleteDescriptive.vb</DependentUpon>
+    <EmbeddedResource Include="dlgDeleteObjects.resx">
+      <DependentUpon>dlgDeleteObjects.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgDeleteDescriptive.sw-KE.resx">
-      <DependentUpon>dlgDeleteDescriptive.vb</DependentUpon>
+    <EmbeddedResource Include="dlgDeleteObjects.sw-KE.resx">
+      <DependentUpon>dlgDeleteObjects.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteMetadata.fr-FR.resx">
       <DependentUpon>dlgDeleteMetadata.vb</DependentUpon>
