@@ -89,37 +89,37 @@ instat_object$set("public", "calculate_summary", function(data_name, columns_to_
   }
   else {
     save <- 2
-  } 
-    calculated_from <- as.list(factors)
-    names(calculated_from) <- rep(data_name, length(factors))
-    calculated_from <- as.list(calculated_from)
-    factor_by <- instat_calculation$new(type = "by", calculated_from = calculated_from)
-    
-    sub_calculations <- list()
-    
-    if(is.null(columns_to_summarise)) {
+  }
+  calculated_from <- as.list(factors)
+  names(calculated_from) <- rep(data_name, length(factors))
+  calculated_from <- as.list(calculated_from)
+  factor_by <- instat_calculation$new(type = "by", calculated_from = calculated_from)
+  
+  sub_calculations <- list()
+  
+  if(is.null(columns_to_summarise)) {
+    for(summary_type in summaries) {
+      summary_calculation <- instat_calculation$new(type = "summary", result_name = summary_type,
+                                                    function_exp = paste0(summary_type, "(na.rm =", na.rm, ")"), save = save)
+      sub_calculations[[length(sub_calculations) + 1]] <- summary_calculation
+    }
+  }
+  else {
+    for(column_names in columns_to_summarise) {
+      calculated_from <- list(column_names)
+      names(calculated_from) <- data_name
       for(summary_type in summaries) {
-        summary_calculation <- instat_calculation$new(type = "summary", result_name = summary_type,
-                                                      function_exp = paste0(summary_type), save = save)
+        summary_calculation <- instat_calculation$new(type = "summary", result_name = paste0(summary_type, "_", column_names),
+                                                      function_exp = paste0(summary_type, "(", column_names, ", na.rm =", na.rm, ")"),
+                                                      calculated_from = calculated_from, save = save)
         sub_calculations[[length(sub_calculations) + 1]] <- summary_calculation
       }
     }
-    else {
-      for(column_names in columns_to_summarise) {
-        calculated_from <- list(column_names)
-        names(calculated_from) <- data_name
-        for(summary_type in summaries) {
-          summary_calculation <- instat_calculation$new(type = "summary", result_name = paste0(summary_type, "_", column_names),
-                                                        function_exp = paste0(summary_type, "(", column_names, ", na.rm =", na.rm, ")"),
-                                                        calculated_from = calculated_from, save = save)
-          sub_calculations[[length(sub_calculations) + 1]] <- summary_calculation
-        }
-      }
-    }
-    combined_calc_sum <- instat_calculation$new(type="combination", sub_calculations = sub_calculations, manipulations = list(factor_by))
-    out <- self$apply_instat_calculation(combined_calc_sum)
-    if(return_output) return(out$data)
   }
+  combined_calc_sum <- instat_calculation$new(type="combination", sub_calculations = sub_calculations, manipulations = list(factor_by))
+  out <- self$apply_instat_calculation(combined_calc_sum)
+  if(return_output) return(out$data)
+}
 )
 
 instat_object$set("public", "summary", function(data_name, columns_to_summarise, summaries, factors = c(), store_results = FALSE, drop = FALSE, return_output = FALSE, summary_name = NA, add_cols = c(), filter_names = c(), ...) {
@@ -295,11 +295,7 @@ summary_sum <- function (x, na.rm = FALSE,...) {
 }
 
 summary_count <- function(x,...) {
-    return(length(x))
-}
-
-summary_dataframe_length <- function(...) {
-  return(n())
+  return(length(x))
 }
 
 summary_count_missing <- function(x,...) {
@@ -344,7 +340,7 @@ summary_median <- function(x, na.rm = FALSE,...) {
 
 
 
-instat_object$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, row_factors = c(), column_factors = c(), store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = TRUE, ...) {
+instat_object$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, row_factors = c(), column_factors = c(), store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = TRUE, return_output = FALSE, ...) {
   
   factors <- c(column_factors, row_factors)
   cell_values <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = factors, store_results = store_results, drop = drop, na.rm = na.rm, return_output = TRUE)
@@ -353,8 +349,7 @@ instat_object$set("public", "summary_table", function(data_name, columns_to_summ
   # should run for every statistic? loop for summary_type: , paste0(summary_type, "()"
   # note: it is not always summary_count, it's any of the summary statistics used.
   # it's not data_name. It's the name given to the dataset, e.g., Survey_by_Village._Variety._Fertgrp.
-  
-  cell_values <- dcast(formula = row_factors ~ column_factors, value.var = colnames(cell_values)[-factors], data = cell_values) 
+  cell_values <- dcast(formula = as.formula(paste(paste(row_factors, collapse = "+"), "~", paste(column_factors, collapse = "+"))), value.var = colnames(cell_values)[!colnames(cell_values) %in% factors], data = cell_values)
   
   
   if(include_margins) {
@@ -378,8 +373,10 @@ instat_object$set("public", "summary_table", function(data_name, columns_to_summ
       overall_row_margin <- append(row_factor_margin$summary_count, overall_value, after = 0)
       # add into the unstacked dataset
       cell_values <- cbind(cell_values, overall_row_margin)
-      
     }
+  }
+  if(return_output) {
+    return(cell_values)
   }
 }
 )

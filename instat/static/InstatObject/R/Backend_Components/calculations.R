@@ -115,7 +115,7 @@ data_object$set("public", "save_calculation", function(calc) {
 
 instat_calculation <- R6Class("instat_calculation",
                        public = list(
-                         initialize = function(function_exp = "", type = "", name = "", result_name = "", result_data_frame = "", = "", manipulations = list(),
+                         initialize = function(function_exp = "", type = "", name = "", result_name = "", result_data_frame = "", manipulations = list(),
                                                sub_calculations = list(), calculated_from = list(), save = 0) {
                            if((type == "calculation" || type == "summary") && missing(result_name)) stop("result_name must be provided for calculation and summary types")
                            if(type == "combination" && save > 0) {
@@ -128,14 +128,14 @@ instat_calculation <- R6Class("instat_calculation",
                            self$name <- name
                            self$result_name <- result_name
                            self$result_data_frame <- result_data_frame
-						   self$manipulations <- manipulations
+						               self$manipulations <- manipulations
                            self$sub_calculations <- sub_calculations
                            self$calculated_from <- calculated_from
                            self$save <- save
                          },
                          name = "",
                          result_name = "",
-						 result_data_frame = "",
+						             result_data_frame = "",
                          type = "",
                          manipulations = list(),
                          sub_calculations = list(),
