@@ -544,7 +544,7 @@ Public Class frmEditor
     End Sub
 
     Private Sub reorderSheet_Click(sender As Object, e As EventArgs) Handles reorderSheet.Click
-        dlgReorderSheet.ShowDialog()
+        dlgReorderDataFrame.ShowDialog()
     End Sub
 
     Private Sub UpdateRFunctionDataFrameParameters()

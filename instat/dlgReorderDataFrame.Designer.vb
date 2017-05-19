@@ -64,7 +64,7 @@ Partial Class dlgReorderDataFrame
         Me.MinimizeBox = False
         Me.Name = "dlgReorderDataFrame"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Reoder Sheets"
+        Me.Text = "Reoder Data Frames"
         Me.ResumeLayout(False)
 
     End Sub
