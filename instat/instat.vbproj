@@ -1104,12 +1104,10 @@
     <Compile Include="dlgTwoSampleNonparametricTest.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgUnusedLevels.Designer.vb">
-      <DependentUpon>dlgUnusedLevels.vb</DependentUpon>
+    <Compile Include="dlgRemoveUnusedLevels.Designer.vb">
+      <DependentUpon>dlgRemoveUnusedLevels.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgUnusedLevels.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="dlgRemoveUnusedLevels.vb" />
     <Compile Include="dlgUseGraph.Designer.vb">
       <DependentUpon>dlgUseGraph.vb</DependentUpon>
     </Compile>
@@ -2974,14 +2972,14 @@
     <EmbeddedResource Include="dlgTwoWayFrequencies.resx">
       <DependentUpon>dlgTwoWayFrequencies.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgUnusedLevels.fr-FR.resx">
-      <DependentUpon>dlgUnusedLevels.vb</DependentUpon>
+    <EmbeddedResource Include="dlgRemoveUnusedLevels.fr-FR.resx">
+      <DependentUpon>dlgRemoveUnusedLevels.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgUnusedLevels.resx">
-      <DependentUpon>dlgUnusedLevels.vb</DependentUpon>
+    <EmbeddedResource Include="dlgRemoveUnusedLevels.resx">
+      <DependentUpon>dlgRemoveUnusedLevels.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgUnusedLevels.sw-KE.resx">
-      <DependentUpon>dlgUnusedLevels.vb</DependentUpon>
+    <EmbeddedResource Include="dlgRemoveUnusedLevels.sw-KE.resx">
+      <DependentUpon>dlgRemoveUnusedLevels.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DlgUseDate.resx">
       <DependentUpon>DlgUseDate.vb</DependentUpon>
