@@ -1038,10 +1038,10 @@
     <Compile Include="dlgReorderLevels.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgReorderSheet.Designer.vb">
-      <DependentUpon>dlgReorderSheet.vb</DependentUpon>
+    <Compile Include="dlgReorderDataFrame.Designer.vb">
+      <DependentUpon>dlgReorderDataFrame.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgReorderSheet.vb">
+    <Compile Include="dlgReorderDataFrame.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgRestrict.Designer.vb">
@@ -2830,14 +2830,14 @@
     <EmbeddedResource Include="dlgReorderLevels.sw-KE.resx">
       <DependentUpon>dlgReorderLevels.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgReorderSheet.fr-FR.resx">
-      <DependentUpon>dlgReorderSheet.vb</DependentUpon>
+    <EmbeddedResource Include="dlgReorderDataFrame.fr-FR.resx">
+      <DependentUpon>dlgReorderDataFrame.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgReorderSheet.resx">
-      <DependentUpon>dlgReorderSheet.vb</DependentUpon>
+    <EmbeddedResource Include="dlgReorderDataFrame.resx">
+      <DependentUpon>dlgReorderDataFrame.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgReorderSheet.sw-KE.resx">
-      <DependentUpon>dlgReorderSheet.vb</DependentUpon>
+    <EmbeddedResource Include="dlgReorderDataFrame.sw-KE.resx">
+      <DependentUpon>dlgReorderDataFrame.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRestrict.fr-FR.resx">
       <DependentUpon>dlgRestrict.vb</DependentUpon>
