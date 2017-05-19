@@ -65,8 +65,8 @@ Public Class dlgDisplayDailyClimaticData
         ucrPnlFrequencyDisplay.AddRadioButton(rdoGraph)
         ucrPnlFrequencyDisplay.AddRadioButton(rdoBoth)
 
-        ucrChkMissingRugPlot.SetText("Missing Rug Plot")
-        ucrChkValuesOutsideYrange.SetText("Values Outside Y Range")
+        ucrChkMissingRugPlot.SetText("Indicate Missing Rug Plot")
+        ucrChkValuesOutsideYrange.SetText("Indicate  Values Outside Y Range")
 
     End Sub
 
