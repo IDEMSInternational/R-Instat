@@ -66,7 +66,6 @@ Public Class dlgRandomSample
 
         ucrSelectorRandomSamples.Reset()
         ucrSaveRandomSample.Reset()
-        'ucrPrefixNewColumns.SetName("Rand")
         SetNewColumName()
 
         'setseed fuction
@@ -75,10 +74,11 @@ Public Class dlgRandomSample
         clsSetSeed.AddParameter("seed", 1)
 
         ucrNudNumberOfSamples.Value = 1
-        SetDataFrameandDistributionParameters()
-        ucrDistWithParameters.SetParameters()
+
+        'SetDataFrameandDistributionParameters()
+        ' ucrDistWithParameters.SetParameters()
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSaveRandomSample.GetText, strTempDataframe:=ucrSelectorRandomSamples.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveRandomSample.GetText)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDistribtionFunction)
+        'ucrBase.clsRsyntax.SetBaseRFunction(clsDistribtionFunction)
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
