@@ -1401,6 +1401,10 @@ Public Class frmMain
         dlgFlatFrequencyTable.ShowDialog()
     End Sub
 
+    Private Sub DispalyClimaticDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DispalyClimaticDataToolStripMenuItem.Click
+        dlgDisplayDailyClimaticData.ShowDialog()
+    End Sub
+
 
 
 
