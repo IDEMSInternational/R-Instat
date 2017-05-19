@@ -34,9 +34,9 @@ Partial Class dlgDescribeTwoVarGraph
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(10, 198)
+        Me.cmdOptions.Location = New System.Drawing.Point(320, 220)
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(120, 23)
+        Me.cmdOptions.Size = New System.Drawing.Size(91, 23)
         Me.cmdOptions.TabIndex = 11
         Me.cmdOptions.Tag = "Options..."
         Me.cmdOptions.Text = "Options"
@@ -75,7 +75,7 @@ Partial Class dlgDescribeTwoVarGraph
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 253)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 247)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
@@ -94,7 +94,7 @@ Partial Class dlgDescribeTwoVarGraph
         '
         'ucrTwoVarGraphSave
         '
-        Me.ucrTwoVarGraphSave.Location = New System.Drawing.Point(12, 227)
+        Me.ucrTwoVarGraphSave.Location = New System.Drawing.Point(12, 221)
         Me.ucrTwoVarGraphSave.Name = "ucrTwoVarGraphSave"
         Me.ucrTwoVarGraphSave.Size = New System.Drawing.Size(265, 20)
         Me.ucrTwoVarGraphSave.TabIndex = 12
@@ -113,7 +113,7 @@ Partial Class dlgDescribeTwoVarGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(421, 313)
+        Me.ClientSize = New System.Drawing.Size(420, 306)
         Me.Controls.Add(Me.lblFirstVariables)
         Me.Controls.Add(Me.ucrReceiverMultipleTwoVar)
         Me.Controls.Add(Me.lblSecondVariable)
