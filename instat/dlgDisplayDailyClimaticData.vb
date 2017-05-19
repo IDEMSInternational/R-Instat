@@ -34,20 +34,32 @@ Public Class dlgDisplayDailyClimaticData
 
     Private Sub InitialiseDialog()
 
-        ucrReceiverStation.Selector = ucrSelectorDisplayDailyClimaticData
-        ucrReceiverYear.Selector = ucrSelectorDisplayDailyClimaticData
-        ucrReceiverDate.Selector = ucrSelectorDisplayDailyClimaticData
-        ucrReceiverElements.Selector = ucrSelectorDisplayDailyClimaticData
-        ucrReceiverXaxis.Selector = ucrSelectorDisplayDailyClimaticData
-        ucrReceiverYaxisLower.Selector = ucrSelectorDisplayDailyClimaticData
-        ucrReceiverYaxisUpper.Selector = ucrSelectorDisplayDailyClimaticData
-        ucrReceiverStation.SetMeAsReceiver()
+        ucrReceiverStations.Selector = ucrSelectorDisplayDailyClimaticData
+        ucrReceiverStations.SetClimaticType("station")
+        ucrReceiverStations.bAutoFill = True
+        ucrReceiverStations.SetMeAsReceiver()
 
-        ucrReceiverStation.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "station" & Chr(34)})
-        ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
-        ucrReceiverXaxis.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "doy" & Chr(34)})
-        ucrReceiverElements.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "rain" & Chr(34)})
-        ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
+        ucrReceiverYear.Selector = ucrSelectorDisplayDailyClimaticData
+        ucrReceiverYear.SetClimaticType("year")
+        ucrReceiverYear.bAutoFill = True
+
+        ucrReceiverDate.Selector = ucrSelectorDisplayDailyClimaticData
+        ucrReceiverDate.SetClimaticType("date")
+        ucrReceiverDate.bAutoFill = True
+
+        ucrReceiverElements.Selector = ucrSelectorDisplayDailyClimaticData
+        ucrReceiverElements.SetParameter(New RParameter("x", 0))
+        ucrReceiverElements.SetParameterIsString()
+        ucrReceiverElements.bWithQuotes = False
+
+        ucrReceiverXaxis.Selector = ucrSelectorDisplayDailyClimaticData
+        ucrReceiverXaxis.SetClimaticType("doy")
+        ucrReceiverXaxis.bAutoFill = True
+
+        ucrReceiverYaxisLower.Selector = ucrSelectorDisplayDailyClimaticData
+        ucrReceiverYaxisLower.bAutoFill = True
+        ucrReceiverYaxisUpper.Selector = ucrSelectorDisplayDailyClimaticData
+        ucrReceiverYaxisUpper.bAutoFill = True
 
         ucrPnlFrequencyDisplay.AddRadioButton(rdoTable)
         ucrPnlFrequencyDisplay.AddRadioButton(rdoGraph)
@@ -70,7 +82,7 @@ Public Class dlgDisplayDailyClimaticData
     End Sub
 
     Private Sub TestOkEnabled()
-
+        ucrBase.OKEnabled(True)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset

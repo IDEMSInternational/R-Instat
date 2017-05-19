@@ -29,7 +29,7 @@ Partial Class dlgDisplayDailyClimaticData
         Me.rdoGraph = New System.Windows.Forms.RadioButton()
         Me.ucrPnlFrequencyDisplay = New instat.UcrPanel()
         Me.lblStation = New System.Windows.Forms.Label()
-        Me.ucrReceiverStation = New instat.ucrReceiverSingle()
+        Me.ucrReceiverStations = New instat.ucrReceiverSingle()
         Me.lblElement = New System.Windows.Forms.Label()
         Me.lblDate = New System.Windows.Forms.Label()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
@@ -131,17 +131,17 @@ Partial Class dlgDisplayDailyClimaticData
         Me.lblStation.TabIndex = 37
         Me.lblStation.Text = "Station:"
         '
-        'ucrReceiverStation
+        'ucrReceiverStations
         '
-        Me.ucrReceiverStation.frmParent = Me
-        Me.ucrReceiverStation.Location = New System.Drawing.Point(274, 80)
-        Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverStation.Name = "ucrReceiverStation"
-        Me.ucrReceiverStation.Selector = Nothing
-        Me.ucrReceiverStation.Size = New System.Drawing.Size(143, 20)
-        Me.ucrReceiverStation.strNcFilePath = ""
-        Me.ucrReceiverStation.TabIndex = 38
-        Me.ucrReceiverStation.ucrSelector = Nothing
+        Me.ucrReceiverStations.frmParent = Me
+        Me.ucrReceiverStations.Location = New System.Drawing.Point(274, 80)
+        Me.ucrReceiverStations.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverStations.Name = "ucrReceiverStations"
+        Me.ucrReceiverStations.Selector = Nothing
+        Me.ucrReceiverStations.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverStations.strNcFilePath = ""
+        Me.ucrReceiverStations.TabIndex = 38
+        Me.ucrReceiverStations.ucrSelector = Nothing
         '
         'lblElement
         '
@@ -305,7 +305,7 @@ Partial Class dlgDisplayDailyClimaticData
         Me.Controls.Add(Me.ucrReceiverDate)
         Me.Controls.Add(Me.lblElement)
         Me.Controls.Add(Me.lblStation)
-        Me.Controls.Add(Me.ucrReceiverStation)
+        Me.Controls.Add(Me.ucrReceiverStations)
         Me.Controls.Add(Me.rdoBoth)
         Me.Controls.Add(Me.rdoTable)
         Me.Controls.Add(Me.rdoGraph)
@@ -330,7 +330,7 @@ Partial Class dlgDisplayDailyClimaticData
     Friend WithEvents rdoGraph As RadioButton
     Friend WithEvents ucrPnlFrequencyDisplay As UcrPanel
     Friend WithEvents lblStation As Label
-    Friend WithEvents ucrReceiverStation As ucrReceiverSingle
+    Friend WithEvents ucrReceiverStations As ucrReceiverSingle
     Friend WithEvents lblElement As Label
     Friend WithEvents ucrReceiverElements As ucrReceiverMultiple
     Friend WithEvents ucrReceiverYaxisUpper As ucrReceiverSingle
