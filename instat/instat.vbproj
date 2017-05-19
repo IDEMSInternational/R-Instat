@@ -263,6 +263,12 @@
     <Compile Include="dlgDescribeTwoVariable.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgDisplayDailyClimaticData.Designer.vb">
+      <DependentUpon>dlgDisplayDailyClimaticData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgDisplayDailyClimaticData.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDrySpells.Designer.vb">
       <DependentUpon>dlgDrySpells.vb</DependentUpon>
     </Compile>
@@ -2457,6 +2463,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDescribeTwoVariable.sw-KE.resx">
       <DependentUpon>dlgDescribeTwoVariable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgDisplayDailyClimaticData.resx">
+      <DependentUpon>dlgDisplayDailyClimaticData.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgEnter.resx">
       <DependentUpon>dlgEnter.vb</DependentUpon>
