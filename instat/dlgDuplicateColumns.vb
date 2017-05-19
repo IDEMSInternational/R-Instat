@@ -79,6 +79,7 @@ Public Class dlgDuplicateColumns
         ucrSelectorForDuplicateColumn.Reset()
         ucrInputColumnName.bAllowNonConditionValues = True
         ucrInputColumnName.Reset()
+        ucrInputColumnName.SetName("")
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
         clsDefaultFunction.AddParameter("before", "FALSE")
