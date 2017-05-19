@@ -13,11 +13,12 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 Public Class dlgRowSummary
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsDefaultFunction As New RFunction
+    Private clsApply As New RFunction
 
     Private Sub dlgRowSummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -33,18 +34,19 @@ Public Class dlgRowSummary
     End Sub
 
     Private Sub SetDefaults()
-        clsDefaultFunction = New RFunction
+        clsApply = New RFunction
 
+        'reset
         ucrSelectorForRowSummaries.Reset()
         ucrSaveResults.Reset()
 
         'Defining the default RFunction
-        clsDefaultFunction.SetRCommand("apply")
-        clsDefaultFunction.AddParameter("FUN", "mean")
-        clsDefaultFunction.AddParameter("MARGIN", 1)
-        clsDefaultFunction.SetAssignTo(ucrSaveResults.GetText, strTempDataframe:=ucrSelectorForRowSummaries.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+        clsApply.SetPackageName("base")
+        clsApply.SetRCommand("apply")
+        clsApply.AddParameter("FUN", "mean")
+        clsApply.AddParameter("MARGIN", 1)
+        clsApply.SetAssignTo(ucrSaveResults.GetText, strTempDataframe:=ucrSelectorForRowSummaries.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsApply)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
