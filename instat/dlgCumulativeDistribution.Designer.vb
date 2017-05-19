@@ -88,6 +88,7 @@ Partial Class dlgCumulativeDistribution
         Me.ucrVariablesAsFactorforCumDist.Name = "ucrVariablesAsFactorforCumDist"
         Me.ucrVariablesAsFactorforCumDist.Selector = Nothing
         Me.ucrVariablesAsFactorforCumDist.Size = New System.Drawing.Size(125, 136)
+        Me.ucrVariablesAsFactorforCumDist.strNcFilePath = ""
         Me.ucrVariablesAsFactorforCumDist.TabIndex = 1
         Me.ucrVariablesAsFactorforCumDist.ucrSelector = Nothing
         Me.ucrVariablesAsFactorforCumDist.ucrVariableSelector = Nothing
@@ -100,6 +101,7 @@ Partial Class dlgCumulativeDistribution
         Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
         Me.ucrFactorReceiver.Selector = Nothing
         Me.ucrFactorReceiver.Size = New System.Drawing.Size(125, 26)
+        Me.ucrFactorReceiver.strNcFilePath = ""
         Me.ucrFactorReceiver.TabIndex = 3
         Me.ucrFactorReceiver.ucrSelector = Nothing
         '
@@ -131,6 +133,7 @@ Partial Class dlgCumulativeDistribution
         'ucrChkIncludePoints
         '
         Me.ucrChkIncludePoints.Checked = False
+        Me.ucrChkIncludePoints.Enabled = False
         Me.ucrChkIncludePoints.Location = New System.Drawing.Point(10, 312)
         Me.ucrChkIncludePoints.Name = "ucrChkIncludePoints"
         Me.ucrChkIncludePoints.Size = New System.Drawing.Size(152, 20)
