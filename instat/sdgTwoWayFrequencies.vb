@@ -115,6 +115,7 @@ Public Class sdgTwoWayFrequencies
         'Setting Plot parameter
         ucrPnlGraphType.AddToLinkedControls(ucrChkStack, {rdoBar}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
 
+        'TODO: Investigate why when some variables are used for line graph this error is given "Breaks and labels are of different lengths"
         rdoLine.Enabled = False
         bControlsInitialised = True
     End Sub
@@ -159,15 +160,11 @@ Public Class sdgTwoWayFrequencies
     'This is a temporary solution to a known bug with sjPlot package
     'Issue posted here https://github.com/strengejacke/sjPlot/issues/227
     'This sub can be removed when this issue is resolved in sjPlot
-    Public Sub ShowValueParameter()
+    Private Sub CheckboxesForShowValues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkShowPercentage.ControlValueChanged, ucrChkShowCount.ControlValueChanged
         If (ucrChkShowPercentage.Checked = False AndAlso ucrChkShowCount.Checked = False) Then
             clsTwoWayGraphFreq.AddParameter("show.values", "FALSE")
         Else
             clsTwoWayGraphFreq.RemoveParameterByName("show.values")
         End If
-    End Sub
-
-    Private Sub CheckboxesForShowValues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkShowPercentage.ControlValueChanged, ucrChkShowCount.ControlValueChanged
-        ShowValueParameter()
     End Sub
 End Class
