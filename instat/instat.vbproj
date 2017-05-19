@@ -1710,10 +1710,10 @@
     <Compile Include="dlgReplaceValues.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgRowSummaries.Designer.vb">
-      <DependentUpon>dlgRowSummaries.vb</DependentUpon>
+    <Compile Include="dlgRowSummary.Designer.vb">
+      <DependentUpon>dlgRowSummary.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgRowSummaries.vb">
+    <Compile Include="dlgRowSummary.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgSaveAs.Designer.vb">
@@ -3863,14 +3863,14 @@
     <EmbeddedResource Include="dlgReplaceValues.sw-KE.resx">
       <DependentUpon>dlgReplaceValues.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgRowSummaries.fr-FR.resx">
-      <DependentUpon>dlgRowSummaries.vb</DependentUpon>
+    <EmbeddedResource Include="dlgRowSummary.fr-FR.resx">
+      <DependentUpon>dlgRowSummary.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgRowSummaries.resx">
-      <DependentUpon>dlgRowSummaries.vb</DependentUpon>
+    <EmbeddedResource Include="dlgRowSummary.resx">
+      <DependentUpon>dlgRowSummary.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgRowSummaries.sw-KE.resx">
-      <DependentUpon>dlgRowSummaries.vb</DependentUpon>
+    <EmbeddedResource Include="dlgRowSummary.sw-KE.resx">
+      <DependentUpon>dlgRowSummary.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSaveAs.fr-FR.resx">
       <DependentUpon>dlgSaveAs.vb</DependentUpon>
