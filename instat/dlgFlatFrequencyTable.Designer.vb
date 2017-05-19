@@ -47,7 +47,7 @@ Partial Class dlgFlatFrequencyTable
         Me.lblColumnVariable.Name = "lblColumnVariable"
         Me.lblColumnVariable.Size = New System.Drawing.Size(125, 13)
         Me.lblColumnVariable.TabIndex = 3
-        Me.lblColumnVariable.Text = "Column Variable (Factor):"
+        Me.lblColumnVariable.Text = "Column Variable(s) (Factor):"
         '
         'ucrChkAddMargins
         '
