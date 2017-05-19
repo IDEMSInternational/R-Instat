@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgDeleteRowsOrColums
     Public bFirstLoad As Boolean = True
@@ -58,11 +57,12 @@ Public Class dlgDeleteRowsOrColums
         ucrReceiverForColumnsToDelete.SetMeAsReceiver()
         ucrReceiverForColumnsToDelete.SetParameterIsString()
         ucrReceiverForColumnsToDelete.SetLinkedDisplayControl(lblColumnsToDelete)
+
         ucrNudFrom.SetParameter(New RParameter("From", 0))
-        ucrNudTo.SetParameter(New RParameter("To", 2))
         ucrNudFrom.SetMinMax(1, ucrSelectorForDeleteColumns.ucrAvailableDataFrames.iDataFrameLength)
         ucrNudFrom.SetLinkedDisplayControl(lblFrom)
 
+        ucrNudTo.SetParameter(New RParameter("To", 2))
         ucrNudTo.SetMinMax(1, ucrSelectorForDeleteColumns.ucrAvailableDataFrames.iDataFrameLength)
         ucrNudTo.SetLinkedDisplayControl(lblTo)
 
@@ -73,13 +73,14 @@ Public Class dlgDeleteRowsOrColums
     Private Sub SetDefaults()
         clsDeleteColumns = New RFunction
         clsDeleteRows = New RFunction
-        ucrSelectorForDeleteColumns.Reset()
         clsOperator = New ROperator
 
-        clsOperator.SetOperation(":")
+        ucrSelectorForDeleteColumns.Reset()
+
         clsDeleteRows.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_rows_in_data")
         clsDeleteColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_columns_in_data")
 
+        clsOperator.SetOperation(":")
         clsOperator.AddParameter("From", 1, iPosition:=0)
         clsOperator.AddParameter("To", 1, iPosition:=2)
 
@@ -95,7 +96,6 @@ Public Class dlgDeleteRowsOrColums
         ucrSelectorForDeleteColumns.SetRCode(clsDeleteRows)
         ucrNudTo.SetRCode(clsOperator, bReset)
         ucrNudFrom.SetRCode(clsOperator, bReset)
-
     End Sub
 
     Private Sub TestOKEnabled()
@@ -152,5 +152,4 @@ Public Class dlgDeleteRowsOrColums
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForColumnsToDelete.ControlContentsChanged, ucrNudFrom.ControlContentsChanged, ucrPnlColumnsOrRows.ControlContentsChanged, ucrNudFrom.ControlContentsChanged
         TestOKEnabled()
     End Sub
-
 End Class
