@@ -336,21 +336,25 @@ summary_median <- function(x, na.rm = FALSE,...) {
   return(median(x, na.rm = na.rm))
 }
 
-
-
-
-
-instat_object$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, row_factors = c(), column_factors = c(), store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = TRUE, return_output = FALSE, ...) {
+instat_object$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, row_factors = c(), column_factors = c(), store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = TRUE, return_output = FALSE, treat_columns_as_factor = FALSE, ...) {
   
   factors <- c(column_factors, row_factors)
   cell_values <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = factors, store_results = store_results, drop = drop, na.rm = na.rm, return_output = TRUE)
-  
+  grps <- nrow(cell_values)
+  cell_values <- melt(cell_values, id.vars = factors, variable.name = "Summary-Variable", value.name = "Value")
+  # TODO this relies on knowing order of output from calculate_summary
+  #      better method should be implemented not relying on this.
+  cell_values[["Variable"]] <- rep(rev(columns_to_summarise), each = nrow(cell_values)/length(columns_to_summarise))
+  cell_values[["Summary"]] <- rep(rev(summaries), each = grps, length.out = nrow(cell_values))
+  if(!treat_columns_as_factor) {
+    cell_values[["Summary"]] <- paste(cell_values[["Variable"]], cell_values[["Summary"]], sep = "_")
+  }
+  View(cell_values)
   #assume one summary for now
   # should run for every statistic? loop for summary_type: , paste0(summary_type, "()"
   # note: it is not always summary_count, it's any of the summary statistics used.
   # it's not data_name. It's the name given to the dataset, e.g., Survey_by_Village._Variety._Fertgrp.
   cell_values <- dcast(formula = as.formula(paste(paste(row_factors, collapse = "+"), "~", paste(column_factors, collapse = "+"))), value.var = colnames(cell_values)[!colnames(cell_values) %in% factors], data = cell_values)
-  
   
   if(include_margins) {
     margin_tables <- list()
