@@ -1014,10 +1014,10 @@
     <Compile Include="dlgRenameMetadata.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgReoderDescriptives.Designer.vb">
-      <DependentUpon>dlgReoderDescriptives.vb</DependentUpon>
+    <Compile Include="dlgReoderObjects.Designer.vb">
+      <DependentUpon>dlgReoderObjects.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgReoderDescriptives.vb">
+    <Compile Include="dlgReoderObjects.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgReoderMetadata.Designer.vb">
@@ -2792,14 +2792,14 @@
     <EmbeddedResource Include="dlgRenameMetadata.sw-KE.resx">
       <DependentUpon>dlgRenameMetadata.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgReoderDescriptives.fr-FR.resx">
-      <DependentUpon>dlgReoderDescriptives.vb</DependentUpon>
+    <EmbeddedResource Include="dlgReoderObjects.fr-FR.resx">
+      <DependentUpon>dlgReoderObjects.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgReoderDescriptives.resx">
-      <DependentUpon>dlgReoderDescriptives.vb</DependentUpon>
+    <EmbeddedResource Include="dlgReoderObjects.resx">
+      <DependentUpon>dlgReoderObjects.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgReoderDescriptives.sw-KE.resx">
-      <DependentUpon>dlgReoderDescriptives.vb</DependentUpon>
+    <EmbeddedResource Include="dlgReoderObjects.sw-KE.resx">
+      <DependentUpon>dlgReoderObjects.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReoderMetadata.fr-FR.resx">
       <DependentUpon>dlgReoderMetadata.vb</DependentUpon>
