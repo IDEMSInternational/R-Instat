@@ -1114,10 +1114,10 @@
     <Compile Include="dlgUseGraph.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgViewDescriptives.Designer.vb">
-      <DependentUpon>dlgViewDescriptives.vb</DependentUpon>
+    <Compile Include="dlgViewObjects.Designer.vb">
+      <DependentUpon>dlgViewObjects.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgViewDescriptives.vb">
+    <Compile Include="dlgViewObjects.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgWindrose.Designer.vb">
@@ -2999,14 +2999,14 @@
     <EmbeddedResource Include="dlgViewAndRemoveLinks.resx">
       <DependentUpon>dlgViewAndRemoveLinks.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgViewDescriptives.fr-FR.resx">
-      <DependentUpon>dlgViewDescriptives.vb</DependentUpon>
+    <EmbeddedResource Include="dlgViewObjects.fr-FR.resx">
+      <DependentUpon>dlgViewObjects.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgViewDescriptives.resx">
-      <DependentUpon>dlgViewDescriptives.vb</DependentUpon>
+    <EmbeddedResource Include="dlgViewObjects.resx">
+      <DependentUpon>dlgViewObjects.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgViewDescriptives.sw-KE.resx">
-      <DependentUpon>dlgViewDescriptives.vb</DependentUpon>
+    <EmbeddedResource Include="dlgViewObjects.sw-KE.resx">
+      <DependentUpon>dlgViewObjects.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgViewGraph.resx">
       <DependentUpon>dlgViewGraph.vb</DependentUpon>
