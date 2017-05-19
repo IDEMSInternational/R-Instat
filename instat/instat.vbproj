@@ -1002,10 +1002,10 @@
     <Compile Include="dlgRecodeNumeric.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgRenameDescriptive.Designer.vb">
-      <DependentUpon>dlgRenameDescriptive.vb</DependentUpon>
+    <Compile Include="dlgRenameObjects.Designer.vb">
+      <DependentUpon>dlgRenameObjects.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgRenameDescriptive.vb">
+    <Compile Include="dlgRenameObjects.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgRenameMetadata.Designer.vb">
@@ -2774,14 +2774,14 @@
     <EmbeddedResource Include="dlgRecodeNumericIntoQuantiles.resx">
       <DependentUpon>dlgRecodeNumericIntoQuantiles.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgRenameDescriptive.fr-FR.resx">
-      <DependentUpon>dlgRenameDescriptive.vb</DependentUpon>
+    <EmbeddedResource Include="dlgRenameObjects.fr-FR.resx">
+      <DependentUpon>dlgRenameObjects.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgRenameDescriptive.resx">
-      <DependentUpon>dlgRenameDescriptive.vb</DependentUpon>
+    <EmbeddedResource Include="dlgRenameObjects.resx">
+      <DependentUpon>dlgRenameObjects.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgRenameDescriptive.sw-KE.resx">
-      <DependentUpon>dlgRenameDescriptive.vb</DependentUpon>
+    <EmbeddedResource Include="dlgRenameObjects.sw-KE.resx">
+      <DependentUpon>dlgRenameObjects.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRenameMetadata.fr-FR.resx">
       <DependentUpon>dlgRenameMetadata.vb</DependentUpon>
