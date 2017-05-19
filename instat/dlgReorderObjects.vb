@@ -15,11 +15,11 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat
 Imports instat.Translations
-Public Class dlgReoderObjects
+Public Class dlgReorderObjects
     Public bFirstLoad As Boolean = True
     Public bReset As Boolean = True
 
-    Private Sub dlgReoderObject_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub dlgReorderObject_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
