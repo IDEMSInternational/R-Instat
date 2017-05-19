@@ -1014,16 +1014,16 @@
     <Compile Include="dlgRenameMetadata.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgReoderObjects.Designer.vb">
-      <DependentUpon>dlgReoderObjects.vb</DependentUpon>
+    <Compile Include="dlgReorderObjects.Designer.vb">
+      <DependentUpon>dlgReorderObjects.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgReoderObjects.vb">
+    <Compile Include="dlgReorderObjects.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgReoderMetadata.Designer.vb">
-      <DependentUpon>dlgReoderMetadata.vb</DependentUpon>
+    <Compile Include="dlgReorderMetadata.Designer.vb">
+      <DependentUpon>dlgReorderMetadata.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgReoderMetadata.vb">
+    <Compile Include="dlgReorderMetadata.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgReorderColumns.Designer.vb">
@@ -2794,23 +2794,23 @@
     <EmbeddedResource Include="dlgRenameMetadata.sw-KE.resx">
       <DependentUpon>dlgRenameMetadata.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgReoderObjects.fr-FR.resx">
-      <DependentUpon>dlgReoderObjects.vb</DependentUpon>
+    <EmbeddedResource Include="dlgReorderObjects.fr-FR.resx">
+      <DependentUpon>dlgReorderObjects.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgReoderObjects.resx">
-      <DependentUpon>dlgReoderObjects.vb</DependentUpon>
+    <EmbeddedResource Include="dlgReorderObjects.resx">
+      <DependentUpon>dlgReorderObjects.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgReoderObjects.sw-KE.resx">
-      <DependentUpon>dlgReoderObjects.vb</DependentUpon>
+    <EmbeddedResource Include="dlgReorderObjects.sw-KE.resx">
+      <DependentUpon>dlgReorderObjects.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgReoderMetadata.fr-FR.resx">
-      <DependentUpon>dlgReoderMetadata.vb</DependentUpon>
+    <EmbeddedResource Include="dlgReorderMetadata.fr-FR.resx">
+      <DependentUpon>dlgReorderMetadata.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgReoderMetadata.resx">
-      <DependentUpon>dlgReoderMetadata.vb</DependentUpon>
+    <EmbeddedResource Include="dlgReorderMetadata.resx">
+      <DependentUpon>dlgReorderMetadata.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgReoderMetadata.sw-KE.resx">
-      <DependentUpon>dlgReoderMetadata.vb</DependentUpon>
+    <EmbeddedResource Include="dlgReorderMetadata.sw-KE.resx">
+      <DependentUpon>dlgReorderMetadata.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReorderColumns.fr-FR.resx">
       <DependentUpon>dlgReorderColumns.vb</DependentUpon>
