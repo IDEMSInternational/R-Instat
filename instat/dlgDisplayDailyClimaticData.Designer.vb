@@ -51,7 +51,7 @@ Partial Class dlgDisplayDailyClimaticData
         Me.ucrBase.Location = New System.Drawing.Point(10, 379)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(428, 52)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.TabIndex = 21
         '
         'ucrSelectorDisplayDailyClimaticData
         '
@@ -61,7 +61,7 @@ Partial Class dlgDisplayDailyClimaticData
         Me.ucrSelectorDisplayDailyClimaticData.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorDisplayDailyClimaticData.Name = "ucrSelectorDisplayDailyClimaticData"
         Me.ucrSelectorDisplayDailyClimaticData.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorDisplayDailyClimaticData.TabIndex = 1
+        Me.ucrSelectorDisplayDailyClimaticData.TabIndex = 4
         '
         'rdoBoth
         '
@@ -76,7 +76,7 @@ Partial Class dlgDisplayDailyClimaticData
         Me.rdoBoth.Location = New System.Drawing.Point(262, 11)
         Me.rdoBoth.Name = "rdoBoth"
         Me.rdoBoth.Size = New System.Drawing.Size(100, 28)
-        Me.rdoBoth.TabIndex = 7
+        Me.rdoBoth.TabIndex = 3
         Me.rdoBoth.Text = "Both"
         Me.rdoBoth.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.rdoBoth.UseVisualStyleBackColor = True
@@ -92,7 +92,7 @@ Partial Class dlgDisplayDailyClimaticData
         Me.rdoTable.Location = New System.Drawing.Point(66, 11)
         Me.rdoTable.Name = "rdoTable"
         Me.rdoTable.Size = New System.Drawing.Size(100, 28)
-        Me.rdoTable.TabIndex = 5
+        Me.rdoTable.TabIndex = 1
         Me.rdoTable.Text = "Table"
         Me.rdoTable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoTable.UseVisualStyleBackColor = True
@@ -110,7 +110,7 @@ Partial Class dlgDisplayDailyClimaticData
         Me.rdoGraph.Location = New System.Drawing.Point(164, 11)
         Me.rdoGraph.Name = "rdoGraph"
         Me.rdoGraph.Size = New System.Drawing.Size(100, 28)
-        Me.rdoGraph.TabIndex = 6
+        Me.rdoGraph.TabIndex = 2
         Me.rdoGraph.Text = "Graph"
         Me.rdoGraph.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.rdoGraph.UseVisualStyleBackColor = True
@@ -120,7 +120,7 @@ Partial Class dlgDisplayDailyClimaticData
         Me.ucrPnlFrequencyDisplay.Location = New System.Drawing.Point(10, 11)
         Me.ucrPnlFrequencyDisplay.Name = "ucrPnlFrequencyDisplay"
         Me.ucrPnlFrequencyDisplay.Size = New System.Drawing.Size(406, 29)
-        Me.ucrPnlFrequencyDisplay.TabIndex = 4
+        Me.ucrPnlFrequencyDisplay.TabIndex = 0
         '
         'lblStation
         '
@@ -128,7 +128,7 @@ Partial Class dlgDisplayDailyClimaticData
         Me.lblStation.Location = New System.Drawing.Point(274, 65)
         Me.lblStation.Name = "lblStation"
         Me.lblStation.Size = New System.Drawing.Size(43, 13)
-        Me.lblStation.TabIndex = 37
+        Me.lblStation.TabIndex = 5
         Me.lblStation.Text = "Station:"
         '
         'ucrReceiverStations
@@ -140,7 +140,7 @@ Partial Class dlgDisplayDailyClimaticData
         Me.ucrReceiverStations.Selector = Nothing
         Me.ucrReceiverStations.Size = New System.Drawing.Size(143, 20)
         Me.ucrReceiverStations.strNcFilePath = ""
-        Me.ucrReceiverStations.TabIndex = 38
+        Me.ucrReceiverStations.TabIndex = 6
         Me.ucrReceiverStations.ucrSelector = Nothing
         '
         'lblElement
@@ -149,7 +149,7 @@ Partial Class dlgDisplayDailyClimaticData
         Me.lblElement.Location = New System.Drawing.Point(10, 233)
         Me.lblElement.Name = "lblElement"
         Me.lblElement.Size = New System.Drawing.Size(59, 13)
-        Me.lblElement.TabIndex = 39
+        Me.lblElement.TabIndex = 14
         Me.lblElement.Text = "Element(s):"
         '
         'lblDate
@@ -158,7 +158,7 @@ Partial Class dlgDisplayDailyClimaticData
         Me.lblDate.Location = New System.Drawing.Point(274, 109)
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(33, 13)
-        Me.lblDate.TabIndex = 41
+        Me.lblDate.TabIndex = 7
         Me.lblDate.Text = "Date:"
         '
         'ucrReceiverDate
@@ -170,7 +170,7 @@ Partial Class dlgDisplayDailyClimaticData
         Me.ucrReceiverDate.Selector = Nothing
         Me.ucrReceiverDate.Size = New System.Drawing.Size(143, 20)
         Me.ucrReceiverDate.strNcFilePath = ""
-        Me.ucrReceiverDate.TabIndex = 42
+        Me.ucrReceiverDate.TabIndex = 8
         Me.ucrReceiverDate.ucrSelector = Nothing
         '
         'ucrReceiverYear
@@ -182,7 +182,7 @@ Partial Class dlgDisplayDailyClimaticData
         Me.ucrReceiverYear.Selector = Nothing
         Me.ucrReceiverYear.Size = New System.Drawing.Size(143, 20)
         Me.ucrReceiverYear.strNcFilePath = ""
-        Me.ucrReceiverYear.TabIndex = 44
+        Me.ucrReceiverYear.TabIndex = 10
         Me.ucrReceiverYear.ucrSelector = Nothing
         '
         'lblYear
@@ -191,7 +191,7 @@ Partial Class dlgDisplayDailyClimaticData
         Me.lblYear.Location = New System.Drawing.Point(274, 153)
         Me.lblYear.Name = "lblYear"
         Me.lblYear.Size = New System.Drawing.Size(32, 13)
-        Me.lblYear.TabIndex = 43
+        Me.lblYear.TabIndex = 9
         Me.lblYear.Text = "Year:"
         '
         'ucrReceiverXaxis
@@ -203,7 +203,7 @@ Partial Class dlgDisplayDailyClimaticData
         Me.ucrReceiverXaxis.Selector = Nothing
         Me.ucrReceiverXaxis.Size = New System.Drawing.Size(143, 20)
         Me.ucrReceiverXaxis.strNcFilePath = ""
-        Me.ucrReceiverXaxis.TabIndex = 46
+        Me.ucrReceiverXaxis.TabIndex = 12
         Me.ucrReceiverXaxis.ucrSelector = Nothing
         '
         'lblXaxis
@@ -212,7 +212,7 @@ Partial Class dlgDisplayDailyClimaticData
         Me.lblXaxis.Location = New System.Drawing.Point(273, 198)
         Me.lblXaxis.Name = "lblXaxis"
         Me.lblXaxis.Size = New System.Drawing.Size(38, 13)
-        Me.lblXaxis.TabIndex = 45
+        Me.lblXaxis.TabIndex = 11
         Me.lblXaxis.Text = "X-axis:"
         '
         'ucrReceiverYaxisLower
@@ -224,7 +224,7 @@ Partial Class dlgDisplayDailyClimaticData
         Me.ucrReceiverYaxisLower.Selector = Nothing
         Me.ucrReceiverYaxisLower.Size = New System.Drawing.Size(143, 20)
         Me.ucrReceiverYaxisLower.strNcFilePath = ""
-        Me.ucrReceiverYaxisLower.TabIndex = 48
+        Me.ucrReceiverYaxisLower.TabIndex = 16
         Me.ucrReceiverYaxisLower.ucrSelector = Nothing
         '
         'lblYaxisLower
@@ -233,7 +233,7 @@ Partial Class dlgDisplayDailyClimaticData
         Me.lblYaxisLower.Location = New System.Drawing.Point(273, 240)
         Me.lblYaxisLower.Name = "lblYaxisLower"
         Me.lblYaxisLower.Size = New System.Drawing.Size(70, 13)
-        Me.lblYaxisLower.TabIndex = 47
+        Me.lblYaxisLower.TabIndex = 15
         Me.lblYaxisLower.Text = "Y-axis Lower:"
         '
         'ucrReceiverYaxisUpper
@@ -245,7 +245,7 @@ Partial Class dlgDisplayDailyClimaticData
         Me.ucrReceiverYaxisUpper.Selector = Nothing
         Me.ucrReceiverYaxisUpper.Size = New System.Drawing.Size(143, 20)
         Me.ucrReceiverYaxisUpper.strNcFilePath = ""
-        Me.ucrReceiverYaxisUpper.TabIndex = 50
+        Me.ucrReceiverYaxisUpper.TabIndex = 18
         Me.ucrReceiverYaxisUpper.ucrSelector = Nothing
         '
         'lblYaxisUpper
@@ -254,7 +254,7 @@ Partial Class dlgDisplayDailyClimaticData
         Me.lblYaxisUpper.Location = New System.Drawing.Point(273, 286)
         Me.lblYaxisUpper.Name = "lblYaxisUpper"
         Me.lblYaxisUpper.Size = New System.Drawing.Size(70, 13)
-        Me.lblYaxisUpper.TabIndex = 49
+        Me.lblYaxisUpper.TabIndex = 17
         Me.lblYaxisUpper.Text = "Y-axis Upper:"
         '
         'ucrReceiverElements
@@ -266,7 +266,7 @@ Partial Class dlgDisplayDailyClimaticData
         Me.ucrReceiverElements.Selector = Nothing
         Me.ucrReceiverElements.Size = New System.Drawing.Size(120, 78)
         Me.ucrReceiverElements.strNcFilePath = ""
-        Me.ucrReceiverElements.TabIndex = 51
+        Me.ucrReceiverElements.TabIndex = 13
         Me.ucrReceiverElements.ucrSelector = Nothing
         '
         'ucrChkMissingRugPlot
@@ -275,7 +275,7 @@ Partial Class dlgDisplayDailyClimaticData
         Me.ucrChkMissingRugPlot.Location = New System.Drawing.Point(10, 328)
         Me.ucrChkMissingRugPlot.Name = "ucrChkMissingRugPlot"
         Me.ucrChkMissingRugPlot.Size = New System.Drawing.Size(263, 20)
-        Me.ucrChkMissingRugPlot.TabIndex = 57
+        Me.ucrChkMissingRugPlot.TabIndex = 19
         '
         'ucrChkValuesOutsideYrange
         '
@@ -283,7 +283,7 @@ Partial Class dlgDisplayDailyClimaticData
         Me.ucrChkValuesOutsideYrange.Location = New System.Drawing.Point(10, 353)
         Me.ucrChkValuesOutsideYrange.Name = "ucrChkValuesOutsideYrange"
         Me.ucrChkValuesOutsideYrange.Size = New System.Drawing.Size(263, 20)
-        Me.ucrChkValuesOutsideYrange.TabIndex = 58
+        Me.ucrChkValuesOutsideYrange.TabIndex = 20
         '
         'dlgDisplayDailyClimaticData
         '
