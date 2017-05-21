@@ -62,6 +62,7 @@ Public Class dlgOpenNetCDF
         ucrReceiverLatName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverLonName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverTimeName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrChkAddDateTime.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub SetDefaults()
@@ -73,6 +74,7 @@ Public Class dlgOpenNetCDF
         ucrInputFilePath.SetName("")
         clsRDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_NetCDF")
         clsRDefaultFunction.AddParameter("nc_data", clsRFunctionParameter:=clsRCDF)
+        clsRDefaultFunction.AddParameter("add_date_time", "TRUE")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRDefaultFunction)
         AutoFillReceivers()
     End Sub
@@ -111,6 +113,10 @@ Public Class dlgOpenNetCDF
         ucrInputFilePath.SetParameter(New RParameter("filename", 0))
         ucrInputDataName.SetParameter(New RParameter("main_data_name", 1))
         ucrInputLocDataName.SetParameter(New RParameter("loc_data_name", 2))
+
+        ucrChkAddDateTime.SetParameter(New RParameter("add_date_time", 6))
+        ucrChkAddDateTime.SetText("Add date/time")
+        ucrChkAddDateTime.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
     End Sub
 
     Private Sub SetRSelector()
