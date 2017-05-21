@@ -115,7 +115,7 @@ Public Class dlgOpenNetCDF
         ucrInputLocDataName.SetParameter(New RParameter("loc_data_name", 2))
 
         ucrChkAddDateTime.SetParameter(New RParameter("add_date_time", 6))
-        ucrChkAddDateTime.SetText("Add date/time")
+        ucrChkAddDateTime.SetText("Add Date/Time Column")
         ucrChkAddDateTime.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
     End Sub
 
