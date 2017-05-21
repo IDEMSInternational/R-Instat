@@ -29,6 +29,7 @@ Partial Class dlgOpenNetCDF
         Me.lblLatColName = New System.Windows.Forms.Label()
         Me.lblLonColName = New System.Windows.Forms.Label()
         Me.lblTimeColName = New System.Windows.Forms.Label()
+        Me.ucrChkAddDateTime = New instat.ucrCheck()
         Me.ucrSelectorNetCDF = New instat.ucrSelectorAddRemove()
         Me.ucrReceiverTimeName = New instat.ucrReceiverSingle()
         Me.ucrReceiverLonName = New instat.ucrReceiverSingle()
@@ -37,7 +38,6 @@ Partial Class dlgOpenNetCDF
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
         Me.ucrInputDataName = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrChkAddDateTime = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblLocDataNamePrefix
@@ -105,6 +105,14 @@ Partial Class dlgOpenNetCDF
         Me.lblTimeColName.Size = New System.Drawing.Size(102, 13)
         Me.lblTimeColName.TabIndex = 12
         Me.lblTimeColName.Text = "Time Column Name:"
+        '
+        'ucrChkAddDateTime
+        '
+        Me.ucrChkAddDateTime.Checked = False
+        Me.ucrChkAddDateTime.Location = New System.Drawing.Point(10, 264)
+        Me.ucrChkAddDateTime.Name = "ucrChkAddDateTime"
+        Me.ucrChkAddDateTime.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkAddDateTime.TabIndex = 14
         '
         'ucrSelectorNetCDF
         '
@@ -186,15 +194,7 @@ Partial Class dlgOpenNetCDF
         Me.ucrBase.Location = New System.Drawing.Point(10, 292)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 14
-        '
-        'ucrChkAddDateTime
-        '
-        Me.ucrChkAddDateTime.Checked = False
-        Me.ucrChkAddDateTime.Location = New System.Drawing.Point(12, 264)
-        Me.ucrChkAddDateTime.Name = "ucrChkAddDateTime"
-        Me.ucrChkAddDateTime.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkAddDateTime.TabIndex = 15
+        Me.ucrBase.TabIndex = 15
         '
         'dlgOpenNetCDF
         '
