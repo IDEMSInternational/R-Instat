@@ -225,7 +225,7 @@ pentad <- function(date) {
   return(temp_pentad)
 }
 
-open_NetCDF <- function(nc_data, latitude_col_name, longitude_col_name, time_col_name, default_names, add_date=TRUE){
+open_NetCDF <- function(nc_data, latitude_col_name, longitude_col_name, time_col_name, default_names, add_date){
   variables = names(nc_data$var)
   lat_lon_names = names(nc_data$dim)
   #we may need to add latitude_col_name, longitude_col_name to the character vector of valid names
@@ -284,21 +284,11 @@ open_NetCDF <- function(nc_data, latitude_col_name, longitude_col_name, time_col
   lat_lon_df <- cbind(lat_lon, station)
   my_data <- cbind(period, lat_lon_df)
   
-  if (add_date){
-    time_units = as.character(strsplit(ncatt_get(nc_data, lat_lon_names[time_in])$units, " ")[[1]])
-    #tustr <- strsplit(gg, " ")
-    
-    #pp = as.character(tustr[[1]])
-    
-    units = time_units[1]
-    new_origin = stringr::str_c(time_units[3:length(time_units)], collapse = " ")
-    
-    #yy = ncvar_get(nc_data2, "time")
-    
-    my_data$my_date = as.character(convertDateNcdf2R(my_data$period, units = units, origin = as.POSIXct(new_origin, 
-                                                                                 tz = "UTC"), time.format = c("%Y-%m-%d", "%Y-%m-%d %H:%M:%S", 
-                                                                                                              "%Y-%m-%d %H:%M", "%Y-%m-%d %Z %H:%M", "%Y-%m-%d %Z %H:%M:%S")))
-    
+  if (add_date && time_found){
+    time_units <- as.character(strsplit(ncatt_get(nc_data, lat_lon_names[time_in])$units, " ")[[1]])
+    units <- time_units[1]
+    new_origin <- stringr::str_c(time_units[3:length(time_units)], collapse = " ")
+    my_data$date_time <- as.character(convertDateNcdf2R(my_data$period, units = units, origin = as.POSIXct(new_origin, tz = "UTC")))
   }
   
   for (current_var in variables){
