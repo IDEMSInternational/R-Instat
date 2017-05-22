@@ -158,10 +158,10 @@ Public Class dlgTransformClimatic
         rdoMoving.Checked = True 'this wil be fixed properly
 
         'Temporary disable
-        rdoCount.Enabled = False
+        rdoCount.Enabled = True
         rdoSpell.Enabled = False
         rdoWaterBalance.Enabled = False
-        grpCount.Enabled = False
+        grpCount.Enabled = True
         grpSpells.Enabled = False
         grpWaterbalance.Enabled = False
 
@@ -223,6 +223,10 @@ Public Class dlgTransformClimatic
             'ucrInputColName.SetPrefix("Count")
             ucrInputColName.SetName("Count")
             grpTransform.Text = "Count"
+            '  r = Function(x) length(which(x > 0.85))
+            'zoo:        rollapply(fill = NA, Data = samaru$Rain, Width = 4, FUN = r, align ='right')
+
+
         ElseIf rdoSpell.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSpellFunction)
             'ucrSaveTransform.SetPrefix("Spell")
