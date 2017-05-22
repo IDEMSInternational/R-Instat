@@ -45,6 +45,7 @@ Partial Class dlgTransformClimatic
         Me.grpWaterbalance = New System.Windows.Forms.GroupBox()
         Me.lblWBEvaporation = New System.Windows.Forms.Label()
         Me.lblWBCapacity = New System.Windows.Forms.Label()
+        Me.ucrInputThreshold = New instat.ucrInputTextBox()
         Me.ucrInputEvaporation = New instat.ucrInputTextBox()
         Me.ucrNudWBCapacity = New instat.ucrNud()
         Me.ucrInputSpellUpper = New instat.ucrInputTextBox()
@@ -54,7 +55,6 @@ Partial Class dlgTransformClimatic
         Me.ucrInputColName = New instat.ucrInputTextBox()
         Me.ucrNudSumOver = New instat.ucrNud()
         Me.ucrInputSum = New instat.ucrInputComboBox()
-        Me.ucrNudThreshold = New instat.ucrNud()
         Me.ucrPnlTransform = New instat.UcrPanel()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrSelectorTransform = New instat.ucrSelectorByDataFrameAddRemove()
@@ -338,6 +338,16 @@ Partial Class dlgTransformClimatic
         Me.lblWBCapacity.Tag = "Capacity"
         Me.lblWBCapacity.Text = "Capacity"
         '
+        'ucrInputThreshold
+        '
+        Me.ucrInputThreshold.AddQuotesIfUnrecognised = True
+        Me.ucrInputThreshold.IsMultiline = False
+        Me.ucrInputThreshold.IsReadOnly = False
+        Me.ucrInputThreshold.Location = New System.Drawing.Point(144, 244)
+        Me.ucrInputThreshold.Name = "ucrInputThreshold"
+        Me.ucrInputThreshold.Size = New System.Drawing.Size(63, 21)
+        Me.ucrInputThreshold.TabIndex = 54
+        '
         'ucrInputEvaporation
         '
         Me.ucrInputEvaporation.AddQuotesIfUnrecognised = True
@@ -431,18 +441,6 @@ Partial Class dlgTransformClimatic
         Me.ucrInputSum.Size = New System.Drawing.Size(106, 21)
         Me.ucrInputSum.TabIndex = 0
         '
-        'ucrNudThreshold
-        '
-        Me.ucrNudThreshold.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudThreshold.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudThreshold.Location = New System.Drawing.Point(144, 249)
-        Me.ucrNudThreshold.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudThreshold.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudThreshold.Name = "ucrNudThreshold"
-        Me.ucrNudThreshold.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudThreshold.TabIndex = 45
-        Me.ucrNudThreshold.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'ucrPnlTransform
         '
         Me.ucrPnlTransform.Location = New System.Drawing.Point(27, 16)
@@ -532,13 +530,13 @@ Partial Class dlgTransformClimatic
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(579, 492)
+        Me.Controls.Add(Me.ucrInputThreshold)
         Me.Controls.Add(Me.grpWaterbalance)
         Me.Controls.Add(Me.grpSpells)
         Me.Controls.Add(Me.grpCount)
         Me.Controls.Add(Me.lblNewColName)
         Me.Controls.Add(Me.ucrInputColName)
         Me.Controls.Add(Me.grpTransform)
-        Me.Controls.Add(Me.ucrNudThreshold)
         Me.Controls.Add(Me.lblThreshold)
         Me.Controls.Add(Me.rdoWaterBalance)
         Me.Controls.Add(Me.rdoSpell)
@@ -598,7 +596,6 @@ Partial Class dlgTransformClimatic
     Friend WithEvents ucrNudSumOver As ucrNud
     Friend WithEvents lblSumOver As Label
     Friend WithEvents ucrInputSum As ucrInputComboBox
-    Friend WithEvents ucrNudThreshold As ucrNud
     Friend WithEvents lblThreshold As Label
     Friend WithEvents ucrInputColName As ucrInputTextBox
     Friend WithEvents lblNewColName As Label
@@ -617,4 +614,5 @@ Partial Class dlgTransformClimatic
     Friend WithEvents ucrInputSpellLower As ucrInputTextBox
     Friend WithEvents lblSpellAnd As Label
     Friend WithEvents lblValuesBetween As Label
+    Friend WithEvents ucrInputThreshold As ucrInputTextBox
 End Class
