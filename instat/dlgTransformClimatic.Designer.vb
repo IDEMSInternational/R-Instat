@@ -110,9 +110,9 @@ Partial Class dlgTransformClimatic
         Me.lblData.AutoSize = True
         Me.lblData.Location = New System.Drawing.Point(313, 227)
         Me.lblData.Name = "lblData"
-        Me.lblData.Size = New System.Drawing.Size(70, 13)
+        Me.lblData.Size = New System.Drawing.Size(48, 13)
         Me.lblData.TabIndex = 27
-        Me.lblData.Text = "Rain Column:"
+        Me.lblData.Text = "Element:"
         '
         'rdoSpell
         '
