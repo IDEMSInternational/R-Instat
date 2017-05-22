@@ -90,11 +90,14 @@ instat_object$set("public", "calculate_summary", function(data_name, columns_to_
   else {
     save <- 2
   }
-  calculated_from <- as.list(factors)
-  names(calculated_from) <- rep(data_name, length(factors))
-  calculated_from <- as.list(calculated_from)
-  factor_by <- instat_calculation$new(type = "by", calculated_from = calculated_from)
-  
+  if(length(factors) > 0) {
+    calculated_from <- as.list(factors)
+    names(calculated_from) <- rep(data_name, length(factors))
+    calculated_from <- as.list(calculated_from)
+    factor_by <- instat_calculation$new(type = "by", calculated_from = calculated_from)
+    manipulations <- list(factor_by)
+  }
+  else manipulations <- list()
   sub_calculations <- list()
   
   if(is.null(columns_to_summarise)) {
@@ -116,7 +119,7 @@ instat_object$set("public", "calculate_summary", function(data_name, columns_to_
       }
     }
   }
-  combined_calc_sum <- instat_calculation$new(type="combination", sub_calculations = sub_calculations, manipulations = list(factor_by))
+  combined_calc_sum <- instat_calculation$new(type="combination", sub_calculations = sub_calculations, manipulations = manipulations)
   out <- self$apply_instat_calculation(combined_calc_sum)
   if(return_output) return(out$data)
 }
@@ -336,47 +339,103 @@ summary_median <- function(x, na.rm = FALSE,...) {
   return(median(x, na.rm = na.rm))
 }
 
-
-
-
-
-instat_object$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, row_factors = c(), column_factors = c(), store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = TRUE, return_output = FALSE, ...) {
-  
-  factors <- c(column_factors, row_factors)
-  cell_values <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = factors, store_results = store_results, drop = drop, na.rm = na.rm, return_output = TRUE)
-  
-  #assume one summary for now
-  # should run for every statistic? loop for summary_type: , paste0(summary_type, "()"
-  # note: it is not always summary_count, it's any of the summary statistics used.
-  # it's not data_name. It's the name given to the dataset, e.g., Survey_by_Village._Variety._Fertgrp.
-  cell_values <- dcast(formula = as.formula(paste(paste(row_factors, collapse = "+"), "~", paste(column_factors, collapse = "+"))), value.var = colnames(cell_values)[!colnames(cell_values) %in% factors], data = cell_values)
-  
-  
-  if(include_margins) {
-    margin_tables <- list()
-    power_sets <- rje::powerSet(factors)
-    for(facts in head(power_sets, -1)) { # OR power_sets[-length(power_sets)])
-      margin_tables[[length(margin_tables) + 1]] <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = facts, store_results = store_results, drop = drop, na.rm = na.rm, return_output = return_output)
-      
-      # Column Factor - add as row margin
-      column_factor_margin <- margin_tables[2]   # in long term where is [[2]], e.g. which(powerSet(c(1,2,3, 4)) == "1"
-      overall_col_margin <- append(column_factor_margin$summary_count, values = c(rep(length.out=length(row_factors), x='NA')), after = 0) 
-      # summary_count - it won't always be this. Also if multiple values then loop?
-      # I need to repeat NA for as many as the number of Row Factors we have hence rep function.
-      # add above into the unstacked data set
-      cell_values <- rbind(cell_values, overall_col_margin)
-      
-      # take [[7]] and [[1]]. Append [[1]]
-      overall_value <- margin_tables[1]   # want to get this 1st value in that list.
-      row_factor_margin <- margin_tables[length(margin_tables)]
-      # append the vector for the summary of interest in row_factor_margin with the overall_value
-      overall_row_margin <- append(row_factor_margin$summary_count, overall_value, after = 0)
-      # add into the unstacked dataset
-      cell_values <- cbind(cell_values, overall_row_margin)
+instat_object$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, row_factors = c(), column_factors = c(), store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, return_output = FALSE, treat_columns_as_factor = FALSE, page_display = FALSE, ...) {
+  if(page_display) {
+    for(col in columns_to_summarise) {
+      self$summary_table(data_name = data_name, columns_to_summarise = col, summaries = summaries, row_factors = row_factors, column_factors = column_factors, store_results = store_results, drop = drop, na.rm = na.rm, summary_name = summary_name, include_margins = include_margins, return_output = return_output, treat_columns_as_factor = treat_columns_as_factor, page_display = FALSE, ... = ...)
     }
   }
-  if(return_output) {
-    return(cell_values)
+  else {
+    factors <- c(column_factors, row_factors)
+    cell_values <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = factors, store_results = store_results, drop = drop, na.rm = na.rm, return_output = TRUE)
+    for(i in 1:length(factors)) {
+      cell_values[[i]] <- as.character(cell_values[[i]])
+    }
+    grps <- nrow(cell_values)
+    cell_values <- melt(cell_values, id.vars = factors, variable.name = "Summary-Variable", value.name = "Value")
+    cell_values[["Variable"]] <- rep(rev(columns_to_summarise), each = nrow(cell_values)/length(columns_to_summarise))
+    cell_values[["Summary"]] <- rep(rev(summaries), each = grps, length.out = nrow(cell_values))
+    if(length(columns_to_summarise) > 1 || length(summaries) > 1) {
+      cell_values[["Summary-Variable"]] <- NULL
+      # TODO this relies on knowing order of output from calculate_summary
+      #      better method should be implemented not relying on this.
+      if(length(summaries) == 1) cell_values[["Summary"]]
+      summary_factors <- c("Variable", "Summary")
+      if(!treat_columns_as_factor) {
+        if(length(summaries) > 1) {
+          cell_values[["Summary"]] <- paste(cell_values[["Summary"]], cell_values[["Variable"]], sep = "_")
+        }
+        else cell_values[["Summary"]] <- paste(summaries, cell_values[["Variable"]], sep = "_")
+        cell_values[["Variable"]] <- NULL
+        summary_factors <- "Summary"
+      }
+    }
+    else {
+      if(treat_columns_as_factor) {
+        summary_factors <- "Variable"
+      }
+      else {
+        summary_factors <- c()
+        cell_values[["Variable"]] <- NULL
+        cell_values[["Summary"]] <- NULL
+      }
+    }
+    if(length(row_factors) > 0) {
+      row_formula <- paste(row_factors, collapse = "+")
+    }
+    else row_formula <- "."
+    if(length(c(column_factors, summary_factors)) > 0) {
+      column_formula <- paste(c(column_factors, summary_factors), collapse = "+")
+    }
+    else column_formula <- "."
+    #print(as.formula(paste(row_formula, "~", column_formula)))
+    cell_values <- dcast(formula = as.formula(paste(row_formula, "~", column_formula)), value.var = "Value", data = cell_values)
+    if(include_margins) {
+      margin_tables <- list()
+      power_sets <- rje::powerSet(factors)
+      power_sets <- power_sets[-(c(length(power_sets)))]
+      for(facts in power_sets) {
+        if(length(facts) == 0) facts <- c()
+        margin_tables[[length(margin_tables) + 1]] <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = facts, store_results = store_results, drop = drop, na.rm = na.rm, return_output = return_output)
+      }
+      # Column Factor - add as row margin
+      # in long term where is [[2]], e.g. which(powerSet(c(1,2,3, 4)) == "1"
+      column_factor_margin <- margin_tables[[2]][[length(column_factors) + 1]]
+      #overall_col_margin <- append(column_factor_margin$summary_count, values = c(rep(length.out=length(row_factors), x='NA')), after = 0) 
+      new_row <- c(rep(NA, length(row_factors)), column_factor_margin)
+      cell_values <- rbind(cell_values, new_row)
+      cell_values[nrow(cell_values), 1] <- "TOTAL"
+      
+      # take [[7]] and [[1]]. Append [[1]]
+      overall_value <- margin_tables[[1]][1,1]
+      row_factor_margin <- margin_tables[[length(margin_tables)]][[length(row_factors) + 1]]
+      # append the vector for the summary of interest in row_factor_margin with the overall_value
+      overall_row_margin <- c(row_factor_margin, overall_value)
+      # add into the unstacked dataset
+      cell_values[["TOTAL"]] <- overall_row_margin
+    }
+    #cell_values <- as.character(cell_values)
+    if(return_output) {
+      args <- list(...)
+      if(! "title" %in% names(args)) {
+        if(length(columns_to_summarise) > 1 && length(summaries) > 1) {
+          title <- paste("Summary of ", paste(columns_to_summarise, collapse = ","))
+        }
+        else if(length(columns_to_summarise) > 1) {
+          title <- paste(summaries, "of", paste(columns_to_summarise, collapse = ","))
+        }
+        else if(length(summaries) > 1) {
+          title <- paste("Summary of", columns_to_summarise)
+        }
+        else {
+          title <- paste(summaries, columns_to_summarise)
+        }
+        title <- gsub("_", ".", title)
+        notes <- paste("Row factors: ", paste0(row_factors, collapse = ", "), " Column Factors: ", paste0(column_factors, collapse = ", "))
+        return(stargazer(cell_values, type = "text", summary = FALSE, rownames = FALSE, title = title, notes = notes, ... = ...))
+      }
+      else return(stargazer(cell_values, type = "text", summary = FALSE, rownames = FALSE, ... = ...))
+    }
   }
 }
 )
