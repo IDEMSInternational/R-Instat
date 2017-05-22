@@ -42,12 +42,13 @@ Public Class dlgNon_ParametricOneWayANOVA
         ucrReceiverYVariate.Selector = ucrDataFrameAddRemove
         ucrReceiverFactor.Selector = ucrDataFrameAddRemove
         ucrReceiverFactor.SetDataType("factor")
-        clsModel.SetOperation("~")
+
 
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-
+        ucrReceiverYVariate.SetRCode(clsModel, bReset)
+        ucrReceiverFactor.SetRCode(clsModel, bReset)
     End Sub
 
     Private Sub SetDefaults()
@@ -57,23 +58,21 @@ Public Class dlgNon_ParametricOneWayANOVA
         ucrDataFrameAddRemove.Reset()
         ucrReceiverYVariate.SetMeAsReceiver()
         clsKruskalWallis.SetRCommand("kruskal.test")
-        clsModel.AddParameter(strParameterValue:=ucrReceiverYVariate.GetVariableNames(bWithQuotes:=False), iPosition:=0)
-
+        clsModel.SetOperation("~")
+        clsModel.AddParameter("variable", ucrReceiverYVariate.GetVariableNames(bWithQuotes:=False), iPosition:=0)
+        clsModel.AddParameter("variable_factor", ucrReceiverFactor.GetVariableNames(bWithQuotes:=False), iPosition:=1)
+        clsKruskalWallis.AddParameter("formula", clsROperatorParameter:=clsModel)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsKruskalWallis)
     End Sub
 
-    Private Sub ucrReceiverYVariate_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverYVariate.SelectionChanged
-        clsModel.AddParameter(iPosition:=0, strParameterValue:=ucrReceiverYVariate.GetVariableNames(bWithQuotes:=False))
-        TestOKEnabled()
-    End Sub
 
     Private Sub ucrReceiverFactor_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverFactor.SelectionChanged
-        clsModel.AddParameter(iPosition:=0, strParameterValue:=ucrReceiverFactor.GetVariableNames(bWithQuotes:=False))
-        TestOKEnabled()
+        '  clsModel.AddParameter(iPosition:=0, strParameterValue:=ucrReceiverFactor.GetVariableNames(bWithQuotes:=False))
+        ' TestOKEnabled()
     End Sub
 
     Private Sub TestOKEnabled()
         If (Not ucrReceiverYVariate.IsEmpty()) And (Not ucrReceiverFactor.IsEmpty()) Then
-            ucrBase.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsModel)
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -82,10 +81,17 @@ Public Class dlgNon_ParametricOneWayANOVA
     End Sub
 
     Private Sub ucrDataFrameAddRemove_DataFrameChanged() Handles ucrDataFrameAddRemove.DataFrameChanged
-        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrDataFrameAddRemove.ucrAvailableDataFrames.clsCurrDataFrame)
+        ' ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrDataFrameAddRemove.ucrAvailableDataFrames.clsCurrDataFrame)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(True)
+        TestOKEnabled()
     End Sub
+
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged, ucrReceiverYVariate.ControlContentsChanged
+        TestOKEnabled()
+    End Sub
+
 End Class
