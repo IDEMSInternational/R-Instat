@@ -42,11 +42,21 @@ Public Class dlgNon_ParametricOneWayANOVA
         ucrReceiverYVariate.Selector = ucrDataFrameAddRemove
         ucrReceiverFactor.Selector = ucrDataFrameAddRemove
         ucrReceiverFactor.SetDataType("factor")
+        ucrReceiverYVariate.SetDataType("numeric")
+        ucrReceiverFactor.SetParameter(New RParameter("x"))
+        ucrReceiverFactor.SetParameterIsString()
+        ucrReceiverFactor.bWithQuotes = False
+        ucrReceiverYVariate.SetParameter(New RParameter("y"))
+        ucrReceiverYVariate.SetParameterIsString()
+        ucrReceiverYVariate.bWithQuotes = False
 
+        ucrDataFrameAddRemove.SetParameter(New RParameter("x"))
+        ucrDataFrameAddRemove.SetParameterIsrfunction()
 
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
+        ucrDataFrameAddRemove.SetRCode(clsKruskalWallis, bReset)
         ucrReceiverYVariate.SetRCode(clsModel, bReset)
         ucrReceiverFactor.SetRCode(clsModel, bReset)
     End Sub
@@ -59,8 +69,8 @@ Public Class dlgNon_ParametricOneWayANOVA
         ucrReceiverYVariate.SetMeAsReceiver()
         clsKruskalWallis.SetRCommand("kruskal.test")
         clsModel.SetOperation("~")
-        clsModel.AddParameter("variable", ucrReceiverYVariate.GetVariableNames(bWithQuotes:=False), iPosition:=0)
-        clsModel.AddParameter("variable_factor", ucrReceiverFactor.GetVariableNames(bWithQuotes:=False), iPosition:=1)
+        'clsModel.AddParameter("variable", ucrReceiverYVariate.GetVariableNames(bWithQuotes:=False), iPosition:=0)
+        'clsModel.AddParameter("variable_factor", ucrReceiverFactor.GetVariableNames(bWithQuotes:=False), iPosition:=1)
         clsKruskalWallis.AddParameter("formula", clsROperatorParameter:=clsModel)
         ucrBase.clsRsyntax.SetBaseRFunction(clsKruskalWallis)
     End Sub
