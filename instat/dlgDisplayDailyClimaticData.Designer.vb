@@ -53,7 +53,7 @@ Partial Class dlgDisplayDailyClimaticData
         Me.ucrBase.Location = New System.Drawing.Point(10, 375)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(428, 52)
-        Me.ucrBase.TabIndex = 21
+        Me.ucrBase.TabIndex = 16
         '
         'ucrSelectorDisplayDailyClimaticData
         '
@@ -223,7 +223,7 @@ Partial Class dlgDisplayDailyClimaticData
         Me.lblYaxisUpper.Location = New System.Drawing.Point(140, 19)
         Me.lblYaxisUpper.Name = "lblYaxisUpper"
         Me.lblYaxisUpper.Size = New System.Drawing.Size(70, 13)
-        Me.lblYaxisUpper.TabIndex = 17
+        Me.lblYaxisUpper.TabIndex = 2
         Me.lblYaxisUpper.Text = "Y-axis Upper:"
         '
         'ucrReceiverElements
@@ -235,7 +235,7 @@ Partial Class dlgDisplayDailyClimaticData
         Me.ucrReceiverElements.Selector = Nothing
         Me.ucrReceiverElements.Size = New System.Drawing.Size(120, 78)
         Me.ucrReceiverElements.strNcFilePath = ""
-        Me.ucrReceiverElements.TabIndex = 13
+        Me.ucrReceiverElements.TabIndex = 15
         Me.ucrReceiverElements.ucrSelector = Nothing
         '
         'ucrChkMissingRugPlot
@@ -244,7 +244,7 @@ Partial Class dlgDisplayDailyClimaticData
         Me.ucrChkMissingRugPlot.Location = New System.Drawing.Point(9, 71)
         Me.ucrChkMissingRugPlot.Name = "ucrChkMissingRugPlot"
         Me.ucrChkMissingRugPlot.Size = New System.Drawing.Size(263, 20)
-        Me.ucrChkMissingRugPlot.TabIndex = 19
+        Me.ucrChkMissingRugPlot.TabIndex = 5
         '
         'ucrNudLowerYaxis
         '
@@ -255,7 +255,7 @@ Partial Class dlgDisplayDailyClimaticData
         Me.ucrNudLowerYaxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLowerYaxis.Name = "ucrNudLowerYaxis"
         Me.ucrNudLowerYaxis.Size = New System.Drawing.Size(50, 23)
-        Me.ucrNudLowerYaxis.TabIndex = 22
+        Me.ucrNudLowerYaxis.TabIndex = 1
         Me.ucrNudLowerYaxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'grpGraph
@@ -269,7 +269,7 @@ Partial Class dlgDisplayDailyClimaticData
         Me.grpGraph.Location = New System.Drawing.Point(10, 232)
         Me.grpGraph.Name = "grpGraph"
         Me.grpGraph.Size = New System.Drawing.Size(277, 105)
-        Me.grpGraph.TabIndex = 23
+        Me.grpGraph.TabIndex = 13
         Me.grpGraph.TabStop = False
         Me.grpGraph.Text = "Graph"
         '
@@ -279,7 +279,7 @@ Partial Class dlgDisplayDailyClimaticData
         Me.ucrChkValuesOutsideYrange.Location = New System.Drawing.Point(9, 45)
         Me.ucrChkValuesOutsideYrange.Name = "ucrChkValuesOutsideYrange"
         Me.ucrChkValuesOutsideYrange.Size = New System.Drawing.Size(263, 20)
-        Me.ucrChkValuesOutsideYrange.TabIndex = 24
+        Me.ucrChkValuesOutsideYrange.TabIndex = 4
         '
         'ucrNudUpperYaxis
         '
@@ -290,7 +290,7 @@ Partial Class dlgDisplayDailyClimaticData
         Me.ucrNudUpperYaxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudUpperYaxis.Name = "ucrNudUpperYaxis"
         Me.ucrNudUpperYaxis.Size = New System.Drawing.Size(50, 23)
-        Me.ucrNudUpperYaxis.TabIndex = 23
+        Me.ucrNudUpperYaxis.TabIndex = 3
         Me.ucrNudUpperYaxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblYaxisLower
@@ -299,7 +299,7 @@ Partial Class dlgDisplayDailyClimaticData
         Me.lblYaxisLower.Location = New System.Drawing.Point(6, 19)
         Me.lblYaxisLower.Name = "lblYaxisLower"
         Me.lblYaxisLower.Size = New System.Drawing.Size(70, 13)
-        Me.lblYaxisLower.TabIndex = 16
+        Me.lblYaxisLower.TabIndex = 0
         Me.lblYaxisLower.Text = "Y-axis Lower:"
         '
         'dlgDisplayDailyClimaticData
