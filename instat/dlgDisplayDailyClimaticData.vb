@@ -56,11 +56,6 @@ Public Class dlgDisplayDailyClimaticData
         ucrReceiverXaxis.SetClimaticType("doy")
         ucrReceiverXaxis.bAutoFill = True
 
-        ucrReceiverYaxisLower.Selector = ucrSelectorDisplayDailyClimaticData
-        ucrReceiverYaxisLower.bAutoFill = True
-        ucrReceiverYaxisUpper.Selector = ucrSelectorDisplayDailyClimaticData
-        ucrReceiverYaxisUpper.bAutoFill = True
-
         ucrPnlFrequencyDisplay.AddRadioButton(rdoTable)
         ucrPnlFrequencyDisplay.AddRadioButton(rdoGraph)
         ucrPnlFrequencyDisplay.AddRadioButton(rdoBoth)
@@ -72,9 +67,8 @@ Public Class dlgDisplayDailyClimaticData
 
     Private Sub SetDefaults()
         ucrSelectorDisplayDailyClimaticData.Reset()
-        'For now
-        rdoGraph.Enabled = False
-        rdoBoth.Enabled = False
+
+
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Object)

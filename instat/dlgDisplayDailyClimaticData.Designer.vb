@@ -37,18 +37,20 @@ Partial Class dlgDisplayDailyClimaticData
         Me.lblYear = New System.Windows.Forms.Label()
         Me.ucrReceiverXaxis = New instat.ucrReceiverSingle()
         Me.lblXaxis = New System.Windows.Forms.Label()
-        Me.ucrReceiverYaxisLower = New instat.ucrReceiverSingle()
-        Me.lblYaxisLower = New System.Windows.Forms.Label()
-        Me.ucrReceiverYaxisUpper = New instat.ucrReceiverSingle()
         Me.lblYaxisUpper = New System.Windows.Forms.Label()
         Me.ucrReceiverElements = New instat.ucrReceiverMultiple()
         Me.ucrChkMissingRugPlot = New instat.ucrCheck()
+        Me.ucrNudLowerYaxis = New instat.ucrNud()
+        Me.grpGraph = New System.Windows.Forms.GroupBox()
+        Me.lblYaxisLower = New System.Windows.Forms.Label()
+        Me.ucrNudUpperYaxis = New instat.ucrNud()
         Me.ucrChkValuesOutsideYrange = New instat.ucrCheck()
+        Me.grpGraph.SuspendLayout()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 379)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 437)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(428, 52)
         Me.ucrBase.TabIndex = 21
@@ -125,7 +127,7 @@ Partial Class dlgDisplayDailyClimaticData
         'lblStation
         '
         Me.lblStation.AutoSize = True
-        Me.lblStation.Location = New System.Drawing.Point(274, 65)
+        Me.lblStation.Location = New System.Drawing.Point(288, 65)
         Me.lblStation.Name = "lblStation"
         Me.lblStation.Size = New System.Drawing.Size(43, 13)
         Me.lblStation.TabIndex = 5
@@ -134,7 +136,7 @@ Partial Class dlgDisplayDailyClimaticData
         'ucrReceiverStations
         '
         Me.ucrReceiverStations.frmParent = Me
-        Me.ucrReceiverStations.Location = New System.Drawing.Point(274, 80)
+        Me.ucrReceiverStations.Location = New System.Drawing.Point(288, 80)
         Me.ucrReceiverStations.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverStations.Name = "ucrReceiverStations"
         Me.ucrReceiverStations.Selector = Nothing
@@ -146,7 +148,7 @@ Partial Class dlgDisplayDailyClimaticData
         'lblElement
         '
         Me.lblElement.AutoSize = True
-        Me.lblElement.Location = New System.Drawing.Point(10, 233)
+        Me.lblElement.Location = New System.Drawing.Point(288, 196)
         Me.lblElement.Name = "lblElement"
         Me.lblElement.Size = New System.Drawing.Size(59, 13)
         Me.lblElement.TabIndex = 14
@@ -155,7 +157,7 @@ Partial Class dlgDisplayDailyClimaticData
         'lblDate
         '
         Me.lblDate.AutoSize = True
-        Me.lblDate.Location = New System.Drawing.Point(274, 109)
+        Me.lblDate.Location = New System.Drawing.Point(288, 109)
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(33, 13)
         Me.lblDate.TabIndex = 7
@@ -164,7 +166,7 @@ Partial Class dlgDisplayDailyClimaticData
         'ucrReceiverDate
         '
         Me.ucrReceiverDate.frmParent = Me
-        Me.ucrReceiverDate.Location = New System.Drawing.Point(273, 124)
+        Me.ucrReceiverDate.Location = New System.Drawing.Point(288, 124)
         Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDate.Name = "ucrReceiverDate"
         Me.ucrReceiverDate.Selector = Nothing
@@ -176,7 +178,7 @@ Partial Class dlgDisplayDailyClimaticData
         'ucrReceiverYear
         '
         Me.ucrReceiverYear.frmParent = Me
-        Me.ucrReceiverYear.Location = New System.Drawing.Point(273, 168)
+        Me.ucrReceiverYear.Location = New System.Drawing.Point(288, 168)
         Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverYear.Name = "ucrReceiverYear"
         Me.ucrReceiverYear.Selector = Nothing
@@ -188,7 +190,7 @@ Partial Class dlgDisplayDailyClimaticData
         'lblYear
         '
         Me.lblYear.AutoSize = True
-        Me.lblYear.Location = New System.Drawing.Point(274, 153)
+        Me.lblYear.Location = New System.Drawing.Point(288, 153)
         Me.lblYear.Name = "lblYear"
         Me.lblYear.Size = New System.Drawing.Size(32, 13)
         Me.lblYear.TabIndex = 9
@@ -197,7 +199,7 @@ Partial Class dlgDisplayDailyClimaticData
         'ucrReceiverXaxis
         '
         Me.ucrReceiverXaxis.frmParent = Me
-        Me.ucrReceiverXaxis.Location = New System.Drawing.Point(273, 213)
+        Me.ucrReceiverXaxis.Location = New System.Drawing.Point(6, 33)
         Me.ucrReceiverXaxis.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverXaxis.Name = "ucrReceiverXaxis"
         Me.ucrReceiverXaxis.Selector = Nothing
@@ -209,49 +211,16 @@ Partial Class dlgDisplayDailyClimaticData
         'lblXaxis
         '
         Me.lblXaxis.AutoSize = True
-        Me.lblXaxis.Location = New System.Drawing.Point(273, 198)
+        Me.lblXaxis.Location = New System.Drawing.Point(6, 16)
         Me.lblXaxis.Name = "lblXaxis"
         Me.lblXaxis.Size = New System.Drawing.Size(38, 13)
         Me.lblXaxis.TabIndex = 11
         Me.lblXaxis.Text = "X-axis:"
         '
-        'ucrReceiverYaxisLower
-        '
-        Me.ucrReceiverYaxisLower.frmParent = Me
-        Me.ucrReceiverYaxisLower.Location = New System.Drawing.Point(273, 255)
-        Me.ucrReceiverYaxisLower.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverYaxisLower.Name = "ucrReceiverYaxisLower"
-        Me.ucrReceiverYaxisLower.Selector = Nothing
-        Me.ucrReceiverYaxisLower.Size = New System.Drawing.Size(143, 20)
-        Me.ucrReceiverYaxisLower.strNcFilePath = ""
-        Me.ucrReceiverYaxisLower.TabIndex = 16
-        Me.ucrReceiverYaxisLower.ucrSelector = Nothing
-        '
-        'lblYaxisLower
-        '
-        Me.lblYaxisLower.AutoSize = True
-        Me.lblYaxisLower.Location = New System.Drawing.Point(273, 240)
-        Me.lblYaxisLower.Name = "lblYaxisLower"
-        Me.lblYaxisLower.Size = New System.Drawing.Size(70, 13)
-        Me.lblYaxisLower.TabIndex = 15
-        Me.lblYaxisLower.Text = "Y-axis Lower:"
-        '
-        'ucrReceiverYaxisUpper
-        '
-        Me.ucrReceiverYaxisUpper.frmParent = Me
-        Me.ucrReceiverYaxisUpper.Location = New System.Drawing.Point(273, 301)
-        Me.ucrReceiverYaxisUpper.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverYaxisUpper.Name = "ucrReceiverYaxisUpper"
-        Me.ucrReceiverYaxisUpper.Selector = Nothing
-        Me.ucrReceiverYaxisUpper.Size = New System.Drawing.Size(143, 20)
-        Me.ucrReceiverYaxisUpper.strNcFilePath = ""
-        Me.ucrReceiverYaxisUpper.TabIndex = 18
-        Me.ucrReceiverYaxisUpper.ucrSelector = Nothing
-        '
         'lblYaxisUpper
         '
         Me.lblYaxisUpper.AutoSize = True
-        Me.lblYaxisUpper.Location = New System.Drawing.Point(273, 286)
+        Me.lblYaxisUpper.Location = New System.Drawing.Point(6, 96)
         Me.lblYaxisUpper.Name = "lblYaxisUpper"
         Me.lblYaxisUpper.Size = New System.Drawing.Size(70, 13)
         Me.lblYaxisUpper.TabIndex = 17
@@ -260,7 +229,7 @@ Partial Class dlgDisplayDailyClimaticData
         'ucrReceiverElements
         '
         Me.ucrReceiverElements.frmParent = Me
-        Me.ucrReceiverElements.Location = New System.Drawing.Point(10, 246)
+        Me.ucrReceiverElements.Location = New System.Drawing.Point(288, 210)
         Me.ucrReceiverElements.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverElements.Name = "ucrReceiverElements"
         Me.ucrReceiverElements.Selector = Nothing
@@ -272,33 +241,76 @@ Partial Class dlgDisplayDailyClimaticData
         'ucrChkMissingRugPlot
         '
         Me.ucrChkMissingRugPlot.Checked = False
-        Me.ucrChkMissingRugPlot.Location = New System.Drawing.Point(10, 328)
+        Me.ucrChkMissingRugPlot.Location = New System.Drawing.Point(6, 148)
         Me.ucrChkMissingRugPlot.Name = "ucrChkMissingRugPlot"
         Me.ucrChkMissingRugPlot.Size = New System.Drawing.Size(263, 20)
         Me.ucrChkMissingRugPlot.TabIndex = 19
         '
+        'ucrNudLowerYaxis
+        '
+        Me.ucrNudLowerYaxis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLowerYaxis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudLowerYaxis.Location = New System.Drawing.Point(80, 64)
+        Me.ucrNudLowerYaxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudLowerYaxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLowerYaxis.Name = "ucrNudLowerYaxis"
+        Me.ucrNudLowerYaxis.Size = New System.Drawing.Size(50, 23)
+        Me.ucrNudLowerYaxis.TabIndex = 22
+        Me.ucrNudLowerYaxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'grpGraph
+        '
+        Me.grpGraph.Controls.Add(Me.ucrChkValuesOutsideYrange)
+        Me.grpGraph.Controls.Add(Me.ucrChkMissingRugPlot)
+        Me.grpGraph.Controls.Add(Me.ucrNudUpperYaxis)
+        Me.grpGraph.Controls.Add(Me.lblYaxisLower)
+        Me.grpGraph.Controls.Add(Me.ucrNudLowerYaxis)
+        Me.grpGraph.Controls.Add(Me.lblXaxis)
+        Me.grpGraph.Controls.Add(Me.ucrReceiverXaxis)
+        Me.grpGraph.Controls.Add(Me.lblYaxisUpper)
+        Me.grpGraph.Location = New System.Drawing.Point(10, 232)
+        Me.grpGraph.Name = "grpGraph"
+        Me.grpGraph.Size = New System.Drawing.Size(275, 182)
+        Me.grpGraph.TabIndex = 23
+        Me.grpGraph.TabStop = False
+        Me.grpGraph.Text = "Graph"
+        '
+        'lblYaxisLower
+        '
+        Me.lblYaxisLower.AutoSize = True
+        Me.lblYaxisLower.Location = New System.Drawing.Point(6, 67)
+        Me.lblYaxisLower.Name = "lblYaxisLower"
+        Me.lblYaxisLower.Size = New System.Drawing.Size(70, 13)
+        Me.lblYaxisLower.TabIndex = 16
+        Me.lblYaxisLower.Text = "Y-axis Lower:"
+        '
+        'ucrNudUpperYaxis
+        '
+        Me.ucrNudUpperYaxis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudUpperYaxis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudUpperYaxis.Location = New System.Drawing.Point(80, 93)
+        Me.ucrNudUpperYaxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudUpperYaxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudUpperYaxis.Name = "ucrNudUpperYaxis"
+        Me.ucrNudUpperYaxis.Size = New System.Drawing.Size(50, 23)
+        Me.ucrNudUpperYaxis.TabIndex = 23
+        Me.ucrNudUpperYaxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'ucrChkValuesOutsideYrange
         '
         Me.ucrChkValuesOutsideYrange.Checked = False
-        Me.ucrChkValuesOutsideYrange.Location = New System.Drawing.Point(10, 353)
+        Me.ucrChkValuesOutsideYrange.Location = New System.Drawing.Point(6, 122)
         Me.ucrChkValuesOutsideYrange.Name = "ucrChkValuesOutsideYrange"
         Me.ucrChkValuesOutsideYrange.Size = New System.Drawing.Size(263, 20)
-        Me.ucrChkValuesOutsideYrange.TabIndex = 20
+        Me.ucrChkValuesOutsideYrange.TabIndex = 24
         '
         'dlgDisplayDailyClimaticData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(444, 439)
-        Me.Controls.Add(Me.ucrChkValuesOutsideYrange)
-        Me.Controls.Add(Me.ucrChkMissingRugPlot)
+        Me.ClientSize = New System.Drawing.Size(437, 497)
+        Me.Controls.Add(Me.grpGraph)
         Me.Controls.Add(Me.ucrReceiverElements)
-        Me.Controls.Add(Me.ucrReceiverYaxisUpper)
-        Me.Controls.Add(Me.lblYaxisUpper)
-        Me.Controls.Add(Me.ucrReceiverYaxisLower)
-        Me.Controls.Add(Me.lblYaxisLower)
-        Me.Controls.Add(Me.ucrReceiverXaxis)
-        Me.Controls.Add(Me.lblXaxis)
         Me.Controls.Add(Me.ucrReceiverYear)
         Me.Controls.Add(Me.lblYear)
         Me.Controls.Add(Me.lblDate)
@@ -318,6 +330,8 @@ Partial Class dlgDisplayDailyClimaticData
         Me.Name = "dlgDisplayDailyClimaticData"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Display Daily Climatic Data"
+        Me.grpGraph.ResumeLayout(False)
+        Me.grpGraph.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -333,16 +347,17 @@ Partial Class dlgDisplayDailyClimaticData
     Friend WithEvents ucrReceiverStations As ucrReceiverSingle
     Friend WithEvents lblElement As Label
     Friend WithEvents ucrReceiverElements As ucrReceiverMultiple
-    Friend WithEvents ucrReceiverYaxisUpper As ucrReceiverSingle
     Friend WithEvents lblYaxisUpper As Label
-    Friend WithEvents ucrReceiverYaxisLower As ucrReceiverSingle
-    Friend WithEvents lblYaxisLower As Label
     Friend WithEvents ucrReceiverXaxis As ucrReceiverSingle
     Friend WithEvents lblXaxis As Label
     Friend WithEvents ucrReceiverYear As ucrReceiverSingle
     Friend WithEvents lblYear As Label
     Friend WithEvents lblDate As Label
     Friend WithEvents ucrReceiverDate As ucrReceiverSingle
-    Friend WithEvents ucrChkValuesOutsideYrange As ucrCheck
     Friend WithEvents ucrChkMissingRugPlot As ucrCheck
+    Friend WithEvents ucrNudLowerYaxis As ucrNud
+    Friend WithEvents grpGraph As GroupBox
+    Friend WithEvents ucrChkValuesOutsideYrange As ucrCheck
+    Friend WithEvents ucrNudUpperYaxis As ucrNud
+    Friend WithEvents lblYaxisLower As Label
 End Class
