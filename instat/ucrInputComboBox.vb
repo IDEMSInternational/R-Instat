@@ -14,10 +14,10 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports System.ComponentModel
-Imports instat
 
 Public Class ucrInputComboBox
     Dim strItemsType As String = ""
+    Public Event SelectionIndexChanged()
 
     Private Sub cboInput_Validating(sender As Object, e As CancelEventArgs) Handles cboInput.Validating
         Dim strCurrent As String
@@ -173,6 +173,7 @@ Public Class ucrInputComboBox
 
     Private Sub cboInput_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboInput.SelectedIndexChanged
         OnNameChanged()
+        RaiseEvent SelectionIndexChanged()
     End Sub
 
     Private Sub ucrInputComboBox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Me.KeyPress
