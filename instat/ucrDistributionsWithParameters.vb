@@ -99,7 +99,7 @@ Public Class ucrDistributionsWithParameters
         End If
     End Sub
 
-    Private Sub ucrDistributionsWithParameters_ucrInputDistributionsIndexChanged(sender As Object, e As EventArgs) Handles Me.ucrInputDistributionsIndexChanged
+    Private Sub ucrDistributionsWithParameters_ucrInputDistributionsIndexChanged() Handles Me.cboDistributionsIndexChanged
         SetParameters()
     End Sub
 

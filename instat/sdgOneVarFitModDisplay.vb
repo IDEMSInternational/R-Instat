@@ -83,7 +83,7 @@ Public Class sdgOneVarFitModDisplay
         End If
     End Sub
 
-    Private Sub ucrDists_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrDists.ucrInputDistributionsIndexChanged
+    Private Sub ucrDists_cboDistributionsIndexChanged() Handles ucrDists.ControlValueChanged
         SetPlotOptions()
     End Sub
 
