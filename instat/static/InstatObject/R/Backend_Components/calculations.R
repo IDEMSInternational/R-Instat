@@ -641,7 +641,7 @@ instat_object$set("public", "save_calc_output", function(calc, curr_data_list, p
           self$get_data_objects(to_data_name)$merge_data(curr_data_list[[c_data_label]][c(calc_link_cols, calc$result_name)], by = by, type = "full")
         }
         else {
-          self$get_data_objects(to_data_name)$add_column_to_data(calc$result_name, curr_data_list[[c_data_label]])
+          self$get_data_objects(to_data_name)$add_columns_to_data(calc$result_name, curr_data_list[[c_data_label]])
         }
       }
       else {
