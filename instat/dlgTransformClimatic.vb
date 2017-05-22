@@ -70,7 +70,7 @@ Public Class dlgTransformClimatic
 
         'clsMatchFun.SetRCommand("match.fun")
 
-        ucrPnlTransform.AddRadioButton(rdoSum)
+        ucrPnlTransform.AddRadioButton(rdoMoving)
         ucrPnlTransform.AddRadioButton(rdoCount)
         ucrPnlTransform.AddRadioButton(rdoSpell)
         ucrPnlTransform.AddRadioButton(rdoWaterBalance)
@@ -134,9 +134,9 @@ Public Class dlgTransformClimatic
         ucrInputColName.SetParameter(New RParameter("result_name"))
 
         'ucrInputColName.SetPrefix("sum")
-        ucrInputColName.SetName("sum")
+        ucrInputColName.SetName("moving")
 
-        ucrPnlTransform.AddToLinkedControls({ucrInputSum, ucrNudSumOver}, {rdoSum}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlTransform.AddToLinkedControls({ucrInputSum, ucrNudSumOver}, {rdoMoving}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransform.AddToLinkedControls({ucrNudCountOver, ucrChkValuesUnderthreshold}, {rdoCount}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransform.AddToLinkedControls({ucrInputSpellLower, ucrInputSpellUpper}, {rdoSpell}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransform.AddToLinkedControls({ucrNudWBCapacity, ucrInputEvaporation}, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
@@ -153,7 +153,7 @@ Public Class dlgTransformClimatic
         clsWaterBalanceFunction = New RFunction
         'ucrSaveTransform.Reset()
         ucrSelectorTransform.Reset()
-        rdoSum.Checked = True 'this wil be fixed properly
+        rdoMoving.Checked = True 'this wil be fixed properly
 
         'Temporary disable
         rdoCount.Enabled = False
@@ -178,7 +178,7 @@ Public Class dlgTransformClimatic
         clsRSumFuncExpr.AddParameter("align", Chr(39) & "right" & Chr(39))
         clsRTrasform.AddParameter("function_exp", Chr(34) & clsRSumFuncExpr.ToScript.ToString & Chr(34))
         clsRTrasform.AddParameter("type", Chr(34) & "calculation" & Chr(34))
-        clsRTrasform.AddParameter("result_name", Chr(34) & "sum" & Chr(34))
+        clsRTrasform.AddParameter("result_name", Chr(34) & "moving" & Chr(34))
         'This might not Beep right
         'clsRTrasform.AddParameter("result_name", Chr(34) & ucrSaveTransform.ucrInputTextSave.GetText & Chr(34))
         clsRTrasform.AddParameter("save", 2)
@@ -208,13 +208,13 @@ Public Class dlgTransformClimatic
     End Sub
 
     Private Sub ucrPnlTransform_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlTransform.ControlContentsChanged
-        If rdoSum.Checked Then
+        If rdoMoving.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSumFunction)
             'ucrBase.clsRsyntax.AddParameter("calc", clsRFunctionParameter:=clsRTrasform)
             'ucrSaveTransform.SetPrefix("Sum")
             'ucrInputColName.SetPrefix("Sum")
-            ucrInputColName.SetName("Sum")
-            grpTransform.Text = "Sum"
+            ucrInputColName.SetName("Moving")
+            grpTransform.Text = "Moving"
         ElseIf rdoCount.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
             'ucrSaveTransform.SetPrefix("Count")

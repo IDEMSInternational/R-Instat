@@ -28,7 +28,7 @@ Partial Class dlgTransformClimatic
         Me.lblStation = New System.Windows.Forms.Label()
         Me.lblData = New System.Windows.Forms.Label()
         Me.rdoSpell = New System.Windows.Forms.RadioButton()
-        Me.rdoSum = New System.Windows.Forms.RadioButton()
+        Me.rdoMoving = New System.Windows.Forms.RadioButton()
         Me.rdoCount = New System.Windows.Forms.RadioButton()
         Me.rdoWaterBalance = New System.Windows.Forms.RadioButton()
         Me.lblThreshold = New System.Windows.Forms.Label()
@@ -132,23 +132,23 @@ Partial Class dlgTransformClimatic
         Me.rdoSpell.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.rdoSpell.UseVisualStyleBackColor = True
         '
-        'rdoSum
+        'rdoMoving
         '
-        Me.rdoSum.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoSum.Checked = True
-        Me.rdoSum.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoSum.FlatAppearance.BorderSize = 2
-        Me.rdoSum.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoSum.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoSum.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.rdoSum.Location = New System.Drawing.Point(49, 17)
-        Me.rdoSum.Name = "rdoSum"
-        Me.rdoSum.Size = New System.Drawing.Size(100, 28)
-        Me.rdoSum.TabIndex = 38
-        Me.rdoSum.TabStop = True
-        Me.rdoSum.Text = "Sum"
-        Me.rdoSum.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoSum.UseVisualStyleBackColor = True
+        Me.rdoMoving.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoMoving.Checked = True
+        Me.rdoMoving.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMoving.FlatAppearance.BorderSize = 2
+        Me.rdoMoving.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMoving.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoMoving.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.rdoMoving.Location = New System.Drawing.Point(49, 17)
+        Me.rdoMoving.Name = "rdoMoving"
+        Me.rdoMoving.Size = New System.Drawing.Size(100, 28)
+        Me.rdoMoving.TabIndex = 38
+        Me.rdoMoving.TabStop = True
+        Me.rdoMoving.Text = "Moving"
+        Me.rdoMoving.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoMoving.UseVisualStyleBackColor = True
         '
         'rdoCount
         '
@@ -207,7 +207,7 @@ Partial Class dlgTransformClimatic
         Me.grpTransform.Size = New System.Drawing.Size(284, 58)
         Me.grpTransform.TabIndex = 46
         Me.grpTransform.TabStop = False
-        Me.grpTransform.Text = "Sum"
+        Me.grpTransform.Text = "Moving"
         '
         'lblSumRows
         '
@@ -458,6 +458,7 @@ Partial Class dlgTransformClimatic
         Me.ucrReceiverStation.Name = "ucrReceiverStation"
         Me.ucrReceiverStation.Selector = Nothing
         Me.ucrReceiverStation.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverStation.strNcFilePath = ""
         Me.ucrReceiverStation.TabIndex = 36
         Me.ucrReceiverStation.ucrSelector = Nothing
         '
@@ -479,6 +480,7 @@ Partial Class dlgTransformClimatic
         Me.ucrReceiverYear.Name = "ucrReceiverYear"
         Me.ucrReceiverYear.Selector = Nothing
         Me.ucrReceiverYear.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverYear.strNcFilePath = ""
         Me.ucrReceiverYear.TabIndex = 30
         Me.ucrReceiverYear.ucrSelector = Nothing
         '
@@ -490,6 +492,7 @@ Partial Class dlgTransformClimatic
         Me.ucrReceiverDate.Name = "ucrReceiverDate"
         Me.ucrReceiverDate.Selector = Nothing
         Me.ucrReceiverDate.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverDate.strNcFilePath = ""
         Me.ucrReceiverDate.TabIndex = 26
         Me.ucrReceiverDate.ucrSelector = Nothing
         '
@@ -501,6 +504,7 @@ Partial Class dlgTransformClimatic
         Me.ucrReceiverDOY.Name = "ucrReceiverDOY"
         Me.ucrReceiverDOY.Selector = Nothing
         Me.ucrReceiverDOY.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverDOY.strNcFilePath = ""
         Me.ucrReceiverDOY.TabIndex = 32
         Me.ucrReceiverDOY.ucrSelector = Nothing
         '
@@ -512,6 +516,7 @@ Partial Class dlgTransformClimatic
         Me.ucrReceiverData.Name = "ucrReceiverData"
         Me.ucrReceiverData.Selector = Nothing
         Me.ucrReceiverData.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverData.strNcFilePath = ""
         Me.ucrReceiverData.TabIndex = 28
         Me.ucrReceiverData.ucrSelector = Nothing
         '
@@ -537,7 +542,7 @@ Partial Class dlgTransformClimatic
         Me.Controls.Add(Me.lblThreshold)
         Me.Controls.Add(Me.rdoWaterBalance)
         Me.Controls.Add(Me.rdoSpell)
-        Me.Controls.Add(Me.rdoSum)
+        Me.Controls.Add(Me.rdoMoving)
         Me.Controls.Add(Me.rdoCount)
         Me.Controls.Add(Me.ucrPnlTransform)
         Me.Controls.Add(Me.lblStation)
@@ -585,7 +590,7 @@ Partial Class dlgTransformClimatic
     Friend WithEvents ucrReceiverData As ucrReceiverSingle
     Friend WithEvents rdoWaterBalance As RadioButton
     Friend WithEvents rdoSpell As RadioButton
-    Friend WithEvents rdoSum As RadioButton
+    Friend WithEvents rdoMoving As RadioButton
     Friend WithEvents rdoCount As RadioButton
     Friend WithEvents ucrPnlTransform As UcrPanel
     Friend WithEvents grpTransform As GroupBox
