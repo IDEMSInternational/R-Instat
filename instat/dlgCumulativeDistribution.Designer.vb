@@ -133,7 +133,6 @@ Partial Class dlgCumulativeDistribution
         'ucrChkIncludePoints
         '
         Me.ucrChkIncludePoints.Checked = False
-        Me.ucrChkIncludePoints.Enabled = False
         Me.ucrChkIncludePoints.Location = New System.Drawing.Point(10, 312)
         Me.ucrChkIncludePoints.Name = "ucrChkIncludePoints"
         Me.ucrChkIncludePoints.Size = New System.Drawing.Size(152, 20)
