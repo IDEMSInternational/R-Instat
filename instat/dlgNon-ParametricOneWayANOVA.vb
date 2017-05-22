@@ -57,12 +57,6 @@ Public Class dlgNon_ParametricOneWayANOVA
 
     End Sub
 
-    Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverYVariate.SetRCode(clsModel, bReset)
-        ucrReceiverFactor.SetRCode(clsModel, bReset)
-        ucrSelectorOneWayAnovaNonParam.SetRCode(clsKruskalWallis, bReset)
-    End Sub
-
     Private Sub SetDefaults()
         clsModel = New ROperator
         clsKruskalWallis = New RFunction
@@ -75,6 +69,12 @@ Public Class dlgNon_ParametricOneWayANOVA
         clsModel.SetOperation("~")
         clsKruskalWallis.AddParameter("formula", clsROperatorParameter:=clsModel, iPosition:=0)
         ucrBase.clsRsyntax.SetBaseRFunction(clsKruskalWallis)
+    End Sub
+
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        ucrReceiverYVariate.SetRCode(clsModel, bReset)
+        ucrReceiverFactor.SetRCode(clsModel, bReset)
+        ucrSelectorOneWayAnovaNonParam.SetRCode(clsKruskalWallis, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
