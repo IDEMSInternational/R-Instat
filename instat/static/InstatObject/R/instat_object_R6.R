@@ -273,8 +273,8 @@ instat_object$set("public", "get_combined_metadata", function(convert_to_charact
   i = 1
   for (curr_obj in private$.data_objects) {
     templist = curr_obj$get_metadata()
-    for ( j in (1:length(templist)) ) {
-      if(length(templist[[j]]) > 1) templist[[j]] <- paste(as.character(templist[[j]]), collapse = ",")
+    for (j in (1:length(templist))) {
+      if(length(templist[[j]]) > 1 || is.list(templist[[j]])) templist[[j]] <- paste(as.character(templist[[j]]), collapse = ",")
       retlist[i, names(templist[j])] = templist[[j]]
     }
     if(all(c(data_name_label, label_label) %in% names(retlist))) retlist <- retlist[ ,c(c(data_name_label, label_label), setdiff(names(retlist), c(data_name_label, label_label)))]
