@@ -17,7 +17,6 @@
 Public Class ucrAxes
     Public bIsX As Boolean
     Public clsRsyntax As New RSyntax
-    Public clsRggplotFunction As New RFunction
     Public clsTitleFunction As New RFunction
     Public clsScalecontinuousFunction As New RFunction
     Public clsSeqFunction As New RFunction
@@ -70,13 +69,13 @@ Public Class ucrAxes
         ucrNudFrom.SetLinkedDisplayControl(lblFrom)
 
         ucrPnlTickmarkers.AddToLinkedControls(ucrNudTo, {rdoTickMarkersCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrNudFrom.SetLinkedDisplayControl(lblTo)
+        ucrNudTo.SetLinkedDisplayControl(lblTo)
 
         ucrPnlTickmarkers.AddToLinkedControls(ucrNudInStepsOf, {rdoTickMarkersCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrNudFrom.SetLinkedDisplayControl(lblInStepsOf)
+        ucrNudInStepsOf.SetLinkedDisplayControl(lblInStepsOf)
 
         ucrPnlTickmarkers.AddToLinkedControls(ucrNudTickMarkersNoOfDecimalPlaces, {rdoTickMarkersCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrNudFrom.SetLinkedDisplayControl(lblTickMarkersNoOfDecimalPlaces)
+        ucrNudTickMarkersNoOfDecimalPlaces.SetLinkedDisplayControl(lblTickMarkersNoOfDecimalPlaces)
 
         'these add parameters to clsSeqFunction
         ucrNudInStepsOf.SetParameter(New RParameter("by"))
@@ -206,7 +205,7 @@ Public Class ucrAxes
         ucrNudLowerLimit.DecimalPlaces = ucrNudScalesNoOfDecimalPlaces.Value
     End Sub
 
-    Private Sub ucrNudTickMarkersNoOfDecimalPlaces_TextChanged() Handles ucrNudTickMarkersNoOfDecimalPlaces.ControlContentsChanged
+    Private Sub ucrNudTickMarkersNoOfDecimalPlaces_ControlContentsChanged() Handles ucrNudTickMarkersNoOfDecimalPlaces.ControlContentsChanged
         ucrNudFrom.DecimalPlaces = ucrNudTickMarkersNoOfDecimalPlaces.Value
         ucrNudTo.DecimalPlaces = ucrNudTickMarkersNoOfDecimalPlaces.Value
         ucrNudInStepsOf.DecimalPlaces = ucrNudTickMarkersNoOfDecimalPlaces.Value

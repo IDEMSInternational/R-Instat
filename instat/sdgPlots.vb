@@ -72,6 +72,7 @@ Public Class sdgPlots
         ucrChkMargin.SetText("Margins")
         ucrChkMargin.SetParameter(New RParameter("margins"))
         ucrChkMargin.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkMargin.SetRDefault("FALSE")
 
         ucrChkFreeScalesX.SetText("Free Scales X")
         ucrChkFreeScalesY.SetText("Free Scales Y")
@@ -85,6 +86,7 @@ Public Class sdgPlots
         ucrPnlHorizonatalVertical.SetParameter(New RParameter("dir"))
         ucrPnlHorizonatalVertical.AddRadioButton(rdoVertical, Chr(34) & "v" & Chr(34))
         ucrPnlHorizonatalVertical.AddRadioButton(rdoHorizontal, Chr(34) & "h" & Chr(34))
+        ucrPnlHorizonatalVertical.SetRDefault(Chr(34) & "h" & Chr(34))
 
         ucrChkIncludeFacets.AddToLinkedControls(ucrFacetSelector, {True}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=False)
         ucrChkIncludeFacets.AddToLinkedControls(ucr1stFactorReceiver, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -142,7 +144,6 @@ Public Class sdgPlots
         tabLayers.Enabled = True
     End Sub
     Public Sub SetDefaults()
-
         ucrChkIncludeFacets.Checked = False
         IncludeFacets()
         ucrNudNumberofRows.Value = 1
