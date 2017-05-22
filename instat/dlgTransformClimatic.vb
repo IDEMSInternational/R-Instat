@@ -82,11 +82,11 @@ Public Class dlgTransformClimatic
         'ucrPnlTransform.AddFunctionNamesCondition(rdoSpell, "")
         'ucrPnlTransform.AddFunctionNamesCondition(rdoWaterBalance, "")
 
-        ucrNudThreshold.SetParameter(New RParameter("threshold"))
-        ucrNudThreshold.SetMinMax(0, 100)
-        ucrNudThreshold.Increment = 0.01
-        ucrNudThreshold.DecimalPlaces = 2
-        ucrNudThreshold.SetRDefault("0.85")
+        ucrInputThreshold.SetValidationTypeAsNumeric()
+        ucrInputThreshold.SetParameter(New RParameter("threshold"))
+        ucrInputThreshold.SetLinkedDisplayControl(lblThreshold)
+
+
 
         ucrInputSum.SetParameter(New RParameter("FUN"))
         dctInputSumPairs.Add("sum", Chr(39) & "sum" & Chr(39))
@@ -154,6 +154,7 @@ Public Class dlgTransformClimatic
         'ucrSaveTransform.Reset()
         ucrSelectorTransform.Reset()
         ucrInputColName.SetName("moving")
+        ucrInputThreshold.SetName(0.85)
         rdoMoving.Checked = True 'this wil be fixed properly
 
         'Temporary disable
