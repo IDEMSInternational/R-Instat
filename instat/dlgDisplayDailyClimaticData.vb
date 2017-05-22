@@ -56,10 +56,16 @@ Public Class dlgDisplayDailyClimaticData
         ucrReceiverXaxis.SetClimaticType("doy")
         ucrReceiverXaxis.bAutoFill = True
 
+        ucrNudUpperYaxis.SetLinkedDisplayControl(lblYaxisUpper)
+        ucrNudLowerYaxis.SetLinkedDisplayControl(lblYaxisLower)
+        ucrReceiverXaxis.SetLinkedDisplayControl(lblXaxis)
+
         ucrPnlFrequencyDisplay.AddRadioButton(rdoTable)
         ucrPnlFrequencyDisplay.AddRadioButton(rdoGraph)
         ucrPnlFrequencyDisplay.AddRadioButton(rdoBoth)
-
+        ucrPnlFrequencyDisplay.AddToLinkedControls({ucrNudLowerYaxis, ucrNudUpperYaxis, ucrReceiverXaxis, ucrChkMissingRugPlot, ucrChkValuesOutsideYrange}, {rdoGraph, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFrequencyDisplay.SetLinkedDisplayControl(grpGraph)
+        ucrChkMissingRugPlot.SetLinkedDisplayControl(grpGraph)
         ucrChkMissingRugPlot.SetText("Indicate Missing Rug Plot")
         ucrChkValuesOutsideYrange.SetText("Indicate  Values Outside Y Range")
 
