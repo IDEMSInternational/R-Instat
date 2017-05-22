@@ -339,11 +339,40 @@ summary_median <- function(x, na.rm = FALSE,...) {
   return(median(x, na.rm = na.rm))
 }
 
-instat_object$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, row_factors = c(), column_factors = c(), store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, return_output = FALSE, treat_columns_as_factor = FALSE, page_display = FALSE, ...) {
-  if(page_display) {
-    for(col in columns_to_summarise) {
-      self$summary_table(data_name = data_name, columns_to_summarise = col, summaries = summaries, row_factors = row_factors, column_factors = column_factors, store_results = store_results, drop = drop, na.rm = na.rm, summary_name = summary_name, include_margins = include_margins, return_output = return_output, treat_columns_as_factor = treat_columns_as_factor, page_display = FALSE, ... = ...)
+instat_object$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, row_factors = c(), column_factors = c(), store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, return_output = FALSE, treat_columns_as_factor = FALSE, page_by = c(), ...) {
+  if(include_margins) {
+    if(length(columns_to_summarise) > 1 && length(summaries)) {
+      warning("Multiple summaries and variables with margins is currently only implemented through multiple pages. Overriding page_by to be c(summaries, variables)")
+      page_by <- c("summaries", "variables")
     }
+    else if(length(summaries) > 1) {
+      warning("Multiple summaries with margins is currently only implemented through multiple pages. Overriding page_by to be summaries")
+      page_by <- "summaries"
+    }
+    else if(length(columns_to_summarise) > 1) {
+      warning("Multiple variables with margins is currently only implemented through multiple pages. Overriding page_by to be variables")
+      page_by <- "variables"
+    }
+  }
+  if(length(page_by) > 0) {
+    if(length(page_by) == 1 && page_by == "summaries") {
+      for(curr_summary in summaries) {
+        self$summary_table(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = curr_summary, row_factors = row_factors, column_factors = column_factors, store_results = store_results, drop = drop, na.rm = na.rm, summary_name = summary_name, include_margins = include_margins, return_output = return_output, treat_columns_as_factor = treat_columns_as_factor, page_by = c(), ... = ...)
+      }
+    }
+    else if(length(page_by) == 1 && page_by == "variables") {
+      for(curr_col in columns_to_summarise) {
+        self$summary_table(data_name = data_name, columns_to_summarise = curr_col, summaries = summaries, row_factors = row_factors, column_factors = column_factors, store_results = store_results, drop = drop, na.rm = na.rm, summary_name = summary_name, include_margins = include_margins, return_output = return_output, treat_columns_as_factor = treat_columns_as_factor, page_by = c(), ... = ...)
+      }
+    }
+    else if(length(page_by) == 2  && all(page_by %in% c("variables", "summaries"))) {
+      for(curr_col in columns_to_summarise) {
+        for(curr_summary in summaries) {
+          self$summary_table(data_name = data_name, columns_to_summarise = curr_col, summaries = curr_summary, row_factors = row_factors, column_factors = column_factors, store_results = store_results, drop = drop, na.rm = na.rm, summary_name = summary_name, include_margins = include_margins, return_output = return_output, treat_columns_as_factor = treat_columns_as_factor, page_by = c(), ... = ...)
+        }
+      }
+    }
+    else warning("page_by not yet implemented for factor columns. No output to display")
   }
   else {
     factors <- c(column_factors, row_factors)
@@ -380,14 +409,14 @@ instat_object$set("public", "summary_table", function(data_name, columns_to_summ
         cell_values[["Summary"]] <- NULL
       }
     }
-    if(length(row_factors) > 0) {
-      row_formula <- paste(row_factors, collapse = "+")
-    }
-    else row_formula <- "."
-    if(length(c(column_factors, summary_factors)) > 0) {
-      column_formula <- paste(c(column_factors, summary_factors), collapse = "+")
+    if(length(column_factors) > 0) {
+      column_formula <- paste(column_factors, collapse = "+")
     }
     else column_formula <- "."
+    if(length(c(row_factors, summary_factors)) > 0) {
+      row_formula <- paste(c(row_factors, summary_factors), collapse = "+")
+    }
+    else row_formula <- "."
     #print(as.formula(paste(row_formula, "~", column_formula)))
     cell_values <- dcast(formula = as.formula(paste(row_formula, "~", column_formula)), value.var = "Value", data = cell_values)
     if(include_margins) {
@@ -400,15 +429,15 @@ instat_object$set("public", "summary_table", function(data_name, columns_to_summ
       }
       # Column Factor - add as row margin
       # in long term where is [[2]], e.g. which(powerSet(c(1,2,3, 4)) == "1"
-      column_factor_margin <- margin_tables[[2]][[length(column_factors) + 1]]
+      column_factor_margin <- margin_tables[[which(sapply(power_sets, function(x) setequal(column_factors, x)))]][[length(column_factors) + 1]]
       #overall_col_margin <- append(column_factor_margin$summary_count, values = c(rep(length.out=length(row_factors), x='NA')), after = 0) 
-      new_row <- c(rep(NA, length(row_factors)), column_factor_margin)
+      new_row <- c(rep(NA, length(row_factors) + length(summary_factors)), column_factor_margin)
       cell_values <- rbind(cell_values, new_row)
       cell_values[nrow(cell_values), 1] <- "TOTAL"
       
       # take [[7]] and [[1]]. Append [[1]]
       overall_value <- margin_tables[[1]][1,1]
-      row_factor_margin <- margin_tables[[length(margin_tables)]][[length(row_factors) + 1]]
+      row_factor_margin <- margin_tables[[which(sapply(power_sets, function(x) setequal(row_factors, x)))]][[length(row_factors) + 1]]
       # append the vector for the summary of interest in row_factor_margin with the overall_value
       overall_row_margin <- c(row_factor_margin, overall_value)
       # add into the unstacked dataset
@@ -432,9 +461,12 @@ instat_object$set("public", "summary_table", function(data_name, columns_to_summ
         }
         title <- gsub("_", ".", title)
         notes <- paste("Row factors: ", paste0(row_factors, collapse = ", "), " Column Factors: ", paste0(column_factors, collapse = ", "))
-        return(stargazer(cell_values, type = "text", summary = FALSE, rownames = FALSE, title = title, notes = notes, ... = ...))
+        return(cell_values)
+        #return(stargazer::stargazer(cell_values, type = "text", summary = FALSE, rownames = FALSE, title = title, notes = notes, ... = ...))
       }
-      else return(stargazer(cell_values, type = "text", summary = FALSE, rownames = FALSE, ... = ...))
+      else {
+        return(stargazer::stargazer(cell_values, type = "text", summary = FALSE, rownames = FALSE, ... = ...))
+      }
     }
   }
 }

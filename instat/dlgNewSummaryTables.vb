@@ -18,8 +18,12 @@ Imports instat.Translations
 Public Class dlgNewSummaryTables
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
+    Private clsSummariesList As New RFunction
+    Private bResetSubdialog As Boolean = False
+    Private clsDefaultFunction As New RFunction
+    Private clsStargazerFunction As New RFunction
+
     Private Sub dlgNewSummaryTables_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstload Then
             InitialiseDialog()
             bFirstload = False
@@ -27,50 +31,96 @@ Public Class dlgNewSummaryTables
         If bReset Then
             SetDefaults()
         End If
+        SetRCodeForControls(bReset)
         bReset = False
-        TestOKEnabled()
-    End Sub
-
-    Public Sub SetRCodeForControls(bReset As Boolean)
-
-    End Sub
-
-    Private Sub SetDefaults()
-        ucrReceiverFactor.SetMeAsReceiver()
-        ucrFactorsSelector.Reset()
+        autoTranslate(Me)
         TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrReceiverFactor.Selector = ucrFactorsSelector
-        ucrReceiverNumeric.Selector = ucrFactorsSelector
-        ucrSingleReceiver.Selector = ucrFactorsSelector
-        ucrReceiverFactor.SetDataType("factor")
+        ucrBase.clsRsyntax.iCallType = 2
+
+        ucrSelectorSummaryTables.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorSummaryTables.SetParameterIsString()
+
+        ucrReceiverNumeric.SetParameter(New RParameter("columns_to_summarise", 1))
+        ucrReceiverNumeric.Selector = ucrSelectorSummaryTables
         ucrReceiverNumeric.SetDataType("numeric")
-        ucrchkCheckWeight.SetText("Weights")
-        ucrchkCheckSummaries.SetText("Treat Summary Columns as a Further Factor")
-        ucrchkCheckDisplayMargins.SetText("Display Margins")
-        ucrchkCheckWeight.AddToLinkedControls(ucrSingleReceiver, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrReceiverNumeric.SetParameterIsString()
+
+        ucrReceiverFactor.SetParameter(New RParameter("row_factors", 3)) ' how to move row_factors to column_factors
+        ucrReceiverFactor.SetParameterIsString()
+        ucrReceiverFactor.Selector = ucrSelectorSummaryTables
+        ucrReceiverFactor.SetDataType("factor")
+
+        ucrReceiverColumnFactor.SetParameter(New RParameter("column_factors", 4)) ' how to move row_factors to column_factors
+        ucrReceiverColumnFactor.SetParameterIsString()
+        ucrReceiverColumnFactor.Selector = ucrSelectorSummaryTables
+        ucrReceiverColumnFactor.SetDataType("factor")
+        ' summary_name 7
+
+        ucrChkStoreResults.Enabled = False ' why do we offer this on the code?
+        'ucrChkStoreResults.SetParameter(New RParameter("store_results", 4))
+        ucrChkStoreResults.SetText("Store Results in Data Frame")
+        'ucrChkStoreResults.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        'ucrChkStoreResults.SetRDefault("TRUE")
+
+        ucrChkOmitMissing.SetText("Omit Missing Values")
+        ucrChkOmitMissing.SetParameter(New RParameter("na.rm", 6))
+        ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkOmitMissing.SetRDefault("FALSE")
+
+        ucrChkDisplayMargins.SetParameter(New RParameter("include_margins", 8))
+        ucrChkDisplayMargins.SetText("Display Margins")
+        ucrChkDisplayMargins.SetRDefault("FALSE")
+
+        ucrChkPrintOutput.SetParameter(New RParameter("return_output", 9))
+        ucrChkPrintOutput.SetText("Print to Output Window")
+        ucrChkPrintOutput.SetRDefault("FALSE")
+
+        ucrChkSummaries.SetParameter(New RParameter("treat_columns_as_factor", 10))
+        ucrChkSummaries.SetText("Treat Summary Columns as a Further Factor")
+        ucrChkSummaries.SetRDefault("FALSE")
+
+        '        ucrChkWeight.SetParameter(New RParameter("", ))
+        ucrChkWeight.SetText("Weights")
+        ucrChkWeight.AddToLinkedControls(ucrSingleReceiver, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrSingleReceiver.Selector = ucrSelectorSummaryTables
     End Sub
 
-    Private Sub EnableCheckSummaries()
-        If ucrReceiverNumeric.lstSelectedVariables.Items.Count > 1 Then
-            ucrchkCheckSummaries.Enabled = True
-        Else
-            ucrchkCheckSummaries.Enabled = False
-        End If
+    Private Sub SetDefaults()
+        clsDefaultFunction = New RFunction
+        clsSummariesList = New RFunction
+        clsStargazerFunction = New RFunction
+
+        clsStargazerFunction.SetPackageName("stargazer")
+        clsStargazerFunction.SetRCommand("stargazer")
+        clsStargazerFunction.AddParameter("x", clsRFunctionParameter:=clsDefaultFunction)
+
+        ucrReceiverFactor.SetMeAsReceiver()
+        ucrSelectorSummaryTables.Reset()
+
+        clsSummariesList.SetRCommand("c")
+        clsSummariesList.AddParameter("summary_mean", Chr(34) & "summary_mean" & Chr(34), bIncludeArgumentName:=False) ' TODO decide which default(s) to use?
+
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
+        clsDefaultFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList, iPosition:=2)
+        clsDefaultFunction.AddParameter("return_output", "TRUE", iPosition:=9) ' we don't want it in the data frame?
+        clsDefaultFunction.AddParameter("store_results", "FALSE", iPosition:=4)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsStargazerFunction)
+        bResetSubdialog = True
+    End Sub
+
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, clsDefaultFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
-        If (Not ucrReceiverFactor.IsEmpty OrElse Not ucrReceiverNumeric.IsEmpty) AndAlso ucrNudColumnFactors.GetText <> "" AndAlso ucrNudDecimals.GetText <> "" AndAlso (Not ucrchkCheckWeight.Checked OrElse (ucrchkCheckWeight.Checked AndAlso Not ucrSingleReceiver.IsEmpty)) Then
+        If (Not ucrReceiverFactor.IsEmpty OrElse Not ucrReceiverNumeric.IsEmpty) AndAlso ucrNudColumnFactors.GetText <> "" AndAlso ucrNudDecimals.GetText <> "" AndAlso (Not ucrChkWeight.Checked OrElse (ucrChkWeight.Checked AndAlso Not ucrSingleReceiver.IsEmpty)) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
-    End Sub
-
-    Private Sub cmdSummaries_Click(sender As Object, e As EventArgs)
-        sdgSummaries.ShowDialog()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -79,12 +129,40 @@ Public Class dlgNewSummaryTables
         TestOKEnabled()
     End Sub
 
+    Private Sub cmdSummaries_Click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
+        sdgSummaries.SetRFunction(clsSummariesList, bResetSubdialog)
+        bResetSubdialog = False
+        sdgSummaries.ShowDialog()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub EnableCheckSummaries()
+        If ucrReceiverNumeric.lstSelectedVariables.Items.Count > 1 Then
+            ucrChkSummaries.Enabled = True
+        Else
+            ucrChkSummaries.Enabled = False
+        End If
+    End Sub
+
+    Private Sub ColumnFactors()
+        ' if ucrNudColumnFactors = 0 then 
+
+        ' 
+    End Sub
+
+    Public Sub PageDisplay()
+        If clsSummariesList.clsParameters.Count = 1 Then
+            clsDefaultFunction.AddParameter("page_display", "FALSE", iPosition:=11)
+        Else
+            clsDefaultFunction.AddParameter("page_display", "TRUE", iPosition:=11)
+        End If
+    End Sub
+
     Private Sub ucrReceiverNumeric_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverNumeric.ControlValueChanged
         EnableCheckSummaries()
     End Sub
 
-    Private Sub ucrReceiverFactor_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged, ucrchkCheckWeight.ControlContentsChanged, ucrSingleReceiver.ControlContentsChanged, ucrNudColumnFactors.ControlContentsChanged, ucrNudDecimals.ControlContentsChanged, ucrReceiverNumeric.ControlContentsChanged
+    Private Sub ucrReceiverFactor_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged, ucrChkWeight.ControlContentsChanged, ucrSingleReceiver.ControlContentsChanged, ucrNudColumnFactors.ControlContentsChanged, ucrNudDecimals.ControlContentsChanged, ucrReceiverNumeric.ControlContentsChanged
         TestOKEnabled()
     End Sub
-
 End Class
