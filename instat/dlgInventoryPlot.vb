@@ -37,7 +37,6 @@ Public Class dlgInventoryPlot
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.iHelpTopicID = 359
         ucrBase.clsRsyntax.iCallType = 3
-
         ucrInventoryPlotSelector.SetParameter(New RParameter("data_name", 0))
         ucrInventoryPlotSelector.SetParameterIsString()
 
@@ -47,20 +46,20 @@ Public Class dlgInventoryPlot
         ucrReceiverDate.bAutoFill = True
         ucrReceiverDate.SetParameterIsString()
 
-        ucrReceiverElements.SetParameter(New RParameter("elements_col", 2))
+        ucrReceiverElements.SetParameter(New RParameter("element_cols", 2))
         ucrReceiverElements.Selector = ucrInventoryPlotSelector
-        ucrReceiverElements.SetIncludedDataTypes({"numeric"})
         ucrReceiverElements.SetParameterIsString()
 
         ucrReceiverStation.SetParameter(New RParameter("station_col", 3))
         ucrReceiverStation.Selector = ucrInventoryPlotSelector
-        ucrReceiverStation.SetIncludedDataTypes({"factor"})
         ucrReceiverStation.SetClimaticType("station")
+        ucrReceiverStation.bAutoFill = True
         ucrReceiverStation.SetParameterIsString()
 
         ucrChkFlipCoordinates.SetParameter(New RParameter("coord_flip", 4))
         ucrChkFlipCoordinates.SetText("Flip Coordinates")
         ucrChkFlipCoordinates.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkFlipCoordinates.SetRDefault("FALSE")
 
         ucrInputTitle.SetParameter(New RParameter("graph_title", 5))
         ucrChkTitle.SetParameter(ucrInputTitle.GetParameter(), bNewChangeParameterValue:=False)
@@ -69,6 +68,21 @@ Public Class dlgInventoryPlot
 
         ucrChkShowNonMissing.SetText("Show Non Missing")
         ucrChkShowNonMissing.Enabled = False ' this currently has no parameter associated with it
+
+        ucrPnlPlotLayout.SetParameter(New RParameter("year_doy_plot"))
+        ucrPnlPlotLayout.AddRadioButton(rdoyear_doy_plot, "TRUE")
+        ucrPnlPlotLayout.AddRadioButton(rdoDatePlot, "FALSE")
+        ucrPnlPlotLayout.SetRDefault("FALSE")
+
+        Dim dctFacetByPairs As New Dictionary(Of String, String)
+        ucrInputFacetBy.SetParameter(New RParameter("facet_by"))
+        dctFacetByPairs.Add("Default", "NULL")
+        dctFacetByPairs.Add("Elements", Chr(34) & "elements" & Chr(34))
+        dctFacetByPairs.Add("Stations", Chr(34) & "stations" & Chr(34))
+        dctFacetByPairs.Add("Stations-Elements", Chr(34) & "stations-elements" & Chr(34))
+        dctFacetByPairs.Add("Elements-Stations", Chr(34) & "elements-stations" & Chr(34))
+        ucrInputFacetBy.SetItems(dctFacetByPairs)
+        ucrInputFacetBy.SetRDefault("NULL")
 
         ucrSaveGraph.SetPrefix("Inventory")
         ucrSaveGraph.SetSaveTypeAsGraph()
@@ -85,10 +99,12 @@ Public Class dlgInventoryPlot
         ucrSaveGraph.Reset()
         ucrReceiverDate.SetMeAsReceiver()
         ucrChkTitle.Checked = False
-        ucrInputTitle.SetName("")
+        ucrInputTitle.SetName("Inventory Plot")
 
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_inventory_plot")
         clsDefaultRFunction.AddParameter("coord_flip", "FALSE")
+        clsDefaultRFunction.AddParameter("year_doy_plot", "FALSE")
+        clsDefaultRFunction.AddParameter("facet_by", "NULL")
         clsDefaultRFunction.SetAssignTo("last_graph", strTempDataframe:=ucrInventoryPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
 
