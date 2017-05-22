@@ -73,7 +73,7 @@ Public Class dlgDisplayDailyClimaticData
 
     Private Sub SetDefaults()
         ucrSelectorDisplayDailyClimaticData.Reset()
-
+        rdoTable.Enabled = False 'for now
 
     End Sub
 
