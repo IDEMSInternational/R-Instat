@@ -49,11 +49,11 @@ Public Class dlgRandomSample
 
         ucrChkSetSeed.SetText("Set Seed:")
         ucrChkSetSeed.AddFunctionNamesCondition(False, "set.seed")
-        ucrChkSetSeed.AddToLinkedControls(ucrNudSeed, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True)
+        ucrChkSetSeed.AddToLinkedControls(ucrNudSeed, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=5)
 
         ucrDistWithParameters.SetParameters()
         ucrNudSeed.SetParameter(New RParameter("seed", 0))
-        ucrNudSeed.SetMinMax(Integer.MaxValue, Integer.MinValue)
+        ucrNudSeed.SetMinMax(Integer.MinValue, Integer.MaxValue)
 
         ucrSaveRandomSamples.SetSaveTypeAsColumn()
         ucrSaveRandomSamples.SetDataFrameSelector(ucrSelectorRandomSamples)
@@ -89,14 +89,17 @@ Public Class dlgRandomSample
 
         ucrSelectorRandomSamples.Reset()
         clsMultipleSamplesFunction.SetRCommand("data.frame")
-        clsSetSeed.SetRCommand("set.seed")
         clsSetSeed.AddParameter("seed", 5)
+        clsSetSeed.SetRCommand("set.seed")
+
 
         setnumberofsamplesparameters()
         ucrDistWithParameters.SetRDistributions()
         clsDistribtionFunction = ucrDistWithParameters.clsCurrRFunction
         setdataframeanddistributionparameters()
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSaveRandomSamples.GetText, strTempDataframe:=ucrSelectorRandomSamples.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveRandomSamples.GetText)
+
+        clsDistribtionFunction.SetAssignTo(ucrSaveRandomSamples.GetText, ucrSelectorRandomSamples.cboAvailableDataFrames.Text, ucrSaveRandomSamples.GetText)
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsDistribtionFunction)
     End Sub
 
@@ -113,14 +116,12 @@ Public Class dlgRandomSample
             clsDistribtionFunction.RemoveParameterByName("nn")
             clsDistribtionFunction.AddParameter("n", ucrSelectorRandomSamples.iDataFrameLength)
         End If
-        TestOKEnabled()
     End Sub
 
     Private Sub setnumberofsamplesparameters()
         If ucrNudNumberOfSamples.Value = 1 Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsDistribtionFunction)
         Else
-            clsDistribtionFunction.RemoveAssignTo()
             clsMultipleSamplesFunction.ClearParameters()
             For i = 1 To ucrNudNumberOfSamples.Value
                 clsMultipleSamplesFunction.AddParameter("X" & i, clsRFunctionParameter:=clsDistribtionFunction)
@@ -132,8 +133,8 @@ Public Class dlgRandomSample
 
     Private Sub TestOKEnabled()
         If ucrDistWithParameters.bParametersFilled AndAlso ucrNudNumberOfSamples.GetText <> "" _
-            AndAlso ucrNudNumberOfSamples.GetText <> "" AndAlso (Not ucrChkSetSeed.Checked OrElse (ucrChkSetSeed.Checked AndAlso ucrNudSeed.Text <> "")) _
-            AndAlso ((ucrNudNumberOfSamples.Value = 1 AndAlso ucrSaveRandomSamples.IsComplete) OrElse (ucrNudNumberOfSamples.GetText <> 1 AndAlso ucrSaveRandomSamples.IsComplete)) Then
+            AndAlso ucrNudNumberOfSamples.GetText <> "" AndAlso (Not ucrChkSetSeed.Checked OrElse (ucrChkSetSeed.Checked AndAlso ucrNudSeed.GetText <> "")) _
+            AndAlso ((ucrNudNumberOfSamples.GetText = 1 AndAlso ucrSaveRandomSamples.IsComplete) OrElse (ucrNudNumberOfSamples.GetText <> 1 AndAlso ucrSaveRandomSamples.IsComplete)) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -152,10 +153,14 @@ Public Class dlgRandomSample
 
     Private Sub ucrSelectorRandomSamples_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorRandomSamples.ControlValueChanged
         setdataframeanddistributionparameters()
-        TestOKEnabled()
     End Sub
 
     Private Sub ucrNudNumberOfSamples_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudNumberOfSamples.ControlValueChanged
         SetNewColumName()
+        setnumberofsamplesparameters()
+    End Sub
+
+    Private Sub ucrSaveRandomSamples_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveRandomSamples.ControlContentsChanged, ucrSelectorRandomSamples.ControlContentsChanged, ucrChkSetSeed.ControlContentsChanged, ucrNudSeed.ControlContentsChanged, ucrSampleSize.ControlContentsChanged, ucrDistWithParameters.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class
