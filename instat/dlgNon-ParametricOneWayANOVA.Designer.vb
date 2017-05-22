@@ -24,10 +24,10 @@ Partial Class dlgNon_ParametricOneWayANOVA
     Private Sub InitializeComponent()
         Me.lblYVariate = New System.Windows.Forms.Label()
         Me.lblFactor = New System.Windows.Forms.Label()
+        Me.ucrSelectorOneWayAnovaNonParam = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
         Me.ucrReceiverYVariate = New instat.ucrReceiverSingle()
-        Me.ucrSelectorOneWayAnovaNonParam = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
         '
         'lblYVariate
@@ -36,7 +36,7 @@ Partial Class dlgNon_ParametricOneWayANOVA
         Me.lblYVariate.Location = New System.Drawing.Point(238, 28)
         Me.lblYVariate.Name = "lblYVariate"
         Me.lblYVariate.Size = New System.Drawing.Size(53, 13)
-        Me.lblYVariate.TabIndex = 4
+        Me.lblYVariate.TabIndex = 1
         Me.lblYVariate.Tag = "Y_Variate:"
         Me.lblYVariate.Text = "Y Variate:"
         '
@@ -46,16 +46,26 @@ Partial Class dlgNon_ParametricOneWayANOVA
         Me.lblFactor.Location = New System.Drawing.Point(239, 86)
         Me.lblFactor.Name = "lblFactor"
         Me.lblFactor.Size = New System.Drawing.Size(40, 13)
-        Me.lblFactor.TabIndex = 5
+        Me.lblFactor.TabIndex = 3
         Me.lblFactor.Tag = "Factor:"
         Me.lblFactor.Text = "Factor:"
+        '
+        'ucrSelectorOneWayAnovaNonParam
+        '
+        Me.ucrSelectorOneWayAnovaNonParam.bShowHiddenColumns = False
+        Me.ucrSelectorOneWayAnovaNonParam.bUseCurrentFilter = True
+        Me.ucrSelectorOneWayAnovaNonParam.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorOneWayAnovaNonParam.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorOneWayAnovaNonParam.Name = "ucrSelectorOneWayAnovaNonParam"
+        Me.ucrSelectorOneWayAnovaNonParam.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorOneWayAnovaNonParam.TabIndex = 0
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(10, 197)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 3
+        Me.ucrBase.TabIndex = 5
         '
         'ucrReceiverFactor
         '
@@ -66,7 +76,7 @@ Partial Class dlgNon_ParametricOneWayANOVA
         Me.ucrReceiverFactor.Selector = Nothing
         Me.ucrReceiverFactor.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverFactor.strNcFilePath = ""
-        Me.ucrReceiverFactor.TabIndex = 2
+        Me.ucrReceiverFactor.TabIndex = 4
         Me.ucrReceiverFactor.ucrSelector = Nothing
         '
         'ucrReceiverYVariate
@@ -78,18 +88,8 @@ Partial Class dlgNon_ParametricOneWayANOVA
         Me.ucrReceiverYVariate.Selector = Nothing
         Me.ucrReceiverYVariate.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverYVariate.strNcFilePath = ""
-        Me.ucrReceiverYVariate.TabIndex = 1
+        Me.ucrReceiverYVariate.TabIndex = 2
         Me.ucrReceiverYVariate.ucrSelector = Nothing
-        '
-        'ucrSelectorOneWayAnovaNonParam
-        '
-        Me.ucrSelectorOneWayAnovaNonParam.bShowHiddenColumns = False
-        Me.ucrSelectorOneWayAnovaNonParam.bUseCurrentFilter = True
-        Me.ucrSelectorOneWayAnovaNonParam.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorOneWayAnovaNonParam.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorOneWayAnovaNonParam.Name = "ucrSelectorOneWayAnovaNonParam"
-        Me.ucrSelectorOneWayAnovaNonParam.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorOneWayAnovaNonParam.TabIndex = 6
         '
         'dlgNon_ParametricOneWayANOVA
         '
