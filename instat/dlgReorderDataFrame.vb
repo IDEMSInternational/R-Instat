@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class dlgReorderSheet
+Public Class dlgReorderDataFrame
     Private bReset As Boolean = True
     Private bFirstLoad As Boolean = True
     Private clsReorderDataFrame As New RFunction
