@@ -27,7 +27,7 @@ Partial Class dlgNon_ParametricOneWayANOVA
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
         Me.ucrReceiverYVariate = New instat.ucrReceiverSingle()
-        Me.ucrDataFrameAddRemove = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSelectorOneWayAnovaNonParam = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
         '
         'lblYVariate
@@ -59,38 +59,44 @@ Partial Class dlgNon_ParametricOneWayANOVA
         '
         'ucrReceiverFactor
         '
+        Me.ucrReceiverFactor.frmParent = Me
         Me.ucrReceiverFactor.Location = New System.Drawing.Point(241, 99)
         Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
         Me.ucrReceiverFactor.Selector = Nothing
         Me.ucrReceiverFactor.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverFactor.strNcFilePath = ""
         Me.ucrReceiverFactor.TabIndex = 2
+        Me.ucrReceiverFactor.ucrSelector = Nothing
         '
         'ucrReceiverYVariate
         '
+        Me.ucrReceiverYVariate.frmParent = Me
         Me.ucrReceiverYVariate.Location = New System.Drawing.Point(240, 43)
         Me.ucrReceiverYVariate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverYVariate.Name = "ucrReceiverYVariate"
         Me.ucrReceiverYVariate.Selector = Nothing
         Me.ucrReceiverYVariate.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverYVariate.strNcFilePath = ""
         Me.ucrReceiverYVariate.TabIndex = 1
+        Me.ucrReceiverYVariate.ucrSelector = Nothing
         '
-        'ucrDataFrameAddRemove
+        'ucrSelectorOneWayAnovaNonParam
         '
-        Me.ucrDataFrameAddRemove.bShowHiddenColumns = False
-        Me.ucrDataFrameAddRemove.bUseCurrentFilter = True
-        Me.ucrDataFrameAddRemove.Location = New System.Drawing.Point(10, 10)
-        Me.ucrDataFrameAddRemove.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrDataFrameAddRemove.Name = "ucrDataFrameAddRemove"
-        Me.ucrDataFrameAddRemove.Size = New System.Drawing.Size(210, 180)
-        Me.ucrDataFrameAddRemove.TabIndex = 6
+        Me.ucrSelectorOneWayAnovaNonParam.bShowHiddenColumns = False
+        Me.ucrSelectorOneWayAnovaNonParam.bUseCurrentFilter = True
+        Me.ucrSelectorOneWayAnovaNonParam.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorOneWayAnovaNonParam.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorOneWayAnovaNonParam.Name = "ucrSelectorOneWayAnovaNonParam"
+        Me.ucrSelectorOneWayAnovaNonParam.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorOneWayAnovaNonParam.TabIndex = 6
         '
         'dlgNon_ParametricOneWayANOVA
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(423, 255)
-        Me.Controls.Add(Me.ucrDataFrameAddRemove)
+        Me.Controls.Add(Me.ucrSelectorOneWayAnovaNonParam)
         Me.Controls.Add(Me.lblFactor)
         Me.Controls.Add(Me.lblYVariate)
         Me.Controls.Add(Me.ucrBase)
@@ -112,5 +118,5 @@ Partial Class dlgNon_ParametricOneWayANOVA
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents lblYVariate As Label
     Friend WithEvents lblFactor As Label
-    Friend WithEvents ucrDataFrameAddRemove As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSelectorOneWayAnovaNonParam As ucrSelectorByDataFrameAddRemove
 End Class
