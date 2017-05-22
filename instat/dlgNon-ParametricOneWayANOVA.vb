@@ -16,40 +16,49 @@
 
 Imports instat.Translations
 Public Class dlgNon_ParametricOneWayANOVA
-    Public bFirstLoad As Boolean = True
-    Public clsModel As New ROperator
+    Private bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
+    Private clsModel As New ROperator
+    Private clsKruskalWallis As New RFunction
 
     Private Sub dlgNon_ParametricOneWayANOVA_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
-
-        autoTranslate(Me)
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.SetFunction("kruskal.test")
+        ucrBase.iHelpTopicID = 183
+
         ucrBase.clsRsyntax.iCallType = 2
         ucrReceiverYVariate.Selector = ucrDataFrameAddRemove
         ucrReceiverFactor.Selector = ucrDataFrameAddRemove
         ucrReceiverFactor.SetDataType("factor")
         clsModel.SetOperation("~")
-        ucrBase.iHelpTopicID = 183
+
     End Sub
 
-    Private Sub ReopenDialog()
+    Public Sub SetRCodeForControls(bReset As Boolean)
 
     End Sub
 
     Private Sub SetDefaults()
+        clsModel = New ROperator
+        clsKruskalWallis = New RFunction
+
         ucrDataFrameAddRemove.Reset()
-        ucrDataFrameAddRemove.Focus()
         ucrReceiverYVariate.SetMeAsReceiver()
-        TestOKEnabled()
+        clsKruskalWallis.SetRCommand("kruskal.test")
+        clsModel.AddParameter(strParameterValue:=ucrReceiverYVariate.GetVariableNames(bWithQuotes:=False), iPosition:=0)
+
     End Sub
 
     Private Sub ucrReceiverYVariate_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverYVariate.SelectionChanged
