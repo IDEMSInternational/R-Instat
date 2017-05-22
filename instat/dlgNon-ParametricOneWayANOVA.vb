@@ -41,24 +41,26 @@ Public Class dlgNon_ParametricOneWayANOVA
         ucrBase.clsRsyntax.iCallType = 2
         ucrReceiverYVariate.Selector = ucrSelectorOneWayAnovaNonParam
         ucrReceiverFactor.Selector = ucrSelectorOneWayAnovaNonParam
-        ucrReceiverFactor.SetDataType("factor")
+
         ucrReceiverYVariate.SetDataType("numeric")
-        ucrReceiverFactor.SetParameter(New RParameter("x"))
-        ucrReceiverFactor.SetParameterIsString()
-        ucrReceiverFactor.bWithQuotes = False
-        ucrReceiverYVariate.SetParameter(New RParameter("g"))
+        ucrReceiverYVariate.SetParameter(New RParameter("x", 0))
         ucrReceiverYVariate.SetParameterIsString()
         ucrReceiverYVariate.bWithQuotes = False
 
-        ucrSelectorOneWayAnovaNonParam.SetParameter(New RParameter("data"))
+        ucrReceiverFactor.SetDataType("factor")
+        ucrReceiverFactor.SetParameter(New RParameter("g", 1))
+        ucrReceiverFactor.SetParameterIsString()
+        ucrReceiverFactor.bWithQuotes = False
+
+        ucrSelectorOneWayAnovaNonParam.SetParameter(New RParameter("data", 1))
         ucrSelectorOneWayAnovaNonParam.SetParameterIsrfunction()
 
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrSelectorOneWayAnovaNonParam.SetRCode(clsKruskalWallis, bReset)
         ucrReceiverYVariate.SetRCode(clsModel, bReset)
         ucrReceiverFactor.SetRCode(clsModel, bReset)
+        ucrSelectorOneWayAnovaNonParam.SetRCode(clsKruskalWallis, bReset)
     End Sub
 
     Private Sub SetDefaults()
@@ -71,7 +73,7 @@ Public Class dlgNon_ParametricOneWayANOVA
         clsKruskalWallis.SetPackageName("stats")
         clsKruskalWallis.SetRCommand("kruskal.test")
         clsModel.SetOperation("~")
-        clsKruskalWallis.AddParameter("formula", clsROperatorParameter:=clsModel)
+        clsKruskalWallis.AddParameter("formula", clsROperatorParameter:=clsModel, iPosition:=0)
         ucrBase.clsRsyntax.SetBaseRFunction(clsKruskalWallis)
     End Sub
 
@@ -81,7 +83,6 @@ Public Class dlgNon_ParametricOneWayANOVA
         Else
             ucrBase.OKEnabled(False)
         End If
-
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -93,5 +94,4 @@ Public Class dlgNon_ParametricOneWayANOVA
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged, ucrReceiverYVariate.ControlContentsChanged
         TestOKEnabled()
     End Sub
-
 End Class
