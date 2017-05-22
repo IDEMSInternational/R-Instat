@@ -66,9 +66,9 @@ Public Class dlgTransformClimatic
 
         clsRTrasform.SetRCommand("instat_calculation$new")
         clsRTrasform.SetAssignTo("transform_calculation")
-        clsRSumFuncExpr.SetRCommand("rollapply")
+        'clsRSumFuncExpr.SetRCommand("rollapply")
 
-        clsMatchFun.SetRCommand("match.fun")
+        'clsMatchFun.SetRCommand("match.fun")
 
         ucrPnlTransform.AddRadioButton(rdoSum)
         ucrPnlTransform.AddRadioButton(rdoCount)
@@ -143,6 +143,10 @@ Public Class dlgTransformClimatic
     End Sub
 
     Private Sub SetDefaults()
+        'clsRTrasform = New RFunction
+        clsRSumFuncExpr = New RFunction
+        clsMatchFun = New RFunction
+
         clsSumFunction = New RFunction
         clsCountFunction = New RFunction
         clsSpellFunction = New RFunction
@@ -158,6 +162,12 @@ Public Class dlgTransformClimatic
         grpCount.Enabled = False
         grpSpells.Enabled = False
         grpWaterbalance.Enabled = False
+
+        'clsRTrasform.SetRCommand("instat_calculation$new")
+        'clsRTrasform.SetAssignTo("transform_calculation")
+        clsRSumFuncExpr.SetRCommand("rollapply")
+
+        clsMatchFun.SetRCommand("match.fun")
 
         clsMatchFun.AddParameter("FUN", Chr(39) & "sum" & Chr(39))
 
