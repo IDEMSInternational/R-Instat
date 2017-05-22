@@ -41,8 +41,11 @@ Public Class dlgCumulativeDistribution
     Private Sub InitaliseDialog()
         Dim clsScaleYReverseFunc As New RFunction
         Dim clsScaleYReverseParam As New RParameter
-        ucrChkIncludePoints.Enabled = False ' temporary
-        ucrChkCountsOnYAxis.Enabled = False ' temporary
+
+        Dim clsGeomPointFunc As New RFunction
+        Dim clsGeomPointParam As New RParameter
+
+        ucrChkCountsOnYAxis.Enabled = False ' temporary What should this do?
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
@@ -74,7 +77,15 @@ Public Class dlgCumulativeDistribution
         ucrChkExceedancePlots.SetParameter(clsScaleYReverseParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
         ucrChkCountsOnYAxis.SetText("Counts on Y Axis")
+
+        clsGeomPointFunc.SetPackageName("ggplot2")
+        clsGeomPointFunc.SetRCommand("geom_point")
+        clsGeomPointFunc.AddParameter("stat", Chr(34) & "ecdf" & Chr(34))
+        clsGeomPointParam.SetArgumentName("geom_point")
+        clsGeomPointParam.SetArgument(clsGeomPointFunc)
         ucrChkIncludePoints.SetText("Include Points")
+        ucrChkIncludePoints.SetParameter(clsGeomPointParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
 
         ucrSaveCumDist.SetPrefix("cumdist")
         ucrSaveCumDist.SetSaveTypeAsGraph()
@@ -121,6 +132,7 @@ Public Class dlgCumulativeDistribution
         ucrSaveCumDist.SetRCode(clsBaseOperator, bReset)
         ucrCumDistSelector.SetRCode(clsRggplotFunction, bReset)
         ucrChkExceedancePlots.SetRCode(clsBaseOperator, bReset)
+        ucrChkIncludePoints.SetRCode(clsBaseOperator, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
