@@ -134,7 +134,7 @@ Public Class dlgTransformClimatic
         ucrInputColName.SetParameter(New RParameter("result_name"))
 
         'ucrInputColName.SetPrefix("sum")
-        ucrInputColName.SetName("moving")
+        'ucrInputColName.SetName("moving")
 
         ucrPnlTransform.AddToLinkedControls({ucrInputSum, ucrNudSumOver}, {rdoMoving}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransform.AddToLinkedControls({ucrNudCountOver, ucrChkValuesUnderthreshold}, {rdoCount}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
@@ -153,6 +153,7 @@ Public Class dlgTransformClimatic
         clsWaterBalanceFunction = New RFunction
         'ucrSaveTransform.Reset()
         ucrSelectorTransform.Reset()
+        ucrInputColName.SetName("moving")
         rdoMoving.Checked = True 'this wil be fixed properly
 
         'Temporary disable
