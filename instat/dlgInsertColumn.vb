@@ -16,21 +16,25 @@
 
 Imports instat.Translations
 Public Class dlgInsertColumn
-    Dim bFirstLoad As Boolean = True
-
+    Private bFirstload As Boolean = True
+    Private bReset As Boolean = True
+    Private clsInsertRowFunction, clsAddColumnFunction As New RFunction
     Private Sub dlgInsertColumn_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrBase.iHelpTopicID = 164
-        If bFirstLoad Then
+        If bFirstload Then
             InitialiseDialog()
-            SetDefaults()
-            bFirstLoad = False
-        Else
-            ReopenDialog()
+            bFirstload = False
         End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        autoTranslate(Me)
         TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 164
         ucrReceiverColumnsToInsert.Selector = ucrSelectorInseertColumns
         ucrReceiverColumnsToInsert.SetMeAsReceiver()
         ucrInputBeforeAfter.SetItems({"Before", "After"})
@@ -68,6 +72,9 @@ Public Class dlgInsertColumn
     End Sub
 
     Private Sub SetDefaults()
+        clsAddColumnFunction = New RFunction
+        clsInsertRowFunction = New RFunction
+
         rdoInsertColumns.Checked = True
         ucrInputPrefixForInsertedColumns.SetName("X")
         ucrInputDefaultValue.SetName("NA")
@@ -81,6 +88,10 @@ Public Class dlgInsertColumn
         Else
             nudPos.Value = 1
         End If
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset)
+
     End Sub
 
     Private Sub nudPos_TextChanged(sender As Object, e As EventArgs) Handles nudPos.TextChanged
@@ -116,10 +127,9 @@ Public Class dlgInsertColumn
         End If
     End Sub
 
-
-
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
 
