@@ -18,6 +18,7 @@ Imports instat.Translations
 Public Class dlgTransformClimatic
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
+    Private clsRCountFuncExpr, clsRWhich As New RFunction
     Private clsRTrasform, clsRSumFuncExpr, clsMatchFun As New RFunction
     Private clsSumFunction, clsCountFunction, clsSpellFunction, clsWaterBalanceFunction As New RFunction
     Private strCurrDataName As String = ""
@@ -170,6 +171,7 @@ Public Class dlgTransformClimatic
         clsRSumFuncExpr.SetRCommand("rollapply")
 
         clsMatchFun.SetRCommand("match.fun")
+        clsRWhich.SetRCommand("which")
 
         clsMatchFun.AddParameter("FUN", Chr(39) & "sum" & Chr(39))
 
@@ -218,11 +220,14 @@ Public Class dlgTransformClimatic
             ucrInputColName.SetName("Moving")
             grpTransform.Text = "Moving"
         ElseIf rdoCount.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSumFunction)
             'ucrSaveTransform.SetPrefix("Count")
             'ucrInputColName.SetPrefix("Count")
             ucrInputColName.SetName("Count")
             grpTransform.Text = "Count"
+            clsRWhich.AddParameter()
+            clsRSumFuncExpr.AddParameter("FUN", "function(x) length(which(x" & ">" & ucrInputThreshold.GetText() & "))")
+            clsRTrasform.AddParameter("function_exp", Chr(34) & clsRSumFuncExpr.ToScript.ToString & Chr(34))
             '  r = Function(x) length(which(x > 0.85))
             'zoo:        rollapply(fill = NA, Data = samaru$Rain, Width = 4, FUN = r, align ='right')
 
