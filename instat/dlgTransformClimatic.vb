@@ -21,6 +21,7 @@ Public Class dlgTransformClimatic
     Private clsRTrasform, clsRRollFuncExpr, clsMatchFun As New RFunction
     Private clsRollFunction, clsSpellFunction, clsWaterBalanceFunction As New RFunction
     Private strCurrDataName As String = ""
+    Private strValuesUnder As String = ">="
     Private Sub dlgTransformClimatic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             InitialiseDialog()
@@ -107,7 +108,7 @@ Public Class dlgTransformClimatic
         ucrNudCountOver.SetLinkedDisplayControl(lblCountOver)
         'ucrNudCountOver.SetRDefault("3")
 
-        ucrChkValuesUnderthreshold.SetParameter(New RParameter("values_under_threshold"))
+        'ucrChkValuesUnderthreshold.SetParameter(New RParameter("values_under_threshold"))
         ucrChkValuesUnderthreshold.SetText("Values Under Threshold")
         ucrChkValuesUnderthreshold.SetLinkedDisplayControl(lblCountRows)
 
@@ -156,6 +157,7 @@ Public Class dlgTransformClimatic
         ucrInputColName.SetName("moving")
         ucrInputThreshold.SetName(0.85)
         ucrNudCountOver.Value = 1
+        ucrChkValuesUnderthreshold.Checked = False
         rdoMoving.Checked = True 'this wil be fixed properly
 
         'Temporary disable
@@ -225,7 +227,7 @@ Public Class dlgTransformClimatic
             ucrInputColName.SetName("Count")
             grpTransform.Text = "Count"
 
-            clsRRollFuncExpr.AddParameter("FUN", "function(x) length(which(x" & ">" & ucrInputThreshold.GetText() & "))")
+            clsRRollFuncExpr.AddParameter("FUN", "function(x) length(which(x" & strValuesUnder & ucrInputThreshold.GetText() & "))")
             clsRTrasform.AddParameter("function_exp", Chr(34) & clsRRollFuncExpr.ToScript.ToString & Chr(34))
 
         ElseIf rdoSpell.Checked Then
@@ -273,6 +275,15 @@ Public Class dlgTransformClimatic
 
     Private Sub ucrCountOver_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrNudCountOver.ControlContentsChanged
         clsRRollFuncExpr.AddParameter("width", ucrNudCountOver.Value)
+        clsRTrasform.AddParameter("function_exp", Chr(34) & clsRRollFuncExpr.ToScript.ToString & Chr(34))
+    End Sub
+    Private Sub ucrValuesUnder_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrChkValuesUnderthreshold.ControlContentsChanged
+        If ucrChkValuesUnderthreshold.Checked Then
+            strValuesUnder = "<"
+        Else
+            strValuesUnder = ">="
+        End If
+        clsRRollFuncExpr.AddParameter("FUN", "function(x) length(which(x" & strValuesUnder & ucrInputThreshold.GetText() & "))")
         clsRTrasform.AddParameter("function_exp", Chr(34) & clsRRollFuncExpr.ToScript.ToString & Chr(34))
     End Sub
 End Class
