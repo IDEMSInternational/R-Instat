@@ -18,9 +18,10 @@ Imports instat.Translations
 Public Class dlgTransformClimatic
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
-    Private clsRTrasform, clsRSumFuncExpr As New RFunction
-    Private clsSumFunction, clsCountFunction, clsSpellFunction, clsWaterBalanceFunction As New RFunction
+    Private clsRTrasform, clsRRollFuncExpr, clsMatchFun As New RFunction
+    Private clsRollFunction, clsSpellFunction, clsWaterBalanceFunction As New RFunction
     Private strCurrDataName As String = ""
+    Private strValuesUnder As String = ">="
     Private Sub dlgTransformClimatic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             InitialiseDialog()
@@ -65,10 +66,12 @@ Public Class dlgTransformClimatic
         'ucrSSTDataframe.SetParameterIsrfunction()
 
         clsRTrasform.SetRCommand("instat_calculation$new")
-        'clsRTrasform.SetAssignTo("transform_calculation")
-        clsRSumFuncExpr.SetRCommand("rollapply")
+        clsRTrasform.SetAssignTo("transform_calculation")
+        'clsRSumFuncExpr.SetRCommand("rollapply")
 
-        ucrPnlTransform.AddRadioButton(rdoSum)
+        'clsMatchFun.SetRCommand("match.fun")
+
+        ucrPnlTransform.AddRadioButton(rdoMoving)
         ucrPnlTransform.AddRadioButton(rdoCount)
         ucrPnlTransform.AddRadioButton(rdoSpell)
         ucrPnlTransform.AddRadioButton(rdoWaterBalance)
@@ -80,17 +83,17 @@ Public Class dlgTransformClimatic
         'ucrPnlTransform.AddFunctionNamesCondition(rdoSpell, "")
         'ucrPnlTransform.AddFunctionNamesCondition(rdoWaterBalance, "")
 
-        ucrNudThreshold.SetParameter(New RParameter("threshold"))
-        ucrNudThreshold.SetMinMax(0, 100)
-        ucrNudThreshold.Increment = 0.01
-        ucrNudThreshold.DecimalPlaces = 2
-        ucrNudThreshold.SetRDefault("0.85")
+        ucrInputThreshold.SetValidationTypeAsNumeric()
+        ucrInputThreshold.SetParameter(New RParameter("threshold"))
+        ucrInputThreshold.SetLinkedDisplayControl(lblThreshold)
+
+
 
         ucrInputSum.SetParameter(New RParameter("FUN"))
-        dctInputSumPairs.Add("sum", "sum")
-        dctInputSumPairs.Add("max", "max")
-        dctInputSumPairs.Add("min", "min")
-        dctInputSumPairs.Add("mean", "mean")
+        dctInputSumPairs.Add("sum", Chr(39) & "sum" & Chr(39))
+        dctInputSumPairs.Add("max", Chr(39) & "max" & Chr(39))
+        dctInputSumPairs.Add("min", Chr(39) & "min" & Chr(39))
+        dctInputSumPairs.Add("mean", Chr(39) & "mean" & Chr(39))
         ucrInputSum.SetItems(dctInputSumPairs)
         ucrInputSum.SetLinkedDisplayControl(lblSumOver)
         ucrNudSumOver.SetParameter(New RParameter("width"))
@@ -105,7 +108,7 @@ Public Class dlgTransformClimatic
         ucrNudCountOver.SetLinkedDisplayControl(lblCountOver)
         'ucrNudCountOver.SetRDefault("3")
 
-        ucrChkValuesUnderthreshold.SetParameter(New RParameter("values_under_threshold"))
+        'ucrChkValuesUnderthreshold.SetParameter(New RParameter("values_under_threshold"))
         ucrChkValuesUnderthreshold.SetText("Values Under Threshold")
         ucrChkValuesUnderthreshold.SetLinkedDisplayControl(lblCountRows)
 
@@ -132,53 +135,69 @@ Public Class dlgTransformClimatic
         ucrInputColName.SetParameter(New RParameter("result_name"))
 
         'ucrInputColName.SetPrefix("sum")
-        ucrInputColName.SetName("sum")
+        'ucrInputColName.SetName("moving")
 
-        ucrPnlTransform.AddToLinkedControls({ucrInputSum, ucrNudSumOver}, {rdoSum}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlTransform.AddToLinkedControls({ucrInputSum, ucrNudSumOver}, {rdoMoving}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransform.AddToLinkedControls({ucrNudCountOver, ucrChkValuesUnderthreshold}, {rdoCount}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransform.AddToLinkedControls({ucrInputSpellLower, ucrInputSpellUpper}, {rdoSpell}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlTransform.AddToLinkedControls({ucrNudWBCapacity, ucrInputEvaporation}, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
     End Sub
 
     Private Sub SetDefaults()
-        clsSumFunction = New RFunction
-        clsCountFunction = New RFunction
+        'clsRTrasform = New RFunction
+        clsRRollFuncExpr = New RFunction
+        clsMatchFun = New RFunction
+
+        clsRollFunction = New RFunction
+        clsRollFunction = New RFunction
         clsSpellFunction = New RFunction
         clsWaterBalanceFunction = New RFunction
         'ucrSaveTransform.Reset()
         ucrSelectorTransform.Reset()
-        rdoSum.Checked = True 'this wil be fixed properly
+        ucrInputColName.SetName("moving")
+        ucrInputThreshold.SetName(0.85)
+        ucrNudCountOver.Value = 1
+        ucrChkValuesUnderthreshold.Checked = False
+        rdoMoving.Checked = True 'this wil be fixed properly
 
         'Temporary disable
-        rdoCount.Enabled = False
+        rdoCount.Enabled = True
         rdoSpell.Enabled = False
         rdoWaterBalance.Enabled = False
-        grpCount.Enabled = False
+        grpCount.Enabled = True
         grpSpells.Enabled = False
         grpWaterbalance.Enabled = False
 
-        clsRSumFuncExpr.AddParameter("data", ucrReceiverData.GetVariableNames(bWithQuotes:=False))
-        clsRSumFuncExpr.AddParameter("fill", "NA")
-        clsRSumFuncExpr.AddParameter("width", 1)
-        clsRSumFuncExpr.AddParameter("FUN", "sum")
-        clsRSumFuncExpr.AddParameter("align", Chr(39) & "right" & Chr(39))
-        clsRTrasform.AddParameter("function_exp", Chr(34) & clsRSumFuncExpr.ToScript.ToString & Chr(34))
+        'clsRTrasform.SetRCommand("instat_calculation$new")
+        'clsRTrasform.SetAssignTo("transform_calculation")
+        clsRRollFuncExpr.SetRCommand("rollapply")
+
+        clsMatchFun.SetRCommand("match.fun")
+
+        clsMatchFun.AddParameter("FUN", Chr(39) & "sum" & Chr(39))
+
+        clsRRollFuncExpr.AddParameter("data", ucrReceiverData.GetVariableNames(bWithQuotes:=False))
+        clsRRollFuncExpr.AddParameter("fill", "NA")
+        clsRRollFuncExpr.AddParameter("width", 1)
+        clsRRollFuncExpr.AddParameter("FUN", clsRFunctionParameter:=clsMatchFun)
+        clsRRollFuncExpr.AddParameter("align", Chr(39) & "right" & Chr(39))
+        clsRTrasform.AddParameter("function_exp", Chr(34) & clsRRollFuncExpr.ToScript.ToString & Chr(34))
         clsRTrasform.AddParameter("type", Chr(34) & "calculation" & Chr(34))
-        clsRTrasform.AddParameter("result_name", Chr(34) & "sum" & Chr(34))
+        clsRTrasform.AddParameter("result_name", Chr(34) & "moving" & Chr(34))
         'This might not Beep right
         'clsRTrasform.AddParameter("result_name", Chr(34) & ucrSaveTransform.ucrInputTextSave.GetText & Chr(34))
         clsRTrasform.AddParameter("save", 2)
-        clsSumFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
-        clsSumFunction.AddParameter("display", "FALSE")
-        clsSumFunction.AddParameter("calc", clsRFunctionParameter:=clsRTrasform)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsSumFunction)
+        clsRollFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
+        clsRollFunction.AddParameter("display", "FALSE")
+        clsRollFunction.AddParameter("calc", clsRFunctionParameter:=clsRTrasform)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRollFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrNudSumOver.SetRCode(clsRSumFuncExpr, bReset)
-        ucrReceiverData.SetRCode(clsRSumFuncExpr, bReset)
+        ucrNudSumOver.SetRCode(clsRRollFuncExpr, bReset)
+        ucrReceiverData.SetRCode(clsRRollFuncExpr, bReset)
         'ucrSaveTransform.SetRCode(clsRTrasform, bReset)
-        ucrInputSum.SetRCode(clsRSumFuncExpr, bReset)
+        ucrInputSum.SetRCode(clsMatchFun, bReset)
         ucrInputColName.SetRCode(clsRTrasform, bReset)
         'ucrPnlTransform.SetRCode(clsRSumFuncExpr, bReset)
     End Sub
@@ -194,19 +213,23 @@ Public Class dlgTransformClimatic
     End Sub
 
     Private Sub ucrPnlTransform_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlTransform.ControlContentsChanged
-        If rdoSum.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsSumFunction)
+        If rdoMoving.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsRollFunction)
             'ucrBase.clsRsyntax.AddParameter("calc", clsRFunctionParameter:=clsRTrasform)
             'ucrSaveTransform.SetPrefix("Sum")
             'ucrInputColName.SetPrefix("Sum")
-            ucrInputColName.SetName("Sum")
-            grpTransform.Text = "Sum"
+            ucrInputColName.SetName("Moving")
+            grpTransform.Text = "Moving"
         ElseIf rdoCount.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsRollFunction)
             'ucrSaveTransform.SetPrefix("Count")
             'ucrInputColName.SetPrefix("Count")
             ucrInputColName.SetName("Count")
             grpTransform.Text = "Count"
+
+            clsRRollFuncExpr.AddParameter("FUN", "function(x) length(which(x" & strValuesUnder & ucrInputThreshold.GetText() & "))")
+            clsRTrasform.AddParameter("function_exp", Chr(34) & clsRRollFuncExpr.ToScript.ToString & Chr(34))
+
         ElseIf rdoSpell.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSpellFunction)
             'ucrSaveTransform.SetPrefix("Spell")
@@ -228,7 +251,8 @@ Public Class dlgTransformClimatic
 
     Private Sub sum_over()
         If Not ucrReceiverData.IsEmpty Then
-            clsRTrasform.AddParameter("function_exp", Chr(34) & clsRSumFuncExpr.ToScript.ToString & Chr(34))
+            'clsRSumFuncExpr.AddParameter("FUN", clsRFunctionParameter:=clsMatchFun)
+            clsRTrasform.AddParameter("function_exp", Chr(34) & clsRRollFuncExpr.ToScript.ToString & Chr(34))
         End If
     End Sub
 
@@ -243,5 +267,23 @@ Public Class dlgTransformClimatic
 
     Private Sub ucrControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlValueChanged, ucrInputSum.ControlValueChanged, ucrNudSumOver.ControlValueChanged
         sum_over()
+    End Sub
+
+    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
+        clsRTrasform.SetAssignTo("transform_calculation")
+    End Sub
+
+    Private Sub ucrCountOver_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrNudCountOver.ControlContentsChanged
+        clsRRollFuncExpr.AddParameter("width", ucrNudCountOver.Value)
+        clsRTrasform.AddParameter("function_exp", Chr(34) & clsRRollFuncExpr.ToScript.ToString & Chr(34))
+    End Sub
+    Private Sub ucrValuesUnder_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrChkValuesUnderthreshold.ControlContentsChanged
+        If ucrChkValuesUnderthreshold.Checked Then
+            strValuesUnder = "<"
+        Else
+            strValuesUnder = ">="
+        End If
+        clsRRollFuncExpr.AddParameter("FUN", "function(x) length(which(x" & strValuesUnder & ucrInputThreshold.GetText() & "))")
+        clsRTrasform.AddParameter("function_exp", Chr(34) & clsRRollFuncExpr.ToScript.ToString & Chr(34))
     End Sub
 End Class
