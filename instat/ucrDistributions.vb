@@ -552,7 +552,7 @@ Public Class ucrDistributions
         clsNoDist.lstExact = {"", "Difference in Means:", 0, 1, 2, Integer.MinValue, Integer.MaxValue}
         lstAllDistributions.Add(clsNoDist)
     End Sub
-    Public Event cboDistributionsIndexChanged()
+    Public Event DistributionsIndexChanged()
     Private Sub ucrInputDistributions_SelectedIndexChanged() Handles ucrInputDistributions.SelectionIndexChanged
         If ucrInputDistributions.cboInput.SelectedIndex <> -1 Then
             clsCurrDistribution = lstCurrentDistributions(ucrInputDistributions.cboInput.SelectedIndex)
@@ -573,7 +573,7 @@ Public Class ucrDistributions
         Else
             clsCurrRFunction = New RFunction
         End If
-        RaiseEvent cboDistributionsIndexChanged()
+        RaiseEvent DistributionsIndexChanged()
     End Sub
 
     Public Sub RecieverDatatype(DataFrame As String, Column As String)
