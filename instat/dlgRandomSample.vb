@@ -22,6 +22,7 @@ Public Class dlgRandomSample
     Private clsDistribtionFunction As New RFunction
     Private clsSetSeed As New RFunction
     Private bReset As Boolean = True
+    Private bUpdateBy As Boolean = False
 
     Private Sub dlgRandomSample_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -42,6 +43,7 @@ Public Class dlgRandomSample
         ucrNudSeed.SetRCode(clsSetSeed, bReset)
         ucrChkSetSeed.SetRCode(clsSetSeed, bReset)
         ucrDistWithParameters.SetRCode(clsDistribtionFunction, bReset)
+        ucrSaveRandomSamples.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -92,7 +94,6 @@ Public Class dlgRandomSample
         clsSetSeed.AddParameter("seed", 5)
         clsSetSeed.SetRCommand("set.seed")
 
-        setnumberofsamplesparameters()
         ucrDistWithParameters.SetRDistributions()
         clsDistribtionFunction = ucrDistWithParameters.clsCurrRFunction
         setdataframeanddistributionparameters()
@@ -119,6 +120,7 @@ Public Class dlgRandomSample
     Private Sub setnumberofsamplesparameters()
         If ucrNudNumberOfSamples.Value = 1 Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsDistribtionFunction)
+            clsMultipleSamplesFunction.RemoveParameterByName("X")
         Else
             clsMultipleSamplesFunction.ClearParameters()
             For i = 1 To ucrNudNumberOfSamples.Value
@@ -156,6 +158,8 @@ Public Class dlgRandomSample
     Private Sub ucrNudNumberOfSamples_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudNumberOfSamples.ControlValueChanged
         SetNewColumName()
         setnumberofsamplesparameters()
+        setnumberofsamplesparameters()
+
     End Sub
 
     Private Sub ucrSaveRandomSamples_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveRandomSamples.ControlContentsChanged, ucrSelectorRandomSamples.ControlContentsChanged, ucrChkSetSeed.ControlContentsChanged, ucrNudSeed.ControlContentsChanged, ucrSampleSize.ControlContentsChanged, ucrDistWithParameters.ControlContentsChanged
