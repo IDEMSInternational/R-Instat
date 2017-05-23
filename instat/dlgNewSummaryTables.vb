@@ -93,9 +93,10 @@ Public Class dlgNewSummaryTables
         clsSummariesList = New RFunction
         clsStargazerFunction = New RFunction
 
-        clsStargazerFunction.SetPackageName("stargazer")
-        clsStargazerFunction.SetRCommand("stargazer")
+        'clsStargazerFunction.SetPackageName("xtable")
+        clsStargazerFunction.SetRCommand("print")
         clsStargazerFunction.AddParameter("x", clsRFunctionParameter:=clsDefaultFunction)
+        clsStargazerFunction.AddParameter("type", Chr(34) & "html" & Chr(34))
 
         ucrReceiverFactor.SetMeAsReceiver()
         ucrSelectorSummaryTables.Reset()
@@ -107,7 +108,9 @@ Public Class dlgNewSummaryTables
         clsDefaultFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList, iPosition:=2)
         clsDefaultFunction.AddParameter("return_output", "TRUE", iPosition:=9) ' we don't want it in the data frame?
         clsDefaultFunction.AddParameter("store_results", "FALSE", iPosition:=4)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsStargazerFunction)
+        ucrBase.clsRsyntax.bHTMLOutput = True
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+        ucrBase.clsRsyntax.iCallType = 1
         bResetSubdialog = True
     End Sub
 
