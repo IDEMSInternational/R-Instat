@@ -506,14 +506,17 @@ instat_object$set("public", "summary_table", function(data_name, columns_to_summ
           return(htmlTable::htmlTable(shaped_cell_values, caption = caption, total = include_margins, align = align, tfoot = notes, ... = ...))
         }
         else {
+          spanner_data <- unique(cell_values[column_factors])
+          names(shaped_cell_values) <- c(row_factors, as.character(spanner_data[[length(spanner_data)]]))
           if(length(column_factors) == 1) {
-            cgroup <- column_factors
-            n.cgroup <- nrow(shaped_cell_values)
+            cgroup <- c(rep("", length(row_factors)), column_factors)
+            n.cgroup <- c(rep(1, length(row_factors)), nrow(spanner_data))
+            print(cgroup)
+            print(n.cgroup)
           }
           else if(length(column_factors) > 1) {
             # removes duplicate rows which exist when row factors present
             spanner_data <- unique(cell_values[column_factors])
-            names(shaped_cell_values) <- c(row_factors, as.character(spanner_data[[length(spanner_data)]]))
             #TODO do this without having to call rle twice to improve efficiency
             lengths <- lapply(spanner_data[-length(spanner_data)], function(x) rle(as.character(x))$lengths)
             values <- lapply(spanner_data[-length(spanner_data)], function(x) rle(as.character(x))$values)
