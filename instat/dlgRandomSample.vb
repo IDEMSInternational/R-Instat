@@ -90,6 +90,7 @@ Public Class dlgRandomSample
         clsDistribtionFunction = New RFunction
 
         ucrSelectorRandomSamples.Reset()
+        ucrNudNumberOfSamples.Value = 1
         clsMultipleSamplesFunction.SetRCommand("data.frame")
         clsSetSeed.AddParameter("seed", 5)
         clsSetSeed.SetRCommand("set.seed")
@@ -151,15 +152,9 @@ Public Class dlgRandomSample
         setdataframeanddistributionparameters()
     End Sub
 
-    Private Sub ucrSelectorRandomSamples_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorRandomSamples.ControlValueChanged
-        setdataframeanddistributionparameters()
-    End Sub
-
     Private Sub ucrNudNumberOfSamples_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudNumberOfSamples.ControlValueChanged
+        setnumberofsamplesparameters()
         SetNewColumName()
-        setnumberofsamplesparameters()
-        setnumberofsamplesparameters()
-
     End Sub
 
     Private Sub ucrSaveRandomSamples_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveRandomSamples.ControlContentsChanged, ucrSelectorRandomSamples.ControlContentsChanged, ucrChkSetSeed.ControlContentsChanged, ucrNudSeed.ControlContentsChanged, ucrSampleSize.ControlContentsChanged, ucrDistWithParameters.ControlContentsChanged
