@@ -63,24 +63,13 @@ Public Class dlgJitter
         ucrPnlDistance.AddRadioButton(rdoMinimumAndMaximum)
 
         ucrPnlDistance.AddParameterPresentCondition(rdoMaximumDistanceFromZero, "max")
-        ucrPnlDistance.AddParameterPresentCondition(rdoMaximumDistanceFromZero, "min")
+        'ucrPnlDistance.AddParameterPresentCondition(rdoMaximumDistanceFromZero, "min")
         ucrPnlDistance.AddParameterPresentCondition(rdoMaximumDistanceFromZero, "n", True)
-
-        ucrPnlDistance.AddParameterPresentCondition(rdoMinimumAndMaximum, "max")
-        ucrPnlDistance.AddParameterPresentCondition(rdoMinimumAndMaximum, "min")
-        ucrPnlDistance.AddParameterPresentCondition(rdoMinimumAndMaximum, "n", False)
 
         ' link
         ucrPnlDistance.AddToLinkedControls(ucrInputMaximumDistanceFromZero, {rdoMaximumDistanceFromZero}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=1)
         ucrPnlDistance.AddToLinkedControls(ucrInputMinimum, {rdoMinimumAndMaximum}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=0)
         ucrPnlDistance.AddToLinkedControls(ucrInputMaximum, {rdoMinimumAndMaximum}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=1)
-
-        'ucrInputs
-        '        ucrInputMaximumDistanceFromZero.SetParameter(New RParameter("max", ))
-        ucrInputMaximumDistanceFromZero.SetValidationTypeAsNumeric()
-        ucrInputMaximumDistanceFromZero.AddQuotesIfUnrecognised = False
-        ucrInputMaximumDistanceFromZero.SetRDefault(1)
-        ' this has two parameters associated with it, however - Max and Min!
 
         ucrInputMinimum.SetParameter(New RParameter("min"))
         ucrInputMinimum.bAddRemoveParameter = False
@@ -94,7 +83,7 @@ Public Class dlgJitter
         ucrInputMaximum.SetRDefault(1)
         ucrInputMaximum.AddQuotesIfUnrecognised = False
 
-        ucrInputMaximumDistanceFromZero.SetParameter(New RParameter("max"))
+        ucrInputMaximumDistanceFromZero.SetParameter(New RParameter("min"))
         ucrInputMaximumDistanceFromZero.bAddRemoveParameter = False
         ucrInputMaximumDistanceFromZero.SetValidationTypeAsNumeric()
         ucrInputMaximumDistanceFromZero.SetRDefault(1)
@@ -112,10 +101,10 @@ Public Class dlgJitter
     Private Sub SetDefaults()
         clsRunif = New RFunction
         clsRunifOperator = New ROperator
-        ucrSelectorForJitter.Reset()
 
+        ucrSelectorForJitter.Reset()
         clsRunif.SetRCommand("runif")
-        clsRunif.AddParameter("min", "0")
+        clsRunif.AddParameter("min", "-1")
         clsRunif.AddParameter("max", "1")
         clsRunif.AddParameter("n", ucrSelectorForJitter.ucrAvailableDataFrames.iDataFrameLength)
 
@@ -127,8 +116,7 @@ Public Class dlgJitter
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
-        'SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ' ucrInputMaximumDistanceFromZero.AddAdditionalCodeParameterPair(clsRunif, New RParameter("min"), iAdditionalPairNo:=1)
+        ucrInputMaximumDistanceFromZero.AddAdditionalCodeParameterPair(clsRunif, New RParameter("max"), iAdditionalPairNo:=1)
         ucrPnlDistance.SetRCode(clsRunif, bReset)
         ucrInputMaximum.SetRCode(clsRunif, bReset)
         ucrInputMinimum.SetRCode(clsRunif, bReset)
@@ -158,9 +146,6 @@ Public Class dlgJitter
             If Not ucrInputMaximumDistanceFromZero.IsEmpty Then
                 clsRunif.AddParameter("min", -(ucrInputMaximumDistanceFromZero.GetText))
                 clsRunif.AddParameter("max", ucrInputMaximumDistanceFromZero.GetText)
-            Else
-                clsRunif.RemoveParameterByName("min")
-                clsRunif.RemoveParameterByName("max")
             End If
         Else
             If Not ucrInputMinimum.IsEmpty Then
@@ -182,6 +167,7 @@ Public Class dlgJitter
 
     Private Sub ucrForDistance_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputMaximum.ControlValueChanged, ucrInputMaximumDistanceFromZero.ControlValueChanged, ucrInputMinimum.ControlValueChanged, ucrPnlDistance.ControlValueChanged
         Distance()
+        '  DefaultValue()
     End Sub
 
     Private Sub ucrReceiverJitter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverJitter.ControlValueChanged
