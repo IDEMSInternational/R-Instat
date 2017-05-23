@@ -90,7 +90,7 @@ Public Class dlgNewSummaryTables
         ucrChkHTMLTable.SetText("HTML Table")
         ucrChkHTMLTable.SetRDefault("TRUE")
 
-        ucrReceiverWeights.SetParameter(New RParameter("weight_by", 17))
+        ucrReceiverWeights.SetParameter(New RParameter("weights", 17))
         ucrReceiverWeights.SetParameterIsString()
         ucrReceiverWeights.Selector = ucrSelectorSummaryTables
         ucrReceiverWeights.SetDataType("numeric")
@@ -98,16 +98,18 @@ Public Class dlgNewSummaryTables
         ucrChkWeight.SetText("Weights")
         ucrChkWeight.SetParameter(ucrReceiverWeights.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkWeight.AddToLinkedControls(ucrReceiverWeights, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        'Not yet implemented
+        ucrChkWeight.Enabled = False
 
         ' For the page_by option:
         ucrInputPageBy.SetParameter(New RParameter("page_by", 13))
-        '        dctPageBy.Add("None", "none") ' TODO add "none" value on R-Code for this
+        dctPageBy.Add("None", "NULL") ' TODO add "none" value on R-Code for this
         dctPageBy.Add("Variables", Chr(34) & "variables" & Chr(34))
         dctPageBy.Add("Summaries", Chr(34) & "summaries" & Chr(34))
         dctPageBy.Add("Variables and Summaries", "c(" & Chr(34) & "variables" & Chr(34) & "," & Chr(34) & "summaries" & Chr(34) & ")")
-        dctPageBy.Add("Default", "NULL") ' TODO add "default" (=NULL) value on R-Code
+        dctPageBy.Add("Default", Chr(34) & "default" & Chr(34))
         ucrInputPageBy.SetItems(dctPageBy)
-        ucrInputPageBy.SetRDefault("NULL")
+        ucrInputPageBy.SetRDefault(Chr(34) & "default" & Chr(34))
     End Sub
 
     Private Sub SetDefaults()
