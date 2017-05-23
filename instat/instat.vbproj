@@ -323,10 +323,10 @@
     <Compile Include="dlgExtremesClimatic.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgFactorLabels.Designer.vb">
-      <DependentUpon>dlgFactorLabels.vb</DependentUpon>
+    <Compile Include="dlgViewLabelsAndLevels.Designer.vb">
+      <DependentUpon>dlgViewLabelsAndLevels.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgFactorLabels.vb">
+    <Compile Include="dlgViewLabelsAndLevels.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgFitCorruptionModel.Designer.vb">
@@ -846,10 +846,10 @@
     <Compile Include="dlgCumulativeDistribution.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgDeleteDescriptive.Designer.vb">
-      <DependentUpon>dlgDeleteDescriptive.vb</DependentUpon>
+    <Compile Include="dlgDeleteObjects.Designer.vb">
+      <DependentUpon>dlgDeleteObjects.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgDeleteDescriptive.vb">
+    <Compile Include="dlgDeleteObjects.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgDeleteMetadata.Designer.vb">
@@ -1002,10 +1002,10 @@
     <Compile Include="dlgRecodeNumeric.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgRenameDescriptive.Designer.vb">
-      <DependentUpon>dlgRenameDescriptive.vb</DependentUpon>
+    <Compile Include="dlgRenameObjects.Designer.vb">
+      <DependentUpon>dlgRenameObjects.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgRenameDescriptive.vb">
+    <Compile Include="dlgRenameObjects.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgRenameMetadata.Designer.vb">
@@ -1014,16 +1014,16 @@
     <Compile Include="dlgRenameMetadata.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgReoderDescriptives.Designer.vb">
-      <DependentUpon>dlgReoderDescriptives.vb</DependentUpon>
+    <Compile Include="dlgReorderObjects.Designer.vb">
+      <DependentUpon>dlgReorderObjects.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgReoderDescriptives.vb">
+    <Compile Include="dlgReorderObjects.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgReoderMetadata.Designer.vb">
-      <DependentUpon>dlgReoderMetadata.vb</DependentUpon>
+    <Compile Include="dlgReorderMetadata.Designer.vb">
+      <DependentUpon>dlgReorderMetadata.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgReoderMetadata.vb">
+    <Compile Include="dlgReorderMetadata.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgReorderColumns.Designer.vb">
@@ -1038,10 +1038,10 @@
     <Compile Include="dlgReorderLevels.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgReorderSheet.Designer.vb">
-      <DependentUpon>dlgReorderSheet.vb</DependentUpon>
+    <Compile Include="dlgReorderDataFrame.Designer.vb">
+      <DependentUpon>dlgReorderDataFrame.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgReorderSheet.vb">
+    <Compile Include="dlgReorderDataFrame.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgRestrict.Designer.vb">
@@ -1104,10 +1104,10 @@
     <Compile Include="dlgTwoSampleNonparametricTest.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgUnusedLevels.Designer.vb">
-      <DependentUpon>dlgUnusedLevels.vb</DependentUpon>
+    <Compile Include="dlgRemoveUnusedLevels.Designer.vb">
+      <DependentUpon>dlgRemoveUnusedLevels.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgUnusedLevels.vb">
+    <Compile Include="dlgRemoveUnusedLevels.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgUseGraph.Designer.vb">
@@ -1116,10 +1116,10 @@
     <Compile Include="dlgUseGraph.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgViewDescriptives.Designer.vb">
-      <DependentUpon>dlgViewDescriptives.vb</DependentUpon>
+    <Compile Include="dlgViewObjects.Designer.vb">
+      <DependentUpon>dlgViewObjects.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgViewDescriptives.vb">
+    <Compile Include="dlgViewObjects.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgWindrose.Designer.vb">
@@ -1704,16 +1704,16 @@
     <Compile Include="dlgRemoveUnusedLabels.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgReplace.Designer.vb">
-      <DependentUpon>dlgReplace.vb</DependentUpon>
+    <Compile Include="dlgReplaceValues.Designer.vb">
+      <DependentUpon>dlgReplaceValues.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgReplace.vb">
+    <Compile Include="dlgReplaceValues.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgRowStats.Designer.vb">
-      <DependentUpon>dlgRowStats.vb</DependentUpon>
+    <Compile Include="dlgRowSummary.Designer.vb">
+      <DependentUpon>dlgRowSummary.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgRowStats.vb">
+    <Compile Include="dlgRowSummary.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgSaveAs.Designer.vb">
@@ -1890,10 +1890,10 @@
     <Compile Include="frmEditor.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgFileNew.Designer.vb">
-      <DependentUpon>dlgFileNew.vb</DependentUpon>
+    <Compile Include="dlgNewDataFrame.Designer.vb">
+      <DependentUpon>dlgNewDataFrame.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgFileNew.vb">
+    <Compile Include="dlgNewDataFrame.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmLog.Designer.vb">
@@ -2398,14 +2398,14 @@
     <EmbeddedResource Include="dlgDefineRedFlags.resx">
       <DependentUpon>dlgDefineRedFlags.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgDeleteDescriptive.fr-FR.resx">
-      <DependentUpon>dlgDeleteDescriptive.vb</DependentUpon>
+    <EmbeddedResource Include="dlgDeleteObjects.fr-FR.resx">
+      <DependentUpon>dlgDeleteObjects.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgDeleteDescriptive.resx">
-      <DependentUpon>dlgDeleteDescriptive.vb</DependentUpon>
+    <EmbeddedResource Include="dlgDeleteObjects.resx">
+      <DependentUpon>dlgDeleteObjects.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgDeleteDescriptive.sw-KE.resx">
-      <DependentUpon>dlgDeleteDescriptive.vb</DependentUpon>
+    <EmbeddedResource Include="dlgDeleteObjects.sw-KE.resx">
+      <DependentUpon>dlgDeleteObjects.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDeleteMetadata.fr-FR.resx">
       <DependentUpon>dlgDeleteMetadata.vb</DependentUpon>
@@ -2500,8 +2500,8 @@
     <EmbeddedResource Include="dlgExtremesClimatic.resx">
       <DependentUpon>dlgExtremesClimatic.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgFactorLabels.resx">
-      <DependentUpon>dlgFactorLabels.vb</DependentUpon>
+    <EmbeddedResource Include="dlgViewLabelsAndLevels.resx">
+      <DependentUpon>dlgViewLabelsAndLevels.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgFitCorruptionModel.resx">
       <DependentUpon>dlgFitCorruptionModel.vb</DependentUpon>
@@ -2776,14 +2776,14 @@
     <EmbeddedResource Include="dlgRecodeNumericIntoQuantiles.resx">
       <DependentUpon>dlgRecodeNumericIntoQuantiles.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgRenameDescriptive.fr-FR.resx">
-      <DependentUpon>dlgRenameDescriptive.vb</DependentUpon>
+    <EmbeddedResource Include="dlgRenameObjects.fr-FR.resx">
+      <DependentUpon>dlgRenameObjects.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgRenameDescriptive.resx">
-      <DependentUpon>dlgRenameDescriptive.vb</DependentUpon>
+    <EmbeddedResource Include="dlgRenameObjects.resx">
+      <DependentUpon>dlgRenameObjects.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgRenameDescriptive.sw-KE.resx">
-      <DependentUpon>dlgRenameDescriptive.vb</DependentUpon>
+    <EmbeddedResource Include="dlgRenameObjects.sw-KE.resx">
+      <DependentUpon>dlgRenameObjects.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRenameMetadata.fr-FR.resx">
       <DependentUpon>dlgRenameMetadata.vb</DependentUpon>
@@ -2794,23 +2794,23 @@
     <EmbeddedResource Include="dlgRenameMetadata.sw-KE.resx">
       <DependentUpon>dlgRenameMetadata.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgReoderDescriptives.fr-FR.resx">
-      <DependentUpon>dlgReoderDescriptives.vb</DependentUpon>
+    <EmbeddedResource Include="dlgReorderObjects.fr-FR.resx">
+      <DependentUpon>dlgReorderObjects.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgReoderDescriptives.resx">
-      <DependentUpon>dlgReoderDescriptives.vb</DependentUpon>
+    <EmbeddedResource Include="dlgReorderObjects.resx">
+      <DependentUpon>dlgReorderObjects.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgReoderDescriptives.sw-KE.resx">
-      <DependentUpon>dlgReoderDescriptives.vb</DependentUpon>
+    <EmbeddedResource Include="dlgReorderObjects.sw-KE.resx">
+      <DependentUpon>dlgReorderObjects.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgReoderMetadata.fr-FR.resx">
-      <DependentUpon>dlgReoderMetadata.vb</DependentUpon>
+    <EmbeddedResource Include="dlgReorderMetadata.fr-FR.resx">
+      <DependentUpon>dlgReorderMetadata.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgReoderMetadata.resx">
-      <DependentUpon>dlgReoderMetadata.vb</DependentUpon>
+    <EmbeddedResource Include="dlgReorderMetadata.resx">
+      <DependentUpon>dlgReorderMetadata.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgReoderMetadata.sw-KE.resx">
-      <DependentUpon>dlgReoderMetadata.vb</DependentUpon>
+    <EmbeddedResource Include="dlgReorderMetadata.sw-KE.resx">
+      <DependentUpon>dlgReorderMetadata.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgReorderColumns.fr-FR.resx">
       <DependentUpon>dlgReorderColumns.vb</DependentUpon>
@@ -2830,14 +2830,14 @@
     <EmbeddedResource Include="dlgReorderLevels.sw-KE.resx">
       <DependentUpon>dlgReorderLevels.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgReorderSheet.fr-FR.resx">
-      <DependentUpon>dlgReorderSheet.vb</DependentUpon>
+    <EmbeddedResource Include="dlgReorderDataFrame.fr-FR.resx">
+      <DependentUpon>dlgReorderDataFrame.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgReorderSheet.resx">
-      <DependentUpon>dlgReorderSheet.vb</DependentUpon>
+    <EmbeddedResource Include="dlgReorderDataFrame.resx">
+      <DependentUpon>dlgReorderDataFrame.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgReorderSheet.sw-KE.resx">
-      <DependentUpon>dlgReorderSheet.vb</DependentUpon>
+    <EmbeddedResource Include="dlgReorderDataFrame.sw-KE.resx">
+      <DependentUpon>dlgReorderDataFrame.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgRestrict.fr-FR.resx">
       <DependentUpon>dlgRestrict.vb</DependentUpon>
@@ -2974,14 +2974,14 @@
     <EmbeddedResource Include="dlgTwoWayFrequencies.resx">
       <DependentUpon>dlgTwoWayFrequencies.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgUnusedLevels.fr-FR.resx">
-      <DependentUpon>dlgUnusedLevels.vb</DependentUpon>
+    <EmbeddedResource Include="dlgRemoveUnusedLevels.fr-FR.resx">
+      <DependentUpon>dlgRemoveUnusedLevels.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgUnusedLevels.resx">
-      <DependentUpon>dlgUnusedLevels.vb</DependentUpon>
+    <EmbeddedResource Include="dlgRemoveUnusedLevels.resx">
+      <DependentUpon>dlgRemoveUnusedLevels.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgUnusedLevels.sw-KE.resx">
-      <DependentUpon>dlgUnusedLevels.vb</DependentUpon>
+    <EmbeddedResource Include="dlgRemoveUnusedLevels.sw-KE.resx">
+      <DependentUpon>dlgRemoveUnusedLevels.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DlgUseDate.resx">
       <DependentUpon>DlgUseDate.vb</DependentUpon>
@@ -3001,14 +3001,14 @@
     <EmbeddedResource Include="dlgViewAndRemoveLinks.resx">
       <DependentUpon>dlgViewAndRemoveLinks.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgViewDescriptives.fr-FR.resx">
-      <DependentUpon>dlgViewDescriptives.vb</DependentUpon>
+    <EmbeddedResource Include="dlgViewObjects.fr-FR.resx">
+      <DependentUpon>dlgViewObjects.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgViewDescriptives.resx">
-      <DependentUpon>dlgViewDescriptives.vb</DependentUpon>
+    <EmbeddedResource Include="dlgViewObjects.resx">
+      <DependentUpon>dlgViewObjects.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgViewDescriptives.sw-KE.resx">
-      <DependentUpon>dlgViewDescriptives.vb</DependentUpon>
+    <EmbeddedResource Include="dlgViewObjects.sw-KE.resx">
+      <DependentUpon>dlgViewObjects.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgViewGraph.resx">
       <DependentUpon>dlgViewGraph.vb</DependentUpon>
@@ -3854,23 +3854,23 @@
     <EmbeddedResource Include="dlgRemoveUnusedLabels.sw-KE.resx">
       <DependentUpon>dlgRemoveUnusedLabels.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgReplace.fr-FR.resx">
-      <DependentUpon>dlgReplace.vb</DependentUpon>
+    <EmbeddedResource Include="dlgReplaceValues.fr-FR.resx">
+      <DependentUpon>dlgReplaceValues.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgReplace.resx">
-      <DependentUpon>dlgReplace.vb</DependentUpon>
+    <EmbeddedResource Include="dlgReplaceValues.resx">
+      <DependentUpon>dlgReplaceValues.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgReplace.sw-KE.resx">
-      <DependentUpon>dlgReplace.vb</DependentUpon>
+    <EmbeddedResource Include="dlgReplaceValues.sw-KE.resx">
+      <DependentUpon>dlgReplaceValues.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgRowStats.fr-FR.resx">
-      <DependentUpon>dlgRowStats.vb</DependentUpon>
+    <EmbeddedResource Include="dlgRowSummary.fr-FR.resx">
+      <DependentUpon>dlgRowSummary.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgRowStats.resx">
-      <DependentUpon>dlgRowStats.vb</DependentUpon>
+    <EmbeddedResource Include="dlgRowSummary.resx">
+      <DependentUpon>dlgRowSummary.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgRowStats.sw-KE.resx">
-      <DependentUpon>dlgRowStats.vb</DependentUpon>
+    <EmbeddedResource Include="dlgRowSummary.sw-KE.resx">
+      <DependentUpon>dlgRowSummary.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSaveAs.fr-FR.resx">
       <DependentUpon>dlgSaveAs.vb</DependentUpon>
@@ -4094,14 +4094,14 @@
       <DependentUpon>frmEditor.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgFileNew.fr-FR.resx">
-      <DependentUpon>dlgFileNew.vb</DependentUpon>
+    <EmbeddedResource Include="dlgNewDataFrame.fr-FR.resx">
+      <DependentUpon>dlgNewDataFrame.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgFileNew.resx">
-      <DependentUpon>dlgFileNew.vb</DependentUpon>
+    <EmbeddedResource Include="dlgNewDataFrame.resx">
+      <DependentUpon>dlgNewDataFrame.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgFileNew.sw-KE.resx">
-      <DependentUpon>dlgFileNew.vb</DependentUpon>
+    <EmbeddedResource Include="dlgNewDataFrame.sw-KE.resx">
+      <DependentUpon>dlgNewDataFrame.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmLog.fr-FR.resx">
       <DependentUpon>frmLog.vb</DependentUpon>
