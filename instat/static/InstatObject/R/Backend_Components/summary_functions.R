@@ -502,24 +502,29 @@ instat_object$set("public", "summary_table", function(data_name, columns_to_summ
         if(length(weights) > 0) notes <- paste(notes, " Weights: ", paste0(weights, collapse = ", "))
       }
       if(as_html) {
-        if(length(column_factors) == 1) {
-          cgroup <- column_factors
-          n.cgroup <- nrow(shaped_cell_values)
+        if(length(column_factors) == 0) {
+          return(htmlTable::htmlTable(shaped_cell_values, caption = caption, total = include_margins, align = align, tfoot = notes, ... = ...))
         }
         else {
-          header <- cell_values[[column_factors[length(column_factors)]]]
-          #TODO do this without having to call rle twice to improve efficiency
-          lengths <- sapply(cell_values[column_factors[-length(column_factors)]], function(x) rle(as.character(x))$lengths)
-          values <- sapply(cell_values[column_factors[-length(column_factors)]], function(x) rle(as.character(x))$values)
-          span_length <- max(sapply(values, length))
-          lengths <- sapply(lengths, function(x) c(x, rep(NA, span_length - length(x))))
-          values <- sapply(values, function(x) c(x, rep(NA, span_length - length(x))))
-          cgroup <- t(matrix(values, ncol = length(column_factors) - 1))
-          n.cgroup <- t(matrix(lengths, ncol = length(column_factors) - 1))
-          #print(cgroup)
-          #print(n.cgroup)
+          if(length(column_factors) == 1) {
+            cgroup <- column_factors
+            n.cgroup <- nrow(shaped_cell_values)
+          }
+          else if(length(column_factors) > 1) {
+            # removes duplicate rows which exist when row factors present
+            spanner_data <- unique(cell_values[column_factors])
+            names(shaped_cell_values) <- c(row_factors, as.character(spanner_data[[length(spanner_data)]]))
+            #TODO do this without having to call rle twice to improve efficiency
+            lengths <- lapply(spanner_data[-length(spanner_data)], function(x) rle(as.character(x))$lengths)
+            values <- lapply(spanner_data[-length(spanner_data)], function(x) rle(as.character(x))$values)
+            span_length <- max(sapply(values, length))
+            lengths <- sapply(lengths, function(x) c(rep(1, length(row_factors)), x, rep(NA, span_length - length(x))))
+            values <- sapply(values, function(x) c(rep("", length(row_factors)), x, rep(NA, span_length - length(x))))
+            cgroup <- t(matrix(values, ncol = length(column_factors) - 1))
+            n.cgroup <- t(matrix(lengths, ncol = length(column_factors) - 1))
+          }
+          return(htmlTable::htmlTable(shaped_cell_values, caption = caption, total = include_margins, align = align, tfoot = notes, cgroup = cgroup, n.cgroup = n.cgroup, ... = ...))
         }
-        return(htmlTable::htmlTable(shaped_cell_values, caption = caption, total = include_margins, align = align, tfoot = notes, cgroup = cgroup, n.cgroup = n.cgroup, header = header, ... = ...))
       }
       else return(shaped_cell_values)
       #return(stargazer::stargazer(shaped_cell_values, type = "html", summary = FALSE, rownames = FALSE, title = caption, notes = notes, ... = ...))
