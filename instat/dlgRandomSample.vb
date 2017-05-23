@@ -43,7 +43,8 @@ Public Class dlgRandomSample
         ucrNudSeed.SetRCode(clsSetSeed, bReset)
         ucrChkSetSeed.SetRCode(clsSetSeed, bReset)
         ucrDistWithParameters.SetRCode(clsDistribtionFunction, bReset)
-        ucrSaveRandomSamples.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrSaveRandomSamples.SetRCode(clsMultipleSamplesFunction, bReset)
+        ucrNudNumberOfSamples.SetRCode(clsMultipleSamplesFunction, bReset)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -62,11 +63,10 @@ Public Class dlgRandomSample
         ucrSaveRandomSamples.SetIsComboBox()
 
         ucrSampleSize.SetDataFrameSelector(ucrSelectorRandomSamples)
+        ucrNudNumberOfSamples.SetParameter(New RParameter("n", 1))
         ucrNudNumberOfSamples.SetMinMax(1, Integer.MaxValue)
         ucrSelectorRandomSamples.bUseCurrentFilter = False
     End Sub
-
-
 
     Private Sub SetNewColumName()
         If ucrNudNumberOfSamples.Value = 1 Then
@@ -90,16 +90,17 @@ Public Class dlgRandomSample
         clsDistribtionFunction = New RFunction
 
         ucrSelectorRandomSamples.Reset()
-        ucrNudNumberOfSamples.Value = 1
-        clsMultipleSamplesFunction.SetRCommand("data.frame")
+        SetNewColumName()
         clsSetSeed.AddParameter("seed", 5)
         clsSetSeed.SetRCommand("set.seed")
 
+        clsMultipleSamplesFunction.SetRCommand("replicate")
+        clsMultipleSamplesFunction.AddParameter("n", 1)
         ucrDistWithParameters.SetRDistributions()
         clsDistribtionFunction = ucrDistWithParameters.clsCurrRFunction
         setdataframeanddistributionparameters()
-
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDistribtionFunction)
+        clsMultipleSamplesFunction.AddParameter("expr", clsRFunctionParameter:=clsDistribtionFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsMultipleSamplesFunction)
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSaveRandomSamples.GetText, strTempDataframe:=ucrSelectorRandomSamples.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveRandomSamples.GetText, bAssignToIsPrefix:=True)
     End Sub
 
@@ -117,20 +118,6 @@ Public Class dlgRandomSample
             clsDistribtionFunction.AddParameter("n", ucrSelectorRandomSamples.iDataFrameLength)
         End If
     End Sub
-
-    Private Sub setnumberofsamplesparameters()
-        If ucrNudNumberOfSamples.Value = 1 Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsDistribtionFunction)
-            clsMultipleSamplesFunction.RemoveParameterByName("X")
-        Else
-            clsMultipleSamplesFunction.ClearParameters()
-            For i = 1 To ucrNudNumberOfSamples.Value
-                clsMultipleSamplesFunction.AddParameter("X" & i, clsRFunctionParameter:=clsDistribtionFunction)
-            Next
-            ucrBase.clsRsyntax.SetBaseRFunction(clsMultipleSamplesFunction)
-        End If
-    End Sub
-
 
     Private Sub TestOKEnabled()
         If ucrDistWithParameters.bParametersFilled AndAlso ucrNudNumberOfSamples.GetText <> "" _
@@ -153,7 +140,6 @@ Public Class dlgRandomSample
     End Sub
 
     Private Sub ucrNudNumberOfSamples_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudNumberOfSamples.ControlValueChanged
-        setnumberofsamplesparameters()
         SetNewColumName()
     End Sub
 
