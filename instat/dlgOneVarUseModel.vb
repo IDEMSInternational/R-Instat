@@ -39,7 +39,10 @@ Public Class dlgOneVarUseModel
 
         ucrBase.iHelpTopicID = 375
         ucrBase.clsRsyntax.iCallType = 2
+
         ucrReceiver.Selector = ucrSelector
+        ucrReceiver.SetParameter(New RParameter("x", 1))
+        ucrReceiver.SetParameterIsRFunction()
         ucrReceiver.SetMeAsReceiver()
         ' ucrBase.clsRsyntax.SetFunction("quantile")
 
@@ -93,11 +96,12 @@ Public Class dlgOneVarUseModel
         clsSeqFunction.AddParameter("to", 1)
 
         clsQuantileFunction.SetRCommand("quantile")
-        clsQuantileFunction.AddParameter("probs", clsRFunctionParameter:=clsSeqFunction)
-        clsQuantileFunction.AddParameter("x", clsRFunctionParameter:=clsRbootFunction)
-
         clsRbootFunction.SetRCommand("bootdist")
-        clsRbootFunction.AddParameter("f", clsRFunctionParameter:=ucrReceiver.GetVariables())
+        clsQuantileFunction.AddParameter("probs", clsRFunctionParameter:=clsSeqFunction)
+
+
+
+        ' clsRbootFunction.AddParameter("f")
 
         BootstrapEnabled()
         TestOKEnabled()
@@ -107,8 +111,11 @@ Public Class dlgOneVarUseModel
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrReceiver.AddAdditionalCodeParameterPair(clsRbootFunction, New RParameter("f"), iAdditionalPairNo:=1)
         ucrChkProduceBootstrap.SetRCode(clsRbootFunction, bReset)
-        ucrNewDataframeName.SetRCode(clsRbootFunction,bReset)
+        ucrNewDataframeName.SetRCode(clsQuantileFunction, bReset)
+        ucrSaveObjects.SetRCode(clsRbootFunction, bReset)
+        ucrReceiver.SetRCode(clsQuantileFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -171,6 +178,7 @@ Public Class dlgOneVarUseModel
             ucrChkProduceBootstrap.Enabled = True
         Else
             ucrChkProduceBootstrap.Enabled = False
+            ucrSaveObjects.Enabled = False
         End If
     End Sub
 
@@ -202,15 +210,15 @@ Public Class dlgOneVarUseModel
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         If ucrChkProduceBootstrap.Checked Then
-            frmMain.clsRLink.RunScript(clsRbootFunction.ToScript(), iCallType:=3)
+            frmMain.clsRLink.RunScript(clsRbootFunction.ToScript(), iCallType:=2)
         End If
     End Sub
 
     Private Sub ucrChkProduceBootstrap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkProduceBootstrap.ControlValueChanged
         If ucrChkProduceBootstrap.Checked Then
-            clsRbootFunction.AddParameter("x", clsRFunctionParameter:=clsRbootFunction)
+            clsQuantileFunction.AddParameter("x", clsRFunctionParameter:=clsRbootFunction)
         Else
-            clsRbootFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiver.GetVariables())
+            clsQuantileFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiver.GetVariables())
         End If
     End Sub
 
