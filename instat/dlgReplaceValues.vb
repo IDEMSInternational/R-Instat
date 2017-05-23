@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 
-Public Class dlgReplace
+Public Class dlgReplaceValues
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private Sub dlgReplace_Load(sender As Object, e As EventArgs) Handles MyBase.Load

@@ -56,7 +56,9 @@ Partial Class dlgReorderLevels
         Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
         Me.ucrReceiverFactor.Selector = Nothing
         Me.ucrReceiverFactor.Size = New System.Drawing.Size(119, 26)
+        Me.ucrReceiverFactor.strNcFilePath = ""
         Me.ucrReceiverFactor.TabIndex = 2
+        Me.ucrReceiverFactor.ucrSelector = Nothing
         '
         'ucrSelectorFactorLevelsToReorder
         '
@@ -79,7 +81,7 @@ Partial Class dlgReorderLevels
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(432, 265)
+        Me.ClientSize = New System.Drawing.Size(421, 268)
         Me.Controls.Add(Me.lblFactor)
         Me.Controls.Add(Me.ucrReorderFactor)
         Me.Controls.Add(Me.ucrReceiverFactor)
