@@ -60,7 +60,7 @@ Public Class sdgPlots
         ucrChkFreeScalesY.SetRCode(clsRFacetFunction, bReset)
         ucrNudNumberofRows.SetRCode(clsRFacetFunction, bReset)
         ucrNudNumberofRows.AddAdditionalCodeParameterPair(clsRFacetFunction, New RParameter("ncol"), iAdditionalPairNo:=1)
-        ucrChkIncludeFacets.SetRCode(clsRFacetFunction, bReset)
+        ucrChkIncludeFacets.SetRCode(clsBaseOperator, bReset)
 
     End Sub
 
@@ -76,19 +76,16 @@ Public Class sdgPlots
 
         clsRFacetFunction.SetPackageName("ggplot2")
         clsRFacetFunction.SetRCommand("facet_wrap")
+        clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsRFacetFunction)
 
         ucrChkIncludeFacets.SetText("Include Facets")
-        ucrChkIncludeFacets.AddFunctionNamesCondition(True, "facet_wrap")
+        ucrChkIncludeFacets.AddFunctionNamesCondition(True, clsRFacetFunction)
         ucrPnlHorizonatalVertical.AddFunctionNamesCondition(rdoHorizontal, "facet_wrap")
         ucrPnlHorizonatalVertical.AddFunctionNamesCondition(rdoVertical, "facet_wrap")
         ucrChkMargin.AddFunctionNamesCondition(False, "facet_wrap", False)
         ucrChkFreeSpace.AddFunctionNamesCondition(False, "facet_wrap", False)
         ucrChkNoOfRowsOrColumns.AddFunctionNamesCondition(True, "facet_wrap")
-
-
         ucrChkNoOfRowsOrColumns.SetText("Fixed Number of Rows")
-
-
         ucrChkMargin.SetText("Margins")
         ucrChkMargin.SetParameter(New RParameter("margins"))
         ucrChkMargin.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
