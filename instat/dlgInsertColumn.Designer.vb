@@ -23,22 +23,21 @@ Partial Class dlgInsertColumn
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblStartPos = New System.Windows.Forms.Label()
-        Me.nudPos = New System.Windows.Forms.NumericUpDown()
-        Me.nudNumCols = New System.Windows.Forms.NumericUpDown()
         Me.lblNumberOfRowsToInsert = New System.Windows.Forms.Label()
         Me.grpInsert = New System.Windows.Forms.GroupBox()
         Me.ucrInputBeforeAfter = New instat.ucrInputComboBox()
-        Me.rdoBeforeAfter = New System.Windows.Forms.RadioButton()
         Me.rdoAtStart = New System.Windows.Forms.RadioButton()
-        Me.rdoAtEnd = New System.Windows.Forms.RadioButton()
+        Me.rdoBeforeAfter = New System.Windows.Forms.RadioButton()
         Me.ucrReceiverColumnsToInsert = New instat.ucrReceiverSingle()
+        Me.rdoAtEnd = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlStartEnd = New instat.UcrPanel()
         Me.lblNumberOfColumnsToInsert = New System.Windows.Forms.Label()
-        Me.nudInsertColumns = New System.Windows.Forms.NumericUpDown()
         Me.lblDefaultValue = New System.Windows.Forms.Label()
         Me.lblPrefixforInsertedColumns = New System.Windows.Forms.Label()
         Me.grpOPtions = New System.Windows.Forms.GroupBox()
         Me.rdoAfter = New System.Windows.Forms.RadioButton()
         Me.rdoBefore = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlBeforeAfter = New instat.UcrPanel()
         Me.rdoInsertColumns = New System.Windows.Forms.RadioButton()
         Me.rdoInsertRows = New System.Windows.Forms.RadioButton()
         Me.ucrPnlColumnsOrRows = New instat.UcrPanel()
@@ -47,10 +46,10 @@ Partial Class dlgInsertColumn
         Me.ucrSelectorInsertColumns = New instat.ucrSelectorAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrDataFramesList = New instat.ucrDataFrame()
-        CType(Me.nudPos, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudNumCols, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ucrNudNumberOfRows = New instat.ucrNud()
+        Me.ucrNudStartRow = New instat.ucrNud()
+        Me.ucrNudNumberOfColumns = New instat.ucrNud()
         Me.grpInsert.SuspendLayout()
-        CType(Me.nudInsertColumns, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpOPtions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -62,24 +61,6 @@ Partial Class dlgInsertColumn
         Me.lblStartPos.Size = New System.Drawing.Size(88, 13)
         Me.lblStartPos.TabIndex = 7
         Me.lblStartPos.Text = "Insert at Position:"
-        '
-        'nudPos
-        '
-        Me.nudPos.Location = New System.Drawing.Point(148, 127)
-        Me.nudPos.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.nudPos.Name = "nudPos"
-        Me.nudPos.Size = New System.Drawing.Size(52, 20)
-        Me.nudPos.TabIndex = 8
-        Me.nudPos.Value = New Decimal(New Integer() {1, 0, 0, 0})
-        '
-        'nudNumCols
-        '
-        Me.nudNumCols.Location = New System.Drawing.Point(148, 101)
-        Me.nudNumCols.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.nudNumCols.Name = "nudNumCols"
-        Me.nudNumCols.Size = New System.Drawing.Size(52, 20)
-        Me.nudNumCols.TabIndex = 6
-        Me.nudNumCols.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'lblNumberOfRowsToInsert
         '
@@ -93,13 +74,14 @@ Partial Class dlgInsertColumn
         'grpInsert
         '
         Me.grpInsert.Controls.Add(Me.ucrInputBeforeAfter)
-        Me.grpInsert.Controls.Add(Me.rdoBeforeAfter)
         Me.grpInsert.Controls.Add(Me.rdoAtStart)
-        Me.grpInsert.Controls.Add(Me.rdoAtEnd)
+        Me.grpInsert.Controls.Add(Me.rdoBeforeAfter)
         Me.grpInsert.Controls.Add(Me.ucrReceiverColumnsToInsert)
-        Me.grpInsert.Location = New System.Drawing.Point(265, 78)
+        Me.grpInsert.Controls.Add(Me.rdoAtEnd)
+        Me.grpInsert.Controls.Add(Me.ucrPnlStartEnd)
+        Me.grpInsert.Location = New System.Drawing.Point(266, 73)
         Me.grpInsert.Name = "grpInsert"
-        Me.grpInsert.Size = New System.Drawing.Size(215, 92)
+        Me.grpInsert.Size = New System.Drawing.Size(215, 107)
         Me.grpInsert.TabIndex = 10
         Me.grpInsert.TabStop = False
         Me.grpInsert.Text = "Insert"
@@ -108,31 +90,43 @@ Partial Class dlgInsertColumn
         '
         Me.ucrInputBeforeAfter.AddQuotesIfUnrecognised = True
         Me.ucrInputBeforeAfter.IsReadOnly = False
-        Me.ucrInputBeforeAfter.Location = New System.Drawing.Point(26, 65)
+        Me.ucrInputBeforeAfter.Location = New System.Drawing.Point(26, 75)
         Me.ucrInputBeforeAfter.Name = "ucrInputBeforeAfter"
         Me.ucrInputBeforeAfter.Size = New System.Drawing.Size(93, 21)
         Me.ucrInputBeforeAfter.TabIndex = 3
         '
-        'rdoBeforeAfter
-        '
-        Me.rdoBeforeAfter.AutoSize = True
-        Me.rdoBeforeAfter.Location = New System.Drawing.Point(6, 70)
-        Me.rdoBeforeAfter.Name = "rdoBeforeAfter"
-        Me.rdoBeforeAfter.Size = New System.Drawing.Size(14, 13)
-        Me.rdoBeforeAfter.TabIndex = 2
-        Me.rdoBeforeAfter.TabStop = True
-        Me.rdoBeforeAfter.UseVisualStyleBackColor = True
-        '
         'rdoAtStart
         '
         Me.rdoAtStart.AutoSize = True
-        Me.rdoAtStart.Location = New System.Drawing.Point(6, 42)
+        Me.rdoAtStart.Location = New System.Drawing.Point(6, 47)
         Me.rdoAtStart.Name = "rdoAtStart"
         Me.rdoAtStart.Size = New System.Drawing.Size(60, 17)
         Me.rdoAtStart.TabIndex = 1
         Me.rdoAtStart.TabStop = True
         Me.rdoAtStart.Text = "At Start"
         Me.rdoAtStart.UseVisualStyleBackColor = True
+        '
+        'rdoBeforeAfter
+        '
+        Me.rdoBeforeAfter.AutoSize = True
+        Me.rdoBeforeAfter.Location = New System.Drawing.Point(6, 79)
+        Me.rdoBeforeAfter.Name = "rdoBeforeAfter"
+        Me.rdoBeforeAfter.Size = New System.Drawing.Size(14, 13)
+        Me.rdoBeforeAfter.TabIndex = 2
+        Me.rdoBeforeAfter.TabStop = True
+        Me.rdoBeforeAfter.UseVisualStyleBackColor = True
+        '
+        'ucrReceiverColumnsToInsert
+        '
+        Me.ucrReceiverColumnsToInsert.frmParent = Me
+        Me.ucrReceiverColumnsToInsert.Location = New System.Drawing.Point(129, 74)
+        Me.ucrReceiverColumnsToInsert.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverColumnsToInsert.Name = "ucrReceiverColumnsToInsert"
+        Me.ucrReceiverColumnsToInsert.Selector = Nothing
+        Me.ucrReceiverColumnsToInsert.Size = New System.Drawing.Size(75, 20)
+        Me.ucrReceiverColumnsToInsert.strNcFilePath = ""
+        Me.ucrReceiverColumnsToInsert.TabIndex = 4
+        Me.ucrReceiverColumnsToInsert.ucrSelector = Nothing
         '
         'rdoAtEnd
         '
@@ -145,17 +139,12 @@ Partial Class dlgInsertColumn
         Me.rdoAtEnd.Text = "At End"
         Me.rdoAtEnd.UseVisualStyleBackColor = True
         '
-        'ucrReceiverColumnsToInsert
+        'ucrPnlStartEnd
         '
-        Me.ucrReceiverColumnsToInsert.frmParent = Me
-        Me.ucrReceiverColumnsToInsert.Location = New System.Drawing.Point(128, 65)
-        Me.ucrReceiverColumnsToInsert.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverColumnsToInsert.Name = "ucrReceiverColumnsToInsert"
-        Me.ucrReceiverColumnsToInsert.Selector = Nothing
-        Me.ucrReceiverColumnsToInsert.Size = New System.Drawing.Size(75, 20)
-        Me.ucrReceiverColumnsToInsert.strNcFilePath = ""
-        Me.ucrReceiverColumnsToInsert.TabIndex = 4
-        Me.ucrReceiverColumnsToInsert.ucrSelector = Nothing
+        Me.ucrPnlStartEnd.Location = New System.Drawing.Point(6, 14)
+        Me.ucrPnlStartEnd.Name = "ucrPnlStartEnd"
+        Me.ucrPnlStartEnd.Size = New System.Drawing.Size(78, 88)
+        Me.ucrPnlStartEnd.TabIndex = 22
         '
         'lblNumberOfColumnsToInsert
         '
@@ -165,13 +154,6 @@ Partial Class dlgInsertColumn
         Me.lblNumberOfColumnsToInsert.Size = New System.Drawing.Size(143, 13)
         Me.lblNumberOfColumnsToInsert.TabIndex = 11
         Me.lblNumberOfColumnsToInsert.Text = "Number of Columns to Insert:"
-        '
-        'nudInsertColumns
-        '
-        Me.nudInsertColumns.Location = New System.Drawing.Point(408, 179)
-        Me.nudInsertColumns.Name = "nudInsertColumns"
-        Me.nudInsertColumns.Size = New System.Drawing.Size(45, 20)
-        Me.nudInsertColumns.TabIndex = 12
         '
         'lblDefaultValue
         '
@@ -185,7 +167,7 @@ Partial Class dlgInsertColumn
         'lblPrefixforInsertedColumns
         '
         Me.lblPrefixforInsertedColumns.AutoSize = True
-        Me.lblPrefixforInsertedColumns.Location = New System.Drawing.Point(10, 248)
+        Me.lblPrefixforInsertedColumns.Location = New System.Drawing.Point(10, 304)
         Me.lblPrefixforInsertedColumns.Name = "lblPrefixforInsertedColumns"
         Me.lblPrefixforInsertedColumns.Size = New System.Drawing.Size(141, 13)
         Me.lblPrefixforInsertedColumns.TabIndex = 15
@@ -195,9 +177,10 @@ Partial Class dlgInsertColumn
         '
         Me.grpOPtions.Controls.Add(Me.rdoAfter)
         Me.grpOPtions.Controls.Add(Me.rdoBefore)
-        Me.grpOPtions.Location = New System.Drawing.Point(265, 78)
+        Me.grpOPtions.Controls.Add(Me.ucrPnlBeforeAfter)
+        Me.grpOPtions.Location = New System.Drawing.Point(268, 63)
         Me.grpOPtions.Name = "grpOPtions"
-        Me.grpOPtions.Size = New System.Drawing.Size(124, 67)
+        Me.grpOPtions.Size = New System.Drawing.Size(124, 82)
         Me.grpOPtions.TabIndex = 9
         Me.grpOPtions.TabStop = False
         Me.grpOPtions.Text = "Options"
@@ -205,7 +188,7 @@ Partial Class dlgInsertColumn
         'rdoAfter
         '
         Me.rdoAfter.AutoSize = True
-        Me.rdoAfter.Location = New System.Drawing.Point(6, 44)
+        Me.rdoAfter.Location = New System.Drawing.Point(5, 53)
         Me.rdoAfter.Name = "rdoAfter"
         Me.rdoAfter.Size = New System.Drawing.Size(47, 17)
         Me.rdoAfter.TabIndex = 1
@@ -216,13 +199,20 @@ Partial Class dlgInsertColumn
         'rdoBefore
         '
         Me.rdoBefore.AutoSize = True
-        Me.rdoBefore.Location = New System.Drawing.Point(6, 20)
+        Me.rdoBefore.Location = New System.Drawing.Point(6, 26)
         Me.rdoBefore.Name = "rdoBefore"
         Me.rdoBefore.Size = New System.Drawing.Size(56, 17)
         Me.rdoBefore.TabIndex = 0
         Me.rdoBefore.TabStop = True
         Me.rdoBefore.Text = "Before"
         Me.rdoBefore.UseVisualStyleBackColor = True
+        '
+        'ucrPnlBeforeAfter
+        '
+        Me.ucrPnlBeforeAfter.Location = New System.Drawing.Point(4, 18)
+        Me.ucrPnlBeforeAfter.Name = "ucrPnlBeforeAfter"
+        Me.ucrPnlBeforeAfter.Size = New System.Drawing.Size(98, 57)
+        Me.ucrPnlBeforeAfter.TabIndex = 21
         '
         'rdoInsertColumns
         '
@@ -268,7 +258,7 @@ Partial Class dlgInsertColumn
         Me.ucrInputPrefixForInsertedColumns.AddQuotesIfUnrecognised = True
         Me.ucrInputPrefixForInsertedColumns.IsMultiline = False
         Me.ucrInputPrefixForInsertedColumns.IsReadOnly = False
-        Me.ucrInputPrefixForInsertedColumns.Location = New System.Drawing.Point(158, 246)
+        Me.ucrInputPrefixForInsertedColumns.Location = New System.Drawing.Point(158, 302)
         Me.ucrInputPrefixForInsertedColumns.Name = "ucrInputPrefixForInsertedColumns"
         Me.ucrInputPrefixForInsertedColumns.Size = New System.Drawing.Size(250, 21)
         Me.ucrInputPrefixForInsertedColumns.TabIndex = 16
@@ -286,7 +276,7 @@ Partial Class dlgInsertColumn
         'ucrSelectorInsertColumns
         '
         Me.ucrSelectorInsertColumns.bShowHiddenColumns = False
-        Me.ucrSelectorInsertColumns.Location = New System.Drawing.Point(9, 97)
+        Me.ucrSelectorInsertColumns.Location = New System.Drawing.Point(20, 151)
         Me.ucrSelectorInsertColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorInsertColumns.Name = "ucrSelectorInsertColumns"
         Me.ucrSelectorInsertColumns.Size = New System.Drawing.Size(202, 148)
@@ -294,7 +284,7 @@ Partial Class dlgInsertColumn
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 270)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 323)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 17
@@ -308,26 +298,62 @@ Partial Class dlgInsertColumn
         Me.ucrDataFramesList.Size = New System.Drawing.Size(127, 41)
         Me.ucrDataFramesList.TabIndex = 3
         '
+        'ucrNudNumberOfRows
+        '
+        Me.ucrNudNumberOfRows.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumberOfRows.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudNumberOfRows.Location = New System.Drawing.Point(148, 101)
+        Me.ucrNudNumberOfRows.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudNumberOfRows.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumberOfRows.Name = "ucrNudNumberOfRows"
+        Me.ucrNudNumberOfRows.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudNumberOfRows.TabIndex = 18
+        Me.ucrNudNumberOfRows.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudStartRow
+        '
+        Me.ucrNudStartRow.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudStartRow.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudStartRow.Location = New System.Drawing.Point(148, 129)
+        Me.ucrNudStartRow.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudStartRow.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudStartRow.Name = "ucrNudStartRow"
+        Me.ucrNudStartRow.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudStartRow.TabIndex = 19
+        Me.ucrNudStartRow.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudNumberOfColumns
+        '
+        Me.ucrNudNumberOfColumns.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumberOfColumns.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudNumberOfColumns.Location = New System.Drawing.Point(408, 180)
+        Me.ucrNudNumberOfColumns.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudNumberOfColumns.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumberOfColumns.Name = "ucrNudNumberOfColumns"
+        Me.ucrNudNumberOfColumns.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudNumberOfColumns.TabIndex = 20
+        Me.ucrNudNumberOfColumns.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'dlgInsertColumn
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(492, 327)
+        Me.ClientSize = New System.Drawing.Size(490, 384)
+        Me.Controls.Add(Me.ucrNudNumberOfColumns)
+        Me.Controls.Add(Me.ucrNudStartRow)
+        Me.Controls.Add(Me.ucrNudNumberOfRows)
         Me.Controls.Add(Me.rdoInsertRows)
         Me.Controls.Add(Me.rdoInsertColumns)
-        Me.Controls.Add(Me.ucrPnlColumnsOrRows)
         Me.Controls.Add(Me.grpOPtions)
+        Me.Controls.Add(Me.ucrPnlColumnsOrRows)
         Me.Controls.Add(Me.ucrInputPrefixForInsertedColumns)
         Me.Controls.Add(Me.lblPrefixforInsertedColumns)
         Me.Controls.Add(Me.ucrInputDefaultValue)
         Me.Controls.Add(Me.lblDefaultValue)
-        Me.Controls.Add(Me.nudInsertColumns)
         Me.Controls.Add(Me.lblNumberOfColumnsToInsert)
         Me.Controls.Add(Me.grpInsert)
         Me.Controls.Add(Me.ucrSelectorInsertColumns)
         Me.Controls.Add(Me.lblStartPos)
-        Me.Controls.Add(Me.nudNumCols)
-        Me.Controls.Add(Me.nudPos)
         Me.Controls.Add(Me.lblNumberOfRowsToInsert)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrDataFramesList)
@@ -337,11 +363,8 @@ Partial Class dlgInsertColumn
         Me.Name = "dlgInsertColumn"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Insert Columns/Rows"
-        CType(Me.nudPos, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudNumCols, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpInsert.ResumeLayout(False)
         Me.grpInsert.PerformLayout()
-        CType(Me.nudInsertColumns, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpOPtions.ResumeLayout(False)
         Me.grpOPtions.PerformLayout()
         Me.ResumeLayout(False)
@@ -352,8 +375,6 @@ Partial Class dlgInsertColumn
     Friend WithEvents ucrDataFramesList As ucrDataFrame
     Friend WithEvents lblStartPos As Label
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents nudPos As NumericUpDown
-    Friend WithEvents nudNumCols As NumericUpDown
     Friend WithEvents lblNumberOfRowsToInsert As Label
     Friend WithEvents ucrSelectorInsertColumns As ucrSelectorAddRemove
     Friend WithEvents grpInsert As GroupBox
@@ -363,7 +384,6 @@ Partial Class dlgInsertColumn
     Friend WithEvents rdoAtEnd As RadioButton
     Friend WithEvents ucrReceiverColumnsToInsert As ucrReceiverSingle
     Friend WithEvents lblNumberOfColumnsToInsert As Label
-    Friend WithEvents nudInsertColumns As NumericUpDown
     Friend WithEvents lblDefaultValue As Label
     Friend WithEvents ucrInputDefaultValue As ucrInputTextBox
     Friend WithEvents lblPrefixforInsertedColumns As Label
@@ -374,4 +394,9 @@ Partial Class dlgInsertColumn
     Friend WithEvents rdoInsertColumns As RadioButton
     Friend WithEvents ucrPnlColumnsOrRows As UcrPanel
     Friend WithEvents rdoInsertRows As RadioButton
+    Friend WithEvents ucrNudNumberOfColumns As ucrNud
+    Friend WithEvents ucrNudStartRow As ucrNud
+    Friend WithEvents ucrNudNumberOfRows As ucrNud
+    Friend WithEvents ucrPnlBeforeAfter As UcrPanel
+    Friend WithEvents ucrPnlStartEnd As UcrPanel
 End Class

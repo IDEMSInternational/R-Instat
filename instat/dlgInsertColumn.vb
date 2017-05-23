@@ -43,43 +43,71 @@ Public Class dlgInsertColumn
         ucrPnlColumnsOrRows.AddRadioButton(rdoInsertColumns)
         ucrPnlColumnsOrRows.AddRadioButton(rdoInsertRows)
 
-        ucrPnlColumnsOrRows.AddFunctionNamesCondition(rdoInsertColumns, "$add_columns_to_data")
-        ucrPnlColumnsOrRows.AddFunctionNamesCondition(rdoInsertRows, "$insert_row_in_data")
+        ucrPnlBeforeAfter.AddRadioButton(rdoBefore)
+        ucrPnlBeforeAfter.AddRadioButton(rdoAfter)
+
+        ucrPnlStartEnd.AddRadioButton(rdoAtStart)
+        ucrPnlStartEnd.AddRadioButton(rdoAtEnd)
+        ucrPnlStartEnd.AddRadioButton(rdoBeforeAfter)
+
+        ucrNudNumberOfRows.SetParameter(New RParameter("number_rows"))
+        ucrNudStartRow.SetParameter(New RParameter("start_row"))
+        ucrNudNumberOfColumns.SetParameter(New RParameter("number_rows"))
+
+
+        'Setting Display of the group boxes in the dialog
+        ucrPnlColumnsOrRows.AddToLinkedControls(ucrPnlStartEnd, {rdoInsertColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlColumnsOrRows.AddToLinkedControls(ucrInputBeforeAfter, {rdoInsertColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlColumnsOrRows.AddToLinkedControls(ucrReceiverColumnsToInsert, {rdoInsertColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlColumnsOrRows.AddToLinkedControls(ucrNudNumberOfColumns, {rdoInsertColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlColumnsOrRows.AddToLinkedControls(ucrInputDefaultValue, {rdoInsertColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrPnlColumnsOrRows.AddToLinkedControls(ucrPnlBeforeAfter, {rdoInsertRows}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlColumnsOrRows.AddToLinkedControls(ucrNudNumberOfRows, {rdoInsertRows}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlColumnsOrRows.AddToLinkedControls(ucrNudStartRow, {rdoInsertRows}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        'ucrSelectorInsertColumns.AddToLinkedControls(ucrNudStartRow, {rdoInsertRows}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudNumberOfColumns.SetLinkedDisplayControl(lblNumberOfColumnsToInsert)
+        ucrInputDefaultValue.SetLinkedDisplayControl(lblDefaultValue)
+        ucrNudNumberOfRows.SetLinkedDisplayControl(lblNumberOfRowsToInsert)
+        ucrNudStartRow.SetLinkedDisplayControl(lblStartPos)
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsAddColumnFunction)
 
     End Sub
 
-    Private Sub ReopenDialog()
-        ucrDataFramesList.Reset()
-        If rdoInsertRows.Checked Then
-            If nudPos.Value = ucrDataFramesList.iDataFrameLength Then
-                nudPos.Value = ucrDataFramesList.iDataFrameLength
-                ucrBase.clsRsyntax.AddParameter("number_rows", nudNumCols.Value)
-            End If
-        Else
-        End If
-    End Sub
+    'Private Sub ReopenDialog()
+    '    ucrDataFramesList.Reset()
+    '    If rdoInsertRows.Checked Then
+    '        If nudPos.Value = ucrDataFramesList.iDataFrameLength Then
+    '            nudPos.Value = ucrDataFramesList.iDataFrameLength
+    '            ucrBase.clsRsyntax.AddParameter("number_rows", nudNumCols.Value)
+    '        End If
+    '    Else
+    '    End If
+    'End Sub
 
     Private Sub SetDefaults()
         clsAddColumnFunction = New RFunction
         clsInsertRowFunction = New RFunction
 
-        clsAddColumnFunction.SetRCommand("$add_columns_to_data")
-        clsInsertRowFunction.SetRCommand("$insert_row_in_data")
+        clsAddColumnFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
+        clsInsertRowFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$insert_row_in_data")
         ucrSelectorInsertColumns.Reset()
 
-        rdoInsertColumns.Checked = True
+        'rdoInsertColumns.Checked = True
         ucrInputPrefixForInsertedColumns.SetName("X")
         ucrInputDefaultValue.SetName("NA")
         ucrDataFramesList.Reset()
         'RowsOrColumns()
-        rdoAtEnd.Checked = True
-        rdoAfter.Checked = True
+        'rdoAtEnd.Checked = True
+        'rdoAfter.Checked = True
         ucrInputBeforeAfter.SetName("After")
-        If ucrDataFramesList.iDataFrameLength >= nudPos.Minimum AndAlso ucrDataFramesList.iDataFrameLength <= nudPos.Maximum Then
-            nudPos.Value = ucrDataFramesList.iDataFrameLength
-        Else
-            nudPos.Value = 1
-        End If
+        ''If ucrDataFramesList.iDataFrameLength >= nudPos.Minimum AndAlso ucrDataFramesList.iDataFrameLength <= nudPos.Maximum Then
+        ''    nudPos.Value = ucrDataFramesList.iDataFrameLength
+        ''Else
+        ''    nudPos.Value = 1
+        'End If
     End Sub
 
     Private Sub SetRCodeForControls(bReset)
@@ -87,56 +115,57 @@ Public Class dlgInsertColumn
     End Sub
 
     Private Sub TestOKEnabled()
-        If rdoInsertColumns.Checked Then
-            If ((nudInsertColumns.Text <> "") And (Not ucrInputDefaultValue.IsEmpty) And (Not ucrInputPrefixForInsertedColumns.IsEmpty) And (ucrDataFramesList.cboAvailableDataFrames.Text <> "")) Then
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
+        'If rdoInsertColumns.Checked Then
+        '    If ((ucrNudNumberOfColumns.Text <> "") And (Not ucrInputDefaultValue.IsEmpty) And (Not ucrInputPrefixForInsertedColumns.IsEmpty) And (ucrDataFramesList.cboAvailableDataFrames.Text <> "")) Then
+        '        ucrBase.OKEnabled(True)
+        '    Else
+        '        ucrBase.OKEnabled(False)
 
-            End If
-        ElseIf rdoInsertRows.Checked Then
-            If ((nudNumCols.Text <> "") And (nudPos.Text <> "") And (ucrDataFramesList.cboAvailableDataFrames.Text <> "")) Then
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
-            End If
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+        '    End If
+        'ElseIf rdoInsertRows.Checked Then
+        '    If ((ucrNudNumberOfRows.Text <> "") And (ucrNudStartRow.Text <> "") And (ucrDataFramesList.cboAvailableDataFrames.Text <> "")) Then
+        '        ucrBase.OKEnabled(True)
+        '    Else
+        '        ucrBase.OKEnabled(False)
+        '    End If
+        'Else
+        '    ucrBase.OKEnabled(False)
+        'End If
+        ucrBase.OKEnabled(True)
     End Sub
 
-    Private Sub nudPos_TextChanged(sender As Object, e As EventArgs) Handles nudPos.TextChanged
-        startpo()
-    End Sub
+    'Private Sub nudPos_TextChanged(sender As Object, e As EventArgs)
+    '    startpo()
+    'End Sub
 
-    Private Sub startpo()
-        If rdoInsertRows.Checked Then
-            If Not nudPos.Text = "" Then
-                ucrBase.clsRsyntax.AddParameter("start_row", nudPos.Value)
-            Else
-                ucrBase.clsRsyntax.RemoveParameter("start_row")
-            End If
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("start_row")
-        End If
-    End Sub
+    'Private Sub startpo()
+    '    If rdoInsertRows.Checked Then
+    '        If Not nudPos.Text = "" Then
+    '            ucrBase.clsRsyntax.AddParameter("start_row", nudPos.Value)
+    '        Else
+    '            ucrBase.clsRsyntax.RemoveParameter("start_row")
+    '        End If
+    '    Else
+    '        ucrBase.clsRsyntax.RemoveParameter("start_row")
+    '    End If
+    'End Sub
 
-    Private Sub nudNumCols_TextChanged(sender As Object, e As EventArgs) Handles nudNumCols.TextChanged
-        NumberofColumnsOrRows()
-        TestOKEnabled()
-    End Sub
+    'Private Sub nudNumCols_TextChanged(sender As Object, e As EventArgs)
+    '    NumberofColumnsOrRows()
+    '    TestOKEnabled()
+    'End Sub
 
-    Private Sub NumberofColumnsOrRows()
-        If rdoInsertRows.Checked Then
-            If Not nudNumCols.Text = "" Then
-                ucrBase.clsRsyntax.AddParameter("number_rows", nudNumCols.Value)
-            Else
-                ucrBase.clsRsyntax.RemoveParameter("number_rows")
-            End If
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("number_rows")
-        End If
-    End Sub
+    'Private Sub NumberofColumnsOrRows()
+    '    If rdoInsertRows.Checked Then
+    '        If Not nudNumCols.Text = "" Then
+    '            ucrBase.clsRsyntax.AddParameter("number_rows", nudNumCols.Value)
+    '        Else
+    '            ucrBase.clsRsyntax.RemoveParameter("number_rows")
+    '        End If
+    '    Else
+    '        ucrBase.clsRsyntax.RemoveParameter("number_rows")
+    '    End If
+    'End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
@@ -152,21 +181,21 @@ Public Class dlgInsertColumn
     End Sub
 
 
-    Private Sub ucrDataFramesList_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrDataFramesList.DataFrameChanged
-        dataFrameListMaxMinPos()
-    End Sub
+    'Private Sub ucrDataFramesList_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrDataFramesList.DataFrameChanged
+    '    dataFrameListMaxMinPos()
+    'End Sub
 
-    Private Sub dataFrameListMaxMinPos()
-        If rdoInsertRows.Checked Then
-            nudPos.Maximum = ucrDataFramesList.iDataFrameLength
-            nudPos.Value = ucrDataFramesList.iDataFrameLength
-        Else
-        End If
-    End Sub
+    'Private Sub dataFrameListMaxMinPos()
+    '    If rdoInsertRows.Checked Then
+    '        nudPos.Maximum = ucrDataFramesList.iDataFrameLength
+    '        nudPos.Value = ucrDataFramesList.iDataFrameLength
+    '    Else
+    '    End If
+    'End Sub
 
-    Private Sub RowsOrColumns_CheckedChanged(sender As Object, e As EventArgs) Handles rdoInsertColumns.CheckedChanged, rdoInsertRows.CheckedChanged
-        RowsOrColumns()
-    End Sub
+    'Private Sub RowsOrColumns_CheckedChanged(sender As Object, e As EventArgs) Handles rdoInsertColumns.CheckedChanged, rdoInsertRows.CheckedChanged
+    '    RowsOrColumns()
+    'End Sub
 
     Private Sub grpOPtions_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBefore.CheckedChanged, rdoAfter.CheckedChanged
         OPtionstoInsert()
@@ -182,72 +211,72 @@ Public Class dlgInsertColumn
         End If
     End Sub
 
-    Private Sub RowsOrColumns()
-        If rdoInsertColumns.Checked Then
-            ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
-            ucrBase.clsRsyntax.AddParameter("use_col_name_as_prefix", "TRUE")
-            BeforeAfterPara()
-            InsertParam()
-            ucrBase.clsRsyntax.RemoveParameter("number_rows")
-            nudInsertColumns.Value = 1
-            NumberofColumnsOrRows()
-            dataFrameListMaxMinPos()
-            ColName()
-            grpInsert.Visible = True
-            grpOPtions.Visible = False
-            nudInsertColumns.Maximum = 100
-            nudNumCols.Visible = False
-            nudPos.Visible = False
-            addColumData()
-            ColsToInsert()
-            OPtionstoInsert()
-            'startpo()
-            BeforeParameter()
-            lblPrefixforInsertedColumns.Visible = True
-            lblDefaultValue.Visible = True
-            ucrInputPrefixForInsertedColumns.Visible = True
-            ucrInputDefaultValue.Visible = True
-            lblNumberOfColumnsToInsert.Visible = True
-            nudInsertColumns.Visible = True
-            lblNumberOfRowsToInsert.Visible = False
-            lblStartPos.Visible = False
-            nudNumCols.Focus()
-            nudPos.Focus()
-        ElseIf rdoInsertRows.Checked Then
-            ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$insert_row_in_data")
-            lblNumberOfRowsToInsert.Visible = True
-            ucrBase.clsRsyntax.RemoveParameter("num_cols")
-            ucrBase.clsRsyntax.RemoveParameter("use_col_name_as_prefix")
-            nudNumCols.Value = 1
-            NumberofColumnsOrRows()
-            dataFrameListMaxMinPos()
-            'startpo()
-            nudNumCols.Maximum = 1000
-            addColumData()
-            InsertParam()
-            BeforeAfterPara()
-            OPtionstoInsert()
-            ColsToInsert()
-            ColName()
-            BeforeParameter()
-            ucrSelectorInsertColumns.Visible = False
-            nudNumCols.Visible = True
-            nudPos.Visible = True
-            lblStartPos.Visible = True
-            lblPrefixforInsertedColumns.Visible = False
-            lblDefaultValue.Visible = False
-            ucrInputPrefixForInsertedColumns.Visible = False
-            ucrInputDefaultValue.Visible = False
-            lblNumberOfColumnsToInsert.Visible = False
-            nudInsertColumns.Visible = False
-            ucrReceiverColumnsToInsert.Visible = False
-            nudInsertColumns.Focus()
-            grpInsert.Visible = False
-            grpOPtions.Visible = True
+    'Private Sub RowsOrColumns()
+    '    If rdoInsertColumns.Checked Then
+    '        'ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
+    '        ucrBase.clsRsyntax.AddParameter("use_col_name_as_prefix", "TRUE")
+    '        BeforeAfterPara()
+    '        InsertParam()
+    '        ucrBase.clsRsyntax.RemoveParameter("number_rows")
+    '        'nudInsertColumns.Value = 1
+    '        'NumberofColumnsOrRows()
+    '        'dataFrameListMaxMinPos()
+    '        'ColName()
+    '        'grpInsert.Visible = True
+    '        'grpOPtions.Visible = False
+    '        'nudInsertColumns.Maximum = 100
+    '        'nudNumCols.Visible = False
+    '        'nudPos.Visible = False
+    '        addColumData()
+    '        ColsToInsert()
+    '        OPtionstoInsert()
+    '        'startpo()
+    '        BeforeParameter()
+    '        'lblPrefixforInsertedColumns.Visible = True
+    '        'lblDefaultValue.Visible = True
+    '        'ucrInputPrefixForInsertedColumns.Visible = True
+    '        'ucrInputDefaultValue.Visible = True
+    '        'lblNumberOfColumnsToInsert.Visible = True
+    '        'nudInsertColumns.Visible = True
+    '        'lblNumberOfRowsToInsert.Visible = False
+    '        'lblStartPos.Visible = False
+    '        'nudNumCols.Focus()
+    '        'nudPos.Focus()
+    '    ElseIf rdoInsertRows.Checked Then
+    '        'ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$insert_row_in_data")
+    '        lblNumberOfRowsToInsert.Visible = True
+    '        ucrBase.clsRsyntax.RemoveParameter("num_cols")
+    '        ucrBase.clsRsyntax.RemoveParameter("use_col_name_as_prefix")
+    '        nudNumCols.Value = 1
+    '        NumberofColumnsOrRows()
+    '        dataFrameListMaxMinPos()
+    '        'startpo()
+    '        nudNumCols.Maximum = 1000
+    '        addColumData()
+    '        InsertParam()
+    '        BeforeAfterPara()
+    '        OPtionstoInsert()
+    '        ColsToInsert()
+    '        ColName()
+    '        BeforeParameter()
+    '        ucrSelectorInsertColumns.Visible = False
+    '        nudNumCols.Visible = True
+    '        nudPos.Visible = True
+    '        lblStartPos.Visible = True
+    '        lblPrefixforInsertedColumns.Visible = False
+    '        lblDefaultValue.Visible = False
+    '        ucrInputPrefixForInsertedColumns.Visible = False
+    '        ucrInputDefaultValue.Visible = False
+    '        lblNumberOfColumnsToInsert.Visible = False
+    '        nudInsertColumns.Visible = False
+    '        ucrReceiverColumnsToInsert.Visible = False
+    '        nudInsertColumns.Focus()
+    '        grpInsert.Visible = False
+    '        grpOPtions.Visible = True
 
-        End If
+    '    End If
 
-    End Sub
+    'End Sub
 
     Private Sub grpInsert_CheckedChanged(sender As Object, e As EventArgs) Handles rdoAtEnd.CheckedChanged, rdoAtStart.CheckedChanged, rdoBeforeAfter.CheckedChanged
         InsertParam()
@@ -361,21 +390,21 @@ Public Class dlgInsertColumn
         End If
     End Sub
 
-    Private Sub nudInsertColumns_TextChanged(sender As Object, e As EventArgs) Handles nudInsertColumns.TextChanged
-        ColsToInsert()
-        TestOKEnabled()
-    End Sub
+    'Private Sub nudInsertColumns_TextChanged(sender As Object, e As EventArgs)
+    '    ColsToInsert()
+    '    TestOKEnabled()
+    'End Sub
 
-    Private Sub ColsToInsert()
-        If rdoInsertColumns.Checked Then
-            If Not nudInsertColumns.Text = "" Then
-                ucrBase.clsRsyntax.AddParameter("num_cols", nudInsertColumns.Value)
-            Else
-                ucrBase.clsRsyntax.RemoveParameter("num_cols")
-            End If
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("num_cols")
-        End If
-    End Sub
+    'Private Sub ColsToInsert()
+    '    If rdoInsertColumns.Checked Then
+    '        If Not nudInsertColumns.Text = "" Then
+    '            ucrBase.clsRsyntax.AddParameter("num_cols", nudInsertColumns.Value)
+    '        Else
+    '            ucrBase.clsRsyntax.RemoveParameter("num_cols")
+    '        End If
+    '    Else
+    '        ucrBase.clsRsyntax.RemoveParameter("num_cols")
+    '    End If
+    'End Sub
 
 End Class
