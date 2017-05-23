@@ -43,16 +43,20 @@ Public Class dlgInsertColumn
         ucrPnlColumnsOrRows.AddRadioButton(rdoInsertColumns)
         ucrPnlColumnsOrRows.AddRadioButton(rdoInsertRows)
 
-        ucrPnlBeforeAfter.AddRadioButton(rdoBefore)
-        ucrPnlBeforeAfter.AddRadioButton(rdoAfter)
+        ucrPnlBeforeAfter.SetParameter(New RParameter("before"))
+        ucrPnlBeforeAfter.AddRadioButton(rdoBefore, "TRUE")
+        ucrPnlBeforeAfter.AddRadioButton(rdoAfter, "FALSE")
 
         ucrPnlStartEnd.AddRadioButton(rdoAtStart)
         ucrPnlStartEnd.AddRadioButton(rdoAtEnd)
         ucrPnlStartEnd.AddRadioButton(rdoBeforeAfter)
 
+        ucrDataFramesList.SetParameter(New RParameter("data_name"))
         ucrNudNumberOfRows.SetParameter(New RParameter("number_rows"))
         ucrNudStartRow.SetParameter(New RParameter("start_row"))
-        ucrNudNumberOfColumns.SetParameter(New RParameter("number_rows"))
+
+        ucrReceiverColumnsToInsert.SetParameter(New RParameter("adjacent_column"))
+
 
 
         'Setting Display of the group boxes in the dialog
@@ -72,16 +76,14 @@ Public Class dlgInsertColumn
         ucrNudNumberOfRows.SetLinkedDisplayControl(lblNumberOfRowsToInsert)
         ucrNudStartRow.SetLinkedDisplayControl(lblStartPos)
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsAddColumnFunction)
-
     End Sub
 
-    'Private Sub ReopenDialog()
+    'Private Sub reopendialog()
     '    ucrDataFramesList.Reset()
     '    If rdoInsertRows.Checked Then
-    '        If nudPos.Value = ucrDataFramesList.iDataFrameLength Then
-    '            nudPos.Value = ucrDataFramesList.iDataFrameLength
-    '            ucrBase.clsRsyntax.AddParameter("number_rows", nudNumCols.Value)
+    '        If nudpos.value = ucrDataFramesList.iDataFrameLength Then
+    '            nudpos.value = ucrDataFramesList.iDataFrameLength
+    '            ucrBase.clsRsyntax.AddParameter("number_rows", nudnumcols.value)
     '        End If
     '    Else
     '    End If
@@ -94,6 +96,10 @@ Public Class dlgInsertColumn
         clsAddColumnFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
         clsInsertRowFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$insert_row_in_data")
         ucrSelectorInsertColumns.Reset()
+
+        ucrNudNumberOfRows.SetRDefault(1)
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsInsertRowFunction)
 
         'rdoInsertColumns.Checked = True
         ucrInputPrefixForInsertedColumns.SetName("X")
@@ -111,7 +117,8 @@ Public Class dlgInsertColumn
     End Sub
 
     Private Sub SetRCodeForControls(bReset)
-
+        ucrNudNumberOfRows.SetRCode(clsInsertRowFunction, bReset)
+        ucrNudStartRow.SetRCode(clsInsertRowFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -155,10 +162,10 @@ Public Class dlgInsertColumn
     '    TestOKEnabled()
     'End Sub
 
-    'Private Sub NumberofColumnsOrRows()
+    'Private Sub numberofcolumnsorrows()
     '    If rdoInsertRows.Checked Then
-    '        If Not nudNumCols.Text = "" Then
-    '            ucrBase.clsRsyntax.AddParameter("number_rows", nudNumCols.Value)
+    '        If Not nudnumcols.text = "" Then
+    '            ucrBase.clsRsyntax.AddParameter("number_rows", nudnumcols.value)
     '        Else
     '            ucrBase.clsRsyntax.RemoveParameter("number_rows")
     '        End If
