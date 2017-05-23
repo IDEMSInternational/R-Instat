@@ -19,7 +19,7 @@ Public Class dlgTransformClimatic
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
     Private clsRTrasform, clsRRollFuncExpr, clsMatchFun As New RFunction
-    Private clsSumFunction, clsCountFunction, clsSpellFunction, clsWaterBalanceFunction As New RFunction
+    Private clsRollFunction, clsSpellFunction, clsWaterBalanceFunction As New RFunction
     Private strCurrDataName As String = ""
     Private Sub dlgTransformClimatic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -147,8 +147,8 @@ Public Class dlgTransformClimatic
         clsRRollFuncExpr = New RFunction
         clsMatchFun = New RFunction
 
-        clsSumFunction = New RFunction
-        clsCountFunction = New RFunction
+        clsRollFunction = New RFunction
+        clsRollFunction = New RFunction
         clsSpellFunction = New RFunction
         clsWaterBalanceFunction = New RFunction
         'ucrSaveTransform.Reset()
@@ -185,10 +185,10 @@ Public Class dlgTransformClimatic
         'This might not Beep right
         'clsRTrasform.AddParameter("result_name", Chr(34) & ucrSaveTransform.ucrInputTextSave.GetText & Chr(34))
         clsRTrasform.AddParameter("save", 2)
-        clsSumFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
-        clsSumFunction.AddParameter("display", "FALSE")
-        clsSumFunction.AddParameter("calc", clsRFunctionParameter:=clsRTrasform)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsSumFunction)
+        clsRollFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
+        clsRollFunction.AddParameter("display", "FALSE")
+        clsRollFunction.AddParameter("calc", clsRFunctionParameter:=clsRTrasform)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRollFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -212,14 +212,14 @@ Public Class dlgTransformClimatic
 
     Private Sub ucrPnlTransform_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlTransform.ControlContentsChanged
         If rdoMoving.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsSumFunction)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsRollFunction)
             'ucrBase.clsRsyntax.AddParameter("calc", clsRFunctionParameter:=clsRTrasform)
             'ucrSaveTransform.SetPrefix("Sum")
             'ucrInputColName.SetPrefix("Sum")
             ucrInputColName.SetName("Moving")
             grpTransform.Text = "Moving"
         ElseIf rdoCount.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsSumFunction)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsRollFunction)
             'ucrSaveTransform.SetPrefix("Count")
             'ucrInputColName.SetPrefix("Count")
             ucrInputColName.SetName("Count")
