@@ -24,13 +24,13 @@ Public Class sdgPlots
     'This clsRSyntax is linked with the ucrBase.clsRSyntax from the dlg calling sdgPLotOptions...
     Public clsRggplotFunction, clsAesFunction, clsRLegendFunction, clsLegendFunction, clsGraphTitleFunction, clsRFacetFunction, clsXLabFunction, clsYLabFunction, clsRThemeFunction As New RFunction 'Warning: I m not sure this field is useful... Will all be revised when changing links though...
     Public clsBaseOperator As New ROperator
+
     Private bControlsInitialised As Boolean = False
     'All the previous RFunctions will eventually be stored as parameters (or parameters of parameters) within the RSyntax building the big Ggplot command "ggplot(...) + geom_..(..) + ... + theme(...) + scales(...) ..."
     'They are treated separately from the RSyntax for the sake of clarity, then sinked in eventually.
     Public bFirstLoad As Boolean = True
     Public strDataFrame As String
     Private bAdditionalLayersSetGlobal As Boolean
-
     'See bLayersDefaultIsGolobal below.
     Private Sub sdgPlots_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'If bFirstLoad Then
@@ -38,16 +38,19 @@ Public Class sdgPlots
         '    SetDefaults()
         '    bFirstLoad = False
         'End If
-        'autoTranslate(Me)
+        autoTranslate(Me)
     End Sub
 
-    Public Sub SetRFunction(clsNewOperator As ROperator, Optional bReset As Boolean = False)
+    Public Sub SetRFunction(clsNewOperator As ROperator, clsNewGraphTitleFunction As RFunction, clsNewLegendFunction As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
         clsBaseOperator = clsNewOperator
+        clsGraphTitleFunction = clsNewGraphTitleFunction
+        clsLegendFunction = clsNewLegendFunction
 
-        ucrInputGraphTitle.SetRCode(clsGraphTitleFunction, bReset)
+        ucrInputGraphTitle.SetRCode(clsNewGraphTitleFunction, bReset)
+        ucrInputLegend.SetRCode(clsNewLegendFunction, bReset)
         ucrPnlHorizonatalVertical.SetRCode(clsRFacetFunction, bReset)
         ucr1stFactorReceiver.SetRCode(clsRFacetFunction, bReset)
         ucr2ndFactorReceiver.SetRCode(clsRFacetFunction, bReset)
@@ -56,6 +59,9 @@ Public Class sdgPlots
         ucrChkFreeScalesX.SetRCode(clsRFacetFunction, bReset)
         ucrChkFreeScalesY.SetRCode(clsRFacetFunction, bReset)
         ucrNudNumberofRows.SetRCode(clsRFacetFunction, bReset)
+        ucrNudNumberofRows.AddAdditionalCodeParameterPair(clsRFacetFunction, New RParameter("ncol"), iAdditionalPairNo:=1)
+        ucrChkIncludeFacets.SetRCode(clsRFacetFunction, bReset)
+
     End Sub
 
     Public Sub InitialiseControls()
@@ -63,11 +69,25 @@ Public Class sdgPlots
         'Links the factor receivers, used for creating facets, with the selector. The variables need to be factors.
         ucr1stFactorReceiver.Selector = ucrFacetSelector
         ucr1stFactorReceiver.SetIncludedDataTypes({"factor"})
+        ucr1stFactorReceiver.SetMeAsReceiver()
+
         ucr2ndFactorReceiver.Selector = ucrFacetSelector
         ucr2ndFactorReceiver.SetIncludedDataTypes({"factor"})
 
+        clsRFacetFunction.SetPackageName("ggplot2")
+        clsRFacetFunction.SetRCommand("facet_wrap")
+
         ucrChkIncludeFacets.SetText("Include Facets")
+        ucrChkIncludeFacets.AddFunctionNamesCondition(True, "facet_wrap")
+        ucrPnlHorizonatalVertical.AddFunctionNamesCondition(rdoHorizontal, "facet_wrap")
+        ucrPnlHorizonatalVertical.AddFunctionNamesCondition(rdoVertical, "facet_wrap")
+        ucrChkMargin.AddFunctionNamesCondition(False, "facet_wrap", False)
+        ucrChkFreeSpace.AddFunctionNamesCondition(False, "facet_wrap", False)
+        ucrChkNoOfRowsOrColumns.AddFunctionNamesCondition(True, "facet_wrap")
+
+
         ucrChkNoOfRowsOrColumns.SetText("Fixed Number of Rows")
+
 
         ucrChkMargin.SetText("Margins")
         ucrChkMargin.SetParameter(New RParameter("margins"))
@@ -76,6 +96,14 @@ Public Class sdgPlots
 
         ucrChkFreeScalesX.SetText("Free Scales X")
         ucrChkFreeScalesY.SetText("Free Scales Y")
+
+        ucrPnlHorizonatalVertical.AddParameterPresentCondition(rdoHorizontal, "h")
+        ucrPnlHorizonatalVertical.AddParameterPresentCondition(rdoHorizontal, "nrow")
+
+        ucrPnlHorizonatalVertical.AddParameterPresentCondition(rdoVertical, "v")
+        ucrPnlHorizonatalVertical.AddParameterPresentCondition(rdoVertical, "ncol")
+
+        ucrNudNumberofRows.SetParameter(New RParameter("nrow"))
 
         'this passes in parameter only if margin is checked. 
         'should be visible when margin is chacked
@@ -86,9 +114,9 @@ Public Class sdgPlots
         ucrPnlHorizonatalVertical.SetParameter(New RParameter("dir"))
         ucrPnlHorizonatalVertical.AddRadioButton(rdoVertical, Chr(34) & "v" & Chr(34))
         ucrPnlHorizonatalVertical.AddRadioButton(rdoHorizontal, Chr(34) & "h" & Chr(34))
-        ucrPnlHorizonatalVertical.SetRDefault(Chr(34) & "h" & Chr(34))
 
-        ucrChkIncludeFacets.AddToLinkedControls(ucrFacetSelector, {True}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=False)
+
+        ucrChkIncludeFacets.AddToLinkedControls(ucrFacetSelector, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkIncludeFacets.AddToLinkedControls(ucr1stFactorReceiver, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucr1stFactorReceiver.SetLinkedDisplayControl(lblFactor1)
 
@@ -108,16 +136,8 @@ Public Class sdgPlots
         'layers tab 
 
         'titles tab
-        Dim clsGraphTitleFunction As New RFunction
-        Dim clsGraphTitleparam As New RParameter
 
-        clsGraphTitleFunction.SetPackageName("ggplot2")
-        clsGraphTitleFunction.SetRCommand("ggtitle")
-        clsGraphTitleparam.SetArgument(clsGraphTitleFunction)
-        clsGraphTitleparam.SetArgumentName("ggtitle")
         ucrInputGraphTitle.SetParameter(New RParameter("label"))
-        clsBaseOperator.AddParameter(clsGraphTitleparam)
-
         ucrPnlLegendTitle.AddRadioButton(rdoLegendTitleAuto)
         ucrPnlLegendTitle.AddRadioButton(rdoLegendTitleCustom)
         ucrChkDisplayLegendTitle.SetText("Display")
@@ -125,14 +145,19 @@ Public Class sdgPlots
         ucrPnlLegendTitle.AddToLinkedControls(ucrChkDisplayLegendTitle, {rdoLegendTitleCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkDisplayLegendTitle.AddToLinkedControls(ucrChkOverwriteLegendTitle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkOverwriteLegendTitle.AddToLinkedControls(ucrInputLegend, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrInputLegend.SetParameter(New RParameter("fill"))
+
         'X Axis tab
 
         'Y Axis tab
 
         'themes tab
-
+        CreateThemes()
         'Corodiantes tab
 
+
+        InitialiseTabs()
         bControlsInitialised = True
     End Sub
 
@@ -144,13 +169,13 @@ Public Class sdgPlots
         tabLayers.Enabled = True
     End Sub
     Public Sub SetDefaults()
-        ucrChkIncludeFacets.Checked = False
+        ' ucrChkIncludeFacets.Checked = False
         IncludeFacets()
         ucrNudNumberofRows.Value = 1
         ucrFacetSelector.Reset()
 
-        ucr1stFactorReceiver.SetMeAsReceiver()
-        ucrInputGraphTitle.SetName("")
+
+
         ucrPlotsAdditionalLayers.Reset()
         'Note that the following two don't reset the bisX and RSyntaxAxis ... So no need to set these again.
         ucrXAxis.Reset()
@@ -203,22 +228,15 @@ Public Class sdgPlots
     Private Sub IncludeFacets()
         'If the user wants facets, the facets options need to be shown, otherwise hide them.
         If ucrChkIncludeFacets.Checked Then
-
-            ucrChkNoOfRowsOrColumns.Checked = False
-            ucrChkMargin.Checked = False
-            ucrChkFreeScalesX.Checked = False
-            ucrChkFreeScalesY.Checked = False
-            ucrChkFreeSpace.Checked = False
-
             'In case IncludeFacets is checked, the facets need to be set. Still might not be included as RSyntax parameter if no no variable has been set for faceting, but this is then decided in the IncludeFacetsParameter below.
-            SetFacets()
-            SecondFactorReceiverEnabled()
+            'SetFacets()
+            ' SecondFactorReceiverEnabled()
 
         Else
 
         End If
         'Then the RSyntax is populated with the appropriate facet parameter (as part of the whole ggplot script) or not.
-        IncludeFacetsParameter()
+        ' IncludeFacetsParameter()
     End Sub
 
     Private Sub SetFacets()
@@ -229,9 +247,8 @@ Public Class sdgPlots
         Dim strSingleFactor As String
         clsTempOp.SetOperation("~")
         'The following two parameters (of the facet function) will be reset in this sub according to the settings selected on the dialog. They need to be cleared in case they are not relevant anymore for example if margins has been checked (they are specific to facet_wrap).
-        clsRFacetFunction.RemoveParameterByName("nrow")
-        clsRFacetFunction.RemoveParameterByName("ncol")
-
+        'clsRFacetFunction.RemoveParameterByName("nrow")
+        'clsRFacetFunction.RemoveParameterByName("ncol")
         If (Not ucr1stFactorReceiver.IsEmpty() AndAlso ucr2ndFactorReceiver.IsEmpty()) Then
 
             strSingleFactor = ucr1stFactorReceiver.GetVariableNames(False)
@@ -309,16 +326,16 @@ Public Class sdgPlots
     End Sub
 
     Private Sub IncludeFacetsParameter()
-        If ucrChkIncludeFacets.Checked AndAlso Not ucr1stFactorReceiver.IsEmpty() Then
-            clsRsyntax.AddOperatorParameter("facet", clsRFunc:=clsRFacetFunction)
-        Else
-            clsRsyntax.RemoveOperatorParameter("facet")
-        End If
+        'If ucrChkIncludeFacets.Checked AndAlso Not ucr1stFactorReceiver.IsEmpty() Then
+        '    clsRsyntax.AddOperatorParameter("facet", clsRFunc:=clsRFacetFunction)
+        'Else
+        '    clsRsyntax.RemoveOperatorParameter("facet")
+        'End If
     End Sub
 
     Private Sub ucrChkIncludeFacets_CheckedChanged() Handles ucrChkIncludeFacets.ControlValueChanged
-        IncludeFacets()
-        FacetsNumberOfRowsOrColumns()
+        '  IncludeFacets()
+        ' FacetsNumberOfRowsOrColumns()
     End Sub
 
     Private Sub SetScaleOption()
@@ -343,16 +360,16 @@ Public Class sdgPlots
     Private Sub FacetsNumberOfRowsOrColumns()
         'This sub decides whether the option to fix the number of rows or columns should be available or not.
         'When ucrChkMargin is checked, or when both receivers are used (i.e. the second optional is filled), facet_grid is used, and thus the number of rows or columns can't be fixed.
-        If ucrChkIncludeFacets.Checked Then
-            If (ucrChkMargin.Checked OrElse ucrChkFreeSpace.Checked OrElse (Not ucr2ndFactorReceiver.IsEmpty)) Then
-                ucrChkNoOfRowsOrColumns.Checked = False
-                ucrChkNoOfRowsOrColumns.Visible = False
-                ucrNudNumberofRows.Visible = False
-            Else
-                ucrChkNoOfRowsOrColumns.Visible = True
-                ucrNudNumberofRows.Visible = ucrChkNoOfRowsOrColumns.Checked
-            End If
-        End If
+        ' If ucrChkIncludeFacets.Checked Then
+        '    If (ucrChkMargin.Checked OrElse ucrChkFreeSpace.Checked OrElse (Not ucr2ndFactorReceiver.IsEmpty)) Then
+        '        ucrChkNoOfRowsOrColumns.Checked = False
+        '        ucrChkNoOfRowsOrColumns.Visible = False
+        '        ucrNudNumberofRows.Visible = False
+        '    Else
+        '        ucrChkNoOfRowsOrColumns.Visible = True
+        '        ucrNudNumberofRows.Visible = ucrChkNoOfRowsOrColumns.Checked
+        '    End If
+        'End If
     End Sub
 
     Private Sub ucr1stFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucr1stFactorReceiver.SelectionChanged
@@ -391,11 +408,11 @@ Public Class sdgPlots
     End Sub
 
     Private Sub ucrChkMargin_CheckedChanged() Handles ucrChkMargin.ControlValueChanged
-        If ucrChkMargin.Checked Then
-            clsRFacetFunction.AddParameter("margins", "TRUE")
-        Else
-            clsRFacetFunction.RemoveParameterByName("margins")
-        End If
+        'If ucrChkMargin.Checked Then
+        '    clsRFacetFunction.AddParameter("margins", "TRUE")
+        'Else
+        '    clsRFacetFunction.RemoveParameterByName("margins")
+        'End If
         FacetsNumberOfRowsOrColumns()
         SetFacets()
     End Sub
@@ -445,17 +462,6 @@ Public Class sdgPlots
         ucrPlotsAdditionalLayers.SetRSyntax(clsRsyntax)
     End Sub
 
-
-    Private Sub ucrInputGraphTitle_NameChanged() Handles ucrInputGraphTitle.NameChanged
-        'If Not ucrInputGraphTitle.IsEmpty Then
-        '    clsGraphTitleFunction.SetRCommand("ggtitle")
-        '    clsGraphTitleFunction.AddParameter("label", Chr(34) & ucrInputGraphTitle.GetText() & Chr(34))
-        '    clsRsyntax.AddOperatorParameter("ggtitle", clsRFunc:=clsGraphTitleFunction)
-        'Else
-        '    clsRsyntax.RemoveOperatorParameter("ggtitle")
-        'End If
-    End Sub
-
     Public Property bLayersDefaultIsGlobal As Boolean
         'Warning: This is used to decide whether the default setting of the first created layer should be to apply aes on all layers. Indeed, coming from plotoptions, it might be that the first layer is the "first additional layer" (don't want to ApplyOnAllLayers), whereas coming from generalforgraphics, the first layer is the first layer. This should be eliminated when the plotoptions sdg will be edited to have as first layer the non-editable layer coming from the main dlg. See issue #1948
         'It is only used in the set defaults here, which sets it to false
@@ -469,13 +475,13 @@ Public Class sdgPlots
     End Property
 
     Private Sub ucrInputLegend_NameChanged() Handles ucrInputLegend.NameChanged
-        If rdoLegendTitleCustom.Checked AndAlso (Not ucrInputLegend.IsEmpty()) Then
-            clsLegendFunction.SetRCommand("labs")
-            clsLegendFunction.AddParameter("fill", Chr(34) & ucrInputLegend.GetText() & Chr(34))
-            clsRsyntax.AddOperatorParameter("labs", clsRFunc:=clsLegendFunction)
-        ElseIf rdoLegendTitleAuto.Checked Then
-            clsRsyntax.RemoveOperatorParameter("labs")
-        End If
+        '    If rdoLegendTitleCustom.Checked AndAlso (Not ucrInputLegend.IsEmpty()) Then
+
+
+        '        clsRsyntax.AddOperatorParameter("labs", clsRFunc:=clsLegendFunction)
+        '    ElseIf rdoLegendTitleAuto.Checked Then
+        '        clsRsyntax.RemoveOperatorParameter("labs")
+        '    End If
     End Sub
     'Warning/Task to be discussed: need to disable ok on dlg's when layers are not complete on subdialogues + warning message... 
     'Warning: actually this will be very hard to implement until the global aes, set from the main layer are properly communicated to plots. Global aes might fill in missing mandatory aes...
