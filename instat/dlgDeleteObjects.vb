@@ -15,11 +15,11 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat
 Imports instat.Translations
-Public Class dlgDeleteDescriptive
+Public Class dlgDeleteObjects
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
 
-    Private Sub dlgDeleteDescriptive_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub dlgDeleteObjects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -29,7 +29,7 @@ Public Class dlgDeleteDescriptive
         If bReset Then
             SetDefaults()
         End If
-        SetRCodeForControls(bReset)
+        SetRCodeforControls(bReset)
         bReset = False
         autoTranslate(Me)
     End Sub
