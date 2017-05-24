@@ -42,7 +42,6 @@ Public Class dlgRandomSample
     Private Sub SetRCodeforControls(bReset As Boolean)
         ucrNudSeed.SetRCode(clsSetSeed, bReset)
         ucrChkSetSeed.SetRCode(clsSetSeed, bReset)
-        ucrDistWithParameters.SetRCode(clsDistribtionFunction, bReset)
         ucrSaveRandomSamples.SetRCode(clsMultipleSamplesFunction, bReset)
         ucrNudNumberOfSamples.SetRCode(clsMultipleSamplesFunction, bReset)
     End Sub
@@ -57,7 +56,6 @@ Public Class dlgRandomSample
         ucrNudSeed.SetParameter(New RParameter("seed", 0))
         ucrNudSeed.SetMinMax(Integer.MinValue, Integer.MaxValue)
 
-        ucrDistWithParameters.SetParameters()
         ucrSaveRandomSamples.SetSaveTypeAsColumn()
         ucrSaveRandomSamples.SetDataFrameSelector(ucrSelectorRandomSamples)
         ucrSaveRandomSamples.SetIsComboBox()
@@ -94,9 +92,10 @@ Public Class dlgRandomSample
         clsSetSeed.AddParameter("seed", 5)
         clsSetSeed.SetRCommand("set.seed")
 
+        ucrDistWithParameters.SetRDistributions()
+        ucrDistWithParameters.SetParameters()
         clsMultipleSamplesFunction.SetRCommand("replicate")
         clsMultipleSamplesFunction.AddParameter("n", 1)
-        ucrDistWithParameters.SetRDistributions()
         clsDistribtionFunction = ucrDistWithParameters.clsCurrRFunction
         setdataframeanddistributionparameters()
         clsMultipleSamplesFunction.AddParameter("expr", clsRFunctionParameter:=clsDistribtionFunction)
@@ -145,5 +144,9 @@ Public Class dlgRandomSample
 
     Private Sub ucrSaveRandomSamples_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveRandomSamples.ControlContentsChanged, ucrSelectorRandomSamples.ControlContentsChanged, ucrChkSetSeed.ControlContentsChanged, ucrNudSeed.ControlContentsChanged, ucrSampleSize.ControlContentsChanged, ucrDistWithParameters.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrSelectorRandomSamples_ControlValueChanged(ucrChangedControl As ucrCore)
+
     End Sub
 End Class
