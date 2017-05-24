@@ -94,7 +94,7 @@ Public Class dlgRandomSample
     Private Sub TestOKEnabled()
         If ucrDistWithParameters.bParametersFilled AndAlso ucrNudNumberOfSamples.GetText <> "" _
             AndAlso (Not ucrChkSetSeed.Checked OrElse (ucrChkSetSeed.Checked AndAlso ucrNudSeed.GetText <> "")) _
-            AndAlso ((ucrNudNumberOfSamples.GetText = 1 AndAlso ucrSaveRandomSamples.IsComplete) OrElse (ucrNudNumberOfSamples.GetText <> 1 AndAlso ucrSaveRandomSamples.IsComplete)) Then
+            AndAlso ucrSaveRandomSamples.IsComplete Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
