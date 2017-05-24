@@ -74,9 +74,10 @@ Public Class dlgRandomSample
 
         clsMultipleSamplesFunction.SetRCommand("replicate")
         clsMultipleSamplesFunction.AddParameter("n", 1)
-        clsMultipleSamplesFunction.AddParameter("expr", clsRFunctionParameter:=clsDistribtionFunction)
 
         clsDistribtionFunction = ucrDistWithParameters.clsCurrRFunction
+
+        clsMultipleSamplesFunction.AddParameter("expr", clsRFunctionParameter:=clsDistribtionFunction)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsMultipleSamplesFunction)
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSaveRandomSamples.GetText, strTempDataframe:=ucrSelectorRandomSamples.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveRandomSamples.GetText, bAssignToIsPrefix:=True)
