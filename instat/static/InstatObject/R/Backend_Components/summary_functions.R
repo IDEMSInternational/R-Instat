@@ -345,7 +345,8 @@ summary_median <- function(x, na.rm = FALSE,...) {
   return(median(x, na.rm = na.rm))
 }
 
-instat_object$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, row_factors = c(), column_factors = c(), store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, return_output = TRUE, treat_columns_as_factor = FALSE, page_by = "default", as_html = TRUE, signif_fig = 2, na_display = "", weights = NULL, margin_name = "MARGIN", caption = NULL, ...) {
+instat_object$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, row_factors = c(), column_factors = c(), store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, return_output = TRUE, treat_columns_as_factor = FALSE, page_by = "default", as_html = TRUE, signif_fig = 2, na_display = "", weights = NULL, caption = NULL, ...) {
+  summaries_display <- sapply(summaries, function(x) ifelse(startsWith(x, "summary_"), substring(x, 9), x))
   if(!is.null(page_by)) {
     if(page_by == "default") {
       if(length(columns_to_summarise) > 1 && length(summaries) > 1) {
@@ -364,6 +365,7 @@ instat_object$set("public", "summary_table", function(data_name, columns_to_summ
     }
   }
   if(include_margins) {
+    margin_name <- ifelse(length(summaries) == 1, summaries_display, margin_name)
     if(length(columns_to_summarise) > 1 && length(summaries) > 1 && !setequal(page_by, c("summaries", "variables"))) {
       warning("Multiple summaries and variables with margins is currently only implemented through multiple pages. Overriding page_by to be c(summaries, variables)")
       page_by <- c("summaries", "variables")
@@ -377,7 +379,6 @@ instat_object$set("public", "summary_table", function(data_name, columns_to_summ
       page_by <- "variables"
     }
   }
-  summaries_display <- sapply(summaries, function(x) ifelse(startsWith(x, "summary_"), substring(x, 9), x))
   if(length(page_by) > 0) {
     out <- list()
     if(length(page_by) == 1 && page_by == "summaries") {
@@ -507,12 +508,14 @@ instat_object$set("public", "summary_table", function(data_name, columns_to_summ
         }
         else {
           spanner_data <- unique(cell_values[column_factors])
-          names(shaped_cell_values) <- c(row_factors, as.character(spanner_data[[length(spanner_data)]]))
+          col_names <- c(row_factors, as.character(spanner_data[[length(spanner_data)]]))
+          if(include_margins) {
+            col_names <- c(col_names, margin_name)
+          }
+          names(shaped_cell_values) <- col_names
           if(length(column_factors) == 1) {
             cgroup <- c(rep("", length(row_factors)), column_factors)
             n.cgroup <- c(rep(1, length(row_factors)), nrow(spanner_data))
-            print(cgroup)
-            print(n.cgroup)
           }
           else if(length(column_factors) > 1) {
             # removes duplicate rows which exist when row factors present
@@ -526,7 +529,15 @@ instat_object$set("public", "summary_table", function(data_name, columns_to_summ
             cgroup <- t(matrix(values, ncol = length(column_factors) - 1))
             n.cgroup <- t(matrix(lengths, ncol = length(column_factors) - 1))
           }
-          return(htmlTable::htmlTable(shaped_cell_values, caption = caption, total = include_margins, align = align, tfoot = notes, cgroup = cgroup, n.cgroup = n.cgroup, ... = ...))
+          css.cell <- ""
+          if(include_margins) {
+            cgroup[[length(cgroup) + 1]] <- ""
+            n.cgroup[[length(n.cgroup) + 1]] <- 1
+            css.cell <- matrix("", nrow = nrow(shaped_cell_values), ncol = ncol(shaped_cell_values))
+            css.cell[ , ncol(css.cell)] <- "font-weight: 900;"
+            css.cell[nrow(css.cell), ] <- "border-top: 1px solid #BEBEBE; font-weight: 900;"
+          }
+          return(htmlTable::htmlTable(shaped_cell_values, caption = caption, total = FALSE, align = align, tfoot = notes, cgroup = cgroup, n.cgroup = n.cgroup, css.cell = css.cell, ... = ...))
         }
       }
       else return(shaped_cell_values)
