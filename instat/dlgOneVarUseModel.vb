@@ -45,11 +45,12 @@ Public Class dlgOneVarUseModel
         ucrReceiver.SetParameterIsRFunction()
         ucrReceiver.SetMeAsReceiver()
 
+
         ucrNewDataframeName.SetPrefix("UseModel")
         ucrNewDataframeName.SetDataFrameSelector(ucrSelector.ucrAvailableDataFrames)
         ucrNewDataframeName.SetSaveTypeAsModel()
         ucrNewDataframeName.SetIsComboBox()
-        ucrNewDataframeName.SetCheckBoxText("Save to DataFrame")
+        ucrNewDataframeName.SetCheckBoxText("Save Model")
         ucrNewDataframeName.SetAssignToIfUncheckedValue("last_model")
 
         ucrSaveObjects.SetName("bootstrap")
@@ -63,7 +64,7 @@ Public Class dlgOneVarUseModel
         ucrChkProduceBootstrap.SetText("Produce Bootstrap")
         ucrChkProduceBootstrap.SetLinkedDisplayControl(cmdBootstrapOptions)
 
-
+        'This part is temporary for now
         sdgOneVarUseModBootstrap.InitialiseDialog()
         sdgOneVarUseModFit.InitialiseDialog()
         sdgOneVarUseModBootstrap.SetMyBootFunction(clsRbootFunction)
@@ -84,6 +85,7 @@ Public Class dlgOneVarUseModel
         sdgOneVarUseModBootstrap.SetDefaults()
         sdgOneVarUseModFit.SetDefaults()
 
+
         clsSeqFunction.SetRCommand("seq")
         clsSeqFunction.AddParameter("from", 0)
         clsSeqFunction.AddParameter("to", 1)
@@ -94,7 +96,7 @@ Public Class dlgOneVarUseModel
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsQuantileFunction)
 
-        ucrBase.clsRsyntax.SetAssignTo(ucrNewDataframeName.GetText, strTempDataframe:=ucrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        ucrBase.clsRsyntax.SetAssignTo(ucrNewDataframeName.GetText, strTempModel:="last_model", strTempDataframe:=ucrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -148,8 +150,10 @@ Public Class dlgOneVarUseModel
     Private Sub ucrChkProduceBootstrap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkProduceBootstrap.ControlValueChanged
         If ucrChkProduceBootstrap.Checked Then
             clsQuantileFunction.AddParameter("x", clsRFunctionParameter:=clsRbootFunction)
+            cmdBootstrapOptions.Visible = True
         Else
             clsQuantileFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiver.GetVariables())
+            cmdBootstrapOptions.Visible = False
         End If
     End Sub
 
