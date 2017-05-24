@@ -59,7 +59,7 @@ Public Class dlgRowSummary
         ucrSaveResults.SetPrefix("row_summary")
         ucrSaveResults.SetSaveTypeAsColumn()
         ucrSaveResults.SetDataFrameSelector(ucrSelectorForRowSummaries.ucrAvailableDataFrames)
-        ucrSaveResults.SetLabelText("Save Result:")
+        ucrSaveResults.SetLabelText("New Column Name:")
         ucrSaveResults.SetIsComboBox()
     End Sub
 

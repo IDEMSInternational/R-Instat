@@ -187,7 +187,7 @@ Partial Class dlgRowSummary
         '
         Me.ucrSaveResults.Location = New System.Drawing.Point(10, 271)
         Me.ucrSaveResults.Name = "ucrSaveResults"
-        Me.ucrSaveResults.Size = New System.Drawing.Size(254, 24)
+        Me.ucrSaveResults.Size = New System.Drawing.Size(269, 24)
         Me.ucrSaveResults.TabIndex = 4
         '
         'ucrSelectorForRowSummaries
