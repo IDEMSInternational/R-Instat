@@ -20,7 +20,7 @@ Public Class dlgViewFactorLabels
     Private bReset As Boolean = True
     Private clsViewFunction, clsSelect As RFunction
 
-    Private Sub dlgFactorLabels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub dlgLabelAndLevels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
@@ -37,16 +37,16 @@ Public Class dlgViewFactorLabels
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 517
 
-        ucrReceiverFactorColumns.SetParameter(New RParameter("x", 1))
-        ucrReceiverFactorColumns.SetParameterIsString()
-        ucrReceiverFactorColumns.SetParameterIncludeArgumentName(False)
-        ucrReceiverFactorColumns.bWithQuotes = False
-        ucrReceiverFactorColumns.SetIncludedDataTypes({"factor", "numeric"})
-        ucrReceiverFactorColumns.Selector = ucrSelectorViewFactorLabels
-        ucrReceiverFactorColumns.SetMeAsReceiver()
+        ucrReceiverVariables.SetParameter(New RParameter("x", 1))
+        ucrReceiverVariables.SetParameterIsString()
+        ucrReceiverVariables.SetParameterIncludeArgumentName(False)
+        ucrReceiverVariables.bWithQuotes = False
+        ucrReceiverVariables.SetIncludedDataTypes({"factor", "numeric"})
+        ucrReceiverVariables.Selector = ucrSelectorViewLabelsAndLevels
+        ucrReceiverVariables.SetMeAsReceiver()
 
-        ucrSelectorViewFactorLabels.SetParameter(New RParameter(".data", 0))
-        ucrSelectorViewFactorLabels.SetParameterIsrfunction()
+        ucrSelectorViewLabelsAndLevels.SetParameter(New RParameter(".data", 0))
+        ucrSelectorViewLabelsAndLevels.SetParameterIsrfunction()
 
         ucrChkShowLabels.SetParameter(New RParameter("show.labels", 1))
         ucrChkShowLabels.SetText("Show Variable Labels")
@@ -90,7 +90,7 @@ Public Class dlgViewFactorLabels
         clsSelect = New RFunction
 
         'Reset
-        ucrSelectorViewFactorLabels.Reset()
+        ucrSelectorViewLabelsAndLevels.Reset()
         'Defining the function
         clsViewFunction.SetPackageName("sjPlot")
         clsViewFunction.SetRCommand("view_df")
@@ -114,12 +114,12 @@ Public Class dlgViewFactorLabels
         ucrChkShowPercentage.SetRCode(clsViewFunction, bReset)
         ucrChkShowType.SetRCode(clsViewFunction, bReset)
         ucrChkShowValues.SetRCode(clsViewFunction, bReset)
-        ucrReceiverFactorColumns.SetRCode(clsSelect, bReset)
-        ucrSelectorViewFactorLabels.SetRCode(clsSelect, bReset)
+        ucrReceiverVariables.SetRCode(clsSelect, bReset)
+        ucrSelectorViewLabelsAndLevels.SetRCode(clsSelect, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        If (Not (ucrReceiverFactorColumns.IsEmpty) AndAlso (ucrChkShowLabels.Checked OrElse ucrChkShowType.Checked OrElse ucrChkShowValues.Checked OrElse ucrChkShowFrequencies.Checked OrElse ucrChkShowPercentage.Checked)) Then
+        If (Not (ucrReceiverVariables.IsEmpty) AndAlso (ucrChkShowLabels.Checked OrElse ucrChkShowType.Checked OrElse ucrChkShowValues.Checked OrElse ucrChkShowFrequencies.Checked OrElse ucrChkShowPercentage.Checked)) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -132,7 +132,7 @@ Public Class dlgViewFactorLabels
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverFactorColumns_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactorColumns.ControlContentsChanged, ucrChkShowFrequencies.ControlContentsChanged, ucrChkShowLabels.ControlContentsChanged, ucrChkShowPercentage.ControlContentsChanged, ucrChkShowType.ControlContentsChanged, ucrChkShowValues.ControlContentsChanged
+    Private Sub ucrReceiverFactorColumns_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariables.ControlContentsChanged, ucrChkShowFrequencies.ControlContentsChanged, ucrChkShowLabels.ControlContentsChanged, ucrChkShowPercentage.ControlContentsChanged, ucrChkShowType.ControlContentsChanged, ucrChkShowValues.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
