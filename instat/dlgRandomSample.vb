@@ -13,6 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 
 Public Class dlgRandomSample
@@ -21,7 +22,6 @@ Public Class dlgRandomSample
     Private clsDistributionFunction As New RFunction
     Private clsSetSeed As New RFunction
     Private bReset As Boolean = True
-    Private bUpdateBy As Boolean = False
 
     Private Sub dlgRandomSample_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -149,5 +149,9 @@ Public Class dlgRandomSample
 
     Private Sub ucrSaveRandomSamples_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveRandomSamples.ControlContentsChanged, ucrSelectorRandomSamples.ControlContentsChanged, ucrChkSetSeed.ControlContentsChanged, ucrNudSeed.ControlContentsChanged, ucrSampleSize.ControlContentsChanged, ucrDistWithParameters.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrSelectorRandomSamples_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorRandomSamples.ControlValueChanged
+        SetDataFrameAndDistributionParameters()
     End Sub
 End Class
