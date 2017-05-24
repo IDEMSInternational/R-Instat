@@ -389,18 +389,18 @@ instat_object$set("public", "summary_table", function(data_name, columns_to_summ
     out <- list()
     if(length(page_by) == 1 && page_by == "summaries") {
       for(i in seq_along(summaries)) {
-        out[[paste(summaries_display[i], columns_to_summarise)]] <- self$summary_table(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries[i], factors = factors, n_column_factors = n_column_factors, store_results = store_results, drop = drop, na.rm = na.rm, summary_name = summary_name, include_margins = include_margins, return_output = return_output, treat_columns_as_factor = treat_columns_as_factor, page_by = "default", as_html = as_html, weights = weights, ... = ...)
+        out[[paste(summaries_display[i], columns_to_summarise)]] <- self$summary_table(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries[i], factors = factors, n_column_factors = n_column_factors, store_results = store_results, drop = drop, na.rm = na.rm, summary_name = summary_name, include_margins = include_margins, return_output = return_output, treat_columns_as_factor = treat_columns_as_factor, page_by = "default", as_html = as_html, weights = weights, na_display = na_display, ... = ...)
       }
     }
     else if(length(page_by) == 1 && page_by == "variables") {
       for(i in seq_along(columns_to_summarise)) {
-        out[[paste(summaries_display, columns_to_summarise[i])]] <- self$summary_table(data_name = data_name, columns_to_summarise = columns_to_summarise[i], summaries = summaries, factors = factors, n_column_factors = n_column_factors, store_results = store_results, drop = drop, na.rm = na.rm, summary_name = summary_name, include_margins = include_margins, return_output = return_output, treat_columns_as_factor = treat_columns_as_factor, page_by = "default", as_html = as_html, weights = weights, ... = ...)
+        out[[paste(summaries_display, columns_to_summarise[i])]] <- self$summary_table(data_name = data_name, columns_to_summarise = columns_to_summarise[i], summaries = summaries, factors = factors, n_column_factors = n_column_factors, store_results = store_results, drop = drop, na.rm = na.rm, summary_name = summary_name, include_margins = include_margins, return_output = return_output, treat_columns_as_factor = treat_columns_as_factor, page_by = "default", as_html = as_html, weights = weights, na_display = na_display, ... = ...)
       }
     }
     else if(length(page_by) == 2  && all(page_by %in% c("variables", "summaries"))) {
       for(i in seq_along(columns_to_summarise)) {
         for(j in seq_along(summaries)) {
-          out[[paste(summaries_display[j], columns_to_summarise[i])]] <- self$summary_table(data_name = data_name, columns_to_summarise = columns_to_summarise[i], summaries = summaries[j], factors = factors, n_column_factors = n_column_factors, store_results = store_results, drop = drop, na.rm = na.rm, summary_name = summary_name, include_margins = include_margins, return_output = return_output, treat_columns_as_factor = treat_columns_as_factor, page_by = "default", as_html = as_html, weights = weights, ... = ...)
+          out[[paste(summaries_display[j], columns_to_summarise[i])]] <- self$summary_table(data_name = data_name, columns_to_summarise = columns_to_summarise[i], summaries = summaries[j], factors = factors, n_column_factors = n_column_factors, store_results = store_results, drop = drop, na.rm = na.rm, summary_name = summary_name, include_margins = include_margins, return_output = return_output, treat_columns_as_factor = treat_columns_as_factor, page_by = "default", as_html = as_html, weights = weights, na_display = na_display, ... = ...)
         }
       }
     }
@@ -490,7 +490,6 @@ instat_object$set("public", "summary_table", function(data_name, columns_to_summ
     }
     else align <- paste(rep("c", ncol(shaped_cell_values)))
     shaped_cell_values <- convert_to_character_matrix(shaped_cell_values, decimal_places = rep(signif_fig, ncol(shaped_cell_values)), na_display = na_display, check.names = FALSE)
-    shaped_cell_values[is.na(shaped_cell_values)] <- na_display
     if(return_output) {
       if(is.null(caption)) {
         if(length(columns_to_summarise) > 1 && length(summaries) > 1) {
