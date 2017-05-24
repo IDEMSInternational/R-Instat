@@ -267,6 +267,11 @@ Public Class dlgTransformClimatic
     End Sub
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
+        'If Not ucrReceiverStation.IsEmpty Then
+        '    clsRTransform.AddParameter("manipulations", clsRFunctionParameter:=clsTransformManipulationsFunc)
+
+        '    strGroupByCalcFrom = "list(" & strCurrDataName & "=" & ucrReceiverStation.GetVariableNames() & ")"
+        'Else
         clsRTransform.SetAssignTo("transform_calculation")
     End Sub
 
@@ -288,7 +293,7 @@ Public Class dlgTransformClimatic
         clsRTransform.AddParameter("function_exp", Chr(34) & clsRRollFuncExpr.ToScript.ToString & Chr(34))
     End Sub
 
-    Private Sub ucrValuesUnder_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrChkValuesUnderThreshold.ControlContentsChanged
+    Private Sub ucrValuesUnder_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrChkValuesUnderThreshold.ControlContentsChanged, ucrInputThreshold.ControlContentsChanged
         If ucrChkValuesUnderThreshold.Checked Then
             strValuesUnder = "<"
         Else
@@ -313,7 +318,13 @@ Public Class dlgTransformClimatic
         'ElseIf Not ucrReceiverYear.IsEmpty Then
         '    strGroupByCalcFrom = "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames() & ")"
         If Not ucrReceiverStation.IsEmpty Then
+            clsTransfornGroupByFunc.SetAssignTo("grouping")
+            clsRTransform.AddParameter("manipulations", clsRFunctionParameter:=clsTransformManipulationsFunc)
+
             strGroupByCalcFrom = "list(" & strCurrDataName & "=" & ucrReceiverStation.GetVariableNames() & ")"
+        Else
+            clsRTransform.RemoveParameterByName("manipulations")
+
         End If
         If strGroupByCalcFrom <> "" Then
             clsTransfornGroupByFunc.AddParameter("calculated_from", strGroupByCalcFrom)
