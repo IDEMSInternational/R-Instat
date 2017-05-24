@@ -24,6 +24,7 @@ Public Class dlgBarAndPieChart
 
     Private clsGraphTitleFunction As New RFunction
     Private clsLegendFunction As New RFunction
+    Private clsRFacetFunction As New RFunction
 
     Private bReset As Boolean = True
     Private bFirstLoad As Boolean = True
@@ -151,15 +152,6 @@ Public Class dlgBarAndPieChart
         clsRgeomBarFunction.SetRCommand("geom_bar")
 
 
-        clsGraphTitleFunction.SetPackageName("ggplot2")
-        clsGraphTitleFunction.SetRCommand("ggtitle")
-        clsBaseOperator.AddParameter("ggtile", clsRFunctionParameter:=clsGraphTitleFunction)
-
-        clsLegendFunction.SetPackageName("ggplot2")
-        clsLegendFunction.SetRCommand("labs")
-        clsBaseOperator.AddParameter("ledendtitle", clsRFunctionParameter:=clsLegendFunction)
-
-
 
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
@@ -195,7 +187,7 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetRFunction(clsBaseOperator, clsGraphTitleFunction, clsLegendFunction, bResetSubdialog)
+        sdgPlots.SetRFunction(clsBaseOperator, clsGraphTitleFunction, clsLegendFunction, clsRFacetFunction, bResetSubdialog)
         sdgPlots.SetDataFrame(strNewDataFrame:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         bResetSubdialog = False
         sdgPlots.ShowDialog()
