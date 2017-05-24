@@ -146,7 +146,7 @@ Public Class dlgJitter
         clsRunif.AddParameter("n", ucrSelectorForJitter.ucrAvailableDataFrames.iDataFrameLength)
     End Sub
 
-    Private Sub ucrSelectorForJitter_DataFrameChanged() Handles ucrSelectorForJitter.DataFrameChanged
+    Private Sub ucrSelectorForJitter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForJitter.ControlValueChanged
         LengthOfDataset()
     End Sub
 End Class
