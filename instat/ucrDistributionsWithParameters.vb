@@ -23,7 +23,6 @@ Public Class ucrDistributionsWithParameters
     Public bParametersFilled As Boolean = False
 
     Private Sub ucrDistributionsWithParameters_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        SetParameters()
         'temp disabled
         ucrInputParameter4.Visible = False
         lblParameter4.Visible = False
