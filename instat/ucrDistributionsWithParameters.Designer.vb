@@ -46,7 +46,7 @@ Partial Class ucrDistributionsWithParameters
         'lblParameter1
         '
         Me.lblParameter1.AutoSize = True
-        Me.lblParameter1.Location = New System.Drawing.Point(9, 76)
+        Me.lblParameter1.Location = New System.Drawing.Point(9, 72)
         Me.lblParameter1.Name = "lblParameter1"
         Me.lblParameter1.Size = New System.Drawing.Size(0, 13)
         Me.lblParameter1.TabIndex = 3
@@ -54,7 +54,7 @@ Partial Class ucrDistributionsWithParameters
         'lblParameter2
         '
         Me.lblParameter2.AutoSize = True
-        Me.lblParameter2.Location = New System.Drawing.Point(9, 105)
+        Me.lblParameter2.Location = New System.Drawing.Point(9, 101)
         Me.lblParameter2.Name = "lblParameter2"
         Me.lblParameter2.Size = New System.Drawing.Size(0, 13)
         Me.lblParameter2.TabIndex = 4
@@ -62,7 +62,7 @@ Partial Class ucrDistributionsWithParameters
         'lblParameter3
         '
         Me.lblParameter3.AutoSize = True
-        Me.lblParameter3.Location = New System.Drawing.Point(9, 135)
+        Me.lblParameter3.Location = New System.Drawing.Point(9, 128)
         Me.lblParameter3.Name = "lblParameter3"
         Me.lblParameter3.Size = New System.Drawing.Size(0, 13)
         Me.lblParameter3.TabIndex = 5
@@ -70,7 +70,7 @@ Partial Class ucrDistributionsWithParameters
         'lblParameter4
         '
         Me.lblParameter4.AutoSize = True
-        Me.lblParameter4.Location = New System.Drawing.Point(9, 165)
+        Me.lblParameter4.Location = New System.Drawing.Point(9, 155)
         Me.lblParameter4.Name = "lblParameter4"
         Me.lblParameter4.Size = New System.Drawing.Size(0, 13)
         Me.lblParameter4.TabIndex = 9
