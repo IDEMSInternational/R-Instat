@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgTransformClimatic
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
-    Private clsRTransform, clsRRollFuncExpr, clsMatchFun As New RFunction
+    Private clsRTransform, clsRRollFuncExpr, clsMatchFun, clsTransformManipulationsFunc, clsTransfornGroupByFunc As New RFunction
     Private clsRollFunction, clsSpellFunction, clsWaterBalanceFunction As New RFunction
     Private strCurrDataName As String = ""
     Private strValuesUnder As String = ">="
@@ -74,6 +74,7 @@ Public Class dlgTransformClimatic
         'clsRSumFuncExpr.SetRCommand("rollapply")
 
         'clsMatchFun.SetRCommand("match.fun")
+
 
         ucrPnlTransform.AddRadioButton(rdoMoving)
         ucrPnlTransform.AddRadioButton(rdoCount)
@@ -153,7 +154,8 @@ Public Class dlgTransformClimatic
         clsRollFunction = New RFunction
         clsSpellFunction = New RFunction
         clsWaterBalanceFunction = New RFunction
-
+        clsTransformManipulationsFunc = New RFunction
+        clsTransfornGroupByFunc = New RFunction
         'ucrSaveTransform.Reset()
         ucrSelectorTransform.Reset()
         ucrReceiverDate.SetMeAsReceiver()
@@ -171,6 +173,13 @@ Public Class dlgTransformClimatic
         grpSpells.Enabled = False
         grpWaterbalance.Enabled = False
 
+        clsTransformManipulationsFunc.SetRCommand("list")
+        clsTransformManipulationsFunc.AddParameter("group_by", clsRFunctionParameter:=clsTransfornGroupByFunc, bIncludeArgumentName:=False)
+
+        clsTransfornGroupByFunc.SetRCommand("instat_calculation$new")
+        clsTransfornGroupByFunc.AddParameter("type", Chr(34) & "by" & Chr(34))
+        clsTransfornGroupByFunc.SetAssignTo("grouping")
+
         'clsRTransform.SetRCommand("instat_calculation$new")
         'clsRTransform.SetAssignTo("transform_calculation")
         clsRRollFuncExpr.SetPackageName("zoo")
@@ -187,6 +196,8 @@ Public Class dlgTransformClimatic
         clsRTransform.AddParameter("function_exp", Chr(34) & clsRRollFuncExpr.ToScript.ToString & Chr(34))
         clsRTransform.AddParameter("type", Chr(34) & "calculation" & Chr(34))
         clsRTransform.AddParameter("result_name", Chr(34) & "moving" & Chr(34))
+        clsRTransform.AddParameter("manipulations", clsRFunctionParameter:=clsTransformManipulationsFunc)
+
         'This might not Beep right
         'clsRTransform.AddParameter("result_name", Chr(34) & ucrSaveTransform.ucrInputTextSave.GetText & Chr(34))
         clsRTransform.AddParameter("save", 2)
@@ -289,5 +300,28 @@ Public Class dlgTransformClimatic
 
     Private Sub ucrReceiverDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged ' add more teskok controls
         TestOkEnabled()
+    End Sub
+
+    Private Sub SetGroupByFuncCalcFrom()
+        Dim strCurrDataName As String = ""
+        Dim strGroupByCalcFrom As String = ""
+
+        strCurrDataName = Chr(34) & ucrSelectorTransform.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34)
+
+        'If Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverStation.IsEmpty Then
+        '    strGroupByCalcFrom = "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames() & ", " & strCurrDataName & "=" & ucrReceiverStations.GetVariableNames() & ")"
+        'ElseIf Not ucrReceiverYear.IsEmpty Then
+        '    strGroupByCalcFrom = "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames() & ")"
+        If Not ucrReceiverStation.IsEmpty Then
+            strGroupByCalcFrom = "list(" & strCurrDataName & "=" & ucrReceiverStation.GetVariableNames() & ")"
+        End If
+        If strGroupByCalcFrom <> "" Then
+            clsTransfornGroupByFunc.AddParameter("calculated_from", strGroupByCalcFrom)
+        Else
+            clsTransfornGroupByFunc.RemoveParameterByName("calculated_from")
+        End If
+    End Sub
+    Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
+        SetGroupByFuncCalcFrom()
     End Sub
 End Class
