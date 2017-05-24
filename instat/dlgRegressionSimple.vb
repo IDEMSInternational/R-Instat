@@ -352,7 +352,7 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrResponse.IsEmpty() AndAlso Not ucrExplanatory.IsEmpty() AndAlso ucrFamily.Enabled AndAlso ucrFamily.cboDistributions.Text <> "" AndAlso (chkSaveModel.Checked AndAlso Not ucrModelName.IsEmpty() OrElse Not chkSaveModel.Checked) Then
+        If Not ucrResponse.IsEmpty() AndAlso Not ucrExplanatory.IsEmpty() AndAlso ucrFamily.Enabled AndAlso ucrFamily.ucrInputDistributions.Text <> "" AndAlso (chkSaveModel.Checked AndAlso Not ucrModelName.IsEmpty() OrElse Not chkSaveModel.Checked) Then
             ucrModelPreview.SetName(clsModel.ToScript)
             '            If rdoSpecific.Checked AndAlso (ucrFamily.clsCurrDistribution.strNameTag = "Poisson" OrElse ucrFamily.clsCurrDistribution.strNameTag = "Binomial") AndAlso Not (ucrLevel1.IsEmpty OrElse ucrLevel2.IsEmpty) Then
             ucrBase.OKEnabled(True)
@@ -402,7 +402,7 @@ Public Class dlgRegressionSimple
                 End If
             Else
                 If ucrFamily.lstCurrentDistributions.Count = 0 OrElse ucrResponse.IsEmpty() Then
-                    ucrFamily.cboDistributions.Text = ""
+                    ucrFamily.ucrInputDistributions.Text = ""
                     cmdModelOptions.Enabled = False
                 Else
                     cmdModelOptions.Enabled = True
@@ -506,9 +506,9 @@ Public Class dlgRegressionSimple
         End If
     End Sub
 
-    Private Sub ucrFamily_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrFamily.cboDistributionsIndexChanged
+    Private Sub ucrFamily_cboDistributionsIndexChanged() Handles ucrFamily.ControlValueChanged
         sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
-        sdgModelOptions.ucrFamily.cboDistributions.SelectedIndex = sdgModelOptions.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
+        sdgModelOptions.ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = sdgModelOptions.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
         sdgModelOptions.RestrictLink()
         ExplanatoryFunctionSelect()
         SetRCode()
@@ -518,7 +518,7 @@ Public Class dlgRegressionSimple
 
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
         sdgModelOptions.ShowDialog()
-        ucrFamily.cboDistributions.SelectedIndex = ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = sdgModelOptions.ucrFamily.clsCurrDistribution.strNameTag)
+        ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = sdgModelOptions.ucrFamily.clsCurrDistribution.strNameTag)
         Display()
     End Sub
 
@@ -624,7 +624,7 @@ Public Class dlgRegressionSimple
         Else
             ucrFamily.SetExactDistributions()
         End If
-        ucrFamily.cboDistributions.ResetText()
+        ucrFamily.ucrInputDistributions.ResetText()
         Display()
         SetRCode()
         TestOKEnabled()
