@@ -31,13 +31,39 @@ Public Class dlgDescribeTwoVarGraph
     End Sub
 
     Private Sub SetDefaults()
+        clsRGGplotFunction = New RFunction
+        clsRBoxPlotGeom = New RFunction
+        clsRScatterPlotGeom = New RFunction
+        clsRLinePlotGeom = New RFunction
+        clsRSummaryAesFunction = New RFunction
+        clsRStatSummary = New RFunction
+        clsRFacet = New RFunction
+        clsRBoxAesFunction = New RFunction
+        clsRBoxAesFunction2 = New RFunction
+        clsRScatterAesFunction = New RFunction
+        clsRScatterAesFunction2 = New RFunction
+        clsRDotPlotGeom = New RFunction
+        clsRBarPlotGeom = New RFunction
+        clsRBarAesFunction = New RFunction
+        clsRDotAesFunction = New RFunction
+        clsRDotAesFunction2 = New RFunction
+        clsRFrequencyPolygonGeom = New RFunction
+        clsRHistogramGeom = New RFunction
+        clsRDensityPlotGeom = New RFunction
+        clsRFreqPolyAesFunction = New RFunction
+        clsRFreqPolyAesFunction2 = New RFunction
+        clsRHistAesFunction = New RFunction
+        clsRHistAesFunction2 = New RFunction
+        clsRDensityAesFunction = New RFunction
+        clsRDensityAesFunction2 = New RFunction
+
         ucrReceiverMultipleTwoVar.SetMeAsReceiver()
         ucrTwoVarGraphSave.Reset()
         ucrSelectorTwoVarGraph.Reset()
         ucrSelectorTwoVarGraph.Focus()
-        ucrTwoVarGraphSave.strPrefix = "TwoVariableGraph"
+        'ucrTwoVarGraphSave.strPrefix = "TwoVariableGraph"
         sdgDescribeTwoVarGraph.Initialise()
-        TestOkEnabled()
+
     End Sub
 
     Private Sub ucrTwoVarGraphSave_Load(sender As Object, e As EventArgs)
@@ -45,6 +71,7 @@ Public Class dlgDescribeTwoVarGraph
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 416
         ucrBase.clsRsyntax.SetOperation("+")
         clsRGGplotFunction.SetRCommand("ggplot")
         ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRGGplotFunction)
@@ -58,7 +85,7 @@ Public Class dlgDescribeTwoVarGraph
         clsRFacet.SetRCommand("facet_wrap")
         clsRFacet.AddParameter("facets", "~variable")
         ucrBase.clsRsyntax.AddOperatorParameter("facet_wrap", clsRFunc:=clsRFacet)
-        ucrBase.iHelpTopicID = 416
+
     End Sub
 
     Private Sub TestOkEnabled()
