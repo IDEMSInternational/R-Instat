@@ -14,11 +14,13 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class sdgTwoWayFrequencies
     Public bControlsInitialised As Boolean = False
     Public clsTwoWayTableFreq, clsTwoWayGraphFreq As New RFunction
+    Public clsGraphOperator As ROperator
+    Public bUseTitle As Boolean = True
+
     Private Sub sdgTwoWayFrequencies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
@@ -52,6 +54,7 @@ Public Class sdgTwoWayFrequencies
         ucrInputVerticalLabels.SetItems(dctVerticalPositionLabel)
         ucrInputVerticalLabels.SetRDefault(Chr(34) & "bottom" & Chr(34))
         ucrInputVerticalLabels.bUpdateRCodeFromControl = False
+
         ucrChkStack.SetParameter(New RParameter("bar.pos", 10), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "stack" & Chr(34), strNewValueIfUnchecked:=Chr(34) & "dodge" & Chr(34))
         ucrChkStack.SetText("Stack Bar Graph")
         ucrChkStack.SetRDefault(Chr(34) & "dodge" & Chr(34))
@@ -69,6 +72,7 @@ Public Class sdgTwoWayFrequencies
         ucrChkBackgroundColour.SetParameter(New RParameter("emph.total", 11), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkBackgroundColour.SetText("Totals Column/Row Background Highlighted")
         ucrChkBackgroundColour.SetRDefault("FALSE")
+
         'Setting Plot parameter
         ucrChkShowCount.SetParameter(New RParameter("show.n", 5), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkShowCount.SetText("Show Count")
@@ -110,29 +114,26 @@ Public Class sdgTwoWayFrequencies
 
         'Setting Plot parameter
         ucrPnlGraphType.AddToLinkedControls(ucrChkStack, {rdoBar}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
-        ucrSaveGraph.SetPrefix("two_way_freq")
-        ucrSaveGraph.SetSaveTypeAsGraph()
-        ucrSaveGraph.SetDataFrameSelector(dlgOneWayFrequencies.ucrSelectorOneWayFreq.ucrAvailableDataFrames)
-        ucrSaveGraph.SetCheckBoxText("Save Graph")
-        ucrSaveGraph.SetIsComboBox()
-        ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
+
+        'TODO: Investigate why when some variables are used for line graph this error is given "Breaks and labels are of different lengths"
         rdoLine.Enabled = False
         bControlsInitialised = True
     End Sub
-    'Linking the subdialogue to the functions main dialogue
-    Public Sub SetRFunction(clsNewSjtFreq As RFunction, clsNewSjpFrq As RFunction, Optional bReset As Boolean = False)
+    'Linking the subdialog to the functions main dialogue
+    Public Sub SetRCode(clsNewSjtFreq As RFunction, clsNewSjpFrq As RFunction, Optional clsNewGraphOperator As ROperator = Nothing, Optional bReset As Boolean = False, Optional bNewUseTitle As Boolean = True)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
         clsTwoWayTableFreq = clsNewSjtFreq
         clsTwoWayGraphFreq = clsNewSjpFrq
+        clsGraphOperator = clsNewGraphOperator
+        bUseTitle = bNewUseTitle
 
         'Setting Rcode for the sub dialogue
         ucrChkShowSummary.SetRCode(clsTwoWayTableFreq, bReset)
         ucrChkBackgroundColour.SetRCode(clsTwoWayTableFreq, bReset)
         ucrNudDecimalPlaces.SetRCode(clsTwoWayTableFreq, bReset)
         ucrChkMissingValues.SetRCode(clsTwoWayTableFreq, bReset)
-        ucrInputTableTitle.SetRCode(clsTwoWayTableFreq, bReset)
         ucrInputTotalsName.SetRCode(clsTwoWayTableFreq, bReset)
         ucrChkTotalColumnName.SetRCode(clsTwoWayTableFreq, bReset)
         ucrChkShowCount.SetRCode(clsTwoWayGraphFreq, bReset)
@@ -142,22 +143,28 @@ Public Class sdgTwoWayFrequencies
         ucrPnlGraphType.SetRCode(clsTwoWayGraphFreq, bReset)
         ucrInputVerticalLabels.SetRCode(clsTwoWayGraphFreq, bReset)
         ucrInputHorizontalLabels.SetRCode(clsTwoWayGraphFreq, bReset)
-        ucrInputGraphTitle.SetRCode(clsTwoWayGraphFreq, bReset)
-        ucrSaveGraph.SetRCode(clsTwoWayGraphFreq, bReset)
+
+        If bUseTitle Then
+            ucrInputTableTitle.SetRCode(clsTwoWayTableFreq, bReset)
+            ucrInputGraphTitle.SetRCode(clsTwoWayGraphFreq, bReset)
+            ucrInputTableTitle.Enabled = True
+            ucrInputGraphTitle.Enabled = True
+        Else
+            ucrInputTableTitle.SetName("")
+            ucrInputGraphTitle.SetName("")
+            ucrInputTableTitle.Enabled = False
+            ucrInputGraphTitle.Enabled = False
+        End If
     End Sub
 
     'This is a temporary solution to a known bug with sjPlot package
     'Issue posted here https://github.com/strengejacke/sjPlot/issues/227
     'This sub can be removed when this issue is resolved in sjPlot
-    Public Sub ShowValueParameter()
+    Private Sub CheckboxesForShowValues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkShowPercentage.ControlValueChanged, ucrChkShowCount.ControlValueChanged
         If (ucrChkShowPercentage.Checked = False AndAlso ucrChkShowCount.Checked = False) Then
             clsTwoWayGraphFreq.AddParameter("show.values", "FALSE")
         Else
             clsTwoWayGraphFreq.RemoveParameterByName("show.values")
         End If
-    End Sub
-
-    Private Sub CheckboxesForShowValues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkShowPercentage.ControlValueChanged, ucrChkShowCount.ControlValueChanged
-        ShowValueParameter()
     End Sub
 End Class

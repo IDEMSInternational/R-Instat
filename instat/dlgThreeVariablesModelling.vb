@@ -181,7 +181,7 @@ Public Class dlgThreeVariableModelling
                     sdgVariableTransformations.ModelFunction(False)
                 Else
                     sdgVariableTransformations.rdoIdentity.Checked = True
-                    clsModel1.AddParameter(iPosition:=0, strParameterValue:=currentReceiver.GetVariableNames(False))
+                    clsModel1.AddParameter(iPosition:=1, strParameterValue:=currentReceiver.GetVariableNames(False))
                 End If
             End If
             'Applying function to response variable 
