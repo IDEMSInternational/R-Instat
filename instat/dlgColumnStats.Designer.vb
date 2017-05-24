@@ -28,7 +28,7 @@ Partial Class dlgColumnStats
         Me.ucrChkStoreResults = New instat.ucrCheck()
         Me.ucrChkOmitMissing = New instat.ucrCheck()
         Me.ucrChkPrintOutput = New instat.ucrCheck()
-        Me.ucrChkdropUnusedLevels = New instat.ucrCheck()
+        Me.ucrChkDropUnusedLevels = New instat.ucrCheck()
         Me.cmdSummaries = New System.Windows.Forms.Button()
         Me.ucrReceiverByFactor = New instat.ucrReceiverMultiple()
         Me.ucrReceiverSelectedVariables = New instat.ucrReceiverMultiple()
@@ -60,7 +60,7 @@ Partial Class dlgColumnStats
         Me.grpOptions.Controls.Add(Me.ucrChkStoreResults)
         Me.grpOptions.Controls.Add(Me.ucrChkOmitMissing)
         Me.grpOptions.Controls.Add(Me.ucrChkPrintOutput)
-        Me.grpOptions.Controls.Add(Me.ucrChkdropUnusedLevels)
+        Me.grpOptions.Controls.Add(Me.ucrChkDropUnusedLevels)
         Me.grpOptions.Location = New System.Drawing.Point(10, 196)
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.Size = New System.Drawing.Size(160, 121)
@@ -92,13 +92,13 @@ Partial Class dlgColumnStats
         Me.ucrChkPrintOutput.Size = New System.Drawing.Size(148, 20)
         Me.ucrChkPrintOutput.TabIndex = 1
         '
-        'ucrChkdropUnusedLevels
+        'ucrChkDropUnusedLevels
         '
-        Me.ucrChkdropUnusedLevels.Checked = False
-        Me.ucrChkdropUnusedLevels.Location = New System.Drawing.Point(6, 67)
-        Me.ucrChkdropUnusedLevels.Name = "ucrChkdropUnusedLevels"
-        Me.ucrChkdropUnusedLevels.Size = New System.Drawing.Size(148, 20)
-        Me.ucrChkdropUnusedLevels.TabIndex = 2
+        Me.ucrChkDropUnusedLevels.Checked = False
+        Me.ucrChkDropUnusedLevels.Location = New System.Drawing.Point(6, 67)
+        Me.ucrChkDropUnusedLevels.Name = "ucrChkDropUnusedLevels"
+        Me.ucrChkDropUnusedLevels.Size = New System.Drawing.Size(148, 20)
+        Me.ucrChkDropUnusedLevels.TabIndex = 2
         '
         'cmdSummaries
         '
@@ -184,5 +184,5 @@ Partial Class dlgColumnStats
     Friend WithEvents ucrChkStoreResults As ucrCheck
     Friend WithEvents ucrChkOmitMissing As ucrCheck
     Friend WithEvents ucrChkPrintOutput As ucrCheck
-    Friend WithEvents ucrChkdropUnusedLevels As ucrCheck
+    Friend WithEvents ucrChkDropUnusedLevels As ucrCheck
 End Class
