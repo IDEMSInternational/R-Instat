@@ -45,6 +45,7 @@ Public Class dlgOneVarUseModel
         ucrReceiver.SetParameterIsRFunction()
         ucrReceiver.SetMeAsReceiver()
 
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         ucrNewDataframeName.SetPrefix("UseModel")
         ucrNewDataframeName.SetDataFrameSelector(ucrSelector.ucrAvailableDataFrames)
