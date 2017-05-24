@@ -72,7 +72,7 @@ Partial Class dlgOneVarUseModel
         '
         Me.ucrSaveObjects.Location = New System.Drawing.Point(239, 114)
         Me.ucrSaveObjects.Name = "ucrSaveObjects"
-        Me.ucrSaveObjects.Size = New System.Drawing.Size(237, 24)
+        Me.ucrSaveObjects.Size = New System.Drawing.Size(189, 24)
         Me.ucrSaveObjects.TabIndex = 12
         '
         'ucrNewDataframeName
@@ -115,7 +115,7 @@ Partial Class dlgOneVarUseModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(480, 291)
+        Me.ClientSize = New System.Drawing.Size(435, 291)
         Me.Controls.Add(Me.ucrChkProduceBootstrap)
         Me.Controls.Add(Me.ucrSaveObjects)
         Me.Controls.Add(Me.ucrNewDataframeName)

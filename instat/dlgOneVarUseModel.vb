@@ -38,11 +38,12 @@ Public Class dlgOneVarUseModel
         ucrBase.iHelpTopicID = 375
         ucrBase.clsRsyntax.iCallType = 2
 
+        ucrSelector.SetItemType("model")
+
         ucrReceiver.Selector = ucrSelector
         ucrReceiver.SetParameter(New RParameter("x", 1))
         ucrReceiver.SetParameterIsRFunction()
         ucrReceiver.SetMeAsReceiver()
-        ' ucrBase.clsRsyntax.SetFunction("quantile")
 
         ucrNewDataframeName.SetPrefix("UseModel")
         ucrNewDataframeName.SetDataFrameSelector(ucrSelector.ucrAvailableDataFrames)
@@ -60,9 +61,9 @@ Public Class dlgOneVarUseModel
         ucrChkProduceBootstrap.AddParameterValueFunctionNamesCondition(True, "x", "bootdist", True)
         ucrChkProduceBootstrap.AddParameterValueFunctionNamesCondition(False, "x", "bootdist", False)
         ucrChkProduceBootstrap.SetText("Produce Bootstrap")
+        ucrChkProduceBootstrap.SetLinkedDisplayControl(cmdBootstrapOptions)
 
-        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        ucrSelector.SetItemType("model")
+
         sdgOneVarUseModBootstrap.InitialiseDialog()
         sdgOneVarUseModFit.InitialiseDialog()
         sdgOneVarUseModBootstrap.SetMyBootFunction(clsRbootFunction)
@@ -77,13 +78,11 @@ Public Class dlgOneVarUseModel
         clsQuantileFunction = New RFunction
 
         ucrSelector.Reset()
+        ucrSaveObjects.Enabled = False 'for now
         ucrSaveObjects.Reset()
         ucrNewDataframeName.Reset()
         sdgOneVarUseModBootstrap.SetDefaults()
         sdgOneVarUseModFit.SetDefaults()
-
-        cmdBootstrapOptions.Visible = False
-        cmdBootstrapOptions.Visible = False
 
         clsSeqFunction.SetRCommand("seq")
         clsSeqFunction.AddParameter("from", 0)
@@ -93,8 +92,6 @@ Public Class dlgOneVarUseModel
         clsRbootFunction.SetRCommand("bootdist")
         clsQuantileFunction.AddParameter("probs", clsRFunctionParameter:=clsSeqFunction)
 
-        ' BootstrapEnabled()
-        TestOKEnabled()
         ucrBase.clsRsyntax.SetBaseRFunction(clsQuantileFunction)
 
         ucrBase.clsRsyntax.SetAssignTo(ucrNewDataframeName.GetText, strTempDataframe:=ucrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
@@ -130,18 +127,8 @@ Public Class dlgOneVarUseModel
     'End If
     'End Sub
 
-    'Private Sub BootstrapEnabled()
-    '    If Not ucrReceiver.IsEmpty Then
-    '        ucrChkProduceBootstrap.Enabled = True
-    '    Else
-    '        ucrChkProduceBootstrap.Enabled = False
-    '        ucrSaveObjects.Enabled = False
-    '    End If
-    'End Sub
-
     Private Sub cmdBootstrapOptions_Click(sender As Object, e As EventArgs) Handles cmdBootstrapOptions.Click
         sdgOneVarUseModBootstrap.ShowDialog()
-        ' BootstrapEnabled()
     End Sub
 
     Private Sub cmdFitModel_Click(sender As Object, e As EventArgs) Handles cmdFitModel.Click
@@ -167,7 +154,6 @@ Public Class dlgOneVarUseModel
     End Sub
 
     Private Sub ucrReceiver_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiver.ControlContentsChanged, ucrSaveObjects.ControlContentsChanged
-        ' BootstrapEnabled()
         TestOKEnabled()
     End Sub
 End Class
