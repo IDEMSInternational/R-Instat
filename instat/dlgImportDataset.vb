@@ -331,11 +331,12 @@ Public Class dlgImportDataset
         If strFileType <> "RDS" Then
                 grdDataPreview.Show()
                 lblDataFrame.Show()
-                If strFileType = "csv" Then
-                    clsReadCSV.AddParameter("nrows", intLines)
-                ElseIf strFileType = "xlsx" Then
-                    clsReadXL.AddParameter("rows", "1:" & intLines)
-                End If
+            If strFileType = "csv" Then
+                clsReadCSV.AddParameter("nrows", intLines)
+            ElseIf strFileType = "xlsx" Then
+                'iPosition = 0 is needed because of a bug in rio::import
+                clsReadXL.AddParameter("rows", "1:" & intLines, iPosition:=0)
+            End If
                 lblCannotImport.Hide()
                 lblNoPreview.Hide()
                 If ucrInputFilePath.IsEmpty() Then

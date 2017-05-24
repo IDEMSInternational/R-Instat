@@ -37,29 +37,29 @@ Partial Class dlgRandomSample
         'lblSampleSize
         '
         Me.lblSampleSize.AutoSize = True
-        Me.lblSampleSize.Location = New System.Drawing.Point(257, 124)
+        Me.lblSampleSize.Location = New System.Drawing.Point(252, 154)
         Me.lblSampleSize.Name = "lblSampleSize"
         Me.lblSampleSize.Size = New System.Drawing.Size(68, 13)
-        Me.lblSampleSize.TabIndex = 10
+        Me.lblSampleSize.TabIndex = 6
         Me.lblSampleSize.Tag = "Sample_Size:"
         Me.lblSampleSize.Text = "Sample Size:"
         '
         'lblNumberofSamples
         '
         Me.lblNumberofSamples.AutoSize = True
-        Me.lblNumberofSamples.Location = New System.Drawing.Point(257, 98)
+        Me.lblNumberofSamples.Location = New System.Drawing.Point(252, 128)
         Me.lblNumberofSamples.Name = "lblNumberofSamples"
         Me.lblNumberofSamples.Size = New System.Drawing.Size(102, 13)
-        Me.lblNumberofSamples.TabIndex = 10
+        Me.lblNumberofSamples.TabIndex = 4
         Me.lblNumberofSamples.Tag = "Number_of_Samples:"
         Me.lblNumberofSamples.Text = "Number of Samples:"
         '
         'ucrSampleSize
         '
-        Me.ucrSampleSize.Location = New System.Drawing.Point(344, 120)
+        Me.ucrSampleSize.Location = New System.Drawing.Point(354, 152)
         Me.ucrSampleSize.Name = "ucrSampleSize"
         Me.ucrSampleSize.Size = New System.Drawing.Size(55, 23)
-        Me.ucrSampleSize.TabIndex = 13
+        Me.ucrSampleSize.TabIndex = 7
         Me.ucrSampleSize.ucrDataFrameSelector = Nothing
         '
         'ucrSelectorRandomSamples
@@ -69,60 +69,60 @@ Partial Class dlgRandomSample
         Me.ucrSelectorRandomSamples.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorRandomSamples.Name = "ucrSelectorRandomSamples"
         Me.ucrSelectorRandomSamples.Size = New System.Drawing.Size(120, 40)
-        Me.ucrSelectorRandomSamples.TabIndex = 8
+        Me.ucrSelectorRandomSamples.TabIndex = 0
         '
         'ucrDistWithParameters
         '
         Me.ucrDistWithParameters.Location = New System.Drawing.Point(10, 55)
         Me.ucrDistWithParameters.Name = "ucrDistWithParameters"
         Me.ucrDistWithParameters.Size = New System.Drawing.Size(221, 156)
-        Me.ucrDistWithParameters.TabIndex = 7
+        Me.ucrDistWithParameters.TabIndex = 1
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(10, 248)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.TabIndex = 9
         '
         'ucrChkSetSeed
         '
         Me.ucrChkSetSeed.Checked = False
-        Me.ucrChkSetSeed.Location = New System.Drawing.Point(260, 69)
+        Me.ucrChkSetSeed.Location = New System.Drawing.Point(252, 99)
         Me.ucrChkSetSeed.Name = "ucrChkSetSeed"
         Me.ucrChkSetSeed.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkSetSeed.TabIndex = 22
+        Me.ucrChkSetSeed.TabIndex = 2
         '
         'ucrNudSeed
         '
         Me.ucrNudSeed.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSeed.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSeed.Location = New System.Drawing.Point(359, 69)
+        Me.ucrNudSeed.Location = New System.Drawing.Point(354, 100)
         Me.ucrNudSeed.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSeed.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSeed.Name = "ucrNudSeed"
         Me.ucrNudSeed.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudSeed.TabIndex = 23
+        Me.ucrNudSeed.TabIndex = 3
         Me.ucrNudSeed.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudNumberOfSamples
         '
         Me.ucrNudNumberOfSamples.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberOfSamples.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNumberOfSamples.Location = New System.Drawing.Point(359, 95)
+        Me.ucrNudNumberOfSamples.Location = New System.Drawing.Point(354, 126)
         Me.ucrNudNumberOfSamples.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNumberOfSamples.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberOfSamples.Name = "ucrNudNumberOfSamples"
         Me.ucrNudNumberOfSamples.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudNumberOfSamples.TabIndex = 23
+        Me.ucrNudNumberOfSamples.TabIndex = 5
         Me.ucrNudNumberOfSamples.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrSaveRandomSamples
         '
         Me.ucrSaveRandomSamples.Location = New System.Drawing.Point(10, 218)
         Me.ucrSaveRandomSamples.Name = "ucrSaveRandomSamples"
-        Me.ucrSaveRandomSamples.Size = New System.Drawing.Size(399, 24)
-        Me.ucrSaveRandomSamples.TabIndex = 24
+        Me.ucrSaveRandomSamples.Size = New System.Drawing.Size(233, 24)
+        Me.ucrSaveRandomSamples.TabIndex = 8
         '
         'dlgRandomSample
         '

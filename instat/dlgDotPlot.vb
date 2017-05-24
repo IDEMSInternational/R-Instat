@@ -89,7 +89,7 @@ Public Class dlgDotPlot
         ucrVariablesAsFactorDotPlot.bWithQuotes = False
         ucrVariablesAsFactorDotPlot.SetParameterIsString()
 
-        ucrSaveDotPlot.SetPrefix("DotPlot")
+        ucrSaveDotPlot.SetPrefix("dotPlot")
         ucrSaveDotPlot.SetSaveTypeAsGraph()
         ucrSaveDotPlot.SetIsComboBox()
         ucrSaveDotPlot.SetCheckBoxText("Save Graph")
