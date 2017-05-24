@@ -157,13 +157,14 @@ Public Class dlgTransformClimatic
         clsTransformManipulationsFunc = New RFunction
         clsTransfornGroupByFunc = New RFunction
         'ucrSaveTransform.Reset()
+
+        rdoMoving.Checked = True 'this wil be fixed properly
         ucrSelectorTransform.Reset()
         ucrReceiverDate.SetMeAsReceiver()
         ucrInputColName.SetName("moving")
         ucrInputThreshold.SetName(0.85)
         ucrNudCountOver.Value = 1
         ucrChkValuesUnderThreshold.Checked = False
-        rdoMoving.Checked = True 'this wil be fixed properly
 
         'Temporary disable
         rdoCount.Enabled = True
@@ -232,13 +233,13 @@ Public Class dlgTransformClimatic
             'ucrBase.clsRsyntax.AddParameter("calc", clsRFunctionParameter:=clsRTrasform)
             'ucrSaveTransform.SetPrefix("Sum")
             'ucrInputColName.SetPrefix("Sum")
-            ucrInputColName.SetName("Moving")
+            ucrInputColName.SetName("moving")
             grpTransform.Text = "Moving"
         ElseIf rdoCount.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsRollFunction)
             'ucrSaveTransform.SetPrefix("Count")
             'ucrInputColName.SetPrefix("Count")
-            ucrInputColName.SetName("Count")
+            ucrInputColName.SetName("count")
             grpTransform.Text = "Count"
 
             clsRRollFuncExpr.AddParameter("FUN", "function(x) length(which(x" & strValuesUnder & ucrInputThreshold.GetText() & "))")
@@ -248,13 +249,13 @@ Public Class dlgTransformClimatic
             ucrBase.clsRsyntax.SetBaseRFunction(clsSpellFunction)
             'ucrSaveTransform.SetPrefix("Spell")
             'ucrInputColName.SetPrefix("Spell")
-            ucrInputColName.SetName("Spell")
+            ucrInputColName.SetName("spell")
             grpTransform.Text = "Spell"
         ElseIf rdoWaterBalance.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsWaterBalanceFunction)
             'ucrSaveTransform.SetPrefix("Water_balance")
             'ucrInputColName.SetPrefix("Water_balance")
-            ucrInputColName.SetName("Water_balance")
+            ucrInputColName.SetName("water_balance")
             grpTransform.Text = "Water_balance"
         End If
     End Sub
