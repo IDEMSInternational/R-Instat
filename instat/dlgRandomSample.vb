@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgRandomSample
     Private bFirstLoad As Boolean = True
     Private clsMultipleSamplesFunction As New RFunction
-    Private clsDistribtionFunction As New RFunction
+    Private clsDistributionFunction As New RFunction
     Private clsSetSeed As New RFunction
     Private bReset As Boolean = True
     Private bUpdateBy As Boolean = False
@@ -61,7 +61,7 @@ Public Class dlgRandomSample
     Private Sub SetDefaults()
         clsSetSeed = New RFunction
         clsMultipleSamplesFunction = New RFunction
-        clsDistribtionFunction = New RFunction
+        clsDistributionFunction = New RFunction
 
         ucrSelectorRandomSamples.Reset()
         SetNewColumName()
@@ -74,9 +74,10 @@ Public Class dlgRandomSample
 
         clsMultipleSamplesFunction.SetRCommand("replicate")
         clsMultipleSamplesFunction.AddParameter("n", 1)
-        clsMultipleSamplesFunction.AddParameter("expr", clsRFunctionParameter:=clsDistribtionFunction)
 
-        clsDistribtionFunction = ucrDistWithParameters.clsCurrRFunction
+        clsDistributionFunction = ucrDistWithParameters.clsCurrRFunction
+
+        clsMultipleSamplesFunction.AddParameter("expr", clsRFunctionParameter:=clsDistributionFunction)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsMultipleSamplesFunction)
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSaveRandomSamples.GetText, strTempDataframe:=ucrSelectorRandomSamples.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveRandomSamples.GetText, bAssignToIsPrefix:=True)
@@ -131,10 +132,10 @@ Public Class dlgRandomSample
 
     Private Sub SetDataFrameAndDistributionParameters()
         If ucrDistWithParameters.clsCurrDistribution.strRName = "hyper" Then
-            clsDistribtionFunction.AddParameter("nn", ucrSelectorRandomSamples.iDataFrameLength)
+            clsDistributionFunction.AddParameter("nn", ucrSelectorRandomSamples.iDataFrameLength)
         Else
-            clsDistribtionFunction.RemoveParameterByName("nn")
-            clsDistribtionFunction.AddParameter("n", ucrSelectorRandomSamples.iDataFrameLength)
+            clsDistributionFunction.RemoveParameterByName("nn")
+            clsDistributionFunction.AddParameter("n", ucrSelectorRandomSamples.iDataFrameLength)
         End If
     End Sub
 
