@@ -13,7 +13,6 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports instat
 Imports instat.Translations
 
 Public Class dlgRandomSample
@@ -39,13 +38,6 @@ Public Class dlgRandomSample
         TestOKEnabled()
     End Sub
 
-    Private Sub SetRCodeforControls(bReset As Boolean)
-        ucrNudSeed.SetRCode(clsSetSeed, bReset)
-        ucrChkSetSeed.SetRCode(clsSetSeed, bReset)
-        ucrSaveRandomSamples.SetRCode(clsMultipleSamplesFunction, bReset)
-        ucrNudNumberOfSamples.SetRCode(clsMultipleSamplesFunction, bReset)
-    End Sub
-
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 376
 
@@ -66,22 +58,6 @@ Public Class dlgRandomSample
         ucrSelectorRandomSamples.bUseCurrentFilter = False
     End Sub
 
-    Private Sub SetNewColumName()
-        If ucrNudNumberOfSamples.Value = 1 Then
-            ucrSaveRandomSamples.SetAssignToBooleans(bTempAssignToIsPrefix:=False)
-            ucrSaveRandomSamples.SetLabelText("New Column Name:")
-            If Not ucrSaveRandomSamples.bUserTyped Then
-                ucrSaveRandomSamples.SetPrefix("random_sample")
-            End If
-        Else
-            ucrSaveRandomSamples.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
-            ucrSaveRandomSamples.SetLabelText("Prefix for New Columns:")
-            If Not ucrSaveRandomSamples.bUserTyped Then
-                ucrSaveRandomSamples.SetPrefix("")
-                ucrSaveRandomSamples.SetName("random_sample")
-            End If
-        End If
-    End Sub
     Private Sub SetDefaults()
         clsSetSeed = New RFunction
         clsMultipleSamplesFunction = New RFunction
@@ -103,19 +79,11 @@ Public Class dlgRandomSample
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSaveRandomSamples.GetText, strTempDataframe:=ucrSelectorRandomSamples.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveRandomSamples.GetText, bAssignToIsPrefix:=True)
     End Sub
 
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
-        SetRCodeforControls(True)
-        TestOKEnabled()
-    End Sub
-
-    Private Sub setdataframeanddistributionparameters()
-        If ucrDistWithParameters.clsCurrDistribution.strRName = "hyper" Then
-            clsDistribtionFunction.AddParameter("nn", ucrSelectorRandomSamples.iDataFrameLength)
-        Else
-            clsDistribtionFunction.RemoveParameterByName("nn")
-            clsDistribtionFunction.AddParameter("n", ucrSelectorRandomSamples.iDataFrameLength)
-        End If
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        ucrNudSeed.SetRCode(clsSetSeed, bReset)
+        ucrChkSetSeed.SetRCode(clsSetSeed, bReset)
+        ucrSaveRandomSamples.SetRCode(clsMultipleSamplesFunction, bReset)
+        ucrNudNumberOfSamples.SetRCode(clsMultipleSamplesFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -128,9 +96,41 @@ Public Class dlgRandomSample
         End If
     End Sub
 
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeforControls(True)
+        TestOKEnabled()
+    End Sub
+
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         If ucrChkSetSeed.Checked Then
             frmMain.clsRLink.RunScript(clsSetSeed.ToScript(), strComment:="dlgRandomSample: Setting the seed for random number generator")
+        End If
+    End Sub
+
+    Private Sub SetNewColumName()
+        If ucrNudNumberOfSamples.Value = 1 Then
+            ucrSaveRandomSamples.SetAssignToBooleans(bTempAssignToIsPrefix:=False)
+            ucrSaveRandomSamples.SetLabelText("New Column Name:")
+            If Not ucrSaveRandomSamples.bUserTyped Then
+                ucrSaveRandomSamples.SetPrefix("random_sample")
+            End If
+        Else
+            ucrSaveRandomSamples.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
+            ucrSaveRandomSamples.SetLabelText("Prefix for New Columns:")
+            If Not ucrSaveRandomSamples.bUserTyped Then
+                ucrSaveRandomSamples.SetPrefix("")
+                ucrSaveRandomSamples.SetName("random_sample")
+            End If
+        End If
+    End Sub
+
+    Private Sub setdataframeanddistributionparameters()
+        If ucrDistWithParameters.clsCurrDistribution.strRName = "hyper" Then
+            clsDistribtionFunction.AddParameter("nn", ucrSelectorRandomSamples.iDataFrameLength)
+        Else
+            clsDistribtionFunction.RemoveParameterByName("nn")
+            clsDistribtionFunction.AddParameter("n", ucrSelectorRandomSamples.iDataFrameLength)
         End If
     End Sub
 
