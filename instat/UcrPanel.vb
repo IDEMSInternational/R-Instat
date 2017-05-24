@@ -43,15 +43,19 @@ Public Class UcrPanel
         AddRadioButtonRange({rdoTemp})
         If strValue <> "" Then
             dctRadioButtonValues.Add(rdoTemp, strValue)
-            AddParameterValuesCondition(rdoTemp, clsParameter.strArgumentName, strValue)
+            AddParameterValuesCondition(rdoTemp, GetParameter().strArgumentName, strValue)
         End If
     End Sub
 
     Public Sub RadioButtons_CheckedChanged()
+        OnControlValueChanged()
+    End Sub
+
+    Public Overrides Sub UpdateParameter(clsTempParam As RParameter)
         Dim strNewValue As String = ""
         Dim rdoTemp As RadioButton
 
-        If bChangeParameterValue AndAlso clsParameter IsNot Nothing Then
+        If bChangeParameterValue AndAlso clsTempParam IsNot Nothing Then
             For Each ctrTemp As Control In pnlRadios.Controls
                 If TypeOf ctrTemp Is RadioButton Then
                     rdoTemp = CType(ctrTemp, RadioButton)
@@ -64,13 +68,11 @@ Public Class UcrPanel
                 End If
             Next
             If strNewValue <> "" Then
-                clsParameter.SetArgumentValue(strNewValue)
+                clsTempParam.SetArgumentValue(strNewValue)
             Else
                 MsgBox("Developer error: No parameter value is associated to the currently checked radio button. Cannot update parameter.")
             End If
         End If
-        UpdateRCode()
-        OnControlValueChanged()
     End Sub
 
     Protected Overrides Sub SetToValue(objTemp As Object)
