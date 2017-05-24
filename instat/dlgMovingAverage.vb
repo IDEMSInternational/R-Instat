@@ -12,19 +12,72 @@
 ' GNU General Public License for more details.
 '
 ' You should have received a copy of the GNU General Public License k
-' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.Imports instat
 Imports instat.Translations
 
 Public Class dlgMovingAverage
+    Private bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
+
     Private Sub dlgMovingAverage_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrBase.clsRsyntax.SetFunction("ma")
-        ucrBase.clsRsyntax.iCallType = 1
         autoTranslate(Me)
-        ucrReceiverDataToAverage.Selector = ucrAddRemove
-        ucrReceiverDataToAverage.SetMeAsReceiver()
+        If bFirstLoad Then
+            InitialiseDialog()
+            bFirstLoad = False
+        End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        TestOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverDataToAverage_Leave(sender As Object, e As EventArgs) Handles ucrReceiverDataToAverage.Leave
-        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverDataToAverage.GetVariables())
+    Private Sub InitialiseDialog()
+        ucrBase.clsRsyntax.iCallType = 1
+
+        ' ucrReceiver
+        ucrReceiverDataToAverage.SetParameter(New RParameter("x", 0))
+        ucrReceiverDataToAverage.SetParameterIsRFunction()
+        ucrReceiverDataToAverage.Selector = ucrAddRemove
+        ucrReceiverDataToAverage.SetMeAsReceiver()
+
+        'chks
+        ucrChkDisplayResults.SetText("Display Results")
+        ucrChkLag.SetText("Lag")
+        ucrChkPlot.SetText("Plot")
+        ucrChkSaveResiduals.SetText("Save Residuals")
+
+        'ucrSave
+        ucrSaveResultsInto.SetCheckBoxText("Save Results into:")
+        ucrSaveResultsInto.SetIsComboBox()
+
+        ucrBase.OKEnabled(False)
+        TestOKEnabled()
+    End Sub
+
+    Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
+
+        ucrAddRemove.Reset()
+
+        'Define the default RFunction
+        clsDefaultFunction.SetRCommand("ma")
+
+        ' Set default RFunction as the base function
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+    End Sub
+
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOKEnabled()
+    End Sub
+
+    Private Sub TestOKEnabled()
     End Sub
 End Class

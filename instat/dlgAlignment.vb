@@ -17,22 +17,51 @@
 Imports instat.Translations
 
 Public Class dlgAlignment
+    Public bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
     Private Sub dlgAlignment_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
-        ucrMultiple.Selector = ucrAddRemove
+        If bFirstLoad Then
+            InitialiseDialog()
+            bFirstLoad = False
+        End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        TestOKEnabled()
+    End Sub
+
+    Private Sub InitialiseDialog()
+        ucrMultiple.Selector = ucrSelectorAlignment
         ucrMultiple.SetMeAsReceiver()
+
         ucrBase.OKEnabled(False)
-        defaultSettings()
     End Sub
 
-    Private Sub defaultSettings()
-        ucrAddRemove.lstAvailableVariable.ResetText()
-        ucrMultiple.lstSelectedVariables.Items.Clear()
-        lstAlignment.ResetText()
+    Private Sub SetDefaults()
+        Dim clsDefaultFunction As New RFunction
+        ucrSelectorAlignment.Reset()
         txtColumnWidth.Text = ""
+
+        'clsDefaultFunction.SetRCommand()
+        'ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
 
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        defaultSettings()
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
+    Private Sub ReopenDialog()
+    End Sub
+
+    Private Sub TestOKEnabled()
+    End Sub
+
+    Private Sub ucrBaseReplace_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOKEnabled()
     End Sub
 End Class

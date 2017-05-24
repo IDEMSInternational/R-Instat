@@ -35,7 +35,7 @@ Partial Class dlgReorderLevels
         Me.lblFactor.Location = New System.Drawing.Point(258, 27)
         Me.lblFactor.Name = "lblFactor"
         Me.lblFactor.Size = New System.Drawing.Size(85, 13)
-        Me.lblFactor.TabIndex = 4
+        Me.lblFactor.TabIndex = 1
         Me.lblFactor.Tag = "Factor_Selected:"
         Me.lblFactor.Text = "Factor Selected:"
         '
@@ -50,12 +50,15 @@ Partial Class dlgReorderLevels
         '
         'ucrReceiverFactor
         '
+        Me.ucrReceiverFactor.frmParent = Me
         Me.ucrReceiverFactor.Location = New System.Drawing.Point(259, 42)
         Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
         Me.ucrReceiverFactor.Selector = Nothing
         Me.ucrReceiverFactor.Size = New System.Drawing.Size(119, 26)
+        Me.ucrReceiverFactor.strNcFilePath = ""
         Me.ucrReceiverFactor.TabIndex = 2
+        Me.ucrReceiverFactor.ucrSelector = Nothing
         '
         'ucrSelectorFactorLevelsToReorder
         '
@@ -65,20 +68,20 @@ Partial Class dlgReorderLevels
         Me.ucrSelectorFactorLevelsToReorder.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorFactorLevelsToReorder.Name = "ucrSelectorFactorLevelsToReorder"
         Me.ucrSelectorFactorLevelsToReorder.Size = New System.Drawing.Size(242, 193)
-        Me.ucrSelectorFactorLevelsToReorder.TabIndex = 1
+        Me.ucrSelectorFactorLevelsToReorder.TabIndex = 0
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(13, 211)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.TabIndex = 4
         '
         'dlgReorderLevels
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(432, 265)
+        Me.ClientSize = New System.Drawing.Size(421, 268)
         Me.Controls.Add(Me.lblFactor)
         Me.Controls.Add(Me.ucrReorderFactor)
         Me.Controls.Add(Me.ucrReceiverFactor)
