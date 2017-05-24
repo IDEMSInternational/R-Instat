@@ -58,6 +58,7 @@ Public Class dlgOneVarUseModel
         ucrSaveObjects.SetSaveTypeAsModel()
         ucrSaveObjects.SetIsComboBox()
         ucrSaveObjects.SetCheckBoxText("Save Bootstrap")
+        ' ucrSaveObjects.SetAssignToIfUncheckedValue("last_bootstrap")
 
         ucrChkProduceBootstrap.AddToLinkedControls(ucrSaveObjects, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=False)
         ucrChkProduceBootstrap.AddParameterValueFunctionNamesCondition(True, "x", "bootdist", True)
@@ -97,15 +98,14 @@ Public Class dlgOneVarUseModel
         ucrBase.clsRsyntax.SetBaseRFunction(clsQuantileFunction)
 
         ucrBase.clsRsyntax.SetAssignTo(ucrNewDataframeName.GetText, strTempModel:="last_model", strTempDataframe:=ucrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-        '        clsRbootFunction.SetAssignTo(ucrSaveObjects.GetText, strTempModel:="last_bootstrap", strTempDataframe:=ucrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text) ' test at end.
+        'clsRbootFunction.SetAssignTo(ucrSaveObjects.GetText, strTempModel:="last_bootstrap", strTempDataframe:=ucrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text) ' test at end.
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiver.AddAdditionalCodeParameterPair(clsRbootFunction, New RParameter("f"), iAdditionalPairNo:=1)
         ucrChkProduceBootstrap.SetRCode(clsRbootFunction, bReset)
         ucrNewDataframeName.SetRCode(clsQuantileFunction, bReset)
-        '        ucrSaveObjects.SetRCode(clsRbootFunction, bReset) ' for now
-        ucrSaveObjects.SetRCode(clsRbootFunction, bReset)
+        ucrSaveObjects.SetRCode(clsRbootFunction, bReset) ' for now
         ucrReceiver.SetRCode(clsQuantileFunction, bReset)
     End Sub
 
