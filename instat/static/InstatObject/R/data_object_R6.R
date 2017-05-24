@@ -1010,7 +1010,7 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
       # Warning: this is different from expected R behaviour
       # Any ordered columns would become unordered factors
       if(use_labels && self$is_variables_metadata("labels", col_name)) {
-        # TODO NA will be introduced if any values which do not have a label associated
+        # TODO NA will be introduced if any values do not have a label associated
         curr_labels <- self$get_variables_metadata(property = "labels", column = col_name, direct_from_attributes = TRUE)
         new_col <- factor(curr_col, ordered = ordered, levels = as.vector(curr_labels), labels = names(curr_labels))
       }
@@ -1020,7 +1020,7 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
       new_col = as.integer(curr_col)
     }
     else if(to_type == "numeric") {
-      new_col <- to_value(curr_col)
+      new_col <- to_value(curr_col, keep.labels = !is_num_fac(curr_col))
     }
     else if(to_type == "character") {
       new_col <- to_character(curr_col)
@@ -1073,8 +1073,13 @@ data_object$set("public", "set_factor_levels", function(col_name, new_levels, se
   # Must be private$data because setting an attribute
   levels(private$data[[col_name]]) <- new_levels
   if(set_new_labels && self$is_variables_metadata("labels", col_name)) {
-    new_labels <- as.character(new_levels[1:length(old_levels)])
-    names(new_labels) <- names(self$get_variables_metadata(property = "labels", column = col_name))
+    new_labels <- self$get_variables_metadata(property = "labels", column = col_name, direct_from_attributes = TRUE)
+    names(new_labels) <- as.character(new_levels[1:length(old_levels)])
+    if(length(new_levels) > length(old_levels)) {
+      extra_labels <- seq(from = max(new_labels) + 1, length.out = (length(new_levels) - length(old_levels)))
+      names(extra_labels) <- new_levels[!new_levels %in% names(new_labels)]
+      new_labels <- c(new_labels, extra_labels)
+    }
     self$append_to_variables_metadata(col_name, "labels", new_labels)
   }
   self$data_changed <- TRUE
@@ -1103,10 +1108,18 @@ data_object$set("public", "set_factor_reference_level", function(col_name, new_r
 
 data_object$set("public", "reorder_factor_levels", function(col_name, new_level_names) {
   if(!col_name %in% self$get_column_names()) stop(paste(col_name,"not found in data."))
-  if(!is.factor(self$get_columns_from_data(col_name, use_current_filter = FALSE))) stop(paste(col_name,"is not a factor."))
-  if(length(new_level_names)!=length(levels(self$get_columns_from_data(col_name, use_current_filter = FALSE)))) stop("Incorrect number of new level names given.")
-  if(!all(new_level_names %in% levels(self$get_columns_from_data(col_name, use_current_filter = FALSE)))) stop(paste("new_level_names must be a reordering of the current levels:",paste(levels(data[[col_name]]), collapse = " ")))
-  self$add_columns_to_data(col_name = col_name, col_data = factor(self$get_columns_from_data(col_name, use_current_filter = FALSE), levels = new_level_names, ordered = is.ordered(self$get_columns_from_data(col_name, use_current_filter = FALSE))))
+  curr_column <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
+  if(!is.factor(curr_column)) stop(col_name,"is not a factor.")
+  curr_levels <- levels(curr_column)
+  if(length(new_level_names)!=length(curr_levels)) stop("Incorrect number of new levels given.")
+  if(!all(new_level_names %in% curr_levels)) stop("new_level_names must be a reordering of the current levels:", paste(levels(curr_column), collapse = ", "))
+  new_column <- factor(curr_column, levels = new_level_names, ordered = is.ordered(curr_column))
+  #TODO are these the only attributes we don't want to manually set?
+  curr_attr <- attributes(curr_column)[!names(attributes(curr_column)) %in% c("levels", "class")]
+  for(i in seq_along(curr_attr)) {
+    attr(new_column, names(curr_attr)[i]) <- curr_attr[[i]]
+  }
+  self$add_columns_to_data(col_name = col_name, col_data = new_column)
   self$variables_metadata_changed <- TRUE
 }
 )
