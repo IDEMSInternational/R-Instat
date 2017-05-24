@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class dlgRowStats
+Partial Class dlgRowSummary
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -35,8 +35,8 @@ Partial Class dlgRowStats
         Me.rdoSum = New System.Windows.Forms.RadioButton()
         Me.ucrPanelStatistics = New instat.UcrPanel()
         Me.ucrSaveResults = New instat.ucrSave()
-        Me.ucrSelectorForRowStats = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverForRowStatistics = New instat.ucrReceiverMultiple()
+        Me.ucrSelectorForRowSummaries = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverForRowSummaries = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpStatistic.SuspendLayout()
         Me.SuspendLayout()
@@ -190,25 +190,27 @@ Partial Class dlgRowStats
         Me.ucrSaveResults.Size = New System.Drawing.Size(254, 24)
         Me.ucrSaveResults.TabIndex = 4
         '
-        'ucrSelectorForRowStats
+        'ucrSelectorForRowSummaries
         '
-        Me.ucrSelectorForRowStats.bShowHiddenColumns = False
-        Me.ucrSelectorForRowStats.bUseCurrentFilter = True
-        Me.ucrSelectorForRowStats.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorForRowStats.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorForRowStats.Name = "ucrSelectorForRowStats"
-        Me.ucrSelectorForRowStats.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorForRowStats.TabIndex = 0
+        Me.ucrSelectorForRowSummaries.bShowHiddenColumns = False
+        Me.ucrSelectorForRowSummaries.bUseCurrentFilter = True
+        Me.ucrSelectorForRowSummaries.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorForRowSummaries.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorForRowSummaries.Name = "ucrSelectorForRowSummaries"
+        Me.ucrSelectorForRowSummaries.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorForRowSummaries.TabIndex = 0
         '
-        'ucrReceiverForRowStatistics
+        'ucrReceiverForRowSummaries
         '
-        Me.ucrReceiverForRowStatistics.frmParent = Me
-        Me.ucrReceiverForRowStatistics.Location = New System.Drawing.Point(247, 60)
-        Me.ucrReceiverForRowStatistics.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverForRowStatistics.Name = "ucrReceiverForRowStatistics"
-        Me.ucrReceiverForRowStatistics.Selector = Nothing
-        Me.ucrReceiverForRowStatistics.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverForRowStatistics.TabIndex = 2
+        Me.ucrReceiverForRowSummaries.frmParent = Me
+        Me.ucrReceiverForRowSummaries.Location = New System.Drawing.Point(247, 60)
+        Me.ucrReceiverForRowSummaries.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverForRowSummaries.Name = "ucrReceiverForRowSummaries"
+        Me.ucrReceiverForRowSummaries.Selector = Nothing
+        Me.ucrReceiverForRowSummaries.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverForRowSummaries.strNcFilePath = ""
+        Me.ucrReceiverForRowSummaries.TabIndex = 2
+        Me.ucrReceiverForRowSummaries.ucrSelector = Nothing
         '
         'ucrBase
         '
@@ -217,7 +219,7 @@ Partial Class dlgRowStats
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 6
         '
-        'dlgRowStats
+        'dlgRowSummaries
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -225,14 +227,14 @@ Partial Class dlgRowStats
         Me.Controls.Add(Me.ucrSaveResults)
         Me.Controls.Add(Me.grpStatistic)
         Me.Controls.Add(Me.cmdUserDefined)
-        Me.Controls.Add(Me.ucrSelectorForRowStats)
+        Me.Controls.Add(Me.ucrSelectorForRowSummaries)
         Me.Controls.Add(Me.lblSelected)
-        Me.Controls.Add(Me.ucrReceiverForRowStatistics)
+        Me.Controls.Add(Me.ucrReceiverForRowSummaries)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgRowStats"
+        Me.Name = "dlgRowSummaries"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Row_Summaries"
         Me.Text = "Row Summaries"
@@ -244,9 +246,9 @@ Partial Class dlgRowStats
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrReceiverForRowStatistics As ucrReceiverMultiple
+    Friend WithEvents ucrReceiverForRowSummaries As ucrReceiverMultiple
     Friend WithEvents lblSelected As Label
-    Friend WithEvents ucrSelectorForRowStats As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSelectorForRowSummaries As ucrSelectorByDataFrameAddRemove
     Friend WithEvents cmdUserDefined As Button
     Friend WithEvents grpStatistic As GroupBox
     Friend WithEvents rdoMinimum As RadioButton

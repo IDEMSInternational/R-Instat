@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class dlgFileNew
+Partial Class dlgNewDataFrame
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -57,6 +57,7 @@ Partial Class dlgFileNew
         '
         'ucrNudRows
         '
+        Me.ucrNudRows.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRows.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudRows.Location = New System.Drawing.Point(73, 12)
         Me.ucrNudRows.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
@@ -68,6 +69,7 @@ Partial Class dlgFileNew
         '
         'ucrNudCols
         '
+        Me.ucrNudCols.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudCols.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudCols.Location = New System.Drawing.Point(73, 40)
         Me.ucrNudCols.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
@@ -84,7 +86,7 @@ Partial Class dlgFileNew
         Me.ucrNewDFName.Size = New System.Drawing.Size(300, 24)
         Me.ucrNewDFName.TabIndex = 4
         '
-        'dlgFileNew
+        'dlgNewDataFrame
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -98,9 +100,9 @@ Partial Class dlgFileNew
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgFileNew"
+        Me.Name = "dlgNewDataFrame"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "New File"
+        Me.Text = "New Data Frame"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
