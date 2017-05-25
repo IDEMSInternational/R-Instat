@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgInsertColumn
     Private bFirstload As Boolean = True
@@ -57,7 +58,7 @@ Public Class dlgInsertColumn
         ucrPnlStartEnd.SetParameter(New RParameter("before"))
         ucrPnlStartEnd.AddRadioButton(rdoAtEnd, "TRUE")
         ucrPnlStartEnd.AddRadioButton(rdoAtStart, "FALSE")
-        'ucrPnlStartEnd.AddRadioButton(rdoBeforeAfter, "FALSE")
+        ucrPnlStartEnd.AddRadioButton(rdoBeforeAfter, "FALSE")
 
         ucrReceiverColumnsToInsert.SetParameter(New RParameter("adjacent_column"))
         ucrNudNumberOfColumns.SetParameter(New RParameter("num_cols"))
@@ -66,11 +67,14 @@ Public Class dlgInsertColumn
         ucrInputDefaultValue.SetRDefault("NA")
 
         Dim dctBeforeAfter As New Dictionary(Of String, String)
+        ucrInputBeforeAfter.SetParameter(New RParameter("before"))
         dctBeforeAfter.Add("Before", "TRUE")
         dctBeforeAfter.Add("After", "FALSE")
         ucrInputBeforeAfter.SetItems(dctBeforeAfter)
         ucrInputBeforeAfter.SetRDefault("FALSE")
 
+        ucrPnlColumnsOrRows.AddFunctionNamesCondition(rdoInsertRows, frmMain.clsRLink.strInstatDataObject & "$insert_row_in_data")
+        ucrPnlColumnsOrRows.AddFunctionNamesCondition(rdoInsertColumns, frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
         'Setting Display of the group boxes in the dialog
         ucrPnlColumnsOrRows.AddToLinkedControls(ucrPnlStartEnd, {rdoInsertColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlColumnsOrRows.AddToLinkedControls(ucrInputBeforeAfter, {rdoInsertColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -85,6 +89,8 @@ Public Class dlgInsertColumn
         ucrPnlColumnsOrRows.AddToLinkedControls(ucrNudStartRow, {rdoInsertRows}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlStartEnd.AddToLinkedControls(ucrSelectorInsertColumns, {rdoBeforeAfter}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
+        ucrPnlStartEnd.AddToLinkedControls(ucrInputBeforeAfter, {rdoBeforeAfter}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlStartEnd.AddToLinkedControls(ucrReceiverColumnsToInsert, {rdoBeforeAfter}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         'ucrSelectorInsertColumns.AddToLinkedControls(ucrNudStartRow, {rdoInsertRows}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudNumberOfColumns.SetLinkedDisplayControl(lblNumberOfColumnsToInsert)
@@ -116,12 +122,11 @@ Public Class dlgInsertColumn
         ucrSelectorInsertColumns.Reset()
         ucrDataFramesList.Reset()
 
-        clsInsertRowFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$insert_row_in_data")
         clsInsertColumnFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
+        clsInsertRowFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$insert_row_in_data")
         clsInsertRowFunction.AddParameter("start_row", ucrDataFramesList.iDataFrameLength)
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsInsertRowFunction)
-
+        ucrBase.clsRsyntax.SetBaseRFunction(clsInsertColumnFunction)
 
         'rdoInsertColumns.Checked = True
         'ucrInputPrefixForInsertedColumns.SetName("X")
@@ -206,6 +211,14 @@ Public Class dlgInsertColumn
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrPnlColumnsOrRows_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumnsOrRows.ControlValueChanged
+        If rdoInsertColumns.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsInsertColumnFunction)
+        ElseIf rdoInsertRows.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsInsertRowFunction)
+        End If
     End Sub
 
     'Private Sub ucrDataFramesList_DataFrameChanged() Handles ucrDataFramesList.DataFrameChanged
