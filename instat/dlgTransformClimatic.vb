@@ -174,7 +174,7 @@ Public Class dlgTransformClimatic
         rdoWaterBalance.Enabled = True
         grpCount.Enabled = True
         grpSpells.Enabled = False
-        grpWaterbalance.Enabled = False
+        grpWaterbalance.Enabled = True
 
         clsTransformManipulationsFunc.SetRCommand("list")
         clsTransformManipulationsFunc.AddParameter("group_by", clsRFunctionParameter:=clsTransfornGroupByFunc, bIncludeArgumentName:=False)
@@ -211,7 +211,8 @@ Public Class dlgTransformClimatic
 
         clsWaterBalance60.SetRCommand("instat_calculation$new")
         clsWaterBalance60.AddParameter("type", Chr(34) & "calculation" & Chr(34))
-        clsWaterBalance60.AddParameter("function_exp", Chr(34) & "Reduce(function(x, y) pmin(pmax(x + y - " & ucrInputEvaporation.GetText() & ", 0), " & ucrNudWBCapacity.Value & "), Replace_NA_60, accumulate=TRUE)" & Chr(34))
+        'clsWaterBalance60.AddParameter("function_exp", Chr(34) & "Reduce(function(x, y) pmin(pmax(x + y - " & ucrInputEvaporation.GetText() & ", 0), " & ucrNudWBCapacity.Value & "), Replace_NA_60, accumulate=TRUE)" & Chr(34))
+        'clsWaterBalance60.AddParameter("function_exp", Chr(34) & "Reduce(function(x, y) pmin(pmax(x + y - " & 5 & ", 0), " & 60 & "), Replace_NA_60, accumulate=TRUE)" & Chr(34))
         clsWaterBalance60.AddParameter("result_name", Chr(34) & "Water_Balance_60" & Chr(34))
         clsWaterBalance60.AddParameter("sub_calculations", clsRFunctionParameter:=clsWaterBalance60List)
         clsWaterBalance60List.AddParameter("sub1", clsRFunctionParameter:=clsReplaceNA60)
@@ -357,4 +358,9 @@ Public Class dlgTransformClimatic
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
         SetGroupByFuncCalcFrom()
     End Sub
+
+    Private Sub ucrWBControls_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrNudWBCapacity.ControlContentsChanged, ucrInputEvaporation.ControlContentsChanged
+        clsWaterBalance60.AddParameter("function_exp", Chr(34) & "Reduce(function(x, y) pmin(pmax(x + y - " & ucrInputEvaporation.GetText() & ", 0), " & ucrNudWBCapacity.Value & "), Replace_NA_60, accumulate=TRUE)" & Chr(34))
+    End Sub
+
 End Class
