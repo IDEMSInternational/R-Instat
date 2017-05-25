@@ -22,49 +22,13 @@ Partial Class sdgOneVarUseModBootstrap
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.chkParametric = New System.Windows.Forms.CheckBox()
-        Me.nudCI = New System.Windows.Forms.NumericUpDown()
-        Me.nudIterations = New System.Windows.Forms.NumericUpDown()
         Me.lblCI = New System.Windows.Forms.Label()
         Me.UcrButtonsSubdialogue1 = New instat.ucrButtonsSubdialogue()
         Me.lblIterations = New System.Windows.Forms.Label()
-        CType(Me.nudCI, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudIterations, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ucrNudCI = New instat.ucrNud()
+        Me.ucrNudIterations = New instat.ucrNud()
+        Me.ucrChkParametric = New instat.ucrCheck()
         Me.SuspendLayout()
-        '
-        'chkParametric
-        '
-        Me.chkParametric.AutoSize = True
-        Me.chkParametric.Checked = True
-        Me.chkParametric.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkParametric.Location = New System.Drawing.Point(13, 67)
-        Me.chkParametric.Name = "chkParametric"
-        Me.chkParametric.Size = New System.Drawing.Size(76, 17)
-        Me.chkParametric.TabIndex = 4
-        Me.chkParametric.Text = "Parametric"
-        Me.chkParametric.UseVisualStyleBackColor = True
-        '
-        'nudCI
-        '
-        Me.nudCI.DecimalPlaces = 2
-        Me.nudCI.Increment = New Decimal(New Integer() {5, 0, 0, 131072})
-        Me.nudCI.Location = New System.Drawing.Point(120, 21)
-        Me.nudCI.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.nudCI.Name = "nudCI"
-        Me.nudCI.Size = New System.Drawing.Size(54, 20)
-        Me.nudCI.TabIndex = 1
-        Me.nudCI.Value = New Decimal(New Integer() {95, 0, 0, 131072})
-        '
-        'nudIterations
-        '
-        Me.nudIterations.Increment = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.nudIterations.Location = New System.Drawing.Point(120, 43)
-        Me.nudIterations.Maximum = New Decimal(New Integer() {10001, 0, 0, 0})
-        Me.nudIterations.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.nudIterations.Name = "nudIterations"
-        Me.nudIterations.Size = New System.Drawing.Size(54, 20)
-        Me.nudIterations.TabIndex = 3
-        Me.nudIterations.Value = New Decimal(New Integer() {1001, 0, 0, 0})
         '
         'lblCI
         '
@@ -91,33 +55,63 @@ Partial Class sdgOneVarUseModBootstrap
         Me.lblIterations.TabIndex = 2
         Me.lblIterations.Text = "Number of Iterations:"
         '
+        'ucrNudCI
+        '
+        Me.ucrNudCI.DecimalPlaces = New Decimal(New Integer() {2, 0, 0, 0})
+        Me.ucrNudCI.Increment = New Decimal(New Integer() {5, 0, 0, 131072})
+        Me.ucrNudCI.Location = New System.Drawing.Point(120, 21)
+        Me.ucrNudCI.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudCI.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCI.Name = "ucrNudCI"
+        Me.ucrNudCI.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudCI.TabIndex = 7
+        Me.ucrNudCI.Value = New Decimal(New Integer() {95, 0, 0, 131072})
+        '
+        'ucrNudIterations
+        '
+        Me.ucrNudIterations.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudIterations.Increment = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudIterations.Location = New System.Drawing.Point(120, 43)
+        Me.ucrNudIterations.Maximum = New Decimal(New Integer() {10001, 0, 0, 0})
+        Me.ucrNudIterations.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudIterations.Name = "ucrNudIterations"
+        Me.ucrNudIterations.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudIterations.TabIndex = 8
+        Me.ucrNudIterations.Value = New Decimal(New Integer() {1001, 0, 0, 0})
+        '
+        'ucrChkParametric
+        '
+        Me.ucrChkParametric.Checked = False
+        Me.ucrChkParametric.Location = New System.Drawing.Point(13, 67)
+        Me.ucrChkParametric.Name = "ucrChkParametric"
+        Me.ucrChkParametric.Size = New System.Drawing.Size(140, 20)
+        Me.ucrChkParametric.TabIndex = 9
+        '
         'sdgOneVarUseModBootstrap
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(184, 161)
+        Me.Controls.Add(Me.ucrChkParametric)
+        Me.Controls.Add(Me.ucrNudIterations)
+        Me.Controls.Add(Me.ucrNudCI)
         Me.Controls.Add(Me.lblIterations)
         Me.Controls.Add(Me.UcrButtonsSubdialogue1)
         Me.Controls.Add(Me.lblCI)
-        Me.Controls.Add(Me.nudIterations)
-        Me.Controls.Add(Me.nudCI)
-        Me.Controls.Add(Me.chkParametric)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgOneVarUseModBootstrap"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Bootstrap Options"
-        CType(Me.nudCI, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudIterations, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents chkParametric As CheckBox
-    Friend WithEvents nudCI As NumericUpDown
-    Friend WithEvents nudIterations As NumericUpDown
     Friend WithEvents lblCI As Label
     Friend WithEvents UcrButtonsSubdialogue1 As ucrButtonsSubdialogue
     Friend WithEvents lblIterations As Label
+    Friend WithEvents ucrNudCI As ucrNud
+    Friend WithEvents ucrNudIterations As ucrNud
+    Friend WithEvents ucrChkParametric As ucrCheck
 End Class
