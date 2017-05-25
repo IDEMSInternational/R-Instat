@@ -15,10 +15,11 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class sdgDescribeTwoVarGraph
+    'Public bControlsInitialised As Boolean = False
+    ' Public clsGraphOneVariable As New RFunction
     Public bFirstLoad As Boolean = True
     Private Sub sdgDescribeTwoVarGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-
         If bFirstLoad Then
             'SetDefaults()
             bFirstLoad = False
@@ -26,6 +27,12 @@ Public Class sdgDescribeTwoVarGraph
     End Sub
 
     Public Sub Initialise()
+        'Dim dctNumericByNumericPairs As New Dictionary(Of String, String)
+        'dctNumericByNumericPairs.Add("Scatter plot", Chr(34) & "geom_boxplot" & Chr(34))
+        'dctNumericByNumericPairs.Add("Line plot", Chr(34) & "geom_boxplot" & Chr(34))
+        'dctNumericByNumericPairs.Add("Scatter and line plot", Chr(34) & "geom_boxplot" & Chr(34))
+
+        'dctNumericByNumericPairs.Add("Boxplot", Chr(34) & "geom_boxplot" & Chr(34))
         ucrNumericByNumeric.SetItems({"Scatter plot", "Line plot", "Scatter and line plot"})
         ucrNumericByNumeric.SetName("Scatter plot")
         ucrNumericByCategorical.SetItems({"Box plot", "Histogram", "Density plot", "Frequency polygon", "Dot plot", "Point plot"})

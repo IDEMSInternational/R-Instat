@@ -78,7 +78,7 @@ Public Class dlgDescribeTwoVarGraph
         clsRFacet.SetRCommand("facet_wrap")
         clsRFacet.AddParameter("facets", "~variable")
         clsBaseOperator.AddParameter("facet_wrap", clsRFunctionParameter:=clsRFacet)
-        clsBaseOperator.AddParameter(True, clsRFunctionParameter:=clsRGGplotFunction)
+        clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRGGplotFunction, iPosition:=0)
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorTwoVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
     End Sub
@@ -98,6 +98,7 @@ Public Class dlgDescribeTwoVarGraph
         ucrReceiverMultipleTwoVar.Selector = ucrSelectorTwoVarGraph
         ucrReceiverMultipleTwoVar.SetSingleTypeStatus(True)
         ucrReceiverMultipleTwoVar.SetMultipleOnlyStatus(True)
+        ucrReceiverMultipleTwoVar.SetDataType("factor")
 
         ucrSecondVariableReceiver.Selector = ucrSelectorTwoVarGraph
         ucrSecondVariableReceiver.SetParameter(New RParameter("fill", 0))
@@ -116,7 +117,7 @@ Public Class dlgDescribeTwoVarGraph
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrSelectorTwoVarGraph.SetRCode(clsRGGplotFunction, bReset)
         ucrSecondVariableReceiver.SetRCode(clsRBarAesFunction, bReset)
-        ucrSaveGraph.SetRCode(clsRGGplotFunction, bReset)
+        ucrSaveGraph.SetRCode(clsBaseOperator, bReset)
         ucrSecondVariableReceiver.AddAdditionalCodeParameterPair(clsRScatterAesFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
         ucrSecondVariableReceiver.AddAdditionalCodeParameterPair(clsRBoxAesFunction, New RParameter("x", 0), iAdditionalPairNo:=2)
         ucrSecondVariableReceiver.AddAdditionalCodeParameterPair(clsRDotAesFunction, New RParameter("y", 0), iAdditionalPairNo:=3)
@@ -178,14 +179,14 @@ Public Class dlgDescribeTwoVarGraph
             Select Case sdgDescribeTwoVarGraph.ucrNumericByNumeric.GetText
                 Case "Scatter plot"
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRScatterAesFunction)
-                    clsBaseOperator.AddParameter("scatter", clsRFunctionParameter:=clsRScatterPlotGeom, iPosition:=0)
+                    clsBaseOperator.AddParameter("scatter", clsRFunctionParameter:=clsRScatterPlotGeom, iPosition:=1)
                 Case "Line plot"
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRScatterAesFunction)
-                    clsBaseOperator.AddParameter("line", clsRFunctionParameter:=clsRLinePlotGeom, iPosition:=0)
+                    clsBaseOperator.AddParameter("line", clsRFunctionParameter:=clsRLinePlotGeom, iPosition:=2)
                     clsBaseOperator.RemoveParameterByName("geom_point")
                 Case "Scatter and line plot"
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRScatterAesFunction)
-                    clsBaseOperator.AddParameter("scatter_line", clsRFunctionParameter:=clsRLinePlotGeom, iPosition:=0)
+                    clsBaseOperator.AddParameter("scatter_line", clsRFunctionParameter:=clsRLinePlotGeom, iPosition:=3)
                     clsBaseOperator.AddParameter("geom_point", clsRFunctionParameter:=clsRScatterPlotGeom)
             End Select
             'numeric by categorical case
@@ -196,27 +197,27 @@ Public Class dlgDescribeTwoVarGraph
                 Case "Box plot"
                     BoxPlot()
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRBoxAesFunction)
-                    clsBaseOperator.AddParameter("boxplot", clsRFunctionParameter:=clsRBoxPlotGeom, iPosition:=0)
+                    clsBaseOperator.AddParameter("boxplot", clsRFunctionParameter:=clsRBoxPlotGeom, iPosition:=4)
                 Case "Frequency polygon"
                     FrequencyPolygon()
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRFreqPolyAesFunction)
-                    clsBaseOperator.AddParameter("frequency_polygon", clsRFunctionParameter:=clsRFrequencyPolygonGeom, iPosition:=0)
+                    clsBaseOperator.AddParameter("frequency_polygon", clsRFunctionParameter:=clsRFrequencyPolygonGeom, iPosition:=5)
                 Case "Histogram"
                     Histogram()
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRHistAesFunction)
-                    clsBaseOperator.AddParameter("histogram", clsRFunctionParameter:=clsRHistogramGeom, iPosition:=0)
+                    clsBaseOperator.AddParameter("histogram", clsRFunctionParameter:=clsRHistogramGeom, iPosition:=6)
                 Case "Density plot"
                     DensityPlot()
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRDensityAesFunction)
-                    clsBaseOperator.AddParameter("density_plot", clsRFunctionParameter:=clsRDensityPlotGeom, iPosition:=0)
+                    clsBaseOperator.AddParameter("density_plot", clsRFunctionParameter:=clsRDensityPlotGeom, iPosition:=7)
                 Case "Dot plot"
                     DotPlot()
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRDotAesFunction)
-                    clsBaseOperator.AddParameter("dot_plot", clsRFunctionParameter:=clsRDotPlotGeom, iPosition:=0)
+                    clsBaseOperator.AddParameter("dot_plot", clsRFunctionParameter:=clsRDotPlotGeom, iPosition:=8)
                 Case "Point plot"
                     ScatterLinePlot()
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRScatterAesFunction)
-                    clsBaseOperator.AddParameter("point_plot", clsRFunctionParameter:=clsRScatterPlotGeom, iPosition:=0)
+                    clsBaseOperator.AddParameter("point_plot", clsRFunctionParameter:=clsRScatterPlotGeom, iPosition:=9)
             End Select
             'categorical by numeric case
         ElseIf (strVarType <> "numeric" AndAlso strVarType <> "integer") AndAlso (strSecondVarType = "numeric" OrElse strSecondVarType = "integer") Then
@@ -226,27 +227,27 @@ Public Class dlgDescribeTwoVarGraph
                 Case "Box plot"
                     BoxPlot()
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRBoxAesFunction2)
-                    clsBaseOperator.AddParameter("boxplot", clsRFunctionParameter:=clsRBoxPlotGeom, iPosition:=0)
+                    clsBaseOperator.AddParameter("boxplot", clsRFunctionParameter:=clsRBoxPlotGeom, iPosition:=10)
                 Case "Frequency polygon"
                     FrequencyPolygon()
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRFreqPolyAesFunction2)
-                    clsBaseOperator.AddParameter("frequency_polygon", clsRFunctionParameter:=clsRFrequencyPolygonGeom, iPosition:=0)
+                    clsBaseOperator.AddParameter("frequency_polygon", clsRFunctionParameter:=clsRFrequencyPolygonGeom, iPosition:=11)
                 Case "Histogram"
                     Histogram()
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRHistAesFunction2)
-                    clsBaseOperator.AddParameter("histogram", clsRFunctionParameter:=clsRHistogramGeom, iPosition:=0)
+                    clsBaseOperator.AddParameter("histogram", clsRFunctionParameter:=clsRHistogramGeom, iPosition:=12)
                 Case "Density plot"
                     DensityPlot()
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRDensityAesFunction2)
-                    clsBaseOperator.AddParameter("density_plot", clsRFunctionParameter:=clsRDensityPlotGeom, iPosition:=0)
+                    clsBaseOperator.AddParameter("density_plot", clsRFunctionParameter:=clsRDensityPlotGeom, iPosition:=13)
                 Case "Dot plot"
                     DotPlot()
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRDotAesFunction2)
-                    clsBaseOperator.AddParameter("dot_plot", clsRFunctionParameter:=clsRDotPlotGeom, iPosition:=0)
+                    clsBaseOperator.AddParameter("dot_plot", clsRFunctionParameter:=clsRDotPlotGeom, iPosition:=14)
                 Case "Point plot"
                     ScatterLinePlot()
                     clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRScatterAesFunction2)
-                    clsBaseOperator.AddParameter("point_plot", clsRFunctionParameter:=clsRScatterPlotGeom, iPosition:=0)
+                    clsBaseOperator.AddParameter("point_plot", clsRFunctionParameter:=clsRScatterPlotGeom, iPosition:=15)
             End Select
             'catogerical by cateogrical case
         ElseIf (strVarType <> "numeric" AndAlso strVarType <> "integer") AndAlso (strVarType <> "numeric" AndAlso strVarType <> "integer") Then
@@ -255,25 +256,17 @@ Public Class dlgDescribeTwoVarGraph
             Select Case sdgDescribeTwoVarGraph.ucrCategoricalByCategorical.GetText
                 Case "Dot plot"
                     DotPlot()
-                    clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRDotAesFunction)
-                    clsBaseOperator.AddParameter("dot_plot", clsRFunctionParameter:=clsRDotPlotGeom, iPosition:=0)
+                    clsRGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRDotAesFunction, iPosition:=0)
+                    clsBaseOperator.AddParameter("dot_plot", clsRFunctionParameter:=clsRDotPlotGeom, iPosition:=16)
                 Case "Bar plot"
                     BarPlot()
-                    clsBaseOperator.AddParameter("barplot", clsRFunctionParameter:=clsRBarPlotGeom, iPosition:=0)
+                    clsBaseOperator.AddParameter("barplot", clsRFunctionParameter:=clsRBarPlotGeom, iPosition:=17)
             End Select
             'Should never reach this case
         Else
             MsgBox("Developer error: Unrecognised column types. Graph may be blank or produce an error.", MsgBoxStyle.Critical)
             ucrBase.clsRsyntax.RemoveOperatorParameter("right")
         End If
-    End Sub
-
-    Private Sub ucrSelectorTwoVarGraph_DataFrameChanged() Handles ucrSelectorTwoVarGraph.DataFrameChanged
-        '  clsRGGplotFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorTwoVarGraph.ucrAvailableDataFrames.clsCurrDataFrame)
-    End Sub
-
-    Private Sub ucrSecondVariableReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrSecondVariableReceiver.SelectionChanged
-
     End Sub
 
     Private Sub BoxPlot()
@@ -302,7 +295,6 @@ Public Class dlgDescribeTwoVarGraph
 
 
     Private Sub DotPlot()
-        clsRDotPlotGeom.SetPackageName("ggplot2")
         clsRDotPlotGeom.SetPackageName("ggplot2")
         clsRDotPlotGeom.SetRCommand("geom_dotplot")
         clsRDotPlotGeom.AddParameter("binaxis", Chr(34) & "y" & Chr(34))
@@ -358,7 +350,7 @@ Public Class dlgDescribeTwoVarGraph
         clsRHistAesFunction2.AddParameter("color", "value")
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSecondVariableReceiver.ControlContentsChanged, ucrReceiverMultipleTwoVar.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSecondVariableReceiver.ControlContentsChanged, ucrReceiverMultipleTwoVar.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
