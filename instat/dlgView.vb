@@ -99,8 +99,18 @@ Public Class dlgView
         ucrSelectorForView.Reset()
         ucrReceiverView.SetMeAsReceiver()
 
+        clsOutputWindowFunction.SetPackageName("utils")
+        ' clsOutputWindowFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables(True))
+        clsOutputWindowFunction.AddParameter("title", Chr(34) & ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+
         clsSeparateWindowFunction.SetPackageName("utils")
         clsSeparateWindowFunction.SetRCommand("View")
+
+        clsHTMLFunction.SetPackageName("sjPlot")
+        clsHTMLFunction.SetRCommand("sjt.df")
+        clsHTMLFunction.AddParameter("describe", "FALSE", iPosition:=1)
+        clsHTMLFunction.AddParameter("altr.row.col", "TRUE", iPosition:=2)
+        clsHTMLFunction.AddParameter("hide.progress", "TRUE", iPosition:=4)
         ucrBase.clsRsyntax.SetBaseRFunction(clsSeparateWindowFunction)
     End Sub
 
@@ -154,8 +164,6 @@ Public Class dlgView
         If rdoDispOutputWindow.Checked Then
             If ucrChkSpecifyRows.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsOutputWindowFunction)
-                clsOutputWindowFunction.AddParameter("title", Chr(34) & ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-                clsOutputWindowFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables(True))
                 If rdoTop.Checked Then
                     clsOutputWindowFunction.SetRCommand("head")
                 Else
@@ -166,17 +174,8 @@ Public Class dlgView
             End If
         ElseIf rdoDispSepOutputWindow.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSeparateWindowFunction)
-            clsSeparateWindowFunction.SetRCommand("View")
         Else
             ucrBase.clsRsyntax.SetBaseRFunction(clsHTMLFunction)
-            clsHTMLFunction.SetPackageName("sjPlot")
-            clsHTMLFunction.SetRCommand("sjt.df")
-            clsHTMLFunction.RemoveParameterByName("x")
-            clsHTMLFunction.RemoveParameterByName("title")
-            clsHTMLFunction.AddParameter("mydf", clsRFunctionParameter:=ucrReceiverView.GetVariables(True))
-            clsHTMLFunction.AddParameter("describe", "FALSE", iPosition:=1)
-            clsHTMLFunction.AddParameter("altr.row.col", "TRUE", iPosition:=2)
-            clsHTMLFunction.AddParameter("hide.progress", "TRUE", iPosition:=4)
         End If
     End Sub
 
