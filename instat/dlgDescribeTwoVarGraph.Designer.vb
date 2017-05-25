@@ -28,8 +28,8 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrSecondVariableReceiver = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverMultipleTwoVar = New instat.ucrVariablesAsFactor()
-        Me.ucrTwoVarGraphSave = New instat.ucrSaveGraph()
         Me.ucrSelectorTwoVarGraph = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSaveGraph = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -92,13 +92,6 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrReceiverMultipleTwoVar.ucrSelector = Nothing
         Me.ucrReceiverMultipleTwoVar.ucrVariableSelector = Nothing
         '
-        'ucrTwoVarGraphSave
-        '
-        Me.ucrTwoVarGraphSave.Location = New System.Drawing.Point(12, 221)
-        Me.ucrTwoVarGraphSave.Name = "ucrTwoVarGraphSave"
-        Me.ucrTwoVarGraphSave.Size = New System.Drawing.Size(265, 20)
-        Me.ucrTwoVarGraphSave.TabIndex = 12
-        '
         'ucrSelectorTwoVarGraph
         '
         Me.ucrSelectorTwoVarGraph.bShowHiddenColumns = False
@@ -109,16 +102,23 @@ Partial Class dlgDescribeTwoVarGraph
         Me.ucrSelectorTwoVarGraph.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorTwoVarGraph.TabIndex = 8
         '
+        'ucrSaveGraph
+        '
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 218)
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(294, 24)
+        Me.ucrSaveGraph.TabIndex = 17
+        '
         'dlgDescribeTwoVarGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(420, 306)
+        Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.lblFirstVariables)
         Me.Controls.Add(Me.ucrReceiverMultipleTwoVar)
         Me.Controls.Add(Me.lblSecondVariable)
         Me.Controls.Add(Me.ucrSecondVariableReceiver)
-        Me.Controls.Add(Me.ucrTwoVarGraphSave)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrSelectorTwoVarGraph)
         Me.Controls.Add(Me.ucrBase)
@@ -134,11 +134,11 @@ Partial Class dlgDescribeTwoVarGraph
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrTwoVarGraphSave As ucrSaveGraph
     Friend WithEvents cmdOptions As Button
     Friend WithEvents ucrSelectorTwoVarGraph As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrSecondVariableReceiver As ucrReceiverSingle
     Friend WithEvents lblSecondVariable As Label
     Friend WithEvents ucrReceiverMultipleTwoVar As ucrVariablesAsFactor
     Friend WithEvents lblFirstVariables As Label
+    Friend WithEvents ucrSaveGraph As ucrSave
 End Class

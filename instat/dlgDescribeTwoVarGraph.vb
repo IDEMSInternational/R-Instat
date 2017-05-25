@@ -65,7 +65,7 @@ Public Class dlgDescribeTwoVarGraph
         clsRDensityAesFunction2 = New RFunction
         clsBaseOperator = New ROperator
         ucrReceiverMultipleTwoVar.SetMeAsReceiver()
-        ucrTwoVarGraphSave.Reset()
+        ucrSaveGraph.Reset()
         ucrSelectorTwoVarGraph.Reset()
         ucrSelectorTwoVarGraph.Focus()
         'ucrTwoVarGraphSave.strPrefix = "TwoVariableGraph"
@@ -104,7 +104,12 @@ Public Class dlgDescribeTwoVarGraph
         ucrSecondVariableReceiver.SetParameterIsString()
         ucrSecondVariableReceiver.bWithQuotes = False
 
-        ucrTwoVarGraphSave.SetDataFrameSelector(ucrSelectorTwoVarGraph.ucrAvailableDataFrames)
+        ucrSaveGraph.SetPrefix("two_var")
+        ucrSaveGraph.SetSaveTypeAsGraph()
+        ucrSaveGraph.SetDataFrameSelector(ucrSelectorTwoVarGraph.ucrAvailableDataFrames)
+        ucrSaveGraph.SetCheckBoxText("Save Graph")
+        ucrSaveGraph.SetIsComboBox()
+        ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
 
     End Sub
 
@@ -127,7 +132,7 @@ Public Class dlgDescribeTwoVarGraph
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverMultipleTwoVar.IsEmpty Or ucrSecondVariableReceiver.IsEmpty Or (ucrTwoVarGraphSave.chkSaveGraph.Checked And ucrTwoVarGraphSave.ucrInputGraphName.IsEmpty) Then
+        If ucrReceiverMultipleTwoVar.IsEmpty Or ucrSecondVariableReceiver.IsEmpty Or Not ucrSaveGraph.IsComplete Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -141,13 +146,13 @@ Public Class dlgDescribeTwoVarGraph
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrTwoVarGraphSave_Load() Handles ucrTwoVarGraphSave.GraphNameChanged, ucrTwoVarGraphSave.SaveGraphCheckedChanged, ucrTwoVarGraphSave.Load
-        If ucrTwoVarGraphSave.bSaveGraph Then
-            '  ucrBase.clsRsyntax.SetAssignTo(ucrTwoVarGraphSave.strGraphName, strTempDataframe:=ucrSelectorTwoVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrTwoVarGraphSave.strGraphName)
-        Else
-            'ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorTwoVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
-        End If
-        TestOkEnabled()
+    Private Sub ucrTwoVarGraphSave_Load()
+        'If ucrTwoVarGraphSave.bSaveGraph Then
+        '    '  ucrBase.clsRsyntax.SetAssignTo(ucrTwoVarGraphSave.strGraphName, strTempDataframe:=ucrSelectorTwoVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrTwoVarGraphSave.strGraphName)
+        'Else
+        '    'ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorTwoVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        'End If
+        'TestOkEnabled()
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
