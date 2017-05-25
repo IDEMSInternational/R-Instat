@@ -102,7 +102,6 @@ Public Class dlgInsertColumn
         ucrPnlStartEnd.AddToLinkedControls(ucrInputBeforeAfter, {rdoBeforeAfter}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlStartEnd.AddToLinkedControls(ucrReceiverColumnsToInsert, {rdoBeforeAfter}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlStartEnd.SetLinkedDisplayControl(grpInsert)
-        'ucrSelectorInsertColumns.AddToLinkedControls(ucrNudStartRow, {rdoInsertRows}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudNumberOfColumns.SetLinkedDisplayControl(lblNumberOfColumnsToInsert)
         ucrInputDefaultValue.SetLinkedDisplayControl(lblDefaultValue)
         ucrNudNumberOfRows.SetLinkedDisplayControl(lblNumberOfRowsToInsert)
@@ -110,7 +109,7 @@ Public Class dlgInsertColumn
 
         ucrSaveInsertColumn.SetPrefix("X")
         ucrSaveInsertColumn.SetSaveTypeAsColumn()
-        'ucrSaveInsertColumn.SetDataFrameSelector(ucrSelectorInsertColumns.ucrAvailableDataFrames)
+        ucrSaveInsertColumn.SetDataFrameSelector(ucrDataFramesList)
         ucrSaveInsertColumn.SetIsTextBox()
         ucrSaveInsertColumn.SetLabelText("Prefix For New Column:")
 
@@ -122,6 +121,8 @@ Public Class dlgInsertColumn
         ucrSelectorInsertColumns.Reset()
         ucrDataFramesList.Reset()
         ucrInputBeforeAfter.Reset()
+        ucrInputDefaultValue.Reset()
+        ucrSaveInsertColumn.Reset()
 
         clsInsertColumnFunction.AddParameter("before", "FALSE")
         clsInsertRowFunction.AddParameter("before", "FALSE")
@@ -129,7 +130,7 @@ Public Class dlgInsertColumn
         clsInsertRowFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$insert_row_in_data")
         clsInsertRowFunction.AddParameter("start_row", ucrDataFramesList.iDataFrameLength)
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsInsertRowFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsInsertColumnFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -147,7 +148,7 @@ Public Class dlgInsertColumn
         ucrSaveInsertColumn.SetRCode(clsInsertColumnFunction, bReset)
         ucrReceiverColumnsToInsert.SetRCode(clsInsertColumnFunction, bReset)
         ucrDataFramesList.SetRCode(clsInsertColumnFunction, bReset)
-        ucrPnlColumnsOrRows.SetRCode(clsInsertRowFunction, bReset)
+        ucrPnlColumnsOrRows.SetRCode(clsInsertColumnFunction, bReset)
 
     End Sub
 
