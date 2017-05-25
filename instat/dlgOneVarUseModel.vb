@@ -18,6 +18,7 @@ Imports instat.Translations
 Public Class dlgOneVarUseModel
     Public bfirstload As Boolean = True
     Public bReset As Boolean = True
+    Private bResetSubdialog As Boolean = False
     Public clsRbootFunction, clsQuantileFunction, clsSeqFunction As New RFunction
     Private Sub dlgOneVarUseModel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -41,7 +42,7 @@ Public Class dlgOneVarUseModel
         ucrSelector.SetItemType("model")
 
         ucrReceiver.Selector = ucrSelector
-        ucrReceiver.SetParameter(New RParameter("x", 1))
+        ucrReceiver.SetParameter(New RParameter("x", 0))
         ucrReceiver.SetParameterIsRFunction()
         ucrReceiver.SetMeAsReceiver()
 
@@ -67,10 +68,7 @@ Public Class dlgOneVarUseModel
         ucrChkProduceBootstrap.SetLinkedDisplayControl(cmdBootstrapOptions)
 
         'This part is temporary for now
-        sdgOneVarUseModBootstrap.InitialiseDialog()
         sdgOneVarUseModFit.InitialiseDialog()
-        sdgOneVarUseModBootstrap.SetMyBootFunction(clsRbootFunction)
-        sdgOneVarUseModBootstrap.SetMyRSyntax(ucrBase.clsRsyntax)
         sdgOneVarUseModFit.SetModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
         sdgOneVarUseModFit.SetMyBootFunction(clsRbootFunction)
         sdgOneVarUseModFit.SetMyRSyntax(ucrBase.clsRsyntax)
@@ -84,7 +82,6 @@ Public Class dlgOneVarUseModel
         ucrSaveObjects.Enabled = False 'for now
         ucrSaveObjects.Reset()
         ucrNewDataframeName.Reset()
-        sdgOneVarUseModBootstrap.SetDefaults()
         sdgOneVarUseModFit.SetDefaults()
 
         clsSeqFunction.SetRCommand("seq")
@@ -99,6 +96,7 @@ Public Class dlgOneVarUseModel
 
         ucrBase.clsRsyntax.SetAssignTo(ucrNewDataframeName.GetText, strTempModel:="last_model", strTempDataframe:=ucrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         'clsRbootFunction.SetAssignTo(ucrSaveObjects.GetText, strTempModel:="last_bootstrap", strTempDataframe:=ucrSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text) ' test at end.
+        bResetSubdialog = True
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -132,7 +130,10 @@ Public Class dlgOneVarUseModel
     'End Sub
 
     Private Sub cmdBootstrapOptions_Click(sender As Object, e As EventArgs) Handles cmdBootstrapOptions.Click
+        sdgOneVarUseModBootstrap.SetRFunction(clsRbootFunction, clsQuantileFunction, bResetSubdialog)
+        bResetSubdialog = False
         sdgOneVarUseModBootstrap.ShowDialog()
+        TestOKEnabled()
     End Sub
 
     Private Sub cmdFitModel_Click(sender As Object, e As EventArgs) Handles cmdFitModel.Click
