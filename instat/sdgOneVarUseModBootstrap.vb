@@ -16,53 +16,39 @@
 Imports instat.Translations
 
 Public Class sdgOneVarUseModBootstrap
-    Public clsRbootFunction As New RFunction
-    Public clsRsyntax As New RSyntax
+    Public bControlsInitialised As Boolean = False
+    Public clsOneVarRbootFunction, clsOnevarQuantileFunction As New RFunction
     Public bfirstload As Boolean = True
 
     Private Sub sdgOneVarUseModBootstrap(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
 
-    Public Sub InitialiseDialog()
-        clsRbootFunction.AddParameter("bootmethod")
-        clsRbootFunction.AddParameter("niter")
-        nudIterations.Minimum = 1
-        nudIterations.Maximum = 10001
-        nudCI.Minimum = 0
-        nudCI.Maximum = 1
-        nudIterations.Increment = 100
-        nudCI.Increment = 0.05
-    End Sub
+    Public Sub InitialiseControls()
 
-    Public Sub SetDefaults()
-        chkParametric.Checked = True
-        nudCI.Value = 0.95
-        nudIterations.Value = 1001
-    End Sub
+        ucrNudIterations.SetParameter(New RParameter("niter", 1))
+        ucrNudIterations.SetMinMax(1, 10001)
+        ucrNudCI.SetParameter(New RParameter("CI.level", 1))
+        ucrNudCI.SetMinMax(0, 1)
 
-    Public Sub SetMyBootFunction(clsRNewbootFunction As RFunction)
-        clsRbootFunction = clsRNewbootFunction
-    End Sub
+        ucrNudIterations.Increment = 100
+        ucrNudCI.Increment = 0.05
 
-    Private Sub chkParametric_CheckedChanged(sender As Object, e As EventArgs) Handles chkParametric.CheckedChanged
-        If chkParametric.Checked Then
-            clsRbootFunction.AddParameter("bootmethod", Chr(34) & "param" & Chr(34))
-        Else
-            clsRbootFunction.AddParameter("bootmethod", Chr(34) & "nonparam" & Chr(34))
+        ucrChkParametric.SetParameter(New RParameter("bootmethod", 2), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "param" & Chr(34), strNewValueIfUnchecked:=Chr(34) & "nonparam" & Chr(34))
+        ucrChkParametric.SetText("Parametric")
+        'ucrChkParametric.SetRDefault(Chr(34) & "nonparam" & Chr(34))
+    End Sub
+    Public Sub SetRFunction(clsNewRbootFunction As RFunction, clsNewQuantileFunction As RFunction, Optional bReset As Boolean = False)
+        If Not bControlsInitialised Then
+            InitialiseControls()
         End If
-    End Sub
+        clsOneVarRbootFunction = clsNewRbootFunction
+        clsOnevarQuantileFunction = clsNewQuantileFunction
 
-    Private Sub nudIterations_ValueChanged(sender As Object, e As EventArgs) Handles nudIterations.ValueChanged
-        clsRbootFunction.AddParameter("niter", nudIterations.Value.ToString())
-    End Sub
+        'Setting Rcode for the sub dialogue
+        ucrChkParametric.SetRCode(clsOneVarRbootFunction, bReset)
+        ucrNudIterations.SetRCode(clsOneVarRbootFunction, bReset)
+        ucrNudCI.SetRCode(clsOnevarQuantileFunction, bReset)
 
-    Public Sub SetMyRSyntax(clsRNewSyntax As RSyntax)
-        clsRsyntax = clsRNewSyntax
     End Sub
-
-    Private Sub nudCI_ValueChanged(sender As Object, e As EventArgs) Handles nudCI.ValueChanged
-        clsRsyntax.AddParameter("CI.level", nudCI.Value.ToString())
-    End Sub
-
 End Class
