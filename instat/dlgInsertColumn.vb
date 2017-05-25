@@ -109,7 +109,7 @@ Public Class dlgInsertColumn
 
         ucrSaveInsertColumn.SetPrefix("X")
         ucrSaveInsertColumn.SetSaveTypeAsColumn()
-        ucrSaveInsertColumn.SetDataFrameSelector(ucrDataFramesList)
+        'ucrSaveInsertColumn.SetDataFrameSelector(ucrDataFramesList)
         ucrSaveInsertColumn.SetIsTextBox()
         ucrSaveInsertColumn.SetLabelText("Prefix For New Column:")
 
@@ -153,23 +153,13 @@ Public Class dlgInsertColumn
     End Sub
 
     Private Sub TestOKEnabled()
-        'If rdoInsertColumns.Checked Then
-        '   If ((ucrNudNumberOfColumns.Text <> "") And (Not ucrInputDefaultValue.IsEmpty) And (Not ucrInputPrefixForInsertedColumns.IsEmpty) And (ucrDataFramesList.cboAvailableDataFrames.Text <> "")) Then
-        '        ucrBase.OKEnabled(True)
-        '    Else
-        '        ucrBase.OKEnabled(False)
-
-        '    End If
-        'ElseIf rdoInsertRows.Checked Then
-        '    If ((ucrNudNumberOfRows.Text <> "") And (ucrNudStartRow.Text <> "") And (ucrDataFramesList.cboAvailableDataFrames.Text <> "")) Then
-        '        ucrBase.OKEnabled(True)
-        '    Else
-        '        ucrBase.OKEnabled(False)
-        '    End If
-        'Else
-        '    ucrBase.OKEnabled(False)
-        'End If
-        ucrBase.OKEnabled(True)
+        If (rdoInsertColumns.Checked AndAlso ucrNudNumberOfColumns.Text <> "" AndAlso Not ucrInputDefaultValue.IsEmpty AndAlso ucrSaveInsertColumn.IsComplete OrElse rdoAtEnd.Checked OrElse rdoAtStart.Checked OrElse rdoBeforeAfter.Checked) Then
+            ucrBase.OKEnabled(True)
+        ElseIf (rdoInsertRows.Checked AndAlso ucrNudNumberOfRows.Text <> "" AndAlso ucrNudStartRow.Text <> "" OrElse rdoAfter.Checked OrElse rdoBefore.Checked) Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -184,5 +174,9 @@ Public Class dlgInsertColumn
         ElseIf rdoInsertRows.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsInsertRowFunction)
         End If
+    End Sub
+
+    Private Sub ucrReceiverColumnsToInsert_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnsToInsert.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class
