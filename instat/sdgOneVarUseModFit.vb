@@ -16,9 +16,10 @@
 Imports instat.Translations
 
 Public Class sdgOneVarUseModFit
+    Private bControlsInitialised As Boolean = False
     Private clsRplotFunction As New RFunction
     Public clsRbootFunction As New RFunction
-    Private clsRseqFunction As New RFunction
+    Private clsRseqFunction, clsRQuantileFunction As New RFunction
     Private clsModel As New RFunction
     Public clsRsyntax As New RSyntax
     Public bfirstload As Boolean = True
@@ -27,27 +28,37 @@ Public Class sdgOneVarUseModFit
         autoTranslate(Me)
     End Sub
 
-    Public Sub InitialiseDialog()
-        nudFrom.Minimum = 0
-        nudFrom.Maximum = 1
-        nudFrom.Increment = 0.05
-        nudTo.Minimum = 0
-        nudTo.Maximum = 1
-        nudTo.Increment = 0.05
-        nudBy.Minimum = 0.001
-        nudBy.Maximum = 1
-        nudBy.Increment = 0.05
+    Public Sub InitialiseControls()
+        ucrNudFrom.SetParameter(New RParameter("from", 0))
+        ucrNudFrom.SetMinMax(0, 1)
+        ucrNudFrom.Increment = 0.05
+        ucrNudTo.SetParameter(New RParameter("to", 1))
+        ucrNudTo.SetMinMax(0, 1)
+        ucrNudTo.Increment = 0.05
+        ucrNudBy.SetParameter(New RParameter("by", 2))
+        ucrNudBy.SetMinMax(0.001, 1)
+        ucrNudBy.Increment = 0.05
+        bControlsInitialised = True
+    End Sub
+    Public Sub SetRFunction(clsNewRSeqFunction As RFunction, Optional bReset As Boolean = False)
+        If Not bControlsInitialised Then
+            InitialiseControls()
+        End If
+        clsRseqFunction = clsNewRSeqFunction
+
+        'Setting Rcode for the sub dialog
+        ucrNudFrom.SetRCode(clsRseqFunction, bReset)
+        ucrNudTo.SetRCode(clsRseqFunction, bReset)
+        ucrNudBy.SetRCode(clsRseqFunction, bReset)
+
     End Sub
 
     Public Sub SetDefaults()
         rdoPlotAll.Checked = True
         rdoSeqValues.Checked = True
         rdoInsertValues.Enabled = False
-        ucrInputValues.Enabled = False
+        UcrInputValues.Enabled = False
         SetPlotOptions()
-        nudFrom.Value = 0
-        nudTo.Value = 1
-        nudBy.Value = 0.1
     End Sub
 
     Public Sub SetModelFunction(clsNewModel As RFunction)
@@ -92,14 +103,6 @@ Public Class sdgOneVarUseModFit
         clsRsyntax = clsRNewSyntax
     End Sub
 
-    Private Sub nudSeq_ValueChanged(sender As Object, e As EventArgs) Handles nudFrom.ValueChanged, nudTo.ValueChanged, nudBy.ValueChanged
-        clsRseqFunction.SetRCommand("seq")
-        clsRseqFunction.AddParameter("from", nudFrom.Value.ToString())
-        clsRseqFunction.AddParameter("to", nudTo.Value.ToString())
-        clsRseqFunction.AddParameter("by", nudBy.Value.ToString())
-        clsRsyntax.AddParameter("probs", clsRFunctionParameter:=clsRseqFunction)
-    End Sub
-
     Public Sub SetPlotOptions()
         If Not dlgOneVarUseModel.ucrChkProduceBootstrap.Checked Then
             rdoCIcdf.Enabled = False
@@ -113,9 +116,9 @@ Public Class sdgOneVarUseModFit
 
     Private Sub rdoInsertValues_CheckedChanged(sender As Object, e As EventArgs) Handles rdoInsertValues.CheckedChanged
         If rdoInsertValues.Checked Then
-            ucrInputValues.Enabled = True
+            UcrInputValues.Enabled = True
         Else
-            ucrInputValues.Enabled = False
+            UcrInputValues.Enabled = False
         End If
     End Sub
 

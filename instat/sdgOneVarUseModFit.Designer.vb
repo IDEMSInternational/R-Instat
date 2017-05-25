@@ -40,14 +40,11 @@ Partial Class sdgOneVarUseModFit
         Me.grpQuantiles = New System.Windows.Forms.GroupBox()
         Me.UcrInputValues = New instat.ucrInputTextBox()
         Me.ucrPnlQuantiles = New instat.UcrPanel()
-        Me.nudTo = New System.Windows.Forms.NumericUpDown()
-        Me.nudBy = New System.Windows.Forms.NumericUpDown()
-        Me.nudFrom = New System.Windows.Forms.NumericUpDown()
+        Me.ucrNudFrom = New instat.ucrNud()
+        Me.ucrNudTo = New instat.ucrNud()
+        Me.ucrNudBy = New instat.ucrNud()
         Me.grpPlots.SuspendLayout()
         Me.grpQuantiles.SuspendLayout()
-        CType(Me.nudTo, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudBy, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudFrom, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'rdoCIcdf
@@ -204,9 +201,9 @@ Partial Class sdgOneVarUseModFit
         '
         'grpQuantiles
         '
-        Me.grpQuantiles.Controls.Add(Me.nudFrom)
-        Me.grpQuantiles.Controls.Add(Me.nudBy)
-        Me.grpQuantiles.Controls.Add(Me.nudTo)
+        Me.grpQuantiles.Controls.Add(Me.ucrNudBy)
+        Me.grpQuantiles.Controls.Add(Me.ucrNudTo)
+        Me.grpQuantiles.Controls.Add(Me.ucrNudFrom)
         Me.grpQuantiles.Controls.Add(Me.UcrInputValues)
         Me.grpQuantiles.Controls.Add(Me.rdoSeqValues)
         Me.grpQuantiles.Controls.Add(Me.lblBy)
@@ -238,26 +235,41 @@ Partial Class sdgOneVarUseModFit
         Me.ucrPnlQuantiles.Size = New System.Drawing.Size(227, 164)
         Me.ucrPnlQuantiles.TabIndex = 0
         '
-        'nudTo
+        'ucrNudFrom
         '
-        Me.nudTo.Location = New System.Drawing.Point(75, 75)
-        Me.nudTo.Name = "nudTo"
-        Me.nudTo.Size = New System.Drawing.Size(52, 20)
-        Me.nudTo.TabIndex = 11
+        Me.ucrNudFrom.DecimalPlaces = New Decimal(New Integer() {2, 0, 0, 0})
+        Me.ucrNudFrom.Increment = New Decimal(New Integer() {5, 0, 0, 131072})
+        Me.ucrNudFrom.Location = New System.Drawing.Point(75, 48)
+        Me.ucrNudFrom.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFrom.Name = "ucrNudFrom"
+        Me.ucrNudFrom.Size = New System.Drawing.Size(52, 20)
+        Me.ucrNudFrom.TabIndex = 14
+        Me.ucrNudFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'nudBy
+        'ucrNudTo
         '
-        Me.nudBy.Location = New System.Drawing.Point(75, 100)
-        Me.nudBy.Name = "nudBy"
-        Me.nudBy.Size = New System.Drawing.Size(52, 20)
-        Me.nudBy.TabIndex = 12
+        Me.ucrNudTo.DecimalPlaces = New Decimal(New Integer() {2, 0, 0, 0})
+        Me.ucrNudTo.Increment = New Decimal(New Integer() {5, 0, 0, 131072})
+        Me.ucrNudTo.Location = New System.Drawing.Point(75, 75)
+        Me.ucrNudTo.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTo.Name = "ucrNudTo"
+        Me.ucrNudTo.Size = New System.Drawing.Size(52, 20)
+        Me.ucrNudTo.TabIndex = 15
+        Me.ucrNudTo.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
-        'nudFrom
+        'ucrNudBy
         '
-        Me.nudFrom.Location = New System.Drawing.Point(75, 48)
-        Me.nudFrom.Name = "nudFrom"
-        Me.nudFrom.Size = New System.Drawing.Size(52, 20)
-        Me.nudFrom.TabIndex = 13
+        Me.ucrNudBy.DecimalPlaces = New Decimal(New Integer() {2, 0, 0, 0})
+        Me.ucrNudBy.Increment = New Decimal(New Integer() {5, 0, 0, 131072})
+        Me.ucrNudBy.Location = New System.Drawing.Point(75, 100)
+        Me.ucrNudBy.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudBy.Minimum = New Decimal(New Integer() {1, 0, 0, 196608})
+        Me.ucrNudBy.Name = "ucrNudBy"
+        Me.ucrNudBy.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudBy.TabIndex = 16
+        Me.ucrNudBy.Value = New Decimal(New Integer() {1, 0, 0, 65536})
         '
         'sdgOneVarUseModFit
         '
@@ -277,9 +289,6 @@ Partial Class sdgOneVarUseModFit
         Me.grpPlots.PerformLayout()
         Me.grpQuantiles.ResumeLayout(False)
         Me.grpQuantiles.PerformLayout()
-        CType(Me.nudTo, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudBy, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudFrom, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -302,7 +311,7 @@ Partial Class sdgOneVarUseModFit
     Friend WithEvents UcrInputValues As ucrInputTextBox
     Friend WithEvents ucrPnlPlots As UcrPanel
     Friend WithEvents ucrPnlQuantiles As UcrPanel
-    Friend WithEvents nudFrom As NumericUpDown
-    Friend WithEvents nudBy As NumericUpDown
-    Friend WithEvents nudTo As NumericUpDown
+    Friend WithEvents ucrNudFrom As ucrNud
+    Friend WithEvents ucrNudTo As ucrNud
+    Friend WithEvents ucrNudBy As ucrNud
 End Class

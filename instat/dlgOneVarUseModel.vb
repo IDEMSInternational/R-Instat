@@ -54,7 +54,6 @@ Public Class dlgOneVarUseModel
         ucrChkProduceBootstrap.SetLinkedDisplayControl(cmdBootstrapOptions)
 
         'This part is temporary for now
-        sdgOneVarUseModFit.InitialiseDialog()
         sdgOneVarUseModFit.SetModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
         sdgOneVarUseModFit.SetMyBootFunction(clsRBootFunction)
         sdgOneVarUseModFit.SetMyRSyntax(ucrBase.clsRsyntax)
@@ -86,6 +85,7 @@ Public Class dlgOneVarUseModel
         clsSeqFunction.SetRCommand("seq")
         clsSeqFunction.AddParameter("from", 0)
         clsSeqFunction.AddParameter("to", 1)
+        clsSeqFunction.AddParameter("by", 0.1)
 
         clsQuantileFunction.SetRCommand("quantile")
         clsQuantileFunction.AddParameter("probs", clsRFunctionParameter:=clsSeqFunction)
@@ -94,6 +94,8 @@ Public Class dlgOneVarUseModel
         clsRBootFunction.SetPackageName("fitdistrplus")
         clsRBootFunction.SetRCommand("bootdist")
         clsRBootFunction.AddParameter("bootmethod", Chr(34) & "nonparam" & Chr(34))
+        clsRBootFunction.AddParameter("niter", 1001)
+
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsQuantileFunction)
 
@@ -147,9 +149,12 @@ Public Class dlgOneVarUseModel
         bResetSubdialog = False
         sdgOneVarUseModBootstrap.ShowDialog()
         TestOKEnabled()
+
     End Sub
 
     Private Sub cmdFitModel_Click(sender As Object, e As EventArgs) Handles cmdFitModel.Click
+        sdgOneVarUseModFit.SetRFunction(clsSeqFunction, bResetSubdialog)
+        bResetSubdialog = False
         sdgOneVarUseModFit.ShowDialog()
     End Sub
 
