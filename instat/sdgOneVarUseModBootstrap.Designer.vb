@@ -33,7 +33,7 @@ Partial Class sdgOneVarUseModBootstrap
         'lblCI
         '
         Me.lblCI.AutoSize = True
-        Me.lblCI.Location = New System.Drawing.Point(10, 23)
+        Me.lblCI.Location = New System.Drawing.Point(10, 19)
         Me.lblCI.Name = "lblCI"
         Me.lblCI.Size = New System.Drawing.Size(102, 13)
         Me.lblCI.TabIndex = 0
@@ -41,7 +41,7 @@ Partial Class sdgOneVarUseModBootstrap
         '
         'UcrButtonsSubdialogue1
         '
-        Me.UcrButtonsSubdialogue1.Location = New System.Drawing.Point(12, 124)
+        Me.UcrButtonsSubdialogue1.Location = New System.Drawing.Point(21, 95)
         Me.UcrButtonsSubdialogue1.Name = "UcrButtonsSubdialogue1"
         Me.UcrButtonsSubdialogue1.Size = New System.Drawing.Size(142, 30)
         Me.UcrButtonsSubdialogue1.TabIndex = 5
@@ -49,7 +49,7 @@ Partial Class sdgOneVarUseModBootstrap
         'lblIterations
         '
         Me.lblIterations.AutoSize = True
-        Me.lblIterations.Location = New System.Drawing.Point(10, 45)
+        Me.lblIterations.Location = New System.Drawing.Point(10, 47)
         Me.lblIterations.Name = "lblIterations"
         Me.lblIterations.Size = New System.Drawing.Size(105, 13)
         Me.lblIterations.TabIndex = 2
@@ -59,7 +59,7 @@ Partial Class sdgOneVarUseModBootstrap
         '
         Me.ucrNudCI.DecimalPlaces = New Decimal(New Integer() {2, 0, 0, 0})
         Me.ucrNudCI.Increment = New Decimal(New Integer() {5, 0, 0, 131072})
-        Me.ucrNudCI.Location = New System.Drawing.Point(120, 21)
+        Me.ucrNudCI.Location = New System.Drawing.Point(120, 17)
         Me.ucrNudCI.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudCI.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudCI.Name = "ucrNudCI"
@@ -82,7 +82,7 @@ Partial Class sdgOneVarUseModBootstrap
         'ucrChkParametric
         '
         Me.ucrChkParametric.Checked = False
-        Me.ucrChkParametric.Location = New System.Drawing.Point(13, 67)
+        Me.ucrChkParametric.Location = New System.Drawing.Point(12, 69)
         Me.ucrChkParametric.Name = "ucrChkParametric"
         Me.ucrChkParametric.Size = New System.Drawing.Size(140, 20)
         Me.ucrChkParametric.TabIndex = 4
@@ -91,7 +91,7 @@ Partial Class sdgOneVarUseModBootstrap
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(184, 161)
+        Me.ClientSize = New System.Drawing.Size(184, 131)
         Me.Controls.Add(Me.ucrChkParametric)
         Me.Controls.Add(Me.ucrNudIterations)
         Me.Controls.Add(Me.ucrNudCI)
