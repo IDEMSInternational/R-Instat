@@ -27,22 +27,48 @@ Public Class sdgDescribeTwoVarGraph
     End Sub
 
     Public Sub Initialise()
-        'Dim dctNumericByNumericPairs As New Dictionary(Of String, String)
-        'dctNumericByNumericPairs.Add("Scatter plot", Chr(34) & "geom_boxplot" & Chr(34))
-        'dctNumericByNumericPairs.Add("Line plot", Chr(34) & "geom_boxplot" & Chr(34))
-        'dctNumericByNumericPairs.Add("Scatter and line plot", Chr(34) & "geom_boxplot" & Chr(34))
+        Dim dctNumericByNumericPairs As New Dictionary(Of String, String)
+        Dim dctucrNumericByCategorical As New Dictionary(Of String, String)
+        Dim dctucrCategoricalByNumeric As New Dictionary(Of String, String)
+        Dim dctucrCategoricalByCategorical As New Dictionary(Of String, String)
 
-        'dctNumericByNumericPairs.Add("Boxplot", Chr(34) & "geom_boxplot" & Chr(34))
-        ucrNumericByNumeric.SetItems({"Scatter plot", "Line plot", "Scatter and line plot"})
-        ucrNumericByNumeric.SetName("Scatter plot")
-        ucrNumericByCategorical.SetItems({"Box plot", "Histogram", "Density plot", "Frequency polygon", "Dot plot", "Point plot"})
-        'How different is the point plot from the summary plot?
-        ucrNumericByCategorical.SetName("Box plot")
-        'ucrCategoricalByNumeric.SetItems({"Summary plot"})
-        ucrCategoricalByNumeric.SetItems({"Box plot", "Histogram", "Density plot", "Frequency polygon", "Dot plot", "Point plot"})
-        ucrCategoricalByNumeric.SetName("Box plot")
-        ucrCategoricalByCategorical.SetItems({"Bar plot", "Dot plot"})
-        ucrCategoricalByCategorical.SetName("Bar plot")
+        dctNumericByNumericPairs.Add("Scatter plot", Chr(34) & "geom_point" & Chr(34))
+        dctNumericByNumericPairs.Add("Line plot", Chr(34) & "geom_boxplot" & Chr(34))
+        dctNumericByNumericPairs.Add("Scatter and line plot", Chr(34) & "geom_line" & Chr(34))
+        ' dctNumericByNumericPairs.Add("Scatter and line plot", Chr(34) & "geom_point" & Chr(34))
+        ucrNumericByNumeric.SetItems(dctNumericByNumericPairs)
+
+        dctucrNumericByCategorical.Add("Box plot", Chr(34) & "geom_point" & Chr(34))
+        dctucrNumericByCategorical.Add("Histogram", Chr(34) & "geom_boxplot" & Chr(34))
+        dctucrNumericByCategorical.Add("Density plot", Chr(34) & "geom_line" & Chr(34))
+        dctucrNumericByCategorical.Add("Frequency polygon", Chr(34) & "geom_line" & Chr(34))
+        dctucrNumericByCategorical.Add("Dot plot", Chr(34) & "geom_line" & Chr(34))
+        dctucrNumericByCategorical.Add("Point plot", Chr(34) & "geom_line" & Chr(34))
+        ucrNumericByCategorical.SetItems(dctucrNumericByCategorical)
+
+
+        dctucrCategoricalByNumeric.Add("Box plot", Chr(34) & "geom_point" & Chr(34))
+        dctucrCategoricalByNumeric.Add("Histogram", Chr(34) & "geom_boxplot" & Chr(34))
+        dctucrCategoricalByNumeric.Add("Density plot", Chr(34) & "geom_line" & Chr(34))
+        dctucrCategoricalByNumeric.Add("Frequency polygon", Chr(34) & "geom_line" & Chr(34))
+        dctucrCategoricalByNumeric.Add("Dot plot", Chr(34) & "geom_line" & Chr(34))
+        dctucrCategoricalByNumeric.Add("Point plot", Chr(34) & "geom_line" & Chr(34))
+        ucrCategoricalByNumeric.SetItems(dctucrCategoricalByNumeric)
+
+        dctucrCategoricalByCategorical.Add("Dot plot", Chr(34) & "geom_line" & Chr(34))
+        dctucrCategoricalByCategorical.Add("Point plot", Chr(34) & "geom_line" & Chr(34))
+        ucrCategoricalByCategorical.SetItems(dctucrCategoricalByCategorical)
+
+        '' ucrNumericByNumeric.SetItems({"Scatter plot", "Line plot", "Scatter and line plot"})
+        ''ucrNumericByNumeric.SetName("Scatter plot")
+        'ucrNumericByCategorical.SetItems({"Box plot", "Histogram", "Density plot", "Frequency polygon", "Dot plot", "Point plot"})
+        ''How different is the point plot from the summary plot?
+        'ucrNumericByCategorical.SetName("Box plot")
+        ''ucrCategoricalByNumeric.SetItems({"Summary plot"})
+        'ucrCategoricalByNumeric.SetItems({"Box plot", "Histogram", "Density plot", "Frequency polygon", "Dot plot", "Point plot"})
+        'ucrCategoricalByNumeric.SetName("Box plot")
+        'ucrCategoricalByCategorical.SetItems({"Bar plot", "Dot plot"})
+        'ucrCategoricalByCategorical.SetName("Bar plot")
     End Sub
 
     'Public Sub GrpBoxEnable()
