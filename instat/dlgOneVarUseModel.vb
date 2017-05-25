@@ -89,9 +89,11 @@ Public Class dlgOneVarUseModel
 
         clsQuantileFunction.SetRCommand("quantile")
         clsQuantileFunction.AddParameter("probs", clsRFunctionParameter:=clsSeqFunction)
+        clsQuantileFunction.AddParameter("CI.level", 0.95)
 
         clsRBootFunction.SetPackageName("fitdistrplus")
         clsRBootFunction.SetRCommand("bootdist")
+        clsRBootFunction.AddParameter("bootmethod", Chr(34) & "nonparam" & Chr(34))
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsQuantileFunction)
 

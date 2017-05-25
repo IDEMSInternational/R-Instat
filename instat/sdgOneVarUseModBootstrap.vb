@@ -27,16 +27,16 @@ Public Class sdgOneVarUseModBootstrap
     Public Sub InitialiseControls()
         ucrNudIterations.SetParameter(New RParameter("niter", 1))
         ucrNudIterations.SetMinMax(1, 10001)
+        ucrNudIterations.SetRDefault(1001)
+        ucrNudIterations.Increment = 100
 
         ucrNudCI.SetParameter(New RParameter("CI.level", 1))
         ucrNudCI.SetMinMax(0, 1)
-
-        ucrNudIterations.Increment = 100
         ucrNudCI.Increment = 0.05
 
         ucrChkParametric.SetParameter(New RParameter("bootmethod", 2), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "param" & Chr(34), strNewValueIfUnchecked:=Chr(34) & "nonparam" & Chr(34))
         ucrChkParametric.SetText("Parametric")
-        'ucrChkParametric.SetRDefault(Chr(34) & "nonparam" & Chr(34))
+        ucrChkParametric.SetRDefault(Chr(34) & "param" & Chr(34))
     End Sub
 
     Public Sub SetRFunction(clsNewRbootFunction As RFunction, clsNewQuantileFunction As RFunction, Optional bReset As Boolean = False)
