@@ -64,7 +64,7 @@ Partial Class sdgOneVarUseModBootstrap
         Me.ucrNudCI.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudCI.Name = "ucrNudCI"
         Me.ucrNudCI.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudCI.TabIndex = 7
+        Me.ucrNudCI.TabIndex = 1
         Me.ucrNudCI.Value = New Decimal(New Integer() {95, 0, 0, 131072})
         '
         'ucrNudIterations
@@ -76,7 +76,7 @@ Partial Class sdgOneVarUseModBootstrap
         Me.ucrNudIterations.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudIterations.Name = "ucrNudIterations"
         Me.ucrNudIterations.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudIterations.TabIndex = 8
+        Me.ucrNudIterations.TabIndex = 3
         Me.ucrNudIterations.Value = New Decimal(New Integer() {1001, 0, 0, 0})
         '
         'ucrChkParametric
@@ -85,7 +85,7 @@ Partial Class sdgOneVarUseModBootstrap
         Me.ucrChkParametric.Location = New System.Drawing.Point(13, 67)
         Me.ucrChkParametric.Name = "ucrChkParametric"
         Me.ucrChkParametric.Size = New System.Drawing.Size(140, 20)
-        Me.ucrChkParametric.TabIndex = 9
+        Me.ucrChkParametric.TabIndex = 4
         '
         'sdgOneVarUseModBootstrap
         '
