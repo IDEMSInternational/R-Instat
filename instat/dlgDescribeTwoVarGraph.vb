@@ -22,6 +22,7 @@ Public Class dlgDescribeTwoVarGraph
     Private clsRFrequencyPolygonGeom, clsRHistogramGeom, clsRDensityPlotGeom, clsRFreqPolyAesFunction, clsRFreqPolyAesFunction2, clsRHistAesFunction, clsRHistAesFunction2, clsRDensityAesFunction, clsRDensityAesFunction2 As New RFunction
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private bResetSubdialog As Boolean = False
     Private clsBaseOperator As New ROperator
     Private Sub dlgDescribeTwoVarGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -67,9 +68,6 @@ Public Class dlgDescribeTwoVarGraph
         ucrReceiverMultipleTwoVar.SetMeAsReceiver()
         ucrSaveGraph.Reset()
         ucrSelectorTwoVarGraph.Reset()
-        ucrSelectorTwoVarGraph.Focus()
-        sdgDescribeTwoVarGraph.Initialise()
-
         clsBaseOperator.SetOperation("+")
         clsRGGplotFunction.SetPackageName("ggplot2")
         clsRGGplotFunction.SetRCommand("ggplot")
@@ -80,6 +78,7 @@ Public Class dlgDescribeTwoVarGraph
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRGGplotFunction, iPosition:=0)
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorTwoVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
+        bResetSubdialog = True
     End Sub
 
     Private Sub InitialiseDialog()
@@ -142,10 +141,9 @@ Public Class dlgDescribeTwoVarGraph
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgDescribeTwoVarGraph.SetRFunction(clsBaseOperator, bResetSubdialog)
+        bResetSubdialog = False
         sdgDescribeTwoVarGraph.ShowDialog()
-        'sdgDescribeTwoVarGraph.SetRFunction(clsSummariesList, bResetSubdialog)
-        'bResetSubdialog = False
-        'sdgDescribeTwoVarGraph.ShowDialog()
         TestOkEnabled()
     End Sub
 

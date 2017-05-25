@@ -15,18 +15,19 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class sdgDescribeTwoVarGraph
-    'Public bControlsInitialised As Boolean = False
-    ' Public clsGraphOneVariable As New RFunction
+    Public bControlsInitialised As Boolean = False
+    Public clsGraphOneVariable As New ROperator
     Public bFirstLoad As Boolean = True
+
     Private Sub sdgDescribeTwoVarGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        If bFirstLoad Then
-            'SetDefaults()
-            bFirstLoad = False
-        End If
+        'If bFirstLoad Then
+        '    'SetDefaults()
+        '    bFirstLoad = False
+        'End If
     End Sub
 
-    Public Sub Initialise()
+    Public Sub InitialiseControls()
         Dim dctNumericByNumericPairs As New Dictionary(Of String, String)
         Dim dctucrNumericByCategorical As New Dictionary(Of String, String)
         Dim dctucrCategoricalByNumeric As New Dictionary(Of String, String)
@@ -96,7 +97,15 @@ Public Class sdgDescribeTwoVarGraph
     '    End If
     'End Sub
 
+    Public Sub SetRFunction(clsNewGraphOneVariable As ROperator, Optional bReset As Boolean = False)
+        If Not bControlsInitialised Then
+            InitialiseControls()
+        End If
+        clsGraphOneVariable = clsNewGraphOneVariable
+
+    End Sub
+
     Private Sub ucrGraphs_NameChanged() Handles ucrNumericByNumeric.NameChanged, ucrNumericByCategorical.NameChanged, ucrCategoricalByNumeric.NameChanged, ucrCategoricalByCategorical.NameChanged
-        dlgDescribeTwoVarGraph.Results()
+        '  dlgDescribeTwoVarGraph.Results()
     End Sub
 End Class
