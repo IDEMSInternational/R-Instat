@@ -72,7 +72,7 @@ Public Class dlgNewSummaryTables
         ucrChkOmitMissing.SetRDefault("FALSE")
 
         ucrChkDisplayMargins.SetParameter(New RParameter("include_margins", 9))
-        ucrChkDisplayMargins.SetText("Display Margins")
+        ucrChkDisplayMargins.SetText("Display Outer Margins")
         ucrChkDisplayMargins.SetRDefault("FALSE")
 
         ucrChkSummaries.Enabled = False ' temporary
@@ -99,7 +99,7 @@ Public Class dlgNewSummaryTables
         ucrChkWeight.Enabled = False
 
         ucrInputNA.SetParameter(New RParameter("na_display", 15))
-        ucrInputNA.SetRDefault("")
+        ucrInputNA.SetRDefault(Chr(34) & Chr(34))
 
         ' For the page_by option:
         ucrInputPageBy.SetParameter(New RParameter("page_by", 12))
