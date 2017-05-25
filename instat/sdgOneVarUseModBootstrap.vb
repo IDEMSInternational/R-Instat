@@ -17,7 +17,7 @@ Imports instat.Translations
 
 Public Class sdgOneVarUseModBootstrap
     Public bControlsInitialised As Boolean = False
-    Public clsOneVarRbootFunction, clsOnevarQuantileFunction As New RFunction
+    Public clsOneVarRBootFunction, clsOneVarQuantileFunction As New RFunction
     Public bfirstload As Boolean = True
 
     Private Sub sdgOneVarUseModBootstrap(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -25,9 +25,9 @@ Public Class sdgOneVarUseModBootstrap
     End Sub
 
     Public Sub InitialiseControls()
-
         ucrNudIterations.SetParameter(New RParameter("niter", 1))
         ucrNudIterations.SetMinMax(1, 10001)
+
         ucrNudCI.SetParameter(New RParameter("CI.level", 1))
         ucrNudCI.SetMinMax(0, 1)
 
@@ -38,17 +38,17 @@ Public Class sdgOneVarUseModBootstrap
         ucrChkParametric.SetText("Parametric")
         'ucrChkParametric.SetRDefault(Chr(34) & "nonparam" & Chr(34))
     End Sub
+
     Public Sub SetRFunction(clsNewRbootFunction As RFunction, clsNewQuantileFunction As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
-        clsOneVarRbootFunction = clsNewRbootFunction
-        clsOnevarQuantileFunction = clsNewQuantileFunction
+        clsOneVarRBootFunction = clsNewRbootFunction
+        clsOneVarQuantileFunction = clsNewQuantileFunction
 
-        'Setting Rcode for the sub dialogue
-        ucrChkParametric.SetRCode(clsOneVarRbootFunction, bReset)
-        ucrNudIterations.SetRCode(clsOneVarRbootFunction, bReset)
-        ucrNudCI.SetRCode(clsOnevarQuantileFunction, bReset)
-
+        'Setting Rcode for the sub dialog
+        ucrChkParametric.SetRCode(clsOneVarRBootFunction, bReset)
+        ucrNudIterations.SetRCode(clsOneVarRBootFunction, bReset)
+        ucrNudCI.SetRCode(clsOneVarQuantileFunction, bReset)
     End Sub
 End Class
