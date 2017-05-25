@@ -35,16 +35,44 @@ Public Class dlgColumnStats
         TestOKEnabled()
     End Sub
 
-    Public Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-    End Sub
+    Private Sub InitialiseDialog()
+        ucrBase.clsRsyntax.iCallType = 2
+        ucrBase.iHelpTopicID = 64
+        ucrChkDropUnusedLevels.Enabled = False ' removed this functionality so this is disabled
 
-    Public Sub TestOKEnabled()
-        If Not ucrReceiverSelectedVariables.IsEmpty() AndAlso Not clsSummariesList.clsParameters.Count = 0 Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+        ucrSelectorForColumnStatistics.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorForColumnStatistics.SetParameterIsString()
+
+        ' only allow numeric variables in the first receiver, this will change once freq. tables is added
+        ucrReceiverSelectedVariables.SetParameter(New RParameter("columns_to_summarise", 1))
+        ucrReceiverSelectedVariables.SetParameterIsString()
+        ucrReceiverSelectedVariables.SetIncludedDataTypes({"numeric"})
+        ucrReceiverSelectedVariables.Selector = ucrSelectorForColumnStatistics
+
+        ucrReceiverByFactor.SetParameter(New RParameter("factors", 2))
+        ucrReceiverByFactor.Selector = ucrSelectorForColumnStatistics
+        ucrReceiverByFactor.SetIncludedDataTypes({"factor"}) 'This needs to change
+        ucrReceiverByFactor.SetParameterIsString()
+
+        ucrChkStoreResults.SetParameter(New RParameter("store_results", 3))
+        ucrChkStoreResults.SetText("Store Results in Data Frame")
+        ucrChkStoreResults.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkStoreResults.SetRDefault("TRUE")
+
+        ucrChkPrintOutput.SetParameter(New RParameter("return_output", 4))
+        ucrChkPrintOutput.SetText("Print Results to Output Window")
+        ucrChkPrintOutput.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkPrintOutput.SetRDefault("FALSE")
+
+        ucrChkDropUnusedLevels.SetParameter(New RParameter("drop", 5))
+        ucrChkDropUnusedLevels.SetText("Drop Unused Levels")
+        ucrChkDropUnusedLevels.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkDropUnusedLevels.SetRDefault("FALSE")
+
+        ucrChkOmitMissing.SetParameter(New RParameter("na.rm", 6))
+        ucrChkOmitMissing.SetText("Omit Missing Values")
+        ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkOmitMissing.SetRDefault("FALSE")
     End Sub
 
     Private Sub SetDefaults()
@@ -65,43 +93,16 @@ Public Class dlgColumnStats
         bResetSubdialog = True
     End Sub
 
-    Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.iCallType = 2
-        ucrBase.iHelpTopicID = 64
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
 
-        ucrReceiverSelectedVariables.Selector = ucrSelectorForColumnStatistics
-        ' only allow numeric variables in the first receiver? 
-        ucrReceiverSelectedVariables.SetIncludedDataTypes({"numeric"})
-        ucrReceiverSelectedVariables.SetParameter(New RParameter("columns_to_summarise", 1))
-        ucrReceiverSelectedVariables.SetParameterIsString()
-
-        ucrReceiverByFactor.Selector = ucrSelectorForColumnStatistics
-        ucrReceiverByFactor.SetIncludedDataTypes({"factor"}) 'This needs to change
-        ucrReceiverByFactor.SetParameter(New RParameter("factors", 2))
-        ucrReceiverByFactor.SetParameterIsString()
-
-        ucrSelectorForColumnStatistics.SetParameter(New RParameter("data_name", 0))
-        ucrSelectorForColumnStatistics.SetParameterIsString()
-
-        ucrChkStoreResults.SetText("Store Results in Data Frame")
-        ucrChkStoreResults.SetParameter(New RParameter("store_results", 3))
-        ucrChkStoreResults.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkStoreResults.SetRDefault("TRUE")
-
-        ucrChkPrintOutput.SetText("Print Results to Output Window")
-        ucrChkPrintOutput.SetParameter(New RParameter("return_output", 4))
-        ucrChkPrintOutput.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkPrintOutput.SetRDefault("FALSE")
-
-        ucrChkdropUnusedLevels.SetText("Drop Unused Levels")
-        ucrChkdropUnusedLevels.SetParameter(New RParameter("drop", 5))
-        ucrChkdropUnusedLevels.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkdropUnusedLevels.SetRDefault("FALSE")
-
-        ucrChkOmitMissing.SetText("Omit Missing Values")
-        ucrChkOmitMissing.SetParameter(New RParameter("na.rm", 6))
-        ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkOmitMissing.SetRDefault("FALSE")
+    Public Sub TestOKEnabled()
+        If Not ucrReceiverSelectedVariables.IsEmpty AndAlso Not ucrReceiverByFactor.IsEmpty AndAlso Not clsSummariesList.clsParameters.Count = 0 Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -110,14 +111,14 @@ Public Class dlgColumnStats
         TestOKEnabled()
     End Sub
 
-    Private Sub cmdSummaries_click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
+    Private Sub cmdSummaries_Click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
         sdgSummaries.SetRFunction(clsSummariesList, bResetSubdialog)
         bResetSubdialog = False
         sdgSummaries.ShowDialog()
         TestOKEnabled()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedVariables.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedVariables.ControlContentsChanged, ucrReceiverByFactor.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
