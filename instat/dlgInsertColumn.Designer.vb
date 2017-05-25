@@ -80,7 +80,7 @@ Partial Class dlgInsertColumn
         Me.grpInsert.Controls.Add(Me.ucrPnlStartEnd)
         Me.grpInsert.Location = New System.Drawing.Point(228, 73)
         Me.grpInsert.Name = "grpInsert"
-        Me.grpInsert.Size = New System.Drawing.Size(298, 101)
+        Me.grpInsert.Size = New System.Drawing.Size(344, 101)
         Me.grpInsert.TabIndex = 10
         Me.grpInsert.TabStop = False
         Me.grpInsert.Text = "Insert"
@@ -88,7 +88,7 @@ Partial Class dlgInsertColumn
         'rdoBeforeAfter
         '
         Me.rdoBeforeAfter.AutoSize = True
-        Me.rdoBeforeAfter.Location = New System.Drawing.Point(20, 71)
+        Me.rdoBeforeAfter.Location = New System.Drawing.Point(24, 73)
         Me.rdoBeforeAfter.Name = "rdoBeforeAfter"
         Me.rdoBeforeAfter.Size = New System.Drawing.Size(96, 17)
         Me.rdoBeforeAfter.TabIndex = 23
@@ -100,7 +100,7 @@ Partial Class dlgInsertColumn
         '
         Me.ucrInputBeforeAfter.AddQuotesIfUnrecognised = True
         Me.ucrInputBeforeAfter.IsReadOnly = False
-        Me.ucrInputBeforeAfter.Location = New System.Drawing.Point(121, 70)
+        Me.ucrInputBeforeAfter.Location = New System.Drawing.Point(140, 71)
         Me.ucrInputBeforeAfter.Name = "ucrInputBeforeAfter"
         Me.ucrInputBeforeAfter.Size = New System.Drawing.Size(93, 21)
         Me.ucrInputBeforeAfter.TabIndex = 3
@@ -108,7 +108,7 @@ Partial Class dlgInsertColumn
         'ucrReceiverColumnsToInsert
         '
         Me.ucrReceiverColumnsToInsert.frmParent = Me
-        Me.ucrReceiverColumnsToInsert.Location = New System.Drawing.Point(218, 69)
+        Me.ucrReceiverColumnsToInsert.Location = New System.Drawing.Point(250, 70)
         Me.ucrReceiverColumnsToInsert.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverColumnsToInsert.Name = "ucrReceiverColumnsToInsert"
         Me.ucrReceiverColumnsToInsert.Selector = Nothing
@@ -120,7 +120,7 @@ Partial Class dlgInsertColumn
         'rdoAtEnd
         '
         Me.rdoAtEnd.AutoSize = True
-        Me.rdoAtEnd.Location = New System.Drawing.Point(21, 18)
+        Me.rdoAtEnd.Location = New System.Drawing.Point(15, 18)
         Me.rdoAtEnd.Name = "rdoAtEnd"
         Me.rdoAtEnd.Size = New System.Drawing.Size(57, 17)
         Me.rdoAtEnd.TabIndex = 0
@@ -131,7 +131,7 @@ Partial Class dlgInsertColumn
         'rdoAtStart
         '
         Me.rdoAtStart.AutoSize = True
-        Me.rdoAtStart.Location = New System.Drawing.Point(21, 43)
+        Me.rdoAtStart.Location = New System.Drawing.Point(15, 46)
         Me.rdoAtStart.Name = "rdoAtStart"
         Me.rdoAtStart.Size = New System.Drawing.Size(60, 17)
         Me.rdoAtStart.TabIndex = 1
@@ -169,7 +169,7 @@ Partial Class dlgInsertColumn
         Me.grpOPtions.Controls.Add(Me.rdoAfter)
         Me.grpOPtions.Controls.Add(Me.rdoBefore)
         Me.grpOPtions.Controls.Add(Me.ucrPnlBeforeAfter)
-        Me.grpOPtions.Location = New System.Drawing.Point(349, 57)
+        Me.grpOPtions.Location = New System.Drawing.Point(236, 60)
         Me.grpOPtions.Name = "grpOPtions"
         Me.grpOPtions.Size = New System.Drawing.Size(124, 82)
         Me.grpOPtions.TabIndex = 9
@@ -179,7 +179,7 @@ Partial Class dlgInsertColumn
         'rdoAfter
         '
         Me.rdoAfter.AutoSize = True
-        Me.rdoAfter.Location = New System.Drawing.Point(5, 53)
+        Me.rdoAfter.Location = New System.Drawing.Point(6, 51)
         Me.rdoAfter.Name = "rdoAfter"
         Me.rdoAfter.Size = New System.Drawing.Size(47, 17)
         Me.rdoAfter.TabIndex = 1
@@ -200,7 +200,7 @@ Partial Class dlgInsertColumn
         '
         'ucrPnlBeforeAfter
         '
-        Me.ucrPnlBeforeAfter.Location = New System.Drawing.Point(4, 18)
+        Me.ucrPnlBeforeAfter.Location = New System.Drawing.Point(8, 19)
         Me.ucrPnlBeforeAfter.Name = "ucrPnlBeforeAfter"
         Me.ucrPnlBeforeAfter.Size = New System.Drawing.Size(98, 57)
         Me.ucrPnlBeforeAfter.TabIndex = 21
@@ -326,7 +326,7 @@ Partial Class dlgInsertColumn
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(574, 325)
+        Me.ClientSize = New System.Drawing.Size(581, 325)
         Me.Controls.Add(Me.grpOPtions)
         Me.Controls.Add(Me.grpInsert)
         Me.Controls.Add(Me.ucrSaveInsertColumn)
