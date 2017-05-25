@@ -56,7 +56,7 @@ Partial Class dlgOneVarUseModel
         Me.cmdBootstrapOptions.Location = New System.Drawing.Point(275, 167)
         Me.cmdBootstrapOptions.Name = "cmdBootstrapOptions"
         Me.cmdBootstrapOptions.Size = New System.Drawing.Size(101, 23)
-        Me.cmdBootstrapOptions.TabIndex = 6
+        Me.cmdBootstrapOptions.TabIndex = 5
         Me.cmdBootstrapOptions.Text = "Bootstrap Options"
         Me.cmdBootstrapOptions.UseVisualStyleBackColor = True
         '
@@ -66,28 +66,28 @@ Partial Class dlgOneVarUseModel
         Me.ucrChkProduceBootstrap.Location = New System.Drawing.Point(239, 88)
         Me.ucrChkProduceBootstrap.Name = "ucrChkProduceBootstrap"
         Me.ucrChkProduceBootstrap.Size = New System.Drawing.Size(172, 20)
-        Me.ucrChkProduceBootstrap.TabIndex = 13
+        Me.ucrChkProduceBootstrap.TabIndex = 3
         '
         'ucrSaveObjects
         '
         Me.ucrSaveObjects.Location = New System.Drawing.Point(239, 114)
         Me.ucrSaveObjects.Name = "ucrSaveObjects"
         Me.ucrSaveObjects.Size = New System.Drawing.Size(189, 24)
-        Me.ucrSaveObjects.TabIndex = 12
+        Me.ucrSaveObjects.TabIndex = 4
         '
         'ucrNewDataframeName
         '
         Me.ucrNewDataframeName.Location = New System.Drawing.Point(10, 201)
         Me.ucrNewDataframeName.Name = "ucrNewDataframeName"
         Me.ucrNewDataframeName.Size = New System.Drawing.Size(259, 24)
-        Me.ucrNewDataframeName.TabIndex = 11
+        Me.ucrNewDataframeName.TabIndex = 6
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(10, 229)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 10
+        Me.ucrBase.TabIndex = 8
         '
         'ucrReceiver
         '
