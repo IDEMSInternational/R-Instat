@@ -1012,7 +1012,8 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
       if(use_labels && self$is_variables_metadata("labels", col_name)) {
         # TODO NA will be introduced if any values do not have a label associated
         curr_labels <- self$get_variables_metadata(property = "labels", column = col_name, direct_from_attributes = TRUE)
-        new_col <- factor(curr_col, ordered = ordered, levels = as.vector(curr_labels), labels = names(curr_labels))
+        new_col <- to_label(curr_col)
+        #new_col <- factor(curr_col, ordered = ordered, levels = as.vector(curr_labels), labels = names(curr_labels))
       }
       else new_col <- factor(curr_col, ordered = ordered)
     }
@@ -1020,7 +1021,7 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
       new_col = as.integer(curr_col)
     }
     else if(to_type == "numeric") {
-      new_col <- to_value(curr_col, keep.labels = !is_num_fac(curr_col))
+      new_col <- to_value(curr_col)#, keep.labels = !is_num_fac(curr_col))
     }
     else if(to_type == "character") {
       new_col <- to_character(curr_col)
