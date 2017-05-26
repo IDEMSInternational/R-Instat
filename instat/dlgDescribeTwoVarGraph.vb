@@ -112,7 +112,7 @@ Public Class dlgDescribeTwoVarGraph
         ' bResetSubdialog = True
     End Sub
 
-    Public Sub SetRCodeForControls(bReset As Boolean)
+    Private Sub SetRCodeForControls(bReset As Boolean)
         ucrSelectorTwoVarGraph.SetRCode(clsRGGplotFunction, bReset)
         ucrSecondVariableReceiver.SetRCode(clsRBarAesFunction, bReset)
         ucrSaveGraph.SetRCode(clsBaseOperator, bReset)
