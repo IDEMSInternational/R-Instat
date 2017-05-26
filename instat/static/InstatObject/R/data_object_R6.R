@@ -978,7 +978,7 @@ data_object$set("public", "sort_dataframe", function(col_names = c(), decreasing
 }
 )
 
-data_object$set("public", "convert_column_to_type", function(col_names = c(), to_type, factor_values = NULL, set_digits, set_decimals = FALSE, keep_attr = TRUE, use_labels = TRUE) {
+data_object$set("public", "convert_column_to_type", function(col_names = c(), to_type, factor_values = NULL, set_digits, set_decimals = FALSE, keep_attr = TRUE, ignore_labels = FALSE) {
   if(!all(col_names %in% self$get_column_names())) stop("Some column names not found in the data")
 
   if(length(to_type) !=1 ) {
@@ -996,32 +996,56 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
   for(col_name in col_names) {
     curr_col <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
     if(keep_attr) {
-      tmp_attr <- attributes(curr_col)
-      #TODO are these the only attributes we don't want to transfer?
-      tmp_attr <- tmp_attr[!names(tmp_attr) %in% c("class", "levels")]
+      tmp_attr <- get_column_attributes(curr_col)
     }
     if(!is.null(factor_values) && is.factor(curr_col) && to_type %in% c("integer", "numeric")) {
       if(factor_values == "force_ordinals") curr_col <- as.numeric(curr_col)
       else if(factor_values == "force_values") curr_col <- as.numeric(levels(curr_col))[curr_col]
+      else stop("If specified, 'factor_values' must be either 'force_ordinals' or 'force_values'")
     }
-    if(to_type %in% c("factor", "ordered_factor")) {
+    else if(to_type %in% c("factor", "ordered_factor")) {
       ordered <- (to_type == "ordered_factor")
       if(set_decimals) curr_col <- round(curr_col, digits = set_digits)
-      # Warning: this is different from expected R behaviour
-      # Any ordered columns would become unordered factors
-      if(use_labels && self$is_variables_metadata("labels", col_name)) {
-        # TODO NA will be introduced if any values do not have a label associated
-        curr_labels <- self$get_variables_metadata(property = "labels", column = col_name, direct_from_attributes = TRUE)
-        new_col <- to_label(curr_col)
-        #new_col <- factor(curr_col, ordered = ordered, levels = as.vector(curr_labels), labels = names(curr_labels))
+      if(ignore_labels) {
+        new_col <- factor(curr_col, ordered = ordered)
       }
-      else new_col <- factor(curr_col, ordered = ordered)
+      else {
+        if(self$is_variables_metadata("labels", col_name)) {
+          new_col <- to_label(curr_col, add.non.labelled = TRUE)
+        }
+        else {
+          new_col <- factor(curr_col, ordered = ordered)
+          if(is.numeric(curr_col) && !self$is_variables_metadata("labels", col_name)) {
+            labs <- sort(unique(curr_col))
+            names(labs) <- labs
+            # temporary fix to issue of add_columns not retaining attributes of new columns
+            tmp_attr[["labels"]] <- labs
+          }
+        }
+      }
     }
     else if(to_type =="integer") {
       new_col = as.integer(curr_col)
     }
     else if(to_type == "numeric") {
-      new_col <- to_value(curr_col)#, keep.labels = !is_num_fac(curr_col))
+      if(ignore_labels) {
+        new_col <- to_value(curr_col)
+      }
+      else {
+        if(self$is_variables_metadata("labels", col_name)) {
+          curr_labels <- self$get_variables_metadata(property = "labels", column = col_name, direct_from_attributes = TRUE)
+          if(!all(curr_col %in% names(curr_labels))) {
+            additional_names <- sort(unique(na.omit(curr_col[!curr_col %in% names(curr_labels)])))
+            additonal <- seq(max(curr_labels) + 1, length.out = length(additional_names))
+            names(additonal) <- additional_names
+            curr_labels <- c(curr_labels, additonal)
+            # temporary fix to issue of add_columns not retaining attributes of new columns
+            tmp_attr[["labels"]] <- curr_labels
+          }
+          new_col <- as.numeric(curr_labels[curr_col])
+        }
+        else new_col <- to_value(curr_col)
+      }
     }
     else if(to_type == "character") {
       new_col <- to_character(curr_col)
@@ -1029,10 +1053,7 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
     self$add_columns_to_data(col_name = col_name, col_data = new_col)
     
     if(keep_attr) {
-      tmp_names <- names(tmp_attr)
-      for(i in seq_along(tmp_attr)) {
-        self$append_to_variables_metadata(property = tmp_names[i], col_names = col_name, new_val = tmp_attr[[i]])
-      }
+      self$append_column_attributes(col_name = col_name, new_attr = tmp_attr)
     }
   }
   self$data_changed <- TRUE
@@ -1059,9 +1080,22 @@ data_object$set("public", "copy_columns", function(col_names = "") {
 
 data_object$set("public", "drop_unused_factor_levels", function(col_name) {
   if(!col_name %in% self$get_column_names()) stop(paste(col_name,"not found in data."))
-  if(!is.factor(self$get_columns_from_data(col_name, use_current_filter = FALSE))) stop(paste(col_name,"is not a factor."))
-  
-  self$add_columns_to_data(col_name, droplevels(self$get_columns_from_data(col_name, use_current_filter = FALSE)))
+  col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
+  if(!is.factor(col_data)) stop(paste(col_name,"is not a factor."))
+  level_counts <- table(col_data)
+  if(any(level_counts == 0)) {
+    if(self$is_variables_metadata("labels", col_name)) {
+      curr_labels <- self$get_variables_metadata(property = "labels", column = col_name, direct_from_attributes = TRUE)
+      curr_labels <- curr_labels[names(level_counts[level_counts > 0])]
+      self$append_to_variables_metadata(property = "labels", col_names = col_name, new_val = curr_labels)
+      col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
+    }
+    tmp_attr <- get_column_attributes(col_data)
+    print(tmp_attr)
+    self$add_columns_to_data(col_name, droplevels(col_data))
+    self$append_column_attributes(col_name = col_name, new_attr = tmp_attr)
+    #print(self$get_variables_metadata(property = "labels", column = col_name, direct_from_attributes = TRUE))
+  }
 } 
 )
 
@@ -2884,5 +2918,14 @@ data_object$set("public", "get_climatic_column_name", function(col_name) {
 
 data_object$set("public", "is_climatic_data", function() {
   return(self$is_metadata(is_climatic_label) &&  self$get_metadata(is_climatic_label))
+}
+)
+
+# TODO merge this with append_to_column_metadata
+data_object$set("public", "append_column_attributes", function(col_name, new_attr) {
+  tmp_names <- names(new_attr)
+  for(i in seq_along(new_attr)) {
+    self$append_to_variables_metadata(property = tmp_names[i], col_names = col_name, new_val = new_attr[[i]])
+  }
 }
 )
