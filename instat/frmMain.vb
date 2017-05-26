@@ -187,7 +187,7 @@ Public Class frmMain
     End Sub
 
     Private Sub SummaryToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificSummary.Click
-        dlgSummaryTables.ShowDialog()
+        dlgNewSummaryTables.ShowDialog()
     End Sub
 
     Private Sub mnuPrepareAddColumnTransform_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnCalculateTransform.Click
@@ -1217,7 +1217,7 @@ Public Class frmMain
         dlgTwoWayFrequencies.ShowDialog()
     End Sub
 
-    Private Sub SummaryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SummaryToolStripMenuItem.Click
+    Private Sub SummaryToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgNewSummaryTables.ShowDialog()
     End Sub
 
