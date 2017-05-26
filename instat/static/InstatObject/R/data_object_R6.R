@@ -1134,10 +1134,12 @@ data_object$set("public", "edit_factor_level", function(col_name, old_level, new
 
 data_object$set("public", "set_factor_reference_level", function(col_name, new_ref_level) {
   if(!col_name %in% self$get_column_names()) stop(paste(col_name,"not found in data."))
-  if(!is.factor(self$get_columns_from_data(col_name, use_current_filter = FALSE))) stop(paste(col_name,"is not a factor."))
-  if(!new_ref_level %in% levels(self$get_columns_from_data(col_name, use_current_filter = FALSE))) stop(paste(new_ref_level, "is not a level of the factor"))
-  
-  self$add_columns_to_data(col_name, relevel(self$get_columns_from_data(col_name, use_current_filter = FALSE), new_ref_level))
+  col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
+  if(!is.factor(col_data)) stop(paste(col_name,"is not a factor."))
+  if(!new_ref_level %in% levels(col_data)) stop(paste(new_ref_level, "is not a level of", col_name))
+  tmp_attr <- get_column_attributes(col_data)
+  self$add_columns_to_data(col_name, relevel(col_data, new_ref_level))
+  self$append_column_attributes(col_name = col_name, new_attr = tmp_attr)
 } 
 )
 
@@ -1845,8 +1847,8 @@ data_object$set("public","set_contrasts_of_factor", function(col_name, new_contr
   else if(!is.character(new_contrasts)) {
     stop("New column name must be of type: character")
   }
-       contrasts(private$data[[col_name]]) <- new_contrasts
-  }
+  contrasts(private$data[[col_name]]) <- new_contrasts
+}
 )
 #This method gets a date column and extracts part of the information such as year, month, week, weekday etc(depending on which parameters are set) and creates their respective new column(s)
 data_object$set("public","split_date", function(col_name = "", week = FALSE, month_val = FALSE, month_abbr = FALSE, month_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE, year = FALSE, day = FALSE, day_in_month = FALSE, day_in_year = FALSE, leap_year = FALSE, day_in_year_366 = FALSE, dekade = FALSE, pentad = FALSE) {
