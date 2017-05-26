@@ -68,7 +68,7 @@ Public Class sdgOneVarUseModFit
         dctQuantileValues.Add("0.25, 0.5, 0.75", "0.25, 0.5, 0.75")
         dctQuantileValues.Add("0.1, ..., 0.9", "0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9")
         ucrInputQuantiles.SetItems(dctQuantileValues)
-        'TODO: set default value
+        ucrInputQuantiles.SetRDefault("0.25, 0.5, 0.75")
 
         ucrPnlQuantiles.AddToLinkedControls(ucrInputQuantiles, {rdoInsertValues}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
         ucrPnlQuantiles.AddToLinkedControls(ucrNudTo, {rdoSequence}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)

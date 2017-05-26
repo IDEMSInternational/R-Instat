@@ -82,7 +82,7 @@ Public Class dlgOneVarUseModel
         sdgOneVarUseModFit.SetDefaults()
 
         clsSeqFunction.SetRCommand("seq")
-        clsSeqFunction.AddParameter("from", 0)
+        clsSeqFunction.AddParameter("from", 0) ' TODO: these parameters have default values set earlier, are these needed here?
         clsSeqFunction.AddParameter("to", 1)
         clsSeqFunction.AddParameter("by", 0.25)
 
