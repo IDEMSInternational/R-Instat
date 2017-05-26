@@ -48,7 +48,7 @@ Public Class sdgOneVarUseModFit
         ucrNudTo.Increment = 0.05
 
         ucrNudBy.SetParameter(New RParameter("by", 3))
-        ucrNudBy.SetMinMax(0.001, 1)
+        ucrNudBy.SetMinMax(0.01, 1)
         ucrNudBy.Increment = 0.05
 
         bControlsInitialised = True
@@ -134,7 +134,7 @@ Public Class sdgOneVarUseModFit
         End If
     End Sub
 
-    Private Sub rdoInsertValues_CheckedChanged(sender As Object, e As EventArgs) Handles rdoInsertValues.CheckedChanged
+    Private Sub rdoInsertValues_CheckedChanged(sender As Object, e As EventArgs)
         If rdoInsertValues.Checked Then
             ucrInputValues.Enabled = True
         Else
