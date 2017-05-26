@@ -84,17 +84,16 @@ Public Class dlgOneVarUseModel
         clsSeqFunction.SetRCommand("seq")
         clsSeqFunction.AddParameter("from", 0)
         clsSeqFunction.AddParameter("to", 1)
-        clsSeqFunction.AddParameter("by", 0.1)
+        clsSeqFunction.AddParameter("by", 0.25)
 
         clsQuantileFunction.SetRCommand("quantile")
         clsQuantileFunction.AddParameter("probs", clsRFunctionParameter:=clsSeqFunction)
-        clsQuantileFunction.AddParameter("CI.level", 0.95)
+        'clsQuantileFunction.AddParameter("CI.level", 0.95) ' this should only be added if bootstrap is checked
 
         clsRBootFunction.SetPackageName("fitdistrplus")
         clsRBootFunction.SetRCommand("bootdist")
         clsRBootFunction.AddParameter("bootmethod", Chr(34) & "nonparam" & Chr(34))
         clsRBootFunction.AddParameter("niter", 1001)
-
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsQuantileFunction)
 
@@ -143,8 +142,13 @@ Public Class dlgOneVarUseModel
     'End If
     'End Sub
 
-
-
+    Public Sub QuantileCommand()
+        If sdgOneVarUseModFit.rdoSequence.Checked Then
+            clsQuantileFunction.AddParameter("probs", clsRFunctionParameter:=clsSeqFunction)
+        Else
+            clsQuantileFunction.AddParameter("probs", strParameterValue:="c(" & sdgOneVarUseModFit.ucrInputQuantiles.GetText & ")")
+        End If
+    End Sub
 
     Private Sub cmdFitModel_Click(sender As Object, e As EventArgs) Handles cmdFitModelandBootstrap.Click
         sdgOneVarUseModFit.SetRFunction(clsSeqFunction, clsRBootFunction, clsQuantileFunction, bResetSubdialog)
