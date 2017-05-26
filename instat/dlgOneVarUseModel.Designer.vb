@@ -43,11 +43,11 @@ Partial Class dlgOneVarUseModel
         '
         'cmdFitModelandBootstrap
         '
-        Me.cmdFitModelandBootstrap.Location = New System.Drawing.Point(265, 200)
+        Me.cmdFitModelandBootstrap.Location = New System.Drawing.Point(333, 200)
         Me.cmdFitModelandBootstrap.Name = "cmdFitModelandBootstrap"
-        Me.cmdFitModelandBootstrap.Size = New System.Drawing.Size(144, 23)
+        Me.cmdFitModelandBootstrap.Size = New System.Drawing.Size(76, 23)
         Me.cmdFitModelandBootstrap.TabIndex = 7
-        Me.cmdFitModelandBootstrap.Text = "Fit Model and Bootstrap"
+        Me.cmdFitModelandBootstrap.Text = "Options"
         Me.cmdFitModelandBootstrap.UseVisualStyleBackColor = True
         '
         'ucrChkProduceBootstrap
@@ -69,7 +69,7 @@ Partial Class dlgOneVarUseModel
         '
         Me.ucrNewDataFrameName.Location = New System.Drawing.Point(10, 200)
         Me.ucrNewDataFrameName.Name = "ucrNewDataFrameName"
-        Me.ucrNewDataFrameName.Size = New System.Drawing.Size(249, 24)
+        Me.ucrNewDataFrameName.Size = New System.Drawing.Size(265, 24)
         Me.ucrNewDataFrameName.TabIndex = 6
         '
         'ucrBase
