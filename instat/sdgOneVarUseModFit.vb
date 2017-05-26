@@ -18,6 +18,7 @@ Imports instat.Translations
 Public Class sdgOneVarUseModFit
     Private bControlsInitialised As Boolean = False
     Private clsRSeqFunction, clsOneVarRBootFunction, clsOneVarQuantileFunction, clsRPlotFunction, clsRBootFunction As New RFunction
+
     Private clsModel As New RFunction
     Public bfirstload As Boolean = True
 
@@ -35,6 +36,7 @@ Public Class sdgOneVarUseModFit
 
         ucrNudCI.SetParameter(New RParameter("CI.level", 1))
         ucrNudCI.SetMinMax(0, 1)
+        ucrNudCI.SetRDefault(0.95)
         ucrNudCI.Increment = 0.05
 
         ucrChkParametric.SetParameter(New RParameter("bootmethod", 2), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "param" & Chr(34), strNewValueIfUnchecked:=Chr(34) & "nonparam" & Chr(34))
@@ -134,7 +136,7 @@ Public Class sdgOneVarUseModFit
         ElseIf rdoCIcdf.Checked Then
             clsRPlotFunction.ClearParameters()
             clsRPlotFunction.SetRCommand("CIcdfplot")
-            clsRPlotFunction.AddParameter("b", clsRFunctionParameter:=clsRBootFunction)
+            clsRPlotFunction.AddParameter("b", clsRFunctionParameter:=dlgOneVarUseModel.clsRBootFunction)
             clsRPlotFunction.AddParameter("CI.output", Chr(34) & "quantile" & Chr(34))
         End If
         frmMain.clsRLink.RunScript(clsRPlotFunction.ToScript(), 2)
@@ -143,10 +145,6 @@ Public Class sdgOneVarUseModFit
     Public Sub SetMyBootFunction(clsRNewBoot As RFunction)
         clsRBootFunction = clsRNewBoot
     End Sub
-
-    'Public Sub SetMyRSyntax(clsRNewSyntax As RSyntax)
-    '    clsRsyntax = clsRNewSyntax
-    'End Sub
 
     Public Sub SetPlotOptions()
         If Not dlgOneVarUseModel.ucrChkProduceBootstrap.Checked Then
