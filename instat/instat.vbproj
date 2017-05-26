@@ -1824,12 +1824,6 @@
     <Compile Include="dlgSummary.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgSummaryTables.designer.vb">
-      <DependentUpon>dlgSummaryTables.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgSummaryTables.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgThreeSummaries.Designer.vb">
       <DependentUpon>dlgThreeSummaries.vb</DependentUpon>
     </Compile>
@@ -4010,15 +4004,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSummary.sw-KE.resx">
       <DependentUpon>dlgSummary.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgSummaryTables.fr-FR.resx">
-      <DependentUpon>dlgSummaryTables.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgSummaryTables.resx">
-      <DependentUpon>dlgSummaryTables.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgSummaryTables.sw-KE.resx">
-      <DependentUpon>dlgSummaryTables.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTransform.fr-FR.resx">
       <DependentUpon>dlgTransform.vb</DependentUpon>
