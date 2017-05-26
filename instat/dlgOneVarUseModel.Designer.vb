@@ -23,8 +23,7 @@ Partial Class dlgOneVarUseModel
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblReceiverObject = New System.Windows.Forms.Label()
-        Me.cmdFitModel = New System.Windows.Forms.Button()
-        Me.cmdBootstrapOptions = New System.Windows.Forms.Button()
+        Me.cmdFitModelandBootstrap = New System.Windows.Forms.Button()
         Me.ucrChkProduceBootstrap = New instat.ucrCheck()
         Me.ucrSaveObjects = New instat.ucrSave()
         Me.ucrNewDataFrameName = New instat.ucrSave()
@@ -42,23 +41,14 @@ Partial Class dlgOneVarUseModel
         Me.lblReceiverObject.TabIndex = 1
         Me.lblReceiverObject.Text = "Selected Object:"
         '
-        'cmdFitModel
+        'cmdFitModelandBootstrap
         '
-        Me.cmdFitModel.Location = New System.Drawing.Point(308, 202)
-        Me.cmdFitModel.Name = "cmdFitModel"
-        Me.cmdFitModel.Size = New System.Drawing.Size(101, 23)
-        Me.cmdFitModel.TabIndex = 7
-        Me.cmdFitModel.Text = "Fit Model"
-        Me.cmdFitModel.UseVisualStyleBackColor = True
-        '
-        'cmdBootstrapOptions
-        '
-        Me.cmdBootstrapOptions.Location = New System.Drawing.Point(308, 172)
-        Me.cmdBootstrapOptions.Name = "cmdBootstrapOptions"
-        Me.cmdBootstrapOptions.Size = New System.Drawing.Size(101, 23)
-        Me.cmdBootstrapOptions.TabIndex = 5
-        Me.cmdBootstrapOptions.Text = "Bootstrap Options"
-        Me.cmdBootstrapOptions.UseVisualStyleBackColor = True
+        Me.cmdFitModelandBootstrap.Location = New System.Drawing.Point(265, 200)
+        Me.cmdFitModelandBootstrap.Name = "cmdFitModelandBootstrap"
+        Me.cmdFitModelandBootstrap.Size = New System.Drawing.Size(144, 23)
+        Me.cmdFitModelandBootstrap.TabIndex = 7
+        Me.cmdFitModelandBootstrap.Text = "Fit Model and Bootstrap"
+        Me.cmdFitModelandBootstrap.UseVisualStyleBackColor = True
         '
         'ucrChkProduceBootstrap
         '
@@ -79,7 +69,7 @@ Partial Class dlgOneVarUseModel
         '
         Me.ucrNewDataFrameName.Location = New System.Drawing.Point(10, 200)
         Me.ucrNewDataFrameName.Name = "ucrNewDataFrameName"
-        Me.ucrNewDataFrameName.Size = New System.Drawing.Size(259, 24)
+        Me.ucrNewDataFrameName.Size = New System.Drawing.Size(249, 24)
         Me.ucrNewDataFrameName.TabIndex = 6
         '
         'ucrBase
@@ -123,8 +113,7 @@ Partial Class dlgOneVarUseModel
         Me.Controls.Add(Me.lblReceiverObject)
         Me.Controls.Add(Me.ucrReceiverObject)
         Me.Controls.Add(Me.ucrSelectorUseModel)
-        Me.Controls.Add(Me.cmdFitModel)
-        Me.Controls.Add(Me.cmdBootstrapOptions)
+        Me.Controls.Add(Me.cmdFitModelandBootstrap)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -140,8 +129,7 @@ Partial Class dlgOneVarUseModel
     Friend WithEvents lblReceiverObject As Label
     Friend WithEvents ucrReceiverObject As ucrReceiverSingle
     Friend WithEvents ucrSelectorUseModel As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents cmdFitModel As Button
-    Friend WithEvents cmdBootstrapOptions As Button
+    Friend WithEvents cmdFitModelandBootstrap As Button
     Friend WithEvents ucrNewDataFrameName As ucrSave
     Friend WithEvents ucrSaveObjects As ucrSave
     Friend WithEvents ucrChkProduceBootstrap As ucrCheck
