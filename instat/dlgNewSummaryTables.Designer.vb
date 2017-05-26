@@ -45,8 +45,8 @@ Partial Class dlgNewSummaryTables
         Me.ucrChkHTMLTable = New instat.ucrCheck()
         Me.ucrNudColumnFactors = New instat.ucrNud()
         Me.grpDisplay = New System.Windows.Forms.GroupBox()
-        Me.lblDisplayNA = New System.Windows.Forms.Label()
         Me.ucrInputNA = New instat.ucrInputTextBox()
+        Me.lblDisplayNA = New System.Windows.Forms.Label()
         Me.grpDisplay.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -277,16 +277,6 @@ Partial Class dlgNewSummaryTables
         Me.grpDisplay.TabStop = False
         Me.grpDisplay.Text = "Display"
         '
-        'lblDisplayNA
-        '
-        Me.lblDisplayNA.AutoSize = True
-        Me.lblDisplayNA.Location = New System.Drawing.Point(8, 141)
-        Me.lblDisplayNA.Name = "lblDisplayNA"
-        Me.lblDisplayNA.Size = New System.Drawing.Size(76, 13)
-        Me.lblDisplayNA.TabIndex = 8
-        Me.lblDisplayNA.Tag = ""
-        Me.lblDisplayNA.Text = "Display NA as:"
-        '
         'ucrInputNA
         '
         Me.ucrInputNA.AddQuotesIfUnrecognised = True
@@ -297,6 +287,16 @@ Partial Class dlgNewSummaryTables
         Me.ucrInputNA.Size = New System.Drawing.Size(89, 21)
         Me.ucrInputNA.TabIndex = 15
         '
+        'lblDisplayNA
+        '
+        Me.lblDisplayNA.AutoSize = True
+        Me.lblDisplayNA.Location = New System.Drawing.Point(8, 141)
+        Me.lblDisplayNA.Name = "lblDisplayNA"
+        Me.lblDisplayNA.Size = New System.Drawing.Size(76, 13)
+        Me.lblDisplayNA.TabIndex = 8
+        Me.lblDisplayNA.Tag = ""
+        Me.lblDisplayNA.Text = "Display NA as:"
+        '
         'dlgNewSummaryTables
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -306,8 +306,8 @@ Partial Class dlgNewSummaryTables
         Me.Controls.Add(Me.ucrChkOmitMissing)
         Me.Controls.Add(Me.ucrChkStoreResults)
         Me.Controls.Add(Me.cmdSummaries)
-        Me.Controls.Add(Me.ucrChkDisplayMargins)
-        Me.Controls.Add(Me.grpDisplay)
+        Me.Controls.Add(Me.ucrChkDispla        Me.Controls.Add(Me.grpDisplay)
+        yMargins)
         Me.Controls.Add(Me.ucrChkSummaries)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrReceiverSummaryCols)
@@ -322,7 +322,7 @@ Partial Class dlgNewSummaryTables
         Me.MinimizeBox = False
         Me.Name = "dlgNewSummaryTables"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "New Summary Tables"
+        Me.Text = "Summary Tables"
         Me.grpDisplay.ResumeLayout(False)
         Me.grpDisplay.PerformLayout()
         Me.ResumeLayout(False)
