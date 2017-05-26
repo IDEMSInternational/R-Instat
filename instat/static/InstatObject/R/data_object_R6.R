@@ -1032,7 +1032,8 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
         new_col <- to_value(curr_col)
       }
       else {
-        if(self$is_variables_metadata("labels", col_name)) {
+        if(self$is_variables_metadata("labels", col_name) && !is.numeric(curr_col)) {
+          #TODO WARNING: need to test this on columns of different types to check for strange behaviour
           curr_labels <- self$get_variables_metadata(property = "labels", column = col_name, direct_from_attributes = TRUE)
           if(!all(curr_col %in% names(curr_labels))) {
             additional_names <- sort(unique(na.omit(curr_col[!curr_col %in% names(curr_labels)])))
@@ -1042,7 +1043,7 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
             # temporary fix to issue of add_columns not retaining attributes of new columns
             tmp_attr[["labels"]] <- curr_labels
           }
-          new_col <- as.numeric(curr_labels[curr_col])
+          new_col <- as.numeric(curr_labels[as.character(curr_col)])
         }
         else new_col <- to_value(curr_col)
       }
