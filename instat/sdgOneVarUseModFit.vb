@@ -17,7 +17,7 @@ Imports instat.Translations
 
 Public Class sdgOneVarUseModFit
     Private bControlsInitialised As Boolean = False
-    Private clsRseqFunction, clsOneVarRBootFunction, clsOneVarQuantileFunction, clsRplotFunction, clsRbootFunction As New RFunction
+    Private clsRSeqFunction, clsOneVarRBootFunction, clsOneVarQuantileFunction, clsRPlotFunction, clsRBootFunction As New RFunction
     Private clsModel As New RFunction
     Public bfirstload As Boolean = True
 
@@ -26,6 +26,8 @@ Public Class sdgOneVarUseModFit
     End Sub
 
     Public Sub InitialiseControls()
+        Dim dctQuantileValues As New Dictionary(Of String, String)
+
         ucrNudIterations.SetParameter(New RParameter("niter", 1))
         ucrNudIterations.SetMinMax(1, 10001)
         ucrNudIterations.SetRDefault(1001)
@@ -39,43 +41,68 @@ Public Class sdgOneVarUseModFit
         ucrChkParametric.SetText("Parametric")
         ucrChkParametric.SetRDefault(Chr(34) & "param" & Chr(34))
 
+        ' "probs" parameter:
+        ucrPnlQuantiles.AddRadioButton(rdoSequence)
+        ucrPnlQuantiles.AddRadioButton(rdoInsertValues)
+        'ucrPnlQuantiles.AddFunctionNamesCondition(rdoSequence, "seq")
+        'ucrPnlQuantiles.AddParameterValuesCondition(rdoInsertValues, "c()")
+
+        '1. Function ran here is probs = seq(from = , to = , by =)
         ucrNudFrom.SetParameter(New RParameter("from", 1))
         ucrNudFrom.SetMinMax(0, 1)
         ucrNudFrom.Increment = 0.05
+        ucrNudFrom.SetRDefault(0)
 
         ucrNudTo.SetParameter(New RParameter("to", 2))
         ucrNudTo.SetMinMax(0, 1)
         ucrNudTo.Increment = 0.05
+        ucrNudFrom.SetRDefault(1)
 
         ucrNudBy.SetParameter(New RParameter("by", 3))
         ucrNudBy.SetMinMax(0.01, 1)
         ucrNudBy.Increment = 0.05
+        ucrNudFrom.SetRDefault(0.25)
+
+        'function ran here is probs = c(VALUES)
+        ucrInputQuantiles.SetParameter(New RParameter("x"))
+        dctQuantileValues.Add("0.25, 0.5, 0.75", "0.25, 0.5, 0.75")
+        dctQuantileValues.Add("0.1, ..., 0.9", "0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9")
+        ucrInputQuantiles.SetItems(dctQuantileValues)
+        'TODO: set default value
+
+        ucrPnlQuantiles.AddToLinkedControls(ucrInputQuantiles, {rdoInsertValues}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
+        ucrPnlQuantiles.AddToLinkedControls(ucrNudTo, {rdoSequence}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
+        ucrPnlQuantiles.AddToLinkedControls(ucrNudFrom, {rdoSequence}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
+        ucrPnlQuantiles.AddToLinkedControls(ucrNudBy, {rdoSequence}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
+        ucrNudTo.SetLinkedDisplayControl(lblTo)
+        ucrNudFrom.SetLinkedDisplayControl(lblFrom)
+        ucrNudBy.SetLinkedDisplayControl(lblBy)
 
         bControlsInitialised = True
     End Sub
+
     Public Sub SetRFunction(clsNewRSeqFunction As RFunction, clsNewRbootFunction As RFunction, clsNewQuantileFunction As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
-        clsRseqFunction = clsNewRSeqFunction
+        clsRSeqFunction = clsNewRSeqFunction
         clsOneVarRBootFunction = clsNewRbootFunction
         clsOneVarQuantileFunction = clsNewQuantileFunction
 
         'Setting Rcode for the sub dialog
-        ucrNudFrom.SetRCode(clsRseqFunction, bReset)
-        ucrNudTo.SetRCode(clsRseqFunction, bReset)
-        ucrNudBy.SetRCode(clsRseqFunction, bReset)
+        ucrNudFrom.SetRCode(clsRSeqFunction, bReset)
+        ucrNudTo.SetRCode(clsRSeqFunction, bReset)
+        ucrNudBy.SetRCode(clsRSeqFunction, bReset)
         ucrChkParametric.SetRCode(clsOneVarRBootFunction, bReset)
         ucrNudIterations.SetRCode(clsOneVarRBootFunction, bReset)
         ucrNudCI.SetRCode(clsOneVarQuantileFunction, bReset)
-
     End Sub
 
     Public Sub SetDefaults()
         rdoPlotAll.Checked = True
         rdoSequence.Checked = True
-        rdoInsertValues.Enabled = False
-        ucrInputValues.Enabled = False
+        'rdoInsertValues.Enabled = False
+        ucrInputQuantiles.Enabled = False
         SetPlotOptions()
     End Sub
 
@@ -85,36 +112,36 @@ Public Class sdgOneVarUseModFit
 
     Public Sub CreateGraphs()
         If rdoPlotAll.Checked Then
-            clsRplotFunction.ClearParameters()
-            clsRplotFunction.SetRCommand("plot")
-            clsRplotFunction.AddParameter("x", clsRFunctionParameter:=dlgOneVarUseModel.ucrReceiverObject.GetVariables())
+            clsRPlotFunction.ClearParameters()
+            clsRPlotFunction.SetRCommand("plot")
+            clsRPlotFunction.AddParameter("x", clsRFunctionParameter:=dlgOneVarUseModel.ucrReceiverObject.GetVariables())
         ElseIf rdoPPPlot.Checked Then
-            clsRplotFunction.ClearParameters()
-            clsRplotFunction.SetRCommand("ppcomp")
-            clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarUseModel.ucrReceiverObject.GetVariables())
+            clsRPlotFunction.ClearParameters()
+            clsRPlotFunction.SetRCommand("ppcomp")
+            clsRPlotFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarUseModel.ucrReceiverObject.GetVariables())
         ElseIf rdoCDFPlot.Checked Then
-            clsRplotFunction.ClearParameters()
-            clsRplotFunction.SetRCommand("cdfcomp")
-            clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarUseModel.ucrReceiverObject.GetVariables())
+            clsRPlotFunction.ClearParameters()
+            clsRPlotFunction.SetRCommand("cdfcomp")
+            clsRPlotFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarUseModel.ucrReceiverObject.GetVariables())
         ElseIf rdoQQPlot.Checked Then
-            clsRplotFunction.ClearParameters()
-            clsRplotFunction.SetRCommand("qqcomp")
-            clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarUseModel.ucrReceiverObject.GetVariables())
+            clsRPlotFunction.ClearParameters()
+            clsRPlotFunction.SetRCommand("qqcomp")
+            clsRPlotFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarUseModel.ucrReceiverObject.GetVariables())
         ElseIf rdoDensityPlot.Checked Then
-            clsRplotFunction.ClearParameters()
-            clsRplotFunction.SetRCommand("denscomp")
-            clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarUseModel.ucrReceiverObject.GetVariables())
+            clsRPlotFunction.ClearParameters()
+            clsRPlotFunction.SetRCommand("denscomp")
+            clsRPlotFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarUseModel.ucrReceiverObject.GetVariables())
         ElseIf rdoCIcdf.Checked Then
-            clsRplotFunction.ClearParameters()
-            clsRplotFunction.SetRCommand("CIcdfplot")
-            clsRplotFunction.AddParameter("b", clsRFunctionParameter:=clsRbootFunction)
-            clsRplotFunction.AddParameter("CI.output", Chr(34) & "quantile" & Chr(34))
+            clsRPlotFunction.ClearParameters()
+            clsRPlotFunction.SetRCommand("CIcdfplot")
+            clsRPlotFunction.AddParameter("b", clsRFunctionParameter:=clsRBootFunction)
+            clsRPlotFunction.AddParameter("CI.output", Chr(34) & "quantile" & Chr(34))
         End If
-        frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 2)
+        frmMain.clsRLink.RunScript(clsRPlotFunction.ToScript(), 2)
     End Sub
 
     Public Sub SetMyBootFunction(clsRNewBoot As RFunction)
-        clsRbootFunction = clsRNewBoot
+        clsRBootFunction = clsRNewBoot
     End Sub
 
     'Public Sub SetMyRSyntax(clsRNewSyntax As RSyntax)
@@ -134,12 +161,7 @@ Public Class sdgOneVarUseModFit
         End If
     End Sub
 
-    Private Sub rdoInsertValues_CheckedChanged(sender As Object, e As EventArgs)
-        If rdoInsertValues.Checked Then
-            ucrInputValues.Enabled = True
-        Else
-            ucrInputValues.Enabled = False
-        End If
+    Private Sub ucrPnlQuantiles_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlQuantiles.ControlValueChanged, ucrInputQuantiles.ControlValueChanged
+        dlgOneVarUseModel.QuantileCommand()
     End Sub
-
 End Class
