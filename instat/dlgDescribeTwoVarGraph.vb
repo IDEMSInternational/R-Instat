@@ -38,31 +38,6 @@ Public Class dlgDescribeTwoVarGraph
         autoTranslate(Me)
     End Sub
 
-    Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 416
-        ucrBase.clsRsyntax.iCallType = 3
-        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-
-        ucrSelectorTwoVarGraph.SetParameter(New RParameter("data", 0))
-        ucrSelectorTwoVarGraph.SetParameterIsrfunction()
-
-        ucrReceiverMultipleTwoVar.Selector = ucrSelectorTwoVarGraph
-        ucrReceiverMultipleTwoVar.SetSingleTypeStatus(True)
-        ucrReceiverMultipleTwoVar.SetMultipleOnlyStatus(True)
-
-        ucrSecondVariableReceiver.Selector = ucrSelectorTwoVarGraph
-        ucrSecondVariableReceiver.SetParameter(New RParameter("fill", 0))
-        ucrSecondVariableReceiver.SetParameterIsString()
-        ucrSecondVariableReceiver.bWithQuotes = False
-
-        ucrSaveGraph.SetPrefix("two_var")
-        ucrSaveGraph.SetSaveTypeAsGraph()
-        ucrSaveGraph.SetDataFrameSelector(ucrSelectorTwoVarGraph.ucrAvailableDataFrames)
-        ucrSaveGraph.SetCheckBoxText("Save Graph")
-        ucrSaveGraph.SetIsComboBox()
-        ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
-    End Sub
-
     Private Sub SetDefaults()
         clsRGGplotFunction = New RFunction
         clsRBoxPlotGeom = New RFunction
@@ -112,6 +87,32 @@ Public Class dlgDescribeTwoVarGraph
         ' bResetSubdialog = True
     End Sub
 
+    Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 416
+        ucrBase.clsRsyntax.iCallType = 3
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+
+        ucrSelectorTwoVarGraph.SetParameter(New RParameter("data", 0))
+        ucrSelectorTwoVarGraph.SetParameterIsrfunction()
+
+        ucrReceiverMultipleTwoVar.Selector = ucrSelectorTwoVarGraph
+        ucrReceiverMultipleTwoVar.SetSingleTypeStatus(True)
+        ucrReceiverMultipleTwoVar.SetMultipleOnlyStatus(True)
+
+        ucrSecondVariableReceiver.Selector = ucrSelectorTwoVarGraph
+        ucrSecondVariableReceiver.SetParameter(New RParameter("fill", 0))
+        ucrSecondVariableReceiver.SetParameterIsString()
+        ucrSecondVariableReceiver.bWithQuotes = False
+
+        ucrSaveGraph.SetPrefix("two_var")
+        ucrSaveGraph.SetSaveTypeAsGraph()
+        ucrSaveGraph.SetDataFrameSelector(ucrSelectorTwoVarGraph.ucrAvailableDataFrames)
+        ucrSaveGraph.SetCheckBoxText("Save Graph")
+        ucrSaveGraph.SetIsComboBox()
+        ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
+
+    End Sub
+
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrSelectorTwoVarGraph.SetRCode(clsRGGplotFunction, bReset)
         ucrSecondVariableReceiver.SetRCode(clsRBarAesFunction, bReset)
@@ -128,13 +129,14 @@ Public Class dlgDescribeTwoVarGraph
         ucrSecondVariableReceiver.AddAdditionalCodeParameterPair(clsRFreqPolyAesFunction2, New RParameter("x", 0), iAdditionalPairNo:=10)
         ucrSecondVariableReceiver.AddAdditionalCodeParameterPair(clsRHistAesFunction2, New RParameter("x", 0), iAdditionalPairNo:=11)
         ucrSecondVariableReceiver.AddAdditionalCodeParameterPair(clsRDensityAesFunction2, New RParameter("x", 0), iAdditionalPairNo:=12)
+
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverMultipleTwoVar.IsEmpty AndAlso Not ucrSecondVariableReceiver.IsEmpty AndAlso ucrSaveGraph.IsComplete Then
-            ucrBase.OKEnabled(True)
-        Else
+        If ucrReceiverMultipleTwoVar.IsEmpty Or ucrSecondVariableReceiver.IsEmpty Or Not ucrSaveGraph.IsComplete Then
             ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
         End If
     End Sub
 
@@ -281,6 +283,7 @@ Public Class dlgDescribeTwoVarGraph
         clsRScatterAesFunction2.AddParameter("x", "value")
     End Sub
 
+
     Private Sub DotPlot()
         clsRDotPlotGeom.SetPackageName("ggplot2")
         clsRDotPlotGeom.SetRCommand("geom_dotplot")
@@ -343,4 +346,5 @@ Public Class dlgDescribeTwoVarGraph
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSecondVariableReceiver.ControlContentsChanged, ucrReceiverMultipleTwoVar.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
         TestOkEnabled()
     End Sub
+
 End Class
