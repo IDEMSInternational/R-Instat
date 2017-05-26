@@ -303,7 +303,7 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
       col_attributes[[data_type_label]] <- class(col)
       for(att_name in names(col_attributes)) {
         #TODO Think how to do this more generally and cover all cases
-        if(att_name == "labels") col_attributes[[att_name]] <- paste(names(col_attributes[[att_name]]), "=", col_attributes[[att_name]], collapse = ", ")
+        if(att_name == labels_label) col_attributes[[att_name]] <- paste(names(col_attributes[[att_name]]), "=", col_attributes[[att_name]], collapse = ", ")
         else if(is.list(col_attributes[[att_name]]) || length(col_attributes[[att_name]]) > 1) col_attributes[[att_name]] <- paste(unlist(col_attributes[[att_name]]), collapse = ",")
         # TODO Possible alternative to include names of list
         # TODO See how to have data frame properly containing lists
@@ -832,6 +832,21 @@ data_object$set("public", "add_defaults_variables_metadata", function(column_nam
     if(!self$is_variables_metadata(signif_figures_label, column)) {
       self$append_to_variables_metadata(column, signif_figures_label, get_default_significant_figures(self$get_columns_from_data(column, use_current_filter = FALSE)))
     }
+    if(self$is_variables_metadata(labels_label, column)) {
+      curr_labels <- self$get_variables_metadata(property = labels_label, column = column, direct_from_attributes = TRUE)
+      if(!is.numeric(curr_labels)) {
+        numeric_labs <- as.numeric(curr_labels)
+        if(any(is.na(numeric_labs))) {
+          warning("labels attribute of non numeric values is not currently supported. labels will be removed from column: ", column, " to prevent compatibility issues. removed labels: ", curr_labels)
+          self$append_to_variables_metadata(column, labels_label, NULL)
+        }
+        else {
+          adjusted_labels <- numeric_labs
+          names(adjusted_labels) <- names(curr_labels)
+          self$append_to_variables_metadata(column, labels_label, adjusted_labels)
+        }
+      }
+    }
   }
 }
 )
@@ -1010,16 +1025,16 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
         new_col <- factor(curr_col, ordered = ordered)
       }
       else {
-        if(self$is_variables_metadata("labels", col_name)) {
+        if(self$is_variables_metadata(labels_label, col_name)) {
           new_col <- to_label(curr_col, add.non.labelled = TRUE)
         }
         else {
           new_col <- factor(curr_col, ordered = ordered)
-          if(is.numeric(curr_col) && !self$is_variables_metadata("labels", col_name)) {
+          if(is.numeric(curr_col) && !self$is_variables_metadata(labels_label, col_name)) {
             labs <- sort(unique(curr_col))
             names(labs) <- labs
             # temporary fix to issue of add_columns not retaining attributes of new columns
-            tmp_attr[["labels"]] <- labs
+            tmp_attr[[labels_label]] <- labs
           }
         }
       }
@@ -1032,16 +1047,16 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
         new_col <- to_value(curr_col)
       }
       else {
-        if(self$is_variables_metadata("labels", col_name) && !is.numeric(curr_col)) {
+        if(self$is_variables_metadata(labels_label, col_name) && !is.numeric(curr_col)) {
           #TODO WARNING: need to test this on columns of different types to check for strange behaviour
-          curr_labels <- self$get_variables_metadata(property = "labels", column = col_name, direct_from_attributes = TRUE)
+          curr_labels <- self$get_variables_metadata(property = labels_label, column = col_name, direct_from_attributes = TRUE)
           if(!all(curr_col %in% names(curr_labels))) {
             additional_names <- sort(unique(na.omit(curr_col[!curr_col %in% names(curr_labels)])))
-            additonal <- seq(max(curr_labels) + 1, length.out = length(additional_names))
+            additonal <- seq(max(curr_labels, na.rm = TRUE) + 1, length.out = length(additional_names))
             names(additonal) <- additional_names
             curr_labels <- c(curr_labels, additonal)
             # temporary fix to issue of add_columns not retaining attributes of new columns
-            tmp_attr[["labels"]] <- curr_labels
+            tmp_attr[[labels_label]] <- curr_labels
           }
           new_col <- as.numeric(curr_labels[as.character(curr_col)])
         }
@@ -1085,17 +1100,17 @@ data_object$set("public", "drop_unused_factor_levels", function(col_name) {
   if(!is.factor(col_data)) stop(paste(col_name,"is not a factor."))
   level_counts <- table(col_data)
   if(any(level_counts == 0)) {
-    if(self$is_variables_metadata("labels", col_name)) {
-      curr_labels <- self$get_variables_metadata(property = "labels", column = col_name, direct_from_attributes = TRUE)
+    if(self$is_variables_metadata(labels_label, col_name)) {
+      curr_labels <- self$get_variables_metadata(property = labels_label, column = col_name, direct_from_attributes = TRUE)
       curr_labels <- curr_labels[names(level_counts[level_counts > 0])]
-      self$append_to_variables_metadata(property = "labels", col_names = col_name, new_val = curr_labels)
+      self$append_to_variables_metadata(property = labels_label, col_names = col_name, new_val = curr_labels)
       col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
     }
     tmp_attr <- get_column_attributes(col_data)
     print(tmp_attr)
     self$add_columns_to_data(col_name, droplevels(col_data))
     self$append_column_attributes(col_name = col_name, new_attr = tmp_attr)
-    #print(self$get_variables_metadata(property = "labels", column = col_name, direct_from_attributes = TRUE))
+    #print(self$get_variables_metadata(property = labels_label, column = col_name, direct_from_attributes = TRUE))
   }
 } 
 )
@@ -1108,15 +1123,15 @@ data_object$set("public", "set_factor_levels", function(col_name, new_levels, se
   
   # Must be private$data because setting an attribute
   levels(private$data[[col_name]]) <- new_levels
-  if(set_new_labels && self$is_variables_metadata("labels", col_name)) {
-    new_labels <- self$get_variables_metadata(property = "labels", column = col_name, direct_from_attributes = TRUE)
+  if(set_new_labels && self$is_variables_metadata(labels_label, col_name)) {
+    new_labels <- self$get_variables_metadata(property = labels_label, column = col_name, direct_from_attributes = TRUE)
     names(new_labels) <- as.character(new_levels[1:length(old_levels)])
     if(length(new_levels) > length(old_levels)) {
       extra_labels <- seq(from = max(new_labels) + 1, length.out = (length(new_levels) - length(old_levels)))
       names(extra_labels) <- new_levels[!new_levels %in% names(new_labels)]
       new_labels <- c(new_labels, extra_labels)
     }
-    self$append_to_variables_metadata(col_name, "labels", new_labels)
+    self$append_to_variables_metadata(col_name, labels_label, new_labels)
   }
   self$data_changed <- TRUE
   self$variables_metadata_changed <- TRUE
