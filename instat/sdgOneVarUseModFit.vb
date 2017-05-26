@@ -66,7 +66,7 @@ Public Class sdgOneVarUseModFit
         'function ran here is probs = c(VALUES)
         ucrInputQuantiles.SetParameter(New RParameter("x"))
         dctQuantileValues.Add("0.25, 0.5, 0.75", "0.25, 0.5, 0.75")
-        dctQuantileValues.Add("0.1, ..., 0.9", "0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9")
+        dctQuantileValues.Add("0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9", "0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9")
         ucrInputQuantiles.SetItems(dctQuantileValues)
         ucrInputQuantiles.SetRDefault("0.25, 0.5, 0.75")
 
@@ -161,7 +161,7 @@ Public Class sdgOneVarUseModFit
         End If
     End Sub
 
-    Private Sub ucrPnlQuantiles_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlQuantiles.ControlValueChanged, ucrInputQuantiles.ControlValueChanged
+    Private Sub ucrBase_ClickReturn(sender As Object, e As EventArgs) Handles ucrBase.ClickReturn
         dlgOneVarUseModel.QuantileCommand()
     End Sub
 End Class
