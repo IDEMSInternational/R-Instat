@@ -473,6 +473,12 @@ import_from_iri <- function(download_from, data_file, path, X1, X2,Y1,Y2, get_ar
 is.binary <- function(x) {
   if(is.logical(x)) return(TRUE)
   else if(is.numeric(x)) return(all(na.omit(x) %in% c(1,0)))
-  else if(is.factor(x)) return(length(levels(x)) == 2)
+  else if(is.factor(x)) return(nlevels(x) == 2)
   else return(FALSE)
+}
+
+get_column_attributes <- function(x, drop = c("class", "levels")) {
+  tmp_attr <- attributes(x)
+  tmp_attr <- tmp_attr[!names(tmp_attr) %in% drop]
+  return(tmp_attr)
 }
