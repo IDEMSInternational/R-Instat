@@ -37,6 +37,7 @@ Public Class sdgOneVarUseModBootstrap
         ucrChkParametric.SetParameter(New RParameter("bootmethod", 2), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "param" & Chr(34), strNewValueIfUnchecked:=Chr(34) & "nonparam" & Chr(34))
         ucrChkParametric.SetText("Parametric")
         ucrChkParametric.SetRDefault(Chr(34) & "param" & Chr(34))
+        bControlsInitialised = True
     End Sub
 
     Public Sub SetRFunction(clsNewRbootFunction As RFunction, clsNewQuantileFunction As RFunction, Optional bReset As Boolean = False)
