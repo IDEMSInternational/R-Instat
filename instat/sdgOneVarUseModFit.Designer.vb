@@ -67,7 +67,7 @@ Partial Class sdgOneVarUseModFit
         Me.ucrBase.Location = New System.Drawing.Point(59, 243)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(142, 30)
-        Me.ucrBase.TabIndex = 2
+        Me.ucrBase.TabIndex = 1
         '
         'tbBootstrapOptions
         '
@@ -90,7 +90,7 @@ Partial Class sdgOneVarUseModFit
         Me.grpBootStrap.Location = New System.Drawing.Point(5, 9)
         Me.grpBootStrap.Name = "grpBootStrap"
         Me.grpBootStrap.Size = New System.Drawing.Size(236, 123)
-        Me.grpBootStrap.TabIndex = 4
+        Me.grpBootStrap.TabIndex = 0
         Me.grpBootStrap.TabStop = False
         Me.grpBootStrap.Text = "Bootstrap Options"
         '
@@ -100,7 +100,7 @@ Partial Class sdgOneVarUseModFit
         Me.ucrChkParametric.Location = New System.Drawing.Point(24, 80)
         Me.ucrChkParametric.Name = "ucrChkParametric"
         Me.ucrChkParametric.Size = New System.Drawing.Size(140, 20)
-        Me.ucrChkParametric.TabIndex = 9
+        Me.ucrChkParametric.TabIndex = 4
         '
         'ucrNudIterations
         '
@@ -111,7 +111,7 @@ Partial Class sdgOneVarUseModFit
         Me.ucrNudIterations.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudIterations.Name = "ucrNudIterations"
         Me.ucrNudIterations.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudIterations.TabIndex = 8
+        Me.ucrNudIterations.TabIndex = 3
         Me.ucrNudIterations.Value = New Decimal(New Integer() {1001, 0, 0, 0})
         '
         'ucrNudCI
@@ -123,7 +123,7 @@ Partial Class sdgOneVarUseModFit
         Me.ucrNudCI.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudCI.Name = "ucrNudCI"
         Me.ucrNudCI.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudCI.TabIndex = 6
+        Me.ucrNudCI.TabIndex = 1
         Me.ucrNudCI.Value = New Decimal(New Integer() {95, 0, 0, 131072})
         '
         'lblNumberOfIterations
@@ -132,7 +132,7 @@ Partial Class sdgOneVarUseModFit
         Me.lblNumberOfIterations.Location = New System.Drawing.Point(22, 58)
         Me.lblNumberOfIterations.Name = "lblNumberOfIterations"
         Me.lblNumberOfIterations.Size = New System.Drawing.Size(105, 13)
-        Me.lblNumberOfIterations.TabIndex = 7
+        Me.lblNumberOfIterations.TabIndex = 2
         Me.lblNumberOfIterations.Text = "Number of Iterations:"
         '
         'lblCI
@@ -141,7 +141,7 @@ Partial Class sdgOneVarUseModFit
         Me.lblCI.Location = New System.Drawing.Point(22, 30)
         Me.lblCI.Name = "lblCI"
         Me.lblCI.Size = New System.Drawing.Size(102, 13)
-        Me.lblCI.TabIndex = 5
+        Me.lblCI.TabIndex = 0
         Me.lblCI.Text = "Confidence Interval:"
         '
         'tbPlots
@@ -168,7 +168,7 @@ Partial Class sdgOneVarUseModFit
         Me.grpPlots.Location = New System.Drawing.Point(13, 5)
         Me.grpPlots.Name = "grpPlots"
         Me.grpPlots.Size = New System.Drawing.Size(236, 185)
-        Me.grpPlots.TabIndex = 2
+        Me.grpPlots.TabIndex = 0
         Me.grpPlots.TabStop = False
         Me.grpPlots.Text = "Plots"
         '
@@ -179,7 +179,7 @@ Partial Class sdgOneVarUseModFit
         Me.rdoNoPlot.Location = New System.Drawing.Point(6, 20)
         Me.rdoNoPlot.Name = "rdoNoPlot"
         Me.rdoNoPlot.Size = New System.Drawing.Size(60, 17)
-        Me.rdoNoPlot.TabIndex = 1
+        Me.rdoNoPlot.TabIndex = 0
         Me.rdoNoPlot.TabStop = True
         Me.rdoNoPlot.Text = "No Plot"
         Me.rdoNoPlot.UseVisualStyleBackColor = True
@@ -190,7 +190,7 @@ Partial Class sdgOneVarUseModFit
         Me.rdoPlotAll.Location = New System.Drawing.Point(6, 43)
         Me.rdoPlotAll.Name = "rdoPlotAll"
         Me.rdoPlotAll.Size = New System.Drawing.Size(68, 17)
-        Me.rdoPlotAll.TabIndex = 2
+        Me.rdoPlotAll.TabIndex = 1
         Me.rdoPlotAll.Text = "Multi-Plot"
         Me.rdoPlotAll.UseVisualStyleBackColor = True
         '
@@ -200,7 +200,7 @@ Partial Class sdgOneVarUseModFit
         Me.rdoCDFPlot.Location = New System.Drawing.Point(6, 66)
         Me.rdoCDFPlot.Name = "rdoCDFPlot"
         Me.rdoCDFPlot.Size = New System.Drawing.Size(67, 17)
-        Me.rdoCDFPlot.TabIndex = 3
+        Me.rdoCDFPlot.TabIndex = 2
         Me.rdoCDFPlot.Text = "CDF Plot"
         Me.rdoCDFPlot.UseVisualStyleBackColor = True
         '
@@ -210,7 +210,7 @@ Partial Class sdgOneVarUseModFit
         Me.rdoDensityPlot.Location = New System.Drawing.Point(6, 89)
         Me.rdoDensityPlot.Name = "rdoDensityPlot"
         Me.rdoDensityPlot.Size = New System.Drawing.Size(81, 17)
-        Me.rdoDensityPlot.TabIndex = 4
+        Me.rdoDensityPlot.TabIndex = 3
         Me.rdoDensityPlot.Text = "Density Plot"
         Me.rdoDensityPlot.UseVisualStyleBackColor = True
         '
@@ -220,7 +220,7 @@ Partial Class sdgOneVarUseModFit
         Me.rdoCIcdf.Location = New System.Drawing.Point(6, 158)
         Me.rdoCIcdf.Name = "rdoCIcdf"
         Me.rdoCIcdf.Size = New System.Drawing.Size(189, 17)
-        Me.rdoCIcdf.TabIndex = 7
+        Me.rdoCIcdf.TabIndex = 6
         Me.rdoCIcdf.Text = "CDF Plot with Confidence Intervals"
         Me.rdoCIcdf.UseVisualStyleBackColor = True
         '
@@ -230,7 +230,7 @@ Partial Class sdgOneVarUseModFit
         Me.rdoQQPlot.Location = New System.Drawing.Point(6, 112)
         Me.rdoQQPlot.Name = "rdoQQPlot"
         Me.rdoQQPlot.Size = New System.Drawing.Size(62, 17)
-        Me.rdoQQPlot.TabIndex = 5
+        Me.rdoQQPlot.TabIndex = 4
         Me.rdoQQPlot.Text = "QQ-Plot"
         Me.rdoQQPlot.UseVisualStyleBackColor = True
         '
@@ -240,7 +240,7 @@ Partial Class sdgOneVarUseModFit
         Me.rdoPPPlot.Location = New System.Drawing.Point(6, 135)
         Me.rdoPPPlot.Name = "rdoPPPlot"
         Me.rdoPPPlot.Size = New System.Drawing.Size(60, 17)
-        Me.rdoPPPlot.TabIndex = 6
+        Me.rdoPPPlot.TabIndex = 5
         Me.rdoPPPlot.Text = "PP-Plot"
         Me.rdoPPPlot.UseVisualStyleBackColor = True
         '
@@ -277,7 +277,7 @@ Partial Class sdgOneVarUseModFit
         Me.grpQuantiles.Location = New System.Drawing.Point(9, 7)
         Me.grpQuantiles.Name = "grpQuantiles"
         Me.grpQuantiles.Size = New System.Drawing.Size(236, 188)
-        Me.grpQuantiles.TabIndex = 2
+        Me.grpQuantiles.TabIndex = 0
         Me.grpQuantiles.TabStop = False
         Me.grpQuantiles.Text = "Quantiles"
         '
@@ -290,7 +290,7 @@ Partial Class sdgOneVarUseModFit
         Me.ucrNudBy.Minimum = New Decimal(New Integer() {1, 0, 0, 196608})
         Me.ucrNudBy.Name = "ucrNudBy"
         Me.ucrNudBy.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudBy.TabIndex = 16
+        Me.ucrNudBy.TabIndex = 8
         Me.ucrNudBy.Value = New Decimal(New Integer() {1, 0, 0, 65536})
         '
         'ucrNudTo
@@ -302,7 +302,7 @@ Partial Class sdgOneVarUseModFit
         Me.ucrNudTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTo.Name = "ucrNudTo"
         Me.ucrNudTo.Size = New System.Drawing.Size(52, 20)
-        Me.ucrNudTo.TabIndex = 15
+        Me.ucrNudTo.TabIndex = 6
         Me.ucrNudTo.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'ucrNudFrom
@@ -314,7 +314,7 @@ Partial Class sdgOneVarUseModFit
         Me.ucrNudFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudFrom.Name = "ucrNudFrom"
         Me.ucrNudFrom.Size = New System.Drawing.Size(52, 20)
-        Me.ucrNudFrom.TabIndex = 14
+        Me.ucrNudFrom.TabIndex = 4
         Me.ucrNudFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrInputValues
@@ -325,7 +325,7 @@ Partial Class sdgOneVarUseModFit
         Me.ucrInputValues.Location = New System.Drawing.Point(17, 153)
         Me.ucrInputValues.Name = "ucrInputValues"
         Me.ucrInputValues.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputValues.TabIndex = 9
+        Me.ucrInputValues.TabIndex = 0
         '
         'rdoSequence
         '
@@ -334,7 +334,7 @@ Partial Class sdgOneVarUseModFit
         Me.rdoSequence.Location = New System.Drawing.Point(6, 20)
         Me.rdoSequence.Name = "rdoSequence"
         Me.rdoSequence.Size = New System.Drawing.Size(121, 17)
-        Me.rdoSequence.TabIndex = 1
+        Me.rdoSequence.TabIndex = 2
         Me.rdoSequence.TabStop = True
         Me.rdoSequence.Text = "Sequence of Values"
         Me.rdoSequence.UseVisualStyleBackColor = True
@@ -345,7 +345,7 @@ Partial Class sdgOneVarUseModFit
         Me.lblBy.Location = New System.Drawing.Point(14, 102)
         Me.lblBy.Name = "lblBy"
         Me.lblBy.Size = New System.Drawing.Size(22, 13)
-        Me.lblBy.TabIndex = 6
+        Me.lblBy.TabIndex = 7
         Me.lblBy.Text = "By:"
         '
         'rdoInsertValues
@@ -354,7 +354,7 @@ Partial Class sdgOneVarUseModFit
         Me.rdoInsertValues.Location = New System.Drawing.Point(6, 130)
         Me.rdoInsertValues.Name = "rdoInsertValues"
         Me.rdoInsertValues.Size = New System.Drawing.Size(86, 17)
-        Me.rdoInsertValues.TabIndex = 8
+        Me.rdoInsertValues.TabIndex = 9
         Me.rdoInsertValues.Text = "Insert Values"
         Me.rdoInsertValues.UseVisualStyleBackColor = True
         '
@@ -364,7 +364,7 @@ Partial Class sdgOneVarUseModFit
         Me.lblTo.Location = New System.Drawing.Point(14, 75)
         Me.lblTo.Name = "lblTo"
         Me.lblTo.Size = New System.Drawing.Size(23, 13)
-        Me.lblTo.TabIndex = 4
+        Me.lblTo.TabIndex = 5
         Me.lblTo.Text = "To:"
         '
         'lblFrom
@@ -373,7 +373,7 @@ Partial Class sdgOneVarUseModFit
         Me.lblFrom.Location = New System.Drawing.Point(14, 50)
         Me.lblFrom.Name = "lblFrom"
         Me.lblFrom.Size = New System.Drawing.Size(33, 13)
-        Me.lblFrom.TabIndex = 2
+        Me.lblFrom.TabIndex = 3
         Me.lblFrom.Text = "From:"
         '
         'ucrPnlQuantiles
@@ -381,7 +381,7 @@ Partial Class sdgOneVarUseModFit
         Me.ucrPnlQuantiles.Location = New System.Drawing.Point(3, 18)
         Me.ucrPnlQuantiles.Name = "ucrPnlQuantiles"
         Me.ucrPnlQuantiles.Size = New System.Drawing.Size(227, 164)
-        Me.ucrPnlQuantiles.TabIndex = 0
+        Me.ucrPnlQuantiles.TabIndex = 1
         '
         'tbOneVarUseModFit
         '
@@ -392,7 +392,7 @@ Partial Class sdgOneVarUseModFit
         Me.tbOneVarUseModFit.Name = "tbOneVarUseModFit"
         Me.tbOneVarUseModFit.SelectedIndex = 0
         Me.tbOneVarUseModFit.Size = New System.Drawing.Size(271, 236)
-        Me.tbOneVarUseModFit.TabIndex = 4
+        Me.tbOneVarUseModFit.TabIndex = 0
         '
         'sdgOneVarUseModFit
         '
