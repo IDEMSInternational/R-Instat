@@ -62,19 +62,6 @@ Public Class sdgPlots
         clsLegendFunction = clsNewLegendFunction
         clsRFacetFunction = clsNewRFacetFunction
 
-
-        clsGraphTitleFunction.SetPackageName("ggplot2")
-        clsGraphTitleFunction.SetRCommand("ggtitle")
-        clsBaseOperator.AddParameter("ggtile", clsRFunctionParameter:=clsGraphTitleFunction)
-
-        clsLegendFunction.SetPackageName("ggplot2")
-        clsLegendFunction.SetRCommand("labs")
-        clsBaseOperator.AddParameter("ledendtitle", clsRFunctionParameter:=clsLegendFunction)
-
-        clsRFacetFunction.SetPackageName("ggplot2")
-        clsRFacetFunction.SetRCommand("facet_wrap")
-        clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsRFacetFunction)
-
         ucrInputGraphTitle.SetRCode(clsNewGraphTitleFunction, bReset)
         ucrInputLegend.SetRCode(clsNewLegendFunction, bReset)
         ucrPnlHorizonatalVertical.SetRCode(clsRFacetFunction, bReset)

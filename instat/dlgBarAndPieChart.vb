@@ -151,7 +151,17 @@ Public Class dlgBarAndPieChart
         clsRgeomBarFunction.SetPackageName("ggplot2")
         clsRgeomBarFunction.SetRCommand("geom_bar")
 
+        clsGraphTitleFunction.SetPackageName("ggplot2")
+        clsGraphTitleFunction.SetRCommand("ggtitle")
+        clsBaseOperator.AddParameter("ggtile", clsRFunctionParameter:=clsGraphTitleFunction)
 
+        clsLegendFunction.SetPackageName("ggplot2")
+        clsLegendFunction.SetRCommand("labs")
+        clsBaseOperator.AddParameter("ledendtitle", clsRFunctionParameter:=clsLegendFunction)
+
+        clsRFacetFunction.SetPackageName("ggplot2")
+        clsRFacetFunction.SetRCommand("facet_wrap")
+        clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsRFacetFunction)
 
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
