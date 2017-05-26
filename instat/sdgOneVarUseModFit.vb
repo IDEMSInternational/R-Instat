@@ -16,38 +16,67 @@
 Imports instat.Translations
 
 Public Class sdgOneVarUseModFit
-    Private clsRplotFunction As New RFunction
-    Public clsRbootFunction As New RFunction
-    Private clsRseqFunction As New RFunction
+    Private bControlsInitialised As Boolean = False
+    Private clsRseqFunction, clsOneVarRBootFunction, clsOneVarQuantileFunction, clsRplotFunction, clsRbootFunction As New RFunction
     Private clsModel As New RFunction
-    Public clsRsyntax As New RSyntax
     Public bfirstload As Boolean = True
 
     Private Sub sdgOneVarFitModDisplay(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
 
-    Public Sub InitialiseDialog()
-        nudFrom.Minimum = 0
-        nudFrom.Maximum = 1
-        nudFrom.Increment = 0.05
-        nudTo.Minimum = 0
-        nudTo.Maximum = 1
-        nudTo.Increment = 0.05
-        nudBy.Minimum = 0.001
-        nudBy.Maximum = 1
-        nudBy.Increment = 0.05
+    Public Sub InitialiseControls()
+        ucrNudIterations.SetParameter(New RParameter("niter", 1))
+        ucrNudIterations.SetMinMax(1, 10001)
+        ucrNudIterations.SetRDefault(1001)
+        ucrNudIterations.Increment = 100
+
+        ucrNudCI.SetParameter(New RParameter("CI.level", 1))
+        ucrNudCI.SetMinMax(0, 1)
+        ucrNudCI.Increment = 0.05
+
+        ucrChkParametric.SetParameter(New RParameter("bootmethod", 2), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "param" & Chr(34), strNewValueIfUnchecked:=Chr(34) & "nonparam" & Chr(34))
+        ucrChkParametric.SetText("Parametric")
+        ucrChkParametric.SetRDefault(Chr(34) & "param" & Chr(34))
+
+        ucrNudFrom.SetParameter(New RParameter("from", 1))
+        ucrNudFrom.SetMinMax(0, 1)
+        ucrNudFrom.Increment = 0.05
+
+        ucrNudTo.SetParameter(New RParameter("to", 2))
+        ucrNudTo.SetMinMax(0, 1)
+        ucrNudTo.Increment = 0.05
+
+        ucrNudBy.SetParameter(New RParameter("by", 3))
+        ucrNudBy.SetMinMax(0.001, 1)
+        ucrNudBy.Increment = 0.05
+
+        bControlsInitialised = True
+    End Sub
+    Public Sub SetRFunction(clsNewRSeqFunction As RFunction, clsNewRbootFunction As RFunction, clsNewQuantileFunction As RFunction, Optional bReset As Boolean = False)
+        If Not bControlsInitialised Then
+            InitialiseControls()
+        End If
+        clsRseqFunction = clsNewRSeqFunction
+        clsOneVarRBootFunction = clsNewRbootFunction
+        clsOneVarQuantileFunction = clsNewQuantileFunction
+
+        'Setting Rcode for the sub dialog
+        ucrNudFrom.SetRCode(clsRseqFunction, bReset)
+        ucrNudTo.SetRCode(clsRseqFunction, bReset)
+        ucrNudBy.SetRCode(clsRseqFunction, bReset)
+        ucrChkParametric.SetRCode(clsOneVarRBootFunction, bReset)
+        ucrNudIterations.SetRCode(clsOneVarRBootFunction, bReset)
+        ucrNudCI.SetRCode(clsOneVarQuantileFunction, bReset)
+
     End Sub
 
     Public Sub SetDefaults()
         rdoPlotAll.Checked = True
-        rdoSeqValues.Checked = True
+        rdoSequence.Checked = True
         rdoInsertValues.Enabled = False
         ucrInputValues.Enabled = False
         SetPlotOptions()
-        nudFrom.Value = 0
-        nudTo.Value = 1
-        nudBy.Value = 0.1
     End Sub
 
     Public Sub SetModelFunction(clsNewModel As RFunction)
@@ -88,26 +117,20 @@ Public Class sdgOneVarUseModFit
         clsRbootFunction = clsRNewBoot
     End Sub
 
-    Public Sub SetMyRSyntax(clsRNewSyntax As RSyntax)
-        clsRsyntax = clsRNewSyntax
-    End Sub
-
-    Private Sub nudSeq_ValueChanged(sender As Object, e As EventArgs) Handles nudFrom.ValueChanged, nudTo.ValueChanged, nudBy.ValueChanged
-        clsRseqFunction.SetRCommand("seq")
-        clsRseqFunction.AddParameter("from", nudFrom.Value.ToString())
-        clsRseqFunction.AddParameter("to", nudTo.Value.ToString())
-        clsRseqFunction.AddParameter("by", nudBy.Value.ToString())
-        clsRsyntax.AddParameter("probs", clsRFunctionParameter:=clsRseqFunction)
-    End Sub
+    'Public Sub SetMyRSyntax(clsRNewSyntax As RSyntax)
+    '    clsRsyntax = clsRNewSyntax
+    'End Sub
 
     Public Sub SetPlotOptions()
         If Not dlgOneVarUseModel.ucrChkProduceBootstrap.Checked Then
             rdoCIcdf.Enabled = False
+            tbBootstrapOptions.Enabled = False
             If rdoCIcdf.Checked Then
                 rdoPlotAll.Checked = True
             End If
         Else
             rdoCIcdf.Enabled = True
+            tbBootstrapOptions.Enabled = True
         End If
     End Sub
 

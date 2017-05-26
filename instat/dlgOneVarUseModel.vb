@@ -51,13 +51,10 @@ Public Class dlgOneVarUseModel
         ucrChkProduceBootstrap.AddParameterValueFunctionNamesCondition(True, "x", "bootdist", True)
         ucrChkProduceBootstrap.AddParameterValueFunctionNamesCondition(False, "x", "bootdist", False)
         ucrChkProduceBootstrap.SetText("Produce Bootstrap")
-        ucrChkProduceBootstrap.SetLinkedDisplayControl(cmdBootstrapOptions)
 
         'This part is temporary for now
-        sdgOneVarUseModFit.InitialiseDialog()
         sdgOneVarUseModFit.SetModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
         sdgOneVarUseModFit.SetMyBootFunction(clsRBootFunction)
-        sdgOneVarUseModFit.SetMyRSyntax(ucrBase.clsRsyntax)
 
         ucrNewDataFrameName.SetPrefix("UseModel")
         ucrNewDataFrameName.SetDataFrameSelector(ucrSelectorUseModel.ucrAvailableDataFrames)
@@ -76,6 +73,7 @@ Public Class dlgOneVarUseModel
     Private Sub SetDefaults()
         clsRBootFunction = New RFunction
         clsQuantileFunction = New RFunction
+        clsSeqFunction = New RFunction
 
         ucrSelectorUseModel.Reset()
         ucrSaveObjects.Enabled = False 'for now
@@ -86,6 +84,7 @@ Public Class dlgOneVarUseModel
         clsSeqFunction.SetRCommand("seq")
         clsSeqFunction.AddParameter("from", 0)
         clsSeqFunction.AddParameter("to", 1)
+        clsSeqFunction.AddParameter("by", 0.1)
 
         clsQuantileFunction.SetRCommand("quantile")
         clsQuantileFunction.AddParameter("probs", clsRFunctionParameter:=clsSeqFunction)
@@ -94,6 +93,8 @@ Public Class dlgOneVarUseModel
         clsRBootFunction.SetPackageName("fitdistrplus")
         clsRBootFunction.SetRCommand("bootdist")
         clsRBootFunction.AddParameter("bootmethod", Chr(34) & "nonparam" & Chr(34))
+        clsRBootFunction.AddParameter("niter", 1001)
+
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsQuantileFunction)
 
@@ -142,25 +143,22 @@ Public Class dlgOneVarUseModel
     'End If
     'End Sub
 
-    Private Sub cmdBootstrapOptions_Click(sender As Object, e As EventArgs) Handles cmdBootstrapOptions.Click
-        sdgOneVarUseModBootstrap.SetRFunction(clsRBootFunction, clsQuantileFunction, bResetSubdialog)
-        bResetSubdialog = False
-        sdgOneVarUseModBootstrap.ShowDialog()
-        TestOKEnabled()
-    End Sub
 
-    Private Sub cmdFitModel_Click(sender As Object, e As EventArgs) Handles cmdFitModel.Click
+
+
+    Private Sub cmdFitModel_Click(sender As Object, e As EventArgs) Handles cmdFitModelandBootstrap.Click
+        sdgOneVarUseModFit.SetRFunction(clsSeqFunction, clsRBootFunction, clsQuantileFunction, bResetSubdialog)
+        bResetSubdialog = False
         sdgOneVarUseModFit.ShowDialog()
     End Sub
 
     Private Sub ucrChkProduceBootstrap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkProduceBootstrap.ControlValueChanged
         If ucrChkProduceBootstrap.Checked Then
             clsQuantileFunction.AddParameter("x", clsRFunctionParameter:=clsRBootFunction)
-            cmdBootstrapOptions.Visible = True
         Else
             clsQuantileFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverObject.GetVariables())
-            cmdBootstrapOptions.Visible = False
-        End If
+                   End If
+        sdgOneVarUseModFit.SetPlotOptions()
     End Sub
 
     Private Sub ucrReceiver_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverObject.ControlContentsChanged, ucrSaveObjects.ControlContentsChanged, ucrNewDataFrameName.ControlContentsChanged
