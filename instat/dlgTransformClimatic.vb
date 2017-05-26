@@ -18,8 +18,8 @@ Imports instat.Translations
 Public Class dlgTransformClimatic
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
-    Private clsRTransform, clsRRollFuncExpr, clsMatchFun, clsTransformManipulationsFunc, clsTransfornGroupByFunc, clsReplaceNA60, clsWaterBalance60, clsWaterBalance60List As New RFunction
-    Private clsRollFunction, clsSpellFunction, clsWaterBalanceFunction As New RFunction
+    Private clsRTransform, clsRRollFuncExpr, clsMatchFun, clsTransformManipulationsFunc, clsTransfornGroupByFunc, clsReplaceNA60, clsWaterBalance60, clsSubCalcList As New RFunction
+    Private clsRollFunction, clsRRainday As New RFunction
     Private strCurrDataName As String = ""
     Private strValuesUnder As String = ">="
     Private Sub dlgTransformClimatic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -138,7 +138,7 @@ Public Class dlgTransformClimatic
 
         ucrInputColName.SetParameter(New RParameter("result_name"))
 
-        clsWaterBalance60List.SetRCommand("list")
+        clsSubCalcList.SetRCommand("list")
         'ucrInputColName.SetPrefix("sum")
         'ucrInputColName.SetName("moving")
 
@@ -153,8 +153,8 @@ Public Class dlgTransformClimatic
         clsRRollFuncExpr = New RFunction
         clsMatchFun = New RFunction
         clsRollFunction = New RFunction
-        clsSpellFunction = New RFunction
-        clsWaterBalanceFunction = New RFunction
+        'clsSpellFunction = New RFunction
+        ' clsWaterBalanceFunction = New RFunction
         clsTransformManipulationsFunc = New RFunction
         clsTransfornGroupByFunc = New RFunction
         'ucrSaveTransform.Reset()
@@ -171,10 +171,10 @@ Public Class dlgTransformClimatic
 
         'Temporary disable
         rdoCount.Enabled = True
-        rdoSpell.Enabled = False
+        rdoSpell.Enabled = True
         rdoWaterBalance.Enabled = True
         grpCount.Enabled = True
-        grpSpells.Enabled = False
+        grpSpells.Enabled = True
         grpWaterbalance.Enabled = True
 
         clsTransformManipulationsFunc.SetRCommand("list")
@@ -215,10 +215,19 @@ Public Class dlgTransformClimatic
         'clsWaterBalance60.AddParameter("function_exp", Chr(34) & "Reduce(function(x, y) pmin(pmax(x + y - " & ucrInputEvaporation.GetText() & ", 0), " & ucrNudWBCapacity.Value & "), Replace_NA_60, accumulate=TRUE)" & Chr(34))
         'clsWaterBalance60.AddParameter("function_exp", Chr(34) & "Reduce(function(x, y) pmin(pmax(x + y - " & 5 & ", 0), " & 60 & "), Replace_NA_60, accumulate=TRUE)" & Chr(34))
         clsWaterBalance60.AddParameter("result_name", Chr(34) & "Water_Balance_60" & Chr(34))
-        clsWaterBalance60.AddParameter("sub_calculations", clsRFunctionParameter:=clsWaterBalance60List)
-        clsWaterBalance60List.AddParameter("sub1", clsRFunctionParameter:=clsReplaceNA60)
+        clsWaterBalance60.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubCalcList)
+        clsSubCalcList.AddParameter("sub1", clsRFunctionParameter:=clsReplaceNA60)
         clsWaterBalance60.AddParameter("save", "2")
         clsWaterBalance60.SetAssignTo("Water_Balance_60")
+
+        clsRRainday.SetRCommand("instat_calculation$new")
+        clsRRainday.AddParameter("type", Chr(34) & "calculation" & Chr(34))
+        ' "match(Rain>=0.85,1, nomatch = 0)"
+        clsRRainday.AddParameter("function_exp", Chr(34) & "match(" & ucrReceiverData.GetVariableNames(False) & ">=0.85, 1, nomatch = 0)" & Chr(34))
+        clsRRainday.AddParameter("result_name", Chr(34) & "rain_day" & Chr(34))
+        clsRRainday.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames() & ")")
+        clsRRainday.AddParameter("save", "0") ' has save = 2on rcode
+        clsRRainday.SetAssignTo("rain_day")
 
         'This might not Beep right
         'clsRTransform.AddParameter("result_name", Chr(34) & ucrSaveTransform.ucrInputTextSave.GetText & Chr(34))
@@ -269,14 +278,20 @@ Public Class dlgTransformClimatic
             clsRTransform.AddParameter("function_exp", Chr(34) & clsRRollFuncExpr.ToScript.ToString & Chr(34))
             clsRTransform.RemoveParameterByName("sub_calculations")
         ElseIf rdoSpell.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsSpellFunction)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsRollFunction)
+            'clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsWaterBalance60List)
+            clsSubCalcList.AddParameter("sub1", clsRFunctionParameter:=clsRRainday)
+            clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubCalcList)
+
+            clsRTransform.AddParameter("function_exp", Chr(34) & "cumsum(rain_day==0)-cummax((rain_day)*cumsum(rain_day==0))" & Chr(34))
             'ucrSaveTransform.SetPrefix("Spell")
             'ucrInputColName.SetPrefix("Spell")
             ucrInputColName.SetName("spell")
             grpTransform.Text = "Spell"
         ElseIf rdoWaterBalance.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsRollFunction)
-            clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsWaterBalance60List)
+            clsSubCalcList.AddParameter("sub1", clsRFunctionParameter:=clsReplaceNA60)
+            clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubCalcList)
             clsRTransform.AddParameter("function_exp", Chr(34) & "Reduce(function(x, y) pmin(pmax(x + y - " & ucrInputEvaporation.GetText() & ", 0), " & ucrNudWBCapacity.Value & "), Replace_NA_60, accumulate=TRUE)" & Chr(34))
             'clsWaterBalance60.AddParameter("function_exp", Chr(34) & "Reduce(function(x, y) pmin(pmax(x + y - " & ucrInputEvaporation.GetText() & ", 0), " & ucrNudWBCapacity.Value & "), Replace_NA_60, accumulate=TRUE)" & Chr(34))
 
