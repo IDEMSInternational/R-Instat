@@ -3,7 +3,7 @@ get_default_significant_figures <- function(data) {
   else return(NA)  
 }
 
-convert_to_character_matrix <- function(data, format_decimal_places = TRUE, decimal_places, return_data_frame = TRUE) {
+convert_to_character_matrix <- function(data, format_decimal_places = TRUE, decimal_places, return_data_frame = TRUE, na_display = NULL, check.names = TRUE) {
   if(nrow(data) == 0) {
     out <- data
   }
@@ -19,12 +19,15 @@ convert_to_character_matrix <- function(data, format_decimal_places = TRUE, deci
       else {
         out[,i] <- format(data[[i]], digits = decimal_places[i], scientific = FALSE)
       }
+      if(!is.null(na_display)) {
+        out[is.na(data[[i]]),i] <- na_display
+      }
       i = i + 1
     }
     colnames(out) <- colnames(data)
     rownames(out) <- rownames(data)
   }
-  if(return_data_frame) out <- data.frame(out, stringsAsFactors = FALSE)
+  if(return_data_frame) out <- data.frame(out, stringsAsFactors = FALSE, check.names = check.names)
   return(out)
 }
 
@@ -473,6 +476,12 @@ import_from_iri <- function(download_from, data_file, path, X1, X2,Y1,Y2, get_ar
 is.binary <- function(x) {
   if(is.logical(x)) return(TRUE)
   else if(is.numeric(x)) return(all(na.omit(x) %in% c(1,0)))
-  else if(is.factor(x)) return(length(levels(x)) == 2)
+  else if(is.factor(x)) return(nlevels(x) == 2)
   else return(FALSE)
+}
+
+get_column_attributes <- function(x, drop = c("class", "levels")) {
+  tmp_attr <- attributes(x)
+  tmp_attr <- tmp_attr[!names(tmp_attr) %in% drop]
+  return(tmp_attr)
 }
