@@ -138,12 +138,12 @@ Public Class dlgAddLink
         End If
     End Sub
 
-    Private Sub ucrDataSelectorFrom_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataSelectorFrom.ControlContentsChanged, ucrInputLinkName.ControlContentsChanged, ucrInputSelectedKey.ControlContentsChanged
+    Private Sub ucrDataSelectorTo_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDataSelectorTo.ControlValueChanged
+        UpdateKeys()
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrDataSelectorTo_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDataSelectorTo.ControlValueChanged
-        UpdateKeys()
+    Private Sub ucrDataSelectorFrom_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataSelectorFrom.ControlContentsChanged, ucrInputLinkName.ControlContentsChanged, ucrInputSelectedKey.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
