@@ -345,8 +345,9 @@ summary_median <- function(x, na.rm = FALSE,...) {
   return(median(x, na.rm = na.rm))
 }
 
-instat_object$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), n_column_factors = 0, store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, return_output = TRUE, treat_columns_as_factor = FALSE, page_by = "default", as_html = TRUE, signif_fig = 2, na_display = "", weights = NULL, caption = NULL, ...) {
+instat_object$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), n_column_factors = 0, store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, return_output = TRUE, treat_columns_as_factor = FALSE, page_by = "default", as_html = TRUE, signif_fig = 2, na_display = "", na_level_display = "NA", weights = NULL, caption = NULL, ...) {
   if(n_column_factors > length(factors)) stop("n_column_factors must be <= number of factors given")
+  if(na_level_display == "") stop("na_level_display must be a non empty string")
   if(n_column_factors > 0) {
     column_factors <- factors[(length(factors) - n_column_factors + 1):length(factors)]
   }
@@ -416,6 +417,10 @@ instat_object$set("public", "summary_table", function(data_name, columns_to_summ
   else {
     margin_name <- ifelse(length(summaries) == 1, summaries_display, "MARGIN")
     cell_values <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = factors, store_results = store_results, drop = drop, na.rm = na.rm, return_output = TRUE, weights = weights)
+    for(i in seq_along(factors)) {
+      levels(cell_values[[i]]) <- c(levels(cell_values[[i]]), na_level_display)
+      cell_values[[i]][is.na(cell_values[[i]])] <- na_level_display
+    }
     grps <- nrow(cell_values)
     cell_values <- reshape2:::melt.data.frame(cell_values, id.vars = factors, variable.name = "Summary-Variable", value.name = "Value")
     cell_values[["Variable"]] <- rep(rev(columns_to_summarise), each = nrow(cell_values)/length(columns_to_summarise))
