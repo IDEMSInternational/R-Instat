@@ -31,6 +31,7 @@ Public Class dlgReorderColumns
         SetRCodeforControls(bReset)
         bReset = False
         autoTranslate(Me)
+        TestOkEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -47,6 +48,7 @@ Public Class dlgReorderColumns
     Private Sub SetDefaults()
         Dim clsReorder = New RFunction
 
+        ucrDataFrameSelect.Reset()
         ucrReorderColumns.Reset()
 
         clsReorder.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$reorder_columns_in_data")
