@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgReorderColumns
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsReorder As New RFunction
+    Private clsReorderFunction As New RFunction
 
     Private Sub dlgReorderColumns_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -46,14 +46,14 @@ Public Class dlgReorderColumns
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsReorder = New RFunction
+        Dim clsReorderFunction = New RFunction
 
         ucrDataFrameSelect.Reset()
         ucrReorderColumns.Reset()
 
-        clsReorder.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$reorder_columns_in_data")
+        clsReorderFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$reorder_columns_in_data")
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsReorder)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsReorderFunction)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
