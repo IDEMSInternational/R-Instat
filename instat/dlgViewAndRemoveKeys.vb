@@ -36,8 +36,8 @@ Public Class dlgViewAndRemoveKeys
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 505
         ucrBase.clsRsyntax.iCallType = 2
+        ucrBase.iHelpTopicID = 505
 
         'Selector
         ucrSelectorKeys.SetParameter(New RParameter("data_name", 0))
@@ -51,10 +51,10 @@ Public Class dlgViewAndRemoveKeys
         ucrReceiverSelectedKey.SetItemType("key")
         ucrReceiverSelectedKey.strSelectorHeading = "Keys"
 
-        ucrPnlKeys.AddRadioButton(rdoDeleteKey)
         ucrPnlKeys.AddRadioButton(rdoViewKey)
-        ucrPnlKeys.AddFunctionNamesCondition(rdoDeleteKey, frmMain.clsRLink.strInstatDataObject & "$remove_key")
+        ucrPnlKeys.AddRadioButton(rdoDeleteKey)
         ucrPnlKeys.AddFunctionNamesCondition(rdoViewKey, frmMain.clsRLink.strInstatDataObject & "$get_keys")
+        ucrPnlKeys.AddFunctionNamesCondition(rdoDeleteKey, frmMain.clsRLink.strInstatDataObject & "$remove_key")
     End Sub
 
     Private Sub SetDefaults()
@@ -63,7 +63,6 @@ Public Class dlgViewAndRemoveKeys
 
         ucrSelectorKeys.Reset()
 
-        ' Set default RFunction as the base function
         clsGetKey.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_keys")
         clsRemoveKey.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_key")
 
@@ -71,7 +70,7 @@ Public Class dlgViewAndRemoveKeys
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverSelectedKey.AddAdditionalCodeParameterPair(clsRemoveKey, New RParameter("key_name", 0), iAdditionalPairNo:=1)
+        ucrReceiverSelectedKey.AddAdditionalCodeParameterPair(clsRemoveKey, New RParameter("key_name", 1), iAdditionalPairNo:=1)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
