@@ -124,8 +124,19 @@ Public Class dlgReplaceValues
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        '   SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-
+        ucrReceiverReplace.SetRCode(clsReplace, bReset)
+        ucrReceiverReplace.AddAdditionalCodeParameterPair(clsReplaceNaLocf, New RParameter("object", 0), iAdditionalPairNo:=1)
+        ucrReceiverReplace.SetParameterIsRFunction()
+        ucrPnlOld.SetRCode(clsReplace, bReset)
+        ucrPnlNew.SetRCode(clsReplace, bReset)
+        ucrInputOldValue.SetRCode(clsReplace, bReset)
+        ucrInputRangeFrom.SetRCode(clsReplace, bReset)
+        ucrInputRangeTo.SetRCode(clsReplace, bReset)
+        ucrChkMin.SetRCode(clsReplace, bReset)
+        ucrChkMax.SetRCode(clsReplace, bReset)
+        ucrInputNewValue.SetRCode(clsReplace, bReset)
+        ucrInputNewValue.SetRCode(clsReplace, bReset)
+        ucrSelectorReplace.SetRCode(clsReplace, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
