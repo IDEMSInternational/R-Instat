@@ -34,8 +34,8 @@ Partial Class dlgViewFactorLabels
         Me.ucrChkShowType = New instat.ucrCheck()
         Me.ucrChkAlternateColour = New instat.ucrCheck()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrReceiverFactorColumns = New instat.ucrReceiverMultiple()
-        Me.ucrSelectorViewFactorLabels = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverVariables = New instat.ucrReceiverMultiple()
+        Me.ucrSelectorViewLabelsAndLevels = New instat.ucrSelectorByDataFrameAddRemove()
         Me.grpDisplayOptions = New System.Windows.Forms.GroupBox()
         Me.grpLabels = New System.Windows.Forms.GroupBox()
         Me.grpSummaryStatistics.SuspendLayout()
@@ -48,9 +48,9 @@ Partial Class dlgViewFactorLabels
         Me.lblFactorColumns.AutoSize = True
         Me.lblFactorColumns.Location = New System.Drawing.Point(266, 45)
         Me.lblFactorColumns.Name = "lblFactorColumns"
-        Me.lblFactorColumns.Size = New System.Drawing.Size(83, 13)
+        Me.lblFactorColumns.Size = New System.Drawing.Size(97, 13)
         Me.lblFactorColumns.TabIndex = 1
-        Me.lblFactorColumns.Text = "Factor Columns:"
+        Me.lblFactorColumns.Text = "Variable(s) to View:"
         '
         'grpSummaryStatistics
         '
@@ -143,27 +143,27 @@ Partial Class dlgViewFactorLabels
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 6
         '
-        'ucrReceiverFactorColumns
+        'ucrReceiverVariables
         '
-        Me.ucrReceiverFactorColumns.frmParent = Me
-        Me.ucrReceiverFactorColumns.Location = New System.Drawing.Point(266, 60)
-        Me.ucrReceiverFactorColumns.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverFactorColumns.Name = "ucrReceiverFactorColumns"
-        Me.ucrReceiverFactorColumns.Selector = Nothing
-        Me.ucrReceiverFactorColumns.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverFactorColumns.strNcFilePath = ""
-        Me.ucrReceiverFactorColumns.TabIndex = 2
-        Me.ucrReceiverFactorColumns.ucrSelector = Nothing
+        Me.ucrReceiverVariables.frmParent = Me
+        Me.ucrReceiverVariables.Location = New System.Drawing.Point(266, 60)
+        Me.ucrReceiverVariables.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverVariables.Name = "ucrReceiverVariables"
+        Me.ucrReceiverVariables.Selector = Nothing
+        Me.ucrReceiverVariables.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverVariables.strNcFilePath = ""
+        Me.ucrReceiverVariables.TabIndex = 2
+        Me.ucrReceiverVariables.ucrSelector = Nothing
         '
-        'ucrSelectorViewFactorLabels
+        'ucrSelectorViewLabelsAndLevels
         '
-        Me.ucrSelectorViewFactorLabels.bShowHiddenColumns = False
-        Me.ucrSelectorViewFactorLabels.bUseCurrentFilter = True
-        Me.ucrSelectorViewFactorLabels.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorViewFactorLabels.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorViewFactorLabels.Name = "ucrSelectorViewFactorLabels"
-        Me.ucrSelectorViewFactorLabels.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorViewFactorLabels.TabIndex = 0
+        Me.ucrSelectorViewLabelsAndLevels.bShowHiddenColumns = False
+        Me.ucrSelectorViewLabelsAndLevels.bUseCurrentFilter = True
+        Me.ucrSelectorViewLabelsAndLevels.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorViewLabelsAndLevels.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorViewLabelsAndLevels.Name = "ucrSelectorViewLabelsAndLevels"
+        Me.ucrSelectorViewLabelsAndLevels.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorViewLabelsAndLevels.TabIndex = 0
         '
         'grpDisplayOptions
         '
@@ -199,14 +199,14 @@ Partial Class dlgViewFactorLabels
         Me.Controls.Add(Me.grpSummaryStatistics)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblFactorColumns)
-        Me.Controls.Add(Me.ucrReceiverFactorColumns)
-        Me.Controls.Add(Me.ucrSelectorViewFactorLabels)
+        Me.Controls.Add(Me.ucrReceiverVariables)
+        Me.Controls.Add(Me.ucrSelectorViewLabelsAndLevels)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgViewFactorLabels"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "View Variable(s) Levels/Labels"
+        Me.Text = "View Labels/Levels"
         Me.grpSummaryStatistics.ResumeLayout(False)
         Me.grpDisplayOptions.ResumeLayout(False)
         Me.grpLabels.ResumeLayout(False)
@@ -215,8 +215,8 @@ Partial Class dlgViewFactorLabels
 
     End Sub
 
-    Friend WithEvents ucrSelectorViewFactorLabels As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrReceiverFactorColumns As ucrReceiverMultiple
+    Friend WithEvents ucrSelectorViewLabelsAndLevels As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrReceiverVariables As ucrReceiverMultiple
     Friend WithEvents lblFactorColumns As Label
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents grpSummaryStatistics As GroupBox
