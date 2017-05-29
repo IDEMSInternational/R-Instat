@@ -3,7 +3,7 @@ data_object$set("public", "merge_data", function(new_data, by = NULL, type = "le
   #TODO how to use match argument with dplyr join functions
   old_metadata <- attributes(private$data)
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
-
+  
   if(type == "left") {
     new_data <- left_join(curr_data, new_data, by)
   }
@@ -83,13 +83,51 @@ instat_object$set("public", "append_summaries_to_data_object", function(out, dat
 } 
 )
 
-instat_object$set("public", "calculate_summary", function(data_name, columns_to_summarise, summaries, factors = c(), store_results = TRUE, drop = FALSE, return_output = FALSE, summary_name = NA, add_cols = c(), filter_names = c(), ...) {
-  calculated_from = list()
-  calculated_from[[1]] <- list(data_name = data_name, columns = columns_to_summarise)
-  #TODO Change this to store sub_calculations for each column
-  calc <- calculation$new(type = "summary", parameters = list(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = factors, store_results = store_results, drop = drop, return_output = return_output, summary_name = summary_name, add_cols = add_cols, ... = ...),  filters = filter_names, calculated_from = calculated_from)
-  results <- self$apply_calculation(calc)
-  if(!is.null(results)) return(results)
+instat_object$set("public", "calculate_summary", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), store_results = TRUE, drop = TRUE, na.rm = FALSE, return_output = FALSE, summary_name = NA, weights = NULL, ...) {
+  if(!store_results) {
+    save <- 0
+  }
+  else {
+    save <- 2
+  }
+  if(length(factors) > 0) {
+    calculated_from <- as.list(factors)
+    names(calculated_from) <- rep(data_name, length(factors))
+    calculated_from <- as.list(calculated_from)
+    factor_by <- instat_calculation$new(type = "by", calculated_from = calculated_from)
+    manipulations <- list(factor_by)
+  }
+  else manipulations <- list()
+  sub_calculations <- list()
+  
+  if(is.null(columns_to_summarise)) {
+    for(summary_type in summaries) {
+      summary_calculation <- instat_calculation$new(type = "summary", result_name = summary_type,
+                                                    function_exp = paste0(summary_type, "(na.rm =", na.rm, ")"), save = save)
+      sub_calculations[[length(sub_calculations) + 1]] <- summary_calculation
+    }
+  }
+  else {
+    for(column_names in columns_to_summarise) {
+      if(!is.null(weights)) calculated_from <- list(column_names, weights)
+      else calculated_from <- list(column_names)
+      names(calculated_from) <- rep(data_name, length(calculated_from))
+      for(summary_type in summaries) {
+        function_exp = paste0(summary_type, "(", column_names)
+        if(!is.null(weights)) {
+          function_exp <- paste0(function_exp, ", weights = ", weights)
+        }
+        function_exp <- paste0(function_exp, ", na.rm =", na.rm, ")")
+        summary_calculation <- instat_calculation$new(type = "summary", result_name = paste0(summary_type, "_", column_names),
+                                                      function_exp = function_exp,
+                                                      calculated_from = calculated_from, save = save)
+        sub_calculations[[length(sub_calculations) + 1]] <- summary_calculation
+      }
+    }
+  }
+  combined_calc_sum <- instat_calculation$new(type="combination", sub_calculations = sub_calculations, manipulations = manipulations)
+  out <- self$apply_instat_calculation(combined_calc_sum)
+  if(return_output) return(out$data)
 }
 )
 
@@ -129,7 +167,7 @@ instat_object$set("public", "summary", function(data_name, columns_to_summarise,
       #row_names(results) <- get_summary_calculation_names(calc, column_summaries, col_new, calc_filters)
       names( results) <- col_new
       #use summaries as row names for now. This needs to change in the long run
-      row.names( results) <- column_summaries
+      row.names(results) <- column_summaries
       if(i == 1) {
         calc_columns <- results
       }
@@ -158,7 +196,6 @@ data_object$set("public", "calculate_summary", function(calc, ...) {
   if("na.rm" %in% names(calc[["parameters"]])) na.rm = calc[["parameters"]][["na.rm"]]
   else na.rm = FALSE
   filter_names = calc[["filters"]]
-  if(missing(columns_to_summarise)) stop("columns_to_summarise must be specified")
   if(missing(summaries)) stop("summaries must be specified")
   # Removed since curr_data_filter has same columns
   # curr_data_full <- self$get_data_frame(use_current_filter = FALSE)
@@ -307,3 +344,228 @@ summary_range <- function(x, na.rm = FALSE, ...){
 summary_median <- function(x, na.rm = FALSE,...) {
   return(median(x, na.rm = na.rm))
 }
+
+instat_object$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), n_column_factors = 0, store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, return_output = TRUE, treat_columns_as_factor = FALSE, page_by = "default", as_html = TRUE, signif_fig = 2, na_display = "", na_level_display = "NA", weights = NULL, caption = NULL, ...) {
+  if(n_column_factors > length(factors)) stop("n_column_factors must be <= number of factors given")
+  if(na_level_display == "") stop("na_level_display must be a non empty string")
+  if(n_column_factors > 0) {
+    column_factors <- factors[(length(factors) - n_column_factors + 1):length(factors)]
+  }
+  else column_factors <- c()
+  if(n_column_factors == length(factors)) row_factors <- c()
+  else row_factors <- setdiff(factors, column_factors)
+  
+  #TODO remove this when we can change code to have factors <- c(row_factors, column_factors)
+  factors <- c(column_factors, row_factors)
+  
+  summaries_display <- sapply(summaries, function(x) ifelse(startsWith(x, "summary_"), substring(x, 9), x))
+  if(!is.null(page_by) && page_by == "default") {
+    if(length(columns_to_summarise) > 1 && length(summaries) > 1) {
+      page_by <- c("summaries", "variables")
+    }
+    else if(length(summaries) > 1) {
+      page_by <- "summaries"
+    }
+    else if(length(columns_to_summarise) > 1) {
+      page_by <- "variables"
+    }
+    else page_by <- c()
+  }
+  if(include_margins) {
+    #TODO fix these checks when we implement choice for page_by
+    # if(length(columns_to_summarise) > 1 && length(summaries) > 1 && !setequal(page_by, c("summaries", "variables"))) {
+    #   warning("Multiple summaries and variables with margins is currently only implemented through multiple pages. Overriding page_by to be c(summaries, variables)")
+    #   page_by <- c("summaries", "variables")
+    # }
+    # else if(length(summaries) > 1 && (length(page_by) == 0 || page_by != "summaries")) {
+    #   warning("Multiple summaries with margins is currently only implemented through multiple pages. Overriding page_by to be summaries")
+    #   page_by <- "summaries"
+    # }
+    # else if(length(columns_to_summarise) > 1 && (length(page_by) == 0 || page_by != "variables")) {
+    #   warning("Multiple variables with margins is currently only implemented through multiple pages. Overriding page_by to be variables")
+    #   page_by <- "variables"
+    # }
+  }
+  if(length(page_by) > 0) {
+    out <- list()
+    if(length(page_by) == 1 && page_by == "summaries") {
+      for(i in seq_along(summaries)) {
+        out[[paste(summaries_display[i], columns_to_summarise)]] <- self$summary_table(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries[i], factors = factors, n_column_factors = n_column_factors, store_results = store_results, drop = drop, na.rm = na.rm, summary_name = summary_name, include_margins = include_margins, return_output = return_output, treat_columns_as_factor = treat_columns_as_factor, page_by = "default", as_html = as_html, weights = weights, na_display = na_display, ... = ...)
+      }
+    }
+    else if(length(page_by) == 1 && page_by == "variables") {
+      for(i in seq_along(columns_to_summarise)) {
+        out[[paste(summaries_display, columns_to_summarise[i])]] <- self$summary_table(data_name = data_name, columns_to_summarise = columns_to_summarise[i], summaries = summaries, factors = factors, n_column_factors = n_column_factors, store_results = store_results, drop = drop, na.rm = na.rm, summary_name = summary_name, include_margins = include_margins, return_output = return_output, treat_columns_as_factor = treat_columns_as_factor, page_by = "default", as_html = as_html, weights = weights, na_display = na_display, ... = ...)
+      }
+    }
+    else if(length(page_by) == 2  && all(page_by %in% c("variables", "summaries"))) {
+      for(i in seq_along(columns_to_summarise)) {
+        for(j in seq_along(summaries)) {
+          out[[paste(summaries_display[j], columns_to_summarise[i])]] <- self$summary_table(data_name = data_name, columns_to_summarise = columns_to_summarise[i], summaries = summaries[j], factors = factors, n_column_factors = n_column_factors, store_results = store_results, drop = drop, na.rm = na.rm, summary_name = summary_name, include_margins = include_margins, return_output = return_output, treat_columns_as_factor = treat_columns_as_factor, page_by = "default", as_html = as_html, weights = weights, na_display = na_display, ... = ...)
+        }
+      }
+    }
+    else warning("page_by not yet implemented for factor columns. No output to display")
+    if(as_html) {
+      if(length(out) == 1 ) {
+        return(out[[1]])
+      }
+      else return(htmlTable::concatHtmlTables(out, headers = ""))
+    }
+    else return(out)
+  }
+  else {
+    margin_name <- ifelse(length(summaries) == 1, summaries_display, "MARGIN")
+    cell_values <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = factors, store_results = store_results, drop = drop, na.rm = na.rm, return_output = TRUE, weights = weights)
+    for(i in seq_along(factors)) {
+      levels(cell_values[[i]]) <- c(levels(cell_values[[i]]), na_level_display)
+      cell_values[[i]][is.na(cell_values[[i]])] <- na_level_display
+    }
+    grps <- nrow(cell_values)
+    cell_values <- reshape2:::melt.data.frame(cell_values, id.vars = factors, variable.name = "Summary-Variable", value.name = "Value")
+    cell_values[["Variable"]] <- rep(rev(columns_to_summarise), each = nrow(cell_values)/length(columns_to_summarise))
+    cell_values[["Summary"]] <- rep(rev(summaries_display), each = grps, length.out = nrow(cell_values))
+    if(length(columns_to_summarise) > 1 || length(summaries) > 1) {
+      cell_values[["Summary-Variable"]] <- NULL
+      # TODO this relies on knowing order of output from calculate_summary
+      #      better method should be implemented not relying on this.
+      if(length(summaries) == 1) cell_values[["Summary"]] <- summaries_display
+      summary_factors <- c("Variable", "Summary")
+      if(!treat_columns_as_factor) {
+        if(length(summaries) > 1) {
+          cell_values[["Summary"]] <- paste(cell_values[["Summary"]], cell_values[["Variable"]], sep = "_")
+        }
+        else cell_values[["Summary"]] <- paste(summaries, cell_values[["Variable"]], sep = "_")
+        cell_values[["Variable"]] <- NULL
+        summary_factors <- "Summary"
+      }
+    }
+    else {
+      if(treat_columns_as_factor) {
+        summary_factors <- "Variable"
+      }
+      else {
+        summary_factors <- c()
+        cell_values[["Variable"]] <- NULL
+        cell_values[["Summary"]] <- NULL
+      }
+    }
+    if(length(column_factors) > 0) {
+      column_formula <- paste(column_factors, collapse = "+")
+    }
+    else column_formula <- "."
+    if(length(c(row_factors, summary_factors)) > 0) {
+      row_formula <- paste(c(row_factors, summary_factors), collapse = "+")
+    }
+    else row_formula <- "."
+    shaped_cell_values <- dcast(formula = as.formula(paste(row_formula, "~", column_formula)), value.var = "Value", data = cell_values)
+    #TODO check this is always correct
+    if(length(row_factors) == 0) shaped_cell_values[[1]] <- NULL
+    for(i in seq_along(row_factors)) {
+      shaped_cell_values[[i]] <- as.character(shaped_cell_values[[i]])
+    }
+    if(include_margins && (length(row_factors) > 0 || length(column_factors) > 0)) {
+      margin_tables <- list()
+      power_sets <- rje::powerSet(factors)
+      # We could need last set if only have row or column factors
+      power_sets <- power_sets[-(c(length(power_sets)))]
+      for(facts in power_sets) {
+        if(length(facts) == 0) facts <- c()
+        margin_tables[[length(margin_tables) + 1]] <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = facts, store_results = store_results, drop = drop, na.rm = na.rm, return_output = TRUE, weights = weights)
+      }
+      # Column Factor - add as row margin
+      if(length(row_factors) > 0) {
+        column_factor_margin <- margin_tables[[which(sapply(power_sets, function(x) setequal(column_factors, x)))]][[length(column_factors) + 1]]
+        new_row <- c(rep(NA, length(row_factors) + length(summary_factors)), column_factor_margin)
+        shaped_cell_values <- rbind(shaped_cell_values, new_row)
+        shaped_cell_values[nrow(shaped_cell_values), 1] <- margin_name
+      }
+      overall_value <- margin_tables[[1]][1,1]
+      if(length(column_factors) > 0) {
+        row_factor_margin <- margin_tables[[which(sapply(power_sets, function(x) setequal(row_factors, x)))]][[length(row_factors) + 1]]
+        # append the vector for the summary of interest in row_factor_margin with the overall_value
+        if(length(row_factors) > 0) {
+          overall_row_margin <- c(row_factor_margin, overall_value)
+        }
+        else overall_row_margin <- overall_value
+        # add into the unstacked dataset
+        shaped_cell_values[[margin_name]] <- overall_row_margin
+      }
+      align <- paste0(paste(rep("c", ncol(shaped_cell_values) - 1), collapse = ""), "|", "c")
+    }
+    else align <- paste(rep("c", ncol(shaped_cell_values)))
+    shaped_cell_values <- convert_to_character_matrix(shaped_cell_values, decimal_places = rep(signif_fig, ncol(shaped_cell_values)), na_display = na_display, check.names = FALSE)
+    if(return_output) {
+      if(is.null(caption)) {
+        if(length(columns_to_summarise) > 1 && length(summaries) > 1) {
+          caption <- paste("Summary of ", paste(columns_to_summarise, collapse = ","))
+        }
+        else if(length(columns_to_summarise) > 1) {
+          caption <- paste(summaries, "of", paste(columns_to_summarise, collapse = ","))
+        }
+        else if(length(summaries) > 1) {
+          caption <- paste("Summary of", columns_to_summarise)
+        }
+        else {
+          caption <- paste(summaries_display, columns_to_summarise)
+        }
+        caption <- gsub("_", ".", caption)
+        notes <- ""
+        if(length(row_factors) > 0) notes <- paste(notes, " Row Factors: ", paste0(row_factors, collapse = ", "))
+        if(length(column_factors) > 0) notes <- paste(notes, " Column Factors: ", paste0(column_factors, collapse = ", "))
+        if(length(weights) > 0) notes <- paste(notes, " Weights: ", paste0(weights, collapse = ", "))
+      }
+      if(as_html) {
+        if(length(column_factors) == 0) {
+          return(htmlTable::htmlTable(shaped_cell_values, caption = caption, total = include_margins, align = align, tfoot = notes, ... = ...))
+        }
+        else {
+          spanner_data <- unique(cell_values[column_factors])
+          col_names <- c(row_factors, as.character(spanner_data[[length(spanner_data)]]))
+          if(include_margins) {
+            col_names <- c(col_names, margin_name)
+          }
+          names(shaped_cell_values) <- col_names
+          if(length(column_factors) == 1) {
+            cgroup <- c(rep("", length(row_factors)), column_factors)
+            n.cgroup <- c(rep(1, length(row_factors)), nrow(spanner_data))
+          }
+          else if(length(column_factors) > 1) {
+            # removes duplicate rows which exist when row factors present
+            spanner_data <- unique(cell_values[column_factors])
+            #TODO do this without having to call rle twice to improve efficiency
+            lengths <- lapply(spanner_data[-length(spanner_data)], function(x) rle(as.character(x))$lengths)
+            values <- lapply(spanner_data[-length(spanner_data)], function(x) rle(as.character(x))$values)
+            span_length <- max(sapply(values, length))
+            lengths <- sapply(lengths, function(x) c(rep(1, length(row_factors)), x, rep(NA, span_length - length(x))))
+            values <- sapply(values, function(x) c(rep("", length(row_factors)), x, rep(NA, span_length - length(x))))
+            cgroup <- t(values)
+            n.cgroup <- t(lengths)
+          }
+          css.cell <- ""
+          if(include_margins) {
+            if(is.matrix(cgroup)) {
+              cgroup <- cbind(cgroup, NA)
+              n.cgroup <- cbind(n.cgroup, NA)
+              for(i in 1:nrow(cgroup)) {
+                cgroup[i, which(is.na(cgroup[i, ]))[1]] <- ""
+                n.cgroup[i, which(is.na(n.cgroup[i, ]))[1]] <- 1
+              }
+            }
+            else {
+              cgroup[[length(cgroup) + 1]] <- ""
+              n.cgroup[[length(n.cgroup) + 1]] <- 1
+            }
+            css.cell <- matrix("", nrow = nrow(shaped_cell_values), ncol = ncol(shaped_cell_values))
+            if(length(column_factors) > 0) css.cell[ , ncol(css.cell)] <- "font-weight: 900;"
+            if(length(row_factors) > 0) css.cell[nrow(css.cell), ] <- "border-top: 1px solid #BEBEBE; font-weight: 900;"
+          }
+          return(htmlTable::htmlTable(shaped_cell_values, caption = caption, total = FALSE, align = align, tfoot = notes, cgroup = cgroup, n.cgroup = n.cgroup, css.cell = css.cell, ... = ...))
+        }
+      }
+      else return(shaped_cell_values)
+      #return(stargazer::stargazer(shaped_cell_values, type = "html", summary = FALSE, rownames = FALSE, title = caption, notes = notes, ... = ...))
+    }
+  }
+}
+)
