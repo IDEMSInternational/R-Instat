@@ -37,7 +37,7 @@ Partial Class dlgRandomSample
         'lblSampleSize
         '
         Me.lblSampleSize.AutoSize = True
-        Me.lblSampleSize.Location = New System.Drawing.Point(252, 154)
+        Me.lblSampleSize.Location = New System.Drawing.Point(276, 154)
         Me.lblSampleSize.Name = "lblSampleSize"
         Me.lblSampleSize.Size = New System.Drawing.Size(68, 13)
         Me.lblSampleSize.TabIndex = 6
@@ -47,7 +47,7 @@ Partial Class dlgRandomSample
         'lblNumberofSamples
         '
         Me.lblNumberofSamples.AutoSize = True
-        Me.lblNumberofSamples.Location = New System.Drawing.Point(252, 128)
+        Me.lblNumberofSamples.Location = New System.Drawing.Point(276, 128)
         Me.lblNumberofSamples.Name = "lblNumberofSamples"
         Me.lblNumberofSamples.Size = New System.Drawing.Size(102, 13)
         Me.lblNumberofSamples.TabIndex = 4
@@ -56,7 +56,7 @@ Partial Class dlgRandomSample
         '
         'ucrSampleSize
         '
-        Me.ucrSampleSize.Location = New System.Drawing.Point(354, 152)
+        Me.ucrSampleSize.Location = New System.Drawing.Point(378, 152)
         Me.ucrSampleSize.Name = "ucrSampleSize"
         Me.ucrSampleSize.Size = New System.Drawing.Size(55, 23)
         Me.ucrSampleSize.TabIndex = 7
@@ -75,7 +75,7 @@ Partial Class dlgRandomSample
         '
         Me.ucrDistWithParameters.Location = New System.Drawing.Point(10, 55)
         Me.ucrDistWithParameters.Name = "ucrDistWithParameters"
-        Me.ucrDistWithParameters.Size = New System.Drawing.Size(221, 156)
+        Me.ucrDistWithParameters.Size = New System.Drawing.Size(247, 156)
         Me.ucrDistWithParameters.TabIndex = 1
         '
         'ucrBase
@@ -88,7 +88,7 @@ Partial Class dlgRandomSample
         'ucrChkSetSeed
         '
         Me.ucrChkSetSeed.Checked = False
-        Me.ucrChkSetSeed.Location = New System.Drawing.Point(252, 99)
+        Me.ucrChkSetSeed.Location = New System.Drawing.Point(276, 101)
         Me.ucrChkSetSeed.Name = "ucrChkSetSeed"
         Me.ucrChkSetSeed.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkSetSeed.TabIndex = 2
@@ -97,7 +97,7 @@ Partial Class dlgRandomSample
         '
         Me.ucrNudSeed.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSeed.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSeed.Location = New System.Drawing.Point(354, 100)
+        Me.ucrNudSeed.Location = New System.Drawing.Point(378, 100)
         Me.ucrNudSeed.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSeed.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSeed.Name = "ucrNudSeed"
@@ -109,7 +109,7 @@ Partial Class dlgRandomSample
         '
         Me.ucrNudNumberOfSamples.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberOfSamples.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNumberOfSamples.Location = New System.Drawing.Point(354, 126)
+        Me.ucrNudNumberOfSamples.Location = New System.Drawing.Point(378, 126)
         Me.ucrNudNumberOfSamples.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNumberOfSamples.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberOfSamples.Name = "ucrNudNumberOfSamples"
@@ -128,7 +128,7 @@ Partial Class dlgRandomSample
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(413, 300)
+        Me.ClientSize = New System.Drawing.Size(540, 300)
         Me.Controls.Add(Me.ucrSaveRandomSamples)
         Me.Controls.Add(Me.ucrNudNumberOfSamples)
         Me.Controls.Add(Me.ucrNudSeed)

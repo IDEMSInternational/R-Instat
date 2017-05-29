@@ -80,7 +80,7 @@ Partial Class ucrDistributionsWithParameters
         Me.ucrInputParameter1.AddQuotesIfUnrecognised = True
         Me.ucrInputParameter1.IsMultiline = False
         Me.ucrInputParameter1.IsReadOnly = False
-        Me.ucrInputParameter1.Location = New System.Drawing.Point(95, 68)
+        Me.ucrInputParameter1.Location = New System.Drawing.Point(143, 64)
         Me.ucrInputParameter1.Name = "ucrInputParameter1"
         Me.ucrInputParameter1.Size = New System.Drawing.Size(100, 21)
         Me.ucrInputParameter1.TabIndex = 11
@@ -90,9 +90,9 @@ Partial Class ucrDistributionsWithParameters
         Me.ucrInputParameter2.AddQuotesIfUnrecognised = True
         Me.ucrInputParameter2.IsMultiline = False
         Me.ucrInputParameter2.IsReadOnly = False
-        Me.ucrInputParameter2.Location = New System.Drawing.Point(95, 97)
+        Me.ucrInputParameter2.Location = New System.Drawing.Point(143, 93)
         Me.ucrInputParameter2.Name = "ucrInputParameter2"
-        Me.ucrInputParameter2.Size = New System.Drawing.Size(102, 21)
+        Me.ucrInputParameter2.Size = New System.Drawing.Size(100, 21)
         Me.ucrInputParameter2.TabIndex = 12
         '
         'ucrInputParameter3
@@ -100,9 +100,9 @@ Partial Class ucrDistributionsWithParameters
         Me.ucrInputParameter3.AddQuotesIfUnrecognised = True
         Me.ucrInputParameter3.IsMultiline = False
         Me.ucrInputParameter3.IsReadOnly = False
-        Me.ucrInputParameter3.Location = New System.Drawing.Point(95, 124)
+        Me.ucrInputParameter3.Location = New System.Drawing.Point(143, 120)
         Me.ucrInputParameter3.Name = "ucrInputParameter3"
-        Me.ucrInputParameter3.Size = New System.Drawing.Size(102, 21)
+        Me.ucrInputParameter3.Size = New System.Drawing.Size(100, 21)
         Me.ucrInputParameter3.TabIndex = 14
         '
         'ucrInputParameter4
@@ -110,7 +110,7 @@ Partial Class ucrDistributionsWithParameters
         Me.ucrInputParameter4.AddQuotesIfUnrecognised = True
         Me.ucrInputParameter4.IsMultiline = False
         Me.ucrInputParameter4.IsReadOnly = False
-        Me.ucrInputParameter4.Location = New System.Drawing.Point(95, 151)
+        Me.ucrInputParameter4.Location = New System.Drawing.Point(143, 147)
         Me.ucrInputParameter4.Name = "ucrInputParameter4"
         Me.ucrInputParameter4.Size = New System.Drawing.Size(100, 21)
         Me.ucrInputParameter4.TabIndex = 13
@@ -129,7 +129,7 @@ Partial Class ucrDistributionsWithParameters
         Me.Controls.Add(Me.lblParameter1)
         Me.Controls.Add(Me.lblDistributionParameters)
         Me.Name = "ucrDistributionsWithParameters"
-        Me.Size = New System.Drawing.Size(207, 177)
+        Me.Size = New System.Drawing.Size(248, 177)
         Me.Controls.SetChildIndex(Me.lblDistributionParameters, 0)
         Me.Controls.SetChildIndex(Me.lblParameter1, 0)
         Me.Controls.SetChildIndex(Me.lblParameter2, 0)
