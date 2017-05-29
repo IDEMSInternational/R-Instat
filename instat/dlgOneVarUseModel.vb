@@ -53,7 +53,6 @@ Public Class dlgOneVarUseModel
         ucrChkProduceBootstrap.SetText("Produce Bootstrap")
 
         'This part is temporary for now
-        sdgOneVarUseModFit.SetModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
         sdgOneVarUseModFit.SetMyBootFunction(clsRBootFunction)
 
         ucrNewDataFrameName.SetPrefix("UseModel")
@@ -88,7 +87,6 @@ Public Class dlgOneVarUseModel
 
         clsQuantileFunction.SetRCommand("quantile")
         clsQuantileFunction.AddParameter("probs", clsRFunctionParameter:=clsSeqFunction)
-        'clsQuantileFunction.AddParameter("CI.level", 0.95) ' this should only be added if bootstrap is checked
 
         clsRBootFunction.SetPackageName("fitdistrplus")
         clsRBootFunction.SetRCommand("bootdist")
