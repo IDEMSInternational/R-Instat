@@ -66,6 +66,7 @@ Public Class sdgOneVarUseModFit
         dctQuantileValues.Add("0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9", "0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9")
         ucrInputQuantiles.SetItems(dctQuantileValues)
         ucrInputQuantiles.SetRDefault("0.25, 0.5, 0.75")
+        ucrInputQuantiles.SetValidationTypeAsNumeric(dcmMin:=0, dcmMax:=1)
 
         ucrPnlQuantiles.AddToLinkedControls(ucrInputQuantiles, {rdoInsertValues}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
         ucrPnlQuantiles.AddToLinkedControls(ucrNudTo, {rdoSequence}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
@@ -132,10 +133,6 @@ Public Class sdgOneVarUseModFit
             clsRPlotFunction.AddParameter("CI.output", Chr(34) & "quantile" & Chr(34))
         End If
         frmMain.clsRLink.RunScript(clsRPlotFunction.ToScript(), iCallType:=2)
-    End Sub
-
-    Public Sub SetMyBootFunction(clsRNewBoot As RFunction)
-        clsRBootFunction = clsRNewBoot
     End Sub
 
     Public Sub SetPlotOptions()
