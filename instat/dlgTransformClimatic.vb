@@ -112,13 +112,10 @@ Public Class dlgTransformClimatic
         ucrNudWBCapacity.SetMinMax(1, Integer.MaxValue)
         ucrNudWBCapacity.Increment = 1
         ucrNudWBCapacity.SetLinkedDisplayControl(lblWBCapacity)
-        'ucrNudWBCapacity.SetRDefault("60")
 
         ucrInputEvaporation.SetParameter(New RParameter("evaporation"))
         ucrInputEvaporation.SetValidationTypeAsNumeric()
         ucrInputEvaporation.SetLinkedDisplayControl(lblWBEvaporation)
-
-        'ucrSaveTransform.SetParameter(New RParameter("result_name"))
 
         ucrInputColName.SetParameter(New RParameter("result_name"))
 
@@ -137,7 +134,6 @@ Public Class dlgTransformClimatic
         clsRollFunction = New RFunction
         clsTransformManipulationsFunc = New RFunction
         clsTransfornGroupByFunc = New RFunction
-        'ucrSaveTransform.Reset()
 
         rdoMoving.Checked = True 'this wil be fixed properly
         ucrSelectorTransform.Reset()
@@ -205,7 +201,6 @@ Public Class dlgTransformClimatic
         clsRRainday.SetAssignTo("rain_day")
 
         'This might not Beep right
-        'clsRTransform.AddParameter("result_name", Chr(34) & ucrSaveTransform.ucrInputTextSave.GetText & Chr(34))
         clsRTransform.AddParameter("save", 2)
         clsRollFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         clsRollFunction.AddParameter("display", "FALSE")
@@ -235,9 +230,9 @@ Public Class dlgTransformClimatic
             ucrBase.clsRsyntax.SetBaseRFunction(clsRollFunction)
             clsRRollFuncExpr.AddParameter("FUN", clsRFunctionParameter:=clsMatchFun)
             clsRTransform.AddParameter("function_exp", Chr(34) & clsRRollFuncExpr.ToScript.ToString & Chr(34))
-            ucrInputColName.SetName("moving")
-            grpTransform.Text = "Moving"
             clsRTransform.RemoveParameterByName("sub_calculations")
+            MovingColNames()
+            grpTransform.Text = "Moving"
         ElseIf rdoCount.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsRollFunction)
             ucrInputColName.SetName("count")
@@ -279,8 +274,19 @@ Public Class dlgTransformClimatic
         clsRTransform.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames() & ")")
     End Sub
 
-    Private Sub ucrControls_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrReceiverData.ControlContentsChanged, ucrInputSum.ControlContentsChanged, ucrNudSumOver.ControlContentsChanged
+    Private Sub ucrInputSum_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrInputSum.ControlContentsChanged
         SumOver()
+        MovingColNames()
+    End Sub
+
+    Private Sub ucrControls_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrReceiverData.ControlContentsChanged, ucrNudSumOver.ControlContentsChanged
+        SumOver()
+    End Sub
+
+    Private Sub MovingColNames()
+        If ucrInputSum.cboInput.SelectedItem <> Nothing Then
+            ucrInputColName.SetName("moving_" & ucrInputSum.cboInput.SelectedItem)
+        End If
     End Sub
 
     Private Sub ucrControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlValueChanged, ucrInputSum.ControlValueChanged, ucrNudSumOver.ControlValueChanged
