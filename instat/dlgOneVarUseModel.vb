@@ -53,7 +53,6 @@ Public Class dlgOneVarUseModel
         ucrChkProduceBootstrap.SetText("Produce Bootstrap")
 
         'This part is temporary for now
-        sdgOneVarUseModFit.SetModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
         sdgOneVarUseModFit.SetMyBootFunction(clsRBootFunction)
 
         ucrNewDataFrameName.SetPrefix("UseModel")
@@ -82,13 +81,12 @@ Public Class dlgOneVarUseModel
         sdgOneVarUseModFit.SetDefaults()
 
         clsSeqFunction.SetRCommand("seq")
-        clsSeqFunction.AddParameter("from", 0) ' TODO: these parameters have default values set earlier, are these needed here?
+        clsSeqFunction.AddParameter("from", 0)
         clsSeqFunction.AddParameter("to", 1)
-        clsSeqFunction.AddParameter("by", 0.25)
+        clsSeqFunction.AddParameter("by",0.25)
 
         clsQuantileFunction.SetRCommand("quantile")
         clsQuantileFunction.AddParameter("probs", clsRFunctionParameter:=clsSeqFunction)
-        'clsQuantileFunction.AddParameter("CI.level", 0.95) ' this should only be added if bootstrap is checked
 
         clsRBootFunction.SetPackageName("fitdistrplus")
         clsRBootFunction.SetRCommand("bootdist")
