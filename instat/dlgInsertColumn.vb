@@ -156,9 +156,9 @@ Public Class dlgInsertColumn
     Private Sub TestOKEnabled()
         If ((rdoInsertColumns.Checked AndAlso (rdoAtEnd.Checked OrElse rdoAtStart.Checked)) AndAlso ucrNudNumberOfColumns.GetText <> "" AndAlso Not ucrInputDefaultValue.IsEmpty AndAlso Not ucrInputPrefixForNewColumn.IsEmpty) Then
             ucrBase.OKEnabled(True)
-        ElseIf (rdoInsertColumns.Checked AndAlso rdoBeforeAfter.Checked AndAlso Not ucrInputBeforeAfter.IsEmpty AndAlso Not ucrReceiverColumnsToInsert.IsEmpty AndAlso Not ucrInputPrefixForNewColumn.IsEmpty AndAlso Not ucrNudNumberOfColumns.GetText <> "" AndAlso Not ucrInputDefaultValue.IsEmpty)
+        ElseIf (rdoInsertColumns.Checked AndAlso rdoBeforeAfter.Checked AndAlso Not ucrInputBeforeAfter.IsEmpty AndAlso Not ucrReceiverColumnsToInsert.IsEmpty AndAlso Not ucrInputPrefixForNewColumn.IsEmpty AndAlso Not ucrNudNumberOfColumns.Text <> "" AndAlso Not ucrInputDefaultValue.IsEmpty)
             ucrBase.OKEnabled(True)
-        ElseIf (rdoInsertRows.Checked AndAlso ucrNudNumberOfRows.GetText <> "" AndAlso ucrNudStartRow.GetText <> "" OrElse rdoAfter.Checked OrElse rdoBefore.Checked) Then
+        ElseIf (rdoInsertRows.Checked AndAlso ucrNudNumberOfRows.Text <> "" AndAlso ucrNudStartRow.Text <> "" OrElse rdoAfter.Checked OrElse rdoBefore.Checked) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
