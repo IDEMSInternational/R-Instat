@@ -23,6 +23,7 @@ Public Class DlgDefineClimaticData
     Dim clsTypesFunction As New RFunction
     Dim lstReceivers As New List(Of ucrReceiverSingle)
     Dim lstRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
+    Private clsDefaultFunction As New RFunction
 
     Private Sub DlgDefineClimaticData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -35,12 +36,7 @@ Public Class DlgDefineClimaticData
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        ReopenDialog()
         TestOKEnabled()
-    End Sub
-
-    Private Sub ReopenDialog()
-
     End Sub
 
     Private Sub InitialiseDialog()
@@ -84,38 +80,25 @@ Public Class DlgDefineClimaticData
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
+        clsDefaultFunction = New RFunction
 
         ucrSelectorDefineClimaticData.Reset()
         ucrReceiverDate.SetMeAsReceiver()
+
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$define_as_climatic")
         clsTypesFunction.SetRCommand("c")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-        ucrBase.clsRsyntax.AddParameter("types", clsRFunctionParameter:=clsTypesFunction)
+
+        clsDefaultFunction.AddParameter("types", clsRFunctionParameter:=clsTypesFunction)
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+
 
         AutoFillReceivers()
     End Sub
 
-    Public Sub SetRCodeForControls(bReset As Boolean)
+    Private Sub SetRCodeForControls(bReset As Boolean)
         ucrSelectorDefineClimaticData.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        SetRcodesforReceivers(bReset)
-    End Sub
-
-    Private Sub SetRcodesforReceivers(bReset As Boolean)
-        Dim ucrTempReceiver As ucrReceiver
-        For Each ucrTempReceiver In lstReceivers
-            ucrTempReceiver.SetRCode(clsTypesFunction, bReset)
-        Next
-    End Sub
-
-    Private Sub SetRSelector()
-        Dim ucrTempReceiver As ucrReceiver
-        For Each ucrTempReceiver In lstReceivers
-            ucrTempReceiver.SetParameter(New RParameter(ucrTempReceiver.Tag))
-            ucrTempReceiver.Selector = ucrSelectorDefineClimaticData
-            ucrTempReceiver.SetParameterIsString()
-            ucrTempReceiver.bExcludeFromSelector = True
-        Next
+        SetRCodesforReceivers(bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -130,6 +113,23 @@ Public Class DlgDefineClimaticData
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
+    End Sub
+
+    Private Sub SetRCodesforReceivers(bReset As Boolean)
+        Dim ucrTempReceiver As ucrReceiver
+        For Each ucrTempReceiver In lstReceivers
+            ucrTempReceiver.SetRCode(clsTypesFunction, bReset)
+        Next
+    End Sub
+
+    Private Sub SetRSelector()
+        Dim ucrTempReceiver As ucrReceiver
+        For Each ucrTempReceiver In lstReceivers
+            ucrTempReceiver.SetParameter(New RParameter(ucrTempReceiver.Tag))
+            ucrTempReceiver.Selector = ucrSelectorDefineClimaticData
+            ucrTempReceiver.SetParameterIsString()
+            ucrTempReceiver.bExcludeFromSelector = True
+        Next
     End Sub
 
     Private Sub AutoFillReceivers()
@@ -177,11 +177,11 @@ Public Class DlgDefineClimaticData
         Return lstValues
     End Function
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged
-        TestOKEnabled()
-    End Sub
-
     Private Sub Selector_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDefineClimaticData.ControlContentsChanged
         AutoFillReceivers()
+    End Sub
+
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class
