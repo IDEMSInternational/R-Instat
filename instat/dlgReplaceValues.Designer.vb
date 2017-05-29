@@ -45,6 +45,7 @@ Partial Class dlgReplaceValues
         Me.ucrReceiverReplace = New instat.ucrReceiverMultiple()
         Me.ucrSelectorReplace = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrNewDataFrame = New instat.ucrSave()
         Me.grpOld.SuspendLayout()
         Me.grpNew.SuspendLayout()
         Me.SuspendLayout()
@@ -287,16 +288,24 @@ Partial Class dlgReplaceValues
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 361)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 391)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 5
+        '
+        'ucrNewDataFrame
+        '
+        Me.ucrNewDataFrame.Location = New System.Drawing.Point(10, 364)
+        Me.ucrNewDataFrame.Name = "ucrNewDataFrame"
+        Me.ucrNewDataFrame.Size = New System.Drawing.Size(285, 24)
+        Me.ucrNewDataFrame.TabIndex = 11
         '
         'dlgReplaceValues
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(459, 420)
+        Me.ClientSize = New System.Drawing.Size(459, 448)
+        Me.Controls.Add(Me.ucrNewDataFrame)
         Me.Controls.Add(Me.grpOld)
         Me.Controls.Add(Me.lblSelectedColumns)
         Me.Controls.Add(Me.grpNew)
@@ -341,4 +350,5 @@ Partial Class dlgReplaceValues
     Friend WithEvents ucrPnlNew As UcrPanel
     Friend WithEvents rdoNewFromAbove As RadioButton
     Friend WithEvents rdoNewFromBelow As RadioButton
+    Friend WithEvents ucrNewDataFrame As ucrSave
 End Class
