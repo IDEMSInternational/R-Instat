@@ -86,10 +86,10 @@ Public Class dlgUseDate
         ucrChkShiftDay.SetRDefault("FALSE")
 
         ucrNudShiftStartDay.SetParameter(New RParameter("shift_start_day"))
-        ucrNudShiftStartDay.SetDefaultState(1)
+        ucrNudShiftStartDay.SetRDefault(1)
         ucrNudShiftStartDay.SetMinMax(1, 31)
 
-        ucrInputComboBoxMonth.SetParameter(New RParameter("shift_month"))
+        ucrInputComboBoxMonth.SetParameter(New RParameter("shift_start_month"))
         Dim dctMonth As New Dictionary(Of String, String)
         dctMonth.Add("January", 1)
         dctMonth.Add("February", 2)
@@ -105,6 +105,8 @@ Public Class dlgUseDate
         dctMonth.Add("December", 12)
         ucrInputComboBoxMonth.SetItems(dctMonth)
         ucrInputComboBoxMonth.SetRDefault(8)
+        'TODO This should probably be the default for this control, hence this is temporary
+        ucrInputComboBoxMonth.bUpdateRCodeFromControl = False
 
         ucrChkDayInYear.SetParameter(New RParameter("day_in_year"))
         ucrChkDayInYear.SetText("Day in Year")
