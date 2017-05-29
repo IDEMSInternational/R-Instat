@@ -18,10 +18,7 @@ Imports instat.Translations
 Public Class sdgOneVarUseModFit
     Private bControlsInitialised As Boolean = False
     Private clsRSeqFunction, clsOneVarRBootFunction, clsOneVarQuantileFunction, clsRPlotFunction, clsRBootFunction As New RFunction
-
-    Private clsModel As New RFunction
     Public bfirstload As Boolean = True
-
     Private Sub sdgOneVarFitModDisplay(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
@@ -46,8 +43,6 @@ Public Class sdgOneVarUseModFit
         ' "probs" parameter:
         ucrPnlQuantiles.AddRadioButton(rdoSequence)
         ucrPnlQuantiles.AddRadioButton(rdoInsertValues)
-        'ucrPnlQuantiles.AddFunctionNamesCondition(rdoSequence, "seq")
-        'ucrPnlQuantiles.AddParameterValuesCondition(rdoInsertValues, "c()")
 
         '1. Function ran here is probs = seq(from = , to = , by =)
         ucrNudFrom.SetParameter(New RParameter("from", 1))
@@ -103,13 +98,8 @@ Public Class sdgOneVarUseModFit
     Public Sub SetDefaults()
         rdoPlotAll.Checked = True
         rdoSequence.Checked = True
-        'rdoInsertValues.Enabled = False
         ucrInputQuantiles.Enabled = False
         SetPlotOptions()
-    End Sub
-
-    Public Sub SetModelFunction(clsNewModel As RFunction)
-        clsModel = clsNewModel
     End Sub
 
     Public Sub CreateGraphs()
@@ -136,10 +126,12 @@ Public Class sdgOneVarUseModFit
         ElseIf rdoCIcdf.Checked Then
             clsRPlotFunction.ClearParameters()
             clsRPlotFunction.SetRCommand("CIcdfplot")
+            dlgOneVarUseModel.clsRBootFunction.RemoveParameterByName("bootmethod")
+            dlgOneVarUseModel.clsRBootFunction.RemoveParameterByName("niter")
             clsRPlotFunction.AddParameter("b", clsRFunctionParameter:=dlgOneVarUseModel.clsRBootFunction)
             clsRPlotFunction.AddParameter("CI.output", Chr(34) & "quantile" & Chr(34))
         End If
-        frmMain.clsRLink.RunScript(clsRPlotFunction.ToScript(), 2)
+        frmMain.clsRLink.RunScript(clsRPlotFunction.ToScript(), iCallType:=2)
     End Sub
 
     Public Sub SetMyBootFunction(clsRNewBoot As RFunction)
