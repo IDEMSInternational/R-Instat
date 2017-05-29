@@ -153,9 +153,9 @@ Partial Class dlgInsertColumn
         Me.grpOPtions.Controls.Add(Me.rdoAfter)
         Me.grpOPtions.Controls.Add(Me.rdoBefore)
         Me.grpOPtions.Controls.Add(Me.ucrPnlBeforeAfter)
-        Me.grpOPtions.Location = New System.Drawing.Point(1, 2)
+        Me.grpOPtions.Location = New System.Drawing.Point(3, -20)
         Me.grpOPtions.Name = "grpOPtions"
-        Me.grpOPtions.Size = New System.Drawing.Size(124, 82)
+        Me.grpOPtions.Size = New System.Drawing.Size(85, 82)
         Me.grpOPtions.TabIndex = 13
         Me.grpOPtions.TabStop = False
         Me.grpOPtions.Text = "Options"
@@ -192,7 +192,7 @@ Partial Class dlgInsertColumn
         'lblNumberOfColumnsToInsert
         '
         Me.lblNumberOfColumnsToInsert.AutoSize = True
-        Me.lblNumberOfColumnsToInsert.Location = New System.Drawing.Point(232, 197)
+        Me.lblNumberOfColumnsToInsert.Location = New System.Drawing.Point(232, 201)
         Me.lblNumberOfColumnsToInsert.Name = "lblNumberOfColumnsToInsert"
         Me.lblNumberOfColumnsToInsert.Size = New System.Drawing.Size(143, 13)
         Me.lblNumberOfColumnsToInsert.TabIndex = 5
@@ -201,7 +201,7 @@ Partial Class dlgInsertColumn
         'lblDefaultValue
         '
         Me.lblDefaultValue.AutoSize = True
-        Me.lblDefaultValue.Location = New System.Drawing.Point(233, 221)
+        Me.lblDefaultValue.Location = New System.Drawing.Point(233, 225)
         Me.lblDefaultValue.Name = "lblDefaultValue"
         Me.lblDefaultValue.Size = New System.Drawing.Size(74, 13)
         Me.lblDefaultValue.TabIndex = 7
@@ -262,7 +262,7 @@ Partial Class dlgInsertColumn
         '
         Me.ucrNudNumberOfColumns.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberOfColumns.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNumberOfColumns.Location = New System.Drawing.Point(373, 193)
+        Me.ucrNudNumberOfColumns.Location = New System.Drawing.Point(373, 197)
         Me.ucrNudNumberOfColumns.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNumberOfColumns.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberOfColumns.Name = "ucrNudNumberOfColumns"
@@ -282,7 +282,7 @@ Partial Class dlgInsertColumn
         Me.ucrInputDefaultValue.AddQuotesIfUnrecognised = True
         Me.ucrInputDefaultValue.IsMultiline = False
         Me.ucrInputDefaultValue.IsReadOnly = False
-        Me.ucrInputDefaultValue.Location = New System.Drawing.Point(374, 217)
+        Me.ucrInputDefaultValue.Location = New System.Drawing.Point(374, 221)
         Me.ucrInputDefaultValue.Name = "ucrInputDefaultValue"
         Me.ucrInputDefaultValue.Size = New System.Drawing.Size(45, 21)
         Me.ucrInputDefaultValue.TabIndex = 8
