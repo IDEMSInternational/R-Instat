@@ -58,7 +58,7 @@ Public Class dlgStringDistance
         ucrPnlStringDist.AddToLinkedControls(ucrInputPatternStringDistance, {rdoString}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrInputComboBoxMethod.SetParameter(New RParameter("method", 2))
-        ucrInputComboBoxMethod.cboInput.DropDownStyle = ComboBoxStyle.DropDownList
+        ucrInputComboBoxMethod.SetDropDownStyleAsNonEditable()
 
         Dim dctMethod As New Dictionary(Of String, String)
         dctMethod.Add("Cosine Distance between q-Gram Profiles", Chr(34) & "cosine" & Chr(34))

@@ -35,6 +35,7 @@ Public Class ucrInput
     Private bLastSilent As Boolean = False
     Private bPrivateAddQuotesIfUnrecognised As Boolean = True
     Protected dctDisplayParameterValues As New Dictionary(Of String, String)
+    Protected bFirstLoad As Boolean = True
 
     Public Sub New()
 
@@ -391,7 +392,6 @@ Public Class ucrInput
         If Not bUserTyped Then
             SetDefaultName()
         End If
-        'RaiseEvent NameChanged()
     End Sub
 
     Private Sub ucrInput_TextChanged(sender As Object, e As EventArgs) Handles Me.TextChanged

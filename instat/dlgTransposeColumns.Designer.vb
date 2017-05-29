@@ -47,11 +47,13 @@ Partial Class dlgTransposeColumns
         Me.ucrReceiverColumsToTranspose.Name = "ucrReceiverColumsToTranspose"
         Me.ucrReceiverColumsToTranspose.Selector = Nothing
         Me.ucrReceiverColumsToTranspose.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverColumsToTranspose.strNcFilePath = ""
         Me.ucrReceiverColumsToTranspose.TabIndex = 2
+        Me.ucrReceiverColumsToTranspose.ucrSelector = Nothing
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 223)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 247)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 5
@@ -68,7 +70,7 @@ Partial Class dlgTransposeColumns
         '
         'ucrNewDataframe
         '
-        Me.ucrNewDataframe.Location = New System.Drawing.Point(10, 197)
+        Me.ucrNewDataframe.Location = New System.Drawing.Point(10, 223)
         Me.ucrNewDataframe.Name = "ucrNewDataframe"
         Me.ucrNewDataframe.Size = New System.Drawing.Size(305, 24)
         Me.ucrNewDataframe.TabIndex = 4
@@ -76,7 +78,7 @@ Partial Class dlgTransposeColumns
         'ucrChkNameNewColumns
         '
         Me.ucrChkNameNewColumns.Checked = False
-        Me.ucrChkNameNewColumns.Location = New System.Drawing.Point(263, 170)
+        Me.ucrChkNameNewColumns.Location = New System.Drawing.Point(10, 197)
         Me.ucrChkNameNewColumns.Name = "ucrChkNameNewColumns"
         Me.ucrChkNameNewColumns.Size = New System.Drawing.Size(148, 20)
         Me.ucrChkNameNewColumns.TabIndex = 3
@@ -85,7 +87,7 @@ Partial Class dlgTransposeColumns
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(416, 281)
+        Me.ClientSize = New System.Drawing.Size(417, 304)
         Me.Controls.Add(Me.ucrChkNameNewColumns)
         Me.Controls.Add(Me.ucrNewDataframe)
         Me.Controls.Add(Me.ucrReceiverColumsToTranspose)
