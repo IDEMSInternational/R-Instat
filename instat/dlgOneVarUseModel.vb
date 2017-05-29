@@ -53,7 +53,6 @@ Public Class dlgOneVarUseModel
         ucrChkProduceBootstrap.SetText("Produce Bootstrap")
 
         'This part is temporary for now
-        sdgOneVarUseModFit.SetMyBootFunction(clsRBootFunction)
 
         ucrNewDataFrameName.SetPrefix("UseModel")
         ucrNewDataFrameName.SetDataFrameSelector(ucrSelectorUseModel.ucrAvailableDataFrames)
