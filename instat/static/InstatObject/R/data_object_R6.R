@@ -1867,7 +1867,7 @@ data_object$set("public","set_contrasts_of_factor", function(col_name, new_contr
 }
 )
 #This method gets a date column and extracts part of the information such as year, month, week, weekday etc(depending on which parameters are set) and creates their respective new column(s)
-data_object$set("public","split_date", function(col_name = "", week = FALSE, month_val = FALSE, month_abbr = FALSE, month_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE, year = FALSE, day = FALSE, day_in_month = FALSE, day_in_year = FALSE, leap_year = FALSE, day_in_year_366 = FALSE, dekade = FALSE, pentad = FALSE) {
+data_object$set("public","split_date", function(col_name = "", week = FALSE, month_val = FALSE, month_abbr = FALSE, month_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE, year = FALSE, day = FALSE, day_in_month = FALSE, day_in_year = FALSE, leap_year = FALSE, day_in_year_366 = FALSE, dekade = FALSE, pentad = FALSE, shift_day = FALSE, shift_year = FALSE, shift_start_day) {
   col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
   if(!is.Date(col_data)) stop("This column must be a date or time!")
   if(day) {
@@ -1947,6 +1947,25 @@ data_object$set("public","split_date", function(col_name = "", week = FALSE, mon
 	  col_name <- next_default_item(prefix = "leap_year", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = leap_year_vector)
 	}
+  if(shift_day || shift_year) {
+    if(shift_start_day %% 1 != 0 || shift_start_day < 2 || shift_start_day > 366) stop("shift_start_day must be an integer between 2 and 366")
+    doy_col <- as.integer(yday_366(col_data))
+    year_col <- year(col_data)
+    temp_shift_day <- doy_col - shift_start_day + 1
+    temp_shift_year <- year_col
+    temp_shift_year[temp_shift_day < 1] <- paste(year_col[temp_shift_day < 1] - 1, year_col[temp_shift_day < 1], sep = "-")
+    temp_shift_year[temp_shift_day > 0] <- paste(year_col[temp_shift_day > 0], year_col[temp_shift_day > 0] + 1, sep = "-")
+    temp_shift_year <- factor(temp_shift_year)
+    temp_shift_day[temp_shift_day < 1] <- temp_shift_day[temp_shift_day < 1] + 366
+    if(shift_day) {
+      col_name <- next_default_item(prefix = paste0("shift_", shift_start_day), existing_names = self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name = col_name, col_data = temp_shift_day)
+    }
+    if(shift_year) {
+      col_name <- next_default_item(prefix = "shift_year", existing_names = self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name = col_name, col_data = temp_shift_year)
+    }
+  }
 }
 )
 
@@ -2017,6 +2036,7 @@ data_object$set("public","set_climatic_types", function(types) {
 )
 
 #Method for creating inventory plot
+
 data_object$set("public","make_inventory_plot", function(date_col, station_col = NULL, year_col = NULL, doy_col = NULL, element_cols = NULL, add_to_data = FALSE, year_doy_plot = FALSE, coord_flip = FALSE, facet_by = NULL, graph_title = "Inventory Plot") {
   if(!self$is_climatic_data()) stop("Data is not defined as climatic.")
   if(missing(date_col)) stop("Date columns must be specified.")
