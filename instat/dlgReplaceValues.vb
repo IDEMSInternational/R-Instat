@@ -13,6 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 
 Public Class dlgReplaceValues
@@ -108,6 +109,12 @@ Public Class dlgReplaceValues
         ''ucrInputNewValue
         ucrInputNewValue.SetParameter(New RParameter("new_value", 4))
         ucrInputNewValue.bAddRemoveParameter = False
+
+        'ucrNewDataFrame
+        ucrNewDataFrame.SetIsTextBox()
+        ucrNewDataFrame.SetSaveTypeAsDataFrame()
+        ucrNewDataFrame.SetDataFrameSelector(ucrSelectorReplace.ucrAvailableDataFrames)
+        ucrNewDataFrame.SetLabelText("New Data Frame Name:")
     End Sub
 
     Private Sub SetDefaults()
@@ -115,11 +122,14 @@ Public Class dlgReplaceValues
         clsReplaceNaLocf = New RFunction
 
         ucrSelectorReplace.Reset()
+        ucrNewDataFrame.Reset()
+        NewDefaultName()
         EnableRange()
         clsReplaceNaLocf.SetRCommand("na.locf")
         clsReplace.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data")
         clsReplace.AddParameter("old_value", "-99")
         clsReplace.AddParameter("new_is_missing", "TRUE")
+        clsReplaceNaLocf.SetAssignTo(ucrNewDataFrame.GetText(), strTempDataframe:=ucrNewDataFrame.GetText())
         ucrBase.clsRsyntax.SetBaseRFunction(clsReplace)
     End Sub
 
@@ -137,6 +147,7 @@ Public Class dlgReplaceValues
         ucrInputNewValue.SetRCode(clsReplace, bReset)
         ucrInputNewValue.SetRCode(clsReplace, bReset)
         ucrSelectorReplace.SetRCode(clsReplace, bReset)
+        ucrNewDataFrame.SetRCode(clsReplaceNaLocf, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -212,7 +223,7 @@ Public Class dlgReplaceValues
         End If
     End Sub
 
-    Private Sub ucrReceiverReplace_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverReplace.ControlContentsChanged, ucrPnlNew.ControlContentsChanged, ucrPnlOld.ControlContentsChanged, ucrInputNewValue.ControlContentsChanged, ucrInputOldValue.ControlContentsChanged, ucrInputRangeFrom.ControlContentsChanged, ucrInputRangeTo.ControlContentsChanged
+    Private Sub ucrReceiverReplace_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverReplace.ControlContentsChanged, ucrPnlNew.ControlContentsChanged, ucrPnlOld.ControlContentsChanged, ucrInputNewValue.ControlContentsChanged, ucrInputOldValue.ControlContentsChanged, ucrInputRangeFrom.ControlContentsChanged, ucrInputRangeTo.ControlContentsChanged, ucrNewDataFrame.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
@@ -229,6 +240,12 @@ Public Class dlgReplaceValues
         EnableRange()
     End Sub
 
+    Private Sub NewDefaultName()
+        If ucrSelectorReplace.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" AndAlso (Not ucrNewDataFrame.bUserTyped) Then
+            ucrNewDataFrame.SetPrefix(ucrSelectorReplace.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        End If
+    End Sub
+
     Private Sub ucrReceiverReplace_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverReplace.ControlValueChanged
         If rdoNewFromAbove.Checked OrElse rdoNewFromBelow.Checked Then
             ucrReceiverReplace.SetParameterIsRFunction()
@@ -237,5 +254,9 @@ Public Class dlgReplaceValues
         End If
         InputValue()
         EnableRange()
+    End Sub
+
+    Private Sub ucrSelectorReplace_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorReplace.ControlValueChanged
+        NewDefaultName()
     End Sub
 End Class
