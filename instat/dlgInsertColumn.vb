@@ -57,8 +57,6 @@ Public Class dlgInsertColumn
         ucrNudStartRow.SetParameter(New RParameter("start_row"))
         ucrNudStartRow.SetMinMax(1, Integer.MaxValue)
 
-
-
         Dim dctBeforeAfter As New Dictionary(Of String, String)
         ucrInputBeforeAfter.SetParameter(New RParameter("before"))
         dctBeforeAfter.Add("Before", "TRUE")
@@ -105,6 +103,7 @@ Public Class dlgInsertColumn
         ucrPnlColumnsOrRows.AddToLinkedControls(ucrNudNumberOfRows, {rdoInsertRows}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlColumnsOrRows.AddToLinkedControls(ucrNudStartRow, {rdoInsertRows}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlInsertColumns.AddToLinkedControls(ucrSelectorInsertColumns, {rdoBeforeAfter}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrSelectorInsertColumns.SetLinkedDisplayControl(lblColumn)
         ucrPnlBeforeAfter.SetLinkedDisplayControl(grpOPtions)
         ucrPnlInsertColumns.AddToLinkedControls(ucrInputBeforeAfter, {rdoBeforeAfter}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlInsertColumns.AddToLinkedControls(ucrReceiverColumnsToInsert, {rdoBeforeAfter}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
