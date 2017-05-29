@@ -61,3 +61,5 @@ graph_label="graph"
 
 #link labels
 keyed_link_label="keyed_link"
+
+max_labels_display=20
