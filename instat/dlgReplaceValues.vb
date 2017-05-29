@@ -18,6 +18,8 @@ Imports instat.Translations
 Public Class dlgReplaceValues
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private clsReplace As New RFunction
+    Private clsReplaceNaLocf As New RFunction
     Private Sub dlgReplace_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -46,7 +48,7 @@ Public Class dlgReplaceValues
         ucrReceiverReplace.SetSingleTypeStatus(True)
         ucrReceiverReplace.SetParameterIsString()
         ucrReceiverReplace.SetExcludedDataTypes({"Date"})
-        rdoNewFromAbove.Enabled = False
+        ' rdoNewFromAbove.Enabled = False
 
         '' Old:
         ucrPnlOld.AddRadioButton(rdoOldValue)
@@ -95,7 +97,8 @@ Public Class dlgReplaceValues
         '' NEW VALUES:
         ucrPnlNew.AddRadioButton(rdoNewValue)
         ucrPnlNew.AddRadioButton(rdoNewMissing)
-        'ucrPnlNew.AddRadioButton(rdoNewFromAbove)
+        ucrPnlNew.AddRadioButton(rdoNewFromBelow)
+        ucrPnlNew.AddRadioButton(rdoNewFromAbove)
 
         ucrPnlNew.AddParameterPresentCondition(rdoNewValue, "new_value")
         ucrPnlNew.AddParameterValuesCondition(rdoNewMissing, "new_is_missing", "TRUE")
@@ -108,34 +111,34 @@ Public Class dlgReplaceValues
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
+        clsReplace = New RFunction
+        clsReplaceNaLocf = New RFunction
+
         ucrSelectorReplace.Reset()
         EnableRange()
-
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data")
-        clsDefaultFunction.AddParameter("old_value", "-99")
-        clsDefaultFunction.AddParameter("new_is_missing", "TRUE")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        clsReplaceNaLocf.SetRCommand("na.locf")
+        clsReplace.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data")
+        clsReplace.AddParameter("old_value", "-99")
+        clsReplace.AddParameter("new_is_missing", "TRUE")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsReplace)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-    End Sub
-
-    Private Sub ReopenDialog()
+        '   SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
 
     End Sub
 
     Private Sub TestOKEnabled()
-        If (Not ucrReceiverReplace.IsEmpty()) Then
-            If ((rdoOldValue.Checked AndAlso Not ucrInputOldValue.IsEmpty) OrElse (rdoOldInterval.Checked AndAlso Not ucrInputRangeFrom.IsEmpty() AndAlso Not ucrInputRangeTo.IsEmpty()) OrElse rdoOldMissing.Checked) AndAlso ((rdoNewValue.Checked AndAlso Not ucrInputNewValue.IsEmpty) OrElse rdoNewMissing.Checked) Then
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
-            End If
-        Else
-                ucrBase.OKEnabled(False)
-        End If
+        'If (Not ucrReceiverReplace.IsEmpty()) Then
+        '    If ((rdoOldValue.Checked AndAlso Not ucrInputOldValue.IsEmpty) OrElse (rdoOldInterval.Checked AndAlso Not ucrInputRangeFrom.IsEmpty() AndAlso Not ucrInputRangeTo.IsEmpty()) OrElse rdoOldMissing.Checked) AndAlso ((rdoNewValue.Checked AndAlso Not ucrInputNewValue.IsEmpty) OrElse rdoNewMissing.Checked) Then
+        '        ucrBase.OKEnabled(True)
+        '    Else
+        '        ucrBase.OKEnabled(False)
+        '    End If
+        'Else
+        '    ucrBase.OKEnabled(False)
+        'End If
+        ucrBase.OKEnabled(True)
     End Sub
 
     Private Sub ucrBaseReplace_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -202,12 +205,25 @@ Public Class dlgReplaceValues
         TestOKEnabled()
     End Sub
 
+    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
+        If rdoNewFromAbove.Checked OrElse rdoNewFromBelow.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceNaLocf)
+        Else
+            ucrBase.clsRsyntax.SetBaseRFunction(clsReplace)
+        End If
+    End Sub
+
     Private Sub ucrPnlOld_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOld.ControlValueChanged, ucrPnlNew.ControlValueChanged
         InputValue()
         EnableRange()
     End Sub
 
     Private Sub ucrReceiverReplace_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverReplace.ControlValueChanged
+        If rdoNewFromAbove.Checked OrElse rdoNewFromBelow.Checked Then
+            ucrReceiverReplace.SetParameterIsRFunction()
+        Else
+            ucrReceiverReplace.SetParameterIsString()
+        End If
         InputValue()
         EnableRange()
     End Sub
