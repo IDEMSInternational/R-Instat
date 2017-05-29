@@ -66,9 +66,6 @@ Public Class dlgTransformClimatic
         ucrReceiverData.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "rain" & Chr(34)})
         ucrReceiverData.bAutoFill = True
 
-        'ucrSSTDataframe.SetParameter(New RParameter("data_name", 0))
-        'ucrSSTDataframe.SetParameterIsrfunction()
-
         clsRTransform.SetRCommand("instat_calculation$new")
         clsRTransform.SetAssignTo("transform_calculation")
 
@@ -93,13 +90,11 @@ Public Class dlgTransformClimatic
         ucrNudSumOver.SetMinMax(1, 366)
         ucrNudSumOver.Increment = 1
         ucrNudSumOver.SetLinkedDisplayControl(lblSumRows)
-        'ucrNudSumOver.SetRDefault("3")
 
         ucrNudCountOver.SetParameter(New RParameter("count_over"))
         ucrNudCountOver.SetMinMax(1, 366)
         ucrNudCountOver.Increment = 1
         ucrNudCountOver.SetLinkedDisplayControl(lblCountOver)
-        'ucrNudCountOver.SetRDefault("3")
 
         'ucrChkValuesUnderthreshold.SetParameter(New RParameter("values_under_threshold"))
         ucrChkValuesUnderThreshold.SetText("Values Under Threshold")
