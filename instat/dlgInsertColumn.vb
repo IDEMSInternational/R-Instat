@@ -76,7 +76,6 @@ Public Class dlgInsertColumn
         ucrInputPrefixForNewColumn.SetParameter(New RParameter("col_name"))
         ucrInputDefaultValue.SetRDefault("NA")
 
-
         ucrPnlInsertColumns.AddParameterValuesCondition(rdoAtStart, "before", "TRUE")
         ucrPnlInsertColumns.AddParameterValuesCondition(rdoAtStart, "before", "FALSE", False)
         ucrPnlInsertColumns.AddParameterPresentCondition(rdoAtStart, "adjacent_column", False)
