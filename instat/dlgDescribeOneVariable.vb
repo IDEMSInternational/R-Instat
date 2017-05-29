@@ -72,7 +72,8 @@ Public Class dlgDescribeOneVariable
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         'When we set the R code, the receiver and checkboxs should have whatever is currently the base function
-        ucrReceiverDescribeOneVar.SetRCode(ucrBaseDescribeOneVar.clsRsyntax.clsBaseFunction, bReset)
+        ucrReceiverDescribeOneVar.AddAdditionalCodeParameterPair(clsInstatSummaryFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
+        ucrReceiverDescribeOneVar.SetRCode(clsSummaryFunction, bReset)
         ucrChkOmitMissing.SetRCode(ucrBaseDescribeOneVar.clsRsyntax.clsBaseFunction, bReset)
         ucrChkCustomise.SetRCode(ucrBaseDescribeOneVar.clsRsyntax.clsBaseFunction, bReset)
         'However, the selector always has the Instat function. This prevents the selector's parameter being added in to the wrong function.
