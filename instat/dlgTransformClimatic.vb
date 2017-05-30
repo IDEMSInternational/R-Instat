@@ -119,6 +119,7 @@ Public Class dlgTransformClimatic
         ucrInputEvaporation.SetLinkedDisplayControl(lblWBEvaporation)
 
         ucrInputColName.SetParameter(New RParameter("result_name"))
+        ucrInputColName.SetName("moving_" & ucrInputSum.cboInput.SelectedItem)
 
         clsSubCalcList.SetRCommand("list")
 
@@ -147,7 +148,6 @@ Public Class dlgTransformClimatic
 
         ucrSelectorTransform.Reset()
         ucrReceiverDate.SetMeAsReceiver()
-        ucrInputColName.SetName("moving")
         ucrInputThreshold.SetName(0.85)
         ucrInputEvaporation.SetName(5)
         ucrNudCountOver.Value = 1
