@@ -18,6 +18,7 @@ Imports instat
 Imports RDotNet
 Imports unvell.ReoGrid.CellTypes
 Imports unvell.ReoGrid.Events
+Imports unvell.ReoGrid
 
 Public Class ucrFactor
     Public Event SelectedLevelChanged()
@@ -28,7 +29,7 @@ Public Class ucrFactor
     Public bIsSelector As Boolean
     Public bIsMultipleSelector As Boolean
     Public bIsGridColumn As Boolean
-    Public iColumnToGet As Integer
+    Public strColumnToGet As String
     Public iSelectorColumnIndex As Integer
     Public strSelectorColumnName As String
     Private bIsEditable As Boolean
@@ -46,7 +47,7 @@ Public Class ucrFactor
         bIsSelector = False
         bIsMultipleSelector = False
         bIsGridColumn = False
-        iColumnToGet = -1
+        strColumnToGet = ""
         iSelectorColumnIndex = -1
         strSelectorColumnName = "Select Level"
         bIsEditable = False
@@ -83,11 +84,11 @@ Public Class ucrFactor
         RefreshFactorData()
     End Sub
 
-    Public Sub SetIsGridColumn(iColumnIndex As Integer)
+    Public Sub SetIsGridColumn(strColumnName As String)
         bIsSelector = False
         bIsMultipleSelector = False
         bIsGridColumn = True
-        iColumnToGet = iColumnIndex
+        strColumnToGet = strColumnName
         RefreshFactorData()
     End Sub
 
@@ -171,7 +172,9 @@ Public Class ucrFactor
         If shtCurrSheet IsNot Nothing Then
             shtCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, Not bIsEditable)
             shtCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
+            shtCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.View_ShowRowHeader, False)
             shtCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
+            shtCurrSheet.ColumnHeaders(0).Width = 30
             ApplyColumnSettings()
             RaiseEvent GridContentChanged()
         End If
@@ -179,15 +182,15 @@ Public Class ucrFactor
 
     Private Sub ApplyColumnSettings()
         Dim lstColNumber As New List(Of Integer)
+        Dim bIsReadOnly As Boolean
 
         If shtCurrSheet IsNot Nothing AndAlso lstEditableColumns IsNot Nothing AndAlso lstEditableColumns.Count > 0 Then
             shtCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, False)
             For i = 0 To shtCurrSheet.ColumnCount - 1
-                If Not lstEditableColumns.Contains(shtCurrSheet.ColumnHeaders(i).Text) Then
-                    For j = 0 To shtCurrSheet.RowCount - 1
-                        shtCurrSheet.Cells(j, i).IsReadOnly = True
-                    Next
-                End If
+                bIsReadOnly = Not lstEditableColumns.Contains(shtCurrSheet.ColumnHeaders(i).Text)
+                For j = 0 To shtCurrSheet.RowCount - 1
+                    shtCurrSheet.Cells(j, i).IsReadOnly = bIsReadOnly
+                Next
             Next
         End If
     End Sub
@@ -223,7 +226,12 @@ Public Class ucrFactor
             shtCurrSheet.AppendRows(1)
             iNewRow = shtCurrSheet.RowCount - 1
             For i = 0 To shtCurrSheet.ColumnCount - 1
-                If i = 0 Then
+                If shtCurrSheet.ColumnHeaders(i).Text = "Ord" Then
+                    shtCurrSheet(iNewRow, i) = shtCurrSheet.RowCount
+                    shtCurrSheet.SetRangeDataFormat(iNewRow, i, 1, 1, unvell.ReoGrid.DataFormat.CellDataFormatFlag.Text)
+                ElseIf shtCurrSheet.ColumnHeaders(i).Text = "Labels" Then
+                    shtCurrSheet(iNewRow, i) = ""
+                ElseIf shtCurrSheet.ColumnHeaders(i).Text = "Levels" Then
                     shtCurrSheet(iNewRow, i) = ""
                 ElseIf shtCurrSheet.ColumnHeaders(i).Text = "Counts" Then
                     'TODO Fix this formatting issue with a grid user control
@@ -384,6 +392,8 @@ Public Class ucrFactor
         If shtCurrSheet IsNot Nothing Then
             If strValues.Count <> shtCurrSheet.RowCount Then
                 MsgBox("Developer error: Cannot set value of control " & Name & " because the list of values does not match the number of levels.")
+            ElseIf iColumnIndex < 0 OrElse iColumnIndex >= shtCurrSheet.ColumnCount Then
+                MsgBox("Developer error: Cannot set value of control " & Name & " because there is no column at index " & iColumnIndex & " in the grid.")
             Else
                 For i = 0 To shtCurrSheet.RowCount - 1
                     shtCurrSheet(i, iColumnIndex) = strValues(i)
@@ -402,14 +412,22 @@ Public Class ucrFactor
         End If
     End Sub
 
-    Public Function IsColumnComplete(iColumn As Integer) As Boolean
-        If shtCurrSheet IsNot Nothing AndAlso iColumn < shtCurrSheet.ColumnCount Then
-            For i = 0 To shtCurrSheet.RowCount - 1
-                If shtCurrSheet(i, iColumn) Is Nothing OrElse shtCurrSheet(i, iColumn).ToString() = "" Then
-                    Return False
-                End If
-            Next
-            Return True
+    Public Function IsColumnComplete(strColumn As String) As Boolean
+        Dim iColumn As Integer = -1
+
+        If shtCurrSheet IsNot Nothing Then
+            iColumn = GetColumnIndex(strColumn)
+            If iColumn = -1 Then
+                MsgBox("No column called " & strColumn & " to select in grid.", MsgBoxStyle.Critical, "Cannot select column.")
+                Return False
+            Else
+                For i As Integer = 0 To shtCurrSheet.RowCount - 1
+                    If shtCurrSheet(i, iColumn) Is Nothing OrElse shtCurrSheet(i, iColumn).ToString() = "" Then
+                        Return False
+                    End If
+                Next
+                Return True
+            End If
         Else
             Return False
         End If
@@ -435,8 +453,8 @@ Public Class ucrFactor
             If bIsSelector Then
                 clsTempParam.SetArgumentValue(GetSelectedLevels())
             ElseIf bIsGridColumn Then
-                If IsColumnComplete(iColumnToGet) Then
-                    clsTempParam.SetArgumentValue(GetColumnInFactorSheet(iColumn:=iColumnToGet))
+                If IsColumnComplete(strColumnToGet) Then
+                    clsTempParam.SetArgumentValue(GetColumnInFactorSheet(strColumn:=strColumnToGet))
                 End If
             End If
         End If
@@ -454,12 +472,47 @@ Public Class ucrFactor
                 RefreshFactorData()
             ElseIf bIsGridColumn Then
                 RefreshFactorData()
-                SetColumn(lstCurrentValues, iColumnToGet)
+                SetColumn(lstCurrentValues, GetColumnIndex(strColumnToGet))
             End If
         End If
     End Sub
 
     Private Sub ucrFactor_GridContentChanged() Handles Me.GridContentChanged, Me.SelectedLevelChanged
         OnControlValueChanged()
+    End Sub
+
+    Private Sub shtCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles shtCurrSheet.AfterCellEdit
+        If shtCurrSheet.ColumnHeaders(e.Cell.Column).Text = "Levels" AndAlso e.NewData.ToString() <> "" Then
+            If Not IsNumeric(e.NewData) Then
+                MsgBox("Invalid value: " & e.NewData.ToString() & vbNewLine & "Levels must be numeric values.", MsgBoxStyle.Exclamation, "Invalid Value")
+                e.EndReason = EndEditReason.Cancel
+            End If
+        End If
+    End Sub
+
+    Public Function GetColumnIndex(strColumn As String) As Integer
+        If shtCurrSheet IsNot Nothing Then
+            For i As Integer = 0 To shtCurrSheet.ColumnCount - 1
+                If shtCurrSheet.ColumnHeaders(i).Text = strColumn Then
+                    Return i
+                End If
+            Next
+        End If
+        Return -1
+    End Function
+
+    'These checks should be done by reogrid control: https://reogrid.net/document/cell-edit/
+    '"paste operation will also be aborted if target range including any read-only cells"
+    Private Sub shtCurrSheet_BeforePaste(sender As Object, e As BeforeRangeOperationEventArgs) Handles shtCurrSheet.BeforePaste
+        For i As Integer = e.Range.Col To e.Range.EndCol
+            If shtCurrSheet.Cells(0, i).IsReadOnly Then
+                e.IsCancelled = True
+            End If
+        Next
+    End Sub
+
+    Private Sub shtCurrSheet_AfterPaste(sender As Object, e As RangeEventArgs) Handles shtCurrSheet.AfterPaste
+        'This is needed because pasting carries cell properties e.g. overrides readonly properties
+        ApplyColumnSettings()
     End Sub
 End Class
