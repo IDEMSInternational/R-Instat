@@ -109,17 +109,18 @@ Public Class dlgReplaceValues
 
         ucrPnlNew.AddParameterPresentCondition(rdoNewValue, "new_value")
         ucrPnlNew.AddParameterValuesCondition(rdoNewMissing, "new_is_missing", "TRUE")
-        ucrPnlNew.AddParameterValuesCondition(rdoNewMissing, "old_value", ucrInputOldValue.GetText)
-        ucrPnlNew.AddParameterPresentCondition(rdoNewMissing, "from_last", False)
-        ucrPnlNew.AddParameterPresentCondition(rdoNewMissing, "from_last", False)
+        '  ucrPnlNew.AddParameterValuesCondition(rdoNewMissing, "from_last", "TRUE", False)
+        ' ucrPnlNew.AddParameterValuesCondition(rdoNewMissing, "from_last", "FALSE", False)
+        ucrPnlNew.AddParameterPresentCondition(rdoNewValue, "from_last", False)
+        ucrPnlNew.AddParameterPresentCondition(rdoNewValue, "from_last", False)
 
-        ucrPnlNew.AddParameterValuesCondition(rdoNewFromAbove, "new_is_missing", False)
-        ucrPnlNew.AddParameterValuesCondition(rdoNewFromBelow, "new_is_missing", False)
-        ucrPnlNew.AddParameterValuesCondition(rdoNewFromBelow, "old_is_missing", False)
-        ucrPnlNew.AddParameterValuesCondition(rdoNewFromBelow, "old_is_missing", False)
+        'ucrPnlNew.AddParameterValuesCondition(rdoNewFromAbove, "new_is_missing", False)
+        'ucrPnlNew.AddParameterValuesCondition(rdoNewFromBelow, "new_is_missing", False)
+        'ucrPnlNew.AddParameterValuesCondition(rdoNewFromBelow, "old_is_missing", False)
+        'ucrPnlNew.AddParameterValuesCondition(rdoNewFromBelow, "old_is_missing", False)
 
-        ucrPnlNew.AddParameterValuesCondition(rdoNewFromAbove, "from_last", "TRUE")
-        ucrPnlNew.AddParameterValuesCondition(rdoNewFromBelow, "from_last", "FALSE")
+        'ucrPnlNew.AddParameterValuesCondition(rdoNewFromAbove, "from_last", "TRUE")
+        'ucrPnlNew.AddParameterValuesCondition(rdoNewFromBelow, "from_last", "FALSE")
 
         ucrPnlNew.AddToLinkedControls(ucrInputNewValue, {rdoNewValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
 
@@ -139,6 +140,7 @@ Public Class dlgReplaceValues
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ' ucrPnlNew.AddAdditionalCodeParameterPair(clsReplace, New RParameter("new_is_missing"), iAdditionalPairNo:=1)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
@@ -172,12 +174,12 @@ Public Class dlgReplaceValues
                 Else
                     ucrInputOldValue.AddQuotesIfUnrecognised = True
                 End If
-                ucrBase.clsRsyntax.RemoveParameter("old_is_missing")
-                ucrBase.clsRsyntax.RemoveParameter("from_last")
+                clsReplace.RemoveParameterByName("old_is_missing")
+                clsReplace.RemoveParameterByName("from_last")
             ElseIf rdoOldMissing.Checked Then
-                ucrBase.clsRsyntax.AddParameter("old_is_missing", "TRUE")
+                clsReplace.AddParameter("old_is_missing", "TRUE")
             Else
-                ucrBase.clsRsyntax.RemoveParameter("old_is_missing")
+                clsReplace.RemoveParameterByName("old_is_missing")
             End If
             If rdoNewValue.Checked Then
                 If (strVarType = "numeric" OrElse strVarType = "integer") Then
@@ -185,16 +187,16 @@ Public Class dlgReplaceValues
                 Else
                     ucrInputNewValue.AddQuotesIfUnrecognised = True
                 End If
-                ucrBase.clsRsyntax.RemoveParameter("new_is_missing")
-                ucrBase.clsRsyntax.RemoveParameter("from_last")
+                clsReplace.RemoveParameterByName("new_is_missing")
+                clsReplace.RemoveParameterByName("from_last")
             ElseIf rdoNewMissing.Checked Then
-                ucrBase.clsRsyntax.AddParameter("new_is_missing", "TRUE")
+                clsReplace.AddParameter("new_is_missing", "TRUE")
             Else
-                ucrBase.clsRsyntax.RemoveParameter("new_is_missing")
+                clsReplace.RemoveParameterByName("new_is_missing")
             End If
             If rdoNewFromAbove.Checked OrElse rdoNewFromBelow.Checked Then
-                ucrBase.clsRsyntax.RemoveParameter("new_is_missing")
-                ucrBase.clsRsyntax.RemoveParameter("old_is_missing")
+                clsReplace.RemoveParameterByName("new_is_missing")
+                clsReplace.RemoveParameterByName("old_value")
             End If
         End If
     End Sub
