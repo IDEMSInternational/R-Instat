@@ -111,7 +111,7 @@ Public Class dlgReplaceValues
         ucrPnlNew.AddParameterValuesCondition(rdoNewMissing, "new_is_missing", "TRUE")
         '  ucrPnlNew.AddParameterValuesCondition(rdoNewMissing, "old_value",
 
-        ucrPnlNew.AddParameterValuesCondition(rdoNewFromAbove, "new_is_missing", False)
+              ucrPnlNew.AddParameterValuesCondition(rdoNewFromAbove, "new_is_missing", False)
         ucrPnlNew.AddParameterValuesCondition(rdoNewFromBelow, "new_is_missing", False)
         ucrPnlNew.AddParameterValuesCondition(rdoNewFromBelow, "old_is_missing", False)
         ucrPnlNew.AddParameterValuesCondition(rdoNewFromBelow, "old_is_missing", False)
