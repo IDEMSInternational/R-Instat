@@ -13,7 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports instat
+
 Imports instat.Translations
 
 Public Class dlgReplaceValues
@@ -47,6 +47,7 @@ Public Class dlgReplaceValues
         ucrReceiverReplace.Selector = ucrSelectorReplace
         ucrReceiverReplace.SetMeAsReceiver()
         ucrReceiverReplace.SetSingleTypeStatus(True)
+        ' ucrReceiverReplace.bForceAsDataFrame = True
         ucrReceiverReplace.SetParameterIsString()
         ucrReceiverReplace.SetExcludedDataTypes({"Date"})
         ' rdoNewFromAbove.Enabled = False
@@ -95,59 +96,44 @@ Public Class dlgReplaceValues
         ucrChkMax.bAddRemoveParameter = False
         ucrChkMax.SetRDefault("FALSE")
 
-        '' NEW VALUES:
-        ucrPnlNew.AddRadioButton(rdoNewValue)
-        ucrPnlNew.AddRadioButton(rdoNewMissing)
-        ucrPnlNew.AddRadioButton(rdoNewFromBelow)
-        ucrPnlNew.AddRadioButton(rdoNewFromAbove)
-
-        ucrPnlNew.AddParameterPresentCondition(rdoNewValue, "new_value")
-        ucrPnlNew.AddParameterValuesCondition(rdoNewMissing, "new_is_missing", "TRUE")
-
-        ucrPnlNew.AddToLinkedControls(ucrInputNewValue, {rdoNewValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
-
         ''ucrInputNewValue
         ucrInputNewValue.SetParameter(New RParameter("new_value", 4))
         ucrInputNewValue.bAddRemoveParameter = False
 
-        'ucrNewDataFrame
-        ucrNewDataFrame.SetIsTextBox()
-        ucrNewDataFrame.SetSaveTypeAsDataFrame()
-        ucrNewDataFrame.SetDataFrameSelector(ucrSelectorReplace.ucrAvailableDataFrames)
-        ucrNewDataFrame.SetLabelText("New Data Frame Name:")
+        '' NEW VALUES:
+        ucrPnlNew.SetParameter(New RParameter("from_last"))
+        ucrPnlNew.AddRadioButton(rdoNewFromAbove, "TRUE")
+        ucrPnlNew.AddRadioButton(rdoNewFromBelow, "FALSE")
+        ucrPnlNew.AddRadioButton(rdoNewValue)
+        ucrPnlNew.AddRadioButton(rdoNewMissing)
+
+        ucrPnlNew.AddParameterPresentCondition(rdoNewValue, "new_value")
+        ucrPnlNew.AddParameterValuesCondition(rdoNewMissing, "new_is_missing", "TRUE")
+        ucrPnlNew.AddParameterValuesCondition(rdoNewFromAbove, "from_last", "TRUE")
+        ucrPnlNew.AddParameterValuesCondition(rdoNewFromBelow, "from_last", "FALSE")
+
+        ucrPnlNew.AddToLinkedControls(ucrInputNewValue, {rdoNewValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
     End Sub
 
     Private Sub SetDefaults()
         clsReplace = New RFunction
         clsReplaceNaLocf = New RFunction
+        'ucrPnlNew.AddToLinkedControls(ucrNewDataFrame, {rdoNewFromAbove, rdoNewFromBelow}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True)
 
         ucrSelectorReplace.Reset()
-        ucrNewDataFrame.Reset()
-        NewDefaultName()
         EnableRange()
-        clsReplaceNaLocf.SetRCommand("na.locf")
+        ' clsReplaceNaLocf.SetRCommand("na.locf")
         clsReplace.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data")
         clsReplace.AddParameter("old_value", "-99")
         clsReplace.AddParameter("new_is_missing", "TRUE")
-        clsReplaceNaLocf.SetAssignTo(ucrNewDataFrame.GetText(), strTempDataframe:=ucrNewDataFrame.GetText())
+        ' clsReplaceNaLocf.SetAssignTo(ucrNewDataFrame.GetText(), strTempDataframe:=ucrNewDataFrame.GetText())
         ucrBase.clsRsyntax.SetBaseRFunction(clsReplace)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverReplace.SetRCode(clsReplace, bReset)
-        ucrReceiverReplace.AddAdditionalCodeParameterPair(clsReplaceNaLocf, New RParameter("object", 0), iAdditionalPairNo:=1)
-        ucrReceiverReplace.SetParameterIsRFunction()
-        ucrPnlOld.SetRCode(clsReplace, bReset)
-        ucrPnlNew.SetRCode(clsReplace, bReset)
-        ucrInputOldValue.SetRCode(clsReplace, bReset)
-        ucrInputRangeFrom.SetRCode(clsReplace, bReset)
-        ucrInputRangeTo.SetRCode(clsReplace, bReset)
-        ucrChkMin.SetRCode(clsReplace, bReset)
-        ucrChkMax.SetRCode(clsReplace, bReset)
-        ucrInputNewValue.SetRCode(clsReplace, bReset)
-        ucrInputNewValue.SetRCode(clsReplace, bReset)
-        ucrSelectorReplace.SetRCode(clsReplace, bReset)
-        ucrNewDataFrame.SetRCode(clsReplaceNaLocf, bReset)
+        ' ucrReceiverReplace.SetRCode(clsReplace, bReset)
+        ' ucrReceiverReplace.AddAdditionalCodeParameterPair(clsReplaceNaLocf, New RParameter("object", 0), iAdditionalPairNo:=1)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -228,11 +214,11 @@ Public Class dlgReplaceValues
     End Sub
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        If rdoNewFromAbove.Checked OrElse rdoNewFromBelow.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceNaLocf)
-        Else
-            ucrBase.clsRsyntax.SetBaseRFunction(clsReplace)
-        End If
+        'If rdoNewFromAbove.Checked OrElse rdoNewFromBelow.Checked Then
+        '    ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceNaLocf)
+        'Else
+        '    ucrBase.clsRsyntax.SetBaseRFunction(clsReplace)
+        'End If
     End Sub
 
     Private Sub ucrPnlOld_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOld.ControlValueChanged, ucrPnlNew.ControlValueChanged
@@ -240,23 +226,23 @@ Public Class dlgReplaceValues
         EnableRange()
     End Sub
 
-    Private Sub NewDefaultName()
-        If ucrSelectorReplace.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" AndAlso (Not ucrNewDataFrame.bUserTyped) Then
-            ucrNewDataFrame.SetPrefix(ucrSelectorReplace.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-        End If
-    End Sub
+    'Private Sub NewDefaultName()
+    '    If ucrSelectorReplace.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" AndAlso (Not ucrNewDataFrame.bUserTyped) Then
+    '        ucrNewDataFrame.SetPrefix(ucrSelectorReplace.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+    '    End If
+    'End Sub
 
     Private Sub ucrReceiverReplace_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverReplace.ControlValueChanged
-        If rdoNewFromAbove.Checked OrElse rdoNewFromBelow.Checked Then
-            ucrReceiverReplace.SetParameterIsRFunction()
-        Else
-            ucrReceiverReplace.SetParameterIsString()
-        End If
+        'If rdoNewFromAbove.Checked OrElse rdoNewFromBelow.Checked Then
+        '    ucrReceiverReplace.SetParameterIsRFunction()
+        'Else
+        '    ucrReceiverReplace.SetParameterIsString()
+        'End If
         InputValue()
         EnableRange()
     End Sub
 
     Private Sub ucrSelectorReplace_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorReplace.ControlValueChanged
-        NewDefaultName()
+        ' NewDefaultName()
     End Sub
 End Class
