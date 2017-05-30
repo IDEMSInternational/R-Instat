@@ -493,7 +493,7 @@ Public Class RLink
         bInstatObjectExists = True
     End Sub
 
-    Public Sub FillListView(lstView As ListView, strType As String, Optional lstIncludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional lstExcludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional strDataFrameName As String = "", Optional strHeading As String = "Variables", Optional strExcludedItems As String() = Nothing, Optional strDatabaseQuery As String = "")
+    Public Sub FillListView(lstView As ListView, strType As String, Optional lstIncludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional lstExcludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional strDataFrameName As String = "", Optional strHeading As String = "Variables", Optional strExcludedItems As String() = Nothing, Optional strDatabaseQuery As String = "", Optional strNcFilePath As String = "")
         Dim vecColumns As GenericVector
         Dim chrCurrColumns As CharacterVector
         Dim i As Integer
@@ -527,6 +527,9 @@ Public Class RLink
                 Case "database_variables"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_database_variable_names")
                     clsGetItems.AddParameter("query", Chr(34) & strDatabaseQuery & Chr(34))
+                Case "nc_dim_variables"
+                    clsGetItems.SetRCommand(strInstatDataObject & "$get_nc_variable_names")
+                    clsGetItems.AddParameter("file", Chr(34) & strNcFilePath & Chr(34))
             End Select
             clsGetItems.AddParameter("as_list", "TRUE")
             lstView.Clear()
@@ -599,6 +602,9 @@ Public Class RLink
             ucrCurrentReceiver.Clear()
             For i = 0 To vecColumns.Count - 1
                 chrCurrColumns = vecColumns(i).AsCharacter
+                If chrCurrColumns Is Nothing Then
+                    Continue For
+                End If
                 For Each strColumn As String In chrCurrColumns
                     lstItems.Add(New KeyValuePair(Of String, String)(strDataFrameName, strColumn))
                 Next
@@ -784,5 +790,19 @@ Public Class RLink
         clsGetColumnName.AddParameter("type", strType)
         strColumn = RunInternalScriptGetValue(clsGetColumnName.ToScript()).AsCharacter(0)
         Return strColumn
+    End Function
+
+    Public Function IsBinary(strDataName As String, strColumn As String) As Boolean
+        Dim clsGetColumn As New RFunction
+        Dim clsIsBinary As New RFunction
+        Dim bIsBinary As Boolean
+
+        clsGetColumn.SetRCommand(strInstatDataObject & "$get_columns_from_data")
+        clsGetColumn.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
+        clsGetColumn.AddParameter("col_names", Chr(34) & strColumn & Chr(34))
+        clsIsBinary.SetRCommand("is.binary")
+        clsIsBinary.AddParameter("x", clsRFunctionParameter:=clsGetColumn)
+        bIsBinary = RunInternalScriptGetValue(clsIsBinary.ToScript()).AsLogical(0)
+        Return bIsBinary
     End Function
 End Class

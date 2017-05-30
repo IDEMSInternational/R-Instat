@@ -39,17 +39,8 @@ Public Class dlgStandardiseCountryNames
         bReset = False
     End Sub
 
-    Private Sub SetDefaults()
-        'Reset 
-        ucrSelectorStandardiseCountry.Reset()
-        clsStandardiseCountryNames = New RFunction
-        clsStandardiseCountryNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$standardise_country_names")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsStandardiseCountryNames)
-    End Sub
-
     Private Sub InitialiseDialog()
-        'helpID
-        '  ucrBase.iHelpTopicID =
+        ucrBase.iHelpTopicID = 530
 
         'selector
         ucrSelectorStandardiseCountry.SetParameter(New RParameter("data_name", 0))
@@ -59,9 +50,15 @@ Public Class dlgStandardiseCountryNames
         ucrReceiverCountryNames.SetParameter(New RParameter("country_columns", 1))
         ucrReceiverCountryNames.SetParameterIsString()
         ucrReceiverCountryNames.SetIncludedDataTypes({"factor", "character"})
-
         ucrReceiverCountryNames.Selector = ucrSelectorStandardiseCountry
         ucrReceiverCountryNames.SetMeAsReceiver()
+    End Sub
+
+    Private Sub SetDefaults()
+        clsStandardiseCountryNames = New RFunction
+        ucrSelectorStandardiseCountry.Reset()
+        clsStandardiseCountryNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$standardise_country_names")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsStandardiseCountryNames)
     End Sub
 
     Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)

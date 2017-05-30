@@ -288,7 +288,7 @@ Public Class frmEditor
     End Sub
 
     Private Sub insertSheet_Click(sender As Object, e As EventArgs) Handles insertSheet.Click
-        dlgFileNew.ShowDialog()
+        dlgNewDataFrame.ShowDialog()
     End Sub
 
     Private Sub deleteSheet_Click(sender As Object, e As EventArgs) Handles deleteSheet.Click
@@ -433,11 +433,11 @@ Public Class frmEditor
     End Sub
 
     Private Sub renameSheet_Click(sender As Object, e As EventArgs) Handles renameSheet.Click
-        dlgRenameSheet.ShowDialog()
+        dlgRenameDataFrame.ShowDialog()
     End Sub
 
     Private Sub MoveOrCopySheet_Click(sender As Object, e As EventArgs) Handles CopySheet.Click
-        dlgCopySheet.ShowDialog()
+        dlgCopyDataFrame.ShowDialog()
     End Sub
 
     Private Sub mnuConvertVariate_Click(sender As Object, e As EventArgs) Handles mnuConvertVariate.Click
@@ -544,7 +544,7 @@ Public Class frmEditor
     End Sub
 
     Private Sub reorderSheet_Click(sender As Object, e As EventArgs) Handles reorderSheet.Click
-        dlgReorderSheet.ShowDialog()
+        dlgReorderDataFrame.ShowDialog()
     End Sub
 
     Private Sub UpdateRFunctionDataFrameParameters()
