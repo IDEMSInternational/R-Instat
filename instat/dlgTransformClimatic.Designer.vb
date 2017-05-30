@@ -69,7 +69,7 @@ Partial Class dlgTransformClimatic
         Me.lblYear.Location = New System.Drawing.Point(320, 170)
         Me.lblYear.Name = "lblYear"
         Me.lblYear.Size = New System.Drawing.Size(32, 13)
-        Me.lblYear.TabIndex = 11
+        Me.lblYear.TabIndex = 10
         Me.lblYear.Text = "Year:"
         '
         'lblDate
@@ -78,7 +78,7 @@ Partial Class dlgTransformClimatic
         Me.lblDate.Location = New System.Drawing.Point(319, 128)
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(33, 13)
-        Me.lblDate.TabIndex = 9
+        Me.lblDate.TabIndex = 8
         Me.lblDate.Text = "Date:"
         '
         'lblDOY
@@ -87,7 +87,7 @@ Partial Class dlgTransformClimatic
         Me.lblDOY.Location = New System.Drawing.Point(319, 212)
         Me.lblDOY.Name = "lblDOY"
         Me.lblDOY.Size = New System.Drawing.Size(66, 13)
-        Me.lblDOY.TabIndex = 13
+        Me.lblDOY.TabIndex = 12
         Me.lblDOY.Text = "Day of Year:"
         '
         'lblStation
@@ -96,7 +96,7 @@ Partial Class dlgTransformClimatic
         Me.lblStation.Location = New System.Drawing.Point(319, 86)
         Me.lblStation.Name = "lblStation"
         Me.lblStation.Size = New System.Drawing.Size(43, 13)
-        Me.lblStation.TabIndex = 7
+        Me.lblStation.TabIndex = 6
         Me.lblStation.Text = "Station:"
         '
         'lblData
@@ -105,7 +105,7 @@ Partial Class dlgTransformClimatic
         Me.lblData.Location = New System.Drawing.Point(318, 254)
         Me.lblData.Name = "lblData"
         Me.lblData.Size = New System.Drawing.Size(48, 13)
-        Me.lblData.TabIndex = 15
+        Me.lblData.TabIndex = 14
         Me.lblData.Text = "Element:"
         '
         'rdoSpell
@@ -186,14 +186,14 @@ Partial Class dlgTransformClimatic
         Me.lblThreshold.Location = New System.Drawing.Point(318, 302)
         Me.lblThreshold.Name = "lblThreshold"
         Me.lblThreshold.Size = New System.Drawing.Size(57, 13)
-        Me.lblThreshold.TabIndex = 17
+        Me.lblThreshold.TabIndex = 16
         Me.lblThreshold.Tag = "Threshold:"
         Me.lblThreshold.Text = "Threshold:"
         '
         'lblSumRows
         '
         Me.lblSumRows.AutoSize = True
-        Me.lblSumRows.Location = New System.Drawing.Point(229, 42)
+        Me.lblSumRows.Location = New System.Drawing.Point(231, 22)
         Me.lblSumRows.Name = "lblSumRows"
         Me.lblSumRows.Size = New System.Drawing.Size(34, 13)
         Me.lblSumRows.TabIndex = 3
@@ -204,7 +204,7 @@ Partial Class dlgTransformClimatic
         '
         Me.ucrNudSumOver.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSumOver.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSumOver.Location = New System.Drawing.Point(173, 39)
+        Me.ucrNudSumOver.Location = New System.Drawing.Point(177, 18)
         Me.ucrNudSumOver.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSumOver.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSumOver.Name = "ucrNudSumOver"
@@ -215,7 +215,7 @@ Partial Class dlgTransformClimatic
         'lblSumOver
         '
         Me.lblSumOver.AutoSize = True
-        Me.lblSumOver.Location = New System.Drawing.Point(132, 42)
+        Me.lblSumOver.Location = New System.Drawing.Point(140, 22)
         Me.lblSumOver.Name = "lblSumOver"
         Me.lblSumOver.Size = New System.Drawing.Size(30, 13)
         Me.lblSumOver.TabIndex = 1
@@ -226,7 +226,7 @@ Partial Class dlgTransformClimatic
         '
         Me.ucrInputSum.AddQuotesIfUnrecognised = True
         Me.ucrInputSum.IsReadOnly = False
-        Me.ucrInputSum.Location = New System.Drawing.Point(13, 39)
+        Me.ucrInputSum.Location = New System.Drawing.Point(19, 18)
         Me.ucrInputSum.Name = "ucrInputSum"
         Me.ucrInputSum.Size = New System.Drawing.Size(112, 21)
         Me.ucrInputSum.TabIndex = 0
@@ -234,25 +234,25 @@ Partial Class dlgTransformClimatic
         'lblNewColName
         '
         Me.lblNewColName.AutoSize = True
-        Me.lblNewColName.Location = New System.Drawing.Point(6, 332)
+        Me.lblNewColName.Location = New System.Drawing.Point(6, 338)
         Me.lblNewColName.Name = "lblNewColName"
         Me.lblNewColName.Size = New System.Drawing.Size(101, 13)
-        Me.lblNewColName.TabIndex = 23
+        Me.lblNewColName.TabIndex = 19
         Me.lblNewColName.Tag = "New Column Name:"
         Me.lblNewColName.Text = "New Column Name:"
         '
         'ucrChkValuesUnderThreshold
         '
         Me.ucrChkValuesUnderThreshold.Checked = False
-        Me.ucrChkValuesUnderThreshold.Location = New System.Drawing.Point(173, 35)
+        Me.ucrChkValuesUnderThreshold.Location = New System.Drawing.Point(16, 46)
         Me.ucrChkValuesUnderThreshold.Name = "ucrChkValuesUnderThreshold"
-        Me.ucrChkValuesUnderThreshold.Size = New System.Drawing.Size(105, 20)
+        Me.ucrChkValuesUnderThreshold.Size = New System.Drawing.Size(186, 20)
         Me.ucrChkValuesUnderThreshold.TabIndex = 0
         '
         'lblCountRows
         '
         Me.lblCountRows.AutoSize = True
-        Me.lblCountRows.Location = New System.Drawing.Point(132, 38)
+        Me.lblCountRows.Location = New System.Drawing.Point(140, 22)
         Me.lblCountRows.Name = "lblCountRows"
         Me.lblCountRows.Size = New System.Drawing.Size(34, 13)
         Me.lblCountRows.TabIndex = 2
@@ -263,7 +263,7 @@ Partial Class dlgTransformClimatic
         '
         Me.ucrNudCountOver.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudCountOver.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudCountOver.Location = New System.Drawing.Point(78, 35)
+        Me.ucrNudCountOver.Location = New System.Drawing.Point(81, 19)
         Me.ucrNudCountOver.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudCountOver.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudCountOver.Name = "ucrNudCountOver"
@@ -274,7 +274,7 @@ Partial Class dlgTransformClimatic
         'lblCountOver
         '
         Me.lblCountOver.AutoSize = True
-        Me.lblCountOver.Location = New System.Drawing.Point(13, 38)
+        Me.lblCountOver.Location = New System.Drawing.Point(13, 22)
         Me.lblCountOver.Name = "lblCountOver"
         Me.lblCountOver.Size = New System.Drawing.Size(64, 13)
         Me.lblCountOver.TabIndex = 0
@@ -283,43 +283,43 @@ Partial Class dlgTransformClimatic
         '
         'grpTransform
         '
-        Me.grpTransform.Controls.Add(Me.ucrInputEvaporation)
-        Me.grpTransform.Controls.Add(Me.ucrChkValuesUnderThreshold)
-        Me.grpTransform.Controls.Add(Me.lblWBEvaporation)
-        Me.grpTransform.Controls.Add(Me.ucrNudWBCapacity)
-        Me.grpTransform.Controls.Add(Me.lblSumRows)
-        Me.grpTransform.Controls.Add(Me.lblWBCapacity)
-        Me.grpTransform.Controls.Add(Me.lblCountRows)
-        Me.grpTransform.Controls.Add(Me.ucrInputSpellUpper)
-        Me.grpTransform.Controls.Add(Me.ucrNudCountOver)
-        Me.grpTransform.Controls.Add(Me.lblCountOver)
-        Me.grpTransform.Controls.Add(Me.ucrNudSumOver)
         Me.grpTransform.Controls.Add(Me.ucrInputSpellLower)
+        Me.grpTransform.Controls.Add(Me.ucrInputSpellUpper)
+        Me.grpTransform.Controls.Add(Me.lblSpellAnd)
+        Me.grpTransform.Controls.Add(Me.ucrChkValuesUnderThreshold)
+        Me.grpTransform.Controls.Add(Me.lblSumRows)
+        Me.grpTransform.Controls.Add(Me.ucrInputEvaporation)
+        Me.grpTransform.Controls.Add(Me.lblValuesBetween)
+        Me.grpTransform.Controls.Add(Me.lblWBEvaporation)
+        Me.grpTransform.Controls.Add(Me.lblCountRows)
+        Me.grpTransform.Controls.Add(Me.ucrNudSumOver)
+        Me.grpTransform.Controls.Add(Me.lblWBCapacity)
+        Me.grpTransform.Controls.Add(Me.ucrNudCountOver)
+        Me.grpTransform.Controls.Add(Me.ucrNudWBCapacity)
         Me.grpTransform.Controls.Add(Me.lblSumOver)
         Me.grpTransform.Controls.Add(Me.ucrInputSum)
-        Me.grpTransform.Controls.Add(Me.lblSpellAnd)
-        Me.grpTransform.Controls.Add(Me.lblValuesBetween)
+        Me.grpTransform.Controls.Add(Me.lblCountOver)
         Me.grpTransform.Location = New System.Drawing.Point(9, 251)
         Me.grpTransform.Name = "grpTransform"
-        Me.grpTransform.Size = New System.Drawing.Size(284, 68)
-        Me.grpTransform.TabIndex = 22
+        Me.grpTransform.Size = New System.Drawing.Size(284, 72)
+        Me.grpTransform.TabIndex = 18
         Me.grpTransform.TabStop = False
-        Me.grpTransform.Text = "Moving"
+        Me.grpTransform.Text = "Options"
         '
         'ucrInputEvaporation
         '
         Me.ucrInputEvaporation.AddQuotesIfUnrecognised = True
         Me.ucrInputEvaporation.IsMultiline = False
         Me.ucrInputEvaporation.IsReadOnly = False
-        Me.ucrInputEvaporation.Location = New System.Drawing.Point(212, 23)
+        Me.ucrInputEvaporation.Location = New System.Drawing.Point(81, 46)
         Me.ucrInputEvaporation.Name = "ucrInputEvaporation"
-        Me.ucrInputEvaporation.Size = New System.Drawing.Size(63, 21)
+        Me.ucrInputEvaporation.Size = New System.Drawing.Size(98, 21)
         Me.ucrInputEvaporation.TabIndex = 3
         '
         'lblWBEvaporation
         '
         Me.lblWBEvaporation.AutoSize = True
-        Me.lblWBEvaporation.Location = New System.Drawing.Point(143, 26)
+        Me.lblWBEvaporation.Location = New System.Drawing.Point(13, 50)
         Me.lblWBEvaporation.Name = "lblWBEvaporation"
         Me.lblWBEvaporation.Size = New System.Drawing.Size(67, 13)
         Me.lblWBEvaporation.TabIndex = 2
@@ -330,7 +330,7 @@ Partial Class dlgTransformClimatic
         '
         Me.ucrNudWBCapacity.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudWBCapacity.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudWBCapacity.Location = New System.Drawing.Point(75, 23)
+        Me.ucrNudWBCapacity.Location = New System.Drawing.Point(81, 19)
         Me.ucrNudWBCapacity.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudWBCapacity.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudWBCapacity.Name = "ucrNudWBCapacity"
@@ -341,7 +341,7 @@ Partial Class dlgTransformClimatic
         'lblWBCapacity
         '
         Me.lblWBCapacity.AutoSize = True
-        Me.lblWBCapacity.Location = New System.Drawing.Point(10, 25)
+        Me.lblWBCapacity.Location = New System.Drawing.Point(13, 22)
         Me.lblWBCapacity.Name = "lblWBCapacity"
         Me.lblWBCapacity.Size = New System.Drawing.Size(51, 13)
         Me.lblWBCapacity.TabIndex = 0
@@ -353,7 +353,7 @@ Partial Class dlgTransformClimatic
         Me.ucrInputSpellUpper.AddQuotesIfUnrecognised = True
         Me.ucrInputSpellUpper.IsMultiline = False
         Me.ucrInputSpellUpper.IsReadOnly = False
-        Me.ucrInputSpellUpper.Location = New System.Drawing.Point(200, 18)
+        Me.ucrInputSpellUpper.Location = New System.Drawing.Point(208, 18)
         Me.ucrInputSpellUpper.Name = "ucrInputSpellUpper"
         Me.ucrInputSpellUpper.Size = New System.Drawing.Size(63, 21)
         Me.ucrInputSpellUpper.TabIndex = 3
@@ -363,7 +363,7 @@ Partial Class dlgTransformClimatic
         Me.ucrInputSpellLower.AddQuotesIfUnrecognised = True
         Me.ucrInputSpellLower.IsMultiline = False
         Me.ucrInputSpellLower.IsReadOnly = False
-        Me.ucrInputSpellLower.Location = New System.Drawing.Point(99, 18)
+        Me.ucrInputSpellLower.Location = New System.Drawing.Point(103, 18)
         Me.ucrInputSpellLower.Name = "ucrInputSpellLower"
         Me.ucrInputSpellLower.Size = New System.Drawing.Size(63, 21)
         Me.ucrInputSpellLower.TabIndex = 1
@@ -371,7 +371,7 @@ Partial Class dlgTransformClimatic
         'lblSpellAnd
         '
         Me.lblSpellAnd.AutoSize = True
-        Me.lblSpellAnd.Location = New System.Drawing.Point(168, 20)
+        Me.lblSpellAnd.Location = New System.Drawing.Point(177, 22)
         Me.lblSpellAnd.Name = "lblSpellAnd"
         Me.lblSpellAnd.Size = New System.Drawing.Size(25, 13)
         Me.lblSpellAnd.TabIndex = 2
@@ -381,7 +381,7 @@ Partial Class dlgTransformClimatic
         'lblValuesBetween
         '
         Me.lblValuesBetween.AutoSize = True
-        Me.lblValuesBetween.Location = New System.Drawing.Point(13, 20)
+        Me.lblValuesBetween.Location = New System.Drawing.Point(16, 22)
         Me.lblValuesBetween.Name = "lblValuesBetween"
         Me.lblValuesBetween.Size = New System.Drawing.Size(84, 13)
         Me.lblValuesBetween.TabIndex = 0
@@ -396,17 +396,17 @@ Partial Class dlgTransformClimatic
         Me.ucrInputThreshold.Location = New System.Drawing.Point(380, 299)
         Me.ucrInputThreshold.Name = "ucrInputThreshold"
         Me.ucrInputThreshold.Size = New System.Drawing.Size(81, 21)
-        Me.ucrInputThreshold.TabIndex = 18
+        Me.ucrInputThreshold.TabIndex = 17
         '
         'ucrInputColName
         '
         Me.ucrInputColName.AddQuotesIfUnrecognised = True
         Me.ucrInputColName.IsMultiline = False
         Me.ucrInputColName.IsReadOnly = False
-        Me.ucrInputColName.Location = New System.Drawing.Point(112, 329)
+        Me.ucrInputColName.Location = New System.Drawing.Point(112, 335)
         Me.ucrInputColName.Name = "ucrInputColName"
         Me.ucrInputColName.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputColName.TabIndex = 24
+        Me.ucrInputColName.TabIndex = 20
         '
         'ucrPnlTransform
         '
@@ -424,7 +424,7 @@ Partial Class dlgTransformClimatic
         Me.ucrReceiverStation.Selector = Nothing
         Me.ucrReceiverStation.Size = New System.Drawing.Size(143, 20)
         Me.ucrReceiverStation.strNcFilePath = ""
-        Me.ucrReceiverStation.TabIndex = 8
+        Me.ucrReceiverStation.TabIndex = 7
         Me.ucrReceiverStation.ucrSelector = Nothing
         '
         'ucrSelectorTransform
@@ -446,7 +446,7 @@ Partial Class dlgTransformClimatic
         Me.ucrReceiverYear.Selector = Nothing
         Me.ucrReceiverYear.Size = New System.Drawing.Size(143, 20)
         Me.ucrReceiverYear.strNcFilePath = ""
-        Me.ucrReceiverYear.TabIndex = 12
+        Me.ucrReceiverYear.TabIndex = 11
         Me.ucrReceiverYear.ucrSelector = Nothing
         '
         'ucrReceiverDate
@@ -458,7 +458,7 @@ Partial Class dlgTransformClimatic
         Me.ucrReceiverDate.Selector = Nothing
         Me.ucrReceiverDate.Size = New System.Drawing.Size(143, 20)
         Me.ucrReceiverDate.strNcFilePath = ""
-        Me.ucrReceiverDate.TabIndex = 10
+        Me.ucrReceiverDate.TabIndex = 9
         Me.ucrReceiverDate.ucrSelector = Nothing
         '
         'ucrReceiverDOY
@@ -470,7 +470,7 @@ Partial Class dlgTransformClimatic
         Me.ucrReceiverDOY.Selector = Nothing
         Me.ucrReceiverDOY.Size = New System.Drawing.Size(143, 20)
         Me.ucrReceiverDOY.strNcFilePath = ""
-        Me.ucrReceiverDOY.TabIndex = 14
+        Me.ucrReceiverDOY.TabIndex = 13
         Me.ucrReceiverDOY.ucrSelector = Nothing
         '
         'ucrReceiverData
@@ -482,21 +482,21 @@ Partial Class dlgTransformClimatic
         Me.ucrReceiverData.Selector = Nothing
         Me.ucrReceiverData.Size = New System.Drawing.Size(143, 20)
         Me.ucrReceiverData.strNcFilePath = ""
-        Me.ucrReceiverData.TabIndex = 16
+        Me.ucrReceiverData.TabIndex = 15
         Me.ucrReceiverData.ucrSelector = Nothing
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 359)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 362)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(402, 52)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.TabIndex = 21
         '
         'dlgTransformClimatic
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(486, 425)
+        Me.ClientSize = New System.Drawing.Size(479, 419)
         Me.Controls.Add(Me.ucrInputThreshold)
         Me.Controls.Add(Me.grpTransform)
         Me.Controls.Add(Me.lblNewColName)
