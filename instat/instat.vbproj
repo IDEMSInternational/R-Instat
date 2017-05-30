@@ -1824,12 +1824,6 @@
     <Compile Include="dlgSummary.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgSummaryTables.designer.vb">
-      <DependentUpon>dlgSummaryTables.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgSummaryTables.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgThreeSummaries.Designer.vb">
       <DependentUpon>dlgThreeSummaries.vb</DependentUpon>
     </Compile>
@@ -4011,15 +4005,6 @@
     <EmbeddedResource Include="dlgSummary.sw-KE.resx">
       <DependentUpon>dlgSummary.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgSummaryTables.fr-FR.resx">
-      <DependentUpon>dlgSummaryTables.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgSummaryTables.resx">
-      <DependentUpon>dlgSummaryTables.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgSummaryTables.sw-KE.resx">
-      <DependentUpon>dlgSummaryTables.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgTransform.fr-FR.resx">
       <DependentUpon>dlgTransform.vb</DependentUpon>
     </EmbeddedResource>
@@ -5431,6 +5416,54 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\zoo_1.8-0.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\backports_1.1.0.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\checkmate_1.8.2.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\devtools_1.13.1.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\GlobalOptions_0.0.12.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\htmlTable_1.9.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\knitr_1.16.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\mclust_5.3.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\plotrix_3.6-5.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\purrr_0.2.2.2.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\R6_2.2.1.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\Rcpp_0.12.11.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\readr_1.1.1.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\rje_1.9.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\rlang_0.1.1.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\tibble_1.3.1.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\tidyr_0.6.3.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
