@@ -53,8 +53,8 @@ Public Class dlgStringDistance
         ucrPnlStringDist.AddRadioButton(rdoString)
         ucrPnlStringDist.AddRadioButton(rdoColumn)
 
-        ucrPnlStringDist.AddParameterValuesCondition(rdoColumn, "b", ucrReceiverColumn.GetVariableNames.Trim(Chr(34)))
-        ucrPnlStringDist.AddParameterValuesCondition(rdoString, "b", Chr(34) & ucrInputPatternStringDistance.GetText & Chr(34))
+        ucrPnlStringDist.AddParameterIsStringCondition(rdoColumn, "b")
+        ucrPnlStringDist.AddParameterIsRFunctionCondition(rdoString, "b")
         ucrPnlStringDist.AddToLinkedControls(ucrReceiverColumn, {rdoColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlStringDist.AddToLinkedControls(ucrInputPatternStringDistance, {rdoString}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
@@ -93,7 +93,7 @@ Public Class dlgStringDistance
         clsStringDistFunction.SetRCommand("stringdist")
         ucrInputPatternStringDistance.Reset()
         clsStringDistFunction.AddParameter("method", Chr(34) & "osa" & Chr(34))
-        clsStringDistFunction.AddParameter("b", ucrInputPatternStringDistance.GetText)
+        clsStringDistFunction.AddParameter("b", Chr(34) & Chr(34))
         ucrBase.clsRsyntax.SetBaseRFunction(clsStringDistFunction)
     End Sub
 
