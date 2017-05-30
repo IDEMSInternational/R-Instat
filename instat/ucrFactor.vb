@@ -37,6 +37,8 @@ Public Class ucrFactor
     Public bIncludeCopyOfLevels As Boolean
     Public strExtraColumn As String = ""
     Public strSelectedLevels As String()
+    Public WithEvents ucrChkLevels As ucrCheck
+    Public bForceShowLevels As Boolean = False
 
     Public Sub New()
 
@@ -119,50 +121,56 @@ Public Class ucrFactor
         Dim bShowGrid As Boolean = False
         Dim clsGetFactorData As New RFunction
         Dim clsConvertToCharacter As New RFunction
+        Dim bHasLevels As Boolean
+        Dim iLevelsCol As Integer
 
         grdFactorData.Worksheets.Clear()
         ' Contains allows ordered factors to be included
-        If clsReceiver IsNot Nothing AndAlso Not clsReceiver.IsEmpty() AndAlso clsReceiver.strCurrDataType.Contains("factor") Then
-            clsGetFactorData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_factor_data_frame")
-            clsGetFactorData.AddParameter("data_name", Chr(34) & clsReceiver.GetDataName() & Chr(34))
-            clsGetFactorData.AddParameter("col_name", clsReceiver.GetVariableNames())
-            clsConvertToCharacter.SetRCommand("convert_to_character_matrix")
-            clsConvertToCharacter.AddParameter("data", clsRFunctionParameter:=clsGetFactorData)
-            dfTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsConvertToCharacter.ToScript()).AsDataFrame
-            frmMain.clsGrids.FillSheet(dfTemp, "Factor Data", grdFactorData)
-            shtCurrSheet = grdFactorData.CurrentWorksheet
-            shtCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
-            bShowGrid = True
-            shtCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
-            If bIncludeCopyOfLevels Then
-                shtCurrSheet.AppendCols(1)
-                shtCurrSheet.ColumnHeaders(shtCurrSheet.ColumnCount - 1).Text = "New Levels"
-                For i = 0 To shtCurrSheet.RowCount - 1
-                    shtCurrSheet(i, shtCurrSheet.ColumnCount - 1) = shtCurrSheet(i, 0)
-                Next
-            End If
-            If strExtraColumn <> "" Then
-                shtCurrSheet.AppendCols(1)
-                shtCurrSheet.ColumnHeaders(shtCurrSheet.ColumnCount - 1).Text = strExtraColumn
-            End If
-            If bIsSelector Then
-                iSelectorColumnIndex = shtCurrSheet.ColumnCount
-                shtCurrSheet.AppendCols(1)
-                If bIsMultipleSelector Then
-                    shtCurrSheet.ColumnHeaders(iSelectorColumnIndex).DefaultCellBody = GetType(CheckBoxCell)
-                    shtCurrSheet.ColumnHeaders(iSelectorColumnIndex).Text = strSelectorColumnName
-                    InitialiseSelected()
-                Else
-                    shtCurrSheet.ColumnHeaders(iSelectorColumnIndex).Text = strSelectorColumnName
-                    shtCurrSheet.ColumnHeaders(iSelectorColumnIndex).DefaultCellBody = GetType(RadioButtonCell)
-                    InitialiseSelected()
-                    Dim rgpselectcolumn As New RadioButtonGroup
+        If clsReceiver IsNot Nothing AndAlso Not clsReceiver.IsEmpty() Then
+            If frmMain.clsRLink.GetColumnType(clsReceiver.GetDataName(), clsReceiver.GetVariableNames(False)).Contains("factor") Then
+                clsGetFactorData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_factor_data_frame")
+                clsGetFactorData.AddParameter("data_name", Chr(34) & clsReceiver.GetDataName() & Chr(34))
+                clsGetFactorData.AddParameter("col_name", clsReceiver.GetVariableNames())
+                clsConvertToCharacter.SetRCommand("convert_to_character_matrix")
+                clsConvertToCharacter.AddParameter("data", clsRFunctionParameter:=clsGetFactorData)
+                dfTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsConvertToCharacter.ToScript()).AsDataFrame
+                frmMain.clsGrids.FillSheet(dfTemp, "Factor Data", grdFactorData)
+                shtCurrSheet = grdFactorData.CurrentWorksheet
+                shtCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
+                bShowGrid = True
+                shtCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
+                If bIncludeCopyOfLevels Then
+                    shtCurrSheet.AppendCols(1)
+                    shtCurrSheet.ColumnHeaders(shtCurrSheet.ColumnCount - 1).Text = "New Levels"
                     For i = 0 To shtCurrSheet.RowCount - 1
-                        Dim rdotemp As New RadioButtonCell
-                        rdotemp.RadioGroup = rgpselectcolumn
-                        shtCurrSheet(i, iSelectorColumnIndex) = rdotemp
+                        shtCurrSheet(i, shtCurrSheet.ColumnCount - 1) = shtCurrSheet(i, 0)
                     Next
                 End If
+                If strExtraColumn <> "" Then
+                    shtCurrSheet.AppendCols(1)
+                    shtCurrSheet.ColumnHeaders(shtCurrSheet.ColumnCount - 1).Text = strExtraColumn
+                End If
+                If bIsSelector Then
+                    iSelectorColumnIndex = shtCurrSheet.ColumnCount
+                    shtCurrSheet.AppendCols(1)
+                    If bIsMultipleSelector Then
+                        shtCurrSheet.ColumnHeaders(iSelectorColumnIndex).DefaultCellBody = GetType(CheckBoxCell)
+                        shtCurrSheet.ColumnHeaders(iSelectorColumnIndex).Text = strSelectorColumnName
+                        InitialiseSelected()
+                    Else
+                        shtCurrSheet.ColumnHeaders(iSelectorColumnIndex).Text = strSelectorColumnName
+                        shtCurrSheet.ColumnHeaders(iSelectorColumnIndex).DefaultCellBody = GetType(RadioButtonCell)
+                        InitialiseSelected()
+                        Dim rgpselectcolumn As New RadioButtonGroup
+                        For i = 0 To shtCurrSheet.RowCount - 1
+                            Dim rdotemp As New RadioButtonCell
+                            rdotemp.RadioGroup = rgpselectcolumn
+                            shtCurrSheet(i, iSelectorColumnIndex) = rdotemp
+                        Next
+                    End If
+                End If
+            Else
+                clsReceiver.Clear()
             End If
         Else
             shtCurrSheet = Nothing
@@ -177,6 +185,22 @@ Public Class ucrFactor
             shtCurrSheet.ColumnHeaders(0).Width = 30
             ApplyColumnSettings()
             RaiseEvent GridContentChanged()
+            If ucrChkLevels IsNot Nothing Then
+                ucrChkLevels.Visible = True
+            End If
+            If Not bForceShowLevels Then
+                iLevelsCol = GetColumnIndex("Levels")
+                If iLevelsCol <> -1 Then
+                    bHasLevels = frmMain.clsRLink.IsVariablesMetadata(clsReceiver.GetDataName(), "labels", clsReceiver.GetVariableNames(False))
+                    If bHasLevels Then
+                        If ucrChkLevels IsNot Nothing Then
+                            ucrChkLevels.Visible = False
+                        End If
+                    Else
+                        shtCurrSheet.HideColumns(iLevelsCol, 1)
+                    End If
+                End If
+            End If
         End If
     End Sub
 
@@ -233,6 +257,7 @@ Public Class ucrFactor
                     shtCurrSheet(iNewRow, i) = ""
                 ElseIf shtCurrSheet.ColumnHeaders(i).Text = "Levels" Then
                     shtCurrSheet(iNewRow, i) = ""
+                    shtCurrSheet.SetRangeDataFormat(iNewRow, i, 1, 1, unvell.ReoGrid.DataFormat.CellDataFormatFlag.Text)
                 ElseIf shtCurrSheet.ColumnHeaders(i).Text = "Counts" Then
                     'TODO Fix this formatting issue with a grid user control
                     shtCurrSheet.SetRangeDataFormat(iNewRow, i, 1, 1, unvell.ReoGrid.DataFormat.CellDataFormatFlag.Text)
@@ -514,5 +539,30 @@ Public Class ucrFactor
     Private Sub shtCurrSheet_AfterPaste(sender As Object, e As RangeEventArgs) Handles shtCurrSheet.AfterPaste
         'This is needed because pasting carries cell properties e.g. overrides readonly properties
         ApplyColumnSettings()
+    End Sub
+
+    Public Sub SetLevelsCheckbox(ucrChkAddLevels As ucrCheck)
+        ucrChkLevels = ucrChkAddLevels
+    End Sub
+
+    Private Sub ucrChkLevels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLevels.ControlValueChanged
+        Dim iLevelsCol As Integer
+
+        If shtCurrSheet IsNot Nothing Then
+            iLevelsCol = GetColumnIndex("Levels")
+            If iLevelsCol <> -1 Then
+                If ucrChkLevels.Checked Then
+                    shtCurrSheet.ShowColumns(iLevelsCol, 1)
+                Else
+                    shtCurrSheet.HideColumns(iLevelsCol, 1)
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub clsReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles clsReceiver.ControlValueChanged
+        If ucrChkLevels IsNot Nothing Then
+            ucrChkLevels.Enabled = Not clsReceiver.IsEmpty
+        End If
     End Sub
 End Class
