@@ -64,6 +64,9 @@ Public Class ucrFactor
 
     Public Sub SetReceiver(clsNewReceiver As ucrReceiverSingle)
         clsReceiver = clsNewReceiver
+        If ucrChkLevels IsNot Nothing Then
+            ucrChkLevels.Enabled = Not clsReceiver.IsEmpty
+        End If
         RefreshFactorData()
     End Sub
 
@@ -186,7 +189,8 @@ Public Class ucrFactor
             ApplyColumnSettings()
             RaiseEvent GridContentChanged()
             If ucrChkLevels IsNot Nothing Then
-                ucrChkLevels.Visible = True
+                ucrChkLevels.Enabled = True
+                ucrChkLevels.Checked = False
             End If
             If Not bForceShowLevels Then
                 iLevelsCol = GetColumnIndex("Levels")
@@ -194,7 +198,8 @@ Public Class ucrFactor
                     bHasLevels = frmMain.clsRLink.IsVariablesMetadata(clsReceiver.GetDataName(), "labels", clsReceiver.GetVariableNames(False))
                     If bHasLevels Then
                         If ucrChkLevels IsNot Nothing Then
-                            ucrChkLevels.Visible = False
+                            ucrChkLevels.Enabled = False
+                            ucrChkLevels.Checked = True
                         End If
                     Else
                         shtCurrSheet.HideColumns(iLevelsCol, 1)
@@ -543,6 +548,9 @@ Public Class ucrFactor
 
     Public Sub SetLevelsCheckbox(ucrChkAddLevels As ucrCheck)
         ucrChkLevels = ucrChkAddLevels
+        If clsReceiver IsNot Nothing Then
+            ucrChkLevels.Enabled = Not clsReceiver.IsEmpty
+        End If
     End Sub
 
     Private Sub ucrChkLevels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLevels.ControlValueChanged
@@ -561,8 +569,8 @@ Public Class ucrFactor
     End Sub
 
     Private Sub clsReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles clsReceiver.ControlValueChanged
-        If ucrChkLevels IsNot Nothing Then
-            ucrChkLevels.Enabled = Not clsReceiver.IsEmpty
+        If ucrChkLevels IsNot Nothing AndAlso clsReceiver.IsEmpty Then
+            ucrChkLevels.Enabled = False
         End If
     End Sub
 End Class
