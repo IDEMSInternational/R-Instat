@@ -37,7 +37,6 @@ Public Class dlgClimSoft
         SetRCodeForControls(bReset)
         bReset = False
         TestOKEnabled()
-        ReopenDialog()
         autoTranslate(Me)
     End Sub
 
@@ -112,10 +111,6 @@ Public Class dlgClimSoft
         End If
     End Sub
 
-    Private Sub ReopenDialog()
-
-    End Sub
-
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
@@ -123,7 +118,7 @@ Public Class dlgClimSoft
     End Sub
 
     Private Sub cmdEstablishConnection_Click(sender As Object, e As EventArgs) Handles cmdEstablishConnection.Click
-        sdgImportFromClimSoft.SetRDatabaseConnection(clsRDatabaseConnect, clsRDatabaseDisconnect, clsHasConnection, bConnectionActive, bResetSubdialog)
+        sdgImportFromClimSoft.SetRDatabaseConnection(clsRDatabaseConnect, clsRDatabaseDisconnect, clsHasConnection, bConnectionActive, bReset)
         bResetSubdialog = False
         sdgImportFromClimSoft.ShowDialog()
         SetConnectionActiveStatus(sdgImportFromClimSoft.GetConnectionActiveStatus())
