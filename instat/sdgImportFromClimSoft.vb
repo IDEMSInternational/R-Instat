@@ -47,14 +47,14 @@ Public Class sdgImportFromClimSoft
         Return bConnected
     End Function
 
-    Public Sub SetRDatabaseConnection(clsNewRDatabaseConnect As RFunction, clsNewRDatabaseDisconnect As RFunction, clsNewHasConnection As RFunction, Optional bConnectionActive As Boolean = False, Optional bResetSubdialog As Boolean = False)
+    Public Sub SetRDatabaseConnection(clsNewRDatabaseConnect As RFunction, clsNewRDatabaseDisconnect As RFunction, clsNewHasConnection As RFunction, Optional bConnectionActive As Boolean = False, Optional bReset As Boolean = False)
         clsRDatabaseConnect = clsNewRDatabaseConnect
         clsRDatabaseDisconnect = clsNewRDatabaseDisconnect
         clsHasConnection = clsNewHasConnection
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
-        SetRCode(Me, clsRDatabaseConnect, False)
+        SetRCode(Me, clsRDatabaseConnect, bReset)
     End Sub
 
     Private Sub cmdEnterPassword_Click(sender As Object, e As EventArgs) Handles cmdEnterPassword.Click
