@@ -43,13 +43,11 @@ Public Class dlgDefineCRI
     End Sub
 
     Private Sub InitialiseDialog()
-        'helpID
+        ucrBase.iHelpTopicID = 527
         ucrInputCRIPreview.IsReadOnly = True
         cmdEdit.Enabled = False
         cmdDelete.Enabled = False
         ucrChkScaleNumeric.Enabled = False
-
-        '  ucrBase.iHelpTopicID =
 
         'ucrnud
         ucrNudWeights.Minimum = 0
@@ -240,6 +238,7 @@ Public Class dlgDefineCRI
         i = i + 1
     End Sub
 
+    ' This is currently empty, but will be coded in the future
     Private Sub cmdEdit_Click(sender As Object, e As EventArgs) Handles cmdEdit.Click
 
     End Sub
@@ -272,7 +271,7 @@ Public Class dlgDefineCRI
     End Sub
 
     Private Sub ucrSelectorCRI_DataFrameChanged() Handles ucrSelectorCRI.DataFrameChanged
-        lstIndexComponents.Clear() ' sort this
+        lstIndexComponents.Items.Clear()
         clsCalculation.ClearParameters()
         clsDefineFunction.RemoveParameterByName("function_expression")
         clsDefineFunction.RemoveParameterByName("calculated_from")
