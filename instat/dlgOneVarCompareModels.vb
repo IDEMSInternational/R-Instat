@@ -44,11 +44,10 @@ Public Class dlgOneVarCompareModels
         ucrSelectorOneVarCompModels.SetItemType("model")
 
         'ucrReceiver
-        UcrReceiverCompareModels.SetParameter(New RParameter("f", 0))
-        UcrReceiverCompareModels.SetParameterIsRFunction()
-        UcrReceiverCompareModels.Selector = ucrSelectorOneVarCompModels
-        UcrReceiverCompareModels.SetMeAsReceiver()
-
+        ucrReceiverCompareModels.SetParameter(New RParameter("f", 0))
+        ucrReceiverCompareModels.SetParameterIsRFunction()
+        ucrReceiverCompareModels.Selector = ucrSelectorOneVarCompModels
+        ucrReceiverCompareModels.SetMeAsReceiver()
 
         ' sdgOneVarCompareModels.InitialiseDialog()
         ' sdgOneVarCompareModels.SetModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
@@ -70,20 +69,16 @@ Public Class dlgOneVarCompareModels
     ' If variable from variablex is selected then
     ' variables not fromvariablex cannot be in dataframe
 
-    Private Sub ReopenDialog()
-        sdgOneVarCompareModels.Reopen()
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Public Sub TestOKEnabled()
-        If Not UcrReceiverCompareModels.IsEmpty Then 'sdgOneVarCompareModels.TestOkEnabled() AndAlso Not  Then
+        If Not ucrReceiverCompareModels.IsEmpty Then 'sdgOneVarCompareModels.TestOkEnabled() AndAlso Not  Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
-    End Sub
-
-    Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -92,12 +87,16 @@ Public Class dlgOneVarCompareModels
         TestOKEnabled()
     End Sub
 
+    Private Sub ReopenDialog()
+        sdgOneVarCompareModels.Reopen()
+    End Sub
+
     Private Sub ucrSelectorOneVarCompModels_DataFrameChanged() Handles ucrSelectorOneVarCompModels.DataFrameChanged
         '    sdgOneVarCompareModels.DisplayChiSquare()
     End Sub
 
-    Private Sub UcrReceiver_SelectionChanged(ucrChangedControl As ucrCore) Handles UcrReceiverCompareModels.ControlContentsChanged
-        If UcrReceiverCompareModels.IsEmpty Then
+    Private Sub ucrReceiver_SelectionChanged(ucrChangedControl As ucrCore) Handles ucrReceiverCompareModels.ControlContentsChanged
+        If ucrReceiverCompareModels.IsEmpty Then
             cmdDisplayObjects.Enabled = False
         Else
             cmdDisplayObjects.Enabled = True

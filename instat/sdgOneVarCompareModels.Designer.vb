@@ -29,18 +29,18 @@ Partial Class sdgOneVarCompareModels
         Me.ucrSaveGOF = New instat.ucrSave()
         Me.ucrChkInputChiSquareBreakpoints = New instat.ucrCheck()
         Me.grpPlot = New System.Windows.Forms.GroupBox()
-        Me.ucrChkCDF = New instat.ucrCheck()
-        Me.ucrChkDensity = New instat.ucrCheck()
-        Me.ucrChkPP = New instat.ucrCheck()
-        Me.ucrChkQQ = New instat.ucrCheck()
         Me.ucrSavePlots = New instat.ucrSave()
+        Me.ucrChkQQ = New instat.ucrCheck()
+        Me.ucrChkPP = New instat.ucrCheck()
+        Me.ucrChkDensity = New instat.ucrCheck()
+        Me.ucrChkCDF = New instat.ucrCheck()
         Me.grpFitModel.SuspendLayout()
         Me.grpPlot.SuspendLayout()
         Me.SuspendLayout()
         '
         'ucrSubBase
         '
-        Me.ucrSubBase.Location = New System.Drawing.Point(89, 276)
+        Me.ucrSubBase.Location = New System.Drawing.Point(73, 274)
         Me.ucrSubBase.Name = "ucrSubBase"
         Me.ucrSubBase.Size = New System.Drawing.Size(142, 30)
         Me.ucrSubBase.TabIndex = 2
@@ -57,6 +57,7 @@ Partial Class sdgOneVarCompareModels
         '
         'ucrDisplayChiData
         '
+        Me.ucrDisplayChiData.AddQuotesIfUnrecognised = True
         Me.ucrDisplayChiData.IsMultiline = False
         Me.ucrDisplayChiData.IsReadOnly = False
         Me.ucrDisplayChiData.Location = New System.Drawing.Point(127, 42)
@@ -70,7 +71,7 @@ Partial Class sdgOneVarCompareModels
         Me.grpFitModel.Controls.Add(Me.ucrSaveGOF)
         Me.grpFitModel.Controls.Add(Me.chkSaveChi)
         Me.grpFitModel.Controls.Add(Me.ucrChkInputChiSquareBreakpoints)
-        Me.grpFitModel.Location = New System.Drawing.Point(12, 12)
+        Me.grpFitModel.Location = New System.Drawing.Point(10, 10)
         Me.grpFitModel.Name = "grpFitModel"
         Me.grpFitModel.Size = New System.Drawing.Size(273, 100)
         Me.grpFitModel.TabIndex = 0
@@ -99,36 +100,19 @@ Partial Class sdgOneVarCompareModels
         Me.grpPlot.Controls.Add(Me.ucrChkPP)
         Me.grpPlot.Controls.Add(Me.ucrChkDensity)
         Me.grpPlot.Controls.Add(Me.ucrChkCDF)
-        Me.grpPlot.Location = New System.Drawing.Point(12, 118)
+        Me.grpPlot.Location = New System.Drawing.Point(10, 116)
         Me.grpPlot.Name = "grpPlot"
         Me.grpPlot.Size = New System.Drawing.Size(273, 152)
         Me.grpPlot.TabIndex = 1
         Me.grpPlot.TabStop = False
         Me.grpPlot.Text = "Plot"
         '
-        'ucrChkCDF
+        'ucrSavePlots
         '
-        Me.ucrChkCDF.Checked = False
-        Me.ucrChkCDF.Location = New System.Drawing.Point(6, 20)
-        Me.ucrChkCDF.Name = "ucrChkCDF"
-        Me.ucrChkCDF.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkCDF.TabIndex = 0
-        '
-        'ucrChkDensity
-        '
-        Me.ucrChkDensity.Checked = False
-        Me.ucrChkDensity.Location = New System.Drawing.Point(6, 46)
-        Me.ucrChkDensity.Name = "ucrChkDensity"
-        Me.ucrChkDensity.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkDensity.TabIndex = 1
-        '
-        'ucrChkPP
-        '
-        Me.ucrChkPP.Checked = False
-        Me.ucrChkPP.Location = New System.Drawing.Point(6, 72)
-        Me.ucrChkPP.Name = "ucrChkPP"
-        Me.ucrChkPP.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkPP.TabIndex = 2
+        Me.ucrSavePlots.Location = New System.Drawing.Point(6, 122)
+        Me.ucrSavePlots.Name = "ucrSavePlots"
+        Me.ucrSavePlots.Size = New System.Drawing.Size(260, 24)
+        Me.ucrSavePlots.TabIndex = 4
         '
         'ucrChkQQ
         '
@@ -138,18 +122,35 @@ Partial Class sdgOneVarCompareModels
         Me.ucrChkQQ.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkQQ.TabIndex = 3
         '
-        'ucrSavePlots
+        'ucrChkPP
         '
-        Me.ucrSavePlots.Location = New System.Drawing.Point(6, 122)
-        Me.ucrSavePlots.Name = "ucrSavePlots"
-        Me.ucrSavePlots.Size = New System.Drawing.Size(260, 24)
-        Me.ucrSavePlots.TabIndex = 4
+        Me.ucrChkPP.Checked = False
+        Me.ucrChkPP.Location = New System.Drawing.Point(6, 72)
+        Me.ucrChkPP.Name = "ucrChkPP"
+        Me.ucrChkPP.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkPP.TabIndex = 2
+        '
+        'ucrChkDensity
+        '
+        Me.ucrChkDensity.Checked = False
+        Me.ucrChkDensity.Location = New System.Drawing.Point(6, 46)
+        Me.ucrChkDensity.Name = "ucrChkDensity"
+        Me.ucrChkDensity.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkDensity.TabIndex = 1
+        '
+        'ucrChkCDF
+        '
+        Me.ucrChkCDF.Checked = False
+        Me.ucrChkCDF.Location = New System.Drawing.Point(6, 20)
+        Me.ucrChkCDF.Name = "ucrChkCDF"
+        Me.ucrChkCDF.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkCDF.TabIndex = 0
         '
         'sdgOneVarCompareModels
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(296, 318)
+        Me.ClientSize = New System.Drawing.Size(294, 312)
         Me.Controls.Add(Me.grpPlot)
         Me.Controls.Add(Me.grpFitModel)
         Me.Controls.Add(Me.ucrSubBase)
