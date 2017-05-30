@@ -77,6 +77,36 @@ Public Class dlgUseDate
         ucrChkDayYear366.SetText("Day in Year (366)")
         ucrChkDayYear366.SetRDefault("FALSE")
 
+        ucrChkShiftYear.SetParameter(New RParameter("shift_year"))
+        ucrChkShiftYear.SetText("Shift Year")
+        ucrChkShiftYear.SetRDefault("FALSE")
+
+        ucrChkShiftDay.SetParameter(New RParameter("shift_day"))
+        ucrChkShiftDay.SetText("Shift Day")
+        ucrChkShiftDay.SetRDefault("FALSE")
+
+        ucrNudShiftStartDay.SetParameter(New RParameter("shift_start_day"))
+
+        ucrInputComboBoxMonth.SetParameter(New RParameter("shift_start_month"))
+        Dim dctMonth As New Dictionary(Of String, String)
+        dctMonth.Add("January", 1)
+        dctMonth.Add("February", 2)
+        dctMonth.Add("March", 3)
+        dctMonth.Add("April", 4)
+        dctMonth.Add("May", 5)
+        dctMonth.Add("June", 6)
+        dctMonth.Add("July", 7)
+        dctMonth.Add("August", 8)
+        dctMonth.Add("September", 9)
+        dctMonth.Add("October", 10)
+        dctMonth.Add("November", 11)
+        dctMonth.Add("December", 12)
+        ucrInputComboBoxMonth.SetItems(dctMonth)
+        ucrInputComboBoxMonth.SetRDefault(8)
+
+        'TODO This should probably be the default for this control, hence this is temporary
+        ucrInputComboBoxMonth.bUpdateRCodeFromControl = False
+
         ucrChkDayInYear.SetParameter(New RParameter("day_in_year"))
         ucrChkDayInYear.SetText("Day in Year")
         ucrChkDayInYear.SetRDefault("FALSE")
@@ -117,7 +147,7 @@ Public Class dlgUseDate
     Private Sub SetDefaults()
         Dim clsDefaultFunction As New RFunction
         ucrSelectorUseDate.Reset()
-
+        clsDefaultFunction.SetRCommand("shift_day")
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$split_date")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
     End Sub
@@ -134,7 +164,7 @@ Public Class dlgUseDate
     End Sub
 
     Private Sub TestOKEnabled()
-        If (Not (ucrReceiverUseDate.IsEmpty) AndAlso (ucrChkYear.Checked OrElse ucrChkWeekday.Checked OrElse ucrChkWeek.Checked OrElse ucrChkPentad.Checked OrElse ucrChkMonth.Checked OrElse ucrChkLeapYear.Checked OrElse ucrChkFullWeekday.Checked OrElse ucrChkFullMonth.Checked OrElse ucrChkDekad.Checked OrElse ucrChkDayYear366.Checked OrElse ucrChkDayInYear.Checked OrElse ucrChkDay.Checked OrElse ucrChkAbbrWeekday.Checked OrElse ucrChkAbbrMonth.Checked)) Then
+        If (Not (ucrReceiverUseDate.IsEmpty) AndAlso (ucrChkYear.Checked OrElse ucrChkWeekday.Checked OrElse ucrChkWeek.Checked OrElse ucrChkPentad.Checked OrElse ucrChkMonth.Checked OrElse ucrChkLeapYear.Checked OrElse ucrChkFullWeekday.Checked OrElse ucrChkFullMonth.Checked OrElse ucrChkDekad.Checked OrElse ucrChkDayYear366.Checked OrElse ucrChkDayInYear.Checked OrElse ucrChkDay.Checked OrElse ucrChkAbbrWeekday.Checked OrElse ucrChkAbbrMonth.Checked OrElse ucrChkShiftDay.Checked OrElse ucrChkShiftYear.Checked OrElse ucrChkShiftDay.Checked AndAlso Not ucrInputComboBoxMonth.IsEmpty AndAlso ucrNudShiftStartDay.GetText <> "")) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -147,7 +177,32 @@ Public Class dlgUseDate
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrReceiverUseDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverUseDate.ControlContentsChanged, ucrChkYear.ControlContentsChanged, ucrChkWeekday.ControlContentsChanged, ucrChkWeek.ControlContentsChanged, ucrChkPentad.ControlContentsChanged, ucrChkMonth.ControlContentsChanged, ucrChkLeapYear.ControlContentsChanged, ucrChkFullWeekday.ControlContentsChanged, ucrChkFullMonth.ControlContentsChanged, ucrChkDekad.ControlContentsChanged, ucrChkDayYear366.ControlContentsChanged, ucrChkDayInYear.ControlContentsChanged, ucrChkDay.ControlContentsChanged, ucrChkAbbrWeekday.ControlContentsChanged, ucrChkAbbrMonth.ControlContentsChanged
+    Private Sub ucrReceiverUseDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverUseDate.ControlContentsChanged, ucrChkYear.ControlContentsChanged, ucrChkWeekday.ControlContentsChanged, ucrChkWeek.ControlContentsChanged, ucrChkPentad.ControlContentsChanged, ucrChkMonth.ControlContentsChanged, ucrChkLeapYear.ControlContentsChanged, ucrChkFullWeekday.ControlContentsChanged, ucrChkFullMonth.ControlContentsChanged, ucrChkDekad.ControlContentsChanged, ucrChkDayYear366.ControlContentsChanged, ucrChkDayInYear.ControlContentsChanged, ucrChkDay.ControlContentsChanged, ucrChkAbbrWeekday.ControlContentsChanged, ucrChkAbbrMonth.ControlContentsChanged, ucrChkShiftDay.ControlContentsChanged, ucrChkShiftYear.ControlContentsChanged, ucrChkShiftDay.ControlContentsChanged, ucrInputComboBoxMonth.ControlContentsChanged, ucrNudShiftStartDay.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrInputComboBoxMonth_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputComboBoxMonth.ControlContentsChanged
+        If ucrInputComboBoxMonth.cboInput.SelectedItem IsNot Nothing Then
+            If ucrInputComboBoxMonth.cboInput.SelectedItem = "January" Then
+                ucrNudShiftStartDay.SetMinMax(1, 31)
+            ElseIf ucrInputComboBoxMonth.cboInput.SelectedItem = "February" Then
+                ucrNudShiftStartDay.SetMinMax(1, 29)
+            ElseIf ucrInputComboBoxMonth.cboInput.SelectedItem = "March" Then
+                ucrNudShiftStartDay.SetMinMax(1, 31)
+            ElseIf ucrInputComboBoxMonth.cboInput.SelectedItem = "May" Then
+                ucrNudShiftStartDay.SetMinMax(1, 31)
+            ElseIf ucrInputComboBoxMonth.cboInput.SelectedItem = "July" Then
+                ucrNudShiftStartDay.SetMinMax(1, 31)
+            ElseIf ucrInputComboBoxMonth.cboInput.SelectedItem = "August" Then
+                ucrNudShiftStartDay.SetMinMax(1, 31)
+            ElseIf ucrInputComboBoxMonth.cboInput.SelectedItem = "October" Then
+                ucrNudShiftStartDay.SetMinMax(1, 31)
+            ElseIf ucrInputComboBoxMonth.cboInput.SelectedItem = "December" Then
+                ucrNudShiftStartDay.SetMinMax(1, 31)
+            Else
+                ucrNudShiftStartDay.SetMinMax(1, 30)
+            End If
+        End If
+
     End Sub
 End Class
