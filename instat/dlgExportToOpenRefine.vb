@@ -33,7 +33,7 @@ Public Class dlgExportToOpenRefine
 
     Private Sub SetDefaults()
         Dim clsDefaultRefine, clsDefaultWrite As New RFunction
-
+        ucrBase.OKEnabled(False)
         ucrOpenRefineDataFrame.Reset()
         ucrInputDatasetName.Reset()
 
@@ -77,12 +77,13 @@ Public Class dlgExportToOpenRefine
         ucrchkOpenBrowser.SetText("Open Browser")
 
     End Sub
-    'Private Sub TestOKEnabled()
-    '    If Not ucrInputDatasetName.IsEmpty Then
-    '        ucrBase.OKEnabled(True)
-    '    Else
-    '        ucrBase.OKEnabled(False)
-    '    End If
+
+    Private Sub TestOKEnabled()
+        '    If Not ucrInputDatasetName.IsEmpty Then
+        '        ucrBase.OKEnabled(True)
+        '    Else
+        '        ucrBase.OKEnabled(False)
+        '    End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
