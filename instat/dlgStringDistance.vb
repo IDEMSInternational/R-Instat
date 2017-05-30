@@ -33,6 +33,7 @@ Public Class dlgStringDistance
     End Sub
 
     Private Sub InitialiseDialog()
+        Dim dctMethod As New Dictionary(Of String, String)
         ucrBase.iHelpTopicID = 347
 
         'ucrReceiver
@@ -46,11 +47,11 @@ Public Class dlgStringDistance
         ucrReceiverColumn.Selector = ucrSelectorStringDistance
         ucrReceiverColumn.SetLinkedDisplayControl(lblColumnString)
 
-        ucrPnlStringDist.AddRadioButton(rdoString)
-        ucrPnlStringDist.AddRadioButton(rdoColumn)
-
         ucrInputPatternStringDistance.SetParameter(New RParameter("b", 1))
         ucrInputPatternStringDistance.SetLinkedDisplayControl(lblPattern)
+
+        ucrPnlStringDist.AddRadioButton(rdoString)
+        ucrPnlStringDist.AddRadioButton(rdoColumn)
 
         ucrPnlStringDist.AddParameterValuesCondition(rdoColumn, "b", ucrReceiverColumn.GetVariableNames.Trim(Chr(34)))
         ucrPnlStringDist.AddParameterValuesCondition(rdoString, "b", Chr(34) & ucrInputPatternStringDistance.GetText & Chr(34))
@@ -60,7 +61,6 @@ Public Class dlgStringDistance
         ucrInputComboBoxMethod.SetParameter(New RParameter("method", 2))
         ucrInputComboBoxMethod.SetDropDownStyleAsNonEditable()
 
-        Dim dctMethod As New Dictionary(Of String, String)
         dctMethod.Add("Cosine Distance between q-Gram Profiles", Chr(34) & "cosine" & Chr(34))
         dctMethod.Add("Distance based on Soundex Encoding", Chr(34) & "soundex" & Chr(34))
         dctMethod.Add("Full Damerau-Levenshtein Distance", Chr(34) & "dl" & Chr(34))
@@ -83,6 +83,7 @@ Public Class dlgStringDistance
 
     Private Sub SetDefaults()
         clsStringDistFunction = New RFunction
+
         ucrInputPatternStringDistance.SetName("")
         ucrSelectorStringDistance.Reset()
         ucrSaveStringDistance.Reset()
