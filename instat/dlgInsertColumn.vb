@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgInsertColumn
     Private bFirstload As Boolean = True
@@ -59,7 +60,7 @@ Public Class dlgInsertColumn
         ucrNudNumberOfRows.SetRDefault(1)
 
         ucrNudStartRow.SetParameter(New RParameter("start_row", 3))
-        ucrNudStartRow.SetMinMax(1, Integer.MaxValue)
+
 
         ucrInputBeforeAfter.SetParameter(New RParameter("before", 2))
         dctBeforeAfter.Add("Before", "TRUE")
@@ -203,5 +204,9 @@ Public Class dlgInsertColumn
 
     Private Sub ucrReceiverColumnsToInsert_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnsToInsert.ControlContentsChanged, ucrPnlColumnsOrRows.ControlContentsChanged, ucrPnlBeforeAfter.ControlContentsChanged, ucrPnlInsertColumns.ControlContentsChanged, ucrInputPrefixForNewColumn.ControlContentsChanged, ucrInputDefaultValue.ControlContentsChanged, ucrInputBeforeAfter.ControlContentsChanged, ucrNudNumberOfRows.ControlContentsChanged, ucrNudStartRow.ControlContentsChanged, ucrNudNumberOfColumns.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrSelectorInsertColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorInsertColumns.ControlValueChanged, ucrNudStartRow.ControlValueChanged
+        ucrNudStartRow.SetMinMax(1, ucrDataFramesList.iDataFrameLength)
     End Sub
 End Class
