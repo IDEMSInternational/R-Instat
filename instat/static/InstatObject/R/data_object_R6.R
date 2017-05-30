@@ -945,7 +945,7 @@ data_object$set("public", "get_factor_data_frame", function(col_name = "") {
   counts <- plyr::rename(counts, replace = c("col_data" = "Labels", "Freq" = "Counts"))
   counts[["Ord"]] <- 1:nrow(counts)
   if(self$is_variables_metadata(str = labels_label, col = col_name)) {
-    curr_levels <- names(self$get_variables_metadata(property = labels_label, column = col_name))
+    curr_levels <- as.vector(self$get_variables_metadata(property = labels_label, column = col_name, direct_from_attributes = TRUE))
   }
   else curr_levels <- counts[["Ord"]]
   counts[["Levels"]] <- curr_levels
@@ -1124,27 +1124,26 @@ data_object$set("public", "set_factor_levels", function(col_name, new_labels, ne
   col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
   if(!is.factor(col_data)) stop(paste(col_name, "is not a factor."))
   old_labels <- levels(col_data)
-  if(length(new_labels) < length(old_labels)) stop("There must be at least as many new levels as current levels.")
-  
+  if(length(new_labels) != length(old_labels)) stop("There must be at least as many new levels as current levels.")
+  if(!missing(new_levels) && anyDuplicated(new_levels)) stop("new levels must be unique")
   # Must be private$data because setting an attribute
   levels(private$data[[col_name]]) <- new_labels
   
   if(!missing(new_levels)) {
     labels_list <- new_levels
-    names(labels_list) <- new_levels
+    names(labels_list) <- new_labels
     self$append_to_variables_metadata(col_name, labels_label, labels_list)
   }
-  # Not sure this is needed now
-  # else if(set_new_labels && self$is_variables_metadata(labels_label, col_name)) {
-  #   labels_list <- self$get_variables_metadata(property = labels_label, column = col_name, direct_from_attributes = TRUE)
-  #   names(labels_list) <- as.character(new_levels[1:length(old_levels)])
-  #   if(length(new_levels) > length(old_levels)) {
-  #     extra_labels <- seq(from = max(labels_list) + 1, length.out = (length(new_levels) - length(old_levels)))
-  #     names(extra_labels) <- new_levels[!new_levels %in% names(labels_list)]
-  #     labels_list <- c(labels_list, extra_labels)
-  #   }
-  #   self$append_to_variables_metadata(col_name, labels_label, labels_list)
-  # }
+  else if(set_new_labels && self$is_variables_metadata(labels_label, col_name)) {
+    labels_list <- self$get_variables_metadata(property = labels_label, column = col_name, direct_from_attributes = TRUE)
+    names(labels_list) <- as.character(new_levels[1:length(old_levels)])
+    if(length(new_levels) > length(old_levels)) {
+      extra_labels <- seq(from = max(labels_list) + 1, length.out = (length(new_levels) - length(old_levels)))
+      names(extra_labels) <- new_levels[!new_levels %in% names(labels_list)]
+      labels_list <- c(labels_list, extra_labels)
+    }
+    self$append_to_variables_metadata(col_name, labels_label, labels_list)
+  }
   self$data_changed <- TRUE
   self$variables_metadata_changed <- TRUE
 } 
