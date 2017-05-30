@@ -42,14 +42,14 @@ Partial Class dlgTransformClimatic
         Me.ucrNudCountOver = New instat.ucrNud()
         Me.lblCountOver = New System.Windows.Forms.Label()
         Me.grpTransform = New System.Windows.Forms.GroupBox()
-        Me.ucrInputEvaporation = New instat.ucrInputTextBox()
-        Me.lblWBEvaporation = New System.Windows.Forms.Label()
-        Me.ucrNudWBCapacity = New instat.ucrNud()
-        Me.lblWBCapacity = New System.Windows.Forms.Label()
-        Me.ucrInputSpellUpper = New instat.ucrInputTextBox()
         Me.ucrInputSpellLower = New instat.ucrInputTextBox()
+        Me.ucrInputSpellUpper = New instat.ucrInputTextBox()
         Me.lblSpellAnd = New System.Windows.Forms.Label()
+        Me.ucrInputEvaporation = New instat.ucrInputTextBox()
         Me.lblValuesBetween = New System.Windows.Forms.Label()
+        Me.lblWBEvaporation = New System.Windows.Forms.Label()
+        Me.lblWBCapacity = New System.Windows.Forms.Label()
+        Me.ucrNudWBCapacity = New instat.ucrNud()
         Me.ucrInputThreshold = New instat.ucrInputTextBox()
         Me.ucrInputColName = New instat.ucrInputTextBox()
         Me.ucrPnlTransform = New instat.UcrPanel()
@@ -135,7 +135,7 @@ Partial Class dlgTransformClimatic
         Me.rdoMoving.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoMoving.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoMoving.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.rdoMoving.Location = New System.Drawing.Point(49, 17)
+        Me.rdoMoving.Location = New System.Drawing.Point(51, 17)
         Me.rdoMoving.Name = "rdoMoving"
         Me.rdoMoving.Size = New System.Drawing.Size(100, 28)
         Me.rdoMoving.TabIndex = 1
@@ -306,6 +306,36 @@ Partial Class dlgTransformClimatic
         Me.grpTransform.TabStop = False
         Me.grpTransform.Text = "Options"
         '
+        'ucrInputSpellLower
+        '
+        Me.ucrInputSpellLower.AddQuotesIfUnrecognised = True
+        Me.ucrInputSpellLower.IsMultiline = False
+        Me.ucrInputSpellLower.IsReadOnly = False
+        Me.ucrInputSpellLower.Location = New System.Drawing.Point(103, 18)
+        Me.ucrInputSpellLower.Name = "ucrInputSpellLower"
+        Me.ucrInputSpellLower.Size = New System.Drawing.Size(63, 21)
+        Me.ucrInputSpellLower.TabIndex = 1
+        '
+        'ucrInputSpellUpper
+        '
+        Me.ucrInputSpellUpper.AddQuotesIfUnrecognised = True
+        Me.ucrInputSpellUpper.IsMultiline = False
+        Me.ucrInputSpellUpper.IsReadOnly = False
+        Me.ucrInputSpellUpper.Location = New System.Drawing.Point(208, 18)
+        Me.ucrInputSpellUpper.Name = "ucrInputSpellUpper"
+        Me.ucrInputSpellUpper.Size = New System.Drawing.Size(63, 21)
+        Me.ucrInputSpellUpper.TabIndex = 3
+        '
+        'lblSpellAnd
+        '
+        Me.lblSpellAnd.AutoSize = True
+        Me.lblSpellAnd.Location = New System.Drawing.Point(177, 22)
+        Me.lblSpellAnd.Name = "lblSpellAnd"
+        Me.lblSpellAnd.Size = New System.Drawing.Size(25, 13)
+        Me.lblSpellAnd.TabIndex = 2
+        Me.lblSpellAnd.Tag = "and"
+        Me.lblSpellAnd.Text = "and"
+        '
         'ucrInputEvaporation
         '
         Me.ucrInputEvaporation.AddQuotesIfUnrecognised = True
@@ -316,6 +346,16 @@ Partial Class dlgTransformClimatic
         Me.ucrInputEvaporation.Size = New System.Drawing.Size(98, 21)
         Me.ucrInputEvaporation.TabIndex = 3
         '
+        'lblValuesBetween
+        '
+        Me.lblValuesBetween.AutoSize = True
+        Me.lblValuesBetween.Location = New System.Drawing.Point(16, 22)
+        Me.lblValuesBetween.Name = "lblValuesBetween"
+        Me.lblValuesBetween.Size = New System.Drawing.Size(84, 13)
+        Me.lblValuesBetween.TabIndex = 0
+        Me.lblValuesBetween.Tag = "Values_Between"
+        Me.lblValuesBetween.Text = "Values Between"
+        '
         'lblWBEvaporation
         '
         Me.lblWBEvaporation.AutoSize = True
@@ -325,6 +365,16 @@ Partial Class dlgTransformClimatic
         Me.lblWBEvaporation.TabIndex = 2
         Me.lblWBEvaporation.Tag = "Evaporation"
         Me.lblWBEvaporation.Text = "Evaporation:"
+        '
+        'lblWBCapacity
+        '
+        Me.lblWBCapacity.AutoSize = True
+        Me.lblWBCapacity.Location = New System.Drawing.Point(13, 22)
+        Me.lblWBCapacity.Name = "lblWBCapacity"
+        Me.lblWBCapacity.Size = New System.Drawing.Size(51, 13)
+        Me.lblWBCapacity.TabIndex = 0
+        Me.lblWBCapacity.Tag = "Capacity"
+        Me.lblWBCapacity.Text = "Capacity:"
         '
         'ucrNudWBCapacity
         '
@@ -337,56 +387,6 @@ Partial Class dlgTransformClimatic
         Me.ucrNudWBCapacity.Size = New System.Drawing.Size(50, 20)
         Me.ucrNudWBCapacity.TabIndex = 1
         Me.ucrNudWBCapacity.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblWBCapacity
-        '
-        Me.lblWBCapacity.AutoSize = True
-        Me.lblWBCapacity.Location = New System.Drawing.Point(13, 22)
-        Me.lblWBCapacity.Name = "lblWBCapacity"
-        Me.lblWBCapacity.Size = New System.Drawing.Size(51, 13)
-        Me.lblWBCapacity.TabIndex = 0
-        Me.lblWBCapacity.Tag = "Capacity"
-        Me.lblWBCapacity.Text = "Capacity:"
-        '
-        'ucrInputSpellUpper
-        '
-        Me.ucrInputSpellUpper.AddQuotesIfUnrecognised = True
-        Me.ucrInputSpellUpper.IsMultiline = False
-        Me.ucrInputSpellUpper.IsReadOnly = False
-        Me.ucrInputSpellUpper.Location = New System.Drawing.Point(208, 18)
-        Me.ucrInputSpellUpper.Name = "ucrInputSpellUpper"
-        Me.ucrInputSpellUpper.Size = New System.Drawing.Size(63, 21)
-        Me.ucrInputSpellUpper.TabIndex = 3
-        '
-        'ucrInputSpellLower
-        '
-        Me.ucrInputSpellLower.AddQuotesIfUnrecognised = True
-        Me.ucrInputSpellLower.IsMultiline = False
-        Me.ucrInputSpellLower.IsReadOnly = False
-        Me.ucrInputSpellLower.Location = New System.Drawing.Point(103, 18)
-        Me.ucrInputSpellLower.Name = "ucrInputSpellLower"
-        Me.ucrInputSpellLower.Size = New System.Drawing.Size(63, 21)
-        Me.ucrInputSpellLower.TabIndex = 1
-        '
-        'lblSpellAnd
-        '
-        Me.lblSpellAnd.AutoSize = True
-        Me.lblSpellAnd.Location = New System.Drawing.Point(177, 22)
-        Me.lblSpellAnd.Name = "lblSpellAnd"
-        Me.lblSpellAnd.Size = New System.Drawing.Size(25, 13)
-        Me.lblSpellAnd.TabIndex = 2
-        Me.lblSpellAnd.Tag = "and"
-        Me.lblSpellAnd.Text = "and"
-        '
-        'lblValuesBetween
-        '
-        Me.lblValuesBetween.AutoSize = True
-        Me.lblValuesBetween.Location = New System.Drawing.Point(16, 22)
-        Me.lblValuesBetween.Name = "lblValuesBetween"
-        Me.lblValuesBetween.Size = New System.Drawing.Size(84, 13)
-        Me.lblValuesBetween.TabIndex = 0
-        Me.lblValuesBetween.Tag = "Values_Between"
-        Me.lblValuesBetween.Text = "Values Between"
         '
         'ucrInputThreshold
         '
