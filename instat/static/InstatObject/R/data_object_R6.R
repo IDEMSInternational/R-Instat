@@ -937,15 +937,19 @@ data_object$set("public", "get_data_frame_length", function(use_current_filter =
 )
 
 data_object$set("public", "get_factor_data_frame", function(col_name = "") {
-  if(!(col_name %in% self$get_column_names())) {
-    stop(col_name, " is not a column in", get_metadata(data_name_label))
-  }
-  if(!(is.factor(self$get_columns_from_data(col_name, use_current_filter = FALSE)))){
-    stop(col_name, " is not a factor column")
-  }
+  if(!(col_name %in% self$get_column_names())) stop(col_name, " is not a column name,")
+  col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
+  if(!(is.factor(col_data))) stop(col_name, " is not a factor column")
   
-  counts <- as.data.frame(table(self$get_columns_from_data(col_name, use_current_filter = FALSE)))
-  counts <- plyr::rename(counts, replace = c("Var1" = "Levels", "Freq" = "Counts"))
+  counts <- as.data.frame(table(col_data))
+  counts <- plyr::rename(counts, replace = c("col_data" = "Labels", "Freq" = "Counts"))
+  counts[["Ord"]] <- 1:nrow(counts)
+  if(self$is_variables_metadata(str = labels_label, col = col_name)) {
+    curr_levels <- names(self$get_variables_metadata(property = labels_label, column = col_name))
+  }
+  else curr_levels <- counts[["Ord"]]
+  counts[["Levels"]] <- curr_levels
+  counts <- counts[c("Ord", "Labels", "Levels", "Counts")]
   return(counts)
 }
 )
@@ -1115,24 +1119,32 @@ data_object$set("public", "drop_unused_factor_levels", function(col_name) {
 } 
 )
 
-data_object$set("public", "set_factor_levels", function(col_name, new_levels, set_new_labels = TRUE) {
-  if(!col_name %in% self$get_column_names()) stop(paste(col_name,"not found in data."))
-  if(!is.factor(self$get_columns_from_data(col_name, use_current_filter = FALSE))) stop(paste(col_name,"is not a factor."))
-  old_levels <- levels(self$get_columns_from_data(col_name, use_current_filter = FALSE))
-  if(length(new_levels) < length(old_levels)) stop("There must be at least as many new levels as current levels.")
+data_object$set("public", "set_factor_levels", function(col_name, new_labels, new_levels, set_new_labels = TRUE) {
+  if(!col_name %in% self$get_column_names()) stop(paste(col_name, "not found in data."))
+  col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
+  if(!is.factor(col_data)) stop(paste(col_name, "is not a factor."))
+  old_labels <- levels(col_data)
+  if(length(new_labels) < length(old_labels)) stop("There must be at least as many new levels as current levels.")
   
   # Must be private$data because setting an attribute
-  levels(private$data[[col_name]]) <- new_levels
-  if(set_new_labels && self$is_variables_metadata(labels_label, col_name)) {
-    new_labels <- self$get_variables_metadata(property = labels_label, column = col_name, direct_from_attributes = TRUE)
-    names(new_labels) <- as.character(new_levels[1:length(old_levels)])
-    if(length(new_levels) > length(old_levels)) {
-      extra_labels <- seq(from = max(new_labels) + 1, length.out = (length(new_levels) - length(old_levels)))
-      names(extra_labels) <- new_levels[!new_levels %in% names(new_labels)]
-      new_labels <- c(new_labels, extra_labels)
-    }
-    self$append_to_variables_metadata(col_name, labels_label, new_labels)
+  levels(private$data[[col_name]]) <- new_labels
+  
+  if(!missing(new_levels)) {
+    labels_list <- new_levels
+    names(labels_list) <- new_levels
+    self$append_to_variables_metadata(col_name, labels_label, labels_list)
   }
+  # Not sure this is needed now
+  # else if(set_new_labels && self$is_variables_metadata(labels_label, col_name)) {
+  #   labels_list <- self$get_variables_metadata(property = labels_label, column = col_name, direct_from_attributes = TRUE)
+  #   names(labels_list) <- as.character(new_levels[1:length(old_levels)])
+  #   if(length(new_levels) > length(old_levels)) {
+  #     extra_labels <- seq(from = max(labels_list) + 1, length.out = (length(new_levels) - length(old_levels)))
+  #     names(extra_labels) <- new_levels[!new_levels %in% names(labels_list)]
+  #     labels_list <- c(labels_list, extra_labels)
+  #   }
+  #   self$append_to_variables_metadata(col_name, labels_label, labels_list)
+  # }
   self$data_changed <- TRUE
   self$variables_metadata_changed <- TRUE
 } 

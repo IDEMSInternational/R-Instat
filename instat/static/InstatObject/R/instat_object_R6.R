@@ -834,8 +834,8 @@ instat_object$set("public", "drop_unused_factor_levels", function(data_name, col
 } 
 )
 
-instat_object$set("public", "set_factor_levels", function(data_name, col_name, new_levels, set_new_labels = TRUE) {
-  self$get_data_objects(data_name)$set_factor_levels(col_name = col_name, new_levels = new_levels, set_new_labels = set_new_labels)
+instat_object$set("public", "set_factor_levels", function(data_name, col_name, new_labels, new_levels, set_new_labels = TRUE) {
+  self$get_data_objects(data_name)$set_factor_levels(col_name = col_name, new_labels = new_labels, new_levels = new_levels, set_new_labels = set_new_labels)
 } 
 )
 

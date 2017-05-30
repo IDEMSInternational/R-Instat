@@ -15,10 +15,12 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat
 Imports instat.Translations
+
 Public Class dlgLabels
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsViewLabels As New RFunction
+
     Private Sub dlgLabels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -37,7 +39,7 @@ Public Class dlgLabels
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverLabels.IsEmpty() AndAlso ucrFactorLabels.IsColumnComplete(0) Then
+        If Not ucrReceiverLabels.IsEmpty() AndAlso ucrFactorLabels.IsColumnComplete("Labels") AndAlso ucrFactorLabels.IsColumnComplete("Levels") Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -55,17 +57,18 @@ Public Class dlgLabels
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 35
-        ucrReceiverLabels.Selector = ucrSelectorForLabels
-        ucrReceiverLabels.SetMeAsReceiver()
 
-        ucrReceiverLabels.SetIncludedDataTypes({"factor"})
+        ucrFactorLabels.SetParameter(New RParameter("new_labels", 2))
         ucrFactorLabels.SetReceiver(ucrReceiverLabels)
         ucrFactorLabels.SetAsViewerOnly()
-        ucrFactorLabels.AddEditableColumns({"Levels"})
+        ucrFactorLabels.AddEditableColumns({"Labels", "Levels"})
+        ucrFactorLabels.SetIsGridColumn("Labels")
 
-        ucrFactorLabels.SetParameter(New RParameter("new_levels", 2))
         ucrReceiverLabels.SetParameter(New RParameter("col_name", 1))
         ucrReceiverLabels.SetParameterIsString()
+        ucrReceiverLabels.Selector = ucrSelectorForLabels
+        ucrReceiverLabels.SetMeAsReceiver()
+        ucrReceiverLabels.SetIncludedDataTypes({"factor"})
 
         ucrSelectorForLabels.SetParameter(New RParameter("data_name", 0))
         ucrSelectorForLabels.SetParameterIsString()
