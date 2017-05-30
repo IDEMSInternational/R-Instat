@@ -115,7 +115,7 @@ data_object$set("public", "save_calculation", function(calc) {
 
 instat_calculation <- R6Class("instat_calculation",
                        public = list(
-                         initialize = function(function_exp = "", type = "", name = "calc", result_name = "", result_data_frame = "", manipulations = list(),
+                         initialize = function(function_exp = "", type = "", name = "", result_name = "", result_data_frame = "", manipulations = list(),
                                                sub_calculations = list(), calculated_from = list(), save = 0) {
                            if((type == "calculation" || type == "summary") && missing(result_name)) stop("result_name must be provided for calculation and summary types")
                            if(type == "combination" && save > 0) {
@@ -128,14 +128,14 @@ instat_calculation <- R6Class("instat_calculation",
                            self$name <- name
                            self$result_name <- result_name
                            self$result_data_frame <- result_data_frame
-                           self$manipulations <- manipulations
+						               self$manipulations <- manipulations
                            self$sub_calculations <- sub_calculations
                            self$calculated_from <- calculated_from
                            self$save <- save
                          },
-                         name = "calc",
+                         name = "",
                          result_name = "",
-                         result_data_frame = "",
+						             result_data_frame = "",
                          type = "",
                          manipulations = list(),
                          sub_calculations = list(),
@@ -143,6 +143,16 @@ instat_calculation <- R6Class("instat_calculation",
                          calculated_from = list(),
                          save = 0
                        )
+)
+
+instat_calculation$set("public", "data_clone", function() {
+  ret <- instat_calculation$new(function_exp = self$function_exp, type = self$type,
+                         name = self$name, result_name = self$result_name, 
+                         manipulations = lapply(self$manipulations, function(x) x$data_clone()), 
+                         sub_calculations = lapply(self$sub_calculations, function(x) x$data_clone()),
+                         calculated_from = self$calculated_from, save = self$save)
+  return(ret)
+}
 )
 
 # Calculation labels
@@ -631,7 +641,7 @@ instat_object$set("public", "save_calc_output", function(calc, curr_data_list, p
           self$get_data_objects(to_data_name)$merge_data(curr_data_list[[c_data_label]][c(calc_link_cols, calc$result_name)], by = by, type = "full")
         }
         else {
-          self$get_data_objects(to_data_name)$add_column_to_data(calc$result_name, curr_data_list[[c_data_label]])
+          self$get_data_objects(to_data_name)$add_columns_to_data(calc$result_name, curr_data_list[[c_data_label]])
         }
       }
       else {
