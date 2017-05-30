@@ -124,13 +124,13 @@ Public Class dlgTransformClimatic
         clsSubCalcList.SetRCommand("list")
 
         ucrPnlTransform.AddToLinkedControls({ucrInputSum, ucrNudSumOver}, {rdoMoving}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputSum.SetLinkedDisplayControl(grpTransform)
+        'ucrInputSum.SetLinkedDisplayControl(grpTransform)
         ucrPnlTransform.AddToLinkedControls({ucrNudCountOver, ucrChkValuesUnderThreshold}, {rdoCount}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
-        ucrNudCountOver.SetLinkedDisplayControl(grpCount)
+        'ucrNudCountOver.SetLinkedDisplayControl(grpCount)
         ucrPnlTransform.AddToLinkedControls({ucrInputSpellLower, ucrInputSpellUpper}, {rdoSpell}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputSpellLower.SetLinkedDisplayControl(grpSpells)
+        'ucrInputSpellLower.SetLinkedDisplayControl(grpSpells)
         ucrPnlTransform.AddToLinkedControls({ucrNudWBCapacity, ucrInputEvaporation}, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
-        ucrNudWBCapacity.SetLinkedDisplayControl(grpWaterbalance)
+        ' ucrNudWBCapacity.SetLinkedDisplayControl(grpWaterbalance)
 
         ucrPnlTransform.AddParameterValuesCondition(rdoMoving, "FUN", Chr(39) & "sum" & Chr(39))
         ucrPnlTransform.AddParameterValuesCondition(rdoCount, "FUN", Chr(39) & "sum" & Chr(39), False)
@@ -285,6 +285,18 @@ Public Class dlgTransformClimatic
 
     Private Sub ucrControls_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrReceiverData.ControlContentsChanged, ucrNudSumOver.ControlContentsChanged
         SumOver()
+    End Sub
+
+    Private Sub lblNewColName_Click(sender As Object, e As EventArgs) Handles lblNewColName.Click
+
+    End Sub
+
+    Private Sub ucrInputColName_Load(sender As Object, e As EventArgs) Handles ucrInputColName.Load
+
+    End Sub
+
+    Private Sub ucrBase_Load(sender As Object, e As EventArgs) Handles ucrBase.Load
+
     End Sub
 
     Private Sub MovingColNames()
