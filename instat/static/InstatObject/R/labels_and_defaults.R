@@ -30,7 +30,10 @@ column_count_label="Column_Count"
 is_linkable="Is_Linkable"
 
 #variables_metadata labels
-display_decimal_label="Display_Decimal"
+label_label="label"
+labels_label="labels"
+signif_figures_label="Signif_Figures"
+scientific_label="Scientific"
 name_label="Name"
 is_factor_label="Is_Factor"
 #changes because attributes default is class
@@ -58,3 +61,5 @@ graph_label="graph"
 
 #link labels
 keyed_link_label="keyed_link"
+
+max_labels_display=20
