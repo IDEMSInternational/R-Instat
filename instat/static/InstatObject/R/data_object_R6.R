@@ -1,105 +1,105 @@
 data_object <- R6Class("data_object",
-                         public = list(
-                           initialize = function(data = data.frame(), data_name = "", 
-                                                 variables_metadata = data.frame(), metadata = list(), 
-                                                 imported_from = "", 
-                                                 messages = TRUE, convert=TRUE, create = TRUE, 
-                                                 start_point=1, filters = list(), objects = list(),
-                                                 calculations = list(), keys = list(), keep_attributes = TRUE)
-{
-                             
-  # Set up the data object
-  self$set_data(data, messages)
-  self$set_changes(list())
-  #removed until this can be fixed.
-  #self$set_variables_metadata(variables_metadata)
-  
-  # Set first so that "no_filter" is added
-  self$set_filters(filters)
-  if(keep_attributes) {
-    self$set_meta(c(attributes(private$data), metadata))
-  }
-  else {
-    self$set_meta(metadata)
-    self$clear_variables_metadata()
-  }
-  self$add_defaults_meta()
-  self$add_defaults_variables_metadata(self$get_column_names())
-  #self$update_variables_metadata()
-  self$set_objects(objects)
-  self$set_calculations(calculations)
-  self$set_keys(keys)
-  
-  # If no name for the data.frame has been given in the list we create a default one.
-  # Decide how to choose default name index
-  if ( !(is.null(data_name) || data_name == "" || missing(data_name))) {
-    if(data_name != make.names(data_name)) {
-      message("data_name is invalid. It will be made valid automatically.")
-      data_name <- make.names(data_name)
-    }
-    self$append_to_metadata(data_name_label, data_name)
-  }
-  else if (!self$is_metadata(data_name_label)) {
-    if (( is.null(data_name) || data_name == "" || missing(data_name))) {
-      self$append_to_metadata(data_name_label,paste0("data_set_",sprintf("%03d", start_point)))
-      if (messages) {
-        message(paste0("No name specified in data_tables list for data frame ", start_point, ". 
-                       Data frame will have default name: ", "data_set_",sprintf("%03d", start_point)))
-      }
-    }
-    else self$append_to_metadata(data_name_label, data_name)     
-  }
-  
-}
-),
-                         private = list(
-                           data = data.frame(),
-                           filters = list(),
-                           objects = list(),
-                           keys = list(),
-                           calculations = list(),
-                           changes = list(), 
-                           .current_filter = list(),
-                           .data_changed = FALSE,
-                           .metadata_changed = FALSE, 
-                           .variables_metadata_changed = FALSE 
-                          ),
-                          active = list(
-                            data_changed = function(new_value) {
-                              if(missing(new_value)) return(private$.data_changed)
-                              else {
-                                if(new_value != TRUE && new_value != FALSE) stop("new_val must be TRUE or FALSE")
-                                private$.data_changed <- new_value
-                                self$append_to_changes(list(Set_property, "data_changed"))
-                              }
-                            },
-                            metadata_changed = function(new_value) {
-                              if(missing(new_value)) return(private$.metadata_changed)
-                              else {
-                                if(new_value != TRUE && new_value != FALSE) stop("new_val must be TRUE or FALSE")
-                                private$.metadata_changed <- new_value
-                                self$append_to_changes(list(Set_property, "metadata_changed"))
-                              }
-                            },
-                            variables_metadata_changed = function(new_value) {
-                              if(missing(new_value)) return(private$.variables_metadata_changed)
-                              else {
-                                if(new_value != TRUE && new_value != FALSE) stop("new_val must be TRUE or FALSE")
-                                private$.variables_metadata_changed <- new_value
-                                self$append_to_changes(list(Set_property, "variable_data_changed"))
-                              }
-                            },
-                            current_filter = function(filter) {
-                              if(missing(filter)) {
-                                return(self$get_filter_as_logical(private$.current_filter$name))
-                              }
-                              else {
-                                private$.current_filter <- filter
-                                self$data_changed <- TRUE
-                                self$append_to_changes(list(Set_property, "current_filter"))
-                              }
-                            }
-                          )
+                       public = list(
+                         initialize = function(data = data.frame(), data_name = "", 
+                                               variables_metadata = data.frame(), metadata = list(), 
+                                               imported_from = "", 
+                                               messages = TRUE, convert=TRUE, create = TRUE, 
+                                               start_point=1, filters = list(), objects = list(),
+                                               calculations = list(), keys = list(), keep_attributes = TRUE)
+                         {
+                           
+                           # Set up the data object
+                           self$set_data(data, messages)
+                           self$set_changes(list())
+                           #removed until this can be fixed.
+                           #self$set_variables_metadata(variables_metadata)
+                           
+                           # Set first so that "no_filter" is added
+                           self$set_filters(filters)
+                           if(keep_attributes) {
+                             self$set_meta(c(attributes(private$data), metadata))
+                           }
+                           else {
+                             self$set_meta(metadata)
+                             self$clear_variables_metadata()
+                           }
+                           self$add_defaults_meta()
+                           self$add_defaults_variables_metadata(self$get_column_names())
+                           #self$update_variables_metadata()
+                           self$set_objects(objects)
+                           self$set_calculations(calculations)
+                           self$set_keys(keys)
+                           
+                           # If no name for the data.frame has been given in the list we create a default one.
+                           # Decide how to choose default name index
+                           if ( !(is.null(data_name) || data_name == "" || missing(data_name))) {
+                             if(data_name != make.names(data_name)) {
+                               message("data_name is invalid. It will be made valid automatically.")
+                               data_name <- make.names(data_name)
+                             }
+                             self$append_to_metadata(data_name_label, data_name)
+                           }
+                           else if (!self$is_metadata(data_name_label)) {
+                             if (( is.null(data_name) || data_name == "" || missing(data_name))) {
+                               self$append_to_metadata(data_name_label,paste0("data_set_",sprintf("%03d", start_point)))
+                               if (messages) {
+                                 message(paste0("No name specified in data_tables list for data frame ", start_point, ". 
+                                                Data frame will have default name: ", "data_set_",sprintf("%03d", start_point)))
+                               }
+                               }
+                             else self$append_to_metadata(data_name_label, data_name)     
+                             }
+                           
+                         }
+                       ),
+                       private = list(
+                         data = data.frame(),
+                         filters = list(),
+                         objects = list(),
+                         keys = list(),
+                         calculations = list(),
+                         changes = list(), 
+                         .current_filter = list(),
+                         .data_changed = FALSE,
+                         .metadata_changed = FALSE, 
+                         .variables_metadata_changed = FALSE 
+                       ),
+                       active = list(
+                         data_changed = function(new_value) {
+                           if(missing(new_value)) return(private$.data_changed)
+                           else {
+                             if(new_value != TRUE && new_value != FALSE) stop("new_val must be TRUE or FALSE")
+                             private$.data_changed <- new_value
+                             self$append_to_changes(list(Set_property, "data_changed"))
+                           }
+                         },
+                         metadata_changed = function(new_value) {
+                           if(missing(new_value)) return(private$.metadata_changed)
+                           else {
+                             if(new_value != TRUE && new_value != FALSE) stop("new_val must be TRUE or FALSE")
+                             private$.metadata_changed <- new_value
+                             self$append_to_changes(list(Set_property, "metadata_changed"))
+                           }
+                         },
+                         variables_metadata_changed = function(new_value) {
+                           if(missing(new_value)) return(private$.variables_metadata_changed)
+                           else {
+                             if(new_value != TRUE && new_value != FALSE) stop("new_val must be TRUE or FALSE")
+                             private$.variables_metadata_changed <- new_value
+                             self$append_to_changes(list(Set_property, "variable_data_changed"))
+                           }
+                         },
+                         current_filter = function(filter) {
+                           if(missing(filter)) {
+                             return(self$get_filter_as_logical(private$.current_filter$name))
+                           }
+                           else {
+                             private$.current_filter <- filter
+                             self$data_changed <- TRUE
+                             self$append_to_changes(list(Set_property, "current_filter"))
+                           }
+                         }
+                       )
 )
 
 data_object$set("public", "set_data", function(new_data, messages=TRUE, check_names = TRUE) {
@@ -159,9 +159,9 @@ data_object$set("public", "clear_metadata", function() {
 
 data_object$set("public", "set_changes", function(new_changes) {
   if(!is.list(new_changes)) stop("Changes must be of type: list")
-
-    private$changes <- new_changes
-    self$append_to_changes(list(Set_property, "changes"))  
+  
+  private$changes <- new_changes
+  self$append_to_changes(list(Set_property, "changes"))  
 }
 )
 
@@ -525,7 +525,7 @@ data_object$set("public", "anova_tables", function(x_col_names, y_col_name, sign
 
 data_object$set("public", "rename_column_in_data", function(curr_col_name = "", new_col_name = "", label = "") {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
-   # Column name must be character
+  # Column name must be character
   if(new_col_name != curr_col_name) {
     if (new_col_name %in% names(curr_data)){
       stop("Cannot rename this column. A column named: ",new_col_name," already exists in the data.")
@@ -557,7 +557,7 @@ data_object$set("public", "rename_column_in_data", function(curr_col_name = "", 
     }
   }
   if(label != "") {
-   self$append_to_variables_metadata(col_name = new_col_name, property = "label", new_val = label)
+    self$append_to_variables_metadata(col_name = new_col_name, property = "label", new_val = label)
     self$variables_metadata_changed <- TRUE
   }
 }
@@ -605,7 +605,7 @@ data_object$set("public", "replace_value_in_data", function(col_names, rows, old
     done = FALSE
     str_data_type <- self$get_variables_metadata(property = data_type_label, column = col_name)
     curr_column <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
-    locf = TRUE
+   #locf = TRUE
     if(locf){
       my_data <- na.locf(curr_column, fromLast = from_last, na.rm = FALSE)
     }
@@ -718,7 +718,7 @@ data_object$set("public", "replace_value_in_data", function(col_names, rows, old
         }
         else message("No values to replace in ", col_name)
       }
-     
+      
     }
   }
   #TODO need to think what to add to changes
@@ -997,7 +997,7 @@ data_object$set("public", "sort_dataframe", function(col_names = c(), decreasing
 
 data_object$set("public", "convert_column_to_type", function(col_names = c(), to_type, factor_values = NULL, set_digits, set_decimals = FALSE, keep_attr = TRUE, use_labels = TRUE) {
   if(!all(col_names %in% self$get_column_names())) stop("Some column names not found in the data")
-
+  
   if(length(to_type) !=1 ) {
     stop("to_type must be a character of length one")
   }
@@ -1461,7 +1461,7 @@ data_object$set("public", "data_clone", function(include_objects = TRUE, include
   else new_filters <- list()
   if(include_calculations) new_calculations <- lapply(private$calculations, function(x) x$data_clone())
   else new_calculations <- list()
-
+  
   ret <- data_object$new(data = private$data, data_name = self$get_metadata(data_name_label), filters = new_filters, objects = new_objects, calculations = new_calculations, keys = private$keys, keep_attributes = include_metadata)
   if(include_logs) ret$set_changes(private$changes)
   else ret$set_changes(list())
@@ -1681,7 +1681,7 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
     else {
       g <- g + curr_geom()
     }
-
+    
     if (coord_flip) {
       g <- g + coord_flip()
     }   
@@ -1806,16 +1806,16 @@ data_object$set("public","set_contrasts_of_factor", function(col_name, new_contr
   contr_row <- nlevels(factor_col)
   if(new_contrasts == "user_defined") {
     if(any(is.na(defined_contr_matrix)) ||!is.numeric(defined_contr_matrix) ||nrow(defined_contr_matrix) != contr_row || ncol(defined_contr_matrix) != contr_col) stop(paste0("The contrast matrix should have ", contr_col, " column(s) and ",  contr_row, " row(s) "))
-    }
-    #checks needed on contrasts before assigning
-    if(!(new_contrasts %in% c("contr.treatment", "contr.helmert", "contr.poly", "contr.sum", "user_defined"))) {
+  }
+  #checks needed on contrasts before assigning
+  if(!(new_contrasts %in% c("contr.treatment", "contr.helmert", "contr.poly", "contr.sum", "user_defined"))) {
     stop(new_contrasts, " is not a valid contrast name")
   } 
   else if(!is.character(new_contrasts)) {
     stop("New column name must be of type: character")
   }
-       contrasts(private$data[[col_name]]) <- new_contrasts
-  }
+  contrasts(private$data[[col_name]]) <- new_contrasts
+}
 )
 #This method gets a date column and extracts part of the information such as year, month, week, weekday etc(depending on which parameters are set) and creates their respective new column(s)
 data_object$set("public","split_date", function(col_name = "", week = FALSE, month_val = FALSE, month_abbr = FALSE, month_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE, year = FALSE, day = FALSE, day_in_month = FALSE, day_in_year = FALSE, leap_year = FALSE, day_in_year_366 = FALSE, dekade = FALSE, pentad = FALSE) {
@@ -1823,66 +1823,66 @@ data_object$set("public","split_date", function(col_name = "", week = FALSE, mon
   if(!is.Date(col_data)) stop("This column must be a date or time!")
   if(day) {
     day_vector <- day(col_data)
-	  col_name <- next_default_item(prefix = "day", existing_names = self$get_column_names(), include_index = FALSE)
+    col_name <- next_default_item(prefix = "day", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = day_vector)
   }
   if(week) {
     week_vector <- as.integer(week(col_data))
-	  col_name <- next_default_item(prefix = "week", existing_names = self$get_column_names(), include_index = FALSE)
+    col_name <- next_default_item(prefix = "week", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = week_vector)
   }
   if(weekday_val) {
     weekday_val_vector <- as.integer(wday(col_data))
-	  col_name <- next_default_item(prefix = "weekday_val", existing_names = self$get_column_names(), include_index = FALSE)
+    col_name <- next_default_item(prefix = "weekday_val", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = weekday_val_vector)
   }
   if(weekday_abbr) {
     weekday_abbr_vector <- wday(col_data, label = TRUE)
-	  col_name <- next_default_item(prefix = "weekday_abbr", existing_names = self$get_column_names(), include_index = FALSE)
+    col_name <- next_default_item(prefix = "weekday_abbr", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = weekday_abbr_vector)
   }
   if(weekday_name) {
     weekday_name_vector <- wday(col_data, label = TRUE, abbr = FALSE)
-	  col_name <- next_default_item(prefix = "weekday_name", existing_names = self$get_column_names(), include_index = FALSE)
+    col_name <- next_default_item(prefix = "weekday_name", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = weekday_name_vector)
   }
   if(month_val) {
     month_val_vector <- as.integer(month(col_data))
-	  col_name <- next_default_item(prefix = "month_val", existing_names = self$get_column_names(), include_index = FALSE)
+    col_name <- next_default_item(prefix = "month_val", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = month_val_vector)
   }
   if(month_abbr) {
     month_abbr_vector <- month(col_data, label = TRUE)
-	  col_name <- next_default_item(prefix = "month_abbr", existing_names = self$get_column_names(), include_index = FALSE)
+    col_name <- next_default_item(prefix = "month_abbr", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = month_abbr_vector)
   }
   if(month_name) {
     month_name_vector <- month(col_data, label = TRUE, abbr = FALSE)
-	  col_name <- next_default_item(prefix = "month_name", existing_names = self$get_column_names(), include_index = FALSE)
+    col_name <- next_default_item(prefix = "month_name", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = month_name_vector)
   }
   if(year) {
     year_vector <- year(col_data)
-	  col_name <- next_default_item(prefix = "year", existing_names = self$get_column_names(), include_index = FALSE)
+    col_name <- next_default_item(prefix = "year", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = year_vector)
     if(self$is_climatic_data()) self$set_climatic_types(types = c(year = col_name))
   }
   if(day_in_month) {
     day_in_month_vector <- as.integer(mday(col_data))
-	  col_name <- next_default_item(prefix = "day_in_month", existing_names = self$get_column_names(), include_index = FALSE)
+    col_name <- next_default_item(prefix = "day_in_month", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = day_in_month_vector)
-	}
-	if(day_in_year) {
+  }
+  if(day_in_year) {
     day_in_year_vector <- as.integer(yday(col_data))
-	  col_name <- next_default_item(prefix = "day_in_year", existing_names = self$get_column_names(), include_index = FALSE)
+    col_name <- next_default_item(prefix = "day_in_year", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = day_in_year_vector)
     if(self$is_climatic_data()) self$set_climatic_types(types = c(doy = col_name))
-	}
-	if(day_in_year_366) {
+  }
+  if(day_in_year_366) {
     day_in_year_366_vector <- as.integer(yday_366(col_data))
-	  col_name <- next_default_item(prefix = "doy_366", existing_names = self$get_column_names(), include_index = FALSE)
+    col_name <- next_default_item(prefix = "doy_366", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = day_in_year_366_vector)
-	}
+  }
   if(dekade) {
     dekade_vector <- as.integer(dekade(col_data))
     col_name <- next_default_item(prefix = "dekade", existing_names = self$get_column_names(), include_index = FALSE)
@@ -1893,11 +1893,11 @@ data_object$set("public","split_date", function(col_name = "", week = FALSE, mon
     col_name <- next_default_item(prefix = "pentad", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = pentad_vector)
   }
-	if(leap_year) {
+  if(leap_year) {
     leap_year_vector <- leap_year(col_data)
-	  col_name <- next_default_item(prefix = "leap_year", existing_names = self$get_column_names(), include_index = FALSE)
+    col_name <- next_default_item(prefix = "leap_year", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = leap_year_vector)
-	}
+  }
 }
 )
 
@@ -2246,7 +2246,7 @@ all_calculated_corruption_column_types <- c(corruption_award_year_label,
                                             corruption_all_bids_label,
                                             corruption_all_bids_trimmed_label,
                                             corruption_contract_value_share_over_threshold_label
-                                            )
+)
 
 corruption_ctry_iso2_label="iso2"
 corruption_ctry_iso3_label="iso3"
@@ -2264,7 +2264,7 @@ all_primary_corruption_country_level_column_types <- c(corruption_country_label,
                                                        corruption_ctry_ss_2013_label,
                                                        corruption_ctry_ss_2015_label,
                                                        corruption_ctry_small_state_label
-                                                       )
+)
 
 # Column metadata for corruption colums
 corruption_type_label = "Corruption_Type"
@@ -2781,7 +2781,7 @@ data_object$set("public","generate_all_bids", function() {
       if(self$is_corruption_type_present(corruption_no_bids_received_label)) {
         all_bids[is.na(all_bids)] <- self$get_columns_from_data(self$get_corruption_column_name(corruption_no_bids_received_label))[is.na(all_bids)]
       }
-
+      
       col_name <- next_default_item(corruption_all_bids_label, self$get_column_names(), include_index = FALSE)
       self$add_columns_to_data(col_name, all_bids)
       self$append_to_variables_metadata(col_name, corruption_type_label, corruption_all_bids_label)
