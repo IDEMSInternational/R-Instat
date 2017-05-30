@@ -170,7 +170,7 @@ Public Class dlgInsertColumn
                 ucrBase.OKEnabled(False)
             End If
         ElseIf rdoInsertRows.Checked Then
-            If (ucrNudNumberOfRows.GetText <> "" AndAlso ucrNudStartRow.GetText <> "" OrElse rdoAfter.Checked OrElse rdoBefore.Checked) Then
+            If (ucrNudNumberOfRows.GetText <> "" AndAlso ucrNudStartRow.GetText <> "") Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
