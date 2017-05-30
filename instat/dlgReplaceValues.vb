@@ -101,11 +101,12 @@ Public Class dlgReplaceValues
         ucrInputNewValue.bAddRemoveParameter = False
 
         '' NEW VALUES:
-        ucrPnlNew.SetParameter(New RParameter("from_last"))
-        ucrPnlNew.AddRadioButton(rdoNewFromAbove, "TRUE")
-        ucrPnlNew.AddRadioButton(rdoNewFromBelow, "FALSE")
+        ucrPnlNew.SetParameter(New RParameter("new_is_missing"))
+        ucrPnlNew.AddRadioButton(rdoNewMissing, "TRUE")
+        ucrPnlNew.AddRadioButton(rdoNewFromAbove)
+        ucrPnlNew.AddRadioButton(rdoNewFromBelow)
         ucrPnlNew.AddRadioButton(rdoNewValue)
-        ucrPnlNew.AddRadioButton(rdoNewMissing)
+
 
         ucrPnlNew.AddParameterPresentCondition(rdoNewValue, "new_value")
         ucrPnlNew.AddParameterValuesCondition(rdoNewMissing, "new_is_missing", "TRUE")
@@ -197,6 +198,11 @@ Public Class dlgReplaceValues
             If rdoNewFromAbove.Checked OrElse rdoNewFromBelow.Checked Then
                 clsReplace.RemoveParameterByName("new_is_missing")
                 clsReplace.RemoveParameterByName("old_value")
+                If rdoNewFromAbove.Checked Then
+                    clsReplace.AddParameter("from_last", "TRUE")
+                ElseIf rdoNewFromBelow.Checked Then
+                    clsReplace.AddParameter("from_last", "FALSE")
+                End If
             End If
         End If
     End Sub
