@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class dlgReplace
+Partial Class dlgReplaceValues
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -258,7 +258,9 @@ Partial Class dlgReplace
         Me.ucrReceiverReplace.Name = "ucrReceiverReplace"
         Me.ucrReceiverReplace.Selector = Nothing
         Me.ucrReceiverReplace.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverReplace.strNcFilePath = ""
         Me.ucrReceiverReplace.TabIndex = 2
+        Me.ucrReceiverReplace.ucrSelector = Nothing
         '
         'ucrSelectorReplace
         '
@@ -277,7 +279,7 @@ Partial Class dlgReplace
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 5
         '
-        'dlgReplace
+        'dlgReplaceValues
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -291,10 +293,10 @@ Partial Class dlgReplace
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgReplace"
+        Me.Name = "dlgReplaceValues"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Replace"
-        Me.Text = "Replace"
+        Me.Text = "Replace Values"
         Me.grpOld.ResumeLayout(False)
         Me.grpOld.PerformLayout()
         Me.grpNew.ResumeLayout(False)
