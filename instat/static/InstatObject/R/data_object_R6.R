@@ -582,7 +582,7 @@ data_object$set("public", "remove_columns_in_data", function(cols=c()) {
 }
 )
 
-data_object$set("public", "replace_value_in_data", function(col_names, rows, old_value, old_is_missing = FALSE, start_value = NA, end_value = NA, new_value, new_is_missing = FALSE, closed_start_value = TRUE, closed_end_value = TRUE) {
+data_object$set("public", "replace_value_in_data", function(col_names, rows, old_value, old_is_missing = FALSE, start_value = NA, end_value = NA, new_value, new_is_missing = FALSE, closed_start_value = TRUE, closed_end_value = TRUE, locf = FALSE, from_last = FALSE) {
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
   # Column name must be character
   if(!all(is.character(col_names))) stop("Column name must be of type: character")
@@ -605,103 +605,120 @@ data_object$set("public", "replace_value_in_data", function(col_names, rows, old
     done = FALSE
     str_data_type <- self$get_variables_metadata(property = data_type_label, column = col_name)
     curr_column <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
-    if("factor" %in% str_data_type) {
-      if(!missing(rows)) {
-        if(!is.na(new_value) && !new_value %in% levels(self$get_columns_from_data(col_name, use_current_filter = FALSE))) {
-          stop("new_value must be an existing level of the factor column.")
-        }
-        replace_rows <- (data_row_names %in% rows)
-      }
-      else {
-        if(filter_applied) stop("Cannot replace values in a factor column when a filter is applied. Remove the filter to do this replacement.")
-        if(is.na(old_value)) {
-          if(!is.na(new_value) && !new_value %in% levels(self$get_columns_from_data(col_name, use_current_filter = FALSE))) stop(new_value, " is not a level of this factor. Add this as a level of the factor before using replace.")
-          replace_rows <- (is.na(curr_column))
+    locf = TRUE
+    if(locf){
+      my_data <- na.locf(curr_column, fromLast = from_last, na.rm = FALSE)
+    }
+    else{
+      if("factor" %in% str_data_type) {
+        if(!missing(rows)) {
+          if(!is.na(new_value) && !new_value %in% levels(self$get_columns_from_data(col_name, use_current_filter = FALSE))) {
+            stop("new_value must be an existing level of the factor column.")
+          }
+          replace_rows <- (data_row_names %in% rows)
         }
         else {
-          self$edit_factor_level(col_name = col_name, old_level = old_value, new_level = new_value)
-          done = TRUE
+          if(filter_applied) stop("Cannot replace values in a factor column when a filter is applied. Remove the filter to do this replacement.")
+          if(is.na(old_value)) {
+            if(!is.na(new_value) && !new_value %in% levels(self$get_columns_from_data(col_name, use_current_filter = FALSE))) stop(new_value, " is not a level of this factor. Add this as a level of the factor before using replace.")
+            replace_rows <- (is.na(curr_column))
+          }
+          else {
+            self$edit_factor_level(col_name = col_name, old_level = old_value, new_level = new_value)
+            done = TRUE
+          }
         }
       }
-    }
-    else if(str_data_type == "integer" || str_data_type == "numeric") {
-      if(!is.na(new_value)) {
-        if(!is.numeric(new_value)) stop(col_name, " is a numeric/integer column. new_value must be of the same type")
-        if(str_data_type == "integer" && !(new_value %% 1 == 0)) stop(col_name, " is an integer column. new_value must be an integer")
+      else if(str_data_type == "integer" || str_data_type == "numeric") {
+        if(!is.na(new_value)) {
+          if(!is.numeric(new_value)) stop(col_name, " is a numeric/integer column. new_value must be of the same type")
+          if(str_data_type == "integer" && !(new_value %% 1 == 0)) stop(col_name, " is an integer column. new_value must be an integer")
+        }
+        if(!missing(rows)) {
+          replace_rows <- (data_row_names %in% rows)
+          if(!missing(old_value) || !is.na(start_value) || !is.na(end_value)) warning("old_value, start_value and end_value will be ignored because rows has been specified.")
+        }
+        else {
+          if(!is.na(start_value) || !is.na(end_value)) {
+            if(!missing(old_value)) warning("old_value will be ignored because start_value or end_value has been specified.")
+            if(closed_start_value) start_value_ineq = match.fun(">=")
+            else start_value_ineq = match.fun(">")
+            if(closed_end_value) end_value_ineq = match.fun("<=")
+            else end_value_ineq = match.fun("<")
+            
+            if(!is.na(start_value) && is.na(end_value)) {
+              replace_rows <- start_value_ineq(curr_column, start_value)
+            }
+            else if(is.na(start_value) && !is.na(end_value)) {
+              replace_rows <- end_value_ineq(curr_column, end_value)
+            }
+            else if(!is.na(start_value) && !is.na(end_value)) {
+              replace_rows <- (start_value_ineq(curr_column,start_value) & end_value_ineq(curr_column, end_value))
+            }
+          }
+          else {
+            if(is.na(old_value)) replace_rows <- (is.na(curr_column))
+            else replace_rows <- (curr_column == old_value)
+          }
+        }
       }
-      if(!missing(rows)) {
-        replace_rows <- (data_row_names %in% rows)
-        if(!missing(old_value) || !is.na(start_value) || !is.na(end_value)) warning("old_value, start_value and end_value will be ignored because rows has been specified.")
+      else if(str_data_type == "character") {
+        if(!missing(rows)) {
+          replace_rows <- (data_row_names %in% rows)
+          if(!missing(old_value)) warning("old_value will be ignored because rows has been specified.")
+        }
+        else {
+          if(is.na(old_value)) replace_rows <- (is.na(curr_column))
+          else replace_rows <- (curr_column == old_value)
+        }
+        new_value <- as.character(new_value)
       }
-      else {
-        if(!is.na(start_value) || !is.na(end_value)) {
-          if(!missing(old_value)) warning("old_value will be ignored because start_value or end_value has been specified.")
-          if(closed_start_value) start_value_ineq = match.fun(">=")
-          else start_value_ineq = match.fun(">")
-          if(closed_end_value) end_value_ineq = match.fun("<=")
-          else end_value_ineq = match.fun("<")
-          
-          if(!is.na(start_value) && is.na(end_value)) {
-            replace_rows <- start_value_ineq(curr_column, start_value)
-          }
-          else if(is.na(start_value) && !is.na(end_value)) {
-            replace_rows <- end_value_ineq(curr_column, end_value)
-          }
-          else if(!is.na(start_value) && !is.na(end_value)) {
-            replace_rows <- (start_value_ineq(curr_column,start_value) & end_value_ineq(curr_column, end_value))
-          }
+      else if(str_data_type == "logical") {
+        #Removed because new columns are logical and we need to be able to type in new values
+        #if(!is.logical(new_value)) stop(col_name, " is a logical column. new_value must be a logical value")
+        if(!missing(rows)) {
+          replace_rows <- (data_row_names %in% rows)
+          if(!missing(old_value)) warning("old_value will be ignored because rows has been specified.")
         }
         else {
           if(is.na(old_value)) replace_rows <- (is.na(curr_column))
           else replace_rows <- (curr_column == old_value)
         }
       }
-    }
-    else if(str_data_type == "character") {
-      if(!missing(rows)) {
-        replace_rows <- (data_row_names %in% rows)
-        if(!missing(old_value)) warning("old_value will be ignored because rows has been specified.")
-      }
+      #TODO add other data type cases
       else {
-        if(is.na(old_value)) replace_rows <- (is.na(curr_column))
-        else replace_rows <- (curr_column == old_value)
+        if(!missing(rows)) {
+          replace_rows <- (data_row_names %in% rows)
+          if(!missing(old_value)) warning("old_value will be ignored because rows has been specified.")
+        }
+        else {
+          if(is.na(old_value)) replace_rows <- (is.na(curr_column))
+          else replace_rows <- (curr_column == old_value)
+        }
       }
-      new_value <- as.character(new_value)
-    }
-    else if(str_data_type == "logical") {
-      #Removed because new columns are logical and we need to be able to type in new values
-      #if(!is.logical(new_value)) stop(col_name, " is a logical column. new_value must be a logical value")
-      if(!missing(rows)) {
-        replace_rows <- (data_row_names %in% rows)
-        if(!missing(old_value)) warning("old_value will be ignored because rows has been specified.")
-      }
-      else {
-        if(is.na(old_value)) replace_rows <- (is.na(curr_column))
-        else replace_rows <- (curr_column == old_value)
-      }
-    }
-    #TODO add other data type cases
-    else {
-      if(!missing(rows)) {
-        replace_rows <- (data_row_names %in% rows)
-        if(!missing(old_value)) warning("old_value will be ignored because rows has been specified.")
-      }
-      else {
-        if(is.na(old_value)) replace_rows <- (is.na(curr_column))
-        else replace_rows <- (curr_column == old_value)
-      }
+      
     }
     if(!done) {
-      replace_rows[is.na(replace_rows)] <- FALSE
-      if(sum(replace_rows) > 0) {
-        if(filter_applied) {
-          replace_rows <- replace_rows & curr_filter
+      if(locf){
+        
+        print(nrow(private$data))
+        print(length(my_data))
+        private$data[[col_name]] <- my_data
+      }
+      else{
+        replace_rows[is.na(replace_rows)] <- FALSE
+        if(sum(replace_rows) > 0) {
+          if(filter_applied) {
+            replace_rows <- replace_rows & curr_filter
+          }
+          # Need private$data here as replacing values in data
+          
+          if(sum(replace_rows) > 0) private$data[[col_name]][replace_rows] <- new_value
+          else message("No values to replace in ", col_name)
         }
-        # Need private$data here as replacing values in data
-        if(sum(replace_rows) > 0) private$data[[col_name]][replace_rows] <- new_value
         else message("No values to replace in ", col_name)
       }
-      else message("No values to replace in ", col_name)
+     
     }
   }
   #TODO need to think what to add to changes
