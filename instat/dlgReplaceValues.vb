@@ -122,17 +122,13 @@ Public Class dlgReplaceValues
 
         ucrSelectorReplace.Reset()
         EnableRange()
-        ' clsReplaceNaLocf.SetRCommand("na.locf")
         clsReplace.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data")
         clsReplace.AddParameter("old_value", "-99")
         clsReplace.AddParameter("new_is_missing", "TRUE")
-        ' clsReplaceNaLocf.SetAssignTo(ucrNewDataFrame.GetText(), strTempDataframe:=ucrNewDataFrame.GetText())
         ucrBase.clsRsyntax.SetBaseRFunction(clsReplace)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ' ucrReceiverReplace.SetRCode(clsReplace, bReset)
-        ' ucrReceiverReplace.AddAdditionalCodeParameterPair(clsReplaceNaLocf, New RParameter("object", 0), iAdditionalPairNo:=1)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
@@ -213,36 +209,14 @@ Public Class dlgReplaceValues
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        'If rdoNewFromAbove.Checked OrElse rdoNewFromBelow.Checked Then
-        '    ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceNaLocf)
-        'Else
-        '    ucrBase.clsRsyntax.SetBaseRFunction(clsReplace)
-        'End If
-    End Sub
-
     Private Sub ucrPnlOld_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOld.ControlValueChanged, ucrPnlNew.ControlValueChanged
         InputValue()
         EnableRange()
     End Sub
 
-    'Private Sub NewDefaultName()
-    '    If ucrSelectorReplace.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" AndAlso (Not ucrNewDataFrame.bUserTyped) Then
-    '        ucrNewDataFrame.SetPrefix(ucrSelectorReplace.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-    '    End If
-    'End Sub
-
     Private Sub ucrReceiverReplace_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverReplace.ControlValueChanged
-        'If rdoNewFromAbove.Checked OrElse rdoNewFromBelow.Checked Then
-        '    ucrReceiverReplace.SetParameterIsRFunction()
-        'Else
-        '    ucrReceiverReplace.SetParameterIsString()
-        'End If
         InputValue()
         EnableRange()
     End Sub
 
-    Private Sub ucrSelectorReplace_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorReplace.ControlValueChanged
-        ' NewDefaultName()
-    End Sub
 End Class
