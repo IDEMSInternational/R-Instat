@@ -38,7 +38,6 @@ Public Class dlgRandomSubsets
         ucrReceiverSubsets.SetParameterIsRFunction()
         ucrReceiverSubsets.Selector = ucrSelectorRandomSubsets
         ucrReceiverSubsets.SetMeAsReceiver()
-        ucrReceiverSubsets.SetIncludedDataTypes({"numeric"})
 
         'Replace checkbox
         ucrChkWithReplacement.SetParameter(New RParameter("replace", 1))
