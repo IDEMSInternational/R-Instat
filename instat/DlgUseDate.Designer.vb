@@ -23,7 +23,6 @@ Partial Class dlgUseDate
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblDateVariable = New System.Windows.Forms.Label()
-        Me.grpDateFunctions = New System.Windows.Forms.GroupBox()
         Me.grpShifted = New System.Windows.Forms.GroupBox()
         Me.lblMonth = New System.Windows.Forms.Label()
         Me.ucrInputComboBoxMonth = New instat.ucrInputComboBox()
@@ -52,7 +51,6 @@ Partial Class dlgUseDate
         Me.ucrReceiverUseDate = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorUseDate = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.grpDateFunctions.SuspendLayout()
         Me.grpShifted.SuspendLayout()
         Me.grpOthers.SuspendLayout()
         Me.grpFullName.SuspendLayout()
@@ -63,25 +61,11 @@ Partial Class dlgUseDate
         'lblDateVariable
         '
         Me.lblDateVariable.AutoSize = True
-        Me.lblDateVariable.Location = New System.Drawing.Point(251, 18)
+        Me.lblDateVariable.Location = New System.Drawing.Point(254, 44)
         Me.lblDateVariable.Name = "lblDateVariable"
         Me.lblDateVariable.Size = New System.Drawing.Size(71, 13)
         Me.lblDateVariable.TabIndex = 1
         Me.lblDateVariable.Text = "Date Column:"
-        '
-        'grpDateFunctions
-        '
-        Me.grpDateFunctions.Controls.Add(Me.grpShifted)
-        Me.grpDateFunctions.Controls.Add(Me.grpOthers)
-        Me.grpDateFunctions.Controls.Add(Me.grpFullName)
-        Me.grpDateFunctions.Controls.Add(Me.grpAbbreviation)
-        Me.grpDateFunctions.Controls.Add(Me.grpValues)
-        Me.grpDateFunctions.Location = New System.Drawing.Point(14, 196)
-        Me.grpDateFunctions.Name = "grpDateFunctions"
-        Me.grpDateFunctions.Size = New System.Drawing.Size(604, 210)
-        Me.grpDateFunctions.TabIndex = 3
-        Me.grpDateFunctions.TabStop = False
-        Me.grpDateFunctions.Text = "Date Functions"
         '
         'grpShifted
         '
@@ -91,17 +75,17 @@ Partial Class dlgUseDate
         Me.grpShifted.Controls.Add(Me.ucrChkShiftYear)
         Me.grpShifted.Controls.Add(Me.ucrNudShiftStartDay)
         Me.grpShifted.Controls.Add(Me.ucrChkShiftDay)
-        Me.grpShifted.Location = New System.Drawing.Point(451, 19)
+        Me.grpShifted.Location = New System.Drawing.Point(236, 201)
         Me.grpShifted.Name = "grpShifted"
         Me.grpShifted.Size = New System.Drawing.Size(143, 125)
-        Me.grpShifted.TabIndex = 3
+        Me.grpShifted.TabIndex = 4
         Me.grpShifted.TabStop = False
         Me.grpShifted.Text = "Shifted"
         '
         'lblMonth
         '
         Me.lblMonth.AutoSize = True
-        Me.lblMonth.Location = New System.Drawing.Point(1, 73)
+        Me.lblMonth.Location = New System.Drawing.Point(10, 73)
         Me.lblMonth.Name = "lblMonth"
         Me.lblMonth.Size = New System.Drawing.Size(40, 13)
         Me.lblMonth.TabIndex = 2
@@ -111,7 +95,7 @@ Partial Class dlgUseDate
         '
         Me.ucrInputComboBoxMonth.AddQuotesIfUnrecognised = True
         Me.ucrInputComboBoxMonth.IsReadOnly = False
-        Me.ucrInputComboBoxMonth.Location = New System.Drawing.Point(3, 88)
+        Me.ucrInputComboBoxMonth.Location = New System.Drawing.Point(56, 70)
         Me.ucrInputComboBoxMonth.Name = "ucrInputComboBoxMonth"
         Me.ucrInputComboBoxMonth.Size = New System.Drawing.Size(81, 21)
         Me.ucrInputComboBoxMonth.TabIndex = 3
@@ -119,7 +103,7 @@ Partial Class dlgUseDate
         'lblDay
         '
         Me.lblDay.AutoSize = True
-        Me.lblDay.Location = New System.Drawing.Point(86, 73)
+        Me.lblDay.Location = New System.Drawing.Point(10, 98)
         Me.lblDay.Name = "lblDay"
         Me.lblDay.Size = New System.Drawing.Size(29, 13)
         Me.lblDay.TabIndex = 4
@@ -137,7 +121,7 @@ Partial Class dlgUseDate
         '
         Me.ucrNudShiftStartDay.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudShiftStartDay.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudShiftStartDay.Location = New System.Drawing.Point(88, 88)
+        Me.ucrNudShiftStartDay.Location = New System.Drawing.Point(57, 95)
         Me.ucrNudShiftStartDay.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudShiftStartDay.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudShiftStartDay.Name = "ucrNudShiftStartDay"
@@ -158,10 +142,10 @@ Partial Class dlgUseDate
         Me.grpOthers.Controls.Add(Me.ucrChkLeapYear)
         Me.grpOthers.Controls.Add(Me.ucrChkDekad)
         Me.grpOthers.Controls.Add(Me.ucrChkPentad)
-        Me.grpOthers.Location = New System.Drawing.Point(6, 147)
+        Me.grpOthers.Location = New System.Drawing.Point(10, 330)
         Me.grpOthers.Name = "grpOthers"
-        Me.grpOthers.Size = New System.Drawing.Size(429, 48)
-        Me.grpOthers.TabIndex = 4
+        Me.grpOthers.Size = New System.Drawing.Size(369, 48)
+        Me.grpOthers.TabIndex = 7
         Me.grpOthers.TabStop = False
         Me.grpOthers.Text = "Other Functions"
         '
@@ -193,10 +177,10 @@ Partial Class dlgUseDate
         '
         Me.grpFullName.Controls.Add(Me.ucrChkFullWeekday)
         Me.grpFullName.Controls.Add(Me.ucrChkFullMonth)
-        Me.grpFullName.Location = New System.Drawing.Point(337, 19)
+        Me.grpFullName.Location = New System.Drawing.Point(385, 201)
         Me.grpFullName.Name = "grpFullName"
-        Me.grpFullName.Size = New System.Drawing.Size(106, 125)
-        Me.grpFullName.TabIndex = 2
+        Me.grpFullName.Size = New System.Drawing.Size(106, 89)
+        Me.grpFullName.TabIndex = 5
         Me.grpFullName.TabStop = False
         Me.grpFullName.Text = "Full Name"
         '
@@ -220,10 +204,10 @@ Partial Class dlgUseDate
         '
         Me.grpAbbreviation.Controls.Add(Me.ucrChkAbbrMonth)
         Me.grpAbbreviation.Controls.Add(Me.ucrChkAbbrWeekday)
-        Me.grpAbbreviation.Location = New System.Drawing.Point(228, 19)
+        Me.grpAbbreviation.Location = New System.Drawing.Point(386, 290)
         Me.grpAbbreviation.Name = "grpAbbreviation"
-        Me.grpAbbreviation.Size = New System.Drawing.Size(105, 125)
-        Me.grpAbbreviation.TabIndex = 1
+        Me.grpAbbreviation.Size = New System.Drawing.Size(105, 88)
+        Me.grpAbbreviation.TabIndex = 6
         Me.grpAbbreviation.TabStop = False
         Me.grpAbbreviation.Text = "Abbreviation"
         '
@@ -252,10 +236,10 @@ Partial Class dlgUseDate
         Me.grpValues.Controls.Add(Me.ucrChkDay)
         Me.grpValues.Controls.Add(Me.ucrChkWeekday)
         Me.grpValues.Controls.Add(Me.ucrChkWeek)
-        Me.grpValues.Location = New System.Drawing.Point(6, 19)
+        Me.grpValues.Location = New System.Drawing.Point(10, 199)
         Me.grpValues.Name = "grpValues"
         Me.grpValues.Size = New System.Drawing.Size(220, 125)
-        Me.grpValues.TabIndex = 0
+        Me.grpValues.TabIndex = 3
         Me.grpValues.TabStop = False
         Me.grpValues.Text = "Values"
         '
@@ -318,7 +302,7 @@ Partial Class dlgUseDate
         'ucrReceiverUseDate
         '
         Me.ucrReceiverUseDate.frmParent = Me
-        Me.ucrReceiverUseDate.Location = New System.Drawing.Point(254, 39)
+        Me.ucrReceiverUseDate.Location = New System.Drawing.Point(254, 59)
         Me.ucrReceiverUseDate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverUseDate.Name = "ucrReceiverUseDate"
         Me.ucrReceiverUseDate.Selector = Nothing
@@ -329,16 +313,16 @@ Partial Class dlgUseDate
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(14, 408)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 384)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(407, 52)
-        Me.ucrBase.TabIndex = 4
+        Me.ucrBase.TabIndex = 8
         '
         'ucrSelectorUseDate
         '
         Me.ucrSelectorUseDate.bShowHiddenColumns = False
         Me.ucrSelectorUseDate.bUseCurrentFilter = True
-        Me.ucrSelectorUseDate.Location = New System.Drawing.Point(14, 9)
+        Me.ucrSelectorUseDate.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorUseDate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorUseDate.Name = "ucrSelectorUseDate"
         Me.ucrSelectorUseDate.Size = New System.Drawing.Size(210, 180)
@@ -348,11 +332,15 @@ Partial Class dlgUseDate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(629, 466)
-        Me.Controls.Add(Me.grpDateFunctions)
+        Me.ClientSize = New System.Drawing.Size(502, 444)
+        Me.Controls.Add(Me.grpOthers)
+        Me.Controls.Add(Me.grpShifted)
         Me.Controls.Add(Me.ucrReceiverUseDate)
+        Me.Controls.Add(Me.grpFullName)
         Me.Controls.Add(Me.lblDateVariable)
+        Me.Controls.Add(Me.grpAbbreviation)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.grpValues)
         Me.Controls.Add(Me.ucrSelectorUseDate)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -360,7 +348,6 @@ Partial Class dlgUseDate
         Me.Name = "dlgUseDate"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Use Date"
-        Me.grpDateFunctions.ResumeLayout(False)
         Me.grpShifted.ResumeLayout(False)
         Me.grpShifted.PerformLayout()
         Me.grpOthers.ResumeLayout(False)
@@ -376,7 +363,6 @@ Partial Class dlgUseDate
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents lblDateVariable As Label
     Friend WithEvents ucrReceiverUseDate As ucrReceiverSingle
-    Friend WithEvents grpDateFunctions As GroupBox
     Friend WithEvents grpOthers As GroupBox
     Friend WithEvents grpFullName As GroupBox
     Friend WithEvents grpAbbreviation As GroupBox
