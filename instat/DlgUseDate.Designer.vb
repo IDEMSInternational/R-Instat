@@ -94,7 +94,7 @@ Partial Class dlgUseDate
         Me.grpShifted.Location = New System.Drawing.Point(451, 19)
         Me.grpShifted.Name = "grpShifted"
         Me.grpShifted.Size = New System.Drawing.Size(143, 125)
-        Me.grpShifted.TabIndex = 4
+        Me.grpShifted.TabIndex = 3
         Me.grpShifted.TabStop = False
         Me.grpShifted.Text = "Shifted"
         '
@@ -104,7 +104,7 @@ Partial Class dlgUseDate
         Me.lblMonth.Location = New System.Drawing.Point(1, 73)
         Me.lblMonth.Name = "lblMonth"
         Me.lblMonth.Size = New System.Drawing.Size(40, 13)
-        Me.lblMonth.TabIndex = 14
+        Me.lblMonth.TabIndex = 2
         Me.lblMonth.Text = "Month:"
         '
         'ucrInputComboBoxMonth
@@ -114,7 +114,7 @@ Partial Class dlgUseDate
         Me.ucrInputComboBoxMonth.Location = New System.Drawing.Point(3, 88)
         Me.ucrInputComboBoxMonth.Name = "ucrInputComboBoxMonth"
         Me.ucrInputComboBoxMonth.Size = New System.Drawing.Size(81, 21)
-        Me.ucrInputComboBoxMonth.TabIndex = 13
+        Me.ucrInputComboBoxMonth.TabIndex = 3
         '
         'lblDay
         '
@@ -122,7 +122,7 @@ Partial Class dlgUseDate
         Me.lblDay.Location = New System.Drawing.Point(86, 73)
         Me.lblDay.Name = "lblDay"
         Me.lblDay.Size = New System.Drawing.Size(29, 13)
-        Me.lblDay.TabIndex = 11
+        Me.lblDay.TabIndex = 4
         Me.lblDay.Text = "Day:"
         '
         'ucrChkShiftYear
@@ -131,7 +131,7 @@ Partial Class dlgUseDate
         Me.ucrChkShiftYear.Location = New System.Drawing.Point(13, 46)
         Me.ucrChkShiftYear.Name = "ucrChkShiftYear"
         Me.ucrChkShiftYear.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkShiftYear.TabIndex = 12
+        Me.ucrChkShiftYear.TabIndex = 1
         '
         'ucrNudShiftStartDay
         '
@@ -142,7 +142,7 @@ Partial Class dlgUseDate
         Me.ucrNudShiftStartDay.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudShiftStartDay.Name = "ucrNudShiftStartDay"
         Me.ucrNudShiftStartDay.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudShiftStartDay.TabIndex = 9
+        Me.ucrNudShiftStartDay.TabIndex = 5
         Me.ucrNudShiftStartDay.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrChkShiftDay
@@ -151,7 +151,7 @@ Partial Class dlgUseDate
         Me.ucrChkShiftDay.Location = New System.Drawing.Point(13, 19)
         Me.ucrChkShiftDay.Name = "ucrChkShiftDay"
         Me.ucrChkShiftDay.Size = New System.Drawing.Size(94, 20)
-        Me.ucrChkShiftDay.TabIndex = 7
+        Me.ucrChkShiftDay.TabIndex = 0
         '
         'grpOthers
         '
@@ -161,7 +161,7 @@ Partial Class dlgUseDate
         Me.grpOthers.Location = New System.Drawing.Point(6, 147)
         Me.grpOthers.Name = "grpOthers"
         Me.grpOthers.Size = New System.Drawing.Size(429, 48)
-        Me.grpOthers.TabIndex = 3
+        Me.grpOthers.TabIndex = 4
         Me.grpOthers.TabStop = False
         Me.grpOthers.Text = "Other Functions"
         '
