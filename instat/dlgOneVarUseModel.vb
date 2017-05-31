@@ -36,14 +36,14 @@ Public Class dlgOneVarUseModel
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 375
-        ucrBase.clsRsyntax.iCallType = 2
+        ucrBase.clsRsyntax.iCallType = 3
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         ucrReceiverObject.SetParameter(New RParameter("x", 0))
         ucrReceiverObject.Selector = ucrSelectorUseModel
         ucrReceiverObject.SetParameterIsRFunction()
         ucrReceiverObject.SetMeAsReceiver()
-        ucrReceiverObject.strSelectorHeading = "Models" ' check this
+        ucrReceiverObject.strSelectorHeading = "Models"
 
         ucrSelectorUseModel.SetItemType("model")
 
@@ -97,11 +97,12 @@ Public Class dlgOneVarUseModel
 
         ucrBase.clsRsyntax.SetAssignTo(ucrNewDataFrameName.GetText, strTempModel:="last_model", strTempDataframe:=ucrSelectorUseModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         '        clsRBootFunction.SetAssignTo(ucrSaveObjects.GetText, strTempModel:="last_bootstrap", strTempDataframe:=ucrSelectorUseModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text) ' test at end.
+        '      ucrBase.clsRsyntax.SetAssignTo(ucrSaveObjects.GetText, strTempModel:=ucrSaveObjects.GetText, strTempDataframe:=ucrSelectorUseModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         bResetSubdialog = True
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverObject.AddAdditionalCodeParameterPair(clsRBootFunction, New RParameter("f"), iAdditionalPairNo:=1)
+        ucrReceiverObject.AddAdditionalCodeParameterPair(clsRBootFunction, New RParameter("f", 0), iAdditionalPairNo:=1)
         ucrChkProduceBootstrap.SetRCode(clsRBootFunction, bReset)
         ucrNewDataFrameName.SetRCode(clsQuantileFunction, bReset)
         ucrSaveObjects.SetRCode(clsRBootFunction, bReset)
@@ -124,7 +125,7 @@ Public Class dlgOneVarUseModel
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         If ucrChkProduceBootstrap.Checked Then
-            frmMain.clsRLink.RunScript(clsRBootFunction.ToScript(), iCallType:=2)
+            frmMain.clsRLink.RunScript(clsRBootFunction.ToScript(), iCallType:=3)
         End If
     End Sub
 
@@ -159,7 +160,7 @@ Public Class dlgOneVarUseModel
             clsQuantileFunction.AddParameter("x", clsRFunctionParameter:=clsRBootFunction)
         Else
             clsQuantileFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverObject.GetVariables())
-                   End If
+        End If
         sdgOneVarUseModFit.SetPlotOptions()
     End Sub
 
