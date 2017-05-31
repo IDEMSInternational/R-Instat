@@ -168,7 +168,7 @@ Partial Class dlgTransformText
         '
         'ucrInputTo
         '
-        Me.ucrInputTo.AddQuotesIfUnrecognised = True
+        '        Me.ucrInputTo.AddQuotesIfUnrecognised = True
         Me.ucrInputTo.IsReadOnly = False
         Me.ucrInputTo.Location = New System.Drawing.Point(75, 22)
         Me.ucrInputTo.Name = "ucrInputTo"

@@ -70,6 +70,7 @@ Public Class dlgTransformText
         ucrInputTo.AddFunctionNamesCondition("Upper", "str_to_upper")
         ucrInputTo.AddFunctionNamesCondition("Title", "str_to_title")
         ucrInputTo.SetLinkedDisplayControl(lblTo)
+        ucrInputTo.SetDropDownStyleAsNonEditable()
 
         'rdoPad
         ucrPnlOperation.AddToLinkedControls(ucrInputPad, {rdoPad}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
