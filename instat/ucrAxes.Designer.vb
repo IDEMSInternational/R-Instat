@@ -23,10 +23,17 @@ Partial Class ucrAxes
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.grpAxisTitle = New System.Windows.Forms.GroupBox()
+        Me.ucrChkOverwriteTitle = New instat.ucrCheck()
+        Me.ucrChkDisplayTitle = New instat.ucrCheck()
         Me.rdoTitleCustom = New System.Windows.Forms.RadioButton()
         Me.rdoTitleAuto = New System.Windows.Forms.RadioButton()
         Me.ucrOverwriteTitle = New instat.ucrInputTextBox()
+        Me.ucrPnlAxisTitle = New instat.UcrPanel()
         Me.grpTickMarkers = New System.Windows.Forms.GroupBox()
+        Me.ucrNudInStepsOf = New instat.ucrNud()
+        Me.ucrNudTo = New instat.ucrNud()
+        Me.ucrNudTickMarkersNoOfDecimalPlaces = New instat.ucrNud()
+        Me.ucrNudFrom = New instat.ucrNud()
         Me.ucrTickMarkers = New instat.ucrInputComboBox()
         Me.lblTickMarkersNoOfDecimalPlaces = New System.Windows.Forms.Label()
         Me.rdoTickMarkersAuto = New System.Windows.Forms.RadioButton()
@@ -35,24 +42,18 @@ Partial Class ucrAxes
         Me.lblInStepsOf = New System.Windows.Forms.Label()
         Me.lblFrom = New System.Windows.Forms.Label()
         Me.lblTo = New System.Windows.Forms.Label()
+        Me.ucrPnlTickmarkers = New instat.UcrPanel()
         Me.grpScales = New System.Windows.Forms.GroupBox()
         Me.lblScalesNoDecimalPlaces = New System.Windows.Forms.Label()
         Me.lblUpperLimit = New System.Windows.Forms.Label()
         Me.lblLowerLimit = New System.Windows.Forms.Label()
         Me.rdoScalesCustom = New System.Windows.Forms.RadioButton()
         Me.rdoScalesAuto = New System.Windows.Forms.RadioButton()
-        Me.ucrNudFrom = New instat.ucrNud()
-        Me.ucrNudTo = New instat.ucrNud()
-        Me.ucrNudInStepsOf = New instat.ucrNud()
-        Me.ucrNudTickMarkersNoOfDecimalPlaces = New instat.ucrNud()
-        Me.ucrNudLowerLimit = New instat.ucrNud()
-        Me.ucrNudUpperLimit = New instat.ucrNud()
-        Me.ucrNudScalesNoOfDecimalPlaces = New instat.ucrNud()
-        Me.ucrPnlTickmarkers = New instat.UcrPanel()
-        Me.ucrPnlAxisTitle = New instat.UcrPanel()
         Me.ucrPnlScales = New instat.UcrPanel()
-        Me.ucrChkDisplayTitle = New instat.ucrCheck()
-        Me.ucrChkOverwriteTitle = New instat.ucrCheck()
+        Me.UcrInput1 = New instat.ucrInput()
+        Me.ucrInputLowerLimit = New instat.ucrInputTextBox()
+        Me.ucrInputUpperLimit = New instat.ucrInputTextBox()
+        Me.ucrInputNoofDecimalsLimit = New instat.ucrInputTextBox()
         Me.grpAxisTitle.SuspendLayout()
         Me.grpTickMarkers.SuspendLayout()
         Me.grpScales.SuspendLayout()
@@ -72,6 +73,22 @@ Partial Class ucrAxes
         Me.grpAxisTitle.TabIndex = 0
         Me.grpAxisTitle.TabStop = False
         Me.grpAxisTitle.Text = "Axis Title"
+        '
+        'ucrChkOverwriteTitle
+        '
+        Me.ucrChkOverwriteTitle.Checked = False
+        Me.ucrChkOverwriteTitle.Location = New System.Drawing.Point(6, 70)
+        Me.ucrChkOverwriteTitle.Name = "ucrChkOverwriteTitle"
+        Me.ucrChkOverwriteTitle.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkOverwriteTitle.TabIndex = 21
+        '
+        'ucrChkDisplayTitle
+        '
+        Me.ucrChkDisplayTitle.Checked = False
+        Me.ucrChkDisplayTitle.Location = New System.Drawing.Point(6, 44)
+        Me.ucrChkDisplayTitle.Name = "ucrChkDisplayTitle"
+        Me.ucrChkDisplayTitle.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkDisplayTitle.TabIndex = 20
         '
         'rdoTitleCustom
         '
@@ -105,6 +122,13 @@ Partial Class ucrAxes
         Me.ucrOverwriteTitle.Size = New System.Drawing.Size(131, 21)
         Me.ucrOverwriteTitle.TabIndex = 1
         '
+        'ucrPnlAxisTitle
+        '
+        Me.ucrPnlAxisTitle.Location = New System.Drawing.Point(6, 18)
+        Me.ucrPnlAxisTitle.Name = "ucrPnlAxisTitle"
+        Me.ucrPnlAxisTitle.Size = New System.Drawing.Size(132, 23)
+        Me.ucrPnlAxisTitle.TabIndex = 19
+        '
         'grpTickMarkers
         '
         Me.grpTickMarkers.Controls.Add(Me.ucrNudInStepsOf)
@@ -126,6 +150,54 @@ Partial Class ucrAxes
         Me.grpTickMarkers.TabIndex = 1
         Me.grpTickMarkers.TabStop = False
         Me.grpTickMarkers.Text = "Tick Marks"
+        '
+        'ucrNudInStepsOf
+        '
+        Me.ucrNudInStepsOf.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudInStepsOf.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudInStepsOf.Location = New System.Drawing.Point(120, 182)
+        Me.ucrNudInStepsOf.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudInStepsOf.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudInStepsOf.Name = "ucrNudInStepsOf"
+        Me.ucrNudInStepsOf.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudInStepsOf.TabIndex = 17
+        Me.ucrNudInStepsOf.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudTo
+        '
+        Me.ucrNudTo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudTo.Location = New System.Drawing.Point(120, 152)
+        Me.ucrNudTo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTo.Name = "ucrNudTo"
+        Me.ucrNudTo.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudTo.TabIndex = 17
+        Me.ucrNudTo.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudTickMarkersNoOfDecimalPlaces
+        '
+        Me.ucrNudTickMarkersNoOfDecimalPlaces.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTickMarkersNoOfDecimalPlaces.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudTickMarkersNoOfDecimalPlaces.Location = New System.Drawing.Point(138, 100)
+        Me.ucrNudTickMarkersNoOfDecimalPlaces.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudTickMarkersNoOfDecimalPlaces.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTickMarkersNoOfDecimalPlaces.Name = "ucrNudTickMarkersNoOfDecimalPlaces"
+        Me.ucrNudTickMarkersNoOfDecimalPlaces.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudTickMarkersNoOfDecimalPlaces.TabIndex = 17
+        Me.ucrNudTickMarkersNoOfDecimalPlaces.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudFrom
+        '
+        Me.ucrNudFrom.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFrom.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudFrom.Location = New System.Drawing.Point(120, 126)
+        Me.ucrNudFrom.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFrom.Name = "ucrNudFrom"
+        Me.ucrNudFrom.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudFrom.TabIndex = 17
+        Me.ucrNudFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrTickMarkers
         '
@@ -204,11 +276,19 @@ Partial Class ucrAxes
         Me.lblTo.TabIndex = 6
         Me.lblTo.Text = "To:"
         '
+        'ucrPnlTickmarkers
+        '
+        Me.ucrPnlTickmarkers.Location = New System.Drawing.Point(6, 18)
+        Me.ucrPnlTickmarkers.Name = "ucrPnlTickmarkers"
+        Me.ucrPnlTickmarkers.Size = New System.Drawing.Size(132, 23)
+        Me.ucrPnlTickmarkers.TabIndex = 18
+        '
         'grpScales
         '
-        Me.grpScales.Controls.Add(Me.ucrNudScalesNoOfDecimalPlaces)
-        Me.grpScales.Controls.Add(Me.ucrNudUpperLimit)
-        Me.grpScales.Controls.Add(Me.ucrNudLowerLimit)
+        Me.grpScales.Controls.Add(Me.ucrInputNoofDecimalsLimit)
+        Me.grpScales.Controls.Add(Me.ucrInputUpperLimit)
+        Me.grpScales.Controls.Add(Me.ucrInputLowerLimit)
+        Me.grpScales.Controls.Add(Me.UcrInput1)
         Me.grpScales.Controls.Add(Me.lblScalesNoDecimalPlaces)
         Me.grpScales.Controls.Add(Me.lblUpperLimit)
         Me.grpScales.Controls.Add(Me.lblLowerLimit)
@@ -271,104 +351,6 @@ Partial Class ucrAxes
         Me.rdoScalesAuto.Text = "Auto"
         Me.rdoScalesAuto.UseVisualStyleBackColor = True
         '
-        'ucrNudFrom
-        '
-        Me.ucrNudFrom.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFrom.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudFrom.Location = New System.Drawing.Point(120, 126)
-        Me.ucrNudFrom.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFrom.Name = "ucrNudFrom"
-        Me.ucrNudFrom.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudFrom.TabIndex = 17
-        Me.ucrNudFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudTo
-        '
-        Me.ucrNudTo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTo.Location = New System.Drawing.Point(120, 152)
-        Me.ucrNudTo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTo.Name = "ucrNudTo"
-        Me.ucrNudTo.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudTo.TabIndex = 17
-        Me.ucrNudTo.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudInStepsOf
-        '
-        Me.ucrNudInStepsOf.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudInStepsOf.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudInStepsOf.Location = New System.Drawing.Point(120, 182)
-        Me.ucrNudInStepsOf.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudInStepsOf.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudInStepsOf.Name = "ucrNudInStepsOf"
-        Me.ucrNudInStepsOf.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudInStepsOf.TabIndex = 17
-        Me.ucrNudInStepsOf.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudTickMarkersNoOfDecimalPlaces
-        '
-        Me.ucrNudTickMarkersNoOfDecimalPlaces.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTickMarkersNoOfDecimalPlaces.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTickMarkersNoOfDecimalPlaces.Location = New System.Drawing.Point(138, 100)
-        Me.ucrNudTickMarkersNoOfDecimalPlaces.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudTickMarkersNoOfDecimalPlaces.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTickMarkersNoOfDecimalPlaces.Name = "ucrNudTickMarkersNoOfDecimalPlaces"
-        Me.ucrNudTickMarkersNoOfDecimalPlaces.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudTickMarkersNoOfDecimalPlaces.TabIndex = 17
-        Me.ucrNudTickMarkersNoOfDecimalPlaces.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudLowerLimit
-        '
-        Me.ucrNudLowerLimit.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLowerLimit.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudLowerLimit.Location = New System.Drawing.Point(75, 48)
-        Me.ucrNudLowerLimit.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudLowerLimit.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLowerLimit.Name = "ucrNudLowerLimit"
-        Me.ucrNudLowerLimit.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudLowerLimit.TabIndex = 8
-        Me.ucrNudLowerLimit.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudUpperLimit
-        '
-        Me.ucrNudUpperLimit.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudUpperLimit.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudUpperLimit.Location = New System.Drawing.Point(75, 73)
-        Me.ucrNudUpperLimit.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudUpperLimit.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudUpperLimit.Name = "ucrNudUpperLimit"
-        Me.ucrNudUpperLimit.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudUpperLimit.TabIndex = 8
-        Me.ucrNudUpperLimit.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudScalesNoOfDecimalPlaces
-        '
-        Me.ucrNudScalesNoOfDecimalPlaces.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudScalesNoOfDecimalPlaces.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudScalesNoOfDecimalPlaces.Location = New System.Drawing.Point(144, 102)
-        Me.ucrNudScalesNoOfDecimalPlaces.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudScalesNoOfDecimalPlaces.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudScalesNoOfDecimalPlaces.Name = "ucrNudScalesNoOfDecimalPlaces"
-        Me.ucrNudScalesNoOfDecimalPlaces.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudScalesNoOfDecimalPlaces.TabIndex = 8
-        Me.ucrNudScalesNoOfDecimalPlaces.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrPnlTickmarkers
-        '
-        Me.ucrPnlTickmarkers.Location = New System.Drawing.Point(6, 18)
-        Me.ucrPnlTickmarkers.Name = "ucrPnlTickmarkers"
-        Me.ucrPnlTickmarkers.Size = New System.Drawing.Size(132, 23)
-        Me.ucrPnlTickmarkers.TabIndex = 18
-        '
-        'ucrPnlAxisTitle
-        '
-        Me.ucrPnlAxisTitle.Location = New System.Drawing.Point(6, 18)
-        Me.ucrPnlAxisTitle.Name = "ucrPnlAxisTitle"
-        Me.ucrPnlAxisTitle.Size = New System.Drawing.Size(132, 23)
-        Me.ucrPnlAxisTitle.TabIndex = 19
-        '
         'ucrPnlScales
         '
         Me.ucrPnlScales.Location = New System.Drawing.Point(0, 17)
@@ -376,21 +358,44 @@ Partial Class ucrAxes
         Me.ucrPnlScales.Size = New System.Drawing.Size(132, 23)
         Me.ucrPnlScales.TabIndex = 20
         '
-        'ucrChkDisplayTitle
+        'UcrInput1
         '
-        Me.ucrChkDisplayTitle.Checked = False
-        Me.ucrChkDisplayTitle.Location = New System.Drawing.Point(6, 44)
-        Me.ucrChkDisplayTitle.Name = "ucrChkDisplayTitle"
-        Me.ucrChkDisplayTitle.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkDisplayTitle.TabIndex = 20
+        Me.UcrInput1.AddQuotesIfUnrecognised = True
+        Me.UcrInput1.IsReadOnly = False
+        Me.UcrInput1.Location = New System.Drawing.Point(132, 33)
+        Me.UcrInput1.Name = "UcrInput1"
+        Me.UcrInput1.Size = New System.Drawing.Size(142, 29)
+        Me.UcrInput1.TabIndex = 21
         '
-        'ucrChkOverwriteTitle
+        'ucrInputLowerLimit
         '
-        Me.ucrChkOverwriteTitle.Checked = False
-        Me.ucrChkOverwriteTitle.Location = New System.Drawing.Point(6, 70)
-        Me.ucrChkOverwriteTitle.Name = "ucrChkOverwriteTitle"
-        Me.ucrChkOverwriteTitle.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkOverwriteTitle.TabIndex = 21
+        Me.ucrInputLowerLimit.AddQuotesIfUnrecognised = True
+        Me.ucrInputLowerLimit.IsMultiline = False
+        Me.ucrInputLowerLimit.IsReadOnly = False
+        Me.ucrInputLowerLimit.Location = New System.Drawing.Point(75, 46)
+        Me.ucrInputLowerLimit.Name = "ucrInputLowerLimit"
+        Me.ucrInputLowerLimit.Size = New System.Drawing.Size(50, 21)
+        Me.ucrInputLowerLimit.TabIndex = 22
+        '
+        'ucrInputUpperLimit
+        '
+        Me.ucrInputUpperLimit.AddQuotesIfUnrecognised = True
+        Me.ucrInputUpperLimit.IsMultiline = False
+        Me.ucrInputUpperLimit.IsReadOnly = False
+        Me.ucrInputUpperLimit.Location = New System.Drawing.Point(75, 76)
+        Me.ucrInputUpperLimit.Name = "ucrInputUpperLimit"
+        Me.ucrInputUpperLimit.Size = New System.Drawing.Size(50, 21)
+        Me.ucrInputUpperLimit.TabIndex = 22
+        '
+        'ucrInputNoofDecimalsLimit
+        '
+        Me.ucrInputNoofDecimalsLimit.AddQuotesIfUnrecognised = True
+        Me.ucrInputNoofDecimalsLimit.IsMultiline = False
+        Me.ucrInputNoofDecimalsLimit.IsReadOnly = False
+        Me.ucrInputNoofDecimalsLimit.Location = New System.Drawing.Point(144, 102)
+        Me.ucrInputNoofDecimalsLimit.Name = "ucrInputNoofDecimalsLimit"
+        Me.ucrInputNoofDecimalsLimit.Size = New System.Drawing.Size(50, 21)
+        Me.ucrInputNoofDecimalsLimit.TabIndex = 22
         '
         'ucrAxes
         '
@@ -436,10 +441,11 @@ Partial Class ucrAxes
     Friend WithEvents ucrNudFrom As ucrNud
     Friend WithEvents ucrPnlAxisTitle As UcrPanel
     Friend WithEvents ucrPnlTickmarkers As UcrPanel
-    Friend WithEvents ucrNudScalesNoOfDecimalPlaces As ucrNud
-    Friend WithEvents ucrNudUpperLimit As ucrNud
-    Friend WithEvents ucrNudLowerLimit As ucrNud
     Friend WithEvents ucrPnlScales As UcrPanel
     Friend WithEvents ucrChkDisplayTitle As ucrCheck
     Friend WithEvents ucrChkOverwriteTitle As ucrCheck
+    Friend WithEvents ucrInputNoofDecimalsLimit As ucrInputTextBox
+    Friend WithEvents ucrInputUpperLimit As ucrInputTextBox
+    Friend WithEvents ucrInputLowerLimit As ucrInputTextBox
+    Friend WithEvents UcrInput1 As ucrInput
 End Class

@@ -44,9 +44,6 @@ Public Class ucrAxes
         ucrNudFrom.Value = 0
         ucrNudTo.Value = 0
         ucrNudInStepsOf.Value = 0
-        ucrNudLowerLimit.Value = 0
-        ucrNudUpperLimit.Value = 0
-        ucrNudScalesNoOfDecimalPlaces.Value = 0
     End Sub
 
     Public Sub Reset()
@@ -88,14 +85,14 @@ Public Class ucrAxes
         'Scales section
         ucrPnlScales.AddRadioButton(rdoScalesAuto)
         ucrPnlScales.AddRadioButton(rdoScalesCustom)
-        ucrPnlScales.AddToLinkedControls(ucrNudScalesNoOfDecimalPlaces, {rdoScalesCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrNudScalesNoOfDecimalPlaces.SetLinkedDisplayControl(lblScalesNoDecimalPlaces)
+        ucrPnlScales.AddToLinkedControls(ucrInputNoofDecimalsLimit, {rdoScalesCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputNoofDecimalsLimit.SetLinkedDisplayControl(lblScalesNoDecimalPlaces)
 
-        ucrPnlScales.AddToLinkedControls(ucrNudLowerLimit, {rdoScalesCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrNudLowerLimit.SetLinkedDisplayControl(lblLowerLimit)
+        ucrPnlScales.AddToLinkedControls(ucrInputLowerLimit, {rdoScalesCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputLowerLimit.SetLinkedDisplayControl(lblLowerLimit)
 
-        ucrPnlScales.AddToLinkedControls(ucrNudUpperLimit, {rdoScalesCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrNudUpperLimit.SetLinkedDisplayControl(lblUpperLimit)
+        ucrPnlScales.AddToLinkedControls(ucrInputUpperLimit, {rdoScalesCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputUpperLimit.SetLinkedDisplayControl(lblUpperLimit)
 
         ucrTickMarkers.SetParameter(New RParameter("breaks"))
         dctTickMarkers.Add("Interval", Chr(34) & "" & Chr(34))
@@ -164,7 +161,7 @@ Public Class ucrAxes
 
     Private Sub ScalesFunction()
         If rdoScalesCustom.Checked Then
-            clsScalecontinuousFunction.AddParameter("limits", "c(" & ucrNudLowerLimit.Value & "," & ucrNudUpperLimit.Value & ")")
+            clsScalecontinuousFunction.AddParameter("limits", "c(" & ucrInputLowerLimit.GetText & "," & ucrInputUpperLimit.GetText & ")")
             ' clsRsyntax.AddOperatorParameter("scale_" & strAxis & "_continuous", clsRFunc:=clsScalecontinuousFunction)
         Else
             'clsRsyntax.RemoveOperatorParameter("scale_" & strAxis & "_continuous")
@@ -211,10 +208,6 @@ Public Class ucrAxes
 
     Private Sub ucrNudLowerLimit_TextChanged(sender As Object, e As EventArgs)
         ScalesFunction()
-    End Sub
-    Private Sub ucrNudScalesNoOfDecimalPlaces_TextChanged() Handles ucrNudScalesNoOfDecimalPlaces.ControlContentsChanged
-        ucrNudUpperLimit.DecimalPlaces = ucrNudScalesNoOfDecimalPlaces.Value
-        ucrNudLowerLimit.DecimalPlaces = ucrNudScalesNoOfDecimalPlaces.Value
     End Sub
 
     Private Sub ucrNudTickMarkersNoOfDecimalPlaces_ControlContentsChanged() Handles ucrNudTickMarkersNoOfDecimalPlaces.ControlContentsChanged
