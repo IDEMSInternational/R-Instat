@@ -13,11 +13,13 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 
 Public Class dlgReplaceValues
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private clsReplace As New RFunction
     Private Sub dlgReplace_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -46,7 +48,6 @@ Public Class dlgReplaceValues
         ucrReceiverReplace.SetSingleTypeStatus(True)
         ucrReceiverReplace.SetParameterIsString()
         ucrReceiverReplace.SetExcludedDataTypes({"Date"})
-        rdoNewFromAbove.Enabled = False
 
         '' Old:
         ucrPnlOld.AddRadioButton(rdoOldValue)
@@ -92,49 +93,59 @@ Public Class dlgReplaceValues
         ucrChkMax.bAddRemoveParameter = False
         ucrChkMax.SetRDefault("FALSE")
 
-        '' NEW VALUES:
-        ucrPnlNew.AddRadioButton(rdoNewValue)
-        ucrPnlNew.AddRadioButton(rdoNewMissing)
-        'ucrPnlNew.AddRadioButton(rdoNewFromAbove)
-
-        ucrPnlNew.AddParameterPresentCondition(rdoNewValue, "new_value")
-        ucrPnlNew.AddParameterValuesCondition(rdoNewMissing, "new_is_missing", "TRUE")
-
-        ucrPnlNew.AddToLinkedControls(ucrInputNewValue, {rdoNewValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
-
         ''ucrInputNewValue
         ucrInputNewValue.SetParameter(New RParameter("new_value", 4))
         ucrInputNewValue.bAddRemoveParameter = False
+
+        '' NEW VALUES:
+        ucrPnlNew.AddRadioButton(rdoNewFromAbove)
+        ucrPnlNew.AddRadioButton(rdoNewFromBelow)
+        ucrPnlNew.AddRadioButton(rdoNewValue)
+        ucrPnlNew.AddRadioButton(rdoNewMissing)
+
+        ucrPnlNew.AddParameterPresentCondition(rdoNewValue, "new_value")
+        ucrPnlNew.AddParameterPresentCondition(rdoNewMissing, "new_value", False)
+        ucrPnlNew.AddParameterPresentCondition(rdoNewFromAbove, "new_value", False)
+        ucrPnlNew.AddParameterPresentCondition(rdoNewFromBelow, "new_value", False)
+
+        ucrPnlNew.AddParameterValuesCondition(rdoNewMissing, "new_is_missing", "TRUE")
+        ucrPnlNew.AddParameterPresentCondition(rdoNewValue, "new_is_missing", False)
+        ucrPnlNew.AddParameterPresentCondition(rdoNewFromAbove, "new_is_missing", False)
+        ucrPnlNew.AddParameterPresentCondition(rdoNewFromBelow, "new_is_missing", False)
+
+        ucrPnlNew.AddParameterValuesCondition(rdoNewFromBelow, "from_last", "TRUE")
+        ucrPnlNew.AddParameterPresentCondition(rdoNewMissing, "from_last", False)
+        ucrPnlNew.AddParameterPresentCondition(rdoNewValue, "from_last", False)
+        ucrPnlNew.AddParameterPresentCondition(rdoNewFromAbove, "from_last", False)
+
+        ucrPnlNew.AddToLinkedControls(ucrInputNewValue, {rdoNewValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
+        clsReplace = New RFunction
+
         ucrSelectorReplace.Reset()
         EnableRange()
-
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data")
-        clsDefaultFunction.AddParameter("old_value", "-99")
-        clsDefaultFunction.AddParameter("new_is_missing", "TRUE")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        clsReplace.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data")
+        clsReplace.AddParameter("old_value", "-99")
+        clsReplace.AddParameter("new_is_missing", "TRUE")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsReplace)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
-    Private Sub ReopenDialog()
-
-    End Sub
-
     Private Sub TestOKEnabled()
         If (Not ucrReceiverReplace.IsEmpty()) Then
-            If ((rdoOldValue.Checked AndAlso Not ucrInputOldValue.IsEmpty) OrElse (rdoOldInterval.Checked AndAlso Not ucrInputRangeFrom.IsEmpty() AndAlso Not ucrInputRangeTo.IsEmpty()) OrElse rdoOldMissing.Checked) AndAlso ((rdoNewValue.Checked AndAlso Not ucrInputNewValue.IsEmpty) OrElse rdoNewMissing.Checked) Then
+            If (((rdoOldValue.Checked AndAlso Not ucrInputOldValue.IsEmpty) OrElse (rdoOldInterval.Checked AndAlso Not ucrInputRangeFrom.IsEmpty() AndAlso Not ucrInputRangeTo.IsEmpty()) OrElse rdoOldMissing.Checked) AndAlso ((rdoNewValue.Checked AndAlso Not ucrInputNewValue.IsEmpty) OrElse rdoNewMissing.Checked) OrElse rdoNewFromAbove.Checked OrElse rdoNewFromBelow.Checked) Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
             End If
         Else
-                ucrBase.OKEnabled(False)
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
@@ -150,28 +161,43 @@ Public Class dlgReplaceValues
         If Not ucrReceiverReplace.IsEmpty Then
             strVarType = ucrReceiverReplace.GetCurrentItemTypes(True)(0)
             If rdoOldValue.Checked Then
+                clsReplace.AddParameter("locf", "FALSE")
+                clsReplace.RemoveParameterByName("from_last")
                 If (strVarType = "numeric" OrElse strVarType = "integer") Then
                     ucrInputOldValue.AddQuotesIfUnrecognised = False
                 Else
                     ucrInputOldValue.AddQuotesIfUnrecognised = True
                 End If
-                ucrBase.clsRsyntax.RemoveParameter("old_is_missing")
+                clsReplace.RemoveParameterByName("old_is_missing")
+
             ElseIf rdoOldMissing.Checked Then
-                ucrBase.clsRsyntax.AddParameter("old_is_missing", "TRUE")
+                clsReplace.AddParameter("old_is_missing", "TRUE")
             Else
-                ucrBase.clsRsyntax.RemoveParameter("old_is_missing")
+                clsReplace.RemoveParameterByName("old_is_missing")
             End If
             If rdoNewValue.Checked Then
+                clsReplace.AddParameter("locf", "FALSE")
+                clsReplace.RemoveParameterByName("from_last")
                 If (strVarType = "numeric" OrElse strVarType = "integer") Then
                     ucrInputNewValue.AddQuotesIfUnrecognised = False
                 Else
                     ucrInputNewValue.AddQuotesIfUnrecognised = True
                 End If
-                ucrBase.clsRsyntax.RemoveParameter("new_is_missing")
+                clsReplace.RemoveParameterByName("new_is_missing")
             ElseIf rdoNewMissing.Checked Then
-                ucrBase.clsRsyntax.AddParameter("new_is_missing", "TRUE")
+                clsReplace.AddParameter("new_is_missing", "TRUE")
             Else
-                ucrBase.clsRsyntax.RemoveParameter("new_is_missing")
+                clsReplace.RemoveParameterByName("new_is_missing")
+            End If
+            If rdoNewFromAbove.Checked OrElse rdoNewFromBelow.Checked Then
+                clsReplace.AddParameter("locf", "TRUE")
+                clsReplace.RemoveParameterByName("new_is_missing")
+                clsReplace.RemoveParameterByName("old_value")
+                If rdoNewFromAbove.Checked Then
+                    clsReplace.AddParameter("from_last", "TRUE")
+                ElseIf rdoNewFromBelow.Checked Then
+                    clsReplace.AddParameter("from_last", "FALSE")
+                End If
             End If
         End If
     End Sub
@@ -196,13 +222,23 @@ Public Class dlgReplaceValues
                 rdoOldInterval.Checked = False
             End If
         End If
+        If rdoOldInterval.Checked OrElse rdoOldValue.Checked Then
+            rdoNewFromAbove.Enabled = False
+            rdoNewFromBelow.Enabled = False
+            rdoNewMissing.Enabled = True
+        Else
+            rdoNewFromAbove.Enabled = True
+            rdoNewFromBelow.Enabled = True
+            rdoNewMissing.Enabled = False
+            rdoNewValue.Checked = True
+        End If
     End Sub
 
-    Private Sub ucrReceiverReplace_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverReplace.ControlContentsChanged, ucrPnlNew.ControlContentsChanged, ucrPnlOld.ControlContentsChanged, ucrInputNewValue.ControlContentsChanged, ucrInputOldValue.ControlContentsChanged, ucrInputRangeFrom.ControlContentsChanged, ucrInputRangeTo.ControlContentsChanged
+    Private Sub Control_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverReplace.ControlContentsChanged, ucrPnlNew.ControlContentsChanged, ucrPnlOld.ControlContentsChanged, ucrInputNewValue.ControlContentsChanged, ucrInputOldValue.ControlContentsChanged, ucrInputRangeFrom.ControlContentsChanged, ucrInputRangeTo.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrPnlOld_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOld.ControlValueChanged, ucrPnlNew.ControlValueChanged
+    Private Sub ucrPnlOld_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOld.ControlValueChanged, ucrPnlNew.ControlValueChanged, ucrInputRangeFrom.ControlContentsChanged, ucrInputRangeTo.ControlContentsChanged
         InputValue()
         EnableRange()
     End Sub
