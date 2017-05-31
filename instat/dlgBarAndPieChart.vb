@@ -19,12 +19,16 @@ Public Class dlgBarAndPieChart
     Private clsRgeomBarFunction As New RFunction
     Private clsBarAesFunction As New RFunction
     Private clsPieAesFunction As New RFunction
-
     Private clsBaseOperator As New ROperator
     Private clsRCoordPolarParam As New RParameter
+
+    Private clsGraphTitleFunction As New RFunction
+    Private clsLegendFunction As New RFunction
+    Private clsRFacetFunction As New RFunction
+
     Private bReset As Boolean = True
     Private bFirstLoad As Boolean = True
-
+    Private bResetSubdialog As Boolean = False
     Private Sub cmdOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -95,7 +99,7 @@ Public Class dlgBarAndPieChart
         ucrSecondReceiver.bWithQuotes = False
         ucrSecondReceiver.SetParameterIsString()
 
-        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
+        ' sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         ucrSaveBar.SetIsComboBox()
         ucrSaveBar.SetCheckBoxText("Save Graph")
         ucrSaveBar.SetDataFrameSelector(ucrBarChartSelector.ucrAvailableDataFrames)
@@ -127,6 +131,7 @@ Public Class dlgBarAndPieChart
         ucrBarChartSelector.Reset()
         ucrFactorReceiver.SetMeAsReceiver()
         ucrSaveBar.Reset()
+        bResetSubdialog = True
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
@@ -145,6 +150,18 @@ Public Class dlgBarAndPieChart
 
         clsRgeomBarFunction.SetPackageName("ggplot2")
         clsRgeomBarFunction.SetRCommand("geom_bar")
+
+        clsGraphTitleFunction.SetPackageName("ggplot2")
+        clsGraphTitleFunction.SetRCommand("ggtitle")
+        clsBaseOperator.AddParameter("ggtile", clsRFunctionParameter:=clsGraphTitleFunction)
+
+        clsLegendFunction.SetPackageName("ggplot2")
+        clsLegendFunction.SetRCommand("labs")
+        clsBaseOperator.AddParameter("ledendtitle", clsRFunctionParameter:=clsLegendFunction)
+
+        clsRFacetFunction.SetPackageName("ggplot2")
+        clsRFacetFunction.SetRCommand("facet_wrap")
+        clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsRFacetFunction)
 
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
@@ -180,7 +197,9 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgPlots.SetRFunction(clsBaseOperator, clsGraphTitleFunction, clsLegendFunction, clsRFacetFunction, bResetSubdialog)
         sdgPlots.SetDataFrame(strNewDataFrame:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        bResetSubdialog = False
         sdgPlots.ShowDialog()
         'Warning, when coordinate flip is added to coordinates tab on sdgPLots, then link with ucrChkFlipCoordinates...
     End Sub
