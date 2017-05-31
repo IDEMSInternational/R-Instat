@@ -232,10 +232,9 @@ Public Class dlgReplaceValues
             rdoNewMissing.Enabled = False
             rdoNewValue.Checked = True
         End If
-
     End Sub
 
-    Private Sub ucrReceiverReplace_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverReplace.ControlContentsChanged, ucrPnlNew.ControlContentsChanged, ucrPnlOld.ControlContentsChanged, ucrInputNewValue.ControlContentsChanged, ucrInputOldValue.ControlContentsChanged, ucrInputRangeFrom.ControlContentsChanged, ucrInputRangeTo.ControlContentsChanged
+    Private Sub Control_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverReplace.ControlContentsChanged, ucrPnlNew.ControlContentsChanged, ucrPnlOld.ControlContentsChanged, ucrInputNewValue.ControlContentsChanged, ucrInputOldValue.ControlContentsChanged, ucrInputRangeFrom.ControlContentsChanged, ucrInputRangeTo.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
@@ -248,5 +247,4 @@ Public Class dlgReplaceValues
         InputValue()
         EnableRange()
     End Sub
-
 End Class

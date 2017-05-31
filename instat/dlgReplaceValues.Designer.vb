@@ -28,20 +28,20 @@ Partial Class dlgReplaceValues
         Me.rdoOldMissing = New System.Windows.Forms.RadioButton()
         Me.rdoOldInterval = New System.Windows.Forms.RadioButton()
         Me.lblRangeMin = New System.Windows.Forms.Label()
-        Me.grpNew = New System.Windows.Forms.GroupBox()
-        Me.rdoNewFromBelow = New System.Windows.Forms.RadioButton()
-        Me.rdoNewFromAbove = New System.Windows.Forms.RadioButton()
-        Me.rdoNewMissing = New System.Windows.Forms.RadioButton()
-        Me.rdoNewValue = New System.Windows.Forms.RadioButton()
-        Me.lblSelectedColumns = New System.Windows.Forms.Label()
         Me.ucrChkMax = New instat.ucrCheck()
         Me.ucrInputRangeTo = New instat.ucrInputTextBox()
         Me.ucrChkMin = New instat.ucrCheck()
         Me.ucrInputRangeFrom = New instat.ucrInputTextBox()
         Me.ucrInputOldValue = New instat.ucrInputTextBox()
         Me.ucrPnlOld = New instat.UcrPanel()
+        Me.grpNew = New System.Windows.Forms.GroupBox()
+        Me.rdoNewFromBelow = New System.Windows.Forms.RadioButton()
+        Me.rdoNewFromAbove = New System.Windows.Forms.RadioButton()
         Me.ucrInputNewValue = New instat.ucrInputTextBox()
+        Me.rdoNewMissing = New System.Windows.Forms.RadioButton()
+        Me.rdoNewValue = New System.Windows.Forms.RadioButton()
         Me.ucrPnlNew = New instat.UcrPanel()
+        Me.lblSelectedColumns = New System.Windows.Forms.Label()
         Me.ucrReceiverReplace = New instat.ucrReceiverMultiple()
         Me.ucrSelectorReplace = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
@@ -64,7 +64,7 @@ Partial Class dlgReplaceValues
         Me.grpOld.Controls.Add(Me.ucrPnlOld)
         Me.grpOld.Location = New System.Drawing.Point(10, 194)
         Me.grpOld.Name = "grpOld"
-        Me.grpOld.Size = New System.Drawing.Size(237, 161)
+        Me.grpOld.Size = New System.Drawing.Size(237, 148)
         Me.grpOld.TabIndex = 3
         Me.grpOld.TabStop = False
         Me.grpOld.Tag = "Old"
@@ -123,76 +123,6 @@ Partial Class dlgReplaceValues
         Me.lblRangeMin.Tag = "Minimum"
         Me.lblRangeMin.Text = "Minimum:"
         '
-        'grpNew
-        '
-        Me.grpNew.Controls.Add(Me.rdoNewFromBelow)
-        Me.grpNew.Controls.Add(Me.rdoNewFromAbove)
-        Me.grpNew.Controls.Add(Me.ucrInputNewValue)
-        Me.grpNew.Controls.Add(Me.rdoNewMissing)
-        Me.grpNew.Controls.Add(Me.rdoNewValue)
-        Me.grpNew.Controls.Add(Me.ucrPnlNew)
-        Me.grpNew.Location = New System.Drawing.Point(253, 194)
-        Me.grpNew.Name = "grpNew"
-        Me.grpNew.Size = New System.Drawing.Size(194, 161)
-        Me.grpNew.TabIndex = 4
-        Me.grpNew.TabStop = False
-        Me.grpNew.Tag = "New"
-        Me.grpNew.Text = "New"
-        '
-        'rdoNewFromBelow
-        '
-        Me.rdoNewFromBelow.AutoSize = True
-        Me.rdoNewFromBelow.Location = New System.Drawing.Point(14, 99)
-        Me.rdoNewFromBelow.Name = "rdoNewFromBelow"
-        Me.rdoNewFromBelow.Size = New System.Drawing.Size(181, 17)
-        Me.rdoNewFromBelow.TabIndex = 5
-        Me.rdoNewFromBelow.TabStop = True
-        Me.rdoNewFromBelow.Text = "First Observation Carried Forward"
-        Me.rdoNewFromBelow.UseVisualStyleBackColor = True
-        '
-        'rdoNewFromAbove
-        '
-        Me.rdoNewFromAbove.AutoSize = True
-        Me.rdoNewFromAbove.Location = New System.Drawing.Point(14, 76)
-        Me.rdoNewFromAbove.Name = "rdoNewFromAbove"
-        Me.rdoNewFromAbove.Size = New System.Drawing.Size(182, 17)
-        Me.rdoNewFromAbove.TabIndex = 4
-        Me.rdoNewFromAbove.TabStop = True
-        Me.rdoNewFromAbove.Text = "Last Observation Carried Forward"
-        Me.rdoNewFromAbove.UseVisualStyleBackColor = True
-        '
-        'rdoNewMissing
-        '
-        Me.rdoNewMissing.AutoSize = True
-        Me.rdoNewMissing.Location = New System.Drawing.Point(14, 53)
-        Me.rdoNewMissing.Name = "rdoNewMissing"
-        Me.rdoNewMissing.Size = New System.Drawing.Size(90, 17)
-        Me.rdoNewMissing.TabIndex = 3
-        Me.rdoNewMissing.TabStop = True
-        Me.rdoNewMissing.Text = "Missing Value"
-        Me.rdoNewMissing.UseVisualStyleBackColor = True
-        '
-        'rdoNewValue
-        '
-        Me.rdoNewValue.AutoSize = True
-        Me.rdoNewValue.Location = New System.Drawing.Point(14, 30)
-        Me.rdoNewValue.Name = "rdoNewValue"
-        Me.rdoNewValue.Size = New System.Drawing.Size(52, 17)
-        Me.rdoNewValue.TabIndex = 1
-        Me.rdoNewValue.TabStop = True
-        Me.rdoNewValue.Text = "Value"
-        Me.rdoNewValue.UseVisualStyleBackColor = True
-        '
-        'lblSelectedColumns
-        '
-        Me.lblSelectedColumns.AutoSize = True
-        Me.lblSelectedColumns.Location = New System.Drawing.Point(249, 46)
-        Me.lblSelectedColumns.Name = "lblSelectedColumns"
-        Me.lblSelectedColumns.Size = New System.Drawing.Size(101, 13)
-        Me.lblSelectedColumns.TabIndex = 1
-        Me.lblSelectedColumns.Tag = "Selected_Column(s)"
-        Me.lblSelectedColumns.Text = "Selected Column(s):"
-        '
         'ucrChkMax
         '
         Me.ucrChkMax.Checked = False
@@ -243,8 +173,46 @@ Partial Class dlgReplaceValues
         '
         Me.ucrPnlOld.Location = New System.Drawing.Point(3, 17)
         Me.ucrPnlOld.Name = "ucrPnlOld"
-        Me.ucrPnlOld.Size = New System.Drawing.Size(228, 131)
+        Me.ucrPnlOld.Size = New System.Drawing.Size(228, 125)
         Me.ucrPnlOld.TabIndex = 0
+        '
+        'grpNew
+        '
+        Me.grpNew.Controls.Add(Me.rdoNewFromBelow)
+        Me.grpNew.Controls.Add(Me.rdoNewFromAbove)
+        Me.grpNew.Controls.Add(Me.ucrInputNewValue)
+        Me.grpNew.Controls.Add(Me.rdoNewMissing)
+        Me.grpNew.Controls.Add(Me.rdoNewValue)
+        Me.grpNew.Controls.Add(Me.ucrPnlNew)
+        Me.grpNew.Location = New System.Drawing.Point(253, 194)
+        Me.grpNew.Name = "grpNew"
+        Me.grpNew.Size = New System.Drawing.Size(194, 148)
+        Me.grpNew.TabIndex = 4
+        Me.grpNew.TabStop = False
+        Me.grpNew.Tag = "New"
+        Me.grpNew.Text = "New"
+        '
+        'rdoNewFromBelow
+        '
+        Me.rdoNewFromBelow.AutoSize = True
+        Me.rdoNewFromBelow.Location = New System.Drawing.Point(14, 99)
+        Me.rdoNewFromBelow.Name = "rdoNewFromBelow"
+        Me.rdoNewFromBelow.Size = New System.Drawing.Size(181, 17)
+        Me.rdoNewFromBelow.TabIndex = 5
+        Me.rdoNewFromBelow.TabStop = True
+        Me.rdoNewFromBelow.Text = "First Observation Carried Forward"
+        Me.rdoNewFromBelow.UseVisualStyleBackColor = True
+        '
+        'rdoNewFromAbove
+        '
+        Me.rdoNewFromAbove.AutoSize = True
+        Me.rdoNewFromAbove.Location = New System.Drawing.Point(14, 76)
+        Me.rdoNewFromAbove.Name = "rdoNewFromAbove"
+        Me.rdoNewFromAbove.Size = New System.Drawing.Size(182, 17)
+        Me.rdoNewFromAbove.TabIndex = 4
+        Me.rdoNewFromAbove.TabStop = True
+        Me.rdoNewFromAbove.Text = "Last Observation Carried Forward"
+        Me.rdoNewFromAbove.UseVisualStyleBackColor = True
         '
         'ucrInputNewValue
         '
@@ -256,12 +224,44 @@ Partial Class dlgReplaceValues
         Me.ucrInputNewValue.Size = New System.Drawing.Size(93, 21)
         Me.ucrInputNewValue.TabIndex = 2
         '
+        'rdoNewMissing
+        '
+        Me.rdoNewMissing.AutoSize = True
+        Me.rdoNewMissing.Location = New System.Drawing.Point(14, 53)
+        Me.rdoNewMissing.Name = "rdoNewMissing"
+        Me.rdoNewMissing.Size = New System.Drawing.Size(90, 17)
+        Me.rdoNewMissing.TabIndex = 3
+        Me.rdoNewMissing.TabStop = True
+        Me.rdoNewMissing.Text = "Missing Value"
+        Me.rdoNewMissing.UseVisualStyleBackColor = True
+        '
+        'rdoNewValue
+        '
+        Me.rdoNewValue.AutoSize = True
+        Me.rdoNewValue.Location = New System.Drawing.Point(14, 30)
+        Me.rdoNewValue.Name = "rdoNewValue"
+        Me.rdoNewValue.Size = New System.Drawing.Size(52, 17)
+        Me.rdoNewValue.TabIndex = 1
+        Me.rdoNewValue.TabStop = True
+        Me.rdoNewValue.Text = "Value"
+        Me.rdoNewValue.UseVisualStyleBackColor = True
+        '
         'ucrPnlNew
         '
         Me.ucrPnlNew.Location = New System.Drawing.Point(6, 19)
         Me.ucrPnlNew.Name = "ucrPnlNew"
         Me.ucrPnlNew.Size = New System.Drawing.Size(189, 111)
         Me.ucrPnlNew.TabIndex = 0
+        '
+        'lblSelectedColumns
+        '
+        Me.lblSelectedColumns.AutoSize = True
+        Me.lblSelectedColumns.Location = New System.Drawing.Point(249, 46)
+        Me.lblSelectedColumns.Name = "lblSelectedColumns"
+        Me.lblSelectedColumns.Size = New System.Drawing.Size(101, 13)
+        Me.lblSelectedColumns.TabIndex = 1
+        Me.lblSelectedColumns.Tag = "Selected_Column(s)"
+        Me.lblSelectedColumns.Text = "Selected Column(s):"
         '
         'ucrReceiverReplace
         '
@@ -287,7 +287,7 @@ Partial Class dlgReplaceValues
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 367)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 353)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 5
@@ -296,7 +296,7 @@ Partial Class dlgReplaceValues
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(459, 424)
+        Me.ClientSize = New System.Drawing.Size(459, 414)
         Me.Controls.Add(Me.grpOld)
         Me.Controls.Add(Me.lblSelectedColumns)
         Me.Controls.Add(Me.grpNew)
