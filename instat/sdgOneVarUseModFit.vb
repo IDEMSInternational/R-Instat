@@ -80,7 +80,7 @@ Public Class sdgOneVarUseModFit
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRFunction(clsNewRSeqFunction As RFunction, clsNewRBootFunction As RFunction, clsNewQuantileFunction As RFunction, clsNewReceiver As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRFunction(clsNewRSeqFunction As RFunction, clsNewRBootFunction As RFunction, clsNewQuantileFunction As RFunction, clsNewReceiver As RFunction, clsNewPlotFunction As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
@@ -88,6 +88,7 @@ Public Class sdgOneVarUseModFit
         clsOneVarRBootFunction = clsNewRBootFunction
         clsOneVarQuantileFunction = clsNewQuantileFunction
         clsRReceiver = clsNewReceiver
+        clsRPlotFunction = clsNewPlotFunction
 
         'Setting Rcode for the sub dialog
         ucrNudFrom.SetRCode(clsRSeqFunction, bReset)
@@ -96,10 +97,11 @@ Public Class sdgOneVarUseModFit
         ucrChkParametric.SetRCode(clsOneVarRBootFunction, bReset)
         ucrNudIterations.SetRCode(clsOneVarRBootFunction, bReset)
         ucrNudCI.SetRCode(clsOneVarQuantileFunction, bReset)
+        ucrPnlPlots.SetRCode(clsRPlotFunction, bReset)
     End Sub
 
     Public Sub SetDefaults()
-        rdoPlotAll.Checked = True
+        'rdoPlotAll.Checked = True
         rdoSequence.Checked = True
         SetPlotOptions()
     End Sub
