@@ -86,6 +86,7 @@ Public Class dlgUseDate
         ucrChkShiftDay.SetRDefault("FALSE")
 
         ucrNudShiftStartDay.SetParameter(New RParameter("shift_start_day"))
+        ucrNudShiftStartDay.SetRDefault(1)
 
         ucrInputComboBoxMonth.SetParameter(New RParameter("shift_start_month"))
         Dim dctMonth As New Dictionary(Of String, String)
@@ -147,7 +148,6 @@ Public Class dlgUseDate
     Private Sub SetDefaults()
         Dim clsDefaultFunction As New RFunction
         ucrSelectorUseDate.Reset()
-        clsDefaultFunction.SetRCommand("shift_day")
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$split_date")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
     End Sub
