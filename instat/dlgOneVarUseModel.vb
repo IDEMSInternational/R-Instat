@@ -20,7 +20,7 @@ Public Class dlgOneVarUseModel
     Public bfirstload As Boolean = True
     Public bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
-   Public clsRBootFunction, clsQuantileFunction, clsSeqFunction, clsReceiver As New RFunction
+    Public clsRBootFunction, clsQuantileFunction, clsSeqFunction, clsReceiver, clsRPlotFunction As New RFunction
     Private Sub dlgOneVarUseModel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bfirstload Then
@@ -73,12 +73,16 @@ Public Class dlgOneVarUseModel
         clsRBootFunction = New RFunction
         clsQuantileFunction = New RFunction
         clsSeqFunction = New RFunction
+        clsRPlotFunction = New RFunction
 
         ucrSelectorUseModel.Reset()
         ucrSaveObjects.Enabled = False 'for now
         ucrSaveObjects.Reset()
         ucrNewDataFrameName.Reset()
         sdgOneVarUseModFit.SetDefaults()
+
+        'clsRPlotFunction.SetPackageName("")
+        clsRPlotFunction.SetRCommand("plot")
 
         clsSeqFunction.SetRCommand("seq")
         clsSeqFunction.AddParameter("from", 0)
@@ -150,7 +154,7 @@ Public Class dlgOneVarUseModel
     End Sub
 
     Private Sub cmdFitModel_Click(sender As Object, e As EventArgs) Handles cmdFitModelandBootstrap.Click
-        sdgOneVarUseModFit.SetRFunction(clsSeqFunction, clsRBootFunction, clsQuantileFunction, clsReceiver, bResetSubdialog)
+        sdgOneVarUseModFit.SetRFunction(clsSeqFunction, clsRBootFunction, clsQuantileFunction, clsReceiver, clsRPlotFunction, bResetSubdialog)
         bResetSubdialog = False
         sdgOneVarUseModFit.ShowDialog()
     End Sub
