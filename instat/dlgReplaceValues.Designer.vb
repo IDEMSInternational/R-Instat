@@ -87,7 +87,7 @@ Partial Class dlgReplaceValues
         Me.lblRangeMax.Location = New System.Drawing.Point(14, 117)
         Me.lblRangeMax.Name = "lblRangeMax"
         Me.lblRangeMax.Size = New System.Drawing.Size(54, 13)
-        Me.lblRangeMax.TabIndex = 8
+        Me.lblRangeMax.TabIndex = 9
         Me.lblRangeMax.Tag = "Maximum"
         Me.lblRangeMax.Text = "Maximum:"
         '
@@ -119,7 +119,7 @@ Partial Class dlgReplaceValues
         Me.lblRangeMin.Location = New System.Drawing.Point(14, 96)
         Me.lblRangeMin.Name = "lblRangeMin"
         Me.lblRangeMin.Size = New System.Drawing.Size(51, 13)
-        Me.lblRangeMin.TabIndex = 5
+        Me.lblRangeMin.TabIndex = 6
         Me.lblRangeMin.Tag = "Minimum"
         Me.lblRangeMin.Text = "Minimum:"
         '
@@ -199,7 +199,7 @@ Partial Class dlgReplaceValues
         Me.ucrChkMax.Location = New System.Drawing.Point(151, 116)
         Me.ucrChkMax.Name = "ucrChkMax"
         Me.ucrChkMax.Size = New System.Drawing.Size(80, 20)
-        Me.ucrChkMax.TabIndex = 10
+        Me.ucrChkMax.TabIndex = 0
         '
         'ucrInputRangeTo
         '
@@ -209,7 +209,7 @@ Partial Class dlgReplaceValues
         Me.ucrInputRangeTo.Location = New System.Drawing.Point(71, 114)
         Me.ucrInputRangeTo.Name = "ucrInputRangeTo"
         Me.ucrInputRangeTo.Size = New System.Drawing.Size(74, 21)
-        Me.ucrInputRangeTo.TabIndex = 9
+        Me.ucrInputRangeTo.TabIndex = 10
         '
         'ucrChkMin
         '
@@ -217,7 +217,7 @@ Partial Class dlgReplaceValues
         Me.ucrChkMin.Location = New System.Drawing.Point(151, 93)
         Me.ucrChkMin.Name = "ucrChkMin"
         Me.ucrChkMin.Size = New System.Drawing.Size(80, 20)
-        Me.ucrChkMin.TabIndex = 7
+        Me.ucrChkMin.TabIndex = 8
         '
         'ucrInputRangeFrom
         '
@@ -227,7 +227,7 @@ Partial Class dlgReplaceValues
         Me.ucrInputRangeFrom.Location = New System.Drawing.Point(71, 93)
         Me.ucrInputRangeFrom.Name = "ucrInputRangeFrom"
         Me.ucrInputRangeFrom.Size = New System.Drawing.Size(74, 21)
-        Me.ucrInputRangeFrom.TabIndex = 6
+        Me.ucrInputRangeFrom.TabIndex = 7
         '
         'ucrInputOldValue
         '
