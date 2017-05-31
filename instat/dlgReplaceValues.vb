@@ -49,7 +49,7 @@ Public Class dlgReplaceValues
         ucrReceiverReplace.SetParameterIsString()
         ucrReceiverReplace.SetExcludedDataTypes({"Date"})
 
-        '' Old:
+        'Old Values
         ucrPnlOld.AddRadioButton(rdoOldValue)
         ucrPnlOld.AddRadioButton(rdoOldMissing)
         ucrPnlOld.AddRadioButton(rdoOldInterval)
@@ -66,35 +66,37 @@ Public Class dlgReplaceValues
         ucrPnlOld.AddToLinkedControls(ucrChkMax, {rdoOldInterval}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         'ucrInputOldValue
-        ucrInputOldValue.SetParameter(New RParameter("old_value", 2))
+        ucrInputOldValue.SetParameter(New RParameter("old_value", 3))
         ucrInputOldValue.bAddRemoveParameter = False
 
         'ucrInputRangeFrom
-        ucrInputRangeFrom.SetParameter(New RParameter("start_value", 2))
+        ucrInputRangeFrom.SetParameter(New RParameter("start_value", 5))
         ucrInputRangeFrom.AddQuotesIfUnrecognised = False
         ucrInputRangeFrom.bAddRemoveParameter = False
         ucrInputRangeFrom.SetLinkedDisplayControl(lblRangeMin)
+        ucrInputRangeFrom.SetRDefault("NA")
 
-        ucrChkMin.SetParameter(New RParameter("closed_start_value"))
+        ucrChkMin.SetParameter(New RParameter("closed_start_value", 9))
         ucrChkMin.SetText("Including")
         ucrChkMin.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkMin.bAddRemoveParameter = False
         ucrChkMin.SetRDefault("FALSE")
 
         'ucrInputRangeTo
-        ucrInputRangeTo.SetParameter(New RParameter("end_value", 3))
+        ucrInputRangeTo.SetParameter(New RParameter("end_value", 6))
         ucrInputRangeTo.AddQuotesIfUnrecognised = False
         ucrInputRangeTo.bAddRemoveParameter = False
         ucrInputRangeTo.SetLinkedDisplayControl(lblRangeMax)
+        ucrInputRangeTo.SetRDefault("NA")
 
-        ucrChkMax.SetParameter(New RParameter("closed_end_value"))
+        ucrChkMax.SetParameter(New RParameter("closed_end_value", 10))
         ucrChkMax.SetText("Including")
         ucrChkMax.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkMax.bAddRemoveParameter = False
         ucrChkMax.SetRDefault("FALSE")
 
         ''ucrInputNewValue
-        ucrInputNewValue.SetParameter(New RParameter("new_value", 4))
+        ucrInputNewValue.SetParameter(New RParameter("new_value", 7))
         ucrInputNewValue.bAddRemoveParameter = False
 
         '' NEW VALUES:
@@ -127,9 +129,10 @@ Public Class dlgReplaceValues
 
         ucrSelectorReplace.Reset()
         EnableRange()
+
         clsReplace.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data")
-        clsReplace.AddParameter("old_value", "-99")
-        clsReplace.AddParameter("new_is_missing", "TRUE")
+        clsReplace.AddParameter("old_value", "-99", iPosition:=3)
+        clsReplace.AddParameter("new_is_missing", "TRUE", iPosition:=8)
         ucrBase.clsRsyntax.SetBaseRFunction(clsReplace)
     End Sub
 
@@ -234,10 +237,6 @@ Public Class dlgReplaceValues
         End If
     End Sub
 
-    Private Sub Control_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverReplace.ControlContentsChanged, ucrPnlNew.ControlContentsChanged, ucrPnlOld.ControlContentsChanged, ucrInputNewValue.ControlContentsChanged, ucrInputOldValue.ControlContentsChanged, ucrInputRangeFrom.ControlContentsChanged, ucrInputRangeTo.ControlContentsChanged
-        TestOKEnabled()
-    End Sub
-
     Private Sub ucrPnlOld_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOld.ControlValueChanged, ucrPnlNew.ControlValueChanged, ucrInputRangeFrom.ControlContentsChanged, ucrInputRangeTo.ControlContentsChanged
         InputValue()
         EnableRange()
@@ -246,5 +245,9 @@ Public Class dlgReplaceValues
     Private Sub ucrReceiverReplace_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverReplace.ControlValueChanged
         InputValue()
         EnableRange()
+    End Sub
+
+    Private Sub Control_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverReplace.ControlContentsChanged, ucrPnlNew.ControlContentsChanged, ucrPnlOld.ControlContentsChanged, ucrInputNewValue.ControlContentsChanged, ucrInputOldValue.ControlContentsChanged, ucrInputRangeFrom.ControlContentsChanged, ucrInputRangeTo.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class
