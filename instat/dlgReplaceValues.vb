@@ -150,8 +150,8 @@ Public Class dlgReplaceValues
         EnableRange()
         clsReplace.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data")
         clsReplace.AddParameter("old_value", "-99")
-        clsReplace.AddParameter("new_value", "1")
-        'clsReplace.AddParameter("new_is_missing", "TRUE")
+        'clsReplace.AddParameter("new_value", "1")
+        clsReplace.AddParameter("new_is_missing", "TRUE")
         ucrBase.clsRsyntax.SetBaseRFunction(clsReplace)
     End Sub
 
@@ -248,7 +248,7 @@ Public Class dlgReplaceValues
         End If
     End Sub
 
-    Private Sub ucrReceiverReplace_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverReplace.ControlContentsChanged, ucrPnlNew.ControlContentsChanged, ucrPnlOld.ControlContentsChanged, ucrInputNewValue.ControlContentsChanged, ucrInputOldValue.ControlContentsChanged, ucrInputRangeFrom.ControlContentsChanged, ucrInputRangeTo.ControlContentsChanged, ucrNewDataFrame.ControlContentsChanged
+    Private Sub ucrReceiverReplace_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverReplace.ControlContentsChanged, ucrPnlNew.ControlContentsChanged, ucrPnlOld.ControlContentsChanged, ucrInputNewValue.ControlContentsChanged, ucrInputOldValue.ControlContentsChanged, ucrInputRangeFrom.ControlContentsChanged, ucrInputRangeTo.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
