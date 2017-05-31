@@ -139,7 +139,7 @@ Public Class dlgReplaceValues
 
     Private Sub TestOKEnabled()
         If (Not ucrReceiverReplace.IsEmpty()) Then
-            If ((rdoOldValue.Checked AndAlso Not ucrInputOldValue.IsEmpty) OrElse (rdoOldInterval.Checked AndAlso Not ucrInputRangeFrom.IsEmpty() AndAlso Not ucrInputRangeTo.IsEmpty()) OrElse rdoOldMissing.Checked) AndAlso ((rdoNewValue.Checked AndAlso Not ucrInputNewValue.IsEmpty) OrElse rdoNewMissing.Checked) OrElse rdoNewFromAbove.Checked OrElse rdoNewFromBelow.Checked Then
+            If (((rdoOldValue.Checked AndAlso Not ucrInputOldValue.IsEmpty) OrElse (rdoOldInterval.Checked AndAlso Not ucrInputRangeFrom.IsEmpty() AndAlso Not ucrInputRangeTo.IsEmpty()) OrElse rdoOldMissing.Checked) AndAlso ((rdoNewValue.Checked AndAlso Not ucrInputNewValue.IsEmpty) OrElse rdoNewMissing.Checked) OrElse rdoNewFromAbove.Checked OrElse rdoNewFromBelow.Checked) Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
@@ -222,6 +222,13 @@ Public Class dlgReplaceValues
                 rdoOldInterval.Checked = False
             End If
         End If
+        'If rdoOldInterval.Checked OrElse rdoOldValue.Checked Then
+        '    rdoNewFromAbove.Visible = False
+        '    rdoNewFromBelow.Visible = False
+        'ElseIf rdoOldMissing.checked Then
+        '    rdoNewFromAbove.Visible = True
+        '    rdoNewFromBelow.Visible = True
+        'End If
     End Sub
 
     Private Sub ucrReceiverReplace_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverReplace.ControlContentsChanged, ucrPnlNew.ControlContentsChanged, ucrPnlOld.ControlContentsChanged, ucrInputNewValue.ControlContentsChanged, ucrInputOldValue.ControlContentsChanged, ucrInputRangeFrom.ControlContentsChanged, ucrInputRangeTo.ControlContentsChanged
