@@ -58,8 +58,6 @@ Public Class dlgCalculator
         ucrCalc.chkSaveResultInto.Checked = True
         SaveResults()
         ucrCalc.ucrSelectorForCalculations.bUseCurrentFilter = False
-        ucrCalc.cmdDoy.Enabled = False
-        ucrCalc.cmdDek.Enabled = False
         ucrBase.Visible = True
     End Sub
 
@@ -81,6 +79,8 @@ Public Class dlgCalculator
         ucrCalc.ucrSaveResultInto.SetDataFrameSelector(ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames)
         ucrCalc.ucrSelectorForCalculations.Reset()
         ucrCalc.ucrSaveResultInto.SetValidationTypeAsRVariable()
+        ucrCalc.cmdDoy.Enabled = False
+        ucrCalc.cmdDek.Enabled = False
     End Sub
 
     Private Sub ucrCalc_SaveNameChanged() Handles ucrCalc.SaveNameChanged
