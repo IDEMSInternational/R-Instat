@@ -605,7 +605,6 @@ data_object$set("public", "replace_value_in_data", function(col_names, rows, old
     done = FALSE
     str_data_type <- self$get_variables_metadata(property = data_type_label, column = col_name)
     curr_column <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
-   #locf = TRUE
     if(locf){
       my_data <- na.locf(curr_column, fromLast = from_last, na.rm = FALSE)
     }
