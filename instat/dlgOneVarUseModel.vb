@@ -80,7 +80,6 @@ Public Class dlgOneVarUseModel
         ucrSaveObjects.Enabled = False ' temporary
         ucrSaveObjects.Reset()
         ucrNewDataFrameName.Reset()
-        sdgOneVarUseModFit.SetDefaults()
 
         clsRPlotFunction.SetPackageName("graphics")
         clsRPlotFunction.SetRCommand("plot")
