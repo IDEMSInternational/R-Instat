@@ -18,9 +18,7 @@ Imports instat.Translations
 Public Class dlgDescribeOneVariable
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsSummaryFunction As New RFunction
-    Private clsInstatSummaryFunction As New RFunction
-    Private clsSummariesList As New RFunction
+    Private clsSummaryFunction, clsSummariesList, clsInstatSummaryFunction As New RFunction
     Private bResetSubdialog As Boolean = False
 
     Private Sub dlgDescriptiveStatistics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -35,6 +33,31 @@ Public Class dlgDescribeOneVariable
         bReset = False
         TestOKEnabled()
         autoTranslate(Me)
+    End Sub
+
+    Private Sub InitialiseDialog()
+        ucrBaseDescribeOneVar.iHelpTopicID = 410
+        ucrBaseDescribeOneVar.clsRsyntax.iCallType = 2
+
+        'The selector is only used for one of the functions. Therefore it's parameter name is always the same. So this can be done in Initialise.
+        ucrSelectorDescribeOneVar.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorDescribeOneVar.SetParameterIsString()
+
+        ucrReceiverDescribeOneVar.Selector = ucrSelectorDescribeOneVar
+        ucrReceiverDescribeOneVar.SetMeAsReceiver()
+
+        ucrChkOmitMissing.SetText("Omit Missing Values")
+        ucrChkOmitMissing.SetRDefault("FALSE")
+
+        ucrChkCustomise.SetText("Customise")
+        ucrChkCustomise.AddFunctionNamesCondition(True, frmMain.clsRLink.strInstatDataObject & "$summary")
+        ucrChkCustomise.AddFunctionNamesCondition(False, "summary")
+
+        ucrChkSaveResult.SetText("Save Result") 'this is disabled in the initial implementation
+        ucrChkSaveResult.Enabled = False
+        'ucrChkSaveResult.SetParameter(New RParameter("store_results"))
+        'ucrChkSaveResult.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        'ucrChkSaveResult.SetRDefault("FALSE")
     End Sub
 
     Private Sub SetDefaults()
@@ -72,36 +95,13 @@ Public Class dlgDescribeOneVariable
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         'When we set the R code, the receiver and checkboxs should have whatever is currently the base function
-        ucrReceiverDescribeOneVar.SetRCode(ucrBaseDescribeOneVar.clsRsyntax.clsBaseFunction, bReset)
+        ucrReceiverDescribeOneVar.AddAdditionalCodeParameterPair(clsInstatSummaryFunction, New RParameter("columns_to_summarise", 0), iAdditionalPairNo:=1)
+        ucrReceiverDescribeOneVar.SetParameterIsString()
+        ucrReceiverDescribeOneVar.SetRCode(clsSummaryFunction, bReset)
         ucrChkOmitMissing.SetRCode(ucrBaseDescribeOneVar.clsRsyntax.clsBaseFunction, bReset)
         ucrChkCustomise.SetRCode(ucrBaseDescribeOneVar.clsRsyntax.clsBaseFunction, bReset)
         'However, the selector always has the Instat function. This prevents the selector's parameter being added in to the wrong function.
         ucrSelectorDescribeOneVar.SetRCode(clsInstatSummaryFunction, bReset)
-    End Sub
-
-    Private Sub InitialiseDialog()
-        ucrBaseDescribeOneVar.iHelpTopicID = 410
-        ucrBaseDescribeOneVar.clsRsyntax.iCallType = 2
-
-        'The selector is only used for one of the functions. Therefore it's parameter name is always the same. So this can be done in Initialise.
-        ucrSelectorDescribeOneVar.SetParameter(New RParameter("data_name", 0))
-        ucrSelectorDescribeOneVar.SetParameterIsString()
-
-        ucrReceiverDescribeOneVar.Selector = ucrSelectorDescribeOneVar
-        ucrReceiverDescribeOneVar.SetMeAsReceiver()
-
-        ucrChkOmitMissing.SetText("Omit Missing Values")
-        ucrChkOmitMissing.SetRDefault("FALSE")
-
-        ucrChkCustomise.SetText("Customise")
-        ucrChkCustomise.AddFunctionNamesCondition(True, frmMain.clsRLink.strInstatDataObject & "$summary")
-        ucrChkCustomise.AddFunctionNamesCondition(False, "summary")
-
-        ucrChkSaveResult.SetText("Save Result") 'this is disabled in the initial implementation
-        ucrChkSaveResult.Enabled = False
-        'ucrChkSaveResult.SetParameter(New RParameter("store_results"))
-        'ucrChkSaveResult.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        'ucrChkSaveResult.SetRDefault("FALSE")
     End Sub
 
     Public Sub TestOKEnabled()
@@ -123,15 +123,11 @@ Public Class dlgDescribeOneVariable
         If ucrChkCustomise.Checked Then
             ucrBaseDescribeOneVar.clsRsyntax.SetBaseRFunction(clsInstatSummaryFunction)
             'For the receiver we set the parameter as new because the value will be different to the current value (one is string and one is RFunction)
-            ucrReceiverDescribeOneVar.SetParameter(New RParameter("columns_to_summarise", 1))
-            ucrReceiverDescribeOneVar.SetParameterIsString()
             'For the checkbox we just change the parameter name, because we want to keep the same value in the control for the new function.
             'Changing the parameter name should be used very cautiously. Normally it is safer to set a new parameter.
             cmdSummaries.Enabled = True
         Else
             ucrBaseDescribeOneVar.clsRsyntax.SetBaseRFunction(clsSummaryFunction)
-            ucrReceiverDescribeOneVar.SetParameter(New RParameter("object", 0))
-            ucrReceiverDescribeOneVar.SetParameterIsRFunction()
             cmdSummaries.Enabled = False
         End If
         'We need to update the base function to include the 
