@@ -25,6 +25,8 @@ Public Class ucrInput
     Public clsRList As New RFunction
     Protected dcmMinimum As Decimal = Decimal.MinValue
     Protected dcmMaximum As Decimal = Decimal.MaxValue
+    Protected Minimum As Double = Double.MinValue
+    Protected Maximum As Double = Double.MaxValue
     Protected bMinimumIncluded, bMaximumIncluded As Boolean
     Protected strDefaultType As String = ""
     Protected strDefaultPrefix As String = ""
@@ -192,6 +194,24 @@ Public Class ucrInput
                     strRange = strRange & "< " & dcmMaximum.ToString()
                 End If
             End If
+        ElseIf strValidationType = "NumericList" Then
+            If Minimum <> Double.MinValue Then
+                If bMinimumIncluded Then
+                    strRange = ">= " & Minimum.ToString()
+                Else
+                    strRange = "> " & Minimum.ToString()
+                End If
+                If Maximum <> Double.MaxValue Then
+                    strRange = strRange & " and "
+                End If
+            End If
+            If Maximum <> Double.MaxValue Then
+                If bMaximumIncluded Then
+                    strRange = strRange & "<= " & Maximum.ToString()
+                Else
+                    strRange = strRange & "< " & Maximum.ToString()
+                End If
+            End If
         End If
         Return strRange
     End Function
@@ -200,8 +220,16 @@ Public Class ucrInput
         strValidationType = "List"
     End Sub
 
-    Public Sub SetValidationTypeAsNumericList(Optional bNewAllowInf As Boolean = False)
+    Public Sub SetValidationTypeAsNumericList(Optional bNewAllowInf As Boolean = False, Optional bIncludeMin As Boolean = True, Optional MinValue As Double = Double.MinValue, Optional MaxValue As Double = Double.MaxValue, Optional bIncludeMax As Boolean = True)
+        ' Dim Dmax As Double = Maximum
+        ' Dim Dmin As Double = Minimum
         strValidationType = "NumericList"
+        If MinValue <> Double.MinValue Then
+            Minimum = MinValue
+        End If
+        If MaxValue <> Double.MaxValue Then
+            Maximum = MaxValue
+        End If
         bAllowInf = bNewAllowInf
     End Sub
 
@@ -268,9 +296,11 @@ Public Class ucrInput
                 Select Case strValidationType
                     Case "RVariable"
                         MsgBox("This name contains an invalid character", vbOKOnly)
+
                 End Select
         End Select
         Return (iValidationCode = 0)
+
     End Function
 
     'Returns integer as code for validation
@@ -345,6 +375,7 @@ Public Class ucrInput
     ' 0 : string is valid
     ' 1 : an item is empty
     ' 2 : an item is not numeric
+    ' 3 : an item is between max and min values
     Public Function ValidateList(strText As String, Optional bIsNumericInput As Boolean = False, Optional bAllowInf As Boolean = False) As Integer
         Dim strItems As String()
         Dim strTemp As String
@@ -368,6 +399,13 @@ Public Class ucrInput
                     clsTempParam.SetArgumentValue(strVal)
                 Else
                     clsTempParam.SetArgumentValue(Chr(34) & strVal & Chr(34))
+                End If
+                SetValidationTypeAsNumericList()
+                If IsNumeric(strVal) Then
+                    If Not (strVal <= Maximum) OrElse Not (strVal >= Minimum) Then
+                        MsgBox("Each item in the list must be " & GetNumericRange(), vbOKOnly)
+                        SetName("")
+                    End If
                 End If
                 clsTempParam.Position = i
                 clsRList.AddParameter(clsTempParam)
