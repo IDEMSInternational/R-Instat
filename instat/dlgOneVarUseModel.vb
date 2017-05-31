@@ -20,7 +20,7 @@ Public Class dlgOneVarUseModel
     Public bfirstload As Boolean = True
     Public bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
-   Public clsRBootFunction, clsQuantileFunction, clsSeqFunction, clsReceiver As New RFunction
+    Public clsRBootFunction, clsQuantileFunction, clsSeqFunction, clsReceiver, clsRPlotFunction As New RFunction
     Private Sub dlgOneVarUseModel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bfirstload Then
@@ -37,14 +37,14 @@ Public Class dlgOneVarUseModel
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 375
-        ucrBase.clsRsyntax.iCallType = 2
+        ucrBase.clsRsyntax.iCallType = 3
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         ucrReceiverObject.SetParameter(New RParameter("x", 0))
         ucrReceiverObject.Selector = ucrSelectorUseModel
         ucrReceiverObject.SetParameterIsRFunction()
         ucrReceiverObject.SetMeAsReceiver()
-        ucrReceiverObject.strSelectorHeading = "Models" ' check this
+        ucrReceiverObject.strSelectorHeading = "Models"
 
         ucrSelectorUseModel.SetItemType("model")
 
@@ -63,22 +63,26 @@ Public Class dlgOneVarUseModel
         ucrNewDataFrameName.SetAssignToIfUncheckedValue("last_model")
 
         ucrSaveObjects.SetPrefix("bootstrap")
+        ucrSaveObjects.SetDataFrameSelector(ucrSelectorUseModel.ucrAvailableDataFrames)
         ucrSaveObjects.SetSaveTypeAsModel()
         ucrSaveObjects.SetIsComboBox()
         ucrSaveObjects.SetCheckBoxText("Save Bootstrap")
-        '        ucrSaveObjects.SetAssignToIfUncheckedValue("last_bootstrap")
+        'ucrSaveObjects.SetAssignToIfUncheckedValue("last_bootstrap")
     End Sub
 
     Private Sub SetDefaults()
         clsRBootFunction = New RFunction
         clsQuantileFunction = New RFunction
         clsSeqFunction = New RFunction
+        clsRPlotFunction = New RFunction
 
         ucrSelectorUseModel.Reset()
-        ucrSaveObjects.Enabled = False 'for now
+        ucrSaveObjects.Enabled = False ' temporary
         ucrSaveObjects.Reset()
         ucrNewDataFrameName.Reset()
-        sdgOneVarUseModFit.SetDefaults()
+
+        clsRPlotFunction.SetPackageName("graphics")
+        clsRPlotFunction.SetRCommand("plot")
 
         clsSeqFunction.SetRCommand("seq")
         clsSeqFunction.AddParameter("from", 0)
@@ -95,13 +99,14 @@ Public Class dlgOneVarUseModel
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsQuantileFunction)
 
-        ucrBase.clsRsyntax.SetAssignTo(ucrNewDataFrameName.GetText, strTempModel:="last_model", strTempDataframe:=ucrSelectorUseModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-        '        clsRBootFunction.SetAssignTo(ucrSaveObjects.GetText, strTempModel:="last_bootstrap", strTempDataframe:=ucrSelectorUseModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text) ' test at end.
+        clsQuantileFunction.SetAssignTo(ucrNewDataFrameName.GetText, strTempModel:="last_model", strTempDataframe:=ucrSelectorUseModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        'clsRBootFunction.SetAssignTo(ucrSaveObjects.GetText, strTempModel:="last_bootstrap", strTempDataframe:=ucrSelectorUseModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         bResetSubdialog = True
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverObject.AddAdditionalCodeParameterPair(clsRBootFunction, New RParameter("f"), iAdditionalPairNo:=1)
+        ucrReceiverObject.AddAdditionalCodeParameterPair(clsRBootFunction, New RParameter("f", 0), iAdditionalPairNo:=1)
+        ucrReceiverObject.AddAdditionalCodeParameterPair(clsRPlotFunction, New RParameter("x", 0), iAdditionalPairNo:=2)
         ucrChkProduceBootstrap.SetRCode(clsRBootFunction, bReset)
         ucrNewDataFrameName.SetRCode(clsQuantileFunction, bReset)
         ucrSaveObjects.SetRCode(clsRBootFunction, bReset)
@@ -124,12 +129,12 @@ Public Class dlgOneVarUseModel
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         If ucrChkProduceBootstrap.Checked Then
-            frmMain.clsRLink.RunScript(clsRBootFunction.ToScript(), iCallType:=2)
+            frmMain.clsRLink.RunScript(clsRBootFunction.ToScript(), iCallType:=3)
         End If
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        sdgOneVarUseModFit.CreateGraphs()
+        frmMain.clsRLink.RunScript(clsRPlotFunction.ToScript(), iCallType:=3)
     End Sub
 
     '  Private Sub AssignSaveObjects()
@@ -149,9 +154,10 @@ Public Class dlgOneVarUseModel
     End Sub
 
     Private Sub cmdFitModel_Click(sender As Object, e As EventArgs) Handles cmdFitModelandBootstrap.Click
-        sdgOneVarUseModFit.SetRFunction(clsSeqFunction, clsRBootFunction, clsQuantileFunction, clsReceiver, bResetSubdialog)
+        sdgOneVarUseModFit.SetRFunction(clsSeqFunction, clsRBootFunction, clsQuantileFunction, clsReceiver, clsRPlotFunction, bResetSubdialog)
         bResetSubdialog = False
         sdgOneVarUseModFit.ShowDialog()
+        sdgOneVarUseModFit.SetPlotOptions()
     End Sub
 
     Private Sub ucrChkProduceBootstrap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkProduceBootstrap.ControlValueChanged
