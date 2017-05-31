@@ -101,27 +101,41 @@ Public Class dlgReplaceValues
         ucrInputNewValue.bAddRemoveParameter = False
 
         '' NEW VALUES:
-        ucrPnlNew.SetParameter(New RParameter("from_last"))
-        ucrPnlNew.AddRadioButton(rdoNewFromAbove, "TRUE")
-        ucrPnlNew.AddRadioButton(rdoNewFromBelow, "FALSE")
+        'ucrPnlNew.SetParameter(New RParameter("new_is_missing"))
+        ucrPnlNew.AddRadioButton(rdoNewFromAbove)
+        ucrPnlNew.AddRadioButton(rdoNewFromBelow)
         ucrPnlNew.AddRadioButton(rdoNewValue)
         ucrPnlNew.AddRadioButton(rdoNewMissing)
 
         ucrPnlNew.AddParameterPresentCondition(rdoNewValue, "new_value")
+        ucrPnlNew.AddParameterPresentCondition(rdoNewMissing, "new_value", False)
+        ucrPnlNew.AddParameterPresentCondition(rdoNewFromAbove, "new_value", False)
+        ucrPnlNew.AddParameterPresentCondition(rdoNewFromBelow, "new_value", False)
+
         ucrPnlNew.AddParameterValuesCondition(rdoNewMissing, "new_is_missing", "TRUE")
+        ucrPnlNew.AddParameterPresentCondition(rdoNewValue, "new_is_missing", False)
+        ucrPnlNew.AddParameterPresentCondition(rdoNewFromAbove, "new_is_missing", False)
+        ucrPnlNew.AddParameterPresentCondition(rdoNewFromBelow, "new_is_missing", False)
         '  ucrPnlNew.AddParameterValuesCondition(rdoNewMissing, "old_value",
 
-              ucrPnlNew.AddParameterValuesCondition(rdoNewFromAbove, "new_is_missing", False)
-        ucrPnlNew.AddParameterValuesCondition(rdoNewFromBelow, "new_is_missing", False)
-        ucrPnlNew.AddParameterValuesCondition(rdoNewFromBelow, "old_is_missing", False)
-        ucrPnlNew.AddParameterValuesCondition(rdoNewFromBelow, "old_is_missing", False)
 
-        ucrPnlNew.AddParameterValuesCondition(rdoNewMissing, "old_value", False)
-        ucrPnlNew.AddParameterValuesCondition(rdoNewFromBelow, "old_value", False)
-        ucrPnlNew.AddParameterValuesCondition(rdoNewFromBelow, "old_is_missing", False)
+        ucrPnlNew.AddParameterValuesCondition(rdoNewFromBelow, "from_last", "TRUE")
+        ucrPnlNew.AddParameterPresentCondition(rdoNewMissing, "from_last", False)
+        ucrPnlNew.AddParameterPresentCondition(rdoNewValue, "from_last", False)
+        ucrPnlNew.AddParameterPresentCondition(rdoNewFromAbove, "from_last", False)
 
-        ucrPnlNew.AddParameterValuesCondition(rdoNewFromAbove, "from_last", "TRUE")
-        ucrPnlNew.AddParameterValuesCondition(rdoNewFromBelow, "from_last", "FALSE")
+        'ucrPnlNew.AddParameterValuesCondition(rdoNewFromAbove, "from_last", "TRUE")
+        'ucrPnlNew.AddParameterValuesCondition(rdoNewMissing, "from_last", "TRUE", False)
+        'ucrPnlNew.AddParameterValuesCondition(rdoNewValue, "from_last", "TRUE", False)
+        'ucrPnlNew.AddParameterValuesCondition(rdoNewFromBelow, "from_last", "TRUE", False)
+
+        'ucrPnlNew.AddParameterPresentCondition(rdoNewMissing, "old_value", False)
+        'ucrPnlNew.AddParameterPresentCondition(rdoNewFromBelow, "old_value", False)
+        'ucrPnlNew.AddParameterPresentCondition(rdoNewFromAbove, "old_value", False)
+
+        ' ucrPnlNew.AddParameterValuesCondition(rdoNewMissing, "old_is_missing", False)
+        'ucrPnlNew.AddParameterPresentCondition(rdoNewFromAbove, "old_is_missing", False)
+        'ucrPnlNew.AddParameterPresentCondition(rdoNewFromBelow, "old_is_missing", False)
 
         ucrPnlNew.AddToLinkedControls(ucrInputNewValue, {rdoNewValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
 
@@ -136,11 +150,13 @@ Public Class dlgReplaceValues
         EnableRange()
         clsReplace.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$replace_value_in_data")
         clsReplace.AddParameter("old_value", "-99")
-        clsReplace.AddParameter("new_is_missing", "TRUE")
+        clsReplace.AddParameter("new_value", "1")
+        'clsReplace.AddParameter("new_is_missing", "TRUE")
         ucrBase.clsRsyntax.SetBaseRFunction(clsReplace)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ' ucrPnlNew.AddAdditionalCodeParameterPair(clsReplace, New RParameter("new_is_missing"), iAdditionalPairNo:=1)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
