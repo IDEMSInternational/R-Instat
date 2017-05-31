@@ -235,7 +235,7 @@ Public Class dlgTransformClimatic
             ucrBase.clsRsyntax.SetBaseRFunction(clsRollFunction)
             ucrInputColName.SetName("count")
             grpTransform.Text = "Count"
-            clsRRollFuncExpr.AddParameter("FUN", "Function(x) length(which(x" & strValuesUnder & ucrInputThreshold.GetText() & "))")
+            clsRRollFuncExpr.AddParameter("FUN", "function(x) length(which(x" & strValuesUnder & ucrInputThreshold.GetText() & "))")
             clsRTransform.AddParameter("function_exp", Chr(34) & clsRRollFuncExpr.ToScript.ToString & Chr(34))
             clsRTransform.RemoveParameterByName("sub_calculations")
         ElseIf rdoSpell.Checked Then
@@ -249,7 +249,7 @@ Public Class dlgTransformClimatic
             ucrBase.clsRsyntax.SetBaseRFunction(clsRollFunction)
             clsSubCalcList.AddParameter("sub1", clsRFunctionParameter:=clsReplaceNA60)
             clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubCalcList)
-            clsRTransform.AddParameter("function_exp", Chr(34) & "Reduce(Function(x, y) pmin(pmax(x + y - " & ucrInputEvaporation.GetText() & ", 0), " & ucrNudWBCapacity.Value & "), Replace_NA_60, accumulate=True)" & Chr(34))
+            clsRTransform.AddParameter("function_exp", Chr(34) & "Reduce(function(x, y) pmin(pmax(x + y - " & ucrInputEvaporation.GetText() & ", 0), " & ucrNudWBCapacity.Value & "), Replace_NA_60, accumulate=True)" & Chr(34))
             ucrInputColName.SetName("water_balance")
             grpTransform.Text = "Water Balance"
         End If
