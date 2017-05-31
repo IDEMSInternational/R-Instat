@@ -195,7 +195,7 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetRCode(clsBaseOperator, clsGraphTitleFunction, clsLabsFunction, clsRFacetFunction, bResetSubdialog)
+        sdgPlots.SetRCode(clsBaseOperator, clsNewLabsFunction:=clsLabsFunction, clsNewRFacetFunction:=clsRFacetFunction, bReset:=bResetSubdialog)
         sdgPlots.SetDataFrame(strNewDataFrame:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         bResetSubdialog = False
         sdgPlots.ShowDialog()
