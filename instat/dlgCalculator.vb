@@ -61,6 +61,8 @@ Public Class dlgCalculator
         ucrCalc.cmdDoy.Enabled = False
         ucrCalc.cmdDek.Enabled = False
         ucrBase.Visible = True
+        ucrCalc.cmdTry.Enabled = False
+        ucrCalc.ucrInputTryMessage.Enabled = False
     End Sub
 
     Private Sub ReopenDialog()
