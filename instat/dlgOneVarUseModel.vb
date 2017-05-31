@@ -63,10 +63,11 @@ Public Class dlgOneVarUseModel
         ucrNewDataFrameName.SetAssignToIfUncheckedValue("last_model")
 
         ucrSaveObjects.SetPrefix("bootstrap")
+        ucrSaveObjects.SetDataFrameSelector(ucrSelectorUseModel.ucrAvailableDataFrames)
         ucrSaveObjects.SetSaveTypeAsModel()
         ucrSaveObjects.SetIsComboBox()
         ucrSaveObjects.SetCheckBoxText("Save Bootstrap")
-        '        ucrSaveObjects.SetAssignToIfUncheckedValue("last_bootstrap")
+        'ucrSaveObjects.SetAssignToIfUncheckedValue("last_bootstrap")
     End Sub
 
     Private Sub SetDefaults()
@@ -76,7 +77,7 @@ Public Class dlgOneVarUseModel
         clsRPlotFunction = New RFunction
 
         ucrSelectorUseModel.Reset()
-        ucrSaveObjects.Enabled = False 'for now
+        ucrSaveObjects.Enabled = False ' temporary
         ucrSaveObjects.Reset()
         ucrNewDataFrameName.Reset()
         sdgOneVarUseModFit.SetDefaults()
@@ -99,9 +100,8 @@ Public Class dlgOneVarUseModel
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsQuantileFunction)
 
-        ucrBase.clsRsyntax.SetAssignTo(ucrNewDataFrameName.GetText, strTempModel:="last_model", strTempDataframe:=ucrSelectorUseModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-        '        clsRBootFunction.SetAssignTo(ucrSaveObjects.GetText, strTempModel:="last_bootstrap", strTempDataframe:=ucrSelectorUseModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text) ' test at end.
-        '      ucrBase.clsRsyntax.SetAssignTo(ucrSaveObjects.GetText, strTempModel:=ucrSaveObjects.GetText, strTempDataframe:=ucrSelectorUseModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        clsQuantileFunction.SetAssignTo(ucrNewDataFrameName.GetText, strTempModel:="last_model", strTempDataframe:=ucrSelectorUseModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        'clsRBootFunction.SetAssignTo(ucrSaveObjects.GetText, strTempModel:="last_bootstrap", strTempDataframe:=ucrSelectorUseModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         bResetSubdialog = True
     End Sub
 
