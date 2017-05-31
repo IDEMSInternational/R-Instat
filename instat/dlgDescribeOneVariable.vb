@@ -61,19 +61,20 @@ Public Class dlgDescribeOneVariable
     End Sub
 
     Private Sub SetDefaults()
+        clsSummariesList = New RFunction
+        clsSummaryFunction = New RFunction
+        clsInstatSummaryFunction = New RFunction
+        cmdSummaries.Enabled = False
 
         ucrSelectorDescribeOneVar.Reset()
 
-        clsSummariesList = New RFunction
         clsSummariesList.SetRCommand("c")
         clsSummariesList.AddParameter("summary_count_non_missing", Chr(34) & "summary_count_non_missing" & Chr(34), bIncludeArgumentName:=False)
         clsSummariesList.AddParameter("summary_count", Chr(34) & "summary_count" & Chr(34), bIncludeArgumentName:=False)
         clsSummariesList.AddParameter("summary_sum", Chr(34) & "summary_sum" & Chr(34), bIncludeArgumentName:=False)
 
-        clsSummaryFunction = New RFunction
         clsSummaryFunction.SetRCommand("summary")
 
-        clsInstatSummaryFunction = New RFunction
         clsInstatSummaryFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary")
         clsInstatSummaryFunction.AddParameter("return_output", "TRUE")
         clsInstatSummaryFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList)
@@ -86,8 +87,6 @@ Public Class dlgDescribeOneVariable
         ucrChkOmitMissing.SetParameter(New RParameter("na.rm"))
         ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkOmitMissing.bUpdateRCodeFromControl = True
-
-        cmdSummaries.Enabled = False
 
         ucrBaseDescribeOneVar.clsRsyntax.SetBaseRFunction(clsSummaryFunction)
         bResetSubdialog = True
@@ -119,6 +118,13 @@ Public Class dlgDescribeOneVariable
         TestOKEnabled()
     End Sub
 
+    Private Sub cmdSummaries_Click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
+        sdgSummaries.SetRFunction(clsSummariesList, bResetSubdialog)
+        bResetSubdialog = False
+        sdgSummaries.ShowDialog()
+        TestOKEnabled()
+    End Sub
+
     Private Sub ChangeBaseFunction()
         If ucrChkCustomise.Checked Then
             ucrBaseDescribeOneVar.clsRsyntax.SetBaseRFunction(clsInstatSummaryFunction)
@@ -135,18 +141,11 @@ Public Class dlgDescribeOneVariable
         SetRCodeForControls(False)
     End Sub
 
-    Private Sub cmdSummaries_click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
-        sdgSummaries.SetRFunction(clsSummariesList, bResetSubdialog)
-        bResetSubdialog = False
-        sdgSummaries.ShowDialog()
-        TestOKEnabled()
+    Private Sub ucrChkCustomise_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCustomise.ControlValueChanged
+        ChangeBaseFunction()
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDescribeOneVar.ControlContentsChanged, ucrChkCustomise.ControlContentsChanged
         TestOKEnabled()
-    End Sub
-
-    Private Sub ucrChkCustomise_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCustomise.ControlValueChanged
-        ChangeBaseFunction()
     End Sub
 End Class
