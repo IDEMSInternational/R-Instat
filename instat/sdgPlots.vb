@@ -51,73 +51,70 @@ Public Class sdgPlots
     End Sub
 
     Public Sub InitialiseControls()
+        Dim dctThemes As New Dictionary(Of String, String)
+        Dim strThemes As String()
+
         'facets tab 
         'Links the factor receivers, used for creating facets, with the selector. The variables need to be factors.
-        'ucr1stFactorReceiver.Selector = ucrFacetSelector
-        'ucr1stFactorReceiver.SetIncludedDataTypes({"factor"})
-        'ucr1stFactorReceiver.SetMeAsReceiver()
-        'ucr1stFactorReceiver.SetParameter(New RParameter("var1", 0))
-        'ucr1stFactorReceiver.SetParameterIsString()
-        'ucr1stFactorReceiver.bWithQuotes = False
+        ucr1stFactorReceiver.Selector = ucrFacetSelector
+        ucr1stFactorReceiver.SetIncludedDataTypes({"factor"})
+        ucr1stFactorReceiver.SetMeAsReceiver()
+        ucr1stFactorReceiver.SetParameter(New RParameter("var1", 0))
+        ucr1stFactorReceiver.SetParameterIsString()
+        ucr1stFactorReceiver.bWithQuotes = False
+        ucr1stFactorReceiver.SetLinkedDisplayControl(lblFactor1)
 
-        'ucr2ndFactorReceiver.Selector = ucrFacetSelector
-        'ucr2ndFactorReceiver.SetIncludedDataTypes({"factor"})
-        'ucr2ndFactorReceiver.SetParameter(New RParameter("var2", 1))
-        'ucr2ndFactorReceiver.SetParameterIsString()
-        'ucr2ndFactorReceiver.bWithQuotes = False
+        ucr2ndFactorReceiver.Selector = ucrFacetSelector
+        ucr2ndFactorReceiver.SetIncludedDataTypes({"factor"})
+        ucr2ndFactorReceiver.SetParameter(New RParameter("var2", 1))
+        ucr2ndFactorReceiver.SetParameterIsString()
+        ucr2ndFactorReceiver.bWithQuotes = False
+        ucr2ndFactorReceiver.SetLinkedDisplayControl(lblFactor2)
 
-        'ucrChkIncludeFacets.SetText("Include Facets")
-        'ucrChkIncludeFacets.AddParameterPresentCondition(True, "facets")
+        ucrChkIncludeFacets.SetText("Include Facets")
+        ucrChkIncludeFacets.AddParameterPresentCondition(True, "facets", True)
+        ucrChkIncludeFacets.AddParameterPresentCondition(False, "facets", False)
 
-        'ucrChkMargin.SetText("Margins")
-        'ucrChkMargin.SetParameter(New RParameter("margins"))
-        'ucrChkMargin.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        'ucrChkMargin.SetRDefault("FALSE")
+        ucrChkMargin.SetText("Margins")
+        ucrChkMargin.SetParameter(New RParameter("margins"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True)
+        ucrChkMargin.SetRDefault("FALSE")
+        ucrChkMargin.AddToLinkedControls(ucrChkNoOfRowsOrColumns, {False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=False)
 
-        'ucrChkMargin.AddFunctionNamesCondition(True, "facet_grid")
+        ucrChkNoOfRowsOrColumns.AddFunctionNamesCondition(True, "facet_wrap", True)
+        ucrChkNoOfRowsOrColumns.AddFunctionNamesCondition(False, "facet_wrap", False)
+        ucrChkNoOfRowsOrColumns.SetText("Fixed Number of Rows")
+        ucrChkNoOfRowsOrColumns.AddToLinkedControls(ucrNudNumberofRows, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        'ucrChkNoOfRowsOrColumns.AddFunctionNamesCondition(True, "facet_wrap")
-        'ucrChkNoOfRowsOrColumns.SetText("Fixed Number of Rows")
+        ucrChkFreeScalesX.SetText("Free Scales X")
+        ucrChkFreeScalesX.SetParameter(New RParameter("free_x"))
 
-        'ucrChkFreeScalesX.SetText("Free Scales X")
-        'ucrChkFreeScalesX.SetParameter(New RParameter("free_x"))
+        ucrChkFreeScalesY.SetText("Free Scales Y")
+        ucrChkFreeScalesY.SetParameter(New RParameter("free_y"))
 
-        'ucrChkFreeScalesY.SetText("Free Scales Y")
-        'ucrChkFreeScalesY.SetParameter(New RParameter("free_y"))
+        ucrNudNumberofRows.SetParameter(New RParameter("nrow"))
 
-        'ucrNudNumberofRows.SetParameter(New RParameter("nrow"))
+        'this passes in parameter only if margin is checked. 
+        'should be visible when margin is checked
+        ucrChkFreeSpace.SetText("Free Space")
+        ucrChkFreeSpace.SetParameter(New RParameter("space"))
+        ucrChkFreeSpace.AddFunctionNamesCondition(True, "facet_grid")
+        ucrChkFreeSpace.SetValueIfChecked(Chr(34) & "free" & Chr(34))
+        ucrChkFreeSpace.AddToLinkedControls(ucrChkNoOfRowsOrColumns, {False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=False)
 
-        ''this passes in parameter only if margin is checked. 
-        ''should be visible when margin is chacked
-        'ucrChkFreeSpace.SetText("Free Space")
-        'ucrChkFreeSpace.SetParameter(New RParameter("space"))
-        'ucrChkFreeSpace.AddFunctionNamesCondition(True, "facet_grid")
-        'ucrChkFreeSpace.SetValueIfChecked(Chr(34) & "free" & Chr(34))
+        ucrPnlHorizonatalVertical.SetParameter(New RParameter("dir"))
+        ucrPnlHorizonatalVertical.AddRadioButton(rdoVertical, Chr(34) & "v" & Chr(34))
+        ucrPnlHorizonatalVertical.AddRadioButton(rdoHorizontal, Chr(34) & "h" & Chr(34))
+        ucrPnlHorizonatalVertical.SetRDefault(Chr(34) & "h" & Chr(34))
 
-        'ucrPnlHorizonatalVertical.SetParameter(New RParameter("dir"))
-        'ucrPnlHorizonatalVertical.AddRadioButton(rdoVertical, Chr(34) & "v" & Chr(34))
-        'ucrPnlHorizonatalVertical.AddRadioButton(rdoHorizontal, Chr(34) & "h" & Chr(34))
-        'ucrPnlHorizonatalVertical.SetRDefault(Chr(34) & "h" & Chr(34))
-
-        'ucrChkIncludeFacets.AddToLinkedControls(ucrFacetSelector, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrChkIncludeFacets.AddToLinkedControls(ucr1stFactorReceiver, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucr1stFactorReceiver.SetLinkedDisplayControl(lblFactor1)
-
-        'ucrChkIncludeFacets.AddToLinkedControls(ucr2ndFactorReceiver, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucr1stFactorReceiver.SetLinkedDisplayControl(lblFactor2)
-
-        'ucrChkIncludeFacets.AddToLinkedControls(ucrPnlHorizonatalVertical, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
-        'ucrChkIncludeFacets.AddToLinkedControls(ucrChkMargin, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrChkIncludeFacets.AddToLinkedControls(ucrChkFreeScalesX, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrChkIncludeFacets.AddToLinkedControls(ucrChkFreeScalesY, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrChkIncludeFacets.AddToLinkedControls(ucrChkFreeSpace, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
-        'ucrChkIncludeFacets.AddToLinkedControls(ucrChkNoOfRowsOrColumns, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrChkNoOfRowsOrColumns.AddToLinkedControls(ucrNudNumberofRows, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
-        'ucrChkMargin.AddToLinkedControls(ucrChkNoOfRowsOrColumns, {False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=False)
-        'ucrChkFreeSpace.AddToLinkedControls(ucrChkNoOfRowsOrColumns, {False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=False)
+        ucrChkIncludeFacets.AddToLinkedControls(ucrFacetSelector, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeFacets.AddToLinkedControls(ucr1stFactorReceiver, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeFacets.AddToLinkedControls(ucr2ndFactorReceiver, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeFacets.AddToLinkedControls(ucrPnlHorizonatalVertical, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoVertical)
+        ucrChkIncludeFacets.AddToLinkedControls(ucrChkMargin, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeFacets.AddToLinkedControls(ucrChkFreeScalesX, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeFacets.AddToLinkedControls(ucrChkFreeScalesY, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeFacets.AddToLinkedControls(ucrChkFreeSpace, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeFacets.AddToLinkedControls(ucrChkNoOfRowsOrColumns, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         'layers tab 
 
@@ -147,9 +144,7 @@ Public Class sdgPlots
         'Y Axis tab
 
         'themes tab
-        Dim dctThemes As New Dictionary(Of String, String)
-        Dim strThemes As String()
-
+        ucrInputThemes.SetParameter(New RParameter("theme"))
         strThemes = GgplotDefaults.strThemes
         'Would prefer to do this through functions but auto updating function name not currently supported through combo box control
         For Each strTemp As String In strThemes
@@ -191,16 +186,15 @@ Public Class sdgPlots
         ucrInputThemes.SetRCode(clsBaseOperator)
 
         'ucrInputLegend.SetRCode(clsNewLabsFunction, bReset)
-        'ucrPnlHorizonatalVertical.SetRCode(clsRFacetFunction, bReset)
-        'ucr1stFactorReceiver.SetRCode(clsTempOp, bReset)
-        'ucr2ndFactorReceiver.SetRCode(clsTempOp, bReset)
-        'ucrChkMargin.SetRCode(clsRFacetFunction, bReset)
-        'ucrChkFreeSpace.SetRCode(clsRFacetFunction, bReset)
-        'ucrChkFreeScalesX.SetRCode(clsRFacetFunction, bReset)
-        'ucrChkFreeScalesY.SetRCode(clsRFacetFunction, bReset)
-        'ucrNudNumberofRows.SetRCode(clsRFacetFunction, bReset)
-        'ucrNudNumberofRows.AddAdditionalCodeParameterPair(clsRFacetFunction, New RParameter("ncol"), iAdditionalPairNo:=1)
-        'ucrChkIncludeFacets.SetRCode(clsBaseOperator, bReset)
+        ucrPnlHorizonatalVertical.SetRCode(clsRFacetFunction, bReset)
+        ucr1stFactorReceiver.SetRCode(clsTempOp, bReset)
+        ucr2ndFactorReceiver.SetRCode(clsTempOp, bReset)
+        ucrChkMargin.SetRCode(clsRFacetFunction, bReset)
+        ucrChkFreeSpace.SetRCode(clsRFacetFunction, bReset)
+        ucrChkFreeScalesX.SetRCode(clsRFacetFunction, bReset)
+        ucrChkFreeScalesY.SetRCode(clsRFacetFunction, bReset)
+        ucrNudNumberofRows.SetRCode(clsRFacetFunction, bReset)
+        ucrChkIncludeFacets.SetRCode(clsBaseOperator, bReset)
 
     End Sub
 
