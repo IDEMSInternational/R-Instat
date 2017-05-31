@@ -82,6 +82,7 @@ Public Class dlgUseDate
         ucrChkShiftDay.SetRDefault("FALSE")
 
         ucrNudShiftStartDay.SetParameter(New RParameter("shift_start_day"))
+        ucrNudShiftStartDay.SetRDefault(1)
 
         ucrInputComboBoxMonth.SetParameter(New RParameter("shift_start_month"))
         Dim dctMonth As New Dictionary(Of String, String)
@@ -145,7 +146,6 @@ Public Class dlgUseDate
 
         ucrSelectorUseDate.Reset()
 
-        clsDefaultFunction.SetRCommand("shift_day")
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$split_date")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
@@ -156,7 +156,7 @@ Public Class dlgUseDate
     End Sub
 
     Private Sub TestOKEnabled()
-        If (Not (ucrReceiverUseDate.IsEmpty) AndAlso (ucrChkYear.Checked OrElse ucrChkWeekday.Checked OrElse ucrChkWeek.Checked OrElse ucrChkPentad.Checked OrElse ucrChkMonth.Checked OrElse ucrChkLeapYear.Checked OrElse ucrChkFullWeekday.Checked OrElse ucrChkFullMonth.Checked OrElse ucrChkDekad.Checked OrElse ucrChkDayYear366.Checked OrElse ucrChkDayInYear.Checked OrElse ucrChkDay.Checked OrElse ucrChkAbbrWeekday.Checked OrElse ucrChkAbbrMonth.Checked OrElse ucrChkShiftDay.Checked OrElse ucrChkShiftYear.Checked OrElse ucrChkShiftDay.Checked) AndAlso Not ucrInputComboBoxMonth.IsEmpty AndAlso ucrNudShiftStartDay.GetText <> "") Then
+        If (Not (ucrReceiverUseDate.IsEmpty) AndAlso (ucrChkYear.Checked OrElse ucrChkWeekday.Checked OrElse ucrChkWeek.Checked OrElse ucrChkPentad.Checked OrElse ucrChkMonth.Checked OrElse ucrChkLeapYear.Checked OrElse ucrChkFullWeekday.Checked OrElse ucrChkFullMonth.Checked OrElse ucrChkDekad.Checked OrElse ucrChkDayYear366.Checked OrElse ucrChkDayInYear.Checked OrElse ucrChkDay.Checked OrElse ucrChkAbbrWeekday.Checked OrElse ucrChkAbbrMonth.Checked OrElse ucrChkShiftYear.Checked OrElse ucrChkShiftDay.Checked AndAlso Not ucrInputComboBoxMonth.IsEmpty AndAlso ucrNudShiftStartDay.GetText <> "")) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
