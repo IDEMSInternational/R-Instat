@@ -13,13 +13,14 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
-Public Class dlgRowStats
+Public Class dlgRowSummary
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsDefaultFunction As New RFunction
+    Private clsApplyFunction As New RFunction
 
-    Private Sub dlgRowStats_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub dlgRowSummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -32,47 +33,18 @@ Public Class dlgRowStats
         autoTranslate(Me)
     End Sub
 
-    Private Sub SetDefaults()
-        clsDefaultFunction = New RFunction
-
-        ucrSelectorForRowStats.Reset()
-        ucrSaveResults.Reset()
-
-        'Defining the default RFunction
-        clsDefaultFunction.SetRCommand("apply")
-        clsDefaultFunction.AddParameter("FUN", "mean")
-        clsDefaultFunction.AddParameter("MARGIN", 1)
-        clsDefaultFunction.SetAssignTo(ucrSaveResults.GetText, strTempDataframe:=ucrSelectorForRowStats.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
-    End Sub
-
-    Private Sub SetRCodeforControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-    End Sub
-
-    Private Sub TestOKEnabled()
-        If Not ucrReceiverForRowStatistics.IsEmpty AndAlso ucrSaveResults.IsComplete Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
-    End Sub
-
-    'this is only temporary and needs to be worked on later
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 45
-        cmdUserDefined.Enabled = False
+        cmdUserDefined.Enabled = False ' temporarily disabled
 
-        'Setting receiver Data rypes, parameters and making it as a receiver
-        ucrReceiverForRowStatistics.Selector = ucrSelectorForRowStats
-        ucrReceiverForRowStatistics.SetMeAsReceiver()
-        ucrReceiverForRowStatistics.SetDataType("numeric")
-        ucrReceiverForRowStatistics.bUseFilteredData = False
-        ucrReceiverForRowStatistics.bForceAsDataFrame = True
-        ucrReceiverForRowStatistics.SetParameter(New RParameter("X", 0))
-        ucrReceiverForRowStatistics.SetParameterIsRFunction()
-
+        'Setting receiver data types and parameters
+        ucrReceiverForRowSummaries.SetParameter(New RParameter("X", 0))
+        ucrReceiverForRowSummaries.Selector = ucrSelectorForRowSummaries
+        ucrReceiverForRowSummaries.SetMeAsReceiver()
+        ucrReceiverForRowSummaries.SetDataType("numeric")
+        ucrReceiverForRowSummaries.bUseFilteredData = False
+        ucrReceiverForRowSummaries.bForceAsDataFrame = True
+        ucrReceiverForRowSummaries.SetParameterIsRFunction()
 
         ucrPanelStatistics.SetParameter(New RParameter("FUN", 2))
         ucrPanelStatistics.AddRadioButton(rdoMean, "mean")
@@ -86,9 +58,37 @@ Public Class dlgRowStats
 
         ucrSaveResults.SetPrefix("row_summary")
         ucrSaveResults.SetSaveTypeAsColumn()
-        ucrSaveResults.SetDataFrameSelector(ucrSelectorForRowStats.ucrAvailableDataFrames)
-        ucrSaveResults.SetLabelText("Row Summary:")
+        ucrSaveResults.SetDataFrameSelector(ucrSelectorForRowSummaries.ucrAvailableDataFrames)
+        ucrSaveResults.SetLabelText("New Column Name:")
         ucrSaveResults.SetIsComboBox()
+    End Sub
+
+    Private Sub SetDefaults()
+        clsApplyFunction = New RFunction
+
+        'reset
+        ucrSelectorForRowSummaries.Reset()
+        ucrSaveResults.Reset()
+
+        'Defining the default RFunction
+        clsApplyFunction.SetPackageName("base")
+        clsApplyFunction.SetRCommand("apply")
+        clsApplyFunction.AddParameter("FUN", "mean")
+        clsApplyFunction.AddParameter("MARGIN", 1)
+        clsApplyFunction.SetAssignTo(ucrSaveResults.GetText, strTempDataframe:=ucrSelectorForRowSummaries.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsApplyFunction)
+    End Sub
+
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
+    Private Sub TestOKEnabled()
+        If Not ucrReceiverForRowSummaries.IsEmpty AndAlso ucrSaveResults.IsComplete Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -97,7 +97,7 @@ Public Class dlgRowStats
         TestOKEnabled()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForRowStatistics.ControlContentsChanged, ucrSaveResults.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverForRowSummaries.ControlContentsChanged, ucrSaveResults.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
