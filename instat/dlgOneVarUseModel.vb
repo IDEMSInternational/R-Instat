@@ -81,7 +81,7 @@ Public Class dlgOneVarUseModel
         ucrNewDataFrameName.Reset()
         sdgOneVarUseModFit.SetDefaults()
 
-        'clsRPlotFunction.SetPackageName("")
+        clsRPlotFunction.SetPackageName("graphics")
         clsRPlotFunction.SetRCommand("plot")
 
         clsSeqFunction.SetRCommand("seq")
@@ -107,6 +107,7 @@ Public Class dlgOneVarUseModel
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverObject.AddAdditionalCodeParameterPair(clsRBootFunction, New RParameter("f", 0), iAdditionalPairNo:=1)
+        ucrReceiverObject.AddAdditionalCodeParameterPair(clsRPlotFunction, New RParameter("x", 0), iAdditionalPairNo:=2)
         ucrChkProduceBootstrap.SetRCode(clsRBootFunction, bReset)
         ucrNewDataFrameName.SetRCode(clsQuantileFunction, bReset)
         ucrSaveObjects.SetRCode(clsRBootFunction, bReset)
@@ -134,7 +135,7 @@ Public Class dlgOneVarUseModel
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        sdgOneVarUseModFit.CreateGraphs()
+        frmMain.clsRLink.RunScript(clsRPlotFunction.ToScript(), iCallType:=3)
     End Sub
 
     '  Private Sub AssignSaveObjects()
@@ -157,6 +158,7 @@ Public Class dlgOneVarUseModel
         sdgOneVarUseModFit.SetRFunction(clsSeqFunction, clsRBootFunction, clsQuantileFunction, clsReceiver, clsRPlotFunction, bResetSubdialog)
         bResetSubdialog = False
         sdgOneVarUseModFit.ShowDialog()
+        sdgOneVarUseModFit.SetPlotOptions()
     End Sub
 
     Private Sub ucrChkProduceBootstrap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkProduceBootstrap.ControlValueChanged

@@ -13,11 +13,11 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports instat
+
 Imports instat.Translations
 Public Class sdgOneVarUseModFit
     Private bControlsInitialised As Boolean = False
-    Private clsRSeqFunction, clsOneVarRBootFunction, clsOneVarQuantileFunction, clsRPlotFunction, clsRBootFunction, clsRReceiver As New RFunction
+    Private clsRSeqFunction, clsOneVarRBootFunction, clsOneVarQuantileFunction, clsRBootFunction, clsRReceiver, clsRPlotFunction As New RFunction
     Public bfirstload As Boolean = True
     Private Sub sdgOneVarFitModDisplay(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -68,7 +68,6 @@ Public Class sdgOneVarUseModFit
         'ucrInputQuantiles.SetRDefault("0.25, 0.5, 0.75")
         ucrInputQuantiles.SetValidationTypeAsNumericList(MinValue:=0, MaxValue:=1)
 
-
         ucrPnlQuantiles.AddToLinkedControls(ucrInputQuantiles, {rdoInsertValues}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
         ucrPnlQuantiles.AddToLinkedControls(ucrNudTo, {rdoSequence}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
         ucrPnlQuantiles.AddToLinkedControls(ucrNudFrom, {rdoSequence}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
@@ -77,6 +76,23 @@ Public Class sdgOneVarUseModFit
         ucrNudFrom.SetLinkedDisplayControl(lblFrom)
         ucrNudBy.SetLinkedDisplayControl(lblBy)
 
+        ucrPnlPlots.AddRadioButton(rdoNoPlot)
+        ucrPnlPlots.AddRadioButton(rdoPlotAll)
+        ucrPnlPlots.AddRadioButton(rdoPPPlot)
+        ucrPnlPlots.AddRadioButton(rdoCDFPlot)
+        ucrPnlPlots.AddRadioButton(rdoQQPlot)
+        ucrPnlPlots.AddRadioButton(rdoDensityPlot)
+        ucrPnlPlots.AddRadioButton(rdoCIcdf)
+
+        ucrPnlPlots.AddFunctionNamesCondition(rdoNoPlot, "")
+        ucrPnlPlots.AddFunctionNamesCondition(rdoPlotAll, "plot")
+        ucrPnlPlots.AddFunctionNamesCondition(rdoPPPlot, "ppcomp")
+        ucrPnlPlots.AddFunctionNamesCondition(rdoCDFPlot, "cdfcomp")
+        ucrPnlPlots.AddFunctionNamesCondition(rdoQQPlot, "qqcomp")
+        ucrPnlPlots.AddFunctionNamesCondition(rdoDensityPlot, "denscomp")
+        ucrPnlPlots.AddFunctionNamesCondition(rdoCIcdf, "CIcdfplot")
+
+        rdoNoPlot.Enabled = False ' temporary
         bControlsInitialised = True
     End Sub
 
@@ -84,6 +100,7 @@ Public Class sdgOneVarUseModFit
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
+
         clsRSeqFunction = clsNewRSeqFunction
         clsOneVarRBootFunction = clsNewRBootFunction
         clsOneVarQuantileFunction = clsNewQuantileFunction
@@ -101,9 +118,7 @@ Public Class sdgOneVarUseModFit
     End Sub
 
     Public Sub SetDefaults()
-        'rdoPlotAll.Checked = True
         rdoSequence.Checked = True
-        SetPlotOptions()
     End Sub
 
     Public Sub CreateGraphs()
@@ -141,7 +156,6 @@ Public Class sdgOneVarUseModFit
             clsRPlotFunction.AddParameter("b", clsRFunctionParameter:=clsOneVarRBootFunction)
             clsRPlotFunction.AddParameter("CI.output", Chr(34) & "quantile" & Chr(34))
         End If
-        frmMain.clsRLink.RunScript(clsRPlotFunction.ToScript(), iCallType:=3)
     End Sub
 
     Public Sub SetPlotOptions()
@@ -159,5 +173,6 @@ Public Class sdgOneVarUseModFit
 
     Private Sub ucrBase_ClickReturn(sender As Object, e As EventArgs) Handles ucrBase.ClickReturn
         dlgOneVarUseModel.QuantileCommand()
+        CreateGraphs()
     End Sub
 End Class
