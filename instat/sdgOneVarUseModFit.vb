@@ -131,7 +131,7 @@ Public Class sdgOneVarUseModFit
             clsRPlotFunction.AddParameter("b", clsRFunctionParameter:=dlgOneVarUseModel.clsRBootFunction)
             clsRPlotFunction.AddParameter("CI.output", Chr(34) & "quantile" & Chr(34))
         End If
-        frmMain.clsRLink.RunScript(clsRPlotFunction.ToScript(), iCallType:=2)
+        frmMain.clsRLink.RunScript(clsRPlotFunction.ToScript(), iCallType:=3)
     End Sub
 
     Public Sub SetMyBootFunction(clsRNewBoot As RFunction)
