@@ -38,7 +38,11 @@ Public Class ucrFactor
     Public strExtraColumn As String = ""
     Public strSelectedLevels As String()
     Public WithEvents ucrChkLevels As ucrCheck
-    Public bForceShowLevels As Boolean = False
+    Public bForceShowLevels As Boolean
+    Public bIncludeLevels As Boolean
+    Public strLevelsName As String
+    Public strLabelsName As String
+    Public strFreqName As String
 
     Public Sub New()
 
@@ -55,6 +59,11 @@ Public Class ucrFactor
         bIsEditable = False
         lstEditableColumns = New List(Of String)
         bIncludeCopyOfLevels = False
+        bForceShowLevels = False
+        bIncludeLevels = True
+        strLevelsName = "Level"
+        strLabelsName = "Label"
+        strFreqName = "Freq"
     End Sub
 
     Private Sub ucrFactor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -126,6 +135,8 @@ Public Class ucrFactor
         Dim clsConvertToCharacter As New RFunction
         Dim bHasLevels As Boolean
         Dim iLevelsCol As Integer
+        Dim iLabelsCol As Integer
+        Dim iFreqCol As Integer
 
         grdFactorData.Worksheets.Clear()
         ' Contains allows ordered factors to be included
@@ -134,6 +145,11 @@ Public Class ucrFactor
                 clsGetFactorData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_factor_data_frame")
                 clsGetFactorData.AddParameter("data_name", Chr(34) & clsReceiver.GetDataName() & Chr(34))
                 clsGetFactorData.AddParameter("col_name", clsReceiver.GetVariableNames())
+                If bIncludeLevels Then
+                    clsGetFactorData.AddParameter("include_levels", "TRUE")
+                Else
+                    clsGetFactorData.AddParameter("include_levels", "FALSE")
+                End If
                 clsConvertToCharacter.SetRCommand("convert_to_character_matrix")
                 clsConvertToCharacter.AddParameter("data", clsRFunctionParameter:=clsGetFactorData)
                 dfTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsConvertToCharacter.ToScript()).AsDataFrame
@@ -142,11 +158,14 @@ Public Class ucrFactor
                 shtCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
                 bShowGrid = True
                 shtCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
+                iLevelsCol = GetColumnIndex(strLevelsName)
+                iLabelsCol = GetColumnIndex(strLabelsName)
+                iFreqCol = GetColumnIndex(strFreqName)
                 If bIncludeCopyOfLevels Then
                     shtCurrSheet.AppendCols(1)
-                    shtCurrSheet.ColumnHeaders(shtCurrSheet.ColumnCount - 1).Text = "New Levels"
+                    shtCurrSheet.ColumnHeaders(shtCurrSheet.ColumnCount - 1).Text = "New Label"
                     For i = 0 To shtCurrSheet.RowCount - 1
-                        shtCurrSheet(i, shtCurrSheet.ColumnCount - 1) = shtCurrSheet(i, 0)
+                        shtCurrSheet(i, shtCurrSheet.ColumnCount - 1) = shtCurrSheet(i, iLabelsCol)
                     Next
                 End If
                 If strExtraColumn <> "" Then
@@ -186,6 +205,12 @@ Public Class ucrFactor
             shtCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.View_ShowRowHeader, False)
             shtCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
             shtCurrSheet.ColumnHeaders(0).Width = 30
+            If iLevelsCol <> -1 Then
+                shtCurrSheet.ColumnHeaders(iLevelsCol).Width = 40
+            End If
+            If iFreqCol <> -1 Then
+                shtCurrSheet.ColumnHeaders(iFreqCol).Width = 40
+            End If
             ApplyColumnSettings()
             RaiseEvent GridContentChanged()
             If ucrChkLevels IsNot Nothing Then
@@ -193,7 +218,6 @@ Public Class ucrFactor
                 ucrChkLevels.Checked = False
             End If
             If Not bForceShowLevels Then
-                iLevelsCol = GetColumnIndex("Levels")
                 If iLevelsCol <> -1 Then
                     bHasLevels = frmMain.clsRLink.IsVariablesMetadata(clsReceiver.GetDataName(), "labels", clsReceiver.GetVariableNames(False))
                     If bHasLevels Then
@@ -255,12 +279,12 @@ Public Class ucrFactor
             shtCurrSheet.AppendRows(1)
             iNewRow = shtCurrSheet.RowCount - 1
             For i = 0 To shtCurrSheet.ColumnCount - 1
-                If shtCurrSheet.ColumnHeaders(i).Text = "Ord" Then
+                If shtCurrSheet.ColumnHeaders(i).Text = "Ord." Then
                     shtCurrSheet(iNewRow, i) = shtCurrSheet.RowCount
                     shtCurrSheet.SetRangeDataFormat(iNewRow, i, 1, 1, unvell.ReoGrid.DataFormat.CellDataFormatFlag.Text)
-                ElseIf shtCurrSheet.ColumnHeaders(i).Text = "Labels" Then
+                ElseIf shtCurrSheet.ColumnHeaders(i).Text = strLabelsName Then
                     shtCurrSheet(iNewRow, i) = ""
-                ElseIf shtCurrSheet.ColumnHeaders(i).Text = "Levels" Then
+                ElseIf shtCurrSheet.ColumnHeaders(i).Text = strLevelsName Then
                     shtCurrSheet(iNewRow, i) = ""
                     shtCurrSheet.SetRangeDataFormat(iNewRow, i, 1, 1, unvell.ReoGrid.DataFormat.CellDataFormatFlag.Text)
                 ElseIf shtCurrSheet.ColumnHeaders(i).Text = "Counts" Then
@@ -278,7 +302,10 @@ Public Class ucrFactor
         Dim i As Integer
         Dim checked As Boolean
         Dim iCount As Integer = 0
+        Dim iLabelsCol As Integer
+
         If grdFactorData.CurrentWorksheet IsNot Nothing Then
+            iLabelsCol = GetColumnIndex(strLabelsName)
             For i = 0 To grdFactorData.CurrentWorksheet.RowCount - 1
                 If shtCurrSheet(i, iSelectorColumnIndex) IsNot Nothing Then
                     checked = DirectCast(shtCurrSheet(i, iSelectorColumnIndex), Boolean)
@@ -288,7 +315,7 @@ Public Class ucrFactor
                         ElseIf iCount > 1 Then
                             strTemp = strTemp & ","
                         End If
-                        strTemp = strTemp & Chr(34) & shtCurrSheet(i, 0) & Chr(34)
+                        strTemp = strTemp & Chr(34) & shtCurrSheet(i, iLabelsCol) & Chr(34)
                         iCount = iCount + 1
                     End If
                 End If
@@ -393,19 +420,30 @@ Public Class ucrFactor
         Dim strTemp As New List(Of String)
 
         If shtCurrSheet IsNot Nothing Then
-            For i = 0 To shtCurrSheet.RowCount - 1
-                If shtCurrSheet(i, iColumn) IsNot Nothing Then
-                    If bWithQuotes Then
-                        strTemp.Add(Chr(34) & shtCurrSheet(i, iColumn).ToString & Chr(34))
+            If iColumn >= shtCurrSheet.ColumnCount OrElse iColumn < 0 Then
+                MsgBox("Developer error: Cannot get column at index: " & iColumn & " index out of bounds")
+            Else
+                For i = 0 To shtCurrSheet.RowCount - 1
+                    If shtCurrSheet(i, iColumn) IsNot Nothing Then
+                        If bWithQuotes Then
+                            strTemp.Add(Chr(34) & shtCurrSheet(i, iColumn).ToString & Chr(34))
+                        Else
+                            strTemp.Add(shtCurrSheet(i, iColumn).ToString)
+                        End If
                     Else
-                        strTemp.Add(shtCurrSheet(i, iColumn).ToString)
+                        strTemp.Add(Nothing)
                     End If
-                Else
-                    strTemp.Add(Nothing)
-                End If
-            Next
+                Next
+            End If
         End If
         Return strTemp
+    End Function
+
+    Public Function GetColumnAsList(strColumn As String, Optional bWithQuotes As Boolean = True) As List(Of String)
+        Dim iColumn As Integer
+
+        iColumn = GetColumnIndex(strColumn)
+        Return GetColumnAsList(iColumn, bWithQuotes)
     End Function
 
     Public Sub SetSelectionAllLevels(bSelect As Boolean)
@@ -512,7 +550,7 @@ Public Class ucrFactor
     End Sub
 
     Private Sub shtCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles shtCurrSheet.AfterCellEdit
-        If shtCurrSheet.ColumnHeaders(e.Cell.Column).Text = "Levels" AndAlso e.NewData.ToString() <> "" Then
+        If shtCurrSheet.ColumnHeaders(e.Cell.Column).Text = strLevelsName AndAlso e.NewData.ToString() <> "" Then
             If Not IsNumeric(e.NewData) Then
                 MsgBox("Invalid value: " & e.NewData.ToString() & vbNewLine & "Levels must be numeric values.", MsgBoxStyle.Exclamation, "Invalid Value")
                 e.EndReason = EndEditReason.Cancel
@@ -557,7 +595,7 @@ Public Class ucrFactor
         Dim iLevelsCol As Integer
 
         If shtCurrSheet IsNot Nothing Then
-            iLevelsCol = GetColumnIndex("Levels")
+            iLevelsCol = GetColumnIndex(strLevelsName)
             If iLevelsCol <> -1 Then
                 If ucrChkLevels.Checked Then
                     shtCurrSheet.ShowColumns(iLevelsCol, 1)
@@ -572,5 +610,10 @@ Public Class ucrFactor
         If ucrChkLevels IsNot Nothing AndAlso clsReceiver.IsEmpty Then
             ucrChkLevels.Enabled = False
         End If
+    End Sub
+
+    Public Sub SetIncludeLevels(bInclude As Boolean)
+        bIncludeLevels = bInclude
+        RefreshFactorData()
     End Sub
 End Class
