@@ -50,7 +50,6 @@ Public Class dlgTransformClimatic
         ucrReceiverStation.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "station" & Chr(34)})
         ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
         ucrReceiverDOY.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "doy" & Chr(34)})
-        'this is not right
         ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
         ucrReceiverStation.bAutoFill = True
         ucrReceiverDate.bAutoFill = True
@@ -73,7 +72,6 @@ Public Class dlgTransformClimatic
         ucrPnlTransform.AddRadioButton(rdoCount)
         ucrPnlTransform.AddRadioButton(rdoSpell)
         ucrPnlTransform.AddRadioButton(rdoWaterBalance)
-        ' ucrPnlTransform.SetLinkedDisplayControl(grpTransform)
 
         ucrInputThreshold.SetParameter(New RParameter("threshold"))
         ucrInputThreshold.SetValidationTypeAsNumeric()
@@ -97,7 +95,6 @@ Public Class dlgTransformClimatic
         ucrNudCountOver.Increment = 1
         ucrNudCountOver.SetLinkedDisplayControl(lblCountOver)
 
-        'ucrChkValuesUnderthreshold.SetParameter(New RParameter("values_under_threshold"))
         ucrChkValuesUnderThreshold.SetText("Values Under Threshold")
         ucrChkValuesUnderThreshold.SetLinkedDisplayControl(lblCountRows)
 
@@ -124,13 +121,9 @@ Public Class dlgTransformClimatic
         clsSubCalcList.SetRCommand("list")
 
         ucrPnlTransform.AddToLinkedControls({ucrInputSum, ucrNudSumOver}, {rdoMoving}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
-        'ucrInputSum.SetLinkedDisplayControl(grpTransform)
         ucrPnlTransform.AddToLinkedControls({ucrNudCountOver, ucrChkValuesUnderThreshold}, {rdoCount}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
-        'ucrNudCountOver.SetLinkedDisplayControl(grpCount)
         ucrPnlTransform.AddToLinkedControls({ucrInputSpellLower, ucrInputSpellUpper}, {rdoSpell}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
-        'ucrInputSpellLower.SetLinkedDisplayControl(grpSpells)
         ucrPnlTransform.AddToLinkedControls({ucrNudWBCapacity, ucrInputEvaporation}, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
-        ' ucrNudWBCapacity.SetLinkedDisplayControl(grpWaterbalance)
 
         ucrPnlTransform.AddParameterValuesCondition(rdoMoving, "FUN", Chr(39) & "sum" & Chr(39))
         ucrPnlTransform.AddParameterValuesCondition(rdoCount, "FUN", Chr(39) & "sum" & Chr(39), False)
@@ -182,7 +175,7 @@ Public Class dlgTransformClimatic
         clsReplaceNA60.AddParameter("function_exp", Chr(34) & "replace(" & ucrReceiverData.GetVariableNames(False) & ", Is .na(" & ucrReceiverData.GetVariableNames(False) & "), 60)" & Chr(34))
         clsReplaceNA60.AddParameter("result_name", Chr(34) & "Replace_NA_60" & Chr(34))
         clsReplaceNA60.AddParameter("calculated_from", " list(" & strCurrDataName & "= " & ucrReceiverData.GetVariableNames() & ")")
-        clsReplaceNA60.AddParameter("save", "0") ' has save = 2on rcode
+        clsReplaceNA60.AddParameter("save", "0")
         clsReplaceNA60.SetAssignTo("Replace_NA_60")
 
         clsWaterBalance60.SetRCommand("instat_calculation$New")
@@ -201,7 +194,6 @@ Public Class dlgTransformClimatic
         clsRRainday.AddParameter("save", "0")
         clsRRainday.SetAssignTo("rain_day")
 
-        'This might not Beep right
         clsRTransform.AddParameter("save", 2)
         clsRollFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         clsRollFunction.AddParameter("display", "FALSE")
