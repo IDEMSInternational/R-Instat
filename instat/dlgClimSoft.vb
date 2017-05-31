@@ -83,8 +83,8 @@ Public Class dlgClimSoft
         ucrInputEndDate.SetName("")
 
         clsRDatabaseConnect.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$database_connect")
+        clsRDatabaseConnect.AddParameter("host", "127.0.0.1")
         sdgImportFromClimSoft.ucrInputDatabaseName.SetName("")
-        sdgImportFromClimSoft.ucrInputHost.SetName("")
         sdgImportFromClimSoft.ucrInputPort.SetName("")
         sdgImportFromClimSoft.ucrInputUserName.SetName("")
 
@@ -118,7 +118,7 @@ Public Class dlgClimSoft
     End Sub
 
     Private Sub cmdEstablishConnection_Click(sender As Object, e As EventArgs) Handles cmdEstablishConnection.Click
-        sdgImportFromClimSoft.SetRDatabaseConnection(clsRDatabaseConnect, clsRDatabaseDisconnect, clsHasConnection, bConnectionActive, bReset)
+        sdgImportFromClimSoft.SetRDatabaseConnection(clsRDatabaseConnect, clsRDatabaseDisconnect, clsHasConnection, bConnectionActive, bResetSubdialog)
         bResetSubdialog = False
         sdgImportFromClimSoft.ShowDialog()
         SetConnectionActiveStatus(sdgImportFromClimSoft.GetConnectionActiveStatus())
