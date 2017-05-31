@@ -150,7 +150,7 @@ Public Class dlgTransformClimatic
         clsTransformManipulationsFunc.SetRCommand("list")
         clsTransformManipulationsFunc.AddParameter("group_by", clsRFunctionParameter:=clsTransformGroupByFunc, bIncludeArgumentName:=False)
 
-        clsTransformGroupByFunc.SetRCommand("instat_calculation$New")
+        clsTransformGroupByFunc.SetRCommand("instat_calculation$new")
         clsTransformGroupByFunc.AddParameter("type", Chr(34) & "by" & Chr(34))
         clsTransformGroupByFunc.SetAssignTo("grouping")
 
@@ -170,7 +170,7 @@ Public Class dlgTransformClimatic
         clsRTransform.AddParameter("result_name", Chr(34) & "moving" & Chr(34))
         clsRTransform.AddParameter("manipulations", clsRFunctionParameter:=clsTransformManipulationsFunc)
 
-        clsReplaceNA60.SetRCommand("instat_calculation$New")
+        clsReplaceNA60.SetRCommand("instat_calculation$new")
         clsReplaceNA60.AddParameter("type", Chr(34) & "calculation" & Chr(34))
         clsReplaceNA60.AddParameter("function_exp", Chr(34) & "replace(" & ucrReceiverData.GetVariableNames(False) & ", Is .na(" & ucrReceiverData.GetVariableNames(False) & "), 60)" & Chr(34))
         clsReplaceNA60.AddParameter("result_name", Chr(34) & "Replace_NA_60" & Chr(34))
@@ -178,7 +178,7 @@ Public Class dlgTransformClimatic
         clsReplaceNA60.AddParameter("save", "0")
         clsReplaceNA60.SetAssignTo("Replace_NA_60")
 
-        clsWaterBalance60.SetRCommand("instat_calculation$New")
+        clsWaterBalance60.SetRCommand("instat_calculation$new")
         clsWaterBalance60.AddParameter("type", Chr(34) & "calculation" & Chr(34))
         clsWaterBalance60.AddParameter("result_name", Chr(34) & "Water_Balance_60" & Chr(34))
         clsWaterBalance60.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubCalcList)
@@ -186,7 +186,7 @@ Public Class dlgTransformClimatic
         clsWaterBalance60.AddParameter("save", "2")
         clsWaterBalance60.SetAssignTo("Water_Balance_60")
 
-        clsRRainday.SetRCommand("instat_calculation$New")
+        clsRRainday.SetRCommand("instat_calculation$new")
         clsRRainday.AddParameter("type", Chr(34) & "calculation" & Chr(34))
         clsRRainday.AddParameter("function_exp", Chr(34) & "match(" & ucrReceiverData.GetVariableNames(False) & ">=0.85, 1, nomatch = 0)" & Chr(34))
         clsRRainday.AddParameter("result_name", Chr(34) & "rain_day" & Chr(34))
