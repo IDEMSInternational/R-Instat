@@ -22,24 +22,15 @@ Partial Class sdgOneVarUseModFit
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtonsSubdialogue()
         Me.tbBootstrapOptions = New System.Windows.Forms.TabPage()
-        Me.ucrChkParametric = New instat.ucrCheck()
         Me.lblNumberOfIterations = New System.Windows.Forms.Label()
-        Me.ucrNudIterations = New instat.ucrNud()
         Me.lblCI = New System.Windows.Forms.Label()
-        Me.ucrNudCI = New instat.ucrNud()
         Me.tbQuantiles = New System.Windows.Forms.TabPage()
-        Me.ucrInputQuantiles = New instat.ucrInputComboBox()
-        Me.ucrNudBy = New instat.ucrNud()
-        Me.ucrNudTo = New instat.ucrNud()
-        Me.ucrNudFrom = New instat.ucrNud()
         Me.lblFrom = New System.Windows.Forms.Label()
         Me.lblTo = New System.Windows.Forms.Label()
         Me.rdoSequence = New System.Windows.Forms.RadioButton()
         Me.rdoInsertValues = New System.Windows.Forms.RadioButton()
         Me.lblBy = New System.Windows.Forms.Label()
-        Me.ucrPnlQuantiles = New instat.UcrPanel()
         Me.tbPlots = New System.Windows.Forms.TabPage()
         Me.rdoNoPlot = New System.Windows.Forms.RadioButton()
         Me.rdoPlotAll = New System.Windows.Forms.RadioButton()
@@ -48,27 +39,29 @@ Partial Class sdgOneVarUseModFit
         Me.rdoDensityPlot = New System.Windows.Forms.RadioButton()
         Me.rdoQQPlot = New System.Windows.Forms.RadioButton()
         Me.rdoCIcdf = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlPlots = New instat.UcrPanel()
         Me.tbOneVarUseModFit = New System.Windows.Forms.TabControl()
+        Me.ucrPnlPlots = New instat.UcrPanel()
+        Me.ucrInputQuantiles = New instat.ucrInputComboBox()
+        Me.ucrNudBy = New instat.ucrNud()
+        Me.ucrNudTo = New instat.ucrNud()
+        Me.ucrNudFrom = New instat.ucrNud()
+        Me.ucrPnlQuantiles = New instat.UcrPanel()
+        Me.ucrChkParametric = New instat.ucrCheck()
+        Me.ucrNudIterations = New instat.ucrNud()
+        Me.ucrNudCI = New instat.ucrNud()
+        Me.ucrBase = New instat.ucrButtonsSubdialogue()
         Me.tbBootstrapOptions.SuspendLayout()
         Me.tbQuantiles.SuspendLayout()
         Me.tbPlots.SuspendLayout()
         Me.tbOneVarUseModFit.SuspendLayout()
         Me.SuspendLayout()
         '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(59, 216)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(142, 30)
-        Me.ucrBase.TabIndex = 0
-        '
         'tbBootstrapOptions
         '
         Me.tbBootstrapOptions.Controls.Add(Me.ucrChkParametric)
         Me.tbBootstrapOptions.Controls.Add(Me.lblNumberOfIterations)
-        Me.tbBootstrapOptions.Controls.Add(Me.ucrNudIterations)
         Me.tbBootstrapOptions.Controls.Add(Me.lblCI)
+        Me.tbBootstrapOptions.Controls.Add(Me.ucrNudIterations)
         Me.tbBootstrapOptions.Controls.Add(Me.ucrNudCI)
         Me.tbBootstrapOptions.Location = New System.Drawing.Point(4, 22)
         Me.tbBootstrapOptions.Name = "tbBootstrapOptions"
@@ -77,14 +70,6 @@ Partial Class sdgOneVarUseModFit
         Me.tbBootstrapOptions.TabIndex = 2
         Me.tbBootstrapOptions.Text = "Bootstrap Options"
         Me.tbBootstrapOptions.UseVisualStyleBackColor = True
-        '
-        'ucrChkParametric
-        '
-        Me.ucrChkParametric.Checked = False
-        Me.ucrChkParametric.Location = New System.Drawing.Point(14, 71)
-        Me.ucrChkParametric.Name = "ucrChkParametric"
-        Me.ucrChkParametric.Size = New System.Drawing.Size(140, 20)
-        Me.ucrChkParametric.TabIndex = 4
         '
         'lblNumberOfIterations
         '
@@ -95,18 +80,6 @@ Partial Class sdgOneVarUseModFit
         Me.lblNumberOfIterations.TabIndex = 0
         Me.lblNumberOfIterations.Text = "Number of Iterations:"
         '
-        'ucrNudIterations
-        '
-        Me.ucrNudIterations.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudIterations.Increment = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudIterations.Location = New System.Drawing.Point(129, 9)
-        Me.ucrNudIterations.Maximum = New Decimal(New Integer() {10001, 0, 0, 0})
-        Me.ucrNudIterations.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudIterations.Name = "ucrNudIterations"
-        Me.ucrNudIterations.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudIterations.TabIndex = 1
-        Me.ucrNudIterations.Value = New Decimal(New Integer() {1001, 0, 0, 0})
-        '
         'lblCI
         '
         Me.lblCI.AutoSize = True
@@ -115,18 +88,6 @@ Partial Class sdgOneVarUseModFit
         Me.lblCI.Size = New System.Drawing.Size(102, 13)
         Me.lblCI.TabIndex = 2
         Me.lblCI.Text = "Confidence Interval:"
-        '
-        'ucrNudCI
-        '
-        Me.ucrNudCI.DecimalPlaces = New Decimal(New Integer() {2, 0, 0, 0})
-        Me.ucrNudCI.Increment = New Decimal(New Integer() {5, 0, 0, 131072})
-        Me.ucrNudCI.Location = New System.Drawing.Point(129, 35)
-        Me.ucrNudCI.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudCI.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudCI.Name = "ucrNudCI"
-        Me.ucrNudCI.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudCI.TabIndex = 3
-        Me.ucrNudCI.Value = New Decimal(New Integer() {95, 0, 0, 131072})
         '
         'tbQuantiles
         '
@@ -147,51 +108,6 @@ Partial Class sdgOneVarUseModFit
         Me.tbQuantiles.TabIndex = 1
         Me.tbQuantiles.Text = "Quantiles"
         Me.tbQuantiles.UseVisualStyleBackColor = True
-        '
-        'ucrInputQuantiles
-        '
-        Me.ucrInputQuantiles.AddQuotesIfUnrecognised = True
-        Me.ucrInputQuantiles.IsReadOnly = False
-        Me.ucrInputQuantiles.Location = New System.Drawing.Point(50, 144)
-        Me.ucrInputQuantiles.Name = "ucrInputQuantiles"
-        Me.ucrInputQuantiles.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputQuantiles.TabIndex = 9
-        '
-        'ucrNudBy
-        '
-        Me.ucrNudBy.DecimalPlaces = New Decimal(New Integer() {2, 0, 0, 0})
-        Me.ucrNudBy.Increment = New Decimal(New Integer() {5, 0, 0, 131072})
-        Me.ucrNudBy.Location = New System.Drawing.Point(79, 91)
-        Me.ucrNudBy.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudBy.Minimum = New Decimal(New Integer() {1, 0, 0, 196608})
-        Me.ucrNudBy.Name = "ucrNudBy"
-        Me.ucrNudBy.Size = New System.Drawing.Size(53, 20)
-        Me.ucrNudBy.TabIndex = 7
-        Me.ucrNudBy.Value = New Decimal(New Integer() {1, 0, 0, 65536})
-        '
-        'ucrNudTo
-        '
-        Me.ucrNudTo.DecimalPlaces = New Decimal(New Integer() {2, 0, 0, 0})
-        Me.ucrNudTo.Increment = New Decimal(New Integer() {5, 0, 0, 131072})
-        Me.ucrNudTo.Location = New System.Drawing.Point(79, 65)
-        Me.ucrNudTo.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTo.Name = "ucrNudTo"
-        Me.ucrNudTo.Size = New System.Drawing.Size(52, 20)
-        Me.ucrNudTo.TabIndex = 5
-        Me.ucrNudTo.Value = New Decimal(New Integer() {1, 0, 0, 0})
-        '
-        'ucrNudFrom
-        '
-        Me.ucrNudFrom.DecimalPlaces = New Decimal(New Integer() {2, 0, 0, 0})
-        Me.ucrNudFrom.Increment = New Decimal(New Integer() {5, 0, 0, 131072})
-        Me.ucrNudFrom.Location = New System.Drawing.Point(79, 39)
-        Me.ucrNudFrom.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFrom.Name = "ucrNudFrom"
-        Me.ucrNudFrom.Size = New System.Drawing.Size(52, 20)
-        Me.ucrNudFrom.TabIndex = 2
-        Me.ucrNudFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblFrom
         '
@@ -241,13 +157,6 @@ Partial Class sdgOneVarUseModFit
         Me.lblBy.Size = New System.Drawing.Size(22, 13)
         Me.lblBy.TabIndex = 6
         Me.lblBy.Text = "By:"
-        '
-        'ucrPnlQuantiles
-        '
-        Me.ucrPnlQuantiles.Location = New System.Drawing.Point(5, 12)
-        Me.ucrPnlQuantiles.Name = "ucrPnlQuantiles"
-        Me.ucrPnlQuantiles.Size = New System.Drawing.Size(227, 164)
-        Me.ucrPnlQuantiles.TabIndex = 3
         '
         'tbPlots
         '
@@ -339,13 +248,6 @@ Partial Class sdgOneVarUseModFit
         Me.rdoCIcdf.Text = "CDF Plot with Confidence Intervals"
         Me.rdoCIcdf.UseVisualStyleBackColor = True
         '
-        'ucrPnlPlots
-        '
-        Me.ucrPnlPlots.Location = New System.Drawing.Point(6, 11)
-        Me.ucrPnlPlots.Name = "ucrPnlPlots"
-        Me.ucrPnlPlots.Size = New System.Drawing.Size(227, 160)
-        Me.ucrPnlPlots.TabIndex = 0
-        '
         'tbOneVarUseModFit
         '
         Me.tbOneVarUseModFit.Controls.Add(Me.tbPlots)
@@ -356,6 +258,104 @@ Partial Class sdgOneVarUseModFit
         Me.tbOneVarUseModFit.SelectedIndex = 0
         Me.tbOneVarUseModFit.Size = New System.Drawing.Size(249, 205)
         Me.tbOneVarUseModFit.TabIndex = 0
+        '
+        'ucrPnlPlots
+        '
+        Me.ucrPnlPlots.Location = New System.Drawing.Point(6, 6)
+        Me.ucrPnlPlots.Name = "ucrPnlPlots"
+        Me.ucrPnlPlots.Size = New System.Drawing.Size(227, 165)
+        Me.ucrPnlPlots.TabIndex = 0
+        '
+        'ucrInputQuantiles
+        '
+        Me.ucrInputQuantiles.AddQuotesIfUnrecognised = True
+        Me.ucrInputQuantiles.IsReadOnly = False
+        Me.ucrInputQuantiles.Location = New System.Drawing.Point(50, 144)
+        Me.ucrInputQuantiles.Name = "ucrInputQuantiles"
+        Me.ucrInputQuantiles.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputQuantiles.TabIndex = 9
+        '
+        'ucrNudBy
+        '
+        Me.ucrNudBy.DecimalPlaces = New Decimal(New Integer() {2, 0, 0, 0})
+        Me.ucrNudBy.Increment = New Decimal(New Integer() {5, 0, 0, 131072})
+        Me.ucrNudBy.Location = New System.Drawing.Point(79, 91)
+        Me.ucrNudBy.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudBy.Minimum = New Decimal(New Integer() {1, 0, 0, 196608})
+        Me.ucrNudBy.Name = "ucrNudBy"
+        Me.ucrNudBy.Size = New System.Drawing.Size(53, 20)
+        Me.ucrNudBy.TabIndex = 7
+        Me.ucrNudBy.Value = New Decimal(New Integer() {1, 0, 0, 65536})
+        '
+        'ucrNudTo
+        '
+        Me.ucrNudTo.DecimalPlaces = New Decimal(New Integer() {2, 0, 0, 0})
+        Me.ucrNudTo.Increment = New Decimal(New Integer() {5, 0, 0, 131072})
+        Me.ucrNudTo.Location = New System.Drawing.Point(79, 65)
+        Me.ucrNudTo.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTo.Name = "ucrNudTo"
+        Me.ucrNudTo.Size = New System.Drawing.Size(52, 20)
+        Me.ucrNudTo.TabIndex = 5
+        Me.ucrNudTo.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'ucrNudFrom
+        '
+        Me.ucrNudFrom.DecimalPlaces = New Decimal(New Integer() {2, 0, 0, 0})
+        Me.ucrNudFrom.Increment = New Decimal(New Integer() {5, 0, 0, 131072})
+        Me.ucrNudFrom.Location = New System.Drawing.Point(79, 39)
+        Me.ucrNudFrom.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFrom.Name = "ucrNudFrom"
+        Me.ucrNudFrom.Size = New System.Drawing.Size(52, 20)
+        Me.ucrNudFrom.TabIndex = 2
+        Me.ucrNudFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrPnlQuantiles
+        '
+        Me.ucrPnlQuantiles.Location = New System.Drawing.Point(5, 12)
+        Me.ucrPnlQuantiles.Name = "ucrPnlQuantiles"
+        Me.ucrPnlQuantiles.Size = New System.Drawing.Size(227, 164)
+        Me.ucrPnlQuantiles.TabIndex = 3
+        '
+        'ucrChkParametric
+        '
+        Me.ucrChkParametric.Checked = False
+        Me.ucrChkParametric.Location = New System.Drawing.Point(14, 71)
+        Me.ucrChkParametric.Name = "ucrChkParametric"
+        Me.ucrChkParametric.Size = New System.Drawing.Size(140, 20)
+        Me.ucrChkParametric.TabIndex = 4
+        '
+        'ucrNudIterations
+        '
+        Me.ucrNudIterations.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudIterations.Increment = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudIterations.Location = New System.Drawing.Point(129, 9)
+        Me.ucrNudIterations.Maximum = New Decimal(New Integer() {10001, 0, 0, 0})
+        Me.ucrNudIterations.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudIterations.Name = "ucrNudIterations"
+        Me.ucrNudIterations.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudIterations.TabIndex = 1
+        Me.ucrNudIterations.Value = New Decimal(New Integer() {1001, 0, 0, 0})
+        '
+        'ucrNudCI
+        '
+        Me.ucrNudCI.DecimalPlaces = New Decimal(New Integer() {2, 0, 0, 0})
+        Me.ucrNudCI.Increment = New Decimal(New Integer() {5, 0, 0, 131072})
+        Me.ucrNudCI.Location = New System.Drawing.Point(129, 35)
+        Me.ucrNudCI.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudCI.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCI.Name = "ucrNudCI"
+        Me.ucrNudCI.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudCI.TabIndex = 3
+        Me.ucrNudCI.Value = New Decimal(New Integer() {95, 0, 0, 131072})
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(59, 216)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(142, 30)
+        Me.ucrBase.TabIndex = 0
         '
         'sdgOneVarUseModFit
         '
