@@ -46,12 +46,14 @@ Public Class dlgDescribeOneVariable
         ucrReceiverDescribeOneVar.Selector = ucrSelectorDescribeOneVar
         ucrReceiverDescribeOneVar.SetMeAsReceiver()
 
+
         ucrChkOmitMissing.SetText("Omit Missing Values")
         ucrChkOmitMissing.SetRDefault("FALSE")
 
         ucrChkCustomise.SetText("Customise")
         ucrChkCustomise.AddFunctionNamesCondition(True, frmMain.clsRLink.strInstatDataObject & "$summary")
         ucrChkCustomise.AddFunctionNamesCondition(False, "summary")
+        
 
         ucrChkSaveResult.SetText("Save Result") 'this is disabled in the initial implementation
         ucrChkSaveResult.Enabled = False
@@ -95,9 +97,8 @@ Public Class dlgDescribeOneVariable
     Private Sub SetRCodeForControls(bReset As Boolean)
         'When we set the R code, the receiver and checkboxs should have whatever is currently the base function
         ucrReceiverDescribeOneVar.AddAdditionalCodeParameterPair(clsInstatSummaryFunction, New RParameter("columns_to_summarise", 0), iAdditionalPairNo:=1)
-        ucrReceiverDescribeOneVar.SetParameterIsString()
         ucrReceiverDescribeOneVar.SetRCode(clsSummaryFunction, bReset)
-        ucrChkOmitMissing.SetRCode(ucrBaseDescribeOneVar.clsRsyntax.clsBaseFunction, bReset)
+        ucrChkOmitMissing.SetRCode(clsSummaryFunction, bReset)
         ucrChkCustomise.SetRCode(ucrBaseDescribeOneVar.clsRsyntax.clsBaseFunction, bReset)
         'However, the selector always has the Instat function. This prevents the selector's parameter being added in to the wrong function.
         ucrSelectorDescribeOneVar.SetRCode(clsInstatSummaryFunction, bReset)
@@ -128,12 +129,14 @@ Public Class dlgDescribeOneVariable
     Private Sub ChangeBaseFunction()
         If ucrChkCustomise.Checked Then
             ucrBaseDescribeOneVar.clsRsyntax.SetBaseRFunction(clsInstatSummaryFunction)
+            ucrReceiverDescribeOneVar.SetParameterIsString()
             'For the receiver we set the parameter as new because the value will be different to the current value (one is string and one is RFunction)
             'For the checkbox we just change the parameter name, because we want to keep the same value in the control for the new function.
             'Changing the parameter name should be used very cautiously. Normally it is safer to set a new parameter.
             cmdSummaries.Enabled = True
         Else
             ucrBaseDescribeOneVar.clsRsyntax.SetBaseRFunction(clsSummaryFunction)
+            ucrReceiverDescribeOneVar.SetParameterIsRFunction()
             cmdSummaries.Enabled = False
         End If
         'We need to update the base function to include the 
