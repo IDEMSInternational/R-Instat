@@ -201,9 +201,10 @@ Public Class dlgInsertColumn
 
     Private Sub ucrReceiverColumnsToInsert_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnsToInsert.ControlContentsChanged, ucrPnlColumnsOrRows.ControlContentsChanged, ucrPnlBeforeAfter.ControlContentsChanged, ucrPnlInsertColumns.ControlContentsChanged, ucrInputPrefixForNewColumn.ControlContentsChanged, ucrInputDefaultValue.ControlContentsChanged, ucrInputBeforeAfter.ControlContentsChanged, ucrNudNumberOfRows.ControlContentsChanged, ucrNudStartRow.ControlContentsChanged, ucrNudNumberOfColumns.ControlContentsChanged
         TestOKEnabled()
+        ucrNudStartRow.SetMinMax(1, ucrDataFramesList.iDataFrameLength)
     End Sub
 
-    Private Sub ucrSelectorInsertColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorInsertColumns.ControlValueChanged, ucrNudStartRow.ControlValueChanged
+    Private Sub ucrSelectorInsertColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorInsertColumns.ControlValueChanged, ucrNudStartRow.ControlValueChanged, ucrPnlBeforeAfter.ControlContentsChanged
         ucrNudStartRow.SetMinMax(1, ucrDataFramesList.iDataFrameLength)
     End Sub
 End Class
