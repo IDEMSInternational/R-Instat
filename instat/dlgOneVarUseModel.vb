@@ -14,12 +14,13 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgOneVarUseModel
     Public bfirstload As Boolean = True
     Public bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
-    Public clsRBootFunction, clsQuantileFunction, clsSeqFunction As New RFunction
+   Public clsRBootFunction, clsQuantileFunction, clsSeqFunction, clsReceiver As New RFunction
     Private Sub dlgOneVarUseModel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bfirstload Then
@@ -53,7 +54,6 @@ Public Class dlgOneVarUseModel
         ucrChkProduceBootstrap.SetText("Produce Bootstrap")
 
         'This part is temporary for now
-        sdgOneVarUseModFit.SetMyBootFunction(clsRBootFunction)
 
         ucrNewDataFrameName.SetPrefix("UseModel")
         ucrNewDataFrameName.SetDataFrameSelector(ucrSelectorUseModel.ucrAvailableDataFrames)
@@ -83,7 +83,7 @@ Public Class dlgOneVarUseModel
         clsSeqFunction.SetRCommand("seq")
         clsSeqFunction.AddParameter("from", 0)
         clsSeqFunction.AddParameter("to", 1)
-        clsSeqFunction.AddParameter("by",0.25)
+        clsSeqFunction.AddParameter("by", 0.25)
 
         clsQuantileFunction.SetRCommand("quantile")
         clsQuantileFunction.AddParameter("probs", clsRFunctionParameter:=clsSeqFunction)
@@ -149,7 +149,7 @@ Public Class dlgOneVarUseModel
     End Sub
 
     Private Sub cmdFitModel_Click(sender As Object, e As EventArgs) Handles cmdFitModelandBootstrap.Click
-        sdgOneVarUseModFit.SetRFunction(clsSeqFunction, clsRBootFunction, clsQuantileFunction, bResetSubdialog)
+        sdgOneVarUseModFit.SetRFunction(clsSeqFunction, clsRBootFunction, clsQuantileFunction, clsReceiver, bResetSubdialog)
         bResetSubdialog = False
         sdgOneVarUseModFit.ShowDialog()
     End Sub
@@ -159,11 +159,15 @@ Public Class dlgOneVarUseModel
             clsQuantileFunction.AddParameter("x", clsRFunctionParameter:=clsRBootFunction)
         Else
             clsQuantileFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverObject.GetVariables())
-                   End If
+        End If
         sdgOneVarUseModFit.SetPlotOptions()
     End Sub
 
     Private Sub ucrReceiver_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverObject.ControlContentsChanged, ucrSaveObjects.ControlContentsChanged, ucrNewDataFrameName.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrReceiverObject_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverObject.ControlValueChanged
+        clsReceiver = ucrReceiverObject.GetVariables()
     End Sub
 End Class
