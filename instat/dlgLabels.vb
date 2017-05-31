@@ -39,7 +39,7 @@ Public Class dlgLabels
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverLabels.IsEmpty() AndAlso ucrFactorLabels.IsColumnComplete("Labels") AndAlso (ucrChkAddLevels.Visible AndAlso Not ucrChkAddLevels.Checked OrElse (ucrFactorLabels.IsColumnComplete("Levels"))) Then
+        If Not ucrReceiverLabels.IsEmpty() AndAlso ucrFactorLabels.IsColumnComplete(ucrFactorLabels.strLabelsName) AndAlso (ucrChkAddLevels.Visible AndAlso Not ucrChkAddLevels.Checked OrElse (ucrFactorLabels.IsColumnComplete(ucrFactorLabels.strLevelsName))) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -60,8 +60,8 @@ Public Class dlgLabels
         ucrFactorLabels.SetParameter(New RParameter("new_labels", 2))
         ucrFactorLabels.SetReceiver(ucrReceiverLabels)
         ucrFactorLabels.SetAsViewerOnly()
-        ucrFactorLabels.AddEditableColumns({"Labels", "Levels"})
-        ucrFactorLabels.SetIsGridColumn("Labels")
+        ucrFactorLabels.AddEditableColumns({ucrFactorLabels.strLevelsName, ucrFactorLabels.strLabelsName})
+        ucrFactorLabels.SetIsGridColumn(ucrFactorLabels.strLabelsName)
         ucrFactorLabels.SetLevelsCheckbox(ucrChkAddLevels)
 
         ucrReceiverLabels.SetParameter(New RParameter("col_name", 1))
@@ -94,8 +94,8 @@ Public Class dlgLabels
 
     'TODO modify factor control to be able to manage two parameters from different columns
     Private Sub ucrFactorLabels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorLabels.ControlValueChanged, ucrChkAddLevels.ControlValueChanged
-        If (ucrChkAddLevels.Checked OrElse Not ucrChkAddLevels.Visible) AndAlso ucrFactorLabels.IsColumnComplete("Levels") Then
-            clsViewLabels.AddParameter("new_levels", strParameterValue:=ucrFactorLabels.GetColumnInFactorSheet("Levels", bWithQuotes:=False))
+        If (ucrChkAddLevels.Checked OrElse Not ucrChkAddLevels.Visible) AndAlso ucrFactorLabels.IsColumnComplete(ucrFactorLabels.strLevelsName) Then
+            clsViewLabels.AddParameter("new_levels", strParameterValue:=ucrFactorLabels.GetColumnInFactorSheet(ucrFactorLabels.strLevelsName, bWithQuotes:=False))
         Else
             clsViewLabels.RemoveParameterByName("new_levels")
         End If

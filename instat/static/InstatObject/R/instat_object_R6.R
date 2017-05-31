@@ -747,8 +747,8 @@ instat_object$set("public", "get_column_factor_levels", function(data_name,col_n
 } 
 )
 
-instat_object$set("public", "get_factor_data_frame", function(data_name,col_name = "") {
-  self$get_data_objects(data_name)$get_factor_data_frame(col_name)
+instat_object$set("public", "get_factor_data_frame", function(data_name, col_name = "", include_levels = TRUE) {
+  self$get_data_objects(data_name)$get_factor_data_frame(col_name = col_name, include_levels = include_levels)
 } 
 )
 
