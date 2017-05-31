@@ -13,11 +13,11 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
-
 Public Class sdgOneVarUseModFit
     Private bControlsInitialised As Boolean = False
-    Private clsRSeqFunction, clsOneVarRBootFunction, clsOneVarQuantileFunction, clsRPlotFunction, clsRBootFunction As New RFunction
+    Private clsRSeqFunction, clsOneVarRBootFunction, clsOneVarQuantileFunction, clsRPlotFunction, clsRBootFunction, clsRReceiver As New RFunction
     Public bfirstload As Boolean = True
     Private Sub sdgOneVarFitModDisplay(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -66,6 +66,8 @@ Public Class sdgOneVarUseModFit
         dctQuantileValues.Add("0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9", "0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9")
         ucrInputQuantiles.SetItems(dctQuantileValues)
         ucrInputQuantiles.SetRDefault("0.25, 0.5, 0.75")
+        ucrInputQuantiles.SetValidationTypeAsNumericList(MinValue:=0, MaxValue:=1)
+
 
         ucrPnlQuantiles.AddToLinkedControls(ucrInputQuantiles, {rdoInsertValues}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
         ucrPnlQuantiles.AddToLinkedControls(ucrNudTo, {rdoSequence}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
@@ -78,13 +80,14 @@ Public Class sdgOneVarUseModFit
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRFunction(clsNewRSeqFunction As RFunction, clsNewRbootFunction As RFunction, clsNewQuantileFunction As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRFunction(clsNewRSeqFunction As RFunction, clsNewRbootFunction As RFunction, clsNewQuantileFunction As RFunction, clsNewReceiver As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
         clsRSeqFunction = clsNewRSeqFunction
         clsOneVarRBootFunction = clsNewRbootFunction
         clsOneVarQuantileFunction = clsNewQuantileFunction
+        clsRReceiver = clsNewReceiver
 
         'Setting Rcode for the sub dialog
         ucrNudFrom.SetRCode(clsRSeqFunction, bReset)
@@ -93,6 +96,7 @@ Public Class sdgOneVarUseModFit
         ucrChkParametric.SetRCode(clsOneVarRBootFunction, bReset)
         ucrNudIterations.SetRCode(clsOneVarRBootFunction, bReset)
         ucrNudCI.SetRCode(clsOneVarQuantileFunction, bReset)
+
     End Sub
 
     Public Sub SetDefaults()
@@ -106,36 +110,32 @@ Public Class sdgOneVarUseModFit
         If rdoPlotAll.Checked Then
             clsRPlotFunction.ClearParameters()
             clsRPlotFunction.SetRCommand("plot")
-            clsRPlotFunction.AddParameter("x", clsRFunctionParameter:=dlgOneVarUseModel.ucrReceiverObject.GetVariables())
+            clsRPlotFunction.AddParameter("x", clsRFunctionParameter:=clsRReceiver)
         ElseIf rdoPPPlot.Checked Then
             clsRPlotFunction.ClearParameters()
             clsRPlotFunction.SetRCommand("ppcomp")
-            clsRPlotFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarUseModel.ucrReceiverObject.GetVariables())
+            clsRPlotFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
         ElseIf rdoCDFPlot.Checked Then
             clsRPlotFunction.ClearParameters()
             clsRPlotFunction.SetRCommand("cdfcomp")
-            clsRPlotFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarUseModel.ucrReceiverObject.GetVariables())
+            clsRPlotFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
         ElseIf rdoQQPlot.Checked Then
             clsRPlotFunction.ClearParameters()
             clsRPlotFunction.SetRCommand("qqcomp")
-            clsRPlotFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarUseModel.ucrReceiverObject.GetVariables())
+            clsRPlotFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
         ElseIf rdoDensityPlot.Checked Then
             clsRPlotFunction.ClearParameters()
             clsRPlotFunction.SetRCommand("denscomp")
-            clsRPlotFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarUseModel.ucrReceiverObject.GetVariables())
+            clsRPlotFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
         ElseIf rdoCIcdf.Checked Then
             clsRPlotFunction.ClearParameters()
             clsRPlotFunction.SetRCommand("CIcdfplot")
             dlgOneVarUseModel.clsRBootFunction.RemoveParameterByName("bootmethod")
             dlgOneVarUseModel.clsRBootFunction.RemoveParameterByName("niter")
-            clsRPlotFunction.AddParameter("b", clsRFunctionParameter:=dlgOneVarUseModel.clsRBootFunction)
+            clsRPlotFunction.AddParameter("b", clsRFunctionParameter:=clsOneVarRBootFunction)
             clsRPlotFunction.AddParameter("CI.output", Chr(34) & "quantile" & Chr(34))
         End If
         frmMain.clsRLink.RunScript(clsRPlotFunction.ToScript(), iCallType:=3)
-    End Sub
-
-    Public Sub SetMyBootFunction(clsRNewBoot As RFunction)
-        clsRBootFunction = clsRNewBoot
     End Sub
 
     Public Sub SetPlotOptions()
