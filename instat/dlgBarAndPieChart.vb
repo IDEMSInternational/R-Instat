@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
+
 Public Class dlgBarAndPieChart
     Private clsRggplotFunction As New RFunction
     Private clsRgeomBarFunction As New RFunction
@@ -22,13 +23,13 @@ Public Class dlgBarAndPieChart
     Private clsBaseOperator As New ROperator
     Private clsRCoordPolarParam As New RParameter
 
-    Private clsGraphTitleFunction As New RFunction
-    Private clsLegendFunction As New RFunction
+    Private clsLabsFunction As New RFunction
     Private clsRFacetFunction As New RFunction
 
     Private bReset As Boolean = True
     Private bFirstLoad As Boolean = True
-    Private bResetSubdialog As Boolean = False
+    Private bResetSubdialog As Boolean = True
+
     Private Sub cmdOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -42,6 +43,7 @@ Public Class dlgBarAndPieChart
         autoTranslate(Me)
         TestOkEnabled()
     End Sub
+
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrFactorReceiver.SetRCode(clsBarAesFunction, bReset)
         ucrFactorReceiver.AddAdditionalCodeParameterPair(clsPieAesFunction, New RParameter("fill", 0), iAdditionalPairNo:=1)
@@ -151,17 +153,13 @@ Public Class dlgBarAndPieChart
         clsRgeomBarFunction.SetPackageName("ggplot2")
         clsRgeomBarFunction.SetRCommand("geom_bar")
 
-        clsGraphTitleFunction.SetPackageName("ggplot2")
-        clsGraphTitleFunction.SetRCommand("ggtitle")
-        clsBaseOperator.AddParameter("ggtile", clsRFunctionParameter:=clsGraphTitleFunction)
-
-        clsLegendFunction.SetPackageName("ggplot2")
-        clsLegendFunction.SetRCommand("labs")
-        clsBaseOperator.AddParameter("ledendtitle", clsRFunctionParameter:=clsLegendFunction)
+        clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
 
         clsRFacetFunction.SetPackageName("ggplot2")
         clsRFacetFunction.SetRCommand("facet_wrap")
         clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsRFacetFunction)
+
+        clsBaseOperator.AddParameter("theme", "theme_grey()")
 
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
@@ -197,7 +195,7 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetRFunction(clsBaseOperator, clsGraphTitleFunction, clsLegendFunction, clsRFacetFunction, bResetSubdialog)
+        sdgPlots.SetRCode(clsBaseOperator, clsGraphTitleFunction, clsLabsFunction, clsRFacetFunction, bResetSubdialog)
         sdgPlots.SetDataFrame(strNewDataFrame:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         bResetSubdialog = False
         sdgPlots.ShowDialog()
