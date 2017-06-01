@@ -182,26 +182,23 @@ Public Class dlgUseDate
     End Sub
 
     Private Sub ucrInputComboBoxMonth_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputComboBoxMonth.ControlContentsChanged
-        If ucrInputComboBoxMonth.cboInput.SelectedItem IsNot Nothing Then
-            If ucrInputComboBoxMonth.cboInput.SelectedItem = "January" Then
-                ucrNudShiftStartDay.SetMinMax(1, 31)
-            ElseIf ucrInputComboBoxMonth.cboInput.SelectedItem = "February" Then
-                ucrNudShiftStartDay.SetMinMax(1, 28)
-            ElseIf ucrInputComboBoxMonth.cboInput.SelectedItem = "March" Then
-                ucrNudShiftStartDay.SetMinMax(1, 31)
-            ElseIf ucrInputComboBoxMonth.cboInput.SelectedItem = "May" Then
-                ucrNudShiftStartDay.SetMinMax(1, 31)
-            ElseIf ucrInputComboBoxMonth.cboInput.SelectedItem = "July" Then
-                ucrNudShiftStartDay.SetMinMax(1, 31)
-            ElseIf ucrInputComboBoxMonth.cboInput.SelectedItem = "August" Then
-                ucrNudShiftStartDay.SetMinMax(1, 31)
-            ElseIf ucrInputComboBoxMonth.cboInput.SelectedItem = "October" Then
-                ucrNudShiftStartDay.SetMinMax(1, 31)
-            ElseIf ucrInputComboBoxMonth.cboInput.SelectedItem = "December" Then
-                ucrNudShiftStartDay.SetMinMax(1, 31)
-            Else
-                ucrNudShiftStartDay.SetMinMax(1, 30)
-            End If
+        Dim strMonth As String
+        'This is the correct way to get the text. 
+        'Also by defining it as a variable, I don't have to repeat this line many times.
+        strMonth = ucrInputComboBoxMonth.GetText()
+        If strMonth = "February" Then
+            ucrNudShiftStartDay.SetMinMax(1, 28)
+            'Creating an array of strings and checking if strMonth is contained in it means you can group similar conditions together
+        ElseIf {"April", "June", "September", "November"}.Contains(strMonth) Then
+            ucrNudShiftStartDay.SetMinMax(1, 30)
+            'By leaving the biggest group of months for the Else, there is less typing needed
+        Else
+            ucrNudShiftStartDay.SetMinMax(1, 31)
+            'Alternative (this is safer because it checks the final conditions instead of in Else):
+            'ElseIf {"January", "March", "July", "August", "October", "December"}.Contains(strMonth) Then
+            '    ucrNudShiftStartDay.SetMinMax(1, 33)
+            'Else
+            '   Some kind of error because value not a month
         End If
     End Sub
 
