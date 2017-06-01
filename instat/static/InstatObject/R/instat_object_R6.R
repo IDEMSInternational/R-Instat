@@ -747,8 +747,8 @@ instat_object$set("public", "get_column_factor_levels", function(data_name,col_n
 } 
 )
 
-instat_object$set("public", "get_factor_data_frame", function(data_name,col_name = "") {
-  self$get_data_objects(data_name)$get_factor_data_frame(col_name)
+instat_object$set("public", "get_factor_data_frame", function(data_name, col_name = "", include_levels = TRUE) {
+  self$get_data_objects(data_name)$get_factor_data_frame(col_name = col_name, include_levels = include_levels)
 } 
 )
 
@@ -834,8 +834,8 @@ instat_object$set("public", "drop_unused_factor_levels", function(data_name, col
 } 
 )
 
-instat_object$set("public", "set_factor_levels", function(data_name, col_name, new_levels, set_new_labels = TRUE) {
-  self$get_data_objects(data_name)$set_factor_levels(col_name = col_name, new_levels = new_levels, set_new_labels = set_new_labels)
+instat_object$set("public", "set_factor_levels", function(data_name, col_name, new_labels, new_levels, set_new_labels = TRUE) {
+  self$get_data_objects(data_name)$set_factor_levels(col_name = col_name, new_labels = new_labels, new_levels = new_levels, set_new_labels = set_new_labels)
 } 
 )
 
