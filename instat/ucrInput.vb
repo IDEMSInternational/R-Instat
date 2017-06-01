@@ -43,7 +43,7 @@ Public Class ucrInput
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        bUpdateRCodeFromControl = True
+        bUpdateRCodeFromControl = False
     End Sub
 
     Public Overridable Sub SetName(strName As String, Optional bSilent As Boolean = False)
