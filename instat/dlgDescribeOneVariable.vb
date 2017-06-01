@@ -46,14 +46,12 @@ Public Class dlgDescribeOneVariable
         ucrReceiverDescribeOneVar.Selector = ucrSelectorDescribeOneVar
         ucrReceiverDescribeOneVar.SetMeAsReceiver()
 
-
         ucrChkOmitMissing.SetText("Omit Missing Values")
         ucrChkOmitMissing.SetRDefault("FALSE")
 
         ucrChkCustomise.SetText("Customise")
         ucrChkCustomise.AddFunctionNamesCondition(True, frmMain.clsRLink.strInstatDataObject & "$summary")
         ucrChkCustomise.AddFunctionNamesCondition(False, "summary")
-        
 
         ucrChkSaveResult.SetText("Save Result") 'this is disabled in the initial implementation
         ucrChkSaveResult.Enabled = False
@@ -95,6 +93,7 @@ Public Class dlgDescribeOneVariable
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrChkOmitMissing.AddAdditionalCodeParameterPair(clsInstatSummaryFunction, ucrChkOmitMissing.GetParameter(), iAdditionalPairNo:=1)
         ucrReceiverDescribeOneVar.AddAdditionalCodeParameterPair(clsInstatSummaryFunction, New RParameter("columns_to_summarise", 0), iAdditionalPairNo:=1)
         ucrReceiverDescribeOneVar.SetRCode(clsSummaryFunction, bReset)
         ucrReceiverDescribeOneVar.SetRCode(ucrBaseDescribeOneVar.clsRsyntax.clsBaseFunction, bReset) 'for now
