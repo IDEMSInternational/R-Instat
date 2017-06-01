@@ -186,7 +186,7 @@ Public Class dlgUseDate
             If ucrInputComboBoxMonth.cboInput.SelectedItem = "January" Then
                 ucrNudShiftStartDay.SetMinMax(1, 31)
             ElseIf ucrInputComboBoxMonth.cboInput.SelectedItem = "February" Then
-                ucrNudShiftStartDay.SetMinMax(1, 29)
+                ucrNudShiftStartDay.SetMinMax(1, 28)
             ElseIf ucrInputComboBoxMonth.cboInput.SelectedItem = "March" Then
                 ucrNudShiftStartDay.SetMinMax(1, 31)
             ElseIf ucrInputComboBoxMonth.cboInput.SelectedItem = "May" Then
