@@ -108,7 +108,7 @@ Public Class dlgScatterPlot
         clsRScatterGeomFunction.SetPackageName("ggplot2")
         clsRScatterGeomFunction.SetRCommand("geom_point")
 
-        clsBaseOperator.AddParameter("theme", "theme_grey()")
+        clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultTheme.Clone())
 
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
