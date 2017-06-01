@@ -23,6 +23,8 @@ Partial Class ucrAxes
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.grpAxisTitle = New System.Windows.Forms.GroupBox()
+        Me.lblTitle = New System.Windows.Forms.Label()
+        Me.rdoSpecifyTitle = New System.Windows.Forms.RadioButton()
         Me.rdoNoTitle = New System.Windows.Forms.RadioButton()
         Me.rdoTitleAuto = New System.Windows.Forms.RadioButton()
         Me.ucrTitle = New instat.ucrInputTextBox()
@@ -51,8 +53,6 @@ Partial Class ucrAxes
         Me.rdoScalesCustom = New System.Windows.Forms.RadioButton()
         Me.rdoScalesAuto = New System.Windows.Forms.RadioButton()
         Me.ucrPnlScales = New instat.UcrPanel()
-        Me.rdoSpecifyTitle = New System.Windows.Forms.RadioButton()
-        Me.lblTitle = New System.Windows.Forms.Label()
         Me.grpAxisTitle.SuspendLayout()
         Me.grpTickMarkers.SuspendLayout()
         Me.grpScales.SuspendLayout()
@@ -72,6 +72,26 @@ Partial Class ucrAxes
         Me.grpAxisTitle.TabIndex = 0
         Me.grpAxisTitle.TabStop = False
         Me.grpAxisTitle.Text = "Axis Title"
+        '
+        'lblTitle
+        '
+        Me.lblTitle.AutoSize = True
+        Me.lblTitle.Location = New System.Drawing.Point(3, 62)
+        Me.lblTitle.Name = "lblTitle"
+        Me.lblTitle.Size = New System.Drawing.Size(27, 13)
+        Me.lblTitle.TabIndex = 20
+        Me.lblTitle.Text = "Title"
+        '
+        'rdoSpecifyTitle
+        '
+        Me.rdoSpecifyTitle.AutoSize = True
+        Me.rdoSpecifyTitle.Location = New System.Drawing.Point(132, 21)
+        Me.rdoSpecifyTitle.Name = "rdoSpecifyTitle"
+        Me.rdoSpecifyTitle.Size = New System.Drawing.Size(83, 17)
+        Me.rdoSpecifyTitle.TabIndex = 3
+        Me.rdoSpecifyTitle.TabStop = True
+        Me.rdoSpecifyTitle.Text = "Specify Title"
+        Me.rdoSpecifyTitle.UseVisualStyleBackColor = True
         '
         'rdoNoTitle
         '
@@ -107,7 +127,7 @@ Partial Class ucrAxes
         '
         'ucrPnlAxisTitle
         '
-        Me.ucrPnlAxisTitle.Location = New System.Drawing.Point(6, 18)
+        Me.ucrPnlAxisTitle.Location = New System.Drawing.Point(4, 18)
         Me.ucrPnlAxisTitle.Name = "ucrPnlAxisTitle"
         Me.ucrPnlAxisTitle.Size = New System.Drawing.Size(209, 23)
         Me.ucrPnlAxisTitle.TabIndex = 19
@@ -369,26 +389,6 @@ Partial Class ucrAxes
         Me.ucrPnlScales.Name = "ucrPnlScales"
         Me.ucrPnlScales.Size = New System.Drawing.Size(132, 23)
         Me.ucrPnlScales.TabIndex = 20
-        '
-        'rdoSpecifyTitle
-        '
-        Me.rdoSpecifyTitle.AutoSize = True
-        Me.rdoSpecifyTitle.Location = New System.Drawing.Point(132, 21)
-        Me.rdoSpecifyTitle.Name = "rdoSpecifyTitle"
-        Me.rdoSpecifyTitle.Size = New System.Drawing.Size(83, 17)
-        Me.rdoSpecifyTitle.TabIndex = 3
-        Me.rdoSpecifyTitle.TabStop = True
-        Me.rdoSpecifyTitle.Text = "Specify Title"
-        Me.rdoSpecifyTitle.UseVisualStyleBackColor = True
-        '
-        'lblTitle
-        '
-        Me.lblTitle.AutoSize = True
-        Me.lblTitle.Location = New System.Drawing.Point(3, 62)
-        Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(27, 13)
-        Me.lblTitle.TabIndex = 20
-        Me.lblTitle.Text = "Title"
         '
         'ucrAxes
         '

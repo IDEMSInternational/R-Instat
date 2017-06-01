@@ -58,8 +58,9 @@ Public Class ucrAxes
         ucrPnlAxisTitle.AddRadioButton(rdoNoTitle)
         ucrPnlAxisTitle.AddRadioButton(rdoSpecifyTitle)
         ucrPnlAxisTitle.AddParameterPresentCondition(rdoTitleAuto, "label", False)
-        ucrPnlAxisTitle.AddParameterPresentCondition(rdoNoTitle, "label", True)
-        ucrPnlAxisTitle.AddParameterPresentCondition(rdoSpecifyTitle, "label", True)
+
+        ucrPnlAxisTitle.AddParameterValuesCondition(rdoNoTitle, "label", "", True)
+        ucrPnlAxisTitle.AddParameterValuesCondition(rdoSpecifyTitle, "label", ucrTitle.GetText <> "", True)
         ucrPnlAxisTitle.AddToLinkedControls(ucrTitle, {rdoSpecifyTitle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrTitle.SetLinkedDisplayControl(lblTitle)
         'Tick Markers section
@@ -229,6 +230,10 @@ Public Class ucrAxes
                 clsScalecontinuousFunction.RemoveParameterByName("breaks")
             End If
         End If
+    End Sub
+
+    Private Sub ucrTitle_Load(sender As Object, e As EventArgs) Handles ucrTitle.Load
+
     End Sub
 End Class
 
