@@ -25,4 +25,10 @@ Public Class sdgThemes
     Public Sub InitialiseControls()
 
     End Sub
+
+    Private Sub lblAngle_Click(sender As Object, e As EventArgs) Handles lblAngle.Click
+
+    End Sub
+
+
 End Class
