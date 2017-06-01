@@ -98,7 +98,7 @@ Public Class RLink
     End Sub
 
     Public Function GetDataFrameNames() As List(Of String)
-        Dim chrDataFrameNames As CharacterVector
+        Dim chrDataFrameNames As CharacterVector = Nothing
         Dim lstDataFrameNames As New List(Of String)
         Dim clsGetDataNames As New RFunction
         Dim expNames As SymbolicExpression
@@ -108,8 +108,6 @@ Public Class RLink
             expNames = RunInternalScriptGetValue(clsGetDataNames.ToScript(), bSilent:=True)
             If expNames IsNot Nothing AndAlso expNames.Type = Internals.SymbolicExpressionType.Null Then
                 chrDataFrameNames = expNames.AsCharacter
-            Else
-                chrDataFrameNames = New CharacterVector(clsEngine, 0)
             End If
             If chrDataFrameNames IsNot Nothing AndAlso chrDataFrameNames.Length > 0 Then
                 lstDataFrameNames.AddRange(chrDataFrameNames)
@@ -119,25 +117,26 @@ Public Class RLink
     End Function
 
     Public Function GetColumnNames(strDataFrameName As String) As List(Of String)
-        Dim chrCurrColumns As CharacterVector
+        Dim chrCurrColumns As CharacterVector = Nothing
         Dim lstCurrColumns As New List(Of String)
         Dim clsGetColumnNames As New RFunction
         Dim expNames As SymbolicExpression
 
-        clsGetColumnNames.SetRCommand(strInstatDataObject & "$get_column_names")
-        clsGetColumnNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
-        expNames = RunInternalScriptGetValue(clsGetColumnNames.ToScript(), bSilent:=True)
-        If expNames IsNot Nothing AndAlso expNames.Type = Internals.SymbolicExpressionType.Null Then
-            chrCurrColumns = expNames.AsCharacter
-        Else
-            chrCurrColumns = New CharacterVector(clsEngine, 0)
-        End If
-        If chrCurrColumns IsNot Nothing AndAlso chrCurrColumns.Length > 0 Then
-            lstCurrColumns.AddRange(chrCurrColumns)
+        If strDataFrameName <> "" AndAlso DataFrameExists(strDataFrameName) Then
+            clsGetColumnNames.SetRCommand(strInstatDataObject & "$get_column_names")
+            clsGetColumnNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
+            expNames = RunInternalScriptGetValue(clsGetColumnNames.ToScript(), bSilent:=True)
+            If expNames IsNot Nothing AndAlso expNames.Type = Internals.SymbolicExpressionType.Null Then
+                chrCurrColumns = expNames.AsCharacter
+            End If
+            If chrCurrColumns IsNot Nothing AndAlso chrCurrColumns.Length > 0 Then
+                lstCurrColumns.AddRange(chrCurrColumns)
+            End If
         End If
         Return lstCurrColumns
     End Function
 
+    'bIncludeOverall = True includes an extra item in the combo box for overall i.e. items not at data frame level 
     Public Sub FillComboDataFrames(ByRef cboDataFrames As ComboBox, Optional bSetDefault As Boolean = True, Optional bIncludeOverall As Boolean = False, Optional strCurrentDataFrame As String = "")
         'This sub is filling the cboDataFrames with the relevant dat frame names (obtained by using GetDataFrameNames()) and potentially "[Overall]".  On thing it is doing, is setting the selected index in the cboDataFrames.
         'It is used on the ucrDataFrame in the FillComboBox sub.
@@ -179,11 +178,10 @@ Public Class RLink
     End Sub
 
     Public Sub FillColumnNames(strDataFrame As String, ByRef cboColumns As ComboBox)
-        Dim lstCurrColumns As List(Of String)
-        If strDataFrame <> "" AndAlso DataFrameExists(strDataFrame) Then
+        Dim lstCurrColumns As New List(Of String)
+
+        If strDataFrame <> "" Then
             lstCurrColumns = GetColumnNames(strDataFrame)
-        Else
-            lstCurrColumns = New List(Of String)
         End If
         cboColumns.Items.Clear()
         cboColumns.Items.AddRange(lstCurrColumns.ToArray)
@@ -203,15 +201,6 @@ Public Class RLink
         lstColumns.Columns(0).Width = -2
 
     End Sub
-
-    Public Function GetDefaultColumnNames(strPrefix As String) As GenericVector
-        Dim lstNextDefaults As GenericVector = Nothing
-        Dim clsGetNextDefault As New RFunction
-        clsGetNextDefault.SetRCommand(strInstatDataObject & "$get_next_default_column_name")
-        clsGetNextDefault.AddParameter("prefix", Chr(34) & strPrefix & Chr(34))
-        lstNextDefaults = RunInternalScriptGetValue(clsGetNextDefault.ToScript()).AsList
-        Return lstNextDefaults
-    End Function
 
     Public Function GetDefaultColumnNames(strPrefix As String, strDataFrameName As String) As String
         Dim strNextDefault As String = ""
@@ -508,7 +497,7 @@ Public Class RLink
     End Sub
 
     Public Sub FillListView(lstView As ListView, strType As String, Optional lstIncludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional lstExcludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional strDataFrameName As String = "", Optional strHeading As String = "Variables", Optional strExcludedItems As String() = Nothing, Optional strDatabaseQuery As String = "", Optional strNcFilePath As String = "")
-        Dim vecColumns As GenericVector
+        Dim vecColumns As GenericVector = Nothing
         Dim chrCurrColumns As CharacterVector
         Dim i As Integer
         Dim grps As New ListViewGroup
@@ -573,28 +562,25 @@ Public Class RLink
             expItems = RunInternalScriptGetValue(clsGetItems.ToScript(), bSilent:=True)
             If expItems IsNot Nothing AndAlso Not expItems.Type = Internals.SymbolicExpressionType.Null Then
                 vecColumns = expItems.AsList
-            Else
-                vecColumns = New GenericVector(clsEngine, 0)
+                For i = 0 To vecColumns.Count - 1
+                    If vecColumns.Count > 1 Then
+                        grps = New ListViewGroup(key:=vecColumns.Names(i), headerText:=vecColumns.Names(i))
+                        lstView.Groups.Add(grps)
+                    End If
+                    chrCurrColumns = vecColumns(i).AsCharacter
+                    If chrCurrColumns IsNot Nothing Then
+                        For j = 0 To chrCurrColumns.Count - 1
+                            lstView.Items.Add(chrCurrColumns(j))
+                            lstView.Items(j).Tag = vecColumns.Names(i)
+                            If vecColumns.Count > 1 Then
+                                lstView.Items(j).Group = lstView.Groups(i)
+                            End If
+                        Next
+                    End If
+                Next
+                'TODO Find out how to get this to set automatically ( Width = -2 almost works)
+                lstView.Columns(0).Width = lstView.Width - 25
             End If
-
-            For i = 0 To vecColumns.Count - 1
-                If vecColumns.Count > 1 Then
-                    grps = New ListViewGroup(key:=vecColumns.Names(i), headerText:=vecColumns.Names(i))
-                    lstView.Groups.Add(grps)
-                End If
-                chrCurrColumns = vecColumns(i).AsCharacter
-                If chrCurrColumns IsNot Nothing Then
-                    For j = 0 To chrCurrColumns.Count - 1
-                        lstView.Items.Add(chrCurrColumns(j))
-                        lstView.Items(j).Tag = vecColumns.Names(i)
-                        If vecColumns.Count > 1 Then
-                            lstView.Items(j).Group = lstView.Groups(i)
-                        End If
-                    Next
-                End If
-            Next
-            'TODO Find out how to get this to set automatically ( Width = -2 almost works)
-            lstView.Columns(0).Width = lstView.Width - 25
         End If
     End Sub
 
