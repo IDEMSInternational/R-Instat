@@ -56,7 +56,11 @@ Public Class ucrAxes
         'Axis Section
         ucrPnlAxisTitle.AddRadioButton(rdoTitleAuto)
         ucrPnlAxisTitle.AddRadioButton(rdoTitleCustom)
-        ucrChkDisplayTitle.SetText("Diaplay")
+        ucrPnlAxisTitle.AddParameterPresentCondition(rdoTitleAuto, "label", False)
+        ucrPnlAxisTitle.AddParameterPresentCondition(rdoTitleCustom, "label", True)
+
+        ucrChkDisplayTitle.SetText("Display")
+
         ucrChkOverwriteTitle.SetText("Overwrite Title")
 
         'Tick Markers section
@@ -102,11 +106,11 @@ Public Class ucrAxes
         TitleDefaults()
     End Sub
 
-    Private Sub SetRCodeForControls(breset As Boolean)
-        ucrNudInStepsOf.SetRCode(clsSeqFunction, breset)
-        ucrNudTo.SetRCode(clsSeqFunction, breset)
-        ucrNudFrom.SetRCode(clsSeqFunction, breset)
-        ucrOverwriteTitle.SetRCode(clsTitleFunction, breset)
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrNudInStepsOf.SetRCode(clsSeqFunction, bReset)
+        ucrNudTo.SetRCode(clsSeqFunction, bReset)
+        ucrNudFrom.SetRCode(clsSeqFunction, bReset)
+        ucrOverwriteTitle.SetRCode(clsTitleFunction, bReset)
     End Sub
 
     Private Sub TitleDefaults()
@@ -219,7 +223,6 @@ Public Class ucrAxes
     Private Sub ucrTickMarkers_ControlValueChanged() Handles ucrTickMarkers.ControlValueChanged
         If rdoTickMarkersCustom.Checked Then
             If ucrTickMarkers.cboInput.SelectedItem = "Interval" Then
-                clsSeqFunction.SetPackageName("ggplot2")
                 clsSeqFunction.SetRCommand("seq")
                 clsScalecontinuousFunction.AddParameter("breaks", clsRFunctionParameter:=clsSeqFunction)
 

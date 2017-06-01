@@ -157,9 +157,8 @@ Public Class dlgBarAndPieChart
 
         clsRFacetFunction.SetPackageName("ggplot2")
         clsRFacetFunction.SetRCommand("facet_wrap")
-        clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsRFacetFunction)
 
-        clsBaseOperator.AddParameter("theme", "theme_grey()")
+        clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultTheme.Clone())
 
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
