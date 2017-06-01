@@ -38,7 +38,7 @@ Public Class ucrAxes
         TitleDefaults()
         ucrTickMarkers.SetName("Interval")
         TitleFunction()
-        ucrOverwriteTitle.SetName("")
+        ucrTitle.SetName("")
 
         ucrNudTickMarkersNoOfDecimalPlaces.Value = 0
         ucrNudFrom.Value = 0
@@ -55,14 +55,13 @@ Public Class ucrAxes
 
         'Axis Section
         ucrPnlAxisTitle.AddRadioButton(rdoTitleAuto)
-        ucrPnlAxisTitle.AddRadioButton(rdoTitleCustom)
+        ucrPnlAxisTitle.AddRadioButton(rdoNoTitle)
+        ucrPnlAxisTitle.AddRadioButton(rdoSpecifyTitle)
         ucrPnlAxisTitle.AddParameterPresentCondition(rdoTitleAuto, "label", False)
-        ucrPnlAxisTitle.AddParameterPresentCondition(rdoTitleCustom, "label", True)
-
-        ucrChkDisplayTitle.SetText("Display")
-
-        ucrChkOverwriteTitle.SetText("Overwrite Title")
-
+        ucrPnlAxisTitle.AddParameterPresentCondition(rdoNoTitle, "label", True)
+        ucrPnlAxisTitle.AddParameterPresentCondition(rdoSpecifyTitle, "label", True)
+        ucrPnlAxisTitle.AddToLinkedControls(ucrTitle, {rdoSpecifyTitle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrTitle.SetLinkedDisplayControl(lblTitle)
         'Tick Markers section
 
         ucrPnlTickmarkers.AddRadioButton(rdoTickMarkersAuto)
@@ -110,7 +109,7 @@ Public Class ucrAxes
         ucrNudInStepsOf.SetRCode(clsSeqFunction, bReset)
         ucrNudTo.SetRCode(clsSeqFunction, bReset)
         ucrNudFrom.SetRCode(clsSeqFunction, bReset)
-        ucrOverwriteTitle.SetRCode(clsTitleFunction, bReset)
+        ucrTitle.SetRCode(clsTitleFunction, bReset)
     End Sub
 
     Private Sub TitleDefaults()
@@ -150,17 +149,17 @@ Public Class ucrAxes
     End Sub
 
     Private Sub TitleFunction()
-        If rdoTitleCustom.Checked AndAlso ucrChkDisplayTitle.Checked Then
-            If ucrChkOverwriteTitle.Checked AndAlso Not ucrOverwriteTitle.IsEmpty Then
-                clsTitleFunction.AddParameter("label", Chr(34) & ucrOverwriteTitle.GetText & Chr(34))
-                'clsRsyntax.AddOperatorParameter(strAxis & "axistitle", clsRFunc:=clsTitleFunction)
-            Else
-                'clsRsyntax.RemoveOperatorParameter(strAxis & "axistitle")
-            End If
-        Else
-            clsTitleFunction.AddParameter("label", Chr(34) & "" & Chr(34))
-            ' clsRsyntax.AddOperatorParameter(strAxis & "axistitle", clsRFunc:=clsTitleFunction)
-        End If
+        'If rdoNoTitle.Checked AndAlso ucrChkDisplayTitle.Checked Then
+        '    If ucrChkOverwriteTitle.Checked AndAlso Not ucrOverwriteTitle.IsEmpty Then
+        '        clsTitleFunction.AddParameter("label", Chr(34) & ucrOverwriteTitle.GetText & Chr(34))
+        '        'clsRsyntax.AddOperatorParameter(strAxis & "axistitle", clsRFunc:=clsTitleFunction)
+        '    Else
+        '        'clsRsyntax.RemoveOperatorParameter(strAxis & "axistitle")
+        '    End If
+        'Else
+        '    clsTitleFunction.AddParameter("label", Chr(34) & "" & Chr(34))
+        '    ' clsRsyntax.AddOperatorParameter(strAxis & "axistitle", clsRFunc:=clsTitleFunction)
+        'End If
     End Sub
 
     Private Sub ScalesFunction()
@@ -172,37 +171,37 @@ Public Class ucrAxes
         End If
     End Sub
 
-    Private Sub ucrOverwriteTitle_NameChanged() Handles ucrOverwriteTitle.NameChanged
-        If rdoTitleCustom.Checked Then
+    Private Sub ucrOverwriteTitle_NameChanged() Handles ucrTitle.NameChanged
+        If rdoNoTitle.Checked Then
             TitleFunction()
         End If
     End Sub
 
     Private Sub ucrChkOverwriteTitle_CheckedChanged(sender As Object, e As EventArgs)
-        If rdoTitleCustom.Checked AndAlso ucrChkOverwriteTitle.Checked Then
-            ucrOverwriteTitle.Visible = True
-        Else
-            ucrOverwriteTitle.Visible = False
-        End If
-        TitleFunction()
+        'If rdoNoTitle.Checked AndAlso ucrChkOverwriteTitle.Checked Then
+        '    ucrOverwriteTitle.Visible = True
+        'Else
+        '    ucrOverwriteTitle.Visible = False
+        'End If
+        'TitleFunction()
     End Sub
 
     Private Sub ucrChkDisplayTitle_CheckedChanged(sender As Object, e As EventArgs)
-        If rdoTitleCustom.Checked AndAlso ucrChkDisplayTitle.Checked Then
-            ucrChkOverwriteTitle.Visible = True
-            If ucrChkOverwriteTitle.Checked Then
-                ucrOverwriteTitle.Visible = True
-            Else
-                ucrOverwriteTitle.Visible = False
-            End If
-        Else
-            ucrChkOverwriteTitle.Visible = False
-            ucrOverwriteTitle.Visible = False
-        End If
-        TitleFunction()
+        'If rdoNoTitle.Checked AndAlso ucrChkDisplayTitle.Checked Then
+        '    ucrChkOverwriteTitle.Visible = True
+        '    If ucrChkOverwriteTitle.Checked Then
+        '        ucrOverwriteTitle.Visible = True
+        '    Else
+        '        ucrOverwriteTitle.Visible = False
+        '    End If
+        'Else
+        '    ucrChkOverwriteTitle.Visible = False
+        '    ucrOverwriteTitle.Visible = False
+        'End If
+        'TitleFunction()
     End Sub
 
-    Private Sub rdoTitleCustom_CheckedChanged(sender As Object, e As EventArgs) Handles rdoTitleCustom.CheckedChanged
+    Private Sub rdoTitleCustom_CheckedChanged(sender As Object, e As EventArgs) Handles rdoNoTitle.CheckedChanged, rdoSpecifyTitle.CheckedChanged
         TitleDefaults()
     End Sub
 

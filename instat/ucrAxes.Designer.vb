@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class ucrAxes
     Inherits instat.ucrCore
 
     'UserControl overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,14 +20,12 @@ Partial Class ucrAxes
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.grpAxisTitle = New System.Windows.Forms.GroupBox()
-        Me.ucrChkOverwriteTitle = New instat.ucrCheck()
-        Me.ucrChkDisplayTitle = New instat.ucrCheck()
-        Me.rdoTitleCustom = New System.Windows.Forms.RadioButton()
+        Me.rdoNoTitle = New System.Windows.Forms.RadioButton()
         Me.rdoTitleAuto = New System.Windows.Forms.RadioButton()
-        Me.ucrOverwriteTitle = New instat.ucrInputTextBox()
+        Me.ucrTitle = New instat.ucrInputTextBox()
         Me.ucrPnlAxisTitle = New instat.UcrPanel()
         Me.grpTickMarkers = New System.Windows.Forms.GroupBox()
         Me.ucrNudInStepsOf = New instat.ucrNud()
@@ -44,16 +42,17 @@ Partial Class ucrAxes
         Me.lblTo = New System.Windows.Forms.Label()
         Me.ucrPnlTickmarkers = New instat.UcrPanel()
         Me.grpScales = New System.Windows.Forms.GroupBox()
+        Me.ucrInputNoofDecimalsLimit = New instat.ucrInputTextBox()
+        Me.ucrInputUpperLimit = New instat.ucrInputTextBox()
+        Me.ucrInputLowerLimit = New instat.ucrInputTextBox()
         Me.lblScalesNoDecimalPlaces = New System.Windows.Forms.Label()
         Me.lblUpperLimit = New System.Windows.Forms.Label()
         Me.lblLowerLimit = New System.Windows.Forms.Label()
         Me.rdoScalesCustom = New System.Windows.Forms.RadioButton()
         Me.rdoScalesAuto = New System.Windows.Forms.RadioButton()
         Me.ucrPnlScales = New instat.UcrPanel()
-        Me.UcrInput1 = New instat.ucrInput()
-        Me.ucrInputLowerLimit = New instat.ucrInputTextBox()
-        Me.ucrInputUpperLimit = New instat.ucrInputTextBox()
-        Me.ucrInputNoofDecimalsLimit = New instat.ucrInputTextBox()
+        Me.rdoSpecifyTitle = New System.Windows.Forms.RadioButton()
+        Me.lblTitle = New System.Windows.Forms.Label()
         Me.grpAxisTitle.SuspendLayout()
         Me.grpTickMarkers.SuspendLayout()
         Me.grpScales.SuspendLayout()
@@ -61,11 +60,11 @@ Partial Class ucrAxes
         '
         'grpAxisTitle
         '
-        Me.grpAxisTitle.Controls.Add(Me.ucrChkOverwriteTitle)
-        Me.grpAxisTitle.Controls.Add(Me.ucrChkDisplayTitle)
-        Me.grpAxisTitle.Controls.Add(Me.rdoTitleCustom)
+        Me.grpAxisTitle.Controls.Add(Me.lblTitle)
+        Me.grpAxisTitle.Controls.Add(Me.rdoSpecifyTitle)
+        Me.grpAxisTitle.Controls.Add(Me.rdoNoTitle)
         Me.grpAxisTitle.Controls.Add(Me.rdoTitleAuto)
-        Me.grpAxisTitle.Controls.Add(Me.ucrOverwriteTitle)
+        Me.grpAxisTitle.Controls.Add(Me.ucrTitle)
         Me.grpAxisTitle.Controls.Add(Me.ucrPnlAxisTitle)
         Me.grpAxisTitle.Location = New System.Drawing.Point(3, 18)
         Me.grpAxisTitle.Name = "grpAxisTitle"
@@ -74,32 +73,16 @@ Partial Class ucrAxes
         Me.grpAxisTitle.TabStop = False
         Me.grpAxisTitle.Text = "Axis Title"
         '
-        'ucrChkOverwriteTitle
+        'rdoNoTitle
         '
-        Me.ucrChkOverwriteTitle.Checked = False
-        Me.ucrChkOverwriteTitle.Location = New System.Drawing.Point(6, 70)
-        Me.ucrChkOverwriteTitle.Name = "ucrChkOverwriteTitle"
-        Me.ucrChkOverwriteTitle.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkOverwriteTitle.TabIndex = 21
-        '
-        'ucrChkDisplayTitle
-        '
-        Me.ucrChkDisplayTitle.Checked = False
-        Me.ucrChkDisplayTitle.Location = New System.Drawing.Point(6, 44)
-        Me.ucrChkDisplayTitle.Name = "ucrChkDisplayTitle"
-        Me.ucrChkDisplayTitle.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkDisplayTitle.TabIndex = 20
-        '
-        'rdoTitleCustom
-        '
-        Me.rdoTitleCustom.AutoSize = True
-        Me.rdoTitleCustom.Location = New System.Drawing.Point(62, 21)
-        Me.rdoTitleCustom.Name = "rdoTitleCustom"
-        Me.rdoTitleCustom.Size = New System.Drawing.Size(60, 17)
-        Me.rdoTitleCustom.TabIndex = 3
-        Me.rdoTitleCustom.TabStop = True
-        Me.rdoTitleCustom.Text = "Custom"
-        Me.rdoTitleCustom.UseVisualStyleBackColor = True
+        Me.rdoNoTitle.AutoSize = True
+        Me.rdoNoTitle.Location = New System.Drawing.Point(62, 21)
+        Me.rdoNoTitle.Name = "rdoNoTitle"
+        Me.rdoNoTitle.Size = New System.Drawing.Size(62, 17)
+        Me.rdoNoTitle.TabIndex = 3
+        Me.rdoNoTitle.TabStop = True
+        Me.rdoNoTitle.Text = "No Title"
+        Me.rdoNoTitle.UseVisualStyleBackColor = True
         '
         'rdoTitleAuto
         '
@@ -112,21 +95,21 @@ Partial Class ucrAxes
         Me.rdoTitleAuto.Text = "Auto"
         Me.rdoTitleAuto.UseVisualStyleBackColor = True
         '
-        'ucrOverwriteTitle
+        'ucrTitle
         '
-        Me.ucrOverwriteTitle.AddQuotesIfUnrecognised = True
-        Me.ucrOverwriteTitle.IsMultiline = False
-        Me.ucrOverwriteTitle.IsReadOnly = False
-        Me.ucrOverwriteTitle.Location = New System.Drawing.Point(109, 70)
-        Me.ucrOverwriteTitle.Name = "ucrOverwriteTitle"
-        Me.ucrOverwriteTitle.Size = New System.Drawing.Size(131, 21)
-        Me.ucrOverwriteTitle.TabIndex = 1
+        Me.ucrTitle.AddQuotesIfUnrecognised = True
+        Me.ucrTitle.IsMultiline = False
+        Me.ucrTitle.IsReadOnly = False
+        Me.ucrTitle.Location = New System.Drawing.Point(62, 62)
+        Me.ucrTitle.Name = "ucrTitle"
+        Me.ucrTitle.Size = New System.Drawing.Size(131, 21)
+        Me.ucrTitle.TabIndex = 1
         '
         'ucrPnlAxisTitle
         '
         Me.ucrPnlAxisTitle.Location = New System.Drawing.Point(6, 18)
         Me.ucrPnlAxisTitle.Name = "ucrPnlAxisTitle"
-        Me.ucrPnlAxisTitle.Size = New System.Drawing.Size(132, 23)
+        Me.ucrPnlAxisTitle.Size = New System.Drawing.Size(209, 23)
         Me.ucrPnlAxisTitle.TabIndex = 19
         '
         'grpTickMarkers
@@ -288,7 +271,6 @@ Partial Class ucrAxes
         Me.grpScales.Controls.Add(Me.ucrInputNoofDecimalsLimit)
         Me.grpScales.Controls.Add(Me.ucrInputUpperLimit)
         Me.grpScales.Controls.Add(Me.ucrInputLowerLimit)
-        Me.grpScales.Controls.Add(Me.UcrInput1)
         Me.grpScales.Controls.Add(Me.lblScalesNoDecimalPlaces)
         Me.grpScales.Controls.Add(Me.lblUpperLimit)
         Me.grpScales.Controls.Add(Me.lblLowerLimit)
@@ -301,6 +283,36 @@ Partial Class ucrAxes
         Me.grpScales.TabIndex = 2
         Me.grpScales.TabStop = False
         Me.grpScales.Text = "Scales"
+        '
+        'ucrInputNoofDecimalsLimit
+        '
+        Me.ucrInputNoofDecimalsLimit.AddQuotesIfUnrecognised = True
+        Me.ucrInputNoofDecimalsLimit.IsMultiline = False
+        Me.ucrInputNoofDecimalsLimit.IsReadOnly = False
+        Me.ucrInputNoofDecimalsLimit.Location = New System.Drawing.Point(144, 102)
+        Me.ucrInputNoofDecimalsLimit.Name = "ucrInputNoofDecimalsLimit"
+        Me.ucrInputNoofDecimalsLimit.Size = New System.Drawing.Size(50, 21)
+        Me.ucrInputNoofDecimalsLimit.TabIndex = 22
+        '
+        'ucrInputUpperLimit
+        '
+        Me.ucrInputUpperLimit.AddQuotesIfUnrecognised = True
+        Me.ucrInputUpperLimit.IsMultiline = False
+        Me.ucrInputUpperLimit.IsReadOnly = False
+        Me.ucrInputUpperLimit.Location = New System.Drawing.Point(75, 76)
+        Me.ucrInputUpperLimit.Name = "ucrInputUpperLimit"
+        Me.ucrInputUpperLimit.Size = New System.Drawing.Size(50, 21)
+        Me.ucrInputUpperLimit.TabIndex = 22
+        '
+        'ucrInputLowerLimit
+        '
+        Me.ucrInputLowerLimit.AddQuotesIfUnrecognised = True
+        Me.ucrInputLowerLimit.IsMultiline = False
+        Me.ucrInputLowerLimit.IsReadOnly = False
+        Me.ucrInputLowerLimit.Location = New System.Drawing.Point(75, 46)
+        Me.ucrInputLowerLimit.Name = "ucrInputLowerLimit"
+        Me.ucrInputLowerLimit.Size = New System.Drawing.Size(50, 21)
+        Me.ucrInputLowerLimit.TabIndex = 22
         '
         'lblScalesNoDecimalPlaces
         '
@@ -358,44 +370,25 @@ Partial Class ucrAxes
         Me.ucrPnlScales.Size = New System.Drawing.Size(132, 23)
         Me.ucrPnlScales.TabIndex = 20
         '
-        'UcrInput1
+        'rdoSpecifyTitle
         '
-        Me.UcrInput1.AddQuotesIfUnrecognised = True
-        Me.UcrInput1.IsReadOnly = False
-        Me.UcrInput1.Location = New System.Drawing.Point(132, 33)
-        Me.UcrInput1.Name = "UcrInput1"
-        Me.UcrInput1.Size = New System.Drawing.Size(142, 29)
-        Me.UcrInput1.TabIndex = 21
+        Me.rdoSpecifyTitle.AutoSize = True
+        Me.rdoSpecifyTitle.Location = New System.Drawing.Point(132, 21)
+        Me.rdoSpecifyTitle.Name = "rdoSpecifyTitle"
+        Me.rdoSpecifyTitle.Size = New System.Drawing.Size(83, 17)
+        Me.rdoSpecifyTitle.TabIndex = 3
+        Me.rdoSpecifyTitle.TabStop = True
+        Me.rdoSpecifyTitle.Text = "Specify Title"
+        Me.rdoSpecifyTitle.UseVisualStyleBackColor = True
         '
-        'ucrInputLowerLimit
+        'lblTitle
         '
-        Me.ucrInputLowerLimit.AddQuotesIfUnrecognised = True
-        Me.ucrInputLowerLimit.IsMultiline = False
-        Me.ucrInputLowerLimit.IsReadOnly = False
-        Me.ucrInputLowerLimit.Location = New System.Drawing.Point(75, 46)
-        Me.ucrInputLowerLimit.Name = "ucrInputLowerLimit"
-        Me.ucrInputLowerLimit.Size = New System.Drawing.Size(50, 21)
-        Me.ucrInputLowerLimit.TabIndex = 22
-        '
-        'ucrInputUpperLimit
-        '
-        Me.ucrInputUpperLimit.AddQuotesIfUnrecognised = True
-        Me.ucrInputUpperLimit.IsMultiline = False
-        Me.ucrInputUpperLimit.IsReadOnly = False
-        Me.ucrInputUpperLimit.Location = New System.Drawing.Point(75, 76)
-        Me.ucrInputUpperLimit.Name = "ucrInputUpperLimit"
-        Me.ucrInputUpperLimit.Size = New System.Drawing.Size(50, 21)
-        Me.ucrInputUpperLimit.TabIndex = 22
-        '
-        'ucrInputNoofDecimalsLimit
-        '
-        Me.ucrInputNoofDecimalsLimit.AddQuotesIfUnrecognised = True
-        Me.ucrInputNoofDecimalsLimit.IsMultiline = False
-        Me.ucrInputNoofDecimalsLimit.IsReadOnly = False
-        Me.ucrInputNoofDecimalsLimit.Location = New System.Drawing.Point(144, 102)
-        Me.ucrInputNoofDecimalsLimit.Name = "ucrInputNoofDecimalsLimit"
-        Me.ucrInputNoofDecimalsLimit.Size = New System.Drawing.Size(50, 21)
-        Me.ucrInputNoofDecimalsLimit.TabIndex = 22
+        Me.lblTitle.AutoSize = True
+        Me.lblTitle.Location = New System.Drawing.Point(3, 62)
+        Me.lblTitle.Name = "lblTitle"
+        Me.lblTitle.Size = New System.Drawing.Size(27, 13)
+        Me.lblTitle.TabIndex = 20
+        Me.lblTitle.Text = "Title"
         '
         'ucrAxes
         '
@@ -417,7 +410,7 @@ Partial Class ucrAxes
     End Sub
 
     Friend WithEvents grpAxisTitle As GroupBox
-    Friend WithEvents ucrOverwriteTitle As ucrInputTextBox
+    Friend WithEvents ucrTitle As ucrInputTextBox
     Friend WithEvents grpTickMarkers As GroupBox
     Friend WithEvents lblFrom As Label
     Friend WithEvents rdoTickMarkersCustom As RadioButton
@@ -432,7 +425,7 @@ Partial Class ucrAxes
     Friend WithEvents lblScalesNoDecimalPlaces As Label
     Friend WithEvents lblUpperLimit As Label
     Friend WithEvents lblLowerLimit As Label
-    Friend WithEvents rdoTitleCustom As RadioButton
+    Friend WithEvents rdoNoTitle As RadioButton
     Friend WithEvents rdoTitleAuto As RadioButton
     Friend WithEvents ucrTickMarkers As ucrInputComboBox
     Friend WithEvents ucrNudInStepsOf As ucrNud
@@ -442,10 +435,9 @@ Partial Class ucrAxes
     Friend WithEvents ucrPnlAxisTitle As UcrPanel
     Friend WithEvents ucrPnlTickmarkers As UcrPanel
     Friend WithEvents ucrPnlScales As UcrPanel
-    Friend WithEvents ucrChkDisplayTitle As ucrCheck
-    Friend WithEvents ucrChkOverwriteTitle As ucrCheck
     Friend WithEvents ucrInputNoofDecimalsLimit As ucrInputTextBox
     Friend WithEvents ucrInputUpperLimit As ucrInputTextBox
     Friend WithEvents ucrInputLowerLimit As ucrInputTextBox
-    Friend WithEvents UcrInput1 As ucrInput
+    Friend WithEvents rdoSpecifyTitle As RadioButton
+    Friend WithEvents lblTitle As Label
 End Class
