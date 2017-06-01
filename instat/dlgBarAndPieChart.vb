@@ -190,7 +190,6 @@ Public Class dlgBarAndPieChart
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
-        sdgPlots.Reset()
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click

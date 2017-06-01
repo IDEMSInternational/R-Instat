@@ -5,6 +5,9 @@
 
             clsTempFunc.SetPackageName("ggplot2")
             clsTempFunc.SetRCommand("labs")
+            clsTempFunc.AddParameter("title", Chr(34) & Chr(34))
+            clsTempFunc.AddParameter("subtitle", Chr(34) & Chr(34))
+            clsTempFunc.AddParameter("caption", Chr(34) & Chr(34))
             Return clsTempFunc
         End Get
     End Property
