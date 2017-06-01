@@ -148,6 +148,7 @@
   <ItemGroup>
     <Compile Include="clsBlockReader.vb" />
     <Compile Include="clsCondition.vb" />
+    <Compile Include="clsGgplotDefaults.vb" />
     <Compile Include="clsRCodeStructure.vb" />
     <Compile Include="dlgAddComment.Designer.vb">
       <DependentUpon>dlgAddComment.vb</DependentUpon>
@@ -718,6 +719,12 @@
       <DependentUpon>sdgOneWayFrequencies.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgOneWayFrequencies.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgThemes.Designer.vb">
+      <DependentUpon>sdgThemes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgThemes.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgTwoWayFrequencies.Designer.vb">
@@ -4161,6 +4168,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgSimpleRegOptions.sw-KE.resx">
       <DependentUpon>sdgSimpleRegOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgThemes.resx">
+      <DependentUpon>sdgThemes.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgTwoWayFrequencies.resx">
       <DependentUpon>sdgTwoWayFrequencies.vb</DependentUpon>

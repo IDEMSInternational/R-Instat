@@ -41,7 +41,9 @@ Public Class dlgRemoveUnusedLevels
         ucrReceiverFactorColumn.Selector = ucrSelectorFactorColumn
         ucrReceiverFactorColumn.SetMeAsReceiver()
         ucrReceiverFactorColumn.SetIncludedDataTypes({"factor"})
+
         ucrRemoveUnusedFactorLevels.SetReceiver(ucrReceiverFactorColumn)
+        ucrRemoveUnusedFactorLevels.SetIncludeLevels(False)
 
         'Set selector data frame
         ucrSelectorFactorColumn.SetParameter(New RParameter("data_name", 0))

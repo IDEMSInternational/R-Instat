@@ -50,6 +50,7 @@ Public Class dlgReferenceLevel
         ucrFactorReferenceLevels.SetParameter(New RParameter("new_ref_level", 2))
         ucrFactorReferenceLevels.SetReceiver(ucrReceiverReferenceLevels)
         ucrFactorReferenceLevels.SetAsSingleSelector()
+        ucrFactorReferenceLevels.SetIncludeLevels(False)
     End Sub
 
     Private Sub SetDefaults()
