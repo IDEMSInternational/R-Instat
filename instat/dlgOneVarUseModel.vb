@@ -37,7 +37,7 @@ Public Class dlgOneVarUseModel
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 375
-        ucrBase.clsRsyntax.iCallType = 3
+        ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         ucrReceiverObject.SetParameter(New RParameter("x", 0))
