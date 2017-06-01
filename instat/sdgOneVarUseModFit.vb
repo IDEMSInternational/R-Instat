@@ -117,7 +117,7 @@ Public Class sdgOneVarUseModFit
         ucrNudIterations.SetRCode(clsOneVarRBootFunction, bReset)
         ucrNudCI.SetRCode(clsOneVarQuantileFunction, bReset)
         ucrPnlPlots.SetRCode(clsRPlotFunction, bReset)
-        ucrPnlQuantiles.SetRCode(clsOneVarQuantileFunction, bReset)
+        ucrPnlQuantiles.SetRCode(clsRSeqFunction, bReset)
     End Sub
 
     Public Sub CreateGraphs()

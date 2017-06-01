@@ -129,12 +129,16 @@ Public Class dlgOneVarUseModel
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         If ucrChkProduceBootstrap.Checked Then
-            frmMain.clsRLink.RunScript(clsRBootFunction.ToScript(), iCallType:=3)
+            frmMain.clsRLink.RunScript(clsRBootFunction.ToScript(), iCallType:=2)
         End If
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        frmMain.clsRLink.RunScript(clsRPlotFunction.ToScript(), iCallType:=3)
+        If Not sdgOneVarUseModFit.rdoNoPlot.Checked Then
+            frmMain.clsRLink.RunScript(clsRPlotFunction.ToScript(), iCallType:=3)
+        Else
+
+        End If
     End Sub
 
     '  Private Sub AssignSaveObjects()
