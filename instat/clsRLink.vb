@@ -748,6 +748,18 @@ Public Class RLink
         Return strDataType
     End Function
 
+    Public Function GetColumnType(strDataName As String, strColumnName As String) As String
+        Dim strDataType As String
+        Dim clsGetColumnType As New RFunction
+
+        clsGetColumnType.SetRCommand(strInstatDataObject & "$get_variables_metadata")
+        clsGetColumnType.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
+        clsGetColumnType.AddParameter("column", Chr(34) & strColumnName & Chr(34))
+        clsGetColumnType.AddParameter("property", Chr(34) & "class" & Chr(34))
+        strDataType = RunInternalScriptGetValue(clsGetColumnType.ToScript()).AsCharacter(0)
+        Return strDataType
+    End Function
+
     Public Function MakeValidText(strText As String) As String
         Dim strOut As String
         Dim clsMakeNames As New RFunction
@@ -804,5 +816,19 @@ Public Class RLink
         clsIsBinary.AddParameter("x", clsRFunctionParameter:=clsGetColumn)
         bIsBinary = RunInternalScriptGetValue(clsIsBinary.ToScript()).AsLogical(0)
         Return bIsBinary
+    End Function
+
+    Public Function IsVariablesMetadata(strDataName As String, strProperty As String, Optional strColumn As String = "") As Boolean
+        Dim clsIsVarMetadata As New RFunction
+        Dim bIsVarMetadata As Boolean
+
+        clsIsVarMetadata.SetRCommand(strInstatDataObject & "$is_variables_metadata")
+        clsIsVarMetadata.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
+        If strColumn <> "" Then
+            clsIsVarMetadata.AddParameter("column", Chr(34) & strColumn & Chr(34))
+        End If
+        clsIsVarMetadata.AddParameter("property", Chr(34) & strProperty & Chr(34))
+        bIsVarMetadata = RunInternalScriptGetValue(clsIsVarMetadata.ToScript()).AsLogical(0)
+        Return bIsVarMetadata
     End Function
 End Class

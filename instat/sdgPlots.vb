@@ -24,13 +24,10 @@ Public Class sdgPlots
     'This clsRSyntax is linked with the ucrBase.clsRSyntax from the dlg calling sdgPLotOptions...
     Public clsRggplotFunction As New RFunction
     Public clsAesFunction As New RFunction    'Warning: I m not sure this field is useful... Will all be revised when changing links though...
-    Public clsRLegendFunction As New RFunction
-    Public clsLegendFunction As New RFunction
-    Public clsGraphTitleFunction As New RFunction
+    Public clsLabsFunction As New RFunction
     Public clsRFacetFunction As New RFunction
     Public clsXLabFunction As New RFunction
     Public clsYLabFunction As New RFunction
-    Public clsRThemeFunction As New RFunction
     Public clsBaseOperator As New ROperator
 
     Private bControlsInitialised As Boolean = False
@@ -53,31 +50,10 @@ Public Class sdgPlots
         autoTranslate(Me)
     End Sub
 
-    Public Sub SetRFunction(clsNewOperator As ROperator, clsNewGraphTitleFunction As RFunction, clsNewLegendFunction As RFunction, clsNewRFacetFunction As RFunction, Optional bReset As Boolean = False)
-        If Not bControlsInitialised Then
-            InitialiseControls()
-        End If
-        clsBaseOperator = clsNewOperator
-        clsGraphTitleFunction = clsNewGraphTitleFunction
-        clsLegendFunction = clsNewLegendFunction
-        clsRFacetFunction = clsNewRFacetFunction
-
-        ucrInputGraphTitle.SetRCode(clsNewGraphTitleFunction, bReset)
-        ucrInputLegend.SetRCode(clsNewLegendFunction, bReset)
-        ucrPnlHorizonatalVertical.SetRCode(clsRFacetFunction, bReset)
-        ucr1stFactorReceiver.SetRCode(clsTempOp, bReset)
-        ucr2ndFactorReceiver.SetRCode(clsTempOp, bReset)
-        ucrChkMargin.SetRCode(clsRFacetFunction, bReset)
-        ucrChkFreeSpace.SetRCode(clsRFacetFunction, bReset)
-        ucrChkFreeScalesX.SetRCode(clsRFacetFunction, bReset)
-        ucrChkFreeScalesY.SetRCode(clsRFacetFunction, bReset)
-        ucrNudNumberofRows.SetRCode(clsRFacetFunction, bReset)
-        ucrNudNumberofRows.AddAdditionalCodeParameterPair(clsRFacetFunction, New RParameter("ncol"), iAdditionalPairNo:=1)
-        ucrChkIncludeFacets.SetRCode(clsBaseOperator, bReset)
-
-    End Sub
-
     Public Sub InitialiseControls()
+        Dim dctThemes As New Dictionary(Of String, String)
+        Dim strThemes As String()
+
         'facets tab 
         'Links the factor receivers, used for creating facets, with the selector. The variables need to be factors.
         ucr1stFactorReceiver.Selector = ucrFacetSelector
@@ -86,25 +62,28 @@ Public Class sdgPlots
         ucr1stFactorReceiver.SetParameter(New RParameter("var1", 0))
         ucr1stFactorReceiver.SetParameterIsString()
         ucr1stFactorReceiver.bWithQuotes = False
+        ucr1stFactorReceiver.SetLinkedDisplayControl(lblFactor1)
 
         ucr2ndFactorReceiver.Selector = ucrFacetSelector
         ucr2ndFactorReceiver.SetIncludedDataTypes({"factor"})
         ucr2ndFactorReceiver.SetParameter(New RParameter("var2", 1))
         ucr2ndFactorReceiver.SetParameterIsString()
         ucr2ndFactorReceiver.bWithQuotes = False
+        ucr2ndFactorReceiver.SetLinkedDisplayControl(lblFactor2)
 
         ucrChkIncludeFacets.SetText("Include Facets")
-        ucrChkIncludeFacets.AddParameterPresentCondition(True, "facets")
+        ucrChkIncludeFacets.AddParameterPresentCondition(True, "facets", True)
+        ucrChkIncludeFacets.AddParameterPresentCondition(False, "facets", False)
 
         ucrChkMargin.SetText("Margins")
-        ucrChkMargin.SetParameter(New RParameter("margins"))
-        ucrChkMargin.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkMargin.SetParameter(New RParameter("margins"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True)
         ucrChkMargin.SetRDefault("FALSE")
+        ucrChkMargin.AddToLinkedControls(ucrChkNoOfRowsOrColumns, {False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=False)
 
-        ucrChkMargin.AddFunctionNamesCondition(True, "facet_grid")
-
-        ucrChkNoOfRowsOrColumns.AddFunctionNamesCondition(True, "facet_wrap")
+        ucrChkNoOfRowsOrColumns.AddFunctionNamesCondition(True, "facet_wrap", True)
+        ucrChkNoOfRowsOrColumns.AddFunctionNamesCondition(False, "facet_wrap", False)
         ucrChkNoOfRowsOrColumns.SetText("Fixed Number of Rows")
+        ucrChkNoOfRowsOrColumns.AddToLinkedControls(ucrNudNumberofRows, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkFreeScalesX.SetText("Free Scales X")
         ucrChkFreeScalesX.SetParameter(New RParameter("free_x"))
@@ -115,11 +94,12 @@ Public Class sdgPlots
         ucrNudNumberofRows.SetParameter(New RParameter("nrow"))
 
         'this passes in parameter only if margin is checked. 
-        'should be visible when margin is chacked
+        'should be visible when margin is checked
         ucrChkFreeSpace.SetText("Free Space")
         ucrChkFreeSpace.SetParameter(New RParameter("space"))
         ucrChkFreeSpace.AddFunctionNamesCondition(True, "facet_grid")
         ucrChkFreeSpace.SetValueIfChecked(Chr(34) & "free" & Chr(34))
+        ucrChkFreeSpace.AddToLinkedControls(ucrChkNoOfRowsOrColumns, {False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=False)
 
         ucrPnlHorizonatalVertical.SetParameter(New RParameter("dir"))
         ucrPnlHorizonatalVertical.AddRadioButton(rdoVertical, Chr(34) & "v" & Chr(34))
@@ -128,85 +108,93 @@ Public Class sdgPlots
 
         ucrChkIncludeFacets.AddToLinkedControls(ucrFacetSelector, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkIncludeFacets.AddToLinkedControls(ucr1stFactorReceiver, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucr1stFactorReceiver.SetLinkedDisplayControl(lblFactor1)
-
         ucrChkIncludeFacets.AddToLinkedControls(ucr2ndFactorReceiver, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucr1stFactorReceiver.SetLinkedDisplayControl(lblFactor2)
-
-        ucrChkIncludeFacets.AddToLinkedControls(ucrPnlHorizonatalVertical, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
+        ucrChkIncludeFacets.AddToLinkedControls(ucrPnlHorizonatalVertical, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoVertical)
         ucrChkIncludeFacets.AddToLinkedControls(ucrChkMargin, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkIncludeFacets.AddToLinkedControls(ucrChkFreeScalesX, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkIncludeFacets.AddToLinkedControls(ucrChkFreeScalesY, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkIncludeFacets.AddToLinkedControls(ucrChkFreeSpace, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
         ucrChkIncludeFacets.AddToLinkedControls(ucrChkNoOfRowsOrColumns, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkNoOfRowsOrColumns.AddToLinkedControls(ucrNudNumberofRows, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
-        ucrChkMargin.AddToLinkedControls(ucrChkNoOfRowsOrColumns, {False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=False)
-        ucrChkFreeSpace.AddToLinkedControls(ucrChkNoOfRowsOrColumns, {False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=False)
 
         'layers tab 
 
         'titles tab
 
-        ucrInputGraphTitle.SetParameter(New RParameter("label"))
-        ucrPnlLegendTitle.AddRadioButton(rdoLegendTitleAuto)
-        ucrPnlLegendTitle.AddRadioButton(rdoLegendTitleCustom)
-        ucrChkDisplayLegendTitle.SetText("Display")
-        ucrChkOverwriteLegendTitle.SetText("Overwrite Title")
-        ucrPnlLegendTitle.AddToLinkedControls(ucrChkDisplayLegendTitle, {rdoLegendTitleCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkDisplayLegendTitle.AddToLinkedControls(ucrChkOverwriteLegendTitle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkOverwriteLegendTitle.AddToLinkedControls(ucrInputLegend, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputLegend.SetParameter(New RParameter("fill"))
+        ucrInputGraphTitle.SetParameter(New RParameter("title"))
+        'TODO what about the subtitle argument of labs?
+        'TODO what about the caption argument of labs?
 
-        rdoLegendTitleAuto.Checked = True
+        'legend titles are more complex than this, suggest we disable until later
+        'ucrPnlLegendTitle.AddRadioButton(rdoLegendTitleAuto)
+        'ucrPnlLegendTitle.AddRadioButton(rdoLegendTitleCustom)
+        'ucrPnlLegendTitle.AddParameterPresentCondition(rdoLegendTitleAuto, "labs", False)
+        'ucrPnlLegendTitle.AddParameterPresentCondition(rdoLegendTitleAuto, "labs", True)
+        'ucrPnlLegendTitle.AddToLinkedControls(ucrChkDisplayLegendTitle, {rdoLegendTitleCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        'ucrChkDisplayLegendTitle.SetText("Display")
+        'ucrChkDisplayLegendTitle.AddToLinkedControls(ucrChkOverwriteLegendTitle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        'ucrChkOverwriteLegendTitle.SetText("Overwrite Title")
+        'ucrChkOverwriteLegendTitle.AddToLinkedControls(ucrInputLegend, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        'ucrInputLegend.SetParameter(New RParameter("fill"))
 
         'X Axis tab
 
         'Y Axis tab
 
         'themes tab
-        Dim clsRThemeParam As New RParameter
-        Dim dctThemes As New Dictionary(Of String, String)
-
-        clsRThemeFunction.SetPackageName("ggplot2")
-        clsRThemeFunction.SetRCommand(ucrInputThemes.GetText())
-        clsRThemeParam.SetArgument(clsRThemeFunction)
-        clsRThemeParam.SetArgumentName("theme")
-        clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsRThemeFunction)
-
-        ucrInputThemes.SetParameter(New RParameter(""))
-        dctThemes.Add("theme_bw", Chr(34) & "" & Chr(34))
-        dctThemes.Add("theme_linedraw", Chr(34) & "" & Chr(34))
-        dctThemes.Add("theme_light", Chr(34) & "" & Chr(34))
-        dctThemes.Add("theme_minimal", Chr(34) & "" & Chr(34))
-        dctThemes.Add("theme_classic", Chr(34) & "" & Chr(34))
-        dctThemes.Add("theme_void", Chr(34) & "" & Chr(34))
-        dctThemes.Add("theme_base", Chr(34) & "" & Chr(34))
-        dctThemes.Add("theme_calc", Chr(34) & "" & Chr(34))
-        dctThemes.Add("theme_economist", Chr(34) & "" & Chr(34))
-        dctThemes.Add("theme_few", Chr(34) & "" & Chr(34))
-        dctThemes.Add("theme_fivethirtyeight", Chr(34) & "" & Chr(34))
-        dctThemes.Add("theme_foundation", Chr(34) & "" & Chr(34))
-        dctThemes.Add("theme_wsj", Chr(34) & "" & Chr(34))
-        dctThemes.Add("theme_tufte", Chr(34) & "" & Chr(34))
-        dctThemes.Add("theme_stata", Chr(34) & "" & Chr(34))
-        dctThemes.Add("theme_solid", Chr(34) & "" & Chr(34))
-        dctThemes.Add("theme_pander", Chr(34) & "" & Chr(34))
-        dctThemes.Add("theme_hc", Chr(34) & "" & Chr(34))
-        dctThemes.Add("theme_solarized", Chr(34) & "" & Chr(34))
-        dctThemes.Add("theme_par", Chr(34) & "" & Chr(34))
-        dctThemes.Add("theme_map", Chr(34) & "" & Chr(34))
-        dctThemes.Add("theme_igray", Chr(34) & "" & Chr(34))
-        dctThemes.Add("theme_gdocs", Chr(34) & "" & Chr(34))
-        dctThemes.Add("theme_grey", Chr(34) & "" & Chr(34))
+        ucrInputThemes.SetParameter(New RParameter("theme"))
+        strThemes = GgplotDefaults.strThemes
+        'Would prefer to do this through functions but auto updating function name not currently supported through combo box control
+        For Each strTemp As String In strThemes
+            If strTemp.StartsWith("theme_") Then
+                dctThemes.Add(strTemp.Remove(0, 6), strTemp & "()")
+            Else
+                dctThemes.Add(strTemp, strTemp & "()")
+            End If
+        Next
         ucrInputThemes.SetItems(dctThemes)
-        ucrInputThemes.SetRDefault("theme_grey")
+        ucrInputThemes.SetRDefault("theme_grey()")
 
         'Corodiantes tab
         InitialiseTabs()
         bControlsInitialised = True
+    End Sub
+
+    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewRFacetFunction As RFunction = Nothing, Optional clsNewThemeParam As RParameter = Nothing, Optional bReset As Boolean = False)
+        If Not bControlsInitialised Then
+            InitialiseControls()
+        End If
+
+        clsBaseOperator = clsNewOperator
+        If clsNewLabsFunction IsNot Nothing Then
+            clsLabsFunction = clsNewLabsFunction
+        Else
+            clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
+        End If
+
+        If clsNewThemeParam IsNot Nothing Then
+            clsBaseOperator.AddParameter(clsNewThemeParam)
+        Else
+            clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultTheme.Clone())
+        End If
+
+        'clsRFacetFunction = clsNewRFacetFunction
+
+        ucrInputGraphTitle.SetRCode(clsLabsFunction, bReset)
+        ucrInputThemes.SetRCode(clsBaseOperator)
+
+        'ucrInputLegend.SetRCode(clsNewLabsFunction, bReset)
+        ucrPnlHorizonatalVertical.SetRCode(clsRFacetFunction, bReset)
+        ucr1stFactorReceiver.SetRCode(clsTempOp, bReset)
+        ucr2ndFactorReceiver.SetRCode(clsTempOp, bReset)
+        ucrChkMargin.SetRCode(clsRFacetFunction, bReset)
+        ucrChkFreeSpace.SetRCode(clsRFacetFunction, bReset)
+        ucrChkFreeScalesX.SetRCode(clsRFacetFunction, bReset)
+        ucrChkFreeScalesY.SetRCode(clsRFacetFunction, bReset)
+        ucrNudNumberofRows.SetRCode(clsRFacetFunction, bReset)
+        ucrChkIncludeFacets.SetRCode(clsBaseOperator, bReset)
 
     End Sub
 
@@ -270,7 +258,6 @@ Public Class sdgPlots
         ''Note that the following two don't reset the bisX and RSyntaxAxis ... So no need to set these again.
         'ucrXAxis.Reset()
         'ucrYAxis.Reset()
-        'ucrInputThemes.SetName("theme_grey")
         'rdoLegendTitleAuto.Checked = True
         'bLayersDefaultIsGlobal = False
     End Sub
@@ -309,15 +296,6 @@ Public Class sdgPlots
         tabctrlBoxSubdialog.SelectedIndex = 0
     End Sub
 
-    Private Sub CreateThemes()
-        'Adds the available themes in the relevant "Themes combo box".
-        'Dim strThemes() As String
-        'strThemes = {"theme_bw", "theme_linedraw", "theme_light", "theme_minimal", "theme_classic", "theme_dark", "theme_void", "theme_base", "theme_calc", "theme_economist", "theme_few", "theme_fivethirtyeight", "theme_foundation", "theme_grey", "theme_gdocs", "theme_igray", "theme_map", "theme_par", "theme_solarized", "theme_hc", "theme_pander", "theme_solid", "theme_stata", "theme_tufte", "theme_wsj"}
-        'Array.Sort(strThemes)
-        'ucrInputThemes.SetItems(strThemes)
-        ''Task: Need to implement theme options. The "All Options" button is temporarily disabled.
-        'cmdAllOptions.Enabled = False
-    End Sub
     Private Sub IncludeFacets()
         'If the user wants facets, the facets options need to be shown, otherwise hide them.
         If ucrChkIncludeFacets.Checked Then
@@ -517,23 +495,6 @@ Public Class sdgPlots
         'End If
         'FacetsNumberOfRowsOrColumns()
         'SetFacets()
-    End Sub
-
-    Private Sub ucrInputThemes_NameChanged() Handles ucrInputThemes.NameChanged
-        'If Not ucrInputThemes.IsEmpty Then
-        '    clsRThemeFunction.SetRCommand(ucrInputThemes.GetText())
-        '    If ucrInputThemes.GetText() = "theme_grey" Then
-        '        If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-        '            clsRsyntax.AddOperatorParameter("theme", clsRFunc:=clsRThemeFunction)
-        '        Else
-        '            clsRsyntax.RemoveOperatorParameter("theme")
-        '        End If
-        '    Else
-        '        clsRsyntax.AddOperatorParameter("theme", clsRFunc:=clsRThemeFunction)
-        '    End If
-        'Else
-        '    clsRsyntax.RemoveOperatorParameter("theme")
-        'End If
     End Sub
 
     'Question to be discussed/Task: This is the kind of subs that could go into a SetupPlotOptions procedure... also only called in two specific plots and not in the others ... Why ? (to be explored)
