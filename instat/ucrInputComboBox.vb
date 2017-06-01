@@ -233,7 +233,7 @@ Public Class ucrInputComboBox
         cboInput.DropDownStyle = ComboBoxStyle.DropDown
         cboInput.AutoCompleteMode = AutoCompleteMode.Append
         cboInput.AutoCompleteSource = AutoCompleteSource.ListItems
-        'TODO implement validation settings for this
+        'TODO implement validation settings for this		
         If bAdditionsAllowed Then
 
         Else
