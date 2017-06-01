@@ -29,16 +29,16 @@ Partial Class dlgRatingScales
         Me.rdoLowAscendingLikert = New System.Windows.Forms.RadioButton()
         Me.rdoNoneLikert = New System.Windows.Forms.RadioButton()
         Me.rdoHighAscendingLikert = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlSjpLikert = New instat.UcrPanel()
         Me.grpLikertType = New System.Windows.Forms.GroupBox()
+        Me.ucrChkNumberOfCategories = New instat.ucrCheck()
+        Me.ucrNudNeutralLevel = New instat.ucrNud()
         Me.lblNeutralLevel = New System.Windows.Forms.Label()
         Me.rdoStacked = New System.Windows.Forms.RadioButton()
         Me.rdoLikert = New System.Windows.Forms.RadioButton()
         Me.rdoTable = New System.Windows.Forms.RadioButton()
         Me.ucrPnlGraphType = New instat.UcrPanel()
-        Me.ucrChkNumberOfCategories = New instat.ucrCheck()
-        Me.ucrNudNeutralLevel = New instat.ucrNud()
         Me.ucrChkFlip = New instat.ucrCheck()
-        Me.ucrPnlSjpLikert = New instat.UcrPanel()
         Me.ucrReceiverWeights = New instat.ucrReceiverSingle()
         Me.ucrChkWeights = New instat.ucrCheck()
         Me.ucrSaveGraph = New instat.ucrSave()
@@ -56,7 +56,7 @@ Partial Class dlgRatingScales
         Me.lblOrderedFactor.Location = New System.Drawing.Point(284, 72)
         Me.lblOrderedFactor.Name = "lblOrderedFactor"
         Me.lblOrderedFactor.Size = New System.Drawing.Size(81, 13)
-        Me.lblOrderedFactor.TabIndex = 1
+        Me.lblOrderedFactor.TabIndex = 5
         Me.lblOrderedFactor.Text = "Ordered Factor:"
         '
         'grpSort
@@ -67,10 +67,10 @@ Partial Class dlgRatingScales
         Me.grpSort.Controls.Add(Me.rdoNoneLikert)
         Me.grpSort.Controls.Add(Me.rdoHighAscendingLikert)
         Me.grpSort.Controls.Add(Me.ucrPnlSjpLikert)
-        Me.grpSort.Location = New System.Drawing.Point(300, 193)
+        Me.grpSort.Location = New System.Drawing.Point(284, 193)
         Me.grpSort.Name = "grpSort"
         Me.grpSort.Size = New System.Drawing.Size(161, 149)
-        Me.grpSort.TabIndex = 10
+        Me.grpSort.TabIndex = 7
         Me.grpSort.TabStop = False
         Me.grpSort.Text = "Sort"
         '
@@ -80,7 +80,7 @@ Partial Class dlgRatingScales
         Me.rdoHighDescendingLikert.Location = New System.Drawing.Point(14, 115)
         Me.rdoHighDescendingLikert.Name = "rdoHighDescendingLikert"
         Me.rdoHighDescendingLikert.Size = New System.Drawing.Size(107, 17)
-        Me.rdoHighDescendingLikert.TabIndex = 11
+        Me.rdoHighDescendingLikert.TabIndex = 0
         Me.rdoHighDescendingLikert.TabStop = True
         Me.rdoHighDescendingLikert.Text = "High Descending"
         Me.rdoHighDescendingLikert.UseVisualStyleBackColor = True
@@ -91,7 +91,7 @@ Partial Class dlgRatingScales
         Me.rdoLowDescendingLikert.Location = New System.Drawing.Point(14, 67)
         Me.rdoLowDescendingLikert.Name = "rdoLowDescendingLikert"
         Me.rdoLowDescendingLikert.Size = New System.Drawing.Size(102, 17)
-        Me.rdoLowDescendingLikert.TabIndex = 6
+        Me.rdoLowDescendingLikert.TabIndex = 4
         Me.rdoLowDescendingLikert.TabStop = True
         Me.rdoLowDescendingLikert.Text = "LowDescending"
         Me.rdoLowDescendingLikert.UseVisualStyleBackColor = True
@@ -102,7 +102,7 @@ Partial Class dlgRatingScales
         Me.rdoLowAscendingLikert.Location = New System.Drawing.Point(14, 43)
         Me.rdoLowAscendingLikert.Name = "rdoLowAscendingLikert"
         Me.rdoLowAscendingLikert.Size = New System.Drawing.Size(95, 17)
-        Me.rdoLowAscendingLikert.TabIndex = 4
+        Me.rdoLowAscendingLikert.TabIndex = 3
         Me.rdoLowAscendingLikert.TabStop = True
         Me.rdoLowAscendingLikert.Text = "LowAscending"
         Me.rdoLowAscendingLikert.UseVisualStyleBackColor = True
@@ -113,7 +113,7 @@ Partial Class dlgRatingScales
         Me.rdoNoneLikert.Location = New System.Drawing.Point(14, 19)
         Me.rdoNoneLikert.Name = "rdoNoneLikert"
         Me.rdoNoneLikert.Size = New System.Drawing.Size(51, 17)
-        Me.rdoNoneLikert.TabIndex = 1
+        Me.rdoNoneLikert.TabIndex = 2
         Me.rdoNoneLikert.TabStop = True
         Me.rdoNoneLikert.Text = "None"
         Me.rdoNoneLikert.UseVisualStyleBackColor = True
@@ -124,10 +124,17 @@ Partial Class dlgRatingScales
         Me.rdoHighAscendingLikert.Location = New System.Drawing.Point(14, 91)
         Me.rdoHighAscendingLikert.Name = "rdoHighAscendingLikert"
         Me.rdoHighAscendingLikert.Size = New System.Drawing.Size(100, 17)
-        Me.rdoHighAscendingLikert.TabIndex = 8
+        Me.rdoHighAscendingLikert.TabIndex = 5
         Me.rdoHighAscendingLikert.TabStop = True
         Me.rdoHighAscendingLikert.Text = "High Ascending"
         Me.rdoHighAscendingLikert.UseVisualStyleBackColor = True
+        '
+        'ucrPnlSjpLikert
+        '
+        Me.ucrPnlSjpLikert.Location = New System.Drawing.Point(8, 14)
+        Me.ucrPnlSjpLikert.Name = "ucrPnlSjpLikert"
+        Me.ucrPnlSjpLikert.Size = New System.Drawing.Size(126, 127)
+        Me.ucrPnlSjpLikert.TabIndex = 1
         '
         'grpLikertType
         '
@@ -139,10 +146,30 @@ Partial Class dlgRatingScales
         Me.grpLikertType.Location = New System.Drawing.Point(10, 312)
         Me.grpLikertType.Name = "grpLikertType"
         Me.grpLikertType.Size = New System.Drawing.Size(224, 80)
-        Me.grpLikertType.TabIndex = 6
+        Me.grpLikertType.TabIndex = 12
         Me.grpLikertType.TabStop = False
         Me.grpLikertType.Tag = "Graph_type"
         Me.grpLikertType.Text = "Likert Options"
+        '
+        'ucrChkNumberOfCategories
+        '
+        Me.ucrChkNumberOfCategories.Checked = False
+        Me.ucrChkNumberOfCategories.Location = New System.Drawing.Point(6, 26)
+        Me.ucrChkNumberOfCategories.Name = "ucrChkNumberOfCategories"
+        Me.ucrChkNumberOfCategories.Size = New System.Drawing.Size(212, 20)
+        Me.ucrChkNumberOfCategories.TabIndex = 0
+        '
+        'ucrNudNeutralLevel
+        '
+        Me.ucrNudNeutralLevel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNeutralLevel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudNeutralLevel.Location = New System.Drawing.Point(83, 52)
+        Me.ucrNudNeutralLevel.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudNeutralLevel.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNeutralLevel.Name = "ucrNudNeutralLevel"
+        Me.ucrNudNeutralLevel.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudNeutralLevel.TabIndex = 2
+        Me.ucrNudNeutralLevel.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblNeutralLevel
         '
@@ -150,7 +177,7 @@ Partial Class dlgRatingScales
         Me.lblNeutralLevel.Location = New System.Drawing.Point(8, 56)
         Me.lblNeutralLevel.Name = "lblNeutralLevel"
         Me.lblNeutralLevel.Size = New System.Drawing.Size(73, 13)
-        Me.lblNeutralLevel.TabIndex = 3
+        Me.lblNeutralLevel.TabIndex = 1
         Me.lblNeutralLevel.Tag = "Neutral_Level"
         Me.lblNeutralLevel.Text = "Neutral Level:"
         '
@@ -164,7 +191,7 @@ Partial Class dlgRatingScales
         Me.rdoStacked.Location = New System.Drawing.Point(258, 10)
         Me.rdoStacked.Name = "rdoStacked"
         Me.rdoStacked.Size = New System.Drawing.Size(100, 28)
-        Me.rdoStacked.TabIndex = 16
+        Me.rdoStacked.TabIndex = 3
         Me.rdoStacked.Text = "Stacked Graph"
         Me.rdoStacked.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoStacked.UseVisualStyleBackColor = True
@@ -179,7 +206,7 @@ Partial Class dlgRatingScales
         Me.rdoLikert.Location = New System.Drawing.Point(160, 10)
         Me.rdoLikert.Name = "rdoLikert"
         Me.rdoLikert.Size = New System.Drawing.Size(100, 28)
-        Me.rdoLikert.TabIndex = 15
+        Me.rdoLikert.TabIndex = 2
         Me.rdoLikert.Text = "Likert Graph"
         Me.rdoLikert.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoLikert.UseVisualStyleBackColor = True
@@ -194,7 +221,7 @@ Partial Class dlgRatingScales
         Me.rdoTable.Location = New System.Drawing.Point(62, 10)
         Me.rdoTable.Name = "rdoTable"
         Me.rdoTable.Size = New System.Drawing.Size(100, 28)
-        Me.rdoTable.TabIndex = 14
+        Me.rdoTable.TabIndex = 1
         Me.rdoTable.Text = "Table"
         Me.rdoTable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoTable.UseVisualStyleBackColor = True
@@ -204,27 +231,7 @@ Partial Class dlgRatingScales
         Me.ucrPnlGraphType.Location = New System.Drawing.Point(53, 8)
         Me.ucrPnlGraphType.Name = "ucrPnlGraphType"
         Me.ucrPnlGraphType.Size = New System.Drawing.Size(315, 35)
-        Me.ucrPnlGraphType.TabIndex = 13
-        '
-        'ucrChkNumberOfCategories
-        '
-        Me.ucrChkNumberOfCategories.Checked = False
-        Me.ucrChkNumberOfCategories.Location = New System.Drawing.Point(6, 26)
-        Me.ucrChkNumberOfCategories.Name = "ucrChkNumberOfCategories"
-        Me.ucrChkNumberOfCategories.Size = New System.Drawing.Size(212, 20)
-        Me.ucrChkNumberOfCategories.TabIndex = 5
-        '
-        'ucrNudNeutralLevel
-        '
-        Me.ucrNudNeutralLevel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNeutralLevel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNeutralLevel.Location = New System.Drawing.Point(83, 52)
-        Me.ucrNudNeutralLevel.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudNeutralLevel.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNeutralLevel.Name = "ucrNudNeutralLevel"
-        Me.ucrNudNeutralLevel.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudNeutralLevel.TabIndex = 4
-        Me.ucrNudNeutralLevel.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrPnlGraphType.TabIndex = 0
         '
         'ucrChkFlip
         '
@@ -232,14 +239,7 @@ Partial Class dlgRatingScales
         Me.ucrChkFlip.Location = New System.Drawing.Point(10, 288)
         Me.ucrChkFlip.Name = "ucrChkFlip"
         Me.ucrChkFlip.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkFlip.TabIndex = 5
-        '
-        'ucrPnlSjpLikert
-        '
-        Me.ucrPnlSjpLikert.Location = New System.Drawing.Point(8, 14)
-        Me.ucrPnlSjpLikert.Name = "ucrPnlSjpLikert"
-        Me.ucrPnlSjpLikert.Size = New System.Drawing.Size(126, 127)
-        Me.ucrPnlSjpLikert.TabIndex = 3
+        Me.ucrChkFlip.TabIndex = 11
         '
         'ucrReceiverWeights
         '
@@ -250,7 +250,7 @@ Partial Class dlgRatingScales
         Me.ucrReceiverWeights.Selector = Nothing
         Me.ucrReceiverWeights.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverWeights.strNcFilePath = ""
-        Me.ucrReceiverWeights.TabIndex = 4
+        Me.ucrReceiverWeights.TabIndex = 10
         Me.ucrReceiverWeights.ucrSelector = Nothing
         '
         'ucrChkWeights
@@ -259,25 +259,25 @@ Partial Class dlgRatingScales
         Me.ucrChkWeights.Location = New System.Drawing.Point(10, 262)
         Me.ucrChkWeights.Name = "ucrChkWeights"
         Me.ucrChkWeights.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkWeights.TabIndex = 3
+        Me.ucrChkWeights.TabIndex = 9
         '
         'ucrSaveGraph
         '
         Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 397)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
         Me.ucrSaveGraph.Size = New System.Drawing.Size(258, 24)
-        Me.ucrSaveGraph.TabIndex = 11
+        Me.ucrSaveGraph.TabIndex = 13
         '
         'ucrReceiverOrderedFactors
         '
         Me.ucrReceiverOrderedFactors.frmParent = Me
-        Me.ucrReceiverOrderedFactors.Location = New System.Drawing.Point(287, 87)
+        Me.ucrReceiverOrderedFactors.Location = New System.Drawing.Point(284, 87)
         Me.ucrReceiverOrderedFactors.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverOrderedFactors.Name = "ucrReceiverOrderedFactors"
         Me.ucrReceiverOrderedFactors.Selector = Nothing
         Me.ucrReceiverOrderedFactors.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverOrderedFactors.strNcFilePath = ""
-        Me.ucrReceiverOrderedFactors.TabIndex = 2
+        Me.ucrReceiverOrderedFactors.TabIndex = 6
         Me.ucrReceiverOrderedFactors.ucrSelector = Nothing
         '
         'ucrBase
@@ -285,14 +285,14 @@ Partial Class dlgRatingScales
         Me.ucrBase.Location = New System.Drawing.Point(10, 429)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 12
+        Me.ucrBase.TabIndex = 14
         '
         'ucrPnlType
         '
         Me.ucrPnlType.Location = New System.Drawing.Point(10, 258)
         Me.ucrPnlType.Name = "ucrPnlType"
         Me.ucrPnlType.Size = New System.Drawing.Size(82, 55)
-        Me.ucrPnlType.TabIndex = 7
+        Me.ucrPnlType.TabIndex = 8
         '
         'ucrSelectorRatingScale
         '
@@ -302,13 +302,13 @@ Partial Class dlgRatingScales
         Me.ucrSelectorRatingScale.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorRatingScale.Name = "ucrSelectorRatingScale"
         Me.ucrSelectorRatingScale.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorRatingScale.TabIndex = 0
+        Me.ucrSelectorRatingScale.TabIndex = 4
         '
         'dlgRatingScales
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(480, 496)
+        Me.ClientSize = New System.Drawing.Size(447, 496)
         Me.Controls.Add(Me.rdoStacked)
         Me.Controls.Add(Me.rdoLikert)
         Me.Controls.Add(Me.rdoTable)

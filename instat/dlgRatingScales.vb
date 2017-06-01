@@ -76,6 +76,7 @@ Public Class dlgRatingScales
         ucrPnlGraphType.AddFunctionNamesCondition(rdoTable, "sjt.stackfrq")
         ucrPnlGraphType.AddFunctionNamesCondition(rdoStacked, "sjp.stackfrq")
 
+        ucrPnlGraphType.AddToLinkedControls(ucrChkFlip, {rdoLikert, rdoStacked}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGraphType.AddToLinkedControls(ucrNudNeutralLevel, {rdoLikert}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGraphType.AddToLinkedControls(ucrChkNumberOfCategories, {rdoLikert}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkNumberOfCategories.SetLinkedDisplayControl(grpLikertType)
