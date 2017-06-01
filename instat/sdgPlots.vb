@@ -196,6 +196,7 @@ Public Class sdgPlots
         ucrNudNumberofRows.SetRCode(clsRFacetFunction, bReset)
         ucrChkIncludeFacets.SetRCode(clsBaseOperator, bReset)
 
+        AddRemoveLabs()
     End Sub
 
     Private Sub SetFacetParameterFunctions()
@@ -535,6 +536,14 @@ Public Class sdgPlots
         '    ElseIf rdoLegendTitleAuto.Checked Then
         '        clsRsyntax.RemoveOperatorParameter("labs")
         '    End If
+    End Sub
+
+    Private Sub AddRemoveLabs()
+        If Not ucrInputGraphTitle.IsEmpty() Then 'OrElse subtitle and caption inputs...
+            clsBaseOperator.AddParameter("labs", clsRFunctionParameter:=clsLabsFunction)
+        Else
+            clsBaseOperator.RemoveParameterByName("labs")
+        End If
     End Sub
     'Warning/Task to be discussed: need to disable ok on dlg's when layers are not complete on subdialogues + warning message... 
     'Warning: actually this will be very hard to implement until the global aes, set from the main layer are properly communicated to plots. Global aes might fill in missing mandatory aes...
