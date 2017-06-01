@@ -43,6 +43,8 @@ Public Class sdgOneVarUseModFit
         ' "probs" parameter:
         ucrPnlQuantiles.AddRadioButton(rdoSequence)
         ucrPnlQuantiles.AddRadioButton(rdoInsertValues)
+        ucrPnlQuantiles.AddFunctionNamesCondition(rdoSequence, "seq")
+        ucrPnlQuantiles.AddFunctionNamesCondition(rdoInsertValues, "quantile")
 
         '1. Function ran here is probs = seq(from = , to = , by =)
         ucrNudFrom.SetParameter(New RParameter("from", 1))
@@ -92,7 +94,7 @@ Public Class sdgOneVarUseModFit
         ucrPnlPlots.AddFunctionNamesCondition(rdoDensityPlot, "denscomp")
         ucrPnlPlots.AddFunctionNamesCondition(rdoCIcdf, "CIcdfplot")
 
-        rdoNoPlot.Enabled = False ' temporary
+        ' rdoNoPlot.Enabled = False ' temporary
         bControlsInitialised = True
     End Sub
 
