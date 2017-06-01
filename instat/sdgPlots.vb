@@ -121,6 +121,8 @@ Public Class sdgPlots
         'titles tab
 
         ucrInputGraphTitle.SetParameter(New RParameter("title"))
+        ucrInputGraphSubTitle.SetParameter(New RParameter("subtitle"))
+        ucrInputGraphCaption.SetParameter(New RParameter("caption"))
         'TODO what about the subtitle argument of labs?
         'TODO what about the caption argument of labs?
 
@@ -181,8 +183,9 @@ Public Class sdgPlots
         End If
 
         'clsRFacetFunction = clsNewRFacetFunction
-
         ucrInputGraphTitle.SetRCode(clsLabsFunction, bReset)
+        ucrInputGraphSubTitle.SetRCode(clsLabsFunction, bReset)
+        ucrInputGraphCaption.SetRCode(clsLabsFunction, bReset)
         ucrInputThemes.SetRCode(clsBaseOperator)
 
         'ucrInputLegend.SetRCode(clsNewLabsFunction, bReset)
@@ -539,7 +542,7 @@ Public Class sdgPlots
     End Sub
 
     Private Sub AddRemoveLabs()
-        If Not ucrInputGraphTitle.IsEmpty() Then 'OrElse subtitle and caption inputs...
+        If Not ucrInputGraphTitle.IsEmpty() OrElse Not ucrInputGraphSubTitle.IsEmpty() OrElse Not ucrInputGraphCaption.IsEmpty() Then
             clsBaseOperator.AddParameter("labs", clsRFunctionParameter:=clsLabsFunction)
         Else
             clsBaseOperator.RemoveParameterByName("labs")

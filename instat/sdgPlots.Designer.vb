@@ -64,6 +64,10 @@ Partial Class sdgPlots
         Me.tabCoordinates = New System.Windows.Forms.TabPage()
         Me.lblWarning = New System.Windows.Forms.Label()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
+        Me.ucrInputGraphSubTitle = New instat.ucrInputTextBox()
+        Me.ucrInputGraphCaption = New instat.ucrInputTextBox()
+        Me.lblSubTitle = New System.Windows.Forms.Label()
+        Me.lblCaption = New System.Windows.Forms.Label()
         Me.tabctrlBoxSubdialog.SuspendLayout()
         Me.tabFacet.SuspendLayout()
         Me.tabLayers.SuspendLayout()
@@ -281,8 +285,12 @@ Partial Class sdgPlots
         '
         'tabTitles
         '
+        Me.tabTitles.Controls.Add(Me.lblCaption)
+        Me.tabTitles.Controls.Add(Me.lblSubTitle)
         Me.tabTitles.Controls.Add(Me.Label1)
         Me.tabTitles.Controls.Add(Me.grpLegendTitle)
+        Me.tabTitles.Controls.Add(Me.ucrInputGraphCaption)
+        Me.tabTitles.Controls.Add(Me.ucrInputGraphSubTitle)
         Me.tabTitles.Controls.Add(Me.ucrInputGraphTitle)
         Me.tabTitles.Location = New System.Drawing.Point(4, 22)
         Me.tabTitles.Name = "tabTitles"
@@ -310,12 +318,13 @@ Partial Class sdgPlots
         Me.grpLegendTitle.Controls.Add(Me.rdoLegendTitleCustom)
         Me.grpLegendTitle.Controls.Add(Me.rdoLegendTitleAuto)
         Me.grpLegendTitle.Controls.Add(Me.ucrPnlLegendTitle)
-        Me.grpLegendTitle.Location = New System.Drawing.Point(6, 57)
+        Me.grpLegendTitle.Location = New System.Drawing.Point(10, 171)
         Me.grpLegendTitle.Name = "grpLegendTitle"
         Me.grpLegendTitle.Size = New System.Drawing.Size(278, 105)
         Me.grpLegendTitle.TabIndex = 8
         Me.grpLegendTitle.TabStop = False
         Me.grpLegendTitle.Text = "Legend Title"
+        Me.grpLegendTitle.Visible = False
         '
         'ucrChkOverwriteLegendTitle
         '
@@ -377,7 +386,7 @@ Partial Class sdgPlots
         Me.ucrInputGraphTitle.AddQuotesIfUnrecognised = True
         Me.ucrInputGraphTitle.IsMultiline = False
         Me.ucrInputGraphTitle.IsReadOnly = False
-        Me.ucrInputGraphTitle.Location = New System.Drawing.Point(75, 14)
+        Me.ucrInputGraphTitle.Location = New System.Drawing.Point(116, 17)
         Me.ucrInputGraphTitle.Name = "ucrInputGraphTitle"
         Me.ucrInputGraphTitle.Size = New System.Drawing.Size(166, 21)
         Me.ucrInputGraphTitle.TabIndex = 9
@@ -506,6 +515,44 @@ Partial Class sdgPlots
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(160, 41)
         Me.ucrBaseSubdialog.TabIndex = 1
         '
+        'ucrInputGraphSubTitle
+        '
+        Me.ucrInputGraphSubTitle.AddQuotesIfUnrecognised = True
+        Me.ucrInputGraphSubTitle.IsMultiline = False
+        Me.ucrInputGraphSubTitle.IsReadOnly = False
+        Me.ucrInputGraphSubTitle.Location = New System.Drawing.Point(116, 44)
+        Me.ucrInputGraphSubTitle.Name = "ucrInputGraphSubTitle"
+        Me.ucrInputGraphSubTitle.Size = New System.Drawing.Size(166, 21)
+        Me.ucrInputGraphSubTitle.TabIndex = 9
+        '
+        'ucrInputGraphCaption
+        '
+        Me.ucrInputGraphCaption.AddQuotesIfUnrecognised = True
+        Me.ucrInputGraphCaption.IsMultiline = False
+        Me.ucrInputGraphCaption.IsReadOnly = False
+        Me.ucrInputGraphCaption.Location = New System.Drawing.Point(116, 71)
+        Me.ucrInputGraphCaption.Name = "ucrInputGraphCaption"
+        Me.ucrInputGraphCaption.Size = New System.Drawing.Size(166, 21)
+        Me.ucrInputGraphCaption.TabIndex = 9
+        '
+        'lblSubTitle
+        '
+        Me.lblSubTitle.AutoSize = True
+        Me.lblSubTitle.Location = New System.Drawing.Point(6, 41)
+        Me.lblSubTitle.Name = "lblSubTitle"
+        Me.lblSubTitle.Size = New System.Drawing.Size(84, 13)
+        Me.lblSubTitle.TabIndex = 10
+        Me.lblSubTitle.Text = "Graph Sub Title:"
+        '
+        'lblCaption
+        '
+        Me.lblCaption.AutoSize = True
+        Me.lblCaption.Location = New System.Drawing.Point(6, 68)
+        Me.lblCaption.Name = "lblCaption"
+        Me.lblCaption.Size = New System.Drawing.Size(78, 13)
+        Me.lblCaption.TabIndex = 10
+        Me.lblCaption.Text = "Graph Caption:"
+        '
         'sdgPlots
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -581,6 +628,10 @@ Partial Class sdgPlots
     Friend WithEvents ucrPnlLegendTitle As UcrPanel
     Friend WithEvents ucrChkDisplayLegendTitle As ucrCheck
     Friend WithEvents ucrChkOverwriteLegendTitle As ucrCheck
+    Friend WithEvents lblCaption As Label
+    Friend WithEvents lblSubTitle As Label
+    Friend WithEvents ucrInputGraphCaption As ucrInputTextBox
+    Friend WithEvents ucrInputGraphSubTitle As ucrInputTextBox
 End Class
 
 
