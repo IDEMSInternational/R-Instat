@@ -106,7 +106,7 @@ Public Class RLink
         clsGetDataNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_names")
         If bInstatObjectExists Then
             expNames = RunInternalScriptGetValue(clsGetDataNames.ToScript(), bSilent:=True)
-            If expNames IsNot Nothing AndAlso expNames.Type = Internals.SymbolicExpressionType.Null Then
+            If expNames IsNot Nothing AndAlso Not expNames.Type = Internals.SymbolicExpressionType.Null Then
                 chrDataFrameNames = expNames.AsCharacter
             End If
             If chrDataFrameNames IsNot Nothing AndAlso chrDataFrameNames.Length > 0 Then
@@ -126,7 +126,7 @@ Public Class RLink
             clsGetColumnNames.SetRCommand(strInstatDataObject & "$get_column_names")
             clsGetColumnNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
             expNames = RunInternalScriptGetValue(clsGetColumnNames.ToScript(), bSilent:=True)
-            If expNames IsNot Nothing AndAlso expNames.Type = Internals.SymbolicExpressionType.Null Then
+            If expNames IsNot Nothing AndAlso Not expNames.Type = Internals.SymbolicExpressionType.Null Then
                 chrCurrColumns = expNames.AsCharacter
             End If
             If chrCurrColumns IsNot Nothing AndAlso chrCurrColumns.Length > 0 Then
@@ -227,7 +227,7 @@ Public Class RLink
             clsGetDefault.AddParameter("existing_names", GetListAsRString(lstItems))
         End If
         expPrefix = RunInternalScriptGetValue(clsGetDefault.ToScript())
-        If Not expPrefix.Type = Internals.SymbolicExpressionType.Null Then
+        If expPrefix IsNot Nothing AndAlso Not expPrefix.Type = Internals.SymbolicExpressionType.Null Then
             strNextDefault = expPrefix.AsCharacter(0)
         End If
         Return strNextDefault
