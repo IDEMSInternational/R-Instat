@@ -101,11 +101,17 @@ Public Class RLink
         Dim chrDataFrameNames As CharacterVector
         Dim lstDataFrameNames As New List(Of String)
         Dim clsGetDataNames As New RFunction
+        Dim expNames As SymbolicExpression
 
         clsGetDataNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_names")
         If bInstatObjectExists Then
-            chrDataFrameNames = RunInternalScriptGetValue(clsGetDataNames.ToScript()).AsCharacter
-            If chrDataFrameNames IsNot Nothing Then
+            expNames = RunInternalScriptGetValue(clsGetDataNames.ToScript(), bSilent:=True)
+            If expNames IsNot Nothing AndAlso expNames.Type = Internals.SymbolicExpressionType.Null Then
+                chrDataFrameNames = expNames.AsCharacter
+            Else
+                chrDataFrameNames = New CharacterVector(clsEngine, 0)
+            End If
+            If chrDataFrameNames IsNot Nothing AndAlso chrDataFrameNames.Length > 0 Then
                 lstDataFrameNames.AddRange(chrDataFrameNames)
             End If
         End If
@@ -116,11 +122,19 @@ Public Class RLink
         Dim chrCurrColumns As CharacterVector
         Dim lstCurrColumns As New List(Of String)
         Dim clsGetColumnNames As New RFunction
+        Dim expNames As SymbolicExpression
 
         clsGetColumnNames.SetRCommand(strInstatDataObject & "$get_column_names")
         clsGetColumnNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
-        chrCurrColumns = RunInternalScriptGetValue(clsGetColumnNames.ToScript()).AsCharacter
-        lstCurrColumns.AddRange(chrCurrColumns)
+        expNames = RunInternalScriptGetValue(clsGetColumnNames.ToScript(), bSilent:=True)
+        If expNames IsNot Nothing AndAlso expNames.Type = Internals.SymbolicExpressionType.Null Then
+            chrCurrColumns = expNames.AsCharacter
+        Else
+            chrCurrColumns = New CharacterVector(clsEngine, 0)
+        End If
+        If chrCurrColumns IsNot Nothing AndAlso chrCurrColumns.Length > 0 Then
+            lstCurrColumns.AddRange(chrCurrColumns)
+        End If
         Return lstCurrColumns
     End Function
 
@@ -503,6 +517,7 @@ Public Class RLink
         Dim clsExcludeList As New RFunction
         Dim kvpInclude As KeyValuePair(Of String, String())
         Dim kvpExclude As KeyValuePair(Of String, String())
+        Dim expItems As SymbolicExpression
 
         If bInstatObjectExists Then
             Select Case strType
@@ -555,7 +570,12 @@ Public Class RLink
             If strExcludedItems IsNot Nothing AndAlso strExcludedItems.Count > 0 Then
                 clsGetItems.AddParameter("excluded_items", GetListAsRString(strExcludedItems.ToList()))
             End If
-            vecColumns = RunInternalScriptGetValue(clsGetItems.ToScript()).AsList
+            expItems = RunInternalScriptGetValue(clsGetItems.ToScript(), bSilent:=True)
+            If expItems IsNot Nothing AndAlso Not expItems.Type = Internals.SymbolicExpressionType.Null Then
+                vecColumns = expItems.AsList
+            Else
+                vecColumns = New GenericVector(clsEngine, 0)
+            End If
 
             For i = 0 To vecColumns.Count - 1
                 If vecColumns.Count > 1 Then
@@ -751,12 +771,18 @@ Public Class RLink
     Public Function GetColumnType(strDataName As String, strColumnName As String) As String
         Dim strDataType As String
         Dim clsGetColumnType As New RFunction
+        Dim expDateType As SymbolicExpression
 
         clsGetColumnType.SetRCommand(strInstatDataObject & "$get_variables_metadata")
         clsGetColumnType.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
         clsGetColumnType.AddParameter("column", Chr(34) & strColumnName & Chr(34))
         clsGetColumnType.AddParameter("property", Chr(34) & "class" & Chr(34))
-        strDataType = RunInternalScriptGetValue(clsGetColumnType.ToScript()).AsCharacter(0)
+        expDateType = RunInternalScriptGetValue(clsGetColumnType.ToScript(), bSilent:=True)
+        If expDateType IsNot Nothing AndAlso Not expDateType.Type = Internals.SymbolicExpressionType.Null Then
+            strDataType = expDateType.AsCharacter(0)
+        Else
+            strDataType = ""
+        End If
         Return strDataType
     End Function
 
