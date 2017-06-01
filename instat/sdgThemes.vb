@@ -17,18 +17,37 @@ Imports instat.Translations
 
 Public Class sdgThemes
     Public bControlsInitialised As Boolean = False
-
+    Public clsTextTheme, clsSegmentTheme As New RFunction
     Private Sub sdgThemes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
 
     Public Sub InitialiseControls()
+        'Text Theme
+        ucrNudsize.SetParameter(New RParameter("size"))
+        ucrNudAngle.SetParameter(New RParameter("angle"))
+        ucrNudHjust.SetParameter(New RParameter("hjust"))
+        ucrNudVjust.SetParameter(New RParameter("vjust"))
+        ucrNudsize.SetParameter(New RParameter("lineheight"))
 
+        ucrInputColour.SetParameter(New RParameter("colour"))
+        ucrInputFace.SetParameter(New RParameter("face"))
+        ucrInputFamily.SetParameter(New RParameter("family"))
+
+        'Segment Theme
+        ucrNudSizeSegment.SetParameter(New RParameter("size"))
+        ucrInputLineType.SetParameter(New RParameter("linetype"))
+        ucrInputColourSegment.SetParameter(New RParameter("colour"))
+
+        bControlsInitialised = True
     End Sub
 
-    Private Sub lblAngle_Click(sender As Object, e As EventArgs) Handles lblAngle.Click
-
+    Public Sub SetRFunction(clsNewTextTheme As RFunction, clsNewSegmentTheme As RFunction, Optional bReset As Boolean = False)
+        If Not bControlsInitialised Then
+            InitialiseControls()
+        End If
+        clsTextTheme = clsNewTextTheme
+        clsSegmentTheme = clsNewSegmentTheme
     End Sub
-
 
 End Class

@@ -87,7 +87,7 @@ Partial Class sdgThemes
         '
         Me.tbXaxis.Controls.Add(Me.tbAxis)
         Me.tbXaxis.Controls.Add(Me.tbYaxis)
-        Me.tbXaxis.Location = New System.Drawing.Point(22, 1)
+        Me.tbXaxis.Location = New System.Drawing.Point(4, 8)
         Me.tbXaxis.Name = "tbXaxis"
         Me.tbXaxis.SelectedIndex = 0
         Me.tbXaxis.Size = New System.Drawing.Size(506, 421)
@@ -108,9 +108,9 @@ Partial Class sdgThemes
         '
         Me.grpTableOptions.Controls.Add(Me.GroupBox1)
         Me.grpTableOptions.Controls.Add(Me.grpThemetext)
-        Me.grpTableOptions.Location = New System.Drawing.Point(0, 3)
+        Me.grpTableOptions.Location = New System.Drawing.Point(-1, 3)
         Me.grpTableOptions.Name = "grpTableOptions"
-        Me.grpTableOptions.Size = New System.Drawing.Size(502, 397)
+        Me.grpTableOptions.Size = New System.Drawing.Size(492, 397)
         Me.grpTableOptions.TabIndex = 0
         Me.grpTableOptions.TabStop = False
         Me.grpTableOptions.Text = "More Options"
