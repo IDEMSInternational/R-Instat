@@ -27,7 +27,7 @@ Partial Class ucrAxes
         Me.rdoSpecifyTitle = New System.Windows.Forms.RadioButton()
         Me.rdoNoTitle = New System.Windows.Forms.RadioButton()
         Me.rdoTitleAuto = New System.Windows.Forms.RadioButton()
-        Me.ucrTitle = New instat.ucrInputTextBox()
+        Me.ucrInputTitle = New instat.ucrInputTextBox()
         Me.ucrPnlAxisTitle = New instat.UcrPanel()
         Me.grpTickMarkers = New System.Windows.Forms.GroupBox()
         Me.ucrNudInStepsOf = New instat.ucrNud()
@@ -64,7 +64,7 @@ Partial Class ucrAxes
         Me.grpAxisTitle.Controls.Add(Me.rdoSpecifyTitle)
         Me.grpAxisTitle.Controls.Add(Me.rdoNoTitle)
         Me.grpAxisTitle.Controls.Add(Me.rdoTitleAuto)
-        Me.grpAxisTitle.Controls.Add(Me.ucrTitle)
+        Me.grpAxisTitle.Controls.Add(Me.ucrInputTitle)
         Me.grpAxisTitle.Controls.Add(Me.ucrPnlAxisTitle)
         Me.grpAxisTitle.Location = New System.Drawing.Point(3, 18)
         Me.grpAxisTitle.Name = "grpAxisTitle"
@@ -115,15 +115,15 @@ Partial Class ucrAxes
         Me.rdoTitleAuto.Text = "Auto"
         Me.rdoTitleAuto.UseVisualStyleBackColor = True
         '
-        'ucrTitle
+        'ucrInputTitle
         '
-        Me.ucrTitle.AddQuotesIfUnrecognised = True
-        Me.ucrTitle.IsMultiline = False
-        Me.ucrTitle.IsReadOnly = False
-        Me.ucrTitle.Location = New System.Drawing.Point(62, 62)
-        Me.ucrTitle.Name = "ucrTitle"
-        Me.ucrTitle.Size = New System.Drawing.Size(131, 21)
-        Me.ucrTitle.TabIndex = 1
+        Me.ucrInputTitle.AddQuotesIfUnrecognised = True
+        Me.ucrInputTitle.IsMultiline = False
+        Me.ucrInputTitle.IsReadOnly = False
+        Me.ucrInputTitle.Location = New System.Drawing.Point(62, 62)
+        Me.ucrInputTitle.Name = "ucrInputTitle"
+        Me.ucrInputTitle.Size = New System.Drawing.Size(131, 21)
+        Me.ucrInputTitle.TabIndex = 1
         '
         'ucrPnlAxisTitle
         '
@@ -410,7 +410,7 @@ Partial Class ucrAxes
     End Sub
 
     Friend WithEvents grpAxisTitle As GroupBox
-    Friend WithEvents ucrTitle As ucrInputTextBox
+    Friend WithEvents ucrInputTitle As ucrInputTextBox
     Friend WithEvents grpTickMarkers As GroupBox
     Friend WithEvents lblFrom As Label
     Friend WithEvents rdoTickMarkersCustom As RadioButton
