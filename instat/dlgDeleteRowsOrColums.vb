@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgDeleteRowsOrColums
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsOperator As New ROperator
+    Private clsOperatorRowNames As New ROperator
     Private clsDeleteRows, clsDeleteColumns As RFunction
     Private Sub dlgDeleteRows_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -73,18 +73,18 @@ Public Class dlgDeleteRowsOrColums
     Private Sub SetDefaults()
         clsDeleteColumns = New RFunction
         clsDeleteRows = New RFunction
-        clsOperator = New ROperator
+        clsOperatorRowNames = New ROperator
 
         ucrSelectorForDeleteColumns.Reset()
 
         clsDeleteRows.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_rows_in_data")
         clsDeleteColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_columns_in_data")
 
-        clsOperator.SetOperation(":")
-        clsOperator.AddParameter("From", 1, iPosition:=0)
-        clsOperator.AddParameter("To", 1, iPosition:=2)
+        clsOperatorRowNames.SetOperation(":")
+        clsOperatorRowNames.AddParameter("From", 1, iPosition:=0)
+        clsOperatorRowNames.AddParameter("To", 1, iPosition:=1)
 
-        clsDeleteRows.AddParameter("row_names", clsROperatorParameter:=clsOperator)
+        clsDeleteRows.AddParameter("row_names", clsROperatorParameter:=clsOperatorRowNames)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDeleteColumns)
     End Sub
 
@@ -93,8 +93,8 @@ Public Class dlgDeleteRowsOrColums
         ucrPnlColumnsOrRows.SetRCode(clsDeleteColumns)
         ucrReceiverForColumnsToDelete.SetRCode(clsDeleteColumns)
         ucrSelectorForDeleteColumns.SetRCode(clsDeleteRows)
-        ucrNudTo.SetRCode(clsOperator, bReset)
-        ucrNudFrom.SetRCode(clsOperator, bReset)
+        ucrNudTo.SetRCode(clsOperatorRowNames, bReset)
+        ucrNudFrom.SetRCode(clsOperatorRowNames, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -116,13 +116,6 @@ Public Class dlgDeleteRowsOrColums
     End Sub
 
     Private Sub ReopenDialog()
-        If ucrSelectorForDeleteColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
-            Try
-                ucrNudFrom.Maximum = frmMain.clsRLink.GetDataFrameLength(ucrSelectorForDeleteColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-                ucrNudTo.Maximum = frmMain.clsRLink.GetDataFrameLength(ucrSelectorForDeleteColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-            Catch ex As Exception
-            End Try
-        End If
         'temp fix to receiver containing deleted column on reopen
         ucrReceiverForColumnsToDelete.Clear()
     End Sub
