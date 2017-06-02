@@ -61,8 +61,8 @@ Public Class dlgTransformClimatic
         ucrReceiverData.bWithQuotes = False
         ucrReceiverData.SetParameterIncludeArgumentName(False)
         ucrReceiverData.Selector = ucrSelectorTransform
-        ucrReceiverData.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "rain" & Chr(34)})
-        ucrReceiverData.bAutoFill = True
+        'ucrReceiverData.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "rain" & Chr(34)})
+        'ucrReceiverData.bAutoFill = True
 
         clsRTransform.SetRCommand("instat_calculation$new")
         clsRTransform.SetAssignTo("transform_calculation")
@@ -298,7 +298,7 @@ Public Class dlgTransformClimatic
         Else
             strValuesUnder = ">="
         End If
-        clsRRollFuncExpr.AddParameter("FUN", "Function(x) length(which(x" & strValuesUnder & ucrInputThreshold.GetText() & "))")
+        clsRRollFuncExpr.AddParameter("FUN", "function(x) length(which(x" & strValuesUnder & ucrInputThreshold.GetText() & "))")
         clsRTransform.AddParameter("function_exp", Chr(34) & clsRRollFuncExpr.ToScript.ToString & Chr(34))
     End Sub
 
