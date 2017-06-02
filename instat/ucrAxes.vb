@@ -17,24 +17,20 @@
 Public Class ucrAxes
     Public bIsX As Boolean
     '  Public clsRsyntax As New RSyntax
-    Public clsTitleFunction As New RFunction
+    Public clsXlabTitleFunction As New RFunction
+    Public clsYlabTitleFunction As New RFunction
+
     Public clsScalecontinuousFunction As New RFunction
     Public clsSeqFunction As New RFunction
     Public strAxis As String
     Public bFirstLoad As Boolean = True
+    Dim bInitialiseControls As Boolean = False
 
     Private Sub ucrAxes_Load(sender As Object, e As EventArgs) Handles Me.Load
-        'If bFirstLoad Then
-        '    SetDefaults()
-        '    InitialiseControl()
-        '    bFirstLoad = False
-        'End If
+
     End Sub
 
     Private Sub SetDefaults()
-        rdoTitleAuto.Checked = True
-        rdoScalesAuto.Checked = True
-        rdoTickMarkersAuto.Checked = True
         TitleDefaults()
         ucrTickMarkers.SetName("Interval")
         TitleFunction()
@@ -107,10 +103,11 @@ Public Class ucrAxes
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrNudInStepsOf.SetRCode(clsSeqFunction, bReset)
-        ucrNudTo.SetRCode(clsSeqFunction, bReset)
-        ucrNudFrom.SetRCode(clsSeqFunction, bReset)
-        ucrTitle.SetRCode(clsTitleFunction, bReset)
+        'ucrNudInStepsOf.SetRCode(clsSeqFunction, bReset)
+        'ucrNudTo.SetRCode(clsSeqFunction, bReset)
+        'ucrNudFrom.SetRCode(clsSeqFunction, bReset)
+        'ucrTitle.SetRCode(clsTitleFunction, bReset)
+        'ucrPnlAxisTitle.SetRCode(clsTitleFunction, bReset)
     End Sub
 
     Private Sub TitleDefaults()
@@ -128,21 +125,37 @@ Public Class ucrAxes
 
     ' i think this sub can be used to set the functions to link with the subdialog
 
-    Public Sub SetXorY(bIsXAxis As Boolean, clsSeqFunction As RFunction, clsTitleFunction As RFunction, clsScalecontinuousFunction As RFunction)
-        If bIsXAxis Then
-            bIsX = True
-            strAxis = "x"
-            clsTitleFunction.SetRCommand("xlab")
-            clsScalecontinuousFunction.SetRCommand("scale_" & strAxis & "_continuous")
+    Public Sub SetRCodeForXorY(bIsXAxis As Boolean, Optional clsSeqFunction As RFunction = Nothing, Optional clsNewXlabTitleFunction As RFunction = Nothing, Optional clsScalecontinuousFunction As RFunction = Nothing, Optional bReset As Boolean = False)
 
-            ' put scale_x_continuous function here
-        ElseIf bIsXAxis = False Then
-            bIsX = False
-            strAxis = "y"
-            clsTitleFunction.SetRCommand("ylab")
-            clsScalecontinuousFunction.SetRCommand("scale_" & strAxis & "_continuous")
-            ' put scale_y_continuous function here
-        End If
+        'If Not bInitialiseControls Then
+        '    InitialiseControl()
+        'End If
+        'If clsNewXlabTitleFunction IsNot Nothing Then
+        '    clsXlabTitleFunction = clsNewXlabTitleFunction
+        'Else
+        '    clsXlabTitleFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
+        'End If
+
+        'If bIsXAxis Then
+        '    bIsX = True
+        '    strAxis = "x"
+        '    clsXlabTitleFunction.SetRCommand("xlab")
+        '    clsScalecontinuousFunction.SetRCommand("scale_" & strAxis & "_continuous")
+
+        '    ' put scale_x_continuous function here
+        'ElseIf bIsXAxis = False Then
+        '    bIsX = False
+        '    strAxis = "y"
+        '    clsYlabTitleFunction.SetRCommand("ylab")
+        '    clsScalecontinuousFunction.SetRCommand("scale_" & strAxis & "_continuous")
+        '    ' put scale_y_continuous function here
+        'End If
+
+        'ucrNudInStepsOf.SetRCode(clsSeqFunction, bReset)
+        'ucrNudTo.SetRCode(clsSeqFunction, bReset)
+        'ucrNudFrom.SetRCode(clsSeqFunction, bReset)
+        'ucrTitle.SetRCode(clsXlabTitleFunction, bReset)
+        'ucrPnlAxisTitle.SetRCode(clsXlabTitleFunction, bReset)
     End Sub
 
     Public Sub SetRsyntaxAxis(clsRsyntaxAxis As RSyntax)

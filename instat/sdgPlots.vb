@@ -24,7 +24,10 @@ Public Class sdgPlots
     'This clsRSyntax is linked with the ucrBase.clsRSyntax from the dlg calling sdgPLotOptions...
     Public clsRggplotFunction As New RFunction
     Public clsAesFunction As New RFunction    'Warning: I m not sure this field is useful... Will all be revised when changing links though...
+
     Public clsLabsFunction As New RFunction
+    Public clsXLabTitleFunction As New RFunction
+
     Public clsRFacetFunction As New RFunction
     Public clsXLabFunction As New RFunction
     Public clsYLabFunction As New RFunction
@@ -123,6 +126,7 @@ Public Class sdgPlots
         ucrInputGraphTitle.SetParameter(New RParameter("title"))
         ucrInputGraphSubTitle.SetParameter(New RParameter("subtitle"))
         ucrInputGraphCaption.SetParameter(New RParameter("caption"))
+
         'TODO what about the subtitle argument of labs?
         'TODO what about the caption argument of labs?
 
@@ -142,6 +146,7 @@ Public Class sdgPlots
         'ucrInputLegend.SetParameter(New RParameter("fill"))
 
         'X Axis tab
+
 
         'Y Axis tab
 
@@ -164,11 +169,11 @@ Public Class sdgPlots
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewRFacetFunction As RFunction = Nothing, Optional clsNewThemeParam As RParameter = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsTitleFunction As RFunction = Nothing, Optional clsNewRFacetFunction As RFunction = Nothing, Optional clsNewThemeParam As RParameter = Nothing, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
-
+        ucrXAxis.SetRCodeForXorY(True)
         clsBaseOperator = clsNewOperator
         If clsNewLabsFunction IsNot Nothing Then
             clsLabsFunction = clsNewLabsFunction
@@ -176,12 +181,17 @@ Public Class sdgPlots
             clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         End If
 
+        If clsNewXLabsTitleFunction IsNot Nothing Then
+            clsXLabTitleFunction = clsNewXLabsTitleFunction
+        Else
+            clsLabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
+        End If
+
         If clsNewThemeParam IsNot Nothing Then
             clsBaseOperator.AddParameter(clsNewThemeParam)
         Else
             clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultTheme.Clone())
         End If
-
         'clsRFacetFunction = clsNewRFacetFunction
         ucrInputGraphTitle.SetRCode(clsLabsFunction, bReset)
         ucrInputGraphSubTitle.SetRCode(clsLabsFunction, bReset)
@@ -198,8 +208,15 @@ Public Class sdgPlots
         ucrChkFreeScalesY.SetRCode(clsRFacetFunction, bReset)
         ucrNudNumberofRows.SetRCode(clsRFacetFunction, bReset)
         ucrChkIncludeFacets.SetRCode(clsBaseOperator, bReset)
-
         AddRemoveLabs()
+
+
+        tbpXAxis.Enabled = False
+        tbpYAxis.Enabled = False
+        tbpFacet.Enabled = False
+        tbpLayers.Enabled = False
+        tbpCoordinates.Enabled = False
+
     End Sub
 
     Private Sub SetFacetParameterFunctions()
@@ -246,11 +263,11 @@ Public Class sdgPlots
     End Sub
 
     Public Sub DisableLayersTab()
-        tabLayers.Enabled = False
+        tbpLayers.Enabled = False
     End Sub
 
     Public Sub EnableLayersTab()
-        tabLayers.Enabled = True
+        tbpLayers.Enabled = True
     End Sub
     Public Sub SetDefaults()
         ' ucrChkIncludeFacets.Checked = False
@@ -293,11 +310,11 @@ Public Class sdgPlots
     End Sub
     Private Sub InitialiseTabs()
         'Question: Tabs are set in turn as selected, using their index. Then the first tab is set as selected again. For some reason this initialises the tabs ?
-        For i = 0 To tabctrlBoxSubdialog.TabCount - 1
-            tabctrlBoxSubdialog.SelectedIndex = i
+        For i = 0 To tbpPlotsOptions.TabCount - 1
+            tbpPlotsOptions.SelectedIndex = i
         Next
-        tabctrlBoxSubdialog.TabPages(6).Enabled = False
-        tabctrlBoxSubdialog.SelectedIndex = 0
+        tbpPlotsOptions.TabPages(6).Enabled = False
+        tbpPlotsOptions.SelectedIndex = 0
     End Sub
 
     Private Sub IncludeFacets()
