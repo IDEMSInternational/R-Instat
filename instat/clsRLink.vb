@@ -231,7 +231,7 @@ Public Class RLink
         Return strNextDefault
     End Function
 
-    Public Sub RunScript(strScript As String, Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bHtmlOutput As Boolean = False)
+    Public Sub RunScript(strScript As String, Optional iCallType As Integer = 0, Optional strComment As String = "")
         Dim strCapturedScript As String
         Dim temp As RDotNet.SymbolicExpression
         Dim strTemp As String
@@ -322,11 +322,14 @@ Public Class RLink
                 MsgBox(e.Message & vbNewLine & "The error occurred in attempting to run the following R command(s):" & vbNewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
             End Try
 
-        ElseIf iCallType = 1 Then
+        ElseIf iCallType = 1 OrElse iCallType = 4 Then
             Try
                 temp = clsEngine.Evaluate(strScript)
                 strTemp = String.Join(Environment.NewLine, temp.AsCharacter())
                 strOutput = strOutput & strTemp & Environment.NewLine
+                If iCallType = 4 Then
+
+                End If
             Catch e As Exception
                 MsgBox(e.Message & vbNewLine & "The error occurred in attempting to run the following R command(s):" & vbNewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
             End Try
@@ -354,10 +357,10 @@ Public Class RLink
             End Try
         End If
         If bOutput AndAlso strOutput <> "" Then
-            If bHtmlOutput Then 'TEST temporary
-                rtbOutput.AddIntoWebBrowser(strHtmlCode:=strOutput) 'TEST temporary
+            If iCallType = 4 Then
+                rtbOutput.AddIntoWebBrowser(strHtmlCode:=strOutput)
             Else
-                rtbOutput.AppendText(clrOutput, fOutput, strOutput) 'TEST temporary
+                rtbOutput.AppendText(clrOutput, fOutput, strOutput)
             End If
         End If
         frmMain.clsGrids.UpdateGrids()
@@ -719,6 +722,26 @@ Public Class RLink
             End If
         End If
         Return lstModelNames
+    End Function
+
+    Public Function GetTableNames(Optional strDataFrameName As String = "") As List(Of String)
+        Dim chrTableNames As CharacterVector
+        Dim lstTableNames As New List(Of String)
+        Dim clsGetTableNames As New RFunction
+        Dim expTableNames As SymbolicExpression
+
+        clsGetTableNames.SetRCommand(strInstatDataObject & "$get_table_names")
+        If strDataFrameName <> "" Then
+            clsGetTableNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
+        End If
+        expTableNames = RunInternalScriptGetValue(clsGetTableNames.ToScript(), bSilent:=True)
+        If expTableNames IsNot Nothing AndAlso Not expTableNames.Type = Internals.SymbolicExpressionType.Null Then
+            chrTableNames = expTableNames.AsCharacter()
+            If chrTableNames.Length > 0 Then
+                lstTableNames.AddRange(chrTableNames)
+            End If
+        End If
+        Return lstTableNames
     End Function
 
     Public Function GetFilterNames(strDataFrameName As String) As List(Of String)
