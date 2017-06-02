@@ -171,11 +171,11 @@ Public Class dlgTransformClimatic
 
         clsReplaceNA60.SetRCommand("instat_calculation$new")
         clsReplaceNA60.AddParameter("type", Chr(34) & "calculation" & Chr(34))
-        clsReplaceNA60.AddParameter("function_exp", Chr(34) & "replace(" & ucrReceiverData.GetVariableNames(False) & ", Is .na(" & ucrReceiverData.GetVariableNames(False) & "), 60)" & Chr(34))
-        clsReplaceNA60.AddParameter("result_name", Chr(34) & "Replace_NA_60" & Chr(34))
+        clsReplaceNA60.AddParameter("function_exp", Chr(34) & "replace(" & ucrReceiverData.GetVariableNames(False) & ", is.na(" & ucrReceiverData.GetVariableNames(False) & "), 60)" & Chr(34))
+        clsReplaceNA60.AddParameter("result_name", Chr(34) & "replace_NA_60" & Chr(34))
         clsReplaceNA60.AddParameter("calculated_from", " list(" & strCurrDataName & "= " & ucrReceiverData.GetVariableNames() & ")")
         clsReplaceNA60.AddParameter("save", "0")
-        clsReplaceNA60.SetAssignTo("Replace_NA_60")
+        clsReplaceNA60.SetAssignTo("replace_NA_60")
 
         clsWaterBalance60.SetRCommand("instat_calculation$new")
         clsWaterBalance60.AddParameter("type", Chr(34) & "calculation" & Chr(34))
@@ -248,7 +248,7 @@ Public Class dlgTransformClimatic
             ucrBase.clsRsyntax.SetBaseRFunction(clsRollFunction)
             clsSubCalcList.AddParameter("sub1", clsRFunctionParameter:=clsReplaceNA60)
             clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubCalcList)
-            clsRTransform.AddParameter("function_exp", Chr(34) & "Reduce(function(x, y) pmin(pmax(x + y - " & ucrInputEvaporation.GetText() & ", 0), " & ucrNudWBCapacity.Value & "), Replace_NA_60, accumulate=True)" & Chr(34))
+            clsRTransform.AddParameter("function_exp", Chr(34) & "Reduce(function(x, y) pmin(pmax(x + y - " & ucrInputEvaporation.GetText() & ", 0), " & ucrNudWBCapacity.Value & "), replace_NA_60, accumulate=TRUE)" & Chr(34))
             ucrInputColName.SetName("water_balance")
             grpTransform.Text = "Water Balance"
         End If
@@ -335,6 +335,6 @@ Public Class dlgTransformClimatic
     End Sub
 
     Private Sub ucrWBControls_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrNudWBCapacity.ControlContentsChanged, ucrInputEvaporation.ControlContentsChanged
-        clsRTransform.AddParameter("function_exp", Chr(34) & "Reduce(Function(x, y) pmin(pmax(x + y - " & ucrInputEvaporation.GetText() & ", 0), " & ucrNudWBCapacity.Value & "), Replace_NA_60, accumulate=True)" & Chr(34))
+        clsRTransform.AddParameter("function_exp", Chr(34) & "Reduce(function(x, y) pmin(pmax(x + y - " & ucrInputEvaporation.GetText() & ", 0), " & ucrNudWBCapacity.Value & "), Replace_NA_60, accumulate=TRUE)" & Chr(34))
     End Sub
 End Class
