@@ -236,9 +236,16 @@ Public Class dlgReplaceValues
 
     End Sub
 
+    Private Sub CheckedRadio()
+        If (rdoNewFromBelow.Checked AndAlso rdoNewFromBelow.Enabled = False) OrElse (rdoNewFromAbove.Checked AndAlso rdoNewFromAbove.Enabled = False) Then
+            rdoNewMissing.Checked = True
+        End If
+    End Sub
+
     Private Sub ucrPnlOld_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOld.ControlValueChanged, ucrPnlNew.ControlValueChanged, ucrInputRangeFrom.ControlContentsChanged, ucrInputRangeTo.ControlContentsChanged
         InputValue()
         EnableRange()
+        CheckedRadio()
     End Sub
 
     Private Sub ucrReceiverReplace_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverReplace.ControlValueChanged
