@@ -11,7 +11,6 @@
 'You should have received a copy of the GNU General Public License k
 'along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgCombine
     Private bFirstLoad As Boolean = True
@@ -31,10 +30,6 @@ Public Class dlgCombine
         autoTranslate(Me)
     End Sub
 
-    Private Sub SetRCodeforControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-    End Sub
-
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 39
 
@@ -46,18 +41,18 @@ Public Class dlgCombine
         ucrFactorsReceiver.bUseFilteredData = False
         ucrFactorsReceiver.SetIncludedDataTypes({"factor"})
 
+        'chkbox
+        ucrChkDropUnusedLevels.SetParameter(New RParameter("drop", 1))
+        ucrChkDropUnusedLevels.SetText("Drop Unused Levels")
+        ucrChkDropUnusedLevels.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkDropUnusedLevels.SetRDefault("FALSE")
+
         ' Input Column Name
         ucrNewColName.SetIsTextBox()
         ucrNewColName.SetPrefix("Interact")
         ucrNewColName.SetSaveTypeAsColumn()
         ucrNewColName.SetDataFrameSelector(ucrSelectorCombineFactors.ucrAvailableDataFrames)
         ucrNewColName.SetLabelText("New Column Name:")
-
-        'chkbox
-        ucrChkDropUnusedLevels.SetParameter(New RParameter("drop", 1))
-        ucrChkDropUnusedLevels.SetText("Drop Unused Levels")
-        ucrChkDropUnusedLevels.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkDropUnusedLevels.SetRDefault("FALSE")
     End Sub
 
     Private Sub SetDefaults()
@@ -66,6 +61,10 @@ Public Class dlgCombine
         clsInteraction.SetRCommand("interaction")
         clsInteraction.SetAssignTo(strTemp:=ucrNewColName.GetText(), strTempDataframe:=ucrSelectorCombineFactors.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText())
         ucrBase.clsRsyntax.SetBaseRFunction(clsInteraction)
+    End Sub
+
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()

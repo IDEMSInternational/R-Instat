@@ -35,27 +35,26 @@ Public Class dlgReorderLevels
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 36
-        'Set Receivers and column parameter
-        ucrReceiverFactor.Selector = ucrSelectorFactorLevelsToReorder
-        ucrReceiverFactor.SetMeAsReceiver()
-        ucrReceiverFactor.SetIncludedDataTypes({"factor"})
-        ucrReceiverFactor.SetParameter(New RParameter("col_name", 1))
-        ucrReceiverFactor.SetParameterIsString()
-
-        'Set reorder scroll list view & datatype accepted
-        ucrReorderFactor.setReceiver(ucrReceiverFactor)
-        ucrReorderFactor.setDataType("factor")
 
         'Set data frame paramater
         ucrSelectorFactorLevelsToReorder.SetParameter(New RParameter("data_name", 0))
         ucrSelectorFactorLevelsToReorder.SetParameterIsString()
 
-        'Set column Parameter
-        ucrReorderFactor.SetParameter(New RParameter("new_level_names", 2))
+        'Set Receivers and column parameter
+        ucrReceiverFactor.SetParameter(New RParameter("col_name", 1))
+        ucrReceiverFactor.Selector = ucrSelectorFactorLevelsToReorder
+        ucrReceiverFactor.SetMeAsReceiver()
+        ucrReceiverFactor.SetIncludedDataTypes({"factor"})
+        ucrReceiverFactor.SetParameterIsString()
 
+        'Set reorder scroll list view & datatype accepted
+        ucrReorderFactor.SetParameter(New RParameter("new_level_names", 2))
+        ucrReorderFactor.setReceiver(ucrReceiverFactor)
+        ucrReorderFactor.setDataType("factor")
     End Sub
 
     Private Sub SetDefaults()
+        clsReorder = New RFunction
         'reset
         ucrSelectorFactorLevelsToReorder.Reset()
         ' Set default function
