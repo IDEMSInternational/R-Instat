@@ -115,10 +115,21 @@ Public Class sdgThemes
 
         clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsGgThemes, iPosition:=15)
         clsGgThemes.SetRCommand("theme")
-        clsSegmentTheme.SetRCommand("element_line")
-        clsSegmentTheme.AddParameter()
+
         clsTextTheme.SetRCommand("element_text")
-        clsTextTheme.AddParameter("")
+
+        'For Setting default values for the nuds 
+        '' clsTextTheme.AddParameter("size", 10)
+        '' clsTextTheme.AddParameter("angle", 45)
+        ''clsTextTheme.AddParameter("hjust", 0.5)
+        ''clsTextTheme.AddParameter("vjust", 0.5)
+        ''clsTextTheme.AddParameter("lineheight", 1.1)
+
+        clsSegmentTheme.SetRCommand("element_line")
+
+        'For Setting default values for the nuds 
+        '' clsSegmentTheme.AddParameter("size", 0.5)
+        '' clsSegmentTheme.AddParameter("linetype", 1)
         clsGgThemes.AddParameter("axis.ticks", clsRFunctionParameter:=clsSegmentTheme)
         clsGgThemes.AddParameter(" axis.text.x", clsRFunctionParameter:=clsTextTheme)
 
