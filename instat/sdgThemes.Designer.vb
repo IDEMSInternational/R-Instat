@@ -225,10 +225,10 @@ Partial Class sdgThemes
         '
         'ucrNudVjust
         '
-        Me.ucrNudVjust.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudVjust.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudVjust.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudVjust.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
         Me.ucrNudVjust.Location = New System.Drawing.Point(94, 75)
-        Me.ucrNudVjust.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudVjust.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudVjust.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudVjust.Name = "ucrNudVjust"
         Me.ucrNudVjust.Size = New System.Drawing.Size(50, 20)
@@ -246,7 +246,7 @@ Partial Class sdgThemes
         '
         'ucrNudLineHeight
         '
-        Me.ucrNudLineHeight.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLineHeight.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudLineHeight.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudLineHeight.Location = New System.Drawing.Point(94, 106)
         Me.ucrNudLineHeight.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
@@ -288,10 +288,10 @@ Partial Class sdgThemes
         '
         'ucrNudHjust
         '
-        Me.ucrNudHjust.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudHjust.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudHjust.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudHjust.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
         Me.ucrNudHjust.Location = New System.Drawing.Point(94, 43)
-        Me.ucrNudHjust.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudHjust.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudHjust.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudHjust.Name = "ucrNudHjust"
         Me.ucrNudHjust.Size = New System.Drawing.Size(50, 20)

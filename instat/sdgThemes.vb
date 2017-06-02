@@ -51,6 +51,24 @@ Public Class sdgThemes
         ucrInputFace.SetItems(dctucrInputFace)
         ucrInputFace.SetRDefault(Chr(34) & "plain" & Chr(34))
 
+        dctucrInputColour.Add("Black", Chr(34) & "black" & Chr(34))
+        dctucrInputColour.Add("Red", Chr(34) & "red" & Chr(34))
+        dctucrInputColour.Add("Blue", Chr(34) & "blue" & Chr(34))
+        dctucrInputColour.Add("Grey", Chr(34) & "grey" & Chr(34))
+        dctucrInputColour.Add("Yellow", Chr(34) & "yellow" & Chr(34))
+        dctucrInputColour.Add("Yellow-Green", Chr(34) & "yellowgreen" & Chr(34))
+        ucrInputColour.SetItems(dctucrInputColour)
+        ucrInputColour.SetRDefault(Chr(34) & "black" & Chr(34))
+
+        dctucrInputColourSegment.Add("Black", Chr(34) & "black" & Chr(34))
+        dctucrInputColourSegment.Add("Red", Chr(34) & "red" & Chr(34))
+        dctucrInputColourSegment.Add("Blue", Chr(34) & "blue" & Chr(34))
+        dctucrInputColourSegment.Add("Grey", Chr(34) & "grey" & Chr(34))
+        dctucrInputColourSegment.Add("Yellow", Chr(34) & "yellow" & Chr(34))
+        dctucrInputColourSegment.Add("Yellow-Green", Chr(34) & "yellowgreen" & Chr(34))
+        ucrInputColourSegment.SetItems(dctucrInputColourSegment)
+        ucrInputColourSegment.SetRDefault(Chr(34) & "black" & Chr(34))
+
         dctucrInputFamily.Add("Times Roman", Chr(34) & "Times" & Chr(34))
         dctucrInputFamily.Add("Courier", Chr(34) & "Courier" & Chr(34))
         dctucrInputFamily.Add("Serif", Chr(34) & "serif" & Chr(34))
@@ -60,8 +78,9 @@ Public Class sdgThemes
         dctucrInputFamily.Add("Palatino", Chr(34) & "Palatino" & Chr(34))
         dctucrInputFamily.Add("Bookman", Chr(34) & "Bookman" & Chr(34))
         dctucrInputFamily.Add("URWGothic", Chr(34) & "URWGothic" & Chr(34))
-        ucrInputFace.SetItems(dctucrInputFamily)
-        ucrInputFace.SetRDefault(Chr(34) & "Times" & Chr(34))
+        ucrInputFamily.SetItems(dctucrInputFamily)
+        ucrInputFamily.SetRDefault(Chr(34) & "Times" & Chr(34))
+
         'Segment Theme
         ucrNudSizeSegment.SetParameter(New RParameter("size"))
         ucrInputLineType.SetParameter(New RParameter("linetype"))
