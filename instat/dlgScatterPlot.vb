@@ -22,6 +22,8 @@ Public Class dlgScatterPlot
     Private clsBaseOperator As New ROperator
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private bResetSubdialog As Boolean = True
+    Private clsLabsFunction As New RFunction
 
     Private Sub dlgScatterPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -83,10 +85,12 @@ Public Class dlgScatterPlot
         clsRggplotFunction = New RFunction
         clsRScatterGeomFunction = New RFunction
         clsRaesFunction = New RFunction
+        clsLabsFunction = New RFunction
 
         ucrSelectorForScatter.Reset()
         ucrSaveScatterPlot.Reset()
         sdgPlots.Reset()
+        bResetSubdialog = True
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
@@ -103,6 +107,8 @@ Public Class dlgScatterPlot
 
         clsRScatterGeomFunction.SetPackageName("ggplot2")
         clsRScatterGeomFunction.SetRCommand("geom_point")
+
+        clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultTheme.Clone())
 
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
@@ -134,7 +140,9 @@ Public Class dlgScatterPlot
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgPlots.SetDataFrame(strNewDataFrame:=ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        sdgPlots.SetRCode(ucrBase.clsRsyntax.clsBaseOperator, clsNewLabsFunction:=clsLabsFunction, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
+        bResetSubdialog = False
     End Sub
 
     Private Sub cmdScatterPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdScatterPlotOptions.Click
