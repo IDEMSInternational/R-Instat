@@ -17,37 +17,86 @@ Imports instat.Translations
 
 Public Class sdgThemes
     Public bControlsInitialised As Boolean = False
-    Public clsTextTheme, clsSegmentTheme As New RFunction
+    Public clsTextTheme, clsSegmentTheme, clsGgThemes As New RFunction
+    Private clsBaseOperator As New ROperator
     Private Sub sdgThemes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
 
     Public Sub InitialiseControls()
+        Dim dctucrInputColour As New Dictionary(Of String, String)
+        Dim dctucrInputColourSegment As New Dictionary(Of String, String)
+        Dim dctucrInputFace As New Dictionary(Of String, String)
+        Dim dctucrInputFamily As New Dictionary(Of String, String)
+
         'Text Theme
         ucrNudsize.SetParameter(New RParameter("size"))
         ucrNudAngle.SetParameter(New RParameter("angle"))
+        ucrNudAngle.SetMinMax(0, 360)
         ucrNudHjust.SetParameter(New RParameter("hjust"))
+        ucrNudHjust.Increment = 0.1
+        ucrNudHjust.SetMinMax(0, 1)
         ucrNudVjust.SetParameter(New RParameter("vjust"))
-        ucrNudsize.SetParameter(New RParameter("lineheight"))
+        ucrNudVjust.Increment = 0.1
+        ucrNudVjust.SetMinMax(0, 1)
+        ucrNudLineHeight.SetParameter(New RParameter("lineheight"))
 
         ucrInputColour.SetParameter(New RParameter("colour"))
         ucrInputFace.SetParameter(New RParameter("face"))
         ucrInputFamily.SetParameter(New RParameter("family"))
 
+        dctucrInputFace.Add("Plain", Chr(34) & "plain" & Chr(34))
+        dctucrInputFace.Add("Bold", Chr(34) & "bold" & Chr(34))
+        dctucrInputFace.Add("Italic", Chr(34) & "italic" & Chr(34))
+        ucrInputFace.SetItems(dctucrInputFace)
+        ucrInputFace.SetRDefault(Chr(34) & "plain" & Chr(34))
+
+        dctucrInputFamily.Add("Times Roman", Chr(34) & "Times" & Chr(34))
+        dctucrInputFamily.Add("Courier", Chr(34) & "Courier" & Chr(34))
+        dctucrInputFamily.Add("Serif", Chr(34) & "serif" & Chr(34))
+        dctucrInputFamily.Add("NimbusSanCond", Chr(34) & "NimbusSanCond" & Chr(34))
+        dctucrInputFamily.Add("CenturySch", Chr(34) & "CenturySch" & Chr(34))
+        dctucrInputFamily.Add("NewCenturySchoolbook", Chr(34) & "NewCenturySchoolbook" & Chr(34))
+        dctucrInputFamily.Add("Palatino", Chr(34) & "Palatino" & Chr(34))
+        dctucrInputFamily.Add("Bookman", Chr(34) & "Bookman" & Chr(34))
+        dctucrInputFamily.Add("URWGothic", Chr(34) & "URWGothic" & Chr(34))
+        ucrInputFace.SetItems(dctucrInputFamily)
+        ucrInputFace.SetRDefault(Chr(34) & "Times" & Chr(34))
         'Segment Theme
         ucrNudSizeSegment.SetParameter(New RParameter("size"))
         ucrInputLineType.SetParameter(New RParameter("linetype"))
         ucrInputColourSegment.SetParameter(New RParameter("colour"))
 
+
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRFunction(clsNewTextTheme As RFunction, clsNewSegmentTheme As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRFunction(clsBaseOperator As ROperator, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
-        clsTextTheme = clsNewTextTheme
-        clsSegmentTheme = clsNewSegmentTheme
+
+
+        clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsGgThemes, iPosition:=15)
+        clsGgThemes.SetRCommand("theme")
+        clsSegmentTheme.SetRCommand("element_line")
+        clsTextTheme.SetRCommand("element_text")
+        clsGgThemes.AddParameter("axis.ticks", clsRFunctionParameter:=clsSegmentTheme)
+        clsGgThemes.AddParameter(" axis.text.x", clsRFunctionParameter:=clsTextTheme)
+
+
+        ucrNudAngle.SetRCode(clsTextTheme, bReset)
+        ucrNudHjust.SetRCode(clsTextTheme, bReset)
+        ucrNudLineHeight.SetRCode(clsTextTheme, bReset)
+        ucrNudsize.SetRCode(clsTextTheme, bReset)
+        ucrNudVjust.SetRCode(clsTextTheme, bReset)
+        ucrInputColour.SetRCode(clsTextTheme, bReset)
+        ucrInputFace.SetRCode(clsTextTheme, bReset)
+        ucrInputFamily.SetRCode(clsTextTheme, bReset)
+
+        ucrNudSizeSegment.SetRCode(clsSegmentTheme, bReset)
+        ucrInputColourSegment.SetRCode(clsSegmentTheme, bReset)
+        ucrInputLineType.SetRCode(clsSegmentTheme, bReset)
     End Sub
 
 End Class
