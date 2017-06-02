@@ -27,109 +27,109 @@ Partial Class sdgThemes
         Me.grpTableOptions = New System.Windows.Forms.GroupBox()
         Me.grpTickLabels = New System.Windows.Forms.GroupBox()
         Me.lblLineEndXtickMarks = New System.Windows.Forms.Label()
+        Me.ucrInputLineEndXTickMarks = New instat.ucrInputComboBox()
         Me.lblSizeXTickMarks = New System.Windows.Forms.Label()
+        Me.ucrNudSizeXTickLabels = New instat.ucrNud()
         Me.lblColourXTickMarks = New System.Windows.Forms.Label()
+        Me.ucrInputColourXTickMarks = New instat.ucrInputComboBox()
         Me.lbllineTypeXTickMarks = New System.Windows.Forms.Label()
+        Me.ucrInputLineTypeXTickMarks = New instat.ucrInputComboBox()
         Me.grpAxisLabelTopAxis = New System.Windows.Forms.GroupBox()
         Me.lblVjustTopAxis = New System.Windows.Forms.Label()
+        Me.ucrNudVjustTopAxis = New instat.ucrNud()
         Me.lblLineHeightTopAxis = New System.Windows.Forms.Label()
+        Me.ucrNudLineHeightTopAxis = New instat.ucrNud()
         Me.lblAngleTop = New System.Windows.Forms.Label()
+        Me.ucrNudAngleTopAxis = New instat.ucrNud()
         Me.lblHjustTopAxis = New System.Windows.Forms.Label()
+        Me.ucrNudHjustTopAxis = New instat.ucrNud()
         Me.lblSizeTopaxis = New System.Windows.Forms.Label()
+        Me.ucrNudSizeTopaxis = New instat.ucrNud()
         Me.lblColourTopAxis = New System.Windows.Forms.Label()
+        Me.ucrInputColourTopAxis = New instat.ucrInputComboBox()
         Me.lblFaceTopAxis = New System.Windows.Forms.Label()
+        Me.ucrInputFaceTopAxis = New instat.ucrInputComboBox()
         Me.lblFamilyTopAxis = New System.Windows.Forms.Label()
+        Me.ucrInputFamilyTopAxis = New instat.ucrInputComboBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.lblLineEndTickMarks = New System.Windows.Forms.Label()
+        Me.ucrInputLineEndTickMarks = New instat.ucrInputComboBox()
         Me.lblSizeTickMarks = New System.Windows.Forms.Label()
+        Me.ucrNudSizeTickMarks = New instat.ucrNud()
         Me.lblColourTickMarks = New System.Windows.Forms.Label()
+        Me.ucrInputColourTickMarks = New instat.ucrInputComboBox()
         Me.lblLineTypeTickMarks = New System.Windows.Forms.Label()
+        Me.ucrInputLineTypeTickMarks = New instat.ucrInputComboBox()
         Me.grpAxisLabel = New System.Windows.Forms.GroupBox()
         Me.lblVjust = New System.Windows.Forms.Label()
+        Me.ucrNudVjust = New instat.ucrNud()
         Me.lblLineHeight = New System.Windows.Forms.Label()
+        Me.ucrNudLineHeight = New instat.ucrNud()
         Me.lblAngle = New System.Windows.Forms.Label()
+        Me.ucrNudAngle = New instat.ucrNud()
         Me.lblHjust = New System.Windows.Forms.Label()
+        Me.ucrNudHjust = New instat.ucrNud()
         Me.lblSize = New System.Windows.Forms.Label()
+        Me.ucrNudsize = New instat.ucrNud()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.ucrInputColour = New instat.ucrInputComboBox()
         Me.lblFace = New System.Windows.Forms.Label()
+        Me.ucrInputFace = New instat.ucrInputComboBox()
         Me.lblFamily = New System.Windows.Forms.Label()
+        Me.ucrInputFamily = New instat.ucrInputComboBox()
         Me.tbYaxis = New System.Windows.Forms.TabPage()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.UcrInputComboBox1 = New instat.ucrInputComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.ucrNudSizeTickLabelsYAxis = New instat.ucrNud()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.UcrInputComboBox2 = New instat.ucrInputComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.UcrInputComboBox3 = New instat.ucrInputComboBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.Label6 = New System.Windows.Forms.Label()
+        Me.ucrNudVjustTopYAxis = New instat.ucrNud()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.ucrNudLineHeightTopYAxis = New instat.ucrNud()
         Me.Label8 = New System.Windows.Forms.Label()
+        Me.ucrNudAngleTopYAxis = New instat.ucrNud()
         Me.Label9 = New System.Windows.Forms.Label()
+        Me.ucrNudHjustTopYAxis = New instat.ucrNud()
         Me.Label10 = New System.Windows.Forms.Label()
+        Me.ucrNudSizeTopYAxis = New instat.ucrNud()
         Me.Label11 = New System.Windows.Forms.Label()
+        Me.UcrInputComboBox4 = New instat.ucrInputComboBox()
         Me.Label12 = New System.Windows.Forms.Label()
+        Me.UcrInputComboBox5 = New instat.ucrInputComboBox()
         Me.Label13 = New System.Windows.Forms.Label()
+        Me.UcrInputComboBox6 = New instat.ucrInputComboBox()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.Label14 = New System.Windows.Forms.Label()
-        Me.Label15 = New System.Windows.Forms.Label()
-        Me.Label16 = New System.Windows.Forms.Label()
-        Me.Label17 = New System.Windows.Forms.Label()
-        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
-        Me.Label18 = New System.Windows.Forms.Label()
-        Me.Label19 = New System.Windows.Forms.Label()
-        Me.Label20 = New System.Windows.Forms.Label()
-        Me.lblHjustYAxis = New System.Windows.Forms.Label()
-        Me.lblSizeYAxis = New System.Windows.Forms.Label()
-        Me.Label23 = New System.Windows.Forms.Label()
-        Me.Label24 = New System.Windows.Forms.Label()
-        Me.Label25 = New System.Windows.Forms.Label()
-        Me.ucrInputLineEndXTickMarks = New instat.ucrInputComboBox()
-        Me.ucrNudSizeXTickMarks = New instat.ucrNud()
-        Me.ucrInputColourXTickMarks = New instat.ucrInputComboBox()
-        Me.ucrInputLineTypeXTickMarks = New instat.ucrInputComboBox()
-        Me.ucrNudVjustTopAxis = New instat.ucrNud()
-        Me.ucrNudLineHeightTopAxis = New instat.ucrNud()
-        Me.ucrNudAngleTopAxis = New instat.ucrNud()
-        Me.ucrNudHjustTopAxis = New instat.ucrNud()
-        Me.ucrNudSizeTopaxis = New instat.ucrNud()
-        Me.ucrInputColourTopAxis = New instat.ucrInputComboBox()
-        Me.ucrInputFaceTopAxis = New instat.ucrInputComboBox()
-        Me.ucrInputFamilyTopAxis = New instat.ucrInputComboBox()
-        Me.ucrInputLineEndTickMarks = New instat.ucrInputComboBox()
-        Me.ucrNudSizeTickMarks = New instat.ucrNud()
-        Me.ucrInputColourTickMarks = New instat.ucrInputComboBox()
-        Me.ucrInputLineTypeTickMarks = New instat.ucrInputComboBox()
-        Me.ucrNudVjust = New instat.ucrNud()
-        Me.ucrNudLineHeight = New instat.ucrNud()
-        Me.ucrNudAngle = New instat.ucrNud()
-        Me.ucrNudHjust = New instat.ucrNud()
-        Me.ucrNudsize = New instat.ucrNud()
-        Me.ucrInputColour = New instat.ucrInputComboBox()
-        Me.ucrInputFace = New instat.ucrInputComboBox()
-        Me.ucrInputFamily = New instat.ucrInputComboBox()
-        Me.UcrInputComboBox1 = New instat.ucrInputComboBox()
-        Me.UcrNud1 = New instat.ucrNud()
-        Me.UcrInputComboBox2 = New instat.ucrInputComboBox()
-        Me.UcrInputComboBox3 = New instat.ucrInputComboBox()
-        Me.UcrNud2 = New instat.ucrNud()
-        Me.UcrNud3 = New instat.ucrNud()
-        Me.UcrNud4 = New instat.ucrNud()
-        Me.UcrNud5 = New instat.ucrNud()
-        Me.UcrNud6 = New instat.ucrNud()
-        Me.UcrInputComboBox4 = New instat.ucrInputComboBox()
-        Me.UcrInputComboBox5 = New instat.ucrInputComboBox()
-        Me.UcrInputComboBox6 = New instat.ucrInputComboBox()
         Me.UcrInputComboBox7 = New instat.ucrInputComboBox()
-        Me.UcrNud7 = New instat.ucrNud()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.ucrNudSizeTickMarksYAxis = New instat.ucrNud()
+        Me.Label16 = New System.Windows.Forms.Label()
         Me.UcrInputComboBox8 = New instat.ucrInputComboBox()
+        Me.Label17 = New System.Windows.Forms.Label()
         Me.UcrInputComboBox9 = New instat.ucrInputComboBox()
-        Me.UcrNud8 = New instat.ucrNud()
-        Me.UcrNud9 = New instat.ucrNud()
-        Me.UcrNud10 = New instat.ucrNud()
-        Me.UcrNud11 = New instat.ucrNud()
-        Me.UcrNud12 = New instat.ucrNud()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.lblVjustYAxis = New System.Windows.Forms.Label()
+        Me.ucrNudVjustYAxis = New instat.ucrNud()
+        Me.lblLineHeightYAxis = New System.Windows.Forms.Label()
+        Me.ucrNudLineHeightYAxis = New instat.ucrNud()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.ucrNudLAngle = New instat.ucrNud()
+        Me.lblHjustYAxis = New System.Windows.Forms.Label()
+        Me.ucrNudHjustYAxis = New instat.ucrNud()
+        Me.lblSizeYAxis = New System.Windows.Forms.Label()
+        Me.ucrNudSizeYAxis = New instat.ucrNud()
+        Me.lblColourYAxis = New System.Windows.Forms.Label()
         Me.UcrInputComboBox10 = New instat.ucrInputComboBox()
+        Me.lblFaceYAxis = New System.Windows.Forms.Label()
         Me.UcrInputComboBox11 = New instat.ucrInputComboBox()
-        Me.UcrInputComboBox12 = New instat.ucrInputComboBox()
+        Me.lblFamilyYAxis = New System.Windows.Forms.Label()
+        Me.crInputComboBox12 = New instat.ucrInputComboBox()
         Me.ucrBaseSubdialogue = New instat.ucrButtonsSubdialogue()
         Me.tbXaxis.SuspendLayout()
         Me.tbAxis.SuspendLayout()
@@ -184,7 +184,7 @@ Partial Class sdgThemes
         Me.grpTickLabels.Controls.Add(Me.lblLineEndXtickMarks)
         Me.grpTickLabels.Controls.Add(Me.ucrInputLineEndXTickMarks)
         Me.grpTickLabels.Controls.Add(Me.lblSizeXTickMarks)
-        Me.grpTickLabels.Controls.Add(Me.ucrNudSizeXTickMarks)
+        Me.grpTickLabels.Controls.Add(Me.ucrNudSizeXTickLabels)
         Me.grpTickLabels.Controls.Add(Me.lblColourXTickMarks)
         Me.grpTickLabels.Controls.Add(Me.ucrInputColourXTickMarks)
         Me.grpTickLabels.Controls.Add(Me.lbllineTypeXTickMarks)
@@ -205,6 +205,16 @@ Partial Class sdgThemes
         Me.lblLineEndXtickMarks.TabIndex = 31
         Me.lblLineEndXtickMarks.Text = "Line End:"
         '
+        'ucrInputLineEndXTickMarks
+        '
+        Me.ucrInputLineEndXTickMarks.AddQuotesIfUnrecognised = True
+        Me.ucrInputLineEndXTickMarks.IsReadOnly = False
+        Me.ucrInputLineEndXTickMarks.Location = New System.Drawing.Point(72, 100)
+        Me.ucrInputLineEndXTickMarks.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputLineEndXTickMarks.Name = "ucrInputLineEndXTickMarks"
+        Me.ucrInputLineEndXTickMarks.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputLineEndXTickMarks.TabIndex = 32
+        '
         'lblSizeXTickMarks
         '
         Me.lblSizeXTickMarks.AutoSize = True
@@ -213,6 +223,18 @@ Partial Class sdgThemes
         Me.lblSizeXTickMarks.Size = New System.Drawing.Size(30, 13)
         Me.lblSizeXTickMarks.TabIndex = 29
         Me.lblSizeXTickMarks.Text = "Size:"
+        '
+        'ucrNudSizeXTickLabels
+        '
+        Me.ucrNudSizeXTickLabels.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSizeXTickLabels.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSizeXTickLabels.Location = New System.Drawing.Point(94, 17)
+        Me.ucrNudSizeXTickLabels.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSizeXTickLabels.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSizeXTickLabels.Name = "ucrNudSizeXTickLabels"
+        Me.ucrNudSizeXTickLabels.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudSizeXTickLabels.TabIndex = 30
+        Me.ucrNudSizeXTickLabels.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblColourXTickMarks
         '
@@ -223,6 +245,16 @@ Partial Class sdgThemes
         Me.lblColourXTickMarks.TabIndex = 27
         Me.lblColourXTickMarks.Text = "Colour:"
         '
+        'ucrInputColourXTickMarks
+        '
+        Me.ucrInputColourXTickMarks.AddQuotesIfUnrecognised = True
+        Me.ucrInputColourXTickMarks.IsReadOnly = False
+        Me.ucrInputColourXTickMarks.Location = New System.Drawing.Point(72, 68)
+        Me.ucrInputColourXTickMarks.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputColourXTickMarks.Name = "ucrInputColourXTickMarks"
+        Me.ucrInputColourXTickMarks.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputColourXTickMarks.TabIndex = 28
+        '
         'lbllineTypeXTickMarks
         '
         Me.lbllineTypeXTickMarks.AutoSize = True
@@ -231,6 +263,16 @@ Partial Class sdgThemes
         Me.lbllineTypeXTickMarks.Size = New System.Drawing.Size(57, 13)
         Me.lbllineTypeXTickMarks.TabIndex = 25
         Me.lbllineTypeXTickMarks.Text = "Line Type:"
+        '
+        'ucrInputLineTypeXTickMarks
+        '
+        Me.ucrInputLineTypeXTickMarks.AddQuotesIfUnrecognised = True
+        Me.ucrInputLineTypeXTickMarks.IsReadOnly = False
+        Me.ucrInputLineTypeXTickMarks.Location = New System.Drawing.Point(72, 40)
+        Me.ucrInputLineTypeXTickMarks.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputLineTypeXTickMarks.Name = "ucrInputLineTypeXTickMarks"
+        Me.ucrInputLineTypeXTickMarks.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputLineTypeXTickMarks.TabIndex = 26
         '
         'grpAxisLabelTopAxis
         '
@@ -266,6 +308,18 @@ Partial Class sdgThemes
         Me.lblVjustTopAxis.TabIndex = 37
         Me.lblVjustTopAxis.Text = "Vjust:"
         '
+        'ucrNudVjustTopAxis
+        '
+        Me.ucrNudVjustTopAxis.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudVjustTopAxis.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
+        Me.ucrNudVjustTopAxis.Location = New System.Drawing.Point(94, 76)
+        Me.ucrNudVjustTopAxis.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudVjustTopAxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudVjustTopAxis.Name = "ucrNudVjustTopAxis"
+        Me.ucrNudVjustTopAxis.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudVjustTopAxis.TabIndex = 38
+        Me.ucrNudVjustTopAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'lblLineHeightTopAxis
         '
         Me.lblLineHeightTopAxis.AutoSize = True
@@ -274,6 +328,18 @@ Partial Class sdgThemes
         Me.lblLineHeightTopAxis.Size = New System.Drawing.Size(64, 13)
         Me.lblLineHeightTopAxis.TabIndex = 35
         Me.lblLineHeightTopAxis.Text = "Line Height:"
+        '
+        'ucrNudLineHeightTopAxis
+        '
+        Me.ucrNudLineHeightTopAxis.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudLineHeightTopAxis.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
+        Me.ucrNudLineHeightTopAxis.Location = New System.Drawing.Point(94, 106)
+        Me.ucrNudLineHeightTopAxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudLineHeightTopAxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLineHeightTopAxis.Name = "ucrNudLineHeightTopAxis"
+        Me.ucrNudLineHeightTopAxis.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudLineHeightTopAxis.TabIndex = 36
+        Me.ucrNudLineHeightTopAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblAngleTop
         '
@@ -284,6 +350,18 @@ Partial Class sdgThemes
         Me.lblAngleTop.TabIndex = 33
         Me.lblAngleTop.Text = "Angle:"
         '
+        'ucrNudAngleTopAxis
+        '
+        Me.ucrNudAngleTopAxis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAngleTopAxis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudAngleTopAxis.Location = New System.Drawing.Point(94, 134)
+        Me.ucrNudAngleTopAxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudAngleTopAxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAngleTopAxis.Name = "ucrNudAngleTopAxis"
+        Me.ucrNudAngleTopAxis.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudAngleTopAxis.TabIndex = 34
+        Me.ucrNudAngleTopAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'lblHjustTopAxis
         '
         Me.lblHjustTopAxis.AutoSize = True
@@ -292,6 +370,18 @@ Partial Class sdgThemes
         Me.lblHjustTopAxis.Size = New System.Drawing.Size(34, 13)
         Me.lblHjustTopAxis.TabIndex = 31
         Me.lblHjustTopAxis.Text = "Hjust:"
+        '
+        'ucrNudHjustTopAxis
+        '
+        Me.ucrNudHjustTopAxis.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudHjustTopAxis.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
+        Me.ucrNudHjustTopAxis.Location = New System.Drawing.Point(94, 46)
+        Me.ucrNudHjustTopAxis.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudHjustTopAxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudHjustTopAxis.Name = "ucrNudHjustTopAxis"
+        Me.ucrNudHjustTopAxis.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudHjustTopAxis.TabIndex = 32
+        Me.ucrNudHjustTopAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblSizeTopaxis
         '
@@ -302,6 +392,18 @@ Partial Class sdgThemes
         Me.lblSizeTopaxis.TabIndex = 29
         Me.lblSizeTopaxis.Text = "Size:"
         '
+        'ucrNudSizeTopaxis
+        '
+        Me.ucrNudSizeTopaxis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSizeTopaxis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSizeTopaxis.Location = New System.Drawing.Point(94, 16)
+        Me.ucrNudSizeTopaxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSizeTopaxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSizeTopaxis.Name = "ucrNudSizeTopaxis"
+        Me.ucrNudSizeTopaxis.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudSizeTopaxis.TabIndex = 30
+        Me.ucrNudSizeTopaxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'lblColourTopAxis
         '
         Me.lblColourTopAxis.AutoSize = True
@@ -310,6 +412,16 @@ Partial Class sdgThemes
         Me.lblColourTopAxis.Size = New System.Drawing.Size(40, 13)
         Me.lblColourTopAxis.TabIndex = 27
         Me.lblColourTopAxis.Text = "Colour:"
+        '
+        'ucrInputColourTopAxis
+        '
+        Me.ucrInputColourTopAxis.AddQuotesIfUnrecognised = True
+        Me.ucrInputColourTopAxis.IsReadOnly = False
+        Me.ucrInputColourTopAxis.Location = New System.Drawing.Point(73, 217)
+        Me.ucrInputColourTopAxis.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputColourTopAxis.Name = "ucrInputColourTopAxis"
+        Me.ucrInputColourTopAxis.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputColourTopAxis.TabIndex = 28
         '
         'lblFaceTopAxis
         '
@@ -320,6 +432,16 @@ Partial Class sdgThemes
         Me.lblFaceTopAxis.TabIndex = 25
         Me.lblFaceTopAxis.Text = "Face:"
         '
+        'ucrInputFaceTopAxis
+        '
+        Me.ucrInputFaceTopAxis.AddQuotesIfUnrecognised = True
+        Me.ucrInputFaceTopAxis.IsReadOnly = False
+        Me.ucrInputFaceTopAxis.Location = New System.Drawing.Point(73, 189)
+        Me.ucrInputFaceTopAxis.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputFaceTopAxis.Name = "ucrInputFaceTopAxis"
+        Me.ucrInputFaceTopAxis.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputFaceTopAxis.TabIndex = 26
+        '
         'lblFamilyTopAxis
         '
         Me.lblFamilyTopAxis.AutoSize = True
@@ -328,6 +450,16 @@ Partial Class sdgThemes
         Me.lblFamilyTopAxis.Size = New System.Drawing.Size(39, 13)
         Me.lblFamilyTopAxis.TabIndex = 23
         Me.lblFamilyTopAxis.Text = "Family:"
+        '
+        'ucrInputFamilyTopAxis
+        '
+        Me.ucrInputFamilyTopAxis.AddQuotesIfUnrecognised = True
+        Me.ucrInputFamilyTopAxis.IsReadOnly = False
+        Me.ucrInputFamilyTopAxis.Location = New System.Drawing.Point(73, 162)
+        Me.ucrInputFamilyTopAxis.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputFamilyTopAxis.Name = "ucrInputFamilyTopAxis"
+        Me.ucrInputFamilyTopAxis.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputFamilyTopAxis.TabIndex = 24
         '
         'GroupBox1
         '
@@ -355,6 +487,16 @@ Partial Class sdgThemes
         Me.lblLineEndTickMarks.TabIndex = 31
         Me.lblLineEndTickMarks.Text = "Line End:"
         '
+        'ucrInputLineEndTickMarks
+        '
+        Me.ucrInputLineEndTickMarks.AddQuotesIfUnrecognised = True
+        Me.ucrInputLineEndTickMarks.IsReadOnly = False
+        Me.ucrInputLineEndTickMarks.Location = New System.Drawing.Point(72, 100)
+        Me.ucrInputLineEndTickMarks.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputLineEndTickMarks.Name = "ucrInputLineEndTickMarks"
+        Me.ucrInputLineEndTickMarks.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputLineEndTickMarks.TabIndex = 32
+        '
         'lblSizeTickMarks
         '
         Me.lblSizeTickMarks.AutoSize = True
@@ -363,6 +505,18 @@ Partial Class sdgThemes
         Me.lblSizeTickMarks.Size = New System.Drawing.Size(30, 13)
         Me.lblSizeTickMarks.TabIndex = 29
         Me.lblSizeTickMarks.Text = "Size:"
+        '
+        'ucrNudSizeTickMarks
+        '
+        Me.ucrNudSizeTickMarks.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSizeTickMarks.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSizeTickMarks.Location = New System.Drawing.Point(94, 17)
+        Me.ucrNudSizeTickMarks.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSizeTickMarks.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSizeTickMarks.Name = "ucrNudSizeTickMarks"
+        Me.ucrNudSizeTickMarks.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudSizeTickMarks.TabIndex = 30
+        Me.ucrNudSizeTickMarks.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblColourTickMarks
         '
@@ -373,6 +527,16 @@ Partial Class sdgThemes
         Me.lblColourTickMarks.TabIndex = 27
         Me.lblColourTickMarks.Text = "Colour:"
         '
+        'ucrInputColourTickMarks
+        '
+        Me.ucrInputColourTickMarks.AddQuotesIfUnrecognised = True
+        Me.ucrInputColourTickMarks.IsReadOnly = False
+        Me.ucrInputColourTickMarks.Location = New System.Drawing.Point(72, 68)
+        Me.ucrInputColourTickMarks.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputColourTickMarks.Name = "ucrInputColourTickMarks"
+        Me.ucrInputColourTickMarks.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputColourTickMarks.TabIndex = 28
+        '
         'lblLineTypeTickMarks
         '
         Me.lblLineTypeTickMarks.AutoSize = True
@@ -381,6 +545,16 @@ Partial Class sdgThemes
         Me.lblLineTypeTickMarks.Size = New System.Drawing.Size(57, 13)
         Me.lblLineTypeTickMarks.TabIndex = 25
         Me.lblLineTypeTickMarks.Text = "Line Type:"
+        '
+        'ucrInputLineTypeTickMarks
+        '
+        Me.ucrInputLineTypeTickMarks.AddQuotesIfUnrecognised = True
+        Me.ucrInputLineTypeTickMarks.IsReadOnly = False
+        Me.ucrInputLineTypeTickMarks.Location = New System.Drawing.Point(72, 40)
+        Me.ucrInputLineTypeTickMarks.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputLineTypeTickMarks.Name = "ucrInputLineTypeTickMarks"
+        Me.ucrInputLineTypeTickMarks.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputLineTypeTickMarks.TabIndex = 26
         '
         'grpAxisLabel
         '
@@ -416,6 +590,18 @@ Partial Class sdgThemes
         Me.lblVjust.TabIndex = 37
         Me.lblVjust.Text = "Vjust:"
         '
+        'ucrNudVjust
+        '
+        Me.ucrNudVjust.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudVjust.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
+        Me.ucrNudVjust.Location = New System.Drawing.Point(94, 76)
+        Me.ucrNudVjust.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudVjust.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudVjust.Name = "ucrNudVjust"
+        Me.ucrNudVjust.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudVjust.TabIndex = 38
+        Me.ucrNudVjust.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'lblLineHeight
         '
         Me.lblLineHeight.AutoSize = True
@@ -424,6 +610,18 @@ Partial Class sdgThemes
         Me.lblLineHeight.Size = New System.Drawing.Size(64, 13)
         Me.lblLineHeight.TabIndex = 35
         Me.lblLineHeight.Text = "Line Height:"
+        '
+        'ucrNudLineHeight
+        '
+        Me.ucrNudLineHeight.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudLineHeight.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
+        Me.ucrNudLineHeight.Location = New System.Drawing.Point(94, 106)
+        Me.ucrNudLineHeight.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudLineHeight.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLineHeight.Name = "ucrNudLineHeight"
+        Me.ucrNudLineHeight.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudLineHeight.TabIndex = 36
+        Me.ucrNudLineHeight.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblAngle
         '
@@ -434,6 +632,18 @@ Partial Class sdgThemes
         Me.lblAngle.TabIndex = 33
         Me.lblAngle.Text = "Angle:"
         '
+        'ucrNudAngle
+        '
+        Me.ucrNudAngle.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAngle.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudAngle.Location = New System.Drawing.Point(94, 136)
+        Me.ucrNudAngle.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudAngle.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAngle.Name = "ucrNudAngle"
+        Me.ucrNudAngle.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudAngle.TabIndex = 34
+        Me.ucrNudAngle.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'lblHjust
         '
         Me.lblHjust.AutoSize = True
@@ -442,6 +652,18 @@ Partial Class sdgThemes
         Me.lblHjust.Size = New System.Drawing.Size(34, 13)
         Me.lblHjust.TabIndex = 31
         Me.lblHjust.Text = "Hjust:"
+        '
+        'ucrNudHjust
+        '
+        Me.ucrNudHjust.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudHjust.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
+        Me.ucrNudHjust.Location = New System.Drawing.Point(94, 46)
+        Me.ucrNudHjust.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudHjust.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudHjust.Name = "ucrNudHjust"
+        Me.ucrNudHjust.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudHjust.TabIndex = 32
+        Me.ucrNudHjust.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblSize
         '
@@ -452,6 +674,18 @@ Partial Class sdgThemes
         Me.lblSize.TabIndex = 29
         Me.lblSize.Text = "Size:"
         '
+        'ucrNudsize
+        '
+        Me.ucrNudsize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudsize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudsize.Location = New System.Drawing.Point(94, 16)
+        Me.ucrNudsize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudsize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudsize.Name = "ucrNudsize"
+        Me.ucrNudsize.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudsize.TabIndex = 30
+        Me.ucrNudsize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'Label2
         '
         Me.Label2.AutoSize = True
@@ -460,6 +694,16 @@ Partial Class sdgThemes
         Me.Label2.Size = New System.Drawing.Size(40, 13)
         Me.Label2.TabIndex = 27
         Me.Label2.Text = "Colour:"
+        '
+        'ucrInputColour
+        '
+        Me.ucrInputColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputColour.IsReadOnly = False
+        Me.ucrInputColour.Location = New System.Drawing.Point(73, 217)
+        Me.ucrInputColour.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputColour.Name = "ucrInputColour"
+        Me.ucrInputColour.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputColour.TabIndex = 28
         '
         'lblFace
         '
@@ -470,6 +714,16 @@ Partial Class sdgThemes
         Me.lblFace.TabIndex = 25
         Me.lblFace.Text = "Face:"
         '
+        'ucrInputFace
+        '
+        Me.ucrInputFace.AddQuotesIfUnrecognised = True
+        Me.ucrInputFace.IsReadOnly = False
+        Me.ucrInputFace.Location = New System.Drawing.Point(73, 189)
+        Me.ucrInputFace.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputFace.Name = "ucrInputFace"
+        Me.ucrInputFace.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputFace.TabIndex = 26
+        '
         'lblFamily
         '
         Me.lblFamily.AutoSize = True
@@ -478,6 +732,16 @@ Partial Class sdgThemes
         Me.lblFamily.Size = New System.Drawing.Size(39, 13)
         Me.lblFamily.TabIndex = 23
         Me.lblFamily.Text = "Family:"
+        '
+        'ucrInputFamily
+        '
+        Me.ucrInputFamily.AddQuotesIfUnrecognised = True
+        Me.ucrInputFamily.IsReadOnly = False
+        Me.ucrInputFamily.Location = New System.Drawing.Point(73, 162)
+        Me.ucrInputFamily.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputFamily.Name = "ucrInputFamily"
+        Me.ucrInputFamily.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputFamily.TabIndex = 24
         '
         'tbYaxis
         '
@@ -498,7 +762,7 @@ Partial Class sdgThemes
         Me.GroupBox2.Controls.Add(Me.Label1)
         Me.GroupBox2.Controls.Add(Me.UcrInputComboBox1)
         Me.GroupBox2.Controls.Add(Me.Label3)
-        Me.GroupBox2.Controls.Add(Me.UcrNud1)
+        Me.GroupBox2.Controls.Add(Me.ucrNudSizeTickLabelsYAxis)
         Me.GroupBox2.Controls.Add(Me.Label4)
         Me.GroupBox2.Controls.Add(Me.UcrInputComboBox2)
         Me.GroupBox2.Controls.Add(Me.Label5)
@@ -519,6 +783,16 @@ Partial Class sdgThemes
         Me.Label1.TabIndex = 31
         Me.Label1.Text = "Line End:"
         '
+        'UcrInputComboBox1
+        '
+        Me.UcrInputComboBox1.AddQuotesIfUnrecognised = True
+        Me.UcrInputComboBox1.IsReadOnly = False
+        Me.UcrInputComboBox1.Location = New System.Drawing.Point(72, 100)
+        Me.UcrInputComboBox1.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.UcrInputComboBox1.Name = "UcrInputComboBox1"
+        Me.UcrInputComboBox1.Size = New System.Drawing.Size(137, 21)
+        Me.UcrInputComboBox1.TabIndex = 32
+        '
         'Label3
         '
         Me.Label3.AutoSize = True
@@ -527,6 +801,18 @@ Partial Class sdgThemes
         Me.Label3.Size = New System.Drawing.Size(30, 13)
         Me.Label3.TabIndex = 29
         Me.Label3.Text = "Size:"
+        '
+        'ucrNudSizeTickLabelsYAxis
+        '
+        Me.ucrNudSizeTickLabelsYAxis.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSizeTickLabelsYAxis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSizeTickLabelsYAxis.Location = New System.Drawing.Point(94, 17)
+        Me.ucrNudSizeTickLabelsYAxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSizeTickLabelsYAxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSizeTickLabelsYAxis.Name = "ucrNudSizeTickLabelsYAxis"
+        Me.ucrNudSizeTickLabelsYAxis.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudSizeTickLabelsYAxis.TabIndex = 30
+        Me.ucrNudSizeTickLabelsYAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'Label4
         '
@@ -537,6 +823,16 @@ Partial Class sdgThemes
         Me.Label4.TabIndex = 27
         Me.Label4.Text = "Colour:"
         '
+        'UcrInputComboBox2
+        '
+        Me.UcrInputComboBox2.AddQuotesIfUnrecognised = True
+        Me.UcrInputComboBox2.IsReadOnly = False
+        Me.UcrInputComboBox2.Location = New System.Drawing.Point(72, 68)
+        Me.UcrInputComboBox2.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.UcrInputComboBox2.Name = "UcrInputComboBox2"
+        Me.UcrInputComboBox2.Size = New System.Drawing.Size(137, 21)
+        Me.UcrInputComboBox2.TabIndex = 28
+        '
         'Label5
         '
         Me.Label5.AutoSize = True
@@ -546,18 +842,28 @@ Partial Class sdgThemes
         Me.Label5.TabIndex = 25
         Me.Label5.Text = "Line Type:"
         '
+        'UcrInputComboBox3
+        '
+        Me.UcrInputComboBox3.AddQuotesIfUnrecognised = True
+        Me.UcrInputComboBox3.IsReadOnly = False
+        Me.UcrInputComboBox3.Location = New System.Drawing.Point(72, 40)
+        Me.UcrInputComboBox3.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.UcrInputComboBox3.Name = "UcrInputComboBox3"
+        Me.UcrInputComboBox3.Size = New System.Drawing.Size(137, 21)
+        Me.UcrInputComboBox3.TabIndex = 26
+        '
         'GroupBox3
         '
         Me.GroupBox3.Controls.Add(Me.Label6)
-        Me.GroupBox3.Controls.Add(Me.UcrNud2)
+        Me.GroupBox3.Controls.Add(Me.ucrNudVjustTopYAxis)
         Me.GroupBox3.Controls.Add(Me.Label7)
-        Me.GroupBox3.Controls.Add(Me.UcrNud3)
+        Me.GroupBox3.Controls.Add(Me.ucrNudLineHeightTopYAxis)
         Me.GroupBox3.Controls.Add(Me.Label8)
-        Me.GroupBox3.Controls.Add(Me.UcrNud4)
+        Me.GroupBox3.Controls.Add(Me.ucrNudAngleTopYAxis)
         Me.GroupBox3.Controls.Add(Me.Label9)
-        Me.GroupBox3.Controls.Add(Me.UcrNud5)
+        Me.GroupBox3.Controls.Add(Me.ucrNudHjustTopYAxis)
         Me.GroupBox3.Controls.Add(Me.Label10)
-        Me.GroupBox3.Controls.Add(Me.UcrNud6)
+        Me.GroupBox3.Controls.Add(Me.ucrNudSizeTopYAxis)
         Me.GroupBox3.Controls.Add(Me.Label11)
         Me.GroupBox3.Controls.Add(Me.UcrInputComboBox4)
         Me.GroupBox3.Controls.Add(Me.Label12)
@@ -580,6 +886,18 @@ Partial Class sdgThemes
         Me.Label6.TabIndex = 37
         Me.Label6.Text = "Vjust:"
         '
+        'ucrNudVjustTopYAxis
+        '
+        Me.ucrNudVjustTopYAxis.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudVjustTopYAxis.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
+        Me.ucrNudVjustTopYAxis.Location = New System.Drawing.Point(94, 76)
+        Me.ucrNudVjustTopYAxis.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudVjustTopYAxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudVjustTopYAxis.Name = "ucrNudVjustTopYAxis"
+        Me.ucrNudVjustTopYAxis.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudVjustTopYAxis.TabIndex = 38
+        Me.ucrNudVjustTopYAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'Label7
         '
         Me.Label7.AutoSize = True
@@ -588,6 +906,18 @@ Partial Class sdgThemes
         Me.Label7.Size = New System.Drawing.Size(64, 13)
         Me.Label7.TabIndex = 35
         Me.Label7.Text = "Line Height:"
+        '
+        'ucrNudLineHeightTopYAxis
+        '
+        Me.ucrNudLineHeightTopYAxis.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudLineHeightTopYAxis.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
+        Me.ucrNudLineHeightTopYAxis.Location = New System.Drawing.Point(94, 106)
+        Me.ucrNudLineHeightTopYAxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudLineHeightTopYAxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLineHeightTopYAxis.Name = "ucrNudLineHeightTopYAxis"
+        Me.ucrNudLineHeightTopYAxis.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudLineHeightTopYAxis.TabIndex = 36
+        Me.ucrNudLineHeightTopYAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'Label8
         '
@@ -598,6 +928,18 @@ Partial Class sdgThemes
         Me.Label8.TabIndex = 33
         Me.Label8.Text = "Angle:"
         '
+        'ucrNudAngleTopYAxis
+        '
+        Me.ucrNudAngleTopYAxis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAngleTopYAxis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudAngleTopYAxis.Location = New System.Drawing.Point(94, 134)
+        Me.ucrNudAngleTopYAxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudAngleTopYAxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAngleTopYAxis.Name = "ucrNudAngleTopYAxis"
+        Me.ucrNudAngleTopYAxis.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudAngleTopYAxis.TabIndex = 34
+        Me.ucrNudAngleTopYAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'Label9
         '
         Me.Label9.AutoSize = True
@@ -606,6 +948,18 @@ Partial Class sdgThemes
         Me.Label9.Size = New System.Drawing.Size(34, 13)
         Me.Label9.TabIndex = 31
         Me.Label9.Text = "Hjust:"
+        '
+        'ucrNudHjustTopYAxis
+        '
+        Me.ucrNudHjustTopYAxis.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudHjustTopYAxis.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
+        Me.ucrNudHjustTopYAxis.Location = New System.Drawing.Point(94, 46)
+        Me.ucrNudHjustTopYAxis.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudHjustTopYAxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudHjustTopYAxis.Name = "ucrNudHjustTopYAxis"
+        Me.ucrNudHjustTopYAxis.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudHjustTopYAxis.TabIndex = 32
+        Me.ucrNudHjustTopYAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'Label10
         '
@@ -616,6 +970,18 @@ Partial Class sdgThemes
         Me.Label10.TabIndex = 29
         Me.Label10.Text = "Size:"
         '
+        'ucrNudSizeTopYAxis
+        '
+        Me.ucrNudSizeTopYAxis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSizeTopYAxis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSizeTopYAxis.Location = New System.Drawing.Point(94, 16)
+        Me.ucrNudSizeTopYAxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSizeTopYAxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSizeTopYAxis.Name = "ucrNudSizeTopYAxis"
+        Me.ucrNudSizeTopYAxis.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudSizeTopYAxis.TabIndex = 30
+        Me.ucrNudSizeTopYAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'Label11
         '
         Me.Label11.AutoSize = True
@@ -624,6 +990,16 @@ Partial Class sdgThemes
         Me.Label11.Size = New System.Drawing.Size(40, 13)
         Me.Label11.TabIndex = 27
         Me.Label11.Text = "Colour:"
+        '
+        'UcrInputComboBox4
+        '
+        Me.UcrInputComboBox4.AddQuotesIfUnrecognised = True
+        Me.UcrInputComboBox4.IsReadOnly = False
+        Me.UcrInputComboBox4.Location = New System.Drawing.Point(73, 217)
+        Me.UcrInputComboBox4.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.UcrInputComboBox4.Name = "UcrInputComboBox4"
+        Me.UcrInputComboBox4.Size = New System.Drawing.Size(137, 21)
+        Me.UcrInputComboBox4.TabIndex = 28
         '
         'Label12
         '
@@ -634,6 +1010,16 @@ Partial Class sdgThemes
         Me.Label12.TabIndex = 25
         Me.Label12.Text = "Face:"
         '
+        'UcrInputComboBox5
+        '
+        Me.UcrInputComboBox5.AddQuotesIfUnrecognised = True
+        Me.UcrInputComboBox5.IsReadOnly = False
+        Me.UcrInputComboBox5.Location = New System.Drawing.Point(73, 189)
+        Me.UcrInputComboBox5.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.UcrInputComboBox5.Name = "UcrInputComboBox5"
+        Me.UcrInputComboBox5.Size = New System.Drawing.Size(137, 21)
+        Me.UcrInputComboBox5.TabIndex = 26
+        '
         'Label13
         '
         Me.Label13.AutoSize = True
@@ -643,12 +1029,22 @@ Partial Class sdgThemes
         Me.Label13.TabIndex = 23
         Me.Label13.Text = "Family:"
         '
+        'UcrInputComboBox6
+        '
+        Me.UcrInputComboBox6.AddQuotesIfUnrecognised = True
+        Me.UcrInputComboBox6.IsReadOnly = False
+        Me.UcrInputComboBox6.Location = New System.Drawing.Point(73, 162)
+        Me.UcrInputComboBox6.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.UcrInputComboBox6.Name = "UcrInputComboBox6"
+        Me.UcrInputComboBox6.Size = New System.Drawing.Size(137, 21)
+        Me.UcrInputComboBox6.TabIndex = 24
+        '
         'GroupBox4
         '
         Me.GroupBox4.Controls.Add(Me.Label14)
         Me.GroupBox4.Controls.Add(Me.UcrInputComboBox7)
         Me.GroupBox4.Controls.Add(Me.Label15)
-        Me.GroupBox4.Controls.Add(Me.UcrNud7)
+        Me.GroupBox4.Controls.Add(Me.ucrNudSizeTickMarksYAxis)
         Me.GroupBox4.Controls.Add(Me.Label16)
         Me.GroupBox4.Controls.Add(Me.UcrInputComboBox8)
         Me.GroupBox4.Controls.Add(Me.Label17)
@@ -669,526 +1065,6 @@ Partial Class sdgThemes
         Me.Label14.TabIndex = 31
         Me.Label14.Text = "Line End:"
         '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(13, 22)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(30, 13)
-        Me.Label15.TabIndex = 29
-        Me.Label15.Text = "Size:"
-        '
-        'Label16
-        '
-        Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(12, 76)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(40, 13)
-        Me.Label16.TabIndex = 27
-        Me.Label16.Text = "Colour:"
-        '
-        'Label17
-        '
-        Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(12, 47)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(57, 13)
-        Me.Label17.TabIndex = 25
-        Me.Label17.Text = "Line Type:"
-        '
-        'GroupBox5
-        '
-        Me.GroupBox5.Controls.Add(Me.Label18)
-        Me.GroupBox5.Controls.Add(Me.UcrNud8)
-        Me.GroupBox5.Controls.Add(Me.Label19)
-        Me.GroupBox5.Controls.Add(Me.UcrNud9)
-        Me.GroupBox5.Controls.Add(Me.Label20)
-        Me.GroupBox5.Controls.Add(Me.UcrNud10)
-        Me.GroupBox5.Controls.Add(Me.lblHjustYAxis)
-        Me.GroupBox5.Controls.Add(Me.UcrNud11)
-        Me.GroupBox5.Controls.Add(Me.lblSizeYAxis)
-        Me.GroupBox5.Controls.Add(Me.UcrNud12)
-        Me.GroupBox5.Controls.Add(Me.Label23)
-        Me.GroupBox5.Controls.Add(Me.UcrInputComboBox10)
-        Me.GroupBox5.Controls.Add(Me.Label24)
-        Me.GroupBox5.Controls.Add(Me.UcrInputComboBox11)
-        Me.GroupBox5.Controls.Add(Me.Label25)
-        Me.GroupBox5.Controls.Add(Me.UcrInputComboBox12)
-        Me.GroupBox5.Location = New System.Drawing.Point(6, 5)
-        Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(230, 245)
-        Me.GroupBox5.TabIndex = 41
-        Me.GroupBox5.TabStop = False
-        Me.GroupBox5.Text = "Y axis label"
-        '
-        'Label18
-        '
-        Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(13, 77)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(33, 13)
-        Me.Label18.TabIndex = 37
-        Me.Label18.Text = "Vjust:"
-        '
-        'Label19
-        '
-        Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(13, 108)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(64, 13)
-        Me.Label19.TabIndex = 35
-        Me.Label19.Text = "Line Height:"
-        '
-        'Label20
-        '
-        Me.Label20.AutoSize = True
-        Me.Label20.Location = New System.Drawing.Point(13, 137)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(37, 13)
-        Me.Label20.TabIndex = 33
-        Me.Label20.Text = "Angle:"
-        '
-        'lblHjustYAxis
-        '
-        Me.lblHjustYAxis.AutoSize = True
-        Me.lblHjustYAxis.Location = New System.Drawing.Point(13, 49)
-        Me.lblHjustYAxis.Name = "lblHjustYAxis"
-        Me.lblHjustYAxis.Size = New System.Drawing.Size(34, 13)
-        Me.lblHjustYAxis.TabIndex = 31
-        Me.lblHjustYAxis.Text = "Hjust:"
-        '
-        'lblSizeYAxis
-        '
-        Me.lblSizeYAxis.AutoSize = True
-        Me.lblSizeYAxis.Location = New System.Drawing.Point(13, 21)
-        Me.lblSizeYAxis.Name = "lblSizeYAxis"
-        Me.lblSizeYAxis.Size = New System.Drawing.Size(30, 13)
-        Me.lblSizeYAxis.TabIndex = 29
-        Me.lblSizeYAxis.Text = "Size:"
-        '
-        'Label23
-        '
-        Me.Label23.AutoSize = True
-        Me.Label23.Location = New System.Drawing.Point(13, 220)
-        Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(40, 13)
-        Me.Label23.TabIndex = 27
-        Me.Label23.Text = "Colour:"
-        '
-        'Label24
-        '
-        Me.Label24.AutoSize = True
-        Me.Label24.Location = New System.Drawing.Point(13, 196)
-        Me.Label24.Name = "Label24"
-        Me.Label24.Size = New System.Drawing.Size(34, 13)
-        Me.Label24.TabIndex = 25
-        Me.Label24.Text = "Face:"
-        '
-        'Label25
-        '
-        Me.Label25.AutoSize = True
-        Me.Label25.Location = New System.Drawing.Point(13, 166)
-        Me.Label25.Name = "Label25"
-        Me.Label25.Size = New System.Drawing.Size(39, 13)
-        Me.Label25.TabIndex = 23
-        Me.Label25.Text = "Family:"
-        '
-        'ucrInputLineEndXTickMarks
-        '
-        Me.ucrInputLineEndXTickMarks.AddQuotesIfUnrecognised = True
-        Me.ucrInputLineEndXTickMarks.IsReadOnly = False
-        Me.ucrInputLineEndXTickMarks.Location = New System.Drawing.Point(72, 100)
-        Me.ucrInputLineEndXTickMarks.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.ucrInputLineEndXTickMarks.Name = "ucrInputLineEndXTickMarks"
-        Me.ucrInputLineEndXTickMarks.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputLineEndXTickMarks.TabIndex = 32
-        '
-        'ucrNudSizeXTickMarks
-        '
-        Me.ucrNudSizeXTickMarks.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSizeXTickMarks.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSizeXTickMarks.Location = New System.Drawing.Point(94, 17)
-        Me.ucrNudSizeXTickMarks.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudSizeXTickMarks.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSizeXTickMarks.Name = "ucrNudSizeXTickMarks"
-        Me.ucrNudSizeXTickMarks.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudSizeXTickMarks.TabIndex = 30
-        Me.ucrNudSizeXTickMarks.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrInputColourXTickMarks
-        '
-        Me.ucrInputColourXTickMarks.AddQuotesIfUnrecognised = True
-        Me.ucrInputColourXTickMarks.IsReadOnly = False
-        Me.ucrInputColourXTickMarks.Location = New System.Drawing.Point(72, 68)
-        Me.ucrInputColourXTickMarks.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.ucrInputColourXTickMarks.Name = "ucrInputColourXTickMarks"
-        Me.ucrInputColourXTickMarks.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputColourXTickMarks.TabIndex = 28
-        '
-        'ucrInputLineTypeXTickMarks
-        '
-        Me.ucrInputLineTypeXTickMarks.AddQuotesIfUnrecognised = True
-        Me.ucrInputLineTypeXTickMarks.IsReadOnly = False
-        Me.ucrInputLineTypeXTickMarks.Location = New System.Drawing.Point(72, 40)
-        Me.ucrInputLineTypeXTickMarks.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.ucrInputLineTypeXTickMarks.Name = "ucrInputLineTypeXTickMarks"
-        Me.ucrInputLineTypeXTickMarks.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputLineTypeXTickMarks.TabIndex = 26
-        '
-        'ucrNudVjustTopAxis
-        '
-        Me.ucrNudVjustTopAxis.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudVjustTopAxis.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.ucrNudVjustTopAxis.Location = New System.Drawing.Point(94, 76)
-        Me.ucrNudVjustTopAxis.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudVjustTopAxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudVjustTopAxis.Name = "ucrNudVjustTopAxis"
-        Me.ucrNudVjustTopAxis.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudVjustTopAxis.TabIndex = 38
-        Me.ucrNudVjustTopAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudLineHeightTopAxis
-        '
-        Me.ucrNudLineHeightTopAxis.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudLineHeightTopAxis.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.ucrNudLineHeightTopAxis.Location = New System.Drawing.Point(94, 106)
-        Me.ucrNudLineHeightTopAxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudLineHeightTopAxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLineHeightTopAxis.Name = "ucrNudLineHeightTopAxis"
-        Me.ucrNudLineHeightTopAxis.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudLineHeightTopAxis.TabIndex = 36
-        Me.ucrNudLineHeightTopAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudAngleTopAxis
-        '
-        Me.ucrNudAngleTopAxis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAngleTopAxis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudAngleTopAxis.Location = New System.Drawing.Point(94, 134)
-        Me.ucrNudAngleTopAxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudAngleTopAxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAngleTopAxis.Name = "ucrNudAngleTopAxis"
-        Me.ucrNudAngleTopAxis.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudAngleTopAxis.TabIndex = 34
-        Me.ucrNudAngleTopAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudHjustTopAxis
-        '
-        Me.ucrNudHjustTopAxis.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudHjustTopAxis.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.ucrNudHjustTopAxis.Location = New System.Drawing.Point(94, 46)
-        Me.ucrNudHjustTopAxis.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudHjustTopAxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudHjustTopAxis.Name = "ucrNudHjustTopAxis"
-        Me.ucrNudHjustTopAxis.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudHjustTopAxis.TabIndex = 32
-        Me.ucrNudHjustTopAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudSizeTopaxis
-        '
-        Me.ucrNudSizeTopaxis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSizeTopaxis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSizeTopaxis.Location = New System.Drawing.Point(94, 16)
-        Me.ucrNudSizeTopaxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudSizeTopaxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSizeTopaxis.Name = "ucrNudSizeTopaxis"
-        Me.ucrNudSizeTopaxis.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudSizeTopaxis.TabIndex = 30
-        Me.ucrNudSizeTopaxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrInputColourTopAxis
-        '
-        Me.ucrInputColourTopAxis.AddQuotesIfUnrecognised = True
-        Me.ucrInputColourTopAxis.IsReadOnly = False
-        Me.ucrInputColourTopAxis.Location = New System.Drawing.Point(73, 217)
-        Me.ucrInputColourTopAxis.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.ucrInputColourTopAxis.Name = "ucrInputColourTopAxis"
-        Me.ucrInputColourTopAxis.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputColourTopAxis.TabIndex = 28
-        '
-        'ucrInputFaceTopAxis
-        '
-        Me.ucrInputFaceTopAxis.AddQuotesIfUnrecognised = True
-        Me.ucrInputFaceTopAxis.IsReadOnly = False
-        Me.ucrInputFaceTopAxis.Location = New System.Drawing.Point(73, 189)
-        Me.ucrInputFaceTopAxis.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.ucrInputFaceTopAxis.Name = "ucrInputFaceTopAxis"
-        Me.ucrInputFaceTopAxis.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputFaceTopAxis.TabIndex = 26
-        '
-        'ucrInputFamilyTopAxis
-        '
-        Me.ucrInputFamilyTopAxis.AddQuotesIfUnrecognised = True
-        Me.ucrInputFamilyTopAxis.IsReadOnly = False
-        Me.ucrInputFamilyTopAxis.Location = New System.Drawing.Point(73, 162)
-        Me.ucrInputFamilyTopAxis.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.ucrInputFamilyTopAxis.Name = "ucrInputFamilyTopAxis"
-        Me.ucrInputFamilyTopAxis.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputFamilyTopAxis.TabIndex = 24
-        '
-        'ucrInputLineEndTickMarks
-        '
-        Me.ucrInputLineEndTickMarks.AddQuotesIfUnrecognised = True
-        Me.ucrInputLineEndTickMarks.IsReadOnly = False
-        Me.ucrInputLineEndTickMarks.Location = New System.Drawing.Point(72, 100)
-        Me.ucrInputLineEndTickMarks.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.ucrInputLineEndTickMarks.Name = "ucrInputLineEndTickMarks"
-        Me.ucrInputLineEndTickMarks.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputLineEndTickMarks.TabIndex = 32
-        '
-        'ucrNudSizeTickMarks
-        '
-        Me.ucrNudSizeTickMarks.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSizeTickMarks.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSizeTickMarks.Location = New System.Drawing.Point(94, 17)
-        Me.ucrNudSizeTickMarks.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudSizeTickMarks.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSizeTickMarks.Name = "ucrNudSizeTickMarks"
-        Me.ucrNudSizeTickMarks.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudSizeTickMarks.TabIndex = 30
-        Me.ucrNudSizeTickMarks.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrInputColourTickMarks
-        '
-        Me.ucrInputColourTickMarks.AddQuotesIfUnrecognised = True
-        Me.ucrInputColourTickMarks.IsReadOnly = False
-        Me.ucrInputColourTickMarks.Location = New System.Drawing.Point(72, 68)
-        Me.ucrInputColourTickMarks.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.ucrInputColourTickMarks.Name = "ucrInputColourTickMarks"
-        Me.ucrInputColourTickMarks.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputColourTickMarks.TabIndex = 28
-        '
-        'ucrInputLineTypeTickMarks
-        '
-        Me.ucrInputLineTypeTickMarks.AddQuotesIfUnrecognised = True
-        Me.ucrInputLineTypeTickMarks.IsReadOnly = False
-        Me.ucrInputLineTypeTickMarks.Location = New System.Drawing.Point(72, 40)
-        Me.ucrInputLineTypeTickMarks.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.ucrInputLineTypeTickMarks.Name = "ucrInputLineTypeTickMarks"
-        Me.ucrInputLineTypeTickMarks.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputLineTypeTickMarks.TabIndex = 26
-        '
-        'ucrNudVjust
-        '
-        Me.ucrNudVjust.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudVjust.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.ucrNudVjust.Location = New System.Drawing.Point(94, 76)
-        Me.ucrNudVjust.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudVjust.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudVjust.Name = "ucrNudVjust"
-        Me.ucrNudVjust.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudVjust.TabIndex = 38
-        Me.ucrNudVjust.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudLineHeight
-        '
-        Me.ucrNudLineHeight.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudLineHeight.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.ucrNudLineHeight.Location = New System.Drawing.Point(94, 106)
-        Me.ucrNudLineHeight.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudLineHeight.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLineHeight.Name = "ucrNudLineHeight"
-        Me.ucrNudLineHeight.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudLineHeight.TabIndex = 36
-        Me.ucrNudLineHeight.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudAngle
-        '
-        Me.ucrNudAngle.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAngle.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudAngle.Location = New System.Drawing.Point(94, 136)
-        Me.ucrNudAngle.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudAngle.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAngle.Name = "ucrNudAngle"
-        Me.ucrNudAngle.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudAngle.TabIndex = 34
-        Me.ucrNudAngle.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudHjust
-        '
-        Me.ucrNudHjust.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudHjust.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.ucrNudHjust.Location = New System.Drawing.Point(94, 46)
-        Me.ucrNudHjust.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudHjust.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudHjust.Name = "ucrNudHjust"
-        Me.ucrNudHjust.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudHjust.TabIndex = 32
-        Me.ucrNudHjust.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudsize
-        '
-        Me.ucrNudsize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudsize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudsize.Location = New System.Drawing.Point(94, 16)
-        Me.ucrNudsize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudsize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudsize.Name = "ucrNudsize"
-        Me.ucrNudsize.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudsize.TabIndex = 30
-        Me.ucrNudsize.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrInputColour
-        '
-        Me.ucrInputColour.AddQuotesIfUnrecognised = True
-        Me.ucrInputColour.IsReadOnly = False
-        Me.ucrInputColour.Location = New System.Drawing.Point(73, 217)
-        Me.ucrInputColour.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.ucrInputColour.Name = "ucrInputColour"
-        Me.ucrInputColour.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputColour.TabIndex = 28
-        '
-        'ucrInputFace
-        '
-        Me.ucrInputFace.AddQuotesIfUnrecognised = True
-        Me.ucrInputFace.IsReadOnly = False
-        Me.ucrInputFace.Location = New System.Drawing.Point(73, 189)
-        Me.ucrInputFace.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.ucrInputFace.Name = "ucrInputFace"
-        Me.ucrInputFace.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputFace.TabIndex = 26
-        '
-        'ucrInputFamily
-        '
-        Me.ucrInputFamily.AddQuotesIfUnrecognised = True
-        Me.ucrInputFamily.IsReadOnly = False
-        Me.ucrInputFamily.Location = New System.Drawing.Point(73, 162)
-        Me.ucrInputFamily.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.ucrInputFamily.Name = "ucrInputFamily"
-        Me.ucrInputFamily.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputFamily.TabIndex = 24
-        '
-        'UcrInputComboBox1
-        '
-        Me.UcrInputComboBox1.AddQuotesIfUnrecognised = True
-        Me.UcrInputComboBox1.IsReadOnly = False
-        Me.UcrInputComboBox1.Location = New System.Drawing.Point(72, 100)
-        Me.UcrInputComboBox1.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.UcrInputComboBox1.Name = "UcrInputComboBox1"
-        Me.UcrInputComboBox1.Size = New System.Drawing.Size(137, 21)
-        Me.UcrInputComboBox1.TabIndex = 32
-        '
-        'UcrNud1
-        '
-        Me.UcrNud1.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNud1.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNud1.Location = New System.Drawing.Point(94, 17)
-        Me.UcrNud1.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.UcrNud1.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNud1.Name = "UcrNud1"
-        Me.UcrNud1.Size = New System.Drawing.Size(50, 20)
-        Me.UcrNud1.TabIndex = 30
-        Me.UcrNud1.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'UcrInputComboBox2
-        '
-        Me.UcrInputComboBox2.AddQuotesIfUnrecognised = True
-        Me.UcrInputComboBox2.IsReadOnly = False
-        Me.UcrInputComboBox2.Location = New System.Drawing.Point(72, 68)
-        Me.UcrInputComboBox2.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.UcrInputComboBox2.Name = "UcrInputComboBox2"
-        Me.UcrInputComboBox2.Size = New System.Drawing.Size(137, 21)
-        Me.UcrInputComboBox2.TabIndex = 28
-        '
-        'UcrInputComboBox3
-        '
-        Me.UcrInputComboBox3.AddQuotesIfUnrecognised = True
-        Me.UcrInputComboBox3.IsReadOnly = False
-        Me.UcrInputComboBox3.Location = New System.Drawing.Point(72, 40)
-        Me.UcrInputComboBox3.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.UcrInputComboBox3.Name = "UcrInputComboBox3"
-        Me.UcrInputComboBox3.Size = New System.Drawing.Size(137, 21)
-        Me.UcrInputComboBox3.TabIndex = 26
-        '
-        'UcrNud2
-        '
-        Me.UcrNud2.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNud2.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.UcrNud2.Location = New System.Drawing.Point(94, 76)
-        Me.UcrNud2.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNud2.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNud2.Name = "UcrNud2"
-        Me.UcrNud2.Size = New System.Drawing.Size(50, 20)
-        Me.UcrNud2.TabIndex = 38
-        Me.UcrNud2.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'UcrNud3
-        '
-        Me.UcrNud3.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNud3.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.UcrNud3.Location = New System.Drawing.Point(94, 106)
-        Me.UcrNud3.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.UcrNud3.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNud3.Name = "UcrNud3"
-        Me.UcrNud3.Size = New System.Drawing.Size(50, 20)
-        Me.UcrNud3.TabIndex = 36
-        Me.UcrNud3.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'UcrNud4
-        '
-        Me.UcrNud4.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNud4.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNud4.Location = New System.Drawing.Point(94, 134)
-        Me.UcrNud4.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.UcrNud4.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNud4.Name = "UcrNud4"
-        Me.UcrNud4.Size = New System.Drawing.Size(50, 20)
-        Me.UcrNud4.TabIndex = 34
-        Me.UcrNud4.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'UcrNud5
-        '
-        Me.UcrNud5.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNud5.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.UcrNud5.Location = New System.Drawing.Point(94, 46)
-        Me.UcrNud5.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNud5.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNud5.Name = "UcrNud5"
-        Me.UcrNud5.Size = New System.Drawing.Size(50, 20)
-        Me.UcrNud5.TabIndex = 32
-        Me.UcrNud5.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'UcrNud6
-        '
-        Me.UcrNud6.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNud6.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNud6.Location = New System.Drawing.Point(94, 16)
-        Me.UcrNud6.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.UcrNud6.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNud6.Name = "UcrNud6"
-        Me.UcrNud6.Size = New System.Drawing.Size(50, 20)
-        Me.UcrNud6.TabIndex = 30
-        Me.UcrNud6.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'UcrInputComboBox4
-        '
-        Me.UcrInputComboBox4.AddQuotesIfUnrecognised = True
-        Me.UcrInputComboBox4.IsReadOnly = False
-        Me.UcrInputComboBox4.Location = New System.Drawing.Point(73, 217)
-        Me.UcrInputComboBox4.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.UcrInputComboBox4.Name = "UcrInputComboBox4"
-        Me.UcrInputComboBox4.Size = New System.Drawing.Size(137, 21)
-        Me.UcrInputComboBox4.TabIndex = 28
-        '
-        'UcrInputComboBox5
-        '
-        Me.UcrInputComboBox5.AddQuotesIfUnrecognised = True
-        Me.UcrInputComboBox5.IsReadOnly = False
-        Me.UcrInputComboBox5.Location = New System.Drawing.Point(73, 189)
-        Me.UcrInputComboBox5.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.UcrInputComboBox5.Name = "UcrInputComboBox5"
-        Me.UcrInputComboBox5.Size = New System.Drawing.Size(137, 21)
-        Me.UcrInputComboBox5.TabIndex = 26
-        '
-        'UcrInputComboBox6
-        '
-        Me.UcrInputComboBox6.AddQuotesIfUnrecognised = True
-        Me.UcrInputComboBox6.IsReadOnly = False
-        Me.UcrInputComboBox6.Location = New System.Drawing.Point(73, 162)
-        Me.UcrInputComboBox6.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.UcrInputComboBox6.Name = "UcrInputComboBox6"
-        Me.UcrInputComboBox6.Size = New System.Drawing.Size(137, 21)
-        Me.UcrInputComboBox6.TabIndex = 24
-        '
         'UcrInputComboBox7
         '
         Me.UcrInputComboBox7.AddQuotesIfUnrecognised = True
@@ -1199,17 +1075,35 @@ Partial Class sdgThemes
         Me.UcrInputComboBox7.Size = New System.Drawing.Size(137, 21)
         Me.UcrInputComboBox7.TabIndex = 32
         '
-        'UcrNud7
+        'Label15
         '
-        Me.UcrNud7.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNud7.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNud7.Location = New System.Drawing.Point(94, 17)
-        Me.UcrNud7.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.UcrNud7.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNud7.Name = "UcrNud7"
-        Me.UcrNud7.Size = New System.Drawing.Size(50, 20)
-        Me.UcrNud7.TabIndex = 30
-        Me.UcrNud7.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(13, 22)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(30, 13)
+        Me.Label15.TabIndex = 29
+        Me.Label15.Text = "Size:"
+        '
+        'ucrNudSizeTickMarksYAxis
+        '
+        Me.ucrNudSizeTickMarksYAxis.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSizeTickMarksYAxis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSizeTickMarksYAxis.Location = New System.Drawing.Point(94, 17)
+        Me.ucrNudSizeTickMarksYAxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSizeTickMarksYAxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSizeTickMarksYAxis.Name = "ucrNudSizeTickMarksYAxis"
+        Me.ucrNudSizeTickMarksYAxis.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudSizeTickMarksYAxis.TabIndex = 30
+        Me.ucrNudSizeTickMarksYAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(12, 76)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(40, 13)
+        Me.Label16.TabIndex = 27
+        Me.Label16.Text = "Colour:"
         '
         'UcrInputComboBox8
         '
@@ -1221,6 +1115,15 @@ Partial Class sdgThemes
         Me.UcrInputComboBox8.Size = New System.Drawing.Size(137, 21)
         Me.UcrInputComboBox8.TabIndex = 28
         '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Location = New System.Drawing.Point(12, 47)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(57, 13)
+        Me.Label17.TabIndex = 25
+        Me.Label17.Text = "Line Type:"
+        '
         'UcrInputComboBox9
         '
         Me.UcrInputComboBox9.AddQuotesIfUnrecognised = True
@@ -1231,65 +1134,144 @@ Partial Class sdgThemes
         Me.UcrInputComboBox9.Size = New System.Drawing.Size(137, 21)
         Me.UcrInputComboBox9.TabIndex = 26
         '
-        'UcrNud8
+        'GroupBox5
         '
-        Me.UcrNud8.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNud8.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.UcrNud8.Location = New System.Drawing.Point(94, 76)
-        Me.UcrNud8.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNud8.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNud8.Name = "UcrNud8"
-        Me.UcrNud8.Size = New System.Drawing.Size(50, 20)
-        Me.UcrNud8.TabIndex = 38
-        Me.UcrNud8.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.GroupBox5.Controls.Add(Me.lblVjustYAxis)
+        Me.GroupBox5.Controls.Add(Me.ucrNudVjustYAxis)
+        Me.GroupBox5.Controls.Add(Me.lblLineHeightYAxis)
+        Me.GroupBox5.Controls.Add(Me.ucrNudLineHeightYAxis)
+        Me.GroupBox5.Controls.Add(Me.Label20)
+        Me.GroupBox5.Controls.Add(Me.ucrNudLAngle)
+        Me.GroupBox5.Controls.Add(Me.lblHjustYAxis)
+        Me.GroupBox5.Controls.Add(Me.ucrNudHjustYAxis)
+        Me.GroupBox5.Controls.Add(Me.lblSizeYAxis)
+        Me.GroupBox5.Controls.Add(Me.ucrNudSizeYAxis)
+        Me.GroupBox5.Controls.Add(Me.lblColourYAxis)
+        Me.GroupBox5.Controls.Add(Me.UcrInputComboBox10)
+        Me.GroupBox5.Controls.Add(Me.lblFaceYAxis)
+        Me.GroupBox5.Controls.Add(Me.UcrInputComboBox11)
+        Me.GroupBox5.Controls.Add(Me.lblFamilyYAxis)
+        Me.GroupBox5.Controls.Add(Me.crInputComboBox12)
+        Me.GroupBox5.Location = New System.Drawing.Point(6, 5)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Size = New System.Drawing.Size(230, 245)
+        Me.GroupBox5.TabIndex = 41
+        Me.GroupBox5.TabStop = False
+        Me.GroupBox5.Text = "Y axis label"
         '
-        'UcrNud9
+        'lblVjustYAxis
         '
-        Me.UcrNud9.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNud9.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.UcrNud9.Location = New System.Drawing.Point(94, 106)
-        Me.UcrNud9.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.UcrNud9.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNud9.Name = "UcrNud9"
-        Me.UcrNud9.Size = New System.Drawing.Size(50, 20)
-        Me.UcrNud9.TabIndex = 36
-        Me.UcrNud9.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.lblVjustYAxis.AutoSize = True
+        Me.lblVjustYAxis.Location = New System.Drawing.Point(13, 77)
+        Me.lblVjustYAxis.Name = "lblVjustYAxis"
+        Me.lblVjustYAxis.Size = New System.Drawing.Size(33, 13)
+        Me.lblVjustYAxis.TabIndex = 37
+        Me.lblVjustYAxis.Text = "Vjust:"
         '
-        'UcrNud10
+        'ucrNudVjustYAxis
         '
-        Me.UcrNud10.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNud10.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNud10.Location = New System.Drawing.Point(94, 136)
-        Me.UcrNud10.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.UcrNud10.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNud10.Name = "UcrNud10"
-        Me.UcrNud10.Size = New System.Drawing.Size(50, 20)
-        Me.UcrNud10.TabIndex = 34
-        Me.UcrNud10.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudVjustYAxis.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudVjustYAxis.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
+        Me.ucrNudVjustYAxis.Location = New System.Drawing.Point(94, 76)
+        Me.ucrNudVjustYAxis.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudVjustYAxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudVjustYAxis.Name = "ucrNudVjustYAxis"
+        Me.ucrNudVjustYAxis.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudVjustYAxis.TabIndex = 38
+        Me.ucrNudVjustYAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'UcrNud11
+        'lblLineHeightYAxis
         '
-        Me.UcrNud11.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNud11.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.UcrNud11.Location = New System.Drawing.Point(94, 46)
-        Me.UcrNud11.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNud11.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNud11.Name = "UcrNud11"
-        Me.UcrNud11.Size = New System.Drawing.Size(50, 20)
-        Me.UcrNud11.TabIndex = 32
-        Me.UcrNud11.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.lblLineHeightYAxis.AutoSize = True
+        Me.lblLineHeightYAxis.Location = New System.Drawing.Point(13, 108)
+        Me.lblLineHeightYAxis.Name = "lblLineHeightYAxis"
+        Me.lblLineHeightYAxis.Size = New System.Drawing.Size(64, 13)
+        Me.lblLineHeightYAxis.TabIndex = 35
+        Me.lblLineHeightYAxis.Text = "Line Height:"
         '
-        'UcrNud12
+        'ucrNudLineHeightYAxis
         '
-        Me.UcrNud12.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNud12.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.UcrNud12.Location = New System.Drawing.Point(94, 16)
-        Me.UcrNud12.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.UcrNud12.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.UcrNud12.Name = "UcrNud12"
-        Me.UcrNud12.Size = New System.Drawing.Size(50, 20)
-        Me.UcrNud12.TabIndex = 30
-        Me.UcrNud12.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLineHeightYAxis.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudLineHeightYAxis.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
+        Me.ucrNudLineHeightYAxis.Location = New System.Drawing.Point(94, 106)
+        Me.ucrNudLineHeightYAxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudLineHeightYAxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLineHeightYAxis.Name = "ucrNudLineHeightYAxis"
+        Me.ucrNudLineHeightYAxis.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudLineHeightYAxis.TabIndex = 36
+        Me.ucrNudLineHeightYAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Location = New System.Drawing.Point(13, 137)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(37, 13)
+        Me.Label20.TabIndex = 33
+        Me.Label20.Text = "Angle:"
+        '
+        'ucrNudLAngle
+        '
+        Me.ucrNudLAngle.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLAngle.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudLAngle.Location = New System.Drawing.Point(94, 136)
+        Me.ucrNudLAngle.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudLAngle.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLAngle.Name = "ucrNudLAngle"
+        Me.ucrNudLAngle.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudLAngle.TabIndex = 34
+        Me.ucrNudLAngle.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblHjustYAxis
+        '
+        Me.lblHjustYAxis.AutoSize = True
+        Me.lblHjustYAxis.Location = New System.Drawing.Point(13, 49)
+        Me.lblHjustYAxis.Name = "lblHjustYAxis"
+        Me.lblHjustYAxis.Size = New System.Drawing.Size(34, 13)
+        Me.lblHjustYAxis.TabIndex = 31
+        Me.lblHjustYAxis.Text = "Hjust:"
+        '
+        'ucrNudHjustYAxis
+        '
+        Me.ucrNudHjustYAxis.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudHjustYAxis.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
+        Me.ucrNudHjustYAxis.Location = New System.Drawing.Point(94, 46)
+        Me.ucrNudHjustYAxis.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudHjustYAxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudHjustYAxis.Name = "ucrNudHjustYAxis"
+        Me.ucrNudHjustYAxis.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudHjustYAxis.TabIndex = 32
+        Me.ucrNudHjustYAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblSizeYAxis
+        '
+        Me.lblSizeYAxis.AutoSize = True
+        Me.lblSizeYAxis.Location = New System.Drawing.Point(13, 21)
+        Me.lblSizeYAxis.Name = "lblSizeYAxis"
+        Me.lblSizeYAxis.Size = New System.Drawing.Size(30, 13)
+        Me.lblSizeYAxis.TabIndex = 29
+        Me.lblSizeYAxis.Text = "Size:"
+        '
+        'ucrNudSizeYAxis
+        '
+        Me.ucrNudSizeYAxis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSizeYAxis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSizeYAxis.Location = New System.Drawing.Point(94, 16)
+        Me.ucrNudSizeYAxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSizeYAxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSizeYAxis.Name = "ucrNudSizeYAxis"
+        Me.ucrNudSizeYAxis.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudSizeYAxis.TabIndex = 30
+        Me.ucrNudSizeYAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblColourYAxis
+        '
+        Me.lblColourYAxis.AutoSize = True
+        Me.lblColourYAxis.Location = New System.Drawing.Point(13, 220)
+        Me.lblColourYAxis.Name = "lblColourYAxis"
+        Me.lblColourYAxis.Size = New System.Drawing.Size(40, 13)
+        Me.lblColourYAxis.TabIndex = 27
+        Me.lblColourYAxis.Text = "Colour:"
         '
         'UcrInputComboBox10
         '
@@ -1301,6 +1283,15 @@ Partial Class sdgThemes
         Me.UcrInputComboBox10.Size = New System.Drawing.Size(137, 21)
         Me.UcrInputComboBox10.TabIndex = 28
         '
+        'lblFaceYAxis
+        '
+        Me.lblFaceYAxis.AutoSize = True
+        Me.lblFaceYAxis.Location = New System.Drawing.Point(13, 196)
+        Me.lblFaceYAxis.Name = "lblFaceYAxis"
+        Me.lblFaceYAxis.Size = New System.Drawing.Size(34, 13)
+        Me.lblFaceYAxis.TabIndex = 25
+        Me.lblFaceYAxis.Text = "Face:"
+        '
         'UcrInputComboBox11
         '
         Me.UcrInputComboBox11.AddQuotesIfUnrecognised = True
@@ -1311,15 +1302,24 @@ Partial Class sdgThemes
         Me.UcrInputComboBox11.Size = New System.Drawing.Size(137, 21)
         Me.UcrInputComboBox11.TabIndex = 26
         '
-        'UcrInputComboBox12
+        'lblFamilyYAxis
         '
-        Me.UcrInputComboBox12.AddQuotesIfUnrecognised = True
-        Me.UcrInputComboBox12.IsReadOnly = False
-        Me.UcrInputComboBox12.Location = New System.Drawing.Point(73, 162)
-        Me.UcrInputComboBox12.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.UcrInputComboBox12.Name = "UcrInputComboBox12"
-        Me.UcrInputComboBox12.Size = New System.Drawing.Size(137, 21)
-        Me.UcrInputComboBox12.TabIndex = 24
+        Me.lblFamilyYAxis.AutoSize = True
+        Me.lblFamilyYAxis.Location = New System.Drawing.Point(13, 166)
+        Me.lblFamilyYAxis.Name = "lblFamilyYAxis"
+        Me.lblFamilyYAxis.Size = New System.Drawing.Size(39, 13)
+        Me.lblFamilyYAxis.TabIndex = 23
+        Me.lblFamilyYAxis.Text = "Family:"
+        '
+        'crInputComboBox12
+        '
+        Me.crInputComboBox12.AddQuotesIfUnrecognised = True
+        Me.crInputComboBox12.IsReadOnly = False
+        Me.crInputComboBox12.Location = New System.Drawing.Point(73, 162)
+        Me.crInputComboBox12.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.crInputComboBox12.Name = "crInputComboBox12"
+        Me.crInputComboBox12.Size = New System.Drawing.Size(137, 21)
+        Me.crInputComboBox12.TabIndex = 24
         '
         'ucrBaseSubdialogue
         '
@@ -1417,7 +1417,7 @@ Partial Class sdgThemes
     Friend WithEvents lblLineEndXtickMarks As Label
     Friend WithEvents ucrInputLineEndXTickMarks As ucrInputComboBox
     Friend WithEvents lblSizeXTickMarks As Label
-    Friend WithEvents ucrNudSizeXTickMarks As ucrNud
+    Friend WithEvents ucrNudSizeXTickLabels As ucrNud
     Friend WithEvents lblColourXTickMarks As Label
     Friend WithEvents ucrInputColourXTickMarks As ucrInputComboBox
     Friend WithEvents lbllineTypeXTickMarks As Label
@@ -1426,22 +1426,22 @@ Partial Class sdgThemes
     Friend WithEvents Label1 As Label
     Friend WithEvents UcrInputComboBox1 As ucrInputComboBox
     Friend WithEvents Label3 As Label
-    Friend WithEvents UcrNud1 As ucrNud
+    Friend WithEvents ucrNudSizeTickLabelsYAxis As ucrNud
     Friend WithEvents Label4 As Label
     Friend WithEvents UcrInputComboBox2 As ucrInputComboBox
     Friend WithEvents Label5 As Label
     Friend WithEvents UcrInputComboBox3 As ucrInputComboBox
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents Label6 As Label
-    Friend WithEvents UcrNud2 As ucrNud
+    Friend WithEvents ucrNudVjustTopYAxis As ucrNud
     Friend WithEvents Label7 As Label
-    Friend WithEvents UcrNud3 As ucrNud
+    Friend WithEvents ucrNudLineHeightTopYAxis As ucrNud
     Friend WithEvents Label8 As Label
-    Friend WithEvents UcrNud4 As ucrNud
+    Friend WithEvents ucrNudAngleTopYAxis As ucrNud
     Friend WithEvents Label9 As Label
-    Friend WithEvents UcrNud5 As ucrNud
+    Friend WithEvents ucrNudHjustTopYAxis As ucrNud
     Friend WithEvents Label10 As Label
-    Friend WithEvents UcrNud6 As ucrNud
+    Friend WithEvents ucrNudSizeTopYAxis As ucrNud
     Friend WithEvents Label11 As Label
     Friend WithEvents UcrInputComboBox4 As ucrInputComboBox
     Friend WithEvents Label12 As Label
@@ -1452,26 +1452,26 @@ Partial Class sdgThemes
     Friend WithEvents Label14 As Label
     Friend WithEvents UcrInputComboBox7 As ucrInputComboBox
     Friend WithEvents Label15 As Label
-    Friend WithEvents UcrNud7 As ucrNud
+    Friend WithEvents ucrNudSizeTickMarksYAxis As ucrNud
     Friend WithEvents Label16 As Label
     Friend WithEvents UcrInputComboBox8 As ucrInputComboBox
     Friend WithEvents Label17 As Label
     Friend WithEvents UcrInputComboBox9 As ucrInputComboBox
     Friend WithEvents GroupBox5 As GroupBox
-    Friend WithEvents Label18 As Label
-    Friend WithEvents UcrNud8 As ucrNud
-    Friend WithEvents Label19 As Label
-    Friend WithEvents UcrNud9 As ucrNud
+    Friend WithEvents lblVjustYAxis As Label
+    Friend WithEvents ucrNudVjustYAxis As ucrNud
+    Friend WithEvents lblLineHeightYAxis As Label
+    Friend WithEvents ucrNudLineHeightYAxis As ucrNud
     Friend WithEvents Label20 As Label
-    Friend WithEvents UcrNud10 As ucrNud
+    Friend WithEvents ucrNudLAngle As ucrNud
     Friend WithEvents lblHjustYAxis As Label
-    Friend WithEvents UcrNud11 As ucrNud
+    Friend WithEvents ucrNudHjustYAxis As ucrNud
     Friend WithEvents lblSizeYAxis As Label
-    Friend WithEvents UcrNud12 As ucrNud
-    Friend WithEvents Label23 As Label
+    Friend WithEvents ucrNudSizeYAxis As ucrNud
+    Friend WithEvents lblColourYAxis As Label
     Friend WithEvents UcrInputComboBox10 As ucrInputComboBox
-    Friend WithEvents Label24 As Label
+    Friend WithEvents lblFaceYAxis As Label
     Friend WithEvents UcrInputComboBox11 As ucrInputComboBox
-    Friend WithEvents Label25 As Label
-    Friend WithEvents UcrInputComboBox12 As ucrInputComboBox
+    Friend WithEvents lblFamilyYAxis As Label
+    Friend WithEvents crInputComboBox12 As ucrInputComboBox
 End Class
