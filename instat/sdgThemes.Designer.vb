@@ -27,6 +27,8 @@ Partial Class sdgThemes
         Me.tbAxis = New System.Windows.Forms.TabPage()
         Me.grpTableOptions = New System.Windows.Forms.GroupBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.lblLineEnd = New System.Windows.Forms.Label()
+        Me.ucrInputLineEnd = New instat.ucrInputComboBox()
         Me.lblSizeSegment = New System.Windows.Forms.Label()
         Me.ucrNudSizeSegment = New instat.ucrNud()
         Me.lblColourSegment = New System.Windows.Forms.Label()
@@ -51,31 +53,40 @@ Partial Class sdgThemes
         Me.lblFamily = New System.Windows.Forms.Label()
         Me.ucrInputFamily = New instat.ucrInputComboBox()
         Me.tbYaxis = New System.Windows.Forms.TabPage()
-        Me.grpGraphOptions = New System.Windows.Forms.GroupBox()
-        Me.lblTitle = New System.Windows.Forms.Label()
-        Me.lblHjust5 = New System.Windows.Forms.Label()
-        Me.lblVjust1 = New System.Windows.Forms.Label()
-        Me.ucrInputGraphTitle = New instat.ucrInputTextBox()
-        Me.ucrInputHorizontalLabels = New instat.ucrInputComboBox()
-        Me.ucrInputVerticalLabels = New instat.ucrInputComboBox()
-        Me.ucrChkShowMissing = New instat.ucrCheck()
-        Me.ucrChkShowPercentage = New instat.ucrCheck()
-        Me.ucrChkShowCount = New instat.ucrCheck()
-        Me.grpGraphType = New System.Windows.Forms.GroupBox()
-        Me.rdoLine = New System.Windows.Forms.RadioButton()
-        Me.rdoDot = New System.Windows.Forms.RadioButton()
-        Me.rdoBar = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlGraphType = New instat.UcrPanel()
-        Me.lblLineEnd = New System.Windows.Forms.Label()
-        Me.ucrInputLineEnd = New instat.ucrInputComboBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.UcrNud1 = New instat.ucrNud()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.UcrNud2 = New instat.ucrNud()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.UcrNud3 = New instat.ucrNud()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.UcrNud4 = New instat.ucrNud()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.UcrNud5 = New instat.ucrNud()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.UcrInputComboBox1 = New instat.ucrInputComboBox()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.UcrInputComboBox2 = New instat.ucrInputComboBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.UcrInputComboBox3 = New instat.ucrInputComboBox()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.UcrInputComboBox4 = New instat.ucrInputComboBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.UcrNud6 = New instat.ucrNud()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.UcrInputComboBox5 = New instat.ucrInputComboBox()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.UcrInputComboBox6 = New instat.ucrInputComboBox()
         Me.tbXaxis.SuspendLayout()
         Me.tbAxis.SuspendLayout()
         Me.grpTableOptions.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.grpThemetext.SuspendLayout()
         Me.tbYaxis.SuspendLayout()
-        Me.grpGraphOptions.SuspendLayout()
-        Me.grpGraphType.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
         Me.SuspendLayout()
         '
         'ucrBaseSubdialogue
@@ -132,7 +143,26 @@ Partial Class sdgThemes
         Me.GroupBox1.Size = New System.Drawing.Size(230, 154)
         Me.GroupBox1.TabIndex = 39
         Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Segment Theme"
+        Me.GroupBox1.Text = "tick marks along axes"
+        '
+        'lblLineEnd
+        '
+        Me.lblLineEnd.AutoSize = True
+        Me.lblLineEnd.Location = New System.Drawing.Point(12, 108)
+        Me.lblLineEnd.Name = "lblLineEnd"
+        Me.lblLineEnd.Size = New System.Drawing.Size(52, 13)
+        Me.lblLineEnd.TabIndex = 31
+        Me.lblLineEnd.Text = "Line End:"
+        '
+        'ucrInputLineEnd
+        '
+        Me.ucrInputLineEnd.AddQuotesIfUnrecognised = True
+        Me.ucrInputLineEnd.IsReadOnly = False
+        Me.ucrInputLineEnd.Location = New System.Drawing.Point(72, 100)
+        Me.ucrInputLineEnd.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputLineEnd.Name = "ucrInputLineEnd"
+        Me.ucrInputLineEnd.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputLineEnd.TabIndex = 32
         '
         'lblSizeSegment
         '
@@ -213,15 +243,15 @@ Partial Class sdgThemes
         Me.grpThemetext.Controls.Add(Me.ucrInputFamily)
         Me.grpThemetext.Location = New System.Drawing.Point(15, 19)
         Me.grpThemetext.Name = "grpThemetext"
-        Me.grpThemetext.Size = New System.Drawing.Size(230, 291)
+        Me.grpThemetext.Size = New System.Drawing.Size(230, 245)
         Me.grpThemetext.TabIndex = 23
         Me.grpThemetext.TabStop = False
-        Me.grpThemetext.Text = "Text Theme"
+        Me.grpThemetext.Text = "X axis label"
         '
         'lblVjust
         '
         Me.lblVjust.AutoSize = True
-        Me.lblVjust.Location = New System.Drawing.Point(13, 80)
+        Me.lblVjust.Location = New System.Drawing.Point(13, 77)
         Me.lblVjust.Name = "lblVjust"
         Me.lblVjust.Size = New System.Drawing.Size(33, 13)
         Me.lblVjust.TabIndex = 37
@@ -231,7 +261,7 @@ Partial Class sdgThemes
         '
         Me.ucrNudVjust.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudVjust.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.ucrNudVjust.Location = New System.Drawing.Point(94, 75)
+        Me.ucrNudVjust.Location = New System.Drawing.Point(94, 76)
         Me.ucrNudVjust.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudVjust.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudVjust.Name = "ucrNudVjust"
@@ -242,7 +272,7 @@ Partial Class sdgThemes
         'lblLineHeight
         '
         Me.lblLineHeight.AutoSize = True
-        Me.lblLineHeight.Location = New System.Drawing.Point(13, 111)
+        Me.lblLineHeight.Location = New System.Drawing.Point(13, 105)
         Me.lblLineHeight.Name = "lblLineHeight"
         Me.lblLineHeight.Size = New System.Drawing.Size(64, 13)
         Me.lblLineHeight.TabIndex = 35
@@ -263,7 +293,7 @@ Partial Class sdgThemes
         'lblAngle
         '
         Me.lblAngle.AutoSize = True
-        Me.lblAngle.Location = New System.Drawing.Point(13, 144)
+        Me.lblAngle.Location = New System.Drawing.Point(13, 133)
         Me.lblAngle.Name = "lblAngle"
         Me.lblAngle.Size = New System.Drawing.Size(37, 13)
         Me.lblAngle.TabIndex = 33
@@ -273,7 +303,7 @@ Partial Class sdgThemes
         '
         Me.ucrNudAngle.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudAngle.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudAngle.Location = New System.Drawing.Point(94, 139)
+        Me.ucrNudAngle.Location = New System.Drawing.Point(94, 136)
         Me.ucrNudAngle.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudAngle.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudAngle.Name = "ucrNudAngle"
@@ -284,7 +314,7 @@ Partial Class sdgThemes
         'lblHjust
         '
         Me.lblHjust.AutoSize = True
-        Me.lblHjust.Location = New System.Drawing.Point(13, 48)
+        Me.lblHjust.Location = New System.Drawing.Point(13, 49)
         Me.lblHjust.Name = "lblHjust"
         Me.lblHjust.Size = New System.Drawing.Size(34, 13)
         Me.lblHjust.TabIndex = 31
@@ -294,7 +324,7 @@ Partial Class sdgThemes
         '
         Me.ucrNudHjust.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudHjust.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.ucrNudHjust.Location = New System.Drawing.Point(94, 43)
+        Me.ucrNudHjust.Location = New System.Drawing.Point(94, 46)
         Me.ucrNudHjust.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudHjust.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudHjust.Name = "ucrNudHjust"
@@ -305,7 +335,7 @@ Partial Class sdgThemes
         'lblSize
         '
         Me.lblSize.AutoSize = True
-        Me.lblSize.Location = New System.Drawing.Point(13, 22)
+        Me.lblSize.Location = New System.Drawing.Point(13, 21)
         Me.lblSize.Name = "lblSize"
         Me.lblSize.Size = New System.Drawing.Size(30, 13)
         Me.lblSize.TabIndex = 29
@@ -315,7 +345,7 @@ Partial Class sdgThemes
         '
         Me.ucrNudsize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudsize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudsize.Location = New System.Drawing.Point(94, 17)
+        Me.ucrNudsize.Location = New System.Drawing.Point(94, 16)
         Me.ucrNudsize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudsize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudsize.Name = "ucrNudsize"
@@ -326,7 +356,7 @@ Partial Class sdgThemes
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(13, 237)
+        Me.Label2.Location = New System.Drawing.Point(13, 220)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(40, 13)
         Me.Label2.TabIndex = 27
@@ -336,7 +366,7 @@ Partial Class sdgThemes
         '
         Me.ucrInputColour.AddQuotesIfUnrecognised = True
         Me.ucrInputColour.IsReadOnly = False
-        Me.ucrInputColour.Location = New System.Drawing.Point(73, 229)
+        Me.ucrInputColour.Location = New System.Drawing.Point(73, 217)
         Me.ucrInputColour.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputColour.Name = "ucrInputColour"
         Me.ucrInputColour.Size = New System.Drawing.Size(137, 21)
@@ -345,7 +375,7 @@ Partial Class sdgThemes
         'lblFace
         '
         Me.lblFace.AutoSize = True
-        Me.lblFace.Location = New System.Drawing.Point(13, 209)
+        Me.lblFace.Location = New System.Drawing.Point(13, 196)
         Me.lblFace.Name = "lblFace"
         Me.lblFace.Size = New System.Drawing.Size(34, 13)
         Me.lblFace.TabIndex = 25
@@ -355,7 +385,7 @@ Partial Class sdgThemes
         '
         Me.ucrInputFace.AddQuotesIfUnrecognised = True
         Me.ucrInputFace.IsReadOnly = False
-        Me.ucrInputFace.Location = New System.Drawing.Point(73, 201)
+        Me.ucrInputFace.Location = New System.Drawing.Point(73, 189)
         Me.ucrInputFace.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputFace.Name = "ucrInputFace"
         Me.ucrInputFace.Size = New System.Drawing.Size(137, 21)
@@ -364,7 +394,7 @@ Partial Class sdgThemes
         'lblFamily
         '
         Me.lblFamily.AutoSize = True
-        Me.lblFamily.Location = New System.Drawing.Point(13, 182)
+        Me.lblFamily.Location = New System.Drawing.Point(13, 166)
         Me.lblFamily.Name = "lblFamily"
         Me.lblFamily.Size = New System.Drawing.Size(39, 13)
         Me.lblFamily.TabIndex = 23
@@ -374,7 +404,7 @@ Partial Class sdgThemes
         '
         Me.ucrInputFamily.AddQuotesIfUnrecognised = True
         Me.ucrInputFamily.IsReadOnly = False
-        Me.ucrInputFamily.Location = New System.Drawing.Point(73, 174)
+        Me.ucrInputFamily.Location = New System.Drawing.Point(73, 162)
         Me.ucrInputFamily.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputFamily.Name = "ucrInputFamily"
         Me.ucrInputFamily.Size = New System.Drawing.Size(137, 21)
@@ -382,8 +412,8 @@ Partial Class sdgThemes
         '
         'tbYaxis
         '
-        Me.tbYaxis.Controls.Add(Me.grpGraphOptions)
-        Me.tbYaxis.Controls.Add(Me.grpGraphType)
+        Me.tbYaxis.Controls.Add(Me.GroupBox3)
+        Me.tbYaxis.Controls.Add(Me.GroupBox2)
         Me.tbYaxis.Location = New System.Drawing.Point(4, 22)
         Me.tbYaxis.Name = "tbYaxis"
         Me.tbYaxis.Padding = New System.Windows.Forms.Padding(3)
@@ -392,176 +422,287 @@ Partial Class sdgThemes
         Me.tbYaxis.Text = "Y-axis"
         Me.tbYaxis.UseVisualStyleBackColor = True
         '
-        'grpGraphOptions
+        'GroupBox2
         '
-        Me.grpGraphOptions.Controls.Add(Me.lblTitle)
-        Me.grpGraphOptions.Controls.Add(Me.lblHjust5)
-        Me.grpGraphOptions.Controls.Add(Me.lblVjust1)
-        Me.grpGraphOptions.Controls.Add(Me.ucrInputGraphTitle)
-        Me.grpGraphOptions.Controls.Add(Me.ucrInputHorizontalLabels)
-        Me.grpGraphOptions.Controls.Add(Me.ucrInputVerticalLabels)
-        Me.grpGraphOptions.Controls.Add(Me.ucrChkShowMissing)
-        Me.grpGraphOptions.Controls.Add(Me.ucrChkShowPercentage)
-        Me.grpGraphOptions.Controls.Add(Me.ucrChkShowCount)
-        Me.grpGraphOptions.Location = New System.Drawing.Point(6, 59)
-        Me.grpGraphOptions.Name = "grpGraphOptions"
-        Me.grpGraphOptions.Size = New System.Drawing.Size(329, 184)
-        Me.grpGraphOptions.TabIndex = 1
-        Me.grpGraphOptions.TabStop = False
-        Me.grpGraphOptions.Text = "Graph Options"
+        Me.GroupBox2.Controls.Add(Me.Label1)
+        Me.GroupBox2.Controls.Add(Me.UcrNud1)
+        Me.GroupBox2.Controls.Add(Me.Label3)
+        Me.GroupBox2.Controls.Add(Me.UcrNud2)
+        Me.GroupBox2.Controls.Add(Me.Label4)
+        Me.GroupBox2.Controls.Add(Me.UcrNud3)
+        Me.GroupBox2.Controls.Add(Me.Label5)
+        Me.GroupBox2.Controls.Add(Me.UcrNud4)
+        Me.GroupBox2.Controls.Add(Me.Label6)
+        Me.GroupBox2.Controls.Add(Me.UcrNud5)
+        Me.GroupBox2.Controls.Add(Me.Label7)
+        Me.GroupBox2.Controls.Add(Me.UcrInputComboBox1)
+        Me.GroupBox2.Controls.Add(Me.Label8)
+        Me.GroupBox2.Controls.Add(Me.UcrInputComboBox2)
+        Me.GroupBox2.Controls.Add(Me.Label9)
+        Me.GroupBox2.Controls.Add(Me.UcrInputComboBox3)
+        Me.GroupBox2.Location = New System.Drawing.Point(6, 6)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(230, 245)
+        Me.GroupBox2.TabIndex = 24
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Y axis label"
         '
-        'lblTitle
+        'Label1
         '
-        Me.lblTitle.AutoSize = True
-        Me.lblTitle.Location = New System.Drawing.Point(12, 155)
-        Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(62, 13)
-        Me.lblTitle.TabIndex = 7
-        Me.lblTitle.Text = "Graph Title:"
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(13, 77)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(33, 13)
+        Me.Label1.TabIndex = 37
+        Me.Label1.Text = "Vjust:"
         '
-        'lblHjust5
+        'UcrNud1
         '
-        Me.lblHjust5.AutoSize = True
-        Me.lblHjust5.Location = New System.Drawing.Point(12, 127)
-        Me.lblHjust5.Name = "lblHjust5"
-        Me.lblHjust5.Size = New System.Drawing.Size(126, 13)
-        Me.lblHjust5.TabIndex = 5
-        Me.lblHjust5.Text = "Horizontal Label Position:"
+        Me.UcrNud1.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.UcrNud1.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
+        Me.UcrNud1.Location = New System.Drawing.Point(94, 76)
+        Me.UcrNud1.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.UcrNud1.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.UcrNud1.Name = "UcrNud1"
+        Me.UcrNud1.Size = New System.Drawing.Size(50, 20)
+        Me.UcrNud1.TabIndex = 38
+        Me.UcrNud1.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'lblVjust1
+        'Label3
         '
-        Me.lblVjust1.AutoSize = True
-        Me.lblVjust1.Location = New System.Drawing.Point(12, 99)
-        Me.lblVjust1.Name = "lblVjust1"
-        Me.lblVjust1.Size = New System.Drawing.Size(114, 13)
-        Me.lblVjust1.TabIndex = 3
-        Me.lblVjust1.Text = "Vertical Label Position:"
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(13, 105)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(64, 13)
+        Me.Label3.TabIndex = 35
+        Me.Label3.Text = "Line Height:"
         '
-        'ucrInputGraphTitle
+        'UcrNud2
         '
-        Me.ucrInputGraphTitle.AddQuotesIfUnrecognised = True
-        Me.ucrInputGraphTitle.IsMultiline = False
-        Me.ucrInputGraphTitle.IsReadOnly = False
-        Me.ucrInputGraphTitle.Location = New System.Drawing.Point(141, 151)
-        Me.ucrInputGraphTitle.Name = "ucrInputGraphTitle"
-        Me.ucrInputGraphTitle.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputGraphTitle.TabIndex = 8
+        Me.UcrNud2.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.UcrNud2.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
+        Me.UcrNud2.Location = New System.Drawing.Point(94, 106)
+        Me.UcrNud2.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.UcrNud2.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.UcrNud2.Name = "UcrNud2"
+        Me.UcrNud2.Size = New System.Drawing.Size(50, 20)
+        Me.UcrNud2.TabIndex = 36
+        Me.UcrNud2.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrInputHorizontalLabels
+        'Label4
         '
-        Me.ucrInputHorizontalLabels.AddQuotesIfUnrecognised = True
-        Me.ucrInputHorizontalLabels.IsReadOnly = False
-        Me.ucrInputHorizontalLabels.Location = New System.Drawing.Point(141, 123)
-        Me.ucrInputHorizontalLabels.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.ucrInputHorizontalLabels.Name = "ucrInputHorizontalLabels"
-        Me.ucrInputHorizontalLabels.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputHorizontalLabels.TabIndex = 6
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(13, 133)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(37, 13)
+        Me.Label4.TabIndex = 33
+        Me.Label4.Text = "Angle:"
         '
-        'ucrInputVerticalLabels
+        'UcrNud3
         '
-        Me.ucrInputVerticalLabels.AddQuotesIfUnrecognised = True
-        Me.ucrInputVerticalLabels.IsReadOnly = False
-        Me.ucrInputVerticalLabels.Location = New System.Drawing.Point(141, 95)
-        Me.ucrInputVerticalLabels.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.ucrInputVerticalLabels.Name = "ucrInputVerticalLabels"
-        Me.ucrInputVerticalLabels.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputVerticalLabels.TabIndex = 4
+        Me.UcrNud3.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.UcrNud3.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.UcrNud3.Location = New System.Drawing.Point(94, 136)
+        Me.UcrNud3.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.UcrNud3.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.UcrNud3.Name = "UcrNud3"
+        Me.UcrNud3.Size = New System.Drawing.Size(50, 20)
+        Me.UcrNud3.TabIndex = 34
+        Me.UcrNud3.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrChkShowMissing
+        'Label5
         '
-        Me.ucrChkShowMissing.Checked = False
-        Me.ucrChkShowMissing.Location = New System.Drawing.Point(12, 73)
-        Me.ucrChkShowMissing.Name = "ucrChkShowMissing"
-        Me.ucrChkShowMissing.Size = New System.Drawing.Size(145, 20)
-        Me.ucrChkShowMissing.TabIndex = 2
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(13, 49)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(34, 13)
+        Me.Label5.TabIndex = 31
+        Me.Label5.Text = "Hjust:"
         '
-        'ucrChkShowPercentage
+        'UcrNud4
         '
-        Me.ucrChkShowPercentage.Checked = False
-        Me.ucrChkShowPercentage.Location = New System.Drawing.Point(12, 19)
-        Me.ucrChkShowPercentage.Name = "ucrChkShowPercentage"
-        Me.ucrChkShowPercentage.Size = New System.Drawing.Size(145, 20)
-        Me.ucrChkShowPercentage.TabIndex = 0
+        Me.UcrNud4.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.UcrNud4.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
+        Me.UcrNud4.Location = New System.Drawing.Point(94, 46)
+        Me.UcrNud4.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.UcrNud4.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.UcrNud4.Name = "UcrNud4"
+        Me.UcrNud4.Size = New System.Drawing.Size(50, 20)
+        Me.UcrNud4.TabIndex = 32
+        Me.UcrNud4.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrChkShowCount
+        'Label6
         '
-        Me.ucrChkShowCount.Checked = False
-        Me.ucrChkShowCount.Location = New System.Drawing.Point(12, 46)
-        Me.ucrChkShowCount.Name = "ucrChkShowCount"
-        Me.ucrChkShowCount.Size = New System.Drawing.Size(145, 20)
-        Me.ucrChkShowCount.TabIndex = 1
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(13, 21)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(30, 13)
+        Me.Label6.TabIndex = 29
+        Me.Label6.Text = "Size:"
         '
-        'grpGraphType
+        'UcrNud5
         '
-        Me.grpGraphType.Controls.Add(Me.rdoLine)
-        Me.grpGraphType.Controls.Add(Me.rdoDot)
-        Me.grpGraphType.Controls.Add(Me.rdoBar)
-        Me.grpGraphType.Controls.Add(Me.ucrPnlGraphType)
-        Me.grpGraphType.Location = New System.Drawing.Point(6, 6)
-        Me.grpGraphType.Name = "grpGraphType"
-        Me.grpGraphType.Size = New System.Drawing.Size(327, 48)
-        Me.grpGraphType.TabIndex = 0
-        Me.grpGraphType.TabStop = False
-        Me.grpGraphType.Text = "Type of Graph"
+        Me.UcrNud5.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.UcrNud5.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.UcrNud5.Location = New System.Drawing.Point(94, 16)
+        Me.UcrNud5.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.UcrNud5.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.UcrNud5.Name = "UcrNud5"
+        Me.UcrNud5.Size = New System.Drawing.Size(50, 20)
+        Me.UcrNud5.TabIndex = 30
+        Me.UcrNud5.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'rdoLine
+        'Label7
         '
-        Me.rdoLine.AutoSize = True
-        Me.rdoLine.Location = New System.Drawing.Point(242, 19)
-        Me.rdoLine.Name = "rdoLine"
-        Me.rdoLine.Size = New System.Drawing.Size(77, 17)
-        Me.rdoLine.TabIndex = 3
-        Me.rdoLine.TabStop = True
-        Me.rdoLine.Text = "Line Graph"
-        Me.rdoLine.UseVisualStyleBackColor = True
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(13, 220)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(40, 13)
+        Me.Label7.TabIndex = 27
+        Me.Label7.Text = "Colour:"
         '
-        'rdoDot
+        'UcrInputComboBox1
         '
-        Me.rdoDot.AutoSize = True
-        Me.rdoDot.Location = New System.Drawing.Point(118, 19)
-        Me.rdoDot.Name = "rdoDot"
-        Me.rdoDot.Size = New System.Drawing.Size(74, 17)
-        Me.rdoDot.TabIndex = 2
-        Me.rdoDot.TabStop = True
-        Me.rdoDot.Text = "Dot Graph"
-        Me.rdoDot.UseVisualStyleBackColor = True
+        Me.UcrInputComboBox1.AddQuotesIfUnrecognised = True
+        Me.UcrInputComboBox1.IsReadOnly = False
+        Me.UcrInputComboBox1.Location = New System.Drawing.Point(73, 217)
+        Me.UcrInputComboBox1.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.UcrInputComboBox1.Name = "UcrInputComboBox1"
+        Me.UcrInputComboBox1.Size = New System.Drawing.Size(137, 21)
+        Me.UcrInputComboBox1.TabIndex = 28
         '
-        'rdoBar
+        'Label8
         '
-        Me.rdoBar.AutoSize = True
-        Me.rdoBar.Location = New System.Drawing.Point(6, 19)
-        Me.rdoBar.Name = "rdoBar"
-        Me.rdoBar.Size = New System.Drawing.Size(73, 17)
-        Me.rdoBar.TabIndex = 1
-        Me.rdoBar.TabStop = True
-        Me.rdoBar.Text = "Bar Graph"
-        Me.rdoBar.UseVisualStyleBackColor = True
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(13, 196)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(34, 13)
+        Me.Label8.TabIndex = 25
+        Me.Label8.Text = "Face:"
         '
-        'ucrPnlGraphType
+        'UcrInputComboBox2
         '
-        Me.ucrPnlGraphType.Location = New System.Drawing.Point(6, 7)
-        Me.ucrPnlGraphType.Name = "ucrPnlGraphType"
-        Me.ucrPnlGraphType.Size = New System.Drawing.Size(323, 44)
-        Me.ucrPnlGraphType.TabIndex = 0
+        Me.UcrInputComboBox2.AddQuotesIfUnrecognised = True
+        Me.UcrInputComboBox2.IsReadOnly = False
+        Me.UcrInputComboBox2.Location = New System.Drawing.Point(73, 189)
+        Me.UcrInputComboBox2.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.UcrInputComboBox2.Name = "UcrInputComboBox2"
+        Me.UcrInputComboBox2.Size = New System.Drawing.Size(137, 21)
+        Me.UcrInputComboBox2.TabIndex = 26
         '
-        'lblLineEnd
+        'Label9
         '
-        Me.lblLineEnd.AutoSize = True
-        Me.lblLineEnd.Location = New System.Drawing.Point(12, 108)
-        Me.lblLineEnd.Name = "lblLineEnd"
-        Me.lblLineEnd.Size = New System.Drawing.Size(52, 13)
-        Me.lblLineEnd.TabIndex = 31
-        Me.lblLineEnd.Text = "Line End:"
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(13, 166)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(39, 13)
+        Me.Label9.TabIndex = 23
+        Me.Label9.Text = "Family:"
         '
-        'ucrInputLineEnd
+        'UcrInputComboBox3
         '
-        Me.ucrInputLineEnd.AddQuotesIfUnrecognised = True
-        Me.ucrInputLineEnd.IsReadOnly = False
-        Me.ucrInputLineEnd.Location = New System.Drawing.Point(72, 100)
-        Me.ucrInputLineEnd.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.ucrInputLineEnd.Name = "ucrInputLineEnd"
-        Me.ucrInputLineEnd.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputLineEnd.TabIndex = 32
+        Me.UcrInputComboBox3.AddQuotesIfUnrecognised = True
+        Me.UcrInputComboBox3.IsReadOnly = False
+        Me.UcrInputComboBox3.Location = New System.Drawing.Point(73, 162)
+        Me.UcrInputComboBox3.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.UcrInputComboBox3.Name = "UcrInputComboBox3"
+        Me.UcrInputComboBox3.Size = New System.Drawing.Size(137, 21)
+        Me.UcrInputComboBox3.TabIndex = 24
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.Label10)
+        Me.GroupBox3.Controls.Add(Me.UcrInputComboBox4)
+        Me.GroupBox3.Controls.Add(Me.Label11)
+        Me.GroupBox3.Controls.Add(Me.UcrNud6)
+        Me.GroupBox3.Controls.Add(Me.Label12)
+        Me.GroupBox3.Controls.Add(Me.UcrInputComboBox5)
+        Me.GroupBox3.Controls.Add(Me.Label13)
+        Me.GroupBox3.Controls.Add(Me.UcrInputComboBox6)
+        Me.GroupBox3.Location = New System.Drawing.Point(252, 8)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(230, 154)
+        Me.GroupBox3.TabIndex = 40
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "tick marks along axes"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(12, 108)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(52, 13)
+        Me.Label10.TabIndex = 31
+        Me.Label10.Text = "Line End:"
+        '
+        'UcrInputComboBox4
+        '
+        Me.UcrInputComboBox4.AddQuotesIfUnrecognised = True
+        Me.UcrInputComboBox4.IsReadOnly = False
+        Me.UcrInputComboBox4.Location = New System.Drawing.Point(72, 100)
+        Me.UcrInputComboBox4.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.UcrInputComboBox4.Name = "UcrInputComboBox4"
+        Me.UcrInputComboBox4.Size = New System.Drawing.Size(137, 21)
+        Me.UcrInputComboBox4.TabIndex = 32
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(13, 22)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(30, 13)
+        Me.Label11.TabIndex = 29
+        Me.Label11.Text = "Size:"
+        '
+        'UcrNud6
+        '
+        Me.UcrNud6.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.UcrNud6.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.UcrNud6.Location = New System.Drawing.Point(94, 17)
+        Me.UcrNud6.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.UcrNud6.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.UcrNud6.Name = "UcrNud6"
+        Me.UcrNud6.Size = New System.Drawing.Size(50, 20)
+        Me.UcrNud6.TabIndex = 30
+        Me.UcrNud6.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(12, 76)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(40, 13)
+        Me.Label12.TabIndex = 27
+        Me.Label12.Text = "Colour:"
+        '
+        'UcrInputComboBox5
+        '
+        Me.UcrInputComboBox5.AddQuotesIfUnrecognised = True
+        Me.UcrInputComboBox5.IsReadOnly = False
+        Me.UcrInputComboBox5.Location = New System.Drawing.Point(72, 68)
+        Me.UcrInputComboBox5.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.UcrInputComboBox5.Name = "UcrInputComboBox5"
+        Me.UcrInputComboBox5.Size = New System.Drawing.Size(137, 21)
+        Me.UcrInputComboBox5.TabIndex = 28
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(12, 47)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(57, 13)
+        Me.Label13.TabIndex = 25
+        Me.Label13.Text = "Line Type:"
+        '
+        'UcrInputComboBox6
+        '
+        Me.UcrInputComboBox6.AddQuotesIfUnrecognised = True
+        Me.UcrInputComboBox6.IsReadOnly = False
+        Me.UcrInputComboBox6.Location = New System.Drawing.Point(72, 40)
+        Me.UcrInputComboBox6.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.UcrInputComboBox6.Name = "UcrInputComboBox6"
+        Me.UcrInputComboBox6.Size = New System.Drawing.Size(137, 21)
+        Me.UcrInputComboBox6.TabIndex = 26
         '
         'sdgThemes
         '
@@ -584,10 +725,10 @@ Partial Class sdgThemes
         Me.grpThemetext.ResumeLayout(False)
         Me.grpThemetext.PerformLayout()
         Me.tbYaxis.ResumeLayout(False)
-        Me.grpGraphOptions.ResumeLayout(False)
-        Me.grpGraphOptions.PerformLayout()
-        Me.grpGraphType.ResumeLayout(False)
-        Me.grpGraphType.PerformLayout()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -597,21 +738,6 @@ Partial Class sdgThemes
     Friend WithEvents tbAxis As TabPage
     Friend WithEvents grpTableOptions As GroupBox
     Friend WithEvents tbYaxis As TabPage
-    Friend WithEvents grpGraphOptions As GroupBox
-    Friend WithEvents lblTitle As Label
-    Friend WithEvents lblHjust5 As Label
-    Friend WithEvents lblVjust1 As Label
-    Friend WithEvents ucrInputGraphTitle As ucrInputTextBox
-    Friend WithEvents ucrInputHorizontalLabels As ucrInputComboBox
-    Friend WithEvents ucrInputVerticalLabels As ucrInputComboBox
-    Friend WithEvents ucrChkShowMissing As ucrCheck
-    Friend WithEvents ucrChkShowPercentage As ucrCheck
-    Friend WithEvents ucrChkShowCount As ucrCheck
-    Friend WithEvents grpGraphType As GroupBox
-    Friend WithEvents rdoLine As RadioButton
-    Friend WithEvents rdoDot As RadioButton
-    Friend WithEvents rdoBar As RadioButton
-    Friend WithEvents ucrPnlGraphType As UcrPanel
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents lblSizeSegment As Label
     Friend WithEvents ucrNudSizeSegment As ucrNud
@@ -638,4 +764,30 @@ Partial Class sdgThemes
     Friend WithEvents ucrInputFamily As ucrInputComboBox
     Friend WithEvents lblLineEnd As Label
     Friend WithEvents ucrInputLineEnd As ucrInputComboBox
+    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents Label1 As Label
+    Friend WithEvents UcrNud1 As ucrNud
+    Friend WithEvents Label3 As Label
+    Friend WithEvents UcrNud2 As ucrNud
+    Friend WithEvents Label4 As Label
+    Friend WithEvents UcrNud3 As ucrNud
+    Friend WithEvents Label5 As Label
+    Friend WithEvents UcrNud4 As ucrNud
+    Friend WithEvents Label6 As Label
+    Friend WithEvents UcrNud5 As ucrNud
+    Friend WithEvents Label7 As Label
+    Friend WithEvents UcrInputComboBox1 As ucrInputComboBox
+    Friend WithEvents Label8 As Label
+    Friend WithEvents UcrInputComboBox2 As ucrInputComboBox
+    Friend WithEvents Label9 As Label
+    Friend WithEvents UcrInputComboBox3 As ucrInputComboBox
+    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents Label10 As Label
+    Friend WithEvents UcrInputComboBox4 As ucrInputComboBox
+    Friend WithEvents Label11 As Label
+    Friend WithEvents UcrNud6 As ucrNud
+    Friend WithEvents Label12 As Label
+    Friend WithEvents UcrInputComboBox5 As ucrInputComboBox
+    Friend WithEvents Label13 As Label
+    Friend WithEvents UcrInputComboBox6 As ucrInputComboBox
 End Class
