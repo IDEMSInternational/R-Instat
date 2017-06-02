@@ -29,6 +29,7 @@ Public Class sdgThemes
         Dim dctucrInputFace As New Dictionary(Of String, String)
         Dim dctucrInputFamily As New Dictionary(Of String, String)
         Dim dctucrInputLineType As New Dictionary(Of String, String)
+        Dim dctucrInputLineEnd As New Dictionary(Of String, String)
 
         'Text Theme
         ucrNudsize.SetParameter(New RParameter("size"))
@@ -49,6 +50,7 @@ Public Class sdgThemes
         dctucrInputFace.Add("Plain", Chr(34) & "plain" & Chr(34))
         dctucrInputFace.Add("Bold", Chr(34) & "bold" & Chr(34))
         dctucrInputFace.Add("Italic", Chr(34) & "italic" & Chr(34))
+        dctucrInputFace.Add("Bold italic", Chr(34) & "bold.italic" & Chr(34))
         ucrInputFace.SetItems(dctucrInputFace)
         ucrInputFace.SetRDefault(Chr(34) & "plain" & Chr(34))
 
@@ -64,13 +66,23 @@ Public Class sdgThemes
 
         dctucrInputFamily.Add("Times Roman", Chr(34) & "Times" & Chr(34))
         dctucrInputFamily.Add("Courier", Chr(34) & "Courier" & Chr(34))
+        dctucrInputFamily.Add("Couriersans", Chr(34) & "Couriersans" & Chr(34))
         dctucrInputFamily.Add("Serif", Chr(34) & "serif" & Chr(34))
         dctucrInputFamily.Add("NimbusSanCond", Chr(34) & "NimbusSanCond" & Chr(34))
         dctucrInputFamily.Add("CenturySch", Chr(34) & "CenturySch" & Chr(34))
         dctucrInputFamily.Add("NewCenturySchoolbook", Chr(34) & "NewCenturySchoolbook" & Chr(34))
         dctucrInputFamily.Add("Palatino", Chr(34) & "Palatino" & Chr(34))
         dctucrInputFamily.Add("Bookman", Chr(34) & "Bookman" & Chr(34))
+        dctucrInputFamily.Add("URWBookman", Chr(34) & "URWBookman" & Chr(34))
         dctucrInputFamily.Add("URWGothic", Chr(34) & "URWGothic" & Chr(34))
+        dctucrInputFamily.Add("NimbusRom", Chr(34) & "NimbusRom" & Chr(34))
+        dctucrInputFamily.Add("URWPalladioURWTimes", Chr(34) & "URWPalladioURWTimes" & Chr(34))
+        dctucrInputFamily.Add("NimbusMonURWHelvetica", Chr(34) & "NimbusMonURWHelvetica" & Chr(34))
+        dctucrInputFamily.Add("Helvetica - Narrow", Chr(34) & "Helvetica - Narrow" & Chr(34))
+        dctucrInputFamily.Add("Helveticaserif", Chr(34) & "Helveticaserif" & Chr(34))
+        dctucrInputFamily.Add("Short", Chr(34) & "Short" & Chr(34))
+        dctucrInputFamily.Add("Canonicalmono", Chr(34) & "Canonicalmono" & Chr(34))
+        dctucrInputFamily.Add("AvantGarde", Chr(34) & "AvantGarde" & Chr(34))
         ucrInputFamily.SetItems(dctucrInputFamily)
         ucrInputFamily.SetRDefault(Chr(34) & "Times" & Chr(34))
         ucrInputFamily.bUpdateRCodeFromControl = False
@@ -103,6 +115,15 @@ Public Class sdgThemes
         dctucrInputColourSegment.Add("Yellow-Green", Chr(34) & "yellowgreen" & Chr(34))
         ucrInputColourSegment.SetItems(dctucrInputColourSegment)
         ucrInputColourSegment.SetRDefault(Chr(34) & "black" & Chr(34))
+
+        ucrInputLineEnd.SetParameter(New RParameter("lineend"))
+        dctucrInputLineEnd.Add("NULL", Chr(34) & "NULL" & Chr(34))
+        dctucrInputLineEnd.Add("round", Chr(34) & "round" & Chr(34))
+        dctucrInputLineEnd.Add("butt", Chr(34) & "butt" & Chr(34))
+        dctucrInputLineEnd.Add("square", Chr(34) & "square" & Chr(34))
+        ucrInputLineEnd.SetItems(dctucrInputLineEnd)
+        ucrInputLineEnd.SetRDefault(Chr(34) & "NULL" & Chr(34))
+        ucrInputLineEnd.bUpdateRCodeFromControl = False
 
         bControlsInitialised = True
     End Sub
