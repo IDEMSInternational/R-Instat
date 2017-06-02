@@ -40,19 +40,19 @@ Public Class dlgFactorDataFrame
         ucrSelectorFactorDataFrame.SetParameterIsString()
 
         ' ucrreceiver
-        ucrReceiverFactorDataFrame.SetParameter(New RParameter("factor", 0))
+        ucrReceiverFactorDataFrame.SetParameter(New RParameter("factor", 1))
         ucrReceiverFactorDataFrame.SetParameterIsString()
         ucrReceiverFactorDataFrame.Selector = ucrSelectorFactorDataFrame
         ucrReceiverFactorDataFrame.SetMeAsReceiver()
         ucrReceiverFactorDataFrame.SetIncludedDataTypes({"factor"})
 
         'ucrnewname
-        ucrInputFactorNames.SetParameter(New RParameter("factor_data_frame_name", 1))
+        ucrInputFactorNames.SetParameter(New RParameter("factor_data_frame_name", 2))
         ucrInputFactorNames.SetValidationTypeAsRVariable()
 
         'chk boxes
         ucrChkAddCurrentContrasts.SetText("Add Current Contrasts")
-        ucrChkAddCurrentContrasts.SetParameter(New RParameter("include_contrasts", 2))
+        ucrChkAddCurrentContrasts.SetParameter(New RParameter("include_contrasts", 4))
         ucrChkAddCurrentContrasts.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkAddCurrentContrasts.SetRDefault("TRUE")
 
