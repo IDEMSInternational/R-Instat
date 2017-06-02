@@ -30,8 +30,19 @@
             Dim clsXlabTempFunc As New RFunction
 
             clsXlabTempFunc.SetPackageName("ggplot2")
-            clsXlabTempFunc.SetRCommand("xlabs")
+            clsXlabTempFunc.SetRCommand("xlab")
             clsXlabTempFunc.AddParameter("label", Chr(34) & Chr(34))
+            Return clsXlabTempFunc
+        End Get
+    End Property
+
+    Public Shared ReadOnly Property clsXScalecontinuousFunction As RFunction
+        Get
+            Dim clsXlabTempFunc As New RFunction
+
+            clsXlabTempFunc.SetPackageName("ggplot2")
+            clsXlabTempFunc.SetRCommand("scale_x_continuous")
+
             Return clsXlabTempFunc
         End Get
     End Property
