@@ -23,6 +23,11 @@ Public Class sdgThemes
         autoTranslate(Me)
     End Sub
 
+    Private Sub lblHjust_Click(sender As Object, e As EventArgs) Handles lblHjust.Click
+
+    End Sub
+
+
     Public Sub InitialiseControls()
         Dim dctucrInputColour As New Dictionary(Of String, String)
         Dim dctucrInputColourSegment As New Dictionary(Of String, String)
@@ -138,6 +143,7 @@ Public Class sdgThemes
         clsGgThemes.SetRCommand("theme")
 
         clsTextTheme.SetRCommand("element_text")
+        clsSegmentTheme.SetRCommand("element_line")
 
         'For Setting default values for the nuds 
         '' clsTextTheme.AddParameter("size", 10)
@@ -146,13 +152,20 @@ Public Class sdgThemes
         ''clsTextTheme.AddParameter("vjust", 0.5)
         ''clsTextTheme.AddParameter("lineheight", 1.1)
 
-        clsSegmentTheme.SetRCommand("element_line")
+
 
         'For Setting default values for the nuds 
         '' clsSegmentTheme.AddParameter("size", 0.5)
         '' clsSegmentTheme.AddParameter("linetype", 1)
         clsGgThemes.AddParameter("axis.ticks", clsRFunctionParameter:=clsSegmentTheme)
-        clsGgThemes.AddParameter(" axis.text.x", clsRFunctionParameter:=clsTextTheme)
+        clsGgThemes.AddParameter("axis.title", clsRFunctionParameter:=clsTextTheme)
+        clsGgThemes.AddParameter("axis.text.x", clsRFunctionParameter:=clsTextTheme)
+        clsGgThemes.AddParameter("axis.text", clsRFunctionParameter:=clsTextTheme)
+        clsGgThemes.AddParameter("axis.text", clsRFunctionParameter:=clsTextTheme)
+        clsGgThemes.AddParameter("title", clsRFunctionParameter:=clsTextTheme)
+
+        clsGgThemes.AddParameter("axis.title.y.right", clsRFunctionParameter:=clsTextTheme)
+        clsGgThemes.AddParameter("axis.title.y", clsRFunctionParameter:=clsTextTheme)
 
 
         ucrNudAngle.SetRCode(clsTextTheme, bReset)
