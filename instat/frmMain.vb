@@ -387,6 +387,7 @@ Public Class frmMain
         dlgDeleteSheet.ShowDialog()
     End Sub
 
+
     Private Sub mnuPrepareSheetDeleteColumnsRows_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameDeleteColumnsRows.Click
         dlgDeleteRowsOrColums.ShowDialog()
     End Sub
