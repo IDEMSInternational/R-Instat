@@ -19,7 +19,8 @@ Public Class dlgExtremesClimatic
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
     Private clsExtreme As New RFunction
-    Private clsRunCalcFunc, clsMinMaxCalcFunction, clsMinMaxGroupByFunc, clsMinMaxManipulationsFunc, clsMinMaxSummariseFunc, clsMinMaxFuncExp, clsPeaksFunction As New RFunction
+    Private strCurrDataName As String = ""
+    Private clsRunCalcFunc, clsMinMaxCalcFunction, clsMinMaxGroupByFunc, clsMinMaxManipulationsFunc, clsMinMaxSummariseFunc, clsMinMaxFuncExp, clsPeaksFilterFunction As New RFunction
 
     Private Sub dlgExtremesClimatic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -107,13 +108,20 @@ Public Class dlgExtremesClimatic
         clsMinMaxSummariseFunc = New RFunction
         clsMinMaxManipulationsFunc = New RFunction
         clsMinMaxFuncExp = New RFunction
+        clsPeaksFilterFunction = New RFunction
 
         ucrSelectorClimaticExtremes.Reset()
         ucrInputThresholdValue.Reset()
+        ucrInputSave.SetName("Extreme")
 
-        clsRunCalcFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
-        clsRunCalcFunc.AddParameter("display", "FALSE")
-        clsRunCalcFunc.AddParameter("calc", clsRFunctionParameter:=clsMinMaxSummariseFunc)
+        clsPeaksFilterFunction.SetRCommand("instat_calculation$new")
+        clsPeaksFilterFunction.SetAssignTo("peak_filter")
+        clsPeaksFilterFunction.AddParameter("type", Chr(34) & "filter" & Chr(34))
+        clsPeaksFilterFunction.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames() & ")")
+        clsPeaksFilterFunction.AddParameter("function_exp", Chr(34) & ucrReceiverElement.GetVariableNames(False) & ">=15" & Chr(34))
+        clsPeaksFilterFunction.AddParameter("result_data_frame", ucrInputSave.GetText())
+        clsPeaksFilterFunction.AddParameter("save", 2)
+        clsPeaksFilterFunction.SetAssignTo("grouping")
 
         clsMinMaxSummariseFunc.SetRCommand("instat_calculation$new")
         clsMinMaxSummariseFunc.SetAssignTo("min_max_summary")
@@ -132,7 +140,11 @@ Public Class dlgExtremesClimatic
         'TODO Make option on dialog
         clsMinMaxFuncExp.AddParameter("na.rm", "TRUE")
 
+        clsRunCalcFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
+        clsRunCalcFunc.AddParameter("display", "FALSE")
+        clsRunCalcFunc.AddParameter("calc", clsRFunctionParameter:=clsMinMaxSummariseFunc)
         ucrBase.clsRsyntax.SetBaseRFunction(clsRunCalcFunc)
+
     End Sub
 
     Private Sub TestOkEnabled()
@@ -151,7 +163,7 @@ Public Class dlgExtremesClimatic
     End Sub
 
     Private Sub SetGroupByFuncCalcFrom()
-        Dim strCurrDataName As String = ""
+        'Dim strCurrDataName As String = ""
         Dim strGroupByCalcFrom As String = ""
 
         strCurrDataName = Chr(34) & ucrSelectorClimaticExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34)
@@ -192,8 +204,12 @@ Public Class dlgExtremesClimatic
                 Else
                     ucrInputSave.SetName("min")
                 End If
+                clsMinMaxSummariseFunc.AddParameter("result_name", Chr(34) & ucrInputSave.GetText() & Chr(34))
+                clsRunCalcFunc.AddParameter("calc", clsRFunctionParameter:=clsMinMaxSummariseFunc)
             ElseIf rdoPeaks.Checked Then
                 ucrInputSave.SetName("value")
+                clsPeaksFilterFunction.AddParameter("result_data_frame", Chr(34) & ucrInputSave.GetText() & Chr(34))
+                clsRunCalcFunc.AddParameter("calc", clsRFunctionParameter:=clsPeaksFilterFunction)
             End If
         End If
     End Sub
@@ -208,6 +224,7 @@ Public Class dlgExtremesClimatic
 
     Private Sub ucrReceiverData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlValueChanged
         SetMinMaxSummaryParams()
+        clsPeaksFilterFunction.AddParameter("function_exp", Chr(34) & ucrReceiverElement.GetVariableNames(False) & ">=15" & Chr(34))
     End Sub
 
     Private Sub ucrPnlMaxMin_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMaxMin.ControlValueChanged
@@ -217,5 +234,9 @@ Public Class dlgExtremesClimatic
             clsMinMaxFuncExp.SetRCommand("min")
         End If
         SetMinMaxSummaryParams()
+    End Sub
+
+    Private Sub ucrSelectorClimaticExtremes_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorClimaticExtremes.ControlContentsChanged
+        clsPeaksFilterFunction.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames() & ")")
     End Sub
 End Class
