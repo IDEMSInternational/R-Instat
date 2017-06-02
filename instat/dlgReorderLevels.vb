@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgReorderLevels
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsReorder As New RFunction
+    Private clsReorderFunction As New RFunction
 
     Private Sub dlgReorderLevels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -54,12 +54,12 @@ Public Class dlgReorderLevels
     End Sub
 
     Private Sub SetDefaults()
-        clsReorder = New RFunction
+        clsReorderFunction = New RFunction
         'reset
         ucrSelectorFactorLevelsToReorder.Reset()
         ' Set default function
-        clsReorder.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$reorder_factor_levels")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsReorder)
+        clsReorderFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$reorder_factor_levels")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsReorderFunction)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
