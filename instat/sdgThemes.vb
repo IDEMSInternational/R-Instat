@@ -93,9 +93,9 @@ Public Class sdgThemes
         ucrInputFamily.bUpdateRCodeFromControl = False
 
         'Tick Marks Along Axes
-        ucrNudSizeSegment.SetParameter(New RParameter("size"))
+        ucrNudSizeTickMarks.SetParameter(New RParameter("size"))
 
-        ucrInputLineType.SetParameter(New RParameter("linetype"))
+        ucrInputLineTypeTickMarks.SetParameter(New RParameter("linetype"))
         dctucrInputLineType.Add("Blank", Chr(34) & "blank" & Chr(34))
         dctucrInputLineType.Add("Solid", Chr(34) & "solid" & Chr(34))
         dctucrInputLineType.Add("Dashed", Chr(34) & "dashed" & Chr(34))
@@ -107,31 +107,32 @@ Public Class sdgThemes
         dctucrInputLineType.Add("F1", Chr(34) & "F1" & Chr(34))
         dctucrInputLineType.Add("4C88C488", Chr(34) & "4C88C488" & Chr(34))
         dctucrInputLineType.Add("12345678", Chr(34) & "12345678" & Chr(34))
-        ucrInputLineType.SetItems(dctucrInputLineType)
-        ucrInputLineType.SetRDefault(Chr(34) & "blank" & Chr(34))
-        ucrInputLineType.bUpdateRCodeFromControl = False
+        ucrInputLineTypeTickMarks.SetItems(dctucrInputLineType)
+        ucrInputLineTypeTickMarks.SetRDefault(Chr(34) & "blank" & Chr(34))
+        ucrInputLineTypeTickMarks.bUpdateRCodeFromControl = False
 
-        ucrInputColourSegment.SetParameter(New RParameter("colour"))
+        ucrInputColourTickMarks.SetParameter(New RParameter("colour"))
         dctucrInputColourSegment.Add("Black", Chr(34) & "black" & Chr(34))
         dctucrInputColourSegment.Add("Red", Chr(34) & "red" & Chr(34))
         dctucrInputColourSegment.Add("Blue", Chr(34) & "blue" & Chr(34))
         dctucrInputColourSegment.Add("Grey", Chr(34) & "grey" & Chr(34))
         dctucrInputColourSegment.Add("Yellow", Chr(34) & "yellow" & Chr(34))
         dctucrInputColourSegment.Add("Yellow-Green", Chr(34) & "yellowgreen" & Chr(34))
-        ucrInputColourSegment.SetItems(dctucrInputColourSegment)
-        ucrInputColourSegment.SetRDefault(Chr(34) & "black" & Chr(34))
+        ucrInputColourTickMarks.SetItems(dctucrInputColourSegment)
+        ucrInputColourTickMarks.SetRDefault(Chr(34) & "black" & Chr(34))
 
-        ucrInputLineEnd.SetParameter(New RParameter("lineend"))
-        dctucrInputLineEnd.Add("NULL", Chr(34) & "NULL" & Chr(34))
+        ucrInputLineEndTickMarks.SetParameter(New RParameter("lineend"))
+        '  dctucrInputLineEnd.Add("NULL", Chr(34) & "NULL" & Chr(34))
         dctucrInputLineEnd.Add("round", Chr(34) & "round" & Chr(34))
         dctucrInputLineEnd.Add("butt", Chr(34) & "butt" & Chr(34))
         dctucrInputLineEnd.Add("square", Chr(34) & "square" & Chr(34))
-        ucrInputLineEnd.SetItems(dctucrInputLineEnd)
-        ucrInputLineEnd.SetRDefault(Chr(34) & "NULL" & Chr(34))
-        ucrInputLineEnd.bUpdateRCodeFromControl = False
+        ucrInputLineEndTickMarks.SetItems(dctucrInputLineEnd)
+        ucrInputLineEndTickMarks.SetRDefault(Chr(34) & "square" & Chr(34))
+        ucrInputLineEndTickMarks.bUpdateRCodeFromControl = False
 
         'X axis Label Top  Axis
         ucrNudSizeTopaxis.SetParameter(New RParameter("size"))
+        ucrNudSizeTopaxis.Increment = 0.1
         ucrNudAngleTopAxis.SetParameter(New RParameter("angle"))
         ucrNudAngleTopAxis.SetMinMax(0, 360)
         ucrNudHjustTopAxis.SetParameter(New RParameter("hjust"))
@@ -187,7 +188,7 @@ Public Class sdgThemes
 
         'Tick Marks Along Axes
         ucrNudSizeXTickMarks.SetParameter(New RParameter("size"))
-
+        ucrNudSizeXTickMarks.Increment = 0.1
         ucrInputLineTypeXTickMarks.SetParameter(New RParameter("linetype"))
         dctucrInputLineTypeXTickMarks.Add("Blank", Chr(34) & "blank" & Chr(34))
         dctucrInputLineTypeXTickMarks.Add("Solid", Chr(34) & "solid" & Chr(34))
@@ -212,15 +213,15 @@ Public Class sdgThemes
         dctucrInputColourXTickMarkst.Add("Yellow", Chr(34) & "yellow" & Chr(34))
         dctucrInputColourXTickMarkst.Add("Yellow-Green", Chr(34) & "yellowgreen" & Chr(34))
         ucrInputColourXTickMarks.SetItems(dctucrInputColourXTickMarkst)
-        'ucrInputColourXTickMarks.SetRDefault(Chr(34) & "black" & Chr(34))
+        ucrInputColourXTickMarks.SetRDefault(Chr(34) & "black" & Chr(34))
 
         ucrInputLineEndXTickMarks.SetParameter(New RParameter("lineend"))
-        dctucrInputLineEndXTickMarks.Add("None", Chr(34) & "NULL" & Chr(34))
+        'dctucrInputLineEndXTickMarks.Add("None", Chr(34) & "NULL" & Chr(34))
         dctucrInputLineEndXTickMarks.Add("round", Chr(34) & "round" & Chr(34))
         dctucrInputLineEndXTickMarks.Add("butt", Chr(34) & "butt" & Chr(34))
         dctucrInputLineEndXTickMarks.Add("square", Chr(34) & "square" & Chr(34))
         ucrInputLineEndXTickMarks.SetItems(dctucrInputLineEndXTickMarks)
-        ucrInputLineEndXTickMarks.SetRDefault(Chr(34) & "NULL" & Chr(34))
+        ucrInputLineEndXTickMarks.SetRDefault(Chr(34) & "square" & Chr(34))
         ucrInputLineEndXTickMarks.bUpdateRCodeFromControl = False
 
         bControlsInitialised = True
@@ -230,8 +231,6 @@ Public Class sdgThemes
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
-
-
         clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsGgThemes, iPosition:=15)
         clsGgThemes.SetRCommand("theme")
 
@@ -271,10 +270,10 @@ Public Class sdgThemes
         ucrInputFamily.SetRCode(clsElementText, bReset)
 
         'X axis Label Top Axis
-        ucrNudSizeSegment.SetRCode(clsElementLine, bReset)
-        ucrInputColourSegment.SetRCode(clsElementLine, bReset)
-        ucrInputLineType.SetRCode(clsElementLine, bReset)
-        ucrInputLineEnd.SetRCode(clsElementLine, bReset)
+        ucrNudSizeTickMarks.SetRCode(clsElementLine, bReset)
+        ucrInputColourTickMarks.SetRCode(clsElementLine, bReset)
+        ucrInputLineTypeTickMarks.SetRCode(clsElementLine, bReset)
+        ucrInputLineEndTickMarks.SetRCode(clsElementLine, bReset)
 
         ucrNudAngleTopAxis.SetRCode(clsElementText, bReset)
         ucrNudHjustTopAxis.SetRCode(clsElementText, bReset)
