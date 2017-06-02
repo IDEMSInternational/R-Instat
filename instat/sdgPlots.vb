@@ -43,6 +43,7 @@ Public Class sdgPlots
     Private strSingleFactor As String
     Private strSecondvariable As String
 
+
     'See bLayersDefaultIsGolobal below.
     Private Sub sdgPlots_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'If bFirstLoad Then
@@ -169,12 +170,14 @@ Public Class sdgPlots
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsTitleFunction As RFunction = Nothing, Optional clsNewRFacetFunction As RFunction = Nothing, Optional clsNewThemeParam As RParameter = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewXScalecontinuousFunction As RFunction = Nothing, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsTitleFunction As RFunction = Nothing, Optional clsNewRFacetFunction As RFunction = Nothing, Optional clsNewThemeParam As RParameter = Nothing, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
-        ucrXAxis.SetRCodeForXorY(True)
+
+        ucrXAxis.SetRCodeForXorY(True, clsNewXlabTitleFunction:=clsXLabTitleFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
         clsBaseOperator = clsNewOperator
+
         If clsNewLabsFunction IsNot Nothing Then
             clsLabsFunction = clsNewLabsFunction
         Else
@@ -184,7 +187,7 @@ Public Class sdgPlots
         If clsNewXLabsTitleFunction IsNot Nothing Then
             clsXLabTitleFunction = clsNewXLabsTitleFunction
         Else
-            clsLabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
+            clsXLabTitleFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         End If
 
         If clsNewThemeParam IsNot Nothing Then
@@ -192,6 +195,7 @@ Public Class sdgPlots
         Else
             clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultTheme.Clone())
         End If
+
         'clsRFacetFunction = clsNewRFacetFunction
         ucrInputGraphTitle.SetRCode(clsLabsFunction, bReset)
         ucrInputGraphSubTitle.SetRCode(clsLabsFunction, bReset)
@@ -211,7 +215,7 @@ Public Class sdgPlots
         AddRemoveLabs()
 
 
-        tbpXAxis.Enabled = False
+        ' tbpXAxis.Enabled = False
         tbpYAxis.Enabled = False
         tbpFacet.Enabled = False
         tbpLayers.Enabled = False
