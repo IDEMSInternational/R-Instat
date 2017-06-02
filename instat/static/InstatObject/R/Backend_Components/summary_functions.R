@@ -410,7 +410,11 @@ instat_object$set("public", "summary_table", function(data_name, columns_to_summ
       if(length(out) == 1 ) {
         return(out[[1]])
       }
-      else return(htmlTable::concatHtmlTables(out, headers = ""))
+      else {
+        tabs <- htmlTable::concatHtmlTables(out, headers = "")
+        class(tabs) <- c("htmlTable", "character")
+        return(tabs)
+      }
     }
     else return(out)
   }
@@ -560,7 +564,9 @@ instat_object$set("public", "summary_table", function(data_name, columns_to_summ
             if(length(column_factors) > 0) css.cell[ , ncol(css.cell)] <- "font-weight: 900;"
             if(length(row_factors) > 0) css.cell[nrow(css.cell), ] <- "border-top: 1px solid #BEBEBE; font-weight: 900;"
           }
-          return(htmlTable::htmlTable(shaped_cell_values, caption = caption, total = FALSE, align = align, tfoot = notes, cgroup = cgroup, n.cgroup = n.cgroup, css.cell = css.cell, ... = ...))
+          tab <- htmlTable::htmlTable(shaped_cell_values, caption = caption, total = FALSE, align = align, tfoot = notes, cgroup = cgroup, n.cgroup = n.cgroup, css.cell = css.cell, ... = ...)
+          class(tab) <- class(tab)[!class(tab) == "html"]
+          return(tab)
         }
       }
       else return(shaped_cell_values)
