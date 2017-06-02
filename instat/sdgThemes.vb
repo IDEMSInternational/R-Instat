@@ -23,6 +23,7 @@ Public Class sdgThemes
         autoTranslate(Me)
     End Sub
 
+
     Public Sub InitialiseControls()
         Dim dctucrInputColour As New Dictionary(Of String, String)
         Dim dctucrInputColourTopAxis As New Dictionary(Of String, String)
@@ -188,8 +189,8 @@ Public Class sdgThemes
         ucrInputFamilyTopAxis.bUpdateRCodeFromControl = False
 
         'Tick Marks Along Axes
-        ucrNudSizeXTickMarks.SetParameter(New RParameter("size"))
-        ucrNudSizeXTickMarks.Increment = 0.1
+        ucrNudSizeXTickLabels.SetParameter(New RParameter("size"))
+        ucrNudSizeXTickLabels.Increment = 0.1
         ucrInputLineTypeXTickMarks.SetParameter(New RParameter("linetype"))
         dctucrInputLineTypeXTickMarks.Add("Blank", Chr(34) & "blank" & Chr(34))
         dctucrInputLineTypeXTickMarks.Add("Solid", Chr(34) & "solid" & Chr(34))
@@ -285,7 +286,7 @@ Public Class sdgThemes
         ucrInputFaceTopAxis.SetRCode(clsElementText, bReset)
         ucrInputFamilyTopAxis.SetRCode(clsElementText, bReset)
 
-        ucrNudSizeXTickMarks.SetRCode(clsElementLine, bReset)
+        ucrNudSizeXTickLabels.SetRCode(clsElementLine, bReset)
         ucrInputColourXTickMarks.SetRCode(clsElementLine, bReset)
         ucrInputLineTypeXTickMarks.SetRCode(clsElementLine, bReset)
         ucrInputLineEndXTickMarks.SetRCode(clsElementLine, bReset)
