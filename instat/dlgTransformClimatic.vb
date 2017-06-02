@@ -131,7 +131,6 @@ Public Class dlgTransformClimatic
     End Sub
 
     Private Sub SetDefaults()
-        'clsRTransform = New RFunction
         clsRRollFuncExpr = New RFunction
         clsMatchFun = New RFunction
         clsRollFunction = New RFunction
@@ -166,7 +165,7 @@ Public Class dlgTransformClimatic
         clsRRollFuncExpr.AddParameter("align", Chr(39) & "right" & Chr(39))
         clsRTransform.AddParameter("function_exp", Chr(34) & clsRRollFuncExpr.ToScript.ToString & Chr(34))
         clsRTransform.AddParameter("type", Chr(34) & "calculation" & Chr(34))
-        clsRTransform.AddParameter("result_name", Chr(34) & "moving" & Chr(34))
+        clsRTransform.AddParameter("result_name", Chr(34) & "moving_sum" & Chr(34))
         clsRTransform.AddParameter("manipulations", clsRFunctionParameter:=clsTransformManipulationsFunc)
 
         clsReplaceNA60.SetRCommand("instat_calculation$new")
