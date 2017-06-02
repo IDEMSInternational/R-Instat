@@ -247,7 +247,7 @@ Partial Class sdgThemes
         'ucrNudLineHeight
         '
         Me.ucrNudLineHeight.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudLineHeight.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudLineHeight.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
         Me.ucrNudLineHeight.Location = New System.Drawing.Point(94, 106)
         Me.ucrNudLineHeight.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudLineHeight.Minimum = New Decimal(New Integer() {0, 0, 0, 0})

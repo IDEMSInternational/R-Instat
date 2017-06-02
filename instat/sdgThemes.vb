@@ -28,6 +28,7 @@ Public Class sdgThemes
         Dim dctucrInputColourSegment As New Dictionary(Of String, String)
         Dim dctucrInputFace As New Dictionary(Of String, String)
         Dim dctucrInputFamily As New Dictionary(Of String, String)
+        Dim dctucrInputLineType As New Dictionary(Of String, String)
 
         'Text Theme
         ucrNudsize.SetParameter(New RParameter("size"))
@@ -59,15 +60,7 @@ Public Class sdgThemes
         dctucrInputColour.Add("Yellow-Green", Chr(34) & "yellowgreen" & Chr(34))
         ucrInputColour.SetItems(dctucrInputColour)
         ucrInputColour.SetRDefault(Chr(34) & "black" & Chr(34))
-
-        dctucrInputColourSegment.Add("Black", Chr(34) & "black" & Chr(34))
-        dctucrInputColourSegment.Add("Red", Chr(34) & "red" & Chr(34))
-        dctucrInputColourSegment.Add("Blue", Chr(34) & "blue" & Chr(34))
-        dctucrInputColourSegment.Add("Grey", Chr(34) & "grey" & Chr(34))
-        dctucrInputColourSegment.Add("Yellow", Chr(34) & "yellow" & Chr(34))
-        dctucrInputColourSegment.Add("Yellow-Green", Chr(34) & "yellowgreen" & Chr(34))
-        ucrInputColourSegment.SetItems(dctucrInputColourSegment)
-        ucrInputColourSegment.SetRDefault(Chr(34) & "black" & Chr(34))
+        ucrInputColour.bUpdateRCodeFromControl = False
 
         dctucrInputFamily.Add("Times Roman", Chr(34) & "Times" & Chr(34))
         dctucrInputFamily.Add("Courier", Chr(34) & "Courier" & Chr(34))
@@ -80,12 +73,36 @@ Public Class sdgThemes
         dctucrInputFamily.Add("URWGothic", Chr(34) & "URWGothic" & Chr(34))
         ucrInputFamily.SetItems(dctucrInputFamily)
         ucrInputFamily.SetRDefault(Chr(34) & "Times" & Chr(34))
+        ucrInputFamily.bUpdateRCodeFromControl = False
 
         'Segment Theme
         ucrNudSizeSegment.SetParameter(New RParameter("size"))
-        ucrInputLineType.SetParameter(New RParameter("linetype"))
-        ucrInputColourSegment.SetParameter(New RParameter("colour"))
 
+        ucrInputLineType.SetParameter(New RParameter("linetype"))
+        dctucrInputLineType.Add("Blank", Chr(34) & "blank" & Chr(34))
+        dctucrInputLineType.Add("Solid", Chr(34) & "solid" & Chr(34))
+        dctucrInputLineType.Add("Dashed", Chr(34) & "dashed" & Chr(34))
+        dctucrInputLineType.Add("Dotted", Chr(34) & "dotted" & Chr(34))
+        dctucrInputLineType.Add("Dot-dash", Chr(34) & "dotdash" & Chr(34))
+        dctucrInputLineType.Add("Long-dash", Chr(34) & "longdash" & Chr(34))
+        dctucrInputLineType.Add("Two-Dash", Chr(34) & "twodash" & Chr(34))
+        dctucrInputLineType.Add("1F", Chr(34) & "1F" & Chr(34))
+        dctucrInputLineType.Add("F1", Chr(34) & "F1" & Chr(34))
+        dctucrInputLineType.Add("4C88C488", Chr(34) & "4C88C488" & Chr(34))
+        dctucrInputLineType.Add("12345678", Chr(34) & "12345678" & Chr(34))
+        ucrInputLineType.SetItems(dctucrInputLineType)
+        ucrInputLineType.SetRDefault(Chr(34) & "blank" & Chr(34))
+        ucrInputLineType.bUpdateRCodeFromControl = False
+
+        ucrInputColourSegment.SetParameter(New RParameter("colour"))
+        dctucrInputColourSegment.Add("Black", Chr(34) & "black" & Chr(34))
+        dctucrInputColourSegment.Add("Red", Chr(34) & "red" & Chr(34))
+        dctucrInputColourSegment.Add("Blue", Chr(34) & "blue" & Chr(34))
+        dctucrInputColourSegment.Add("Grey", Chr(34) & "grey" & Chr(34))
+        dctucrInputColourSegment.Add("Yellow", Chr(34) & "yellow" & Chr(34))
+        dctucrInputColourSegment.Add("Yellow-Green", Chr(34) & "yellowgreen" & Chr(34))
+        ucrInputColourSegment.SetItems(dctucrInputColourSegment)
+        ucrInputColourSegment.SetRDefault(Chr(34) & "black" & Chr(34))
 
         bControlsInitialised = True
     End Sub
@@ -99,7 +116,9 @@ Public Class sdgThemes
         clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsGgThemes, iPosition:=15)
         clsGgThemes.SetRCommand("theme")
         clsSegmentTheme.SetRCommand("element_line")
+        clsSegmentTheme.AddParameter()
         clsTextTheme.SetRCommand("element_text")
+        clsTextTheme.AddParameter("")
         clsGgThemes.AddParameter("axis.ticks", clsRFunctionParameter:=clsSegmentTheme)
         clsGgThemes.AddParameter(" axis.text.x", clsRFunctionParameter:=clsTextTheme)
 
