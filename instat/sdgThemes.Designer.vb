@@ -66,6 +66,8 @@ Partial Class sdgThemes
         Me.rdoDot = New System.Windows.Forms.RadioButton()
         Me.rdoBar = New System.Windows.Forms.RadioButton()
         Me.ucrPnlGraphType = New instat.UcrPanel()
+        Me.lblLineEnd = New System.Windows.Forms.Label()
+        Me.ucrInputLineEnd = New instat.ucrInputComboBox()
         Me.tbXaxis.SuspendLayout()
         Me.tbAxis.SuspendLayout()
         Me.grpTableOptions.SuspendLayout()
@@ -117,6 +119,8 @@ Partial Class sdgThemes
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.lblLineEnd)
+        Me.GroupBox1.Controls.Add(Me.ucrInputLineEnd)
         Me.GroupBox1.Controls.Add(Me.lblSizeSegment)
         Me.GroupBox1.Controls.Add(Me.ucrNudSizeSegment)
         Me.GroupBox1.Controls.Add(Me.lblColourSegment)
@@ -125,7 +129,7 @@ Partial Class sdgThemes
         Me.GroupBox1.Controls.Add(Me.ucrInputLineType)
         Me.GroupBox1.Location = New System.Drawing.Point(251, 22)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(230, 110)
+        Me.GroupBox1.Size = New System.Drawing.Size(230, 154)
         Me.GroupBox1.TabIndex = 39
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Segment Theme"
@@ -540,6 +544,25 @@ Partial Class sdgThemes
         Me.ucrPnlGraphType.Size = New System.Drawing.Size(323, 44)
         Me.ucrPnlGraphType.TabIndex = 0
         '
+        'lblLineEnd
+        '
+        Me.lblLineEnd.AutoSize = True
+        Me.lblLineEnd.Location = New System.Drawing.Point(12, 108)
+        Me.lblLineEnd.Name = "lblLineEnd"
+        Me.lblLineEnd.Size = New System.Drawing.Size(52, 13)
+        Me.lblLineEnd.TabIndex = 31
+        Me.lblLineEnd.Text = "Line End:"
+        '
+        'ucrInputLineEnd
+        '
+        Me.ucrInputLineEnd.AddQuotesIfUnrecognised = True
+        Me.ucrInputLineEnd.IsReadOnly = False
+        Me.ucrInputLineEnd.Location = New System.Drawing.Point(72, 100)
+        Me.ucrInputLineEnd.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputLineEnd.Name = "ucrInputLineEnd"
+        Me.ucrInputLineEnd.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputLineEnd.TabIndex = 32
+        '
         'sdgThemes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -613,4 +636,6 @@ Partial Class sdgThemes
     Friend WithEvents ucrInputFace As ucrInputComboBox
     Friend WithEvents lblFamily As Label
     Friend WithEvents ucrInputFamily As ucrInputComboBox
+    Friend WithEvents lblLineEnd As Label
+    Friend WithEvents ucrInputLineEnd As ucrInputComboBox
 End Class
