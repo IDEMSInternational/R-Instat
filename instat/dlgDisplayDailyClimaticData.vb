@@ -15,16 +15,36 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class dlgRemoveUnusedLabels
-    Private Sub dlgRemoveUnusedLabels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrBase.clsRsyntax.SetFunction("droplevels")
-        ucrSelectedVariable.Selector = ucrAddRemove
-        ucrSelectedVariable.SetMeAsReceiver()
+Public Class dlgDisplayDailyClimaticData
+    Private bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
+    Private Sub dlgDisplayDailyClimaticData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+        If bFirstLoad Then
+            InitialiseDialog()
+            bFirstLoad = False
+        End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        TestOkEnabled()
+    End Sub
+
+    Private Sub InitialiseDialog()
 
     End Sub
-    Private Sub ucrSelectedVariable_Leave(sender As Object, e As EventArgs) Handles ucrSelectedVariable.Leave
-        ucrBase.clsRsyntax.AddParameter("X", ucrSelectedVariable.GetVariableNames())
+
+    Private Sub SetDefaults()
+
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Object)
+
+    End Sub
+
+    Private Sub TestOkEnabled()
 
     End Sub
 End Class

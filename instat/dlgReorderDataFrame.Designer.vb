@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class dlgReorderSheet
+Partial Class dlgReorderDataFrame
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,54 +22,54 @@ Partial Class dlgReorderSheet
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.lblSheetsToReoder = New System.Windows.Forms.Label()
-        Me.ucrSheetsToReorder = New instat.ucrReorder()
+        Me.lblDataFrameToReorder = New System.Windows.Forms.Label()
+        Me.ucrDataFrameToReorder = New instat.ucrReorder()
         Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
-        'lblSheetsToReoder
+        'lblDataFrameToReorder
         '
-        Me.lblSheetsToReoder.Location = New System.Drawing.Point(12, 21)
-        Me.lblSheetsToReoder.Name = "lblSheetsToReoder"
-        Me.lblSheetsToReoder.Size = New System.Drawing.Size(100, 23)
-        Me.lblSheetsToReoder.TabIndex = 0
-        Me.lblSheetsToReoder.Text = "Sheets to Reoder"
+        Me.lblDataFrameToReorder.Location = New System.Drawing.Point(10, 22)
+        Me.lblDataFrameToReorder.Name = "lblDataFrameToReorder"
+        Me.lblDataFrameToReorder.Size = New System.Drawing.Size(132, 12)
+        Me.lblDataFrameToReorder.TabIndex = 0
+        Me.lblDataFrameToReorder.Text = "Data Frames to Reorder:"
         '
-        'ucrSheetsToReorder
+        'ucrDataFrameToReorder
         '
-        Me.ucrSheetsToReorder.Location = New System.Drawing.Point(15, 47)
-        Me.ucrSheetsToReorder.Name = "ucrSheetsToReorder"
-        Me.ucrSheetsToReorder.Size = New System.Drawing.Size(154, 139)
-        Me.ucrSheetsToReorder.TabIndex = 1
-        Me.ucrSheetsToReorder.ucrDataFrameList = Nothing
-        Me.ucrSheetsToReorder.ucrReceiver = Nothing
+        Me.ucrDataFrameToReorder.Location = New System.Drawing.Point(8, 35)
+        Me.ucrDataFrameToReorder.Name = "ucrDataFrameToReorder"
+        Me.ucrDataFrameToReorder.Size = New System.Drawing.Size(154, 139)
+        Me.ucrDataFrameToReorder.TabIndex = 1
+        Me.ucrDataFrameToReorder.ucrDataFrameList = Nothing
+        Me.ucrDataFrameToReorder.ucrReceiver = Nothing
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 206)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 180)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 2
         '
-        'dlgReorderSheet
+        'dlgReorderDataFrame
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 261)
-        Me.Controls.Add(Me.lblSheetsToReoder)
-        Me.Controls.Add(Me.ucrSheetsToReorder)
+        Me.ClientSize = New System.Drawing.Size(420, 238)
+        Me.Controls.Add(Me.lblDataFrameToReorder)
+        Me.Controls.Add(Me.ucrDataFrameToReorder)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgReorderSheet"
+        Me.Name = "dlgReorderDataFrame"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Reoder Sheets"
+        Me.Text = "Reoder Data Frames"
         Me.ResumeLayout(False)
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrSheetsToReorder As ucrReorder
-    Friend WithEvents lblSheetsToReoder As Label
+    Friend WithEvents ucrDataFrameToReorder As ucrReorder
+    Friend WithEvents lblDataFrameToReorder As Label
 End Class

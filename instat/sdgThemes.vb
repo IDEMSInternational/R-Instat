@@ -13,18 +13,16 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
 Imports instat.Translations
-Public Class dlgRemoveUnusedLabels
-    Private Sub dlgRemoveUnusedLabels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrBase.clsRsyntax.SetFunction("droplevels")
-        ucrSelectedVariable.Selector = ucrAddRemove
-        ucrSelectedVariable.SetMeAsReceiver()
-        autoTranslate(Me)
 
+Public Class sdgThemes
+    Public bControlsInitialised As Boolean = False
+
+    Private Sub sdgThemes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autoTranslate(Me)
     End Sub
-    Private Sub ucrSelectedVariable_Leave(sender As Object, e As EventArgs) Handles ucrSelectedVariable.Leave
-        ucrBase.clsRsyntax.AddParameter("X", ucrSelectedVariable.GetVariableNames())
+
+    Public Sub InitialiseControls()
 
     End Sub
 End Class

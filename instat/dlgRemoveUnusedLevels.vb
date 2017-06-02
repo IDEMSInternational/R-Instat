@@ -13,53 +13,52 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports instat
-Imports instat.Translations
-Public Class dlgDeleteDescriptive
-    Public bFirstLoad As Boolean = True
-    Private bReset As Boolean = True
 
-    Private Sub dlgDeleteDescriptive_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+Imports instat.Translations
+Public Class dlgRemoveUnusedLevels
+    Private bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
+    Private clsUnusedLevels As New RFunction
+
+    Private Sub dlgRemoveUnusedLevels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
         If bReset Then
             SetDefaults()
         End If
-        SetRCodeForControls(bReset)
+        SetRCodeforControls(bReset)
         bReset = False
         autoTranslate(Me)
-    End Sub
-
-    Private Sub ReopenDialog()
-        ucrSelectorDeleteObject.Reset() ' temporary fix
+        TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 352
+        ucrBase.iHelpTopicID = 40
 
-        ' Selector
-        ucrSelectorDeleteObject.SetParameter(New RParameter("data_name", 0))
-        ucrSelectorDeleteObject.SetParameterIsString()
-        ucrSelectorDeleteObject.SetItemType("object")
+        'Set receiver
+        ucrReceiverFactorColumn.Selector = ucrSelectorFactorColumn
+        ucrReceiverFactorColumn.SetMeAsReceiver()
+        ucrReceiverFactorColumn.SetIncludedDataTypes({"factor"})
 
-        ' Receiver
-        ucrReceiverObjectsToDelete.SetParameter(New RParameter("object_names", 1))
-        ucrReceiverObjectsToDelete.SetParameterIsString()
-        ucrReceiverObjectsToDelete.Selector = ucrSelectorDeleteObject
-        ucrReceiverObjectsToDelete.SetMeAsReceiver()
+        ucrRemoveUnusedFactorLevels.SetReceiver(ucrReceiverFactorColumn)
+        ucrRemoveUnusedFactorLevels.SetIncludeLevels(False)
+
+        'Set selector data frame
+        ucrSelectorFactorColumn.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorFactorColumn.SetParameterIsString()
+
+        ucrReceiverFactorColumn.SetParameter(New RParameter("col_name", 1))
+        ucrReceiverFactorColumn.SetParameterIsString()
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
+        clsUnusedLevels = New RFunction
+        ucrSelectorFactorColumn.Reset()
 
-        ucrSelectorDeleteObject.Reset()
-
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$delete_objects")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        clsUnusedLevels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$drop_unused_factor_levels")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsUnusedLevels)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
@@ -67,10 +66,10 @@ Public Class dlgDeleteDescriptive
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverObjectsToDelete.IsEmpty Then
-            ucrBase.OKEnabled(True)
-        Else
+        If ucrReceiverFactorColumn.IsEmpty() Then
             ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
         End If
     End Sub
 
@@ -80,7 +79,8 @@ Public Class dlgDeleteDescriptive
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrReceiverObjectsToDelete_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverObjectsToDelete.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactorColumn.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
 End Class

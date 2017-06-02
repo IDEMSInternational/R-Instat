@@ -32,6 +32,8 @@ Public Class ucrReceiver
 
     Public strDatabaseQuery As String = ""
 
+    Private strPrvNcFilePath As String = ""
+
     Public bAddParameterIfEmpty As Boolean = False
     'If the control is used to set a parameter that is a string i.e. column = "ID"
     Protected bParameterIsString As Boolean = False
@@ -90,6 +92,18 @@ Public Class ucrReceiver
     Public Overridable Sub RemoveColor()
 
     End Sub
+
+    Public Property strNcFilePath As String
+        Get
+            Return strPrvNcFilePath
+        End Get
+        Set(strFilePath As String)
+            strPrvNcFilePath = strFilePath
+            If Selector IsNot Nothing Then
+                Selector.LoadList()
+            End If
+        End Set
+    End Property
 
     Public Overridable Function GetVariables(Optional bForceAsDataFrame As Boolean = False) As RFunction
         Dim clsGetVariablesFunc As New RFunction

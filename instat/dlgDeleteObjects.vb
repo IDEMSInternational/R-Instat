@@ -13,17 +13,18 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+Imports instat
 Imports instat.Translations
-Public Class dlgReorderLevels
-    Private bFirstLoad As Boolean = True
+Public Class dlgDeleteObjects
+    Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsReorder As New RFunction
 
-    Private Sub dlgReorderLevels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub dlgDeleteObjects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
+        Else
+            ReopenDialog()
         End If
         If bReset Then
             SetDefaults()
@@ -33,33 +34,32 @@ Public Class dlgReorderLevels
         autoTranslate(Me)
     End Sub
 
+    Private Sub ReopenDialog()
+        ucrSelectorDeleteObject.Reset() ' temporary fix
+    End Sub
+
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 36
+        ucrBase.iHelpTopicID = 352
 
-        'Set data frame paramater
-        ucrSelectorFactorLevelsToReorder.SetParameter(New RParameter("data_name", 0))
-        ucrSelectorFactorLevelsToReorder.SetParameterIsString()
+        ' Selector
+        ucrSelectorDeleteObject.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorDeleteObject.SetParameterIsString()
+        ucrSelectorDeleteObject.SetItemType("object")
 
-        'Set Receivers and column parameter
-        ucrReceiverFactor.SetParameter(New RParameter("col_name", 1))
-        ucrReceiverFactor.Selector = ucrSelectorFactorLevelsToReorder
-        ucrReceiverFactor.SetMeAsReceiver()
-        ucrReceiverFactor.SetIncludedDataTypes({"factor"})
-        ucrReceiverFactor.SetParameterIsString()
-
-        'Set reorder scroll list view & datatype accepted
-        ucrReorderFactor.SetParameter(New RParameter("new_level_names", 2))
-        ucrReorderFactor.setReceiver(ucrReceiverFactor)
-        ucrReorderFactor.setDataType("factor")
+        ' Receiver
+        ucrReceiverObjectsToDelete.SetParameter(New RParameter("object_names", 1))
+        ucrReceiverObjectsToDelete.SetParameterIsString()
+        ucrReceiverObjectsToDelete.Selector = ucrSelectorDeleteObject
+        ucrReceiverObjectsToDelete.SetMeAsReceiver()
     End Sub
 
     Private Sub SetDefaults()
-        clsReorder = New RFunction
-        'reset
-        ucrSelectorFactorLevelsToReorder.Reset()
-        ' Set default function
-        clsReorder.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$reorder_factor_levels")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsReorder)
+        Dim clsDefaultFunction As New RFunction
+
+        ucrSelectorDeleteObject.Reset()
+
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$delete_objects")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
@@ -67,7 +67,7 @@ Public Class dlgReorderLevels
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverFactor.IsEmpty Then
+        If Not ucrReceiverObjectsToDelete.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -80,7 +80,7 @@ Public Class dlgReorderLevels
         TestOKEnabled()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged
+    Private Sub ucrReceiverObjectsToDelete_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverObjectsToDelete.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
