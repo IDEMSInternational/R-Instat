@@ -137,11 +137,15 @@ Public Class ucrFactor
         Dim iLevelsCol As Integer
         Dim iLabelsCol As Integer
         Dim iFreqCol As Integer
+        Dim strColType As String
 
         grdFactorData.Worksheets.Clear()
         ' Contains allows ordered factors to be included
         If clsReceiver IsNot Nothing AndAlso Not clsReceiver.IsEmpty() Then
-            If frmMain.clsRLink.GetColumnType(clsReceiver.GetDataName(), clsReceiver.GetVariableNames(False)).Contains("factor") Then
+            strColType = frmMain.clsRLink.GetColumnType(clsReceiver.GetDataName(), clsReceiver.GetVariableNames(False))
+            If strColType = "" Then
+                clsReceiver.Clear()
+            ElseIf strColType.Contains("factor") Then
                 clsGetFactorData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_factor_data_frame")
                 clsGetFactorData.AddParameter("data_name", Chr(34) & clsReceiver.GetDataName() & Chr(34))
                 clsGetFactorData.AddParameter("col_name", clsReceiver.GetVariableNames())
@@ -191,8 +195,6 @@ Public Class ucrFactor
                         Next
                     End If
                 End If
-            Else
-                clsReceiver.Clear()
             End If
         Else
             shtCurrSheet = Nothing
