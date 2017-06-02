@@ -198,7 +198,7 @@ Partial Class dlgReplaceValues
         Me.rdoNewFromBelow.Location = New System.Drawing.Point(14, 73)
         Me.rdoNewFromBelow.Name = "rdoNewFromBelow"
         Me.rdoNewFromBelow.Size = New System.Drawing.Size(181, 17)
-        Me.rdoNewFromBelow.TabIndex = 5
+        Me.rdoNewFromBelow.TabIndex = 4
         Me.rdoNewFromBelow.TabStop = True
         Me.rdoNewFromBelow.Text = "First Observation Carried Forward"
         Me.rdoNewFromBelow.UseVisualStyleBackColor = True
@@ -209,7 +209,7 @@ Partial Class dlgReplaceValues
         Me.rdoNewFromAbove.Location = New System.Drawing.Point(14, 96)
         Me.rdoNewFromAbove.Name = "rdoNewFromAbove"
         Me.rdoNewFromAbove.Size = New System.Drawing.Size(182, 17)
-        Me.rdoNewFromAbove.TabIndex = 4
+        Me.rdoNewFromAbove.TabIndex = 5
         Me.rdoNewFromAbove.TabStop = True
         Me.rdoNewFromAbove.Text = "Last Observation Carried Forward"
         Me.rdoNewFromAbove.UseVisualStyleBackColor = True
