@@ -232,9 +232,8 @@ Public Class dlgReplaceValues
         Else
             rdoNewFromAbove.Enabled = True
             rdoNewFromBelow.Enabled = True
-            rdoNewMissing.Enabled = False
-            rdoNewValue.Checked = True
         End If
+
     End Sub
 
     Private Sub ucrPnlOld_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOld.ControlValueChanged, ucrPnlNew.ControlValueChanged, ucrInputRangeFrom.ControlContentsChanged, ucrInputRangeTo.ControlContentsChanged
