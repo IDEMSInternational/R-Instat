@@ -13,6 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 
 Public Class dlgRecodeFactor
@@ -41,29 +42,41 @@ Public Class dlgRecodeFactor
         ucrBase.iHelpTopicID = 37
 
         ucrFactorGrid.SetReceiver(ucrReceiverFactor)
-        ucrFactorGrid.SetAsViewerOnly()
         ucrFactorGrid.bIncludeCopyOfLevels = True
-        ucrFactorGrid.AddEditableColumns({"New Label"})
-        ucrFactorGrid.SetIncludeLevels(False)
-        ucrReceiverFactor.SetParameter(New RParameter("X", 0))
+        ucrFactorGrid.AddEditableColumns({ucrFactorGrid.strLabelsName})
+        ucrFactorGrid.SetIsGridColumn(ucrFactorGrid.strLabelsName)
+
+        ucrReceiverFactor.SetParameter(New RParameter("x", 0))
         ucrReceiverFactor.SetParameterIsRFunction()
+
+        ucrFactorGrid.SetParameter(New RParameter("replace", 1))
+
+        ucrSaveNewCol.SetSaveTypeAsColumn()
+        ucrSaveNewCol.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
+        ucrSaveNewCol.SetIsComboBox()
+        ucrSaveNewCol.SetLabelText("New Factor Column")
 
     End Sub
 
     Private Sub SetDefaults()
         clsReplaceFunction = New RFunction
         clsRevalue = New RFunction
+
         ucrSelectorForRecode.Reset()
         ucrSelectorForRecode.Focus()
         ucrFactorGrid.ResetText()
-        clsReplaceFunction.strRCommand = "c"
+        ucrSaveNewCol.Reset()
+        clsReplaceFunction.SetRCommand("c")
         clsReplaceFunction.AddParameter("replace", clsRFunctionParameter:=clsReplaceFunction)
         clsRevalue.SetRCommand("revalue")
+
+        clsRevalue.SetAssignTo("recoded_column", strTempDataframe:=ucrSelectorForRecode.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveNewCol.GetText, bAssignToIsPrefix:=True)
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsRevalue)
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverFactor.IsEmpty AndAlso ucrFactorGrid.IsColumnComplete("New Label") Then
+        If Not ucrReceiverFactor.IsEmpty AndAlso ucrSaveNewCol.IsComplete Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -72,29 +85,17 @@ Public Class dlgRecodeFactor
 
     Private Sub SetRCodeforControls(bReset As Boolean)
         ucrReceiverFactor.SetRCode(clsRevalue, bReset)
-        ucrFactorGrid.SetRCode(clsReplaceFunction, bReset)
-    End Sub
-
-    Private Sub ucrFactorGrid_GridContentChanged() Handles ucrFactorGrid.GridContentChanged
-        Dim strCurrentLabels As List(Of String)
-        Dim strNewLabels As List(Of String)
-        Dim strReplace As String = ""
-
-        strCurrentLabels = ucrFactorGrid.GetColumnAsList(ucrFactorGrid.strLabelsName, False)
-        strNewLabels = ucrFactorGrid.GetColumnAsList("New Label", True)
-        clsReplaceFunction.ClearParameters()
-        If ucrFactorGrid.IsColumnComplete(ucrFactorGrid.strLabelsName) AndAlso strCurrentLabels.Count = strNewLabels.Count Then
-            For i = 0 To strCurrentLabels.Count - 1
-                ' Backtick needed for names of the vector incase the levels are not valid R names
-                clsReplaceFunction.AddParameter(Chr(96) & strCurrentLabels(i) & Chr(96), strNewLabels(i))
-            Next
-        End If
-        TestOKEnabled()
+        ucrFactorGrid.SetRCode(clsRevalue, bReset)
+        ucrSaveNewCol.SetRCode(clsRevalue, bReset)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeforControls(True)
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrReceiverFactor_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged, ucrSaveNewCol.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
