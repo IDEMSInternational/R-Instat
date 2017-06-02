@@ -94,6 +94,7 @@ Public Class sdgThemes
 
         'Tick Marks Along Axes
         ucrNudSizeTickMarks.SetParameter(New RParameter("size"))
+        ucrNudSizeTickMarks.Increment = 0.1
 
         ucrInputLineTypeTickMarks.SetParameter(New RParameter("linetype"))
         dctucrInputLineType.Add("Blank", Chr(34) & "blank" & Chr(34))
