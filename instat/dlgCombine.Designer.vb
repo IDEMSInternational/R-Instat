@@ -43,7 +43,7 @@ Partial Class dlgCombine
         'ucrFactorsReceiver
         '
         Me.ucrFactorsReceiver.frmParent = Me
-        Me.ucrFactorsReceiver.Location = New System.Drawing.Point(273, 60)
+        Me.ucrFactorsReceiver.Location = New System.Drawing.Point(254, 60)
         Me.ucrFactorsReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFactorsReceiver.Name = "ucrFactorsReceiver"
         Me.ucrFactorsReceiver.Selector = Nothing
@@ -54,7 +54,7 @@ Partial Class dlgCombine
         '
         'lblFactors
         '
-        Me.lblFactors.Location = New System.Drawing.Point(273, 44)
+        Me.lblFactors.Location = New System.Drawing.Point(254, 44)
         Me.lblFactors.Name = "lblFactors"
         Me.lblFactors.Size = New System.Drawing.Size(100, 15)
         Me.lblFactors.TabIndex = 1

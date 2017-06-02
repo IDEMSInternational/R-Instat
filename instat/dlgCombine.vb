@@ -57,7 +57,10 @@ Public Class dlgCombine
 
     Private Sub SetDefaults()
         clsInteraction = New RFunction
+
         ucrSelectorCombineFactors.Reset()
+        ucrNewColName.Reset()
+
         clsInteraction.SetRCommand("interaction")
         clsInteraction.SetAssignTo(strTemp:=ucrNewColName.GetText(), strTempDataframe:=ucrSelectorCombineFactors.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText())
         ucrBase.clsRsyntax.SetBaseRFunction(clsInteraction)

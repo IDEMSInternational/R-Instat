@@ -31,6 +31,7 @@ is_linkable="Is_Linkable"
 
 #variables_metadata labels
 label_label="label"
+labels_label="labels"
 signif_figures_label="Signif_Figures"
 scientific_label="Scientific"
 name_label="Name"
@@ -60,3 +61,5 @@ graph_label="graph"
 
 #link labels
 keyed_link_label="keyed_link"
+
+max_labels_display=10

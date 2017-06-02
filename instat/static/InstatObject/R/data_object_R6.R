@@ -302,8 +302,12 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
       if(is.null(col_attributes)) col_attributes <- list()
       col_attributes[[data_type_label]] <- class(col)
       for(att_name in names(col_attributes)) {
-        #TODO Think how to do this more generally and cover all cases
-        if(att_name == "labels") col_attributes[[att_name]] <- paste(names(col_attributes[[att_name]]), "=", col_attributes[[att_name]], collapse = ", ")
+        if(att_name == labels_label) {
+          num_labels <- length(col_attributes[[att_name]])		
+          max_labels <- min(max_labels_display, num_labels)		
+          col_attributes[[att_name]] <- paste(names(col_attributes[[att_name]])[1:max_labels], "=", col_attributes[[att_name]][1:max_labels], collapse = ", ")		
+          if(num_labels > max_labels) col_attributes[[att_name]] <- paste0(col_attributes[[att_name]], "...")		
+        }
         else if(is.list(col_attributes[[att_name]]) || length(col_attributes[[att_name]]) > 1) col_attributes[[att_name]] <- paste(unlist(col_attributes[[att_name]]), collapse = ",")
         # TODO Possible alternative to include names of list
         # TODO See how to have data frame properly containing lists
@@ -832,6 +836,21 @@ data_object$set("public", "add_defaults_variables_metadata", function(column_nam
     if(!self$is_variables_metadata(signif_figures_label, column)) {
       self$append_to_variables_metadata(column, signif_figures_label, get_default_significant_figures(self$get_columns_from_data(column, use_current_filter = FALSE)))
     }
+    if(self$is_variables_metadata(labels_label, column)) {
+      curr_labels <- self$get_variables_metadata(property = labels_label, column = column, direct_from_attributes = TRUE)
+      if(!is.numeric(curr_labels)) {
+        numeric_labs <- as.numeric(curr_labels)
+        if(any(is.na(numeric_labs))) {
+          warning("labels attribute of non numeric values is not currently supported. labels will be removed from column: ", column, " to prevent compatibility issues. removed labels: ", curr_labels)
+          self$append_to_variables_metadata(column, labels_label, NULL)
+        }
+        else {
+          adjusted_labels <- numeric_labs
+          names(adjusted_labels) <- names(curr_labels)
+          self$append_to_variables_metadata(column, labels_label, adjusted_labels)
+        }
+      }
+    }
   }
 }
 )
@@ -921,16 +940,27 @@ data_object$set("public", "get_data_frame_length", function(use_current_filter =
 }
 )
 
-data_object$set("public", "get_factor_data_frame", function(col_name = "") {
-  if(!(col_name %in% self$get_column_names())) {
-    stop(col_name, " is not a column in", get_metadata(data_name_label))
-  }
-  if(!(is.factor(self$get_columns_from_data(col_name, use_current_filter = FALSE)))){
-    stop(col_name, " is not a factor column")
-  }
+data_object$set("public", "get_factor_data_frame", function(col_name = "", include_levels = TRUE) {
+  if(!(col_name %in% self$get_column_names())) stop(col_name, " is not a column name,")
+  col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
+  if(!(is.factor(col_data))) stop(col_name, " is not a factor column")
   
-  counts <- as.data.frame(table(self$get_columns_from_data(col_name, use_current_filter = FALSE)))
-  counts <- plyr::rename(counts, replace = c("Var1" = "Levels", "Freq" = "Counts"))
+  counts <- as.data.frame(table(col_data))
+  counts <- plyr::rename(counts, replace = c("col_data" = "Label"))
+  counts[["Ord."]] <- 1:nrow(counts)
+  if(include_levels) {
+    if(self$is_variables_metadata(str = labels_label, col = col_name)) {
+      curr_levels <- self$get_variables_metadata(property = labels_label, column = col_name, direct_from_attributes = TRUE)
+      curr_levels <- data.frame(Label = names(curr_levels), Level = as.vector(curr_levels))
+      counts <- left_join(counts, curr_levels, by = "Label")
+    }
+    else {
+      curr_levels <- counts[["Ord."]]
+      counts[["Level"]] <- curr_levels
+    }
+    counts <- counts[c("Ord.", "Label", "Level", "Freq")]
+  }
+  else counts <- counts[c("Ord.", "Label", "Freq")]
   return(counts)
 }
 )
@@ -978,7 +1008,7 @@ data_object$set("public", "sort_dataframe", function(col_names = c(), decreasing
 }
 )
 
-data_object$set("public", "convert_column_to_type", function(col_names = c(), to_type, factor_values = NULL, set_digits, set_decimals = FALSE, keep_attr = TRUE, use_labels = TRUE) {
+data_object$set("public", "convert_column_to_type", function(col_names = c(), to_type, factor_values = NULL, set_digits, set_decimals = FALSE, keep_attr = TRUE, ignore_labels = FALSE) {
   if(!all(col_names %in% self$get_column_names())) stop("Some column names not found in the data")
 
   if(length(to_type) !=1 ) {
@@ -996,31 +1026,57 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
   for(col_name in col_names) {
     curr_col <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
     if(keep_attr) {
-      tmp_attr <- attributes(curr_col)
-      #TODO are these the only attributes we don't want to transfer?
-      tmp_attr <- tmp_attr[!names(tmp_attr) %in% c("class", "levels")]
+      tmp_attr <- get_column_attributes(curr_col)
     }
     if(!is.null(factor_values) && is.factor(curr_col) && to_type %in% c("integer", "numeric")) {
       if(factor_values == "force_ordinals") curr_col <- as.numeric(curr_col)
       else if(factor_values == "force_values") curr_col <- as.numeric(levels(curr_col))[curr_col]
+      else stop("If specified, 'factor_values' must be either 'force_ordinals' or 'force_values'")
     }
-    if(to_type %in% c("factor", "ordered_factor")) {
+    else if(to_type %in% c("factor", "ordered_factor")) {
       ordered <- (to_type == "ordered_factor")
       if(set_decimals) curr_col <- round(curr_col, digits = set_digits)
-      # Warning: this is different from expected R behaviour
-      # Any ordered columns would become unordered factors
-      if(use_labels && self$is_variables_metadata("labels", col_name)) {
-        # TODO NA will be introduced if any values which do not have a label associated
-        curr_labels <- self$get_variables_metadata(property = "labels", column = col_name, direct_from_attributes = TRUE)
-        new_col <- factor(curr_col, ordered = ordered, levels = as.vector(curr_labels), labels = names(curr_labels))
+      if(ignore_labels) {
+        new_col <- factor(curr_col, ordered = ordered)
       }
-      else new_col <- factor(curr_col, ordered = ordered)
+      else {
+        if(self$is_variables_metadata(labels_label, col_name)) {
+          new_col <- to_label(curr_col, add.non.labelled = TRUE)
+        }
+        else {
+          new_col <- factor(curr_col, ordered = ordered)
+          if(is.numeric(curr_col) && !self$is_variables_metadata(labels_label, col_name)) {
+            labs <- sort(unique(curr_col))
+            names(labs) <- labs
+            # temporary fix to issue of add_columns not retaining attributes of new columns
+            tmp_attr[[labels_label]] <- labs
+          }
+        }
+      }
     }
     else if(to_type =="integer") {
       new_col = as.integer(curr_col)
     }
     else if(to_type == "numeric") {
-      new_col <- to_value(curr_col)
+      if(ignore_labels) {
+        new_col <- to_value(curr_col)
+      }
+      else {
+        if(self$is_variables_metadata(labels_label, col_name) && !is.numeric(curr_col)) {
+          #TODO WARNING: need to test this on columns of different types to check for strange behaviour
+          curr_labels <- self$get_variables_metadata(property = labels_label, column = col_name, direct_from_attributes = TRUE)
+          if(!all(curr_col %in% names(curr_labels))) {
+            additional_names <- sort(unique(na.omit(curr_col[!curr_col %in% names(curr_labels)])))
+            additonal <- seq(max(curr_labels, na.rm = TRUE) + 1, length.out = length(additional_names))
+            names(additonal) <- additional_names
+            curr_labels <- c(curr_labels, additonal)
+            # temporary fix to issue of add_columns not retaining attributes of new columns
+            tmp_attr[[labels_label]] <- curr_labels
+          }
+          new_col <- as.numeric(curr_labels[as.character(curr_col)])
+        }
+        else new_col <- to_value(curr_col)
+      }
     }
     else if(to_type == "character") {
       new_col <- to_character(curr_col)
@@ -1028,10 +1084,7 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
     self$add_columns_to_data(col_name = col_name, col_data = new_col)
     
     if(keep_attr) {
-      tmp_names <- names(tmp_attr)
-      for(i in seq_along(tmp_attr)) {
-        self$append_to_variables_metadata(property = tmp_names[i], col_names = col_name, new_val = tmp_attr[[i]])
-      }
+      self$append_column_attributes(col_name = col_name, new_attr = tmp_attr)
     }
   }
   self$data_changed <- TRUE
@@ -1058,24 +1111,49 @@ data_object$set("public", "copy_columns", function(col_names = "") {
 
 data_object$set("public", "drop_unused_factor_levels", function(col_name) {
   if(!col_name %in% self$get_column_names()) stop(paste(col_name,"not found in data."))
-  if(!is.factor(self$get_columns_from_data(col_name, use_current_filter = FALSE))) stop(paste(col_name,"is not a factor."))
-  
-  self$add_columns_to_data(col_name, droplevels(self$get_columns_from_data(col_name, use_current_filter = FALSE)))
+  col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
+  if(!is.factor(col_data)) stop(paste(col_name,"is not a factor."))
+  level_counts <- table(col_data)
+  if(any(level_counts == 0)) {
+    if(self$is_variables_metadata(labels_label, col_name)) {
+      curr_labels <- self$get_variables_metadata(property = labels_label, column = col_name, direct_from_attributes = TRUE)
+      curr_labels <- curr_labels[names(level_counts[level_counts > 0])]
+      self$append_to_variables_metadata(property = labels_label, col_names = col_name, new_val = curr_labels)
+      col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
+    }
+    tmp_attr <- get_column_attributes(col_data)
+    print(tmp_attr)
+    self$add_columns_to_data(col_name, droplevels(col_data))
+    self$append_column_attributes(col_name = col_name, new_attr = tmp_attr)
+    #print(self$get_variables_metadata(property = labels_label, column = col_name, direct_from_attributes = TRUE))
+  }
 } 
 )
 
-data_object$set("public", "set_factor_levels", function(col_name, new_levels, set_new_labels = TRUE) {
-  if(!col_name %in% self$get_column_names()) stop(paste(col_name,"not found in data."))
-  if(!is.factor(self$get_columns_from_data(col_name, use_current_filter = FALSE))) stop(paste(col_name,"is not a factor."))
-  old_levels <- levels(self$get_columns_from_data(col_name, use_current_filter = FALSE))
-  if(length(new_levels) < length(old_levels)) stop("There must be at least as many new levels as current levels.")
-  
+data_object$set("public", "set_factor_levels", function(col_name, new_labels, new_levels, set_new_labels = TRUE) {
+  if(!col_name %in% self$get_column_names()) stop(paste(col_name, "not found in data."))
+  col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
+  if(!is.factor(col_data)) stop(paste(col_name, "is not a factor."))
+  old_labels <- levels(col_data)
+  if(length(new_labels) < length(old_labels)) stop("There must be at least as many new levels as current levels.")
+  if(!missing(new_levels) && anyDuplicated(new_levels)) stop("new levels must be unique")
   # Must be private$data because setting an attribute
-  levels(private$data[[col_name]]) <- new_levels
-  if(set_new_labels && self$is_variables_metadata("labels", col_name)) {
-    new_labels <- as.character(new_levels[1:length(old_levels)])
-    names(new_labels) <- names(self$get_variables_metadata(property = "labels", column = col_name))
-    self$append_to_variables_metadata(col_name, "labels", new_labels)
+  levels(private$data[[col_name]]) <- new_labels
+  
+  if(!missing(new_levels)) {
+    labels_list <- new_levels
+    names(labels_list) <- new_labels
+    self$append_to_variables_metadata(col_name, labels_label, labels_list)
+  }
+  else if(set_new_labels && self$is_variables_metadata(labels_label, col_name)) {
+    labels_list <- self$get_variables_metadata(property = labels_label, column = col_name, direct_from_attributes = TRUE)
+    names(labels_list) <- as.character(new_labels[1:length(old_levels)])
+    if(length(new_labels) > length(old_lables)) {
+      extra_labels <- seq(from = max(labels_list) + 1, length.out = (length(new_labels) - length(old_levels)))
+      names(extra_labels) <- new_labels[!new_labels %in% names(labels_list)]
+      labels_list <- c(labels_list, extra_labels)
+    }
+    self$append_to_variables_metadata(col_name, labels_label, labels_list)
   }
   self$data_changed <- TRUE
   self$variables_metadata_changed <- TRUE
@@ -1094,19 +1172,29 @@ data_object$set("public", "edit_factor_level", function(col_name, old_level, new
 
 data_object$set("public", "set_factor_reference_level", function(col_name, new_ref_level) {
   if(!col_name %in% self$get_column_names()) stop(paste(col_name,"not found in data."))
-  if(!is.factor(self$get_columns_from_data(col_name, use_current_filter = FALSE))) stop(paste(col_name,"is not a factor."))
-  if(!new_ref_level %in% levels(self$get_columns_from_data(col_name, use_current_filter = FALSE))) stop(paste(new_ref_level, "is not a level of the factor"))
-  
-  self$add_columns_to_data(col_name, relevel(self$get_columns_from_data(col_name, use_current_filter = FALSE), new_ref_level))
+  col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
+  if(!is.factor(col_data)) stop(paste(col_name,"is not a factor."))
+  if(!new_ref_level %in% levels(col_data)) stop(paste(new_ref_level, "is not a level of", col_name))
+  tmp_attr <- get_column_attributes(col_data)
+  self$add_columns_to_data(col_name, relevel(col_data, new_ref_level))
+  self$append_column_attributes(col_name = col_name, new_attr = tmp_attr)
 } 
 )
 
 data_object$set("public", "reorder_factor_levels", function(col_name, new_level_names) {
   if(!col_name %in% self$get_column_names()) stop(paste(col_name,"not found in data."))
-  if(!is.factor(self$get_columns_from_data(col_name, use_current_filter = FALSE))) stop(paste(col_name,"is not a factor."))
-  if(length(new_level_names)!=length(levels(self$get_columns_from_data(col_name, use_current_filter = FALSE)))) stop("Incorrect number of new level names given.")
-  if(!all(new_level_names %in% levels(self$get_columns_from_data(col_name, use_current_filter = FALSE)))) stop(paste("new_level_names must be a reordering of the current levels:",paste(levels(data[[col_name]]), collapse = " ")))
-  self$add_columns_to_data(col_name = col_name, col_data = factor(self$get_columns_from_data(col_name, use_current_filter = FALSE), levels = new_level_names, ordered = is.ordered(self$get_columns_from_data(col_name, use_current_filter = FALSE))))
+  curr_column <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
+  if(!is.factor(curr_column)) stop(col_name,"is not a factor.")
+  curr_levels <- levels(curr_column)
+  if(length(new_level_names)!=length(curr_levels)) stop("Incorrect number of new levels given.")
+  if(!all(new_level_names %in% curr_levels)) stop("new_level_names must be a reordering of the current levels:", paste(levels(curr_column), collapse = ", "))
+  new_column <- factor(curr_column, levels = new_level_names, ordered = is.ordered(curr_column))
+  #TODO are these the only attributes we don't want to manually set?
+  curr_attr <- attributes(curr_column)[!names(attributes(curr_column)) %in% c("levels", "class")]
+  for(i in seq_along(curr_attr)) {
+    attr(new_column, names(curr_attr)[i]) <- curr_attr[[i]]
+  }
+  self$add_columns_to_data(col_name = col_name, col_data = new_column)
   self$variables_metadata_changed <- TRUE
 }
 )
@@ -1797,11 +1885,12 @@ data_object$set("public","set_contrasts_of_factor", function(col_name, new_contr
   else if(!is.character(new_contrasts)) {
     stop("New column name must be of type: character")
   }
-       contrasts(private$data[[col_name]]) <- new_contrasts
-  }
+  contrasts(private$data[[col_name]]) <- new_contrasts
+}
 )
+
 #This method gets a date column and extracts part of the information such as year, month, week, weekday etc(depending on which parameters are set) and creates their respective new column(s)
-data_object$set("public","split_date", function(col_name = "", week = FALSE, month_val = FALSE, month_abbr = FALSE, month_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE, year = FALSE, day = FALSE, day_in_month = FALSE, day_in_year = FALSE, leap_year = FALSE, day_in_year_366 = FALSE, dekade = FALSE, pentad = FALSE) {
+data_object$set("public","split_date", function(col_name = "", week = FALSE, month_val = FALSE, month_abbr = FALSE, month_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE, year = FALSE, day = FALSE, day_in_month = FALSE, day_in_year = FALSE, leap_year = FALSE, day_in_year_366 = FALSE, dekade = FALSE, pentad = FALSE, shift_day = FALSE, shift_year = FALSE, shift_start_day_in_month = 1, shift_start_month = 8) {
   col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
   if(!is.Date(col_data)) stop("This column must be a date or time!")
   if(day) {
@@ -1881,6 +1970,35 @@ data_object$set("public","split_date", function(col_name = "", week = FALSE, mon
 	  col_name <- next_default_item(prefix = "leap_year", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = leap_year_vector)
 	}
+  if(shift_day || shift_year) {
+    if(shift_start_month %% 1 != 0 || shift_start_month < 1 || shift_start_month > 12) stop("shift_start_month must be an integer between 1 and 12. ", shift_start_month, " is invalid.")
+    # TODO better checks on day in relation to month selected
+    if(shift_start_day_in_month %% 1 != 0 || shift_start_day_in_month < 1 || shift_start_day_in_month > 31) stop("shift_start_day_in_month must be an integer between 1 and 31. ", shift_start_day_in_month, " is invalid.")
+    if(shift_start_day_in_month == 1 && shift_start_month == 1) stop("shift year must start after 1 Jan.")
+    # using a leap year as year to ensure consistent day of year across years
+    shift_start_day <- yday(as.Date(paste("2000", shift_start_month, shift_start_day_in_month), format = "%Y %m %d"))
+    if(is.na(shift_start_day)) stop("Could not identify starting day for shift year with shift_start_month = ", shift_start_month, " and shift_start_day = ", shift_start_day_in_month)
+    if(shift_start_day %% 1 != 0 || shift_start_day < 2 || shift_start_day > 366) stop("shift_start_day must be an integer between 2 and 366")
+    doy_col <- as.integer(yday_366(col_data))
+    year_col <- year(col_data)
+    temp_shift_day <- doy_col - shift_start_day + 1
+    temp_shift_year <- year_col
+    temp_shift_year[temp_shift_day < 1] <- paste(year_col[temp_shift_day < 1] - 1, year_col[temp_shift_day < 1], sep = "-")
+    temp_shift_year[temp_shift_day > 0] <- paste(year_col[temp_shift_day > 0], year_col[temp_shift_day > 0] + 1, sep = "-")
+    temp_shift_year <- factor(temp_shift_year)
+    temp_shift_day[temp_shift_day < 1] <- temp_shift_day[temp_shift_day < 1] + 366
+    shift_year_labs <- c(min(year_col) -1, sort(unique(year_col)))
+    names(shift_year_labs) <- paste(shift_year_labs, shift_year_labs + 1, sep = "-")
+    if(shift_day) {
+      col_name <- next_default_item(prefix = paste0("shift_", shift_start_day), existing_names = self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name = col_name, col_data = temp_shift_day)
+    }
+    if(shift_year) {
+      col_name <- next_default_item(prefix = "shift_year", existing_names = self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name = col_name, col_data = temp_shift_year)
+      self$append_to_variables_metadata(col_names = col_name, property = labels_label, new_val = shift_year_labs)
+    }
+  }
 }
 )
 
@@ -1951,6 +2069,7 @@ data_object$set("public","set_climatic_types", function(types) {
 )
 
 #Method for creating inventory plot
+
 data_object$set("public","make_inventory_plot", function(date_col, station_col = NULL, year_col = NULL, doy_col = NULL, element_cols = NULL, add_to_data = FALSE, year_doy_plot = FALSE, coord_flip = FALSE, facet_by = NULL, graph_title = "Inventory Plot") {
   if(!self$is_climatic_data()) stop("Data is not defined as climatic.")
   if(missing(date_col)) stop("Date columns must be specified.")
@@ -2870,5 +2989,14 @@ data_object$set("public", "get_climatic_column_name", function(col_name) {
 
 data_object$set("public", "is_climatic_data", function() {
   return(self$is_metadata(is_climatic_label) &&  self$get_metadata(is_climatic_label))
+}
+)
+
+# TODO merge this with append_to_column_metadata
+data_object$set("public", "append_column_attributes", function(col_name, new_attr) {
+  tmp_names <- names(new_attr)
+  for(i in seq_along(new_attr)) {
+    self$append_to_variables_metadata(property = tmp_names[i], col_names = col_name, new_val = new_attr[[i]])
+  }
 }
 )
