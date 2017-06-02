@@ -27,8 +27,7 @@ Partial Class dlgRecodeFactor
         Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
         Me.lblFactor = New System.Windows.Forms.Label()
         Me.ucrFactorGrid = New instat.ucrFactor()
-        Me.ucrInputColumnName = New instat.ucrInputComboBox()
-        Me.lblNewColumnName = New System.Windows.Forms.Label()
+        Me.ucrSaveNewCol = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -50,12 +49,15 @@ Partial Class dlgRecodeFactor
         '
         'ucrReceiverFactor
         '
+        Me.ucrReceiverFactor.frmParent = Me
         Me.ucrReceiverFactor.Location = New System.Drawing.Point(255, 50)
         Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
         Me.ucrReceiverFactor.Selector = Nothing
         Me.ucrReceiverFactor.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverFactor.strNcFilePath = ""
         Me.ucrReceiverFactor.TabIndex = 2
+        Me.ucrReceiverFactor.ucrSelector = Nothing
         '
         'lblFactor
         '
@@ -76,31 +78,21 @@ Partial Class dlgRecodeFactor
         Me.ucrFactorGrid.shtCurrSheet = Nothing
         Me.ucrFactorGrid.Size = New System.Drawing.Size(288, 221)
         Me.ucrFactorGrid.TabIndex = 4
+        Me.ucrFactorGrid.ucrChkLevels = Nothing
         '
-        'ucrInputColumnName
+        'ucrSaveNewCol
         '
-        Me.ucrInputColumnName.IsReadOnly = False
-        Me.ucrInputColumnName.Location = New System.Drawing.Point(111, 308)
-        Me.ucrInputColumnName.Name = "ucrInputColumnName"
-        Me.ucrInputColumnName.Size = New System.Drawing.Size(178, 21)
-        Me.ucrInputColumnName.TabIndex = 5
-        '
-        'lblNewColumnName
-        '
-        Me.lblNewColumnName.AutoSize = True
-        Me.lblNewColumnName.Location = New System.Drawing.Point(7, 311)
-        Me.lblNewColumnName.Name = "lblNewColumnName"
-        Me.lblNewColumnName.Size = New System.Drawing.Size(101, 13)
-        Me.lblNewColumnName.TabIndex = 7
-        Me.lblNewColumnName.Text = "New Column Name:"
+        Me.ucrSaveNewCol.Location = New System.Drawing.Point(13, 305)
+        Me.ucrSaveNewCol.Name = "ucrSaveNewCol"
+        Me.ucrSaveNewCol.Size = New System.Drawing.Size(530, 24)
+        Me.ucrSaveNewCol.TabIndex = 5
         '
         'dlgRecodeFactor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(555, 396)
-        Me.Controls.Add(Me.lblNewColumnName)
-        Me.Controls.Add(Me.ucrInputColumnName)
+        Me.Controls.Add(Me.ucrSaveNewCol)
         Me.Controls.Add(Me.ucrFactorGrid)
         Me.Controls.Add(Me.lblFactor)
         Me.Controls.Add(Me.ucrReceiverFactor)
@@ -122,6 +114,5 @@ Partial Class dlgRecodeFactor
     Friend WithEvents ucrReceiverFactor As ucrReceiverSingle
     Friend WithEvents lblFactor As Label
     Friend WithEvents ucrFactorGrid As ucrFactor
-    Friend WithEvents ucrInputColumnName As ucrInputComboBox
-    Friend WithEvents lblNewColumnName As Label
+    Friend WithEvents ucrSaveNewCol As ucrSave
 End Class
