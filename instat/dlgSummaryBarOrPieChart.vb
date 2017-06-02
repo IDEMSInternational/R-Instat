@@ -77,7 +77,7 @@ Public Class dlgSummaryBarOrPieChart
         ucrSaveSummaryBar.SetCheckBoxText("Save Graph")
         ucrSaveSummaryBar.SetDataFrameSelector(ucrSummaryBarSelector.ucrAvailableDataFrames)
         ucrSaveSummaryBar.SetSaveTypeAsGraph()
-        ucrSaveSummaryBar.SetPrefix("Bar")
+        ucrSaveSummaryBar.SetPrefix("bar")
         ucrSaveSummaryBar.SetAssignToIfUncheckedValue("last_graph")
 
         clsRCoordPolarFunction.SetPackageName("ggplot2")
