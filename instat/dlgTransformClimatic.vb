@@ -230,11 +230,11 @@ Public Class dlgTransformClimatic
             MovingColNames()
             grpTransform.Text = "Moving"
         ElseIf rdoCount.Checked Then
-            ucrInputColName.SetName("count")
             clsRRollFuncExpr.AddParameter("width", ucrNudCountOver.Value)
             clsRRollFuncExpr.AddParameter("FUN", "function(x) length(which(x" & strValuesUnder & ucrInputThreshold.GetText() & "))")
             clsRTransform.AddParameter("function_exp", Chr(34) & clsRRollFuncExpr.ToScript.ToString & Chr(34))
             clsRTransform.RemoveParameterByName("sub_calculations")
+            ucrInputColName.SetName("count")
             grpTransform.Text = "Count"
         ElseIf rdoSpell.Checked Then
             clsSubCalcList.AddParameter("sub1", clsRFunctionParameter:=clsRRainday)
