@@ -100,7 +100,7 @@ Public Class dlgUseDate
         dctMonth.Add("December", 12)
         ucrInputComboBoxMonth.SetItems(dctMonth)
         ucrInputComboBoxMonth.SetRDefault(8)
-        'ucrInputComboBoxMonth.SetDropDownStyleAsNonEditable()
+        ucrInputComboBoxMonth.SetDropDownStyleAsNonEditable()
 
         'TODO This should probably be the default for this control, hence this is temporary
         ucrInputComboBoxMonth.bUpdateRCodeFromControl = False

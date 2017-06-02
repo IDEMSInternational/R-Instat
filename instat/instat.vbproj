@@ -557,10 +557,10 @@
     <Compile Include="dlgTwoWayFrequencies.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DlgUseDate.Designer.vb">
-      <DependentUpon>DlgUseDate.vb</DependentUpon>
+    <Compile Include="dlgUseDate.Designer.vb">
+      <DependentUpon>dlgUseDate.vb</DependentUpon>
     </Compile>
-    <Compile Include="DlgUseDate.vb">
+    <Compile Include="dlgUseDate.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgViewAndRemoveKeys.Designer.vb">
@@ -2983,8 +2983,8 @@
     <EmbeddedResource Include="dlgRemoveUnusedLevels.sw-KE.resx">
       <DependentUpon>dlgRemoveUnusedLevels.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DlgUseDate.resx">
-      <DependentUpon>DlgUseDate.vb</DependentUpon>
+    <EmbeddedResource Include="dlgUseDate.resx">
+      <DependentUpon>dlgUseDate.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgUseGraph.fr-FR.resx">
       <DependentUpon>dlgUseGraph.vb</DependentUpon>
