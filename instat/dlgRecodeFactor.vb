@@ -35,21 +35,24 @@ Public Class dlgRecodeFactor
     End Sub
 
     Private Sub InitialiseDialog()
-
+        clsReplaceFunction = New RFunction
         ucrReceiverFactor.Selector = ucrSelectorForRecode
         ucrReceiverFactor.SetIncludedDataTypes({"factor"})
         ucrReceiverFactor.SetMeAsReceiver()
         ucrBase.iHelpTopicID = 37
 
+        ucrFactorGrid.SetAsViewerOnly()
+        ucrFactorGrid.bIncludeCopyOfLevels = True
         ucrFactorGrid.SetReceiver(ucrReceiverFactor)
         ucrFactorGrid.bIncludeCopyOfLevels = True
         ucrFactorGrid.AddEditableColumns({ucrFactorGrid.strLabelsName})
         ucrFactorGrid.SetIsGridColumn(ucrFactorGrid.strLabelsName)
 
+        clsReplaceFunction.strRCommand = "c"
+        clsReplaceFunction.AddParameter("replace", clsRFunctionParameter:=clsReplaceFunction)
+
         ucrReceiverFactor.SetParameter(New RParameter("x", 0))
         ucrReceiverFactor.SetParameterIsRFunction()
-
-        ucrFactorGrid.SetParameter(New RParameter("replace", 1))
 
         ucrSaveNewCol.SetSaveTypeAsColumn()
         ucrSaveNewCol.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
@@ -66,8 +69,7 @@ Public Class dlgRecodeFactor
         ucrSelectorForRecode.Focus()
         ucrFactorGrid.ResetText()
         ucrSaveNewCol.Reset()
-        clsReplaceFunction.SetRCommand("c")
-        clsReplaceFunction.AddParameter("replace", clsRFunctionParameter:=clsReplaceFunction)
+
         clsRevalue.SetRCommand("revalue")
 
         clsRevalue.SetAssignTo("recoded_column", strTempDataframe:=ucrSelectorForRecode.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveNewCol.GetText, bAssignToIsPrefix:=True)
@@ -75,8 +77,25 @@ Public Class dlgRecodeFactor
         ucrBase.clsRsyntax.SetBaseRFunction(clsRevalue)
     End Sub
 
+    Private Sub ucrFactorGrid_GridContentChanged() Handles ucrFactorGrid.GridContentChanged
+        Dim strCurrentLevels As List(Of String)
+        Dim strNewLevels As List(Of String)
+        Dim strReplace As String = ""
+
+        strCurrentLevels = ucrFactorGrid.GetColumnAsList(0, False)
+        strNewLevels = ucrFactorGrid.GetColumnAsList(2, True)
+        clsReplaceFunction.ClearParameters()
+        If ucrFactorGrid.IsColumnComplete(2) AndAlso strCurrentLevels.Count = strNewLevels.Count Then
+            For i = 0 To strCurrentLevels.Count - 1
+                ' Backtick needed for names of the vector incase the levels are not valid R names
+                clsReplaceFunction.AddParameter(Chr(96) & strCurrentLevels(i) & Chr(96), strNewLevels(i))
+            Next
+        End If
+        TestOKEnabled()
+    End Sub
+
     Private Sub TestOKEnabled()
-        If Not ucrReceiverFactor.IsEmpty AndAlso ucrSaveNewCol.IsComplete Then
+        If Not ucrReceiverFactor.IsEmpty AndAlso ucrSaveNewCol.IsComplete AndAlso ucrFactorGrid.IsColumnComplete(2) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
