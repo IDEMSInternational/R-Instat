@@ -137,6 +137,7 @@ Public Class dlgInsertColumn
         clsInsertRowFunction.AddParameter("before", "FALSE")
         clsInsertRowFunction.AddParameter("start_row", ucrDataFramesList.iDataFrameLength)
         ucrBase.clsRsyntax.SetBaseRFunction(clsInsertColumnFunction)
+        ucrNudStartRow.SetMinMax(1, ucrDataFramesList.iDataFrameLength)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -198,12 +199,11 @@ Public Class dlgInsertColumn
         End If
     End Sub
 
-    Private Sub ucrReceiverColumnsToInsert_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnsToInsert.ControlContentsChanged, ucrPnlColumnsOrRows.ControlContentsChanged, ucrPnlBeforeAfter.ControlContentsChanged, ucrPnlInsertColumns.ControlContentsChanged, ucrInputPrefixForNewColumn.ControlContentsChanged, ucrInputDefaultValue.ControlContentsChanged, ucrInputBeforeAfter.ControlContentsChanged, ucrNudNumberOfRows.ControlContentsChanged, ucrNudStartRow.ControlContentsChanged, ucrNudNumberOfColumns.ControlContentsChanged
-        TestOKEnabled()
+    Private Sub ucrSelectorInsertColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDataFramesList.ControlValueChanged
         ucrNudStartRow.SetMinMax(1, ucrDataFramesList.iDataFrameLength)
     End Sub
 
-    Private Sub ucrSelectorInsertColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorInsertColumns.ControlValueChanged, ucrNudStartRow.ControlValueChanged, ucrPnlBeforeAfter.ControlContentsChanged
-        ucrNudStartRow.SetMinMax(1, ucrDataFramesList.iDataFrameLength)
+    Private Sub ucrReceiverColumnsToInsert_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnsToInsert.ControlContentsChanged, ucrPnlColumnsOrRows.ControlContentsChanged, ucrPnlBeforeAfter.ControlContentsChanged, ucrPnlInsertColumns.ControlContentsChanged, ucrInputPrefixForNewColumn.ControlContentsChanged, ucrInputDefaultValue.ControlContentsChanged, ucrInputBeforeAfter.ControlContentsChanged, ucrNudNumberOfRows.ControlContentsChanged, ucrNudStartRow.ControlContentsChanged, ucrNudNumberOfColumns.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class
