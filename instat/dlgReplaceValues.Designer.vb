@@ -195,7 +195,7 @@ Partial Class dlgReplaceValues
         'rdoNewFromBelow
         '
         Me.rdoNewFromBelow.AutoSize = True
-        Me.rdoNewFromBelow.Location = New System.Drawing.Point(13, 96)
+        Me.rdoNewFromBelow.Location = New System.Drawing.Point(14, 73)
         Me.rdoNewFromBelow.Name = "rdoNewFromBelow"
         Me.rdoNewFromBelow.Size = New System.Drawing.Size(181, 17)
         Me.rdoNewFromBelow.TabIndex = 5
@@ -206,7 +206,7 @@ Partial Class dlgReplaceValues
         'rdoNewFromAbove
         '
         Me.rdoNewFromAbove.AutoSize = True
-        Me.rdoNewFromAbove.Location = New System.Drawing.Point(14, 73)
+        Me.rdoNewFromAbove.Location = New System.Drawing.Point(14, 96)
         Me.rdoNewFromAbove.Name = "rdoNewFromAbove"
         Me.rdoNewFromAbove.Size = New System.Drawing.Size(182, 17)
         Me.rdoNewFromAbove.TabIndex = 4
