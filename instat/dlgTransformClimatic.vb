@@ -56,7 +56,6 @@ Public Class dlgTransformClimatic
         ucrReceiverDOY.bAutoFill = True
         ucrReceiverYear.bAutoFill = True
 
-
         ucrReceiverData.SetParameter(New RParameter("data", 0))
         ucrReceiverData.SetParameterIsString()
         ucrReceiverData.bWithQuotes = False
