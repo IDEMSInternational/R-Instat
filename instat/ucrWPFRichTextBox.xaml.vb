@@ -143,6 +143,7 @@ Public Class ucrWPFRichTextBox
         conWebBrowser.Padding = thickness
         rtbOutput.Document.Blocks.Add(conWebBrowser)
         rtbOutput.Document.Blocks.Add(New Documents.Paragraph)
+        rtbOutput.ScrollToEnd()
     End Sub
 
     Private Sub rtbOutput_MouseDoubleClick(sender As Object, e As MouseButtonEventArgs) Handles rtbOutput.MouseDoubleClick
