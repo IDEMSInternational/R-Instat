@@ -55,6 +55,11 @@ Public Class ucrInputComboBox
         FillItemTypes()
     End Sub
 
+    Public Sub SetItemsTypeAsTables()
+        strItemsType = "Tables"
+        FillItemTypes()
+    End Sub
+
     Public Sub SetItemsTypeAsGraphs()
         strItemsType = "Graphs"
         FillItemTypes()
@@ -72,17 +77,22 @@ Public Class ucrInputComboBox
                     frmMain.clsRLink.FillColumnNames(ucrDataFrameSelector.cboAvailableDataFrames.Text, cboColumns:=cboInput)
                 End If
             Case "Data Frames"
+                'TODO not yet implemented
             Case "Models"
                 If ucrDataFrameSelector IsNot Nothing Then
                     cboInput.Items.Clear()
                     cboInput.Items.AddRange(frmMain.clsRLink.GetModelNames(ucrDataFrameSelector.cboAvailableDataFrames.Text).ToArray)
+                End If
+            Case "Tables"
+                If ucrDataFrameSelector IsNot Nothing Then
+                    cboInput.Items.Clear()
+                    cboInput.Items.AddRange(frmMain.clsRLink.GetTableNames(ucrDataFrameSelector.cboAvailableDataFrames.Text).ToArray)
                 End If
             Case "Graphs"
                 If ucrDataFrameSelector IsNot Nothing Then
                     cboInput.Items.Clear()
                     cboInput.Items.AddRange(frmMain.clsRLink.GetGraphNames(ucrDataFrameSelector.cboAvailableDataFrames.Text).ToArray())
                 End If
-
             Case "Filters"
                 If ucrDataFrameSelector IsNot Nothing Then
                     cboInput.Items.Clear()
@@ -233,7 +243,7 @@ Public Class ucrInputComboBox
         cboInput.DropDownStyle = ComboBoxStyle.DropDown
         cboInput.AutoCompleteMode = AutoCompleteMode.Append
         cboInput.AutoCompleteSource = AutoCompleteSource.ListItems
-        'TODO implement validation settings for this
+        'TODO implement validation settings for this		
         If bAdditionsAllowed Then
 
         Else

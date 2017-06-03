@@ -323,14 +323,21 @@ Public Class clsGridLink
                 vecColumnDataTypes = frmMain.clsRLink.RunInternalScriptGetValue(clsGetVarMetaFunc.ToScript()).AsCharacter
 
                 For k = 0 To dfTemp.ColumnCount - 1
-                    If vecColumnDataTypes(k).Contains("factor") Then
+                    If vecColumnDataTypes(k).Contains("factor") AndAlso vecColumnDataTypes(k).Contains("ordered") Then
+                        fillWorkSheet.ColumnHeaders(k).Text = strColumnNames(k) & " (o.f)"
+                        fillWorkSheet.ColumnHeaders(k).TextColor = Graphics.SolidColor.Blue
+                    ElseIf vecColumnDataTypes(k).Contains("factor") Then
                         fillWorkSheet.ColumnHeaders(k).Text = strColumnNames(k) & " (f)"
+                        fillWorkSheet.ColumnHeaders(k).TextColor = Graphics.SolidColor.Blue
                     ElseIf vecColumnDataTypes(k).Contains("character") Then
                         fillWorkSheet.ColumnHeaders(k).Text = strColumnNames(k) & " (c)"
+                        fillWorkSheet.ColumnHeaders(k).TextColor = Graphics.SolidColor.DarkBlue
                     ElseIf vecColumnDataTypes(k).Contains("Date") Then
                         fillWorkSheet.ColumnHeaders(k).Text = strColumnNames(k) & " (D)"
+                        fillWorkSheet.ColumnHeaders(k).TextColor = Graphics.SolidColor.DarkBlue
                     Else
                         fillWorkSheet.ColumnHeaders(k).Text = strColumnNames(k)
+                        fillWorkSheet.ColumnHeaders(k).TextColor = Graphics.SolidColor.DarkBlue
                     End If
                 Next
             Else
