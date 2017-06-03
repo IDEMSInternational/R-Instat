@@ -31,7 +31,6 @@
 
             clsXlabTempFunc.SetPackageName("ggplot2")
             clsXlabTempFunc.SetRCommand("xlab")
-            clsXlabTempFunc.AddParameter("label", Chr(34) & Chr(34))
             Return clsXlabTempFunc
         End Get
     End Property
@@ -42,7 +41,6 @@
 
             clsXlabTempFunc.SetPackageName("ggplot2")
             clsXlabTempFunc.SetRCommand("scale_x_continuous")
-
             Return clsXlabTempFunc
         End Get
     End Property
