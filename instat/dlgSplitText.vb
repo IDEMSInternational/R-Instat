@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgSplitText
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsDefaultFunction As New RFunction
+    Private clsSplitTextFunction As New RFunction
 
     Private Sub dlgSplitText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -66,17 +66,17 @@ Public Class dlgSplitText
     End Sub
 
     Private Sub SetDefaults()
-        clsDefaultFunction = New RFunction
+        clsSplitTextFunction = New RFunction
 
         ucrSelectorSplitTextColumn.Reset()
 
-        clsDefaultFunction.SetPackageName("stringr")
-        clsDefaultFunction.SetRCommand("str_split_fixed")
-        clsDefaultFunction.AddParameter("pattern", Chr(34) & "," & Chr(34))
-        clsDefaultFunction.AddParameter("n", 2)
-        clsDefaultFunction.SetAssignTo(strTemp:="Split", strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="Split", bAssignToIsPrefix:=True)
+        clsSplitTextFunction.SetPackageName("stringr")
+        clsSplitTextFunction.SetRCommand("str_split_fixed")
+        clsSplitTextFunction.AddParameter("pattern", Chr(34) & "," & Chr(34))
+        clsSplitTextFunction.AddParameter("n", 2)
+        clsSplitTextFunction.SetAssignTo(strTemp:="Split", strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="Split", bAssignToIsPrefix:=True)
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsSplitTextFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
