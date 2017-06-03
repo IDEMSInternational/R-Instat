@@ -171,22 +171,20 @@ Public Class sdgPlots
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewXScalecontinuousFunction As RFunction = Nothing, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsTitleFunction As RFunction = Nothing, Optional clsNewRFacetFunction As RFunction = Nothing, Optional clsNewThemeParam As RParameter = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewYScalecontinuousFunction As RFunction = Nothing, Optional clsNewXScalecontinuousFunction As RFunction = Nothing, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsTitleFunction As RFunction = Nothing, Optional clsNewYLabsTitleFunction As RFunction = Nothing, Optional clsNewRFacetFunction As RFunction = Nothing, Optional clsNewThemeParam As RParameter = Nothing, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
         clsBaseOperator = clsNewOperator
         clsXLabFunction = clsNewXLabsTitleFunction
+        clsYLabFunction = clsNewYLabsTitleFunction
         clsXScalecontinuousFunction = clsNewXScalecontinuousFunction
-
 
         If clsNewLabsFunction IsNot Nothing Then
             clsLabsFunction = clsNewLabsFunction
         Else
             clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         End If
-
-
 
         If clsNewThemeParam IsNot Nothing Then
             clsBaseOperator.AddParameter(clsNewThemeParam)

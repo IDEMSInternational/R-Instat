@@ -27,6 +27,8 @@ Public Class dlgScatterPlot
     Private clsXlabsFunction As New RFunction
     Private clsYlabsFunction As New RFunction
     Private clsXScalecontinuousFunction As New RFunction
+    Private clsYScalecontinuousFunction As New RFunction
+
 
     Private Sub dlgScatterPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -115,7 +117,7 @@ Public Class dlgScatterPlot
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
-
+        clsYScalecontinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone()
 
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
