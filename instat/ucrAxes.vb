@@ -26,19 +26,6 @@ Public Class ucrAxes
     Public bFirstLoad As Boolean = True
     Dim bInitialiseControls As Boolean = False
 
-    Public Sub SetYOrX(bNewIsXorY As Boolean)
-        bIsX = bNewIsXorY
-    End Sub
-
-    Private Sub SetDefaults()
-        ucrTickMarkers.SetName("Interval")
-        ucrInputTitle.SetName("")
-        ucrNudTickMarkersNoOfDecimalPlaces.Value = 0
-        ucrNudFrom.Value = 0
-        ucrNudTo.Value = 0
-        ucrNudInStepsOf.Value = 0
-    End Sub
-
     Public Sub InitialiseControl()
         Dim dctTickMarkers As New Dictionary(Of String, String)
 
@@ -72,14 +59,12 @@ Public Class ucrAxes
 
         ucrPnlTickmarkers.AddToLinkedControls(ucrNudTickMarkersNoOfDecimalPlaces, {rdoTickMarkersCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudTickMarkersNoOfDecimalPlaces.SetLinkedDisplayControl(lblTickMarkersNoOfDecimalPlaces)
-
-        ucrTickMarkers.SetParameter(New RParameter("breaks"))
-        dctTickMarkers.Add("Interval", Chr(34) & "" & Chr(34))
-        dctTickMarkers.Add("Specific Values", Chr(34) & "" & Chr(34))
-        ucrTickMarkers.SetItems(dctTickMarkers)
+        ucrTickMarkers.SetItems({"Interval", "Specific Values"})
 
         ucrPnlTickmarkers.AddParameterPresentCondition(rdoTickMarkersAuto, "breaks", False)
         ucrPnlTickmarkers.AddParameterPresentCondition(rdoTickMarkersCustom, "breaks", True)
+        ucrSpecificValues.SetParameter(New RParameter("breaks"))
+        'ucrSpecificValues.SetValidationTypeAsNumericList()
 
 
         'these add parameters to clsSeqFunction
@@ -92,9 +77,6 @@ Public Class ucrAxes
         ucrPnlScales.AddParameterPresentCondition(rdoScalesAuto, "limits", False)
         ucrPnlScales.AddRadioButton(rdoScalesCustom)
         ucrPnlScales.AddParameterPresentCondition(rdoScalesCustom, "limits", True)
-
-        'ucrPnlScales.AddToLinkedControls(ucrInputNoofDecimalsLimit, {rdoScalesCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrInputNoofDecimalsLimit.SetLinkedDisplayControl(lblScalesNoDecimalPlaces)
 
         ucrPnlScales.AddToLinkedControls(ucrInputLowerLimit, {rdoScalesCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputLowerLimit.SetLinkedDisplayControl(lblLowerLimit)
@@ -144,10 +126,15 @@ Public Class ucrAxes
         ucrInputLowerLimit.SetRCode(clsXScalecontinuousFunction, bReset)
         ucrInputUpperLimit.SetRCode(clsXScalecontinuousFunction, bReset)
         ucrPnlTickmarkers.SetRCode(clsXScalecontinuousFunction, bReset)
+        ucrSpecificValues.SetRCode(clsXScalecontinuousFunction, bReset)
 
         ucrNudInStepsOf.SetRCode(clsSeqFunction, bReset)
+        clsSeqFunction.AddParameter("by", 0)
         ucrNudTo.SetRCode(clsSeqFunction, bReset)
+        clsSeqFunction.AddParameter("to", 0)
         ucrNudFrom.SetRCode(clsSeqFunction, bReset)
+        clsSeqFunction.AddParameter("from", 0)
+        ucrTickMarkers.SetName("Interval")
 
         AddRemoveLabs()
         AddRemoveXScales()
