@@ -181,11 +181,11 @@ Public Class ucrAxes
     Private Sub ucrPnlAxisTitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlAxisTitle.ControlValueChanged, ucrInputTitle.ControlValueChanged
         If ucrChangedControl.Equals(ucrPnlAxisTitle) Then
             If rdoTitleAuto.Checked Then
-                clsXlabTitleFunction.RemoveParameterByName("label")
+                clsXYlabTitleFunction.RemoveParameterByName("label")
             ElseIf rdoNoTitle.Checked Then
-                clsXlabTitleFunction.AddParameter("label", Chr(34) & Chr(34))
+                clsXYlabTitleFunction.AddParameter("label", Chr(34) & Chr(34))
             Else
-                clsXlabTitleFunction.AddParameter(ucrInputTitle.GetParameter())
+                clsXYlabTitleFunction.AddParameter(ucrInputTitle.GetParameter())
             End If
         End If
         AddRemoveLabs()
