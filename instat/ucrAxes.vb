@@ -20,6 +20,7 @@ Public Class ucrAxes
     Public bIsX As Boolean
     '  Public clsRsyntax As New RSyntax
     Public clsXYlabTitleFunction As RFunction
+    Public clsXScalecontinuousFunction As New RFunction
     Public clsXlabTitleFunction As New RFunction
 
     Public clsBaseOperator As New ROperator
@@ -63,6 +64,8 @@ Public Class ucrAxes
         ucrPnlAxisTitle.AddToLinkedControls(ucrInputTitle, {rdoSpecifyTitle}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputTitle.SetLinkedDisplayControl(lblTitle)
 
+        ucrPnlScales.AddParameterPresentCondition(rdoScalesAuto, "limits", False)
+
         ucrInputTitle.SetParameter(New RParameter("label"))
         'Tick Markers section
 
@@ -90,8 +93,8 @@ Public Class ucrAxes
         'Scales section
         ucrPnlScales.AddRadioButton(rdoScalesAuto)
         ucrPnlScales.AddRadioButton(rdoScalesCustom)
-        ucrPnlScales.AddToLinkedControls(ucrInputNoofDecimalsLimit, {rdoScalesCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputNoofDecimalsLimit.SetLinkedDisplayControl(lblScalesNoDecimalPlaces)
+        'ucrPnlScales.AddToLinkedControls(ucrInputNoofDecimalsLimit, {rdoScalesCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        'ucrInputNoofDecimalsLimit.SetLinkedDisplayControl(lblScalesNoDecimalPlaces)
 
         ucrPnlScales.AddToLinkedControls(ucrInputLowerLimit, {rdoScalesCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputLowerLimit.SetLinkedDisplayControl(lblLowerLimit)
@@ -122,7 +125,7 @@ Public Class ucrAxes
 
     ' i think this sub can be used to set the functions to link with the subdialog
 
-    Public Sub SetRCodeForControl(bIsXAxis As Boolean, Optional clsNewXYlabTitleFunction As RFunction = Nothing, Optional clsNewBaseOperator As ROperator = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCodeForControl(bIsXAxis As Boolean, Optional clsNewXScalecontinuousFunction As RFunction = Nothing, Optional clsNewXYlabTitleFunction As RFunction = Nothing, Optional clsNewBaseOperator As ROperator = Nothing, Optional bReset As Boolean = False)
 
         If Not bInitialiseControls Then
             InitialiseControl()
@@ -146,8 +149,21 @@ Public Class ucrAxes
             clsXYlabTitleFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         End If
 
+        If clsNewXScalecontinuousFunction IsNot Nothing Then
+            clsXScalecontinuousFunction = clsNewXScalecontinuousFunction
+        Else
+            clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone
+        End If
+
         ucrPnlAxisTitle.SetRCode(clsXYlabTitleFunction, bReset)
         ucrInputTitle.SetRCode(clsXYlabTitleFunction, bReset)
+
+        'scales functions
+        ucrPnlScales.SetRCode(clsXScalecontinuousFunction, bReset)
+        ucrInputLowerLimit.SetRCode(clsXScalecontinuousFunction, bReset)
+        ucrInputUpperLimit.SetRCode(clsXScalecontinuousFunction, bReset)
+
+        ' ucrInputNoofDecimalsLimit.SetRCode(clsXScalecontinuousFunction, bReset)
 
         ucrNudInStepsOf.SetRCode(clsSeqFunction, bReset)
         ucrNudTo.SetRCode(clsSeqFunction, bReset)
@@ -176,15 +192,11 @@ Public Class ucrAxes
 
     Private Sub ScalesFunction()
         If rdoScalesCustom.Checked Then
-            clsScalecontinuousFunction.AddParameter("limits", "c(" & ucrInputLowerLimit.GetText & "," & ucrInputUpperLimit.GetText & ")")
+            'clsScalecontinuousFunction.AddParameter("limits", "c(" & ucrInputLowerLimit.GetText & "," & ucrInputUpperLimit.GetText & ")")
             ' clsRsyntax.AddOperatorParameter("scale_" & strAxis & "_continuous", clsRFunc:=clsScalecontinuousFunction)
         Else
             'clsRsyntax.RemoveOperatorParameter("scale_" & strAxis & "_continuous")
         End If
-    End Sub
-
-    Private Sub ucrOverwriteTitle_NameChanged() Handles ucrInputTitle.NameChanged
-
     End Sub
 
     Private Sub ucrChkOverwriteTitle_CheckedChanged(sender As Object, e As EventArgs)
@@ -219,10 +231,6 @@ Public Class ucrAxes
         TitleDefaults()
     End Sub
 
-    Private Sub ucrNudLowerLimit_TextChanged(sender As Object, e As EventArgs)
-        ScalesFunction()
-    End Sub
-
     Private Sub ucrNudTickMarkersNoOfDecimalPlaces_ControlContentsChanged() Handles ucrNudTickMarkersNoOfDecimalPlaces.ControlContentsChanged
         ucrNudFrom.DecimalPlaces = ucrNudTickMarkersNoOfDecimalPlaces.Value
         ucrNudTo.DecimalPlaces = ucrNudTickMarkersNoOfDecimalPlaces.Value
@@ -230,15 +238,15 @@ Public Class ucrAxes
     End Sub
 
     Private Sub ucrTickMarkers_ControlValueChanged() Handles ucrTickMarkers.ControlValueChanged
-        If rdoTickMarkersCustom.Checked Then
-            If ucrTickMarkers.cboInput.SelectedItem = "Interval" Then
-                clsSeqFunction.SetRCommand("seq")
-                clsScalecontinuousFunction.AddParameter("breaks", clsRFunctionParameter:=clsSeqFunction)
+        'If rdoTickMarkersCustom.Checked Then
+        '    If ucrTickMarkers.cboInput.SelectedItem = "Interval" Then
+        '        clsSeqFunction.SetRCommand("seq")
+        '        clsScalecontinuousFunction.AddParameter("breaks", clsRFunctionParameter:=clsSeqFunction)
 
-            ElseIf ucrTickMarkers.cboInput.SelectedItem = "Specific Values" Then
-                clsScalecontinuousFunction.RemoveParameterByName("breaks")
-            End If
-        End If
+        '    ElseIf ucrTickMarkers.cboInput.SelectedItem = "Specific Values" Then
+        '        clsScalecontinuousFunction.RemoveParameterByName("breaks")
+        '    End If
+        'End If
     End Sub
 
     Private Sub AddRemoveLabs()
@@ -261,5 +269,25 @@ Public Class ucrAxes
         End If
         AddRemoveLabs()
     End Sub
+
+    Private Sub AddRemoveXScales()
+        If rdoScalesCustom.Checked Then
+            clsBaseOperator.AddParameter("xscales", clsRFunctionParameter:=clsXScalecontinuousFunction)
+        Else
+            clsBaseOperator.RemoveParameterByName("xscales")
+        End If
+    End Sub
+
+    Private Sub ucrPnlScales_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlScales.ControlValueChanged, ucrInputLowerLimit.ControlValueChanged, ucrInputUpperLimit.ControlValueChanged
+        If ucrChangedControl.Equals(ucrPnlScales) Then
+            If rdoScalesCustom.Checked AndAlso (Not ucrInputLowerLimit.IsEmpty AndAlso Not ucrInputUpperLimit.IsEmpty) Then
+                clsXScalecontinuousFunction.AddParameter("limits", "c(" & ucrInputLowerLimit.GetText & "," & ucrInputUpperLimit.GetText & ")")
+            Else
+                clsXScalecontinuousFunction.RemoveParameterByName("limits")
+            End If
+        End If
+        AddRemoveXScales()
+    End Sub
+
 End Class
 

@@ -29,6 +29,7 @@ Public Class sdgPlots
 
     Public clsRFacetFunction As New RFunction
     Public clsXLabFunction As New RFunction
+    Public clsXScalecontinuousFunction As New RFunction
     Public clsYLabFunction As New RFunction
     Public clsBaseOperator As New ROperator
 
@@ -175,6 +176,9 @@ Public Class sdgPlots
             InitialiseControls()
         End If
         clsBaseOperator = clsNewOperator
+        clsXLabFunction = clsNewXLabsTitleFunction
+        clsXScalecontinuousFunction = clsNewXScalecontinuousFunction
+
 
         If clsNewLabsFunction IsNot Nothing Then
             clsLabsFunction = clsNewLabsFunction
@@ -182,7 +186,7 @@ Public Class sdgPlots
             clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         End If
 
-        clsXLabFunction = clsNewXLabsTitleFunction
+
 
         If clsNewThemeParam IsNot Nothing Then
             clsBaseOperator.AddParameter(clsNewThemeParam)
