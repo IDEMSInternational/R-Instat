@@ -103,12 +103,18 @@ Public Class ucrCore
                     If Not clsTempRCode.ContainsParameter(clsTempRParameter) Then
                         If clsTempRCode.ContainsParameter(clsTempRParameter.strArgumentName) Then
                             SetParameter(clsTempRCode.GetParameter(clsTempRParameter.strArgumentName), i)
-                        ElseIf bReset Then
-                            If objDefaultState Is Nothing Then
-                                SetToRDefault()
-                                'Exit Sub
-                            End If
                         Else
+                            SetParameter(GetParameter(i).Clone(), i)
+                            If bReset Then
+                                If objDefaultState Is Nothing Then
+                                    If objRDefault IsNot Nothing Then
+                                        SetToRDefault()
+                                    Else
+                                        ResetControlValue()
+                                    End If
+                                    'Exit Sub
+                                End If
+                            End If
                         End If
                     End If
                 Else
@@ -530,4 +536,8 @@ Public Class ucrCore
             lstAllRCodes(0) = bNewRCode
         End Set
     End Property
+
+    Protected Overridable Sub ResetControlValue()
+        'TODO implement in specific controls
+    End Sub
 End Class

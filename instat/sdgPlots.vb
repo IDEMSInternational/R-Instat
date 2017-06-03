@@ -24,15 +24,12 @@ Public Class sdgPlots
     'This clsRSyntax is linked with the ucrBase.clsRSyntax from the dlg calling sdgPLotOptions...
     Public clsRggplotFunction As New RFunction
     Public clsAesFunction As New RFunction    'Warning: I m not sure this field is useful... Will all be revised when changing links though...
-
     Public clsLabsFunction As New RFunction
-    Public clsXLabTitleFunction As New RFunction
-
     Public clsRFacetFunction As New RFunction
     Public clsXLabFunction As New RFunction
+    Public clsXScalecontinuousFunction As New RFunction
     Public clsYLabFunction As New RFunction
     Public clsBaseOperator As New ROperator
-
     Private bControlsInitialised As Boolean = False
     'All the previous RFunctions will eventually be stored as parameters (or parameters of parameters) within the RSyntax building the big Ggplot command "ggplot(...) + geom_..(..) + ... + theme(...) + scales(...) ..."
     'They are treated separately from the RSyntax for the sake of clarity, then sinked in eventually.
@@ -42,7 +39,6 @@ Public Class sdgPlots
     Private clsTempOp As New ROperator
     Private strSingleFactor As String
     Private strSecondvariable As String
-
     'See bLayersDefaultIsGolobal below.
     Private Sub sdgPlots_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'If bFirstLoad Then
@@ -80,6 +76,7 @@ Public Class sdgPlots
 
         ucrChkMargin.SetText("Margins")
         ucrChkMargin.SetParameter(New RParameter("margins"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True)
+        ucrChkMargin.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkMargin.SetRDefault("FALSE")
         ucrChkMargin.AddToLinkedControls(ucrChkNoOfRowsOrColumns, {False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=False)
 
@@ -146,9 +143,10 @@ Public Class sdgPlots
         'ucrInputLegend.SetParameter(New RParameter("fill"))
 
         'X Axis tab
-
+        'ucrXAxis.InitialiseControl()
 
         'Y Axis tab
+        'ucrYAxis.InitialiseControl()
 
         'themes tab
         ucrInputThemes.SetParameter(New RParameter("theme"))
@@ -169,22 +167,20 @@ Public Class sdgPlots
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsTitleFunction As RFunction = Nothing, Optional clsNewRFacetFunction As RFunction = Nothing, Optional clsNewThemeParam As RParameter = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewYScalecontinuousFunction As RFunction = Nothing, Optional clsNewXScalecontinuousFunction As RFunction = Nothing, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsTitleFunction As RFunction = Nothing, Optional clsNewYLabsTitleFunction As RFunction = Nothing, Optional clsNewRFacetFunction As RFunction = Nothing, Optional clsNewThemeParam As RParameter = Nothing, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
-        ucrXAxis.SetRCodeForXorY(True)
         clsBaseOperator = clsNewOperator
+        clsXLabFunction = clsNewXLabsTitleFunction
+        clsYLabFunction = clsNewYLabsTitleFunction
+        clsXScalecontinuousFunction = clsNewXScalecontinuousFunction
+        clsRFacetFunction = clsNewRFacetFunction
+
         If clsNewLabsFunction IsNot Nothing Then
             clsLabsFunction = clsNewLabsFunction
         Else
             clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
-        End If
-
-        If clsNewXLabsTitleFunction IsNot Nothing Then
-            clsXLabTitleFunction = clsNewXLabsTitleFunction
-        Else
-            clsLabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         End If
 
         If clsNewThemeParam IsNot Nothing Then
@@ -192,7 +188,8 @@ Public Class sdgPlots
         Else
             clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultTheme.Clone())
         End If
-        'clsRFacetFunction = clsNewRFacetFunction
+
+
         ucrInputGraphTitle.SetRCode(clsLabsFunction, bReset)
         ucrInputGraphSubTitle.SetRCode(clsLabsFunction, bReset)
         ucrInputGraphCaption.SetRCode(clsLabsFunction, bReset)
@@ -202,18 +199,23 @@ Public Class sdgPlots
         ucrPnlHorizonatalVertical.SetRCode(clsRFacetFunction, bReset)
         ucr1stFactorReceiver.SetRCode(clsTempOp, bReset)
         ucr2ndFactorReceiver.SetRCode(clsTempOp, bReset)
+
         ucrChkMargin.SetRCode(clsRFacetFunction, bReset)
         ucrChkFreeSpace.SetRCode(clsRFacetFunction, bReset)
         ucrChkFreeScalesX.SetRCode(clsRFacetFunction, bReset)
         ucrChkFreeScalesY.SetRCode(clsRFacetFunction, bReset)
         ucrNudNumberofRows.SetRCode(clsRFacetFunction, bReset)
         ucrChkIncludeFacets.SetRCode(clsBaseOperator, bReset)
+
         AddRemoveLabs()
 
+        'axis controls
+        ucrXAxis.SetRCodeForControl(True, clsNewXYlabTitleFunction:=clsXLabFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        'ucrYAxis.SetRCodeForControl(True, clsNewXYlabTitleFunction:=clsNewYLabTitleFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
-        tbpXAxis.Enabled = False
+        ' tbpXAxis.Enabled = False
         tbpYAxis.Enabled = False
-        tbpFacet.Enabled = False
+        'tbpFacet.Enabled = False
         tbpLayers.Enabled = False
         tbpCoordinates.Enabled = False
 
@@ -260,6 +262,7 @@ Public Class sdgPlots
             clsTempOp.RemoveParameterByName("sn")
             clsRFacetFunction.AddParameter("facets", clsROperatorParameter:=clsTempOp, iPosition:=1)
         End If
+        clsBaseOperator.AddParameter("facet", clsRFunctionParameter:=clsRFacetFunction)
     End Sub
 
     Public Sub DisableLayersTab()
@@ -281,10 +284,6 @@ Public Class sdgPlots
         'ucrYAxis.Reset()
         'rdoLegendTitleAuto.Checked = True
         'bLayersDefaultIsGlobal = False
-    End Sub
-
-    Public Sub Reset()
-        SetDefaults()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -530,11 +529,6 @@ Public Class sdgPlots
         ucrFacetSelector.SetDataframe(strDataFrame, False)
     End Sub
 
-    Public Sub SetRSyntax(clsRSyntaxIn As RSyntax)
-        'When the link for RSyntax has been changed, the ucrAdditionalLayers RSyntax needs to be updated.
-        'clsRsyntax = clsRSyntaxIn
-        'ucrPlotsAdditionalLayers.SetRSyntax(clsRsyntax)
-    End Sub
 
     Public Property bLayersDefaultIsGlobal As Boolean
         'Warning: This is used to decide whether the default setting of the first created layer should be to apply aes on all layers. Indeed, coming from plotoptions, it might be that the first layer is the "first additional layer" (don't want to ApplyOnAllLayers), whereas coming from generalforgraphics, the first layer is the first layer. This should be eliminated when the plotoptions sdg will be edited to have as first layer the non-editable layer coming from the main dlg. See issue #1948
@@ -547,16 +541,6 @@ Public Class sdgPlots
             ucrPlotsAdditionalLayers.bSetGlobalIsDefault = bValue
         End Set
     End Property
-
-    Private Sub ucrInputLegend_NameChanged() Handles ucrInputLegend.NameChanged
-        '    If rdoLegendTitleCustom.Checked AndAlso (Not ucrInputLegend.IsEmpty()) Then
-
-
-        '        clsRsyntax.AddOperatorParameter("labs", clsRFunc:=clsLegendFunction)
-        '    ElseIf rdoLegendTitleAuto.Checked Then
-        '        clsRsyntax.RemoveOperatorParameter("labs")
-        '    End If
-    End Sub
 
     Private Sub AddRemoveLabs()
         If Not ucrInputGraphTitle.IsEmpty() OrElse (Not ucrInputGraphSubTitle.IsEmpty() OrElse Not ucrInputGraphCaption.IsEmpty()) Then
