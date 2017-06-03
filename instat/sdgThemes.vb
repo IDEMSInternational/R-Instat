@@ -17,7 +17,7 @@ Imports instat.Translations
 
 Public Class sdgThemes
     Public bControlsInitialised As Boolean = False
-    Public clsElementText, clsElementLine, clsGgThemes As New RFunction
+    Public clsElementText, clsElementTextTop, clsElementLine, clsElementLineTop, clsGgThemes As New RFunction
     Private clsBaseOperator As New ROperator
     Private Sub sdgThemes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -252,7 +252,9 @@ Public Class sdgThemes
         clsGgThemes.SetRCommand("theme")
 
         clsElementText.SetRCommand("element_text")
+        clsElementTextTop.SetRCommand("element_text")
         clsElementLine.SetRCommand("element_line")
+        clsElementLineTop.SetRCommand("element_line")
 
         'For Setting default values for the nuds 
         '' clsTextTheme.AddParameter("size", 10)
@@ -269,7 +271,7 @@ Public Class sdgThemes
         clsGgThemes.AddParameter("axis.ticks", clsRFunctionParameter:=clsElementLine)
         clsGgThemes.AddParameter("axis.ticks.x", clsRFunctionParameter:=clsElementLine)
         clsGgThemes.AddParameter("axis.text.x", clsRFunctionParameter:=clsElementText)
-        clsGgThemes.AddParameter("axis.text.x.top", clsRFunctionParameter:=clsElementText)
+        clsGgThemes.AddParameter("axis.text.x.top", clsRFunctionParameter:=clsElementTextTop)
         'clsGgThemes.AddParameter("axis.text", clsRFunctionParameter:=clsTextTheme)
         ' clsGgThemes.AddParameter("title", clsRFunctionParameter:=clsTextTheme)
 
@@ -292,14 +294,14 @@ Public Class sdgThemes
         ucrInputLineTypeTickMarks.SetRCode(clsElementLine, bReset)
         ucrInputLineEndTickMarks.SetRCode(clsElementLine, bReset)
 
-        ucrNudAngleTopAxis.SetRCode(clsElementText, bReset)
-        ucrNudHjustTopAxis.SetRCode(clsElementText, bReset)
-        ucrNudLineHeightTopAxis.SetRCode(clsElementText, bReset)
-        ucrNudSizeTopaxis.SetRCode(clsElementText, bReset)
-        ucrNudVjustTopAxis.SetRCode(clsElementText, bReset)
-        ucrInputColourTopAxis.SetRCode(clsElementText, bReset)
-        ucrInputFaceTopAxis.SetRCode(clsElementText, bReset)
-        ucrInputFamilyTopAxis.SetRCode(clsElementText, bReset)
+        ucrNudAngleTopAxis.SetRCode(clsElementTextTop, bReset)
+        ucrNudHjustTopAxis.SetRCode(clsElementTextTop, bReset)
+        ucrNudLineHeightTopAxis.SetRCode(clsElementTextTop, bReset)
+        ucrNudSizeTopaxis.SetRCode(clsElementTextTop, bReset)
+        ucrNudVjustTopAxis.SetRCode(clsElementTextTop, bReset)
+        ucrInputColourTopAxis.SetRCode(clsElementTextTop, bReset)
+        ucrInputFaceTopAxis.SetRCode(clsElementTextTop, bReset)
+        ucrInputFamilyTopAxis.SetRCode(clsElementTextTop, bReset)
 
         ucrNudSizeXTickLabels.SetRCode(clsElementLine, bReset)
         ucrInputColourXTickMarks.SetRCode(clsElementLine, bReset)
