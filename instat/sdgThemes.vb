@@ -123,6 +123,7 @@ Public Class sdgThemes
         ucrNudSizeTickMarks.SetParameter(New RParameter("size"))
         ucrNudSizeTickMarks.Increment = 0.1
 
+
         ucrChkLineTypeTickMarksXAxis.SetText("Line Type")
         ucrInputLineTypeTickMarks.SetParameter(New RParameter("linetype"))
         dctucrInputLineType.Add("Blank", Chr(34) & "blank" & Chr(34))
@@ -227,9 +228,11 @@ Public Class sdgThemes
 
         'Tick Marks Along Axes
         ucrChkSizeTickLabelsXAxis.SetText("Size")
-        ucrNudSizeXTickLabels.SetParameter(New RParameter("size"))
-        ucrNudSizeXTickLabels.Increment = 0.1
-        ucrInputLineTypeXTickMarks.SetParameter(New RParameter("linetype"))
+        ucrNudSizeTickLabelsXAxis.SetParameter(New RParameter("size"))
+        ucrNudSizeTickLabelsXAxis.Increment = 0.1
+
+        ucrChkLineTypeTickLabelsXAxis.SetText("Line Type")
+        ucrInputLineTypeTickLabelsXAxis.SetParameter(New RParameter("linetype"))
         dctucrInputLineTypeXTickMarks.Add("Blank", Chr(34) & "blank" & Chr(34))
         dctucrInputLineTypeXTickMarks.Add("Solid", Chr(34) & "solid" & Chr(34))
         dctucrInputLineTypeXTickMarks.Add("Dashed", Chr(34) & "dashed" & Chr(34))
@@ -241,30 +244,30 @@ Public Class sdgThemes
         dctucrInputLineTypeXTickMarks.Add("F1", Chr(34) & "F1" & Chr(34))
         dctucrInputLineTypeXTickMarks.Add("4C88C488", Chr(34) & "4C88C488" & Chr(34))
         dctucrInputLineTypeXTickMarks.Add("12345678", Chr(34) & "12345678" & Chr(34))
-        ucrInputLineTypeXTickMarks.SetItems(dctucrInputLineTypeXTickMarks)
-        ucrInputLineTypeXTickMarks.SetRDefault(Chr(34) & "blank" & Chr(34))
-        ucrInputLineTypeXTickMarks.bUpdateRCodeFromControl = False
+        ucrInputLineTypeTickLabelsXAxis.SetItems(dctucrInputLineTypeXTickMarks)
+        ucrInputLineTypeTickLabelsXAxis.SetRDefault(Chr(34) & "blank" & Chr(34))
+        ucrInputLineTypeTickLabelsXAxis.bUpdateRCodeFromControl = False
 
         ucrChkColourTickLabelsXAxis.SetText("Colour")
-        ucrInputColourXTickMarks.SetParameter(New RParameter("colour"))
+        ucrInputColourTickLabelsXAxis.SetParameter(New RParameter("colour"))
         dctucrInputColourXTickMarks.Add("Black", Chr(34) & "black" & Chr(34))
         dctucrInputColourXTickMarks.Add("Red", Chr(34) & "red" & Chr(34))
         dctucrInputColourXTickMarks.Add("Blue", Chr(34) & "blue" & Chr(34))
         dctucrInputColourXTickMarks.Add("Grey", Chr(34) & "grey" & Chr(34))
         dctucrInputColourXTickMarks.Add("Yellow", Chr(34) & "yellow" & Chr(34))
         dctucrInputColourXTickMarks.Add("Yellow-Green", Chr(34) & "yellowgreen" & Chr(34))
-        ucrInputColourXTickMarks.SetItems(dctucrInputColourXTickMarks)
-        ucrInputColourXTickMarks.SetRDefault(Chr(34) & "black" & Chr(34))
+        ucrInputColourTickLabelsXAxis.SetItems(dctucrInputColourXTickMarks)
+        ucrInputColourTickLabelsXAxis.SetRDefault(Chr(34) & "black" & Chr(34))
 
         ucrChkLineEndTickLabelsXAxis.SetText("Line End")
-        ucrInputLineEndXTickMarks.SetParameter(New RParameter("lineend"))
+        ucrInputLineEndTickLabelsXAxis.SetParameter(New RParameter("lineend"))
         'dctucrInputLineEndXTickMarks.Add("None", Chr(34) & "NULL" & Chr(34))
         dctucrInputLineEndXTickMarks.Add("round", Chr(34) & "round" & Chr(34))
         dctucrInputLineEndXTickMarks.Add("butt", Chr(34) & "butt" & Chr(34))
         dctucrInputLineEndXTickMarks.Add("square", Chr(34) & "square" & Chr(34))
-        ucrInputLineEndXTickMarks.SetItems(dctucrInputLineEndXTickMarks)
-        ucrInputLineEndXTickMarks.SetRDefault(Chr(34) & "square" & Chr(34))
-        ucrInputLineEndXTickMarks.bUpdateRCodeFromControl = False
+        ucrInputLineEndTickLabelsXAxis.SetItems(dctucrInputLineEndXTickMarks)
+        ucrInputLineEndTickLabelsXAxis.SetRDefault(Chr(34) & "square" & Chr(34))
+        ucrInputLineEndTickLabelsXAxis.bUpdateRCodeFromControl = False
 
         'Linking
         ucrChkSize.AddToLinkedControls(ucrNudsize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -284,6 +287,16 @@ Public Class sdgThemes
         ucrChkFaceTopXAxis.AddToLinkedControls(ucrInputFaceTopAxis, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkFamilyTopXAxis.AddToLinkedControls(ucrInputFamilyTopAxis, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkColourTopXAxis.AddToLinkedControls(ucrInputColourTopAxis, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkSizeTickMarksXAxis.AddToLinkedControls(ucrNudSizeTickMarks, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkLineTypeTickMarksXAxis.AddToLinkedControls(ucrInputLineTypeTickMarks, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkLineEndTickMarksXAxis.AddToLinkedControls(ucrInputLineEndTickMarks, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkColourTickMarksXAxis.AddToLinkedControls(ucrInputColourTickMarks, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkSizeTickLabelsXAxis.AddToLinkedControls(ucrNudSizeTickLabelsXAxis, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkLineTypeTickLabelsXAxis.AddToLinkedControls(ucrInputLineTypeTickLabelsXAxis, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkLineEndTickLabelsXAxis.AddToLinkedControls(ucrInputLineEndTickLabelsXAxis, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkColourTickLabelsXAxis.AddToLinkedControls(ucrInputColourTickLabelsXAxis, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         'Y-axis Label
         ucrNudSizeYAxis.SetParameter(New RParameter("size"))
@@ -524,7 +537,7 @@ Public Class sdgThemes
 
         'X axis Label
         ucrNudAngle.SetRCode(clsElementText, bReset)
-        ucrChkSize.SetRCode(clsElementText, bReset)
+        ucrChkAngle.SetRCode(clsElementText, bReset)
 
         ucrNudHjust.SetRCode(clsElementText, bReset)
         ucrChkHjust.SetRCode(clsElementText, bReset)
@@ -584,17 +597,19 @@ Public Class sdgThemes
         ucrInputFamilyTopAxis.SetRCode(clsElementTextTop, bReset)
         ucrChkFamilyTopXAxis.SetRCode(clsElementTextTop, bReset)
 
-        ucrNudSizeXTickLabels.SetRCode(clsElementLine, bReset)
+        ucrNudSizeTickLabelsXAxis.SetRCode(clsElementLine, bReset)
         ucrChkSizeTickLabelsXAxis.SetRCode(clsElementLine, bReset)
 
-        ucrInputColourXTickMarks.SetRCode(clsElementLine, bReset)
-        ucrChkColourTickMarksXAxis.SetRCode(clsElementLine, bReset)
+        ucrInputColourTickLabelsXAxis.SetRCode(clsElementLine, bReset)
+        ucrChkColourTickLabelsXAxis.SetRCode(clsElementLine, bReset)
 
-        ucrInputLineTypeXTickMarks.SetRCode(clsElementLine, bReset)
-        ucrChkLineTypeTickMarksXAxis.SetRCode(clsElementLine, bReset)
+        ucrInputLineTypeTickLabelsXAxis.SetRCode(clsElementLine, bReset)
+        ucrChkLineTypeTickLabelsXAxis.SetRCode(clsElementLine, bReset)
 
-        ucrInputLineEndXTickMarks.SetRCode(clsElementLine, bReset)
-        ucrChkLineEndTickMarksXAxis.SetRCode(clsElementLine, bReset)
+        ucrInputLineEndTickLabelsXAxis.SetRCode(clsElementLine, bReset)
+        ucrChkLineEndTickLabelsXAxis.SetRCode(clsElementLine, bReset)
+
+
     End Sub
 
 End Class
