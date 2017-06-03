@@ -23,6 +23,21 @@ Public Class sdgThemes
         autoTranslate(Me)
     End Sub
 
+    Private Sub ucrNudSizeTopYAxis_Load(sender As Object, e As EventArgs) Handles ucrNudSizeTopYAxis.Load
+
+    End Sub
+
+    Private Sub UcrInputComboBox6_Load(sender As Object, e As EventArgs) Handles ucrInputFamilyTopYAxis.Load
+
+    End Sub
+
+    Private Sub UcrInputComboBox7_Load(sender As Object, e As EventArgs) Handles ucrInputLineEndTickMarksYAxis.Load
+
+    End Sub
+
+    Private Sub ucrInputLineEndTickMarks_Load(sender As Object, e As EventArgs) Handles ucrInputLineEndTickMarks.Load
+
+    End Sub
 
     Public Sub InitialiseControls()
         Dim dctucrInputColour As New Dictionary(Of String, String)

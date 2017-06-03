@@ -78,58 +78,58 @@ Partial Class sdgThemes
         Me.lblFamily = New System.Windows.Forms.Label()
         Me.ucrInputFamily = New instat.ucrInputComboBox()
         Me.tbYaxis = New System.Windows.Forms.TabPage()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.UcrInputComboBox1 = New instat.ucrInputComboBox()
-        Me.Label3 = New System.Windows.Forms.Label()
+        Me.grpTickLabelYAxis = New System.Windows.Forms.GroupBox()
+        Me.LlblLinEndTickLabelYAxis = New System.Windows.Forms.Label()
+        Me.ucrInputLineEndTickLabelsYAxis = New instat.ucrInputComboBox()
+        Me.lblSizeTickLabelYAxis = New System.Windows.Forms.Label()
         Me.ucrNudSizeTickLabelsYAxis = New instat.ucrNud()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.UcrInputComboBox2 = New instat.ucrInputComboBox()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.UcrInputComboBox3 = New instat.ucrInputComboBox()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.Label6 = New System.Windows.Forms.Label()
+        Me.lblColourTickLabelYAxis = New System.Windows.Forms.Label()
+        Me.ucrInputColourTickLabelsYAxis = New instat.ucrInputComboBox()
+        Me.lblLineHeightTickLabelsYAxis = New System.Windows.Forms.Label()
+        Me.ucrInputLineTypeTopYAxis = New instat.ucrInputComboBox()
+        Me.grpYAxisTopLabels = New System.Windows.Forms.GroupBox()
+        Me.lblVjustTopYAxis = New System.Windows.Forms.Label()
         Me.ucrNudVjustTopYAxis = New instat.ucrNud()
-        Me.Label7 = New System.Windows.Forms.Label()
+        Me.lblLineHeightTopYAxis = New System.Windows.Forms.Label()
         Me.ucrNudLineHeightTopYAxis = New instat.ucrNud()
-        Me.Label8 = New System.Windows.Forms.Label()
+        Me.lblAngleTopYAxis = New System.Windows.Forms.Label()
         Me.ucrNudAngleTopYAxis = New instat.ucrNud()
-        Me.Label9 = New System.Windows.Forms.Label()
+        Me.lblHjustTopYAxis = New System.Windows.Forms.Label()
         Me.ucrNudHjustTopYAxis = New instat.ucrNud()
-        Me.Label10 = New System.Windows.Forms.Label()
+        Me.lblSizeTopYAxis = New System.Windows.Forms.Label()
         Me.ucrNudSizeTopYAxis = New instat.ucrNud()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.UcrInputComboBox4 = New instat.ucrInputComboBox()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.UcrInputComboBox5 = New instat.ucrInputComboBox()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.UcrInputComboBox6 = New instat.ucrInputComboBox()
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.UcrInputComboBox7 = New instat.ucrInputComboBox()
-        Me.Label15 = New System.Windows.Forms.Label()
+        Me.lblColourTopYAxis = New System.Windows.Forms.Label()
+        Me.ucrInputColourTopYAxis = New instat.ucrInputComboBox()
+        Me.lblFaceTopYAxis = New System.Windows.Forms.Label()
+        Me.ucrInputFaceTopYAxis = New instat.ucrInputComboBox()
+        Me.lblFamilyTopYaxis = New System.Windows.Forms.Label()
+        Me.ucrInputFamilyTopYAxis = New instat.ucrInputComboBox()
+        Me.grpTickMarksYAxis = New System.Windows.Forms.GroupBox()
+        Me.lblLineEndTickMarksYAxis = New System.Windows.Forms.Label()
+        Me.ucrInputLineEndTickMarksYAxis = New instat.ucrInputComboBox()
+        Me.lblSizeTickMarksYAxis = New System.Windows.Forms.Label()
         Me.ucrNudSizeTickMarksYAxis = New instat.ucrNud()
-        Me.Label16 = New System.Windows.Forms.Label()
-        Me.UcrInputComboBox8 = New instat.ucrInputComboBox()
-        Me.Label17 = New System.Windows.Forms.Label()
-        Me.UcrInputComboBox9 = New instat.ucrInputComboBox()
-        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.lblColourTickMarksYAxis = New System.Windows.Forms.Label()
+        Me.ucrInputColourTickMarksYAxis = New instat.ucrInputComboBox()
+        Me.lblLineHeightTickMarksYAxis = New System.Windows.Forms.Label()
+        Me.ucrInputLineTypeYAxis = New instat.ucrInputComboBox()
+        Me.grpYAxisLabels = New System.Windows.Forms.GroupBox()
         Me.lblVjustYAxis = New System.Windows.Forms.Label()
         Me.ucrNudVjustYAxis = New instat.ucrNud()
         Me.lblLineHeightYAxis = New System.Windows.Forms.Label()
         Me.ucrNudLineHeightYAxis = New instat.ucrNud()
-        Me.Label20 = New System.Windows.Forms.Label()
-        Me.ucrNudLAngle = New instat.ucrNud()
+        Me.lblAngleYAxis = New System.Windows.Forms.Label()
+        Me.ucrNudLAngleYAxis = New instat.ucrNud()
         Me.lblHjustYAxis = New System.Windows.Forms.Label()
         Me.ucrNudHjustYAxis = New instat.ucrNud()
         Me.lblSizeYAxis = New System.Windows.Forms.Label()
         Me.ucrNudSizeYAxis = New instat.ucrNud()
         Me.lblColourYAxis = New System.Windows.Forms.Label()
-        Me.UcrInputComboBox10 = New instat.ucrInputComboBox()
+        Me.ucrInputColourYAxis = New instat.ucrInputComboBox()
         Me.lblFaceYAxis = New System.Windows.Forms.Label()
-        Me.UcrInputComboBox11 = New instat.ucrInputComboBox()
+        Me.ucrInputFaceYAxis = New instat.ucrInputComboBox()
         Me.lblFamilyYAxis = New System.Windows.Forms.Label()
-        Me.crInputComboBox12 = New instat.ucrInputComboBox()
+        Me.ucrInputFamilyYAxis = New instat.ucrInputComboBox()
         Me.ucrBaseSubdialogue = New instat.ucrButtonsSubdialogue()
         Me.tbXaxis.SuspendLayout()
         Me.tbAxis.SuspendLayout()
@@ -139,10 +139,10 @@ Partial Class sdgThemes
         Me.GroupBox1.SuspendLayout()
         Me.grpAxisLabel.SuspendLayout()
         Me.tbYaxis.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
-        Me.GroupBox4.SuspendLayout()
-        Me.GroupBox5.SuspendLayout()
+        Me.grpTickLabelYAxis.SuspendLayout()
+        Me.grpYAxisTopLabels.SuspendLayout()
+        Me.grpTickMarksYAxis.SuspendLayout()
+        Me.grpYAxisLabels.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbXaxis
@@ -745,10 +745,10 @@ Partial Class sdgThemes
         '
         'tbYaxis
         '
-        Me.tbYaxis.Controls.Add(Me.GroupBox2)
-        Me.tbYaxis.Controls.Add(Me.GroupBox3)
-        Me.tbYaxis.Controls.Add(Me.GroupBox4)
-        Me.tbYaxis.Controls.Add(Me.GroupBox5)
+        Me.tbYaxis.Controls.Add(Me.grpTickLabelYAxis)
+        Me.tbYaxis.Controls.Add(Me.grpYAxisTopLabels)
+        Me.tbYaxis.Controls.Add(Me.grpTickMarksYAxis)
+        Me.tbYaxis.Controls.Add(Me.grpYAxisLabels)
         Me.tbYaxis.Location = New System.Drawing.Point(4, 22)
         Me.tbYaxis.Name = "tbYaxis"
         Me.tbYaxis.Padding = New System.Windows.Forms.Padding(3)
@@ -757,50 +757,50 @@ Partial Class sdgThemes
         Me.tbYaxis.Text = "Y-axis"
         Me.tbYaxis.UseVisualStyleBackColor = True
         '
-        'GroupBox2
+        'grpTickLabelYAxis
         '
-        Me.GroupBox2.Controls.Add(Me.Label1)
-        Me.GroupBox2.Controls.Add(Me.UcrInputComboBox1)
-        Me.GroupBox2.Controls.Add(Me.Label3)
-        Me.GroupBox2.Controls.Add(Me.ucrNudSizeTickLabelsYAxis)
-        Me.GroupBox2.Controls.Add(Me.Label4)
-        Me.GroupBox2.Controls.Add(Me.UcrInputComboBox2)
-        Me.GroupBox2.Controls.Add(Me.Label5)
-        Me.GroupBox2.Controls.Add(Me.UcrInputComboBox3)
-        Me.GroupBox2.Location = New System.Drawing.Point(251, 259)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(230, 154)
-        Me.GroupBox2.TabIndex = 43
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Y axis tick labels"
+        Me.grpTickLabelYAxis.Controls.Add(Me.LlblLinEndTickLabelYAxis)
+        Me.grpTickLabelYAxis.Controls.Add(Me.ucrInputLineEndTickLabelsYAxis)
+        Me.grpTickLabelYAxis.Controls.Add(Me.lblSizeTickLabelYAxis)
+        Me.grpTickLabelYAxis.Controls.Add(Me.ucrNudSizeTickLabelsYAxis)
+        Me.grpTickLabelYAxis.Controls.Add(Me.lblColourTickLabelYAxis)
+        Me.grpTickLabelYAxis.Controls.Add(Me.ucrInputColourTickLabelsYAxis)
+        Me.grpTickLabelYAxis.Controls.Add(Me.lblLineHeightTickLabelsYAxis)
+        Me.grpTickLabelYAxis.Controls.Add(Me.ucrInputLineTypeTopYAxis)
+        Me.grpTickLabelYAxis.Location = New System.Drawing.Point(251, 259)
+        Me.grpTickLabelYAxis.Name = "grpTickLabelYAxis"
+        Me.grpTickLabelYAxis.Size = New System.Drawing.Size(230, 154)
+        Me.grpTickLabelYAxis.TabIndex = 43
+        Me.grpTickLabelYAxis.TabStop = False
+        Me.grpTickLabelYAxis.Text = "Y axis tick labels"
         '
-        'Label1
+        'LlblLinEndTickLabelYAxis
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(12, 108)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(52, 13)
-        Me.Label1.TabIndex = 31
-        Me.Label1.Text = "Line End:"
+        Me.LlblLinEndTickLabelYAxis.AutoSize = True
+        Me.LlblLinEndTickLabelYAxis.Location = New System.Drawing.Point(12, 108)
+        Me.LlblLinEndTickLabelYAxis.Name = "LlblLinEndTickLabelYAxis"
+        Me.LlblLinEndTickLabelYAxis.Size = New System.Drawing.Size(52, 13)
+        Me.LlblLinEndTickLabelYAxis.TabIndex = 31
+        Me.LlblLinEndTickLabelYAxis.Text = "Line End:"
         '
-        'UcrInputComboBox1
+        'ucrInputLineEndTickLabelsYAxis
         '
-        Me.UcrInputComboBox1.AddQuotesIfUnrecognised = True
-        Me.UcrInputComboBox1.IsReadOnly = False
-        Me.UcrInputComboBox1.Location = New System.Drawing.Point(72, 100)
-        Me.UcrInputComboBox1.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.UcrInputComboBox1.Name = "UcrInputComboBox1"
-        Me.UcrInputComboBox1.Size = New System.Drawing.Size(137, 21)
-        Me.UcrInputComboBox1.TabIndex = 32
+        Me.ucrInputLineEndTickLabelsYAxis.AddQuotesIfUnrecognised = True
+        Me.ucrInputLineEndTickLabelsYAxis.IsReadOnly = False
+        Me.ucrInputLineEndTickLabelsYAxis.Location = New System.Drawing.Point(72, 100)
+        Me.ucrInputLineEndTickLabelsYAxis.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputLineEndTickLabelsYAxis.Name = "ucrInputLineEndTickLabelsYAxis"
+        Me.ucrInputLineEndTickLabelsYAxis.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputLineEndTickLabelsYAxis.TabIndex = 32
         '
-        'Label3
+        'lblSizeTickLabelYAxis
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(13, 22)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(30, 13)
-        Me.Label3.TabIndex = 29
-        Me.Label3.Text = "Size:"
+        Me.lblSizeTickLabelYAxis.AutoSize = True
+        Me.lblSizeTickLabelYAxis.Location = New System.Drawing.Point(13, 22)
+        Me.lblSizeTickLabelYAxis.Name = "lblSizeTickLabelYAxis"
+        Me.lblSizeTickLabelYAxis.Size = New System.Drawing.Size(30, 13)
+        Me.lblSizeTickLabelYAxis.TabIndex = 29
+        Me.lblSizeTickLabelYAxis.Text = "Size:"
         '
         'ucrNudSizeTickLabelsYAxis
         '
@@ -814,77 +814,77 @@ Partial Class sdgThemes
         Me.ucrNudSizeTickLabelsYAxis.TabIndex = 30
         Me.ucrNudSizeTickLabelsYAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'Label4
+        'lblColourTickLabelYAxis
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(12, 76)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(40, 13)
-        Me.Label4.TabIndex = 27
-        Me.Label4.Text = "Colour:"
+        Me.lblColourTickLabelYAxis.AutoSize = True
+        Me.lblColourTickLabelYAxis.Location = New System.Drawing.Point(12, 76)
+        Me.lblColourTickLabelYAxis.Name = "lblColourTickLabelYAxis"
+        Me.lblColourTickLabelYAxis.Size = New System.Drawing.Size(40, 13)
+        Me.lblColourTickLabelYAxis.TabIndex = 27
+        Me.lblColourTickLabelYAxis.Text = "Colour:"
         '
-        'UcrInputComboBox2
+        'ucrInputColourTickLabelsYAxis
         '
-        Me.UcrInputComboBox2.AddQuotesIfUnrecognised = True
-        Me.UcrInputComboBox2.IsReadOnly = False
-        Me.UcrInputComboBox2.Location = New System.Drawing.Point(72, 68)
-        Me.UcrInputComboBox2.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.UcrInputComboBox2.Name = "UcrInputComboBox2"
-        Me.UcrInputComboBox2.Size = New System.Drawing.Size(137, 21)
-        Me.UcrInputComboBox2.TabIndex = 28
+        Me.ucrInputColourTickLabelsYAxis.AddQuotesIfUnrecognised = True
+        Me.ucrInputColourTickLabelsYAxis.IsReadOnly = False
+        Me.ucrInputColourTickLabelsYAxis.Location = New System.Drawing.Point(72, 68)
+        Me.ucrInputColourTickLabelsYAxis.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputColourTickLabelsYAxis.Name = "ucrInputColourTickLabelsYAxis"
+        Me.ucrInputColourTickLabelsYAxis.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputColourTickLabelsYAxis.TabIndex = 28
         '
-        'Label5
+        'lblLineHeightTickLabelsYAxis
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(12, 47)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(57, 13)
-        Me.Label5.TabIndex = 25
-        Me.Label5.Text = "Line Type:"
+        Me.lblLineHeightTickLabelsYAxis.AutoSize = True
+        Me.lblLineHeightTickLabelsYAxis.Location = New System.Drawing.Point(12, 47)
+        Me.lblLineHeightTickLabelsYAxis.Name = "lblLineHeightTickLabelsYAxis"
+        Me.lblLineHeightTickLabelsYAxis.Size = New System.Drawing.Size(57, 13)
+        Me.lblLineHeightTickLabelsYAxis.TabIndex = 25
+        Me.lblLineHeightTickLabelsYAxis.Text = "Line Type:"
         '
-        'UcrInputComboBox3
+        'ucrInputLineTypeTopYAxis
         '
-        Me.UcrInputComboBox3.AddQuotesIfUnrecognised = True
-        Me.UcrInputComboBox3.IsReadOnly = False
-        Me.UcrInputComboBox3.Location = New System.Drawing.Point(72, 40)
-        Me.UcrInputComboBox3.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.UcrInputComboBox3.Name = "UcrInputComboBox3"
-        Me.UcrInputComboBox3.Size = New System.Drawing.Size(137, 21)
-        Me.UcrInputComboBox3.TabIndex = 26
+        Me.ucrInputLineTypeTopYAxis.AddQuotesIfUnrecognised = True
+        Me.ucrInputLineTypeTopYAxis.IsReadOnly = False
+        Me.ucrInputLineTypeTopYAxis.Location = New System.Drawing.Point(72, 40)
+        Me.ucrInputLineTypeTopYAxis.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputLineTypeTopYAxis.Name = "ucrInputLineTypeTopYAxis"
+        Me.ucrInputLineTypeTopYAxis.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputLineTypeTopYAxis.TabIndex = 26
         '
-        'GroupBox3
+        'grpYAxisTopLabels
         '
-        Me.GroupBox3.Controls.Add(Me.Label6)
-        Me.GroupBox3.Controls.Add(Me.ucrNudVjustTopYAxis)
-        Me.GroupBox3.Controls.Add(Me.Label7)
-        Me.GroupBox3.Controls.Add(Me.ucrNudLineHeightTopYAxis)
-        Me.GroupBox3.Controls.Add(Me.Label8)
-        Me.GroupBox3.Controls.Add(Me.ucrNudAngleTopYAxis)
-        Me.GroupBox3.Controls.Add(Me.Label9)
-        Me.GroupBox3.Controls.Add(Me.ucrNudHjustTopYAxis)
-        Me.GroupBox3.Controls.Add(Me.Label10)
-        Me.GroupBox3.Controls.Add(Me.ucrNudSizeTopYAxis)
-        Me.GroupBox3.Controls.Add(Me.Label11)
-        Me.GroupBox3.Controls.Add(Me.UcrInputComboBox4)
-        Me.GroupBox3.Controls.Add(Me.Label12)
-        Me.GroupBox3.Controls.Add(Me.UcrInputComboBox5)
-        Me.GroupBox3.Controls.Add(Me.Label13)
-        Me.GroupBox3.Controls.Add(Me.UcrInputComboBox6)
-        Me.GroupBox3.Location = New System.Drawing.Point(251, 5)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(230, 245)
-        Me.GroupBox3.TabIndex = 44
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Y axis label on top axis"
+        Me.grpYAxisTopLabels.Controls.Add(Me.lblVjustTopYAxis)
+        Me.grpYAxisTopLabels.Controls.Add(Me.ucrNudVjustTopYAxis)
+        Me.grpYAxisTopLabels.Controls.Add(Me.lblLineHeightTopYAxis)
+        Me.grpYAxisTopLabels.Controls.Add(Me.ucrNudLineHeightTopYAxis)
+        Me.grpYAxisTopLabels.Controls.Add(Me.lblAngleTopYAxis)
+        Me.grpYAxisTopLabels.Controls.Add(Me.ucrNudAngleTopYAxis)
+        Me.grpYAxisTopLabels.Controls.Add(Me.lblHjustTopYAxis)
+        Me.grpYAxisTopLabels.Controls.Add(Me.ucrNudHjustTopYAxis)
+        Me.grpYAxisTopLabels.Controls.Add(Me.lblSizeTopYAxis)
+        Me.grpYAxisTopLabels.Controls.Add(Me.ucrNudSizeTopYAxis)
+        Me.grpYAxisTopLabels.Controls.Add(Me.lblColourTopYAxis)
+        Me.grpYAxisTopLabels.Controls.Add(Me.ucrInputColourTopYAxis)
+        Me.grpYAxisTopLabels.Controls.Add(Me.lblFaceTopYAxis)
+        Me.grpYAxisTopLabels.Controls.Add(Me.ucrInputFaceTopYAxis)
+        Me.grpYAxisTopLabels.Controls.Add(Me.lblFamilyTopYaxis)
+        Me.grpYAxisTopLabels.Controls.Add(Me.ucrInputFamilyTopYAxis)
+        Me.grpYAxisTopLabels.Location = New System.Drawing.Point(251, 5)
+        Me.grpYAxisTopLabels.Name = "grpYAxisTopLabels"
+        Me.grpYAxisTopLabels.Size = New System.Drawing.Size(230, 245)
+        Me.grpYAxisTopLabels.TabIndex = 44
+        Me.grpYAxisTopLabels.TabStop = False
+        Me.grpYAxisTopLabels.Text = "Y axis label on top axis"
         '
-        'Label6
+        'lblVjustTopYAxis
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(13, 77)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(33, 13)
-        Me.Label6.TabIndex = 37
-        Me.Label6.Text = "Vjust:"
+        Me.lblVjustTopYAxis.AutoSize = True
+        Me.lblVjustTopYAxis.Location = New System.Drawing.Point(13, 77)
+        Me.lblVjustTopYAxis.Name = "lblVjustTopYAxis"
+        Me.lblVjustTopYAxis.Size = New System.Drawing.Size(33, 13)
+        Me.lblVjustTopYAxis.TabIndex = 37
+        Me.lblVjustTopYAxis.Text = "Vjust:"
         '
         'ucrNudVjustTopYAxis
         '
@@ -898,14 +898,14 @@ Partial Class sdgThemes
         Me.ucrNudVjustTopYAxis.TabIndex = 38
         Me.ucrNudVjustTopYAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'Label7
+        'lblLineHeightTopYAxis
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(13, 105)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(64, 13)
-        Me.Label7.TabIndex = 35
-        Me.Label7.Text = "Line Height:"
+        Me.lblLineHeightTopYAxis.AutoSize = True
+        Me.lblLineHeightTopYAxis.Location = New System.Drawing.Point(13, 105)
+        Me.lblLineHeightTopYAxis.Name = "lblLineHeightTopYAxis"
+        Me.lblLineHeightTopYAxis.Size = New System.Drawing.Size(64, 13)
+        Me.lblLineHeightTopYAxis.TabIndex = 35
+        Me.lblLineHeightTopYAxis.Text = "Line Height:"
         '
         'ucrNudLineHeightTopYAxis
         '
@@ -919,14 +919,14 @@ Partial Class sdgThemes
         Me.ucrNudLineHeightTopYAxis.TabIndex = 36
         Me.ucrNudLineHeightTopYAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'Label8
+        'lblAngleTopYAxis
         '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(13, 133)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(37, 13)
-        Me.Label8.TabIndex = 33
-        Me.Label8.Text = "Angle:"
+        Me.lblAngleTopYAxis.AutoSize = True
+        Me.lblAngleTopYAxis.Location = New System.Drawing.Point(13, 133)
+        Me.lblAngleTopYAxis.Name = "lblAngleTopYAxis"
+        Me.lblAngleTopYAxis.Size = New System.Drawing.Size(37, 13)
+        Me.lblAngleTopYAxis.TabIndex = 33
+        Me.lblAngleTopYAxis.Text = "Angle:"
         '
         'ucrNudAngleTopYAxis
         '
@@ -940,14 +940,14 @@ Partial Class sdgThemes
         Me.ucrNudAngleTopYAxis.TabIndex = 34
         Me.ucrNudAngleTopYAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'Label9
+        'lblHjustTopYAxis
         '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(13, 49)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(34, 13)
-        Me.Label9.TabIndex = 31
-        Me.Label9.Text = "Hjust:"
+        Me.lblHjustTopYAxis.AutoSize = True
+        Me.lblHjustTopYAxis.Location = New System.Drawing.Point(13, 49)
+        Me.lblHjustTopYAxis.Name = "lblHjustTopYAxis"
+        Me.lblHjustTopYAxis.Size = New System.Drawing.Size(34, 13)
+        Me.lblHjustTopYAxis.TabIndex = 31
+        Me.lblHjustTopYAxis.Text = "Hjust:"
         '
         'ucrNudHjustTopYAxis
         '
@@ -961,14 +961,14 @@ Partial Class sdgThemes
         Me.ucrNudHjustTopYAxis.TabIndex = 32
         Me.ucrNudHjustTopYAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'Label10
+        'lblSizeTopYAxis
         '
-        Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(13, 21)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(30, 13)
-        Me.Label10.TabIndex = 29
-        Me.Label10.Text = "Size:"
+        Me.lblSizeTopYAxis.AutoSize = True
+        Me.lblSizeTopYAxis.Location = New System.Drawing.Point(13, 21)
+        Me.lblSizeTopYAxis.Name = "lblSizeTopYAxis"
+        Me.lblSizeTopYAxis.Size = New System.Drawing.Size(30, 13)
+        Me.lblSizeTopYAxis.TabIndex = 29
+        Me.lblSizeTopYAxis.Text = "Size:"
         '
         'ucrNudSizeTopYAxis
         '
@@ -982,107 +982,107 @@ Partial Class sdgThemes
         Me.ucrNudSizeTopYAxis.TabIndex = 30
         Me.ucrNudSizeTopYAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'Label11
+        'lblColourTopYAxis
         '
-        Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(13, 220)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(40, 13)
-        Me.Label11.TabIndex = 27
-        Me.Label11.Text = "Colour:"
+        Me.lblColourTopYAxis.AutoSize = True
+        Me.lblColourTopYAxis.Location = New System.Drawing.Point(13, 220)
+        Me.lblColourTopYAxis.Name = "lblColourTopYAxis"
+        Me.lblColourTopYAxis.Size = New System.Drawing.Size(40, 13)
+        Me.lblColourTopYAxis.TabIndex = 27
+        Me.lblColourTopYAxis.Text = "Colour:"
         '
-        'UcrInputComboBox4
+        'ucrInputColourTopYAxis
         '
-        Me.UcrInputComboBox4.AddQuotesIfUnrecognised = True
-        Me.UcrInputComboBox4.IsReadOnly = False
-        Me.UcrInputComboBox4.Location = New System.Drawing.Point(73, 217)
-        Me.UcrInputComboBox4.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.UcrInputComboBox4.Name = "UcrInputComboBox4"
-        Me.UcrInputComboBox4.Size = New System.Drawing.Size(137, 21)
-        Me.UcrInputComboBox4.TabIndex = 28
+        Me.ucrInputColourTopYAxis.AddQuotesIfUnrecognised = True
+        Me.ucrInputColourTopYAxis.IsReadOnly = False
+        Me.ucrInputColourTopYAxis.Location = New System.Drawing.Point(73, 217)
+        Me.ucrInputColourTopYAxis.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputColourTopYAxis.Name = "ucrInputColourTopYAxis"
+        Me.ucrInputColourTopYAxis.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputColourTopYAxis.TabIndex = 28
         '
-        'Label12
+        'lblFaceTopYAxis
         '
-        Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(13, 196)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(34, 13)
-        Me.Label12.TabIndex = 25
-        Me.Label12.Text = "Face:"
+        Me.lblFaceTopYAxis.AutoSize = True
+        Me.lblFaceTopYAxis.Location = New System.Drawing.Point(13, 196)
+        Me.lblFaceTopYAxis.Name = "lblFaceTopYAxis"
+        Me.lblFaceTopYAxis.Size = New System.Drawing.Size(34, 13)
+        Me.lblFaceTopYAxis.TabIndex = 25
+        Me.lblFaceTopYAxis.Text = "Face:"
         '
-        'UcrInputComboBox5
+        'ucrInputFaceTopYAxis
         '
-        Me.UcrInputComboBox5.AddQuotesIfUnrecognised = True
-        Me.UcrInputComboBox5.IsReadOnly = False
-        Me.UcrInputComboBox5.Location = New System.Drawing.Point(73, 189)
-        Me.UcrInputComboBox5.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.UcrInputComboBox5.Name = "UcrInputComboBox5"
-        Me.UcrInputComboBox5.Size = New System.Drawing.Size(137, 21)
-        Me.UcrInputComboBox5.TabIndex = 26
+        Me.ucrInputFaceTopYAxis.AddQuotesIfUnrecognised = True
+        Me.ucrInputFaceTopYAxis.IsReadOnly = False
+        Me.ucrInputFaceTopYAxis.Location = New System.Drawing.Point(73, 189)
+        Me.ucrInputFaceTopYAxis.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputFaceTopYAxis.Name = "ucrInputFaceTopYAxis"
+        Me.ucrInputFaceTopYAxis.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputFaceTopYAxis.TabIndex = 26
         '
-        'Label13
+        'lblFamilyTopYaxis
         '
-        Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(13, 166)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(39, 13)
-        Me.Label13.TabIndex = 23
-        Me.Label13.Text = "Family:"
+        Me.lblFamilyTopYaxis.AutoSize = True
+        Me.lblFamilyTopYaxis.Location = New System.Drawing.Point(13, 166)
+        Me.lblFamilyTopYaxis.Name = "lblFamilyTopYaxis"
+        Me.lblFamilyTopYaxis.Size = New System.Drawing.Size(39, 13)
+        Me.lblFamilyTopYaxis.TabIndex = 23
+        Me.lblFamilyTopYaxis.Text = "Family:"
         '
-        'UcrInputComboBox6
+        'ucrInputFamilyTopYAxis
         '
-        Me.UcrInputComboBox6.AddQuotesIfUnrecognised = True
-        Me.UcrInputComboBox6.IsReadOnly = False
-        Me.UcrInputComboBox6.Location = New System.Drawing.Point(73, 162)
-        Me.UcrInputComboBox6.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.UcrInputComboBox6.Name = "UcrInputComboBox6"
-        Me.UcrInputComboBox6.Size = New System.Drawing.Size(137, 21)
-        Me.UcrInputComboBox6.TabIndex = 24
+        Me.ucrInputFamilyTopYAxis.AddQuotesIfUnrecognised = True
+        Me.ucrInputFamilyTopYAxis.IsReadOnly = False
+        Me.ucrInputFamilyTopYAxis.Location = New System.Drawing.Point(73, 162)
+        Me.ucrInputFamilyTopYAxis.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputFamilyTopYAxis.Name = "ucrInputFamilyTopYAxis"
+        Me.ucrInputFamilyTopYAxis.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputFamilyTopYAxis.TabIndex = 24
         '
-        'GroupBox4
+        'grpTickMarksYAxis
         '
-        Me.GroupBox4.Controls.Add(Me.Label14)
-        Me.GroupBox4.Controls.Add(Me.UcrInputComboBox7)
-        Me.GroupBox4.Controls.Add(Me.Label15)
-        Me.GroupBox4.Controls.Add(Me.ucrNudSizeTickMarksYAxis)
-        Me.GroupBox4.Controls.Add(Me.Label16)
-        Me.GroupBox4.Controls.Add(Me.UcrInputComboBox8)
-        Me.GroupBox4.Controls.Add(Me.Label17)
-        Me.GroupBox4.Controls.Add(Me.UcrInputComboBox9)
-        Me.GroupBox4.Location = New System.Drawing.Point(6, 256)
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(230, 154)
-        Me.GroupBox4.TabIndex = 42
-        Me.GroupBox4.TabStop = False
-        Me.GroupBox4.Text = "Tick marks along axes"
+        Me.grpTickMarksYAxis.Controls.Add(Me.lblLineEndTickMarksYAxis)
+        Me.grpTickMarksYAxis.Controls.Add(Me.ucrInputLineEndTickMarksYAxis)
+        Me.grpTickMarksYAxis.Controls.Add(Me.lblSizeTickMarksYAxis)
+        Me.grpTickMarksYAxis.Controls.Add(Me.ucrNudSizeTickMarksYAxis)
+        Me.grpTickMarksYAxis.Controls.Add(Me.lblColourTickMarksYAxis)
+        Me.grpTickMarksYAxis.Controls.Add(Me.ucrInputColourTickMarksYAxis)
+        Me.grpTickMarksYAxis.Controls.Add(Me.lblLineHeightTickMarksYAxis)
+        Me.grpTickMarksYAxis.Controls.Add(Me.ucrInputLineTypeYAxis)
+        Me.grpTickMarksYAxis.Location = New System.Drawing.Point(6, 256)
+        Me.grpTickMarksYAxis.Name = "grpTickMarksYAxis"
+        Me.grpTickMarksYAxis.Size = New System.Drawing.Size(230, 154)
+        Me.grpTickMarksYAxis.TabIndex = 42
+        Me.grpTickMarksYAxis.TabStop = False
+        Me.grpTickMarksYAxis.Text = "Tick marks along axes"
         '
-        'Label14
+        'lblLineEndTickMarksYAxis
         '
-        Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(12, 108)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(52, 13)
-        Me.Label14.TabIndex = 31
-        Me.Label14.Text = "Line End:"
+        Me.lblLineEndTickMarksYAxis.AutoSize = True
+        Me.lblLineEndTickMarksYAxis.Location = New System.Drawing.Point(12, 108)
+        Me.lblLineEndTickMarksYAxis.Name = "lblLineEndTickMarksYAxis"
+        Me.lblLineEndTickMarksYAxis.Size = New System.Drawing.Size(52, 13)
+        Me.lblLineEndTickMarksYAxis.TabIndex = 31
+        Me.lblLineEndTickMarksYAxis.Text = "Line End:"
         '
-        'UcrInputComboBox7
+        'ucrInputLineEndTickMarksYAxis
         '
-        Me.UcrInputComboBox7.AddQuotesIfUnrecognised = True
-        Me.UcrInputComboBox7.IsReadOnly = False
-        Me.UcrInputComboBox7.Location = New System.Drawing.Point(72, 100)
-        Me.UcrInputComboBox7.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.UcrInputComboBox7.Name = "UcrInputComboBox7"
-        Me.UcrInputComboBox7.Size = New System.Drawing.Size(137, 21)
-        Me.UcrInputComboBox7.TabIndex = 32
+        Me.ucrInputLineEndTickMarksYAxis.AddQuotesIfUnrecognised = True
+        Me.ucrInputLineEndTickMarksYAxis.IsReadOnly = False
+        Me.ucrInputLineEndTickMarksYAxis.Location = New System.Drawing.Point(72, 100)
+        Me.ucrInputLineEndTickMarksYAxis.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputLineEndTickMarksYAxis.Name = "ucrInputLineEndTickMarksYAxis"
+        Me.ucrInputLineEndTickMarksYAxis.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputLineEndTickMarksYAxis.TabIndex = 32
         '
-        'Label15
+        'lblSizeTickMarksYAxis
         '
-        Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(13, 22)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(30, 13)
-        Me.Label15.TabIndex = 29
-        Me.Label15.Text = "Size:"
+        Me.lblSizeTickMarksYAxis.AutoSize = True
+        Me.lblSizeTickMarksYAxis.Location = New System.Drawing.Point(13, 22)
+        Me.lblSizeTickMarksYAxis.Name = "lblSizeTickMarksYAxis"
+        Me.lblSizeTickMarksYAxis.Size = New System.Drawing.Size(30, 13)
+        Me.lblSizeTickMarksYAxis.TabIndex = 29
+        Me.lblSizeTickMarksYAxis.Text = "Size:"
         '
         'ucrNudSizeTickMarksYAxis
         '
@@ -1096,68 +1096,68 @@ Partial Class sdgThemes
         Me.ucrNudSizeTickMarksYAxis.TabIndex = 30
         Me.ucrNudSizeTickMarksYAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'Label16
+        'lblColourTickMarksYAxis
         '
-        Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(12, 76)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(40, 13)
-        Me.Label16.TabIndex = 27
-        Me.Label16.Text = "Colour:"
+        Me.lblColourTickMarksYAxis.AutoSize = True
+        Me.lblColourTickMarksYAxis.Location = New System.Drawing.Point(12, 76)
+        Me.lblColourTickMarksYAxis.Name = "lblColourTickMarksYAxis"
+        Me.lblColourTickMarksYAxis.Size = New System.Drawing.Size(40, 13)
+        Me.lblColourTickMarksYAxis.TabIndex = 27
+        Me.lblColourTickMarksYAxis.Text = "Colour:"
         '
-        'UcrInputComboBox8
+        'ucrInputColourTickMarksYAxis
         '
-        Me.UcrInputComboBox8.AddQuotesIfUnrecognised = True
-        Me.UcrInputComboBox8.IsReadOnly = False
-        Me.UcrInputComboBox8.Location = New System.Drawing.Point(72, 68)
-        Me.UcrInputComboBox8.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.UcrInputComboBox8.Name = "UcrInputComboBox8"
-        Me.UcrInputComboBox8.Size = New System.Drawing.Size(137, 21)
-        Me.UcrInputComboBox8.TabIndex = 28
+        Me.ucrInputColourTickMarksYAxis.AddQuotesIfUnrecognised = True
+        Me.ucrInputColourTickMarksYAxis.IsReadOnly = False
+        Me.ucrInputColourTickMarksYAxis.Location = New System.Drawing.Point(72, 68)
+        Me.ucrInputColourTickMarksYAxis.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputColourTickMarksYAxis.Name = "ucrInputColourTickMarksYAxis"
+        Me.ucrInputColourTickMarksYAxis.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputColourTickMarksYAxis.TabIndex = 28
         '
-        'Label17
+        'lblLineHeightTickMarksYAxis
         '
-        Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(12, 47)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(57, 13)
-        Me.Label17.TabIndex = 25
-        Me.Label17.Text = "Line Type:"
+        Me.lblLineHeightTickMarksYAxis.AutoSize = True
+        Me.lblLineHeightTickMarksYAxis.Location = New System.Drawing.Point(12, 47)
+        Me.lblLineHeightTickMarksYAxis.Name = "lblLineHeightTickMarksYAxis"
+        Me.lblLineHeightTickMarksYAxis.Size = New System.Drawing.Size(57, 13)
+        Me.lblLineHeightTickMarksYAxis.TabIndex = 25
+        Me.lblLineHeightTickMarksYAxis.Text = "Line Type:"
         '
-        'UcrInputComboBox9
+        'ucrInputLineTypeYAxis
         '
-        Me.UcrInputComboBox9.AddQuotesIfUnrecognised = True
-        Me.UcrInputComboBox9.IsReadOnly = False
-        Me.UcrInputComboBox9.Location = New System.Drawing.Point(72, 40)
-        Me.UcrInputComboBox9.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.UcrInputComboBox9.Name = "UcrInputComboBox9"
-        Me.UcrInputComboBox9.Size = New System.Drawing.Size(137, 21)
-        Me.UcrInputComboBox9.TabIndex = 26
+        Me.ucrInputLineTypeYAxis.AddQuotesIfUnrecognised = True
+        Me.ucrInputLineTypeYAxis.IsReadOnly = False
+        Me.ucrInputLineTypeYAxis.Location = New System.Drawing.Point(72, 40)
+        Me.ucrInputLineTypeYAxis.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputLineTypeYAxis.Name = "ucrInputLineTypeYAxis"
+        Me.ucrInputLineTypeYAxis.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputLineTypeYAxis.TabIndex = 26
         '
-        'GroupBox5
+        'grpYAxisLabels
         '
-        Me.GroupBox5.Controls.Add(Me.lblVjustYAxis)
-        Me.GroupBox5.Controls.Add(Me.ucrNudVjustYAxis)
-        Me.GroupBox5.Controls.Add(Me.lblLineHeightYAxis)
-        Me.GroupBox5.Controls.Add(Me.ucrNudLineHeightYAxis)
-        Me.GroupBox5.Controls.Add(Me.Label20)
-        Me.GroupBox5.Controls.Add(Me.ucrNudLAngle)
-        Me.GroupBox5.Controls.Add(Me.lblHjustYAxis)
-        Me.GroupBox5.Controls.Add(Me.ucrNudHjustYAxis)
-        Me.GroupBox5.Controls.Add(Me.lblSizeYAxis)
-        Me.GroupBox5.Controls.Add(Me.ucrNudSizeYAxis)
-        Me.GroupBox5.Controls.Add(Me.lblColourYAxis)
-        Me.GroupBox5.Controls.Add(Me.UcrInputComboBox10)
-        Me.GroupBox5.Controls.Add(Me.lblFaceYAxis)
-        Me.GroupBox5.Controls.Add(Me.UcrInputComboBox11)
-        Me.GroupBox5.Controls.Add(Me.lblFamilyYAxis)
-        Me.GroupBox5.Controls.Add(Me.crInputComboBox12)
-        Me.GroupBox5.Location = New System.Drawing.Point(6, 5)
-        Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(230, 245)
-        Me.GroupBox5.TabIndex = 41
-        Me.GroupBox5.TabStop = False
-        Me.GroupBox5.Text = "Y axis label"
+        Me.grpYAxisLabels.Controls.Add(Me.lblVjustYAxis)
+        Me.grpYAxisLabels.Controls.Add(Me.ucrNudVjustYAxis)
+        Me.grpYAxisLabels.Controls.Add(Me.lblLineHeightYAxis)
+        Me.grpYAxisLabels.Controls.Add(Me.ucrNudLineHeightYAxis)
+        Me.grpYAxisLabels.Controls.Add(Me.lblAngleYAxis)
+        Me.grpYAxisLabels.Controls.Add(Me.ucrNudLAngleYAxis)
+        Me.grpYAxisLabels.Controls.Add(Me.lblHjustYAxis)
+        Me.grpYAxisLabels.Controls.Add(Me.ucrNudHjustYAxis)
+        Me.grpYAxisLabels.Controls.Add(Me.lblSizeYAxis)
+        Me.grpYAxisLabels.Controls.Add(Me.ucrNudSizeYAxis)
+        Me.grpYAxisLabels.Controls.Add(Me.lblColourYAxis)
+        Me.grpYAxisLabels.Controls.Add(Me.ucrInputColourYAxis)
+        Me.grpYAxisLabels.Controls.Add(Me.lblFaceYAxis)
+        Me.grpYAxisLabels.Controls.Add(Me.ucrInputFaceYAxis)
+        Me.grpYAxisLabels.Controls.Add(Me.lblFamilyYAxis)
+        Me.grpYAxisLabels.Controls.Add(Me.ucrInputFamilyYAxis)
+        Me.grpYAxisLabels.Location = New System.Drawing.Point(6, 5)
+        Me.grpYAxisLabels.Name = "grpYAxisLabels"
+        Me.grpYAxisLabels.Size = New System.Drawing.Size(230, 245)
+        Me.grpYAxisLabels.TabIndex = 41
+        Me.grpYAxisLabels.TabStop = False
+        Me.grpYAxisLabels.Text = "Y axis label"
         '
         'lblVjustYAxis
         '
@@ -1201,26 +1201,26 @@ Partial Class sdgThemes
         Me.ucrNudLineHeightYAxis.TabIndex = 36
         Me.ucrNudLineHeightYAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'Label20
+        'lblAngleYAxis
         '
-        Me.Label20.AutoSize = True
-        Me.Label20.Location = New System.Drawing.Point(13, 137)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(37, 13)
-        Me.Label20.TabIndex = 33
-        Me.Label20.Text = "Angle:"
+        Me.lblAngleYAxis.AutoSize = True
+        Me.lblAngleYAxis.Location = New System.Drawing.Point(13, 137)
+        Me.lblAngleYAxis.Name = "lblAngleYAxis"
+        Me.lblAngleYAxis.Size = New System.Drawing.Size(37, 13)
+        Me.lblAngleYAxis.TabIndex = 33
+        Me.lblAngleYAxis.Text = "Angle:"
         '
-        'ucrNudLAngle
+        'ucrNudLAngleYAxis
         '
-        Me.ucrNudLAngle.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLAngle.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudLAngle.Location = New System.Drawing.Point(94, 136)
-        Me.ucrNudLAngle.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudLAngle.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLAngle.Name = "ucrNudLAngle"
-        Me.ucrNudLAngle.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudLAngle.TabIndex = 34
-        Me.ucrNudLAngle.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLAngleYAxis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLAngleYAxis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudLAngleYAxis.Location = New System.Drawing.Point(94, 136)
+        Me.ucrNudLAngleYAxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudLAngleYAxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLAngleYAxis.Name = "ucrNudLAngleYAxis"
+        Me.ucrNudLAngleYAxis.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudLAngleYAxis.TabIndex = 34
+        Me.ucrNudLAngleYAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblHjustYAxis
         '
@@ -1273,15 +1273,15 @@ Partial Class sdgThemes
         Me.lblColourYAxis.TabIndex = 27
         Me.lblColourYAxis.Text = "Colour:"
         '
-        'UcrInputComboBox10
+        'ucrInputColourYAxis
         '
-        Me.UcrInputComboBox10.AddQuotesIfUnrecognised = True
-        Me.UcrInputComboBox10.IsReadOnly = False
-        Me.UcrInputComboBox10.Location = New System.Drawing.Point(73, 217)
-        Me.UcrInputComboBox10.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.UcrInputComboBox10.Name = "UcrInputComboBox10"
-        Me.UcrInputComboBox10.Size = New System.Drawing.Size(137, 21)
-        Me.UcrInputComboBox10.TabIndex = 28
+        Me.ucrInputColourYAxis.AddQuotesIfUnrecognised = True
+        Me.ucrInputColourYAxis.IsReadOnly = False
+        Me.ucrInputColourYAxis.Location = New System.Drawing.Point(73, 217)
+        Me.ucrInputColourYAxis.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputColourYAxis.Name = "ucrInputColourYAxis"
+        Me.ucrInputColourYAxis.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputColourYAxis.TabIndex = 28
         '
         'lblFaceYAxis
         '
@@ -1292,15 +1292,15 @@ Partial Class sdgThemes
         Me.lblFaceYAxis.TabIndex = 25
         Me.lblFaceYAxis.Text = "Face:"
         '
-        'UcrInputComboBox11
+        'ucrInputFaceYAxis
         '
-        Me.UcrInputComboBox11.AddQuotesIfUnrecognised = True
-        Me.UcrInputComboBox11.IsReadOnly = False
-        Me.UcrInputComboBox11.Location = New System.Drawing.Point(73, 189)
-        Me.UcrInputComboBox11.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.UcrInputComboBox11.Name = "UcrInputComboBox11"
-        Me.UcrInputComboBox11.Size = New System.Drawing.Size(137, 21)
-        Me.UcrInputComboBox11.TabIndex = 26
+        Me.ucrInputFaceYAxis.AddQuotesIfUnrecognised = True
+        Me.ucrInputFaceYAxis.IsReadOnly = False
+        Me.ucrInputFaceYAxis.Location = New System.Drawing.Point(73, 189)
+        Me.ucrInputFaceYAxis.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputFaceYAxis.Name = "ucrInputFaceYAxis"
+        Me.ucrInputFaceYAxis.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputFaceYAxis.TabIndex = 26
         '
         'lblFamilyYAxis
         '
@@ -1311,15 +1311,15 @@ Partial Class sdgThemes
         Me.lblFamilyYAxis.TabIndex = 23
         Me.lblFamilyYAxis.Text = "Family:"
         '
-        'crInputComboBox12
+        'ucrInputFamilyYAxis
         '
-        Me.crInputComboBox12.AddQuotesIfUnrecognised = True
-        Me.crInputComboBox12.IsReadOnly = False
-        Me.crInputComboBox12.Location = New System.Drawing.Point(73, 162)
-        Me.crInputComboBox12.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.crInputComboBox12.Name = "crInputComboBox12"
-        Me.crInputComboBox12.Size = New System.Drawing.Size(137, 21)
-        Me.crInputComboBox12.TabIndex = 24
+        Me.ucrInputFamilyYAxis.AddQuotesIfUnrecognised = True
+        Me.ucrInputFamilyYAxis.IsReadOnly = False
+        Me.ucrInputFamilyYAxis.Location = New System.Drawing.Point(73, 162)
+        Me.ucrInputFamilyYAxis.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputFamilyYAxis.Name = "ucrInputFamilyYAxis"
+        Me.ucrInputFamilyYAxis.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputFamilyYAxis.TabIndex = 24
         '
         'ucrBaseSubdialogue
         '
@@ -1353,14 +1353,14 @@ Partial Class sdgThemes
         Me.grpAxisLabel.ResumeLayout(False)
         Me.grpAxisLabel.PerformLayout()
         Me.tbYaxis.ResumeLayout(False)
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
-        Me.GroupBox4.ResumeLayout(False)
-        Me.GroupBox4.PerformLayout()
-        Me.GroupBox5.ResumeLayout(False)
-        Me.GroupBox5.PerformLayout()
+        Me.grpTickLabelYAxis.ResumeLayout(False)
+        Me.grpTickLabelYAxis.PerformLayout()
+        Me.grpYAxisTopLabels.ResumeLayout(False)
+        Me.grpYAxisTopLabels.PerformLayout()
+        Me.grpTickMarksYAxis.ResumeLayout(False)
+        Me.grpTickMarksYAxis.PerformLayout()
+        Me.grpYAxisLabels.ResumeLayout(False)
+        Me.grpYAxisLabels.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1422,56 +1422,56 @@ Partial Class sdgThemes
     Friend WithEvents ucrInputColourXTickMarks As ucrInputComboBox
     Friend WithEvents lbllineTypeXTickMarks As Label
     Friend WithEvents ucrInputLineTypeXTickMarks As ucrInputComboBox
-    Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents Label1 As Label
-    Friend WithEvents UcrInputComboBox1 As ucrInputComboBox
-    Friend WithEvents Label3 As Label
+    Friend WithEvents grpTickLabelYAxis As GroupBox
+    Friend WithEvents LlblLinEndTickLabelYAxis As Label
+    Friend WithEvents ucrInputLineEndTickLabelsYAxis As ucrInputComboBox
+    Friend WithEvents lblSizeTickLabelYAxis As Label
     Friend WithEvents ucrNudSizeTickLabelsYAxis As ucrNud
-    Friend WithEvents Label4 As Label
-    Friend WithEvents UcrInputComboBox2 As ucrInputComboBox
-    Friend WithEvents Label5 As Label
-    Friend WithEvents UcrInputComboBox3 As ucrInputComboBox
-    Friend WithEvents GroupBox3 As GroupBox
-    Friend WithEvents Label6 As Label
+    Friend WithEvents lblColourTickLabelYAxis As Label
+    Friend WithEvents ucrInputColourTickLabelsYAxis As ucrInputComboBox
+    Friend WithEvents lblLineHeightTickLabelsYAxis As Label
+    Friend WithEvents ucrInputLineTypeTopYAxis As ucrInputComboBox
+    Friend WithEvents grpYAxisTopLabels As GroupBox
+    Friend WithEvents lblVjustTopYAxis As Label
     Friend WithEvents ucrNudVjustTopYAxis As ucrNud
-    Friend WithEvents Label7 As Label
+    Friend WithEvents lblLineHeightTopYAxis As Label
     Friend WithEvents ucrNudLineHeightTopYAxis As ucrNud
-    Friend WithEvents Label8 As Label
+    Friend WithEvents lblAngleTopYAxis As Label
     Friend WithEvents ucrNudAngleTopYAxis As ucrNud
-    Friend WithEvents Label9 As Label
+    Friend WithEvents lblHjustTopYAxis As Label
     Friend WithEvents ucrNudHjustTopYAxis As ucrNud
-    Friend WithEvents Label10 As Label
+    Friend WithEvents lblSizeTopYAxis As Label
     Friend WithEvents ucrNudSizeTopYAxis As ucrNud
-    Friend WithEvents Label11 As Label
-    Friend WithEvents UcrInputComboBox4 As ucrInputComboBox
-    Friend WithEvents Label12 As Label
-    Friend WithEvents UcrInputComboBox5 As ucrInputComboBox
-    Friend WithEvents Label13 As Label
-    Friend WithEvents UcrInputComboBox6 As ucrInputComboBox
-    Friend WithEvents GroupBox4 As GroupBox
-    Friend WithEvents Label14 As Label
-    Friend WithEvents UcrInputComboBox7 As ucrInputComboBox
-    Friend WithEvents Label15 As Label
+    Friend WithEvents lblColourTopYAxis As Label
+    Friend WithEvents ucrInputColourTopYAxis As ucrInputComboBox
+    Friend WithEvents lblFaceTopYAxis As Label
+    Friend WithEvents ucrInputFaceTopYAxis As ucrInputComboBox
+    Friend WithEvents lblFamilyTopYaxis As Label
+    Friend WithEvents ucrInputFamilyTopYAxis As ucrInputComboBox
+    Friend WithEvents grpTickMarksYAxis As GroupBox
+    Friend WithEvents lblLineEndTickMarksYAxis As Label
+    Friend WithEvents ucrInputLineEndTickMarksYAxis As ucrInputComboBox
+    Friend WithEvents lblSizeTickMarksYAxis As Label
     Friend WithEvents ucrNudSizeTickMarksYAxis As ucrNud
-    Friend WithEvents Label16 As Label
-    Friend WithEvents UcrInputComboBox8 As ucrInputComboBox
-    Friend WithEvents Label17 As Label
-    Friend WithEvents UcrInputComboBox9 As ucrInputComboBox
-    Friend WithEvents GroupBox5 As GroupBox
+    Friend WithEvents lblColourTickMarksYAxis As Label
+    Friend WithEvents ucrInputColourTickMarksYAxis As ucrInputComboBox
+    Friend WithEvents lblLineHeightTickMarksYAxis As Label
+    Friend WithEvents ucrInputLineTypeYAxis As ucrInputComboBox
+    Friend WithEvents grpYAxisLabels As GroupBox
     Friend WithEvents lblVjustYAxis As Label
     Friend WithEvents ucrNudVjustYAxis As ucrNud
     Friend WithEvents lblLineHeightYAxis As Label
     Friend WithEvents ucrNudLineHeightYAxis As ucrNud
-    Friend WithEvents Label20 As Label
-    Friend WithEvents ucrNudLAngle As ucrNud
+    Friend WithEvents lblAngleYAxis As Label
+    Friend WithEvents ucrNudLAngleYAxis As ucrNud
     Friend WithEvents lblHjustYAxis As Label
     Friend WithEvents ucrNudHjustYAxis As ucrNud
     Friend WithEvents lblSizeYAxis As Label
     Friend WithEvents ucrNudSizeYAxis As ucrNud
     Friend WithEvents lblColourYAxis As Label
-    Friend WithEvents UcrInputComboBox10 As ucrInputComboBox
+    Friend WithEvents ucrInputColourYAxis As ucrInputComboBox
     Friend WithEvents lblFaceYAxis As Label
-    Friend WithEvents UcrInputComboBox11 As ucrInputComboBox
+    Friend WithEvents ucrInputFaceYAxis As ucrInputComboBox
     Friend WithEvents lblFamilyYAxis As Label
-    Friend WithEvents crInputComboBox12 As ucrInputComboBox
+    Friend WithEvents ucrInputFamilyYAxis As ucrInputComboBox
 End Class
