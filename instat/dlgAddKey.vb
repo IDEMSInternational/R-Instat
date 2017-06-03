@@ -36,43 +36,42 @@ Public Class dlgAddKey
         If bReset Then
             SetDefaults()
         End If
-
         SetRCodeForControls(bReset)
         bReset = False
         bUniqueChecked = False
         TestOKEnabled()
     End Sub
 
-    Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        TestOKEnabled()
-    End Sub
-
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 504
-
-        ucrReceiverKeyColumns.Selector = ucrSelectorKeyColumns
-        ucrReceiverKeyColumns.SetMeAsReceiver()
 
         ucrSelectorKeyColumns.SetParameter(New RParameter("data_name", 0))
         ucrSelectorKeyColumns.SetParameterIsString()
 
         ucrReceiverKeyColumns.SetParameter(New RParameter("col_names", 1))
         ucrReceiverKeyColumns.SetParameterIsString()
+        ucrReceiverKeyColumns.Selector = ucrSelectorKeyColumns
+        ucrReceiverKeyColumns.SetMeAsReceiver()
 
         ucrInputKeyName.SetParameter(New RParameter("key_name", 2))
         ucrInputKeyName.SetValidationTypeAsRVariable()
     End Sub
 
     Private Sub SetDefaults()
+        clsDefaultRFunction = New RFunction
+
         ucrSelectorKeyColumns.Reset()
+        ucrInputKeyName.SetName("")
         ucrInputKeyName.Reset()
         ucrInputCheckInput.Reset()
         bUniqueChecked = False
 
-        clsDefaultRFunction = New RFunction
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -83,16 +82,12 @@ Public Class dlgAddKey
         End If
     End Sub
 
-    Private Sub ucrReceiverKeyColumns_ControlValueChanged() Handles ucrReceiverKeyColumns.ControlValueChanged
-        If ucrReceiverKeyColumns.IsEmpty Then
-            cmdCheckUnique.Enabled = False
-        Else
-            cmdCheckUnique.Enabled = True
-        End If
-        bUniqueChecked = False
-        ucrInputCheckInput.SetName("")
-        ucrInputCheckInput.txtInput.BackColor = SystemColors.Window
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOKEnabled()
     End Sub
+
     Private Sub cmdCheckUnique_Click(sender As Object, e As EventArgs) Handles cmdCheckUnique.Click
         Dim iAnyDuplicated As Integer
         Dim iSumNA As Integer
@@ -129,13 +124,18 @@ Public Class dlgAddKey
         TestOKEnabled()
     End Sub
 
-    Private Sub AllControls_ControlContentsChanged() Handles ucrInputKeyName.ControlContentsChanged, ucrReceiverKeyColumns.ControlContentsChanged
-        TestOKEnabled()
+    Private Sub ucrReceiverKeyColumns_ControlValueChanged() Handles ucrReceiverKeyColumns.ControlValueChanged
+        If ucrReceiverKeyColumns.IsEmpty Then
+            cmdCheckUnique.Enabled = False
+        Else
+            cmdCheckUnique.Enabled = True
+        End If
+        bUniqueChecked = False
+        ucrInputCheckInput.SetName("")
+        ucrInputCheckInput.txtInput.BackColor = SystemColors.Window
     End Sub
 
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
-        SetRCodeForControls(True)
+    Private Sub AllControls_ControlContentsChanged() Handles ucrInputKeyName.ControlContentsChanged, ucrReceiverKeyColumns.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
