@@ -31,12 +31,14 @@ Partial Class dlgStemAndLeaf
         'ucrReceiverStemAndLeaf
         '
         Me.ucrReceiverStemAndLeaf.frmParent = Me
-        Me.ucrReceiverStemAndLeaf.Location = New System.Drawing.Point(258, 60)
+        Me.ucrReceiverStemAndLeaf.Location = New System.Drawing.Point(256, 60)
         Me.ucrReceiverStemAndLeaf.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverStemAndLeaf.Name = "ucrReceiverStemAndLeaf"
         Me.ucrReceiverStemAndLeaf.Selector = Nothing
-        Me.ucrReceiverStemAndLeaf.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverStemAndLeaf.Size = New System.Drawing.Size(120, 26)
+        Me.ucrReceiverStemAndLeaf.strNcFilePath = ""
         Me.ucrReceiverStemAndLeaf.TabIndex = 2
+        Me.ucrReceiverStemAndLeaf.ucrSelector = Nothing
         '
         'ucrBase
         '
@@ -69,7 +71,7 @@ Partial Class dlgStemAndLeaf
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(411, 254)
+        Me.ClientSize = New System.Drawing.Size(416, 259)
         Me.Controls.Add(Me.ucrStemLeafSelector)
         Me.Controls.Add(Me.lblSelectedVariable)
         Me.Controls.Add(Me.ucrBase)

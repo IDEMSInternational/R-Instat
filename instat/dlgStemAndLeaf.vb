@@ -42,12 +42,13 @@ Public Class dlgStemAndLeaf
         ucrReceiverStemAndLeaf.SetParameterIsRFunction()
         ucrReceiverStemAndLeaf.Selector = ucrStemLeafSelector
         ucrReceiverStemAndLeaf.SetIncludedDataTypes({"numeric"})
+        ucrReceiverStemAndLeaf.SetMeAsReceiver()
     End Sub
 
     Private Sub SetDefaults()
         clsStemAndLeaf = New RFunction
 
-        ucrReceiverStemAndLeaf.SetMeAsReceiver()
+        clsStemAndLeaf.SetPackageName("graphics")
         clsStemAndLeaf.SetRCommand("stem")
         ucrBase.clsRsyntax.SetBaseRFunction(clsStemAndLeaf)
     End Sub
