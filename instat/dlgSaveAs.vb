@@ -105,7 +105,7 @@ Public Class dlgSaveAs
         End Using
     End Sub
 
-    Private Sub ucrInputFilePath_ControContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFilePath.ControlContentsChanged
+    Private Sub ucrInputFilePath_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFilePath.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
