@@ -51,7 +51,7 @@ Partial Class dlgStack
         Me.lblStackDataInto.Location = New System.Drawing.Point(10, 248)
         Me.lblStackDataInto.Name = "lblStackDataInto"
         Me.lblStackDataInto.Size = New System.Drawing.Size(85, 13)
-        Me.lblStackDataInto.TabIndex = 8
+        Me.lblStackDataInto.TabIndex = 7
         Me.lblStackDataInto.Tag = "Stack_Data_Into"
         Me.lblStackDataInto.Text = "Stack Data Into:"
         '
@@ -61,7 +61,7 @@ Partial Class dlgStack
         Me.lblFactorInto.Location = New System.Drawing.Point(10, 216)
         Me.lblFactorInto.Name = "lblFactorInto"
         Me.lblFactorInto.Size = New System.Drawing.Size(61, 13)
-        Me.lblFactorInto.TabIndex = 6
+        Me.lblFactorInto.TabIndex = 5
         Me.lblFactorInto.Tag = "Factor_Into"
         Me.lblFactorInto.Text = "Factor Into:"
         '
@@ -83,7 +83,7 @@ Partial Class dlgStack
         Me.ucrStackDataInto.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrStackDataInto.Name = "ucrStackDataInto"
         Me.ucrStackDataInto.Size = New System.Drawing.Size(165, 21)
-        Me.ucrStackDataInto.TabIndex = 9
+        Me.ucrStackDataInto.TabIndex = 8
         '
         'ucrFactorInto
         '
@@ -94,7 +94,7 @@ Partial Class dlgStack
         Me.ucrFactorInto.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrFactorInto.Name = "ucrFactorInto"
         Me.ucrFactorInto.Size = New System.Drawing.Size(165, 21)
-        Me.ucrFactorInto.TabIndex = 7
+        Me.ucrFactorInto.TabIndex = 6
         '
         'ucrColumnsToCarryReceiver
         '
@@ -143,13 +143,13 @@ Partial Class dlgStack
         Me.ucrSaveNewDataName.Location = New System.Drawing.Point(10, 274)
         Me.ucrSaveNewDataName.Name = "ucrSaveNewDataName"
         Me.ucrSaveNewDataName.Size = New System.Drawing.Size(266, 20)
-        Me.ucrSaveNewDataName.TabIndex = 5
+        Me.ucrSaveNewDataName.TabIndex = 9
         '
         'dlgStack
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(418, 360)
+        Me.ClientSize = New System.Drawing.Size(416, 357)
         Me.Controls.Add(Me.ucrSaveNewDataName)
         Me.Controls.Add(Me.ucrChkCarryColumns)
         Me.Controls.Add(Me.ucrStackDataInto)
