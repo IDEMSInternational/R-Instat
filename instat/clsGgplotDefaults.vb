@@ -35,14 +35,36 @@
         End Get
     End Property
 
+    Public Shared ReadOnly Property clsYlabTitleFunction As RFunction
+        Get
+            Dim clsYlabTempFunc As New RFunction
+
+            clsYlabTempFunc.SetPackageName("ggplot2")
+            clsYlabTempFunc.SetRCommand("ylab")
+            Return clsYlabTempFunc
+        End Get
+    End Property
+
     Public Shared ReadOnly Property clsXScalecontinuousFunction As RFunction
         Get
             Dim clsXlabScalesTempFunc As New RFunction
 
             clsXlabScalesTempFunc.SetPackageName("ggplot2")
-            clsXlabScalesTempFunc.SetRCommand("scale_x_continuous")
 
+            clsXlabScalesTempFunc.SetRCommand("scale_x_continuous")
             Return clsXlabScalesTempFunc
         End Get
     End Property
+
+    Public Shared ReadOnly Property clsYScalecontinuousFunction As RFunction
+        Get
+            Dim clsYlabScalesTempFunc As New RFunction
+
+            clsYlabScalesTempFunc.SetPackageName("ggplot2")
+            clsYlabScalesTempFunc.SetRCommand("scale_y_continuous")
+
+            Return clsYlabScalesTempFunc
+        End Get
+    End Property
+
 End Class
