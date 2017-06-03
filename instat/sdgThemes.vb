@@ -23,23 +23,9 @@ Public Class sdgThemes
         autoTranslate(Me)
     End Sub
 
-    Private Sub ucrNudSizeTopYAxis_Load(sender As Object, e As EventArgs) Handles ucrNudSizeTopYAxis.Load
-
-    End Sub
-
-    Private Sub UcrInputComboBox6_Load(sender As Object, e As EventArgs) Handles ucrInputFamilyTopYAxis.Load
-
-    End Sub
-
-    Private Sub UcrInputComboBox7_Load(sender As Object, e As EventArgs) Handles ucrInputLineEndTickMarksYAxis.Load
-
-    End Sub
-
-    Private Sub ucrInputLineEndTickMarks_Load(sender As Object, e As EventArgs) Handles ucrInputLineEndTickMarks.Load
-
-    End Sub
 
     Public Sub InitialiseControls()
+        'X-Axis tab
         Dim dctucrInputColour As New Dictionary(Of String, String)
         Dim dctucrInputColourTopAxis As New Dictionary(Of String, String)
         Dim dctucrInputColourSegment As New Dictionary(Of String, String)
@@ -49,25 +35,45 @@ Public Class sdgThemes
         Dim dctucrInputFamilyTopAxis As New Dictionary(Of String, String)
         Dim dctucrInputLineType As New Dictionary(Of String, String)
         Dim dctucrInputLineTypeXTickMarks As New Dictionary(Of String, String)
-        Dim dctucrInputColourXTickMarkst As New Dictionary(Of String, String)
+        Dim dctucrInputColourXTickMarks As New Dictionary(Of String, String)
         Dim dctucrInputLineEnd As New Dictionary(Of String, String)
         Dim dctucrInputLineEndXTickMarks As New Dictionary(Of String, String)
 
+        'Y -Axis tab
+        Dim dctucrInputColourYAxis As New Dictionary(Of String, String)
+        Dim dctucrInputColourTopYAxis As New Dictionary(Of String, String)
+        'Dim dctucrInputColour As New Dictionary(Of String, String)
+        Dim dctucrInputFaceYAxis As New Dictionary(Of String, String)
+        Dim dctucrInputFaceTopYAxis As New Dictionary(Of String, String)
+        Dim dctucrInputFamilyYAxis As New Dictionary(Of String, String)
+        Dim dctucrInputFamilyTopYAxis As New Dictionary(Of String, String)
+        Dim dctucrInputLineTypeTickLabelsYAxis As New Dictionary(Of String, String)
+        Dim dctucrInputLineEndTickLabelsYAxis As New Dictionary(Of String, String)
+        Dim dctucrInputColourTickMarksYAxis As New Dictionary(Of String, String)
+        'Dim dctucrInputColourTickMarksYAxis As New Dictionary(Of String, String)
+        Dim dctucrInputColourTickLabelsYAxis As New Dictionary(Of String, String)
+        Dim dctucrInputLineTypeTickMarksYAxis As New Dictionary(Of String, String)
+        Dim dctucrInputLineEndTickMarksYAxis As New Dictionary(Of String, String)
+
         'X axis Label
+        ucrChkSize.SetText("Size")
         ucrNudsize.SetParameter(New RParameter("size"))
+        ucrChkAngle.SetText("Angle")
         ucrNudAngle.SetParameter(New RParameter("angle"))
         ucrNudAngle.SetMinMax(0, 360)
+        ucrChkHjust.SetText("Hjust")
         ucrNudHjust.SetParameter(New RParameter("hjust"))
         ucrNudHjust.Increment = 0.1
         ucrNudHjust.SetMinMax(0, 1)
+        ucrChkVjust.SetText("Vjust")
         ucrNudVjust.SetParameter(New RParameter("vjust"))
         ucrNudVjust.Increment = 0.1
         ucrNudVjust.SetMinMax(0, 1)
+        ucrChkLineHeight.SetText("Line Height")
         ucrNudLineHeight.SetParameter(New RParameter("lineheight"))
-        ucrInputColour.SetParameter(New RParameter("colour"))
-        ucrInputFace.SetParameter(New RParameter("face"))
-        ucrInputFamily.SetParameter(New RParameter("family"))
 
+        ucrChkFace.SetText("Face")
+        ucrInputFace.SetParameter(New RParameter("face"))
         dctucrInputFace.Add("Plain", Chr(34) & "plain" & Chr(34))
         dctucrInputFace.Add("Bold", Chr(34) & "bold" & Chr(34))
         dctucrInputFace.Add("Italic", Chr(34) & "italic" & Chr(34))
@@ -75,6 +81,8 @@ Public Class sdgThemes
         ucrInputFace.SetItems(dctucrInputFace)
         ucrInputFace.SetRDefault(Chr(34) & "plain" & Chr(34))
 
+        ucrChkColour.SetText("Colour")
+        ucrInputColour.SetParameter(New RParameter("colour"))
         dctucrInputColour.Add("Black", Chr(34) & "black" & Chr(34))
         dctucrInputColour.Add("Red", Chr(34) & "red" & Chr(34))
         dctucrInputColour.Add("Blue", Chr(34) & "blue" & Chr(34))
@@ -85,6 +93,8 @@ Public Class sdgThemes
         ucrInputColour.SetRDefault(Chr(34) & "black" & Chr(34))
         ucrInputColour.bUpdateRCodeFromControl = False
 
+        ucrChkFamily.SetText("Family")
+        ucrInputFamily.SetParameter(New RParameter("family"))
         dctucrInputFamily.Add("Times Roman", Chr(34) & "Times" & Chr(34))
         dctucrInputFamily.Add("Courier", Chr(34) & "Courier" & Chr(34))
         dctucrInputFamily.Add("Couriersans", Chr(34) & "Couriersans" & Chr(34))
@@ -109,9 +119,11 @@ Public Class sdgThemes
         ucrInputFamily.bUpdateRCodeFromControl = False
 
         'Tick Marks Along Axes
+        ucrChkSizeTickMarksXAxis.SetText("Size")
         ucrNudSizeTickMarks.SetParameter(New RParameter("size"))
         ucrNudSizeTickMarks.Increment = 0.1
 
+        ucrChkLineTypeTickMarksXAxis.SetText("Line Type")
         ucrInputLineTypeTickMarks.SetParameter(New RParameter("linetype"))
         dctucrInputLineType.Add("Blank", Chr(34) & "blank" & Chr(34))
         dctucrInputLineType.Add("Solid", Chr(34) & "solid" & Chr(34))
@@ -128,6 +140,7 @@ Public Class sdgThemes
         ucrInputLineTypeTickMarks.SetRDefault(Chr(34) & "blank" & Chr(34))
         ucrInputLineTypeTickMarks.bUpdateRCodeFromControl = False
 
+        ucrChkColourTickMarksXAxis.SetText("Colour")
         ucrInputColourTickMarks.SetParameter(New RParameter("colour"))
         dctucrInputColourSegment.Add("Black", Chr(34) & "black" & Chr(34))
         dctucrInputColourSegment.Add("Red", Chr(34) & "red" & Chr(34))
@@ -138,6 +151,7 @@ Public Class sdgThemes
         ucrInputColourTickMarks.SetItems(dctucrInputColourSegment)
         ucrInputColourTickMarks.SetRDefault(Chr(34) & "black" & Chr(34))
 
+        ucrChkLineEndTickMarksXAxis.SetText("Line End")
         ucrInputLineEndTickMarks.SetParameter(New RParameter("lineend"))
         '  dctucrInputLineEnd.Add("NULL", Chr(34) & "NULL" & Chr(34))
         dctucrInputLineEnd.Add("round", Chr(34) & "round" & Chr(34))
@@ -148,18 +162,24 @@ Public Class sdgThemes
         ucrInputLineEndTickMarks.bUpdateRCodeFromControl = False
 
         'X axis Label Top  Axis
+        ucrChkSizeTopXAxis.SetText("Size")
         ucrNudSizeTopaxis.SetParameter(New RParameter("size"))
         ucrNudSizeTopaxis.Increment = 0.1
+        ucrChkAngleTopXAxis.SetText("Angle")
         ucrNudAngleTopAxis.SetParameter(New RParameter("angle"))
         ucrNudAngleTopAxis.SetMinMax(0, 360)
+        ucrChkHjustTopXAxis.SetText("Hjust")
         ucrNudHjustTopAxis.SetParameter(New RParameter("hjust"))
         ucrNudHjustTopAxis.Increment = 0.1
         ucrNudHjustTopAxis.SetMinMax(0, 1)
+        ucrChkVjustTopXAxis.SetText("Vjust")
         ucrNudVjustTopAxis.SetParameter(New RParameter("vjust"))
         ucrNudVjustTopAxis.Increment = 0.1
         ucrNudVjustTopAxis.SetMinMax(0, 1)
+        ucrChkLineHeightTopXAxis.SetText("Line Height")
         ucrNudLineHeightTopAxis.SetParameter(New RParameter("lineheight"))
 
+        ucrChkFaceTopXAxis.SetText("Face")
         ucrInputFaceTopAxis.SetParameter(New RParameter("face"))
         dctucrInputFaceTopAxis.Add("Plain", Chr(34) & "plain" & Chr(34))
         dctucrInputFaceTopAxis.Add("Bold", Chr(34) & "bold" & Chr(34))
@@ -168,6 +188,7 @@ Public Class sdgThemes
         ucrInputFaceTopAxis.SetItems(dctucrInputFaceTopAxis)
         ucrInputFaceTopAxis.SetRDefault(Chr(34) & "plain" & Chr(34))
 
+        ucrChkColourTopXAxis.SetText("colour")
         ucrInputColourTopAxis.SetParameter(New RParameter("colour"))
         dctucrInputColourTopAxis.Add("Black", Chr(34) & "black" & Chr(34))
         dctucrInputColourTopAxis.Add("Red", Chr(34) & "red" & Chr(34))
@@ -179,6 +200,7 @@ Public Class sdgThemes
         ucrInputColourTopAxis.SetRDefault(Chr(34) & "black" & Chr(34))
         ucrInputColourTopAxis.bUpdateRCodeFromControl = False
 
+        ucrChkFamilyTopXAxis.SetText("Family")
         ucrInputFamilyTopAxis.SetParameter(New RParameter("family"))
         dctucrInputFamilyTopAxis.Add("Times Roman", Chr(34) & "Times" & Chr(34))
         dctucrInputFamilyTopAxis.Add("Courier", Chr(34) & "Courier" & Chr(34))
@@ -204,6 +226,7 @@ Public Class sdgThemes
         ucrInputFamilyTopAxis.bUpdateRCodeFromControl = False
 
         'Tick Marks Along Axes
+        ucrChkSizeTickLabelsXAxis.SetText("Size")
         ucrNudSizeXTickLabels.SetParameter(New RParameter("size"))
         ucrNudSizeXTickLabels.Increment = 0.1
         ucrInputLineTypeXTickMarks.SetParameter(New RParameter("linetype"))
@@ -222,16 +245,18 @@ Public Class sdgThemes
         ucrInputLineTypeXTickMarks.SetRDefault(Chr(34) & "blank" & Chr(34))
         ucrInputLineTypeXTickMarks.bUpdateRCodeFromControl = False
 
+        ucrChkColourTickLabelsXAxis.SetText("Colour")
         ucrInputColourXTickMarks.SetParameter(New RParameter("colour"))
-        dctucrInputColourXTickMarkst.Add("Black", Chr(34) & "black" & Chr(34))
-        dctucrInputColourXTickMarkst.Add("Red", Chr(34) & "red" & Chr(34))
-        dctucrInputColourXTickMarkst.Add("Blue", Chr(34) & "blue" & Chr(34))
-        dctucrInputColourXTickMarkst.Add("Grey", Chr(34) & "grey" & Chr(34))
-        dctucrInputColourXTickMarkst.Add("Yellow", Chr(34) & "yellow" & Chr(34))
-        dctucrInputColourXTickMarkst.Add("Yellow-Green", Chr(34) & "yellowgreen" & Chr(34))
-        ucrInputColourXTickMarks.SetItems(dctucrInputColourXTickMarkst)
+        dctucrInputColourXTickMarks.Add("Black", Chr(34) & "black" & Chr(34))
+        dctucrInputColourXTickMarks.Add("Red", Chr(34) & "red" & Chr(34))
+        dctucrInputColourXTickMarks.Add("Blue", Chr(34) & "blue" & Chr(34))
+        dctucrInputColourXTickMarks.Add("Grey", Chr(34) & "grey" & Chr(34))
+        dctucrInputColourXTickMarks.Add("Yellow", Chr(34) & "yellow" & Chr(34))
+        dctucrInputColourXTickMarks.Add("Yellow-Green", Chr(34) & "yellowgreen" & Chr(34))
+        ucrInputColourXTickMarks.SetItems(dctucrInputColourXTickMarks)
         ucrInputColourXTickMarks.SetRDefault(Chr(34) & "black" & Chr(34))
 
+        ucrChkLineEndTickLabelsXAxis.SetText("Line End")
         ucrInputLineEndXTickMarks.SetParameter(New RParameter("lineend"))
         'dctucrInputLineEndXTickMarks.Add("None", Chr(34) & "NULL" & Chr(34))
         dctucrInputLineEndXTickMarks.Add("round", Chr(34) & "round" & Chr(34))
@@ -240,6 +265,225 @@ Public Class sdgThemes
         ucrInputLineEndXTickMarks.SetItems(dctucrInputLineEndXTickMarks)
         ucrInputLineEndXTickMarks.SetRDefault(Chr(34) & "square" & Chr(34))
         ucrInputLineEndXTickMarks.bUpdateRCodeFromControl = False
+
+        'Linking
+        ucrChkSize.AddToLinkedControls(ucrNudsize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkHjust.AddToLinkedControls(ucrNudHjust, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkVjust.AddToLinkedControls(ucrNudVjust, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkLineHeight.AddToLinkedControls(ucrNudLineHeight, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkAngle.AddToLinkedControls(ucrNudAngle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkFace.AddToLinkedControls(ucrInputFace, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkFamily.AddToLinkedControls(ucrInputFamily, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkColour.AddToLinkedControls(ucrInputColour, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkSizeTopXAxis.AddToLinkedControls(ucrNudSizeTopaxis, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkHjustTopXAxis.AddToLinkedControls(ucrNudHjustTopAxis, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkVjustTopXAxis.AddToLinkedControls(ucrNudVjustTopAxis, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkLineHeightTopXAxis.AddToLinkedControls(ucrNudLineHeightTopAxis, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkAngleTopXAxis.AddToLinkedControls(ucrNudAngleTopAxis, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkFaceTopXAxis.AddToLinkedControls(ucrInputFaceTopAxis, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkFamilyTopXAxis.AddToLinkedControls(ucrInputFamilyTopAxis, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkColourTopXAxis.AddToLinkedControls(ucrInputColourTopAxis, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        'Y-axis Label
+        ucrNudSizeYAxis.SetParameter(New RParameter("size"))
+        ucrNudLAngleYAxis.SetParameter(New RParameter("angle"))
+        ucrNudLAngleYAxis.SetMinMax(0, 360)
+        ucrNudHjustYAxis.SetParameter(New RParameter("hjust"))
+        ucrNudHjustYAxis.Increment = 0.1
+        ucrNudHjustYAxis.SetMinMax(0, 1)
+        ucrNudVjustYAxis.SetParameter(New RParameter("vjust"))
+        ucrNudVjustYAxis.Increment = 0.1
+        ucrNudVjustYAxis.SetMinMax(0, 1)
+        ucrNudLineHeightYAxis.SetParameter(New RParameter("lineheight"))
+
+        ucrInputFaceYAxis.SetParameter(New RParameter("face"))
+        dctucrInputFaceYAxis.Add("Plain", Chr(34) & "plain" & Chr(34))
+        dctucrInputFaceYAxis.Add("Bold", Chr(34) & "bold" & Chr(34))
+        dctucrInputFaceYAxis.Add("Italic", Chr(34) & "italic" & Chr(34))
+        dctucrInputFaceYAxis.Add("Bold italic", Chr(34) & "bold.italic" & Chr(34))
+        ucrInputFaceYAxis.SetItems(dctucrInputFaceYAxis)
+        ucrInputFaceYAxis.SetRDefault(Chr(34) & "plain" & Chr(34))
+
+        ucrInputColourYAxis.SetParameter(New RParameter("colour"))
+        dctucrInputColourYAxis.Add("Black", Chr(34) & "black" & Chr(34))
+        dctucrInputColourYAxis.Add("Red", Chr(34) & "red" & Chr(34))
+        dctucrInputColourYAxis.Add("Blue", Chr(34) & "blue" & Chr(34))
+        dctucrInputColourYAxis.Add("Grey", Chr(34) & "grey" & Chr(34))
+        dctucrInputColourYAxis.Add("Yellow", Chr(34) & "yellow" & Chr(34))
+        dctucrInputColourYAxis.Add("Yellow-Green", Chr(34) & "yellowgreen" & Chr(34))
+        ucrInputColourYAxis.SetItems(dctucrInputColourYAxis)
+        ucrInputColourYAxis.SetRDefault(Chr(34) & "black" & Chr(34))
+        ucrInputColourYAxis.bUpdateRCodeFromControl = False
+
+        ucrInputFamilyYAxis.SetParameter(New RParameter("family"))
+        dctucrInputFamilyYAxis.Add("Times Roman", Chr(34) & "Times" & Chr(34))
+        dctucrInputFamilyYAxis.Add("Courier", Chr(34) & "Courier" & Chr(34))
+        dctucrInputFamilyYAxis.Add("Couriersans", Chr(34) & "Couriersans" & Chr(34))
+        dctucrInputFamilyYAxis.Add("Serif", Chr(34) & "serif" & Chr(34))
+        dctucrInputFamilyYAxis.Add("NimbusSanCond", Chr(34) & "NimbusSanCond" & Chr(34))
+        dctucrInputFamilyYAxis.Add("CenturySch", Chr(34) & "CenturySch" & Chr(34))
+        dctucrInputFamilyYAxis.Add("NewCenturySchoolbook", Chr(34) & "NewCenturySchoolbook" & Chr(34))
+        dctucrInputFamilyYAxis.Add("Palatino", Chr(34) & "Palatino" & Chr(34))
+        dctucrInputFamilyYAxis.Add("Bookman", Chr(34) & "Bookman" & Chr(34))
+        dctucrInputFamilyYAxis.Add("URWBookman", Chr(34) & "URWBookman" & Chr(34))
+        dctucrInputFamilyYAxis.Add("URWGothic", Chr(34) & "URWGothic" & Chr(34))
+        dctucrInputFamilyYAxis.Add("NimbusRom", Chr(34) & "NimbusRom" & Chr(34))
+        dctucrInputFamilyYAxis.Add("URWPalladioURWTimes", Chr(34) & "URWPalladioURWTimes" & Chr(34))
+        dctucrInputFamilyYAxis.Add("NimbusMonURWHelvetica", Chr(34) & "NimbusMonURWHelvetica" & Chr(34))
+        dctucrInputFamilyYAxis.Add("Helvetica - Narrow", Chr(34) & "Helvetica - Narrow" & Chr(34))
+        dctucrInputFamilyYAxis.Add("Helveticaserif", Chr(34) & "Helveticaserif" & Chr(34))
+        dctucrInputFamilyYAxis.Add("Short", Chr(34) & "Short" & Chr(34))
+        dctucrInputFamilyYAxis.Add("Canonicalmono", Chr(34) & "Canonicalmono" & Chr(34))
+        dctucrInputFamilyYAxis.Add("AvantGarde", Chr(34) & "AvantGarde" & Chr(34))
+        ucrInputFamilyYAxis.SetItems(dctucrInputFamilyYAxis)
+        ucrInputFamilyYAxis.SetRDefault(Chr(34) & "Times" & Chr(34))
+        ucrInputFamilyYAxis.bUpdateRCodeFromControl = False
+
+        'Tick Marks Along-Axes
+        ucrNudSizeTickMarksYAxis.SetParameter(New RParameter("size"))
+        ucrNudSizeTickMarksYAxis.Increment = 0.1
+
+        ucrInputLineTypeTickLabelsYAxis.SetParameter(New RParameter("linetype"))
+        dctucrInputLineTypeTickLabelsYAxis.Add("Blank", Chr(34) & "blank" & Chr(34))
+        dctucrInputLineTypeTickLabelsYAxis.Add("Solid", Chr(34) & "solid" & Chr(34))
+        dctucrInputLineTypeTickLabelsYAxis.Add("Dashed", Chr(34) & "dashed" & Chr(34))
+        dctucrInputLineTypeTickLabelsYAxis.Add("Dotted", Chr(34) & "dotted" & Chr(34))
+        dctucrInputLineTypeTickLabelsYAxis.Add("Dot-dash", Chr(34) & "dotdash" & Chr(34))
+        dctucrInputLineTypeTickLabelsYAxis.Add("Long-dash", Chr(34) & "longdash" & Chr(34))
+        dctucrInputLineTypeTickLabelsYAxis.Add("Two-Dash", Chr(34) & "twodash" & Chr(34))
+        dctucrInputLineTypeTickLabelsYAxis.Add("1F", Chr(34) & "1F" & Chr(34))
+        dctucrInputLineTypeTickLabelsYAxis.Add("F1", Chr(34) & "F1" & Chr(34))
+        dctucrInputLineTypeTickLabelsYAxis.Add("4C88C488", Chr(34) & "4C88C488" & Chr(34))
+        dctucrInputLineTypeTickLabelsYAxis.Add("12345678", Chr(34) & "12345678" & Chr(34))
+        ucrInputLineTypeTickLabelsYAxis.SetItems(dctucrInputLineTypeTickLabelsYAxis)
+        ucrInputLineTypeTickLabelsYAxis.SetRDefault(Chr(34) & "blank" & Chr(34))
+        ucrInputLineTypeTickLabelsYAxis.bUpdateRCodeFromControl = False
+
+        ucrInputColourTickMarksYAxis.SetParameter(New RParameter("colour"))
+        dctucrInputColourTickMarksYAxis.Add("Black", Chr(34) & "black" & Chr(34))
+        dctucrInputColourTickMarksYAxis.Add("Red", Chr(34) & "red" & Chr(34))
+        dctucrInputColourTickMarksYAxis.Add("Blue", Chr(34) & "blue" & Chr(34))
+        dctucrInputColourTickMarksYAxis.Add("Grey", Chr(34) & "grey" & Chr(34))
+        dctucrInputColourTickMarksYAxis.Add("Yellow", Chr(34) & "yellow" & Chr(34))
+        dctucrInputColourTickMarksYAxis.Add("Yellow-Green", Chr(34) & "yellowgreen" & Chr(34))
+        ucrInputColourTickMarksYAxis.SetItems(dctucrInputColourTickMarksYAxis)
+        ucrInputColourTickMarksYAxis.SetRDefault(Chr(34) & "black" & Chr(34))
+
+        ucrInputLineEndTickLabelsYAxis.SetParameter(New RParameter("lineend"))
+        '  dctucrInputLineEnd.Add("NULL", Chr(34) & "NULL" & Chr(34))
+        dctucrInputLineEndTickLabelsYAxis.Add("round", Chr(34) & "round" & Chr(34))
+        dctucrInputLineEndTickLabelsYAxis.Add("butt", Chr(34) & "butt" & Chr(34))
+        dctucrInputLineEndTickLabelsYAxis.Add("square", Chr(34) & "square" & Chr(34))
+        ucrInputLineEndTickLabelsYAxis.SetItems(dctucrInputLineEndTickLabelsYAxis)
+        ucrInputLineEndTickLabelsYAxis.SetRDefault(Chr(34) & "square" & Chr(34))
+        ucrInputLineEndTickLabelsYAxis.bUpdateRCodeFromControl = False
+
+        'Y axis Label Top  Axis
+        ucrNudSizeTopYAxis.SetParameter(New RParameter("size"))
+        ucrNudSizeTopYAxis.Increment = 0.1
+        ucrNudAngleTopYAxis.SetParameter(New RParameter("angle"))
+        ucrNudAngleTopYAxis.SetMinMax(0, 360)
+        ucrNudHjustTopYAxis.SetParameter(New RParameter("hjust"))
+        ucrNudHjustTopYAxis.Increment = 0.1
+        ucrNudHjustTopYAxis.SetMinMax(0, 1)
+        ucrNudHjustTopYAxis.SetParameter(New RParameter("vjust"))
+        ucrNudVjustTopYAxis.Increment = 0.1
+        ucrNudVjustTopYAxis.SetMinMax(0, 1)
+        ucrNudLineHeightTopYAxis.SetParameter(New RParameter("lineheight"))
+
+        ucrInputFaceTopYAxis.SetParameter(New RParameter("face"))
+        dctucrInputFaceTopYAxis.Add("Plain", Chr(34) & "plain" & Chr(34))
+        dctucrInputFaceTopYAxis.Add("Bold", Chr(34) & "bold" & Chr(34))
+        dctucrInputFaceTopYAxis.Add("Italic", Chr(34) & "italic" & Chr(34))
+        dctucrInputFaceTopYAxis.Add("Bold italic", Chr(34) & "bold.italic" & Chr(34))
+        ucrInputFaceTopYAxis.SetItems(dctucrInputFaceTopAxis)
+        ucrInputFaceTopYAxis.SetRDefault(Chr(34) & "plain" & Chr(34))
+
+        ucrInputColourTopYAxis.SetParameter(New RParameter("colour"))
+        dctucrInputColourTopYAxis.Add("Black", Chr(34) & "black" & Chr(34))
+        dctucrInputColourTopYAxis.Add("Red", Chr(34) & "red" & Chr(34))
+        dctucrInputColourTopYAxis.Add("Blue", Chr(34) & "blue" & Chr(34))
+        dctucrInputColourTopYAxis.Add("Grey", Chr(34) & "grey" & Chr(34))
+        dctucrInputColourTopYAxis.Add("Yellow", Chr(34) & "yellow" & Chr(34))
+        dctucrInputColourTopYAxis.Add("Yellow-Green", Chr(34) & "yellowgreen" & Chr(34))
+        ucrInputColourTopYAxis.SetItems(dctucrInputColourTopYAxis)
+        ucrInputColourTopYAxis.SetRDefault(Chr(34) & "black" & Chr(34))
+        ucrInputColourTopYAxis.bUpdateRCodeFromControl = False
+
+        ucrInputFamilyTopYAxis.SetParameter(New RParameter("family"))
+        'dctucrInputFamilyYAxisTopAxis.Add("Times Roman", Chr(34) & "Times" & Chr(34))
+        dctucrInputFamilyTopYAxis.Add("Courier", Chr(34) & "Courier" & Chr(34))
+        dctucrInputFamilyTopYAxis.Add("Couriersans", Chr(34) & "Couriersans" & Chr(34))
+        dctucrInputFamilyTopYAxis.Add("Serif", Chr(34) & "serif" & Chr(34))
+        dctucrInputFamilyTopYAxis.Add("NimbusSanCond", Chr(34) & "NimbusSanCond" & Chr(34))
+        dctucrInputFamilyTopYAxis.Add("CenturySch", Chr(34) & "CenturySch" & Chr(34))
+        dctucrInputFamilyTopYAxis.Add("NewCenturySchoolbook", Chr(34) & "NewCenturySchoolbook" & Chr(34))
+        dctucrInputFamilyTopYAxis.Add("Palatino", Chr(34) & "Palatino" & Chr(34))
+        dctucrInputFamilyTopYAxis.Add("Bookman", Chr(34) & "Bookman" & Chr(34))
+        dctucrInputFamilyTopYAxis.Add("URWBookman", Chr(34) & "URWBookman" & Chr(34))
+        dctucrInputFamilyTopYAxis.Add("URWGothic", Chr(34) & "URWGothic" & Chr(34))
+        dctucrInputFamilyTopYAxis.Add("NimbusRom", Chr(34) & "NimbusRom" & Chr(34))
+        dctucrInputFamilyTopYAxis.Add("URWPalladioURWTimes", Chr(34) & "URWPalladioURWTimes" & Chr(34))
+        dctucrInputFamilyTopYAxis.Add("NimbusMonURWHelvetica", Chr(34) & "NimbusMonURWHelvetica" & Chr(34))
+        dctucrInputFamilyTopYAxis.Add("Helvetica - Narrow", Chr(34) & "Helvetica - Narrow" & Chr(34))
+        dctucrInputFamilyTopYAxis.Add("Helveticaserif", Chr(34) & "Helveticaserif" & Chr(34))
+        dctucrInputFamilyTopYAxis.Add("Short", Chr(34) & "Short" & Chr(34))
+        dctucrInputFamilyTopYAxis.Add("Canonicalmono", Chr(34) & "Canonicalmono" & Chr(34))
+        dctucrInputFamilyTopYAxis.Add("AvantGarde", Chr(34) & "AvantGarde" & Chr(34))
+        ucrInputFamilyTopYAxis.SetItems(dctucrInputFamilyTopYAxis)
+        ucrInputFamilyTopYAxis.SetRDefault(Chr(34) & "Times" & Chr(34))
+        ucrInputFamilyTopYAxis.bUpdateRCodeFromControl = False
+
+        'Tick Marks Along Axes
+        ucrNudSizeTickMarksYAxis.SetParameter(New RParameter("size"))
+        ucrNudSizeTickMarksYAxis.Increment = 0.1
+
+        ucrInputLineTypeTickMarksYAxis.SetParameter(New RParameter("linetype"))
+        dctucrInputLineTypeTickMarksYAxis.Add("Blank", Chr(34) & "blank" & Chr(34))
+        dctucrInputLineTypeTickMarksYAxis.Add("Solid", Chr(34) & "solid" & Chr(34))
+        dctucrInputLineTypeTickMarksYAxis.Add("Dashed", Chr(34) & "dashed" & Chr(34))
+        dctucrInputLineTypeTickMarksYAxis.Add("Dotted", Chr(34) & "dotted" & Chr(34))
+        dctucrInputLineTypeTickMarksYAxis.Add("Dot-dash", Chr(34) & "dotdash" & Chr(34))
+        dctucrInputLineTypeTickMarksYAxis.Add("Long-dash", Chr(34) & "longdash" & Chr(34))
+        dctucrInputLineTypeTickMarksYAxis.Add("Two-Dash", Chr(34) & "twodash" & Chr(34))
+        dctucrInputLineTypeTickMarksYAxis.Add("1F", Chr(34) & "1F" & Chr(34))
+        dctucrInputLineTypeTickMarksYAxis.Add("F1", Chr(34) & "F1" & Chr(34))
+        dctucrInputLineTypeTickMarksYAxis.Add("4C88C488", Chr(34) & "4C88C488" & Chr(34))
+        dctucrInputLineTypeTickMarksYAxis.Add("12345678", Chr(34) & "12345678" & Chr(34))
+        ucrInputLineTypeTickMarksYAxis.SetItems(dctucrInputLineTypeTickMarksYAxis)
+        ucrInputLineTypeTickMarksYAxis.SetRDefault(Chr(34) & "blank" & Chr(34))
+        ucrInputLineTypeTickMarksYAxis.bUpdateRCodeFromControl = False
+
+        'ucrInputColourTickMarksYAxis.SetParameter(New RParameter("colour"))
+        'dctucrInputColourTickMarksYAxis.Add("Black", Chr(34) & "black" & Chr(34))
+        'dctucrInputColourTickMarksYAxis.Add("Red", Chr(34) & "red" & Chr(34))
+        'dctucrInputColourTickMarksYAxis.Add("Blue", Chr(34) & "blue" & Chr(34))
+        'dctucrInputColourTickMarksYAxis.Add("Grey", Chr(34) & "grey" & Chr(34))
+        'dctucrInputColourTickMarksYAxis.Add("Yellow", Chr(34) & "yellow" & Chr(34))
+        'dctucrInputColourTickMarksYAxis.Add("Yellow-Green", Chr(34) & "yellowgreen" & Chr(34))
+        'ucrInputColourTickMarksYAxis.SetItems(dctucrInputColourTickMarksYAxis)
+        'ucrInputColourTickMarksYAxis.SetRDefault(Chr(34) & "black" & Chr(34))
+
+        ucrInputColourTickLabelsYAxis.SetParameter(New RParameter("colour"))
+        dctucrInputColourTickLabelsYAxis.Add("Black", Chr(34) & "black" & Chr(34))
+        dctucrInputColourTickLabelsYAxis.Add("Red", Chr(34) & "red" & Chr(34))
+        dctucrInputColourTickLabelsYAxis.Add("Blue", Chr(34) & "blue" & Chr(34))
+        dctucrInputColourTickLabelsYAxis.Add("Grey", Chr(34) & "grey" & Chr(34))
+        dctucrInputColourTickLabelsYAxis.Add("Yellow", Chr(34) & "yellow" & Chr(34))
+        dctucrInputColourTickLabelsYAxis.Add("Yellow-Green", Chr(34) & "yellowgreen" & Chr(34))
+        ucrInputColourTickLabelsYAxis.SetItems(dctucrInputColourTickMarksYAxis)
+        ucrInputColourTickLabelsYAxis.SetRDefault(Chr(34) & "black" & Chr(34))
+        ucrInputColourTickLabelsYAxis.bUpdateRCodeFromControl = False
+
+        ucrInputLineEndTickMarksYAxis.SetParameter(New RParameter("lineend"))
+        'dctucrInputLineEndXTickMarks.Add("None", Chr(34) & "NULL" & Chr(34))
+        dctucrInputLineEndTickMarksYAxis.Add("round", Chr(34) & "round" & Chr(34))
+        dctucrInputLineEndTickMarksYAxis.Add("butt", Chr(34) & "butt" & Chr(34))
+        dctucrInputLineEndTickMarksYAxis.Add("square", Chr(34) & "square" & Chr(34))
+        ucrInputLineEndTickMarksYAxis.SetItems(dctucrInputLineEndTickMarksYAxis)
+        ucrInputLineEndTickMarksYAxis.SetRDefault(Chr(34) & "square" & Chr(34))
+        ucrInputLineEndTickMarksYAxis.bUpdateRCodeFromControl = False
 
         bControlsInitialised = True
     End Sub
@@ -280,33 +524,77 @@ Public Class sdgThemes
 
         'X axis Label
         ucrNudAngle.SetRCode(clsElementText, bReset)
+        ucrChkSize.SetRCode(clsElementText, bReset)
+
         ucrNudHjust.SetRCode(clsElementText, bReset)
+        ucrChkHjust.SetRCode(clsElementText, bReset)
+
         ucrNudLineHeight.SetRCode(clsElementText, bReset)
+        ucrChkLineHeight.SetRCode(clsElementText, bReset)
+
         ucrNudsize.SetRCode(clsElementText, bReset)
+        ucrChkSize.SetRCode(clsElementText, bReset)
+
         ucrNudVjust.SetRCode(clsElementText, bReset)
+        ucrChkVjust.SetRCode(clsElementText, bReset)
+
         ucrInputColour.SetRCode(clsElementText, bReset)
+        ucrChkColour.SetRCode(clsElementText, bReset)
+
         ucrInputFace.SetRCode(clsElementText, bReset)
+        ucrChkFace.SetRCode(clsElementText, bReset)
+
         ucrInputFamily.SetRCode(clsElementText, bReset)
+        ucrChkFamily.SetRCode(clsElementText, bReset)
 
         'X axis Label Top Axis
         ucrNudSizeTickMarks.SetRCode(clsElementLine, bReset)
+        ucrChkSizeTickMarksXAxis.SetRCode(clsElementLine, bReset)
+
         ucrInputColourTickMarks.SetRCode(clsElementLine, bReset)
+        ucrChkColourTickMarksXAxis.SetRCode(clsElementLine, bReset)
+
         ucrInputLineTypeTickMarks.SetRCode(clsElementLine, bReset)
+        ucrChkLineTypeTickMarksXAxis.SetRCode(clsElementLine, bReset)
+
         ucrInputLineEndTickMarks.SetRCode(clsElementLine, bReset)
+        ucrChkLineEndTickMarksXAxis.SetRCode(clsElementLine, bReset)
 
         ucrNudAngleTopAxis.SetRCode(clsElementTextTop, bReset)
+        ucrChkAngleTopXAxis.SetRCode(clsElementTextTop, bReset)
+
         ucrNudHjustTopAxis.SetRCode(clsElementTextTop, bReset)
+        ucrChkHjustTopXAxis.SetRCode(clsElementTextTop, bReset)
+
         ucrNudLineHeightTopAxis.SetRCode(clsElementTextTop, bReset)
+        ucrChkLineHeightTopXAxis.SetRCode(clsElementTextTop, bReset)
+
         ucrNudSizeTopaxis.SetRCode(clsElementTextTop, bReset)
+        ucrChkSizeTopXAxis.SetRCode(clsElementTextTop, bReset)
+
         ucrNudVjustTopAxis.SetRCode(clsElementTextTop, bReset)
+        ucrChkVjustTopXAxis.SetRCode(clsElementTextTop, bReset)
+
         ucrInputColourTopAxis.SetRCode(clsElementTextTop, bReset)
+        ucrChkColourTopXAxis.SetRCode(clsElementTextTop, bReset)
+
         ucrInputFaceTopAxis.SetRCode(clsElementTextTop, bReset)
+        ucrChkFaceTopXAxis.SetRCode(clsElementTextTop, bReset)
+
         ucrInputFamilyTopAxis.SetRCode(clsElementTextTop, bReset)
+        ucrChkFamilyTopXAxis.SetRCode(clsElementTextTop, bReset)
 
         ucrNudSizeXTickLabels.SetRCode(clsElementLine, bReset)
+        ucrChkSizeTickLabelsXAxis.SetRCode(clsElementLine, bReset)
+
         ucrInputColourXTickMarks.SetRCode(clsElementLine, bReset)
+        ucrChkColourTickMarksXAxis.SetRCode(clsElementLine, bReset)
+
         ucrInputLineTypeXTickMarks.SetRCode(clsElementLine, bReset)
+        ucrChkLineTypeTickMarksXAxis.SetRCode(clsElementLine, bReset)
+
         ucrInputLineEndXTickMarks.SetRCode(clsElementLine, bReset)
+        ucrChkLineEndTickMarksXAxis.SetRCode(clsElementLine, bReset)
     End Sub
 
 End Class
