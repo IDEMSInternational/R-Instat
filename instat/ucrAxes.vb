@@ -47,6 +47,7 @@ Public Class ucrAxes
         ucrPnlTickmarkers.AddParameterPresentCondition(rdoTickMarkersAuto, "breaks", False)
         ucrPnlTickmarkers.AddParameterPresentCondition(rdoTickMarkersCustom, "breaks", True)
         ucrPnlTickmarkers.AddToLinkedControls(ucrTickMarkers, {rdoTickMarkersCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlTickmarkers.AddToLinkedControls(ucrTickMarkers, {rdoTickMarkersCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrPnlTickmarkers.AddToLinkedControls(ucrNudFrom, {rdoTickMarkersCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudFrom.SetLinkedDisplayControl(lblFrom)
@@ -59,12 +60,14 @@ Public Class ucrAxes
 
         ucrPnlTickmarkers.AddToLinkedControls(ucrNudTickMarkersNoOfDecimalPlaces, {rdoTickMarkersCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudTickMarkersNoOfDecimalPlaces.SetLinkedDisplayControl(lblTickMarkersNoOfDecimalPlaces)
+        ucrTickMarkers.SetName("Interval")
         ucrTickMarkers.SetItems({"Interval", "Specific Values"})
 
         ucrPnlTickmarkers.AddParameterPresentCondition(rdoTickMarkersAuto, "breaks", False)
         ucrPnlTickmarkers.AddParameterPresentCondition(rdoTickMarkersCustom, "breaks", True)
         ucrSpecificValues.SetParameter(New RParameter("breaks"))
-        'ucrSpecificValues.SetValidationTypeAsNumericList()
+        ucrSpecificValues.AddQuotesIfUnrecognised = False
+        ucrSpecificValues.SetValidationTypeAsNumericList()
 
 
         'these add parameters to clsSeqFunction
@@ -134,7 +137,6 @@ Public Class ucrAxes
         clsSeqFunction.AddParameter("to", 0)
         ucrNudFrom.SetRCode(clsSeqFunction, bReset)
         clsSeqFunction.AddParameter("from", 0)
-        ucrTickMarkers.SetName("Interval")
 
         AddRemoveLabs()
         AddRemoveXScales()
@@ -199,7 +201,7 @@ Public Class ucrAxes
     End Sub
 
     Private Sub tickMarkersDisplay()
-        If ucrTickMarkers.GetText = "Specific Values" Then
+        If rdoTickMarkersCustom.Checked AndAlso ucrTickMarkers.GetText = "Specific Values" Then
             ucrSpecificValues.Visible = True
             ucrNudFrom.Visible = False
             lblFrom.Visible = False
