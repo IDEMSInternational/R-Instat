@@ -18,6 +18,7 @@ Imports instat.Translations
 Public Class dlgSaveAs
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private clsSaveFunction As New RFunction
 
     Private Sub dlgSaveAs_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -34,18 +35,23 @@ Public Class dlgSaveAs
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 332
-        ucrInputFilePath.IsReadOnly = True
-        lblConfirm.Text = "Click Ok to confirm the save"
+
         ucrInputFilePath.SetParameter(New RParameter("file", 0))
+        ucrInputFilePath.IsReadOnly = True
+
+        lblConfirm.Text = "Click Ok to confirm the save"
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
+        clsSaveFunction = New RFunction
+
         ucrInputFilePath.Reset()
         ucrInputFilePath.SetName("")
-        clsDefaultFunction.SetRCommand("saveRDS")
-        clsDefaultFunction.AddParameter("object", frmMain.clsRLink.strInstatDataObject)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+
+        clsSaveFunction.SetRCommand("saveRDS")
+        clsSaveFunction.AddParameter("object", frmMain.clsRLink.strInstatDataObject)
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsSaveFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -58,13 +64,9 @@ Public Class dlgSaveAs
             lblConfirm.Show()
             ucrBase.OKEnabled(True)
         Else
-            ucrBase.OKEnabled(False)
             lblConfirm.Hide()
+            ucrBase.OKEnabled(False)
         End If
-    End Sub
-
-    Private Sub cmdEditorSave_Click(sender As Object, e As EventArgs) Handles cmdChooseFile.Click
-        SelectFileToSave()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -72,14 +74,19 @@ Public Class dlgSaveAs
         SetRCodeForControls(True)
     End Sub
 
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        frmMain.strSaveFilePath = ucrInputFilePath.GetText()
+        frmMain.clsRecentItems.addToMenu(Replace(ucrInputFilePath.GetText(), "/", "\"))
+    End Sub
+
+    Private Sub cmdEditorSave_Click(sender As Object, e As EventArgs) Handles cmdChooseFile.Click
+        SelectFileToSave()
+    End Sub
+
     Private Sub ucrInputFilePath_Click(sender As Object, e As EventArgs) Handles ucrInputFilePath.Click
         If ucrInputFilePath.IsEmpty() Then
             SelectFileToSave()
         End If
-    End Sub
-
-    Private Sub ucrInputFilePath_ControContenetsChanged(ucrchangedControl As ucrCore) Handles ucrInputFilePath.ControlContentsChanged
-        TestOKEnabled()
     End Sub
 
     Private Sub SelectFileToSave()
@@ -98,8 +105,7 @@ Public Class dlgSaveAs
         End Using
     End Sub
 
-    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        frmMain.strSaveFilePath = ucrInputFilePath.GetText()
-        frmMain.clsRecentItems.addToMenu(Replace(ucrInputFilePath.GetText(), "/", "\"))
+    Private Sub ucrInputFilePath_ControContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFilePath.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class
