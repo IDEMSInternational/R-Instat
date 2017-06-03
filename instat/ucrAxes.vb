@@ -14,11 +14,12 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
+
 Public Class ucrAxes
     Public bIsX As Boolean
     '  Public clsRsyntax As New RSyntax
-    Public clsXlabTitleFunction As New RFunction
-    Public clsYlabTitleFunction As New RFunction
+    Public clsXYlabTitleFunction As RFunction
 
     Public clsBaseOperator As New ROperator
 
@@ -48,7 +49,7 @@ Public Class ucrAxes
         SetDefaults()
     End Sub
 
-    Private Sub InitialiseControl()
+    Public Sub InitialiseControl()
         Dim dctTickMarkers As New Dictionary(Of String, String)
 
         'Axis Section
@@ -56,10 +57,9 @@ Public Class ucrAxes
         ucrPnlAxisTitle.AddRadioButton(rdoNoTitle)
         ucrPnlAxisTitle.AddRadioButton(rdoSpecifyTitle)
         ucrPnlAxisTitle.AddParameterPresentCondition(rdoTitleAuto, "label", False)
-
-        ucrPnlAxisTitle.AddParameterValuesCondition(rdoNoTitle, "label", "", True)
-        ucrPnlAxisTitle.AddParameterValuesCondition(rdoSpecifyTitle, "label", ucrInputTitle.GetText <> "", True)
-        ucrPnlAxisTitle.AddToLinkedControls(ucrInputTitle, {rdoSpecifyTitle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlAxisTitle.AddParameterValuesCondition(rdoNoTitle, "label", Chr(34) & Chr(34), True)
+        ucrPnlAxisTitle.AddParameterValuesCondition(rdoSpecifyTitle, "label", Chr(34) & Chr(34), False)
+        ucrPnlAxisTitle.AddToLinkedControls(ucrInputTitle, {rdoSpecifyTitle}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputTitle.SetLinkedDisplayControl(lblTitle)
 
         ucrInputTitle.SetParameter(New RParameter("label"))
@@ -104,16 +104,6 @@ Public Class ucrAxes
         ucrTickMarkers.SetItems(dctTickMarkers)
 
         bInitialiseControls = True
-
-        'TitleDefaults()
-    End Sub
-
-    Private Sub SetRCodeForControls(bReset As Boolean)
-        'ucrNudInStepsOf.SetRCode(clsSeqFunction, bReset)
-        'ucrNudTo.SetRCode(clsSeqFunction, bReset)
-        'ucrNudFrom.SetRCode(clsSeqFunction, bReset)
-        'ucrTitle.SetRCode(clsTitleFunction, bReset)
-        'ucrPnlAxisTitle.SetRCode(clsTitleFunction, bReset)
     End Sub
 
     Private Sub TitleDefaults()
@@ -131,41 +121,38 @@ Public Class ucrAxes
 
     ' i think this sub can be used to set the functions to link with the subdialog
 
-    Public Sub SetRCodeForXorY(bIsXAxis As Boolean, Optional clsNewXlabTitleFunction As RFunction = Nothing, Optional clsNewBaseOperator As ROperator = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCodeForControl(bIsXAxis As Boolean, Optional clsNewXYlabTitleFunction As RFunction = Nothing, Optional clsNewBaseOperator As ROperator = Nothing, Optional bReset As Boolean = False)
 
         If Not bInitialiseControls Then
             InitialiseControl()
         End If
         clsBaseOperator = clsNewBaseOperator
-        clsXlabTitleFunction = clsNewXlabTitleFunction
 
         If bIsXAxis Then
             bIsX = True
             strAxis = "x"
-            clsXlabTitleFunction.SetRCommand("xlab")
-            clsScalecontinuousFunction.SetRCommand("scale_" & strAxis & "_continuous")
+        Else
+            '    bIsX = False
+            '    strAxis = "y"
+            '    clsYlabTitleFunction.SetRCommand("ylab")
+            '    clsScalecontinuousFunction.SetRCommand("scale_" & strAxis & "_continuous")
+            '    ' put scale_y_continuous function here
         End If
 
-        If clsNewXlabTitleFunction IsNot Nothing Then
-            clsXlabTitleFunction = clsNewXlabTitleFunction
+        If clsNewXYlabTitleFunction IsNot Nothing Then
+            clsXYlabTitleFunction = clsNewXYlabTitleFunction
         Else
-            clsXlabTitleFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
+            clsXYlabTitleFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         End If
-        ' put scale_x_continuous function here
-        'Else
-        '    bIsX = False
-        '    strAxis = "y"
-        '    clsYlabTitleFunction.SetRCommand("ylab")
-        '    clsScalecontinuousFunction.SetRCommand("scale_" & strAxis & "_continuous")
-        '    ' put scale_y_continuous function here
-        'End If
-        ucrPnlAxisTitle.SetRCode(clsXlabTitleFunction, bReset)
-        ucrInputTitle.SetRCode(clsXlabTitleFunction, bReset)
+
+        ucrPnlAxisTitle.SetRCode(clsXYlabTitleFunction, bReset)
+        ucrInputTitle.SetRCode(clsXYlabTitleFunction, bReset)
 
         ucrNudInStepsOf.SetRCode(clsSeqFunction, bReset)
         ucrNudTo.SetRCode(clsSeqFunction, bReset)
         ucrNudFrom.SetRCode(clsSeqFunction, bReset)
 
+        AddRemoveLabs()
     End Sub
 
     Public Sub SetRsyntaxAxis(clsRsyntaxAxis As RSyntax)
@@ -251,6 +238,27 @@ Public Class ucrAxes
                 clsScalecontinuousFunction.RemoveParameterByName("breaks")
             End If
         End If
+    End Sub
+
+    Private Sub AddRemoveLabs()
+        If rdoNoTitle.Checked OrElse (rdoSpecifyTitle.Checked AndAlso Not ucrInputTitle.IsEmpty) Then
+            clsBaseOperator.AddParameter("xlab", clsRFunctionParameter:=clsXYlabTitleFunction)
+        Else
+            clsBaseOperator.RemoveParameterByName("xlab")
+        End If
+    End Sub
+
+    Private Sub ucrPnlAxisTitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlAxisTitle.ControlValueChanged, ucrInputTitle.ControlValueChanged
+        If ucrChangedControl.Equals(ucrPnlAxisTitle) Then
+            If rdoTitleAuto.Checked Then
+                clsXlabTitleFunction.RemoveParameterByName("label")
+            ElseIf rdoNoTitle.Checked Then
+                clsXlabTitleFunction.AddParameter("label", Chr(34) & Chr(34))
+            Else
+                clsXlabTitleFunction.AddParameter(ucrInputTitle.GetParameter())
+            End If
+        End If
+        AddRemoveLabs()
     End Sub
 End Class
 

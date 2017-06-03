@@ -483,4 +483,8 @@ Public Class ucrInput
         Next
         Return False
     End Function
+
+    Protected Overrides Sub ResetControlValue()
+        SetName("")
+    End Sub
 End Class
