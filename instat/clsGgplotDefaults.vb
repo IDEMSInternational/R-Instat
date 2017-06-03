@@ -37,11 +37,12 @@
 
     Public Shared ReadOnly Property clsXScalecontinuousFunction As RFunction
         Get
-            Dim clsXlabTempFunc As New RFunction
+            Dim clsXlabScalesTempFunc As New RFunction
 
-            clsXlabTempFunc.SetPackageName("ggplot2")
-            clsXlabTempFunc.SetRCommand("scale_x_continuous")
-            Return clsXlabTempFunc
+            clsXlabScalesTempFunc.SetPackageName("ggplot2")
+            clsXlabScalesTempFunc.SetRCommand("scale_x_continuous")
+
+            Return clsXlabScalesTempFunc
         End Get
     End Property
 End Class

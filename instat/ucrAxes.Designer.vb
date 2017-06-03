@@ -44,10 +44,8 @@ Partial Class ucrAxes
         Me.lblTo = New System.Windows.Forms.Label()
         Me.ucrPnlTickmarkers = New instat.UcrPanel()
         Me.grpScales = New System.Windows.Forms.GroupBox()
-        Me.ucrInputNoofDecimalsLimit = New instat.ucrInputTextBox()
         Me.ucrInputUpperLimit = New instat.ucrInputTextBox()
         Me.ucrInputLowerLimit = New instat.ucrInputTextBox()
-        Me.lblScalesNoDecimalPlaces = New System.Windows.Forms.Label()
         Me.lblUpperLimit = New System.Windows.Forms.Label()
         Me.lblLowerLimit = New System.Windows.Forms.Label()
         Me.rdoScalesCustom = New System.Windows.Forms.RadioButton()
@@ -117,6 +115,7 @@ Partial Class ucrAxes
         '
         'ucrInputTitle
         '
+        Me.ucrInputTitle.AddQuotesIfUnrecognised = True
         Me.ucrInputTitle.IsMultiline = False
         Me.ucrInputTitle.IsReadOnly = False
         Me.ucrInputTitle.Location = New System.Drawing.Point(62, 62)
@@ -203,6 +202,7 @@ Partial Class ucrAxes
         '
         'ucrTickMarkers
         '
+        Me.ucrTickMarkers.AddQuotesIfUnrecognised = True
         Me.ucrTickMarkers.IsReadOnly = False
         Me.ucrTickMarkers.Location = New System.Drawing.Point(6, 47)
         Me.ucrTickMarkers.Name = "ucrTickMarkers"
@@ -231,6 +231,7 @@ Partial Class ucrAxes
         '
         'ucrSpecificValues
         '
+        Me.ucrSpecificValues.AddQuotesIfUnrecognised = True
         Me.ucrSpecificValues.IsMultiline = False
         Me.ucrSpecificValues.IsReadOnly = False
         Me.ucrSpecificValues.Location = New System.Drawing.Point(6, 73)
@@ -285,10 +286,8 @@ Partial Class ucrAxes
         '
         'grpScales
         '
-        Me.grpScales.Controls.Add(Me.ucrInputNoofDecimalsLimit)
         Me.grpScales.Controls.Add(Me.ucrInputUpperLimit)
         Me.grpScales.Controls.Add(Me.ucrInputLowerLimit)
-        Me.grpScales.Controls.Add(Me.lblScalesNoDecimalPlaces)
         Me.grpScales.Controls.Add(Me.lblUpperLimit)
         Me.grpScales.Controls.Add(Me.lblLowerLimit)
         Me.grpScales.Controls.Add(Me.rdoScalesCustom)
@@ -301,17 +300,9 @@ Partial Class ucrAxes
         Me.grpScales.TabStop = False
         Me.grpScales.Text = "Scales"
         '
-        'ucrInputNoofDecimalsLimit
-        '
-        Me.ucrInputNoofDecimalsLimit.IsMultiline = False
-        Me.ucrInputNoofDecimalsLimit.IsReadOnly = False
-        Me.ucrInputNoofDecimalsLimit.Location = New System.Drawing.Point(144, 102)
-        Me.ucrInputNoofDecimalsLimit.Name = "ucrInputNoofDecimalsLimit"
-        Me.ucrInputNoofDecimalsLimit.Size = New System.Drawing.Size(50, 21)
-        Me.ucrInputNoofDecimalsLimit.TabIndex = 22
-        '
         'ucrInputUpperLimit
         '
+        Me.ucrInputUpperLimit.AddQuotesIfUnrecognised = True
         Me.ucrInputUpperLimit.IsMultiline = False
         Me.ucrInputUpperLimit.IsReadOnly = False
         Me.ucrInputUpperLimit.Location = New System.Drawing.Point(75, 76)
@@ -321,21 +312,13 @@ Partial Class ucrAxes
         '
         'ucrInputLowerLimit
         '
+        Me.ucrInputLowerLimit.AddQuotesIfUnrecognised = True
         Me.ucrInputLowerLimit.IsMultiline = False
         Me.ucrInputLowerLimit.IsReadOnly = False
         Me.ucrInputLowerLimit.Location = New System.Drawing.Point(75, 46)
         Me.ucrInputLowerLimit.Name = "ucrInputLowerLimit"
         Me.ucrInputLowerLimit.Size = New System.Drawing.Size(50, 21)
         Me.ucrInputLowerLimit.TabIndex = 22
-        '
-        'lblScalesNoDecimalPlaces
-        '
-        Me.lblScalesNoDecimalPlaces.AutoSize = True
-        Me.lblScalesNoDecimalPlaces.Location = New System.Drawing.Point(3, 102)
-        Me.lblScalesNoDecimalPlaces.Name = "lblScalesNoDecimalPlaces"
-        Me.lblScalesNoDecimalPlaces.Size = New System.Drawing.Size(135, 13)
-        Me.lblScalesNoDecimalPlaces.TabIndex = 6
-        Me.lblScalesNoDecimalPlaces.Text = "Number of Decimal Places:"
         '
         'lblUpperLimit
         '
@@ -416,7 +399,6 @@ Partial Class ucrAxes
     Friend WithEvents grpScales As GroupBox
     Friend WithEvents rdoScalesCustom As RadioButton
     Friend WithEvents rdoScalesAuto As RadioButton
-    Friend WithEvents lblScalesNoDecimalPlaces As Label
     Friend WithEvents lblUpperLimit As Label
     Friend WithEvents lblLowerLimit As Label
     Friend WithEvents rdoNoTitle As RadioButton
@@ -429,7 +411,6 @@ Partial Class ucrAxes
     Friend WithEvents ucrPnlAxisTitle As UcrPanel
     Friend WithEvents ucrPnlTickmarkers As UcrPanel
     Friend WithEvents ucrPnlScales As UcrPanel
-    Friend WithEvents ucrInputNoofDecimalsLimit As ucrInputTextBox
     Friend WithEvents ucrInputUpperLimit As ucrInputTextBox
     Friend WithEvents ucrInputLowerLimit As ucrInputTextBox
     Friend WithEvents rdoSpecifyTitle As RadioButton
