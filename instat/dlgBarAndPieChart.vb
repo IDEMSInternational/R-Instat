@@ -170,10 +170,10 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged
-        SetDailogOptions()
+        SetDialogOptions()
     End Sub
 
-    Private Sub SetDailogOptions()
+    Private Sub SetDialogOptions()
         If rdoBarChart.Checked Then
             clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsBarAesFunction, iPosition:=1)
             ucrSaveBar.SetPrefix("bar")
@@ -200,8 +200,8 @@ Public Class dlgBarAndPieChart
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgPlots.SetRCode(clsBaseOperator, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabTitleFunction, clsNewLabsFunction:=clsLabsFunction, clsNewRFacetFunction:=clsRFacetFunction, bReset:=bResetSubdialog)
         sdgPlots.SetDataFrame(strNewDataFrame:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-        bResetSubdialog = False
         sdgPlots.ShowDialog()
+        bResetSubdialog = False
         'Warning, when coordinate flip is added to coordinates tab on sdgPLots, then link with ucrChkFlipCoordinates...
     End Sub
 

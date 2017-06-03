@@ -117,7 +117,6 @@ Partial Class ucrAxes
         '
         'ucrInputTitle
         '
-        Me.ucrInputTitle.AddQuotesIfUnrecognised = True
         Me.ucrInputTitle.IsMultiline = False
         Me.ucrInputTitle.IsReadOnly = False
         Me.ucrInputTitle.Location = New System.Drawing.Point(62, 62)
@@ -204,7 +203,6 @@ Partial Class ucrAxes
         '
         'ucrTickMarkers
         '
-        Me.ucrTickMarkers.AddQuotesIfUnrecognised = True
         Me.ucrTickMarkers.IsReadOnly = False
         Me.ucrTickMarkers.Location = New System.Drawing.Point(6, 47)
         Me.ucrTickMarkers.Name = "ucrTickMarkers"
@@ -233,7 +231,6 @@ Partial Class ucrAxes
         '
         'ucrSpecificValues
         '
-        Me.ucrSpecificValues.AddQuotesIfUnrecognised = True
         Me.ucrSpecificValues.IsMultiline = False
         Me.ucrSpecificValues.IsReadOnly = False
         Me.ucrSpecificValues.Location = New System.Drawing.Point(6, 73)
@@ -306,7 +303,6 @@ Partial Class ucrAxes
         '
         'ucrInputNoofDecimalsLimit
         '
-        Me.ucrInputNoofDecimalsLimit.AddQuotesIfUnrecognised = True
         Me.ucrInputNoofDecimalsLimit.IsMultiline = False
         Me.ucrInputNoofDecimalsLimit.IsReadOnly = False
         Me.ucrInputNoofDecimalsLimit.Location = New System.Drawing.Point(144, 102)
@@ -316,7 +312,6 @@ Partial Class ucrAxes
         '
         'ucrInputUpperLimit
         '
-        Me.ucrInputUpperLimit.AddQuotesIfUnrecognised = True
         Me.ucrInputUpperLimit.IsMultiline = False
         Me.ucrInputUpperLimit.IsReadOnly = False
         Me.ucrInputUpperLimit.Location = New System.Drawing.Point(75, 76)
@@ -326,7 +321,6 @@ Partial Class ucrAxes
         '
         'ucrInputLowerLimit
         '
-        Me.ucrInputLowerLimit.AddQuotesIfUnrecognised = True
         Me.ucrInputLowerLimit.IsMultiline = False
         Me.ucrInputLowerLimit.IsReadOnly = False
         Me.ucrInputLowerLimit.Location = New System.Drawing.Point(75, 46)

@@ -26,7 +26,6 @@ Public Class sdgPlots
     Public clsAesFunction As New RFunction    'Warning: I m not sure this field is useful... Will all be revised when changing links though...
 
     Public clsLabsFunction As New RFunction
-    Public clsXLabTitleFunction As New RFunction
 
     Public clsRFacetFunction As New RFunction
     Public clsXLabFunction As New RFunction
@@ -147,9 +146,10 @@ Public Class sdgPlots
         'ucrInputLegend.SetParameter(New RParameter("fill"))
 
         'X Axis tab
-
+        'ucrXAxis.InitialiseControl()
 
         'Y Axis tab
+        'ucrYAxis.InitialiseControl()
 
         'themes tab
         ucrInputThemes.SetParameter(New RParameter("theme"))
@@ -174,8 +174,6 @@ Public Class sdgPlots
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
-
-        ucrXAxis.SetRCodeForXorY(True, clsNewXlabTitleFunction:=clsXLabTitleFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
         clsBaseOperator = clsNewOperator
 
         If clsNewLabsFunction IsNot Nothing Then
@@ -184,11 +182,7 @@ Public Class sdgPlots
             clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         End If
 
-        If clsNewXLabsTitleFunction IsNot Nothing Then
-            clsXLabTitleFunction = clsNewXLabsTitleFunction
-        Else
-            clsXLabTitleFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
-        End If
+        clsXLabFunction = clsNewXLabsTitleFunction
 
         If clsNewThemeParam IsNot Nothing Then
             clsBaseOperator.AddParameter(clsNewThemeParam)
@@ -214,6 +208,9 @@ Public Class sdgPlots
         ucrChkIncludeFacets.SetRCode(clsBaseOperator, bReset)
         AddRemoveLabs()
 
+        'axis controls
+        ucrXAxis.SetRCodeForControl(True, clsNewXYlabTitleFunction:=clsXLabFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        'ucrYAxis.SetRCodeForControl(True, clsNewXYlabTitleFunction:=clsNewYLabTitleFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
         ' tbpXAxis.Enabled = False
         tbpYAxis.Enabled = False
