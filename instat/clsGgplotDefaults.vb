@@ -67,4 +67,15 @@
         End Get
     End Property
 
+    Public Shared ReadOnly Property clsFacetFunction As RFunction
+        Get
+            Dim clsFacetTempFunc As New RFunction
+
+            clsFacetTempFunc.SetPackageName("ggplot2")
+            clsFacetTempFunc.SetRCommand("facet_wrap")
+
+            Return clsFacetTempFunc
+        End Get
+    End Property
+
 End Class
