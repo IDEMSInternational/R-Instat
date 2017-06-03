@@ -39,11 +39,6 @@ Public Class dlgSaveAs
         ucrInputFilePath.SetParameter(New RParameter("file", 0))
     End Sub
 
-    Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        TestOKEnabled()
-    End Sub
-
     Private Sub SetDefaults()
         Dim clsDefaultFunction As New RFunction
         ucrInputFilePath.Reset()
@@ -51,6 +46,11 @@ Public Class dlgSaveAs
         clsDefaultFunction.SetRCommand("saveRDS")
         clsDefaultFunction.AddParameter("object", frmMain.clsRLink.strInstatDataObject)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        TestOKEnabled()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -67,6 +67,21 @@ Public Class dlgSaveAs
         SelectFileToSave()
     End Sub
 
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+    End Sub
+
+    Private Sub ucrInputFilePath_Click(sender As Object, e As EventArgs) Handles ucrInputFilePath.Click
+        If ucrInputFilePath.IsEmpty() Then
+            SelectFileToSave()
+        End If
+    End Sub
+
+    Private Sub ucrInputFilePath_ControContenetsChanged(ucrchangedControl As ucrCore) Handles ucrInputFilePath.ControlContentsChanged
+        TestOKEnabled()
+    End Sub
+
     Private Sub SelectFileToSave()
         Using dlgSave As New SaveFileDialog
             dlgSave.Title = "Save Data File"
@@ -81,21 +96,6 @@ Public Class dlgSaveAs
             End If
             TestOKEnabled()
         End Using
-    End Sub
-
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
-        SetRCodeForControls(True)
-    End Sub
-
-    Private Sub ucrInputFilePath_Click(sender As Object, e As EventArgs) Handles ucrInputFilePath.Click
-        If ucrInputFilePath.IsEmpty() Then
-            SelectFileToSave()
-        End If
-    End Sub
-
-    Private Sub ucrInputFilePath_ControContenetsChanged(ucrchangedControl As ucrCore) Handles ucrInputFilePath.ControlContentsChanged
-        TestOKEnabled()
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
