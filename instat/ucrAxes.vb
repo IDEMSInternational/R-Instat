@@ -20,6 +20,7 @@ Public Class ucrAxes
     Public bIsX As Boolean
     '  Public clsRsyntax As New RSyntax
     Public clsXYlabTitleFunction As RFunction
+    Public clsXlabTitleFunction As New RFunction
 
     Public clsBaseOperator As New ROperator
 

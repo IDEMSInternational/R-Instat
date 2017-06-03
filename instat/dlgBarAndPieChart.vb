@@ -24,7 +24,7 @@ Public Class dlgBarAndPieChart
     Private clsRCoordPolarParam As New RParameter
 
     Private clsLabsFunction As New RFunction
-    Private clsXlabTitleFunction As New RFunction
+    Private clsXlabsFunction As New RFunction
     Private clsXScalecontinuousFunction As New RFunction
 
     Private clsRFacetFunction As New RFunction
@@ -157,7 +157,8 @@ Public Class dlgBarAndPieChart
         clsRgeomBarFunction.SetRCommand("geom_bar")
 
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
-        clsXlabTitleFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
+
+        clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
 
         clsRFacetFunction.SetPackageName("ggplot2")
@@ -198,7 +199,7 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetRCode(clsBaseOperator, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabTitleFunction, clsNewLabsFunction:=clsLabsFunction, clsNewRFacetFunction:=clsRFacetFunction, bReset:=bResetSubdialog)
+        sdgPlots.SetRCode(clsBaseOperator, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewLabsFunction:=clsLabsFunction, clsNewRFacetFunction:=clsRFacetFunction, bReset:=bResetSubdialog)
         sdgPlots.SetDataFrame(strNewDataFrame:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         sdgPlots.ShowDialog()
         bResetSubdialog = False

@@ -24,7 +24,7 @@ Public Class dlgScatterPlot
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = True
     Private clsLabsFunction As New RFunction
-    Private clsXlabsFunction As RFunction
+    Private clsXlabsFunction As New RFunction
     Private clsYlabsFunction As New RFunction
 
     Private Sub dlgScatterPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -111,8 +111,8 @@ Public Class dlgScatterPlot
         clsRScatterGeomFunction.SetRCommand("geom_point")
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultTheme.Clone())
-
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
+        clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
 
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
