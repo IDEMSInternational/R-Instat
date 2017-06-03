@@ -39,8 +39,9 @@ Public Class dlgNewSummaryTables
 
     Private Sub InitialiseDialog()
         Dim dctPageBy As New Dictionary(Of String, String)
-        ucrBase.clsRsyntax.iCallType = 1
-        ucrBase.clsRsyntax.bHTMLOutput = True
+        ucrBase.clsRsyntax.iCallType = 4
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+
         ucrInputPageBy.Enabled = False ' temporarily disabled
 
         'summary_name = NA - 8
@@ -115,9 +116,12 @@ Public Class dlgNewSummaryTables
         ucrChkRowNumbers.SetText("Show Row Names")
         ucrChkRowNumbers.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
-        'ucrSaveTable.SetSaveTypeAsTable() ' TODO: add save type
-        'ucrSaveTable.SetDataFrameSelector(ucrSelectorSummaryTables.ucrAvailableDataFrames)
-        ucrSaveTable.SetLabelText("Save Table:")
+        ucrSaveTable.SetPrefix("table")
+        ucrSaveTable.SetSaveTypeAsTable()
+        ucrSaveTable.SetDataFrameSelector(ucrSelectorSummaryTables.ucrAvailableDataFrames)
+        ucrSaveTable.SetIsComboBox()
+        ucrSaveTable.SetCheckBoxText("Save Table")
+        ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
     End Sub
 
     Private Sub SetDefaults()
@@ -136,7 +140,7 @@ Public Class dlgNewSummaryTables
         clsDefaultFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList, iPosition:=2)
         clsDefaultFunction.AddParameter("store_results", "FALSE", iPosition:=5)
         clsDefaultFunction.AddParameter("rnames", "FALSE", iPosition:=18)
-        clsDefaultFunction.SetAssignTo(ucrSaveTable.GetText)
+        clsDefaultFunction.SetAssignTo("last_table", strTempDataframe:=ucrSelectorSummaryTables.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_table")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
         bResetSubdialog = True
@@ -212,9 +216,9 @@ Public Class dlgNewSummaryTables
 
     Private Sub ucrChkHTMLTable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkHTMLTable.ControlValueChanged
         If ucrChkHTMLTable.Checked Then
-            ucrBase.clsRsyntax.bHTMLOutput = True
+            ucrBase.clsRsyntax.iCallType = 4
         Else
-            ucrBase.clsRsyntax.bHTMLOutput = False
+            ucrBase.clsRsyntax.iCallType = 1
         End If
     End Sub
 
