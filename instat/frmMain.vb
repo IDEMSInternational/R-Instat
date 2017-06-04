@@ -56,7 +56,7 @@ Public Class frmMain
         strStaticPath = Path.GetFullPath("static")
         strHelpFilePath = "Help\R-Instat.chm"
         strAppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "RInstat\")
-        strInstatOptionsFile = "RInstatOptions.bin"
+        strInstatOptionsFile = "Options.bin"
         strSaveFilePath = ""
 
         clsRLink.SetEngine()
