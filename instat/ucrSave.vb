@@ -148,6 +148,10 @@ Public Class ucrSave
                 ucrInputComboSave.SetDefaultTypeAsModel()
                 ucrInputComboSave.SetItemsTypeAsModels()
                 ucrInputTextSave.SetDefaultTypeAsModel()
+            Case "table"
+                ucrInputComboSave.SetDefaultTypeAsTable()
+                ucrInputComboSave.SetItemsTypeAsTables()
+                ucrInputTextSave.SetDefaultTypeAsTable()
             Case Else
                 MsgBox("Developer error: unrecognised save type: " & strType)
         End Select
@@ -167,6 +171,10 @@ Public Class ucrSave
 
     Public Sub SetSaveTypeAsModel()
         SetSaveType("model")
+    End Sub
+
+    Public Sub SetSaveTypeAsTable()
+        SetSaveType("table")
     End Sub
 
     Public Sub Reset()
@@ -262,6 +270,8 @@ Public Class ucrSave
                                 clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempGraph:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
                             Case "model"
                                 clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempModel:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
+                            Case "table"
+                                clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempTable:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
                         End Select
                     Else
                         clsTempCode.RemoveAssignTo()
