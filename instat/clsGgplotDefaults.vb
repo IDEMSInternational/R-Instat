@@ -12,7 +12,7 @@
         End Get
     End Property
 
-    Public Shared ReadOnly Property clsDefaultTheme As RParameter
+    Public Shared ReadOnly Property clsDefaultThemeParameter As RParameter
         Get
             Dim clsTempParam As New RParameter
 
@@ -77,6 +77,60 @@
             clsFacetTempFunc.AddParameter("dir", Chr(34) & "h" & Chr(34))
             clsFacetTempFunc.AddParameter("facets", clsROperatorParameter:=clsFacetVariablesOp)
             Return clsFacetTempFunc
+        End Get
+    End Property
+
+    Public Shared ReadOnly Property dctThemeFunctions As Dictionary(Of String, RFunction)
+        Get
+            Dim dctTemp As New Dictionary(Of String, RFunction)
+            Dim clsElementText As RFunction
+
+            clsElementText = New RFunction
+            clsElementText.SetPackageName("ggplot2")
+            clsElementText.SetRCommand("element_text")
+
+            dctTemp.Add("axis.text.x", clsElementText.Clone())
+            dctTemp.Add("axis.text.y", clsElementText.Clone())
+
+            Return dctTemp
+        End Get
+    End Property
+
+    Public Shared ReadOnly Property dctFonts As Dictionary(Of String, String)
+        Get
+            Dim dctTemp As New Dictionary(Of String, String)
+            dctTemp.Add("Times Roman", Chr(34) & "Times" & Chr(34))
+            dctTemp.Add("Courier", Chr(34) & "Courier" & Chr(34))
+            dctTemp.Add("Couriersans", Chr(34) & "Couriersans" & Chr(34))
+            dctTemp.Add("Serif", Chr(34) & "serif" & Chr(34))
+            dctTemp.Add("NimbusSanCond", Chr(34) & "NimbusSanCond" & Chr(34))
+            dctTemp.Add("CenturySch", Chr(34) & "CenturySch" & Chr(34))
+            dctTemp.Add("NewCenturySchoolbook", Chr(34) & "NewCenturySchoolbook" & Chr(34))
+            dctTemp.Add("Palatino", Chr(34) & "Palatino" & Chr(34))
+            dctTemp.Add("Bookman", Chr(34) & "Bookman" & Chr(34))
+            dctTemp.Add("URWBookman", Chr(34) & "URWBookman" & Chr(34))
+            dctTemp.Add("URWGothic", Chr(34) & "URWGothic" & Chr(34))
+            dctTemp.Add("NimbusRom", Chr(34) & "NimbusRom" & Chr(34))
+            dctTemp.Add("URWPalladioURWTimes", Chr(34) & "URWPalladioURWTimes" & Chr(34))
+            dctTemp.Add("NimbusMonURWHelvetica", Chr(34) & "NimbusMonURWHelvetica" & Chr(34))
+            dctTemp.Add("Helvetica - Narrow", Chr(34) & "Helvetica - Narrow" & Chr(34))
+            dctTemp.Add("Helveticaserif", Chr(34) & "Helveticaserif" & Chr(34))
+            dctTemp.Add("Short", Chr(34) & "Short" & Chr(34))
+            dctTemp.Add("Canonicalmono", Chr(34) & "Canonicalmono" & Chr(34))
+            dctTemp.Add("AvantGarde", Chr(34) & "AvantGarde" & Chr(34))
+
+            Return dctTemp
+        End Get
+    End Property
+
+    Public Shared ReadOnly Property clsDefaultThemeFunction As RFunction
+        Get
+            Dim clsTempFunc As New RFunction
+
+            clsTempFunc.SetPackageName("ggplot2")
+            clsTempFunc.SetRCommand("theme")
+
+            Return clsTempFunc
         End Get
     End Property
 End Class
