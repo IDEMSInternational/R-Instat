@@ -13,16 +13,18 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 
 Public Class sdgThemes
     Public bControlsInitialised As Boolean = False
-    Public clsElementXAxisText, clsElementXAxisTextTop, clsElementXAxisLine, clsElementYAxisLine, clsElementYAxisText, clsElementYAxisTextRight, clsElementXAxisLineTop, clsGgThemes As New RFunction
+    Private clsElementXAxisText, clsElementXAxisTextTop, clsElementXAxisLine, clsElementYAxisLine, clsElementYAxisText, clsElementYAxisTextRight, clsElementXAxisLineTop, clsThemeFunction As New RFunction
     Private clsBaseOperator As New ROperator
+    Private dctThemeFunctions As New Dictionary(Of String, RFunction)
+
     Private Sub sdgThemes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
-
 
     Public Sub InitialiseControls()
         'X-Axis tab
@@ -91,7 +93,6 @@ Public Class sdgThemes
         dctucrInputColour.Add("Yellow-Green", Chr(34) & "yellowgreen" & Chr(34))
         ucrInputColour.SetItems(dctucrInputColour)
         ucrInputColour.SetRDefault(Chr(34) & "black" & Chr(34))
-        ucrInputColour.bUpdateRCodeFromControl = False
 
         ucrChkFamily.SetText("Family")
         ucrInputFamily.SetParameter(New RParameter("family"))
@@ -114,9 +115,8 @@ Public Class sdgThemes
         dctucrInputFamily.Add("Short", Chr(34) & "Short" & Chr(34))
         dctucrInputFamily.Add("Canonicalmono", Chr(34) & "Canonicalmono" & Chr(34))
         dctucrInputFamily.Add("AvantGarde", Chr(34) & "AvantGarde" & Chr(34))
-        ucrInputFamily.SetItems(dctucrInputFamily)
+        ucrInputFamily.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctFonts))
         ucrInputFamily.SetRDefault(Chr(34) & "Times" & Chr(34))
-        ucrInputFamily.bUpdateRCodeFromControl = False
 
         'Tick Marks Along Axes
         ucrChkSizeTickMarksXAxis.SetText("Size")
@@ -139,7 +139,6 @@ Public Class sdgThemes
         dctucrInputLineType.Add("12345678", Chr(34) & "12345678" & Chr(34))
         ucrInputLineTypeTickMarks.SetItems(dctucrInputLineType)
         ucrInputLineTypeTickMarks.SetRDefault(Chr(34) & "blank" & Chr(34))
-        ucrInputLineTypeTickMarks.bUpdateRCodeFromControl = False
 
         ucrChkColourTickMarksXAxis.SetText("Colour")
         ucrInputColourTickMarks.SetParameter(New RParameter("colour"))
@@ -160,7 +159,6 @@ Public Class sdgThemes
         dctucrInputLineEnd.Add("square", Chr(34) & "square" & Chr(34))
         ucrInputLineEndTickMarks.SetItems(dctucrInputLineEnd)
         ucrInputLineEndTickMarks.SetRDefault(Chr(34) & "square" & Chr(34))
-        ucrInputLineEndTickMarks.bUpdateRCodeFromControl = False
 
         'X axis Label Top  Axis
         ucrChkSizeTopXAxis.SetText("Size")
@@ -199,7 +197,6 @@ Public Class sdgThemes
         dctucrInputColourTopAxis.Add("Yellow-Green", Chr(34) & "yellowgreen" & Chr(34))
         ucrInputColourTopAxis.SetItems(dctucrInputColourTopAxis)
         ucrInputColourTopAxis.SetRDefault(Chr(34) & "black" & Chr(34))
-        ucrInputColourTopAxis.bUpdateRCodeFromControl = False
 
         ucrChkFamilyTopXAxis.SetText("Family")
         ucrInputFamilyTopAxis.SetParameter(New RParameter("family"))
@@ -224,7 +221,6 @@ Public Class sdgThemes
         dctucrInputFamilyTopAxis.Add("AvantGarde", Chr(34) & "AvantGarde" & Chr(34))
         ucrInputFamilyTopAxis.SetItems(dctucrInputFamilyTopAxis)
         ucrInputFamilyTopAxis.SetRDefault(Chr(34) & "Times" & Chr(34))
-        ucrInputFamilyTopAxis.bUpdateRCodeFromControl = False
 
         'Tick Marks Along Axes
         ucrChkSizeTickLabelsXAxis.SetText("Size")
@@ -246,7 +242,6 @@ Public Class sdgThemes
         dctucrInputLineTypeXTickMarks.Add("12345678", Chr(34) & "12345678" & Chr(34))
         ucrInputLineTypeTickLabelsXAxis.SetItems(dctucrInputLineTypeXTickMarks)
         ucrInputLineTypeTickLabelsXAxis.SetRDefault(Chr(34) & "blank" & Chr(34))
-        ucrInputLineTypeTickLabelsXAxis.bUpdateRCodeFromControl = False
 
         ucrChkColourTickLabelsXAxis.SetText("Colour")
         ucrInputColourTickLabelsXAxis.SetParameter(New RParameter("colour"))
@@ -267,7 +262,6 @@ Public Class sdgThemes
         dctucrInputLineEndXTickMarks.Add("square", Chr(34) & "square" & Chr(34))
         ucrInputLineEndTickLabelsXAxis.SetItems(dctucrInputLineEndXTickMarks)
         ucrInputLineEndTickLabelsXAxis.SetRDefault(Chr(34) & "square" & Chr(34))
-        ucrInputLineEndTickLabelsXAxis.bUpdateRCodeFromControl = False
 
         'Linking
         ucrChkSize.AddToLinkedControls(ucrNudsize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -334,7 +328,6 @@ Public Class sdgThemes
         dctucrInputColourYAxis.Add("Yellow-Green", Chr(34) & "yellowgreen" & Chr(34))
         ucrInputColourYAxis.SetItems(dctucrInputColourYAxis)
         ucrInputColourYAxis.SetRDefault(Chr(34) & "black" & Chr(34))
-        ucrInputColourYAxis.bUpdateRCodeFromControl = False
 
         ucrChkFamilyYAxis.SetText("Family")
         ucrInputFamilyYAxis.SetParameter(New RParameter("family"))
@@ -359,7 +352,6 @@ Public Class sdgThemes
         dctucrInputFamilyYAxis.Add("AvantGarde", Chr(34) & "AvantGarde" & Chr(34))
         ucrInputFamilyYAxis.SetItems(dctucrInputFamilyYAxis)
         ucrInputFamilyYAxis.SetRDefault(Chr(34) & "Times" & Chr(34))
-        ucrInputFamilyYAxis.bUpdateRCodeFromControl = False
 
         'Tick Marks Along-Axes
         ucrChkSizeTickMarksYAxis.SetText("Size")
@@ -381,7 +373,6 @@ Public Class sdgThemes
         dctucrInputLineTypeTickLabelsYAxis.Add("12345678", Chr(34) & "12345678" & Chr(34))
         ucrInputLineTypeTickLabelsYAxis.SetItems(dctucrInputLineTypeTickLabelsYAxis)
         ucrInputLineTypeTickLabelsYAxis.SetRDefault(Chr(34) & "blank" & Chr(34))
-        ucrInputLineTypeTickLabelsYAxis.bUpdateRCodeFromControl = False
 
         ucrChkColourTickMarksYAxis.SetText("Colour")
         ucrInputColourTickMarksYAxis.SetParameter(New RParameter("colour"))
@@ -402,7 +393,6 @@ Public Class sdgThemes
         dctucrInputLineEndTickLabelsYAxis.Add("square", Chr(34) & "square" & Chr(34))
         ucrInputLineEndTickLabelsYAxis.SetItems(dctucrInputLineEndTickLabelsYAxis)
         ucrInputLineEndTickLabelsYAxis.SetRDefault(Chr(34) & "square" & Chr(34))
-        ucrInputLineEndTickLabelsYAxis.bUpdateRCodeFromControl = False
 
         'Y axis Label Top  Axis
         ucrChkSizeRightYAxis.SetText("Size")
@@ -430,7 +420,6 @@ Public Class sdgThemes
         dctucrInputFaceTopYAxis.Add("Bold italic", Chr(34) & "bold.italic" & Chr(34))
         ucrInputFaceRightYAxis.SetItems(dctucrInputFaceTopAxis)
         ucrInputFaceRightYAxis.SetRDefault(Chr(34) & "plain" & Chr(34))
-        ucrInputFaceRightYAxis.bUpdateRCodeFromControl = False
 
         ucrChkColourRightYAxis.SetText("Colour")
         ucrInputColourRightYAxis.SetParameter(New RParameter("colour"))
@@ -442,7 +431,6 @@ Public Class sdgThemes
         dctucrInputColourTopYAxis.Add("Yellow-Green", Chr(34) & "yellowgreen" & Chr(34))
         ucrInputColourRightYAxis.SetItems(dctucrInputColourTopYAxis)
         ucrInputColourRightYAxis.SetRDefault(Chr(34) & "black" & Chr(34))
-        ucrInputColourRightYAxis.bUpdateRCodeFromControl = False
 
         ucrChkFamilyRightYAxis.SetText("Family")
         ucrInputFamilyRightYAxis.SetParameter(New RParameter("family"))
@@ -467,7 +455,6 @@ Public Class sdgThemes
         dctucrInputFamilyTopYAxis.Add("AvantGarde", Chr(34) & "AvantGarde" & Chr(34))
         ucrInputFamilyRightYAxis.SetItems(dctucrInputFamilyTopYAxis)
         ucrInputFamilyRightYAxis.SetRDefault(Chr(34) & "Times" & Chr(34))
-        ucrInputFamilyRightYAxis.bUpdateRCodeFromControl = False
 
         'Tick Marks Along Axes
         ucrChkSizeTickMarksYAxis.SetText("Size")
@@ -493,7 +480,6 @@ Public Class sdgThemes
         dctucrInputLineTypeTickMarksYAxis.Add("12345678", Chr(34) & "12345678" & Chr(34))
         ucrInputLineTypeTickMarksYAxis.SetItems(dctucrInputLineTypeTickMarksYAxis)
         ucrInputLineTypeTickMarksYAxis.SetRDefault(Chr(34) & "blank" & Chr(34))
-        ucrInputLineTypeTickMarksYAxis.bUpdateRCodeFromControl = False
 
         ucrChkColourTickLabelsYAxis.SetText("Colour")
         ucrInputColourTickLabelsYAxis.SetParameter(New RParameter("colour"))
@@ -505,7 +491,6 @@ Public Class sdgThemes
         dctucrInputColourTickLabelsYAxis.Add("Yellow-Green", Chr(34) & "yellowgreen" & Chr(34))
         ucrInputColourTickLabelsYAxis.SetItems(dctucrInputColourTickMarksYAxis)
         ucrInputColourTickLabelsYAxis.SetRDefault(Chr(34) & "black" & Chr(34))
-        ucrInputColourTickLabelsYAxis.bUpdateRCodeFromControl = False
 
         ucrChkLineEndTickMarksYAxis.SetText("Line End")
         ucrInputLineEndTickMarksYAxis.SetParameter(New RParameter("lineend"))
@@ -515,7 +500,6 @@ Public Class sdgThemes
         dctucrInputLineEndTickMarksYAxis.Add("square", Chr(34) & "square" & Chr(34))
         ucrInputLineEndTickMarksYAxis.SetItems(dctucrInputLineEndTickMarksYAxis)
         ucrInputLineEndTickMarksYAxis.SetRDefault(Chr(34) & "square" & Chr(34))
-        ucrInputLineEndTickMarksYAxis.bUpdateRCodeFromControl = False
 
         ucrChkSizeYAxis.AddToLinkedControls(ucrNudSizeYAxis, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkHjustYAxis.AddToLinkedControls(ucrNudHjustYAxis, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -544,35 +528,37 @@ Public Class sdgThemes
         ucrChkLineTypeTickLabelsYAxis.AddToLinkedControls(ucrInputLineTypeTickLabelsYAxis, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkLineEndTickLabelsYAxis.AddToLinkedControls(ucrInputLineEndTickLabelsYAxis, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkColourTickLabelsYAxis.AddToLinkedControls(ucrInputColourTickLabelsYAxis, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
     End Sub
 
-    Public Sub SetRFunction(clsBaseOperator As ROperator, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsBaseOperator As ROperator, clsNewThemeFunction As RFunction, dctNewThemeFunctions As Dictionary(Of String, RFunction), Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
-        clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsGgThemes, iPosition:=15)
-        clsGgThemes.SetRCommand("theme")
+        clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=15)
+        clsThemeFunction = clsNewThemeFunction
 
-        clsElementXAxisText.SetRCommand("element_text")
-        clsElementXAxisTextTop.SetRCommand("element_text")
-        clsElementXAxisLine.SetRCommand("element_line")
-        ' clsElementXAxisLineTop.SetRCommand("element_line")
+        dctThemeFunctions = dctNewThemeFunctions
+        dctThemeFunctions.TryGetValue("axis.text.x", clsElementXAxisText)
 
-        clsElementYAxisText.SetRCommand("element_text")
-        clsElementYAxisTextRight.SetRCommand("element_text")
-        clsElementYAxisLine.SetRCommand("element_line")
-        ' clsElementXAxisLineTop.SetRCommand("element_line")
+        'clsElementXAxisText.SetRCommand("element_text")
+        'clsElementXAxisTextTop.SetRCommand("element_text")
+        'clsElementXAxisLine.SetRCommand("element_line")
+        '' clsElementXAxisLineTop.SetRCommand("element_line")
 
-        clsGgThemes.AddParameter("axis.ticks", clsRFunctionParameter:=clsElementXAxisLine)
-        clsGgThemes.AddParameter("axis.ticks.x", clsRFunctionParameter:=clsElementXAxisLine)
-        clsGgThemes.AddParameter("axis.text.x", clsRFunctionParameter:=clsElementXAxisText)
-        clsGgThemes.AddParameter("axis.text.x.top", clsRFunctionParameter:=clsElementXAxisTextTop)
+        'clsElementYAxisText.SetRCommand("element_text")
+        'clsElementYAxisTextRight.SetRCommand("element_text")
+        'clsElementYAxisLine.SetRCommand("element_line")
+        '' clsElementXAxisLineTop.SetRCommand("element_line")
 
-        'clsGgThemes.AddParameter("axis.ticks", clsRFunctionParameter:=clsElementYAxisLine)
-        clsGgThemes.AddParameter("axis.ticks.y", clsRFunctionParameter:=clsElementYAxisLine)
-        clsGgThemes.AddParameter("axis.text.y", clsRFunctionParameter:=clsElementYAxisText)
-        clsGgThemes.AddParameter("axis.text.y.right", clsRFunctionParameter:=clsElementYAxisTextRight)
+        'clsThemeFunction.AddParameter("axis.ticks", clsRFunctionParameter:=clsElementXAxisLine)
+        'clsThemeFunction.AddParameter("axis.ticks.x", clsRFunctionParameter:=clsElementXAxisLine)
+        'clsThemeFunction.AddParameter("axis.text.x", clsRFunctionParameter:=clsElementXAxisText)
+        'clsThemeFunction.AddParameter("axis.text.x.top", clsRFunctionParameter:=clsElementXAxisTextTop)
+
+        ''clsGgThemes.AddParameter("axis.ticks", clsRFunctionParameter:=clsElementYAxisLine)
+        'clsThemeFunction.AddParameter("axis.ticks.y", clsRFunctionParameter:=clsElementYAxisLine)
+        'clsThemeFunction.AddParameter("axis.text.y", clsRFunctionParameter:=clsElementYAxisText)
+        'clsThemeFunction.AddParameter("axis.text.y.right", clsRFunctionParameter:=clsElementYAxisTextRight)
 
         'X axis Label
         ucrNudAngle.SetRCode(clsElementXAxisText, bReset)
@@ -722,6 +708,27 @@ Public Class sdgThemes
         ucrInputLineEndTickLabelsYAxis.SetRCode(clsElementYAxisLine, bReset)
         ucrChkLineEndTickLabelsYAxis.SetRCode(clsElementYAxisLine, bReset)
 
+        AddRemoveElementXAxisText()
     End Sub
 
+    Private Sub AddRemoveElementXAxisText()
+        If ucrChkAngle.Checked OrElse ucrChkHjust.Checked OrElse ucrChkLineHeight.Checked OrElse ucrChkSize.Checked OrElse ucrChkVjust.Checked OrElse ucrChkColour.Checked OrElse ucrChkFace.Checked OrElse ucrChkFamily.Checked Then
+            clsThemeFunction.AddParameter("axis.text.x", clsRFunctionParameter:=clsElementXAxisText)
+        Else
+            clsThemeFunction.RemoveParameterByName("axis.text.x")
+        End If
+        AddRemoveTheme()
+    End Sub
+
+    Private Sub AddRemoveTheme()
+        If clsThemeFunction.iParameterCount > 0 Then
+            clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=15)
+        Else
+            clsBaseOperator.RemoveParameterByName("theme")
+        End If
+    End Sub
+
+    Private Sub ElementXAxisTextControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAngle.ControlValueChanged, ucrChkHjust.ControlValueChanged 'etc. add all controls for "axis.text.x"
+        AddRemoveElementXAxisText()
+    End Sub
 End Class

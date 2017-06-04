@@ -111,7 +111,7 @@ Public Class dlgHistogram
         clsRgeomPlotFunction.SetPackageName("ggplot2")
         clsRgeomPlotFunction.SetRCommand("geom_histogram")
 
-        clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultTheme.Clone())
+        clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()

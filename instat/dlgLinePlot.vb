@@ -120,7 +120,7 @@ Public Class dlgLinePlot
         clsRgeomlineplotFunction.SetPackageName("ggplot2")
         clsRgeomlineplotFunction.SetRCommand("geom_line")
 
-        clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultTheme.Clone())
+        clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
