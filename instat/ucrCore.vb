@@ -106,6 +106,7 @@ Public Class ucrCore
                         Else
                             'This causes an issue if this parameter is linked to another control
                             'because .Clone breaks the link
+                            'Not an issue if controls do not need to share parameters
                             SetParameter(GetParameter(i).Clone(), i)
                             'TODO if we don't reset what should happen to the parameter value
                             '     when it's not found in the function?
