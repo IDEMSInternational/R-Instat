@@ -31,12 +31,25 @@ Public Class dlgRecodeNumericIntoQuantiles
         bReset = False
     End Sub
 
-    Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrNewColumnName.SetRCode(clsBincodeFunction, bReset)
-        ucrReceiverNumeric.SetRCode(clsBincodeFunction, bReset)
-        ucrNudNumberOfQuantiles.SetRCode(clsSeqFunction, bReset)
-        ucrNudQuantileAlgorithm.SetRCode(clsQuantileFunction, bReset)
+    Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 537
+        ucrReceiverNumeric.Selector = ucrSelectorRecodeNumeric
+        ucrReceiverNumeric.SetMeAsReceiver()
+        ucrReceiverNumeric.SetDataType("numeric")
+        ucrReceiverNumeric.SetParameter(New RParameter("x", 0))
+        ucrReceiverNumeric.SetParameterIsRFunction()
 
+        ucrNudNumberOfQuantiles.SetParameter(New RParameter("length.out", 3))
+        ucrNudNumberOfQuantiles.SetMinMax(1, Integer.MaxValue)
+        ucrNudQuantileAlgorithm.SetParameter(New RParameter("type", 1))
+        ucrNudQuantileAlgorithm.SetMinMax(1, 9)
+        ilength = ucrNudNumberOfQuantiles.Value + 1
+
+        ucrNewColumnName.SetPrefix("quantiles")
+        ucrNewColumnName.SetSaveTypeAsColumn()
+        ucrNewColumnName.SetDataFrameSelector(ucrSelectorRecodeNumeric.ucrAvailableDataFrames)
+        ucrNewColumnName.SetIsComboBox()
+        ucrNewColumnName.SetLabelText("New Column Name:")
     End Sub
 
     Private Sub SetDefaults()
@@ -62,28 +75,14 @@ Public Class dlgRecodeNumericIntoQuantiles
 
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnName.GetText, strTempDataframe:=ucrSelectorRecodeNumeric.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText)
         ucrBase.clsRsyntax.SetBaseRFunction(clsBincodeFunction)
-
     End Sub
 
-    Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 537
-        ucrReceiverNumeric.Selector = ucrSelectorRecodeNumeric
-        ucrReceiverNumeric.SetMeAsReceiver()
-        ucrReceiverNumeric.SetDataType("numeric")
-        ucrReceiverNumeric.SetParameter(New RParameter("x", 0))
-        ucrReceiverNumeric.SetParameterIsRFunction()
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrNewColumnName.SetRCode(clsBincodeFunction, bReset)
+        ucrReceiverNumeric.SetRCode(clsBincodeFunction, bReset)
+        ucrNudNumberOfQuantiles.SetRCode(clsSeqFunction, bReset)
+        ucrNudQuantileAlgorithm.SetRCode(clsQuantileFunction, bReset)
 
-        ucrNudNumberOfQuantiles.SetParameter(New RParameter("length.out", 3))
-        ucrNudNumberOfQuantiles.SetMinMax(1, Integer.MaxValue)
-        ucrNudQuantileAlgorithm.SetParameter(New RParameter("type", 1))
-        ucrNudQuantileAlgorithm.SetMinMax(1, 9)
-        ilength = ucrNudNumberOfQuantiles.Value + 1
-
-        ucrNewColumnName.SetPrefix("quantiles")
-        ucrNewColumnName.SetSaveTypeAsColumn()
-        ucrNewColumnName.SetDataFrameSelector(ucrSelectorRecodeNumeric.ucrAvailableDataFrames)
-        ucrNewColumnName.SetIsComboBox()
-        ucrNewColumnName.SetLabelText("New Column Name:")
     End Sub
 
     Private Sub TestOkEnabled()
@@ -94,22 +93,22 @@ Public Class dlgRecodeNumericIntoQuantiles
         End If
     End Sub
 
-    Private Sub ucrNudNumberOfQuantiles_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudNumberOfQuantiles.ControlValueChanged
-        ilength = ucrNudNumberOfQuantiles.Value + 1
-        clsSeqFunction.AddParameter("length.out", ilength)
-    End Sub
-
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverSingle_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverNumeric.ControlContentsChanged, ucrNudQuantileAlgorithm.ControlContentsChanged, ucrNudNumberOfQuantiles.ControlContentsChanged, ucrNewColumnName.ControlContentsChanged
-        TestOkEnabled()
+    Private Sub ucrNudNumberOfQuantiles_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudNumberOfQuantiles.ControlValueChanged
+        ilength = ucrNudNumberOfQuantiles.Value + 1
+        clsSeqFunction.AddParameter("length.out", ilength)
     End Sub
 
     Private Sub ucrReceiverNumeric_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverNumeric.ControlValueChanged
         clsQuantileFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverNumeric.GetVariables)
+    End Sub
+
+    Private Sub ucrReceiverSingle_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverNumeric.ControlContentsChanged, ucrNudQuantileAlgorithm.ControlContentsChanged, ucrNudNumberOfQuantiles.ControlContentsChanged, ucrNewColumnName.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class
