@@ -94,15 +94,17 @@ Public Class sdgPlots
 
         ucrChkFreeScalesX.SetText("Free Scales X")
         ucrChkFreeScalesX.SetParameter(New RParameter("scales"))
-        ucrChkFreeScalesX.AddParameterValuesCondition(True, "scales", {"free", "free_x"})
-        ucrChkFreeScalesX.AddParameterValuesCondition(False, "scales", {"free", "free_x"}, False)
+        ucrChkFreeScalesX.AddParameterValuesCondition(True, "scales", {Chr(34) & "free" & Chr(34), Chr(34) & "free_x" & Chr(34)})
+        ucrChkFreeScalesX.AddParameterValuesCondition(False, "scales", {Chr(34) & "free" & Chr(34), Chr(34) & "free_x" & Chr(34)}, False)
         ucrChkFreeScalesX.bChangeParameterValue = False
+        ucrChkFreeScalesX.bAddRemoveParameter = False
 
         ucrChkFreeScalesY.SetText("Free Scales Y")
         ucrChkFreeScalesY.SetParameter(New RParameter("scales"))
-        ucrChkFreeScalesY.AddParameterValuesCondition(True, "scales", {"free", "free_y"})
-        ucrChkFreeScalesY.AddParameterValuesCondition(False, "scales", {"free", "free_y"}, False)
+        ucrChkFreeScalesY.AddParameterValuesCondition(True, "scales", {Chr(34) & "free" & Chr(34), Chr(34) & "free_y" & Chr(34)})
+        ucrChkFreeScalesY.AddParameterValuesCondition(False, "scales", {Chr(34) & "free" & Chr(34), Chr(34) & "free_y" & Chr(34)}, False)
         ucrChkFreeScalesY.bChangeParameterValue = False
+        ucrChkFreeScalesY.bAddRemoveParameter = False
 
         ucrNudNumberofRows.SetParameter(New RParameter("nrow"))
 
@@ -113,7 +115,7 @@ Public Class sdgPlots
         ucrChkFreeSpace.AddFunctionNamesCondition(True, "facet_grid")
         ucrChkFreeSpace.AddParameterValuesCondition(True, "space", "free")
         ucrChkFreeSpace.SetValueIfChecked(Chr(34) & "free" & Chr(34))
-        ucrChkFreeSpace.AddToLinkedControls(ucrChkNoOfRowsOrColumns, {False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=False)
+        ucrChkFreeSpace.AddToLinkedControls(ucrChkNoOfRowsOrColumns, {False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         'Not setting parameter to write because of complex conditions for adding/removing this parameter
         'Conditions in place for reading function
@@ -258,6 +260,7 @@ Public Class sdgPlots
         bRCodeSet = True
         AddRemoveLabs()
         AddRemoveFacets()
+        SetScaleParameter()
     End Sub
 
     Private Sub SetFacetParameters()
@@ -460,23 +463,25 @@ Public Class sdgPlots
         ' FacetsNumberOfRowsOrColumns()
     End Sub
 
-    Private Sub ScaleParameter()
+    Private Sub SetScaleParameter()
         'This sub is setting the right scale parameter in the clsRFacetFunctions, according to the scale chk boxes. 
         'It only needs to be called when these are modified, as this parameter is common to both facets_grid and facets_wrap. Although graphics on the same row or column in facets_grid share the y or x axis respectively. Still different rows might benefit from having different y-axis scales for instance.
         'Warning: ggplot allows the extra parameter "space" in the facet_grid case. That one takes as values "free" or "fixed" (with quotes). It determines whether the size of rows and columns should adapt to the range of the scale.
-        If ucrChkFreeScalesX.Checked AndAlso ucrChkFreeScalesY.Checked Then
-            clsFacetFunction.AddParameter("scales", Chr(34) & "free" & Chr(34))
-        ElseIf ucrChkFreeScalesX.Checked Then
-            clsFacetFunction.AddParameter("scales", Chr(34) & "free_x" & Chr(34))
-        ElseIf ucrChkFreeScalesY.Checked Then
-            clsFacetFunction.AddParameter("scales", Chr(34) & "free_y" & Chr(34))
-        Else
-            clsFacetFunction.AddParameter("scales", Chr(34) & "free_y" & Chr(34))
+        If bRCodeSet Then
+            If ucrChkFreeScalesX.Checked AndAlso ucrChkFreeScalesY.Checked Then
+                clsFacetFunction.AddParameter("scales", Chr(34) & "free" & Chr(34))
+            ElseIf ucrChkFreeScalesX.Checked Then
+                clsFacetFunction.AddParameter("scales", Chr(34) & "free_x" & Chr(34))
+            ElseIf ucrChkFreeScalesY.Checked Then
+                clsFacetFunction.AddParameter("scales", Chr(34) & "free_y" & Chr(34))
+            Else
+                clsFacetFunction.RemoveParameterByName("scales")
+            End If
         End If
     End Sub
 
     Private Sub chkScales_CheckedChanged() Handles ucrChkFreeScalesX.ControlValueChanged, ucrChkFreeScalesY.ControlValueChanged
-        ScaleParameter()
+        SetScaleParameter()
     End Sub
 
     Private Sub FacetsNumberOfRowsOrColumns()
