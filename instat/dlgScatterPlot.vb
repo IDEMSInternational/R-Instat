@@ -90,7 +90,6 @@ Public Class dlgScatterPlot
         clsRggplotFunction = New RFunction
         clsRScatterGeomFunction = New RFunction
         clsRaesFunction = New RFunction
-        clsLabsFunction = New RFunction
 
         ucrSelectorForScatter.Reset()
         ucrSaveScatterPlot.Reset()

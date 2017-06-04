@@ -119,7 +119,7 @@ Public Class dlgDotPlot
 
         ucrDotPlotSelector.Reset()
         ucrSaveDotPlot.Reset()
-        sdgPlots.Reset()
+        bResetSubdialog = True
 
         'I am not sure we need this
         bEditAesFunction = True
@@ -139,6 +139,13 @@ Public Class dlgDotPlot
         clsRDotplotGeomFunction.SetPackageName("ggplot2")
         clsRDotplotGeomFunction.SetRCommand("geom_dotplot")
         clsRDotplotGeomFunction.AddParameter("binaxis", Chr(34) & "x" & Chr(34))
+
+        clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultTheme.Clone())
+        clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
+        clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
+        clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
+        clsRFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
+
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrDotPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
 
@@ -184,11 +191,7 @@ Public Class dlgDotPlot
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        'This sub handles the call of PLot Options. It opens sdgPlots. Need to work on the link.
         sdgPlots.SetRCode(clsBaseOperator, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabsTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, strNewDataFrame:=ucrDotPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bReset:=bResetSubdialog)
-        'sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
-        'sdgPlots.SetGgplotFunction(clsRggPlotFunction)
-        'sdgPlots.SetDataFrame(strNewDataFrame:=ucrDotPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
     End Sub
