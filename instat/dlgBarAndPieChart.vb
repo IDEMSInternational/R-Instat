@@ -26,9 +26,7 @@ Public Class dlgBarAndPieChart
     Private clsLabsFunction As New RFunction
     Private clsXlabsFunction As New RFunction
     Private clsYlabFunction As New RFunction
-
     Private clsXScalecontinuousFunction As New RFunction
-
     Private clsRFacetFunction As New RFunction
 
     Private bReset As Boolean = True
