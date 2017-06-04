@@ -70,12 +70,13 @@
     Public Shared ReadOnly Property clsFacetFunction As RFunction
         Get
             Dim clsFacetTempFunc As New RFunction
+            Dim clsFacetVariablesOp As New ROperator("~")
 
             clsFacetTempFunc.SetPackageName("ggplot2")
             clsFacetTempFunc.SetRCommand("facet_wrap")
-
+            clsFacetTempFunc.AddParameter("dir", Chr(34) & "h" & Chr(34))
+            clsFacetTempFunc.AddParameter("facets", clsROperatorParameter:=clsFacetVariablesOp)
             Return clsFacetTempFunc
         End Get
     End Property
-
 End Class

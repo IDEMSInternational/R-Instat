@@ -35,17 +35,19 @@ Partial Class dlgViewObjects
         '
         'lblSelectedObject
         '
-        Me.lblSelectedObject.Location = New System.Drawing.Point(250, 43)
+        Me.lblSelectedObject.AutoSize = True
+        Me.lblSelectedObject.Location = New System.Drawing.Point(250, 45)
         Me.lblSelectedObject.Name = "lblSelectedObject"
-        Me.lblSelectedObject.Size = New System.Drawing.Size(100, 23)
+        Me.lblSelectedObject.Size = New System.Drawing.Size(79, 13)
         Me.lblSelectedObject.TabIndex = 1
         Me.lblSelectedObject.Text = "Object to View:"
         '
         'rdoStructure
         '
-        Me.rdoStructure.Location = New System.Drawing.Point(10, 206)
+        Me.rdoStructure.AutoSize = True
+        Me.rdoStructure.Location = New System.Drawing.Point(256, 93)
         Me.rdoStructure.Name = "rdoStructure"
-        Me.rdoStructure.Size = New System.Drawing.Size(88, 24)
+        Me.rdoStructure.Size = New System.Drawing.Size(68, 17)
         Me.rdoStructure.TabIndex = 4
         Me.rdoStructure.TabStop = True
         Me.rdoStructure.Tag = "Structure"
@@ -54,9 +56,10 @@ Partial Class dlgViewObjects
         '
         'rdoAllContents
         '
-        Me.rdoAllContents.Location = New System.Drawing.Point(104, 206)
+        Me.rdoAllContents.AutoSize = True
+        Me.rdoAllContents.Location = New System.Drawing.Point(256, 116)
         Me.rdoAllContents.Name = "rdoAllContents"
-        Me.rdoAllContents.Size = New System.Drawing.Size(100, 24)
+        Me.rdoAllContents.Size = New System.Drawing.Size(81, 17)
         Me.rdoAllContents.TabIndex = 5
         Me.rdoAllContents.TabStop = True
         Me.rdoAllContents.Tag = "All_Contents"
@@ -65,9 +68,10 @@ Partial Class dlgViewObjects
         '
         'rdoComponent
         '
-        Me.rdoComponent.Location = New System.Drawing.Point(198, 206)
+        Me.rdoComponent.AutoSize = True
+        Me.rdoComponent.Location = New System.Drawing.Point(256, 139)
         Me.rdoComponent.Name = "rdoComponent"
-        Me.rdoComponent.Size = New System.Drawing.Size(87, 24)
+        Me.rdoComponent.Size = New System.Drawing.Size(79, 17)
         Me.rdoComponent.TabIndex = 6
         Me.rdoComponent.TabStop = True
         Me.rdoComponent.Tag = "Component"
@@ -76,9 +80,10 @@ Partial Class dlgViewObjects
         '
         'rdoViewGraph
         '
-        Me.rdoViewGraph.Location = New System.Drawing.Point(292, 206)
+        Me.rdoViewGraph.AutoSize = True
+        Me.rdoViewGraph.Location = New System.Drawing.Point(256, 162)
         Me.rdoViewGraph.Name = "rdoViewGraph"
-        Me.rdoViewGraph.Size = New System.Drawing.Size(80, 24)
+        Me.rdoViewGraph.Size = New System.Drawing.Size(80, 17)
         Me.rdoViewGraph.TabIndex = 7
         Me.rdoViewGraph.TabStop = True
         Me.rdoViewGraph.Text = "View Graph"
@@ -92,7 +97,9 @@ Partial Class dlgViewObjects
         Me.ucrReceiverSelectedObject.Name = "ucrReceiverSelectedObject"
         Me.ucrReceiverSelectedObject.Selector = Nothing
         Me.ucrReceiverSelectedObject.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverSelectedObject.strNcFilePath = ""
         Me.ucrReceiverSelectedObject.TabIndex = 2
+        Me.ucrReceiverSelectedObject.ucrSelector = Nothing
         '
         'ucrSelectorForViewObject
         '
@@ -106,23 +113,23 @@ Partial Class dlgViewObjects
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 244)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 198)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 8
         '
         'ucrPnlContentsToView
         '
-        Me.ucrPnlContentsToView.Location = New System.Drawing.Point(4, 193)
+        Me.ucrPnlContentsToView.Location = New System.Drawing.Point(250, 90)
         Me.ucrPnlContentsToView.Name = "ucrPnlContentsToView"
-        Me.ucrPnlContentsToView.Size = New System.Drawing.Size(416, 45)
+        Me.ucrPnlContentsToView.Size = New System.Drawing.Size(109, 94)
         Me.ucrPnlContentsToView.TabIndex = 3
         '
-        'dlgViewDescriptives
+        'dlgViewObjects
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(418, 301)
+        Me.ClientSize = New System.Drawing.Size(417, 259)
         Me.Controls.Add(Me.rdoViewGraph)
         Me.Controls.Add(Me.rdoComponent)
         Me.Controls.Add(Me.rdoAllContents)
@@ -135,11 +142,12 @@ Partial Class dlgViewObjects
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgViewDescriptives"
+        Me.Name = "dlgViewObjects"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = ""
         Me.Text = "View Object"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
