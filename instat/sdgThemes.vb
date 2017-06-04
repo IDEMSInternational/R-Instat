@@ -495,16 +495,6 @@ Public Class sdgThemes
         ucrInputLineTypeTickMarksYAxis.SetRDefault(Chr(34) & "blank" & Chr(34))
         ucrInputLineTypeTickMarksYAxis.bUpdateRCodeFromControl = False
 
-        'ucrInputColourTickMarksYAxis.SetParameter(New RParameter("colour"))
-        'dctucrInputColourTickMarksYAxis.Add("Black", Chr(34) & "black" & Chr(34))
-        'dctucrInputColourTickMarksYAxis.Add("Red", Chr(34) & "red" & Chr(34))
-        'dctucrInputColourTickMarksYAxis.Add("Blue", Chr(34) & "blue" & Chr(34))
-        'dctucrInputColourTickMarksYAxis.Add("Grey", Chr(34) & "grey" & Chr(34))
-        'dctucrInputColourTickMarksYAxis.Add("Yellow", Chr(34) & "yellow" & Chr(34))
-        'dctucrInputColourTickMarksYAxis.Add("Yellow-Green", Chr(34) & "yellowgreen" & Chr(34))
-        'ucrInputColourTickMarksYAxis.SetItems(dctucrInputColourTickMarksYAxis)
-        'ucrInputColourTickMarksYAxis.SetRDefault(Chr(34) & "black" & Chr(34))
-
         ucrChkColourTickLabelsYAxis.SetText("Colour")
         ucrInputColourTickLabelsYAxis.SetParameter(New RParameter("colour"))
         dctucrInputColourTickLabelsYAxis.Add("Black", Chr(34) & "black" & Chr(34))
@@ -517,7 +507,7 @@ Public Class sdgThemes
         ucrInputColourTickLabelsYAxis.SetRDefault(Chr(34) & "black" & Chr(34))
         ucrInputColourTickLabelsYAxis.bUpdateRCodeFromControl = False
 
-        ucrChkLineTypeTickMarksYAxis.SetText("Line End")
+        ucrChkLineEndTickMarksYAxis.SetText("Line End")
         ucrInputLineEndTickMarksYAxis.SetParameter(New RParameter("lineend"))
         'dctucrInputLineEndXTickMarks.Add("None", Chr(34) & "NULL" & Chr(34))
         dctucrInputLineEndTickMarksYAxis.Add("round", Chr(34) & "round" & Chr(34))
@@ -545,15 +535,15 @@ Public Class sdgThemes
         ucrChkFamilyRightYAxis.AddToLinkedControls(ucrInputFamilyRightYAxis, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkColourRightYAxis.AddToLinkedControls(ucrInputColourRightYAxis, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        'ucrChkSizeTickMarksXAxis.AddToLinkedControls(ucrNudSizeTickMarks, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrChkLineTypeTickMarksXAxis.AddToLinkedControls(ucrInputLineTypeTickMarks, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrChkLineEndTickMarksXAxis.AddToLinkedControls(ucrInputLineEndTickMarks, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrChkColourTickMarksXAxis.AddToLinkedControls(ucrInputColourTickMarks, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkSizeTickMarksYAxis.AddToLinkedControls(ucrNudSizeTickMarksYAxis, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkLineTypeTickMarksYAxis.AddToLinkedControls(ucrInputLineTypeTickMarksYAxis, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkLineEndTickMarksYAxis.AddToLinkedControls(ucrInputLineEndTickMarksYAxis, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkColourTickMarksYAxis.AddToLinkedControls(ucrInputColourTickMarksYAxis, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        'ucrChkSizeTickLabelsXAxis.AddToLinkedControls(ucrNudSizeTickLabelsXAxis, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrChkLineTypeTickLabelsXAxis.AddToLinkedControls(ucrInputLineTypeTickLabelsXAxis, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrChkLineEndTickLabelsXAxis.AddToLinkedControls(ucrInputLineEndTickLabelsXAxis, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrChkColourTickLabelsXAxis.AddToLinkedControls(ucrInputColourTickLabelsXAxis, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkSizeTickLabelsYAxis.AddToLinkedControls(ucrNudSizeTickLabelsYAxis, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkLineTypeTickLabelsYAxis.AddToLinkedControls(ucrInputLineTypeTickLabelsYAxis, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkLineEndTickLabelsYAxis.AddToLinkedControls(ucrInputLineEndTickLabelsYAxis, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkColourTickLabelsYAxis.AddToLinkedControls(ucrInputColourTickLabelsYAxis, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
     End Sub
 
@@ -567,19 +557,19 @@ Public Class sdgThemes
         clsElementXAxisText.SetRCommand("element_text")
         clsElementXAxisTextTop.SetRCommand("element_text")
         clsElementXAxisLine.SetRCommand("element_line")
-        clsElementXAxisLineTop.SetRCommand("element_line")
+        ' clsElementXAxisLineTop.SetRCommand("element_line")
 
         clsElementYAxisText.SetRCommand("element_text")
         clsElementYAxisTextRight.SetRCommand("element_text")
         clsElementYAxisLine.SetRCommand("element_line")
-        clsElementXAxisLineTop.SetRCommand("element_line")
+        ' clsElementXAxisLineTop.SetRCommand("element_line")
 
         clsGgThemes.AddParameter("axis.ticks", clsRFunctionParameter:=clsElementXAxisLine)
         clsGgThemes.AddParameter("axis.ticks.x", clsRFunctionParameter:=clsElementXAxisLine)
         clsGgThemes.AddParameter("axis.text.x", clsRFunctionParameter:=clsElementXAxisText)
         clsGgThemes.AddParameter("axis.text.x.top", clsRFunctionParameter:=clsElementXAxisTextTop)
 
-        clsGgThemes.AddParameter("axis.ticks", clsRFunctionParameter:=clsElementYAxisLine)
+        'clsGgThemes.AddParameter("axis.ticks", clsRFunctionParameter:=clsElementYAxisLine)
         clsGgThemes.AddParameter("axis.ticks.y", clsRFunctionParameter:=clsElementYAxisLine)
         clsGgThemes.AddParameter("axis.text.y", clsRFunctionParameter:=clsElementYAxisText)
         clsGgThemes.AddParameter("axis.text.y.right", clsRFunctionParameter:=clsElementYAxisTextRight)
@@ -688,7 +678,7 @@ Public Class sdgThemes
         ucrChkSizeTickMarksYAxis.SetRCode(clsElementYAxisLine, bReset)
 
         ucrInputColourTickMarksYAxis.SetRCode(clsElementYAxisLine, bReset)
-        ucrChkColourTickLabelsYAxis.SetRCode(clsElementYAxisLine, bReset)
+        ucrChkColourTickMarksYAxis.SetRCode(clsElementYAxisLine, bReset)
 
         ucrInputLineTypeTickMarksYAxis.SetRCode(clsElementYAxisLine, bReset)
         ucrChkLineTypeTickMarksYAxis.SetRCode(clsElementYAxisLine, bReset)
