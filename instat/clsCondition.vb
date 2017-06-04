@@ -92,7 +92,7 @@
             Else
                 clsTempParam = clsRCode.GetParameter(strParameterName)
             End If
-            Return (clsTempParam IsNot Nothing AndAlso clsTempParam.bIsString AndAlso clsTempParam.strArgumentValue IsNot Nothing AndAlso (bIsPositive = lstValues.Contains(clsTempParam.strArgumentValue)))
+            Return (bIsPositive = (clsTempParam IsNot Nothing AndAlso clsTempParam.bIsString AndAlso clsTempParam.strArgumentValue IsNot Nothing AndAlso lstValues.Contains(clsTempParam.strArgumentValue)))
         ElseIf bIsParameterPresent Then
             Return (bIsPositive = clsRCode.ContainsParameter(strParameterName))
         ElseIf bIsFunctionNames Then
