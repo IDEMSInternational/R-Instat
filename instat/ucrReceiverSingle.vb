@@ -244,10 +244,6 @@ Public Class ucrReceiverSingle
         RemoveSelected()
     End Sub
 
-    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
-        MyBase.UpdateControl(bReset)
-    End Sub
-
     Private Sub Selector_DataFrameChanged() Handles ucrSelector.DataFrameChanged
         CheckAutoFill()
     End Sub
@@ -279,7 +275,9 @@ Public Class ucrReceiverSingle
 
     Private Sub ucrReceiverSingle_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
-            AddHandler ParentForm.Shown, AddressOf ParentForm_Shown
+            If ParentForm IsNot Nothing Then
+                AddHandler ParentForm.Shown, AddressOf ParentForm_Shown
+            End If
             bFirstLoad = False
         End If
     End Sub
