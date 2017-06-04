@@ -79,52 +79,52 @@ Partial Class sdgThemes
         Me.ucrInputFamily = New instat.ucrInputComboBox()
         Me.tbYaxis = New System.Windows.Forms.TabPage()
         Me.grpTickLabelYAxis = New System.Windows.Forms.GroupBox()
-        Me.UcrCheck45 = New instat.ucrCheck()
-        Me.UcrCheck46 = New instat.ucrCheck()
-        Me.UcrCheck47 = New instat.ucrCheck()
-        Me.UcrCheck48 = New instat.ucrCheck()
+        Me.ucrChkLineEndTickLabelsYAxis = New instat.ucrCheck()
+        Me.ucrChkSizeTickLabelsYAxis = New instat.ucrCheck()
+        Me.ucrChkLineTypeTickLabelsYAxis = New instat.ucrCheck()
+        Me.ucrChkColourTickLabelsYAxis = New instat.ucrCheck()
         Me.ucrInputLineEndTickLabelsYAxis = New instat.ucrInputComboBox()
         Me.ucrNudSizeTickLabelsYAxis = New instat.ucrNud()
         Me.ucrInputColourTickLabelsYAxis = New instat.ucrInputComboBox()
         Me.ucrInputLineTypeTickLabelsYAxis = New instat.ucrInputComboBox()
         Me.grpYAxisTopLabels = New System.Windows.Forms.GroupBox()
-        Me.UcrCheck9 = New instat.ucrCheck()
-        Me.UcrCheck10 = New instat.ucrCheck()
-        Me.UcrCheck11 = New instat.ucrCheck()
-        Me.UcrCheck12 = New instat.ucrCheck()
-        Me.UcrCheck13 = New instat.ucrCheck()
-        Me.UcrCheck14 = New instat.ucrCheck()
-        Me.UcrCheck15 = New instat.ucrCheck()
-        Me.UcrCheck16 = New instat.ucrCheck()
-        Me.ucrNudVjustTopYAxis = New instat.ucrNud()
-        Me.ucrNudLineHeightTopYAxis = New instat.ucrNud()
-        Me.ucrNudAngleTopYAxis = New instat.ucrNud()
-        Me.ucrNudHjustTopYAxis = New instat.ucrNud()
-        Me.ucrNudSizeTopYAxis = New instat.ucrNud()
-        Me.ucrInputColourTopYAxis = New instat.ucrInputComboBox()
-        Me.ucrInputFaceTopYAxis = New instat.ucrInputComboBox()
-        Me.ucrInputFamilyTopYAxis = New instat.ucrInputComboBox()
+        Me.ucrChkColourRightYAxis = New instat.ucrCheck()
+        Me.ucrChkFaceRightYAxis = New instat.ucrCheck()
+        Me.ucrChkFamilyRightYAxis = New instat.ucrCheck()
+        Me.ucrChkAngleRightYAxis = New instat.ucrCheck()
+        Me.ucrChkHjustRightYAxis = New instat.ucrCheck()
+        Me.ucrChkVjustRightYAxis = New instat.ucrCheck()
+        Me.ucrChkLineHeightRightYAxis = New instat.ucrCheck()
+        Me.ucrChkSizeRightYAxis = New instat.ucrCheck()
+        Me.ucrNudVjustRightYAxis = New instat.ucrNud()
+        Me.ucrNudLineHeightRightYAxis = New instat.ucrNud()
+        Me.ucrNudAngleRightYAxis = New instat.ucrNud()
+        Me.ucrNudHjustRightYAxis = New instat.ucrNud()
+        Me.ucrNudSizeRightYAxis = New instat.ucrNud()
+        Me.ucrInputColourRightYAxis = New instat.ucrInputComboBox()
+        Me.ucrInputFaceRightYAxis = New instat.ucrInputComboBox()
+        Me.ucrInputFamilyRightYAxis = New instat.ucrInputComboBox()
         Me.grpTickMarksYAxis = New System.Windows.Forms.GroupBox()
-        Me.UcrCheck41 = New instat.ucrCheck()
-        Me.UcrCheck42 = New instat.ucrCheck()
-        Me.UcrCheck43 = New instat.ucrCheck()
-        Me.UcrCheck44 = New instat.ucrCheck()
+        Me.ucrChkLineEndTickMarksYAxis = New instat.ucrCheck()
+        Me.ucrChkSizeTickMarksYAxis = New instat.ucrCheck()
+        Me.ucrChkLineTypeTickMarksYAxis = New instat.ucrCheck()
+        Me.ucrChkColourTickMarksYAxis = New instat.ucrCheck()
         Me.ucrInputLineEndTickMarksYAxis = New instat.ucrInputComboBox()
         Me.ucrNudSizeTickMarksYAxis = New instat.ucrNud()
         Me.ucrInputColourTickMarksYAxis = New instat.ucrInputComboBox()
         Me.ucrInputLineTypeTickMarksYAxis = New instat.ucrInputComboBox()
         Me.grpYAxisLabels = New System.Windows.Forms.GroupBox()
-        Me.UcrCheck8 = New instat.ucrCheck()
-        Me.UcrCheck7 = New instat.ucrCheck()
-        Me.UcrCheck6 = New instat.ucrCheck()
-        Me.UcrCheck5 = New instat.ucrCheck()
-        Me.UcrCheck4 = New instat.ucrCheck()
-        Me.UcrCheck3 = New instat.ucrCheck()
-        Me.UcrCheck2 = New instat.ucrCheck()
-        Me.UcrCheck1 = New instat.ucrCheck()
+        Me.ucrChkColourYAxis = New instat.ucrCheck()
+        Me.ucrChkFaceYAxis = New instat.ucrCheck()
+        Me.ucrChkFamilyYAxis = New instat.ucrCheck()
+        Me.ucrChkAngleYAxis = New instat.ucrCheck()
+        Me.ucrChkHjustYAxis = New instat.ucrCheck()
+        Me.ucrChkVjustYAxis = New instat.ucrCheck()
+        Me.ucrChkLineHeightYAxis = New instat.ucrCheck()
+        Me.ucrChkSizeYAxis = New instat.ucrCheck()
         Me.ucrNudVjustYAxis = New instat.ucrNud()
         Me.ucrNudLineHeightYAxis = New instat.ucrNud()
-        Me.ucrNudLAngleYAxis = New instat.ucrNud()
+        Me.ucrNudAngleYAxis = New instat.ucrNud()
         Me.ucrNudHjustYAxis = New instat.ucrNud()
         Me.ucrNudSizeYAxis = New instat.ucrNud()
         Me.ucrInputColourYAxis = New instat.ucrInputComboBox()
@@ -735,58 +735,58 @@ Partial Class sdgThemes
         '
         'grpTickLabelYAxis
         '
-        Me.grpTickLabelYAxis.Controls.Add(Me.UcrCheck45)
-        Me.grpTickLabelYAxis.Controls.Add(Me.UcrCheck46)
-        Me.grpTickLabelYAxis.Controls.Add(Me.UcrCheck47)
-        Me.grpTickLabelYAxis.Controls.Add(Me.UcrCheck48)
+        Me.grpTickLabelYAxis.Controls.Add(Me.ucrChkLineEndTickLabelsYAxis)
+        Me.grpTickLabelYAxis.Controls.Add(Me.ucrChkSizeTickLabelsYAxis)
+        Me.grpTickLabelYAxis.Controls.Add(Me.ucrChkLineTypeTickLabelsYAxis)
+        Me.grpTickLabelYAxis.Controls.Add(Me.ucrChkColourTickLabelsYAxis)
         Me.grpTickLabelYAxis.Controls.Add(Me.ucrInputLineEndTickLabelsYAxis)
         Me.grpTickLabelYAxis.Controls.Add(Me.ucrNudSizeTickLabelsYAxis)
         Me.grpTickLabelYAxis.Controls.Add(Me.ucrInputColourTickLabelsYAxis)
         Me.grpTickLabelYAxis.Controls.Add(Me.ucrInputLineTypeTickLabelsYAxis)
-        Me.grpTickLabelYAxis.Location = New System.Drawing.Point(262, 263)
+        Me.grpTickLabelYAxis.Location = New System.Drawing.Point(263, 256)
         Me.grpTickLabelYAxis.Name = "grpTickLabelYAxis"
         Me.grpTickLabelYAxis.Size = New System.Drawing.Size(264, 154)
         Me.grpTickLabelYAxis.TabIndex = 43
         Me.grpTickLabelYAxis.TabStop = False
         Me.grpTickLabelYAxis.Text = "Y axis tick labels"
         '
-        'UcrCheck45
+        'ucrChkLineEndTickLabelsYAxis
         '
-        Me.UcrCheck45.Checked = False
-        Me.UcrCheck45.Location = New System.Drawing.Point(14, 111)
-        Me.UcrCheck45.Name = "UcrCheck45"
-        Me.UcrCheck45.Size = New System.Drawing.Size(100, 20)
-        Me.UcrCheck45.TabIndex = 58
+        Me.ucrChkLineEndTickLabelsYAxis.Checked = False
+        Me.ucrChkLineEndTickLabelsYAxis.Location = New System.Drawing.Point(13, 107)
+        Me.ucrChkLineEndTickLabelsYAxis.Name = "ucrChkLineEndTickLabelsYAxis"
+        Me.ucrChkLineEndTickLabelsYAxis.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkLineEndTickLabelsYAxis.TabIndex = 58
         '
-        'UcrCheck46
+        'ucrChkSizeTickLabelsYAxis
         '
-        Me.UcrCheck46.Checked = False
-        Me.UcrCheck46.Location = New System.Drawing.Point(14, 24)
-        Me.UcrCheck46.Name = "UcrCheck46"
-        Me.UcrCheck46.Size = New System.Drawing.Size(100, 20)
-        Me.UcrCheck46.TabIndex = 57
+        Me.ucrChkSizeTickLabelsYAxis.Checked = False
+        Me.ucrChkSizeTickLabelsYAxis.Location = New System.Drawing.Point(13, 20)
+        Me.ucrChkSizeTickLabelsYAxis.Name = "ucrChkSizeTickLabelsYAxis"
+        Me.ucrChkSizeTickLabelsYAxis.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkSizeTickLabelsYAxis.TabIndex = 57
         '
-        'UcrCheck47
+        'ucrChkLineTypeTickLabelsYAxis
         '
-        Me.UcrCheck47.Checked = False
-        Me.UcrCheck47.Location = New System.Drawing.Point(14, 53)
-        Me.UcrCheck47.Name = "UcrCheck47"
-        Me.UcrCheck47.Size = New System.Drawing.Size(100, 20)
-        Me.UcrCheck47.TabIndex = 56
+        Me.ucrChkLineTypeTickLabelsYAxis.Checked = False
+        Me.ucrChkLineTypeTickLabelsYAxis.Location = New System.Drawing.Point(13, 49)
+        Me.ucrChkLineTypeTickLabelsYAxis.Name = "ucrChkLineTypeTickLabelsYAxis"
+        Me.ucrChkLineTypeTickLabelsYAxis.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkLineTypeTickLabelsYAxis.TabIndex = 56
         '
-        'UcrCheck48
+        'ucrChkColourTickLabelsYAxis
         '
-        Me.UcrCheck48.Checked = False
-        Me.UcrCheck48.Location = New System.Drawing.Point(14, 82)
-        Me.UcrCheck48.Name = "UcrCheck48"
-        Me.UcrCheck48.Size = New System.Drawing.Size(100, 20)
-        Me.UcrCheck48.TabIndex = 55
+        Me.ucrChkColourTickLabelsYAxis.Checked = False
+        Me.ucrChkColourTickLabelsYAxis.Location = New System.Drawing.Point(13, 78)
+        Me.ucrChkColourTickLabelsYAxis.Name = "ucrChkColourTickLabelsYAxis"
+        Me.ucrChkColourTickLabelsYAxis.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkColourTickLabelsYAxis.TabIndex = 55
         '
         'ucrInputLineEndTickLabelsYAxis
         '
         Me.ucrInputLineEndTickLabelsYAxis.AddQuotesIfUnrecognised = True
         Me.ucrInputLineEndTickLabelsYAxis.IsReadOnly = False
-        Me.ucrInputLineEndTickLabelsYAxis.Location = New System.Drawing.Point(115, 100)
+        Me.ucrInputLineEndTickLabelsYAxis.Location = New System.Drawing.Point(114, 106)
         Me.ucrInputLineEndTickLabelsYAxis.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputLineEndTickLabelsYAxis.Name = "ucrInputLineEndTickLabelsYAxis"
         Me.ucrInputLineEndTickLabelsYAxis.Size = New System.Drawing.Size(137, 21)
@@ -796,7 +796,7 @@ Partial Class sdgThemes
         '
         Me.ucrNudSizeTickLabelsYAxis.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudSizeTickLabelsYAxis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSizeTickLabelsYAxis.Location = New System.Drawing.Point(137, 17)
+        Me.ucrNudSizeTickLabelsYAxis.Location = New System.Drawing.Point(114, 19)
         Me.ucrNudSizeTickLabelsYAxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSizeTickLabelsYAxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSizeTickLabelsYAxis.Name = "ucrNudSizeTickLabelsYAxis"
@@ -808,7 +808,7 @@ Partial Class sdgThemes
         '
         Me.ucrInputColourTickLabelsYAxis.AddQuotesIfUnrecognised = True
         Me.ucrInputColourTickLabelsYAxis.IsReadOnly = False
-        Me.ucrInputColourTickLabelsYAxis.Location = New System.Drawing.Point(115, 68)
+        Me.ucrInputColourTickLabelsYAxis.Location = New System.Drawing.Point(114, 77)
         Me.ucrInputColourTickLabelsYAxis.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputColourTickLabelsYAxis.Name = "ucrInputColourTickLabelsYAxis"
         Me.ucrInputColourTickLabelsYAxis.Size = New System.Drawing.Size(137, 21)
@@ -818,7 +818,7 @@ Partial Class sdgThemes
         '
         Me.ucrInputLineTypeTickLabelsYAxis.AddQuotesIfUnrecognised = True
         Me.ucrInputLineTypeTickLabelsYAxis.IsReadOnly = False
-        Me.ucrInputLineTypeTickLabelsYAxis.Location = New System.Drawing.Point(115, 40)
+        Me.ucrInputLineTypeTickLabelsYAxis.Location = New System.Drawing.Point(114, 48)
         Me.ucrInputLineTypeTickLabelsYAxis.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputLineTypeTickLabelsYAxis.Name = "ucrInputLineTypeTickLabelsYAxis"
         Me.ucrInputLineTypeTickLabelsYAxis.Size = New System.Drawing.Size(137, 21)
@@ -826,22 +826,22 @@ Partial Class sdgThemes
         '
         'grpYAxisTopLabels
         '
-        Me.grpYAxisTopLabels.Controls.Add(Me.UcrCheck9)
-        Me.grpYAxisTopLabels.Controls.Add(Me.UcrCheck10)
-        Me.grpYAxisTopLabels.Controls.Add(Me.UcrCheck11)
-        Me.grpYAxisTopLabels.Controls.Add(Me.UcrCheck12)
-        Me.grpYAxisTopLabels.Controls.Add(Me.UcrCheck13)
-        Me.grpYAxisTopLabels.Controls.Add(Me.UcrCheck14)
-        Me.grpYAxisTopLabels.Controls.Add(Me.UcrCheck15)
-        Me.grpYAxisTopLabels.Controls.Add(Me.UcrCheck16)
-        Me.grpYAxisTopLabels.Controls.Add(Me.ucrNudVjustTopYAxis)
-        Me.grpYAxisTopLabels.Controls.Add(Me.ucrNudLineHeightTopYAxis)
-        Me.grpYAxisTopLabels.Controls.Add(Me.ucrNudAngleTopYAxis)
-        Me.grpYAxisTopLabels.Controls.Add(Me.ucrNudHjustTopYAxis)
-        Me.grpYAxisTopLabels.Controls.Add(Me.ucrNudSizeTopYAxis)
-        Me.grpYAxisTopLabels.Controls.Add(Me.ucrInputColourTopYAxis)
-        Me.grpYAxisTopLabels.Controls.Add(Me.ucrInputFaceTopYAxis)
-        Me.grpYAxisTopLabels.Controls.Add(Me.ucrInputFamilyTopYAxis)
+        Me.grpYAxisTopLabels.Controls.Add(Me.ucrChkColourRightYAxis)
+        Me.grpYAxisTopLabels.Controls.Add(Me.ucrChkFaceRightYAxis)
+        Me.grpYAxisTopLabels.Controls.Add(Me.ucrChkFamilyRightYAxis)
+        Me.grpYAxisTopLabels.Controls.Add(Me.ucrChkAngleRightYAxis)
+        Me.grpYAxisTopLabels.Controls.Add(Me.ucrChkHjustRightYAxis)
+        Me.grpYAxisTopLabels.Controls.Add(Me.ucrChkVjustRightYAxis)
+        Me.grpYAxisTopLabels.Controls.Add(Me.ucrChkLineHeightRightYAxis)
+        Me.grpYAxisTopLabels.Controls.Add(Me.ucrChkSizeRightYAxis)
+        Me.grpYAxisTopLabels.Controls.Add(Me.ucrNudVjustRightYAxis)
+        Me.grpYAxisTopLabels.Controls.Add(Me.ucrNudLineHeightRightYAxis)
+        Me.grpYAxisTopLabels.Controls.Add(Me.ucrNudAngleRightYAxis)
+        Me.grpYAxisTopLabels.Controls.Add(Me.ucrNudHjustRightYAxis)
+        Me.grpYAxisTopLabels.Controls.Add(Me.ucrNudSizeRightYAxis)
+        Me.grpYAxisTopLabels.Controls.Add(Me.ucrInputColourRightYAxis)
+        Me.grpYAxisTopLabels.Controls.Add(Me.ucrInputFaceRightYAxis)
+        Me.grpYAxisTopLabels.Controls.Add(Me.ucrInputFamilyRightYAxis)
         Me.grpYAxisTopLabels.Location = New System.Drawing.Point(262, 5)
         Me.grpYAxisTopLabels.Name = "grpYAxisTopLabels"
         Me.grpYAxisTopLabels.Size = New System.Drawing.Size(264, 245)
@@ -849,166 +849,166 @@ Partial Class sdgThemes
         Me.grpYAxisTopLabels.TabStop = False
         Me.grpYAxisTopLabels.Text = "Y axis label on top axis"
         '
-        'UcrCheck9
+        'ucrChkColourRightYAxis
         '
-        Me.UcrCheck9.Checked = False
-        Me.UcrCheck9.Location = New System.Drawing.Point(14, 213)
-        Me.UcrCheck9.Name = "UcrCheck9"
-        Me.UcrCheck9.Size = New System.Drawing.Size(100, 20)
-        Me.UcrCheck9.TabIndex = 53
+        Me.ucrChkColourRightYAxis.Checked = False
+        Me.ucrChkColourRightYAxis.Location = New System.Drawing.Point(14, 212)
+        Me.ucrChkColourRightYAxis.Name = "ucrChkColourRightYAxis"
+        Me.ucrChkColourRightYAxis.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkColourRightYAxis.TabIndex = 53
         '
-        'UcrCheck10
+        'ucrChkFaceRightYAxis
         '
-        Me.UcrCheck10.Checked = False
-        Me.UcrCheck10.Location = New System.Drawing.Point(14, 184)
-        Me.UcrCheck10.Name = "UcrCheck10"
-        Me.UcrCheck10.Size = New System.Drawing.Size(100, 20)
-        Me.UcrCheck10.TabIndex = 52
+        Me.ucrChkFaceRightYAxis.Checked = False
+        Me.ucrChkFaceRightYAxis.Location = New System.Drawing.Point(14, 184)
+        Me.ucrChkFaceRightYAxis.Name = "ucrChkFaceRightYAxis"
+        Me.ucrChkFaceRightYAxis.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkFaceRightYAxis.TabIndex = 52
         '
-        'UcrCheck11
+        'ucrChkFamilyRightYAxis
         '
-        Me.UcrCheck11.Checked = False
-        Me.UcrCheck11.Location = New System.Drawing.Point(14, 161)
-        Me.UcrCheck11.Name = "UcrCheck11"
-        Me.UcrCheck11.Size = New System.Drawing.Size(100, 20)
-        Me.UcrCheck11.TabIndex = 51
+        Me.ucrChkFamilyRightYAxis.Checked = False
+        Me.ucrChkFamilyRightYAxis.Location = New System.Drawing.Point(14, 156)
+        Me.ucrChkFamilyRightYAxis.Name = "ucrChkFamilyRightYAxis"
+        Me.ucrChkFamilyRightYAxis.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkFamilyRightYAxis.TabIndex = 51
         '
-        'UcrCheck12
+        'ucrChkAngleRightYAxis
         '
-        Me.UcrCheck12.Checked = False
-        Me.UcrCheck12.Location = New System.Drawing.Point(14, 128)
-        Me.UcrCheck12.Name = "UcrCheck12"
-        Me.UcrCheck12.Size = New System.Drawing.Size(100, 20)
-        Me.UcrCheck12.TabIndex = 50
+        Me.ucrChkAngleRightYAxis.Checked = False
+        Me.ucrChkAngleRightYAxis.Location = New System.Drawing.Point(14, 128)
+        Me.ucrChkAngleRightYAxis.Name = "ucrChkAngleRightYAxis"
+        Me.ucrChkAngleRightYAxis.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkAngleRightYAxis.TabIndex = 50
         '
-        'UcrCheck13
+        'ucrChkHjustRightYAxis
         '
-        Me.UcrCheck13.Checked = False
-        Me.UcrCheck13.Location = New System.Drawing.Point(14, 41)
-        Me.UcrCheck13.Name = "UcrCheck13"
-        Me.UcrCheck13.Size = New System.Drawing.Size(100, 20)
-        Me.UcrCheck13.TabIndex = 49
+        Me.ucrChkHjustRightYAxis.Checked = False
+        Me.ucrChkHjustRightYAxis.Location = New System.Drawing.Point(14, 44)
+        Me.ucrChkHjustRightYAxis.Name = "ucrChkHjustRightYAxis"
+        Me.ucrChkHjustRightYAxis.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkHjustRightYAxis.TabIndex = 49
         '
-        'UcrCheck14
+        'ucrChkVjustRightYAxis
         '
-        Me.UcrCheck14.Checked = False
-        Me.UcrCheck14.Location = New System.Drawing.Point(14, 67)
-        Me.UcrCheck14.Name = "UcrCheck14"
-        Me.UcrCheck14.Size = New System.Drawing.Size(100, 20)
-        Me.UcrCheck14.TabIndex = 48
+        Me.ucrChkVjustRightYAxis.Checked = False
+        Me.ucrChkVjustRightYAxis.Location = New System.Drawing.Point(14, 72)
+        Me.ucrChkVjustRightYAxis.Name = "ucrChkVjustRightYAxis"
+        Me.ucrChkVjustRightYAxis.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkVjustRightYAxis.TabIndex = 48
         '
-        'UcrCheck15
+        'ucrChkLineHeightRightYAxis
         '
-        Me.UcrCheck15.Checked = False
-        Me.UcrCheck15.Location = New System.Drawing.Point(14, 93)
-        Me.UcrCheck15.Name = "UcrCheck15"
-        Me.UcrCheck15.Size = New System.Drawing.Size(100, 20)
-        Me.UcrCheck15.TabIndex = 47
+        Me.ucrChkLineHeightRightYAxis.Checked = False
+        Me.ucrChkLineHeightRightYAxis.Location = New System.Drawing.Point(14, 100)
+        Me.ucrChkLineHeightRightYAxis.Name = "ucrChkLineHeightRightYAxis"
+        Me.ucrChkLineHeightRightYAxis.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkLineHeightRightYAxis.TabIndex = 47
         '
-        'UcrCheck16
+        'ucrChkSizeRightYAxis
         '
-        Me.UcrCheck16.Checked = False
-        Me.UcrCheck16.Location = New System.Drawing.Point(14, 11)
-        Me.UcrCheck16.Name = "UcrCheck16"
-        Me.UcrCheck16.Size = New System.Drawing.Size(100, 20)
-        Me.UcrCheck16.TabIndex = 46
+        Me.ucrChkSizeRightYAxis.Checked = False
+        Me.ucrChkSizeRightYAxis.Location = New System.Drawing.Point(14, 16)
+        Me.ucrChkSizeRightYAxis.Name = "ucrChkSizeRightYAxis"
+        Me.ucrChkSizeRightYAxis.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkSizeRightYAxis.TabIndex = 46
         '
-        'ucrNudVjustTopYAxis
+        'ucrNudVjustRightYAxis
         '
-        Me.ucrNudVjustTopYAxis.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudVjustTopYAxis.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.ucrNudVjustTopYAxis.Location = New System.Drawing.Point(117, 76)
-        Me.ucrNudVjustTopYAxis.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudVjustTopYAxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudVjustTopYAxis.Name = "ucrNudVjustTopYAxis"
-        Me.ucrNudVjustTopYAxis.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudVjustTopYAxis.TabIndex = 38
-        Me.ucrNudVjustTopYAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudVjustRightYAxis.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudVjustRightYAxis.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
+        Me.ucrNudVjustRightYAxis.Location = New System.Drawing.Point(115, 72)
+        Me.ucrNudVjustRightYAxis.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudVjustRightYAxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudVjustRightYAxis.Name = "ucrNudVjustRightYAxis"
+        Me.ucrNudVjustRightYAxis.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudVjustRightYAxis.TabIndex = 38
+        Me.ucrNudVjustRightYAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrNudLineHeightTopYAxis
+        'ucrNudLineHeightRightYAxis
         '
-        Me.ucrNudLineHeightTopYAxis.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudLineHeightTopYAxis.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.ucrNudLineHeightTopYAxis.Location = New System.Drawing.Point(117, 106)
-        Me.ucrNudLineHeightTopYAxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudLineHeightTopYAxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLineHeightTopYAxis.Name = "ucrNudLineHeightTopYAxis"
-        Me.ucrNudLineHeightTopYAxis.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudLineHeightTopYAxis.TabIndex = 36
-        Me.ucrNudLineHeightTopYAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLineHeightRightYAxis.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudLineHeightRightYAxis.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
+        Me.ucrNudLineHeightRightYAxis.Location = New System.Drawing.Point(115, 100)
+        Me.ucrNudLineHeightRightYAxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudLineHeightRightYAxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLineHeightRightYAxis.Name = "ucrNudLineHeightRightYAxis"
+        Me.ucrNudLineHeightRightYAxis.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudLineHeightRightYAxis.TabIndex = 36
+        Me.ucrNudLineHeightRightYAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrNudAngleTopYAxis
+        'ucrNudAngleRightYAxis
         '
-        Me.ucrNudAngleTopYAxis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAngleTopYAxis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudAngleTopYAxis.Location = New System.Drawing.Point(117, 134)
-        Me.ucrNudAngleTopYAxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudAngleTopYAxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAngleTopYAxis.Name = "ucrNudAngleTopYAxis"
-        Me.ucrNudAngleTopYAxis.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudAngleTopYAxis.TabIndex = 34
-        Me.ucrNudAngleTopYAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAngleRightYAxis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAngleRightYAxis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudAngleRightYAxis.Location = New System.Drawing.Point(115, 128)
+        Me.ucrNudAngleRightYAxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudAngleRightYAxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAngleRightYAxis.Name = "ucrNudAngleRightYAxis"
+        Me.ucrNudAngleRightYAxis.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudAngleRightYAxis.TabIndex = 34
+        Me.ucrNudAngleRightYAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrNudHjustTopYAxis
+        'ucrNudHjustRightYAxis
         '
-        Me.ucrNudHjustTopYAxis.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudHjustTopYAxis.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.ucrNudHjustTopYAxis.Location = New System.Drawing.Point(117, 46)
-        Me.ucrNudHjustTopYAxis.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudHjustTopYAxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudHjustTopYAxis.Name = "ucrNudHjustTopYAxis"
-        Me.ucrNudHjustTopYAxis.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudHjustTopYAxis.TabIndex = 32
-        Me.ucrNudHjustTopYAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudHjustRightYAxis.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudHjustRightYAxis.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
+        Me.ucrNudHjustRightYAxis.Location = New System.Drawing.Point(115, 44)
+        Me.ucrNudHjustRightYAxis.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudHjustRightYAxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudHjustRightYAxis.Name = "ucrNudHjustRightYAxis"
+        Me.ucrNudHjustRightYAxis.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudHjustRightYAxis.TabIndex = 32
+        Me.ucrNudHjustRightYAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrNudSizeTopYAxis
+        'ucrNudSizeRightYAxis
         '
-        Me.ucrNudSizeTopYAxis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSizeTopYAxis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSizeTopYAxis.Location = New System.Drawing.Point(117, 16)
-        Me.ucrNudSizeTopYAxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudSizeTopYAxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSizeTopYAxis.Name = "ucrNudSizeTopYAxis"
-        Me.ucrNudSizeTopYAxis.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudSizeTopYAxis.TabIndex = 30
-        Me.ucrNudSizeTopYAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSizeRightYAxis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSizeRightYAxis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSizeRightYAxis.Location = New System.Drawing.Point(115, 16)
+        Me.ucrNudSizeRightYAxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSizeRightYAxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSizeRightYAxis.Name = "ucrNudSizeRightYAxis"
+        Me.ucrNudSizeRightYAxis.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudSizeRightYAxis.TabIndex = 30
+        Me.ucrNudSizeRightYAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrInputColourTopYAxis
+        'ucrInputColourRightYAxis
         '
-        Me.ucrInputColourTopYAxis.AddQuotesIfUnrecognised = True
-        Me.ucrInputColourTopYAxis.IsReadOnly = False
-        Me.ucrInputColourTopYAxis.Location = New System.Drawing.Point(117, 217)
-        Me.ucrInputColourTopYAxis.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.ucrInputColourTopYAxis.Name = "ucrInputColourTopYAxis"
-        Me.ucrInputColourTopYAxis.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputColourTopYAxis.TabIndex = 28
+        Me.ucrInputColourRightYAxis.AddQuotesIfUnrecognised = True
+        Me.ucrInputColourRightYAxis.IsReadOnly = False
+        Me.ucrInputColourRightYAxis.Location = New System.Drawing.Point(115, 212)
+        Me.ucrInputColourRightYAxis.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputColourRightYAxis.Name = "ucrInputColourRightYAxis"
+        Me.ucrInputColourRightYAxis.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputColourRightYAxis.TabIndex = 28
         '
-        'ucrInputFaceTopYAxis
+        'ucrInputFaceRightYAxis
         '
-        Me.ucrInputFaceTopYAxis.AddQuotesIfUnrecognised = True
-        Me.ucrInputFaceTopYAxis.IsReadOnly = False
-        Me.ucrInputFaceTopYAxis.Location = New System.Drawing.Point(117, 189)
-        Me.ucrInputFaceTopYAxis.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.ucrInputFaceTopYAxis.Name = "ucrInputFaceTopYAxis"
-        Me.ucrInputFaceTopYAxis.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputFaceTopYAxis.TabIndex = 26
+        Me.ucrInputFaceRightYAxis.AddQuotesIfUnrecognised = True
+        Me.ucrInputFaceRightYAxis.IsReadOnly = False
+        Me.ucrInputFaceRightYAxis.Location = New System.Drawing.Point(115, 183)
+        Me.ucrInputFaceRightYAxis.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputFaceRightYAxis.Name = "ucrInputFaceRightYAxis"
+        Me.ucrInputFaceRightYAxis.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputFaceRightYAxis.TabIndex = 26
         '
-        'ucrInputFamilyTopYAxis
+        'ucrInputFamilyRightYAxis
         '
-        Me.ucrInputFamilyTopYAxis.AddQuotesIfUnrecognised = True
-        Me.ucrInputFamilyTopYAxis.IsReadOnly = False
-        Me.ucrInputFamilyTopYAxis.Location = New System.Drawing.Point(117, 162)
-        Me.ucrInputFamilyTopYAxis.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.ucrInputFamilyTopYAxis.Name = "ucrInputFamilyTopYAxis"
-        Me.ucrInputFamilyTopYAxis.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputFamilyTopYAxis.TabIndex = 24
+        Me.ucrInputFamilyRightYAxis.AddQuotesIfUnrecognised = True
+        Me.ucrInputFamilyRightYAxis.IsReadOnly = False
+        Me.ucrInputFamilyRightYAxis.Location = New System.Drawing.Point(115, 155)
+        Me.ucrInputFamilyRightYAxis.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputFamilyRightYAxis.Name = "ucrInputFamilyRightYAxis"
+        Me.ucrInputFamilyRightYAxis.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputFamilyRightYAxis.TabIndex = 24
         '
         'grpTickMarksYAxis
         '
-        Me.grpTickMarksYAxis.Controls.Add(Me.UcrCheck41)
-        Me.grpTickMarksYAxis.Controls.Add(Me.UcrCheck42)
-        Me.grpTickMarksYAxis.Controls.Add(Me.UcrCheck43)
-        Me.grpTickMarksYAxis.Controls.Add(Me.UcrCheck44)
+        Me.grpTickMarksYAxis.Controls.Add(Me.ucrChkLineEndTickMarksYAxis)
+        Me.grpTickMarksYAxis.Controls.Add(Me.ucrChkSizeTickMarksYAxis)
+        Me.grpTickMarksYAxis.Controls.Add(Me.ucrChkLineTypeTickMarksYAxis)
+        Me.grpTickMarksYAxis.Controls.Add(Me.ucrChkColourTickMarksYAxis)
         Me.grpTickMarksYAxis.Controls.Add(Me.ucrInputLineEndTickMarksYAxis)
         Me.grpTickMarksYAxis.Controls.Add(Me.ucrNudSizeTickMarksYAxis)
         Me.grpTickMarksYAxis.Controls.Add(Me.ucrInputColourTickMarksYAxis)
@@ -1020,43 +1020,43 @@ Partial Class sdgThemes
         Me.grpTickMarksYAxis.TabStop = False
         Me.grpTickMarksYAxis.Text = "Tick marks along axes"
         '
-        'UcrCheck41
+        'ucrChkLineEndTickMarksYAxis
         '
-        Me.UcrCheck41.Checked = False
-        Me.UcrCheck41.Location = New System.Drawing.Point(6, 111)
-        Me.UcrCheck41.Name = "UcrCheck41"
-        Me.UcrCheck41.Size = New System.Drawing.Size(100, 20)
-        Me.UcrCheck41.TabIndex = 58
+        Me.ucrChkLineEndTickMarksYAxis.Checked = False
+        Me.ucrChkLineEndTickMarksYAxis.Location = New System.Drawing.Point(6, 107)
+        Me.ucrChkLineEndTickMarksYAxis.Name = "ucrChkLineEndTickMarksYAxis"
+        Me.ucrChkLineEndTickMarksYAxis.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkLineEndTickMarksYAxis.TabIndex = 58
         '
-        'UcrCheck42
+        'ucrChkSizeTickMarksYAxis
         '
-        Me.UcrCheck42.Checked = False
-        Me.UcrCheck42.Location = New System.Drawing.Point(6, 24)
-        Me.UcrCheck42.Name = "UcrCheck42"
-        Me.UcrCheck42.Size = New System.Drawing.Size(100, 20)
-        Me.UcrCheck42.TabIndex = 57
+        Me.ucrChkSizeTickMarksYAxis.Checked = False
+        Me.ucrChkSizeTickMarksYAxis.Location = New System.Drawing.Point(6, 20)
+        Me.ucrChkSizeTickMarksYAxis.Name = "ucrChkSizeTickMarksYAxis"
+        Me.ucrChkSizeTickMarksYAxis.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkSizeTickMarksYAxis.TabIndex = 57
         '
-        'UcrCheck43
+        'ucrChkLineTypeTickMarksYAxis
         '
-        Me.UcrCheck43.Checked = False
-        Me.UcrCheck43.Location = New System.Drawing.Point(6, 53)
-        Me.UcrCheck43.Name = "UcrCheck43"
-        Me.UcrCheck43.Size = New System.Drawing.Size(100, 20)
-        Me.UcrCheck43.TabIndex = 56
+        Me.ucrChkLineTypeTickMarksYAxis.Checked = False
+        Me.ucrChkLineTypeTickMarksYAxis.Location = New System.Drawing.Point(6, 49)
+        Me.ucrChkLineTypeTickMarksYAxis.Name = "ucrChkLineTypeTickMarksYAxis"
+        Me.ucrChkLineTypeTickMarksYAxis.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkLineTypeTickMarksYAxis.TabIndex = 56
         '
-        'UcrCheck44
+        'ucrChkColourTickMarksYAxis
         '
-        Me.UcrCheck44.Checked = False
-        Me.UcrCheck44.Location = New System.Drawing.Point(6, 82)
-        Me.UcrCheck44.Name = "UcrCheck44"
-        Me.UcrCheck44.Size = New System.Drawing.Size(100, 20)
-        Me.UcrCheck44.TabIndex = 55
+        Me.ucrChkColourTickMarksYAxis.Checked = False
+        Me.ucrChkColourTickMarksYAxis.Location = New System.Drawing.Point(6, 78)
+        Me.ucrChkColourTickMarksYAxis.Name = "ucrChkColourTickMarksYAxis"
+        Me.ucrChkColourTickMarksYAxis.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkColourTickMarksYAxis.TabIndex = 55
         '
         'ucrInputLineEndTickMarksYAxis
         '
         Me.ucrInputLineEndTickMarksYAxis.AddQuotesIfUnrecognised = True
         Me.ucrInputLineEndTickMarksYAxis.IsReadOnly = False
-        Me.ucrInputLineEndTickMarksYAxis.Location = New System.Drawing.Point(110, 100)
+        Me.ucrInputLineEndTickMarksYAxis.Location = New System.Drawing.Point(110, 106)
         Me.ucrInputLineEndTickMarksYAxis.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputLineEndTickMarksYAxis.Name = "ucrInputLineEndTickMarksYAxis"
         Me.ucrInputLineEndTickMarksYAxis.Size = New System.Drawing.Size(137, 21)
@@ -1066,7 +1066,7 @@ Partial Class sdgThemes
         '
         Me.ucrNudSizeTickMarksYAxis.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudSizeTickMarksYAxis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSizeTickMarksYAxis.Location = New System.Drawing.Point(132, 17)
+        Me.ucrNudSizeTickMarksYAxis.Location = New System.Drawing.Point(110, 19)
         Me.ucrNudSizeTickMarksYAxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSizeTickMarksYAxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSizeTickMarksYAxis.Name = "ucrNudSizeTickMarksYAxis"
@@ -1078,7 +1078,7 @@ Partial Class sdgThemes
         '
         Me.ucrInputColourTickMarksYAxis.AddQuotesIfUnrecognised = True
         Me.ucrInputColourTickMarksYAxis.IsReadOnly = False
-        Me.ucrInputColourTickMarksYAxis.Location = New System.Drawing.Point(110, 68)
+        Me.ucrInputColourTickMarksYAxis.Location = New System.Drawing.Point(110, 77)
         Me.ucrInputColourTickMarksYAxis.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputColourTickMarksYAxis.Name = "ucrInputColourTickMarksYAxis"
         Me.ucrInputColourTickMarksYAxis.Size = New System.Drawing.Size(137, 21)
@@ -1088,7 +1088,7 @@ Partial Class sdgThemes
         '
         Me.ucrInputLineTypeTickMarksYAxis.AddQuotesIfUnrecognised = True
         Me.ucrInputLineTypeTickMarksYAxis.IsReadOnly = False
-        Me.ucrInputLineTypeTickMarksYAxis.Location = New System.Drawing.Point(110, 40)
+        Me.ucrInputLineTypeTickMarksYAxis.Location = New System.Drawing.Point(110, 48)
         Me.ucrInputLineTypeTickMarksYAxis.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputLineTypeTickMarksYAxis.Name = "ucrInputLineTypeTickMarksYAxis"
         Me.ucrInputLineTypeTickMarksYAxis.Size = New System.Drawing.Size(137, 21)
@@ -1096,17 +1096,17 @@ Partial Class sdgThemes
         '
         'grpYAxisLabels
         '
-        Me.grpYAxisLabels.Controls.Add(Me.UcrCheck8)
-        Me.grpYAxisLabels.Controls.Add(Me.UcrCheck7)
-        Me.grpYAxisLabels.Controls.Add(Me.UcrCheck6)
-        Me.grpYAxisLabels.Controls.Add(Me.UcrCheck5)
-        Me.grpYAxisLabels.Controls.Add(Me.UcrCheck4)
-        Me.grpYAxisLabels.Controls.Add(Me.UcrCheck3)
-        Me.grpYAxisLabels.Controls.Add(Me.UcrCheck2)
-        Me.grpYAxisLabels.Controls.Add(Me.UcrCheck1)
+        Me.grpYAxisLabels.Controls.Add(Me.ucrChkColourYAxis)
+        Me.grpYAxisLabels.Controls.Add(Me.ucrChkFaceYAxis)
+        Me.grpYAxisLabels.Controls.Add(Me.ucrChkFamilyYAxis)
+        Me.grpYAxisLabels.Controls.Add(Me.ucrChkAngleYAxis)
+        Me.grpYAxisLabels.Controls.Add(Me.ucrChkHjustYAxis)
+        Me.grpYAxisLabels.Controls.Add(Me.ucrChkVjustYAxis)
+        Me.grpYAxisLabels.Controls.Add(Me.ucrChkLineHeightYAxis)
+        Me.grpYAxisLabels.Controls.Add(Me.ucrChkSizeYAxis)
         Me.grpYAxisLabels.Controls.Add(Me.ucrNudVjustYAxis)
         Me.grpYAxisLabels.Controls.Add(Me.ucrNudLineHeightYAxis)
-        Me.grpYAxisLabels.Controls.Add(Me.ucrNudLAngleYAxis)
+        Me.grpYAxisLabels.Controls.Add(Me.ucrNudAngleYAxis)
         Me.grpYAxisLabels.Controls.Add(Me.ucrNudHjustYAxis)
         Me.grpYAxisLabels.Controls.Add(Me.ucrNudSizeYAxis)
         Me.grpYAxisLabels.Controls.Add(Me.ucrInputColourYAxis)
@@ -1119,75 +1119,75 @@ Partial Class sdgThemes
         Me.grpYAxisLabels.TabStop = False
         Me.grpYAxisLabels.Text = "Y axis label"
         '
-        'UcrCheck8
+        'ucrChkColourYAxis
         '
-        Me.UcrCheck8.Checked = False
-        Me.UcrCheck8.Location = New System.Drawing.Point(6, 218)
-        Me.UcrCheck8.Name = "UcrCheck8"
-        Me.UcrCheck8.Size = New System.Drawing.Size(100, 20)
-        Me.UcrCheck8.TabIndex = 45
+        Me.ucrChkColourYAxis.Checked = False
+        Me.ucrChkColourYAxis.Location = New System.Drawing.Point(6, 212)
+        Me.ucrChkColourYAxis.Name = "ucrChkColourYAxis"
+        Me.ucrChkColourYAxis.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkColourYAxis.TabIndex = 45
         '
-        'UcrCheck7
+        'ucrChkFaceYAxis
         '
-        Me.UcrCheck7.Checked = False
-        Me.UcrCheck7.Location = New System.Drawing.Point(6, 189)
-        Me.UcrCheck7.Name = "UcrCheck7"
-        Me.UcrCheck7.Size = New System.Drawing.Size(100, 20)
-        Me.UcrCheck7.TabIndex = 44
+        Me.ucrChkFaceYAxis.Checked = False
+        Me.ucrChkFaceYAxis.Location = New System.Drawing.Point(6, 184)
+        Me.ucrChkFaceYAxis.Name = "ucrChkFaceYAxis"
+        Me.ucrChkFaceYAxis.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkFaceYAxis.TabIndex = 44
         '
-        'UcrCheck6
+        'ucrChkFamilyYAxis
         '
-        Me.UcrCheck6.Checked = False
-        Me.UcrCheck6.Location = New System.Drawing.Point(6, 166)
-        Me.UcrCheck6.Name = "UcrCheck6"
-        Me.UcrCheck6.Size = New System.Drawing.Size(100, 20)
-        Me.UcrCheck6.TabIndex = 43
+        Me.ucrChkFamilyYAxis.Checked = False
+        Me.ucrChkFamilyYAxis.Location = New System.Drawing.Point(6, 156)
+        Me.ucrChkFamilyYAxis.Name = "ucrChkFamilyYAxis"
+        Me.ucrChkFamilyYAxis.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkFamilyYAxis.TabIndex = 43
         '
-        'UcrCheck5
+        'ucrChkAngleYAxis
         '
-        Me.UcrCheck5.Checked = False
-        Me.UcrCheck5.Location = New System.Drawing.Point(6, 133)
-        Me.UcrCheck5.Name = "UcrCheck5"
-        Me.UcrCheck5.Size = New System.Drawing.Size(100, 20)
-        Me.UcrCheck5.TabIndex = 42
+        Me.ucrChkAngleYAxis.Checked = False
+        Me.ucrChkAngleYAxis.Location = New System.Drawing.Point(6, 128)
+        Me.ucrChkAngleYAxis.Name = "ucrChkAngleYAxis"
+        Me.ucrChkAngleYAxis.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkAngleYAxis.TabIndex = 42
         '
-        'UcrCheck4
+        'ucrChkHjustYAxis
         '
-        Me.UcrCheck4.Checked = False
-        Me.UcrCheck4.Location = New System.Drawing.Point(6, 46)
-        Me.UcrCheck4.Name = "UcrCheck4"
-        Me.UcrCheck4.Size = New System.Drawing.Size(100, 20)
-        Me.UcrCheck4.TabIndex = 41
+        Me.ucrChkHjustYAxis.Checked = False
+        Me.ucrChkHjustYAxis.Location = New System.Drawing.Point(6, 44)
+        Me.ucrChkHjustYAxis.Name = "ucrChkHjustYAxis"
+        Me.ucrChkHjustYAxis.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkHjustYAxis.TabIndex = 41
         '
-        'UcrCheck3
+        'ucrChkVjustYAxis
         '
-        Me.UcrCheck3.Checked = False
-        Me.UcrCheck3.Location = New System.Drawing.Point(6, 72)
-        Me.UcrCheck3.Name = "UcrCheck3"
-        Me.UcrCheck3.Size = New System.Drawing.Size(100, 20)
-        Me.UcrCheck3.TabIndex = 40
+        Me.ucrChkVjustYAxis.Checked = False
+        Me.ucrChkVjustYAxis.Location = New System.Drawing.Point(6, 72)
+        Me.ucrChkVjustYAxis.Name = "ucrChkVjustYAxis"
+        Me.ucrChkVjustYAxis.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkVjustYAxis.TabIndex = 40
         '
-        'UcrCheck2
+        'ucrChkLineHeightYAxis
         '
-        Me.UcrCheck2.Checked = False
-        Me.UcrCheck2.Location = New System.Drawing.Point(6, 98)
-        Me.UcrCheck2.Name = "UcrCheck2"
-        Me.UcrCheck2.Size = New System.Drawing.Size(100, 20)
-        Me.UcrCheck2.TabIndex = 39
+        Me.ucrChkLineHeightYAxis.Checked = False
+        Me.ucrChkLineHeightYAxis.Location = New System.Drawing.Point(6, 100)
+        Me.ucrChkLineHeightYAxis.Name = "ucrChkLineHeightYAxis"
+        Me.ucrChkLineHeightYAxis.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkLineHeightYAxis.TabIndex = 39
         '
-        'UcrCheck1
+        'ucrChkSizeYAxis
         '
-        Me.UcrCheck1.Checked = False
-        Me.UcrCheck1.Location = New System.Drawing.Point(6, 16)
-        Me.UcrCheck1.Name = "UcrCheck1"
-        Me.UcrCheck1.Size = New System.Drawing.Size(100, 20)
-        Me.UcrCheck1.TabIndex = 33
+        Me.ucrChkSizeYAxis.Checked = False
+        Me.ucrChkSizeYAxis.Location = New System.Drawing.Point(6, 16)
+        Me.ucrChkSizeYAxis.Name = "ucrChkSizeYAxis"
+        Me.ucrChkSizeYAxis.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkSizeYAxis.TabIndex = 33
         '
         'ucrNudVjustYAxis
         '
         Me.ucrNudVjustYAxis.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudVjustYAxis.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.ucrNudVjustYAxis.Location = New System.Drawing.Point(110, 76)
+        Me.ucrNudVjustYAxis.Location = New System.Drawing.Point(110, 72)
         Me.ucrNudVjustYAxis.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudVjustYAxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudVjustYAxis.Name = "ucrNudVjustYAxis"
@@ -1199,7 +1199,7 @@ Partial Class sdgThemes
         '
         Me.ucrNudLineHeightYAxis.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudLineHeightYAxis.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.ucrNudLineHeightYAxis.Location = New System.Drawing.Point(110, 106)
+        Me.ucrNudLineHeightYAxis.Location = New System.Drawing.Point(110, 100)
         Me.ucrNudLineHeightYAxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudLineHeightYAxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLineHeightYAxis.Name = "ucrNudLineHeightYAxis"
@@ -1207,23 +1207,23 @@ Partial Class sdgThemes
         Me.ucrNudLineHeightYAxis.TabIndex = 36
         Me.ucrNudLineHeightYAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrNudLAngleYAxis
+        'ucrNudAngleYAxis
         '
-        Me.ucrNudLAngleYAxis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLAngleYAxis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudLAngleYAxis.Location = New System.Drawing.Point(110, 136)
-        Me.ucrNudLAngleYAxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudLAngleYAxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLAngleYAxis.Name = "ucrNudLAngleYAxis"
-        Me.ucrNudLAngleYAxis.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudLAngleYAxis.TabIndex = 34
-        Me.ucrNudLAngleYAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAngleYAxis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAngleYAxis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudAngleYAxis.Location = New System.Drawing.Point(110, 128)
+        Me.ucrNudAngleYAxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudAngleYAxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAngleYAxis.Name = "ucrNudAngleYAxis"
+        Me.ucrNudAngleYAxis.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudAngleYAxis.TabIndex = 34
+        Me.ucrNudAngleYAxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudHjustYAxis
         '
         Me.ucrNudHjustYAxis.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudHjustYAxis.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.ucrNudHjustYAxis.Location = New System.Drawing.Point(110, 46)
+        Me.ucrNudHjustYAxis.Location = New System.Drawing.Point(110, 44)
         Me.ucrNudHjustYAxis.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudHjustYAxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudHjustYAxis.Name = "ucrNudHjustYAxis"
@@ -1247,7 +1247,7 @@ Partial Class sdgThemes
         '
         Me.ucrInputColourYAxis.AddQuotesIfUnrecognised = True
         Me.ucrInputColourYAxis.IsReadOnly = False
-        Me.ucrInputColourYAxis.Location = New System.Drawing.Point(110, 217)
+        Me.ucrInputColourYAxis.Location = New System.Drawing.Point(110, 212)
         Me.ucrInputColourYAxis.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputColourYAxis.Name = "ucrInputColourYAxis"
         Me.ucrInputColourYAxis.Size = New System.Drawing.Size(137, 21)
@@ -1257,7 +1257,7 @@ Partial Class sdgThemes
         '
         Me.ucrInputFaceYAxis.AddQuotesIfUnrecognised = True
         Me.ucrInputFaceYAxis.IsReadOnly = False
-        Me.ucrInputFaceYAxis.Location = New System.Drawing.Point(110, 189)
+        Me.ucrInputFaceYAxis.Location = New System.Drawing.Point(110, 183)
         Me.ucrInputFaceYAxis.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputFaceYAxis.Name = "ucrInputFaceYAxis"
         Me.ucrInputFaceYAxis.Size = New System.Drawing.Size(137, 21)
@@ -1267,7 +1267,7 @@ Partial Class sdgThemes
         '
         Me.ucrInputFamilyYAxis.AddQuotesIfUnrecognised = True
         Me.ucrInputFamilyYAxis.IsReadOnly = False
-        Me.ucrInputFamilyYAxis.Location = New System.Drawing.Point(110, 162)
+        Me.ucrInputFamilyYAxis.Location = New System.Drawing.Point(110, 155)
         Me.ucrInputFamilyYAxis.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputFamilyYAxis.Name = "ucrInputFamilyYAxis"
         Me.ucrInputFamilyYAxis.Size = New System.Drawing.Size(137, 21)
@@ -1348,14 +1348,14 @@ Partial Class sdgThemes
     Friend WithEvents ucrInputColourTickLabelsYAxis As ucrInputComboBox
     Friend WithEvents ucrInputLineTypeTickLabelsYAxis As ucrInputComboBox
     Friend WithEvents grpYAxisTopLabels As GroupBox
-    Friend WithEvents ucrNudVjustTopYAxis As ucrNud
-    Friend WithEvents ucrNudLineHeightTopYAxis As ucrNud
-    Friend WithEvents ucrNudAngleTopYAxis As ucrNud
-    Friend WithEvents ucrNudHjustTopYAxis As ucrNud
-    Friend WithEvents ucrNudSizeTopYAxis As ucrNud
-    Friend WithEvents ucrInputColourTopYAxis As ucrInputComboBox
-    Friend WithEvents ucrInputFaceTopYAxis As ucrInputComboBox
-    Friend WithEvents ucrInputFamilyTopYAxis As ucrInputComboBox
+    Friend WithEvents ucrNudVjustRightYAxis As ucrNud
+    Friend WithEvents ucrNudLineHeightRightYAxis As ucrNud
+    Friend WithEvents ucrNudAngleRightYAxis As ucrNud
+    Friend WithEvents ucrNudHjustRightYAxis As ucrNud
+    Friend WithEvents ucrNudSizeRightYAxis As ucrNud
+    Friend WithEvents ucrInputColourRightYAxis As ucrInputComboBox
+    Friend WithEvents ucrInputFaceRightYAxis As ucrInputComboBox
+    Friend WithEvents ucrInputFamilyRightYAxis As ucrInputComboBox
     Friend WithEvents grpTickMarksYAxis As GroupBox
     Friend WithEvents ucrInputLineEndTickMarksYAxis As ucrInputComboBox
     Friend WithEvents ucrNudSizeTickMarksYAxis As ucrNud
@@ -1364,28 +1364,28 @@ Partial Class sdgThemes
     Friend WithEvents grpYAxisLabels As GroupBox
     Friend WithEvents ucrNudVjustYAxis As ucrNud
     Friend WithEvents ucrNudLineHeightYAxis As ucrNud
-    Friend WithEvents ucrNudLAngleYAxis As ucrNud
+    Friend WithEvents ucrNudAngleYAxis As ucrNud
     Friend WithEvents ucrNudHjustYAxis As ucrNud
     Friend WithEvents ucrNudSizeYAxis As ucrNud
     Friend WithEvents ucrInputColourYAxis As ucrInputComboBox
     Friend WithEvents ucrInputFaceYAxis As ucrInputComboBox
     Friend WithEvents ucrInputFamilyYAxis As ucrInputComboBox
-    Friend WithEvents UcrCheck4 As ucrCheck
-    Friend WithEvents UcrCheck3 As ucrCheck
-    Friend WithEvents UcrCheck2 As ucrCheck
-    Friend WithEvents UcrCheck1 As ucrCheck
-    Friend WithEvents UcrCheck8 As ucrCheck
-    Friend WithEvents UcrCheck7 As ucrCheck
-    Friend WithEvents UcrCheck6 As ucrCheck
-    Friend WithEvents UcrCheck5 As ucrCheck
-    Friend WithEvents UcrCheck9 As ucrCheck
-    Friend WithEvents UcrCheck10 As ucrCheck
-    Friend WithEvents UcrCheck11 As ucrCheck
-    Friend WithEvents UcrCheck12 As ucrCheck
-    Friend WithEvents UcrCheck13 As ucrCheck
-    Friend WithEvents UcrCheck14 As ucrCheck
-    Friend WithEvents UcrCheck15 As ucrCheck
-    Friend WithEvents UcrCheck16 As ucrCheck
+    Friend WithEvents ucrChkHjustYAxis As ucrCheck
+    Friend WithEvents ucrChkVjustYAxis As ucrCheck
+    Friend WithEvents ucrChkLineHeightYAxis As ucrCheck
+    Friend WithEvents ucrChkSizeYAxis As ucrCheck
+    Friend WithEvents ucrChkColourYAxis As ucrCheck
+    Friend WithEvents ucrChkFaceYAxis As ucrCheck
+    Friend WithEvents ucrChkFamilyYAxis As ucrCheck
+    Friend WithEvents ucrChkAngleYAxis As ucrCheck
+    Friend WithEvents ucrChkColourRightYAxis As ucrCheck
+    Friend WithEvents ucrChkFaceRightYAxis As ucrCheck
+    Friend WithEvents ucrChkFamilyRightYAxis As ucrCheck
+    Friend WithEvents ucrChkAngleRightYAxis As ucrCheck
+    Friend WithEvents ucrChkHjustRightYAxis As ucrCheck
+    Friend WithEvents ucrChkVjustRightYAxis As ucrCheck
+    Friend WithEvents ucrChkLineHeightRightYAxis As ucrCheck
+    Friend WithEvents ucrChkSizeRightYAxis As ucrCheck
     Friend WithEvents ucrChkColour As ucrCheck
     Friend WithEvents ucrChkFace As ucrCheck
     Friend WithEvents ucrChkFamily As ucrCheck
@@ -1410,12 +1410,12 @@ Partial Class sdgThemes
     Friend WithEvents ucrChkSizeTickMarksXAxis As ucrCheck
     Friend WithEvents ucrChkLineTypeTickMarksXAxis As ucrCheck
     Friend WithEvents ucrChkColourTickMarksXAxis As ucrCheck
-    Friend WithEvents UcrCheck45 As ucrCheck
-    Friend WithEvents UcrCheck46 As ucrCheck
-    Friend WithEvents UcrCheck47 As ucrCheck
-    Friend WithEvents UcrCheck48 As ucrCheck
-    Friend WithEvents UcrCheck41 As ucrCheck
-    Friend WithEvents UcrCheck42 As ucrCheck
-    Friend WithEvents UcrCheck43 As ucrCheck
-    Friend WithEvents UcrCheck44 As ucrCheck
+    Friend WithEvents ucrChkLineEndTickLabelsYAxis As ucrCheck
+    Friend WithEvents ucrChkSizeTickLabelsYAxis As ucrCheck
+    Friend WithEvents ucrChkLineTypeTickLabelsYAxis As ucrCheck
+    Friend WithEvents ucrChkColourTickLabelsYAxis As ucrCheck
+    Friend WithEvents ucrChkLineEndTickMarksYAxis As ucrCheck
+    Friend WithEvents ucrChkSizeTickMarksYAxis As ucrCheck
+    Friend WithEvents ucrChkLineTypeTickMarksYAxis As ucrCheck
+    Friend WithEvents ucrChkColourTickMarksYAxis As ucrCheck
 End Class
