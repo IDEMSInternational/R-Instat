@@ -104,7 +104,12 @@ Public Class ucrCore
                         If clsTempRCode.ContainsParameter(clsTempRParameter.strArgumentName) Then
                             SetParameter(clsTempRCode.GetParameter(clsTempRParameter.strArgumentName), i)
                         Else
+                            'This causes an issue if this parameter is linked to another control
+                            'because .Clone breaks the link
                             SetParameter(GetParameter(i).Clone(), i)
+                            'TODO if we don't reset what should happen to the parameter value
+                            '     when it's not found in the function?
+                            '     Causes issues when parameter retains value from different dialog
                             If bReset Then
                                 If objDefaultState Is Nothing Then
                                     If objRDefault IsNot Nothing Then
@@ -114,6 +119,8 @@ Public Class ucrCore
                                     End If
                                     'Exit Sub
                                 End If
+                            Else
+                                ResetControlValue()
                             End If
                         End If
                     End If
@@ -393,7 +400,14 @@ Public Class ucrCore
     Public Sub AddParameterPresentCondition(objControlState As Object, strParamName As String, Optional bNewIsPositive As Boolean = True)
         Dim clsTempCond As New Condition
 
-        clsTempCond.SetParameterPresentName(strParamName, bNewIsPositive)
+        clsTempCond.SetParameterPresentNames(strParamName, bNewIsPositive)
+        AddCondition(objControlState, clsTempCond)
+    End Sub
+
+    Public Sub AddParameterPresentCondition(objControlState As Object, lstParamName As String(), Optional bNewIsPositive As Boolean = True)
+        Dim clsTempCond As New Condition
+
+        clsTempCond.SetParameterPresentNames(lstParamName.ToString(), bNewIsPositive)
         AddCondition(objControlState, clsTempCond)
     End Sub
 
