@@ -519,6 +519,12 @@ Public Class ucrCore
         End If
     End Sub
 
+    Public Sub SetParameterPosition(iPosition As Integer)
+        If clsParameter IsNot Nothing Then
+            clsParameter.Position = iPosition
+        End If
+    End Sub
+
     Private Property clsParameter As RParameter
         Get
             Return lstAllRParameters(0)
