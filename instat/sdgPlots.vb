@@ -182,10 +182,17 @@ Public Class sdgPlots
 
         'Corodiantes tab
         InitialiseTabs()
+
+        'temporary disabled until implemented
+        tbpLayers.Enabled = False
+        tbpCoordinates.Enabled = False
+        grpLegendTitle.Enabled = False
+        cmdAllOptions.Enabled = False
+        GroupBox1.Visible = False
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewYScalecontinuousFunction As RFunction = Nothing, Optional clsNewXScalecontinuousFunction As RFunction = Nothing, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsTitleFunction As RFunction = Nothing, Optional clsNewYLabsTitleFunction As RFunction = Nothing, Optional clsNewFacetFunction As RFunction = Nothing, Optional clsNewThemeParam As RParameter = Nothing, Optional strNewDataFrame As String = "", Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewYScalecontinuousFunction As RFunction = Nothing, Optional clsNewXScalecontinuousFunction As RFunction = Nothing, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsTitleFunction As RFunction = Nothing, Optional clsNewYLabTitleFunction As RFunction = Nothing, Optional clsNewFacetFunction As RFunction = Nothing, Optional clsNewThemeParam As RParameter = Nothing, Optional strNewDataFrame As String = "", Optional bReset As Boolean = False)
         Dim clsTempParam As RParameter
 
         bRCodeSet = False
@@ -198,7 +205,7 @@ Public Class sdgPlots
         End If
         clsBaseOperator = clsNewOperator
         clsXLabFunction = clsNewXLabsTitleFunction
-        clsYLabFunction = clsNewYLabsTitleFunction
+        clsYLabFunction = clsNewYLabTitleFunction
         clsXScalecontinuousFunction = clsNewXScalecontinuousFunction
         clsFacetFunction = clsNewFacetFunction
 
@@ -245,13 +252,7 @@ Public Class sdgPlots
 
         'axis controls
         ucrXAxis.SetRCodeForControl(True, clsNewXYlabTitleFunction:=clsXLabFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        'ucrYAxis.SetRCodeForControl(True, clsNewXYlabTitleFunction:=clsNewYLabTitleFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-
-        ' tbpXAxis.Enabled = False
-        tbpYAxis.Enabled = False
-        'tbpFacet.Enabled = False
-        tbpLayers.Enabled = False
-        tbpCoordinates.Enabled = False
+        ucrYAxis.SetRCodeForControl(False, clsNewXYlabTitleFunction:=clsYLabFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
         bRCodeSet = True
         AddRemoveLabs()
@@ -260,6 +261,7 @@ Public Class sdgPlots
         SecondFactorReceiverEnabled()
         If bReset Then
             ucr1stFactorReceiver.SetMeAsReceiver()
+            tbpPlotsOptions.SelectedIndex = 0
         End If
         SetFacetParameters()
     End Sub
@@ -382,7 +384,6 @@ Public Class sdgPlots
     End Sub
 
     Private Sub InitialiseTabs()
-        'Question: Tabs are set in turn as selected, using their index. Then the first tab is set as selected again. For some reason this initialises the tabs ?
         For i = 0 To tbpPlotsOptions.TabCount - 1
             tbpPlotsOptions.SelectedIndex = i
         Next
