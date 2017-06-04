@@ -17,7 +17,7 @@ Imports instat.Translations
 Public Class dlgViewObjects
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsViewObject As New RFunction
+    Private clsViewObjectFunction As New RFunction
 
     Private Sub dlgViewObjects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -33,10 +33,6 @@ Public Class dlgViewObjects
         TestOKEnabled()
     End Sub
 
-    Private Sub SetRCodeforControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-    End Sub
-
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 349
 
@@ -50,9 +46,10 @@ Public Class dlgViewObjects
         ucrReceiverSelectedObject.SetParameterIsString()
         ucrReceiverSelectedObject.Selector = ucrSelectorForViewObject
         ucrReceiverSelectedObject.SetMeAsReceiver()
+        ucrReceiverSelectedObject.strSelectorHeading = "Objects"
 
-        ucrPnlContentsToView.bAllowNonConditionValues = True
-        ''' rdo's
+        ucrPnlContentsToView.bAllowNonConditionValues = True ' temporary
+        ' rdo's
         'ucrPnlContentsToView.SetParameter(New RParameter("", 2))
         'ucrPnlContentsToView.AddRadioButton(rdoStructure, Chr(34) & "" & Chr(34))
         'ucrPnlContentsToView.AddRadioButton(rdoAllContents, Chr(34) & " " & Chr(34))
@@ -62,12 +59,18 @@ Public Class dlgViewObjects
     End Sub
 
     Private Sub SetDefaults()
-        clsViewObject = New RFunction
+        clsViewObjectFunction = New RFunction
+
         ucrSelectorForViewObject.Reset()
         rdoViewGraph.Checked = True
-        SetICallType()
-        clsViewObject.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_objects")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsViewObject)
+        SetiCallType()
+
+        clsViewObjectFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_objects")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsViewObjectFunction)
+    End Sub
+
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -84,7 +87,7 @@ Public Class dlgViewObjects
         TestOKEnabled()
     End Sub
 
-    Private Sub SetICallType()
+    Private Sub SetiCallType()
         If rdoViewGraph.Checked Then
             ucrBase.clsRsyntax.iCallType = 0
         Else
@@ -92,11 +95,11 @@ Public Class dlgViewObjects
         End If
     End Sub
 
-    Private Sub ucrReceiverSelectedObject_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedObject.ControlContentsChanged
-        TestOKEnabled()
+    Private Sub ucrPnlContentsToReview_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlContentsToView.ControlContentsChanged
+        SetiCallType()
     End Sub
 
-    Private Sub ucrPnlContentsToReview_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlContentsToView.ControlContentsChanged
-        SetICallType()
+    Private Sub ucrReceiverSelectedObject_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedObject.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class
