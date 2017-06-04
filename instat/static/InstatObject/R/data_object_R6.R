@@ -302,12 +302,11 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
       if(is.null(col_attributes)) col_attributes <- list()
       col_attributes[[data_type_label]] <- class(col)
       for(att_name in names(col_attributes)) {
-        #TODO Think how to do this more generally and cover all cases
         if(att_name == labels_label) {
-          num_labels <- length(col_attributes[[att_name]])
-          max_labels <- min(max_labels_display, num_labels)
-          col_attributes[[att_name]] <- paste(names(col_attributes[[att_name]])[1:max_labels], "=", col_attributes[[att_name]][1:max_labels], collapse = ", ")
-          if(num_labels > max_labels) col_attributes[[att_name]] <- paste0(col_attributes[[att_name]], "...")
+          num_labels <- length(col_attributes[[att_name]])		
+          max_labels <- min(max_labels_display, num_labels)		
+          col_attributes[[att_name]] <- paste(names(col_attributes[[att_name]])[1:max_labels], "=", col_attributes[[att_name]][1:max_labels], collapse = ", ")		
+          if(num_labels > max_labels) col_attributes[[att_name]] <- paste0(col_attributes[[att_name]], "...")		
         }
         else if(is.list(col_attributes[[att_name]]) || length(col_attributes[[att_name]]) > 1) col_attributes[[att_name]] <- paste(unlist(col_attributes[[att_name]]), collapse = ",")
         # TODO Possible alternative to include names of list
@@ -1489,8 +1488,9 @@ data_object$set("public", "get_objects", function(object_name, type = "", force_
 data_object$set("public", "get_object_names", function(type = "", as_list = FALSE, excluded_items = c()) {
   if(type == "") out = names(private$objects)
   else {
-    if(type == model_label) out = names(private$objects)[!sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob") %in% class(x)))]
+    if(type == model_label) out = names(private$objects)[!sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "htmlTable") %in% class(x)))]
     else if(type == graph_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob") %in% class(x)))]
+    else if(type == table_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("htmlTable") %in% class(x)))]
     else stop("type: ", type, " not recognised")
   }
   if(length(excluded_items) > 0) {
@@ -1889,8 +1889,9 @@ data_object$set("public","set_contrasts_of_factor", function(col_name, new_contr
   contrasts(private$data[[col_name]]) <- new_contrasts
 }
 )
+
 #This method gets a date column and extracts part of the information such as year, month, week, weekday etc(depending on which parameters are set) and creates their respective new column(s)
-data_object$set("public","split_date", function(col_name = "", week = FALSE, month_val = FALSE, month_abbr = FALSE, month_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE, year = FALSE, day = FALSE, day_in_month = FALSE, day_in_year = FALSE, leap_year = FALSE, day_in_year_366 = FALSE, dekade = FALSE, pentad = FALSE) {
+data_object$set("public","split_date", function(col_name = "", week = FALSE, month_val = FALSE, month_abbr = FALSE, month_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE, year = FALSE, day = FALSE, day_in_month = FALSE, day_in_year = FALSE, leap_year = FALSE, day_in_year_366 = FALSE, dekade = FALSE, pentad = FALSE, shift_day = FALSE, shift_year = FALSE, shift_start_day_in_month = 1, shift_start_month = 8) {
   col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
   if(!is.Date(col_data)) stop("This column must be a date or time!")
   if(day) {
@@ -1970,6 +1971,35 @@ data_object$set("public","split_date", function(col_name = "", week = FALSE, mon
 	  col_name <- next_default_item(prefix = "leap_year", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = leap_year_vector)
 	}
+  if(shift_day || shift_year) {
+    if(shift_start_month %% 1 != 0 || shift_start_month < 1 || shift_start_month > 12) stop("shift_start_month must be an integer between 1 and 12. ", shift_start_month, " is invalid.")
+    # TODO better checks on day in relation to month selected
+    if(shift_start_day_in_month %% 1 != 0 || shift_start_day_in_month < 1 || shift_start_day_in_month > 31) stop("shift_start_day_in_month must be an integer between 1 and 31. ", shift_start_day_in_month, " is invalid.")
+    if(shift_start_day_in_month == 1 && shift_start_month == 1) stop("shift year must start after 1 Jan.")
+    # using a leap year as year to ensure consistent day of year across years
+    shift_start_day <- yday(as.Date(paste("2000", shift_start_month, shift_start_day_in_month), format = "%Y %m %d"))
+    if(is.na(shift_start_day)) stop("Could not identify starting day for shift year with shift_start_month = ", shift_start_month, " and shift_start_day = ", shift_start_day_in_month)
+    if(shift_start_day %% 1 != 0 || shift_start_day < 2 || shift_start_day > 366) stop("shift_start_day must be an integer between 2 and 366")
+    doy_col <- as.integer(yday_366(col_data))
+    year_col <- year(col_data)
+    temp_shift_day <- doy_col - shift_start_day + 1
+    temp_shift_year <- year_col
+    temp_shift_year[temp_shift_day < 1] <- paste(year_col[temp_shift_day < 1] - 1, year_col[temp_shift_day < 1], sep = "-")
+    temp_shift_year[temp_shift_day > 0] <- paste(year_col[temp_shift_day > 0], year_col[temp_shift_day > 0] + 1, sep = "-")
+    temp_shift_year <- factor(temp_shift_year)
+    temp_shift_day[temp_shift_day < 1] <- temp_shift_day[temp_shift_day < 1] + 366
+    shift_year_labs <- c(min(year_col) -1, sort(unique(year_col)))
+    names(shift_year_labs) <- paste(shift_year_labs, shift_year_labs + 1, sep = "-")
+    if(shift_day) {
+      col_name <- next_default_item(prefix = paste0("shift_", shift_start_day), existing_names = self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name = col_name, col_data = temp_shift_day)
+    }
+    if(shift_year) {
+      col_name <- next_default_item(prefix = "shift_year", existing_names = self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name = col_name, col_data = temp_shift_year)
+      self$append_to_variables_metadata(col_names = col_name, property = labels_label, new_val = shift_year_labs)
+    }
+  }
 }
 )
 
@@ -2040,6 +2070,7 @@ data_object$set("public","set_climatic_types", function(types) {
 )
 
 #Method for creating inventory plot
+
 data_object$set("public","make_inventory_plot", function(date_col, station_col = NULL, year_col = NULL, doy_col = NULL, element_cols = NULL, add_to_data = FALSE, year_doy_plot = FALSE, coord_flip = FALSE, facet_by = NULL, graph_title = "Inventory Plot") {
   if(!self$is_climatic_data()) stop("Data is not defined as climatic.")
   if(missing(date_col)) stop("Date columns must be specified.")
