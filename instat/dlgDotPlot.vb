@@ -24,6 +24,12 @@ Public Class dlgDotPlot
     'bFirstload is used to determine whether the dlg still needs setup or not.
     Private bReset As Boolean = True
     Private bFirstLoad As Boolean = True
+    Private clsLabsFunction As New RFunction
+    Private clsXlabsFunction As New RFunction
+    Private clsYlabFunction As New RFunction
+    Private clsXScalecontinuousFunction As New RFunction
+    Private clsRFacetFunction As New RFunction
+    Private bResetSubdialog As Boolean = True
     'strBinAxis stores the name of the axis along which the bins are made. Then strOtherAxis is the other axis (x or y)
     Private strBinAxis As String
     Private strOtherAxis As String
@@ -113,7 +119,7 @@ Public Class dlgDotPlot
 
         ucrDotPlotSelector.Reset()
         ucrSaveDotPlot.Reset()
-        sdgPlots.Reset()
+        bResetSubdialog = True
 
         'I am not sure we need this
         bEditAesFunction = True
@@ -133,6 +139,13 @@ Public Class dlgDotPlot
         clsRDotplotGeomFunction.SetPackageName("ggplot2")
         clsRDotplotGeomFunction.SetRCommand("geom_dotplot")
         clsRDotplotGeomFunction.AddParameter("binaxis", Chr(34) & "x" & Chr(34))
+
+        clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultTheme.Clone())
+        clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
+        clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
+        clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
+        clsRFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
+
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrDotPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
 
@@ -178,11 +191,9 @@ Public Class dlgDotPlot
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        'This sub handles the call of PLot Options. It opens sdgPlots. Need to work on the link.
-        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
-        sdgPlots.SetGgplotFunction(clsRggPlotFunction)
-        sdgPlots.SetDataFrame(strNewDataFrame:=ucrDotPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        sdgPlots.SetRCode(clsBaseOperator, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, strNewDataFrame:=ucrDotPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
+        bResetSubdialog = False
     End Sub
 
     Private Sub AllControlChanged() Handles ucrVariablesAsFactorDotPlot.ControlContentsChanged, ucrSaveDotPlot.ControlContentsChanged

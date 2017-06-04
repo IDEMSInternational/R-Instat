@@ -544,7 +544,7 @@ Partial Class sdgPlots
         Me.lblWarning.Name = "lblWarning"
         Me.lblWarning.Size = New System.Drawing.Size(213, 20)
         Me.lblWarning.TabIndex = 0
-        Me.lblWarning.Text = "This is yet to be implemented"
+        Me.lblWarning.Text = "Not yet implemented"
         '
         'ucrBaseSubdialog
         '
