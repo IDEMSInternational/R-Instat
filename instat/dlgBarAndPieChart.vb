@@ -28,7 +28,9 @@ Public Class dlgBarAndPieChart
     Private clsYlabFunction As New RFunction
     Private clsXScalecontinuousFunction As New RFunction
     Private clsRFacetFunction As New RFunction
-
+    Private clsThemeFuction As New RFunction
+    Private dctThemeTextFunctions As New Dictionary(Of String, RFunction)
+    Private dctThemeLineFunctions As New Dictionary(Of String, RFunction)
     Private bReset As Boolean = True
     Private bFirstLoad As Boolean = True
     Private bResetSubdialog As Boolean = True
@@ -163,7 +165,9 @@ Public Class dlgBarAndPieChart
         clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
         clsRFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
-
+        clsThemeFuction = GgplotDefaults.clsDefaultThemeFunction.Clone
+        dctThemeTextFunctions = GgplotDefaults.dctThemeTextFunctions
+        dctThemeLineFunctions = GgplotDefaults.dctThemeLineFunctions
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
     End Sub
@@ -197,7 +201,7 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetRCode(clsBaseOperator, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, strNewDataFrame:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bReset:=bResetSubdialog)
+        sdgPlots.SetRCode(clsNewOperator:=clsBaseOperator, clsNewThemeFunction:=clsThemeFuction, dctNewThemeLineFunctions:=dctThemeLineFunctions, dctNewThemeTextFunctions:=dctThemeTextFunctions, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, strNewDataFrame:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bReset:=bResetSubdialog)
         'sdgPlots.SetDataFrame(strNewDataFrame:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         sdgPlots.ShowDialog()
         bResetSubdialog = False

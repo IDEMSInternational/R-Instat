@@ -13,7 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports instat
+
 Imports instat.Translations
 
 Public Class sdgThemes
@@ -28,36 +28,6 @@ Public Class sdgThemes
     End Sub
 
     Public Sub InitialiseControls()
-        'X-Axis tab
-        Dim dctucrInputColour As New Dictionary(Of String, String)
-        Dim dctucrInputUnits As New Dictionary(Of String, String)
-        Dim dctucrInputColourTopAxis As New Dictionary(Of String, String)
-        Dim dctucrInputColourSegment As New Dictionary(Of String, String)
-        Dim dctucrInputFace As New Dictionary(Of String, String)
-        Dim dctucrInputFaceTopAxis As New Dictionary(Of String, String)
-        Dim dctucrInputFamily As New Dictionary(Of String, String)
-        Dim dctucrInputFamilyTopAxis As New Dictionary(Of String, String)
-        Dim dctucrInputLineType As New Dictionary(Of String, String)
-        Dim dctucrInputLineTypeXTickMarks As New Dictionary(Of String, String)
-        Dim dctucrInputColourXTickMarks As New Dictionary(Of String, String)
-        Dim dctucrInputLineEnd As New Dictionary(Of String, String)
-        Dim dctucrInputLineEndXTickMarks As New Dictionary(Of String, String)
-
-        'Y -Axis tab
-        Dim dctucrInputColourYAxis As New Dictionary(Of String, String)
-        Dim dctucrInputColourTopYAxis As New Dictionary(Of String, String)
-        'Dim dctucrInputColour As New Dictionary(Of String, String)
-        Dim dctucrInputFaceYAxis As New Dictionary(Of String, String)
-        Dim dctucrInputFaceTopYAxis As New Dictionary(Of String, String)
-        Dim dctucrInputFamilyYAxis As New Dictionary(Of String, String)
-        Dim dctucrInputFamilyTopYAxis As New Dictionary(Of String, String)
-        Dim dctucrInputLineTypeTickLabelsYAxis As New Dictionary(Of String, String)
-        Dim dctucrInputLineEndTickLabelsYAxis As New Dictionary(Of String, String)
-        Dim dctucrInputColourTickMarksYAxis As New Dictionary(Of String, String)
-        'Dim dctucrInputColourTickMarksYAxis As New Dictionary(Of String, String)
-        Dim dctucrInputColourTickLabelsYAxis As New Dictionary(Of String, String)
-        Dim dctucrInputLineTypeTickMarksYAxis As New Dictionary(Of String, String)
-        Dim dctucrInputLineEndTickMarksYAxis As New Dictionary(Of String, String)
 
         'X axis Label
         ucrChkSize.SetText("Size")
@@ -78,22 +48,12 @@ Public Class sdgThemes
 
         ucrChkFace.SetText("Face")
         ucrInputFace.SetParameter(New RParameter("face"))
-        dctucrInputFace.Add("Plain", Chr(34) & "plain" & Chr(34))
-        dctucrInputFace.Add("Bold", Chr(34) & "bold" & Chr(34))
-        dctucrInputFace.Add("Italic", Chr(34) & "italic" & Chr(34))
-        dctucrInputFace.Add("Bold italic", Chr(34) & "bold.italic" & Chr(34))
-        ucrInputFace.SetItems(dctucrInputFace)
+        ucrInputFace.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctFontFace))
         ucrInputFace.SetRDefault(Chr(34) & "plain" & Chr(34))
 
         ucrChkColour.SetText("Colour")
         ucrInputColour.SetParameter(New RParameter("colour"))
-        dctucrInputColour.Add("Black", Chr(34) & "black" & Chr(34))
-        dctucrInputColour.Add("Red", Chr(34) & "red" & Chr(34))
-        dctucrInputColour.Add("Blue", Chr(34) & "blue" & Chr(34))
-        dctucrInputColour.Add("Grey", Chr(34) & "grey" & Chr(34))
-        dctucrInputColour.Add("Yellow", Chr(34) & "yellow" & Chr(34))
-        dctucrInputColour.Add("Yellow-Green", Chr(34) & "yellowgreen" & Chr(34))
-        ucrInputColour.SetItems(dctucrInputColour)
+        ucrInputColour.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
         ucrInputColour.SetRDefault(Chr(34) & "black" & Chr(34))
 
         ucrChkFamily.SetText("Family")
@@ -109,38 +69,17 @@ Public Class sdgThemes
 
         ucrChkLineTypeTickMarksXAxis.SetText("Line Type")
         ucrInputLineTypeTickMarks.SetParameter(New RParameter("linetype"))
-        dctucrInputLineType.Add("Blank", Chr(34) & "blank" & Chr(34))
-        dctucrInputLineType.Add("Solid", Chr(34) & "solid" & Chr(34))
-        dctucrInputLineType.Add("Dashed", Chr(34) & "dashed" & Chr(34))
-        dctucrInputLineType.Add("Dotted", Chr(34) & "dotted" & Chr(34))
-        dctucrInputLineType.Add("Dot-dash", Chr(34) & "dotdash" & Chr(34))
-        dctucrInputLineType.Add("Long-dash", Chr(34) & "longdash" & Chr(34))
-        dctucrInputLineType.Add("Two-Dash", Chr(34) & "twodash" & Chr(34))
-        dctucrInputLineType.Add("1F", Chr(34) & "1F" & Chr(34))
-        dctucrInputLineType.Add("F1", Chr(34) & "F1" & Chr(34))
-        dctucrInputLineType.Add("4C88C488", Chr(34) & "4C88C488" & Chr(34))
-        dctucrInputLineType.Add("12345678", Chr(34) & "12345678" & Chr(34))
-        ucrInputLineTypeTickMarks.SetItems(dctucrInputLineType)
+        ucrInputLineTypeTickMarks.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctLineType))
         ucrInputLineTypeTickMarks.SetRDefault(Chr(34) & "blank" & Chr(34))
 
         ucrChkColourTickMarksXAxis.SetText("Colour")
         ucrInputColourTickMarks.SetParameter(New RParameter("colour"))
-        dctucrInputColourSegment.Add("Black", Chr(34) & "black" & Chr(34))
-        dctucrInputColourSegment.Add("Red", Chr(34) & "red" & Chr(34))
-        dctucrInputColourSegment.Add("Blue", Chr(34) & "blue" & Chr(34))
-        dctucrInputColourSegment.Add("Grey", Chr(34) & "grey" & Chr(34))
-        dctucrInputColourSegment.Add("Yellow", Chr(34) & "yellow" & Chr(34))
-        dctucrInputColourSegment.Add("Yellow-Green", Chr(34) & "yellowgreen" & Chr(34))
-        ucrInputColourTickMarks.SetItems(dctucrInputColourSegment)
+        ucrInputColourTickMarks.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
         ucrInputColourTickMarks.SetRDefault(Chr(34) & "black" & Chr(34))
 
         ucrChkLineEndTickMarksXAxis.SetText("Line End")
         ucrInputLineEndTickMarks.SetParameter(New RParameter("lineend"))
-        '  dctucrInputLineEnd.Add("NULL", Chr(34) & "NULL" & Chr(34))
-        dctucrInputLineEnd.Add("round", Chr(34) & "round" & Chr(34))
-        dctucrInputLineEnd.Add("butt", Chr(34) & "butt" & Chr(34))
-        dctucrInputLineEnd.Add("square", Chr(34) & "square" & Chr(34))
-        ucrInputLineEndTickMarks.SetItems(dctucrInputLineEnd)
+        ucrInputLineEndTickMarks.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctLineEnd))
         ucrInputLineEndTickMarks.SetRDefault(Chr(34) & "square" & Chr(34))
 
         'X axis Label Top  Axis
@@ -163,22 +102,12 @@ Public Class sdgThemes
 
         ucrChkFaceTopXAxis.SetText("Face")
         ucrInputFaceTopAxis.SetParameter(New RParameter("face"))
-        dctucrInputFaceTopAxis.Add("Plain", Chr(34) & "plain" & Chr(34))
-        dctucrInputFaceTopAxis.Add("Bold", Chr(34) & "bold" & Chr(34))
-        dctucrInputFaceTopAxis.Add("Italic", Chr(34) & "italic" & Chr(34))
-        dctucrInputFaceTopAxis.Add("Bold italic", Chr(34) & "bold.italic" & Chr(34))
-        ucrInputFaceTopAxis.SetItems(dctucrInputFaceTopAxis)
+        ucrInputFaceTopAxis.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctFontFace))
         ucrInputFaceTopAxis.SetRDefault(Chr(34) & "plain" & Chr(34))
 
         ucrChkColourTopXAxis.SetText("colour")
         ucrInputColourTopAxis.SetParameter(New RParameter("colour"))
-        dctucrInputColourTopAxis.Add("Black", Chr(34) & "black" & Chr(34))
-        dctucrInputColourTopAxis.Add("Red", Chr(34) & "red" & Chr(34))
-        dctucrInputColourTopAxis.Add("Blue", Chr(34) & "blue" & Chr(34))
-        dctucrInputColourTopAxis.Add("Grey", Chr(34) & "grey" & Chr(34))
-        dctucrInputColourTopAxis.Add("Yellow", Chr(34) & "yellow" & Chr(34))
-        dctucrInputColourTopAxis.Add("Yellow-Green", Chr(34) & "yellowgreen" & Chr(34))
-        ucrInputColourTopAxis.SetItems(dctucrInputColourTopAxis)
+        ucrInputColourTopAxis.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
         ucrInputColourTopAxis.SetRDefault(Chr(34) & "black" & Chr(34))
 
         ucrChkFamilyTopXAxis.SetText("Family")
@@ -193,38 +122,17 @@ Public Class sdgThemes
 
         ucrChkLineTypeTickLabelsXAxis.SetText("Line Type")
         ucrInputLineTypeTickLabelsXAxis.SetParameter(New RParameter("linetype"))
-        dctucrInputLineTypeXTickMarks.Add("Blank", Chr(34) & "blank" & Chr(34))
-        dctucrInputLineTypeXTickMarks.Add("Solid", Chr(34) & "solid" & Chr(34))
-        dctucrInputLineTypeXTickMarks.Add("Dashed", Chr(34) & "dashed" & Chr(34))
-        dctucrInputLineTypeXTickMarks.Add("Dotted", Chr(34) & "dotted" & Chr(34))
-        dctucrInputLineTypeXTickMarks.Add("Dot-dash", Chr(34) & "dotdash" & Chr(34))
-        dctucrInputLineTypeXTickMarks.Add("Long-dash", Chr(34) & "longdash" & Chr(34))
-        dctucrInputLineTypeXTickMarks.Add("Two-Dash", Chr(34) & "twodash" & Chr(34))
-        dctucrInputLineTypeXTickMarks.Add("1F", Chr(34) & "1F" & Chr(34))
-        dctucrInputLineTypeXTickMarks.Add("F1", Chr(34) & "F1" & Chr(34))
-        dctucrInputLineTypeXTickMarks.Add("4C88C488", Chr(34) & "4C88C488" & Chr(34))
-        dctucrInputLineTypeXTickMarks.Add("12345678", Chr(34) & "12345678" & Chr(34))
-        ucrInputLineTypeTickLabelsXAxis.SetItems(dctucrInputLineTypeXTickMarks)
+        ucrInputLineTypeTickLabelsXAxis.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctLineType))
         ucrInputLineTypeTickLabelsXAxis.SetRDefault(Chr(34) & "blank" & Chr(34))
 
         ucrChkColourTickLabelsXAxis.SetText("Colour")
         ucrInputColourTickLabelsXAxis.SetParameter(New RParameter("colour"))
-        dctucrInputColourXTickMarks.Add("Black", Chr(34) & "black" & Chr(34))
-        dctucrInputColourXTickMarks.Add("Red", Chr(34) & "red" & Chr(34))
-        dctucrInputColourXTickMarks.Add("Blue", Chr(34) & "blue" & Chr(34))
-        dctucrInputColourXTickMarks.Add("Grey", Chr(34) & "grey" & Chr(34))
-        dctucrInputColourXTickMarks.Add("Yellow", Chr(34) & "yellow" & Chr(34))
-        dctucrInputColourXTickMarks.Add("Yellow-Green", Chr(34) & "yellowgreen" & Chr(34))
-        ucrInputColourTickLabelsXAxis.SetItems(dctucrInputColourXTickMarks)
+        ucrInputColourTickLabelsXAxis.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
         ucrInputColourTickLabelsXAxis.SetRDefault(Chr(34) & "black" & Chr(34))
 
         ucrChkLineEndTickLabelsXAxis.SetText("Line End")
         ucrInputLineEndTickLabelsXAxis.SetParameter(New RParameter("lineend"))
-        'dctucrInputLineEndXTickMarks.Add("None", Chr(34) & "NULL" & Chr(34))
-        dctucrInputLineEndXTickMarks.Add("round", Chr(34) & "round" & Chr(34))
-        dctucrInputLineEndXTickMarks.Add("butt", Chr(34) & "butt" & Chr(34))
-        dctucrInputLineEndXTickMarks.Add("square", Chr(34) & "square" & Chr(34))
-        ucrInputLineEndTickLabelsXAxis.SetItems(dctucrInputLineEndXTickMarks)
+        ucrInputLineEndTickLabelsXAxis.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
         ucrInputLineEndTickLabelsXAxis.SetRDefault(Chr(34) & "square" & Chr(34))
 
         'Linking
@@ -275,22 +183,12 @@ Public Class sdgThemes
 
         ucrChkFaceYAxis.SetText("Face")
         ucrInputFaceYAxis.SetParameter(New RParameter("face"))
-        dctucrInputFaceYAxis.Add("Plain", Chr(34) & "plain" & Chr(34))
-        dctucrInputFaceYAxis.Add("Bold", Chr(34) & "bold" & Chr(34))
-        dctucrInputFaceYAxis.Add("Italic", Chr(34) & "italic" & Chr(34))
-        dctucrInputFaceYAxis.Add("Bold italic", Chr(34) & "bold.italic" & Chr(34))
-        ucrInputFaceYAxis.SetItems(dctucrInputFaceYAxis)
+        ucrInputFaceYAxis.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctFontFace))
         ucrInputFaceYAxis.SetRDefault(Chr(34) & "plain" & Chr(34))
 
         ucrChkColourYAxis.SetText("Colour")
         ucrInputColourYAxis.SetParameter(New RParameter("colour"))
-        dctucrInputColourYAxis.Add("Black", Chr(34) & "black" & Chr(34))
-        dctucrInputColourYAxis.Add("Red", Chr(34) & "red" & Chr(34))
-        dctucrInputColourYAxis.Add("Blue", Chr(34) & "blue" & Chr(34))
-        dctucrInputColourYAxis.Add("Grey", Chr(34) & "grey" & Chr(34))
-        dctucrInputColourYAxis.Add("Yellow", Chr(34) & "yellow" & Chr(34))
-        dctucrInputColourYAxis.Add("Yellow-Green", Chr(34) & "yellowgreen" & Chr(34))
-        ucrInputColourYAxis.SetItems(dctucrInputColourYAxis)
+        ucrInputColourYAxis.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
         ucrInputColourYAxis.SetRDefault(Chr(34) & "black" & Chr(34))
 
         ucrChkFamilyYAxis.SetText("Family")
@@ -305,38 +203,18 @@ Public Class sdgThemes
 
         ucrChkLineTypeTickLabelsYAxis.SetText("Line Type")
         ucrInputLineTypeTickLabelsYAxis.SetParameter(New RParameter("linetype"))
-        dctucrInputLineTypeTickLabelsYAxis.Add("Blank", Chr(34) & "blank" & Chr(34))
-        dctucrInputLineTypeTickLabelsYAxis.Add("Solid", Chr(34) & "solid" & Chr(34))
-        dctucrInputLineTypeTickLabelsYAxis.Add("Dashed", Chr(34) & "dashed" & Chr(34))
-        dctucrInputLineTypeTickLabelsYAxis.Add("Dotted", Chr(34) & "dotted" & Chr(34))
-        dctucrInputLineTypeTickLabelsYAxis.Add("Dot-dash", Chr(34) & "dotdash" & Chr(34))
-        dctucrInputLineTypeTickLabelsYAxis.Add("Long-dash", Chr(34) & "longdash" & Chr(34))
-        dctucrInputLineTypeTickLabelsYAxis.Add("Two-Dash", Chr(34) & "twodash" & Chr(34))
-        dctucrInputLineTypeTickLabelsYAxis.Add("1F", Chr(34) & "1F" & Chr(34))
-        dctucrInputLineTypeTickLabelsYAxis.Add("F1", Chr(34) & "F1" & Chr(34))
-        dctucrInputLineTypeTickLabelsYAxis.Add("4C88C488", Chr(34) & "4C88C488" & Chr(34))
-        dctucrInputLineTypeTickLabelsYAxis.Add("12345678", Chr(34) & "12345678" & Chr(34))
-        ucrInputLineTypeTickLabelsYAxis.SetItems(dctucrInputLineTypeTickLabelsYAxis)
+
+        ucrInputLineTypeTickLabelsYAxis.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctLineType))
         ucrInputLineTypeTickLabelsYAxis.SetRDefault(Chr(34) & "blank" & Chr(34))
 
         ucrChkColourTickMarksYAxis.SetText("Colour")
         ucrInputColourTickMarksYAxis.SetParameter(New RParameter("colour"))
-        dctucrInputColourTickMarksYAxis.Add("Black", Chr(34) & "black" & Chr(34))
-        dctucrInputColourTickMarksYAxis.Add("Red", Chr(34) & "red" & Chr(34))
-        dctucrInputColourTickMarksYAxis.Add("Blue", Chr(34) & "blue" & Chr(34))
-        dctucrInputColourTickMarksYAxis.Add("Grey", Chr(34) & "grey" & Chr(34))
-        dctucrInputColourTickMarksYAxis.Add("Yellow", Chr(34) & "yellow" & Chr(34))
-        dctucrInputColourTickMarksYAxis.Add("Yellow-Green", Chr(34) & "yellowgreen" & Chr(34))
-        ucrInputColourTickMarksYAxis.SetItems(dctucrInputColourTickMarksYAxis)
+        ucrInputColourTickMarksYAxis.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
         ucrInputColourTickMarksYAxis.SetRDefault(Chr(34) & "black" & Chr(34))
 
         ucrChkLineEndTickLabelsYAxis.SetText("Line End")
         ucrInputLineEndTickLabelsYAxis.SetParameter(New RParameter("lineend"))
-        '  dctucrInputLineEnd.Add("NULL", Chr(34) & "NULL" & Chr(34))
-        dctucrInputLineEndTickLabelsYAxis.Add("round", Chr(34) & "round" & Chr(34))
-        dctucrInputLineEndTickLabelsYAxis.Add("butt", Chr(34) & "butt" & Chr(34))
-        dctucrInputLineEndTickLabelsYAxis.Add("square", Chr(34) & "square" & Chr(34))
-        ucrInputLineEndTickLabelsYAxis.SetItems(dctucrInputLineEndTickLabelsYAxis)
+        ucrInputLineEndTickLabelsYAxis.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctLineEnd))
         ucrInputLineEndTickLabelsYAxis.SetRDefault(Chr(34) & "square" & Chr(34))
 
         'Y axis Label Top  Axis
@@ -359,22 +237,12 @@ Public Class sdgThemes
 
         ucrChkFaceRightYAxis.SetText("Face")
         ucrInputFaceRightYAxis.SetParameter(New RParameter("face"))
-        dctucrInputFaceTopYAxis.Add("Plain", Chr(34) & "plain" & Chr(34))
-        dctucrInputFaceTopYAxis.Add("Bold", Chr(34) & "bold" & Chr(34))
-        dctucrInputFaceTopYAxis.Add("Italic", Chr(34) & "italic" & Chr(34))
-        dctucrInputFaceTopYAxis.Add("Bold italic", Chr(34) & "bold.italic" & Chr(34))
-        ucrInputFaceRightYAxis.SetItems(dctucrInputFaceTopAxis)
+        ucrInputFaceRightYAxis.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctFontFace))
         ucrInputFaceRightYAxis.SetRDefault(Chr(34) & "plain" & Chr(34))
 
         ucrChkColourRightYAxis.SetText("Colour")
         ucrInputColourRightYAxis.SetParameter(New RParameter("colour"))
-        dctucrInputColourTopYAxis.Add("Black", Chr(34) & "black" & Chr(34))
-        dctucrInputColourTopYAxis.Add("Red", Chr(34) & "red" & Chr(34))
-        dctucrInputColourTopYAxis.Add("Blue", Chr(34) & "blue" & Chr(34))
-        dctucrInputColourTopYAxis.Add("Grey", Chr(34) & "grey" & Chr(34))
-        dctucrInputColourTopYAxis.Add("Yellow", Chr(34) & "yellow" & Chr(34))
-        dctucrInputColourTopYAxis.Add("Yellow-Green", Chr(34) & "yellowgreen" & Chr(34))
-        ucrInputColourRightYAxis.SetItems(dctucrInputColourTopYAxis)
+        ucrInputColourRightYAxis.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
         ucrInputColourRightYAxis.SetRDefault(Chr(34) & "black" & Chr(34))
 
         ucrChkFamilyRightYAxis.SetText("Family")
@@ -393,62 +261,23 @@ Public Class sdgThemes
 
         ucrChkLineTypeTickMarksYAxis.SetText("Line Type")
         ucrInputLineTypeTickMarksYAxis.SetParameter(New RParameter("linetype"))
-        dctucrInputLineTypeTickMarksYAxis.Add("Blank", Chr(34) & "blank" & Chr(34))
-        dctucrInputLineTypeTickMarksYAxis.Add("Solid", Chr(34) & "solid" & Chr(34))
-        dctucrInputLineTypeTickMarksYAxis.Add("Dashed", Chr(34) & "dashed" & Chr(34))
-        dctucrInputLineTypeTickMarksYAxis.Add("Dotted", Chr(34) & "dotted" & Chr(34))
-        dctucrInputLineTypeTickMarksYAxis.Add("Dot-dash", Chr(34) & "dotdash" & Chr(34))
-        dctucrInputLineTypeTickMarksYAxis.Add("Long-dash", Chr(34) & "longdash" & Chr(34))
-        dctucrInputLineTypeTickMarksYAxis.Add("Two-Dash", Chr(34) & "twodash" & Chr(34))
-        dctucrInputLineTypeTickMarksYAxis.Add("1F", Chr(34) & "1F" & Chr(34))
-        dctucrInputLineTypeTickMarksYAxis.Add("F1", Chr(34) & "F1" & Chr(34))
-        dctucrInputLineTypeTickMarksYAxis.Add("4C88C488", Chr(34) & "4C88C488" & Chr(34))
-        dctucrInputLineTypeTickMarksYAxis.Add("12345678", Chr(34) & "12345678" & Chr(34))
-        ucrInputLineTypeTickMarksYAxis.SetItems(dctucrInputLineTypeTickMarksYAxis)
+        ucrInputLineTypeTickMarksYAxis.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctLineType))
         ucrInputLineTypeTickMarksYAxis.SetRDefault(Chr(34) & "blank" & Chr(34))
 
         ucrChkColourTickLabelsYAxis.SetText("Colour")
         ucrInputColourTickLabelsYAxis.SetParameter(New RParameter("colour"))
-        dctucrInputColourTickLabelsYAxis.Add("Black", Chr(34) & "black" & Chr(34))
-        dctucrInputColourTickLabelsYAxis.Add("Red", Chr(34) & "red" & Chr(34))
-        dctucrInputColourTickLabelsYAxis.Add("Blue", Chr(34) & "blue" & Chr(34))
-        dctucrInputColourTickLabelsYAxis.Add("Grey", Chr(34) & "grey" & Chr(34))
-        dctucrInputColourTickLabelsYAxis.Add("Yellow", Chr(34) & "yellow" & Chr(34))
-        dctucrInputColourTickLabelsYAxis.Add("Yellow-Green", Chr(34) & "yellowgreen" & Chr(34))
-        ucrInputColourTickLabelsYAxis.SetItems(dctucrInputColourTickMarksYAxis)
+        ucrInputColourTickLabelsYAxis.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
         ucrInputColourTickLabelsYAxis.SetRDefault(Chr(34) & "black" & Chr(34))
 
         ucrChkLineEndTickMarksYAxis.SetText("Line End")
         ucrInputLineEndTickMarksYAxis.SetParameter(New RParameter("lineend"))
-        'dctucrInputLineEndXTickMarks.Add("None", Chr(34) & "NULL" & Chr(34))
-        dctucrInputLineEndTickMarksYAxis.Add("round", Chr(34) & "round" & Chr(34))
-        dctucrInputLineEndTickMarksYAxis.Add("butt", Chr(34) & "butt" & Chr(34))
-        dctucrInputLineEndTickMarksYAxis.Add("square", Chr(34) & "square" & Chr(34))
-        ucrInputLineEndTickMarksYAxis.SetItems(dctucrInputLineEndTickMarksYAxis)
+        ucrInputLineEndTickMarksYAxis.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctLineEnd))
         ucrInputLineEndTickMarksYAxis.SetRDefault(Chr(34) & "square" & Chr(34))
 
         'Units
         ucrChkUnits.SetText("Tick length")
         ucrInputTickUnits.SetParameter(New RParameter("units"))
-        dctucrInputUnits.Add("Normalised Parent Coordinates", Chr(34) & "npc" & Chr(34))
-        dctucrInputUnits.Add("Centimetres", Chr(34) & "cm" & Chr(34))
-        dctucrInputUnits.Add("Inches", Chr(34) & "inches" & Chr(34))
-        dctucrInputUnits.Add("Millimetres", Chr(34) & "mm" & Chr(34))
-        dctucrInputUnits.Add("Points", Chr(34) & "points" & Chr(34))
-        dctucrInputUnits.Add("Picas", Chr(34) & "picas" & Chr(34))
-        dctucrInputUnits.Add("Big Points", Chr(34) & "bigpts" & Chr(34))
-        dctucrInputUnits.Add("Dida", Chr(34) & "dida" & Chr(34))
-        dctucrInputUnits.Add("Cicero", Chr(34) & "cicero" & Chr(34))
-        dctucrInputUnits.Add("Scaled Points", Chr(34) & "scaledpts" & Chr(34))
-        dctucrInputUnits.Add("Lines", Chr(34) & "lines" & Chr(34))
-        dctucrInputUnits.Add("Character", Chr(34) & "char" & Chr(34))
-        dctucrInputUnits.Add("Native", Chr(34) & "native" & Chr(34))
-        dctucrInputUnits.Add("String Width", Chr(34) & "strwidth" & Chr(34))
-        dctucrInputUnits.Add("String Height", Chr(34) & "strheight" & Chr(34))
-        dctucrInputUnits.Add("Square Normalised Parent Coordinates", Chr(34) & "snpc" & Chr(34))
-        dctucrInputUnits.Add("Grop Height", Chr(34) & "grobheight" & Chr(34))
-        dctucrInputUnits.Add("Grop Width", Chr(34) & "grobwidth" & Chr(34))
-        ucrInputTickUnits.SetItems(dctucrInputUnits)
+        ucrInputTickUnits.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctFonts))
         ucrInputTickUnits.SetRDefault(Chr(34) & "npc" & Chr(34))
 
         ucrChkSizeYAxis.AddToLinkedControls(ucrNudSizeYAxis, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -484,12 +313,16 @@ Public Class sdgThemes
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
-        clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=15)
         clsThemeFunction = clsNewThemeFunction
+        clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=15)
+
 
         dctThemeFunctions = dctNewThemeFunctions
         dctThemeFunctions.TryGetValue("axis.text.x", clsElementXAxisText)
         dctThemeFunctions.TryGetValue("axis.text.y", clsElementYAxisText)
+        dctThemeFunctions.TryGetValue("axis.text.y", clsElementYAxisText)
+        dctThemeFunctions.TryGetValue("axis.ticks.x", clsElementXAxisText)
+        dctThemeFunctions.TryGetValue("axis.ticks.y", clsElementYAxisText)
 
         'clsElementXAxisText.SetRCommand("element_text")
         'clsElementXAxisTextTop.SetRCommand("element_text")
@@ -660,6 +493,9 @@ Public Class sdgThemes
         ucrChkLineEndTickLabelsYAxis.SetRCode(clsElementYAxisLine, bReset)
 
         AddRemoveElementXAxisText()
+        AddRemoveElementYAxisText()
+        AddRemoveElementXTickLine()
+        AddRemoveElementYTickLine()
     End Sub
 
     Private Sub AddRemoveElementXAxisText()
@@ -667,6 +503,33 @@ Public Class sdgThemes
             clsThemeFunction.AddParameter("axis.text.x", clsRFunctionParameter:=clsElementXAxisText)
         Else
             clsThemeFunction.RemoveParameterByName("axis.text.x")
+        End If
+        AddRemoveTheme()
+    End Sub
+
+    Private Sub AddRemoveElementYAxisText()
+        If ucrChkAngle.Checked OrElse ucrChkHjust.Checked OrElse ucrChkLineHeight.Checked OrElse ucrChkSize.Checked OrElse ucrChkVjust.Checked OrElse ucrChkColour.Checked OrElse ucrChkFace.Checked OrElse ucrChkFamily.Checked Then
+            clsThemeFunction.AddParameter("axis.text.y", clsRFunctionParameter:=clsElementXAxisText)
+        Else
+            clsThemeFunction.RemoveParameterByName("axis.text.y")
+        End If
+        AddRemoveTheme()
+    End Sub
+
+    Private Sub AddRemoveElementYTickLine()
+        If ucrChkAngle.Checked OrElse ucrChkHjust.Checked OrElse ucrChkLineHeight.Checked OrElse ucrChkSize.Checked OrElse ucrChkVjust.Checked OrElse ucrChkColour.Checked OrElse ucrChkFace.Checked OrElse ucrChkFamily.Checked Then
+            clsThemeFunction.AddParameter("axis.ticks.y", clsRFunctionParameter:=clsElementXAxisText)
+        Else
+            clsThemeFunction.RemoveParameterByName("axis.ticks.y")
+        End If
+        AddRemoveTheme()
+    End Sub
+
+    Private Sub AddRemoveElementXTickLine()
+        If ucrChkAngle.Checked OrElse ucrChkHjust.Checked OrElse ucrChkLineHeight.Checked OrElse ucrChkSize.Checked OrElse ucrChkVjust.Checked OrElse ucrChkColour.Checked OrElse ucrChkFace.Checked OrElse ucrChkFamily.Checked Then
+            clsThemeFunction.AddParameter("axis.ticks.x", clsRFunctionParameter:=clsElementXAxisText)
+        Else
+            clsThemeFunction.RemoveParameterByName("axis.ticks.x")
         End If
         AddRemoveTheme()
     End Sub
