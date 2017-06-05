@@ -28,12 +28,15 @@ Partial Class dlgOpenNetCDF
         Me.lblMainDataName = New System.Windows.Forms.Label()
         Me.lblLatColName = New System.Windows.Forms.Label()
         Me.lblLonColName = New System.Windows.Forms.Label()
-        Me.ucrInputLonColName = New instat.ucrInputTextBox()
-        Me.ucrInputLatColName = New instat.ucrInputTextBox()
         Me.ucrInputLocDataName = New instat.ucrInputTextBox()
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
         Me.ucrInputDataName = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
+        Me.lblTimeColName = New System.Windows.Forms.Label()
+        Me.ucrReceiverLatName = New instat.ucrReceiverSingle()
+        Me.ucrReceiverLonName = New instat.ucrReceiverSingle()
+        Me.ucrReceiverTimeName = New instat.ucrReceiverSingle()
+        Me.ucrSelectorNetCDF = New instat.ucrSelectorAddRemove()
         Me.SuspendLayout()
         '
         'lblLocDataNamePrefix
@@ -41,19 +44,19 @@ Partial Class dlgOpenNetCDF
         Me.lblLocDataNamePrefix.AutoSize = True
         Me.lblLocDataNamePrefix.Location = New System.Drawing.Point(10, 88)
         Me.lblLocDataNamePrefix.Name = "lblLocDataNamePrefix"
-        Me.lblLocDataNamePrefix.Size = New System.Drawing.Size(105, 13)
+        Me.lblLocDataNamePrefix.Size = New System.Drawing.Size(108, 13)
         Me.lblLocDataNamePrefix.TabIndex = 5
-        Me.lblLocDataNamePrefix.Tag = "Lat_Lon_Data_Name:"
-        Me.lblLocDataNamePrefix.Text = "Lat/Lon Data Name:"
+        Me.lblLocDataNamePrefix.Tag = "Location_Data_Name:"
+        Me.lblLocDataNamePrefix.Text = "Location Data Name:"
         '
         'cmdOpenDataSet
         '
-        Me.cmdOpenDataSet.Location = New System.Drawing.Point(303, 19)
+        Me.cmdOpenDataSet.Location = New System.Drawing.Point(330, 18)
         Me.cmdOpenDataSet.Name = "cmdOpenDataSet"
         Me.cmdOpenDataSet.Size = New System.Drawing.Size(77, 23)
         Me.cmdOpenDataSet.TabIndex = 2
         Me.cmdOpenDataSet.Tag = "Select_File..."
-        Me.cmdOpenDataSet.Text = "Select File..."
+        Me.cmdOpenDataSet.Text = "Browse"
         Me.cmdOpenDataSet.UseVisualStyleBackColor = True
         '
         'lblFileOpenPath
@@ -78,49 +81,29 @@ Partial Class dlgOpenNetCDF
         'lblLatColName
         '
         Me.lblLatColName.AutoSize = True
-        Me.lblLatColName.Location = New System.Drawing.Point(10, 120)
+        Me.lblLatColName.Location = New System.Drawing.Point(260, 122)
         Me.lblLatColName.Name = "lblLatColName"
         Me.lblLatColName.Size = New System.Drawing.Size(117, 13)
-        Me.lblLatColName.TabIndex = 7
+        Me.lblLatColName.TabIndex = 8
         Me.lblLatColName.Text = "Latitude Column Name:"
         '
         'lblLonColName
         '
         Me.lblLonColName.AutoSize = True
-        Me.lblLonColName.Location = New System.Drawing.Point(10, 152)
+        Me.lblLonColName.Location = New System.Drawing.Point(260, 165)
         Me.lblLonColName.Name = "lblLonColName"
         Me.lblLonColName.Size = New System.Drawing.Size(126, 13)
-        Me.lblLonColName.TabIndex = 9
+        Me.lblLonColName.TabIndex = 10
         Me.lblLonColName.Text = "Longitude Column Name:"
-        '
-        'ucrInputLonColName
-        '
-        Me.ucrInputLonColName.AddQuotesIfUnrecognised = True
-        Me.ucrInputLonColName.IsMultiline = False
-        Me.ucrInputLonColName.IsReadOnly = False
-        Me.ucrInputLonColName.Location = New System.Drawing.Point(150, 148)
-        Me.ucrInputLonColName.Name = "ucrInputLonColName"
-        Me.ucrInputLonColName.Size = New System.Drawing.Size(142, 21)
-        Me.ucrInputLonColName.TabIndex = 10
-        '
-        'ucrInputLatColName
-        '
-        Me.ucrInputLatColName.AddQuotesIfUnrecognised = True
-        Me.ucrInputLatColName.IsMultiline = False
-        Me.ucrInputLatColName.IsReadOnly = False
-        Me.ucrInputLatColName.Location = New System.Drawing.Point(150, 116)
-        Me.ucrInputLatColName.Name = "ucrInputLatColName"
-        Me.ucrInputLatColName.Size = New System.Drawing.Size(142, 21)
-        Me.ucrInputLatColName.TabIndex = 8
         '
         'ucrInputLocDataName
         '
         Me.ucrInputLocDataName.AddQuotesIfUnrecognised = True
         Me.ucrInputLocDataName.IsMultiline = False
         Me.ucrInputLocDataName.IsReadOnly = False
-        Me.ucrInputLocDataName.Location = New System.Drawing.Point(150, 84)
+        Me.ucrInputLocDataName.Location = New System.Drawing.Point(138, 84)
         Me.ucrInputLocDataName.Name = "ucrInputLocDataName"
-        Me.ucrInputLocDataName.Size = New System.Drawing.Size(142, 21)
+        Me.ucrInputLocDataName.Size = New System.Drawing.Size(184, 21)
         Me.ucrInputLocDataName.TabIndex = 6
         '
         'ucrInputFilePath
@@ -130,7 +113,7 @@ Partial Class dlgOpenNetCDF
         Me.ucrInputFilePath.IsReadOnly = False
         Me.ucrInputFilePath.Location = New System.Drawing.Point(52, 20)
         Me.ucrInputFilePath.Name = "ucrInputFilePath"
-        Me.ucrInputFilePath.Size = New System.Drawing.Size(240, 21)
+        Me.ucrInputFilePath.Size = New System.Drawing.Size(270, 21)
         Me.ucrInputFilePath.TabIndex = 1
         '
         'ucrInputDataName
@@ -138,27 +121,81 @@ Partial Class dlgOpenNetCDF
         Me.ucrInputDataName.AddQuotesIfUnrecognised = True
         Me.ucrInputDataName.IsMultiline = False
         Me.ucrInputDataName.IsReadOnly = False
-        Me.ucrInputDataName.Location = New System.Drawing.Point(150, 52)
+        Me.ucrInputDataName.Location = New System.Drawing.Point(138, 52)
         Me.ucrInputDataName.Name = "ucrInputDataName"
-        Me.ucrInputDataName.Size = New System.Drawing.Size(142, 21)
+        Me.ucrInputDataName.Size = New System.Drawing.Size(184, 21)
         Me.ucrInputDataName.TabIndex = 4
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 179)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 272)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 11
+        Me.ucrBase.TabIndex = 14
+        '
+        'lblTimeColName
+        '
+        Me.lblTimeColName.AutoSize = True
+        Me.lblTimeColName.Location = New System.Drawing.Point(260, 208)
+        Me.lblTimeColName.Name = "lblTimeColName"
+        Me.lblTimeColName.Size = New System.Drawing.Size(102, 13)
+        Me.lblTimeColName.TabIndex = 12
+        Me.lblTimeColName.Text = "Time Column Name:"
+        '
+        'ucrReceiverLatName
+        '
+        Me.ucrReceiverLatName.frmParent = Me
+        Me.ucrReceiverLatName.Location = New System.Drawing.Point(260, 137)
+        Me.ucrReceiverLatName.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverLatName.Name = "ucrReceiverLatName"
+        Me.ucrReceiverLatName.Selector = Nothing
+        Me.ucrReceiverLatName.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverLatName.TabIndex = 9
+        Me.ucrReceiverLatName.ucrSelector = Nothing
+        '
+        'ucrReceiverLonName
+        '
+        Me.ucrReceiverLonName.frmParent = Me
+        Me.ucrReceiverLonName.Location = New System.Drawing.Point(260, 180)
+        Me.ucrReceiverLonName.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverLonName.Name = "ucrReceiverLonName"
+        Me.ucrReceiverLonName.Selector = Nothing
+        Me.ucrReceiverLonName.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverLonName.TabIndex = 11
+        Me.ucrReceiverLonName.ucrSelector = Nothing
+        '
+        'ucrReceiverTimeName
+        '
+        Me.ucrReceiverTimeName.frmParent = Me
+        Me.ucrReceiverTimeName.Location = New System.Drawing.Point(260, 223)
+        Me.ucrReceiverTimeName.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverTimeName.Name = "ucrReceiverTimeName"
+        Me.ucrReceiverTimeName.Selector = Nothing
+        Me.ucrReceiverTimeName.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverTimeName.TabIndex = 13
+        Me.ucrReceiverTimeName.ucrSelector = Nothing
+        '
+        'ucrSelectorNetCDF
+        '
+        Me.ucrSelectorNetCDF.bShowHiddenColumns = False
+        Me.ucrSelectorNetCDF.Location = New System.Drawing.Point(9, 122)
+        Me.ucrSelectorNetCDF.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorNetCDF.Name = "ucrSelectorNetCDF"
+        Me.ucrSelectorNetCDF.Size = New System.Drawing.Size(201, 147)
+        Me.ucrSelectorNetCDF.TabIndex = 7
         '
         'dlgOpenNetCDF
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(421, 237)
+        Me.ClientSize = New System.Drawing.Size(416, 328)
+        Me.Controls.Add(Me.ucrSelectorNetCDF)
+        Me.Controls.Add(Me.ucrReceiverTimeName)
+        Me.Controls.Add(Me.ucrReceiverLonName)
+        Me.Controls.Add(Me.ucrReceiverLatName)
+        Me.Controls.Add(Me.lblTimeColName)
         Me.Controls.Add(Me.lblLonColName)
         Me.Controls.Add(Me.lblLatColName)
-        Me.Controls.Add(Me.ucrInputLonColName)
-        Me.Controls.Add(Me.ucrInputLatColName)
         Me.Controls.Add(Me.ucrInputLocDataName)
         Me.Controls.Add(Me.lblLocDataNamePrefix)
         Me.Controls.Add(Me.ucrInputFilePath)
@@ -186,9 +223,12 @@ Partial Class dlgOpenNetCDF
     Friend WithEvents cmdOpenDataSet As Button
     Friend WithEvents lblFileOpenPath As Label
     Friend WithEvents lblMainDataName As Label
-    Friend WithEvents ucrInputLatColName As ucrInputTextBox
-    Friend WithEvents ucrInputLonColName As ucrInputTextBox
     Friend WithEvents lblLatColName As Label
     Friend WithEvents lblLonColName As Label
+    Friend WithEvents lblTimeColName As Label
+    Friend WithEvents ucrReceiverLatName As ucrReceiverSingle
+    Friend WithEvents ucrReceiverTimeName As ucrReceiverSingle
+    Friend WithEvents ucrReceiverLonName As ucrReceiverSingle
+    Friend WithEvents ucrSelectorNetCDF As ucrSelectorAddRemove
 End Class
 
