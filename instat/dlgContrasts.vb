@@ -52,12 +52,18 @@ Public Class dlgContrasts
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 353
+        Dim dctContrastTypes As New Dictionary(Of String, String)
+
+        ucrSelectorForContrast.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorForContrast.SetParameterIsString()
+
+        ucrReceiverForContrasts.SetParameter(New RParameter("col_name", 1))
+        ucrReceiverForContrasts.SetParameterIsString()
         ucrReceiverForContrasts.Selector = ucrSelectorForContrast
         ucrReceiverForContrasts.SetMeAsReceiver()
         ucrReceiverForContrasts.SetIncludedDataTypes({"factor"})
-        ucrBase.iHelpTopicID = 353
 
-        Dim dctContrastTypes As New Dictionary(Of String, String)
         ucrInputContrastName.SetParameter(New RParameter("new_contrasts", 2))
         dctContrastTypes.Add("Treatment/Control", Chr(34) & "contr.treatment" & Chr(34))
         dctContrastTypes.Add("Helmert", Chr(34) & "contr.helmert" & Chr(34))
@@ -66,13 +72,6 @@ Public Class dlgContrasts
         dctContrastTypes.Add("User Defined", Chr(34) & "user_defined" & Chr(34))
         ucrInputContrastName.SetItems(dctContrastTypes)
         ucrInputContrastName.SetLinkedDisplayControl(lblSelectContrastName)
-
-        ucrSelectorForContrast.SetParameter(New RParameter("data_name", 0))
-        ucrSelectorForContrast.SetParameterIsString()
-
-        ucrReceiverForContrasts.SetParameter(New RParameter("col_name", 1))
-        ucrReceiverForContrasts.SetParameterIsString()
-
     End Sub
 
     Private Sub SetDefaults()
@@ -82,7 +81,6 @@ Public Class dlgContrasts
         clsSetContrast = New RFunction
 
         grdCurrSheet.Reset()
-
         ucrInputContrastName.Reset()
         ucrSelectorForContrast.Reset()
 
