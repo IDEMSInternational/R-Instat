@@ -212,7 +212,7 @@ Public Class sdgPlots
         clsXScalecontinuousFunction = clsNewXScalecontinuousFunction
         clsFacetFunction = clsNewFacetFunction
         clsThemeFunction = clsNewThemeFunction
-        dctThemeFunctions = dctNewThemeFunctions
+        dctThemeFunctions = GgplotDefaults.dctThemeFunctions
 
         If clsFacetFunction.ContainsParameter("facets") Then
             clsTempParam = clsFacetFunction.GetParameter("facets")
@@ -616,6 +616,7 @@ Public Class sdgPlots
 
     Private Sub cmdAllOptions_Click(sender As Object, e As EventArgs) Handles cmdAllOptions.Click
         sdgThemes.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, bReset:=bResetThemes)
+        Me.SendToBack()
         sdgThemes.ShowDialog()
         bResetThemes = False
     End Sub
