@@ -51,7 +51,6 @@ Public Class dlgEnter
         ucrSaveEnterResultInto.SetDataFrameSelector(ucrDataFrameEnter)
         ucrSaveEnterResultInto.SetValidationTypeAsRVariable()
         cmdTry.Enabled = False
-        ucrInputTryMessage.Enabled = False
     End Sub
     Private Sub SetDefaults()
         chkShowEnterArguments.Checked = False
