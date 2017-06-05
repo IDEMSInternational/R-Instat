@@ -78,7 +78,7 @@ Partial Class dlgContrasts
         '
         'ucrInputContrastName
         '
-        Me.ucrInputContrastName.AddQuotesIfUnrecognised = True
+        '        Me.ucrInputContrastName.AddQuotesIfUnrecognised = True
         Me.ucrInputContrastName.IsReadOnly = False
         Me.ucrInputContrastName.Location = New System.Drawing.Point(260, 114)
         Me.ucrInputContrastName.Name = "ucrInputContrastName"
