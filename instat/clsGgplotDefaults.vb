@@ -92,6 +92,8 @@
             clsElementRect = New RFunction
 
             clsElementText.SetPackageName("ggplot2")
+            clsElementLine.SetPackageName("ggplot2")
+            clsElementRect.SetPackageName("ggplot2")
             clsElementText.SetRCommand("element_text")
             clsElementLine.SetRCommand("element_line")
             clsElementRect.SetRCommand("element_rect")
