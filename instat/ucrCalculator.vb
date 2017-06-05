@@ -33,7 +33,6 @@ Public Class ucrCalculator
     Public Sub InitialiseControl()
         ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Statistics", "Strings (Character Columns)", "Probability", "Dates", "Rows"}) ' "Rows" is a temp. name
         ucrReceiverForCalculation.Selector = ucrSelectorForCalculations
-        ucrInputTryMessage.Enabled = False
         cmdTry.Enabled = False
     End Sub
 
