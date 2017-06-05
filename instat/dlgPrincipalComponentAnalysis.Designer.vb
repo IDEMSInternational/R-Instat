@@ -36,7 +36,7 @@ Partial Class dlgPrincipalComponentAnalysis
         'lblExplanatoryVariables
         '
         Me.lblExplanatoryVariables.AutoSize = True
-        Me.lblExplanatoryVariables.Location = New System.Drawing.Point(251, 45)
+        Me.lblExplanatoryVariables.Location = New System.Drawing.Point(247, 45)
         Me.lblExplanatoryVariables.Name = "lblExplanatoryVariables"
         Me.lblExplanatoryVariables.Size = New System.Drawing.Size(111, 13)
         Me.lblExplanatoryVariables.TabIndex = 1
@@ -65,20 +65,18 @@ Partial Class dlgPrincipalComponentAnalysis
         '
         'ucrReceiverMultiplePCA
         '
-        Me.ucrReceiverMultiplePCA.bAddRemoveParameter = True
-        Me.ucrReceiverMultiplePCA.bChangeParameterValue = True
         Me.ucrReceiverMultiplePCA.frmParent = Me
-        Me.ucrReceiverMultiplePCA.Location = New System.Drawing.Point(250, 60)
+        Me.ucrReceiverMultiplePCA.Location = New System.Drawing.Point(247, 60)
         Me.ucrReceiverMultiplePCA.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultiplePCA.Name = "ucrReceiverMultiplePCA"
         Me.ucrReceiverMultiplePCA.Selector = Nothing
         Me.ucrReceiverMultiplePCA.Size = New System.Drawing.Size(120, 88)
+        Me.ucrReceiverMultiplePCA.strNcFilePath = ""
         Me.ucrReceiverMultiplePCA.TabIndex = 2
+        Me.ucrReceiverMultiplePCA.ucrSelector = Nothing
         '
         'ucrSelectorPCA
         '
-        Me.ucrSelectorPCA.bAddRemoveParameter = True
-        Me.ucrSelectorPCA.bChangeParameterValue = True
         Me.ucrSelectorPCA.bShowHiddenColumns = False
         Me.ucrSelectorPCA.bUseCurrentFilter = True
         Me.ucrSelectorPCA.Location = New System.Drawing.Point(10, 10)
@@ -96,8 +94,6 @@ Partial Class dlgPrincipalComponentAnalysis
         '
         'ucrNudNumberOfComp
         '
-        Me.ucrNudNumberOfComp.bAddRemoveParameter = True
-        Me.ucrNudNumberOfComp.bChangeParameterValue = True
         Me.ucrNudNumberOfComp.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberOfComp.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudNumberOfComp.Location = New System.Drawing.Point(370, 151)
@@ -110,8 +106,6 @@ Partial Class dlgPrincipalComponentAnalysis
         '
         'ucrSaveResult
         '
-        Me.ucrSaveResult.bAddRemoveParameter = True
-        Me.ucrSaveResult.bChangeParameterValue = True
         Me.ucrSaveResult.Location = New System.Drawing.Point(10, 204)
         Me.ucrSaveResult.Name = "ucrSaveResult"
         Me.ucrSaveResult.Size = New System.Drawing.Size(255, 24)
@@ -119,8 +113,6 @@ Partial Class dlgPrincipalComponentAnalysis
         '
         'ucrChkScaleData
         '
-        Me.ucrChkScaleData.bAddRemoveParameter = True
-        Me.ucrChkScaleData.bChangeParameterValue = True
         Me.ucrChkScaleData.Checked = False
         Me.ucrChkScaleData.Location = New System.Drawing.Point(250, 175)
         Me.ucrChkScaleData.Name = "ucrChkScaleData"

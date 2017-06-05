@@ -13,7 +13,6 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports instat
 Imports instat.Translations
 Public Class dlgPrincipalComponentAnalysis
     Public bFirstLoad As Boolean = True
@@ -21,6 +20,9 @@ Public Class dlgPrincipalComponentAnalysis
     Private bResetSubdialog As Boolean = False
     'Public ExplanatoryVariables
     Public strModelName As String = ""
+    Private clsPCAFunction As New RFunction
+    Private clsREigenValues, clsREigenVectors, clsRRotation, clsRRotationCoord, clsRRotationEig As New RFunction
+    ' call all classes in the sub dialog
 
     Private Sub dlgPrincipalComponentAnalysis_oad(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -43,11 +45,21 @@ Public Class dlgPrincipalComponentAnalysis
         ComponentsMinimum()
 
         'ucrReceiver
-        ucrReceiverMultiplePCA.SetParameter(New RParameter("X", 1))
+        ucrReceiverMultiplePCA.SetParameter(New RParameter("X", 0))
         ucrReceiverMultiplePCA.SetParameterIsRFunction()
         ucrReceiverMultiplePCA.Selector = ucrSelectorPCA
         ucrReceiverMultiplePCA.SetDataType("numeric")
         ucrReceiverMultiplePCA.SetMeAsReceiver()
+
+        'ucrCheckBox
+        ucrChkScaleData.SetParameter(New RParameter("scale.unit", 1))
+        ucrChkScaleData.SetText("Scale Data")
+        ucrChkScaleData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkScaleData.SetRDefault("TRUE")
+
+        'ucrNud
+        ucrNudNumberOfComp.SetParameter(New RParameter("ncp", 2))
+        ucrNudNumberOfComp.SetRDefault(5)
 
         'ucrSaveResult
         ucrSaveResult.SetPrefix("PCA")
@@ -57,37 +69,55 @@ Public Class dlgPrincipalComponentAnalysis
         ucrSaveResult.SetIsComboBox()
         ucrSaveResult.SetAssignToIfUncheckedValue("last_PCA")
 
-        'ucrNud
-        ucrNudNumberOfComp.SetParameter(New RParameter("ncp"))
-
-        'ucrCheckBox
-        ucrChkScaleData.SetParameter(New RParameter("scale.unit"))
-        ucrChkScaleData.SetText("Scale Data")
-        ucrChkScaleData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkScaleData.SetRDefault("TRUE")
-
         'sdgPrincipalComponentAnalysis.ucrSelectorFactor.SetDataframe(ucrSelectorPCA.ucrAvailableDataFrames.strCurrDataFrame, bEnableDataframe:=False)
     End Sub
 
-    Private Sub ReopenDialog()
-
-    End Sub
-
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
+        clsPCAFunction = New RFunction
+        clsREigenVectors = New RFunction
+        clsREigenValues = New RFunction
+        clsRRotation = New RFunction
+        clsRRotationEig = New RFunction
+        clsRRotationCoord = New RFunction
+        ' package name, r command and defaults for sdg
 
         ucrSelectorPCA.Reset()
 
-        clsDefaultFunction.SetRCommand("PCA")
-        clsDefaultFunction.AddParameter("ncp", 2)
-        clsDefaultFunction.AddParameter("graph", "FALSE") ' I don't know what this is for, but it's in there?
-        clsDefaultFunction.SetAssignTo("last_PCA", strTempModel:="last_PCA", strTempDataframe:=ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
+        clsPCAFunction.SetPackageName("FactoMineR")
+        clsPCAFunction.SetRCommand("PCA")
+        clsPCAFunction.AddParameter("ncp", 2)
+        clsPCAFunction.AddParameter("graph", "FALSE") ' I don't know what this is for, but it's in there?
+        clsPCAFunction.SetAssignTo("last_PCA", strTempModel:="last_PCA", strTempDataframe:=ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        clsREigenValues.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+        clsREigenValues.AddParameter("value1", Chr(34) & "eig" & Chr(34))
+
+        clsREigenVectors.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+        clsREigenVectors.AddParameter("value1", Chr(34) & "ind" & Chr(34))
+        clsREigenVectors.AddParameter("value2", Chr(34) & "coord" & Chr(34))
+
+        clsRRotationCoord.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+        clsRRotationCoord.AddParameter("value1", Chr(34) & "var" & Chr(34))
+        clsRRotationCoord.AddParameter("value2", Chr(34) & "coord" & Chr(34))
+
+        clsRRotationEig.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+        clsRRotationEig.AddParameter("value1", Chr(34) & "eig" & Chr(34))
+
+        clsRRotation.SetRCommand("sweep")
+        clsRRotation.AddParameter("x", clsRFunctionParameter:=clsRRotationCoord)
+        clsRRotation.AddParameter("MARGIN", 2)
+        clsRRotation.AddParameter("STATS", "sqrt(" & clsRRotationEig.ToScript.ToString & "[,1])")
+        clsRRotation.AddParameter("FUN", " '/'")
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsPCAFunction)
         bResetSubdialog = True
     End Sub
 
-    Private Sub TestOKEnabled()
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
+    Private Sub TestOKEnabled() ' add in if the sdg has a clear nud, etc
         If ucrSaveResult.IsComplete AndAlso Not ucrReceiverMultiplePCA.IsEmpty() AndAlso ucrNudNumberOfComp.GetText <> "" Then
             ucrBase.OKEnabled(True)
         Else
@@ -101,18 +131,24 @@ Public Class dlgPrincipalComponentAnalysis
         TestOKEnabled()
     End Sub
 
-    Private Sub SetRCodeforControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    Private Sub ucrBasePCA_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        'sdgPrincipalComponentAnalysis.PCAOptions()
+        If sdgPrincipalComponentAnalysis.ucrChkEigenvalues.Checked Then
+            frmMain.clsRLink.RunScript(clsREigenValues.ToScript(), 2)
+        End If
+        If sdgPrincipalComponentAnalysis.ucrChkEigenvectors.Checked Then
+            frmMain.clsRLink.RunScript(clsREigenVectors.ToScript(), 2)
+        End If
+        If sdgPrincipalComponentAnalysis.ucrChkRotation.Checked Then
+            frmMain.clsRLink.RunScript(clsRRotation.ToScript(), 2)
+        End If
     End Sub
 
     Private Sub cmdPCAOptions_Click(sender As Object, e As EventArgs) Handles cmdPCAOptions.Click
-        '        sdgPrincipalComponentAnalysis.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, bResetSubdialog)
-        '        bResetSubdialog = False
-        'sdgPrincipalComponentAnalysis.ShowDialog()
-    End Sub
-
-    Private Sub ucrBasePCA_clickok(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        'sdgPrincipalComponentAnalysis.PCAOptions()
+        sdgPrincipalComponentAnalysis.SetRFunction(clsREigenValues, clsREigenVectors, clsRRotation, bResetSubdialog)
+        ' put all classes in there ^
+        bResetSubdialog = False
+        sdgPrincipalComponentAnalysis.ShowDialog()
     End Sub
 
     Private Sub ComponentsMinimum()
@@ -131,6 +167,32 @@ Public Class dlgPrincipalComponentAnalysis
         End If
     End Sub
 
+    Private Sub SetUp()
+        AssignName()
+        clsREigenValues.AddParameter("data_name", Chr(34) & ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+        clsREigenValues.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
+
+        clsREigenVectors.AddParameter("data_name", Chr(34) & ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+        clsREigenVectors.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
+
+        clsRRotationCoord.AddParameter("data_name", Chr(34) & ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+        clsRRotationCoord.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
+        clsRRotationEig.AddParameter("data_name", Chr(34) & ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+        clsRRotationEig.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
+    End Sub
+
+    Public Sub AssignName()
+        If ucrSaveResult.IsComplete Then
+            strModelName = ucrSaveResult.GetText()
+        Else
+            strModelName = "last_CCA"
+        End If
+    End Sub
+
+    Private Sub ucrSaveResult_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlValueChanged, ucrSelectorPCA.ControlValueChanged
+        SetUp()
+    End Sub
+
     Private Sub ucrReceiverMultiplePCA_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultiplePCA.ControlValueChanged, ucrNudNumberOfComp.ControlValueChanged
         ComponentsMinimum()
         '        sdgPrincipalComponentAnalysis.Dimensions()
@@ -140,7 +202,7 @@ Public Class dlgPrincipalComponentAnalysis
     '     sdgPrincipalComponentAnalysis.Dimensions()
     '  End Sub
 
-    Private Sub ucr_for_Test_OK(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlContentsChanged, ucrReceiverMultiplePCA.ControlContentsChanged, ucrNudNumberOfComp.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlContentsChanged, ucrReceiverMultiplePCA.ControlContentsChanged, ucrNudNumberOfComp.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
