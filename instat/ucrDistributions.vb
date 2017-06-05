@@ -259,10 +259,10 @@ Public Class ucrDistributions
         ' Extreme Value Distribution
         clsExtremeValueDist.strNameTag = "Extreme_Value"
         clsExtremeValueDist.strRName = "evd"
-        clsExtremeValueDist.strRFunctionName = "revd"
-        clsExtremeValueDist.strPFunctionName = "pevd"
-        clsExtremeValueDist.strQFunctionName = "qqevd"
-        clsExtremeValueDist.strDFunctionName = "devd"
+        clsExtremeValueDist.strRFunctionName = "extRemes::revd"
+        clsExtremeValueDist.strPFunctionName = "extRemes::pevd"
+        clsExtremeValueDist.strQFunctionName = "extRemes::qqevd"
+        clsExtremeValueDist.strDFunctionName = "extRemes::devd"
         clsExtremeValueDist.bIsContinuous = True
         clsExtremeValueDist.AddParameter("shape", "Shape", 0)
         clsExtremeValueDist.AddParameter("scale", "Scale", 1)
@@ -458,43 +458,43 @@ Public Class ucrDistributions
         'Gamma With Shape and Scale distribution
         clsGammaWithShapeandScale.strNameTag = "Gamma_With_Shape_and_Scale"
         clsGammaWithShapeandScale.strRName = "gamma"
-        clsGammaWithShapeandScale.strRFunctionName = "rgamma"
-        clsGammaWithShapeandScale.strPFunctionName = "pgamma"
-        clsGammaWithShapeandScale.strQFunctionName = "qgamma"
-        clsGammaWithShapeandScale.strDFunctionName = "dgamma"
+        clsGammaWithShapeandScale.strRFunctionName = "stats::rgamma"
+        clsGammaWithShapeandScale.strPFunctionName = "stats::pgamma"
+        clsGammaWithShapeandScale.strQFunctionName = "stats::qgamma"
+        clsGammaWithShapeandScale.strDFunctionName = "stats::dgamma"
         clsGammaWithShapeandScale.bIsContinuous = True
-        clsGammaWithShapeandScale.AddParameter("shape", "Shape")
+        clsGammaWithShapeandScale.AddParameter("shape", "Shape", "1")
         clsGammaWithShapeandScale.AddParameter("scale", "Scale")
         lstAllDistributions.Add(clsGammaWithShapeandScale)
 
         'Gamma With Shape and Mean distribution
         clsGammaWithShapeandMean.strNameTag = "Gamma_With_Shape_and_Mean"
         clsGammaWithShapeandMean.strRName = "gamma"
-        clsGammaWithShapeandMean.strRFunctionName = "rgamma"
-        clsGammaWithShapeandMean.strPFunctionName = "pgamma"
-        clsGammaWithShapeandMean.strQFunctionName = "qgamma"
-        clsGammaWithShapeandMean.strDFunctionName = "dgamma"
+        clsGammaWithShapeandMean.strRFunctionName = "stats::rgamma"
+        clsGammaWithShapeandMean.strPFunctionName = "stats::pgamma"
+        clsGammaWithShapeandMean.strQFunctionName = "stats::qgamma"
+        clsGammaWithShapeandMean.strDFunctionName = "stats::dgamma"
         clsGammaWithShapeandMean.bIsContinuous = True
-        clsGammaWithShapeandMean.AddParameter("shape", "Shape")
+        clsGammaWithShapeandMean.AddParameter("shape", "Shape", 1)
         clsGammaWithShapeandMean.AddParameter("mean", "Mean")
         lstAllDistributions.Add(clsGammaWithShapeandMean)
 
         'Gamma With Shape and Rate distribution
         clsGammaWithShapeandRate.strNameTag = "Gamma_With_Shape_and_Rate"
         clsGammaWithShapeandRate.strRName = "gamma"
-        clsGammaWithShapeandRate.strRFunctionName = "rgamma"
-        clsGammaWithShapeandRate.strPFunctionName = "pgamma"
-        clsGammaWithShapeandRate.strQFunctionName = "qgamma"
-        clsGammaWithShapeandRate.strDFunctionName = "dgamma"
+        clsGammaWithShapeandRate.strRFunctionName = "stats::rgamma"
+        clsGammaWithShapeandRate.strPFunctionName = "stats::pgamma"
+        clsGammaWithShapeandRate.strQFunctionName = "stats::qgamma"
+        clsGammaWithShapeandRate.strDFunctionName = "stats::dgamma"
         clsGammaWithShapeandRate.bIsContinuous = True
-        clsGammaWithShapeandRate.AddParameter("shape", "Shape")
+        clsGammaWithShapeandRate.AddParameter("shape", "Shape", 1)
         clsGammaWithShapeandRate.AddParameter("rate", "Rate")
         lstAllDistributions.Add(clsGammaWithShapeandRate)
 
         'Gamma With Shape and Scale distribution
         clsGamma.strNameTag = "Gamma"
         clsGamma.strRName = "gamma"
-        clsGamma.strGLMFunctionName = "Gamma"
+        clsGamma.strGLMFunctionName = "stats::Gamma"
         clsGamma.bNumeric = True
         clsGamma.bIsContinuous = True
         lstAllDistributions.Add(clsGamma)
@@ -503,13 +503,13 @@ Public Class ucrDistributions
         'TODO Paramaters 
         clsGammaWithZerosDist.strNameTag = "Gamma_With_Zeros"
         clsGammaWithZerosDist.strRName = "gamma"
-        clsGammaWithZerosDist.strRFunctionName = "rgamma"
-        clsGammaWithZerosDist.strPFunctionName = "pgamma"
-        clsGammaWithZerosDist.strQFunctionName = "qgamma"
-        clsGammaWithZerosDist.strDFunctionName = "dgamma"
+        clsGammaWithZerosDist.strRFunctionName = "stats::rgamma"
+        clsGammaWithZerosDist.strPFunctionName = "stats::pgamma"
+        clsGammaWithZerosDist.strQFunctionName = "stats::qgamma"
+        clsGammaWithZerosDist.strDFunctionName = "stats::dgamma"
         clsGammaWithZerosDist.bIsContinuous = True
-        clsGammaWithZerosDist.AddParameter("", "", "")
-        clsGammaWithZerosDist.AddParameter("", "", )
+        clsGammaWithZerosDist.AddParameter("shape", "Shape", 1)
+        clsGammaWithZerosDist.AddParameter("rate", "Rate")
         lstAllDistributions.Add(clsGammaWithZerosDist)
 
         'Inverse Gaussian distribution
