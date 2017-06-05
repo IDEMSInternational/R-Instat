@@ -24,6 +24,12 @@ Public Class dlgBoxplot
     'Similarly clsRgeom_boxplotFunction and clsRaesFunction (respectively the geom_boxplot function and the global aes function) are given through SetupLayer to sdgLayerOptions for edit. 
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private clsLabsFunction As New RFunction
+    Private clsXlabsFunction As New RFunction
+    Private clsYlabFunction As New RFunction
+    Private clsXScalecontinuousFunction As New RFunction
+    Private clsRFacetFunction As New RFunction
+    Private bResetSubdialog As Boolean = True
 
     Private Sub dlgBoxPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -101,8 +107,7 @@ Public Class dlgBoxplot
         ucrSaveBoxplot.SetDataFrameSelector(ucrSelectorBoxPlot.ucrAvailableDataFrames)
         ucrSaveBoxplot.SetAssignToIfUncheckedValue("last_graph")
 
-        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
-        sdgPlots.SetGgplotFunction(clsRggplotFunction)
+        '  sdgPlots.SetGgplotFunction(clsRggplotFunction)
     End Sub
 
     Private Sub SetDefaults()
@@ -114,7 +119,7 @@ Public Class dlgBoxplot
         ucrSelectorBoxPlot.Reset()
         ucrSaveBoxplot.Reset()
         sdgPlots.Reset()
-
+        bResetSubdialog = True
         'rdoBoxplot.Checked = True
         'These chk boxes add features to the BoxPlot when ticked. See SetCorrdFlip and chkVarwidth_CheckedChanged. By default they are unticked.
         clsBaseOperator.SetOperation("+")
@@ -132,6 +137,13 @@ Public Class dlgBoxplot
         clsRgeomPlotFunction.SetPackageName("ggplot2")
         clsRgeomPlotFunction.SetRCommand("geom_boxplot")
         clsRgeomPlotFunction.AddParameter("varwidth", "FALSE")
+
+        clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultTheme.Clone())
+        clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
+        clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
+        clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
+        clsRFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
+
 
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
@@ -168,9 +180,9 @@ Public Class dlgBoxplot
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetDataFrame(strNewDataFrame:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        sdgPlots.SetRCode(clsBaseOperator, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, strNewDataFrame:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
-        'Task: work on the link.
+        bResetSubdialog = False
     End Sub
 
     Private Sub cmdBoxPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdBoxPlotOptions.Click
