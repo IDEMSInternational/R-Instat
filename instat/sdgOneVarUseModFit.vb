@@ -127,26 +127,31 @@ Public Class sdgOneVarUseModFit
             clsRPlotFunction.SetRCommand("plot")
             clsRPlotFunction.AddParameter("x", clsRFunctionParameter:=clsRReceiver)
         ElseIf rdoPPPlot.Checked Then
+            clsRPlotFunction.RemoveParameterByName("x")
             clsRPlotFunction.ClearParameters()
             clsRPlotFunction.SetPackageName("fitdistrplus")
             clsRPlotFunction.SetRCommand("ppcomp")
             clsRPlotFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
         ElseIf rdoCDFPlot.Checked Then
             clsRPlotFunction.ClearParameters()
+            clsRPlotFunction.RemoveParameterByName("x")
             clsRPlotFunction.SetPackageName("fitdistrplus")
             clsRPlotFunction.SetRCommand("cdfcomp")
             clsRPlotFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
         ElseIf rdoQQPlot.Checked Then
+            clsRPlotFunction.RemoveParameterByName("x")
             clsRPlotFunction.ClearParameters()
             clsRPlotFunction.SetPackageName("fitdistrplus")
             clsRPlotFunction.SetRCommand("qqcomp")
             clsRPlotFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
         ElseIf rdoDensityPlot.Checked Then
+            clsRPlotFunction.RemoveParameterByName("x")
             clsRPlotFunction.ClearParameters()
             clsRPlotFunction.SetPackageName("fitdistrplus")
             clsRPlotFunction.SetRCommand("denscomp")
             clsRPlotFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
         ElseIf rdoCIcdf.Checked Then
+            clsRPlotFunction.RemoveParameterByName("x")
             clsRPlotFunction.ClearParameters()
             clsRPlotFunction.SetPackageName("fitdistrplus")
             clsRPlotFunction.SetRCommand("CIcdfplot")
