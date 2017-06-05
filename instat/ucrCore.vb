@@ -103,12 +103,26 @@ Public Class ucrCore
                     If Not clsTempRCode.ContainsParameter(clsTempRParameter) Then
                         If clsTempRCode.ContainsParameter(clsTempRParameter.strArgumentName) Then
                             SetParameter(clsTempRCode.GetParameter(clsTempRParameter.strArgumentName), i)
-                        ElseIf bReset Then
-                            If objDefaultState Is Nothing Then
-                                SetToRDefault()
-                                'Exit Sub
-                            End If
                         Else
+                            'This causes an issue if this parameter is linked to another control
+                            'because .Clone breaks the link
+                            'Not an issue if controls do not need to share parameters
+                            SetParameter(GetParameter(i).Clone(), i)
+                            'TODO if we don't reset what should happen to the parameter value
+                            '     when it's not found in the function?
+                            '     Causes issues when parameter retains value from different dialog
+                            If bReset Then
+                                If objDefaultState Is Nothing Then
+                                    If objRDefault IsNot Nothing Then
+                                        SetToRDefault()
+                                    Else
+                                        ResetControlValue()
+                                    End If
+                                    'Exit Sub
+                                End If
+                            Else
+                                ResetControlValue()
+                            End If
                         End If
                     End If
                 Else
@@ -387,7 +401,14 @@ Public Class ucrCore
     Public Sub AddParameterPresentCondition(objControlState As Object, strParamName As String, Optional bNewIsPositive As Boolean = True)
         Dim clsTempCond As New Condition
 
-        clsTempCond.SetParameterPresentName(strParamName, bNewIsPositive)
+        clsTempCond.SetParameterPresentNames(strParamName, bNewIsPositive)
+        AddCondition(objControlState, clsTempCond)
+    End Sub
+
+    Public Sub AddParameterPresentCondition(objControlState As Object, lstParamName As String(), Optional bNewIsPositive As Boolean = True)
+        Dim clsTempCond As New Condition
+
+        clsTempCond.SetParameterPresentNames(lstParamName.ToString(), bNewIsPositive)
         AddCondition(objControlState, clsTempCond)
     End Sub
 
@@ -513,6 +534,12 @@ Public Class ucrCore
         End If
     End Sub
 
+    Public Sub SetParameterPosition(iPosition As Integer)
+        If clsParameter IsNot Nothing Then
+            clsParameter.Position = iPosition
+        End If
+    End Sub
+
     Private Property clsParameter As RParameter
         Get
             Return lstAllRParameters(0)
@@ -530,4 +557,8 @@ Public Class ucrCore
             lstAllRCodes(0) = bNewRCode
         End Set
     End Property
+
+    Protected Overridable Sub ResetControlValue()
+        'TODO implement in specific controls
+    End Sub
 End Class
