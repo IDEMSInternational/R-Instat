@@ -35,7 +35,6 @@ Public Class dlgRecodeFactor
     End Sub
 
     Private Sub InitialiseDialog()
-        clsReplaceFunction = New RFunction
         ucrReceiverFactor.Selector = ucrSelectorForRecode
         ucrReceiverFactor.SetIncludedDataTypes({"factor"})
         ucrReceiverFactor.SetMeAsReceiver()
@@ -44,7 +43,7 @@ Public Class dlgRecodeFactor
         ucrFactorGrid.SetReceiver(ucrReceiverFactor)
         ucrFactorGrid.SetAsViewerOnly()
         ucrFactorGrid.bIncludeCopyOfLevels = True
-        ucrFactorGrid.AddEditableColumns({ucrFactorGrid.strLabelsName})
+        ucrFactorGrid.AddEditableColumns({"New Label"})
 
         ucrReceiverFactor.SetParameter(New RParameter("x", 0))
         ucrReceiverFactor.SetParameterIsRFunction()
@@ -72,28 +71,30 @@ Public Class dlgRecodeFactor
         ucrBase.clsRsyntax.SetBaseRFunction(clsRevalue)
     End Sub
 
-    Private Sub ucrFactorGrid_GridContentChanged() Handles ucrFactorGrid.ControlContentsChanged
+    Private Sub ucrFactorGrid_GridContentChanged() Handles ucrFactorGrid.GridContentChanged
         Dim strCurrentLevels As List(Of String)
         Dim strNewLevels As List(Of String)
         Dim strReplace As String = ""
 
         strCurrentLevels = ucrFactorGrid.GetColumnAsList(1, False)
-        strNewLevels = ucrFactorGrid.GetColumnAsList(2, True)
+        strNewLevels = ucrFactorGrid.GetColumnAsList(ucrFactorGrid.GetColumnIndex("New Label"), True)
         clsReplaceFunction.ClearParameters()
 
-        If ucrFactorGrid.IsColumnComplete(ucrFactorGrid.strLabelsName) AndAlso strCurrentLevels.Count = strNewLevels.Count Then
+        If ucrFactorGrid.IsColumnComplete("New Label") AndAlso strCurrentLevels.Count = strNewLevels.Count Then
             For i = 0 To strCurrentLevels.Count - 1
                 ' Backtick needed for names of the vector incase the levels are not valid R names
                 clsReplaceFunction.AddParameter(Chr(96) & strCurrentLevels(i) & Chr(96), strNewLevels(i))
             Next
+            clsReplaceFunction.strRCommand = "c"
+            ucrBase.clsRsyntax.AddParameter("replace", clsRFunctionParameter:=clsReplaceFunction)
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("replace")
         End If
-        clsReplaceFunction.strRCommand = "c"
-        ucrBase.clsRsyntax.AddParameter("replace", clsRFunctionParameter:=clsReplaceFunction)
         TestOKEnabled()
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverFactor.IsEmpty AndAlso ucrSaveNewCol.IsComplete AndAlso ucrFactorGrid.IsColumnComplete(ucrFactorGrid.strLabelsName) Then
+        If Not ucrReceiverFactor.IsEmpty AndAlso ucrSaveNewCol.IsComplete AndAlso ucrFactorGrid.IsColumnComplete("New Label") Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
