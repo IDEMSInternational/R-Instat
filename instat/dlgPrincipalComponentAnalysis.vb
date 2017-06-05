@@ -22,6 +22,10 @@ Public Class dlgPrincipalComponentAnalysis
     Public strModelName As String = ""
     Private clsPCAFunction As New RFunction
     Private clsREigenValues, clsREigenVectors, clsRRotation, clsRRotationCoord, clsRRotationEig As New RFunction
+    Private clsRScreePlotFunction, clsRScreePlotTheme, clsRVariablesPlotFunction, clsRVariablesPlotTheme, clsRIndividualsPlotFunction, clsRIndividualsPlotTheme, clsRBiplotFunction, clsRBiplotTheme, clsRBarPlotFunction As New RFunction
+    Private clsRFactor, clsRMelt, clsRBarPlotGeom, clsRBarPlotAes, clsRBarPlotFacet As New RFunction
+    Private clsRScreePlot, clsRVariablesPlot, clsRIndividualsPlot, clsRBiplot As New RSyntax
+    Dim clsRBarPlot, clsRBarPlot0 As New ROperator
     ' call all classes in the sub dialog
 
     Private Sub dlgPrincipalComponentAnalysis_oad(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -79,6 +83,26 @@ Public Class dlgPrincipalComponentAnalysis
         clsRRotation = New RFunction
         clsRRotationEig = New RFunction
         clsRRotationCoord = New RFunction
+        clsRScreePlotTheme = New RFunction
+        clsRScreePlot = New RSyntax
+        clsRScreePlotFunction = New RFunction
+        clsRVariablesPlotFunction = New RFunction
+        clsRVariablesPlotTheme = New RFunction
+        clsRVariablesPlot = New RSyntax
+        clsRIndividualsPlotFunction = New RFunction
+        clsRIndividualsPlotTheme = New RFunction
+        clsRIndividualsPlot = New RSyntax
+        clsRBiplotFunction = New RFunction
+        clsRBiplotTheme = New RFunction
+        clsRBiplot = New RSyntax
+        clsRBarPlotFunction = New RFunction
+        clsRFactor = New RFunction
+        clsRMelt = New RFunction
+        clsRBarPlotGeom = New RFunction
+        clsRBarPlotAes = New RFunction
+        clsRBarPlotFacet = New RFunction
+        clsRBarPlot0 = New ROperator
+        clsRBarPlot = New ROperator
         ' package name, r command and defaults for sdg
 
         ucrSelectorPCA.Reset()
@@ -109,6 +133,73 @@ Public Class dlgPrincipalComponentAnalysis
         clsRRotation.AddParameter("STATS", "sqrt(" & clsRRotationEig.ToScript.ToString & "[,1])")
         clsRRotation.AddParameter("FUN", " '/'")
 
+        ' Scree Function
+        clsRScreePlot.SetOperation("+")
+        clsRScreePlotFunction.SetPackageName("factoextra")
+        clsRScreePlotFunction.SetRCommand("fviz_screeplot")
+        clsRScreePlotFunction.AddParameter("X", clsRFunctionParameter:=clsPCAFunction)
+        clsRScreePlotTheme.SetPackageName("ggplot2")
+        clsRScreePlotTheme.SetRCommand("theme_minimal")
+        clsRScreePlot.AddOperatorParameter(True, clsRFunc:=clsRScreePlotFunction)
+        clsRScreePlot.AddOperatorParameter(True, clsRFunc:=clsRScreePlotTheme)
+
+        ' Variables Function
+        clsRVariablesPlot.SetOperation("+")
+        clsRVariablesPlotFunction.SetPackageName("factoextra")
+        clsRVariablesPlotFunction.SetRCommand("fviz_pca_var")
+        clsRVariablesPlotFunction.AddParameter("X", clsRFunctionParameter:=clsPCAFunction)
+        clsRVariablesPlotTheme.SetPackageName("ggplot2")
+        clsRVariablesPlotTheme.SetRCommand("theme_minimal")
+        clsRVariablesPlot.SetOperatorParameter(True, clsRFunc:=clsRVariablesPlotFunction)
+        clsRVariablesPlot.SetOperatorParameter(False, clsRFunc:=clsRVariablesPlotTheme)
+
+        ' Individual Plot
+        clsRIndividualsPlot.SetOperation("+")
+        clsRIndividualsPlotFunction.SetPackageName("factoextra")
+        clsRIndividualsPlotFunction.SetRCommand("fviz_pca_ind")
+        clsRIndividualsPlotFunction.AddParameter("X", clsRFunctionParameter:=clsPCAFunction)
+        clsRIndividualsPlotTheme.SetPackageName("ggplot2")
+        clsRIndividualsPlotTheme.SetRCommand("theme_minimal")
+        clsRIndividualsPlot.SetOperatorParameter(True, clsRFunc:=clsRIndividualsPlotFunction)
+        clsRIndividualsPlot.SetOperatorParameter(False, clsRFunc:=clsRIndividualsPlotTheme)
+
+        ' Biplot
+        clsRBiplot.SetOperation("+")
+        clsRBiplotFunction.SetPackageName("factoextra")
+        clsRBiplotFunction.SetRCommand("fviz_pca_biplot")
+        clsRBiplotFunction.AddParameter("X", clsRFunctionParameter:=clsPCAFunction)
+        clsRBiplotTheme.SetPackageName("ggplot2")
+        clsRBiplotTheme.SetRCommand("theme_minimal")
+        clsRBiplot.SetOperatorParameter(True, clsRFunc:=clsRBiplotFunction)
+        clsRBiplot.SetOperatorParameter(False, clsRFunc:=clsRBiplotTheme)
+
+        ' Barplot
+        clsRBarPlot0.SetOperation("+")
+        clsRBarPlot.SetOperation("+")
+        clsRFactor.SetRCommand("cbind")
+        clsRMelt.SetRCommand("melt")
+        clsRMelt.AddParameter("", clsRFunctionParameter:=clsREigenVectors) ' not sure if this will work!
+        clsRFactor.AddParameter("", clsRFunctionParameter:=clsRMelt)
+        clsRBarPlotFunction.SetPackageName("ggplot2")
+        clsRBarPlotFunction.SetRCommand("ggplot")
+        clsRBarPlotFunction.AddParameter("data", clsRFunctionParameter:=clsRFactor)
+        clsRBarPlotGeom.SetPackageName("ggplot2")
+        clsRBarPlotGeom.SetRCommand("geom_bar")
+        clsRBarPlotAes.SetPackageName("ggplot2")
+        clsRBarPlotAes.SetRCommand("aes")
+        clsRBarPlotAes.AddParameter("x", "Var1")
+        clsRBarPlotAes.AddParameter("y", "value")
+        clsRBarPlotAes.AddParameter("fill", "factor_col") ' may not run this here
+        clsRBarPlotGeom.AddParameter("", clsRFunctionParameter:=clsRBarPlotAes)
+        clsRBarPlotGeom.AddParameter("stat", Chr(34) & "identity" & Chr(34))
+        clsRBarPlotFacet.SetPackageName("ggplot2")
+        clsRBarPlotFacet.SetRCommand("facet_wrap")
+        clsRBarPlotFacet.AddParameter("", "~Var2")
+        clsRBarPlot0.AddParameter(iPosition:=0, clsRFunctionParameter:=clsRBarPlotFunction)
+        clsRBarPlot0.AddParameter(clsRFunctionParameter:=clsRBarPlotGeom)
+        clsRBarPlot.AddParameter(iPosition:=0, clsROperatorParameter:=clsRBarPlot0)
+        clsRBarPlot.AddParameter(clsRFunctionParameter:=clsRBarPlotFacet)
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsPCAFunction)
         bResetSubdialog = True
     End Sub
@@ -133,6 +224,7 @@ Public Class dlgPrincipalComponentAnalysis
 
     Private Sub ucrBasePCA_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         'sdgPrincipalComponentAnalysis.PCAOptions()
+        ' this is wrong. just here for now.
         If sdgPrincipalComponentAnalysis.ucrChkEigenvalues.Checked Then
             frmMain.clsRLink.RunScript(clsREigenValues.ToScript(), 2)
         End If
@@ -142,11 +234,21 @@ Public Class dlgPrincipalComponentAnalysis
         If sdgPrincipalComponentAnalysis.ucrChkRotation.Checked Then
             frmMain.clsRLink.RunScript(clsRRotation.ToScript(), 2)
         End If
+        If sdgPrincipalComponentAnalysis.rdoScreePlot.Checked Then
+            frmMain.clsRLink.RunScript(clsRScreePlot.GetScript(), 3)
+        ElseIf sdgPrincipalComponentAnalysis.rdoVariablesPlot.Checked Then
+            frmMain.clsRLink.RunScript(clsRVariablesPlot.GetScript(), 3)
+        ElseIf sdgPrincipalComponentAnalysis.rdoIndividualsPlot.Checked Then
+            frmMain.clsRLink.RunScript(clsRIndividualsPlot.GetScript(), 3)
+        ElseIf sdgPrincipalComponentAnalysis.rdoBiplot.Checked Then
+            frmMain.clsRLink.RunScript(clsRBiplot.GetScript(), 3)
+        ElseIf sdgPrincipalComponentAnalysis.rdoBarplot.Checked Then
+            frmMain.clsRLink.RunScript(clsRBarPlot.ToScript, 3)
+        End If
     End Sub
 
     Private Sub cmdPCAOptions_Click(sender As Object, e As EventArgs) Handles cmdPCAOptions.Click
-        sdgPrincipalComponentAnalysis.SetRFunction(clsREigenValues, clsREigenVectors, clsRRotation, bResetSubdialog)
-        ' put all classes in there ^
+        sdgPrincipalComponentAnalysis.SetRFunction(clsREigenValues, clsREigenVectors, clsRRotation, clsRScreePlotFunction, clsRVariablesPlotFunction, clsRIndividualsPlotFunction, clsRBiplotFunction, clsRFactor, bResetSubdialog)
         bResetSubdialog = False
         sdgPrincipalComponentAnalysis.ShowDialog()
     End Sub
