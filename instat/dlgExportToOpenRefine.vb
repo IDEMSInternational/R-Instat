@@ -11,10 +11,8 @@
 'You should have received a copy of the GNU General Public License 
 'along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '
-Imports instat
 Imports instat.Translations
 Public Class dlgExportToOpenRefine
-
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsWriteToCSV As New RFunction
@@ -47,28 +45,22 @@ Public Class dlgExportToOpenRefine
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultRefine = New RFunction
-        Dim clsDefaultWrite = New RFunction
+        clsDefaultRefine = New RFunction
+        clsDefaultWrite = New RFunction
+
         ucrDataFrameOpenRefine.Reset()
         ucrInputDatasetName.Reset()
-
         NewDefaultName()
 
+        clsDefaultWrite.SetPackageName("utils")
         clsDefaultWrite.SetRCommand("write.csv")
-        clsDefaultWrite.AddParameter("x", ucrDataFrameOpenRefine.cboAvailableDataFrames.SelectedItem)
         clsDefaultWrite.AddParameter("row.names", "FALSE")
-        clsDefaultWrite.AddParameter("file", Chr(34) & ucrInputDatasetName.GetText() & ".csv" & Chr(34))
 
-        clsWriteToCSV = clsDefaultWrite.Clone
-
-        clsDefaultRefine.SetRCommand("rrefine::refine_upload")
-        clsDefaultRefine.AddParameter("file", Chr(34) & ucrInputDatasetName.GetText() & ".csv" & Chr(34))
-        clsDefaultRefine.AddParameter("project.name", Chr(34) & ucrInputDatasetName.GetText() & Chr(34))
+        clsDefaultRefine.SetPackageName("rrefine")
+        clsDefaultRefine.SetRCommand("refine_upload")
         clsDefaultRefine.AddParameter("open.browser", "FALSE")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRefine)
-
-        ucrBase.OKEnabled(True)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -90,7 +82,7 @@ Public Class dlgExportToOpenRefine
     End Sub
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        frmMain.clsRLink.RunScript(clsWriteToCSV.ToScript(), strComment:="Convert the data set to csv")
+        frmMain.clsRLink.RunScript(clsDefaultWrite.ToScript(), strComment:="Convert the data set to csv")
     End Sub
 
     Private Sub NewDefaultName()
@@ -99,18 +91,19 @@ Public Class dlgExportToOpenRefine
         End If
     End Sub
 
-
-
     Private Sub ucrOpenRefineDataFrame_ControlContentsChanged() Handles ucrDataFrameOpenRefine.ControlContentsChanged
         NewDefaultName()
+        clsDefaultWrite.RemoveParameterByName("x")
+        clsDefaultWrite.RemoveParameterByName("file")
+        clsDefaultRefine.RemoveParameterByName("file")
+        clsDefaultRefine.RemoveParameterByName("project.name")
+        clsDefaultWrite.AddParameter("x", ucrDataFrameOpenRefine.cboAvailableDataFrames.SelectedItem)
+        clsDefaultWrite.AddParameter("file", Chr(34) & ucrInputDatasetName.GetText() & ".csv" & Chr(34))
+        clsDefaultRefine.AddParameter("file", Chr(34) & ucrInputDatasetName.GetText() & ".csv" & Chr(34))
+        clsDefaultRefine.AddParameter("project.name", Chr(34) & ucrInputDatasetName.GetText() & Chr(34))
     End Sub
 
     Private Sub ucrOpenRefineDataFrame_ContentsChanged() Handles ucrInputDatasetName.ControlContentsChanged, ucrDataFrameOpenRefine.ControlContentsChanged
         TestOKEnabled()
     End Sub
-
-    'fix this run at right time
-    'clsDefaultWrite.AddParameter("file", Chr(34) & ucrInputDatasetName.GetText() & ".csv" & Chr(34)) ' fix this bug
-    '   clsDefaultRefine.AddParameter("project.name", Chr(34) & ucrInputDatasetName.GetText() & Chr(34)) ' fix this bug. This doesn't update yet when you change it
-
 End Class
