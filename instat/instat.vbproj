@@ -1218,6 +1218,12 @@
     <Compile Include="ucrAdditionalLayers.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrAxisElements.Designer.vb">
+      <DependentUpon>ucrAxisElements.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrAxisElements.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrCalculator.Designer.vb">
       <DependentUpon>ucrCalculator.vb</DependentUpon>
     </Compile>
@@ -2154,6 +2160,12 @@
       <DependentUpon>ucrSelectorByDataFrameAddRemove.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrSelectorByDataFrameAddRemove.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrThemeElements.Designer.vb">
+      <DependentUpon>ucrThemeElements.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrThemeElements.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrVariablename.designer.vb">
@@ -4198,6 +4210,9 @@
     <EmbeddedResource Include="ucrAxes.resx">
       <DependentUpon>ucrAxes.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrAxisElements.resx">
+      <DependentUpon>ucrAxisElements.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrButtons.fr-FR.resx">
       <DependentUpon>ucrButtons.vb</DependentUpon>
     </EmbeddedResource>
@@ -4525,6 +4540,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrSelectorByDataFrameAddRemove.sw-KE.resx">
       <DependentUpon>ucrSelectorByDataFrameAddRemove.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrThemeElements.resx">
+      <DependentUpon>ucrThemeElements.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrVariablename.fr-FR.resx">
       <DependentUpon>ucrVariablename.vb</DependentUpon>
