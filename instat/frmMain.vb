@@ -56,7 +56,7 @@ Public Class frmMain
         strStaticPath = Path.GetFullPath("static")
         strHelpFilePath = "Help\R-Instat.chm"
         strAppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "RInstat\")
-        strInstatOptionsFile = "RInstatOptions.bin"
+        strInstatOptionsFile = "Options.bin"
         strSaveFilePath = ""
 
         clsRLink.SetEngine()
@@ -187,7 +187,7 @@ Public Class frmMain
     End Sub
 
     Private Sub SummaryToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificSummary.Click
-        dlgSummaryTables.ShowDialog()
+        dlgNewSummaryTables.ShowDialog()
     End Sub
 
     Private Sub mnuPrepareAddColumnTransform_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnCalculateTransform.Click
@@ -386,6 +386,7 @@ Public Class frmMain
     Private Sub mnuPrepareDataFileDeleteSheets_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataObjectDeleteDataFrame.Click
         dlgDeleteSheet.ShowDialog()
     End Sub
+
 
     Private Sub mnuPrepareSheetDeleteColumnsRows_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameDeleteColumnsRows.Click
         dlgDeleteRowsOrColums.ShowDialog()
@@ -1217,7 +1218,7 @@ Public Class frmMain
         dlgTwoWayFrequencies.ShowDialog()
     End Sub
 
-    Private Sub SummaryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SummaryToolStripMenuItem.Click
+    Private Sub SummaryToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgNewSummaryTables.ShowDialog()
     End Sub
 

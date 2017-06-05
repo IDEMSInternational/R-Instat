@@ -37,6 +37,7 @@ Public Class ucrInput
     Private bLastSilent As Boolean = False
     Private bPrivateAddQuotesIfUnrecognised As Boolean = True
     Protected dctDisplayParameterValues As New Dictionary(Of String, String)
+    Protected bFirstLoad As Boolean = True
 
     Public Sub New()
 
@@ -44,7 +45,7 @@ Public Class ucrInput
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        bUpdateRCodeFromControl = True
+        bUpdateRCodeFromControl = False
     End Sub
 
     Public Overridable Sub SetName(strName As String, Optional bSilent As Boolean = False)
@@ -98,6 +99,11 @@ Public Class ucrInput
         SetDefaultName()
     End Sub
 
+    Public Sub SetDefaultTypeAsTable()
+        strDefaultType = "Table"
+        SetDefaultName()
+    End Sub
+
     Public Sub SetDefaultTypeAsDataFrame()
         strDefaultType = "Data Frame"
         SetDefaultName()
@@ -143,6 +149,12 @@ Public Class ucrInput
                     SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetModelNames(ucrDataFrameSelector.cboAvailableDataFrames.Text)))
                 Else
                     SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetModelNames()))
+                End If
+            ElseIf strDefaultType = "Table" Then
+                If ucrDataFrameSelector IsNot Nothing AndAlso ucrDataFrameSelector.cboAvailableDataFrames.Text <> "" Then
+                    SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetTableNames(ucrDataFrameSelector.cboAvailableDataFrames.Text)))
+                Else
+                    SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetTableNames()))
                 End If
             ElseIf strDefaultType = "Data Frame" Then
                 SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetDataFrameNames()))
@@ -429,7 +441,6 @@ Public Class ucrInput
         If Not bUserTyped Then
             SetDefaultName()
         End If
-        'RaiseEvent NameChanged()
     End Sub
 
     Private Sub ucrInput_TextChanged(sender As Object, e As EventArgs) Handles Me.TextChanged
@@ -510,4 +521,8 @@ Public Class ucrInput
         Next
         Return False
     End Function
+
+    Protected Overrides Sub ResetControlValue()
+        SetName("")
+    End Sub
 End Class
