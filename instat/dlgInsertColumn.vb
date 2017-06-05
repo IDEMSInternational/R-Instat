@@ -30,6 +30,7 @@ Public Class dlgInsertColumn
         SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
+        ReopenDialog()
         TestOKEnabled()
     End Sub
 
@@ -136,8 +137,16 @@ Public Class dlgInsertColumn
         clsInsertRowFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$insert_row_in_data")
         clsInsertRowFunction.AddParameter("before", "FALSE")
         clsInsertRowFunction.AddParameter("start_row", ucrDataFramesList.iDataFrameLength)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsInsertColumnFunction)
         ucrNudStartRow.SetMinMax(1, ucrDataFramesList.iDataFrameLength)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsInsertColumnFunction)
+    End Sub
+
+    Private Sub ReopenDialog()
+        ucrDataFramesList.Reset()
+        ucrNudStartRow.SetMinMax(1, ucrDataFramesList.iDataFrameLength)
+        If ucrDataFramesList.cboAvailableDataFrames.Text <> "" Then
+            ucrNudStartRow.Value = ucrDataFramesList.iDataFrameLength
+        End If
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
