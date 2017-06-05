@@ -21,6 +21,12 @@ Public Class dlgCumulativeDistribution
     Private clsRaesFunction As New RFunction
     Private clsBaseOperator As New ROperator
     Private bFirstLoad As Boolean = True
+    Private clsLabsFunction As New RFunction
+    Private clsXlabsFunction As New RFunction
+    Private clsYlabFunction As New RFunction
+    Private clsXScalecontinuousFunction As New RFunction
+    Private clsRFacetFunction As New RFunction
+    Private bResetSubdialog As Boolean = True
     Private bReset As Boolean = True
 
     Private Sub dlgCumulativeDistribution_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -93,8 +99,6 @@ Public Class dlgCumulativeDistribution
         ucrSaveCumDist.SetCheckBoxText("Save Graph")
         ucrSaveCumDist.SetAssignToIfUncheckedValue("last_graph")
         ucrSaveCumDist.SetDataFrameSelector(ucrCumDistSelector.ucrAvailableDataFrames)
-
-        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
     End Sub
 
     Private Sub SetDefaults()
@@ -107,6 +111,7 @@ Public Class dlgCumulativeDistribution
         ucrCumDistSelector.Focus()
         ucrSaveCumDist.Reset()
         sdgPlots.Reset()
+        bResetSubdialog = True
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
@@ -121,6 +126,12 @@ Public Class dlgCumulativeDistribution
 
         clsRgeomCumDistFunction.SetPackageName("ggplot2")
         clsRgeomCumDistFunction.SetRCommand("stat_ecdf")
+
+        clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultTheme.Clone())
+        clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
+        clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
+        clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
+        clsRFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
 
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrCumDistSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
@@ -150,8 +161,9 @@ Public Class dlgCumulativeDistribution
     End Sub
 
     Private Sub cmdPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdPlotOptions.Click
-        sdgPlots.SetDataFrame(strNewDataFrame:=ucrCumDistSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        sdgPlots.SetRCode(clsBaseOperator, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, strNewDataFrame:=ucrCumDistSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
+        bResetSubdialog = False
     End Sub
 
     Private Sub cmdLineOptions_Click(sender As Object, e As EventArgs) Handles cmdLineOptions.Click

@@ -18,7 +18,7 @@ Imports instat.Translations
 
 Public Class dlgRecodeFactor
     Private bFirstLoad As Boolean = True
-    Private clsReplaceFunction, clsRevalue As RFunction
+    Private clsReplaceFunction, clsRevalueFunction As RFunction
     Private bReset As Boolean = True
     Private Sub dlgRecodeFactor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -35,40 +35,59 @@ Public Class dlgRecodeFactor
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 37
+
+        ucrReceiverFactor.SetParameter(New RParameter("x", 0))
         ucrReceiverFactor.Selector = ucrSelectorForRecode
         ucrReceiverFactor.SetIncludedDataTypes({"factor"})
         ucrReceiverFactor.SetMeAsReceiver()
-        ucrBase.iHelpTopicID = 37
+        ucrReceiverFactor.SetParameterIsRFunction()
 
         ucrFactorGrid.SetReceiver(ucrReceiverFactor)
         ucrFactorGrid.SetAsViewerOnly()
         ucrFactorGrid.bIncludeCopyOfLevels = True
         ucrFactorGrid.AddEditableColumns({"New Label"})
 
-        ucrReceiverFactor.SetParameter(New RParameter("x", 0))
-        ucrReceiverFactor.SetParameterIsRFunction()
-
-        ucrSaveNewCol.SetSaveTypeAsColumn()
-        ucrSaveNewCol.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
-        ucrSaveNewCol.SetIsComboBox()
-        ucrSaveNewCol.SetLabelText("New Factor Column")
-
+        ucrSaveNewColumn.SetSaveTypeAsColumn()
+        ucrSaveNewColumn.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
+        ucrSaveNewColumn.SetIsComboBox()
+        ucrSaveNewColumn.SetLabelText("New Column Name:")
+        ucrSaveNewColumn.SetPrefix("recoded_column")
     End Sub
 
     Private Sub SetDefaults()
         clsReplaceFunction = New RFunction
-        clsRevalue = New RFunction
+        clsRevalueFunction = New RFunction
 
         ucrSelectorForRecode.Reset()
         ucrSelectorForRecode.Focus()
         ucrFactorGrid.ResetText()
-        ucrSaveNewCol.Reset()
+        ucrSaveNewColumn.Reset()
 
-        clsRevalue.SetRCommand("revalue")
-        ucrBase.clsRsyntax.AddParameter("replace", clsRFunctionParameter:=clsReplaceFunction)
-        clsRevalue.SetAssignTo("recoded_column", strTempDataframe:=ucrSelectorForRecode.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveNewCol.GetText, bAssignToIsPrefix:=True)
+        clsRevalueFunction.SetPackageName("plyr")
+        clsRevalueFunction.SetRCommand("revalue")
+        clsRevalueFunction.AddParameter("replace", clsRFunctionParameter:=clsReplaceFunction)
+        clsRevalueFunction.SetAssignTo(strTemp:=ucrSaveNewColumn.GetText(), strTempDataframe:=ucrSelectorForRecode.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveNewColumn.GetText())
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsRevalue)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRevalueFunction)
+    End Sub
+
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        SetRCode(Me, clsRevalueFunction, bReset)
+    End Sub
+
+    Private Sub TestOKEnabled()
+        If Not ucrReceiverFactor.IsEmpty AndAlso ucrSaveNewColumn.IsComplete AndAlso ucrFactorGrid.IsColumnComplete("New Label") Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeforControls(True)
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrFactorGrid_GridContentChanged() Handles ucrFactorGrid.GridContentChanged
@@ -93,27 +112,7 @@ Public Class dlgRecodeFactor
         TestOKEnabled()
     End Sub
 
-    Private Sub TestOKEnabled()
-        If Not ucrReceiverFactor.IsEmpty AndAlso ucrSaveNewCol.IsComplete AndAlso ucrFactorGrid.IsColumnComplete("New Label") Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
-    End Sub
-
-    Private Sub SetRCodeforControls(bReset As Boolean)
-        ucrReceiverFactor.SetRCode(clsRevalue, bReset)
-        ucrFactorGrid.SetRCode(clsRevalue, bReset)
-        ucrSaveNewCol.SetRCode(clsRevalue, bReset)
-    End Sub
-
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
-        SetRCodeforControls(True)
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrReceiverFactor_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged, ucrSaveNewCol.ControlContentsChanged
+    Private Sub ucrReceiverFactor_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged, ucrSaveNewColumn.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class

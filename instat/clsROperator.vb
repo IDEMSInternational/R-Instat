@@ -16,9 +16,13 @@
 
 Public Class ROperator
     Inherits RCodeStructure
-    Public bForceIncludeOperation As Boolean = True
+    Public bForceIncludeOperation As Boolean = False
     Public strOperation As String
     Public bBrackets As Boolean = True
+
+    Public Sub New(Optional strOp As String = "", Optional bBracketsTemp As Boolean = True)
+        SetOperation(strOp, bBracketsTemp)
+    End Sub
 
     Public Sub SetOperation(strTemp As String, Optional bBracketsTemp As Boolean = True)
         strOperation = strTemp
@@ -35,10 +39,18 @@ Public Class ROperator
             Else
                 strTemp = strTemp & clsParameters(0).ToScript(strScript)
             End If
+            'If there's only one parameter and bForceIncludeOperation then we include the operator
+            'The position of the operator depends on the parameter position
+            If bForceIncludeOperation AndAlso clsParameters.Count = 1 Then
+                If clsParameters(0).Position = 0 Then
+                    strTemp = strTemp & Chr(32) & strOperation & Chr(32)
+                Else
+                    strTemp = Chr(32) & strOperation & Chr(32) & strTemp
+                End If
+            End If
         Else
             'message
         End If
-
         For Each clsParam In clsParameters.GetRange(1, clsParameters.Count - 1)
             'If bIncludeOperation Then
             strTemp = strTemp & Chr(32) & strOperation & Chr(32)
