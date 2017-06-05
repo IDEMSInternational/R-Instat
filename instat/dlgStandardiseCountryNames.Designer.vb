@@ -52,6 +52,7 @@ Partial Class dlgStandardiseCountryNames
         Me.ucrReceiverCountryNames.Name = "ucrReceiverCountryNames"
         Me.ucrReceiverCountryNames.Selector = Nothing
         Me.ucrReceiverCountryNames.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverCountryNames.strNcFilePath = ""
         Me.ucrReceiverCountryNames.TabIndex = 2
         Me.ucrReceiverCountryNames.ucrSelector = Nothing
         '
@@ -69,7 +70,7 @@ Partial Class dlgStandardiseCountryNames
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(418, 257)
+        Me.ClientSize = New System.Drawing.Size(416, 253)
         Me.Controls.Add(Me.lblCountryNames)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrReceiverCountryNames)
