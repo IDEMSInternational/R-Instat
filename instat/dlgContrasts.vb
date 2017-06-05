@@ -25,7 +25,6 @@ Public Class dlgContrasts
     Public clsNlevels, clsFactorColumn, clsContractMatrix, clsSetContrast As New RFunction
 
     Public Sub New()
-
         ' This call is required by the designer.
         InitializeComponent()
 
@@ -50,20 +49,6 @@ Public Class dlgContrasts
         bReset = False
         autoTranslate(Me)
         TestOKEnabled()
-    End Sub
-
-    Private Sub SetRCodeforControls(bReset As Boolean)
-        ucrSelectorForContrast.SetRCode(clsSetContrast, bReset)
-        ucrReceiverForContrasts.SetRCode(clsSetContrast, bReset)
-        ucrInputContrastName.SetRCode(clsSetContrast, bReset)
-    End Sub
-
-    Private Sub TestOKEnabled()
-        If ucrReceiverForContrasts.IsEmpty OrElse (ucrInputContrastName.GetText = "User Defined" AndAlso IsEmptyCells()) Then
-            ucrBase.OKEnabled(False)
-        Else
-            ucrBase.OKEnabled(True)
-        End If
     End Sub
 
     Private Sub InitialiseDialog()
@@ -109,6 +94,20 @@ Public Class dlgContrasts
         clsSetContrast.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_contrasts_of_factor")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSetContrast)
+    End Sub
+
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        ucrSelectorForContrast.SetRCode(clsSetContrast, bReset)
+        ucrReceiverForContrasts.SetRCode(clsSetContrast, bReset)
+        ucrInputContrastName.SetRCode(clsSetContrast, bReset)
+    End Sub
+
+    Private Sub TestOKEnabled()
+        If ucrReceiverForContrasts.IsEmpty OrElse (ucrInputContrastName.GetText = "User Defined" AndAlso IsEmptyCells()) Then
+            ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
