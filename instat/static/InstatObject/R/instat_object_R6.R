@@ -458,8 +458,9 @@ instat_object$set("public", "get_objects", function(data_name, object_name, incl
 instat_object$set("public", "get_object_names", function(data_name, include_overall = TRUE, include, exclude, type = "", include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
   if(type == "") overall_object_names = names(private$.objects)
   else {
-    if(type == model_label) overall_object_names = names(private$.objects)[!sapply(private$.objects, function(x) any(c("ggplot", "gg") %in% class(x)))]
-    else if(type == graph_label) overall_object_names = names(private$.objects)[sapply(private$.objects, function(x) any(c("ggplot", "gg") %in% class(x)))]
+    if(type == model_label) overall_object_names = names(private$.objects)[!sapply(private$.objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "htmlTable") %in% class(x)))]
+    else if(type == graph_label) overall_object_names = names(private$.objects)[sapply(private$.objects, function(x) any(c("ggplot", "gg", "gtable", "grob") %in% class(x)))]
+    else if(type == table_label) overall_object_names = names(private$.objects)[sapply(private$.objects, function(x) any(c("htmlTable") %in% class(x)))]
     else stop("type: ", type, " not recognised")
   }
   if(missing(data_name)) {
@@ -572,6 +573,21 @@ instat_object$set("public", "get_graphs", function(data_name, graph_name, includ
 
 instat_object$set("public", "get_graph_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
   self$get_object_names(data_name = data_name, include_overall = include_overall, include, exclude, type = graph_label, include_empty = include_empty, as_list = as_list, excluded_items = excluded_items)
+}
+)
+
+instat_object$set("public", "add_table", function(data_name, table, table_name) {
+  self$add_object(data_name = data_name, object = table, object_name = table_name)
+}
+)
+
+instat_object$set("public", "get_tables", function(data_name, table_name, include_overall = TRUE, force_as_list = FALSE) {
+  self$get_objects(data_name = data_name, object_name = table_name, include_overall = include_overall, type = table_label, force_as_list = force_as_list)
+}
+)
+
+instat_object$set("public", "get_table_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
+  self$get_object_names(data_name = data_name, include_overall = include_overall, include, exclude, type = table_label, include_empty = include_empty, as_list = as_list, excluded_items = excluded_items)
 }
 )
 
@@ -747,8 +763,8 @@ instat_object$set("public", "get_column_factor_levels", function(data_name,col_n
 } 
 )
 
-instat_object$set("public", "get_factor_data_frame", function(data_name,col_name = "") {
-  self$get_data_objects(data_name)$get_factor_data_frame(col_name)
+instat_object$set("public", "get_factor_data_frame", function(data_name, col_name = "", include_levels = TRUE) {
+  self$get_data_objects(data_name)$get_factor_data_frame(col_name = col_name, include_levels = include_levels)
 } 
 )
 
@@ -778,8 +794,8 @@ instat_object$set("public", "rename_dataframe", function(data_name, new_value = 
 } 
 )
 
-instat_object$set("public", "convert_column_to_type", function(data_name, col_names = c(), to_type, factor_values = NULL, set_digits, set_decimals = FALSE, keep_attr = TRUE, use_labels = TRUE) {
-  self$get_data_objects(data_name)$convert_column_to_type(col_names = col_names, to_type = to_type, factor_values = factor_values, set_digits = set_digits,set_decimals = set_decimals, keep_attr = keep_attr, use_labels = use_labels)
+instat_object$set("public", "convert_column_to_type", function(data_name, col_names = c(), to_type, factor_values = NULL, set_digits, set_decimals = FALSE, keep_attr = TRUE, ignore_labels = FALSE) {
+  self$get_data_objects(data_name)$convert_column_to_type(col_names = col_names, to_type = to_type, factor_values = factor_values, set_digits = set_digits,set_decimals = set_decimals, keep_attr = keep_attr, ignore_labels = ignore_labels)
 }
 )
 
@@ -834,8 +850,8 @@ instat_object$set("public", "drop_unused_factor_levels", function(data_name, col
 } 
 )
 
-instat_object$set("public", "set_factor_levels", function(data_name, col_name, new_levels, set_new_labels = TRUE) {
-  self$get_data_objects(data_name)$set_factor_levels(col_name = col_name, new_levels = new_levels, set_new_labels = set_new_labels)
+instat_object$set("public", "set_factor_levels", function(data_name, col_name, new_labels, new_levels, set_new_labels = TRUE) {
+  self$get_data_objects(data_name)$set_factor_levels(col_name = col_name, new_labels = new_labels, new_levels = new_levels, set_new_labels = set_new_labels)
 } 
 )
 
@@ -1082,8 +1098,8 @@ instat_object$set("public","create_factor_data_frame", function(data_name, facto
 }
 )
 
-instat_object$set("public","split_date", function(data_name, col_name = "", year = FALSE, day = FALSE, week = FALSE,  month_val = FALSE, month_abbr = FALSE, month_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE, day_in_month = FALSE, day_in_year = FALSE,  leap_year = FALSE, day_in_year_366 = FALSE, dekade = FALSE, pentad = FALSE ) {
-  self$get_data_objects(data_name)$split_date(col_name = col_name , week = week, month_val = month_val,  month_abbr = month_abbr, month_name = month_name, weekday_val = weekday_val, weekday_abbr = weekday_abbr,  weekday_name =  weekday_name, day = day, year = year, day_in_month = day_in_month, day_in_year = day_in_year,  leap_year =  leap_year, day_in_year_366 = day_in_year_366, dekade = dekade, pentad = pentad)
+instat_object$set("public","split_date", function(data_name, col_name = "", year = FALSE, day = FALSE, week = FALSE,  month_val = FALSE, month_abbr = FALSE, month_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE, day_in_month = FALSE, day_in_year = FALSE,  leap_year = FALSE, day_in_year_366 = FALSE, dekade = FALSE, pentad = FALSE, shift_day = FALSE, shift_year = FALSE, shift_start_day_in_month = 1, shift_start_month = 8) {
+  self$get_data_objects(data_name)$split_date(col_name = col_name , week = week, month_val = month_val,  month_abbr = month_abbr, month_name = month_name, weekday_val = weekday_val, weekday_abbr = weekday_abbr,  weekday_name =  weekday_name, day = day, year = year, day_in_month = day_in_month, day_in_year = day_in_year,  leap_year =  leap_year, day_in_year_366 = day_in_year_366, dekade = dekade, pentad = pentad, shift_day = shift_day, shift_year = shift_year, shift_start_day_in_month = shift_start_day_in_month, shift_start_month = shift_start_month)
 }
 )
 

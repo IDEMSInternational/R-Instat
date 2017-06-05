@@ -85,6 +85,12 @@ Public Class ucrInputTextBox
         txtInput.Copy()
     End Sub
 
+    Private Sub ucrInputTextBox_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If bFirstLoad Then
+            bFirstLoad = False
+        End If
+    End Sub
+
     Public Overrides Property IsReadOnly As Boolean
         Get
             Return MyBase.IsReadOnly
