@@ -149,6 +149,7 @@ Public Class dlgContrasts
         If Not ucrReceiverForContrasts.IsEmpty AndAlso ucrInputContrastName.GetText = "User Defined" Then
             Me.Size = New System.Drawing.Size(440 + grdLayoutForContrasts.Width, 294)
             clsFactorColumn.AddParameter("col_name", ucrReceiverForContrasts.GetVariableNames())
+            clsFactorColumn.AddParameter("data_name", Chr(34) & ucrSelectorForContrast.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
             clsNlevels.AddParameter("x", clsRFunctionParameter:=clsFactorColumn)
             grdCurrSheet.Rows = frmMain.clsRLink.RunInternalScriptGetValue(clsNlevels.ToScript).AsNumeric(0)
             grdCurrSheet.Columns = grdCurrSheet.Rows - 1
