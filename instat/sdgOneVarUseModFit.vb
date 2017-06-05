@@ -19,6 +19,7 @@ Public Class sdgOneVarUseModFit
     Private bControlsInitialised As Boolean = False
     Private clsRSeqFunction, clsOneVarRBootFunction, clsOneVarQuantileFunction, clsRBootFunction, clsRReceiver, clsRPlotFunction As New RFunction
     Public bfirstload As Boolean = True
+
     Private Sub sdgOneVarFitModDisplay(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
@@ -93,6 +94,7 @@ Public Class sdgOneVarUseModFit
         ucrPnlPlots.AddFunctionNamesCondition(rdoQQPlot, "qqcomp")
         ucrPnlPlots.AddFunctionNamesCondition(rdoDensityPlot, "denscomp")
         ucrPnlPlots.AddFunctionNamesCondition(rdoCIcdf, "CIcdfplot")
+        InitialiseTabs()
 
         ' rdoNoPlot.Enabled = False ' temporary
         bControlsInitialised = True
@@ -118,6 +120,10 @@ Public Class sdgOneVarUseModFit
         ucrNudCI.SetRCode(clsOneVarQuantileFunction, bReset)
         ucrPnlPlots.SetRCode(clsRPlotFunction, bReset)
         ucrPnlQuantiles.SetRCode(clsRSeqFunction, bReset)
+
+        If bReset Then
+            tbpOneVarUseModFit.SelectedIndex = 0
+        End If
     End Sub
 
     Public Sub CreateGraphs()
@@ -165,18 +171,26 @@ Public Class sdgOneVarUseModFit
     Public Sub SetPlotOptions()
         If Not dlgOneVarUseModel.ucrChkProduceBootstrap.Checked Then
             rdoCIcdf.Enabled = False
-            tbBootstrapOptions.Enabled = False
+            tbpBootstrapOptions.Enabled = False
             If rdoCIcdf.Checked Then
                 rdoPlotAll.Checked = True
             End If
         Else
             rdoCIcdf.Enabled = True
-            tbBootstrapOptions.Enabled = True
+            tbpBootstrapOptions.Enabled = True
         End If
     End Sub
 
     Private Sub ucrBase_ClickReturn(sender As Object, e As EventArgs) Handles ucrBase.ClickReturn
         dlgOneVarUseModel.QuantileCommand()
         CreateGraphs()
+    End Sub
+
+    Private Sub InitialiseTabs()
+        For i = 0 To tbpOneVarUseModFit.TabCount - 1
+            tbpOneVarUseModFit.SelectedIndex = i
+        Next
+        tbpOneVarUseModFit.TabPages(2).Enabled = False
+        tbpOneVarUseModFit.SelectedIndex = 0
     End Sub
 End Class
