@@ -1219,8 +1219,7 @@ instat_object$set("public", "get_corruption_contract_data_names", function() {
 
 instat_object$set("public", "get_database_variable_names", function(query, data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
   if(self$has_database_connection()) {
-    temp_data <- dbGetQuery(self$get_database_connection(), query)
-    
+    temp_data <- DBI::dbGetQuery(self$get_database_connection(), query)
     if(as_list) {
       out <- list()
       out[["database"]] <- temp_data[[1]]
@@ -1257,7 +1256,7 @@ instat_object$set("public", "has_database_connection", function() {
 instat_object$set("public", "database_connect", function(dbname, user, host, port, drv = MySQL(), password) {
   #password <- getPass(paste0(username, " password:"))
   out <- NULL
-  out <- dbConnect(drv = drv, dbname = dbname, user = user, password = password, host = host, port = port)
+  out <- DBI::dbConnect(drv = drv, dbname = dbname, user = user, password = password, host = host, port = port)
   if(!is.null(out)) {
     self$set_database_connection(out)
   }
@@ -1276,7 +1275,7 @@ instat_object$set("public", "set_database_connection", function(dbi_connection) 
 
 instat_object$set("public", "database_disconnect", function() {
   if(!is.null(self$get_database_connection())) {
-    dbDisconnect(private$.database_connection)
+    DBI::dbDisconnect(private$.database_connection)
     self$set_database_connection(NULL)
   }
 }
@@ -1286,7 +1285,7 @@ instat_object$set("public", "import_from_climsoft", function(stations = c(), ele
   #need to perform checks here
   con = self$get_database_connection()
   my_stations = paste0("(", paste(as.character(stations), collapse=", "), ")")
-  station_info <- dbGetQuery(con, paste0("SELECT * FROM station WHERE stationID in ", my_stations, ";"))
+  station_info <- DBI::dbGetQuery(con, paste0("SELECT * FROM station WHERE stationID in ", my_stations, ";"))
   date_bounds=""
   if(start_date!=""){
     if(try(!is.na(as.Date( start_date, format= "%Y-%m-%d")))){
@@ -1308,11 +1307,11 @@ instat_object$set("public", "import_from_climsoft", function(stations = c(), ele
   
   if (length(elements) > 0){
     my_elements = paste0("(", paste0(sprintf("'%s'", elements), collapse = ", "), ")")
-    element_ids = dbGetQuery(con, paste0("SELECT elementID FROM obselement WHERE elementName in", my_elements,";"))
+    element_ids = DBI::dbGetQuery(con, paste0("SELECT elementID FROM obselement WHERE elementName in", my_elements,";"))
     element_id_vec = paste0("(", paste0(sprintf("%d", element_ids$elementID), collapse = ", "), ")")
   }
   if(include_observation_data){
-    station_data <- dbGetQuery(con, paste0("SELECT observationfinal.recordedFrom, observationfinal.describedBy, obselement.abbreviation, obselement.elementName,observationfinal.obsDatetime,observationfinal.obsValue FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy AND observationfinal.recordedFrom IN", my_stations, "AND observationfinal.describedBy IN", element_id_vec, date_bounds, " ORDER BY observationfinal.recordedFrom, observationfinal.describedBy;"))
+    station_data <- DBI::dbGetQuery(con, paste0("SELECT observationfinal.recordedFrom, observationfinal.describedBy, obselement.abbreviation, obselement.elementName,observationfinal.obsDatetime,observationfinal.obsValue FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy AND observationfinal.recordedFrom IN", my_stations, "AND observationfinal.describedBy IN", element_id_vec, date_bounds, " ORDER BY observationfinal.recordedFrom, observationfinal.describedBy;"))
     data_list <- list(station_info, station_data)
     names(data_list) = c("station_info","station_data")
   }
