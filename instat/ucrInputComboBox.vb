@@ -55,6 +55,11 @@ Public Class ucrInputComboBox
         FillItemTypes()
     End Sub
 
+    Public Sub SetItemsTypeAsTables()
+        strItemsType = "Tables"
+        FillItemTypes()
+    End Sub
+
     Public Sub SetItemsTypeAsGraphs()
         strItemsType = "Graphs"
         FillItemTypes()
@@ -72,17 +77,22 @@ Public Class ucrInputComboBox
                     frmMain.clsRLink.FillColumnNames(ucrDataFrameSelector.cboAvailableDataFrames.Text, cboColumns:=cboInput)
                 End If
             Case "Data Frames"
+                'TODO not yet implemented
             Case "Models"
                 If ucrDataFrameSelector IsNot Nothing Then
                     cboInput.Items.Clear()
                     cboInput.Items.AddRange(frmMain.clsRLink.GetModelNames(ucrDataFrameSelector.cboAvailableDataFrames.Text).ToArray)
+                End If
+            Case "Tables"
+                If ucrDataFrameSelector IsNot Nothing Then
+                    cboInput.Items.Clear()
+                    cboInput.Items.AddRange(frmMain.clsRLink.GetTableNames(ucrDataFrameSelector.cboAvailableDataFrames.Text).ToArray)
                 End If
             Case "Graphs"
                 If ucrDataFrameSelector IsNot Nothing Then
                     cboInput.Items.Clear()
                     cboInput.Items.AddRange(frmMain.clsRLink.GetGraphNames(ucrDataFrameSelector.cboAvailableDataFrames.Text).ToArray())
                 End If
-
             Case "Filters"
                 If ucrDataFrameSelector IsNot Nothing Then
                     cboInput.Items.Clear()
@@ -133,14 +143,15 @@ Public Class ucrInputComboBox
 
         If bClearExisting Then
             cboInput.Items.Clear()
+            dctDisplayParameterValues.Clear()
         End If
-        If clsParameter Is Nothing Then
+        If GetParameter() Is Nothing Then
             MsgBox("Developer error: Parameter must be set before items can be set. Modify setup for " & Name & " so that the parameter is set first.")
         End If
         For Each kvpTemp In dctItemParameterValuePairs
             cboInput.Items.Add(kvpTemp.Key)
             dctDisplayParameterValues.Add(kvpTemp.Key, kvpTemp.Value)
-            AddParameterValuesCondition(kvpTemp.Key, clsParameter.strArgumentName, kvpTemp.Value)
+            AddParameterValuesCondition(kvpTemp.Key, GetParameter().strArgumentName, kvpTemp.Value)
         Next
         AdjustComboBoxWidth(cboInput)
     End Sub
@@ -168,6 +179,10 @@ Public Class ucrInputComboBox
     Private Sub ucrInputComboBox_Load(sender As Object, e As EventArgs) Handles Me.Load
         bAllowNonConditionValues = False
         FillItemTypes()
+        If bFirstLoad Then
+            SetDropDownStyleAsEditable(True)
+            bFirstLoad = False
+        End If
     End Sub
 
     Private Sub cboInput_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboInput.SelectedIndexChanged
@@ -216,5 +231,23 @@ Public Class ucrInputComboBox
 
     Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
         MyBase.UpdateControl(bReset)
+    End Sub
+
+    Public Sub SetDropDownStyleAsNonEditable()
+        cboInput.DropDownStyle = ComboBoxStyle.DropDownList
+        cboInput.AutoCompleteMode = AutoCompleteMode.None
+        cboInput.AutoCompleteSource = AutoCompleteSource.None
+    End Sub
+
+    Public Sub SetDropDownStyleAsEditable(bAdditionsAllowed As Boolean)
+        cboInput.DropDownStyle = ComboBoxStyle.DropDown
+        cboInput.AutoCompleteMode = AutoCompleteMode.Append
+        cboInput.AutoCompleteSource = AutoCompleteSource.ListItems
+        'TODO implement validation settings for this		
+        If bAdditionsAllowed Then
+
+        Else
+
+        End If
     End Sub
 End Class

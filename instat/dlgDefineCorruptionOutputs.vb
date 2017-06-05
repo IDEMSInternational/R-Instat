@@ -37,20 +37,10 @@ Public Class dlgDefineCorruptionOutputs
         End If
         SetRCodeForControls(bReset)
         bReset = False
-
-    End Sub
-
-    Private Sub SetDefaults()
-        'Reset 
-        ucrSelectorCorruptionOutputs.Reset()
-        clsCorruptionOutputs = New RFunction
-        clsCorruptionOutputs.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$define_corruption_outputs")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsCorruptionOutputs)
     End Sub
 
     Private Sub InitialiseDialog()
-        'helpID
-        '  ucrBase.iHelpTopicID =
+        ucrBase.iHelpTopicID = 191
 
         'selector
         ucrSelectorCorruptionOutputs.SetParameter(New RParameter("data_name", 0))
@@ -59,6 +49,17 @@ Public Class dlgDefineCorruptionOutputs
         'ucrreceiver
         ucrReceiverCorruptionOutputs.SetParameter(New RParameter("output_columns", 1))
         ucrReceiverCorruptionOutputs.SetParameterIsString()
+        ucrReceiverCorruptionOutputs.Selector = ucrSelectorCorruptionOutputs
+        ucrReceiverCorruptionOutputs.SetMeAsReceiver()
+    End Sub
+
+    Private Sub SetDefaults()
+        'Reset 
+        ucrSelectorCorruptionOutputs.Reset()
+
+        clsCorruptionOutputs = New RFunction
+        clsCorruptionOutputs.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$define_corruption_outputs")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsCorruptionOutputs)
     End Sub
 
     Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
