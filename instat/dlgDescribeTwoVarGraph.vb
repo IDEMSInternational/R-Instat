@@ -48,13 +48,13 @@ Public Class dlgDescribeTwoVarGraph
         ucrBase.clsRsyntax.SetOperation("+")
         clsRGGplotFunction.SetRCommand("ggplot")
         ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRGGplotFunction)
-        ucrReceiverMultipleTwoVar.SetSelector(ucrSelectorTwoVarGraph)
+        ucrReceiverMultipleTwoVar.Selector = ucrSelectorTwoVarGraph
         ucrReceiverMultipleTwoVar.SetSingleTypeStatus(True)
         ucrReceiverMultipleTwoVar.SetMultipleOnlyStatus(True)
         ucrSecondVariableReceiver.Selector = ucrSelectorTwoVarGraph
         ucrTwoVarGraphSave.SetDataFrameSelector(ucrSelectorTwoVarGraph.ucrAvailableDataFrames)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        ucrBase.clsRsyntax.iCallType = 0
+        ucrBase.clsRsyntax.iCallType = 3
         clsRFacet.SetRCommand("facet_wrap")
         clsRFacet.AddParameter("facets", "~variable")
         ucrBase.clsRsyntax.AddOperatorParameter("facet_wrap", clsRFunc:=clsRFacet)

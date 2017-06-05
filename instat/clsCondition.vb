@@ -3,18 +3,25 @@
     Private bIsParameterPresent As Boolean = False
     Private bIsFunctionNames As Boolean = False
     Private bIsParameterType As Boolean = False
+    Private bIsParameterValuesRFunctionNames As Boolean = False
     Private strParameterType As String = ""
     Private strParameterName As String = ""
     Private lstValues As List(Of String) = New List(Of String)
     Private bIsPositive As Boolean = True
 
-    Public Sub SetParameterPresentName(strParamName As String, Optional bNewIsPositive As Boolean = True)
-        strParameterName = strParamName
+    Public Sub SetParameterPresentNames(strParamName As String, Optional bNewIsPositive As Boolean = True)
+        SetParameterPresentNames(New List(Of String)({strParamName}), bNewIsPositive)
+    End Sub
+
+    Public Sub SetParameterPresentNames(lstParamName As List(Of String), Optional bNewIsPositive As Boolean = True)
+        strParameterName = ""
+        lstValues = lstParamName
         bIsParameterPresent = True
         bIsParameterValues = False
         bIsFunctionNames = False
         bIsParameterType = False
         strParameterType = ""
+        bIsParameterValuesRFunctionNames = False
         bIsPositive = bNewIsPositive
     End Sub
 
@@ -26,11 +33,28 @@
         bIsFunctionNames = False
         bIsParameterType = False
         strParameterType = ""
+        bIsParameterValuesRFunctionNames = False
         bIsPositive = bNewIsPositive
     End Sub
 
     Public Sub SetParameterValues(strParamName As String, strParamValues As String, Optional bNewIsPositive As Boolean = True)
         SetParameterValues(strParamName, New List(Of String)({strParamValues}), bNewIsPositive)
+    End Sub
+
+    Public Sub SetParameterValuesRFunctionNames(strParamName As String, lstRCodeNames As List(Of String), Optional bNewIsPositive As Boolean = True)
+        strParameterName = strParamName
+        lstValues = lstRCodeNames
+        bIsParameterValues = False
+        bIsParameterPresent = False
+        bIsFunctionNames = False
+        bIsParameterType = False
+        strParameterType = ""
+        bIsParameterValuesRFunctionNames = True
+        bIsPositive = bNewIsPositive
+    End Sub
+
+    Public Sub SetParameterValuesRFunctionNames(strParamName As String, strRCodeNames As String, Optional bNewIsPositive As Boolean = True)
+        SetParameterValuesRFunctionNames(strParamName, New List(Of String)({strRCodeNames}), bNewIsPositive)
     End Sub
 
     Public Sub SetFunctionName(strFuncName As String, Optional bNewIsPositive As Boolean = True)
@@ -44,6 +68,7 @@
         bIsParameterPresent = False
         bIsParameterType = False
         strParameterType = ""
+        bIsParameterValuesRFunctionNames = False
         bIsPositive = bNewIsPositive
     End Sub
 
@@ -52,6 +77,7 @@
         bIsParameterValues = False
         bIsParameterPresent = False
         bIsParameterType = True
+        bIsParameterValuesRFunctionNames = False
         strParameterName = strParamName
         If Not {"string", "RFunction", "ROperator"}.Contains(strType) Then
             MsgBox("Developer error: strType must be either string, RFunction or ROperator.")
@@ -71,9 +97,9 @@
             Else
                 clsTempParam = clsRCode.GetParameter(strParameterName)
             End If
-            Return (clsTempParam IsNot Nothing AndAlso clsTempParam.bIsString AndAlso clsTempParam.strArgumentValue IsNot Nothing AndAlso (bIsPositive = lstValues.Contains(clsTempParam.strArgumentValue)))
+            Return (bIsPositive = (clsTempParam IsNot Nothing AndAlso clsTempParam.bIsString AndAlso clsTempParam.strArgumentValue IsNot Nothing AndAlso lstValues.Contains(clsTempParam.strArgumentValue)))
         ElseIf bIsParameterPresent Then
-            Return (bIsPositive = clsRCode.ContainsParameter(strParameterName))
+            Return (bIsPositive = lstValues.Any(Function(x) clsRCode.ContainsParameter(x)))
         ElseIf bIsFunctionNames Then
             If TypeOf clsRCode Is RFunction Then
                 clsTempFunc = CType(clsRCode, RFunction)
@@ -98,8 +124,22 @@
                         Return False
                 End Select
             End If
+        ElseIf bIsParameterValuesRFunctionNames Then
+            If clsParameter IsNot Nothing Then
+                If clsParameter.strArgumentName = strParameterName Then
+                    clsTempParam = clsParameter
+                Else
+                    clsTempParam = clsRCode.GetParameter(strParameterName)
+                End If
+            Else
+                clsTempParam = clsRCode.GetParameter(strParameterName)
+            End If
+            If Not (clsTempParam IsNot Nothing AndAlso clsTempParam.bIsFunction AndAlso clsTempParam.clsArgumentCodeStructure IsNot Nothing) Then
+                Return Not bIsPositive
+            End If
+            Return ((bIsPositive = lstValues.Contains(DirectCast(clsTempParam.clsArgumentCodeStructure, RFunction).strRCommand)))
         Else
-            Return True
+                Return True
         End If
     End Function
 End Class

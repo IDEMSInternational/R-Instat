@@ -14,20 +14,18 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgColumnStructure
     Private bReset As Boolean = True
-    Private clsColByMetadata As New RFunction
+    Private clsColByMetadata, clsColumnStructure As New RFunction
     'clsCourByStructure is here to construct the R-command that will colour columns according to their type in case it is required (see relevant tick box).
-    Public bFirstLoad As Boolean = True
+    Private bFirstLoad As Boolean = True
     Private Sub ucrSelectorColumnStructures_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
         End If
-
         If bReset Then
             SetDefaults()
         End If
@@ -75,16 +73,17 @@ Public Class dlgColumnStructure
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultColourByStructure, clsDefualtRFunction As New RFunction
+        clsColByMetadata = New RFunction
+        clsColumnStructure = New RFunction
+        ucrSelectorColumnStructure.Reset()
         ucrChkColourColumnsByStructure.Checked = False
         SetColumnStructureInReceiver()
         ucrReceiverType1.SetMeAsReceiver()
-        clsDefaultColourByStructure.AddParameter("data_name", Chr(34) & ucrSelectorColumnStructure.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-        clsDefaultColourByStructure.AddParameter("property", Chr(34) & "Structure" & Chr(34))
-        clsDefaultColourByStructure.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_column_colours_by_metadata")
-        clsColByMetadata = clsdefaultColourByStructure.Clone
-        clsDefualtRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_structure_columns")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefualtRFunction.Clone())
+        clsColByMetadata.AddParameter("data_name", Chr(34) & ucrSelectorColumnStructure.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+        clsColByMetadata.AddParameter("property", Chr(34) & "Structure" & Chr(34))
+        clsColByMetadata.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_column_colours_by_metadata")
+        clsColumnStructure.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_structure_columns")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsColumnStructure)
     End Sub
 
     Private Sub SetColumnStructureInReceiver()
