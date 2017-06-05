@@ -72,6 +72,7 @@ Public Class dlgContrasts
         dctContrastTypes.Add("User Defined", Chr(34) & "user_defined" & Chr(34))
         ucrInputContrastName.SetItems(dctContrastTypes)
         ucrInputContrastName.SetLinkedDisplayControl(lblSelectContrastName)
+        ucrInputContrastName.SetDropDownStyleAsNonEditable()
     End Sub
 
     Private Sub SetDefaults()
