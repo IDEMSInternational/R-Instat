@@ -32,6 +32,8 @@ Public Class ucrReceiver
 
     Public strDatabaseQuery As String = ""
 
+    Private strPrvNcFilePath As String = ""
+
     Public bAddParameterIfEmpty As Boolean = False
     'If the control is used to set a parameter that is a string i.e. column = "ID"
     Protected bParameterIsString As Boolean = False
@@ -90,6 +92,18 @@ Public Class ucrReceiver
     Public Overridable Sub RemoveColor()
 
     End Sub
+
+    Public Property strNcFilePath As String
+        Get
+            Return strPrvNcFilePath
+        End Get
+        Set(strFilePath As String)
+            strPrvNcFilePath = strFilePath
+            If Selector IsNot Nothing Then
+                Selector.LoadList()
+            End If
+        End Set
+    End Property
 
     Public Overridable Function GetVariables(Optional bForceAsDataFrame As Boolean = False) As RFunction
         Dim clsGetVariablesFunc As New RFunction
@@ -168,7 +182,7 @@ Public Class ucrReceiver
         AddIncludedMetadataProperty("class", {Chr(34) & strTemp & Chr(34)})
     End Sub
 
-    Public Sub SetIncludedDataTypes(strInclude As String())
+    Public Overridable Sub SetIncludedDataTypes(strInclude As String())
         Dim strTypes(strInclude.Count - 1) As String
 
         Array.Copy(strInclude, strTypes, strInclude.Length)
@@ -179,7 +193,7 @@ Public Class ucrReceiver
         AddIncludedMetadataProperty("class", strTypes)
     End Sub
 
-    Public Sub SetExcludedDataTypes(strExclude As String())
+    Public Overridable Sub SetExcludedDataTypes(strExclude As String())
         Dim strTypes(strExclude.Count - 1) As String
 
         Array.Copy(strExclude, strTypes, strExclude.Length)
@@ -353,7 +367,7 @@ Public Class ucrReceiver
         End If
     End Sub
 
-    Protected Overrides Sub UpdateParameter(clsTempParam As RParameter)
+    Public Overrides Sub UpdateParameter(clsTempParam As RParameter)
         If clsTempParam Is Nothing Then
             clsTempParam = New RParameter
         End If
@@ -403,4 +417,8 @@ Public Class ucrReceiver
             ucrSelector = ucrNewSelector
         End Set
     End Property
+
+    Protected Overrides Sub ResetControlValue()
+        Clear()
+    End Sub
 End Class

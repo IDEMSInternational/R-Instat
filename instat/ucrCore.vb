@@ -103,12 +103,26 @@ Public Class ucrCore
                     If Not clsTempRCode.ContainsParameter(clsTempRParameter) Then
                         If clsTempRCode.ContainsParameter(clsTempRParameter.strArgumentName) Then
                             SetParameter(clsTempRCode.GetParameter(clsTempRParameter.strArgumentName), i)
-                        ElseIf bReset Then
-                            If objDefaultState Is Nothing Then
-                                SetToRDefault()
-                                'Exit Sub
-                            End If
                         Else
+                            'This causes an issue if this parameter is linked to another control
+                            'because .Clone breaks the link
+                            'Not an issue if controls do not need to share parameters
+                            SetParameter(GetParameter(i).Clone(), i)
+                            'TODO if we don't reset what should happen to the parameter value
+                            '     when it's not found in the function?
+                            '     Causes issues when parameter retains value from different dialog
+                            If bReset Then
+                                If objDefaultState Is Nothing Then
+                                    If objRDefault IsNot Nothing Then
+                                        SetToRDefault()
+                                    Else
+                                        ResetControlValue()
+                                    End If
+                                    'Exit Sub
+                                End If
+                            Else
+                                ResetControlValue()
+                            End If
                         End If
                     End If
                 Else
@@ -180,7 +194,7 @@ Public Class ucrCore
                 End If
             End If
             If ucrControl.bLinkedAddRemoveParameter Then
-                ucrControl.AddOrRemoveParameter(bTemp)
+                ucrControl.AddOrRemoveParameter(bTemp AndAlso (ucrControl.CanAddParameter() OrElse Not ucrControl.bAddRemoveParameter))
             End If
             If ucrControl.bLinkedHideIfParameterMissing Then
                 ucrControl.SetVisible(bTemp)
@@ -280,7 +294,7 @@ Public Class ucrCore
                 If bAdd Then
                     lstAllRCodes(i).AddParameter(lstAllRParameters(i))
                 Else
-                    lstAllRCodes(i).RemoveParameter(lstAllRParameters(i))
+                    lstAllRCodes(i).RemoveParameterByName(lstAllRParameters(i).strArgumentName)
                 End If
             End If
         Next
@@ -336,8 +350,8 @@ Public Class ucrCore
         Return bTemp
     End Function
 
-    Public Overridable Function GetParameter() As RParameter
-        Return clsParameter
+    Public Overridable Function GetParameter(Optional iIndex As Integer = 0) As RParameter
+        Return lstAllRParameters(iIndex)
     End Function
 
     Public Overridable Function GetRCode() As RCodeStructure
@@ -387,7 +401,14 @@ Public Class ucrCore
     Public Sub AddParameterPresentCondition(objControlState As Object, strParamName As String, Optional bNewIsPositive As Boolean = True)
         Dim clsTempCond As New Condition
 
-        clsTempCond.SetParameterPresentName(strParamName, bNewIsPositive)
+        clsTempCond.SetParameterPresentNames(strParamName, bNewIsPositive)
+        AddCondition(objControlState, clsTempCond)
+    End Sub
+
+    Public Sub AddParameterPresentCondition(objControlState As Object, lstParamName As String(), Optional bNewIsPositive As Boolean = True)
+        Dim clsTempCond As New Condition
+
+        clsTempCond.SetParameterPresentNames(lstParamName.ToString(), bNewIsPositive)
         AddCondition(objControlState, clsTempCond)
     End Sub
 
@@ -423,6 +444,20 @@ Public Class ucrCore
         Dim clsTempCond As New Condition
 
         clsTempCond.SetParameterType(strType:="ROperator", strParamName:=strParameterName, bNewIsPositive:=bNewIsPositive)
+        AddCondition(objControlState, clsTempCond)
+    End Sub
+
+    Public Sub AddParameterValueFunctionNamesCondition(objControlState As Object, strParameterName As String, strFunctionName As String, Optional bNewIsPositive As Boolean = True)
+        Dim clsTempCond As New Condition
+
+        clsTempCond.SetParameterValuesRFunctionNames(strParamName:=strParameterName, strRCodeNames:=strFunctionName, bNewIsPositive:=bNewIsPositive)
+        AddCondition(objControlState, clsTempCond)
+    End Sub
+
+    Public Sub AddParameterValueFunctionNamesCondition(objControlState As Object, strParameterName As String, strFunctionNames As String(), Optional bNewIsPositive As Boolean = True)
+        Dim clsTempCond As New Condition
+
+        clsTempCond.SetParameterValuesRFunctionNames(strParamName:=strParameterName, lstRCodeNames:=strFunctionNames.ToList(), bNewIsPositive:=bNewIsPositive)
         AddCondition(objControlState, clsTempCond)
     End Sub
 
@@ -465,7 +500,7 @@ Public Class ucrCore
         strValuesToIgnore = strValues
     End Sub
 
-    Public Sub AddAdditionalCodeParameterPair(clsNewRCode As RCodeStructure, clsNewRParameter As RParameter, Optional iAdditionalPairNo As Integer = -1)
+    Public Overridable Sub AddAdditionalCodeParameterPair(clsNewRCode As RCodeStructure, clsNewRParameter As RParameter, Optional iAdditionalPairNo As Integer = -1)
         If iAdditionalPairNo = -1 Then
             iAdditionalPairNo = lstAllRCodes.Count
         End If
@@ -487,7 +522,7 @@ Public Class ucrCore
         Next
     End Sub
 
-    Protected Overridable Sub UpdateParameter(clsTempParam As RParameter)
+    Public Overridable Sub UpdateParameter(clsTempParam As RParameter)
         If GetValueToSet() IsNot Nothing Then
             clsTempParam.SetArgumentValue(GetValueToSet().ToString())
         End If
@@ -496,6 +531,12 @@ Public Class ucrCore
     Public Sub SetParameterIncludeArgumentName(bInclude As Boolean)
         If clsParameter IsNot Nothing Then
             clsParameter.bIncludeArgumentName = bInclude
+        End If
+    End Sub
+
+    Public Sub SetParameterPosition(iPosition As Integer)
+        If clsParameter IsNot Nothing Then
+            clsParameter.Position = iPosition
         End If
     End Sub
 
@@ -516,4 +557,8 @@ Public Class ucrCore
             lstAllRCodes(0) = bNewRCode
         End Set
     End Property
+
+    Protected Overridable Sub ResetControlValue()
+        'TODO implement in specific controls
+    End Sub
 End Class

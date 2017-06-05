@@ -29,6 +29,8 @@ Public Class ucrSave
         ucrChkSave.bIsActiveRControl = False
         ucrInputComboSave.bIsActiveRControl = False
         ucrInputTextSave.bIsActiveRControl = False
+        ucrInputComboSave.bUpdateRCodeFromControl = True
+        ucrInputTextSave.bUpdateRCodeFromControl = True
     End Sub
 
     Private Sub SetDefaults()
@@ -146,6 +148,10 @@ Public Class ucrSave
                 ucrInputComboSave.SetDefaultTypeAsModel()
                 ucrInputComboSave.SetItemsTypeAsModels()
                 ucrInputTextSave.SetDefaultTypeAsModel()
+            Case "table"
+                ucrInputComboSave.SetDefaultTypeAsTable()
+                ucrInputComboSave.SetItemsTypeAsTables()
+                ucrInputTextSave.SetDefaultTypeAsTable()
             Case Else
                 MsgBox("Developer error: unrecognised save type: " & strType)
         End Select
@@ -165,6 +171,10 @@ Public Class ucrSave
 
     Public Sub SetSaveTypeAsModel()
         SetSaveType("model")
+    End Sub
+
+    Public Sub SetSaveTypeAsTable()
+        SetSaveType("table")
     End Sub
 
     Public Sub Reset()
@@ -234,37 +244,41 @@ Public Class ucrSave
     Private Sub UpdateAssignTo(Optional bRemove As Boolean = False)
         Dim strSaveName As String
         Dim strDataName As String = ""
-        Dim clsMainRCode As RCodeStructure
+        Dim clsTempCode As RCodeStructure
 
-        clsMainRCode = GetRCode()
-        If clsMainRCode IsNot Nothing Then
-            If bRemove Then
-                clsMainRCode.RemoveAssignTo()
-            Else
-                If ucrDataFrameSelector IsNot Nothing Then
-                    strDataName = ucrDataFrameSelector.cboAvailableDataFrames.Text
-                End If
-                If bShowCheckBox AndAlso Not ucrChkSave.Checked Then
-                    strSaveName = strAssignToIfUnchecked
+        For i As Integer = 0 To lstAllRCodes.Count - 1
+            clsTempCode = lstAllRCodes(i)
+            If clsTempCode IsNot Nothing Then
+                If bRemove Then
+                    clsTempCode.RemoveAssignTo()
                 Else
-                    strSaveName = GetText()
-                End If
-                If strSaveName <> "" Then
-                    Select Case strSaveType
-                        Case "column"
-                            clsMainRCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempColumn:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix, bAssignToColumnWithoutNames:=bAssignToColumnWithoutNames, bInsertColumnBefore:=bInsertColumnBefore)
-                        Case "dataframe"
-                            clsMainRCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
-                        Case "graph"
-                            clsMainRCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempGraph:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
-                        Case "model"
-                            clsMainRCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempModel:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
-                    End Select
-                Else
-                    clsMainRCode.RemoveAssignTo()
+                    If ucrDataFrameSelector IsNot Nothing Then
+                        strDataName = ucrDataFrameSelector.cboAvailableDataFrames.Text
+                    End If
+                    If bShowCheckBox AndAlso Not ucrChkSave.Checked Then
+                        strSaveName = strAssignToIfUnchecked
+                    Else
+                        strSaveName = GetText()
+                    End If
+                    If strSaveName <> "" Then
+                        Select Case strSaveType
+                            Case "column"
+                                clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempColumn:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix, bAssignToColumnWithoutNames:=bAssignToColumnWithoutNames, bInsertColumnBefore:=bInsertColumnBefore)
+                            Case "dataframe"
+                                clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
+                            Case "graph"
+                                clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempGraph:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
+                            Case "model"
+                                clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempModel:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
+                            Case "table"
+                                clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempTable:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
+                        End Select
+                    Else
+                        clsTempCode.RemoveAssignTo()
+                    End If
                 End If
             End If
-        End If
+        Next
     End Sub
 
     Private Sub ucrInputControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputComboSave.ControlContentsChanged, ucrInputTextSave.ControlContentsChanged
@@ -339,5 +353,9 @@ Public Class ucrSave
 
     Public Overrides Sub AddOrRemoveParameter(bAdd As Boolean)
         UpdateAssignTo(Not bAdd)
+    End Sub
+
+    Public Sub AddAdditionalRCode(clsNewRCode As RCodeStructure, Optional iAdditionalPairNo As Integer = -1)
+        AddAdditionalCodeParameterPair(clsNewRCode, Nothing, iAdditionalPairNo)
     End Sub
 End Class
