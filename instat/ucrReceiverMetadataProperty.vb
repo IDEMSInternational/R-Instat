@@ -22,29 +22,29 @@ Public Class ucrReceiverMetadataProperty
 
     Public Sub SetControls()
         'This sub creates adapts the ucrReceiverMetadataProperty to the type of layer parameter, it's default value, the available values etc, stored within clsLayerParam.
-        nudParamValue.Visible = False
+        ucrNudParamValue.Visible = False
         ucrCboParamValue.Visible = False
         ucrColor.Visible = False
         ucrInputTextValue.Visible = False
         If clsLayerParam IsNot Nothing Then
             If clsLayerParam.strLayerParameterDataType = "numeric" Then
                 If clsLayerParam.lstParameterStrings.Count >= 1 Then
-                    nudParamValue.DecimalPlaces = clsLayerParam.lstParameterStrings(0)
+                    ucrNudParamValue.DecimalPlaces = clsLayerParam.lstParameterStrings(0)
                 Else
-                    nudParamValue.DecimalPlaces = 0
+                    ucrNudParamValue.DecimalPlaces = 0
                 End If
-                nudParamValue.Increment = Math.Pow(10, -nudParamValue.DecimalPlaces)
+                ucrNudParamValue.Increment = Math.Pow(10, -ucrNudParamValue.DecimalPlaces)
                 If clsLayerParam.lstParameterStrings.Count >= 2 Then
-                    nudParamValue.Minimum = clsLayerParam.lstParameterStrings(1)
+                    ucrNudParamValue.Minimum = clsLayerParam.lstParameterStrings(1)
                 Else
-                    nudParamValue.Minimum = Decimal.MinValue
+                    ucrNudParamValue.Minimum = Decimal.MinValue
                 End If
                 If clsLayerParam.lstParameterStrings.Count >= 3 Then
-                    nudParamValue.Maximum = clsLayerParam.lstParameterStrings(2)
+                    ucrNudParamValue.Maximum = clsLayerParam.lstParameterStrings(2)
                 Else
-                    nudParamValue.Maximum = Decimal.MaxValue
+                    ucrNudParamValue.Maximum = Decimal.MaxValue
                 End If
-                ctrActive = nudParamValue
+                ctrActive = ucrNudParamValue
             ElseIf clsLayerParam.strLayerParameterDataType = "boolean" Then
                 ctrActive = ucrCboParamValue
                 ucrCboParamValue.SetItems({"TRUE", "FALSE"})
@@ -66,7 +66,7 @@ Public Class ucrReceiverMetadataProperty
         End If
     End Sub
 
-    Private Sub nudParamValue_TextChanged(sender As Object, e As EventArgs) Handles nudParamValue.TextChanged
+    Private Sub ucrNudParamValue_TextChanged(sender As Object, e As EventArgs)
         RaiseEvent ControlContentsChanged()
     End Sub
 
@@ -85,7 +85,7 @@ Public Class ucrReceiverMetadataProperty
     Public Sub SetValue(strValue As String)
         If TypeOf (ctrActive) Is NumericUpDown Then
             If strValue <> "" Then
-                nudParamValue.Value = strValue
+                ucrNudParamValue.Value = strValue
             End If
         Else
             ctrActive.Text = strValue
