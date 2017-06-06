@@ -18,6 +18,8 @@
 Imports instat.Translations
 Public Class dlgRecodeNumeric
     Public bFirstLoad As Boolean = True
+    Public strDefaultDataFrame As String = ""
+    Public strDefaultColumn As String = ""
     Private Sub dlgRecode_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -27,6 +29,7 @@ Public Class dlgRecodeNumeric
         Else
             ReopenDialog()
         End If
+        SetDefaultColumn()
         TestOKEnabled()
         ucrBase.iHelpTopicID = 43
     End Sub
@@ -37,12 +40,13 @@ Public Class dlgRecodeNumeric
         ucrReceiverRecode.SetIncludedDataTypes({"numeric"})
         ucrBase.clsRsyntax.SetFunction("cut")
         ucrBase.clsRsyntax.AddParameter("include.lowest", "TRUE")
+        ucrBase.clsRsyntax.AddParameter("dig.lab", "10")
         ucrInputRecode.SetItemsTypeAsColumns()
         ucrInputRecode.SetDefaultTypeAsColumn()
         ucrInputRecode.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
         ucrInputRecode.SetValidationTypeAsRVariable()
         ucrMultipleLabels.SetValidationTypeAsList()
-        ucrMultipleNumericRecode.SetValidationTypeAsNumericList()
+        ucrMultipleNumericRecode.SetValidationTypeAsNumericList(bNewAllowInf:=True)
     End Sub
 
     Private Sub SetDefaults()
@@ -61,6 +65,18 @@ Public Class dlgRecodeNumeric
 
     Private Sub ReopenDialog()
 
+    End Sub
+
+    Private Sub SetDefaultColumn()
+        If strDefaultDataFrame <> "" Then
+            ucrSelectorForRecode.SetDataframe(strDefaultDataFrame)
+        End If
+        If strDefaultColumn <> "" Then
+            ucrReceiverRecode.Add(strDefaultColumn, strDefaultDataFrame)
+            ucrInputRecode.Focus()
+        End If
+        strDefaultDataFrame = ""
+        strDefaultColumn = ""
     End Sub
 
     Private Sub TestOKEnabled()

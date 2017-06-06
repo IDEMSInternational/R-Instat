@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports RDotNet
+Imports unvell.ReoGrid
 
 Public Class RLink
     ' R interface class. Each instance of the class has its own REngine instance
@@ -44,6 +45,8 @@ Public Class RLink
 
     Public strGraphDisplayOption As String = "view_output_window"
 
+    Private grdDataView As ReoGridControl
+
     Public Sub New(Optional bWithInstatObj As Boolean = False, Optional bWithClimsoft As Boolean = False)
 
     End Sub
@@ -62,6 +65,10 @@ Public Class RLink
             Application.Exit()
         End Try
         clsEngine.Initialize()
+    End Sub
+
+    Public Sub SetDataViewGrid(grdNewDataGrid As ReoGridControl)
+        grdDataView = grdNewDataGrid
     End Sub
 
     Public Sub setFormatOutput(tempFont As Font, tempColor As Color)
@@ -91,14 +98,16 @@ Public Class RLink
     End Sub
 
     Public Function GetDataFrameNames() As List(Of String)
-        Dim chrDataFrameNames As CharacterVector
+        Dim chrDataFrameNames As CharacterVector = Nothing
         Dim lstDataFrameNames As New List(Of String)
         Dim clsGetDataNames As New RFunction
+        Dim expNames As SymbolicExpression
 
         clsGetDataNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_names")
         If bInstatObjectExists Then
-            chrDataFrameNames = RunInternalScriptGetValue(clsGetDataNames.ToScript()).AsCharacter
-            If chrDataFrameNames IsNot Nothing Then
+            expNames = RunInternalScriptGetValue(clsGetDataNames.ToScript(), bSilent:=True)
+            If expNames IsNot Nothing AndAlso Not expNames.Type = Internals.SymbolicExpressionType.Null Then
+                chrDataFrameNames = expNames.AsCharacter
                 lstDataFrameNames.AddRange(chrDataFrameNames)
             End If
         End If
@@ -106,17 +115,24 @@ Public Class RLink
     End Function
 
     Public Function GetColumnNames(strDataFrameName As String) As List(Of String)
-        Dim chrCurrColumns As CharacterVector
+        Dim chrCurrColumns As CharacterVector = Nothing
         Dim lstCurrColumns As New List(Of String)
         Dim clsGetColumnNames As New RFunction
+        Dim expNames As SymbolicExpression
 
-        clsGetColumnNames.SetRCommand(strInstatDataObject & "$get_column_names")
-        clsGetColumnNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
-        chrCurrColumns = RunInternalScriptGetValue(clsGetColumnNames.ToScript()).AsCharacter
-        lstCurrColumns.AddRange(chrCurrColumns)
+        If strDataFrameName <> "" AndAlso DataFrameExists(strDataFrameName) Then
+            clsGetColumnNames.SetRCommand(strInstatDataObject & "$get_column_names")
+            clsGetColumnNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
+            expNames = RunInternalScriptGetValue(clsGetColumnNames.ToScript(), bSilent:=True)
+            If expNames IsNot Nothing AndAlso Not expNames.Type = Internals.SymbolicExpressionType.Null Then
+                chrCurrColumns = expNames.AsCharacter
+                lstCurrColumns.AddRange(chrCurrColumns)
+            End If
+        End If
         Return lstCurrColumns
     End Function
 
+    'bIncludeOverall = True includes an extra item in the combo box for overall i.e. items not at data frame level 
     Public Sub FillComboDataFrames(ByRef cboDataFrames As ComboBox, Optional bSetDefault As Boolean = True, Optional bIncludeOverall As Boolean = False, Optional strCurrentDataFrame As String = "")
         'This sub is filling the cboDataFrames with the relevant dat frame names (obtained by using GetDataFrameNames()) and potentially "[Overall]".  On thing it is doing, is setting the selected index in the cboDataFrames.
         'It is used on the ucrDataFrame in the FillComboBox sub.
@@ -127,8 +143,8 @@ Public Class RLink
             cboDataFrames.Items.AddRange(GetDataFrameNames().ToArray)
             AdjustComboBoxWidth(cboDataFrames)
             'Task/Question: From what I understood, if bSetDefault is true or if the strCurrentDataFrame (given as an argument) is actually not in cboDataFrames (is this case generic or should it never happen ?), then the selected Index should be the current worksheet.
-            If (bSetDefault OrElse cboDataFrames.Items.IndexOf(strCurrentDataFrame) = -1) AndAlso (frmEditor.grdData IsNot Nothing) AndAlso (frmEditor.grdData.CurrentWorksheet IsNot Nothing) Then
-                cboDataFrames.SelectedIndex = cboDataFrames.Items.IndexOf(frmEditor.grdData.CurrentWorksheet.Name)
+            If (bSetDefault OrElse cboDataFrames.Items.IndexOf(strCurrentDataFrame) = -1) AndAlso (grdDataView IsNot Nothing) AndAlso (grdDataView.CurrentWorksheet IsNot Nothing) Then
+                cboDataFrames.SelectedIndex = cboDataFrames.Items.IndexOf(grdDataView.CurrentWorksheet.Name)
             ElseIf cboDataFrames.Items.IndexOf(strCurrentDataFrame) <> -1 Then
                 cboDataFrames.SelectedIndex = cboDataFrames.Items.IndexOf(strCurrentDataFrame)
             End If
@@ -139,7 +155,7 @@ Public Class RLink
     ' Then this can be removed
     Public Shared Sub AdjustComboBoxWidth(cboCurrent As ComboBox)
         Dim iWidth As Integer = cboCurrent.DropDownWidth
-        Dim graTemp As Graphics = cboCurrent.CreateGraphics()
+        Dim graTemp As System.Drawing.Graphics = cboCurrent.CreateGraphics()
         Dim font As Font = cboCurrent.Font
         Dim iScrollBarWidth As Integer
         Dim iNewWidth As Integer
@@ -158,11 +174,10 @@ Public Class RLink
     End Sub
 
     Public Sub FillColumnNames(strDataFrame As String, ByRef cboColumns As ComboBox)
-        Dim lstCurrColumns As List(Of String)
-        If strDataFrame <> "" AndAlso DataFrameExists(strDataFrame) Then
+        Dim lstCurrColumns As New List(Of String)
+
+        If strDataFrame <> "" Then
             lstCurrColumns = GetColumnNames(strDataFrame)
-        Else
-            lstCurrColumns = New List(Of String)
         End If
         cboColumns.Items.Clear()
         cboColumns.Items.AddRange(lstCurrColumns.ToArray)
@@ -183,15 +198,6 @@ Public Class RLink
 
     End Sub
 
-    Public Function GetDefaultColumnNames(strPrefix As String) As GenericVector
-        Dim lstNextDefaults As GenericVector = Nothing
-        Dim clsGetNextDefault As New RFunction
-        clsGetNextDefault.SetRCommand(strInstatDataObject & "$get_next_default_column_name")
-        clsGetNextDefault.AddParameter("prefix", Chr(34) & strPrefix & Chr(34))
-        lstNextDefaults = RunInternalScriptGetValue(clsGetNextDefault.ToScript()).AsList
-        Return lstNextDefaults
-    End Function
-
     Public Function GetDefaultColumnNames(strPrefix As String, strDataFrameName As String) As String
         Dim strNextDefault As String = ""
         Dim clsGetNextDefault As New RFunction
@@ -205,7 +211,7 @@ Public Class RLink
     End Function
 
     Public Function GetNextDefault(strPrefix As String, lstItems As List(Of String)) As String
-        Dim strNextDefault As String = ""
+        Dim strNextDefault As String
         Dim clsGetDefault As New RFunction
         Dim strExistingNames As String
         Dim expPrefix As SymbolicExpression
@@ -217,13 +223,15 @@ Public Class RLink
             clsGetDefault.AddParameter("existing_names", GetListAsRString(lstItems))
         End If
         expPrefix = RunInternalScriptGetValue(clsGetDefault.ToScript())
-        If Not expPrefix.Type = Internals.SymbolicExpressionType.Null Then
+        If expPrefix IsNot Nothing AndAlso Not expPrefix.Type = Internals.SymbolicExpressionType.Null Then
             strNextDefault = expPrefix.AsCharacter(0)
+        Else
+            strNextDefault = ""
         End If
         Return strNextDefault
     End Function
 
-    Public Sub RunScript(strScript As String, Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bHtmlOutput As Boolean = False)
+    Public Sub RunScript(strScript As String, Optional iCallType As Integer = 0, Optional strComment As String = "")
         Dim strCapturedScript As String
         Dim temp As RDotNet.SymbolicExpression
         Dim strTemp As String
@@ -233,7 +241,7 @@ Public Class RLink
         Dim strTempGraphsDirectory As String
         Dim clsPNGFunction As New RFunction
 
-        strTempGraphsDirectory = IO.Path.Combine(IO.Path.GetTempPath() & "R_Instat_Temp_Graphs")
+        strTempGraphsDirectory = System.IO.Path.Combine(System.IO.Path.GetTempPath() & "R_Instat_Temp_Graphs")
         strOutput = ""
 
         If strComment <> "" Then
@@ -258,14 +266,14 @@ Public Class RLink
             End If
         End If
 
-            'If strScript.Length > 2000 Then
-            '    MsgBox("The following command cannot be run because it exceeds the character limit of 2000 characters for a command in R-Instat." & vbNewLine & strScript & vbNewLine & vbNewLine & "It may be possible to run the command directly in R.", MsgBoxStyle.Critical, "Cannot run command")
-            If iCallType = 0 OrElse iCallType = 3 Then
+        'If strScript.Length > 2000 Then
+        '    MsgBox("The following command cannot be run because it exceeds the character limit of 2000 characters for a command in R-Instat." & vbNewLine & strScript & vbNewLine & vbNewLine & "It may be possible to run the command directly in R.", MsgBoxStyle.Critical, "Cannot run command")
+        If iCallType = 0 OrElse iCallType = 3 Then
             Try
                 If iCallType = 3 Then
                     If strGraphDisplayOption = "view_output_window" OrElse strGraphDisplayOption = "view_separate_window" Then
                         clsPNGFunction.SetRCommand("png")
-                        clsPNGFunction.AddParameter("filename", Chr(34) & IO.Path.Combine(strTempGraphsDirectory & "/Graph.png").Replace("\", "/") & Chr(34))
+                        clsPNGFunction.AddParameter("filename", Chr(34) & System.IO.Path.Combine(strTempGraphsDirectory & "/Graph.png").Replace("\", "/") & Chr(34))
                         clsPNGFunction.AddParameter("width", 4000)
                         clsPNGFunction.AddParameter("height", 4000)
                         clsPNGFunction.AddParameter("res", 500)
@@ -273,7 +281,7 @@ Public Class RLink
                         'need to boost resolution of the devices, it's not as good as with ggsave.
                     End If
                 End If
-                    clsEngine.Evaluate(strScript)
+                clsEngine.Evaluate(strScript)
                 If iCallType = 3 Then
                     If strGraphDisplayOption = "view_output_window" OrElse strGraphDisplayOption = "view_separate_window" Then
                         'add an R script (maybe in the form of one of our methods) that copies divices to the temp directory, using the default device production... use dev.list() and dev.copy() with arguments device = the devices in the list and which = jpeg devices with different paths leading to the temp directory, using a paste() method to find different names for the files
@@ -284,7 +292,7 @@ Public Class RLink
                         'It is called from RLink at the end of RunScript.
                         Dim lstTempGraphFiles As ObjectModel.ReadOnlyCollection(Of String)
                         Dim iNumberOfFiles As Integer = -1
-                        strTempGraphsDirectory = IO.Path.Combine(IO.Path.GetTempPath(), "R_Instat_Temp_Graphs")
+                        strTempGraphsDirectory = System.IO.Path.Combine(System.IO.Path.GetTempPath(), "R_Instat_Temp_Graphs")
                         Try
                             lstTempGraphFiles = FileIO.FileSystem.GetFiles(strTempGraphsDirectory)
                         Catch e As Exception
@@ -314,11 +322,14 @@ Public Class RLink
                 MsgBox(e.Message & vbNewLine & "The error occurred in attempting to run the following R command(s):" & vbNewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
             End Try
 
-        ElseIf iCallType = 1 Then
+        ElseIf iCallType = 1 OrElse iCallType = 4 Then
             Try
                 temp = clsEngine.Evaluate(strScript)
                 strTemp = String.Join(Environment.NewLine, temp.AsCharacter())
                 strOutput = strOutput & strTemp & Environment.NewLine
+                If iCallType = 4 Then
+
+                End If
             Catch e As Exception
                 MsgBox(e.Message & vbNewLine & "The error occurred in attempting to run the following R command(s):" & vbNewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
             End Try
@@ -346,10 +357,10 @@ Public Class RLink
             End Try
         End If
         If bOutput AndAlso strOutput <> "" Then
-            If bHtmlOutput Then 'TEST temporary
-                rtbOutput.AddIntoWebBrowser(strHtmlCode:=strOutput) 'TEST temporary
+            If iCallType = 4 Then
+                rtbOutput.AddIntoWebBrowser(strHtmlCode:=strOutput)
             Else
-                rtbOutput.AppendText(clrOutput, fOutput, strOutput) 'TEST temporary
+                rtbOutput.AppendText(clrOutput, fOutput, strOutput)
             End If
         End If
         frmMain.clsGrids.UpdateGrids()
@@ -441,6 +452,7 @@ Public Class RLink
     Public Function GetDefaultDataFrameName(strPrefix As String, Optional iStartIndex As Integer = 1, Optional bIncludeIndex As Boolean = True) As String
         Dim strTemp As String
         Dim clsGetNextDataName As New RFunction
+        Dim expName As SymbolicExpression
 
         clsGetNextDataName.SetRCommand(strInstatDataObject & "$get_next_default_dataframe_name")
         clsGetNextDataName.AddParameter("prefix", Chr(34) & strPrefix & Chr(34))
@@ -453,22 +465,14 @@ Public Class RLink
         Else
             clsGetNextDataName.AddParameter("include_index", "FALSE")
         End If
-        strTemp = RunInternalScriptGetValue(clsGetNextDataName.ToScript()).AsCharacter(0)
+        expName = RunInternalScriptGetValue(clsGetNextDataName.ToScript(), bSilent:=True)
+        If expName IsNot Nothing AndAlso Not expName.Type = Internals.SymbolicExpressionType.Null Then
+            strTemp = expName.AsCharacter(0)
+        Else
+            strTemp = ""
+        End If
         Return strTemp
     End Function
-
-    Public Sub CreateNewClimateObject() 'creates an instance of the climate object
-        If Not bClimateObjectExists Then
-            frmMain.Cursor = Cursors.WaitCursor
-            frmSetupLoading.Show()
-            RunScript("setwd('" & frmMain.strStaticPath.Replace("\", "/") & strClimateObjectPath & "')")
-            RunScript("source(" & Chr(34) & "SourcingScript.R" & Chr(34) & ")")
-            RunScript(strClimateObject & "<-climate$new()")
-            bClimateObjectExists = True
-            frmSetupLoading.Close()
-            frmMain.Cursor = Cursors.Default
-        End If
-    End Sub
 
     Public Sub RSetup()
         'run script to load libraries
@@ -486,8 +490,8 @@ Public Class RLink
         bInstatObjectExists = True
     End Sub
 
-    Public Sub FillListView(lstView As ListView, strType As String, Optional lstIncludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional lstExcludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional strDataFrameName As String = "", Optional strHeading As String = "Variables", Optional strExcludedItems As String() = Nothing, Optional strDatabaseQuery As String = "")
-        Dim vecColumns As GenericVector
+    Public Sub FillListView(lstView As ListView, strType As String, Optional lstIncludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional lstExcludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional strDataFrameName As String = "", Optional strHeading As String = "Variables", Optional strExcludedItems As String() = Nothing, Optional strDatabaseQuery As String = "", Optional strNcFilePath As String = "")
+        Dim vecColumns As GenericVector = Nothing
         Dim chrCurrColumns As CharacterVector
         Dim i As Integer
         Dim grps As New ListViewGroup
@@ -496,6 +500,7 @@ Public Class RLink
         Dim clsExcludeList As New RFunction
         Dim kvpInclude As KeyValuePair(Of String, String())
         Dim kvpExclude As KeyValuePair(Of String, String())
+        Dim expItems As SymbolicExpression
 
         If bInstatObjectExists Then
             Select Case strType
@@ -520,6 +525,9 @@ Public Class RLink
                 Case "database_variables"
                     clsGetItems.SetRCommand(strInstatDataObject & "$get_database_variable_names")
                     clsGetItems.AddParameter("query", Chr(34) & strDatabaseQuery & Chr(34))
+                Case "nc_dim_variables"
+                    clsGetItems.SetRCommand(strInstatDataObject & "$get_nc_variable_names")
+                    clsGetItems.AddParameter("file", Chr(34) & strNcFilePath & Chr(34))
             End Select
             clsGetItems.AddParameter("as_list", "TRUE")
             lstView.Clear()
@@ -545,26 +553,28 @@ Public Class RLink
             If strExcludedItems IsNot Nothing AndAlso strExcludedItems.Count > 0 Then
                 clsGetItems.AddParameter("excluded_items", GetListAsRString(strExcludedItems.ToList()))
             End If
-            vecColumns = RunInternalScriptGetValue(clsGetItems.ToScript()).AsList
-
-            For i = 0 To vecColumns.Count - 1
-                If vecColumns.Count > 1 Then
-                    grps = New ListViewGroup(key:=vecColumns.Names(i), headerText:=vecColumns.Names(i))
-                    lstView.Groups.Add(grps)
-                End If
-                chrCurrColumns = vecColumns(i).AsCharacter
-                If chrCurrColumns IsNot Nothing Then
-                    For j = 0 To chrCurrColumns.Count - 1
-                        lstView.Items.Add(chrCurrColumns(j))
-                        lstView.Items(j).Tag = vecColumns.Names(i)
-                        If vecColumns.Count > 1 Then
-                            lstView.Items(j).Group = lstView.Groups(i)
-                        End If
-                    Next
-                End If
-            Next
-            'TODO Find out how to get this to set automatically ( Width = -2 almost works)
-            lstView.Columns(0).Width = lstView.Width - 25
+            expItems = RunInternalScriptGetValue(clsGetItems.ToScript(), bSilent:=True)
+            If expItems IsNot Nothing AndAlso Not expItems.Type = Internals.SymbolicExpressionType.Null Then
+                vecColumns = expItems.AsList
+                For i = 0 To vecColumns.Count - 1
+                    If vecColumns.Count > 1 Then
+                        grps = New ListViewGroup(key:=vecColumns.Names(i), headerText:=vecColumns.Names(i))
+                        lstView.Groups.Add(grps)
+                    End If
+                    chrCurrColumns = vecColumns(i).AsCharacter
+                    If chrCurrColumns IsNot Nothing Then
+                        For j = 0 To chrCurrColumns.Count - 1
+                            lstView.Items.Add(chrCurrColumns(j))
+                            lstView.Items(j).Tag = vecColumns.Names(i)
+                            If vecColumns.Count > 1 Then
+                                lstView.Items(j).Group = lstView.Groups(i)
+                            End If
+                        Next
+                    End If
+                Next
+                'TODO Find out how to get this to set automatically ( Width = -2 almost works)
+                lstView.Columns(0).Width = lstView.Width - 25
+            End If
         End If
     End Sub
 
@@ -576,6 +586,7 @@ Public Class RLink
         Dim clsIncludeList As New RFunction
         Dim kvpInclude As KeyValuePair(Of String, String())
         Dim lstItems As New List(Of KeyValuePair(Of String, String))
+        Dim expColumns As SymbolicExpression
 
         kvpInclude = New KeyValuePair(Of String, String())(strProperty, strValues)
         ucrCurrentReceiver.Selector.LoadList()
@@ -588,15 +599,25 @@ Public Class RLink
             clsIncludeList.SetRCommand("list")
             clsIncludeList.AddParameter(kvpInclude.Key, GetListAsRString(kvpInclude.Value.ToList(), bWithQuotes:=False))
             clsGetItems.AddParameter("include", clsRFunctionParameter:=clsIncludeList)
-            vecColumns = RunInternalScriptGetValue(clsGetItems.ToScript()).AsList
+            expColumns = RunInternalScriptGetValue(clsGetItems.ToScript(), bSilent:=True)
+            If expColumns IsNot Nothing AndAlso Not expColumns.Type = Internals.SymbolicExpressionType.Null Then
+                vecColumns = expColumns.AsList
+            Else
+                vecColumns = Nothing
+            End If
             ucrCurrentReceiver.Clear()
-            For i = 0 To vecColumns.Count - 1
-                chrCurrColumns = vecColumns(i).AsCharacter
-                For Each strColumn As String In chrCurrColumns
-                    lstItems.Add(New KeyValuePair(Of String, String)(strDataFrameName, strColumn))
+            If vecColumns IsNot Nothing Then
+                For i = 0 To vecColumns.Count - 1
+                    chrCurrColumns = vecColumns(i).AsCharacter
+                    If chrCurrColumns Is Nothing Then
+                        Continue For
+                    End If
+                    For Each strColumn As String In chrCurrColumns
+                        lstItems.Add(New KeyValuePair(Of String, String)(strDataFrameName, strColumn))
+                    Next
+                    ucrCurrentReceiver.AddMultiple(lstItems.ToArray())
                 Next
-                ucrCurrentReceiver.AddMultiple(lstItems.ToArray())
-            Next
+            End If
         End If
         ucrCurrentReceiver.Selector.LoadList()
     End Sub
@@ -604,6 +625,7 @@ Public Class RLink
     Public Function GetListAsRString(lstStrings As List(Of String), Optional bWithQuotes As Boolean = True) As String
         Dim strTemp As String = ""
         Dim i As Integer
+
         If lstStrings.Count = 1 Then
             If bWithQuotes Then
                 strTemp = Chr(34) & lstStrings.Item(0) & Chr(34)
@@ -632,16 +654,23 @@ Public Class RLink
     Public Function DataFrameExists(strDataFrameName As String) As Boolean
         Dim bExists As Boolean
         Dim clsDataFrameExists As New RFunction
+        Dim expExists As SymbolicExpression
 
         clsDataFrameExists.SetRCommand(strInstatDataObject & "$data_frame_exists")
         clsDataFrameExists.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
-        bExists = RunInternalScriptGetValue(clsDataFrameExists.ToScript()).AsLogical(0)
+        expExists = RunInternalScriptGetValue(clsDataFrameExists.ToScript(), bSilent:=True)
+        If expExists IsNot Nothing AndAlso Not expExists.Type = Internals.SymbolicExpressionType.Null Then
+            bExists = expExists.AsLogical(0)
+        Else
+            bExists = False
+        End If
         Return bExists
     End Function
 
     Public Function GetDataFrameLength(strDataFrameName As String, Optional bUseCurrentFilter As Boolean = False) As Integer
-        Dim intLength As Integer
+        Dim iLength As Integer
         Dim clsDataFrameLength As New RFunction
+        Dim expLength As SymbolicExpression
 
         clsDataFrameLength.SetRCommand(strInstatDataObject & "$get_data_frame_length")
         clsDataFrameLength.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
@@ -650,18 +679,29 @@ Public Class RLink
         Else
             clsDataFrameLength.AddParameter("use_current_filter", "FALSE")
         End If
-        intLength = RunInternalScriptGetValue(clsDataFrameLength.ToScript()).AsInteger(0)
-        Return intLength
+        expLength = RunInternalScriptGetValue(clsDataFrameLength.ToScript(), bSilent:=True)
+        If expLength IsNot Nothing AndAlso Not expLength.Type = Internals.SymbolicExpressionType.Null Then
+            iLength = expLength.AsInteger(0)
+        Else
+            iLength = 0
+        End If
+        Return iLength
     End Function
 
     Public Function GetDataFrameColumnCount(strDataFrameName As String) As Integer
-        Dim intColumnCount As Integer
+        Dim iColumnCount As Integer
         Dim clsDataFrameColCount As New RFunction
+        Dim expCount As SymbolicExpression
 
         clsDataFrameColCount.SetRCommand(strInstatDataObject & "$get_column_count")
         clsDataFrameColCount.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
-        intColumnCount = RunInternalScriptGetValue(clsDataFrameColCount.ToScript()).AsInteger(0)
-        Return intColumnCount
+        expCount = RunInternalScriptGetValue(clsDataFrameColCount.ToScript(), bSilent:=True)
+        If expCount IsNot Nothing AndAlso Not expCount.Type = Internals.SymbolicExpressionType.Null Then
+            iColumnCount = expCount.AsInteger(0)
+        Else
+            iColumnCount = 0
+        End If
+        Return iColumnCount
     End Function
 
     Public Function GetModelNames(Optional strDataFrameName As String = "") As List(Of String)
@@ -675,13 +715,33 @@ Public Class RLink
             clsGetModelNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
         End If
         expModelNames = RunInternalScriptGetValue(clsGetModelNames.ToScript(), bSilent:=True)
-        If expModelNames IsNot Nothing AndAlso (Not expModelNames.Type = Internals.SymbolicExpressionType.Null) Then
+        If expModelNames IsNot Nothing AndAlso Not expModelNames.Type = Internals.SymbolicExpressionType.Null Then
             chrModelNames = expModelNames.AsCharacter()
             If chrModelNames.Length > 0 Then
                 lstModelNames.AddRange(chrModelNames)
             End If
         End If
         Return lstModelNames
+    End Function
+
+    Public Function GetTableNames(Optional strDataFrameName As String = "") As List(Of String)
+        Dim chrTableNames As CharacterVector
+        Dim lstTableNames As New List(Of String)
+        Dim clsGetTableNames As New RFunction
+        Dim expTableNames As SymbolicExpression
+
+        clsGetTableNames.SetRCommand(strInstatDataObject & "$get_table_names")
+        If strDataFrameName <> "" Then
+            clsGetTableNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
+        End If
+        expTableNames = RunInternalScriptGetValue(clsGetTableNames.ToScript(), bSilent:=True)
+        If expTableNames IsNot Nothing AndAlso Not expTableNames.Type = Internals.SymbolicExpressionType.Null Then
+            chrTableNames = expTableNames.AsCharacter()
+            If chrTableNames.Length > 0 Then
+                lstTableNames.AddRange(chrTableNames)
+            End If
+        End If
+        Return lstTableNames
     End Function
 
     Public Function GetFilterNames(strDataFrameName As String) As List(Of String)
@@ -727,34 +787,74 @@ Public Class RLink
     Public Function GetDataType(strDataFrameName As String, strColumnName As String) As String
         Dim strDataType As String
         Dim clsGetDataType As New RFunction
+        Dim expType As SymbolicExpression
 
         clsGetDataType.SetRCommand(strInstatDataObject & "$get_data_type")
         clsGetDataType.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
         clsGetDataType.AddParameter("col_name", Chr(34) & strColumnName & Chr(34))
-        strDataType = RunInternalScriptGetValue(clsGetDataType.ToScript()).AsCharacter(0)
+        expType = RunInternalScriptGetValue(clsGetDataType.ToScript(), bSilent:=True)
+        If expType IsNot Nothing AndAlso Not expType.Type = Internals.SymbolicExpressionType.Null Then
+            strDataType = expType.AsCharacter(0)
+        Else
+            strDataType = ""
+        End If
+        Return strDataType
+    End Function
+
+    Public Function GetColumnType(strDataName As String, strColumnName As String) As String
+        Dim strDataType As String
+        Dim clsGetColumnType As New RFunction
+        Dim expDateType As SymbolicExpression
+
+        clsGetColumnType.SetRCommand(strInstatDataObject & "$get_variables_metadata")
+        clsGetColumnType.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
+        clsGetColumnType.AddParameter("column", Chr(34) & strColumnName & Chr(34))
+        clsGetColumnType.AddParameter("property", Chr(34) & "class" & Chr(34))
+        expDateType = RunInternalScriptGetValue(clsGetColumnType.ToScript(), bSilent:=True)
+        If expDateType IsNot Nothing AndAlso Not expDateType.Type = Internals.SymbolicExpressionType.Null Then
+            strDataType = expDateType.AsCharacter(0)
+        Else
+            strDataType = ""
+        End If
         Return strDataType
     End Function
 
     Public Function MakeValidText(strText As String) As String
         Dim strOut As String
         Dim clsMakeNames As New RFunction
+        Dim expOut As SymbolicExpression
 
         clsMakeNames.SetRCommand("make.names")
         clsMakeNames.AddParameter("names", Chr(34) & strText & Chr(34))
-        strOut = RunInternalScriptGetValue(clsMakeNames.ToScript()).AsCharacter(0)
+        expOut = RunInternalScriptGetValue(clsMakeNames.ToScript(), bSilent:=True)
+        If expOut IsNot Nothing AndAlso Not expOut.Type = Internals.SymbolicExpressionType.Null Then
+            strOut = expOut.AsCharacter(0)
+        Else
+            strOut = ""
+        End If
         Return strOut
     End Function
 
+    Public Function IsValidText(strText As String) As String
+        Dim strValidText As String
+        Dim clsMakeNames As New RFunction
+
+        strValidText = MakeValidText(strText)
+        Return (strText = strValidText)
+    End Function
+
     'Corruption analysis functions
-    Public Function GetCorruptionDataFrameNames() As List(Of String)
+    Public Function GetCorruptionContractDataFrameNames() As List(Of String)
         Dim clsGetDataNames As New RFunction
-        Dim lstNames As New List(Of String)
+        Dim lstNames As List(Of String)
         Dim expDataNames As SymbolicExpression
 
-        clsGetDataNames.SetRCommand(strInstatDataObject & "$get_corruption_data_names")
-        expDataNames = RunInternalScriptGetValue(clsGetDataNames.ToScript())
-        If Not expDataNames.Type = Internals.SymbolicExpressionType.Null Then
+        clsGetDataNames.SetRCommand(strInstatDataObject & "$get_corruption_contract_data_names")
+        expDataNames = RunInternalScriptGetValue(clsGetDataNames.ToScript(), bSilent:=True)
+        If expDataNames IsNot Nothing AndAlso Not expDataNames.Type = Internals.SymbolicExpressionType.Null Then
             lstNames = expDataNames.AsCharacter.ToList()
+        Else
+            lstNames = New List(Of String)
         End If
         Return lstNames
     End Function
@@ -762,11 +862,57 @@ Public Class RLink
     Public Function GetCorruptionColumnOfType(strDataName As String, strType As String) As String
         Dim clsGetColumnName As New RFunction
         Dim strColumn As String
+        Dim expColumn As SymbolicExpression
 
         clsGetColumnName.SetRCommand(strInstatDataObject & "$get_corruption_column_name")
         clsGetColumnName.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
-        clsGetColumnName.AddParameter("type", Chr(34) & strType & Chr(34))
-        strColumn = RunInternalScriptGetValue(clsGetColumnName.ToScript()).AsCharacter(0)
+        clsGetColumnName.AddParameter("type", strType)
+        expColumn = RunInternalScriptGetValue(clsGetColumnName.ToScript(), bSilent:=True)
+        If expColumn IsNot Nothing AndAlso Not expColumn.Type = Internals.SymbolicExpressionType.Null Then
+            strColumn = expColumn.AsCharacter(0)
+        Else
+            strColumn = ""
+        End If
         Return strColumn
+    End Function
+
+    Public Function IsBinary(strDataName As String, strColumn As String) As Boolean
+        Dim clsGetColumn As New RFunction
+        Dim clsIsBinary As New RFunction
+        Dim bIsBinary As Boolean
+        Dim expBinary As SymbolicExpression
+
+        clsGetColumn.SetRCommand(strInstatDataObject & "$get_columns_from_data")
+        clsGetColumn.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
+        clsGetColumn.AddParameter("col_names", Chr(34) & strColumn & Chr(34))
+        clsIsBinary.SetRCommand("is.binary")
+        clsIsBinary.AddParameter("x", clsRFunctionParameter:=clsGetColumn)
+        expBinary = RunInternalScriptGetValue(clsIsBinary.ToScript())
+        If expBinary IsNot Nothing AndAlso Not expBinary.Type = Internals.SymbolicExpressionType.Null Then
+            bIsBinary = expBinary.AsLogical(0)
+        Else
+            bIsBinary = False
+        End If
+        Return bIsBinary
+    End Function
+
+    Public Function IsVariablesMetadata(strDataName As String, strProperty As String, Optional strColumn As String = "") As Boolean
+        Dim clsIsVarMetadata As New RFunction
+        Dim bIsVarMetadata As Boolean
+        Dim expIsVar As SymbolicExpression
+
+        clsIsVarMetadata.SetRCommand(strInstatDataObject & "$is_variables_metadata")
+        clsIsVarMetadata.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
+        If strColumn <> "" Then
+            clsIsVarMetadata.AddParameter("column", Chr(34) & strColumn & Chr(34))
+        End If
+        clsIsVarMetadata.AddParameter("property", Chr(34) & strProperty & Chr(34))
+        expIsVar = RunInternalScriptGetValue(clsIsVarMetadata.ToScript())
+        If expIsVar IsNot Nothing AndAlso expIsVar.Type = Internals.SymbolicExpressionType.Null Then
+            bIsVarMetadata = expIsVar.AsLogical(0)
+        Else
+            bIsVarMetadata = False
+        End If
+        Return bIsVarMetadata
     End Function
 End Class
