@@ -1,5 +1,4 @@
-﻿
-' Instat-R
+﻿' Instat-R
 ' Copyright (C) 2015
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -15,17 +14,16 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
+
 Public Class ucrReceiverMetadataProperty
     Public clsLayerParam As LayerParameter
-    Public ctrActive As Control
-    Public Event ControlContentsChanged()
+    Public ctrActive As ucrCore
 
-    Public Sub SetControls()
-        'This sub creates adapts the ucrReceiverMetadataProperty to the type of layer parameter, it's default value, the available values etc, stored within clsLayerParam.
-        ucrNudParamValue.Visible = False
-        ucrCboParamValue.Visible = False
-        ucrColor.Visible = False
-        ucrInputTextValue.Visible = False
+    Public Sub SetControls(clsNewRCode As RCodeStructure, Optional clsNewLayerParam As LayerParameter = Nothing, Optional bReset As Boolean = False)
+        clsLayerParam = clsNewLayerParam
+        'This sub adapts the ucrReceiverMetadataProperty to the type of layer parameter, it's default value, the available values etc, stored within clsLayerParam.
+        ClearCodeAndParameters()
         If clsLayerParam IsNot Nothing Then
             If clsLayerParam.strLayerParameterDataType = "numeric" Then
                 If clsLayerParam.lstParameterStrings.Count >= 1 Then
@@ -46,49 +44,52 @@ Public Class ucrReceiverMetadataProperty
                 End If
                 ctrActive = ucrNudParamValue
             ElseIf clsLayerParam.strLayerParameterDataType = "boolean" Then
-                ctrActive = ucrCboParamValue
-                ucrCboParamValue.SetItems({"TRUE", "FALSE"})
+                ctrActive = ucrInputCboParamValue
+                ucrInputCboParamValue.SetItems({"TRUE", "FALSE"})
             ElseIf clsLayerParam.strLayerParameterDataType = "colour" Then
                 ctrActive = ucrColor
             ElseIf clsLayerParam.strLayerParameterDataType = "list" Then
-                ctrActive = ucrCboParamValue
+                ctrActive = ucrInputCboParamValue
                 If clsLayerParam.lstParameterStrings IsNot Nothing AndAlso clsLayerParam.lstParameterStrings.Count > 0 Then
-                    ucrCboParamValue.SetItems(clsLayerParam.lstParameterStrings)
+                    ucrInputCboParamValue.SetItems(clsLayerParam.lstParameterStrings)
                 Else
-                    ucrCboParamValue.cboInput.Items.Clear()
+                    ucrInputCboParamValue.cboInput.Items.Clear()
                 End If
             ElseIf clsLayerParam.strLayerParameterDataType = "text" Then
                 ctrActive = ucrInputTextValue
             Else
-                ctrActive = New Control 'this should never actually be used but is here to ensure the code is stable even if a developper uses an incorrect datatype
+                ctrActive = New ucrCore 'this should never actually be used but is here to ensure the code is stable even if a developer uses an incorrect datatype
             End If
             ctrActive.Visible = True
+            ctrActive.SetParameter(New RParameter(clsLayerParam.strLayerParameterName))
+            ctrActive.SetRCode(clsNewRCode, bReset)
         End If
     End Sub
 
-    Private Sub ucrNudParamValue_TextChanged(sender As Object, e As EventArgs)
-        RaiseEvent ControlContentsChanged()
+    Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrColor.ControlContentsChanged, ucrInputCboParamValue.ControlContentsChanged, ucrInputTextValue.ControlContentsChanged, ucrNudParamValue.ControlContentsChanged
+        OnControlContentsChanged()
     End Sub
 
-    Private Sub ucrCboParamValue_NameChanged() Handles ucrCboParamValue.NameChanged
-        RaiseEvent ControlContentsChanged()
+    Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrColor.ControlValueChanged, ucrInputCboParamValue.ControlValueChanged, ucrInputTextValue.ControlValueChanged, ucrNudParamValue.ControlValueChanged
+        OnControlValueChanged()
     End Sub
 
-    Private Sub ucrColor_NameChanged() Handles ucrColor.NameChanged
-        RaiseEvent ControlContentsChanged()
+    Public Overrides Sub ClearCodeAndParameters()
+        ucrNudParamValue.ClearCodeAndParameters()
+        ucrInputCboParamValue.ClearCodeAndParameters()
+        ucrInputTextValue.ClearCodeAndParameters()
+        ucrColor.ClearCodeAndParameters()
+        ucrNudParamValue.Visible = False
+        ucrInputCboParamValue.Visible = False
+        ucrColor.Visible = False
+        ucrInputTextValue.Visible = False
     End Sub
 
-    Private Sub ucrInputTextValue_NameChanged() Handles ucrInputTextValue.NameChanged
-        RaiseEvent ControlContentsChanged()
-    End Sub
-
-    Public Sub SetValue(strValue As String)
-        If TypeOf (ctrActive) Is NumericUpDown Then
-            If strValue <> "" Then
-                ucrNudParamValue.Value = strValue
-            End If
-        Else
-            ctrActive.Text = strValue
-        End If
+    Public Overrides Sub SetAddRemoveParameter(bNew As Boolean)
+        MyBase.SetAddRemoveParameter(bNew)
+        ucrNudParamValue.SetAddRemoveParameter(bNew)
+        ucrInputCboParamValue.SetAddRemoveParameter(bNew)
+        ucrInputTextValue.SetAddRemoveParameter(bNew)
+        ucrColor.SetAddRemoveParameter(bNew)
     End Sub
 End Class

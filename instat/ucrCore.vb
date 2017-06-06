@@ -555,4 +555,14 @@ Public Class ucrCore
     Protected Overridable Sub ResetControlValue()
         'TODO implement in specific controls
     End Sub
+
+    Public Overridable Sub ClearCodeAndParameters()
+        lstAllRCodes = New List(Of RCodeStructure)
+        lstAllRParameters = New List(Of RParameter)
+        UpdateControl()
+    End Sub
+
+    Public Overridable Sub SetAddRemoveParameter(bNew As Boolean)
+        bAddRemoveParameter = bNew
+    End Sub
 End Class
