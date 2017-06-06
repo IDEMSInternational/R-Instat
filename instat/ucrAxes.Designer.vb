@@ -344,7 +344,7 @@ Partial Class ucrAxes
         Me.Controls.Add(Me.grpTickMarkers)
         Me.Controls.Add(Me.grpAxisTitle)
         Me.Name = "ucrAxes"
-        Me.Size = New System.Drawing.Size(470, 269)
+        Me.Size = New System.Drawing.Size(465, 261)
         Me.grpAxisTitle.ResumeLayout(False)
         Me.grpAxisTitle.PerformLayout()
         Me.grpTickMarkers.ResumeLayout(False)
