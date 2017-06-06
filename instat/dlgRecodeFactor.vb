@@ -69,6 +69,8 @@ Public Class dlgRecodeFactor
         clsRevalueFunction.AddParameter("replace", clsRFunctionParameter:=clsReplaceFunction)
         clsRevalueFunction.SetAssignTo(strTemp:=ucrSaveNewColumn.GetText(), strTempDataframe:=ucrSelectorForRecode.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveNewColumn.GetText())
 
+        clsReplaceFunction.SetRCommand("c")
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsRevalueFunction)
     End Sub
 
@@ -97,20 +99,19 @@ Public Class dlgRecodeFactor
     End Sub
 
     Private Sub ucrFactorGrid_GridContentChanged() Handles ucrFactorGrid.GridContentChanged
-        Dim strCurrentLevels As List(Of String)
-        Dim strNewLevels As List(Of String)
+        Dim strCurrentLabels As List(Of String)
+        Dim strNewLabels As List(Of String)
         Dim strReplace As String = ""
 
-        strCurrentLevels = ucrFactorGrid.GetColumnAsList(1, False)
-        strNewLevels = ucrFactorGrid.GetColumnAsList(ucrFactorGrid.GetColumnIndex("New Label"), True)
+        strCurrentLabels = ucrFactorGrid.GetColumnAsList(ucrFactorGrid.strLabelsName, False)
+        strNewLabels = ucrFactorGrid.GetColumnAsList("New Label", True)
         clsReplaceFunction.ClearParameters()
 
-        If ucrFactorGrid.IsColumnComplete("New Label") AndAlso strCurrentLevels.Count = strNewLevels.Count Then
-            For i = 0 To strCurrentLevels.Count - 1
+        If ucrFactorGrid.IsColumnComplete("New Label") AndAlso strCurrentLabels.Count = strNewLabels.Count Then
+            For i = 0 To strCurrentLabels.Count - 1
                 ' Backtick needed for names of the vector incase the levels are not valid R names
-                clsReplaceFunction.AddParameter(Chr(96) & strCurrentLevels(i) & Chr(96), strNewLevels(i))
+                clsReplaceFunction.AddParameter(Chr(96) & strCurrentLabels(i) & Chr(96), strNewLabels(i))
             Next
-            clsReplaceFunction.strRCommand = "c"
             ucrBase.clsRsyntax.AddParameter("replace", clsRFunctionParameter:=clsReplaceFunction)
         Else
             ucrBase.clsRsyntax.RemoveParameter("replace")
