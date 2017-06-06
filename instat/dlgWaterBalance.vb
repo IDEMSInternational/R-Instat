@@ -138,11 +138,11 @@ Public Class dlgWaterBalance
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverRainfall.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso ucrNudCapacity.Text <> "" AndAlso ucrNudFrom.Text <> "" AndAlso ucrNudTo.Text <> "" AndAlso Not ucrInputEvaporation.IsEmpty AndAlso ucrNudWBLessThan.Text <> "" AndAlso ucrSaveWaterBalance.IsComplete Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+        'If Not ucrReceiverRainfall.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso ucrNudCapacity.Text <> "" AndAlso ucrNudFrom.Text <> "" AndAlso ucrNudTo.Text <> "" AndAlso Not ucrInputEvaporation.IsEmpty AndAlso ucrNudWBLessThan.Text <> "" AndAlso ucrSaveWaterBalance.IsComplete Then
+        '    ucrBase.OKEnabled(True)
+        'Else
+        '    ucrBase.OKEnabled(False)
+        'End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -312,5 +312,28 @@ Public Class dlgWaterBalance
 
     Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveWaterBalance.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverRainfall.ControlContentsChanged, ucrNudCapacity.ControlContentsChanged, ucrNudFrom.ControlContentsChanged, ucrNudTo.ControlContentsChanged, ucrInputEvaporation.ControlContentsChanged, ucrNudWBLessThan.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrPnlEndofRains_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlEndofRains.ControlContentsChanged
+        If rdoRain.Checked Then
+            'ucrBase.clsRsyntax.SetBaseRFunction(clsSumFunction)
+            'ucrBase.clsRsyntax.AddParameter("calc", clsRFunctionParameter:=clsRTrasform)
+            'ucrSaveTransform.SetPrefix("Sum")
+            'ucrInputColName.SetPrefix("Sum")
+            'ucrInputColName.SetName("Sum")
+            'grpTransform.Text = "Sum"
+        ElseIf rdoWaterBalance.Checked Then
+            'ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
+            'ucrSaveTransform.SetPrefix("Count")
+            'ucrInputColName.SetPrefix("Count")
+            'ucrInputColName.SetName("Count")
+            'grpTransform.Text = "Count"
+        ElseIf rdoBoth.Checked Then
+            'ucrBase.clsRsyntax.SetBaseRFunction(clsSpellFunction)
+            'ucrSaveTransform.SetPrefix("Spell")
+            'ucrInputColName.SetPrefix("Spell")
+            'ucrInputColName.SetName("Spell")
+            'grpTransform.Text = "Spell"
+        End If
     End Sub
 End Class

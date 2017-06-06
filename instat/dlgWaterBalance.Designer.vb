@@ -64,7 +64,7 @@ Partial Class dlgWaterBalance
         'lblYear
         '
         Me.lblYear.AutoSize = True
-        Me.lblYear.Location = New System.Drawing.Point(248, 173)
+        Me.lblYear.Location = New System.Drawing.Point(248, 130)
         Me.lblYear.Name = "lblYear"
         Me.lblYear.Size = New System.Drawing.Size(32, 13)
         Me.lblYear.TabIndex = 17
@@ -82,7 +82,7 @@ Partial Class dlgWaterBalance
         'lblDOY
         '
         Me.lblDOY.AutoSize = True
-        Me.lblDOY.Location = New System.Drawing.Point(247, 215)
+        Me.lblDOY.Location = New System.Drawing.Point(247, 172)
         Me.lblDOY.Name = "lblDOY"
         Me.lblDOY.Size = New System.Drawing.Size(66, 13)
         Me.lblDOY.TabIndex = 19
@@ -94,7 +94,7 @@ Partial Class dlgWaterBalance
         Me.grpRainParameters.Controls.Add(Me.ucrNudFrom)
         Me.grpRainParameters.Controls.Add(Me.lblFrom)
         Me.grpRainParameters.Controls.Add(Me.lblTo)
-        Me.grpRainParameters.Location = New System.Drawing.Point(12, 253)
+        Me.grpRainParameters.Location = New System.Drawing.Point(12, 257)
         Me.grpRainParameters.Name = "grpRainParameters"
         Me.grpRainParameters.Size = New System.Drawing.Size(318, 40)
         Me.grpRainParameters.TabIndex = 21
@@ -166,7 +166,7 @@ Partial Class dlgWaterBalance
         'lblRainfall
         '
         Me.lblRainfall.AutoSize = True
-        Me.lblRainfall.Location = New System.Drawing.Point(246, 131)
+        Me.lblRainfall.Location = New System.Drawing.Point(246, 214)
         Me.lblRainfall.Name = "lblRainfall"
         Me.lblRainfall.Size = New System.Drawing.Size(70, 13)
         Me.lblRainfall.TabIndex = 15
@@ -183,7 +183,7 @@ Partial Class dlgWaterBalance
         '
         'ucrSaveWaterBalance
         '
-        Me.ucrSaveWaterBalance.Location = New System.Drawing.Point(12, 399)
+        Me.ucrSaveWaterBalance.Location = New System.Drawing.Point(12, 403)
         Me.ucrSaveWaterBalance.Name = "ucrSaveWaterBalance"
         Me.ucrSaveWaterBalance.Size = New System.Drawing.Size(276, 24)
         Me.ucrSaveWaterBalance.TabIndex = 27
@@ -201,7 +201,7 @@ Partial Class dlgWaterBalance
         'ucrReceiverYear
         '
         Me.ucrReceiverYear.frmParent = Me
-        Me.ucrReceiverYear.Location = New System.Drawing.Point(246, 188)
+        Me.ucrReceiverYear.Location = New System.Drawing.Point(246, 145)
         Me.ucrReceiverYear.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverYear.Name = "ucrReceiverYear"
         Me.ucrReceiverYear.Selector = Nothing
@@ -225,7 +225,7 @@ Partial Class dlgWaterBalance
         'ucrReceiverDOY
         '
         Me.ucrReceiverDOY.frmParent = Me
-        Me.ucrReceiverDOY.Location = New System.Drawing.Point(246, 230)
+        Me.ucrReceiverDOY.Location = New System.Drawing.Point(246, 187)
         Me.ucrReceiverDOY.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDOY.Name = "ucrReceiverDOY"
         Me.ucrReceiverDOY.Selector = Nothing
@@ -237,7 +237,7 @@ Partial Class dlgWaterBalance
         'ucrReceiverRainfall
         '
         Me.ucrReceiverRainfall.frmParent = Me
-        Me.ucrReceiverRainfall.Location = New System.Drawing.Point(246, 146)
+        Me.ucrReceiverRainfall.Location = New System.Drawing.Point(246, 229)
         Me.ucrReceiverRainfall.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverRainfall.Name = "ucrReceiverRainfall"
         Me.ucrReceiverRainfall.Selector = Nothing
@@ -258,7 +258,7 @@ Partial Class dlgWaterBalance
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(8, 425)
+        Me.ucrBase.Location = New System.Drawing.Point(8, 429)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 56)
         Me.ucrBase.TabIndex = 23
@@ -351,7 +351,7 @@ Partial Class dlgWaterBalance
         Me.grpRain.Controls.Add(Me.ucrNudAmount)
         Me.grpRain.Controls.Add(Me.lblTotalOverDays)
         Me.grpRain.Controls.Add(Me.ucrNudTotalOverDays)
-        Me.grpRain.Location = New System.Drawing.Point(9, 300)
+        Me.grpRain.Location = New System.Drawing.Point(9, 304)
         Me.grpRain.Name = "grpRain"
         Me.grpRain.Size = New System.Drawing.Size(304, 39)
         Me.grpRain.TabIndex = 34
@@ -408,7 +408,7 @@ Partial Class dlgWaterBalance
         Me.grpWaterBalance.Controls.Add(Me.ucrInputEvaporation)
         Me.grpWaterBalance.Controls.Add(Me.lblEvaporation)
         Me.grpWaterBalance.Controls.Add(Me.lblCapacity)
-        Me.grpWaterBalance.Location = New System.Drawing.Point(9, 345)
+        Me.grpWaterBalance.Location = New System.Drawing.Point(9, 349)
         Me.grpWaterBalance.Name = "grpWaterBalance"
         Me.grpWaterBalance.Size = New System.Drawing.Size(429, 48)
         Me.grpWaterBalance.TabIndex = 35
@@ -443,7 +443,7 @@ Partial Class dlgWaterBalance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(446, 489)
+        Me.ClientSize = New System.Drawing.Size(441, 492)
         Me.Controls.Add(Me.grpWaterBalance)
         Me.Controls.Add(Me.grpRain)
         Me.Controls.Add(Me.lblStation)
