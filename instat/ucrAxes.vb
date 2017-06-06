@@ -20,7 +20,6 @@ Public Class ucrAxes
     Public clsXYScaleContinuousFunction As New RFunction
     Public clsXlabTitleFunction As New RFunction
     Public clsBaseOperator As New ROperator
-    Public clsScalecontinuousFunction As New RFunction
     Public clsSeqFunction As New RFunction
     Public strAxis As String
     Public bFirstLoad As Boolean = True
@@ -188,14 +187,14 @@ Public Class ucrAxes
     End Sub
 
     Private Sub ucrPnlScales_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlScales.ControlValueChanged, ucrInputLowerLimit.ControlValueChanged, ucrInputUpperLimit.ControlValueChanged
-        'If ucrChangedControl.Equals(ucrPnlScales) Then
-        If rdoScalesCustom.Checked AndAlso (Not ucrInputLowerLimit.IsEmpty AndAlso Not ucrInputUpperLimit.IsEmpty) Then
-            Dim strLowerLimit As String = ucrInputLowerLimit.GetText
-            Dim strUpperLimit As String = ucrInputUpperLimit.GetText
-            clsXYScaleContinuousFunction.AddParameter("limits", "c(" & strLowerLimit & "," & strUpperLimit & ")")
+        If ucrChangedControl.Equals(ucrPnlScales) Then
+            If rdoScalesCustom.Checked AndAlso (Not ucrInputLowerLimit.IsEmpty AndAlso Not ucrInputUpperLimit.IsEmpty) Then
+                Dim strLowerLimit As String = ucrInputLowerLimit.GetText
+                Dim strUpperLimit As String = ucrInputUpperLimit.GetText
+                clsXYScaleContinuousFunction.AddParameter("limits", "c(" & strLowerLimit & "," & strUpperLimit & ")")
+            End If
         End If
-        ' End If
-
+        AddRemoveXYScales()
     End Sub
 
     Private Sub tickMarkersDisplay()
@@ -218,8 +217,5 @@ Public Class ucrAxes
         End If
     End Sub
 
-    Private Sub ucrAxes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    End Sub
 End Class
 
