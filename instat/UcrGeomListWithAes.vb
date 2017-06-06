@@ -89,12 +89,12 @@ Public Class UcrGeomListWithParameters
             ucrGeomWithAesSelector.SetDataframe(strDataFrameName, (Not chkApplyOnAllLayers.Checked) OrElse strGlobalDataFrame = "")
         End If
     End Sub
-    Public Overrides Sub Setup(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempGlobalAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bApplyAesGlobally As Boolean = True, Optional bIgnoreGlobalAes As Boolean = False, Optional iNumVariablesForGeoms As Integer = -1, Optional clsTempLocalAes As RFunction = Nothing)
+    Public Overrides Sub Setup(clsNewGeomFunc As RFunction, clsNewGlobalAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bApplyAesGlobally As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional clsNewLocalAes As RFunction = Nothing)
         'See ucrAdditionalLayers and Specific Plots dlg to see how the SetUp Parameters are chosen within the sdgLayerOptions.SetupLayer call.
-        MyBase.Setup(clsTempGgPlot, clsTempGeomFunc, clsTempGlobalAesFunc, bFixAes, bFixGeom, strDataframe, bApplyAesGlobally, bIgnoreGlobalAes, iNumVariablesForGeoms, clsTempLocalAes)
+        MyBase.Setup(clsNewGeomFunc, clsNewGlobalAesFunc, bFixAes, bFixGeom, strDataframe, bApplyAesGlobally, iNumVariablesForGeoms, clsNewLocalAes)
         strGlobalDataFrame = strDataframe
-        If clsTempLocalAes IsNot Nothing Then
-            clsGeomAesFunction = clsTempLocalAes
+        If clsNewLocalAes IsNot Nothing Then
+            clsGeomAesFunction = clsNewLocalAes
         Else
             clsGeomAesFunction = New RFunction
             clsGeomAesFunction.SetRCommand("aes")
@@ -146,7 +146,7 @@ Public Class UcrGeomListWithParameters
             'When IgnoreGlobalAes is checked, we don't want the global aesthetics to appear in the receivers.
             'Task: print global aesthetics in blue within the receivers and perhaps global aesthetics inherited from another dataframe in red ?
             If Not chkIgnoreGlobalAes.Checked Then
-                For Each clsParam In clsGgplotAesFunction.clsParameters
+                For Each clsParam In clsGlobalAesFunction.clsParameters
                     If clsParam.strArgumentName = lstCurrArguments(i) Then
                         'For some geoms like LinePlot, when the x or y aes is not filled, ggplot R syntax requires to set x="". This x="" might be copied into the global aes if the ApplyOnAllLayers is set to true for a BoxPlot Layer. This might be copied from the GgplotAesFunction parameters into the aes receivers by error in subsequent layers.
                         If Not ((clsParam.strArgumentName = "x" OrElse clsParam.strArgumentName = "y") AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34)) Then
