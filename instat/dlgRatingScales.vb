@@ -39,8 +39,10 @@ Public Class dlgRatingScales
         ucrReceiverOrderedFactors.Selector = ucrSelectorRatingScale
         ucrReceiverWeights.Selector = ucrSelectorRatingScale
 
+
         ucrReceiverOrderedFactors.SetParameter(New RParameter("items", 1))
         ucrReceiverOrderedFactors.SetParameterIsRFunction()
+        ucrReceiverOrderedFactors.bForceAsDataFrame = True
 
         ucrReceiverWeights.SetParameter(New RParameter("weight.by", 2))
         ucrReceiverWeights.SetParameterIsRFunction()
@@ -77,13 +79,12 @@ Public Class dlgRatingScales
         ucrPnlGraphType.AddFunctionNamesCondition(rdoStacked, "sjp.stackfrq")
 
         ucrPnlGraphType.AddToLinkedControls(ucrChkFlip, {rdoLikert, rdoStacked}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlGraphType.AddToLinkedControls(ucrNudNeutralLevel, {rdoLikert}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlGraphType.AddToLinkedControls(ucrNudNeutralLevel, {rdoLikert}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=1)
         ucrPnlGraphType.AddToLinkedControls(ucrChkNumberOfCategories, {rdoLikert}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkNumberOfCategories.SetLinkedDisplayControl(grpLikertType)
 
         ucrNudNeutralLevel.SetLinkedDisplayControl(lblNeutralLevel)
         ucrNudNeutralLevel.SetLinkedDisplayControl(lblNeutralLevel)
-
 
         ucrSaveGraph.SetPrefix("Graph")
         ucrSaveGraph.SetSaveTypeAsColumn()
@@ -99,17 +100,22 @@ Public Class dlgRatingScales
         clsSjpStackFrq = New RFunction
         ChangeOfParameters()
         ucrSelectorRatingScale.Reset()
-
+        NumberOfLevels()
+        clsSjplikert.SetPackageName("sjPlot")
         clsSjplikert.SetRCommand("sjp.likert")
         clsSjplikert.AddParameter("catcount", "NULL")
         'clsSjplikert.AddParameter("cat.neutral")
         clsSjplikert.AddParameter("coord.flip", "FALSE")
 
+        clsSjpStackFrq.SetPackageName("sjPlot")
         clsSjpStackFrq.SetRCommand("sjp.stackfrq")
         clsSjpStackFrq.AddParameter("coord.flip", "FALSE")
 
+        clsSjtStackFrq.SetPackageName("sjPlot")
         clsSjtStackFrq.SetRCommand("sjt.stackfrq")
         clsSjtStackFrq.AddParameter("sort.frq", "NULL")
+        clsSjtStackFrq.AddParameter("show.n", "TRUE")
+
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjtStackFrq)
     End Sub
@@ -194,6 +200,7 @@ Public Class dlgRatingScales
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         If rdoLikert.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjplikert)
+            ucrBase.clsRsyntax.iCallType = 3
             'ucrBase.clsRsyntax.bHTMLOutput = False
         ElseIf rdoTable.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjtStackFrq)
@@ -217,24 +224,32 @@ Public Class dlgRatingScales
     Private Sub NumberOfLevels()
         Dim iLevels As Integer
         Dim iMedLevel As Integer
+        If Not ucrReceiverOrderedFactors.IsEmpty AndAlso ucrSelectorRatingScale.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+            If rdoLikert.Checked Then
+                If ucrChkNumberOfCategories.Checked Then
+                    clsLevelofFactor.SetRCommand("nlevels")
+                    clsFactorColumn.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+                    clsFactorColumn.AddParameter("col_name", ucrReceiverOrderedFactors.GetVariableNames())
+                    clsFactorColumn.AddParameter("data_name", Chr(34) & ucrSelectorRatingScale.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+                    clsLevelofFactor.AddParameter("x", clsRFunctionParameter:=clsFactorColumn)
 
-        clsLevelofFactor.SetRCommand("nlevels")
-        clsFactorColumn.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
-        clsFactorColumn.AddParameter("col_name", ucrReceiverOrderedFactors.GetVariableNames())
-        clsFactorColumn.AddParameter("data_name", Chr(34) & ucrSelectorRatingScale.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-        clsLevelofFactor.AddParameter("x", clsRFunctionParameter:=clsFactorColumn)
+                    iLevels = frmMain.clsRLink.RunInternalScriptGetValue(clsLevelofFactor.ToScript).AsNumeric(0)
 
-        iLevels = frmMain.clsRLink.RunInternalScriptGetValue(clsLevelofFactor.ToScript).AsNumeric(0)
-
-        'to check it its even you can do this - see if you divide by two has a remeinder 
-        iMedLevel = (iLevels + 1) / 2
-        If IsOdd(iLevels) = True Then
-            ucrNudNeutralLevel.Visible = True
-            ucrNudNeutralLevel.Value = iMedLevel
+                    'to check it its even you can do this - see if you divide by two has a remeinder 
+                    iMedLevel = (iLevels + 1) / 2
+                    If IsOdd(iLevels) = True Then
+                        ucrNudNeutralLevel.Visible = True
+                        ucrNudNeutralLevel.Value = iMedLevel
+                    Else
+                        ucrNudNeutralLevel.Visible = False
+                    End If
+                    ucrNudNeutralLevel.SetMinMax(1, iLevels)
+                End If
+            End If
         Else
-            ucrNudNeutralLevel.Visible = False
+            ucrNudNeutralLevel.SetMinMax(1, Integer.MaxValue)
+            ucrNudNeutralLevel.Value = 1
         End If
-        ucrNudNeutralLevel.SetMinMax(1, iLevels)
     End Sub
 
     Private Sub ucrNudNeutralLevel_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudNeutralLevel.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrReceiverOrderedFactors.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged
@@ -257,13 +272,7 @@ Public Class dlgRatingScales
         End If
     End Sub
 
-    Private Sub ucrReceiverOrderedFactors_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOrderedFactors.ControlValueChanged, ucrPnlType.ControlValueChanged
-        If Not ucrReceiverOrderedFactors.IsEmpty Then
-            If rdoLikert.Checked Then
-                NumberOfLevels()
-            Else
-                ucrNudNeutralLevel.SetMinMax(1, Integer.MaxValue)
-            End If
-        End If
+    Private Sub ucrReceiverOrderedFactors_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOrderedFactors.ControlValueChanged, ucrPnlType.ControlValueChanged, ucrChkNumberOfCategories.ControlValueChanged, ucrSelectorRatingScale.ControlValueChanged
+        NumberOfLevels()
     End Sub
 End Class
