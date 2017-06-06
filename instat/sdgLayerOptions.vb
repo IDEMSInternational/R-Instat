@@ -79,14 +79,14 @@ Public Class sdgLayerOptions
         Dim bTempIgnoreGlobalAes As Boolean
         bTempIgnoreGlobalAes = ((clsGeomFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "inherit.aes") <> -1) AndAlso (clsGeomFunction.GetParameter("inherit.aes").strArgumentValue = "FALSE"))
         If clsGeomFunction.strRCommand = "geom_boxplot" OrElse clsGeomFunction.strRCommand = "geom_dotplot" Then
-            If (clsAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 OrElse bTempIgnoreGlobalAes) AndAlso ucrGeomWithAes.clsGeomAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 Then
+            If (clsAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 OrElse bTempIgnoreGlobalAes) AndAlso ucrGeomWithAes.clsLocalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 Then
                 clsRelevantAesFunction.AddParameter("x", Chr(34) & Chr(34))
             End If
         ElseIf clsGeomFunction.strRCommand = "geom_point" OrElse clsGeomFunction.strRCommand = "geom_line" Then
-            If (clsAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 OrElse bTempIgnoreGlobalAes) AndAlso ucrGeomWithAes.clsGeomAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 Then
+            If (clsAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 OrElse bTempIgnoreGlobalAes) AndAlso ucrGeomWithAes.clsLocalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "x") = -1 Then
                 clsRelevantAesFunction.AddParameter("x", Chr(34) & Chr(34))
             End If
-            If (clsAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") = -1 OrElse bTempIgnoreGlobalAes) AndAlso ucrGeomWithAes.clsGeomAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") = -1 Then
+            If (clsAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") = -1 OrElse bTempIgnoreGlobalAes) AndAlso ucrGeomWithAes.clsLocalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") = -1 Then
                 clsRelevantAesFunction.AddParameter("y", Chr(34) & Chr(34))
             End If
         End If
@@ -98,7 +98,7 @@ Public Class sdgLayerOptions
         'Two situations: apply on all layers checked or not. Would edit the global or local aes accordingly. 
         If ucrGeomWithAes.chkApplyOnAllLayers.Checked Then
             'First, in case the chkApplyOnAllLayers is checked, what is by default understood as local mapping (clsGeomAesFunction) needs to become global mapping: the Aes parameters in clsGeomAesFunction are sent through to clsAesFunction.
-            For Each clsParam In ucrGeomWithAes.clsGeomAesFunction.clsParameters
+            For Each clsParam In ucrGeomWithAes.clsLocalAesFunction.clsParameters
                 clsAesFunction.AddParameter(clsParam) 'Warning: This never removes the parameters that have been previously inserted...
             Next
             'Now, we don't want the parameters "mapping" and "data" in the Layer as these will be fixed globally and then inherited.
@@ -113,8 +113,8 @@ Public Class sdgLayerOptions
             strGlobalDataFrame = ucrGeomWithAes.ucrGeomWithAesSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text
             ucrGeomWithAes.strGlobalDataFrame = strGlobalDataFrame
         Else 'Warning: in case the sdgLayerOptions has been called by specific dlg, need to refill the aes on that dlg. Imagine the ApplyOnAllLayers has been unticked ? Problem... Also in order to solve this, would need to know on the specific dialog if it has been unticked or not in order to know how to fill in the aes receivers ! The linking will be restudied anyway. There are many ways to go, see discussion on github.
-            If ucrGeomWithAes.clsGeomAesFunction.iParameterCount > 0 Then
-                clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=ucrGeomWithAes.clsGeomAesFunction.Clone())
+            If ucrGeomWithAes.clsLocalAesFunction.iParameterCount > 0 Then
+                clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=ucrGeomWithAes.clsLocalAesFunction.Clone())
             Else
                 clsGeomFunction.RemoveParameterByName("mapping")
             End If
@@ -144,7 +144,7 @@ Public Class sdgLayerOptions
         'Adding stat = identity method 
         If clsGeomFunction.strRCommand = "geom_bar" OrElse clsGeomFunction.strRCommand = "geom_density" OrElse clsGeomFunction.strRCommand = "geom_freqpoly" Then
             'If there is a y in the global aes, and the global aes are not ignored or if there is a y in the local aes then in case stat has not been set manually, stat is set to identity.
-            If (((clsAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") <> -1) AndAlso ((clsGeomFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "inherit.aes") = -1) OrElse (clsGeomFunction.GetParameter("inherit.aes").strArgumentValue = "TRUE"))) OrElse (ucrGeomWithAes.clsGeomAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") <> -1)) AndAlso (clsGeomFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "stat") = -1) Then
+            If (((clsAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") <> -1) AndAlso ((clsGeomFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "inherit.aes") = -1) OrElse (clsGeomFunction.GetParameter("inherit.aes").strArgumentValue = "TRUE"))) OrElse (ucrGeomWithAes.clsLocalAesFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "y") <> -1)) AndAlso (clsGeomFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "stat") = -1) Then
                 clsGeomFunction.AddParameter("stat", Chr(34) & "identity" & Chr(34))
                 'Task: send a message to the user saying that stat = identity has been added as a parameter in order to avoid error. Can be modified on the LayerParameter tab.
                 'In case the "y" mapping has been removed after editing the layer, the added "stat" parameter should probably be removed so it is important for the user to know it has been added in automatically, in case he wants to go to the layer parameters tab and remove it.

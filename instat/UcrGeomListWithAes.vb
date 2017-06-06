@@ -19,15 +19,13 @@ Imports instat
 
 Public Class UcrGeomListWithParameters
     Public lstAesParameterLabels As New List(Of Label)
-    Public lstAesParameterUcr As New List(Of ucrReceiverSingle)
+    Public lstAesParameterReceivers As New List(Of ucrReceiverSingle)
     'The two previous fields are the lists of parameter labels and receivers on the ucr.
     Public lstCurrArguments As New List(Of String)
     'lstCurrArguments is the list of aes parameters names of the current geom (ucrGeom.clsCurrGeom), i.e. the list of parameter names of clsGeomAesFunction.
     Public bFirstLoad As Boolean = True
     Public ucrLayersControl As ucrLayerParameters
-    Public bCheckEnabled As Boolean = True
     Public Event DataFrameChanged()
-    Public clsGeomAesFunction As RFunction
     'clsGeomAesFunction stores the value (aes function) of the local mapping (of this particular layer). It is used as parameter in sdgLayerOptions.clsGeomFunction.
     Public bAddToLocalAes As Boolean = True
     Public bCurrentFixAes As Boolean = True
@@ -38,13 +36,11 @@ Public Class UcrGeomListWithParameters
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        SetSelector()
+
         'Get the lists of parameter labels and receivers.
         lstAesParameterLabels.AddRange({lblGgParam1, lblGgParam2, lblGgParam3, lblGgParam4, lblGgParam5, lblGgParam6, lblGgParam7, lblGgParam8, lblGgParam9, lblGgParam10, lblGgParam11, lblGgParam12, lblGgParam13})
-        lstAesParameterUcr.AddRange({ucrReceiverParam1, ucrReceiverParam2, ucrReceiverParam3, ucrReceiverParam4, ucrReceiverParam5, ucrReceiverParam6, ucrReceiverParam7, ucrReceiverParam8, ucrReceiverParam9, ucrReceiverParam10, ucrReceiverParam11, ucrReceiverParam12, ucrReceiverParam13})
-        'Set the R command of the local Aes function.
-        clsGeomAesFunction = New RFunction
-        clsGeomAesFunction.SetRCommand("aes")
+        lstAesParameterReceivers.AddRange({ucrReceiverParam1, ucrReceiverParam2, ucrReceiverParam3, ucrReceiverParam4, ucrReceiverParam5, ucrReceiverParam6, ucrReceiverParam7, ucrReceiverParam8, ucrReceiverParam9, ucrReceiverParam10, ucrReceiverParam11, ucrReceiverParam12, ucrReceiverParam13})
+        SetSelector()
     End Sub
 
     Private Sub UcrGeomListWithParameters_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -59,19 +55,11 @@ Public Class UcrGeomListWithParameters
 
     Private Sub SetSelector()
         'Link the selector and the receivers
-        ucrReceiverParam1.Selector = ucrGeomWithAesSelector
-        ucrReceiverParam2.Selector = ucrGeomWithAesSelector
-        ucrReceiverParam3.Selector = ucrGeomWithAesSelector
-        ucrReceiverParam4.Selector = ucrGeomWithAesSelector
-        ucrReceiverParam5.Selector = ucrGeomWithAesSelector
-        ucrReceiverParam6.Selector = ucrGeomWithAesSelector
-        ucrReceiverParam7.Selector = ucrGeomWithAesSelector
-        ucrReceiverParam8.Selector = ucrGeomWithAesSelector
-        ucrReceiverParam9.Selector = ucrGeomWithAesSelector
-        ucrReceiverParam10.Selector = ucrGeomWithAesSelector
-        ucrReceiverParam11.Selector = ucrGeomWithAesSelector
-        ucrReceiverParam12.Selector = ucrGeomWithAesSelector
-        ucrReceiverParam13.Selector = ucrGeomWithAesSelector
+        For Each ucrTempReceiver In lstAesParameterReceivers
+            ucrTempReceiver.Selector = ucrGeomWithAesSelector
+            ucrTempReceiver.SetParameterIsString()
+            ucrTempReceiver.bWithQuotes = False
+        Next
     End Sub
 
     Private Sub InitialiseSelectedDataFrame()
@@ -89,15 +77,16 @@ Public Class UcrGeomListWithParameters
             ucrGeomWithAesSelector.SetDataframe(strDataFrameName, (Not chkApplyOnAllLayers.Checked) OrElse strGlobalDataFrame = "")
         End If
     End Sub
-    Public Overrides Sub Setup(clsNewGeomFunc As RFunction, clsNewGlobalAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bApplyAesGlobally As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional clsNewLocalAes As RFunction = Nothing)
+
+    Public Overrides Sub Setup(clsNewGeomFunc As RFunction, clsNewGlobalAesFunc As RFunction, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bApplyAesGlobally As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional clsNewLocalAes As RFunction = Nothing, Optional bReset As Boolean = False)
         'See ucrAdditionalLayers and Specific Plots dlg to see how the SetUp Parameters are chosen within the sdgLayerOptions.SetupLayer call.
-        MyBase.Setup(clsNewGeomFunc, clsNewGlobalAesFunc, bFixAes, bFixGeom, strDataframe, bApplyAesGlobally, iNumVariablesForGeoms, clsNewLocalAes)
+        MyBase.Setup(clsNewGeomFunc, clsNewGlobalAesFunc, bFixGeom, strDataframe, bApplyAesGlobally, iNumVariablesForGeoms, clsNewLocalAes, bReset)
         strGlobalDataFrame = strDataframe
         If clsNewLocalAes IsNot Nothing Then
-            clsGeomAesFunction = clsNewLocalAes
+            clsLocalAesFunction = clsNewLocalAes
         Else
-            clsGeomAesFunction = New RFunction
-            clsGeomAesFunction.SetRCommand("aes")
+            clsLocalAesFunction = New RFunction
+            clsLocalAesFunction.SetRCommand("aes")
         End If
 
         'ucrGeomWithAesSelector.Reset() 'Warning: Not sure this is necessary anymore... Testing will confirm.
@@ -131,7 +120,8 @@ Public Class UcrGeomListWithParameters
         End If
         Return bValue
     End Function
-    Private Sub SetAes(Optional bFixAes As Boolean = False)
+
+    Private Sub SetAes()
         'This function fills in the aesthetic receivers with the appropriate values, starting with the values coming from the global aes (if IgnoreGlobalAes is not chacked) and then in the local aes.
         Dim bFirstEnabled As Boolean = True
         Dim iFirstEnabled As Integer = 0
@@ -141,8 +131,7 @@ Public Class UcrGeomListWithParameters
             'Clear the potentially up to date content of the Aesthetics receivers. If the content of lstAesParameterUcr(i) is still relevant, then one of the parameters's name in clsGgplotAesFunction will match lstCurrArguments(i) and the value recovered accordingly.
             'Warning/Question: when geom is changed, local aes of previous geom are not kept. Is that fine ? Could change the method for layer to remember the previous selection for common aes between the two geoms.
             'Warning: the order in which the two following are called counts as clearing only operates when ucr is enabled. Not that this sub will always enable all ucr's that were previously disabled.
-            lstAesParameterUcr(i).Enabled = True
-            lstAesParameterUcr(i).Clear()
+            lstAesParameterReceivers(i).Clear()
             'When IgnoreGlobalAes is checked, we don't want the global aesthetics to appear in the receivers.
             'Task: print global aesthetics in blue within the receivers and perhaps global aesthetics inherited from another dataframe in red ?
             If Not chkIgnoreGlobalAes.Checked Then
@@ -150,50 +139,51 @@ Public Class UcrGeomListWithParameters
                     If clsParam.strArgumentName = lstCurrArguments(i) Then
                         'For some geoms like LinePlot, when the x or y aes is not filled, ggplot R syntax requires to set x="". This x="" might be copied into the global aes if the ApplyOnAllLayers is set to true for a BoxPlot Layer. This might be copied from the GgplotAesFunction parameters into the aes receivers by error in subsequent layers.
                         If Not ((clsParam.strArgumentName = "x" OrElse clsParam.strArgumentName = "y") AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34)) Then
-                            lstAesParameterUcr(i).Add(clsParam.strArgumentValue)
-                            lstAesParameterUcr(i).Enabled = Not bFixAes 'Warning/Question/Task: this is not flexible enough. Some of the aesthetics are set in the options. They cannot be editted on the main, however when coming back to options these are fixed and so cannot be editted anywhere anymore. Would need to be able to choose which aesthetics among a Layer should be fixed maybe.
+                            lstAesParameterReceivers(i).Add(clsParam.strArgumentValue)
                             Exit For
                         End If
                     End If
                 Next
             End If
-            For Each clsParam In clsGeomAesFunction.clsParameters
+            For Each clsParam In clsLocalAesFunction.clsParameters
                 If clsParam.strArgumentName = lstCurrArguments(i) Then
                     If Not ((clsParam.strArgumentName = "x" OrElse clsParam.strArgumentName = "y") AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34)) Then 'As before, check that x is not mapped to "" before putting in receivers.
-                        lstAesParameterUcr(i).Add(clsParam.strArgumentValue)
-                        lstAesParameterUcr(i).Enabled = True
+                        lstAesParameterReceivers(i).Add(clsParam.strArgumentValue)
+                        lstAesParameterReceivers(i).Enabled = True
                         Exit For
                     End If
                 End If
             Next
-            If bFirstEnabled AndAlso lstAesParameterUcr(i).Enabled Then
+            If bFirstEnabled AndAlso lstAesParameterReceivers(i).Enabled Then
                 iFirstEnabled = i
                 bFirstEnabled = False
             End If
         Next
-        lstAesParameterUcr(iFirstEnabled).SetMeAsReceiver()
+        lstAesParameterReceivers(iFirstEnabled).SetMeAsReceiver()
         bAddToLocalAes = True
     End Sub
 
     Public Sub SetParameters() 'this will set function or aes parameters
+        Dim iMaxIndex As Integer
+        Dim i As Integer
+        Dim strParamName As String
 
-        Dim iMaxIndex As Integer = lstAesParameterLabels.Count
+        iMaxIndex = lstAesParameterLabels.Count
         'iMaxIndex will be set as the minimum between the number of aes parameters in the current geom and the number of aesthetics recievers on the dialog.
-        Dim i As Integer = iMaxIndex
         'i is just an index variable for the loops.
 
         'Security check: our current geom has been populated.
         If clsCurrGeom IsNot Nothing Then
             'The following two will be reset as desired.
-            clsGeomAesFunction.ClearParameters()
+            clsLocalAesFunction.ClearParameters()
             lstCurrArguments.Clear()
-
+            ClearReceiversCodeAndParameter()
             If (clsCurrGeom.clsAesParameters.Count < iMaxIndex) Then
                 'If the number of aes parameters in the current geom is smaller than the number of receivers, then we hide the exceeding receivers and labels.
                 iMaxIndex = clsCurrGeom.clsAesParameters.Count
                 For i = iMaxIndex To (lstAesParameterLabels.Count - 1)
                     lstAesParameterLabels(i).Visible = False
-                    lstAesParameterUcr(i).Visible = False
+                    lstAesParameterReceivers(i).Visible = False
                 Next
             ElseIf (clsCurrGeom.clsAesParameters.Count > iMaxIndex) Then
                 'If the number of parameters in the current geom is greater than the number of receivers, then there is an error.
@@ -201,26 +191,28 @@ Public Class UcrGeomListWithParameters
             End If
 
             'In any case, we show all the receivers that have index lower than the iMaxIndex, and we populate the labels with the appropriate names.
-            i = 0
             For i = 0 To (iMaxIndex - 1)
+                strParamName = clsCurrGeom.clsAesParameters(i).strAesParameterName
                 lstAesParameterLabels(i).Visible = True
-                lstAesParameterUcr(i).Visible = True
+                lstAesParameterReceivers(i).Visible = True
 
-                lstAesParameterLabels(i).Text = clsCurrGeom.clsAesParameters(i).strAesParameterName & ":"
-                lstCurrArguments.Add(clsCurrGeom.clsAesParameters(i).strAesParameterName)
-                lstAesParameterUcr(i).Clear()
+                lstAesParameterLabels(i).Text = strParamName & ":"
+                lstCurrArguments.Add(strParamName)
+                lstAesParameterReceivers(i).SetParameter(New RParameter(strParamName))
                 If clsCurrGeom.clsAesParameters(i).bIsMandatory Then
                     lstAesParameterLabels(i).Font = New Font(lstAesParameterLabels(i).Font, FontStyle.Bold)
                 Else
                     lstAesParameterLabels(i).Font = New Font(lstAesParameterLabels(i).Font, FontStyle.Regular)
                 End If
                 If clsCurrGeom.clsAesParameters(i).strIncludedDataTypes IsNot Nothing Then
-                    lstAesParameterUcr(i).SetIncludedDataTypes(clsCurrGeom.clsAesParameters(i).strIncludedDataTypes)
-                Else lstAesParameterUcr(i).RemoveIncludedMetadataProperty("class")
+                    lstAesParameterReceivers(i).SetIncludedDataTypes(clsCurrGeom.clsAesParameters(i).strIncludedDataTypes)
+                Else
+                    lstAesParameterReceivers(i).RemoveIncludedMetadataProperty("class")
                 End If
                 If clsCurrGeom.clsAesParameters(i).strExcludedDataTypes IsNot Nothing Then
-                    lstAesParameterUcr(i).SetExcludedDataTypes(clsCurrGeom.clsAesParameters(i).strExcludedDataTypes)
-                Else lstAesParameterUcr(i).RemoveExcludedMetadataProperty("class")
+                    lstAesParameterReceivers(i).SetExcludedDataTypes(clsCurrGeom.clsAesParameters(i).strExcludedDataTypes)
+                Else
+                    lstAesParameterReceivers(i).RemoveExcludedMetadataProperty("class")
                 End If
             Next
         Else 'If the current geom has not been populated, then an error has been made in the code
@@ -229,11 +221,9 @@ Public Class UcrGeomListWithParameters
         SetAes(bCurrentFixAes)
     End Sub
 
-    Public Sub UcrGeomListWithParameters_cboGeomListIndexChanged(sender As Object, e As EventArgs) Handles Me.GeomChanged
-        'this would only work on sdgLayers only
-        'sdgLayerOptions.ucrLayerParameter.cboGeomList.SelectedItem = Me.cboGeomList.SelectedItem
+    Public Sub UcrGeomListWithParameters_cboGeomListIndexChanged() Handles Me.GeomChanged
         If ucrLayersControl IsNot Nothing Then
-            ucrLayersControl.cboGeomList.SelectedItem = Me.cboGeomList.SelectedItem
+            ucrLayersControl.SetGeomName(GetGeomName())
         End If
         SetParameters()
     End Sub
@@ -242,11 +232,11 @@ Public Class UcrGeomListWithParameters
         Dim iIndex As Integer
         'bApplyToLocalAes is used to avoid changing the content of clsGeomAesFunction when the receivers are setup according to the content of clsGeomAesFunction and clsGgplotAesFunction in SetAes().
         If bAddToLocalAes Then
-            iIndex = lstAesParameterUcr.IndexOf(ucrChangedReceiver)
+            iIndex = lstAesParameterReceivers.IndexOf(ucrChangedReceiver)
             If Not ucrChangedReceiver.IsEmpty Then
-                clsGeomAesFunction.AddParameter(lstCurrArguments(iIndex), ucrChangedReceiver.GetVariableNames(False))
+                clsLocalAesFunction.AddParameter(lstCurrArguments(iIndex), ucrChangedReceiver.GetVariableNames(False))
             ElseIf iIndex < lstCurrArguments.Count Then 'Warning/Task: got an error here. The iIndex was longer than lstCurrArguments when clicking on edit layer. Don't really understand how this is possible. Just added the reality check but might need to put more thoughts into this...
-                clsGeomAesFunction.RemoveParameterByName(lstCurrArguments(iIndex))
+                clsLocalAesFunction.RemoveParameterByName(lstCurrArguments(iIndex))
             Else MsgBox("Developer Error: the iIndex (going through lstAesParameterUcr) in ucrReceiverParam_WithMeSelectionChanged is greater than lstAesParameterUcr.count. We beleive that this occurs when editting a layer with fewer aes parameters than there are filled aesthetics parameters in the GlobalAesthetics.", MsgBoxStyle.OkOnly)
             End If
         End If
@@ -258,7 +248,7 @@ Public Class UcrGeomListWithParameters
         'Added a proposal for jointly mandatory situations. For the moment the only case is two jointly mandatory aes.Turns out to be not necessary for geom_point so not used for now.
         'If a mandatory aes or two jointly mandatory aes have empty mapping, then not ok, otherwise ok.
         For i = 0 To (clsCurrGeom.clsAesParameters.Count - 1)
-            If (lstAesParameterUcr(i).IsEmpty()) AndAlso clsCurrGeom.clsAesParameters(i).bIsMandatory Then
+            If (lstAesParameterReceivers(i).IsEmpty()) AndAlso clsCurrGeom.clsAesParameters(i).bIsMandatory Then
                 ' If clsCurrGeom.clsAesParameters(i).bIsMandatory Then
                 Return False
                 'ElseIf clsCurrGeom.clsAesParameters(i).bIsDependentlyMandatory Then
@@ -307,5 +297,12 @@ Public Class UcrGeomListWithParameters
             'chkIgnoreGlobalAes.Checked = False 'Warning, if IgnoreGlobalAes was checked before changing dataframe and coming back, then it will be unchecked now...
         End If
         'Note SetAes will be called automatically if chkIgnoreGlobalAes.checked has been changed.
+    End Sub
+
+    Public Sub ClearReceiversCodeAndParameter()
+        For Each ucrTempReceiver As ucrReceiverSingle In lstAesParameterReceivers
+            ucrTempReceiver.ClearCodeAndParameters()
+            ucrTempReceiver.Clear()
+        Next
     End Sub
 End Class
