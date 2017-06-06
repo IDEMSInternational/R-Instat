@@ -28,9 +28,7 @@ Public Class ucrLayerParamsControls
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
-        'This sets up the Layer parameter of the current control. First get the right LayerParameter stored in the ucrReceiverMetadataProperty.
         ucrReceiverMetadataProperty.SetControls(clsNewRCode:=clsNewRCode, clsNewLayerParam:=clsNewLayerParam, bReset:=bReset)
-        'Then the parameter's label, ucrReceiverMP, and value are set if clsLayerParameter is non-empty. Otherwise parameter name chk is hidden
         If clsNewLayerParam IsNot Nothing Then
             ucrChkParamName.SetText(clsNewLayerParam.strLayerParameterName)
             ucrChkParamName.AddParameterPresentCondition(True, clsNewLayerParam.strLayerParameterName)
