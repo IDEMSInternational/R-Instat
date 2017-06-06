@@ -36,7 +36,7 @@ Partial Class dlgRecodeNumericIntoQuantiles
         'lblNumberOfQuantiles
         '
         Me.lblNumberOfQuantiles.AutoSize = True
-        Me.lblNumberOfQuantiles.Location = New System.Drawing.Point(242, 103)
+        Me.lblNumberOfQuantiles.Location = New System.Drawing.Point(244, 94)
         Me.lblNumberOfQuantiles.Name = "lblNumberOfQuantiles"
         Me.lblNumberOfQuantiles.Size = New System.Drawing.Size(106, 13)
         Me.lblNumberOfQuantiles.TabIndex = 3
@@ -46,7 +46,7 @@ Partial Class dlgRecodeNumericIntoQuantiles
         'lblQuantileAlgorithm
         '
         Me.lblQuantileAlgorithm.AutoSize = True
-        Me.lblQuantileAlgorithm.Location = New System.Drawing.Point(242, 133)
+        Me.lblQuantileAlgorithm.Location = New System.Drawing.Point(244, 119)
         Me.lblQuantileAlgorithm.Name = "lblQuantileAlgorithm"
         Me.lblQuantileAlgorithm.Size = New System.Drawing.Size(95, 13)
         Me.lblQuantileAlgorithm.TabIndex = 5
@@ -74,7 +74,7 @@ Partial Class dlgRecodeNumericIntoQuantiles
         '
         Me.ucrNudQuantileAlgorithm.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudQuantileAlgorithm.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudQuantileAlgorithm.Location = New System.Drawing.Point(350, 131)
+        Me.ucrNudQuantileAlgorithm.Location = New System.Drawing.Point(350, 117)
         Me.ucrNudQuantileAlgorithm.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudQuantileAlgorithm.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudQuantileAlgorithm.Name = "ucrNudQuantileAlgorithm"
@@ -86,7 +86,7 @@ Partial Class dlgRecodeNumericIntoQuantiles
         '
         Me.ucrNudNumberOfQuantiles.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberOfQuantiles.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNumberOfQuantiles.Location = New System.Drawing.Point(350, 101)
+        Me.ucrNudNumberOfQuantiles.Location = New System.Drawing.Point(350, 91)
         Me.ucrNudNumberOfQuantiles.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNumberOfQuantiles.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberOfQuantiles.Name = "ucrNudNumberOfQuantiles"
@@ -102,7 +102,9 @@ Partial Class dlgRecodeNumericIntoQuantiles
         Me.ucrReceiverNumeric.Name = "ucrReceiverNumeric"
         Me.ucrReceiverNumeric.Selector = Nothing
         Me.ucrReceiverNumeric.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverNumeric.strNcFilePath = ""
         Me.ucrReceiverNumeric.TabIndex = 2
+        Me.ucrReceiverNumeric.ucrSelector = Nothing
         '
         'ucrBase
         '
@@ -125,7 +127,7 @@ Partial Class dlgRecodeNumericIntoQuantiles
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 287)
+        Me.ClientSize = New System.Drawing.Size(416, 286)
         Me.Controls.Add(Me.lblSelectedVariable)
         Me.Controls.Add(Me.ucrNewColumnName)
         Me.Controls.Add(Me.ucrNudQuantileAlgorithm)
