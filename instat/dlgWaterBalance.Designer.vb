@@ -34,7 +34,6 @@ Partial Class dlgWaterBalance
         Me.lblCapacity = New System.Windows.Forms.Label()
         Me.lblRainfall = New System.Windows.Forms.Label()
         Me.lblEvaporation = New System.Windows.Forms.Label()
-        Me.ucrSaveWaterBalance = New instat.ucrSave()
         Me.ucrInputEvaporation = New instat.ucrInputTextBox()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
@@ -56,6 +55,8 @@ Partial Class dlgWaterBalance
         Me.grpWaterBalance = New System.Windows.Forms.GroupBox()
         Me.ucrNudWBLessThan = New instat.ucrNud()
         Me.ucrNudCapacity = New instat.ucrNud()
+        Me.ucrInputColName = New instat.ucrInputTextBox()
+        Me.lblNewColName = New System.Windows.Forms.Label()
         Me.grpRainParameters.SuspendLayout()
         Me.grpRain.SuspendLayout()
         Me.grpWaterBalance.SuspendLayout()
@@ -180,13 +181,6 @@ Partial Class dlgWaterBalance
         Me.lblEvaporation.Size = New System.Drawing.Size(67, 13)
         Me.lblEvaporation.TabIndex = 24
         Me.lblEvaporation.Text = "Evaporation:"
-        '
-        'ucrSaveWaterBalance
-        '
-        Me.ucrSaveWaterBalance.Location = New System.Drawing.Point(12, 403)
-        Me.ucrSaveWaterBalance.Name = "ucrSaveWaterBalance"
-        Me.ucrSaveWaterBalance.Size = New System.Drawing.Size(276, 24)
-        Me.ucrSaveWaterBalance.TabIndex = 27
         '
         'ucrInputEvaporation
         '
@@ -439,11 +433,33 @@ Partial Class dlgWaterBalance
         Me.ucrNudCapacity.TabIndex = 36
         Me.ucrNudCapacity.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
+        'ucrInputColName
+        '
+        Me.ucrInputColName.AddQuotesIfUnrecognised = True
+        Me.ucrInputColName.IsMultiline = False
+        Me.ucrInputColName.IsReadOnly = False
+        Me.ucrInputColName.Location = New System.Drawing.Point(176, 403)
+        Me.ucrInputColName.Name = "ucrInputColName"
+        Me.ucrInputColName.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputColName.TabIndex = 50
+        '
+        'lblNewColName
+        '
+        Me.lblNewColName.AutoSize = True
+        Me.lblNewColName.Location = New System.Drawing.Point(30, 403)
+        Me.lblNewColName.Name = "lblNewColName"
+        Me.lblNewColName.Size = New System.Drawing.Size(101, 13)
+        Me.lblNewColName.TabIndex = 51
+        Me.lblNewColName.Tag = "New Column Name:"
+        Me.lblNewColName.Text = "New Column Name:"
+        '
         'dlgWaterBalance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(441, 492)
+        Me.Controls.Add(Me.lblNewColName)
+        Me.Controls.Add(Me.ucrInputColName)
         Me.Controls.Add(Me.grpWaterBalance)
         Me.Controls.Add(Me.grpRain)
         Me.Controls.Add(Me.lblStation)
@@ -452,7 +468,6 @@ Partial Class dlgWaterBalance
         Me.Controls.Add(Me.rdoRain)
         Me.Controls.Add(Me.rdoWaterBalance)
         Me.Controls.Add(Me.ucrPnlEndofRains)
-        Me.Controls.Add(Me.ucrSaveWaterBalance)
         Me.Controls.Add(Me.ucrReceiverYear)
         Me.Controls.Add(Me.lblYear)
         Me.Controls.Add(Me.lblDate)
@@ -499,7 +514,6 @@ Partial Class dlgWaterBalance
     Friend WithEvents ucrSelectorForWaterBalance As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents lblWBLessthan As Label
-    Friend WithEvents ucrSaveWaterBalance As ucrSave
     Friend WithEvents lblStation As Label
     Friend WithEvents ucrReceiverStation As ucrReceiverSingle
     Friend WithEvents rdoBoth As RadioButton
@@ -516,4 +530,6 @@ Partial Class dlgWaterBalance
     Friend WithEvents ucrNudCapacity As ucrNud
     Friend WithEvents ucrNudTo As ucrNud
     Friend WithEvents ucrNudFrom As ucrNud
+    Friend WithEvents ucrInputColName As ucrInputTextBox
+    Friend WithEvents lblNewColName As Label
 End Class

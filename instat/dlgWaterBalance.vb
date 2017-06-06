@@ -99,11 +99,11 @@ Public Class dlgWaterBalance
         ucrReceiverYear.bAutoFill = True
 
         'save
-        ucrSaveWaterBalance.SetDataFrameSelector(ucrSelectorForWaterBalance.ucrAvailableDataFrames)
-        ucrSaveWaterBalance.SetLabelText("New Column Name:")
-        ucrSaveWaterBalance.SetIsTextBox()
-        ucrSaveWaterBalance.SetPrefix("Water_Balance")
-        ucrSaveWaterBalance.SetSaveTypeAsColumn()
+        'ucrSaveWaterBalance.SetDataFrameSelector(ucrSelectorForWaterBalance.ucrAvailableDataFrames)
+        'ucrSaveWaterBalance.SetLabelText("New Column Name:")
+        'ucrSaveWaterBalance.SetIsTextBox()
+        'ucrSaveWaterBalance.SetPrefix("Water_Balance")
+        'ucrSaveWaterBalance.SetSaveTypeAsColumn()
 
         'add parameter name
         ucrNudCapacity.Maximum = Integer.MaxValue
@@ -124,7 +124,7 @@ Public Class dlgWaterBalance
 
     Private Sub SetDefaults()
         ucrSelectorForWaterBalance.Reset()
-        ucrSaveWaterBalance.Reset()
+        'ucrSaveWaterBalance.Reset()
 
         ucrNudFrom.Value = 1
         ucrNudTo.Value = 366
@@ -238,7 +238,7 @@ Public Class dlgWaterBalance
 
         clsWaterBalance.AddParameter("type", Chr(34) & "calculation" & Chr(34))
         clsWaterBalance.AddParameter("function_exp", Chr(34) & "replace(First_Water_Balance_0, Difference != 0, NA)" & Chr(34))
-        clsWaterBalance.AddParameter("result_name", Chr(34) & ucrSaveWaterBalance.GetText() & Chr(34))
+        clsWaterBalance.AddParameter("result_name", Chr(34) & ucrInputColName.GetText() & Chr(34))
         clsWaterBalance.AddParameter("sub_calculations", clsRFunctionParameter:=clsWaterBalanceList)
         clsWaterBalanceList.AddParameter("sub1", clsRFunctionParameter:=clsFirstWaterBalance0)
         clsWaterBalanceList.AddParameter("sub2", clsRFunctionParameter:=clsDifference)
@@ -305,12 +305,12 @@ Public Class dlgWaterBalance
         ' TestOKEnabled()
     End Sub
 
-    Private Sub ucrSaveWaterBalance_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveWaterBalance.ControlValueChanged
-        clsWaterBalance.SetAssignTo(ucrSaveWaterBalance.ucrInputTextSave.GetText)
-        FirstWaterBalancePerYear()
-    End Sub
+    'Private Sub ucrSaveWaterBalance_ControlValueChanged(ucrChangedControl As ucrCore)
+    '    clsWaterBalance.SetAssignTo(ucrSaveWaterBalance.ucrInputTextSave.GetText)
+    '    FirstWaterBalancePerYear()
+    'End Sub
 
-    Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveWaterBalance.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverRainfall.ControlContentsChanged, ucrNudCapacity.ControlContentsChanged, ucrNudFrom.ControlContentsChanged, ucrNudTo.ControlContentsChanged, ucrInputEvaporation.ControlContentsChanged, ucrNudWBLessThan.ControlContentsChanged
+    Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverRainfall.ControlContentsChanged, ucrNudCapacity.ControlContentsChanged, ucrNudFrom.ControlContentsChanged, ucrNudTo.ControlContentsChanged, ucrInputEvaporation.ControlContentsChanged, ucrNudWBLessThan.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
