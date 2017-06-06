@@ -23,9 +23,9 @@ Public Class dlgWaterBalance
     Private strCurrDataName As String = ""
 
     Private Sub dlgWaterBalance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If bFirstLoad Then
+        If bFirstload Then
             InitialiseDialog()
-            bFirstLoad = False
+            bFirstload = False
         End If
         If bReset Then
             SetDefaults()
@@ -178,9 +178,11 @@ Public Class dlgWaterBalance
         clsWaterBalance60.AddParameter("type", Chr(34) & "calculation" & Chr(34))
         clsWaterBalance60.AddParameter("result_name", Chr(34) & "Water_Balance_60" & Chr(34))
         clsWaterBalance60.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubCalcList)
-        clsSubCalcList.AddParameter("sub1", clsRFunctionParameter:=clsReplaceNA)
+
         clsWaterBalance60.AddParameter("save", "2")
         clsWaterBalance60.SetAssignTo("Water_Balance_60")
+        clsSubCalcList.SetRCommand("list")
+        clsSubCalcList.AddParameter("sub1", clsRFunctionParameter:=clsReplaceNA)
 
         clsREndofRains.AddParameter("function_exp", Chr(34) & "Reduce(function(x, y) pmin(pmax(x + y - " & ucrInputEvaporation.GetText() & ", 0), " & ucrNudCapacity.Value & "), replace_NA, accumulate=TRUE)" & Chr(34))
         clsREndofRains.AddParameter("type", Chr(34) & "calculation" & Chr(34))
@@ -188,7 +190,7 @@ Public Class dlgWaterBalance
         clsREndofRains.AddParameter("manipulations", clsRFunctionParameter:=clsTransformManipulationsFunc)
         clsREndofRains.AddParameter("save", 2)
 
-        clsREndofRains.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
+        clsRollFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         clsRollFunction.AddParameter("display", "FALSE")
         clsRollFunction.AddParameter("calc", clsRFunctionParameter:=clsREndofRains)
         ucrBase.clsRsyntax.SetBaseRFunction(clsRollFunction)
