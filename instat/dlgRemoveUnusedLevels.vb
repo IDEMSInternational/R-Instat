@@ -102,7 +102,7 @@ Public Class dlgRemoveUnusedLevels
     End Sub
 
     Private Sub ucrReceiverFactorColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactorColumn.ControlValueChanged, ucrRemoveUnusedFactorLevels.ControlValueChanged
-        Dim numOutput As Integer
+        Dim iNumOutput As Integer
 
         If Not ucrReceiverFactorColumn.IsEmpty Then
             clstable.AddParameter("x", clsRFunctionParameter:=clsFactorColumn)
@@ -112,16 +112,19 @@ Public Class dlgRemoveUnusedLevels
 
             clsSum.AddParameter("x", clsROperatorParameter:=clsTableOperation)
 
-            numOutput = frmMain.clsRLink.RunInternalScriptGetValue(clsSum.ToScript).AsNumeric(0)
+            iNumOutput = frmMain.clsRLink.RunInternalScriptGetValue(clsSum.ToScript).AsNumeric(0)
             ucrInputUnusedLevels.txtInput.BackColor = Color.Green
-            If numOutput = 0 Then
+            If iNumOutput = 0 Then
                 ucrInputUnusedLevels.SetName("no unused levels to remove")
+                ucrInputUnusedLevels.txtInput.BackColor = Color.Red
             Else
-                ucrInputUnusedLevels.SetName(numOutput & " unused levels will be removed")
+                ucrInputUnusedLevels.SetName(iNumOutput & " unused levels will be removed")
+                ucrInputUnusedLevels.txtInput.BackColor = Color.Green
             End If
         Else
             ucrInputUnusedLevels.txtInput.BackColor = Color.White
             clstable.RemoveParameterByName("x")
+            ucrInputUnusedLevels.ResetText()
         End If
     End Sub
 End Class
