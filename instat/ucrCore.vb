@@ -108,6 +108,7 @@ Public Class ucrCore
                             'because .Clone breaks the link
                             'Not an issue if controls do not need to share parameters
                             SetParameter(GetParameter(i).Clone(), i)
+                            'SetParameter(New RParameter(GetParameter(i).strArgumentName), i)
                             'TODO if we don't reset what should happen to the parameter value
                             '     when it's not found in the function?
                             '     Causes issues when parameter retains value from different dialog
