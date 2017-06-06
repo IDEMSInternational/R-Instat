@@ -941,6 +941,11 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub ucrReceiverForCalculation_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForCalculation.SelectionChanged
+        If ucrReceiverForCalculation.IsEmpty Then
+            cmdTry.Enabled = False
+        Else
+            cmdTry.Enabled = True
+        End If
         RaiseEvent SelectionChanged()
     End Sub
 
