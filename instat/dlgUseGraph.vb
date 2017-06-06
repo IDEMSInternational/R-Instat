@@ -47,7 +47,6 @@ Public Class dlgUseGraph
         ucrBase.iHelpTopicID = 430
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
-        'Disabling this button temporarily before we get to subdialog for graphics sorted 
 
         ucrGraphsSelector.SetParameter(New RParameter("data_name", 0))
         ucrGraphsSelector.SetParameterIsString()
