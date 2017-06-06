@@ -124,6 +124,7 @@ Public Class dlgFromLibrary
 
     Private Sub cboPackages_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboPackages.SelectedValueChanged
         loadDatasets(cboPackages.SelectedItem.ToString)
+        clsDataFunction.AddParameter("package", Chr(34) & cboPackages.SelectedItem.ToString & Chr(34))
         TestOkEnabled()
     End Sub
 
@@ -168,6 +169,7 @@ Public Class dlgFromLibrary
         Dim clsHelp As New RFunction
         clsHelp.SetRCommand("help")
         clsHelp.AddParameter("topic", Chr(34) & lstCollection.SelectedItems(0).Text & Chr(34))
+        clsHelp.AddParameter("package", Chr(34) & cboPackages.SelectedItem & Chr(34))
         clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
         frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:=" dlgOpenFromLibrary Opening help page for" & " " & lstCollection.SelectedItems(0).Text & " " & "dataset")
     End Sub
