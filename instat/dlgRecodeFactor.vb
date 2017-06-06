@@ -52,14 +52,13 @@ Public Class dlgRecodeFactor
         ucrSaveNewColumn.SetSaveTypeAsColumn()
         ucrSaveNewColumn.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
         ucrSaveNewColumn.SetIsComboBox()
-        ucrSaveNewColumn.SetLabelText("Recoded Column Name:")
+        ucrSaveNewColumn.SetLabelText("New Column Name:")
     End Sub
 
     Private Sub SetDefaults()
         clsReplaceFunction = New RFunction
         clsRevalueFunction = New RFunction
 
-        ucrSaveNewColumn.SetPrefix("recoded_column")
         ucrSelectorForRecode.Reset()
         ucrSelectorForRecode.Focus()
         ucrFactorGrid.ResetText()
@@ -91,6 +90,12 @@ Public Class dlgRecodeFactor
         TestOKEnabled()
     End Sub
 
+    Private Sub DefaultNewName()
+        If ((Not ucrSaveNewColumn.bUserTyped) AndAlso (Not ucrReceiverFactor.IsEmpty)) Then
+            ucrSaveNewColumn.SetPrefix(ucrReceiverFactor.GetVariableNames(bWithQuotes:=False) & "_recoded")
+        End If
+    End Sub
+
     Private Sub ucrFactorGrid_GridContentChanged() Handles ucrFactorGrid.GridContentChanged
         Dim strCurrentLevels As List(Of String)
         Dim strNewLevels As List(Of String)
@@ -113,15 +118,11 @@ Public Class dlgRecodeFactor
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrReceiverFactor_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged, ucrSaveNewColumn.ControlContentsChanged
-        TestOKEnabled()
+    Private Sub ucrReceiverFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlValueChanged
+        DefaultNewName()
     End Sub
 
-    Private Sub ucrReceiverFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlValueChanged
-        If Not ucrReceiverFactor.IsEmpty Then
-            ucrSaveNewColumn.SetPrefix(ucrReceiverFactor.GetVariables.ToScript & "_recoded")
-        Else
-            ucrSaveNewColumn.SetPrefix("recoded_column")
-        End If
+    Private Sub ucrReceiverFactor_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged, ucrSaveNewColumn.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class

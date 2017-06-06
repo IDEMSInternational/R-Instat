@@ -23,11 +23,11 @@ Partial Class dlgRecodeFactor
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSelectorForRecode = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
         Me.lblFactor = New System.Windows.Forms.Label()
-        Me.ucrFactorGrid = New instat.ucrFactor()
         Me.ucrSaveNewColumn = New instat.ucrSave()
+        Me.ucrFactorGrid = New instat.ucrFactor()
+        Me.ucrSelectorForRecode = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -36,16 +36,6 @@ Partial Class dlgRecodeFactor
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 5
-        '
-        'ucrSelectorForRecode
-        '
-        Me.ucrSelectorForRecode.bShowHiddenColumns = False
-        Me.ucrSelectorForRecode.bUseCurrentFilter = True
-        Me.ucrSelectorForRecode.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorForRecode.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorForRecode.Name = "ucrSelectorForRecode"
-        Me.ucrSelectorForRecode.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorForRecode.TabIndex = 0
         '
         'ucrReceiverFactor
         '
@@ -68,6 +58,13 @@ Partial Class dlgRecodeFactor
         Me.lblFactor.TabIndex = 1
         Me.lblFactor.Text = "Factor Selected:"
         '
+        'ucrSaveNewColumn
+        '
+        Me.ucrSaveNewColumn.Location = New System.Drawing.Point(10, 305)
+        Me.ucrSaveNewColumn.Name = "ucrSaveNewColumn"
+        Me.ucrSaveNewColumn.Size = New System.Drawing.Size(229, 24)
+        Me.ucrSaveNewColumn.TabIndex = 4
+        '
         'ucrFactorGrid
         '
         Me.ucrFactorGrid.AutoSize = True
@@ -80,12 +77,15 @@ Partial Class dlgRecodeFactor
         Me.ucrFactorGrid.TabIndex = 3
         Me.ucrFactorGrid.ucrChkLevels = Nothing
         '
-        'ucrSaveNewColumn
+        'ucrSelectorForRecode
         '
-        Me.ucrSaveNewColumn.Location = New System.Drawing.Point(13, 305)
-        Me.ucrSaveNewColumn.Name = "ucrSaveNewColumn"
-        Me.ucrSaveNewColumn.Size = New System.Drawing.Size(229, 24)
-        Me.ucrSaveNewColumn.TabIndex = 4
+        Me.ucrSelectorForRecode.bShowHiddenColumns = False
+        Me.ucrSelectorForRecode.bUseCurrentFilter = True
+        Me.ucrSelectorForRecode.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorForRecode.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorForRecode.Name = "ucrSelectorForRecode"
+        Me.ucrSelectorForRecode.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorForRecode.TabIndex = 0
         '
         'dlgRecodeFactor
         '
