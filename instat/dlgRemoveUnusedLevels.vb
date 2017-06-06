@@ -16,10 +16,11 @@
 
 Imports RDotNet
 Imports instat.Translations
+
 Public Class dlgRemoveUnusedLevels
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsUnusedLevels, clstable, clsSum As New RFunction
+    Private clsUnusedLevels, clstable, clsSum, clsFactorColumn As New RFunction
     Private clsTableOperation As New ROperator
 
     Private Sub dlgRemoveUnusedLevels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -57,20 +58,36 @@ Public Class dlgRemoveUnusedLevels
 
     Private Sub SetDefaults()
         clsUnusedLevels = New RFunction
+        clstable = New RFunction
+        clsFactorColumn = New RFunction
+        clsSum = New RFunction
+
         ucrSelectorFactorColumn.Reset()
+        ucrInputUnusedLevels.SetName("")
+        ucrInputUnusedLevels.Reset()
+
+        clstable.SetRCommand("table")
+        clsSum.SetRCommand("sum")
+        clsFactorColumn.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
         clsUnusedLevels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$drop_unused_factor_levels")
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsUnusedLevels)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+
+        ucrSelectorFactorColumn.AddAdditionalCodeParameterPair(clsFactorColumn, ucrSelectorFactorColumn.GetParameter, iAdditionalPairNo:=1)
+        ucrReceiverFactorColumn.AddAdditionalCodeParameterPair(clsFactorColumn, ucrReceiverFactorColumn.GetParameter, iAdditionalPairNo:=1)
+
+        ucrSelectorFactorColumn.SetRCode(clsUnusedLevels, bReset)
+        ucrReceiverFactorColumn.SetRCode(clsUnusedLevels, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrReceiverFactorColumn.IsEmpty() Then
-            ucrBase.OKEnabled(False)
-        Else
+        If Not ucrReceiverFactorColumn.IsEmpty() AndAlso Not ucrInputUnusedLevels.IsEmpty Then
             ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
@@ -80,16 +97,15 @@ Public Class dlgRemoveUnusedLevels
         TestOKEnabled()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactorColumn.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactorColumn.ControlContentsChanged, ucrInputUnusedLevels.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrReceiverFactorColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactorColumn.ControlValueChanged
+    Private Sub ucrReceiverFactorColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactorColumn.ControlValueChanged, ucrRemoveUnusedFactorLevels.ControlValueChanged
         Dim numOutput As Integer
-        clstable.SetRCommand("table")
-        clsSum.SetRCommand("sum")
+
         If Not ucrReceiverFactorColumn.IsEmpty Then
-            clstable.AddParameter("x", clsRFunctionParameter:=ucrReceiverFactorColumn.GetVariables)
+            clstable.AddParameter("x", clsRFunctionParameter:=clsFactorColumn)
             clsTableOperation.SetOperation("==")
             clsTableOperation.AddParameter(clsRFunctionParameter:=clstable, iPosition:=0)
             clsTableOperation.AddParameter("threshhold", 0, iPosition:=1)
@@ -97,12 +113,14 @@ Public Class dlgRemoveUnusedLevels
             clsSum.AddParameter("x", clsROperatorParameter:=clsTableOperation)
 
             numOutput = frmMain.clsRLink.RunInternalScriptGetValue(clsSum.ToScript).AsNumeric(0)
+            ucrInputUnusedLevels.txtInput.BackColor = Color.Green
             If numOutput = 0 Then
                 ucrInputUnusedLevels.SetName("no unused levels to remove")
             Else
                 ucrInputUnusedLevels.SetName(numOutput & " unused levels will be removed")
             End If
         Else
+            ucrInputUnusedLevels.txtInput.BackColor = Color.White
             clstable.RemoveParameterByName("x")
         End If
     End Sub
