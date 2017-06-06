@@ -1,5 +1,5 @@
 # a link can contain multiple ways to link two data frames
-link <- R6Class("link",
+link <- R6::R6Class("link",
                        public = list(
                          initialize = function(from_data_frame = "", to_data_frame = "", type = "", link_columns = list()) {
                            self$from_data_frame <- from_data_frame
