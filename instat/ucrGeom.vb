@@ -27,6 +27,7 @@ Public Class ucrGeom
     'Question: clsGeomFunction is the RFunction associated to the clsCurrGeom ? Could it be included in clsCurrGeom, if yes do we wish that ? Used together with clsGgplotAesFunction... ?
     'Similarly for lstFunctionParameters. Both, together with clsGgplotAesFunction are supposedly passed through to ucrAdditionalLayers and assigned to smth in ucrAdditionalLayers by calling  sdgLayerOption.SetupLayer which calls setup ? Still need to figure out when/how they are used though...
     Public clsGlobalAesFunction As New RFunction
+    Public clsLocalAesFunction As RFunction
     Private bFirstLoad As Boolean = True
     Public strGlobalDataFrame As String = ""
 
@@ -74,7 +75,7 @@ Public Class ucrGeom
         clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=clsGlobalAesFunction)
     End Sub
 
-    Public Overridable Sub Setup(clsNewGeomFunc As RFunction, clsNewGlobalAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bApplyAesGlobally As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional clsNewLocalAes As RFunction = Nothing)
+    Public Overridable Sub Setup(clsNewGeomFunc As RFunction, clsNewGlobalAesFunc As RFunction, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bApplyAesGlobally As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional clsNewLocalAes As RFunction = Nothing, Optional bReset As Boolean = False)
         'Setup is used to setup the parameters of ucrGeom as well as ucrGeomListWithAes and ucrLayerParameters as they override Setup from ucrGeom. The Setup function is also used within sdgLayerOptions.SetupLayer which plays the same role for the whole sdlLayerOption.
         'These functions are called all together in the ucrAddLayers when a Layer is added or editted, as well as in specific plots dialogs such as dlgBoxPlot when the plot options sdgPlots (dealing with layers) is opened.
         Dim GeomCount As New Geoms
@@ -92,11 +93,12 @@ Public Class ucrGeom
         SetGeomFunction(clsNewGeomFunc)
         ucrInputGeoms.Enabled = Not bFixGeom
         clsGlobalAesFunction = clsNewGlobalAesFunc
+        clsLocalAesFunction = clsNewLocalAes
     End Sub
 
-    Public Overridable Sub SetGeomFunction(clsTempGeomFunc As RFunction)
+    Public Overridable Sub SetGeomFunction(clsTempGeomFunc As RFunction, Optional bReset As Boolean = False)
         clsGeomFunction = clsTempGeomFunc
-        SetRCode(clsGeomFunction)
+        SetRCode(clsGeomFunction, bReset)
     End Sub
 
     Public Sub CreateGeomList()
@@ -1178,4 +1180,12 @@ Public Class ucrGeom
             clsGeomFunction.SetRCommand(clsCurrGeom.strGeomName)
         End If
     End Sub
+
+    Public Sub SetGeomName(strNewGeom As String)
+        ucrInputGeoms.SetName(strNewGeom)
+    End Sub
+
+    Public Function GetGeomName() As String
+        Return ucrInputGeoms.GetText()
+    End Function
 End Class
