@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 
 Public Class dlgRecodeFactor
@@ -51,14 +52,14 @@ Public Class dlgRecodeFactor
         ucrSaveNewColumn.SetSaveTypeAsColumn()
         ucrSaveNewColumn.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
         ucrSaveNewColumn.SetIsComboBox()
-        ucrSaveNewColumn.SetLabelText("New Column Name:")
-        ucrSaveNewColumn.SetPrefix("recoded_column")
+        ucrSaveNewColumn.SetLabelText("Recoded Column Name:")
     End Sub
 
     Private Sub SetDefaults()
         clsReplaceFunction = New RFunction
         clsRevalueFunction = New RFunction
 
+        ucrSaveNewColumn.SetPrefix("recoded_column")
         ucrSelectorForRecode.Reset()
         ucrSelectorForRecode.Focus()
         ucrFactorGrid.ResetText()
@@ -114,5 +115,13 @@ Public Class dlgRecodeFactor
 
     Private Sub ucrReceiverFactor_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged, ucrSaveNewColumn.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrReceiverFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlValueChanged
+        If Not ucrReceiverFactor.IsEmpty Then
+            ucrSaveNewColumn.SetPrefix(ucrReceiverFactor.GetVariables.ToScript & "_recoded")
+        Else
+            ucrSaveNewColumn.SetPrefix("recoded_column")
+        End If
     End Sub
 End Class
