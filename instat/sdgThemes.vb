@@ -147,17 +147,23 @@ Public Class sdgThemes
     End Sub
 
     Public Sub SetRCode(clsBaseOperator As ROperator, clsNewThemeFunction As RFunction, dctNewThemeFunctions As Dictionary(Of String, RFunction), Optional bReset As Boolean = False)
+        Dim clsXElementText As New RFunction
+        Dim clsYElementText As New RFunction
+        Dim clsXTopElementText As New RFunction
+        Dim clsYRightElementText As New RFunction
+
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
         clsThemeFunction = clsNewThemeFunction
         clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=15)
 
-
         dctThemeFunctions = dctNewThemeFunctions
-        dctThemeFunctions.TryGetValue("axis.text.x", clsElementText)
-        dctThemeFunctions.TryGetValue("axis.text.y", clsElementText)
-        dctThemeFunctions.TryGetValue("axis.text.y", clsElementText)
+        dctThemeFunctions.TryGetValue("axis.text.x", clsXElementText)
+        dctThemeFunctions.TryGetValue("axis.text.y", clsYElementText)
+        dctThemeFunctions.TryGetValue("axis.text.x.top", clsXTopElementText)
+        dctThemeFunctions.TryGetValue("axis.text.y.right", clsYRightElementText)
+
         dctThemeFunctions.TryGetValue("axis.ticks.x", clsElementLine)
         dctThemeFunctions.TryGetValue("axis.ticks.y", clsElementLine)
 
@@ -187,7 +193,6 @@ Public Class sdgThemes
         ucrInputLineEndTickMarksYAxis.SetRCode(clsElementYAxisLine, bReset)
         ucrChkLineEndTickMarksYAxis.SetRCode(clsElementYAxisLine, bReset)
 
-
         ucrNudSizeTickLabelsYAxis.SetRCode(clsElementYAxisLine, bReset)
         ucrChkSizeTickLabelsYAxis.SetRCode(clsElementYAxisLine, bReset)
 
@@ -200,14 +205,11 @@ Public Class sdgThemes
         ucrInputLineEndTickLabelsYAxis.SetRCode(clsElementYAxisLine, bReset)
         ucrChkLineEndTickLabelsYAxis.SetRCode(clsElementYAxisLine, bReset)
 
-
-        ucrThemeBottomXAxis.SetRCodeForControl(dctNewThemeFunctions:=dctThemeFunctions, clsNewThemeFUnction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, clsNewElementText:=clsElementText)
-        ucrThemeTopXAxis.SetRCodeForControl(dctNewThemeFunctions:=dctThemeFunctions, clsNewThemeFUnction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, clsNewElementText:=clsElementText)
-        ucrThemeLeftYAxis.SetRCodeForControl(dctNewThemeFunctions:=dctThemeFunctions, clsNewThemeFUnction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, clsNewElementText:=clsElementText)
-        ucrThemeRightYAxis.SetRCodeForControl(dctNewThemeFunctions:=dctThemeFunctions, clsNewThemeFUnction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, clsNewElementText:=clsElementText)
-
+        ucrThemeBottomXAxis.SetRCodeForControl("axis.text.x", clsXElementText, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrThemeTopXAxis.SetRCodeForControl("axis.text.x.top", clsXTopElementText, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrThemeLeftYAxis.SetRCodeForControl("axis.text.y", clsYElementText, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrThemeRightYAxis.SetRCodeForControl("axis.text.y.right", clsYRightElementText, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
         'AddRemoveElementParameters()
-
     End Sub
 
     'Private Sub AddRemoveElementParameters()

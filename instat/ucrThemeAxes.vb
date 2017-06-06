@@ -16,14 +16,12 @@
 
 Public Class ucrThemeAxes
     Private bInitialiseControls As Boolean = False
-    Public bIsX As Boolean
-    Public bIsBottom As Boolean
-    Public bIsRight As Boolean
     Public strAxis As String
     Private clsThemeFunction As New RFunction
     Private clsElementText As New RFunction
     Private strParameter As String
     Private clsBaseOperator As New ROperator
+
     Public Sub InitialiseControl()
         ucrChkSize.SetText("Size")
         ucrNudsize.SetParameter(New RParameter("size"))
@@ -71,39 +69,19 @@ Public Class ucrThemeAxes
         bInitialiseControls = True
     End Sub
 
-    Public Sub SetRCodeForControl(dctNewThemeFunctions As Dictionary(Of String, RFunction), Optional clsNewThemeFUnction As RFunction = Nothing, Optional clsNewElementText As RFunction = Nothing, Optional clsNewBaseOperator As ROperator = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetAxis(strNewAxis As String)
+        strAxis = strNewAxis
+    End Sub
+
+    Public Sub SetRCodeForControl(strNewAxis As String, clsNewElementText As RFunction, clsNewThemeFunction As RFunction, clsNewBaseOperator As ROperator, Optional bReset As Boolean = False)
         If Not bInitialiseControls Then
             InitialiseControl()
         End If
+
+        SetAxis(strNewAxis)
         clsBaseOperator = clsNewBaseOperator
-        clsThemeFunction = clsNewThemeFUnction
+        clsThemeFunction = clsNewThemeFunction
         clsElementText = clsNewElementText
-
-        'bIsX = bIsXAxis
-        'bIsBottom = bIsBottomXAxis
-
-        'If bIsXAxis AndAlso bIsBottomXAxis Then
-        '    bIsX = True
-        '    bIsBottom = True
-        '    strAxis = "x-bottom"
-        'ElseIf (bIsXAxis AndAlso bIsBottomXAxis = False) Then
-        '    bIsX = True
-        '    strAxis = "x-top"
-        'ElseIf (bIsXAxis = False AndAlso bIsLeftYAxis = True) Then
-        '    bIsX = False
-        '    strAxis = "y-left"
-        'ElseIf ((bIsXAxis = False AndAlso bIsLeftYAxis = False))
-        '    bIsX = False
-        '    strAxis = "y-right"
-        'End If
-
-        'If clsThemeFunction IsNot Nothing Then
-        '    clsThemeFunction.AddParameter("axis.text.x", clsRFunctionParameter:=clsNewElementText)
-
-        'Else
-        '    clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction.Clone
-        'End If
-
 
         ucrNudAngle.SetRCode(clsElementText, bReset)
         ucrChkAngle.SetRCode(clsElementText, bReset)
@@ -129,29 +107,14 @@ Public Class ucrThemeAxes
         ucrInputFamily.SetRCode(clsElementText, bReset)
         ucrChkFamily.SetRCode(clsElementText, bReset)
 
-
-        If strParameter = "axis.text.x" Then
-            AddRemoveElementBottomXAxis()
-        End If
-
-        AddRemoveElementLeftYAxis()
+        AddRemoveElementAxis()
     End Sub
 
-
-    Private Sub AddRemoveElementBottomXAxis()
+    Private Sub AddRemoveElementAxis()
         If ucrChkAngle.Checked OrElse ucrChkHjust.Checked OrElse ucrChkLineHeight.Checked OrElse ucrChkSize.Checked OrElse ucrChkVjust.Checked OrElse ucrChkColour.Checked OrElse ucrChkFace.Checked OrElse ucrChkFamily.Checked Then
-            clsThemeFunction.AddParameter("axis.text.x", clsRFunctionParameter:=clsElementText)
+            clsThemeFunction.AddParameter(strAxis, clsRFunctionParameter:=clsElementText)
         Else
-            clsThemeFunction.RemoveParameterByName("axis.text.x")
-        End If
-        AddRemoveTheme()
-    End Sub
-
-    Private Sub AddRemoveElementLeftYAxis()
-        If ucrChkAngle.Checked OrElse ucrChkHjust.Checked OrElse ucrChkLineHeight.Checked OrElse ucrChkSize.Checked OrElse ucrChkVjust.Checked OrElse ucrChkColour.Checked OrElse ucrChkFace.Checked OrElse ucrChkFamily.Checked Then
-            clsThemeFunction.AddParameter("axis.text.y", clsRFunctionParameter:=clsElementText)
-        Else
-            clsThemeFunction.RemoveParameterByName("axis.text.y")
+            clsThemeFunction.RemoveParameterByName(strAxis)
         End If
         AddRemoveTheme()
     End Sub
@@ -165,7 +128,6 @@ Public Class ucrThemeAxes
     End Sub
 
     Private Sub ElementXAxisTextControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAngle.ControlValueChanged, ucrChkHjust.ControlValueChanged, ucrChkLineHeight.ControlValueChanged, ucrChkSize.ControlValueChanged, ucrChkVjust.ControlValueChanged, ucrChkColour.ControlValueChanged, ucrChkFace.ControlValueChanged, ucrChkFamily.ControlValueChanged
-        AddRemoveElementBottomXAxis()
+        AddRemoveElementAxis()
     End Sub
-
 End Class
