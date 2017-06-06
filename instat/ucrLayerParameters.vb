@@ -60,7 +60,7 @@ Public Class ucrLayerParameters
                 If (i < clsCurrGeom.clsLayerParameters.Count) Then
                     lstLayerParameterControl(i).SetLayerParameter(clsCurrGeom.clsLayerParameters(i))
                 Else
-                    lstLayerParameterControl(i).SetLayerParameter(Nothing)
+                    lstLayerParameterControl(i).SetControl(Nothing)
                 End If
             Next
         End If

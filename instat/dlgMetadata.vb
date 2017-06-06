@@ -45,8 +45,7 @@ Public Class dlgMetadata
         '     Also need to get current values of metadata to set in ucrReceiverMetadataProperty
 
         clsLayerParam.strLayerParameterDataType = "list"
-        ucrNewValue.clsLayerParam = clsLayerParam
-        ucrNewValue.SetControls()
+        ucrNewValue.SetControls(clsLayerParam)
         ucrReceiverChooseProperty.Selector = ucrSelectByMetadata
         ucrReceiverChooseColumns.Selector = ucrSelectByMetadata
         ucrReceiverChooseProperty.SetMeAsReceiver()
@@ -130,7 +129,7 @@ Public Class dlgMetadata
                 clsLayerParam.lstParameterStrings = strCurrMetadataValues.Distinct.ToArray
                 bListSet = True
             End If
-            ucrNewValue.SetControls()
+            ucrNewValue.SetControls(clsLayerParam)
         End If
         If Not bSetCurrentValue Then
             ucrCurrentValue.SetName("")
