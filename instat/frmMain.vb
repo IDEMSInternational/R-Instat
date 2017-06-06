@@ -56,7 +56,7 @@ Public Class frmMain
         strStaticPath = Path.GetFullPath("static")
         strHelpFilePath = "Help\R-Instat.chm"
         strAppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "RInstat\")
-        strInstatOptionsFile = "RInstatOptions.bin"
+        strInstatOptionsFile = "Options.bin"
         strSaveFilePath = ""
 
         clsRLink.SetEngine()
@@ -386,6 +386,7 @@ Public Class frmMain
     Private Sub mnuPrepareDataFileDeleteSheets_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataObjectDeleteDataFrame.Click
         dlgDeleteSheet.ShowDialog()
     End Sub
+
 
     Private Sub mnuPrepareSheetDeleteColumnsRows_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameDeleteColumnsRows.Click
         dlgDeleteRowsOrColums.ShowDialog()

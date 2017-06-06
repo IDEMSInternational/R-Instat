@@ -417,4 +417,8 @@ Public Class ucrReceiver
             ucrSelector = ucrNewSelector
         End Set
     End Property
+
+    Protected Overrides Sub ResetControlValue()
+        Clear()
+    End Sub
 End Class
