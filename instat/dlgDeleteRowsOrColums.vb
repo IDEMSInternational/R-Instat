@@ -16,7 +16,7 @@
 
 Imports instat.Translations
 Public Class dlgDeleteRowsOrColums
-    Public bFirstLoad As Boolean = True
+    Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsOperatorRowNames As New ROperator
     Private clsDeleteRows, clsDeleteColumns As RFunction
@@ -26,7 +26,6 @@ Public Class dlgDeleteRowsOrColums
             InitialiseDialog()
             bFirstLoad = False
         End If
-
         If bReset Then
             SetDefaults()
         End If
