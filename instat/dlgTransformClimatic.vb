@@ -83,6 +83,7 @@ Public Class dlgTransformClimatic
         dctInputSumPairs.Add("mean", Chr(39) & "mean" & Chr(39))
         ucrInputSum.SetItems(dctInputSumPairs)
         ucrInputSum.SetLinkedDisplayControl(lblSumOver)
+        ucrInputSum.SetDropDownStyleAsNonEditable()
 
         ucrNudSumOver.SetParameter(New RParameter("width"))
         ucrNudSumOver.SetMinMax(1, 366)

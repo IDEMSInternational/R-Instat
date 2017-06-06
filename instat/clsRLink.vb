@@ -98,14 +98,18 @@ Public Class RLink
     End Sub
 
     Public Function GetDataFrameNames() As List(Of String)
-        Dim chrDataFrameNames As CharacterVector
+        Dim chrDataFrameNames As CharacterVector = Nothing
         Dim lstDataFrameNames As New List(Of String)
         Dim clsGetDataNames As New RFunction
+        Dim expNames As SymbolicExpression
 
         clsGetDataNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_names")
         If bInstatObjectExists Then
-            chrDataFrameNames = RunInternalScriptGetValue(clsGetDataNames.ToScript()).AsCharacter
-            If chrDataFrameNames IsNot Nothing Then
+            expNames = RunInternalScriptGetValue(clsGetDataNames.ToScript(), bSilent:=True)
+            If expNames IsNot Nothing AndAlso Not expNames.Type = Internals.SymbolicExpressionType.Null Then
+                chrDataFrameNames = expNames.AsCharacter
+            End If
+            If chrDataFrameNames IsNot Nothing AndAlso chrDataFrameNames.Length > 0 Then
                 lstDataFrameNames.AddRange(chrDataFrameNames)
             End If
         End If
@@ -113,17 +117,26 @@ Public Class RLink
     End Function
 
     Public Function GetColumnNames(strDataFrameName As String) As List(Of String)
-        Dim chrCurrColumns As CharacterVector
+        Dim chrCurrColumns As CharacterVector = Nothing
         Dim lstCurrColumns As New List(Of String)
         Dim clsGetColumnNames As New RFunction
+        Dim expNames As SymbolicExpression
 
-        clsGetColumnNames.SetRCommand(strInstatDataObject & "$get_column_names")
-        clsGetColumnNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
-        chrCurrColumns = RunInternalScriptGetValue(clsGetColumnNames.ToScript()).AsCharacter
-        lstCurrColumns.AddRange(chrCurrColumns)
+        If strDataFrameName <> "" AndAlso DataFrameExists(strDataFrameName) Then
+            clsGetColumnNames.SetRCommand(strInstatDataObject & "$get_column_names")
+            clsGetColumnNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
+            expNames = RunInternalScriptGetValue(clsGetColumnNames.ToScript(), bSilent:=True)
+            If expNames IsNot Nothing AndAlso Not expNames.Type = Internals.SymbolicExpressionType.Null Then
+                chrCurrColumns = expNames.AsCharacter
+            End If
+            If chrCurrColumns IsNot Nothing AndAlso chrCurrColumns.Length > 0 Then
+                lstCurrColumns.AddRange(chrCurrColumns)
+            End If
+        End If
         Return lstCurrColumns
     End Function
 
+    'bIncludeOverall = True includes an extra item in the combo box for overall i.e. items not at data frame level 
     Public Sub FillComboDataFrames(ByRef cboDataFrames As ComboBox, Optional bSetDefault As Boolean = True, Optional bIncludeOverall As Boolean = False, Optional strCurrentDataFrame As String = "")
         'This sub is filling the cboDataFrames with the relevant dat frame names (obtained by using GetDataFrameNames()) and potentially "[Overall]".  On thing it is doing, is setting the selected index in the cboDataFrames.
         'It is used on the ucrDataFrame in the FillComboBox sub.
@@ -165,11 +178,10 @@ Public Class RLink
     End Sub
 
     Public Sub FillColumnNames(strDataFrame As String, ByRef cboColumns As ComboBox)
-        Dim lstCurrColumns As List(Of String)
-        If strDataFrame <> "" AndAlso DataFrameExists(strDataFrame) Then
+        Dim lstCurrColumns As New List(Of String)
+
+        If strDataFrame <> "" Then
             lstCurrColumns = GetColumnNames(strDataFrame)
-        Else
-            lstCurrColumns = New List(Of String)
         End If
         cboColumns.Items.Clear()
         cboColumns.Items.AddRange(lstCurrColumns.ToArray)
@@ -189,15 +201,6 @@ Public Class RLink
         lstColumns.Columns(0).Width = -2
 
     End Sub
-
-    Public Function GetDefaultColumnNames(strPrefix As String) As GenericVector
-        Dim lstNextDefaults As GenericVector = Nothing
-        Dim clsGetNextDefault As New RFunction
-        clsGetNextDefault.SetRCommand(strInstatDataObject & "$get_next_default_column_name")
-        clsGetNextDefault.AddParameter("prefix", Chr(34) & strPrefix & Chr(34))
-        lstNextDefaults = RunInternalScriptGetValue(clsGetNextDefault.ToScript()).AsList
-        Return lstNextDefaults
-    End Function
 
     Public Function GetDefaultColumnNames(strPrefix As String, strDataFrameName As String) As String
         Dim strNextDefault As String = ""
@@ -224,7 +227,7 @@ Public Class RLink
             clsGetDefault.AddParameter("existing_names", GetListAsRString(lstItems))
         End If
         expPrefix = RunInternalScriptGetValue(clsGetDefault.ToScript())
-        If Not expPrefix.Type = Internals.SymbolicExpressionType.Null Then
+        If expPrefix IsNot Nothing AndAlso Not expPrefix.Type = Internals.SymbolicExpressionType.Null Then
             strNextDefault = expPrefix.AsCharacter(0)
         End If
         Return strNextDefault
@@ -494,7 +497,7 @@ Public Class RLink
     End Sub
 
     Public Sub FillListView(lstView As ListView, strType As String, Optional lstIncludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional lstExcludedDataTypes As List(Of KeyValuePair(Of String, String())) = Nothing, Optional strDataFrameName As String = "", Optional strHeading As String = "Variables", Optional strExcludedItems As String() = Nothing, Optional strDatabaseQuery As String = "", Optional strNcFilePath As String = "")
-        Dim vecColumns As GenericVector
+        Dim vecColumns As GenericVector = Nothing
         Dim chrCurrColumns As CharacterVector
         Dim i As Integer
         Dim grps As New ListViewGroup
@@ -503,6 +506,7 @@ Public Class RLink
         Dim clsExcludeList As New RFunction
         Dim kvpInclude As KeyValuePair(Of String, String())
         Dim kvpExclude As KeyValuePair(Of String, String())
+        Dim expItems As SymbolicExpression
 
         If bInstatObjectExists Then
             Select Case strType
@@ -555,26 +559,28 @@ Public Class RLink
             If strExcludedItems IsNot Nothing AndAlso strExcludedItems.Count > 0 Then
                 clsGetItems.AddParameter("excluded_items", GetListAsRString(strExcludedItems.ToList()))
             End If
-            vecColumns = RunInternalScriptGetValue(clsGetItems.ToScript()).AsList
-
-            For i = 0 To vecColumns.Count - 1
-                If vecColumns.Count > 1 Then
-                    grps = New ListViewGroup(key:=vecColumns.Names(i), headerText:=vecColumns.Names(i))
-                    lstView.Groups.Add(grps)
-                End If
-                chrCurrColumns = vecColumns(i).AsCharacter
-                If chrCurrColumns IsNot Nothing Then
-                    For j = 0 To chrCurrColumns.Count - 1
-                        lstView.Items.Add(chrCurrColumns(j))
-                        lstView.Items(j).Tag = vecColumns.Names(i)
-                        If vecColumns.Count > 1 Then
-                            lstView.Items(j).Group = lstView.Groups(i)
-                        End If
-                    Next
-                End If
-            Next
-            'TODO Find out how to get this to set automatically ( Width = -2 almost works)
-            lstView.Columns(0).Width = lstView.Width - 25
+            expItems = RunInternalScriptGetValue(clsGetItems.ToScript(), bSilent:=True)
+            If expItems IsNot Nothing AndAlso Not expItems.Type = Internals.SymbolicExpressionType.Null Then
+                vecColumns = expItems.AsList
+                For i = 0 To vecColumns.Count - 1
+                    If vecColumns.Count > 1 Then
+                        grps = New ListViewGroup(key:=vecColumns.Names(i), headerText:=vecColumns.Names(i))
+                        lstView.Groups.Add(grps)
+                    End If
+                    chrCurrColumns = vecColumns(i).AsCharacter
+                    If chrCurrColumns IsNot Nothing Then
+                        For j = 0 To chrCurrColumns.Count - 1
+                            lstView.Items.Add(chrCurrColumns(j))
+                            lstView.Items(j).Tag = vecColumns.Names(i)
+                            If vecColumns.Count > 1 Then
+                                lstView.Items(j).Group = lstView.Groups(i)
+                            End If
+                        Next
+                    End If
+                Next
+                'TODO Find out how to get this to set automatically ( Width = -2 almost works)
+                lstView.Columns(0).Width = lstView.Width - 25
+            End If
         End If
     End Sub
 
@@ -748,6 +754,24 @@ Public Class RLink
         Return strDataType
     End Function
 
+    Public Function GetColumnType(strDataName As String, strColumnName As String) As String
+        Dim strDataType As String
+        Dim clsGetColumnType As New RFunction
+        Dim expDateType As SymbolicExpression
+
+        clsGetColumnType.SetRCommand(strInstatDataObject & "$get_variables_metadata")
+        clsGetColumnType.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
+        clsGetColumnType.AddParameter("column", Chr(34) & strColumnName & Chr(34))
+        clsGetColumnType.AddParameter("property", Chr(34) & "class" & Chr(34))
+        expDateType = RunInternalScriptGetValue(clsGetColumnType.ToScript(), bSilent:=True)
+        If expDateType IsNot Nothing AndAlso Not expDateType.Type = Internals.SymbolicExpressionType.Null Then
+            strDataType = expDateType.AsCharacter(0)
+        Else
+            strDataType = ""
+        End If
+        Return strDataType
+    End Function
+
     Public Function MakeValidText(strText As String) As String
         Dim strOut As String
         Dim clsMakeNames As New RFunction
@@ -804,5 +828,19 @@ Public Class RLink
         clsIsBinary.AddParameter("x", clsRFunctionParameter:=clsGetColumn)
         bIsBinary = RunInternalScriptGetValue(clsIsBinary.ToScript()).AsLogical(0)
         Return bIsBinary
+    End Function
+
+    Public Function IsVariablesMetadata(strDataName As String, strProperty As String, Optional strColumn As String = "") As Boolean
+        Dim clsIsVarMetadata As New RFunction
+        Dim bIsVarMetadata As Boolean
+
+        clsIsVarMetadata.SetRCommand(strInstatDataObject & "$is_variables_metadata")
+        clsIsVarMetadata.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
+        If strColumn <> "" Then
+            clsIsVarMetadata.AddParameter("column", Chr(34) & strColumn & Chr(34))
+        End If
+        clsIsVarMetadata.AddParameter("property", Chr(34) & strProperty & Chr(34))
+        bIsVarMetadata = RunInternalScriptGetValue(clsIsVarMetadata.ToScript()).AsLogical(0)
+        Return bIsVarMetadata
     End Function
 End Class
