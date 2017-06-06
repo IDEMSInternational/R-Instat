@@ -21,8 +21,8 @@ Public Class dlgInsertColumn
     Private Sub dlgInsertColumn_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ucrBase.iHelpTopicID = 164
         If bFirstLoad Then
-            InitialiseDialog
-            setDefaults()
+            InitialiseDialog()
+            SetDefaults()
             bFirstLoad = False
         Else
             ReopenDialog()
@@ -67,7 +67,7 @@ Public Class dlgInsertColumn
         End If
     End Sub
 
-    Private Sub setDefaults()
+    Private Sub SetDefaults()
         rdoInsertColumns.Checked = True
         ucrInputPrefixForInsertedColumns.SetName("X")
         ucrInputDefaultValue.SetName("NA")
@@ -119,7 +119,7 @@ Public Class dlgInsertColumn
 
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        setDefaults()
+        SetDefaults()
         TestOKEnabled()
     End Sub
 
@@ -145,8 +145,8 @@ Public Class dlgInsertColumn
 
     Private Sub RowsOrColumns_CheckedChanged(sender As Object, e As EventArgs) Handles rdoInsertColumns.CheckedChanged, rdoInsertRows.CheckedChanged
         RowsOrColumns()
-
     End Sub
+
     Private Sub grpOPtions_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBefore.CheckedChanged, rdoAfter.CheckedChanged
         OPtionstoInsert()
     End Sub
@@ -356,4 +356,5 @@ Public Class dlgInsertColumn
             ucrBase.clsRsyntax.RemoveParameter("num_cols")
         End If
     End Sub
+
 End Class

@@ -1,47 +1,47 @@
-instat_object <- R6Class("instat_object",
-                  public = list(
-                    initialize = function(data_tables = list(), instat_obj_metadata = list(), 
-                                          data_tables_variables_metadata = rep(list(data.frame()),length(data_tables)),
-                                          data_tables_metadata = rep(list(list()),length(data_tables)),
-                                          data_tables_filters = rep(list(list()),length(data_tables)),
-                                          imported_from = as.list(rep("",length(data_tables))),
-                                          messages=TRUE, convert=TRUE, create=TRUE)
-{ 
-    self$set_meta(instat_obj_metadata)
-    self$set_objects(list())
-                      
-    if (missing(data_tables) || length(data_tables) == 0) {
-    self$set_data_objects(list())
-    }
-                      
-    else {
-    self$import_data(data_tables=data_tables, data_tables_variables_metadata=data_tables_variables_metadata, 
-    data_tables_metadata=data_tables_metadata, 
-    imported_from=imported_from, messages=messages, convert=convert, create=create, data_tables_filters = data_tables_filters)
-    }
-                      
-    private$.data_objects_changed <- FALSE
-}
-                ),
-                private = list(
-                  .data_objects = list(),
-                  .metadata = list(),
-                  .objects = list(),
-                  .links = list(),
-                  .data_objects_changed = FALSE,
-                  .database_connection = NULL
-                ),
-                active = list(
-                  data_objects_changed = function(new_value) {
-                    if(missing(new_value)) return(private$.data_objects_changed)
-                    else {
-                      if(new_value != TRUE && new_value != FALSE) stop("new_value must be TRUE or FALSE")
-                      private$.data_objects_changed <- new_value
-                      #TODO is this behaviour we want?
-                      invisible(sapply(self$get_data_objects(), function(x) x$data_changed <- new_value))
-                    }
-                  }
-                )
+instat_object <- R6::R6Class("instat_object",
+                         public = list(
+                           initialize = function(data_tables = list(), instat_obj_metadata = list(), 
+                                                 data_tables_variables_metadata = rep(list(data.frame()),length(data_tables)),
+                                                 data_tables_metadata = rep(list(list()),length(data_tables)),
+                                                 data_tables_filters = rep(list(list()),length(data_tables)),
+                                                 imported_from = as.list(rep("",length(data_tables))),
+                                                 messages=TRUE, convert=TRUE, create=TRUE)
+                           { 
+                             self$set_meta(instat_obj_metadata)
+                             self$set_objects(list())
+                             
+                             if (missing(data_tables) || length(data_tables) == 0) {
+                               self$set_data_objects(list())
+                             }
+                             
+                             else {
+                               self$import_data(data_tables=data_tables, data_tables_variables_metadata=data_tables_variables_metadata, 
+                                                data_tables_metadata=data_tables_metadata, 
+                                                imported_from=imported_from, messages=messages, convert=convert, create=create, data_tables_filters = data_tables_filters)
+                             }
+                             
+                             private$.data_objects_changed <- FALSE
+                           }
+                         ),
+                         private = list(
+                           .data_objects = list(),
+                           .metadata = list(),
+                           .objects = list(),
+                           .links = list(),
+                           .data_objects_changed = FALSE,
+                           .database_connection = NULL
+                         ),
+                         active = list(
+                           data_objects_changed = function(new_value) {
+                             if(missing(new_value)) return(private$.data_objects_changed)
+                             else {
+                               if(new_value != TRUE && new_value != FALSE) stop("new_value must be TRUE or FALSE")
+                               private$.data_objects_changed <- new_value
+                               #TODO is this behaviour we want?
+                               invisible(sapply(self$get_data_objects(), function(x) x$data_changed <- new_value))
+                             }
+                           }
+                         )
 )
 
 instat_object$set("public", "import_data", function(data_tables = list(), data_tables_variables_metadata = rep(list(data.frame()),length(data_tables)),
@@ -56,25 +56,23 @@ instat_object$set("public", "import_data", function(data_tables = list(), data_t
   
   else {
     
-    if (!(class(data_tables) == "list"))  {
+    if(!(is.list(data_tables)))  {
       stop("data_tables must be a list of data frames")
     }
     
-    if (length(unique(names(data_tables))) != length(names(data_tables)) ) {
+    if(anyDuplicated(names(data_tables))) {
       stop("There are duplicate names in the data tables list.")
     }
     
-    if (!(length(data_tables_variables_metadata) == length(data_tables))) { 
-      stop("If data_tables_variables_metadata is specified, it must be a list of metadata lists with the same
-           length as data_tables.")
+    if(length(data_tables_variables_metadata) != length(data_tables)) { 
+      stop("If data_tables_variables_metadata is specified, it must be a list of metadata lists with the same length as data_tables.")
     }
     
-    if (!(length(data_tables_metadata) == length(data_tables))) { 
-      stop("If data_tables_metadata is specified, it must be a list of metadata lists with the same
-           length as data_tables.")
+    if(length(data_tables_metadata) != length(data_tables)) { 
+      stop("If data_tables_metadata is specified, it must be a list of metadata lists with the same length as data_tables.")
     }
     
-    if (length(imported_from) != length(data_tables) ) { 
+    if (length(imported_from) != length(data_tables)) { 
       stop("imported_from must be a list of the same length as data_tables")
     }
     
@@ -128,8 +126,8 @@ instat_object$set("public", "copy_data_object", function(data_name, new_name, fi
 
 
 instat_object$set("public", "import_RDS", function(data_RDS, keep_existing = TRUE, overwrite_existing = FALSE, include_objects = TRUE,
-                                         include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_calculations = TRUE)
-# TODO add include_calcuations options
+                                                   include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_calculations = TRUE)
+  # TODO add include_calcuations options
 {
   if("instat_object" %in% class(data_RDS)) {
     if(!keep_existing && include_objects && include_metadata && include_logs && include_filters && include_calculations) {
@@ -153,18 +151,18 @@ instat_object$set("public", "import_RDS", function(data_RDS, keep_existing = TRU
       }
       new_objects_list = data_RDS$get_objects(data_name = overall_label)
       new_objects_count = length(new_objects_list)
-      if (include_objects && new_objects_count > 0) {
-        for ( i in (1:new_objects_count) ) {
-          if (!(names(new_objects_list)[i] %in% names(private$.objects)) || overwrite_existing) {
+      if(include_objects && new_objects_count > 0) {
+        for(i in (1:new_objects_count)) {
+          if(!(names(new_objects_list)[i] %in% names(private$.objects)) || overwrite_existing) {
             self$add_object(object = new_objects_list[i], object_name = names(new_objects_list)[i])
           }
         }
       }
       new_metadata = data_RDS$get_metadata()
       new_metadata_count = length(new_metadata)
-      if (include_metadata && new_metadata_count > 0) {
-        for ( i in (1:new_metadata_count) ) {
-          if (!(names(new_metadata)[i] %in% names(private$metadata)) || overwrite_existing) {
+      if(include_metadata && new_metadata_count > 0) {
+        for(i in (1:new_metadata_count)) {
+          if(!(names(new_metadata)[i] %in% names(private$metadata)) || overwrite_existing) {
             self$append_to_metadata(names(new_metadata)[i], new_metadata[[i]])
           }
         }
@@ -172,15 +170,15 @@ instat_object$set("public", "import_RDS", function(data_RDS, keep_existing = TRU
     }
     self$data_objects_changed <- TRUE
   }
-  else if (is.data.frame(data_RDS) || is.matrix(data_RDS)) {
+  else if(is.data.frame(data_RDS) || is.matrix(data_RDS)) {
     self$import_data(data_tables = list(data_RDS = data_RDS))
   }
-  else stop(paste("Cannot import an objects of class", class(data_RDS)))
+  else stop("Cannot import an objects of class", paste(class(data_RDS), collapse = ","))
 }
 )
 
-instat_object$set("public", "import_from_ODK", function(username, password, form_name, platform) {
-  out <- import_from_ODK(username, password, form_name, platform)
+instat_object$set("public", "import_from_ODK", function(username, form_name, platform) {
+  out <- import_from_ODK(username, form_name, platform)
   data_list <- list(out)
   names(data_list) <- form_name
   self$import_data(data_tables = data_list)
@@ -201,17 +199,13 @@ instat_object$set("public", "set_meta", function(new_meta) {
 
 instat_object$set("public", "set_objects", function(new_objects) {
   if(!is.list(new_objects)) stop("new_objects must be of type: list")
-  
   private$.objects <- new_objects 
 }
 )
 
 instat_object$set("public", "append_data_object", function(name, obj) {
-  if( !class(name) == "character") {
-    stop("name must be a character")
-  }
-  
-  if ( !"data_object" %in% class(obj)) {
+  if(!is.character(name)) stop("name must be a character")
+  if(!"data_object" %in% class(obj)) {
     stop("obj must be a data object")
   }
   obj$append_to_metadata(data_name_label, name)
@@ -270,12 +264,16 @@ instat_object$set("public", "get_variables_metadata", function(data_name, data_t
 
 instat_object$set("public", "get_combined_metadata", function(convert_to_character = FALSE) { 
   retlist <- data.frame()
+  i = 1
   for (curr_obj in private$.data_objects) {
     templist = curr_obj$get_metadata()
-    for ( j in (1:length(templist)) ) {
-      if(length(templist[[j]]) > 1) templist[[j]] <- paste(as.character(templist[[j]]), collapse = ",")
-      retlist[curr_obj$get_metadata(data_name_label), names(templist[j])] = templist[[j]]
+    for (j in (1:length(templist))) {
+      if(length(templist[[j]]) > 1 || is.list(templist[[j]])) templist[[j]] <- paste(as.character(templist[[j]]), collapse = ",")
+      retlist[i, names(templist[j])] = templist[[j]]
     }
+    if(all(c(data_name_label, label_label) %in% names(retlist))) retlist <- retlist[ ,c(c(data_name_label, label_label), setdiff(names(retlist), c(data_name_label, label_label)))]
+    else if(data_name_label %in% names(retlist)) retlist <- retlist[ ,c(data_name_label, setdiff(names(retlist), data_name_label))]
+    i = i + 1
   }
   if(convert_to_character) return(convert_to_character_matrix(retlist, FALSE))
   else return(retlist)
@@ -356,9 +354,7 @@ instat_object$set("public", "set_data_frames_changed", function(data_name = "", 
       curr_obj$data_changed <- new_val
     }
   }
-  
   else self$get_data_objects(data_name)$set_data_changed(new_val)
-  
 } 
 )
 
@@ -368,7 +364,6 @@ instat_object$set("public", "set_variables_metadata_changed", function(data_name
       curr_obj$variables_metadata_changed <- new_val
     }
   }
-  
   else self$get_data_objects(data_name)$set_variables_metadata_changed(new_val)
 } 
 )
@@ -379,7 +374,6 @@ instat_object$set("public", "set_metadata_changed", function(data_name = "", new
       curr_obj$set_metadata_changed(new_val)
     }
   }
-  
   else self$get_data_objects(data_name)$set_metadata_changed(new_val)
 } 
 )
@@ -390,11 +384,10 @@ instat_object$set("public", "add_columns_to_data", function(data_name, col_name 
 }
 )
 
-instat_object$set("public", "get_columns_from_data", function(data_name, col_names, from_stacked_data = FALSE,
-                                                    force_as_data_frame = FALSE, use_current_filter = TRUE) {
+instat_object$set("public", "get_columns_from_data", function(data_name, col_names, from_stacked_data = FALSE, force_as_data_frame = FALSE, use_current_filter = TRUE) {
   if(missing(data_name)) stop("data_name is required")
   if(!from_stacked_data) {
-    if(!data_name %in% names(private$.data_objects)) stop(paste(data_name, "not found"))
+    if(!data_name %in% names(private$.data_objects)) stop(data_name, "not found")
     self$get_data_objects(data_name)$get_columns_from_data(col_names, force_as_data_frame, use_current_filter = use_current_filter)
   }
   else {
@@ -441,7 +434,7 @@ instat_object$set("public", "get_objects", function(data_name, object_name, incl
       else out = curr_objects
     }
     else out = self$get_data_objects(data_name)$get_objects(object_name = object_name, type = type, force_as_list = force_as_list)
-	if(as_list) {
+    if(as_list) {
       lst = list()
       lst[[data_name]][[object_name]] <- out
       return(lst)
@@ -454,8 +447,9 @@ instat_object$set("public", "get_objects", function(data_name, object_name, incl
 instat_object$set("public", "get_object_names", function(data_name, include_overall = TRUE, include, exclude, type = "", include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
   if(type == "") overall_object_names = names(private$.objects)
   else {
-    if(type == model_label) overall_object_names = names(private$.objects)[!sapply(private$.objects, function(x) any(c("ggplot", "gg") %in% class(x)))]
-    else if(type == graph_label) overall_object_names = names(private$.objects)[sapply(private$.objects, function(x) any(c("ggplot", "gg") %in% class(x)))]
+    if(type == model_label) overall_object_names = names(private$.objects)[!sapply(private$.objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "htmlTable") %in% class(x)))]
+    else if(type == graph_label) overall_object_names = names(private$.objects)[sapply(private$.objects, function(x) any(c("ggplot", "gg", "gtable", "grob") %in% class(x)))]
+    else if(type == table_label) overall_object_names = names(private$.objects)[sapply(private$.objects, function(x) any(c("htmlTable") %in% class(x)))]
     else stop("type: ", type, " not recognised")
   }
   if(missing(data_name)) {
@@ -529,7 +523,7 @@ instat_object$set("public", "get_from_object", function(data_name, object_name, 
     if(!value2 %in% names(curr_object[[value1]])) stop(paste0(value2, " not found in ", object_name,"[[\"",value1,"\"]]"))
     if(missing(value3)) return(curr_object[[value1]][[value2]])
     else {
-      if(!value3 %in% names(curr_object[[value1]][[value2]])) stop(paste0(value3, " not found in ", object_name,"[[\"",value1,"\"]]","[[\"",value2,"\"]]"))
+      if(!value3 %in% names(curr_object[[value1]][[value2]])) stop(value3, " not found in ", object_name,"[[\"",value1,"\"]]","[[\"",value2,"\"]]")
       return(curr_object[[value1]][[value2]][[value3]])
     }
   }
@@ -568,6 +562,21 @@ instat_object$set("public", "get_graphs", function(data_name, graph_name, includ
 
 instat_object$set("public", "get_graph_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
   self$get_object_names(data_name = data_name, include_overall = include_overall, include, exclude, type = graph_label, include_empty = include_empty, as_list = as_list, excluded_items = excluded_items)
+}
+)
+
+instat_object$set("public", "add_table", function(data_name, table, table_name) {
+  self$add_object(data_name = data_name, object = table, object_name = table_name)
+}
+)
+
+instat_object$set("public", "get_tables", function(data_name, table_name, include_overall = TRUE, force_as_list = FALSE) {
+  self$get_objects(data_name = data_name, object_name = table_name, include_overall = include_overall, type = table_label, force_as_list = force_as_list)
+}
+)
+
+instat_object$set("public", "get_table_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
+  self$get_object_names(data_name = data_name, include_overall = include_overall, include, exclude, type = table_label, include_empty = include_empty, as_list = as_list, excluded_items = excluded_items)
 }
 )
 
@@ -632,13 +641,9 @@ instat_object$set("public", "replace_value_in_data", function(data_name, col_nam
   self$get_data_objects(data_name)$replace_value_in_data(col_names, rows, old_value, old_is_missing, start_value, end_value, new_value, new_is_missing, closed_start_value, closed_end_value)
 } 
 )
-# instat_object$set("public", "replace_value_in_data", function(data_name, col_name, row, new_value) {
-#   self$get_data_objects(data_name)$replace_value_in_data(col_name, row, new_value)
-# } 
-# )
 
-instat_object$set("public", "rename_column_in_data", function(data_name, column_name, new_val) {
-  self$get_data_objects(data_name)$rename_column_in_data(column_name, new_val)
+instat_object$set("public", "rename_column_in_data", function(data_name, column_name, new_val, label = "") {
+  self$get_data_objects(data_name)$rename_column_in_data(column_name, new_val, label)
 } 
 )
 
@@ -649,12 +654,6 @@ instat_object$set("public", "frequency_tables", function(data_name, x_col_names,
 
 instat_object$set("public", "anova_tables", function(data_name, x_col_names, y_col_name, signif.stars = FALSE, sign_level = FALSE, means = FALSE) {
   self$get_data_objects(data_name)$anova_tables(x_col_names = x_col_names, y_col_name = y_col_name, signif.stars = signif.stars, sign_level = sign_level, means = means)
-} 
-)
-
-#TODO remove this method
-instat_object$set("public", "remove_columns_in_data_from_start_position", function(data_name, start_pos, col_numbers) {
-  self$get_data_objects(data_name)$remove_columns_in_data_from_start_position(start_pos = start_pos, col_numbers = col_numbers)
 } 
 )
 
@@ -677,8 +676,7 @@ instat_object$set("public", "get_next_default_column_name", function(data_name, 
     return(out)
   }
   if(!is.character(data_name)) stop("data_name must be of type character")
-  if(!data_name %in% names(private$.data_objects)) stop(paste("dataframe: ", data_name, " not found"))
-  
+  if(!data_name %in% names(private$.data_objects)) stop("dataframe: ", data_name, " not found")
   return(self$get_data_objects(data_name)$get_next_default_column_name(prefix))
 } 
 )
@@ -719,16 +717,15 @@ instat_object$set("public", "delete_dataframe", function(data_name) {
   # TODO need a set or append
   private$.data_objects[[data_name]] <- NULL
   data_objects_changed <- TRUE
-  link_name <- ""
+  link_names <- c()
   for(i in seq_along(private$.links)) {
     if(private$.links[[i]]$from_data_frame == data_name || private$.links[[i]]$to_data_frame == data_name) {
-      link_name <- names(private$.links)[i]
-      break
+      link_names <- c(link_names, names(private$.links)[i])
     }
   }
-  if(link_name != "") {
-    #TODO Should this be delete or disable?
-    self$remove_link(link_name)
+  for(name in link_names) {
+    #TODO Should we be able to disable links instead of deleting?
+    self$remove_link(name)
   }
 } 
 )
@@ -744,8 +741,8 @@ instat_object$set("public", "get_column_factor_levels", function(data_name,col_n
 } 
 )
 
-instat_object$set("public", "get_factor_data_frame", function(data_name,col_name = "") {
-  self$get_data_objects(data_name)$get_factor_data_frame(col_name)
+instat_object$set("public", "get_factor_data_frame", function(data_name, col_name = "", include_levels = TRUE) {
+  self$get_data_objects(data_name)$get_factor_data_frame(col_name = col_name, include_levels = include_levels)
 } 
 )
 
@@ -754,17 +751,30 @@ instat_object$set("public", "sort_dataframe", function(data_name, col_names = c(
 } 
 )
 
-instat_object$set("public", "rename_dataframe", function(data_name, new_value = "") {
-  data_obj = self$get_data_objects(data_name)
+instat_object$set("public", "rename_dataframe", function(data_name, new_value = "", label = "") {
+  if(new_value %in% names(private$.data_objects)) stop("Cannot rename data frame since ", new_value, " is an existing data frame.")
+  data_obj <- self$get_data_objects(data_name)
   names(private$.data_objects)[names(private$.data_objects) == data_name] <- new_value
   data_obj$append_to_metadata(data_name_label, new_value)
+  for(i in seq_along(private$.links)) {
+    if(private$.links[[i]]$from_data_frame == data_name) {
+      private$.links[[i]]$from_data_frame <- new_value
+    }
+    if(private$.links[[i]]$to_data_frame == data_name) {
+      private$.links[[i]]$to_data_frame <- new_value
+    }
+  }
   data_obj$set_data_changed(TRUE)
- } 
+  if(label != "") {
+    data_obj$append_to_metadata(property = "label" , new_val = label)
+    data_obj$set_metadata_changed(TRUE)
+  }
+} 
 )
 
-instat_object$set("public", "convert_column_to_type", function(data_name, col_names = c(), to_type, factor_numeric = "by_levels", set_digits, set_decimals = FALSE) {
-  self$get_data_objects(data_name)$convert_column_to_type(col_names = col_names, to_type = to_type, factor_numeric = factor_numeric, set_digits = set_digits,set_decimals = set_decimals)
-} 
+instat_object$set("public", "convert_column_to_type", function(data_name, col_names = c(), to_type, factor_values = NULL, set_digits, set_decimals = FALSE, keep_attr = TRUE, ignore_labels = FALSE) {
+  self$get_data_objects(data_name)$convert_column_to_type(col_names = col_names, to_type = to_type, factor_values = factor_values, set_digits = set_digits,set_decimals = set_decimals, keep_attr = keep_attr, ignore_labels = ignore_labels)
+}
 )
 
 instat_object$set("public", "append_to_variables_metadata", function(data_name, col_names, property, new_val = "") {
@@ -802,7 +812,7 @@ instat_object$set("public", "add_metadata_field", function(data_name, property, 
 instat_object$set("public", "reorder_dataframes", function(data_frames_order) {
   if(length(data_frames_order) != length(names(private$.data_objects))) stop("number data frames to order should be equal to number of dataframes in the object")
   if(!setequal(data_frames_order,names(private$.data_objects))) stop("data_frames_order must be a permutation of the dataframe names.")
-
+  
   self$set_data_objects(private$.data_objects[data_frames_order])
   self$data_objects_changed <- TRUE
 } 
@@ -818,8 +828,8 @@ instat_object$set("public", "drop_unused_factor_levels", function(data_name, col
 } 
 )
 
-instat_object$set("public", "set_factor_levels", function(data_name, col_name, new_levels) {
-  self$get_data_objects(data_name)$set_factor_levels(col_name = col_name, new_levels = new_levels)
+instat_object$set("public", "set_factor_levels", function(data_name, col_name, new_labels, new_levels, set_new_labels = TRUE) {
+  self$get_data_objects(data_name)$set_factor_levels(col_name = col_name, new_labels = new_labels, new_levels = new_levels, set_new_labels = set_new_labels)
 } 
 )
 
@@ -848,12 +858,19 @@ instat_object$set("public","get_data_type", function(data_name, col_name) {
 } 
 )
 
-instat_object$set("public","copy_data_frame", function(data_name, new_name) {
-  curr_obj = self$get_data_objects(data_name)$clone(deep = TRUE)
+instat_object$set("public","copy_data_frame", function(data_name, new_name, label = "") {
+  if(new_name %in% names(private$.data_objects)) stop("Cannot copy data frame since ", new_name, " is an existing data frame.")
+  curr_obj <- self$get_data_objects(data_name)$clone(deep = TRUE)
   
-  if(missing(new_name)) new_name = next_default_item(data_name, self$get_data_names())
+  if(missing(new_name)) new_name <- next_default_item(data_name, self$get_data_names())
   self$append_data_object(new_name, curr_obj)
-  curr_obj$data_changed <- TRUE
+  new_data_obj <- self$get_data_objects(new_name)
+  new_data_obj$data_changed <- TRUE
+  new_data_obj$set_data_changed(TRUE)
+  if(label != "") {
+    new_data_obj$append_to_metadata(property = "label" , new_val = label)
+    new_data_obj$set_metadata_changed(TRUE)
+  }
 } 
 )
 
@@ -958,7 +975,7 @@ instat_object$set("public","get_keys", function(data_name, key_name) {
 
 instat_object$set("public","get_links", function(link_name) {
   if(!missing(link_name)) {
-    if(!link_name %in% names(private$keys)) stop(link_name, " not found.")
+    if(!link_name %in% names(private$.links)) stop(link_name, " not found.")
     return(private$.links[[link_name]])
   }
   else return(private$.links)
@@ -1059,8 +1076,8 @@ instat_object$set("public","create_factor_data_frame", function(data_name, facto
 }
 )
 
-instat_object$set("public","split_date", function(data_name, col_name = "", year = FALSE, day = FALSE, week = FALSE,  month_val = FALSE, month_abbr = FALSE, month_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE, day_in_month = FALSE, day_in_year = FALSE,  leap_year = FALSE, day_in_year_366 = FALSE, dekade = FALSE, pentad = FALSE ) {
-  self$get_data_objects(data_name)$split_date(col_name = col_name , week = week, month_val = month_val,  month_abbr = month_abbr, month_name = month_name, weekday_val = weekday_val, weekday_abbr = weekday_abbr,  weekday_name =  weekday_name, day = day, year = year, day_in_month = day_in_month, day_in_year = day_in_year,  leap_year =  leap_year, day_in_year_366 = day_in_year_366, dekade = dekade, pentad = pentad)
+instat_object$set("public","split_date", function(data_name, col_name = "", year = FALSE, day = FALSE, week = FALSE,  month_val = FALSE, month_abbr = FALSE, month_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE, day_in_month = FALSE, day_in_year = FALSE,  leap_year = FALSE, day_in_year_366 = FALSE, dekade = FALSE, pentad = FALSE, shift_day = FALSE, shift_year = FALSE, shift_start_day_in_month = 1, shift_start_month = 8) {
+  self$get_data_objects(data_name)$split_date(col_name = col_name , week = week, month_val = month_val,  month_abbr = month_abbr, month_name = month_name, weekday_val = weekday_val, weekday_abbr = weekday_abbr,  weekday_name =  weekday_name, day = day, year = year, day_in_month = day_in_month, day_in_year = day_in_year,  leap_year =  leap_year, day_in_year_366 = day_in_year_366, dekade = dekade, pentad = pentad, shift_day = shift_day, shift_year = shift_year, shift_start_day_in_month = shift_start_day_in_month, shift_start_month = shift_start_month)
 }
 )
 
@@ -1074,18 +1091,23 @@ instat_object$set("public", "import_SST", function(dataset, data_from = 5, data_
 }
 )
 
-instat_object$set("public","make_inventory_plot", function(data_name,col_name = "", year , doy, add_to_data = FALSE, coord_flip = FALSE, threshold, facets) {
-  self$get_data_objects(data_name)$make_inventory_plot(col_name = col_name , year = year, doy =doy,add_to_data = add_to_data, coord_flip = coord_flip, threshold = threshold, facets = facets)
+instat_object$set("public","make_inventory_plot", function(data_name, date_col, station_col = NULL, year_col = NULL, doy_col = NULL, element_cols = NULL, add_to_data = FALSE, year_doy_plot = FALSE, coord_flip = FALSE, facet_by = NULL, graph_title = "Inventory Plot") {
+  self$get_data_objects(data_name)$make_inventory_plot(date_col = date_col, station_col = station_col, year_col = year_col, doy_col = doy_col, element_cols = element_cols, add_to_data = add_to_data, year_doy_plot = year_doy_plot, coord_flip = coord_flip, facet_by = facet_by, graph_title = graph_title)
 }
 )
 
-instat_object$set("public", "import_NetCDF", function(nc_data, data_names = c()) {
-  data_list <- open_NetCDF(nc_data)
-  if(length(data_list) != length(data_names))stop("data_names vector should be of length 2")
-  names(data_list) = data_names
+instat_object$set("public", "import_NetCDF", function(nc_data, main_data_name, loc_data_name, latitude_col_name = "", longitude_col_name = "") {
+  nc_result <- open_NetCDF(nc_data = nc_data, latitude_col_name = latitude_col_name, longitude_col_name = longitude_col_name)
+  if(length(nc_result) != 3)stop("Output from open_NetCDF should be a list of length 3")
+  
+  data_list = nc_result[c(1,2)]
+  
+  names(data_list) = c(main_data_name, next_default_item(prefix = loc_data_name, existing_names = self$get_data_names(), include_index = FALSE))
   self$import_data(data_tables = data_list)
-  self$add_key(data_names[2], c("lat", "lon"))
-  self$add_link(from_data_frame = data_names[1], to_data_frame = data_names[2], link_pairs = c(lat = "lat", lon = "lon"), type = keyed_link_label)
+  self$add_key(names(data_list)[2], nc_result[3][[1]])
+  named_char_vec  <- nc_result[3][[1]]
+  names(named_char_vec) <- named_char_vec
+  self$add_link(from_data_frame = names(data_list)[1], to_data_frame = names(data_list)[2], link_pairs = named_char_vec, type = keyed_link_label)
 }
 )
 
@@ -1096,25 +1118,6 @@ instat_object$set("public", "infill_missing_dates", function(data_name, date_nam
 
 instat_object$set("public", "get_key_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
   self$get_data_objects(data_name)$get_key_names(include_overall = include_overall, include, exclude, include_empty = include_empty, as_list = as_list, excluded_items = excluded_items)
-}
-)
-
-instat_object$set("public", "get_link_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c(), exclude_self_links = TRUE) {
-  if(exclude_self_links) {
-    out <- c()
-    i <- 1
-    for(link in private$.links) {
-      if(link$from_data_frame != link$to_data_frame) out <- c(out, names(private$.links)[i])
-      i <- i + 1
-    }
-  }
-  else out <- names(private$.links)
-  if(as_list) {
-    lst <- list()
-    lst[[overall_label]] <- out
-    return(lst)
-  }
-  else return(out)
 }
 )
 
@@ -1183,9 +1186,7 @@ instat_object$set("public", "is_metadata", function(data_name, str) {
 )
 
 instat_object$set("public", "get_climatic_column_name", function(data_name, col_name) {
-  new_data = subset(InstatDataObject$get_variables_metadata(data_name), Climatic_Type==col_name, select = Name)
-  if(!nrow(new_data==1))stop(paste(col_name, " column cannot be found in the data."))
-  return(as.character(new_data))
+  self$get_data_objects(data_name)$get_climatic_column_name(col_name = col_name)
 }
 )
 
@@ -1197,7 +1198,18 @@ instat_object$set("public", "merge_data", function(data_name, new_data, by = NUL
 instat_object$set("public", "get_corruption_data_names", function() {
   corruption_names <- c()
   for(curr_name in self$get_data_names()) {
-    if(self$get_data_objects(curr_name)$is_metadata(is_corruption_label) && self$get_data_objects(curr_name)$get_metadata(is_corruption_label)) {
+    if(self$get_data_objects(curr_name)$is_metadata(corruption_data_label) && self$get_data_objects(curr_name)$get_metadata(corruption_data_label)) {
+      corruption_names <- c(corruption_names, curr_name)
+    }
+  }
+  return(corruption_names)
+}
+)
+
+instat_object$set("public", "get_corruption_contract_data_names", function() {
+  corruption_names <- c()
+  for(curr_name in self$get_data_names()) {
+    if(self$get_data_objects(curr_name)$is_metadata(corruption_data_label) && self$get_data_objects(curr_name)$get_metadata(corruption_data_label) == corruption_contract_level_label) {
       corruption_names <- c(corruption_names, curr_name)
     }
   }
@@ -1206,16 +1218,33 @@ instat_object$set("public", "get_corruption_data_names", function() {
 )
 
 instat_object$set("public", "get_database_variable_names", function(query, data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
-  if(self$has_database_connection) {
-    temp_data <- dbGetQuery(self$get_database_connection(), query)
+  if(self$has_database_connection()) {
+    temp_data <- DBI::dbGetQuery(self$get_database_connection(), query)
     if(as_list) {
       out <- list()
-      out[["database"]] <- tempdata[[1]]
+      out[["database"]] <- temp_data[[1]]
       return(out)
     }
-    else return(tempdata[[1]])
+    else return(temp_data[[1]])
   }
   else return(list())
+}
+)
+
+instat_object$set("public", "get_nc_variable_names", function(file = "", as_list = FALSE, ...) {
+  if(file == "") {
+    vars <- ""
+  }
+  else {
+    nc_file <- nc_open(file)
+    vars <- names(nc_file$dim)
+  }
+  if(as_list) {
+    out <- list()
+    out[["dim variables"]] <- vars
+    return(out)
+  }
+  else return(vars)
 }
 )
 
@@ -1224,10 +1253,10 @@ instat_object$set("public", "has_database_connection", function() {
 }
 )
 
-instat_object$set("public", "database_connect", function(dbname, user, host, port, drv = MySQL()) {
-  password <- getPass(paste0(username, " password:"))
+instat_object$set("public", "database_connect", function(dbname, user, host, port, drv = MySQL(), password) {
+  #password <- getPass(paste0(username, " password:"))
   out <- NULL
-  out <- dbConnect(drv = drv, dbname = dbname, user = user, password = password, host = host, port = port)
+  out <- DBI::dbConnect(drv = drv, dbname = dbname, user = user, password = password, host = host, port = port)
   if(!is.null(out)) {
     self$set_database_connection(out)
   }
@@ -1246,13 +1275,92 @@ instat_object$set("public", "set_database_connection", function(dbi_connection) 
 
 instat_object$set("public", "database_disconnect", function() {
   if(!is.null(self$get_database_connection())) {
-    dbDisconnect(private$.database_connection)
+    DBI::dbDisconnect(private$.database_connection)
     self$set_database_connection(NULL)
   }
 }
 )
 
-instat_object$set("public", "import_from_climsoft", function(stations = c(), elements = c(), include_observation_data = FALSE, start_date, end_date) {
+instat_object$set("public", "import_from_climsoft", function(stations = c(), elements = c(), include_observation_data = FALSE, start_date = "", end_date = "") {
+  #need to perform checks here
+  con = self$get_database_connection()
+  my_stations = paste0("(", paste(as.character(stations), collapse=", "), ")")
+  station_info <- DBI::dbGetQuery(con, paste0("SELECT * FROM station WHERE stationID in ", my_stations, ";"))
+  date_bounds=""
+  if(start_date!=""){
+    if(try(!is.na(as.Date( start_date, format= "%Y-%m-%d")))){
+      date_bounds = paste0(date_bounds, " AND obsDatetime >",sQuote(start_date))
+    }
+    else{
+      stop("start_date format should be yyyy-mm-yy.")
+    }
+  }
   
+  if(end_date!=""){
+    if(try(!is.na(as.Date(end_date, format= "%Y-%m-%d")))){
+      date_bounds = paste0(date_bounds, " AND obsDatetime <",sQuote(end_date))
+    }
+    else{
+      stop("end_date format should be yyyy-mm-yy.")
+    }
+  }
+  
+  if (length(elements) > 0){
+    my_elements = paste0("(", paste0(sprintf("'%s'", elements), collapse = ", "), ")")
+    element_ids = DBI::dbGetQuery(con, paste0("SELECT elementID FROM obselement WHERE elementName in", my_elements,";"))
+    element_id_vec = paste0("(", paste0(sprintf("%d", element_ids$elementID), collapse = ", "), ")")
+  }
+  if(include_observation_data){
+    station_data <- DBI::dbGetQuery(con, paste0("SELECT observationfinal.recordedFrom, observationfinal.describedBy, obselement.abbreviation, obselement.elementName,observationfinal.obsDatetime,observationfinal.obsValue FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy AND observationfinal.recordedFrom IN", my_stations, "AND observationfinal.describedBy IN", element_id_vec, date_bounds, " ORDER BY observationfinal.recordedFrom, observationfinal.describedBy;"))
+    data_list <- list(station_info, station_data)
+    names(data_list) = c("station_info","station_data")
+  }
+  else{
+    data_list <- list(station_info)
+    names(data_list) = "station_info"
+  }
+  self$import_data(data_tables = data_list)
+  
+  self$add_key("station_info", c("stationId"))
+  if(include_observation_data)(self$add_link(from_data_frame = "station_data", to_data_frame = "station_info", link_pairs = c(recordedFrom = "stationId"), type = keyed_link_label))
 }
+)
+
+instat_object$set("public", "import_from_iri", function(download_from, data_file, data_frame_name, location_data_name, path, X1, X2 = NA, Y1, Y2 = NA, get_area_point = "area"){
+  
+  data_list <- import_from_iri(download_from  = download_from, data_file = data_file, path = path, X1 = X1, X2 = X2, Y1 = Y1, Y2 = Y2, get_area_point = get_area_point)
+  names(data_list) = c(next_default_item(prefix = data_frame_name , existing_names = self$get_data_names(), include_index = FALSE), next_default_item(prefix = location_data_name , existing_names = self$get_data_names(), include_index = FALSE))
+  self$import_data(data_tables = data_list)
+  loc_col_names <- names(data_list[[2]])
+  self$add_key(location_data_name, loc_col_names)
+  names(loc_col_names) <- loc_col_names
+  self$add_link(from_data_frame = names(data_list)[1], to_data_frame = names(data_list)[2], link_pairs = loc_col_names, type = keyed_link_label)
+} 
+)
+
+instat_object$set("public", "export_workspace", function(data_names, file, include_graphs = TRUE, include_models = TRUE, include_metadata = TRUE) {
+  e <- new.env()
+  for(temp_name in data_names) {
+    e[[temp_name]] <- self$get_data_frame(temp_name, use_current_filter = FALSE)
+    if(include_graphs) {
+      graphs <- self$get_graphs(temp_name)
+      graph_names <- names(graphs)
+      for(i in seq_along(graphs)) {
+        e[[paste(temp_name, graph_names[i], sep = "_")]] <- graphs[[i]]
+      }
+    }
+    if(include_models) {
+      models <- self$get_models(temp_name)
+      model_names <- names(models)
+      for(i in seq_along(models)) {
+        e[[paste(temp_name, model_names[i], sep = "_")]] <- models[[i]]
+      }
+    }
+    if(include_metadata) {
+      var_metadata <- self$get_variables_metadata(temp_name)
+      e[[paste(temp_name, "variables_metadata", sep = "_")]] <- var_metadata
+    }
+  }
+  save(list = ls(all.names = TRUE, envir = e), envir = e, file = file)
+} 
 )
