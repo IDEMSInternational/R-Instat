@@ -14,11 +14,13 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports RDotNet
 Imports instat.Translations
 Public Class dlgRemoveUnusedLevels
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsUnusedLevels As New RFunction
+    Private clsUnusedLevels, clstable, clsSum As New RFunction
+    Private clsTableOperation As New ROperator
 
     Private Sub dlgRemoveUnusedLevels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -56,7 +58,6 @@ Public Class dlgRemoveUnusedLevels
     Private Sub SetDefaults()
         clsUnusedLevels = New RFunction
         ucrSelectorFactorColumn.Reset()
-
         clsUnusedLevels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$drop_unused_factor_levels")
         ucrBase.clsRsyntax.SetBaseRFunction(clsUnusedLevels)
     End Sub
@@ -83,4 +84,26 @@ Public Class dlgRemoveUnusedLevels
         TestOKEnabled()
     End Sub
 
+    Private Sub ucrReceiverFactorColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactorColumn.ControlValueChanged
+        Dim numOutput As Integer
+        clstable.SetRCommand("table")
+        clsSum.SetRCommand("sum")
+        If Not ucrReceiverFactorColumn.IsEmpty Then
+            clstable.AddParameter("x", clsRFunctionParameter:=ucrReceiverFactorColumn.GetVariables)
+            clsTableOperation.SetOperation("==")
+            clsTableOperation.AddParameter(clsRFunctionParameter:=clstable, iPosition:=0)
+            clsTableOperation.AddParameter("threshhold", 0, iPosition:=1)
+
+            clsSum.AddParameter("x", clsROperatorParameter:=clsTableOperation)
+
+            numOutput = frmMain.clsRLink.RunInternalScriptGetValue(clsSum.ToScript).AsNumeric(0)
+            If numOutput = 0 Then
+                ucrInputUnusedLevels.SetName("no unused levels to remove")
+            Else
+                ucrInputUnusedLevels.SetName(numOutput & " unused levels will be removed")
+            End If
+        Else
+            clstable.RemoveParameterByName("x")
+        End If
+    End Sub
 End Class
