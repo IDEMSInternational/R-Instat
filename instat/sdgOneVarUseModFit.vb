@@ -95,6 +95,7 @@ Public Class sdgOneVarUseModFit
         ucrPnlPlots.AddFunctionNamesCondition(rdoDensityPlot, "denscomp")
         ucrPnlPlots.AddFunctionNamesCondition(rdoCIcdf, "CIcdfplot")
         InitialiseTabs()
+        SetPlotOptions()
 
         ' rdoNoPlot.Enabled = False ' temporary
         bControlsInitialised = True
@@ -190,7 +191,6 @@ Public Class sdgOneVarUseModFit
         For i = 0 To tbpOneVarUseModFit.TabCount - 1
             tbpOneVarUseModFit.SelectedIndex = i
         Next
-        tbpOneVarUseModFit.TabPages(2).Enabled = False
         tbpOneVarUseModFit.SelectedIndex = 0
     End Sub
 End Class
