@@ -159,4 +159,8 @@ Public Class ucrCheck
             End If
         End If
     End Sub
+
+    Protected Overrides Sub ResetControlValue()
+        Checked = False
+    End Sub
 End Class
