@@ -20,7 +20,7 @@ Imports System.Text.RegularExpressions
 Public Class dlgOpenNetCDF
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsRDefaultFunction, clsRCDF As New RFunction
+    Private clsNetCDFFunction, clsRCDFFunction As New RFunction
     Dim strFileType As String
     Dim bComponentsInitialised As Boolean
     Public bStartOpenDialog As Boolean
@@ -68,6 +68,16 @@ Public Class dlgOpenNetCDF
         ucrReceiverTimeName.Tag = "time"
         SetRSelector()
 
+        ucrInputFilePath.SetParameter(New RParameter("filename", 0))
+        ucrInputFilePath.IsReadOnly = True
+
+        ucrInputDataName.SetParameter(New RParameter("main_data_name", 1))
+        ucrInputDataName.SetValidationTypeAsRVariable()
+
+        ucrInputLocDataName.SetParameter(New RParameter("loc_data_name", 2))
+        ucrInputLocDataName.SetDefaultTypeAsDataFrame()
+        ucrInputLocDataName.SetValidationTypeAsRVariable()
+
         ucrReceiverLatName.SetParameter(New RParameter("latitude_col_name", 3))
         ucrReceiverLatName.SetParameterIsString()
         ucrReceiverLatName.Selector = ucrSelectorNetCDF
@@ -83,36 +93,30 @@ Public Class dlgOpenNetCDF
         ucrReceiverTimeName.Selector = ucrSelectorNetCDF
         ucrReceiverTimeName.SetItemType("nc_dim_variables")
 
-        ucrInputLocDataName.SetDefaultTypeAsDataFrame()
-        ucrInputDataName.SetValidationTypeAsRVariable()
-        ucrInputLocDataName.SetValidationTypeAsRVariable()
-        ucrInputFilePath.SetParameter(New RParameter("filename", 0))
-        ucrInputDataName.SetParameter(New RParameter("main_data_name", 1))
-        ucrInputLocDataName.SetParameter(New RParameter("loc_data_name", 2))
-
         ucrChkAddDateTime.SetParameter(New RParameter("add_date_time", 6))
         ucrChkAddDateTime.SetText("Add Date/Time Column")
         ucrChkAddDateTime.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
     End Sub
 
     Private Sub SetDefaults()
-        clsRDefaultFunction = New RFunction
+        clsNetCDFFunction = New RFunction
+
         ucrInputLocDataName.SetName("lat_lon_data")
         ucrInputDataName.SetName("")
         ucrSelectorNetCDF.Reset()
-        ucrInputFilePath.IsReadOnly = True
         ucrInputFilePath.SetName("")
-        clsRDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_NetCDF")
-        clsRDefaultFunction.AddParameter("nc_data", clsRFunctionParameter:=clsRCDF)
-        clsRDefaultFunction.AddParameter("add_date_time", "TRUE")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsRDefaultFunction)
+
+        clsNetCDFFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_NetCDF")
+        clsNetCDFFunction.AddParameter("nc_data", clsRFunctionParameter:=clsRCDFFunction)
+        clsNetCDFFunction.AddParameter("add_date_time", "TRUE")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsNetCDFFunction)
         AutoFillReceivers()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrInputDataName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrInputLocDataName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrInputFilePath.SetRCode(clsRCDF, bReset)
+        ucrInputFilePath.SetRCode(clsRCDFFunction, bReset)
         ucrReceiverLatName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverLonName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverTimeName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
@@ -169,8 +173,8 @@ Public Class dlgOpenNetCDF
                     lblMainDataName.Show()
 
                     If strFileExt = ".nc" Then
-                        clsRCDF.SetRCommand("nc_open")
-                        clsRCDF.AddParameter("filename", Chr(34) & strFilePath & Chr(34))
+                        clsRCDFFunction.SetRCommand("nc_open")
+                        clsRCDFFunction.AddParameter("filename", Chr(34) & strFilePath & Chr(34))
                         strFileType = "nc"
                         ucrInputDataName.SetName(strFileName, bSilent:=True)
                         ucrInputDataName.Focus()
