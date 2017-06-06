@@ -107,6 +107,7 @@ Public Class dlgRatingScales
         'clsSjplikert.AddParameter("cat.neutral")
         clsSjplikert.AddParameter("coord.flip", "FALSE")
 
+
         clsSjpStackFrq.SetPackageName("sjPlot")
         clsSjpStackFrq.SetRCommand("sjp.stackfrq")
         clsSjpStackFrq.AddParameter("coord.flip", "FALSE")
@@ -126,8 +127,8 @@ Public Class dlgRatingScales
         ucrChkFlip.AddAdditionalCodeParameterPair(clsSjplikert, New RParameter("coord.flip", 3), iAdditionalPairNo:=1)
         ucrChkWeights.AddAdditionalCodeParameterPair(clsSjplikert, New RParameter("weight.by", 2), iAdditionalPairNo:=1)
         ucrChkWeights.AddAdditionalCodeParameterPair(clsSjpStackFrq, New RParameter("weight.by", 2), iAdditionalPairNo:=2)
-        ucrReceiverOrderedFactors.AddAdditionalCodeParameterPair(clsSjplikert, New RParameter("items", 1), iAdditionalPairNo:=1)
-        ucrReceiverOrderedFactors.AddAdditionalCodeParameterPair(clsSjpStackFrq, New RParameter("items", 1), iAdditionalPairNo:=2)
+        ucrReceiverOrderedFactors.AddAdditionalCodeParameterPair(clsSjplikert, ucrReceiverOrderedFactors.GetParameter(), iAdditionalPairNo:=1)
+        ucrReceiverOrderedFactors.AddAdditionalCodeParameterPair(clsSjpStackFrq, ucrReceiverOrderedFactors.GetParameter(), iAdditionalPairNo:=2)
         ucrPnlSjpLikert.AddAdditionalCodeParameterPair(clsSjpStackFrq, New RParameter("sort.frq", 3), iAdditionalPairNo:=1)
         ucrPnlSjpLikert.AddAdditionalCodeParameterPair(clsSjplikert, New RParameter("sort.frq", 3), iAdditionalPairNo:=2)
 
@@ -245,6 +246,9 @@ Public Class dlgRatingScales
                     End If
                     ucrNudNeutralLevel.SetMinMax(1, iLevels)
                 End If
+            Else
+                ucrNudNeutralLevel.SetMinMax(1, Integer.MaxValue)
+                ucrNudNeutralLevel.Value = 1
             End If
         Else
             ucrNudNeutralLevel.SetMinMax(1, Integer.MaxValue)
