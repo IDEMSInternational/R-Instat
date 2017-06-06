@@ -2156,6 +2156,12 @@
     <Compile Include="ucrSelectorByDataFrameAddRemove.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrThemeAxes.Designer.vb">
+      <DependentUpon>ucrThemeAxes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrThemeAxes.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrVariablename.designer.vb">
       <DependentUpon>ucrVariablename.vb</DependentUpon>
     </Compile>
@@ -4525,6 +4531,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrSelectorByDataFrameAddRemove.sw-KE.resx">
       <DependentUpon>ucrSelectorByDataFrameAddRemove.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrThemeAxes.resx">
+      <DependentUpon>ucrThemeAxes.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrVariablename.fr-FR.resx">
       <DependentUpon>ucrVariablename.vb</DependentUpon>
