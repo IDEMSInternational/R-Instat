@@ -129,7 +129,7 @@ Partial Class sdgImportFromClimSoft
         '
         'cmdEnterPassword
         '
-        Me.cmdEnterPassword.Location = New System.Drawing.Point(12, 129)
+        Me.cmdEnterPassword.Location = New System.Drawing.Point(12, 130)
         Me.cmdEnterPassword.Name = "cmdEnterPassword"
         Me.cmdEnterPassword.Size = New System.Drawing.Size(107, 22)
         Me.cmdEnterPassword.TabIndex = 8
