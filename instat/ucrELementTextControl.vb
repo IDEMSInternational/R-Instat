@@ -14,12 +14,11 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Public Class ucrThemeAxes
+Public Class ucrELementTextControl
     Private bInitialiseControls As Boolean = False
     Public strAxis As String
     Private clsThemeFunction As New RFunction
     Private clsElementText As New RFunction
-    Private strParameter As String
     Private clsBaseOperator As New ROperator
 
     Public Sub InitialiseControl()
@@ -47,8 +46,8 @@ Public Class ucrThemeAxes
         ucrChkColour.SetText("Colour")
         ucrColors.SetParameter(New RParameter("colour"))
         ucrColors.AddQuotesIfUnrecognised = False
-        ' ucrInputColour.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
-        'ucrInputColour.SetRDefault(Chr(34) & "black" & Chr(34))
+        'ucrColors.bAllowNonConditionValues = True
+        ucrColors.SetName(Chr(34) & "NULL" & Chr(34))
 
         ucrChkFamily.SetText("Family")
         ucrInputFamily.SetParameter(New RParameter("family"))
@@ -130,4 +129,13 @@ Public Class ucrThemeAxes
     Private Sub ElementXAxisTextControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAngle.ControlValueChanged, ucrChkHjust.ControlValueChanged, ucrChkLineHeight.ControlValueChanged, ucrChkSize.ControlValueChanged, ucrChkVjust.ControlValueChanged, ucrChkColour.ControlValueChanged, ucrChkFace.ControlValueChanged, ucrChkFamily.ControlValueChanged
         AddRemoveElementAxis()
     End Sub
+
+    Private Sub grpAxisLabels_Enter(sender As Object, e As EventArgs) Handles grpAxisLabels.Enter
+
+    End Sub
+
+    Public Sub setlabel(strlabel As String)
+        grpAxisLabels.Text = strlabel
+    End Sub
+
 End Class
