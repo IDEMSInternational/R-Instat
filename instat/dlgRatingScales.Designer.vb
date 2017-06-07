@@ -29,23 +29,23 @@ Partial Class dlgRatingScales
         Me.rdoLowAscendingLikert = New System.Windows.Forms.RadioButton()
         Me.rdoNoneLikert = New System.Windows.Forms.RadioButton()
         Me.rdoHighAscendingLikert = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlSjpLikert = New instat.UcrPanel()
         Me.grpLikertType = New System.Windows.Forms.GroupBox()
-        Me.ucrChkNumberOfCategories = New instat.ucrCheck()
-        Me.ucrNudNeutralLevel = New instat.ucrNud()
         Me.lblNeutralLevel = New System.Windows.Forms.Label()
         Me.rdoStacked = New System.Windows.Forms.RadioButton()
         Me.rdoLikert = New System.Windows.Forms.RadioButton()
         Me.rdoTable = New System.Windows.Forms.RadioButton()
         Me.ucrPnlGraphType = New instat.UcrPanel()
+        Me.ucrChkNumberOfCategories = New instat.ucrCheck()
+        Me.ucrNudNeutralLevel = New instat.ucrNud()
         Me.ucrChkFlip = New instat.ucrCheck()
+        Me.ucrPnlSjpLikert = New instat.UcrPanel()
         Me.ucrReceiverWeights = New instat.ucrReceiverSingle()
         Me.ucrChkWeights = New instat.ucrCheck()
-        Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrReceiverOrderedFactors = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlType = New instat.UcrPanel()
         Me.ucrSelectorRatingScale = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSaveGraph = New instat.ucrSave()
         Me.grpSort.SuspendLayout()
         Me.grpLikertType.SuspendLayout()
         Me.SuspendLayout()
@@ -129,13 +129,6 @@ Partial Class dlgRatingScales
         Me.rdoHighAscendingLikert.Text = "High Ascending"
         Me.rdoHighAscendingLikert.UseVisualStyleBackColor = True
         '
-        'ucrPnlSjpLikert
-        '
-        Me.ucrPnlSjpLikert.Location = New System.Drawing.Point(8, 14)
-        Me.ucrPnlSjpLikert.Name = "ucrPnlSjpLikert"
-        Me.ucrPnlSjpLikert.Size = New System.Drawing.Size(126, 127)
-        Me.ucrPnlSjpLikert.TabIndex = 1
-        '
         'grpLikertType
         '
         Me.grpLikertType.Controls.Add(Me.ucrChkNumberOfCategories)
@@ -150,26 +143,6 @@ Partial Class dlgRatingScales
         Me.grpLikertType.TabStop = False
         Me.grpLikertType.Tag = "Graph_type"
         Me.grpLikertType.Text = "Likert Options"
-        '
-        'ucrChkNumberOfCategories
-        '
-        Me.ucrChkNumberOfCategories.Checked = False
-        Me.ucrChkNumberOfCategories.Location = New System.Drawing.Point(6, 26)
-        Me.ucrChkNumberOfCategories.Name = "ucrChkNumberOfCategories"
-        Me.ucrChkNumberOfCategories.Size = New System.Drawing.Size(212, 20)
-        Me.ucrChkNumberOfCategories.TabIndex = 0
-        '
-        'ucrNudNeutralLevel
-        '
-        Me.ucrNudNeutralLevel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNeutralLevel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNeutralLevel.Location = New System.Drawing.Point(83, 52)
-        Me.ucrNudNeutralLevel.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudNeutralLevel.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNeutralLevel.Name = "ucrNudNeutralLevel"
-        Me.ucrNudNeutralLevel.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudNeutralLevel.TabIndex = 2
-        Me.ucrNudNeutralLevel.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblNeutralLevel
         '
@@ -233,13 +206,40 @@ Partial Class dlgRatingScales
         Me.ucrPnlGraphType.Size = New System.Drawing.Size(315, 35)
         Me.ucrPnlGraphType.TabIndex = 0
         '
+        'ucrChkNumberOfCategories
+        '
+        Me.ucrChkNumberOfCategories.Checked = False
+        Me.ucrChkNumberOfCategories.Location = New System.Drawing.Point(6, 26)
+        Me.ucrChkNumberOfCategories.Name = "ucrChkNumberOfCategories"
+        Me.ucrChkNumberOfCategories.Size = New System.Drawing.Size(212, 20)
+        Me.ucrChkNumberOfCategories.TabIndex = 0
+        '
+        'ucrNudNeutralLevel
+        '
+        Me.ucrNudNeutralLevel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNeutralLevel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudNeutralLevel.Location = New System.Drawing.Point(83, 52)
+        Me.ucrNudNeutralLevel.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudNeutralLevel.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNeutralLevel.Name = "ucrNudNeutralLevel"
+        Me.ucrNudNeutralLevel.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudNeutralLevel.TabIndex = 2
+        Me.ucrNudNeutralLevel.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'ucrChkFlip
         '
         Me.ucrChkFlip.Checked = False
         Me.ucrChkFlip.Location = New System.Drawing.Point(10, 288)
         Me.ucrChkFlip.Name = "ucrChkFlip"
-        Me.ucrChkFlip.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkFlip.Size = New System.Drawing.Size(224, 20)
         Me.ucrChkFlip.TabIndex = 11
+        '
+        'ucrPnlSjpLikert
+        '
+        Me.ucrPnlSjpLikert.Location = New System.Drawing.Point(8, 14)
+        Me.ucrPnlSjpLikert.Name = "ucrPnlSjpLikert"
+        Me.ucrPnlSjpLikert.Size = New System.Drawing.Size(126, 127)
+        Me.ucrPnlSjpLikert.TabIndex = 1
         '
         'ucrReceiverWeights
         '
@@ -260,13 +260,6 @@ Partial Class dlgRatingScales
         Me.ucrChkWeights.Name = "ucrChkWeights"
         Me.ucrChkWeights.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkWeights.TabIndex = 9
-        '
-        'ucrSaveGraph
-        '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 397)
-        Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(258, 24)
-        Me.ucrSaveGraph.TabIndex = 13
         '
         'ucrReceiverOrderedFactors
         '
@@ -304,11 +297,19 @@ Partial Class dlgRatingScales
         Me.ucrSelectorRatingScale.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorRatingScale.TabIndex = 4
         '
+        'ucrSaveGraph
+        '
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 399)
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(255, 24)
+        Me.ucrSaveGraph.TabIndex = 15
+        '
         'dlgRatingScales
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(447, 496)
+        Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.rdoStacked)
         Me.Controls.Add(Me.rdoLikert)
         Me.Controls.Add(Me.rdoTable)
@@ -318,7 +319,6 @@ Partial Class dlgRatingScales
         Me.Controls.Add(Me.grpSort)
         Me.Controls.Add(Me.ucrReceiverWeights)
         Me.Controls.Add(Me.ucrChkWeights)
-        Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.lblOrderedFactor)
         Me.Controls.Add(Me.ucrReceiverOrderedFactors)
         Me.Controls.Add(Me.ucrBase)
@@ -344,7 +344,6 @@ Partial Class dlgRatingScales
     Friend WithEvents ucrReceiverOrderedFactors As ucrReceiverMultiple
     Friend WithEvents lblOrderedFactor As Label
     Friend WithEvents ucrChkWeights As ucrCheck
-    Friend WithEvents ucrSaveGraph As ucrSave
     Friend WithEvents ucrReceiverWeights As ucrReceiverSingle
     Friend WithEvents grpSort As GroupBox
     Friend WithEvents ucrChkFlip As ucrCheck
@@ -363,4 +362,5 @@ Partial Class dlgRatingScales
     Friend WithEvents rdoTable As RadioButton
     Friend WithEvents ucrPnlGraphType As UcrPanel
     Friend WithEvents ucrChkNumberOfCategories As ucrCheck
+    Friend WithEvents ucrSaveGraph As ucrSave
 End Class
