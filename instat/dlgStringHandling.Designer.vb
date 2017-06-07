@@ -75,12 +75,12 @@ Partial Class dlgStringHandling
         Me.rdoCount.FlatAppearance.BorderSize = 2
         Me.rdoCount.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoCount.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoCount.Location = New System.Drawing.Point(25, 12)
+        Me.rdoCount.Location = New System.Drawing.Point(11, 12)
         Me.rdoCount.Name = "rdoCount"
-        Me.rdoCount.Size = New System.Drawing.Size(61, 27)
+        Me.rdoCount.Size = New System.Drawing.Size(88, 27)
         Me.rdoCount.TabIndex = 1
         Me.rdoCount.TabStop = True
-        Me.rdoCount.Text = "Count"
+        Me.rdoCount.Text = " Word Count"
         Me.rdoCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoCount.UseVisualStyleBackColor = True
         '
@@ -91,7 +91,7 @@ Partial Class dlgStringHandling
         Me.rdoReplace.FlatAppearance.BorderSize = 2
         Me.rdoReplace.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoReplace.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoReplace.Location = New System.Drawing.Point(261, 12)
+        Me.rdoReplace.Location = New System.Drawing.Point(277, 12)
         Me.rdoReplace.Name = "rdoReplace"
         Me.rdoReplace.Size = New System.Drawing.Size(61, 27)
         Me.rdoReplace.TabIndex = 5
@@ -107,7 +107,7 @@ Partial Class dlgStringHandling
         Me.rdoLocate.FlatAppearance.BorderSize = 2
         Me.rdoLocate.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoLocate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoLocate.Location = New System.Drawing.Point(202, 12)
+        Me.rdoLocate.Location = New System.Drawing.Point(217, 12)
         Me.rdoLocate.Name = "rdoLocate"
         Me.rdoLocate.Size = New System.Drawing.Size(61, 27)
         Me.rdoLocate.TabIndex = 4
@@ -123,7 +123,7 @@ Partial Class dlgStringHandling
         Me.rdoExtract.FlatAppearance.BorderSize = 2
         Me.rdoExtract.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoExtract.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoExtract.Location = New System.Drawing.Point(143, 12)
+        Me.rdoExtract.Location = New System.Drawing.Point(158, 12)
         Me.rdoExtract.Name = "rdoExtract"
         Me.rdoExtract.Size = New System.Drawing.Size(61, 27)
         Me.rdoExtract.TabIndex = 3
@@ -139,7 +139,7 @@ Partial Class dlgStringHandling
         Me.rdoDetect.FlatAppearance.BorderSize = 2
         Me.rdoDetect.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoDetect.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoDetect.Location = New System.Drawing.Point(84, 12)
+        Me.rdoDetect.Location = New System.Drawing.Point(98, 12)
         Me.rdoDetect.Name = "rdoDetect"
         Me.rdoDetect.Size = New System.Drawing.Size(61, 27)
         Me.rdoDetect.TabIndex = 2
@@ -155,7 +155,7 @@ Partial Class dlgStringHandling
         Me.rdoReplaceAll.FlatAppearance.BorderSize = 2
         Me.rdoReplaceAll.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoReplaceAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoReplaceAll.Location = New System.Drawing.Point(320, 12)
+        Me.rdoReplaceAll.Location = New System.Drawing.Point(335, 12)
         Me.rdoReplaceAll.Name = "rdoReplaceAll"
         Me.rdoReplaceAll.Size = New System.Drawing.Size(74, 27)
         Me.rdoReplaceAll.TabIndex = 6
@@ -180,6 +180,7 @@ Partial Class dlgStringHandling
         Me.ucrReceiverStringHandling.Name = "ucrReceiverStringHandling"
         Me.ucrReceiverStringHandling.Selector = Nothing
         Me.ucrReceiverStringHandling.Size = New System.Drawing.Size(138, 20)
+        Me.ucrReceiverStringHandling.strNcFilePath = ""
         Me.ucrReceiverStringHandling.TabIndex = 9
         Me.ucrReceiverStringHandling.ucrSelector = Nothing
         '
@@ -231,7 +232,7 @@ Partial Class dlgStringHandling
         '
         Me.ucrPnlStringHandling.Location = New System.Drawing.Point(9, 1)
         Me.ucrPnlStringHandling.Name = "ucrPnlStringHandling"
-        Me.ucrPnlStringHandling.Size = New System.Drawing.Size(410, 51)
+        Me.ucrPnlStringHandling.Size = New System.Drawing.Size(406, 51)
         Me.ucrPnlStringHandling.TabIndex = 0
         '
         'dlgStringHandling
