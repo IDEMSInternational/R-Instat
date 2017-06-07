@@ -24,6 +24,11 @@ Public Class dlgScatterPlot
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = True
     Private clsLabsFunction As New RFunction
+    Private clsXlabsFunction As New RFunction
+    Private clsYlabsFunction As New RFunction
+    Private clsXScalecontinuousFunction As New RFunction
+    Private clsYScalecontinuousFunction As New RFunction
+    Private clsFacetsFunction As New RFunction
 
     Private Sub dlgScatterPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -85,7 +90,6 @@ Public Class dlgScatterPlot
         clsRggplotFunction = New RFunction
         clsRScatterGeomFunction = New RFunction
         clsRaesFunction = New RFunction
-        clsLabsFunction = New RFunction
 
         ucrSelectorForScatter.Reset()
         ucrSaveScatterPlot.Reset()
@@ -109,6 +113,12 @@ Public Class dlgScatterPlot
         clsRScatterGeomFunction.SetRCommand("geom_point")
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultTheme.Clone())
+        clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
+        clsYlabsFunction = GgplotDefaults.clsYlabTitleFunction.Clone()
+        clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
+        clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
+        clsYScalecontinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone()
+        clsFacetsFunction = GgplotDefaults.clsFacetFunction.Clone()
 
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
@@ -139,8 +149,8 @@ Public Class dlgScatterPlot
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetDataFrame(strNewDataFrame:=ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-        sdgPlots.SetRCode(ucrBase.clsRsyntax.clsBaseOperator, clsNewLabsFunction:=clsLabsFunction, bReset:=bResetSubdialog)
+        'sdgPlots.SetDataFrame(strNewDataFrame:=ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewLabsFunction:=clsLabsFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabsFunction, clsNewFacetFunction:=clsFacetsFunction, strNewDataFrame:=ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
     End Sub
