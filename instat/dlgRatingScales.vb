@@ -83,7 +83,7 @@ Public Class dlgRatingScales
         ucrPnlGraphType.AddToLinkedControls(ucrChkFlip, {rdoLikert, rdoStacked}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGraphType.AddToLinkedControls(ucrNudNeutralLevel, {rdoLikert}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=1)
         ucrPnlGraphType.AddToLinkedControls(ucrChkNumberOfCategories, {rdoLikert}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlGraphType.AddToLinkedControls(ucrSaveGraph, {rdoLikert, rdoStacked}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlGraphType.AddToLinkedControls(ucrSaveGraph, {rdoLikert, rdoStacked}, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=False)
 
         ucrChkNumberOfCategories.SetLinkedDisplayControl(grpLikertType)
 
@@ -93,7 +93,7 @@ Public Class dlgRatingScales
         ucrSaveGraph.SetPrefix("Graph")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorRatingScale.ucrAvailableDataFrames)
-        ucrSaveGraph.SetLabelText("Save Graph:")
+        ucrSaveGraph.SetCheckBoxText("Save Graph:")
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
         ucrSaveGraph.SetIsComboBox()
     End Sub
@@ -125,7 +125,7 @@ Public Class dlgRatingScales
         clsSjtStackFrq.AddParameter("show.total", "TRUE", iPosition:=6)
         clsSjtStackFrq.AddParameter("altr.row.col", "TRUE", iPosition:=7)
 
-        clsSjtStackFrq.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorRatingScale.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        clsSjplikert.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorRatingScale.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjtStackFrq)
     End Sub
