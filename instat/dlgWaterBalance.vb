@@ -414,6 +414,8 @@ Public Class dlgWaterBalance
             'ucrInputColName.SetPrefix("Sum")
             'ucrInputColName.SetName("Sum")
             'grpTransform.Text = "Sum"
+            clsWaterBalance0.AddParameter("save", "0")
+            clsWaterBalance0.SetAssignTo("Water_Balance_0")
             clsWaterEndRainsBase.AddParameter("calc", clsRFunctionParameter:=clsFirstWaterBalance0)
             ucrBase.clsRsyntax.SetBaseRFunction(clsWaterEndRainsBase)
         ElseIf rdoWaterBalance.Checked Then
@@ -426,11 +428,11 @@ Public Class dlgWaterBalance
             'ucrInputColName.SetName("Count")
             'grpTransform.Text = "Count"
         ElseIf rdoBoth.Checked Then
-            'ucrBase.clsRsyntax.SetBaseRFunction(clsSpellFunction)
-            'ucrSaveTransform.SetPrefix("Spell")
-            'ucrInputColName.SetPrefix("Spell")
-            'ucrInputColName.SetName("Spell")
-            'grpTransform.Text = "Spell"
+            clsWaterBalance0.AddParameter("save", "2")
+            clsWaterBalance0.SetAssignTo("Water_Balance_0")
+            'clsWaterBalance0.AddParameter("sub_calculations", clsRFunctionParameter:=clsWaterBalance0List)
+            clsWaterEndRainsBase.AddParameter("calc", clsRFunctionParameter:=clsFirstWaterBalance0)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsWaterEndRainsBase)
         End If
     End Sub
 
