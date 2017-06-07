@@ -20,6 +20,30 @@ Public Class sdgThemes
     Public bControlsInitialised As Boolean = False
     Private clsElementLine, clsElementXAxisTextTop, clsElementXAxisLine, clsElementYAxisLine, clsElementText, clsElementYAxisTextRight, clsElementXAxisLineTop, clsThemeFunction As New RFunction
 
+    Private Sub tbThemeLegend_Click(sender As Object, e As EventArgs) Handles tbThemeLegend.Click
+
+    End Sub
+
+    Private Sub UcrCheck1_Load(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub UcrInputComboBox1_Load(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub UcrCheck2_Load(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub UcrInputComboBox2_Load(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub grpLegendAdjustments_Enter(sender As Object, e As EventArgs)
+
+    End Sub
+
     Private Sub ucrThemeAxesTitle_Load(sender As Object, e As EventArgs) Handles ucrThemeAxesTitle.Load
 
     End Sub

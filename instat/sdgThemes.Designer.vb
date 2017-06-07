@@ -65,11 +65,25 @@ Partial Class sdgThemes
         Me.ucrChkUnits = New instat.ucrCheck()
         Me.ucrInputTickUnits = New instat.ucrInputComboBox()
         Me.ucrThemeAxesTitle = New instat.ucrELementTextControl()
-        Me.UcrElementRectControl1 = New instat.ucrElementRectControl()
-        Me.UcrElementRectControl2 = New instat.ucrElementRectControl()
-        Me.UcrElementRectControl3 = New instat.ucrElementRectControl()
+        Me.ucrLegendBackground = New instat.ucrElementRectControl()
+        Me.ucrLegendKey = New instat.ucrElementRectControl()
+        Me.ucrLegendBoxBackground = New instat.ucrElementRectControl()
         Me.tbThemeLegend = New System.Windows.Forms.TabPage()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.grpLegendBackGroundAndKey = New System.Windows.Forms.GroupBox()
+        Me.grpLegendAdjustments = New System.Windows.Forms.GroupBox()
+        Me.ucrChkLegendJustification = New instat.ucrCheck()
+        Me.ucrInputLegendJustification = New instat.ucrInputComboBox()
+        Me.ucrChkLegendBox = New instat.ucrCheck()
+        Me.ucrInputLegendBox = New instat.ucrInputComboBox()
+        Me.urChkLegendPosition = New instat.ucrCheck()
+        Me.ucrChkLegendDirection = New instat.ucrCheck()
+        Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
+        Me.ucrInputLegendDirection = New instat.ucrInputComboBox()
+        Me.urChkLegendBoxJust = New instat.ucrCheck()
+        Me.ucrInputLegendBoxJust = New instat.ucrInputComboBox()
+        Me.UcrELementTextControl1 = New instat.ucrELementTextControl()
+        Me.UcrELementTextControl2 = New instat.ucrELementTextControl()
+        Me.grpLegendTitleAndText = New System.Windows.Forms.GroupBox()
         Me.tbThemeYaxis.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.grpYAxisTitle.SuspendLayout()
@@ -85,7 +99,9 @@ Partial Class sdgThemes
         Me.tbTitle.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.tbThemeLegend.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
+        Me.grpLegendBackGroundAndKey.SuspendLayout()
+        Me.grpLegendAdjustments.SuspendLayout()
+        Me.grpLegendTitleAndText.SuspendLayout()
         Me.SuspendLayout()
         '
         'ucrBaseSubdialogue
@@ -478,30 +494,32 @@ Partial Class sdgThemes
         Me.ucrThemeAxesTitle.Size = New System.Drawing.Size(255, 228)
         Me.ucrThemeAxesTitle.TabIndex = 59
         '
-        'UcrElementRectControl1
+        'ucrLegendBackground
         '
-        Me.UcrElementRectControl1.Location = New System.Drawing.Point(11, 19)
-        Me.UcrElementRectControl1.Name = "UcrElementRectControl1"
-        Me.UcrElementRectControl1.Size = New System.Drawing.Size(253, 155)
-        Me.UcrElementRectControl1.TabIndex = 0
+        Me.ucrLegendBackground.Location = New System.Drawing.Point(11, 19)
+        Me.ucrLegendBackground.Name = "ucrLegendBackground"
+        Me.ucrLegendBackground.Size = New System.Drawing.Size(253, 155)
+        Me.ucrLegendBackground.TabIndex = 0
         '
-        'UcrElementRectControl2
+        'ucrLegendKey
         '
-        Me.UcrElementRectControl2.Location = New System.Drawing.Point(519, 19)
-        Me.UcrElementRectControl2.Name = "UcrElementRectControl2"
-        Me.UcrElementRectControl2.Size = New System.Drawing.Size(253, 155)
-        Me.UcrElementRectControl2.TabIndex = 1
+        Me.ucrLegendKey.Location = New System.Drawing.Point(519, 19)
+        Me.ucrLegendKey.Name = "ucrLegendKey"
+        Me.ucrLegendKey.Size = New System.Drawing.Size(253, 155)
+        Me.ucrLegendKey.TabIndex = 1
         '
-        'UcrElementRectControl3
+        'ucrLegendBoxBackground
         '
-        Me.UcrElementRectControl3.Location = New System.Drawing.Point(260, 19)
-        Me.UcrElementRectControl3.Name = "UcrElementRectControl3"
-        Me.UcrElementRectControl3.Size = New System.Drawing.Size(253, 155)
-        Me.UcrElementRectControl3.TabIndex = 2
+        Me.ucrLegendBoxBackground.Location = New System.Drawing.Point(260, 19)
+        Me.ucrLegendBoxBackground.Name = "ucrLegendBoxBackground"
+        Me.ucrLegendBoxBackground.Size = New System.Drawing.Size(253, 155)
+        Me.ucrLegendBoxBackground.TabIndex = 2
         '
         'tbThemeLegend
         '
-        Me.tbThemeLegend.Controls.Add(Me.GroupBox3)
+        Me.tbThemeLegend.Controls.Add(Me.grpLegendTitleAndText)
+        Me.tbThemeLegend.Controls.Add(Me.grpLegendAdjustments)
+        Me.tbThemeLegend.Controls.Add(Me.grpLegendBackGroundAndKey)
         Me.tbThemeLegend.Location = New System.Drawing.Point(4, 22)
         Me.tbThemeLegend.Name = "tbThemeLegend"
         Me.tbThemeLegend.Padding = New System.Windows.Forms.Padding(3)
@@ -510,17 +528,151 @@ Partial Class sdgThemes
         Me.tbThemeLegend.Text = "Legend"
         Me.tbThemeLegend.UseVisualStyleBackColor = True
         '
-        'GroupBox3
+        'grpLegendBackGroundAndKey
         '
-        Me.GroupBox3.Controls.Add(Me.UcrElementRectControl3)
-        Me.GroupBox3.Controls.Add(Me.UcrElementRectControl1)
-        Me.GroupBox3.Controls.Add(Me.UcrElementRectControl2)
-        Me.GroupBox3.Location = New System.Drawing.Point(6, 6)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(783, 180)
-        Me.GroupBox3.TabIndex = 3
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "GroupBox3"
+        Me.grpLegendBackGroundAndKey.Controls.Add(Me.ucrLegendBoxBackground)
+        Me.grpLegendBackGroundAndKey.Controls.Add(Me.ucrLegendBackground)
+        Me.grpLegendBackGroundAndKey.Controls.Add(Me.ucrLegendKey)
+        Me.grpLegendBackGroundAndKey.Location = New System.Drawing.Point(6, 246)
+        Me.grpLegendBackGroundAndKey.Name = "grpLegendBackGroundAndKey"
+        Me.grpLegendBackGroundAndKey.Size = New System.Drawing.Size(777, 176)
+        Me.grpLegendBackGroundAndKey.TabIndex = 3
+        Me.grpLegendBackGroundAndKey.TabStop = False
+        Me.grpLegendBackGroundAndKey.Text = "Legend Background and Key"
+        '
+        'grpLegendAdjustments
+        '
+        Me.grpLegendAdjustments.Controls.Add(Me.ucrChkLegendJustification)
+        Me.grpLegendAdjustments.Controls.Add(Me.ucrInputLegendJustification)
+        Me.grpLegendAdjustments.Controls.Add(Me.ucrChkLegendBox)
+        Me.grpLegendAdjustments.Controls.Add(Me.ucrInputLegendBox)
+        Me.grpLegendAdjustments.Controls.Add(Me.urChkLegendPosition)
+        Me.grpLegendAdjustments.Controls.Add(Me.ucrChkLegendDirection)
+        Me.grpLegendAdjustments.Controls.Add(Me.ucrInputLegendPosition)
+        Me.grpLegendAdjustments.Controls.Add(Me.ucrInputLegendDirection)
+        Me.grpLegendAdjustments.Controls.Add(Me.urChkLegendBoxJust)
+        Me.grpLegendAdjustments.Controls.Add(Me.ucrInputLegendBoxJust)
+        Me.grpLegendAdjustments.Location = New System.Drawing.Point(557, 6)
+        Me.grpLegendAdjustments.Name = "grpLegendAdjustments"
+        Me.grpLegendAdjustments.Size = New System.Drawing.Size(241, 161)
+        Me.grpLegendAdjustments.TabIndex = 100
+        Me.grpLegendAdjustments.TabStop = False
+        Me.grpLegendAdjustments.Text = "Legend Adjustments"
+        '
+        'ucrChkLegendJustification
+        '
+        Me.ucrChkLegendJustification.Checked = False
+        Me.ucrChkLegendJustification.Location = New System.Drawing.Point(6, 128)
+        Me.ucrChkLegendJustification.Name = "ucrChkLegendJustification"
+        Me.ucrChkLegendJustification.Size = New System.Drawing.Size(88, 20)
+        Me.ucrChkLegendJustification.TabIndex = 109
+        '
+        'ucrInputLegendJustification
+        '
+        Me.ucrInputLegendJustification.AddQuotesIfUnrecognised = True
+        Me.ucrInputLegendJustification.IsReadOnly = False
+        Me.ucrInputLegendJustification.Location = New System.Drawing.Point(95, 126)
+        Me.ucrInputLegendJustification.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputLegendJustification.Name = "ucrInputLegendJustification"
+        Me.ucrInputLegendJustification.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputLegendJustification.TabIndex = 108
+        '
+        'ucrChkLegendBox
+        '
+        Me.ucrChkLegendBox.Checked = False
+        Me.ucrChkLegendBox.Location = New System.Drawing.Point(6, 100)
+        Me.ucrChkLegendBox.Name = "ucrChkLegendBox"
+        Me.ucrChkLegendBox.Size = New System.Drawing.Size(88, 20)
+        Me.ucrChkLegendBox.TabIndex = 107
+        '
+        'ucrInputLegendBox
+        '
+        Me.ucrInputLegendBox.AddQuotesIfUnrecognised = True
+        Me.ucrInputLegendBox.IsReadOnly = False
+        Me.ucrInputLegendBox.Location = New System.Drawing.Point(95, 98)
+        Me.ucrInputLegendBox.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputLegendBox.Name = "ucrInputLegendBox"
+        Me.ucrInputLegendBox.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputLegendBox.TabIndex = 106
+        '
+        'urChkLegendPosition
+        '
+        Me.urChkLegendPosition.Checked = False
+        Me.urChkLegendPosition.Location = New System.Drawing.Point(6, 21)
+        Me.urChkLegendPosition.Name = "urChkLegendPosition"
+        Me.urChkLegendPosition.Size = New System.Drawing.Size(88, 20)
+        Me.urChkLegendPosition.TabIndex = 105
+        '
+        'ucrChkLegendDirection
+        '
+        Me.ucrChkLegendDirection.Checked = False
+        Me.ucrChkLegendDirection.Location = New System.Drawing.Point(6, 47)
+        Me.ucrChkLegendDirection.Name = "ucrChkLegendDirection"
+        Me.ucrChkLegendDirection.Size = New System.Drawing.Size(88, 20)
+        Me.ucrChkLegendDirection.TabIndex = 101
+        '
+        'ucrInputLegendPosition
+        '
+        Me.ucrInputLegendPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputLegendPosition.IsReadOnly = False
+        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(95, 19)
+        Me.ucrInputLegendPosition.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
+        Me.ucrInputLegendPosition.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputLegendPosition.TabIndex = 104
+        '
+        'ucrInputLegendDirection
+        '
+        Me.ucrInputLegendDirection.AddQuotesIfUnrecognised = True
+        Me.ucrInputLegendDirection.IsReadOnly = False
+        Me.ucrInputLegendDirection.Location = New System.Drawing.Point(95, 45)
+        Me.ucrInputLegendDirection.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputLegendDirection.Name = "ucrInputLegendDirection"
+        Me.ucrInputLegendDirection.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputLegendDirection.TabIndex = 100
+        '
+        'urChkLegendBoxJust
+        '
+        Me.urChkLegendBoxJust.Checked = False
+        Me.urChkLegendBoxJust.Location = New System.Drawing.Point(6, 73)
+        Me.urChkLegendBoxJust.Name = "urChkLegendBoxJust"
+        Me.urChkLegendBoxJust.Size = New System.Drawing.Size(88, 20)
+        Me.urChkLegendBoxJust.TabIndex = 103
+        '
+        'ucrInputLegendBoxJust
+        '
+        Me.ucrInputLegendBoxJust.AddQuotesIfUnrecognised = True
+        Me.ucrInputLegendBoxJust.IsReadOnly = False
+        Me.ucrInputLegendBoxJust.Location = New System.Drawing.Point(95, 71)
+        Me.ucrInputLegendBoxJust.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputLegendBoxJust.Name = "ucrInputLegendBoxJust"
+        Me.ucrInputLegendBoxJust.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputLegendBoxJust.TabIndex = 102
+        '
+        'UcrELementTextControl1
+        '
+        Me.UcrELementTextControl1.Location = New System.Drawing.Point(275, 12)
+        Me.UcrELementTextControl1.Name = "UcrELementTextControl1"
+        Me.UcrELementTextControl1.Size = New System.Drawing.Size(255, 224)
+        Me.UcrELementTextControl1.TabIndex = 65
+        '
+        'UcrELementTextControl2
+        '
+        Me.UcrELementTextControl2.Location = New System.Drawing.Point(14, 12)
+        Me.UcrELementTextControl2.Name = "UcrELementTextControl2"
+        Me.UcrELementTextControl2.Size = New System.Drawing.Size(255, 224)
+        Me.UcrELementTextControl2.TabIndex = 64
+        '
+        'grpLegendTitleAndText
+        '
+        Me.grpLegendTitleAndText.Controls.Add(Me.UcrELementTextControl1)
+        Me.grpLegendTitleAndText.Controls.Add(Me.UcrELementTextControl2)
+        Me.grpLegendTitleAndText.Location = New System.Drawing.Point(6, 6)
+        Me.grpLegendTitleAndText.Name = "grpLegendTitleAndText"
+        Me.grpLegendTitleAndText.Size = New System.Drawing.Size(545, 242)
+        Me.grpLegendTitleAndText.TabIndex = 101
+        Me.grpLegendTitleAndText.TabStop = False
+        Me.grpLegendTitleAndText.Text = "Legend Title and Text"
         '
         'sdgThemes
         '
@@ -550,7 +702,9 @@ Partial Class sdgThemes
         Me.tbTitle.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.tbThemeLegend.ResumeLayout(False)
-        Me.GroupBox3.ResumeLayout(False)
+        Me.grpLegendBackGroundAndKey.ResumeLayout(False)
+        Me.grpLegendAdjustments.ResumeLayout(False)
+        Me.grpLegendTitleAndText.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -599,8 +753,22 @@ Partial Class sdgThemes
     Friend WithEvents ucrThemeAxesTickLabels As ucrELementTextControl
     Friend WithEvents ucrThemeAxesLines As ucrElementLineControl
     Friend WithEvents tbThemeLegend As TabPage
-    Friend WithEvents GroupBox3 As GroupBox
-    Friend WithEvents UcrElementRectControl3 As ucrElementRectControl
-    Friend WithEvents UcrElementRectControl1 As ucrElementRectControl
-    Friend WithEvents UcrElementRectControl2 As ucrElementRectControl
+    Friend WithEvents grpLegendBackGroundAndKey As GroupBox
+    Friend WithEvents ucrLegendBoxBackground As ucrElementRectControl
+    Friend WithEvents ucrLegendBackground As ucrElementRectControl
+    Friend WithEvents ucrLegendKey As ucrElementRectControl
+    Friend WithEvents grpLegendAdjustments As GroupBox
+    Friend WithEvents ucrChkLegendJustification As ucrCheck
+    Friend WithEvents ucrInputLegendJustification As ucrInputComboBox
+    Friend WithEvents ucrChkLegendBox As ucrCheck
+    Friend WithEvents ucrInputLegendBox As ucrInputComboBox
+    Friend WithEvents urChkLegendPosition As ucrCheck
+    Friend WithEvents ucrChkLegendDirection As ucrCheck
+    Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
+    Friend WithEvents ucrInputLegendDirection As ucrInputComboBox
+    Friend WithEvents urChkLegendBoxJust As ucrCheck
+    Friend WithEvents ucrInputLegendBoxJust As ucrInputComboBox
+    Friend WithEvents grpLegendTitleAndText As GroupBox
+    Friend WithEvents UcrELementTextControl1 As ucrELementTextControl
+    Friend WithEvents UcrELementTextControl2 As ucrELementTextControl
 End Class
