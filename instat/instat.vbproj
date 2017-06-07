@@ -1266,6 +1266,12 @@
     <Compile Include="ucrDialogDisabled.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrElementRectControl.Designer.vb">
+      <DependentUpon>ucrElementRectControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrElementRectControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrFilter.Designer.vb">
       <DependentUpon>ucrFilter.vb</DependentUpon>
     </Compile>
@@ -4311,6 +4317,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrDistributionsWithParameters.sw-KE.resx">
       <DependentUpon>ucrDistributionsWithParameters.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrElementRectControl.resx">
+      <DependentUpon>ucrElementRectControl.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrFactor.fr-FR.resx">
       <DependentUpon>ucrFactor.vb</DependentUpon>

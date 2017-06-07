@@ -25,7 +25,6 @@ Partial Class sdgThemes
         Me.ucrBaseSubdialogue = New instat.ucrButtonsSubdialogue()
         Me.tbThemeFacets = New System.Windows.Forms.TabPage()
         Me.tbThemePanelAndBackground = New System.Windows.Forms.TabPage()
-        Me.tbThemeLegend = New System.Windows.Forms.TabPage()
         Me.tbThemeYaxis = New System.Windows.Forms.TabPage()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.UcrTickMarksAndLabels1 = New instat.ucrElementLineControl()
@@ -66,6 +65,11 @@ Partial Class sdgThemes
         Me.ucrChkUnits = New instat.ucrCheck()
         Me.ucrInputTickUnits = New instat.ucrInputComboBox()
         Me.ucrThemeAxesTitle = New instat.ucrELementTextControl()
+        Me.UcrElementRectControl1 = New instat.ucrElementRectControl()
+        Me.UcrElementRectControl2 = New instat.ucrElementRectControl()
+        Me.UcrElementRectControl3 = New instat.ucrElementRectControl()
+        Me.tbThemeLegend = New System.Windows.Forms.TabPage()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.tbThemeYaxis.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.grpYAxisTitle.SuspendLayout()
@@ -80,6 +84,8 @@ Partial Class sdgThemes
         Me.tbLegend.SuspendLayout()
         Me.tbTitle.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        Me.tbThemeLegend.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
         Me.SuspendLayout()
         '
         'ucrBaseSubdialogue
@@ -93,7 +99,7 @@ Partial Class sdgThemes
         '
         Me.tbThemeFacets.Location = New System.Drawing.Point(4, 22)
         Me.tbThemeFacets.Name = "tbThemeFacets"
-        Me.tbThemeFacets.Size = New System.Drawing.Size(809, 555)
+        Me.tbThemeFacets.Size = New System.Drawing.Size(816, 555)
         Me.tbThemeFacets.TabIndex = 4
         Me.tbThemeFacets.Text = "Facets"
         Me.tbThemeFacets.UseVisualStyleBackColor = True
@@ -102,20 +108,10 @@ Partial Class sdgThemes
         '
         Me.tbThemePanelAndBackground.Location = New System.Drawing.Point(4, 22)
         Me.tbThemePanelAndBackground.Name = "tbThemePanelAndBackground"
-        Me.tbThemePanelAndBackground.Size = New System.Drawing.Size(809, 555)
+        Me.tbThemePanelAndBackground.Size = New System.Drawing.Size(816, 555)
         Me.tbThemePanelAndBackground.TabIndex = 3
         Me.tbThemePanelAndBackground.Text = "Panel and Background  "
         Me.tbThemePanelAndBackground.UseVisualStyleBackColor = True
-        '
-        'tbThemeLegend
-        '
-        Me.tbThemeLegend.Location = New System.Drawing.Point(4, 22)
-        Me.tbThemeLegend.Name = "tbThemeLegend"
-        Me.tbThemeLegend.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbThemeLegend.Size = New System.Drawing.Size(809, 555)
-        Me.tbThemeLegend.TabIndex = 2
-        Me.tbThemeLegend.Text = "Legend"
-        Me.tbThemeLegend.UseVisualStyleBackColor = True
         '
         'tbThemeYaxis
         '
@@ -126,7 +122,7 @@ Partial Class sdgThemes
         Me.tbThemeYaxis.Location = New System.Drawing.Point(4, 22)
         Me.tbThemeYaxis.Name = "tbThemeYaxis"
         Me.tbThemeYaxis.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbThemeYaxis.Size = New System.Drawing.Size(809, 555)
+        Me.tbThemeYaxis.Size = New System.Drawing.Size(816, 555)
         Me.tbThemeYaxis.TabIndex = 1
         Me.tbThemeYaxis.Text = "Y-axis"
         Me.tbThemeYaxis.UseVisualStyleBackColor = True
@@ -237,7 +233,7 @@ Partial Class sdgThemes
         Me.tbThemeXAxis.Location = New System.Drawing.Point(4, 22)
         Me.tbThemeXAxis.Name = "tbThemeXAxis"
         Me.tbThemeXAxis.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbThemeXAxis.Size = New System.Drawing.Size(809, 555)
+        Me.tbThemeXAxis.Size = New System.Drawing.Size(816, 555)
         Me.tbThemeXAxis.TabIndex = 0
         Me.tbThemeXAxis.Text = "X-axis"
         Me.tbThemeXAxis.UseVisualStyleBackColor = True
@@ -482,6 +478,50 @@ Partial Class sdgThemes
         Me.ucrThemeAxesTitle.Size = New System.Drawing.Size(255, 228)
         Me.ucrThemeAxesTitle.TabIndex = 59
         '
+        'UcrElementRectControl1
+        '
+        Me.UcrElementRectControl1.Location = New System.Drawing.Point(11, 19)
+        Me.UcrElementRectControl1.Name = "UcrElementRectControl1"
+        Me.UcrElementRectControl1.Size = New System.Drawing.Size(253, 155)
+        Me.UcrElementRectControl1.TabIndex = 0
+        '
+        'UcrElementRectControl2
+        '
+        Me.UcrElementRectControl2.Location = New System.Drawing.Point(519, 19)
+        Me.UcrElementRectControl2.Name = "UcrElementRectControl2"
+        Me.UcrElementRectControl2.Size = New System.Drawing.Size(253, 155)
+        Me.UcrElementRectControl2.TabIndex = 1
+        '
+        'UcrElementRectControl3
+        '
+        Me.UcrElementRectControl3.Location = New System.Drawing.Point(260, 19)
+        Me.UcrElementRectControl3.Name = "UcrElementRectControl3"
+        Me.UcrElementRectControl3.Size = New System.Drawing.Size(253, 155)
+        Me.UcrElementRectControl3.TabIndex = 2
+        '
+        'tbThemeLegend
+        '
+        Me.tbThemeLegend.Controls.Add(Me.GroupBox3)
+        Me.tbThemeLegend.Location = New System.Drawing.Point(4, 22)
+        Me.tbThemeLegend.Name = "tbThemeLegend"
+        Me.tbThemeLegend.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbThemeLegend.Size = New System.Drawing.Size(816, 555)
+        Me.tbThemeLegend.TabIndex = 2
+        Me.tbThemeLegend.Text = "Legend"
+        Me.tbThemeLegend.UseVisualStyleBackColor = True
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.UcrElementRectControl3)
+        Me.GroupBox3.Controls.Add(Me.UcrElementRectControl1)
+        Me.GroupBox3.Controls.Add(Me.UcrElementRectControl2)
+        Me.GroupBox3.Location = New System.Drawing.Point(6, 6)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(783, 180)
+        Me.GroupBox3.TabIndex = 3
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "GroupBox3"
+        '
         'sdgThemes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -509,6 +549,8 @@ Partial Class sdgThemes
         Me.tbLegend.ResumeLayout(False)
         Me.tbTitle.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
+        Me.tbThemeLegend.ResumeLayout(False)
+        Me.GroupBox3.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -516,7 +558,6 @@ Partial Class sdgThemes
     Friend WithEvents ucrBaseSubdialogue As ucrButtonsSubdialogue
     Friend WithEvents tbThemeFacets As TabPage
     Friend WithEvents tbThemePanelAndBackground As TabPage
-    Friend WithEvents tbThemeLegend As TabPage
     Friend WithEvents tbThemeYaxis As TabPage
     Friend WithEvents tbThemeXAxis As TabPage
     Friend WithEvents grpTableOptions As GroupBox
@@ -557,4 +598,9 @@ Partial Class sdgThemes
     Friend WithEvents ucrInputTickUnits As ucrInputComboBox
     Friend WithEvents ucrThemeAxesTickLabels As ucrELementTextControl
     Friend WithEvents ucrThemeAxesLines As ucrElementLineControl
+    Friend WithEvents tbThemeLegend As TabPage
+    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents UcrElementRectControl3 As ucrElementRectControl
+    Friend WithEvents UcrElementRectControl1 As ucrElementRectControl
+    Friend WithEvents UcrElementRectControl2 As ucrElementRectControl
 End Class
