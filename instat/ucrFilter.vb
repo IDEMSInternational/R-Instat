@@ -62,6 +62,7 @@ Public Class ucrFilter
         ucrFilterOperation.SetItems({"==", "<", "<=", ">", ">=", "!="})
         ucrFactorLevels.SetAsMultipleSelector()
         ucrFactorLevels.SetReceiver(ucrFilterByReceiver)
+        ucrFactorLevels.SetIncludeLevels(False)
         clsFilterView.bForceIncludeOperation = False
         lstFilters.Columns.Add("Variable")
         lstFilters.Columns.Add("Condition")
