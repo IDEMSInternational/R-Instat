@@ -28,6 +28,7 @@ Public Class ucrGeom
     'Similarly for lstFunctionParameters. Both, together with clsGgplotAesFunction are supposedly passed through to ucrAdditionalLayers and assigned to smth in ucrAdditionalLayers by calling  sdgLayerOption.SetupLayer which calls setup ? Still need to figure out when/how they are used though...
     Public clsGlobalAesFunction As New RFunction
     Public clsLocalAesFunction As RFunction
+    Public clsGgplotFunction As New RFunction
     Private bFirstLoad As Boolean = True
     Public strGlobalDataFrame As String = ""
 
@@ -75,7 +76,7 @@ Public Class ucrGeom
         clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=clsGlobalAesFunction)
     End Sub
 
-    Public Overridable Sub Setup(clsNewGeomFunc As RFunction, clsNewGlobalAesFunc As RFunction, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bApplyAesGlobally As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional clsNewLocalAes As RFunction = Nothing, Optional bReset As Boolean = False)
+    Public Overridable Sub Setup(clsNewGgplotFunction As RFunction, clsNewGeomFunc As RFunction, clsNewGlobalAesFunc As RFunction, clsNewLocalAes As RFunction, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bApplyAesGlobally As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional bReset As Boolean = False)
         'Setup is used to setup the parameters of ucrGeom as well as ucrGeomListWithAes and ucrLayerParameters as they override Setup from ucrGeom. The Setup function is also used within sdgLayerOptions.SetupLayer which plays the same role for the whole sdlLayerOption.
         'These functions are called all together in the ucrAddLayers when a Layer is added or editted, as well as in specific plots dialogs such as dlgBoxPlot when the plot options sdgPlots (dealing with layers) is opened.
         Dim GeomCount As New Geoms
@@ -94,6 +95,7 @@ Public Class ucrGeom
         ucrInputGeoms.Enabled = Not bFixGeom
         clsGlobalAesFunction = clsNewGlobalAesFunc
         clsLocalAesFunction = clsNewLocalAes
+        clsGgplotFunction = clsNewGgplotFunction
     End Sub
 
     Public Overridable Sub SetGeomFunction(clsTempGeomFunc As RFunction, Optional bReset As Boolean = False)

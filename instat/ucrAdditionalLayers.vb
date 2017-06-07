@@ -29,6 +29,7 @@ Public Class ucrAdditionalLayers
     'Deciding if the first layer needs to be used for global aesthetics. 
     'Question to be discussed: What is this variable about again ? it is linked with sdgPlots.bAdditionalLayersSetGlobal in sdgPLots.bLayersDefaultIsGolobal.
     Public Event NumberOfLayersChanged() 'This event is raised when the number of Layers in the lstLayers on ucrAdditionalLayers has been changed, then handled by testOkEnabled On GeneralForGraphics. 
+
     Public Sub New()
 
         ' This call is required by the designer.
@@ -58,6 +59,7 @@ Public Class ucrAdditionalLayers
             bFirstLoad = False
         End If
     End Sub
+
     Private Sub SetDefaults()
         iLayerIndex = 0
         lstLayers.Clear()
@@ -72,11 +74,20 @@ Public Class ucrAdditionalLayers
 
     End Sub
     Private Sub cmdAdd_Click(sender As Object, e As EventArgs) Handles cmdAdd.Click
-        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=Nothing, clsTempAesFunc:=clsGgplotAesFunction, bFixAes:=False, bFixGeom:=False, strDataframe:=strGlobalDataFrame, bApplyAesGlobally:=(bSetGlobalIsDefault AndAlso lstLayers.Items.Count = 0), bIgnoreGlobalAes:=False)
+        Dim clsNewLocalAesFunction As New RFunction
+        Dim clsNewGeomFunction As New RFunction
+
+        'TODO add these in Ggplot default class
+        clsNewLocalAesFunction.SetPackageName("ggplot2")
+        clsNewLocalAesFunction.SetRCommand("aes")
+        clsNewGeomFunction.SetPackageName("ggplot2")
+        clsNewGeomFunction.SetRCommand("geom_boxplot")
+
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsNewGeomFunction, clsNewGlobalAesFunc:=clsGgplotAesFunction, clsNewLocalAes:=clsNewLocalAesFunction, bFixGeom:=False, strDataframe:=strGlobalDataFrame, bApplyAesGlobally:=(bSetGlobalIsDefault AndAlso lstLayers.Items.Count = 0))
         ParentForm.SendToBack()
         sdgLayerOptions.ShowDialog()
         strGlobalDataFrame = sdgLayerOptions.strGlobalDataFrame
-        AddLayers()
+        AddLayers(clsNewGeomFunction.strRCommand)
     End Sub
 
     Private Sub SetEditDeleteEnabled()
@@ -88,16 +99,18 @@ Public Class ucrAdditionalLayers
             cmdEdit.Enabled = False
         End If
     End Sub
+
     Private Sub lstLayers_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstLayers.SelectedIndexChanged
         SetEditDeleteEnabled()
     End Sub
-    Public Sub AddLayers(Optional lviCurrentItem As ListViewItem = Nothing)
+
+    Public Sub AddLayers(strGeomName As String, Optional lviCurrentItem As ListViewItem = Nothing)
         Dim lviLayer As ListViewItem
         Dim strLayerName As String
 
         If lviCurrentItem Is Nothing Then
             iLayerIndex = iLayerIndex + 1
-            strLayerName = iLayerIndex & "." & sdgLayerOptions.ucrGeomWithAes.cboGeomList.SelectedItem
+            strLayerName = iLayerIndex & "." & strGeomName
             lviLayer = New ListViewItem(text:=strLayerName)
             lstLayers.Items.Add(lviLayer)
             lstLayerComplete.Add(sdgLayerOptions.TestForOKEnabled())
@@ -132,36 +145,29 @@ Public Class ucrAdditionalLayers
     End Sub
 
     Private Sub cmdEdit_Click(sender As Object, e As EventArgs) Handles cmdEdit.Click
-        Dim clsSelectedGeom As RFunction
+        Dim clsSelectedGeomFunction As RFunction
         Dim clsLocalAes As RFunction
-        Dim bIgnoreGlobalAes As Boolean
-        'bIgnoreGlobalAes is used in Setup(Layer) to determine whether the chkIgnoreGlobalAes should be ticked in the sdgLayerOptions. It's value is determined below. The following RParameter will be used in this procedure.
 
         'The selected geom is found as the RFunction of the appropriate RParameter of RSyntax. The name of that Parameter is the name of the selected item in the lstLayers. That one is fetched using .SelectedItems(0) as there can only be one selected item at a time when the edit button is clicked.
-        clsSelectedGeom = clsRSyntax.GetParameter(lstLayers.SelectedItems(0).Text).clsArgumentCodeStructure
-        If clsSelectedGeom.GetParameter("mapping") IsNot Nothing Then
-            clsLocalAes = clsSelectedGeom.GetParameter("mapping").clsArgumentCodeStructure
+        clsSelectedGeomFunction = clsRSyntax.GetParameter(lstLayers.SelectedItems(0).Text).clsArgumentCodeStructure
+        If clsSelectedGeomFunction.ContainsParameter("mapping") Then
+            clsLocalAes = clsSelectedGeomFunction.GetParameter("mapping").clsArgumentCodeStructure
         Else
-            clsLocalAes = Nothing
-        End If
-
-        'Before we set-up the Layer in sdgLayerOptions, we determine the value of bIgnoreGlobalAes. We can detect if chkIgnoreGlobalAes was ticked last time the Layer was editted by looking at the "inherit.aes" parameter of the layer parameters.
-        If (clsSelectedGeom.GetParameter("inherit.aes") IsNot Nothing) AndAlso (clsSelectedGeom.GetParameter("inherit.aes").strArgumentValue = "FALSE") Then
-            bIgnoreGlobalAes = True
-        Else
-            bIgnoreGlobalAes = False
+            'TODO should come from ggplot defaults class
+            clsLocalAes = New RFunction
+            clsLocalAes.SetPackageName("ggplot2")
+            clsLocalAes.SetRCommand("aes")
         End If
 
         'Warning: sdgLayerOptions should not be setup using dlgGeneralForGraphics' fields !! These fields should be given through to the ucrAdditionalLayers (which should have all these) 
-        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsSelectedGeom, clsTempAesFunc:=clsGgplotAesFunction, bFixAes:=False, bFixGeom:=True, strDataframe:=strGlobalDataFrame, bApplyAesGlobally:=False, bIgnoreGlobalAes:=bIgnoreGlobalAes, clsTempLocalAes:=clsLocalAes)
-        'It has been chosen to fix the value of bApplyAesGlobally to False as when a Layer is editted, the choice to apply the Aes globally should be reconsidered no matter what it has been during last edit.       
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsSelectedGeomFunction, clsNewGlobalAesFunc:=clsGgplotAesFunction, clsNewLocalAes:=clsLocalAes, bFixGeom:=True, strDataframe:=strGlobalDataFrame, bApplyAesGlobally:=False, bReset:=False)
+        'It has been chosen to fix the value of bApplyAesGlobally to False as when a Layer is editted, the choice to apply the Aes globally should be reconsidered no matter what it has been during last edit.
         ParentForm.SendToBack() 'Otherwise sdgLayerOptions appears behind sdgPLotOptions
         sdgLayerOptions.ShowDialog()
-        AddLayers(lstLayers.SelectedItems(0))
+        AddLayers(clsSelectedGeomFunction.strRCommand, lstLayers.SelectedItems(0))
     End Sub
 
     Public Sub Reset()
         SetDefaults()
     End Sub
-
 End Class
