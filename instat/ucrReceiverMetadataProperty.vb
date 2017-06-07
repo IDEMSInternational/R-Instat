@@ -21,10 +21,7 @@ Public Class ucrReceiverMetadataProperty
     Public ctrActive As ucrCore
 
     Public Sub SetControls(clsNewRCode As RCodeStructure, Optional clsNewLayerParam As LayerParameter = Nothing, Optional bReset As Boolean = False)
-        Dim dctBooleanItems As New Dictionary(Of String, String)
-
-        dctBooleanItems.Add("TRUE", "TRUE")
-        dctBooleanItems.Add("FALSE", "FALSE")
+        Dim clsTempParam As RParameter
 
         clsLayerParam = clsNewLayerParam
         'This sub adapts the ucrReceiverMetadataProperty to the type of layer parameter, it's default value, the available values etc, stored within clsLayerParam.
@@ -54,11 +51,6 @@ Public Class ucrReceiverMetadataProperty
                 ctrActive = ucrColor
             ElseIf clsLayerParam.strLayerParameterDataType = "list" Then
                 ctrActive = ucrInputCboParamValue
-                If clsLayerParam.lstParameterStrings IsNot Nothing AndAlso clsLayerParam.lstParameterStrings.Count > 0 Then
-                    ucrInputCboParamValue.SetItems(dctBooleanItems)
-                Else
-                    ucrInputCboParamValue.SetItems()
-                End If
             ElseIf clsLayerParam.strLayerParameterDataType = "text" Then
                 ctrActive = ucrInputTextValue
             Else
@@ -68,10 +60,24 @@ Public Class ucrReceiverMetadataProperty
             'Needed to remove conditions from previous use of control
             ctrActive.ClearConditions()
             ctrActive.bUpdateRCodeFromControl = True
-            ctrActive.SetParameter(New RParameter(clsLayerParam.strLayerParameterName))
+            ctrActive.bAddRemoveParameter = False
+            clsTempParam = New RParameter(clsLayerParam.strLayerParameterName)
+            If clsLayerParam.strParameterDefaultValue IsNot Nothing Then
+                clsTempParam.SetArgumentValue(clsLayerParam.strParameterDefaultValue)
+            End If
+            ctrActive.SetParameter(clsTempParam)
             'Must be done after parameter set because it affects the conditions
+
             If ctrActive.Equals(ucrInputCboParamValue) Then
-                ucrInputCboParamValue.SetItems(dctBooleanItems)
+                If clsLayerParam.strLayerParameterDataType = "boolean" Then
+                    ucrInputCboParamValue.SetItems({"TRUE", "FALSE"})
+                ElseIf clsLayerParam.strLayerParameterDataType = "list" Then
+                    If clsLayerParam.lstParameterStrings IsNot Nothing AndAlso clsLayerParam.lstParameterStrings.Count > 0 Then
+                        ucrInputCboParamValue.SetItems(clsLayerParam.lstParameterStrings)
+                    Else
+                        ucrInputCboParamValue.SetItems()
+                    End If
+                End If
             End If
             ctrActive.SetRCode(clsNewRCode, bReset)
         End If
