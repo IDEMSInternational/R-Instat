@@ -281,4 +281,8 @@ Public Class ucrReceiverSingle
             bFirstLoad = False
         End If
     End Sub
+
+    Public Overrides Sub SetTextColour(clrNew As Color)
+        txtReceiverSingle.ForeColor = clrNew
+    End Sub
 End Class

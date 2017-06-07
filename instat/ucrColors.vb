@@ -22,6 +22,7 @@ Public Class ucrColors
 
     Private Sub ucrColors_Load(sender As Object, e As EventArgs) Handles Me.Load
         SetItems(strColours)
+        bAllowNonConditionValues = True
     End Sub
 
     Private Sub ucrColors_NameChanged() Handles Me.NameChanged
