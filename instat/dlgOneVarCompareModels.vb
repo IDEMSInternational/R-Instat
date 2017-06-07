@@ -60,8 +60,8 @@ Public Class dlgOneVarCompareModels
         Dim clsDefaultFunction As New RFunction
         ucrSelectorOneVarCompModels.Reset()
 
-        clsDefaultFunction.SetRCommand("gofstat")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        clsDefaultFunction.SetRCommand("fitdistrplus::gofstat")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
         ' bResetSubdialog = True
     End Sub
 
@@ -106,7 +106,7 @@ Public Class dlgOneVarCompareModels
     End Sub
 
     Private Sub cmdDisplayObjects_Click(sender As Object, e As EventArgs) Handles cmdDisplayObjects.Click
-        '        sdgOneVarCompareModels.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, bResetSubdialog)
+        ' sdgOneVarCompareModels.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, bResetSubdialog)
         'bResetSubdialog = False
         'sdgOneVarCompareModels.ShowDialog()
 
