@@ -82,7 +82,7 @@ Partial Class dlgOpenNetCDF
         'lblLatColName
         '
         Me.lblLatColName.AutoSize = True
-        Me.lblLatColName.Location = New System.Drawing.Point(260, 122)
+        Me.lblLatColName.Location = New System.Drawing.Point(260, 125)
         Me.lblLatColName.Name = "lblLatColName"
         Me.lblLatColName.Size = New System.Drawing.Size(117, 13)
         Me.lblLatColName.TabIndex = 8
@@ -91,7 +91,7 @@ Partial Class dlgOpenNetCDF
         'lblLonColName
         '
         Me.lblLonColName.AutoSize = True
-        Me.lblLonColName.Location = New System.Drawing.Point(260, 165)
+        Me.lblLonColName.Location = New System.Drawing.Point(260, 169)
         Me.lblLonColName.Name = "lblLonColName"
         Me.lblLonColName.Size = New System.Drawing.Size(126, 13)
         Me.lblLonColName.TabIndex = 10
@@ -100,7 +100,7 @@ Partial Class dlgOpenNetCDF
         'lblTimeColName
         '
         Me.lblTimeColName.AutoSize = True
-        Me.lblTimeColName.Location = New System.Drawing.Point(260, 208)
+        Me.lblTimeColName.Location = New System.Drawing.Point(260, 211)
         Me.lblTimeColName.Name = "lblTimeColName"
         Me.lblTimeColName.Size = New System.Drawing.Size(102, 13)
         Me.lblTimeColName.TabIndex = 12
@@ -109,7 +109,7 @@ Partial Class dlgOpenNetCDF
         'ucrChkAddDateTime
         '
         Me.ucrChkAddDateTime.Checked = False
-        Me.ucrChkAddDateTime.Location = New System.Drawing.Point(10, 264)
+        Me.ucrChkAddDateTime.Location = New System.Drawing.Point(10, 255)
         Me.ucrChkAddDateTime.Name = "ucrChkAddDateTime"
         Me.ucrChkAddDateTime.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkAddDateTime.TabIndex = 14
@@ -191,7 +191,7 @@ Partial Class dlgOpenNetCDF
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 292)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 281)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 15
@@ -200,7 +200,7 @@ Partial Class dlgOpenNetCDF
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(429, 348)
+        Me.ClientSize = New System.Drawing.Size(420, 341)
         Me.Controls.Add(Me.ucrChkAddDateTime)
         Me.Controls.Add(Me.ucrSelectorNetCDF)
         Me.Controls.Add(Me.ucrReceiverTimeName)

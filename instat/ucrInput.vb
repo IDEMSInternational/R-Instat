@@ -421,6 +421,9 @@ Public Class ucrInput
     Protected Overrides Sub SetToValue(objTemp As Object)
         If objTemp IsNot Nothing Then
             SetName(objTemp.ToString())
+        Else
+            'If no value reset to a default value
+            SetName("")
         End If
     End Sub
 
