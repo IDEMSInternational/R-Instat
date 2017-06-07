@@ -59,7 +59,7 @@ Public Class dlgRatingScales
         ucrChkWeights.AddToLinkedControls(ucrReceiverWeights, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkFlip.SetText("Flip Coordinates")
-        ucrChkFlip.SetParameter(New RParameter("coord.flip"))
+        ucrChkFlip.SetParameter(New RParameter("coord.flip", 4))
         ucrChkFlip.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkFlip.SetRDefault("FALSE")
 
@@ -105,21 +105,20 @@ Public Class dlgRatingScales
         clsSjplikert.SetRCommand("sjp.likert")
         ' clsSjplikert.AddParameter("catcount", 1)
         'clsSjplikert.AddParameter("cat.neutral")
-        clsSjplikert.AddParameter("coord.flip", "FALSE")
+        clsSjplikert.AddParameter("coord.flip", "FALSE", iPosition:=4)
 
         clsSjpStackFrq.SetPackageName("sjPlot")
         clsSjpStackFrq.SetRCommand("sjp.stackfrq")
-        clsSjtStackFrq.AddParameter("show.n", "TRUE")
-        clsSjpStackFrq.AddParameter("coord.flip", "FALSE")
+        clsSjpStackFrq.AddParameter("show.n", "TRUE", iPosition:=4)
+        clsSjpStackFrq.AddParameter("coord.flip", "FALSE", iPosition:=4)
 
         clsSjtStackFrq.SetPackageName("sjPlot")
         clsSjtStackFrq.SetRCommand("sjt.stackfrq")
-        clsSjtStackFrq.AddParameter("sort.frq", "NULL")
-        clsSjtStackFrq.AddParameter("show.n", "TRUE")
-        clsSjtStackFrq.AddParameter("show.na", "TRUE")
-        clsSjtStackFrq.AddParameter("string.na", "NA")
-        clsSjtStackFrq.AddParameter("string.total", "N")
-        clsSjtStackFrq.AddParameter("altr.row.col", "TRUE")
+        clsSjtStackFrq.AddParameter("sort.frq", "NULL", iPosition:=3)
+        clsSjtStackFrq.AddParameter("show.n", "TRUE", iPosition:=4)
+        clsSjtStackFrq.AddParameter("show.na", "TRUE", iPosition:=5)
+        clsSjtStackFrq.AddParameter("show.total", "TRUE", iPosition:=6)
+        clsSjtStackFrq.AddParameter("altr.row.col", "TRUE", iPosition:=7)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjtStackFrq)
     End Sub
@@ -127,7 +126,7 @@ Public Class dlgRatingScales
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjplikert, ucrChkWeights.GetParameter(), iAdditionalPairNo:=1)
         ucrReceiverWeights.AddAdditionalCodeParameterPair(clsSjpStackFrq, ucrChkWeights.GetParameter(), iAdditionalPairNo:=2)
-        ucrChkFlip.AddAdditionalCodeParameterPair(clsSjplikert, New RParameter("coord.flip", 3), iAdditionalPairNo:=1)
+        ucrChkFlip.AddAdditionalCodeParameterPair(clsSjplikert, New RParameter("coord.flip", 4), iAdditionalPairNo:=1)
         ucrChkWeights.AddAdditionalCodeParameterPair(clsSjplikert, New RParameter("weight.by", 2), iAdditionalPairNo:=1)
         ucrChkWeights.AddAdditionalCodeParameterPair(clsSjpStackFrq, New RParameter("weight.by", 2), iAdditionalPairNo:=2)
         ucrReceiverOrderedFactors.AddAdditionalCodeParameterPair(clsSjplikert, ucrReceiverOrderedFactors.GetParameter(), iAdditionalPairNo:=1)
