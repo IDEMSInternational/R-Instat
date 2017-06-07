@@ -95,7 +95,6 @@ Public Class dlgInsertColumn
 
         ucrPnlInsertColumns.AddToLinkedControls(ucrInputBeforeAfter, {rdoBeforeAfter}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlInsertColumns.AddToLinkedControls(ucrReceiverColumnsToInsert, {rdoBeforeAfter}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
         ucrPnlColumnsOrRows.AddToLinkedControls(ucrPnlInsertColumns, {rdoInsertColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlColumnsOrRows.AddToLinkedControls(ucrNudNumberOfColumns, {rdoInsertColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlColumnsOrRows.AddToLinkedControls(ucrInputDefaultValue, {rdoInsertColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -150,17 +149,14 @@ Public Class dlgInsertColumn
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrSelectorInsertColumns.AddAdditionalCodeParameterPair(clsInsertRowFunction, ucrSelectorInsertColumns.GetParameter, iAdditionalPairNo:=1)
-
         ucrNudNumberOfRows.SetRCode(clsInsertRowFunction, bReset)
         ucrNudStartRow.SetRCode(clsInsertRowFunction, bReset)
         ucrPnlBeforeAfter.SetRCode(clsInsertRowFunction, bReset)
 
         ucrNudNumberOfColumns.SetRCode(clsInsertColumnFunction, bReset)
         ucrInputDefaultValue.SetRCode(clsInsertColumnFunction, bReset)
-
         ucrInputPrefixForNewColumn.SetRCode(clsInsertColumnFunction, bReset)
         ucrReceiverColumnsToInsert.SetRCode(clsInsertColumnFunction, bReset)
-
         ucrSelectorInsertColumns.SetRCode(clsInsertColumnFunction, bReset)
         ucrPnlColumnsOrRows.SetRCode(clsInsertColumnFunction, bReset)
         ucrPnlInsertColumns.SetRCode(clsInsertColumnFunction, bReset)

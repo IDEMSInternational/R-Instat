@@ -83,7 +83,7 @@ Partial Class dlgInsertColumn
         Me.grpInsert.Location = New System.Drawing.Point(235, 85)
         Me.grpInsert.Name = "grpInsert"
         Me.grpInsert.Size = New System.Drawing.Size(286, 122)
-        Me.grpInsert.TabIndex = 5
+        Me.grpInsert.TabIndex = 6
         Me.grpInsert.TabStop = False
         Me.grpInsert.Text = "Insert"
         '
@@ -93,7 +93,7 @@ Partial Class dlgInsertColumn
         Me.lblColumn.Location = New System.Drawing.Point(152, 73)
         Me.lblColumn.Name = "lblColumn"
         Me.lblColumn.Size = New System.Drawing.Size(45, 13)
-        Me.lblColumn.TabIndex = 6
+        Me.lblColumn.TabIndex = 2
         Me.lblColumn.Text = "Column:"
         '
         'ucrInputBeforeAfter
@@ -103,7 +103,7 @@ Partial Class dlgInsertColumn
         Me.ucrInputBeforeAfter.Location = New System.Drawing.Point(51, 87)
         Me.ucrInputBeforeAfter.Name = "ucrInputBeforeAfter"
         Me.ucrInputBeforeAfter.Size = New System.Drawing.Size(93, 21)
-        Me.ucrInputBeforeAfter.TabIndex = 4
+        Me.ucrInputBeforeAfter.TabIndex = 1
         '
         'ucrReceiverColumnsToInsert
         '
@@ -114,7 +114,7 @@ Partial Class dlgInsertColumn
         Me.ucrReceiverColumnsToInsert.Selector = Nothing
         Me.ucrReceiverColumnsToInsert.Size = New System.Drawing.Size(116, 20)
         Me.ucrReceiverColumnsToInsert.strNcFilePath = ""
-        Me.ucrReceiverColumnsToInsert.TabIndex = 0
+        Me.ucrReceiverColumnsToInsert.TabIndex = 3
         Me.ucrReceiverColumnsToInsert.ucrSelector = Nothing
         '
         'rdoBeforeAfter
@@ -123,7 +123,7 @@ Partial Class dlgInsertColumn
         Me.rdoBeforeAfter.Location = New System.Drawing.Point(10, 64)
         Me.rdoBeforeAfter.Name = "rdoBeforeAfter"
         Me.rdoBeforeAfter.Size = New System.Drawing.Size(131, 17)
-        Me.rdoBeforeAfter.TabIndex = 3
+        Me.rdoBeforeAfter.TabIndex = 0
         Me.rdoBeforeAfter.TabStop = True
         Me.rdoBeforeAfter.Text = "Before or After Column"
         Me.rdoBeforeAfter.UseVisualStyleBackColor = True
@@ -175,7 +175,7 @@ Partial Class dlgInsertColumn
         Me.rdoAfter.Location = New System.Drawing.Point(10, 41)
         Me.rdoAfter.Name = "rdoAfter"
         Me.rdoAfter.Size = New System.Drawing.Size(47, 17)
-        Me.rdoAfter.TabIndex = 2
+        Me.rdoAfter.TabIndex = 1
         Me.rdoAfter.TabStop = True
         Me.rdoAfter.Text = "After"
         Me.rdoAfter.UseVisualStyleBackColor = True
@@ -186,7 +186,7 @@ Partial Class dlgInsertColumn
         Me.rdoBefore.Location = New System.Drawing.Point(10, 18)
         Me.rdoBefore.Name = "rdoBefore"
         Me.rdoBefore.Size = New System.Drawing.Size(56, 17)
-        Me.rdoBefore.TabIndex = 1
+        Me.rdoBefore.TabIndex = 0
         Me.rdoBefore.TabStop = True
         Me.rdoBefore.Text = "Before"
         Me.rdoBefore.UseVisualStyleBackColor = True
@@ -265,7 +265,7 @@ Partial Class dlgInsertColumn
         Me.ucrSelectorInsertColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorInsertColumns.Name = "ucrSelectorInsertColumns"
         Me.ucrSelectorInsertColumns.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorInsertColumns.TabIndex = 7
+        Me.ucrSelectorInsertColumns.TabIndex = 3
         '
         'ucrInputPrefixForNewColumn
         '
@@ -275,7 +275,7 @@ Partial Class dlgInsertColumn
         Me.ucrInputPrefixForNewColumn.Location = New System.Drawing.Point(159, 286)
         Me.ucrInputPrefixForNewColumn.Name = "ucrInputPrefixForNewColumn"
         Me.ucrInputPrefixForNewColumn.Size = New System.Drawing.Size(163, 21)
-        Me.ucrInputPrefixForNewColumn.TabIndex = 17
+        Me.ucrInputPrefixForNewColumn.TabIndex = 0
         '
         'ucrNudNumberOfColumns
         '
@@ -311,7 +311,7 @@ Partial Class dlgInsertColumn
         Me.ucrBase.Location = New System.Drawing.Point(10, 313)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.TabIndex = 1
         '
         'ucrNudNumberOfRows
         '
