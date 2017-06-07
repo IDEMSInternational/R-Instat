@@ -27,7 +27,7 @@ Partial Class ucrAxes
         Me.rdoSpecifyTitle = New System.Windows.Forms.RadioButton()
         Me.rdoNoTitle = New System.Windows.Forms.RadioButton()
         Me.rdoTitleAuto = New System.Windows.Forms.RadioButton()
-        Me.ucrTitle = New instat.ucrInputTextBox()
+        Me.ucrInputTitle = New instat.ucrInputTextBox()
         Me.ucrPnlAxisTitle = New instat.UcrPanel()
         Me.grpTickMarkers = New System.Windows.Forms.GroupBox()
         Me.ucrNudInStepsOf = New instat.ucrNud()
@@ -44,10 +44,8 @@ Partial Class ucrAxes
         Me.lblTo = New System.Windows.Forms.Label()
         Me.ucrPnlTickmarkers = New instat.UcrPanel()
         Me.grpScales = New System.Windows.Forms.GroupBox()
-        Me.ucrInputNoofDecimalsLimit = New instat.ucrInputTextBox()
         Me.ucrInputUpperLimit = New instat.ucrInputTextBox()
         Me.ucrInputLowerLimit = New instat.ucrInputTextBox()
-        Me.lblScalesNoDecimalPlaces = New System.Windows.Forms.Label()
         Me.lblUpperLimit = New System.Windows.Forms.Label()
         Me.lblLowerLimit = New System.Windows.Forms.Label()
         Me.rdoScalesCustom = New System.Windows.Forms.RadioButton()
@@ -64,7 +62,7 @@ Partial Class ucrAxes
         Me.grpAxisTitle.Controls.Add(Me.rdoSpecifyTitle)
         Me.grpAxisTitle.Controls.Add(Me.rdoNoTitle)
         Me.grpAxisTitle.Controls.Add(Me.rdoTitleAuto)
-        Me.grpAxisTitle.Controls.Add(Me.ucrTitle)
+        Me.grpAxisTitle.Controls.Add(Me.ucrInputTitle)
         Me.grpAxisTitle.Controls.Add(Me.ucrPnlAxisTitle)
         Me.grpAxisTitle.Location = New System.Drawing.Point(3, 18)
         Me.grpAxisTitle.Name = "grpAxisTitle"
@@ -115,15 +113,15 @@ Partial Class ucrAxes
         Me.rdoTitleAuto.Text = "Auto"
         Me.rdoTitleAuto.UseVisualStyleBackColor = True
         '
-        'ucrTitle
+        'ucrInputTitle
         '
-        Me.ucrTitle.AddQuotesIfUnrecognised = True
-        Me.ucrTitle.IsMultiline = False
-        Me.ucrTitle.IsReadOnly = False
-        Me.ucrTitle.Location = New System.Drawing.Point(62, 62)
-        Me.ucrTitle.Name = "ucrTitle"
-        Me.ucrTitle.Size = New System.Drawing.Size(131, 21)
-        Me.ucrTitle.TabIndex = 1
+        Me.ucrInputTitle.AddQuotesIfUnrecognised = True
+        Me.ucrInputTitle.IsMultiline = False
+        Me.ucrInputTitle.IsReadOnly = False
+        Me.ucrInputTitle.Location = New System.Drawing.Point(62, 62)
+        Me.ucrInputTitle.Name = "ucrInputTitle"
+        Me.ucrInputTitle.Size = New System.Drawing.Size(131, 21)
+        Me.ucrInputTitle.TabIndex = 1
         '
         'ucrPnlAxisTitle
         '
@@ -288,10 +286,8 @@ Partial Class ucrAxes
         '
         'grpScales
         '
-        Me.grpScales.Controls.Add(Me.ucrInputNoofDecimalsLimit)
         Me.grpScales.Controls.Add(Me.ucrInputUpperLimit)
         Me.grpScales.Controls.Add(Me.ucrInputLowerLimit)
-        Me.grpScales.Controls.Add(Me.lblScalesNoDecimalPlaces)
         Me.grpScales.Controls.Add(Me.lblUpperLimit)
         Me.grpScales.Controls.Add(Me.lblLowerLimit)
         Me.grpScales.Controls.Add(Me.rdoScalesCustom)
@@ -303,16 +299,6 @@ Partial Class ucrAxes
         Me.grpScales.TabIndex = 2
         Me.grpScales.TabStop = False
         Me.grpScales.Text = "Scales"
-        '
-        'ucrInputNoofDecimalsLimit
-        '
-        Me.ucrInputNoofDecimalsLimit.AddQuotesIfUnrecognised = True
-        Me.ucrInputNoofDecimalsLimit.IsMultiline = False
-        Me.ucrInputNoofDecimalsLimit.IsReadOnly = False
-        Me.ucrInputNoofDecimalsLimit.Location = New System.Drawing.Point(144, 102)
-        Me.ucrInputNoofDecimalsLimit.Name = "ucrInputNoofDecimalsLimit"
-        Me.ucrInputNoofDecimalsLimit.Size = New System.Drawing.Size(50, 21)
-        Me.ucrInputNoofDecimalsLimit.TabIndex = 22
         '
         'ucrInputUpperLimit
         '
@@ -333,15 +319,6 @@ Partial Class ucrAxes
         Me.ucrInputLowerLimit.Name = "ucrInputLowerLimit"
         Me.ucrInputLowerLimit.Size = New System.Drawing.Size(50, 21)
         Me.ucrInputLowerLimit.TabIndex = 22
-        '
-        'lblScalesNoDecimalPlaces
-        '
-        Me.lblScalesNoDecimalPlaces.AutoSize = True
-        Me.lblScalesNoDecimalPlaces.Location = New System.Drawing.Point(3, 102)
-        Me.lblScalesNoDecimalPlaces.Name = "lblScalesNoDecimalPlaces"
-        Me.lblScalesNoDecimalPlaces.Size = New System.Drawing.Size(135, 13)
-        Me.lblScalesNoDecimalPlaces.TabIndex = 6
-        Me.lblScalesNoDecimalPlaces.Text = "Number of Decimal Places:"
         '
         'lblUpperLimit
         '
@@ -410,7 +387,7 @@ Partial Class ucrAxes
     End Sub
 
     Friend WithEvents grpAxisTitle As GroupBox
-    Friend WithEvents ucrTitle As ucrInputTextBox
+    Friend WithEvents ucrInputTitle As ucrInputTextBox
     Friend WithEvents grpTickMarkers As GroupBox
     Friend WithEvents lblFrom As Label
     Friend WithEvents rdoTickMarkersCustom As RadioButton
@@ -422,7 +399,6 @@ Partial Class ucrAxes
     Friend WithEvents grpScales As GroupBox
     Friend WithEvents rdoScalesCustom As RadioButton
     Friend WithEvents rdoScalesAuto As RadioButton
-    Friend WithEvents lblScalesNoDecimalPlaces As Label
     Friend WithEvents lblUpperLimit As Label
     Friend WithEvents lblLowerLimit As Label
     Friend WithEvents rdoNoTitle As RadioButton
@@ -435,7 +411,6 @@ Partial Class ucrAxes
     Friend WithEvents ucrPnlAxisTitle As UcrPanel
     Friend WithEvents ucrPnlTickmarkers As UcrPanel
     Friend WithEvents ucrPnlScales As UcrPanel
-    Friend WithEvents ucrInputNoofDecimalsLimit As ucrInputTextBox
     Friend WithEvents ucrInputUpperLimit As ucrInputTextBox
     Friend WithEvents ucrInputLowerLimit As ucrInputTextBox
     Friend WithEvents rdoSpecifyTitle As RadioButton

@@ -103,14 +103,17 @@ Public Class dlgNewSummaryTables
         ucrInputNA.SetRDefault(Chr(34) & Chr(34))
 
         ' For the page_by option:
-        ucrInputPageBy.SetParameter(New RParameter("page_by", 12))
-        dctPageBy.Add("None", "NULL")
-        dctPageBy.Add("Variables", Chr(34) & "variables" & Chr(34))
-        dctPageBy.Add("Summaries", Chr(34) & "summaries" & Chr(34))
-        dctPageBy.Add("Variables and Summaries", "c(" & Chr(34) & "variables" & Chr(34) & "," & Chr(34) & "summaries" & Chr(34) & ")")
-        dctPageBy.Add("Default", Chr(34) & "default" & Chr(34))
-        ucrInputPageBy.SetItems(dctPageBy)
-        ucrInputPageBy.SetRDefault(Chr(34) & "default" & Chr(34))
+        'temp disabled, not yet implemented in R function
+        'ucrInputPageBy.SetParameter(New RParameter("page_by", 12))
+        'temp added to prevent developer error while disabled
+        ucrInputPageBy.bAllowNonConditionValues = True
+        'dctPageBy.Add("None", "NULL")
+        'dctPageBy.Add("Variables", Chr(34) & "variables" & Chr(34))
+        'dctPageBy.Add("Summaries", Chr(34) & "summaries" & Chr(34))
+        'dctPageBy.Add("Variables and Summaries", "c(" & Chr(34) & "variables" & Chr(34) & "," & Chr(34) & "summaries" & Chr(34) & ")")
+        'dctPageBy.Add("Default", Chr(34) & "default" & Chr(34))
+        'ucrInputPageBy.SetItems(dctPageBy)
+        'ucrInputPageBy.SetRDefault(Chr(34) & "default" & Chr(34))
 
         ucrChkRowNumbers.SetParameter(New RParameter("rnames", 18))
         ucrChkRowNumbers.SetText("Show Row Names")
