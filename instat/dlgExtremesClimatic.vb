@@ -87,16 +87,22 @@ Public Class dlgExtremesClimatic
         ucrPnlExtremesType.AddToLinkedControls({ucrInputThresholdValue, ucrInputThresholdOperator}, {rdoPeaks}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlExtremesType.AddToLinkedControls(ucrPnlMaxMin, {rdoMinMax}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrPnlExtremesType.AddParameterValuesCondition(rdoMinMax, "result_name", Chr(34) & ucrInputSave.GetText() & Chr(34))
-        ucrPnlExtremesType.AddParameterValuesCondition(rdoPeaks, "result_name", Chr(34) & ucrInputSave.GetText() & Chr(34), False)
-        ucrPnlExtremesType.AddParameterValuesCondition(rdoPeaks, "result_data_frame", Chr(34) & ucrInputSave.GetText() & Chr(34))
-        ucrPnlExtremesType.AddParameterValuesCondition(rdoMinMax, "result_data_frame", Chr(34) & ucrInputSave.GetText() & Chr(34), False)
+        'disabling control for now.
+        ucrInputThresholdOperator.Enabled = False
+        ucrInputThresholdValue.Enabled = False
+        lblValues.Enabled = False
+
+        'ucrPnlExtremesType.AddParameterPresentCondition(rdoMinMax, "result_name")
+        'ucrPnlExtremesType.AddParameterPresentCondition(rdoPeaks, "result_name", False)
+        ucrPnlExtremesType.AddParameterPresentCondition(rdoPeaks, "result_data_frame")
+        ucrPnlExtremesType.AddParameterPresentCondition(rdoMinMax, "result_data_frame", False)
     End Sub
 
     Private Sub SetRCodeForControls(bReset)
         ucrReceiverElement.SetRCode(clsMinMaxFuncExp, bReset)
         ucrInputSave.SetRCode(clsMinMaxSummariseFunc, bReset)
-        ucrPnlMaxMin.SetRCode(clsMinMaxFuncExp)
+        ucrPnlMaxMin.SetRCode(clsMinMaxFuncExp, bReset)
+        ucrPnlExtremesType.SetRCode(clsMinMaxFuncExp, bReset)
     End Sub
 
     Private Sub SetDefaults()
