@@ -23,8 +23,7 @@ Public Class dlgWaterBalance
         clsWaterEndRainsBase, clsEndOfRainsManipulationsFunc, clsREndofRains,
         clsWaterBalBase, clsWaterBalManipulationsFunc, clssGroupByFunc, clsAddKey,
         clsYearGroup, clsDayFromAndTo, clsFirstWaterBalanceYear As New RFunction
-    Public clsWaterBalanceList, clsWaterBalanceCalc,
-        clsWaterBalance, clsSubCalcList, clsReplaceNA, clsFirstWaterBalance0List,
+    Public clsWaterBalanceList, clsWaterBalanceCalc, clsSubCalcList, clsReplaceNA, clsFirstWaterBalance0List,
         clsWaterFilter0List, clsReplaceNA0,
         clsWaterBalance0List, clsWaterBalance0, clsWaterFilter0, clsFirstWaterBalance0 As New RFunction
     Private strCurrDataName As String = ""
@@ -93,8 +92,8 @@ Public Class dlgWaterBalance
         clsDayFromAndTo.SetAssignTo("Day_From_and_To")
         clsYearGroup.SetRCommand("instat_calculation$new")
         clsYearGroup.SetAssignTo("Year_Group_Daily")
-        clsWaterBalance.SetRCommand("instat_calculation$new")
-        clsWaterBalance.SetAssignTo("Water_Balance")
+        'clsWaterBalance.SetRCommand("instat_calculation$new")
+        'clsWaterBalance.SetAssignTo("Water_Balance")
         clsWaterBalanceCalc.SetRCommand("instat_calculation$new")
         clsWaterBalanceCalc.SetAssignTo("Water_Balance_Calc")
         clsFirstWaterBalanceYear.SetRCommand("instat_calculation$new")
@@ -120,10 +119,14 @@ Public Class dlgWaterBalance
         'nudCapacity.DecimalPlaces = 0
 
         'ucrNudTo.Maximum = 366
-        ucrNudTo.SetMinMax(ucrNudFrom.Value + 1, 366)
-        ucrNudFrom.SetMinMax(1, ucrNudFrom.Value - 1)
+        'ucrNudTo.SetMinMax(ucrNudFrom.Value + 1, 366)
+        'ucrNudFrom.SetMinMax(1, ucrNudFrom.Value - 1)
+
+        ucrNudTo.SetMinMax(2, 366)
+        ucrNudFrom.SetMinMax(1, 366)
+
+        ucrNudWBLessThan.SetMinMax(1, Integer.MaxValue)
         ucrNudWBLessThan.Increment = 10
-        ucrNudWBLessThan.Maximum = Integer.MaxValue
 
         ucrInputEvaporation.SetValidationTypeAsNumeric()
 
@@ -329,7 +332,8 @@ Public Class dlgWaterBalance
             clsSubCalcList.AddParameter("sub1", clsRFunctionParameter:=clsReplaceNA)
             clsRWater_bal.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubCalcList)
             clsRWater_bal.AddParameter("function_exp", Chr(34) & "Reduce(function(x, y) pmin(pmax(x + y - " & ucrInputEvaporation.GetText() & ", 0), " & ucrNudCapacity.Value & "), replace_NA, accumulate=TRUE)" & Chr(34))
-            clsWaterBalBase.AddParameter("calc", clsRFunctionParameter:=clsRWater_bal)
+            'clsWaterBalBase.AddParameter("calc", clsRFunctionParameter:=clsRWater_bal)
+            clsWaterBalBase.AddParameter("calc", clsRFunctionParameter:=clsWaterBalance0)
             ucrBase.clsRsyntax.SetBaseRFunction(clsWaterBalBase)
         ElseIf rdoBoth.Checked Then
             clsWaterBalance0.AddParameter("save", "2")
