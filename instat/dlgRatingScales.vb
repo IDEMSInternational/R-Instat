@@ -39,7 +39,6 @@ Public Class dlgRatingScales
         ucrReceiverOrderedFactors.Selector = ucrSelectorRatingScale
         ucrReceiverWeights.Selector = ucrSelectorRatingScale
 
-
         ucrReceiverOrderedFactors.SetParameter(New RParameter("items", 1))
         ucrReceiverOrderedFactors.SetParameterIsRFunction()
         ucrReceiverOrderedFactors.bForceAsDataFrame = True
@@ -51,7 +50,9 @@ Public Class dlgRatingScales
         ucrNudNeutralLevel.SetParameter(New RParameter("catcount", 4))
         ucrChkNumberOfCategories.SetText("Number of Categories")
         ucrChkNumberOfCategories.SetParameter(ucrNudNeutralLevel.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        ucrChkNumberOfCategories.AddToLinkedControls(ucrNudNeutralLevel, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkNumberOfCategories.AddToLinkedControls(ucrNudNeutralLevel, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        ucrChkNumberOfCategories.AddParameterPresentCondition(True, "catcount")
+        ucrChkNumberOfCategories.AddParameterPresentCondition(False, "catcount", False)
 
         ucrChkWeights.SetText("Weights")
         ucrChkWeights.SetParameter(ucrReceiverWeights.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
@@ -107,7 +108,6 @@ Public Class dlgRatingScales
         'clsSjplikert.AddParameter("cat.neutral")
         clsSjplikert.AddParameter("coord.flip", "FALSE")
 
-
         clsSjpStackFrq.SetPackageName("sjPlot")
         clsSjpStackFrq.SetRCommand("sjp.stackfrq")
         clsSjpStackFrq.AddParameter("coord.flip", "FALSE")
@@ -138,6 +138,7 @@ Public Class dlgRatingScales
         ucrChkWeights.SetRCode(clsSjtStackFrq, bReset)
         ucrReceiverWeights.SetRCode(clsSjtStackFrq, bReset)
         ucrNudNeutralLevel.SetRCode(clsSjplikert, bReset)
+        ucrChkNumberOfCategories.SetRCode(clsSjplikert, bReset)
         ucrPnlGraphType.SetRCode(clsSjtStackFrq, bReset)
     End Sub
 
