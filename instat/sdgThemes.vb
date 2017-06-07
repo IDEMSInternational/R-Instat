@@ -18,35 +18,7 @@ Imports instat.Translations
 
 Public Class sdgThemes
     Public bControlsInitialised As Boolean = False
-    Private clsElementLine, clsElementXAxisTextTop, clsElementXAxisLine, clsElementYAxisLine, clsElementText, clsElementYAxisTextRight, clsElementXAxisLineTop, clsThemeFunction As New RFunction
-
-    Private Sub tbThemeLegend_Click(sender As Object, e As EventArgs) Handles tbThemeLegend.Click
-
-    End Sub
-
-    Private Sub UcrCheck1_Load(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub UcrInputComboBox1_Load(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub UcrCheck2_Load(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub UcrInputComboBox2_Load(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub grpLegendAdjustments_Enter(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub ucrThemeAxesTitle_Load(sender As Object, e As EventArgs) Handles ucrThemeAxesTitle.Load
-
-    End Sub
+    Private clsElementLine, clsElementRect, clsElementXAxisTextTop, clsElementXAxisLine, clsElementYAxisLine, clsElementText, clsElementYAxisTextRight, clsElementXAxisLineTop, clsThemeFunction As New RFunction
 
     Private clsBaseOperator As New ROperator
 
@@ -57,12 +29,12 @@ Public Class sdgThemes
     End Sub
 
     Public Sub InitialiseControls()
+        Dim dctLegendPosition As New Dictionary(Of String, String)
+        Dim dctLegendDirection As New Dictionary(Of String, String)
+        Dim dctLegendBox As New Dictionary(Of String, String)
+        Dim dctLegendBoxJust As New Dictionary(Of String, String)
+        Dim dctLegendJustification As New Dictionary(Of String, String)
 
-        'Units
-        ucrChkUnits.SetText("Tick length")
-        ucrInputTickUnits.SetParameter(New RParameter("units"))
-        ucrInputTickUnits.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctFonts))
-        ucrInputTickUnits.SetRDefault(Chr(34) & "npc" & Chr(34))
         ucrThemeBottomXAxis.setlabel("X axis tick labels")
         ucrThemeTopXAxis.setlabel("X axis tick labels on top axis")
         ucrThemeLeftYAxis.setlabel("Y axis tick labels")
@@ -79,6 +51,72 @@ Public Class sdgThemes
         ucrThemeAxesTitle.setlabel("Label of axes")
         ucrThemeAxesTickLabels.setlabel("Tick marks along axes")
         ucrThemeAxesLines.setlabel("Lines along axes")
+
+        ucrLegendTitle.setlabel("Title of legend")
+        ucrLegendText.setlabel("Legend item labels")
+        ucrLegendBackground.setlabel("Background of legend")
+        ucrLegendKey.setlabel("Background underneath legend keys")
+        ucrLegendBoxBackground.setlabel("Background of legend area")
+
+        'Units
+        ucrChkUnits.SetText("Tick length")
+        ucrInputTickUnits.SetParameter(New RParameter("units"))
+        ucrInputTickUnits.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctFonts))
+        ucrInputTickUnits.SetRDefault(Chr(34) & "npc" & Chr(34))
+
+
+        ' TODO: Find what this means: "two-element numeric vector"
+        urChkLegendPosition.SetText("Legend Position")
+        ucrInputLegendPosition.SetParameter(New RParameter("legend.position"))
+        dctLegendPosition.Add("None", Chr(34) & "none" & Chr(34))
+        dctLegendPosition.Add("Left", Chr(34) & "left" & Chr(34))
+        dctLegendPosition.Add("Right", Chr(34) & "right" & Chr(34))
+        dctLegendPosition.Add("Top", Chr(34) & "top" & Chr(34))
+        dctLegendPosition.Add("Bottom", Chr(34) & "bottom" & Chr(34))
+        ucrInputLegendPosition.SetItems(dctLegendPosition)
+        ucrInputLegendPosition.SetRDefault(Chr(34) & "none" & Chr(34))
+
+        ucrChkLegendBox.SetText("Multiple Legend Arrangement")
+        ucrInputLegendBox.SetParameter(New RParameter("legend.box"))
+        dctLegendBox.Add("Vertical", Chr(34) & "vertical" & Chr(34))
+        dctLegendBox.Add("Horizontal", Chr(34) & "horizontal" & Chr(34))
+        ucrInputLegendBox.SetItems(dctLegendBox)
+        ucrInputLegendBox.SetRDefault(Chr(34) & "vertical" & Chr(34))
+
+        urChkLegendBoxJust.SetText("Justification of Legend Box")
+        ucrInputLegendBoxJust.SetParameter(New RParameter("legend.box.just"))
+        dctLegendBoxJust.Add("Top", Chr(34) & "top" & Chr(34))
+        dctLegendBoxJust.Add("Bottom", Chr(34) & "bottom" & Chr(34))
+        dctLegendBoxJust.Add("Right", Chr(34) & "right" & Chr(34))
+        dctLegendBoxJust.Add("Left", Chr(34) & "left" & Chr(34))
+        ucrInputLegendBoxJust.SetItems(dctLegendBoxJust)
+        ucrInputLegendBoxJust.SetRDefault(Chr(34) & "top" & Chr(34))
+
+
+        ucrChkLegendDirection.SetText("Legend Direction")
+        ucrInputLegendDirection.SetParameter(New RParameter("legend.direction"))
+        dctLegendDirection.Add("Vertical", Chr(34) & "vertical" & Chr(34))
+        dctLegendDirection.Add("Horizontal", Chr(34) & "horizontal" & Chr(34))
+        ucrInputLegendDirection.SetItems(dctLegendDirection)
+        ucrInputLegendDirection.SetRDefault(Chr(34) & "vertical" & Chr(34))
+
+
+        ucrChkLegendJustification.SetText("Legend Justification")
+        ucrInputLegendJustification.SetParameter(New RParameter("legend.justification"))
+        dctLegendJustification.Add("Top", Chr(34) & "top" & Chr(34))
+        dctLegendJustification.Add("Bottom", Chr(34) & "bottom" & Chr(34))
+        dctLegendJustification.Add("Right", Chr(34) & "right" & Chr(34))
+        dctLegendJustification.Add("Left", Chr(34) & "left" & Chr(34))
+        dctLegendJustification.Add("Center", Chr(34) & "centre" & Chr(34))
+        ucrInputLegendJustification.SetItems(dctLegendJustification)
+        ucrInputLegendJustification.SetRDefault(Chr(34) & "top" & Chr(34))
+
+        urChkLegendPosition.AddToLinkedControls(ucrInputLegendPosition, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkLegendBox.AddToLinkedControls(ucrInputLegendBox, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        urChkLegendBoxJust.AddToLinkedControls(ucrInputLegendBoxJust, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkLegendDirection.AddToLinkedControls(ucrInputLegendDirection, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkLegendJustification.AddToLinkedControls(ucrInputLegendJustification, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
     End Sub
 
     Public Sub SetRCode(clsBaseOperator As ROperator, clsNewThemeFunction As RFunction, dctNewThemeFunctions As Dictionary(Of String, RFunction), Optional bReset As Boolean = False)
@@ -92,6 +130,8 @@ Public Class sdgThemes
         Dim clsYElementTitle As New RFunction
         Dim clsXTopElementTitle As New RFunction
         Dim clsYRightElementTitle As New RFunction
+        Dim clsElementLegendText As New RFunction
+        Dim clsElementLegendTitle As New RFunction
 
         Dim clsXElementLine As New RFunction
         Dim clsElementLineAxes As New RFunction
@@ -102,11 +142,15 @@ Public Class sdgThemes
         Dim clsElementLineXAxis As New RFunction
         Dim clsElementLineYAxis As New RFunction
 
+        Dim clsElementLegendBackground As New RFunction
+        Dim clsElementLegendBoxBackground As New RFunction
+        Dim clsElementLegendtKey As New RFunction
+
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
-        clsThemeFunction = clsNewThemeFunction
         clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=15)
+        clsThemeFunction = clsNewThemeFunction
 
         dctThemeFunctions = dctNewThemeFunctions
         dctThemeFunctions.TryGetValue("axis.text", clsElementTickText)
@@ -114,6 +158,9 @@ Public Class sdgThemes
         dctThemeFunctions.TryGetValue("axis.text.y", clsYElementText)
         dctThemeFunctions.TryGetValue("axis.text.x.top", clsXTopElementText)
         dctThemeFunctions.TryGetValue("axis.text.y.right", clsYRightElementText)
+
+        dctThemeFunctions.TryGetValue("legend.text", clsElementLegendText)
+        dctThemeFunctions.TryGetValue("legend.title", clsElementLegendTitle)
 
         dctThemeFunctions.TryGetValue("axis.title", clsXElementTitleText)
         dctThemeFunctions.TryGetValue("axis.title.x", clsXElementTitle)
@@ -128,6 +175,12 @@ Public Class sdgThemes
         dctThemeFunctions.TryGetValue("axis.line.y", clsElementLineYAxis)
         dctThemeFunctions.TryGetValue("axis.ticks", clsElementTickAxes)
         dctThemeFunctions.TryGetValue("axis.line", clsElementLineAxes)
+
+
+        dctThemeFunctions.TryGetValue("legend.background", clsElementLegendBackground)
+        dctThemeFunctions.TryGetValue("legend.box.background", clsElementLegendBoxBackground)
+        dctThemeFunctions.TryGetValue("legend.key", clsElementLegendtKey)
+        ' dctThemeFunctions.TryGetValue("legend.background", clsElementLineAxes)
 
         ucrTickMarksXAxis.SetRCodeForControl("axis.ticks.x", clsXElementLine, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
         ucrTickMarksYAxis.SetRCodeForControl("axis.ticks.y", clsYElementLine, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
@@ -148,24 +201,63 @@ Public Class sdgThemes
         ucrThemeTitleYAxis.SetRCodeForControl("axis.title.y", clsYElementTitle, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
         ucrThemeTitleYRightAxis.SetRCodeForControl("axis.title.y.right", clsYRightElementTitle, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
-        'AddRemoveElementParameters()
+        ucrLegendTitle.SetRCodeForControl("legend.title", clsElementLegendTitle, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrLegendText.SetRCodeForControl("legend.text", clsElementLegendText, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrLegendBackground.SetRCodeForControl("legend.background", clsElementLegendBackground, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrLegendBoxBackground.SetRCodeForControl("legend.box.background", clsElementLegendBoxBackground, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrLegendKey.SetRCodeForControl("legend.key", clsElementLegendtKey, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+
+
+        urChkLegendPosition.SetRCode(clsThemeFunction, bReset)
+        ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset)
+
+        ucrChkLegendBox.SetRCode(clsThemeFunction, bReset)
+        ucrInputLegendBox.SetRCode(clsThemeFunction, bReset)
+
+        urChkLegendBoxJust.SetRCode(clsThemeFunction, bReset)
+        ucrInputLegendBoxJust.SetRCode(clsThemeFunction, bReset)
+
+        ucrChkLegendDirection.SetRCode(clsThemeFunction, bReset)
+        ucrInputLegendDirection.SetRCode(clsThemeFunction, bReset)
+
+        ucrChkLegendJustification.SetRCode(clsThemeFunction, bReset)
+        ucrInputLegendJustification.SetRCode(clsThemeFunction, bReset)
+        AddRemoveElementParameters()
     End Sub
 
-    'Private Sub AddRemoveElementParameters()
-    '    If ucrChkAngle.Checked OrElse ucrChkHjust.Checked OrElse ucrChkLineHeight.Checked OrElse ucrChkSize.Checked OrElse ucrChkVjust.Checked OrElse ucrChkColour.Checked OrElse ucrChkFace.Checked OrElse ucrChkFamily.Checked Then
-    '        clsThemeFunction.AddParameter("axis.text.x", clsRFunctionParameter:=clsElementText)
-    '        clsThemeFunction.AddParameter("axis.text.y", clsRFunctionParameter:=clsElementText)
-    '        clsThemeFunction.AddParameter("axis.ticks.y", clsRFunctionParameter:=clsElementLine)
-    '        clsThemeFunction.AddParameter("axis.ticks.x", clsRFunctionParameter:=clsElementLine)
+    Private Sub AddRemoveElementParameters()
+        'If ucrChkLegendBox.Checked Then
+        '    clsThemeFunction.AddParameter("legend.box")
+        'Else
+        '    clsThemeFunction.RemoveParameterByName("legend.box")
+        'End If
 
-    '    Else
-    '        clsThemeFunction.RemoveParameterByName("axis.text.x")
-    '        clsThemeFunction.RemoveParameterByName("axis.text.y")
-    '        clsThemeFunction.RemoveParameterByName("axis.ticks.y")
-    '        clsThemeFunction.RemoveParameterByName("axis.ticks.x")
-    '    End If
-    '    AddRemoveTheme()
-    'End Sub
+        'If ucrChkLegendDirection.Checked Then
+        '    clsThemeFunction.AddParameter("legend.direction")
+        'Else
+        '    clsThemeFunction.RemoveParameterByName("legend.direction")
+        'End If
+
+        'If ucrChkLegendJustification.Checked Then
+        '    clsThemeFunction.AddParameter("legend.justification")
+        'Else
+        '    clsThemeFunction.RemoveParameterByName("legend.justification")
+        'End If
+
+        'If urChkLegendBoxJust.Checked Then
+        '    clsThemeFunction.AddParameter("legend.box.just")
+        'Else
+        '    clsThemeFunction.RemoveParameterByName("legend.box.just")
+        'End If
+
+        'If urChkLegendPosition.Checked Then
+        '    clsThemeFunction.AddParameter("legend.position")
+        'Else
+        '    clsThemeFunction.RemoveParameterByName("legend.position")
+        'End If
+
+        AddRemoveTheme()
+    End Sub
 
     Private Sub AddRemoveTheme()
         If clsThemeFunction.iParameterCount > 0 Then
@@ -175,4 +267,7 @@ Public Class sdgThemes
         End If
     End Sub
 
+    Private Sub ElementLegendControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLegendBox.ControlValueChanged, ucrChkLegendDirection.ControlValueChanged, ucrChkLegendJustification.ControlValueChanged, urChkLegendBoxJust.ControlValueChanged, urChkLegendPosition.ControlValueChanged
+        AddRemoveElementParameters()
+    End Sub
 End Class
