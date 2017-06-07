@@ -96,6 +96,7 @@ Public Class ucrGeom
         clsGlobalAesFunction = clsNewGlobalAesFunc
         clsLocalAesFunction = clsNewLocalAes
         clsGgplotFunction = clsNewGgplotFunction
+        strGlobalDataFrame = strDataframe
     End Sub
 
     Public Overridable Sub SetGeomFunction(clsTempGeomFunc As RFunction, Optional bReset As Boolean = False)

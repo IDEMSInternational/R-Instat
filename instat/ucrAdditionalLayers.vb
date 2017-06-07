@@ -86,7 +86,7 @@ Public Class ucrAdditionalLayers
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsNewGeomFunction, clsNewGlobalAesFunc:=clsGgplotAesFunction, clsNewLocalAes:=clsNewLocalAesFunction, bFixGeom:=False, strDataframe:=strGlobalDataFrame, bApplyAesGlobally:=(bSetGlobalIsDefault AndAlso lstLayers.Items.Count = 0))
         ParentForm.SendToBack()
         sdgLayerOptions.ShowDialog()
-        strGlobalDataFrame = sdgLayerOptions.strGlobalDataFrame
+        strGlobalDataFrame = sdgLayerOptions.GetGlobalDataFrame()
         AddLayers(clsNewGeomFunction.strRCommand)
     End Sub
 
