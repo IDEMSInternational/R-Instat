@@ -45,7 +45,7 @@ Public Class dlgRandomSample
         ucrSampleSize.SetDataFrameSelector(ucrSelectorRandomSamples)
         ucrNudNumberOfSamples.SetMinMax(1, Integer.MaxValue)
         ucrSelectorRandomSamples.bUseCurrentFilter = False
-
+        ucrDistWithParameters.ucrInputDistributions.SetDropDownStyleAsNonEditable()
         ucrChkSetSeed.SetText("Set Seed")
         ucrChkSetSeed.AddFunctionNamesCondition(False, "set.seed")
         ucrChkSetSeed.AddToLinkedControls(ucrNudSeed, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=5)
