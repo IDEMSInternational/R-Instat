@@ -94,6 +94,7 @@ Public Class ucrCore
     Public Overridable Sub UpdateControl(Optional bReset As Boolean = False)
         Dim clsTempRCode As RCodeStructure
         Dim clsTempRParameter As RParameter
+        Dim clsTempCloneParameter As RParameter
 
         For i As Integer = 0 To lstAllRCodes.Count - 1
             clsTempRCode = lstAllRCodes(i)
@@ -109,7 +110,11 @@ Public Class ucrCore
                             'Not an issue if controls do not need to share parameters
                             'This is needed so that if this parameter is contained in functions in multiple dialogs,
                             'the parameter only changes the functions in the currently open dialog
-                            SetParameter(New RParameter(GetParameter(i).strArgumentName), i)
+                            clsTempCloneParameter = GetParameter(i).Clone()
+                            If Not bUpdateRCodeFromControl Then
+                                clsTempCloneParameter.ClearAllArguments()
+                            End If
+                            SetParameter(clsTempCloneParameter, i)
 
                             'If the control has a default state then it's linked control will set the value and we should not set to R default
                             If objDefaultState Is Nothing Then
