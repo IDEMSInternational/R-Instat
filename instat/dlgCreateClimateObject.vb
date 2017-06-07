@@ -33,7 +33,7 @@ Public Class dlgCreateClimateObject
     End Sub
 
     Private Sub InitialiseDialog()
-        frmMain.clsRLink.CreateNewClimateObject()
+        'frmMain.clsRLink.CreateNewClimateObject()
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strClimateObject & "$import_data")
     End Sub
     Private Sub SetDefaults()

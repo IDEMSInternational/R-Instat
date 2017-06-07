@@ -35,57 +35,57 @@ Partial Class dlgSplitText
         '
         'lblSelectedFactor
         '
-        Me.lblSelectedFactor.Location = New System.Drawing.Point(271, 37)
+        Me.lblSelectedFactor.AutoSize = True
+        Me.lblSelectedFactor.Location = New System.Drawing.Point(252, 45)
         Me.lblSelectedFactor.Name = "lblSelectedFactor"
-        Me.lblSelectedFactor.Size = New System.Drawing.Size(140, 23)
+        Me.lblSelectedFactor.Size = New System.Drawing.Size(85, 13)
         Me.lblSelectedFactor.TabIndex = 1
         Me.lblSelectedFactor.Tag = "Selected_Factor"
         Me.lblSelectedFactor.Text = "Selected Factor:"
         '
         'lblSplitBy
         '
-        Me.lblSplitBy.Location = New System.Drawing.Point(271, 81)
+        Me.lblSplitBy.AutoSize = True
+        Me.lblSplitBy.Location = New System.Drawing.Point(252, 88)
         Me.lblSplitBy.Name = "lblSplitBy"
-        Me.lblSplitBy.Size = New System.Drawing.Size(140, 23)
+        Me.lblSplitBy.Size = New System.Drawing.Size(44, 13)
         Me.lblSplitBy.TabIndex = 3
         Me.lblSplitBy.Tag = ""
         Me.lblSplitBy.Text = "Split by:"
         '
         'lblNumberofPiecesToReturn
         '
-        Me.lblNumberofPiecesToReturn.Location = New System.Drawing.Point(269, 131)
+        Me.lblNumberofPiecesToReturn.AutoSize = True
+        Me.lblNumberofPiecesToReturn.Location = New System.Drawing.Point(252, 138)
         Me.lblNumberofPiecesToReturn.Name = "lblNumberofPiecesToReturn"
-        Me.lblNumberofPiecesToReturn.Size = New System.Drawing.Size(149, 23)
+        Me.lblNumberofPiecesToReturn.Size = New System.Drawing.Size(141, 13)
         Me.lblNumberofPiecesToReturn.TabIndex = 5
         Me.lblNumberofPiecesToReturn.Tag = "Number_of_Pieces_to_Return"
         Me.lblNumberofPiecesToReturn.Text = "Number of Pieces to Return:"
         '
         'ucrInputPattern
         '
-        Me.ucrInputPattern.bAddRemoveParameter = True
-        Me.ucrInputPattern.bChangeParameterValue = True
+        Me.ucrInputPattern.AddQuotesIfUnrecognised = True
         Me.ucrInputPattern.IsReadOnly = False
-        Me.ucrInputPattern.Location = New System.Drawing.Point(272, 96)
+        Me.ucrInputPattern.Location = New System.Drawing.Point(252, 103)
         Me.ucrInputPattern.Name = "ucrInputPattern"
         Me.ucrInputPattern.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputPattern.TabIndex = 4
         '
         'ucrReceiverSplitTextColumn
         '
-        Me.ucrReceiverSplitTextColumn.bAddRemoveParameter = True
-        Me.ucrReceiverSplitTextColumn.bChangeParameterValue = True
         Me.ucrReceiverSplitTextColumn.frmParent = Me
-        Me.ucrReceiverSplitTextColumn.Location = New System.Drawing.Point(272, 53)
+        Me.ucrReceiverSplitTextColumn.Location = New System.Drawing.Point(252, 60)
         Me.ucrReceiverSplitTextColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSplitTextColumn.Name = "ucrReceiverSplitTextColumn"
         Me.ucrReceiverSplitTextColumn.Selector = Nothing
         Me.ucrReceiverSplitTextColumn.Size = New System.Drawing.Size(137, 20)
+        Me.ucrReceiverSplitTextColumn.strNcFilePath = ""
         Me.ucrReceiverSplitTextColumn.TabIndex = 2
+        Me.ucrReceiverSplitTextColumn.ucrSelector = Nothing
         '
         'ucrSelectorSplitTextColumn
         '
-        Me.ucrSelectorSplitTextColumn.bAddRemoveParameter = True
-        Me.ucrSelectorSplitTextColumn.bChangeParameterValue = True
         Me.ucrSelectorSplitTextColumn.bShowHiddenColumns = False
         Me.ucrSelectorSplitTextColumn.bUseCurrentFilter = True
         Me.ucrSelectorSplitTextColumn.Location = New System.Drawing.Point(10, 10)
@@ -96,29 +96,25 @@ Partial Class dlgSplitText
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 230)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 227)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 8
         '
         'ucrNudPieces
         '
-        Me.ucrNudPieces.bAddRemoveParameter = True
-        Me.ucrNudPieces.bChangeParameterValue = True
         Me.ucrNudPieces.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPieces.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPieces.Location = New System.Drawing.Point(274, 153)
+        Me.ucrNudPieces.Location = New System.Drawing.Point(252, 154)
         Me.ucrNudPieces.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudPieces.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPieces.Name = "ucrNudPieces"
-        Me.ucrNudPieces.Size = New System.Drawing.Size(41, 20)
+        Me.ucrNudPieces.Size = New System.Drawing.Size(44, 20)
         Me.ucrNudPieces.TabIndex = 6
         Me.ucrNudPieces.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrSaveColumn
         '
-        Me.ucrSaveColumn.bAddRemoveParameter = True
-        Me.ucrSaveColumn.bChangeParameterValue = True
         Me.ucrSaveColumn.Location = New System.Drawing.Point(10, 200)
         Me.ucrSaveColumn.Name = "ucrSaveColumn"
         Me.ucrSaveColumn.Size = New System.Drawing.Size(305, 24)
@@ -128,7 +124,7 @@ Partial Class dlgSplitText
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(423, 288)
+        Me.ClientSize = New System.Drawing.Size(419, 285)
         Me.Controls.Add(Me.ucrSaveColumn)
         Me.Controls.Add(Me.ucrNudPieces)
         Me.Controls.Add(Me.ucrInputPattern)
@@ -146,6 +142,7 @@ Partial Class dlgSplitText
         Me.Tag = "Split_Text_Column"
         Me.Text = "Split Text Column"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

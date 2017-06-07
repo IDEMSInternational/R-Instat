@@ -45,7 +45,8 @@ Public Class dlgImportDataset
         clsReadXL = New RFunction
         'clsTempWorkbookImport = New RFunction
         'clsTempExcelPreview = New RFunction
-        ucrBase.clsRsyntax.SetFunction("rio::import")
+        ucrBase.clsRsyntax.SetPackageName("rio")
+        ucrBase.clsRsyntax.SetFunction("import")
         clsImportRDS.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_RDS")
         bFirstLoad = True
         bFromLibrary = False
@@ -235,7 +236,8 @@ Public Class dlgImportDataset
             lblName.Hide()
             'ucrInputName.SetName(strFileName, bSilent:=True)
         ElseIf strFileExt = ".csv" Then
-            clsReadCSV.SetRCommand("rio::import")
+            clsReadCSV.SetPackageName("rio")
+            clsReadCSV.SetRCommand("import")
             clsReadCSV.AddParameter("file", Chr(34) & strFilePath & Chr(34))
             ucrBase.clsRsyntax.SetBaseRFunction(clsReadCSV)
             grpRDS.Hide()
@@ -248,7 +250,8 @@ Public Class dlgImportDataset
             RefreshFilePreview()
             ucrInputName.Focus()
         ElseIf strFileExt = ".xlsx" OrElse strFileExt = ".xls" Then
-            clsReadXL.SetRCommand("rio::import")
+            clsReadXL.SetPackageName("rio")
+            clsReadXL.SetRCommand("import")
             clsReadXL.AddParameter("file", Chr(34) & strFilePath & Chr(34))
             ucrBase.clsRsyntax.SetBaseRFunction(clsReadXL)
             grpCSV.Hide()
@@ -635,11 +638,13 @@ Public Class dlgImportDataset
         Dim clsGetSheetNames As New RFunction
         'Dim clsGetNamedRegions As New RFunction
 
+        clsGetSheetNames.SetPackageName("readxl")
         clsGetSheetNames.SetRCommand("excel_sheets")
         clsGetSheetNames.AddParameter("path", Chr(34) & ucrInputFilePath.GetText() & Chr(34))
         'not needed now since not using openxlsx
         ' temporary solutions until issue with getNamedRegions is resolved
         ' https://github.com/awalker89/openxlsx/issues/174
+        'clsGetNamedRegions.SetPackageName("openxlsx")
         'clsGetNamedRegions.SetRCommand("getNamedRegions")
         'clsGetNamedRegions.SetRCommand("regmatches")
         'clsGetNamedRegions.AddParameter("xlsxFile", strTempWorkbookName)
