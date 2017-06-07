@@ -99,8 +99,8 @@ Public Class dlgClimSoft
         bResetSubdialog = True
     End Sub
 
-    Public Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    Private Sub SetRCodeForControls(bReset As Boolean)
+         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
