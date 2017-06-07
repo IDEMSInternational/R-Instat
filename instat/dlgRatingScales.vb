@@ -101,22 +101,25 @@ Public Class dlgRatingScales
         clsSjpStackFrq = New RFunction
         ChangeOfParameters()
         ucrSelectorRatingScale.Reset()
-        NumberOfLevels()
         clsSjplikert.SetPackageName("sjPlot")
         clsSjplikert.SetRCommand("sjp.likert")
-        clsSjplikert.AddParameter("catcount", "NULL")
+        ' clsSjplikert.AddParameter("catcount", 1)
         'clsSjplikert.AddParameter("cat.neutral")
         clsSjplikert.AddParameter("coord.flip", "FALSE")
 
         clsSjpStackFrq.SetPackageName("sjPlot")
         clsSjpStackFrq.SetRCommand("sjp.stackfrq")
+        clsSjtStackFrq.AddParameter("show.n", "TRUE")
         clsSjpStackFrq.AddParameter("coord.flip", "FALSE")
 
         clsSjtStackFrq.SetPackageName("sjPlot")
         clsSjtStackFrq.SetRCommand("sjt.stackfrq")
         clsSjtStackFrq.AddParameter("sort.frq", "NULL")
         clsSjtStackFrq.AddParameter("show.n", "TRUE")
-
+        clsSjtStackFrq.AddParameter("show.na", "TRUE")
+        clsSjtStackFrq.AddParameter("string.na", "NA")
+        clsSjtStackFrq.AddParameter("string.total", "N")
+        clsSjtStackFrq.AddParameter("altr.row.col", "TRUE")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjtStackFrq)
     End Sub
@@ -257,8 +260,13 @@ Public Class dlgRatingScales
         End If
     End Sub
 
-    Private Sub ucrNudNeutralLevel_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudNeutralLevel.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrReceiverOrderedFactors.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged
+    Private Sub ucrNudNeutralLevel_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudNeutralLevel.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrReceiverOrderedFactors.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrPnlGraphType.ControlContentsChanged
         TestOkEnabled()
+        If ucrReceiverOrderedFactors.lstSelectedVariables.Items.Count > 1 Then
+            ucrChkNumberOfCategories.Checked = False
+        Else
+            ucrChkNumberOfCategories.Checked = True
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
