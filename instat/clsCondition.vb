@@ -9,8 +9,13 @@
     Private lstValues As List(Of String) = New List(Of String)
     Private bIsPositive As Boolean = True
 
-    Public Sub SetParameterPresentName(strParamName As String, Optional bNewIsPositive As Boolean = True)
-        strParameterName = strParamName
+    Public Sub SetParameterPresentNames(strParamName As String, Optional bNewIsPositive As Boolean = True)
+        SetParameterPresentNames(New List(Of String)({strParamName}), bNewIsPositive)
+    End Sub
+
+    Public Sub SetParameterPresentNames(lstParamName As List(Of String), Optional bNewIsPositive As Boolean = True)
+        strParameterName = ""
+        lstValues = lstParamName
         bIsParameterPresent = True
         bIsParameterValues = False
         bIsFunctionNames = False
@@ -92,9 +97,9 @@
             Else
                 clsTempParam = clsRCode.GetParameter(strParameterName)
             End If
-            Return (clsTempParam IsNot Nothing AndAlso clsTempParam.bIsString AndAlso clsTempParam.strArgumentValue IsNot Nothing AndAlso (bIsPositive = lstValues.Contains(clsTempParam.strArgumentValue)))
+            Return (bIsPositive = (clsTempParam IsNot Nothing AndAlso clsTempParam.bIsString AndAlso clsTempParam.strArgumentValue IsNot Nothing AndAlso lstValues.Contains(clsTempParam.strArgumentValue)))
         ElseIf bIsParameterPresent Then
-            Return (bIsPositive = clsRCode.ContainsParameter(strParameterName))
+            Return (bIsPositive = lstValues.Any(Function(x) clsRCode.ContainsParameter(x)))
         ElseIf bIsFunctionNames Then
             If TypeOf clsRCode Is RFunction Then
                 clsTempFunc = CType(clsRCode, RFunction)
