@@ -110,8 +110,7 @@ Public Class dlgExtremesClimatic
 
         ucrSelectorClimaticExtremes.Reset()
         ucrInputThresholdValue.Reset()
-        ucrInputSave.SetName("Extreme")
-        ucrInputSave.Reset()
+        'ucrInputSave.SetName("Extreme")
 
         clsPeaksFilterFunction.SetRCommand("instat_calculation$new")
         clsPeaksFilterFunction.SetAssignTo("peak_filter")
@@ -230,8 +229,10 @@ Public Class dlgExtremesClimatic
     Private Sub ucrPnlMaxMin_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMaxMin.ControlValueChanged
         If rdoMax.Checked Then
             clsMinMaxFuncExp.SetRCommand("max")
+            ucrInputSave.SetName("Max")
         ElseIf rdoMin.Checked Then
             clsMinMaxFuncExp.SetRCommand("min")
+            ucrInputSave.SetName("Min")
         End If
         SetMinMaxSummaryParams()
     End Sub
