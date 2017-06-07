@@ -84,6 +84,9 @@ Public Class UcrPanel
             Else
                 MsgBox("Developer error: Cannot set the value of " & Name & " because cannot convert value of object to radio button.")
             End If
+        Else
+            'If no value reset to a default value
+            dctRadioButtonValues.Keys(0).Checked = True
         End If
     End Sub
 
