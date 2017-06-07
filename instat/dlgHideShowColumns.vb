@@ -34,14 +34,6 @@ Public Class dlgHideShowColumns
         autoTranslate(Me)
     End Sub
 
-    Private Sub TestOKEnabled()
-        If ucrSelectorForHiddenColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
-    End Sub
-
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 167
 
@@ -58,16 +50,15 @@ Public Class dlgHideShowColumns
         ucrReceiverHiddenColumns.bExcludeFromSelector = True
     End Sub
 
-    Private Sub SetHiddenColumnsInReceiver()
-        ucrReceiverHiddenColumns.AddItemsWithMetadataProperty(ucrSelectorForHiddenColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Is_Hidden", {"TRUE"})
-    End Sub
-
     Private Sub SetDefaults()
         Dim clsHiddenColumns = New RFunction
+
         ucrSelectorForHiddenColumns.Reset()
         SetHiddenColumnsInReceiver()
-        clsHiddenColumns.AddParameter("col_names", "c()")
+
         clsHiddenColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_hidden_columns")
+        clsHiddenColumns.AddParameter("col_names", "c()")
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsHiddenColumns)
     End Sub
 
@@ -75,10 +66,22 @@ Public Class dlgHideShowColumns
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
+    Private Sub TestOKEnabled()
+        If ucrSelectorForHiddenColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
+    End Sub
+
+    Private Sub SetHiddenColumnsInReceiver()
+        ucrReceiverHiddenColumns.AddItemsWithMetadataProperty(ucrSelectorForHiddenColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text, "Is_Hidden", {"TRUE"})
     End Sub
 
     Private Sub ucrSelectorForHiddenColumns_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForHiddenColumns.ControlContentsChanged
