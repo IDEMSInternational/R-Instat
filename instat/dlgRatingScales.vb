@@ -209,7 +209,6 @@ Public Class dlgRatingScales
         End If
     End Sub
 
-
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         If rdoLikert.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjplikert)
@@ -275,10 +274,11 @@ Public Class dlgRatingScales
         Else
             ucrChkNumberOfCategories.Checked = True
         End If
-    End Sub
-
-    Private Sub ucrChkFlip_Load(sender As Object, e As EventArgs) Handles ucrChkFlip.Load
-
+        If rdoTable.Checked Then
+            ucrReceiverOrderedFactors.SetDataType("numeric")
+        Else
+            ucrReceiverOrderedFactors.SetDataType("factor")
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -286,7 +286,8 @@ Public Class dlgRatingScales
         SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
-    Private Sub ucrPnlType_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlType.ControlContentsChanged, ucrPnlSjpLikert.ControlContentsChanged
+
+    Private Sub ucrPnlGraphType_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlGraphType.ControlContentsChanged, ucrPnlSjpLikert.ControlContentsChanged
         ChangeOfParameters()
     End Sub
     Private Sub ucrChkWeights_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWeights.ControlValueChanged
