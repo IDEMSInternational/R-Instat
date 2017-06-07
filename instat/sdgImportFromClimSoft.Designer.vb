@@ -100,7 +100,7 @@ Partial Class sdgImportFromClimSoft
         Me.ucrInputUserName.Location = New System.Drawing.Point(103, 102)
         Me.ucrInputUserName.Name = "ucrInputUserName"
         Me.ucrInputUserName.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputUserName.TabIndex = 7
+        Me.ucrInputUserName.Thttps://github.com/stevekogo/Instat/pull/393/conflict?name=instat%252FsdgImportFromClimSoft.Designer.vb&ancestor_oid=699638e264475760202e9b92515aa8cbf93e16e1&base_oid=b1b3e95ccc54969c96e89f35047659a9c46ba65c&head_oid=f933d5b1aeab0f0f7becc5eedbe5df88c87ebb29abIndex = 7
         '
         'lblUserName
         '

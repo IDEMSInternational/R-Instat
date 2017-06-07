@@ -78,7 +78,6 @@ Public Class dlgClimSoft
         clsRDatabaseConnect = New RFunction
         clsHasConnection = New RFunction
         clsRDatabaseDisconnect = New RFunction
-
         ucrReceiverMultipleStations.SetMeAsReceiver()
         ucrInputStartDate.SetName("")
         ucrInputEndDate.SetName("")
@@ -101,7 +100,7 @@ Public Class dlgClimSoft
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
