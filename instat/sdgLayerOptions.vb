@@ -59,15 +59,15 @@ Public Class sdgLayerOptions
     End Sub
 
 
-    Public Sub SetupLayer(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bApplyAesGlobally As Boolean = True, Optional bIgnoreGlobalAes As Boolean = False, Optional iNumVariablesForGeoms As Integer = -1, Optional clsTempLocalAes As RFunction = Nothing)
-        If clsTempGeomFunc Is Nothing Then
-            clsTempGeomFunc = New RFunction
+    Public Sub SetupLayer(clsTempGgPlot As RFunction, clsNewGeomFunc As RFunction, clsNewGlobalAesFunc As RFunction, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bApplyAesGlobally As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional clsNewLocalAes As RFunction = Nothing, Optional bReset As Boolean = False)
+        If clsNewGeomFunc Is Nothing Then
+            clsNewGeomFunc = New RFunction
         End If
-        clsGeomFunction = clsTempGeomFunc
-        clsAesFunction = clsTempAesFunc
+        clsGeomFunction = clsNewGeomFunc
+        clsAesFunction = clsNewGlobalAesFunc
         clsGgplotFunction = clsTempGgPlot
-        ucrGeomWithAes.Setup(clsTempGgPlot, clsTempGeomFunc, clsTempAesFunc, bFixAes, bFixGeom, strDataframe, bApplyAesGlobally, bIgnoreGlobalAes, iNumVariablesForGeoms, clsTempLocalAes)
-        ucrLayerParameter.Setup(clsTempGgPlot, clsTempGeomFunc, clsTempAesFunc, bFixAes, bFixGeom, strDataframe, bApplyAesGlobally, bIgnoreGlobalAes, iNumVariablesForGeoms, clsTempLocalAes) 'Don't really need to give all parameters through as this function just calls the mother Setup from ucrGeom who doesn't use some of them which are optional, such as clsTempLocalAes...
+        'ucrGeomWithAes.Setup(clsTempGeomFunc, clsTempAesFunc, bFixGeom, strDataframe, bApplyAesGlobally, bIgnoreGlobalAes, iNumVariablesForGeoms, clsTempLocalAes)
+        'ucrLayerParameter.Setup(clsTempGeomFunc, clsTempAesFunc, bFixAes, bFixGeom, strDataframe, bApplyAesGlobally, bIgnoreGlobalAes, iNumVariablesForGeoms, clsTempLocalAes) 'Don't really need to give all parameters through as this function just calls the mother Setup from ucrGeom who doesn't use some of them which are optional, such as clsTempLocalAes...
     End Sub
 
     Public Function TestForOKEnabled() As Boolean

@@ -28,7 +28,11 @@ Public Class UcrGeomListWithParameters
     Public Event DataFrameChanged()
     'clsGeomAesFunction stores the value (aes function) of the local mapping (of this particular layer). It is used as parameter in sdgLayerOptions.clsGeomFunction.
     Public bAddToLocalAes As Boolean = True
-    Public bCurrentFixAes As Boolean = True
+    ' Intermediate aes function which is the combination of the current global aes and the local aes.
+    ' This is the function linked to the receivers with it updates and will update from
+    ' This is needed to prevent real time changes to global or local aes because this can change e.g. when apply globally is checked
+    ' When returning from this control, the intermediate aes with update the global and local aes appropriately
+    Private clsInterAesFunction As New RFunction
 
     Public Sub New()
 
@@ -46,6 +50,8 @@ Public Class UcrGeomListWithParameters
     Private Sub UcrGeomListWithParameters_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             SetParameters()
+            clsInterAesFunction.SetPackageName("ggplot2")
+            clsInterAesFunction.SetRCommand("aes")
             'This one is called when the geom is changed, which is apparently the case when the Layer is loaded (first thing that happens). Left in for security but could be taken out.
             bFirstLoad = False
         End If
@@ -81,16 +87,11 @@ Public Class UcrGeomListWithParameters
     Public Overrides Sub Setup(clsNewGeomFunc As RFunction, clsNewGlobalAesFunc As RFunction, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bApplyAesGlobally As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional clsNewLocalAes As RFunction = Nothing, Optional bReset As Boolean = False)
         'See ucrAdditionalLayers and Specific Plots dlg to see how the SetUp Parameters are chosen within the sdgLayerOptions.SetupLayer call.
         MyBase.Setup(clsNewGeomFunc, clsNewGlobalAesFunc, bFixGeom, strDataframe, bApplyAesGlobally, iNumVariablesForGeoms, clsNewLocalAes, bReset)
-        strGlobalDataFrame = strDataframe
-        If clsNewLocalAes IsNot Nothing Then
-            clsLocalAesFunction = clsNewLocalAes
-        Else
-            clsLocalAesFunction = New RFunction
-            clsLocalAesFunction.SetRCommand("aes")
-        End If
 
-        'ucrGeomWithAesSelector.Reset() 'Warning: Not sure this is necessary anymore... Testing will confirm.
+        ' This might stay as data frame depends on global/local option and therefore can't be linked to a function
         InitialiseSelectedDataFrame()
+
+        SetInterAes(bReset)
 
         'Using the values of the two relevant parameters, the two following lines determine whether the chkBoxes ApplyToAllLayers and IgnoreGlobalAes should be ticked. 
         'Introduced a safety net: these can't be ticked at the same time, in that case an error has been made in the code and a message is sent to the user.
@@ -102,65 +103,109 @@ Public Class UcrGeomListWithParameters
         chkApplyOnAllLayers.Checked = bApplyAesGlobally
         chkIgnoreGlobalAes.Checked = bIgnoreGlobalAes 'Note: raises the event check changed if the value has indeed changed.
 
-
-
-
-
-        bCurrentFixAes = bFixAes 'Warning/Question/Task: this is not flexible enough. Some of the aesthetics are set in the options. They cannot be editted on the main, however when coming back to options these are fixed and so cannot be editted anywhere anymore. Would need to be able to choose which aesthetics among a Layer should be fixed maybe.
-        'SetAes needs to be called after the IgnoreGlobalAes has been setup as it determines whether the global aes are written in the rceivers or not.
-        SetAes(bCurrentFixAes)
+        SetAes()
         'Warning: SetAes is called three times when a layer is created... one in the load, one in the setup, one when geom is set, ... 
     End Sub
 
-    Private Function LocalAndGlobalDataFramesAreDifferent() As Boolean
-        'This methods checks whether the dataframe used for this layer is different from the global dataframe. If they are different, then chkIgnoreGlobalAes is checked. See UcrSelector_DataFrameChanged. Might also be used to print global aes in red when dataframes are different.
-        Dim bValue As Boolean = False
-        If strGlobalDataFrame <> "" AndAlso ucrGeomWithAesSelector.strCurrentDataFrame <> strGlobalDataFrame Then 'Warning: if the CurrentDataframe is chosen appropriately, which is the case thanks to InitialiseSelectedDataFrame
-            bValue = True
-        End If
-        Return bValue
-    End Function
+    Private Sub SetInterAes(Optional bReset As Boolean = False)
+        Dim iFirstEmptyAes As Integer = 0
+        Dim bAesFound As Boolean = False
+        Dim strCurrGeomAesParamName As String
+
+        'Clear code so receivers don't update until intermediate function is set
+        ClearReceiversCodeAndParameter()
+        For i = 0 To clsCurrGeom.clsAesParameters.Count - 1
+            strCurrGeomAesParamName = clsCurrGeom.clsAesParameters(i).strAesParameterName
+            lstAesParameterReceivers(i).SetParameter(New RParameter(strCurrGeomAesParamName))
+            'Task: print global aesthetics in blue within the receivers and perhaps global aesthetics inherited from another dataframe in red ?
+            'When IgnoreGlobalAes is not checked, we want the applicable global aesthetics to appear in the intermediate function.
+            If Not chkIgnoreGlobalAes.Checked Then
+                'For some geoms e.g. geom_line, when an aes is not filled in (usually x or y), ggplot syntax requires the aes to be set to "" e.g. x = "". 
+                'We do not need to copy this to the intermediate aes as they are affectively empty
+                If clsGlobalAesFunction.ContainsParameter(strCurrGeomAesParamName) AndAlso Not clsGlobalAesFunction.GetParameter(strCurrGeomAesParamName).strArgumentValue = Chr(34) & Chr(34) Then
+                    bAesFound = True
+                    clsInterAesFunction.AddParameter(clsGlobalAesFunction.GetParameter(strCurrGeomAesParamName).Clone())
+                End If
+                'For Each clsParam In clsGlobalAesFunction.clsParameters
+                '    If clsParam.strArgumentName = lstCurrArguments(i) Then
+                '        If Not ((clsParam.strArgumentName = "x" OrElse clsParam.strArgumentName = "y") AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34)) Then
+                '            lstAesParameterReceivers(i).Add(clsParam.strArgumentValue)
+                '            Exit For
+                '        End If
+                '    End If
+                'Next
+            End If
+            If clsLocalAesFunction.ContainsParameter(strCurrGeomAesParamName) AndAlso Not clsLocalAesFunction.GetParameter(strCurrGeomAesParamName).strArgumentValue = Chr(34) & Chr(34) Then
+                bAesFound = True
+                clsInterAesFunction.AddParameter(clsGlobalAesFunction.GetParameter(strCurrGeomAesParamName).Clone())
+            End If
+
+            'For Each clsParam In clsLocalAesFunction.clsParameters
+            '    If clsParam.strArgumentName = lstCurrArguments(i) Then
+            '        If Not ((clsParam.strArgumentName = "x" OrElse clsParam.strArgumentName = "y") AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34)) Then 'As before, check that x is not mapped to "" before putting in receivers.
+            '            lstAesParameterReceivers(i).Add(clsParam.strArgumentValue)
+            '            lstAesParameterReceivers(i).Enabled = True
+            '            Exit For
+            '        End If
+            '    End If
+            'Next
+            If bAesFound Then
+                iFirstEmptyAes = i
+            End If
+            bAesFound = False
+        Next
+        SetRCodeForReceivers(clsInterAesFunction, bReset)
+    End Sub
+
+    'Private Function LocalAndGlobalDataFramesAreDifferent() As Boolean
+    '    'This methods checks whether the dataframe used for this layer is different from the global dataframe. If they are different, then chkIgnoreGlobalAes is checked. See UcrSelector_DataFrameChanged. Might also be used to print global aes in red when dataframes are different.
+    '    Dim bValue As Boolean = False
+    '    If strGlobalDataFrame <> "" AndAlso ucrGeomWithAesSelector.strCurrentDataFrame <> strGlobalDataFrame Then 'Warning: if the CurrentDataframe is chosen appropriately, which is the case thanks to InitialiseSelectedDataFrame
+    '        bValue = True
+    '    End If
+    '    Return bValue
+    'End Function
 
     Private Sub SetAes()
-        'This function fills in the aesthetic receivers with the appropriate values, starting with the values coming from the global aes (if IgnoreGlobalAes is not chacked) and then in the local aes.
-        Dim bFirstEnabled As Boolean = True
-        Dim iFirstEnabled As Integer = 0
-        bAddToLocalAes = False
-        'We are changing the content of the receivers according to the info in the clsGgplotAesFunction and clsGeomAesFunction. We don't want to change the content of clsGeomAesFunction according to the changed content of the receivers. Hence we set bApplyToLocalAes to False at the beginning of this procedure, then reset it to True at the end (see ucrReceiverParam_WithMeSelectionChanged).
-        For i = 0 To clsCurrGeom.clsAesParameters.Count - 1
-            'Clear the potentially up to date content of the Aesthetics receivers. If the content of lstAesParameterUcr(i) is still relevant, then one of the parameters's name in clsGgplotAesFunction will match lstCurrArguments(i) and the value recovered accordingly.
-            'Warning/Question: when geom is changed, local aes of previous geom are not kept. Is that fine ? Could change the method for layer to remember the previous selection for common aes between the two geoms.
-            'Warning: the order in which the two following are called counts as clearing only operates when ucr is enabled. Not that this sub will always enable all ucr's that were previously disabled.
-            lstAesParameterReceivers(i).Clear()
-            'When IgnoreGlobalAes is checked, we don't want the global aesthetics to appear in the receivers.
-            'Task: print global aesthetics in blue within the receivers and perhaps global aesthetics inherited from another dataframe in red ?
-            If Not chkIgnoreGlobalAes.Checked Then
-                For Each clsParam In clsGlobalAesFunction.clsParameters
-                    If clsParam.strArgumentName = lstCurrArguments(i) Then
-                        'For some geoms like LinePlot, when the x or y aes is not filled, ggplot R syntax requires to set x="". This x="" might be copied into the global aes if the ApplyOnAllLayers is set to true for a BoxPlot Layer. This might be copied from the GgplotAesFunction parameters into the aes receivers by error in subsequent layers.
-                        If Not ((clsParam.strArgumentName = "x" OrElse clsParam.strArgumentName = "y") AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34)) Then
-                            lstAesParameterReceivers(i).Add(clsParam.strArgumentValue)
-                            Exit For
-                        End If
-                    End If
-                Next
-            End If
-            For Each clsParam In clsLocalAesFunction.clsParameters
-                If clsParam.strArgumentName = lstCurrArguments(i) Then
-                    If Not ((clsParam.strArgumentName = "x" OrElse clsParam.strArgumentName = "y") AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34)) Then 'As before, check that x is not mapped to "" before putting in receivers.
-                        lstAesParameterReceivers(i).Add(clsParam.strArgumentValue)
-                        lstAesParameterReceivers(i).Enabled = True
-                        Exit For
-                    End If
-                End If
-            Next
-            If bFirstEnabled AndAlso lstAesParameterReceivers(i).Enabled Then
-                iFirstEnabled = i
-                bFirstEnabled = False
-            End If
-        Next
-        lstAesParameterReceivers(iFirstEnabled).SetMeAsReceiver()
-        bAddToLocalAes = True
+        ''This function fills in the aesthetic receivers with the appropriate values, starting with the values coming from the global aes (if IgnoreGlobalAes is not chacked) and then in the local aes.
+        'Dim bFirstEnabled As Boolean = True
+        'Dim iFirstEnabled As Integer = 0
+        'bAddToLocalAes = False
+        ''We are changing the content of the receivers according to the info in the clsGgplotAesFunction and clsGeomAesFunction. We don't want to change the content of clsGeomAesFunction according to the changed content of the receivers. Hence we set bApplyToLocalAes to False at the beginning of this procedure, then reset it to True at the end (see ucrReceiverParam_WithMeSelectionChanged).
+        'For i = 0 To clsCurrGeom.clsAesParameters.Count - 1
+        '    'Clear the potentially up to date content of the Aesthetics receivers. If the content of lstAesParameterUcr(i) is still relevant, then one of the parameters's name in clsGgplotAesFunction will match lstCurrArguments(i) and the value recovered accordingly.
+        '    'Warning/Question: when geom is changed, local aes of previous geom are not kept. Is that fine ? Could change the method for layer to remember the previous selection for common aes between the two geoms.
+        '    'Warning: the order in which the two following are called counts as clearing only operates when ucr is enabled. Not that this sub will always enable all ucr's that were previously disabled.
+        '    lstAesParameterReceivers(i).Clear()
+        '    'When IgnoreGlobalAes is checked, we don't want the global aesthetics to appear in the receivers.
+        '    'Task: print global aesthetics in blue within the receivers and perhaps global aesthetics inherited from another dataframe in red ?
+        '    If Not chkIgnoreGlobalAes.Checked Then
+        '        For Each clsParam In clsGlobalAesFunction.clsParameters
+        '            If clsParam.strArgumentName = lstCurrArguments(i) Then
+        '                'For some geoms like LinePlot, when the x or y aes is not filled, ggplot R syntax requires to set x="". This x="" might be copied into the global aes if the ApplyOnAllLayers is set to true for a BoxPlot Layer. This might be copied from the GgplotAesFunction parameters into the aes receivers by error in subsequent layers.
+        '                If Not ((clsParam.strArgumentName = "x" OrElse clsParam.strArgumentName = "y") AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34)) Then
+        '                    lstAesParameterReceivers(i).Add(clsParam.strArgumentValue)
+        '                    Exit For
+        '                End If
+        '            End If
+        '        Next
+        '    End If
+        '    For Each clsParam In clsLocalAesFunction.clsParameters
+        '        If clsParam.strArgumentName = lstCurrArguments(i) Then
+        '            If Not ((clsParam.strArgumentName = "x" OrElse clsParam.strArgumentName = "y") AndAlso clsParam.strArgumentValue = Chr(34) & Chr(34)) Then 'As before, check that x is not mapped to "" before putting in receivers.
+        '                lstAesParameterReceivers(i).Add(clsParam.strArgumentValue)
+        '                lstAesParameterReceivers(i).Enabled = True
+        '                Exit For
+        '            End If
+        '        End If
+        '    Next
+        '    If bFirstEnabled AndAlso lstAesParameterReceivers(i).Enabled Then
+        '        iFirstEnabled = i
+        '        bFirstEnabled = False
+        '    End If
+        'Next
+        'lstAesParameterReceivers(iFirstEnabled).SetMeAsReceiver()
+        'bAddToLocalAes = True
     End Sub
 
     Public Sub SetParameters() 'this will set function or aes parameters
@@ -218,7 +263,7 @@ Public Class UcrGeomListWithParameters
         Else 'If the current geom has not been populated, then an error has been made in the code
             MsgBox("Developer Error: the current geom (clsCurrGeom) has not been populated before setting the aes parameters for the ucrGeomListWithAes on the sdgLayerOptions.", MsgBoxStyle.OkOnly)
         End If
-        SetAes(bCurrentFixAes)
+        SetAes()
     End Sub
 
     Public Sub UcrGeomListWithParameters_cboGeomListIndexChanged() Handles Me.GeomChanged
@@ -229,17 +274,17 @@ Public Class UcrGeomListWithParameters
     End Sub
 
     Private Sub ucrReceiverParam_WithMeSelectionChanged(ucrChangedReceiver As ucrReceiverSingle) Handles ucrReceiverParam1.WithMeSelectionChanged, ucrReceiverParam2.WithMeSelectionChanged, ucrReceiverParam3.WithMeSelectionChanged, ucrReceiverParam4.WithMeSelectionChanged, ucrReceiverParam5.WithMeSelectionChanged, ucrReceiverParam6.WithMeSelectionChanged, ucrReceiverParam7.WithMeSelectionChanged, ucrReceiverParam8.WithMeSelectionChanged, ucrReceiverParam9.WithMeSelectionChanged, ucrReceiverParam10.WithMeSelectionChanged, ucrReceiverParam11.WithMeSelectionChanged, ucrReceiverParam12.WithMeSelectionChanged, ucrReceiverParam13.WithMeSelectionChanged
-        Dim iIndex As Integer
-        'bApplyToLocalAes is used to avoid changing the content of clsGeomAesFunction when the receivers are setup according to the content of clsGeomAesFunction and clsGgplotAesFunction in SetAes().
-        If bAddToLocalAes Then
-            iIndex = lstAesParameterReceivers.IndexOf(ucrChangedReceiver)
-            If Not ucrChangedReceiver.IsEmpty Then
-                clsLocalAesFunction.AddParameter(lstCurrArguments(iIndex), ucrChangedReceiver.GetVariableNames(False))
-            ElseIf iIndex < lstCurrArguments.Count Then 'Warning/Task: got an error here. The iIndex was longer than lstCurrArguments when clicking on edit layer. Don't really understand how this is possible. Just added the reality check but might need to put more thoughts into this...
-                clsLocalAesFunction.RemoveParameterByName(lstCurrArguments(iIndex))
-            Else MsgBox("Developer Error: the iIndex (going through lstAesParameterUcr) in ucrReceiverParam_WithMeSelectionChanged is greater than lstAesParameterUcr.count. We beleive that this occurs when editting a layer with fewer aes parameters than there are filled aesthetics parameters in the GlobalAesthetics.", MsgBoxStyle.OkOnly)
-            End If
-        End If
+        'Dim iIndex As Integer
+        ''bApplyToLocalAes is used to avoid changing the content of clsGeomAesFunction when the receivers are setup according to the content of clsGeomAesFunction and clsGgplotAesFunction in SetAes().
+        'If bAddToLocalAes Then
+        '    iIndex = lstAesParameterReceivers.IndexOf(ucrChangedReceiver)
+        '    If Not ucrChangedReceiver.IsEmpty Then
+        '        clsLocalAesFunction.AddParameter(lstCurrArguments(iIndex), ucrChangedReceiver.GetVariableNames(False))
+        '    ElseIf iIndex < lstCurrArguments.Count Then 'Warning/Task: got an error here. The iIndex was longer than lstCurrArguments when clicking on edit layer. Don't really understand how this is possible. Just added the reality check but might need to put more thoughts into this...
+        '        clsLocalAesFunction.RemoveParameterByName(lstCurrArguments(iIndex))
+        '    Else MsgBox("Developer Error: the iIndex (going through lstAesParameterUcr) in ucrReceiverParam_WithMeSelectionChanged is greater than lstAesParameterUcr.count. We beleive that this occurs when editting a layer with fewer aes parameters than there are filled aesthetics parameters in the GlobalAesthetics.", MsgBoxStyle.OkOnly)
+        '    End If
+        'End If
     End Sub
 
     Public Function TestForOkEnabled() As Boolean
@@ -288,14 +333,16 @@ Public Class UcrGeomListWithParameters
     Private Sub ucrGeomWithAesSelector_DataFrameChanged() Handles ucrGeomWithAesSelector.DataFrameChanged
         'Warning: When the dataframes in local layers don't correspond to the data in the global ggplot function, inherit.aes should be set to false unless variables have the same name in different dataframes...
         'Warning: in ggplot, one can work with data1 in the global ggplot function and data2 in some layer. If the parameter inherit.aes is not set to false, the mapping in ggplot function will be copied into the layer with different dataframe. Unless the variables used in data1 are also variables in data2, this will give an error and crash the software... 
-        If LocalAndGlobalDataFramesAreDifferent() Then
-            chkIgnoreGlobalAes.Checked = True
 
-        Else
-            'Task: add a warning message explaining the situation to the user when warning messages will have been implemented homogenuously through out the software...
+        'Probably don't need. Could want global aes for different data frames if column names are the same
+        'If LocalAndGlobalDataFramesAreDifferent() Then
+        'chkIgnoreGlobalAes.Checked = True
 
-            'chkIgnoreGlobalAes.Checked = False 'Warning, if IgnoreGlobalAes was checked before changing dataframe and coming back, then it will be unchecked now...
-        End If
+        'Else
+        'Task: add a warning message explaining the situation to the user when warning messages will have been implemented homogenuously through out the software...
+
+        'chkIgnoreGlobalAes.Checked = False 'Warning, if IgnoreGlobalAes was checked before changing dataframe and coming back, then it will be unchecked now...
+        'End If
         'Note SetAes will be called automatically if chkIgnoreGlobalAes.checked has been changed.
     End Sub
 
@@ -303,6 +350,12 @@ Public Class UcrGeomListWithParameters
         For Each ucrTempReceiver As ucrReceiverSingle In lstAesParameterReceivers
             ucrTempReceiver.ClearCodeAndParameters()
             ucrTempReceiver.Clear()
+        Next
+    End Sub
+
+    Public Sub SetRCodeForReceivers(clsNewRCode As RCodeStructure, Optional bReset As Boolean = False)
+        For Each ucrTempReceiver As ucrReceiver In lstAesParameterReceivers
+            ucrTempReceiver.SetRCode(clsNewRCode, bReset)
         Next
     End Sub
 End Class
