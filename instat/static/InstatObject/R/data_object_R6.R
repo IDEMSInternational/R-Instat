@@ -1033,7 +1033,7 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
       }
     }
     else if(to_type == "character") {
-      new_col <- to_character(curr_col)
+      new_col <- sjmisc::to_character(curr_col)
     }
     self$add_columns_to_data(col_name = col_name, col_data = new_col)
     
