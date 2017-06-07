@@ -81,13 +81,16 @@ Public Class dlgFromLibrary
     Private Sub FillPackagesCombo()
         Dim strTempHolder As String = "lsPackagesHolder"
         Dim i As Integer
-        Dim lstAvailablePackages As CharacterVector
+        Dim lstAvailablePackages As String()
         cboPackages.Items.Clear()
-        lstAvailablePackages = frmMain.clsRLink.RunInternalScriptGetValue(strPackages & "<-(.packages())").AsCharacter
+        'This is now a static list because
+        lstAvailablePackages = {"datasets", "reshape2", "lubridate", "plyr", "dplyr", "rtf", "openxlsx", "ggplot2", "extRemes", "GGally", "agridat", "DAAG", "FactoMineR", "plotrix", "candisc", "R6", "openair", "circular", "survival", "Evapotranspiration", "clifro", "devtools", "factoextra", "circlize", "CircStats", "gridExtra", "ggfortify", "rio", "readxl", "lme4", "dummies", "ggthemes", "lazyeval", "stringr", "httr", "jsonlite", "fitdistrplus", "visreg", "climdex.pcic", "mosaic", "ncdf4", "getPass", "RMySQL", "DBI", "EnvStats", "signmedian.test", "sjPlot", "sjmisc", "plotly", "svglite", "htmlTable", "rje"}
+
+        'lstAvailablePackages = frmMain.clsRLink.RunInternalScriptGetValue(strPackages & "<-(.packages())").AsCharacter
         For i = 0 To lstAvailablePackages.Length - 1
             Try
-                If frmMain.clsRLink.RunInternalScriptGetValue("nrow(data(package = " & Chr(34) & lstAvailablePackages.AsCharacter(i) & Chr(34) & ")$results)").AsInteger(0) > 0 Then
-                    cboPackages.Items.Add(lstAvailablePackages.AsCharacter(i))
+                If frmMain.clsRLink.RunInternalScriptGetValue("nrow(data(package = " & Chr(34) & lstAvailablePackages(i) & Chr(34) & ")$results)").AsInteger(0) > 0 Then
+                    cboPackages.Items.Add(lstAvailablePackages(i))
                 End If
             Catch ex As Exception
 
@@ -121,6 +124,7 @@ Public Class dlgFromLibrary
 
     Private Sub cboPackages_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboPackages.SelectedValueChanged
         loadDatasets(cboPackages.SelectedItem.ToString)
+        clsDataFunction.AddParameter("package", Chr(34) & cboPackages.SelectedItem.ToString & Chr(34))
         TestOkEnabled()
     End Sub
 
@@ -165,6 +169,7 @@ Public Class dlgFromLibrary
         Dim clsHelp As New RFunction
         clsHelp.SetRCommand("help")
         clsHelp.AddParameter("topic", Chr(34) & lstCollection.SelectedItems(0).Text & Chr(34))
+        clsHelp.AddParameter("package", Chr(34) & cboPackages.SelectedItem & Chr(34))
         clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
         frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:=" dlgOpenFromLibrary Opening help page for" & " " & lstCollection.SelectedItems(0).Text & " " & "dataset")
     End Sub
