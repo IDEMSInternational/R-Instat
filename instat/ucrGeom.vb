@@ -1177,9 +1177,11 @@ Public Class ucrGeom
                 For Each clsParam In lstAllGeoms(iPreviousGeomIndex).clsLayerParameters
                     clsGeomFunction.RemoveParameterByName(clsParam.strLayerParameterName)
                 Next
+                clsGeomFunction.SetRCommand(clsCurrGeom.strGeomName)
                 RaiseEvent GeomChanged()
+            Else
+                clsGeomFunction.SetRCommand(clsCurrGeom.strGeomName)
             End If
-            clsGeomFunction.SetRCommand(clsCurrGeom.strGeomName)
         End If
     End Sub
 

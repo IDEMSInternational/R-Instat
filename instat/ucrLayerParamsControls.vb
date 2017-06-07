@@ -36,7 +36,7 @@ Public Class ucrLayerParamsControls
             ucrChkParamName.Visible = True
         Else
             ucrChkParamName.Visible = False
-            End If
+        End If
     End Sub
 
     Private Sub ucrReceiverMetadataProperty_ControlContentsChanged() Handles ucrReceiverMetadataProperty.ControlContentsChanged, ucrChkParamName.ControlContentsChanged
