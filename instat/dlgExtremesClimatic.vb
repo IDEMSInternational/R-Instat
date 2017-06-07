@@ -84,15 +84,13 @@ Public Class dlgExtremesClimatic
 
         ucrInputSave.SetParameter(New RParameter("result_name"))
 
-        'ursaveExtremes       
-        'ucrSaveExtremes.SetSaveTypeAsColumn()
-        'ucrSaveExtremes.SetDataFrameSelector(ucrSelectorClimaticExtremes.ucrAvailableDataFrames)
-        'ucrSaveExtremes.SetIsTextBox()
-        'ucrSaveExtremes.SetLabelText("New Column Name")
-        'ucrSaveExtremes.SetPrefix("Value")
-
         ucrPnlExtremesType.AddToLinkedControls({ucrInputThresholdValue, ucrInputThresholdOperator}, {rdoPeaks}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlExtremesType.AddToLinkedControls(ucrPnlMaxMin, {rdoMinMax}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrPnlExtremesType.AddParameterValuesCondition(rdoMinMax, "result_name", Chr(34) & ucrInputSave.GetText() & Chr(34))
+        ucrPnlExtremesType.AddParameterValuesCondition(rdoPeaks, "result_name", Chr(34) & ucrInputSave.GetText() & Chr(34), False)
+        ucrPnlExtremesType.AddParameterValuesCondition(rdoPeaks, "result_data_frame", Chr(34) & ucrInputSave.GetText() & Chr(34))
+        ucrPnlExtremesType.AddParameterValuesCondition(rdoMinMax, "result_data_frame", Chr(34) & ucrInputSave.GetText() & Chr(34), False)
     End Sub
 
     Private Sub SetRCodeForControls(bReset)
@@ -113,6 +111,7 @@ Public Class dlgExtremesClimatic
         ucrSelectorClimaticExtremes.Reset()
         ucrInputThresholdValue.Reset()
         ucrInputSave.SetName("Extreme")
+        ucrInputSave.Reset()
 
         clsPeaksFilterFunction.SetRCommand("instat_calculation$new")
         clsPeaksFilterFunction.SetAssignTo("peak_filter")
@@ -148,12 +147,13 @@ Public Class dlgExtremesClimatic
     End Sub
 
     Private Sub TestOkEnabled()
-        'If (rdoMinMax.Checked AndAlso Not ucrReceiverYear.IsEmpty() AndAlso Not ucrReceiverDate.IsEmpty() AndAlso Not ucrReceiverDOY.IsEmpty() AndAlso Not ucrReceiverData.IsEmpty()) Then
-        '    ucrBase.OKEnabled(True)
-        'Else
-        '    ucrBase.OKEnabled(False)
-        'End If
-        ucrBase.OKEnabled(True)
+        If (rdoMinMax.Checked AndAlso Not ucrReceiverYear.IsEmpty() AndAlso Not ucrReceiverDate.IsEmpty() AndAlso Not ucrReceiverDOY.IsEmpty() AndAlso Not ucrReceiverElement.IsEmpty()) Then
+            ucrBase.OKEnabled(True)
+        ElseIf (rdoPeaks.Checked AndAlso Not ucrReceiverYear.IsEmpty() AndAlso Not ucrReceiverDate.IsEmpty() AndAlso Not ucrReceiverDOY.IsEmpty() AndAlso Not ucrReceiverElement.IsEmpty())
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -238,5 +238,9 @@ Public Class dlgExtremesClimatic
 
     Private Sub ucrSelectorClimaticExtremes_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorClimaticExtremes.ControlContentsChanged
         clsPeaksFilterFunction.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames() & ")")
+    End Sub
+
+    Private Sub ucrReceiverDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class
