@@ -22,7 +22,6 @@ Public Class sdgLayerOptions
     'clsGgplotFunction is the global ggplot function, linked through the ucrAdditionalLayers to either sdgPlots or dlgGeneralForGraphics.
     Public bFirstLoad As Boolean = True
     Public bAesInGeom As Boolean
-    Public strGlobalDataFrame As String
 
     Public Sub New()
         ' This call is required by the designer.
@@ -51,7 +50,6 @@ Public Class sdgLayerOptions
 
     Private Sub SetDefaults()
         ucrGeomWithAes.Reset()
-        strGlobalDataFrame = ""
     End Sub
 
     Private Sub ReopenDialog()
@@ -73,4 +71,8 @@ Public Class sdgLayerOptions
     Private Sub ucrSdgLayerBase_ClickReturn(sender As Object, e As EventArgs) Handles ucrSdgLayerBase.ClickReturn
         ucrGeomWithAes.UpdateGlobalAndLocalAesFromInter()
     End Sub
+
+    Public Function GetGlobalDataFrame() As String
+        Return ucrGeomWithAes.strGlobalDataFrame
+    End Function
 End Class

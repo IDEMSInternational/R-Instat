@@ -336,6 +336,11 @@ Public Class UcrGeomListWithParameters
             strGlobalDataFrame = ucrGeomWithAesSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text
             clsCurrentAesFunction = clsGlobalAesFunction
         Else 'Warning: in case the sdgLayerOptions has been called by specific dlg, need to refill the aes on that dlg. Imagine the ApplyOnAllLayers has been unticked ? Problem... Also in order to solve this, would need to know on the specific dialog if it has been unticked or not in order to know how to fill in the aes receivers ! The linking will be restudied anyway. There are many ways to go, see discussion on github.
+            For Each clsParam In clsInterAesFunction.clsParameters
+                If Not (clsGlobalAesFunction.ContainsParameter(clsParam.strArgumentName) AndAlso clsGlobalAesFunction.GetParameter(clsParam.strArgumentName).strArgumentValue = clsParam.strArgumentValue)) Then
+                    clsLocalAesFunction.AddParameter(clsParam)
+                End If
+            Next
             clsLocalAesFunction = clsInterAesFunction.Clone()
             'If global data frame later changes, data parameter is needed in each geom?
             If ucrGeomWithAesSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> strGlobalDataFrame Then
