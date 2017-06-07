@@ -92,9 +92,9 @@ Public Class dlgRandomSample
     End Sub
 
     Private Sub TestOKEnabled()
-        If  ucrDistWithParameters.bParametersFilled AndAlso ucrNudNumberOfSamples.GetText <> "" _
-            AndAlso (Not ucrChkSetSeed.Checked OrElse (ucrChkSetSeed.Checked AndAlso ucrNudSeed.GetText <> "")) _
-            AndAlso ucrSaveRandomSamples.IsComplete Then
+        If ((ucrDistWithParameters.bParametersFilled AndAlso ucrNudNumberOfSamples.GetText <> "") AndAlso
+           ((Not ucrChkSetSeed.Checked) OrElse (ucrChkSetSeed.Checked AndAlso ucrNudSeed.GetText <> "")) _
+            AndAlso ucrSaveRandomSamples.IsComplete) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -156,7 +156,7 @@ Public Class dlgRandomSample
         SetDataFrameAndDistributionParameters()
     End Sub
 
-    Private Sub ucrDistWithParameters_ParameterChanged() Handles ucrDistWithParameters.ControlContentsChanged
+    Private Sub ucrDistWithParameters_ParameterChanged() Handles ucrDistWithParameters.ParameterChanged
         TestOKEnabled()
     End Sub
 End Class
