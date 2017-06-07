@@ -110,7 +110,7 @@
             dctTemp.Add("axis.title.y.right", clsElementText.Clone())
             dctTemp.Add("axis.text", clsElementText.Clone())
             dctTemp.Add("axis.text.x", clsElementText.Clone())
-            dctTemp.Add(" axis.text.x.top", clsElementText.Clone())
+            dctTemp.Add("axis.text.x.top", clsElementText.Clone())
             dctTemp.Add("axis.text.y", clsElementText.Clone())
             dctTemp.Add("axis.text.y.right", clsElementText.Clone())
             dctTemp.Add("axis.ticks", clsElementLine.Clone())

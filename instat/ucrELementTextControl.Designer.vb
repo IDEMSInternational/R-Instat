@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class ucrThemeAxes
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+Partial Class ucrELementTextControl
     Inherits System.Windows.Forms.UserControl
 
     'UserControl overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,9 +20,10 @@ Partial Class ucrThemeAxes
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.grpAxisLabels = New System.Windows.Forms.GroupBox()
+        Me.ucrColors = New instat.ucrColors()
         Me.ucrChkColour = New instat.ucrCheck()
         Me.ucrChkFace = New instat.ucrCheck()
         Me.ucrChkFamily = New instat.ucrCheck()
@@ -38,7 +39,6 @@ Partial Class ucrThemeAxes
         Me.ucrNudsize = New instat.ucrNud()
         Me.ucrInputFace = New instat.ucrInputComboBox()
         Me.ucrInputFamily = New instat.ucrInputComboBox()
-        Me.ucrColors = New instat.ucrColors()
         Me.grpAxisLabels.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -60,82 +60,91 @@ Partial Class ucrThemeAxes
         Me.grpAxisLabels.Controls.Add(Me.ucrNudsize)
         Me.grpAxisLabels.Controls.Add(Me.ucrInputFace)
         Me.grpAxisLabels.Controls.Add(Me.ucrInputFamily)
-        Me.grpAxisLabels.Location = New System.Drawing.Point(12, 10)
+        Me.grpAxisLabels.Location = New System.Drawing.Point(3, 0)
         Me.grpAxisLabels.Name = "grpAxisLabels"
-        Me.grpAxisLabels.Size = New System.Drawing.Size(274, 240)
+        Me.grpAxisLabels.Size = New System.Drawing.Size(246, 223)
         Me.grpAxisLabels.TabIndex = 71
         Me.grpAxisLabels.TabStop = False
-        Me.grpAxisLabels.Text = "Axis Labels"
+        Me.grpAxisLabels.Text = "Element Text "
+        '
+        'ucrColors
+        '
+        Me.ucrColors.AddQuotesIfUnrecognised = True
+        Me.ucrColors.IsReadOnly = False
+        Me.ucrColors.Location = New System.Drawing.Point(105, 191)
+        Me.ucrColors.Name = "ucrColors"
+        Me.ucrColors.Size = New System.Drawing.Size(137, 21)
+        Me.ucrColors.TabIndex = 86
         '
         'ucrChkColour
         '
         Me.ucrChkColour.Checked = False
-        Me.ucrChkColour.Location = New System.Drawing.Point(19, 210)
+        Me.ucrChkColour.Location = New System.Drawing.Point(8, 192)
         Me.ucrChkColour.Name = "ucrChkColour"
-        Me.ucrChkColour.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkColour.Size = New System.Drawing.Size(94, 20)
         Me.ucrChkColour.TabIndex = 85
         '
         'ucrChkFace
         '
         Me.ucrChkFace.Checked = False
-        Me.ucrChkFace.Location = New System.Drawing.Point(19, 183)
+        Me.ucrChkFace.Location = New System.Drawing.Point(8, 167)
         Me.ucrChkFace.Name = "ucrChkFace"
-        Me.ucrChkFace.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkFace.Size = New System.Drawing.Size(94, 20)
         Me.ucrChkFace.TabIndex = 84
         '
         'ucrChkFamily
         '
         Me.ucrChkFamily.Checked = False
-        Me.ucrChkFamily.Location = New System.Drawing.Point(19, 156)
+        Me.ucrChkFamily.Location = New System.Drawing.Point(8, 142)
         Me.ucrChkFamily.Name = "ucrChkFamily"
-        Me.ucrChkFamily.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkFamily.Size = New System.Drawing.Size(94, 20)
         Me.ucrChkFamily.TabIndex = 83
         '
         'ucrChkAngle
         '
         Me.ucrChkAngle.Checked = False
-        Me.ucrChkAngle.Location = New System.Drawing.Point(19, 129)
+        Me.ucrChkAngle.Location = New System.Drawing.Point(8, 117)
         Me.ucrChkAngle.Name = "ucrChkAngle"
-        Me.ucrChkAngle.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkAngle.Size = New System.Drawing.Size(94, 20)
         Me.ucrChkAngle.TabIndex = 82
         '
         'ucrChkHjust
         '
         Me.ucrChkHjust.Checked = False
-        Me.ucrChkHjust.Location = New System.Drawing.Point(19, 48)
+        Me.ucrChkHjust.Location = New System.Drawing.Point(8, 44)
         Me.ucrChkHjust.Name = "ucrChkHjust"
-        Me.ucrChkHjust.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkHjust.Size = New System.Drawing.Size(94, 20)
         Me.ucrChkHjust.TabIndex = 81
         '
         'ucrChkVjust
         '
         Me.ucrChkVjust.Checked = False
-        Me.ucrChkVjust.Location = New System.Drawing.Point(19, 75)
+        Me.ucrChkVjust.Location = New System.Drawing.Point(8, 69)
         Me.ucrChkVjust.Name = "ucrChkVjust"
-        Me.ucrChkVjust.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkVjust.Size = New System.Drawing.Size(94, 20)
         Me.ucrChkVjust.TabIndex = 80
         '
         'ucrChkLineHeight
         '
         Me.ucrChkLineHeight.Checked = False
-        Me.ucrChkLineHeight.Location = New System.Drawing.Point(19, 102)
+        Me.ucrChkLineHeight.Location = New System.Drawing.Point(8, 94)
         Me.ucrChkLineHeight.Name = "ucrChkLineHeight"
-        Me.ucrChkLineHeight.Size = New System.Drawing.Size(96, 18)
+        Me.ucrChkLineHeight.Size = New System.Drawing.Size(94, 18)
         Me.ucrChkLineHeight.TabIndex = 79
         '
         'ucrChkSize
         '
         Me.ucrChkSize.Checked = False
-        Me.ucrChkSize.Location = New System.Drawing.Point(19, 21)
+        Me.ucrChkSize.Location = New System.Drawing.Point(8, 19)
         Me.ucrChkSize.Name = "ucrChkSize"
-        Me.ucrChkSize.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkSize.Size = New System.Drawing.Size(94, 20)
         Me.ucrChkSize.TabIndex = 78
         '
         'ucrNudVjust
         '
         Me.ucrNudVjust.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudVjust.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.ucrNudVjust.Location = New System.Drawing.Point(119, 75)
+        Me.ucrNudVjust.Location = New System.Drawing.Point(105, 68)
         Me.ucrNudVjust.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudVjust.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudVjust.Name = "ucrNudVjust"
@@ -147,7 +156,7 @@ Partial Class ucrThemeAxes
         '
         Me.ucrNudLineHeight.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudLineHeight.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.ucrNudLineHeight.Location = New System.Drawing.Point(119, 100)
+        Me.ucrNudLineHeight.Location = New System.Drawing.Point(105, 92)
         Me.ucrNudLineHeight.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudLineHeight.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLineHeight.Name = "ucrNudLineHeight"
@@ -159,7 +168,7 @@ Partial Class ucrThemeAxes
         '
         Me.ucrNudAngle.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudAngle.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudAngle.Location = New System.Drawing.Point(119, 129)
+        Me.ucrNudAngle.Location = New System.Drawing.Point(105, 117)
         Me.ucrNudAngle.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudAngle.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudAngle.Name = "ucrNudAngle"
@@ -171,7 +180,7 @@ Partial Class ucrThemeAxes
         '
         Me.ucrNudHjust.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudHjust.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.ucrNudHjust.Location = New System.Drawing.Point(119, 48)
+        Me.ucrNudHjust.Location = New System.Drawing.Point(105, 43)
         Me.ucrNudHjust.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudHjust.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudHjust.Name = "ucrNudHjust"
@@ -183,7 +192,7 @@ Partial Class ucrThemeAxes
         '
         Me.ucrNudsize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudsize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudsize.Location = New System.Drawing.Point(119, 21)
+        Me.ucrNudsize.Location = New System.Drawing.Point(105, 19)
         Me.ucrNudsize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudsize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudsize.Name = "ucrNudsize"
@@ -195,7 +204,7 @@ Partial Class ucrThemeAxes
         '
         Me.ucrInputFace.AddQuotesIfUnrecognised = True
         Me.ucrInputFace.IsReadOnly = False
-        Me.ucrInputFace.Location = New System.Drawing.Point(119, 182)
+        Me.ucrInputFace.Location = New System.Drawing.Point(105, 166)
         Me.ucrInputFace.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputFace.Name = "ucrInputFace"
         Me.ucrInputFace.Size = New System.Drawing.Size(137, 21)
@@ -205,20 +214,11 @@ Partial Class ucrThemeAxes
         '
         Me.ucrInputFamily.AddQuotesIfUnrecognised = True
         Me.ucrInputFamily.IsReadOnly = False
-        Me.ucrInputFamily.Location = New System.Drawing.Point(119, 155)
+        Me.ucrInputFamily.Location = New System.Drawing.Point(105, 141)
         Me.ucrInputFamily.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputFamily.Name = "ucrInputFamily"
         Me.ucrInputFamily.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputFamily.TabIndex = 70
-        '
-        'ucrColors
-        '
-        Me.ucrColors.AddQuotesIfUnrecognised = True
-        Me.ucrColors.IsReadOnly = False
-        Me.ucrColors.Location = New System.Drawing.Point(119, 209)
-        Me.ucrColors.Name = "ucrColors"
-        Me.ucrColors.Size = New System.Drawing.Size(137, 21)
-        Me.ucrColors.TabIndex = 86
         '
         'ucrThemeAxes
         '
@@ -226,7 +226,7 @@ Partial Class ucrThemeAxes
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.grpAxisLabels)
         Me.Name = "ucrThemeAxes"
-        Me.Size = New System.Drawing.Size(296, 260)
+        Me.Size = New System.Drawing.Size(259, 227)
         Me.grpAxisLabels.ResumeLayout(False)
         Me.ResumeLayout(False)
 
