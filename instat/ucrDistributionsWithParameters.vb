@@ -91,7 +91,7 @@ Public Class ucrDistributionsWithParameters
     End Sub
 
     Public Sub CheckParametersFilled()
-        If (Not ucrInputParameter1.Visible Or ucrInputParameter1.GetText <> "") And (Not ucrInputParameter2.Visible Or ucrInputParameter2.GetText <> "") And (Not ucrInputParameter3.Visible Or ucrInputParameter3.GetText <> "") Then
+        If (Not ucrInputParameter1.Visible OrElse Not ucrInputParameter1.IsEmpty) AndAlso (Not ucrInputParameter2.Visible OrElse Not ucrInputParameter2.IsEmpty) AndAlso (Not ucrInputParameter3.Visible OrElse Not ucrInputParameter3.IsEmpty) Then
             bParametersFilled = True
         Else
             bParametersFilled = False
@@ -104,28 +104,22 @@ Public Class ucrDistributionsWithParameters
 
     Public Event ParameterChanged()
 
-    Private Sub ucrInputParameter1_ControlValueChanged() Handles ucrInputParameter1.ControlValueChanged
-        If Not ucrInputParameter1.IsEmpty Then
-            AddParameter(lstCurrArguments(0), ucrInputParameter1.GetText)
-            CheckParametersFilled()
-            RaiseEvent ParameterChanged()
-        End If
-
+    Private Sub ucrInputParameter1_Leave() Handles ucrInputParameter1.Leave
+        AddParameter(lstCurrArguments(0), ucrInputParameter1.GetText)
+        CheckParametersFilled()
+        RaiseEvent ParameterChanged()
     End Sub
 
-    Private Sub ucrInputParameter2_ControlValueChanged() Handles ucrInputParameter2.ControlValueChanged
-        If Not ucrInputParameter2.IsEmpty Then
-            AddParameter(lstCurrArguments(1), ucrInputParameter2.GetText)
-            CheckParametersFilled()
-            RaiseEvent ParameterChanged()
-        End If
+
+    Private Sub ucrInputParameter2_Leave() Handles ucrInputParameter2.Leave
+        AddParameter(lstCurrArguments(1), ucrInputParameter2.GetText)
+        CheckParametersFilled()
+        RaiseEvent ParameterChanged()
     End Sub
 
-    Private Sub ucrInputParameter3_ControlValueChanged() Handles ucrInputParameter3.ControlValueChanged
-        If Not ucrInputParameter3.IsEmpty Then
-            AddParameter(lstCurrArguments(2), ucrInputParameter3.GetText)
-            RaiseEvent ParameterChanged()
-        End If
+    Private Sub ucrInputParameter3_Leave() Handles ucrInputParameter3.Leave
+        AddParameter(lstCurrArguments(2), ucrInputParameter3.GetText)
+        RaiseEvent ParameterChanged()
     End Sub
 
     Private Sub ucrDistributionsWithParameters_ParameterChanged() Handles Me.ParameterChanged
