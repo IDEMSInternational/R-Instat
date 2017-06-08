@@ -44,7 +44,6 @@ Public Class ucrDataFrame
 
     Private Sub InitialiseControl()
         bUseCurrentFilter = True
-        SetRDefault("")
         lblDataFrame.AutoSize = True
         bUpdateRCodeFromControl = True
     End Sub
