@@ -31,15 +31,11 @@ Partial Class dlgStringHandling
         Me.rdoExtract = New System.Windows.Forms.RadioButton()
         Me.rdoDetect = New System.Windows.Forms.RadioButton()
         Me.rdoReplaceAll = New System.Windows.Forms.RadioButton()
-        Me.ucrChkIgnoreCase = New instat.ucrCheck()
-        Me.ucrReceiverStringHandling = New instat.ucrReceiverSingle()
-        Me.ucrInputReplaceBy = New instat.ucrInputTextBox()
-        Me.ucrSaveStringHandling = New instat.ucrSave()
-        Me.ucrInputPattern = New instat.ucrInputTextBox()
-        Me.ucrSelectorStringHandling = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrPnlStringHandling = New instat.UcrPanel()
         Me.grpRegex = New System.Windows.Forms.GroupBox()
+        Me.cmdBackSlash = New System.Windows.Forms.Button()
+        Me.cmdWBackSlash = New System.Windows.Forms.Button()
+        Me.cmdDollarSign = New System.Windows.Forms.Button()
+        Me.cmdOpenCloseParenthesis = New System.Windows.Forms.Button()
         Me.cmdBackSlashd = New System.Windows.Forms.Button()
         Me.cmdBackSlashs = New System.Windows.Forms.Button()
         Me.cmdPower = New System.Windows.Forms.Button()
@@ -58,11 +54,16 @@ Partial Class dlgStringHandling
         Me.cmdBackSlashb = New System.Windows.Forms.Button()
         Me.cmdSbackSlash = New System.Windows.Forms.Button()
         Me.cmdOr = New System.Windows.Forms.Button()
-        Me.cmdOpenCloseParenthesis = New System.Windows.Forms.Button()
-        Me.cmdAmperstand = New System.Windows.Forms.Button()
-        Me.cmdWBackSlash = New System.Windows.Forms.Button()
-        Me.cmdBackSlash = New System.Windows.Forms.Button()
+        Me.ucrReceiverForRegexExpression = New instat.ucrReceiverExpression()
         Me.ucrChkRegex = New instat.ucrCheck()
+        Me.ucrChkIgnoreCase = New instat.ucrCheck()
+        Me.ucrReceiverStringHandling = New instat.ucrReceiverSingle()
+        Me.ucrInputReplaceBy = New instat.ucrInputTextBox()
+        Me.ucrSaveStringHandling = New instat.ucrSave()
+        Me.ucrInputPattern = New instat.ucrInputTextBox()
+        Me.ucrSelectorStringHandling = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrPnlStringHandling = New instat.UcrPanel()
         Me.grpRegex.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -189,82 +190,11 @@ Partial Class dlgStringHandling
         Me.rdoReplaceAll.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoReplaceAll.UseVisualStyleBackColor = True
         '
-        'ucrChkIgnoreCase
-        '
-        Me.ucrChkIgnoreCase.Checked = False
-        Me.ucrChkIgnoreCase.Location = New System.Drawing.Point(259, 129)
-        Me.ucrChkIgnoreCase.Name = "ucrChkIgnoreCase"
-        Me.ucrChkIgnoreCase.Size = New System.Drawing.Size(113, 20)
-        Me.ucrChkIgnoreCase.TabIndex = 10
-        '
-        'ucrReceiverStringHandling
-        '
-        Me.ucrReceiverStringHandling.frmParent = Me
-        Me.ucrReceiverStringHandling.Location = New System.Drawing.Point(259, 105)
-        Me.ucrReceiverStringHandling.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverStringHandling.Name = "ucrReceiverStringHandling"
-        Me.ucrReceiverStringHandling.Selector = Nothing
-        Me.ucrReceiverStringHandling.Size = New System.Drawing.Size(138, 20)
-        Me.ucrReceiverStringHandling.strNcFilePath = ""
-        Me.ucrReceiverStringHandling.TabIndex = 9
-        Me.ucrReceiverStringHandling.ucrSelector = Nothing
-        '
-        'ucrInputReplaceBy
-        '
-        Me.ucrInputReplaceBy.AddQuotesIfUnrecognised = True
-        Me.ucrInputReplaceBy.IsMultiline = False
-        Me.ucrInputReplaceBy.IsReadOnly = False
-        Me.ucrInputReplaceBy.Location = New System.Drawing.Point(259, 212)
-        Me.ucrInputReplaceBy.Name = "ucrInputReplaceBy"
-        Me.ucrInputReplaceBy.Size = New System.Drawing.Size(138, 20)
-        Me.ucrInputReplaceBy.TabIndex = 14
-        '
-        'ucrSaveStringHandling
-        '
-        Me.ucrSaveStringHandling.Location = New System.Drawing.Point(9, 247)
-        Me.ucrSaveStringHandling.Name = "ucrSaveStringHandling"
-        Me.ucrSaveStringHandling.Size = New System.Drawing.Size(279, 24)
-        Me.ucrSaveStringHandling.TabIndex = 15
-        '
-        'ucrInputPattern
-        '
-        Me.ucrInputPattern.AddQuotesIfUnrecognised = True
-        Me.ucrInputPattern.IsMultiline = False
-        Me.ucrInputPattern.IsReadOnly = False
-        Me.ucrInputPattern.Location = New System.Drawing.Point(259, 170)
-        Me.ucrInputPattern.Name = "ucrInputPattern"
-        Me.ucrInputPattern.Size = New System.Drawing.Size(138, 20)
-        Me.ucrInputPattern.TabIndex = 12
-        '
-        'ucrSelectorStringHandling
-        '
-        Me.ucrSelectorStringHandling.bShowHiddenColumns = False
-        Me.ucrSelectorStringHandling.bUseCurrentFilter = True
-        Me.ucrSelectorStringHandling.Location = New System.Drawing.Point(9, 55)
-        Me.ucrSelectorStringHandling.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorStringHandling.Name = "ucrSelectorStringHandling"
-        Me.ucrSelectorStringHandling.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorStringHandling.TabIndex = 7
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 273)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(406, 52)
-        Me.ucrBase.TabIndex = 16
-        '
-        'ucrPnlStringHandling
-        '
-        Me.ucrPnlStringHandling.Location = New System.Drawing.Point(9, 1)
-        Me.ucrPnlStringHandling.Name = "ucrPnlStringHandling"
-        Me.ucrPnlStringHandling.Size = New System.Drawing.Size(406, 51)
-        Me.ucrPnlStringHandling.TabIndex = 0
-        '
         'grpRegex
         '
         Me.grpRegex.Controls.Add(Me.cmdBackSlash)
         Me.grpRegex.Controls.Add(Me.cmdWBackSlash)
-        Me.grpRegex.Controls.Add(Me.cmdAmperstand)
+        Me.grpRegex.Controls.Add(Me.cmdDollarSign)
         Me.grpRegex.Controls.Add(Me.cmdOpenCloseParenthesis)
         Me.grpRegex.Controls.Add(Me.cmdBackSlashd)
         Me.grpRegex.Controls.Add(Me.cmdBackSlashs)
@@ -292,6 +222,46 @@ Partial Class dlgStringHandling
         Me.grpRegex.TabIndex = 180
         Me.grpRegex.TabStop = False
         Me.grpRegex.Text = "Regex"
+        '
+        'cmdBackSlash
+        '
+        Me.cmdBackSlash.Location = New System.Drawing.Point(160, 105)
+        Me.cmdBackSlash.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdBackSlash.Name = "cmdBackSlash"
+        Me.cmdBackSlash.Size = New System.Drawing.Size(38, 30)
+        Me.cmdBackSlash.TabIndex = 140
+        Me.cmdBackSlash.Text = "\ "
+        Me.cmdBackSlash.UseVisualStyleBackColor = True
+        '
+        'cmdWBackSlash
+        '
+        Me.cmdWBackSlash.Location = New System.Drawing.Point(160, 75)
+        Me.cmdWBackSlash.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdWBackSlash.Name = "cmdWBackSlash"
+        Me.cmdWBackSlash.Size = New System.Drawing.Size(38, 30)
+        Me.cmdWBackSlash.TabIndex = 139
+        Me.cmdWBackSlash.Text = "\ W"
+        Me.cmdWBackSlash.UseVisualStyleBackColor = True
+        '
+        'cmdDollarSign
+        '
+        Me.cmdDollarSign.Location = New System.Drawing.Point(198, 44)
+        Me.cmdDollarSign.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdDollarSign.Name = "cmdDollarSign"
+        Me.cmdDollarSign.Size = New System.Drawing.Size(38, 30)
+        Me.cmdDollarSign.TabIndex = 138
+        Me.cmdDollarSign.Text = "$"
+        Me.cmdDollarSign.UseVisualStyleBackColor = True
+        '
+        'cmdOpenCloseParenthesis
+        '
+        Me.cmdOpenCloseParenthesis.Location = New System.Drawing.Point(198, 13)
+        Me.cmdOpenCloseParenthesis.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdOpenCloseParenthesis.Name = "cmdOpenCloseParenthesis"
+        Me.cmdOpenCloseParenthesis.Size = New System.Drawing.Size(38, 30)
+        Me.cmdOpenCloseParenthesis.TabIndex = 137
+        Me.cmdOpenCloseParenthesis.Text = "(  )"
+        Me.cmdOpenCloseParenthesis.UseVisualStyleBackColor = True
         '
         'cmdBackSlashd
         '
@@ -475,45 +445,17 @@ Partial Class dlgStringHandling
         Me.cmdOr.Text = "|"
         Me.cmdOr.UseVisualStyleBackColor = True
         '
-        'cmdOpenCloseParenthesis
+        'ucrReceiverForRegexExpression
         '
-        Me.cmdOpenCloseParenthesis.Location = New System.Drawing.Point(198, 13)
-        Me.cmdOpenCloseParenthesis.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdOpenCloseParenthesis.Name = "cmdOpenCloseParenthesis"
-        Me.cmdOpenCloseParenthesis.Size = New System.Drawing.Size(38, 30)
-        Me.cmdOpenCloseParenthesis.TabIndex = 137
-        Me.cmdOpenCloseParenthesis.Text = "(  )"
-        Me.cmdOpenCloseParenthesis.UseVisualStyleBackColor = True
-        '
-        'cmdAmperstand
-        '
-        Me.cmdAmperstand.Location = New System.Drawing.Point(198, 44)
-        Me.cmdAmperstand.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdAmperstand.Name = "cmdAmperstand"
-        Me.cmdAmperstand.Size = New System.Drawing.Size(38, 30)
-        Me.cmdAmperstand.TabIndex = 138
-        Me.cmdAmperstand.Text = "^"
-        Me.cmdAmperstand.UseVisualStyleBackColor = True
-        '
-        'cmdWBackSlash
-        '
-        Me.cmdWBackSlash.Location = New System.Drawing.Point(160, 75)
-        Me.cmdWBackSlash.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdWBackSlash.Name = "cmdWBackSlash"
-        Me.cmdWBackSlash.Size = New System.Drawing.Size(38, 30)
-        Me.cmdWBackSlash.TabIndex = 139
-        Me.cmdWBackSlash.Text = "\ W"
-        Me.cmdWBackSlash.UseVisualStyleBackColor = True
-        '
-        'cmdBackSlash
-        '
-        Me.cmdBackSlash.Location = New System.Drawing.Point(160, 105)
-        Me.cmdBackSlash.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
-        Me.cmdBackSlash.Name = "cmdBackSlash"
-        Me.cmdBackSlash.Size = New System.Drawing.Size(38, 30)
-        Me.cmdBackSlash.TabIndex = 140
-        Me.cmdBackSlash.Text = "\ "
-        Me.cmdBackSlash.UseVisualStyleBackColor = True
+        Me.ucrReceiverForRegexExpression.frmParent = Me
+        Me.ucrReceiverForRegexExpression.Location = New System.Drawing.Point(259, 170)
+        Me.ucrReceiverForRegexExpression.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.ucrReceiverForRegexExpression.Name = "ucrReceiverForRegexExpression"
+        Me.ucrReceiverForRegexExpression.Selector = Nothing
+        Me.ucrReceiverForRegexExpression.Size = New System.Drawing.Size(138, 28)
+        Me.ucrReceiverForRegexExpression.strNcFilePath = ""
+        Me.ucrReceiverForRegexExpression.TabIndex = 182
+        Me.ucrReceiverForRegexExpression.ucrSelector = Nothing
         '
         'ucrChkRegex
         '
@@ -523,11 +465,83 @@ Partial Class dlgStringHandling
         Me.ucrChkRegex.Size = New System.Drawing.Size(113, 20)
         Me.ucrChkRegex.TabIndex = 181
         '
+        'ucrChkIgnoreCase
+        '
+        Me.ucrChkIgnoreCase.Checked = False
+        Me.ucrChkIgnoreCase.Location = New System.Drawing.Point(259, 129)
+        Me.ucrChkIgnoreCase.Name = "ucrChkIgnoreCase"
+        Me.ucrChkIgnoreCase.Size = New System.Drawing.Size(113, 20)
+        Me.ucrChkIgnoreCase.TabIndex = 10
+        '
+        'ucrReceiverStringHandling
+        '
+        Me.ucrReceiverStringHandling.frmParent = Me
+        Me.ucrReceiverStringHandling.Location = New System.Drawing.Point(259, 105)
+        Me.ucrReceiverStringHandling.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverStringHandling.Name = "ucrReceiverStringHandling"
+        Me.ucrReceiverStringHandling.Selector = Nothing
+        Me.ucrReceiverStringHandling.Size = New System.Drawing.Size(138, 20)
+        Me.ucrReceiverStringHandling.strNcFilePath = ""
+        Me.ucrReceiverStringHandling.TabIndex = 9
+        Me.ucrReceiverStringHandling.ucrSelector = Nothing
+        '
+        'ucrInputReplaceBy
+        '
+        Me.ucrInputReplaceBy.AddQuotesIfUnrecognised = True
+        Me.ucrInputReplaceBy.IsMultiline = False
+        Me.ucrInputReplaceBy.IsReadOnly = False
+        Me.ucrInputReplaceBy.Location = New System.Drawing.Point(259, 212)
+        Me.ucrInputReplaceBy.Name = "ucrInputReplaceBy"
+        Me.ucrInputReplaceBy.Size = New System.Drawing.Size(138, 20)
+        Me.ucrInputReplaceBy.TabIndex = 14
+        '
+        'ucrSaveStringHandling
+        '
+        Me.ucrSaveStringHandling.Location = New System.Drawing.Point(9, 247)
+        Me.ucrSaveStringHandling.Name = "ucrSaveStringHandling"
+        Me.ucrSaveStringHandling.Size = New System.Drawing.Size(279, 24)
+        Me.ucrSaveStringHandling.TabIndex = 15
+        '
+        'ucrInputPattern
+        '
+        Me.ucrInputPattern.AddQuotesIfUnrecognised = True
+        Me.ucrInputPattern.IsMultiline = False
+        Me.ucrInputPattern.IsReadOnly = False
+        Me.ucrInputPattern.Location = New System.Drawing.Point(259, 170)
+        Me.ucrInputPattern.Name = "ucrInputPattern"
+        Me.ucrInputPattern.Size = New System.Drawing.Size(138, 20)
+        Me.ucrInputPattern.TabIndex = 12
+        '
+        'ucrSelectorStringHandling
+        '
+        Me.ucrSelectorStringHandling.bShowHiddenColumns = False
+        Me.ucrSelectorStringHandling.bUseCurrentFilter = True
+        Me.ucrSelectorStringHandling.Location = New System.Drawing.Point(9, 55)
+        Me.ucrSelectorStringHandling.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorStringHandling.Name = "ucrSelectorStringHandling"
+        Me.ucrSelectorStringHandling.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorStringHandling.TabIndex = 7
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(9, 273)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(406, 52)
+        Me.ucrBase.TabIndex = 16
+        '
+        'ucrPnlStringHandling
+        '
+        Me.ucrPnlStringHandling.Location = New System.Drawing.Point(9, 1)
+        Me.ucrPnlStringHandling.Name = "ucrPnlStringHandling"
+        Me.ucrPnlStringHandling.Size = New System.Drawing.Size(406, 51)
+        Me.ucrPnlStringHandling.TabIndex = 0
+        '
         'dlgStringHandling
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(662, 331)
+        Me.Controls.Add(Me.ucrReceiverForRegexExpression)
         Me.Controls.Add(Me.ucrChkRegex)
         Me.Controls.Add(Me.grpRegex)
         Me.Controls.Add(Me.ucrChkIgnoreCase)
@@ -596,8 +610,9 @@ Partial Class dlgStringHandling
     Friend WithEvents cmdBackSlashb As Button
     Friend WithEvents cmdSbackSlash As Button
     Friend WithEvents cmdOr As Button
-    Friend WithEvents cmdAmperstand As Button
+    Friend WithEvents cmdDollarSign As Button
     Friend WithEvents cmdWBackSlash As Button
     Friend WithEvents cmdBackSlash As Button
     Friend WithEvents ucrChkRegex As ucrCheck
+    Friend WithEvents ucrReceiverForRegexExpression As ucrReceiverExpression
 End Class
