@@ -218,8 +218,8 @@ Public Class ucrCore
             If bUpdateRCodeFromControl AndAlso CanUpdate() Then
                 UpdateRCode(bReset)
             End If
-            UpdateControl(bReset)
         End If
+        UpdateControl(bReset)
     End Sub
 
     Protected Overridable Function CanUpdate()
