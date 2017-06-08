@@ -107,17 +107,17 @@ Partial Class sdgThemes
         Me.ucrPlotSubTitle = New instat.ucrELementTextControl()
         Me.ucrPlotTitle = New instat.ucrELementTextControl()
         Me.tbLegend = New System.Windows.Forms.TabControl()
-        Me.tbThemePanelMoreOptions = New System.Windows.Forms.TabPage()
         Me.tbThemeLegendMoreOptions = New System.Windows.Forms.TabPage()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.UcrGridUnit2 = New instat.ucrGridUnit()
-        Me.UcrGridUnit3 = New instat.ucrGridUnit()
-        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.UcrGridUnit5 = New instat.ucrGridUnit()
-        Me.UcrGridUnit6 = New instat.ucrGridUnit()
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.UcrGridUnit1 = New instat.ucrGridUnit()
-        Me.UcrGridUnit4 = New instat.ucrGridUnit()
+        Me.tbThemePanelMoreOptions = New System.Windows.Forms.TabPage()
+        Me.grpPanelGridMajorMinor = New System.Windows.Forms.GroupBox()
+        Me.ucrPanelGridMajorYAxis = New instat.ucrELementTextControl()
+        Me.ucrPanelGridMajorXAxis = New instat.ucrELementTextControl()
+        Me.ucrPanelGridMinorYAxis = New instat.ucrELementTextControl()
+        Me.ucrPanelGridMinorXAxis = New instat.ucrELementTextControl()
+        Me.grpLegendSpacing = New System.Windows.Forms.GroupBox()
+        Me.ucrLegendSpacingYAxis = New instat.ucrGridUnit()
+        Me.ucrLegendSpacingXAxis = New instat.ucrGridUnit()
+        Me.ucrLegendSpacing = New instat.ucrGridUnit()
         Me.tbThemeFacets.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.grpFacetBackground.SuspendLayout()
@@ -148,11 +148,10 @@ Partial Class sdgThemes
         Me.grpPlotBackground.SuspendLayout()
         Me.grpPlotTitleAndCaption.SuspendLayout()
         Me.tbLegend.SuspendLayout()
-        Me.tbThemePanelMoreOptions.SuspendLayout()
         Me.tbThemeLegendMoreOptions.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
-        Me.GroupBox4.SuspendLayout()
+        Me.tbThemePanelMoreOptions.SuspendLayout()
+        Me.grpPanelGridMajorMinor.SuspendLayout()
+        Me.grpLegendSpacing.SuspendLayout()
         Me.SuspendLayout()
         '
         'ucrBaseSubdialogue
@@ -169,7 +168,7 @@ Partial Class sdgThemes
         Me.tbThemeFacets.Controls.Add(Me.grpFacetLabels)
         Me.tbThemeFacets.Location = New System.Drawing.Point(4, 22)
         Me.tbThemeFacets.Name = "tbThemeFacets"
-        Me.tbThemeFacets.Size = New System.Drawing.Size(816, 564)
+        Me.tbThemeFacets.Size = New System.Drawing.Size(816, 583)
         Me.tbThemeFacets.TabIndex = 4
         Me.tbThemeFacets.Text = "Facets"
         Me.tbThemeFacets.UseVisualStyleBackColor = True
@@ -256,7 +255,7 @@ Partial Class sdgThemes
         Me.tbThemePanelAndBackground.Controls.Add(Me.grpPAnelGrid)
         Me.tbThemePanelAndBackground.Location = New System.Drawing.Point(4, 22)
         Me.tbThemePanelAndBackground.Name = "tbThemePanelAndBackground"
-        Me.tbThemePanelAndBackground.Size = New System.Drawing.Size(816, 564)
+        Me.tbThemePanelAndBackground.Size = New System.Drawing.Size(816, 583)
         Me.tbThemePanelAndBackground.TabIndex = 3
         Me.tbThemePanelAndBackground.Text = "Panel and Background  "
         Me.tbThemePanelAndBackground.UseVisualStyleBackColor = True
@@ -575,7 +574,7 @@ Partial Class sdgThemes
         Me.tbThemeYaxis.Location = New System.Drawing.Point(4, 22)
         Me.tbThemeYaxis.Name = "tbThemeYaxis"
         Me.tbThemeYaxis.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbThemeYaxis.Size = New System.Drawing.Size(816, 564)
+        Me.tbThemeYaxis.Size = New System.Drawing.Size(816, 583)
         Me.tbThemeYaxis.TabIndex = 1
         Me.tbThemeYaxis.Text = "Y-axis"
         Me.tbThemeYaxis.UseVisualStyleBackColor = True
@@ -670,7 +669,7 @@ Partial Class sdgThemes
         Me.tbThemeXAxis.Location = New System.Drawing.Point(4, 22)
         Me.tbThemeXAxis.Name = "tbThemeXAxis"
         Me.tbThemeXAxis.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbThemeXAxis.Size = New System.Drawing.Size(816, 564)
+        Me.tbThemeXAxis.Size = New System.Drawing.Size(816, 583)
         Me.tbThemeXAxis.TabIndex = 0
         Me.tbThemeXAxis.Text = "X-axis"
         Me.tbThemeXAxis.UseVisualStyleBackColor = True
@@ -918,10 +917,19 @@ Partial Class sdgThemes
         Me.tbLegend.Size = New System.Drawing.Size(824, 590)
         Me.tbLegend.TabIndex = 1
         '
+        'tbThemeLegendMoreOptions
+        '
+        Me.tbThemeLegendMoreOptions.Controls.Add(Me.grpLegendSpacing)
+        Me.tbThemeLegendMoreOptions.Location = New System.Drawing.Point(4, 22)
+        Me.tbThemeLegendMoreOptions.Name = "tbThemeLegendMoreOptions"
+        Me.tbThemeLegendMoreOptions.Size = New System.Drawing.Size(816, 564)
+        Me.tbThemeLegendMoreOptions.TabIndex = 10
+        Me.tbThemeLegendMoreOptions.Text = "Legend(More Options)"
+        Me.tbThemeLegendMoreOptions.UseVisualStyleBackColor = True
+        '
         'tbThemePanelMoreOptions
         '
-        Me.tbThemePanelMoreOptions.Controls.Add(Me.GroupBox3)
-        Me.tbThemePanelMoreOptions.Controls.Add(Me.GroupBox2)
+        Me.tbThemePanelMoreOptions.Controls.Add(Me.grpPanelGridMajorMinor)
         Me.tbThemePanelMoreOptions.Location = New System.Drawing.Point(4, 22)
         Me.tbThemePanelMoreOptions.Name = "tbThemePanelMoreOptions"
         Me.tbThemePanelMoreOptions.Padding = New System.Windows.Forms.Padding(3)
@@ -930,90 +938,79 @@ Partial Class sdgThemes
         Me.tbThemePanelMoreOptions.Text = "Panel(More Options)"
         Me.tbThemePanelMoreOptions.UseVisualStyleBackColor = True
         '
-        'tbThemeLegendMoreOptions
+        'grpPanelGridMajorMinor
         '
-        Me.tbThemeLegendMoreOptions.Controls.Add(Me.GroupBox4)
-        Me.tbThemeLegendMoreOptions.Location = New System.Drawing.Point(4, 22)
-        Me.tbThemeLegendMoreOptions.Name = "tbThemeLegendMoreOptions"
-        Me.tbThemeLegendMoreOptions.Size = New System.Drawing.Size(816, 564)
-        Me.tbThemeLegendMoreOptions.TabIndex = 10
-        Me.tbThemeLegendMoreOptions.Text = "Legend(More Options)"
-        Me.tbThemeLegendMoreOptions.UseVisualStyleBackColor = True
+        Me.grpPanelGridMajorMinor.Controls.Add(Me.ucrPanelGridMinorYAxis)
+        Me.grpPanelGridMajorMinor.Controls.Add(Me.ucrPanelGridMinorXAxis)
+        Me.grpPanelGridMajorMinor.Controls.Add(Me.ucrPanelGridMajorYAxis)
+        Me.grpPanelGridMajorMinor.Controls.Add(Me.ucrPanelGridMajorXAxis)
+        Me.grpPanelGridMajorMinor.Location = New System.Drawing.Point(6, 6)
+        Me.grpPanelGridMajorMinor.Name = "grpPanelGridMajorMinor"
+        Me.grpPanelGridMajorMinor.Size = New System.Drawing.Size(523, 471)
+        Me.grpPanelGridMajorMinor.TabIndex = 71
+        Me.grpPanelGridMajorMinor.TabStop = False
+        Me.grpPanelGridMajorMinor.Text = "Panel Grid"
         '
-        'GroupBox2
+        'ucrPanelGridMajorYAxis
         '
-        Me.GroupBox2.Controls.Add(Me.UcrGridUnit2)
-        Me.GroupBox2.Controls.Add(Me.UcrGridUnit3)
-        Me.GroupBox2.Location = New System.Drawing.Point(6, 6)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(537, 150)
-        Me.GroupBox2.TabIndex = 70
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Panel Spacing"
+        Me.ucrPanelGridMajorYAxis.Location = New System.Drawing.Point(263, 12)
+        Me.ucrPanelGridMajorYAxis.Name = "ucrPanelGridMajorYAxis"
+        Me.ucrPanelGridMajorYAxis.Size = New System.Drawing.Size(258, 224)
+        Me.ucrPanelGridMajorYAxis.TabIndex = 59
         '
-        'UcrGridUnit2
+        'ucrPanelGridMajorXAxis
         '
-        Me.UcrGridUnit2.Location = New System.Drawing.Point(271, 25)
-        Me.UcrGridUnit2.Name = "UcrGridUnit2"
-        Me.UcrGridUnit2.Size = New System.Drawing.Size(255, 119)
-        Me.UcrGridUnit2.TabIndex = 106
+        Me.ucrPanelGridMajorXAxis.Location = New System.Drawing.Point(4, 12)
+        Me.ucrPanelGridMajorXAxis.Name = "ucrPanelGridMajorXAxis"
+        Me.ucrPanelGridMajorXAxis.Size = New System.Drawing.Size(259, 224)
+        Me.ucrPanelGridMajorXAxis.TabIndex = 58
         '
-        'UcrGridUnit3
+        'ucrPanelGridMinorYAxis
         '
-        Me.UcrGridUnit3.Location = New System.Drawing.Point(7, 19)
-        Me.UcrGridUnit3.Name = "UcrGridUnit3"
-        Me.UcrGridUnit3.Size = New System.Drawing.Size(258, 119)
-        Me.UcrGridUnit3.TabIndex = 105
+        Me.ucrPanelGridMinorYAxis.Location = New System.Drawing.Point(263, 242)
+        Me.ucrPanelGridMinorYAxis.Name = "ucrPanelGridMinorYAxis"
+        Me.ucrPanelGridMinorYAxis.Size = New System.Drawing.Size(258, 224)
+        Me.ucrPanelGridMinorYAxis.TabIndex = 61
         '
-        'GroupBox3
+        'ucrPanelGridMinorXAxis
         '
-        Me.GroupBox3.Controls.Add(Me.UcrGridUnit5)
-        Me.GroupBox3.Controls.Add(Me.UcrGridUnit6)
-        Me.GroupBox3.Location = New System.Drawing.Point(6, 162)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(537, 150)
-        Me.GroupBox3.TabIndex = 108
-        Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Panel Spacing"
+        Me.ucrPanelGridMinorXAxis.Location = New System.Drawing.Point(4, 242)
+        Me.ucrPanelGridMinorXAxis.Name = "ucrPanelGridMinorXAxis"
+        Me.ucrPanelGridMinorXAxis.Size = New System.Drawing.Size(259, 224)
+        Me.ucrPanelGridMinorXAxis.TabIndex = 60
         '
-        'UcrGridUnit5
+        'grpLegendSpacing
         '
-        Me.UcrGridUnit5.Location = New System.Drawing.Point(271, 25)
-        Me.UcrGridUnit5.Name = "UcrGridUnit5"
-        Me.UcrGridUnit5.Size = New System.Drawing.Size(255, 119)
-        Me.UcrGridUnit5.TabIndex = 106
+        Me.grpLegendSpacing.Controls.Add(Me.ucrLegendSpacingYAxis)
+        Me.grpLegendSpacing.Controls.Add(Me.ucrLegendSpacingXAxis)
+        Me.grpLegendSpacing.Controls.Add(Me.ucrLegendSpacing)
+        Me.grpLegendSpacing.Location = New System.Drawing.Point(4, 16)
+        Me.grpLegendSpacing.Name = "grpLegendSpacing"
+        Me.grpLegendSpacing.Size = New System.Drawing.Size(788, 150)
+        Me.grpLegendSpacing.TabIndex = 5
+        Me.grpLegendSpacing.TabStop = False
+        Me.grpLegendSpacing.Text = "Legend Spacing"
         '
-        'UcrGridUnit6
+        'ucrLegendSpacingYAxis
         '
-        Me.UcrGridUnit6.Location = New System.Drawing.Point(7, 19)
-        Me.UcrGridUnit6.Name = "UcrGridUnit6"
-        Me.UcrGridUnit6.Size = New System.Drawing.Size(258, 119)
-        Me.UcrGridUnit6.TabIndex = 105
+        Me.ucrLegendSpacingYAxis.Location = New System.Drawing.Point(523, 25)
+        Me.ucrLegendSpacingYAxis.Name = "ucrLegendSpacingYAxis"
+        Me.ucrLegendSpacingYAxis.Size = New System.Drawing.Size(256, 119)
+        Me.ucrLegendSpacingYAxis.TabIndex = 107
         '
-        'GroupBox4
+        'ucrLegendSpacingXAxis
         '
-        Me.GroupBox4.Controls.Add(Me.UcrGridUnit1)
-        Me.GroupBox4.Controls.Add(Me.UcrGridUnit4)
-        Me.GroupBox4.Location = New System.Drawing.Point(4, 4)
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(537, 150)
-        Me.GroupBox4.TabIndex = 71
-        Me.GroupBox4.TabStop = False
-        Me.GroupBox4.Text = "Panel Spacing"
+        Me.ucrLegendSpacingXAxis.Location = New System.Drawing.Point(271, 25)
+        Me.ucrLegendSpacingXAxis.Name = "ucrLegendSpacingXAxis"
+        Me.ucrLegendSpacingXAxis.Size = New System.Drawing.Size(255, 119)
+        Me.ucrLegendSpacingXAxis.TabIndex = 106
         '
-        'UcrGridUnit1
+        'ucrLegendSpacing
         '
-        Me.UcrGridUnit1.Location = New System.Drawing.Point(271, 25)
-        Me.UcrGridUnit1.Name = "UcrGridUnit1"
-        Me.UcrGridUnit1.Size = New System.Drawing.Size(255, 119)
-        Me.UcrGridUnit1.TabIndex = 106
-        '
-        'UcrGridUnit4
-        '
-        Me.UcrGridUnit4.Location = New System.Drawing.Point(7, 19)
-        Me.UcrGridUnit4.Name = "UcrGridUnit4"
-        Me.UcrGridUnit4.Size = New System.Drawing.Size(258, 119)
-        Me.UcrGridUnit4.TabIndex = 105
+        Me.ucrLegendSpacing.Location = New System.Drawing.Point(7, 19)
+        Me.ucrLegendSpacing.Name = "ucrLegendSpacing"
+        Me.ucrLegendSpacing.Size = New System.Drawing.Size(258, 119)
+        Me.ucrLegendSpacing.TabIndex = 105
         '
         'sdgThemes
         '
@@ -1058,11 +1055,10 @@ Partial Class sdgThemes
         Me.grpPlotBackground.ResumeLayout(False)
         Me.grpPlotTitleAndCaption.ResumeLayout(False)
         Me.tbLegend.ResumeLayout(False)
-        Me.tbThemePanelMoreOptions.ResumeLayout(False)
         Me.tbThemeLegendMoreOptions.ResumeLayout(False)
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox4.ResumeLayout(False)
+        Me.tbThemePanelMoreOptions.ResumeLayout(False)
+        Me.grpPanelGridMajorMinor.ResumeLayout(False)
+        Me.grpLegendSpacing.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -1154,13 +1150,13 @@ Partial Class sdgThemes
     Friend WithEvents ucrStripsSpaceGrid As ucrGridUnit
     Friend WithEvents tbThemeLegendMoreOptions As TabPage
     Friend WithEvents tbThemePanelMoreOptions As TabPage
-    Friend WithEvents GroupBox3 As GroupBox
-    Friend WithEvents UcrGridUnit5 As ucrGridUnit
-    Friend WithEvents UcrGridUnit6 As ucrGridUnit
-    Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents UcrGridUnit2 As ucrGridUnit
-    Friend WithEvents UcrGridUnit3 As ucrGridUnit
-    Friend WithEvents GroupBox4 As GroupBox
-    Friend WithEvents UcrGridUnit1 As ucrGridUnit
-    Friend WithEvents UcrGridUnit4 As ucrGridUnit
+    Friend WithEvents grpPanelGridMajorMinor As GroupBox
+    Friend WithEvents ucrPanelGridMajorYAxis As ucrELementTextControl
+    Friend WithEvents ucrPanelGridMajorXAxis As ucrELementTextControl
+    Friend WithEvents ucrPanelGridMinorYAxis As ucrELementTextControl
+    Friend WithEvents ucrPanelGridMinorXAxis As ucrELementTextControl
+    Friend WithEvents grpLegendSpacing As GroupBox
+    Friend WithEvents ucrLegendSpacingYAxis As ucrGridUnit
+    Friend WithEvents ucrLegendSpacingXAxis As ucrGridUnit
+    Friend WithEvents ucrLegendSpacing As ucrGridUnit
 End Class
