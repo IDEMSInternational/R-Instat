@@ -23,37 +23,85 @@ Partial Class sdgOneVarCompareModels
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.ucrSubBase = New instat.ucrButtonsSubdialogue()
-        Me.chkSaveChi = New System.Windows.Forms.CheckBox()
-        Me.ucrDisplayChiData = New instat.ucrInputTextBox()
+        Me.tbpOneVarCompareModels = New System.Windows.Forms.TabControl()
+        Me.tbpFit = New System.Windows.Forms.TabPage()
+        Me.tbpPlot = New System.Windows.Forms.TabPage()
         Me.grpFitModel = New System.Windows.Forms.GroupBox()
         Me.ucrSaveGOF = New instat.ucrSave()
+        Me.ucrDisplayChiData = New instat.ucrInputTextBox()
+        Me.chkSaveChi = New System.Windows.Forms.CheckBox()
         Me.ucrChkInputChiSquareBreakpoints = New instat.ucrCheck()
-        Me.grpPlot = New System.Windows.Forms.GroupBox()
+        Me.grpPlotOptions = New System.Windows.Forms.GroupBox()
         Me.ucrSavePlots = New instat.ucrSave()
         Me.ucrChkQQ = New instat.ucrCheck()
         Me.ucrChkPP = New instat.ucrCheck()
         Me.ucrChkDensity = New instat.ucrCheck()
         Me.ucrChkCDF = New instat.ucrCheck()
+        Me.tbpOneVarCompareModels.SuspendLayout()
+        Me.tbpFit.SuspendLayout()
+        Me.tbpPlot.SuspendLayout()
         Me.grpFitModel.SuspendLayout()
-        Me.grpPlot.SuspendLayout()
+        Me.grpPlotOptions.SuspendLayout()
         Me.SuspendLayout()
         '
         'ucrSubBase
         '
-        Me.ucrSubBase.Location = New System.Drawing.Point(73, 274)
+        Me.ucrSubBase.Location = New System.Drawing.Point(51, 206)
         Me.ucrSubBase.Name = "ucrSubBase"
         Me.ucrSubBase.Size = New System.Drawing.Size(142, 30)
         Me.ucrSubBase.TabIndex = 2
         '
-        'chkSaveChi
+        'tbpOneVarCompareModels
         '
-        Me.chkSaveChi.AutoSize = True
-        Me.chkSaveChi.Location = New System.Drawing.Point(6, 44)
-        Me.chkSaveChi.Name = "chkSaveChi"
-        Me.chkSaveChi.Size = New System.Drawing.Size(115, 17)
-        Me.chkSaveChi.TabIndex = 1
-        Me.chkSaveChi.Text = "Display Chi-Square"
-        Me.chkSaveChi.UseVisualStyleBackColor = True
+        Me.tbpOneVarCompareModels.Controls.Add(Me.tbpFit)
+        Me.tbpOneVarCompareModels.Controls.Add(Me.tbpPlot)
+        Me.tbpOneVarCompareModels.Location = New System.Drawing.Point(2, 12)
+        Me.tbpOneVarCompareModels.Name = "tbpOneVarCompareModels"
+        Me.tbpOneVarCompareModels.SelectedIndex = 0
+        Me.tbpOneVarCompareModels.Size = New System.Drawing.Size(300, 188)
+        Me.tbpOneVarCompareModels.TabIndex = 3
+        '
+        'tbpFit
+        '
+        Me.tbpFit.Controls.Add(Me.grpFitModel)
+        Me.tbpFit.Location = New System.Drawing.Point(4, 22)
+        Me.tbpFit.Name = "tbpFit"
+        Me.tbpFit.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpFit.Size = New System.Drawing.Size(292, 162)
+        Me.tbpFit.TabIndex = 0
+        Me.tbpFit.Text = "Fit"
+        Me.tbpFit.UseVisualStyleBackColor = True
+        '
+        'tbpPlot
+        '
+        Me.tbpPlot.Controls.Add(Me.grpPlotOptions)
+        Me.tbpPlot.Location = New System.Drawing.Point(4, 22)
+        Me.tbpPlot.Name = "tbpPlot"
+        Me.tbpPlot.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpPlot.Size = New System.Drawing.Size(292, 162)
+        Me.tbpPlot.TabIndex = 1
+        Me.tbpPlot.Text = "Plot"
+        Me.tbpPlot.UseVisualStyleBackColor = True
+        '
+        'grpFitModel
+        '
+        Me.grpFitModel.Controls.Add(Me.ucrSaveGOF)
+        Me.grpFitModel.Controls.Add(Me.ucrDisplayChiData)
+        Me.grpFitModel.Controls.Add(Me.chkSaveChi)
+        Me.grpFitModel.Controls.Add(Me.ucrChkInputChiSquareBreakpoints)
+        Me.grpFitModel.Location = New System.Drawing.Point(6, 15)
+        Me.grpFitModel.Name = "grpFitModel"
+        Me.grpFitModel.Size = New System.Drawing.Size(273, 100)
+        Me.grpFitModel.TabIndex = 1
+        Me.grpFitModel.TabStop = False
+        Me.grpFitModel.Text = "Goodness of Fit"
+        '
+        'ucrSaveGOF
+        '
+        Me.ucrSaveGOF.Location = New System.Drawing.Point(6, 14)
+        Me.ucrSaveGOF.Name = "ucrSaveGOF"
+        Me.ucrSaveGOF.Size = New System.Drawing.Size(255, 24)
+        Me.ucrSaveGOF.TabIndex = 15
         '
         'ucrDisplayChiData
         '
@@ -65,25 +113,15 @@ Partial Class sdgOneVarCompareModels
         Me.ucrDisplayChiData.Size = New System.Drawing.Size(139, 21)
         Me.ucrDisplayChiData.TabIndex = 2
         '
-        'grpFitModel
+        'chkSaveChi
         '
-        Me.grpFitModel.Controls.Add(Me.ucrDisplayChiData)
-        Me.grpFitModel.Controls.Add(Me.ucrSaveGOF)
-        Me.grpFitModel.Controls.Add(Me.chkSaveChi)
-        Me.grpFitModel.Controls.Add(Me.ucrChkInputChiSquareBreakpoints)
-        Me.grpFitModel.Location = New System.Drawing.Point(10, 10)
-        Me.grpFitModel.Name = "grpFitModel"
-        Me.grpFitModel.Size = New System.Drawing.Size(273, 100)
-        Me.grpFitModel.TabIndex = 0
-        Me.grpFitModel.TabStop = False
-        Me.grpFitModel.Text = "Goodness of Fit"
-        '
-        'ucrSaveGOF
-        '
-        Me.ucrSaveGOF.Location = New System.Drawing.Point(6, 19)
-        Me.ucrSaveGOF.Name = "ucrSaveGOF"
-        Me.ucrSaveGOF.Size = New System.Drawing.Size(260, 24)
-        Me.ucrSaveGOF.TabIndex = 0
+        Me.chkSaveChi.AutoSize = True
+        Me.chkSaveChi.Location = New System.Drawing.Point(6, 44)
+        Me.chkSaveChi.Name = "chkSaveChi"
+        Me.chkSaveChi.Size = New System.Drawing.Size(115, 17)
+        Me.chkSaveChi.TabIndex = 1
+        Me.chkSaveChi.Text = "Display Chi-Square"
+        Me.chkSaveChi.UseVisualStyleBackColor = True
         '
         'ucrChkInputChiSquareBreakpoints
         '
@@ -93,19 +131,19 @@ Partial Class sdgOneVarCompareModels
         Me.ucrChkInputChiSquareBreakpoints.Size = New System.Drawing.Size(229, 20)
         Me.ucrChkInputChiSquareBreakpoints.TabIndex = 3
         '
-        'grpPlot
+        'grpPlotOptions
         '
-        Me.grpPlot.Controls.Add(Me.ucrSavePlots)
-        Me.grpPlot.Controls.Add(Me.ucrChkQQ)
-        Me.grpPlot.Controls.Add(Me.ucrChkPP)
-        Me.grpPlot.Controls.Add(Me.ucrChkDensity)
-        Me.grpPlot.Controls.Add(Me.ucrChkCDF)
-        Me.grpPlot.Location = New System.Drawing.Point(10, 116)
-        Me.grpPlot.Name = "grpPlot"
-        Me.grpPlot.Size = New System.Drawing.Size(273, 152)
-        Me.grpPlot.TabIndex = 1
-        Me.grpPlot.TabStop = False
-        Me.grpPlot.Text = "Plot"
+        Me.grpPlotOptions.Controls.Add(Me.ucrSavePlots)
+        Me.grpPlotOptions.Controls.Add(Me.ucrChkQQ)
+        Me.grpPlotOptions.Controls.Add(Me.ucrChkPP)
+        Me.grpPlotOptions.Controls.Add(Me.ucrChkDensity)
+        Me.grpPlotOptions.Controls.Add(Me.ucrChkCDF)
+        Me.grpPlotOptions.Location = New System.Drawing.Point(3, 3)
+        Me.grpPlotOptions.Name = "grpPlotOptions"
+        Me.grpPlotOptions.Size = New System.Drawing.Size(273, 152)
+        Me.grpPlotOptions.TabIndex = 2
+        Me.grpPlotOptions.TabStop = False
+        Me.grpPlotOptions.Text = "Plot Options"
         '
         'ucrSavePlots
         '
@@ -150,9 +188,8 @@ Partial Class sdgOneVarCompareModels
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(294, 312)
-        Me.Controls.Add(Me.grpPlot)
-        Me.Controls.Add(Me.grpFitModel)
+        Me.ClientSize = New System.Drawing.Size(303, 251)
+        Me.Controls.Add(Me.tbpOneVarCompareModels)
         Me.Controls.Add(Me.ucrSubBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -160,23 +197,29 @@ Partial Class sdgOneVarCompareModels
         Me.Name = "sdgOneVarCompareModels"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Display Options"
+        Me.tbpOneVarCompareModels.ResumeLayout(False)
+        Me.tbpFit.ResumeLayout(False)
+        Me.tbpPlot.ResumeLayout(False)
         Me.grpFitModel.ResumeLayout(False)
         Me.grpFitModel.PerformLayout()
-        Me.grpPlot.ResumeLayout(False)
+        Me.grpPlotOptions.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
 
     Friend WithEvents ucrSubBase As ucrButtonsSubdialogue
-    Friend WithEvents chkSaveChi As CheckBox
-    Friend WithEvents ucrDisplayChiData As ucrInputTextBox
+    Friend WithEvents tbpOneVarCompareModels As TabControl
+    Friend WithEvents tbpFit As TabPage
     Friend WithEvents grpFitModel As GroupBox
-    Friend WithEvents grpPlot As GroupBox
-    Friend WithEvents ucrChkInputChiSquareBreakpoints As ucrCheck
-    Friend WithEvents ucrChkCDF As ucrCheck
-    Friend WithEvents ucrChkDensity As ucrCheck
-    Friend WithEvents ucrChkPP As ucrCheck
-    Friend WithEvents ucrChkQQ As ucrCheck
     Friend WithEvents ucrSaveGOF As ucrSave
+    Friend WithEvents ucrDisplayChiData As ucrInputTextBox
+    Friend WithEvents chkSaveChi As CheckBox
+    Friend WithEvents ucrChkInputChiSquareBreakpoints As ucrCheck
+    Friend WithEvents tbpPlot As TabPage
+    Friend WithEvents grpPlotOptions As GroupBox
     Friend WithEvents ucrSavePlots As ucrSave
+    Friend WithEvents ucrChkQQ As ucrCheck
+    Friend WithEvents ucrChkPP As ucrCheck
+    Friend WithEvents ucrChkDensity As ucrCheck
+    Friend WithEvents ucrChkCDF As ucrCheck
 End Class

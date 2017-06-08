@@ -16,7 +16,8 @@
 Imports instat.Translations
 
 Public Class sdgOneVarCompareModels
-    Private clsRcdfcompFunction, clsRdenscompFunction, clsRqqcompFunction, clsRppcompFunction, clsListFunction, clsRAsDataFrame, clsModel, clsRsyntax, clsOperation As New RFunction
+    Private bControlsInitialised As Boolean = False
+    Private clsRcdfcompFunction, clsRdenscompFunction, clsRqqcompFunction, clsRppcompFunction, clsListFunction, clsRAsDataFrame, clsModel, clsRGofStat, clsRReceiver, clsRsyntax, clsOperation As New RFunction
     Private clsOperatorforTable, clsOperatorForBreaks As New ROperator
     Private WithEvents ucrRecs As ucrReceiver
     Public bfirstload As Boolean = True
@@ -37,10 +38,22 @@ Public Class sdgOneVarCompareModels
         ucrChkInputChiSquareBreakpoints.SetText("Input Chi-Square Breakpoints")
 
         'ucrChkPlots
+        ucrChkCDF.SetParameter(New RParameter("ft", 1), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkCDF.SetRDefault("TRUE")
         ucrChkCDF.SetText("CDF")
+
+        ucrChkDensity.SetParameter(New RParameter("ft", 1), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkDensity.SetText("Density")
+        ucrChkDensity.SetRDefault("FALSE")
+
+        ucrChkPP.SetParameter(New RParameter("ft", 1), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkPP.SetRDefault("FALSE")
         ucrChkPP.SetText("PP")
+
+        ucrChkQQ.SetParameter(New RParameter("ft", 1), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkQQ.SetRDefault("FALSE")
         ucrChkQQ.SetText("QQ")
+        InitialiseTabs()
 
         'ucrSavePlot
         ucrSavePlots.SetPrefix("plots")
@@ -50,22 +63,32 @@ Public Class sdgOneVarCompareModels
         ucrSavePlots.SetAssignToIfUncheckedValue("last_model")
     End Sub
 
+    Public Sub SetRFunction(clsNewRGofStat As RFunction, clsNewReceiver As RFunction, clsNewRcdfcompFunction As RFunction, Optional bReset As Boolean = False)
+        If Not bControlsInitialised Then
+            InitialiseControls()
+        End If
+
+        clsRGofStat = clsNewRGofStat
+        clsRcdfcompFunction = clsNewRcdfcompFunction
+        clsRReceiver = clsNewReceiver
+        'Setting Rcode for the sub dialog
+        ucrSaveGOF.SetRCode(clsRGofStat, bReset)
+        ucrChkCDF.SetRCode(clsRcdfcompFunction, bReset)
+        ucrChkDensity.SetRCode(clsRdenscompFunction, bReset)
+        ucrChkInputChiSquareBreakpoints.SetRCode(clsOperatorForBreaks, bReset)
+        ucrChkPP.SetRCode(clsRppcompFunction, bReset)
+        ucrChkQQ.SetRCode(clsRqqcompFunction, bReset)
 
 
+        If bReset Then
+            tbpOneVarCompareModels.SelectedIndex = 0
+        End If
+    End Sub
     Public Sub InitialiseDialog()
-        clsRcdfcompFunction.SetRCommand("cdfcomp")
-        clsRdenscompFunction.SetRCommand("denscomp")
-        clsRqqcompFunction.SetRCommand("qqcomp")
-        clsRppcompFunction.SetRCommand("ppcomp")
         ucrDisplayChiData.SetValidationTypeAsRVariable()
     End Sub
 
     Public Sub SetDefaults()
-        ucrChkCDF.Checked = True
-        ucrChkDensity.Checked = False
-        ucrChkPP.Checked = False
-        ucrChkQQ.Checked = False
-        chkSaveChi.Checked = True
         ucrSavePlots.Enabled = False ' disabled for now
         ucrDisplayChiData.Reset()
         If dlgOneVarCompareModels.ucrSelectorOneVarCompModels.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
@@ -102,7 +125,7 @@ Public Class sdgOneVarCompareModels
         End If
     End Sub
 
-    Private Sub ucrDisplayChiData_NameChanged() Handles ucrDisplayChiData.NameChanged
+    Private Sub ucrDisplayChiData_NameChanged()
         DisplayChiSquare()
     End Sub
 
@@ -114,19 +137,23 @@ Public Class sdgOneVarCompareModels
         Dim strTemp As String = ""
 
         If ucrChkCDF.Checked Then
-            clsRcdfcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.ucrReceiverCompareModels.GetVariables())
+            clsRcdfcompFunction.SetRCommand("fitdistrplus::cdfcomp")
+            clsRcdfcompFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
             frmMain.clsRLink.RunScript(clsRcdfcompFunction.ToScript(), 2)
         End If
         If ucrChkPP.Checked Then
-            clsRppcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.ucrReceiverCompareModels.GetVariables())
+            clsRppcompFunction.SetRCommand("fitdistrplus::denscomp")
+            clsRppcompFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
             frmMain.clsRLink.RunScript(clsRppcompFunction.ToScript(), 2)
         End If
         If ucrChkQQ.Checked Then
-            clsRqqcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.ucrReceiverCompareModels.GetVariables())
+            clsRqqcompFunction.SetRCommand("fitdistrplus::qqcomp")
+            clsRqqcompFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
             frmMain.clsRLink.RunScript(clsRqqcompFunction.ToScript(), 2)
         End If
         If ucrChkDensity.Checked Then
-            clsRdenscompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.ucrReceiverCompareModels.GetVariables())
+            clsRdenscompFunction.SetRCommand("fitdistrplus::ppcomp")
+            clsRdenscompFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
             frmMain.clsRLink.RunScript(clsRdenscompFunction.ToScript(), 2)
         End If
         If chkSaveChi.Checked Then
@@ -151,7 +178,7 @@ Public Class sdgOneVarCompareModels
         End If
     End Sub
 
-    Private Sub chkSaveChi_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveChi.CheckedChanged
+    Private Sub chkSaveChi_CheckedChanged(sender As Object, e As EventArgs)
         DisplayChiSquare()
     End Sub
 
@@ -168,6 +195,13 @@ Public Class sdgOneVarCompareModels
         End If
         Return bOkEnabled
     End Function
+
+    Private Sub InitialiseTabs()
+        For i = 0 To tbpOneVarCompareModels.TabCount - 1
+            tbpOneVarCompareModels.SelectedIndex = i
+        Next
+        tbpOneVarCompareModels.SelectedIndex = 0
+    End Sub
 
 End Class
 
