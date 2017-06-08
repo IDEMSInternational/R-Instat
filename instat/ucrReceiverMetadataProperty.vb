@@ -70,10 +70,10 @@ Public Class ucrReceiverMetadataProperty
 
             If ctrActive.Equals(ucrInputCboParamValue) Then
                 If clsLayerParam.strLayerParameterDataType = "boolean" Then
-                    ucrInputCboParamValue.SetItems({"TRUE", "FALSE"})
+                    ucrInputCboParamValue.SetItems({"TRUE", "FALSE"}, bAddConditions:=True)
                 ElseIf clsLayerParam.strLayerParameterDataType = "list" Then
                     If clsLayerParam.lstParameterStrings IsNot Nothing AndAlso clsLayerParam.lstParameterStrings.Count > 0 Then
-                        ucrInputCboParamValue.SetItems(clsLayerParam.lstParameterStrings)
+                        ucrInputCboParamValue.SetItems(clsLayerParam.lstParameterStrings, bAddConditions:=True)
                     Else
                         ucrInputCboParamValue.SetItems()
                     End If
@@ -109,4 +109,18 @@ Public Class ucrReceiverMetadataProperty
         ucrInputTextValue.SetAddRemoveParameter(bNew)
         ucrColor.SetAddRemoveParameter(bNew)
     End Sub
+
+    Public Overrides Sub AddOrRemoveParameter(bAdd As Boolean)
+        If ctrActive IsNot Nothing Then
+            ctrActive.AddOrRemoveParameter(bAdd)
+        End If
+    End Sub
+
+    Public Overrides Function CanAddParameter() As Boolean
+        If ctrActive IsNot Nothing Then
+            Return ctrActive.CanAddParameter()
+        Else
+            Return False
+        End If
+    End Function
 End Class

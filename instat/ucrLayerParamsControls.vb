@@ -20,7 +20,8 @@ Public Class ucrLayerParamsControls
     Private bControlsInitialised As Boolean = False
 
     Private Sub InitialiseControls()
-        ucrReceiverMetadataProperty.bAddRemoveParameter = False
+        ucrReceiverMetadataProperty.SetAddRemoveParameter(False)
+        ucrChkParamName.bChangeParameterValue = False
         ucrChkParamName.AddToLinkedControls(ucrLinked:=ucrReceiverMetadataProperty, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True) ', objNewDefaultState:=1)
     End Sub
 
@@ -29,6 +30,7 @@ Public Class ucrLayerParamsControls
             InitialiseControls()
         End If
         ucrReceiverMetadataProperty.SetControls(clsNewRCode:=clsNewRCode, clsNewLayerParam:=clsNewLayerParam, bReset:=bReset)
+        ucrChkParamName.SetRCode(clsNewRCode, bReset)
         If clsNewLayerParam IsNot Nothing Then
             ucrChkParamName.SetText(clsNewLayerParam.strLayerParameterName)
             ucrChkParamName.AddParameterPresentCondition(True, clsNewLayerParam.strLayerParameterName)

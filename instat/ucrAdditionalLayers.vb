@@ -15,10 +15,10 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class ucrAdditionalLayers
-    Public clsRSyntax As RSyntax
+    Public clsBaseOperator As ROperator
     'clsRSyntax is playing the role of "+" operator in the construction of the whole ggplot2 command. It will take as first parameter clsRggplotFunction and as other parameters the sdgLayerOptions.clsGeomFunction's of different layers.
-    Public clsRggplotFunction As New RFunction
-    Public clsGgplotAesFunction As New RFunction
+    Public clsRggplotFunction As RFunction
+    Public clsGgplotAesFunction As RFunction
     'clsRggplotFunction is the global ggplot function that takes as mapping parameter clsGgplotAesFunction. clsRggplotFunction is linked through to sdgLayerOptions where it might be modified when sdgLayerOptions.chkApplyOnAllLyers is ticked for instance.
     Public bFirstLoad As Boolean = True
     Public lstLayerComplete As New List(Of Boolean)
@@ -38,10 +38,8 @@ Public Class ucrAdditionalLayers
 
     End Sub
 
-    'The following three subs enable to link the RSyntax, clsGgplotFunction and clsAesFunction from ucrAdditionalLayers
-    'to the corresponding fields in dlgGeneralForGraphics or sdgPlots (both have an instance of ucrAdditionalLayers).  
-    Public Sub SetRSyntax(clsRSyntaxIn As RSyntax)
-        clsRSyntax = clsRSyntaxIn
+    Public Sub SetBaseOperator(clsNewBaseOperator As ROperator)
+        clsBaseOperator = clsNewBaseOperator
     End Sub
 
     Public Sub SetGGplotFunction(clsRggplotFunc As RFunction)
@@ -72,6 +70,7 @@ Public Class ucrAdditionalLayers
     Private Sub InitialiseControl()
 
     End Sub
+
     Private Sub cmdAdd_Click(sender As Object, e As EventArgs) Handles cmdAdd.Click
         Dim clsNewLocalAesFunction As New RFunction
         Dim clsNewGeomFunction As New RFunction
@@ -82,7 +81,7 @@ Public Class ucrAdditionalLayers
         clsNewGeomFunction.SetPackageName("ggplot2")
         clsNewGeomFunction.SetRCommand("geom_boxplot")
 
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsNewGeomFunction, clsNewGlobalAesFunc:=clsGgplotAesFunction, clsNewLocalAes:=clsNewLocalAesFunction, bFixGeom:=False, strDataframe:=strGlobalDataFrame, bApplyAesGlobally:=(bSetGlobalIsDefault AndAlso lstLayers.Items.Count = 0))
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsNewGeomFunction, clsNewGlobalAesFunc:=clsGgplotAesFunction, clsNewLocalAes:=clsNewLocalAesFunction, bFixGeom:=False, strDataframe:=strGlobalDataFrame, bApplyAesGlobally:=(bSetGlobalIsDefault AndAlso lstLayers.Items.Count = 0), iTabToDisplay:=0)
         ParentForm.SendToBack()
         sdgLayerOptions.ShowDialog()
         strGlobalDataFrame = sdgLayerOptions.GetGlobalDataFrame()
@@ -125,7 +124,7 @@ Public Class ucrAdditionalLayers
             lstLayers.Items(lstLayers.Items.IndexOf(lviLayer)).ForeColor = Color.Red
         End If
 
-        clsRSyntax.SetOperatorParameter(iPosition:=iLayerIndex, strParameterName:=strLayerName, clsRFunc:=sdgLayerOptions.clsGeomFunction.Clone())
+        clsBaseOperator.AddParameter(strParameterName:=strLayerName, clsRFunctionParameter:=sdgLayerOptions.clsGeomFunction.Clone(), iPosition:=iLayerIndex)
         'Note: as the GeomFunction on sdgLayerOptions will be edited for different layers, it cannot be linked like clsGgplotFunction would, it needs to be cloned.
 
         'When the number of Layers in the lstLayers on ucrAdditionalLayers need to check if OK is enabled on dlgGeneralForGraphics.
@@ -134,7 +133,7 @@ Public Class ucrAdditionalLayers
 
     Private Sub cmdDelete_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click
         If lstLayers.SelectedItems.Count = 1 Then
-            clsRSyntax.RemoveOperatorParameter(lstLayers.SelectedItems(0).Text)
+            clsBaseOperator.RemoveParameterByName(lstLayers.SelectedItems(0).Text)
             lstLayerComplete.RemoveAt(lstLayers.SelectedIndices(0))
             lstLayers.Items.Remove(lstLayers.SelectedItems(0))
 
@@ -148,7 +147,7 @@ Public Class ucrAdditionalLayers
         Dim clsLocalAes As RFunction
 
         'The selected geom is found as the RFunction of the appropriate RParameter of RSyntax. The name of that Parameter is the name of the selected item in the lstLayers. That one is fetched using .SelectedItems(0) as there can only be one selected item at a time when the edit button is clicked.
-        clsSelectedGeomFunction = clsRSyntax.GetParameter(lstLayers.SelectedItems(0).Text).clsArgumentCodeStructure
+        clsSelectedGeomFunction = clsBaseOperator.GetParameter(lstLayers.SelectedItems(0).Text).clsArgumentCodeStructure
         If clsSelectedGeomFunction.ContainsParameter("mapping") Then
             clsLocalAes = clsSelectedGeomFunction.GetParameter("mapping").clsArgumentCodeStructure
         Else
@@ -159,7 +158,7 @@ Public Class ucrAdditionalLayers
         End If
 
         'Warning: sdgLayerOptions should not be setup using dlgGeneralForGraphics' fields !! These fields should be given through to the ucrAdditionalLayers (which should have all these) 
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsSelectedGeomFunction, clsNewGlobalAesFunc:=clsGgplotAesFunction, clsNewLocalAes:=clsLocalAes, bFixGeom:=True, strDataframe:=strGlobalDataFrame, bApplyAesGlobally:=False, bReset:=False)
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsSelectedGeomFunction, clsNewGlobalAesFunc:=clsGgplotAesFunction, clsNewLocalAes:=clsLocalAes, bFixGeom:=True, strDataframe:=strGlobalDataFrame, bApplyAesGlobally:=False, bReset:=False, iTabToDisplay:=0)
         'It has been chosen to fix the value of bApplyAesGlobally to False as when a Layer is editted, the choice to apply the Aes globally should be reconsidered no matter what it has been during last edit.
         ParentForm.SendToBack() 'Otherwise sdgLayerOptions appears behind sdgPLotOptions
         sdgLayerOptions.ShowDialog()
