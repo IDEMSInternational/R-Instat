@@ -13,7 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports instat
+
 Imports instat.Translations
 Public Class dlgStringHandling
     Private bFirstload As Boolean = True
@@ -57,13 +57,14 @@ Public Class dlgStringHandling
         ucrPnlStringHandling.AddFunctionNamesCondition(rdoReplaceAll, "str_replace_all")
 
         ucrInputPattern.SetParameter(New RParameter("pattern", 1))
+        ucrReceiverForRegexExpression.SetParameter(New RParameter("pattern", 1))
         ucrInputReplaceBy.SetParameter(New RParameter("replacement", 2))
 
         'disabling replaceby input text box
         ucrPnlStringHandling.AddToLinkedControls(ucrInputReplaceBy, {rdoReplace, rdoReplaceAll}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputReplaceBy.SetLinkedDisplayControl(lblReplaceBy)
         ucrChkRegex.AddToLinkedControls(ucrReceiverForRegexExpression, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrReceiverForRegexExpression.AddToLinkedControls(ucrChkRegex, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        'ucrChkRegex.AddToLinkedControls(ucrChkRegex, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
 
         'ucrSave
@@ -139,7 +140,8 @@ Public Class dlgStringHandling
         ucrInputPattern.AddAdditionalCodeParameterPair(clsReplaceFunction, New RParameter("pattern", 1), iAdditionalPairNo:=4)
         ucrInputPattern.AddAdditionalCodeParameterPair(clsReplaceAllFunction, New RParameter("pattern", 1), iAdditionalPairNo:=5)
         ucrInputPattern.AddAdditionalCodeParameterPair(clsFixedFunction, New RParameter("pattern", 1), iAdditionalPairNo:=6)
-        ucrInputPattern.AddAdditionalCodeParameterPair(clsRegexFunction, New RParameter("pattern", 1), iAdditionalPairNo:=7)
+
+        'ucrReceiverForRegexExpression.AddAdditionalCodeParameterPair(clsRegexFunction, New RParameter("pattern", 1), iAdditionalPairNo:=1)
 
         ucrInputReplaceBy.AddAdditionalCodeParameterPair(clsReplaceFunction, New RParameter("replacement", 2), iAdditionalPairNo:=1)
 
@@ -150,7 +152,7 @@ Public Class dlgStringHandling
         ucrPnlStringHandling.SetRCode(clsCountFunction, bReset)
         ucrSaveStringHandling.SetRCode(clsCountFunction, bReset)
         ucrChkIgnoreCase.SetRCode(clsCountFunction, bReset)
-        ucrChkRegex.SetRCode(clsRegexFunction, bReset)
+        ucrReceiverForRegexExpression.SetRCode(clsRegexFunction, bReset)
 
         ucrSaveStringHandling.AddAdditionalRCode(clsDetectFunction, iAdditionalPairNo:=1)
         ucrSaveStringHandling.AddAdditionalRCode(clsExtractFunction, iAdditionalPairNo:=2)
@@ -280,9 +282,9 @@ Public Class dlgStringHandling
     End Sub
 
     Private Sub TestOkEnabled()
-        If ((rdoReplace.Checked OrElse rdoReplaceAll.Checked) AndAlso ucrSaveStringHandling.IsComplete() AndAlso Not ucrReceiverStringHandling.IsEmpty() AndAlso Not ucrInputPattern.IsEmpty AndAlso Not ucrInputReplaceBy.IsEmpty) Then
+        If ((rdoReplace.Checked OrElse rdoReplaceAll.Checked) AndAlso ucrSaveStringHandling.IsComplete() AndAlso Not ucrReceiverStringHandling.IsEmpty() AndAlso ((Not ucrInputPattern.IsEmpty OrElse Not ucrReceiverForRegexExpression.IsEmpty)) AndAlso Not ucrInputReplaceBy.IsEmpty) Then
             ucrBase.OKEnabled(True)
-        ElseIf (rdoCount.Checked OrElse rdoDetect.Checked OrElse rdoExtract.Checked OrElse rdoLocate.Checked) AndAlso ucrSaveStringHandling.IsComplete() AndAlso Not ucrReceiverStringHandling.IsEmpty() AndAlso Not ucrInputPattern.IsEmpty() Then
+        ElseIf (rdoCount.Checked OrElse rdoDetect.Checked OrElse rdoExtract.Checked OrElse rdoLocate.Checked) AndAlso ucrSaveStringHandling.IsComplete() AndAlso Not ucrReceiverStringHandling.IsEmpty() AndAlso ((Not ucrInputPattern.IsEmpty() OrElse Not ucrReceiverForRegexExpression.IsEmpty)) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
