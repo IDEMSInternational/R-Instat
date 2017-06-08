@@ -94,6 +94,7 @@ Public Class ucrCore
     Public Overridable Sub UpdateControl(Optional bReset As Boolean = False)
         Dim clsTempRCode As RCodeStructure
         Dim clsTempRParameter As RParameter
+        Dim clsTempCloneParameter As RParameter
 
         For i As Integer = 0 To lstAllRCodes.Count - 1
             clsTempRCode = lstAllRCodes(i)
@@ -104,25 +105,23 @@ Public Class ucrCore
                         If clsTempRCode.ContainsParameter(clsTempRParameter.strArgumentName) Then
                             SetParameter(clsTempRCode.GetParameter(clsTempRParameter.strArgumentName), i)
                         Else
-                            'This causes an issue if this parameter is linked to another control
-                            'because .Clone breaks the link
+                            'This causes an issue if this parameter is contained in another control
+                            'because the link is broken
                             'Not an issue if controls do not need to share parameters
-                            SetParameter(GetParameter(i).Clone(), i)
-                            'SetParameter(New RParameter(GetParameter(i).strArgumentName), i)
-                            'TODO if we don't reset what should happen to the parameter value
-                            '     when it's not found in the function?
-                            '     Causes issues when parameter retains value from different dialog
-                            If bReset Then
-                                If objDefaultState Is Nothing Then
-                                    If objRDefault IsNot Nothing Then
-                                        SetToRDefault()
-                                    Else
-                                        ResetControlValue()
-                                    End If
-                                    'Exit Sub
+                            'This is needed so that if this parameter is contained in functions in multiple dialogs,
+                            'the parameter only changes the functions in the currently open dialog
+                            clsTempCloneParameter = GetParameter(i).Clone()
+                            If Not bUpdateRCodeFromControl Then
+                                clsTempCloneParameter.ClearAllArguments()
+                            End If
+                            SetParameter(clsTempCloneParameter, i)
+
+                            'If the control has a default state then it's linked control will set the value and we should not set to R default
+                            If objDefaultState Is Nothing Then
+                                If objRDefault IsNot Nothing Then
+                                    SetToRDefault()
                                 End If
-                            Else
-                                ResetControlValue()
+                                'If there is no R default the value should remain nothing and SetControlValue() will set an apppropriate "empty" value
                             End If
                         End If
                     End If
@@ -153,9 +152,7 @@ Public Class ucrCore
             Next
             If Not bConditionsMet Then
                 If bAllowNonConditionValues Then
-                    If GetValueToSet() IsNot Nothing Then
-                        SetToValue(GetValueToSet())
-                    End If
+                    SetToValue(GetValueToSet())
                 Else
                     MsgBox("Developer error: no state of control " & Name & " satisfies it's condition. Cannot determine how to set the control from the RCode. Modify control setup so that one state can satisfy its conditions.")
                 End If
@@ -241,7 +238,8 @@ Public Class ucrCore
         If clsParameter IsNot Nothing AndAlso objRDefault IsNot Nothing Then
             clsParameter.SetArgumentValue(objRDefault.ToString())
         End If
-        UpdateControl()
+        'Removed because this is currently only called within UpdateControl() so control will be updated anyway
+        'UpdateControl()
     End Sub
 
     ''Set a linked paramter name and what the control should do when the parameter is not in the R code
