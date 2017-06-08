@@ -49,7 +49,7 @@ Public Class sdgThemes
         ucrXAxisLines.setlabel("Line along x axis")
         ucrTickMarksAxes.setlabel("Tick marks along axes")
         ucrThemeAxesTitle.setlabel("Label of axes")
-        ucrThemeAxesTickLabels.setlabel("Tick marks along axes")
+        ucrThemeAxesTickLabels.setlabel("Tick marks label along axes")
         ucrThemeAxesLines.setlabel("Lines along axes")
 
         ucrLegendTitle.setlabel("Title of legend")
@@ -61,11 +61,12 @@ Public Class sdgThemes
         ucrLegendSpacing.setlabel("Spacing between legends")
         ucrLegendSpacingXAxis.setlabel("Horizontal spacing between legends")
         ucrLegendSpacingYAxis.setlabel("Horizontal spacing between legends")
+        ucrLegendBoxSpacing.setlabel("Space between plot area legend box")
 
         ucrPanelGridMajorXAxis.setlabel("vertical major grid lines ")
         ucrPanelGridMajorYAxis.setlabel("horizontal major grid lines ")
         ucrPanelGridMinorXAxis.setlabel("vertical minor grid lines")
-        ucrPanelGridMinorXAxis.setlabel("horizontal minor grid lines")
+        ucrPanelGridMinorYAxis.setlabel("horizontal minor grid lines")
 
         ucrPanelGrid.setlabel("Grid lines")
         ucrPanelGridMajor.setlabel("Major grid lines ")
@@ -88,7 +89,7 @@ Public Class sdgThemes
 
         ucrLegendKeySize.setlabel("Size of legend keys")
         ucrLegendKeyHeight.setlabel("Key background height")
-        ucrLegendKeySize.setlabel("Key background width")
+        ucrLegendKeyWidth.setlabel("Key background width")
 
         ucrPanelSpacing.setlabel("Spacing between facet panels ")
         ucrPanelSpacingXAxis.setlabel("Horizontal spacing between facet panels")
@@ -213,6 +214,7 @@ Public Class sdgThemes
         Dim clsUnitLegendSpacing As New RFunction
         Dim clsUnitLegendSpacingXAxis As New RFunction
         Dim clsUnitLegendSpacingYAxis As New RFunction
+        Dim clsUnitLegendBoxSpacing As New RFunction
 
         If Not bControlsInitialised Then
             InitialiseControls()
@@ -279,6 +281,7 @@ Public Class sdgThemes
         dctThemeFunctions.TryGetValue("legend.spacing", clsUnitLegendSpacing)
         dctThemeFunctions.TryGetValue("legend.spacing.x", clsUnitLegendSpacingXAxis)
         dctThemeFunctions.TryGetValue("legend.spacing.y", clsUnitLegendSpacingYAxis)
+        dctThemeFunctions.TryGetValue("legend.box.spacing", clsUnitLegendBoxSpacing)
 
         dctThemeFunctions.TryGetValue("plot.background", clsElementPlotBackground)
 
@@ -288,8 +291,8 @@ Public Class sdgThemes
         ucrTickMarksYAxis.SetRCodeForControl("axis.ticks.y", clsYElementLine, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
         ucrXAxisLines.SetRCodeForControl("axis.line.x", clsElementLineXAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
         ucrYAxisLines.SetRCodeForControl("axis.line.y", clsElementLineYAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrThemeAxesTickLabels.SetRCodeForControl("axis.ticks", clsElementTickAxes, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrTickMarksAxes.SetRCodeForControl("axis.text", clsElementTickText, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrTickMarksAxes.SetRCodeForControl("axis.ticks", clsElementTickAxes, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrThemeAxesTickLabels.SetRCodeForControl("axis.text", clsElementTickText, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
         ucrThemeAxesTitle.SetRCodeForControl("axis.title", clsXElementTitleText, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
         ucrThemeAxesLines.SetRCodeForControl("axis.line", clsElementLineAxes, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
@@ -311,7 +314,8 @@ Public Class sdgThemes
 
         ucrLegendSpacing.SetRCodeForControl("legend.spacing", clsUnitLegendSpacing, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
         ucrLegendSpacingXAxis.SetRCodeForControl("legend.spacing.x", clsUnitLegendSpacingXAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrLegendSpacingXAxis.SetRCodeForControl("legend.spacing.y", clsUnitLegendSpacingYAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrLegendSpacingYAxis.SetRCodeForControl("legend.spacing.y", clsUnitLegendSpacingYAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrLegendBoxSpacing.SetRCodeForControl("legend.box.spacing", clsUnitLegendBoxSpacing, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
         ucrPanelGridMajorXAxis.SetRCodeForControl("panel.grid.major.x", clsElementPanelGridMajorXAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
         ucrPanelGridMajorYAxis.SetRCodeForControl("panel.grid.major.y", clsElementPanelGridMajorYAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)

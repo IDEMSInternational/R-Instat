@@ -37,7 +37,7 @@ Public Class ucrGridUnit
         ucrInputVector.SetParameter(New RParameter("x"))
         ucrInputVector.AddQuotesIfUnrecognised = False
         ' ucrInputVector.SetValidationTypeAsNumeric()
-        ucrInputVector.SetRDefault("1")
+
 
         ucrChkUnits.AddToLinkedControls(ucrInputUnits, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkUnits.AddToLinkedControls(ucrInputData, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
