@@ -23,8 +23,7 @@ Partial Class ucrElementRectControl
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.grpElementRect = New System.Windows.Forms.GroupBox()
-        Me.ucrChkLegendLineEnd = New instat.ucrCheck()
-        Me.ucrInputLegendLineEnd = New instat.ucrInputComboBox()
+        Me.ucrLegendFill = New instat.ucrColors()
         Me.ucrLegendColors = New instat.ucrColors()
         Me.ucrChkLegendFill = New instat.ucrCheck()
         Me.ucrChkLegendSize = New instat.ucrCheck()
@@ -32,15 +31,12 @@ Partial Class ucrElementRectControl
         Me.ucrChkLegendColour = New instat.ucrCheck()
         Me.ucrNudLegendSize = New instat.ucrNud()
         Me.ucrInputLegendLineType = New instat.ucrInputComboBox()
-        Me.ucrLegendFill = New instat.ucrColors()
         Me.grpElementRect.SuspendLayout()
         Me.SuspendLayout()
         '
         'grpElementRect
         '
         Me.grpElementRect.Controls.Add(Me.ucrLegendFill)
-        Me.grpElementRect.Controls.Add(Me.ucrChkLegendLineEnd)
-        Me.grpElementRect.Controls.Add(Me.ucrInputLegendLineEnd)
         Me.grpElementRect.Controls.Add(Me.ucrLegendColors)
         Me.grpElementRect.Controls.Add(Me.ucrChkLegendFill)
         Me.grpElementRect.Controls.Add(Me.ucrChkLegendSize)
@@ -50,28 +46,19 @@ Partial Class ucrElementRectControl
         Me.grpElementRect.Controls.Add(Me.ucrInputLegendLineType)
         Me.grpElementRect.Location = New System.Drawing.Point(8, 3)
         Me.grpElementRect.Name = "grpElementRect"
-        Me.grpElementRect.Size = New System.Drawing.Size(238, 145)
+        Me.grpElementRect.Size = New System.Drawing.Size(238, 122)
         Me.grpElementRect.TabIndex = 0
         Me.grpElementRect.TabStop = False
         Me.grpElementRect.Text = "ElementRect"
         '
-        'ucrChkLegendLineEnd
+        'ucrLegendFill
         '
-        Me.ucrChkLegendLineEnd.Checked = False
-        Me.ucrChkLegendLineEnd.Location = New System.Drawing.Point(6, 117)
-        Me.ucrChkLegendLineEnd.Name = "ucrChkLegendLineEnd"
-        Me.ucrChkLegendLineEnd.Size = New System.Drawing.Size(88, 20)
-        Me.ucrChkLegendLineEnd.TabIndex = 97
-        '
-        'ucrInputLegendLineEnd
-        '
-        Me.ucrInputLegendLineEnd.AddQuotesIfUnrecognised = True
-        Me.ucrInputLegendLineEnd.IsReadOnly = False
-        Me.ucrInputLegendLineEnd.Location = New System.Drawing.Point(95, 115)
-        Me.ucrInputLegendLineEnd.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.ucrInputLegendLineEnd.Name = "ucrInputLegendLineEnd"
-        Me.ucrInputLegendLineEnd.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputLegendLineEnd.TabIndex = 96
+        Me.ucrLegendFill.AddQuotesIfUnrecognised = True
+        Me.ucrLegendFill.IsReadOnly = False
+        Me.ucrLegendFill.Location = New System.Drawing.Point(95, 90)
+        Me.ucrLegendFill.Name = "ucrLegendFill"
+        Me.ucrLegendFill.Size = New System.Drawing.Size(137, 21)
+        Me.ucrLegendFill.TabIndex = 98
         '
         'ucrLegendColors
         '
@@ -136,22 +123,13 @@ Partial Class ucrElementRectControl
         Me.ucrInputLegendLineType.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputLegendLineType.TabIndex = 88
         '
-        'ucrLegendFill
-        '
-        Me.ucrLegendFill.AddQuotesIfUnrecognised = True
-        Me.ucrLegendFill.IsReadOnly = False
-        Me.ucrLegendFill.Location = New System.Drawing.Point(95, 90)
-        Me.ucrLegendFill.Name = "ucrLegendFill"
-        Me.ucrLegendFill.Size = New System.Drawing.Size(137, 21)
-        Me.ucrLegendFill.TabIndex = 98
-        '
         'ucrElementRectControl
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.grpElementRect)
         Me.Name = "ucrElementRectControl"
-        Me.Size = New System.Drawing.Size(253, 155)
+        Me.Size = New System.Drawing.Size(253, 131)
         Me.grpElementRect.ResumeLayout(False)
         Me.ResumeLayout(False)
 
@@ -165,7 +143,5 @@ Partial Class ucrElementRectControl
     Friend WithEvents ucrChkLegendColour As ucrCheck
     Friend WithEvents ucrNudLegendSize As ucrNud
     Friend WithEvents ucrInputLegendLineType As ucrInputComboBox
-    Friend WithEvents ucrChkLegendLineEnd As ucrCheck
-    Friend WithEvents ucrInputLegendLineEnd As ucrInputComboBox
     Friend WithEvents ucrLegendFill As ucrColors
 End Class

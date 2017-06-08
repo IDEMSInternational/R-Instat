@@ -44,16 +44,8 @@ Public Class ucrElementRectControl
         ucrLegendFill.AddQuotesIfUnrecognised = False
         ucrLegendFill.SetRDefault(Chr(34) & "black" & Chr(34))
 
-
-        ucrChkLegendLineEnd.SetText("Line End")
-        ucrInputLegendLineEnd.SetParameter(New RParameter("lineend"))
-        ucrInputLegendLineEnd.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctLineEnd))
-        ucrInputLegendLineEnd.SetRDefault(Chr(34) & "square" & Chr(34))
-
-
         ucrChkLegendSize.AddToLinkedControls(ucrNudLegendSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkLegendLineType.AddToLinkedControls(ucrInputLegendLineType, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkLegendLineEnd.AddToLinkedControls(ucrInputLegendLineEnd, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkLegendColour.AddToLinkedControls(ucrLegendColors, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkLegendFill.AddToLinkedControls(ucrLegendFill, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
@@ -87,8 +79,6 @@ Public Class ucrElementRectControl
         ucrInputLegendLineType.SetRCode(clsElementLine, bReset)
         ucrChkLegendLineType.SetRCode(clsElementLine, bReset)
 
-        ucrInputLegendLineEnd.SetRCode(clsElementLine, bReset)
-        ucrChkLegendLineEnd.SetRCode(clsElementLine, bReset)
         AddRemoveElementLineAxis()
     End Sub
 

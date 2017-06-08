@@ -64,10 +64,10 @@ Public Class sdgThemes
         ucrPanelBorder.setlabel("Panel border")
         ucrPanelBackGround.setlabel("Panel background")
 
-        ucrPlotBackGround.setlabel("")
-        ucrPlotCaption.setlabel("")
-        ucrPlotSubTitle.setlabel("")
-        ucrPlotTitle.setlabel("")
+        ucrPlotBackGround.setlabel("Background of the entire plot")
+        ucrPlotCaption.setlabel("Plot title(text appearance)")
+        ucrPlotSubTitle.setlabel("Plot subtitle(text appearance)")
+        ucrPlotTitle.setlabel("Caption below the plot (text appearance)")
 
         'Units
         ucrChkUnits.SetText("Tick length")
@@ -144,6 +144,10 @@ Public Class sdgThemes
         Dim clsElementLegendText As New RFunction
         Dim clsElementLegendTitle As New RFunction
 
+        Dim clsElementPlotTitle As New RFunction
+        Dim clsElementPlotSubtitle As New RFunction
+        Dim clsElementPlotCaption As New RFunction
+
         Dim clsXElementLine As New RFunction
         Dim clsElementLineAxes As New RFunction
         Dim clsYElementLine As New RFunction
@@ -159,6 +163,8 @@ Public Class sdgThemes
 
         Dim clsElementBorder As New RFunction
         Dim clsElementPanelBackGround As New RFunction
+
+        Dim clsElementPlotBackground As New RFunction
 
         Dim clsElementPanelGrid As New RFunction
         Dim clsElementPanelGridMajor As New RFunction
@@ -186,6 +192,9 @@ Public Class sdgThemes
         dctThemeFunctions.TryGetValue("axis.title.x.top", clsXTopElementTitle)
         dctThemeFunctions.TryGetValue("axis.title.y.right", clsYRightElementTitle)
 
+        dctThemeFunctions.TryGetValue("plot.title", clsElementPlotTitle)
+        dctThemeFunctions.TryGetValue("plot.subtitle", clsElementPlotSubtitle)
+        dctThemeFunctions.TryGetValue("plot.caption", clsElementPlotCaption)
 
         dctThemeFunctions.TryGetValue("axis.ticks.x", clsXElementLine)
         dctThemeFunctions.TryGetValue("axis.ticks.y", clsYElementLine)
@@ -194,15 +203,17 @@ Public Class sdgThemes
         dctThemeFunctions.TryGetValue("axis.ticks", clsElementTickAxes)
         dctThemeFunctions.TryGetValue("axis.line", clsElementLineAxes)
 
-        dctThemeFunctions.TryGetValue("Panel.grid", clsElementPanelGrid)
-        dctThemeFunctions.TryGetValue("Panel.grid.major", clsElementPanelGridMajor)
-        dctThemeFunctions.TryGetValue("Panel.grid.minor", clsElementPanelGridMinor)
+        dctThemeFunctions.TryGetValue("panel.grid", clsElementPanelGrid)
+        dctThemeFunctions.TryGetValue("panel.grid.major", clsElementPanelGridMajor)
+        dctThemeFunctions.TryGetValue("panel.grid.minor", clsElementPanelGridMinor)
 
         dctThemeFunctions.TryGetValue("legend.background", clsElementLegendBackground)
         dctThemeFunctions.TryGetValue("legend.box.background", clsElementLegendBoxBackground)
         dctThemeFunctions.TryGetValue("legend.key", clsElementLegendtKey)
-        dctThemeFunctions.TryGetValue("Panel.background", clsElementPanelBackGround)
-        dctThemeFunctions.TryGetValue("Panel.border", clsElementBorder)
+        dctThemeFunctions.TryGetValue("panel.background", clsElementPanelBackGround)
+        dctThemeFunctions.TryGetValue("panel.border", clsElementBorder)
+
+        dctThemeFunctions.TryGetValue("plot.background", clsElementPlotBackground)
 
         ucrTickMarksXAxis.SetRCodeForControl("axis.ticks.x", clsXElementLine, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
         ucrTickMarksYAxis.SetRCodeForControl("axis.ticks.y", clsYElementLine, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
@@ -229,16 +240,16 @@ Public Class sdgThemes
         ucrLegendBoxBackground.SetRCodeForControl("legend.box.background", clsElementLegendBoxBackground, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
         ucrLegendKey.SetRCodeForControl("legend.key", clsElementLegendtKey, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
-        ucrPanelGrid.SetRCodeForControl("Panel.grid", clsElementPanelGrid, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrPanelGridMajor.SetRCodeForControl("Panel.grid.major", clsElementPanelGridMajor, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrPanelGridMinor.SetRCodeForControl("Panel.grid.minor", clsElementPanelGridMinor, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrPanelBorder.SetRCodeForControl("Panel.background", clsElementPanelBackGround, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrPanelBackGround.SetRCodeForControl("Panel.border", clsElementBorder, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrPanelGrid.SetRCodeForControl("panel.grid", clsElementPanelGrid, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrPanelGridMajor.SetRCodeForControl("panel.grid.major", clsElementPanelGridMajor, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrPanelGridMinor.SetRCodeForControl("panel.grid.minor", clsElementPanelGridMinor, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrPanelBackGround.SetRCodeForControl("panel.background", clsElementPanelBackGround, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrPanelBorder.SetRCodeForControl("panel.border", clsElementBorder, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
-        ucrPlotBackGround.SetRCodeForControl("Panel.border", clsElementBorder, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrPlotCaption.SetRCodeForControl("Panel.border", clsElementBorder, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrPlotSubTitle.SetRCodeForControl("Panel.border", clsElementBorder, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrPlotTitle.SetRCodeForControl("Panel.border", clsElementBorder, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrPlotBackGround.SetRCodeForControl("plot.background", clsElementPlotBackground, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrPlotCaption.SetRCodeForControl("plot.caption", clsElementPlotCaption, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrPlotSubTitle.SetRCodeForControl("plot.subtitle", clsElementPlotSubtitle, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrPlotTitle.SetRCodeForControl("plot.title", clsElementPlotTitle, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
 
         urChkLegendPosition.SetRCode(clsThemeFunction, bReset)
