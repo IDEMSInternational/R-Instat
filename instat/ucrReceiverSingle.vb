@@ -206,6 +206,7 @@ Public Class ucrReceiverSingle
         OnSelectionChanged()
     End Sub
 
+    'TODO make these global options
     Public Overrides Sub SetColor()
         txtReceiverSingle.BackColor = Color.Aqua
     End Sub
@@ -279,6 +280,13 @@ Public Class ucrReceiverSingle
                 AddHandler ParentForm.Shown, AddressOf ParentForm_Shown
             End If
             bFirstLoad = False
+            If Selector IsNot Nothing AndAlso Not Selector.CurrentReceiver.Equals(Me) Then
+                RemoveColor()
+            End If
         End If
+    End Sub
+
+    Public Overrides Sub SetTextColour(clrNew As Color)
+        txtReceiverSingle.ForeColor = clrNew
     End Sub
 End Class
