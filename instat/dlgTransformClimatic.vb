@@ -146,6 +146,12 @@ Public Class dlgTransformClimatic
         ucrNudWBCapacity.Value = 60
         ucrChkValuesUnderThreshold.Checked = False
 
+        'these are disabled since they are not used anywhere in the dialog but Roger proposed in the issues page
+        ucrInputSpellLower.Enabled = False
+        ucrInputSpellUpper.Enabled = False
+        lblValuesBetween.Enabled = False
+        lblSpellAnd.Enabled = False
+
         clsTransformManipulationsFunc.SetRCommand("list")
         clsTransformManipulationsFunc.AddParameter("group_by", clsRFunctionParameter:=clsTransformGroupByFunc, bIncludeArgumentName:=False)
 
@@ -223,6 +229,7 @@ Public Class dlgTransformClimatic
     End Sub
 
     Private Sub ucrPnlTransform_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlTransform.ControlContentsChanged
+        Dim bRain As Boolean = False
         If rdoMoving.Checked Then
             clsRRollFuncExpr.AddParameter("width", ucrNudSumOver.Value)
             clsRRollFuncExpr.AddParameter("FUN", clsRFunctionParameter:=clsMatchFun)
@@ -245,12 +252,20 @@ Public Class dlgTransformClimatic
             ucrInputColName.SetName("spell")
             grpTransform.Text = "Spell"
         ElseIf rdoWaterBalance.Checked Then
+            bRain = True
             clsReplaceNA.AddParameter("function_exp", Chr(34) & "replace(" & ucrReceiverData.GetVariableNames(False) & ", is.na(" & ucrReceiverData.GetVariableNames(False) & ")," & ucrNudWBCapacity.Value & ")" & Chr(34))
             clsSubCalcList.AddParameter("sub1", clsRFunctionParameter:=clsReplaceNA)
             clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubCalcList)
             clsRTransform.AddParameter("function_exp", Chr(34) & "Reduce(function(x, y) pmin(pmax(x + y - " & ucrInputEvaporation.GetText() & ", 0), " & ucrNudWBCapacity.Value & "), replace_NA, accumulate=TRUE)" & Chr(34))
             ucrInputColName.SetName("water_balance")
             grpTransform.Text = "Water Balance"
+        End If
+        If bRain Then
+            ucrReceiverData.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "rain" & Chr(34)})
+            ucrReceiverData.bAutoFill = True
+        Else
+            ucrReceiverData.RemoveIncludedMetadataProperty("Climatic_Type")
+            'ucrReceiverData.bAutoFill = True
         End If
     End Sub
 
