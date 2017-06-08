@@ -124,8 +124,8 @@ Public Class dlgInsertColumn
         ucrInputBeforeAfter.Reset()
         ucrInputDefaultValue.Reset()
         ucrInputPrefixForNewColumn.Reset()
-        ucrInputPrefixForNewColumn.SetName("X")
         clsInsertColumnFunction.AddParameter("col_data", " NA")
+        clsInsertColumnFunction.AddParameter("col_name", "X")
 
         clsInsertColumnFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
         clsInsertColumnFunction.AddParameter("use_col_name_as_prefix", "TRUE")
