@@ -315,8 +315,8 @@ Public Class ucrGeomListWithParameters
             clsGeomFunction.RemoveParameterByName("data")
 
             'Here the global ggplot function takes the relevant "mapping" and "data" parameters as required by "ApplyOnAllLayers".
-            clsGgplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsGlobalAesFunction)
-            clsGgplotFunction.AddParameter("data", clsRFunctionParameter:=ucrGeomWithAesSelector.ucrAvailableDataFrames.clsCurrDataFrame.Clone())
+            clsGgplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsGlobalAesFunction, iPosition:=1)
+            clsGgplotFunction.AddParameter("data", clsRFunctionParameter:=ucrGeomWithAesSelector.ucrAvailableDataFrames.clsCurrDataFrame.Clone(), iPosition:=0)
 
             strGlobalDataFrame = ucrGeomWithAesSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text
             clsCurrentAesFunction = clsGlobalAesFunction
@@ -331,7 +331,7 @@ Public Class ucrGeomListWithParameters
 
             'If global data frame later changes, data parameter is needed in each geom?
             If ucrGeomWithAesSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> strGlobalDataFrame Then
-                clsGeomFunction.AddParameter("data", clsRFunctionParameter:=ucrGeomWithAesSelector.ucrAvailableDataFrames.clsCurrDataFrame.Clone())
+                clsGeomFunction.AddParameter("data", clsRFunctionParameter:=ucrGeomWithAesSelector.ucrAvailableDataFrames.clsCurrDataFrame.Clone(), iPosition:=1)
             Else
                 clsGeomFunction.RemoveParameterByName("data")
             End If
@@ -364,7 +364,7 @@ Public Class ucrGeomListWithParameters
 
         'Done after because aes may be added in from above
         If Not ucrChkApplyOnAllLayers.Checked AndAlso clsLocalAesFunction.iParameterCount > 0 Then
-            clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=clsLocalAesFunction.Clone())
+            clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=clsLocalAesFunction.Clone(), iPosition:=0)
         Else
             clsGeomFunction.RemoveParameterByName("mapping")
         End If

@@ -56,7 +56,10 @@ Public Class sdgLayerOptions
 
     End Sub
 
-    Public Sub SetupLayer(clsNewGgPlot As RFunction, clsNewGeomFunc As RFunction, clsNewGlobalAesFunc As RFunction, clsNewLocalAes As RFunction, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bApplyAesGlobally As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional bReset As Boolean = False)
+    Public Sub SetupLayer(clsNewGgPlot As RFunction, clsNewGeomFunc As RFunction, clsNewGlobalAesFunc As RFunction, clsNewLocalAes As RFunction, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bApplyAesGlobally As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional bReset As Boolean = False, Optional iTabToDisplay As Integer = 0)
+        If iTabToDisplay > 0 AndAlso iTabToDisplay <= tbcLayers.TabCount - 1 Then
+            tbcLayers.SelectedIndex = iTabToDisplay
+        End If
         clsGeomFunction = clsNewGeomFunc
         clsAesFunction = clsNewGlobalAesFunc
         clsGgplotFunction = clsNewGgPlot
