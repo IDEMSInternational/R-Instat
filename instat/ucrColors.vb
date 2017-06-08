@@ -15,15 +15,35 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class ucrColors
+    Private strPickColour As String = "Pick Colour..."
+    Private strColours As String() = {"NULL", strPickColour, Chr(34) & "black" & Chr(34), Chr(34) & "white" & Chr(34), Chr(34) & "blue" & Chr(34), Chr(34) & "red" & Chr(34), Chr(34) & "yellow" & Chr(34), Chr(34) & "purple" & Chr(34), Chr(34) & "green" & Chr(34), Chr(34) & "orange" & Chr(34), Chr(34) & "grey" & Chr(34), Chr(34) & "brown" & Chr(34), Chr(34) & "pink" & Chr(34)}
+    'TODO move this to a global location so that all controls can access the same colour dialog and user defined colours are kept
+    Private dlgColour As New ColorDialog
+
     Private Sub ucrColors_Load(sender As Object, e As EventArgs) Handles Me.Load
-        Me.SetItems({Chr(34) & "Pick Colour" & Chr(34), Chr(34) & "black" & Chr(34), Chr(34) & "white" & Chr(34), Chr(34) & "blue" & Chr(34), Chr(34) & "red" & Chr(34), Chr(34) & "yellow" & Chr(34), Chr(34) & "purple" & Chr(34), Chr(34) & "green" & Chr(34), Chr(34) & "orange" & Chr(34), Chr(34) & "grey" & Chr(34), Chr(34) & "brown" & Chr(34), Chr(34) & "pink" & Chr(34)})
+        SetItems(strColours)
     End Sub
 
     Private Sub ucrColors_NameChanged() Handles Me.NameChanged
-        Dim dlgColour As New ColorDialog
-        If Me.cboInput.Text = Chr(34) & "Pick Colour" & Chr(34) Then
-            dlgColour.ShowDialog()
-            SetName(Chr(34) & dlgColour.Color.Name & Chr(34))
+        Dim strColourItem As String
+        Dim clrTemp As Color
+
+        If GetText() = strPickColour Then
+            Try
+                If dlgColour.ShowDialog() = DialogResult.OK Then
+                    clrTemp = dlgColour.Color
+                    'first two character from Hex are fixed as FF for VB use, not part of colour value
+                    'ggplot requires # in front of Hex colour values
+                    strColourItem = Chr(34) & "#" & Hex(clrTemp.ToArgb).Substring(2, 6) & Chr(34)
+                    'First item is NULL and needs to be changed before setting text otherwise value will not show in combobox
+                    cboInput.Items.Item(0) = strColourItem
+                    SetName(strColourItem)
+                Else
+                    SetName("NULL")
+                End If
+            Catch ex As Exception
+                dlgColour.Dispose()
+            End Try
         End If
     End Sub
 End Class

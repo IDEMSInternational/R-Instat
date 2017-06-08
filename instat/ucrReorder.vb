@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports RDotNet
 Public Class ucrReorder
     Public Event OrderChanged()
@@ -226,7 +227,7 @@ Public Class ucrReorder
     End Sub
 
     'to update this to check if the order has changed
-    Public Function isEmpty() As Boolean
+    Public Function IsEmpty() As Boolean
         If lstAvailableData.Items.Count > 0 Then
             Return False
         Else
@@ -240,9 +241,11 @@ Public Class ucrReorder
 
     Protected Overrides Sub SetControlValue()
         Dim lstCurrentVariables As String()
+        Dim clsMainParameter As RParameter
 
-        If clsParameter IsNot Nothing AndAlso clsParameter.bIsString AndAlso clsParameter.strArgumentValue IsNot Nothing Then
-            lstCurrentVariables = ExtractItemsFromRList(clsParameter.strArgumentValue)
+        clsMainParameter = GetParameter()
+        If clsMainParameter IsNot Nothing AndAlso clsMainParameter.bIsString AndAlso clsMainParameter.strArgumentValue IsNot Nothing Then
+            lstCurrentVariables = ExtractItemsFromRList(clsMainParameter.strArgumentValue)
             SetToValue(lstCurrentVariables)
         End If
     End Sub
@@ -251,22 +254,30 @@ Public Class ucrReorder
         Dim strTemp As String()
         Dim chrTemp As CharacterVector
 
-        If TypeOf objTemp Is String() Then
-            strTemp = CType(objTemp, String())
-            FillListView(strTemp)
-        ElseIf TypeOf objTemp Is CharacterVector Then
-            chrTemp = CType(objTemp, CharacterVector)
-            FillListView(chrTemp)
+        If objTemp Is Nothing Then
+            FillListView(New String() {})
         Else
-            MsgBox("Developer error: Cannot set the value of " & Name & " because cannot convert value of object to String() or CharacterVector.")
+            If TypeOf objTemp Is String() Then
+                strTemp = CType(objTemp, String())
+                FillListView(strTemp)
+            ElseIf TypeOf objTemp Is CharacterVector Then
+                chrTemp = CType(objTemp, CharacterVector)
+                FillListView(chrTemp)
+            Else
+                MsgBox("Developer error: Cannot set the value of " & Name & " because cannot convert value of object to String() or CharacterVector.")
+            End If
         End If
     End Sub
 
     Private Sub ucrReorder_OrderChanged() Handles Me.OrderChanged
-        If clsParameter Is Nothing Then
-            clsParameter = New RParameter
-        End If
-        clsParameter.SetArgumentValue(GetVariableNames(bWithQuotes))
+
         OnControlValueChanged()
+    End Sub
+
+    Public Overrides Sub UpdateParameter(clsTempParam As RParameter)
+        If clsTempParam Is Nothing Then
+            clsTempParam = New RParameter
+        End If
+        clsTempParam.SetArgumentValue(GetVariableNames(bWithQuotes))
     End Sub
 End Class
