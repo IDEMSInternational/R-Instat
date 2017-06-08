@@ -31,29 +31,27 @@ Partial Class dlgReorderColumns
         'lblColumns
         '
         Me.lblColumns.AutoSize = True
-        Me.lblColumns.Location = New System.Drawing.Point(207, 33)
+        Me.lblColumns.Location = New System.Drawing.Point(210, 37)
         Me.lblColumns.Name = "lblColumns"
         Me.lblColumns.Size = New System.Drawing.Size(103, 13)
-        Me.lblColumns.TabIndex = 11
+        Me.lblColumns.TabIndex = 1
         Me.lblColumns.Text = "Columns to Reorder:"
         '
         'ucrReorderColumns
         '
-        Me.ucrReorderColumns.Location = New System.Drawing.Point(201, 45)
+        Me.ucrReorderColumns.Location = New System.Drawing.Point(210, 49)
         Me.ucrReorderColumns.Name = "ucrReorderColumns"
         Me.ucrReorderColumns.Size = New System.Drawing.Size(154, 139)
-        Me.ucrReorderColumns.TabIndex = 13
+        Me.ucrReorderColumns.TabIndex = 2
         Me.ucrReorderColumns.ucrDataFrameList = Nothing
         Me.ucrReorderColumns.ucrReceiver = Nothing
         '
         'ucrBase
         '
-        Me.ucrBase.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.ucrBase.Location = New System.Drawing.Point(10, 192)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 194)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 10
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 3
         '
         'ucrDataFrameSelect
         '
@@ -62,13 +60,13 @@ Partial Class dlgReorderColumns
         Me.ucrDataFrameSelect.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrDataFrameSelect.Name = "ucrDataFrameSelect"
         Me.ucrDataFrameSelect.Size = New System.Drawing.Size(120, 40)
-        Me.ucrDataFrameSelect.TabIndex = 14
+        Me.ucrDataFrameSelect.TabIndex = 0
         '
         'dlgReorderColumns
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 245)
+        Me.ClientSize = New System.Drawing.Size(414, 249)
         Me.Controls.Add(Me.ucrDataFrameSelect)
         Me.Controls.Add(Me.ucrReorderColumns)
         Me.Controls.Add(Me.lblColumns)
