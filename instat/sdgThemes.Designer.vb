@@ -22,7 +22,14 @@ Partial Class sdgThemes
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.ucrBaseSubdialogue = New instat.ucrButtonsSubdialogue()
         Me.tbThemeFacets = New System.Windows.Forms.TabPage()
+        Me.grpFacetBackground = New System.Windows.Forms.GroupBox()
+        Me.ucrStripBackGround = New instat.ucrElementRectControl()
+        Me.grpFacetLabels = New System.Windows.Forms.GroupBox()
+        Me.ucrStripTextYAxis = New instat.ucrELementTextControl()
+        Me.ucrStripTextXAxis = New instat.ucrELementTextControl()
+        Me.ucrStripText = New instat.ucrELementTextControl()
         Me.tbThemePanelAndBackground = New System.Windows.Forms.TabPage()
         Me.grpBorderAndBackground = New System.Windows.Forms.GroupBox()
         Me.ucrPanelBackGround = New instat.ucrElementRectControl()
@@ -31,45 +38,6 @@ Partial Class sdgThemes
         Me.ucrPanelGridMinor = New instat.ucrElementLineControl()
         Me.ucrPanelGridMajor = New instat.ucrElementLineControl()
         Me.ucrPanelGrid = New instat.ucrElementLineControl()
-        Me.tbThemeYaxis = New System.Windows.Forms.TabPage()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.ucrYAxisLines = New instat.ucrElementLineControl()
-        Me.grpYAxisTitle = New System.Windows.Forms.GroupBox()
-        Me.ucrThemeTitleYRightAxis = New instat.ucrELementTextControl()
-        Me.ucrThemeTitleYAxis = New instat.ucrELementTextControl()
-        Me.grpTickMarkLabelsYAxis = New System.Windows.Forms.GroupBox()
-        Me.ucrThemeYRightAxis = New instat.ucrELementTextControl()
-        Me.ucrThemeLeftYAxis = New instat.ucrELementTextControl()
-        Me.grpTickMarkers = New System.Windows.Forms.GroupBox()
-        Me.ucrTickMarksYAxis = New instat.ucrElementLineControl()
-        Me.tbThemeXAxis = New System.Windows.Forms.TabPage()
-        Me.grpTableOptions = New System.Windows.Forms.GroupBox()
-        Me.grpTickMarkLabelsXAxis = New System.Windows.Forms.GroupBox()
-        Me.ucrThemeTopXAxis = New instat.ucrELementTextControl()
-        Me.ucrThemeBottomXAxis = New instat.ucrELementTextControl()
-        Me.grpXAxisTitle = New System.Windows.Forms.GroupBox()
-        Me.ucrThemeTitleXTopAxis = New instat.ucrELementTextControl()
-        Me.ucrThemeTitleXAxis = New instat.ucrELementTextControl()
-        Me.grpXAxisLines = New System.Windows.Forms.GroupBox()
-        Me.UcrTickMarksAndLabels3 = New instat.ucrElementLineControl()
-        Me.ucrXAxisLines = New instat.ucrElementLineControl()
-        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
-        Me.UcrTickMarksAndLabels5 = New instat.ucrElementLineControl()
-        Me.ucrTickMarksXAxis = New instat.ucrElementLineControl()
-        Me.tbLegend = New System.Windows.Forms.TabControl()
-        Me.tbPLot = New System.Windows.Forms.TabPage()
-        Me.grpPlotBackground = New System.Windows.Forms.GroupBox()
-        Me.ucrPlotBackGround = New instat.ucrElementRectControl()
-        Me.grpPlotTitleAndCaption = New System.Windows.Forms.GroupBox()
-        Me.ucrPlotCaption = New instat.ucrELementTextControl()
-        Me.ucrPlotSubTitle = New instat.ucrELementTextControl()
-        Me.ucrPlotTitle = New instat.ucrELementTextControl()
-        Me.tbXYAxes = New System.Windows.Forms.TabPage()
-        Me.ucrThemeAxesLines = New instat.ucrElementLineControl()
-        Me.ucrThemeAxesTickLabels = New instat.ucrELementTextControl()
-        Me.ucrTickMarksAxes = New instat.ucrElementLineControl()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.ucrThemeAxesTitle = New instat.ucrELementTextControl()
         Me.tbThemeLegend = New System.Windows.Forms.TabPage()
         Me.grpLegendTitleAndText = New System.Windows.Forms.GroupBox()
         Me.ucrLegendText = New instat.ucrELementTextControl()
@@ -89,18 +57,53 @@ Partial Class sdgThemes
         Me.ucrLegendBoxBackground = New instat.ucrElementRectControl()
         Me.ucrLegendBackground = New instat.ucrElementRectControl()
         Me.ucrLegendKey = New instat.ucrElementRectControl()
-        Me.ucrBaseSubdialogue = New instat.ucrButtonsSubdialogue()
-        Me.ucrInputTickUnits = New instat.ucrInputComboBox()
-        Me.ucrChkUnits = New instat.ucrCheck()
-        Me.ucrInputUnits = New instat.ucrInputTextBox()
-        Me.ucrInputMarginUnits = New instat.ucrInputComboBox()
-        Me.ucrChkMaigin = New instat.ucrCheck()
-        Me.ucrInputMargin = New instat.ucrInputTextBox()
+        Me.tbThemeYaxis = New System.Windows.Forms.TabPage()
+        Me.grpLineAlongYAxis = New System.Windows.Forms.GroupBox()
+        Me.ucrYAxisLines = New instat.ucrElementLineControl()
+        Me.grpYAxisTitle = New System.Windows.Forms.GroupBox()
+        Me.ucrThemeTitleYRightAxis = New instat.ucrELementTextControl()
+        Me.ucrThemeTitleYAxis = New instat.ucrELementTextControl()
+        Me.grpTickMarkLabelsYAxis = New System.Windows.Forms.GroupBox()
+        Me.ucrThemeYRightAxis = New instat.ucrELementTextControl()
+        Me.ucrThemeLeftYAxis = New instat.ucrELementTextControl()
+        Me.grpTickMarkers = New System.Windows.Forms.GroupBox()
+        Me.ucrTickMarksYAxis = New instat.ucrElementLineControl()
+        Me.tbThemeXAxis = New System.Windows.Forms.TabPage()
+        Me.grpTableOptions = New System.Windows.Forms.GroupBox()
+        Me.grpTickMarkLabelsXAxis = New System.Windows.Forms.GroupBox()
+        Me.ucrThemeTopXAxis = New instat.ucrELementTextControl()
+        Me.ucrThemeBottomXAxis = New instat.ucrELementTextControl()
+        Me.grpXAxisTitle = New System.Windows.Forms.GroupBox()
+        Me.ucrThemeTitleXTopAxis = New instat.ucrELementTextControl()
+        Me.ucrThemeTitleXAxis = New instat.ucrELementTextControl()
+        Me.grpTickMarks = New System.Windows.Forms.GroupBox()
+        Me.ucrXAxisLines = New instat.ucrElementLineControl()
+        Me.ucrTickMarksXAxis = New instat.ucrElementLineControl()
+        Me.tbXYAxes = New System.Windows.Forms.TabPage()
+        Me.ucrThemeAxesLines = New instat.ucrElementLineControl()
+        Me.ucrThemeAxesTickLabels = New instat.ucrELementTextControl()
+        Me.ucrTickMarksAxes = New instat.ucrElementLineControl()
+        Me.ucrThemeAxesTitle = New instat.ucrELementTextControl()
+        Me.tbPLot = New System.Windows.Forms.TabPage()
+        Me.grpPlotBackground = New System.Windows.Forms.GroupBox()
+        Me.ucrPlotBackGround = New instat.ucrElementRectControl()
+        Me.grpPlotTitleAndCaption = New System.Windows.Forms.GroupBox()
+        Me.ucrPlotCaption = New instat.ucrELementTextControl()
+        Me.ucrPlotSubTitle = New instat.ucrELementTextControl()
+        Me.ucrPlotTitle = New instat.ucrELementTextControl()
+        Me.tbLegend = New System.Windows.Forms.TabControl()
+        Me.tbThemeFacets.SuspendLayout()
+        Me.grpFacetBackground.SuspendLayout()
+        Me.grpFacetLabels.SuspendLayout()
         Me.tbThemePanelAndBackground.SuspendLayout()
         Me.grpBorderAndBackground.SuspendLayout()
         Me.grpPAnelGrid.SuspendLayout()
+        Me.tbThemeLegend.SuspendLayout()
+        Me.grpLegendTitleAndText.SuspendLayout()
+        Me.grpLegendAdjustments.SuspendLayout()
+        Me.grpLegendBackGroundAndKey.SuspendLayout()
         Me.tbThemeYaxis.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
+        Me.grpLineAlongYAxis.SuspendLayout()
         Me.grpYAxisTitle.SuspendLayout()
         Me.grpTickMarkLabelsYAxis.SuspendLayout()
         Me.grpTickMarkers.SuspendLayout()
@@ -108,27 +111,81 @@ Partial Class sdgThemes
         Me.grpTableOptions.SuspendLayout()
         Me.grpTickMarkLabelsXAxis.SuspendLayout()
         Me.grpXAxisTitle.SuspendLayout()
-        Me.grpXAxisLines.SuspendLayout()
-        Me.GroupBox5.SuspendLayout()
-        Me.tbLegend.SuspendLayout()
+        Me.grpTickMarks.SuspendLayout()
+        Me.tbXYAxes.SuspendLayout()
         Me.tbPLot.SuspendLayout()
         Me.grpPlotBackground.SuspendLayout()
         Me.grpPlotTitleAndCaption.SuspendLayout()
-        Me.tbXYAxes.SuspendLayout()
-        Me.tbThemeLegend.SuspendLayout()
-        Me.grpLegendTitleAndText.SuspendLayout()
-        Me.grpLegendAdjustments.SuspendLayout()
-        Me.grpLegendBackGroundAndKey.SuspendLayout()
+        Me.tbLegend.SuspendLayout()
         Me.SuspendLayout()
+        '
+        'ucrBaseSubdialogue
+        '
+        Me.ucrBaseSubdialogue.Location = New System.Drawing.Point(340, 623)
+        Me.ucrBaseSubdialogue.Name = "ucrBaseSubdialogue"
+        Me.ucrBaseSubdialogue.Size = New System.Drawing.Size(142, 30)
+        Me.ucrBaseSubdialogue.TabIndex = 0
         '
         'tbThemeFacets
         '
+        Me.tbThemeFacets.Controls.Add(Me.grpFacetBackground)
+        Me.tbThemeFacets.Controls.Add(Me.grpFacetLabels)
         Me.tbThemeFacets.Location = New System.Drawing.Point(4, 22)
         Me.tbThemeFacets.Name = "tbThemeFacets"
-        Me.tbThemeFacets.Size = New System.Drawing.Size(816, 555)
+        Me.tbThemeFacets.Size = New System.Drawing.Size(816, 564)
         Me.tbThemeFacets.TabIndex = 4
         Me.tbThemeFacets.Text = "Facets"
         Me.tbThemeFacets.UseVisualStyleBackColor = True
+        '
+        'grpFacetBackground
+        '
+        Me.grpFacetBackground.Controls.Add(Me.ucrStripBackGround)
+        Me.grpFacetBackground.Location = New System.Drawing.Point(12, 264)
+        Me.grpFacetBackground.Name = "grpFacetBackground"
+        Me.grpFacetBackground.Size = New System.Drawing.Size(269, 148)
+        Me.grpFacetBackground.TabIndex = 104
+        Me.grpFacetBackground.TabStop = False
+        Me.grpFacetBackground.Text = "Facet Label Background "
+        '
+        'ucrStripBackGround
+        '
+        Me.ucrStripBackGround.Location = New System.Drawing.Point(11, 19)
+        Me.ucrStripBackGround.Name = "ucrStripBackGround"
+        Me.ucrStripBackGround.Size = New System.Drawing.Size(253, 128)
+        Me.ucrStripBackGround.TabIndex = 0
+        '
+        'grpFacetLabels
+        '
+        Me.grpFacetLabels.Controls.Add(Me.ucrStripTextYAxis)
+        Me.grpFacetLabels.Controls.Add(Me.ucrStripTextXAxis)
+        Me.grpFacetLabels.Controls.Add(Me.ucrStripText)
+        Me.grpFacetLabels.Location = New System.Drawing.Point(12, 3)
+        Me.grpFacetLabels.Name = "grpFacetLabels"
+        Me.grpFacetLabels.Size = New System.Drawing.Size(804, 244)
+        Me.grpFacetLabels.TabIndex = 103
+        Me.grpFacetLabels.TabStop = False
+        Me.grpFacetLabels.Text = "Facet Labels"
+        '
+        'ucrStripTextYAxis
+        '
+        Me.ucrStripTextYAxis.Location = New System.Drawing.Point(536, 12)
+        Me.ucrStripTextYAxis.Name = "ucrStripTextYAxis"
+        Me.ucrStripTextYAxis.Size = New System.Drawing.Size(255, 224)
+        Me.ucrStripTextYAxis.TabIndex = 66
+        '
+        'ucrStripTextXAxis
+        '
+        Me.ucrStripTextXAxis.Location = New System.Drawing.Point(275, 12)
+        Me.ucrStripTextXAxis.Name = "ucrStripTextXAxis"
+        Me.ucrStripTextXAxis.Size = New System.Drawing.Size(255, 224)
+        Me.ucrStripTextXAxis.TabIndex = 65
+        '
+        'ucrStripText
+        '
+        Me.ucrStripText.Location = New System.Drawing.Point(14, 12)
+        Me.ucrStripText.Name = "ucrStripText"
+        Me.ucrStripText.Size = New System.Drawing.Size(255, 224)
+        Me.ucrStripText.TabIndex = 64
         '
         'tbThemePanelAndBackground
         '
@@ -136,7 +193,7 @@ Partial Class sdgThemes
         Me.tbThemePanelAndBackground.Controls.Add(Me.grpPAnelGrid)
         Me.tbThemePanelAndBackground.Location = New System.Drawing.Point(4, 22)
         Me.tbThemePanelAndBackground.Name = "tbThemePanelAndBackground"
-        Me.tbThemePanelAndBackground.Size = New System.Drawing.Size(816, 555)
+        Me.tbThemePanelAndBackground.Size = New System.Drawing.Size(816, 564)
         Me.tbThemePanelAndBackground.TabIndex = 3
         Me.tbThemePanelAndBackground.Text = "Panel and Background  "
         Me.tbThemePanelAndBackground.UseVisualStyleBackColor = True
@@ -199,355 +256,6 @@ Partial Class sdgThemes
         Me.ucrPanelGrid.Size = New System.Drawing.Size(254, 124)
         Me.ucrPanelGrid.TabIndex = 63
         '
-        'tbThemeYaxis
-        '
-        Me.tbThemeYaxis.Controls.Add(Me.GroupBox1)
-        Me.tbThemeYaxis.Controls.Add(Me.grpYAxisTitle)
-        Me.tbThemeYaxis.Controls.Add(Me.grpTickMarkLabelsYAxis)
-        Me.tbThemeYaxis.Controls.Add(Me.grpTickMarkers)
-        Me.tbThemeYaxis.Location = New System.Drawing.Point(4, 22)
-        Me.tbThemeYaxis.Name = "tbThemeYaxis"
-        Me.tbThemeYaxis.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbThemeYaxis.Size = New System.Drawing.Size(816, 555)
-        Me.tbThemeYaxis.TabIndex = 1
-        Me.tbThemeYaxis.Text = "Y-axis"
-        Me.tbThemeYaxis.UseVisualStyleBackColor = True
-        '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.ucrYAxisLines)
-        Me.GroupBox1.Location = New System.Drawing.Point(544, 289)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(260, 136)
-        Me.GroupBox1.TabIndex = 66
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Line Along Y-Axis"
-        '
-        'ucrYAxisLines
-        '
-        Me.ucrYAxisLines.Location = New System.Drawing.Point(4, 12)
-        Me.ucrYAxisLines.Name = "ucrYAxisLines"
-        Me.ucrYAxisLines.Size = New System.Drawing.Size(254, 124)
-        Me.ucrYAxisLines.TabIndex = 63
-        '
-        'grpYAxisTitle
-        '
-        Me.grpYAxisTitle.Controls.Add(Me.ucrThemeTitleYRightAxis)
-        Me.grpYAxisTitle.Controls.Add(Me.ucrThemeTitleYAxis)
-        Me.grpYAxisTitle.Location = New System.Drawing.Point(4, 23)
-        Me.grpYAxisTitle.Name = "grpYAxisTitle"
-        Me.grpYAxisTitle.Size = New System.Drawing.Size(528, 247)
-        Me.grpYAxisTitle.TabIndex = 67
-        Me.grpYAxisTitle.TabStop = False
-        Me.grpYAxisTitle.Text = "Y-Lab Title"
-        '
-        'ucrThemeTitleYRightAxis
-        '
-        Me.ucrThemeTitleYRightAxis.Location = New System.Drawing.Point(264, 13)
-        Me.ucrThemeTitleYRightAxis.Name = "ucrThemeTitleYRightAxis"
-        Me.ucrThemeTitleYRightAxis.Size = New System.Drawing.Size(262, 227)
-        Me.ucrThemeTitleYRightAxis.TabIndex = 66
-        '
-        'ucrThemeTitleYAxis
-        '
-        Me.ucrThemeTitleYAxis.Location = New System.Drawing.Point(4, 13)
-        Me.ucrThemeTitleYAxis.Name = "ucrThemeTitleYAxis"
-        Me.ucrThemeTitleYAxis.Size = New System.Drawing.Size(259, 227)
-        Me.ucrThemeTitleYAxis.TabIndex = 65
-        '
-        'grpTickMarkLabelsYAxis
-        '
-        Me.grpTickMarkLabelsYAxis.Controls.Add(Me.ucrThemeYRightAxis)
-        Me.grpTickMarkLabelsYAxis.Controls.Add(Me.ucrThemeLeftYAxis)
-        Me.grpTickMarkLabelsYAxis.Location = New System.Drawing.Point(4, 289)
-        Me.grpTickMarkLabelsYAxis.Name = "grpTickMarkLabelsYAxis"
-        Me.grpTickMarkLabelsYAxis.Size = New System.Drawing.Size(528, 243)
-        Me.grpTickMarkLabelsYAxis.TabIndex = 66
-        Me.grpTickMarkLabelsYAxis.TabStop = False
-        Me.grpTickMarkLabelsYAxis.Text = "Tick Mark Labels "
-        '
-        'ucrThemeYRightAxis
-        '
-        Me.ucrThemeYRightAxis.Location = New System.Drawing.Point(268, 14)
-        Me.ucrThemeYRightAxis.Name = "ucrThemeYRightAxis"
-        Me.ucrThemeYRightAxis.Size = New System.Drawing.Size(262, 226)
-        Me.ucrThemeYRightAxis.TabIndex = 60
-        '
-        'ucrThemeLeftYAxis
-        '
-        Me.ucrThemeLeftYAxis.Location = New System.Drawing.Point(8, 14)
-        Me.ucrThemeLeftYAxis.Name = "ucrThemeLeftYAxis"
-        Me.ucrThemeLeftYAxis.Size = New System.Drawing.Size(259, 226)
-        Me.ucrThemeLeftYAxis.TabIndex = 59
-        '
-        'grpTickMarkers
-        '
-        Me.grpTickMarkers.Controls.Add(Me.ucrTickMarksYAxis)
-        Me.grpTickMarkers.Location = New System.Drawing.Point(540, 24)
-        Me.grpTickMarkers.Name = "grpTickMarkers"
-        Me.grpTickMarkers.Size = New System.Drawing.Size(264, 137)
-        Me.grpTickMarkers.TabIndex = 65
-        Me.grpTickMarkers.TabStop = False
-        Me.grpTickMarkers.Text = "TickMarkers"
-        '
-        'ucrTickMarksYAxis
-        '
-        Me.ucrTickMarksYAxis.Location = New System.Drawing.Point(4, 10)
-        Me.ucrTickMarksYAxis.Name = "ucrTickMarksYAxis"
-        Me.ucrTickMarksYAxis.Size = New System.Drawing.Size(254, 124)
-        Me.ucrTickMarksYAxis.TabIndex = 63
-        '
-        'tbThemeXAxis
-        '
-        Me.tbThemeXAxis.Controls.Add(Me.grpTableOptions)
-        Me.tbThemeXAxis.Location = New System.Drawing.Point(4, 22)
-        Me.tbThemeXAxis.Name = "tbThemeXAxis"
-        Me.tbThemeXAxis.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbThemeXAxis.Size = New System.Drawing.Size(816, 555)
-        Me.tbThemeXAxis.TabIndex = 0
-        Me.tbThemeXAxis.Text = "X-axis"
-        Me.tbThemeXAxis.UseVisualStyleBackColor = True
-        '
-        'grpTableOptions
-        '
-        Me.grpTableOptions.Controls.Add(Me.grpTickMarkLabelsXAxis)
-        Me.grpTableOptions.Controls.Add(Me.grpXAxisTitle)
-        Me.grpTableOptions.Controls.Add(Me.grpXAxisLines)
-        Me.grpTableOptions.Controls.Add(Me.GroupBox5)
-        Me.grpTableOptions.Location = New System.Drawing.Point(-1, 3)
-        Me.grpTableOptions.Name = "grpTableOptions"
-        Me.grpTableOptions.Size = New System.Drawing.Size(821, 678)
-        Me.grpTableOptions.TabIndex = 0
-        Me.grpTableOptions.TabStop = False
-        Me.grpTableOptions.Text = "More Options"
-        '
-        'grpTickMarkLabelsXAxis
-        '
-        Me.grpTickMarkLabelsXAxis.Controls.Add(Me.ucrThemeTopXAxis)
-        Me.grpTickMarkLabelsXAxis.Controls.Add(Me.ucrThemeBottomXAxis)
-        Me.grpTickMarkLabelsXAxis.Location = New System.Drawing.Point(7, 263)
-        Me.grpTickMarkLabelsXAxis.Name = "grpTickMarkLabelsXAxis"
-        Me.grpTickMarkLabelsXAxis.Size = New System.Drawing.Size(523, 245)
-        Me.grpTickMarkLabelsXAxis.TabIndex = 70
-        Me.grpTickMarkLabelsXAxis.TabStop = False
-        Me.grpTickMarkLabelsXAxis.Text = "Tick Mark Labels "
-        '
-        'ucrThemeTopXAxis
-        '
-        Me.ucrThemeTopXAxis.Location = New System.Drawing.Point(263, 12)
-        Me.ucrThemeTopXAxis.Name = "ucrThemeTopXAxis"
-        Me.ucrThemeTopXAxis.Size = New System.Drawing.Size(258, 224)
-        Me.ucrThemeTopXAxis.TabIndex = 59
-        '
-        'ucrThemeBottomXAxis
-        '
-        Me.ucrThemeBottomXAxis.Location = New System.Drawing.Point(4, 12)
-        Me.ucrThemeBottomXAxis.Name = "ucrThemeBottomXAxis"
-        Me.ucrThemeBottomXAxis.Size = New System.Drawing.Size(259, 224)
-        Me.ucrThemeBottomXAxis.TabIndex = 58
-        '
-        'grpXAxisTitle
-        '
-        Me.grpXAxisTitle.Controls.Add(Me.ucrThemeTitleXTopAxis)
-        Me.grpXAxisTitle.Controls.Add(Me.ucrThemeTitleXAxis)
-        Me.grpXAxisTitle.Location = New System.Drawing.Point(7, 15)
-        Me.grpXAxisTitle.Name = "grpXAxisTitle"
-        Me.grpXAxisTitle.Size = New System.Drawing.Size(522, 246)
-        Me.grpXAxisTitle.TabIndex = 69
-        Me.grpXAxisTitle.TabStop = False
-        Me.grpXAxisTitle.Text = "X-Lab Title"
-        '
-        'ucrThemeTitleXTopAxis
-        '
-        Me.ucrThemeTitleXTopAxis.Location = New System.Drawing.Point(266, 14)
-        Me.ucrThemeTitleXTopAxis.Name = "ucrThemeTitleXTopAxis"
-        Me.ucrThemeTitleXTopAxis.Size = New System.Drawing.Size(252, 230)
-        Me.ucrThemeTitleXTopAxis.TabIndex = 64
-        '
-        'ucrThemeTitleXAxis
-        '
-        Me.ucrThemeTitleXAxis.Location = New System.Drawing.Point(6, 11)
-        Me.ucrThemeTitleXAxis.Name = "ucrThemeTitleXAxis"
-        Me.ucrThemeTitleXAxis.Size = New System.Drawing.Size(260, 231)
-        Me.ucrThemeTitleXAxis.TabIndex = 63
-        '
-        'grpXAxisLines
-        '
-        Me.grpXAxisLines.Controls.Add(Me.UcrTickMarksAndLabels3)
-        Me.grpXAxisLines.Controls.Add(Me.ucrXAxisLines)
-        Me.grpXAxisLines.Location = New System.Drawing.Point(532, 276)
-        Me.grpXAxisLines.Name = "grpXAxisLines"
-        Me.grpXAxisLines.Size = New System.Drawing.Size(260, 264)
-        Me.grpXAxisLines.TabIndex = 68
-        Me.grpXAxisLines.TabStop = False
-        Me.grpXAxisLines.Text = "Line Along X-Axis"
-        '
-        'UcrTickMarksAndLabels3
-        '
-        Me.UcrTickMarksAndLabels3.Location = New System.Drawing.Point(4, 134)
-        Me.UcrTickMarksAndLabels3.Name = "UcrTickMarksAndLabels3"
-        Me.UcrTickMarksAndLabels3.Size = New System.Drawing.Size(254, 124)
-        Me.UcrTickMarksAndLabels3.TabIndex = 64
-        '
-        'ucrXAxisLines
-        '
-        Me.ucrXAxisLines.Location = New System.Drawing.Point(4, 12)
-        Me.ucrXAxisLines.Name = "ucrXAxisLines"
-        Me.ucrXAxisLines.Size = New System.Drawing.Size(254, 124)
-        Me.ucrXAxisLines.TabIndex = 63
-        '
-        'GroupBox5
-        '
-        Me.GroupBox5.Controls.Add(Me.UcrTickMarksAndLabels5)
-        Me.GroupBox5.Controls.Add(Me.ucrTickMarksXAxis)
-        Me.GroupBox5.Location = New System.Drawing.Point(528, 10)
-        Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(264, 257)
-        Me.GroupBox5.TabIndex = 67
-        Me.GroupBox5.TabStop = False
-        Me.GroupBox5.Text = "TickMarkers"
-        '
-        'UcrTickMarksAndLabels5
-        '
-        Me.UcrTickMarksAndLabels5.Location = New System.Drawing.Point(4, 132)
-        Me.UcrTickMarksAndLabels5.Name = "UcrTickMarksAndLabels5"
-        Me.UcrTickMarksAndLabels5.Size = New System.Drawing.Size(254, 126)
-        Me.UcrTickMarksAndLabels5.TabIndex = 64
-        '
-        'ucrTickMarksXAxis
-        '
-        Me.ucrTickMarksXAxis.Location = New System.Drawing.Point(4, 10)
-        Me.ucrTickMarksXAxis.Name = "ucrTickMarksXAxis"
-        Me.ucrTickMarksXAxis.Size = New System.Drawing.Size(254, 124)
-        Me.ucrTickMarksXAxis.TabIndex = 63
-        '
-        'tbLegend
-        '
-        Me.tbLegend.Controls.Add(Me.tbPLot)
-        Me.tbLegend.Controls.Add(Me.tbXYAxes)
-        Me.tbLegend.Controls.Add(Me.tbThemeXAxis)
-        Me.tbLegend.Controls.Add(Me.tbThemeYaxis)
-        Me.tbLegend.Controls.Add(Me.tbThemeLegend)
-        Me.tbLegend.Controls.Add(Me.tbThemePanelAndBackground)
-        Me.tbLegend.Controls.Add(Me.tbThemeFacets)
-        Me.tbLegend.Location = New System.Drawing.Point(4, 8)
-        Me.tbLegend.Name = "tbLegend"
-        Me.tbLegend.SelectedIndex = 0
-        Me.tbLegend.Size = New System.Drawing.Size(824, 581)
-        Me.tbLegend.TabIndex = 1
-        '
-        'tbPLot
-        '
-        Me.tbPLot.Controls.Add(Me.grpPlotBackground)
-        Me.tbPLot.Controls.Add(Me.grpPlotTitleAndCaption)
-        Me.tbPLot.Location = New System.Drawing.Point(4, 22)
-        Me.tbPLot.Name = "tbPLot"
-        Me.tbPLot.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbPLot.Size = New System.Drawing.Size(816, 555)
-        Me.tbPLot.TabIndex = 7
-        Me.tbPLot.Text = "Plot"
-        Me.tbPLot.UseVisualStyleBackColor = True
-        '
-        'grpPlotBackground
-        '
-        Me.grpPlotBackground.Controls.Add(Me.ucrPlotBackGround)
-        Me.grpPlotBackground.Location = New System.Drawing.Point(6, 256)
-        Me.grpPlotBackground.Name = "grpPlotBackground"
-        Me.grpPlotBackground.Size = New System.Drawing.Size(269, 148)
-        Me.grpPlotBackground.TabIndex = 103
-        Me.grpPlotBackground.TabStop = False
-        Me.grpPlotBackground.Text = "Plot Background "
-        '
-        'ucrPlotBackGround
-        '
-        Me.ucrPlotBackGround.Location = New System.Drawing.Point(11, 19)
-        Me.ucrPlotBackGround.Name = "ucrPlotBackGround"
-        Me.ucrPlotBackGround.Size = New System.Drawing.Size(253, 128)
-        Me.ucrPlotBackGround.TabIndex = 0
-        '
-        'grpPlotTitleAndCaption
-        '
-        Me.grpPlotTitleAndCaption.Controls.Add(Me.ucrPlotCaption)
-        Me.grpPlotTitleAndCaption.Controls.Add(Me.ucrPlotSubTitle)
-        Me.grpPlotTitleAndCaption.Controls.Add(Me.ucrPlotTitle)
-        Me.grpPlotTitleAndCaption.Location = New System.Drawing.Point(6, 6)
-        Me.grpPlotTitleAndCaption.Name = "grpPlotTitleAndCaption"
-        Me.grpPlotTitleAndCaption.Size = New System.Drawing.Size(804, 244)
-        Me.grpPlotTitleAndCaption.TabIndex = 102
-        Me.grpPlotTitleAndCaption.TabStop = False
-        Me.grpPlotTitleAndCaption.Text = "PLot Title and Caption"
-        '
-        'ucrPlotCaption
-        '
-        Me.ucrPlotCaption.Location = New System.Drawing.Point(536, 12)
-        Me.ucrPlotCaption.Name = "ucrPlotCaption"
-        Me.ucrPlotCaption.Size = New System.Drawing.Size(255, 224)
-        Me.ucrPlotCaption.TabIndex = 66
-        '
-        'ucrPlotSubTitle
-        '
-        Me.ucrPlotSubTitle.Location = New System.Drawing.Point(275, 12)
-        Me.ucrPlotSubTitle.Name = "ucrPlotSubTitle"
-        Me.ucrPlotSubTitle.Size = New System.Drawing.Size(255, 224)
-        Me.ucrPlotSubTitle.TabIndex = 65
-        '
-        'ucrPlotTitle
-        '
-        Me.ucrPlotTitle.Location = New System.Drawing.Point(14, 12)
-        Me.ucrPlotTitle.Name = "ucrPlotTitle"
-        Me.ucrPlotTitle.Size = New System.Drawing.Size(255, 224)
-        Me.ucrPlotTitle.TabIndex = 64
-        '
-        'tbXYAxes
-        '
-        Me.tbXYAxes.Controls.Add(Me.ucrThemeAxesLines)
-        Me.tbXYAxes.Controls.Add(Me.ucrThemeAxesTickLabels)
-        Me.tbXYAxes.Controls.Add(Me.ucrTickMarksAxes)
-        Me.tbXYAxes.Controls.Add(Me.GroupBox2)
-        Me.tbXYAxes.Controls.Add(Me.ucrThemeAxesTitle)
-        Me.tbXYAxes.Location = New System.Drawing.Point(4, 22)
-        Me.tbXYAxes.Name = "tbXYAxes"
-        Me.tbXYAxes.Size = New System.Drawing.Size(816, 555)
-        Me.tbXYAxes.TabIndex = 6
-        Me.tbXYAxes.Text = "XY-Axes"
-        Me.tbXYAxes.UseVisualStyleBackColor = True
-        '
-        'ucrThemeAxesLines
-        '
-        Me.ucrThemeAxesLines.Location = New System.Drawing.Point(271, 246)
-        Me.ucrThemeAxesLines.Name = "ucrThemeAxesLines"
-        Me.ucrThemeAxesLines.Size = New System.Drawing.Size(257, 122)
-        Me.ucrThemeAxesLines.TabIndex = 64
-        '
-        'ucrThemeAxesTickLabels
-        '
-        Me.ucrThemeAxesTickLabels.Location = New System.Drawing.Point(268, 13)
-        Me.ucrThemeAxesTickLabels.Name = "ucrThemeAxesTickLabels"
-        Me.ucrThemeAxesTickLabels.Size = New System.Drawing.Size(255, 228)
-        Me.ucrThemeAxesTickLabels.TabIndex = 63
-        '
-        'ucrTickMarksAxes
-        '
-        Me.ucrTickMarksAxes.Location = New System.Drawing.Point(4, 244)
-        Me.ucrTickMarksAxes.Name = "ucrTickMarksAxes"
-        Me.ucrTickMarksAxes.Size = New System.Drawing.Size(257, 122)
-        Me.ucrTickMarksAxes.TabIndex = 62
-        '
-        'GroupBox2
-        '
-        Me.GroupBox2.Location = New System.Drawing.Point(7, 372)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(264, 149)
-        Me.GroupBox2.TabIndex = 61
-        Me.GroupBox2.TabStop = False
-        '
-        'ucrThemeAxesTitle
-        '
-        Me.ucrThemeAxesTitle.Location = New System.Drawing.Point(7, 13)
-        Me.ucrThemeAxesTitle.Name = "ucrThemeAxesTitle"
-        Me.ucrThemeAxesTitle.Size = New System.Drawing.Size(255, 228)
-        Me.ucrThemeAxesTitle.TabIndex = 59
-        '
         'tbThemeLegend
         '
         Me.tbThemeLegend.Controls.Add(Me.grpLegendTitleAndText)
@@ -556,7 +264,7 @@ Partial Class sdgThemes
         Me.tbThemeLegend.Location = New System.Drawing.Point(4, 22)
         Me.tbThemeLegend.Name = "tbThemeLegend"
         Me.tbThemeLegend.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbThemeLegend.Size = New System.Drawing.Size(816, 555)
+        Me.tbThemeLegend.Size = New System.Drawing.Size(816, 564)
         Me.tbThemeLegend.TabIndex = 2
         Me.tbThemeLegend.Text = "Legend"
         Me.tbThemeLegend.UseVisualStyleBackColor = True
@@ -651,6 +359,7 @@ Partial Class sdgThemes
         '
         'ucrChkLegendDirection
         '
+        Me.ucrChkLegendDirection.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.ucrChkLegendDirection.Checked = False
         Me.ucrChkLegendDirection.Location = New System.Drawing.Point(6, 47)
         Me.ucrChkLegendDirection.Name = "ucrChkLegendDirection"
@@ -728,74 +437,325 @@ Partial Class sdgThemes
         Me.ucrLegendKey.Size = New System.Drawing.Size(253, 130)
         Me.ucrLegendKey.TabIndex = 1
         '
-        'ucrBaseSubdialogue
+        'tbThemeYaxis
         '
-        Me.ucrBaseSubdialogue.Location = New System.Drawing.Point(349, 595)
-        Me.ucrBaseSubdialogue.Name = "ucrBaseSubdialogue"
-        Me.ucrBaseSubdialogue.Size = New System.Drawing.Size(142, 30)
-        Me.ucrBaseSubdialogue.TabIndex = 0
+        Me.tbThemeYaxis.Controls.Add(Me.grpLineAlongYAxis)
+        Me.tbThemeYaxis.Controls.Add(Me.grpYAxisTitle)
+        Me.tbThemeYaxis.Controls.Add(Me.grpTickMarkLabelsYAxis)
+        Me.tbThemeYaxis.Controls.Add(Me.grpTickMarkers)
+        Me.tbThemeYaxis.Location = New System.Drawing.Point(4, 22)
+        Me.tbThemeYaxis.Name = "tbThemeYaxis"
+        Me.tbThemeYaxis.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbThemeYaxis.Size = New System.Drawing.Size(816, 564)
+        Me.tbThemeYaxis.TabIndex = 1
+        Me.tbThemeYaxis.Text = "Y-axis"
+        Me.tbThemeYaxis.UseVisualStyleBackColor = True
         '
-        'ucrInputTickUnits
+        'grpLineAlongYAxis
         '
-        Me.ucrInputTickUnits.AddQuotesIfUnrecognised = True
-        Me.ucrInputTickUnits.IsReadOnly = False
-        Me.ucrInputTickUnits.Location = New System.Drawing.Point(114, 52)
-        Me.ucrInputTickUnits.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.ucrInputTickUnits.Name = "ucrInputTickUnits"
-        Me.ucrInputTickUnits.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputTickUnits.TabIndex = 60
+        Me.grpLineAlongYAxis.Controls.Add(Me.ucrYAxisLines)
+        Me.grpLineAlongYAxis.Location = New System.Drawing.Point(544, 289)
+        Me.grpLineAlongYAxis.Name = "grpLineAlongYAxis"
+        Me.grpLineAlongYAxis.Size = New System.Drawing.Size(260, 136)
+        Me.grpLineAlongYAxis.TabIndex = 66
+        Me.grpLineAlongYAxis.TabStop = False
+        Me.grpLineAlongYAxis.Text = "Line Along Y-Axis"
         '
-        'ucrChkUnits
+        'ucrYAxisLines
         '
-        Me.ucrChkUnits.Checked = False
-        Me.ucrChkUnits.Location = New System.Drawing.Point(14, 20)
-        Me.ucrChkUnits.Name = "ucrChkUnits"
-        Me.ucrChkUnits.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkUnits.TabIndex = 61
+        Me.ucrYAxisLines.Location = New System.Drawing.Point(4, 12)
+        Me.ucrYAxisLines.Name = "ucrYAxisLines"
+        Me.ucrYAxisLines.Size = New System.Drawing.Size(254, 124)
+        Me.ucrYAxisLines.TabIndex = 63
         '
-        'ucrInputUnits
+        'grpYAxisTitle
         '
-        Me.ucrInputUnits.AddQuotesIfUnrecognised = True
-        Me.ucrInputUnits.IsMultiline = False
-        Me.ucrInputUnits.IsReadOnly = False
-        Me.ucrInputUnits.Location = New System.Drawing.Point(114, 20)
-        Me.ucrInputUnits.Name = "ucrInputUnits"
-        Me.ucrInputUnits.Size = New System.Drawing.Size(50, 23)
-        Me.ucrInputUnits.TabIndex = 62
+        Me.grpYAxisTitle.Controls.Add(Me.ucrThemeTitleYRightAxis)
+        Me.grpYAxisTitle.Controls.Add(Me.ucrThemeTitleYAxis)
+        Me.grpYAxisTitle.Location = New System.Drawing.Point(4, 23)
+        Me.grpYAxisTitle.Name = "grpYAxisTitle"
+        Me.grpYAxisTitle.Size = New System.Drawing.Size(528, 247)
+        Me.grpYAxisTitle.TabIndex = 67
+        Me.grpYAxisTitle.TabStop = False
+        Me.grpYAxisTitle.Text = "Y-Lab Title"
         '
-        'ucrInputMarginUnits
+        'ucrThemeTitleYRightAxis
         '
-        Me.ucrInputMarginUnits.AddQuotesIfUnrecognised = True
-        Me.ucrInputMarginUnits.IsReadOnly = False
-        Me.ucrInputMarginUnits.Location = New System.Drawing.Point(114, 114)
-        Me.ucrInputMarginUnits.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.ucrInputMarginUnits.Name = "ucrInputMarginUnits"
-        Me.ucrInputMarginUnits.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputMarginUnits.TabIndex = 63
+        Me.ucrThemeTitleYRightAxis.Location = New System.Drawing.Point(264, 13)
+        Me.ucrThemeTitleYRightAxis.Name = "ucrThemeTitleYRightAxis"
+        Me.ucrThemeTitleYRightAxis.Size = New System.Drawing.Size(262, 227)
+        Me.ucrThemeTitleYRightAxis.TabIndex = 66
         '
-        'ucrChkMaigin
+        'ucrThemeTitleYAxis
         '
-        Me.ucrChkMaigin.Checked = False
-        Me.ucrChkMaigin.Location = New System.Drawing.Point(14, 82)
-        Me.ucrChkMaigin.Name = "ucrChkMaigin"
-        Me.ucrChkMaigin.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkMaigin.TabIndex = 64
+        Me.ucrThemeTitleYAxis.Location = New System.Drawing.Point(4, 13)
+        Me.ucrThemeTitleYAxis.Name = "ucrThemeTitleYAxis"
+        Me.ucrThemeTitleYAxis.Size = New System.Drawing.Size(259, 227)
+        Me.ucrThemeTitleYAxis.TabIndex = 65
         '
-        'ucrInputMargin
+        'grpTickMarkLabelsYAxis
         '
-        Me.ucrInputMargin.AddQuotesIfUnrecognised = True
-        Me.ucrInputMargin.IsMultiline = False
-        Me.ucrInputMargin.IsReadOnly = False
-        Me.ucrInputMargin.Location = New System.Drawing.Point(114, 82)
-        Me.ucrInputMargin.Name = "ucrInputMargin"
-        Me.ucrInputMargin.Size = New System.Drawing.Size(50, 23)
-        Me.ucrInputMargin.TabIndex = 65
+        Me.grpTickMarkLabelsYAxis.Controls.Add(Me.ucrThemeYRightAxis)
+        Me.grpTickMarkLabelsYAxis.Controls.Add(Me.ucrThemeLeftYAxis)
+        Me.grpTickMarkLabelsYAxis.Location = New System.Drawing.Point(4, 289)
+        Me.grpTickMarkLabelsYAxis.Name = "grpTickMarkLabelsYAxis"
+        Me.grpTickMarkLabelsYAxis.Size = New System.Drawing.Size(528, 243)
+        Me.grpTickMarkLabelsYAxis.TabIndex = 66
+        Me.grpTickMarkLabelsYAxis.TabStop = False
+        Me.grpTickMarkLabelsYAxis.Text = "Tick Mark Labels "
+        '
+        'ucrThemeYRightAxis
+        '
+        Me.ucrThemeYRightAxis.Location = New System.Drawing.Point(268, 14)
+        Me.ucrThemeYRightAxis.Name = "ucrThemeYRightAxis"
+        Me.ucrThemeYRightAxis.Size = New System.Drawing.Size(262, 226)
+        Me.ucrThemeYRightAxis.TabIndex = 60
+        '
+        'ucrThemeLeftYAxis
+        '
+        Me.ucrThemeLeftYAxis.Location = New System.Drawing.Point(8, 14)
+        Me.ucrThemeLeftYAxis.Name = "ucrThemeLeftYAxis"
+        Me.ucrThemeLeftYAxis.Size = New System.Drawing.Size(259, 226)
+        Me.ucrThemeLeftYAxis.TabIndex = 59
+        '
+        'grpTickMarkers
+        '
+        Me.grpTickMarkers.Controls.Add(Me.ucrTickMarksYAxis)
+        Me.grpTickMarkers.Location = New System.Drawing.Point(540, 24)
+        Me.grpTickMarkers.Name = "grpTickMarkers"
+        Me.grpTickMarkers.Size = New System.Drawing.Size(264, 137)
+        Me.grpTickMarkers.TabIndex = 65
+        Me.grpTickMarkers.TabStop = False
+        Me.grpTickMarkers.Text = "TickMarkers"
+        '
+        'ucrTickMarksYAxis
+        '
+        Me.ucrTickMarksYAxis.Location = New System.Drawing.Point(4, 10)
+        Me.ucrTickMarksYAxis.Name = "ucrTickMarksYAxis"
+        Me.ucrTickMarksYAxis.Size = New System.Drawing.Size(254, 124)
+        Me.ucrTickMarksYAxis.TabIndex = 63
+        '
+        'tbThemeXAxis
+        '
+        Me.tbThemeXAxis.Controls.Add(Me.grpTableOptions)
+        Me.tbThemeXAxis.Location = New System.Drawing.Point(4, 22)
+        Me.tbThemeXAxis.Name = "tbThemeXAxis"
+        Me.tbThemeXAxis.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbThemeXAxis.Size = New System.Drawing.Size(816, 564)
+        Me.tbThemeXAxis.TabIndex = 0
+        Me.tbThemeXAxis.Text = "X-axis"
+        Me.tbThemeXAxis.UseVisualStyleBackColor = True
+        '
+        'grpTableOptions
+        '
+        Me.grpTableOptions.Controls.Add(Me.grpTickMarkLabelsXAxis)
+        Me.grpTableOptions.Controls.Add(Me.grpXAxisTitle)
+        Me.grpTableOptions.Controls.Add(Me.grpTickMarks)
+        Me.grpTableOptions.Location = New System.Drawing.Point(-1, 3)
+        Me.grpTableOptions.Name = "grpTableOptions"
+        Me.grpTableOptions.Size = New System.Drawing.Size(821, 678)
+        Me.grpTableOptions.TabIndex = 0
+        Me.grpTableOptions.TabStop = False
+        Me.grpTableOptions.Text = "More Options"
+        '
+        'grpTickMarkLabelsXAxis
+        '
+        Me.grpTickMarkLabelsXAxis.Controls.Add(Me.ucrThemeTopXAxis)
+        Me.grpTickMarkLabelsXAxis.Controls.Add(Me.ucrThemeBottomXAxis)
+        Me.grpTickMarkLabelsXAxis.Location = New System.Drawing.Point(7, 263)
+        Me.grpTickMarkLabelsXAxis.Name = "grpTickMarkLabelsXAxis"
+        Me.grpTickMarkLabelsXAxis.Size = New System.Drawing.Size(523, 245)
+        Me.grpTickMarkLabelsXAxis.TabIndex = 70
+        Me.grpTickMarkLabelsXAxis.TabStop = False
+        Me.grpTickMarkLabelsXAxis.Text = "Tick Mark Labels "
+        '
+        'ucrThemeTopXAxis
+        '
+        Me.ucrThemeTopXAxis.Location = New System.Drawing.Point(263, 12)
+        Me.ucrThemeTopXAxis.Name = "ucrThemeTopXAxis"
+        Me.ucrThemeTopXAxis.Size = New System.Drawing.Size(258, 224)
+        Me.ucrThemeTopXAxis.TabIndex = 59
+        '
+        'ucrThemeBottomXAxis
+        '
+        Me.ucrThemeBottomXAxis.Location = New System.Drawing.Point(4, 12)
+        Me.ucrThemeBottomXAxis.Name = "ucrThemeBottomXAxis"
+        Me.ucrThemeBottomXAxis.Size = New System.Drawing.Size(259, 224)
+        Me.ucrThemeBottomXAxis.TabIndex = 58
+        '
+        'grpXAxisTitle
+        '
+        Me.grpXAxisTitle.Controls.Add(Me.ucrThemeTitleXTopAxis)
+        Me.grpXAxisTitle.Controls.Add(Me.ucrThemeTitleXAxis)
+        Me.grpXAxisTitle.Location = New System.Drawing.Point(7, 15)
+        Me.grpXAxisTitle.Name = "grpXAxisTitle"
+        Me.grpXAxisTitle.Size = New System.Drawing.Size(522, 246)
+        Me.grpXAxisTitle.TabIndex = 69
+        Me.grpXAxisTitle.TabStop = False
+        Me.grpXAxisTitle.Text = "X-Lab Title"
+        '
+        'ucrThemeTitleXTopAxis
+        '
+        Me.ucrThemeTitleXTopAxis.Location = New System.Drawing.Point(266, 14)
+        Me.ucrThemeTitleXTopAxis.Name = "ucrThemeTitleXTopAxis"
+        Me.ucrThemeTitleXTopAxis.Size = New System.Drawing.Size(252, 230)
+        Me.ucrThemeTitleXTopAxis.TabIndex = 64
+        '
+        'ucrThemeTitleXAxis
+        '
+        Me.ucrThemeTitleXAxis.Location = New System.Drawing.Point(6, 11)
+        Me.ucrThemeTitleXAxis.Name = "ucrThemeTitleXAxis"
+        Me.ucrThemeTitleXAxis.Size = New System.Drawing.Size(260, 231)
+        Me.ucrThemeTitleXAxis.TabIndex = 63
+        '
+        'grpTickMarks
+        '
+        Me.grpTickMarks.Controls.Add(Me.ucrXAxisLines)
+        Me.grpTickMarks.Controls.Add(Me.ucrTickMarksXAxis)
+        Me.grpTickMarks.Location = New System.Drawing.Point(528, 10)
+        Me.grpTickMarks.Name = "grpTickMarks"
+        Me.grpTickMarks.Size = New System.Drawing.Size(264, 259)
+        Me.grpTickMarks.TabIndex = 67
+        Me.grpTickMarks.TabStop = False
+        Me.grpTickMarks.Text = "TickMarkers"
+        '
+        'ucrXAxisLines
+        '
+        Me.ucrXAxisLines.Location = New System.Drawing.Point(4, 136)
+        Me.ucrXAxisLines.Name = "ucrXAxisLines"
+        Me.ucrXAxisLines.Size = New System.Drawing.Size(254, 124)
+        Me.ucrXAxisLines.TabIndex = 64
+        '
+        'ucrTickMarksXAxis
+        '
+        Me.ucrTickMarksXAxis.Location = New System.Drawing.Point(4, 10)
+        Me.ucrTickMarksXAxis.Name = "ucrTickMarksXAxis"
+        Me.ucrTickMarksXAxis.Size = New System.Drawing.Size(254, 124)
+        Me.ucrTickMarksXAxis.TabIndex = 63
+        '
+        'tbXYAxes
+        '
+        Me.tbXYAxes.Controls.Add(Me.ucrThemeAxesLines)
+        Me.tbXYAxes.Controls.Add(Me.ucrThemeAxesTickLabels)
+        Me.tbXYAxes.Controls.Add(Me.ucrTickMarksAxes)
+        Me.tbXYAxes.Controls.Add(Me.ucrThemeAxesTitle)
+        Me.tbXYAxes.Location = New System.Drawing.Point(4, 22)
+        Me.tbXYAxes.Name = "tbXYAxes"
+        Me.tbXYAxes.Size = New System.Drawing.Size(816, 564)
+        Me.tbXYAxes.TabIndex = 6
+        Me.tbXYAxes.Text = "XY-Axes"
+        Me.tbXYAxes.UseVisualStyleBackColor = True
+        '
+        'ucrThemeAxesLines
+        '
+        Me.ucrThemeAxesLines.Location = New System.Drawing.Point(271, 246)
+        Me.ucrThemeAxesLines.Name = "ucrThemeAxesLines"
+        Me.ucrThemeAxesLines.Size = New System.Drawing.Size(257, 122)
+        Me.ucrThemeAxesLines.TabIndex = 64
+        '
+        'ucrThemeAxesTickLabels
+        '
+        Me.ucrThemeAxesTickLabels.Location = New System.Drawing.Point(268, 13)
+        Me.ucrThemeAxesTickLabels.Name = "ucrThemeAxesTickLabels"
+        Me.ucrThemeAxesTickLabels.Size = New System.Drawing.Size(255, 228)
+        Me.ucrThemeAxesTickLabels.TabIndex = 63
+        '
+        'ucrTickMarksAxes
+        '
+        Me.ucrTickMarksAxes.Location = New System.Drawing.Point(4, 244)
+        Me.ucrTickMarksAxes.Name = "ucrTickMarksAxes"
+        Me.ucrTickMarksAxes.Size = New System.Drawing.Size(257, 122)
+        Me.ucrTickMarksAxes.TabIndex = 62
+        '
+        'ucrThemeAxesTitle
+        '
+        Me.ucrThemeAxesTitle.Location = New System.Drawing.Point(7, 13)
+        Me.ucrThemeAxesTitle.Name = "ucrThemeAxesTitle"
+        Me.ucrThemeAxesTitle.Size = New System.Drawing.Size(255, 228)
+        Me.ucrThemeAxesTitle.TabIndex = 59
+        '
+        'tbPLot
+        '
+        Me.tbPLot.Controls.Add(Me.grpPlotBackground)
+        Me.tbPLot.Controls.Add(Me.grpPlotTitleAndCaption)
+        Me.tbPLot.Location = New System.Drawing.Point(4, 22)
+        Me.tbPLot.Name = "tbPLot"
+        Me.tbPLot.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbPLot.Size = New System.Drawing.Size(816, 564)
+        Me.tbPLot.TabIndex = 7
+        Me.tbPLot.Text = "Plot"
+        Me.tbPLot.UseVisualStyleBackColor = True
+        '
+        'grpPlotBackground
+        '
+        Me.grpPlotBackground.Controls.Add(Me.ucrPlotBackGround)
+        Me.grpPlotBackground.Location = New System.Drawing.Point(6, 256)
+        Me.grpPlotBackground.Name = "grpPlotBackground"
+        Me.grpPlotBackground.Size = New System.Drawing.Size(269, 148)
+        Me.grpPlotBackground.TabIndex = 103
+        Me.grpPlotBackground.TabStop = False
+        Me.grpPlotBackground.Text = "Plot Background "
+        '
+        'ucrPlotBackGround
+        '
+        Me.ucrPlotBackGround.Location = New System.Drawing.Point(11, 19)
+        Me.ucrPlotBackGround.Name = "ucrPlotBackGround"
+        Me.ucrPlotBackGround.Size = New System.Drawing.Size(253, 128)
+        Me.ucrPlotBackGround.TabIndex = 0
+        '
+        'grpPlotTitleAndCaption
+        '
+        Me.grpPlotTitleAndCaption.Controls.Add(Me.ucrPlotCaption)
+        Me.grpPlotTitleAndCaption.Controls.Add(Me.ucrPlotSubTitle)
+        Me.grpPlotTitleAndCaption.Controls.Add(Me.ucrPlotTitle)
+        Me.grpPlotTitleAndCaption.Location = New System.Drawing.Point(6, 6)
+        Me.grpPlotTitleAndCaption.Name = "grpPlotTitleAndCaption"
+        Me.grpPlotTitleAndCaption.Size = New System.Drawing.Size(804, 244)
+        Me.grpPlotTitleAndCaption.TabIndex = 102
+        Me.grpPlotTitleAndCaption.TabStop = False
+        Me.grpPlotTitleAndCaption.Text = "PLot Title and Caption"
+        '
+        'ucrPlotCaption
+        '
+        Me.ucrPlotCaption.Location = New System.Drawing.Point(536, 12)
+        Me.ucrPlotCaption.Name = "ucrPlotCaption"
+        Me.ucrPlotCaption.Size = New System.Drawing.Size(255, 224)
+        Me.ucrPlotCaption.TabIndex = 66
+        '
+        'ucrPlotSubTitle
+        '
+        Me.ucrPlotSubTitle.Location = New System.Drawing.Point(275, 12)
+        Me.ucrPlotSubTitle.Name = "ucrPlotSubTitle"
+        Me.ucrPlotSubTitle.Size = New System.Drawing.Size(255, 224)
+        Me.ucrPlotSubTitle.TabIndex = 65
+        '
+        'ucrPlotTitle
+        '
+        Me.ucrPlotTitle.Location = New System.Drawing.Point(14, 12)
+        Me.ucrPlotTitle.Name = "ucrPlotTitle"
+        Me.ucrPlotTitle.Size = New System.Drawing.Size(255, 224)
+        Me.ucrPlotTitle.TabIndex = 64
+        '
+        'tbLegend
+        '
+        Me.tbLegend.Controls.Add(Me.tbPLot)
+        Me.tbLegend.Controls.Add(Me.tbXYAxes)
+        Me.tbLegend.Controls.Add(Me.tbThemeXAxis)
+        Me.tbLegend.Controls.Add(Me.tbThemeYaxis)
+        Me.tbLegend.Controls.Add(Me.tbThemeLegend)
+        Me.tbLegend.Controls.Add(Me.tbThemePanelAndBackground)
+        Me.tbLegend.Controls.Add(Me.tbThemeFacets)
+        Me.tbLegend.Location = New System.Drawing.Point(4, 8)
+        Me.tbLegend.Name = "tbLegend"
+        Me.tbLegend.SelectedIndex = 0
+        Me.tbLegend.Size = New System.Drawing.Size(824, 590)
+        Me.tbLegend.TabIndex = 1
         '
         'sdgThemes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(833, 633)
+        Me.ClientSize = New System.Drawing.Size(833, 653)
         Me.Controls.Add(Me.tbLegend)
         Me.Controls.Add(Me.ucrBaseSubdialogue)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
@@ -804,11 +764,18 @@ Partial Class sdgThemes
         Me.Name = "sdgThemes"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Themes"
+        Me.tbThemeFacets.ResumeLayout(False)
+        Me.grpFacetBackground.ResumeLayout(False)
+        Me.grpFacetLabels.ResumeLayout(False)
         Me.tbThemePanelAndBackground.ResumeLayout(False)
         Me.grpBorderAndBackground.ResumeLayout(False)
         Me.grpPAnelGrid.ResumeLayout(False)
+        Me.tbThemeLegend.ResumeLayout(False)
+        Me.grpLegendTitleAndText.ResumeLayout(False)
+        Me.grpLegendAdjustments.ResumeLayout(False)
+        Me.grpLegendBackGroundAndKey.ResumeLayout(False)
         Me.tbThemeYaxis.ResumeLayout(False)
-        Me.GroupBox1.ResumeLayout(False)
+        Me.grpLineAlongYAxis.ResumeLayout(False)
         Me.grpYAxisTitle.ResumeLayout(False)
         Me.grpTickMarkLabelsYAxis.ResumeLayout(False)
         Me.grpTickMarkers.ResumeLayout(False)
@@ -816,52 +783,36 @@ Partial Class sdgThemes
         Me.grpTableOptions.ResumeLayout(False)
         Me.grpTickMarkLabelsXAxis.ResumeLayout(False)
         Me.grpXAxisTitle.ResumeLayout(False)
-        Me.grpXAxisLines.ResumeLayout(False)
-        Me.GroupBox5.ResumeLayout(False)
-        Me.tbLegend.ResumeLayout(False)
+        Me.grpTickMarks.ResumeLayout(False)
+        Me.tbXYAxes.ResumeLayout(False)
         Me.tbPLot.ResumeLayout(False)
         Me.grpPlotBackground.ResumeLayout(False)
         Me.grpPlotTitleAndCaption.ResumeLayout(False)
-        Me.tbXYAxes.ResumeLayout(False)
-        Me.tbThemeLegend.ResumeLayout(False)
-        Me.grpLegendTitleAndText.ResumeLayout(False)
-        Me.grpLegendAdjustments.ResumeLayout(False)
-        Me.grpLegendBackGroundAndKey.ResumeLayout(False)
+        Me.tbLegend.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
 
     Friend WithEvents ucrBaseSubdialogue As ucrButtonsSubdialogue
     Friend WithEvents tbThemeFacets As TabPage
+    Friend WithEvents grpFacetBackground As GroupBox
+    Friend WithEvents ucrStripBackGround As ucrElementRectControl
+    Friend WithEvents grpFacetLabels As GroupBox
+    Friend WithEvents ucrStripTextYAxis As ucrELementTextControl
+    Friend WithEvents ucrStripTextXAxis As ucrELementTextControl
+    Friend WithEvents ucrStripText As ucrELementTextControl
     Friend WithEvents tbThemePanelAndBackground As TabPage
-    Friend WithEvents tbThemeYaxis As TabPage
-    Friend WithEvents tbThemeXAxis As TabPage
-    Friend WithEvents grpTableOptions As GroupBox
-    Friend WithEvents tbLegend As TabControl
-    Friend WithEvents grpTickMarkers As GroupBox
-    Friend WithEvents ucrTickMarksYAxis As ucrElementLineControl
-    Friend WithEvents grpTickMarkLabelsYAxis As GroupBox
-    Friend WithEvents ucrThemeYRightAxis As ucrELementTextControl
-    Friend WithEvents ucrThemeLeftYAxis As ucrELementTextControl
-    Friend WithEvents grpYAxisTitle As GroupBox
-    Friend WithEvents ucrThemeTitleYRightAxis As ucrELementTextControl
-    Friend WithEvents ucrThemeTitleYAxis As ucrELementTextControl
-    Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents ucrYAxisLines As ucrElementLineControl
-    Friend WithEvents grpXAxisLines As GroupBox
-    Friend WithEvents UcrTickMarksAndLabels3 As ucrElementLineControl
-    Friend WithEvents ucrXAxisLines As ucrElementLineControl
-    Friend WithEvents GroupBox5 As GroupBox
-    Friend WithEvents UcrTickMarksAndLabels5 As ucrElementLineControl
-    Friend WithEvents ucrTickMarksXAxis As ucrElementLineControl
-    Friend WithEvents grpXAxisTitle As GroupBox
-    Friend WithEvents ucrThemeTitleXTopAxis As ucrELementTextControl
-    Friend WithEvents ucrThemeTitleXAxis As ucrELementTextControl
-    Friend WithEvents grpTickMarkLabelsXAxis As GroupBox
-    Friend WithEvents ucrThemeBottomXAxis As ucrELementTextControl
-    Friend WithEvents ucrThemeTopXAxis As ucrELementTextControl
+    Friend WithEvents grpBorderAndBackground As GroupBox
+    Friend WithEvents ucrPanelBackGround As ucrElementRectControl
+    Friend WithEvents ucrPanelBorder As ucrElementRectControl
+    Friend WithEvents grpPAnelGrid As GroupBox
+    Friend WithEvents ucrPanelGridMinor As ucrElementLineControl
+    Friend WithEvents ucrPanelGridMajor As ucrElementLineControl
+    Friend WithEvents ucrPanelGrid As ucrElementLineControl
     Friend WithEvents tbThemeLegend As TabPage
-    Friend WithEvents grpLegendBackGroundAndKey As GroupBox
+    Friend WithEvents grpLegendTitleAndText As GroupBox
+    Friend WithEvents ucrLegendText As ucrELementTextControl
+    Friend WithEvents ucrLegendTitle As ucrELementTextControl
     Friend WithEvents grpLegendAdjustments As GroupBox
     Friend WithEvents ucrChkLegendJustification As ucrCheck
     Friend WithEvents ucrInputLegendJustification As ucrInputComboBox
@@ -873,36 +824,43 @@ Partial Class sdgThemes
     Friend WithEvents ucrInputLegendDirection As ucrInputComboBox
     Friend WithEvents urChkLegendBoxJust As ucrCheck
     Friend WithEvents ucrInputLegendBoxJust As ucrInputComboBox
-    Friend WithEvents grpLegendTitleAndText As GroupBox
-    Friend WithEvents ucrLegendText As ucrELementTextControl
-    Friend WithEvents ucrLegendTitle As ucrELementTextControl
-    Friend WithEvents grpPAnelGrid As GroupBox
-    Friend WithEvents ucrPanelGridMinor As ucrElementLineControl
-    Friend WithEvents ucrPanelGridMajor As ucrElementLineControl
-    Friend WithEvents ucrPanelGrid As ucrElementLineControl
+    Friend WithEvents grpLegendBackGroundAndKey As GroupBox
     Friend WithEvents ucrLegendBoxBackground As ucrElementRectControl
     Friend WithEvents ucrLegendBackground As ucrElementRectControl
     Friend WithEvents ucrLegendKey As ucrElementRectControl
-    Friend WithEvents grpBorderAndBackground As GroupBox
-    Friend WithEvents ucrPanelBackGround As ucrElementRectControl
-    Friend WithEvents ucrPanelBorder As ucrElementRectControl
-    Friend WithEvents tbPLot As TabPage
-    Friend WithEvents ucrThemeAxesTitle As ucrELementTextControl
-    Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents ucrInputTickUnits As ucrInputComboBox
-    Friend WithEvents ucrChkUnits As ucrCheck
-    Friend WithEvents ucrInputUnits As ucrInputTextBox
-    Friend WithEvents ucrInputMarginUnits As ucrInputComboBox
-    Friend WithEvents ucrChkMaigin As ucrCheck
-    Friend WithEvents ucrInputMargin As ucrInputTextBox
-    Friend WithEvents ucrTickMarksAxes As ucrElementLineControl
-    Friend WithEvents ucrThemeAxesTickLabels As ucrELementTextControl
-    Friend WithEvents ucrThemeAxesLines As ucrElementLineControl
+    Friend WithEvents tbThemeYaxis As TabPage
+    Friend WithEvents grpLineAlongYAxis As GroupBox
+    Friend WithEvents ucrYAxisLines As ucrElementLineControl
+    Friend WithEvents grpYAxisTitle As GroupBox
+    Friend WithEvents ucrThemeTitleYRightAxis As ucrELementTextControl
+    Friend WithEvents ucrThemeTitleYAxis As ucrELementTextControl
+    Friend WithEvents grpTickMarkLabelsYAxis As GroupBox
+    Friend WithEvents ucrThemeYRightAxis As ucrELementTextControl
+    Friend WithEvents ucrThemeLeftYAxis As ucrELementTextControl
+    Friend WithEvents grpTickMarkers As GroupBox
+    Friend WithEvents ucrTickMarksYAxis As ucrElementLineControl
+    Friend WithEvents tbThemeXAxis As TabPage
+    Friend WithEvents grpTableOptions As GroupBox
+    Friend WithEvents grpTickMarkLabelsXAxis As GroupBox
+    Friend WithEvents ucrThemeTopXAxis As ucrELementTextControl
+    Friend WithEvents ucrThemeBottomXAxis As ucrELementTextControl
+    Friend WithEvents grpXAxisTitle As GroupBox
+    Friend WithEvents ucrThemeTitleXTopAxis As ucrELementTextControl
+    Friend WithEvents ucrThemeTitleXAxis As ucrELementTextControl
+    Friend WithEvents grpTickMarks As GroupBox
+    Friend WithEvents ucrXAxisLines As ucrElementLineControl
+    Friend WithEvents ucrTickMarksXAxis As ucrElementLineControl
     Friend WithEvents tbXYAxes As TabPage
+    Friend WithEvents ucrThemeAxesLines As ucrElementLineControl
+    Friend WithEvents ucrThemeAxesTickLabels As ucrELementTextControl
+    Friend WithEvents ucrTickMarksAxes As ucrElementLineControl
+    Friend WithEvents ucrThemeAxesTitle As ucrELementTextControl
+    Friend WithEvents tbPLot As TabPage
+    Friend WithEvents grpPlotBackground As GroupBox
+    Friend WithEvents ucrPlotBackGround As ucrElementRectControl
     Friend WithEvents grpPlotTitleAndCaption As GroupBox
     Friend WithEvents ucrPlotCaption As ucrELementTextControl
     Friend WithEvents ucrPlotSubTitle As ucrELementTextControl
     Friend WithEvents ucrPlotTitle As ucrELementTextControl
-    Friend WithEvents grpPlotBackground As GroupBox
-    Friend WithEvents ucrPlotBackGround As ucrElementRectControl
+    Friend WithEvents tbLegend As TabControl
 End Class
