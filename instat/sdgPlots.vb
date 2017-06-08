@@ -29,6 +29,7 @@ Public Class sdgPlots
     Public clsFacetFunction As New RFunction
     Public clsXLabFunction As New RFunction
     Public clsXScalecontinuousFunction As New RFunction
+    Public clsYScalecontinuousFunction As New RFunction
     Public clsYLabFunction As New RFunction
     Public clsBaseOperator As New ROperator
     Private bControlsInitialised As Boolean = False
@@ -41,14 +42,9 @@ Public Class sdgPlots
     Private strFirstVariable As String
     Private strSecondvariable As String
     Private bRCodeSet As Boolean = False
-
     'See bLayersDefaultIsGolobal below.
+
     Private Sub sdgPlots_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'If bFirstLoad Then
-        '    InitialiseDialog()
-        '    SetDefaults()
-        '    bFirstLoad = False
-        'End If
         autoTranslate(Me)
     End Sub
 
@@ -207,6 +203,7 @@ Public Class sdgPlots
         clsXLabFunction = clsNewXLabsTitleFunction
         clsYLabFunction = clsNewYLabTitleFunction
         clsXScalecontinuousFunction = clsNewXScalecontinuousFunction
+        clsYScalecontinuousFunction = clsNewYScalecontinuousFunction
         clsFacetFunction = clsNewFacetFunction
 
         If clsFacetFunction.ContainsParameter("facets") Then
@@ -251,8 +248,8 @@ Public Class sdgPlots
         ucrChkIncludeFacets.SetRCode(clsBaseOperator, bReset)
 
         'axis controls
-        ucrXAxis.SetRCodeForControl(True, clsNewXYlabTitleFunction:=clsXLabFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrYAxis.SetRCodeForControl(False, clsNewXYlabTitleFunction:=clsYLabFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrXAxis.SetRCodeForControl(True, clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrYAxis.SetRCodeForControl(False, clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
         bRCodeSet = True
         AddRemoveLabs()

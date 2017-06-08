@@ -30,12 +30,10 @@ Partial Class ucrAxes
         Me.ucrInputTitle = New instat.ucrInputTextBox()
         Me.ucrPnlAxisTitle = New instat.UcrPanel()
         Me.grpTickMarkers = New System.Windows.Forms.GroupBox()
-        Me.ucrNudInStepsOf = New instat.ucrNud()
-        Me.ucrNudTo = New instat.ucrNud()
-        Me.ucrNudTickMarkersNoOfDecimalPlaces = New instat.ucrNud()
-        Me.ucrNudFrom = New instat.ucrNud()
+        Me.ucrInputInStepsOf = New instat.ucrInputTextBox()
+        Me.ucrInputTo = New instat.ucrInputTextBox()
+        Me.ucrInputFrom = New instat.ucrInputTextBox()
         Me.ucrTickMarkers = New instat.ucrInputComboBox()
-        Me.lblTickMarkersNoOfDecimalPlaces = New System.Windows.Forms.Label()
         Me.rdoTickMarkersAuto = New System.Windows.Forms.RadioButton()
         Me.ucrSpecificValues = New instat.ucrInputTextBox()
         Me.rdoTickMarkersCustom = New System.Windows.Forms.RadioButton()
@@ -132,12 +130,10 @@ Partial Class ucrAxes
         '
         'grpTickMarkers
         '
-        Me.grpTickMarkers.Controls.Add(Me.ucrNudInStepsOf)
-        Me.grpTickMarkers.Controls.Add(Me.ucrNudTo)
-        Me.grpTickMarkers.Controls.Add(Me.ucrNudTickMarkersNoOfDecimalPlaces)
-        Me.grpTickMarkers.Controls.Add(Me.ucrNudFrom)
+        Me.grpTickMarkers.Controls.Add(Me.ucrInputInStepsOf)
+        Me.grpTickMarkers.Controls.Add(Me.ucrInputTo)
+        Me.grpTickMarkers.Controls.Add(Me.ucrInputFrom)
         Me.grpTickMarkers.Controls.Add(Me.ucrTickMarkers)
-        Me.grpTickMarkers.Controls.Add(Me.lblTickMarkersNoOfDecimalPlaces)
         Me.grpTickMarkers.Controls.Add(Me.rdoTickMarkersAuto)
         Me.grpTickMarkers.Controls.Add(Me.ucrSpecificValues)
         Me.grpTickMarkers.Controls.Add(Me.rdoTickMarkersCustom)
@@ -152,53 +148,35 @@ Partial Class ucrAxes
         Me.grpTickMarkers.TabStop = False
         Me.grpTickMarkers.Text = "Tick Marks"
         '
-        'ucrNudInStepsOf
+        'ucrInputInStepsOf
         '
-        Me.ucrNudInStepsOf.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudInStepsOf.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudInStepsOf.Location = New System.Drawing.Point(120, 182)
-        Me.ucrNudInStepsOf.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudInStepsOf.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudInStepsOf.Name = "ucrNudInStepsOf"
-        Me.ucrNudInStepsOf.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudInStepsOf.TabIndex = 17
-        Me.ucrNudInStepsOf.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrInputInStepsOf.AddQuotesIfUnrecognised = True
+        Me.ucrInputInStepsOf.IsMultiline = False
+        Me.ucrInputInStepsOf.IsReadOnly = False
+        Me.ucrInputInStepsOf.Location = New System.Drawing.Point(74, 152)
+        Me.ucrInputInStepsOf.Name = "ucrInputInStepsOf"
+        Me.ucrInputInStepsOf.Size = New System.Drawing.Size(47, 21)
+        Me.ucrInputInStepsOf.TabIndex = 19
         '
-        'ucrNudTo
+        'ucrInputTo
         '
-        Me.ucrNudTo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTo.Location = New System.Drawing.Point(120, 152)
-        Me.ucrNudTo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTo.Name = "ucrNudTo"
-        Me.ucrNudTo.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudTo.TabIndex = 17
-        Me.ucrNudTo.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrInputTo.AddQuotesIfUnrecognised = True
+        Me.ucrInputTo.IsMultiline = False
+        Me.ucrInputTo.IsReadOnly = False
+        Me.ucrInputTo.Location = New System.Drawing.Point(74, 124)
+        Me.ucrInputTo.Name = "ucrInputTo"
+        Me.ucrInputTo.Size = New System.Drawing.Size(47, 21)
+        Me.ucrInputTo.TabIndex = 19
         '
-        'ucrNudTickMarkersNoOfDecimalPlaces
+        'ucrInputFrom
         '
-        Me.ucrNudTickMarkersNoOfDecimalPlaces.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTickMarkersNoOfDecimalPlaces.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTickMarkersNoOfDecimalPlaces.Location = New System.Drawing.Point(138, 100)
-        Me.ucrNudTickMarkersNoOfDecimalPlaces.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudTickMarkersNoOfDecimalPlaces.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTickMarkersNoOfDecimalPlaces.Name = "ucrNudTickMarkersNoOfDecimalPlaces"
-        Me.ucrNudTickMarkersNoOfDecimalPlaces.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudTickMarkersNoOfDecimalPlaces.TabIndex = 17
-        Me.ucrNudTickMarkersNoOfDecimalPlaces.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudFrom
-        '
-        Me.ucrNudFrom.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFrom.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudFrom.Location = New System.Drawing.Point(120, 126)
-        Me.ucrNudFrom.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFrom.Name = "ucrNudFrom"
-        Me.ucrNudFrom.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudFrom.TabIndex = 17
-        Me.ucrNudFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrInputFrom.AddQuotesIfUnrecognised = True
+        Me.ucrInputFrom.IsMultiline = False
+        Me.ucrInputFrom.IsReadOnly = False
+        Me.ucrInputFrom.Location = New System.Drawing.Point(74, 96)
+        Me.ucrInputFrom.Name = "ucrInputFrom"
+        Me.ucrInputFrom.Size = New System.Drawing.Size(47, 21)
+        Me.ucrInputFrom.TabIndex = 19
         '
         'ucrTickMarkers
         '
@@ -208,15 +186,6 @@ Partial Class ucrAxes
         Me.ucrTickMarkers.Name = "ucrTickMarkers"
         Me.ucrTickMarkers.Size = New System.Drawing.Size(137, 21)
         Me.ucrTickMarkers.TabIndex = 16
-        '
-        'lblTickMarkersNoOfDecimalPlaces
-        '
-        Me.lblTickMarkersNoOfDecimalPlaces.AutoSize = True
-        Me.lblTickMarkersNoOfDecimalPlaces.Location = New System.Drawing.Point(3, 102)
-        Me.lblTickMarkersNoOfDecimalPlaces.Name = "lblTickMarkersNoOfDecimalPlaces"
-        Me.lblTickMarkersNoOfDecimalPlaces.Size = New System.Drawing.Size(135, 13)
-        Me.lblTickMarkersNoOfDecimalPlaces.TabIndex = 10
-        Me.lblTickMarkersNoOfDecimalPlaces.Text = "Number of Decimal Places:"
         '
         'rdoTickMarkersAuto
         '
@@ -253,7 +222,7 @@ Partial Class ucrAxes
         'lblInStepsOf
         '
         Me.lblInStepsOf.AutoSize = True
-        Me.lblInStepsOf.Location = New System.Drawing.Point(3, 185)
+        Me.lblInStepsOf.Location = New System.Drawing.Point(9, 156)
         Me.lblInStepsOf.Name = "lblInStepsOf"
         Me.lblInStepsOf.Size = New System.Drawing.Size(61, 13)
         Me.lblInStepsOf.TabIndex = 9
@@ -262,7 +231,7 @@ Partial Class ucrAxes
         'lblFrom
         '
         Me.lblFrom.AutoSize = True
-        Me.lblFrom.Location = New System.Drawing.Point(3, 133)
+        Me.lblFrom.Location = New System.Drawing.Point(9, 104)
         Me.lblFrom.Name = "lblFrom"
         Me.lblFrom.Size = New System.Drawing.Size(33, 13)
         Me.lblFrom.TabIndex = 5
@@ -271,7 +240,7 @@ Partial Class ucrAxes
         'lblTo
         '
         Me.lblTo.AutoSize = True
-        Me.lblTo.Location = New System.Drawing.Point(3, 159)
+        Me.lblTo.Location = New System.Drawing.Point(9, 130)
         Me.lblTo.Name = "lblTo"
         Me.lblTo.Size = New System.Drawing.Size(23, 13)
         Me.lblTo.TabIndex = 6
@@ -375,7 +344,7 @@ Partial Class ucrAxes
         Me.Controls.Add(Me.grpTickMarkers)
         Me.Controls.Add(Me.grpAxisTitle)
         Me.Name = "ucrAxes"
-        Me.Size = New System.Drawing.Size(470, 269)
+        Me.Size = New System.Drawing.Size(465, 261)
         Me.grpAxisTitle.ResumeLayout(False)
         Me.grpAxisTitle.PerformLayout()
         Me.grpTickMarkers.ResumeLayout(False)
@@ -393,7 +362,6 @@ Partial Class ucrAxes
     Friend WithEvents rdoTickMarkersCustom As RadioButton
     Friend WithEvents rdoTickMarkersAuto As RadioButton
     Friend WithEvents lblTo As Label
-    Friend WithEvents lblTickMarkersNoOfDecimalPlaces As Label
     Friend WithEvents lblInStepsOf As Label
     Friend WithEvents ucrSpecificValues As ucrInputTextBox
     Friend WithEvents grpScales As GroupBox
@@ -404,10 +372,6 @@ Partial Class ucrAxes
     Friend WithEvents rdoNoTitle As RadioButton
     Friend WithEvents rdoTitleAuto As RadioButton
     Friend WithEvents ucrTickMarkers As ucrInputComboBox
-    Friend WithEvents ucrNudInStepsOf As ucrNud
-    Friend WithEvents ucrNudTo As ucrNud
-    Friend WithEvents ucrNudTickMarkersNoOfDecimalPlaces As ucrNud
-    Friend WithEvents ucrNudFrom As ucrNud
     Friend WithEvents ucrPnlAxisTitle As UcrPanel
     Friend WithEvents ucrPnlTickmarkers As UcrPanel
     Friend WithEvents ucrPnlScales As UcrPanel
@@ -415,4 +379,7 @@ Partial Class ucrAxes
     Friend WithEvents ucrInputLowerLimit As ucrInputTextBox
     Friend WithEvents rdoSpecifyTitle As RadioButton
     Friend WithEvents lblTitle As Label
+    Friend WithEvents ucrInputInStepsOf As ucrInputTextBox
+    Friend WithEvents ucrInputTo As ucrInputTextBox
+    Friend WithEvents ucrInputFrom As ucrInputTextBox
 End Class
