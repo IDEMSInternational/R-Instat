@@ -75,6 +75,18 @@ Public Class sdgThemes
         ucrStripTextYAxis.setlabel("Facet labels along vertical direction")
 
         ucrTickLength.setlabel("Length of tick marks")
+        ucrPlotMargin.setlabel("Margin around entire plot")
+
+        ucrLegendKeySize.setlabel("Size of legend keys")
+        ucrLegendKeyHeight.setlabel("Key background height")
+        ucrLegendKeySize.setlabel("Key background width")
+
+        ucrPanelSpacing.setlabel("Spacing between facet panels ")
+        ucrPanelSpacingXAxis.setlabel("Horizontal spacing between facet panels")
+        ucrPanelSpacingYAxis.setlabel("Vertical spacing between facet panels")
+
+        ucrStripsSpaceGrid.setlabel("When strips are switched(Grid)")
+        ucrStripsSpaceWrap.setlabel("when strips are switched(wrap)")
 
         ' TODO: Find what this means: "two-element numeric vector"
         urChkLegendPosition.SetText("Legend Position")
@@ -176,6 +188,15 @@ Public Class sdgThemes
         Dim clsElementPanelGridMinor As New RFunction
 
         Dim clsUnitAxisTickLength As New RFunction
+        Dim clsUnitLegendSize As New RFunction
+        Dim clsUnitLegendHeight As New RFunction
+        Dim clsUnitLegendWidth As New RFunction
+        Dim clsUnitPanelSpacing As New RFunction
+        Dim clsUnitPanelSpacingXAxis As New RFunction
+        Dim clsUnitPanelSpacingYAxis As New RFunction
+        Dim clsUnitPlotMargin As New RFunction
+        Dim clsUnitStripsGrid As New RFunction
+        Dim clsUnitStripsWrap As New RFunction
 
         If Not bControlsInitialised Then
             InitialiseControls()
@@ -219,12 +240,23 @@ Public Class sdgThemes
         dctThemeFunctions.TryGetValue("panel.grid.minor", clsElementPanelGridMinor)
 
         dctThemeFunctions.TryGetValue("axis.ticks.length", clsUnitAxisTickLength)
+        dctThemeFunctions.TryGetValue("legend.key.size", clsUnitLegendSize)
+        dctThemeFunctions.TryGetValue("legend.key.height", clsUnitLegendHeight)
+        dctThemeFunctions.TryGetValue("legend.key.width", clsUnitLegendWidth)
+        dctThemeFunctions.TryGetValue("panel.spacing", clsUnitPanelSpacing)
+        dctThemeFunctions.TryGetValue("panel.spacing.x", clsUnitPanelSpacingXAxis)
+        dctThemeFunctions.TryGetValue("panel.spacing.y", clsUnitPanelSpacingYAxis)
+        dctThemeFunctions.TryGetValue("plot.margin", clsUnitPlotMargin)
+        dctThemeFunctions.TryGetValue("strip.switch.pad.grid", clsUnitStripsGrid)
+        dctThemeFunctions.TryGetValue("strip.switch.pad.wrap", clsUnitStripsWrap)
 
         dctThemeFunctions.TryGetValue("legend.background", clsElementLegendBackground)
         dctThemeFunctions.TryGetValue("legend.box.background", clsElementLegendBoxBackground)
         dctThemeFunctions.TryGetValue("legend.key", clsElementLegendtKey)
         dctThemeFunctions.TryGetValue("panel.background", clsElementPanelBackGround)
         dctThemeFunctions.TryGetValue("panel.border", clsElementBorder)
+
+
 
         dctThemeFunctions.TryGetValue("plot.background", clsElementPlotBackground)
 
@@ -272,6 +304,19 @@ Public Class sdgThemes
         ucrStripTextYAxis.SetRCodeForControl("strip.text.y", clsElementStripTextYAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
         ucrTickLength.SetRCodeForControl("axis.ticks.length", clsUnitAxisTickLength, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+
+        ucrLegendKeySize.SetRCodeForControl("legend.key.size", clsUnitLegendSize, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrLegendKeyHeight.SetRCodeForControl("legend.key.height", clsUnitLegendHeight, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrLegendKeyWidth.SetRCodeForControl("legend.key.width", clsUnitLegendWidth, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+
+        ucrPanelSpacing.SetRCodeForControl("panel.spacing", clsUnitPanelSpacing, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrPanelSpacingXAxis.SetRCodeForControl("panel.spacing.x", clsUnitPanelSpacingXAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrPanelSpacingYAxis.SetRCodeForControl("panel.spacing.y", clsUnitPanelSpacingYAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+
+        ucrStripsSpaceGrid.SetRCodeForControl("strip.switch.pad.grid", clsUnitStripsGrid, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrStripsSpaceWrap.SetRCodeForControl("strip.switch.pad.wrap", clsUnitStripsWrap, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+
+        ucrPlotMargin.SetRCodeForControl("plot.margin", clsUnitPlotMargin, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
         urChkLegendPosition.SetRCode(clsThemeFunction, bReset)
         ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset)
