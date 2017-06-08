@@ -212,7 +212,7 @@ Public Class sdgPlots
         clsXScalecontinuousFunction = clsNewXScalecontinuousFunction
         clsFacetFunction = clsNewFacetFunction
         clsThemeFunction = clsNewThemeFunction
-        dctThemeFunctions = GgplotDefaults.dctThemeFunctions
+        dctThemeFunctions = dctNewThemeFunctions
 
         If clsFacetFunction.ContainsParameter("facets") Then
             clsTempParam = clsFacetFunction.GetParameter("facets")

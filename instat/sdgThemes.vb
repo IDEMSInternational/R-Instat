@@ -219,8 +219,8 @@ Public Class sdgThemes
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
-        clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=15)
         clsThemeFunction = clsNewThemeFunction
+        clsBaseOperator.AddParameter("theme", clsRFunctionParameter:=clsThemeFunction, iPosition:=15)
 
         dctThemeFunctions = dctNewThemeFunctions
         dctThemeFunctions.TryGetValue("axis.text", clsElementTickText)
