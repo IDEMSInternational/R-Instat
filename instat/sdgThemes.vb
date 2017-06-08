@@ -20,14 +20,6 @@ Public Class sdgThemes
     Public bControlsInitialised As Boolean = False
     Private clsElementLine, clsElementRect, clsElementXAxisTextTop, clsElementXAxisLine, clsElementYAxisLine, clsElementText, clsElementYAxisTextRight, clsElementXAxisLineTop, clsThemeFunction As New RFunction
 
-    Private Sub grpTableOptions_Enter(sender As Object, e As EventArgs) Handles grpTableOptions.Enter
-
-    End Sub
-
-    Private Sub ucrYAxisLines_Load(sender As Object, e As EventArgs)
-
-    End Sub
-
     Private clsBaseOperator As New ROperator
 
     Private dctThemeFunctions As New Dictionary(Of String, RFunction)
@@ -81,12 +73,8 @@ Public Class sdgThemes
         ucrStripText.setlabel("Facet labels")
         ucrStripTextXAxis.setlabel("Facet labels along horizontal direction")
         ucrStripTextYAxis.setlabel("Facet labels along vertical direction")
-        'Units
-        ucrChkUnits.SetText("Tick length")
-        ucrInputTickUnits.SetParameter(New RParameter("units"))
-        ucrInputTickUnits.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctFonts))
-        ucrInputTickUnits.SetRDefault(Chr(34) & "npc" & Chr(34))
 
+        ucrTickLength.setlabel("Length of tick marks")
 
         ' TODO: Find what this means: "two-element numeric vector"
         urChkLegendPosition.SetText("Legend Position")
@@ -187,6 +175,8 @@ Public Class sdgThemes
         Dim clsElementPanelGridMajor As New RFunction
         Dim clsElementPanelGridMinor As New RFunction
 
+        Dim clsUnitAxisTickLength As New RFunction
+
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
@@ -227,6 +217,8 @@ Public Class sdgThemes
         dctThemeFunctions.TryGetValue("panel.grid", clsElementPanelGrid)
         dctThemeFunctions.TryGetValue("panel.grid.major", clsElementPanelGridMajor)
         dctThemeFunctions.TryGetValue("panel.grid.minor", clsElementPanelGridMinor)
+
+        dctThemeFunctions.TryGetValue("axis.ticks.length", clsUnitAxisTickLength)
 
         dctThemeFunctions.TryGetValue("legend.background", clsElementLegendBackground)
         dctThemeFunctions.TryGetValue("legend.box.background", clsElementLegendBoxBackground)
@@ -278,6 +270,8 @@ Public Class sdgThemes
         ucrStripText.SetRCodeForControl("strip.text", clsElementStripText, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
         ucrStripTextXAxis.SetRCodeForControl("strip.text.x", clsElementStripTextXAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
         ucrStripTextYAxis.SetRCodeForControl("strip.text.y", clsElementStripTextYAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+
+        ucrTickLength.SetRCodeForControl("axis.ticks.length", clsUnitAxisTickLength, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
         urChkLegendPosition.SetRCode(clsThemeFunction, bReset)
         ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset)

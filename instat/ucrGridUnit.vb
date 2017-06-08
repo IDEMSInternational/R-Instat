@@ -22,6 +22,26 @@ Public Class ucrGridUnit
     Private clsUnit As New RFunction
     Private clsBaseOperator As New ROperator
     Public Sub InitialiseControl()
+        'Units
+        ucrChkUnits.SetText("Tick length")
+        ucrInputUnits.SetParameter(New RParameter("units"))
+        ucrInputUnits.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctUnits))
+        ucrInputUnits.SetRDefault(Chr(34) & "npc" & Chr(34))
+
+        ucrInputData.SetParameter(New RParameter("data"))
+        ucrInputData.SetRDefault("NULL")
+        ucrInputData.AddQuotesIfUnrecognised = False
+        ' ucrInputData.SetValidationTypeAsNumeric()
+
+        ucrInputVector.SetParameter(New RParameter("x"))
+        ucrInputVector.AddQuotesIfUnrecognised = False
+        ' ucrInputVector.SetValidationTypeAsNumeric()
+        ucrInputVector.SetRDefault("1")
+
+        ucrChkUnits.AddToLinkedControls(ucrInputUnits, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkUnits.AddToLinkedControls(ucrInputData, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkUnits.AddToLinkedControls(ucrInputVector, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputData.SetLinkedDisplayControl(lblData)
 
     End Sub
 
@@ -38,6 +58,11 @@ Public Class ucrGridUnit
         clsBaseOperator = clsNewBaseOperator
         clsThemeFunction = clsNewThemeFunction
         clsUnit = clsNewUnit
+
+        ucrChkUnits.SetRCode(clsUnit, bReset)
+        ucrInputUnits.SetRCode(clsUnit, bReset)
+        ucrInputData.SetRCode(clsUnit, bReset)
+        ucrInputVector.SetRCode(clsUnit, bReset)
     End Sub
 
     Private Sub AddRemoveElementLineAxis()

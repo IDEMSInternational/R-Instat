@@ -23,34 +23,43 @@ Partial Class ucrGridUnit
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.grpUnits = New System.Windows.Forms.GroupBox()
+        Me.lblData = New System.Windows.Forms.Label()
         Me.ucrInputData = New instat.ucrInputTextBox()
         Me.ucrInputVector = New instat.ucrInputTextBox()
         Me.ucrInputUnits = New instat.ucrInputComboBox()
         Me.ucrChkUnits = New instat.ucrCheck()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.grpUnits.SuspendLayout()
         Me.SuspendLayout()
         '
         'grpUnits
         '
-        Me.grpUnits.Controls.Add(Me.Label1)
+        Me.grpUnits.Controls.Add(Me.lblData)
         Me.grpUnits.Controls.Add(Me.ucrInputData)
         Me.grpUnits.Controls.Add(Me.ucrInputVector)
         Me.grpUnits.Controls.Add(Me.ucrInputUnits)
         Me.grpUnits.Controls.Add(Me.ucrChkUnits)
-        Me.grpUnits.Location = New System.Drawing.Point(-2, -3)
+        Me.grpUnits.Location = New System.Drawing.Point(3, -3)
         Me.grpUnits.Name = "grpUnits"
-        Me.grpUnits.Size = New System.Drawing.Size(279, 120)
+        Me.grpUnits.Size = New System.Drawing.Size(249, 120)
         Me.grpUnits.TabIndex = 108
         Me.grpUnits.TabStop = False
         Me.grpUnits.Text = "Units"
+        '
+        'lblData
+        '
+        Me.lblData.AutoSize = True
+        Me.lblData.Location = New System.Drawing.Point(108, 69)
+        Me.lblData.Name = "lblData"
+        Me.lblData.Size = New System.Drawing.Size(78, 13)
+        Me.lblData.TabIndex = 112
+        Me.lblData.Text = "Data (Optional)"
         '
         'ucrInputData
         '
         Me.ucrInputData.AddQuotesIfUnrecognised = True
         Me.ucrInputData.IsMultiline = False
         Me.ucrInputData.IsReadOnly = False
-        Me.ucrInputData.Location = New System.Drawing.Point(134, 89)
+        Me.ucrInputData.Location = New System.Drawing.Point(108, 89)
         Me.ucrInputData.Name = "ucrInputData"
         Me.ucrInputData.Size = New System.Drawing.Size(106, 23)
         Me.ucrInputData.TabIndex = 111
@@ -60,7 +69,7 @@ Partial Class ucrGridUnit
         Me.ucrInputVector.AddQuotesIfUnrecognised = True
         Me.ucrInputVector.IsMultiline = False
         Me.ucrInputVector.IsReadOnly = False
-        Me.ucrInputVector.Location = New System.Drawing.Point(134, 18)
+        Me.ucrInputVector.Location = New System.Drawing.Point(108, 18)
         Me.ucrInputVector.Name = "ucrInputVector"
         Me.ucrInputVector.Size = New System.Drawing.Size(106, 23)
         Me.ucrInputVector.TabIndex = 110
@@ -69,7 +78,7 @@ Partial Class ucrGridUnit
         '
         Me.ucrInputUnits.AddQuotesIfUnrecognised = True
         Me.ucrInputUnits.IsReadOnly = False
-        Me.ucrInputUnits.Location = New System.Drawing.Point(134, 42)
+        Me.ucrInputUnits.Location = New System.Drawing.Point(108, 42)
         Me.ucrInputUnits.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputUnits.Name = "ucrInputUnits"
         Me.ucrInputUnits.Size = New System.Drawing.Size(137, 21)
@@ -77,21 +86,11 @@ Partial Class ucrGridUnit
         '
         'ucrChkUnits
         '
-        Me.ucrChkUnits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.ucrChkUnits.Checked = False
         Me.ucrChkUnits.Location = New System.Drawing.Point(10, 18)
         Me.ucrChkUnits.Name = "ucrChkUnits"
-        Me.ucrChkUnits.Size = New System.Drawing.Size(122, 20)
+        Me.ucrChkUnits.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkUnits.TabIndex = 108
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(134, 69)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(78, 13)
-        Me.Label1.TabIndex = 112
-        Me.Label1.Text = "Data (Optional)"
         '
         'ucrGridUnit
         '
@@ -110,6 +109,6 @@ Partial Class ucrGridUnit
     Friend WithEvents ucrInputData As ucrInputTextBox
     Friend WithEvents ucrInputVector As ucrInputTextBox
     Friend WithEvents ucrInputUnits As ucrInputComboBox
+    Friend WithEvents lblData As Label
     Friend WithEvents ucrChkUnits As ucrCheck
-    Friend WithEvents Label1 As Label
 End Class
