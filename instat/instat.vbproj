@@ -1266,6 +1266,12 @@
     <Compile Include="ucrDialogDisabled.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrElementRectControl.Designer.vb">
+      <DependentUpon>ucrElementRectControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrElementRectControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrFilter.Designer.vb">
       <DependentUpon>ucrFilter.vb</DependentUpon>
     </Compile>
@@ -1282,6 +1288,12 @@
       <DependentUpon>ucrGeom.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrGeom.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrGridUnit.Designer.vb">
+      <DependentUpon>ucrGridUnit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrGridUnit.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrInputComboBox.Designer.vb">
@@ -2154,6 +2166,18 @@
       <DependentUpon>ucrSelectorByDataFrameAddRemove.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrSelectorByDataFrameAddRemove.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrELementTextControl.Designer.vb">
+      <DependentUpon>ucrELementTextControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrELementTextControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrElementLineControl.Designer.vb">
+      <DependentUpon>ucrElementLineControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrElementLineControl.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrVariablename.designer.vb">
@@ -4300,6 +4324,9 @@
     <EmbeddedResource Include="ucrDistributionsWithParameters.sw-KE.resx">
       <DependentUpon>ucrDistributionsWithParameters.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrElementRectControl.resx">
+      <DependentUpon>ucrElementRectControl.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrFactor.fr-FR.resx">
       <DependentUpon>ucrFactor.vb</DependentUpon>
     </EmbeddedResource>
@@ -4335,6 +4362,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrGeom.sw-KE.resx">
       <DependentUpon>ucrGeom.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrGridUnit.resx">
+      <DependentUpon>ucrGridUnit.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrInput.fr-FR.resx">
       <DependentUpon>ucrInput.vb</DependentUpon>
@@ -4525,6 +4555,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrSelectorByDataFrameAddRemove.sw-KE.resx">
       <DependentUpon>ucrSelectorByDataFrameAddRemove.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrELementTextControl.resx">
+      <DependentUpon>ucrELementTextControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrElementLineControl.resx">
+      <DependentUpon>ucrElementLineControl.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrVariablename.fr-FR.resx">
       <DependentUpon>ucrVariablename.vb</DependentUpon>
