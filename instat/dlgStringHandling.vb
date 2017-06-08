@@ -62,6 +62,9 @@ Public Class dlgStringHandling
         'disabling replaceby input text box
         ucrPnlStringHandling.AddToLinkedControls(ucrInputReplaceBy, {rdoReplace, rdoReplaceAll}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputReplaceBy.SetLinkedDisplayControl(lblReplaceBy)
+        ucrChkRegex.AddToLinkedControls(ucrReceiverForRegexExpression, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        'ucrReceiverForRegexExpression.AddToLinkedControls(ucrChkRegex, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
 
         'ucrSave
         ucrSaveStringHandling.SetPrefix("count")
@@ -154,7 +157,6 @@ Public Class dlgStringHandling
         ucrSaveStringHandling.AddAdditionalRCode(clsLocateFunction, iAdditionalPairNo:=3)
         ucrSaveStringHandling.AddAdditionalRCode(clsReplaceFunction, iAdditionalPairNo:=4)
         ucrSaveStringHandling.AddAdditionalRCode(clsReplaceAllFunction, iAdditionalPairNo:=5)
-
     End Sub
 
     Private Sub ChangePrefixName()
@@ -179,6 +181,94 @@ Public Class dlgStringHandling
         Else
             ucrSaveStringHandling.SetAssignToBooleans(bTempAssignToIsPrefix:=False)
         End If
+    End Sub
+
+    Private Sub cmdQuote_Click(sender As Object, e As EventArgs) Handles cmdQuote.Click
+        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition(" "" ")
+    End Sub
+
+    Private Sub cmdSingleQuote_Click(sender As Object, e As EventArgs) Handles cmdSingleQuote.Click
+        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition(" ' ' ")
+    End Sub
+
+    Private Sub cmdOpenClosedBracket_Click(sender As Object, e As EventArgs) Handles cmdOpenClosedBracket.Click
+        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("[ ] ")
+    End Sub
+
+    Private Sub cmdOpenBracketCaretClosedBracket_Click(sender As Object, e As EventArgs) Handles cmdOpenBracketCaretClosedBracket.Click
+        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("[ ^ ] ")
+    End Sub
+
+    Private Sub cmdOpenCloseBrace_Click(sender As Object, e As EventArgs) Handles cmdOpenCloseBrace.Click
+        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("{ }")
+    End Sub
+
+    Private Sub cmdOpenCloseParenthesis_Click(sender As Object, e As EventArgs) Handles cmdOpenCloseParenthesis.Click
+        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("*")
+    End Sub
+
+    Private Sub cmdPlus_Click(sender As Object, e As EventArgs) Handles cmdPlus.Click
+        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("+")
+    End Sub
+
+    Private Sub cmdQuestionMark_Click(sender As Object, e As EventArgs) Handles cmdQuestionMark.Click
+        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("?")
+    End Sub
+
+    Private Sub cmdMultiply_Click(sender As Object, e As EventArgs) Handles cmdMultiply.Click
+        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition(".")
+    End Sub
+
+    Private Sub cmdPower_Click(sender As Object, e As EventArgs) Handles cmdPower.Click
+        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("^")
+    End Sub
+
+    Private Sub cmdDollarSign_Click(sender As Object, e As EventArgs) Handles cmdDollarSign.Click
+        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("$")
+    End Sub
+
+    Private Sub cmdOr_Click(sender As Object, e As EventArgs) Handles cmdOr.Click
+        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("|")
+    End Sub
+
+    Private Sub cmdBackSlashb_Click(sender As Object, e As EventArgs) Handles cmdBackSlashb.Click
+        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("\b")
+    End Sub
+
+    Private Sub cmdBbackSlash_Click(sender As Object, e As EventArgs) Handles cmdBbackSlash.Click
+        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("\B")
+    End Sub
+
+    Private Sub cmdBackSlashw_Click(sender As Object, e As EventArgs) Handles cmdBackSlashw.Click
+        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("\w")
+    End Sub
+
+    Private Sub cmdWBackSlash_Click(sender As Object, e As EventArgs) Handles cmdWBackSlash.Click
+        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("\W")
+    End Sub
+
+    Private Sub cmdBackSlashs_Click(sender As Object, e As EventArgs) Handles cmdBackSlashs.Click
+        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("\s")
+    End Sub
+
+    Private Sub cmdSbackSlash_Click(sender As Object, e As EventArgs) Handles cmdSbackSlash.Click
+        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("\S")
+    End Sub
+
+    Private Sub cmdBackSlashd_Click(sender As Object, e As EventArgs) Handles cmdBackSlashd.Click
+        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("\d")
+    End Sub
+
+    Private Sub cmdDBackSlah_Click(sender As Object, e As EventArgs) Handles cmdDBackSlah.Click
+        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("\D")
+    End Sub
+
+    Private Sub cmdBackSlash_Click(sender As Object, e As EventArgs) Handles cmdBackSlash.Click
+        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("\")
+    End Sub
+
+    Private Sub cmdStar_Click(sender As Object, e As EventArgs) Handles cmdStar.Click
+        ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("*")
     End Sub
 
     Private Sub NewColumnName()
