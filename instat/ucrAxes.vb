@@ -16,11 +16,10 @@
 
 Public Class ucrAxes
     Public bIsX As Boolean
-    Public clsXYlabTitleFunction As RFunction
+    Public clsXYlabTitleFunction As New RFunction
     Public clsXYScaleContinuousFunction As New RFunction
     Public clsXlabTitleFunction As New RFunction
     Public clsBaseOperator As New ROperator
-    Public clsScalecontinuousFunction As New RFunction
     Public clsSeqFunction As New RFunction
     Public strAxis As String
     Public bFirstLoad As Boolean = True
@@ -45,51 +44,55 @@ Public Class ucrAxes
         ucrInputTitle.SetParameter(New RParameter("label"))
 
         'temp disabled, not yet implemented
-        grpTickMarkers.Enabled = False
+
+        'grpTickMarkers.Enabled = False
         'Tick Markers section
-        'ucrPnlTickmarkers.AddRadioButton(rdoTickMarkersAuto)
-        'ucrPnlTickmarkers.AddRadioButton(rdoTickMarkersCustom)
-        'ucrPnlTickmarkers.AddParameterPresentCondition(rdoTickMarkersAuto, "breaks", False)
-        'ucrPnlTickmarkers.AddParameterPresentCondition(rdoTickMarkersCustom, "breaks", True)
-        'ucrPnlTickmarkers.AddToLinkedControls(ucrTickMarkers, {rdoTickMarkersCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrPnlTickmarkers.AddToLinkedControls(ucrTickMarkers, {rdoTickMarkersCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlTickmarkers.AddRadioButton(rdoTickMarkersAuto)
+        ucrPnlTickmarkers.AddRadioButton(rdoTickMarkersCustom)
+        ucrPnlTickmarkers.AddParameterPresentCondition(rdoTickMarkersAuto, "breaks", False)
+        ucrPnlTickmarkers.AddParameterPresentCondition(rdoTickMarkersCustom, "breaks", True)
+        ucrPnlTickmarkers.AddToLinkedControls(ucrTickMarkers, {rdoTickMarkersCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlTickmarkers.AddToLinkedControls(ucrTickMarkers, {rdoTickMarkersCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        'ucrPnlTickmarkers.AddToLinkedControls(ucrNudFrom, {rdoTickMarkersCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrNudFrom.SetLinkedDisplayControl(lblFrom)
+        ucrPnlTickmarkers.AddToLinkedControls(ucrInputFrom, {rdoTickMarkersCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputFrom.SetLinkedDisplayControl(lblFrom)
 
-        'ucrPnlTickmarkers.AddToLinkedControls(ucrNudTo, {rdoTickMarkersCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrNudTo.SetLinkedDisplayControl(lblTo)
+        ucrPnlTickmarkers.AddToLinkedControls(ucrInputTo, {rdoTickMarkersCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputTo.SetLinkedDisplayControl(lblTo)
 
-        'ucrPnlTickmarkers.AddToLinkedControls(ucrNudInStepsOf, {rdoTickMarkersCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrNudInStepsOf.SetLinkedDisplayControl(lblInStepsOf)
+        ucrPnlTickmarkers.AddToLinkedControls(ucrInputInStepsOf, {rdoTickMarkersCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputInStepsOf.SetLinkedDisplayControl(lblInStepsOf)
 
-        'ucrPnlTickmarkers.AddToLinkedControls(ucrNudTickMarkersNoOfDecimalPlaces, {rdoTickMarkersCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrNudTickMarkersNoOfDecimalPlaces.SetLinkedDisplayControl(lblTickMarkersNoOfDecimalPlaces)
-        'ucrTickMarkers.SetName("Interval")
-        'ucrTickMarkers.SetItems({"Interval", "Specific Values"})
+        ucrTickMarkers.SetName("Interval")
+        ucrTickMarkers.SetItems({"Interval", "Specific Values"})
 
-        'ucrPnlTickmarkers.AddParameterPresentCondition(rdoTickMarkersAuto, "breaks", False)
-        'ucrPnlTickmarkers.AddParameterPresentCondition(rdoTickMarkersCustom, "breaks", True)
-        'ucrSpecificValues.SetParameter(New RParameter("breaks"))
-        'ucrSpecificValues.AddQuotesIfUnrecognised = False
-        'ucrSpecificValues.SetValidationTypeAsNumericList()
+        ucrPnlTickmarkers.AddParameterPresentCondition(rdoTickMarkersAuto, "breaks", False)
+        ucrPnlTickmarkers.AddParameterPresentCondition(rdoTickMarkersCustom, "breaks", True)
+        ucrSpecificValues.SetParameter(New RParameter("breaks"))
+        ucrSpecificValues.AddQuotesIfUnrecognised = False
+        ucrSpecificValues.SetValidationTypeAsNumericList()
 
         'these add parameters to clsSeqFunction
-        'ucrNudInStepsOf.SetParameter(New RParameter("by"))
-        'ucrNudTo.SetParameter(New RParameter("to"))
-        'ucrNudFrom.SetParameter(New RParameter("from"))
+        ucrInputInStepsOf.SetParameter(New RParameter("by"))
+        ucrInputInStepsOf.AddQuotesIfUnrecognised = False
+
+        ucrInputTo.SetParameter(New RParameter("to"))
+        ucrInputTo.AddQuotesIfUnrecognised = False
+
+        ucrInputFrom.SetParameter(New RParameter("from"))
+        ucrInputFrom.AddQuotesIfUnrecognised = False
 
         'Scales section
         'temp disabled, not yet implemented
-        grpScales.Enabled = False
-        'ucrPnlScales.AddRadioButton(rdoScalesAuto)
-        'ucrPnlScales.AddParameterPresentCondition(rdoScalesAuto, "limits", False)
-        'ucrPnlScales.AddRadioButton(rdoScalesCustom)
-        'ucrPnlScales.AddParameterPresentCondition(rdoScalesCustom, "limits", True)
-        'ucrPnlScales.AddToLinkedControls(ucrInputLowerLimit, {rdoScalesCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrPnlScales.AddToLinkedControls(ucrInputUpperLimit, {rdoScalesCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrInputLowerLimit.SetLinkedDisplayControl(lblLowerLimit)
-        'ucrInputUpperLimit.SetLinkedDisplayControl(lblUpperLimit)
+        ' grpScales.Enabled = False
+        ucrPnlScales.AddRadioButton(rdoScalesAuto)
+        ucrPnlScales.AddParameterPresentCondition(rdoScalesAuto, "limits", False)
+        ucrPnlScales.AddRadioButton(rdoScalesCustom)
+        ucrPnlScales.AddParameterPresentCondition(rdoScalesCustom, "limits", True)
+        ucrPnlScales.AddToLinkedControls(ucrInputLowerLimit, {rdoScalesCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlScales.AddToLinkedControls(ucrInputUpperLimit, {rdoScalesCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputLowerLimit.SetLinkedDisplayControl(lblLowerLimit)
+        ucrInputUpperLimit.SetLinkedDisplayControl(lblUpperLimit)
         bInitialiseControls = True
     End Sub
 
@@ -117,40 +120,35 @@ Public Class ucrAxes
 
         'scales functions
         'Temp disabled, not yet implemented
-        'ucrPnlScales.SetRCode(clsXYScaleContinuousFunction, bReset)
-        'ucrInputLowerLimit.SetRCode(clsXYScaleContinuousFunction, bReset)
-        'ucrInputUpperLimit.SetRCode(clsXYScaleContinuousFunction, bReset)
-        'ucrPnlTickmarkers.SetRCode(clsXYScaleContinuousFunction, bReset)
-        'ucrSpecificValues.SetRCode(clsXYScaleContinuousFunction, bReset)
+        ucrPnlScales.SetRCode(clsXYScaleContinuousFunction, bReset)
+        ucrPnlTickmarkers.SetRCode(clsXYScaleContinuousFunction, bReset)
+        ucrInputLowerLimit.SetRCode(clsXYScaleContinuousFunction, bReset)
+        ucrInputUpperLimit.SetRCode(clsXYScaleContinuousFunction, bReset)
+        ucrPnlTickmarkers.SetRCode(clsXYScaleContinuousFunction, bReset)
+        ucrSpecificValues.SetRCode(clsXYScaleContinuousFunction, bReset)
 
         'Temp disabled, not yet implemented
-        'ucrNudInStepsOf.SetRCode(clsSeqFunction, bReset)
-        'clsSeqFunction.AddParameter("by", 0)
-        'ucrNudTo.SetRCode(clsSeqFunction, bReset)
-        'clsSeqFunction.AddParameter("to", 0)
-        'ucrNudFrom.SetRCode(clsSeqFunction, bReset)
-        'clsSeqFunction.AddParameter("from", 0)
+        ucrInputInStepsOf.SetRCode(clsSeqFunction, bReset)
+        clsSeqFunction.AddParameter("by", 0)
+        ucrInputTo.SetRCode(clsSeqFunction, bReset)
+        clsSeqFunction.AddParameter("to", 0)
+        ucrInputFrom.SetRCode(clsSeqFunction, bReset)
+        clsSeqFunction.AddParameter("from", 0)
 
         bRCodeSet = True
         SetLabel()
         AddRemoveXYScales()
     End Sub
 
-    Private Sub ucrNudTickMarkersNoOfDecimalPlaces_ControlContentsChanged() Handles ucrNudTickMarkersNoOfDecimalPlaces.ControlContentsChanged
-        'ucrNudFrom.DecimalPlaces = ucrNudTickMarkersNoOfDecimalPlaces.Value
-        'ucrNudTo.DecimalPlaces = ucrNudTickMarkersNoOfDecimalPlaces.Value
-        'ucrNudInStepsOf.DecimalPlaces = ucrNudTickMarkersNoOfDecimalPlaces.Value
-    End Sub
-
     Private Sub ucrTickMarkers_ControlValueChanged() Handles ucrTickMarkers.ControlValueChanged, ucrPnlTickmarkers.ControlValueChanged
-        'If rdoTickMarkersCustom.Checked AndAlso ucrTickMarkers.cboInput.SelectedItem = "Interval" Then
-        '    clsSeqFunction.SetRCommand("seq")
-        '    clsXYScaleContinuousFunction.AddParameter("breaks", clsRFunctionParameter:=clsSeqFunction)
+        If rdoTickMarkersCustom.Checked AndAlso ucrTickMarkers.cboInput.SelectedItem = "Interval" Then
+            clsSeqFunction.SetRCommand("seq")
+            clsXYScaleContinuousFunction.AddParameter("breaks", clsRFunctionParameter:=clsSeqFunction)
 
-        'ElseIf ucrTickMarkers.cboInput.SelectedItem = "Specific Values" Then
-        '    clsXYScaleContinuousFunction.RemoveParameterByName("breaks")
-        'End If
-        'tickMarkersDisplay()
+        ElseIf ucrTickMarkers.cboInput.SelectedItem = "Specific Values" Then
+            clsXYScaleContinuousFunction.RemoveParameterByName("breaks")
+        End If
+        tickMarkersDisplay()
     End Sub
 
     Private Sub AddRemoveLabs()
@@ -181,47 +179,43 @@ Public Class ucrAxes
     End Sub
 
     Private Sub AddRemoveXYScales()
-        'If rdoScalesCustom.Checked AndAlso (Not ucrInputLowerLimit.IsEmpty AndAlso Not ucrInputUpperLimit.IsEmpty) Then
-        '    clsBaseOperator.AddParameter(strAxis & "scales", clsRFunctionParameter:=clsXYScaleContinuousFunction)
-        'Else
-        '    clsBaseOperator.RemoveParameterByName(strAxis & "scales")
-        'End If
+        If rdoScalesCustom.Checked AndAlso (Not ucrInputLowerLimit.IsEmpty AndAlso Not ucrInputUpperLimit.IsEmpty) Then
+            clsBaseOperator.AddParameter(strAxis & "scales", clsRFunctionParameter:=clsXYScaleContinuousFunction)
+        Else
+            clsBaseOperator.RemoveParameterByName(strAxis & "scales")
+        End If
     End Sub
 
     Private Sub ucrPnlScales_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlScales.ControlValueChanged, ucrInputLowerLimit.ControlValueChanged, ucrInputUpperLimit.ControlValueChanged
-        ''If ucrChangedControl.Equals(ucrPnlScales) Then
-        'If rdoScalesCustom.Checked AndAlso (Not ucrInputLowerLimit.IsEmpty AndAlso Not ucrInputUpperLimit.IsEmpty) Then
-        '    Dim strLowerLimit As String = ucrInputLowerLimit.GetText
-        '    Dim strUpperLimit As String = ucrInputUpperLimit.GetText
-        '    clsXYScaleContinuousFunction.AddParameter("limits", "c(" & strLowerLimit & "," & strUpperLimit & ")")
-        'End If
-
-        '' End If
-        'AddRemoveXScales()
+        If ucrChangedControl.Equals(ucrPnlScales) Then
+            If rdoScalesCustom.Checked AndAlso (Not ucrInputLowerLimit.IsEmpty AndAlso Not ucrInputUpperLimit.IsEmpty) Then
+                Dim strLowerLimit As String = ucrInputLowerLimit.GetText
+                Dim strUpperLimit As String = ucrInputUpperLimit.GetText
+                clsXYScaleContinuousFunction.AddParameter("limits", "c(" & strLowerLimit & "," & strUpperLimit & ")")
+            End If
+        End If
+        AddRemoveXYScales()
     End Sub
 
     Private Sub tickMarkersDisplay()
-        'If rdoTickMarkersCustom.Checked AndAlso ucrTickMarkers.GetText = "Specific Values" Then
-        '    ucrSpecificValues.Visible = True
-        '    ucrNudFrom.Visible = False
-        '    lblFrom.Visible = False
-        '    ucrNudTo.Visible = False
-        '    lblTo.Visible = False
-        '    ucrNudTickMarkersNoOfDecimalPlaces.Visible = False
-        '    lblTickMarkersNoOfDecimalPlaces.Visible = False
-        '    ucrNudInStepsOf.Visible = False
-        '    lblInStepsOf.Visible = False
-        'Else
-        '    ucrSpecificValues.Visible = False
-        '    ucrNudFrom.Visible = True
-        '    lblFrom.Visible = True
-        '    ucrNudTo.Visible = True
-        '    lblTo.Visible = True
-        '    ucrNudTickMarkersNoOfDecimalPlaces.Visible = True
-        '    lblTickMarkersNoOfDecimalPlaces.Visible = True
-        '    ucrNudInStepsOf.Visible = True
-        '    lblInStepsOf.Visible = True
-        'End If
+        If rdoTickMarkersCustom.Checked AndAlso ucrTickMarkers.GetText = "Specific Values" Then
+            ucrSpecificValues.Visible = True
+            ucrInputFrom.Visible = False
+            lblFrom.Visible = False
+            ucrInputTo.Visible = False
+            lblTo.Visible = False
+            ucrInputInStepsOf.Visible = False
+            lblInStepsOf.Visible = False
+        Else
+            ucrSpecificValues.Visible = False
+            ucrInputFrom.Visible = True
+            lblFrom.Visible = True
+            ucrInputTo.Visible = True
+            lblTo.Visible = True
+            ucrInputInStepsOf.Visible = True
+            lblInStepsOf.Visible = True
+        End If
     End Sub
+
 End Class
 
