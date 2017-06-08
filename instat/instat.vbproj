@@ -1290,6 +1290,12 @@
     <Compile Include="ucrGeom.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrGridUnit.Designer.vb">
+      <DependentUpon>ucrGridUnit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrGridUnit.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrInputComboBox.Designer.vb">
       <DependentUpon>ucrInputComboBox.vb</DependentUpon>
     </Compile>
@@ -4356,6 +4362,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrGeom.sw-KE.resx">
       <DependentUpon>ucrGeom.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrGridUnit.resx">
+      <DependentUpon>ucrGridUnit.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrInput.fr-FR.resx">
       <DependentUpon>ucrInput.vb</DependentUpon>

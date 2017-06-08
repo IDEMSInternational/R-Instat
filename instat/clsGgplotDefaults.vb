@@ -87,16 +87,23 @@
             Dim clsElementLine As RFunction
             Dim clsElementRect As RFunction
 
+            Dim clsUnit As RFunction
+
             clsElementText = New RFunction
             clsElementLine = New RFunction
             clsElementRect = New RFunction
+            clsElementRect = New RFunction
 
+            clsUnit = New RFunction
+
+            clsUnit.SetPackageName("grid")
             clsElementText.SetPackageName("ggplot2")
             clsElementLine.SetPackageName("ggplot2")
             clsElementRect.SetPackageName("ggplot2")
             clsElementText.SetRCommand("element_text")
             clsElementLine.SetRCommand("element_line")
             clsElementRect.SetRCommand("element_rect")
+            clsUnit.SetRCommand("unit")
 
             dctTemp.Add("line", clsElementLine.Clone())
             dctTemp.Add("rect", clsElementRect.Clone())
@@ -116,11 +123,11 @@
             dctTemp.Add("axis.ticks", clsElementLine.Clone())
             dctTemp.Add("axis.ticks.x", clsElementLine.Clone())
             dctTemp.Add("axis.ticks.y", clsElementLine.Clone())
-            'dctTemp.Add(" axis.ticks.length", clsElementLine.Clone())
+            dctTemp.Add("axis.ticks.length", clsUnit.Clone())
             dctTemp.Add("axis.line", clsElementLine.Clone())
             dctTemp.Add("axis.line.x", clsElementLine.Clone())
             dctTemp.Add("axis.line.y", clsElementLine.Clone())
-            ' dctTemp.Add("axis.ticks.length", clsElementLine.Clone())
+            dctTemp.Add("axis.ticks.length", clsUnit.Clone())
             dctTemp.Add("legend.background", clsElementRect.Clone())
             ' dctTemp.Add("legend.margin", clsElementLine.Clone())
             ' dctTemp.Add("legend.spacing", clsElementLine.Clone())

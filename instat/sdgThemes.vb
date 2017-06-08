@@ -20,6 +20,14 @@ Public Class sdgThemes
     Public bControlsInitialised As Boolean = False
     Private clsElementLine, clsElementRect, clsElementXAxisTextTop, clsElementXAxisLine, clsElementYAxisLine, clsElementText, clsElementYAxisTextRight, clsElementXAxisLineTop, clsThemeFunction As New RFunction
 
+    Private Sub grpTableOptions_Enter(sender As Object, e As EventArgs) Handles grpTableOptions.Enter
+
+    End Sub
+
+    Private Sub ucrYAxisLines_Load(sender As Object, e As EventArgs)
+
+    End Sub
+
     Private clsBaseOperator As New ROperator
 
     Private dctThemeFunctions As New Dictionary(Of String, RFunction)
@@ -69,6 +77,10 @@ Public Class sdgThemes
         ucrPlotSubTitle.setlabel("Plot subtitle(text appearance)")
         ucrPlotTitle.setlabel("Caption below the plot (text appearance)")
 
+        ucrStripBackGround.setlabel("Background of facet labels")
+        ucrStripText.setlabel("Facet labels")
+        ucrStripTextXAxis.setlabel("Facet labels along horizontal direction")
+        ucrStripTextYAxis.setlabel("Facet labels along vertical direction")
         'Units
         ucrChkUnits.SetText("Tick length")
         ucrInputTickUnits.SetParameter(New RParameter("units"))
@@ -148,6 +160,10 @@ Public Class sdgThemes
         Dim clsElementPlotSubtitle As New RFunction
         Dim clsElementPlotCaption As New RFunction
 
+        Dim clsElementStripText As New RFunction
+        Dim clsElementStripTextXAxis As New RFunction
+        Dim clsElementStripTextYAxis As New RFunction
+
         Dim clsXElementLine As New RFunction
         Dim clsElementLineAxes As New RFunction
         Dim clsYElementLine As New RFunction
@@ -165,6 +181,7 @@ Public Class sdgThemes
         Dim clsElementPanelBackGround As New RFunction
 
         Dim clsElementPlotBackground As New RFunction
+        Dim clsElementStripBackground As New RFunction
 
         Dim clsElementPanelGrid As New RFunction
         Dim clsElementPanelGridMajor As New RFunction
@@ -196,6 +213,10 @@ Public Class sdgThemes
         dctThemeFunctions.TryGetValue("plot.subtitle", clsElementPlotSubtitle)
         dctThemeFunctions.TryGetValue("plot.caption", clsElementPlotCaption)
 
+        dctThemeFunctions.TryGetValue("strip.text", clsElementStripText)
+        dctThemeFunctions.TryGetValue("strip.text.x", clsElementStripTextXAxis)
+        dctThemeFunctions.TryGetValue("strip.text.y", clsElementStripTextYAxis)
+
         dctThemeFunctions.TryGetValue("axis.ticks.x", clsXElementLine)
         dctThemeFunctions.TryGetValue("axis.ticks.y", clsYElementLine)
         dctThemeFunctions.TryGetValue("axis.line.x", clsElementLineXAxis)
@@ -214,6 +235,8 @@ Public Class sdgThemes
         dctThemeFunctions.TryGetValue("panel.border", clsElementBorder)
 
         dctThemeFunctions.TryGetValue("plot.background", clsElementPlotBackground)
+
+        dctThemeFunctions.TryGetValue("strip.background", clsElementStripBackground)
 
         ucrTickMarksXAxis.SetRCodeForControl("axis.ticks.x", clsXElementLine, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
         ucrTickMarksYAxis.SetRCodeForControl("axis.ticks.y", clsYElementLine, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
@@ -251,6 +274,10 @@ Public Class sdgThemes
         ucrPlotSubTitle.SetRCodeForControl("plot.subtitle", clsElementPlotSubtitle, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
         ucrPlotTitle.SetRCodeForControl("plot.title", clsElementPlotTitle, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
+        ucrStripBackGround.SetRCodeForControl("strip.background", clsElementStripBackground, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrStripText.SetRCodeForControl("strip.text", clsElementStripText, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrStripTextXAxis.SetRCodeForControl("strip.text.x", clsElementStripTextXAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrStripTextYAxis.SetRCodeForControl("strip.text.y", clsElementStripTextYAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
         urChkLegendPosition.SetRCode(clsThemeFunction, bReset)
         ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset)
@@ -311,7 +338,7 @@ Public Class sdgThemes
         End If
     End Sub
 
-    Private Sub ElementLegendControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLegendBox.ControlValueChanged, ucrChkLegendDirection.ControlValueChanged, ucrChkLegendJustification.ControlValueChanged, urChkLegendBoxJust.ControlValueChanged, urChkLegendPosition.ControlValueChanged
+    Private Sub ElementLegendControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles urChkLegendPosition.ControlValueChanged, urChkLegendBoxJust.ControlValueChanged, ucrChkLegendJustification.ControlValueChanged, ucrChkLegendDirection.ControlValueChanged, ucrChkLegendBox.ControlValueChanged
         AddRemoveElementParameters()
     End Sub
 End Class
