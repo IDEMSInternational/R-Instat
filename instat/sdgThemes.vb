@@ -58,6 +58,11 @@ Public Class sdgThemes
         ucrLegendKey.setlabel("Background underneath legend keys")
         ucrLegendBoxBackground.setlabel("Background of legend area")
 
+        ucrPanelGridMajorXAxis.setlabel("vertical major grid lines ")
+        ucrPanelGridMajorYAxis.setlabel("horizontal major grid lines ")
+        ucrPanelGridMinorXAxis.setlabel("vertical minor grid lines")
+        ucrPanelGridMinorXAxis.setlabel("horizontal minor grid lines")
+
         ucrPanelGrid.setlabel("Grid lines")
         ucrPanelGridMajor.setlabel("Major grid lines ")
         ucrPanelGridMinor.setlabel("Major grid lines ")
@@ -87,6 +92,10 @@ Public Class sdgThemes
 
         ucrStripsSpaceGrid.setlabel("When strips are switched(Grid)")
         ucrStripsSpaceWrap.setlabel("when strips are switched(wrap)")
+
+        ucrLegendSpacing.setlabel("")
+        ucrLegendSpacingXAxis.setlabel("")
+        ucrLegendSpacingYAxis.setlabel("")
 
         ' TODO: Find what this means: "two-element numeric vector"
         urChkLegendPosition.SetText("Legend Position")
@@ -186,6 +195,10 @@ Public Class sdgThemes
         Dim clsElementPanelGrid As New RFunction
         Dim clsElementPanelGridMajor As New RFunction
         Dim clsElementPanelGridMinor As New RFunction
+        Dim clsElementPanelGridMajorXAxis As New RFunction
+        Dim clsElementPanelGridMajorYAxis As New RFunction
+        Dim clsElementPanelGridMinorXAxis As New RFunction
+        Dim clsElementPanelGridMinorYAxis As New RFunction
 
         Dim clsUnitAxisTickLength As New RFunction
         Dim clsUnitLegendSize As New RFunction
@@ -238,6 +251,10 @@ Public Class sdgThemes
         dctThemeFunctions.TryGetValue("panel.grid", clsElementPanelGrid)
         dctThemeFunctions.TryGetValue("panel.grid.major", clsElementPanelGridMajor)
         dctThemeFunctions.TryGetValue("panel.grid.minor", clsElementPanelGridMinor)
+        dctThemeFunctions.TryGetValue("panel.grid.major.x", clsElementPanelGridMajorXAxis)
+        dctThemeFunctions.TryGetValue("panel.grid.major.y", clsElementPanelGridMajorYAxis)
+        dctThemeFunctions.TryGetValue("panel.grid.minor.x", clsElementPanelGridMinorXAxis)
+        dctThemeFunctions.TryGetValue("panel.grid.minor.y", clsElementPanelGridMinorYAxis)
 
         dctThemeFunctions.TryGetValue("axis.ticks.length", clsUnitAxisTickLength)
         dctThemeFunctions.TryGetValue("legend.key.size", clsUnitLegendSize)
@@ -286,6 +303,11 @@ Public Class sdgThemes
         ucrLegendBackground.SetRCodeForControl("legend.background", clsElementLegendBackground, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
         ucrLegendBoxBackground.SetRCodeForControl("legend.box.background", clsElementLegendBoxBackground, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
         ucrLegendKey.SetRCodeForControl("legend.key", clsElementLegendtKey, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+
+        ucrPanelGridMajorXAxis.SetRCodeForControl("panel.grid.major.x", clsElementPanelGridMajorXAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrPanelGridMajorYAxis.SetRCodeForControl("panel.grid.major.y", clsElementPanelGridMajorYAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrPanelGridMinorXAxis.SetRCodeForControl("panel.grid.minor.x", clsElementPanelGridMinorXAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrPanelGridMinorYAxis.SetRCodeForControl("panel.grid.minor.y", clsElementPanelGridMinorYAxis, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
         ucrPanelGrid.SetRCodeForControl("panel.grid", clsElementPanelGrid, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
         ucrPanelGridMajor.SetRCodeForControl("panel.grid.major", clsElementPanelGridMajor, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)

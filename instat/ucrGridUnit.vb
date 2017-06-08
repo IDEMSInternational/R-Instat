@@ -26,7 +26,8 @@ Public Class ucrGridUnit
         ucrChkUnits.SetText("Tick length")
         ucrInputUnits.SetParameter(New RParameter("units"))
         ucrInputUnits.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctUnits))
-        ucrInputUnits.SetRDefault(Chr(34) & "npc" & Chr(34))
+        '? default npc  
+        ' ucrInputUnits.SetRDefault(Chr(34) & "npc" & Chr(34))
 
         ucrInputData.SetParameter(New RParameter("data"))
         ucrInputData.SetRDefault("NULL")
