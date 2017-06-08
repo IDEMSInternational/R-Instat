@@ -104,7 +104,7 @@ Public Class dlgRugPlot
         clsRgeom_RugPlotFunction.SetPackageName("ggplot2")
         clsRgeom_RugPlotFunction.SetRCommand("geom_rug")
 
-        clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultTheme.Clone())
+        clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()

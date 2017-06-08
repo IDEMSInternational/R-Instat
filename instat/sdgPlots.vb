@@ -40,7 +40,10 @@ Public Class sdgPlots
     Private clsFacetVariablesOperator As New ROperator
     Private strFirstVariable As String
     Private strSecondvariable As String
+    Private clsThemeFunction As New RFunction
+    Private dctThemeFunctions As New Dictionary(Of String, RFunction)
     Private bRCodeSet As Boolean = False
+    Private bResetThemes As Boolean = True
 
     'See bLayersDefaultIsGolobal below.
     Private Sub sdgPlots_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -187,12 +190,12 @@ Public Class sdgPlots
         tbpLayers.Enabled = False
         tbpCoordinates.Enabled = False
         grpLegendTitle.Enabled = False
-        cmdAllOptions.Enabled = False
+        'cmdAllOptions.Enabled = False
         GroupBox1.Visible = False
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewYScalecontinuousFunction As RFunction = Nothing, Optional clsNewXScalecontinuousFunction As RFunction = Nothing, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsTitleFunction As RFunction = Nothing, Optional clsNewYLabTitleFunction As RFunction = Nothing, Optional clsNewFacetFunction As RFunction = Nothing, Optional clsNewThemeParam As RParameter = Nothing, Optional strNewDataFrame As String = "", Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewYScalecontinuousFunction As RFunction = Nothing, Optional clsNewXScalecontinuousFunction As RFunction = Nothing, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsTitleFunction As RFunction = Nothing, Optional clsNewYLabTitleFunction As RFunction = Nothing, Optional clsNewFacetFunction As RFunction = Nothing, Optional clsNewThemeParam As RParameter = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional strNewDataFrame As String = "", Optional bReset As Boolean = False)
         Dim clsTempParam As RParameter
 
         bRCodeSet = False
@@ -208,6 +211,8 @@ Public Class sdgPlots
         clsYLabFunction = clsNewYLabTitleFunction
         clsXScalecontinuousFunction = clsNewXScalecontinuousFunction
         clsFacetFunction = clsNewFacetFunction
+        clsThemeFunction = clsNewThemeFunction
+        dctThemeFunctions = dctNewThemeFunctions
 
         If clsFacetFunction.ContainsParameter("facets") Then
             clsTempParam = clsFacetFunction.GetParameter("facets")
@@ -230,7 +235,7 @@ Public Class sdgPlots
         If clsNewThemeParam IsNot Nothing Then
             clsBaseOperator.AddParameter(clsNewThemeParam)
         Else
-            clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultTheme.Clone())
+            clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         End If
 
         ucrInputGraphTitle.SetRCode(clsLabsFunction, bReset)
@@ -262,6 +267,7 @@ Public Class sdgPlots
         If bReset Then
             ucr1stFactorReceiver.SetMeAsReceiver()
             tbpPlotsOptions.SelectedIndex = 0
+            bResetThemes = True
         End If
         SetFacetParameters()
     End Sub
@@ -608,6 +614,12 @@ Public Class sdgPlots
         SetFacetParameters()
     End Sub
 
+    Private Sub cmdAllOptions_Click(sender As Object, e As EventArgs) Handles cmdAllOptions.Click
+        sdgThemes.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, bReset:=bResetThemes)
+        Me.SendToBack()
+        sdgThemes.ShowDialog()
+        bResetThemes = False
+    End Sub
     'Warning/Task to be discussed: need to disable ok on dlg's when layers are not complete on subdialogues + warning message... 
     'Warning: actually this will be very hard to implement until the global aes, set from the main layer are properly communicated to plots. Global aes might fill in missing mandatory aes...
 End Class
