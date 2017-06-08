@@ -14,6 +14,8 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
+
 Public Class ucrNud
     Public Sub New()
 
@@ -30,14 +32,17 @@ Public Class ucrNud
     End Sub
 
     Private Sub nudUpDown_TextChanged(sender As Object, e As EventArgs) Handles nudUpDown.TextChanged
-        If bChangeParameterValue AndAlso clsParameter IsNot Nothing Then
+        OnControlValueChanged()
+    End Sub
+
+    Public Overrides Sub UpdateParameter(clsTempParam As RParameter)
+        If bChangeParameterValue AndAlso clsTempParam IsNot Nothing Then
             If nudUpDown.Text <> "" Then
-                clsParameter.SetArgumentValue(nudUpDown.Value)
+                clsTempParam.SetArgumentValue(nudUpDown.Value)
             Else
-                clsParameter.SetArgumentValue("")
+                clsTempParam.SetArgumentValue("")
             End If
         End If
-        OnControlValueChanged()
     End Sub
 
     Public Property Minimum As Decimal
@@ -128,10 +133,15 @@ Public Class ucrNud
     Protected Overrides Sub SetToValue(objTemp As Object)
         Dim dNewValue As Decimal
 
-        If objTemp IsNot Nothing AndAlso Decimal.TryParse(objTemp, dNewValue) AndAlso dNewValue >= nudUpDown.Minimum AndAlso dNewValue <= nudUpDown.Maximum Then
-            nudUpDown.Value = dNewValue
+        If objTemp Is Nothing Then
+            'If no value reset to a default value
+            nudUpDown.Value = nudUpDown.Minimum
         Else
-            MsgBox("Developer error: The value given cannot be converted to a decimal or is outside the range of the control. Value will be unchanged.")
+            If Decimal.TryParse(objTemp, dNewValue) AndAlso dNewValue >= nudUpDown.Minimum AndAlso dNewValue <= nudUpDown.Maximum Then
+                nudUpDown.Value = dNewValue
+            Else
+                MsgBox("Developer error: The value given cannot be converted to a decimal or is outside the range of the control. Value will be unchanged.")
+            End If
         End If
     End Sub
 End Class
