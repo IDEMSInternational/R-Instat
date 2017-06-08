@@ -127,7 +127,6 @@
             dctTemp.Add("axis.line", clsElementLine.Clone())
             dctTemp.Add("axis.line.x", clsElementLine.Clone())
             dctTemp.Add("axis.line.y", clsElementLine.Clone())
-            dctTemp.Add("axis.ticks.length", clsUnit.Clone())
             dctTemp.Add("legend.background", clsElementRect.Clone())
             ' dctTemp.Add("legend.margin", clsElementLine.Clone())
             ' dctTemp.Add("legend.spacing", clsElementLine.Clone())

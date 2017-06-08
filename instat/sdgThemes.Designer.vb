@@ -85,6 +85,7 @@ Partial Class sdgThemes
         Me.ucrTickMarksAxes = New instat.ucrElementLineControl()
         Me.ucrThemeAxesTitle = New instat.ucrELementTextControl()
         Me.tbPLot = New System.Windows.Forms.TabPage()
+        Me.ucrTickLength = New instat.ucrGridUnit()
         Me.grpPlotBackground = New System.Windows.Forms.GroupBox()
         Me.ucrPlotBackGround = New instat.ucrElementRectControl()
         Me.grpPlotTitleAndCaption = New System.Windows.Forms.GroupBox()
@@ -92,6 +93,10 @@ Partial Class sdgThemes
         Me.ucrPlotSubTitle = New instat.ucrELementTextControl()
         Me.ucrPlotTitle = New instat.ucrELementTextControl()
         Me.tbLegend = New System.Windows.Forms.TabControl()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.UcrGridUnit1 = New instat.ucrGridUnit()
+        Me.UcrGridUnit2 = New instat.ucrGridUnit()
+        Me.UcrGridUnit3 = New instat.ucrGridUnit()
         Me.tbThemeFacets.SuspendLayout()
         Me.grpFacetBackground.SuspendLayout()
         Me.grpFacetLabels.SuspendLayout()
@@ -117,6 +122,7 @@ Partial Class sdgThemes
         Me.grpPlotBackground.SuspendLayout()
         Me.grpPlotTitleAndCaption.SuspendLayout()
         Me.tbLegend.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'ucrBaseSubdialogue
@@ -258,6 +264,7 @@ Partial Class sdgThemes
         '
         'tbThemeLegend
         '
+        Me.tbThemeLegend.Controls.Add(Me.GroupBox1)
         Me.tbThemeLegend.Controls.Add(Me.grpLegendTitleAndText)
         Me.tbThemeLegend.Controls.Add(Me.grpLegendAdjustments)
         Me.tbThemeLegend.Controls.Add(Me.grpLegendBackGroundAndKey)
@@ -359,7 +366,6 @@ Partial Class sdgThemes
         '
         'ucrChkLegendDirection
         '
-        Me.ucrChkLegendDirection.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.ucrChkLegendDirection.Checked = False
         Me.ucrChkLegendDirection.Location = New System.Drawing.Point(6, 47)
         Me.ucrChkLegendDirection.Name = "ucrChkLegendDirection"
@@ -676,6 +682,7 @@ Partial Class sdgThemes
         '
         'tbPLot
         '
+        Me.tbPLot.Controls.Add(Me.ucrTickLength)
         Me.tbPLot.Controls.Add(Me.grpPlotBackground)
         Me.tbPLot.Controls.Add(Me.grpPlotTitleAndCaption)
         Me.tbPLot.Location = New System.Drawing.Point(4, 22)
@@ -685,6 +692,13 @@ Partial Class sdgThemes
         Me.tbPLot.TabIndex = 7
         Me.tbPLot.Text = "Plot"
         Me.tbPLot.UseVisualStyleBackColor = True
+        '
+        'ucrTickLength
+        '
+        Me.ucrTickLength.Location = New System.Drawing.Point(332, 275)
+        Me.ucrTickLength.Name = "ucrTickLength"
+        Me.ucrTickLength.Size = New System.Drawing.Size(280, 119)
+        Me.ucrTickLength.TabIndex = 104
         '
         'grpPlotBackground
         '
@@ -751,6 +765,39 @@ Partial Class sdgThemes
         Me.tbLegend.Size = New System.Drawing.Size(824, 590)
         Me.tbLegend.TabIndex = 1
         '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.UcrGridUnit3)
+        Me.GroupBox1.Controls.Add(Me.UcrGridUnit2)
+        Me.GroupBox1.Controls.Add(Me.UcrGridUnit1)
+        Me.GroupBox1.Location = New System.Drawing.Point(4, 402)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(777, 150)
+        Me.GroupBox1.TabIndex = 4
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Legend Background and Key"
+        '
+        'UcrGridUnit1
+        '
+        Me.UcrGridUnit1.Location = New System.Drawing.Point(13, 25)
+        Me.UcrGridUnit1.Name = "UcrGridUnit1"
+        Me.UcrGridUnit1.Size = New System.Drawing.Size(280, 119)
+        Me.UcrGridUnit1.TabIndex = 105
+        '
+        'UcrGridUnit2
+        '
+        Me.UcrGridUnit2.Location = New System.Drawing.Point(299, 19)
+        Me.UcrGridUnit2.Name = "UcrGridUnit2"
+        Me.UcrGridUnit2.Size = New System.Drawing.Size(280, 119)
+        Me.UcrGridUnit2.TabIndex = 106
+        '
+        'UcrGridUnit3
+        '
+        Me.UcrGridUnit3.Location = New System.Drawing.Point(529, 31)
+        Me.UcrGridUnit3.Name = "UcrGridUnit3"
+        Me.UcrGridUnit3.Size = New System.Drawing.Size(280, 119)
+        Me.UcrGridUnit3.TabIndex = 107
+        '
         'sdgThemes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -789,6 +836,7 @@ Partial Class sdgThemes
         Me.grpPlotBackground.ResumeLayout(False)
         Me.grpPlotTitleAndCaption.ResumeLayout(False)
         Me.tbLegend.ResumeLayout(False)
+        Me.GroupBox1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -863,4 +911,9 @@ Partial Class sdgThemes
     Friend WithEvents ucrPlotSubTitle As ucrELementTextControl
     Friend WithEvents ucrPlotTitle As ucrELementTextControl
     Friend WithEvents tbLegend As TabControl
+    Friend WithEvents ucrTickLength As ucrGridUnit
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents UcrGridUnit3 As ucrGridUnit
+    Friend WithEvents UcrGridUnit2 As ucrGridUnit
+    Friend WithEvents UcrGridUnit1 As ucrGridUnit
 End Class
