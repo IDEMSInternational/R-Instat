@@ -1703,7 +1703,7 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
       g <- g + ggplot2::geom_bar() + ggplot2::coord_polar(theta = "x")
     }
     else {
-      g <- g + ggplot2::curr_geom()
+      g <- g + curr_geom()
     }
 
     if (coord_flip) {
