@@ -66,9 +66,9 @@ Public Class dlgOpenNetCDF
 
     Private Sub InitialiseDialog()
         'ucrBase.iHelpTopicID = 
-        Dim kvpLat As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("lat", {"y", "lat", "latitude"}.ToList())
-        Dim kvpLon As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("lon", {"x", "lon", "longitude"}.ToList())
-        Dim kvpTime As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("time", {"t", "time", "period"}.ToList())
+        Dim kvpLat As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("lat", {"y", "lat", "latitude", "latit"}.ToList())
+        Dim kvpLon As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("lon", {"x", "lon", "longitude", "longit"}.ToList())
+        Dim kvpTime As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("time", {"t", "time", "period", "pd"}.ToList())
 
         ucrInputDataName.SetDefaultTypeAsDataFrame()
         ucrInputDataName.SetValidationTypeAsRVariable()
@@ -79,8 +79,6 @@ Public Class dlgOpenNetCDF
         ucrInputFilePath.SetParameter(New RParameter("filename", 0))
         ucrInputDataName.SetParameter(New RParameter("main_data_name", 1))
         ucrInputLocDataName.SetParameter(New RParameter("loc_data_name", 2))
-
-
 
         ucrReceiverLatName.SetParameter(New RParameter("latitude_col_name", 3))
         ucrReceiverLatName.SetParameterIsString()
