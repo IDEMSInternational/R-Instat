@@ -140,7 +140,7 @@ Public Class dlgDotPlot
         clsRDotplotGeomFunction.SetRCommand("geom_dotplot")
         clsRDotplotGeomFunction.AddParameter("binaxis", Chr(34) & "x" & Chr(34))
 
-        clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultTheme.Clone())
+        clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
