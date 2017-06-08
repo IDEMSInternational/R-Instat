@@ -20,7 +20,7 @@ Public Class dlgOneVarCompareModels
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
-    Private clsGofStat, clsReceiver, clsRcdfcompFunction, clsRAsDataFrame As New RFunction
+    Private clsGofStat, clsReceiver, clsRcdfcompFunction, clsRAsDataFrame, clsRdenscompFunction, clsRppcompFunction, clsRqqcompFunction As New RFunction
     Private clsOperatorforTable As New ROperator
     Private Sub dlgOneVarCompareModels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -68,12 +68,14 @@ Public Class dlgOneVarCompareModels
         clsRcdfcompFunction.SetRCommand("fitdistrplus::cdfcomp")
 
         clsOperatorforTable.SetOperation("$")
-        clsOperatorforTable.AddParameter(iPosition:=0, clsRFunctionParameter:=clsReceiver)
-        clsOperatorforTable.AddParameter(strParameterValue:="chisqtable")
+        clsOperatorforTable.AddParameter(clsRFunctionParameter:=clsGofStat, iPosition:=0)
+        clsOperatorforTable.AddParameter(strParameterValue:="chisqbreaks")
+
+        ' clsOperatorforTable.AddParameter("chisqtable", clsRFunctionParameter:=clsReceiver, iPosition:=0)
         clsRAsDataFrame.SetRCommand("as.data.frame")
         clsRAsDataFrame.AddParameter("x", clsROperatorParameter:=clsOperatorforTable)
 
-        clsRAsDataFrame.SetAssignTo(sdgOneVarCompareModels.ucrDisplayChiData.GetText(), strTempDataframe:=sdgOneVarCompareModels.ucrDisplayChiData.GetText())
+        clsRAsDataFrame.SetAssignTo(ucrSelectorOneVarCompModels.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempDataframe:=ucrSelectorOneVarCompModels.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsGofStat)
         bResetSubdialog = True
@@ -84,7 +86,8 @@ Public Class dlgOneVarCompareModels
     ' variables not fromvariablex cannot be in dataframe
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrReceiverCompareModels.SetRCode(clsGofStat, bReset)
+        'SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Public Sub TestOKEnabled()
@@ -120,7 +123,7 @@ Public Class dlgOneVarCompareModels
     End Sub
 
     Private Sub cmdDisplayObjects_Click(sender As Object, e As EventArgs) Handles cmdDisplayObjects.Click
-        sdgOneVarCompareModels.SetRFunction(clsGofStat, clsReceiver, clsRcdfcompFunction, bResetSubdialog)
+        sdgOneVarCompareModels.SetRCode(clsGofStat, clsReceiver, clsRcdfcompFunction, clsRdenscompFunction, clsRppcompFunction, clsRqqcompFunction, clsRAsDataFrame, clsOperatorforTable, bResetSubdialog)
         bResetSubdialog = False
         sdgOneVarCompareModels.ShowDialog()
     End Sub

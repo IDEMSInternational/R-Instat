@@ -27,12 +27,6 @@ Public Class sdgOneVarCompareModels
     End Sub
 
     Public Sub InitialiseControls()
-        'ucrSaveGOF
-        ucrSaveGOF.SetName("GOF")
-        ucrSaveGOF.SetSaveTypeAsModel() ' or graph?
-        ucrSaveGOF.SetCheckBoxText("Save Fit")
-        ucrSaveGOF.SetIsComboBox()
-        ucrSaveGOF.SetAssignToIfUncheckedValue("last_model")
 
         'ucrInputChiSquareBreaks
         ucrChkInputChiSquareBreakpoints.SetText("Input Chi-Square Breakpoints")
@@ -54,6 +48,19 @@ Public Class sdgOneVarCompareModels
         ucrChkQQ.SetRDefault("FALSE")
         ucrChkQQ.SetText("QQ")
         InitialiseTabs()
+        'ucrSaveGOF
+        ucrSaveGOF.SetPrefix("GOF")
+        ucrSaveGOF.SetSaveTypeAsModel() ' or graph?
+        ucrSaveGOF.SetCheckBoxText("Save Fit")
+        ucrSaveGOF.SetIsComboBox()
+        ucrSaveGOF.SetAssignToIfUncheckedValue("last_model")
+
+        'ucrSaveDisplayChi
+        ucrSaveDisplayChi.SetPrefix("ChiSquare")
+        ucrSaveDisplayChi.SetSaveTypeAsDataFrame()
+        ucrSaveDisplayChi.SetCheckBoxText("Save DisplayChi")
+        ucrSaveDisplayChi.SetIsComboBox()
+        ucrSaveDisplayChi.SetAssignToIfUncheckedValue("last_model")
 
         'ucrSavePlot
         ucrSavePlots.SetPrefix("plots")
@@ -63,7 +70,7 @@ Public Class sdgOneVarCompareModels
         ucrSavePlots.SetAssignToIfUncheckedValue("last_model")
     End Sub
 
-    Public Sub SetRFunction(clsNewRGofStat As RFunction, clsNewReceiver As RFunction, clsNewRcdfcompFunction As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewRGofStat As RFunction, clsNewReceiver As RFunction, clsNewRcdfcompFunction As RFunction, clsNewclsRdenscompFunction As RFunction, clsNewclsRppcompFunction As RFunction, clsNewclsRqqcompFunction As RFunction, clsNewclsRAsDataFrame As RFunction, Optional clsNewOperatorForBreaks As ROperator = Nothing, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
@@ -71,6 +78,12 @@ Public Class sdgOneVarCompareModels
         clsRGofStat = clsNewRGofStat
         clsRcdfcompFunction = clsNewRcdfcompFunction
         clsRReceiver = clsNewReceiver
+        clsRdenscompFunction = clsNewclsRdenscompFunction
+        clsOperatorForBreaks = clsNewOperatorForBreaks
+        clsRppcompFunction = clsNewclsRppcompFunction
+        clsRqqcompFunction = clsNewclsRqqcompFunction
+        clsRAsDataFrame = clsNewclsRAsDataFrame
+
         'Setting Rcode for the sub dialog
         ucrSaveGOF.SetRCode(clsRGofStat, bReset)
         ucrChkCDF.SetRCode(clsRcdfcompFunction, bReset)
@@ -78,59 +91,37 @@ Public Class sdgOneVarCompareModels
         ucrChkInputChiSquareBreakpoints.SetRCode(clsOperatorForBreaks, bReset)
         ucrChkPP.SetRCode(clsRppcompFunction, bReset)
         ucrChkQQ.SetRCode(clsRqqcompFunction, bReset)
-
+        ucrSaveDisplayChi.SetRCode(clsRAsDataFrame, bReset)
 
         If bReset Then
             tbpOneVarCompareModels.SelectedIndex = 0
         End If
     End Sub
-    Public Sub InitialiseDialog()
-        ucrDisplayChiData.SetValidationTypeAsRVariable()
-    End Sub
-
-    Public Sub SetDefaults()
-        ucrSavePlots.Enabled = False ' disabled for now
-        ucrDisplayChiData.Reset()
-        If dlgOneVarCompareModels.ucrSelectorOneVarCompModels.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
-            ucrDisplayChiData.SetName(dlgOneVarCompareModels.ucrSelectorOneVarCompModels.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_ChiSquare")
-        End If
-        DisplayChiSquare()
-        DisplayChiBreaks()
-        'ucrBase.ihelptopicID = 
-    End Sub
 
     Public Sub Reopen()
-        DisplayChiSquare()
+        '  DisplayChiSquare()
     End Sub
 
-    Public Sub SetModelFunction(clsNewModel As RFunction)
-        clsModel = clsNewModel
-    End Sub
-
-    Public Sub DisplayChiSquare()
-        If chkSaveChi.Checked Then
-            ucrDisplayChiData.Visible = True
-            clsOperatorforTable.SetOperation("$")
-            clsOperatorforTable.AddParameter(iPosition:=0, clsRFunctionParameter:=clsModel)
-            clsOperatorforTable.AddParameter(strParameterValue:="chisqtable")
-            clsRAsDataFrame.SetRCommand("as.data.frame")
-            clsRAsDataFrame.AddParameter("x", clsROperatorParameter:=clsOperatorforTable)
-        Else
-            ucrDisplayChiData.Visible = False
-        End If
-        If Not ucrDisplayChiData.IsEmpty Then
-            clsRAsDataFrame.SetAssignTo(ucrDisplayChiData.GetText(), strTempDataframe:=ucrDisplayChiData.GetText())
-        Else
-            clsRAsDataFrame.RemoveAssignTo()
-        End If
-    End Sub
+    'Public Sub DisplayChiSquare()
+    '    If chkSaveChi.Checked Then
+    '        ucrDisplayChiData.Visible = True
+    '        clsOperatorforTable.SetOperation("$")
+    '        clsOperatorforTable.AddParameter(iPosition:=0, clsRFunctionParameter:=clsModel)
+    '        clsOperatorforTable.AddParameter(strParameterValue:="chisqtable")
+    '        clsRAsDataFrame.SetRCommand("as.data.frame")
+    '        clsRAsDataFrame.AddParameter("x", clsROperatorParameter:=clsOperatorforTable)
+    '    Else
+    '        ucrDisplayChiData.Visible = False
+    '    End If
+    '    If Not ucrDisplayChiData.IsEmpty Then
+    '        clsRAsDataFrame.SetAssignTo(ucrDisplayChiData.GetText(), strTempDataframe:=ucrDisplayChiData.GetText())
+    '    Else
+    '        clsRAsDataFrame.RemoveAssignTo()
+    '    End If
+    'End Sub
 
     Private Sub ucrDisplayChiData_NameChanged()
-        DisplayChiSquare()
-    End Sub
-
-    Public Sub SetReceiver(ucrNewReceiver As ucrReceiver)
-        ucrRecs = ucrNewReceiver
+        ' DisplayChiSquare()
     End Sub
 
     Public Sub CreateGraphs()
@@ -156,7 +147,8 @@ Public Class sdgOneVarCompareModels
             clsRdenscompFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
             frmMain.clsRLink.RunScript(clsRdenscompFunction.ToScript(), 2)
         End If
-        If chkSaveChi.Checked Then
+
+        If ucrSaveDisplayChi.IsComplete Then
             frmMain.clsRLink.RunScript(clsOperatorforTable.ToScript(), 0)
             clsRAsDataFrame.ToScript(strTemp)
             frmMain.clsRLink.RunScript(strTemp, 0)
@@ -164,6 +156,7 @@ Public Class sdgOneVarCompareModels
         If ucrChkInputChiSquareBreakpoints.Checked Then
             frmMain.clsRLink.RunScript(clsOperatorForBreaks.ToScript(), 2)
         End If
+
     End Sub
 
     Private Sub chkInputBreakpoints_Checked_Changed(sender As Object, e As EventArgs)
@@ -179,22 +172,8 @@ Public Class sdgOneVarCompareModels
     End Sub
 
     Private Sub chkSaveChi_CheckedChanged(sender As Object, e As EventArgs)
-        DisplayChiSquare()
+        ' DisplayChiSquare()
     End Sub
-
-    ' Private Sub ucrSavePlots_NameChanged() Handles ucrSavePlots.Click
-    'TODO Graph Names assigned go up in increments for any of the graphs selected (e.g. 3 plots are selected and it is named "plots", then automatically we get "plots1", ... , "plots3"
-    'End Sub
-
-    Public Function TestOkEnabled() As Boolean
-        Dim bOkEnabled As Boolean
-        If (ucrSaveGOF.IsComplete()) AndAlso (chkSaveChi.Checked AndAlso Not ucrDisplayChiData.IsEmpty OrElse Not chkSaveChi.Checked) Then
-            bOkEnabled = True
-        Else
-            bOkEnabled = False
-        End If
-        Return bOkEnabled
-    End Function
 
     Private Sub InitialiseTabs()
         For i = 0 To tbpOneVarCompareModels.TabCount - 1
