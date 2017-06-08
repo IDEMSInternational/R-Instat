@@ -218,8 +218,8 @@ Public Class ucrCore
             If bUpdateRCodeFromControl AndAlso CanUpdate() Then
                 UpdateRCode(bReset)
             End If
-            UpdateControl(bReset)
         End If
+        UpdateControl(bReset)
     End Sub
 
     Protected Overridable Function CanUpdate()
@@ -350,7 +350,11 @@ Public Class ucrCore
     End Function
 
     Public Overridable Function GetParameter(Optional iIndex As Integer = 0) As RParameter
-        Return lstAllRParameters(iIndex)
+        If iIndex < lstAllRParameters.Count Then
+            Return lstAllRParameters(iIndex)
+        Else
+            Return Nothing
+        End If
     End Function
 
     Public Overridable Function GetRCode() As RCodeStructure
@@ -485,8 +489,12 @@ Public Class ucrCore
             clsParameter.SetArgumentName(strNewName)
         End If
         If bClearConditions Then
-            dctConditions.Clear()
+            ClearConditions()
         End If
+    End Sub
+
+    Public Sub ClearConditions()
+        dctConditions.Clear()
     End Sub
 
     Public Sub SetParameterValue(strNewValue As String)
@@ -559,5 +567,18 @@ Public Class ucrCore
 
     Protected Overridable Sub ResetControlValue()
         'TODO implement in specific controls
+    End Sub
+
+    Public Overridable Sub ClearCodeAndParameters()
+        lstAllRCodes = New List(Of RCodeStructure)
+        lstAllRParameters = New List(Of RParameter)
+        'Ensures there is always something at index 0
+        lstAllRCodes.Add(Nothing)
+        lstAllRParameters.Add(Nothing)
+        UpdateControl()
+    End Sub
+
+    Public Overridable Sub SetAddRemoveParameter(bNew As Boolean)
+        bAddRemoveParameter = bNew
     End Sub
 End Class
