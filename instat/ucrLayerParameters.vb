@@ -19,7 +19,7 @@ Imports instat
 Public Class ucrLayerParameters
     Public lstLayerParameterControl As New List(Of ucrLayerParamsControls)
     Private bFirstLoad As Boolean = True
-    Public WithEvents ucrGeomWithAes As UcrGeomListWithParameters
+    Public WithEvents ucrGeomWithAes As ucrGeomListWithParameters
 
     Public Sub New()
 

@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class UcrGeomListWithParameters
+Partial Class ucrGeomListWithParameters
     Inherits instat.ucrGeom
 
     'Form overrides dispose to clean up the component list.

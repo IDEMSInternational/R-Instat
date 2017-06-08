@@ -15,13 +15,13 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgGeneralForGraphics
-    Public clsRggplotFunction As New RFunction
+    Public clsGgplotFunction As New RFunction
     Private bFirstLoad As Boolean = True
     Private lstLayerComplete As New List(Of Boolean)
     'list of completed layers.
     Private iLayerIndex As Integer
     'current layer
-    Public WithEvents clsGgplotAesFunction As New RFunction
+    Public WithEvents clsGlobalAesFunction As New RFunction
     Private strGlobalDataFrame As String
     Public bDataFrameSet As Boolean
 
@@ -40,17 +40,17 @@ Public Class dlgGeneralForGraphics
     Private Sub InitialiseDialog()
         'setting the base ggplot functions
         ucrBase.clsRsyntax.SetOperation("+")
-        clsRggplotFunction.SetRCommand("ggplot")
-        clsGgplotAesFunction.SetRCommand("aes")
-        ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
+        clsGgplotFunction.SetRCommand("ggplot")
+        clsGlobalAesFunction.SetRCommand("aes")
+        ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsGgplotFunction)
         'True for "we are setting the first parameter, on the left of +".
         ucrBase.iHelpTopicID = 356
 
         ucrSaveGraph.SetDataFrameSelector(sdgLayerOptions.ucrGeomWithAes.ucrGeomWithAesSelector.ucrAvailableDataFrames)
         ucrSaveGraph.strPrefix = "Graph"
         ucrAdditionalLayers.SetRSyntax(ucrBase.clsRsyntax)
-        ucrAdditionalLayers.SetGGplotFunction(clsRggplotFunction)
-        ucrAdditionalLayers.SetAesFunction(clsGgplotAesFunction)
+        ucrAdditionalLayers.SetGGplotFunction(clsGgplotFunction)
+        ucrAdditionalLayers.SetAesFunction(clsGlobalAesFunction)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         'By default, we want to put in the script the output of our Base R-command (in this case the ...+...+...) even when it has been assigned to some object (in which case we want the name of that object in the script so that it's called when the script is run).
         'For example, when a graph is saved, it is assigned to it's place in an R-instat object. If we had set bExcludeAssignedFunctionOutput to True, then we would never print the graph when running the script.
@@ -65,8 +65,8 @@ Public Class dlgGeneralForGraphics
         'SetEditDeleteEnabled()
         strGlobalDataFrame = ""
         bDataFrameSet = False
-        clsRggplotFunction.ClearParameters()
-        clsGgplotAesFunction.ClearParameters()
+        clsGgplotFunction.ClearParameters()
+        clsGlobalAesFunction.ClearParameters()
         ucrAdditionalLayers.Reset()
         If ucrBase.clsRsyntax.clsBaseOperator IsNot Nothing Then
             ucrBase.clsRsyntax.clsBaseOperator.RemoveAllAdditionalParameters()
@@ -175,7 +175,7 @@ Public Class dlgGeneralForGraphics
 
     Private Sub SetupPlotOptions() 'Warning to be discussed: I m hoping to have a Setup function in sdgPlots itself... ?
         sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
-        sdgPlots.SetGgplotFunction(clsRggplotFunction)
+        sdgPlots.SetGgplotFunction(clsGgplotFunction)
     End Sub
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgPlots.DisableLayersTab()
