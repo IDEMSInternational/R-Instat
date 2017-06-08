@@ -118,6 +118,8 @@ Partial Class sdgThemes
         Me.ucrLegendSpacingYAxis = New instat.ucrGridUnit()
         Me.ucrLegendSpacingXAxis = New instat.ucrGridUnit()
         Me.ucrLegendSpacing = New instat.ucrGridUnit()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.UcrGridUnit1 = New instat.ucrGridUnit()
         Me.tbThemeFacets.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.grpFacetBackground.SuspendLayout()
@@ -152,6 +154,7 @@ Partial Class sdgThemes
         Me.tbThemePanelMoreOptions.SuspendLayout()
         Me.grpPanelGridMajorMinor.SuspendLayout()
         Me.grpLegendSpacing.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'ucrBaseSubdialogue
@@ -919,6 +922,7 @@ Partial Class sdgThemes
         '
         'tbThemeLegendMoreOptions
         '
+        Me.tbThemeLegendMoreOptions.Controls.Add(Me.GroupBox2)
         Me.tbThemeLegendMoreOptions.Controls.Add(Me.grpLegendSpacing)
         Me.tbThemeLegendMoreOptions.Location = New System.Drawing.Point(4, 22)
         Me.tbThemeLegendMoreOptions.Name = "tbThemeLegendMoreOptions"
@@ -1012,6 +1016,23 @@ Partial Class sdgThemes
         Me.ucrLegendSpacing.Size = New System.Drawing.Size(258, 119)
         Me.ucrLegendSpacing.TabIndex = 105
         '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.UcrGridUnit1)
+        Me.GroupBox2.Location = New System.Drawing.Point(6, 172)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(263, 137)
+        Me.GroupBox2.TabIndex = 107
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "GroupBox2"
+        '
+        'UcrGridUnit1
+        '
+        Me.UcrGridUnit1.Location = New System.Drawing.Point(1, 15)
+        Me.UcrGridUnit1.Name = "UcrGridUnit1"
+        Me.UcrGridUnit1.Size = New System.Drawing.Size(256, 114)
+        Me.UcrGridUnit1.TabIndex = 104
+        '
         'sdgThemes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1059,6 +1080,7 @@ Partial Class sdgThemes
         Me.tbThemePanelMoreOptions.ResumeLayout(False)
         Me.grpPanelGridMajorMinor.ResumeLayout(False)
         Me.grpLegendSpacing.ResumeLayout(False)
+        Me.GroupBox2.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -1159,4 +1181,6 @@ Partial Class sdgThemes
     Friend WithEvents ucrLegendSpacingYAxis As ucrGridUnit
     Friend WithEvents ucrLegendSpacingXAxis As ucrGridUnit
     Friend WithEvents ucrLegendSpacing As ucrGridUnit
+    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents UcrGridUnit1 As ucrGridUnit
 End Class
