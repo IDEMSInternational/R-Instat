@@ -569,6 +569,7 @@ Partial Class ucrAxes
     Friend WithEvents lblMajorBreaksTo As Label
     Friend WithEvents lblMajorBreaksInStepsOf As Label
     Friend WithEvents ucrInputMajorBreaksCustom As ucrInputTextBox
+
     Friend WithEvents grpScales As GroupBox
     Friend WithEvents rdoScalesCustom As RadioButton
     Friend WithEvents rdoScalesAuto As RadioButton
@@ -605,4 +606,5 @@ Partial Class ucrAxes
     Friend WithEvents rdoMinorBreaksNone As RadioButton
     Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
     Friend WithEvents ucrChkLabels As ucrCheck
+
 End Class
