@@ -20,6 +20,18 @@ Public Class sdgThemes
     Public bControlsInitialised As Boolean = False
     Private clsElementLine, clsElementRect, clsElementXAxisTextTop, clsElementXAxisLine, clsElementYAxisLine, clsElementText, clsElementYAxisTextRight, clsElementXAxisLineTop, clsThemeFunction As New RFunction
 
+    Private Sub GroupBox4_Enter(sender As Object, e As EventArgs) Handles grpBorderAndBackground.Enter
+
+    End Sub
+
+    Private Sub ucrPanelGrid_Load(sender As Object, e As EventArgs) Handles ucrPanelGrid.Load
+
+    End Sub
+
+    Private Sub UcrELementTextControl3_Load(sender As Object, e As EventArgs) Handles ucrPlotCaption.Load
+
+    End Sub
+
     Private clsBaseOperator As New ROperator
 
     Private dctThemeFunctions As New Dictionary(Of String, RFunction)
@@ -76,14 +88,14 @@ Public Class sdgThemes
         ucrInputLegendPosition.SetItems(dctLegendPosition)
         ucrInputLegendPosition.SetRDefault(Chr(34) & "none" & Chr(34))
 
-        ucrChkLegendBox.SetText("Multiple Legend Arrangement")
+        ucrChkLegendBox.SetText("Legend Layout")
         ucrInputLegendBox.SetParameter(New RParameter("legend.box"))
         dctLegendBox.Add("Vertical", Chr(34) & "vertical" & Chr(34))
         dctLegendBox.Add("Horizontal", Chr(34) & "horizontal" & Chr(34))
         ucrInputLegendBox.SetItems(dctLegendBox)
         ucrInputLegendBox.SetRDefault(Chr(34) & "vertical" & Chr(34))
 
-        urChkLegendBoxJust.SetText("Justification of Legend Box")
+        urChkLegendBoxJust.SetText("Justify Legend Box")
         ucrInputLegendBoxJust.SetParameter(New RParameter("legend.box.just"))
         dctLegendBoxJust.Add("Top", Chr(34) & "top" & Chr(34))
         dctLegendBoxJust.Add("Bottom", Chr(34) & "bottom" & Chr(34))
@@ -226,35 +238,35 @@ Public Class sdgThemes
     End Sub
 
     Private Sub AddRemoveElementParameters()
-        'If ucrChkLegendBox.Checked Then
-        '    clsThemeFunction.AddParameter("legend.box")
-        'Else
-        '    clsThemeFunction.RemoveParameterByName("legend.box")
-        'End If
+        If ucrChkLegendBox.Checked Then
+            clsThemeFunction.AddParameter("legend.box")
+        Else
+            clsThemeFunction.RemoveParameterByName("legend.box")
+        End If
 
-        'If ucrChkLegendDirection.Checked Then
-        '    clsThemeFunction.AddParameter("legend.direction")
-        'Else
-        '    clsThemeFunction.RemoveParameterByName("legend.direction")
-        'End If
+        If ucrChkLegendDirection.Checked Then
+            clsThemeFunction.AddParameter("legend.direction")
+        Else
+            clsThemeFunction.RemoveParameterByName("legend.direction")
+        End If
 
-        'If ucrChkLegendJustification.Checked Then
-        '    clsThemeFunction.AddParameter("legend.justification")
-        'Else
-        '    clsThemeFunction.RemoveParameterByName("legend.justification")
-        'End If
+        If ucrChkLegendJustification.Checked Then
+            clsThemeFunction.AddParameter("legend.justification")
+        Else
+            clsThemeFunction.RemoveParameterByName("legend.justification")
+        End If
 
-        'If urChkLegendBoxJust.Checked Then
-        '    clsThemeFunction.AddParameter("legend.box.just")
-        'Else
-        '    clsThemeFunction.RemoveParameterByName("legend.box.just")
-        'End If
+        If urChkLegendBoxJust.Checked Then
+            clsThemeFunction.AddParameter("legend.box.just")
+        Else
+            clsThemeFunction.RemoveParameterByName("legend.box.just")
+        End If
 
-        'If urChkLegendPosition.Checked Then
-        '    clsThemeFunction.AddParameter("legend.position")
-        'Else
-        '    clsThemeFunction.RemoveParameterByName("legend.position")
-        'End If
+        If urChkLegendPosition.Checked Then
+            clsThemeFunction.AddParameter("legend.position")
+        Else
+            clsThemeFunction.RemoveParameterByName("legend.position")
+        End If
 
         AddRemoveTheme()
     End Sub
