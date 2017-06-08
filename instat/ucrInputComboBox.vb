@@ -130,12 +130,22 @@ Public Class ucrInputComboBox
         Return cboInput.Text
     End Function
 
-    Public Sub SetItems(strItems As String(), Optional bClearExisting As Boolean = True)
-        If bClearExisting Then
-            cboInput.Items.Clear()
+    Public Sub SetItems(Optional strItems As String() = Nothing, Optional bClearExisting As Boolean = True, Optional bAddConditions As Boolean = False)
+        Dim dctValues As New Dictionary(Of String, String)
+        If bAddConditions Then
+            For Each strTemp As String In strItems
+                dctValues.Add(strTemp, strTemp)
+            Next
+            SetItems(dctValues, bClearExisting)
+        Else
+            If bClearExisting Then
+                cboInput.Items.Clear()
+            End If
+            If strItems IsNot Nothing Then
+                cboInput.Items.AddRange(strItems)
+            End If
+            AdjustComboBoxWidth(cboInput)
         End If
-        cboInput.Items.AddRange(strItems)
-        AdjustComboBoxWidth(cboInput)
     End Sub
 
     Public Sub SetItems(dctItemParameterValuePairs As Dictionary(Of String, String), Optional bClearExisting As Boolean = True)
@@ -154,6 +164,10 @@ Public Class ucrInputComboBox
             AddParameterValuesCondition(kvpTemp.Key, GetParameter().strArgumentName, kvpTemp.Value)
         Next
         AdjustComboBoxWidth(cboInput)
+    End Sub
+
+    Public Sub AddItems(strItems As String())
+        SetItems(strItems, bClearExisting:=False)
     End Sub
 
     Private Sub cboInput_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cboInput.KeyPress
