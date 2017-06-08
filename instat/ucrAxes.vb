@@ -14,6 +14,8 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
+
 Public Class ucrAxes
     Public bIsX As Boolean
     Public clsXYlabTitleFunction As New RFunction
@@ -22,6 +24,8 @@ Public Class ucrAxes
     Public clsBaseOperator As New ROperator
     Public clsSeqFunction As New RFunction
     Public strAxis As String
+    'e.g. discrete, continuous
+    Public strAxisType As String
     Public bFirstLoad As Boolean = True
     Private bInitialiseControls As Boolean = False
     Private bRCodeSet As Boolean = False
@@ -47,27 +51,22 @@ Public Class ucrAxes
 
         'grpTickMarkers.Enabled = False
         'Tick Markers section
-        ucrPnlTickmarkers.AddRadioButton(rdoMajorBreaksAuto)
-        ucrPnlTickmarkers.AddRadioButton(rdoMajorBreaksNone)
-        ucrPnlTickmarkers.AddParameterPresentCondition(rdoMajorBreaksAuto, "breaks", False)
-        ucrPnlTickmarkers.AddParameterPresentCondition(rdoMajorBreaksNone, "breaks", True)
-        ucrPnlTickmarkers.AddToLinkedControls(ucrTickMarkers, {rdoMajorBreaksNone}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlTickmarkers.AddToLinkedControls(ucrTickMarkers, {rdoMajorBreaksNone}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlMajorBreaks.AddRadioButton(rdoMajorBreaksAuto)
+        ucrPnlMajorBreaks.AddRadioButton(rdoMajorBreaksNone)
+        ucrPnlMajorBreaks.AddParameterPresentCondition(rdoMajorBreaksAuto, "breaks", False)
+        ucrPnlMajorBreaks.AddParameterPresentCondition(rdoMajorBreaksNone, "breaks", True)
 
-        ucrPnlTickmarkers.AddToLinkedControls(ucrInputMajorBreaksFrom, {rdoMajorBreaksNone}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlMajorBreaks.AddToLinkedControls(ucrInputMajorBreaksFrom, {rdoMajorBreaksNone}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputMajorBreaksFrom.SetLinkedDisplayControl(lblMajorBreaksFrom)
 
-        ucrPnlTickmarkers.AddToLinkedControls(ucrInputMajorBreaksTo, {rdoMajorBreaksNone}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlMajorBreaks.AddToLinkedControls(ucrInputMajorBreaksTo, {rdoMajorBreaksNone}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputMajorBreaksTo.SetLinkedDisplayControl(lblMajorBreaksTo)
 
-        ucrPnlTickmarkers.AddToLinkedControls(ucrInputMajorBreaksInStepsOf, {rdoMajorBreaksNone}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlMajorBreaks.AddToLinkedControls(ucrInputMajorBreaksInStepsOf, {rdoMajorBreaksNone}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputMajorBreaksInStepsOf.SetLinkedDisplayControl(lblMajorBreaksInStepsOf)
 
-        ucrTickMarkers.SetName("Interval")
-        ucrTickMarkers.SetItems({"Interval", "Specific Values"})
-
-        ucrPnlTickmarkers.AddParameterPresentCondition(rdoMajorBreaksAuto, "breaks", False)
-        ucrPnlTickmarkers.AddParameterPresentCondition(rdoMajorBreaksNone, "breaks", True)
+        ucrPnlMajorBreaks.AddParameterPresentCondition(rdoMajorBreaksAuto, "breaks", False)
+        ucrPnlMajorBreaks.AddParameterPresentCondition(rdoMajorBreaksNone, "breaks", True)
         ucrInputMajorBreaksCustom.SetParameter(New RParameter("breaks"))
         ucrInputMajorBreaksCustom.AddQuotesIfUnrecognised = False
         ucrInputMajorBreaksCustom.SetValidationTypeAsNumericList()
@@ -81,6 +80,8 @@ Public Class ucrAxes
 
         ucrInputMajorBreaksFrom.SetParameter(New RParameter("from"))
         ucrInputMajorBreaksFrom.AddQuotesIfUnrecognised = False
+
+        ucrInputAxisType.SetItems({"Continuous", "Discrete", "Date"})
 
         'Scales section
         'temp disabled, not yet implemented
@@ -96,14 +97,14 @@ Public Class ucrAxes
         bInitialiseControls = True
     End Sub
 
-    Public Sub SetRCodeForControl(bIsXAxis As Boolean, Optional clsNewXYScaleContinuousFunction As RFunction = Nothing, Optional clsNewXYlabTitleFunction As RFunction = Nothing, Optional clsNewBaseOperator As ROperator = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCodeForControl(bIsXAxis As Boolean, Optional strNewAxisType As String = "Continuous", Optional clsNewXYScaleContinuousFunction As RFunction = Nothing, Optional clsNewXYlabTitleFunction As RFunction = Nothing, Optional clsNewBaseOperator As ROperator = Nothing, Optional bReset As Boolean = False)
         bRCodeSet = False
         If Not bInitialiseControls Then
             InitialiseControl()
         End If
         clsBaseOperator = clsNewBaseOperator
         bIsX = bIsXAxis
-
+        strAxisType = strNewAxisType
         If bIsXAxis Then
             bIsX = True
             strAxis = "x"
@@ -111,6 +112,7 @@ Public Class ucrAxes
             bIsX = False
             strAxis = "y"
         End If
+        ucrInputAxisType.SetName(strAxisType)
 
         clsXYlabTitleFunction = clsNewXYlabTitleFunction
         clsXYScaleContinuousFunction = clsNewXYScaleContinuousFunction
@@ -121,10 +123,10 @@ Public Class ucrAxes
         'scales functions
         'Temp disabled, not yet implemented
         ucrPnlScales.SetRCode(clsXYScaleContinuousFunction, bReset)
-        ucrPnlTickmarkers.SetRCode(clsXYScaleContinuousFunction, bReset)
+        ucrPnlMajorBreaks.SetRCode(clsXYScaleContinuousFunction, bReset)
         ucrInputLowerLimit.SetRCode(clsXYScaleContinuousFunction, bReset)
         ucrInputUpperLimit.SetRCode(clsXYScaleContinuousFunction, bReset)
-        ucrPnlTickmarkers.SetRCode(clsXYScaleContinuousFunction, bReset)
+        ucrPnlMajorBreaks.SetRCode(clsXYScaleContinuousFunction, bReset)
         ucrInputMajorBreaksCustom.SetRCode(clsXYScaleContinuousFunction, bReset)
 
         'Temp disabled, not yet implemented
@@ -138,17 +140,6 @@ Public Class ucrAxes
         bRCodeSet = True
         SetLabel()
         AddRemoveXYScales()
-    End Sub
-
-    Private Sub ucrTickMarkers_ControlValueChanged() Handles ucrTickMarkers.ControlValueChanged, ucrPnlTickmarkers.ControlValueChanged
-        If rdoMajorBreaksNone.Checked AndAlso ucrTickMarkers.cboInput.SelectedItem = "Interval" Then
-            clsSeqFunction.SetRCommand("seq")
-            clsXYScaleContinuousFunction.AddParameter("breaks", clsRFunctionParameter:=clsSeqFunction)
-
-        ElseIf ucrTickMarkers.cboInput.SelectedItem = "Specific Values" Then
-            clsXYScaleContinuousFunction.RemoveParameterByName("breaks")
-        End If
-        tickMarkersDisplay()
     End Sub
 
     Private Sub AddRemoveLabs()
@@ -197,28 +188,44 @@ Public Class ucrAxes
         AddRemoveXYScales()
     End Sub
 
-    Private Sub tickMarkersDisplay()
-        If rdoMajorBreaksNone.Checked AndAlso ucrTickMarkers.GetText = "Specific Values" Then
-            ucrInputMajorBreaksCustom.Visible = True
-            ucrInputMajorBreaksFrom.Visible = False
-            lblMajorBreaksFrom.Visible = False
-            ucrInputMajorBreaksTo.Visible = False
-            lblMajorBreaksTo.Visible = False
-            ucrInputMajorBreaksInStepsOf.Visible = False
-            lblMajorBreaksInStepsOf.Visible = False
-        Else
-            ucrInputMajorBreaksCustom.Visible = False
-            ucrInputMajorBreaksFrom.Visible = True
-            lblMajorBreaksFrom.Visible = True
-            ucrInputMajorBreaksTo.Visible = True
-            lblMajorBreaksTo.Visible = True
-            ucrInputMajorBreaksInStepsOf.Visible = True
-            lblMajorBreaksInStepsOf.Visible = True
-        End If
+    'Private Sub tickMarkersDisplay()
+    '    If rdoMajorBreaksNone.Checked AndAlso ucrTickMarkers.GetText = "Specific Values" Then
+    '        ucrInputMajorBreaksCustom.Visible = True
+    '        ucrInputMajorBreaksFrom.Visible = False
+    '        lblMajorBreaksFrom.Visible = False
+    '        ucrInputMajorBreaksTo.Visible = False
+    '        lblMajorBreaksTo.Visible = False
+    '        ucrInputMajorBreaksInStepsOf.Visible = False
+    '        lblMajorBreaksInStepsOf.Visible = False
+    '    Else
+    '        ucrInputMajorBreaksCustom.Visible = False
+    '        ucrInputMajorBreaksFrom.Visible = True
+    '        lblMajorBreaksFrom.Visible = True
+    '        ucrInputMajorBreaksTo.Visible = True
+    '        lblMajorBreaksTo.Visible = True
+    '        ucrInputMajorBreaksInStepsOf.Visible = True
+    '        lblMajorBreaksInStepsOf.Visible = True
+    '    End If
+    'End Sub
+
+    Private Sub ucrTickMarkers_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMajorBreaks.ControlValueChanged
+
     End Sub
 
-    Private Sub ucrTickMarkers_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlTickmarkers.ControlValueChanged
+    Private Sub ucrInputAxisType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputAxisType.ControlValueChanged
+        SetAxisTypeControls()
+    End Sub
 
+    Private Sub SetAxisTypeControls()
+        strAxisType = ucrInputAxisType.GetText()
+        'hide all axis type lanels
+        If strAxisType = "Continuous" Then
+            'show continous panels
+        ElseIf strAxisType = "Discrete" Then
+            'show discrete panels
+        ElseIf strAxisType = "Date" Then
+            'show date panels
+        End If
     End Sub
 End Class
 
