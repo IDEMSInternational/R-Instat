@@ -272,6 +272,7 @@ Public Class RLink
             Try
                 If iCallType = 3 Then
                     If strGraphDisplayOption = "view_output_window" OrElse strGraphDisplayOption = "view_separate_window" Then
+                        clsPNGFunction.SetPackageName("grDevices")
                         clsPNGFunction.SetRCommand("png")
                         clsPNGFunction.AddParameter("filename", Chr(34) & System.IO.Path.Combine(strTempGraphsDirectory & "/Graph.png").Replace("\", "/") & Chr(34))
                         clsPNGFunction.AddParameter("width", 4000)
