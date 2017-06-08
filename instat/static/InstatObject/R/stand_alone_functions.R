@@ -229,13 +229,12 @@ pentad <- function(date) {
 }
 
 open_NetCDF <- function(nc_data, latitude_col_name, longitude_col_name, time_col_name, default_names, add_date_time){
-  #nc_data = ncdf4::nc_open(nc_data)
   variables = names(nc_data$var)
   lat_lon_names = names(nc_data$dim)
   #we may need to add latitude_col_name, longitude_col_name to the character vector of valid names
-  lat_names = c("lat", "latitude", "LAT", "Lat", "LATITUDE")
-  lon_names = c("lon", "longitude", "LON", "Lon", "LONGITUDE")
-  time_names = c("time", "TIME", "Time", "period", "Period", "PERIOD")
+  lat_names = c("lat", "latitude", "LAT", "Lat", "LATITUDE", "Y")
+  lon_names = c("lon", "longitude", "LON", "Lon", "LONGITUDE", "X")
+  time_names = c("time", "TIME", "Time", "period", "Period", "PERIOD", "T")
   if (stringr::str_trim(latitude_col_name) != ""){
     lat_names <- c(lat_names, latitude_col_name)
   }
