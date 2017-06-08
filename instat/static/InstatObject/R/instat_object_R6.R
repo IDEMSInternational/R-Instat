@@ -1236,7 +1236,7 @@ instat_object$set("public", "get_nc_variable_names", function(file = "", as_list
     vars <- ""
   }
   else {
-    nc_file <- nc_open(file)
+    nc_file <- ncdf4::nc_open(file)
     vars <- names(nc_file$dim)
   }
   if(as_list) {

@@ -229,6 +229,7 @@ pentad <- function(date) {
 }
 
 open_NetCDF <- function(nc_data, latitude_col_name, longitude_col_name, time_col_name, default_names, add_date_time){
+  #nc_data = ncdf4::nc_open(nc_data)
   variables = names(nc_data$var)
   lat_lon_names = names(nc_data$dim)
   #we may need to add latitude_col_name, longitude_col_name to the character vector of valid names
@@ -238,10 +239,10 @@ open_NetCDF <- function(nc_data, latitude_col_name, longitude_col_name, time_col
   if (stringr::str_trim(latitude_col_name) != ""){
     lat_names <- c(lat_names, latitude_col_name)
   }
-  if (str_trim(longitude_col_name) != ""){
+  if (stringr::str_trim(longitude_col_name) != ""){
     lon_names <- c(lon_names, longitude_col_name)
   }
-  if (str_trim(time_col_name) != ""){
+  if (stringr::str_trim(time_col_name) != ""){
     time_names <- c(time_names, time_col_name)
   }
   lat_in <- which(lat_lon_names %in% lat_names)
@@ -288,10 +289,10 @@ open_NetCDF <- function(nc_data, latitude_col_name, longitude_col_name, time_col
   my_data <- cbind(period, lat_lon_df)
   
   if (add_date_time && time_found){
-    time_units <- as.character(strsplit(ncatt_get(nc_data, lat_lon_names[time_in])$units, " ")[[1]])
+    time_units <- as.character(strsplit(ncdf4::ncatt_get(nc_data, lat_lon_names[time_in])$units, " ")[[1]])
     units <- time_units[1]
     new_origin <- stringr::str_c(time_units[3:length(time_units)], collapse = " ")
-    my_data$date_time <- as.character(convertDateNcdf2R(my_data$period, units = units, origin = as.POSIXct(new_origin, tz = "UTC")))
+    my_data$date_time <- as.character(ncdf.tools::convertDateNcdf2R(my_data$period, units = units, origin = as.POSIXct(new_origin, tz = "UTC")))
   }
   
   for (current_var in variables){
