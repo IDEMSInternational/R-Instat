@@ -108,7 +108,6 @@ Public Class dlgInsertColumn
 
         ucrInputPrefixForNewColumn.SetParameter(New RParameter("col_name", 6))
         ucrInputPrefixForNewColumn.SetLinkedDisplayControl(lblInputColumnPrefix)
-        ucrInputPrefixForNewColumn.SetPrefix("X")
 
         ucrPnlBeforeAfter.SetLinkedDisplayControl(grpOptions)
         ucrNudNumberOfRows.SetLinkedDisplayControl(lblNumberOfRowsToInsert)
@@ -126,7 +125,7 @@ Public Class dlgInsertColumn
         ucrInputDefaultValue.Reset()
         ucrInputPrefixForNewColumn.Reset()
         ucrInputPrefixForNewColumn.SetName("X")
-        ucrInputDefaultValue.SetName("NA")
+        clsInsertColumnFunction.AddParameter("col_data", " NA")
 
         clsInsertColumnFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
         clsInsertColumnFunction.AddParameter("use_col_name_as_prefix", "TRUE")
