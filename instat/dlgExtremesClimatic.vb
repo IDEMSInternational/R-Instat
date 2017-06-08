@@ -122,6 +122,7 @@ Public Class dlgExtremesClimatic
         clsMinMaxSummariseFunction.SetAssignTo("min_max_summary")
         clsMinMaxSummariseFunction.AddParameter("type", Chr(34) & "summary" & Chr(34))
         clsMinMaxSummariseFunction.AddParameter("save", 2)
+        clsMinMaxSummariseFunction.AddParameter("result_name", "max")
         clsMinMaxSummariseFunction.AddParameter("manipulations", clsRFunctionParameter:=clsMinMaxManipulationsFunction)
 
         clsMinMaxFuncExp.SetRCommand("max")
@@ -129,8 +130,10 @@ Public Class dlgExtremesClimatic
         clsMinMaxFuncExp.AddParameter("na.rm", "TRUE")
 
         clsRunCalcFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
+        clsRunCalcFunction.AddParameter("calc", clsRFunctionParameter:=clsMinMaxSummariseFunction)
         clsRunCalcFunction.AddParameter("display", "FALSE")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRunCalcFunction)
+
     End Sub
 
     Private Sub SetRCodeForControls(bReset)
@@ -166,7 +169,7 @@ Public Class dlgExtremesClimatic
         strCurrDataName = Chr(34) & ucrSelectorClimaticExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34)
 
         If Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverStations.IsEmpty Then
-            strGroupByCalcFrom = "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames() & ", " & strCurrDataName & "=" & ucrReceiverStations.GetVariableNames() & ")"
+            strGroupByCalcFrom = "list(" & strCurrDataName & "=" & ucrReceiverStations.GetVariableNames() & ", " & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames() & ")"
         ElseIf Not ucrReceiverYear.IsEmpty Then
             strGroupByCalcFrom = "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames() & ")"
         ElseIf Not ucrReceiverStations.IsEmpty Then
@@ -188,7 +191,7 @@ Public Class dlgExtremesClimatic
                     ucrInputSave.SetName("min")
                 End If
             ElseIf rdoPeaks.Checked Then
-                ucrInputSave.SetName("value")
+                ucrInputSave.SetName("Peaks_data_frame")
             End If
         End If
     End Sub
