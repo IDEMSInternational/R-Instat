@@ -120,7 +120,7 @@ Public Class dlgLinePlot
         clsRgeomlineplotFunction.SetPackageName("ggplot2")
         clsRgeomlineplotFunction.SetRCommand("geom_line")
 
-        clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultTheme.Clone())
+        clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
@@ -175,7 +175,7 @@ Public Class dlgLinePlot
     End Sub
 
     Private Sub cmdLineOptions_Click(sender As Object, e As EventArgs) Handles cmdLineOptions.Click
-        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeomlineplotFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrLinePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True, bIgnoreGlobalAes:=False)
+        'sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeomlineplotFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrLinePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True, bIgnoreGlobalAes:=False)
         sdgLayerOptions.ShowDialog()
         'Coming from the sdgLayerOptions, clsRaesFunction and others has been modified. One then needs to display these modifications on the dlgScatteredPlot.
 

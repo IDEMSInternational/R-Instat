@@ -135,6 +135,7 @@ Public Class ucrAxes
         ucrInputMajorBreaksTo.SetRCode(clsSeqFunction, bReset)
         clsSeqFunction.AddParameter("to", 0)
         ucrInputMajorBreaksFrom.SetRCode(clsSeqFunction, bReset)
+
         clsSeqFunction.AddParameter("from", 0)
 
         bRCodeSet = True
@@ -227,5 +228,6 @@ Public Class ucrAxes
             'show date panels
         End If
     End Sub
+
 End Class
 
