@@ -120,7 +120,6 @@ Public Class dlgOpenNetCDF
         clsRDefaultFunction.AddParameter("add_date_time", "TRUE")
         clsRDefaultFunction.AddParameter("loc_data_name", "lat_lon_data")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRDefaultFunction)
-        'SetRSelector()
         AutoFillReceivers()
     End Sub
 
@@ -194,7 +193,6 @@ Public Class dlgOpenNetCDF
         ucrReceiverLatName.strNcFilePath = ucrInputFilePath.GetText()
         ucrReceiverLonName.strNcFilePath = ucrInputFilePath.GetText()
         ucrReceiverTimeName.strNcFilePath = ucrInputFilePath.GetText()
-        'AutoFillReceivers()
     End Sub
 
     Private Sub Receivers_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLatName.ControlContentsChanged, ucrReceiverLonName.ControlContentsChanged, ucrInputDataName.ControlContentsChanged, ucrInputLocDataName.ControlContentsChanged
