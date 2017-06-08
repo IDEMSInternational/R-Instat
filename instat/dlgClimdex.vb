@@ -91,6 +91,8 @@ Public Class dlgClimdex
         'Define the default RFunction
         clsDefaultFunction.SetPackageName("climdex.pcic")
         clsDefaultFunction.SetRCommand("climdexInput.raw")
+        clsDefaultFunction.SetAssignTo("climdex_input")
+
         clsRTmax.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
         clsRTmin.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
         clsRPrec.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
@@ -103,10 +105,9 @@ Public Class dlgClimdex
         clsRChar.SetRCommand("as.character")
         clsRChar.AddParameter("x", clsRFunctionParameter:=clsRDate)
         clsRPCIct.AddParameter("x", clsRFunctionParameter:=clsRChar)
-        clsDefaultFunction.SetAssignTo("climdex_input")
 
         ' Set default RFunction as the base function
-        ucrBaseClimdex.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        ucrBaseClimdex.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
         'add rfunction as parameters of the main function here
         ucrBaseClimdex.clsRsyntax.AddParameter("tmax", clsRFunctionParameter:=clsRTmax)
         ucrBaseClimdex.clsRsyntax.AddParameter("tmax.dates", clsRFunctionParameter:=clsRPCIct)
