@@ -1033,7 +1033,7 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
       }
     }
     else if(to_type == "character") {
-      new_col <- to_character(curr_col)
+      new_col <- sjmisc::to_character(curr_col)
     }
     self$add_columns_to_data(col_name = col_name, col_data = new_col)
     
@@ -1209,7 +1209,7 @@ data_object$set("public", "get_data_type", function(col_name = "") {
   else if(is.logical(private$data[[col_name]])) {
     type = "logical"
   }
-  else if(is.Date(private$data[[col_name]])){
+  else if(lubridate::is.Date(private$data[[col_name]])){
     # #TODO
     #we can add options for other forms of dates serch as POSIXct, POSIXlt, Date, chron, yearmon, yearqtr, zoo, zooreg, timeDate, xts, its, ti, jul, timeSeries, and fts objects.
     type = "Date"
@@ -1845,7 +1845,7 @@ data_object$set("public","set_contrasts_of_factor", function(col_name, new_contr
 #This method gets a date column and extracts part of the information such as year, month, week, weekday etc(depending on which parameters are set) and creates their respective new column(s)
 data_object$set("public","split_date", function(col_name = "", week = FALSE, month_val = FALSE, month_abbr = FALSE, month_name = FALSE, weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE, year = FALSE, day = FALSE, day_in_month = FALSE, day_in_year = FALSE, leap_year = FALSE, day_in_year_366 = FALSE, dekade = FALSE, pentad = FALSE, shift_day = FALSE, shift_year = FALSE, shift_start_day_in_month = 1, shift_start_month = 8) {
   col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
-  if(!is.Date(col_data)) stop("This column must be a date or time!")
+  if(!lubridate::is.Date(col_data)) stop("This column must be a date or time!")
   if(day) {
     day_vector <- lubridate::day(col_data)
 	  col_name <- next_default_item(prefix = "day", existing_names = self$get_column_names(), include_index = FALSE)
@@ -2027,7 +2027,7 @@ data_object$set("public","make_inventory_plot", function(date_col, station_col =
   if(!self$is_climatic_data()) stop("Data is not defined as climatic.")
   if(missing(date_col)) stop("Date columns must be specified.")
   if(missing(element_cols)) stop("Element column(s) must be specified.")
-  if(!is.Date(self$get_columns_from_data(date_col))) stop(paste(date_col, " must be of type Date."))
+  if(!lubridate::is.Date(self$get_columns_from_data(date_col))) stop(paste(date_col, " must be of type Date."))
   
   if(!all(element_cols %in% self$get_column_names())) {
     stop("Not all elements columns found in the data")
@@ -2135,7 +2135,7 @@ data_object$set("public","make_inventory_plot", function(date_col, station_col =
 
 data_object$set("public","infill_missing_dates", function(date_name, factors) {
   date_col <- self$get_columns_from_data(date_name)
-  if(!is.Date(date_col)) stop(date_name, " is not a Date column.")
+  if(!lubridate::is.Date(date_col)) stop(date_name, " is not a Date column.")
   if(anyNA(date_col)) stop("Cannot do infilling as date column has missing values")
   if(missing(factors)) {
     if(anyDuplicated(date_col) > 0) stop("Cannot do infilling as date column has duplicate values.")
@@ -2451,7 +2451,7 @@ data_object$set("public","generate_award_year", function() {
     if(!self$is_corruption_type_present(corruption_award_date_label)) message("Cannot auto generate ", corruption_award_year_label, " because ", corruption_award_date_label, " column is not present.")
     else {
       award_date <- self$get_columns_from_data(self$get_corruption_column_name(corruption_award_date_label))
-      if(!is.Date(award_date)) message(message("Cannot auto generate ", corruption_award_year_label, " because ", corruption_award_date_label, " column is not of type Date."))
+      if(!lubridate::is.Date(award_date)) message(message("Cannot auto generate ", corruption_award_year_label, " because ", corruption_award_date_label, " column is not of type Date."))
       else {
         col_name <- next_default_item(corruption_award_year_label, self$get_column_names(), include_index = FALSE)
         self$add_columns_to_data(col_name, year(award_date))
@@ -2592,7 +2592,7 @@ data_object$set("public","generate_signature_period", function() {
     if(!self$is_corruption_type_present(corruption_award_date_label) || !self$is_corruption_type_present(corruption_signature_date_label)) message("Cannot auto generate ", corruption_signature_period_label, " because ", corruption_award_date_label, "or", corruption_signature_date_label, " are not defined.")
     award_date <- self$get_columns_from_data(self$get_corruption_column_name(corruption_award_date_label))
     sign_date <- self$get_columns_from_data(self$get_corruption_column_name(corruption_signature_date_label))
-    if(!is.Date(award_date) || !is.Date(sign_date)) message("Cannot auto generate ", corruption_signature_period_label, " because ", corruption_award_date_label, " or ", corruption_signature_date_label, " are not of type Date.")
+    if(!lubridate::is.Date(award_date) || !lubridate::is.Date(sign_date)) message("Cannot auto generate ", corruption_signature_period_label, " because ", corruption_award_date_label, " or ", corruption_signature_date_label, " are not of type Date.")
     else {
       signature_period <- self$get_columns_from_data(self$get_corruption_column_name(corruption_signature_date_label)) - self$get_columns_from_data(self$get_corruption_column_name(corruption_award_date_label))
       col_name <- next_default_item(corruption_signature_period_label, self$get_column_names(), include_index = FALSE)
