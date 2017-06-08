@@ -50,6 +50,7 @@ Public Class dlgAppend
         ucrChkIncludeIDColumn.bChangeParameterValue = False
         ucrChkIncludeIDColumn.AddToLinkedControls(ucrLinked:=ucrInputIDColName, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputIDColName.bAddRemoveParameter = False
+        ucrInputIDColName.SetLinkedDisplayControl(lblIDColName)
 
         ' ucrSave
         ucrSaveGraph.SetIsTextBox()
