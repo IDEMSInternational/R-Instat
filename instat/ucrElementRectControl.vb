@@ -38,7 +38,7 @@ Public Class ucrElementRectControl
         ucrLegendColors.AddQuotesIfUnrecognised = False
         ucrLegendColors.SetRDefault(Chr(34) & "black" & Chr(34))
 
-        ucrChkLegendFill.SetText("Colour")
+        ucrChkLegendFill.SetText("Fill")
         ucrLegendFill.SetParameter(New RParameter("fill"))
         ucrLegendFill.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
         ucrLegendFill.AddQuotesIfUnrecognised = False
