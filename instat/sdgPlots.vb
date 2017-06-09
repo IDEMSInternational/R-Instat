@@ -643,6 +643,26 @@ Public Class sdgPlots
         bResetThemes = False
     End Sub
 
-'Warning/Task to be discussed: need to disable ok on dlg's when layers are not complete on subdialogues + warning message... 
+    Private Sub ucrChkIncludeFacets_CheckedChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeFacets.ControlValueChanged, ucr2ndFactorReceiver.ControlValueChanged, ucr1stFactorReceiver.ControlValueChanged
+
+    End Sub
+
+    Private Sub ucrChkFreeSpace_CheckedChanged(ucrChangedControl As ucrCore) Handles ucrChkFreeSpace.ControlValueChanged
+
+    End Sub
+
+    Private Sub chkScales_CheckedChanged(ucrChangedControl As ucrCore) Handles ucrChkFreeScalesY.ControlValueChanged, ucrChkFreeScalesX.ControlValueChanged
+
+    End Sub
+
+    Private Sub ucrPnlHorizonatalVertical_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlHorizonatalVertical.ControlValueChanged, ucrChkMargin.ControlValueChanged
+
+    End Sub
+
+    Private Sub LabsControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputGraphTitle.ControlValueChanged, ucrInputGraphSubTitle.ControlValueChanged, ucrInputGraphCaption.ControlValueChanged
+
+    End Sub
+
+    'Warning/Task to be discussed: need to disable ok on dlg's when layers are not complete on subdialogues + warning message... 
     'Warning: actually this will be very hard to implement until the global aes, set from the main layer are properly communicated to plots. Global aes might fill in missing mandatory aes...
 End Class
