@@ -147,6 +147,11 @@ Public Class dlgWaterBalance
         ucrNudWBLessThan.Value = 40
         ucrInputEvaporation.SetName("5")
 
+
+        DayFromAndToMethod()
+        YearGroupDaily()
+        WaterBalance()
+
         clsWaterBalManipulationsFunc.SetRCommand("list")
         clsWaterBalManipulationsFunc.AddParameter("group_by", clsRFunctionParameter:=clsWaterBalGroupByFunc, bIncludeArgumentName:=False)
 
@@ -189,7 +194,7 @@ Public Class dlgWaterBalance
         clsWaterEndRainsBase.AddParameter("display", "FALSE")
         clsWaterEndRainsBase.AddParameter("calc", clsRFunctionParameter:=clsWaterEndRainsBase)
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsWaterBalBase)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsWaterEndRainsBase)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -238,6 +243,11 @@ Public Class dlgWaterBalance
     End Sub
 
     Private Sub WaterBalance()
+        clsReplaceNA0 = New RFunction
+        clsWaterBalance0 = New RFunction
+        clsWaterFilter0 = New RFunction
+        clsFirstWaterBalance0 = New RFunction
+
         clsReplaceNA0.AddParameter("type", Chr(34) & "calculation" & Chr(34))
         clsReplaceNA0.AddParameter("function_exp", Chr(34) & "replace(" & ucrReceiverRainfall.GetVariableNames(False) & ", is.na(" & ucrReceiverRainfall.GetVariableNames(False) & "), 0)" & Chr(34))
         clsReplaceNA0.AddParameter("result_name", Chr(34) & "Replace_NA_0" & Chr(34))
@@ -375,6 +385,10 @@ Public Class dlgWaterBalance
         WaterBalance()
         clsRWater_bal.SetAssignTo("water_bal_calculation")
         clsReplaceNA.SetAssignTo("replace_NA")
+        clsReplaceNA0.SetAssignTo("Replace_NA_0")
+        clsWaterBalance0.SetAssignTo("Water_Balance_0")
+        clsWaterFilter0.SetAssignTo("Water_Filter_0")
+        clsFirstWaterBalance0.SetAssignTo("First_Water_Balance_0")
         SetGroupByFuncCalcFrom()
         'If rdoRain.Checked Then
         '    'clsRollFunction.AddParameter("calc", clsRFunctionParameter:=clsRWater_bal)
