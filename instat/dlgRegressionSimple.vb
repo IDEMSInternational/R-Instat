@@ -111,8 +111,8 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub SetTTest()
-        clsRTTest.SetRCommand("t.test")
         clsRTTest.SetPackageName("mosaic")
+        clsRTTest.SetRCommand("t.test")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRTTest)
         clsRTTest.AddParameter("conf.level", nudCI.Value.ToString())
         clsRTTest.AddParameter("data", clsRFunctionParameter:=ucrSelectorSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame)
@@ -134,8 +134,8 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub SetFTest()
-        clsRFTest.SetRCommand("var.test")
         clsRFTest.SetPackageName("stats")
+        clsRFTest.SetRCommand("var.test")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRFTest)
         clsRFTest.AddParameter("conf.level", nudCI.Value.ToString())
         clsRFTest.AddParameter("data", clsRFunctionParameter:=ucrSelectorSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame)
@@ -147,6 +147,7 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub SetWilcoxTest()
+        clsRWilcoxTest.SetPackageName("stats")
         clsRWilcoxTest.SetRCommand("wilcox.test")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRWilcoxTest)
         clsRWilcoxTest.AddParameter("conf.level", nudCI.Value.ToString())
@@ -158,6 +159,7 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub SetKruskalTest()
+        clsRKruskalTest.SetPackageName("stats")
         clsRKruskalTest.SetRCommand("kruskal.test")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRKruskalTest)
         clsModel.SetOperation("~")
@@ -184,7 +186,7 @@ Public Class dlgRegressionSimple
 
     Private Sub SetBinomTest()
         Dim clsyFunc, clsnFunc As New RFunction
-
+        clsRBinomial.SetRCommand("mosaic")
         clsRBinomial.SetRCommand("prop.test")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRBinomial)
         clsRBinomial.AddParameter("conf.level", nudCI.Value.ToString())
@@ -258,6 +260,7 @@ Public Class dlgRegressionSimple
         Dim clsxFunc As New RFunction
         Dim clsTFunc As New RFunction
 
+        clsRPoisson.SetPackageName("stats")
         clsRPoisson.SetRCommand("poisson.test")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRPoisson)
         clsRPoisson.AddParameter("conf.level", nudCI.Value.ToString())
