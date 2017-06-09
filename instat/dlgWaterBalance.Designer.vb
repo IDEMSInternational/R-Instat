@@ -149,10 +149,10 @@ Partial Class dlgWaterBalance
         Me.lblWBLessthan.AutoSize = True
         Me.lblWBLessthan.Location = New System.Drawing.Point(270, 16)
         Me.lblWBLessthan.Name = "lblWBLessthan"
-        Me.lblWBLessthan.Size = New System.Drawing.Size(93, 13)
+        Me.lblWBLessthan.Size = New System.Drawing.Size(78, 13)
         Me.lblWBLessthan.TabIndex = 7
-        Me.lblWBLessthan.Tag = "Water Balance <="
-        Me.lblWBLessthan.Text = "Water Balance <="
+        Me.lblWBLessthan.Tag = "Water Balance"
+        Me.lblWBLessthan.Text = "Water Balance"
         '
         'lblCapacity
         '

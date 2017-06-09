@@ -146,6 +146,8 @@ Public Class dlgWaterBalance
         ucrNudCapacity.Value = 60
         ucrNudWBLessThan.Value = 40
         ucrInputEvaporation.SetName("5")
+        ucrNudTotalOverDays.Value = 1
+        ucrNudAmount.Value = 0
 
         clsDayFromAndTo = New RFunction
         clsYearGroup = New RFunction
