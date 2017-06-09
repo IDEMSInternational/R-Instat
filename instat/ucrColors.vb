@@ -36,7 +36,9 @@ Public Class ucrColors
             dctColours.Add("Brown", Chr(34) & "brown" & Chr(34))
             dctColours.Add("Pink", Chr(34) & "pink" & Chr(34))
         End If
-        SetItems(dctColours)
+        If GetParameter() IsNot Nothing Then
+            SetItems(dctColours)
+        End If
         bAllowNonConditionValues = True
     End Sub
 
