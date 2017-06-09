@@ -50,6 +50,7 @@ Public Class ucrDistributions
     Private Sub ucrDistributions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             SetDistributions()
+            ucrInputDistributions.SetDropDownStyleAsNonEditable()
             bFirstLoad = False
         End If
     End Sub
@@ -139,7 +140,7 @@ Public Class ucrDistributions
     Public Sub SetDistributions()
         Dim bUse As Boolean
         lstCurrentDistributions.Clear()
-        ucrInputDistributions.cboInput.Items.Clear()
+        ucrInputDistributions.SetItems()
 
         For Each Dist In lstAllDistributions
             bUse = False
@@ -178,7 +179,7 @@ Public Class ucrDistributions
             End Select
             If Dist.bIncluded And bUse Then
                 lstCurrentDistributions.Add(Dist)
-                ucrInputDistributions.cboInput.Items.Add(translate(Dist.strNameTag))
+                ucrInputDistributions.AddItems({translate(Dist.strNameTag)})
             End If
         Next
         If ucrInputDistributions.cboInput.Items.Count > 0 Then
@@ -259,10 +260,11 @@ Public Class ucrDistributions
         ' Extreme Value Distribution
         clsExtremeValueDist.strNameTag = "Extreme_Value"
         clsExtremeValueDist.strRName = "evd"
-        clsExtremeValueDist.strRFunctionName = "extRemes::revd"
-        clsExtremeValueDist.strPFunctionName = "extRemes::pevd"
-        clsExtremeValueDist.strQFunctionName = "extRemes::qqevd"
-        clsExtremeValueDist.strDFunctionName = "extRemes::devd"
+        clsExtremeValueDist.strPackagName = "extRemes"
+        clsExtremeValueDist.strRFunctionName = "revd"
+        clsExtremeValueDist.strPFunctionName = "pevd"
+        clsExtremeValueDist.strQFunctionName = "qqevd"
+        clsExtremeValueDist.strDFunctionName = "devd"
         clsExtremeValueDist.bIsContinuous = True
         clsExtremeValueDist.AddParameter("shape", "Shape", 0)
         clsExtremeValueDist.AddParameter("scale", "Scale", 1)
@@ -458,10 +460,11 @@ Public Class ucrDistributions
         'Gamma With Shape and Scale distribution
         clsGammaWithShapeandScale.strNameTag = "Gamma_With_Shape_and_Scale"
         clsGammaWithShapeandScale.strRName = "gamma"
-        clsGammaWithShapeandScale.strRFunctionName = "stats::rgamma"
-        clsGammaWithShapeandScale.strPFunctionName = "stats::pgamma"
-        clsGammaWithShapeandScale.strQFunctionName = "stats::qgamma"
-        clsGammaWithShapeandScale.strDFunctionName = "stats::dgamma"
+        clsGammaWithShapeandScale.strPackagName = "stats"
+        clsGammaWithShapeandScale.strRFunctionName = "rgamma"
+        clsGammaWithShapeandScale.strPFunctionName = "pgamma"
+        clsGammaWithShapeandScale.strQFunctionName = "qgamma"
+        clsGammaWithShapeandScale.strDFunctionName = "dgamma"
         clsGammaWithShapeandScale.bIsContinuous = True
         clsGammaWithShapeandScale.AddParameter("shape", "Shape", "1")
         clsGammaWithShapeandScale.AddParameter("scale", "Scale")
@@ -470,10 +473,11 @@ Public Class ucrDistributions
         'Gamma With Shape and Mean distribution
         clsGammaWithShapeandMean.strNameTag = "Gamma_With_Shape_and_Mean"
         clsGammaWithShapeandMean.strRName = "gamma"
-        clsGammaWithShapeandMean.strRFunctionName = "stats::rgamma"
-        clsGammaWithShapeandMean.strPFunctionName = "stats::pgamma"
-        clsGammaWithShapeandMean.strQFunctionName = "stats::qgamma"
-        clsGammaWithShapeandMean.strDFunctionName = "stats::dgamma"
+        clsGammaWithShapeandMean.strPackagName = "stats"
+        clsGammaWithShapeandMean.strRFunctionName = "rgamma"
+        clsGammaWithShapeandMean.strPFunctionName = "pgamma"
+        clsGammaWithShapeandMean.strQFunctionName = "qgamma"
+        clsGammaWithShapeandMean.strDFunctionName = "dgamma"
         clsGammaWithShapeandMean.bIsContinuous = True
         clsGammaWithShapeandMean.AddParameter("shape", "Shape", 1)
         clsGammaWithShapeandMean.AddParameter("mean", "Mean")
@@ -482,10 +486,11 @@ Public Class ucrDistributions
         'Gamma With Shape and Rate distribution
         clsGammaWithShapeandRate.strNameTag = "Gamma_With_Shape_and_Rate"
         clsGammaWithShapeandRate.strRName = "gamma"
-        clsGammaWithShapeandRate.strRFunctionName = "stats::rgamma"
-        clsGammaWithShapeandRate.strPFunctionName = "stats::pgamma"
-        clsGammaWithShapeandRate.strQFunctionName = "stats::qgamma"
-        clsGammaWithShapeandRate.strDFunctionName = "stats::dgamma"
+        clsGammaWithShapeandRate.strPackagName = "stats"
+        clsGammaWithShapeandRate.strRFunctionName = "rgamma"
+        clsGammaWithShapeandRate.strPFunctionName = "pgamma"
+        clsGammaWithShapeandRate.strQFunctionName = "qgamma"
+        clsGammaWithShapeandRate.strDFunctionName = "dgamma"
         clsGammaWithShapeandRate.bIsContinuous = True
         clsGammaWithShapeandRate.AddParameter("shape", "Shape", 1)
         clsGammaWithShapeandRate.AddParameter("rate", "Rate")
@@ -494,7 +499,8 @@ Public Class ucrDistributions
         'Gamma With Shape and Scale distribution
         clsGamma.strNameTag = "Gamma"
         clsGamma.strRName = "gamma"
-        clsGamma.strGLMFunctionName = "stats::Gamma"
+        clsGamma.strPackagName = "stats"
+        clsGamma.strGLMFunctionName = "Gamma"
         clsGamma.bNumeric = True
         clsGamma.bIsContinuous = True
         lstAllDistributions.Add(clsGamma)
@@ -503,10 +509,11 @@ Public Class ucrDistributions
         'TODO Paramaters 
         clsGammaWithZerosDist.strNameTag = "Gamma_With_Zeros"
         clsGammaWithZerosDist.strRName = "gamma"
-        clsGammaWithZerosDist.strRFunctionName = "stats::rgamma"
-        clsGammaWithZerosDist.strPFunctionName = "stats::pgamma"
-        clsGammaWithZerosDist.strQFunctionName = "stats::qgamma"
-        clsGammaWithZerosDist.strDFunctionName = "stats::dgamma"
+        clsGammaWithZerosDist.strPackagName = "stats"
+        clsGammaWithZerosDist.strRFunctionName = "rgamma"
+        clsGammaWithZerosDist.strPFunctionName = "pgamma"
+        clsGammaWithZerosDist.strQFunctionName = "qgamma"
+        clsGammaWithZerosDist.strDFunctionName = "dgamma"
         clsGammaWithZerosDist.bIsContinuous = True
         clsGammaWithZerosDist.AddParameter("shape", "Shape", 1)
         clsGammaWithZerosDist.AddParameter("rate", "Rate")
@@ -552,10 +559,13 @@ Public Class ucrDistributions
         clsNoDist.lstExact = {"", "Difference in Means:", 0, 1, 2, Integer.MinValue, Integer.MaxValue}
         lstAllDistributions.Add(clsNoDist)
     End Sub
+
     Public Event DistributionsIndexChanged()
+
     Private Sub ucrInputDistributions_SelectedIndexChanged() Handles ucrInputDistributions.SelectionIndexChanged
         If ucrInputDistributions.cboInput.SelectedIndex <> -1 Then
             clsCurrDistribution = lstCurrentDistributions(ucrInputDistributions.cboInput.SelectedIndex)
+            clsCurrRFunction.SetPackageName(clsCurrDistribution.strPackagName)
             Select Case strDistributionType
                 Case "RFunctions"
                     clsCurrRFunction.SetRCommand(clsCurrDistribution.strRFunctionName)

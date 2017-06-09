@@ -17,6 +17,8 @@ Imports System.ComponentModel
 
 Public Class ucrInputComboBox
     Dim strItemsType As String = ""
+    'temporary event which is only raised when index is changed
+    'NameChanged raised any time value is set (even if it's the same)
     Public Event SelectionIndexChanged()
 
     Private Sub cboInput_Validating(sender As Object, e As CancelEventArgs) Handles cboInput.Validating

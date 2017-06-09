@@ -30,6 +30,7 @@ Public Class sdgOneVarFitModDisplay
     Public Sub InitialiseDialog()
         UcrSaveLikelihood.SetDataFrameSelector(dlgOneVarFitModel.ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
         ucrSavePlots.SetDataFrameSelector(dlgOneVarFitModel.ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
+        clsRLogLikFunction.SetPackageName("fitdistrplus")
         clsRLogLikFunction.SetRCommand("llplot")
     End Sub
 
