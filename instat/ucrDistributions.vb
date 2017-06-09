@@ -26,6 +26,9 @@ Public Class ucrDistributions
     Public clsCurrRFunction As RFunction
     Public strDataType As String
     Public bFirstLoad As Boolean
+    Private bParameterIsDistFunction As Boolean = False
+    Private bFunctionIsDistFunction As Boolean = False
+    Private bParameterIsDistName As Boolean = False
 
     Public Sub New()
 
@@ -136,7 +139,8 @@ Public Class ucrDistributions
     Public Sub SetDistributions()
         Dim bUse As Boolean
         lstCurrentDistributions.Clear()
-        cboDistributions.Items.Clear()
+        ucrInputDistributions.cboInput.Items.Clear()
+
         For Each Dist In lstAllDistributions
             bUse = False
             Select Case strDistributionType
@@ -174,11 +178,11 @@ Public Class ucrDistributions
             End Select
             If Dist.bIncluded And bUse Then
                 lstCurrentDistributions.Add(Dist)
-                cboDistributions.Items.Add(translate(Dist.strNameTag))
+                ucrInputDistributions.cboInput.Items.Add(translate(Dist.strNameTag))
             End If
         Next
-        If cboDistributions.Items.Count > 0 Then
-            cboDistributions.SelectedIndex = 0
+        If ucrInputDistributions.cboInput.Items.Count > 0 Then
+            ucrInputDistributions.cboInput.SelectedIndex = 0
         End If
     End Sub
 
@@ -255,10 +259,10 @@ Public Class ucrDistributions
         ' Extreme Value Distribution
         clsExtremeValueDist.strNameTag = "Extreme_Value"
         clsExtremeValueDist.strRName = "evd"
-        clsExtremeValueDist.strRFunctionName = "revd"
-        clsExtremeValueDist.strPFunctionName = "pevd"
-        clsExtremeValueDist.strQFunctionName = "qqevd"
-        clsExtremeValueDist.strDFunctionName = "devd"
+        clsExtremeValueDist.strRFunctionName = "extRemes::revd"
+        clsExtremeValueDist.strPFunctionName = "extRemes::pevd"
+        clsExtremeValueDist.strQFunctionName = "extRemes::qqevd"
+        clsExtremeValueDist.strDFunctionName = "extRemes::devd"
         clsExtremeValueDist.bIsContinuous = True
         clsExtremeValueDist.AddParameter("shape", "Shape", 0)
         clsExtremeValueDist.AddParameter("scale", "Scale", 1)
@@ -454,43 +458,43 @@ Public Class ucrDistributions
         'Gamma With Shape and Scale distribution
         clsGammaWithShapeandScale.strNameTag = "Gamma_With_Shape_and_Scale"
         clsGammaWithShapeandScale.strRName = "gamma"
-        clsGammaWithShapeandScale.strRFunctionName = "rgamma"
-        clsGammaWithShapeandScale.strPFunctionName = "pgamma"
-        clsGammaWithShapeandScale.strQFunctionName = "qgamma"
-        clsGammaWithShapeandScale.strDFunctionName = "dgamma"
+        clsGammaWithShapeandScale.strRFunctionName = "stats::rgamma"
+        clsGammaWithShapeandScale.strPFunctionName = "stats::pgamma"
+        clsGammaWithShapeandScale.strQFunctionName = "stats::qgamma"
+        clsGammaWithShapeandScale.strDFunctionName = "stats::dgamma"
         clsGammaWithShapeandScale.bIsContinuous = True
-        clsGammaWithShapeandScale.AddParameter("shape", "Shape")
+        clsGammaWithShapeandScale.AddParameter("shape", "Shape", "1")
         clsGammaWithShapeandScale.AddParameter("scale", "Scale")
         lstAllDistributions.Add(clsGammaWithShapeandScale)
 
         'Gamma With Shape and Mean distribution
         clsGammaWithShapeandMean.strNameTag = "Gamma_With_Shape_and_Mean"
         clsGammaWithShapeandMean.strRName = "gamma"
-        clsGammaWithShapeandMean.strRFunctionName = "rgamma"
-        clsGammaWithShapeandMean.strPFunctionName = "pgamma"
-        clsGammaWithShapeandMean.strQFunctionName = "qgamma"
-        clsGammaWithShapeandMean.strDFunctionName = "dgamma"
+        clsGammaWithShapeandMean.strRFunctionName = "stats::rgamma"
+        clsGammaWithShapeandMean.strPFunctionName = "stats::pgamma"
+        clsGammaWithShapeandMean.strQFunctionName = "stats::qgamma"
+        clsGammaWithShapeandMean.strDFunctionName = "stats::dgamma"
         clsGammaWithShapeandMean.bIsContinuous = True
-        clsGammaWithShapeandMean.AddParameter("shape", "Shape")
+        clsGammaWithShapeandMean.AddParameter("shape", "Shape", 1)
         clsGammaWithShapeandMean.AddParameter("mean", "Mean")
         lstAllDistributions.Add(clsGammaWithShapeandMean)
 
         'Gamma With Shape and Rate distribution
         clsGammaWithShapeandRate.strNameTag = "Gamma_With_Shape_and_Rate"
         clsGammaWithShapeandRate.strRName = "gamma"
-        clsGammaWithShapeandRate.strRFunctionName = "rgamma"
-        clsGammaWithShapeandRate.strPFunctionName = "pgamma"
-        clsGammaWithShapeandRate.strQFunctionName = "qgamma"
-        clsGammaWithShapeandRate.strDFunctionName = "dgamma"
+        clsGammaWithShapeandRate.strRFunctionName = "stats::rgamma"
+        clsGammaWithShapeandRate.strPFunctionName = "stats::pgamma"
+        clsGammaWithShapeandRate.strQFunctionName = "stats::qgamma"
+        clsGammaWithShapeandRate.strDFunctionName = "stats::dgamma"
         clsGammaWithShapeandRate.bIsContinuous = True
-        clsGammaWithShapeandRate.AddParameter("shape", "Shape")
+        clsGammaWithShapeandRate.AddParameter("shape", "Shape", 1)
         clsGammaWithShapeandRate.AddParameter("rate", "Rate")
         lstAllDistributions.Add(clsGammaWithShapeandRate)
 
         'Gamma With Shape and Scale distribution
         clsGamma.strNameTag = "Gamma"
         clsGamma.strRName = "gamma"
-        clsGamma.strGLMFunctionName = "Gamma"
+        clsGamma.strGLMFunctionName = "stats::Gamma"
         clsGamma.bNumeric = True
         clsGamma.bIsContinuous = True
         lstAllDistributions.Add(clsGamma)
@@ -499,13 +503,13 @@ Public Class ucrDistributions
         'TODO Paramaters 
         clsGammaWithZerosDist.strNameTag = "Gamma_With_Zeros"
         clsGammaWithZerosDist.strRName = "gamma"
-        clsGammaWithZerosDist.strRFunctionName = "rgamma"
-        clsGammaWithZerosDist.strPFunctionName = "pgamma"
-        clsGammaWithZerosDist.strQFunctionName = "qgamma"
-        clsGammaWithZerosDist.strDFunctionName = "dgamma"
+        clsGammaWithZerosDist.strRFunctionName = "stats::rgamma"
+        clsGammaWithZerosDist.strPFunctionName = "stats::pgamma"
+        clsGammaWithZerosDist.strQFunctionName = "stats::qgamma"
+        clsGammaWithZerosDist.strDFunctionName = "stats::dgamma"
         clsGammaWithZerosDist.bIsContinuous = True
-        clsGammaWithZerosDist.AddParameter("", "", "")
-        clsGammaWithZerosDist.AddParameter("", "", )
+        clsGammaWithZerosDist.AddParameter("shape", "Shape", 1)
+        clsGammaWithZerosDist.AddParameter("rate", "Rate")
         lstAllDistributions.Add(clsGammaWithZerosDist)
 
         'Inverse Gaussian distribution
@@ -548,10 +552,10 @@ Public Class ucrDistributions
         clsNoDist.lstExact = {"", "Difference in Means:", 0, 1, 2, Integer.MinValue, Integer.MaxValue}
         lstAllDistributions.Add(clsNoDist)
     End Sub
-    Public Event cboDistributionsIndexChanged(sender As Object, e As EventArgs)
-    Private Sub cboDistributions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDistributions.SelectedIndexChanged
-        If cboDistributions.SelectedIndex <> -1 Then
-            clsCurrDistribution = lstCurrentDistributions(cboDistributions.SelectedIndex)
+    Public Event DistributionsIndexChanged()
+    Private Sub ucrInputDistributions_SelectedIndexChanged() Handles ucrInputDistributions.SelectionIndexChanged
+        If ucrInputDistributions.cboInput.SelectedIndex <> -1 Then
+            clsCurrDistribution = lstCurrentDistributions(ucrInputDistributions.cboInput.SelectedIndex)
             Select Case strDistributionType
                 Case "RFunctions"
                     clsCurrRFunction.SetRCommand(clsCurrDistribution.strRFunctionName)
@@ -569,7 +573,7 @@ Public Class ucrDistributions
         Else
             clsCurrRFunction = New RFunction
         End If
-        RaiseEvent cboDistributionsIndexChanged(sender, e)
+        RaiseEvent DistributionsIndexChanged()
     End Sub
 
     Public Sub RecieverDatatype(DataFrame As String, Column As String)
@@ -580,5 +584,71 @@ Public Class ucrDistributions
     Public Sub RecieverDatatype(strNewType As String)
         strDataType = strNewType
         SetDistributions()
+    End Sub
+
+    Public Sub SetParameterIsDistName()
+        bParameterIsDistName = True
+        bParameterIsDistFunction = False
+        bFunctionIsDistFunction = False
+        UpdateAllParameters()
+    End Sub
+
+    Public Sub SetParameterIsDistFunction()
+        bParameterIsDistFunction = True
+        bParameterIsDistName = False
+        bFunctionIsDistFunction = False
+        UpdateAllParameters()
+    End Sub
+
+    Public Sub SetFunctionIsDistFunction()
+        bParameterIsDistFunction = False
+        bParameterIsDistName = False
+        bFunctionIsDistFunction = True
+        UpdateAllParameters()
+    End Sub
+
+    Public Overrides Sub UpdateParameter(clsTempParam As RParameter)
+        If clsTempParam Is Nothing Then
+            clsTempParam = New RParameter
+        End If
+        If bParameterIsDistName Then
+            'TODO this currently only works with one value to ignore. Also may need option not to set parameter value to strValuesToIgnore
+            '     although this currently can be done with bAddParameterIfEmpty = True
+            clsTempParam.SetArgumentValue(Chr(34) & clsCurrDistribution.strRName & Chr(34))
+        ElseIf bParameterIsDistFunction Then
+            clsTempParam.SetArgument(clsCurrRFunction)
+        ElseIf bFunctionIsDistFunction Then
+            SetRCode(clsCurrRFunction)
+        End If
+    End Sub
+
+    Protected Overrides Sub SetControlValue()
+        Dim strFunctionName As String = ""
+        Dim lstCurrentVariables As String() = Nothing
+        Dim clsTempParameter As RParameter
+        Dim clsNewCurrentDist As Distribution = Nothing
+
+        clsTempParameter = GetParameter()
+        If bParameterIsDistName AndAlso clsTempParameter IsNot Nothing AndAlso clsTempParameter.bIsString Then
+            clsNewCurrentDist = lstCurrentDistributions.Find(Function(x) x.strRName = clsTempParameter.strArgumentValue.Trim(Chr(34)))
+        Else
+            If (bParameterIsDistFunction AndAlso clsTempParameter IsNot Nothing AndAlso clsTempParameter.bIsFunction) Then
+                strFunctionName = DirectCast(clsTempParameter.clsArgumentCodeStructure, RFunction).strRCommand
+            ElseIf bFunctionIsDistFunction AndAlso GetRCode() IsNot Nothing Then
+                strFunctionName = DirectCast(GetRCode(), RFunction).strRCommand
+            End If
+            If strFunctionName <> "" Then
+                For Each clsTempDist As Distribution In lstCurrentDistributions
+                    If clsTempDist.IsDistributionFunction(strFunctionName) Then
+                        clsNewCurrentDist = clsTempDist
+                    End If
+                Next
+            End If
+        End If
+        If clsNewCurrentDist IsNot Nothing Then
+            ucrInputDistributions.SetName(translate(clsNewCurrentDist.strNameTag))
+        Else
+            MsgBox("Developer error: Cannot set value of " & Name & " because cannot find a distribution matching the function and parameter given")
+        End If
     End Sub
 End Class
