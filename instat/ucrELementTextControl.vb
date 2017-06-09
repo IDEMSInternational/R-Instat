@@ -24,36 +24,59 @@ Public Class ucrELementTextControl
     Public Sub InitialiseControl()
         ucrChkSize.SetText("Size")
         ucrNudsize.SetParameter(New RParameter("size"))
+        ucrChkSize.AddParameterPresentCondition(True, "size")
+        ucrChkSize.AddParameterPresentCondition(False, "size", False)
+        ucrNudsize.SetRDefault("0")
+
         ucrChkAngle.SetText("Angle")
         ucrNudAngle.SetParameter(New RParameter("angle"))
         ucrNudAngle.SetMinMax(0, 360)
+        ucrChkAngle.AddParameterPresentCondition(True, "angle")
+        ucrChkAngle.AddParameterPresentCondition(False, "angle", False)
+        ucrNudAngle.SetRDefault("0")
+
         ucrChkHjust.SetText("Hjust")
         ucrNudHjust.SetParameter(New RParameter("hjust"))
         ucrNudHjust.Increment = 0.1
         ucrNudHjust.SetMinMax(0, 1)
+        ucrChkHjust.AddParameterPresentCondition(True, "hjust")
+        ucrChkHjust.AddParameterPresentCondition(False, "hjust", False)
+        ucrNudHjust.SetRDefault("0.0")
+
         ucrChkVjust.SetText("Vjust")
         ucrNudVjust.SetParameter(New RParameter("vjust"))
         ucrNudVjust.Increment = 0.1
         ucrNudVjust.SetMinMax(0, 1)
+        ucrChkVjust.AddParameterPresentCondition(True, "vjust")
+        ucrChkVjust.AddParameterPresentCondition(False, "vjust", False)
+        ucrNudVjust.SetRDefault("0.0")
+
         ucrChkLineHeight.SetText("Line Height")
         ucrNudLineHeight.SetParameter(New RParameter("lineheight"))
+        ucrChkLineHeight.AddParameterPresentCondition(True, "lineheight")
+        ucrChkLineHeight.AddParameterPresentCondition(False, "lineheight", False)
+        ucrNudLineHeight.SetRDefault("0.0")
 
         ucrChkFace.SetText("Face")
         ucrInputFace.SetParameter(New RParameter("face"))
         ucrInputFace.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctFontFace))
         ucrInputFace.SetRDefault(Chr(34) & "plain" & Chr(34))
+        ucrChkFace.AddParameterPresentCondition(True, "face")
+        ucrChkFace.AddParameterPresentCondition(False, "face", False)
 
         ucrChkColour.SetText("Colour")
         ucrColors.SetParameter(New RParameter("colour"))
         ucrColors.AddQuotesIfUnrecognised = False
-        'ucrColors.bAllowNonConditionValues = True
         ucrColors.SetName(Chr(34) & "NULL" & Chr(34))
+        ucrChkColour.AddParameterPresentCondition(True, "colour")
+        ucrChkColour.AddParameterPresentCondition(False, "colour", False)
 
         ucrChkFamily.SetText("Family")
         ucrInputFamily.SetParameter(New RParameter("family"))
         ucrInputFamily.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctFonts))
         ucrInputFamily.SetRDefault(Chr(34) & "Times" & Chr(34))
-
+        ucrChkFamily.AddParameterPresentCondition(True, "family")
+        ucrChkFamily.AddParameterPresentCondition(False, "family", False)
 
         'Linking
         ucrChkSize.AddToLinkedControls(ucrNudsize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
