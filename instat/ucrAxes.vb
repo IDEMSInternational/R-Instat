@@ -53,29 +53,53 @@ Public Class ucrAxes
         'Tick Markers section
         ucrPnlMajorBreaks.AddRadioButton(rdoMajorBreaksAuto)
         ucrPnlMajorBreaks.AddRadioButton(rdoMajorBreaksNone)
+        ucrPnlMajorBreaks.AddRadioButton(rdoMajorBreaksCustom)
+        ucrPnlMajorBreaks.AddRadioButton(rdoMajorBreaksSeq)
+
         ucrPnlMajorBreaks.AddParameterPresentCondition(rdoMajorBreaksAuto, "breaks", False)
         ucrPnlMajorBreaks.AddParameterPresentCondition(rdoMajorBreaksNone, "breaks", True)
 
-        ucrPnlMajorBreaks.AddToLinkedControls(ucrInputMajorBreaksFrom, {rdoMajorBreaksNone}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlMajorBreaks.AddToLinkedControls(ucrInputMajorBreaksFrom, {rdoMajorBreaksSeq}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputMajorBreaksFrom.SetLinkedDisplayControl(lblMajorBreaksFrom)
 
-        ucrPnlMajorBreaks.AddToLinkedControls(ucrInputMajorBreaksTo, {rdoMajorBreaksNone}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlMajorBreaks.AddToLinkedControls(ucrInputMajorBreaksTo, {rdoMajorBreaksSeq}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputMajorBreaksTo.SetLinkedDisplayControl(lblMajorBreaksTo)
 
-        ucrPnlMajorBreaks.AddToLinkedControls(ucrInputMajorBreaksInStepsOf, {rdoMajorBreaksNone}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlMajorBreaks.AddToLinkedControls(ucrInputMajorBreaksInStepsOf, {rdoMajorBreaksSeq}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputMajorBreaksInStepsOf.SetLinkedDisplayControl(lblMajorBreaksInStepsOf)
 
-        ucrPnlMajorBreaks.AddToLinkedControls(ucrInputMajorBreaksInStepsOf, {rdoMajorBreaksNone}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlMajorBreaks.AddToLinkedControls(ucrInputMajorBreaksInStepsOf, {rdoMajorBreaksSeq}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputMajorBreaksInStepsOf.SetLinkedDisplayControl(lblMajorBreaksInStepsOf)
 
         ucrPnlMajorBreaks.AddParameterPresentCondition(rdoMajorBreaksAuto, "breaks", False)
-        ucrPnlMajorBreaks.AddParameterPresentCondition(rdoMajorBreaksNone, "breaks", True)
+        ucrPnlMajorBreaks.AddParameterPresentCondition(rdoMajorBreaksNone, "breaks", False)
+
         ucrInputMajorBreaksCustom.SetParameter(New RParameter("breaks"))
         ucrInputMajorBreaksCustom.AddQuotesIfUnrecognised = False
         ucrInputMajorBreaksCustom.SetValidationTypeAsNumericList()
 
         ucrChkLabels.AddParameterPresentCondition(True, "label")
         ucrInputMajorBreaksLabels.SetParameter(New RParameter("label"))
+
+        ucrPnlMinorBreaks.AddRadioButton(rdoMinorBreaksAuto)
+        ucrPnlMinorBreaks.AddRadioButton(rdoMinorBreaksCustom)
+        ucrPnlMinorBreaks.AddRadioButton(rdoMinorBreaksSeq)
+        ucrPnlMinorBreaks.AddRadioButton(rdoMinorBreaksNone)
+
+        ucrPnlMinorBreaks.AddToLinkedControls(ucrInputMinorBreaksFrom, {rdoMinorBreaksSeq}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputMinorBreaksFrom.SetLinkedDisplayControl(lblMinorBreaksFrom)
+
+        ucrPnlMinorBreaks.AddToLinkedControls(ucrInputMinorBreaksTo, {rdoMinorBreaksSeq}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputMinorBreaksTo.SetLinkedDisplayControl(lblMinorBreaksTo)
+
+        ucrPnlMinorBreaks.AddToLinkedControls(ucrChkLabels, {rdoMinorBreaksSeq}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkLabels.AddToLinkedControls(ucrInputMajorBreaksLabels, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrPnlMinorBreaks.AddToLinkedControls(ucrInputMinorBreaksInStepsOf, {rdoMinorBreaksSeq}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputMinorBreaksInStepsOf.SetLinkedDisplayControl(lblMinorBreaksInStepsOf)
+
+        ucrPnlMinorBreaks.AddToLinkedControls(ucrInputMinorBreaksCustom, {rdoMinorBreaksCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
 
         'these add parameters to clsSeqFunction
         ucrInputMajorBreaksInStepsOf.SetParameter(New RParameter("by"))
@@ -238,7 +262,5 @@ Public Class ucrAxes
 
         End If
     End Sub
-
-
 End Class
 
