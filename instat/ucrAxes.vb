@@ -30,6 +30,8 @@ Public Class ucrAxes
     Private bInitialiseControls As Boolean = False
     Private bRCodeSet As Boolean = False
 
+    Private clsLimitsfunc As New RFunction
+
     Public Sub InitialiseControl()
         Dim dctTickMarkers As New Dictionary(Of String, String)
 
@@ -106,12 +108,29 @@ Public Class ucrAxes
         'these add parameters to clsSeqFunction
         ucrInputMajorBreaksInStepsOf.SetParameter(New RParameter("by"))
         ucrInputMajorBreaksInStepsOf.AddQuotesIfUnrecognised = False
-
         ucrInputMajorBreaksTo.SetParameter(New RParameter("to"))
         ucrInputMajorBreaksTo.AddQuotesIfUnrecognised = False
-
         ucrInputMajorBreaksFrom.SetParameter(New RParameter("from"))
         ucrInputMajorBreaksFrom.AddQuotesIfUnrecognised = False
+
+        ucrInputLowerLimit.SetParameter(New RParameter("lowerlimit", 0))
+        ucrInputLowerLimit.SetParameterIncludeArgumentName(False)
+        ucrInputLowerLimit.SetValidationTypeAsNumeric()
+        ucrInputLowerLimit.AddQuotesIfUnrecognised = False
+        ucrInputUpperLimit.SetParameter(New RParameter("upperlimit", 1))
+        ucrInputUpperLimit.SetParameterIncludeArgumentName(False)
+        ucrInputUpperLimit.SetValidationTypeAsNumeric()
+        ucrInputUpperLimit.AddQuotesIfUnrecognised = False
+        'ucrInputMinorBreaksInStepsOf.SetParameter(New RParameter("by"))
+        'ucrInputMinorBreaksInStepsOf.AddQuotesIfUnrecognised = False
+        'ucrInputMinorBreaksTo.SetParameter(New RParameter("to"))
+        'ucrInputMinorBreaksTo.AddQuotesIfUnrecognised = False
+        'ucrInputMinorBreaksFrom.SetParameter(New RParameter("from"))
+        'ucrInputMinorBreaksFrom.AddQuotesIfUnrecognised = False
+
+        'ucrInputMinorBreaksCustom.SetParameter(New RParameter("breaks"))
+        'ucrInputMinorBreaksCustom.AddQuotesIfUnrecognised = False
+        'ucrInputMinorBreaksCustom.SetValidationTypeAsNumericList()
 
         ucrInputAxisType.SetItems({"Continuous", "Discrete", "Date"})
 
@@ -122,6 +141,7 @@ Public Class ucrAxes
         ucrPnlScales.AddParameterPresentCondition(rdoScalesAuto, "limits", False)
         ucrPnlScales.AddRadioButton(rdoScalesCustom)
         ucrPnlScales.AddParameterPresentCondition(rdoScalesCustom, "limits", True)
+
         ucrPnlScales.AddToLinkedControls(ucrInputLowerLimit, {rdoScalesCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlScales.AddToLinkedControls(ucrInputUpperLimit, {rdoScalesCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputLowerLimit.SetLinkedDisplayControl(lblLowerLimit)
@@ -148,6 +168,8 @@ Public Class ucrAxes
 
         clsXYlabTitleFunction = clsNewXYlabTitleFunction
         clsXYScaleContinuousFunction = clsNewXYScaleContinuousFunction
+        clsSeqFunction.SetRCommand("seq")
+        clsLimitsfunc.SetRCommand("c")
 
         ucrPnlAxisTitle.SetRCode(clsXYlabTitleFunction, bReset)
         ucrInputTitle.SetRCode(clsXYlabTitleFunction, bReset)
@@ -155,19 +177,22 @@ Public Class ucrAxes
         'scales functions
         'Temp disabled, not yet implemented
         ucrPnlScales.SetRCode(clsXYScaleContinuousFunction, bReset)
+
         ucrPnlMajorBreaks.SetRCode(clsXYScaleContinuousFunction, bReset)
+
         ucrInputLowerLimit.SetRCode(clsXYScaleContinuousFunction, bReset)
         ucrInputUpperLimit.SetRCode(clsXYScaleContinuousFunction, bReset)
+
         ucrPnlMajorBreaks.SetRCode(clsXYScaleContinuousFunction, bReset)
         ucrInputMajorBreaksCustom.SetRCode(clsXYScaleContinuousFunction, bReset)
         ucrInputMajorBreaksLabels.SetRCode(clsXYScaleContinuousFunction, bReset)
         ucrChkLabels.SetRCode(clsXYScaleContinuousFunction, bReset)
 
-        ucrPnlMinorBreaks.SetRCode(clsXYScaleContinuousFunction, bReset)
-        ucrInputMinorBreaksCustom.SetRCode(clsXYScaleContinuousFunction, bReset)
-        ucrInputMinorBreaksFrom.SetRCode(clsXYScaleContinuousFunction, bReset)
-        ucrInputMinorBreaksTo.SetRCode(clsXYScaleContinuousFunction, bReset)
-        ucrInputMinorBreaksInStepsOf.SetRCode(clsXYScaleContinuousFunction, bReset)
+        'ucrPnlMinorBreaks.SetRCode(clsXYScaleContinuousFunction, bReset)
+        'ucrInputMinorBreaksCustom.SetRCode(clsXYScaleContinuousFunction, bReset)
+        'ucrInputMinorBreaksFrom.SetRCode(clsXYScaleContinuousFunction, bReset)
+        'ucrInputMinorBreaksTo.SetRCode(clsXYScaleContinuousFunction, bReset)
+        'ucrInputMinorBreaksInStepsOf.SetRCode(clsXYScaleContinuousFunction, bReset)
 
         'Temp disabled, not yet implemented
         ucrInputMajorBreaksInStepsOf.SetRCode(clsSeqFunction, bReset)
@@ -176,6 +201,9 @@ Public Class ucrAxes
         clsSeqFunction.AddParameter("to", 0)
         ucrInputMajorBreaksFrom.SetRCode(clsSeqFunction, bReset)
         clsSeqFunction.AddParameter("from", 0)
+
+        ucrInputLowerLimit.SetRCode(clsLimitsfunc, bReset)
+        ucrInputUpperLimit.SetRCode(clsLimitsfunc, bReset)
 
         bRCodeSet = True
         SetLabel()
@@ -218,13 +246,13 @@ Public Class ucrAxes
     End Sub
 
     Private Sub ucrPnlScales_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlScales.ControlValueChanged, ucrInputLowerLimit.ControlValueChanged, ucrInputUpperLimit.ControlValueChanged
-        If ucrChangedControl.Equals(ucrPnlScales) Then
-            If rdoScalesCustom.Checked AndAlso (Not ucrInputLowerLimit.IsEmpty AndAlso Not ucrInputUpperLimit.IsEmpty) Then
-                Dim strLowerLimit As String = ucrInputLowerLimit.GetText
-                Dim strUpperLimit As String = ucrInputUpperLimit.GetText
-                clsXYScaleContinuousFunction.AddParameter("limits", "c(" & strLowerLimit & "," & strUpperLimit & ")")
-            End If
+        ' If ucrChangedControl.Equals(ucrPnlScales) Then
+        If rdoScalesCustom.Checked AndAlso (Not ucrInputLowerLimit.IsEmpty AndAlso Not ucrInputUpperLimit.IsEmpty) Then
+            clsXYScaleContinuousFunction.AddParameter("limits", clsRFunctionParameter:=clsLimitsfunc)
+        Else
+            ' clsXYScaleContinuousFunction.RemoveParameterByName("limits")
         End If
+        ' End If
         AddRemoveXYScales()
     End Sub
 
@@ -264,6 +292,15 @@ Public Class ucrAxes
             'show date panels
 
         End If
+    End Sub
+
+    Private Sub ucrPnlMajorBreaks_Load() Handles ucrPnlMajorBreaks.ControlValueChanged
+        If rdoMajorBreaksSeq.Checked Then
+            clsXYScaleContinuousFunction.AddParameter("breaks", clsRFunctionParameter:=clsSeqFunction)
+        ElseIf rdoMajorBreaksCustom.Checked Then
+            clsXYScaleContinuousFunction.AddParameter("breaks", "c(" & ucrInputMajorBreaksCustom.GetText & ")")
+        End If
+        AddRemoveXYScales()
     End Sub
 End Class
 
