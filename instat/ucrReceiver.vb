@@ -417,4 +417,12 @@ Public Class ucrReceiver
             ucrSelector = ucrNewSelector
         End Set
     End Property
+
+    Protected Overrides Sub ResetControlValue()
+        Clear()
+    End Sub
+
+    Public Overridable Sub SetTextColour(clrNew As Color)
+
+    End Sub
 End Class
