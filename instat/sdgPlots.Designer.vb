@@ -91,7 +91,7 @@ Partial Class sdgPlots
         Me.tbpPlotsOptions.Location = New System.Drawing.Point(1, 3)
         Me.tbpPlotsOptions.Name = "tbpPlotsOptions"
         Me.tbpPlotsOptions.SelectedIndex = 0
-        Me.tbpPlotsOptions.Size = New System.Drawing.Size(480, 308)
+        Me.tbpPlotsOptions.Size = New System.Drawing.Size(507, 356)
         Me.tbpPlotsOptions.TabIndex = 0
         '
         'tbpFacet
@@ -435,7 +435,7 @@ Partial Class sdgPlots
         Me.tbpXAxis.Location = New System.Drawing.Point(4, 22)
         Me.tbpXAxis.Name = "tbpXAxis"
         Me.tbpXAxis.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpXAxis.Size = New System.Drawing.Size(472, 282)
+        Me.tbpXAxis.Size = New System.Drawing.Size(499, 330)
         Me.tbpXAxis.TabIndex = 5
         Me.tbpXAxis.Text = "X-Axis"
         Me.tbpXAxis.UseVisualStyleBackColor = True
@@ -444,7 +444,7 @@ Partial Class sdgPlots
         '
         Me.ucrXAxis.Location = New System.Drawing.Point(0, 1)
         Me.ucrXAxis.Name = "ucrXAxis"
-        Me.ucrXAxis.Size = New System.Drawing.Size(470, 300)
+        Me.ucrXAxis.Size = New System.Drawing.Size(512, 322)
         Me.ucrXAxis.TabIndex = 0
         '
         'tbpYAxis
@@ -542,13 +542,13 @@ Partial Class sdgPlots
         Me.lblWarning.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblWarning.Location = New System.Drawing.Point(99, 93)
         Me.lblWarning.Name = "lblWarning"
-        Me.lblWarning.Size = New System.Drawing.Size(213, 20)
+        Me.lblWarning.Size = New System.Drawing.Size(154, 20)
         Me.lblWarning.TabIndex = 0
         Me.lblWarning.Text = "Not yet implemented"
         '
         'ucrBaseSubdialog
         '
-        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(170, 317)
+        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(164, 365)
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(160, 41)
         Me.ucrBaseSubdialog.TabIndex = 1
@@ -557,7 +557,7 @@ Partial Class sdgPlots
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(479, 350)
+        Me.ClientSize = New System.Drawing.Size(517, 399)
         Me.Controls.Add(Me.ucrBaseSubdialog)
         Me.Controls.Add(Me.tbpPlotsOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
