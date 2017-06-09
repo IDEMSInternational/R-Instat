@@ -65,7 +65,7 @@ Public Class dlgStringHandling
         ucrInputReplaceBy.SetLinkedDisplayControl(lblReplaceBy)
         ucrChkRegex.AddToLinkedControls(ucrReceiverForRegexExpression, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         'ucrChkRegex.AddToLinkedControls(ucrChkRegex, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
+        ucrChkRegex.SetLinkedDisplayControl(grpRegex)
 
         'ucrSave
         ucrSaveStringHandling.SetPrefix("count")
@@ -83,7 +83,6 @@ Public Class dlgStringHandling
         ucrChkRegex.SetText("Regex")
         ucrChkRegex.AddParameterValueFunctionNamesCondition(True, "pattern", "regex")
         ucrChkRegex.AddParameterValueFunctionNamesCondition(False, "pattern", "regex", False)
-
     End Sub
 
     Private Sub SetDefaults()
@@ -108,6 +107,7 @@ Public Class dlgStringHandling
         clsRegexFunction.SetPackageName("stringr")
         clsRegexFunction.SetRCommand("regex")
         clsRegexFunction.AddParameter("ignore_case", "TRUE")
+        clsRegexFunction.AddParameter("pattern", Chr(34) & ucrReceiverForRegexExpression.GetText & Chr(34))
 
         clsCountFunction.SetPackageName("stringr")
         clsCountFunction.SetRCommand("str_count")
@@ -125,6 +125,17 @@ Public Class dlgStringHandling
         clsCountFunction.SetAssignTo(ucrSaveStringHandling.GetText, strTempDataframe:=ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveStringHandling.GetText, bAssignToIsPrefix:=True)
         ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
         NewColumnName()
+        changeLocation()
+    End Sub
+
+    Private Sub changeLocation()
+        If ucrChkRegex.Checked Then
+            grpRegex.Visible = True
+            Me.Size = New Size(672, 370)
+        Else
+            grpRegex.Visible = False
+            Me.Size = New Size(427, 370)
+        End If
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -273,6 +284,10 @@ Public Class dlgStringHandling
         ucrReceiverForRegexExpression.AddToReceiverAtCursorPosition("*")
     End Sub
 
+    Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
+        ucrReceiverForRegexExpression.Clear()
+    End Sub
+
     Private Sub NewColumnName()
         If rdoLocate.Checked Then
             ucrSaveStringHandling.SetLabelText("Prefix for New Column:")
@@ -315,7 +330,7 @@ Public Class dlgStringHandling
         ChangePrefixName()
     End Sub
 
-    Private Sub ucrReceiverStringHandling_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStringHandling.ControlContentsChanged, ucrPnlStringHandling.ControlContentsChanged, ucrInputPattern.ControlContentsChanged, ucrInputReplaceBy.ControlContentsChanged
+    Private Sub ucrReceiverStringHandling_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStringHandling.ControlContentsChanged, ucrPnlStringHandling.ControlContentsChanged, ucrInputPattern.ControlContentsChanged, ucrInputReplaceBy.ControlContentsChanged, ucrReceiverForRegexExpression.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -338,6 +353,7 @@ Public Class dlgStringHandling
     End Sub
 
     Private Sub ucrChkRegex_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkRegex.ControlContentsChanged
+        changeLocation()
         If ucrChkRegex.Checked Then
             clsCountFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction)
             clsDetectFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction)
