@@ -40,7 +40,6 @@ Public Class ucrElementLineControl
         ucrChkTickColour.AddParameterPresentCondition(True, "colour")
         ucrChkTickColour.AddParameterPresentCondition(False, "colour", False)
         ucrColors.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
-        ucrColors.AddQuotesIfUnrecognised = False
 
         ucrChkTickLineEnd.SetText("Line End")
         ucrInpuTicktLineEnd.SetParameter(New RParameter("lineend"))
@@ -104,8 +103,7 @@ Public Class ucrElementLineControl
         AddRemoveElementLineAxis()
     End Sub
 
-    Public Sub setlabel(strlabel As String)
+    Public Sub SetLabel(strlabel As String)
         grpTickMarks.Text = strlabel
     End Sub
-
 End Class
