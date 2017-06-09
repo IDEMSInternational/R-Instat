@@ -20,6 +20,7 @@ Public Class ucrElementRectControl
     Private clsThemeFunction As New RFunction
     Private clsElementLine As New RFunction
     Private clsBaseOperator As New ROperator
+
     Public Sub InitialiseControl()
 
         ucrChkLegendSize.SetText("Size")
@@ -39,14 +40,12 @@ Public Class ucrElementRectControl
         ucrChkLegendColour.AddParameterPresentCondition(True, "colour")
         ucrChkLegendColour.AddParameterPresentCondition(False, "colour", False)
         ucrLegendColors.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
-        ucrLegendColors.AddQuotesIfUnrecognised = False
 
         ucrChkLegendFill.SetText("Fill")
         ucrLegendFill.SetParameter(New RParameter("fill"))
         ucrChkLegendFill.AddParameterPresentCondition(True, "fill")
         ucrChkLegendFill.AddParameterPresentCondition(False, "fill", False)
         ucrLegendFill.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
-        ucrLegendFill.AddQuotesIfUnrecognised = False
 
         ucrChkLegendSize.AddToLinkedControls(ucrNudLegendSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.0)
         ucrChkLegendLineType.AddToLinkedControls(ucrInputLegendLineType, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Solid")
@@ -107,8 +106,7 @@ Public Class ucrElementRectControl
         AddRemoveElementLineAxis()
     End Sub
 
-    Public Sub setlabel(strlabel As String)
+    Public Sub SetLabel(strlabel As String)
         grpElementRect.Text = strlabel
     End Sub
-
 End Class

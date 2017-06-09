@@ -60,7 +60,6 @@ Public Class ucrELementTextControl
 
         ucrChkColour.SetText("Colour")
         ucrColors.SetParameter(New RParameter("colour"))
-        ucrColors.AddQuotesIfUnrecognised = False
         ucrChkColour.AddParameterPresentCondition(True, "colour")
         ucrChkColour.AddParameterPresentCondition(False, "colour", False)
 
@@ -145,8 +144,7 @@ Public Class ucrELementTextControl
         AddRemoveElementAxis()
     End Sub
 
-    Public Sub setlabel(strlabel As String)
+    Public Sub SetLabel(strlabel As String)
         grpAxisLabels.Text = strlabel
     End Sub
-
 End Class

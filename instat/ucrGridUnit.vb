@@ -30,10 +30,8 @@ Public Class ucrGridUnit
         ucrInputUnits.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctUnits))
 
         ucrInputData.SetParameter(New RParameter("data"))
-        ucrInputData.AddQuotesIfUnrecognised = False
 
         ucrInputVector.SetParameter(New RParameter("x"))
-        ucrInputVector.AddQuotesIfUnrecognised = False
 
         ucrChkUnits.AddToLinkedControls(ucrInputUnits, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Centimetres")
         ucrInputUnits.SetLinkedDisplayControl(lblUnits)
