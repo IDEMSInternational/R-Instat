@@ -64,7 +64,9 @@ Public Class dlgStringHandling
         ucrPnlStringHandling.AddToLinkedControls(ucrInputReplaceBy, {rdoReplace, rdoReplaceAll}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputReplaceBy.SetLinkedDisplayControl(lblReplaceBy)
         ucrChkRegex.AddToLinkedControls(ucrReceiverForRegexExpression, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrChkRegex.AddToLinkedControls(ucrChkRegex, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkRegex.AddToLinkedControls(ucrChkIgnoreCase, {False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        'ucrChkIgnoreCase.AddToLinkedControls(ucrChkRegex, {False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkRegex.SetLinkedDisplayControl(grpRegex)
         ucrChkRegex.SetLinkedDisplayControl(grpRegex)
 
         'ucrSave
@@ -81,8 +83,8 @@ Public Class dlgStringHandling
 
         'ucrChkRegex
         ucrChkRegex.SetText("Regex")
-        ucrChkRegex.AddParameterValueFunctionNamesCondition(True, "pattern", "regex")
-        ucrChkRegex.AddParameterValueFunctionNamesCondition(False, "pattern", "regex", False)
+        'ucrChkRegex.AddParameterValueFunctionNamesCondition(True, "pattern", "regex")
+        'ucrChkRegex.AddParameterValueFunctionNamesCondition(False, "pattern", "regex", False)
     End Sub
 
     Private Sub SetDefaults()
