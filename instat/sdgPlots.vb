@@ -24,7 +24,7 @@ Public Class sdgPlots
     Public clsRsyntax As New RSyntax
     'This clsRSyntax is linked with the ucrBase.clsRSyntax from the dlg calling sdgPLotOptions...
     Public clsRggplotFunction As New RFunction
-    Public clsAesFunction As New RFunction    'Warning: I m not sure this field is useful... Will all be revised when changing links though...
+    Public clsGlobalAesFunction As New RFunction
     Public clsLabsFunction As New RFunction
     Public clsFacetFunction As New RFunction
     Public clsXLabFunction As New RFunction
@@ -161,10 +161,10 @@ Public Class sdgPlots
         'ucrInputLegend.SetParameter(New RParameter("fill"))
 
         'X Axis tab
-        'ucrXAxis.InitialiseControl()
+        ucrXAxis.InitialiseControl()
 
         'Y Axis tab
-        'ucrYAxis.InitialiseControl()
+        ucrYAxis.InitialiseControl()
 
         'themes tab
         ucrInputThemes.SetParameter(New RParameter("theme"))
@@ -192,7 +192,7 @@ Public Class sdgPlots
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewYScalecontinuousFunction As RFunction = Nothing, Optional clsNewXScalecontinuousFunction As RFunction = Nothing, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsTitleFunction As RFunction = Nothing, Optional clsNewYLabTitleFunction As RFunction = Nothing, Optional clsNewFacetFunction As RFunction = Nothing, Optional clsNewThemeParam As RParameter = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional strNewDataFrame As String = "", Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewYScalecontinuousFunction As RFunction = Nothing, Optional clsNewXScalecontinuousFunction As RFunction = Nothing, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsTitleFunction As RFunction = Nothing, Optional clsNewYLabTitleFunction As RFunction = Nothing, Optional clsNewFacetFunction As RFunction = Nothing, Optional clsNewThemeParam As RParameter = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional strNewDataFrame As String = "", Optional bReset As Boolean = False)
         Dim clsTempParam As RParameter
 
         bRCodeSet = False
@@ -204,6 +204,7 @@ Public Class sdgPlots
             ucrFacetSelector.SetDataframe(strDataFrame, False)
         End If
         clsBaseOperator = clsNewOperator
+        clsGlobalAesFunction = clsNewGlobalAesFunction
         clsXLabFunction = clsNewXLabsTitleFunction
         clsYLabFunction = clsNewYLabTitleFunction
         clsXScalecontinuousFunction = clsNewXScalecontinuousFunction
@@ -254,8 +255,9 @@ Public Class sdgPlots
         ucrChkIncludeFacets.SetRCode(clsBaseOperator, bReset)
 
         'axis controls
-        ucrXAxis.SetRCodeForControl(True, clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrYAxis.SetRCodeForControl(False, clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrXAxis.SetRCodeForControl(bIsXAxis:=True, strNewAxisType:=GetAxisType(True), clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrYAxis.SetRCodeForControl(bIsXAxis:=False, strNewAxisType:=GetAxisType(False), clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+
 
         bRCodeSet = True
         AddRemoveLabs()
@@ -612,12 +614,35 @@ Public Class sdgPlots
         SetFacetParameters()
     End Sub
 
+    Private Function GetAxisType(bIsX As Boolean) As String
+        Dim strAes As String
+
+        If bIsX Then
+            strAes = "x"
+        Else
+            strAes = "y"
+        End If
+        If clsGlobalAesFunction IsNot Nothing Then
+            If clsGlobalAesFunction.ContainsParameter(strAes) Then
+                'Run R code to determine type
+                'Temp default to continuous
+                Return "Continuous"
+            Else
+                'When aes not present discrete scale function works
+                Return "Discrete"
+            End If
+        Else
+            Return "Discrete"
+        End If
+    End Function
+
     Private Sub cmdAllOptions_Click(sender As Object, e As EventArgs) Handles cmdAllOptions.Click
         sdgThemes.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, bReset:=bResetThemes)
         Me.SendToBack()
         sdgThemes.ShowDialog()
         bResetThemes = False
     End Sub
-    'Warning/Task to be discussed: need to disable ok on dlg's when layers are not complete on subdialogues + warning message... 
+
+'Warning/Task to be discussed: need to disable ok on dlg's when layers are not complete on subdialogues + warning message... 
     'Warning: actually this will be very hard to implement until the global aes, set from the main layer are properly communicated to plots. Global aes might fill in missing mandatory aes...
 End Class
