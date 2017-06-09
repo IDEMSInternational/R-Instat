@@ -17,7 +17,7 @@ Imports instat.Translations
 
 Public Class sdgOneVarCompareModels
     Private bControlsInitialised As Boolean = False
-    Private clsRcdfcompFunction, clsRdenscompFunction, clsRqqcompFunction, clsRppcompFunction, clsListFunction, clsRAsDataFrame, clsModel, clsRGofStat, clsRReceiver, clsRsyntax, clsOperation As New RFunction
+    Private clsRcdfcompFunction, clsRdenscompFunction, clsRqqcompFunction, clsRppcompFunction, clsListFunction, clsRAsDataFrame, clsModel, clsRGofStat, clsRReceiver, clsRsyntax, clsRPlotFunction, clsOperation As New RFunction
     Private clsOperatorforTable, clsOperatorForBreaks As New ROperator
     Private WithEvents ucrRecs As ucrReceiver
     Public bfirstload As Boolean = True
@@ -50,7 +50,7 @@ Public Class sdgOneVarCompareModels
         InitialiseTabs()
         'ucrSaveGOF
         ucrSaveGOF.SetPrefix("GOF")
-        ucrSaveGOF.SetSaveTypeAsModel() ' or graph?
+        ' ucrSaveGOF.SetSaveTypeAsModel() ' or graph?
         ucrSaveGOF.SetCheckBoxText("Save Fit")
         ucrSaveGOF.SetIsComboBox()
         ucrSaveGOF.SetAssignToIfUncheckedValue("last_model")
@@ -70,27 +70,24 @@ Public Class sdgOneVarCompareModels
         ucrSavePlots.SetAssignToIfUncheckedValue("last_model")
     End Sub
 
-    Public Sub SetRCode(clsNewRGofStat As RFunction, clsNewReceiver As RFunction, clsNewRcdfcompFunction As RFunction, clsNewclsRdenscompFunction As RFunction, clsNewclsRppcompFunction As RFunction, clsNewclsRqqcompFunction As RFunction, clsNewclsRAsDataFrame As RFunction, Optional clsNewOperatorForBreaks As ROperator = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewRGofStat As RFunction, clsNewReceiver As RFunction, clsNewRPlotFunction As RFunction, clsNewclsRAsDataFrame As RFunction, Optional clsNewOperatorforTable As ROperator = Nothing, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
 
         clsRGofStat = clsNewRGofStat
-        clsRcdfcompFunction = clsNewRcdfcompFunction
         clsRReceiver = clsNewReceiver
-        clsRdenscompFunction = clsNewclsRdenscompFunction
-        clsOperatorForBreaks = clsNewOperatorForBreaks
-        clsRppcompFunction = clsNewclsRppcompFunction
-        clsRqqcompFunction = clsNewclsRqqcompFunction
+        clsOperatorforTable = clsNewOperatorforTable
         clsRAsDataFrame = clsNewclsRAsDataFrame
+        clsRPlotFunction = clsNewRPlotFunction
 
         'Setting Rcode for the sub dialog
         ucrSaveGOF.SetRCode(clsRGofStat, bReset)
-        ucrChkCDF.SetRCode(clsRcdfcompFunction, bReset)
-        ucrChkDensity.SetRCode(clsRdenscompFunction, bReset)
+        ucrChkCDF.SetRCode(clsRPlotFunction, bReset)
+        ucrChkDensity.SetRCode(clsRPlotFunction, bReset)
         ucrChkInputChiSquareBreakpoints.SetRCode(clsOperatorForBreaks, bReset)
-        ucrChkPP.SetRCode(clsRppcompFunction, bReset)
-        ucrChkQQ.SetRCode(clsRqqcompFunction, bReset)
+        ucrChkPP.SetRCode(clsRPlotFunction, bReset)
+        ucrChkQQ.SetRCode(clsRPlotFunction, bReset)
         ucrSaveDisplayChi.SetRCode(clsRAsDataFrame, bReset)
 
         If bReset Then
@@ -98,54 +95,31 @@ Public Class sdgOneVarCompareModels
         End If
     End Sub
 
-    Public Sub Reopen()
-        '  DisplayChiSquare()
-    End Sub
-
-    'Public Sub DisplayChiSquare()
-    '    If chkSaveChi.Checked Then
-    '        ucrDisplayChiData.Visible = True
-    '        clsOperatorforTable.SetOperation("$")
-    '        clsOperatorforTable.AddParameter(iPosition:=0, clsRFunctionParameter:=clsModel)
-    '        clsOperatorforTable.AddParameter(strParameterValue:="chisqtable")
-    '        clsRAsDataFrame.SetRCommand("as.data.frame")
-    '        clsRAsDataFrame.AddParameter("x", clsROperatorParameter:=clsOperatorforTable)
-    '    Else
-    '        ucrDisplayChiData.Visible = False
-    '    End If
-    '    If Not ucrDisplayChiData.IsEmpty Then
-    '        clsRAsDataFrame.SetAssignTo(ucrDisplayChiData.GetText(), strTempDataframe:=ucrDisplayChiData.GetText())
-    '    Else
-    '        clsRAsDataFrame.RemoveAssignTo()
-    '    End If
-    'End Sub
-
-    Private Sub ucrDisplayChiData_NameChanged()
-        ' DisplayChiSquare()
-    End Sub
-
     Public Sub CreateGraphs()
         Dim strTemp As String = ""
 
         If ucrChkCDF.Checked Then
-            clsRcdfcompFunction.SetRCommand("fitdistrplus::cdfcomp")
-            clsRcdfcompFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
-            frmMain.clsRLink.RunScript(clsRcdfcompFunction.ToScript(), 2)
+            clsRPlotFunction.SetRCommand("fitdistrplus::cdfcomp")
+            clsRPlotFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
+            frmMain.clsRLink.RunScript(clsRPlotFunction.ToScript(), 3)
         End If
         If ucrChkPP.Checked Then
-            clsRppcompFunction.SetRCommand("fitdistrplus::denscomp")
-            clsRppcompFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
-            frmMain.clsRLink.RunScript(clsRppcompFunction.ToScript(), 2)
+            'clsRPlotFunction.ClearParameters()
+            clsRPlotFunction.SetRCommand("fitdistrplus::denscomp")
+            clsRPlotFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
+            frmMain.clsRLink.RunScript(clsRPlotFunction.ToScript(), 3)
         End If
         If ucrChkQQ.Checked Then
-            clsRqqcompFunction.SetRCommand("fitdistrplus::qqcomp")
-            clsRqqcompFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
-            frmMain.clsRLink.RunScript(clsRqqcompFunction.ToScript(), 2)
+            'clsRPlotFunction.ClearParameters()
+            clsRPlotFunction.SetRCommand("fitdistrplus::qqcomp")
+            clsRPlotFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
+            frmMain.clsRLink.RunScript(clsRPlotFunction.ToScript(), 3)
         End If
         If ucrChkDensity.Checked Then
-            clsRdenscompFunction.SetRCommand("fitdistrplus::ppcomp")
-            clsRdenscompFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
-            frmMain.clsRLink.RunScript(clsRdenscompFunction.ToScript(), 2)
+            ' clsRPlotFunction.ClearParameters()
+            clsRPlotFunction.SetRCommand("fitdistrplus::ppcomp")
+            clsRPlotFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
+            frmMain.clsRLink.RunScript(clsRPlotFunction.ToScript(), 3)
         End If
 
         If ucrSaveDisplayChi.IsComplete Then
@@ -159,20 +133,12 @@ Public Class sdgOneVarCompareModels
 
     End Sub
 
-    Private Sub chkInputBreakpoints_Checked_Changed(sender As Object, e As EventArgs)
-        DisplayChiBreaks()
-    End Sub
-
     Public Sub DisplayChiBreaks()
         If ucrChkInputChiSquareBreakpoints.Checked Then
             clsOperatorForBreaks.SetOperation("$")
             clsOperatorForBreaks.AddParameter(iPosition:=0, clsRFunctionParameter:=clsModel)
             clsOperatorForBreaks.AddParameter(strParameterValue:="chisqbreaks")
         End If
-    End Sub
-
-    Private Sub chkSaveChi_CheckedChanged(sender As Object, e As EventArgs)
-        ' DisplayChiSquare()
     End Sub
 
     Private Sub InitialiseTabs()
@@ -184,30 +150,3 @@ Public Class sdgOneVarCompareModels
 
 End Class
 
-
-' if in main dialog:
-' How does this change here?
-
-'Private clsCDF As New RFunction
-
-'Public Sub SetRCodeForControls(bReset As Boolean)
-'    ucrreceiverinDLG.SetRCode(clsCDF, bReset)
-'End Sub
-
-'Private Sub SetDefaults()
-'Dim clsCDFDefault As New RFunction
-'ucrChkSetSeed.Checked = False
-'clsCDFDefault.SetRCommand("cdfcomp")
-
-'clsCDF = clsCDFDefault.Clone
-'End Sub
-
-'    Private Sub InitialiseDialog()
-'ucrReceiverinDLG.SetParameter(New RParameter ("ft"))
-'    End Sub
-
-'Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk'
-'If ucrChkCDF.Checked Then 
-'frmMain.clsRLink.RunScript(clsCDF.ToScript, strComment:="")
-'End If
-'End Sub

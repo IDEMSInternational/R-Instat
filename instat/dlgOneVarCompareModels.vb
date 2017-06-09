@@ -20,7 +20,7 @@ Public Class dlgOneVarCompareModels
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
-    Private clsGofStat, clsReceiver, clsRcdfcompFunction, clsRAsDataFrame, clsRdenscompFunction, clsRppcompFunction, clsRqqcompFunction As New RFunction
+    Private clsGofStat, clsReceiver, clsRAsDataFrame, clsRBootFunction As New RFunction
     Private clsOperatorforTable As New ROperator
     Private Sub dlgOneVarCompareModels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -33,7 +33,7 @@ Public Class dlgOneVarCompareModels
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        ReopenDialog()
+        '  ReopenDialog()
         TestOKEnabled()
     End Sub
 
@@ -59,13 +59,13 @@ Public Class dlgOneVarCompareModels
 
     Private Sub SetDefaults()
         clsGofStat = New RFunction
-        clsRcdfcompFunction = New RFunction
+        clsRBootFunction = New RFunction
         clsReceiver = New RFunction
 
         ucrSelectorOneVarCompModels.Reset()
 
         clsGofStat.SetRCommand("fitdistrplus::gofstat")
-        clsRcdfcompFunction.SetRCommand("fitdistrplus::cdfcomp")
+        clsRBootFunction.SetRCommand("fitdistrplus::cdfcomp")
 
         clsOperatorforTable.SetOperation("$")
         clsOperatorforTable.AddParameter(clsRFunctionParameter:=clsGofStat, iPosition:=0)
@@ -104,9 +104,9 @@ Public Class dlgOneVarCompareModels
         TestOKEnabled()
     End Sub
 
-    Private Sub ReopenDialog()
-        sdgOneVarCompareModels.Reopen()
-    End Sub
+    'Private Sub ReopenDialog()
+    '    sdgOneVarCompareModels.Reopen()
+    'End Sub
 
     Private Sub ucrSelectorOneVarCompModels_DataFrameChanged() Handles ucrSelectorOneVarCompModels.DataFrameChanged
         '    sdgOneVarCompareModels.DisplayChiSquare()
@@ -123,7 +123,7 @@ Public Class dlgOneVarCompareModels
     End Sub
 
     Private Sub cmdDisplayObjects_Click(sender As Object, e As EventArgs) Handles cmdDisplayObjects.Click
-        sdgOneVarCompareModels.SetRCode(clsGofStat, clsReceiver, clsRcdfcompFunction, clsRdenscompFunction, clsRppcompFunction, clsRqqcompFunction, clsRAsDataFrame, clsOperatorforTable, bResetSubdialog)
+        sdgOneVarCompareModels.SetRCode(clsGofStat, clsReceiver, clsRBootFunction, clsRAsDataFrame, clsOperatorforTable, bResetSubdialog)
         bResetSubdialog = False
         sdgOneVarCompareModels.ShowDialog()
     End Sub
