@@ -42,6 +42,12 @@ Public Class dlgTransformClimatic
         ucrBase.iHelpTopicID = 358
 
         ' Setting receivers
+        ucrReceiverData.SetParameter(New RParameter("data", 0))
+        ucrReceiverData.SetParameterIsString()
+        ucrReceiverData.bWithQuotes = False
+        ucrReceiverData.SetParameterIncludeArgumentName(False)
+        ucrReceiverData.Selector = ucrSelectorTransform
+
         ucrReceiverStation.Selector = ucrSelectorTransform
         ucrReceiverYear.Selector = ucrSelectorTransform
         ucrReceiverDate.Selector = ucrSelectorTransform
@@ -55,12 +61,6 @@ Public Class dlgTransformClimatic
         ucrReceiverDate.bAutoFill = True
         ucrReceiverDOY.bAutoFill = True
         ucrReceiverYear.bAutoFill = True
-
-        ucrReceiverData.SetParameter(New RParameter("data", 0))
-        ucrReceiverData.SetParameterIsString()
-        ucrReceiverData.bWithQuotes = False
-        ucrReceiverData.SetParameterIncludeArgumentName(False)
-        ucrReceiverData.Selector = ucrSelectorTransform
 
         clsRTransform.SetRCommand("instat_calculation$new")
         clsRTransform.SetAssignTo("transform_calculation")
@@ -223,6 +223,31 @@ Public Class dlgTransformClimatic
         TestOkEnabled()
     End Sub
 
+    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
+        clsRTransform.SetAssignTo("transform_calculation")
+        clsWaterBalance60.SetAssignTo("water_balance_60")
+        clsReplaceNA.SetAssignTo("replace_NA")
+        clsRRainday.SetAssignTo("rain_day")
+        SetGroupByFuncCalcFrom()
+        If rdoMoving.Checked Then
+            clsRTransform.AddParameter("function_exp", Chr(34) & clsRRollFuncExpr.ToScript.ToString & Chr(34))
+        ElseIf rdoCount.Checked Then
+            clsRTransform.AddParameter("function_exp", Chr(34) & clsRRollFuncExpr.ToScript.ToString & Chr(34))
+        ElseIf rdoSpell.Checked Then
+            clsRTransform.AddParameter("function_exp", Chr(34) & "cumsum(rain_day==0)-cummax((rain_day)*cumsum(rain_day==0))" & Chr(34))
+        ElseIf rdoWaterBalance.Checked Then
+            clsRTransform.AddParameter("function_exp", Chr(34) & "Reduce(function(x, y) pmin(pmax(x + y - " & ucrInputEvaporation.GetText() & ", 0), " & ucrNudWBCapacity.Value & "), replace_NA, accumulate=TRUE)" & Chr(34))
+        End If
+        clsRollFunction.AddParameter("calc", clsRFunctionParameter:=clsRTransform)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRollFunction)
+    End Sub
+
+    Private Sub SumOver()
+        If Not ucrReceiverData.IsEmpty Then
+            clsRTransform.AddParameter("function_exp", Chr(34) & clsRRollFuncExpr.ToScript.ToString & Chr(34))
+        End If
+    End Sub
+
     Private Sub ucrPnlTransform_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlTransform.ControlValueChanged, ucrPnlTransform.ControlContentsChanged
         Dim bRain As Boolean = False
         If rdoMoving.Checked Then
@@ -259,29 +284,10 @@ Public Class dlgTransformClimatic
         End If
     End Sub
 
-    Private Sub SumOver()
-        If Not ucrReceiverData.IsEmpty Then
-            clsRTransform.AddParameter("function_exp", Chr(34) & clsRRollFuncExpr.ToScript.ToString & Chr(34))
+    Private Sub MovingColNames()
+        If ucrInputSum.cboInput.SelectedItem <> Nothing Then
+            ucrInputColName.SetName("moving_" & ucrInputSum.cboInput.SelectedItem)
         End If
-    End Sub
-
-    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        clsRTransform.SetAssignTo("transform_calculation")
-        clsWaterBalance60.SetAssignTo("water_balance_60")
-        clsReplaceNA.SetAssignTo("replace_NA")
-        clsRRainday.SetAssignTo("rain_day")
-        SetGroupByFuncCalcFrom()
-        If rdoMoving.Checked Then
-            clsRTransform.AddParameter("function_exp", Chr(34) & clsRRollFuncExpr.ToScript.ToString & Chr(34))
-        ElseIf rdoCount.Checked Then
-            clsRTransform.AddParameter("function_exp", Chr(34) & clsRRollFuncExpr.ToScript.ToString & Chr(34))
-        ElseIf rdoSpell.Checked Then
-            clsRTransform.AddParameter("function_exp", Chr(34) & "cumsum(rain_day==0)-cummax((rain_day)*cumsum(rain_day==0))" & Chr(34))
-        ElseIf rdoWaterBalance.Checked Then
-            clsRTransform.AddParameter("function_exp", Chr(34) & "Reduce(function(x, y) pmin(pmax(x + y - " & ucrInputEvaporation.GetText() & ", 0), " & ucrNudWBCapacity.Value & "), replace_NA, accumulate=TRUE)" & Chr(34))
-        End If
-        clsRollFunction.AddParameter("calc", clsRFunctionParameter:=clsRTransform)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsRollFunction)
     End Sub
 
     Private Sub ucrSelectorTransform_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrSelectorTransform.ControlContentsChanged, ucrReceiverData.ControlContentsChanged
@@ -291,25 +297,6 @@ Public Class dlgTransformClimatic
         clsRRainday.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames() & ")")
         clsRTransform.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverData.GetVariableNames() & ")")
         clsReplaceNA.AddParameter("calculated_from", " list(" & strCurrDataName & "= " & ucrReceiverData.GetVariableNames() & ")")
-    End Sub
-
-    Private Sub ucrInputSum_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrInputSum.ControlContentsChanged
-        SumOver()
-        MovingColNames()
-    End Sub
-
-    Private Sub ucrControls_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrReceiverData.ControlContentsChanged, ucrNudSumOver.ControlContentsChanged
-        SumOver()
-    End Sub
-
-    Private Sub MovingColNames()
-        If ucrInputSum.cboInput.SelectedItem <> Nothing Then
-            ucrInputColName.SetName("moving_" & ucrInputSum.cboInput.SelectedItem)
-        End If
-    End Sub
-
-    Private Sub ucrControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlValueChanged, ucrInputSum.ControlValueChanged, ucrNudSumOver.ControlValueChanged
-        SumOver()
     End Sub
 
     Private Sub ucrCountOver_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrNudCountOver.ControlContentsChanged
@@ -325,10 +312,6 @@ Public Class dlgTransformClimatic
         End If
         clsRRollFuncExpr.AddParameter("FUN", "function(x) length(which(x" & strValuesUnder & ucrInputThreshold.GetText() & "))")
         clsRTransform.AddParameter("function_exp", Chr(34) & clsRRollFuncExpr.ToScript.ToString & Chr(34))
-    End Sub
-
-    Private Sub ucrReceiverDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverData.ControlContentsChanged
-        TestOkEnabled()
     End Sub
 
     Private Sub SetGroupByFuncCalcFrom()
@@ -350,9 +333,6 @@ Public Class dlgTransformClimatic
             clsTransformGroupByFunc.RemoveParameterByName("calculated_from")
         End If
     End Sub
-    Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
-        SetGroupByFuncCalcFrom()
-    End Sub
 
     Private Sub ucrWBControls_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrNudWBCapacity.ControlContentsChanged, ucrInputEvaporation.ControlContentsChanged
         clsRTransform.AddParameter("function_exp", Chr(34) & "Reduce(function(x, y) pmin(pmax(x + y - " & ucrInputEvaporation.GetText() & ", 0), " & ucrNudWBCapacity.Value & "), replace_NA, accumulate=TRUE)" & Chr(34))
@@ -363,5 +343,22 @@ Public Class dlgTransformClimatic
         clsSubCalcList.AddParameter("sub1", clsRFunctionParameter:=clsRRainday)
         clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubCalcList)
         clsRTransform.AddParameter("function_exp", Chr(34) & "cumsum(rain_day==0)-cummax((rain_day)*cumsum(rain_day==0))" & Chr(34))
+    End Sub
+
+    Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
+        SetGroupByFuncCalcFrom()
+    End Sub
+
+    Private Sub ucrControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlValueChanged, ucrInputSum.ControlValueChanged, ucrNudSumOver.ControlValueChanged
+        SumOver()
+    End Sub
+
+    Private Sub ucrInputSum_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrInputSum.ControlContentsChanged
+        SumOver()
+        MovingColNames()
+    End Sub
+
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverData.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class
