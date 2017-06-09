@@ -65,11 +65,17 @@ Public Class ucrAxes
         ucrPnlMajorBreaks.AddToLinkedControls(ucrInputMajorBreaksInStepsOf, {rdoMajorBreaksNone}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputMajorBreaksInStepsOf.SetLinkedDisplayControl(lblMajorBreaksInStepsOf)
 
+        ucrPnlMajorBreaks.AddToLinkedControls(ucrInputMajorBreaksInStepsOf, {rdoMajorBreaksNone}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputMajorBreaksInStepsOf.SetLinkedDisplayControl(lblMajorBreaksInStepsOf)
+
         ucrPnlMajorBreaks.AddParameterPresentCondition(rdoMajorBreaksAuto, "breaks", False)
         ucrPnlMajorBreaks.AddParameterPresentCondition(rdoMajorBreaksNone, "breaks", True)
         ucrInputMajorBreaksCustom.SetParameter(New RParameter("breaks"))
         ucrInputMajorBreaksCustom.AddQuotesIfUnrecognised = False
         ucrInputMajorBreaksCustom.SetValidationTypeAsNumericList()
+
+        ucrChkLabels.AddParameterPresentCondition(True, "label")
+        ucrInputMajorBreaksLabels.SetParameter(New RParameter("label"))
 
         'these add parameters to clsSeqFunction
         ucrInputMajorBreaksInStepsOf.SetParameter(New RParameter("by"))
@@ -128,6 +134,8 @@ Public Class ucrAxes
         ucrInputUpperLimit.SetRCode(clsXYScaleContinuousFunction, bReset)
         ucrPnlMajorBreaks.SetRCode(clsXYScaleContinuousFunction, bReset)
         ucrInputMajorBreaksCustom.SetRCode(clsXYScaleContinuousFunction, bReset)
+        ucrInputMajorBreaksLabels.SetRCode(clsXYScaleContinuousFunction, bReset)
+        ucrChkLabels.SetRCode(clsXYScaleContinuousFunction, bReset)
 
         'Temp disabled, not yet implemented
         ucrInputMajorBreaksInStepsOf.SetRCode(clsSeqFunction, bReset)
@@ -222,12 +230,15 @@ Public Class ucrAxes
         'hide all axis type lanels
         If strAxisType = "Continuous" Then
             'show continous panels
+
         ElseIf strAxisType = "Discrete" Then
             'show discrete panels
         ElseIf strAxisType = "Date" Then
             'show date panels
+
         End If
     End Sub
+
 
 End Class
 
