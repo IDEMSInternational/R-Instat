@@ -71,6 +71,10 @@ Public Class ucrAxes
         ucrPnlMajorBreaks.AddToLinkedControls(ucrInputMajorBreaksInStepsOf, {rdoMajorBreaksSeq}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputMajorBreaksInStepsOf.SetLinkedDisplayControl(lblMajorBreaksInStepsOf)
 
+        ucrPnlMajorBreaks.AddToLinkedControls(ucrInputMajorBreaksCustom, {rdoMajorBreaksCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlMajorBreaks.AddToLinkedControls(ucrChkLabels, {rdoMajorBreaksSeq}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkLabels.AddToLinkedControls(ucrInputMajorBreaksLabels, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
         ucrPnlMajorBreaks.AddParameterPresentCondition(rdoMajorBreaksAuto, "breaks", False)
         ucrPnlMajorBreaks.AddParameterPresentCondition(rdoMajorBreaksNone, "breaks", False)
 
@@ -86,20 +90,18 @@ Public Class ucrAxes
         ucrPnlMinorBreaks.AddRadioButton(rdoMinorBreaksSeq)
         ucrPnlMinorBreaks.AddRadioButton(rdoMinorBreaksNone)
 
+        ucrPnlMinorBreaks.AddParameterPresentCondition(rdoMinorBreaksAuto, "minor_breaks", False)
+        ucrPnlMinorBreaks.AddParameterPresentCondition(rdoMinorBreaksNone, "minor_breaks", False)
+
         ucrPnlMinorBreaks.AddToLinkedControls(ucrInputMinorBreaksFrom, {rdoMinorBreaksSeq}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputMinorBreaksFrom.SetLinkedDisplayControl(lblMinorBreaksFrom)
 
         ucrPnlMinorBreaks.AddToLinkedControls(ucrInputMinorBreaksTo, {rdoMinorBreaksSeq}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputMinorBreaksTo.SetLinkedDisplayControl(lblMinorBreaksTo)
 
-        ucrPnlMinorBreaks.AddToLinkedControls(ucrChkLabels, {rdoMinorBreaksSeq}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkLabels.AddToLinkedControls(ucrInputMajorBreaksLabels, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
         ucrPnlMinorBreaks.AddToLinkedControls(ucrInputMinorBreaksInStepsOf, {rdoMinorBreaksSeq}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputMinorBreaksInStepsOf.SetLinkedDisplayControl(lblMinorBreaksInStepsOf)
-
         ucrPnlMinorBreaks.AddToLinkedControls(ucrInputMinorBreaksCustom, {rdoMinorBreaksCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
 
         'these add parameters to clsSeqFunction
         ucrInputMajorBreaksInStepsOf.SetParameter(New RParameter("by"))
@@ -161,13 +163,18 @@ Public Class ucrAxes
         ucrInputMajorBreaksLabels.SetRCode(clsXYScaleContinuousFunction, bReset)
         ucrChkLabels.SetRCode(clsXYScaleContinuousFunction, bReset)
 
+        ucrPnlMinorBreaks.SetRCode(clsXYScaleContinuousFunction, bReset)
+        ucrInputMinorBreaksCustom.SetRCode(clsXYScaleContinuousFunction, bReset)
+        ucrInputMinorBreaksFrom.SetRCode(clsXYScaleContinuousFunction, bReset)
+        ucrInputMinorBreaksTo.SetRCode(clsXYScaleContinuousFunction, bReset)
+        ucrInputMinorBreaksInStepsOf.SetRCode(clsXYScaleContinuousFunction, bReset)
+
         'Temp disabled, not yet implemented
         ucrInputMajorBreaksInStepsOf.SetRCode(clsSeqFunction, bReset)
         clsSeqFunction.AddParameter("by", 0)
         ucrInputMajorBreaksTo.SetRCode(clsSeqFunction, bReset)
         clsSeqFunction.AddParameter("to", 0)
         ucrInputMajorBreaksFrom.SetRCode(clsSeqFunction, bReset)
-
         clsSeqFunction.AddParameter("from", 0)
 
         bRCodeSet = True
@@ -240,10 +247,6 @@ Public Class ucrAxes
     '        lblMajorBreaksInStepsOf.Visible = True
     '    End If
     'End Sub
-
-    Private Sub ucrTickMarkers_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMajorBreaks.ControlValueChanged
-
-    End Sub
 
     Private Sub ucrInputAxisType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputAxisType.ControlValueChanged
         SetAxisTypeControls()
