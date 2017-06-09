@@ -23,7 +23,7 @@ Public Class ucrGridUnit
     Private clsBaseOperator As New ROperator
     Public Sub InitialiseControl()
         'Units
-        ucrChkUnits.SetText("Tick length")
+        ucrChkUnits.SetText("Units")
         ucrInputUnits.SetParameter(New RParameter("units"))
         ucrInputUnits.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctUnits))
         '? default npc  
@@ -40,9 +40,11 @@ Public Class ucrGridUnit
 
 
         ucrChkUnits.AddToLinkedControls(ucrInputUnits, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputUnits.SetLinkedDisplayControl(lblUnits)
         ucrChkUnits.AddToLinkedControls(ucrInputData, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkUnits.AddToLinkedControls(ucrInputVector, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputData.SetLinkedDisplayControl(lblData)
+        ucrChkUnits.AddToLinkedControls(ucrInputVector, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputVector.SetLinkedDisplayControl(lblVector)
 
     End Sub
 
@@ -90,4 +92,5 @@ Public Class ucrGridUnit
     Public Sub setlabel(strlabel As String)
         grpUnits.Text = strlabel
     End Sub
+
 End Class

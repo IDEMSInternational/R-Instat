@@ -24,22 +24,30 @@ Public Class ucrElementRectControl
 
         ucrChkLegendSize.SetText("Size")
         ucrNudLegendSize.SetParameter(New RParameter("size"))
+        ucrChkLegendSize.AddParameterPresentCondition(True, "size")
+        ucrChkLegendSize.AddParameterPresentCondition(False, "size", False)
         ucrNudLegendSize.Increment = 0.1
-
+        ucrNudLegendSize.SetRDefault("0.0")
 
         ucrChkLegendLineType.SetText("Line Type")
         ucrInputLegendLineType.SetParameter(New RParameter("linetype"))
+        ucrChkLegendLineType.AddParameterPresentCondition(True, "linetype")
+        ucrChkLegendLineType.AddParameterPresentCondition(False, "linetype", False)
         ucrInputLegendLineType.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctLineType))
         ucrInputLegendLineType.SetRDefault(Chr(34) & "blank" & Chr(34))
 
         ucrChkLegendColour.SetText("Colour")
         ucrLegendColors.SetParameter(New RParameter("colour"))
+        ucrChkLegendColour.AddParameterPresentCondition(True, "colour")
+        ucrChkLegendColour.AddParameterPresentCondition(False, "colour", False)
         ucrLegendColors.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
         ucrLegendColors.AddQuotesIfUnrecognised = False
         ucrLegendColors.SetRDefault(Chr(34) & "black" & Chr(34))
 
         ucrChkLegendFill.SetText("Fill")
         ucrLegendFill.SetParameter(New RParameter("fill"))
+        ucrChkLegendFill.AddParameterPresentCondition(True, "fill")
+        ucrChkLegendFill.AddParameterPresentCondition(False, "fill", False)
         ucrLegendFill.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
         ucrLegendFill.AddQuotesIfUnrecognised = False
         ucrLegendFill.SetRDefault(Chr(34) & "black" & Chr(34))

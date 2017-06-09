@@ -24,22 +24,31 @@ Public Class ucrElementLineControl
 
         ucrChkTickSize.SetText("Size")
         ucrNudTickSize.SetParameter(New RParameter("size"))
+        ucrChkTickSize.AddParameterPresentCondition(True, "size")
+        ucrChkTickSize.AddParameterPresentCondition(False, "size", False)
+        ucrChkTickSize.SetRDefault("0.0")
         ucrNudTickSize.Increment = 0.1
 
 
         ucrChkTickLineType.SetText("Line Type")
         ucrInputTickLineType.SetParameter(New RParameter("linetype"))
+        ucrChkTickLineType.AddParameterPresentCondition(True, "linetype")
+        ucrChkTickLineType.AddParameterPresentCondition(False, "linetype", False)
         ucrInputTickLineType.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctLineType))
         ucrInputTickLineType.SetRDefault(Chr(34) & "blank" & Chr(34))
 
         ucrChkTickColour.SetText("Colour")
         ucrColors.SetParameter(New RParameter("colour"))
+        ucrChkTickColour.AddParameterPresentCondition(True, "colour")
+        ucrChkTickColour.AddParameterPresentCondition(False, "colour", False)
         ucrColors.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
         ucrColors.AddQuotesIfUnrecognised = False
         ucrColors.SetRDefault(Chr(34) & "black" & Chr(34))
 
         ucrChkTickLineEnd.SetText("Line End")
         ucrInpuTicktLineEnd.SetParameter(New RParameter("lineend"))
+        ucrChkTickLineEnd.AddParameterPresentCondition(True, "lineend")
+        ucrChkTickLineEnd.AddParameterPresentCondition(False, "lineend", False)
         ucrInpuTicktLineEnd.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctLineEnd))
         ucrInpuTicktLineEnd.SetRDefault(Chr(34) & "square" & Chr(34))
 
