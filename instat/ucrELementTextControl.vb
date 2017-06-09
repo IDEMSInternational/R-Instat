@@ -67,7 +67,7 @@ Public Class ucrELementTextControl
         ucrChkColour.SetText("Colour")
         ucrColors.SetParameter(New RParameter("colour"))
         ucrColors.AddQuotesIfUnrecognised = False
-        ucrColors.SetName(Chr(34) & "NULL" & Chr(34))
+        ucrColors.SetRDefault(Chr(34) & "black" & Chr(34))
         ucrChkColour.AddParameterPresentCondition(True, "colour")
         ucrChkColour.AddParameterPresentCondition(False, "colour", False)
 

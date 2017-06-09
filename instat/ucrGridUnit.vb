@@ -25,9 +25,11 @@ Public Class ucrGridUnit
         'Units
         ucrChkUnits.SetText("Units")
         ucrInputUnits.SetParameter(New RParameter("units"))
+        ucrChkUnits.AddParameterPresentCondition(True, "units")
+        ucrChkUnits.AddParameterPresentCondition(False, "units", False)
         ucrInputUnits.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctUnits))
         '? default npc  
-        ' ucrInputUnits.SetRDefault(Chr(34) & "npc" & Chr(34))
+        'ucrInputUnits.SetRDefault(Chr(34) & "npc" & Chr(34))
 
         ucrInputData.SetParameter(New RParameter("data"))
         ucrInputData.SetRDefault("NULL")
