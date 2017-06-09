@@ -186,7 +186,6 @@ Public Class dlgRegressionSimple
 
     Private Sub SetBinomTest()
         Dim clsyFunc, clsnFunc As New RFunction
-        ' TODO: Is this stats or mosaic package?
         clsRBinomial.SetRCommand("mosaic")
         clsRBinomial.SetRCommand("prop.test")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRBinomial)
