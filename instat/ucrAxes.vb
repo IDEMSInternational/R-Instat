@@ -223,5 +223,6 @@ Public Class ucrAxes
         '    lblInStepsOf.Visible = True
         'End If
     End Sub
+
 End Class
 
