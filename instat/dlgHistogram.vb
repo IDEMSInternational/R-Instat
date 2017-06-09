@@ -27,6 +27,8 @@ Public Class dlgHistogram
     Private clsYlabFunction As New RFunction
     Private clsXScalecontinuousFunction As New RFunction
     Private clsRFacetFunction As New RFunction
+    Private clsThemeFunction As New RFunction
+    Private dctThemeFunctions As New Dictionary(Of String, RFunction)
     Private bResetSubdialog As Boolean = True
 
     Private Sub dlgHistogram_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -117,6 +119,8 @@ Public Class dlgHistogram
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
         clsRFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
+        dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
+        clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction
 
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrHistogramSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
@@ -160,7 +164,7 @@ Public Class dlgHistogram
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetRCode(clsBaseOperator, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, strNewDataFrame:=ucrHistogramSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bReset:=bResetSubdialog)
+        sdgPlots.SetRCode(clsBaseOperator, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewFacetFunction:=clsRFacetFunction, strNewDataFrame:=ucrHistogramSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
     End Sub
