@@ -179,8 +179,8 @@ Public Class sdgPlots
         Next
         ucrInputThemes.SetItems(dctThemes)
         ucrInputThemes.SetRDefault("theme_grey()")
+        ucrInputThemes.SetDropDownStyleAsNonEditable()
 
-        'Corodiantes tab
         InitialiseTabs()
 
         'temporary disabled until implemented
@@ -623,7 +623,7 @@ Public Class sdgPlots
             strAes = "y"
         End If
         If clsGlobalAesFunction IsNot Nothing Then
-            If clsGlobalAesFunction.ContainsParameter(strAes) Then
+            If clsGlobalAesFunction.ContainsParameter(strAes) AndAlso clsGlobalAesFunction.GetParameter(strAes).strArgumentValue <> Chr(34) & Chr(34) Then
                 'Run R code to determine type
                 'Temp default to continuous
                 Return "Continuous"
