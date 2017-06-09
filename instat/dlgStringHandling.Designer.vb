@@ -32,6 +32,7 @@ Partial Class dlgStringHandling
         Me.rdoDetect = New System.Windows.Forms.RadioButton()
         Me.rdoReplaceAll = New System.Windows.Forms.RadioButton()
         Me.grpRegex = New System.Windows.Forms.GroupBox()
+        Me.cmdClear = New System.Windows.Forms.Button()
         Me.cmdBackSlash = New System.Windows.Forms.Button()
         Me.cmdWBackSlash = New System.Windows.Forms.Button()
         Me.cmdDollarSign = New System.Windows.Forms.Button()
@@ -192,6 +193,7 @@ Partial Class dlgStringHandling
         '
         'grpRegex
         '
+        Me.grpRegex.Controls.Add(Me.cmdClear)
         Me.grpRegex.Controls.Add(Me.cmdBackSlash)
         Me.grpRegex.Controls.Add(Me.cmdWBackSlash)
         Me.grpRegex.Controls.Add(Me.cmdDollarSign)
@@ -214,7 +216,7 @@ Partial Class dlgStringHandling
         Me.grpRegex.Controls.Add(Me.cmdBackSlashb)
         Me.grpRegex.Controls.Add(Me.cmdSbackSlash)
         Me.grpRegex.Controls.Add(Me.cmdOr)
-        Me.grpRegex.Location = New System.Drawing.Point(419, 109)
+        Me.grpRegex.Location = New System.Drawing.Point(412, 62)
         Me.grpRegex.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.grpRegex.Name = "grpRegex"
         Me.grpRegex.Padding = New System.Windows.Forms.Padding(2, 3, 2, 3)
@@ -222,6 +224,17 @@ Partial Class dlgStringHandling
         Me.grpRegex.TabIndex = 180
         Me.grpRegex.TabStop = False
         Me.grpRegex.Text = "Regex"
+        '
+        'cmdClear
+        '
+        Me.cmdClear.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmdClear.Location = New System.Drawing.Point(198, 74)
+        Me.cmdClear.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
+        Me.cmdClear.Name = "cmdClear"
+        Me.cmdClear.Size = New System.Drawing.Size(37, 61)
+        Me.cmdClear.TabIndex = 145
+        Me.cmdClear.Text = "Clear"
+        Me.cmdClear.UseVisualStyleBackColor = True
         '
         'cmdBackSlash
         '
@@ -307,7 +320,7 @@ Partial Class dlgStringHandling
         '
         'cmdPlus
         '
-        Me.cmdPlus.Location = New System.Drawing.Point(39, 44)
+        Me.cmdPlus.Location = New System.Drawing.Point(42, 44)
         Me.cmdPlus.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdPlus.Name = "cmdPlus"
         Me.cmdPlus.Size = New System.Drawing.Size(38, 30)
@@ -460,7 +473,7 @@ Partial Class dlgStringHandling
         'ucrChkRegex
         '
         Me.ucrChkRegex.Checked = False
-        Me.ucrChkRegex.Location = New System.Drawing.Point(419, 83)
+        Me.ucrChkRegex.Location = New System.Drawing.Point(259, 67)
         Me.ucrChkRegex.Name = "ucrChkRegex"
         Me.ucrChkRegex.Size = New System.Drawing.Size(113, 20)
         Me.ucrChkRegex.TabIndex = 181
@@ -540,7 +553,7 @@ Partial Class dlgStringHandling
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(662, 331)
+        Me.ClientSize = New System.Drawing.Size(671, 331)
         Me.Controls.Add(Me.ucrReceiverForRegexExpression)
         Me.Controls.Add(Me.ucrChkRegex)
         Me.Controls.Add(Me.grpRegex)
@@ -615,4 +628,5 @@ Partial Class dlgStringHandling
     Friend WithEvents cmdBackSlash As Button
     Friend WithEvents ucrChkRegex As ucrCheck
     Friend WithEvents ucrReceiverForRegexExpression As ucrReceiverExpression
+    Friend WithEvents cmdClear As Button
 End Class
