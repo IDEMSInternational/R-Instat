@@ -64,7 +64,7 @@ Public Class dlgOneVarCompareModels
         ucrSelectorOneVarCompModels.Reset()
 
         clsGofStat.SetRCommand("fitdistrplus::gofstat")
-        ' clsRcdfcompFunction.SetRCommand("fitdistrplus::cdfcomp")
+        clsRcdfcompFunction.SetRCommand("fitdistrplus::cdfcomp")
 
         clsOperatorforTable.SetOperation("$")
         clsOperatorforTable.AddParameter(clsRFunctionParameter:=clsGofStat, iPosition:=0)

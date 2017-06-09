@@ -101,23 +101,21 @@ Public Class sdgOneVarCompareModels
             frmMain.clsRLink.RunScript(clsRcdfcompFunction.ToScript(), 3)
         End If
         If ucrChkPP.Checked Then
-            'clsRPlotFunction.ClearParameters()
             clsRdenscompFunction.SetRCommand("fitdistrplus::denscomp")
             clsRdenscompFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
             frmMain.clsRLink.RunScript(clsRdenscompFunction.ToScript(), 3)
         End If
         If ucrChkQQ.Checked Then
-            'clsRPlotFunction.ClearParameters()
             clsRqqcompFunction.SetRCommand("fitdistrplus::qqcomp")
             clsRqqcompFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
             frmMain.clsRLink.RunScript(clsRqqcompFunction.ToScript(), 3)
         End If
         If ucrChkDensity.Checked Then
-            ' clsRPlotFunction.ClearParameters()
             clsRppcompFunction.SetRCommand("fitdistrplus::ppcomp")
             clsRppcompFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
             frmMain.clsRLink.RunScript(clsRppcompFunction.ToScript(), 3)
         End If
+
 
         If ucrSaveDisplayChi.IsComplete Then
             frmMain.clsRLink.RunScript(clsOperatorforTable.ToScript(), 0)
@@ -125,17 +123,12 @@ Public Class sdgOneVarCompareModels
             frmMain.clsRLink.RunScript(strTemp, 0)
         End If
         If ucrChkInputChiSquareBreakpoints.Checked Then
-            frmMain.clsRLink.RunScript(clsOperatorForBreaks.ToScript(), 2)
-        End If
-
-    End Sub
-
-    Public Sub DisplayChiBreaks()
-        If ucrChkInputChiSquareBreakpoints.Checked Then
             clsOperatorForBreaks.SetOperation("$")
             clsOperatorForBreaks.AddParameter(iPosition:=0, clsRFunctionParameter:=clsRGofStat)
             clsOperatorForBreaks.AddParameter(strParameterValue:="chisqbreaks")
+            frmMain.clsRLink.RunScript(clsOperatorForBreaks.ToScript(), 2)
         End If
+
     End Sub
 
     Private Sub InitialiseTabs()
