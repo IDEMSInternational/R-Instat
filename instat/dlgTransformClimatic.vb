@@ -232,7 +232,7 @@ Public Class dlgTransformClimatic
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrPnlTransform_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlTransform.ControlContentsChanged
+    Private Sub ucrPnlTransform_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlTransform.ControlValueChanged
         Dim bRain As Boolean = False
         If rdoMoving.Checked Then
             clsRRollFuncExpr.AddParameter("width", ucrNudSumOver.Value)
