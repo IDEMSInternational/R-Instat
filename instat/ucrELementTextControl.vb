@@ -26,14 +26,12 @@ Public Class ucrELementTextControl
         ucrNudsize.SetParameter(New RParameter("size"))
         ucrChkSize.AddParameterPresentCondition(True, "size")
         ucrChkSize.AddParameterPresentCondition(False, "size", False)
-        ucrNudsize.SetRDefault("0")
 
         ucrChkAngle.SetText("Angle")
         ucrNudAngle.SetParameter(New RParameter("angle"))
         ucrNudAngle.SetMinMax(0, 360)
         ucrChkAngle.AddParameterPresentCondition(True, "angle")
         ucrChkAngle.AddParameterPresentCondition(False, "angle", False)
-        ucrNudAngle.SetRDefault("0")
 
         ucrChkHjust.SetText("Hjust")
         ucrNudHjust.SetParameter(New RParameter("hjust"))
@@ -41,7 +39,6 @@ Public Class ucrELementTextControl
         ucrNudHjust.SetMinMax(0, 1)
         ucrChkHjust.AddParameterPresentCondition(True, "hjust")
         ucrChkHjust.AddParameterPresentCondition(False, "hjust", False)
-        ucrNudHjust.SetRDefault("0.0")
 
         ucrChkVjust.SetText("Vjust")
         ucrNudVjust.SetParameter(New RParameter("vjust"))
@@ -49,44 +46,39 @@ Public Class ucrELementTextControl
         ucrNudVjust.SetMinMax(0, 1)
         ucrChkVjust.AddParameterPresentCondition(True, "vjust")
         ucrChkVjust.AddParameterPresentCondition(False, "vjust", False)
-        ucrNudVjust.SetRDefault("0.0")
 
         ucrChkLineHeight.SetText("Line Height")
         ucrNudLineHeight.SetParameter(New RParameter("lineheight"))
         ucrChkLineHeight.AddParameterPresentCondition(True, "lineheight")
         ucrChkLineHeight.AddParameterPresentCondition(False, "lineheight", False)
-        ucrNudLineHeight.SetRDefault("0.0")
 
         ucrChkFace.SetText("Face")
         ucrInputFace.SetParameter(New RParameter("face"))
         ucrInputFace.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctFontFace))
-        ucrInputFace.SetRDefault(Chr(34) & "plain" & Chr(34))
         ucrChkFace.AddParameterPresentCondition(True, "face")
         ucrChkFace.AddParameterPresentCondition(False, "face", False)
 
         ucrChkColour.SetText("Colour")
         ucrColors.SetParameter(New RParameter("colour"))
         ucrColors.AddQuotesIfUnrecognised = False
-        ucrColors.SetRDefault(Chr(34) & "black" & Chr(34))
         ucrChkColour.AddParameterPresentCondition(True, "colour")
         ucrChkColour.AddParameterPresentCondition(False, "colour", False)
 
         ucrChkFamily.SetText("Family")
         ucrInputFamily.SetParameter(New RParameter("family"))
         ucrInputFamily.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctFonts))
-        ucrInputFamily.SetRDefault(Chr(34) & "Times" & Chr(34))
         ucrChkFamily.AddParameterPresentCondition(True, "family")
         ucrChkFamily.AddParameterPresentCondition(False, "family", False)
 
         'Linking
-        ucrChkSize.AddToLinkedControls(ucrNudsize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkHjust.AddToLinkedControls(ucrNudHjust, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkVjust.AddToLinkedControls(ucrNudVjust, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkLineHeight.AddToLinkedControls(ucrNudLineHeight, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkAngle.AddToLinkedControls(ucrNudAngle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkFace.AddToLinkedControls(ucrInputFace, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkFamily.AddToLinkedControls(ucrInputFamily, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkColour.AddToLinkedControls(ucrColors, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkSize.AddToLinkedControls(ucrNudsize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrChkHjust.AddToLinkedControls(ucrNudHjust, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.0)
+        ucrChkVjust.AddToLinkedControls(ucrNudVjust, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.0)
+        ucrChkLineHeight.AddToLinkedControls(ucrNudLineHeight, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.0)
+        ucrChkAngle.AddToLinkedControls(ucrNudAngle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrChkFace.AddToLinkedControls(ucrInputFace, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Plain")
+        ucrChkFamily.AddToLinkedControls(ucrInputFamily, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Times Roman")
+        ucrChkColour.AddToLinkedControls(ucrColors, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Black")
 
         bInitialiseControls = True
     End Sub
@@ -151,10 +143,6 @@ Public Class ucrELementTextControl
 
     Private Sub ElementXAxisTextControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAngle.ControlValueChanged, ucrChkHjust.ControlValueChanged, ucrChkLineHeight.ControlValueChanged, ucrChkSize.ControlValueChanged, ucrChkVjust.ControlValueChanged, ucrChkColour.ControlValueChanged, ucrChkFace.ControlValueChanged, ucrChkFamily.ControlValueChanged
         AddRemoveElementAxis()
-    End Sub
-
-    Private Sub grpAxisLabels_Enter(sender As Object, e As EventArgs) Handles grpAxisLabels.Enter
-
     End Sub
 
     Public Sub setlabel(strlabel As String)
