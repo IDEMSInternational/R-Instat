@@ -76,7 +76,15 @@ Public Class dlgExtremesClimatic
         ucrInputThresholdValue.SetValidationTypeAsNumeric()
         ucrInputThresholdValue.SetLinkedDisplayControl(lblValues)
 
-        ucrInputThresholdOperator.SetItems({"Greater than", "Less than", "Greater than or equal to", "Less than or equal to"})
+        ucrInputThresholdOperator.SetParameter(New RParameter("threshold_operator"))
+        Dim dctThreshold As New Dictionary(Of String, String)
+        dctThreshold.Add(">", Chr(34) & ">" & Chr(34))
+        dctThreshold.Add("<", Chr(34) & "<" & Chr(34))
+        dctThreshold.Add(">=", Chr(34) & ">=" & Chr(34))
+        dctThreshold.Add("<=", Chr(34) & "<=" & Chr(34))
+        ucrInputThresholdOperator.SetItems(dctThreshold)
+        ucrInputThresholdOperator.SetDropDownStyleAsNonEditable()
+        ucrInputThresholdValue.SetValidationTypeAsNumeric()
 
         ucrInputSave.SetParameter(New RParameter("result_name"))
 
@@ -84,9 +92,7 @@ Public Class dlgExtremesClimatic
         ucrPnlExtremesType.AddToLinkedControls(ucrPnlMaxMin, {rdoMinMax}, bNewLinkedHideIfParameterMissing:=True)
 
         'disabling control for now.
-        ucrInputThresholdOperator.Enabled = False
-        ucrInputThresholdValue.Enabled = False
-        lblValues.Enabled = False
+        ucrChkDayNumber.Enabled = False
 
         ucrPnlExtremesType.AddParameterPresentCondition(rdoPeaks, "result_data_frame")
         ucrPnlExtremesType.AddParameterPresentCondition(rdoMinMax, "result_data_frame", False)
@@ -114,6 +120,8 @@ Public Class dlgExtremesClimatic
         clsMinMaxGroupByFunction.SetRCommand("instat_calculation$new")
         clsMinMaxGroupByFunction.AddParameter("type", Chr(34) & "by" & Chr(34))
         clsMinMaxGroupByFunction.SetAssignTo("grouping")
+        ucrInputThresholdValue.SetName(40)
+        ucrInputThresholdOperator.SetName("<=")
 
         clsMinMaxManipulationsFunction.SetRCommand("list")
         clsMinMaxManipulationsFunction.AddParameter("group_by", clsRFunctionParameter:=clsMinMaxGroupByFunction, bIncludeArgumentName:=False)
@@ -234,10 +242,10 @@ Public Class dlgExtremesClimatic
         SetGroupByFuncCalcFrom()
     End Sub
 
-    Private Sub ucrReceiverData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlValueChanged
+    Private Sub ucrReceiverData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlValueChanged, ucrInputThresholdOperator.ControlContentsChanged, ucrInputThresholdValue.ControlValueChanged
         SetMinMaxSummaryParams()
         clsPeaksFilterFunction.RemoveParameterByName("function_exp")
-        clsPeaksFilterFunction.AddParameter("function_exp", Chr(34) & ucrReceiverElement.GetVariableNames(False) & ">=15" & Chr(34))
+        clsPeaksFilterFunction.AddParameter("function_exp", Chr(34) & ucrReceiverElement.GetVariableNames(False) & ucrInputThresholdOperator.cboInput.SelectedItem & ucrInputThresholdValue.GetText & Chr(34))
     End Sub
 
     Private Sub ucrSelectorClimaticExtremes_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorClimaticExtremes.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged
