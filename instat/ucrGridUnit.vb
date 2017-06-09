@@ -23,26 +23,24 @@ Public Class ucrGridUnit
     Private clsBaseOperator As New ROperator
     Public Sub InitialiseControl()
         'Units
-        ucrChkUnits.SetText("Tick length")
+        ucrChkUnits.SetText("Units")
         ucrInputUnits.SetParameter(New RParameter("units"))
+        ucrChkUnits.AddParameterPresentCondition(True, "units")
+        ucrChkUnits.AddParameterPresentCondition(False, "units", False)
         ucrInputUnits.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctUnits))
-        '? default npc  
-        ' ucrInputUnits.SetRDefault(Chr(34) & "npc" & Chr(34))
 
         ucrInputData.SetParameter(New RParameter("data"))
-        ucrInputData.SetRDefault("NULL")
         ucrInputData.AddQuotesIfUnrecognised = False
-        ' ucrInputData.SetValidationTypeAsNumeric()
 
         ucrInputVector.SetParameter(New RParameter("x"))
         ucrInputVector.AddQuotesIfUnrecognised = False
-        ' ucrInputVector.SetValidationTypeAsNumeric()
 
-
-        ucrChkUnits.AddToLinkedControls(ucrInputUnits, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkUnits.AddToLinkedControls(ucrInputData, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkUnits.AddToLinkedControls(ucrInputVector, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkUnits.AddToLinkedControls(ucrInputUnits, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Centimetres")
+        ucrInputUnits.SetLinkedDisplayControl(lblUnits)
+        ucrChkUnits.AddToLinkedControls(ucrInputData, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="NULL")
         ucrInputData.SetLinkedDisplayControl(lblData)
+        ucrChkUnits.AddToLinkedControls(ucrInputVector, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrInputVector.SetLinkedDisplayControl(lblVector)
 
     End Sub
 
@@ -90,4 +88,5 @@ Public Class ucrGridUnit
     Public Sub setlabel(strlabel As String)
         grpUnits.Text = strlabel
     End Sub
+
 End Class
