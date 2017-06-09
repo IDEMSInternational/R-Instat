@@ -101,9 +101,10 @@ Public Class sdgOneVarCompareModels
             frmMain.clsRLink.RunScript(clsRcdfcompFunction.ToScript(), 3)
         End If
         If ucrChkPP.Checked Then
-            clsRdenscompFunction.SetRCommand("fitdistrplus::denscomp")
-            clsRdenscompFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
-            frmMain.clsRLink.RunScript(clsRdenscompFunction.ToScript(), 3)
+            clsRppcompFunction.SetRCommand("fitdistrplus::ppcomp")
+            clsRppcompFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
+            frmMain.clsRLink.RunScript(clsRppcompFunction.ToScript(), 3)
+
         End If
         If ucrChkQQ.Checked Then
             clsRqqcompFunction.SetRCommand("fitdistrplus::qqcomp")
@@ -111,11 +112,10 @@ Public Class sdgOneVarCompareModels
             frmMain.clsRLink.RunScript(clsRqqcompFunction.ToScript(), 3)
         End If
         If ucrChkDensity.Checked Then
-            clsRppcompFunction.SetRCommand("fitdistrplus::ppcomp")
-            clsRppcompFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
-            frmMain.clsRLink.RunScript(clsRppcompFunction.ToScript(), 3)
+            clsRdenscompFunction.SetRCommand("fitdistrplus::denscomp")
+            clsRdenscompFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
+            frmMain.clsRLink.RunScript(clsRdenscompFunction.ToScript(), 3)
         End If
-
 
         If ucrSaveDisplayChi.IsComplete Then
             frmMain.clsRLink.RunScript(clsOperatorforTable.ToScript(), 0)
