@@ -26,7 +26,6 @@ Public Class ucrElementLineControl
         ucrNudTickSize.SetParameter(New RParameter("size"))
         ucrChkTickSize.AddParameterPresentCondition(True, "size")
         ucrChkTickSize.AddParameterPresentCondition(False, "size", False)
-        ucrChkTickSize.SetRDefault("0.0")
         ucrNudTickSize.Increment = 0.1
 
 
@@ -35,7 +34,6 @@ Public Class ucrElementLineControl
         ucrChkTickLineType.AddParameterPresentCondition(True, "linetype")
         ucrChkTickLineType.AddParameterPresentCondition(False, "linetype", False)
         ucrInputTickLineType.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctLineType))
-        ucrInputTickLineType.SetRDefault(Chr(34) & "blank" & Chr(34))
 
         ucrChkTickColour.SetText("Colour")
         ucrColors.SetParameter(New RParameter("colour"))
@@ -43,20 +41,17 @@ Public Class ucrElementLineControl
         ucrChkTickColour.AddParameterPresentCondition(False, "colour", False)
         ucrColors.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
         ucrColors.AddQuotesIfUnrecognised = False
-        ucrColors.SetRDefault(Chr(34) & "black" & Chr(34))
 
         ucrChkTickLineEnd.SetText("Line End")
         ucrInpuTicktLineEnd.SetParameter(New RParameter("lineend"))
         ucrChkTickLineEnd.AddParameterPresentCondition(True, "lineend")
         ucrChkTickLineEnd.AddParameterPresentCondition(False, "lineend", False)
         ucrInpuTicktLineEnd.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctLineEnd))
-        ucrInpuTicktLineEnd.SetRDefault(Chr(34) & "square" & Chr(34))
 
-
-        ucrChkTickSize.AddToLinkedControls(ucrNudTickSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkTickLineType.AddToLinkedControls(ucrInputTickLineType, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkTickLineEnd.AddToLinkedControls(ucrInpuTicktLineEnd, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkTickColour.AddToLinkedControls(ucrColors, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkTickSize.AddToLinkedControls(ucrNudTickSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.0)
+        ucrChkTickLineType.AddToLinkedControls(ucrInputTickLineType, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Solid")
+        ucrChkTickLineEnd.AddToLinkedControls(ucrInpuTicktLineEnd, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Square")
+        ucrChkTickColour.AddToLinkedControls(ucrColors, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Black")
         bInitialiseControls = True
     End Sub
 
