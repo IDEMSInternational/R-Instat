@@ -58,8 +58,9 @@ structure_type_3_label="Measurement"
 overall_label="[Overall]"
 model_label="model"
 graph_label="graph"
+table_label="table"
 
 #link labels
 keyed_link_label="keyed_link"
 
-max_labels_display=20
+max_labels_display=10

@@ -55,6 +55,11 @@ Public Class ucrInputComboBox
         FillItemTypes()
     End Sub
 
+    Public Sub SetItemsTypeAsTables()
+        strItemsType = "Tables"
+        FillItemTypes()
+    End Sub
+
     Public Sub SetItemsTypeAsGraphs()
         strItemsType = "Graphs"
         FillItemTypes()
@@ -72,17 +77,22 @@ Public Class ucrInputComboBox
                     frmMain.clsRLink.FillColumnNames(ucrDataFrameSelector.cboAvailableDataFrames.Text, cboColumns:=cboInput)
                 End If
             Case "Data Frames"
+                'TODO not yet implemented
             Case "Models"
                 If ucrDataFrameSelector IsNot Nothing Then
                     cboInput.Items.Clear()
                     cboInput.Items.AddRange(frmMain.clsRLink.GetModelNames(ucrDataFrameSelector.cboAvailableDataFrames.Text).ToArray)
+                End If
+            Case "Tables"
+                If ucrDataFrameSelector IsNot Nothing Then
+                    cboInput.Items.Clear()
+                    cboInput.Items.AddRange(frmMain.clsRLink.GetTableNames(ucrDataFrameSelector.cboAvailableDataFrames.Text).ToArray)
                 End If
             Case "Graphs"
                 If ucrDataFrameSelector IsNot Nothing Then
                     cboInput.Items.Clear()
                     cboInput.Items.AddRange(frmMain.clsRLink.GetGraphNames(ucrDataFrameSelector.cboAvailableDataFrames.Text).ToArray())
                 End If
-
             Case "Filters"
                 If ucrDataFrameSelector IsNot Nothing Then
                     cboInput.Items.Clear()
@@ -120,12 +130,22 @@ Public Class ucrInputComboBox
         Return cboInput.Text
     End Function
 
-    Public Sub SetItems(strItems As String(), Optional bClearExisting As Boolean = True)
-        If bClearExisting Then
-            cboInput.Items.Clear()
+    Public Sub SetItems(Optional strItems As String() = Nothing, Optional bClearExisting As Boolean = True, Optional bAddConditions As Boolean = False)
+        Dim dctValues As New Dictionary(Of String, String)
+        If bAddConditions Then
+            For Each strTemp As String In strItems
+                dctValues.Add(strTemp, strTemp)
+            Next
+            SetItems(dctValues, bClearExisting)
+        Else
+            If bClearExisting Then
+                cboInput.Items.Clear()
+            End If
+            If strItems IsNot Nothing Then
+                cboInput.Items.AddRange(strItems)
+            End If
+            AdjustComboBoxWidth(cboInput)
         End If
-        cboInput.Items.AddRange(strItems)
-        AdjustComboBoxWidth(cboInput)
     End Sub
 
     Public Sub SetItems(dctItemParameterValuePairs As Dictionary(Of String, String), Optional bClearExisting As Boolean = True)
@@ -144,6 +164,10 @@ Public Class ucrInputComboBox
             AddParameterValuesCondition(kvpTemp.Key, GetParameter().strArgumentName, kvpTemp.Value)
         Next
         AdjustComboBoxWidth(cboInput)
+    End Sub
+
+    Public Sub AddItems(strItems As String())
+        SetItems(strItems, bClearExisting:=False)
     End Sub
 
     Private Sub cboInput_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cboInput.KeyPress
@@ -233,7 +257,7 @@ Public Class ucrInputComboBox
         cboInput.DropDownStyle = ComboBoxStyle.DropDown
         cboInput.AutoCompleteMode = AutoCompleteMode.Append
         cboInput.AutoCompleteSource = AutoCompleteSource.ListItems
-        'TODO implement validation settings for this
+        'TODO implement validation settings for this		
         If bAdditionsAllowed Then
 
         Else
