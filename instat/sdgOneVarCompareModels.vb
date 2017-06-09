@@ -33,19 +33,10 @@ Public Class sdgOneVarCompareModels
 
         'ucrChkPlots
         ucrChkCDF.SetParameter(New RParameter("ft", 1), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        ucrChkCDF.SetRDefault("TRUE")
         ucrChkCDF.SetText("CDF")
-
-        ucrChkDensity.SetParameter(New RParameter("ft", 1), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkCDF.SetRDefault("TRUE")
         ucrChkDensity.SetText("Density")
-        ucrChkDensity.SetRDefault("FALSE")
-
-        ucrChkPP.SetParameter(New RParameter("ft", 1), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        ucrChkPP.SetRDefault("FALSE")
         ucrChkPP.SetText("PP")
-
-        ucrChkQQ.SetParameter(New RParameter("ft", 1), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        ucrChkQQ.SetRDefault("FALSE")
         ucrChkQQ.SetText("QQ")
         InitialiseTabs()
         'ucrSaveGOF
@@ -58,9 +49,9 @@ Public Class sdgOneVarCompareModels
         'ucrSaveDisplayChi
         ' ucrSaveDisplayChi.SetPrefix("ChiSquare")
         ucrSaveDisplayChi.SetSaveTypeAsDataFrame()
-        ucrSaveDisplayChi.SetCheckBoxText("Save DisplayChi")
+        ucrSaveDisplayChi.SetCheckBoxText("DisplayChi")
         ucrSaveDisplayChi.SetIsComboBox()
-        ucrSaveDisplayChi.SetAssignToIfUncheckedValue("last_model")
+        ucrSaveDisplayChi.SetAssignToIfUncheckedValue("last_DataFrame")
 
         'ucrSavePlot
         ucrSavePlots.Enabled = False 'for now

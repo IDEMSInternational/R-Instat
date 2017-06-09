@@ -33,7 +33,6 @@ Public Class dlgOneVarCompareModels
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        '  ReopenDialog()
         TestOKEnabled()
     End Sub
 
@@ -50,11 +49,6 @@ Public Class dlgOneVarCompareModels
         ucrReceiverCompareModels.Selector = ucrSelectorOneVarCompModels
         ucrReceiverCompareModels.SetMeAsReceiver()
 
-        ' sdgOneVarCompareModels.InitialiseDialog()
-        ' sdgOneVarCompareModels.SetModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
-        ' sdgOneVarCompareModels.SetReceiver(UcrReceiver)
-        ' sdgOneVarCompareModels.DisplayChiSquare()
-        ' sdgOneVarCompareModels.DisplayChiBreaks()
     End Sub
 
     Private Sub SetDefaults()
@@ -70,19 +64,16 @@ Public Class dlgOneVarCompareModels
         ucrSelectorOneVarCompModels.Reset()
 
         clsGofStat.SetRCommand("fitdistrplus::gofstat")
-        clsRcdfcompFunction.SetRCommand("fitdistrplus::cdfcomp")
+        ' clsRcdfcompFunction.SetRCommand("fitdistrplus::cdfcomp")
 
         clsOperatorforTable.SetOperation("$")
         clsOperatorforTable.AddParameter(clsRFunctionParameter:=clsGofStat, iPosition:=0)
         clsOperatorforTable.AddParameter(strParameterValue:="chisqbreaks")
 
-        ' clsOperatorforTable.AddParameter("chisqtable", clsRFunctionParameter:=clsReceiver, iPosition:=0)
         clsRAsDataFrame.SetRCommand("as.data.frame")
         clsRAsDataFrame.AddParameter("x", clsROperatorParameter:=clsOperatorforTable)
 
         clsRAsDataFrame.SetAssignTo(ucrSelectorOneVarCompModels.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_ChiSquare", strTempDataframe:=ucrSelectorOneVarCompModels.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-
-        clsGofStat.SetAssignTo(sdgOneVarCompareModels.ucrSaveGOF.GetText, strTempDataframe:=ucrSelectorOneVarCompModels.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsGofStat)
         bResetSubdialog = True
@@ -98,7 +89,7 @@ Public Class dlgOneVarCompareModels
     End Sub
 
     Public Sub TestOKEnabled()
-        If Not ucrReceiverCompareModels.IsEmpty Then 'sdgOneVarCompareModels.TestOkEnabled() AndAlso Not  Then
+        If Not ucrReceiverCompareModels.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
