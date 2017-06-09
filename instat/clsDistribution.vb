@@ -16,6 +16,7 @@
 
 Public Class Distribution
     Public strNameTag As String
+    Public strPackagName As String = ""
     Public strRName As String = ""
     Public bIncluded As Boolean = True
     Public strRFunctionName As String = ""
@@ -46,6 +47,11 @@ Public Class Distribution
         End If
         clsParameters.Add(NewParameter)
     End Sub
+
+    Public Function IsDistributionFunction(strFunctionName As String) As Boolean
+        Dim strNames() As String = {strRFunctionName, strPFunctionName, strQFunctionName, strDFunctionName, strExactName, strGLMFunctionName}
+        Return strNames.Contains(strFunctionName)
+    End Function
 End Class
 
 Public Class DistributionParameter

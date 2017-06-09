@@ -30,6 +30,7 @@ Public Class sdgOneVarFitModDisplay
     Public Sub InitialiseDialog()
         UcrSaveLikelihood.SetDataFrameSelector(dlgOneVarFitModel.ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
         ucrSavePlots.SetDataFrameSelector(dlgOneVarFitModel.ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
+        clsRLogLikFunction.SetPackageName("fitdistrplus")
         clsRLogLikFunction.SetRCommand("llplot")
     End Sub
 
@@ -83,7 +84,7 @@ Public Class sdgOneVarFitModDisplay
         End If
     End Sub
 
-    Private Sub ucrDists_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrDists.cboDistributionsIndexChanged
+    Private Sub ucrDists_cboDistributionsIndexChanged() Handles ucrDists.ControlValueChanged
         SetPlotOptions()
     End Sub
 
