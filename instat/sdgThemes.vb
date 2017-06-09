@@ -75,9 +75,9 @@ Public Class sdgThemes
         ucrPanelBackGround.SetLabel("Panel background")
 
         ucrPlotBackGround.SetLabel("Background of the entire plot")
-        ucrPlotCaption.SetLabel("Plot title(text appearance)")
+        ucrPlotCaption.SetLabel("Caption below the plot (text appearance)")
         ucrPlotSubTitle.SetLabel("Plot subtitle(text appearance)")
-        ucrPlotTitle.SetLabel("Caption below the plot (text appearance)")
+        ucrPlotTitle.SetLabel("Plot title(text appearance)")
 
         ucrStripBackGround.SetLabel("Background of facet labels")
         ucrStripText.SetLabel("Facet labels")
