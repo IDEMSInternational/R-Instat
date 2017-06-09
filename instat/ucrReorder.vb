@@ -227,7 +227,7 @@ Public Class ucrReorder
     End Sub
 
     'to update this to check if the order has changed
-    Public Function isEmpty() As Boolean
+    Public Function IsEmpty() As Boolean
         If lstAvailableData.Items.Count > 0 Then
             Return False
         Else
