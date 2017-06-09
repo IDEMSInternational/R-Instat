@@ -19,13 +19,8 @@ Imports instat.Translations
 Public Class dlgWaterBalance
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
-    Public clsEndRainsGroupByFunc, clsWaterBalGroupByFunc, clsRWater_bal,
-        clsWaterEndRainsBase, clsEndOfRainsManipulationsFunc, clsREndofRains,
-        clsWaterBalBase, clsWaterBalManipulationsFunc, clssGroupByFunc, clsAddKey,
-        clsYearGroup, clsDayFromAndTo, clsFirstWaterBalanceYear As New RFunction
-    Public clsWaterBalanceList, clsWaterBalanceCalc, clsSubCalcList, clsReplaceNA, clsFirstWaterBalance0List,
-        clsWaterFilter0List, clsReplaceNA0,
-        clsWaterBalance0List, clsWaterBalance0, clsWaterFilter0, clsFirstWaterBalance0 As New RFunction
+    Public clsEndRainsGroupByFunc, clsWaterBalGroupByFunc, clsWaterEndRainsBase, clsEndOfRainsManipulationsFunc, clsREndofRains, clsWaterBalBase, clsWaterBalManipulationsFunc, clssGroupByFunc, clsAddKey, clsYearGroup, clsDayFromAndTo, clsFirstWaterBalanceYear As New RFunction
+    Public clsWaterBalanceList, clsWaterBalanceCalc, clsSubCalcList, clsReplaceNA, clsFirstWaterBalance0List, clsWaterFilter0List, clsReplaceNA0, clsWaterBalance0List, clsWaterBalance0, clsWaterFilter0, clsFirstWaterBalance0 As New RFunction
     Private strCurrDataName As String = ""
 
     Private Sub dlgWaterBalance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -66,9 +61,6 @@ Public Class dlgWaterBalance
         ucrReceiverYear.bAutoFill = True
         ucrReceiverStation.bAutoFill = True
 
-        clsRWater_bal.SetRCommand("instat_calculation$new")
-        clsRWater_bal.SetAssignTo("water_bal_calculation")
-
         clsREndofRains.SetRCommand("instat_calculation$new")
         clsREndofRains.SetAssignTo("end_of_rains_calculation")
         ucrPnlEndofRains.AddRadioButton(rdoRain)
@@ -87,40 +79,8 @@ Public Class dlgWaterBalance
         ucrInputColName.SetParameter(New RParameter("result_name"))
         ucrInputColName.SetName("water_bal")
 
-        'clsAddKey.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
-        'clsDayFromAndTo.SetRCommand("instat_calculation$new")
-        'clsDayFromAndTo.SetAssignTo("Day_From_and_To")
-        'clsYearGroup.SetRCommand("instat_calculation$new")
-        'clsYearGroup.SetAssignTo("Year_Group_Daily")
-        ''clsWaterBalance.SetRCommand("instat_calculation$new")
-        ''clsWaterBalance.SetAssignTo("Water_Balance")
-        'clsWaterBalanceCalc.SetRCommand("instat_calculation$new")
-        'clsWaterBalanceCalc.SetAssignTo("Water_Balance_Calc")
-        'clsFirstWaterBalanceYear.SetRCommand("instat_calculation$new")
-        'clsFirstWaterBalanceYear.SetAssignTo("First_Water_Balance")
-        'clsWaterBalanceList.SetRCommand("list")
-        'clsReplaceNA0.SetRCommand("instat_calculation$new")
-        'clsWaterBalance0.SetRCommand("instat_calculation$new")
-        'clsWaterFilter0.SetRCommand("instat_calculation$new")
-        'clsFirstWaterBalance0.SetRCommand("instat_calculation$new")
-
-        'clsReplaceNA0.SetAssignTo("Replace_NA_0")
-        'clsWaterBalance0.SetAssignTo("Water_Balance_0")
-        'clsWaterFilter0.SetAssignTo("Water_Filter_0")
-        'clsFirstWaterBalance0.SetAssignTo("First_Water_Balance_0")
-
-        'clsWaterBalance0List.SetRCommand("list")
-        'clsWaterFilter0List.SetRCommand("list")
-        'clsFirstWaterBalance0List.SetRCommand("list")
-
-        'add parameter name
         ucrNudCapacity.Maximum = Integer.MaxValue
         ucrNudCapacity.Increment = 10
-        'nudCapacity.DecimalPlaces = 0
-
-        'ucrNudTo.Maximum = 366
-        'ucrNudTo.SetMinMax(ucrNudFrom.Value + 1, 366)
-        'ucrNudFrom.SetMinMax(1, ucrNudFrom.Value - 1)
 
         ucrNudTo.SetMinMax(2, 366)
         ucrNudFrom.SetMinMax(1, 366)
@@ -140,6 +100,8 @@ Public Class dlgWaterBalance
         clsEndOfRainsManipulationsFunc = New RFunction
         clsWaterBalBase = New RFunction
         ucrSelectorForWaterBalance.Reset()
+
+        rdoRain.Checked = True ' this needs to be fixed well
 
         ucrNudFrom.Value = 1
         ucrNudTo.Value = 366
@@ -171,8 +133,7 @@ Public Class dlgWaterBalance
         clsYearGroup.AddParameter("type", Chr(34) & "by" & Chr(34))
         clsYearGroup.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames & ")")
         clsYearGroup.SetAssignTo("Year_Group_Daily")
-        'clsWaterBalance.SetRCommand("instat_calculation$new")
-        'clsWaterBalance.SetAssignTo("Water_Balance")
+
         clsWaterBalanceCalc.SetRCommand("instat_calculation$new")
         clsWaterBalanceCalc.SetAssignTo("Water_Balance_Calc")
         clsFirstWaterBalanceYear.SetRCommand("instat_calculation$new")
@@ -231,22 +192,8 @@ Public Class dlgWaterBalance
         clsWaterBalGroupByFunc.AddParameter("type", Chr(34) & "by" & Chr(34))
         clsWaterBalGroupByFunc.SetAssignTo("grouping")
 
-        'clsReplaceNA.SetRCommand("instat_calculation$new")
-        'clsReplaceNA.AddParameter("type", Chr(34) & "calculation" & Chr(34))
-        'clsReplaceNA.AddParameter("function_exp", Chr(34) & "replace(" & ucrReceiverRainfall.GetVariableNames(False) & ", is.na(" & ucrReceiverRainfall.GetVariableNames(False) & ")," & ucrNudCapacity.Value & ")" & Chr(34))
-        'clsReplaceNA.AddParameter("result_name", Chr(34) & "replace_NA" & Chr(34))
-        'clsReplaceNA.AddParameter("calculated_from", " list(" & strCurrDataName & "= " & ucrReceiverRainfall.GetVariableNames() & ")")
-        'clsReplaceNA.AddParameter("save", "0")
-        'clsReplaceNA.SetAssignTo("replace_NA")
-
         clsSubCalcList.SetRCommand("list")
         clsSubCalcList.AddParameter("sub1", clsRFunctionParameter:=clsReplaceNA)
-
-        'clsRWater_bal.AddParameter("function_exp", Chr(34) & "Reduce(function(x, y) pmin(pmax(x + y - " & ucrInputEvaporation.GetText() & ", 0), " & ucrNudCapacity.Value & "), replace_NA, accumulate=TRUE)" & Chr(34))
-        'clsRWater_bal.AddParameter("type", Chr(34) & "calculation" & Chr(34))
-        'clsRWater_bal.AddParameter("result_name", Chr(34) & "water_bal" & Chr(34))
-        'clsRWater_bal.AddParameter("manipulations", clsRFunctionParameter:=clsWaterBalManipulationsFunc)
-        'clsRWater_bal.AddParameter("save", 2)
 
         clsREndofRains.AddParameter("function_exp", Chr(34) & "min(water_bal)")
         clsREndofRains.AddParameter("type", Chr(34) & "summary" & Chr(34))
@@ -256,9 +203,7 @@ Public Class dlgWaterBalance
 
         clsWaterBalBase.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         clsWaterBalBase.AddParameter("display", "FALSE")
-        'clsWaterBalBase.AddParameter("calc", clsRFunctionParameter:=clsRWater_bal)
         clsWaterBalBase.AddParameter("calc", clsRFunctionParameter:=clsWaterBalance0)
-
 
         clsWaterEndRainsBase.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         clsWaterEndRainsBase.AddParameter("display", "FALSE")
@@ -272,7 +217,7 @@ Public Class dlgWaterBalance
         'ucrNudSumOver.SetRCode(clsRRollFuncExpr, bReset)
         'ucrReceiverData.SetRCode(clsRRollFuncExpr, bReset)
         'ucrInputSum.SetRCode(clsMatchFun, bReset)
-        ucrInputColName.SetRCode(clsRWater_bal, bReset)
+        'ucrInputColName.SetRCode(clsRWater_bal, bReset)
     End Sub
 
     Private Sub ReopenDialog()
@@ -280,11 +225,11 @@ Public Class dlgWaterBalance
     End Sub
 
     Private Sub TestOKEnabled()
-        'If Not ucrReceiverRainfall.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso ucrNudCapacity.Text <> "" AndAlso ucrNudFrom.Text <> "" AndAlso ucrNudTo.Text <> "" AndAlso Not ucrInputEvaporation.IsEmpty AndAlso ucrNudWBLessThan.Text <> "" AndAlso ucrSaveWaterBalance.IsComplete Then
-        '    ucrBase.OKEnabled(True)
-        'Else
-        '    ucrBase.OKEnabled(False)
-        'End If
+        If Not ucrReceiverRainfall.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty Then ' AndAlso ucrNudCapacity.Text <> "" AndAlso ucrNudFrom.Text <> "" AndAlso ucrNudTo.Text <> "" AndAlso Not ucrInputEvaporation.IsEmpty AndAlso ucrNudWBLessThan.Text <> "" AndAlso ucrInputColName.GetText <> "" Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -313,7 +258,6 @@ Public Class dlgWaterBalance
     End Sub
 
     Private Sub WaterBalance()
-
         clsReplaceNA0.AddParameter("type", Chr(34) & "calculation" & Chr(34))
         clsReplaceNA0.AddParameter("function_exp", Chr(34) & "replace(" & ucrReceiverRainfall.GetVariableNames(False) & ", is.na(" & ucrReceiverRainfall.GetVariableNames(False) & "), 0)" & Chr(34))
         clsReplaceNA0.AddParameter("result_name", Chr(34) & "Replace_NA_0" & Chr(34))
@@ -363,58 +307,32 @@ Public Class dlgWaterBalance
         TestOKEnabled()
     End Sub
 
-    'Private Sub ucrReceiverDate_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverDate.SelectionChanged
-    '    AddKeyMethod()
-    '    'TestOKEnabled()
-    'End Sub
-
-    Private Sub DayFromAndTo(sender As Object, e As EventArgs)
-        DayFromAndToMethod()
-        nudValues()
-        TestOKEnabled()
-    End Sub
-
-    Private Sub nudWBLessThan_ValueChanged(sender As Object, e As EventArgs) Handles ucrNudWBLessThan.TextChanged
-        WaterBalance()
-        TestOKEnabled()
-    End Sub
-
-    Private Sub nudCapacity_ValueChanged(sender As Object, e As EventArgs)
-        WaterBalance()
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrInputEvaporation_NameChanged() Handles ucrInputEvaporation.NameChanged
-        WaterBalance()
-        TestOKEnabled()
-    End Sub
-
     Private Sub ucrSaveWaterBalance_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputColName.ControlValueChanged
-        'add the result name here
+        TestOKEnabled()
     End Sub
 
-    Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverRainfall.ControlContentsChanged, ucrNudCapacity.ControlContentsChanged, ucrNudFrom.ControlContentsChanged, ucrNudTo.ControlContentsChanged, ucrInputEvaporation.ControlContentsChanged, ucrNudWBLessThan.ControlContentsChanged
+    Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverRainfall.ControlContentsChanged ', ucrNudCapacity.ControlContentsChanged, ucrNudFrom.ControlContentsChanged, ucrNudTo.ControlContentsChanged, ucrInputEvaporation.ControlContentsChanged, ucrNudWBLessThan.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
     Private Sub ucrPnlEndofRains_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlEndofRains.ControlContentsChanged
+        PanelOptions()
+    End Sub
+
+    Private Sub PanelOptions()
         If rdoRain.Checked Then
             clsWaterBalance0.AddParameter("save", "0")
-            clsWaterBalance0.SetAssignTo("Water_Balance_0")
             clsWaterEndRainsBase.AddParameter("calc", clsRFunctionParameter:=clsFirstWaterBalance0)
             ucrBase.clsRsyntax.SetBaseRFunction(clsWaterEndRainsBase)
         ElseIf rdoWaterBalance.Checked Then
+            clsWaterBalance0.AddParameter("save", "2")
             clsReplaceNA.AddParameter("function_exp", Chr(34) & "replace(" & ucrReceiverRainfall.GetVariableNames(False) & ", is.na(" & ucrReceiverRainfall.GetVariableNames(False) & ")," & ucrNudCapacity.Value & ")" & Chr(34))
             clsSubCalcList.AddParameter("sub1", clsRFunctionParameter:=clsReplaceNA)
-            clsRWater_bal.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubCalcList)
-            clsRWater_bal.AddParameter("function_exp", Chr(34) & "Reduce(function(x, y) pmin(pmax(x + y - " & ucrInputEvaporation.GetText() & ", 0), " & ucrNudCapacity.Value & "), replace_NA, accumulate=TRUE)" & Chr(34))
-            'clsWaterBalBase.AddParameter("calc", clsRFunctionParameter:=clsRWater_bal)
             clsWaterBalBase.AddParameter("calc", clsRFunctionParameter:=clsWaterBalance0)
             ucrBase.clsRsyntax.SetBaseRFunction(clsWaterBalBase)
         ElseIf rdoBoth.Checked Then
             clsWaterBalance0.AddParameter("save", "2")
             clsWaterBalance0.SetAssignTo("Water_Balance_0")
-            'clsWaterBalance0.AddParameter("sub_calculations", clsRFunctionParameter:=clsWaterBalance0List)
             clsWaterEndRainsBase.AddParameter("calc", clsRFunctionParameter:=clsFirstWaterBalance0)
             ucrBase.clsRsyntax.SetBaseRFunction(clsWaterEndRainsBase)
         End If
@@ -428,11 +346,9 @@ Public Class dlgWaterBalance
 
         If Not ucrReceiverStation.IsEmpty Then
             clsWaterBalGroupByFunc.SetAssignTo("grouping")
-            clsRWater_bal.AddParameter("manipulations", clsRFunctionParameter:=clsWaterBalManipulationsFunc)
             clsWaterBalance0.AddParameter("manipulations", clsRFunctionParameter:=clsWaterBalManipulationsFunc)
             strGroupByCalcFrom = "list(" & strCurrDataName & "=" & ucrReceiverStation.GetVariableNames() & ")"
         Else
-            clsRWater_bal.RemoveParameterByName("manipulations")
             clsWaterBalance0.RemoveParameterByName("manipulations")
         End If
         If strGroupByCalcFrom <> "" Then
@@ -449,44 +365,24 @@ Public Class dlgWaterBalance
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         DayFromAndToMethod()
         WaterBalance()
-        clsRWater_bal.SetAssignTo("water_bal_calculation")
         clsReplaceNA.SetAssignTo("replace_NA")
         clsReplaceNA0.SetAssignTo("Replace_NA_0")
         clsWaterBalance0.SetAssignTo("Water_Balance_0")
         clsWaterFilter0.SetAssignTo("Water_Filter_0")
         clsFirstWaterBalance0.SetAssignTo("First_Water_Balance_0")
         SetGroupByFuncCalcFrom()
-        If rdoRain.Checked Then
-            clsWaterBalance0.AddParameter("save", "0")
-            'clsWaterBalance0.SetAssignTo("Water_Balance_0")
-            clsWaterEndRainsBase.AddParameter("calc", clsRFunctionParameter:=clsFirstWaterBalance0)
-            ucrBase.clsRsyntax.SetBaseRFunction(clsWaterEndRainsBase)
-        ElseIf rdoWaterBalance.Checked Then
-            clsWaterBalance0.AddParameter("save", "2")
-            clsReplaceNA.AddParameter("function_exp", Chr(34) & "replace(" & ucrReceiverRainfall.GetVariableNames(False) & ", is.na(" & ucrReceiverRainfall.GetVariableNames(False) & ")," & ucrNudCapacity.Value & ")" & Chr(34))
-            clsSubCalcList.AddParameter("sub1", clsRFunctionParameter:=clsReplaceNA)
-            clsRWater_bal.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubCalcList)
-            clsRWater_bal.AddParameter("function_exp", Chr(34) & "Reduce(function(x, y) pmin(pmax(x + y - " & ucrInputEvaporation.GetText() & ", 0), " & ucrNudCapacity.Value & "), replace_NA, accumulate=TRUE)" & Chr(34))
-            'clsWaterBalBase.AddParameter("calc", clsRFunctionParameter:=clsWaterBalance0)
-            clsWaterBalBase.AddParameter("calc", clsRFunctionParameter:=clsWaterBalance0)
-            ucrBase.clsRsyntax.SetBaseRFunction(clsWaterBalBase)
-        ElseIf rdoBoth.Checked Then
-            clsWaterBalance0.AddParameter("save", "2")
-            clsWaterBalance0.SetAssignTo("Water_Balance_0")
-            'clsWaterBalance0.AddParameter("sub_calculations", clsRFunctionParameter:=clsWaterBalance0List)
-            clsWaterEndRainsBase.AddParameter("calc", clsRFunctionParameter:=clsFirstWaterBalance0)
-            ucrBase.clsRsyntax.SetBaseRFunction(clsWaterEndRainsBase)
-        End If
+        PanelOptions()
+
     End Sub
 
     Private Sub ucrWBControls_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrNudCapacity.ControlContentsChanged, ucrInputEvaporation.ControlContentsChanged
-        clsRWater_bal.AddParameter("function_exp", Chr(34) & "Reduce(function(x, y) pmin(pmax(x + y - " & ucrInputEvaporation.GetText() & ", 0), " & ucrNudCapacity.Value & "), replace_NA, accumulate=TRUE)" & Chr(34))
+        clsWaterBalance0.AddParameter("function_exp", Chr(34) & "Reduce(function(x, y) pmin(pmax(x + y - " & ucrInputEvaporation.GetText() & ", 0), " & ucrNudCapacity.Value & "), replace_NA, accumulate=TRUE)" & Chr(34))
     End Sub
 
     Private Sub ucrSelectorForWaterBalance_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrSelectorForWaterBalance.ControlContentsChanged, ucrReceiverRainfall.ControlContentsChanged
         strCurrDataName = Chr(34) & ucrSelectorForWaterBalance.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34)
         clsReplaceNA.AddParameter("function_exp", Chr(34) & "replace(" & ucrReceiverRainfall.GetVariableNames(False) & ", is.na(" & ucrReceiverRainfall.GetVariableNames(False) & ")," & ucrNudCapacity.Value & ")" & Chr(34))
-        clsRWater_bal.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames() & ")")
+        clsWaterBalance0.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames() & ")")
         clsReplaceNA.AddParameter("calculated_from", " list(" & strCurrDataName & "= " & ucrReceiverRainfall.GetVariableNames() & ")")
     End Sub
 
