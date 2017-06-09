@@ -102,7 +102,7 @@ Public Class sdgPrincipalComponentAnalysis
         clsRScreePlot.SetOperatorParameter(True, clsRFunc:=clsRScreePlotFunction)
         clsRScreePlot.SetOperatorParameter(False, clsRFunc:=clsRScreePlotTheme)
         If chkPercentageScree.Checked Then
-            clsRScreePlotFunction.AddParameter("addlabels", "True")
+            clsRScreePlotFunction.AddParameter("addlabels", "TRUE")
         Else
             clsRScreePlotFunction.RemoveParameterByName("addlabels")
         End If
