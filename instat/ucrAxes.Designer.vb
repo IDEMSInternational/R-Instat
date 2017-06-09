@@ -66,7 +66,6 @@ Partial Class ucrAxes
         Me.grpMinorBreaks = New System.Windows.Forms.GroupBox()
         Me.lblMinorBreaksFrom = New System.Windows.Forms.Label()
         Me.rdoMinorBreaksNone = New System.Windows.Forms.RadioButton()
-        Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.grpAxisTitle.SuspendLayout()
         Me.grpMajorBreaks.SuspendLayout()
         Me.grpScales.SuspendLayout()
@@ -604,7 +603,6 @@ Partial Class ucrAxes
     Friend WithEvents grpMinorBreaks As GroupBox
     Friend WithEvents lblMinorBreaksFrom As Label
     Friend WithEvents rdoMinorBreaksNone As RadioButton
-    Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
     Friend WithEvents ucrChkLabels As ucrCheck
 
 End Class
