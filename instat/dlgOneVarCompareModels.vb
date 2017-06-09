@@ -20,8 +20,8 @@ Public Class dlgOneVarCompareModels
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
-    Private clsGofStat, clsReceiver, clsRAsDataFrame, clsRBootFunction As New RFunction
-    Private clsOperatorforTable As New ROperator
+    Private clsGofStat, clsReceiver, clsRAsDataFrame, clsRcdfcompFunction, clsRdenscompFunction, clsRqqcompFunction, clsRppcompFunction As New RFunction
+    Private clsOperatorforTable, clsOperatorForBreaks As New ROperator
     Private Sub dlgOneVarCompareModels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -59,13 +59,18 @@ Public Class dlgOneVarCompareModels
 
     Private Sub SetDefaults()
         clsGofStat = New RFunction
-        clsRBootFunction = New RFunction
+        clsRppcompFunction = New RFunction
         clsReceiver = New RFunction
+        clsRdenscompFunction = New RFunction
+        clsRqqcompFunction = New RFunction
+        clsRqqcompFunction = New RFunction
+        clsOperatorForBreaks = New ROperator
+        clsOperatorforTable = New ROperator
 
         ucrSelectorOneVarCompModels.Reset()
 
         clsGofStat.SetRCommand("fitdistrplus::gofstat")
-        clsRBootFunction.SetRCommand("fitdistrplus::cdfcomp")
+        clsRcdfcompFunction.SetRCommand("fitdistrplus::cdfcomp")
 
         clsOperatorforTable.SetOperation("$")
         clsOperatorforTable.AddParameter(clsRFunctionParameter:=clsGofStat, iPosition:=0)
@@ -75,7 +80,9 @@ Public Class dlgOneVarCompareModels
         clsRAsDataFrame.SetRCommand("as.data.frame")
         clsRAsDataFrame.AddParameter("x", clsROperatorParameter:=clsOperatorforTable)
 
-        clsRAsDataFrame.SetAssignTo(ucrSelectorOneVarCompModels.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempDataframe:=ucrSelectorOneVarCompModels.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        clsRAsDataFrame.SetAssignTo(ucrSelectorOneVarCompModels.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_ChiSquare", strTempDataframe:=ucrSelectorOneVarCompModels.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+
+        clsGofStat.SetAssignTo(sdgOneVarCompareModels.ucrSaveGOF.GetText, strTempDataframe:=ucrSelectorOneVarCompModels.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsGofStat)
         bResetSubdialog = True
@@ -123,7 +130,7 @@ Public Class dlgOneVarCompareModels
     End Sub
 
     Private Sub cmdDisplayObjects_Click(sender As Object, e As EventArgs) Handles cmdDisplayObjects.Click
-        sdgOneVarCompareModels.SetRCode(clsGofStat, clsReceiver, clsRBootFunction, clsRAsDataFrame, clsOperatorforTable, bResetSubdialog)
+        sdgOneVarCompareModels.SetRCode(clsGofStat, clsReceiver, clsRdenscompFunction, clsRcdfcompFunction, clsRqqcompFunction, clsRppcompFunction, clsRAsDataFrame, clsOperatorforTable,clsOperatorForBreaks, bResetSubdialog)
         bResetSubdialog = False
         sdgOneVarCompareModels.ShowDialog()
     End Sub
