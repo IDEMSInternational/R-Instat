@@ -33,8 +33,16 @@ Public Class ucrCalculator
     Public Sub InitialiseControl()
         ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Statistics", "Strings (Character Columns)", "Probability", "Dates", "Rows"}) ' "Rows" is a temp. name
         ucrReceiverForCalculation.Selector = ucrSelectorForCalculations
+        cmdTry.Enabled = False
     End Sub
 
+    Public Sub Reset()
+        ucrReceiverForCalculation.ResetText()
+        ucrInputCalOptions.Reset()
+        ucrInputTryMessage.Reset()
+        ucrSaveResultInto.Reset()
+        ucrSelectorForCalculations.Reset()
+    End Sub
     Public Sub SetCalculationHistory()
         ucrReceiverForCalculation.AddtoCombobox(ucrReceiverForCalculation.GetText)
     End Sub
@@ -933,6 +941,11 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub ucrReceiverForCalculation_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForCalculation.SelectionChanged
+        If ucrReceiverForCalculation.IsEmpty Then
+            cmdTry.Enabled = False
+        Else
+            cmdTry.Enabled = True
+        End If
         RaiseEvent SelectionChanged()
     End Sub
 
