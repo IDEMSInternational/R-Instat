@@ -14,11 +14,14 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports RDotNet
 Imports instat.Translations
+
 Public Class dlgRemoveUnusedLevels
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsUnusedLevels As New RFunction
+    Private clsUnusedLevels, clstable, clsSum, clsFactorColumn As New RFunction
+    Private clsTableOperation As New ROperator
 
     Private Sub dlgRemoveUnusedLevels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -55,21 +58,36 @@ Public Class dlgRemoveUnusedLevels
 
     Private Sub SetDefaults()
         clsUnusedLevels = New RFunction
-        ucrSelectorFactorColumn.Reset()
+        clstable = New RFunction
+        clsFactorColumn = New RFunction
+        clsSum = New RFunction
 
+        ucrSelectorFactorColumn.Reset()
+        ucrInputUnusedLevels.SetName("")
+        ucrInputUnusedLevels.Reset()
+
+        clstable.SetRCommand("table")
+        clsSum.SetRCommand("sum")
+        clsFactorColumn.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
         clsUnusedLevels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$drop_unused_factor_levels")
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsUnusedLevels)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+
+        ucrSelectorFactorColumn.AddAdditionalCodeParameterPair(clsFactorColumn, ucrSelectorFactorColumn.GetParameter, iAdditionalPairNo:=1)
+        ucrReceiverFactorColumn.AddAdditionalCodeParameterPair(clsFactorColumn, ucrReceiverFactorColumn.GetParameter, iAdditionalPairNo:=1)
+
+        ucrSelectorFactorColumn.SetRCode(clsUnusedLevels, bReset)
+        ucrReceiverFactorColumn.SetRCode(clsUnusedLevels, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrReceiverFactorColumn.IsEmpty() Then
-            ucrBase.OKEnabled(False)
-        Else
+        If Not ucrReceiverFactorColumn.IsEmpty() AndAlso Not ucrInputUnusedLevels.IsEmpty Then
             ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
@@ -79,8 +97,34 @@ Public Class dlgRemoveUnusedLevels
         TestOKEnabled()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactorColumn.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactorColumn.ControlContentsChanged, ucrInputUnusedLevels.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
+    Private Sub ucrReceiverFactorColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactorColumn.ControlValueChanged, ucrRemoveUnusedFactorLevels.ControlValueChanged
+        Dim iNumOutput As Integer
+
+        If Not ucrReceiverFactorColumn.IsEmpty Then
+            clstable.AddParameter("x", clsRFunctionParameter:=clsFactorColumn)
+            clsTableOperation.SetOperation("==")
+            clsTableOperation.AddParameter(clsRFunctionParameter:=clstable, iPosition:=0)
+            clsTableOperation.AddParameter("threshhold", 0, iPosition:=1)
+
+            clsSum.AddParameter("x", clsROperatorParameter:=clsTableOperation)
+
+            iNumOutput = frmMain.clsRLink.RunInternalScriptGetValue(clsSum.ToScript).AsNumeric(0)
+            ucrInputUnusedLevels.txtInput.BackColor = Color.Green
+            If iNumOutput = 0 Then
+                ucrInputUnusedLevels.SetName("no unused levels to remove")
+                ucrInputUnusedLevels.txtInput.BackColor = Color.Red
+            Else
+                ucrInputUnusedLevels.SetName(iNumOutput & " unused levels will be removed")
+                ucrInputUnusedLevels.txtInput.BackColor = Color.Green
+            End If
+        Else
+            ucrInputUnusedLevels.txtInput.BackColor = Color.White
+            clstable.RemoveParameterByName("x")
+            ucrInputUnusedLevels.ResetText()
+        End If
+    End Sub
 End Class
