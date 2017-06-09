@@ -210,7 +210,7 @@ Public Class dlgFitModel
 
         If ucrFamily.lstCurrentDistributions.Count = 0 Or ucrReceiverResponseVar.IsEmpty() Then
             ucrFamily.Enabled = False
-            ucrFamily.ucrInputDistributions.Text = ""
+            ucrFamily.ucrInputDistributions.SetName("")
             cmdModelOptions.Enabled = False
         Else
             ucrFamily.Enabled = True

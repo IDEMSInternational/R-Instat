@@ -75,12 +75,12 @@ Public Class ucrDistributionsWithParameters
                 lstParameterLabels(i).Text = translate(clsCurrDistribution.clsParameters(i).strNameTag)
                 lstCurrArguments.Add(clsCurrDistribution.clsParameters(i).strArgumentName)
                 If clsCurrDistribution.clsParameters(i).bHasDefault Then
-                    lstParameterInputTextBoxes(i).Text = clsCurrDistribution.clsParameters(i).strDefaultValue
+                    lstParameterInputTextBoxes(i).SetName(clsCurrDistribution.clsParameters(i).strDefaultValue)
                     AddParameter(clsCurrDistribution.clsParameters(i).strArgumentName, clsCurrDistribution.clsParameters(i).strDefaultValue)
                 Else
                     lstParameterInputTextBoxes(i).Reset()
                 End If
-                RaiseEvent ParameterChanged()
+                OnControlValueChanged()
             Next
             If clsCurrDistribution.strNameTag = "Bernouli" Then
                 AddParameter("size", 1)
@@ -102,27 +102,31 @@ Public Class ucrDistributionsWithParameters
         SetParameters()
     End Sub
 
-    Public Event ParameterChanged()
-
-    Private Sub ucrInputParameter1_Leave() Handles ucrInputParameter1.Leave
-        AddParameter(lstCurrArguments(0), ucrInputParameter1.GetText)
-        CheckParametersFilled()
-        RaiseEvent ParameterChanged()
+    Private Sub ucrInputParameter1_ControlValueChanged() Handles ucrInputParameter1.ControlValueChanged
+        If lstCurrArguments IsNot Nothing AndAlso lstCurrArguments.Count > 0 Then
+            AddParameter(lstCurrArguments(0), ucrInputParameter1.GetText)
+            CheckParametersFilled()
+        End If
+        OnControlValueChanged()
     End Sub
 
-
-    Private Sub ucrInputParameter2_Leave() Handles ucrInputParameter2.Leave
-        AddParameter(lstCurrArguments(1), ucrInputParameter2.GetText)
-        CheckParametersFilled()
-        RaiseEvent ParameterChanged()
+    Private Sub ucrInputParameter2_ControlValueChanged() Handles ucrInputParameter2.ControlValueChanged
+        If lstCurrArguments IsNot Nothing AndAlso lstCurrArguments.Count > 1 Then
+            AddParameter(lstCurrArguments(1), ucrInputParameter2.GetText)
+            CheckParametersFilled()
+        End If
+        OnControlValueChanged()
     End Sub
 
-    Private Sub ucrInputParameter3_Leave() Handles ucrInputParameter3.Leave
-        AddParameter(lstCurrArguments(2), ucrInputParameter3.GetText)
-        RaiseEvent ParameterChanged()
+    Private Sub ucrInputParameter3_ControlValueChanged() Handles ucrInputParameter3.ControlValueChanged
+        If lstCurrArguments IsNot Nothing AndAlso lstCurrArguments.Count > 2 Then
+            AddParameter(lstCurrArguments(2), ucrInputParameter3.GetText)
+            CheckParametersFilled()
+        End If
+        OnControlValueChanged()
     End Sub
 
-    Private Sub ucrDistributionsWithParameters_ParameterChanged() Handles Me.ParameterChanged
+    Private Sub ucrDistributionsWithParameters_ParameterChanged() Handles Me.ControlValueChanged
         CheckParametersFilled()
     End Sub
 End Class

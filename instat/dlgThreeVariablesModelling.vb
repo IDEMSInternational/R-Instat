@@ -134,7 +134,7 @@ Public Class dlgThreeVariableModelling
         End If
         If ucrFamily.lstCurrentDistributions.Count = 0 Or ucrResponse.IsEmpty() Then
             ucrFamily.Enabled = False
-            ucrFamily.ucrInputDistributions.Text = ""
+            ucrFamily.ucrInputDistributions.SetName("")
             cmdModelOptions.Enabled = False
         Else
             ucrFamily.Enabled = True

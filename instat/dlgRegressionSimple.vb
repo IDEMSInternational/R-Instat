@@ -352,7 +352,7 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrResponse.IsEmpty() AndAlso Not ucrExplanatory.IsEmpty() AndAlso ucrFamily.Enabled AndAlso ucrFamily.ucrInputDistributions.Text <> "" AndAlso (chkSaveModel.Checked AndAlso Not ucrModelName.IsEmpty() OrElse Not chkSaveModel.Checked) Then
+        If Not ucrResponse.IsEmpty() AndAlso Not ucrExplanatory.IsEmpty() AndAlso ucrFamily.Enabled AndAlso Not ucrFamily.ucrInputDistributions.IsEmpty() AndAlso (chkSaveModel.Checked AndAlso Not ucrModelName.IsEmpty() OrElse Not chkSaveModel.Checked) Then
             ucrModelPreview.SetName(clsModel.ToScript)
             '            If rdoSpecific.Checked AndAlso (ucrFamily.clsCurrDistribution.strNameTag = "Poisson" OrElse ucrFamily.clsCurrDistribution.strNameTag = "Binomial") AndAlso Not (ucrLevel1.IsEmpty OrElse ucrLevel2.IsEmpty) Then
             ucrBase.OKEnabled(True)
@@ -402,7 +402,7 @@ Public Class dlgRegressionSimple
                 End If
             Else
                 If ucrFamily.lstCurrentDistributions.Count = 0 OrElse ucrResponse.IsEmpty() Then
-                    ucrFamily.ucrInputDistributions.Text = ""
+                    ucrFamily.ucrInputDistributions.SetName("")
                     cmdModelOptions.Enabled = False
                 Else
                     cmdModelOptions.Enabled = True
@@ -624,7 +624,7 @@ Public Class dlgRegressionSimple
         Else
             ucrFamily.SetExactDistributions()
         End If
-        ucrFamily.ucrInputDistributions.ResetText()
+        ucrFamily.ucrInputDistributions.SetName("")
         Display()
         SetRCode()
         TestOKEnabled()
