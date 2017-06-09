@@ -56,8 +56,7 @@ Partial Class dlgStringHandling
         Me.cmdSbackSlash = New System.Windows.Forms.Button()
         Me.cmdOr = New System.Windows.Forms.Button()
         Me.ucrReceiverForRegexExpression = New instat.ucrReceiverExpression()
-        Me.ucrChkRegex = New instat.ucrCheck()
-        Me.ucrChkIgnoreCase = New instat.ucrCheck()
+        Me.ucrChkIncludeRegularExpressions = New instat.ucrCheck()
         Me.ucrReceiverStringHandling = New instat.ucrReceiverSingle()
         Me.ucrInputReplaceBy = New instat.ucrInputTextBox()
         Me.ucrSaveStringHandling = New instat.ucrSave()
@@ -65,7 +64,12 @@ Partial Class dlgStringHandling
         Me.ucrSelectorStringHandling = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlStringHandling = New instat.UcrPanel()
+        Me.rdoFixed = New System.Windows.Forms.RadioButton()
+        Me.rdoRegex = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlFixedRegex = New instat.UcrPanel()
+        Me.grpFixedRegex = New System.Windows.Forms.GroupBox()
         Me.grpRegex.SuspendLayout()
+        Me.grpFixedRegex.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblColumn
@@ -216,7 +220,7 @@ Partial Class dlgStringHandling
         Me.grpRegex.Controls.Add(Me.cmdBackSlashb)
         Me.grpRegex.Controls.Add(Me.cmdSbackSlash)
         Me.grpRegex.Controls.Add(Me.cmdOr)
-        Me.grpRegex.Location = New System.Drawing.Point(412, 62)
+        Me.grpRegex.Location = New System.Drawing.Point(420, 110)
         Me.grpRegex.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.grpRegex.Name = "grpRegex"
         Me.grpRegex.Padding = New System.Windows.Forms.Padding(2, 3, 2, 3)
@@ -470,21 +474,13 @@ Partial Class dlgStringHandling
         Me.ucrReceiverForRegexExpression.TabIndex = 182
         Me.ucrReceiverForRegexExpression.ucrSelector = Nothing
         '
-        'ucrChkRegex
+        'ucrChkIncludeRegularExpressions
         '
-        Me.ucrChkRegex.Checked = False
-        Me.ucrChkRegex.Location = New System.Drawing.Point(259, 67)
-        Me.ucrChkRegex.Name = "ucrChkRegex"
-        Me.ucrChkRegex.Size = New System.Drawing.Size(113, 20)
-        Me.ucrChkRegex.TabIndex = 181
-        '
-        'ucrChkIgnoreCase
-        '
-        Me.ucrChkIgnoreCase.Checked = False
-        Me.ucrChkIgnoreCase.Location = New System.Drawing.Point(259, 129)
-        Me.ucrChkIgnoreCase.Name = "ucrChkIgnoreCase"
-        Me.ucrChkIgnoreCase.Size = New System.Drawing.Size(113, 20)
-        Me.ucrChkIgnoreCase.TabIndex = 10
+        Me.ucrChkIncludeRegularExpressions.Checked = False
+        Me.ucrChkIncludeRegularExpressions.Location = New System.Drawing.Point(259, 129)
+        Me.ucrChkIncludeRegularExpressions.Name = "ucrChkIncludeRegularExpressions"
+        Me.ucrChkIncludeRegularExpressions.Size = New System.Drawing.Size(113, 20)
+        Me.ucrChkIncludeRegularExpressions.TabIndex = 10
         '
         'ucrReceiverStringHandling
         '
@@ -549,15 +545,55 @@ Partial Class dlgStringHandling
         Me.ucrPnlStringHandling.Size = New System.Drawing.Size(406, 51)
         Me.ucrPnlStringHandling.TabIndex = 0
         '
+        'rdoFixed
+        '
+        Me.rdoFixed.AutoSize = True
+        Me.rdoFixed.Location = New System.Drawing.Point(15, 19)
+        Me.rdoFixed.Name = "rdoFixed"
+        Me.rdoFixed.Size = New System.Drawing.Size(50, 17)
+        Me.rdoFixed.TabIndex = 183
+        Me.rdoFixed.TabStop = True
+        Me.rdoFixed.Text = "Fixed"
+        Me.rdoFixed.UseVisualStyleBackColor = True
+        '
+        'rdoRegex
+        '
+        Me.rdoRegex.AutoSize = True
+        Me.rdoRegex.Location = New System.Drawing.Point(69, 19)
+        Me.rdoRegex.Name = "rdoRegex"
+        Me.rdoRegex.Size = New System.Drawing.Size(56, 17)
+        Me.rdoRegex.TabIndex = 184
+        Me.rdoRegex.TabStop = True
+        Me.rdoRegex.Text = "Regex"
+        Me.rdoRegex.UseVisualStyleBackColor = True
+        '
+        'ucrPnlFixedRegex
+        '
+        Me.ucrPnlFixedRegex.Location = New System.Drawing.Point(15, 12)
+        Me.ucrPnlFixedRegex.Name = "ucrPnlFixedRegex"
+        Me.ucrPnlFixedRegex.Size = New System.Drawing.Size(120, 32)
+        Me.ucrPnlFixedRegex.TabIndex = 185
+        '
+        'grpFixedRegex
+        '
+        Me.grpFixedRegex.Controls.Add(Me.rdoRegex)
+        Me.grpFixedRegex.Controls.Add(Me.rdoFixed)
+        Me.grpFixedRegex.Controls.Add(Me.ucrPnlFixedRegex)
+        Me.grpFixedRegex.Location = New System.Drawing.Point(423, 45)
+        Me.grpFixedRegex.Name = "grpFixedRegex"
+        Me.grpFixedRegex.Size = New System.Drawing.Size(137, 48)
+        Me.grpFixedRegex.TabIndex = 186
+        Me.grpFixedRegex.TabStop = False
+        Me.grpFixedRegex.Text = "Regular Expressions"
+        '
         'dlgStringHandling
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(671, 331)
         Me.Controls.Add(Me.ucrReceiverForRegexExpression)
-        Me.Controls.Add(Me.ucrChkRegex)
         Me.Controls.Add(Me.grpRegex)
-        Me.Controls.Add(Me.ucrChkIgnoreCase)
+        Me.Controls.Add(Me.ucrChkIncludeRegularExpressions)
         Me.Controls.Add(Me.rdoReplaceAll)
         Me.Controls.Add(Me.rdoDetect)
         Me.Controls.Add(Me.rdoExtract)
@@ -574,6 +610,7 @@ Partial Class dlgStringHandling
         Me.Controls.Add(Me.ucrSelectorStringHandling)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrPnlStringHandling)
+        Me.Controls.Add(Me.grpFixedRegex)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -581,6 +618,8 @@ Partial Class dlgStringHandling
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "String Handling"
         Me.grpRegex.ResumeLayout(False)
+        Me.grpFixedRegex.ResumeLayout(False)
+        Me.grpFixedRegex.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -602,7 +641,7 @@ Partial Class dlgStringHandling
     Friend WithEvents rdoCount As RadioButton
     Friend WithEvents ucrPnlStringHandling As UcrPanel
     Friend WithEvents rdoReplaceAll As RadioButton
-    Friend WithEvents ucrChkIgnoreCase As ucrCheck
+    Friend WithEvents ucrChkIncludeRegularExpressions As ucrCheck
     Friend WithEvents grpRegex As GroupBox
     Friend WithEvents cmdOpenCloseParenthesis As Button
     Friend WithEvents cmdBackSlashd As Button
@@ -626,7 +665,10 @@ Partial Class dlgStringHandling
     Friend WithEvents cmdDollarSign As Button
     Friend WithEvents cmdWBackSlash As Button
     Friend WithEvents cmdBackSlash As Button
-    Friend WithEvents ucrChkRegex As ucrCheck
     Friend WithEvents ucrReceiverForRegexExpression As ucrReceiverExpression
     Friend WithEvents cmdClear As Button
+    Friend WithEvents rdoRegex As RadioButton
+    Friend WithEvents rdoFixed As RadioButton
+    Friend WithEvents ucrPnlFixedRegex As UcrPanel
+    Friend WithEvents grpFixedRegex As GroupBox
 End Class
