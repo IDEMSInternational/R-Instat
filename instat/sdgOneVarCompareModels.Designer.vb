@@ -158,7 +158,7 @@ Partial Class sdgOneVarCompareModels
         Me.ucrChkDensity.Checked = False
         Me.ucrChkDensity.Location = New System.Drawing.Point(6, 46)
         Me.ucrChkDensity.Name = "ucrChkDensity"
-        Me.ucrChkDensity.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkDensity.Size = New System.Drawing.Size(260, 20)
         Me.ucrChkDensity.TabIndex = 1
         '
         'ucrChkCDF
@@ -166,7 +166,7 @@ Partial Class sdgOneVarCompareModels
         Me.ucrChkCDF.Checked = False
         Me.ucrChkCDF.Location = New System.Drawing.Point(6, 20)
         Me.ucrChkCDF.Name = "ucrChkCDF"
-        Me.ucrChkCDF.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkCDF.Size = New System.Drawing.Size(260, 20)
         Me.ucrChkCDF.TabIndex = 0
         '
         'sdgOneVarCompareModels
