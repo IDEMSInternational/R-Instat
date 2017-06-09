@@ -18,12 +18,8 @@ Imports instat.Translations
 Public Class dlgNewSummaryTables
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
-    Private clsSummariesList As New RFunction
-    Private bResetSubdialog As Boolean = False
-    Private clsDefaultFunction As New RFunction
-    Private lstCheckboxes As New List(Of ucrCheck)
-
     Private Sub dlgNewSummaryTables_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autoTranslate(Me)
         If bFirstload Then
             InitialiseDialog()
             bFirstload = False
@@ -31,9 +27,18 @@ Public Class dlgNewSummaryTables
         If bReset Then
             SetDefaults()
         End If
-        SetRCodeForControls(bReset)
         bReset = False
-        autoTranslate(Me)
+        TestOKEnabled()
+    End Sub
+
+
+    Public Sub SetRCodeForControls(bReset As Boolean)
+
+    End Sub
+
+    Private Sub SetDefaults()
+        ucrReceiverFactor.SetMeAsReceiver()
+        ucrFactorsSelector.Reset()
         TestOKEnabled()
     End Sub
 
@@ -145,20 +150,37 @@ Public Class dlgNewSummaryTables
         clsDefaultFunction.AddParameter("rnames", "FALSE", iPosition:=18)
         clsDefaultFunction.SetAssignTo("last_table", strTempDataframe:=ucrSelectorSummaryTables.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_table")
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
-        bResetSubdialog = True
+
+    Private Sub InitialiseDialog()
+        ucrReceiverFactor.Selector = ucrFactorsSelector
+        ucrReceiverNumeric.Selector = ucrFactorsSelector
+        ucrSingleReceiver.Selector = ucrFactorsSelector
+        ucrReceiverFactor.SetDataType("factor")
+        ucrReceiverNumeric.SetDataType("numeric")
+        ucrchkCheckWeight.SetText("Weights")
+        ucrchkCheckSummaries.SetText("Treat Summary Columns as a Further Factor")
+        ucrchkCheckDisplayMargins.SetText("Display Margins")
+        ucrchkCheckWeight.AddToLinkedControls(ucrSingleReceiver, {True}, bNewLinkedHideIfParameterMissing:=True)
     End Sub
 
-    Public Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    Private Sub EnableCheckSummaries()
+        If ucrReceiverNumeric.lstSelectedVariables.Items.Count > 1 Then
+            ucrchkCheckSummaries.Enabled = True
+        Else
+            ucrchkCheckSummaries.Enabled = False
+        End If
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverFactors.IsEmpty AndAlso ucrSaveTable.IsComplete AndAlso ucrNudSigFigs.GetText <> "" AndAlso ucrNudColumnFactors.GetText <> "" AndAlso (Not ucrChkWeight.Checked OrElse (ucrChkWeight.Checked AndAlso Not ucrReceiverWeights.IsEmpty)) AndAlso Not ucrReceiverSummaryCols.IsEmpty AndAlso Not clsSummariesList.clsParameters.Count = 0 Then
+        If (Not ucrReceiverFactor.IsEmpty OrElse Not ucrReceiverNumeric.IsEmpty) AndAlso ucrNudColumnFactors.GetText <> "" AndAlso ucrNudDecimals.GetText <> "" AndAlso (Not ucrchkCheckWeight.Checked OrElse (ucrchkCheckWeight.Checked AndAlso Not ucrSingleReceiver.IsEmpty)) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
+    End Sub
+
+    Private Sub cmdSummaries_Click(sender As Object, e As EventArgs)
+        sdgSummaries.ShowDialog()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -167,53 +189,9 @@ Public Class dlgNewSummaryTables
         TestOKEnabled()
     End Sub
 
-    Private Sub cmdSummaries_Click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
-        sdgSummaries.SetRFunction(clsSummariesList, bResetSubdialog)
-        bResetSubdialog = False
-        sdgSummaries.ShowDialog()
-        TestOKEnabled()
-    End Sub
-
-    Private Sub EnableCheckSummaries()
-        If ucrReceiverSummaryCols.lstSelectedVariables.Items.Count > 1 OrElse clsSummariesList.clsParameters.Count > 1 Then ' TODO get this to work for clsSummariesList > 1
-            '    ucrChkSummaries.Enabled = True ' temporarily disabled while ucrChkSummaries is disabled
-            'Else
-            ucrChkSummaries.Enabled = False
-        End If
-    End Sub
-
-    Private Sub PageBy()
-        'If ucrChkDisplayMargins.Checked AndAlso (ucrReceiverSummaryCols.lstSelectedVariables.Items.Count > 1 OrElse clsSummariesList.clsParameters.Count > 1) Then ' TODO get this to work for clsSummariesList > 1
-        '    clsDefaultFunction.AddParameter("page_by", "c(" & Chr(34) & "variables" & Chr(34) & "," & Chr(34) & "summaries" & Chr(34) & ")", iPosition:=13)
-        '    ucrInputPageBy.SetName("Variables and Summaries")
-        '    ucrInputPageBy.Enabled = False
-        'Else
-        '    clsDefaultFunction.AddParameter("page_by", "NULL", iPosition:=13)
-        '    ucrInputPageBy.SetName("None")
-        '    ucrInputPageBy.Enabled = True
-        'End If
-    End Sub
-
-    Private Sub ucrChkWeights_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWeight.ControlValueChanged
-        If ucrChkWeight.Checked Then
-            ucrReceiverWeights.SetMeAsReceiver()
-        Else
-            If ucrReceiverFactors.IsEmpty Then
-                ucrReceiverFactors.SetMeAsReceiver()
-            ElseIf ucrReceiverSummaryCols.IsEmpty Then
-                ucrReceiverSummaryCols.SetMeAsReceiver()
-            Else
-                ucrReceiverFactors.SetMeAsReceiver()
-            End If
-        End If
-    End Sub
-
-    Private Sub ucrChkDisplayMargins_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayMargins.ControlValueChanged
-        PageBy()
-    End Sub
-
-    Private Sub ucrReceiverNumeric_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSummaryCols.ControlValueChanged
+    Private Sub ucrReceiverNumeric_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverNumeric.ControlValueChanged
         EnableCheckSummaries()
+
         PageBy()
     End Sub
 
@@ -223,21 +201,11 @@ Public Class dlgNewSummaryTables
         Else
             ucrBase.clsRsyntax.iCallType = 1
         End If
+
     End Sub
 
-    Private Sub ucrChkRowNumbers_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkRowNumbers.ControlValueChanged
-        If Not ucrChkRowNumbers.Checked Then
-            clsDefaultFunction.AddParameter("rnames", "FALSE")
-        Else
-            clsDefaultFunction.RemoveParameterByName("rnames")
-        End If
-    End Sub
-
-    Private Sub ucrReceiverFactors_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactors.ControlValueChanged
-        ucrNudColumnFactors.Maximum = ucrReceiverFactors.lstSelectedVariables.Items.Count
-    End Sub
-
-    Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactors.ControlContentsChanged, ucrSaveTable.ControlContentsChanged, ucrChkWeight.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrNudSigFigs.ControlContentsChanged, ucrReceiverSummaryCols.ControlContentsChanged, ucrNudColumnFactors.ControlContentsChanged
+    Private Sub ucrReceiverFactor_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged, ucrchkCheckWeight.ControlContentsChanged, ucrSingleReceiver.ControlContentsChanged, ucrNudColumnFactors.ControlContentsChanged, ucrNudDecimals.ControlContentsChanged, ucrReceiverNumeric.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
 End Class
