@@ -56,9 +56,10 @@ Public Class sdgOneVarGraph
         ucrNudNumberofColumns.bAddRemoveParameter = False
         ucrNudNumberofColumns.SetLinkedDisplayControl(lblNumberofColumns)
 
-        ucrChkSpecifyLayout.SetParameter(ucrNudNumberofColumns.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkSpecifyLayout.SetText("Specify Layout")
         ucrChkSpecifyLayout.AddToLinkedControls(ucrLinked:=ucrNudNumberofColumns, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        ucrChkSpecifyLayout.AddParameterPresentCondition(True, "ncol")
+        ucrChkSpecifyLayout.AddParameterPresentCondition(False, "ncol", False)
 
         ucrChkFreeScaleAxisforFacets.SetText("Free Scale Axis for Facets")
         ucrChkFreeScaleAxisforFacets.SetParameter(New RParameter("free_scale_axis"))
