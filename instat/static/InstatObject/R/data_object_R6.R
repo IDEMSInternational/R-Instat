@@ -951,8 +951,8 @@ data_object$set("public", "sort_dataframe", function(col_names = c(), decreasing
       if(!(col_name %in% names(curr_data))) {
         stop(col_name, " is not a column in ", get_metadata(data_name_label))
       }
-      if(decreasing) col_names_exp[[i]] <- interp(~ desc(var), var = as.name(col_name))
-      else col_names_exp[[i]] <- interp(~ var, var = as.name(col_name))
+      if(decreasing) col_names_exp[[i]] <- lazyeval::interp(~ desc(var), var = as.name(col_name))
+      else col_names_exp[[i]] <- lazyeval::interp(~ var, var = as.name(col_name))
       i = i + 1
     }
     if(by_row_names) warning("Cannot sort by columns and row names. Sorting will be done by given columns only.")
@@ -2156,10 +2156,10 @@ data_object$set("public","infill_missing_dates", function(date_name, factors) {
     col_names_exp <- c()
     for(i in seq_along(factors)) {
       col_name <- factors[i]
-      col_names_exp[[i]] <- interp(~ var, var = as.name(col_name))
+      col_names_exp[[i]] <- lazyeval::interp(~ var, var = as.name(col_name))
     }
     grouped_data <- self$get_data_frame(use_current_filter = FALSE) %>% dplyr::group_by_(.dots = col_names_exp)
-    date_ranges <- grouped_data %>% dplyr::summarise_(.dots = setNames(list(interp(~ min(var), var = as.name(date_name)), lazyeval::interp(~ max(var), var = as.name(date_name))), c("Min", "Max")))
+    date_ranges <- grouped_data %>% dplyr::summarise_(.dots = setNames(list(lazyeval::interp(~ min(var), var = as.name(date_name)), lazyeval::interp(~ max(var), var = as.name(date_name))), c("Min", "Max")))
     date_lengths <- grouped_data %>% dplyr::summarise(Count = n())
     full_dates_list <- list()
     for(j in 1:nrow(date_ranges)) {
