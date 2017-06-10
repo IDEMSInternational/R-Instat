@@ -55,6 +55,9 @@ Public Class dlgOneVarFitModel
         ucrOperator.SetItems({"==", "<", "<=", ">", ">=", "!="})
         ucrVariables.SetItemsTypeAsColumns()    'we want SetItemsTypeAs factors in the column
         rdoMeanWilcox.Checked = True
+
+        'temp disabled as only works for numeric columns currently
+        chkConvertToVariate.Enabled = False
     End Sub
 
     Private Sub SetDefaults()
