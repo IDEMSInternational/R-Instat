@@ -192,7 +192,7 @@ Public Class dlgTwoWayFrequencies
         ucrChkWeights.SetRCode(clsSjTab, bReset)
         ucrChkFlip.SetRCode(clsSjPlot, bReset)
         ucrPnlFreqType.SetRCode(clsSjPlot, bReset)
-        ucrPnlFreqDisplay.SetRCode(clsSjTab, bReset)
+        ucrPnlFreqDisplay.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrSelectorTwoWayFrequencies.SetRCode(clsSjTab, bReset)
         ucrChkCell.SetRCode(clsSjTab, bReset)
         ucrChkColumn.SetRCode(clsSjTab, bReset)

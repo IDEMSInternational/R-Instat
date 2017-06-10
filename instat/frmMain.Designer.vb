@@ -585,25 +585,27 @@ Partial Class frmMain
         '
         'mnuDescribeThreeVariableSummarise
         '
+        Me.mnuDescribeThreeVariableSummarise.Enabled = False
         Me.mnuDescribeThreeVariableSummarise.Name = "mnuDescribeThreeVariableSummarise"
-        Me.mnuDescribeThreeVariableSummarise.Size = New System.Drawing.Size(142, 22)
+        Me.mnuDescribeThreeVariableSummarise.Size = New System.Drawing.Size(152, 22)
         Me.mnuDescribeThreeVariableSummarise.Text = "Summarise..."
         '
         'mnuDescribeThreeVariableGraph
         '
+        Me.mnuDescribeThreeVariableGraph.Enabled = False
         Me.mnuDescribeThreeVariableGraph.Name = "mnuDescribeThreeVariableGraph"
-        Me.mnuDescribeThreeVariableGraph.Size = New System.Drawing.Size(142, 22)
+        Me.mnuDescribeThreeVariableGraph.Size = New System.Drawing.Size(152, 22)
         Me.mnuDescribeThreeVariableGraph.Text = "Graph..."
         '
         'ToolStripSeparator36
         '
         Me.ToolStripSeparator36.Name = "ToolStripSeparator36"
-        Me.ToolStripSeparator36.Size = New System.Drawing.Size(139, 6)
+        Me.ToolStripSeparator36.Size = New System.Drawing.Size(149, 6)
         '
         'mnuDescribeThreeVariableFrequencies
         '
         Me.mnuDescribeThreeVariableFrequencies.Name = "mnuDescribeThreeVariableFrequencies"
-        Me.mnuDescribeThreeVariableFrequencies.Size = New System.Drawing.Size(142, 22)
+        Me.mnuDescribeThreeVariableFrequencies.Size = New System.Drawing.Size(152, 22)
         Me.mnuDescribeThreeVariableFrequencies.Text = "Frequencies"
         '
         'mnuDescribeSpecific
