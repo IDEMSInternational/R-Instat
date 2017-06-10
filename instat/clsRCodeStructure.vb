@@ -22,6 +22,7 @@ Public Class RCodeStructure
     Public strAssignToColumn As String
     Public strAssignToModel As String
     Public strAssignToGraph As String
+    Public strAssignToTable As String
     'These AssingTo's are only relevant in the string case, as RFunction and ROperator have internal equivalents.
     'If they are empty, the output Of the command Is Not linked To an R-instat object.
     'If they are non-empty, that gives the name of the R-instat Object fields it needs to be linked with.
@@ -53,7 +54,7 @@ Public Class RCodeStructure
     End Sub
 
     'Most methods from RFunction/ROperator have been moved here
-    Public Sub SetAssignTo(strTemp As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional strTempGraph As String = "", Optional bAssignToIsPrefix As Boolean = False, Optional bAssignToColumnWithoutNames As Boolean = False, Optional bInsertColumnBefore As Boolean = False)
+    Public Sub SetAssignTo(strTemp As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional strTempGraph As String = "", Optional strTempTable As String = "", Optional bAssignToIsPrefix As Boolean = False, Optional bAssignToColumnWithoutNames As Boolean = False, Optional bInsertColumnBefore As Boolean = False)
         strAssignTo = strTemp
         If Not strTempDataframe = "" Then
             strAssignToDataFrame = strTempDataframe
@@ -66,6 +67,9 @@ Public Class RCodeStructure
         End If
         If Not strTempGraph = "" Then
             strAssignToGraph = strTempGraph
+        End If
+        If Not strTempTable = "" Then
+            strAssignToTable = strTempTable
         End If
         bToBeAssigned = True
         bIsAssigned = False
@@ -92,6 +96,8 @@ Public Class RCodeStructure
         Dim clsGetModels As New RFunction
         Dim clsAddGraphs As New RFunction
         Dim clsGetGraphs As New RFunction
+        Dim clsAddTables As New RFunction
+        Dim clsGetTables As New RFunction
         Dim clsDataList As New RFunction
 
         If bIsAssigned Then
@@ -157,6 +163,19 @@ Public Class RCodeStructure
                 clsGetGraphs.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
                 clsGetGraphs.AddParameter("graph_name", Chr(34) & strAssignToGraph & Chr(34))
                 strAssignTo = clsGetGraphs.ToScript()
+            ElseIf Not strAssignToTable = "" Then
+                clsAddTables.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_table")
+                clsAddTables.AddParameter("table_name", Chr(34) & strAssignToTable & Chr(34))
+                clsAddTables.AddParameter("table", strAssignTo)
+                If Not strAssignToDataFrame = "" Then
+                    clsAddTables.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
+                    clsGetTables.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
+                End If
+                strScript = strScript & clsAddTables.ToScript() & vbCrLf
+
+                clsGetTables.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_tables")
+                clsGetTables.AddParameter("table_name", Chr(34) & strAssignToTable & Chr(34))
+                strAssignTo = clsGetTables.ToScript()
             ElseIf Not strAssignToDataFrame = "" Then
                 clsAddData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_data")
                 clsDataList.SetRCommand("list")
