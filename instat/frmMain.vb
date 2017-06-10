@@ -182,7 +182,7 @@ Public Class frmMain
     End Sub
 
     Private Sub FrequencyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificFrequency.Click
-        dlgFreqTables.ShowDialog()
+        dlgFlatFrequencyTable.ShowDialog()
     End Sub
 
     Private Sub SummaryToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificSummary.Click
@@ -952,10 +952,6 @@ Public Class frmMain
         dlgBarAndPieChart.ShowDialog()
     End Sub
 
-    Private Sub mnuDescribeSpecificBarChartFromSummary_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificBarChartFromSummary.Click
-        dlgSummaryBarOrPieChart.ShowDialog()
-    End Sub
-
     Private Sub mnuDescribeOtherGraphicsDialogsCumulativeDistribution_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsCumulativeDistribution.Click
         dlgCumulativeDistribution.ShowDialog()
     End Sub
@@ -1398,7 +1394,7 @@ Public Class frmMain
     End Sub
 
     Private Sub FrequencyTablesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FrequencyTablesToolStripMenuItem.Click
-        dlgFlatFrequencyTable.ShowDialog()
+        dlgSummaryBarOrPieChart.ShowDialog()
     End Sub
 
     Private Sub DispalyClimaticDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DispalyClimaticDataToolStripMenuItem.Click
