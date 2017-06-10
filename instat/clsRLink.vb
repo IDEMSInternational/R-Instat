@@ -357,7 +357,7 @@ Public Class RLink
                 MsgBox(e.Message & vbNewLine & "The error occurred in attempting to run the following R command(s):" & vbNewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
             End Try
         End If
-        If bOutput AndAlso strOutput <> "" Then
+        If bOutput AndAlso strOutput IsNot Nothing AndAlso strOutput <> "" Then
             If iCallType = 4 Then
                 rtbOutput.AddIntoWebBrowser(strHtmlCode:=strOutput)
             Else
