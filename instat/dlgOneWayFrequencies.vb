@@ -66,10 +66,11 @@ Public Class dlgOneWayFrequencies
 
         'setting rdoGraph and rdoTable
         ucrPnlFrequencies.AddFunctionNamesCondition(rdoTable, "sjtab")
-        ucrPnlFrequencies.AddFunctionNamesCondition(rdoGraph, "sjplot")
+        ucrPnlFrequencies.AddFunctionNamesCondition(rdoGraph, "plot_grid")
 
         'setting rdoBoth 
-        ucrPnlFrequencies.AddFunctionNamesCondition(rdoBoth, "sjplot")
+        'This is incorrect but we can't currently do what's needed 
+        ucrPnlFrequencies.AddFunctionNamesCondition(rdoBoth, "plot_grid")
         ucrPnlFrequencies.AddFunctionNamesCondition(rdoBoth, "sjtab")
         ucrPnlFrequencies.AddToLinkedControls(ucrChkFlip, {rdoGraph, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencies.AddToLinkedControls(ucrSaveGraph, {rdoGraph, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
@@ -136,7 +137,7 @@ Public Class dlgOneWayFrequencies
 
         ucrReceiverWeights.SetRCode(clsSjTab, bReset)
         ucrReceiverOneWayFreq.SetRCode(clsSjTab, bReset)
-        ucrPnlFrequencies.SetRCode(clsSjTab, bReset)
+        ucrPnlFrequencies.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrChkWeights.SetRCode(clsSjTab, bReset)
         ucrPnlSort.SetRCode(clsSjTab, bReset)
         ucrChkFlip.SetRCode(clsSjPlot, bReset)
