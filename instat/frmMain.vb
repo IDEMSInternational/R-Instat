@@ -153,7 +153,6 @@ Public Class frmMain
         Dim frmNewGraph As New frmGraphDisplay
 
         frmNewGraph.SetImageFromFile(strFilePath)
-        frmNewGraph.MdiParent = Me
         frmNewGraph.Show()
         frmNewGraph.BringToFront()
     End Sub
