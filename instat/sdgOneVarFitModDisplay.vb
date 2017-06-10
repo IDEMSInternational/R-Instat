@@ -58,26 +58,31 @@ Public Class sdgOneVarFitModDisplay
     Public Sub CreateGraphs()
         If rdoPlotAll.Checked Then
             clsRplotFunction.ClearParameters()
+            clsRplotFunction.SetPackageName("")
             clsRplotFunction.SetRCommand("plot")
             clsRplotFunction.AddParameter("x", clsRFunctionParameter:=clsModel)
             frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 3)
         ElseIf rdoPPPlot.Checked Then
             clsRplotFunction.ClearParameters()
+            clsRplotFunction.SetPackageName("fitdistrplus")
             clsRplotFunction.SetRCommand("ppcomp")
             clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
             frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 3)
         ElseIf rdoCDFPlot.Checked Then
             clsRplotFunction.ClearParameters()
+            clsRplotFunction.SetPackageName("fitdistrplus")
             clsRplotFunction.SetRCommand("cdfcomp")
             clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
             frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 3)
         ElseIf rdoQQPlot.Checked Then
             clsRplotFunction.ClearParameters()
+            clsRplotFunction.SetPackageName("fitdistrplus")
             clsRplotFunction.SetRCommand("qqcomp")
             clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
             frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 3)
         ElseIf rdoDensityPlot.Checked Then
             clsRplotFunction.ClearParameters()
+            clsRplotFunction.SetPackageName("fitdistrplus")
             clsRplotFunction.SetRCommand("denscomp")
             clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
             frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 3)
