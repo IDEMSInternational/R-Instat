@@ -45,6 +45,13 @@ Partial Class ucrAxes
         Me.ucrPnlMajorBreaks = New instat.UcrPanel()
         Me.ucrInputMajorBreaksCustom = New instat.ucrInputTextBox()
         Me.grpScales = New System.Windows.Forms.GroupBox()
+        Me.ucrInputExpand = New instat.ucrInputTextBox()
+        Me.ucrInputTransformation = New instat.ucrInputComboBox()
+        Me.ucrInputPosition = New instat.ucrInputComboBox()
+        Me.lblExpand = New System.Windows.Forms.Label()
+        Me.lblTransformation = New System.Windows.Forms.Label()
+        Me.lblPosition = New System.Windows.Forms.Label()
+        Me.ucrChkNaValue = New instat.ucrCheck()
         Me.ucrInputUpperLimit = New instat.ucrInputTextBox()
         Me.ucrInputLowerLimit = New instat.ucrInputTextBox()
         Me.lblUpperLimit = New System.Windows.Forms.Label()
@@ -307,6 +314,13 @@ Partial Class ucrAxes
         '
         'grpScales
         '
+        Me.grpScales.Controls.Add(Me.ucrInputExpand)
+        Me.grpScales.Controls.Add(Me.ucrInputTransformation)
+        Me.grpScales.Controls.Add(Me.ucrInputPosition)
+        Me.grpScales.Controls.Add(Me.lblExpand)
+        Me.grpScales.Controls.Add(Me.lblTransformation)
+        Me.grpScales.Controls.Add(Me.lblPosition)
+        Me.grpScales.Controls.Add(Me.ucrChkNaValue)
         Me.grpScales.Controls.Add(Me.ucrInputUpperLimit)
         Me.grpScales.Controls.Add(Me.ucrInputLowerLimit)
         Me.grpScales.Controls.Add(Me.lblUpperLimit)
@@ -316,10 +330,73 @@ Partial Class ucrAxes
         Me.grpScales.Controls.Add(Me.ucrPnlScales)
         Me.grpScales.Location = New System.Drawing.Point(3, 94)
         Me.grpScales.Name = "grpScales"
-        Me.grpScales.Size = New System.Drawing.Size(215, 108)
+        Me.grpScales.Size = New System.Drawing.Size(215, 224)
         Me.grpScales.TabIndex = 2
         Me.grpScales.TabStop = False
         Me.grpScales.Text = "Scales"
+        '
+        'ucrInputExpand
+        '
+        Me.ucrInputExpand.AddQuotesIfUnrecognised = True
+        Me.ucrInputExpand.IsMultiline = False
+        Me.ucrInputExpand.IsReadOnly = False
+        Me.ucrInputExpand.Location = New System.Drawing.Point(85, 189)
+        Me.ucrInputExpand.Name = "ucrInputExpand"
+        Me.ucrInputExpand.Size = New System.Drawing.Size(118, 21)
+        Me.ucrInputExpand.TabIndex = 27
+        '
+        'ucrInputTransformation
+        '
+        Me.ucrInputTransformation.AddQuotesIfUnrecognised = True
+        Me.ucrInputTransformation.IsReadOnly = False
+        Me.ucrInputTransformation.Location = New System.Drawing.Point(85, 160)
+        Me.ucrInputTransformation.Name = "ucrInputTransformation"
+        Me.ucrInputTransformation.Size = New System.Drawing.Size(118, 21)
+        Me.ucrInputTransformation.TabIndex = 26
+        '
+        'ucrInputPosition
+        '
+        Me.ucrInputPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputPosition.IsReadOnly = False
+        Me.ucrInputPosition.Location = New System.Drawing.Point(85, 129)
+        Me.ucrInputPosition.Name = "ucrInputPosition"
+        Me.ucrInputPosition.Size = New System.Drawing.Size(118, 21)
+        Me.ucrInputPosition.TabIndex = 26
+        '
+        'lblExpand
+        '
+        Me.lblExpand.AutoSize = True
+        Me.lblExpand.Location = New System.Drawing.Point(7, 189)
+        Me.lblExpand.Name = "lblExpand"
+        Me.lblExpand.Size = New System.Drawing.Size(43, 13)
+        Me.lblExpand.TabIndex = 25
+        Me.lblExpand.Text = "Expand"
+        '
+        'lblTransformation
+        '
+        Me.lblTransformation.AutoSize = True
+        Me.lblTransformation.Location = New System.Drawing.Point(4, 159)
+        Me.lblTransformation.Name = "lblTransformation"
+        Me.lblTransformation.Size = New System.Drawing.Size(77, 13)
+        Me.lblTransformation.TabIndex = 25
+        Me.lblTransformation.Text = "Transformation"
+        '
+        'lblPosition
+        '
+        Me.lblPosition.AutoSize = True
+        Me.lblPosition.Location = New System.Drawing.Point(4, 129)
+        Me.lblPosition.Name = "lblPosition"
+        Me.lblPosition.Size = New System.Drawing.Size(44, 13)
+        Me.lblPosition.TabIndex = 25
+        Me.lblPosition.Text = "Position"
+        '
+        'ucrChkNaValue
+        '
+        Me.ucrChkNaValue.Checked = False
+        Me.ucrChkNaValue.Location = New System.Drawing.Point(6, 103)
+        Me.ucrChkNaValue.Name = "ucrChkNaValue"
+        Me.ucrChkNaValue.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkNaValue.TabIndex = 23
         '
         'ucrInputUpperLimit
         '
@@ -373,7 +450,7 @@ Partial Class ucrAxes
         'rdoScalesAuto
         '
         Me.rdoScalesAuto.AutoSize = True
-        Me.rdoScalesAuto.Location = New System.Drawing.Point(6, 20)
+        Me.rdoScalesAuto.Location = New System.Drawing.Point(9, 20)
         Me.rdoScalesAuto.Name = "rdoScalesAuto"
         Me.rdoScalesAuto.Size = New System.Drawing.Size(47, 17)
         Me.rdoScalesAuto.TabIndex = 3
@@ -383,9 +460,9 @@ Partial Class ucrAxes
         '
         'ucrPnlScales
         '
-        Me.ucrPnlScales.Location = New System.Drawing.Point(0, 17)
+        Me.ucrPnlScales.Location = New System.Drawing.Point(6, 17)
         Me.ucrPnlScales.Name = "ucrPnlScales"
-        Me.ucrPnlScales.Size = New System.Drawing.Size(132, 23)
+        Me.ucrPnlScales.Size = New System.Drawing.Size(127, 23)
         Me.ucrPnlScales.TabIndex = 20
         '
         'ucrInputAxisType
@@ -546,7 +623,7 @@ Partial Class ucrAxes
         Me.Controls.Add(Me.grpMajorBreaks)
         Me.Controls.Add(Me.grpAxisTitle)
         Me.Name = "ucrAxes"
-        Me.Size = New System.Drawing.Size(485, 320)
+        Me.Size = New System.Drawing.Size(485, 334)
         Me.grpAxisTitle.ResumeLayout(False)
         Me.grpAxisTitle.PerformLayout()
         Me.grpMajorBreaks.ResumeLayout(False)
@@ -604,5 +681,11 @@ Partial Class ucrAxes
     Friend WithEvents lblMinorBreaksFrom As Label
     Friend WithEvents rdoMinorBreaksNone As RadioButton
     Friend WithEvents ucrChkLabels As ucrCheck
-
+    Friend WithEvents ucrInputTransformation As ucrInputComboBox
+    Friend WithEvents ucrInputPosition As ucrInputComboBox
+    Friend WithEvents lblTransformation As Label
+    Friend WithEvents lblPosition As Label
+    Friend WithEvents ucrChkNaValue As ucrCheck
+    Friend WithEvents ucrInputExpand As ucrInputTextBox
+    Friend WithEvents lblExpand As Label
 End Class

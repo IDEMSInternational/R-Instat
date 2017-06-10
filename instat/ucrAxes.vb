@@ -151,6 +151,23 @@ Public Class ucrAxes
         ucrInputAxisType.SetItems({"Continuous", "Discrete", "Date"})
         ucrInputAxisType.SetDropDownStyleAsNonEditable()
 
+        ucrChkNaValue.SetText("replace Missing Values")
+        ucrChkNaValue.SetParameter(New RParameter("na.value"))
+        ucrChkNaValue.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+
+        ucrInputPosition.SetParameter(New RParameter("position"))
+        ucrInputExpand.SetParameter(New RParameter("expand"))
+        ucrInputExpand.AddQuotesIfUnrecognised = False
+        ucrInputExpand.SetValidationTypeAsNumericList()
+        ucrInputTransformation.SetParameter(New RParameter("trans"))
+        ucrInputTransformation.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctTransformations))
+
+        If bIsX Then
+            ucrInputPosition.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctXPosition))
+        ElseIf bIsX = False
+            ucrInputPosition.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctYPosition))
+        End If
+
         bInitialiseControls = True
     End Sub
 
@@ -168,6 +185,7 @@ Public Class ucrAxes
         If bIsXAxis Then
             bIsX = True
             strAxis = "x"
+
         Else
             bIsX = False
             strAxis = "y"
@@ -222,6 +240,11 @@ Public Class ucrAxes
         ucrInputLowerLimit.SetRCode(clsLimitsFunction, bReset)
         ucrInputUpperLimit.SetRCode(clsLimitsFunction, bReset)
 
+        ucrInputTransformation.SetRCode(clsXYScaleContinuousFunction, bReset)
+        ucrInputExpand.SetRCode(clsXYScaleContinuousFunction, bReset)
+        ucrInputPosition.SetRCode(clsXYScaleContinuousFunction, bReset)
+        ucrChkNaValue.SetRCode(clsXYScaleContinuousFunction, bReset)
+
         ucrPnlMajorBreaks.SetRCode(clsXYScaleContinuousFunction, bReset)
         ucrInputMajorBreaksCustom.SetRCode(clsXYScaleContinuousFunction, bReset)
         ucrInputMajorBreaksLabels.SetRCode(clsXYScaleContinuousFunction, bReset)
@@ -237,9 +260,6 @@ Public Class ucrAxes
         ucrInputMinorBreaksInStepsOf.SetRCode(clsMinorBreaksSeqFunction, bReset)
 
         ucrChkLabels.SetRCode(clsXYScaleContinuousFunction, bReset)
-
-
-
         bRCodeSet = True
         SetLabel()
         AddRemoveContinuousXYScales()
