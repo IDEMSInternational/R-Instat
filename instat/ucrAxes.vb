@@ -151,23 +151,39 @@ Public Class ucrAxes
         ucrInputAxisType.SetItems({"Continuous", "Discrete", "Date"})
         ucrInputAxisType.SetDropDownStyleAsNonEditable()
 
-        ucrChkNaValue.SetText("replace Missing Values")
-        ucrChkNaValue.SetParameter(New RParameter("na.value"))
-        ucrChkNaValue.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkNaValue.SetText("Replace Missing Values")
+        ucrInputRelaceMissingvalues.SetParameter(New RParameter("na.value"))
+        ucrChkNaValue.AddParameterPresentCondition(True, "na.value")
+        ucrChkNaValue.AddParameterPresentCondition(False, "na.value", False)
+        ucrInputRelaceMissingvalues.AddQuotesIfUnrecognised = False
+        ucrChkNaValue.AddToLinkedControls(ucrInputRelaceMissingvalues, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0")
 
-        ucrInputPosition.SetParameter(New RParameter("position"))
-        ucrInputExpand.SetParameter(New RParameter("expand"))
-        ucrInputExpand.AddQuotesIfUnrecognised = False
-        ucrInputExpand.SetValidationTypeAsNumericList()
+        ucrChkTransformation.SetText("Transfromation")
         ucrInputTransformation.SetParameter(New RParameter("trans"))
+        ucrChkTransformation.AddParameterPresentCondition(True, "trans")
+        ucrChkTransformation.AddParameterPresentCondition(False, "trans", False)
+        ucrChkTransformation.AddToLinkedControls(ucrInputTransformation, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="asn")
         ucrInputTransformation.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctTransformations))
 
+        ucrChkPosition.SetText("Position")
+        ucrInputPosition.SetParameter(New RParameter("position"))
+        ucrChkPosition.AddParameterPresentCondition(True, "position")
+        ucrChkPosition.AddParameterPresentCondition(False, "position", False)
         If bIsX Then
             ucrInputPosition.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctXPosition))
+            ucrChkPosition.AddToLinkedControls(ucrInputPosition, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Bottom")
         ElseIf bIsX = False
             ucrInputPosition.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctYPosition))
+            ucrChkPosition.AddToLinkedControls(ucrInputPosition, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Left")
         End If
 
+        ucrChkExpand.SetText("Expand")
+        ucrInputExpand.SetParameter(New RParameter("expand"))
+        ucrChkExpand.AddParameterPresentCondition(True, "expand")
+        ucrChkExpand.AddParameterPresentCondition(False, "expand", False)
+        ucrChkExpand.AddToLinkedControls(ucrInputExpand, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
+        ucrInputExpand.AddQuotesIfUnrecognised = False
+        ucrInputExpand.SetValidationTypeAsNumericList()
         bInitialiseControls = True
     End Sub
 
@@ -240,10 +256,17 @@ Public Class ucrAxes
         ucrInputLowerLimit.SetRCode(clsLimitsFunction, bReset)
         ucrInputUpperLimit.SetRCode(clsLimitsFunction, bReset)
 
-        ucrInputTransformation.SetRCode(clsXYScaleContinuousFunction, bReset)
-        ucrInputExpand.SetRCode(clsXYScaleContinuousFunction, bReset)
         ucrInputPosition.SetRCode(clsXYScaleContinuousFunction, bReset)
+        ucrChkPosition.SetRCode(clsXYScaleContinuousFunction, bReset)
+
         ucrChkNaValue.SetRCode(clsXYScaleContinuousFunction, bReset)
+        ucrInputRelaceMissingvalues.SetRCode(clsXYScaleContinuousFunction, bReset)
+
+        ucrChkTransformation.SetRCode(clsXYScaleContinuousFunction, bReset)
+        ucrInputTransformation.SetRCode(clsXYScaleContinuousFunction, bReset)
+
+        ucrChkExpand.SetRCode(clsXYScaleContinuousFunction, bReset)
+        ucrInputExpand.SetRCode(clsXYScaleContinuousFunction, bReset)
 
         ucrPnlMajorBreaks.SetRCode(clsXYScaleContinuousFunction, bReset)
         ucrInputMajorBreaksCustom.SetRCode(clsXYScaleContinuousFunction, bReset)
