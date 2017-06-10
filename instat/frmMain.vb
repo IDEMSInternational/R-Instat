@@ -495,7 +495,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareViewObjects_Click(sender As Object, e As EventArgs) Handles mnuPrepareRObjectsView.Click
-        dlgView.ShowDialog()
+        dlgViewObjects.ShowDialog()
     End Sub
 
     Private Sub mnuPrepareReorderObjects_Click(sender As Object, e As EventArgs) Handles mnuPrepareRObjectsReorder.Click
