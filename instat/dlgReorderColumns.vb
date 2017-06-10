@@ -49,7 +49,6 @@ Public Class dlgReorderColumns
         Dim clsReorderFunction = New RFunction
 
         ucrDataFrameSelect.Reset()
-        ucrReorderColumns.Reset()
 
         clsReorderFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$reorder_columns_in_data")
 
