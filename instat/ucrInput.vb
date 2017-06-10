@@ -296,6 +296,8 @@ Public Class ucrInput
                 Select Case strValidationType
                     Case "RVariable"
                         MsgBox("This name cannot start with a dot followed by a number/nothing", vbOKOnly)
+                    Case "NumericList"
+                        MsgBox("Each item in the list must be " & GetNumericRange(), vbOKOnly, "Validation Error")
                 End Select
             Case 4
                 Select Case strValidationType
