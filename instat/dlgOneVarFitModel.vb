@@ -34,6 +34,10 @@ Public Class dlgOneVarFitModel
     Private Sub InitialiseDialog()
         sdgOneVarFitModDisplay.InitialiseDialog()
         sdgOneVarFitModel.InitialiseDialog()
+
+        clsROneVarFitModel.SetPackageName("fitdistrplus")
+        clsROneVarFitModel.SetRCommand("fitdist")
+
         UcrBase.iHelpTopicID = 296
         UcrBase.clsRsyntax.iCallType = 2
         UcrReceiver.Selector = ucrSelectorOneVarFitMod
@@ -67,7 +71,9 @@ Public Class dlgOneVarFitModel
         ucrSaveModel.SetPrefix("dist")
         nudCI.Value = 0.95
         BinomialConditions()
-        chkSaveModel.Checked = True
+        'temp set to False to fix bug in saving
+        chkSaveModel.Checked = False
+        ucrSaveModel.Visible = False
         ucrSaveModel.Reset()
         SetDataParameter()
         EnableOptions()
@@ -197,8 +203,6 @@ Public Class dlgOneVarFitModel
 
     Public Sub FitDistFunction()
         UcrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModel)
-        clsROneVarFitModel.SetPackageName("fitdistrplus")
-        clsROneVarFitModel.SetRCommand("fitdist")
         clsROneVarFitModel.AddParameter("distr", Chr(34) & ucrFamily.clsCurrDistribution.strRName & Chr(34))
         SetDataParameter()
     End Sub
@@ -298,6 +302,7 @@ Public Class dlgOneVarFitModel
     Private Sub PlotResiduals()
         clsRplot.SetRCommand("plot")
         clsRplot.AddParameter("x", clsRFunctionParameter:=clsRfitdist)
+        clsRfitdist.SetPackageName("fitdistrplus")
         clsRfitdist.SetRCommand("fitdist")
         clsRfitdist.AddParameter("distr", Chr(34) & ucrFamily.clsCurrDistribution.strRName & Chr(34))
         If ucrFamily.clsCurrDistribution.strNameTag = "Poisson" Then
