@@ -25,8 +25,6 @@ Public Class ucrInput
     Public clsRList As New RFunction
     Protected dcmMinimum As Decimal = Decimal.MinValue
     Protected dcmMaximum As Decimal = Decimal.MaxValue
-    Protected Minimum As Double = Double.MinValue
-    Protected Maximum As Double = Double.MaxValue
     Protected bMinimumIncluded, bMaximumIncluded As Boolean
     Protected strDefaultType As String = ""
     Protected strDefaultPrefix As String = ""
@@ -207,21 +205,21 @@ Public Class ucrInput
                 End If
             End If
         ElseIf strValidationType = "NumericList" Then
-            If Minimum <> Double.MinValue Then
+            If dcmMinimum <> Double.MinValue Then
                 If bMinimumIncluded Then
-                    strRange = ">= " & Minimum.ToString()
+                    strRange = ">= " & dcmMinimum.ToString()
                 Else
-                    strRange = "> " & Minimum.ToString()
+                    strRange = "> " & dcmMinimum.ToString()
                 End If
-                If Maximum <> Double.MaxValue Then
+                If dcmMaximum <> Double.MaxValue Then
                     strRange = strRange & " and "
                 End If
             End If
-            If Maximum <> Double.MaxValue Then
+            If dcmMaximum <> Double.MaxValue Then
                 If bMaximumIncluded Then
-                    strRange = strRange & "<= " & Maximum.ToString()
+                    strRange = strRange & "<= " & dcmMaximum.ToString()
                 Else
-                    strRange = strRange & "< " & Maximum.ToString()
+                    strRange = strRange & "< " & dcmMaximum.ToString()
                 End If
             End If
         End If
@@ -232,15 +230,15 @@ Public Class ucrInput
         strValidationType = "List"
     End Sub
 
-    Public Sub SetValidationTypeAsNumericList(Optional bNewAllowInf As Boolean = False, Optional bIncludeMin As Boolean = True, Optional MinValue As Double = Double.MinValue, Optional MaxValue As Double = Double.MaxValue, Optional bIncludeMax As Boolean = True)
+    Public Sub SetValidationTypeAsNumericList(Optional bNewAllowInf As Boolean = False, Optional bIncludeMin As Boolean = True, Optional dcmMin As Double = Double.MinValue, Optional dcmMax As Double = Double.MaxValue, Optional bIncludeMax As Boolean = True)
         ' Dim Dmax As Double = Maximum
         ' Dim Dmin As Double = Minimum
         strValidationType = "NumericList"
-        If MinValue <> Double.MinValue Then
-            Minimum = MinValue
+        If dcmMin <> Double.MinValue Then
+            dcmMinimum = dcmMin
         End If
-        If MaxValue <> Double.MaxValue Then
-            Maximum = MaxValue
+        If dcmMax <> Double.MaxValue Then
+            dcmMaximum = dcmMax
         End If
         bAllowInf = bNewAllowInf
     End Sub
@@ -405,19 +403,12 @@ Public Class ucrInput
                 If bIsNumericInput Then
                     If Not IsNumeric(strVal) AndAlso (Not (bAllowInf AndAlso ({"Inf", "-Inf"}.Contains(strVal)))) Then
                         Return 2
-                        'MsgBox("Textbox requires a list of numbers separated by commas.", vbOKOnly, "Validation Error")
-                        'txtNumericItems.Focus()
+                    ElseIf strVal > dcmMaximum OrElse strVal < dcmMinimum Then
+                        Return 3
                     End If
                     clsTempParam.SetArgumentValue(strVal)
                 Else
                     clsTempParam.SetArgumentValue(Chr(34) & strVal & Chr(34))
-                End If
-                SetValidationTypeAsNumericList()
-                If IsNumeric(strVal) Then
-                    If Not (strVal <= Maximum) OrElse Not (strVal >= Minimum) Then
-                        MsgBox("Each item in the list must be " & GetNumericRange(), vbOKOnly)
-                        SetName("")
-                    End If
                 End If
                 clsTempParam.Position = i
                 clsRList.AddParameter(clsTempParam)
