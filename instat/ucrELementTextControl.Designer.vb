@@ -220,13 +220,13 @@ Partial Class ucrELementTextControl
         Me.ucrInputFamily.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputFamily.TabIndex = 70
         '
-        'ucrThemeAxes
+        'ucrELementTextControl
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.grpAxisLabels)
-        Me.Name = "ucrThemeAxes"
-        Me.Size = New System.Drawing.Size(259, 227)
+        Me.Name = "ucrELementTextControl"
+        Me.Size = New System.Drawing.Size(255, 227)
         Me.grpAxisLabels.ResumeLayout(False)
         Me.ResumeLayout(False)
 
