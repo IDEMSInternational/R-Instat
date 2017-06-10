@@ -76,7 +76,6 @@ Partial Class sdgThemes
         Me.ucrThemeYRightAxis = New instat.ucrELementTextControl()
         Me.ucrThemeLeftYAxis = New instat.ucrELementTextControl()
         Me.grpTickMarkers = New System.Windows.Forms.GroupBox()
-        Me.ucrYAxisLines = New instat.ucrElementLineControl()
         Me.ucrTickMarksYAxis = New instat.ucrElementLineControl()
         Me.ucrYAxisLines = New instat.ucrElementLineControl()
         Me.tbThemeXAxis = New System.Windows.Forms.TabPage()
@@ -168,7 +167,7 @@ Partial Class sdgThemes
         Me.tbThemeFacets.Controls.Add(Me.grpFacetLabels)
         Me.tbThemeFacets.Location = New System.Drawing.Point(4, 22)
         Me.tbThemeFacets.Name = "tbThemeFacets"
-        Me.tbThemeFacets.Size = New System.Drawing.Size(816, 564)
+        Me.tbThemeFacets.Size = New System.Drawing.Size(817, 583)
         Me.tbThemeFacets.TabIndex = 4
         Me.tbThemeFacets.Text = "Facets"
         Me.tbThemeFacets.UseVisualStyleBackColor = True
@@ -255,7 +254,7 @@ Partial Class sdgThemes
         Me.tbThemePanelAndBackground.Controls.Add(Me.grpPanelGrid)
         Me.tbThemePanelAndBackground.Location = New System.Drawing.Point(4, 22)
         Me.tbThemePanelAndBackground.Name = "tbThemePanelAndBackground"
-        Me.tbThemePanelAndBackground.Size = New System.Drawing.Size(816, 564)
+        Me.tbThemePanelAndBackground.Size = New System.Drawing.Size(817, 583)
         Me.tbThemePanelAndBackground.TabIndex = 3
         Me.tbThemePanelAndBackground.Text = "Panel and Background  "
         Me.tbThemePanelAndBackground.UseVisualStyleBackColor = True
@@ -573,9 +572,9 @@ Partial Class sdgThemes
         Me.tbThemeYaxis.Location = New System.Drawing.Point(4, 22)
         Me.tbThemeYaxis.Name = "tbThemeYaxis"
         Me.tbThemeYaxis.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbThemeYaxis.Size = New System.Drawing.Size(816, 564)
+        Me.tbThemeYaxis.Size = New System.Drawing.Size(817, 583)
         Me.tbThemeYaxis.TabIndex = 1
-        Me.tbThemeYaxis.Text = "Y-axis"
+        Me.tbThemeYaxis.Text = "Y-Axis"
         Me.tbThemeYaxis.UseVisualStyleBackColor = True
         '
         'grpYAxisTitle
@@ -639,13 +638,6 @@ Partial Class sdgThemes
         Me.grpTickMarkers.TabStop = False
         Me.grpTickMarkers.Text = "TickMarkers"
         '
-        'ucrYAxisLines
-        '
-        Me.ucrYAxisLines.Location = New System.Drawing.Point(4, 129)
-        Me.ucrYAxisLines.Name = "ucrYAxisLines"
-        Me.ucrYAxisLines.Size = New System.Drawing.Size(254, 124)
-        Me.ucrYAxisLines.TabIndex = 63
-        '
         'ucrTickMarksYAxis
         '
         Me.ucrTickMarksYAxis.Location = New System.Drawing.Point(4, 21)
@@ -668,7 +660,7 @@ Partial Class sdgThemes
         Me.tbThemeXAxis.Location = New System.Drawing.Point(4, 22)
         Me.tbThemeXAxis.Name = "tbThemeXAxis"
         Me.tbThemeXAxis.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbThemeXAxis.Size = New System.Drawing.Size(816, 564)
+        Me.tbThemeXAxis.Size = New System.Drawing.Size(817, 583)
         Me.tbThemeXAxis.TabIndex = 0
         Me.tbThemeXAxis.Text = "X-Axis"
         Me.tbThemeXAxis.UseVisualStyleBackColor = True
@@ -757,7 +749,7 @@ Partial Class sdgThemes
         Me.tbXYAxes.Controls.Add(Me.ucrThemeAxesTitle)
         Me.tbXYAxes.Location = New System.Drawing.Point(4, 22)
         Me.tbXYAxes.Name = "tbXYAxes"
-        Me.tbXYAxes.Size = New System.Drawing.Size(816, 564)
+        Me.tbXYAxes.Size = New System.Drawing.Size(817, 583)
         Me.tbXYAxes.TabIndex = 6
         Me.tbXYAxes.Text = "XY-Axes"
         Me.tbXYAxes.UseVisualStyleBackColor = True
@@ -815,7 +807,7 @@ Partial Class sdgThemes
         Me.tbPLot.Location = New System.Drawing.Point(4, 22)
         Me.tbPLot.Name = "tbPLot"
         Me.tbPLot.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbPLot.Size = New System.Drawing.Size(816, 564)
+        Me.tbPLot.Size = New System.Drawing.Size(817, 583)
         Me.tbPLot.TabIndex = 7
         Me.tbPLot.Text = "Plot"
         Me.tbPLot.UseVisualStyleBackColor = True
@@ -910,9 +902,9 @@ Partial Class sdgThemes
         Me.tbThemeLegendMoreOptions.Controls.Add(Me.grpLegendSpacing)
         Me.tbThemeLegendMoreOptions.Location = New System.Drawing.Point(4, 22)
         Me.tbThemeLegendMoreOptions.Name = "tbThemeLegendMoreOptions"
-        Me.tbThemeLegendMoreOptions.Size = New System.Drawing.Size(816, 564)
+        Me.tbThemeLegendMoreOptions.Size = New System.Drawing.Size(817, 583)
         Me.tbThemeLegendMoreOptions.TabIndex = 10
-        Me.tbThemeLegendMoreOptions.Text = "Legend(More Options)"
+        Me.tbThemeLegendMoreOptions.Text = "Legend (More Options)"
         Me.tbThemeLegendMoreOptions.UseVisualStyleBackColor = True
         '
         'grpLegendBoxSpacing
@@ -971,7 +963,7 @@ Partial Class sdgThemes
         Me.tbThemePanelMoreOptions.Location = New System.Drawing.Point(4, 22)
         Me.tbThemePanelMoreOptions.Name = "tbThemePanelMoreOptions"
         Me.tbThemePanelMoreOptions.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbThemePanelMoreOptions.Size = New System.Drawing.Size(816, 564)
+        Me.tbThemePanelMoreOptions.Size = New System.Drawing.Size(817, 583)
         Me.tbThemePanelMoreOptions.TabIndex = 9
         Me.tbThemePanelMoreOptions.Text = "Panel (More Options)"
         Me.tbThemePanelMoreOptions.UseVisualStyleBackColor = True
