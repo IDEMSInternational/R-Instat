@@ -75,9 +75,9 @@ Public Class sdgThemes
         ucrPanelBackGround.SetLabel("Panel background")
 
         ucrPlotBackGround.SetLabel("Background of the entire plot")
-        ucrPlotCaption.SetLabel("Plot title(text appearance)")
+        ucrPlotCaption.SetLabel("Caption below the plot (text appearance)")
         ucrPlotSubTitle.SetLabel("Plot subtitle(text appearance)")
-        ucrPlotTitle.SetLabel("Caption below the plot (text appearance)")
+        ucrPlotTitle.SetLabel("Plot title(text appearance)")
 
         ucrStripBackGround.SetLabel("Background of facet labels")
         ucrStripText.SetLabel("Facet labels")
@@ -125,14 +125,12 @@ Public Class sdgThemes
         ucrInputLegendBoxJust.SetItems(dctLegendBoxJust)
         ucrInputLegendBoxJust.SetRDefault(Chr(34) & "top" & Chr(34))
 
-
         ucrChkLegendDirection.SetText("Legend Direction")
         ucrInputLegendDirection.SetParameter(New RParameter("legend.direction"))
         dctLegendDirection.Add("Vertical", Chr(34) & "vertical" & Chr(34))
         dctLegendDirection.Add("Horizontal", Chr(34) & "horizontal" & Chr(34))
         ucrInputLegendDirection.SetItems(dctLegendDirection)
         ucrInputLegendDirection.SetRDefault(Chr(34) & "vertical" & Chr(34))
-
 
         ucrChkLegendJustification.SetText("Legend Justification")
         ucrInputLegendJustification.SetParameter(New RParameter("legend.justification"))
