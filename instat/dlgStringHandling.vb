@@ -114,7 +114,7 @@ Public Class dlgStringHandling
         clsRegexFunction.AddParameter("ignore_case", "TRUE")
         ucrReceiverForRegexExpression.SetText("")
 
-        clsRegexFunction.AddParameter("pattern", Chr(34) & ucrReceiverForRegexExpression.cboExpression.Text & Chr(34))
+        clsRegexFunction.AddParameter("pattern", Chr(34) & ucrReceiverForRegexExpression.cboExpression.SelectedItem & Chr(34))
 
         clsCountFunction.SetPackageName("stringr")
         clsCountFunction.SetRCommand("str_count")
@@ -171,6 +171,7 @@ Public Class dlgStringHandling
         ucrSaveStringHandling.SetRCode(clsCountFunction, bReset)
         ucrChkIncludeRegularExpressions.SetRCode(clsFixedFunction, bReset)
         ucrPnlFixedRegex.SetRCode(clsFixedFunction, bReset)
+        ucrReceiverForRegexExpression.SetRCode(clsRegexFunction, bReset)
 
         ucrSaveStringHandling.AddAdditionalRCode(clsDetectFunction, iAdditionalPairNo:=1)
         ucrSaveStringHandling.AddAdditionalRCode(clsExtractFunction, iAdditionalPairNo:=2)
@@ -307,6 +308,10 @@ Public Class dlgStringHandling
         If ((rdoReplace.Checked OrElse rdoReplaceAll.Checked OrElse Not ucrReceiverForRegexExpression.IsEmpty) AndAlso ucrSaveStringHandling.IsComplete() AndAlso Not ucrReceiverStringHandling.IsEmpty() AndAlso Not ucrInputPattern.IsEmpty AndAlso Not ucrInputReplaceBy.IsEmpty) Then
             ucrBase.OKEnabled(True)
         ElseIf (rdoCount.Checked OrElse rdoDetect.Checked OrElse rdoExtract.Checked OrElse rdoLocate.Checked OrElse Not ucrReceiverForRegexExpression.IsEmpty) AndAlso ucrSaveStringHandling.IsComplete() AndAlso Not ucrReceiverStringHandling.IsEmpty() AndAlso Not ucrInputPattern.IsEmpty() Then
+            ucrBase.OKEnabled(True)
+        ElseIf (rdoReplace.Checked OrElse rdoReplaceAll.Checked) AndAlso ucrSaveStringHandling.IsComplete() AndAlso Not ucrReceiverStringHandling.IsEmpty() AndAlso Not ucrReceiverForRegexExpression.IsEmpty AndAlso Not ucrInputReplaceBy.IsEmpty Then
+            ucrBase.OKEnabled(True)
+        ElseIf (rdoCount.Checked OrElse rdoDetect.Checked OrElse rdoExtract.Checked OrElse rdoLocate.Checked) AndAlso ucrSaveStringHandling.IsComplete() AndAlso Not ucrReceiverStringHandling.IsEmpty() AndAlso Not ucrReceiverForRegexExpression.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
