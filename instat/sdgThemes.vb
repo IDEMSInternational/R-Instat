@@ -63,10 +63,10 @@ Public Class sdgThemes
         ucrLegendSpacingYAxis.setlabel("Horizontal spacing between legends")
         ucrLegendBoxSpacing.setlabel("Space between plot area legend box")
 
-        ucrPanelGridMajorXAxis.SetLabel("vertical major grid lines ")
-        ucrPanelGridMajorYAxis.SetLabel("horizontal major grid lines ")
-        ucrPanelGridMinorXAxis.SetLabel("vertical minor grid lines")
-        ucrPanelGridMinorYAxis.SetLabel("horizontal minor grid lines")
+        ucrPanelGridMajorXAxis.SetLabel("Vertical major grid lines ")
+        ucrPanelGridMajorYAxis.SetLabel("Horizontal major grid lines ")
+        ucrPanelGridMinorXAxis.SetLabel("Vertical minor grid lines")
+        ucrPanelGridMinorYAxis.SetLabel("Horizontal minor grid lines")
 
         ucrPanelGrid.SetLabel("Grid lines")
         ucrPanelGridMajor.SetLabel("Major grid lines ")
@@ -74,10 +74,10 @@ Public Class sdgThemes
         ucrPanelBorder.SetLabel("Panel border")
         ucrPanelBackGround.SetLabel("Panel background")
 
-        ucrPlotBackGround.SetLabel("Background of the entire plot")
+        ucrPlotBackground.SetLabel("Background of the entire plot")
         ucrPlotCaption.SetLabel("Caption below the plot (text appearance)")
-        ucrPlotSubTitle.SetLabel("Plot subtitle(text appearance)")
-        ucrPlotTitle.SetLabel("Plot title(text appearance)")
+        ucrPlotSubTitle.SetLabel("Plot subtitle (text appearance)")
+        ucrPlotTitle.SetLabel("Plot title (text appearance)")
 
         ucrStripBackGround.SetLabel("Background of facet labels")
         ucrStripText.SetLabel("Facet labels")
@@ -95,8 +95,8 @@ Public Class sdgThemes
         ucrPanelSpacingXAxis.setlabel("Horizontal spacing between facet panels")
         ucrPanelSpacingYAxis.setlabel("Vertical spacing between facet panels")
 
-        ucrStripsSpaceGrid.setlabel("When strips are switched(Grid)")
-        ucrStripsSpaceWrap.setlabel("when strips are switched(wrap)")
+        ucrStripsSpaceGrid.setlabel("When strips are switched (Grid)")
+        ucrStripsSpaceWrap.setlabel("when strips are switched (wrap)")
 
         ' TODO: Find what this means: "two-element numeric vector"
         urChkLegendPosition.SetText("Legend Position")

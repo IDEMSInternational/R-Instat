@@ -111,11 +111,12 @@ Partial Class dlgShowModel
         '
         Me.ucrDistributionsFOrTablePlus.Location = New System.Drawing.Point(255, 80)
         Me.ucrDistributionsFOrTablePlus.Name = "ucrDistributionsFOrTablePlus"
-        Me.ucrDistributionsFOrTablePlus.Size = New System.Drawing.Size(209, 185)
+        Me.ucrDistributionsFOrTablePlus.Size = New System.Drawing.Size(254, 185)
         Me.ucrDistributionsFOrTablePlus.TabIndex = 11
         '
         'ucrInputNewColNameforTablePlus
         '
+        Me.ucrInputNewColNameforTablePlus.AddQuotesIfUnrecognised = True
         Me.ucrInputNewColNameforTablePlus.IsReadOnly = False
         Me.ucrInputNewColNameforTablePlus.Location = New System.Drawing.Point(114, 266)
         Me.ucrInputNewColNameforTablePlus.Name = "ucrInputNewColNameforTablePlus"
@@ -134,12 +135,15 @@ Partial Class dlgShowModel
         '
         'ucrReceiverExpressionForTablePlus
         '
+        Me.ucrReceiverExpressionForTablePlus.frmParent = Me
         Me.ucrReceiverExpressionForTablePlus.Location = New System.Drawing.Point(246, 57)
         Me.ucrReceiverExpressionForTablePlus.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverExpressionForTablePlus.Name = "ucrReceiverExpressionForTablePlus"
         Me.ucrReceiverExpressionForTablePlus.Selector = Nothing
         Me.ucrReceiverExpressionForTablePlus.Size = New System.Drawing.Size(137, 20)
+        Me.ucrReceiverExpressionForTablePlus.strNcFilePath = ""
         Me.ucrReceiverExpressionForTablePlus.TabIndex = 2
+        Me.ucrReceiverExpressionForTablePlus.ucrSelector = Nothing
         '
         'ucrBase
         '
@@ -150,6 +154,7 @@ Partial Class dlgShowModel
         '
         'ucrInputProbabilities
         '
+        Me.ucrInputProbabilities.AddQuotesIfUnrecognised = True
         Me.ucrInputProbabilities.IsReadOnly = False
         Me.ucrInputProbabilities.Location = New System.Drawing.Point(246, 57)
         Me.ucrInputProbabilities.Name = "ucrInputProbabilities"
