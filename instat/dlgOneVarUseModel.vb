@@ -21,6 +21,10 @@ Public Class dlgOneVarUseModel
     Public bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
     Public clsRBootFunction, clsQuantileFunction, clsSeqFunction, clsReceiver, clsRPlotFunction As New RFunction
+    'temp fix to deciding if plot should be included
+    'won't be needed once RSyntax can contain multiple functions
+    Private bPlot As Boolean
+
     Private Sub dlgOneVarUseModel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bfirstload Then
@@ -46,7 +50,7 @@ Public Class dlgOneVarUseModel
         ucrReceiverObject.SetMeAsReceiver()
         ucrReceiverObject.strSelectorHeading = "Models"
 
-        ucrSelectorUseModel.SetItemType("model")
+        ucrReceiverObject.SetItemType("model")
 
         ucrChkProduceBootstrap.AddToLinkedControls(ucrSaveObjects, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=False)
         ucrChkProduceBootstrap.AddParameterValueFunctionNamesCondition(True, "x", "bootdist", True)
@@ -84,6 +88,8 @@ Public Class dlgOneVarUseModel
         clsRPlotFunction.SetPackageName("graphics")
         clsRPlotFunction.SetRCommand("plot")
 
+        'default for running plot
+        bPlot = True
         clsSeqFunction.SetRCommand("seq")
         clsSeqFunction.AddParameter("from", 0)
         clsSeqFunction.AddParameter("to", 1)
@@ -134,7 +140,7 @@ Public Class dlgOneVarUseModel
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        If Not sdgOneVarUseModFit.rdoNoPlot.Checked Then
+        If bPlot Then
             frmMain.clsRLink.RunScript(clsRPlotFunction.ToScript(), iCallType:=3)
         Else
 
@@ -149,16 +155,9 @@ Public Class dlgOneVarUseModel
     'End If
     'End Sub
 
-    Public Sub QuantileCommand()
-        If sdgOneVarUseModFit.rdoSequence.Checked Then
-            clsQuantileFunction.AddParameter("probs", clsRFunctionParameter:=clsSeqFunction)
-        Else
-            clsQuantileFunction.AddParameter("probs", strParameterValue:="c(" & sdgOneVarUseModFit.ucrInputQuantiles.GetText & ")")
-        End If
-    End Sub
-
     Private Sub cmdFitModel_Click(sender As Object, e As EventArgs) Handles cmdFitModelandBootstrap.Click
         sdgOneVarUseModFit.SetRFunction(clsSeqFunction, clsRBootFunction, clsQuantileFunction, clsReceiver, clsRPlotFunction, bResetSubdialog)
+        bPlot = Not sdgOneVarUseModFit.rdoNoPlot.Checked
         bResetSubdialog = False
         sdgOneVarUseModFit.ShowDialog()
         sdgOneVarUseModFit.SetPlotOptions()

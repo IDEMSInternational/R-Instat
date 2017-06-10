@@ -134,7 +134,7 @@ Public Class RCodeStructure
 
                 clsGetColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
                 clsGetColumns.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
-                clsGetColumns.AddParameter("col_name", Chr(34) & strAssignToColumn & Chr(34))
+                clsGetColumns.AddParameter("col_names", Chr(34) & strAssignToColumn & Chr(34))
                 strAssignTo = clsGetColumns.ToScript()
             ElseIf Not strAssignToModel = "" Then
                 clsAddModels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_model")

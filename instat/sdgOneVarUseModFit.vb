@@ -183,8 +183,16 @@ Public Class sdgOneVarUseModFit
     End Sub
 
     Private Sub ucrBase_ClickReturn(sender As Object, e As EventArgs) Handles ucrBase.ClickReturn
-        dlgOneVarUseModel.QuantileCommand()
+        QuantileCommand()
         CreateGraphs()
+    End Sub
+
+    Public Sub QuantileCommand()
+        If rdoSequence.Checked Then
+            clsOneVarQuantileFunction.AddParameter("probs", clsRFunctionParameter:=clsRSeqFunction)
+        Else
+            clsOneVarQuantileFunction.AddParameter("probs", strParameterValue:="c(" & ucrInputQuantiles.GetText & ")")
+        End If
     End Sub
 
     Private Sub InitialiseTabs()
