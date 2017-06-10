@@ -151,7 +151,6 @@ Public Class dlgOneVarFitModel
         clsRPoissonTest.ClearParameters()
         clsRBinomTest.ClearParameters()
         clsRTTest.ClearParameters()
-        clsRConvert.ClearParameters()
         clsRStartValues.ClearParameters()
         If rdoGeneral.Checked Then
             FitDistFunction()
@@ -294,7 +293,6 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub PlotResiduals()
-        clsRConvert.ClearParameters()
         clsRplot.SetRCommand("plot")
         clsRplot.AddParameter("x", clsRFunctionParameter:=clsRfitdist)
         clsRfitdist.SetRCommand("fitdist")
