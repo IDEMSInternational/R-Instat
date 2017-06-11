@@ -49,8 +49,6 @@ Public Class dlgExportToOpenRefine
         clsDefaultWrite = New RFunction
 
         ucrDataFrameOpenRefine.Reset()
-        ucrInputDatasetName.Reset()
-        NewDefaultName()
 
         clsDefaultWrite.SetPackageName("utils")
         clsDefaultWrite.SetRCommand("write.csv")
@@ -58,6 +56,7 @@ Public Class dlgExportToOpenRefine
 
         clsDefaultRefine.SetPackageName("rrefine")
         clsDefaultRefine.SetRCommand("refine_upload")
+        clsDefaultRefine.AddParameter("project.name", ucrDataFrameOpenRefine.cboAvailableDataFrames.SelectedItem & "_clean_up")
         clsDefaultRefine.AddParameter("open.browser", "FALSE")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRefine)
