@@ -26,6 +26,7 @@ Public Class dlgHistogram
     Private clsXlabsFunction As New RFunction
     Private clsYlabFunction As New RFunction
     Private clsXScalecontinuousFunction As New RFunction
+    Private clsYScalecontinuousFunction As New RFunction
     Private clsRFacetFunction As New RFunction
     Private clsThemeFunction As New RFunction
     Private dctThemeFunctions As New Dictionary(Of String, RFunction)
@@ -115,9 +116,10 @@ Public Class dlgHistogram
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
-        clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone
+        clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone()
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
+        clsYScalecontinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone()
         clsRFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
         clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction
@@ -164,7 +166,7 @@ Public Class dlgHistogram
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetRCode(clsBaseOperator, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewFacetFunction:=clsRFacetFunction, strNewDataFrame:=ucrHistogramSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bReset:=bResetSubdialog)
+        sdgPlots.SetRCode(clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewFacetFunction:=clsRFacetFunction, strNewDataFrame:=ucrHistogramSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
     End Sub
