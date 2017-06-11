@@ -53,6 +53,7 @@ Public Class dlgSummaryBarOrPieChart
 
         ucrPnlOptions.AddRadioButton(rdoBarChart)
         ucrPnlOptions.AddRadioButton(rdoPieChart)
+        ucrPnlOptions.AddRadioButton(rdoTable)
         ucrPnlOptions.AddParameterPresentCondition(rdoPieChart, "coord_polar")
         ucrPnlOptions.AddParameterPresentCondition(rdoBarChart, "coord_polar", False)
 
@@ -103,7 +104,6 @@ Public Class dlgSummaryBarOrPieChart
         ucrSummaryBarSelector.Reset()
         ucrYReceiver.SetMeAsReceiver()
         ucrSaveSummaryBar.Reset()
-        SetDialogOptions()
         bResetSubdialog = True
 
         clsBaseOperator.SetOperation("+")
@@ -127,6 +127,7 @@ Public Class dlgSummaryBarOrPieChart
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
         clsRFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
+
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
         clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction
 
@@ -141,6 +142,7 @@ Public Class dlgSummaryBarOrPieChart
         ucrSaveSummaryBar.SetRCode(clsBaseOperator, bReset)
         ucrSummaryBarSelector.SetRCode(clsRggplotFunction, bReset)
         ucrPnlOptions.SetRCode(clsBaseOperator, bReset)
+        SetDialogOptions()
     End Sub
 
     Private Sub TestOkEnabled()

@@ -196,7 +196,6 @@ Public Class ucrInputComboBox
         bAllowNonConditionValues = False
         FillItemTypes()
         If bFirstLoad Then
-            SetDropDownStyleAsEditable(True)
             bFirstLoad = False
         End If
     End Sub
