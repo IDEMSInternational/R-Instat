@@ -29,6 +29,7 @@ Public Class ucrAxes
     Public strAxisType As String
     Public bFirstLoad As Boolean = True
     Private bInitialiseControls As Boolean = False
+    Private clsExpandFunction As New RFunction
     Private bRCodeSet As Boolean = False
 
     Public Sub InitialiseControl()
@@ -248,6 +249,7 @@ Public Class ucrAxes
             clsMinorBreaksSeqFunction.SetRCommand("seq")
         End If
 
+        clsExpandFunction.SetRCommand("c")
         ucrPnlAxisTitle.SetRCode(clsXYlabTitleFunction, bReset)
         ucrInputTitle.SetRCode(clsXYlabTitleFunction, bReset)
 
@@ -266,7 +268,7 @@ Public Class ucrAxes
         ucrInputTransformation.SetRCode(clsXYScaleContinuousFunction, bReset)
 
         ucrChkExpand.SetRCode(clsXYScaleContinuousFunction, bReset)
-        ucrInputExpand.SetRCode(clsXYScaleContinuousFunction, bReset)
+        ucrInputExpand.SetRCode(clsExpandFunction, bReset)
 
         ucrPnlMajorBreaks.SetRCode(clsXYScaleContinuousFunction, bReset)
         ucrInputMajorBreaksCustom.SetRCode(clsXYScaleContinuousFunction, bReset)
@@ -399,5 +401,13 @@ Public Class ucrAxes
             clsXYScaleContinuousFunction.RemoveParameterByName("limits")
         End If
         AddRemoveContinuousXYScales()
+    End Sub
+
+    Private Sub ucrChkExpand_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExpand.ControlValueChanged
+        If ucrChkExpand.Checked Then
+            clsXYScaleContinuousFunction.AddParameter("expand", clsRFunctionParameter:=clsExpandFunction)
+        Else
+            clsXYScaleContinuousFunction.RemoveParameterByName("expand")
+        End If
     End Sub
 End Class
