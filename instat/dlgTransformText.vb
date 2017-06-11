@@ -335,11 +335,11 @@ Public Class dlgTransformText
                 ucrBase.clsRsyntax.SetBaseRFunction(clsConvertFunction)
                 Select Case ucrInputTo.GetText
                     Case "Lower"
-                        ucrBase.clsRsyntax.SetFunction("str_to_lower")
+                        ucrBase.clsRsyntax.SetFunction("stringr::str_to_lower")
                     Case "Upper"
-                        ucrBase.clsRsyntax.SetFunction("str_to_upper")
+                        ucrBase.clsRsyntax.SetFunction("stringr::str_to_upper")
                     Case "Title"
-                        ucrBase.clsRsyntax.SetFunction("str_to_title")
+                        ucrBase.clsRsyntax.SetFunction("stringr::str_to_title")
                 End Select
             End If
             TestOkEnabled()
