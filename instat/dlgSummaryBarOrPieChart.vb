@@ -103,7 +103,6 @@ Public Class dlgSummaryBarOrPieChart
         ucrSummaryBarSelector.Reset()
         ucrYReceiver.SetMeAsReceiver()
         ucrSaveSummaryBar.Reset()
-        SetDialogOptions()
         bResetSubdialog = True
 
         clsBaseOperator.SetOperation("+")
@@ -142,6 +141,7 @@ Public Class dlgSummaryBarOrPieChart
         ucrSaveSummaryBar.SetRCode(clsBaseOperator, bReset)
         ucrSummaryBarSelector.SetRCode(clsRggplotFunction, bReset)
         ucrPnlOptions.SetRCode(clsBaseOperator, bReset)
+        SetDialogOptions()
     End Sub
 
     Private Sub TestOkEnabled()
