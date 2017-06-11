@@ -68,10 +68,14 @@ Public Class ucrReceiver
     End Sub
 
     Public Overridable Sub RemoveSelected()
-        If Selector IsNot Nothing Then
+        If IsCurrentReceiver() Then
             Selector.LoadList()
         End If
     End Sub
+
+    Private Function IsCurrentReceiver() As Boolean
+        Return Selector IsNot Nothing AndAlso Selector.CurrentReceiver IsNot Nothing AndAlso Selector.CurrentReceiver.Equals(Me)
+    End Function
 
     Public Overridable Sub Remove(strItems As String())
 
@@ -99,7 +103,7 @@ Public Class ucrReceiver
         End Get
         Set(strFilePath As String)
             strPrvNcFilePath = strFilePath
-            If Selector IsNot Nothing Then
+            If IsCurrentReceiver() Then
                 Selector.LoadList()
             End If
         End Set
@@ -229,7 +233,7 @@ Public Class ucrReceiver
         '    lstExcludedMetadataProperties.RemoveAt(iExcludeIndex)
         'End If
 
-        If Selector IsNot Nothing Then
+        If IsCurrentReceiver() Then
             Selector.LoadList()
         End If
 
@@ -242,7 +246,7 @@ Public Class ucrReceiver
         If iIncludeIndex <> -1 Then
             lstIncludedMetadataProperties.RemoveAt(iIncludeIndex)
         End If
-        If Selector IsNot Nothing Then
+        If IsCurrentReceiver() Then
             Selector.LoadList()
         End If
 
@@ -255,7 +259,7 @@ Public Class ucrReceiver
         If iIncludeIndex <> -1 Then
             lstExcludedMetadataProperties.RemoveAt(iIncludeIndex)
         End If
-        If Selector IsNot Nothing Then
+        If IsCurrentReceiver() Then
             Selector.LoadList()
         End If
     End Sub
@@ -285,7 +289,7 @@ Public Class ucrReceiver
         '    lstIncludedMetadataProperties.RemoveAt(iIncludeIndex)
         'End If
 
-        If Selector IsNot Nothing Then
+        If IsCurrentReceiver() Then
             Selector.LoadList()
         End If
     End Sub
@@ -328,7 +332,7 @@ Public Class ucrReceiver
             Case "object"
                 strItemsParameterNameInRFunction = "object_name"
         End Select
-        If Selector IsNot Nothing Then
+        If IsCurrentReceiver() Then
             Selector.LoadList()
         End If
         bTypeSet = True
