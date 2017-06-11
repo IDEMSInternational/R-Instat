@@ -132,6 +132,7 @@ Public Class dlgCumulativeDistribution
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
+        clsYScalecontinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone
         clsRFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
         clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone
 

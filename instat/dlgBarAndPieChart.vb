@@ -163,6 +163,7 @@ Public Class dlgBarAndPieChart
         clsXlabFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone()
         clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
+        clsYScalecontinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone
         clsRFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsThemeFuction = GgplotDefaults.clsDefaultThemeFunction.Clone
