@@ -50,7 +50,6 @@ Public Class dlgRenameObjects
 
         'ucrSelector
         ucrSelectorForRenameObject.SetParameter(New RParameter("data_name", 0))
-        ucrSelectorForRenameObject.SetItemType("object")
         ucrSelectorForRenameObject.SetParameterIsString()
 
         'ucrReceiver
@@ -58,6 +57,7 @@ Public Class dlgRenameObjects
         ucrReceiverCurrentName.Selector = ucrSelectorForRenameObject
         ucrReceiverCurrentName.SetMeAsReceiver()
         ucrReceiverCurrentName.SetParameterIsString()
+        ucrReceiverCurrentName.SetItemType("object")
 
         'ucrNewName
         ucrInputNewName.SetParameter(New RParameter("new_name", 2))
