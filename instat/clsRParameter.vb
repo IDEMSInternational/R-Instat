@@ -125,6 +125,7 @@ Public Class RParameter
         clsTempRParam.bIsFunction = bIsFunction
         clsTempRParam.bIsOperator = bIsOperator
         clsTempRParam.bIsString = bIsString
+        clsTempRParam.iPosition = iPosition
         clsTempRParam.bIncludeArgumentName = bIncludeArgumentName
         If clsArgumentCodeStructure IsNot Nothing Then
             clsTempRParam.clsArgumentCodeStructure = clsArgumentCodeStructure.Clone

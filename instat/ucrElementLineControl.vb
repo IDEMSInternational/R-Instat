@@ -28,7 +28,6 @@ Public Class ucrElementLineControl
         ucrChkTickSize.AddParameterPresentCondition(False, "size", False)
         ucrNudTickSize.Increment = 0.1
 
-
         ucrChkTickLineType.SetText("Line Type")
         ucrInputTickLineType.SetParameter(New RParameter("linetype"))
         ucrChkTickLineType.AddParameterPresentCondition(True, "linetype")
