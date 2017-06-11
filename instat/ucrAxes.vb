@@ -14,8 +14,6 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
-
 Public Class ucrAxes
     Public bIsX As Boolean
     Public clsXYlabTitleFunction As New RFunction
@@ -180,6 +178,7 @@ Public Class ucrAxes
 
         ucrChkExpand.SetText("Expand")
         ucrInputExpand.SetParameter(New RParameter("expand"))
+        ucrInputExpand.SetParameterIncludeArgumentName(False)
         ucrChkExpand.AddParameterPresentCondition(True, "expand")
         ucrChkExpand.AddParameterPresentCondition(False, "expand", False)
         ucrChkExpand.AddToLinkedControls(ucrInputExpand, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
@@ -325,26 +324,6 @@ Public Class ucrAxes
         End If
     End Sub
 
-    'Private Sub tickMarkersDisplay()
-    '    If rdoMajorBreaksNone.Checked AndAlso ucrTickMarkers.GetText = "Specific Values" Then
-    '        ucrInputMajorBreaksCustom.Visible = True
-    '        ucrInputMajorBreaksFrom.Visible = False
-    '        lblMajorBreaksFrom.Visible = False
-    '        ucrInputMajorBreaksTo.Visible = False
-    '        lblMajorBreaksTo.Visible = False
-    '        ucrInputMajorBreaksInStepsOf.Visible = False
-    '        lblMajorBreaksInStepsOf.Visible = False
-    '    Else
-    '        ucrInputMajorBreaksCustom.Visible = False
-    '        ucrInputMajorBreaksFrom.Visible = True
-    '        lblMajorBreaksFrom.Visible = True
-    '        ucrInputMajorBreaksTo.Visible = True
-    '        lblMajorBreaksTo.Visible = True
-    '        ucrInputMajorBreaksInStepsOf.Visible = True
-    '        lblMajorBreaksInStepsOf.Visible = True
-    '    End If
-    'End Sub
-
     Private Sub ucrInputAxisType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputAxisType.ControlValueChanged
         SetAxisTypeControls()
     End Sub
@@ -409,5 +388,10 @@ Public Class ucrAxes
         Else
             clsXYScaleContinuousFunction.RemoveParameterByName("expand")
         End If
+        AddRemoveContinuousXYScales()
+    End Sub
+
+    Private Sub ucrChkNaValue_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExpand.ControlValueChanged, ucrChkPosition.ControlValueChanged, ucrChkTransformation.ControlValueChanged, ucrChkExpand.ControlValueChanged
+        AddRemoveContinuousXYScales()
     End Sub
 End Class

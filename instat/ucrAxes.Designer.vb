@@ -45,9 +45,13 @@ Partial Class ucrAxes
         Me.ucrPnlMajorBreaks = New instat.UcrPanel()
         Me.ucrInputMajorBreaksCustom = New instat.ucrInputTextBox()
         Me.grpScales = New System.Windows.Forms.GroupBox()
+        Me.ucrInputRelaceMissingvalues = New instat.ucrInputTextBox()
         Me.ucrInputExpand = New instat.ucrInputTextBox()
         Me.ucrInputTransformation = New instat.ucrInputComboBox()
         Me.ucrInputPosition = New instat.ucrInputComboBox()
+        Me.ucrChkExpand = New instat.ucrCheck()
+        Me.ucrChkTransformation = New instat.ucrCheck()
+        Me.ucrChkPosition = New instat.ucrCheck()
         Me.ucrChkNaValue = New instat.ucrCheck()
         Me.ucrInputUpperLimit = New instat.ucrInputTextBox()
         Me.ucrInputLowerLimit = New instat.ucrInputTextBox()
@@ -70,10 +74,6 @@ Partial Class ucrAxes
         Me.grpMinorBreaks = New System.Windows.Forms.GroupBox()
         Me.lblMinorBreaksFrom = New System.Windows.Forms.Label()
         Me.rdoMinorBreaksNone = New System.Windows.Forms.RadioButton()
-        Me.ucrInputRelaceMissingvalues = New instat.ucrInputTextBox()
-        Me.ucrChkPosition = New instat.ucrCheck()
-        Me.ucrChkTransformation = New instat.ucrCheck()
-        Me.ucrChkExpand = New instat.ucrCheck()
         Me.grpAxisTitle.SuspendLayout()
         Me.grpMajorBreaks.SuspendLayout()
         Me.grpScales.SuspendLayout()
@@ -337,6 +337,16 @@ Partial Class ucrAxes
         Me.grpScales.TabStop = False
         Me.grpScales.Text = "Scales"
         '
+        'ucrInputRelaceMissingvalues
+        '
+        Me.ucrInputRelaceMissingvalues.AddQuotesIfUnrecognised = True
+        Me.ucrInputRelaceMissingvalues.IsMultiline = False
+        Me.ucrInputRelaceMissingvalues.IsReadOnly = False
+        Me.ucrInputRelaceMissingvalues.Location = New System.Drawing.Point(112, 103)
+        Me.ucrInputRelaceMissingvalues.Name = "ucrInputRelaceMissingvalues"
+        Me.ucrInputRelaceMissingvalues.Size = New System.Drawing.Size(91, 21)
+        Me.ucrInputRelaceMissingvalues.TabIndex = 27
+        '
         'ucrInputExpand
         '
         Me.ucrInputExpand.AddQuotesIfUnrecognised = True
@@ -364,6 +374,30 @@ Partial Class ucrAxes
         Me.ucrInputPosition.Name = "ucrInputPosition"
         Me.ucrInputPosition.Size = New System.Drawing.Size(91, 21)
         Me.ucrInputPosition.TabIndex = 26
+        '
+        'ucrChkExpand
+        '
+        Me.ucrChkExpand.Checked = False
+        Me.ucrChkExpand.Location = New System.Drawing.Point(6, 187)
+        Me.ucrChkExpand.Name = "ucrChkExpand"
+        Me.ucrChkExpand.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkExpand.TabIndex = 23
+        '
+        'ucrChkTransformation
+        '
+        Me.ucrChkTransformation.Checked = False
+        Me.ucrChkTransformation.Location = New System.Drawing.Point(6, 159)
+        Me.ucrChkTransformation.Name = "ucrChkTransformation"
+        Me.ucrChkTransformation.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkTransformation.TabIndex = 23
+        '
+        'ucrChkPosition
+        '
+        Me.ucrChkPosition.Checked = False
+        Me.ucrChkPosition.Location = New System.Drawing.Point(6, 131)
+        Me.ucrChkPosition.Name = "ucrChkPosition"
+        Me.ucrChkPosition.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkPosition.TabIndex = 23
         '
         'ucrChkNaValue
         '
@@ -587,40 +621,6 @@ Partial Class ucrAxes
         Me.rdoMinorBreaksNone.TabStop = True
         Me.rdoMinorBreaksNone.Text = "None"
         Me.rdoMinorBreaksNone.UseVisualStyleBackColor = True
-        '
-        'ucrInputRelaceMissingvalues
-        '
-        Me.ucrInputRelaceMissingvalues.AddQuotesIfUnrecognised = True
-        Me.ucrInputRelaceMissingvalues.IsMultiline = False
-        Me.ucrInputRelaceMissingvalues.IsReadOnly = False
-        Me.ucrInputRelaceMissingvalues.Location = New System.Drawing.Point(112, 103)
-        Me.ucrInputRelaceMissingvalues.Name = "ucrInputRelaceMissingvalues"
-        Me.ucrInputRelaceMissingvalues.Size = New System.Drawing.Size(91, 21)
-        Me.ucrInputRelaceMissingvalues.TabIndex = 27
-        '
-        'ucrChkPosition
-        '
-        Me.ucrChkPosition.Checked = False
-        Me.ucrChkPosition.Location = New System.Drawing.Point(7, 131)
-        Me.ucrChkPosition.Name = "ucrChkPosition"
-        Me.ucrChkPosition.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkPosition.TabIndex = 23
-        '
-        'ucrChkTransformation
-        '
-        Me.ucrChkTransformation.Checked = False
-        Me.ucrChkTransformation.Location = New System.Drawing.Point(4, 159)
-        Me.ucrChkTransformation.Name = "ucrChkTransformation"
-        Me.ucrChkTransformation.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkTransformation.TabIndex = 23
-        '
-        'ucrChkExpand
-        '
-        Me.ucrChkExpand.Checked = False
-        Me.ucrChkExpand.Location = New System.Drawing.Point(6, 187)
-        Me.ucrChkExpand.Name = "ucrChkExpand"
-        Me.ucrChkExpand.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkExpand.TabIndex = 23
         '
         'ucrAxes
         '
