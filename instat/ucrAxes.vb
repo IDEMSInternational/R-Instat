@@ -14,6 +14,8 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
+
 Public Class ucrAxes
     Public bIsX As Boolean
     Public clsXYlabTitleFunction As New RFunction
@@ -26,8 +28,7 @@ Public Class ucrAxes
     'e.g. discrete, continuous
     Public strAxisType As String
     Public bFirstLoad As Boolean = True
-    Private bInitialiseControls As Boolean = False
-    Private clsExpandFunction As New RFunction
+    Private bControlsInitialised As Boolean = False
     Private bRCodeSet As Boolean = False
 
     Public Sub InitialiseControl()
@@ -57,6 +58,7 @@ Public Class ucrAxes
         ucrPnlMajorBreaks.AddParameterValuesCondition(rdoMajorBreaksNone, "breaks", "NULL")
         ucrPnlMajorBreaks.AddParameterValueFunctionNamesCondition(rdoMajorBreaksSeq, "breaks", "seq")
         ucrPnlMajorBreaks.AddParameterPresentCondition(rdoMajorBreaksCustom, "breaks")
+        ucrPnlMajorBreaks.AddParameterValuesCondition(rdoMajorBreaksCustom, "breaks", "NULL", bNewIsPositive:=False)
         ucrPnlMajorBreaks.AddParameterIsStringCondition(rdoMajorBreaksCustom, "breaks")
 
         ucrPnlMajorBreaks.AddToLinkedControls(ucrInputMajorBreaksFrom, {rdoMajorBreaksSeq}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -64,18 +66,17 @@ Public Class ucrAxes
         ucrPnlMajorBreaks.AddToLinkedControls(ucrInputMajorBreaksInStepsOf, {rdoMajorBreaksSeq}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMajorBreaks.AddToLinkedControls(ucrInputMajorBreaksInStepsOf, {rdoMajorBreaksSeq}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMajorBreaks.AddToLinkedControls(ucrInputMajorBreaksCustom, {rdoMajorBreaksCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlMajorBreaks.AddToLinkedControls(ucrChkLabels, {rdoMajorBreaksCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=False)
-
-        ucrChkLabels.AddToLinkedControls(ucrInputMajorBreaksLabels, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
-        'ucrInputMajorBreaksCustom.SetParameter(New RParameter("breaks"))
-        ucrInputMajorBreaksCustom.AddQuotesIfUnrecognised = False
-        ucrInputMajorBreaksCustom.SetValidationTypeAsNumericList()
+        ucrPnlMajorBreaks.AddToLinkedControls(ucrChkLabels, {rdoMajorBreaksSeq, rdoMajorBreaksCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=False)
 
         ucrChkLabels.SetText("Labels")
         ucrChkLabels.AddParameterPresentCondition(True, "labels")
         ucrChkLabels.AddParameterPresentCondition(False, "labels", False)
-        ucrInputMajorBreaksLabels.SetParameter(New RParameter("labels"))
+        ucrChkLabels.AddToLinkedControls(ucrInputMajorBreaksLabels, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
+        ucrInputMajorBreaksLabels.SetValidationTypeAsList()
+
+        'ucrInputMajorBreaksCustom.SetParameter(New RParameter("breaks"))
+        ucrInputMajorBreaksCustom.AddQuotesIfUnrecognised = False
+        ucrInputMajorBreaksCustom.SetValidationTypeAsNumericList()
 
         ucrPnlMinorBreaks.AddRadioButton(rdoMinorBreaksAuto)
         ucrPnlMinorBreaks.AddRadioButton(rdoMinorBreaksCustom)
@@ -151,12 +152,15 @@ Public Class ucrAxes
         ucrInputAxisType.SetItems({"Continuous", "Discrete", "Date"})
         ucrInputAxisType.SetDropDownStyleAsNonEditable()
 
-        ucrChkNaValue.SetText("Replace Missing Values")
         ucrInputRelaceMissingvalues.SetParameter(New RParameter("na.value"))
+        ucrInputRelaceMissingvalues.SetValidationTypeAsNumeric()
+        ucrInputRelaceMissingvalues.bAddRemoveParameter = False
+        ucrInputRelaceMissingvalues.AddQuotesIfUnrecognised = False
+
+        ucrChkNaValue.SetText("Replace Missing Values")
         ucrChkNaValue.AddParameterPresentCondition(True, "na.value")
         ucrChkNaValue.AddParameterPresentCondition(False, "na.value", False)
-        ucrInputRelaceMissingvalues.AddQuotesIfUnrecognised = False
-        ucrChkNaValue.AddToLinkedControls(ucrInputRelaceMissingvalues, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0")
+        ucrChkNaValue.AddToLinkedControls(ucrInputRelaceMissingvalues, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
 
         ucrChkTransformation.SetText("Transfromation")
         ucrInputTransformation.SetParameter(New RParameter("trans"))
@@ -174,14 +178,12 @@ Public Class ucrAxes
         ucrChkPosition.AddToLinkedControls(ucrInputPosition, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=Nothing)
 
         ucrChkExpand.SetText("Expand")
-        ucrInputExpand.SetParameter(New RParameter("expand"))
-        ucrInputExpand.SetParameterIncludeArgumentName(False)
         ucrChkExpand.AddParameterPresentCondition(True, "expand")
         ucrChkExpand.AddParameterPresentCondition(False, "expand", False)
         ucrChkExpand.AddToLinkedControls(ucrInputExpand, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
-        ucrInputExpand.AddQuotesIfUnrecognised = False
         ucrInputExpand.SetValidationTypeAsNumericList()
-        bInitialiseControls = True
+
+        bControlsInitialised = True
     End Sub
 
     Public Sub SetRCodeForControl(bIsXAxis As Boolean, Optional strNewAxisType As String = "Continuous", Optional clsNewXYScaleContinuousFunction As RFunction = Nothing, Optional clsNewXYlabTitleFunction As RFunction = Nothing, Optional clsNewBaseOperator As ROperator = Nothing, Optional bReset As Boolean = False)
@@ -189,7 +191,7 @@ Public Class ucrAxes
         Dim clsTempMinorBreaksParam As RParameter
 
         bRCodeSet = False
-        If Not bInitialiseControls Then
+        If Not bControlsInitialised Then
             InitialiseControl()
         End If
         clsBaseOperator = clsNewBaseOperator
@@ -253,7 +255,6 @@ Public Class ucrAxes
             clsMinorBreaksSeqFunction.SetRCommand("seq")
         End If
 
-        clsExpandFunction.SetRCommand("c")
         ucrPnlAxisTitle.SetRCode(clsXYlabTitleFunction, bReset)
         ucrInputTitle.SetRCode(clsXYlabTitleFunction, bReset)
 
@@ -272,7 +273,6 @@ Public Class ucrAxes
         ucrInputTransformation.SetRCode(clsXYScaleContinuousFunction, bReset)
 
         ucrChkExpand.SetRCode(clsXYScaleContinuousFunction, bReset)
-        ucrInputExpand.SetRCode(clsExpandFunction, bReset)
 
         ucrPnlMajorBreaks.SetRCode(clsXYScaleContinuousFunction, bReset)
         ucrInputMajorBreaksCustom.SetRCode(clsXYScaleContinuousFunction, bReset)
@@ -362,6 +362,7 @@ Public Class ucrAxes
         ElseIf rdoMajorBreaksCustom.Checked Then
             clsXYScaleContinuousFunction.AddParameter("breaks", "c(" & ucrInputMajorBreaksCustom.GetText() & ")")
         End If
+        SetLabelsParameter()
         AddRemoveContinuousXYScales()
     End Sub
 
@@ -387,16 +388,30 @@ Public Class ucrAxes
         AddRemoveContinuousXYScales()
     End Sub
 
-    Private Sub ucrChkExpand_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExpand.ControlValueChanged
-        If ucrChkExpand.Checked Then
-            clsXYScaleContinuousFunction.AddParameter("expand", clsRFunctionParameter:=clsExpandFunction)
+    Private Sub ExpandControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExpand.ControlValueChanged, ucrInputExpand.ControlValueChanged
+        If ucrChkExpand.Checked AndAlso Not ucrInputExpand.IsEmpty Then
+            clsXYScaleContinuousFunction.AddParameter("expand", clsRFunctionParameter:=ucrInputExpand.clsRList)
         Else
             clsXYScaleContinuousFunction.RemoveParameterByName("expand")
         End If
         AddRemoveContinuousXYScales()
     End Sub
 
-    Private Sub ucrChkNaValue_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExpand.ControlValueChanged, ucrChkPosition.ControlValueChanged, ucrChkTransformation.ControlValueChanged, ucrChkExpand.ControlValueChanged
+    Private Sub ScalesCheckboxes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExpand.ControlValueChanged, ucrChkPosition.ControlValueChanged, ucrChkTransformation.ControlValueChanged, ucrChkExpand.ControlValueChanged, ucrChkNaValue.ControlValueChanged
+        AddRemoveContinuousXYScales()
+    End Sub
+
+    Private Sub LabelsControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLabels.ControlValueChanged, ucrInputMajorBreaksLabels.ControlValueChanged
+        SetLabelsParameter()
+    End Sub
+
+    Private Sub SetLabelsParameter()
+        If (rdoMajorBreaksSeq.Checked OrElse rdoMajorBreaksCustom.Checked) AndAlso ucrChkLabels.Checked AndAlso Not ucrInputMajorBreaksLabels.IsEmpty() Then
+            'TODO add functionality to input control to do this automatically for a list
+            clsXYScaleContinuousFunction.AddParameter("labels", ucrInputMajorBreaksLabels.clsRList.ToScript())
+        Else
+            clsXYScaleContinuousFunction.RemoveParameterByName("labels")
+        End If
         AddRemoveContinuousXYScales()
     End Sub
 End Class
