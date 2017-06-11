@@ -20,6 +20,7 @@ Public Class dlgUseGraph
     Private bReset As Boolean = True
     Private clsUseGraphFunction As New RFunction
     Private clsBaseOperator As New ROperator
+    Private clsThemeFunction As New RFunction
     Private bResetSubdialog As Boolean = True
     Private clsLabsFunction As New RFunction
     Private clsXlabsFunction As New RFunction
@@ -27,6 +28,7 @@ Public Class dlgUseGraph
     Private clsXScalecontinuousFunction As New RFunction
     Private clsYScalecontinuousFunction As New RFunction
     Private clsFacetsFunction As New RFunction
+    Private dctThemeFunctions As New Dictionary(Of String, RFunction)
 
     Private Sub dlgUseGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -83,7 +85,8 @@ Public Class dlgUseGraph
         clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
         clsYScalecontinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone()
         clsFacetsFunction = GgplotDefaults.clsFacetFunction.Clone()
-
+        dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
+        clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction
         clsUseGraphFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrGraphsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
@@ -112,7 +115,7 @@ Public Class dlgUseGraph
     End Sub
 
     Private Sub cmdPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdPlotOptions.Click
-        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewLabsFunction:=clsLabsFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabsFunction, clsNewFacetFunction:=clsFacetsFunction, strNewDataFrame:=ucrGraphsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bReset:=bResetSubdialog)
+        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewLabsFunction:=clsLabsFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabsFunction, clsNewFacetFunction:=clsFacetsFunction, strNewDataFrame:=ucrGraphsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
     End Sub
 
