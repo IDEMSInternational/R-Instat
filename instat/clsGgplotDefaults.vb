@@ -287,4 +287,45 @@
             Return clsTempFunc
         End Get
     End Property
+
+    Public Shared ReadOnly Property dctTransformations As Dictionary(Of String, String)
+        Get
+            Dim dcttempTransfromations As New Dictionary(Of String, String)
+            dcttempTransfromations.Add("asn", Chr(34) & "asn" & Chr(34))
+            dcttempTransfromations.Add("atanh", Chr(34) & "atanh" & Chr(34))
+            dcttempTransfromations.Add("boxcox", Chr(34) & "boxcox" & Chr(34))
+            dcttempTransfromations.Add("exp", Chr(34) & "exp" & Chr(34))
+            dcttempTransfromations.Add("identity", Chr(34) & "identity" & Chr(34))
+            dcttempTransfromations.Add("log", Chr(34) & "log" & Chr(34))
+            dcttempTransfromations.Add("log10", Chr(34) & "log10" & Chr(34))
+            dcttempTransfromations.Add("log1p", Chr(34) & "log1p" & Chr(34))
+            dcttempTransfromations.Add("log2", Chr(34) & "log2" & Chr(34))
+            dcttempTransfromations.Add("logit", Chr(34) & "logit" & Chr(34))
+            dcttempTransfromations.Add("probability", Chr(34) & "probability" & Chr(34))
+            dcttempTransfromations.Add("probit", Chr(34) & "probit" & Chr(34))
+            dcttempTransfromations.Add("reciprocal", Chr(34) & "reciprocal" & Chr(34))
+            dcttempTransfromations.Add("reverse", Chr(34) & "reverse" & Chr(34))
+            dcttempTransfromations.Add("sqrt", Chr(34) & "sqrt" & Chr(34))
+            Return dcttempTransfromations
+        End Get
+    End Property
+
+
+    Public Shared ReadOnly Property dctXPosition As Dictionary(Of String, String)
+        Get
+            Dim dctTempXPosition As New Dictionary(Of String, String)
+            dctTempXPosition.Add("Top", Chr(34) & "top" & Chr(34))
+            dctTempXPosition.Add("Bottom", Chr(34) & "bottom" & Chr(34))
+            Return dctTempXPosition
+        End Get
+    End Property
+
+    Public Shared ReadOnly Property dctYPosition As Dictionary(Of String, String)
+        Get
+            Dim dctTempYPosition As New Dictionary(Of String, String)
+            dctTempYPosition.Add("Left", Chr(34) & "left" & Chr(34))
+            dctTempYPosition.Add("Right", Chr(34) & "right" & Chr(34))
+            Return dctTempYPosition
+        End Get
+    End Property
 End Class

@@ -14,8 +14,6 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
-
 Public Class ucrAxes
     Public bIsX As Boolean
     Public clsXYlabTitleFunction As New RFunction
@@ -29,6 +27,7 @@ Public Class ucrAxes
     Public strAxisType As String
     Public bFirstLoad As Boolean = True
     Private bInitialiseControls As Boolean = False
+    Private clsExpandFunction As New RFunction
     Private bRCodeSet As Boolean = False
 
     Public Sub InitialiseControl()
@@ -151,6 +150,33 @@ Public Class ucrAxes
         ucrInputAxisType.SetItems({"Continuous", "Discrete", "Date"})
         ucrInputAxisType.SetDropDownStyleAsNonEditable()
 
+        ucrChkNaValue.SetText("Replace Missing Values")
+        ucrInputRelaceMissingvalues.SetParameter(New RParameter("na.value"))
+        ucrChkNaValue.AddParameterPresentCondition(True, "na.value")
+        ucrChkNaValue.AddParameterPresentCondition(False, "na.value", False)
+        ucrInputRelaceMissingvalues.AddQuotesIfUnrecognised = False
+        ucrChkNaValue.AddToLinkedControls(ucrInputRelaceMissingvalues, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0")
+
+        ucrChkTransformation.SetText("Transfromation")
+        ucrInputTransformation.SetParameter(New RParameter("trans"))
+        ucrChkTransformation.AddParameterPresentCondition(True, "trans")
+        ucrChkTransformation.AddParameterPresentCondition(False, "trans", False)
+        ucrChkTransformation.AddToLinkedControls(ucrInputTransformation, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="asn")
+        ucrInputTransformation.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctTransformations))
+
+        ucrChkPosition.SetText("Position")
+        ucrInputPosition.SetParameter(New RParameter("position"))
+        ucrChkPosition.AddParameterPresentCondition(True, "position")
+        ucrChkPosition.AddParameterPresentCondition(False, "position", False)
+
+        ucrChkExpand.SetText("Expand")
+        ucrInputExpand.SetParameter(New RParameter("expand"))
+        ucrInputExpand.SetParameterIncludeArgumentName(False)
+        ucrChkExpand.AddParameterPresentCondition(True, "expand")
+        ucrChkExpand.AddParameterPresentCondition(False, "expand", False)
+        ucrChkExpand.AddToLinkedControls(ucrInputExpand, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.05,0")
+        ucrInputExpand.AddQuotesIfUnrecognised = False
+        ucrInputExpand.SetValidationTypeAsNumericList()
         bInitialiseControls = True
     End Sub
 
@@ -168,9 +194,18 @@ Public Class ucrAxes
         If bIsXAxis Then
             bIsX = True
             strAxis = "x"
+
         Else
             bIsX = False
             strAxis = "y"
+        End If
+
+        If bIsX Then
+            ucrInputPosition.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctXPosition))
+            ucrChkPosition.AddToLinkedControls(ucrInputPosition, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Bottom")
+        ElseIf bIsX = False
+            ucrInputPosition.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctYPosition))
+            ucrChkPosition.AddToLinkedControls(ucrInputPosition, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Left")
         End If
         ucrInputAxisType.SetName(strAxisType)
 
@@ -214,6 +249,7 @@ Public Class ucrAxes
             clsMinorBreaksSeqFunction.SetRCommand("seq")
         End If
 
+        clsExpandFunction.SetRCommand("c")
         ucrPnlAxisTitle.SetRCode(clsXYlabTitleFunction, bReset)
         ucrInputTitle.SetRCode(clsXYlabTitleFunction, bReset)
 
@@ -221,6 +257,18 @@ Public Class ucrAxes
         ucrPnlScales.SetRCode(clsXYScaleContinuousFunction, bReset)
         ucrInputLowerLimit.SetRCode(clsLimitsFunction, bReset)
         ucrInputUpperLimit.SetRCode(clsLimitsFunction, bReset)
+
+        ucrInputPosition.SetRCode(clsXYScaleContinuousFunction, bReset)
+        ucrChkPosition.SetRCode(clsXYScaleContinuousFunction, bReset)
+
+        ucrChkNaValue.SetRCode(clsXYScaleContinuousFunction, bReset)
+        ucrInputRelaceMissingvalues.SetRCode(clsXYScaleContinuousFunction, bReset)
+
+        ucrChkTransformation.SetRCode(clsXYScaleContinuousFunction, bReset)
+        ucrInputTransformation.SetRCode(clsXYScaleContinuousFunction, bReset)
+
+        ucrChkExpand.SetRCode(clsXYScaleContinuousFunction, bReset)
+        ucrInputExpand.SetRCode(clsExpandFunction, bReset)
 
         ucrPnlMajorBreaks.SetRCode(clsXYScaleContinuousFunction, bReset)
         ucrInputMajorBreaksCustom.SetRCode(clsXYScaleContinuousFunction, bReset)
@@ -237,9 +285,6 @@ Public Class ucrAxes
         ucrInputMinorBreaksInStepsOf.SetRCode(clsMinorBreaksSeqFunction, bReset)
 
         ucrChkLabels.SetRCode(clsXYScaleContinuousFunction, bReset)
-
-
-
         bRCodeSet = True
         SetLabel()
         AddRemoveContinuousXYScales()
@@ -279,26 +324,6 @@ Public Class ucrAxes
             clsBaseOperator.RemoveParameterByName("scale" & "_" & strAxis & "_" & strAxisType)
         End If
     End Sub
-
-    'Private Sub tickMarkersDisplay()
-    '    If rdoMajorBreaksNone.Checked AndAlso ucrTickMarkers.GetText = "Specific Values" Then
-    '        ucrInputMajorBreaksCustom.Visible = True
-    '        ucrInputMajorBreaksFrom.Visible = False
-    '        lblMajorBreaksFrom.Visible = False
-    '        ucrInputMajorBreaksTo.Visible = False
-    '        lblMajorBreaksTo.Visible = False
-    '        ucrInputMajorBreaksInStepsOf.Visible = False
-    '        lblMajorBreaksInStepsOf.Visible = False
-    '    Else
-    '        ucrInputMajorBreaksCustom.Visible = False
-    '        ucrInputMajorBreaksFrom.Visible = True
-    '        lblMajorBreaksFrom.Visible = True
-    '        ucrInputMajorBreaksTo.Visible = True
-    '        lblMajorBreaksTo.Visible = True
-    '        ucrInputMajorBreaksInStepsOf.Visible = True
-    '        lblMajorBreaksInStepsOf.Visible = True
-    '    End If
-    'End Sub
 
     Private Sub ucrInputAxisType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputAxisType.ControlValueChanged
         SetAxisTypeControls()
@@ -356,5 +381,22 @@ Public Class ucrAxes
             clsXYScaleContinuousFunction.RemoveParameterByName("limits")
         End If
         AddRemoveContinuousXYScales()
+    End Sub
+
+    Private Sub ucrChkExpand_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExpand.ControlValueChanged
+        If ucrChkExpand.Checked Then
+            clsXYScaleContinuousFunction.AddParameter("expand", clsRFunctionParameter:=clsExpandFunction)
+        Else
+            clsXYScaleContinuousFunction.RemoveParameterByName("expand")
+        End If
+        AddRemoveContinuousXYScales()
+    End Sub
+
+    Private Sub ucrChkNaValue_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExpand.ControlValueChanged, ucrChkPosition.ControlValueChanged, ucrChkTransformation.ControlValueChanged, ucrChkExpand.ControlValueChanged
+        AddRemoveContinuousXYScales()
+    End Sub
+
+    Private Sub ucrAxes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
     End Sub
 End Class
