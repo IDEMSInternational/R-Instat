@@ -70,6 +70,7 @@ Public Class dlgColourbyProperty
         ucrSelectorColourByMetadata.AddAdditionalCodeParameterPair(clsRemoveColour, ucrSelectorColourByMetadata.GetParameter(), iAdditionalPairNo:=1)
         ucrSelectorColourByMetadata.SetRCode(clsColourByMetadata, bReset)
         ucrReceiverMetadataProperty.SetRCode(clsColourByMetadata, bReset)
+        ucrChkRemoveColours.SetRCode(clsColourByMetadata, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -92,7 +93,6 @@ Public Class dlgColourbyProperty
         Else
             ucrBase.clsRsyntax.SetBaseRFunction(clsColourByMetadata)
         End If
-        SetRCodeForControls(False)
     End Sub
 
     Private Sub Controls_ControContententsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorColourByMetadata.ControlContentsChanged, ucrReceiverMetadataProperty.ControlContentsChanged, ucrChkRemoveColours.ControlContentsChanged
