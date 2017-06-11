@@ -19,8 +19,9 @@ Public Class dlgThreeVariableFrequencies
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
-    Private clsSjTab, clsSelect, clsSjPlot, clsGroupBy, clsGriArrange As New RFunction
+    Private clsSjTab, clsSelect, clsSjPlot, clsGroupBy, clsGridArrange As New RFunction
     Private clsTableBaseOperator, clsGraphBaseOperator As New ROperator
+    Private clsCurrBaseCode As RCodeStructure
 
     Private Sub dlgThreeVariableFrequencies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -145,7 +146,7 @@ Public Class dlgThreeVariableFrequencies
         clsSjPlot = New RFunction
         clsGroupBy = New RFunction
         clsSjTab = New RFunction
-        clsGriArrange = New RFunction
+        clsGridArrange = New RFunction
         clsTableBaseOperator = New ROperator
         clsGraphBaseOperator = New ROperator
 
@@ -181,12 +182,13 @@ Public Class dlgThreeVariableFrequencies
         clsSjPlot.AddParameter("show.prc", "TRUE")
         clsSjPlot.AddParameter("show.n", "TRUE")
 
-        clsGriArrange.SetPackageName("gridExtra")
-        clsGriArrange.SetRCommand("grid.arrange")
-        clsGriArrange.AddParameter("grobs", clsROperatorParameter:=clsGraphBaseOperator)
+        clsGridArrange.SetPackageName("gridExtra")
+        clsGridArrange.SetRCommand("grid.arrange")
+        clsGridArrange.AddParameter("grobs", clsROperatorParameter:=clsGraphBaseOperator)
 
-        clsGriArrange.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorThreeVariableFrequencies.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        clsGridArrange.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorThreeVariableFrequencies.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsTableBaseOperator)
+        clsCurrBaseCode = clsTableBaseOperator
         bResetSubdialog = True
     End Sub
 
@@ -214,13 +216,13 @@ Public Class dlgThreeVariableFrequencies
         ucrChkWeights.SetRCode(clsSjTab, bReset)
         ucrChkFlip.SetRCode(clsSjPlot, bReset)
         ucrPnlFreqType.SetRCode(clsSjPlot, bReset)
-        ucrPnlFrequencyDisplay.SetRCode(ucrBase.clsRsyntax.clsBaseOperator, bReset)
+        ucrPnlFrequencyDisplay.SetRCode(clsCurrBaseCode, bReset)
         ucrSelectorThreeVariableFrequencies.SetRCode(clsTableBaseOperator, bReset)
         ucrChkCell.SetRCode(clsSjTab, bReset)
         ucrChkColumn.SetRCode(clsSjTab, bReset)
         ucrChkRow.SetRCode(clsSjTab, bReset)
         ucrChkCount.SetRCode(clsSjTab, bReset)
-        ucrSaveGraph.SetRCode(clsGriArrange, bReset)
+        ucrSaveGraph.SetRCode(clsGridArrange, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -249,12 +251,15 @@ Public Class dlgThreeVariableFrequencies
     Private Sub SetBaseFunction()
         If rdoTable.Checked OrElse rdoBoth.Checked Then
             ucrBase.clsRsyntax.SetBaseROperator(clsTableBaseOperator)
+            clsCurrBaseCode = clsTableBaseOperator
             ucrBase.clsRsyntax.iCallType = 0
         ElseIf rdoGraph.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsGriArrange)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsGridArrange)
+            clsCurrBaseCode = clsGraphBaseOperator
             ucrBase.clsRsyntax.iCallType = 3
         End If
     End Sub
+
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         Dim strGraph As String
         Dim strTempScript As String = ""
@@ -263,16 +268,16 @@ Public Class dlgThreeVariableFrequencies
         Dim strAssignTo As String
 
         If rdoBoth.Checked Then
-            bIsAssigned = clsGriArrange.bIsAssigned
-            bToBeAssigned = clsGriArrange.bToBeAssigned
-            strAssignTo = clsGriArrange.strAssignTo
+            bIsAssigned = clsGridArrange.bIsAssigned
+            bToBeAssigned = clsGridArrange.bToBeAssigned
+            strAssignTo = clsGridArrange.strAssignTo
 
-            strGraph = clsGriArrange.ToScript(strTempScript)
+            strGraph = clsGridArrange.ToScript(strTempScript)
             frmMain.clsRLink.RunScript(strTempScript & strGraph, iCallType:=3)
 
-            clsGriArrange.bIsAssigned = bIsAssigned
-            clsGriArrange.bToBeAssigned = bToBeAssigned
-            clsGriArrange.strAssignTo = strAssignTo
+            clsGridArrange.bIsAssigned = bIsAssigned
+            clsGridArrange.bToBeAssigned = bToBeAssigned
+            clsGridArrange.strAssignTo = strAssignTo
         End If
     End Sub
 
