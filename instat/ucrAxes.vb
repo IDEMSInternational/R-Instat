@@ -57,15 +57,14 @@ Public Class ucrAxes
         ucrPnlMajorBreaks.AddParameterValuesCondition(rdoMajorBreaksNone, "breaks", "NULL")
         ucrPnlMajorBreaks.AddParameterValueFunctionNamesCondition(rdoMajorBreaksSeq, "breaks", "seq")
         ucrPnlMajorBreaks.AddParameterPresentCondition(rdoMajorBreaksCustom, "breaks")
-        ucrPnlMajorBreaks.AddParameterIsRFunctionCondition(rdoMajorBreaksCustom, "breaks")
-        ucrPnlMajorBreaks.AddParameterValueFunctionNamesCondition(rdoMajorBreaksCustom, "breaks", "seq", bNewIsPositive:=False)
+        ucrPnlMajorBreaks.AddParameterIsStringCondition(rdoMajorBreaksCustom, "breaks")
 
         ucrPnlMajorBreaks.AddToLinkedControls(ucrInputMajorBreaksFrom, {rdoMajorBreaksSeq}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMajorBreaks.AddToLinkedControls(ucrInputMajorBreaksTo, {rdoMajorBreaksSeq}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMajorBreaks.AddToLinkedControls(ucrInputMajorBreaksInStepsOf, {rdoMajorBreaksSeq}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMajorBreaks.AddToLinkedControls(ucrInputMajorBreaksInStepsOf, {rdoMajorBreaksSeq}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMajorBreaks.AddToLinkedControls(ucrInputMajorBreaksCustom, {rdoMajorBreaksCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlMajorBreaks.AddToLinkedControls(ucrChkLabels, {rdoMajorBreaksCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlMajorBreaks.AddToLinkedControls(ucrChkLabels, {rdoMajorBreaksCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=False)
 
         ucrChkLabels.AddToLinkedControls(ucrInputMajorBreaksLabels, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
@@ -73,8 +72,10 @@ Public Class ucrAxes
         ucrInputMajorBreaksCustom.AddQuotesIfUnrecognised = False
         ucrInputMajorBreaksCustom.SetValidationTypeAsNumericList()
 
-        ucrChkLabels.AddParameterPresentCondition(True, "label")
-        ucrInputMajorBreaksLabels.SetParameter(New RParameter("label"))
+        ucrChkLabels.SetText("Labels")
+        ucrChkLabels.AddParameterPresentCondition(True, "labels")
+        ucrChkLabels.AddParameterPresentCondition(False, "labels", False)
+        ucrInputMajorBreaksLabels.SetParameter(New RParameter("labels"))
 
         ucrPnlMinorBreaks.AddRadioButton(rdoMinorBreaksAuto)
         ucrPnlMinorBreaks.AddRadioButton(rdoMinorBreaksCustom)
@@ -163,11 +164,14 @@ Public Class ucrAxes
         ucrChkTransformation.AddParameterPresentCondition(False, "trans", False)
         ucrChkTransformation.AddToLinkedControls(ucrInputTransformation, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="asn")
         ucrInputTransformation.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctTransformations))
+        ucrInputTransformation.SetDropDownStyleAsNonEditable()
 
         ucrChkPosition.SetText("Position")
         ucrInputPosition.SetParameter(New RParameter("position"))
+        ucrInputPosition.SetDropDownStyleAsNonEditable()
         ucrChkPosition.AddParameterPresentCondition(True, "position")
         ucrChkPosition.AddParameterPresentCondition(False, "position", False)
+        ucrChkPosition.AddToLinkedControls(ucrInputPosition, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=Nothing)
 
         ucrChkExpand.SetText("Expand")
         ucrInputExpand.SetParameter(New RParameter("expand"))
@@ -202,10 +206,10 @@ Public Class ucrAxes
 
         If bIsX Then
             ucrInputPosition.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctXPosition))
-            ucrChkPosition.AddToLinkedControls(ucrInputPosition, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Bottom")
-        ElseIf bIsX = False
+            ucrInputPosition.SetDefaultState("Bottom")
+        ElseIf Not bIsX Then
             ucrInputPosition.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctYPosition))
-            ucrChkPosition.AddToLinkedControls(ucrInputPosition, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Left")
+            ucrInputPosition.SetDefaultState("Left")
         End If
         ucrInputAxisType.SetName(strAxisType)
 
@@ -348,7 +352,7 @@ Public Class ucrAxes
         End If
     End Sub
 
-    Private Sub ucrPnlMajorBreaks_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMajorBreaks.ControlValueChanged
+    Private Sub BreaksControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMajorBreaks.ControlValueChanged, ucrInputMajorBreaksCustom.ControlValueChanged
         If rdoMajorBreaksAuto.Checked Then
             clsXYScaleContinuousFunction.RemoveParameterByName("breaks")
         ElseIf rdoMajorBreaksNone.Checked Then
@@ -356,7 +360,7 @@ Public Class ucrAxes
         ElseIf rdoMajorBreaksSeq.Checked Then
             clsXYScaleContinuousFunction.AddParameter("breaks", clsRFunctionParameter:=clsMajorBreaksSeqFunction)
         ElseIf rdoMajorBreaksCustom.Checked Then
-            clsXYScaleContinuousFunction.AddParameter("breaks", ucrInputMajorBreaksCustom.GetText())
+            clsXYScaleContinuousFunction.AddParameter("breaks", "c(" & ucrInputMajorBreaksCustom.GetText() & ")")
         End If
         AddRemoveContinuousXYScales()
     End Sub
@@ -394,9 +398,5 @@ Public Class ucrAxes
 
     Private Sub ucrChkNaValue_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExpand.ControlValueChanged, ucrChkPosition.ControlValueChanged, ucrChkTransformation.ControlValueChanged, ucrChkExpand.ControlValueChanged
         AddRemoveContinuousXYScales()
-    End Sub
-
-    Private Sub ucrAxes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
     End Sub
 End Class
