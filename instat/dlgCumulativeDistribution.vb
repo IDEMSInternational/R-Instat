@@ -34,7 +34,6 @@ Public Class dlgCumulativeDistribution
             InitaliseDialog()
             bFirstLoad = False
         End If
-
         If bReset Then
             SetDefaults()
         End If
@@ -47,7 +46,6 @@ Public Class dlgCumulativeDistribution
     Private Sub InitaliseDialog()
         Dim clsScaleYReverseFunc As New RFunction
         Dim clsScaleYReverseParam As New RParameter
-
         Dim clsGeomPointFunc As New RFunction
         Dim clsGeomPointParam As New RParameter
 
@@ -92,8 +90,7 @@ Public Class dlgCumulativeDistribution
         ucrChkIncludePoints.SetText("Include Points")
         ucrChkIncludePoints.SetParameter(clsGeomPointParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
-
-        ucrSaveCumDist.SetPrefix("cumdist")
+        ucrSaveCumDist.SetPrefix("cumulative_dist")
         ucrSaveCumDist.SetSaveTypeAsGraph()
         ucrSaveCumDist.SetIsComboBox()
         ucrSaveCumDist.SetCheckBoxText("Save Graph")
@@ -138,7 +135,7 @@ Public Class dlgCumulativeDistribution
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
     End Sub
 
-    Public Sub SetRCodeForControls(bReset As Boolean)
+    Private Sub SetRCodeForControls(bReset As Boolean)
         ucrFactorReceiver.SetRCode(clsRaesFunction, bReset)
         ucrVariablesAsFactorforCumDist.SetRCode(clsRaesFunction, bReset)
         ucrSaveCumDist.SetRCode(clsBaseOperator, bReset)
@@ -171,7 +168,7 @@ Public Class dlgCumulativeDistribution
         sdgLayerOptions.ShowDialog()
     End Sub
 
-    Private Sub AllControls_ControlContentsChanged() Handles ucrVariablesAsFactorforCumDist.ControlContentsChanged, ucrSaveCumDist.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged() Handles ucrVariablesAsFactorforCumDist.ControlContentsChanged, ucrSaveCumDist.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
