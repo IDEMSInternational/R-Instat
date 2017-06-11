@@ -110,15 +110,15 @@ Public Class dlgReplaceValues
         ucrPnlNew.AddParameterPresentCondition(rdoNewFromAbove, "new_value", False)
         ucrPnlNew.AddParameterPresentCondition(rdoNewFromBelow, "new_value", False)
 
-        ucrPnlNew.AddParameterValuesCondition(rdoNewMissing, "new_is_missing", "TRUE")
+        ucrPnlNew.AddParameterValuesCondition(rdoNewMissing, "new_is_missing","TRUE")
         ucrPnlNew.AddParameterPresentCondition(rdoNewValue, "new_is_missing", False)
         ucrPnlNew.AddParameterPresentCondition(rdoNewFromAbove, "new_is_missing", False)
         ucrPnlNew.AddParameterPresentCondition(rdoNewFromBelow, "new_is_missing", False)
 
-        ucrPnlNew.AddParameterValuesCondition(rdoNewFromBelow, "from_last", "TRUE")
+        ucrPnlNew.AddParameterValuesCondition(rdoNewFromBelow, "from_last", "FALSE")
         ucrPnlNew.AddParameterPresentCondition(rdoNewMissing, "from_last", False)
         ucrPnlNew.AddParameterPresentCondition(rdoNewValue, "from_last", False)
-        ucrPnlNew.AddParameterPresentCondition(rdoNewFromAbove, "from_last", False)
+        ucrPnlNew.AddParameterValuesCondition(rdoNewFromAbove, "from_last", "TRUE")
 
         ucrPnlNew.AddToLinkedControls(ucrInputNewValue, {rdoNewValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
 

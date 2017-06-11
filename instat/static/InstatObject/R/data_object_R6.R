@@ -603,7 +603,7 @@ data_object$set("public", "replace_value_in_data", function(col_names, rows, old
     str_data_type <- self$get_variables_metadata(property = data_type_label, column = col_name)
     curr_column <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
     if(locf){
-      my_data <- na.locf(curr_column, fromLast = from_last, na.rm = FALSE)
+      my_data <- zoo::na.locf(curr_column, fromLast = from_last, na.rm = FALSE)
     }
     else{
       if("factor" %in% str_data_type) {
@@ -696,9 +696,6 @@ data_object$set("public", "replace_value_in_data", function(col_names, rows, old
     }
     if(!done) {
       if(locf){
-        
-        print(nrow(private$data))
-        print(length(my_data))
         private$data[[col_name]] <- my_data
       }
       else{
