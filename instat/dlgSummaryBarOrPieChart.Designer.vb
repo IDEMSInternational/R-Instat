@@ -30,6 +30,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.cmdPieChartOptions = New System.Windows.Forms.Button()
         Me.rdoBarChart = New System.Windows.Forms.RadioButton()
         Me.rdoPieChart = New System.Windows.Forms.RadioButton()
+        Me.rdoTable = New System.Windows.Forms.RadioButton()
         Me.ucrSaveSummaryBar = New instat.ucrSave()
         Me.ucrSecondFactorReceiver = New instat.ucrReceiverSingle()
         Me.ucrFactorReceiver = New instat.ucrReceiverSingle()
@@ -37,7 +38,6 @@ Partial Class dlgSummaryBarOrPieChart
         Me.ucrSummaryBarSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.rdoTable = New System.Windows.Forms.RadioButton()
         Me.SuspendLayout()
         '
         'lblYvariable
@@ -133,6 +133,23 @@ Partial Class dlgSummaryBarOrPieChart
         Me.rdoPieChart.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoPieChart.UseVisualStyleBackColor = True
         '
+        'rdoTable
+        '
+        Me.rdoTable.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoTable.Enabled = False
+        Me.rdoTable.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoTable.FlatAppearance.BorderSize = 2
+        Me.rdoTable.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoTable.Location = New System.Drawing.Point(261, 10)
+        Me.rdoTable.Name = "rdoTable"
+        Me.rdoTable.Size = New System.Drawing.Size(100, 27)
+        Me.rdoTable.TabIndex = 0
+        Me.rdoTable.TabStop = True
+        Me.rdoTable.Text = "Tables"
+        Me.rdoTable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoTable.UseVisualStyleBackColor = True
+        '
         'ucrSaveSummaryBar
         '
         Me.ucrSaveSummaryBar.Location = New System.Drawing.Point(10, 288)
@@ -199,23 +216,6 @@ Partial Class dlgSummaryBarOrPieChart
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         Me.ucrPnlOptions.Size = New System.Drawing.Size(307, 35)
         Me.ucrPnlOptions.TabIndex = 0
-        '
-        'rdoTable
-        '
-        Me.rdoTable.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoTable.Enabled = False
-        Me.rdoTable.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoTable.FlatAppearance.BorderSize = 2
-        Me.rdoTable.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoTable.Location = New System.Drawing.Point(261, 10)
-        Me.rdoTable.Name = "rdoTable"
-        Me.rdoTable.Size = New System.Drawing.Size(100, 27)
-        Me.rdoTable.TabIndex = 0
-        Me.rdoTable.TabStop = True
-        Me.rdoTable.Text = "Table"
-        Me.rdoTable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoTable.UseVisualStyleBackColor = True
         '
         'dlgSummaryBarOrPieChart
         '
