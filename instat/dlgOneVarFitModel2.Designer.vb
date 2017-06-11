@@ -194,6 +194,7 @@ Partial Class dlgOneVarFitModel
         '
         'ucrVariables
         '
+        Me.ucrVariables.AddQuotesIfUnrecognised = True
         Me.ucrVariables.IsReadOnly = False
         Me.ucrVariables.Location = New System.Drawing.Point(91, 104)
         Me.ucrVariables.Name = "ucrVariables"
@@ -202,6 +203,7 @@ Partial Class dlgOneVarFitModel
         '
         'ucrOperator
         '
+        Me.ucrOperator.AddQuotesIfUnrecognised = True
         Me.ucrOperator.IsReadOnly = False
         Me.ucrOperator.Location = New System.Drawing.Point(78, 104)
         Me.ucrOperator.Name = "ucrOperator"
@@ -210,13 +212,14 @@ Partial Class dlgOneVarFitModel
         '
         'ucrFamily
         '
-        Me.ucrFamily.Location = New System.Drawing.Point(10, 224)
+        Me.ucrFamily.Location = New System.Drawing.Point(10, 228)
         Me.ucrFamily.Name = "ucrFamily"
-        Me.ucrFamily.Size = New System.Drawing.Size(197, 43)
+        Me.ucrFamily.Size = New System.Drawing.Size(219, 30)
         Me.ucrFamily.TabIndex = 11
         '
         'ucrSaveModel
         '
+        Me.ucrSaveModel.AddQuotesIfUnrecognised = True
         Me.ucrSaveModel.IsReadOnly = False
         Me.ucrSaveModel.Location = New System.Drawing.Point(92, 275)
         Me.ucrSaveModel.Name = "ucrSaveModel"
@@ -225,12 +228,15 @@ Partial Class dlgOneVarFitModel
         '
         'UcrReceiver
         '
+        Me.UcrReceiver.frmParent = Me
         Me.UcrReceiver.Location = New System.Drawing.Point(249, 64)
         Me.UcrReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.UcrReceiver.Name = "UcrReceiver"
         Me.UcrReceiver.Selector = Nothing
         Me.UcrReceiver.Size = New System.Drawing.Size(137, 20)
+        Me.UcrReceiver.strNcFilePath = ""
         Me.UcrReceiver.TabIndex = 2
+        Me.UcrReceiver.ucrSelector = Nothing
         '
         'ucrSelectorOneVarFitMod
         '

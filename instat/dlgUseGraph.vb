@@ -50,12 +50,12 @@ Public Class dlgUseGraph
 
         ucrGraphsSelector.SetParameter(New RParameter("data_name", 0))
         ucrGraphsSelector.SetParameterIsString()
-        ucrGraphsSelector.SetItemType("graph")
 
         ucrGraphReceiver.SetParameter(New RParameter("graph_name", 1))
         ucrGraphReceiver.Selector = ucrGraphsSelector
         ucrGraphReceiver.strSelectorHeading = "Graphs"
         ucrGraphReceiver.SetParameterIsString()
+        ucrGraphReceiver.SetItemType("graph")
 
         ucrSaveGraph.SetPrefix("use_graph")
         ucrSaveGraph.SetSaveTypeAsGraph()
