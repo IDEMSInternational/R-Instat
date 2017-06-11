@@ -38,7 +38,7 @@ Public Class dlgThreeVariableFrequencies
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 523
-        ucrChkWeights.Enabled = False ' temporary for now
+        ucrChkWeights.Enabled = False ' temporary because of bug in R functions being used
 
         ucrSelectorThreeVariableFrequencies.SetParameter(New RParameter("data", 0))
         ucrSelectorThreeVariableFrequencies.SetParameterIsrfunction()
@@ -107,8 +107,8 @@ Public Class dlgThreeVariableFrequencies
         ucrPnlFrequencyDisplay.AddRadioButton(rdoGraph)
         ucrPnlFrequencyDisplay.AddRadioButton(rdoBoth)
 
-        ucrPnlFrequencyDisplay.AddFunctionNamesCondition(rdoTable, "sjtab")
-        ucrPnlFrequencyDisplay.AddFunctionNamesCondition(rdoGraph, "sjplot")
+        ucrPnlFrequencyDisplay.AddParameterPresentCondition(rdoTable, "sjtab")
+        ucrPnlFrequencyDisplay.AddParameterPresentCondition(rdoGraph, "sjplot")
 
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkCount, {rdoTable, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrSaveGraph, {rdoGraph, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
@@ -208,7 +208,7 @@ Public Class dlgThreeVariableFrequencies
         ucrChkWeights.SetRCode(clsSjTab, bReset)
         ucrChkFlip.SetRCode(clsSjPlot, bReset)
         ucrPnlFreqType.SetRCode(clsSjPlot, bReset)
-        ucrPnlFrequencyDisplay.SetRCode(clsSjTab, bReset)
+        ucrPnlFrequencyDisplay.SetRCode(ucrBase.clsRsyntax.clsBaseOperator, bReset)
         ucrSelectorThreeVariableFrequencies.SetRCode(clsTableBaseOperator, bReset)
         ucrChkCell.SetRCode(clsSjTab, bReset)
         ucrChkColumn.SetRCode(clsSjTab, bReset)
@@ -239,7 +239,7 @@ Public Class dlgThreeVariableFrequencies
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
+    Private Sub SetBaseFunction()
         If rdoTable.Checked OrElse rdoBoth.Checked Then
             ucrBase.clsRsyntax.SetBaseROperator(clsTableBaseOperator)
             ucrBase.clsRsyntax.iCallType = 0
@@ -307,6 +307,7 @@ Public Class dlgThreeVariableFrequencies
             ucrReceiverColumnFactor.SetParameter(clsColumnParam)
         End If
         ChangeLocation()
+        SetBaseFunction()
     End Sub
 
     Private Sub ucrPnlFreqType_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlFreqType.ControlContentsChanged
