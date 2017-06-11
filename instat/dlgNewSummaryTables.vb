@@ -22,6 +22,7 @@ Public Class dlgNewSummaryTables
     Private bResetSubdialog As Boolean = False
     Private clsDefaultFunction As New RFunction
     Private lstCheckboxes As New List(Of ucrCheck)
+    Private bRCodeSet As Boolean = True
 
     Private Sub dlgNewSummaryTables_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -106,7 +107,7 @@ Public Class dlgNewSummaryTables
         'temp disabled, not yet implemented in R function
         'ucrInputPageBy.SetParameter(New RParameter("page_by", 12))
         'temp added to prevent developer error while disabled
-        ucrInputPageBy.bAllowNonConditionValues = True
+        ucrInputPageBy.bIsActiveRControl = False
         'dctPageBy.Add("None", "NULL")
         'dctPageBy.Add("Variables", Chr(34) & "variables" & Chr(34))
         'dctPageBy.Add("Summaries", Chr(34) & "summaries" & Chr(34))
@@ -150,7 +151,11 @@ Public Class dlgNewSummaryTables
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
+        'Prevents nud number of columns resetting until controls not synced with R code
+        bRCodeSet = False
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        bRCodeSet = True
+        SetMaxColumnFactors()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -183,6 +188,7 @@ Public Class dlgNewSummaryTables
     End Sub
 
     Private Sub PageBy()
+        'temp disabled as not implemented in function yet
         'If ucrChkDisplayMargins.Checked AndAlso (ucrReceiverSummaryCols.lstSelectedVariables.Items.Count > 1 OrElse clsSummariesList.clsParameters.Count > 1) Then ' TODO get this to work for clsSummariesList > 1
         '    clsDefaultFunction.AddParameter("page_by", "c(" & Chr(34) & "variables" & Chr(34) & "," & Chr(34) & "summaries" & Chr(34) & ")", iPosition:=13)
         '    ucrInputPageBy.SetName("Variables and Summaries")
@@ -234,10 +240,16 @@ Public Class dlgNewSummaryTables
     End Sub
 
     Private Sub ucrReceiverFactors_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactors.ControlValueChanged
-        ucrNudColumnFactors.Maximum = ucrReceiverFactors.lstSelectedVariables.Items.Count
+        If bRCodeSet Then
+            SetMaxColumnFactors()
+        End If
     End Sub
 
     Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactors.ControlContentsChanged, ucrSaveTable.ControlContentsChanged, ucrChkWeight.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrNudSigFigs.ControlContentsChanged, ucrReceiverSummaryCols.ControlContentsChanged, ucrNudColumnFactors.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub SetMaxColumnFactors()
+        ucrNudColumnFactors.Maximum = ucrReceiverFactors.lstSelectedVariables.Items.Count
     End Sub
 End Class
