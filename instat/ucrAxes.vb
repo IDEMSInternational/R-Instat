@@ -168,13 +168,6 @@ Public Class ucrAxes
         ucrInputPosition.SetParameter(New RParameter("position"))
         ucrChkPosition.AddParameterPresentCondition(True, "position")
         ucrChkPosition.AddParameterPresentCondition(False, "position", False)
-        If bIsX Then
-            ucrInputPosition.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctXPosition))
-            ucrChkPosition.AddToLinkedControls(ucrInputPosition, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Bottom")
-        ElseIf bIsX = False
-            ucrInputPosition.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctYPosition))
-            ucrChkPosition.AddToLinkedControls(ucrInputPosition, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Left")
-        End If
 
         ucrChkExpand.SetText("Expand")
         ucrInputExpand.SetParameter(New RParameter("expand"))
@@ -205,6 +198,14 @@ Public Class ucrAxes
         Else
             bIsX = False
             strAxis = "y"
+        End If
+
+        If bIsX Then
+            ucrInputPosition.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctXPosition))
+            ucrChkPosition.AddToLinkedControls(ucrInputPosition, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Bottom")
+        ElseIf bIsX = False
+            ucrInputPosition.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctYPosition))
+            ucrChkPosition.AddToLinkedControls(ucrInputPosition, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Left")
         End If
         ucrInputAxisType.SetName(strAxisType)
 
@@ -393,5 +394,9 @@ Public Class ucrAxes
 
     Private Sub ucrChkNaValue_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExpand.ControlValueChanged, ucrChkPosition.ControlValueChanged, ucrChkTransformation.ControlValueChanged, ucrChkExpand.ControlValueChanged
         AddRemoveContinuousXYScales()
+    End Sub
+
+    Private Sub ucrAxes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
     End Sub
 End Class
