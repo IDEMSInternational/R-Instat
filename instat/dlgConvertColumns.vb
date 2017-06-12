@@ -130,9 +130,13 @@ Public Class dlgConvertColumns
         End If
     End Sub
 
-    Private Sub ucrChkSpecifyDecimalsToDisplay_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSpecifyDecimalsToDisplay.ControlValueChanged
-        If ucrChkSpecifyDecimalsToDisplay.Checked Then
-            ucrReceiverColumnsToConvert.SetDataType("numeric")
+    Private Sub ucrChkSpecifyDecimalsToDisplay_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSpecifyDecimalsToDisplay.ControlValueChanged, ucrPnlConvertTo.ControlValueChanged
+        If rdoFactor.Checked OrElse rdoOrderedFactor.Checked Then
+            If ucrChkSpecifyDecimalsToDisplay.Checked Then
+                ucrReceiverColumnsToConvert.SetDataType("numeric")
+            Else
+                ucrReceiverColumnsToConvert.SetIncludedDataTypes({"integer", "numeric", "character", "ordered", "factor"})
+            End If
         Else
             ucrReceiverColumnsToConvert.SetIncludedDataTypes({"integer", "numeric", "character", "ordered", "factor"})
         End If
