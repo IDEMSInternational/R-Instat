@@ -1,5 +1,4 @@
-
-﻿' Instat-R
+' R-Instat 
 ' Copyright (C) 2015
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -16,7 +15,6 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-
 Public Class dlgOneVarCompareModels
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
@@ -64,12 +62,14 @@ Public Class dlgOneVarCompareModels
 
         ucrSelectorOneVarCompModels.Reset()
 
-        clsGofStat.SetRCommand("fitdistrplus::gofstat")
-        clsRcdfcompFunction.SetRCommand("fitdistrplus::cdfcomp")
+        clsGofStat.SetPackageName("fitdistrplus")
+        clsGofStat.SetRCommand("gofstat")
+        clsRcdfcompFunction.SetPackageName("fitdistrplus")
+        clsRcdfcompFunction.SetRCommand("cdfcomp")
 
         clsOperatorforTable.SetOperation("$")
         clsOperatorforTable.AddParameter(clsRFunctionParameter:=clsGofStat, iPosition:=0)
-        clsOperatorforTable.AddParameter(strParameterValue:="chisqbreaks")
+        clsOperatorforTable.AddParameter(strParameterValue:="chisqtable")
 
         clsRAsDataFrame.SetRCommand("as.data.frame")
         clsRAsDataFrame.AddParameter("x", clsROperatorParameter:=clsOperatorforTable)
