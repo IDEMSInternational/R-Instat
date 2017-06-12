@@ -45,6 +45,7 @@ Public Class sdgPlots
     Private dctThemeFunctions As New Dictionary(Of String, RFunction)
     Private bRCodeSet As Boolean = False
     Private bResetThemes As Boolean = True
+    Private ucrBaseSelector As ucrSelector
 
     'See bLayersDefaultIsGolobal below.
 
@@ -192,17 +193,19 @@ Public Class sdgPlots
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewYScalecontinuousFunction As RFunction = Nothing, Optional clsNewXScalecontinuousFunction As RFunction = Nothing, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsTitleFunction As RFunction = Nothing, Optional clsNewYLabTitleFunction As RFunction = Nothing, Optional clsNewFacetFunction As RFunction = Nothing, Optional clsNewThemeParam As RParameter = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional strNewDataFrame As String = "", Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewYScalecontinuousFunction As RFunction = Nothing, Optional clsNewXScalecontinuousFunction As RFunction = Nothing, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsTitleFunction As RFunction = Nothing, Optional clsNewYLabTitleFunction As RFunction = Nothing, Optional clsNewFacetFunction As RFunction = Nothing, Optional clsNewThemeParam As RParameter = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False)
         Dim clsTempParam As RParameter
 
         bRCodeSet = False
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
-        If strNewDataFrame <> "" Then
-            strDataFrame = strNewDataFrame
+        ucrBaseSelector = ucrNewBaseSelector
+        If ucrBaseSelector IsNot Nothing AndAlso ucrBaseSelector.strCurrentDataFrame <> "" Then
+            strDataFrame = ucrBaseSelector.strCurrentDataFrame
             ucrFacetSelector.SetDataframe(strDataFrame, False)
         End If
+        ucrFacetSelector.SetLinkedSelector(ucrBaseSelector)
         clsBaseOperator = clsNewOperator
         clsGlobalAesFunction = clsNewGlobalAesFunction
         clsXLabFunction = clsNewXLabsTitleFunction
