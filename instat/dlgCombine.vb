@@ -11,11 +11,11 @@
 'You should have received a copy of the GNU General Public License k
 'along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgCombine
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private clsInteraction As New RFunction
 
     Private Sub dlgCombine_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -30,21 +30,22 @@ Public Class dlgCombine
         autoTranslate(Me)
     End Sub
 
-    Private Sub SetRCodeforControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-    End Sub
-
-
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 39
 
         'ucrReceiver
-        ucrFactorsReceiver.SetParameter(New RParameter("x"))
+        ucrFactorsReceiver.SetParameter(New RParameter("x", 0))
         ucrFactorsReceiver.SetParameterIsRFunction()
         ucrFactorsReceiver.Selector = ucrSelectorCombineFactors
         ucrFactorsReceiver.SetMeAsReceiver()
         ucrFactorsReceiver.bUseFilteredData = False
         ucrFactorsReceiver.SetIncludedDataTypes({"factor"})
+
+        'chkbox
+        ucrChkDropUnusedLevels.SetParameter(New RParameter("drop", 1))
+        ucrChkDropUnusedLevels.SetText("Drop Unused Levels")
+        ucrChkDropUnusedLevels.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkDropUnusedLevels.SetRDefault("FALSE")
 
         ' Input Column Name
         ucrNewColName.SetIsTextBox()
@@ -52,27 +53,21 @@ Public Class dlgCombine
         ucrNewColName.SetSaveTypeAsColumn()
         ucrNewColName.SetDataFrameSelector(ucrSelectorCombineFactors.ucrAvailableDataFrames)
         ucrNewColName.SetLabelText("New Column Name:")
-
-        'chkbox
-        ucrChkDropUnusedLevels.SetParameter(New RParameter("drop"))
-        ucrChkDropUnusedLevels.SetText("Drop Unused Levels")
-        ucrChkDropUnusedLevels.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkDropUnusedLevels.SetRDefault("FALSE")
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
+        clsInteraction = New RFunction
+
         ucrSelectorCombineFactors.Reset()
+        ucrNewColName.Reset()
 
-        clsDefaultFunction.SetRCommand("interaction")
-        clsDefaultFunction.SetAssignTo(strTemp:=ucrNewColName.GetText(), strTempDataframe:=ucrSelectorCombineFactors.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText())
-
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
+        clsInteraction.SetRCommand("interaction")
+        clsInteraction.SetAssignTo(strTemp:=ucrNewColName.GetText(), strTempDataframe:=ucrSelectorCombineFactors.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText())
+        ucrBase.clsRsyntax.SetBaseRFunction(clsInteraction)
     End Sub
 
-    Private Sub ReOpenDialog()
-
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
