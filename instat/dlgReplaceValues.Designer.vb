@@ -35,8 +35,8 @@ Partial Class dlgReplaceValues
         Me.ucrInputOldValue = New instat.ucrInputTextBox()
         Me.ucrPnlOld = New instat.UcrPanel()
         Me.grpNew = New System.Windows.Forms.GroupBox()
-        Me.rdoNewFromBelow = New System.Windows.Forms.RadioButton()
         Me.rdoNewFromAbove = New System.Windows.Forms.RadioButton()
+        Me.rdoNewFromBelow = New System.Windows.Forms.RadioButton()
         Me.ucrInputNewValue = New instat.ucrInputTextBox()
         Me.rdoNewMissing = New System.Windows.Forms.RadioButton()
         Me.rdoNewValue = New System.Windows.Forms.RadioButton()
@@ -178,8 +178,8 @@ Partial Class dlgReplaceValues
         '
         'grpNew
         '
-        Me.grpNew.Controls.Add(Me.rdoNewFromBelow)
         Me.grpNew.Controls.Add(Me.rdoNewFromAbove)
+        Me.grpNew.Controls.Add(Me.rdoNewFromBelow)
         Me.grpNew.Controls.Add(Me.ucrInputNewValue)
         Me.grpNew.Controls.Add(Me.rdoNewMissing)
         Me.grpNew.Controls.Add(Me.rdoNewValue)
@@ -194,25 +194,25 @@ Partial Class dlgReplaceValues
         '
         'rdoNewFromBelow
         '
-        Me.rdoNewFromBelow.AutoSize = True
-        Me.rdoNewFromBelow.Location = New System.Drawing.Point(14, 73)
-        Me.rdoNewFromBelow.Name = "rdoNewFromBelow"
-        Me.rdoNewFromBelow.Size = New System.Drawing.Size(181, 17)
-        Me.rdoNewFromBelow.TabIndex = 4
-        Me.rdoNewFromBelow.TabStop = True
-        Me.rdoNewFromBelow.Text = "First Observation Carried Forward"
-        Me.rdoNewFromBelow.UseVisualStyleBackColor = True
+        Me.rdoNewFromAbove.AutoSize = True
+        Me.rdoNewFromAbove.Location = New System.Drawing.Point(14, 73)
+        Me.rdoNewFromAbove.Name = "rdoNewFromBelow"
+        Me.rdoNewFromAbove.Size = New System.Drawing.Size(181, 17)
+        Me.rdoNewFromAbove.TabIndex = 4
+        Me.rdoNewFromAbove.TabStop = True
+        Me.rdoNewFromAbove.Text = "Value From Above"
+        Me.rdoNewFromAbove.UseVisualStyleBackColor = True
         '
         'rdoNewFromAbove
         '
-        Me.rdoNewFromAbove.AutoSize = True
-        Me.rdoNewFromAbove.Location = New System.Drawing.Point(14, 96)
-        Me.rdoNewFromAbove.Name = "rdoNewFromAbove"
-        Me.rdoNewFromAbove.Size = New System.Drawing.Size(182, 17)
-        Me.rdoNewFromAbove.TabIndex = 5
-        Me.rdoNewFromAbove.TabStop = True
-        Me.rdoNewFromAbove.Text = "Last Observation Carried Forward"
-        Me.rdoNewFromAbove.UseVisualStyleBackColor = True
+        Me.rdoNewFromBelow.AutoSize = True
+        Me.rdoNewFromBelow.Location = New System.Drawing.Point(14, 96)
+        Me.rdoNewFromBelow.Name = "rdoNewFromAbove"
+        Me.rdoNewFromBelow.Size = New System.Drawing.Size(182, 17)
+        Me.rdoNewFromBelow.TabIndex = 5
+        Me.rdoNewFromBelow.TabStop = True
+        Me.rdoNewFromBelow.Text = "Value From Below"
+        Me.rdoNewFromBelow.UseVisualStyleBackColor = True
         '
         'ucrInputNewValue
         '
@@ -339,6 +339,6 @@ Partial Class dlgReplaceValues
     Friend WithEvents rdoNewMissing As RadioButton
     Friend WithEvents rdoNewValue As RadioButton
     Friend WithEvents ucrPnlNew As UcrPanel
-    Friend WithEvents rdoNewFromAbove As RadioButton
     Friend WithEvents rdoNewFromBelow As RadioButton
+    Friend WithEvents rdoNewFromAbove As RadioButton
 End Class
