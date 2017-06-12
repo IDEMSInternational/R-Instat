@@ -30,6 +30,7 @@ Public Class ucrSelector
     Public lstExcludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
     Private strType As String
     Private bShowHiddenCols As Boolean = False
+    Private WithEvents ucrLinkedSelector As ucrSelector
 
     'Does the selector have its own parameter
     'Usually False as the parameter comes from the data frame selector
@@ -193,14 +194,28 @@ Public Class ucrSelector
         SelectAll()
     End Sub
 
-    Public Sub AddToVariablesList(strVariable As String)
-        lstVariablesInReceivers.Add(strVariable)
-        RaiseEvent VariablesInReceiversChanged()
+    Public Sub SetLinkedSelector(ucrNewLinkedSelector As ucrSelector)
+        ucrLinkedSelector = ucrNewLinkedSelector
     End Sub
 
-    Public Sub RemoveFromVariablesList(strVariable As String)
-        lstVariablesInReceivers.Remove(strVariable)
-        RaiseEvent VariablesInReceiversChanged()
+    Public Sub AddToVariablesList(strVariable As String, Optional strDataFrame As String = "")
+        If strDataFrame = "" OrElse strDataFrame = strCurrentDataFrame Then
+            lstVariablesInReceivers.Add(strVariable)
+            If ucrLinkedSelector IsNot Nothing Then
+                ucrLinkedSelector.AddToVariablesList(strVariable, strCurrentDataFrame)
+            End If
+            RaiseEvent VariablesInReceiversChanged()
+        End If
+    End Sub
+
+    Public Sub RemoveFromVariablesList(strVariable As String, Optional strDataFrame As String = "")
+        If strDataFrame = "" OrElse strDataFrame = strCurrentDataFrame Then
+            lstVariablesInReceivers.Remove(strVariable)
+            If ucrLinkedSelector IsNot Nothing Then
+                ucrLinkedSelector.RemoveFromVariablesList(strVariable, strCurrentDataFrame)
+            End If
+            RaiseEvent VariablesInReceiversChanged()
+        End If
     End Sub
 
     Public Sub AddIncludedMetadataProperty(strProperty As String, strInclude As String())
