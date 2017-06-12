@@ -295,7 +295,7 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
   else if(!missing(property) && length(property == 1) && property == data_type_label) {
     if(missing(column)) column <- names(private$data)
     #if(missing(column)) column <- self$get_column_names()
-    out <- sapply(private$data[ , column], class)
+    out <- sapply(private$data[column], class)
     out <- sapply(out, function(x) paste(unlist(x), collapse = ","))
     return(as.vector(out))
   }
