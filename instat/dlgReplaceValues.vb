@@ -100,25 +100,30 @@ Public Class dlgReplaceValues
         ucrInputNewValue.bAddRemoveParameter = False
 
         '' NEW VALUES:
-        ucrPnlNew.AddRadioButton(rdoNewFromAbove)
         ucrPnlNew.AddRadioButton(rdoNewFromBelow)
+        ucrPnlNew.AddRadioButton(rdoNewFromAbove)
         ucrPnlNew.AddRadioButton(rdoNewValue)
         ucrPnlNew.AddRadioButton(rdoNewMissing)
 
-        ucrPnlNew.AddParameterPresentCondition(rdoNewValue, "new_value")
         ucrPnlNew.AddParameterPresentCondition(rdoNewMissing, "new_value", False)
-        ucrPnlNew.AddParameterPresentCondition(rdoNewFromAbove, "new_value", False)
+        ucrPnlNew.AddParameterPresentCondition(rdoNewValue, "new_value")
         ucrPnlNew.AddParameterPresentCondition(rdoNewFromBelow, "new_value", False)
+        ucrPnlNew.AddParameterPresentCondition(rdoNewFromAbove, "new_value", False)
 
-        ucrPnlNew.AddParameterValuesCondition(rdoNewMissing, "new_is_missing","TRUE")
+        ucrPnlNew.AddParameterValuesCondition(rdoNewMissing, "new_is_missing", "TRUE")
         ucrPnlNew.AddParameterPresentCondition(rdoNewValue, "new_is_missing", False)
-        ucrPnlNew.AddParameterPresentCondition(rdoNewFromAbove, "new_is_missing", False)
         ucrPnlNew.AddParameterPresentCondition(rdoNewFromBelow, "new_is_missing", False)
+        ucrPnlNew.AddParameterPresentCondition(rdoNewFromAbove, "new_is_missing", False)
 
-        ucrPnlNew.AddParameterValuesCondition(rdoNewFromBelow, "from_last", "FALSE")
         ucrPnlNew.AddParameterPresentCondition(rdoNewMissing, "from_last", False)
         ucrPnlNew.AddParameterPresentCondition(rdoNewValue, "from_last", False)
-        ucrPnlNew.AddParameterValuesCondition(rdoNewFromAbove, "from_last", "TRUE")
+        ucrPnlNew.AddParameterValuesCondition(rdoNewFromBelow, "from_last", "TRUE")
+        ucrPnlNew.AddParameterValuesCondition(rdoNewFromAbove, "from_last", "FALSE")
+
+        ucrPnlNew.AddParameterPresentCondition(rdoNewValue, "locf", False)
+        ucrPnlNew.AddParameterPresentCondition(rdoNewMissing, "locf", False)
+        ucrPnlNew.AddParameterPresentCondition(rdoNewFromBelow, "locf")
+        ucrPnlNew.AddParameterPresentCondition(rdoNewFromAbove, "locf")
 
         ucrPnlNew.AddToLinkedControls(ucrInputNewValue, {rdoNewValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
 
@@ -142,7 +147,7 @@ Public Class dlgReplaceValues
 
     Private Sub TestOKEnabled()
         If (Not ucrReceiverReplace.IsEmpty()) Then
-            If (((rdoOldValue.Checked AndAlso Not ucrInputOldValue.IsEmpty) OrElse (rdoOldInterval.Checked AndAlso Not ucrInputRangeFrom.IsEmpty() AndAlso Not ucrInputRangeTo.IsEmpty()) OrElse rdoOldMissing.Checked) AndAlso ((rdoNewValue.Checked AndAlso Not ucrInputNewValue.IsEmpty) OrElse rdoNewMissing.Checked) OrElse rdoNewFromAbove.Checked OrElse rdoNewFromBelow.Checked) Then
+            If (((rdoOldValue.Checked AndAlso Not ucrInputOldValue.IsEmpty) OrElse (rdoOldInterval.Checked AndAlso Not ucrInputRangeFrom.IsEmpty() AndAlso Not ucrInputRangeTo.IsEmpty()) OrElse rdoOldMissing.Checked) AndAlso ((rdoNewValue.Checked AndAlso Not ucrInputNewValue.IsEmpty) OrElse rdoNewMissing.Checked) OrElse rdoNewFromBelow.Checked OrElse rdoNewFromAbove.Checked) Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
@@ -164,8 +169,6 @@ Public Class dlgReplaceValues
         If Not ucrReceiverReplace.IsEmpty Then
             strVarType = ucrReceiverReplace.GetCurrentItemTypes(True)(0)
             If rdoOldValue.Checked Then
-                clsReplace.AddParameter("locf", "FALSE")
-                clsReplace.RemoveParameterByName("from_last")
                 If (strVarType = "numeric" OrElse strVarType = "integer") Then
                     ucrInputOldValue.AddQuotesIfUnrecognised = False
                 Else
@@ -179,8 +182,6 @@ Public Class dlgReplaceValues
                 clsReplace.RemoveParameterByName("old_is_missing")
             End If
             If rdoNewValue.Checked Then
-                clsReplace.AddParameter("locf", "FALSE")
-                clsReplace.RemoveParameterByName("from_last")
                 If (strVarType = "numeric" OrElse strVarType = "integer") Then
                     ucrInputNewValue.AddQuotesIfUnrecognised = False
                 Else
@@ -192,15 +193,18 @@ Public Class dlgReplaceValues
             Else
                 clsReplace.RemoveParameterByName("new_is_missing")
             End If
-            If rdoNewFromAbove.Checked OrElse rdoNewFromBelow.Checked Then
+            If rdoNewFromBelow.Checked OrElse rdoNewFromAbove.Checked Then
                 clsReplace.AddParameter("locf", "TRUE")
                 clsReplace.RemoveParameterByName("new_is_missing")
                 clsReplace.RemoveParameterByName("old_value")
-                If rdoNewFromAbove.Checked Then
+                If rdoNewFromBelow.Checked Then
                     clsReplace.AddParameter("from_last", "TRUE")
-                ElseIf rdoNewFromBelow.Checked Then
+                ElseIf rdoNewFromAbove.Checked Then
                     clsReplace.AddParameter("from_last", "FALSE")
                 End If
+            Else
+                clsReplace.RemoveParameterByName("locf")
+                clsReplace.RemoveParameterByName("from_last")
             End If
         End If
     End Sub
@@ -226,18 +230,18 @@ Public Class dlgReplaceValues
             End If
         End If
         If rdoOldInterval.Checked OrElse rdoOldValue.Checked Then
-            rdoNewFromAbove.Enabled = False
             rdoNewFromBelow.Enabled = False
+            rdoNewFromAbove.Enabled = False
             rdoNewMissing.Enabled = True
         Else
-            rdoNewFromAbove.Enabled = True
             rdoNewFromBelow.Enabled = True
+            rdoNewFromAbove.Enabled = True
         End If
 
     End Sub
 
     Private Sub CheckedRadio()
-        If (rdoNewFromBelow.Checked AndAlso rdoNewFromBelow.Enabled = False) OrElse (rdoNewFromAbove.Checked AndAlso rdoNewFromAbove.Enabled = False) Then
+        If (rdoNewFromAbove.Checked AndAlso rdoNewFromAbove.Enabled = False) OrElse (rdoNewFromBelow.Checked AndAlso rdoNewFromBelow.Enabled = False) Then
             rdoNewMissing.Checked = True
         End If
     End Sub
