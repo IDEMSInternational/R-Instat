@@ -22,8 +22,8 @@ Partial Class sdgOneWayFrequencies
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.tbOneWayFrequencies = New System.Windows.Forms.TabControl()
-        Me.tbTable = New System.Windows.Forms.TabPage()
+        Me.tbpOneWayFrequencies = New System.Windows.Forms.TabControl()
+        Me.tbpTable = New System.Windows.Forms.TabPage()
         Me.grpTableOptions = New System.Windows.Forms.GroupBox()
         Me.lblOmitZero = New System.Windows.Forms.Label()
         Me.ucrInputOmitZero = New instat.ucrInputComboBox()
@@ -34,7 +34,7 @@ Partial Class sdgOneWayFrequencies
         Me.ucrChkHighlightedRows = New instat.ucrCheck()
         Me.ucrChkMedian = New instat.ucrCheck()
         Me.ucrChkShowSummary = New instat.ucrCheck()
-        Me.tbGraph = New System.Windows.Forms.TabPage()
+        Me.tbpGraph = New System.Windows.Forms.TabPage()
         Me.grpGraphOptions = New System.Windows.Forms.GroupBox()
         Me.lblTitle = New System.Windows.Forms.Label()
         Me.lblHjust = New System.Windows.Forms.Label()
@@ -51,34 +51,34 @@ Partial Class sdgOneWayFrequencies
         Me.rdoBar = New System.Windows.Forms.RadioButton()
         Me.ucrPnlGraphType = New instat.UcrPanel()
         Me.ucrBaseOneWayFrequencies = New instat.ucrButtonsSubdialogue()
-        Me.tbOneWayFrequencies.SuspendLayout()
-        Me.tbTable.SuspendLayout()
+        Me.tbpOneWayFrequencies.SuspendLayout()
+        Me.tbpTable.SuspendLayout()
         Me.grpTableOptions.SuspendLayout()
-        Me.tbGraph.SuspendLayout()
+        Me.tbpGraph.SuspendLayout()
         Me.grpGraphOptions.SuspendLayout()
         Me.grpGraphType.SuspendLayout()
         Me.SuspendLayout()
         '
-        'tbOneWayFrequencies
+        'tbpOneWayFrequencies
         '
-        Me.tbOneWayFrequencies.Controls.Add(Me.tbTable)
-        Me.tbOneWayFrequencies.Controls.Add(Me.tbGraph)
-        Me.tbOneWayFrequencies.Location = New System.Drawing.Point(7, 4)
-        Me.tbOneWayFrequencies.Name = "tbOneWayFrequencies"
-        Me.tbOneWayFrequencies.SelectedIndex = 0
-        Me.tbOneWayFrequencies.Size = New System.Drawing.Size(352, 272)
-        Me.tbOneWayFrequencies.TabIndex = 0
+        Me.tbpOneWayFrequencies.Controls.Add(Me.tbpTable)
+        Me.tbpOneWayFrequencies.Controls.Add(Me.tbpGraph)
+        Me.tbpOneWayFrequencies.Location = New System.Drawing.Point(7, 4)
+        Me.tbpOneWayFrequencies.Name = "tbpOneWayFrequencies"
+        Me.tbpOneWayFrequencies.SelectedIndex = 0
+        Me.tbpOneWayFrequencies.Size = New System.Drawing.Size(352, 272)
+        Me.tbpOneWayFrequencies.TabIndex = 0
         '
-        'tbTable
+        'tbpTable
         '
-        Me.tbTable.Controls.Add(Me.grpTableOptions)
-        Me.tbTable.Location = New System.Drawing.Point(4, 22)
-        Me.tbTable.Name = "tbTable"
-        Me.tbTable.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbTable.Size = New System.Drawing.Size(344, 246)
-        Me.tbTable.TabIndex = 0
-        Me.tbTable.Text = "Table"
-        Me.tbTable.UseVisualStyleBackColor = True
+        Me.tbpTable.Controls.Add(Me.grpTableOptions)
+        Me.tbpTable.Location = New System.Drawing.Point(4, 22)
+        Me.tbpTable.Name = "tbpTable"
+        Me.tbpTable.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpTable.Size = New System.Drawing.Size(344, 246)
+        Me.tbpTable.TabIndex = 0
+        Me.tbpTable.Text = "Table"
+        Me.tbpTable.UseVisualStyleBackColor = True
         '
         'grpTableOptions
         '
@@ -180,17 +180,17 @@ Partial Class sdgOneWayFrequencies
         Me.ucrChkShowSummary.Size = New System.Drawing.Size(145, 20)
         Me.ucrChkShowSummary.TabIndex = 0
         '
-        'tbGraph
+        'tbpGraph
         '
-        Me.tbGraph.Controls.Add(Me.grpGraphOptions)
-        Me.tbGraph.Controls.Add(Me.grpGraphType)
-        Me.tbGraph.Location = New System.Drawing.Point(4, 22)
-        Me.tbGraph.Name = "tbGraph"
-        Me.tbGraph.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbGraph.Size = New System.Drawing.Size(344, 246)
-        Me.tbGraph.TabIndex = 1
-        Me.tbGraph.Text = "Graph"
-        Me.tbGraph.UseVisualStyleBackColor = True
+        Me.tbpGraph.Controls.Add(Me.grpGraphOptions)
+        Me.tbpGraph.Controls.Add(Me.grpGraphType)
+        Me.tbpGraph.Location = New System.Drawing.Point(4, 22)
+        Me.tbpGraph.Name = "tbpGraph"
+        Me.tbpGraph.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpGraph.Size = New System.Drawing.Size(344, 246)
+        Me.tbpGraph.TabIndex = 1
+        Me.tbpGraph.Text = "Graph"
+        Me.tbpGraph.UseVisualStyleBackColor = True
         '
         'grpGraphOptions
         '
@@ -356,7 +356,7 @@ Partial Class sdgOneWayFrequencies
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(365, 323)
-        Me.Controls.Add(Me.tbOneWayFrequencies)
+        Me.Controls.Add(Me.tbpOneWayFrequencies)
         Me.Controls.Add(Me.ucrBaseOneWayFrequencies)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -364,11 +364,11 @@ Partial Class sdgOneWayFrequencies
         Me.Name = "sdgOneWayFrequencies"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "One Way Frequencies Options"
-        Me.tbOneWayFrequencies.ResumeLayout(False)
-        Me.tbTable.ResumeLayout(False)
+        Me.tbpOneWayFrequencies.ResumeLayout(False)
+        Me.tbpTable.ResumeLayout(False)
         Me.grpTableOptions.ResumeLayout(False)
         Me.grpTableOptions.PerformLayout()
-        Me.tbGraph.ResumeLayout(False)
+        Me.tbpGraph.ResumeLayout(False)
         Me.grpGraphOptions.ResumeLayout(False)
         Me.grpGraphOptions.PerformLayout()
         Me.grpGraphType.ResumeLayout(False)
@@ -378,13 +378,13 @@ Partial Class sdgOneWayFrequencies
     End Sub
 
     Friend WithEvents ucrBaseOneWayFrequencies As ucrButtonsSubdialogue
-    Friend WithEvents tbOneWayFrequencies As TabControl
-    Friend WithEvents tbTable As TabPage
+    Friend WithEvents tbpOneWayFrequencies As TabControl
+    Friend WithEvents tbpTable As TabPage
     Friend WithEvents grpTableOptions As GroupBox
     Friend WithEvents ucrChkHighlightedRows As ucrCheck
     Friend WithEvents ucrChkMedian As ucrCheck
     Friend WithEvents ucrChkShowSummary As ucrCheck
-    Friend WithEvents tbGraph As TabPage
+    Friend WithEvents tbpGraph As TabPage
     Friend WithEvents grpGraphOptions As GroupBox
     Friend WithEvents ucrChkShowMissing As ucrCheck
     Friend WithEvents ucrChkShowPercentage As ucrCheck
