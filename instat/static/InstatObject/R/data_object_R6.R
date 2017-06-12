@@ -1165,14 +1165,15 @@ data_object$set("public", "get_column_names", function(as_list = FALSE, include 
     if(data_type_label %in% names(exclude) && "numeric" %in% exclude[[data_type_label]]) {
       exclude[[data_type_label]] = c(exclude[[data_type_label]], "integer")
     }
-    
     col_names <- self$get_column_names()
-    var_metadata <- self$get_variables_metadata()
     out = c()
     i = 1
     for(col in col_names) {
       if(length(include) > 0 || length(exclude) > 0) {
-        curr_var_metadata = var_metadata[i, ]
+        curr_var_metadata <- self$get_variables_metadata(column = col, direct_from_attributes = TRUE)
+        if(!data_type_label %in% names(curr_var_metadata)) curr_var_metadata[[data_type_label]] <- class(self$get_columns_from_data(col_names = col))
+        #TODO this is a temp compatibility solution for how the class of ordered factor used to be shown when getting metadata
+        if(length(curr_var_metadata[[data_type_label]]) == 2 && all(curr_var_metadata[[data_type_label]] %in% c("ordered", "factor"))) curr_var_metadata[[data_type_label]] <- "ordered,factor"
         if(all(c(names(include), names(exclude)) %in% names(curr_var_metadata)) && all(sapply(names(include), function(prop) curr_var_metadata[[prop]] %in% include[[prop]]))
            && all(sapply(names(exclude), function(prop) !curr_var_metadata[[prop]] %in% exclude[[prop]]))) {
           out <- c(out, col)
