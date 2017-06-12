@@ -51,7 +51,7 @@ Partial Class dlgCombineforGraphics
         '
         'ucrSave
         '
-        Me.ucrSave.Location = New System.Drawing.Point(10, 228)
+        Me.ucrSave.Location = New System.Drawing.Point(10, 231)
         Me.ucrSave.Name = "ucrSave"
         Me.ucrSave.Size = New System.Drawing.Size(276, 24)
         Me.ucrSave.TabIndex = 4
@@ -63,8 +63,10 @@ Partial Class dlgCombineforGraphics
         Me.ucrCombineGraphReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrCombineGraphReceiver.Name = "ucrCombineGraphReceiver"
         Me.ucrCombineGraphReceiver.Selector = Nothing
-        Me.ucrCombineGraphReceiver.Size = New System.Drawing.Size(120, 130)
+        Me.ucrCombineGraphReceiver.Size = New System.Drawing.Size(120, 100)
+        Me.ucrCombineGraphReceiver.strNcFilePath = ""
         Me.ucrCombineGraphReceiver.TabIndex = 2
+        Me.ucrCombineGraphReceiver.ucrSelector = Nothing
         '
         'ucrCombineGraphSelector
         '
@@ -87,7 +89,7 @@ Partial Class dlgCombineforGraphics
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 312)
+        Me.ClientSize = New System.Drawing.Size(414, 314)
         Me.Controls.Add(Me.ucrSave)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.lblGraphsToCombine)

@@ -273,7 +273,7 @@ Public Class dlgImportDataset
         Else
             strFileType = strFileExt.Substring(1)
             ucrBase.clsRsyntax.clsBaseFunction.ClearParameters()
-            ucrBase.clsRsyntax.SetFunction("rio::import")
+            ucrBase.clsRsyntax.SetFunction("import")
             ucrBase.clsRsyntax.AddParameter("file", Chr(34) & strFilePath & Chr(34))
             grpCSV.Hide()
             grpExcel.Hide()
