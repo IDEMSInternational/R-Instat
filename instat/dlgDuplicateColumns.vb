@@ -27,6 +27,8 @@ Public Class dlgDuplicateColumns
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
+        Else
+            ReopenDialog()
         End If
         If bReset Then
             SetDefaults()
@@ -92,6 +94,10 @@ Public Class dlgDuplicateColumns
         Else
             ucrBase.OKEnabled(False)
         End If
+    End Sub
+
+    Private Sub ReopenDialog()
+        ucrInputColumnName.bAllowNonConditionValues = True ' temporary fix
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
