@@ -76,7 +76,7 @@ Public Class dlgExtremesClimatic
         ucrInputThresholdValue.SetValidationTypeAsNumeric()
         ucrInputThresholdValue.SetLinkedDisplayControl(lblValues)
 
-        ucrInputThresholdOperator.SetParameter(New RParameter("threshold_operator"))
+        ucrInputThresholdOperator.SetParameter(New RParameter("function_exp"))
         Dim dctThreshold As New Dictionary(Of String, String)
         dctThreshold.Add(">", Chr(34) & ">" & Chr(34))
         dctThreshold.Add("<", Chr(34) & "<" & Chr(34))
@@ -121,7 +121,7 @@ Public Class dlgExtremesClimatic
         clsMinMaxGroupByFunction.AddParameter("type", Chr(34) & "by" & Chr(34))
         clsMinMaxGroupByFunction.SetAssignTo("grouping")
         ucrInputThresholdValue.SetName(40)
-        ucrInputThresholdOperator.SetName("<=")
+        ucrInputThresholdOperator.SetName(">=")
 
         clsMinMaxManipulationsFunction.SetRCommand("list")
         clsMinMaxManipulationsFunction.AddParameter("group_by", clsRFunctionParameter:=clsMinMaxGroupByFunction, bIncludeArgumentName:=False)
@@ -201,7 +201,7 @@ Public Class dlgExtremesClimatic
                     ucrInputSave.SetName("min")
                 End If
             ElseIf rdoPeaks.Checked Then
-                ucrInputSave.SetName("Peaks_data_frame")
+                ucrInputSave.SetName("Peaks")
             End If
         End If
     End Sub
