@@ -391,7 +391,7 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
       }
       # Otherwise, there must be existing keys defined in the data frame
       else {
-        if(!self$has_key(overall_calc_from))  stop("Cannot merge calculated_from columns into exisiting data as there is no key defined in ", curr_data_list[[c_link_label]][["from_data_frame"]])
+        if(!self$has_key(overall_calc_from)) stop("Cannot merge calculated_from columns into exisiting data as there is no key defined in ", curr_data_list[[c_link_label]][["from_data_frame"]])
         overall_links <- self$get_keys(overall_calc_from)
       }
       if(!self$has_key(data_frame_name))  stop("Cannot merge calculated_from columns into exisiting data as there is no key defined in ", data_frame_name)
