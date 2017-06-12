@@ -26,6 +26,8 @@ Public Class dlgAddLink
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
+        Else
+            ReopenDialog()
         End If
         If bReset Then
             SetDefaults()
@@ -42,10 +44,10 @@ Public Class dlgAddLink
         ucrDataSelectorFrom.SetParameter(New RParameter("from_data_frame", 0))
         ucrDataSelectorFrom.SetParameterIsString()
 
-        ucrDataSelectorTo.SetParameter(New RParameter("to_data_frame", 0))
+        ucrDataSelectorTo.SetParameter(New RParameter("to_data_frame", 1))
         ucrDataSelectorTo.SetParameterIsString()
 
-        ucrInputLinkName.SetParameter(New RParameter("link_name", 0))
+        ucrInputLinkName.SetParameter(New RParameter("link_name", 4))
         lvwLinkViewBox.Columns.Add("Name", 80, HorizontalAlignment.Left)
         lvwLinkViewBox.Columns.Add("Columns", 150, HorizontalAlignment.Left)
         ucrInputSelectedKey.IsReadOnly = True
@@ -56,10 +58,13 @@ Public Class dlgAddLink
 
         ucrDataSelectorFrom.Reset()
         ucrDataSelectorTo.Reset()
+        ucrInputLinkName.SetName("")
+
         UpdateKeys()
 
-        clsAddLink.AddParameter("type", Chr(34) & "keyed_link" & Chr(34))
         clsAddLink.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_link")
+        clsAddLink.AddParameter("type", Chr(34) & "keyed_link" & Chr(34), iPosition:=3)
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsAddLink)
     End Sub
 
@@ -79,6 +84,10 @@ Public Class dlgAddLink
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
+    End Sub
+
+    Private Sub ReopenDialog()
+        UpdateKeys() ' currently I may open the dialog, then realise I haven't set my keys, make my key, reopen this dlg and my key doesn't show up until I reset it.
     End Sub
 
     Public Sub UpdateKeys()
@@ -138,12 +147,12 @@ Public Class dlgAddLink
         End If
     End Sub
 
-    Private Sub ucrDataSelectorFrom_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataSelectorFrom.ControlContentsChanged, ucrInputLinkName.ControlContentsChanged, ucrInputSelectedKey.ControlContentsChanged
+    Private Sub ucrDataSelectorTo_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDataSelectorTo.ControlValueChanged
+        UpdateKeys()
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrDataSelectorTo_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDataSelectorTo.ControlValueChanged
-        UpdateKeys()
+    Private Sub ucrDataSelectorFrom_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataSelectorFrom.ControlContentsChanged, ucrInputLinkName.ControlContentsChanged, ucrInputSelectedKey.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class

@@ -75,7 +75,7 @@ Partial Class dlgAddLink
         'lblKeys
         '
         Me.lblKeys.AutoSize = True
-        Me.lblKeys.Location = New System.Drawing.Point(168, 27)
+        Me.lblKeys.Location = New System.Drawing.Point(168, 30)
         Me.lblKeys.Name = "lblKeys"
         Me.lblKeys.Size = New System.Drawing.Size(33, 13)
         Me.lblKeys.TabIndex = 4
@@ -84,7 +84,7 @@ Partial Class dlgAddLink
         'lvwLinkViewBox
         '
         Me.lvwLinkViewBox.FullRowSelect = True
-        Me.lvwLinkViewBox.Location = New System.Drawing.Point(168, 42)
+        Me.lvwLinkViewBox.Location = New System.Drawing.Point(168, 45)
         Me.lvwLinkViewBox.Name = "lvwLinkViewBox"
         Me.lvwLinkViewBox.Size = New System.Drawing.Size(240, 123)
         Me.lvwLinkViewBox.TabIndex = 5
