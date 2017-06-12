@@ -45,6 +45,7 @@ Public Class dlgFromLibrary
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 156
         'fills the combo box
+        clsDataFunction.SetPackageName("utils")
         clsDataFunction.SetRCommand("data")
         FillPackagesCombo()
     End Sub
@@ -167,6 +168,7 @@ Public Class dlgFromLibrary
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
         Dim clsHelp As New RFunction
+        clsHelp.SetPackageName("utils")
         clsHelp.SetRCommand("help")
         clsHelp.AddParameter("topic", Chr(34) & lstCollection.SelectedItems(0).Text & Chr(34))
         clsHelp.AddParameter("package", Chr(34) & cboPackages.SelectedItem & Chr(34))
