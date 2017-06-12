@@ -281,22 +281,36 @@ data_object$set("public", "get_data_frame", function(convert_to_character = FALS
 }
 )
 
+# As a temp fix to rlink crashing here we access private$data directly
 data_object$set("public", "get_variables_metadata", function(data_type = "all", convert_to_character = FALSE, property, column, error_if_no_property = TRUE, direct_from_attributes = FALSE) {
   #if(update) self$update_variables_metadata()
   if(direct_from_attributes) {
-    if(missing(property)) return(attributes(self$get_columns_from_data(column, use_current_filter = FALSE)))
-    else return(attr(self$get_columns_from_data(column, use_current_filter = FALSE), property))
+    #if(missing(property)) return(attributes(self$get_columns_from_data(column, use_current_filter = FALSE)))
+    if(missing(property)) return(attributes(private$data[, column]))
+    #else return(attr(self$get_columns_from_data(column, use_current_filter = FALSE), property))
+    else return(attr(private$data[, column], property))
+  }
+  # special case of getting "class" property which isn't always stored in attributes
+  else if(!missing(property) && length(property == 1) && property == data_type_label) {
+    if(missing(column)) column <- names(private$data)
+    #if(missing(column)) column <- self$get_column_names()
+    out <- sapply(private$data[ , column], class)
+    out <- sapply(out, function(x) paste(unlist(x), collapse = ","))
+    return(as.vector(out))
   }
   else {
-    i = 1
     out <- list()
-    for(col in self$get_data_frame(use_current_filter = FALSE)) {
+    #curr_data <- self$get_data_frame(use_current_filter = FALSE)
+    curr_data <- private$data
+    for(i in seq_along(names(curr_data))) {
+      col <- curr_data[ ,i]
       ind <- which(names(attributes(col)) == "levels")
       if(length(ind) > 0) col_attributes <- attributes(col)[-ind]
       else col_attributes <- attributes(col)
       if(is.null(col_attributes)) col_attributes <- list()
       col_attributes[[data_type_label]] <- class(col)
-      for(att_name in names(col_attributes)) {
+      for(j in seq_along(col_attributes)) {
+        att_name <- names(col_attributes)[j]
         if(att_name == labels_label) {
           num_labels <- length(col_attributes[[att_name]])		
           max_labels <- min(max_labels_display, num_labels)		
@@ -313,7 +327,6 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
       #}
       col_attributes <- data.frame(col_attributes, stringsAsFactors = FALSE)
       out[[i]] <- col_attributes
-      i = i + 1
     }
     #RLink crashes with bind_rows for some data frames with ~50+ columns
     #rbind.fill safer alternative currently
@@ -321,7 +334,8 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
     out <- as.data.frame(out)
     if(all(c(name_label, label_label) %in% names(out))) out <- out[ ,c(c(name_label, label_label), setdiff(names(out), c(name_label, label_label)))]
     else if(name_label %in% names(out)) out <- out[ ,c(name_label, setdiff(names(out), name_label))]
-    row.names(out) <- self$get_column_names()
+    #row.names(out) <- self$get_column_names()
+    row.names(out) <- names(private$data)
     if(data_type != "all") {
       if(data_type == "numeric") {
         out <- out[out[[data_type_label]] %in% c("numeric", "integer"), ]
@@ -337,12 +351,14 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
         not_found <- TRUE
       }
       if(!missing(column)) {
-        if(!all(column %in% self$get_column_names())) stop(column, " not found in data")
+        #if(!all(column %in% self$get_column_names())) stop(column, " not found in data")
+        if(!all(column %in% names(private$data))) stop(column, " not found in data")
         if(not_found) out <- rep(NA, length(column))
         else out <- out[column, property]
       }
       else {
-        if(not_found) out <- rep(NA, length(self$get_column_names()))
+        #if(not_found) out <- rep(NA, length(self$get_column_names()))
+        if(not_found) out <- rep(NA, ncol(private$data))
         else out <- out[, property]
       }
     }
