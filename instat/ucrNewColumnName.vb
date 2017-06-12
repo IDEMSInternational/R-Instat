@@ -50,7 +50,6 @@ Public Class ucrNewColumnName
     End Sub
 
     Public Sub GetNextDefaults()
-        lstNextDefaultNames = frmMain.clsRLink.GetDefaultColumnNames(strPrefix)
     End Sub
 
     Public Sub SetDefaultName()
