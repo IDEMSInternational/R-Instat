@@ -295,7 +295,7 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
   else if(!missing(property) && length(property == 1) && property == data_type_label) {
     if(missing(column)) column <- names(private$data)
     #if(missing(column)) column <- self$get_column_names()
-    out <- sapply(private$data[ , column], class)
+    out <- sapply(private$data[column], class)
     out <- sapply(out, function(x) paste(unlist(x), collapse = ","))
     return(as.vector(out))
   }
@@ -304,7 +304,7 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
     #curr_data <- self$get_data_frame(use_current_filter = FALSE)
     curr_data <- private$data
     for(i in seq_along(names(curr_data))) {
-      col <- curr_data[ ,i]
+      col <- curr_data[[i]]
       ind <- which(names(attributes(col)) == "levels")
       if(length(ind) > 0) col_attributes <- attributes(col)[-ind]
       else col_attributes <- attributes(col)
