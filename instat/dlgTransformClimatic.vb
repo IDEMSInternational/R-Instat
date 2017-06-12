@@ -145,6 +145,7 @@ Public Class dlgTransformClimatic
         ucrChkValuesUnderThreshold.Checked = False
         ucrInputSpellLower.SetName(0)
         ucrInputSpellUpper.SetName(0.85)
+        ucrInputColName.bUserTyped = False
 
         clsTransformManipulationsFunc.SetRCommand("list")
         clsTransformManipulationsFunc.AddParameter("group_by", clsRFunctionParameter:=clsTransformGroupByFunc, bIncludeArgumentName:=False)
@@ -254,28 +255,25 @@ Public Class dlgTransformClimatic
             clsRRollFuncExpr.AddParameter("width", ucrNudSumOver.Value)
             clsRRollFuncExpr.AddParameter("FUN", clsRFunctionParameter:=clsMatchFun)
             clsRTransform.RemoveParameterByName("sub_calculations")
-            MovingColNames()
             grpTransform.Text = "Moving"
         ElseIf rdoCount.Checked Then
             clsRRollFuncExpr.AddParameter("width", ucrNudCountOver.Value)
             clsRRollFuncExpr.AddParameter("FUN", "function(x) length(which(x" & strValuesUnder & ucrInputThreshold.GetText() & "))")
             clsRTransform.RemoveParameterByName("sub_calculations")
-            ucrInputColName.SetName("count")
             grpTransform.Text = "Count"
         ElseIf rdoSpell.Checked Then
             clsRRainday.AddParameter("function_exp", Chr(34) & "ifelse(" & ucrReceiverData.GetVariableNames(False) & " >= " & ucrInputSpellLower.GetText() & " & " & ucrReceiverData.GetVariableNames(False) & " <= " & ucrInputSpellUpper.GetText() & ", 0, 1)" & Chr(34))
             clsSubCalcList.AddParameter("sub1", clsRFunctionParameter:=clsRRainday)
             clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubCalcList)
-            ucrInputColName.SetName("spell")
             grpTransform.Text = "Spell"
         ElseIf rdoWaterBalance.Checked Then
             bRain = True
             clsReplaceNA.AddParameter("function_exp", Chr(34) & "replace(" & ucrReceiverData.GetVariableNames(False) & ", is.na(" & ucrReceiverData.GetVariableNames(False) & ")," & ucrNudWBCapacity.Value & ")" & Chr(34))
             clsSubCalcList.AddParameter("sub1", clsRFunctionParameter:=clsReplaceNA)
             clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubCalcList)
-            ucrInputColName.SetName("water_balance")
             grpTransform.Text = "Water Balance"
         End If
+        SetAssignName()
         If bRain Then
             ucrReceiverData.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "rain" & Chr(34)})
             ucrReceiverData.bAutoFill = True
@@ -284,6 +282,19 @@ Public Class dlgTransformClimatic
         End If
     End Sub
 
+    Private Sub SetAssignName()
+        If Not ucrInputColName.bUserTyped Then
+            If rdoMoving.Checked Then
+                MovingColNames()
+            ElseIf rdoCount.Checked Then
+                ucrInputColName.SetName("count")
+            ElseIf rdoSpell.Checked Then
+                ucrInputColName.SetName("spell")
+            ElseIf rdoWaterBalance.Checked Then
+                ucrInputColName.SetName("water_balance")
+            End If
+        End If
+    End Sub
     Private Sub MovingColNames()
         If ucrInputSum.cboInput.SelectedItem <> Nothing Then
             ucrInputColName.SetName("moving_" & ucrInputSum.cboInput.SelectedItem)
