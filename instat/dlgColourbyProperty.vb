@@ -58,7 +58,6 @@ Public Class dlgColourbyProperty
         clsRemoveColour = New RFunction
 
         ucrSelectorColourByMetadata.Reset()
-        ucrChkRemoveColours.Checked = False
 
         clsColourByMetadata.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_column_colours_by_metadata")
         clsRemoveColour.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_column_colours")
@@ -70,7 +69,7 @@ Public Class dlgColourbyProperty
         ucrSelectorColourByMetadata.AddAdditionalCodeParameterPair(clsRemoveColour, ucrSelectorColourByMetadata.GetParameter(), iAdditionalPairNo:=1)
         ucrSelectorColourByMetadata.SetRCode(clsColourByMetadata, bReset)
         ucrReceiverMetadataProperty.SetRCode(clsColourByMetadata, bReset)
-        ucrChkRemoveColours.SetRCode(clsColourByMetadata, bReset)
+        ucrChkRemoveColours.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
