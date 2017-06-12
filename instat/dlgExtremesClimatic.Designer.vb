@@ -27,7 +27,6 @@ Partial Class dlgExtremesClimatic
         Me.lblYear = New System.Windows.Forms.Label()
         Me.lblDayOfYear = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
-        Me.lblOperator = New System.Windows.Forms.Label()
         Me.ucrInputThresholdValue = New instat.ucrInputTextBox()
         Me.ucrInputThresholdOperator = New instat.ucrInputComboBox()
         Me.rdoMin = New System.Windows.Forms.RadioButton()
@@ -89,7 +88,6 @@ Partial Class dlgExtremesClimatic
         '
         'grpOptions
         '
-        Me.grpOptions.Controls.Add(Me.lblOperator)
         Me.grpOptions.Controls.Add(Me.ucrInputThresholdValue)
         Me.grpOptions.Controls.Add(Me.ucrInputThresholdOperator)
         Me.grpOptions.Controls.Add(Me.rdoMin)
@@ -104,21 +102,12 @@ Partial Class dlgExtremesClimatic
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
         '
-        'lblOperator
-        '
-        Me.lblOperator.AutoSize = True
-        Me.lblOperator.Location = New System.Drawing.Point(44, 139)
-        Me.lblOperator.Name = "lblOperator"
-        Me.lblOperator.Size = New System.Drawing.Size(51, 13)
-        Me.lblOperator.TabIndex = 6
-        Me.lblOperator.Text = "Operator:"
-        '
         'ucrInputThresholdValue
         '
         Me.ucrInputThresholdValue.AddQuotesIfUnrecognised = True
         Me.ucrInputThresholdValue.IsMultiline = False
         Me.ucrInputThresholdValue.IsReadOnly = False
-        Me.ucrInputThresholdValue.Location = New System.Drawing.Point(97, 108)
+        Me.ucrInputThresholdValue.Location = New System.Drawing.Point(98, 108)
         Me.ucrInputThresholdValue.Name = "ucrInputThresholdValue"
         Me.ucrInputThresholdValue.Size = New System.Drawing.Size(70, 21)
         Me.ucrInputThresholdValue.TabIndex = 5
@@ -127,7 +116,7 @@ Partial Class dlgExtremesClimatic
         '
         Me.ucrInputThresholdOperator.AddQuotesIfUnrecognised = True
         Me.ucrInputThresholdOperator.IsReadOnly = False
-        Me.ucrInputThresholdOperator.Location = New System.Drawing.Point(96, 136)
+        Me.ucrInputThresholdOperator.Location = New System.Drawing.Point(49, 108)
         Me.ucrInputThresholdOperator.Name = "ucrInputThresholdOperator"
         Me.ucrInputThresholdOperator.Size = New System.Drawing.Size(47, 21)
         Me.ucrInputThresholdOperator.TabIndex = 7
@@ -159,9 +148,9 @@ Partial Class dlgExtremesClimatic
         Me.lblValues.AutoSize = True
         Me.lblValues.Location = New System.Drawing.Point(9, 110)
         Me.lblValues.Name = "lblValues"
-        Me.lblValues.Size = New System.Drawing.Size(87, 13)
+        Me.lblValues.Size = New System.Drawing.Size(37, 13)
         Me.lblValues.TabIndex = 4
-        Me.lblValues.Text = "Threshold Value:"
+        Me.lblValues.Text = "Value:"
         '
         'ucrPnlMaxMin
         '
@@ -383,5 +372,4 @@ Partial Class dlgExtremesClimatic
     Friend WithEvents rdoMax As RadioButton
     Friend WithEvents ucrPnlMaxMin As UcrPanel
     Friend WithEvents lblNewColName As Label
-    Friend WithEvents lblOperator As Label
 End Class
