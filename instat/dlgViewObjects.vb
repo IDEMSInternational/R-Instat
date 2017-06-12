@@ -39,7 +39,6 @@ Public Class dlgViewObjects
         ' ucr selector
         ucrSelectorForViewObject.SetParameter(New RParameter("data_name", 0))
         ucrSelectorForViewObject.SetParameterIsString()
-        ucrSelectorForViewObject.SetItemType("object")
 
         ' ucr receiver
         ucrReceiverSelectedObject.SetParameter(New RParameter("object_name", 1))
@@ -47,6 +46,7 @@ Public Class dlgViewObjects
         ucrReceiverSelectedObject.Selector = ucrSelectorForViewObject
         ucrReceiverSelectedObject.SetMeAsReceiver()
         ucrReceiverSelectedObject.strSelectorHeading = "Objects"
+        ucrReceiverSelectedObject.SetItemType("object")
 
         ucrPnlContentsToView.bAllowNonConditionValues = True ' temporary
         ' rdo's

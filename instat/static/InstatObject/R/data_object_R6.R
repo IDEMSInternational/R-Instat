@@ -951,8 +951,8 @@ data_object$set("public", "sort_dataframe", function(col_names = c(), decreasing
       if(!(col_name %in% names(curr_data))) {
         stop(col_name, " is not a column in ", get_metadata(data_name_label))
       }
-      if(decreasing) col_names_exp[[i]] <- interp(~ desc(var), var = as.name(col_name))
-      else col_names_exp[[i]] <- interp(~ var, var = as.name(col_name))
+      if(decreasing) col_names_exp[[i]] <- lazyeval::interp(~ desc(var), var = as.name(col_name))
+      else col_names_exp[[i]] <- lazyeval::interp(~ var, var = as.name(col_name))
       i = i + 1
     }
     if(by_row_names) warning("Cannot sort by columns and row names. Sorting will be done by given columns only.")
@@ -1165,14 +1165,15 @@ data_object$set("public", "get_column_names", function(as_list = FALSE, include 
     if(data_type_label %in% names(exclude) && "numeric" %in% exclude[[data_type_label]]) {
       exclude[[data_type_label]] = c(exclude[[data_type_label]], "integer")
     }
-    
     col_names <- self$get_column_names()
-    var_metadata <- self$get_variables_metadata()
     out = c()
     i = 1
     for(col in col_names) {
       if(length(include) > 0 || length(exclude) > 0) {
-        curr_var_metadata = var_metadata[i, ]
+        curr_var_metadata <- self$get_variables_metadata(column = col, direct_from_attributes = TRUE)
+        if(!data_type_label %in% names(curr_var_metadata)) curr_var_metadata[[data_type_label]] <- class(self$get_columns_from_data(col_names = col))
+        #TODO this is a temp compatibility solution for how the class of ordered factor used to be shown when getting metadata
+        if(length(curr_var_metadata[[data_type_label]]) == 2 && all(curr_var_metadata[[data_type_label]] %in% c("ordered", "factor"))) curr_var_metadata[[data_type_label]] <- "ordered,factor"
         if(all(c(names(include), names(exclude)) %in% names(curr_var_metadata)) && all(sapply(names(include), function(prop) curr_var_metadata[[prop]] %in% include[[prop]]))
            && all(sapply(names(exclude), function(prop) !curr_var_metadata[[prop]] %in% exclude[[prop]]))) {
           out <- c(out, col)
@@ -1703,7 +1704,7 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
       g <- g + ggplot2::geom_bar() + ggplot2::coord_polar(theta = "x")
     }
     else {
-      g <- g + ggplot2::curr_geom()
+      g <- g + curr_geom()
     }
 
     if (coord_flip) {
@@ -2156,10 +2157,10 @@ data_object$set("public","infill_missing_dates", function(date_name, factors) {
     col_names_exp <- c()
     for(i in seq_along(factors)) {
       col_name <- factors[i]
-      col_names_exp[[i]] <- interp(~ var, var = as.name(col_name))
+      col_names_exp[[i]] <- lazyeval::interp(~ var, var = as.name(col_name))
     }
     grouped_data <- self$get_data_frame(use_current_filter = FALSE) %>% dplyr::group_by_(.dots = col_names_exp)
-    date_ranges <- grouped_data %>% dplyr::summarise_(.dots = setNames(list(interp(~ min(var), var = as.name(date_name)), lazyeval::interp(~ max(var), var = as.name(date_name))), c("Min", "Max")))
+    date_ranges <- grouped_data %>% dplyr::summarise_(.dots = setNames(list(lazyeval::interp(~ min(var), var = as.name(date_name)), lazyeval::interp(~ max(var), var = as.name(date_name))), c("Min", "Max")))
     date_lengths <- grouped_data %>% dplyr::summarise(Count = n())
     full_dates_list <- list()
     for(j in 1:nrow(date_ranges)) {
