@@ -329,4 +329,25 @@ Public Class ucrSelector
             MyBase.UpdateControl(bReset)
         End If
     End Sub
+
+    Private Sub SelectionMenuStrip_VisibleChanged(sender As Object, e As EventArgs) Handles SelectionMenuStrip.VisibleChanged
+        If SelectionMenuStrip.Visible Then
+            If CurrentReceiver IsNot Nothing Then
+                AddSelectedToolStripMenuItem.Enabled = True
+                If TypeOf CurrentReceiver Is ucrReceiverSingle Then
+                    AddAllToolStripMenuItem.Enabled = False
+                    SelectAllToolStripMenuItem.Enabled = False
+                ElseIf TypeOf CurrentReceiver Is ucrReceiverMultiple Then
+                    AddAllToolStripMenuItem.Enabled = True
+                    SelectAllToolStripMenuItem.Enabled = True
+                Else
+                    MsgBox("Current receiver is neither ucrReceiverSingle or ucrReceiverMultiple. Cannot determine visibility of menu items.")
+                End If
+            Else
+                AddSelectedToolStripMenuItem.Enabled = False
+                AddAllToolStripMenuItem.Enabled = False
+                SelectAllToolStripMenuItem.Enabled = False
+            End If
+        End If
+    End Sub
 End Class

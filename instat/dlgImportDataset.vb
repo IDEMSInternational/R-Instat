@@ -45,8 +45,8 @@ Public Class dlgImportDataset
         clsReadXL = New RFunction
         'clsTempWorkbookImport = New RFunction
         'clsTempExcelPreview = New RFunction
-        ucrBase.clsRsyntax.SetPackageName("rio")
         ucrBase.clsRsyntax.SetFunction("import")
+        ucrBase.clsRsyntax.SetPackageName("rio")
         clsImportRDS.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_RDS")
         bFirstLoad = True
         bFromLibrary = False
@@ -272,6 +272,7 @@ Public Class dlgImportDataset
             'ucrInputName.SetName(strFileName, bSilent:=True)
         Else
             strFileType = strFileExt.Substring(1)
+            ucrBase.clsRsyntax.clsBaseFunction.SetPackageName("rio")
             ucrBase.clsRsyntax.clsBaseFunction.ClearParameters()
             ucrBase.clsRsyntax.SetFunction("import")
             ucrBase.clsRsyntax.AddParameter("file", Chr(34) & strFilePath & Chr(34))
