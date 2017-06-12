@@ -33,7 +33,7 @@ Partial Class dlgUseGraph
         'lblGraphtoUse
         '
         Me.lblGraphtoUse.AutoSize = True
-        Me.lblGraphtoUse.Location = New System.Drawing.Point(252, 44)
+        Me.lblGraphtoUse.Location = New System.Drawing.Point(252, 45)
         Me.lblGraphtoUse.Name = "lblGraphtoUse"
         Me.lblGraphtoUse.Size = New System.Drawing.Size(73, 13)
         Me.lblGraphtoUse.TabIndex = 1
@@ -41,16 +41,16 @@ Partial Class dlgUseGraph
         '
         'cmdPlotOptions
         '
-        Me.cmdPlotOptions.Location = New System.Drawing.Point(252, 94)
+        Me.cmdPlotOptions.Location = New System.Drawing.Point(10, 202)
         Me.cmdPlotOptions.Name = "cmdPlotOptions"
-        Me.cmdPlotOptions.Size = New System.Drawing.Size(75, 23)
+        Me.cmdPlotOptions.Size = New System.Drawing.Size(108, 23)
         Me.cmdPlotOptions.TabIndex = 3
         Me.cmdPlotOptions.Text = "Plot Options"
         Me.cmdPlotOptions.UseVisualStyleBackColor = True
         '
         'ucrSaveGraph
         '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 200)
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 231)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
         Me.ucrSaveGraph.Size = New System.Drawing.Size(276, 24)
         Me.ucrSaveGraph.TabIndex = 4
@@ -63,7 +63,9 @@ Partial Class dlgUseGraph
         Me.ucrGraphReceiver.Name = "ucrGraphReceiver"
         Me.ucrGraphReceiver.Selector = Nothing
         Me.ucrGraphReceiver.Size = New System.Drawing.Size(120, 20)
+        Me.ucrGraphReceiver.strNcFilePath = ""
         Me.ucrGraphReceiver.TabIndex = 2
+        Me.ucrGraphReceiver.ucrSelector = Nothing
         '
         'ucrGraphsSelector
         '
@@ -77,7 +79,7 @@ Partial Class dlgUseGraph
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 230)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 261)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 5
@@ -86,7 +88,7 @@ Partial Class dlgUseGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 287)
+        Me.ClientSize = New System.Drawing.Size(416, 319)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.cmdPlotOptions)
         Me.Controls.Add(Me.lblGraphtoUse)
