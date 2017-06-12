@@ -52,7 +52,6 @@ Partial Class frmMain
         Me.mnuDescribeSpecificDotPlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificRugPlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificBarChart = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDescribeSpecificBarChartFromSummary = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeGeneral = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeGeneralColumnSummaries = New System.Windows.Forms.ToolStripMenuItem()
         Me.DescribeGeneralTabulation = New System.Windows.Forms.ToolStripMenuItem()
@@ -469,6 +468,7 @@ Partial Class frmMain
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
+        Me.ToolStripSeparator38 = New System.Windows.Forms.ToolStripSeparator()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -513,32 +513,32 @@ Partial Class frmMain
         'mnuDescribeOneVariableSummarise
         '
         Me.mnuDescribeOneVariableSummarise.Name = "mnuDescribeOneVariableSummarise"
-        Me.mnuDescribeOneVariableSummarise.Size = New System.Drawing.Size(152, 22)
+        Me.mnuDescribeOneVariableSummarise.Size = New System.Drawing.Size(146, 22)
         Me.mnuDescribeOneVariableSummarise.Tag = "Summarise..."
         Me.mnuDescribeOneVariableSummarise.Text = "Summarise..."
         '
         'mnuDescribeOneVariableGraph
         '
         Me.mnuDescribeOneVariableGraph.Name = "mnuDescribeOneVariableGraph"
-        Me.mnuDescribeOneVariableGraph.Size = New System.Drawing.Size(152, 22)
+        Me.mnuDescribeOneVariableGraph.Size = New System.Drawing.Size(146, 22)
         Me.mnuDescribeOneVariableGraph.Tag = "Graph..."
         Me.mnuDescribeOneVariableGraph.Text = "Graph..."
         '
         'ToolStripSeparator33
         '
         Me.ToolStripSeparator33.Name = "ToolStripSeparator33"
-        Me.ToolStripSeparator33.Size = New System.Drawing.Size(149, 6)
+        Me.ToolStripSeparator33.Size = New System.Drawing.Size(143, 6)
         '
         'mnuDescribeOneVariableFrequencies
         '
         Me.mnuDescribeOneVariableFrequencies.Name = "mnuDescribeOneVariableFrequencies"
-        Me.mnuDescribeOneVariableFrequencies.Size = New System.Drawing.Size(152, 22)
+        Me.mnuDescribeOneVariableFrequencies.Size = New System.Drawing.Size(146, 22)
         Me.mnuDescribeOneVariableFrequencies.Text = "Frequencies..."
         '
         'RatingDataToolStripMenuItem
         '
         Me.RatingDataToolStripMenuItem.Name = "RatingDataToolStripMenuItem"
-        Me.RatingDataToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.RatingDataToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.RatingDataToolStripMenuItem.Text = "Rating Data..."
         '
         'mnuDescribeTwoVariables
@@ -585,30 +585,32 @@ Partial Class frmMain
         '
         'mnuDescribeThreeVariableSummarise
         '
+        Me.mnuDescribeThreeVariableSummarise.Enabled = False
         Me.mnuDescribeThreeVariableSummarise.Name = "mnuDescribeThreeVariableSummarise"
-        Me.mnuDescribeThreeVariableSummarise.Size = New System.Drawing.Size(142, 22)
+        Me.mnuDescribeThreeVariableSummarise.Size = New System.Drawing.Size(152, 22)
         Me.mnuDescribeThreeVariableSummarise.Text = "Summarise..."
         '
         'mnuDescribeThreeVariableGraph
         '
+        Me.mnuDescribeThreeVariableGraph.Enabled = False
         Me.mnuDescribeThreeVariableGraph.Name = "mnuDescribeThreeVariableGraph"
-        Me.mnuDescribeThreeVariableGraph.Size = New System.Drawing.Size(142, 22)
+        Me.mnuDescribeThreeVariableGraph.Size = New System.Drawing.Size(152, 22)
         Me.mnuDescribeThreeVariableGraph.Text = "Graph..."
         '
         'ToolStripSeparator36
         '
         Me.ToolStripSeparator36.Name = "ToolStripSeparator36"
-        Me.ToolStripSeparator36.Size = New System.Drawing.Size(139, 6)
+        Me.ToolStripSeparator36.Size = New System.Drawing.Size(149, 6)
         '
         'mnuDescribeThreeVariableFrequencies
         '
         Me.mnuDescribeThreeVariableFrequencies.Name = "mnuDescribeThreeVariableFrequencies"
-        Me.mnuDescribeThreeVariableFrequencies.Size = New System.Drawing.Size(142, 22)
+        Me.mnuDescribeThreeVariableFrequencies.Size = New System.Drawing.Size(152, 22)
         Me.mnuDescribeThreeVariableFrequencies.Text = "Frequencies"
         '
         'mnuDescribeSpecific
         '
-        Me.mnuDescribeSpecific.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeSpecificFrequency, Me.mnuDescribeSpecificSummary, Me.mnuDescribeSpecificMultipleResponse, Me.ToolStripSeparator26, Me.mnuDescribeSpecificScatterPlot, Me.mnuDescribeSpecificLinePlot, Me.mnuDescribeSpecificHistogram, Me.mnuDescribeSpecificBoxplot, Me.mnuDescribeSpecificDotPlot, Me.mnuDescribeSpecificRugPlot, Me.mnuDescribeSpecificBarChart, Me.mnuDescribeSpecificBarChartFromSummary})
+        Me.mnuDescribeSpecific.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeSpecificFrequency, Me.mnuDescribeSpecificSummary, Me.mnuDescribeSpecificMultipleResponse, Me.ToolStripSeparator26, Me.mnuDescribeSpecificScatterPlot, Me.mnuDescribeSpecificLinePlot, Me.mnuDescribeSpecificHistogram, Me.mnuDescribeSpecificBoxplot, Me.mnuDescribeSpecificDotPlot, Me.mnuDescribeSpecificRugPlot, Me.mnuDescribeSpecificBarChart})
         Me.mnuDescribeSpecific.Name = "mnuDescribeSpecific"
         Me.mnuDescribeSpecific.Size = New System.Drawing.Size(172, 22)
         Me.mnuDescribeSpecific.Tag = "Table_Dialogs"
@@ -616,16 +618,15 @@ Partial Class frmMain
         '
         'mnuDescribeSpecificFrequency
         '
-        Me.mnuDescribeSpecificFrequency.Enabled = False
         Me.mnuDescribeSpecificFrequency.Name = "mnuDescribeSpecificFrequency"
-        Me.mnuDescribeSpecificFrequency.Size = New System.Drawing.Size(217, 22)
+        Me.mnuDescribeSpecificFrequency.Size = New System.Drawing.Size(180, 22)
         Me.mnuDescribeSpecificFrequency.Tag = "Frequency..."
         Me.mnuDescribeSpecificFrequency.Text = "Frequency..."
         '
         'mnuDescribeSpecificSummary
         '
         Me.mnuDescribeSpecificSummary.Name = "mnuDescribeSpecificSummary"
-        Me.mnuDescribeSpecificSummary.Size = New System.Drawing.Size(217, 22)
+        Me.mnuDescribeSpecificSummary.Size = New System.Drawing.Size(180, 22)
         Me.mnuDescribeSpecificSummary.Tag = "Summary..."
         Me.mnuDescribeSpecificSummary.Text = "Summary..."
         '
@@ -633,73 +634,66 @@ Partial Class frmMain
         '
         Me.mnuDescribeSpecificMultipleResponse.Enabled = False
         Me.mnuDescribeSpecificMultipleResponse.Name = "mnuDescribeSpecificMultipleResponse"
-        Me.mnuDescribeSpecificMultipleResponse.Size = New System.Drawing.Size(217, 22)
+        Me.mnuDescribeSpecificMultipleResponse.Size = New System.Drawing.Size(180, 22)
         Me.mnuDescribeSpecificMultipleResponse.Tag = "Multiple_Response..."
         Me.mnuDescribeSpecificMultipleResponse.Text = "Multiple Response..."
         '
         'ToolStripSeparator26
         '
         Me.ToolStripSeparator26.Name = "ToolStripSeparator26"
-        Me.ToolStripSeparator26.Size = New System.Drawing.Size(214, 6)
+        Me.ToolStripSeparator26.Size = New System.Drawing.Size(177, 6)
         '
         'mnuDescribeSpecificScatterPlot
         '
         Me.mnuDescribeSpecificScatterPlot.Name = "mnuDescribeSpecificScatterPlot"
-        Me.mnuDescribeSpecificScatterPlot.Size = New System.Drawing.Size(217, 22)
+        Me.mnuDescribeSpecificScatterPlot.Size = New System.Drawing.Size(180, 22)
         Me.mnuDescribeSpecificScatterPlot.Tag = "Scatter_Plot..."
         Me.mnuDescribeSpecificScatterPlot.Text = "Scatter Plot..."
         '
         'mnuDescribeSpecificLinePlot
         '
         Me.mnuDescribeSpecificLinePlot.Name = "mnuDescribeSpecificLinePlot"
-        Me.mnuDescribeSpecificLinePlot.Size = New System.Drawing.Size(217, 22)
+        Me.mnuDescribeSpecificLinePlot.Size = New System.Drawing.Size(180, 22)
         Me.mnuDescribeSpecificLinePlot.Tag = "Line_Plot..."
         Me.mnuDescribeSpecificLinePlot.Text = "Line Plot..."
         '
         'mnuDescribeSpecificHistogram
         '
         Me.mnuDescribeSpecificHistogram.Name = "mnuDescribeSpecificHistogram"
-        Me.mnuDescribeSpecificHistogram.Size = New System.Drawing.Size(217, 22)
+        Me.mnuDescribeSpecificHistogram.Size = New System.Drawing.Size(180, 22)
         Me.mnuDescribeSpecificHistogram.Tag = "Histogram..."
         Me.mnuDescribeSpecificHistogram.Text = "Histogram..."
         '
         'mnuDescribeSpecificBoxplot
         '
         Me.mnuDescribeSpecificBoxplot.Name = "mnuDescribeSpecificBoxplot"
-        Me.mnuDescribeSpecificBoxplot.Size = New System.Drawing.Size(217, 22)
+        Me.mnuDescribeSpecificBoxplot.Size = New System.Drawing.Size(180, 22)
         Me.mnuDescribeSpecificBoxplot.Tag = "Boxplot..."
         Me.mnuDescribeSpecificBoxplot.Text = "Boxplot..."
         '
         'mnuDescribeSpecificDotPlot
         '
         Me.mnuDescribeSpecificDotPlot.Name = "mnuDescribeSpecificDotPlot"
-        Me.mnuDescribeSpecificDotPlot.Size = New System.Drawing.Size(217, 22)
+        Me.mnuDescribeSpecificDotPlot.Size = New System.Drawing.Size(180, 22)
         Me.mnuDescribeSpecificDotPlot.Tag = "Dotplot..."
         Me.mnuDescribeSpecificDotPlot.Text = "Dot Plot..."
         '
         'mnuDescribeSpecificRugPlot
         '
         Me.mnuDescribeSpecificRugPlot.Name = "mnuDescribeSpecificRugPlot"
-        Me.mnuDescribeSpecificRugPlot.Size = New System.Drawing.Size(217, 22)
+        Me.mnuDescribeSpecificRugPlot.Size = New System.Drawing.Size(180, 22)
         Me.mnuDescribeSpecificRugPlot.Text = "Rug Plot..."
         '
         'mnuDescribeSpecificBarChart
         '
         Me.mnuDescribeSpecificBarChart.Name = "mnuDescribeSpecificBarChart"
-        Me.mnuDescribeSpecificBarChart.Size = New System.Drawing.Size(217, 22)
+        Me.mnuDescribeSpecificBarChart.Size = New System.Drawing.Size(180, 22)
         Me.mnuDescribeSpecificBarChart.Tag = "Bar_Chart"
         Me.mnuDescribeSpecificBarChart.Text = "Bar Chart..."
         '
-        'mnuDescribeSpecificBarChartFromSummary
-        '
-        Me.mnuDescribeSpecificBarChartFromSummary.Name = "mnuDescribeSpecificBarChartFromSummary"
-        Me.mnuDescribeSpecificBarChartFromSummary.Size = New System.Drawing.Size(217, 22)
-        Me.mnuDescribeSpecificBarChartFromSummary.Tag = "Bar_Chart_From_Summary..."
-        Me.mnuDescribeSpecificBarChartFromSummary.Text = "Bar Chart From Summary..."
-        '
         'mnuDescribeGeneral
         '
-        Me.mnuDescribeGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeGeneralColumnSummaries, Me.DescribeGeneralTabulation, Me.DescribeGeneralGraphics, Me.FrequencyTablesToolStripMenuItem})
+        Me.mnuDescribeGeneral.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeGeneralColumnSummaries, Me.DescribeGeneralTabulation, Me.DescribeGeneralGraphics, Me.ToolStripSeparator38, Me.FrequencyTablesToolStripMenuItem})
         Me.mnuDescribeGeneral.Name = "mnuDescribeGeneral"
         Me.mnuDescribeGeneral.Size = New System.Drawing.Size(172, 22)
         Me.mnuDescribeGeneral.Tag = "General"
@@ -731,7 +725,7 @@ Partial Class frmMain
         '
         Me.FrequencyTablesToolStripMenuItem.Name = "FrequencyTablesToolStripMenuItem"
         Me.FrequencyTablesToolStripMenuItem.Size = New System.Drawing.Size(188, 22)
-        Me.FrequencyTablesToolStripMenuItem.Text = "Frequency Tables..."
+        Me.FrequencyTablesToolStripMenuItem.Text = "Use Summaries..."
         '
         'ToolStripSeparator9
         '
@@ -3211,7 +3205,7 @@ Partial Class frmMain
         '
         Me.mnuPrepareKeysAndLinksAddComment.Name = "mnuPrepareKeysAndLinksAddComment"
         Me.mnuPrepareKeysAndLinksAddComment.Size = New System.Drawing.Size(207, 22)
-        Me.mnuPrepareKeysAndLinksAddComment.Text = "Add comment..."
+        Me.mnuPrepareKeysAndLinksAddComment.Text = "Add Comment..."
         '
         'mnuPrepareDataObject
         '
@@ -3684,6 +3678,11 @@ Partial Class frmMain
         Me.ucrOutput.Size = New System.Drawing.Size(295, 113)
         Me.ucrOutput.TabIndex = 0
         '
+        'ToolStripSeparator38
+        '
+        Me.ToolStripSeparator38.Name = "ToolStripSeparator38"
+        Me.ToolStripSeparator38.Size = New System.Drawing.Size(185, 6)
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -4034,7 +4033,6 @@ Partial Class frmMain
     Friend WithEvents mnuDescribeSpecificDotPlot As ToolStripMenuItem
     Friend WithEvents mnuDescribeSpecificRugPlot As ToolStripMenuItem
     Friend WithEvents mnuDescribeSpecificBarChart As ToolStripMenuItem
-    Friend WithEvents mnuDescribeSpecificBarChartFromSummary As ToolStripMenuItem
     Friend WithEvents mnuDescribeMoreGraphs As ToolStripMenuItem
     Friend WithEvents mnuDescribeOtherGraphicsDialogsWindRose As ToolStripMenuItem
     Friend WithEvents mnuDescribeOtherGraphicsDialogsCumulativeDistribution As ToolStripMenuItem
@@ -4177,4 +4175,5 @@ Partial Class frmMain
     Friend WithEvents ExportRObjectsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents FrequencyTablesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DispalyClimaticDataToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator38 As ToolStripSeparator
 End Class
