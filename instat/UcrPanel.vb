@@ -77,6 +77,7 @@ Public Class UcrPanel
 
     Protected Overrides Sub SetToValue(objTemp As Object)
         Dim rdoTemp As RadioButton
+
         If objTemp IsNot Nothing Then
             If TypeOf objTemp Is RadioButton Then
                 rdoTemp = DirectCast(objTemp, RadioButton)
@@ -86,7 +87,10 @@ Public Class UcrPanel
             End If
         Else
             'If no value reset to a default value
-            dctRadioButtonValues.Keys(0).Checked = True
+            If pnlRadios.Controls.Count > 0 AndAlso TypeOf pnlRadios.Controls(0) Is RadioButton Then
+                rdoTemp = DirectCast(pnlRadios.Controls(0), RadioButton)
+                rdoTemp.Checked = True
+            End If
         End If
     End Sub
 

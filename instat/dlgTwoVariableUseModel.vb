@@ -44,7 +44,7 @@ Public Class dlgTwoVariableUseModel
     Private Sub InitialiseDialog()
         'ucrBase.iHelpTopicID = 
         ucrBaseUseModel.clsRsyntax.SetOperation("+")
-        ucrSelectorUseModel.SetItemType("model")
+        ucrReceiverUseModel.SetItemType("model")
         ucrReceiverUseModel.Selector = ucrSelectorUseModel
         clsRCommand.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_models")
         ucrBaseUseModel.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRCommand)

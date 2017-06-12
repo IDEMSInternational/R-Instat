@@ -20,6 +20,7 @@ Public Class dlgExtremesClimatic
     Private clsExtreme As New RFunction
     Private strCurrDataName As String = ""
     Private clsRunCalcFunction, clsMinMaxCalcFunction, clsMinMaxGroupByFunction, clsMinMaxManipulationsFunction, clsMinMaxSummariseFunction, clsMinMaxFuncExp, clsPeaksFilterFunction As New RFunction
+    Private clsCurrCalc As RFunction
 
     Private Sub dlgExtremesClimatic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -60,7 +61,6 @@ Public Class dlgExtremesClimatic
         ucrReceiverElement.Selector = ucrSelectorClimaticExtremes
         ucrReceiverElement.SetParameterIsString()
         ucrReceiverElement.bWithQuotes = False
-        ucrReceiverElement.bAutoFill = True
 
         'ucrRdoOptions
         ucrPnlExtremesType.AddRadioButton(rdoMinMax)
@@ -94,8 +94,8 @@ Public Class dlgExtremesClimatic
         'disabling control for now.
         ucrChkDayNumber.Enabled = False
 
-        ucrPnlExtremesType.AddParameterPresentCondition(rdoPeaks, "result_data_frame")
-        ucrPnlExtremesType.AddParameterPresentCondition(rdoMinMax, "result_data_frame", False)
+        ucrPnlExtremesType.AddParameterValuesCondition(rdoPeaks, "type", Chr(34) & "filter" & Chr(34))
+        ucrPnlExtremesType.AddParameterValuesCondition(rdoMinMax, "type", Chr(34) & "summary" & Chr(34))
     End Sub
 
     Private Sub SetDefaults()
@@ -139,6 +139,8 @@ Public Class dlgExtremesClimatic
 
         clsRunCalcFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         clsRunCalcFunction.AddParameter("calc", clsRFunctionParameter:=clsMinMaxSummariseFunction)
+        'This is a dummy function used to set the R code of the ucrPnlExtremesType
+        clsCurrCalc = clsMinMaxSummariseFunction
         clsRunCalcFunction.AddParameter("display", "FALSE")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRunCalcFunction)
 
@@ -149,7 +151,7 @@ Public Class dlgExtremesClimatic
         ucrReceiverElement.SetRCode(clsMinMaxFuncExp, bReset)
         ucrInputSave.SetRCode(clsMinMaxSummariseFunction, bReset)
         ucrPnlMaxMin.SetRCode(clsMinMaxFuncExp, bReset)
-        ucrPnlExtremesType.SetRCode(clsMinMaxFuncExp, bReset)
+        ucrPnlExtremesType.SetRCode(clsCurrCalc, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -219,16 +221,19 @@ Public Class dlgExtremesClimatic
     End Sub
 
     Private Sub SetCalculationValues()
-        clsRunCalcFunction.RemoveParameterByName("calc")
         If rdoMinMax.Checked Then
             clsRunCalcFunction.AddParameter("calc", clsRFunctionParameter:=clsMinMaxSummariseFunction)
+            clsCurrCalc = clsMinMaxSummariseFunction
             If rdoMin.Checked Then
                 clsMinMaxFuncExp.SetRCommand("min")
             Else
                 clsMinMaxFuncExp.SetRCommand("max")
             End If
-        Else
+        ElseIf rdoPeaks.Checked Then
             clsRunCalcFunction.AddParameter("calc", clsRFunctionParameter:=clsPeaksFilterFunction)
+            clsCurrCalc = clsPeaksFilterFunction
+        Else
+            clsRunCalcFunction.RemoveParameterByName("calc")
         End If
     End Sub
 

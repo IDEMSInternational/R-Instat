@@ -26,7 +26,7 @@ Partial Class dlgColourbyProperty
         Me.ucrSelectorColourByMetadata = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverMetadataProperty = New instat.ucrReceiverSingle()
         Me.lblMetadataProp = New System.Windows.Forms.Label()
-        Me.ucrchkRemoveColours = New instat.ucrCheck()
+        Me.ucrChkRemoveColours = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -49,36 +49,38 @@ Partial Class dlgColourbyProperty
         'ucrReceiverMetadataProperty
         '
         Me.ucrReceiverMetadataProperty.frmParent = Me
-        Me.ucrReceiverMetadataProperty.Location = New System.Drawing.Point(274, 50)
+        Me.ucrReceiverMetadataProperty.Location = New System.Drawing.Point(263, 60)
         Me.ucrReceiverMetadataProperty.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMetadataProperty.Name = "ucrReceiverMetadataProperty"
         Me.ucrReceiverMetadataProperty.Selector = Nothing
         Me.ucrReceiverMetadataProperty.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverMetadataProperty.strNcFilePath = ""
         Me.ucrReceiverMetadataProperty.TabIndex = 2
+        Me.ucrReceiverMetadataProperty.ucrSelector = Nothing
         '
         'lblMetadataProp
         '
         Me.lblMetadataProp.AutoSize = True
-        Me.lblMetadataProp.Location = New System.Drawing.Point(275, 34)
+        Me.lblMetadataProp.Location = New System.Drawing.Point(263, 45)
         Me.lblMetadataProp.Name = "lblMetadataProp"
         Me.lblMetadataProp.Size = New System.Drawing.Size(97, 13)
         Me.lblMetadataProp.TabIndex = 3
         Me.lblMetadataProp.Text = "Metadata Property:"
         '
-        'ucrchkRemoveColours
+        'ucrChkRemoveColours
         '
-        Me.ucrchkRemoveColours.Checked = False
-        Me.ucrchkRemoveColours.Location = New System.Drawing.Point(274, 74)
-        Me.ucrchkRemoveColours.Name = "ucrchkRemoveColours"
-        Me.ucrchkRemoveColours.Size = New System.Drawing.Size(100, 20)
-        Me.ucrchkRemoveColours.TabIndex = 4
+        Me.ucrChkRemoveColours.Checked = False
+        Me.ucrChkRemoveColours.Location = New System.Drawing.Point(263, 84)
+        Me.ucrChkRemoveColours.Name = "ucrChkRemoveColours"
+        Me.ucrChkRemoveColours.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkRemoveColours.TabIndex = 4
         '
         'dlgColourbyProperty
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(422, 261)
-        Me.Controls.Add(Me.ucrchkRemoveColours)
+        Me.Controls.Add(Me.ucrChkRemoveColours)
         Me.Controls.Add(Me.lblMetadataProp)
         Me.Controls.Add(Me.ucrReceiverMetadataProperty)
         Me.Controls.Add(Me.ucrSelectorColourByMetadata)
@@ -99,5 +101,5 @@ Partial Class dlgColourbyProperty
     Friend WithEvents ucrSelectorColourByMetadata As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverMetadataProperty As ucrReceiverSingle
     Friend WithEvents lblMetadataProp As Label
-    Friend WithEvents ucrchkRemoveColours As ucrCheck
+    Friend WithEvents ucrChkRemoveColours As ucrCheck
 End Class
