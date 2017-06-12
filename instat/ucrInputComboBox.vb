@@ -14,10 +14,12 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports System.ComponentModel
-Imports instat
 
 Public Class ucrInputComboBox
     Dim strItemsType As String = ""
+    'temporary event which is only raised when index is changed
+    'NameChanged raised any time value is set (even if it's the same)
+    Public Event SelectionIndexChanged()
 
     Private Sub cboInput_Validating(sender As Object, e As CancelEventArgs) Handles cboInput.Validating
         Dim strCurrent As String
@@ -194,13 +196,13 @@ Public Class ucrInputComboBox
         bAllowNonConditionValues = False
         FillItemTypes()
         If bFirstLoad Then
-            SetDropDownStyleAsEditable(True)
             bFirstLoad = False
         End If
     End Sub
 
     Private Sub cboInput_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboInput.SelectedIndexChanged
         OnNameChanged()
+        RaiseEvent SelectionIndexChanged()
     End Sub
 
     Private Sub ucrInputComboBox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Me.KeyPress

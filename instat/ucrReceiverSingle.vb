@@ -229,7 +229,9 @@ Public Class ucrReceiverSingle
             Selector.RemoveFromVariablesList("variable")
         Else
             Me.Enabled = True
-            RemoveSelected()
+            If txtReceiverSingle.Text = "variable" Then
+                RemoveSelected()
+            End If
         End If
     End Sub
 
