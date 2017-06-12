@@ -43,7 +43,7 @@ Public Class dlgCombineforGraphics
         ucrCombineGraphReceiver.SetParameter(New RParameter("grobs", 0))
         ucrCombineGraphReceiver.SetParameterIsRFunction()
         ucrCombineGraphReceiver.Selector = ucrCombineGraphSelector
-        ucrCombineGraphSelector.SetItemType("graph")
+        ucrCombineGraphReceiver.SetItemType("graph")
         ucrCombineGraphReceiver.strSelectorHeading = "Graphs"
 
         ucrSave.SetPrefix("combined_graph")

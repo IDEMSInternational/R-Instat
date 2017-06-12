@@ -36,8 +36,8 @@ Public Class dlgOneVarCompareModels
         ucrBase.clsRsyntax.iCallType = 2
         UcrReceiver.Selector = ucrSelectorOneVarCompModels
         UcrReceiver.SetMeAsReceiver()
+        UcrReceiver.SetItemType("model")
         ucrBase.clsRsyntax.SetFunction("gofstat")
-        ucrSelectorOneVarCompModels.SetItemType("model")
         sdgOneVarCompareModels.SetModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
         sdgOneVarCompareModels.SetReceiver(UcrReceiver)
         sdgOneVarCompareModels.DisplayChiSquare()
