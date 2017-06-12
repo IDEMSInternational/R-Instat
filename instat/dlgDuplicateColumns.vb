@@ -97,7 +97,7 @@ Public Class dlgDuplicateColumns
     End Sub
 
     Private Sub ReopenDialog()
-        ucrInputColumnName.bAllowNonConditionValues = True
+        ucrInputColumnName.bAllowNonConditionValues = True ' temporary fix
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
