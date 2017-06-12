@@ -45,6 +45,8 @@ Public Class dlgOneWayFrequencies
         ucrReceiverOneWayFreq.SetParameterIsRFunction()
         ucrReceiverOneWayFreq.bForceAsDataFrame = True
         ucrReceiverOneWayFreq.Selector = ucrSelectorOneWayFreq
+        'temp fix to bug in sjPlot
+        ucrReceiverOneWayFreq.bRemoveLabels = True
 
         ucrReceiverWeights.SetParameter(New RParameter("weight.by", 1))
         ucrReceiverWeights.SetParameterIsRFunction()

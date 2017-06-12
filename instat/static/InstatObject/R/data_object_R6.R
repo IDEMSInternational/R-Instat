@@ -498,15 +498,36 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
 }
 )
 
-data_object$set("public", "get_columns_from_data", function(col_names, force_as_data_frame = FALSE, use_current_filter = TRUE) {
+#A bug in sjPlot requires removing labels when a factor column already has labels, using remove_labels for this if needed.
+data_object$set("public", "get_columns_from_data", function(col_names, force_as_data_frame = FALSE, use_current_filter = TRUE, remove_labels = FALSE) {
   if(missing(col_names)) stop("no col_names to return")
   if(!all(col_names %in% self$get_column_names())) stop("Not all column names were found in data")
   
   if(length(col_names)==1) {
-    if(force_as_data_frame) return(self$get_data_frame(use_current_filter = use_current_filter)[col_names])
-    else return(self$get_data_frame(use_current_filter = use_current_filter)[[col_names]])
+    if(force_as_data_frame) {
+      dat <- self$get_data_frame(use_current_filter = use_current_filter)[col_names]
+      if(remove_labels) {
+        for(i in seq_along(dat)) {
+          if(!is.numeric(dat[[i]])) attr(dat[[i]], "labels") <- NULL
+        }
+      }
+      return(dat)
+    }
+    else {
+      dat <- self$get_data_frame(use_current_filter = use_current_filter)[[col_names]]
+      if(remove_labels && !is.numeric(dat)) attr(dat, "labels") <- NULL
+      return(dat)
+    }
   }
-  else return(self$get_data_frame(use_current_filter = use_current_filter)[col_names])
+  else {
+    dat <- self$get_data_frame(use_current_filter = use_current_filter)[col_names]
+    if(remove_labels) {
+      for(i in seq_along(dat)) {
+        if(!is.numeric(dat[[i]])) attr(dat[[i]], "labels") <- NULL
+      }
+    }
+    return(dat)
+  }
 }
 )
 
