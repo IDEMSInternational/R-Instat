@@ -18,6 +18,7 @@ Public Class dlgExportToOpenRefine
     Private clsWriteToCSV As New RFunction
     Private clsDefaultRefine As New RFunction
     Private clsDefaultWrite As New RFunction
+    Private clsGetDataFrame As New RFunction
 
     Private Sub dlgExportToOpenRefine_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -35,6 +36,9 @@ Public Class dlgExportToOpenRefine
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 466
 
+        ucrDataFrameOpenRefine.SetParameter(New RParameter("data_name", 0))
+        ucrDataFrameOpenRefine.SetParameterIsString()
+
         ucrInputDatasetName.SetParameter(New RParameter("project.name", 0))
         ucrInputDatasetName.SetValidationTypeAsRVariable()
 
@@ -47,12 +51,16 @@ Public Class dlgExportToOpenRefine
     Private Sub SetDefaults()
         clsDefaultRefine = New RFunction
         clsDefaultWrite = New RFunction
+        clsGetDataFrame = New RFunction
 
         ucrDataFrameOpenRefine.Reset()
+
+        clsGetDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
 
         clsDefaultWrite.SetPackageName("utils")
         clsDefaultWrite.SetRCommand("write.csv")
         clsDefaultWrite.AddParameter("row.names", "FALSE")
+        clsDefaultWrite.AddParameter("x", clsRFunctionParameter:=clsGetDataFrame)
 
         clsDefaultRefine.SetPackageName("rrefine")
         clsDefaultRefine.SetRCommand("refine_upload")
@@ -63,7 +71,9 @@ Public Class dlgExportToOpenRefine
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrDataFrameOpenRefine.SetRCode(clsGetDataFrame, bReset)
+        ucrInputDatasetName.SetRCode(clsDefaultRefine, bReset)
+        ucrChkOpenBrowser.SetRCode(clsDefaultRefine, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -92,11 +102,9 @@ Public Class dlgExportToOpenRefine
 
     Private Sub ucrOpenRefineDataFrame_ControlContentsChanged() Handles ucrDataFrameOpenRefine.ControlContentsChanged
         NewDefaultName()
-        clsDefaultWrite.RemoveParameterByName("x")
         clsDefaultWrite.RemoveParameterByName("file")
         clsDefaultRefine.RemoveParameterByName("file")
         clsDefaultRefine.RemoveParameterByName("project.name")
-        clsDefaultWrite.AddParameter("x", ucrDataFrameOpenRefine.cboAvailableDataFrames.SelectedItem)
         clsDefaultWrite.AddParameter("file", Chr(34) & ucrInputDatasetName.GetText() & ".csv" & Chr(34))
         clsDefaultRefine.AddParameter("file", Chr(34) & ucrInputDatasetName.GetText() & ".csv" & Chr(34))
         clsDefaultRefine.AddParameter("project.name", Chr(34) & ucrInputDatasetName.GetText() & Chr(34))
