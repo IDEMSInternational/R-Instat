@@ -46,19 +46,46 @@ Public Class dlgView
         ucrPnlDisplayWindow.AddRadioButton(rdoDispOutputWindow)
         ucrPnlDisplayWindow.AddRadioButton(rdoDispSepOutputWindow)
         ucrPnlDisplayWindow.AddRadioButton(rdoHTMLOutputWindow)
+
+        ucrPnlDisplayWindow.AddParameterPresentCondition(rdoDispSepOutputWindow, "title")
+        ucrPnlDisplayWindow.AddParameterPresentCondition(rdoDispSepOutputWindow, "x")
+        ucrPnlDisplayWindow.AddParameterPresentCondition(rdoDispSepOutputWindow, "n", False)
+        ucrPnlDisplayWindow.AddParameterPresentCondition(rdoDispSepOutputWindow, "describe", False)
+        ucrPnlDisplayWindow.AddParameterPresentCondition(rdoDispSepOutputWindow, "altr.row.col", False)
+        ucrPnlDisplayWindow.AddParameterPresentCondition(rdoDispSepOutputWindow, "hide.progress", False)
+        ucrPnlDisplayWindow.AddParameterPresentCondition(rdoDispSepOutputWindow, " mydf", False)
+
+        ucrPnlDisplayWindow.AddParameterPresentCondition(rdoHTMLOutputWindow, "title", False)
+        ucrPnlDisplayWindow.AddParameterPresentCondition(rdoHTMLOutputWindow, "x", False)
+        ucrPnlDisplayWindow.AddParameterPresentCondition(rdoHTMLOutputWindow, "n", False)
+        ucrPnlDisplayWindow.AddParameterPresentCondition(rdoHTMLOutputWindow, "describe", "FALSE")
+        ucrPnlDisplayWindow.AddParameterPresentCondition(rdoHTMLOutputWindow, "altr.row.col", "TRUE")
+        ucrPnlDisplayWindow.AddParameterPresentCondition(rdoHTMLOutputWindow, "hide.progress", "TRUE")
+        ucrPnlDisplayWindow.AddParameterPresentCondition(rdoHTMLOutputWindow, " mydf")
+
+        ucrPnlDisplayWindow.AddParameterPresentCondition(rdoDispOutputWindow, "title", False)
+        ucrPnlDisplayWindow.AddParameterPresentCondition(rdoDispOutputWindow, "x")
+        ucrPnlDisplayWindow.AddParameterPresentCondition(rdoDispOutputWindow, "n")
+        ucrPnlDisplayWindow.AddParameterPresentCondition(rdoDispOutputWindow, "describe", False)
+        ucrPnlDisplayWindow.AddParameterPresentCondition(rdoDispOutputWindow, "altr.row.col", False)
+        ucrPnlDisplayWindow.AddParameterPresentCondition(rdoDispOutputWindow, "hide.progress", False)
+        ucrPnlDisplayWindow.AddParameterPresentCondition(rdoDispOutputWindow, " mydf", False)
+
         ucrPnlDisplayWindow.AddToLinkedControls(ucrChkSpecifyRows, {rdoDispOutputWindow}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=True)
         ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoDispSepOutputWindow, "View")
+        ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoDispSepOutputWindow, {"head", "tail", "sjt.df", frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data"}, False)
+
         ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoHTMLOutputWindow, "sjt.df")
+        ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoHTMLOutputWindow, {"head", "tail", "View", frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data"}, False)
         ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoDispOutputWindow, {"head", "tail", frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data"})
-
-
+        ucrPnlDisplayWindow.AddFunctionNamesCondition(rdoDispOutputWindow, {"sjt.df", "View"}, False)
         ucrPnlDisplayFrom.AddRadioButton(rdoBottom)
         ucrPnlDisplayFrom.AddRadioButton(rdoTop)
         ucrPnlDisplayFrom.SetLinkedDisplayControl(lblDisplayFrom)
         ucrPnlDisplayFrom.AddFunctionNamesCondition(rdoTop, "head")
         ucrPnlDisplayFrom.AddFunctionNamesCondition(rdoBottom, "tail")
         ucrPnlDisplayFrom.bAllowNonConditionValues = True
-        ucrPnlDisplayFrom.SetDefaultState(rdoTop)
+
         ' This linking only applies if rdoDispOutputWindow is checked
         ucrChkSpecifyRows.SetText("Specify Rows")
         ucrChkSpecifyRows.AddToLinkedControls(ucrPnlDisplayFrom, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoTop)
@@ -67,6 +94,8 @@ Public Class dlgView
         ucrChkSpecifyRows.AddFunctionNamesCondition(False, {frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data"})
         ucrChkSpecifyRows.bAllowNonConditionValues = True
 
+
+        ucrPnlDisplayWindow.SetDefaultState(rdoDispSepOutputWindow)
         ' Linking for when rdoHTML is checked
         ucrChkSortColumn.Visible = False
         'ucrPnlDisplayWindow.AddToLinkedControls(ucrChkSortColumn, {rdoHTMLOutputWindow}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=True)
