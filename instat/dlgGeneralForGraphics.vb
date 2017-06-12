@@ -31,9 +31,13 @@ Public Class dlgGeneralForGraphics
     'RFunctions for Options sub dialog
     Private clsLabsFunction As New RFunction
     Private clsXlabsFunction As New RFunction
-    Private clsYlabFunction As New RFunction
     Private clsXScalecontinuousFunction As New RFunction
-    Private clsRFacetFunction As New RFunction
+    Private bResetSubdialog As Boolean = True
+    Private clsYlabsFunction As New RFunction
+    Private clsYScalecontinuousFunction As New RFunction
+    Private clsFacetsFunction As New RFunction
+    Private clsThemeFunction As New RFunction
+    Private dctThemeFunctions As New Dictionary(Of String, RFunction)
 
     Private Sub dlgGeneralForGraphics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -86,6 +90,16 @@ Public Class dlgGeneralForGraphics
         ucrAdditionalLayers.SetGGplotFunction(clsGgplotFunction)
         ucrAdditionalLayers.SetAesFunction(clsGlobalAesFunction)
 
+        clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
+        clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
+        clsYlabsFunction = GgplotDefaults.clsYlabTitleFunction.Clone()
+        clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
+        clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
+        clsYScalecontinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone()
+        clsFacetsFunction = GgplotDefaults.clsFacetFunction.Clone()
+        dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
+        clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction
+
         If ucrBase.clsRsyntax.clsBaseOperator IsNot Nothing Then
             ucrBase.clsRsyntax.clsBaseOperator.RemoveAllAdditionalParameters()
         End If
@@ -123,7 +137,7 @@ Public Class dlgGeneralForGraphics
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgPlots.DisableLayersTab()
-        sdgPlots.SetRCode(clsBaseOperator, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, strNewDataFrame:=strGlobalDataFrame, bReset:=bResetOptionsSubdialog)
+        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewLabsFunction:=clsLabsFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabsFunction, clsNewFacetFunction:=clsFacetsFunction, strNewDataFrame:=sdgLayerOptions.ucrGeomWithAes.ucrGeomWithAesSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetOptionsSubdialog = False
         sdgPlots.EnableLayersTab()
