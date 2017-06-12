@@ -5,16 +5,16 @@ data_object$set("public", "merge_data", function(new_data, by = NULL, type = "le
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
   
   if(type == "left") {
-    new_data <- left_join(curr_data, new_data, by)
+    new_data <- dplyr::left_join(curr_data, new_data, by)
   }
   else if(type == "right") {
-    new_data <- right_join(curr_data, new_data, by)
+    new_data <- dplyr::right_join(curr_data, new_data, by)
   }
   else if(type == "full") {
-    new_data <- full_join(curr_data, new_data, by)
+    new_data <- dplyr::full_join(curr_data, new_data, by)
   }
   else if(type == "inner") {
-    new_data <- inner_join(curr_data, new_data, by)
+    new_data <- dplyr::inner_join(curr_data, new_data, by)
   }
   else stop("type must be one of left, right, inner or full")
   self$set_data(new_data)
@@ -140,32 +140,32 @@ instat_object$set("public", "summary", function(data_name, columns_to_summarise,
   factor_collection <-  c(count_non_missing_label, count_missing_label, count_label, mode_label) #maximum and minimum labels should be added when we distinguish ordered factors
   ordered_factor_collection <-  c(count_non_missing_label, count_missing_label, count_label, mode_label, min_label, max_label)
   i = 1
-  for(col_new in columns_to_summarise){
+  for(col_new in columns_to_summarise) {
     col_data_type = self$get_variables_metadata(data_name = data_name, column = col_new, property = data_type_label)
-    if(col_data_type == "numeric" || col_data_type == "integer"){
+    if(col_data_type == "numeric" || col_data_type == "integer") {
       column_summaries = intersect(summaries, numeric_collection)
     }
-    else if(col_data_type == "factor"){
+    else if(col_data_type == "factor") {
       column_summaries = intersect(summaries, factor_collection)
     }
-    else if(col_data_type == paste0(c("ordered","factor"), collapse = ",")){
+    else if(col_data_type == paste0(c("ordered","factor"), collapse = ",")) {
       column_summaries = intersect(summaries, ordered_factor_collection)
     }
-    else if(col_data_type == "character"){
+    else if(col_data_type == "character") {
       column_summaries = intersect(summaries, alltypes_collection)
     }
-    else if(col_data_type == "logical"){
+    else if(col_data_type == "logical") {
       #To be defined
     }
-    else if(col_data_type == "Date"){
+    else if(col_data_type == "Date") {
       #To be defined
     }
     calc <- calculation$new(type = "summary", parameters = list(data_name = data_name, columns_to_summarise = col_new, summaries = column_summaries, factors = factors, store_results = store_results, drop = drop, return_output = return_output, summary_name = summary_name, add_cols = add_cols, ... = ...),  filters = filter_names, calculated_from = calculated_from)
     results <- self$apply_calculation(calc)
-    if(!is.null(results)){
-      results<-as.data.frame(t(results[,-1]))
+    if(!is.null(results)) {
+      results <- as.data.frame(t(results[,-1]))
       #row_names(results) <- get_summary_calculation_names(calc, column_summaries, col_new, calc_filters)
-      names( results) <- col_new
+      names(results) <- col_new
       #use summaries as row names for now. This needs to change in the long run
       row.names(results) <- column_summaries
       if(i == 1) {
@@ -179,7 +179,7 @@ instat_object$set("public", "summary", function(data_name, columns_to_summarise,
       }
       i = i + 1
     }
-    else{
+    else {
       warning("There is no output to return")
     }
   }
@@ -227,7 +227,7 @@ data_object$set("public", "calculate_summary", function(calc, ...) {
     if(!all(summaries %in% all_summaries)) stop(paste("Some of the summaries from:",paste(summaries, collapse = ","),"were not recognised."))
     if(!all(factors %in% names(curr_data_filter))) stop(paste("Some of the factors:","c(",paste(factors, collapse = ","),") were not found in the data."))
     
-    out <- ddply(curr_data_filter, factors, function(x) apply(combinations, 1, FUN = function(y) {
+    out <- plyr::ddply(curr_data_filter, factors, function(x) apply(combinations, 1, FUN = function(y) {
       # temp disabled to allow na.rm to be passed in
       #na.rm <- missing_values_check(x[[y[[2]]]])
       if("na.rm" %in% names(list(...))) stop("na.rm should not be specified. Use xxx to specify missing values handling.")
@@ -325,18 +325,18 @@ summary_var <- function(x, na.rm = FALSE,...) {
 
 summary_max <- function (x, na.rm = FALSE,...) {
   #TODO This prevents warning and -Inf being retured. Is this desirable?
-  if( length(x)==0 || (na.rm && length(x[!is.na(x)])==0) ) return(NA)
+  if(length(x)==0 || (na.rm && length(x[!is.na(x)])==0)) return(NA)
   else return(max(x, na.rm = na.rm))
 } 
 
 summary_min <- function (x, na.rm = FALSE,...) {
   #TODO This prevents warning and Inf being retured. Is this desirable?
-  if( length(x)==0 || (na.rm && length(x[!is.na(x)])==0) ) return(NA)
+  if(length(x)==0 || (na.rm && length(x[!is.na(x)])==0)) return(NA)
   else return(min(x, na.rm = na.rm))
 } 
 
 #get the range of the data
-summary_range <- function(x, na.rm = FALSE, ...){
+summary_range <- function(x, na.rm = FALSE, ...) {
   return(max(x, na.rm = na.rm) - min(x, na.rm = na.rm))
 }
 
@@ -345,8 +345,9 @@ summary_median <- function(x, na.rm = FALSE,...) {
   return(median(x, na.rm = na.rm))
 }
 
-instat_object$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), n_column_factors = 0, store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, return_output = TRUE, treat_columns_as_factor = FALSE, page_by = "default", as_html = TRUE, signif_fig = 2, na_display = "", weights = NULL, caption = NULL, ...) {
+instat_object$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), n_column_factors = 0, store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, return_output = TRUE, treat_columns_as_factor = FALSE, page_by = "default", as_html = TRUE, signif_fig = 2, na_display = "", na_level_display = "NA", weights = NULL, caption = NULL, ...) {
   if(n_column_factors > length(factors)) stop("n_column_factors must be <= number of factors given")
+  if(na_level_display == "") stop("na_level_display must be a non empty string")
   if(n_column_factors > 0) {
     column_factors <- factors[(length(factors) - n_column_factors + 1):length(factors)]
   }
@@ -409,13 +410,21 @@ instat_object$set("public", "summary_table", function(data_name, columns_to_summ
       if(length(out) == 1 ) {
         return(out[[1]])
       }
-      else return(htmlTable::concatHtmlTables(out, headers = ""))
+      else {
+        tabs <- htmlTable::concatHtmlTables(out, headers = "")
+        class(tabs) <- c("htmlTable", "character")
+        return(tabs)
+      }
     }
     else return(out)
   }
   else {
     margin_name <- ifelse(length(summaries) == 1, summaries_display, "MARGIN")
     cell_values <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = factors, store_results = store_results, drop = drop, na.rm = na.rm, return_output = TRUE, weights = weights)
+    for(i in seq_along(factors)) {
+      levels(cell_values[[i]]) <- c(levels(cell_values[[i]]), na_level_display)
+      cell_values[[i]][is.na(cell_values[[i]])] <- na_level_display
+    }
     grps <- nrow(cell_values)
     cell_values <- reshape2:::melt.data.frame(cell_values, id.vars = factors, variable.name = "Summary-Variable", value.name = "Value")
     cell_values[["Variable"]] <- rep(rev(columns_to_summarise), each = nrow(cell_values)/length(columns_to_summarise))
@@ -453,7 +462,7 @@ instat_object$set("public", "summary_table", function(data_name, columns_to_summ
       row_formula <- paste(c(row_factors, summary_factors), collapse = "+")
     }
     else row_formula <- "."
-    shaped_cell_values <- dcast(formula = as.formula(paste(row_formula, "~", column_formula)), value.var = "Value", data = cell_values)
+    shaped_cell_values <- reshape2::dcast(formula = as.formula(paste(row_formula, "~", column_formula)), value.var = "Value", data = cell_values)
     #TODO check this is always correct
     if(length(row_factors) == 0) shaped_cell_values[[1]] <- NULL
     for(i in seq_along(row_factors)) {
@@ -555,7 +564,9 @@ instat_object$set("public", "summary_table", function(data_name, columns_to_summ
             if(length(column_factors) > 0) css.cell[ , ncol(css.cell)] <- "font-weight: 900;"
             if(length(row_factors) > 0) css.cell[nrow(css.cell), ] <- "border-top: 1px solid #BEBEBE; font-weight: 900;"
           }
-          return(htmlTable::htmlTable(shaped_cell_values, caption = caption, total = FALSE, align = align, tfoot = notes, cgroup = cgroup, n.cgroup = n.cgroup, css.cell = css.cell, ... = ...))
+          tab <- htmlTable::htmlTable(shaped_cell_values, caption = caption, total = FALSE, align = align, tfoot = notes, cgroup = cgroup, n.cgroup = n.cgroup, css.cell = css.cell, ... = ...)
+          class(tab) <- class(tab)[!class(tab) == "html"]
+          return(tab)
         }
       }
       else return(shaped_cell_values)
