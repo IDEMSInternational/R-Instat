@@ -83,13 +83,21 @@ instat_object$set("public", "append_summaries_to_data_object", function(out, dat
 } 
 )
 
-instat_object$set("public", "calculate_summary", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), store_results = TRUE, drop = TRUE, na.rm = FALSE, return_output = FALSE, summary_name = NA, weights = NULL, ...) {
-  if(!store_results) {
-    save <- 0
+instat_object$set("public", "calculate_summary", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), store_results = TRUE, drop = TRUE, na.rm = FALSE, return_output = FALSE, summary_name = NA, weights = NULL, result_names = NULL, ...) {
+  include_columns_to_summarise <- TRUE
+  if(is.null(columns_to_summarise) || length(columns_to_summarise) == 0) {
+    # temporary fix for doing counts of a data frame
+    # dplyr cannot count data frame groups without passing a column (https://stackoverflow.com/questions/44217265/passing-correct-data-frame-from-within-dplyrsummarise)
+    # This is a known issue (https://github.com/tidyverse/dplyr/issues/2752)
+    if(length(summaries) != 1 || summaries != count_label) stop("When there are no columns to summarise can only use count function as summary")
+    else columns_to_summarise <- self$get_column_names(data_name)[1]
+    include_columns_to_summarise <- FALSE
   }
-  else {
-    save <- 2
-  }
+  if(!store_results) save <- 0
+  else save <- 2
+  
+  summaries_display <- sapply(summaries, function(x) ifelse(startsWith(x, "summary_"), substring(x, 9), x))
+  
   if(length(factors) > 0) {
     calculated_from <- as.list(factors)
     names(calculated_from) <- rep(data_name, length(factors))
@@ -100,29 +108,32 @@ instat_object$set("public", "calculate_summary", function(data_name, columns_to_
   else manipulations <- list()
   sub_calculations <- list()
   
-  if(is.null(columns_to_summarise)) {
+  i <- 0
+  for(column_names in columns_to_summarise) {
+    i <- i + 1
+    # In the case of counting without columns, the first column column will be the "calculated from"
+    # which will add unwanted column metadata
+    calculated_from <- list(column_names)
+    if(!is.null(weights)) calculated_from[[length(calculated_from) + 1]] <- weights
+    names(calculated_from) <- rep(data_name, length(calculated_from))
+    j <- 0
     for(summary_type in summaries) {
-      summary_calculation <- instat_calculation$new(type = "summary", result_name = summary_type,
-                                                    function_exp = paste0(summary_type, "(na.rm =", na.rm, ")"), save = save)
-      sub_calculations[[length(sub_calculations) + 1]] <- summary_calculation
-    }
-  }
-  else {
-    for(column_names in columns_to_summarise) {
-      if(!is.null(weights)) calculated_from <- list(column_names, weights)
-      else calculated_from <- list(column_names)
-      names(calculated_from) <- rep(data_name, length(calculated_from))
-      for(summary_type in summaries) {
-        function_exp = paste0(summary_type, "(", column_names)
-        if(!is.null(weights)) {
-          function_exp <- paste0(function_exp, ", weights = ", weights)
-        }
-        function_exp <- paste0(function_exp, ", na.rm =", na.rm, ")")
-        summary_calculation <- instat_calculation$new(type = "summary", result_name = paste0(summary_type, "_", column_names),
-                                                      function_exp = function_exp,
-                                                      calculated_from = calculated_from, save = save)
-        sub_calculations[[length(sub_calculations) + 1]] <- summary_calculation
+      j <- j + 1
+      function_exp = paste0(summary_type, "(", column_names)
+      if(!is.null(weights)) {
+        function_exp <- paste0(function_exp, ", weights = ", weights)
       }
+      function_exp <- paste0(function_exp, ", na.rm =", na.rm, ")")
+      if(is.null(result_names)) {
+        result_name = summaries_display[j]
+        if(include_columns_to_summarise) result_name = paste0(result_name, "_", column_names)
+      }
+      #TODO result_names could be horizontal/vertical vector, matrix or single value
+      else result_name <- result_names[i,j]
+      summary_calculation <- instat_calculation$new(type = "summary", result_name = result_name,
+                                                    function_exp = function_exp,
+                                                    calculated_from = calculated_from, save = save)
+      sub_calculations[[length(sub_calculations) + 1]] <- summary_calculation
     }
   }
   combined_calc_sum <- instat_calculation$new(type="combination", sub_calculations = sub_calculations, manipulations = manipulations)
