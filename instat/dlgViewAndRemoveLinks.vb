@@ -46,7 +46,7 @@ Public Class dlgViewAndRemoveLinks
         ucrReceiverViewLinks.SetMeAsReceiver()
         ucrReceiverViewLinks.SetParameter(New RParameter("link_name", 0))
         ucrReceiverViewLinks.SetParameterIsString()
-        ucrSelectorLinks.SetItemType("link")
+        ucrReceiverViewLinks.SetItemType("link")
         ucrpnlDeleteView.AddRadioButton(rdoDeleteLink)
         ucrpnlDeleteView.AddRadioButton(rdoViewLink)
         ucrpnlDeleteView.AddFunctionNamesCondition(rdoDeleteLink, frmMain.clsRLink.strInstatDataObject & "$remove_link")

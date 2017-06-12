@@ -273,9 +273,9 @@ Public Class ucrVariablesAsFactor
                         lstCurrentVariables = ExtractItemsFromRList(clsTempParameter.strArgumentValue)
                     End If
                 ElseIf bParameterIsRFunction AndAlso clsTempParameter.bIsFunction Then
-                    clsTempDataParameter = clsTempParameter.clsArgumentCodeStructure.GetParameter(strColumnsParameterNameInRFunction)
+                    clsTempDataParameter = clsTempParameter.clsArgumentCodeStructure.GetParameter(strItemsParameterNameInRFunction)
                     If clsTempDataParameter IsNot Nothing Then
-                        lstCurrentVariables = ExtractItemsFromRList(clsTempParameter.clsArgumentCodeStructure.GetParameter(strColumnsParameterNameInRFunction).strArgumentValue)
+                        lstCurrentVariables = ExtractItemsFromRList(clsTempParameter.clsArgumentCodeStructure.GetParameter(strItemsParameterNameInRFunction).strArgumentValue)
                     End If
                 End If
                 Clear()

@@ -81,11 +81,13 @@ Public Class ucrReceiverMultiple
         MyBase.Remove(strItems)
         Dim strTempItem As String
 
-        For Each strTempItem In strItems
-            lstSelectedVariables.Items.RemoveByKey(strTempItem)
-            Selector.RemoveFromVariablesList(strTempItem)
-        Next
-        OnSelectionChanged()
+        If strItems.Count > 0 Then
+            For Each strTempItem In strItems
+                lstSelectedVariables.Items.RemoveByKey(strTempItem)
+                Selector.RemoveFromVariablesList(strTempItem)
+            Next
+            OnSelectionChanged()
+        End If
     End Sub
 
     Public Overrides Sub Clear()
