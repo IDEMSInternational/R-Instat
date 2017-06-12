@@ -96,23 +96,27 @@ Public Class sdgOneVarCompareModels
         Dim strTemp As String = ""
 
         If ucrChkCDF.Checked Then
-            clsRcdfcompFunction.SetRCommand("fitdistrplus::cdfcomp")
+            clsRcdfcompFunction.SetPackageName("fitdistrplus")
+            clsRcdfcompFunction.SetRCommand("cdfcomp")
             clsRcdfcompFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
             frmMain.clsRLink.RunScript(clsRcdfcompFunction.ToScript(), 3)
         End If
         If ucrChkPP.Checked Then
-            clsRppcompFunction.SetRCommand("fitdistrplus::ppcomp")
+            clsRppcompFunction.SetPackageName("fitdistrplus")
+            clsRppcompFunction.SetRCommand("ppcomp")
             clsRppcompFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
             frmMain.clsRLink.RunScript(clsRppcompFunction.ToScript(), 3)
 
         End If
         If ucrChkQQ.Checked Then
-            clsRqqcompFunction.SetRCommand("fitdistrplus::qqcomp")
+            clsRqqcompFunction.SetPackageName("fitdistrplus")
+            clsRqqcompFunction.SetRCommand("qqcomp")
             clsRqqcompFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
             frmMain.clsRLink.RunScript(clsRqqcompFunction.ToScript(), 3)
         End If
         If ucrChkDensity.Checked Then
-            clsRdenscompFunction.SetRCommand("fitdistrplus::denscomp")
+            clsRdenscompFunction.SetPackageName("fitdistrplus")
+            clsRdenscompFunction.SetRCommand("denscomp")
             clsRdenscompFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
             frmMain.clsRLink.RunScript(clsRdenscompFunction.ToScript(), 3)
         End If
