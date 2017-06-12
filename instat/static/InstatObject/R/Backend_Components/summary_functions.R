@@ -83,7 +83,7 @@ instat_object$set("public", "append_summaries_to_data_object", function(out, dat
 } 
 )
 
-instat_object$set("public", "calculate_summary", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), store_results = TRUE, drop = TRUE, na.rm = FALSE, return_output = FALSE, summary_name = NA, weights = NULL, result_names = NULL, ...) {
+instat_object$set("public", "calculate_summary", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), store_results = TRUE, drop = TRUE, na.rm = FALSE, return_output = FALSE, summary_name = NA, weights = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, perc_return_all = FALSE, ...) {
   include_columns_to_summarise <- TRUE
   if(is.null(columns_to_summarise) || length(columns_to_summarise) == 0) {
     # temporary fix for doing counts of a data frame
@@ -93,19 +93,38 @@ instat_object$set("public", "calculate_summary", function(data_name, columns_to_
     else columns_to_summarise <- self$get_column_names(data_name)[1]
     include_columns_to_summarise <- FALSE
   }
+  if(!percentage_type %in% c("none", "factors", "columns", "filter")) stop("percentage_type: ", percentage_type, " not recognised.")
+  if(percentage_type == "columns") {
+    if(!(length(perc_total_columns) == 1 || length(perc_total_columns) == length(columns_to_summarise))) stop("perc_total_columns must either be of length 1 or the same length as columns_to_summarise")
+  }
   if(!store_results) save <- 0
   else save <- 2
   
   summaries_display <- sapply(summaries, function(x) ifelse(startsWith(x, "summary_"), substring(x, 9), x))
   
-  if(length(factors) > 0) {
-    calculated_from <- as.list(factors)
-    names(calculated_from) <- rep(data_name, length(factors))
+  if(percentage_type == "factors") {
+    manip_factors <- intersect(factors, perc_total_factors)
+  }
+  else manip_factors <- factors
+  if(length(manip_factors) > 0) {
+    calculated_from <- as.list(manip_factors)
+    names(calculated_from) <- rep(data_name, length(manip_factors))
     calculated_from <- as.list(calculated_from)
     factor_by <- instat_calculation$new(type = "by", calculated_from = calculated_from)
     manipulations <- list(factor_by)
   }
   else manipulations <- list()
+  if(percentage_type == "factors") {
+    value_factors <- setdiff(factors, manip_factors)
+    if(length(value_factors) > 0) {
+      calculated_from <- as.list(value_factors)
+      names(calculated_from) <- rep(data_name, length(value_factors))
+      calculated_from <- as.list(calculated_from)
+      factor_by <- instat_calculation$new(type = "by", calculated_from = calculated_from)
+      value_manipulations <- list(factor_by)
+    }
+    else value_manipulations <- list()
+  }
   sub_calculations <- list()
   
   i <- 0
@@ -119,7 +138,7 @@ instat_object$set("public", "calculate_summary", function(data_name, columns_to_
     j <- 0
     for(summary_type in summaries) {
       j <- j + 1
-      function_exp = paste0(summary_type, "(", column_names)
+      function_exp <- ""
       if(!is.null(weights)) {
         function_exp <- paste0(function_exp, ", weights = ", weights)
       }
@@ -130,15 +149,53 @@ instat_object$set("public", "calculate_summary", function(data_name, columns_to_
       }
       #TODO result_names could be horizontal/vertical vector, matrix or single value
       else result_name <- result_names[i,j]
-      summary_calculation <- instat_calculation$new(type = "summary", result_name = result_name,
-                                                    function_exp = function_exp,
-                                                    calculated_from = calculated_from, save = save)
+      if(percentage_type == "none") {
+        summary_calculation <- instat_calculation$new(type = "summary", result_name = result_name,
+                                                      function_exp = paste0(summary_type, "(", column_names, function_exp),
+                                                      calculated_from = calculated_from, save = save)
+      }
+      else {
+        values_calculation <- instat_calculation$new(type = "summary", result_name = result_name,
+                                                      function_exp = paste0(summary_type, "(", column_names, function_exp),
+                                                      calculated_from = calculated_from, save = 0)
+        if(percentage_type == "columns") {
+          if(length(perc_total_columns) == 1) perc_col_name <- perc_total_columns
+          else perc_col_name <- perc_total_columns[i]
+          totals_calculation <- instat_calculation$new(type = "summary", result_name = paste0(summaries_display[j], "_", perc_total_columns, "_totals"),
+                                                       function_exp = paste0(summary_type, "(", perc_col_name, function_exp),
+                                                       calculated_from = calculated_from, save = 0)
+        }
+        else if(percentage_type == "filter") {
+          #TODO
+        }
+        else if(percentage_type == "factors") {
+          values_calculation$manipulations <- value_manipulations
+          totals_calculation <- instat_calculation$new(type = "summary", result_name = paste0(result_name, "_totals"),
+                                                       function_exp = paste0(summary_type, "(", column_names, function_exp),
+                                                       calculated_from = calculated_from, save = 0)
+        }
+        function_exp <- paste0(values_calculation$result_name, "/", totals_calculation$result_name)
+        if(!perc_decimal) {
+          function_exp <- paste0("(", function_exp, ") * 100")
+        }
+        summary_calculation <- instat_calculation$new(type = "calculation", result_name = paste0("perc_", result_name),
+                                                      function_exp = function_exp,
+                                                      calculated_from = list(), save = save, sub_calculations = list(totals_calculation, values_calculation))
+      }
       sub_calculations[[length(sub_calculations) + 1]] <- summary_calculation
     }
   }
   combined_calc_sum <- instat_calculation$new(type="combination", sub_calculations = sub_calculations, manipulations = manipulations)
   out <- self$apply_instat_calculation(combined_calc_sum)
-  if(return_output) return(out$data)
+  if(return_output) {
+    dat <- out$data
+    if(percentage_type == "none" || perc_return_all) return(out$data)
+    else {
+      #This is a temp fix to only returning final percentage columns.
+      #Depends on result name format used above for summary_calculation in percentage case
+      dat[c(which(names(dat) %in% factors), which(startsWith(names(dat), "perc_")))]
+    }
+  }
 }
 )
 
@@ -356,7 +413,7 @@ summary_median <- function(x, na.rm = FALSE,...) {
   return(median(x, na.rm = na.rm))
 }
 
-instat_object$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), n_column_factors = 0, store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, return_output = TRUE, treat_columns_as_factor = FALSE, page_by = "default", as_html = TRUE, signif_fig = 2, na_display = "", na_level_display = "NA", weights = NULL, caption = NULL, ...) {
+instat_object$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), n_column_factors = 0, store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, return_output = TRUE, treat_columns_as_factor = FALSE, page_by = "default", as_html = TRUE, signif_fig = 2, na_display = "", na_level_display = "NA", weights = NULL, caption = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, ...) {
   if(n_column_factors > length(factors)) stop("n_column_factors must be <= number of factors given")
   if(na_level_display == "") stop("na_level_display must be a non empty string")
   if(n_column_factors > 0) {
@@ -401,18 +458,18 @@ instat_object$set("public", "summary_table", function(data_name, columns_to_summ
     out <- list()
     if(length(page_by) == 1 && page_by == "summaries") {
       for(i in seq_along(summaries)) {
-        out[[paste(summaries_display[i], columns_to_summarise)]] <- self$summary_table(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries[i], factors = factors, n_column_factors = n_column_factors, store_results = store_results, drop = drop, na.rm = na.rm, summary_name = summary_name, include_margins = include_margins, return_output = return_output, treat_columns_as_factor = treat_columns_as_factor, page_by = "default", as_html = as_html, weights = weights, na_display = na_display, ... = ...)
+        out[[paste(summaries_display[i], columns_to_summarise)]] <- self$summary_table(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries[i], factors = factors, n_column_factors = n_column_factors, store_results = store_results, drop = drop, na.rm = na.rm, summary_name = summary_name, include_margins = include_margins, return_output = return_output, treat_columns_as_factor = treat_columns_as_factor, page_by = "default", as_html = as_html, weights = weights, na_display = na_display, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, perc_return_all = FALSE, ... = ...)
       }
     }
     else if(length(page_by) == 1 && page_by == "variables") {
       for(i in seq_along(columns_to_summarise)) {
-        out[[paste(summaries_display, columns_to_summarise[i])]] <- self$summary_table(data_name = data_name, columns_to_summarise = columns_to_summarise[i], summaries = summaries, factors = factors, n_column_factors = n_column_factors, store_results = store_results, drop = drop, na.rm = na.rm, summary_name = summary_name, include_margins = include_margins, return_output = return_output, treat_columns_as_factor = treat_columns_as_factor, page_by = "default", as_html = as_html, weights = weights, na_display = na_display, ... = ...)
+        out[[paste(summaries_display, columns_to_summarise[i])]] <- self$summary_table(data_name = data_name, columns_to_summarise = columns_to_summarise[i], summaries = summaries, factors = factors, n_column_factors = n_column_factors, store_results = store_results, drop = drop, na.rm = na.rm, summary_name = summary_name, include_margins = include_margins, return_output = return_output, treat_columns_as_factor = treat_columns_as_factor, page_by = "default", as_html = as_html, weights = weights, na_display = na_display, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, perc_return_all = FALSE, ... = ...)
       }
     }
     else if(length(page_by) == 2  && all(page_by %in% c("variables", "summaries"))) {
       for(i in seq_along(columns_to_summarise)) {
         for(j in seq_along(summaries)) {
-          out[[paste(summaries_display[j], columns_to_summarise[i])]] <- self$summary_table(data_name = data_name, columns_to_summarise = columns_to_summarise[i], summaries = summaries[j], factors = factors, n_column_factors = n_column_factors, store_results = store_results, drop = drop, na.rm = na.rm, summary_name = summary_name, include_margins = include_margins, return_output = return_output, treat_columns_as_factor = treat_columns_as_factor, page_by = "default", as_html = as_html, weights = weights, na_display = na_display, ... = ...)
+          out[[paste(summaries_display[j], columns_to_summarise[i])]] <- self$summary_table(data_name = data_name, columns_to_summarise = columns_to_summarise[i], summaries = summaries[j], factors = factors, n_column_factors = n_column_factors, store_results = store_results, drop = drop, na.rm = na.rm, summary_name = summary_name, include_margins = include_margins, return_output = return_output, treat_columns_as_factor = treat_columns_as_factor, page_by = "default", as_html = as_html, weights = weights, na_display = na_display, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, perc_return_all = FALSE, ... = ...)
         }
       }
     }
@@ -431,7 +488,7 @@ instat_object$set("public", "summary_table", function(data_name, columns_to_summ
   }
   else {
     margin_name <- ifelse(length(summaries) == 1, summaries_display, "MARGIN")
-    cell_values <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = factors, store_results = store_results, drop = drop, na.rm = na.rm, return_output = TRUE, weights = weights)
+    cell_values <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = factors, store_results = store_results, drop = drop, na.rm = na.rm, return_output = TRUE, weights = weights, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, perc_return_all = FALSE)
     for(i in seq_along(factors)) {
       levels(cell_values[[i]]) <- c(levels(cell_values[[i]]), na_level_display)
       cell_values[[i]][is.na(cell_values[[i]])] <- na_level_display
@@ -486,7 +543,7 @@ instat_object$set("public", "summary_table", function(data_name, columns_to_summ
       power_sets <- power_sets[-(c(length(power_sets)))]
       for(facts in power_sets) {
         if(length(facts) == 0) facts <- c()
-        margin_tables[[length(margin_tables) + 1]] <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = facts, store_results = store_results, drop = drop, na.rm = na.rm, return_output = TRUE, weights = weights)
+        margin_tables[[length(margin_tables) + 1]] <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = facts, store_results = store_results, drop = drop, na.rm = na.rm, return_output = TRUE, weights = weights, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, perc_return_all = FALSE)
       }
       # Column Factor - add as row margin
       if(length(row_factors) > 0) {
@@ -512,17 +569,24 @@ instat_object$set("public", "summary_table", function(data_name, columns_to_summ
     shaped_cell_values <- convert_to_character_matrix(shaped_cell_values, decimal_places = rep(signif_fig, ncol(shaped_cell_values)), na_display = na_display, check.names = FALSE)
     if(return_output) {
       if(is.null(caption)) {
+        caption <- ""
+        if(percentage_type != "none") {
+          if(perc_decimal) caption <- "Proportions"
+          else caption <- "Percentages"
+          if(percentage_type == "factors" && length(setdiff(factors, perc_total_factors)) > 0) caption <- paste0(caption, " (within ", paste(setdiff(factors, perc_total_factors), collapse = ", "), ")")
+          caption <- paste0(caption, ":")
+        }
         if(length(columns_to_summarise) > 1 && length(summaries) > 1) {
-          caption <- paste("Summary of ", paste(columns_to_summarise, collapse = ","))
+          caption <- paste(caption, "Summary of ", paste(columns_to_summarise, collapse = ","))
         }
         else if(length(columns_to_summarise) > 1) {
-          caption <- paste(summaries, "of", paste(columns_to_summarise, collapse = ","))
+          caption <- paste(caption, summaries, "of", paste(columns_to_summarise, collapse = ","))
         }
         else if(length(summaries) > 1) {
-          caption <- paste("Summary of", columns_to_summarise)
+          caption <- paste(caption, "Summary of", columns_to_summarise)
         }
         else {
-          caption <- paste(summaries_display, columns_to_summarise)
+          caption <- paste(caption, summaries_display, columns_to_summarise)
         }
         caption <- gsub("_", ".", caption)
         notes <- ""
