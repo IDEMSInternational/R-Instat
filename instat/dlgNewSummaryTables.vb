@@ -63,7 +63,6 @@ Public Class dlgNewSummaryTables
         ucrNudColumnFactors.SetParameter(New RParameter("n_column_factors", 4))
         ucrNudColumnFactors.SetRDefault(0)
 
-        ucrChkStoreResults.Enabled = False ' Temporary, checking this currently causes a crash
         ucrChkStoreResults.SetParameter(New RParameter("store_results", 5))
         ucrChkStoreResults.SetText("Store Results in Data Frame")
         ucrChkStoreResults.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
@@ -118,9 +117,9 @@ Public Class dlgNewSummaryTables
         'ucrInputPageBy.SetItems(dctPageBy)
         'ucrInputPageBy.SetRDefault(Chr(34) & "default" & Chr(34))
 
-        ucrChkRowNumbers.SetParameter(New RParameter("rnames", 18))
+        ucrChkRowNumbers.SetParameter(New RParameter("rnames", 18), bNewChangeParameterValue:=True)
         ucrChkRowNumbers.SetText("Show Row Names")
-        ucrChkRowNumbers.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkRowNumbers.SetRDefault("TRUE") ' temporary fix, this is not the actual R-default but we need to not run this parameter
 
         ucrSaveTable.SetPrefix("table")
         ucrSaveTable.SetSaveTypeAsTable()
