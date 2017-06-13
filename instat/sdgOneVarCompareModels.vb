@@ -17,7 +17,7 @@ Imports instat.Translations
 
 Public Class sdgOneVarCompareModels
     Private bControlsInitialised As Boolean = False
-    Private clsRcdfcompFunction, clsRdenscompFunction, clsRqqcompFunction, clsRppcompFunction, clsListFunction, clsRAsDataFrame, clsModel, clsRGofStat, clsRReceiver, clsRsyntax, clsRPlotFunction, clsOperation As New RFunction
+    Private clsRcdfcompFunction, clsRdenscompFunction, clsRqqcompFunction, clsRppcompFunction, clsListFunction, clsRAsDataFrame, clsModel, clsRGofStat, clsRGofStat2, clsRReceiver, clsRsyntax, clsRPlotFunction, clsOperation As New RFunction
     Private clsOperatorforTable, clsOperatorForBreaks As New ROperator
     Private WithEvents ucrRecs As ucrReceiver
     Public bfirstload As Boolean = True
@@ -32,9 +32,9 @@ Public Class sdgOneVarCompareModels
         ucrChkInputChiSquareBreakpoints.SetText("Input Chi-Square Breakpoints")
 
         'ucrChkPlots
-        ucrChkCDF.SetParameter(New RParameter("ft", 1), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkCDF.AddFunctionNamesCondition(True, "cdfcomp")
         ucrChkCDF.SetText("CDF")
-        ucrChkCDF.SetRDefault("TRUE")
+
         ucrChkDensity.SetText("Density")
         ucrChkPP.SetText("PP")
         ucrChkQQ.SetText("QQ")
@@ -67,7 +67,8 @@ Public Class sdgOneVarCompareModels
             InitialiseControls()
         End If
 
-        clsRGofStat = clsNewRGofStat
+        clsRGofStat = clsNewRGofStat.Clone
+        clsRGofStat2 = clsNewRGofStat.Clone
         clsRReceiver = clsNewReceiver
         clsOperatorforTable = clsNewOperatorforTable
         clsRAsDataFrame = clsNewclsRAsDataFrame
@@ -122,6 +123,10 @@ Public Class sdgOneVarCompareModels
         End If
 
         If ucrSaveDisplayChi.IsComplete Then
+            clsOperatorforTable.SetOperation("$")
+            clsOperatorforTable.AddParameter(clsRFunctionParameter:=clsRGofStat2, iPosition:=0)
+            clsOperatorforTable.AddParameter(strParameterValue:="chisqtable")
+
             frmMain.clsRLink.RunScript(clsOperatorforTable.ToScript(), 0)
             clsRAsDataFrame.ToScript(strTemp)
             frmMain.clsRLink.RunScript(strTemp, 0)
