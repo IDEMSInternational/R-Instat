@@ -60,7 +60,7 @@ Public Class dlgRestrict
 
     Private Sub InitialiseDialog()
         ucrInputFilterPreview.txtInput.ReadOnly = True
-        ucrSelectorFilter.SetItemType("filter")
+        ucrReceiverFilter.SetItemType("filter")
         ucrReceiverFilter.strSelectorHeading = "Filters"
         ucrReceiverFilter.Selector = ucrSelectorFilter
         ucrReceiverFilter.SetMeAsReceiver()

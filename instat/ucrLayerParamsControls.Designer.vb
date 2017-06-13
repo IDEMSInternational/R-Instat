@@ -1,6 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class ucrLayerParamsControls
-    Inherits System.Windows.Forms.UserControl
+    Inherits instat.ucrCore
 
     'UserControl overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()>
@@ -22,18 +22,9 @@ Partial Class ucrLayerParamsControls
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.chkParamName = New System.Windows.Forms.CheckBox()
         Me.ucrReceiverMetadataProperty = New instat.ucrReceiverMetadataProperty()
+        Me.ucrChkParamName = New instat.ucrCheck()
         Me.SuspendLayout()
-        '
-        'chkParamName
-        '
-        Me.chkParamName.AutoSize = True
-        Me.chkParamName.Location = New System.Drawing.Point(3, 6)
-        Me.chkParamName.Name = "chkParamName"
-        Me.chkParamName.Size = New System.Drawing.Size(15, 14)
-        Me.chkParamName.TabIndex = 0
-        Me.chkParamName.UseVisualStyleBackColor = True
         '
         'ucrReceiverMetadataProperty
         '
@@ -42,19 +33,26 @@ Partial Class ucrLayerParamsControls
         Me.ucrReceiverMetadataProperty.Size = New System.Drawing.Size(161, 23)
         Me.ucrReceiverMetadataProperty.TabIndex = 1
         '
+        'ucrChkParamName
+        '
+        Me.ucrChkParamName.Checked = False
+        Me.ucrChkParamName.Dock = System.Windows.Forms.DockStyle.Left
+        Me.ucrChkParamName.Location = New System.Drawing.Point(0, 0)
+        Me.ucrChkParamName.Name = "ucrChkParamName"
+        Me.ucrChkParamName.Size = New System.Drawing.Size(100, 25)
+        Me.ucrChkParamName.TabIndex = 2
+        '
         'ucrLayerParamsControls
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkParamName)
         Me.Controls.Add(Me.ucrReceiverMetadataProperty)
-        Me.Controls.Add(Me.chkParamName)
         Me.Name = "ucrLayerParamsControls"
         Me.Size = New System.Drawing.Size(265, 25)
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents chkParamName As CheckBox
     Friend WithEvents ucrReceiverMetadataProperty As ucrReceiverMetadataProperty
+    Friend WithEvents ucrChkParamName As ucrCheck
 End Class
