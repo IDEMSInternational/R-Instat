@@ -296,9 +296,9 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
   #if(update) self$update_variables_metadata()
   if(direct_from_attributes) {
     #if(missing(property)) return(attributes(self$get_columns_from_data(column, use_current_filter = FALSE)))
-    if(missing(property)) return(attributes(private$data[, column]))
+    if(missing(property)) return(attributes(private$data[[column]]))
     #else return(attr(self$get_columns_from_data(column, use_current_filter = FALSE), property))
-    else return(attr(private$data[, column], property))
+    else return(attr(private$data[[column]], property))
   }
   # special case of getting "class" property which isn't always stored in attributes
   else if(!missing(property) && length(property == 1) && property == data_type_label) {
@@ -1238,6 +1238,7 @@ data_object$set("public", "get_column_names", function(as_list = FALSE, include 
     for(col in col_names) {
       if(length(include) > 0 || length(exclude) > 0) {
         curr_var_metadata <- self$get_variables_metadata(column = col, direct_from_attributes = TRUE)
+        print(curr_var_metadata)
         if(!data_type_label %in% names(curr_var_metadata)) curr_var_metadata[[data_type_label]] <- class(self$get_columns_from_data(col_names = col))
         #TODO this is a temp compatibility solution for how the class of ordered factor used to be shown when getting metadata
         if(length(curr_var_metadata[[data_type_label]]) == 2 && all(curr_var_metadata[[data_type_label]] %in% c("ordered", "factor"))) curr_var_metadata[[data_type_label]] <- "ordered,factor"
