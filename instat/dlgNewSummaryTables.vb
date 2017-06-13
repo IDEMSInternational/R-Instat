@@ -121,7 +121,7 @@ Public Class dlgNewSummaryTables
         ucrChkRowNumbers.SetText("Show Row Names")
         ucrChkRowNumbers.SetRDefault("TRUE") ' temporary fix, this is not the actual R-default but we need to not run this parameter
 
-        ucrSaveTable.SetPrefix("table")
+        ucrSaveTable.SetPrefix("summary_table")
         ucrSaveTable.SetSaveTypeAsTable()
         ucrSaveTable.SetDataFrameSelector(ucrSelectorSummaryTables.ucrAvailableDataFrames)
         ucrSaveTable.SetIsComboBox()
@@ -136,7 +136,6 @@ Public Class dlgNewSummaryTables
         ucrReceiverFactors.SetMeAsReceiver()
         ucrSelectorSummaryTables.Reset()
         ucrSaveTable.Reset()
-        ucrSaveTable.SetName("summary_table") ' change this to prefix later. currently, if this is prefix then it is blank
 
         clsSummariesList.SetRCommand("c")
         clsSummariesList.AddParameter("summary_mean", Chr(34) & "summary_mean" & Chr(34), bIncludeArgumentName:=False) ' TODO decide which default(s) to use?
