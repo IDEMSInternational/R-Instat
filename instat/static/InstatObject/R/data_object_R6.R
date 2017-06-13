@@ -887,7 +887,13 @@ data_object$set("public", "reorder_columns_in_data", function(col_order) {
     if(!(setequal(col_order,names(private$data)))) stop("Invalid column order")
   }
   else stop("column order must be a numeric or character vector")
+  old_metadata <- attributes(private$data)
   self$set_data(private$data[ ,col_order])
+  for(name in names(old_metadata)) {
+    if(!name %in% c("names", "class", "row.names")) {
+      self$append_to_metadata(name, old_metadata[[name]])
+    }
+  }
   self$append_to_changes(list(Col_order, col_order))
 }
 )
