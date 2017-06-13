@@ -82,14 +82,14 @@ Public Class dlgNewSummaryTables
         ucrChkSummaries.SetText("Treat Summary Columns as a Further Factor")
         ucrChkSummaries.SetRDefault("FALSE")
 
-        ucrNudSigFigs.SetParameter(New RParameter("signif_fig", 14))
-        ucrNudSigFigs.SetRDefault(2)
-
         ucrChkHTMLTable.SetParameter(New RParameter("as_html", 13))
         ucrChkHTMLTable.SetText("HTML Table")
         ucrChkHTMLTable.SetRDefault("TRUE")
 
-        ucrReceiverWeights.SetParameter(New RParameter("weights", 16))
+        ucrNudSigFigs.SetParameter(New RParameter("signif_fig", 14))
+        ucrNudSigFigs.SetRDefault(2)
+
+        ucrReceiverWeights.SetParameter(New RParameter("weights", 17))
         ucrReceiverWeights.SetParameterIsString()
         ucrReceiverWeights.Selector = ucrSelectorSummaryTables
         ucrReceiverWeights.SetDataType("numeric")
