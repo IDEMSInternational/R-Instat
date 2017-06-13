@@ -328,6 +328,7 @@ Public Class dlgImportDataset
         '    control.Enabled = False
         'Next
         Cursor = Cursors.WaitCursor
+        ucrBase.OKEnabled(False)
         clsAsCharacterFunc.SetRCommand("convert_to_character_matrix")
         strTempDataFrameName = "temp"
         bToBeAssigned = ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned
