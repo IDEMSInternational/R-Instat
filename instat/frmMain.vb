@@ -56,7 +56,7 @@ Public Class frmMain
         strStaticPath = Path.GetFullPath("static")
         strHelpFilePath = "Help\R-Instat.chm"
         strAppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "RInstat\")
-        strInstatOptionsFile = "RInstatOptions.bin"
+        strInstatOptionsFile = "Options.bin"
         strSaveFilePath = ""
 
         clsRLink.SetEngine()
@@ -153,7 +153,6 @@ Public Class frmMain
         Dim frmNewGraph As New frmGraphDisplay
 
         frmNewGraph.SetImageFromFile(strFilePath)
-        frmNewGraph.MdiParent = Me
         frmNewGraph.Show()
         frmNewGraph.BringToFront()
     End Sub
@@ -183,11 +182,11 @@ Public Class frmMain
     End Sub
 
     Private Sub FrequencyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificFrequency.Click
-        dlgFreqTables.ShowDialog()
+        dlgFlatFrequencyTable.ShowDialog()
     End Sub
 
     Private Sub SummaryToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificSummary.Click
-        dlgSummaryTables.ShowDialog()
+        dlgNewSummaryTables.ShowDialog()
     End Sub
 
     Private Sub mnuPrepareAddColumnTransform_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnCalculateTransform.Click
@@ -387,6 +386,7 @@ Public Class frmMain
         dlgDeleteSheet.ShowDialog()
     End Sub
 
+
     Private Sub mnuPrepareSheetDeleteColumnsRows_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameDeleteColumnsRows.Click
         dlgDeleteRowsOrColums.ShowDialog()
     End Sub
@@ -494,7 +494,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareViewObjects_Click(sender As Object, e As EventArgs) Handles mnuPrepareRObjectsView.Click
-        dlgView.ShowDialog()
+        dlgViewObjects.ShowDialog()
     End Sub
 
     Private Sub mnuPrepareReorderObjects_Click(sender As Object, e As EventArgs) Handles mnuPrepareRObjectsReorder.Click
@@ -952,10 +952,6 @@ Public Class frmMain
         dlgBarAndPieChart.ShowDialog()
     End Sub
 
-    Private Sub mnuDescribeSpecificBarChartFromSummary_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificBarChartFromSummary.Click
-        dlgSummaryBarOrPieChart.ShowDialog()
-    End Sub
-
     Private Sub mnuDescribeOtherGraphicsDialogsCumulativeDistribution_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsCumulativeDistribution.Click
         dlgCumulativeDistribution.ShowDialog()
     End Sub
@@ -1217,7 +1213,7 @@ Public Class frmMain
         dlgTwoWayFrequencies.ShowDialog()
     End Sub
 
-    Private Sub SummaryToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SummaryToolStripMenuItem.Click
+    Private Sub SummaryToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgNewSummaryTables.ShowDialog()
     End Sub
 
@@ -1398,11 +1394,15 @@ Public Class frmMain
     End Sub
 
     Private Sub FrequencyTablesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FrequencyTablesToolStripMenuItem.Click
-        dlgFlatFrequencyTable.ShowDialog()
+        dlgSummaryBarOrPieChart.ShowDialog()
     End Sub
 
     Private Sub DispalyClimaticDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DispalyClimaticDataToolStripMenuItem.Click
         dlgDisplayDailyClimaticData.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticPrepareClimaticSummaries_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareClimaticSummaries.Click
+        dlgClimaticSummary.ShowDialog()
     End Sub
 
     'Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click

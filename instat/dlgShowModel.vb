@@ -180,7 +180,7 @@ Public Class dlgShowModel
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrDistributionsFOrTablePlus_ParameterChanged() Handles ucrDistributionsFOrTablePlus.ParameterChanged
+    Private Sub ucrDistributionsFOrTablePlus_ParameterChanged() Handles ucrDistributionsFOrTablePlus.ControlContentsChanged
         ReceiverLabels()
     End Sub
 

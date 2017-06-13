@@ -27,6 +27,7 @@ Partial Class dlgRemoveUnusedLevels
         Me.ucrReceiverFactorColumn = New instat.ucrReceiverSingle()
         Me.ucrSelectorFactorColumn = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrInputUnusedLevels = New instat.ucrInputTextBox()
         Me.SuspendLayout()
         '
         'lblFactor
@@ -49,6 +50,7 @@ Partial Class dlgRemoveUnusedLevels
         Me.ucrRemoveUnusedFactorLevels.shtCurrSheet = Nothing
         Me.ucrRemoveUnusedFactorLevels.Size = New System.Drawing.Size(255, 175)
         Me.ucrRemoveUnusedFactorLevels.TabIndex = 3
+        Me.ucrRemoveUnusedFactorLevels.ucrChkLevels = Nothing
         '
         'ucrReceiverFactorColumn
         '
@@ -58,7 +60,9 @@ Partial Class dlgRemoveUnusedLevels
         Me.ucrReceiverFactorColumn.Name = "ucrReceiverFactorColumn"
         Me.ucrReceiverFactorColumn.Selector = Nothing
         Me.ucrReceiverFactorColumn.Size = New System.Drawing.Size(106, 26)
+        Me.ucrReceiverFactorColumn.strNcFilePath = ""
         Me.ucrReceiverFactorColumn.TabIndex = 2
+        Me.ucrReceiverFactorColumn.ucrSelector = Nothing
         '
         'ucrSelectorFactorColumn
         '
@@ -72,16 +76,27 @@ Partial Class dlgRemoveUnusedLevels
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 257)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 283)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 4
         '
-        'dlgUnusedLevels
+        'ucrInputUnusedLevels
+        '
+        Me.ucrInputUnusedLevels.AddQuotesIfUnrecognised = True
+        Me.ucrInputUnusedLevels.IsMultiline = False
+        Me.ucrInputUnusedLevels.IsReadOnly = False
+        Me.ucrInputUnusedLevels.Location = New System.Drawing.Point(114, 258)
+        Me.ucrInputUnusedLevels.Name = "ucrInputUnusedLevels"
+        Me.ucrInputUnusedLevels.Size = New System.Drawing.Size(380, 21)
+        Me.ucrInputUnusedLevels.TabIndex = 5
+        '
+        'dlgRemoveUnusedLevels
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(504, 313)
+        Me.ClientSize = New System.Drawing.Size(504, 348)
+        Me.Controls.Add(Me.ucrInputUnusedLevels)
         Me.Controls.Add(Me.ucrRemoveUnusedFactorLevels)
         Me.Controls.Add(Me.lblFactor)
         Me.Controls.Add(Me.ucrReceiverFactorColumn)
@@ -90,7 +105,7 @@ Partial Class dlgRemoveUnusedLevels
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgUnusedLevels"
+        Me.Name = "dlgRemoveUnusedLevels"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Remove_Unused_Factor_Levels"
         Me.Text = "Remove Unused Levels"
@@ -104,4 +119,5 @@ Partial Class dlgRemoveUnusedLevels
     Friend WithEvents ucrReceiverFactorColumn As ucrReceiverSingle
     Friend WithEvents lblFactor As Label
     Friend WithEvents ucrRemoveUnusedFactorLevels As ucrFactor
+    Friend WithEvents ucrInputUnusedLevels As ucrInputTextBox
 End Class
