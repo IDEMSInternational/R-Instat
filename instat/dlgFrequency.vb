@@ -70,11 +70,6 @@ Public Class dlgFrequency
         'ucrChkPrintOutput.SetText("Print to Output Window")
         'ucrChkPrintOutput.SetRDefault("TRUE")
 
-        ucrChkSummaries.Enabled = False ' temporary
-        ucrChkSummaries.SetParameter(New RParameter("treat_columns_as_factor", 11))
-        ucrChkSummaries.SetText("Treat Summary Columns as a Further Factor")
-        ucrChkSummaries.SetRDefault("FALSE")
-
         ' For the page_by option:
         ucrInputPageBy.Enabled = False ' Temporary, not yet implemented in R function
         'ucrInputPageBy.SetParameter(New RParameter("page_by", 12))
@@ -155,6 +150,7 @@ Public Class dlgFrequency
         clsDefaultFunction.AddParameter("summaries", "count_label", iPosition:=2) 'clsRFunctionParameter:=clsSummaryCount, iPosition:=2)
         clsDefaultFunction.AddParameter("store_results", "FALSE", iPosition:=5)
         clsDefaultFunction.AddParameter("rnames", "FALSE", iPosition:=18)
+        clsDefaultFunction.SetAssignTo("last_table", strTempDataframe:=ucrSelectorFrequency.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_table")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
         bResetSubdialog = True
@@ -189,14 +185,6 @@ Public Class dlgFrequency
         'TestOKEnabled()
     End Sub
 
-    Private Sub EnableCheckSummaries()
-        If ucrReceiverFactors.lstSelectedVariables.Items.Count > 1 Then 'OrElse clsSummaryCount.clsParameters.Count > 1 Then ' TODO get this to work for clsSummariesList > 1
-            '    ucrChkSummaries.Enabled = True ' temporarily disabled while ucrChkSummaries is disabled
-            'Else
-            ucrChkSummaries.Enabled = False
-        End If
-    End Sub
-
     Private Sub SetMaxColumnFactors()
         ucrNudColumnFactors.Maximum = ucrReceiverFactors.lstSelectedVariables.Items.Count
     End Sub
@@ -212,7 +200,6 @@ Public Class dlgFrequency
     End Sub
 
     Private Sub ucrReceiverFactors_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactors.ControlValueChanged
-        EnableCheckSummaries()
         If bRCodeSet Then
             SetMaxColumnFactors()
         End If
@@ -221,10 +208,8 @@ Public Class dlgFrequency
     Private Sub ucrChkHTMLTable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkHTMLTable.ControlValueChanged
         If ucrChkHTMLTable.Checked Then
             ucrBase.clsRsyntax.iCallType = 4
-            clsDefaultFunction.SetAssignTo("last_table", strTempDataframe:=ucrSelectorFrequency.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_table")
         Else
             ucrBase.clsRsyntax.iCallType = 2
-            clsDefaultFunction.RemoveAssignTo()
         End If
     End Sub
 
