@@ -17,6 +17,16 @@ Imports System.ComponentModel
 
 Public Class ucrInputComboBox
     Dim strItemsType As String = ""
+
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        bAllowNonConditionValues = False
+    End Sub
+
     'temporary event which is only raised when index is changed
     'NameChanged raised any time value is set (even if it's the same)
     Public Event SelectionIndexChanged()
@@ -193,7 +203,6 @@ Public Class ucrInputComboBox
     End Function
 
     Private Sub ucrInputComboBox_Load(sender As Object, e As EventArgs) Handles Me.Load
-        bAllowNonConditionValues = False
         FillItemTypes()
         If bFirstLoad Then
             bFirstLoad = False
