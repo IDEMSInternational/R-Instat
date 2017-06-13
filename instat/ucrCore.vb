@@ -113,7 +113,7 @@ Public Class ucrCore
                             'This is needed so that if this parameter is contained in functions in multiple dialogs,
                             'the parameter only changes the functions in the currently open dialog
                             clsTempCloneParameter = GetParameter(i).Clone()
-                            If Not bUpdateRCodeFromControl Then
+                            If Not bUpdateRCodeFromControl AndAlso bChangeParameterValue Then
                                 clsTempCloneParameter.ClearAllArguments()
                             End If
                             SetParameter(clsTempCloneParameter, i)
