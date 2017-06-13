@@ -231,6 +231,7 @@ Partial Class dlgConvertColumns
         Me.ucrReceiverColumnsToConvert.Name = "ucrReceiverColumnsToConvert"
         Me.ucrReceiverColumnsToConvert.Selector = Nothing
         Me.ucrReceiverColumnsToConvert.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverColumnsToConvert.strNcFilePath = ""
         Me.ucrReceiverColumnsToConvert.TabIndex = 2
         Me.ucrReceiverColumnsToConvert.ucrSelector = Nothing
         '
