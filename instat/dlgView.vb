@@ -185,9 +185,9 @@ Public Class dlgView
     End Sub
 
     Private Sub FunctionControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDisplayFrom.ControlValueChanged, ucrPnlDisplayWindow.ControlValueChanged, ucrChkSpecifyRows.ControlValueChanged
-        '   If bControlsUpdated Then
-        ChangeFunctionParameters()
-        ' End If
+        If bControlsUpdated Then
+            ChangeFunctionParameters()
+        End If
     End Sub
 
     Private Sub ucrChkSortColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSortColumn.ControlValueChanged, ucrPnlDisplayWindow.ControlValueChanged
