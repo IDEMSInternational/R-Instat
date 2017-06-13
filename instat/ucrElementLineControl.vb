@@ -22,34 +22,37 @@ Public Class ucrElementLineControl
     Private clsBaseOperator As New ROperator
     Public Sub InitialiseControl()
 
-        ucrChkTickSize.SetText("Size")
-        ucrNudTickSize.SetParameter(New RParameter("size"))
-        ucrChkTickSize.AddParameterPresentCondition(True, "size")
-        ucrChkTickSize.AddParameterPresentCondition(False, "size", False)
-        ucrNudTickSize.Increment = 0.1
+        ucrChkLineSize.SetText("Size")
+        ucrNudLineSize.SetParameter(New RParameter("size"))
+        ucrChkLineSize.AddParameterPresentCondition(True, "size")
+        ucrChkLineSize.AddParameterPresentCondition(False, "size", False)
+        ucrNudLineSize.Increment = 0.1
 
-        ucrChkTickLineType.SetText("Line Type")
-        ucrInputTickLineType.SetParameter(New RParameter("linetype"))
-        ucrChkTickLineType.AddParameterPresentCondition(True, "linetype")
-        ucrChkTickLineType.AddParameterPresentCondition(False, "linetype", False)
-        ucrInputTickLineType.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctLineType))
+        ucrChkLineLineType.SetText("Line Type")
+        ucrInputLineLineType.SetParameter(New RParameter("linetype"))
+        ucrChkLineLineType.AddParameterPresentCondition(True, "linetype")
+        ucrChkLineLineType.AddParameterPresentCondition(False, "linetype", False)
+        ucrInputLineLineType.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctLineType))
+        ucrInputLineLineType.SetDropDownStyleAsNonEditable()
 
-        ucrChkTickColour.SetText("Colour")
-        ucrColors.SetParameter(New RParameter("colour"))
-        ucrChkTickColour.AddParameterPresentCondition(True, "colour")
-        ucrChkTickColour.AddParameterPresentCondition(False, "colour", False)
-        ucrColors.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
+        ucrChkLineColour.SetText("Colour")
+        ucrLineColors.SetParameter(New RParameter("colour"))
+        ucrChkLineColour.AddParameterPresentCondition(True, "colour")
+        ucrChkLineColour.AddParameterPresentCondition(False, "colour", False)
+        ucrLineColors.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
+        ucrLineColors.SetDropDownStyleAsNonEditable()
 
-        ucrChkTickLineEnd.SetText("Line End")
-        ucrInpuTicktLineEnd.SetParameter(New RParameter("lineend"))
-        ucrChkTickLineEnd.AddParameterPresentCondition(True, "lineend")
-        ucrChkTickLineEnd.AddParameterPresentCondition(False, "lineend", False)
-        ucrInpuTicktLineEnd.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctLineEnd))
+        ucrChkLineLineEnd.SetText("Line End")
+        ucrInputLineLineEnd.SetParameter(New RParameter("lineend"))
+        ucrChkLineLineEnd.AddParameterPresentCondition(True, "lineend")
+        ucrChkLineLineEnd.AddParameterPresentCondition(False, "lineend", False)
+        ucrInputLineLineEnd.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctLineEnd))
+        ucrInputLineLineEnd.SetDropDownStyleAsNonEditable()
 
-        ucrChkTickSize.AddToLinkedControls(ucrNudTickSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.0)
-        ucrChkTickLineType.AddToLinkedControls(ucrInputTickLineType, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Solid")
-        ucrChkTickLineEnd.AddToLinkedControls(ucrInpuTicktLineEnd, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Square")
-        ucrChkTickColour.AddToLinkedControls(ucrColors, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Black")
+        ucrChkLineSize.AddToLinkedControls(ucrNudLineSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.0)
+        ucrChkLineLineType.AddToLinkedControls(ucrInputLineLineType, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Solid")
+        ucrChkLineLineEnd.AddToLinkedControls(ucrInputLineLineEnd, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Square")
+        ucrChkLineColour.AddToLinkedControls(ucrLineColors, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Black")
         bInitialiseControls = True
     End Sub
 
@@ -67,22 +70,22 @@ Public Class ucrElementLineControl
         clsThemeFunction = clsNewThemeFunction
         clsElementLine = clsNewElementLine
 
-        ucrNudTickSize.SetRCode(clsElementLine, bReset)
-        ucrChkTickSize.SetRCode(clsElementLine, bReset)
+        ucrNudLineSize.SetRCode(clsElementLine, bReset)
+        ucrChkLineSize.SetRCode(clsElementLine, bReset)
 
-        ucrColors.SetRCode(clsElementLine, bReset)
-        ucrChkTickColour.SetRCode(clsElementLine, bReset)
+        ucrLineColors.SetRCode(clsElementLine, bReset)
+        ucrChkLineColour.SetRCode(clsElementLine, bReset)
 
-        ucrInputTickLineType.SetRCode(clsElementLine, bReset)
-        ucrChkTickLineType.SetRCode(clsElementLine, bReset)
+        ucrInputLineLineType.SetRCode(clsElementLine, bReset)
+        ucrChkLineLineType.SetRCode(clsElementLine, bReset)
 
-        ucrInpuTicktLineEnd.SetRCode(clsElementLine, bReset)
-        ucrChkTickLineEnd.SetRCode(clsElementLine, bReset)
+        ucrInputLineLineEnd.SetRCode(clsElementLine, bReset)
+        ucrChkLineLineEnd.SetRCode(clsElementLine, bReset)
         AddRemoveElementLineAxis()
     End Sub
 
     Private Sub AddRemoveElementLineAxis()
-        If ucrChkTickColour.Checked OrElse ucrChkTickLineEnd.Checked OrElse ucrChkTickLineType.Checked OrElse ucrChkTickSize.Checked Then
+        If ucrChkLineColour.Checked OrElse ucrChkLineLineEnd.Checked OrElse ucrChkLineLineType.Checked OrElse ucrChkLineSize.Checked Then
             clsThemeFunction.AddParameter(strAxisLine, clsRFunctionParameter:=clsElementLine)
         Else
             clsThemeFunction.RemoveParameterByName(strAxisLine)
@@ -98,11 +101,15 @@ Public Class ucrElementLineControl
         End If
     End Sub
 
-    Private Sub ElementTickAxisLineControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTickLineType.ControlValueChanged, ucrChkTickSize.ControlValueChanged, ucrChkTickLineEnd.ControlValueChanged, ucrChkTickColour.ControlValueChanged
+    Private Sub ElementTickAxisLineControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLineLineType.ControlValueChanged, ucrChkLineSize.ControlValueChanged, ucrChkLineLineEnd.ControlValueChanged, ucrChkLineColour.ControlValueChanged
         AddRemoveElementLineAxis()
     End Sub
 
     Public Sub SetLabel(strlabel As String)
         grpTickMarks.Text = strlabel
+    End Sub
+
+    Private Sub ucrChkLineLineType_Load(sender As Object, e As EventArgs) Handles ucrChkLineLineType.Load
+
     End Sub
 End Class
