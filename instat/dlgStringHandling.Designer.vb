@@ -218,14 +218,14 @@ Partial Class dlgStringHandling
         Me.grpRegex.Controls.Add(Me.cmdBackSlashb)
         Me.grpRegex.Controls.Add(Me.cmdSbackSlash)
         Me.grpRegex.Controls.Add(Me.cmdOr)
-        Me.grpRegex.Location = New System.Drawing.Point(420, 1)
+        Me.grpRegex.Location = New System.Drawing.Point(420, 9)
         Me.grpRegex.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.grpRegex.Name = "grpRegex"
         Me.grpRegex.Padding = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.grpRegex.Size = New System.Drawing.Size(239, 141)
         Me.grpRegex.TabIndex = 180
         Me.grpRegex.TabStop = False
-        Me.grpRegex.Text = "Regex"
+        Me.grpRegex.Text = "Regex keyboard"
         '
         'cmdClear
         '
@@ -457,7 +457,7 @@ Partial Class dlgStringHandling
         Me.cmdOr.Name = "cmdOr"
         Me.cmdOr.Size = New System.Drawing.Size(38, 30)
         Me.cmdOr.TabIndex = 117
-        Me.cmdOr.Text = "|"
+        Me.cmdOr.Text = "|,"
         Me.cmdOr.UseVisualStyleBackColor = True
         '
         'rdoFixed
@@ -496,7 +496,7 @@ Partial Class dlgStringHandling
         '
         'ucrPnlFixedRegex
         '
-        Me.ucrPnlFixedRegex.Location = New System.Drawing.Point(259, 92)
+        Me.ucrPnlFixedRegex.Location = New System.Drawing.Point(259, 87)
         Me.ucrPnlFixedRegex.Name = "ucrPnlFixedRegex"
         Me.ucrPnlFixedRegex.Size = New System.Drawing.Size(116, 32)
         Me.ucrPnlFixedRegex.TabIndex = 185
@@ -576,7 +576,7 @@ Partial Class dlgStringHandling
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(660, 331)
+        Me.ClientSize = New System.Drawing.Size(669, 331)
         Me.Controls.Add(Me.rdoRegex)
         Me.Controls.Add(Me.rdoFixed)
         Me.Controls.Add(Me.ucrReceiverForRegexExpression)
