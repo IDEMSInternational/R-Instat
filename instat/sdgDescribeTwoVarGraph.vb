@@ -61,14 +61,18 @@ Public Class sdgDescribeTwoVarGraph
 
         ucrNumericByNumeric.SetItems({"Scatter plot", "Line plot", "Scatter and line plot"})
         ucrNumericByNumeric.SetName("Scatter plot")
+        ucrNumericByNumeric.SetDropDownStyleAsNonEditable()
         ucrNumericByCategorical.SetItems({"Box plot", "Histogram", "Density plot", "Frequency polygon", "Dot plot", "Point plot"})
         'How different is the point plot from the summary plot?
         ucrNumericByCategorical.SetName("Box plot")
+        ucrNumericByCategorical.SetDropDownStyleAsNonEditable()
         'ucrCategoricalByNumeric.SetItems({"Summary plot"})
         ucrCategoricalByNumeric.SetItems({"Box plot", "Histogram", "Density plot", "Frequency polygon", "Dot plot", "Point plot"})
         ucrCategoricalByNumeric.SetName("Box plot")
+        ucrCategoricalByNumeric.SetDropDownStyleAsNonEditable()
         ucrCategoricalByCategorical.SetItems({"Bar plot", "Dot plot"})
         ucrCategoricalByCategorical.SetName("Bar plot")
+        ucrCategoricalByCategorical.SetDropDownStyleAsNonEditable()
     End Sub
 
     'Public Sub GrpBoxEnable()
