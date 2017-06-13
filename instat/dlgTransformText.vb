@@ -26,8 +26,6 @@ Public Class dlgTransformText
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
         If bReset Then
             SetDefaults()
@@ -283,11 +281,6 @@ Public Class dlgTransformText
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
-    End Sub
-
-    Private Sub ReopenDialog() ' This is temporary while reopening the dialog can cause a developer error if the user changes a value in the ucrInput
-        ucrInputPad.bAllowNonConditionValues = True
-        ucrInputSeparator.bAllowNonConditionValues = True
     End Sub
 
     Private Sub NewDefaultName()
