@@ -111,6 +111,7 @@ Public Class dlgRatingScales
         ' clsSjplikert.AddParameter("catcount", 1)
         'clsSjplikert.AddParameter("cat.neutral")
         clsSjplikert.AddParameter("coord.flip", "FALSE", iPosition:=4)
+        rdoLikert.Enabled = False
 
         clsSjpStackFrq.SetPackageName("sjPlot")
         clsSjpStackFrq.SetRCommand("sjp.stackfrq")
@@ -143,13 +144,13 @@ Public Class dlgRatingScales
         ucrSaveGraph.AddAdditionalCodeParameterPair(clsSjplikert, ucrSaveGraph.GetParameter, iAdditionalPairNo:=1)
 
         ucrReceiverOrderedFactors.SetRCode(clsSjtStackFrq)
-        ucrPnlSjpLikert.SetRCode(clsSjtStackFrq)
+        ucrPnlSjpLikert.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrChkFlip.SetRCode(clsSjpStackFrq, bReset)
         ucrChkWeights.SetRCode(clsSjtStackFrq, bReset)
         ucrReceiverWeights.SetRCode(clsSjtStackFrq, bReset)
         ucrNudNeutralLevel.SetRCode(clsSjplikert, bReset)
         ucrChkNumberOfCategories.SetRCode(clsSjplikert, bReset)
-        ucrPnlGraphType.SetRCode(clsSjtStackFrq, bReset)
+        ucrPnlGraphType.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrSaveGraph.SetRCode(clsSjpStackFrq, bReset)
     End Sub
 
