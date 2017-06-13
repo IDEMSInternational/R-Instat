@@ -84,7 +84,7 @@ Public Class dlgView
         ucrPnlDisplayFrom.SetLinkedDisplayControl(lblDisplayFrom)
         ucrPnlDisplayFrom.AddFunctionNamesCondition(rdoTop, "head")
         ucrPnlDisplayFrom.AddFunctionNamesCondition(rdoBottom, "tail")
-        ucrPnlDisplayFrom.bAllowNonConditionValues = True
+        '  ucrPnlDisplayFrom.bAllowNonConditionValues = True
 
         ' This linking only applies if rdoDispOutputWindow is checked
         ucrChkSpecifyRows.SetText("Specify Rows")
@@ -96,6 +96,8 @@ Public Class dlgView
 
 
         ucrPnlDisplayWindow.SetDefaultState(rdoDispSepOutputWindow)
+        'ucrPnlDisplayFrom.SetDefaultState(rdoTop)
+        'ucrChkSpecifyRows.SetDefaultState(False)
         ' Linking for when rdoHTML is checked
         ucrChkSortColumn.Visible = False
         'ucrPnlDisplayWindow.AddToLinkedControls(ucrChkSortColumn, {rdoHTMLOutputWindow}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=True)
@@ -127,7 +129,9 @@ Public Class dlgView
 
         ucrSelectorForView.Reset()
         ucrReceiverView.SetMeAsReceiver()
+        'Temporary fix for the panel 
 
+        rdoDispSepOutputWindow.Checked = True
         clsOutputWindowFunction.SetPackageName("utils")
         ' clsOutputWindowFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverView.GetVariables(True))
         clsSeparateWindowFunction.AddParameter("title", Chr(34) & ucrSelectorForView.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
