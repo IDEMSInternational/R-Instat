@@ -29,6 +29,7 @@ Public Class ucrReceiver
     Public bExcludeFromSelector As Boolean = False
     Public Event SelectionChanged(sender As Object, e As EventArgs)
     Public WithEvents frmParent As Form
+    Public bRemoveLabels As Boolean = False
 
     Public strDatabaseQuery As String = ""
 
