@@ -13,7 +13,6 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports instat
 Imports instat.Translations
 
 Public Class dlgOneVariableGraph
@@ -50,7 +49,7 @@ Public Class dlgOneVariableGraph
         clsOneVarGraph.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
         ' Set default RFunction as the base function
-        ucrBase.clsRsyntax.SetBaseRFunction(clsOneVarGraph.Clone())
+        ucrBase.clsRsyntax.SetBaseRFunction(clsOneVarGraph)
         bResetSubdialog = True
     End Sub
 
