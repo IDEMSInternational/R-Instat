@@ -19,7 +19,8 @@ Imports instat.Translations
 Public Class dlgWaterBalance
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
-    Public clsEndRainsGroupByFunc, clsWaterBalGroupByFunc, clsWaterEndRainsBase, clsEndOfRainsManipulationsFunc, clsREndofRains, clsWaterBalBase, clsWaterBalManipulationsFunc, clssGroupByFunc, clsAddKey, clsYearGroup, clsDayFromAndTo, clsFirstWaterBalanceYear As New RFunction
+    Public clsAddKey As New RFunction
+    Public clsEndRainsGroupByFunc, clsWaterBalGroupByFunc, clsWaterEndRainsBase, clsEndOfRainsManipulationsFunc, clsREndofRains, clsWaterBalBase, clsWaterBalManipulationsFunc, clssGroupByFunc, clsYearGroup, clsDayFromAndTo, clsFirstWaterBalanceYear As New RFunction
     Public clsWaterBalanceList, clsWaterBalanceCalc, clsSubCalcList, clsReplaceNA, clsFirstWaterBalance0List, clsWaterFilter0List, clsReplaceNA0, clsWaterBalance0List, clsWaterBalance0, clsWaterFilter0, clsFirstWaterBalance0 As New RFunction
     Private strCurrDataName As String = ""
 
