@@ -244,7 +244,7 @@ Partial Class dlgFrequency
         '
         'ucrSaveTable
         '
-        Me.ucrSaveTable.Location = New System.Drawing.Point(10, 378)
+        Me.ucrSaveTable.Location = New System.Drawing.Point(10, 255)
         Me.ucrSaveTable.Name = "ucrSaveTable"
         Me.ucrSaveTable.Size = New System.Drawing.Size(270, 24)
         Me.ucrSaveTable.TabIndex = 10
