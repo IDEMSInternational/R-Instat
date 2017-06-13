@@ -35,7 +35,7 @@ Public Class dlgFrequency
         SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
-        TestOkEnabled()
+        TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -155,7 +155,6 @@ Public Class dlgFrequency
         clsDefaultFunction.AddParameter("summaries", "count_label", iPosition:=2) 'clsRFunctionParameter:=clsSummaryCount, iPosition:=2)
         clsDefaultFunction.AddParameter("store_results", "FALSE", iPosition:=5)
         clsDefaultFunction.AddParameter("rnames", "FALSE", iPosition:=18)
-        clsDefaultFunction.SetAssignTo("last_table", strTempDataframe:=ucrSelectorFrequency.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_table")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
         bResetSubdialog = True
@@ -222,8 +221,10 @@ Public Class dlgFrequency
     Private Sub ucrChkHTMLTable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkHTMLTable.ControlValueChanged
         If ucrChkHTMLTable.Checked Then
             ucrBase.clsRsyntax.iCallType = 4
+            clsDefaultFunction.SetAssignTo("last_table", strTempDataframe:=ucrSelectorFrequency.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_table")
         Else
-            ucrBase.clsRsyntax.iCallType = 2 ' TODO fix this here and on NewSummaryTables
+            ucrBase.clsRsyntax.iCallType = 2
+            clsDefaultFunction.RemoveAssignTo()
         End If
     End Sub
 
