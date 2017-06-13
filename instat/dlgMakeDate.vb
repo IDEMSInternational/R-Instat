@@ -20,6 +20,7 @@ Public Class dlgMakeDate
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Dim bUseSelectedColumn As Boolean = False
+    Private bControlsUpdated As Boolean = False
     Dim strSelectedColumn As String = ""
     Dim strSelectedDataFrame As String = ""
     Private clsDateFunction, clsMakeYearDay, clsMakeYearMonthDay As New RFunction
@@ -170,13 +171,11 @@ Public Class dlgMakeDate
         ucrPnlDate.AddToLinkedControls(ucrPnlFormat, {rdoSingleColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlDate.AddToLinkedControls(ucrReceiverForDate, {rdoSingleColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverForDate.SetLinkedDisplayControl(grpSingleColumn)
-        'ucrPnlDate.bAllowNonConditionValues = True
 
         ''linking up ucrinputs for format and origin
         ucrPnlFormat.AddToLinkedControls(ucrInputFormat, {rdoSpecifyFormat}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Year-Month-Day")
         ucrPnlFormat.AddToLinkedControls(ucrInputOrigin, {rdoSpecifyOrigin}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Excel")
-        'ucrPnlFormat.bAllowNonConditionValues = True
-
+       
         'when rdoTwoColumn is checked
         ucrPnlDate.AddToLinkedControls(ucrReceiverYearTwo, {rdoTwoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverYearTwo.SetLinkedDisplayControl(lblYearTwo)
@@ -252,6 +251,7 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ' bControlsUpdated = False
         ucrPnlDate.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrSaveDate.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
 
@@ -277,7 +277,7 @@ Public Class dlgMakeDate
         ucrReceiverDayThree.SetRCode(clsMakeYearMonthDay, bReset)
         ucrSelectorMakeDate.SetRCode(clsMakeYearMonthDay, bReset)
         ucrSelectorMakeDate.SetRCode(clsMakeYearDay, bReset)
-
+        ' bControlsUpdated = True
     End Sub
 
     Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
@@ -376,4 +376,5 @@ Public Class dlgMakeDate
             ucrReceiverForDate.SetIncludedDataTypes({"numeric", "character", "factor", "integer"})
         End If
     End Sub
+
 End Class
