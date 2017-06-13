@@ -44,9 +44,9 @@ Partial Class ucrElementLineControl
         Me.grpTickMarks.Controls.Add(Me.ucrInpuTicktLineEnd)
         Me.grpTickMarks.Controls.Add(Me.ucrNudTickSize)
         Me.grpTickMarks.Controls.Add(Me.ucrInputTickLineType)
-        Me.grpTickMarks.Location = New System.Drawing.Point(2, 1)
+        Me.grpTickMarks.Location = New System.Drawing.Point(3, 0)
         Me.grpTickMarks.Name = "grpTickMarks"
-        Me.grpTickMarks.Size = New System.Drawing.Size(247, 119)
+        Me.grpTickMarks.Size = New System.Drawing.Size(246, 119)
         Me.grpTickMarks.TabIndex = 41
         Me.grpTickMarks.TabStop = False
         Me.grpTickMarks.Text = "Element Line"
@@ -55,7 +55,7 @@ Partial Class ucrElementLineControl
         '
         Me.ucrColors.AddQuotesIfUnrecognised = True
         Me.ucrColors.IsReadOnly = False
-        Me.ucrColors.Location = New System.Drawing.Point(100, 66)
+        Me.ucrColors.Location = New System.Drawing.Point(105, 68)
         Me.ucrColors.Name = "ucrColors"
         Me.ucrColors.Size = New System.Drawing.Size(137, 21)
         Me.ucrColors.TabIndex = 87
@@ -63,7 +63,7 @@ Partial Class ucrElementLineControl
         'ucrChkTickLineEnd
         '
         Me.ucrChkTickLineEnd.Checked = False
-        Me.ucrChkTickLineEnd.Location = New System.Drawing.Point(11, 92)
+        Me.ucrChkTickLineEnd.Location = New System.Drawing.Point(8, 94)
         Me.ucrChkTickLineEnd.Name = "ucrChkTickLineEnd"
         Me.ucrChkTickLineEnd.Size = New System.Drawing.Size(88, 20)
         Me.ucrChkTickLineEnd.TabIndex = 54
@@ -71,7 +71,7 @@ Partial Class ucrElementLineControl
         'ucrChkTickSize
         '
         Me.ucrChkTickSize.Checked = False
-        Me.ucrChkTickSize.Location = New System.Drawing.Point(11, 20)
+        Me.ucrChkTickSize.Location = New System.Drawing.Point(8, 19)
         Me.ucrChkTickSize.Name = "ucrChkTickSize"
         Me.ucrChkTickSize.Size = New System.Drawing.Size(88, 20)
         Me.ucrChkTickSize.TabIndex = 53
@@ -79,7 +79,7 @@ Partial Class ucrElementLineControl
         'ucrChkTickLineType
         '
         Me.ucrChkTickLineType.Checked = False
-        Me.ucrChkTickLineType.Location = New System.Drawing.Point(11, 44)
+        Me.ucrChkTickLineType.Location = New System.Drawing.Point(8, 44)
         Me.ucrChkTickLineType.Name = "ucrChkTickLineType"
         Me.ucrChkTickLineType.Size = New System.Drawing.Size(88, 20)
         Me.ucrChkTickLineType.TabIndex = 52
@@ -87,7 +87,7 @@ Partial Class ucrElementLineControl
         'ucrChkTickColour
         '
         Me.ucrChkTickColour.Checked = False
-        Me.ucrChkTickColour.Location = New System.Drawing.Point(11, 68)
+        Me.ucrChkTickColour.Location = New System.Drawing.Point(8, 69)
         Me.ucrChkTickColour.Name = "ucrChkTickColour"
         Me.ucrChkTickColour.Size = New System.Drawing.Size(88, 20)
         Me.ucrChkTickColour.TabIndex = 51
@@ -96,7 +96,7 @@ Partial Class ucrElementLineControl
         '
         Me.ucrInpuTicktLineEnd.AddQuotesIfUnrecognised = True
         Me.ucrInpuTicktLineEnd.IsReadOnly = False
-        Me.ucrInpuTicktLineEnd.Location = New System.Drawing.Point(100, 90)
+        Me.ucrInpuTicktLineEnd.Location = New System.Drawing.Point(105, 93)
         Me.ucrInpuTicktLineEnd.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInpuTicktLineEnd.Name = "ucrInpuTicktLineEnd"
         Me.ucrInpuTicktLineEnd.Size = New System.Drawing.Size(137, 21)
@@ -106,7 +106,7 @@ Partial Class ucrElementLineControl
         '
         Me.ucrNudTickSize.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudTickSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTickSize.Location = New System.Drawing.Point(100, 19)
+        Me.ucrNudTickSize.Location = New System.Drawing.Point(105, 19)
         Me.ucrNudTickSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudTickSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudTickSize.Name = "ucrNudTickSize"
@@ -118,18 +118,18 @@ Partial Class ucrElementLineControl
         '
         Me.ucrInputTickLineType.AddQuotesIfUnrecognised = True
         Me.ucrInputTickLineType.IsReadOnly = False
-        Me.ucrInputTickLineType.Location = New System.Drawing.Point(100, 42)
+        Me.ucrInputTickLineType.Location = New System.Drawing.Point(105, 43)
         Me.ucrInputTickLineType.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputTickLineType.Name = "ucrInputTickLineType"
         Me.ucrInputTickLineType.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputTickLineType.TabIndex = 26
         '
-        'ucrTickMarksAndLabels
+        'ucrElementLineControl
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.grpTickMarks)
-        Me.Name = "ucrTickMarksAndLabels"
+        Me.Name = "ucrElementLineControl"
         Me.Size = New System.Drawing.Size(255, 123)
         Me.grpTickMarks.ResumeLayout(False)
         Me.ResumeLayout(False)
