@@ -48,6 +48,10 @@ Public Class dlgFromLibrary
         clsDataFunction.SetPackageName("utils")
         clsDataFunction.SetRCommand("data")
         FillPackagesCombo()
+        'TODO remove once control is updated
+        cboPackages.DropDownStyle = ComboBoxStyle.DropDownList
+        cboPackages.AutoCompleteMode = AutoCompleteMode.None
+        cboPackages.AutoCompleteSource = AutoCompleteSource.None
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
