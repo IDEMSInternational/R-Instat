@@ -63,6 +63,7 @@ Public Class dlgNewSummaryTables
         ucrNudColumnFactors.SetParameter(New RParameter("n_column_factors", 4))
         ucrNudColumnFactors.SetRDefault(0)
 
+        ucrChkStoreResults.Enabled = False ' Temporary, checking this currently causes a crash
         ucrChkStoreResults.SetParameter(New RParameter("store_results", 5))
         ucrChkStoreResults.SetText("Store Results in Data Frame")
         ucrChkStoreResults.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
@@ -87,6 +88,7 @@ Public Class dlgNewSummaryTables
         ucrChkHTMLTable.SetRDefault("TRUE")
 
         ucrNudSigFigs.SetParameter(New RParameter("signif_fig", 14))
+        ucrNudSigFigs.SetMinMax(0, 22)
         ucrNudSigFigs.SetRDefault(2)
 
         ucrReceiverWeights.SetParameter(New RParameter("weights", 17))
