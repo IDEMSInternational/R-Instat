@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgViewAndRemoveLinks
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsVewLinks As New RFunction
+    Private clsViewLinks As New RFunction
     Private clsDeleteLinks As New RFunction
 
     Private Sub dlgViewAndRemoveLinks_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -26,6 +26,8 @@ Public Class dlgViewAndRemoveLinks
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
+        Else
+            ReopenDialog()
         End If
         If bReset Then
             SetDefaults()
@@ -35,23 +37,37 @@ Public Class dlgViewAndRemoveLinks
         TestOKEnabled()
     End Sub
 
+    Private Sub InitialiseDialog()
+        ucrBase.clsRsyntax.iCallType = 2
+        ucrBase.iHelpTopicID = 507
+
+        ucrSelectorLinks.SetItemType("link")
+
+        ucrReceiverViewLinks.SetParameter(New RParameter("link_name", 0))
+        ucrReceiverViewLinks.Selector = ucrSelectorLinks
+        ucrReceiverViewLinks.SetMeAsReceiver()
+        ucrReceiverViewLinks.SetParameterIsString()
+        ucrReceiverViewLinks.strSelectorHeading = "Links"
+        ucrReceiverViewLinks.SetItemType("link")
+        ucrPnlLinks.AddRadioButton(rdoDeleteLink)
+        ucrPnlLinks.AddRadioButton(rdoViewLink)
+        ucrPnlLinks.AddFunctionNamesCondition(rdoDeleteLink, frmMain.clsRLink.strInstatDataObject & "$remove_link")
+        ucrPnlLinks.AddFunctionNamesCondition(rdoViewLink, frmMain.clsRLink.strInstatDataObject & "$view_link")
+    End Sub
+
+    Private Sub SetDefaults()
+        clsViewLinks = New RFunction
+        clsDeleteLinks = New RFunction
+
+        clsViewLinks.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$view_link")
+        clsDeleteLinks.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_link")
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsViewLinks)
+    End Sub
+
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverViewLinks.AddAdditionalCodeParameterPair(clsDeleteLinks, New RParameter("link_name", 0), iAdditionalPairNo:=1)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-    End Sub
-
-    Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 507
-        ucrReceiverViewLinks.Selector = ucrSelectorLinks
-        ucrReceiverViewLinks.SetMeAsReceiver()
-        ucrReceiverViewLinks.SetParameter(New RParameter("link_name", 0))
-        ucrReceiverViewLinks.SetParameterIsString()
-        ucrSelectorLinks.SetItemType("link")
-        ucrpnlDeleteView.AddRadioButton(rdoDeleteLink)
-        ucrpnlDeleteView.AddRadioButton(rdoViewLink)
-        ucrpnlDeleteView.AddFunctionNamesCondition(rdoDeleteLink, frmMain.clsRLink.strInstatDataObject & "$remove_link")
-        ucrpnlDeleteView.AddFunctionNamesCondition(rdoViewLink, frmMain.clsRLink.strInstatDataObject & "$view_link")
-
     End Sub
 
     Private Sub TestOKEnabled()
@@ -62,20 +78,15 @@ Public Class dlgViewAndRemoveLinks
         End If
     End Sub
 
-    Private Sub SetDefaults()
-        clsDeleteLinks = New RFunction
-        clsVewLinks = New RFunction
-        clsDeleteLinks.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_link")
-        clsVewLinks.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$view_link")
-        ucrBase.clsRsyntax.iCallType = 2
-        ucrBase.clsRsyntax.SetBaseRFunction(clsVewLinks)
+    Private Sub ReopenDialog() 'Temporary fixes remove link error on reopen of the dialog
+        ucrSelectorLinks.Reset()
     End Sub
 
-    Private Sub ucrpnlDeleteView_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrpnlDeleteView.ControlValueChanged
+    Private Sub ucrPnlLinks_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlLinks.ControlValueChanged
         If rdoDeleteLink.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsDeleteLinks)
         Else
-            ucrBase.clsRsyntax.SetBaseRFunction(clsVewLinks)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsViewLinks)
         End If
     End Sub
 
