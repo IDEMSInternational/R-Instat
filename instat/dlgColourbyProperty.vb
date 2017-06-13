@@ -17,44 +17,59 @@
 Imports instat.Translations
 Public Class dlgColourbyProperty
     Public bFirstLoad As Boolean = True
-    Public clsDefaultFuncAdd As New RFunction
-    Public clsDefaultRemove
+    Private clsColourByMetadata As New RFunction
+    Private clsRemoveColour As New RFunction
+    Private bReset As Boolean = True
 
     Private Sub dlgColourbyProperty_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
-            TestOKEnabled()
             bFirstLoad = False
         End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
         TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 391
 
-        ucrReceiverMetadataProperty.Selector = ucrSelectorColourByMetadata
-        ucrReceiverMetadataProperty.SetItemType("metadata")
-        ucrReceiverMetadataProperty.SetMeAsReceiver()
-
-        ucrchkRemoveColours.SetText("Remove Colour(s)")
-
-        ucrReceiverMetadataProperty.SetParameter(New RParameter("property"))
-        ucrReceiverMetadataProperty.SetParameterIsString()
-
-        ucrSelectorColourByMetadata.SetParameter(New RParameter("data_name"))
+        ucrSelectorColourByMetadata.SetParameter(New RParameter("data_name", 0))
         ucrSelectorColourByMetadata.SetParameterIsString()
 
-        clsDefaultFuncAdd.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_column_colours_by_metadata")
-        'ucrchkRemoveColours.SetParameter(frmMain.clsRLink.strInstatDataObject & "$remove_column_colours")
+        ucrReceiverMetadataProperty.SetParameter(New RParameter("property", 1))
+        ucrReceiverMetadataProperty.SetParameterIsString()
+        ucrReceiverMetadataProperty.Selector = ucrSelectorColourByMetadata
+        ucrReceiverMetadataProperty.SetMeAsReceiver()
+        ucrReceiverMetadataProperty.SetItemType("metadata")
+        ucrReceiverMetadataProperty.strSelectorHeading = "Metadata Property"
+
+        ucrChkRemoveColours.SetText("Remove Colour")
+        ucrChkRemoveColours.AddFunctionNamesCondition(True, frmMain.clsRLink.strInstatDataObject & "$remove_column_colours")
+        ucrChkRemoveColours.AddFunctionNamesCondition(False, frmMain.clsRLink.strInstatDataObject & "$set_column_colours_by_metadata")
     End Sub
 
     Private Sub SetDefaults()
-        '  SetOrRemoveColours()
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFuncAdd.Clone())
+        clsColourByMetadata = New RFunction
+        clsRemoveColour = New RFunction
+
         ucrSelectorColourByMetadata.Reset()
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
+
+        clsColourByMetadata.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_column_colours_by_metadata")
+        clsRemoveColour.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_column_colours")
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsColourByMetadata)
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrSelectorColourByMetadata.AddAdditionalCodeParameterPair(clsRemoveColour, ucrSelectorColourByMetadata.GetParameter(), iAdditionalPairNo:=1)
+        ucrSelectorColourByMetadata.SetRCode(clsColourByMetadata, bReset)
+        ucrReceiverMetadataProperty.SetRCode(clsColourByMetadata, bReset)
+        ucrChkRemoveColours.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -67,23 +82,19 @@ Public Class dlgColourbyProperty
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
 
-    Private Sub Controls_ControContententsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorColourByMetadata.ControlContentsChanged, ucrReceiverMetadataProperty.ControlContentsChanged, ucrchkRemoveColours.ControlContentsChanged
-        TestOKEnabled()
+    Private Sub ucrChkRemoveColours_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkRemoveColours.ControlValueChanged
+        If ucrChkRemoveColours.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsRemoveColour)
+        Else
+            ucrBase.clsRsyntax.SetBaseRFunction(clsColourByMetadata)
+        End If
     End Sub
 
-    'Private Sub SetOrRemoveColours()
-    '    If ucrchkRemoveColours.Checked Then
-    '        ucrSelectorColourByMetadata.Reset()
-    '        ucrSelectorColourByMetadata.SetCurrentReceiver(Nothing)
-    '        ucrReceiverMetadataProperty.Enabled = False
-    '        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFuncAdd)
-    '    Else
-    '        ucrReceiverMetadataProperty.Enabled = True
-    '    End If
-    '    TestOKEnabled()
-    'End Sub
-
+    Private Sub Controls_ControContententsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorColourByMetadata.ControlContentsChanged, ucrReceiverMetadataProperty.ControlContentsChanged, ucrChkRemoveColours.ControlContentsChanged
+        TestOKEnabled()
+    End Sub
 End Class
