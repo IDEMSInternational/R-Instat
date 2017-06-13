@@ -185,7 +185,7 @@ Public Class sdgClimdexIndices
         ucrInputFreq.SetItems(dctInputFreqPairs)
         ucrInputFreq.cboInput.SelectedItem = "annual"
         ucrInputFreq.SetRDefault(Chr(34) & "annual" & Chr(34))
-        ucrInputFreq.SetDropDownStyleAsNonEditable()
+
         ucrInputFreq.bAllowNonConditionValues = True
 
         ucrInputTempQtiles.SetParameter(New RParameter("x"))
@@ -225,7 +225,7 @@ Public Class sdgClimdexIndices
         dctNumericPairs.Add("GSL_max", Chr(34) & "GSL_max" & Chr(34))
         dctNumericPairs.Add("GSL_sum", Chr(34) & "GSL_sum" & Chr(34))
         ucrInputGSLMode.SetItems(dctNumericPairs)
-        ucrInputGSLMode.cboInput.SelectedItem = "GSL"
+     
         ucrInputGSLMode.SetRDefault(Chr(34) & "GSL" & Chr(34))
         ucrInputGSLMode.bAllowNonConditionValues = True
 
@@ -267,6 +267,14 @@ Public Class sdgClimdexIndices
         clsRTwoArg4.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsDefaultFunction)
         clsRTwoArg5.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsDefaultFunction)
         clsRThreeArg.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsDefaultFunction)
+
+        clsROneArg.SetPackageName("climdex.pcic")
+        clsRTwoArg1.SetPackageName("climdex.pcic")
+        clsRTwoArg2.SetPackageName("climdex.pcic")
+        clsRTwoArg3.SetPackageName("climdex.pcic")
+        clsRTwoArg4.SetPackageName("climdex.pcic")
+        clsRTwoArg5.SetPackageName("climdex.pcic")
+        clsRThreeArg.SetPackageName("climdex.pcic")
         InitialiseTabs()
         bControlsInitialised = True
     End Sub
