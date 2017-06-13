@@ -20,7 +20,6 @@ Public Class dlgMakeDate
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Dim bUseSelectedColumn As Boolean = False
-    Private bControlsUpdated As Boolean = False
     Dim strSelectedColumn As String = ""
     Dim strSelectedDataFrame As String = ""
     Private clsDateFunction, clsMakeYearDay, clsMakeYearMonthDay As New RFunction
@@ -237,21 +236,10 @@ Public Class dlgMakeDate
         clsMakeYearMonthDay.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_date_yearmonthday")
         clsDateFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverForDate.GetVariables())
         clsDateFunction.SetAssignTo(ucrSaveDate.GetText, strTempDataframe:=ucrSelectorMakeDate.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveDate.GetText)
-
-        clsDateFunction.AddParameter("format", Chr(34) & "%Y-%m-%d" & Chr(34))
-        clsDateFunction.AddParameter("origin", Chr(34) & "1899-12-30" & Chr(34))
-        clsMakeYearDay.AddParameter("year_format", Chr(34) & "%Y" & Chr(34))
-
-        clsMakeYearDay.AddParameter("doy_typical_length", Chr(34) & "365/366" & Chr(34))
-        clsMakeYearMonthDay.AddParameter("day_format", Chr(34) & "%d" & Chr(34))
-        clsMakeYearMonthDay.AddParameter("month_format", Chr(34) & "%m" & Chr(34))
-        clsMakeYearMonthDay.AddParameter("year_format", Chr(34) & "%Y" & Chr(34))
         ucrBase.clsRsyntax.SetBaseRFunction(clsDateFunction)
-
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ' bControlsUpdated = False
         ucrPnlDate.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrSaveDate.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
 
@@ -277,7 +265,6 @@ Public Class dlgMakeDate
         ucrReceiverDayThree.SetRCode(clsMakeYearMonthDay, bReset)
         ucrSelectorMakeDate.SetRCode(clsMakeYearMonthDay, bReset)
         ucrSelectorMakeDate.SetRCode(clsMakeYearDay, bReset)
-        ' bControlsUpdated = True
     End Sub
 
     Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
@@ -295,7 +282,6 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub TestOKEnabled()
-
         If ucrSaveDate.IsComplete Then
             ' we have three radio buttons, so need to define when OK can be enabled for each radio button.
             If rdoSingleColumn.Checked Then
@@ -376,5 +362,4 @@ Public Class dlgMakeDate
             ucrReceiverForDate.SetIncludedDataTypes({"numeric", "character", "factor", "integer"})
         End If
     End Sub
-
-End Class
+    End Class
