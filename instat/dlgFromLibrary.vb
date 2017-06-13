@@ -63,7 +63,6 @@ Public Class dlgFromLibrary
 
     Private Sub rdoDefaultDatasets_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDefaultDatasets.CheckedChanged, rdoInstatCollection.CheckedChanged
         If rdoDefaultDatasets.Checked Then
-            ucrBase.clsRsyntax.SetFunction("as.data.frame")
             cboPackages.Enabled = True
             lstCollection.Enabled = True
             grpCollection.Enabled = False
@@ -130,8 +129,9 @@ Public Class dlgFromLibrary
     End Sub
 
     Private Sub lstCollection_Click(sender As Object, e As EventArgs) Handles lstCollection.Click
+        ucrBase.clsRsyntax.SetCommandString(chkString(lstCollection.SelectedItems(0).SubItems(0).Text))
         ucrBase.clsRsyntax.SetAssignTo(chkString(lstCollection.SelectedItems(0).SubItems(0).Text), strTempDataframe:=chkString(lstCollection.SelectedItems(0).SubItems(0).Text))
-        ucrBase.clsRsyntax.AddParameter("x", chkString(lstCollection.SelectedItems(0).SubItems(0).Text))
+        'ucrBase.clsRsyntax.AddParameter("x", chkString(lstCollection.SelectedItems(0).SubItems(0).Text))
         clsDataFunction.AddParameter("X", chkString(lstCollection.SelectedItems(0).SubItems(0).Text))
 
         TestOkEnabled()
@@ -162,7 +162,7 @@ Public Class dlgFromLibrary
         If bChecked Then
             frmMain.clsRLink.RunScript(clsDataFunction.ToScript(), strComment:=ucrBase.strComment)
         Else
-            frmMain.clsRLink.RunScript(clsDataFunction.ToScript(), strComment:=ucrBase.strComment)
+            frmMain.clsRLink.RunScript(clsDataFunction.ToScript())
         End If
     End Sub
 
