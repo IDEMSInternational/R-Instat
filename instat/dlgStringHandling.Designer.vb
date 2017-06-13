@@ -82,7 +82,7 @@ Partial Class dlgStringHandling
         'lblReplaceBy
         '
         Me.lblReplaceBy.AutoSize = True
-        Me.lblReplaceBy.Location = New System.Drawing.Point(259, 224)
+        Me.lblReplaceBy.Location = New System.Drawing.Point(259, 218)
         Me.lblReplaceBy.Name = "lblReplaceBy"
         Me.lblReplaceBy.Size = New System.Drawing.Size(65, 13)
         Me.lblReplaceBy.TabIndex = 13
@@ -91,7 +91,7 @@ Partial Class dlgStringHandling
         'lblPattern
         '
         Me.lblPattern.AutoSize = True
-        Me.lblPattern.Location = New System.Drawing.Point(259, 174)
+        Me.lblPattern.Location = New System.Drawing.Point(259, 170)
         Me.lblPattern.Name = "lblPattern"
         Me.lblPattern.Size = New System.Drawing.Size(44, 13)
         Me.lblPattern.TabIndex = 11
@@ -104,7 +104,7 @@ Partial Class dlgStringHandling
         Me.rdoCount.FlatAppearance.BorderSize = 2
         Me.rdoCount.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoCount.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoCount.Location = New System.Drawing.Point(11, 12)
+        Me.rdoCount.Location = New System.Drawing.Point(14, 12)
         Me.rdoCount.Name = "rdoCount"
         Me.rdoCount.Size = New System.Drawing.Size(88, 27)
         Me.rdoCount.TabIndex = 1
@@ -136,7 +136,7 @@ Partial Class dlgStringHandling
         Me.rdoLocate.FlatAppearance.BorderSize = 2
         Me.rdoLocate.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoLocate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoLocate.Location = New System.Drawing.Point(217, 12)
+        Me.rdoLocate.Location = New System.Drawing.Point(218, 12)
         Me.rdoLocate.Name = "rdoLocate"
         Me.rdoLocate.Size = New System.Drawing.Size(61, 27)
         Me.rdoLocate.TabIndex = 4
@@ -152,7 +152,7 @@ Partial Class dlgStringHandling
         Me.rdoExtract.FlatAppearance.BorderSize = 2
         Me.rdoExtract.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoExtract.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoExtract.Location = New System.Drawing.Point(158, 12)
+        Me.rdoExtract.Location = New System.Drawing.Point(159, 12)
         Me.rdoExtract.Name = "rdoExtract"
         Me.rdoExtract.Size = New System.Drawing.Size(61, 27)
         Me.rdoExtract.TabIndex = 3
@@ -168,7 +168,7 @@ Partial Class dlgStringHandling
         Me.rdoDetect.FlatAppearance.BorderSize = 2
         Me.rdoDetect.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoDetect.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoDetect.Location = New System.Drawing.Point(98, 12)
+        Me.rdoDetect.Location = New System.Drawing.Point(100, 12)
         Me.rdoDetect.Name = "rdoDetect"
         Me.rdoDetect.Size = New System.Drawing.Size(61, 27)
         Me.rdoDetect.TabIndex = 2
@@ -218,7 +218,7 @@ Partial Class dlgStringHandling
         Me.grpRegex.Controls.Add(Me.cmdBackSlashb)
         Me.grpRegex.Controls.Add(Me.cmdSbackSlash)
         Me.grpRegex.Controls.Add(Me.cmdOr)
-        Me.grpRegex.Location = New System.Drawing.Point(420, 9)
+        Me.grpRegex.Location = New System.Drawing.Point(420, 144)
         Me.grpRegex.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.grpRegex.Name = "grpRegex"
         Me.grpRegex.Padding = New System.Windows.Forms.Padding(2, 3, 2, 3)
@@ -230,17 +230,17 @@ Partial Class dlgStringHandling
         'cmdClear
         '
         Me.cmdClear.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdClear.Location = New System.Drawing.Point(198, 74)
+        Me.cmdClear.Location = New System.Drawing.Point(198, 75)
         Me.cmdClear.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdClear.Name = "cmdClear"
-        Me.cmdClear.Size = New System.Drawing.Size(37, 61)
+        Me.cmdClear.Size = New System.Drawing.Size(37, 60)
         Me.cmdClear.TabIndex = 145
         Me.cmdClear.Text = "Clear"
         Me.cmdClear.UseVisualStyleBackColor = True
         '
         'cmdBackSlash
         '
-        Me.cmdBackSlash.Location = New System.Drawing.Point(160, 105)
+        Me.cmdBackSlash.Location = New System.Drawing.Point(159, 105)
         Me.cmdBackSlash.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdBackSlash.Name = "cmdBackSlash"
         Me.cmdBackSlash.Size = New System.Drawing.Size(38, 30)
@@ -250,7 +250,7 @@ Partial Class dlgStringHandling
         '
         'cmdWBackSlash
         '
-        Me.cmdWBackSlash.Location = New System.Drawing.Point(160, 75)
+        Me.cmdWBackSlash.Location = New System.Drawing.Point(159, 75)
         Me.cmdWBackSlash.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdWBackSlash.Name = "cmdWBackSlash"
         Me.cmdWBackSlash.Size = New System.Drawing.Size(38, 30)
@@ -260,7 +260,7 @@ Partial Class dlgStringHandling
         '
         'cmdDollarSign
         '
-        Me.cmdDollarSign.Location = New System.Drawing.Point(198, 44)
+        Me.cmdDollarSign.Location = New System.Drawing.Point(198, 45)
         Me.cmdDollarSign.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdDollarSign.Name = "cmdDollarSign"
         Me.cmdDollarSign.Size = New System.Drawing.Size(38, 30)
@@ -270,7 +270,7 @@ Partial Class dlgStringHandling
         '
         'cmdOpenCloseParenthesis
         '
-        Me.cmdOpenCloseParenthesis.Location = New System.Drawing.Point(198, 13)
+        Me.cmdOpenCloseParenthesis.Location = New System.Drawing.Point(198, 15)
         Me.cmdOpenCloseParenthesis.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdOpenCloseParenthesis.Name = "cmdOpenCloseParenthesis"
         Me.cmdOpenCloseParenthesis.Size = New System.Drawing.Size(38, 30)
@@ -280,7 +280,7 @@ Partial Class dlgStringHandling
         '
         'cmdBackSlashd
         '
-        Me.cmdBackSlashd.Location = New System.Drawing.Point(81, 106)
+        Me.cmdBackSlashd.Location = New System.Drawing.Point(81, 105)
         Me.cmdBackSlashd.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdBackSlashd.Name = "cmdBackSlashd"
         Me.cmdBackSlashd.Size = New System.Drawing.Size(38, 30)
@@ -291,7 +291,7 @@ Partial Class dlgStringHandling
         'cmdBackSlashs
         '
         Me.cmdBackSlashs.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmdBackSlashs.Location = New System.Drawing.Point(3, 106)
+        Me.cmdBackSlashs.Location = New System.Drawing.Point(3, 105)
         Me.cmdBackSlashs.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdBackSlashs.Name = "cmdBackSlashs"
         Me.cmdBackSlashs.Size = New System.Drawing.Size(38, 30)
@@ -302,7 +302,7 @@ Partial Class dlgStringHandling
         '
         'cmdPower
         '
-        Me.cmdPower.Location = New System.Drawing.Point(160, 44)
+        Me.cmdPower.Location = New System.Drawing.Point(159, 45)
         Me.cmdPower.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdPower.Name = "cmdPower"
         Me.cmdPower.Size = New System.Drawing.Size(38, 30)
@@ -312,7 +312,7 @@ Partial Class dlgStringHandling
         '
         'cmdOpenBracketCaretClosedBracket
         '
-        Me.cmdOpenBracketCaretClosedBracket.Location = New System.Drawing.Point(120, 13)
+        Me.cmdOpenBracketCaretClosedBracket.Location = New System.Drawing.Point(120, 15)
         Me.cmdOpenBracketCaretClosedBracket.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdOpenBracketCaretClosedBracket.Name = "cmdOpenBracketCaretClosedBracket"
         Me.cmdOpenBracketCaretClosedBracket.Size = New System.Drawing.Size(38, 30)
@@ -322,7 +322,7 @@ Partial Class dlgStringHandling
         '
         'cmdPlus
         '
-        Me.cmdPlus.Location = New System.Drawing.Point(42, 44)
+        Me.cmdPlus.Location = New System.Drawing.Point(42, 45)
         Me.cmdPlus.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdPlus.Name = "cmdPlus"
         Me.cmdPlus.Size = New System.Drawing.Size(38, 30)
@@ -342,7 +342,7 @@ Partial Class dlgStringHandling
         '
         'cmdMultiply
         '
-        Me.cmdMultiply.Location = New System.Drawing.Point(120, 44)
+        Me.cmdMultiply.Location = New System.Drawing.Point(120, 45)
         Me.cmdMultiply.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdMultiply.Name = "cmdMultiply"
         Me.cmdMultiply.Size = New System.Drawing.Size(38, 30)
@@ -352,7 +352,7 @@ Partial Class dlgStringHandling
         '
         'cmdOpenCloseBrace
         '
-        Me.cmdOpenCloseBrace.Location = New System.Drawing.Point(160, 13)
+        Me.cmdOpenCloseBrace.Location = New System.Drawing.Point(159, 15)
         Me.cmdOpenCloseBrace.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdOpenCloseBrace.Name = "cmdOpenCloseBrace"
         Me.cmdOpenCloseBrace.Size = New System.Drawing.Size(38, 30)
@@ -362,7 +362,7 @@ Partial Class dlgStringHandling
         '
         'cmdOpenClosedBracket
         '
-        Me.cmdOpenClosedBracket.Location = New System.Drawing.Point(81, 13)
+        Me.cmdOpenClosedBracket.Location = New System.Drawing.Point(81, 15)
         Me.cmdOpenClosedBracket.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdOpenClosedBracket.Name = "cmdOpenClosedBracket"
         Me.cmdOpenClosedBracket.Size = New System.Drawing.Size(38, 30)
@@ -372,7 +372,7 @@ Partial Class dlgStringHandling
         '
         'cmdSingleQuote
         '
-        Me.cmdSingleQuote.Location = New System.Drawing.Point(42, 13)
+        Me.cmdSingleQuote.Location = New System.Drawing.Point(42, 15)
         Me.cmdSingleQuote.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdSingleQuote.Name = "cmdSingleQuote"
         Me.cmdSingleQuote.Size = New System.Drawing.Size(38, 30)
@@ -382,7 +382,7 @@ Partial Class dlgStringHandling
         '
         'cmdQuote
         '
-        Me.cmdQuote.Location = New System.Drawing.Point(3, 13)
+        Me.cmdQuote.Location = New System.Drawing.Point(3, 15)
         Me.cmdQuote.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdQuote.Name = "cmdQuote"
         Me.cmdQuote.Size = New System.Drawing.Size(38, 30)
@@ -392,7 +392,7 @@ Partial Class dlgStringHandling
         '
         'cmdQuestionMark
         '
-        Me.cmdQuestionMark.Location = New System.Drawing.Point(81, 44)
+        Me.cmdQuestionMark.Location = New System.Drawing.Point(81, 45)
         Me.cmdQuestionMark.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdQuestionMark.Name = "cmdQuestionMark"
         Me.cmdQuestionMark.Size = New System.Drawing.Size(38, 30)
@@ -402,7 +402,7 @@ Partial Class dlgStringHandling
         '
         'cmdDBackSlah
         '
-        Me.cmdDBackSlah.Location = New System.Drawing.Point(121, 105)
+        Me.cmdDBackSlah.Location = New System.Drawing.Point(120, 105)
         Me.cmdDBackSlah.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdDBackSlah.Name = "cmdDBackSlah"
         Me.cmdDBackSlah.Size = New System.Drawing.Size(38, 30)
@@ -412,7 +412,7 @@ Partial Class dlgStringHandling
         '
         'cmdStar
         '
-        Me.cmdStar.Location = New System.Drawing.Point(3, 44)
+        Me.cmdStar.Location = New System.Drawing.Point(3, 45)
         Me.cmdStar.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdStar.Name = "cmdStar"
         Me.cmdStar.Size = New System.Drawing.Size(38, 30)
@@ -442,7 +442,7 @@ Partial Class dlgStringHandling
         '
         'cmdSbackSlash
         '
-        Me.cmdSbackSlash.Location = New System.Drawing.Point(42, 106)
+        Me.cmdSbackSlash.Location = New System.Drawing.Point(42, 105)
         Me.cmdSbackSlash.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.cmdSbackSlash.Name = "cmdSbackSlash"
         Me.cmdSbackSlash.Size = New System.Drawing.Size(38, 30)
@@ -485,7 +485,7 @@ Partial Class dlgStringHandling
         'ucrReceiverForRegexExpression
         '
         Me.ucrReceiverForRegexExpression.frmParent = Me
-        Me.ucrReceiverForRegexExpression.Location = New System.Drawing.Point(259, 190)
+        Me.ucrReceiverForRegexExpression.Location = New System.Drawing.Point(259, 185)
         Me.ucrReceiverForRegexExpression.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.ucrReceiverForRegexExpression.Name = "ucrReceiverForRegexExpression"
         Me.ucrReceiverForRegexExpression.Selector = Nothing
@@ -504,7 +504,7 @@ Partial Class dlgStringHandling
         'ucrChkIncludeRegularExpressions
         '
         Me.ucrChkIncludeRegularExpressions.Checked = False
-        Me.ucrChkIncludeRegularExpressions.Location = New System.Drawing.Point(170, 55)
+        Me.ucrChkIncludeRegularExpressions.Location = New System.Drawing.Point(9, 242)
         Me.ucrChkIncludeRegularExpressions.Name = "ucrChkIncludeRegularExpressions"
         Me.ucrChkIncludeRegularExpressions.Size = New System.Drawing.Size(239, 20)
         Me.ucrChkIncludeRegularExpressions.TabIndex = 10
@@ -526,14 +526,14 @@ Partial Class dlgStringHandling
         Me.ucrInputReplaceBy.AddQuotesIfUnrecognised = True
         Me.ucrInputReplaceBy.IsMultiline = False
         Me.ucrInputReplaceBy.IsReadOnly = False
-        Me.ucrInputReplaceBy.Location = New System.Drawing.Point(259, 242)
+        Me.ucrInputReplaceBy.Location = New System.Drawing.Point(259, 233)
         Me.ucrInputReplaceBy.Name = "ucrInputReplaceBy"
         Me.ucrInputReplaceBy.Size = New System.Drawing.Size(138, 20)
         Me.ucrInputReplaceBy.TabIndex = 14
         '
         'ucrSaveStringHandling
         '
-        Me.ucrSaveStringHandling.Location = New System.Drawing.Point(9, 247)
+        Me.ucrSaveStringHandling.Location = New System.Drawing.Point(9, 268)
         Me.ucrSaveStringHandling.Name = "ucrSaveStringHandling"
         Me.ucrSaveStringHandling.Size = New System.Drawing.Size(224, 24)
         Me.ucrSaveStringHandling.TabIndex = 15
@@ -543,7 +543,7 @@ Partial Class dlgStringHandling
         Me.ucrInputPattern.AddQuotesIfUnrecognised = True
         Me.ucrInputPattern.IsMultiline = False
         Me.ucrInputPattern.IsReadOnly = False
-        Me.ucrInputPattern.Location = New System.Drawing.Point(259, 190)
+        Me.ucrInputPattern.Location = New System.Drawing.Point(259, 186)
         Me.ucrInputPattern.Name = "ucrInputPattern"
         Me.ucrInputPattern.Size = New System.Drawing.Size(138, 20)
         Me.ucrInputPattern.TabIndex = 12
@@ -560,7 +560,7 @@ Partial Class dlgStringHandling
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 273)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 293)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(406, 52)
         Me.ucrBase.TabIndex = 16
@@ -576,7 +576,7 @@ Partial Class dlgStringHandling
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(669, 331)
+        Me.ClientSize = New System.Drawing.Size(669, 351)
         Me.Controls.Add(Me.rdoRegex)
         Me.Controls.Add(Me.rdoFixed)
         Me.Controls.Add(Me.ucrReceiverForRegexExpression)

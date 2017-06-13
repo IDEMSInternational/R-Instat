@@ -45,8 +45,8 @@ Public Class dlgImportDataset
         clsReadXL = New RFunction
         'clsTempWorkbookImport = New RFunction
         'clsTempExcelPreview = New RFunction
-        ucrBase.clsRsyntax.SetPackageName("rio")
         ucrBase.clsRsyntax.SetFunction("import")
+        ucrBase.clsRsyntax.SetPackageName("rio")
         clsImportRDS.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_RDS")
         bFirstLoad = True
         bFromLibrary = False
@@ -272,6 +272,7 @@ Public Class dlgImportDataset
             'ucrInputName.SetName(strFileName, bSilent:=True)
         Else
             strFileType = strFileExt.Substring(1)
+            ucrBase.clsRsyntax.clsBaseFunction.SetPackageName("rio")
             ucrBase.clsRsyntax.clsBaseFunction.ClearParameters()
             ucrBase.clsRsyntax.SetFunction("import")
             ucrBase.clsRsyntax.AddParameter("file", Chr(34) & strFilePath & Chr(34))
@@ -327,6 +328,7 @@ Public Class dlgImportDataset
         '    control.Enabled = False
         'Next
         Cursor = Cursors.WaitCursor
+        ucrBase.OKEnabled(False)
         clsAsCharacterFunc.SetRCommand("convert_to_character_matrix")
         strTempDataFrameName = "temp"
         bToBeAssigned = ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned
@@ -358,8 +360,10 @@ Public Class dlgImportDataset
                         bValid = False
                     Else
                         ucrBase.clsRsyntax.RemoveParameter("nrows")
-                        ucrBase.clsRsyntax.RemoveParameter("rows")
-                        ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned = bToBeAssigned
+                    ucrBase.clsRsyntax.RemoveParameter("rows")
+                    'If readXL is not the base function this may be needed.
+                    clsReadXL.RemoveParameterByName("rows")
+                    ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned = bToBeAssigned
                         Try
                             frmMain.clsGrids.FillSheet(dfTemp, strTempDataFrameName, grdDataPreview, bIncludeDataTypes:=False)
                             grdDataPreview.Enabled = True
