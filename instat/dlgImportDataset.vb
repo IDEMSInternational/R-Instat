@@ -359,8 +359,10 @@ Public Class dlgImportDataset
                         bValid = False
                     Else
                         ucrBase.clsRsyntax.RemoveParameter("nrows")
-                        ucrBase.clsRsyntax.RemoveParameter("rows")
-                        ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned = bToBeAssigned
+                    ucrBase.clsRsyntax.RemoveParameter("rows")
+                    'If readXL is not the base function this may be needed.
+                    clsReadXL.RemoveParameterByName("rows")
+                    ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned = bToBeAssigned
                         Try
                             frmMain.clsGrids.FillSheet(dfTemp, strTempDataFrameName, grdDataPreview, bIncludeDataTypes:=False)
                             grdDataPreview.Enabled = True
