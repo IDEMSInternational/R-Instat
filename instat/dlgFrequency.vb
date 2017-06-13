@@ -223,7 +223,7 @@ Public Class dlgFrequency
         If ucrChkHTMLTable.Checked Then
             ucrBase.clsRsyntax.iCallType = 4
         Else
-            ucrBase.clsRsyntax.iCallType = 1
+            ucrBase.clsRsyntax.iCallType = 2 ' TODO fix this here and on NewSummaryTables
         End If
     End Sub
 
