@@ -1941,7 +1941,7 @@ data_object$set("public","split_date", function(col_name = "", week = FALSE, mon
     self$add_columns_to_data(col_name = col_name, col_data = weekday_name_vector)
   }
   if(month_val) {
-    month_val_vector <- as.integer(month(col_data))
+    month_val_vector <- as.integer(lubridate::month(col_data))
     col_name <- next_default_item(prefix = "month_val", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = month_val_vector)
   }
