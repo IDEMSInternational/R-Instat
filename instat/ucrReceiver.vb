@@ -17,7 +17,7 @@
 Imports instat
 Imports instat.Translations
 Public Class ucrReceiver
-    Public WithEvents Selector As ucrSelector
+    Public WithEvents ucrSelector As ucrSelector
     Public lstIncludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
     Public lstExcludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
     Public bFirstLoad As Boolean
@@ -29,16 +29,19 @@ Public Class ucrReceiver
     Public bExcludeFromSelector As Boolean = False
     Public Event SelectionChanged(sender As Object, e As EventArgs)
     Public WithEvents frmParent As Form
+    Public bRemoveLabels As Boolean = False
 
     Public strDatabaseQuery As String = ""
 
+    Private strPrvNcFilePath As String = ""
+
     Public bAddParameterIfEmpty As Boolean = False
     'If the control is used to set a parameter that is a string i.e. column = "ID"
-    Private bParameterIsString As Boolean = False
+    Protected bParameterIsString As Boolean = False
     'If the control is used to set a parameter that is an RFunction i.e. x = InstatDataObject$get_columns_from_data()
-    Private bParameterIsRFunction As Boolean = False
+    Protected bParameterIsRFunction As Boolean = False
     'The name of the data parameter in the get columns instat object method (should always be the same)
-    Private strColumnsParameterNameInRFunction As String = "col_names"
+    Protected strItemsParameterNameInRFunction As String = "col_names"
 
     'Should quotes be used when bParameterIsString = False
     Public bWithQuotes As Boolean = True
@@ -66,10 +69,14 @@ Public Class ucrReceiver
     End Sub
 
     Public Overridable Sub RemoveSelected()
-        If Selector IsNot Nothing Then
+        If IsCurrentReceiver() Then
             Selector.LoadList()
         End If
     End Sub
+
+    Private Function IsCurrentReceiver() As Boolean
+        Return Selector IsNot Nothing AndAlso Selector.CurrentReceiver IsNot Nothing AndAlso Selector.CurrentReceiver.Equals(Me)
+    End Function
 
     Public Overridable Sub Remove(strItems As String())
 
@@ -91,6 +98,18 @@ Public Class ucrReceiver
 
     End Sub
 
+    Public Property strNcFilePath As String
+        Get
+            Return strPrvNcFilePath
+        End Get
+        Set(strFilePath As String)
+            strPrvNcFilePath = strFilePath
+            If IsCurrentReceiver() Then
+                Selector.LoadList()
+            End If
+        End Set
+    End Property
+
     Public Overridable Function GetVariables(Optional bForceAsDataFrame As Boolean = False) As RFunction
         Dim clsGetVariablesFunc As New RFunction
         Return clsGetVariablesFunc
@@ -106,7 +125,7 @@ Public Class ucrReceiver
         Return strVarNames
     End Function
 
-    Public Sub SetMeAsReceiver()
+    Public Overridable Sub SetMeAsReceiver()
         If Selector IsNot Nothing Then
             Selector.SetCurrentReceiver(Me)
         End If
@@ -168,7 +187,7 @@ Public Class ucrReceiver
         AddIncludedMetadataProperty("class", {Chr(34) & strTemp & Chr(34)})
     End Sub
 
-    Public Sub SetIncludedDataTypes(strInclude As String())
+    Public Overridable Sub SetIncludedDataTypes(strInclude As String())
         Dim strTypes(strInclude.Count - 1) As String
 
         Array.Copy(strInclude, strTypes, strInclude.Length)
@@ -179,7 +198,7 @@ Public Class ucrReceiver
         AddIncludedMetadataProperty("class", strTypes)
     End Sub
 
-    Public Sub SetExcludedDataTypes(strExclude As String())
+    Public Overridable Sub SetExcludedDataTypes(strExclude As String())
         Dim strTypes(strExclude.Count - 1) As String
 
         Array.Copy(strExclude, strTypes, strExclude.Length)
@@ -215,7 +234,7 @@ Public Class ucrReceiver
         '    lstExcludedMetadataProperties.RemoveAt(iExcludeIndex)
         'End If
 
-        If Selector IsNot Nothing Then
+        If IsCurrentReceiver() Then
             Selector.LoadList()
         End If
 
@@ -228,7 +247,7 @@ Public Class ucrReceiver
         If iIncludeIndex <> -1 Then
             lstIncludedMetadataProperties.RemoveAt(iIncludeIndex)
         End If
-        If Selector IsNot Nothing Then
+        If IsCurrentReceiver() Then
             Selector.LoadList()
         End If
 
@@ -241,7 +260,7 @@ Public Class ucrReceiver
         If iIncludeIndex <> -1 Then
             lstExcludedMetadataProperties.RemoveAt(iIncludeIndex)
         End If
-        If Selector IsNot Nothing Then
+        If IsCurrentReceiver() Then
             Selector.LoadList()
         End If
     End Sub
@@ -271,12 +290,12 @@ Public Class ucrReceiver
         '    lstIncludedMetadataProperties.RemoveAt(iIncludeIndex)
         'End If
 
-        If Selector IsNot Nothing Then
+        If IsCurrentReceiver() Then
             Selector.LoadList()
         End If
     End Sub
 
-    Protected Overridable Sub Selector_ResetAll() Handles Selector.ResetReceivers
+    Protected Overridable Sub Selector_ResetAll() Handles ucrSelector.ResetReceivers
         Clear()
     End Sub
 
@@ -295,7 +314,26 @@ Public Class ucrReceiver
 
     Public Sub SetItemType(strNewType As String)
         strType = strNewType
-        If Selector IsNot Nothing Then
+        Select Case strType
+            Case "column"
+                strItemsParameterNameInRFunction = "col_names"
+            Case "metadata"
+                'TODO what should this be?
+                strItemsParameterNameInRFunction = ""
+            Case "graph"
+                strItemsParameterNameInRFunction = "graph_name"
+            Case "model"
+                strItemsParameterNameInRFunction = "model_name"
+            Case "table"
+                strItemsParameterNameInRFunction = "table_name"
+            Case "filter"
+                strItemsParameterNameInRFunction = "filter_name"
+            Case "link"
+                strItemsParameterNameInRFunction = "link_name"
+            Case "object"
+                strItemsParameterNameInRFunction = "object_name"
+        End Select
+        If IsCurrentReceiver() Then
             Selector.LoadList()
         End If
         bTypeSet = True
@@ -324,15 +362,19 @@ Public Class ucrReceiver
     Protected Overrides Sub SetControlValue()
         Dim clsTempDataParameter As RParameter
         Dim lstCurrentVariables As String() = Nothing
+        Dim clsTempParameter As RParameter
 
-        If clsParameter IsNot Nothing Then
+        clsTempParameter = GetParameter()
+        If clsTempParameter IsNot Nothing Then
             If bChangeParameterValue Then
-                If bParameterIsString AndAlso clsParameter.bIsString Then
-                    lstCurrentVariables = ExtractItemsFromRList(clsParameter.strArgumentValue)
-                ElseIf bParameterIsRFunction AndAlso clsParameter.bIsFunction Then
-                    clsTempDataParameter = clsParameter.clsArgumentCodeStructure.GetParameter(strColumnsParameterNameInRFunction)
+                If bParameterIsString AndAlso clsTempParameter.bIsString Then
+                    If strValuesToIgnore Is Nothing OrElse (Not strValuesToIgnore.Contains(clsTempParameter.strArgumentValue)) Then
+                        lstCurrentVariables = ExtractItemsFromRList(clsTempParameter.strArgumentValue)
+                    End If
+                ElseIf bParameterIsRFunction AndAlso clsTempParameter.bIsFunction Then
+                    clsTempDataParameter = clsTempParameter.clsArgumentCodeStructure.GetParameter(strItemsParameterNameInRFunction)
                     If clsTempDataParameter IsNot Nothing Then
-                        lstCurrentVariables = ExtractItemsFromRList(clsParameter.clsArgumentCodeStructure.GetParameter(strColumnsParameterNameInRFunction).strArgumentValue)
+                        lstCurrentVariables = ExtractItemsFromRList(clsTempParameter.clsArgumentCodeStructure.GetParameter(strItemsParameterNameInRFunction).strArgumentValue)
                     End If
                 End If
                 Clear()
@@ -349,31 +391,34 @@ Public Class ucrReceiver
         End If
     End Sub
 
-    Private Sub ucrReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles Me.SelectionChanged
-        UpdateParameter()
-    End Sub
-
-    Public Sub UpdateParameter()
-        If clsParameter Is Nothing Then
-            clsParameter = New RParameter
+    Public Overrides Sub UpdateParameter(clsTempParam As RParameter)
+        If clsTempParam Is Nothing Then
+            clsTempParam = New RParameter
         End If
+        'Could need bParameterIsString and bParameterIsRFunction to be properties of RParameter if two functions need string/function
         If bParameterIsString Then
-            clsParameter.SetArgumentValue(GetVariableNames(bWithQuotes))
+            'TODO this currently only works with one value to ignore. Also may need option not to set parameter value to strValuesToIgnore
+            '     although this currently can be done with bAddParameterIfEmpty = True
+            If IsEmpty() AndAlso strValuesToIgnore IsNot Nothing AndAlso strValuesToIgnore.Count = 1 Then
+                clsTempParam.SetArgumentValue(strValuesToIgnore(0))
+            Else
+                clsTempParam.SetArgumentValue(GetVariableNames(bWithQuotes))
+            End If
         ElseIf bParameterIsRFunction Then
-            clsParameter.SetArgument(GetVariables(bForceAsDataFrame))
+            clsTempParam.SetArgument(GetVariables(bForceAsDataFrame))
         End If
     End Sub
 
-    Public Sub SetParameterIsString()
+    Public Overridable Sub SetParameterIsString()
         bParameterIsString = True
         bParameterIsRFunction = False
-        UpdateParameter()
+        UpdateAllParameters()
     End Sub
 
-    Public Sub SetParameterIsRFunction()
+    Public Overridable Sub SetParameterIsRFunction()
         bParameterIsRFunction = True
         bParameterIsString = False
-        UpdateParameter()
+        UpdateAllParameters()
     End Sub
 
     Public Overrides Function IsRDefault() As Boolean
@@ -386,5 +431,22 @@ Public Class ucrReceiver
 
     Public Sub SetClimaticType(strTemp As String)
         AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & strTemp & Chr(34)})
+    End Sub
+
+    Public Overridable Property Selector As ucrSelector
+        Get
+            Return ucrSelector
+        End Get
+        Set(ucrNewSelector As ucrSelector)
+            ucrSelector = ucrNewSelector
+        End Set
+    End Property
+
+    Protected Overrides Sub ResetControlValue()
+        Clear()
+    End Sub
+
+    Public Overridable Sub SetTextColour(clrNew As Color)
+
     End Sub
 End Class

@@ -14,6 +14,8 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
+
 Public Class ucrCheck
     ''Is the checkbox linked to specific parameter values when checked/unchecked
     'Private bIsParameterValue As Boolean = True
@@ -25,19 +27,19 @@ Public Class ucrCheck
         Dim clsTempCond As New Condition
 
         strValueIfChecked = strNewValueIfChecked
-        If clsParameter Is Nothing Then
+        If GetParameter() Is Nothing Then
             MsgBox("Developer error: Parameter must be set before SetValueIfChecked can be run! Control will not update correctly.")
         Else
-            AddParameterValuesCondition(True, clsParameter.strArgumentName, strValueIfChecked)
+            AddParameterValuesCondition(True, GetParameter().strArgumentName, strValueIfChecked)
         End If
     End Sub
 
     Public Sub SetValueIfUnchecked(strNewValueIfUnchecked As String)
         strValueIfUnchecked = strNewValueIfUnchecked
-        If clsParameter Is Nothing OrElse clsParameter.strArgumentName Is Nothing Then
+        If GetParameter() Is Nothing OrElse GetParameter().strArgumentName Is Nothing Then
             MsgBox("Developer error: Parameter must be set with a parameter name before SetValueIfUnchecked can be run! Control will not update correctly.")
         Else
-            AddParameterValuesCondition(False, clsParameter.strArgumentName, strValueIfUnchecked)
+            AddParameterValuesCondition(False, GetParameter().strArgumentName, strValueIfUnchecked)
         End If
     End Sub
 
@@ -48,8 +50,8 @@ Public Class ucrCheck
         If bChangeParameterValue Then
             SetValuesCheckedAndUnchecked(strNewValueIfChecked, strNewValueIfUnchecked)
         ElseIf bAddRemoveParameter Then
-            AddParameterPresentCondition(True, clsParameter.strArgumentName)
-            AddParameterPresentCondition(False, clsParameter.strArgumentName, False)
+            AddParameterPresentCondition(True, GetParameter().strArgumentName)
+            AddParameterPresentCondition(False, GetParameter().strArgumentName, False)
         End If
     End Sub
 
@@ -59,15 +61,21 @@ Public Class ucrCheck
     End Sub
 
     Private Sub chkCheck_CheckedChanged(sender As Object, e As EventArgs) Handles chkCheck.CheckedChanged
-        If bChangeParameterValue AndAlso clsParameter IsNot Nothing Then
+        OnControlValueChanged()
+    End Sub
+
+    Public Overrides Sub UpdateParameter(clsTempParam As RParameter)
+        If bChangeParameterValue AndAlso clsTempParam IsNot Nothing Then
             If chkCheck.Checked Then
-                clsParameter.SetArgumentValue(strValueIfChecked)
+                If strValueIfChecked <> "" Then
+                    clsTempParam.SetArgumentValue(strValueIfChecked)
+                End If
             Else
-                clsParameter.SetArgumentValue(strValueIfUnchecked)
+                If strValueIfUnchecked <> "" Then
+                    clsTempParam.SetArgumentValue(strValueIfUnchecked)
+                End If
             End If
         End If
-        UpdateRCode()
-        OnControlValueChanged()
     End Sub
 
     Public Property Checked As Boolean
@@ -96,19 +104,24 @@ Public Class ucrCheck
     End Function
 
     Public Overrides Function GetValueToSet() As Object
-        If clsParameter IsNot Nothing Then
-            If clsParameter.bIsString Then
+        Dim clsMainParameter As RParameter
+
+        clsMainParameter = GetParameter()
+        If clsMainParameter IsNot Nothing Then
+            If clsMainParameter.bIsString Then
                 If bChangeParameterValue Then
-                    If clsParameter.strArgumentValue = strValueIfChecked OrElse clsParameter.strArgumentValue = strValueIfUnchecked Then
-                        Return (clsParameter.strArgumentValue = strValueIfChecked)
+                    If clsMainParameter.strArgumentValue = strValueIfChecked OrElse clsMainParameter.strArgumentValue = strValueIfUnchecked Then
+                        Return (clsMainParameter.strArgumentValue = strValueIfChecked)
                     Else
-                        Return clsParameter.strArgumentValue
+                        Return clsMainParameter.strArgumentValue
                     End If
                 ElseIf bAddRemoveParameter Then
-                    Return clsRCode.ContainsParameter(clsParameter)
+                    Return GetRCode().ContainsParameter(clsMainParameter)
+                Else
+                    Return Nothing
                 End If
-            ElseIf clsParameter.bIsFunction OrElse clsParameter.bIsOperator Then
-                Return clsParameter.clsArgumentCodeStructure
+            ElseIf clsMainParameter.bIsFunction OrElse clsMainParameter.bIsOperator Then
+                Return clsMainParameter.clsArgumentCodeStructure
             Else
                 Return Nothing
             End If
@@ -120,10 +133,15 @@ Public Class ucrCheck
     Protected Overrides Sub SetToValue(objTemp As Object)
         Dim bTempValue As Boolean
 
-        If Boolean.TryParse(objTemp, bTempValue) Then
-            Checked = bTempValue
+        If objTemp Is Nothing Then
+            'If no value reset to a default value
+            Checked = False
         Else
-            MsgBox("Developer error: Cannot set the value of " & Name & " because cannot convert value of object to boolean.")
+            If Boolean.TryParse(objTemp, bTempValue) Then
+                Checked = bTempValue
+            Else
+                MsgBox("Developer error: Cannot set the value of " & Name & " because cannot convert value of object to boolean.")
+            End If
         End If
     End Sub
 
@@ -143,9 +161,13 @@ Public Class ucrCheck
             If bChangeParameterValue Then
                 SetValuesCheckedAndUnchecked(strValueIfChecked, strValueIfUnchecked)
             ElseIf bAddRemoveParameter Then
-                AddParameterPresentCondition(True, clsParameter.strArgumentName)
-                AddParameterPresentCondition(False, clsParameter.strArgumentName, False)
+                AddParameterPresentCondition(True, GetParameter().strArgumentName)
+                AddParameterPresentCondition(False, GetParameter().strArgumentName, False)
             End If
         End If
+    End Sub
+
+    Protected Overrides Sub ResetControlValue()
+        Checked = False
     End Sub
 End Class
