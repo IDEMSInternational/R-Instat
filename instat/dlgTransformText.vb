@@ -36,6 +36,9 @@ Public Class dlgTransformText
     End Sub
 
     Private Sub InitialiseDialog()
+        Dim dctInputPad As New Dictionary(Of String, String)
+        Dim dctInputSeparator As New Dictionary(Of String, String)
+
         ucrBase.iHelpTopicID = 343
         ucrBase.clsRsyntax.bUseBaseFunction = True
 
@@ -78,7 +81,6 @@ Public Class dlgTransformText
         ucrPnlOperation.AddToLinkedControls(ucrNudWidth, {rdoPad}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         'ucrInputPad
-        Dim dctInputPad As New Dictionary(Of String, String)
         ucrInputPad.SetParameter(New RParameter("pad", 3))
         dctInputPad.Add("Space ( )", Chr(34) & " " & Chr(34))
         dctInputPad.Add("Hash #", Chr(34) & "#" & Chr(34))
@@ -88,6 +90,7 @@ Public Class dlgTransformText
         ucrInputPad.SetItems(dctInputPad)
         ucrInputPad.SetLinkedDisplayControl(lblPad)
         ucrInputPad.SetRDefault(Chr(34) & " " & Chr(34))
+        ucrInputPad.bAllowNonConditionValues = True
 
         'ucrNudWidth
         ucrNudWidth.SetParameter(New RParameter("width", 1))
@@ -139,7 +142,6 @@ Public Class dlgTransformText
         ucrChkLastOr.AddParameterIsRFunctionCondition(True, "start", True)
 
         ' ucrInputSeparator
-        Dim dctInputSeparator As New Dictionary(Of String, String)
         ucrInputSeparator.SetParameter(New RParameter("sep", 3))
         dctInputSeparator.Add("Space ( )", "fixed(" & Chr(34) & " " & Chr(34) & ")")
         dctInputSeparator.Add("Colon :", Chr(34) & ":" & Chr(34))
@@ -148,6 +150,7 @@ Public Class dlgTransformText
         ucrInputSeparator.SetItems(dctInputSeparator)
         ucrInputSeparator.SetLinkedDisplayControl(lblSeparator)
         ucrInputSeparator.SetRDefault("fixed(" & Chr(34) & " " & Chr(34) & ")")
+        ucrInputSeparator.bAllowNonConditionValues = True
 
         'rdoSubstring
         ucrPnlOperation.AddToLinkedControls(ucrNudFrom, {rdoSubstring}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
