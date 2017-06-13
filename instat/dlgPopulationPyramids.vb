@@ -37,18 +37,26 @@ Public Class dlgPopulationPyramids
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 455
         ucrBase.clsRsyntax.SetOperation("+")
+
+        clsRggplotFunction.SetPackageName("ggplot")
         clsRggplotFunction.SetRCommand("ggplot")
+
+        clsRaesFunction.SetPackageName("ggplot")
         clsRaesFunction.SetRCommand("aes")
         clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
         ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
+
+        clsRgeom_bar.SetPackageName("ggplot")
         clsRgeom_bar.SetRCommand("geom_bar")
         clsRgeom_bar.AddParameter("stat", Chr(34) & "identity" & Chr(34))
         ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_bar)
 
+        clsRgeom_bar2.SetPackageName("ggplot")
         clsRgeom_bar2.SetRCommand("geom_bar")
         clsRgeom_bar2.AddParameter("stat", Chr(34) & "identity" & Chr(34))
         ucrBase.clsRsyntax.AddOperatorParameter("geom_bar", clsRFunc:=clsRgeom_bar)
 
+        clsRgeom_CoordFlip.SetPackageName("ggplot")
         clsRgeom_CoordFlip.SetRCommand("coord_flip")
         ucrBase.clsRsyntax.AddOperatorParameter("coord_flip", "coord_flip")
 
