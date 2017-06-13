@@ -56,31 +56,38 @@ Public Class dlgMakeDate
         dctMonthItems.Add("Partial Word", Chr(34) & "%b" & Chr(34))
         dctMonthItems.Add("Full Word", Chr(34) & "%B" & Chr(34))
         ucrInputMonthOption.SetItems(dctMonthItems)
+        ucrInputMonthOption.SetDropDownStyleAsEditable(bAdditionsAllowed:=True)
 
         ucrInputDayOption.SetParameter(New RParameter("day_format", 4))
         dctDayItems.Add("By Month", Chr(34) & "%d" & Chr(34))
         ucrInputDayOption.SetItems(dctDayItems)
+        ucrInputDayOption.SetDropDownStyleAsEditable(bAdditionsAllowed:=True)
 
         ucrInputComboBoxMonthTwo.SetParameter(New RParameter("doy_typical_length", 3))
         dctMonthTwoItems.Add("365/366", Chr(34) & "365/366" & Chr(34))
         dctMonthTwoItems.Add("366", Chr(34) & "366" & Chr(34))
         ucrInputComboBoxMonthTwo.SetItems(dctMonthTwoItems)
+        ucrInputComboBoxMonthTwo.SetDropDownStyleAsEditable(bAdditionsAllowed:=True)
 
         ucrInputFormat.SetParameter(New RParameter("format", 1))
         dctDateFormat.Add("Year-Month-Day", Chr(34) & "%Y-%m-%d" & Chr(34))
         dctDateFormat.Add("Year/Month/Day", Chr(34) & "%Y/%m/%d" & Chr(34))
         dctDateFormat.Add("Day-Month-Year", Chr(34) & "%d-%m-%Y" & Chr(34))
         ucrInputFormat.SetItems(dctDateFormat)
+        ucrInputFormat.SetDropDownStyleAsEditable(bAdditionsAllowed:=True)
 
         ucrInputOrigin.SetParameter(New RParameter("origin", 1))
         dctdateorigin.Add("Excel", Chr(34) & "1899-12-30" & Chr(34))
         dctdateorigin.Add("Gregorian", Chr(34) & "1600-03-01" & Chr(34))
         ucrInputOrigin.SetItems(dctdateorigin)
+        ucrInputOrigin.SetDropDownStyleAsEditable(bAdditionsAllowed:=True)
+
 
         ucrInputYearOption.SetParameter(New RParameter("year_format", 6))
         dctYearItems.Add("4 Digit", Chr(34) & "%Y" & Chr(34))
         dctYearItems.Add("2 Digit", Chr(34) & "%y" & Chr(34))
         ucrInputYearOption.SetItems(dctYearItems)
+        ucrInputYearOption.SetDropDownStyleAsEditable(bAdditionsAllowed:=True)
         'TODO - ucrinputFomat
 
         'ucrInputSeparator.SetItems({"/", "-", "_", ".", ",", ";", ":"})
@@ -265,6 +272,7 @@ Public Class dlgMakeDate
         ucrReceiverDayThree.SetRCode(clsMakeYearMonthDay, bReset)
         ucrSelectorMakeDate.SetRCode(clsMakeYearMonthDay, bReset)
         ucrSelectorMakeDate.SetRCode(clsMakeYearDay, bReset)
+        GroupBoxDisplayOnReOpen()
     End Sub
 
     Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
@@ -362,4 +370,20 @@ Public Class dlgMakeDate
             ucrReceiverForDate.SetIncludedDataTypes({"numeric", "character", "factor", "integer"})
         End If
     End Sub
-    End Class
+
+    'Temporary fix: This should be deleted since - this should be automatic
+    Private Sub GroupBoxDisplayOnReOpen()
+        If rdoSingleColumn.Checked Then
+            grpSingleColumn.Visible = True
+        ElseIf rdoTwoColumns.Checked Then
+            grpTwoColumns.Visible = True
+        Else
+            grpThreeColumns.Visible = True
+        End If
+    End Sub
+
+    Private Sub ucrPnDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDate.ControlValueChanged
+
+    End Sub
+
+End Class
