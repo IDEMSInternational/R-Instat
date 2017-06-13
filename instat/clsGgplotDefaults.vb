@@ -80,7 +80,7 @@
         End Get
     End Property
 
-    Public Shared ReadOnly Property clsLocalAesfunc As RFunction
+    Public Shared ReadOnly Property clsAesFunction As RFunction
         Get
             Dim clslocalAesTempFunc As New RFunction
             clslocalAesTempFunc.SetPackageName("ggplot2")
