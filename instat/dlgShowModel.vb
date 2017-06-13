@@ -45,25 +45,53 @@ Public Class dlgShowModel
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.iCallType = 2
+        '  ucrBase.clsRsyntax.iCallType = 2
+
+
         ucrBase.iHelpTopicID = 157
         ucrReceiverExpressionForTablePlus.Selector = ucrSelectorForDataFrame
         ucrReceiverExpressionForTablePlus.SetMeAsReceiver()
         ucrReceiverExpressionForTablePlus.SetIncludedDataTypes({"numeric"})
+
+        ucrPnlDistTypes.AddRadioButton(rdoProbabilities)
+        ucrPnlDistTypes.AddRadioButton(rdoQuantiles)
+
+        ucrPnlDistTypes.AddFunctionNamesCondition(rdoQuantiles, "qdist")
+        ucrPnlDistTypes.AddFunctionNamesCondition(rdoQuantiles, "pdist")
+
         ucrSaveGraphResults.SetDataFrameSelector(ucrSelectorForDataFrame.ucrAvailableDataFrames)
         ucrSaveGraphResults.SetSaveTypeAsColumn()
         ucrSaveGraphResults.SetIsComboBox()
         ucrSaveGraphResults.SetLabelText("Save Graph  Result:")
+
+
         ucrChkEnterValues.SetText("Enter value(s)")
+
+        ucrChkDisplayGraphResults.SetParameter(New RParameter("plot"))
+        ucrChkDisplayGraphResults.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkDisplayGraphResults.SetText("Display Graph Results")
     End Sub
 
+
     Private Sub SetDefaults()
+
+        clsQuantiles = New RFunction
+        clsProbabilities = New RFunction
+
         ucrSelectorForDataFrame.Reset()
         ucrInputProbabilities.Reset()
         ucrSaveGraphResults.Reset()
-        rdoQuantiles.Checked = True
-        SetName()
+
+        clsProbabilities.SetPackageName("mosaic")
+        clsQuantiles.SetPackageName("mosaic")
+
+        clsProbabilities.SetRCommand("pdist")
+        clsQuantiles.SetRCommand("qdist")
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsQuantiles)
+
+
+
         ReceiverLabels()
         SaveResults()
         SetItems()
@@ -73,21 +101,17 @@ Public Class dlgShowModel
     Private Sub SetItems()
         If rdoProbabilities.Checked Then
             ucrInputProbabilities.SetItems({"1", "0.1, 1, 3, 5, 10 ", "-2, -1, 0, 1, 2"})
+            ucrInputProbabilities.SetName("1")
         Else
             ucrInputProbabilities.SetItems({"0.5", "0.1, 0.2, 0.4, 0.6, 0.8, 0.9 ", "0.2, 0.5, 0.8", " 0.5, 0.8, 0.9, 0.95, 0.99"})
+            ucrInputProbabilities.SetName("0.5")
         End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-    End Sub
-
-    Private Sub SetName()
-        If rdoProbabilities.Checked Then
-            ucrInputProbabilities.SetName("1")
-        Else
-            ucrInputProbabilities.SetName("0.5")
-        End If
+        SetRCodeForControls(True)
+        TestOKEnabled()
     End Sub
 
     Private Sub PqParameters()
@@ -134,47 +158,37 @@ Public Class dlgShowModel
         'End If
     End Sub
 
-    Private Sub DisplayGraphResults()
-        'If chkGraphResults.Checked Then
-        '    ucrBase.clsRsyntax.AddParameter("plot", "TRUE")
-        'Else
-        '    ucrBase.clsRsyntax.AddParameter("plot", "FALSE")
-        'End If
-    End Sub
     Private Sub rdoProbabilitiesandQuantiles_CheckedChanged(sender As Object, e As EventArgs)
-        SetName()
         SetItems()
-        ReceiverLabels()
+        receiverlabels()
     End Sub
 
-    Private Sub ReceiverLabels()
-        'ucrBase.clsRsyntax.ClearParameters()
-        'ucrBase.clsRsyntax.AddParameter("dist", Chr(34) & ucrDistributionsFOrTablePlus.clsCurrDistribution.strRName & Chr(34))
-        'PqParameters()
-        'DisplayGraphResults()
-        'If rdoProbabilities.Checked Then
-        '    If Not ucrInputNewColNameforTablePlus.bUserTyped Then
-        '        ucrInputNewColNameforTablePlus.SetPrefix("Prob")
-        '    End If
-        '    lblQuantValues.Visible = True
-        '    lblProbValues.Visible = False
-        '    ucrBase.clsRsyntax.SetFunction("mosaic:: pdist")
-        'Else
-        '    If Not ucrInputNewColNameforTablePlus.bUserTyped Then
-        '        ucrInputNewColNameforTablePlus.SetPrefix("Quant")
-        '    End If
-        '    lblQuantValues.Visible = False
-        '    lblProbValues.Visible = True
-        '    ucrBase.clsRsyntax.SetFunction("mosaic::qdist")
-        'End If
-        'For Each clstempparam In ucrDistributionsFOrTablePlus.clsCurrRFunction.clsParameters
-        '    ucrBase.clsRsyntax.AddParameter(clstempparam.Clone())
-        'Next
+    Private Sub receiverlabels()
+        ucrBase.clsRsyntax.ClearParameters()
+        ucrBase.clsRsyntax.AddParameter("dist", Chr(34) & ucrDistributionsFOrTablePlus.clsCurrDistribution.strRName & Chr(34))
+        PqParameters()
+        If rdoProbabilities.Checked Then
+            If Not ucrSaveGraphResults.bUserTyped Then
+                ucrSaveGraphResults.SetPrefix("prob")
+            End If
+            lblQuantValues.Visible = True
+            lblProbValues.Visible = False
+            ucrBase.clsRsyntax.SetFunction("mosaic:: pdist")
+        Else
+            If Not ucrSaveGraphResults.bUserTyped Then
+                ucrSaveGraphResults.SetPrefix("quant")
+            End If
+            lblQuantValues.Visible = False
+            lblProbValues.Visible = True
+            ucrBase.clsRsyntax.SetFunction("mosaic::qdist")
+        End If
+        For Each clstempparam In ucrDistributionsFOrTablePlus.clsCurrRFunction.clsParameters
+            ucrBase.clsRsyntax.AddParameter(clstempparam.Clone())
+        Next
     End Sub
 
     Private Sub ucrReceiverExpressionForTablePlus_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverExpressionForTablePlus.SelectionChanged
         ReceiverLabels()
-        DisplayGraphResults()
         TestOKEnabled()
     End Sub
 
