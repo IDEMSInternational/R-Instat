@@ -55,7 +55,6 @@ Public Class dlgFrequency
         ucrNudColumnFactors.SetParameter(New RParameter("n_column_factors", 4))
         ucrNudColumnFactors.SetRDefault(0)
 
-        ucrChkStoreResults.Enabled = False ' Temporary, checking this currently causes a crash
         ucrChkStoreResults.SetParameter(New RParameter("store_results", 5))
         ucrChkStoreResults.SetText("Store Results in Data Frame")
         ucrChkStoreResults.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
@@ -107,9 +106,9 @@ Public Class dlgFrequency
         ucrChkWeights.SetRDefault("NULL")
         ucrChkWeights.AddToLinkedControls(ucrReceiverSingle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChkRowNumbers.SetParameter(New RParameter("rnames", 18))
+        ucrChkRowNumbers.SetParameter(New RParameter("rnames", 18), bNewChangeParameterValue:=True)
         ucrChkRowNumbers.SetText("Show Row Names")
-        ucrChkRowNumbers.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkRowNumbers.SetRDefault("TRUE") ' temporary fix, this is not the actual R-default but we need to not run this parameter
 
         '19: caption = NULL
         '20 result_names = NULL
@@ -188,7 +187,7 @@ Public Class dlgFrequency
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         'sdgFrequency.SetRFunction(clsSummaryCount, bResetSubdialog)
         'bResetSubdialog = False
-        sdgFrequency.ShowDialog()
+        '        sdgFrequency.ShowDialog()
         'TestOKEnabled()
     End Sub
 
