@@ -118,7 +118,7 @@ Partial Class dlgTransformClimatic
         Me.rdoSpell.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSpell.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoSpell.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoSpell.Location = New System.Drawing.Point(239, 17)
+        Me.rdoSpell.Location = New System.Drawing.Point(237, 17)
         Me.rdoSpell.Name = "rdoSpell"
         Me.rdoSpell.Size = New System.Drawing.Size(100, 28)
         Me.rdoSpell.TabIndex = 3
@@ -135,7 +135,7 @@ Partial Class dlgTransformClimatic
         Me.rdoMoving.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoMoving.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoMoving.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.rdoMoving.Location = New System.Drawing.Point(43, 17)
+        Me.rdoMoving.Location = New System.Drawing.Point(41, 17)
         Me.rdoMoving.Name = "rdoMoving"
         Me.rdoMoving.Size = New System.Drawing.Size(100, 28)
         Me.rdoMoving.TabIndex = 1
@@ -153,7 +153,7 @@ Partial Class dlgTransformClimatic
         Me.rdoCount.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoCount.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoCount.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoCount.Location = New System.Drawing.Point(141, 17)
+        Me.rdoCount.Location = New System.Drawing.Point(139, 17)
         Me.rdoCount.Name = "rdoCount"
         Me.rdoCount.Size = New System.Drawing.Size(100, 28)
         Me.rdoCount.TabIndex = 2
@@ -171,7 +171,7 @@ Partial Class dlgTransformClimatic
         Me.rdoWaterBalance.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoWaterBalance.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoWaterBalance.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoWaterBalance.Location = New System.Drawing.Point(337, 17)
+        Me.rdoWaterBalance.Location = New System.Drawing.Point(335, 17)
         Me.rdoWaterBalance.Name = "rdoWaterBalance"
         Me.rdoWaterBalance.Size = New System.Drawing.Size(100, 28)
         Me.rdoWaterBalance.TabIndex = 4
@@ -409,7 +409,7 @@ Partial Class dlgTransformClimatic
         '
         'ucrPnlTransform
         '
-        Me.ucrPnlTransform.Location = New System.Drawing.Point(19, 16)
+        Me.ucrPnlTransform.Location = New System.Drawing.Point(17, 16)
         Me.ucrPnlTransform.Name = "ucrPnlTransform"
         Me.ucrPnlTransform.Size = New System.Drawing.Size(446, 29)
         Me.ucrPnlTransform.TabIndex = 0
