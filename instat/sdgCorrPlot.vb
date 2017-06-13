@@ -62,7 +62,7 @@ Public Class sdgCorrPlot
 
     Public Sub GGscatmatrix()
         dlgCorrelation.TempData()
-        clsRGGscatmatrix.SetPackageName("ggplot2")
+        clsRGGscatmatrix.SetPackageName("GGally")
         clsRGGscatmatrix.SetRCommand("ggscatmat")
         dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
         dlgCorrelation.ucrBase.clsRsyntax.SetBaseRFunction(clsRGGscatmatrix)
