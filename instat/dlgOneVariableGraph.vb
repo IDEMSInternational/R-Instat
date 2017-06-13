@@ -13,14 +13,13 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports instat
 Imports instat.Translations
 
 Public Class dlgOneVariableGraph
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
-
+    Dim clsOneVarGraph As New RFunction
     Private Sub dlgOneVariableGraph_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -37,22 +36,21 @@ Public Class dlgOneVariableGraph
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
+        clsOneVarGraph = New RFunction
 
         ucrSelectorOneVarGraph.Reset()
         ucrSaveGraph.Reset()
 
         'Define the default RFunction
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$graph_one_variable")
-        clsDefaultFunction.AddParameter("numeric", Chr(34) & "geom_boxplot" & Chr(34))
-        clsDefaultFunction.AddParameter("categorical", Chr(34) & "geom_bar" & Chr(34))
-        clsDefaultFunction.AddParameter("output", Chr(34) & "facets" & Chr(34))
-        clsDefaultFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        clsOneVarGraph.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$graph_one_variable")
+        clsOneVarGraph.AddParameter("numeric", Chr(34) & "geom_boxplot" & Chr(34))
+        clsOneVarGraph.AddParameter("categorical", Chr(34) & "geom_bar" & Chr(34))
+        clsOneVarGraph.AddParameter("output", Chr(34) & "facets" & Chr(34))
+        clsOneVarGraph.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
         ' Set default RFunction as the base function
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        ucrBase.clsRsyntax.SetBaseRFunction(clsOneVarGraph)
         bResetSubdialog = True
-        TestOkEnabled()
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
