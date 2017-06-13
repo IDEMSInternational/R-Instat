@@ -23,6 +23,14 @@ Public Class dlgRugPlot
     Private clsBaseOperator As New ROperator
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
+    Private clsLabsFunction As New RFunction
+    Private clsXlabsFunction As New RFunction
+    Private clsYlabFunction As New RFunction
+    Private clsXScalecontinuousFunction As New RFunction
+    Private clsYScalecontinuousFunction As New RFunction
+    Private clsRFacetFunction As New RFunction
+    Private clsThemeFunction As New RFunction
+    Private dctThemeFunctions As New Dictionary(Of String, RFunction)
 
     Private Sub dlgRugPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -83,7 +91,7 @@ Public Class dlgRugPlot
 
         ucrSaveGraph.Reset()
         ucrRugPlotSelector.Reset()
-        sdgPlots.Reset()
+        bResetSubdialog = True
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsDefaultFunction, iPosition:=0)
@@ -99,9 +107,19 @@ Public Class dlgRugPlot
         clsRgeom_RugPlotFunction.SetPackageName("ggplot2")
         clsRgeom_RugPlotFunction.SetRCommand("geom_rug")
 
+        clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
+        clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
+        clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
+        clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
+        clsYScalecontinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone()
+        clsRFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
+        clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone
+        dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
+        clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction
+
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrRugPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
-        bResetSubdialog = True
+
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
@@ -133,13 +151,14 @@ Public Class dlgRugPlot
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetDataFrame(strNewDataFrame:=ucrRugPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        sdgPlots.SetRCode(clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, ucrNewBaseSelector:=ucrRugPlotSelector, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
+        bResetSubdialog = False
     End Sub
 
     Private Sub cmdRugPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdRugPlotOptions.Click
         ''''''' i wonder if all this will be needed for the new system
-        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsDefaultFunction, clsTempGeomFunc:=clsRgeom_RugPlotFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrRugPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True, bIgnoreGlobalAes:=False)
+        'sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsDefaultFunction, clsTempGeomFunc:=clsRgeom_RugPlotFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrRugPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True, bIgnoreGlobalAes:=False)
         sdgLayerOptions.ShowDialog()
 
         For Each clsParam In clsRaesFunction.clsParameters

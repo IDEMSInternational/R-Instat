@@ -14,16 +14,26 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
+
 Public Class dlgBarAndPieChart
     Private clsRggplotFunction As New RFunction
     Private clsRgeomBarFunction As New RFunction
     Private clsBarAesFunction As New RFunction
     Private clsPieAesFunction As New RFunction
-
     Private clsBaseOperator As New ROperator
     Private clsRCoordPolarParam As New RParameter
+
+    Private clsLabsFunction As New RFunction
+    Private clsXlabFunction As New RFunction
+    Private clsYlabFunction As New RFunction
+    Private clsXScalecontinuousFunction As New RFunction
+    Private clsYScalecontinuousFunction As New RFunction
+    Private clsRFacetFunction As New RFunction
+    Private clsThemeFuction As New RFunction
+    Private dctThemeFunctions As New Dictionary(Of String, RFunction)
     Private bReset As Boolean = True
     Private bFirstLoad As Boolean = True
+    Private bResetSubdialog As Boolean = True
 
     Private Sub cmdOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -38,6 +48,7 @@ Public Class dlgBarAndPieChart
         autoTranslate(Me)
         TestOkEnabled()
     End Sub
+
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrFactorReceiver.SetRCode(clsBarAesFunction, bReset)
         ucrFactorReceiver.AddAdditionalCodeParameterPair(clsPieAesFunction, New RParameter("fill", 0), iAdditionalPairNo:=1)
@@ -95,7 +106,7 @@ Public Class dlgBarAndPieChart
         ucrSecondReceiver.bWithQuotes = False
         ucrSecondReceiver.SetParameterIsString()
 
-        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
+        ' sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         ucrSaveBar.SetIsComboBox()
         ucrSaveBar.SetCheckBoxText("Save Graph")
         ucrSaveBar.SetDataFrameSelector(ucrBarChartSelector.ucrAvailableDataFrames)
@@ -127,6 +138,7 @@ Public Class dlgBarAndPieChart
         ucrBarChartSelector.Reset()
         ucrFactorReceiver.SetMeAsReceiver()
         ucrSaveBar.Reset()
+        bResetSubdialog = True
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
@@ -146,15 +158,25 @@ Public Class dlgBarAndPieChart
         clsRgeomBarFunction.SetPackageName("ggplot2")
         clsRgeomBarFunction.SetRCommand("geom_bar")
 
+        clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
+
+        clsXlabFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
+        clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone()
+        clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
+        clsYScalecontinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone
+        clsRFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
+        clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
+        clsThemeFuction = GgplotDefaults.clsDefaultThemeFunction.Clone
+        dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
     End Sub
 
     Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged
-        SetDailogOptions()
+        SetDialogOptions()
     End Sub
 
-    Private Sub SetDailogOptions()
+    Private Sub SetDialogOptions()
         If rdoBarChart.Checked Then
             clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsBarAesFunction, iPosition:=1)
             ucrSaveBar.SetPrefix("bar")
@@ -176,17 +198,18 @@ Public Class dlgBarAndPieChart
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
-        sdgPlots.Reset()
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetDataFrame(strNewDataFrame:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        sdgPlots.SetRCode(clsNewOperator:=clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewThemeFunction:=clsThemeFuction, dctNewThemeFunctions:=dctThemeFunctions, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrBarChartSelector, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
+        bResetSubdialog = False
         'Warning, when coordinate flip is added to coordinates tab on sdgPLots, then link with ucrChkFlipCoordinates...
     End Sub
 
     Private Sub cmdBarChartOptions_Click(sender As Object, e As EventArgs) Handles cmdBarChartOptions.Click
-        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeomBarFunction, clsTempAesFunc:=clsBarAesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True, bIgnoreGlobalAes:=False)
+        'What should global and local aes be?
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomBarFunction, clsNewGlobalAesFunc:=clsBarAesFunction, clsNewLocalAes:=clsBarAesFunction, bFixGeom:=True, strDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True)
         sdgLayerOptions.ShowDialog()
         For Each clsParam In clsBarAesFunction.clsParameters
             If clsParam.strArgumentName = "x" Then
@@ -199,7 +222,7 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub cmdPieChartOptions_Click(sender As Object, e As EventArgs) Handles cmdPieChartOptions.Click
-        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeomBarFunction, clsTempAesFunc:=clsPieAesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True)
+        'sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeomBarFunction, clsTempAesFunc:=clsPieAesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True)
         sdgLayerOptions.ShowDialog()
         For Each clsParam In clsPieAesFunction.clsParameters
             If clsParam.strArgumentName = "x" Then

@@ -14,6 +14,8 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <PublishUrl>C:\Users\deaspo\Desktop\applications\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -33,8 +35,6 @@
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -120,10 +120,9 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
     <Reference Include="UIAutomationProvider" />
-    <Reference Include="unvell.ReoGrid, Version=1.2.3.0, Culture=neutral, PublicKeyToken=0a947d9ccc179105, processorArchitecture=MSIL">
+    <Reference Include="unvell.ReoGrid, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\unvell.ReoGrid.dll.1.2.3.0\lib\20\unvell.ReoGrid.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>lib\unvell.ReoGrid.dll</HintPath>
     </Reference>
     <Reference Include="unvell.ReoScript, Version=1.5.0.0, Culture=neutral, PublicKeyToken=85339a558a3a0c58, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -148,6 +147,7 @@
   <ItemGroup>
     <Compile Include="clsBlockReader.vb" />
     <Compile Include="clsCondition.vb" />
+    <Compile Include="clsGgplotDefaults.vb" />
     <Compile Include="clsRCodeStructure.vb" />
     <Compile Include="dlgAddComment.Designer.vb">
       <DependentUpon>dlgAddComment.vb</DependentUpon>
@@ -183,6 +183,12 @@
       <DependentUpon>dlgCliData.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgCliData.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgClimaticSummary.Designer.vb">
+      <DependentUpon>dlgClimaticSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimaticSummary.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgClimdex.Designer.vb">
@@ -557,10 +563,10 @@
     <Compile Include="dlgTwoWayFrequencies.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DlgUseDate.Designer.vb">
-      <DependentUpon>DlgUseDate.vb</DependentUpon>
+    <Compile Include="dlgUseDate.Designer.vb">
+      <DependentUpon>dlgUseDate.vb</DependentUpon>
     </Compile>
-    <Compile Include="DlgUseDate.vb">
+    <Compile Include="dlgUseDate.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgViewAndRemoveKeys.Designer.vb">
@@ -718,6 +724,12 @@
       <DependentUpon>sdgOneWayFrequencies.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgOneWayFrequencies.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgThemes.Designer.vb">
+      <DependentUpon>sdgThemes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgThemes.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgTwoWayFrequencies.Designer.vb">
@@ -1260,6 +1272,12 @@
     <Compile Include="ucrDialogDisabled.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrElementRectControl.Designer.vb">
+      <DependentUpon>ucrElementRectControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrElementRectControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrFilter.Designer.vb">
       <DependentUpon>ucrFilter.vb</DependentUpon>
     </Compile>
@@ -1276,6 +1294,12 @@
       <DependentUpon>ucrGeom.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrGeom.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrGridUnit.Designer.vb">
+      <DependentUpon>ucrGridUnit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrGridUnit.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrInputComboBox.Designer.vb">
@@ -1824,12 +1848,6 @@
     <Compile Include="dlgSummary.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgSummaryTables.designer.vb">
-      <DependentUpon>dlgSummaryTables.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgSummaryTables.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgThreeSummaries.Designer.vb">
       <DependentUpon>dlgThreeSummaries.vb</DependentUpon>
     </Compile>
@@ -2156,6 +2174,18 @@
     <Compile Include="ucrSelectorByDataFrameAddRemove.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrELementTextControl.Designer.vb">
+      <DependentUpon>ucrELementTextControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrELementTextControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrElementLineControl.Designer.vb">
+      <DependentUpon>ucrElementLineControl.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrElementLineControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrVariablename.designer.vb">
       <DependentUpon>ucrVariablename.vb</DependentUpon>
     </Compile>
@@ -2301,6 +2331,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCliData.resx">
       <DependentUpon>dlgCliData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimaticSummary.resx">
+      <DependentUpon>dlgClimaticSummary.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgClimdex.resx">
       <DependentUpon>dlgClimdex.vb</DependentUpon>
@@ -2983,8 +3016,8 @@
     <EmbeddedResource Include="dlgRemoveUnusedLevels.sw-KE.resx">
       <DependentUpon>dlgRemoveUnusedLevels.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DlgUseDate.resx">
-      <DependentUpon>DlgUseDate.vb</DependentUpon>
+    <EmbeddedResource Include="dlgUseDate.resx">
+      <DependentUpon>dlgUseDate.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgUseGraph.fr-FR.resx">
       <DependentUpon>dlgUseGraph.vb</DependentUpon>
@@ -4011,15 +4044,6 @@
     <EmbeddedResource Include="dlgSummary.sw-KE.resx">
       <DependentUpon>dlgSummary.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgSummaryTables.fr-FR.resx">
-      <DependentUpon>dlgSummaryTables.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgSummaryTables.resx">
-      <DependentUpon>dlgSummaryTables.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgSummaryTables.sw-KE.resx">
-      <DependentUpon>dlgSummaryTables.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgTransform.fr-FR.resx">
       <DependentUpon>dlgTransform.vb</DependentUpon>
     </EmbeddedResource>
@@ -4177,6 +4201,9 @@
     <EmbeddedResource Include="sdgSimpleRegOptions.sw-KE.resx">
       <DependentUpon>sdgSimpleRegOptions.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgThemes.resx">
+      <DependentUpon>sdgThemes.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgTwoWayFrequencies.resx">
       <DependentUpon>sdgTwoWayFrequencies.vb</DependentUpon>
     </EmbeddedResource>
@@ -4306,6 +4333,9 @@
     <EmbeddedResource Include="ucrDistributionsWithParameters.sw-KE.resx">
       <DependentUpon>ucrDistributionsWithParameters.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucrElementRectControl.resx">
+      <DependentUpon>ucrElementRectControl.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucrFactor.fr-FR.resx">
       <DependentUpon>ucrFactor.vb</DependentUpon>
     </EmbeddedResource>
@@ -4341,6 +4371,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrGeom.sw-KE.resx">
       <DependentUpon>ucrGeom.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrGridUnit.resx">
+      <DependentUpon>ucrGridUnit.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrInput.fr-FR.resx">
       <DependentUpon>ucrInput.vb</DependentUpon>
@@ -4531,6 +4564,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrSelectorByDataFrameAddRemove.sw-KE.resx">
       <DependentUpon>ucrSelectorByDataFrameAddRemove.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrELementTextControl.resx">
+      <DependentUpon>ucrELementTextControl.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrElementLineControl.resx">
+      <DependentUpon>ucrElementLineControl.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrVariablename.fr-FR.resx">
       <DependentUpon>ucrVariablename.vb</DependentUpon>
@@ -5431,6 +5470,54 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\zoo_1.8-0.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\backports_1.1.0.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\checkmate_1.8.2.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\devtools_1.13.1.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\GlobalOptions_0.0.12.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\htmlTable_1.9.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\knitr_1.16.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\mclust_5.3.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\plotrix_3.6-5.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\purrr_0.2.2.2.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\R6_2.2.1.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\Rcpp_0.12.11.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\readr_1.1.1.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\rje_1.9.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\rlang_0.1.1.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\tibble_1.3.1.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\tidyr_0.6.3.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
