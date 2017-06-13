@@ -80,6 +80,15 @@
         End Get
     End Property
 
+    Public Shared ReadOnly Property clsLocalAesfunc As RFunction
+        Get
+            Dim clslocalAesTempFunc As New RFunction
+            clslocalAesTempFunc.SetPackageName("ggplot2")
+            clslocalAesTempFunc.SetRCommand("aes")
+            Return clslocalAesTempFunc
+        End Get
+    End Property
+
     Public Shared ReadOnly Property dctThemeFunctions As Dictionary(Of String, RFunction)
         Get
             Dim dctTemp As New Dictionary(Of String, RFunction)
