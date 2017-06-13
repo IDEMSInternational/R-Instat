@@ -63,7 +63,7 @@ Partial Class dlgCumulativeDistribution
         Me.cmdPlotOptions.Size = New System.Drawing.Size(120, 25)
         Me.cmdPlotOptions.TabIndex = 5
         Me.cmdPlotOptions.Tag = "Plot_Options"
-        Me.cmdPlotOptions.Text = "Plot Options"
+        Me.cmdPlotOptions.Text = "Options"
         Me.cmdPlotOptions.UseVisualStyleBackColor = True
         '
         'ucrChkExceedancePlots
