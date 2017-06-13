@@ -103,6 +103,15 @@ data_object <- R6::R6Class("data_object",
 )
 
 data_object$set("public", "set_data", function(new_data, messages=TRUE, check_names = TRUE) {
+  if(is.matrix(new_data)) new_data <- as.data.frame(new_data)
+  else if(is.ts(new_data)) {
+    ind <- zoo::index(new_data)
+    new_data <- data.frame(index = ind, value = new_data)
+  }
+  else if(is.vector(new_data) && !is.list(new_data)) {
+    new_data <- as.data.frame(new_data)
+  }
+  #TODO convert ts objects correctly
   if(!is.data.frame(new_data)) {
     stop("Data set must be of type: data.frame")
   }
@@ -304,7 +313,7 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
     #curr_data <- self$get_data_frame(use_current_filter = FALSE)
     curr_data <- private$data
     for(i in seq_along(names(curr_data))) {
-      col <- curr_data[ ,i]
+      col <- curr_data[[i]]
       ind <- which(names(attributes(col)) == "levels")
       if(length(ind) > 0) col_attributes <- attributes(col)[-ind]
       else col_attributes <- attributes(col)
@@ -810,7 +819,8 @@ data_object$set("public", "is_metadata", function(str) {
 data_object$set("public", "is_variables_metadata", function(str, col, return_vector = FALSE) {
   if(str == data_type_label) return(TRUE)
   if(missing(col)) {
-    return(any(sapply(self$get_column_names(), function(x) str %in% names(attributes(self$get_columns_from_data(x, use_current_filter = FALSE)))), na.rm = TRUE))
+    dat <- self$get_data_frame(use_current_filter = FALSE)
+    return(any(sapply(dat, function(x) str %in% names(attributes(x))), na.rm = TRUE))
   }
   else {
     out <- sapply(col, function(x) str %in% names(attributes(self$get_columns_from_data(x, use_current_filter = FALSE))))
@@ -887,7 +897,13 @@ data_object$set("public", "reorder_columns_in_data", function(col_order) {
     if(!(setequal(col_order,names(private$data)))) stop("Invalid column order")
   }
   else stop("column order must be a numeric or character vector")
+  old_metadata <- attributes(private$data)
   self$set_data(private$data[ ,col_order])
+  for(name in names(old_metadata)) {
+    if(!name %in% c("names", "class", "row.names")) {
+      self$append_to_metadata(name, old_metadata[[name]])
+    }
+  }
   self$append_to_changes(list(Col_order, col_order))
 }
 )
