@@ -144,6 +144,7 @@ Public Class dlgNewSummaryTables
         clsDefaultFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList, iPosition:=2)
         clsDefaultFunction.AddParameter("store_results", "FALSE", iPosition:=5)
         clsDefaultFunction.AddParameter("rnames", "FALSE", iPosition:=18)
+        clsDefaultFunction.SetAssignTo("last_table", strTempDataframe:=ucrSelectorSummaryTables.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_table")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
         bResetSubdialog = True
@@ -225,10 +226,8 @@ Public Class dlgNewSummaryTables
     Private Sub ucrChkHTMLTable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkHTMLTable.ControlValueChanged
         If ucrChkHTMLTable.Checked Then
             ucrBase.clsRsyntax.iCallType = 4
-            clsDefaultFunction.SetAssignTo("last_table", strTempDataframe:=ucrSelectorSummaryTables.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_table")
         Else
             ucrBase.clsRsyntax.iCallType = 2
-            clsDefaultFunction.RemoveAssignTo()
         End If
     End Sub
 
