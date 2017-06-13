@@ -42,40 +42,42 @@ Public Class dlgMakeDate
     Private Sub InitialiseDialog()
         'helpID
         ucrBase.iHelpTopicID = 461
+        Dim dctYearItems As New Dictionary(Of String, String)
+        Dim dctMonthItems As New Dictionary(Of String, String)
+        Dim dctDayItems As New Dictionary(Of String, String)
+        Dim dctMonthTwoItems As New Dictionary(Of String, String)
+        Dim dctDateFormat As New Dictionary(Of String, String)
+        Dim dctdateorigin As New Dictionary(Of String, String)
+        'Dim dctDayItemsDOY As New Dictionary(Of String, String)
+        'Dim dctDayItemsDOY As New Dictionary(Of String, String)
 
         ucrInputMonthOption.SetParameter(New RParameter("month_format", 5))
-        Dim dctMonthItems As New Dictionary(Of String, String)
         dctMonthItems.Add("Numerical", Chr(34) & "%m" & Chr(34))
         dctMonthItems.Add("Partial Word", Chr(34) & "%b" & Chr(34))
         dctMonthItems.Add("Full Word", Chr(34) & "%B" & Chr(34))
         ucrInputMonthOption.SetItems(dctMonthItems)
 
         ucrInputDayOption.SetParameter(New RParameter("day_format", 4))
-        Dim dctDayItems As New Dictionary(Of String, String)
         dctDayItems.Add("By Month", Chr(34) & "%d" & Chr(34))
         ucrInputDayOption.SetItems(dctDayItems)
 
         ucrInputComboBoxMonthTwo.SetParameter(New RParameter("doy_typical_length", 3))
-        Dim dctMonthTwoItems As New Dictionary(Of String, String)
         dctMonthTwoItems.Add("365/366", Chr(34) & "365/366" & Chr(34))
         dctMonthTwoItems.Add("366", Chr(34) & "366" & Chr(34))
         ucrInputComboBoxMonthTwo.SetItems(dctMonthTwoItems)
 
         ucrInputFormat.SetParameter(New RParameter("format", 1))
-        Dim dctDateFormat As New Dictionary(Of String, String)
         dctDateFormat.Add("Year-Month-Day", Chr(34) & "%Y-%m-%d" & Chr(34))
         dctDateFormat.Add("Year/Month/Day", Chr(34) & "%Y/%m/%d" & Chr(34))
         dctDateFormat.Add("Day-Month-Year", Chr(34) & "%d-%m-%Y" & Chr(34))
         ucrInputFormat.SetItems(dctDateFormat)
 
         ucrInputOrigin.SetParameter(New RParameter("origin", 1))
-        Dim dctdateorigin As New Dictionary(Of String, String)
         dctdateorigin.Add("Excel", Chr(34) & "1899-12-30" & Chr(34))
         dctdateorigin.Add("Gregorian", Chr(34) & "1600-03-01" & Chr(34))
         ucrInputOrigin.SetItems(dctdateorigin)
 
         ucrInputYearOption.SetParameter(New RParameter("year_format", 6))
-        Dim dctYearItems As New Dictionary(Of String, String)
         dctYearItems.Add("4 Digit", Chr(34) & "%Y" & Chr(34))
         dctYearItems.Add("2 Digit", Chr(34) & "%y" & Chr(34))
         ucrInputYearOption.SetItems(dctYearItems)
@@ -87,7 +89,6 @@ Public Class dlgMakeDate
         'ucrInputMonth.SetItems({"Numerical", "Partial Word", "Full Word"})
 
         'ucrInputDay.SetParameter(New RParameter(""))
-        'Dim dctDayItemsDOY As New Dictionary(Of String, String)
         'dctDayItemsDOY.Add("By Month", Chr(34) & "%d" & Chr(34))
         'dctDayItemsDOY.Add("By Year", Chr(34) & "%j" & Chr(34))
         'ucrInputDay.SetItems(dctDayItemsDOY)
@@ -97,7 +98,6 @@ Public Class dlgMakeDate
         'ucrInputMonth.SetItems({"Numerical", "Partial Word", "Full Word"})
 
         'ucrInputDay.SetParameter(New RParameter(""))
-        'Dim dctDayItemsDOY As New Dictionary(Of String, String)
         'dctDayItemsDOY.Add("By Month", Chr(34) & "%d" & Chr(34))
         'dctDayItemsDOY.Add("By Year", Chr(34) & "%j" & Chr(34))
         'ucrInputDay.SetItems(dctDayItemsDOY)
