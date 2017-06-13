@@ -78,9 +78,6 @@ Public Class dlgWaterBalance
         ucrInputEvaporation.SetValidationTypeAsNumeric()
         ucrInputEvaporation.SetLinkedDisplayControl(lblEvaporation)
 
-        ucrInputColName.SetParameter(New RParameter("result_name"))
-        ucrInputColName.SetName("water_bal")
-
         ucrNudCapacity.Maximum = Integer.MaxValue
         ucrNudCapacity.Increment = 10
 
@@ -92,8 +89,23 @@ Public Class dlgWaterBalance
 
         ucrInputEvaporation.SetValidationTypeAsNumeric()
 
-        'ucrPnlEndofRains.AddToLinkedControls({ucrNudTotalOverDays, ucrNudAmount}, {rdoRain}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
-        'ucrPnlEndofRains.AddToLinkedControls({ucrInputEvaporation, ucrNudWBLessThan, ucrNudCapacity}, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputEndRainColName.SetParameter(New RParameter("result_name"))
+        ucrInputEndRainColName.SetName("End_of_rains")
+        ucrInputEndRainColName.SetLinkedDisplayControl(lblEndRainsColName)
+
+        ucrInputWBColName.SetParameter(New RParameter("result_name"))
+        ucrInputWBColName.SetName("Water_bal")
+        ucrInputWBColName.SetLinkedDisplayControl(lblWBColName)
+
+        ucrPnlEndofRains.AddToLinkedControls({ucrInputEndRainColName}, {rdoRain}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
+        'ucrPnlEndofRains.AddToLinkedControls({ucrInputWBColName}, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
+        'ucrPnlEndofRains.AddToLinkedControls({ucrInputEndRainColName, ucrInputWBColName}, {rdoBoth}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
+
+
+        'ucrPnlEndofRains.AddParameterPresentCondition(rdoRain, "manipulations")
+        'ucrPnlEndofRains.AddParameterPresentCondition(rdoWaterBalance, "manipulations", False)
+        'ucrPnlEndofRains.AddParameterPresentCondition(rdoBoth, "manipulations")
+
     End Sub
 
     Private Sub SetDefaults()
@@ -215,8 +227,9 @@ Public Class dlgWaterBalance
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        'ucrPnlTransform.SetRCode(clsMatchFun, bReset)
-        'ucrNudSumOver.SetRCode(clsRRollFuncExpr, bReset)
+        ucrInputEndRainColName.SetRCode(clsFirstWaterBalance0, bReset)
+        'ucrInputWBColName.SetRCode(clsWaterBalance0, bReset)
+
         'ucrReceiverData.SetRCode(clsRRollFuncExpr, bReset)
         'ucrInputSum.SetRCode(clsMatchFun, bReset)
         'ucrInputColName.SetRCode(clsRWater_bal, bReset)
@@ -284,7 +297,7 @@ Public Class dlgWaterBalance
 
         clsFirstWaterBalance0.AddParameter("type", Chr(34) & "summary" & Chr(34))
         clsFirstWaterBalance0.AddParameter("function_exp", Chr(34) & ucrReceiverDOY.GetVariableNames(False) & "[" & 1 & "]" & Chr(34))
-        clsFirstWaterBalance0.AddParameter("result_name", Chr(34) & "First_Water_Balance_0" & Chr(34))
+        'clsFirstWaterBalance0.AddParameter("result_name", Chr(34) & "First_Water_Balance_0" & Chr(34))
         clsFirstWaterBalance0.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")")
         clsFirstWaterBalance0.AddParameter("manipulations", clsRFunctionParameter:=clsFirstWaterBalance0List)
         clsFirstWaterBalance0.AddParameter("save", "2")
@@ -313,7 +326,7 @@ Public Class dlgWaterBalance
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrSaveWaterBalance_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputColName.ControlValueChanged
+    Private Sub ucrSaveWaterBalance_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputEndRainColName.ControlValueChanged
         TestOKEnabled()
     End Sub
 

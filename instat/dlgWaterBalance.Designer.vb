@@ -55,8 +55,10 @@ Partial Class dlgWaterBalance
         Me.grpWaterBalance = New System.Windows.Forms.GroupBox()
         Me.ucrNudWBLessThan = New instat.ucrNud()
         Me.ucrNudCapacity = New instat.ucrNud()
-        Me.ucrInputColName = New instat.ucrInputTextBox()
-        Me.lblNewColName = New System.Windows.Forms.Label()
+        Me.ucrInputEndRainColName = New instat.ucrInputTextBox()
+        Me.lblEndRainsColName = New System.Windows.Forms.Label()
+        Me.lblWBColName = New System.Windows.Forms.Label()
+        Me.ucrInputWBColName = New instat.ucrInputTextBox()
         Me.grpRainParameters.SuspendLayout()
         Me.grpRain.SuspendLayout()
         Me.grpWaterBalance.SuspendLayout()
@@ -252,7 +254,7 @@ Partial Class dlgWaterBalance
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(8, 429)
+        Me.ucrBase.Location = New System.Drawing.Point(8, 457)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 56)
         Me.ucrBase.TabIndex = 23
@@ -433,33 +435,55 @@ Partial Class dlgWaterBalance
         Me.ucrNudCapacity.TabIndex = 36
         Me.ucrNudCapacity.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrInputColName
+        'ucrInputEndRainColName
         '
-        Me.ucrInputColName.AddQuotesIfUnrecognised = True
-        Me.ucrInputColName.IsMultiline = False
-        Me.ucrInputColName.IsReadOnly = False
-        Me.ucrInputColName.Location = New System.Drawing.Point(176, 403)
-        Me.ucrInputColName.Name = "ucrInputColName"
-        Me.ucrInputColName.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputColName.TabIndex = 50
+        Me.ucrInputEndRainColName.AddQuotesIfUnrecognised = True
+        Me.ucrInputEndRainColName.IsMultiline = False
+        Me.ucrInputEndRainColName.IsReadOnly = False
+        Me.ucrInputEndRainColName.Location = New System.Drawing.Point(153, 403)
+        Me.ucrInputEndRainColName.Name = "ucrInputEndRainColName"
+        Me.ucrInputEndRainColName.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputEndRainColName.TabIndex = 50
         '
-        'lblNewColName
+        'lblEndRainsColName
         '
-        Me.lblNewColName.AutoSize = True
-        Me.lblNewColName.Location = New System.Drawing.Point(30, 403)
-        Me.lblNewColName.Name = "lblNewColName"
-        Me.lblNewColName.Size = New System.Drawing.Size(101, 13)
-        Me.lblNewColName.TabIndex = 51
-        Me.lblNewColName.Tag = "New Column Name:"
-        Me.lblNewColName.Text = "New Column Name:"
+        Me.lblEndRainsColName.AutoSize = True
+        Me.lblEndRainsColName.Location = New System.Drawing.Point(23, 403)
+        Me.lblEndRainsColName.Name = "lblEndRainsColName"
+        Me.lblEndRainsColName.Size = New System.Drawing.Size(120, 13)
+        Me.lblEndRainsColName.TabIndex = 51
+        Me.lblEndRainsColName.Tag = "End of Rains Col Name:"
+        Me.lblEndRainsColName.Text = "End of Rains Col Name:"
+        '
+        'lblWBColName
+        '
+        Me.lblWBColName.AutoSize = True
+        Me.lblWBColName.Location = New System.Drawing.Point(24, 432)
+        Me.lblWBColName.Name = "lblWBColName"
+        Me.lblWBColName.Size = New System.Drawing.Size(130, 13)
+        Me.lblWBColName.TabIndex = 53
+        Me.lblWBColName.Tag = "Water Balance Col Name:"
+        Me.lblWBColName.Text = "Water Balance Col Name:"
+        '
+        'ucrInputWBColName
+        '
+        Me.ucrInputWBColName.AddQuotesIfUnrecognised = True
+        Me.ucrInputWBColName.IsMultiline = False
+        Me.ucrInputWBColName.IsReadOnly = False
+        Me.ucrInputWBColName.Location = New System.Drawing.Point(161, 432)
+        Me.ucrInputWBColName.Name = "ucrInputWBColName"
+        Me.ucrInputWBColName.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputWBColName.TabIndex = 52
         '
         'dlgWaterBalance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(441, 492)
-        Me.Controls.Add(Me.lblNewColName)
-        Me.Controls.Add(Me.ucrInputColName)
+        Me.ClientSize = New System.Drawing.Size(439, 519)
+        Me.Controls.Add(Me.lblWBColName)
+        Me.Controls.Add(Me.ucrInputWBColName)
+        Me.Controls.Add(Me.lblEndRainsColName)
+        Me.Controls.Add(Me.ucrInputEndRainColName)
         Me.Controls.Add(Me.grpWaterBalance)
         Me.Controls.Add(Me.grpRain)
         Me.Controls.Add(Me.lblStation)
@@ -530,6 +554,8 @@ Partial Class dlgWaterBalance
     Friend WithEvents ucrNudCapacity As ucrNud
     Friend WithEvents ucrNudTo As ucrNud
     Friend WithEvents ucrNudFrom As ucrNud
-    Friend WithEvents ucrInputColName As ucrInputTextBox
-    Friend WithEvents lblNewColName As Label
+    Friend WithEvents ucrInputEndRainColName As ucrInputTextBox
+    Friend WithEvents lblEndRainsColName As Label
+    Friend WithEvents lblWBColName As Label
+    Friend WithEvents ucrInputWBColName As ucrInputTextBox
 End Class
