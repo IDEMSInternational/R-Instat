@@ -62,6 +62,7 @@ Public Class dlgWaterBalance
         ucrReceiverYear.bAutoFill = True
         ucrReceiverStation.bAutoFill = True
 
+        clsAddKey.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
         clsREndofRains.SetRCommand("instat_calculation$new")
         clsREndofRains.SetAssignTo("end_of_rains_calculation")
         ucrPnlEndofRains.AddRadioButton(rdoRain)
@@ -246,9 +247,13 @@ Public Class dlgWaterBalance
 
     Private Sub AddKeyMethod()
         If Not ucrReceiverDate.IsEmpty Then
-            clsAddKey.AddParameter("col_name", ucrReceiverDate.GetVariableNames)
+            If Not ucrReceiverStation.IsEmpty Then
+                clsAddKey.AddParameter("col_names", "c(" & ucrReceiverStation.GetVariableNames & "," & ucrReceiverDate.GetVariableNames & ")")
+            Else
+                clsAddKey.AddParameter("col_names", ucrReceiverDate.GetVariableNames)
+            End If
         Else
-            clsAddKey.RemoveParameterByName("col_name")
+            clsAddKey.RemoveParameterByName("col_names")
         End If
     End Sub
 
@@ -312,7 +317,12 @@ Public Class dlgWaterBalance
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverRainfall.ControlContentsChanged ', ucrNudCapacity.ControlContentsChanged, ucrNudFrom.ControlContentsChanged, ucrNudTo.ControlContentsChanged, ucrInputEvaporation.ControlContentsChanged, ucrNudWBLessThan.ControlContentsChanged
+    Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDOY.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverRainfall.ControlContentsChanged ', ucrNudCapacity.ControlContentsChanged, ucrNudFrom.ControlContentsChanged, ucrNudTo.ControlContentsChanged, ucrInputEvaporation.ControlContentsChanged, ucrNudWBLessThan.ControlContentsChanged
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrDateControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged
+        AddKeyMethod()
         TestOKEnabled()
     End Sub
 
@@ -361,9 +371,11 @@ Public Class dlgWaterBalance
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
         SetGroupByFuncCalcFrom()
+        AddKeyMethod()
     End Sub
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
+        frmMain.clsRLink.RunScript(clsAddKey.ToScript, strComment:="Water Balance: Defining Date column as key")
         DayFromAndToMethod()
         WaterBalance()
         clsReplaceNA.SetAssignTo("replace_NA")
@@ -382,6 +394,7 @@ Public Class dlgWaterBalance
 
     Private Sub ucrSelectorForWaterBalance_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrSelectorForWaterBalance.ControlContentsChanged, ucrReceiverRainfall.ControlContentsChanged
         strCurrDataName = Chr(34) & ucrSelectorForWaterBalance.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34)
+        clsAddKey.AddParameter("data_name", strCurrDataName)
         clsReplaceNA.AddParameter("function_exp", Chr(34) & "replace(" & ucrReceiverRainfall.GetVariableNames(False) & ", is.na(" & ucrReceiverRainfall.GetVariableNames(False) & ")," & ucrNudCapacity.Value & ")" & Chr(34))
         clsWaterBalance0.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames() & ")")
         clsReplaceNA.AddParameter("calculated_from", " list(" & strCurrDataName & "= " & ucrReceiverRainfall.GetVariableNames() & ")")
