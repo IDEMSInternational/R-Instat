@@ -64,8 +64,8 @@ Public Class dlgTransformClimatic
         ucrReceiverDOY.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "doy" & Chr(34)})
         ucrReceiverDOY.bAutoFill = True
 
-        clsRTransform.SetRCommand("instat_calculation$new")
-        clsRTransform.SetAssignTo("transform_calculation")
+        'clsRTransform.SetRCommand("instat_calculation$new")
+        'clsRTransform.SetAssignTo("transform_calculation")
 
         ucrInputThreshold.SetParameter(New RParameter("threshold", 1))
         ucrInputThreshold.SetValidationTypeAsNumeric()
@@ -149,7 +149,7 @@ Public Class dlgTransformClimatic
         ucrChkValuesUnderThreshold.Checked = False
         ucrInputSpellLower.SetName(0)
         ucrInputSpellUpper.SetName(0.85)
-
+        ucrInputColName.bUserTyped = False
         ' RDO1
         clsTransformGroupByFunc.SetRCommand("instat_calculation$new")
         clsTransformGroupByFunc.AddParameter("type", Chr(34) & "by" & Chr(34), iPosition:=2)
@@ -200,6 +200,8 @@ Public Class dlgTransformClimatic
         clsTransformManipulationsFunc.SetRCommand("list")
         clsTransformManipulationsFunc.AddParameter("group_by", clsRFunctionParameter:=clsTransformGroupByFunc, bIncludeArgumentName:=False, iPosition:=0)
 
+        clsRTransform.SetRCommand("instat_calculation$new")
+        clsRTransform.SetAssignTo("transform_calculation")
         clsRTransform.AddParameter("function_exp", Chr(34) & clsRRollFuncExpr.ToScript.ToString & Chr(34), iPosition:=2)
         clsRTransform.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=1)
         clsRTransform.AddParameter("result_name", Chr(34) & "moving_sum" & Chr(34), iPosition:=3)
