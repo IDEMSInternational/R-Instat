@@ -19,7 +19,7 @@ Public Class dlgFrequency
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsDefaultFunction As New RFunction
-    Private clsSummaryCount As New RFunction
+    '    Private clsSummaryCount As New RFunction
     Private bResetSubdialog As Boolean = False
     Private lstCheckboxes As New List(Of ucrCheck)
     Private bRCodeSet As Boolean = True
@@ -39,7 +39,9 @@ Public Class dlgFrequency
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.iCallType = 2
+        Dim dctPercentageType As New Dictionary(Of String, String)
+        ucrBase.clsRsyntax.iCallType = 4
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         ucrSelectorFrequency.SetParameter(New RParameter("data_name", 0))
         ucrSelectorFrequency.SetParameterIsString()
@@ -53,15 +55,11 @@ Public Class dlgFrequency
         ucrNudColumnFactors.SetParameter(New RParameter("n_column_factors", 4))
         ucrNudColumnFactors.SetRDefault(0)
 
+        ucrChkStoreResults.Enabled = False ' Temporary, checking this currently causes a crash
         ucrChkStoreResults.SetParameter(New RParameter("store_results", 5))
         ucrChkStoreResults.SetText("Store Results in Data Frame")
         ucrChkStoreResults.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkStoreResults.SetRDefault("TRUE")
-
-        ucrChkOmitMissing.SetParameter(New RParameter("na.rm", 7))
-        ucrChkOmitMissing.SetText("Omit Missing Values")
-        ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkOmitMissing.SetRDefault("FALSE")
 
         '8: summary_name = NA
 
@@ -96,6 +94,7 @@ Public Class dlgFrequency
         ucrChkHTMLTable.SetRDefault("TRUE")
 
         ucrNudSigFigs.SetParameter(New RParameter("signif_fig", 14))
+        ucrNudSigFigs.SetMinMax(0, 22)
         ucrNudSigFigs.SetRDefault(2)
 
         ucrInputNA.SetParameter(New RParameter("na_display", 15))
@@ -115,54 +114,47 @@ Public Class dlgFrequency
         '19: caption = NULL
         '20 result_names = NULL
 
-        '2: summaries,
-        '   alltypes_collection <- c(count_non_missing_label, count_missing_label, count_label, mode_label)
-        '       numeric_collection <- c(count_non_missing_label, count_missing_label, count_label, mode_label, min_label, max_label, mean_label, sd_label, range_label, median_label, sum_label, var_label)
-        '       factor_collection <- c(count_non_missing_label, count_missing_label, count_label, mode_label) #maximum and minimum labels should be added when we distinguish ordered factors
-        '       ordered_factor_collection <- c(count_non_missing_label, count_missing_label, count_label, mode_label, min_label, max_label)
+        ucrChkDisplayAsPercentage.SetParameter(New RParameter("percentage_type", 21))
+        ucrChkDisplayAsPercentage.SetText("As Percentages")
+        ucrChkDisplayAsPercentage.SetValuesCheckedAndUnchecked(Chr(34) & "factors" & Chr(34), Chr(34) & "none" & Chr(34))
+        ucrChkDisplayAsPercentage.SetRDefault(Chr(34) & "none" & Chr(34))
 
-        '21: percentage_type = "none"
-        '  ucrInputukukj.SetParameter(New RParameter("percentage_type", 21))
-        Dim dctPatternPairs As New Dictionary(Of String, String)
+        ucrReceiverMultiplePercentages.SetParameter(New RParameter("perc_total_factors", 23))
+        ucrReceiverMultiplePercentages.SetParameterIsString()
+        ucrReceiverMultiplePercentages.Selector = ucrSelectorFrequency
+        ucrReceiverMultiplePercentages.SetDataType("factor") ' TODO data this accepts must be in the other receiver too
+        ucrChkDisplayAsPercentage.AddToLinkedControls(ucrReceiverMultiplePercentages, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrReceiverMultiplePercentages.SetLinkedDisplayControl(lblFactorsAsPercentage)
 
+        ucrChkPercentageProportion.SetParameter(New RParameter("perc_decimal", 25))
+        ucrChkPercentageProportion.SetText("Display as Decimal")
+        ucrChkPercentageProportion.SetRDefault("FALSE")
 
-        '22:     perc_total_columns = NULL
-        '23: perc_total_factors = c()
-        '24:     perc_total_filter = NULL,
+        ucrChkDisplayAsPercentage.AddToLinkedControls(ucrChkPercentageProportion, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChkPercentageDecimal.SetParameter(New RParameter("perc_decimal", 25))
-        ucrChkPercentageDecimal.SetText("Display as decimal")
-        ucrChkPercentageDecimal.SetRDefault("FALSE") ' only enabled if percentage type <> none.
-
-        'ucrChkOverallPercentages.SetText("Overall Percentages")
-        'ucrChkPercentagesOf.SetText("Percentages of")
-
-        'ucrChkPercentagesOf.AddToLinkedControls(ucrSingleReceiver, {True}, bNewLinkedHideIfParameterMissing:=True)
-        'ucrNudColumnFactors.SetMinMax(0, frmMain.clsRLink.GetDataFrameLength(ucrSelectorFrequency.ucrAvailableDataFrames.cboAvailableDataFrames.Text))
-        'ucrNudDecimals.SetMinMax(0, 5)
-
-        ''lstCheckboxes = New List(Of ucrCheck)
-        ''lstCheckboxes.AddRange({ucrChkCounts}) ' add in here percentages, etc too?
-        ''For Each ctrTemp As ucrCheck In lstCheckboxes
-        ''    ctrTemp.SetParameterValue(Chr(34) & ctrTemp.GetParameter().strArgumentName & Chr(34))
-        ''    ctrTemp.SetParameterIncludeArgumentName(False)
-        ''Next
+        'ucrSave
+        ucrSaveTable.SetPrefix("frequency_table")
+        ucrSaveTable.SetSaveTypeAsTable()
+        ucrSaveTable.SetDataFrameSelector(ucrSelectorFrequency.ucrAvailableDataFrames)
+        ucrSaveTable.SetIsComboBox()
+        ucrSaveTable.SetCheckBoxText("Save Table")
+        ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
     End Sub
 
     Private Sub SetDefaults()
         clsDefaultFunction = New RFunction
-        clsSummaryCount = New RFunction
+        '        clsSummaryCount = New RFunction
 
         ucrReceiverFactors.SetMeAsReceiver()
         ucrSelectorFrequency.Reset()
         ucrSaveTable.Reset()
         ucrSaveTable.SetName("summary_table") ' change this to prefix later. currently, if this is prefix then it is blank
 
-        clsSummaryCount.SetRCommand("c")
-        clsSummaryCount.AddParameter("count_label", "count_label", bIncludeArgumentName:=False) ' TODO decide which default(s) to use?
+        '        clsSummaryCount.SetRCommand("c")
+        '        clsSummaryCount.AddParameter("count_label", "count_label", bIncludeArgumentName:=False) ' TODO decide which default(s) to use?
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
-        clsDefaultFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummaryCount, iPosition:=2)
+        clsDefaultFunction.AddParameter("summaries", "count_label", iPosition:=2) 'clsRFunctionParameter:=clsSummaryCount, iPosition:=2)
         clsDefaultFunction.AddParameter("store_results", "FALSE", iPosition:=5)
         clsDefaultFunction.AddParameter("rnames", "FALSE", iPosition:=18)
         clsDefaultFunction.SetAssignTo("last_table", strTempDataframe:=ucrSelectorFrequency.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_table")
@@ -180,7 +172,7 @@ Public Class dlgFrequency
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverFactors.IsEmpty AndAlso ucrSaveTable.IsComplete AndAlso ucrNudSigFigs.GetText <> "" AndAlso ucrNudColumnFactors.GetText <> "" AndAlso (Not ucrChkWeights.Checked OrElse (ucrChkWeights.Checked AndAlso Not ucrReceiverSingle.IsEmpty)) AndAlso (Not ucrChkPercentagesOf.Checked OrElse (ucrChkPercentagesOf.Checked AndAlso Not ucrSingleReceiver.IsEmpty)) AndAlso Not ucrReceiverFactors.IsEmpty AndAlso Not clsSummaryCount.clsParameters.Count = 0 Then
+        If Not ucrReceiverFactors.IsEmpty AndAlso ucrSaveTable.IsComplete AndAlso ucrNudSigFigs.GetText <> "" AndAlso ucrNudColumnFactors.GetText <> "" AndAlso (Not ucrChkWeights.Checked OrElse (ucrChkWeights.Checked AndAlso Not ucrReceiverSingle.IsEmpty)) AndAlso Not ucrReceiverFactors.IsEmpty Then 'AndAlso Not clsSummaryCount.clsParameters.Count = 0 Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -190,7 +182,7 @@ Public Class dlgFrequency
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
-        TestOkEnabled()
+        TestOKEnabled()
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
@@ -201,7 +193,7 @@ Public Class dlgFrequency
     End Sub
 
     Private Sub EnableCheckSummaries()
-        If ucrReceiverFactors.lstSelectedVariables.Items.Count > 1 OrElse clsSummaryCount.clsParameters.Count > 1 Then ' TODO get this to work for clsSummariesList > 1
+        If ucrReceiverFactors.lstSelectedVariables.Items.Count > 1 Then 'OrElse clsSummaryCount.clsParameters.Count > 1 Then ' TODO get this to work for clsSummariesList > 1
             '    ucrChkSummaries.Enabled = True ' temporarily disabled while ucrChkSummaries is disabled
             'Else
             ucrChkSummaries.Enabled = False
@@ -212,11 +204,11 @@ Public Class dlgFrequency
         ucrNudColumnFactors.Maximum = ucrReceiverFactors.lstSelectedVariables.Items.Count
     End Sub
 
-    Private Sub ucrChkWeights_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWeights.ControlValueChanged
+    Private Sub SettingReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWeights.ControlValueChanged, ucrChkDisplayAsPercentage.ControlValueChanged, ucrChkWeights.ControlValueChanged
         If ucrChkWeights.Checked Then
             ucrReceiverSingle.SetMeAsReceiver()
-        ElseIf ucrChkPercentagesOf.Checked Then
-            ucrSingleReceiver.SetMeAsReceiver()
+        ElseIf ucrChkDisplayAsPercentage.Checked Then
+            ucrReceiverMultiplePercentages.SetMeAsReceiver()
         Else
             ucrReceiverFactors.SetMeAsReceiver()
         End If
@@ -245,7 +237,7 @@ Public Class dlgFrequency
         End If
     End Sub
 
-    Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactors.ControlContentsChanged, ucrSaveTable.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrReceiverSingle.ControlContentsChanged, ucrChkPercentagesOf.ControlContentsChanged, ucrSingleReceiver.ControlContentsChanged, ucrNudSigFigs.ControlContentsChanged, ucrNudColumnFactors.ControlContentsChanged
+    Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactors.ControlContentsChanged, ucrSaveTable.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrReceiverSingle.ControlContentsChanged, ucrNudSigFigs.ControlContentsChanged, ucrNudColumnFactors.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
