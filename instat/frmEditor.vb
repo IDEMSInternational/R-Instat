@@ -44,7 +44,7 @@ Public Class frmEditor
     Private Sub frmEditor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         FreezeToHereToolStripMenuItem.Enabled = False
         UnfreezeToolStripMenuItem.Enabled = False
-        frmMain.clsGrids.SetData(grdData)
+        'frmMain.clsGrids.SetData(grdData)
         grdData.Visible = False
         autoTranslate(Me)
         'Disable Autoformat cell
@@ -288,7 +288,7 @@ Public Class frmEditor
     End Sub
 
     Private Sub insertSheet_Click(sender As Object, e As EventArgs) Handles insertSheet.Click
-        dlgFileNew.ShowDialog()
+        dlgNewDataFrame.ShowDialog()
     End Sub
 
     Private Sub deleteSheet_Click(sender As Object, e As EventArgs) Handles deleteSheet.Click
@@ -433,11 +433,11 @@ Public Class frmEditor
     End Sub
 
     Private Sub renameSheet_Click(sender As Object, e As EventArgs) Handles renameSheet.Click
-        dlgRenameSheet.ShowDialog()
+        dlgRenameDataFrame.ShowDialog()
     End Sub
 
     Private Sub MoveOrCopySheet_Click(sender As Object, e As EventArgs) Handles CopySheet.Click
-        dlgCopySheet.ShowDialog()
+        dlgCopyDataFrame.ShowDialog()
     End Sub
 
     Private Sub mnuConvertVariate_Click(sender As Object, e As EventArgs) Handles mnuConvertVariate.Click
@@ -544,7 +544,7 @@ Public Class frmEditor
     End Sub
 
     Private Sub reorderSheet_Click(sender As Object, e As EventArgs) Handles reorderSheet.Click
-        dlgReorderSheet.ShowDialog()
+        dlgReorderDataFrame.ShowDialog()
     End Sub
 
     Private Sub UpdateRFunctionDataFrameParameters()
@@ -587,7 +587,7 @@ Public Class frmEditor
     End Sub
 
     Private Sub frmEditor_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
-        frmMain.mnuViewDataView.Checked = Me.Visible
+        'frmMain.mnuViewDataView.Checked = Me.Visible
     End Sub
 
     Private Sub clearColumnFilterToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles clearColumnFilterToolStripMenuItem.Click
