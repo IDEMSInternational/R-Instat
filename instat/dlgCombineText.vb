@@ -52,6 +52,7 @@ Public Class dlgCombineText
         dctSeparator.Add("Underscore _", Chr(34) & "_" & Chr(34))
         ucrInputSeparator.SetItems(dctSeparator)
         ucrInputSeparator.SetRDefault(Chr(34) & "" & Chr(34))
+        ucrInputSeparator.bAllowNonConditionValues = True
 
         ' ucrSaveColumn
         ucrSaveColumn.SetIsTextBox()
