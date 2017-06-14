@@ -116,6 +116,7 @@ Public Class dlgImportGriddedData
         dctFiles.Add("Monthly NMME deg1p0", Chr(34) & "monthly_NMME_deg1p0" & Chr(34))
         dctFiles.Add("Monthly Precipitation", Chr(34) & "monthly_prcp" & Chr(34))
         ucrInputDataFile.SetItems(dctFiles)
+        ucrInputDataFile.SetDropDownStyleAsNonEditable()
 
         clsRDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_from_iri")
         clsRDefaultFunction.AddParameter("download_from", Chr(34) & "CHIRPS_V2P0" & Chr(34))
