@@ -609,6 +609,7 @@ data_object$set("public", "rename_column_in_data", function(curr_col_name = "", 
 )
 
 data_object$set("public", "remove_columns_in_data", function(cols=c()) {
+  if(length(cols) == self$get_column_count()) stop("Cannot delete all columns through this function. Use delete_dataframe to delete the data.")
   for(col_name in cols) {
     # Column name must be character
     if(!is.character(col_name)) {
