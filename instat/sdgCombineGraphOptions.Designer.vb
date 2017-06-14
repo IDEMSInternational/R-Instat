@@ -98,6 +98,7 @@ Partial Class sdgCombineGraphOptions
         Me.grdLayout.SheetTabNewButtonVisible = True
         Me.grdLayout.SheetTabVisible = True
         Me.grdLayout.SheetTabWidth = 60
+        Me.grdLayout.ShowScrollEndSpacing = True
         Me.grdLayout.Size = New System.Drawing.Size(343, 179)
         Me.grdLayout.TabIndex = 5
         Me.grdLayout.Text = "ReoGridControl1"
@@ -232,6 +233,7 @@ Partial Class sdgCombineGraphOptions
         '
         'ucrInputLeft
         '
+        Me.ucrInputLeft.AddQuotesIfUnrecognised = True
         Me.ucrInputLeft.IsMultiline = False
         Me.ucrInputLeft.IsReadOnly = False
         Me.ucrInputLeft.Location = New System.Drawing.Point(60, 100)
@@ -241,6 +243,7 @@ Partial Class sdgCombineGraphOptions
         '
         'ucrInputRight
         '
+        Me.ucrInputRight.AddQuotesIfUnrecognised = True
         Me.ucrInputRight.IsMultiline = False
         Me.ucrInputRight.IsReadOnly = False
         Me.ucrInputRight.Location = New System.Drawing.Point(60, 70)
@@ -250,6 +253,7 @@ Partial Class sdgCombineGraphOptions
         '
         'ucrInputBottom
         '
+        Me.ucrInputBottom.AddQuotesIfUnrecognised = True
         Me.ucrInputBottom.IsMultiline = False
         Me.ucrInputBottom.IsReadOnly = False
         Me.ucrInputBottom.Location = New System.Drawing.Point(60, 42)
@@ -259,6 +263,7 @@ Partial Class sdgCombineGraphOptions
         '
         'ucrInputTop
         '
+        Me.ucrInputTop.AddQuotesIfUnrecognised = True
         Me.ucrInputTop.IsMultiline = False
         Me.ucrInputTop.IsReadOnly = False
         Me.ucrInputTop.Location = New System.Drawing.Point(60, 15)
