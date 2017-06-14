@@ -89,8 +89,8 @@ Public Class dlgCombineforGraphics
     Private Sub cmdLayout_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         'this SetRFunction is still empty in subdialog but will be fixed soon.
         sdgCombineGraphOptions.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, bResetSubDialog)
-        bResetSubDialog = False
         sdgCombineGraphOptions.ShowDialog()
+        bResetSubDialog = False
     End Sub
 
     Private Sub AllControls_ControlContentsChanged() Handles ucrCombineGraphReceiver.ControlContentsChanged, ucrSave.ControlContentsChanged
