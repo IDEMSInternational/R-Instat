@@ -120,10 +120,10 @@ Public Class dlgAddLink
                 clsColumnNames.AddParameter("to_columns", "c(" & strKeyColumns & ")")
                 bCanAutoLink = chrKeyColumns.ToArray.All(Function(strCol) strColumnNames.Contains(strCol))
                 If bCanAutoLink Then
-                    lviTemp.BackColor = Color.Green
+                    lviTemp.BackColor = Color.LightGreen
                     ucrBase.OKEnabled(True)
                 Else
-                    lviTemp.BackColor = Color.Red
+                    lviTemp.BackColor = Color.LightCoral
                     ucrBase.OKEnabled(False)
                 End If
                 lvwLinkViewBox.Items.Add(lviTemp)
