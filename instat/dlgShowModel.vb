@@ -49,7 +49,8 @@ Public Class dlgShowModel
         ucrSelectorForDataFrame.Reset()
         ucrInputProbabilities.Reset()
         ucrInputNewColNameforTablePlus.Reset()
-
+        ucrDistributionsFOrTablePlus.SetRDistributions()
+        ucrDistributionsFOrTablePlus.SetParameters()
         rdoQuantiles.Checked = True
         SetName()
         ucrBase.clsRsyntax.iCallType = 2
