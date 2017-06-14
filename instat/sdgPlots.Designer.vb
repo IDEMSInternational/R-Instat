@@ -63,11 +63,11 @@ Partial Class sdgPlots
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.lblFont = New System.Windows.Forms.Label()
         Me.cmdAllOptions = New System.Windows.Forms.Button()
-        Me.lblTheme = New System.Windows.Forms.Label()
-        Me.ucrInputThemes = New instat.ucrInputComboBox()
         Me.tbpCoordinates = New System.Windows.Forms.TabPage()
         Me.lblWarning = New System.Windows.Forms.Label()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
+        Me.urChkSelectTheme = New instat.ucrCheck()
+        Me.ucrInputThemes = New instat.ucrInputComboBox()
         Me.tbpPlotsOptions.SuspendLayout()
         Me.tbpFacet.SuspendLayout()
         Me.tbpLayers.SuspendLayout()
@@ -467,11 +467,11 @@ Partial Class sdgPlots
         '
         'tbpThemes
         '
+        Me.tbpThemes.Controls.Add(Me.urChkSelectTheme)
+        Me.tbpThemes.Controls.Add(Me.ucrInputThemes)
         Me.tbpThemes.Controls.Add(Me.GroupBox1)
         Me.tbpThemes.Controls.Add(Me.lblFont)
         Me.tbpThemes.Controls.Add(Me.cmdAllOptions)
-        Me.tbpThemes.Controls.Add(Me.lblTheme)
-        Me.tbpThemes.Controls.Add(Me.ucrInputThemes)
         Me.tbpThemes.Location = New System.Drawing.Point(4, 22)
         Me.tbpThemes.Name = "tbpThemes"
         Me.tbpThemes.Padding = New System.Windows.Forms.Padding(3)
@@ -500,30 +500,12 @@ Partial Class sdgPlots
         '
         'cmdAllOptions
         '
-        Me.cmdAllOptions.Location = New System.Drawing.Point(275, 18)
+        Me.cmdAllOptions.Location = New System.Drawing.Point(295, 17)
         Me.cmdAllOptions.Name = "cmdAllOptions"
         Me.cmdAllOptions.Size = New System.Drawing.Size(78, 23)
         Me.cmdAllOptions.TabIndex = 2
         Me.cmdAllOptions.Text = "All Options"
         Me.cmdAllOptions.UseVisualStyleBackColor = True
-        '
-        'lblTheme
-        '
-        Me.lblTheme.AutoSize = True
-        Me.lblTheme.Location = New System.Drawing.Point(8, 22)
-        Me.lblTheme.Name = "lblTheme"
-        Me.lblTheme.Size = New System.Drawing.Size(76, 13)
-        Me.lblTheme.TabIndex = 0
-        Me.lblTheme.Text = "Select Theme:"
-        '
-        'ucrInputThemes
-        '
-        Me.ucrInputThemes.AddQuotesIfUnrecognised = True
-        Me.ucrInputThemes.IsReadOnly = False
-        Me.ucrInputThemes.Location = New System.Drawing.Point(87, 19)
-        Me.ucrInputThemes.Name = "ucrInputThemes"
-        Me.ucrInputThemes.Size = New System.Drawing.Size(171, 21)
-        Me.ucrInputThemes.TabIndex = 1
         '
         'tbpCoordinates
         '
@@ -552,6 +534,23 @@ Partial Class sdgPlots
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(160, 41)
         Me.ucrBaseSubdialog.TabIndex = 1
+        '
+        'urChkSelectTheme
+        '
+        Me.urChkSelectTheme.Checked = False
+        Me.urChkSelectTheme.Location = New System.Drawing.Point(6, 18)
+        Me.urChkSelectTheme.Name = "urChkSelectTheme"
+        Me.urChkSelectTheme.Size = New System.Drawing.Size(97, 20)
+        Me.urChkSelectTheme.TabIndex = 108
+        '
+        'ucrInputThemes
+        '
+        Me.ucrInputThemes.AddQuotesIfUnrecognised = True
+        Me.ucrInputThemes.IsReadOnly = False
+        Me.ucrInputThemes.Location = New System.Drawing.Point(109, 18)
+        Me.ucrInputThemes.Name = "ucrInputThemes"
+        Me.ucrInputThemes.Size = New System.Drawing.Size(171, 21)
+        Me.ucrInputThemes.TabIndex = 107
         '
         'sdgPlots
         '
@@ -600,8 +599,6 @@ Partial Class sdgPlots
     Friend WithEvents ucr1stFactorReceiver As ucrReceiverSingle
     Friend WithEvents tbpXAxis As TabPage
     Friend WithEvents tbpYAxis As TabPage
-    Friend WithEvents ucrInputThemes As ucrInputComboBox
-    Friend WithEvents lblTheme As Label
     Friend WithEvents cmdAllOptions As Button
     Friend WithEvents lblFont As Label
     Friend WithEvents ucrPlotsAdditionalLayers As ucrAdditionalLayers
@@ -632,6 +629,8 @@ Partial Class sdgPlots
     Friend WithEvents lblSubTitle As Label
     Friend WithEvents ucrInputGraphCaption As ucrInputTextBox
     Friend WithEvents ucrInputGraphSubTitle As ucrInputTextBox
+    Friend WithEvents urChkSelectTheme As ucrCheck
+    Friend WithEvents ucrInputThemes As ucrInputComboBox
 End Class
 
 
