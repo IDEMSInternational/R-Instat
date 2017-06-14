@@ -23,27 +23,27 @@ Partial Class ucrElementLineControl
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.grpTickMarks = New System.Windows.Forms.GroupBox()
-        Me.ucrColors = New instat.ucrColors()
-        Me.ucrChkTickLineEnd = New instat.ucrCheck()
-        Me.ucrChkTickSize = New instat.ucrCheck()
-        Me.ucrChkTickLineType = New instat.ucrCheck()
-        Me.ucrChkTickColour = New instat.ucrCheck()
-        Me.ucrInpuTicktLineEnd = New instat.ucrInputComboBox()
-        Me.ucrNudTickSize = New instat.ucrNud()
-        Me.ucrInputTickLineType = New instat.ucrInputComboBox()
+        Me.ucrLineColors = New instat.ucrColors()
+        Me.ucrChkLineLineEnd = New instat.ucrCheck()
+        Me.ucrChkLineSize = New instat.ucrCheck()
+        Me.ucrChkLineLineType = New instat.ucrCheck()
+        Me.ucrChkLineColour = New instat.ucrCheck()
+        Me.ucrInputLineLineEnd = New instat.ucrInputComboBox()
+        Me.ucrNudLineSize = New instat.ucrNud()
+        Me.ucrInputLineLineType = New instat.ucrInputComboBox()
         Me.grpTickMarks.SuspendLayout()
         Me.SuspendLayout()
         '
         'grpTickMarks
         '
-        Me.grpTickMarks.Controls.Add(Me.ucrColors)
-        Me.grpTickMarks.Controls.Add(Me.ucrChkTickLineEnd)
-        Me.grpTickMarks.Controls.Add(Me.ucrChkTickSize)
-        Me.grpTickMarks.Controls.Add(Me.ucrChkTickLineType)
-        Me.grpTickMarks.Controls.Add(Me.ucrChkTickColour)
-        Me.grpTickMarks.Controls.Add(Me.ucrInpuTicktLineEnd)
-        Me.grpTickMarks.Controls.Add(Me.ucrNudTickSize)
-        Me.grpTickMarks.Controls.Add(Me.ucrInputTickLineType)
+        Me.grpTickMarks.Controls.Add(Me.ucrLineColors)
+        Me.grpTickMarks.Controls.Add(Me.ucrChkLineLineEnd)
+        Me.grpTickMarks.Controls.Add(Me.ucrChkLineSize)
+        Me.grpTickMarks.Controls.Add(Me.ucrChkLineLineType)
+        Me.grpTickMarks.Controls.Add(Me.ucrChkLineColour)
+        Me.grpTickMarks.Controls.Add(Me.ucrInputLineLineEnd)
+        Me.grpTickMarks.Controls.Add(Me.ucrNudLineSize)
+        Me.grpTickMarks.Controls.Add(Me.ucrInputLineLineType)
         Me.grpTickMarks.Location = New System.Drawing.Point(3, 0)
         Me.grpTickMarks.Name = "grpTickMarks"
         Me.grpTickMarks.Size = New System.Drawing.Size(246, 119)
@@ -51,78 +51,78 @@ Partial Class ucrElementLineControl
         Me.grpTickMarks.TabStop = False
         Me.grpTickMarks.Text = "Element Line"
         '
-        'ucrColors
+        'ucrLineColors
         '
-        Me.ucrColors.AddQuotesIfUnrecognised = True
-        Me.ucrColors.IsReadOnly = False
-        Me.ucrColors.Location = New System.Drawing.Point(105, 68)
-        Me.ucrColors.Name = "ucrColors"
-        Me.ucrColors.Size = New System.Drawing.Size(137, 21)
-        Me.ucrColors.TabIndex = 87
+        Me.ucrLineColors.AddQuotesIfUnrecognised = True
+        Me.ucrLineColors.IsReadOnly = False
+        Me.ucrLineColors.Location = New System.Drawing.Point(105, 68)
+        Me.ucrLineColors.Name = "ucrLineColors"
+        Me.ucrLineColors.Size = New System.Drawing.Size(137, 21)
+        Me.ucrLineColors.TabIndex = 87
         '
-        'ucrChkTickLineEnd
+        'ucrChkLineLineEnd
         '
-        Me.ucrChkTickLineEnd.Checked = False
-        Me.ucrChkTickLineEnd.Location = New System.Drawing.Point(8, 94)
-        Me.ucrChkTickLineEnd.Name = "ucrChkTickLineEnd"
-        Me.ucrChkTickLineEnd.Size = New System.Drawing.Size(88, 20)
-        Me.ucrChkTickLineEnd.TabIndex = 54
+        Me.ucrChkLineLineEnd.Checked = False
+        Me.ucrChkLineLineEnd.Location = New System.Drawing.Point(8, 94)
+        Me.ucrChkLineLineEnd.Name = "ucrChkLineLineEnd"
+        Me.ucrChkLineLineEnd.Size = New System.Drawing.Size(88, 20)
+        Me.ucrChkLineLineEnd.TabIndex = 54
         '
-        'ucrChkTickSize
+        'ucrChkLineSize
         '
-        Me.ucrChkTickSize.Checked = False
-        Me.ucrChkTickSize.Location = New System.Drawing.Point(8, 19)
-        Me.ucrChkTickSize.Name = "ucrChkTickSize"
-        Me.ucrChkTickSize.Size = New System.Drawing.Size(88, 20)
-        Me.ucrChkTickSize.TabIndex = 53
+        Me.ucrChkLineSize.Checked = False
+        Me.ucrChkLineSize.Location = New System.Drawing.Point(8, 19)
+        Me.ucrChkLineSize.Name = "ucrChkLineSize"
+        Me.ucrChkLineSize.Size = New System.Drawing.Size(88, 20)
+        Me.ucrChkLineSize.TabIndex = 53
         '
-        'ucrChkTickLineType
+        'ucrChkLineLineType
         '
-        Me.ucrChkTickLineType.Checked = False
-        Me.ucrChkTickLineType.Location = New System.Drawing.Point(8, 44)
-        Me.ucrChkTickLineType.Name = "ucrChkTickLineType"
-        Me.ucrChkTickLineType.Size = New System.Drawing.Size(88, 20)
-        Me.ucrChkTickLineType.TabIndex = 52
+        Me.ucrChkLineLineType.Checked = False
+        Me.ucrChkLineLineType.Location = New System.Drawing.Point(8, 44)
+        Me.ucrChkLineLineType.Name = "ucrChkLineLineType"
+        Me.ucrChkLineLineType.Size = New System.Drawing.Size(88, 20)
+        Me.ucrChkLineLineType.TabIndex = 52
         '
-        'ucrChkTickColour
+        'ucrChkLineColour
         '
-        Me.ucrChkTickColour.Checked = False
-        Me.ucrChkTickColour.Location = New System.Drawing.Point(8, 69)
-        Me.ucrChkTickColour.Name = "ucrChkTickColour"
-        Me.ucrChkTickColour.Size = New System.Drawing.Size(88, 20)
-        Me.ucrChkTickColour.TabIndex = 51
+        Me.ucrChkLineColour.Checked = False
+        Me.ucrChkLineColour.Location = New System.Drawing.Point(8, 69)
+        Me.ucrChkLineColour.Name = "ucrChkLineColour"
+        Me.ucrChkLineColour.Size = New System.Drawing.Size(88, 20)
+        Me.ucrChkLineColour.TabIndex = 51
         '
-        'ucrInpuTicktLineEnd
+        'ucrInputLineLineEnd
         '
-        Me.ucrInpuTicktLineEnd.AddQuotesIfUnrecognised = True
-        Me.ucrInpuTicktLineEnd.IsReadOnly = False
-        Me.ucrInpuTicktLineEnd.Location = New System.Drawing.Point(105, 93)
-        Me.ucrInpuTicktLineEnd.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.ucrInpuTicktLineEnd.Name = "ucrInpuTicktLineEnd"
-        Me.ucrInpuTicktLineEnd.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInpuTicktLineEnd.TabIndex = 32
+        Me.ucrInputLineLineEnd.AddQuotesIfUnrecognised = True
+        Me.ucrInputLineLineEnd.IsReadOnly = False
+        Me.ucrInputLineLineEnd.Location = New System.Drawing.Point(105, 93)
+        Me.ucrInputLineLineEnd.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputLineLineEnd.Name = "ucrInputLineLineEnd"
+        Me.ucrInputLineLineEnd.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputLineLineEnd.TabIndex = 32
         '
-        'ucrNudTickSize
+        'ucrNudLineSize
         '
-        Me.ucrNudTickSize.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTickSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTickSize.Location = New System.Drawing.Point(105, 19)
-        Me.ucrNudTickSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudTickSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTickSize.Name = "ucrNudTickSize"
-        Me.ucrNudTickSize.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudTickSize.TabIndex = 30
-        Me.ucrNudTickSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLineSize.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudLineSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudLineSize.Location = New System.Drawing.Point(105, 19)
+        Me.ucrNudLineSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudLineSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLineSize.Name = "ucrNudLineSize"
+        Me.ucrNudLineSize.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudLineSize.TabIndex = 30
+        Me.ucrNudLineSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrInputTickLineType
+        'ucrInputLineLineType
         '
-        Me.ucrInputTickLineType.AddQuotesIfUnrecognised = True
-        Me.ucrInputTickLineType.IsReadOnly = False
-        Me.ucrInputTickLineType.Location = New System.Drawing.Point(105, 43)
-        Me.ucrInputTickLineType.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.ucrInputTickLineType.Name = "ucrInputTickLineType"
-        Me.ucrInputTickLineType.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputTickLineType.TabIndex = 26
+        Me.ucrInputLineLineType.AddQuotesIfUnrecognised = True
+        Me.ucrInputLineLineType.IsReadOnly = False
+        Me.ucrInputLineLineType.Location = New System.Drawing.Point(105, 43)
+        Me.ucrInputLineLineType.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputLineLineType.Name = "ucrInputLineLineType"
+        Me.ucrInputLineLineType.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputLineLineType.TabIndex = 26
         '
         'ucrElementLineControl
         '
@@ -137,12 +137,12 @@ Partial Class ucrElementLineControl
     End Sub
 
     Friend WithEvents grpTickMarks As GroupBox
-    Friend WithEvents ucrChkTickLineEnd As ucrCheck
-    Friend WithEvents ucrChkTickSize As ucrCheck
-    Friend WithEvents ucrChkTickLineType As ucrCheck
-    Friend WithEvents ucrChkTickColour As ucrCheck
-    Friend WithEvents ucrInpuTicktLineEnd As ucrInputComboBox
-    Friend WithEvents ucrNudTickSize As ucrNud
-    Friend WithEvents ucrInputTickLineType As ucrInputComboBox
-    Friend WithEvents ucrColors As ucrColors
+    Friend WithEvents ucrChkLineLineEnd As ucrCheck
+    Friend WithEvents ucrChkLineSize As ucrCheck
+    Friend WithEvents ucrChkLineLineType As ucrCheck
+    Friend WithEvents ucrChkLineColour As ucrCheck
+    Friend WithEvents ucrInputLineLineEnd As ucrInputComboBox
+    Friend WithEvents ucrNudLineSize As ucrNud
+    Friend WithEvents ucrInputLineLineType As ucrInputComboBox
+    Friend WithEvents ucrLineColors As ucrColors
 End Class

@@ -52,22 +52,25 @@ Public Class ucrELementTextControl
         ucrChkLineHeight.AddParameterPresentCondition(True, "lineheight")
         ucrChkLineHeight.AddParameterPresentCondition(False, "lineheight", False)
 
-        ucrChkFace.SetText("Face")
-        ucrInputFace.SetParameter(New RParameter("face"))
-        ucrInputFace.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctFontFace))
-        ucrChkFace.AddParameterPresentCondition(True, "face")
-        ucrChkFace.AddParameterPresentCondition(False, "face", False)
+        ucrChkTextFace.SetText("Face")
+        ucrInputTextFace.SetParameter(New RParameter("face"))
+        ucrInputTextFace.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctFontFace))
+        ucrChkTextFace.AddParameterPresentCondition(True, "face")
+        ucrChkTextFace.AddParameterPresentCondition(False, "face", False)
+        ucrInputTextFace.SetDropDownStyleAsNonEditable()
 
-        ucrChkColour.SetText("Colour")
-        ucrColors.SetParameter(New RParameter("colour"))
-        ucrChkColour.AddParameterPresentCondition(True, "colour")
-        ucrChkColour.AddParameterPresentCondition(False, "colour", False)
+        ucrChkTextColour.SetText("Colour")
+        ucrTextColors.SetParameter(New RParameter("colour"))
+        ucrChkTextColour.AddParameterPresentCondition(True, "colour")
+        ucrChkTextColour.AddParameterPresentCondition(False, "colour", False)
+        ucrTextColors.SetDropDownStyleAsNonEditable()
 
-        ucrChkFamily.SetText("Family")
-        ucrInputFamily.SetParameter(New RParameter("family"))
-        ucrInputFamily.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctFonts))
-        ucrChkFamily.AddParameterPresentCondition(True, "family")
-        ucrChkFamily.AddParameterPresentCondition(False, "family", False)
+        ucrChkTextFamily.SetText("Family")
+        ucrInputTextFamily.SetParameter(New RParameter("family"))
+        ucrInputTextFamily.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctFonts))
+        ucrChkTextFamily.AddParameterPresentCondition(True, "family")
+        ucrChkTextFamily.AddParameterPresentCondition(False, "family", False)
+        ucrInputTextFamily.SetDropDownStyleAsNonEditable()
 
         'Linking
         ucrChkSize.AddToLinkedControls(ucrNudsize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
@@ -75,9 +78,9 @@ Public Class ucrELementTextControl
         ucrChkVjust.AddToLinkedControls(ucrNudVjust, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.0)
         ucrChkLineHeight.AddToLinkedControls(ucrNudLineHeight, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.0)
         ucrChkAngle.AddToLinkedControls(ucrNudAngle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
-        ucrChkFace.AddToLinkedControls(ucrInputFace, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Plain")
-        ucrChkFamily.AddToLinkedControls(ucrInputFamily, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Times Roman")
-        ucrChkColour.AddToLinkedControls(ucrColors, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Black")
+        ucrChkTextFace.AddToLinkedControls(ucrInputTextFace, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Plain")
+        ucrChkTextFamily.AddToLinkedControls(ucrInputTextFamily, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Times Roman")
+        ucrChkTextColour.AddToLinkedControls(ucrTextColors, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Black")
 
         bInitialiseControls = True
     End Sub
@@ -111,20 +114,20 @@ Public Class ucrELementTextControl
         ucrNudVjust.SetRCode(clsElementText, bReset)
         ucrChkVjust.SetRCode(clsElementText, bReset)
 
-        ucrColors.SetRCode(clsElementText, bReset)
-        ucrChkColour.SetRCode(clsElementText, bReset)
+        ucrTextColors.SetRCode(clsElementText, bReset)
+        ucrChkTextColour.SetRCode(clsElementText, bReset)
 
-        ucrInputFace.SetRCode(clsElementText, bReset)
-        ucrChkFace.SetRCode(clsElementText, bReset)
+        ucrInputTextFace.SetRCode(clsElementText, bReset)
+        ucrChkTextFace.SetRCode(clsElementText, bReset)
 
-        ucrInputFamily.SetRCode(clsElementText, bReset)
-        ucrChkFamily.SetRCode(clsElementText, bReset)
+        ucrInputTextFamily.SetRCode(clsElementText, bReset)
+        ucrChkTextFamily.SetRCode(clsElementText, bReset)
 
         AddRemoveElementAxis()
     End Sub
 
     Private Sub AddRemoveElementAxis()
-        If ucrChkAngle.Checked OrElse ucrChkHjust.Checked OrElse ucrChkLineHeight.Checked OrElse ucrChkSize.Checked OrElse ucrChkVjust.Checked OrElse ucrChkColour.Checked OrElse ucrChkFace.Checked OrElse ucrChkFamily.Checked Then
+        If ucrChkAngle.Checked OrElse ucrChkHjust.Checked OrElse ucrChkLineHeight.Checked OrElse ucrChkSize.Checked OrElse ucrChkVjust.Checked OrElse ucrChkTextColour.Checked OrElse ucrChkTextFace.Checked OrElse ucrChkTextFamily.Checked Then
             clsThemeFunction.AddParameter(strAxis, clsRFunctionParameter:=clsElementText)
         Else
             clsThemeFunction.RemoveParameterByName(strAxis)
@@ -140,7 +143,7 @@ Public Class ucrELementTextControl
         End If
     End Sub
 
-    Private Sub ElementXAxisTextControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAngle.ControlValueChanged, ucrChkHjust.ControlValueChanged, ucrChkLineHeight.ControlValueChanged, ucrChkSize.ControlValueChanged, ucrChkVjust.ControlValueChanged, ucrChkColour.ControlValueChanged, ucrChkFace.ControlValueChanged, ucrChkFamily.ControlValueChanged
+    Private Sub ElementXAxisTextControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAngle.ControlValueChanged, ucrChkHjust.ControlValueChanged, ucrChkLineHeight.ControlValueChanged, ucrChkSize.ControlValueChanged, ucrChkVjust.ControlValueChanged, ucrChkTextColour.ControlValueChanged, ucrChkTextFace.ControlValueChanged, ucrChkTextFamily.ControlValueChanged
         AddRemoveElementAxis()
     End Sub
 
