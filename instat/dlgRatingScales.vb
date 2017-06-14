@@ -275,8 +275,10 @@ Public Class dlgRatingScales
         ChangeOfParameters()
         ucrReceiverOrderedFactors.Clear()
         If rdoTable.Checked Then
+            lblOrderedFactor.Text = "Variables (Factors):"
             ucrReceiverOrderedFactors.SetDataType("numeric")
         Else
+            lblOrderedFactor.Text = "Variables (Numeric):"
             ucrReceiverOrderedFactors.SetDataType("factor")
         End If
     End Sub
@@ -301,4 +303,5 @@ Public Class dlgRatingScales
         '    ucrChkNumberOfCategories.Checked = True
         'End If
     End Sub
+
 End Class
