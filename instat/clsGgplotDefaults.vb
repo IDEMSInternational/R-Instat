@@ -16,7 +16,7 @@
         Get
             Dim clsTempParam As New RParameter
 
-            clsTempParam.SetArgumentName("theme_name")
+            clsTempParam.SetArgumentName("theme")
             clsTempParam.SetArgumentValue("theme_grey()")
             Return clsTempParam
         End Get
