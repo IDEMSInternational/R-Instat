@@ -169,7 +169,7 @@ Public Class sdgPlots
         ucrYAxis.InitialiseControl()
 
         'themes tab
-        ucrInputThemes.SetParameter(New RParameter("theme"))
+        ucrInputThemes.SetParameter(New RParameter("theme_name"))
         strThemes = GgplotDefaults.strThemes
         'Would prefer to do this through functions but auto updating function name not currently supported through combo box control
         For Each strTemp As String In strThemes
