@@ -2783,7 +2783,6 @@ Partial Class frmMain
         '
         'mnuPrepareCheckDataImportOpenRefine
         '
-        Me.mnuPrepareCheckDataImportOpenRefine.Enabled = False
         Me.mnuPrepareCheckDataImportOpenRefine.Name = "mnuPrepareCheckDataImportOpenRefine"
         Me.mnuPrepareCheckDataImportOpenRefine.Size = New System.Drawing.Size(245, 22)
         Me.mnuPrepareCheckDataImportOpenRefine.Text = "Import From OpenRefine..."
