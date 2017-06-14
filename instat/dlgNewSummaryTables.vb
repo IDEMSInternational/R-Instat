@@ -82,14 +82,15 @@ Public Class dlgNewSummaryTables
         ucrChkSummaries.SetText("Treat Summary Columns as a Further Factor")
         ucrChkSummaries.SetRDefault("FALSE")
 
-        ucrNudSigFigs.SetParameter(New RParameter("signif_fig", 14))
-        ucrNudSigFigs.SetRDefault(2)
-
         ucrChkHTMLTable.SetParameter(New RParameter("as_html", 13))
         ucrChkHTMLTable.SetText("HTML Table")
         ucrChkHTMLTable.SetRDefault("TRUE")
 
-        ucrReceiverWeights.SetParameter(New RParameter("weights", 16))
+        ucrNudSigFigs.SetParameter(New RParameter("signif_fig", 14))
+        ucrNudSigFigs.SetMinMax(0, 22)
+        ucrNudSigFigs.SetRDefault(2)
+
+        ucrReceiverWeights.SetParameter(New RParameter("weights", 17))
         ucrReceiverWeights.SetParameterIsString()
         ucrReceiverWeights.Selector = ucrSelectorSummaryTables
         ucrReceiverWeights.SetDataType("numeric")
@@ -116,11 +117,11 @@ Public Class dlgNewSummaryTables
         'ucrInputPageBy.SetItems(dctPageBy)
         'ucrInputPageBy.SetRDefault(Chr(34) & "default" & Chr(34))
 
-        ucrChkRowNumbers.SetParameter(New RParameter("rnames", 18))
+        ucrChkRowNumbers.SetParameter(New RParameter("rnames", 18), bNewChangeParameterValue:=True)
         ucrChkRowNumbers.SetText("Show Row Names")
-        ucrChkRowNumbers.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkRowNumbers.SetRDefault("TRUE") ' temporary fix, this is not the actual R-default but we need to not run this parameter
 
-        ucrSaveTable.SetPrefix("table")
+        ucrSaveTable.SetPrefix("summary_table")
         ucrSaveTable.SetSaveTypeAsTable()
         ucrSaveTable.SetDataFrameSelector(ucrSelectorSummaryTables.ucrAvailableDataFrames)
         ucrSaveTable.SetIsComboBox()
@@ -135,7 +136,6 @@ Public Class dlgNewSummaryTables
         ucrReceiverFactors.SetMeAsReceiver()
         ucrSelectorSummaryTables.Reset()
         ucrSaveTable.Reset()
-        ucrSaveTable.SetName("summary_table") ' change this to prefix later. currently, if this is prefix then it is blank
 
         clsSummariesList.SetRCommand("c")
         clsSummariesList.AddParameter("summary_mean", Chr(34) & "summary_mean" & Chr(34), bIncludeArgumentName:=False) ' TODO decide which default(s) to use?
@@ -227,7 +227,7 @@ Public Class dlgNewSummaryTables
         If ucrChkHTMLTable.Checked Then
             ucrBase.clsRsyntax.iCallType = 4
         Else
-            ucrBase.clsRsyntax.iCallType = 1
+            ucrBase.clsRsyntax.iCallType = 2
         End If
     End Sub
 
