@@ -477,7 +477,7 @@ Public Class ucrFactor
     End Sub
 
     Private Sub grdFactorData_Leave(sender As Object, e As EventArgs) Handles grdFactorData.Leave
-        If shtCurrSheet.IsEditing Then
+        If shtCurrSheet IsNot Nothing AndAlso shtCurrSheet.IsEditing Then
             shtCurrSheet.EndEdit(unvell.ReoGrid.EndEditReason.NormalFinish)
         End If
     End Sub
