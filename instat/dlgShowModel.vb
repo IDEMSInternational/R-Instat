@@ -13,7 +13,6 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports instat
 Imports instat.Translations
 Public Class dlgShowModel
     Public bFirstLoad As Boolean = True
@@ -189,7 +188,7 @@ Public Class dlgShowModel
         TestOKEnabled()
     End Sub
 
-    Private Sub chkSIngleValues_CheckedChanged(sender As Object, e As EventArgs) Handles chkSingleValues.CheckedChanged
+    Private Sub chkSingleValues_CheckedChanged(sender As Object, e As EventArgs) Handles chkSingleValues.CheckedChanged
         Results()
         ReceiverLabels()
     End Sub
@@ -202,6 +201,7 @@ Public Class dlgShowModel
             ucrReceiverExpressionForTablePlus.Visible = False
             ucrSelectorForDataFrame.Reset()
             ucrInputProbabilities.Visible = True
+            ucrSelectorForDataFrame.SetVariablesVisible(False)
         Else
             chkSaveResults.Visible = True
             ucrInputProbabilities.SetName("")
@@ -209,7 +209,7 @@ Public Class dlgShowModel
             ucrReceiverExpressionForTablePlus.Visible = True
             ucrInputNewColNameforTablePlus.Visible = False
             ucrInputProbabilities.Visible = False
-            ucrReceiverExpressionForTablePlus.Visible = True
+            ucrSelectorForDataFrame.SetVariablesVisible(True)
         End If
     End Sub
 
