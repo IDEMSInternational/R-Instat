@@ -61,6 +61,8 @@ Public Class dlgExportToOpenRefine
         clsDefaultWrite.SetRCommand("write.csv")
         clsDefaultWrite.AddParameter("row.names", "FALSE")
         clsDefaultWrite.AddParameter("x", clsRFunctionParameter:=clsGetDataFrame)
+        clsDefaultWrite.AddParameter("file", Chr(34) & ucrInputDatasetName.GetText() & ".csv" & Chr(34))
+        clsDefaultRefine.AddParameter("file", Chr(34) & ucrInputDatasetName.GetText() & ".csv" & Chr(34))
 
         clsDefaultRefine.SetPackageName("rrefine")
         clsDefaultRefine.SetRCommand("refine_upload")

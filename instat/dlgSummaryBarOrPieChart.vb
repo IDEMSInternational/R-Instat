@@ -26,7 +26,10 @@ Public Class dlgSummaryBarOrPieChart
     Private clsXlabsFunction As New RFunction
     Private clsYlabFunction As New RFunction
     Private clsXScalecontinuousFunction As New RFunction
+    Private clsYScalecontinuousFunction As New RFunction
     Private clsRFacetFunction As New RFunction
+    Private clsThemeFunction As New RFunction
+    Private dctThemeFunctions As New Dictionary(Of String, RFunction)
     Private bResetSubdialog As Boolean = True
 
     Private Sub cmdOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -51,6 +54,7 @@ Public Class dlgSummaryBarOrPieChart
 
         ucrPnlOptions.AddRadioButton(rdoBarChart)
         ucrPnlOptions.AddRadioButton(rdoPieChart)
+        ucrPnlOptions.AddRadioButton(rdoTable)
         ucrPnlOptions.AddParameterPresentCondition(rdoPieChart, "coord_polar")
         ucrPnlOptions.AddParameterPresentCondition(rdoBarChart, "coord_polar", False)
 
@@ -101,7 +105,6 @@ Public Class dlgSummaryBarOrPieChart
         ucrSummaryBarSelector.Reset()
         ucrYReceiver.SetMeAsReceiver()
         ucrSaveSummaryBar.Reset()
-        SetDialogOptions()
         bResetSubdialog = True
 
         clsBaseOperator.SetOperation("+")
@@ -124,7 +127,11 @@ Public Class dlgSummaryBarOrPieChart
         clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
+        clsYScalecontinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone
         clsRFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
+
+        dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
+        clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction
 
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSummaryBarSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
@@ -137,6 +144,7 @@ Public Class dlgSummaryBarOrPieChart
         ucrSaveSummaryBar.SetRCode(clsBaseOperator, bReset)
         ucrSummaryBarSelector.SetRCode(clsRggplotFunction, bReset)
         ucrPnlOptions.SetRCode(clsBaseOperator, bReset)
+        SetDialogOptions()
     End Sub
 
     Private Sub TestOkEnabled()
@@ -155,7 +163,7 @@ Public Class dlgSummaryBarOrPieChart
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetRCode(clsBaseOperator, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, strNewDataFrame:=ucrSummaryBarSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bReset:=bResetSubdialog)
+        sdgPlots.SetRCode(clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, strNewDataFrame:=ucrSummaryBarSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
     End Sub
