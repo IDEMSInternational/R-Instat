@@ -215,13 +215,16 @@ Public Class dlgBarAndPieChart
         'What should global and local aes be?
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomBarFunction, clsNewGlobalAesFunc:=clsBarAesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrBarChartSelector, bApplyAesGlobally:=True, bReset:=bResetLayerSubdialog)
         sdgLayerOptions.ShowDialog()
-        For Each clsParam In clsBarAesFunction.clsParameters
-            If clsParam.strArgumentName = "x" Then
-                ucrFactorReceiver.Add(clsParam.strArgumentValue)
-            ElseIf clsParam.strArgumentName = "fill" Then
-                ucrSecondReceiver.Add(clsParam.strArgumentValue)
-            End If
-        Next
+        If clsBarAesFunction.ContainsParameter("x") Then
+            ucrFactorReceiver.Add(clsBarAesFunction.GetParameter("x").strArgumentValue)
+        Else
+            ucrFactorReceiver.Clear()
+        End If
+        If clsBarAesFunction.ContainsParameter("fill") Then
+            ucrSecondReceiver.Add(clsBarAesFunction.GetParameter("fill").strArgumentValue)
+        Else
+            ucrSecondReceiver.Clear()
+        End If
         TestOkEnabled()
     End Sub
 
