@@ -56,6 +56,7 @@ Partial Class frmMain
         Me.mnuDescribeGeneralColumnSummaries = New System.Windows.Forms.ToolStripMenuItem()
         Me.DescribeGeneralTabulation = New System.Windows.Forms.ToolStripMenuItem()
         Me.DescribeGeneralGraphics = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator38 = New System.Windows.Forms.ToolStripSeparator()
         Me.FrequencyTablesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator9 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuDescribeMultivariate = New System.Windows.Forms.ToolStripMenuItem()
@@ -460,15 +461,14 @@ Partial Class frmMain
         Me.splOverall = New System.Windows.Forms.SplitContainer()
         Me.splExtraWindows = New System.Windows.Forms.SplitContainer()
         Me.splMetadata = New System.Windows.Forms.SplitContainer()
+        Me.splLogScript = New System.Windows.Forms.SplitContainer()
+        Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrColumnMeta = New instat.ucrColumnMetadata()
         Me.ucrDataFrameMeta = New instat.ucrDataFrameMetadata()
-        Me.splLogScript = New System.Windows.Forms.SplitContainer()
         Me.ucrLogWindow = New instat.ucrLog()
         Me.ucrScriptWindow = New instat.ucrScript()
-        Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
-        Me.ToolStripSeparator38 = New System.Windows.Forms.ToolStripSeparator()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -537,8 +537,9 @@ Partial Class frmMain
         '
         'RatingDataToolStripMenuItem
         '
+        Me.RatingDataToolStripMenuItem.Enabled = False
         Me.RatingDataToolStripMenuItem.Name = "RatingDataToolStripMenuItem"
-        Me.RatingDataToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.RatingDataToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.RatingDataToolStripMenuItem.Text = "Rating Data..."
         '
         'mnuDescribeTwoVariables
@@ -587,25 +588,25 @@ Partial Class frmMain
         '
         Me.mnuDescribeThreeVariableSummarise.Enabled = False
         Me.mnuDescribeThreeVariableSummarise.Name = "mnuDescribeThreeVariableSummarise"
-        Me.mnuDescribeThreeVariableSummarise.Size = New System.Drawing.Size(152, 22)
+        Me.mnuDescribeThreeVariableSummarise.Size = New System.Drawing.Size(142, 22)
         Me.mnuDescribeThreeVariableSummarise.Text = "Summarise..."
         '
         'mnuDescribeThreeVariableGraph
         '
         Me.mnuDescribeThreeVariableGraph.Enabled = False
         Me.mnuDescribeThreeVariableGraph.Name = "mnuDescribeThreeVariableGraph"
-        Me.mnuDescribeThreeVariableGraph.Size = New System.Drawing.Size(152, 22)
+        Me.mnuDescribeThreeVariableGraph.Size = New System.Drawing.Size(142, 22)
         Me.mnuDescribeThreeVariableGraph.Text = "Graph..."
         '
         'ToolStripSeparator36
         '
         Me.ToolStripSeparator36.Name = "ToolStripSeparator36"
-        Me.ToolStripSeparator36.Size = New System.Drawing.Size(149, 6)
+        Me.ToolStripSeparator36.Size = New System.Drawing.Size(139, 6)
         '
         'mnuDescribeThreeVariableFrequencies
         '
         Me.mnuDescribeThreeVariableFrequencies.Name = "mnuDescribeThreeVariableFrequencies"
-        Me.mnuDescribeThreeVariableFrequencies.Size = New System.Drawing.Size(152, 22)
+        Me.mnuDescribeThreeVariableFrequencies.Size = New System.Drawing.Size(142, 22)
         Me.mnuDescribeThreeVariableFrequencies.Text = "Frequencies"
         '
         'mnuDescribeSpecific
@@ -720,6 +721,11 @@ Partial Class frmMain
         Me.DescribeGeneralGraphics.Size = New System.Drawing.Size(188, 22)
         Me.DescribeGeneralGraphics.Tag = "Graphics..."
         Me.DescribeGeneralGraphics.Text = "Graphics..."
+        '
+        'ToolStripSeparator38
+        '
+        Me.ToolStripSeparator38.Name = "ToolStripSeparator38"
+        Me.ToolStripSeparator38.Size = New System.Drawing.Size(185, 6)
         '
         'FrequencyTablesToolStripMenuItem
         '
@@ -2221,6 +2227,7 @@ Partial Class frmMain
         '
         'mnuFilePrint
         '
+        Me.mnuFilePrint.Enabled = False
         Me.mnuFilePrint.Name = "mnuFilePrint"
         Me.mnuFilePrint.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.P), System.Windows.Forms.Keys)
         Me.mnuFilePrint.Size = New System.Drawing.Size(213, 22)
@@ -2229,6 +2236,7 @@ Partial Class frmMain
         '
         'mnuFilePrintPreview
         '
+        Me.mnuFilePrintPreview.Enabled = False
         Me.mnuFilePrintPreview.Name = "mnuFilePrintPreview"
         Me.mnuFilePrintPreview.Size = New System.Drawing.Size(213, 22)
         Me.mnuFilePrintPreview.Tag = "Print_Preview"
@@ -2378,6 +2386,7 @@ Partial Class frmMain
         'mnuTbPrint
         '
         Me.mnuTbPrint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.mnuTbPrint.Enabled = False
         Me.mnuTbPrint.Image = CType(resources.GetObject("mnuTbPrint.Image"), System.Drawing.Image)
         Me.mnuTbPrint.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.mnuTbPrint.Name = "mnuTbPrint"
@@ -2536,12 +2545,14 @@ Partial Class frmMain
         '
         'ImportFromCSPROToolStripMenuItem
         '
+        Me.ImportFromCSPROToolStripMenuItem.Enabled = False
         Me.ImportFromCSPROToolStripMenuItem.Name = "ImportFromCSPROToolStripMenuItem"
         Me.ImportFromCSPROToolStripMenuItem.Size = New System.Drawing.Size(213, 22)
         Me.ImportFromCSPROToolStripMenuItem.Text = "Import from CSPRO..."
         '
         'ImportFromToolStripMenuItem
         '
+        Me.ImportFromToolStripMenuItem.Enabled = False
         Me.ImportFromToolStripMenuItem.Name = "ImportFromToolStripMenuItem"
         Me.ImportFromToolStripMenuItem.Size = New System.Drawing.Size(213, 22)
         Me.ImportFromToolStripMenuItem.Text = "Import from Databases..."
@@ -2553,6 +2564,7 @@ Partial Class frmMain
         '
         'mnuFileConvert
         '
+        Me.mnuFileConvert.Enabled = False
         Me.mnuFileConvert.Name = "mnuFileConvert"
         Me.mnuFileConvert.Size = New System.Drawing.Size(213, 22)
         Me.mnuFileConvert.Text = "Convert..."
@@ -2771,7 +2783,6 @@ Partial Class frmMain
         '
         'mnuPrepareCheckDataImportOpenRefine
         '
-        Me.mnuPrepareCheckDataImportOpenRefine.Enabled = False
         Me.mnuPrepareCheckDataImportOpenRefine.Name = "mnuPrepareCheckDataImportOpenRefine"
         Me.mnuPrepareCheckDataImportOpenRefine.Size = New System.Drawing.Size(245, 22)
         Me.mnuPrepareCheckDataImportOpenRefine.Text = "Import From OpenRefine..."
@@ -3579,24 +3590,6 @@ Partial Class frmMain
         Me.splMetadata.SplitterWidth = 5
         Me.splMetadata.TabIndex = 0
         '
-        'ucrColumnMeta
-        '
-        Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrColumnMeta.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ucrColumnMeta.Location = New System.Drawing.Point(0, 0)
-        Me.ucrColumnMeta.Name = "ucrColumnMeta"
-        Me.ucrColumnMeta.Size = New System.Drawing.Size(66, 118)
-        Me.ucrColumnMeta.TabIndex = 0
-        '
-        'ucrDataFrameMeta
-        '
-        Me.ucrDataFrameMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrDataFrameMeta.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ucrDataFrameMeta.Location = New System.Drawing.Point(0, 0)
-        Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
-        Me.ucrDataFrameMeta.Size = New System.Drawing.Size(129, 118)
-        Me.ucrDataFrameMeta.TabIndex = 0
-        '
         'splLogScript
         '
         Me.splLogScript.BackColor = System.Drawing.Color.LightGray
@@ -3617,25 +3610,6 @@ Partial Class frmMain
         Me.splLogScript.SplitterDistance = 131
         Me.splLogScript.SplitterWidth = 5
         Me.splLogScript.TabIndex = 0
-        '
-        'ucrLogWindow
-        '
-        Me.ucrLogWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrLogWindow.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ucrLogWindow.Location = New System.Drawing.Point(0, 0)
-        Me.ucrLogWindow.Name = "ucrLogWindow"
-        Me.ucrLogWindow.Size = New System.Drawing.Size(131, 118)
-        Me.ucrLogWindow.TabIndex = 0
-        '
-        'ucrScriptWindow
-        '
-        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrScriptWindow.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ucrScriptWindow.Location = New System.Drawing.Point(0, 0)
-        Me.ucrScriptWindow.Name = "ucrScriptWindow"
-        Me.ucrScriptWindow.Size = New System.Drawing.Size(259, 118)
-        Me.ucrScriptWindow.TabIndex = 0
-        Me.ucrScriptWindow.Tag = "Script_Window"
         '
         'splDataOutput
         '
@@ -3658,6 +3632,43 @@ Partial Class frmMain
         Me.splDataOutput.SplitterWidth = 5
         Me.splDataOutput.TabIndex = 0
         '
+        'ucrColumnMeta
+        '
+        Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrColumnMeta.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ucrColumnMeta.Location = New System.Drawing.Point(0, 0)
+        Me.ucrColumnMeta.Name = "ucrColumnMeta"
+        Me.ucrColumnMeta.Size = New System.Drawing.Size(66, 118)
+        Me.ucrColumnMeta.TabIndex = 0
+        '
+        'ucrDataFrameMeta
+        '
+        Me.ucrDataFrameMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrDataFrameMeta.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ucrDataFrameMeta.Location = New System.Drawing.Point(0, 0)
+        Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
+        Me.ucrDataFrameMeta.Size = New System.Drawing.Size(129, 118)
+        Me.ucrDataFrameMeta.TabIndex = 0
+        '
+        'ucrLogWindow
+        '
+        Me.ucrLogWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrLogWindow.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ucrLogWindow.Location = New System.Drawing.Point(0, 0)
+        Me.ucrLogWindow.Name = "ucrLogWindow"
+        Me.ucrLogWindow.Size = New System.Drawing.Size(131, 118)
+        Me.ucrLogWindow.TabIndex = 0
+        '
+        'ucrScriptWindow
+        '
+        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrScriptWindow.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ucrScriptWindow.Location = New System.Drawing.Point(0, 0)
+        Me.ucrScriptWindow.Name = "ucrScriptWindow"
+        Me.ucrScriptWindow.Size = New System.Drawing.Size(259, 118)
+        Me.ucrScriptWindow.TabIndex = 0
+        Me.ucrScriptWindow.Tag = "Script_Window"
+        '
         'ucrDataViewer
         '
         Me.ucrDataViewer.BackColor = System.Drawing.SystemColors.Control
@@ -3677,11 +3688,6 @@ Partial Class frmMain
         Me.ucrOutput.Name = "ucrOutput"
         Me.ucrOutput.Size = New System.Drawing.Size(295, 113)
         Me.ucrOutput.TabIndex = 0
-        '
-        'ToolStripSeparator38
-        '
-        Me.ToolStripSeparator38.Name = "ToolStripSeparator38"
-        Me.ToolStripSeparator38.Size = New System.Drawing.Size(185, 6)
         '
         'frmMain
         '
