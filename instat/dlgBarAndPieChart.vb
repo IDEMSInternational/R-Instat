@@ -228,18 +228,18 @@ Public Class dlgBarAndPieChart
     Private Sub cmdPieChartOptions_Click(sender As Object, e As EventArgs) Handles cmdPieChartOptions.Click
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomBarFunction, clsNewGlobalAesFunc:=clsPieAesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrBarChartSelector, bApplyAesGlobally:=True, bReset:=bResetLayerSubdialog)
         sdgLayerOptions.ShowDialog()
-        'For Each clsParam In clsPieAesFunction.clsParameters
-        '    If clsParam.strArgumentName = "x" Then
-        '        If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
-        '            '  ucrFactorReceiver.Add(clsParam.strArgumentValue)
-        '            clsPieAesFunction.AddParameter("x", Chr(34) & Chr(34))
-        '        End If
-        '    ElseIf clsParam.strArgumentName = "fill" Then
-        '        ucrFactorReceiver.Add(clsParam.strArgumentValue)
-        '    End If
-        'Next
+        'temp fix - should instead be setting R code of the receivers here
+        If Not clsPieAesFunction.ContainsParameter("x") Then
+            clsPieAesFunction.AddParameter("x", Chr(34) & Chr(34))
+        End If
+        If clsPieAesFunction.ContainsParameter("fill") Then
+            ucrFactorReceiver.Add(clsPieAesFunction.GetParameter("fill").strArgumentValue)
+        Else
+            ucrFactorReceiver.Clear()
+        End If
         TestOkEnabled()
     End Sub
+
     Private Sub AllControlsChanged() Handles ucrSaveBar.ControlContentsChanged, ucrFactorReceiver.ControlContentsChanged
         TestOkEnabled()
     End Sub
