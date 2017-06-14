@@ -31,9 +31,13 @@ Public Class dlgGeneralForGraphics
     'RFunctions for Options sub dialog
     Private clsLabsFunction As New RFunction
     Private clsXlabsFunction As New RFunction
-    Private clsYlabFunction As New RFunction
     Private clsXScalecontinuousFunction As New RFunction
-    Private clsRFacetFunction As New RFunction
+    Private bResetSubdialog As Boolean = True
+    Private clsYlabsFunction As New RFunction
+    Private clsYScalecontinuousFunction As New RFunction
+    Private clsFacetsFunction As New RFunction
+    Private clsThemeFunction As New RFunction
+    Private dctThemeFunctions As New Dictionary(Of String, RFunction)
 
     Private Sub dlgGeneralForGraphics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -48,7 +52,7 @@ Public Class dlgGeneralForGraphics
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 356
+        ucrBase.iHelpTopicID = 420
         'By default, we want to put in the script the output of our Base R-command (in this case the ...+...+...) even when it has been assigned to some object (in which case we want the name of that object in the script so that it's called when the script is run).
         'For example, when a graph is saved, it is assigned to it's place in an R-instat object. If we had set bExcludeAssignedFunctionOutput to True, then we would never print the graph when running the script.
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
@@ -85,6 +89,16 @@ Public Class dlgGeneralForGraphics
         ucrAdditionalLayers.SetBaseOperator(clsBaseOperator)
         ucrAdditionalLayers.SetGGplotFunction(clsGgplotFunction)
         ucrAdditionalLayers.SetAesFunction(clsGlobalAesFunction)
+
+        clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
+        clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
+        clsYlabsFunction = GgplotDefaults.clsYlabTitleFunction.Clone()
+        clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
+        clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
+        clsYScalecontinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone()
+        clsFacetsFunction = GgplotDefaults.clsFacetFunction.Clone()
+        dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
+        clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction
 
         If ucrBase.clsRsyntax.clsBaseOperator IsNot Nothing Then
             ucrBase.clsRsyntax.clsBaseOperator.RemoveAllAdditionalParameters()
@@ -123,7 +137,7 @@ Public Class dlgGeneralForGraphics
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgPlots.DisableLayersTab()
-        sdgPlots.SetRCode(clsBaseOperator, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, strNewDataFrame:=strGlobalDataFrame, bReset:=bResetOptionsSubdialog)
+        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewLabsFunction:=clsLabsFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabsFunction, clsNewFacetFunction:=clsFacetsFunction, ucrNewBaseSelector:=sdgLayerOptions.ucrGeomWithAes.ucrGeomWithAesSelector, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetOptionsSubdialog = False
         sdgPlots.EnableLayersTab()

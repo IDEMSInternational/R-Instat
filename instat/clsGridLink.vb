@@ -68,6 +68,7 @@ Public Class clsGridLink
         Dim clsSetVariablesMetadataChanged As New RFunction
         Dim clsGetCombinedMetadata As New RFunction
         Dim clsSetMetadataChanged As New RFunction
+        Dim expVarMetadata As SymbolicExpression
 
         clsDataChanged.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_changed")
         clsMetadataChanged.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_metadata_changed")
@@ -113,11 +114,16 @@ Public Class clsGridLink
                 clsVariablesMetadataChanged.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
                 If (bGrdVariablesMetadataExists AndAlso frmMain.clsRLink.RunInternalScriptGetValue(clsVariablesMetadataChanged.ToScript()).AsLogical(0)) Then
                     clsGetVariablesMetadata.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
-                    dfTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetVariablesMetadata.ToScript()).AsDataFrame()
-                    FillSheet(dfTemp, strDataName, grdVariablesMetadata)
-                    clsSetVariablesMetadataChanged.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
-                    clsSetVariablesMetadataChanged.AddParameter("new_val", "TRUE")
-                    frmMain.clsRLink.RunInternalScript(clsSetVariablesMetadataChanged.ToScript())
+                    expVarMetadata = frmMain.clsRLink.RunInternalScriptGetValue(clsGetVariablesMetadata.ToScript())
+                    If expVarMetadata IsNot Nothing AndAlso expVarMetadata.Type <> Internals.SymbolicExpressionType.Null Then
+                        dfTemp = expVarMetadata.AsDataFrame()
+                        FillSheet(dfTemp, strDataName, grdVariablesMetadata)
+                        clsSetVariablesMetadataChanged.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
+                        clsSetVariablesMetadataChanged.AddParameter("new_val", "TRUE")
+                        frmMain.clsRLink.RunInternalScript(clsSetVariablesMetadataChanged.ToScript())
+                    Else
+                        bGrdVariablesMetadataExists = False
+                    End If
                 End If
             Next
             'delete old sheets
@@ -247,6 +253,8 @@ Public Class clsGridLink
         Dim vecColumnColours As NumericVector
         Dim bApplyColumnColours As Boolean
         Dim i, j, k As Integer
+        Dim expColNames As SymbolicExpression
+        Dim strCurrColNames As String = ""
 
         iCount = 0
         For Each tempWorkSheet In grdCurr.Worksheets
@@ -272,9 +280,10 @@ Public Class clsGridLink
         fillWorkSheet.Columns = dfTemp.ColumnCount
         strColumnNames = dfTemp.ColumnNames
         If dfTemp.RowCount = 0 Then
-            'TODO Does this reset any changes that we need to keep?
-            '     (Formatting is reapplied below)
-            fillWorkSheet.Reset(1, dfTemp.ColumnCount)
+            fillWorkSheet.Rows = 1
+            For j = 0 To fillWorkSheet.Columns - 1
+                fillWorkSheet(row:=0, col:=j) = ""
+            Next
             fillWorkSheet.SetRowsHeight(0, 1, 0.1)
             fillWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_AllowAdjustRowHeight, False)
         Else
@@ -308,12 +317,21 @@ Public Class clsGridLink
             clsGetColumnNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_names")
             clsGetColumnNames.AddParameter("data_name", Chr(34) & strName & Chr(34))
             clsGetColumnNames.AddParameter("include", "list(Is_Hidden = FALSE)")
-            If bIncludeDataTypes Then
+            If bInstatObjectDataFrame AndAlso frmMain.clsRLink.bInstatObjectExists Then
+                expColNames = frmMain.clsRLink.RunInternalScriptGetValue(clsGetColumnNames.ToScript())
+                If expColNames IsNot Nothing AndAlso expColNames.Type <> Internals.SymbolicExpressionType.Null Then
+                    strCurrColNames = frmMain.clsRLink.GetListAsRString(expColNames.AsCharacter.ToList)
+                Else
+                    strCurrColNames = ""
+                End If
+            End If
+
+            If bInstatObjectDataFrame AndAlso frmMain.clsRLink.bInstatObjectExists AndAlso bIncludeDataTypes Then
                 If bInstatObjectDataFrame AndAlso frmMain.clsRLink.bInstatObjectExists Then
                     clsGetVarMetaFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
                     clsGetVarMetaFunc.AddParameter("data_name", Chr(34) & strName & Chr(34))
                     clsGetVarMetaFunc.AddParameter("property", "data_type_label")
-                    clsGetVarMetaFunc.AddParameter("column", clsRFunctionParameter:=clsGetColumnNames)
+                    clsGetVarMetaFunc.AddParameter("column", strCurrColNames)
                 Else
                     clsGetVarMetaFunc.SetRCommand("sapply")
                     clsGetVarMetaFunc.AddParameter("X", strName)
@@ -356,14 +374,14 @@ Public Class clsGridLink
                 clsHasColoursFunc.ClearParameters()
                 clsHasColoursFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$has_colours")
                 clsHasColoursFunc.AddParameter("data_name", Chr(34) & strName & Chr(34))
-                clsHasColoursFunc.AddParameter("columns", clsRFunctionParameter:=clsGetColumnNames)
+                clsHasColoursFunc.AddParameter("columns", strCurrColNames)
                 bApplyColumnColours = frmMain.clsRLink.RunInternalScriptGetValue(clsHasColoursFunc.ToScript()).AsLogical(0)
                 If bApplyColumnColours Then
                     clsGetVarMetaFunc.ClearParameters()
                     clsGetVarMetaFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
                     clsGetVarMetaFunc.AddParameter("data_name", Chr(34) & strName & Chr(34))
                     clsGetVarMetaFunc.AddParameter("property", "colour_label")
-                    clsGetVarMetaFunc.AddParameter("column", clsRFunctionParameter:=clsGetColumnNames)
+                    clsGetVarMetaFunc.AddParameter("column", strCurrColNames)
                     vecColumnColours = frmMain.clsRLink.RunInternalScriptGetValue(clsGetVarMetaFunc.ToScript()).AsNumeric
                     For k = 0 To dfTemp.ColumnCount - 1
                         SetDataViewColumnColor(grdCurr.CurrentWorksheet, k, bApplyColumnColours, vecColumnColours(k).ToString())
