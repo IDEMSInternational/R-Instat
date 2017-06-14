@@ -539,7 +539,7 @@ Partial Class frmMain
         '
         Me.RatingDataToolStripMenuItem.Enabled = False
         Me.RatingDataToolStripMenuItem.Name = "RatingDataToolStripMenuItem"
-        Me.RatingDataToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.RatingDataToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.RatingDataToolStripMenuItem.Text = "Rating Data..."
         '
         'mnuDescribeTwoVariables
