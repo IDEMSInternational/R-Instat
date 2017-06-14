@@ -1031,6 +1031,7 @@ Partial Class frmMain
         'mnuModelOtherOneVariable
         '
         Me.mnuModelOtherOneVariable.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuModelOtherOneVariableExactResults, Me.mnuModelOtherOneVariableSampleSummaryData, Me.mnuModelOtherOneVariableNonParametric, Me.mnuModelOtherOneVariableGoodnessofFit})
+        Me.mnuModelOtherOneVariable.Enabled = False
         Me.mnuModelOtherOneVariable.Name = "mnuModelOtherOneVariable"
         Me.mnuModelOtherOneVariable.Size = New System.Drawing.Size(201, 22)
         Me.mnuModelOtherOneVariable.Tag = "Other_(One_Variable)"
@@ -1070,6 +1071,7 @@ Partial Class frmMain
         'mnuModelOtherTwoVariables
         '
         Me.mnuModelOtherTwoVariables.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuModelOtherTwoVariablesTwoSamples, Me.mnuModelOtherTwoVariablesSummaryData, Me.mnuModelOtherTwoVariablesSimpleRegression, Me.mnuModelOtherTwoVariablesOneWayANOVA, Me.mnuModelOtherTwoVariablesNonParametricTwoSamples, Me.mnuModelOtherTwoVariablesNonParametricOneWayANOVA})
+        Me.mnuModelOtherTwoVariables.Enabled = False
         Me.mnuModelOtherTwoVariables.Name = "mnuModelOtherTwoVariables"
         Me.mnuModelOtherTwoVariables.Size = New System.Drawing.Size(201, 22)
         Me.mnuModelOtherTwoVariables.Tag = "Other_(Two_Variables)"
