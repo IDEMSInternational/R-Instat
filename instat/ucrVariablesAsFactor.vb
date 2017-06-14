@@ -96,7 +96,7 @@ Public Class ucrVariablesAsFactor
         For i = 0 To ucrMultipleVariables.lstSelectedVariables.Items.Count - 1
             lstVariablesFromSelector.Remove(ucrMultipleVariables.lstSelectedVariables.Items(i).Text)
         Next
-
+        lstVariablesFromSelector.RemoveAll(Function(x) x = "value")
         If lstVariablesFromSelector.Count = 1 Then
             If bWithQuotes Then
                 strIDVars = Chr(34) & lstVariablesFromSelector(0) & Chr(34)
@@ -164,6 +164,9 @@ Public Class ucrVariablesAsFactor
                 ucrFactorReceiver.SetStackedFactorMode(False)
             End If
             ucrSingleVariable.SetMeAsReceiver()
+            If Selector IsNot Nothing Then
+                Selector.bIsStacked = False
+            End If
         Else
             ucrSingleVariable.Visible = False
             ucrMultipleVariables.Visible = True
@@ -177,6 +180,9 @@ Public Class ucrVariablesAsFactor
                 ucrVariableSelector.ucrAvailableDataFrames.clsCurrDataFrame.AddParameter("id.vars", GetIDVarNamesFromSelector())
             End If
             ucrMultipleVariables.SetMeAsReceiver()
+            If Selector IsNot Nothing Then
+                Selector.bIsStacked = True
+            End If
         End If
         OnControlValueChanged()
     End Sub
@@ -321,7 +327,6 @@ Public Class ucrVariablesAsFactor
             MyBase.Selector = ucrNewSelector
             ucrSingleVariable.Selector = ucrNewSelector
             ucrMultipleVariables.Selector = ucrNewSelector
-
             If ucrNewSelector IsNot Nothing Then
                 ucrVariableSelector = TryCast(ucrNewSelector, ucrSelectorByDataFrame)
                 If ucrVariableSelector Is Nothing Then
