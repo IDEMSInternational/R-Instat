@@ -42,6 +42,7 @@ Public Class sdgLayerOptions
     Private Sub InitialiseDialog()
         ucrLayerParameter.ucrGeomWithAes = ucrGeomWithAes
         ucrGeomWithAes.ucrLayersControl = ucrLayerParameter
+        ucrSdgLayerBase.iHelpTopicID = 569
         'Each ucrLayerParameter has a field of type ucrGeomListWithAes and reciprocally as both of them "collaborate to provide full description of a Layer".
         'The obvious linking is performed here in sdgLayerOptions.
     End Sub
