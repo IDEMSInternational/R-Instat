@@ -168,12 +168,12 @@ Public Class sdgClimdexIndices
         ucrNudMothlyMissingDays.SetMinMax(1, 31)
 
         ucrNudLowerBase.SetParameter(New RParameter("lower_base", 0))
-        ucrNudLowerBase.clsParameter.bIncludeArgumentName = False
+        ucrNudLowerBase.SetParameterIncludeArgumentName(False)
         ucrNudLowerBase.SetRDefault(1961)
         ucrNudLowerBase.SetMinMax(1900, 9999)
 
         ucrNudUpperBase.SetParameter(New RParameter("upper_base", 1))
-        ucrNudUpperBase.clsParameter.bIncludeArgumentName = False
+        ucrNudUpperBase.SetParameterIncludeArgumentName(False)
         ucrNudUpperBase.SetRDefault(1990)
         ucrNudUpperBase.SetMinMax(1900, 9999)
 
@@ -188,13 +188,13 @@ Public Class sdgClimdexIndices
         ucrInputTempQtiles.SetParameter(New RParameter("x"))
         ucrInputTempQtiles.SetValidationTypeAsNumericList()
         ucrInputTempQtiles.AddQuotesIfUnrecognised = False
-        ucrInputTempQtiles.clsParameter.bIncludeArgumentName = False
+        ucrInputTempQtiles.SetParameterIncludeArgumentName(False)
         ucrInputTempQtiles.SetRDefault("0.1, 0.9")
 
         ucrInputPrecQtiles.SetParameter(New RParameter("x"))
         ucrInputPrecQtiles.SetValidationTypeAsNumericList()
         ucrInputPrecQtiles.AddQuotesIfUnrecognised = False
-        ucrInputPrecQtiles.clsParameter.bIncludeArgumentName = False
+        ucrInputPrecQtiles.SetParameterIncludeArgumentName(False)
         ucrInputPrecQtiles.SetRDefault("0.95, 0.99")
 
         clsNewClimdexInput.AddParameter("temp.qtiles", clsRFunctionParameter:=clsRTempQTiles)
@@ -262,6 +262,7 @@ Public Class sdgClimdexIndices
         clsRTwoArg4.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsDefaultFunction)
         clsRTwoArg5.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsDefaultFunction)
         clsRThreeArg.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsDefaultFunction)
+        InitialiseTabs()
         bControlsInitialised = True
     End Sub
 
@@ -436,6 +437,10 @@ Public Class sdgClimdexIndices
         ucrChkSpellDISpanYear.SetRCode(clsRTwoArg5, bReset)
         ucrInputGSLMode.SetRCode(clsRTwoArg2, bReset)
         IndicesType()
+
+        If bReset Then
+            tbpClimdex.SelectedIndex = 0
+        End If
     End Sub
 
     Private Sub GroupBoxControl(TempGroupBox As GroupBox)
@@ -563,5 +568,14 @@ Public Class sdgClimdexIndices
 
     Private Sub ucrInputFreq_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFreq.ControlContentsChanged
         IndicesType()
+    End Sub
+
+    Private Sub InitialiseTabs()
+        For i = 0 To tbpClimdex.TabCount - 1
+            tbpClimdex.SelectedIndex = i
+        Next
+        tbpClimdex.TabPages(2).Enabled = False
+        tbpClimdex.TabPages(1).Enabled = False
+        tbpClimdex.SelectedIndex = 0
     End Sub
 End Class
