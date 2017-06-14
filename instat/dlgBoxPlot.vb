@@ -34,7 +34,7 @@ Public Class dlgBoxplot
     Private clsThemeFunction As New RFunction
     Private dctThemeFunctions As Dictionary(Of String, RFunction)
     Private bResetSubdialog As Boolean = True
-    Private bResetLayerSubdialog As Boolean = True
+    Private bResetBoxLayerSubdialog As Boolean = True
 
     Private Sub dlgBoxPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -195,9 +195,9 @@ Public Class dlgBoxplot
 
     Private Sub cmdBoxPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdBoxPlotOptions.Click
         'SetupLayer sends the components storing the plot info (clsRgeom_boxplotFunction, clsRggplotFunction, ...) of dlgBoxPlot through to sdgLayerOptions where these will be edited.
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomPlotFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorBoxPlot, bApplyAesGlobally:=True, bReset:=bResetLayerSubdialog)
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomPlotFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorBoxPlot, bApplyAesGlobally:=True, bReset:=bResetBoxLayerSubdialog)
         sdgLayerOptions.ShowDialog()
-        bResetLayerSubdialog = False
+        bResetBoxLayerSubdialog = False
         'Coming from the sdgLayerOptions, clsRgeom_boxplot and others has been modified. One then needs to display these modifications on the dlgBoxPlot.
         If clsRgeomPlotFunction.GetParameter("varwidth") IsNot Nothing Then
             If clsRgeomPlotFunction.GetParameter("varwidth").strArgumentValue = "TRUE" Then
