@@ -41,7 +41,6 @@ Partial Class dlgCombineforGraphics
         '
         'cmdOptions
         '
-        Me.cmdOptions.Enabled = False
         Me.cmdOptions.Location = New System.Drawing.Point(10, 199)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(75, 23)
