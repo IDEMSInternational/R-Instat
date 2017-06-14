@@ -32,7 +32,7 @@ Public Class dlgSummaryBarOrPieChart
     Private dctThemeFunctions As New Dictionary(Of String, RFunction)
     Private bResetSubdialog As Boolean = True
     Private clsLocalRaesFunction As New RFunction
-    Private bResetLayerSubdialog As Boolean = True
+    Private bResetSummaryBarLayerSubdialog As Boolean = True
 
     Private Sub cmdOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -172,8 +172,9 @@ Public Class dlgSummaryBarOrPieChart
     End Sub
 
     Private Sub cmdBarChartOptions_Click(sender As Object, e As EventArgs) Handles cmdBarChartOptions.Click
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomBarFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSummaryBarSelector, bApplyAesGlobally:=True, bReset:=bResetLayerSubdialog)
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomBarFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSummaryBarSelector, bApplyAesGlobally:=True, bReset:=bResetSummaryBarLayerSubdialog)
         sdgLayerOptions.ShowDialog()
+        bResetSummaryBarLayerSubdialog = False
         For Each clsParam In clsRaesFunction.clsParameters
             If clsParam.strArgumentName = "x" Then
                 ucrFactorReceiver.Add(clsParam.strArgumentValue)
@@ -187,8 +188,9 @@ Public Class dlgSummaryBarOrPieChart
     End Sub
 
     Private Sub cmdPieChartOptions_Click(sender As Object, e As EventArgs) Handles cmdPieChartOptions.Click
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomBarFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSummaryBarSelector, bApplyAesGlobally:=True, bReset:=bResetLayerSubdialog)
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomBarFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSummaryBarSelector, bApplyAesGlobally:=True, bReset:=bResetSummaryBarLayerSubdialog)
         sdgLayerOptions.ShowDialog()
+        bResetSummaryBarLayerSubdialog = False
         For Each clsParam In clsRaesFunction.clsParameters
             If clsParam.strArgumentName = "y" Then
                 ucrYReceiver.Add(clsParam.strArgumentValue)
