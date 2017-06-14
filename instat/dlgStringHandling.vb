@@ -51,9 +51,8 @@ Public Class dlgStringHandling
         ucrPnlStringHandling.AddRadioButton(rdoReplaceAll)
 
         'ucrRdofixedRegex
-        ucrPnlFixedRegex.SetParameter(New RParameter("ignore_case"))
-        ucrPnlFixedRegex.AddRadioButton(rdoFixed, "FALSE")
-        ucrPnlFixedRegex.AddRadioButton(rdoRegex, "TRUE")
+        ucrPnlFixedRegex.AddRadioButton(rdoFixed)
+        ucrPnlFixedRegex.AddRadioButton(rdoRegex)
 
         ucrPnlStringHandling.AddFunctionNamesCondition(rdoCount, "str_count")
         ucrPnlStringHandling.AddFunctionNamesCondition(rdoExtract, "str_extract")
@@ -198,6 +197,8 @@ Public Class dlgStringHandling
     Private Sub AddRemoveParameters()
         If ucrChkIncludeRegularExpressions.Checked Then
             If rdoRegex.Checked Then
+                clsFixedFunction.RemoveParameterByName("ignore_case")
+                clsRegexFunction.AddParameter("ignore_case", "TRUE")
                 If Not ucrReceiverForRegexExpression.IsEmpty Then
                     clsRegexFunction.AddParameter("pattern", Chr(34) & ucrReceiverForRegexExpression.GetText & Chr(34))
                     clsCountFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction)
@@ -208,6 +209,8 @@ Public Class dlgStringHandling
                     clsReplaceAllFunction.AddParameter("pattern", clsRFunctionParameter:=clsRegexFunction)
                 End If
             Else
+                clsFixedFunction.AddParameter("ignore_case", "FALSE")
+                clsRegexFunction.RemoveParameterByName("ignore_case")
                 clsRegexFunction.RemoveParameterByName("pattern")
                 clsFixedFunction.AddParameter("pattern", Chr(34) & ucrInputPattern.GetText & Chr(34))
                 clsCountFunction.AddParameter("pattern", clsRFunctionParameter:=clsFixedFunction)
