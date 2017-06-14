@@ -67,7 +67,6 @@ versions <- c("1.4-5", "1.12", "1.9-3", "0.2.0", "1.1.0", "0.1-3",
               "0.3-2", "1.0.2", "3.98-1.7", "1.8-2", "2.1.14", "1.8-0")
 
 success <- invisible(mapply(function(p, v) length(find.package(p, quiet = TRUE)) > 0 && compareVersion(as.character(packageVersion(p)), v) >= 0, packs, versions))
-print(success)
 if(!all(success)) install.packages(names(success)[!success], repos = paste0("file:///", getwd(), "/extras"), type = "win.binary")
 
 for(pack in c("plyr", "dplyr", "ggplot2", "svglite")) {

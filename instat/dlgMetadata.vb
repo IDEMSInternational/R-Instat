@@ -46,13 +46,15 @@ Public Class dlgMetadata
 
         clsLayerParam.strLayerParameterDataType = "list"
         'To be updated, not correct
-        ucrNewValue.SetControls(Nothing, clsLayerParam)
-        ucrReceiverChooseProperty.Selector = ucrSelectByMetadata
-        ucrReceiverChooseColumns.Selector = ucrSelectByMetadata
-        ucrReceiverChooseProperty.SetMeAsReceiver()
-        ucrBase.iHelpTopicID = 391
-        ucrReceiverChooseColumns.SetItemType("column")
-        ucrReceiverChooseProperty.SetItemType("metadata")
+        'ucrNewValue.SetControls(Nothing, clsLayerParam)
+        ucrNewValue.bIsActiveRControl = False
+
+        'ucrReceiverChooseProperty.Selector = ucrSelectByMetadata
+        'ucrReceiverChooseColumns.Selector = ucrSelectByMetadata
+        'ucrReceiverChooseProperty.SetMeAsReceiver()
+        ucrBase.iHelpTopicID = 53
+        'ucrReceiverChooseColumns.SetItemType("column")
+        'ucrReceiverChooseProperty.SetItemType("metadata")
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$append_to_variables_metadata")
         clsGetVarMetadata.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
         ucrCurrentValue.IsReadOnly = True
