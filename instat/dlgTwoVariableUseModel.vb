@@ -44,6 +44,8 @@ Public Class dlgTwoVariableUseModel
     Private Sub InitialiseDialog()
         'Temporary fix: Bugs if you run the dialogue the second time
         sdgSimpleRegOptions.chkFittedModel.Enabled = False
+        'autoplot function does not support glm/lm models
+        sdgSimpleRegOptions.chkFittedModel.Enabled = False
         'ucrBase.iHelpTopicID = 
         ucrBaseUseModel.clsRsyntax.SetOperation("+")
         ucrReceiverUseModel.SetItemType("model")
