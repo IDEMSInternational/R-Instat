@@ -25,6 +25,7 @@
     Public Shared ReadOnly Property strThemes As String()
         Get
             Dim strTemp As String()
+            'TODO need to make proper functions and set package names
             strTemp = {"theme_bw", "theme_linedraw", "theme_light", "theme_minimal", "theme_classic", "theme_dark", "theme_void", "theme_base", "theme_calc", "theme_economist", "theme_few", "theme_fivethirtyeight", "theme_foundation", "theme_grey", "theme_gdocs", "theme_igray", "theme_map", "theme_par", "theme_solarized", "theme_hc", "theme_pander", "theme_solid", "theme_stata", "theme_tufte", "theme_wsj"}
             System.Array.Sort(Of String)(strTemp)
             Return strTemp
