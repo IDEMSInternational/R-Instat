@@ -42,6 +42,7 @@ Public Class dlgFrequency
         Dim dctPercentageType As New Dictionary(Of String, String)
         ucrBase.clsRsyntax.iCallType = 4
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        cmdOptions.Enabled = False ' Temporarily disabled
 
         ucrSelectorFrequency.SetParameter(New RParameter("data_name", 0))
         ucrSelectorFrequency.SetParameterIsString()
