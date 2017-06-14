@@ -82,7 +82,7 @@ Public Class dlgPolynomials
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrNudDegree.SetRCode(clsPolynomial, bReset)
-        ucrPnlType.SetRCode(clsPolynomial, bReset)
+        ucrPnlType.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrSavePoly.SetRCode(clsPolynomial, bReset)
         If rdoSimple.Checked OrElse rdoOrthogonal.Checked Then
             ucrReceiverPolynomial.SetRCode(clsPolynomial, bReset)
