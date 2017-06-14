@@ -32,7 +32,7 @@ Public Class dlgClimaticSummary
     End Sub
 
     Private Sub InitialiseDialog()
-
+        ucrBase.iHelpTopicID = 510
     End Sub
 
     Private Sub SetDefaults()
