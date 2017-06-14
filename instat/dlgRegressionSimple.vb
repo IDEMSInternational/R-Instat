@@ -509,7 +509,7 @@ Public Class dlgRegressionSimple
         End If
     End Sub
 
-    Private Sub ucrFamily_cboDistributionsIndexChanged() Handles ucrFamily.ControlValueChanged
+    Private Sub ucrDistWithParameters_ucrInputDistributionsIndexChanged() Handles ucrFamily.DistributionsIndexChanged
         sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
         sdgModelOptions.ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = sdgModelOptions.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
         sdgModelOptions.RestrictLink()
