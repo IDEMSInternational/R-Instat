@@ -35,6 +35,8 @@ Public Class dlgThreeVariableModelling
     End Sub
 
     Private Sub InitialiseDialog()
+        'Temporary fix: function autoplot does not support glm/lm models
+        sdgSimpleRegOptions.chkMultiplePlots.Enabled = False
         ucrBaseThreeVariableModelling.clsRsyntax.iCallType = 2
         ucrBaseThreeVariableModelling.clsRsyntax.SetFunction("")
         ucrBaseThreeVariableModelling.iHelpTopicID = 369
@@ -254,7 +256,7 @@ Public Class dlgThreeVariableModelling
         End If
     End Sub
 
-    Public Sub ucrFamily_cboDistributionsIndexChanged() Handles ucrFamily.ControlValueChanged
+    Public Sub ucrFamily_cboDistributionsIndexChanged() Handles ucrFamily.DistributionsIndexChanged
         sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
         sdgModelOptions.ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = sdgModelOptions.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
         sdgModelOptions.RestrictLink()
