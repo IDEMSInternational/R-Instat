@@ -107,14 +107,16 @@ Public Class sdgThemes
         dctLegendPosition.Add("Top", Chr(34) & "top" & Chr(34))
         dctLegendPosition.Add("Bottom", Chr(34) & "bottom" & Chr(34))
         ucrInputLegendPosition.SetItems(dctLegendPosition)
-        ucrInputLegendPosition.SetRDefault(Chr(34) & "none" & Chr(34))
+        urChkLegendPosition.AddParameterPresentCondition(True, "legend.position")
+        urChkLegendPosition.AddParameterPresentCondition(False, "legend.position", False)
 
         ucrChkLegendBox.SetText("Legend Layout")
         ucrInputLegendBox.SetParameter(New RParameter("legend.box"))
         dctLegendBox.Add("Vertical", Chr(34) & "vertical" & Chr(34))
         dctLegendBox.Add("Horizontal", Chr(34) & "horizontal" & Chr(34))
         ucrInputLegendBox.SetItems(dctLegendBox)
-        ucrInputLegendBox.SetRDefault(Chr(34) & "vertical" & Chr(34))
+        ucrChkLegendBox.AddParameterPresentCondition(True, "legend.box")
+        ucrChkLegendBox.AddParameterPresentCondition(False, "legend.box", False)
 
         urChkLegendBoxJust.SetText("Justify Legend Box")
         ucrInputLegendBoxJust.SetParameter(New RParameter("legend.box.just"))
@@ -123,14 +125,17 @@ Public Class sdgThemes
         dctLegendBoxJust.Add("Right", Chr(34) & "right" & Chr(34))
         dctLegendBoxJust.Add("Left", Chr(34) & "left" & Chr(34))
         ucrInputLegendBoxJust.SetItems(dctLegendBoxJust)
-        ucrInputLegendBoxJust.SetRDefault(Chr(34) & "top" & Chr(34))
+        urChkLegendBoxJust.AddParameterPresentCondition(True, "legend.box.just")
+        urChkLegendBoxJust.AddParameterPresentCondition(False, "legend.box.just", False)
 
         ucrChkLegendDirection.SetText("Legend Direction")
         ucrInputLegendDirection.SetParameter(New RParameter("legend.direction"))
         dctLegendDirection.Add("Vertical", Chr(34) & "vertical" & Chr(34))
         dctLegendDirection.Add("Horizontal", Chr(34) & "horizontal" & Chr(34))
         ucrInputLegendDirection.SetItems(dctLegendDirection)
-        ucrInputLegendDirection.SetRDefault(Chr(34) & "vertical" & Chr(34))
+        ucrChkLegendDirection.AddParameterPresentCondition(True, "legend.direction")
+        ucrChkLegendDirection.AddParameterPresentCondition(False, "legend.direction", False)
+
 
         ucrChkLegendJustification.SetText("Legend Justification")
         ucrInputLegendJustification.SetParameter(New RParameter("legend.justification"))
@@ -140,13 +145,15 @@ Public Class sdgThemes
         dctLegendJustification.Add("Left", Chr(34) & "left" & Chr(34))
         dctLegendJustification.Add("Center", Chr(34) & "centre" & Chr(34))
         ucrInputLegendJustification.SetItems(dctLegendJustification)
-        ucrInputLegendJustification.SetRDefault(Chr(34) & "top" & Chr(34))
+        ucrChkLegendJustification.AddParameterPresentCondition(True, "legend.justification")
+        ucrChkLegendJustification.AddParameterPresentCondition(False, "legend.justification", False)
 
-        urChkLegendPosition.AddToLinkedControls(ucrInputLegendPosition, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkLegendBox.AddToLinkedControls(ucrInputLegendBox, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        urChkLegendBoxJust.AddToLinkedControls(ucrInputLegendBoxJust, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkLegendDirection.AddToLinkedControls(ucrInputLegendDirection, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkLegendJustification.AddToLinkedControls(ucrInputLegendJustification, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        urChkLegendPosition.AddToLinkedControls(ucrInputLegendPosition, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
+        ucrChkLegendBox.AddToLinkedControls(ucrInputLegendBox, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Vertical")
+        urChkLegendBoxJust.AddToLinkedControls(ucrInputLegendBoxJust, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Top")
+        ucrChkLegendDirection.AddToLinkedControls(ucrInputLegendDirection, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Vertical")
+        ucrChkLegendJustification.AddToLinkedControls(ucrInputLegendJustification, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Top")
 
     End Sub
 
@@ -326,7 +333,7 @@ Public Class sdgThemes
         ucrPanelBackGround.SetRCodeForControl("panel.background", clsElementPanelBackGround, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
         ucrPanelBorder.SetRCodeForControl("panel.border", clsElementBorder, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
-        ucrPlotBackGround.SetRCodeForControl("plot.background", clsElementPlotBackground, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrPlotBackground.SetRCodeForControl("plot.background", clsElementPlotBackground, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
         ucrPlotCaption.SetRCodeForControl("plot.caption", clsElementPlotCaption, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
         ucrPlotSubTitle.SetRCodeForControl("plot.subtitle", clsElementPlotSubtitle, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
         ucrPlotTitle.SetRCodeForControl("plot.title", clsElementPlotTitle, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
