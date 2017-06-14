@@ -102,9 +102,6 @@ Public Class dlgExportToOpenRefine
 
     Private Sub ucrOpenRefineDataFrame_ControlContentsChanged() Handles ucrDataFrameOpenRefine.ControlContentsChanged
         NewDefaultName()
-        clsDefaultWrite.RemoveParameterByName("file")
-        clsDefaultRefine.RemoveParameterByName("file")
-        clsDefaultRefine.RemoveParameterByName("project.name")
         clsDefaultWrite.AddParameter("file", Chr(34) & ucrInputDatasetName.GetText() & ".csv" & Chr(34))
         clsDefaultRefine.AddParameter("file", Chr(34) & ucrInputDatasetName.GetText() & ".csv" & Chr(34))
         clsDefaultRefine.AddParameter("project.name", Chr(34) & ucrInputDatasetName.GetText() & Chr(34))
