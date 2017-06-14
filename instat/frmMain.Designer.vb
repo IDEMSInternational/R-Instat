@@ -3030,28 +3030,28 @@ Partial Class frmMain
         'mnuPrepareColumnTextFindReplace
         '
         Me.mnuPrepareColumnTextFindReplace.Name = "mnuPrepareColumnTextFindReplace"
-        Me.mnuPrepareColumnTextFindReplace.Size = New System.Drawing.Size(143, 22)
+        Me.mnuPrepareColumnTextFindReplace.Size = New System.Drawing.Size(152, 22)
         Me.mnuPrepareColumnTextFindReplace.Tag = "Find/Replace..."
-        Me.mnuPrepareColumnTextFindReplace.Text = "Find/Replace"
+        Me.mnuPrepareColumnTextFindReplace.Text = "Find/Replace..."
         '
         'mnuPrepareColumnTextTransform
         '
         Me.mnuPrepareColumnTextTransform.Name = "mnuPrepareColumnTextTransform"
-        Me.mnuPrepareColumnTextTransform.Size = New System.Drawing.Size(143, 22)
+        Me.mnuPrepareColumnTextTransform.Size = New System.Drawing.Size(152, 22)
         Me.mnuPrepareColumnTextTransform.Tag = "Transform..."
         Me.mnuPrepareColumnTextTransform.Text = "Transform..."
         '
         'mnuPrepareColumnTextSplit
         '
         Me.mnuPrepareColumnTextSplit.Name = "mnuPrepareColumnTextSplit"
-        Me.mnuPrepareColumnTextSplit.Size = New System.Drawing.Size(143, 22)
+        Me.mnuPrepareColumnTextSplit.Size = New System.Drawing.Size(152, 22)
         Me.mnuPrepareColumnTextSplit.Tag = "Split..."
         Me.mnuPrepareColumnTextSplit.Text = "Split..."
         '
         'mnuPrepareColumnTextCombine
         '
         Me.mnuPrepareColumnTextCombine.Name = "mnuPrepareColumnTextCombine"
-        Me.mnuPrepareColumnTextCombine.Size = New System.Drawing.Size(143, 22)
+        Me.mnuPrepareColumnTextCombine.Size = New System.Drawing.Size(152, 22)
         Me.mnuPrepareColumnTextCombine.Tag = "Combine..."
         Me.mnuPrepareColumnTextCombine.Text = "Combine..."
         '
@@ -3059,16 +3059,16 @@ Partial Class frmMain
         '
         Me.mnuPrepareColumnTextMatch.Enabled = False
         Me.mnuPrepareColumnTextMatch.Name = "mnuPrepareColumnTextMatch"
-        Me.mnuPrepareColumnTextMatch.Size = New System.Drawing.Size(143, 22)
+        Me.mnuPrepareColumnTextMatch.Size = New System.Drawing.Size(152, 22)
         Me.mnuPrepareColumnTextMatch.Tag = "Match..."
         Me.mnuPrepareColumnTextMatch.Text = "Match..."
         '
         'mnuPrepareColumnTextDistance
         '
         Me.mnuPrepareColumnTextDistance.Name = "mnuPrepareColumnTextDistance"
-        Me.mnuPrepareColumnTextDistance.Size = New System.Drawing.Size(143, 22)
+        Me.mnuPrepareColumnTextDistance.Size = New System.Drawing.Size(152, 22)
         Me.mnuPrepareColumnTextDistance.Tag = "Distance..."
-        Me.mnuPrepareColumnTextDistance.Text = "Distance"
+        Me.mnuPrepareColumnTextDistance.Text = "Distance..."
         '
         'mnuPrepareColumnDate
         '
