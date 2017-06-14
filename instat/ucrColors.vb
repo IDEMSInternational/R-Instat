@@ -20,7 +20,12 @@ Public Class ucrColors
     'TODO move this to a global location so that all controls can access the same colour dialog and user defined colours are kept
     Private dlgColour As New ColorDialog
 
-    Private Sub ucrColors_Load(sender As Object, e As EventArgs) Handles Me.Load
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
         If dctColours.Count = 0 Then
             dctColours.Add("NULL", "NULL")
             dctColours.Add(strPickColour, strPickColour)
@@ -36,10 +41,13 @@ Public Class ucrColors
             dctColours.Add("Brown", Chr(34) & "brown" & Chr(34))
             dctColours.Add("Pink", Chr(34) & "pink" & Chr(34))
         End If
+        bAllowNonConditionValues = True
+    End Sub
+
+    Private Sub ucrColors_Load(sender As Object, e As EventArgs) Handles Me.Load
         If GetParameter() IsNot Nothing Then
             SetItems(dctColours)
         End If
-        bAllowNonConditionValues = True
     End Sub
 
     Private Sub ucrColors_NameChanged() Handles Me.NameChanged
