@@ -34,6 +34,7 @@ Partial Class dlgRatingScales
         Me.rdoStacked = New System.Windows.Forms.RadioButton()
         Me.rdoLikert = New System.Windows.Forms.RadioButton()
         Me.rdoTable = New System.Windows.Forms.RadioButton()
+        Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrPnlGraphType = New instat.UcrPanel()
         Me.ucrChkNumberOfCategories = New instat.ucrCheck()
         Me.ucrNudNeutralLevel = New instat.ucrNud()
@@ -45,7 +46,6 @@ Partial Class dlgRatingScales
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlType = New instat.UcrPanel()
         Me.ucrSelectorRatingScale = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrSaveGraph = New instat.ucrSave()
         Me.grpSort.SuspendLayout()
         Me.grpLikertType.SuspendLayout()
         Me.SuspendLayout()
@@ -69,7 +69,7 @@ Partial Class dlgRatingScales
         Me.grpSort.Controls.Add(Me.ucrPnlSjpLikert)
         Me.grpSort.Location = New System.Drawing.Point(284, 193)
         Me.grpSort.Name = "grpSort"
-        Me.grpSort.Size = New System.Drawing.Size(161, 149)
+        Me.grpSort.Size = New System.Drawing.Size(136, 149)
         Me.grpSort.TabIndex = 7
         Me.grpSort.TabStop = False
         Me.grpSort.Text = "Sort"
@@ -161,7 +161,7 @@ Partial Class dlgRatingScales
         Me.rdoStacked.FlatAppearance.BorderSize = 2
         Me.rdoStacked.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoStacked.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoStacked.Location = New System.Drawing.Point(258, 10)
+        Me.rdoStacked.Location = New System.Drawing.Point(162, 10)
         Me.rdoStacked.Name = "rdoStacked"
         Me.rdoStacked.Size = New System.Drawing.Size(100, 28)
         Me.rdoStacked.TabIndex = 3
@@ -176,7 +176,7 @@ Partial Class dlgRatingScales
         Me.rdoLikert.FlatAppearance.BorderSize = 2
         Me.rdoLikert.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoLikert.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoLikert.Location = New System.Drawing.Point(160, 10)
+        Me.rdoLikert.Location = New System.Drawing.Point(262, 10)
         Me.rdoLikert.Name = "rdoLikert"
         Me.rdoLikert.Size = New System.Drawing.Size(100, 28)
         Me.rdoLikert.TabIndex = 2
@@ -198,6 +198,13 @@ Partial Class dlgRatingScales
         Me.rdoTable.Text = "Table"
         Me.rdoTable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoTable.UseVisualStyleBackColor = True
+        '
+        'ucrSaveGraph
+        '
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 399)
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(255, 24)
+        Me.ucrSaveGraph.TabIndex = 15
         '
         'ucrPnlGraphType
         '
@@ -297,18 +304,11 @@ Partial Class dlgRatingScales
         Me.ucrSelectorRatingScale.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorRatingScale.TabIndex = 4
         '
-        'ucrSaveGraph
-        '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 399)
-        Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(255, 24)
-        Me.ucrSaveGraph.TabIndex = 15
-        '
         'dlgRatingScales
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(447, 496)
+        Me.ClientSize = New System.Drawing.Size(425, 496)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.rdoStacked)
         Me.Controls.Add(Me.rdoLikert)
