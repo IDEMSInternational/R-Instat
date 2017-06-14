@@ -107,7 +107,7 @@ Public Class dlgFourVariableModelling
 
     Public Sub ResponseConvert()
         If Not ucrResponse.IsEmpty Then
-            ucrFamily.RecieverDatatype(ucrSelectorFourVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
+            ucrFamily.ReceiverDatatype(ucrSelectorFourVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
 
             If ucrFamily.strDataType = "numeric" Then
                 chkConvertToVariate.Checked = False
@@ -120,12 +120,12 @@ Public Class dlgFourVariableModelling
                 clsRConvert.SetRCommand("as.numeric")
                 clsRConvert.AddParameter("x", ucrResponse.GetVariableNames(bWithQuotes:=False))
                 clsModel.AddParameter(iPosition:=0, clsRFunctionParameter:=clsRConvert)
-                ucrFamily.RecieverDatatype("numeric")
+                ucrFamily.ReceiverDatatype("numeric")
             Else
                 clsModel.AddParameter(iPosition:=0, strParameterValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
-                ucrFamily.RecieverDatatype(ucrSelectorFourVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
+                ucrFamily.ReceiverDatatype(ucrSelectorFourVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
             End If
-            sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
+            sdgModelOptions.ucrFamily.ReceiverDatatype(ucrFamily.strDataType)
         End If
 
         If ucrFamily.lstCurrentDistributions.Count = 0 Or ucrResponse.IsEmpty() Then
@@ -232,7 +232,7 @@ Public Class dlgFourVariableModelling
     End Sub
 
     Public Sub ChooseRFunction()
-        sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
+        sdgModelOptions.ucrFamily.ReceiverDatatype(ucrFamily.strDataType)
         sdgModelOptions.ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = sdgModelOptions.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
         sdgModelOptions.RestrictLink()
         'TODO:   Include multinomial as an option And the appropriate function

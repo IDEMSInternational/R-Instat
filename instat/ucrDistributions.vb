@@ -586,12 +586,12 @@ Public Class ucrDistributions
         RaiseEvent DistributionsIndexChanged()
     End Sub
 
-    Public Sub RecieverDatatype(DataFrame As String, Column As String)
+    Public Sub ReceiverDatatype(DataFrame As String, Column As String)
         strDataType = frmMain.clsRLink.GetDataType(DataFrame, Column)
         SetDistributions()
     End Sub
 
-    Public Sub RecieverDatatype(strNewType As String)
+    Public Sub ReceiverDatatype(strNewType As String)
         strDataType = strNewType
         SetDistributions()
     End Sub

@@ -383,25 +383,25 @@ Public Class dlgRegressionSimple
     Public Sub ConvertToVariate()
         If rdoGeneral.Checked Then
             If Not ucrResponse.IsEmpty Then
-                ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
+                ucrFamily.ReceiverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
                 If ucrFamily.strDataType = "numeric" Then
                     chkConvertToVariate.Checked = False
                     chkConvertToVariate.Visible = False
                 Else
                     chkConvertToVariate.Visible = True
                 End If
-                sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
+                sdgModelOptions.ucrFamily.ReceiverDatatype(ucrFamily.strDataType)
                 If chkConvertToVariate.Checked Then
                     clsRConvert.SetRCommand("as.numeric")
                     clsRConvert.AddParameter("x", ucrResponse.GetVariableNames(bWithQuotes:=False))
                     clsModel.AddParameter(iPosition:=0, clsRFunctionParameter:=clsRConvert)
                     clsModel.AddParameter(clsRFunctionParameter:=ucrExplanatory.GetVariables())
-                    ucrFamily.RecieverDatatype("numeric")
+                    ucrFamily.ReceiverDatatype("numeric")
                 Else
                     clsModel.AddParameter(iPosition:=0, clsRFunctionParameter:=ucrResponse.GetVariables())
                     clsModel.AddParameter(clsRFunctionParameter:=ucrExplanatory.GetVariables())
                     clsModel.AddParameter(iPosition:=0, strParameterValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
-                    ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
+                    ucrFamily.ReceiverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
                 End If
             Else
                 If ucrFamily.lstCurrentDistributions.Count = 0 OrElse ucrResponse.IsEmpty() Then
@@ -413,7 +413,7 @@ Public Class dlgRegressionSimple
             End If
         Else
             If Not ucrResponse.IsEmpty Then
-                ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
+                ucrFamily.ReceiverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
             End If
         End If
         TestOKEnabled()
@@ -509,8 +509,8 @@ Public Class dlgRegressionSimple
         End If
     End Sub
 
-    Private Sub ucrFamily_cboDistributionsIndexChanged() Handles ucrFamily.ControlValueChanged
-        sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
+    Private Sub ucrDistWithParameters_ucrInputDistributionsIndexChanged() Handles ucrFamily.DistributionsIndexChanged
+        sdgModelOptions.ucrFamily.ReceiverDatatype(ucrFamily.strDataType)
         sdgModelOptions.ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = sdgModelOptions.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
         sdgModelOptions.RestrictLink()
         ExplanatoryFunctionSelect()
