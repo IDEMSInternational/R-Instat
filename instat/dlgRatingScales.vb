@@ -37,6 +37,11 @@ Public Class dlgRatingScales
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 519
 
+        lblOrderedFactor.Text = "Variables:"
+
+        ucrPnlSjpLikert.Enabled = False
+
+
         ucrPnlGraphType.AddRadioButton(rdoLikert)
         ucrPnlGraphType.AddRadioButton(rdoStacked)
         ucrPnlGraphType.AddRadioButton(rdoTable)
@@ -273,14 +278,6 @@ Public Class dlgRatingScales
     Private Sub ucrPnlGraphType_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlGraphType.ControlValueChanged, ucrPnlSjpLikert.ControlValueChanged
         SetBaseFunction()
         ChangeOfParameters()
-        ucrReceiverOrderedFactors.Clear()
-        If rdoTable.Checked Then
-            lblOrderedFactor.Text = "Variables (Factors):"
-            ucrReceiverOrderedFactors.SetDataType("numeric")
-        Else
-            lblOrderedFactor.Text = "Variables (Numeric):"
-            ucrReceiverOrderedFactors.SetDataType("factor")
-        End If
     End Sub
 
     Private Sub ucrChkWeights_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWeights.ControlValueChanged
