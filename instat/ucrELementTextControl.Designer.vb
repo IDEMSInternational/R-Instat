@@ -23,10 +23,10 @@ Partial Class ucrELementTextControl
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.grpAxisLabels = New System.Windows.Forms.GroupBox()
-        Me.ucrColors = New instat.ucrColors()
-        Me.ucrChkColour = New instat.ucrCheck()
-        Me.ucrChkFace = New instat.ucrCheck()
-        Me.ucrChkFamily = New instat.ucrCheck()
+        Me.ucrTextColors = New instat.ucrColors()
+        Me.ucrChkTextColour = New instat.ucrCheck()
+        Me.ucrChkTextFace = New instat.ucrCheck()
+        Me.ucrChkTextFamily = New instat.ucrCheck()
         Me.ucrChkAngle = New instat.ucrCheck()
         Me.ucrChkHjust = New instat.ucrCheck()
         Me.ucrChkVjust = New instat.ucrCheck()
@@ -37,17 +37,17 @@ Partial Class ucrELementTextControl
         Me.ucrNudAngle = New instat.ucrNud()
         Me.ucrNudHjust = New instat.ucrNud()
         Me.ucrNudsize = New instat.ucrNud()
-        Me.ucrInputFace = New instat.ucrInputComboBox()
-        Me.ucrInputFamily = New instat.ucrInputComboBox()
+        Me.ucrInputTextFace = New instat.ucrInputComboBox()
+        Me.ucrInputTextFamily = New instat.ucrInputComboBox()
         Me.grpAxisLabels.SuspendLayout()
         Me.SuspendLayout()
         '
         'grpAxisLabels
         '
-        Me.grpAxisLabels.Controls.Add(Me.ucrColors)
-        Me.grpAxisLabels.Controls.Add(Me.ucrChkColour)
-        Me.grpAxisLabels.Controls.Add(Me.ucrChkFace)
-        Me.grpAxisLabels.Controls.Add(Me.ucrChkFamily)
+        Me.grpAxisLabels.Controls.Add(Me.ucrTextColors)
+        Me.grpAxisLabels.Controls.Add(Me.ucrChkTextColour)
+        Me.grpAxisLabels.Controls.Add(Me.ucrChkTextFace)
+        Me.grpAxisLabels.Controls.Add(Me.ucrChkTextFamily)
         Me.grpAxisLabels.Controls.Add(Me.ucrChkAngle)
         Me.grpAxisLabels.Controls.Add(Me.ucrChkHjust)
         Me.grpAxisLabels.Controls.Add(Me.ucrChkVjust)
@@ -58,8 +58,8 @@ Partial Class ucrELementTextControl
         Me.grpAxisLabels.Controls.Add(Me.ucrNudAngle)
         Me.grpAxisLabels.Controls.Add(Me.ucrNudHjust)
         Me.grpAxisLabels.Controls.Add(Me.ucrNudsize)
-        Me.grpAxisLabels.Controls.Add(Me.ucrInputFace)
-        Me.grpAxisLabels.Controls.Add(Me.ucrInputFamily)
+        Me.grpAxisLabels.Controls.Add(Me.ucrInputTextFace)
+        Me.grpAxisLabels.Controls.Add(Me.ucrInputTextFamily)
         Me.grpAxisLabels.Location = New System.Drawing.Point(3, 0)
         Me.grpAxisLabels.Name = "grpAxisLabels"
         Me.grpAxisLabels.Size = New System.Drawing.Size(246, 223)
@@ -67,38 +67,38 @@ Partial Class ucrELementTextControl
         Me.grpAxisLabels.TabStop = False
         Me.grpAxisLabels.Text = "Element Text "
         '
-        'ucrColors
+        'ucrTextColors
         '
-        Me.ucrColors.AddQuotesIfUnrecognised = True
-        Me.ucrColors.IsReadOnly = False
-        Me.ucrColors.Location = New System.Drawing.Point(105, 191)
-        Me.ucrColors.Name = "ucrColors"
-        Me.ucrColors.Size = New System.Drawing.Size(137, 21)
-        Me.ucrColors.TabIndex = 86
+        Me.ucrTextColors.AddQuotesIfUnrecognised = True
+        Me.ucrTextColors.IsReadOnly = False
+        Me.ucrTextColors.Location = New System.Drawing.Point(105, 191)
+        Me.ucrTextColors.Name = "ucrTextColors"
+        Me.ucrTextColors.Size = New System.Drawing.Size(137, 21)
+        Me.ucrTextColors.TabIndex = 86
         '
-        'ucrChkColour
+        'ucrChkTextColour
         '
-        Me.ucrChkColour.Checked = False
-        Me.ucrChkColour.Location = New System.Drawing.Point(8, 192)
-        Me.ucrChkColour.Name = "ucrChkColour"
-        Me.ucrChkColour.Size = New System.Drawing.Size(94, 20)
-        Me.ucrChkColour.TabIndex = 85
+        Me.ucrChkTextColour.Checked = False
+        Me.ucrChkTextColour.Location = New System.Drawing.Point(8, 192)
+        Me.ucrChkTextColour.Name = "ucrChkTextColour"
+        Me.ucrChkTextColour.Size = New System.Drawing.Size(94, 20)
+        Me.ucrChkTextColour.TabIndex = 85
         '
-        'ucrChkFace
+        'ucrChkTextFace
         '
-        Me.ucrChkFace.Checked = False
-        Me.ucrChkFace.Location = New System.Drawing.Point(8, 167)
-        Me.ucrChkFace.Name = "ucrChkFace"
-        Me.ucrChkFace.Size = New System.Drawing.Size(94, 20)
-        Me.ucrChkFace.TabIndex = 84
+        Me.ucrChkTextFace.Checked = False
+        Me.ucrChkTextFace.Location = New System.Drawing.Point(8, 167)
+        Me.ucrChkTextFace.Name = "ucrChkTextFace"
+        Me.ucrChkTextFace.Size = New System.Drawing.Size(94, 20)
+        Me.ucrChkTextFace.TabIndex = 84
         '
-        'ucrChkFamily
+        'ucrChkTextFamily
         '
-        Me.ucrChkFamily.Checked = False
-        Me.ucrChkFamily.Location = New System.Drawing.Point(8, 142)
-        Me.ucrChkFamily.Name = "ucrChkFamily"
-        Me.ucrChkFamily.Size = New System.Drawing.Size(94, 20)
-        Me.ucrChkFamily.TabIndex = 83
+        Me.ucrChkTextFamily.Checked = False
+        Me.ucrChkTextFamily.Location = New System.Drawing.Point(8, 142)
+        Me.ucrChkTextFamily.Name = "ucrChkTextFamily"
+        Me.ucrChkTextFamily.Size = New System.Drawing.Size(94, 20)
+        Me.ucrChkTextFamily.TabIndex = 83
         '
         'ucrChkAngle
         '
@@ -200,25 +200,25 @@ Partial Class ucrELementTextControl
         Me.ucrNudsize.TabIndex = 73
         Me.ucrNudsize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrInputFace
+        'ucrInputTextFace
         '
-        Me.ucrInputFace.AddQuotesIfUnrecognised = True
-        Me.ucrInputFace.IsReadOnly = False
-        Me.ucrInputFace.Location = New System.Drawing.Point(105, 166)
-        Me.ucrInputFace.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.ucrInputFace.Name = "ucrInputFace"
-        Me.ucrInputFace.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputFace.TabIndex = 71
+        Me.ucrInputTextFace.AddQuotesIfUnrecognised = True
+        Me.ucrInputTextFace.IsReadOnly = False
+        Me.ucrInputTextFace.Location = New System.Drawing.Point(105, 166)
+        Me.ucrInputTextFace.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputTextFace.Name = "ucrInputTextFace"
+        Me.ucrInputTextFace.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputTextFace.TabIndex = 71
         '
-        'ucrInputFamily
+        'ucrInputTextFamily
         '
-        Me.ucrInputFamily.AddQuotesIfUnrecognised = True
-        Me.ucrInputFamily.IsReadOnly = False
-        Me.ucrInputFamily.Location = New System.Drawing.Point(105, 141)
-        Me.ucrInputFamily.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.ucrInputFamily.Name = "ucrInputFamily"
-        Me.ucrInputFamily.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputFamily.TabIndex = 70
+        Me.ucrInputTextFamily.AddQuotesIfUnrecognised = True
+        Me.ucrInputTextFamily.IsReadOnly = False
+        Me.ucrInputTextFamily.Location = New System.Drawing.Point(105, 141)
+        Me.ucrInputTextFamily.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputTextFamily.Name = "ucrInputTextFamily"
+        Me.ucrInputTextFamily.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputTextFamily.TabIndex = 70
         '
         'ucrELementTextControl
         '
@@ -232,8 +232,8 @@ Partial Class ucrELementTextControl
 
     End Sub
     Friend WithEvents grpAxisLabels As GroupBox
-    Friend WithEvents ucrChkFace As ucrCheck
-    Friend WithEvents ucrChkFamily As ucrCheck
+    Friend WithEvents ucrChkTextFace As ucrCheck
+    Friend WithEvents ucrChkTextFamily As ucrCheck
     Friend WithEvents ucrChkAngle As ucrCheck
     Friend WithEvents ucrChkHjust As ucrCheck
     Friend WithEvents ucrChkVjust As ucrCheck
@@ -244,8 +244,8 @@ Partial Class ucrELementTextControl
     Friend WithEvents ucrNudAngle As ucrNud
     Friend WithEvents ucrNudHjust As ucrNud
     Friend WithEvents ucrNudsize As ucrNud
-    Friend WithEvents ucrInputFace As ucrInputComboBox
-    Friend WithEvents ucrInputFamily As ucrInputComboBox
-    Friend WithEvents ucrChkColour As ucrCheck
-    Friend WithEvents ucrColors As ucrColors
+    Friend WithEvents ucrInputTextFace As ucrInputComboBox
+    Friend WithEvents ucrInputTextFamily As ucrInputComboBox
+    Friend WithEvents ucrChkTextColour As ucrCheck
+    Friend WithEvents ucrTextColors As ucrColors
 End Class
