@@ -26,15 +26,18 @@ Public Class sdgOneVarCompareModels
     End Sub
 
     Public Sub InitialiseDialog()
+        clsRcdfcompFunction.SetPackageName("fitdistrplus")
         clsRcdfcompFunction.SetRCommand("cdfcomp")
+        clsRdenscompFunction.SetPackageName("fitdistrplus")
         clsRdenscompFunction.SetRCommand("denscomp")
+        clsRqqcompFunction.SetPackageName("fitdistrplus")
         clsRqqcompFunction.SetRCommand("qqcomp")
+        clsRppcompFunction.SetPackageName("fitdistrplus")
         clsRppcompFunction.SetRCommand("ppcomp")
         ucrDisplayChiData.SetValidationTypeAsRVariable()
     End Sub
 
     Public Sub SetDefaults()
-        chkCDF.Checked = True
         chkDensity.Checked = False
         chkPP.Checked = False
         chkQQ.Checked = False

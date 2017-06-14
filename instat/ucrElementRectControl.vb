@@ -23,34 +23,37 @@ Public Class ucrElementRectControl
 
     Public Sub InitialiseControl()
 
-        ucrChkLegendSize.SetText("Size")
-        ucrNudLegendSize.SetParameter(New RParameter("size"))
-        ucrChkLegendSize.AddParameterPresentCondition(True, "size")
-        ucrChkLegendSize.AddParameterPresentCondition(False, "size", False)
-        ucrNudLegendSize.Increment = 0.1
+        ucrChkRectSize.SetText("Size")
+        ucrNudRectSize.SetParameter(New RParameter("size"))
+        ucrChkRectSize.AddParameterPresentCondition(True, "size")
+        ucrChkRectSize.AddParameterPresentCondition(False, "size", False)
+        ucrNudRectSize.Increment = 0.1
 
-        ucrChkLegendLineType.SetText("Line Type")
-        ucrInputLegendLineType.SetParameter(New RParameter("linetype"))
-        ucrChkLegendLineType.AddParameterPresentCondition(True, "linetype")
-        ucrChkLegendLineType.AddParameterPresentCondition(False, "linetype", False)
-        ucrInputLegendLineType.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctLineType))
+        ucrChkRectLineType.SetText("Line Type")
+        ucrInputRectLineType.SetParameter(New RParameter("linetype"))
+        ucrChkRectLineType.AddParameterPresentCondition(True, "linetype")
+        ucrChkRectLineType.AddParameterPresentCondition(False, "linetype", False)
+        ucrInputRectLineType.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctLineType))
+        ucrInputRectLineType.SetDropDownStyleAsNonEditable()
 
-        ucrChkLegendColour.SetText("Colour")
-        ucrLegendColors.SetParameter(New RParameter("colour"))
-        ucrChkLegendColour.AddParameterPresentCondition(True, "colour")
-        ucrChkLegendColour.AddParameterPresentCondition(False, "colour", False)
-        ucrLegendColors.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
+        ucrChkRectColour.SetText("Colour")
+        ucrRectColors.SetParameter(New RParameter("colour"))
+        ucrChkRectColour.AddParameterPresentCondition(True, "colour")
+        ucrChkRectColour.AddParameterPresentCondition(False, "colour", False)
+        ucrRectColors.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
+        ucrRectColors.SetDropDownStyleAsNonEditable()
 
-        ucrChkLegendFill.SetText("Fill")
-        ucrLegendFill.SetParameter(New RParameter("fill"))
-        ucrChkLegendFill.AddParameterPresentCondition(True, "fill")
-        ucrChkLegendFill.AddParameterPresentCondition(False, "fill", False)
-        ucrLegendFill.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
+        ucrChkRectFill.SetText("Fill")
+        ucrRectFill.SetParameter(New RParameter("fill"))
+        ucrChkRectFill.AddParameterPresentCondition(True, "fill")
+        ucrChkRectFill.AddParameterPresentCondition(False, "fill", False)
+        ucrRectFill.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctColour))
+        ucrRectFill.SetDropDownStyleAsNonEditable()
 
-        ucrChkLegendSize.AddToLinkedControls(ucrNudLegendSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.0)
-        ucrChkLegendLineType.AddToLinkedControls(ucrInputLegendLineType, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Solid")
-        ucrChkLegendColour.AddToLinkedControls(ucrLegendColors, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Black")
-        ucrChkLegendFill.AddToLinkedControls(ucrLegendFill, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Black")
+        ucrChkRectSize.AddToLinkedControls(ucrNudRectSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.0)
+        ucrChkRectLineType.AddToLinkedControls(ucrInputRectLineType, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Solid")
+        ucrChkRectColour.AddToLinkedControls(ucrRectColors, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Black")
+        ucrChkRectFill.AddToLinkedControls(ucrRectFill, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Black")
 
         bInitialiseControls = True
     End Sub
@@ -70,23 +73,23 @@ Public Class ucrElementRectControl
         clsThemeFunction = clsNewThemeFunction
         clsElementLine = clsNewElementLine
 
-        ucrNudLegendSize.SetRCode(clsElementLine, bReset)
-        ucrChkLegendSize.SetRCode(clsElementLine, bReset)
+        ucrNudRectSize.SetRCode(clsElementLine, bReset)
+        ucrChkRectSize.SetRCode(clsElementLine, bReset)
 
-        ucrLegendColors.SetRCode(clsElementLine, bReset)
-        ucrChkLegendColour.SetRCode(clsElementLine, bReset)
+        ucrRectColors.SetRCode(clsElementLine, bReset)
+        ucrChkRectColour.SetRCode(clsElementLine, bReset)
 
-        ucrLegendFill.SetRCode(clsElementLine, bReset)
-        ucrChkLegendFill.SetRCode(clsElementLine, bReset)
+        ucrRectFill.SetRCode(clsElementLine, bReset)
+        ucrChkRectFill.SetRCode(clsElementLine, bReset)
 
-        ucrInputLegendLineType.SetRCode(clsElementLine, bReset)
-        ucrChkLegendLineType.SetRCode(clsElementLine, bReset)
+        ucrInputRectLineType.SetRCode(clsElementLine, bReset)
+        ucrChkRectLineType.SetRCode(clsElementLine, bReset)
 
         AddRemoveElementLineAxis()
     End Sub
 
     Private Sub AddRemoveElementLineAxis()
-        If ucrChkLegendColour.Checked OrElse ucrChkLegendFill.Checked OrElse ucrChkLegendLineType.Checked OrElse ucrChkLegendSize.Checked OrElse ucrChkLegendFill.Checked Then
+        If ucrChkRectColour.Checked OrElse ucrChkRectFill.Checked OrElse ucrChkRectLineType.Checked OrElse ucrChkRectSize.Checked OrElse ucrChkRectFill.Checked Then
             clsThemeFunction.AddParameter(strLegend, clsRFunctionParameter:=clsElementLine)
         Else
             clsThemeFunction.RemoveParameterByName(strLegend)
@@ -102,7 +105,7 @@ Public Class ucrElementRectControl
         End If
     End Sub
 
-    Private Sub ElementTickAxisLineControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLegendLineType.ControlValueChanged, ucrChkLegendSize.ControlValueChanged, ucrChkLegendFill.ControlValueChanged, ucrChkLegendColour.ControlValueChanged, ucrChkLegendFill.ControlValueChanged
+    Private Sub ElementTickAxisLineControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkRectLineType.ControlValueChanged, ucrChkRectSize.ControlValueChanged, ucrChkRectFill.ControlValueChanged, ucrChkRectColour.ControlValueChanged, ucrChkRectFill.ControlValueChanged
         AddRemoveElementLineAxis()
     End Sub
 

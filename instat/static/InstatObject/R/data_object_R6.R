@@ -296,9 +296,9 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
   #if(update) self$update_variables_metadata()
   if(direct_from_attributes) {
     #if(missing(property)) return(attributes(self$get_columns_from_data(column, use_current_filter = FALSE)))
-    if(missing(property)) return(attributes(private$data[, column]))
+    if(missing(property)) return(attributes(private$data[[column]]))
     #else return(attr(self$get_columns_from_data(column, use_current_filter = FALSE), property))
-    else return(attr(private$data[, column], property))
+    else return(attr(private$data[[column]], property))
   }
   # special case of getting "class" property which isn't always stored in attributes
   else if(!missing(property) && length(property == 1) && property == data_type_label) {
@@ -609,6 +609,7 @@ data_object$set("public", "rename_column_in_data", function(curr_col_name = "", 
 )
 
 data_object$set("public", "remove_columns_in_data", function(cols=c()) {
+  if(length(cols) == self$get_column_count()) stop("Cannot delete all columns through this function. Use delete_dataframe to delete the data.")
   for(col_name in cols) {
     # Column name must be character
     if(!is.character(col_name)) {
@@ -1510,7 +1511,7 @@ data_object$set("public", "get_object_names", function(type = "", as_list = FALS
   else {
     if(type == model_label) out = names(private$objects)[!sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "htmlTable") %in% class(x)))]
     else if(type == graph_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob") %in% class(x)))]
-    else if(type == table_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("htmlTable") %in% class(x)))]
+    else if(type == table_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("htmlTable", "data.frame") %in% class(x)))]
     else stop("type: ", type, " not recognised")
   }
   if(length(excluded_items) > 0) {
@@ -1732,13 +1733,15 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
     }
   }
   if(output == "facets") {
-    if(length(column_types) > 1) {
+    if(length(unique(column_types)) > 1) {
       warning("Cannot do facets with graphs of different types. Combine graphs will be used instead.")
       output <- "combine"
     }
     else column_types <- unique(column_types)
   }
   if(output == "facets") {
+    # column_types will be unique by this point
+    column_types <- column_types[1]
     if(column_types == "numeric") {
       curr_geom <- numeric_geom
       curr_geom_name <- numeric
@@ -1941,7 +1944,7 @@ data_object$set("public","split_date", function(col_name = "", week = FALSE, mon
     self$add_columns_to_data(col_name = col_name, col_data = weekday_name_vector)
   }
   if(month_val) {
-    month_val_vector <- as.integer(month(col_data))
+    month_val_vector <- as.integer(lubridate::month(col_data))
     col_name <- next_default_item(prefix = "month_val", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = month_val_vector)
   }
@@ -2472,7 +2475,6 @@ instat_object$set("public","get_corruption_column_name", function(data_name, typ
 
 data_object$set("public","get_corruption_column_name", function(type) {
   if(self$is_corruption_type_present(type)) {
-    print("yes")
     var_metadata <- self$get_variables_metadata()
     col_name <- var_metadata[!is.na(var_metadata[[corruption_type_label]]) & var_metadata[[corruption_type_label]] == type, name_label]
     if(length(col_name >= 1)) return(col_name)

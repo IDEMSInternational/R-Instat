@@ -93,7 +93,7 @@ Partial Class dlgExportRObjects
         Me.cmdBrowse.Name = "cmdBrowse"
         Me.cmdBrowse.Size = New System.Drawing.Size(62, 23)
         Me.cmdBrowse.TabIndex = 5
-        Me.cmdBrowse.Text = "Browse..."
+        Me.cmdBrowse.Text = "Browse"
         Me.cmdBrowse.UseVisualStyleBackColor = True
         '
         'dlgExportRObjects
