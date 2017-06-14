@@ -296,9 +296,9 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
   #if(update) self$update_variables_metadata()
   if(direct_from_attributes) {
     #if(missing(property)) return(attributes(self$get_columns_from_data(column, use_current_filter = FALSE)))
-    if(missing(property)) return(attributes(private$data[, column]))
+    if(missing(property)) return(attributes(private$data[[column]]))
     #else return(attr(self$get_columns_from_data(column, use_current_filter = FALSE), property))
-    else return(attr(private$data[, column], property))
+    else return(attr(private$data[[column]], property))
   }
   # special case of getting "class" property which isn't always stored in attributes
   else if(!missing(property) && length(property == 1) && property == data_type_label) {
@@ -1510,7 +1510,7 @@ data_object$set("public", "get_object_names", function(type = "", as_list = FALS
   else {
     if(type == model_label) out = names(private$objects)[!sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "htmlTable") %in% class(x)))]
     else if(type == graph_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob") %in% class(x)))]
-    else if(type == table_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("htmlTable") %in% class(x)))]
+    else if(type == table_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("htmlTable", "data.frame") %in% class(x)))]
     else stop("type: ", type, " not recognised")
   }
   if(length(excluded_items) > 0) {
@@ -2472,7 +2472,6 @@ instat_object$set("public","get_corruption_column_name", function(data_name, typ
 
 data_object$set("public","get_corruption_column_name", function(type) {
   if(self$is_corruption_type_present(type)) {
-    print("yes")
     var_metadata <- self$get_variables_metadata()
     col_name <- var_metadata[!is.na(var_metadata[[corruption_type_label]]) & var_metadata[[corruption_type_label]] == type, name_label]
     if(length(col_name >= 1)) return(col_name)
