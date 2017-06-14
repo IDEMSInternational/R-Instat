@@ -461,12 +461,12 @@ Partial Class frmMain
         Me.splOverall = New System.Windows.Forms.SplitContainer()
         Me.splExtraWindows = New System.Windows.Forms.SplitContainer()
         Me.splMetadata = New System.Windows.Forms.SplitContainer()
+        Me.splLogScript = New System.Windows.Forms.SplitContainer()
+        Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrColumnMeta = New instat.ucrColumnMetadata()
         Me.ucrDataFrameMeta = New instat.ucrDataFrameMetadata()
-        Me.splLogScript = New System.Windows.Forms.SplitContainer()
         Me.ucrLogWindow = New instat.ucrLog()
         Me.ucrScriptWindow = New instat.ucrScript()
-        Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.ucrDataViewer = New instat.ucrDataView()
         Me.ucrOutput = New instat.ucrOutputWindow()
         Me.stsStrip.SuspendLayout()
@@ -537,6 +537,7 @@ Partial Class frmMain
         '
         'RatingDataToolStripMenuItem
         '
+        Me.RatingDataToolStripMenuItem.Enabled = False
         Me.RatingDataToolStripMenuItem.Name = "RatingDataToolStripMenuItem"
         Me.RatingDataToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.RatingDataToolStripMenuItem.Text = "Rating Data..."
@@ -1030,6 +1031,7 @@ Partial Class frmMain
         'mnuModelOtherOneVariable
         '
         Me.mnuModelOtherOneVariable.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuModelOtherOneVariableExactResults, Me.mnuModelOtherOneVariableSampleSummaryData, Me.mnuModelOtherOneVariableNonParametric, Me.mnuModelOtherOneVariableGoodnessofFit})
+        Me.mnuModelOtherOneVariable.Enabled = False
         Me.mnuModelOtherOneVariable.Name = "mnuModelOtherOneVariable"
         Me.mnuModelOtherOneVariable.Size = New System.Drawing.Size(201, 22)
         Me.mnuModelOtherOneVariable.Tag = "Other_(One_Variable)"
@@ -1069,6 +1071,7 @@ Partial Class frmMain
         'mnuModelOtherTwoVariables
         '
         Me.mnuModelOtherTwoVariables.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuModelOtherTwoVariablesTwoSamples, Me.mnuModelOtherTwoVariablesSummaryData, Me.mnuModelOtherTwoVariablesSimpleRegression, Me.mnuModelOtherTwoVariablesOneWayANOVA, Me.mnuModelOtherTwoVariablesNonParametricTwoSamples, Me.mnuModelOtherTwoVariablesNonParametricOneWayANOVA})
+        Me.mnuModelOtherTwoVariables.Enabled = False
         Me.mnuModelOtherTwoVariables.Name = "mnuModelOtherTwoVariables"
         Me.mnuModelOtherTwoVariables.Size = New System.Drawing.Size(201, 22)
         Me.mnuModelOtherTwoVariables.Tag = "Other_(Two_Variables)"
@@ -1471,6 +1474,7 @@ Partial Class frmMain
         '
         'mnuClimaticFileCliData
         '
+        Me.mnuClimaticFileCliData.Enabled = False
         Me.mnuClimaticFileCliData.Name = "mnuClimaticFileCliData"
         Me.mnuClimaticFileCliData.Size = New System.Drawing.Size(215, 22)
         Me.mnuClimaticFileCliData.Text = "CliData..."
@@ -1526,12 +1530,14 @@ Partial Class frmMain
         '
         'mnuClimaticDatesMakeTime
         '
+        Me.mnuClimaticDatesMakeTime.Enabled = False
         Me.mnuClimaticDatesMakeTime.Name = "mnuClimaticDatesMakeTime"
         Me.mnuClimaticDatesMakeTime.Size = New System.Drawing.Size(182, 22)
         Me.mnuClimaticDatesMakeTime.Text = "Make Time..."
         '
         'mnuClimaticDatesUseTime
         '
+        Me.mnuClimaticDatesUseTime.Enabled = False
         Me.mnuClimaticDatesUseTime.Name = "mnuClimaticDatesUseTime"
         Me.mnuClimaticDatesUseTime.Size = New System.Drawing.Size(182, 22)
         Me.mnuClimaticDatesUseTime.Text = "Use Time..."
@@ -1564,6 +1570,7 @@ Partial Class frmMain
         '
         'mnuClimaticPrepareClimaticSummaries
         '
+        Me.mnuClimaticPrepareClimaticSummaries.Enabled = False
         Me.mnuClimaticPrepareClimaticSummaries.Name = "mnuClimaticPrepareClimaticSummaries"
         Me.mnuClimaticPrepareClimaticSummaries.Size = New System.Drawing.Size(224, 22)
         Me.mnuClimaticPrepareClimaticSummaries.Text = "Climatic Summaries..."
@@ -1680,6 +1687,7 @@ Partial Class frmMain
         '
         'QCProceduresToolStripMenuItem
         '
+        Me.QCProceduresToolStripMenuItem.Enabled = False
         Me.QCProceduresToolStripMenuItem.Name = "QCProceduresToolStripMenuItem"
         Me.QCProceduresToolStripMenuItem.Size = New System.Drawing.Size(162, 22)
         Me.QCProceduresToolStripMenuItem.Text = "QC Procedures..."
@@ -1705,24 +1713,28 @@ Partial Class frmMain
         '
         'mnuClimaticDescribeRainfall
         '
+        Me.mnuClimaticDescribeRainfall.Enabled = False
         Me.mnuClimaticDescribeRainfall.Name = "mnuClimaticDescribeRainfall"
         Me.mnuClimaticDescribeRainfall.Size = New System.Drawing.Size(199, 22)
         Me.mnuClimaticDescribeRainfall.Text = "Rainfall..."
         '
         'mnuClimaticDescribeTemperatures
         '
+        Me.mnuClimaticDescribeTemperatures.Enabled = False
         Me.mnuClimaticDescribeTemperatures.Name = "mnuClimaticDescribeTemperatures"
         Me.mnuClimaticDescribeTemperatures.Size = New System.Drawing.Size(199, 22)
         Me.mnuClimaticDescribeTemperatures.Text = "Temperature..."
         '
         'mnuClimaticDescribeWindSpeedDirection
         '
+        Me.mnuClimaticDescribeWindSpeedDirection.Enabled = False
         Me.mnuClimaticDescribeWindSpeedDirection.Name = "mnuClimaticDescribeWindSpeedDirection"
         Me.mnuClimaticDescribeWindSpeedDirection.Size = New System.Drawing.Size(199, 22)
         Me.mnuClimaticDescribeWindSpeedDirection.Text = "Wind Speed/Direction..."
         '
         'mnuClimaticDescribeSunshineRadiation
         '
+        Me.mnuClimaticDescribeSunshineRadiation.Enabled = False
         Me.mnuClimaticDescribeSunshineRadiation.Name = "mnuClimaticDescribeSunshineRadiation"
         Me.mnuClimaticDescribeSunshineRadiation.Size = New System.Drawing.Size(199, 22)
         Me.mnuClimaticDescribeSunshineRadiation.Text = "Sunshine/Radiation..."
@@ -1734,6 +1746,7 @@ Partial Class frmMain
         '
         'mnuClimaticDescribeGeneral
         '
+        Me.mnuClimaticDescribeGeneral.Enabled = False
         Me.mnuClimaticDescribeGeneral.Name = "mnuClimaticDescribeGeneral"
         Me.mnuClimaticDescribeGeneral.Size = New System.Drawing.Size(199, 22)
         Me.mnuClimaticDescribeGeneral.Text = "General"
@@ -1768,6 +1781,7 @@ Partial Class frmMain
         'mnuClimaticPICSA
         '
         Me.mnuClimaticPICSA.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticPICSARainfall, Me.mnuClimaticPICSATemperature, Me.mnuClimaticPICSACrops})
+        Me.mnuClimaticPICSA.Enabled = False
         Me.mnuClimaticPICSA.Name = "mnuClimaticPICSA"
         Me.mnuClimaticPICSA.Size = New System.Drawing.Size(191, 22)
         Me.mnuClimaticPICSA.Text = "PICSA"
@@ -2226,6 +2240,7 @@ Partial Class frmMain
         '
         'mnuFilePrint
         '
+        Me.mnuFilePrint.Enabled = False
         Me.mnuFilePrint.Name = "mnuFilePrint"
         Me.mnuFilePrint.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.P), System.Windows.Forms.Keys)
         Me.mnuFilePrint.Size = New System.Drawing.Size(213, 22)
@@ -2234,6 +2249,7 @@ Partial Class frmMain
         '
         'mnuFilePrintPreview
         '
+        Me.mnuFilePrintPreview.Enabled = False
         Me.mnuFilePrintPreview.Name = "mnuFilePrintPreview"
         Me.mnuFilePrintPreview.Size = New System.Drawing.Size(213, 22)
         Me.mnuFilePrintPreview.Tag = "Print_Preview"
@@ -2383,6 +2399,7 @@ Partial Class frmMain
         'mnuTbPrint
         '
         Me.mnuTbPrint.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.mnuTbPrint.Enabled = False
         Me.mnuTbPrint.Image = CType(resources.GetObject("mnuTbPrint.Image"), System.Drawing.Image)
         Me.mnuTbPrint.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.mnuTbPrint.Name = "mnuTbPrint"
@@ -2541,12 +2558,14 @@ Partial Class frmMain
         '
         'ImportFromCSPROToolStripMenuItem
         '
+        Me.ImportFromCSPROToolStripMenuItem.Enabled = False
         Me.ImportFromCSPROToolStripMenuItem.Name = "ImportFromCSPROToolStripMenuItem"
         Me.ImportFromCSPROToolStripMenuItem.Size = New System.Drawing.Size(213, 22)
         Me.ImportFromCSPROToolStripMenuItem.Text = "Import from CSPRO..."
         '
         'ImportFromToolStripMenuItem
         '
+        Me.ImportFromToolStripMenuItem.Enabled = False
         Me.ImportFromToolStripMenuItem.Name = "ImportFromToolStripMenuItem"
         Me.ImportFromToolStripMenuItem.Size = New System.Drawing.Size(213, 22)
         Me.ImportFromToolStripMenuItem.Text = "Import from Databases..."
@@ -2558,6 +2577,7 @@ Partial Class frmMain
         '
         'mnuFileConvert
         '
+        Me.mnuFileConvert.Enabled = False
         Me.mnuFileConvert.Name = "mnuFileConvert"
         Me.mnuFileConvert.Size = New System.Drawing.Size(213, 22)
         Me.mnuFileConvert.Text = "Convert..."
@@ -2776,7 +2796,6 @@ Partial Class frmMain
         '
         'mnuPrepareCheckDataImportOpenRefine
         '
-        Me.mnuPrepareCheckDataImportOpenRefine.Enabled = False
         Me.mnuPrepareCheckDataImportOpenRefine.Name = "mnuPrepareCheckDataImportOpenRefine"
         Me.mnuPrepareCheckDataImportOpenRefine.Size = New System.Drawing.Size(245, 22)
         Me.mnuPrepareCheckDataImportOpenRefine.Text = "Import From OpenRefine..."
@@ -3011,28 +3030,28 @@ Partial Class frmMain
         'mnuPrepareColumnTextFindReplace
         '
         Me.mnuPrepareColumnTextFindReplace.Name = "mnuPrepareColumnTextFindReplace"
-        Me.mnuPrepareColumnTextFindReplace.Size = New System.Drawing.Size(143, 22)
+        Me.mnuPrepareColumnTextFindReplace.Size = New System.Drawing.Size(152, 22)
         Me.mnuPrepareColumnTextFindReplace.Tag = "Find/Replace..."
-        Me.mnuPrepareColumnTextFindReplace.Text = "Find/Replace"
+        Me.mnuPrepareColumnTextFindReplace.Text = "Find/Replace..."
         '
         'mnuPrepareColumnTextTransform
         '
         Me.mnuPrepareColumnTextTransform.Name = "mnuPrepareColumnTextTransform"
-        Me.mnuPrepareColumnTextTransform.Size = New System.Drawing.Size(143, 22)
+        Me.mnuPrepareColumnTextTransform.Size = New System.Drawing.Size(152, 22)
         Me.mnuPrepareColumnTextTransform.Tag = "Transform..."
         Me.mnuPrepareColumnTextTransform.Text = "Transform..."
         '
         'mnuPrepareColumnTextSplit
         '
         Me.mnuPrepareColumnTextSplit.Name = "mnuPrepareColumnTextSplit"
-        Me.mnuPrepareColumnTextSplit.Size = New System.Drawing.Size(143, 22)
+        Me.mnuPrepareColumnTextSplit.Size = New System.Drawing.Size(152, 22)
         Me.mnuPrepareColumnTextSplit.Tag = "Split..."
         Me.mnuPrepareColumnTextSplit.Text = "Split..."
         '
         'mnuPrepareColumnTextCombine
         '
         Me.mnuPrepareColumnTextCombine.Name = "mnuPrepareColumnTextCombine"
-        Me.mnuPrepareColumnTextCombine.Size = New System.Drawing.Size(143, 22)
+        Me.mnuPrepareColumnTextCombine.Size = New System.Drawing.Size(152, 22)
         Me.mnuPrepareColumnTextCombine.Tag = "Combine..."
         Me.mnuPrepareColumnTextCombine.Text = "Combine..."
         '
@@ -3040,16 +3059,16 @@ Partial Class frmMain
         '
         Me.mnuPrepareColumnTextMatch.Enabled = False
         Me.mnuPrepareColumnTextMatch.Name = "mnuPrepareColumnTextMatch"
-        Me.mnuPrepareColumnTextMatch.Size = New System.Drawing.Size(143, 22)
+        Me.mnuPrepareColumnTextMatch.Size = New System.Drawing.Size(152, 22)
         Me.mnuPrepareColumnTextMatch.Tag = "Match..."
         Me.mnuPrepareColumnTextMatch.Text = "Match..."
         '
         'mnuPrepareColumnTextDistance
         '
         Me.mnuPrepareColumnTextDistance.Name = "mnuPrepareColumnTextDistance"
-        Me.mnuPrepareColumnTextDistance.Size = New System.Drawing.Size(143, 22)
+        Me.mnuPrepareColumnTextDistance.Size = New System.Drawing.Size(152, 22)
         Me.mnuPrepareColumnTextDistance.Tag = "Distance..."
-        Me.mnuPrepareColumnTextDistance.Text = "Distance"
+        Me.mnuPrepareColumnTextDistance.Text = "Distance..."
         '
         'mnuPrepareColumnDate
         '
@@ -3584,24 +3603,6 @@ Partial Class frmMain
         Me.splMetadata.SplitterWidth = 5
         Me.splMetadata.TabIndex = 0
         '
-        'ucrColumnMeta
-        '
-        Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrColumnMeta.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ucrColumnMeta.Location = New System.Drawing.Point(0, 0)
-        Me.ucrColumnMeta.Name = "ucrColumnMeta"
-        Me.ucrColumnMeta.Size = New System.Drawing.Size(66, 118)
-        Me.ucrColumnMeta.TabIndex = 0
-        '
-        'ucrDataFrameMeta
-        '
-        Me.ucrDataFrameMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrDataFrameMeta.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ucrDataFrameMeta.Location = New System.Drawing.Point(0, 0)
-        Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
-        Me.ucrDataFrameMeta.Size = New System.Drawing.Size(129, 118)
-        Me.ucrDataFrameMeta.TabIndex = 0
-        '
         'splLogScript
         '
         Me.splLogScript.BackColor = System.Drawing.Color.LightGray
@@ -3623,25 +3624,6 @@ Partial Class frmMain
         Me.splLogScript.SplitterWidth = 5
         Me.splLogScript.TabIndex = 0
         '
-        'ucrLogWindow
-        '
-        Me.ucrLogWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrLogWindow.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ucrLogWindow.Location = New System.Drawing.Point(0, 0)
-        Me.ucrLogWindow.Name = "ucrLogWindow"
-        Me.ucrLogWindow.Size = New System.Drawing.Size(131, 118)
-        Me.ucrLogWindow.TabIndex = 0
-        '
-        'ucrScriptWindow
-        '
-        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrScriptWindow.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ucrScriptWindow.Location = New System.Drawing.Point(0, 0)
-        Me.ucrScriptWindow.Name = "ucrScriptWindow"
-        Me.ucrScriptWindow.Size = New System.Drawing.Size(259, 118)
-        Me.ucrScriptWindow.TabIndex = 0
-        Me.ucrScriptWindow.Tag = "Script_Window"
-        '
         'splDataOutput
         '
         Me.splDataOutput.BackColor = System.Drawing.Color.LightGray
@@ -3662,6 +3644,43 @@ Partial Class frmMain
         Me.splDataOutput.SplitterDistance = 300
         Me.splDataOutput.SplitterWidth = 5
         Me.splDataOutput.TabIndex = 0
+        '
+        'ucrColumnMeta
+        '
+        Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrColumnMeta.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ucrColumnMeta.Location = New System.Drawing.Point(0, 0)
+        Me.ucrColumnMeta.Name = "ucrColumnMeta"
+        Me.ucrColumnMeta.Size = New System.Drawing.Size(66, 118)
+        Me.ucrColumnMeta.TabIndex = 0
+        '
+        'ucrDataFrameMeta
+        '
+        Me.ucrDataFrameMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrDataFrameMeta.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ucrDataFrameMeta.Location = New System.Drawing.Point(0, 0)
+        Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
+        Me.ucrDataFrameMeta.Size = New System.Drawing.Size(129, 118)
+        Me.ucrDataFrameMeta.TabIndex = 0
+        '
+        'ucrLogWindow
+        '
+        Me.ucrLogWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrLogWindow.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ucrLogWindow.Location = New System.Drawing.Point(0, 0)
+        Me.ucrLogWindow.Name = "ucrLogWindow"
+        Me.ucrLogWindow.Size = New System.Drawing.Size(131, 118)
+        Me.ucrLogWindow.TabIndex = 0
+        '
+        'ucrScriptWindow
+        '
+        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrScriptWindow.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ucrScriptWindow.Location = New System.Drawing.Point(0, 0)
+        Me.ucrScriptWindow.Name = "ucrScriptWindow"
+        Me.ucrScriptWindow.Size = New System.Drawing.Size(259, 118)
+        Me.ucrScriptWindow.TabIndex = 0
+        Me.ucrScriptWindow.Tag = "Script_Window"
         '
         'ucrDataViewer
         '
