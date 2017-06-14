@@ -35,7 +35,7 @@ Public Class dlgRatingScales
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.iCallType = 519
+        ucrBase.iHelpTopicID = 519
 
         ucrPnlGraphType.AddRadioButton(rdoLikert)
         ucrPnlGraphType.AddRadioButton(rdoStacked)
