@@ -48,9 +48,10 @@ Public Class sdgCombineGraphOptions
         ucrInputLeft.SetParameter(New RParameter("left"))
         ucrInputRight.SetParameter(New RParameter("right"))
         ucrInputTop.SetParameter(New RParameter("top"))
-
+        grdLayout.Visible = False
+        ucrChkSpecifyOrder.AddParameterPresentCondition(True, "ncol")
+        ucrChkSpecifyOrder.AddParameterPresentCondition(True, "nrow")
         ucrChkSpecifyOrder.SetText("Specify Order")
-        ucrChkSpecifyOrder.Checked = False
         bInitialiseControls = True
     End Sub
 
@@ -131,16 +132,6 @@ Public Class sdgCombineGraphOptions
         End If
     End Sub
 
-    Private Sub chkSpecifyOrder_ControlValueChanged() Handles ucrChkSpecifyOrder.ControlValueChanged
-        If ucrChkSpecifyOrder.Checked = True Then
-            grdLayout.Visible = True
-            SwitchNcolToMatrixFunc()
-        Else
-            grdLayout.Visible = False
-            RemoveNcolFromMatrixfunc()
-        End If
-    End Sub
-
     Public Sub SwitchNcolToMatrixFunc()
         clsCombineGraph.RemoveParameterByName("ncol")
         clsCombineGraph.RemoveParameterByName("nrow")
@@ -166,14 +157,24 @@ Public Class sdgCombineGraphOptions
         If Not bInitialiseControls Then
             InitialiseControls()
         End If
-
         clsCombineGraph = clsNewRFunction
         SetRCode(Me, clsCombineGraph, bReset)
-    End Sub
-
-    Private Sub sdgCombineGraphOptions_Load(sender As Object, e As EventArgs) Handles Me.Load
-        Me.BringToFront()
-        LoadGraphs()
         SetDefaultRowAndColumns()
     End Sub
+
+    Private Sub chkrdoSpecifyOrder_CheckedChanged() Handles ucrChkSpecifyOrder.ControlValueChanged
+        If ucrChkSpecifyOrder.Checked Then
+            grdLayout.Visible = True
+            SwitchNcolToMatrixFunc()
+        Else
+            grdLayout.Visible = False
+            RemoveNcolFromMatrixfunc()
+        End If
+    End Sub
+
+    Private Sub sdgCombineGraphOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LoadGraphs()
+    End Sub
 End Class
+
+
