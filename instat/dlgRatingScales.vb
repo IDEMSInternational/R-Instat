@@ -105,6 +105,7 @@ Public Class dlgRatingScales
         ucrSaveGraph.Reset()
         ucrSelectorRatingScale.Reset()
         ucrReceiverOrderedFactors.SetMeAsReceiver()
+        ucrReceiverOrderedFactors.bForceAsDataFrame = True
 
         clsSjpLikert.SetPackageName("sjPlot")
         clsSjpLikert.SetRCommand("sjp.likert")
@@ -272,12 +273,12 @@ Public Class dlgRatingScales
     Private Sub ucrPnlGraphType_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlGraphType.ControlValueChanged, ucrPnlSjpLikert.ControlValueChanged
         SetBaseFunction()
         ChangeOfParameters()
-        ucrReceiverOrderedFactors.Clear()
-        If rdoTable.Checked Then
-            ucrReceiverOrderedFactors.SetDataType("numeric")
-        Else
-            ucrReceiverOrderedFactors.SetDataType("factor")
-        End If
+        'ucrReceiverOrderedFactors.Clear()
+        'If rdoTable.Checked Then
+        '    ucrReceiverOrderedFactors.SetDataType("numeric")
+        'Else
+        '    ucrReceiverOrderedFactors.SetDataType("factor")
+        'End If
     End Sub
 
     Private Sub ucrChkWeights_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWeights.ControlValueChanged
