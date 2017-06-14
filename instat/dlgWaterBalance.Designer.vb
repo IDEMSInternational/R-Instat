@@ -301,7 +301,7 @@ Partial Class dlgWaterBalance
         Me.Name = "dlgWaterBalance"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = ""
-        Me.Text = "End of rains"
+        Me.Text = "End of Rains"
         Me.grpRainParameters.ResumeLayout(False)
         Me.grpRainParameters.PerformLayout()
         CType(Me.nudWBLessThan, System.ComponentModel.ISupportInitialize).EndInit()
