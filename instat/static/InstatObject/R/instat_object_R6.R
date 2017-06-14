@@ -455,7 +455,8 @@ instat_object$set("public", "get_object_names", function(data_name, include_over
   if(missing(data_name)) {
     if(missing(type)) out = sapply(self$get_data_objects(), function(x) x$get_object_names()) 
     else out = sapply(self$get_data_objects(), function(x) x$get_object_names(type = type))
-    if(include_overall) out[[overall_label]] <- overall_object_names
+    #temp disabled as causes a bug
+    #if(include_overall) out[[overall_label]] <- overall_object_names
     if(!include_empty) out = out[sapply(out, function(x) length(x) > 0)]
     if(as_list) out = as.list(out)
     return(out)
