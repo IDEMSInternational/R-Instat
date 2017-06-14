@@ -280,9 +280,10 @@ Public Class clsGridLink
         fillWorkSheet.Columns = dfTemp.ColumnCount
         strColumnNames = dfTemp.ColumnNames
         If dfTemp.RowCount = 0 Then
-            'TODO Does this reset any changes that we need to keep?
-            '     (Formatting is reapplied below)
-            fillWorkSheet.Reset(1, dfTemp.ColumnCount)
+            fillWorkSheet.Rows = 1
+            For j = 0 To fillWorkSheet.Columns - 1
+                fillWorkSheet(row:=0, col:=j) = ""
+            Next
             fillWorkSheet.SetRowsHeight(0, 1, 0.1)
             fillWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_AllowAdjustRowHeight, False)
         Else
