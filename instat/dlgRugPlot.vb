@@ -16,7 +16,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class dlgRugPlot
-    Private clsDefaultFunction As New RFunction
+    Private clsRggplotFunction As New RFunction
     Private clsRgeom_RugPlotFunction As New RFunction
     Private clsRaesFunction As New RFunction
     Private bFirstLoad As Boolean = True
@@ -31,6 +31,9 @@ Public Class dlgRugPlot
     Private clsRFacetFunction As New RFunction
     Private clsThemeFunction As New RFunction
     Private dctThemeFunctions As New Dictionary(Of String, RFunction)
+    Private clsLocalRaesFunction As New RFunction
+    Private bResetLayerSubdialog As Boolean = True
+
 
     Private Sub dlgRugPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -85,7 +88,7 @@ Public Class dlgRugPlot
 
     Private Sub SetDefaults()
         clsRaesFunction = New RFunction
-        clsDefaultFunction = New RFunction
+        clsRggplotFunction = New RFunction
         clsRgeom_RugPlotFunction = New RFunction
         clsBaseOperator = New ROperator
 
@@ -94,12 +97,12 @@ Public Class dlgRugPlot
         bResetSubdialog = True
 
         clsBaseOperator.SetOperation("+")
-        clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsDefaultFunction, iPosition:=0)
+        clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
         clsBaseOperator.AddParameter("scatter", clsRFunctionParameter:=clsRgeom_RugPlotFunction)
 
-        clsDefaultFunction.SetPackageName("ggplot2")
-        clsDefaultFunction.SetRCommand("ggplot")
-        clsDefaultFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction, iPosition:=1)
+        clsRggplotFunction.SetPackageName("ggplot2")
+        clsRggplotFunction.SetRCommand("ggplot")
+        clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction, iPosition:=1)
 
         clsRaesFunction.SetPackageName("ggplot2")
         clsRaesFunction.SetRCommand("aes")
@@ -116,6 +119,7 @@ Public Class dlgRugPlot
         clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
         clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction
+        clsLocalRaesFunction = GgplotDefaults.clsAesFunction.Clone()
 
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrRugPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
@@ -124,7 +128,7 @@ Public Class dlgRugPlot
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrSaveGraph.SetRCode(clsBaseOperator, bReset)
-        ucrRugPlotSelector.SetRCode(clsDefaultFunction, bReset)
+        ucrRugPlotSelector.SetRCode(clsRggplotFunction, bReset)
 
         ucrReceiverX.SetRCode(clsRaesFunction, bReset)
         ucrFactorOptionalReceiver.SetRCode(clsRaesFunction, bReset)
@@ -158,7 +162,7 @@ Public Class dlgRugPlot
 
     Private Sub cmdRugPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdRugPlotOptions.Click
         ''''''' i wonder if all this will be needed for the new system
-        'sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsDefaultFunction, clsTempGeomFunc:=clsRgeom_RugPlotFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrRugPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True, bIgnoreGlobalAes:=False)
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeom_RugPlotFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrRugPlotSelector, bApplyAesGlobally:=True, bReset:=bResetLayerSubdialog)
         sdgLayerOptions.ShowDialog()
 
         For Each clsParam In clsRaesFunction.clsParameters
