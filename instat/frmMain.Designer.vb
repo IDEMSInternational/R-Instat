@@ -513,32 +513,32 @@ Partial Class frmMain
         'mnuDescribeOneVariableSummarise
         '
         Me.mnuDescribeOneVariableSummarise.Name = "mnuDescribeOneVariableSummarise"
-        Me.mnuDescribeOneVariableSummarise.Size = New System.Drawing.Size(152, 22)
+        Me.mnuDescribeOneVariableSummarise.Size = New System.Drawing.Size(146, 22)
         Me.mnuDescribeOneVariableSummarise.Tag = "Summarise..."
         Me.mnuDescribeOneVariableSummarise.Text = "Summarise..."
         '
         'mnuDescribeOneVariableGraph
         '
         Me.mnuDescribeOneVariableGraph.Name = "mnuDescribeOneVariableGraph"
-        Me.mnuDescribeOneVariableGraph.Size = New System.Drawing.Size(152, 22)
+        Me.mnuDescribeOneVariableGraph.Size = New System.Drawing.Size(146, 22)
         Me.mnuDescribeOneVariableGraph.Tag = "Graph..."
         Me.mnuDescribeOneVariableGraph.Text = "Graph..."
         '
         'ToolStripSeparator33
         '
         Me.ToolStripSeparator33.Name = "ToolStripSeparator33"
-        Me.ToolStripSeparator33.Size = New System.Drawing.Size(149, 6)
+        Me.ToolStripSeparator33.Size = New System.Drawing.Size(143, 6)
         '
         'mnuDescribeOneVariableFrequencies
         '
         Me.mnuDescribeOneVariableFrequencies.Name = "mnuDescribeOneVariableFrequencies"
-        Me.mnuDescribeOneVariableFrequencies.Size = New System.Drawing.Size(152, 22)
+        Me.mnuDescribeOneVariableFrequencies.Size = New System.Drawing.Size(146, 22)
         Me.mnuDescribeOneVariableFrequencies.Text = "Frequencies..."
         '
         'RatingDataToolStripMenuItem
         '
         Me.RatingDataToolStripMenuItem.Name = "RatingDataToolStripMenuItem"
-        Me.RatingDataToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.RatingDataToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
         Me.RatingDataToolStripMenuItem.Text = "Rating Data..."
         '
         'mnuDescribeTwoVariables
@@ -1557,6 +1557,7 @@ Partial Class frmMain
         '
         'DispalyClimaticDataToolStripMenuItem
         '
+        Me.DispalyClimaticDataToolStripMenuItem.Enabled = False
         Me.DispalyClimaticDataToolStripMenuItem.Name = "DispalyClimaticDataToolStripMenuItem"
         Me.DispalyClimaticDataToolStripMenuItem.Size = New System.Drawing.Size(224, 22)
         Me.DispalyClimaticDataToolStripMenuItem.Text = "Display Daily Climatic Data..."
