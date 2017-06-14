@@ -94,4 +94,7 @@ Public Class dlgCombineforGraphics
     Private Sub AllControls_ControlContentsChanged() Handles ucrCombineGraphReceiver.ControlContentsChanged, ucrSave.ControlContentsChanged
         TestOkEnabled()
     End Sub
+    Private Sub AllControl_ControlContentsChanged() Handles ucrCombineGraphReceiver.ControlContentsChanged
+        sdgCombineGraphOptions.SetDefaultRowAndColumns()
+    End Sub
 End Class
