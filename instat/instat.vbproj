@@ -5520,8 +5520,8 @@
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\tidyr_0.6.3.zip">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="static\Library\Climatic\WKenyaRain.csv" />
-    <None Include="static\Library\Climatic\WKenya_StationInfo.xlsx" />
+    <Content Include="static\Library\Climatic\WKenyaRain.csv" />
+    <Content Include="static\Library\Climatic\WKenya_StationInfo.xlsx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
