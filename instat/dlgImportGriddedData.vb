@@ -59,6 +59,7 @@ Public Class dlgImportGriddedData
         'dctDownloadPairs.Add("NOAA_CMORPH_V0PX", Chr(34) & "NOAA_CMORPH_V0PX" & Chr(34))
         dctDownloadPairs.Add("NASA_TRMM_3B42", Chr(34) & "NASA_TRMM_3B42" & Chr(34))
         ucrInputDownloadFrom.SetItems(dctDownloadPairs)
+        ucrInputDownloadFrom.SetDropDownStyleAsNonEditable()
 
         ucrInputDataFile.SetParameter(New RParameter("data_file", 1))
 
