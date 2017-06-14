@@ -169,7 +169,11 @@ Public Class sdgPlots
         ucrYAxis.InitialiseControl()
 
         'themes tab
-        ucrInputThemes.SetParameter(New RParameter("theme_name"))
+        urChkSelectTheme.SetText("Select Theme:")
+        ucrInputThemes.SetParameter(New RParameter("theme"))
+        urChkSelectTheme.AddToLinkedControls(ucrInputThemes, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="theme_grey")
+        urChkSelectTheme.AddParameterPresentCondition(True, "theme")
+        urChkSelectTheme.AddParameterPresentCondition(False, "theme", False)
         strThemes = GgplotDefaults.strThemes
         'Would prefer to do this through functions but auto updating function name not currently supported through combo box control
         For Each strTemp As String In strThemes
@@ -244,7 +248,8 @@ Public Class sdgPlots
         ucrInputGraphTitle.SetRCode(clsLabsFunction, bReset)
         ucrInputGraphSubTitle.SetRCode(clsLabsFunction, bReset)
         ucrInputGraphCaption.SetRCode(clsLabsFunction, bReset)
-        ucrInputThemes.SetRCode(clsBaseOperator)
+        urChkSelectTheme.SetRCode(clsBaseOperator, bReset)
+        ucrInputThemes.SetRCode(clsBaseOperator, bReset)
 
         'ucrInputLegend.SetRCode(clsNewLabsFunction, bReset)
         ucrPnlHorizonatalVertical.SetRCode(clsFacetFunction, bReset)
