@@ -98,16 +98,16 @@ Partial Class ucrAxes
         'lblTitle
         '
         Me.lblTitle.AutoSize = True
-        Me.lblTitle.Location = New System.Drawing.Point(3, 47)
+        Me.lblTitle.Location = New System.Drawing.Point(6, 51)
         Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(27, 13)
+        Me.lblTitle.Size = New System.Drawing.Size(30, 13)
         Me.lblTitle.TabIndex = 20
-        Me.lblTitle.Text = "Title"
+        Me.lblTitle.Text = "Title:"
         '
         'rdoSpecifyTitle
         '
         Me.rdoSpecifyTitle.AutoSize = True
-        Me.rdoSpecifyTitle.Location = New System.Drawing.Point(132, 21)
+        Me.rdoSpecifyTitle.Location = New System.Drawing.Point(59, 21)
         Me.rdoSpecifyTitle.Name = "rdoSpecifyTitle"
         Me.rdoSpecifyTitle.Size = New System.Drawing.Size(83, 17)
         Me.rdoSpecifyTitle.TabIndex = 3
@@ -118,7 +118,7 @@ Partial Class ucrAxes
         'rdoNoTitle
         '
         Me.rdoNoTitle.AutoSize = True
-        Me.rdoNoTitle.Location = New System.Drawing.Point(62, 21)
+        Me.rdoNoTitle.Location = New System.Drawing.Point(153, 21)
         Me.rdoNoTitle.Name = "rdoNoTitle"
         Me.rdoNoTitle.Size = New System.Drawing.Size(62, 17)
         Me.rdoNoTitle.TabIndex = 3
@@ -161,10 +161,10 @@ Partial Class ucrAxes
         Me.grpMajorBreaks.Controls.Add(Me.rdoMajorBreaksSeq)
         Me.grpMajorBreaks.Controls.Add(Me.rdoMajorBreaksCustom)
         Me.grpMajorBreaks.Controls.Add(Me.ucrInputMajorBreaksInStepsOf)
+        Me.grpMajorBreaks.Controls.Add(Me.rdoMajorBreaksNone)
         Me.grpMajorBreaks.Controls.Add(Me.ucrInputMajorBreaksTo)
         Me.grpMajorBreaks.Controls.Add(Me.ucrInputMajorBreaksFrom)
         Me.grpMajorBreaks.Controls.Add(Me.rdoMajorBreaksAuto)
-        Me.grpMajorBreaks.Controls.Add(Me.rdoMajorBreaksNone)
         Me.grpMajorBreaks.Controls.Add(Me.lblMajorBreaksInStepsOf)
         Me.grpMajorBreaks.Controls.Add(Me.lblMajorBreaksFrom)
         Me.grpMajorBreaks.Controls.Add(Me.lblMajorBreaksTo)
@@ -182,7 +182,7 @@ Partial Class ucrAxes
         Me.ucrChkLabels.Checked = False
         Me.ucrChkLabels.Location = New System.Drawing.Point(5, 133)
         Me.ucrChkLabels.Name = "ucrChkLabels"
-        Me.ucrChkLabels.Size = New System.Drawing.Size(58, 20)
+        Me.ucrChkLabels.Size = New System.Drawing.Size(65, 20)
         Me.ucrChkLabels.TabIndex = 22
         '
         'ucrInputMajorBreaksLabels
@@ -198,7 +198,7 @@ Partial Class ucrAxes
         'rdoMajorBreaksSeq
         '
         Me.rdoMajorBreaksSeq.AutoSize = True
-        Me.rdoMajorBreaksSeq.Location = New System.Drawing.Point(109, 21)
+        Me.rdoMajorBreaksSeq.Location = New System.Drawing.Point(56, 21)
         Me.rdoMajorBreaksSeq.Name = "rdoMajorBreaksSeq"
         Me.rdoMajorBreaksSeq.Size = New System.Drawing.Size(74, 17)
         Me.rdoMajorBreaksSeq.TabIndex = 21
@@ -209,7 +209,7 @@ Partial Class ucrAxes
         'rdoMajorBreaksCustom
         '
         Me.rdoMajorBreaksCustom.AutoSize = True
-        Me.rdoMajorBreaksCustom.Location = New System.Drawing.Point(184, 22)
+        Me.rdoMajorBreaksCustom.Location = New System.Drawing.Point(135, 21)
         Me.rdoMajorBreaksCustom.Name = "rdoMajorBreaksCustom"
         Me.rdoMajorBreaksCustom.Size = New System.Drawing.Size(60, 17)
         Me.rdoMajorBreaksCustom.TabIndex = 20
@@ -232,7 +232,7 @@ Partial Class ucrAxes
         Me.ucrInputMajorBreaksTo.AddQuotesIfUnrecognised = True
         Me.ucrInputMajorBreaksTo.IsMultiline = False
         Me.ucrInputMajorBreaksTo.IsReadOnly = False
-        Me.ucrInputMajorBreaksTo.Location = New System.Drawing.Point(74, 73)
+        Me.ucrInputMajorBreaksTo.Location = New System.Drawing.Point(74, 72)
         Me.ucrInputMajorBreaksTo.Name = "ucrInputMajorBreaksTo"
         Me.ucrInputMajorBreaksTo.Size = New System.Drawing.Size(47, 21)
         Me.ucrInputMajorBreaksTo.TabIndex = 19
@@ -242,7 +242,7 @@ Partial Class ucrAxes
         Me.ucrInputMajorBreaksFrom.AddQuotesIfUnrecognised = True
         Me.ucrInputMajorBreaksFrom.IsMultiline = False
         Me.ucrInputMajorBreaksFrom.IsReadOnly = False
-        Me.ucrInputMajorBreaksFrom.Location = New System.Drawing.Point(74, 47)
+        Me.ucrInputMajorBreaksFrom.Location = New System.Drawing.Point(74, 46)
         Me.ucrInputMajorBreaksFrom.Name = "ucrInputMajorBreaksFrom"
         Me.ucrInputMajorBreaksFrom.Size = New System.Drawing.Size(47, 21)
         Me.ucrInputMajorBreaksFrom.TabIndex = 19
@@ -261,7 +261,7 @@ Partial Class ucrAxes
         'rdoMajorBreaksNone
         '
         Me.rdoMajorBreaksNone.AutoSize = True
-        Me.rdoMajorBreaksNone.Location = New System.Drawing.Point(54, 21)
+        Me.rdoMajorBreaksNone.Location = New System.Drawing.Point(200, 21)
         Me.rdoMajorBreaksNone.Name = "rdoMajorBreaksNone"
         Me.rdoMajorBreaksNone.Size = New System.Drawing.Size(51, 17)
         Me.rdoMajorBreaksNone.TabIndex = 3
@@ -272,7 +272,7 @@ Partial Class ucrAxes
         'lblMajorBreaksInStepsOf
         '
         Me.lblMajorBreaksInStepsOf.AutoSize = True
-        Me.lblMajorBreaksInStepsOf.Location = New System.Drawing.Point(9, 102)
+        Me.lblMajorBreaksInStepsOf.Location = New System.Drawing.Point(9, 103)
         Me.lblMajorBreaksInStepsOf.Name = "lblMajorBreaksInStepsOf"
         Me.lblMajorBreaksInStepsOf.Size = New System.Drawing.Size(61, 13)
         Me.lblMajorBreaksInStepsOf.TabIndex = 9
@@ -290,7 +290,7 @@ Partial Class ucrAxes
         'lblMajorBreaksTo
         '
         Me.lblMajorBreaksTo.AutoSize = True
-        Me.lblMajorBreaksTo.Location = New System.Drawing.Point(9, 76)
+        Me.lblMajorBreaksTo.Location = New System.Drawing.Point(9, 75)
         Me.lblMajorBreaksTo.Name = "lblMajorBreaksTo"
         Me.lblMajorBreaksTo.Size = New System.Drawing.Size(23, 13)
         Me.lblMajorBreaksTo.TabIndex = 6
@@ -298,9 +298,9 @@ Partial Class ucrAxes
         '
         'ucrPnlMajorBreaks
         '
-        Me.ucrPnlMajorBreaks.Location = New System.Drawing.Point(6, 18)
+        Me.ucrPnlMajorBreaks.Location = New System.Drawing.Point(3, 19)
         Me.ucrPnlMajorBreaks.Name = "ucrPnlMajorBreaks"
-        Me.ucrPnlMajorBreaks.Size = New System.Drawing.Size(247, 23)
+        Me.ucrPnlMajorBreaks.Size = New System.Drawing.Size(245, 23)
         Me.ucrPnlMajorBreaks.TabIndex = 18
         '
         'ucrInputMajorBreaksCustom
@@ -330,9 +330,9 @@ Partial Class ucrAxes
         Me.grpScales.Controls.Add(Me.rdoScalesCustom)
         Me.grpScales.Controls.Add(Me.rdoScalesAuto)
         Me.grpScales.Controls.Add(Me.ucrPnlScales)
-        Me.grpScales.Location = New System.Drawing.Point(3, 94)
+        Me.grpScales.Location = New System.Drawing.Point(3, 90)
         Me.grpScales.Name = "grpScales"
-        Me.grpScales.Size = New System.Drawing.Size(215, 224)
+        Me.grpScales.Size = New System.Drawing.Size(220, 228)
         Me.grpScales.TabIndex = 2
         Me.grpScales.TabStop = False
         Me.grpScales.Text = "Scales"
@@ -478,7 +478,7 @@ Partial Class ucrAxes
         '
         Me.ucrInputAxisType.AddQuotesIfUnrecognised = True
         Me.ucrInputAxisType.IsReadOnly = False
-        Me.ucrInputAxisType.Location = New System.Drawing.Point(343, 4)
+        Me.ucrInputAxisType.Location = New System.Drawing.Point(344, 7)
         Me.ucrInputAxisType.Name = "ucrInputAxisType"
         Me.ucrInputAxisType.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputAxisType.TabIndex = 3
@@ -486,7 +486,7 @@ Partial Class ucrAxes
         'rdoMinorBreaksSeq
         '
         Me.rdoMinorBreaksSeq.AutoSize = True
-        Me.rdoMinorBreaksSeq.Location = New System.Drawing.Point(109, 19)
+        Me.rdoMinorBreaksSeq.Location = New System.Drawing.Point(56, 20)
         Me.rdoMinorBreaksSeq.Name = "rdoMinorBreaksSeq"
         Me.rdoMinorBreaksSeq.Size = New System.Drawing.Size(74, 17)
         Me.rdoMinorBreaksSeq.TabIndex = 32
@@ -497,7 +497,7 @@ Partial Class ucrAxes
         'rdoMinorBreaksCustom
         '
         Me.rdoMinorBreaksCustom.AutoSize = True
-        Me.rdoMinorBreaksCustom.Location = New System.Drawing.Point(184, 20)
+        Me.rdoMinorBreaksCustom.Location = New System.Drawing.Point(135, 20)
         Me.rdoMinorBreaksCustom.Name = "rdoMinorBreaksCustom"
         Me.rdoMinorBreaksCustom.Size = New System.Drawing.Size(60, 17)
         Me.rdoMinorBreaksCustom.TabIndex = 31
@@ -559,7 +559,7 @@ Partial Class ucrAxes
         'lblMinorBreaksInStepsOf
         '
         Me.lblMinorBreaksInStepsOf.AutoSize = True
-        Me.lblMinorBreaksInStepsOf.Location = New System.Drawing.Point(9, 100)
+        Me.lblMinorBreaksInStepsOf.Location = New System.Drawing.Point(9, 101)
         Me.lblMinorBreaksInStepsOf.Name = "lblMinorBreaksInStepsOf"
         Me.lblMinorBreaksInStepsOf.Size = New System.Drawing.Size(61, 13)
         Me.lblMinorBreaksInStepsOf.TabIndex = 25
@@ -568,7 +568,7 @@ Partial Class ucrAxes
         'lblMinorBreaksTo
         '
         Me.lblMinorBreaksTo.AutoSize = True
-        Me.lblMinorBreaksTo.Location = New System.Drawing.Point(9, 74)
+        Me.lblMinorBreaksTo.Location = New System.Drawing.Point(9, 75)
         Me.lblMinorBreaksTo.Name = "lblMinorBreaksTo"
         Me.lblMinorBreaksTo.Size = New System.Drawing.Size(23, 13)
         Me.lblMinorBreaksTo.TabIndex = 24
@@ -578,7 +578,7 @@ Partial Class ucrAxes
         '
         Me.ucrPnlMinorBreaks.Location = New System.Drawing.Point(6, 16)
         Me.ucrPnlMinorBreaks.Name = "ucrPnlMinorBreaks"
-        Me.ucrPnlMinorBreaks.Size = New System.Drawing.Size(247, 23)
+        Me.ucrPnlMinorBreaks.Size = New System.Drawing.Size(245, 23)
         Me.ucrPnlMinorBreaks.TabIndex = 27
         '
         'grpMinorBreaks
@@ -605,7 +605,7 @@ Partial Class ucrAxes
         'lblMinorBreaksFrom
         '
         Me.lblMinorBreaksFrom.AutoSize = True
-        Me.lblMinorBreaksFrom.Location = New System.Drawing.Point(22, 48)
+        Me.lblMinorBreaksFrom.Location = New System.Drawing.Point(9, 48)
         Me.lblMinorBreaksFrom.Name = "lblMinorBreaksFrom"
         Me.lblMinorBreaksFrom.Size = New System.Drawing.Size(33, 13)
         Me.lblMinorBreaksFrom.TabIndex = 34
@@ -614,7 +614,7 @@ Partial Class ucrAxes
         'rdoMinorBreaksNone
         '
         Me.rdoMinorBreaksNone.AutoSize = True
-        Me.rdoMinorBreaksNone.Location = New System.Drawing.Point(54, 19)
+        Me.rdoMinorBreaksNone.Location = New System.Drawing.Point(200, 20)
         Me.rdoMinorBreaksNone.Name = "rdoMinorBreaksNone"
         Me.rdoMinorBreaksNone.Size = New System.Drawing.Size(51, 17)
         Me.rdoMinorBreaksNone.TabIndex = 22
