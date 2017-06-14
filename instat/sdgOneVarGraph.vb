@@ -23,10 +23,6 @@ Public Class sdgOneVarGraph
         autoTranslate(Me)
     End Sub
 
-    Private Sub sdgOneVarGraph_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-
-    End Sub
-
     Public Sub InitialiseControls()
         Dim dctNumericPairs As New Dictionary(Of String, String)
         Dim dctCategoricalPairs As New Dictionary(Of String, String)
@@ -44,21 +40,24 @@ Public Class sdgOneVarGraph
         dctNumericPairs.Add("Violin + Jitter", Chr(34) & "violin_jitter" & Chr(34))
         dctNumericPairs.Add("Violin + Boxplot", Chr(34) & "violin_box" & Chr(34))
         ucrInputNumeric.SetItems(dctNumericPairs)
+        ucrInputNumeric.SetDropDownStyleAsNonEditable()
 
         ucrInputCategorical.SetParameter(New RParameter("categorical"))
         dctCategoricalPairs.Add("Bar Chart", Chr(34) & "geom_bar" & Chr(34))
         dctCategoricalPairs.Add("Pie Chart", Chr(34) & "pie_chart" & Chr(34))
         dctCategoricalPairs.Add("Dot Plot", Chr(34) & "geom_dotplot" & Chr(34))
         ucrInputCategorical.SetItems(dctCategoricalPairs)
+        ucrInputCategorical.SetDropDownStyleAsNonEditable()
 
         ucrNudNumberofColumns.SetParameter(New RParameter("ncol"))
         ucrNudNumberofColumns.SetMinMax(1, 10)
         ucrNudNumberofColumns.bAddRemoveParameter = False
         ucrNudNumberofColumns.SetLinkedDisplayControl(lblNumberofColumns)
 
-        ucrChkSpecifyLayout.SetParameter(ucrNudNumberofColumns.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkSpecifyLayout.SetText("Specify Layout")
         ucrChkSpecifyLayout.AddToLinkedControls(ucrLinked:=ucrNudNumberofColumns, objValues:={True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        ucrChkSpecifyLayout.AddParameterPresentCondition(True, "ncol")
+        ucrChkSpecifyLayout.AddParameterPresentCondition(False, "ncol", False)
 
         ucrChkFreeScaleAxisforFacets.SetText("Free Scale Axis for Facets")
         ucrChkFreeScaleAxisforFacets.SetParameter(New RParameter("free_scale_axis"))
