@@ -81,7 +81,7 @@ Public Class sdgSimpleRegOptions
 
     Public Sub ResidualPlots()
         clsRGraphics.SetOperation("+")
-        clsRggplotFunction.SetPackageName("ggplot2")
+        clsRResidualPlotsFunction.SetPackageName("ggplot2")
         clsRResidualPlotsFunction.SetRCommand("autoplot")
         clsRResidualPlotsFunction.AddParameter("object", clsRFunctionParameter:=clsRModelFunction)
         clsRgeom_point.SetRCommand("geom_point")
