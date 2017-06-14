@@ -19,8 +19,6 @@ Public Class sdgCombineGraphOptions
     Private bFirstLoad As Boolean = True
     Private bInitialiseControls As Boolean = False
     Public clsCombineGraph As New RFunction
-
-    Public clsRsyntax As New RSyntax
     Public WithEvents grdCurrSheet As Worksheet
     Public clsMatrixFunction As New RFunction
 
@@ -39,12 +37,6 @@ Public Class sdgCombineGraphOptions
         grdCurrSheet.SetSettings(WorksheetSettings.Edit_DragSelectionToMoveCells, False)
     End Sub
 
-    Private Sub sdgLayout_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.BringToFront()
-        LoadGraphs()
-        SetDefaultRowAndColumns()
-    End Sub
-
     Private Sub InitialiseControls()
         grdCurrSheet.Rows = ucrNudRows.Value
         grdCurrSheet.Columns = ucrNudColumns.Value
@@ -58,7 +50,7 @@ Public Class sdgCombineGraphOptions
         ucrInputTop.SetParameter(New RParameter("top"))
 
         ucrChkSpecifyOrder.SetText("Specify Order")
-        ucrChkSpecifyOrder.AddToLinkedControls({ucrInputTop, ucrInputRight}, objValues:={True})
+        ucrChkSpecifyOrder.Checked = False
         bInitialiseControls = True
     End Sub
 
@@ -139,10 +131,9 @@ Public Class sdgCombineGraphOptions
         End If
     End Sub
 
-    Private Sub chkSpecifyOrder_CheckedChanged() Handles ucrChkSpecifyOrder.ControlValueChanged
+    Private Sub chkSpecifyOrder_ControlValueChanged() Handles ucrChkSpecifyOrder.ControlValueChanged
         If ucrChkSpecifyOrder.Checked = True Then
             grdLayout.Visible = True
-            'SetMatrixFunction()
             SwitchNcolToMatrixFunc()
         Else
             grdLayout.Visible = False
@@ -151,8 +142,8 @@ Public Class sdgCombineGraphOptions
     End Sub
 
     Public Sub SwitchNcolToMatrixFunc()
-        clsRsyntax.RemoveParameter("ncol")
-        clsRsyntax.RemoveParameter("nrow")
+        clsCombineGraph.RemoveParameterByName("ncol")
+        clsCombineGraph.RemoveParameterByName("nrow")
         clsMatrixFunction.AddParameter("ncol", ucrNudColumns.Value)
         clsMatrixFunction.AddParameter("nrow", ucrNudRows.Value)
     End Sub
@@ -160,9 +151,9 @@ Public Class sdgCombineGraphOptions
     Public Sub RemoveNcolFromMatrixfunc()
         clsMatrixFunction.RemoveParameterByName("ncol")
         clsMatrixFunction.RemoveParameterByName("nrow")
-        clsRsyntax.RemoveParameter("layout_matrix")
-        clsRsyntax.AddParameter("nrow", ucrNudRows.Value)
-        clsRsyntax.AddParameter("ncol", ucrNudColumns.Value)
+        clsCombineGraph.RemoveParameterByName("layout_matrix")
+        clsCombineGraph.AddParameter("nrow", ucrNudRows.Value)
+        clsCombineGraph.AddParameter("ncol", ucrNudColumns.Value)
     End Sub
 
     Private Sub grdLayout_Leave(sender As Object, e As EventArgs) Handles grdLayout.Leave
@@ -178,5 +169,11 @@ Public Class sdgCombineGraphOptions
 
         clsCombineGraph = clsNewRFunction
         SetRCode(Me, clsCombineGraph, bReset)
+    End Sub
+
+    Private Sub sdgCombineGraphOptions_Load(sender As Object, e As EventArgs) Handles Me.Load
+        Me.BringToFront()
+        LoadGraphs()
+        SetDefaultRowAndColumns()
     End Sub
 End Class
