@@ -87,6 +87,7 @@ Public Class dlgScatterPlot
 
         clsGeomSmoothFunc.SetPackageName("ggplot2")
         clsGeomSmoothFunc.SetRCommand("geom_smooth")
+        clsGeomSmoothFunc.AddParameter("method", Chr(34) & "lm" & Chr(34))
         clsGeomSmoothParameter.SetArgumentName("geom_smooth")
         clsGeomSmoothParameter.SetArgument(clsGeomSmoothFunc)
         ucrChkLineofBestFit.SetText("Add Line of Best Fit")
@@ -203,26 +204,26 @@ Public Class dlgScatterPlot
     End Sub
 
     Private Sub CheckIfNumeric()
-        strReceiverXVarType = ucrReceiverX.strCurrDataType
-        strReceiverYSingleVarType = ucrVariablesAsFactorForScatter.ucrSingleVariable.strCurrDataType
+        'strReceiverXVarType = ucrReceiverX.strCurrDataType
+        'strReceiverYSingleVarType = ucrVariablesAsFactorForScatter.ucrSingleVariable.strCurrDataType
 
-        If (ucrVariablesAsFactorForScatter.ucrMultipleVariables.GetCurrentItemTypes.Count > 0) Then
-            strReceiverYMultipleVarType = ucrVariablesAsFactorForScatter.ucrMultipleVariables.GetCurrentItemTypes.Item(0) 'how about the others as this just gets for the first one 
-        Else
-            strReceiverYMultipleVarType = ""
-        End If
+        'If (ucrVariablesAsFactorForScatter.ucrMultipleVariables.GetCurrentItemTypes.Count > 0) Then
+        '    strReceiverYMultipleVarType = ucrVariablesAsFactorForScatter.ucrMultipleVariables.GetCurrentItemTypes.Item(0) 'how about the others as this just gets for the first one 
+        'Else
+        '    strReceiverYMultipleVarType = ""
+        'End If
 
-        If (Not ucrVariablesAsFactorForScatter.IsEmpty() AndAlso Not ucrReceiverX.IsEmpty()) Then
-            If ((strReceiverXVarType = "numeric" OrElse strReceiverXVarType = "integer") AndAlso (strReceiverYSingleVarType = "numeric" OrElse strReceiverYSingleVarType = "integer")) OrElse (strReceiverYMultipleVarType = "numeric" OrElse strReceiverYMultipleVarType = "integer") Then
-                ucrChkLineofBestFit.Enabled = True
-            End If
-        Else
-            ucrChkLineofBestFit.Enabled = False
-            clsBaseOperator.RemoveParameterByName("geom_smooth")
-        End If
+        'If (Not ucrVariablesAsFactorForScatter.IsEmpty() AndAlso Not ucrReceiverX.IsEmpty()) Then
+        '    If ((strReceiverXVarType = "numeric" OrElse strReceiverXVarType = "integer") AndAlso (strReceiverYSingleVarType = "numeric" OrElse strReceiverYSingleVarType = "integer")) OrElse (strReceiverYMultipleVarType = "numeric" OrElse strReceiverYMultipleVarType = "integer") Then
+        '        ucrChkLineofBestFit.Enabled = True
+        '    End If
+        'Else
+        '    ucrChkLineofBestFit.Enabled = False
+        '    clsBaseOperator.RemoveParameterByName("geom_smooth")
+        'End If
     End Sub
 
     Private Sub ucrVariablesAsFactorForScatter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForScatter.ControlContentsChanged, ucrReceiverX.ControlContentsChanged
-        CheckIfNumeric()
+        ' CheckIfNumeric()
     End Sub
 End Class
