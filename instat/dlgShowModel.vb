@@ -49,6 +49,7 @@ Public Class dlgShowModel
         ucrBase.clsRsyntax.iCallType = 2
         ucrInputNewColNameforTablePlus.SetDataFrameSelector(ucrSelectorForDataFrame.ucrAvailableDataFrames)
         ucrInputNewColNameforTablePlus.SetValidationTypeAsRVariable()
+        ucrInputProbabilities.SetValidationTypeAsNumericList()
     End Sub
 
     Private Sub SetDefaults()
