@@ -162,7 +162,7 @@ Public Class ucrAxes
         ucrChkNaValue.AddParameterPresentCondition(False, "na.value", False)
         ucrChkNaValue.AddToLinkedControls(ucrInputRelaceMissingvalues, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
 
-        ucrChkTransformation.SetText("Transfromation")
+        ucrChkTransformation.SetText("Transformation")
         ucrInputTransformation.SetParameter(New RParameter("trans"))
         ucrChkTransformation.AddParameterPresentCondition(True, "trans")
         ucrChkTransformation.AddParameterPresentCondition(False, "trans", False)

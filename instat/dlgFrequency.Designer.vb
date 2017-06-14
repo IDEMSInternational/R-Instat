@@ -22,47 +22,267 @@ Partial Class dlgFrequency
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSelectorFrequency = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverFactors = New instat.ucrReceiverMultiple()
         Me.lblFactors = New System.Windows.Forms.Label()
-        Me.ucrchkWeights = New instat.ucrCheck()
-        Me.ucrReceiverSingle = New instat.ucrReceiverSingle()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.ucrNudDecimals = New instat.ucrNud()
-        Me.lblDecimals = New System.Windows.Forms.Label()
-        Me.ucrNudColumnFactors = New instat.ucrNud()
         Me.lblColumnFactors = New System.Windows.Forms.Label()
-        Me.ucrChkDisplayMargins = New instat.ucrCheck()
         Me.cmdOptions = New System.Windows.Forms.Button()
-        Me.ucrChkCounts = New instat.ucrCheck()
-        Me.ucrChkOverallPercentages = New instat.ucrCheck()
-        Me.ucrChkPercentagesOf = New instat.ucrCheck()
-        Me.ucrSingleReceiver = New instat.ucrReceiverSingle()
+        Me.lblDisplayNA = New System.Windows.Forms.Label()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.lblPageBy = New System.Windows.Forms.Label()
+        Me.lblSigFigs = New System.Windows.Forms.Label()
         Me.grpDisplay = New System.Windows.Forms.GroupBox()
-        Me.ucrChkOmitMissing = New instat.ucrCheck()
-        Me.ucrChkPrintOutput = New instat.ucrCheck()
+        Me.lblFactorsAsPercentage = New System.Windows.Forms.Label()
+        Me.ucrNudSigFigs = New instat.ucrNud()
+        Me.ucrNudColumnFactors = New instat.ucrNud()
+        Me.ucrInputNA = New instat.ucrInputTextBox()
+        Me.ucrChkRowNumbers = New instat.ucrCheck()
+        Me.ucrInputPageBy = New instat.ucrInputComboBox()
+        Me.ucrChkHTMLTable = New instat.ucrCheck()
+        Me.ucrSaveTable = New instat.ucrSave()
+        Me.ucrChkDisplayMargins = New instat.ucrCheck()
+        Me.ucrChkStoreResults = New instat.ucrCheck()
+        Me.ucrReceiverSingle = New instat.ucrReceiverSingle()
+        Me.ucrChkWeights = New instat.ucrCheck()
+        Me.ucrReceiverMultiplePercentages = New instat.ucrReceiverMultiple()
+        Me.ucrChkPercentageProportion = New instat.ucrCheck()
+        Me.ucrChkDisplayAsPercentage = New instat.ucrCheck()
+        Me.ucrReceiverFactors = New instat.ucrReceiverMultiple()
+        Me.ucrSelectorFrequency = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
         Me.UcrCheck1 = New instat.ucrCheck()
-        Me.GroupBox2.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         Me.grpDisplay.SuspendLayout()
         Me.SuspendLayout()
         '
-        'ucrBase
+        'lblFactors
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 392)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(425, 55)
-        Me.ucrBase.TabIndex = 8
+        Me.lblFactors.AutoSize = True
+        Me.lblFactors.Location = New System.Drawing.Point(253, 45)
+        Me.lblFactors.Name = "lblFactors"
+        Me.lblFactors.Size = New System.Drawing.Size(45, 13)
+        Me.lblFactors.TabIndex = 1
+        Me.lblFactors.Tag = "Factors:"
+        Me.lblFactors.Text = "Factors:"
         '
-        'ucrSelectorFrequency
+        'lblColumnFactors
         '
-        Me.ucrSelectorFrequency.bShowHiddenColumns = False
-        Me.ucrSelectorFrequency.bUseCurrentFilter = True
-        Me.ucrSelectorFrequency.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorFrequency.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorFrequency.Name = "ucrSelectorFrequency"
-        Me.ucrSelectorFrequency.Size = New System.Drawing.Size(210, 182)
-        Me.ucrSelectorFrequency.TabIndex = 0
+        Me.lblColumnFactors.AutoSize = True
+        Me.lblColumnFactors.Location = New System.Drawing.Point(8, 128)
+        Me.lblColumnFactors.Name = "lblColumnFactors"
+        Me.lblColumnFactors.Size = New System.Drawing.Size(83, 13)
+        Me.lblColumnFactors.TabIndex = 6
+        Me.lblColumnFactors.Tag = "Column_Factors"
+        Me.lblColumnFactors.Text = "Column Factors:"
+        '
+        'cmdOptions
+        '
+        Me.cmdOptions.Location = New System.Drawing.Point(323, 392)
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(86, 23)
+        Me.cmdOptions.TabIndex = 11
+        Me.cmdOptions.Text = "Options"
+        Me.cmdOptions.UseVisualStyleBackColor = True
+        '
+        'lblDisplayNA
+        '
+        Me.lblDisplayNA.AutoSize = True
+        Me.lblDisplayNA.Location = New System.Drawing.Point(8, 154)
+        Me.lblDisplayNA.Name = "lblDisplayNA"
+        Me.lblDisplayNA.Size = New System.Drawing.Size(76, 13)
+        Me.lblDisplayNA.TabIndex = 8
+        Me.lblDisplayNA.Tag = ""
+        Me.lblDisplayNA.Text = "Display NA as:"
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.ucrNudSigFigs)
+        Me.GroupBox1.Controls.Add(Me.ucrNudColumnFactors)
+        Me.GroupBox1.Controls.Add(Me.lblColumnFactors)
+        Me.GroupBox1.Controls.Add(Me.ucrInputNA)
+        Me.GroupBox1.Controls.Add(Me.ucrChkRowNumbers)
+        Me.GroupBox1.Controls.Add(Me.lblPageBy)
+        Me.GroupBox1.Controls.Add(Me.lblDisplayNA)
+        Me.GroupBox1.Controls.Add(Me.ucrInputPageBy)
+        Me.GroupBox1.Controls.Add(Me.ucrChkHTMLTable)
+        Me.GroupBox1.Controls.Add(Me.lblSigFigs)
+        Me.GroupBox1.Location = New System.Drawing.Point(223, 194)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(186, 192)
+        Me.GroupBox1.TabIndex = 8
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Display"
+        '
+        'lblPageBy
+        '
+        Me.lblPageBy.AutoSize = True
+        Me.lblPageBy.Location = New System.Drawing.Point(8, 75)
+        Me.lblPageBy.Name = "lblPageBy"
+        Me.lblPageBy.Size = New System.Drawing.Size(49, 13)
+        Me.lblPageBy.TabIndex = 2
+        Me.lblPageBy.Tag = "Page by:"
+        Me.lblPageBy.Text = "Page by:"
+        '
+        'lblSigFigs
+        '
+        Me.lblSigFigs.AutoSize = True
+        Me.lblSigFigs.Location = New System.Drawing.Point(8, 101)
+        Me.lblSigFigs.Name = "lblSigFigs"
+        Me.lblSigFigs.Size = New System.Drawing.Size(96, 13)
+        Me.lblSigFigs.TabIndex = 4
+        Me.lblSigFigs.Tag = "Significant_Figures:"
+        Me.lblSigFigs.Text = "Significant Figures:"
+        '
+        'grpDisplay
+        '
+        Me.grpDisplay.Controls.Add(Me.lblFactorsAsPercentage)
+        Me.grpDisplay.Controls.Add(Me.ucrReceiverMultiplePercentages)
+        Me.grpDisplay.Controls.Add(Me.ucrChkPercentageProportion)
+        Me.grpDisplay.Controls.Add(Me.ucrChkDisplayAsPercentage)
+        Me.grpDisplay.Location = New System.Drawing.Point(414, 194)
+        Me.grpDisplay.Name = "grpDisplay"
+        Me.grpDisplay.Size = New System.Drawing.Size(155, 192)
+        Me.grpDisplay.TabIndex = 9
+        Me.grpDisplay.TabStop = False
+        Me.grpDisplay.Text = "Percentages"
+        '
+        'lblFactorsAsPercentage
+        '
+        Me.lblFactorsAsPercentage.AutoSize = True
+        Me.lblFactorsAsPercentage.Location = New System.Drawing.Point(18, 44)
+        Me.lblFactorsAsPercentage.Name = "lblFactorsAsPercentage"
+        Me.lblFactorsAsPercentage.Size = New System.Drawing.Size(117, 13)
+        Me.lblFactorsAsPercentage.TabIndex = 1
+        Me.lblFactorsAsPercentage.Tag = "Factors as Percentage:"
+        Me.lblFactorsAsPercentage.Text = "Factors as Percentage:"
+        '
+        'ucrNudSigFigs
+        '
+        Me.ucrNudSigFigs.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSigFigs.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSigFigs.Location = New System.Drawing.Point(129, 98)
+        Me.ucrNudSigFigs.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSigFigs.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSigFigs.Name = "ucrNudSigFigs"
+        Me.ucrNudSigFigs.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudSigFigs.TabIndex = 5
+        Me.ucrNudSigFigs.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudColumnFactors
+        '
+        Me.ucrNudColumnFactors.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudColumnFactors.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudColumnFactors.Location = New System.Drawing.Point(130, 124)
+        Me.ucrNudColumnFactors.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudColumnFactors.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudColumnFactors.Name = "ucrNudColumnFactors"
+        Me.ucrNudColumnFactors.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudColumnFactors.TabIndex = 7
+        Me.ucrNudColumnFactors.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputNA
+        '
+        Me.ucrInputNA.AddQuotesIfUnrecognised = True
+        Me.ucrInputNA.IsMultiline = False
+        Me.ucrInputNA.IsReadOnly = False
+        Me.ucrInputNA.Location = New System.Drawing.Point(90, 150)
+        Me.ucrInputNA.Name = "ucrInputNA"
+        Me.ucrInputNA.Size = New System.Drawing.Size(89, 21)
+        Me.ucrInputNA.TabIndex = 9
+        '
+        'ucrChkRowNumbers
+        '
+        Me.ucrChkRowNumbers.Checked = False
+        Me.ucrChkRowNumbers.Location = New System.Drawing.Point(11, 19)
+        Me.ucrChkRowNumbers.Name = "ucrChkRowNumbers"
+        Me.ucrChkRowNumbers.Size = New System.Drawing.Size(156, 20)
+        Me.ucrChkRowNumbers.TabIndex = 0
+        '
+        'ucrInputPageBy
+        '
+        Me.ucrInputPageBy.AddQuotesIfUnrecognised = True
+        Me.ucrInputPageBy.IsReadOnly = False
+        Me.ucrInputPageBy.Location = New System.Drawing.Point(60, 71)
+        Me.ucrInputPageBy.Name = "ucrInputPageBy"
+        Me.ucrInputPageBy.Size = New System.Drawing.Size(120, 21)
+        Me.ucrInputPageBy.TabIndex = 3
+        '
+        'ucrChkHTMLTable
+        '
+        Me.ucrChkHTMLTable.Checked = False
+        Me.ucrChkHTMLTable.Location = New System.Drawing.Point(11, 45)
+        Me.ucrChkHTMLTable.Name = "ucrChkHTMLTable"
+        Me.ucrChkHTMLTable.Size = New System.Drawing.Size(148, 20)
+        Me.ucrChkHTMLTable.TabIndex = 1
+        '
+        'ucrSaveTable
+        '
+        Me.ucrSaveTable.Location = New System.Drawing.Point(10, 391)
+        Me.ucrSaveTable.Name = "ucrSaveTable"
+        Me.ucrSaveTable.Size = New System.Drawing.Size(270, 24)
+        Me.ucrSaveTable.TabIndex = 10
+        '
+        'ucrChkDisplayMargins
+        '
+        Me.ucrChkDisplayMargins.Checked = False
+        Me.ucrChkDisplayMargins.Location = New System.Drawing.Point(10, 365)
+        Me.ucrChkDisplayMargins.Name = "ucrChkDisplayMargins"
+        Me.ucrChkDisplayMargins.Size = New System.Drawing.Size(104, 20)
+        Me.ucrChkDisplayMargins.TabIndex = 7
+        '
+        'ucrChkStoreResults
+        '
+        Me.ucrChkStoreResults.Checked = False
+        Me.ucrChkStoreResults.Location = New System.Drawing.Point(10, 339)
+        Me.ucrChkStoreResults.Name = "ucrChkStoreResults"
+        Me.ucrChkStoreResults.Size = New System.Drawing.Size(91, 20)
+        Me.ucrChkStoreResults.TabIndex = 6
+        '
+        'ucrReceiverSingle
+        '
+        Me.ucrReceiverSingle.frmParent = Me
+        Me.ucrReceiverSingle.Location = New System.Drawing.Point(101, 200)
+        Me.ucrReceiverSingle.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverSingle.Name = "ucrReceiverSingle"
+        Me.ucrReceiverSingle.Selector = Nothing
+        Me.ucrReceiverSingle.Size = New System.Drawing.Size(117, 20)
+        Me.ucrReceiverSingle.strNcFilePath = ""
+        Me.ucrReceiverSingle.TabIndex = 4
+        Me.ucrReceiverSingle.ucrSelector = Nothing
+        '
+        'ucrChkWeights
+        '
+        Me.ucrChkWeights.Checked = False
+        Me.ucrChkWeights.Location = New System.Drawing.Point(10, 200)
+        Me.ucrChkWeights.Name = "ucrChkWeights"
+        Me.ucrChkWeights.Size = New System.Drawing.Size(88, 20)
+        Me.ucrChkWeights.TabIndex = 3
+        '
+        'ucrReceiverMultiplePercentages
+        '
+        Me.ucrReceiverMultiplePercentages.frmParent = Nothing
+        Me.ucrReceiverMultiplePercentages.Location = New System.Drawing.Point(18, 59)
+        Me.ucrReceiverMultiplePercentages.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverMultiplePercentages.Name = "ucrReceiverMultiplePercentages"
+        Me.ucrReceiverMultiplePercentages.Selector = Nothing
+        Me.ucrReceiverMultiplePercentages.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverMultiplePercentages.strNcFilePath = ""
+        Me.ucrReceiverMultiplePercentages.TabIndex = 2
+        Me.ucrReceiverMultiplePercentages.ucrSelector = Nothing
+        '
+        'ucrChkPercentageProportion
+        '
+        Me.ucrChkPercentageProportion.Checked = False
+        Me.ucrChkPercentageProportion.Location = New System.Drawing.Point(14, 166)
+        Me.ucrChkPercentageProportion.Name = "ucrChkPercentageProportion"
+        Me.ucrChkPercentageProportion.Size = New System.Drawing.Size(135, 20)
+        Me.ucrChkPercentageProportion.TabIndex = 3
+        '
+        'ucrChkDisplayAsPercentage
+        '
+        Me.ucrChkDisplayAsPercentage.Checked = False
+        Me.ucrChkDisplayAsPercentage.Location = New System.Drawing.Point(14, 19)
+        Me.ucrChkDisplayAsPercentage.Name = "ucrChkDisplayAsPercentage"
+        Me.ucrChkDisplayAsPercentage.Size = New System.Drawing.Size(135, 20)
+        Me.ucrChkDisplayAsPercentage.TabIndex = 0
         '
         'ucrReceiverFactors
         '
@@ -76,175 +296,22 @@ Partial Class dlgFrequency
         Me.ucrReceiverFactors.TabIndex = 2
         Me.ucrReceiverFactors.ucrSelector = Nothing
         '
-        'lblFactors
+        'ucrSelectorFrequency
         '
-        Me.lblFactors.AutoSize = True
-        Me.lblFactors.Location = New System.Drawing.Point(253, 45)
-        Me.lblFactors.Name = "lblFactors"
-        Me.lblFactors.Size = New System.Drawing.Size(45, 13)
-        Me.lblFactors.TabIndex = 1
-        Me.lblFactors.Tag = "Factors:"
-        Me.lblFactors.Text = "Factors:"
+        Me.ucrSelectorFrequency.bShowHiddenColumns = False
+        Me.ucrSelectorFrequency.bUseCurrentFilter = True
+        Me.ucrSelectorFrequency.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorFrequency.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorFrequency.Name = "ucrSelectorFrequency"
+        Me.ucrSelectorFrequency.Size = New System.Drawing.Size(210, 182)
+        Me.ucrSelectorFrequency.TabIndex = 0
         '
-        'ucrchkWeights
+        'ucrBase
         '
-        Me.ucrchkWeights.Checked = False
-        Me.ucrchkWeights.Location = New System.Drawing.Point(10, 204)
-        Me.ucrchkWeights.Name = "ucrchkWeights"
-        Me.ucrchkWeights.Size = New System.Drawing.Size(75, 20)
-        Me.ucrchkWeights.TabIndex = 3
-        '
-        'ucrReceiverSingle
-        '
-        Me.ucrReceiverSingle.frmParent = Me
-        Me.ucrReceiverSingle.Location = New System.Drawing.Point(103, 204)
-        Me.ucrReceiverSingle.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverSingle.Name = "ucrReceiverSingle"
-        Me.ucrReceiverSingle.Selector = Nothing
-        Me.ucrReceiverSingle.Size = New System.Drawing.Size(117, 20)
-        Me.ucrReceiverSingle.strNcFilePath = ""
-        Me.ucrReceiverSingle.TabIndex = 4
-        Me.ucrReceiverSingle.ucrSelector = Nothing
-        '
-        'GroupBox2
-        '
-        Me.GroupBox2.Controls.Add(Me.ucrNudDecimals)
-        Me.GroupBox2.Controls.Add(Me.lblDecimals)
-        Me.GroupBox2.Controls.Add(Me.ucrNudColumnFactors)
-        Me.GroupBox2.Controls.Add(Me.lblColumnFactors)
-        Me.GroupBox2.Controls.Add(Me.ucrChkDisplayMargins)
-        Me.GroupBox2.Location = New System.Drawing.Point(10, 282)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(159, 104)
-        Me.GroupBox2.TabIndex = 6
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Layout:"
-        '
-        'ucrNudDecimals
-        '
-        Me.ucrNudDecimals.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudDecimals.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudDecimals.Location = New System.Drawing.Point(90, 63)
-        Me.ucrNudDecimals.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudDecimals.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudDecimals.Name = "ucrNudDecimals"
-        Me.ucrNudDecimals.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudDecimals.TabIndex = 4
-        Me.ucrNudDecimals.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblDecimals
-        '
-        Me.lblDecimals.AutoSize = True
-        Me.lblDecimals.Location = New System.Drawing.Point(5, 65)
-        Me.lblDecimals.Name = "lblDecimals"
-        Me.lblDecimals.Size = New System.Drawing.Size(53, 13)
-        Me.lblDecimals.TabIndex = 3
-        Me.lblDecimals.Tag = "Decimals"
-        Me.lblDecimals.Text = "Decimals:"
-        '
-        'ucrNudColumnFactors
-        '
-        Me.ucrNudColumnFactors.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudColumnFactors.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudColumnFactors.Location = New System.Drawing.Point(90, 40)
-        Me.ucrNudColumnFactors.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudColumnFactors.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudColumnFactors.Name = "ucrNudColumnFactors"
-        Me.ucrNudColumnFactors.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudColumnFactors.TabIndex = 2
-        Me.ucrNudColumnFactors.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblColumnFactors
-        '
-        Me.lblColumnFactors.AutoSize = True
-        Me.lblColumnFactors.Location = New System.Drawing.Point(5, 42)
-        Me.lblColumnFactors.Name = "lblColumnFactors"
-        Me.lblColumnFactors.Size = New System.Drawing.Size(83, 13)
-        Me.lblColumnFactors.TabIndex = 1
-        Me.lblColumnFactors.Tag = "Column_Factors"
-        Me.lblColumnFactors.Text = "Column Factors:"
-        '
-        'ucrChkDisplayMargins
-        '
-        Me.ucrChkDisplayMargins.Checked = False
-        Me.ucrChkDisplayMargins.Location = New System.Drawing.Point(5, 19)
-        Me.ucrChkDisplayMargins.Name = "ucrChkDisplayMargins"
-        Me.ucrChkDisplayMargins.Size = New System.Drawing.Size(104, 20)
-        Me.ucrChkDisplayMargins.TabIndex = 0
-        '
-        'cmdOptions
-        '
-        Me.cmdOptions.Location = New System.Drawing.Point(321, 256)
-        Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(86, 23)
-        Me.cmdOptions.TabIndex = 7
-        Me.cmdOptions.Text = "Options"
-        Me.cmdOptions.UseVisualStyleBackColor = True
-        '
-        'ucrChkCounts
-        '
-        Me.ucrChkCounts.Checked = False
-        Me.ucrChkCounts.Location = New System.Drawing.Point(5, 19)
-        Me.ucrChkCounts.Name = "ucrChkCounts"
-        Me.ucrChkCounts.Size = New System.Drawing.Size(115, 20)
-        Me.ucrChkCounts.TabIndex = 0
-        '
-        'ucrChkOverallPercentages
-        '
-        Me.ucrChkOverallPercentages.Checked = False
-        Me.ucrChkOverallPercentages.Location = New System.Drawing.Point(5, 45)
-        Me.ucrChkOverallPercentages.Name = "ucrChkOverallPercentages"
-        Me.ucrChkOverallPercentages.Size = New System.Drawing.Size(140, 20)
-        Me.ucrChkOverallPercentages.TabIndex = 1
-        '
-        'ucrChkPercentagesOf
-        '
-        Me.ucrChkPercentagesOf.Checked = False
-        Me.ucrChkPercentagesOf.Location = New System.Drawing.Point(5, 71)
-        Me.ucrChkPercentagesOf.Name = "ucrChkPercentagesOf"
-        Me.ucrChkPercentagesOf.Size = New System.Drawing.Size(91, 20)
-        Me.ucrChkPercentagesOf.TabIndex = 2
-        '
-        'ucrSingleReceiver
-        '
-        Me.ucrSingleReceiver.frmParent = Me
-        Me.ucrSingleReceiver.Location = New System.Drawing.Point(99, 71)
-        Me.ucrSingleReceiver.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSingleReceiver.Name = "ucrSingleReceiver"
-        Me.ucrSingleReceiver.Selector = Nothing
-        Me.ucrSingleReceiver.Size = New System.Drawing.Size(86, 20)
-        Me.ucrSingleReceiver.strNcFilePath = ""
-        Me.ucrSingleReceiver.TabIndex = 3
-        Me.ucrSingleReceiver.ucrSelector = Nothing
-        '
-        'grpDisplay
-        '
-        Me.grpDisplay.Controls.Add(Me.ucrSingleReceiver)
-        Me.grpDisplay.Controls.Add(Me.ucrChkPercentagesOf)
-        Me.grpDisplay.Controls.Add(Me.ucrChkOverallPercentages)
-        Me.grpDisplay.Controls.Add(Me.ucrChkCounts)
-        Me.grpDisplay.Location = New System.Drawing.Point(175, 282)
-        Me.grpDisplay.Name = "grpDisplay"
-        Me.grpDisplay.Size = New System.Drawing.Size(232, 104)
-        Me.grpDisplay.TabIndex = 5
-        Me.grpDisplay.TabStop = False
-        Me.grpDisplay.Text = "Display"
-        '
-        'ucrChkOmitMissing
-        '
-        Me.ucrChkOmitMissing.Checked = False
-        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(10, 230)
-        Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
-        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(91, 20)
-        Me.ucrChkOmitMissing.TabIndex = 4
-        '
-        'ucrChkPrintOutput
-        '
-        Me.ucrChkPrintOutput.Checked = False
-        Me.ucrChkPrintOutput.Location = New System.Drawing.Point(10, 256)
-        Me.ucrChkPrintOutput.Name = "ucrChkPrintOutput"
-        Me.ucrChkPrintOutput.Size = New System.Drawing.Size(91, 20)
-        Me.ucrChkPrintOutput.TabIndex = 9
+        Me.ucrBase.Location = New System.Drawing.Point(10, 421)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(425, 55)
+        Me.ucrBase.TabIndex = 12
         '
         'UcrCheck1
         '
@@ -258,13 +325,14 @@ Partial Class dlgFrequency
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(423, 456)
-        Me.Controls.Add(Me.ucrChkPrintOutput)
-        Me.Controls.Add(Me.ucrChkOmitMissing)
+        Me.ClientSize = New System.Drawing.Size(576, 478)
+        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.ucrSaveTable)
+        Me.Controls.Add(Me.ucrChkDisplayMargins)
+        Me.Controls.Add(Me.ucrChkStoreResults)
         Me.Controls.Add(Me.cmdOptions)
-        Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.ucrReceiverSingle)
-        Me.Controls.Add(Me.ucrchkWeights)
+        Me.Controls.Add(Me.ucrChkWeights)
         Me.Controls.Add(Me.grpDisplay)
         Me.Controls.Add(Me.lblFactors)
         Me.Controls.Add(Me.ucrReceiverFactors)
@@ -276,9 +344,10 @@ Partial Class dlgFrequency
         Me.Name = "dlgFrequency"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Frequency"
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.grpDisplay.ResumeLayout(False)
+        Me.grpDisplay.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -289,20 +358,26 @@ Partial Class dlgFrequency
     Friend WithEvents ucrReceiverFactors As ucrReceiverMultiple
     Friend WithEvents lblFactors As Label
     Friend WithEvents ucrReceiverSingle As ucrReceiverSingle
-    Friend WithEvents ucrchkWeights As ucrCheck
-    Friend WithEvents GroupBox2 As GroupBox
-    Friend WithEvents ucrNudDecimals As ucrNud
-    Friend WithEvents lblDecimals As Label
+    Friend WithEvents ucrChkWeights As ucrCheck
     Friend WithEvents ucrNudColumnFactors As ucrNud
     Friend WithEvents lblColumnFactors As Label
     Friend WithEvents ucrChkDisplayMargins As ucrCheck
     Friend WithEvents cmdOptions As Button
-    Friend WithEvents grpDisplay As GroupBox
-    Friend WithEvents ucrSingleReceiver As ucrReceiverSingle
-    Friend WithEvents ucrChkPercentagesOf As ucrCheck
-    Friend WithEvents ucrChkOverallPercentages As ucrCheck
-    Friend WithEvents ucrChkCounts As ucrCheck
     Friend WithEvents UcrCheck1 As ucrCheck
-    Friend WithEvents ucrChkOmitMissing As ucrCheck
-    Friend WithEvents ucrChkPrintOutput As ucrCheck
+    Friend WithEvents ucrChkStoreResults As ucrCheck
+    Friend WithEvents ucrNudSigFigs As ucrNud
+    Friend WithEvents ucrChkHTMLTable As ucrCheck
+    Friend WithEvents ucrInputNA As ucrInputTextBox
+    Friend WithEvents lblDisplayNA As Label
+    Friend WithEvents ucrSaveTable As ucrSave
+    Friend WithEvents ucrChkRowNumbers As ucrCheck
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents lblPageBy As Label
+    Friend WithEvents ucrInputPageBy As ucrInputComboBox
+    Friend WithEvents lblSigFigs As Label
+    Friend WithEvents ucrChkPercentageProportion As ucrCheck
+    Friend WithEvents grpDisplay As GroupBox
+    Friend WithEvents lblFactorsAsPercentage As Label
+    Friend WithEvents ucrReceiverMultiplePercentages As ucrReceiverMultiple
+    Friend WithEvents ucrChkDisplayAsPercentage As ucrCheck
 End Class

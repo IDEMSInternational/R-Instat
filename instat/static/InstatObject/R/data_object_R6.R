@@ -103,6 +103,15 @@ data_object <- R6::R6Class("data_object",
 )
 
 data_object$set("public", "set_data", function(new_data, messages=TRUE, check_names = TRUE) {
+  if(is.matrix(new_data)) new_data <- as.data.frame(new_data)
+  else if(is.ts(new_data)) {
+    ind <- zoo::index(new_data)
+    new_data <- data.frame(index = ind, value = new_data)
+  }
+  else if(is.vector(new_data) && !is.list(new_data)) {
+    new_data <- as.data.frame(new_data)
+  }
+  #TODO convert ts objects correctly
   if(!is.data.frame(new_data)) {
     stop("Data set must be of type: data.frame")
   }
@@ -287,9 +296,9 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
   #if(update) self$update_variables_metadata()
   if(direct_from_attributes) {
     #if(missing(property)) return(attributes(self$get_columns_from_data(column, use_current_filter = FALSE)))
-    if(missing(property)) return(attributes(private$data[, column]))
+    if(missing(property)) return(attributes(private$data[[column]]))
     #else return(attr(self$get_columns_from_data(column, use_current_filter = FALSE), property))
-    else return(attr(private$data[, column], property))
+    else return(attr(private$data[[column]], property))
   }
   # special case of getting "class" property which isn't always stored in attributes
   else if(!missing(property) && length(property == 1) && property == data_type_label) {
@@ -304,7 +313,7 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
     #curr_data <- self$get_data_frame(use_current_filter = FALSE)
     curr_data <- private$data
     for(i in seq_along(names(curr_data))) {
-      col <- curr_data[ ,i]
+      col <- curr_data[[i]]
       ind <- which(names(attributes(col)) == "levels")
       if(length(ind) > 0) col_attributes <- attributes(col)[-ind]
       else col_attributes <- attributes(col)
@@ -600,6 +609,7 @@ data_object$set("public", "rename_column_in_data", function(curr_col_name = "", 
 )
 
 data_object$set("public", "remove_columns_in_data", function(cols=c()) {
+  if(length(cols) == self$get_column_count()) stop("Cannot delete all columns through this function. Use delete_dataframe to delete the data.")
   for(col_name in cols) {
     # Column name must be character
     if(!is.character(col_name)) {
@@ -810,7 +820,8 @@ data_object$set("public", "is_metadata", function(str) {
 data_object$set("public", "is_variables_metadata", function(str, col, return_vector = FALSE) {
   if(str == data_type_label) return(TRUE)
   if(missing(col)) {
-    return(any(sapply(self$get_column_names(), function(x) str %in% names(attributes(self$get_columns_from_data(x, use_current_filter = FALSE)))), na.rm = TRUE))
+    dat <- self$get_data_frame(use_current_filter = FALSE)
+    return(any(sapply(dat, function(x) str %in% names(attributes(x))), na.rm = TRUE))
   }
   else {
     out <- sapply(col, function(x) str %in% names(attributes(self$get_columns_from_data(x, use_current_filter = FALSE))))
@@ -887,7 +898,13 @@ data_object$set("public", "reorder_columns_in_data", function(col_order) {
     if(!(setequal(col_order,names(private$data)))) stop("Invalid column order")
   }
   else stop("column order must be a numeric or character vector")
+  old_metadata <- attributes(private$data)
   self$set_data(private$data[ ,col_order])
+  for(name in names(old_metadata)) {
+    if(!name %in% c("names", "class", "row.names")) {
+      self$append_to_metadata(name, old_metadata[[name]])
+    }
+  }
   self$append_to_changes(list(Col_order, col_order))
 }
 )
@@ -1494,7 +1511,7 @@ data_object$set("public", "get_object_names", function(type = "", as_list = FALS
   else {
     if(type == model_label) out = names(private$objects)[!sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "htmlTable") %in% class(x)))]
     else if(type == graph_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob") %in% class(x)))]
-    else if(type == table_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("htmlTable") %in% class(x)))]
+    else if(type == table_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("htmlTable", "data.frame") %in% class(x)))]
     else stop("type: ", type, " not recognised")
   }
   if(length(excluded_items) > 0) {
@@ -1716,13 +1733,15 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
     }
   }
   if(output == "facets") {
-    if(length(column_types) > 1) {
+    if(length(unique(column_types)) > 1) {
       warning("Cannot do facets with graphs of different types. Combine graphs will be used instead.")
       output <- "combine"
     }
     else column_types <- unique(column_types)
   }
   if(output == "facets") {
+    # column_types will be unique by this point
+    column_types <- column_types[1]
     if(column_types == "numeric") {
       curr_geom <- numeric_geom
       curr_geom_name <- numeric
@@ -1925,7 +1944,7 @@ data_object$set("public","split_date", function(col_name = "", week = FALSE, mon
     self$add_columns_to_data(col_name = col_name, col_data = weekday_name_vector)
   }
   if(month_val) {
-    month_val_vector <- as.integer(month(col_data))
+    month_val_vector <- as.integer(lubridate::month(col_data))
     col_name <- next_default_item(prefix = "month_val", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = month_val_vector)
   }
@@ -2456,7 +2475,6 @@ instat_object$set("public","get_corruption_column_name", function(data_name, typ
 
 data_object$set("public","get_corruption_column_name", function(type) {
   if(self$is_corruption_type_present(type)) {
-    print("yes")
     var_metadata <- self$get_variables_metadata()
     col_name <- var_metadata[!is.na(var_metadata[[corruption_type_label]]) & var_metadata[[corruption_type_label]] == type, name_label]
     if(length(col_name >= 1)) return(col_name)
