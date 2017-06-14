@@ -67,7 +67,7 @@ Public Class dlgStringHandling
         'disabling replaceby input text box
         ucrPnlStringHandling.AddToLinkedControls(ucrInputReplaceBy, {rdoReplace, rdoReplaceAll}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputReplaceBy.SetLinkedDisplayControl(lblReplaceBy)
-        ucrChkIncludeRegularExpressions.AddToLinkedControls(ucrPnlFixedRegex, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeRegularExpressions.AddToLinkedControls(ucrPnlFixedRegex, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=rdoFixed)
         ucrPnlFixedRegex.AddToLinkedControls(ucrReceiverForRegexExpression, {rdoRegex}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         'ucrSave
@@ -83,6 +83,16 @@ Public Class dlgStringHandling
 
         ucrPnlFixedRegex.AddFunctionNamesCondition(rdoFixed, "fixed")
         ucrPnlFixedRegex.AddFunctionNamesCondition(rdoRegex, "regex")
+
+        'temporary disabling
+        cmdDBackSlah.Visible = False
+        cmdWBackSlash.Visible = False
+        cmdBbackSlash.Visible = False
+        cmdSbackSlash.Visible = False
+        cmdBackSlashb.Visible = False
+        cmdBackSlashw.Visible = False
+        cmdBackSlashs.Visible = False
+        cmdBackSlashd.Visible = False
     End Sub
 
     Private Sub SetDefaults()
@@ -96,6 +106,12 @@ Public Class dlgStringHandling
         clsRegexFunction = New RFunction
 
         ucrSelectorStringHandling.Reset()
+
+        'temporaryfix
+        ucrChkIncludeRegularExpressions.Checked = False
+        rdoFixed.Checked = True
+        rdoCount.Checked = True
+        Visibile()
 
         ucrInputReplaceBy.Reset()
         ucrSaveStringHandling.Reset()
@@ -134,6 +150,17 @@ Public Class dlgStringHandling
         ChangeSize()
     End Sub
 
+    'temporary fix.
+    Private Sub Visibile()
+        If ucrChkIncludeRegularExpressions.Checked Then
+            rdoRegex.Visible = True
+            rdoFixed.Visible = True
+        Else
+            rdoRegex.Visible = False
+            rdoFixed.Visible = False
+        End If
+    End Sub
+
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsDetectFunction, New RParameter("string", 0), iAdditionalPairNo:=1)
         ucrReceiverStringHandling.AddAdditionalCodeParameterPair(clsExtractFunction, New RParameter("string", 0), iAdditionalPairNo:=2)
@@ -154,10 +181,10 @@ Public Class dlgStringHandling
         ucrInputPattern.SetRCode(clsCountFunction, bReset)
         ucrInputReplaceBy.SetRCode(clsReplaceFunction, bReset)
         ucrInputReplaceBy.SetRCode(clsReplaceAllFunction, bReset)
-        ucrPnlStringHandling.SetRCode(clsCountFunction, bReset)
+        'ucrPnlStringHandling.SetRCode(clsCountFunction, bReset)
         ucrSaveStringHandling.SetRCode(clsCountFunction, bReset)
-        ucrChkIncludeRegularExpressions.SetRCode(clsFixedFunction, bReset)
-        ucrPnlFixedRegex.SetRCode(clsFixedFunction, bReset)
+        'ucrChkIncludeRegularExpressions.SetRCode(clsFixedFunction, bReset)
+        'ucrPnlFixedRegex.SetRCode(clsFixedFunction, bReset)
 
         ucrSaveStringHandling.AddAdditionalRCode(clsDetectFunction, iAdditionalPairNo:=1)
         ucrSaveStringHandling.AddAdditionalRCode(clsExtractFunction, iAdditionalPairNo:=2)
@@ -375,6 +402,7 @@ Public Class dlgStringHandling
     End Sub
 
     Private Sub ucrPnlFixedRegex_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlFixedRegex.ControlContentsChanged, ucrChkIncludeRegularExpressions.ControlValueChanged, ucrReceiverForRegexExpression.ControlValueChanged, ucrInputPattern.ControlValueChanged
+        Visibile()
         AddRemoveParameters()
         ChangeSize()
     End Sub
