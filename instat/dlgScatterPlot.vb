@@ -51,6 +51,8 @@ Public Class dlgScatterPlot
         ucrBase.iHelpTopicID = 433
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
+        Dim clsGeomSmoothFunc As New RFunction
+        Dim clsGeomSmoothParameter As New RParameter
 
         ucrSelectorForScatter.SetParameter(New RParameter("data", 0))
         ucrSelectorForScatter.SetParameterIsrfunction()
@@ -78,7 +80,12 @@ Public Class dlgScatterPlot
         ucrFactorOptionalReceiver.Selector = ucrSelectorForScatter
         ucrFactorOptionalReceiver.SetIncludedDataTypes({"factor", "numeric"})
 
-        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
+        clsGeomSmoothFunc.SetPackageName("ggplot2")
+        clsGeomSmoothFunc.SetRCommand("geom_smooth")
+        clsGeomSmoothParameter.SetArgumentName("geom_smooth")
+        clsGeomSmoothParameter.SetArgument(clsGeomSmoothFunc)
+        ucrChkLineofBestFit.SetText("Add Line of Best Fit")
+        ucrChkLineofBestFit.SetParameter(clsGeomSmoothParameter, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
         ucrSaveScatterPlot.SetPrefix("scatterplot")
         ucrSaveScatterPlot.SetSaveTypeAsGraph()
@@ -134,6 +141,7 @@ Public Class dlgScatterPlot
         ucrReceiverX.SetRCode(clsRaesFunction, bReset)
         ucrVariablesAsFactorForScatter.SetRCode(clsRaesFunction, bReset)
         ucrFactorOptionalReceiver.SetRCode(clsRaesFunction, bReset)
+        ucrChkLineofBestFit.SetRCode(clsBaseOperator, bReset)
         ucrSaveScatterPlot.SetRCode(clsBaseOperator, bReset)
     End Sub
 
