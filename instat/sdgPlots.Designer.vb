@@ -59,15 +59,15 @@ Partial Class sdgPlots
         Me.ucrXAxis = New instat.ucrAxes()
         Me.tbpYAxis = New System.Windows.Forms.TabPage()
         Me.ucrYAxis = New instat.ucrAxes()
-        Me.tbpThemes = New System.Windows.Forms.TabPage()
+        Me.tbpTheme = New System.Windows.Forms.TabPage()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.lblFont = New System.Windows.Forms.Label()
         Me.cmdAllOptions = New System.Windows.Forms.Button()
+        Me.ucrInputThemes = New instat.ucrInputComboBox()
         Me.tbpCoordinates = New System.Windows.Forms.TabPage()
         Me.lblWarning = New System.Windows.Forms.Label()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
         Me.urChkSelectTheme = New instat.ucrCheck()
-        Me.ucrInputThemes = New instat.ucrInputComboBox()
         Me.tbpPlotsOptions.SuspendLayout()
         Me.tbpFacet.SuspendLayout()
         Me.tbpLayers.SuspendLayout()
@@ -75,7 +75,7 @@ Partial Class sdgPlots
         Me.grpLegendTitle.SuspendLayout()
         Me.tbpXAxis.SuspendLayout()
         Me.tbpYAxis.SuspendLayout()
-        Me.tbpThemes.SuspendLayout()
+        Me.tbpTheme.SuspendLayout()
         Me.tbpCoordinates.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -86,7 +86,7 @@ Partial Class sdgPlots
         Me.tbpPlotsOptions.Controls.Add(Me.tbpTitles)
         Me.tbpPlotsOptions.Controls.Add(Me.tbpXAxis)
         Me.tbpPlotsOptions.Controls.Add(Me.tbpYAxis)
-        Me.tbpPlotsOptions.Controls.Add(Me.tbpThemes)
+        Me.tbpPlotsOptions.Controls.Add(Me.tbpTheme)
         Me.tbpPlotsOptions.Controls.Add(Me.tbpCoordinates)
         Me.tbpPlotsOptions.Location = New System.Drawing.Point(1, 3)
         Me.tbpPlotsOptions.Name = "tbpPlotsOptions"
@@ -465,21 +465,21 @@ Partial Class sdgPlots
         Me.ucrYAxis.Size = New System.Drawing.Size(496, 329)
         Me.ucrYAxis.TabIndex = 0
         '
-        'tbpThemes
+        'tbpTheme
         '
-        Me.tbpThemes.Controls.Add(Me.urChkSelectTheme)
-        Me.tbpThemes.Controls.Add(Me.ucrInputThemes)
-        Me.tbpThemes.Controls.Add(Me.GroupBox1)
-        Me.tbpThemes.Controls.Add(Me.lblFont)
-        Me.tbpThemes.Controls.Add(Me.cmdAllOptions)
-        Me.tbpThemes.Location = New System.Drawing.Point(4, 22)
-        Me.tbpThemes.Name = "tbpThemes"
-        Me.tbpThemes.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpThemes.Size = New System.Drawing.Size(499, 330)
-        Me.tbpThemes.TabIndex = 1
-        Me.tbpThemes.Tag = "Themes"
-        Me.tbpThemes.Text = "Themes"
-        Me.tbpThemes.UseVisualStyleBackColor = True
+        Me.tbpTheme.Controls.Add(Me.urChkSelectTheme)
+        Me.tbpTheme.Controls.Add(Me.GroupBox1)
+        Me.tbpTheme.Controls.Add(Me.lblFont)
+        Me.tbpTheme.Controls.Add(Me.cmdAllOptions)
+        Me.tbpTheme.Controls.Add(Me.ucrInputThemes)
+        Me.tbpTheme.Location = New System.Drawing.Point(4, 22)
+        Me.tbpTheme.Name = "tbpTheme"
+        Me.tbpTheme.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpTheme.Size = New System.Drawing.Size(499, 330)
+        Me.tbpTheme.TabIndex = 1
+        Me.tbpTheme.Tag = "Theme"
+        Me.tbpTheme.Text = "Theme"
+        Me.tbpTheme.UseVisualStyleBackColor = True
         '
         'GroupBox1
         '
@@ -500,12 +500,21 @@ Partial Class sdgPlots
         '
         'cmdAllOptions
         '
-        Me.cmdAllOptions.Location = New System.Drawing.Point(295, 17)
+        Me.cmdAllOptions.Location = New System.Drawing.Point(297, 18)
         Me.cmdAllOptions.Name = "cmdAllOptions"
         Me.cmdAllOptions.Size = New System.Drawing.Size(78, 23)
         Me.cmdAllOptions.TabIndex = 2
         Me.cmdAllOptions.Text = "All Options"
         Me.cmdAllOptions.UseVisualStyleBackColor = True
+        '
+        'ucrInputThemes
+        '
+        Me.ucrInputThemes.AddQuotesIfUnrecognised = True
+        Me.ucrInputThemes.IsReadOnly = False
+        Me.ucrInputThemes.Location = New System.Drawing.Point(109, 19)
+        Me.ucrInputThemes.Name = "ucrInputThemes"
+        Me.ucrInputThemes.Size = New System.Drawing.Size(171, 21)
+        Me.ucrInputThemes.TabIndex = 1
         '
         'tbpCoordinates
         '
@@ -538,19 +547,10 @@ Partial Class sdgPlots
         'urChkSelectTheme
         '
         Me.urChkSelectTheme.Checked = False
-        Me.urChkSelectTheme.Location = New System.Drawing.Point(6, 18)
+        Me.urChkSelectTheme.Location = New System.Drawing.Point(6, 19)
         Me.urChkSelectTheme.Name = "urChkSelectTheme"
         Me.urChkSelectTheme.Size = New System.Drawing.Size(97, 20)
-        Me.urChkSelectTheme.TabIndex = 108
-        '
-        'ucrInputThemes
-        '
-        Me.ucrInputThemes.AddQuotesIfUnrecognised = True
-        Me.ucrInputThemes.IsReadOnly = False
-        Me.ucrInputThemes.Location = New System.Drawing.Point(109, 18)
-        Me.ucrInputThemes.Name = "ucrInputThemes"
-        Me.ucrInputThemes.Size = New System.Drawing.Size(171, 21)
-        Me.ucrInputThemes.TabIndex = 107
+        Me.urChkSelectTheme.TabIndex = 106
         '
         'sdgPlots
         '
@@ -577,8 +577,8 @@ Partial Class sdgPlots
         Me.grpLegendTitle.PerformLayout()
         Me.tbpXAxis.ResumeLayout(False)
         Me.tbpYAxis.ResumeLayout(False)
-        Me.tbpThemes.ResumeLayout(False)
-        Me.tbpThemes.PerformLayout()
+        Me.tbpTheme.ResumeLayout(False)
+        Me.tbpTheme.PerformLayout()
         Me.tbpCoordinates.ResumeLayout(False)
         Me.tbpCoordinates.PerformLayout()
         Me.ResumeLayout(False)
@@ -586,7 +586,7 @@ Partial Class sdgPlots
     End Sub
 
     Friend WithEvents tbpPlotsOptions As TabControl
-    Friend WithEvents tbpThemes As TabPage
+    Friend WithEvents tbpTheme As TabPage
     Friend WithEvents ucrBaseSubdialog As ucrButtonsSubdialogue
     Friend WithEvents tbpTitles As TabPage
     Friend WithEvents tbpFacet As TabPage
@@ -599,6 +599,7 @@ Partial Class sdgPlots
     Friend WithEvents ucr1stFactorReceiver As ucrReceiverSingle
     Friend WithEvents tbpXAxis As TabPage
     Friend WithEvents tbpYAxis As TabPage
+    Friend WithEvents ucrInputThemes As ucrInputComboBox
     Friend WithEvents cmdAllOptions As Button
     Friend WithEvents lblFont As Label
     Friend WithEvents ucrPlotsAdditionalLayers As ucrAdditionalLayers
@@ -630,7 +631,6 @@ Partial Class sdgPlots
     Friend WithEvents ucrInputGraphCaption As ucrInputTextBox
     Friend WithEvents ucrInputGraphSubTitle As ucrInputTextBox
     Friend WithEvents urChkSelectTheme As ucrCheck
-    Friend WithEvents ucrInputThemes As ucrInputComboBox
 End Class
 
 
