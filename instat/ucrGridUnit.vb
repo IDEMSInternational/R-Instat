@@ -28,6 +28,7 @@ Public Class ucrGridUnit
         ucrChkUnits.AddParameterPresentCondition(True, "units")
         ucrChkUnits.AddParameterPresentCondition(False, "units", False)
         ucrInputUnits.SetItems(New Dictionary(Of String, String)(GgplotDefaults.dctUnits))
+        ucrInputUnits.SetDropDownStyleAsNonEditable()
 
         ucrInputData.SetParameter(New RParameter("data"))
 

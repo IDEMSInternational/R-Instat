@@ -82,20 +82,20 @@ Partial Class dlgShowModel
         'lblQuantValues
         '
         Me.lblQuantValues.AutoSize = True
-        Me.lblQuantValues.Location = New System.Drawing.Point(243, 32)
+        Me.lblQuantValues.Location = New System.Drawing.Point(243, 51)
         Me.lblQuantValues.Name = "lblQuantValues"
-        Me.lblQuantValues.Size = New System.Drawing.Size(39, 13)
+        Me.lblQuantValues.Size = New System.Drawing.Size(42, 13)
         Me.lblQuantValues.TabIndex = 8
-        Me.lblQuantValues.Text = "Values"
+        Me.lblQuantValues.Text = "Values:"
         '
         'lblProbValues
         '
         Me.lblProbValues.AutoSize = True
-        Me.lblProbValues.Location = New System.Drawing.Point(243, 32)
+        Me.lblProbValues.Location = New System.Drawing.Point(243, 51)
         Me.lblProbValues.Name = "lblProbValues"
-        Me.lblProbValues.Size = New System.Drawing.Size(63, 13)
+        Me.lblProbValues.Size = New System.Drawing.Size(66, 13)
         Me.lblProbValues.TabIndex = 9
-        Me.lblProbValues.Text = "Probabilities"
+        Me.lblProbValues.Text = "Probabilities:"
         '
         'chkSingleValues
         '
@@ -109,7 +109,7 @@ Partial Class dlgShowModel
         '
         'ucrDistributionsFOrTablePlus
         '
-        Me.ucrDistributionsFOrTablePlus.Location = New System.Drawing.Point(255, 80)
+        Me.ucrDistributionsFOrTablePlus.Location = New System.Drawing.Point(255, 102)
         Me.ucrDistributionsFOrTablePlus.Name = "ucrDistributionsFOrTablePlus"
         Me.ucrDistributionsFOrTablePlus.Size = New System.Drawing.Size(254, 185)
         Me.ucrDistributionsFOrTablePlus.TabIndex = 11
@@ -118,7 +118,7 @@ Partial Class dlgShowModel
         '
         Me.ucrInputNewColNameforTablePlus.AddQuotesIfUnrecognised = True
         Me.ucrInputNewColNameforTablePlus.IsReadOnly = False
-        Me.ucrInputNewColNameforTablePlus.Location = New System.Drawing.Point(114, 266)
+        Me.ucrInputNewColNameforTablePlus.Location = New System.Drawing.Point(99, 268)
         Me.ucrInputNewColNameforTablePlus.Name = "ucrInputNewColNameforTablePlus"
         Me.ucrInputNewColNameforTablePlus.Size = New System.Drawing.Size(135, 21)
         Me.ucrInputNewColNameforTablePlus.TabIndex = 6
@@ -136,7 +136,7 @@ Partial Class dlgShowModel
         'ucrReceiverExpressionForTablePlus
         '
         Me.ucrReceiverExpressionForTablePlus.frmParent = Me
-        Me.ucrReceiverExpressionForTablePlus.Location = New System.Drawing.Point(246, 57)
+        Me.ucrReceiverExpressionForTablePlus.Location = New System.Drawing.Point(243, 66)
         Me.ucrReceiverExpressionForTablePlus.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverExpressionForTablePlus.Name = "ucrReceiverExpressionForTablePlus"
         Me.ucrReceiverExpressionForTablePlus.Selector = Nothing
@@ -156,7 +156,7 @@ Partial Class dlgShowModel
         '
         Me.ucrInputProbabilities.AddQuotesIfUnrecognised = True
         Me.ucrInputProbabilities.IsReadOnly = False
-        Me.ucrInputProbabilities.Location = New System.Drawing.Point(246, 57)
+        Me.ucrInputProbabilities.Location = New System.Drawing.Point(243, 66)
         Me.ucrInputProbabilities.Name = "ucrInputProbabilities"
         Me.ucrInputProbabilities.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputProbabilities.TabIndex = 13
@@ -165,7 +165,7 @@ Partial Class dlgShowModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(572, 350)
+        Me.ClientSize = New System.Drawing.Size(515, 350)
         Me.Controls.Add(Me.ucrInputProbabilities)
         Me.Controls.Add(Me.chkSingleValues)
         Me.Controls.Add(Me.ucrDistributionsFOrTablePlus)

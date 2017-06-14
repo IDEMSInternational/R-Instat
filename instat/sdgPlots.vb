@@ -57,6 +57,7 @@ Public Class sdgPlots
         Dim dctThemes As New Dictionary(Of String, String)
         Dim strThemes As String()
 
+        ucrBaseSubdialog.iHelpTopicID = 136
         'facets tab 
         'Links the factor receivers, used for creating facets, with the selector. The variables need to be factors.
         ucr1stFactorReceiver.Selector = ucrFacetSelector
@@ -168,7 +169,7 @@ Public Class sdgPlots
         ucrYAxis.InitialiseControl()
 
         'themes tab
-        ucrInputThemes.SetParameter(New RParameter("theme"))
+        ucrInputThemes.SetParameter(New RParameter("theme_name"))
         strThemes = GgplotDefaults.strThemes
         'Would prefer to do this through functions but auto updating function name not currently supported through combo box control
         For Each strTemp As String In strThemes

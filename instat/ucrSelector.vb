@@ -31,7 +31,7 @@ Public Class ucrSelector
     Private strType As String
     Private bShowHiddenCols As Boolean = False
     Private WithEvents ucrLinkedSelector As ucrSelector
-
+    Public bIsStacked As Boolean = False
     'Does the selector have its own parameter
     'Usually False as the parameter comes from the data frame selector
     Public bHasOwnParameter As Boolean = False
@@ -365,4 +365,8 @@ Public Class ucrSelector
             End If
         End If
     End Sub
+
+    Public Function HasStackedVariables() As Boolean
+        Return bIsStacked OrElse (ucrLinkedSelector IsNot Nothing AndAlso ucrLinkedSelector.bIsStacked)
+    End Function
 End Class
