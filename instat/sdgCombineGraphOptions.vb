@@ -23,7 +23,6 @@ Public Class sdgCombineGraphOptions
     Public clsMatrixFunction As New RFunction
 
     Public Sub New()
-
         ' This call is required by the designer.
         InitializeComponent()
 
@@ -41,13 +40,14 @@ Public Class sdgCombineGraphOptions
         grdCurrSheet.Rows = ucrNudRows.Value
         grdCurrSheet.Columns = ucrNudColumns.Value
 
-        ucrNudColumns.SetParameter(New RParameter("ncol"))
-        ucrNudRows.SetParameter(New RParameter("nrow"))
+        ucrNudColumns.SetParameter(New RParameter("ncol", 1))
+        ucrNudRows.SetParameter(New RParameter("nrow", 2))
 
-        ucrInputBottom.SetParameter(New RParameter("bottom"))
-        ucrInputLeft.SetParameter(New RParameter("left"))
-        ucrInputRight.SetParameter(New RParameter("right"))
-        ucrInputTop.SetParameter(New RParameter("top"))
+        ucrInputTop.SetParameter(New RParameter("top", 2))
+        ucrInputBottom.SetParameter(New RParameter("bottom", 4))
+        ucrInputLeft.SetParameter(New RParameter("left", 5))
+        ucrInputRight.SetParameter(New RParameter("right", 6))
+
         grdLayout.Visible = False
         ucrChkSpecifyOrder.AddParameterPresentCondition(True, "ncol")
         ucrChkSpecifyOrder.AddParameterPresentCondition(True, "nrow")
@@ -132,14 +132,14 @@ Public Class sdgCombineGraphOptions
         End If
     End Sub
 
-    Public Sub SwitchNcolToMatrixFunc()
+    Public Sub SwitchNColToMatrixFunc()
         clsCombineGraph.RemoveParameterByName("ncol")
         clsCombineGraph.RemoveParameterByName("nrow")
         clsMatrixFunction.AddParameter("ncol", ucrNudColumns.Value)
         clsMatrixFunction.AddParameter("nrow", ucrNudRows.Value)
     End Sub
 
-    Public Sub RemoveNcolFromMatrixfunc()
+    Public Sub RemoveNColFromMatrixfunc()
         clsMatrixFunction.RemoveParameterByName("ncol")
         clsMatrixFunction.RemoveParameterByName("nrow")
         clsCombineGraph.RemoveParameterByName("layout_matrix")
@@ -153,6 +153,7 @@ Public Class sdgCombineGraphOptions
             SetMatrixFunction()
         End If
     End Sub
+
     Public Sub SetRFunction(clsNewRFunction As RFunction, Optional bReset As Boolean = False)
         If Not bInitialiseControls Then
             InitialiseControls()
@@ -162,13 +163,13 @@ Public Class sdgCombineGraphOptions
         SetDefaultRowAndColumns()
     End Sub
 
-    Private Sub chkrdoSpecifyOrder_CheckedChanged() Handles ucrChkSpecifyOrder.ControlValueChanged
+    Private Sub ucrChkSpecifyOrder_ControlValueChanged() Handles ucrChkSpecifyOrder.ControlValueChanged
         If ucrChkSpecifyOrder.Checked Then
             grdLayout.Visible = True
-            SwitchNcolToMatrixFunc()
+            SwitchNColToMatrixFunc()
         Else
             grdLayout.Visible = False
-            RemoveNcolFromMatrixfunc()
+            RemoveNColFromMatrixfunc()
         End If
     End Sub
 
