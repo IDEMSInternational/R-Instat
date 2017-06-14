@@ -23,27 +23,27 @@ Partial Class ucrElementRectControl
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.grpElementRect = New System.Windows.Forms.GroupBox()
-        Me.ucrLegendFill = New instat.ucrColors()
-        Me.ucrLegendColors = New instat.ucrColors()
-        Me.ucrChkLegendFill = New instat.ucrCheck()
-        Me.ucrChkLegendSize = New instat.ucrCheck()
-        Me.ucrChkLegendLineType = New instat.ucrCheck()
-        Me.ucrChkLegendColour = New instat.ucrCheck()
-        Me.ucrNudLegendSize = New instat.ucrNud()
-        Me.ucrInputLegendLineType = New instat.ucrInputComboBox()
+        Me.ucrRectFill = New instat.ucrColors()
+        Me.ucrRectColors = New instat.ucrColors()
+        Me.ucrChkRectFill = New instat.ucrCheck()
+        Me.ucrChkRectSize = New instat.ucrCheck()
+        Me.ucrChkRectLineType = New instat.ucrCheck()
+        Me.ucrChkRectColour = New instat.ucrCheck()
+        Me.ucrNudRectSize = New instat.ucrNud()
+        Me.ucrInputRectLineType = New instat.ucrInputComboBox()
         Me.grpElementRect.SuspendLayout()
         Me.SuspendLayout()
         '
         'grpElementRect
         '
-        Me.grpElementRect.Controls.Add(Me.ucrLegendFill)
-        Me.grpElementRect.Controls.Add(Me.ucrLegendColors)
-        Me.grpElementRect.Controls.Add(Me.ucrChkLegendFill)
-        Me.grpElementRect.Controls.Add(Me.ucrChkLegendSize)
-        Me.grpElementRect.Controls.Add(Me.ucrChkLegendLineType)
-        Me.grpElementRect.Controls.Add(Me.ucrChkLegendColour)
-        Me.grpElementRect.Controls.Add(Me.ucrNudLegendSize)
-        Me.grpElementRect.Controls.Add(Me.ucrInputLegendLineType)
+        Me.grpElementRect.Controls.Add(Me.ucrRectFill)
+        Me.grpElementRect.Controls.Add(Me.ucrRectColors)
+        Me.grpElementRect.Controls.Add(Me.ucrChkRectFill)
+        Me.grpElementRect.Controls.Add(Me.ucrChkRectSize)
+        Me.grpElementRect.Controls.Add(Me.ucrChkRectLineType)
+        Me.grpElementRect.Controls.Add(Me.ucrChkRectColour)
+        Me.grpElementRect.Controls.Add(Me.ucrNudRectSize)
+        Me.grpElementRect.Controls.Add(Me.ucrInputRectLineType)
         Me.grpElementRect.Location = New System.Drawing.Point(3, 0)
         Me.grpElementRect.Name = "grpElementRect"
         Me.grpElementRect.Size = New System.Drawing.Size(246, 119)
@@ -51,77 +51,77 @@ Partial Class ucrElementRectControl
         Me.grpElementRect.TabStop = False
         Me.grpElementRect.Text = "ElementRect"
         '
-        'ucrLegendFill
+        'ucrRectFill
         '
-        Me.ucrLegendFill.AddQuotesIfUnrecognised = True
-        Me.ucrLegendFill.IsReadOnly = False
-        Me.ucrLegendFill.Location = New System.Drawing.Point(105, 93)
-        Me.ucrLegendFill.Name = "ucrLegendFill"
-        Me.ucrLegendFill.Size = New System.Drawing.Size(137, 21)
-        Me.ucrLegendFill.TabIndex = 98
+        Me.ucrRectFill.AddQuotesIfUnrecognised = True
+        Me.ucrRectFill.IsReadOnly = False
+        Me.ucrRectFill.Location = New System.Drawing.Point(105, 93)
+        Me.ucrRectFill.Name = "ucrRectFill"
+        Me.ucrRectFill.Size = New System.Drawing.Size(137, 21)
+        Me.ucrRectFill.TabIndex = 98
         '
-        'ucrLegendColors
+        'ucrRectColors
         '
-        Me.ucrLegendColors.AddQuotesIfUnrecognised = True
-        Me.ucrLegendColors.IsReadOnly = False
-        Me.ucrLegendColors.Location = New System.Drawing.Point(105, 68)
-        Me.ucrLegendColors.Name = "ucrLegendColors"
-        Me.ucrLegendColors.Size = New System.Drawing.Size(137, 21)
-        Me.ucrLegendColors.TabIndex = 95
+        Me.ucrRectColors.AddQuotesIfUnrecognised = True
+        Me.ucrRectColors.IsReadOnly = False
+        Me.ucrRectColors.Location = New System.Drawing.Point(105, 68)
+        Me.ucrRectColors.Name = "ucrRectColors"
+        Me.ucrRectColors.Size = New System.Drawing.Size(137, 21)
+        Me.ucrRectColors.TabIndex = 95
         '
-        'ucrChkLegendFill
+        'ucrChkRectFill
         '
-        Me.ucrChkLegendFill.Checked = False
-        Me.ucrChkLegendFill.Location = New System.Drawing.Point(6, 94)
-        Me.ucrChkLegendFill.Name = "ucrChkLegendFill"
-        Me.ucrChkLegendFill.Size = New System.Drawing.Size(88, 20)
-        Me.ucrChkLegendFill.TabIndex = 94
+        Me.ucrChkRectFill.Checked = False
+        Me.ucrChkRectFill.Location = New System.Drawing.Point(6, 94)
+        Me.ucrChkRectFill.Name = "ucrChkRectFill"
+        Me.ucrChkRectFill.Size = New System.Drawing.Size(88, 20)
+        Me.ucrChkRectFill.TabIndex = 94
         '
-        'ucrChkLegendSize
+        'ucrChkRectSize
         '
-        Me.ucrChkLegendSize.Checked = False
-        Me.ucrChkLegendSize.Location = New System.Drawing.Point(8, 19)
-        Me.ucrChkLegendSize.Name = "ucrChkLegendSize"
-        Me.ucrChkLegendSize.Size = New System.Drawing.Size(88, 20)
-        Me.ucrChkLegendSize.TabIndex = 93
+        Me.ucrChkRectSize.Checked = False
+        Me.ucrChkRectSize.Location = New System.Drawing.Point(8, 19)
+        Me.ucrChkRectSize.Name = "ucrChkRectSize"
+        Me.ucrChkRectSize.Size = New System.Drawing.Size(88, 20)
+        Me.ucrChkRectSize.TabIndex = 93
         '
-        'ucrChkLegendLineType
+        'ucrChkRectLineType
         '
-        Me.ucrChkLegendLineType.Checked = False
-        Me.ucrChkLegendLineType.Location = New System.Drawing.Point(8, 44)
-        Me.ucrChkLegendLineType.Name = "ucrChkLegendLineType"
-        Me.ucrChkLegendLineType.Size = New System.Drawing.Size(88, 20)
-        Me.ucrChkLegendLineType.TabIndex = 92
+        Me.ucrChkRectLineType.Checked = False
+        Me.ucrChkRectLineType.Location = New System.Drawing.Point(8, 44)
+        Me.ucrChkRectLineType.Name = "ucrChkRectLineType"
+        Me.ucrChkRectLineType.Size = New System.Drawing.Size(88, 20)
+        Me.ucrChkRectLineType.TabIndex = 92
         '
-        'ucrChkLegendColour
+        'ucrChkRectColour
         '
-        Me.ucrChkLegendColour.Checked = False
-        Me.ucrChkLegendColour.Location = New System.Drawing.Point(6, 69)
-        Me.ucrChkLegendColour.Name = "ucrChkLegendColour"
-        Me.ucrChkLegendColour.Size = New System.Drawing.Size(88, 20)
-        Me.ucrChkLegendColour.TabIndex = 91
+        Me.ucrChkRectColour.Checked = False
+        Me.ucrChkRectColour.Location = New System.Drawing.Point(6, 69)
+        Me.ucrChkRectColour.Name = "ucrChkRectColour"
+        Me.ucrChkRectColour.Size = New System.Drawing.Size(88, 20)
+        Me.ucrChkRectColour.TabIndex = 91
         '
-        'ucrNudLegendSize
+        'ucrNudRectSize
         '
-        Me.ucrNudLegendSize.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudLegendSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudLegendSize.Location = New System.Drawing.Point(105, 19)
-        Me.ucrNudLegendSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudLegendSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLegendSize.Name = "ucrNudLegendSize"
-        Me.ucrNudLegendSize.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudLegendSize.TabIndex = 89
-        Me.ucrNudLegendSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRectSize.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudRectSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudRectSize.Location = New System.Drawing.Point(105, 19)
+        Me.ucrNudRectSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudRectSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRectSize.Name = "ucrNudRectSize"
+        Me.ucrNudRectSize.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudRectSize.TabIndex = 89
+        Me.ucrNudRectSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrInputLegendLineType
+        'ucrInputRectLineType
         '
-        Me.ucrInputLegendLineType.AddQuotesIfUnrecognised = True
-        Me.ucrInputLegendLineType.IsReadOnly = False
-        Me.ucrInputLegendLineType.Location = New System.Drawing.Point(105, 43)
-        Me.ucrInputLegendLineType.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
-        Me.ucrInputLegendLineType.Name = "ucrInputLegendLineType"
-        Me.ucrInputLegendLineType.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputLegendLineType.TabIndex = 88
+        Me.ucrInputRectLineType.AddQuotesIfUnrecognised = True
+        Me.ucrInputRectLineType.IsReadOnly = False
+        Me.ucrInputRectLineType.Location = New System.Drawing.Point(105, 43)
+        Me.ucrInputRectLineType.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrInputRectLineType.Name = "ucrInputRectLineType"
+        Me.ucrInputRectLineType.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputRectLineType.TabIndex = 88
         '
         'ucrElementRectControl
         '
@@ -136,12 +136,12 @@ Partial Class ucrElementRectControl
     End Sub
 
     Friend WithEvents grpElementRect As GroupBox
-    Friend WithEvents ucrLegendColors As ucrColors
-    Friend WithEvents ucrChkLegendFill As ucrCheck
-    Friend WithEvents ucrChkLegendSize As ucrCheck
-    Friend WithEvents ucrChkLegendLineType As ucrCheck
-    Friend WithEvents ucrChkLegendColour As ucrCheck
-    Friend WithEvents ucrNudLegendSize As ucrNud
-    Friend WithEvents ucrInputLegendLineType As ucrInputComboBox
-    Friend WithEvents ucrLegendFill As ucrColors
+    Friend WithEvents ucrRectColors As ucrColors
+    Friend WithEvents ucrChkRectFill As ucrCheck
+    Friend WithEvents ucrChkRectSize As ucrCheck
+    Friend WithEvents ucrChkRectLineType As ucrCheck
+    Friend WithEvents ucrChkRectColour As ucrCheck
+    Friend WithEvents ucrNudRectSize As ucrNud
+    Friend WithEvents ucrInputRectLineType As ucrInputComboBox
+    Friend WithEvents ucrRectFill As ucrColors
 End Class
