@@ -105,19 +105,19 @@ Public Class sdgOneVarCompareModels
 
         If chkCDF.Checked Then
             clsRcdfcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
-            frmMain.clsRLink.RunScript(clsRcdfcompFunction.ToScript(), 2)
+            frmMain.clsRLink.RunScript(clsRcdfcompFunction.ToScript(), 3)
         End If
         If chkPP.Checked Then
             clsRppcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
-            frmMain.clsRLink.RunScript(clsRppcompFunction.ToScript(), 2)
+            frmMain.clsRLink.RunScript(clsRppcompFunction.ToScript(), 3)
         End If
         If chkQQ.Checked Then
             clsRqqcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
-            frmMain.clsRLink.RunScript(clsRqqcompFunction.ToScript(), 2)
+            frmMain.clsRLink.RunScript(clsRqqcompFunction.ToScript(), 3)
         End If
         If chkDensity.Checked Then
             clsRdenscompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
-            frmMain.clsRLink.RunScript(clsRdenscompFunction.ToScript(), 2)
+            frmMain.clsRLink.RunScript(clsRdenscompFunction.ToScript(), 3)
         End If
         If chkSaveChi.Checked Then
             frmMain.clsRLink.RunScript(clsOperatorforTable.ToScript(), 0)
