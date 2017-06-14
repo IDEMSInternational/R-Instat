@@ -179,14 +179,13 @@ Public Class sdgClimdexIndices
 
         clsNewClimdexInput.AddParameter("base.range", clsRFunctionParameter:=clsRBaseRange)
         clsNewClimdexInput.AddParameter("max.missing.days", clsRFunctionParameter:=clsRMaxMisingDays)
+
         ucrInputFreq.SetParameter(New RParameter("freq"))
         dctInputFreqPairs.Add("annual", Chr(34) & "annual" & Chr(34))
         dctInputFreqPairs.Add("monthly", Chr(34) & "monthly" & Chr(34))
         ucrInputFreq.SetItems(dctInputFreqPairs)
-        ucrInputFreq.cboInput.SelectedItem = "annual"
         ucrInputFreq.SetRDefault(Chr(34) & "annual" & Chr(34))
-
-        ucrInputFreq.bAllowNonConditionValues = True
+        ucrInputFreq.SetDropDownStyleAsNonEditable()
 
         ucrInputTempQtiles.SetParameter(New RParameter("x"))
         ucrInputTempQtiles.SetValidationTypeAsNumericList()
@@ -225,9 +224,8 @@ Public Class sdgClimdexIndices
         dctNumericPairs.Add("GSL_max", Chr(34) & "GSL_max" & Chr(34))
         dctNumericPairs.Add("GSL_sum", Chr(34) & "GSL_sum" & Chr(34))
         ucrInputGSLMode.SetItems(dctNumericPairs)
-     
+        ucrInputGSLMode.SetDropDownStyleAsNonEditable()
         ucrInputGSLMode.SetRDefault(Chr(34) & "GSL" & Chr(34))
-        ucrInputGSLMode.bAllowNonConditionValues = True
 
         lstGroupboxes = New List(Of GroupBox)
         lstGroupboxes.AddRange({grpPrecAnnual, grpPrecAnnualMonthly, grpTmaxAnnual, grpTmaxAnnualMonthly, grpTminAnnual, grpTminAnnualMonthly, grpTmaxTminAnnual, grpTmaxTminAnnualMonthly})
