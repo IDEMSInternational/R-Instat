@@ -64,11 +64,12 @@ Public Class sdgOneVarUseModFit
         ucrNudFrom.SetRDefault(0.25)
 
         'function ran here is probs = c(VALUES)
-        ucrInputQuantiles.SetParameter(New RParameter("x"))
         dctQuantileValues.Add("0.25, 0.5, 0.75", "0.25, 0.5, 0.75")
         dctQuantileValues.Add("0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9", "0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9")
+        ucrInputQuantiles.SetParameter(New RParameter("x"))
         ucrInputQuantiles.SetItems(dctQuantileValues)
-        'ucrInputQuantiles.SetRDefault("0.25, 0.5, 0.75")
+        ucrInputQuantiles.SetDefaultState("0.25, 0.5, 0.75")
+        ucrInputQuantiles.bAllowNonConditionValues = True
         ucrInputQuantiles.SetValidationTypeAsNumericList(dcmMin:=0, dcmMax:=1)
 
         ucrPnlQuantiles.AddToLinkedControls(ucrInputQuantiles, {rdoInsertValues}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)

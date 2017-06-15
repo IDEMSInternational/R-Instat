@@ -69,7 +69,8 @@ versions <- c("1.4-5", "1.12", "1.9-3", "0.2.0", "1.1.0", "0.1-3",
 success <- invisible(mapply(function(p, v) length(find.package(p, quiet = TRUE)) > 0 && compareVersion(as.character(packageVersion(p)), v) >= 0, packs, versions))
 if(!all(success)) install.packages(names(success)[!success], repos = paste0("file:///", getwd(), "/extras"), type = "win.binary")
 
-for(pack in c("plyr", "dplyr", "ggplot2", "svglite")) {
+# ggthemes temp added because themes list doesn't contain package names
+for(pack in c("plyr", "dplyr", "ggplot2", "ggthemes", "svglite")) {
  library(pack, character.only = TRUE)
 }
 
