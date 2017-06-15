@@ -157,13 +157,13 @@ instat_object$set("public", "calculate_summary", function(data_name, columns_to_
       else {
         values_calculation <- instat_calculation$new(type = "summary", result_name = result_name,
                                                       function_exp = paste0(summary_type, "(", column_names, function_exp),
-                                                      calculated_from = calculated_from, save = 0)
+                                                      calculated_from = calculated_from, save = save)
         if(percentage_type == "columns") {
           if(length(perc_total_columns) == 1) perc_col_name <- perc_total_columns
           else perc_col_name <- perc_total_columns[i]
           totals_calculation <- instat_calculation$new(type = "summary", result_name = paste0(summaries_display[j], "_", perc_total_columns, "_totals"),
                                                        function_exp = paste0(summary_type, "(", perc_col_name, function_exp),
-                                                       calculated_from = calculated_from, save = 0)
+                                                       calculated_from = calculated_from, save = save)
         }
         else if(percentage_type == "filter") {
           #TODO
@@ -172,7 +172,7 @@ instat_object$set("public", "calculate_summary", function(data_name, columns_to_
           values_calculation$manipulations <- value_manipulations
           totals_calculation <- instat_calculation$new(type = "summary", result_name = paste0(result_name, "_totals"),
                                                        function_exp = paste0(summary_type, "(", column_names, function_exp),
-                                                       calculated_from = calculated_from, save = 0)
+                                                       calculated_from = calculated_from, save = save)
         }
         function_exp <- paste0(values_calculation$result_name, "/", totals_calculation$result_name)
         if(!perc_decimal) {
@@ -603,7 +603,9 @@ instat_object$set("public", "summary_table", function(data_name, columns_to_summ
       }
       if(as_html) {
         if(length(column_factors) == 0) {
-          return(htmlTable::htmlTable(shaped_cell_values, caption = caption, total = include_margins, align = align, tfoot = notes, ... = ...))
+          tab <- htmlTable::htmlTable(shaped_cell_values, caption = caption, total = include_margins, align = align, tfoot = notes, ... = ...)
+          class(tab) <- class(tab)[!class(tab) == "html"]
+          return(tab)
         }
         else {
           spanner_data <- unique(cell_values[column_factors])
