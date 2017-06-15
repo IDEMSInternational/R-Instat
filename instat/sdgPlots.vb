@@ -170,8 +170,8 @@ Public Class sdgPlots
 
         'themes tab
         urChkSelectTheme.SetText("Select Theme:")
-        ucrInputThemes.SetParameter(New RParameter("theme_name"))
-        urChkSelectTheme.AddToLinkedControls(ucrInputThemes, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="theme_grey")
+        ucrInputThemes.SetParameter(New RParameter("theme_name", 14))
+        urChkSelectTheme.AddToLinkedControls(ucrInputThemes, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="grey")
         urChkSelectTheme.AddParameterPresentCondition(True, "theme_name")
         urChkSelectTheme.AddParameterPresentCondition(False, "theme_name", False)
         strThemes = GgplotDefaults.strThemes
@@ -239,11 +239,21 @@ Public Class sdgPlots
             clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         End If
 
+        Dim clsDefaultThemePosition As RParameter
+
         If clsNewThemeParam IsNot Nothing Then
-            clsBaseOperator.AddParameter(clsNewThemeParam)
+            clsDefaultThemePosition = clsNewThemeParam
+            clsDefaultThemePosition.Position = 14
+            clsBaseOperator.AddParameter(clsDefaultThemePosition)
         Else
-            clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
+            clsDefaultThemePosition = GgplotDefaults.clsDefaultThemeParameter.Clone
+            clsDefaultThemePosition.Position = 14
+            clsBaseOperator.AddParameter(clsDefaultThemePosition)
+
         End If
+
+
+
 
         ucrInputGraphTitle.SetRCode(clsLabsFunction, bReset)
         ucrInputGraphSubTitle.SetRCode(clsLabsFunction, bReset)
@@ -650,26 +660,6 @@ Public Class sdgPlots
         Me.SendToBack()
         sdgThemes.ShowDialog()
         bResetThemes = False
-    End Sub
-
-    Private Sub ucrChkIncludeFacets_CheckedChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeFacets.ControlValueChanged, ucr2ndFactorReceiver.ControlValueChanged, ucr1stFactorReceiver.ControlValueChanged
-
-    End Sub
-
-    Private Sub ucrChkFreeSpace_CheckedChanged(ucrChangedControl As ucrCore) Handles ucrChkFreeSpace.ControlValueChanged
-
-    End Sub
-
-    Private Sub chkScales_CheckedChanged(ucrChangedControl As ucrCore) Handles ucrChkFreeScalesY.ControlValueChanged, ucrChkFreeScalesX.ControlValueChanged
-
-    End Sub
-
-    Private Sub ucrPnlHorizonatalVertical_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlHorizonatalVertical.ControlValueChanged, ucrChkMargin.ControlValueChanged
-
-    End Sub
-
-    Private Sub LabsControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputGraphTitle.ControlValueChanged, ucrInputGraphSubTitle.ControlValueChanged, ucrInputGraphCaption.ControlValueChanged
-
     End Sub
 
     'Warning/Task to be discussed: need to disable ok on dlg's when layers are not complete on subdialogues + warning message... 
