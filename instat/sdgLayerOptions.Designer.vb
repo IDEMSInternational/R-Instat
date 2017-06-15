@@ -24,7 +24,7 @@ Partial Class sdgLayerOptions
     Private Sub InitializeComponent()
         Me.tbcLayers = New System.Windows.Forms.TabControl()
         Me.tbpAesthetics = New System.Windows.Forms.TabPage()
-        Me.ucrGeomWithAes = New instat.UcrGeomListWithParameters()
+        Me.ucrGeomWithAes = New instat.ucrGeomListWithParameters()
         Me.tbpGeomParameters = New System.Windows.Forms.TabPage()
         Me.ucrLayerParameter = New instat.ucrLayerParameters()
         Me.ucrSdgLayerBase = New instat.ucrButtonsSubdialogue()
@@ -111,6 +111,6 @@ Partial Class sdgLayerOptions
     Friend WithEvents tbcLayers As TabControl
     Friend WithEvents tbpAesthetics As TabPage
     Friend WithEvents tbpGeomParameters As TabPage
-    Friend WithEvents ucrGeomWithAes As UcrGeomListWithParameters
+    Friend WithEvents ucrGeomWithAes As ucrGeomListWithParameters
     Friend WithEvents ucrLayerParameter As ucrLayerParameters
 End Class

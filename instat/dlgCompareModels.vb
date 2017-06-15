@@ -61,7 +61,7 @@ Public Class dlgCompareModels
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrDistributionForCompareModels_ParameterChanged() Handles ucrDistributionForCompareModels.ParameterChanged
+    Private Sub ucrDistributionForCompareModels_ParameterChanged() Handles ucrDistributionForCompareModels.ControlContentsChanged
         distParameters()
     End Sub
 

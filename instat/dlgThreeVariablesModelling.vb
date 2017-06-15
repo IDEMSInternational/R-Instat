@@ -35,6 +35,8 @@ Public Class dlgThreeVariableModelling
     End Sub
 
     Private Sub InitialiseDialog()
+        'Temporary fix: function autoplot does not support glm/lm models
+        sdgSimpleRegOptions.chkMultiplePlots.Enabled = False
         ucrBaseThreeVariableModelling.clsRsyntax.iCallType = 2
         ucrBaseThreeVariableModelling.clsRsyntax.SetFunction("")
         ucrBaseThreeVariableModelling.iHelpTopicID = 369
@@ -134,7 +136,7 @@ Public Class dlgThreeVariableModelling
         End If
         If ucrFamily.lstCurrentDistributions.Count = 0 Or ucrResponse.IsEmpty() Then
             ucrFamily.Enabled = False
-            ucrFamily.cboDistributions.Text = ""
+            ucrFamily.ucrInputDistributions.SetName("")
             cmdModelOptions.Enabled = False
         Else
             ucrFamily.Enabled = True
@@ -254,9 +256,9 @@ Public Class dlgThreeVariableModelling
         End If
     End Sub
 
-    Public Sub ucrFamily_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrFamily.cboDistributionsIndexChanged
+    Public Sub ucrFamily_cboDistributionsIndexChanged() Handles ucrFamily.DistributionsIndexChanged
         sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
-        sdgModelOptions.ucrFamily.cboDistributions.SelectedIndex = sdgModelOptions.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
+        sdgModelOptions.ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = sdgModelOptions.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
         sdgModelOptions.RestrictLink()
         'TODO:   Include multinomial as an option And the appropriate function
         If (ucrFamily.clsCurrDistribution.strNameTag = "Normal") Then
@@ -271,7 +273,7 @@ Public Class dlgThreeVariableModelling
 
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
         sdgModelOptions.ShowDialog()
-        ucrFamily.cboDistributions.SelectedIndex = ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = sdgModelOptions.ucrFamily.clsCurrDistribution.strNameTag)
+        ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = sdgModelOptions.ucrFamily.clsCurrDistribution.strNameTag)
     End Sub
 
     Private Sub chkResponseFunction_CheckedChanged(sender As Object, e As EventArgs) Handles chkResponseFunction.CheckedChanged

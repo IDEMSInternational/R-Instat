@@ -37,6 +37,7 @@ Public Class dlgUnstack
     Private Sub InitialiseDialog()
         ucrFactorToUnstackReceiver.Selector = ucrSelectorForunstack
         ucrColumnToUnstackReceiver.Selector = ucrSelectorForunstack
+        ucrBase.clsRsyntax.SetPackageName("reshape2")
         ucrBase.clsRsyntax.SetFunction("dcast")
         ucrFactorToUnstackReceiver.SetMeAsReceiver()
         ucrBase.iHelpTopicID = 58

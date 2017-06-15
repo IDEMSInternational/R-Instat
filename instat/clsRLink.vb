@@ -272,6 +272,7 @@ Public Class RLink
             Try
                 If iCallType = 3 Then
                     If strGraphDisplayOption = "view_output_window" OrElse strGraphDisplayOption = "view_separate_window" Then
+                        clsPNGFunction.SetPackageName("grDevices")
                         clsPNGFunction.SetRCommand("png")
                         clsPNGFunction.AddParameter("filename", Chr(34) & System.IO.Path.Combine(strTempGraphsDirectory & "/Graph.png").Replace("\", "/") & Chr(34))
                         clsPNGFunction.AddParameter("width", 4000)
@@ -356,7 +357,7 @@ Public Class RLink
                 MsgBox(e.Message & vbNewLine & "The error occurred in attempting to run the following R command(s):" & vbNewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
             End Try
         End If
-        If bOutput AndAlso strOutput <> "" Then
+        If bOutput AndAlso strOutput IsNot Nothing AndAlso strOutput <> "" Then
             If iCallType = 4 Then
                 rtbOutput.AddIntoWebBrowser(strHtmlCode:=strOutput)
             Else

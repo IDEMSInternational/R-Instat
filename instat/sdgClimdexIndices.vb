@@ -179,11 +179,13 @@ Public Class sdgClimdexIndices
 
         clsNewClimdexInput.AddParameter("base.range", clsRFunctionParameter:=clsRBaseRange)
         clsNewClimdexInput.AddParameter("max.missing.days", clsRFunctionParameter:=clsRMaxMisingDays)
+
         ucrInputFreq.SetParameter(New RParameter("freq"))
         dctInputFreqPairs.Add("annual", Chr(34) & "annual" & Chr(34))
         dctInputFreqPairs.Add("monthly", Chr(34) & "monthly" & Chr(34))
         ucrInputFreq.SetItems(dctInputFreqPairs)
-        ucrInputFreq.cboInput.SelectedItem = "annual"
+        ucrInputFreq.SetRDefault(Chr(34) & "annual" & Chr(34))
+        ucrInputFreq.SetDropDownStyleAsNonEditable()
 
         ucrInputTempQtiles.SetParameter(New RParameter("x"))
         ucrInputTempQtiles.SetValidationTypeAsNumericList()
@@ -222,7 +224,8 @@ Public Class sdgClimdexIndices
         dctNumericPairs.Add("GSL_max", Chr(34) & "GSL_max" & Chr(34))
         dctNumericPairs.Add("GSL_sum", Chr(34) & "GSL_sum" & Chr(34))
         ucrInputGSLMode.SetItems(dctNumericPairs)
-        ucrInputGSLMode.cboInput.SelectedItem = "GSL"
+        ucrInputGSLMode.SetDropDownStyleAsNonEditable()
+        ucrInputGSLMode.SetRDefault(Chr(34) & "GSL" & Chr(34))
 
         lstGroupboxes = New List(Of GroupBox)
         lstGroupboxes.AddRange({grpPrecAnnual, grpPrecAnnualMonthly, grpTmaxAnnual, grpTmaxAnnualMonthly, grpTminAnnual, grpTminAnnualMonthly, grpTmaxTminAnnual, grpTmaxTminAnnualMonthly})
@@ -262,6 +265,15 @@ Public Class sdgClimdexIndices
         clsRTwoArg4.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsDefaultFunction)
         clsRTwoArg5.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsDefaultFunction)
         clsRThreeArg.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsDefaultFunction)
+
+        clsROneArg.SetPackageName("climdex.pcic")
+        clsRTwoArg1.SetPackageName("climdex.pcic")
+        clsRTwoArg2.SetPackageName("climdex.pcic")
+        clsRTwoArg3.SetPackageName("climdex.pcic")
+        clsRTwoArg4.SetPackageName("climdex.pcic")
+        clsRTwoArg5.SetPackageName("climdex.pcic")
+        clsRThreeArg.SetPackageName("climdex.pcic")
+        InitialiseTabs()
         bControlsInitialised = True
     End Sub
 
@@ -436,6 +448,10 @@ Public Class sdgClimdexIndices
         ucrChkSpellDISpanYear.SetRCode(clsRTwoArg5, bReset)
         ucrInputGSLMode.SetRCode(clsRTwoArg2, bReset)
         IndicesType()
+
+        If bReset Then
+            tbpClimdex.SelectedIndex = 0
+        End If
     End Sub
 
     Private Sub GroupBoxControl(TempGroupBox As GroupBox)
@@ -563,5 +579,14 @@ Public Class sdgClimdexIndices
 
     Private Sub ucrInputFreq_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFreq.ControlContentsChanged
         IndicesType()
+    End Sub
+
+    Private Sub InitialiseTabs()
+        For i = 0 To tbpClimdex.TabCount - 1
+            tbpClimdex.SelectedIndex = i
+        Next
+        tbpClimdex.TabPages(2).Enabled = False
+        tbpClimdex.TabPages(1).Enabled = False
+        tbpClimdex.SelectedIndex = 0
     End Sub
 End Class

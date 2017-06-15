@@ -39,38 +39,38 @@ Partial Class dlgClimdex
         'lblTmax
         '
         Me.lblTmax.AutoSize = True
-        Me.lblTmax.Location = New System.Drawing.Point(286, 63)
+        Me.lblTmax.Location = New System.Drawing.Point(256, 85)
         Me.lblTmax.Name = "lblTmax"
-        Me.lblTmax.Size = New System.Drawing.Size(33, 13)
+        Me.lblTmax.Size = New System.Drawing.Size(117, 13)
         Me.lblTmax.TabIndex = 3
-        Me.lblTmax.Tag = "Tmax"
-        Me.lblTmax.Text = "Tmax"
+        Me.lblTmax.Tag = "Maximum Temperature:"
+        Me.lblTmax.Text = "Maximum Temperature:"
         '
         'lblTmin
         '
         Me.lblTmin.AutoSize = True
-        Me.lblTmin.Location = New System.Drawing.Point(286, 100)
+        Me.lblTmin.Location = New System.Drawing.Point(256, 126)
         Me.lblTmin.Name = "lblTmin"
-        Me.lblTmin.Size = New System.Drawing.Size(30, 13)
+        Me.lblTmin.Size = New System.Drawing.Size(114, 13)
         Me.lblTmin.TabIndex = 5
-        Me.lblTmin.Tag = "Tmin"
-        Me.lblTmin.Text = "Tmin"
+        Me.lblTmin.Tag = "Minimum Temperature:"
+        Me.lblTmin.Text = "Minimum Temperature:"
         '
         'lblPrec
         '
         Me.lblPrec.AutoSize = True
-        Me.lblPrec.Location = New System.Drawing.Point(286, 139)
+        Me.lblPrec.Location = New System.Drawing.Point(256, 167)
         Me.lblPrec.Name = "lblPrec"
-        Me.lblPrec.Size = New System.Drawing.Size(29, 13)
+        Me.lblPrec.Size = New System.Drawing.Size(45, 13)
         Me.lblPrec.TabIndex = 7
-        Me.lblPrec.Tag = "Prec"
-        Me.lblPrec.Text = "Prec"
+        Me.lblPrec.Tag = "Rainfall:"
+        Me.lblPrec.Text = "Rainfall:"
         '
         'cmdIndices
         '
-        Me.cmdIndices.Location = New System.Drawing.Point(286, 193)
+        Me.cmdIndices.Location = New System.Drawing.Point(335, 213)
         Me.cmdIndices.Name = "cmdIndices"
-        Me.cmdIndices.Size = New System.Drawing.Size(62, 23)
+        Me.cmdIndices.Size = New System.Drawing.Size(74, 23)
         Me.cmdIndices.TabIndex = 10
         Me.cmdIndices.Tag = "Indices..."
         Me.cmdIndices.Text = "Indices..."
@@ -79,58 +79,66 @@ Partial Class dlgClimdex
         'lblDate
         '
         Me.lblDate.AutoSize = True
-        Me.lblDate.Location = New System.Drawing.Point(286, 20)
+        Me.lblDate.Location = New System.Drawing.Point(256, 44)
         Me.lblDate.Name = "lblDate"
-        Me.lblDate.Size = New System.Drawing.Size(30, 13)
+        Me.lblDate.Size = New System.Drawing.Size(33, 13)
         Me.lblDate.TabIndex = 1
-        Me.lblDate.Tag = "Date"
-        Me.lblDate.Text = "Date"
+        Me.lblDate.Tag = "Date:"
+        Me.lblDate.Text = "Date:"
         '
         'ucrReceiverDate
         '
         Me.ucrReceiverDate.frmParent = Me
-        Me.ucrReceiverDate.Location = New System.Drawing.Point(286, 39)
+        Me.ucrReceiverDate.Location = New System.Drawing.Point(256, 59)
         Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDate.Name = "ucrReceiverDate"
         Me.ucrReceiverDate.Selector = Nothing
         Me.ucrReceiverDate.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverDate.strNcFilePath = ""
         Me.ucrReceiverDate.TabIndex = 2
+        Me.ucrReceiverDate.ucrSelector = Nothing
         '
         'ucrReceiverPrec
         '
         Me.ucrReceiverPrec.frmParent = Me
-        Me.ucrReceiverPrec.Location = New System.Drawing.Point(286, 156)
+        Me.ucrReceiverPrec.Location = New System.Drawing.Point(256, 182)
         Me.ucrReceiverPrec.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverPrec.Name = "ucrReceiverPrec"
         Me.ucrReceiverPrec.Selector = Nothing
         Me.ucrReceiverPrec.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverPrec.strNcFilePath = ""
         Me.ucrReceiverPrec.TabIndex = 8
+        Me.ucrReceiverPrec.ucrSelector = Nothing
         '
         'ucrReceiverTmin
         '
         Me.ucrReceiverTmin.frmParent = Me
-        Me.ucrReceiverTmin.Location = New System.Drawing.Point(286, 116)
+        Me.ucrReceiverTmin.Location = New System.Drawing.Point(256, 141)
         Me.ucrReceiverTmin.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverTmin.Name = "ucrReceiverTmin"
         Me.ucrReceiverTmin.Selector = Nothing
         Me.ucrReceiverTmin.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverTmin.strNcFilePath = ""
         Me.ucrReceiverTmin.TabIndex = 6
+        Me.ucrReceiverTmin.ucrSelector = Nothing
         '
         'ucrReceiverTmax
         '
         Me.ucrReceiverTmax.frmParent = Me
-        Me.ucrReceiverTmax.Location = New System.Drawing.Point(286, 79)
+        Me.ucrReceiverTmax.Location = New System.Drawing.Point(256, 100)
         Me.ucrReceiverTmax.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverTmax.Name = "ucrReceiverTmax"
         Me.ucrReceiverTmax.Selector = Nothing
         Me.ucrReceiverTmax.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverTmax.strNcFilePath = ""
         Me.ucrReceiverTmax.TabIndex = 4
+        Me.ucrReceiverTmax.ucrSelector = Nothing
         '
         'ucrSelectorClimdex
         '
         Me.ucrSelectorClimdex.bShowHiddenColumns = False
         Me.ucrSelectorClimdex.bUseCurrentFilter = True
-        Me.ucrSelectorClimdex.Location = New System.Drawing.Point(10, 3)
+        Me.ucrSelectorClimdex.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorClimdex.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorClimdex.Name = "ucrSelectorClimdex"
         Me.ucrSelectorClimdex.Size = New System.Drawing.Size(210, 180)
@@ -138,7 +146,7 @@ Partial Class dlgClimdex
         '
         'ucrBaseClimdex
         '
-        Me.ucrBaseClimdex.Location = New System.Drawing.Point(10, 222)
+        Me.ucrBaseClimdex.Location = New System.Drawing.Point(12, 242)
         Me.ucrBaseClimdex.Name = "ucrBaseClimdex"
         Me.ucrBaseClimdex.Size = New System.Drawing.Size(410, 52)
         Me.ucrBaseClimdex.TabIndex = 11
@@ -146,7 +154,7 @@ Partial Class dlgClimdex
         'ucrChkSave
         '
         Me.ucrChkSave.Checked = False
-        Me.ucrChkSave.Location = New System.Drawing.Point(10, 196)
+        Me.ucrChkSave.Location = New System.Drawing.Point(12, 216)
         Me.ucrChkSave.Name = "ucrChkSave"
         Me.ucrChkSave.Size = New System.Drawing.Size(107, 20)
         Me.ucrChkSave.TabIndex = 9
@@ -155,7 +163,7 @@ Partial Class dlgClimdex
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(424, 278)
+        Me.ClientSize = New System.Drawing.Size(421, 302)
         Me.Controls.Add(Me.ucrChkSave)
         Me.Controls.Add(Me.lblDate)
         Me.Controls.Add(Me.ucrReceiverDate)

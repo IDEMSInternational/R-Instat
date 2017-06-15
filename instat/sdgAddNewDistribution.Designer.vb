@@ -56,7 +56,7 @@ Partial Class sdgAddNewDistribution
         '
         Me.ucrNewDistributions.Location = New System.Drawing.Point(12, 12)
         Me.ucrNewDistributions.Name = "ucrNewDistributions"
-        Me.ucrNewDistributions.Size = New System.Drawing.Size(221, 194)
+        Me.ucrNewDistributions.Size = New System.Drawing.Size(253, 194)
         Me.ucrNewDistributions.TabIndex = 0
         '
         'grpChangeLimits
@@ -165,7 +165,7 @@ Partial Class sdgAddNewDistribution
         'lstAddedDistribution
         '
         Me.lstAddedDistribution.FormattingEnabled = True
-        Me.lstAddedDistribution.Location = New System.Drawing.Point(242, 41)
+        Me.lstAddedDistribution.Location = New System.Drawing.Point(271, 44)
         Me.lstAddedDistribution.Name = "lstAddedDistribution"
         Me.lstAddedDistribution.Size = New System.Drawing.Size(120, 147)
         Me.lstAddedDistribution.TabIndex = 5
@@ -173,7 +173,7 @@ Partial Class sdgAddNewDistribution
         'lblAddedDistribution
         '
         Me.lblAddedDistribution.AutoSize = True
-        Me.lblAddedDistribution.Location = New System.Drawing.Point(239, 25)
+        Me.lblAddedDistribution.Location = New System.Drawing.Point(268, 28)
         Me.lblAddedDistribution.Name = "lblAddedDistribution"
         Me.lblAddedDistribution.Size = New System.Drawing.Size(93, 13)
         Me.lblAddedDistribution.TabIndex = 4
