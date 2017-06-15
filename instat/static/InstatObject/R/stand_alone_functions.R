@@ -300,7 +300,7 @@ open_NetCDF <- function(nc_data, latitude_col_name, longitude_col_name, time_col
       nc_value = dataset
     }
     else if(length(dim(dataset)) == 2) {
-      nc_value = as.vector(t(dataset))
+      nc_value = as.vector(dataset)
     }
     else if(length(dim(dataset)) == 3) {
       lonIdx <- which(!is.na(lon))

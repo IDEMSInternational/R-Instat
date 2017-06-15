@@ -105,11 +105,9 @@ Public Class ucrReceiver
 
         Set(strFilePath As String)
             strPrvNcFilePath = strFilePath
+            Me.Clear()
             If IsCurrentReceiver() Then
                 Selector.LoadList()
-            End If
-            If strFilePath = "" Then
-                Me.Clear()
             End If
         End Set
 

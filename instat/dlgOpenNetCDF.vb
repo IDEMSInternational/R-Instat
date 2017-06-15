@@ -20,12 +20,13 @@ Imports System.Text.RegularExpressions
 Public Class dlgOpenNetCDF
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsRDefaultFunction, clsRCDF As New RFunction
+    Private clsImportCDF, clsOpenCDF As New RFunction
     Dim strFileType As String
     Dim bComponentsInitialised As Boolean
     Public bStartOpenDialog As Boolean
     Dim lstReceivers As New List(Of ucrReceiverSingle)
     Dim lstRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
+    Dim strCurrentFile As String = ""
 
     Public Sub New()
         ' This call is required by the designer.
@@ -57,7 +58,7 @@ Public Class dlgOpenNetCDF
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrInputDataName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrInputLocDataName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrInputFilePath.SetRCode(clsRCDF, bReset)
+        ucrInputFilePath.SetRCode(clsOpenCDF, bReset)
         ucrReceiverLatName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverLonName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrReceiverTimeName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
@@ -66,19 +67,27 @@ Public Class dlgOpenNetCDF
 
     Private Sub InitialiseDialog()
         'ucrBase.iHelpTopicID = 
-        Dim kvpLat As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("lat", {"y", "lat", "latitude", "latit"}.ToList())
-        Dim kvpLon As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("lon", {"x", "lon", "longitude", "longit"}.ToList())
-        Dim kvpTime As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("time", {"t", "time", "period", "pd"}.ToList())
+        Dim kvpLat As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("lat", {"lat", "Y"}.ToList())
+        Dim kvpLon As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("lon", {"lon", "X"}.ToList())
+        Dim kvpTime As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("time", {"time", "period", "T"}.ToList())
 
+        ucrInputDataName.SetParameter(New RParameter("main_data_name", 1))
         ucrInputDataName.SetDefaultTypeAsDataFrame()
         ucrInputDataName.SetValidationTypeAsRVariable()
+        ucrInputDataName.bAutoChangeOnLeave = True
 
+        ucrInputLocDataName.SetParameter(New RParameter("loc_data_name", 2))
         ucrInputLocDataName.SetDefaultTypeAsDataFrame()
         ucrInputLocDataName.SetValidationTypeAsRVariable()
 
         ucrInputFilePath.SetParameter(New RParameter("filename", 0))
-        ucrInputDataName.SetParameter(New RParameter("main_data_name", 1))
-        ucrInputLocDataName.SetParameter(New RParameter("loc_data_name", 2))
+        ucrInputFilePath.IsReadOnly = True
+
+        lstRecognisedTypes.AddRange({kvpLat, kvpLon, kvpTime})
+        lstReceivers.AddRange({ucrReceiverLatName, ucrReceiverLonName, ucrReceiverTimeName})
+        ucrReceiverLatName.Tag = "lat"
+        ucrReceiverLonName.Tag = "lon"
+        ucrReceiverTimeName.Tag = "time"
 
         ucrReceiverLatName.SetParameter(New RParameter("latitude_col_name", 3))
         ucrReceiverLatName.SetParameterIsString()
@@ -108,21 +117,29 @@ Public Class dlgOpenNetCDF
     End Sub
 
     Private Sub SetDefaults()
-        clsRDefaultFunction = New RFunction
-        ucrInputDataName.SetName("")
+        clsImportCDF = New RFunction
+        clsOpenCDF = New RFunction
         ucrSelectorNetCDF.Reset()
-        ucrInputFilePath.IsReadOnly = True
-        ucrInputFilePath.SetName("")
-        clsRDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_NetCDF")
-        clsRDefaultFunction.AddParameter("nc_data", clsRFunctionParameter:=clsRCDF)
-        clsRDefaultFunction.AddParameter("add_date_time", "TRUE")
-        clsRDefaultFunction.AddParameter("loc_data_name", "lat_lon_data")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsRDefaultFunction)
+        'Reset now optioanlly clears text in control
+        'System shouldn't require reset of input controls so this should be a temporary fix
+        ucrInputFilePath.Reset()
+        ucrInputLocDataName.Reset()
+        ucrInputDataName.Reset()
+        ucrReceiverLatName.SetMeAsReceiver()
+
+        clsOpenCDF.SetPackageName("ncdf4")
+        clsOpenCDF.SetRCommand("nc_open")
+
+        clsImportCDF.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_NetCDF")
+        clsImportCDF.AddParameter("nc_data", clsRFunctionParameter:=clsOpenCDF)
+        clsImportCDF.AddParameter("add_date_time", "TRUE")
+        clsImportCDF.AddParameter("loc_data_name", Chr(34) & "location_data" & Chr(34))
+        ucrBase.clsRsyntax.SetBaseRFunction(clsImportCDF)
         AutoFillReceivers()
     End Sub
 
     Private Sub TestOkEnabled()
-        If (ucrInputDataName.Text <> "" AndAlso ucrInputLocDataName.Text <> "" AndAlso ucrInputFilePath.Text <> "" AndAlso (Not ucrInputDataName.Text = ucrInputLocDataName.Text) AndAlso Not ucrReceiverLatName.IsEmpty() AndAlso Not ucrReceiverLonName.IsEmpty()) Then
+        If Not ucrReceiverLatName.IsEmpty() AndAlso Not ucrReceiverLonName.IsEmpty() AndAlso ucrInputDataName.GetText() <> "" AndAlso ucrInputLocDataName.GetText() <> "" AndAlso ucrInputFilePath.GetText() <> "" AndAlso (Not ucrInputDataName.GetText() = ucrInputLocDataName.GetText()) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -168,12 +185,11 @@ Public Class dlgOpenNetCDF
                     strFileExt = Path.GetExtension(strFilePath)
                     ucrInputFilePath.SetName(strFilePath)
                     If strFileExt = ".nc" Then
-                        clsRCDF.SetRCommand("nc_open")
-                        clsRCDF.SetPackageName("ncdf4")
-                        clsRCDF.AddParameter("filename", Chr(34) & strFilePath & Chr(34))
+                        clsOpenCDF.SetRCommand("nc_open")
+                        clsOpenCDF.SetPackageName("ncdf4")
+                        clsOpenCDF.AddParameter("filename", Chr(34) & strFilePath & Chr(34))
                         strFileType = "nc"
                         ucrInputDataName.SetName(strFileName, bSilent:=True)
-                        ucrInputDataName.Focus()
                     End If
                 End If
             End If
@@ -185,12 +201,12 @@ Public Class dlgOpenNetCDF
         TestOkEnabled()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFilePath.ControlContentsChanged
-        TestOkEnabled()
+    Private Sub ucrInputFilePath_ControlValueChanged() Handles ucrInputFilePath.StrictNameChanged
         AutoFillReceivers()
         ucrReceiverLatName.strNcFilePath = ucrInputFilePath.GetText()
         ucrReceiverLonName.strNcFilePath = ucrInputFilePath.GetText()
         ucrReceiverTimeName.strNcFilePath = ucrInputFilePath.GetText()
+        strCurrentFile = ucrInputFilePath.GetText()
     End Sub
 
     Private Sub Receivers_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLatName.ControlContentsChanged, ucrReceiverLonName.ControlContentsChanged, ucrInputDataName.ControlContentsChanged, ucrInputLocDataName.ControlContentsChanged
@@ -201,7 +217,7 @@ Public Class dlgOpenNetCDF
         Dim lstRecognisedValues As List(Of String)
         Dim ucrCurrentReceiver As ucrReceiver
         Dim bFound As Boolean = False
-        'ucrCurrentReceiver.Clear()
+
         ucrCurrentReceiver = ucrSelectorNetCDF.CurrentReceiver
 
         For Each ucrTempReceiver As ucrReceiver In lstReceivers
@@ -245,5 +261,9 @@ Public Class dlgOpenNetCDF
 
     Private Sub Selector_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorNetCDF.ControlContentsChanged
         AutoFillReceivers()
+    End Sub
+
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFilePath.ControlContentsChanged, ucrInputDataName.ControlContentsChanged, ucrInputLocDataName.ControlContentsChanged, ucrReceiverLatName.ControlContentsChanged, ucrReceiverLonName.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class
