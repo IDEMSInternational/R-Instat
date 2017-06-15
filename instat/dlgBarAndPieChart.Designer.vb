@@ -75,7 +75,7 @@ Partial Class dlgBarAndPieChart
         Me.cmdOptions.Size = New System.Drawing.Size(120, 25)
         Me.cmdOptions.TabIndex = 10
         Me.cmdOptions.Tag = "Plot_Options..."
-        Me.cmdOptions.Text = "Plot Options..."
+        Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'cmdPieChartOptions
@@ -147,6 +147,7 @@ Partial Class dlgBarAndPieChart
         Me.ucrSecondReceiver.Name = "ucrSecondReceiver"
         Me.ucrSecondReceiver.Selector = Nothing
         Me.ucrSecondReceiver.Size = New System.Drawing.Size(120, 20)
+        Me.ucrSecondReceiver.strNcFilePath = ""
         Me.ucrSecondReceiver.TabIndex = 7
         Me.ucrSecondReceiver.ucrSelector = Nothing
         '
@@ -158,6 +159,7 @@ Partial Class dlgBarAndPieChart
         Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
         Me.ucrFactorReceiver.Selector = Nothing
         Me.ucrFactorReceiver.Size = New System.Drawing.Size(120, 20)
+        Me.ucrFactorReceiver.strNcFilePath = ""
         Me.ucrFactorReceiver.TabIndex = 5
         Me.ucrFactorReceiver.ucrSelector = Nothing
         '

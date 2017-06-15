@@ -609,6 +609,7 @@ data_object$set("public", "rename_column_in_data", function(curr_col_name = "", 
 )
 
 data_object$set("public", "remove_columns_in_data", function(cols=c()) {
+  if(length(cols) == self$get_column_count()) stop("Cannot delete all columns through this function. Use delete_dataframe to delete the data.")
   for(col_name in cols) {
     # Column name must be character
     if(!is.character(col_name)) {
@@ -1238,7 +1239,6 @@ data_object$set("public", "get_column_names", function(as_list = FALSE, include 
     for(col in col_names) {
       if(length(include) > 0 || length(exclude) > 0) {
         curr_var_metadata <- self$get_variables_metadata(column = col, direct_from_attributes = TRUE)
-        print(curr_var_metadata)
         if(!data_type_label %in% names(curr_var_metadata)) curr_var_metadata[[data_type_label]] <- class(self$get_columns_from_data(col_names = col))
         #TODO this is a temp compatibility solution for how the class of ordered factor used to be shown when getting metadata
         if(length(curr_var_metadata[[data_type_label]]) == 2 && all(curr_var_metadata[[data_type_label]] %in% c("ordered", "factor"))) curr_var_metadata[[data_type_label]] <- "ordered,factor"
@@ -1511,7 +1511,7 @@ data_object$set("public", "get_object_names", function(type = "", as_list = FALS
   else {
     if(type == model_label) out = names(private$objects)[!sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "htmlTable") %in% class(x)))]
     else if(type == graph_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob") %in% class(x)))]
-    else if(type == table_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("htmlTable") %in% class(x)))]
+    else if(type == table_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("htmlTable", "data.frame") %in% class(x)))]
     else stop("type: ", type, " not recognised")
   }
   if(length(excluded_items) > 0) {
@@ -1733,13 +1733,15 @@ data_object$set("public", "graph_one_variable", function(columns, numeric = "geo
     }
   }
   if(output == "facets") {
-    if(length(column_types) > 1) {
+    if(length(unique(column_types)) > 1) {
       warning("Cannot do facets with graphs of different types. Combine graphs will be used instead.")
       output <- "combine"
     }
     else column_types <- unique(column_types)
   }
   if(output == "facets") {
+    # column_types will be unique by this point
+    column_types <- column_types[1]
     if(column_types == "numeric") {
       curr_geom <- numeric_geom
       curr_geom_name <- numeric
@@ -2473,7 +2475,6 @@ instat_object$set("public","get_corruption_column_name", function(data_name, typ
 
 data_object$set("public","get_corruption_column_name", function(type) {
   if(self$is_corruption_type_present(type)) {
-    print("yes")
     var_metadata <- self$get_variables_metadata()
     col_name <- var_metadata[!is.na(var_metadata[[corruption_type_label]]) & var_metadata[[corruption_type_label]] == type, name_label]
     if(length(col_name >= 1)) return(col_name)

@@ -74,7 +74,7 @@ Public Class dlgAddLink
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrDataSelectorFrom.cboAvailableDataFrames.Text <> "" AndAlso ucrDataSelectorTo.cboAvailableDataFrames.Text <> "" AndAlso Not ucrInputLinkName.IsEmpty AndAlso Not ucrInputSelectedKey.IsEmpty Then
+        If ucrDataSelectorFrom.cboAvailableDataFrames.Text <> "" AndAlso ucrDataSelectorTo.cboAvailableDataFrames.Text <> "" AndAlso Not ucrInputLinkName.IsEmpty AndAlso Not ucrInputSelectedKey.IsEmpty AndAlso IsSelectionValidKey() Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -148,6 +148,7 @@ Public Class dlgAddLink
             clsAddLink.RemoveParameterByName("link_pairs")
             ucrInputSelectedKey.SetName("")
         End If
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrDataSelectorTo_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDataSelectorTo.ControlValueChanged
@@ -158,4 +159,12 @@ Public Class dlgAddLink
     Private Sub ucrDataSelectorFrom_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataSelectorFrom.ControlContentsChanged, ucrInputLinkName.ControlContentsChanged, ucrInputSelectedKey.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
+    Private Function IsSelectionValidKey() As Boolean
+        If lvwLinkViewBox.SelectedItems.Count = 1 Then
+            Return lvwLinkViewBox.SelectedItems(0).BackColor = Color.LightGreen
+        Else
+            Return False
+        End If
+    End Function
 End Class

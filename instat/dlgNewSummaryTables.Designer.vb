@@ -83,7 +83,7 @@ Partial Class dlgNewSummaryTables
         '
         Me.ucrSaveTable.Location = New System.Drawing.Point(10, 472)
         Me.ucrSaveTable.Name = "ucrSaveTable"
-        Me.ucrSaveTable.Size = New System.Drawing.Size(219, 24)
+        Me.ucrSaveTable.Size = New System.Drawing.Size(255, 24)
         Me.ucrSaveTable.TabIndex = 13
         '
         'ucrChkOmitMissing
