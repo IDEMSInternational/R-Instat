@@ -23,8 +23,8 @@ Partial Class dlgOneWayFrequencies
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.grpSort = New System.Windows.Forms.GroupBox()
-        Me.rdoDescending = New System.Windows.Forms.RadioButton()
-        Me.rdoAscending = New System.Windows.Forms.RadioButton()
+        Me.rdoDescendingFrequencies = New System.Windows.Forms.RadioButton()
+        Me.rdoAscendingFrequencies = New System.Windows.Forms.RadioButton()
         Me.rdoNone = New System.Windows.Forms.RadioButton()
         Me.ucrPnlSort = New instat.UcrPanel()
         Me.cmdOptions = New System.Windows.Forms.Button()
@@ -47,38 +47,38 @@ Partial Class dlgOneWayFrequencies
         '
         'grpSort
         '
-        Me.grpSort.Controls.Add(Me.rdoDescending)
-        Me.grpSort.Controls.Add(Me.rdoAscending)
+        Me.grpSort.Controls.Add(Me.rdoDescendingFrequencies)
+        Me.grpSort.Controls.Add(Me.rdoAscendingFrequencies)
         Me.grpSort.Controls.Add(Me.rdoNone)
         Me.grpSort.Controls.Add(Me.ucrPnlSort)
         Me.grpSort.Location = New System.Drawing.Point(269, 201)
         Me.grpSort.Name = "grpSort"
-        Me.grpSort.Size = New System.Drawing.Size(120, 95)
+        Me.grpSort.Size = New System.Drawing.Size(163, 95)
         Me.grpSort.TabIndex = 7
         Me.grpSort.TabStop = False
         Me.grpSort.Text = "Sort"
         '
-        'rdoDescending
+        'rdoDescendingFrequencies
         '
-        Me.rdoDescending.AutoSize = True
-        Me.rdoDescending.Location = New System.Drawing.Point(10, 65)
-        Me.rdoDescending.Name = "rdoDescending"
-        Me.rdoDescending.Size = New System.Drawing.Size(82, 17)
-        Me.rdoDescending.TabIndex = 3
-        Me.rdoDescending.TabStop = True
-        Me.rdoDescending.Text = "Descending"
-        Me.rdoDescending.UseVisualStyleBackColor = True
+        Me.rdoDescendingFrequencies.AutoSize = True
+        Me.rdoDescendingFrequencies.Location = New System.Drawing.Point(10, 65)
+        Me.rdoDescendingFrequencies.Name = "rdoDescendingFrequencies"
+        Me.rdoDescendingFrequencies.Size = New System.Drawing.Size(143, 17)
+        Me.rdoDescendingFrequencies.TabIndex = 3
+        Me.rdoDescendingFrequencies.TabStop = True
+        Me.rdoDescendingFrequencies.Text = "Descending Frequencies"
+        Me.rdoDescendingFrequencies.UseVisualStyleBackColor = True
         '
-        'rdoAscending
+        'rdoAscendingFrequencies
         '
-        Me.rdoAscending.AutoSize = True
-        Me.rdoAscending.Location = New System.Drawing.Point(10, 43)
-        Me.rdoAscending.Name = "rdoAscending"
-        Me.rdoAscending.Size = New System.Drawing.Size(75, 17)
-        Me.rdoAscending.TabIndex = 2
-        Me.rdoAscending.TabStop = True
-        Me.rdoAscending.Text = "Ascending"
-        Me.rdoAscending.UseVisualStyleBackColor = True
+        Me.rdoAscendingFrequencies.AutoSize = True
+        Me.rdoAscendingFrequencies.Location = New System.Drawing.Point(10, 43)
+        Me.rdoAscendingFrequencies.Name = "rdoAscendingFrequencies"
+        Me.rdoAscendingFrequencies.Size = New System.Drawing.Size(136, 17)
+        Me.rdoAscendingFrequencies.TabIndex = 2
+        Me.rdoAscendingFrequencies.TabStop = True
+        Me.rdoAscendingFrequencies.Text = "Ascending Frequencies"
+        Me.rdoAscendingFrequencies.UseVisualStyleBackColor = True
         '
         'rdoNone
         '
@@ -95,7 +95,7 @@ Partial Class dlgOneWayFrequencies
         '
         Me.ucrPnlSort.Location = New System.Drawing.Point(3, 16)
         Me.ucrPnlSort.Name = "ucrPnlSort"
-        Me.ucrPnlSort.Size = New System.Drawing.Size(114, 69)
+        Me.ucrPnlSort.Size = New System.Drawing.Size(154, 69)
         Me.ucrPnlSort.TabIndex = 0
         '
         'cmdOptions
@@ -196,6 +196,7 @@ Partial Class dlgOneWayFrequencies
         Me.ucrReceiverWeights.Name = "ucrReceiverWeights"
         Me.ucrReceiverWeights.Selector = Nothing
         Me.ucrReceiverWeights.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverWeights.strNcFilePath = ""
         Me.ucrReceiverWeights.TabIndex = 10
         Me.ucrReceiverWeights.ucrSelector = Nothing
         '
@@ -240,6 +241,7 @@ Partial Class dlgOneWayFrequencies
         Me.ucrReceiverOneWayFreq.Name = "ucrReceiverOneWayFreq"
         Me.ucrReceiverOneWayFreq.Selector = Nothing
         Me.ucrReceiverOneWayFreq.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverOneWayFreq.strNcFilePath = ""
         Me.ucrReceiverOneWayFreq.TabIndex = 6
         Me.ucrReceiverOneWayFreq.ucrSelector = Nothing
         '
@@ -254,7 +256,7 @@ Partial Class dlgOneWayFrequencies
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 408)
+        Me.ClientSize = New System.Drawing.Size(434, 408)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrReceiverOneWayFreq)
         Me.Controls.Add(Me.rdoBoth)
@@ -287,8 +289,8 @@ Partial Class dlgOneWayFrequencies
     Friend WithEvents ucrSelectorOneWayFreq As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents grpSort As GroupBox
-    Friend WithEvents rdoDescending As RadioButton
-    Friend WithEvents rdoAscending As RadioButton
+    Friend WithEvents rdoDescendingFrequencies As RadioButton
+    Friend WithEvents rdoAscendingFrequencies As RadioButton
     Friend WithEvents rdoNone As RadioButton
     Friend WithEvents ucrPnlSort As UcrPanel
     Friend WithEvents cmdOptions As Button

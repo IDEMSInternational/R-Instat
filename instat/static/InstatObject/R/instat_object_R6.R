@@ -384,11 +384,11 @@ instat_object$set("public", "add_columns_to_data", function(data_name, col_name 
 }
 )
 
-instat_object$set("public", "get_columns_from_data", function(data_name, col_names, from_stacked_data = FALSE, force_as_data_frame = FALSE, use_current_filter = TRUE) {
+instat_object$set("public", "get_columns_from_data", function(data_name, col_names, from_stacked_data = FALSE, force_as_data_frame = FALSE, use_current_filter = TRUE, remove_labels = FALSE) {
   if(missing(data_name)) stop("data_name is required")
   if(!from_stacked_data) {
     if(!data_name %in% names(private$.data_objects)) stop(data_name, "not found")
-    self$get_data_objects(data_name)$get_columns_from_data(col_names, force_as_data_frame, use_current_filter = use_current_filter)
+    self$get_data_objects(data_name)$get_columns_from_data(col_names, force_as_data_frame, use_current_filter = use_current_filter, remove_labels = remove_labels)
   }
   else {
     if(!exists(data_name)) stop(paste(data_name, "not found."))
@@ -455,7 +455,8 @@ instat_object$set("public", "get_object_names", function(data_name, include_over
   if(missing(data_name)) {
     if(missing(type)) out = sapply(self$get_data_objects(), function(x) x$get_object_names()) 
     else out = sapply(self$get_data_objects(), function(x) x$get_object_names(type = type))
-    if(include_overall) out[[overall_label]] <- overall_object_names
+    #temp disabled as causes a bug
+    #if(include_overall) out[[overall_label]] <- overall_object_names
     if(!include_empty) out = out[sapply(out, function(x) length(x) > 0)]
     if(as_list) out = as.list(out)
     return(out)
@@ -637,9 +638,9 @@ instat_object$set("public", "filter_string", function(data_name, filter_name) {
 }
 )
 
-instat_object$set("public", "replace_value_in_data", function(data_name, col_names, rows, old_value, old_is_missing = FALSE, start_value = NA, end_value = NA, new_value, new_is_missing = FALSE, closed_start_value = TRUE, closed_end_value = TRUE) {
-  self$get_data_objects(data_name)$replace_value_in_data(col_names, rows, old_value, old_is_missing, start_value, end_value, new_value, new_is_missing, closed_start_value, closed_end_value)
-} 
+instat_object$set("public", "replace_value_in_data", function(data_name, col_names, rows, old_value, old_is_missing = FALSE, start_value = NA, end_value = NA, new_value, new_is_missing = FALSE, closed_start_value = TRUE, closed_end_value = TRUE, locf = FALSE, from_last = FALSE) {
+  self$get_data_objects(data_name)$replace_value_in_data(col_names, rows, old_value, old_is_missing, start_value, end_value, new_value, new_is_missing, closed_start_value, closed_end_value, locf, from_last)
+}
 )
 
 instat_object$set("public", "rename_column_in_data", function(data_name, column_name, new_val, label = "") {
@@ -1253,8 +1254,8 @@ instat_object$set("public", "has_database_connection", function() {
 }
 )
 
-instat_object$set("public", "database_connect", function(dbname, user, host, port, drv = MySQL(), password) {
-  #password <- getPass(paste0(username, " password:"))
+instat_object$set("public", "database_connect", function(dbname, user, host, port, drv = RMySQL::MySQL()) {
+ password <- getPass::getPass(paste0(user, " password:"))
   out <- NULL
   out <- DBI::dbConnect(drv = drv, dbname = dbname, user = user, password = password, host = host, port = port)
   if(!is.null(out)) {
@@ -1284,8 +1285,10 @@ instat_object$set("public", "database_disconnect", function() {
 instat_object$set("public", "import_from_climsoft", function(stations = c(), elements = c(), include_observation_data = FALSE, start_date = "", end_date = "") {
   #need to perform checks here
   con = self$get_database_connection()
-  my_stations = paste0("(", paste(as.character(stations), collapse=", "), ")")
-  station_info <- DBI::dbGetQuery(con, paste0("SELECT * FROM station WHERE stationID in ", my_stations, ";"))
+  if(!is.null(stations)){
+    my_stations = paste0("(", paste(as.character(stations), collapse=", "), ")")
+    station_info <- DBI::dbGetQuery(con, paste0("SELECT * FROM station WHERE stationID in ", my_stations, ";"))
+  }
   date_bounds=""
   if(start_date!=""){
     if(try(!is.na(as.Date( start_date, format= "%Y-%m-%d")))){
@@ -1295,7 +1298,6 @@ instat_object$set("public", "import_from_climsoft", function(stations = c(), ele
       stop("start_date format should be yyyy-mm-yy.")
     }
   }
-  
   if(end_date!=""){
     if(try(!is.na(as.Date(end_date, format= "%Y-%m-%d")))){
       date_bounds = paste0(date_bounds, " AND obsDatetime <",sQuote(end_date))
@@ -1311,7 +1313,15 @@ instat_object$set("public", "import_from_climsoft", function(stations = c(), ele
     element_id_vec = paste0("(", paste0(sprintf("%d", element_ids$elementID), collapse = ", "), ")")
   }
   if(include_observation_data){
-    station_data <- DBI::dbGetQuery(con, paste0("SELECT observationfinal.recordedFrom, observationfinal.describedBy, obselement.abbreviation, obselement.elementName,observationfinal.obsDatetime,observationfinal.obsValue FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy AND observationfinal.recordedFrom IN", my_stations, "AND observationfinal.describedBy IN", element_id_vec, date_bounds, " ORDER BY observationfinal.recordedFrom, observationfinal.describedBy;"))
+    if(!is.null(stations)){
+      station_data <-  DBI::dbGetQuery(con, paste0("SELECT observationfinal.recordedFrom, observationfinal.describedBy, obselement.abbreviation, obselement.elementName,observationfinal.obsDatetime,observationfinal.obsValue FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy AND observationfinal.recordedFrom IN", my_stations, "AND observationfinal.describedBy IN", element_id_vec, date_bounds, " ORDER BY observationfinal.recordedFrom, observationfinal.describedBy;"))
+    }
+    else{
+      station_data <-  DBI::dbGetQuery(con, paste0("SELECT observationfinal.recordedFrom, observationfinal.describedBy, obselement.abbreviation, obselement.elementName,observationfinal.obsDatetime,observationfinal.obsValue FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy AND observationfinal.describedBy IN", element_id_vec, date_bounds, " ORDER BY observationfinal.recordedFrom, observationfinal.describedBy;"))
+      my_stations = paste0("(", paste(as.character(unique(station_data$recordedFrom)), collapse=", "), ")")
+      station_info <-  DBI::dbGetQuery(con, paste0("SELECT * FROM station WHERE stationID in ", my_stations, ";"))
+    }
+
     data_list <- list(station_info, station_data)
     names(data_list) = c("station_info","station_data")
   }

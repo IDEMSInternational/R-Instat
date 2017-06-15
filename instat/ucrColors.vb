@@ -16,12 +16,38 @@
 
 Public Class ucrColors
     Private strPickColour As String = "Pick Colour..."
-    Private strColours As String() = {"NULL", strPickColour, Chr(34) & "black" & Chr(34), Chr(34) & "white" & Chr(34), Chr(34) & "blue" & Chr(34), Chr(34) & "red" & Chr(34), Chr(34) & "yellow" & Chr(34), Chr(34) & "purple" & Chr(34), Chr(34) & "green" & Chr(34), Chr(34) & "orange" & Chr(34), Chr(34) & "grey" & Chr(34), Chr(34) & "brown" & Chr(34), Chr(34) & "pink" & Chr(34)}
+    Private dctColours As New Dictionary(Of String, String)
     'TODO move this to a global location so that all controls can access the same colour dialog and user defined colours are kept
     Private dlgColour As New ColorDialog
 
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        If dctColours.Count = 0 Then
+            dctColours.Add("NULL", "NULL")
+            dctColours.Add(strPickColour, strPickColour)
+            dctColours.Add("Black", Chr(34) & "black" & Chr(34))
+            dctColours.Add("White", Chr(34) & "white" & Chr(34))
+            dctColours.Add("Blue", Chr(34) & "blue" & Chr(34))
+            dctColours.Add("Red", Chr(34) & "red" & Chr(34))
+            dctColours.Add("Yellow", Chr(34) & "yellow" & Chr(34))
+            dctColours.Add("Purple", Chr(34) & "purple" & Chr(34))
+            dctColours.Add("Green", Chr(34) & "green" & Chr(34))
+            dctColours.Add("Orange", Chr(34) & "orange" & Chr(34))
+            dctColours.Add("Grey", Chr(34) & "grey" & Chr(34))
+            dctColours.Add("Brown", Chr(34) & "brown" & Chr(34))
+            dctColours.Add("Pink", Chr(34) & "pink" & Chr(34))
+        End If
+        bAllowNonConditionValues = True
+    End Sub
+
     Private Sub ucrColors_Load(sender As Object, e As EventArgs) Handles Me.Load
-        SetItems(strColours)
+        If GetParameter() IsNot Nothing Then
+            SetItems(dctColours)
+        End If
     End Sub
 
     Private Sub ucrColors_NameChanged() Handles Me.NameChanged
@@ -34,7 +60,7 @@ Public Class ucrColors
                     clrTemp = dlgColour.Color
                     'first two character from Hex are fixed as FF for VB use, not part of colour value
                     'ggplot requires # in front of Hex colour values
-                    strColourItem = Chr(34) & "#" & Hex(clrTemp.ToArgb).Substring(2, 6) & Chr(34)
+                    strColourItem = "#" & Hex(clrTemp.ToArgb).Substring(2, 6)
                     'First item is NULL and needs to be changed before setting text otherwise value will not show in combobox
                     cboInput.Items.Item(0) = strColourItem
                     SetName(strColourItem)

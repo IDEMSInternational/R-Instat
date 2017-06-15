@@ -1,6 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class ucrReceiverMetadataProperty
-    Inherits System.Windows.Forms.UserControl
+    Inherits instat.ucrCore
 
     'UserControl overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()>
@@ -23,7 +23,7 @@ Partial Class ucrReceiverMetadataProperty
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.ucrInputTextValue = New instat.ucrInputTextBox()
-        Me.ucrCboParamValue = New instat.ucrInputComboBox()
+        Me.ucrInputCboParamValue = New instat.ucrInputComboBox()
         Me.ucrColor = New instat.ucrColors()
         Me.ucrNudParamValue = New instat.ucrNud()
         Me.SuspendLayout()
@@ -39,15 +39,15 @@ Partial Class ucrReceiverMetadataProperty
         Me.ucrInputTextValue.Size = New System.Drawing.Size(140, 22)
         Me.ucrInputTextValue.TabIndex = 11
         '
-        'ucrCboParamValue
+        'ucrInputCboParamValue
         '
-        Me.ucrCboParamValue.AddQuotesIfUnrecognised = True
-        Me.ucrCboParamValue.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ucrCboParamValue.IsReadOnly = False
-        Me.ucrCboParamValue.Location = New System.Drawing.Point(0, 0)
-        Me.ucrCboParamValue.Name = "ucrCboParamValue"
-        Me.ucrCboParamValue.Size = New System.Drawing.Size(140, 22)
-        Me.ucrCboParamValue.TabIndex = 10
+        Me.ucrInputCboParamValue.AddQuotesIfUnrecognised = True
+        Me.ucrInputCboParamValue.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ucrInputCboParamValue.IsReadOnly = False
+        Me.ucrInputCboParamValue.Location = New System.Drawing.Point(0, 0)
+        Me.ucrInputCboParamValue.Name = "ucrInputCboParamValue"
+        Me.ucrInputCboParamValue.Size = New System.Drawing.Size(140, 22)
+        Me.ucrInputCboParamValue.TabIndex = 10
         '
         'ucrColor
         '
@@ -78,7 +78,7 @@ Partial Class ucrReceiverMetadataProperty
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.ucrNudParamValue)
         Me.Controls.Add(Me.ucrInputTextValue)
-        Me.Controls.Add(Me.ucrCboParamValue)
+        Me.Controls.Add(Me.ucrInputCboParamValue)
         Me.Controls.Add(Me.ucrColor)
         Me.Name = "ucrReceiverMetadataProperty"
         Me.Size = New System.Drawing.Size(140, 22)
@@ -86,7 +86,7 @@ Partial Class ucrReceiverMetadataProperty
 
     End Sub
     Friend WithEvents ucrColor As ucrColors
-    Friend WithEvents ucrCboParamValue As ucrInputComboBox
+    Friend WithEvents ucrInputCboParamValue As ucrInputComboBox
     Friend WithEvents ucrInputTextValue As ucrInputTextBox
     Friend WithEvents ucrNudParamValue As ucrNud
 End Class

@@ -45,7 +45,7 @@ Partial Class dlgUseGraph
         Me.cmdPlotOptions.Name = "cmdPlotOptions"
         Me.cmdPlotOptions.Size = New System.Drawing.Size(108, 23)
         Me.cmdPlotOptions.TabIndex = 3
-        Me.cmdPlotOptions.Text = "Plot Options"
+        Me.cmdPlotOptions.Text = "Options"
         Me.cmdPlotOptions.UseVisualStyleBackColor = True
         '
         'ucrSaveGraph
