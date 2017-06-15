@@ -39,7 +39,7 @@ Public Class dlgDotPlot
     'bEditAesFunction is used to avoid the aesthetics to be edited within clsRaesFunction when the receivers are actually setup according to the content of clsRaesFunction (for example coming back from LayerOptions).
     Private bEditAesFunction As Boolean
     Private clsLocalRaesFunction As New RFunction
-    Private bResetLayerSubdialog As Boolean = True
+    Private bResetDotLayerSubdialog As Boolean = True
 
     Private Sub dlgDotPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -170,8 +170,9 @@ Public Class dlgDotPlot
         'This sub handles a call of the options which opens the LayerOptions sdg.
         Dim iIndex As Integer
         bEditAesFunction = False 'The content of the AesFunction should not be edited when we are setting up the dialogue according to the content of AesFunction, when coming back from LayerOptions.
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggPlotFunction, clsNewGeomFunc:=clsRDotplotGeomFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrDotPlotSelector, bApplyAesGlobally:=True, bReset:=bResetLayerSubdialog)
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggPlotFunction, clsNewGeomFunc:=clsRDotplotGeomFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrDotPlotSelector, bApplyAesGlobally:=True, bReset:=bResetDotLayerSubdialog)
         sdgLayerOptions.ShowDialog()
+        bResetDotLayerSubdialog = False
         iIndex = clsRDotplotGeomFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "binaxis")
         If iIndex <> -1 AndAlso clsRDotplotGeomFunction.clsParameters(iIndex).strArgumentValue = Chr(34) & "y" & Chr(34) Then
             rdoYBinAxis.Checked = True
