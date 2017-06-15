@@ -55,16 +55,6 @@ Public Class dlgOpenNetCDF
         TestOkEnabled()
     End Sub
 
-    Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrInputDataName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrInputLocDataName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrInputFilePath.SetRCode(clsOpenCDF, bReset)
-        ucrReceiverLatName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrReceiverLonName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrReceiverTimeName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrChkAddDateTime.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-    End Sub
-
     Private Sub InitialiseDialog()
         'ucrBase.iHelpTopicID = 
         Dim kvpLat As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("lat", {"lat", "Y"}.ToList())
@@ -138,12 +128,33 @@ Public Class dlgOpenNetCDF
         AutoFillReceivers()
     End Sub
 
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrInputDataName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrInputLocDataName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrInputFilePath.SetRCode(clsOpenCDF, bReset)
+        ucrReceiverLatName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrReceiverLonName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrReceiverTimeName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrChkAddDateTime.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
     Private Sub TestOkEnabled()
-        If Not ucrReceiverLatName.IsEmpty() AndAlso Not ucrReceiverLonName.IsEmpty() AndAlso ucrInputDataName.GetText() <> "" AndAlso ucrInputLocDataName.GetText() <> "" AndAlso ucrInputFilePath.GetText() <> "" AndAlso (Not ucrInputDataName.GetText() = ucrInputLocDataName.GetText()) Then
+        If ucrInputDataName.GetText() <> "" AndAlso ucrInputLocDataName.GetText() <> "" AndAlso ucrInputFilePath.GetText() <> "" AndAlso (Not ucrInputDataName.GetText() = ucrInputLocDataName.GetText()) Then ' AndAlso Not ucrReceiverLatName.IsEmpty() AndAlso Not ucrReceiverLonName.IsEmpty() 
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
+    End Sub
+
+    Private Sub cmdOpenDataSet_Click(sender As Object, e As EventArgs) Handles cmdOpenDataSet.Click
+        GetFileFromOpenDialog()
+        TestOkEnabled()
     End Sub
 
     Private Sub SetRSelector()
@@ -154,12 +165,6 @@ Public Class dlgOpenNetCDF
             ucrTempReceiver.SetParameterIsString()
             ucrTempReceiver.bExcludeFromSelector = True
         Next
-    End Sub
-
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
-        SetRCodeForControls(True)
-        TestOkEnabled()
     End Sub
 
     'Loads the open dialog on load and click
@@ -194,23 +199,6 @@ Public Class dlgOpenNetCDF
                 End If
             End If
         End Using
-    End Sub
-
-    Private Sub cmdOpenDataSet_Click(sender As Object, e As EventArgs) Handles cmdOpenDataSet.Click
-        GetFileFromOpenDialog()
-        TestOkEnabled()
-    End Sub
-
-    Private Sub ucrInputFilePath_ControlValueChanged() Handles ucrInputFilePath.StrictNameChanged
-        AutoFillReceivers()
-        ucrReceiverLatName.strNcFilePath = ucrInputFilePath.GetText()
-        ucrReceiverLonName.strNcFilePath = ucrInputFilePath.GetText()
-        ucrReceiverTimeName.strNcFilePath = ucrInputFilePath.GetText()
-        strCurrentFile = ucrInputFilePath.GetText()
-    End Sub
-
-    Private Sub Receivers_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLatName.ControlContentsChanged, ucrReceiverLonName.ControlContentsChanged, ucrInputDataName.ControlContentsChanged, ucrInputLocDataName.ControlContentsChanged
-        TestOkEnabled()
     End Sub
 
     Private Sub AutoFillReceivers()
@@ -258,6 +246,18 @@ Public Class dlgOpenNetCDF
         Next
         Return lstValues
     End Function
+
+    Private Sub ucrInputFilePath_ControlValueChanged() Handles ucrInputFilePath.StrictNameChanged
+        AutoFillReceivers()
+        ucrReceiverLatName.strNcFilePath = ucrInputFilePath.GetText()
+        ucrReceiverLonName.strNcFilePath = ucrInputFilePath.GetText()
+        ucrReceiverTimeName.strNcFilePath = ucrInputFilePath.GetText()
+        strCurrentFile = ucrInputFilePath.GetText()
+    End Sub
+
+    Private Sub Receivers_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLatName.ControlContentsChanged, ucrReceiverLonName.ControlContentsChanged, ucrInputDataName.ControlContentsChanged, ucrInputLocDataName.ControlContentsChanged
+        TestOkEnabled()
+    End Sub
 
     Private Sub Selector_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorNetCDF.ControlContentsChanged
         AutoFillReceivers()
