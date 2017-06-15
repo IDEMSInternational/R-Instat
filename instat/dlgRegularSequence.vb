@@ -106,6 +106,13 @@ Public Class dlgRegularSequence
         clsSeqFunction = New RFunction
         ucrSelectDataFrameRegularSequence.Reset()
         ucrNewColumnName.Reset()
+        'temporary fix
+        ucrInputFrom.Reset()
+        ucrInputTo.Reset()
+        ucrInputFrom.SetName("1")
+        ucrInputInStepsOf.SetName("1")
+        ucrNudRepeatValues.Value = 1
+        ucrInputTo.SetName(ucrDataFrameLengthForRegularSequence.ucrDataFrameSelector.iDataFrameLength)
 
         clsSeqFunction.SetRCommand("seq")
         clsSeqFunction.AddParameter("from", 1)
@@ -116,7 +123,7 @@ Public Class dlgRegularSequence
         clsRepFunction.AddParameter("x", clsRFunctionParameter:=clsSeqFunction)
         clsRepFunction.AddParameter("each", 1)
         clsRepFunction.AddParameter("length.out", ucrSelectDataFrameRegularSequence.iDataFrameLength, iPosition:=3)
-        'clsSeqFunction.SetAssignTo(ucrNewColumnName.GetText, strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText)
+        ' clsSeqFunction.SetAssignTo(ucrNewColumnName.GetText, strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText)
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnName.GetText, strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText)
         ucrBase.clsRsyntax.SetBaseRFunction(clsRepFunction)
         CheckSequenceLength()
