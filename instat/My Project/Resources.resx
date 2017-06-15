@@ -1570,4 +1570,16 @@
   <data name="No_Distribution" xml:space="preserve">
     <value>No Distribution</value>
   </data>
+  <data name="DF1" xml:space="preserve">
+    <value>DF1</value>
+  </data>
+  <data name="DF2" xml:space="preserve">
+    <value>DF2</value>
+  </data>
+  <data name="Shape1" xml:space="preserve">
+    <value>Shape1</value>
+  </data>
+  <data name="Shape2" xml:space="preserve">
+    <value>Shape2</value>
+  </data>
 </root>

@@ -32,6 +32,7 @@ Public Class dlgPrincipalComponentAnalysis
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBasePCA.clsRsyntax.SetPackageName("FactoMineR")
         ucrBasePCA.clsRsyntax.SetFunction("PCA")
         ucrBasePCA.clsRsyntax.iCallType = 0
         ucrReceiverMultiplePCA.Selector = ucrSelectorPCA

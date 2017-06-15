@@ -13,110 +13,193 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports instat.Translations
 
+Imports instat.Translations
 Public Class sdgOneVarUseModFit
-    Private clsRplotFunction As New RFunction
-    Public clsRbootFunction As New RFunction
-    Private clsRseqFunction As New RFunction
-    Private clsModel As New RFunction
-    Public clsRsyntax As New RSyntax
+    Private bControlsInitialised As Boolean = False
+    Private clsRSeqFunction, clsOneVarRBootFunction, clsOneVarQuantileFunction, clsRBootFunction, clsRReceiver, clsRPlotFunction As New RFunction
     Public bfirstload As Boolean = True
 
     Private Sub sdgOneVarFitModDisplay(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
 
-    Public Sub InitialiseDialog()
-        nudFrom.Minimum = 0
-        nudFrom.Maximum = 1
-        nudFrom.Increment = 0.05
-        nudTo.Minimum = 0
-        nudTo.Maximum = 1
-        nudTo.Increment = 0.05
-        nudBy.Minimum = 0.001
-        nudBy.Maximum = 1
-        nudBy.Increment = 0.05
-    End Sub
+    Public Sub InitialiseControls()
+        Dim dctQuantileValues As New Dictionary(Of String, String)
 
-    Public Sub SetDefaults()
-        rdoPlotAll.Checked = True
-        rdoSeqValues.Checked = True
-        rdoInsertValues.Enabled = False
-        ucrInputValues.Enabled = False
+        ucrNudIterations.SetParameter(New RParameter("niter", 1))
+        ucrNudIterations.SetMinMax(1, 10001)
+        ucrNudIterations.SetRDefault(1001)
+        ucrNudIterations.Increment = 100
+
+        ucrNudCI.SetParameter(New RParameter("CI.level", 1))
+        ucrNudCI.SetMinMax(0, 1)
+        ucrNudCI.SetRDefault(0.95)
+        ucrNudCI.Increment = 0.05
+
+        ucrChkParametric.SetParameter(New RParameter("bootmethod", 2), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "param" & Chr(34), strNewValueIfUnchecked:=Chr(34) & "nonparam" & Chr(34))
+        ucrChkParametric.SetText("Parametric")
+        ucrChkParametric.SetRDefault(Chr(34) & "param" & Chr(34))
+
+        ' "probs" parameter:
+        ucrPnlQuantiles.AddRadioButton(rdoSequence)
+        ucrPnlQuantiles.AddRadioButton(rdoInsertValues)
+        ucrPnlQuantiles.AddFunctionNamesCondition(rdoSequence, "seq")
+        ucrPnlQuantiles.AddFunctionNamesCondition(rdoInsertValues, "quantile")
+
+        '1. Function ran here is probs = seq(from = , to = , by =)
+        ucrNudFrom.SetParameter(New RParameter("from", 1))
+        ucrNudFrom.SetMinMax(0, 1)
+        ucrNudFrom.Increment = 0.05
+        ucrNudFrom.SetRDefault(0)
+
+        ucrNudTo.SetParameter(New RParameter("to", 2))
+        ucrNudTo.SetMinMax(0, 1)
+        ucrNudTo.Increment = 0.05
+        ucrNudFrom.SetRDefault(1)
+
+        ucrNudBy.SetParameter(New RParameter("by", 3))
+        ucrNudBy.SetMinMax(0.01, 1)
+        ucrNudBy.Increment = 0.05
+        ucrNudFrom.SetRDefault(0.25)
+
+        'function ran here is probs = c(VALUES)
+        dctQuantileValues.Add("0.25, 0.5, 0.75", "0.25, 0.5, 0.75")
+        dctQuantileValues.Add("0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9", "0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9")
+        ucrInputQuantiles.SetParameter(New RParameter("x"))
+        ucrInputQuantiles.SetItems(dctQuantileValues)
+        ucrInputQuantiles.SetDefaultState("0.25, 0.5, 0.75")
+        ucrInputQuantiles.bAllowNonConditionValues = True
+        ucrInputQuantiles.SetValidationTypeAsNumericList(dcmMin:=0, dcmMax:=1)
+
+        ucrPnlQuantiles.AddToLinkedControls(ucrInputQuantiles, {rdoInsertValues}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
+        ucrPnlQuantiles.AddToLinkedControls(ucrNudTo, {rdoSequence}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
+        ucrPnlQuantiles.AddToLinkedControls(ucrNudFrom, {rdoSequence}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
+        ucrPnlQuantiles.AddToLinkedControls(ucrNudBy, {rdoSequence}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
+        ucrNudTo.SetLinkedDisplayControl(lblTo)
+        ucrNudFrom.SetLinkedDisplayControl(lblFrom)
+        ucrNudBy.SetLinkedDisplayControl(lblBy)
+
+        ucrPnlPlots.AddRadioButton(rdoNoPlot)
+        ucrPnlPlots.AddRadioButton(rdoPlotAll)
+        ucrPnlPlots.AddRadioButton(rdoPPPlot)
+        ucrPnlPlots.AddRadioButton(rdoCDFPlot)
+        ucrPnlPlots.AddRadioButton(rdoQQPlot)
+        ucrPnlPlots.AddRadioButton(rdoDensityPlot)
+        ucrPnlPlots.AddRadioButton(rdoCIcdf)
+
+        ucrPnlPlots.AddFunctionNamesCondition(rdoNoPlot, "")
+        ucrPnlPlots.AddFunctionNamesCondition(rdoPlotAll, "plot")
+        ucrPnlPlots.AddFunctionNamesCondition(rdoPPPlot, "ppcomp")
+        ucrPnlPlots.AddFunctionNamesCondition(rdoCDFPlot, "cdfcomp")
+        ucrPnlPlots.AddFunctionNamesCondition(rdoQQPlot, "qqcomp")
+        ucrPnlPlots.AddFunctionNamesCondition(rdoDensityPlot, "denscomp")
+        ucrPnlPlots.AddFunctionNamesCondition(rdoCIcdf, "CIcdfplot")
+        InitialiseTabs()
         SetPlotOptions()
-        nudFrom.Value = 0
-        nudTo.Value = 1
-        nudBy.Value = 0.1
+
+        ' rdoNoPlot.Enabled = False ' temporary
+        bControlsInitialised = True
     End Sub
 
-    Public Sub SetModelFunction(clsNewModel As RFunction)
-        clsModel = clsNewModel
+    Public Sub SetRFunction(clsNewRSeqFunction As RFunction, clsNewRBootFunction As RFunction, clsNewQuantileFunction As RFunction, clsNewReceiver As RFunction, clsNewPlotFunction As RFunction, Optional bReset As Boolean = False)
+        If Not bControlsInitialised Then
+            InitialiseControls()
+        End If
+
+        clsRSeqFunction = clsNewRSeqFunction
+        clsOneVarRBootFunction = clsNewRBootFunction
+        clsOneVarQuantileFunction = clsNewQuantileFunction
+        clsRReceiver = clsNewReceiver
+        clsRPlotFunction = clsNewPlotFunction
+
+        'Setting Rcode for the sub dialog
+        ucrNudFrom.SetRCode(clsRSeqFunction, bReset)
+        ucrNudTo.SetRCode(clsRSeqFunction, bReset)
+        ucrNudBy.SetRCode(clsRSeqFunction, bReset)
+        ucrChkParametric.SetRCode(clsOneVarRBootFunction, bReset)
+        ucrNudIterations.SetRCode(clsOneVarRBootFunction, bReset)
+        ucrNudCI.SetRCode(clsOneVarQuantileFunction, bReset)
+        ucrPnlPlots.SetRCode(clsRPlotFunction, bReset)
+        ucrPnlQuantiles.SetRCode(clsRSeqFunction, bReset)
+
+        If bReset Then
+            tbpOneVarUseModFit.SelectedIndex = 0
+        End If
     End Sub
 
     Public Sub CreateGraphs()
         If rdoPlotAll.Checked Then
-            clsRplotFunction.ClearParameters()
-            clsRplotFunction.SetRCommand("plot")
-            clsRplotFunction.AddParameter("x", clsRFunctionParameter:=dlgOneVarUseModel.ucrReceiver.GetVariables())
+            clsRPlotFunction.ClearParameters()
+            clsRPlotFunction.SetPackageName("graphics")
+            clsRPlotFunction.SetRCommand("plot")
+            clsRPlotFunction.AddParameter("x", clsRFunctionParameter:=clsRReceiver)
         ElseIf rdoPPPlot.Checked Then
-            clsRplotFunction.ClearParameters()
-            clsRplotFunction.SetRCommand("ppcomp")
-            clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarUseModel.ucrReceiver.GetVariables())
+            clsRPlotFunction.RemoveParameterByName("x")
+            clsRPlotFunction.ClearParameters()
+            clsRPlotFunction.SetPackageName("fitdistrplus")
+            clsRPlotFunction.SetRCommand("ppcomp")
+            clsRPlotFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
         ElseIf rdoCDFPlot.Checked Then
-            clsRplotFunction.ClearParameters()
-            clsRplotFunction.SetRCommand("cdfcomp")
-            clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarUseModel.ucrReceiver.GetVariables())
+            clsRPlotFunction.ClearParameters()
+            clsRPlotFunction.RemoveParameterByName("x")
+            clsRPlotFunction.SetPackageName("fitdistrplus")
+            clsRPlotFunction.SetRCommand("cdfcomp")
+            clsRPlotFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
         ElseIf rdoQQPlot.Checked Then
-            clsRplotFunction.ClearParameters()
-            clsRplotFunction.SetRCommand("qqcomp")
-            clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarUseModel.ucrReceiver.GetVariables())
+            clsRPlotFunction.RemoveParameterByName("x")
+            clsRPlotFunction.ClearParameters()
+            clsRPlotFunction.SetPackageName("fitdistrplus")
+            clsRPlotFunction.SetRCommand("qqcomp")
+            clsRPlotFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
         ElseIf rdoDensityPlot.Checked Then
-            clsRplotFunction.ClearParameters()
-            clsRplotFunction.SetRCommand("denscomp")
-            clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarUseModel.ucrReceiver.GetVariables())
+            clsRPlotFunction.RemoveParameterByName("x")
+            clsRPlotFunction.ClearParameters()
+            clsRPlotFunction.SetPackageName("fitdistrplus")
+            clsRPlotFunction.SetRCommand("denscomp")
+            clsRPlotFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
         ElseIf rdoCIcdf.Checked Then
-            clsRplotFunction.ClearParameters()
-            clsRplotFunction.SetRCommand("CIcdfplot")
-            clsRplotFunction.AddParameter("b", clsRFunctionParameter:=clsRbootFunction)
-            clsRplotFunction.AddParameter("CI.output", Chr(34) & "quantile" & Chr(34))
+            clsRPlotFunction.RemoveParameterByName("x")
+            clsRPlotFunction.ClearParameters()
+            clsRPlotFunction.SetPackageName("fitdistrplus")
+            clsRPlotFunction.SetRCommand("CIcdfplot")
+            dlgOneVarUseModel.clsRBootFunction.RemoveParameterByName("bootmethod")
+            dlgOneVarUseModel.clsRBootFunction.RemoveParameterByName("niter")
+            clsRPlotFunction.AddParameter("b", clsRFunctionParameter:=clsOneVarRBootFunction)
+            clsRPlotFunction.AddParameter("CI.output", Chr(34) & "quantile" & Chr(34))
         End If
-        frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 2)
-    End Sub
-
-    Public Sub SetMyBootFunction(clsRNewBoot As RFunction)
-        clsRbootFunction = clsRNewBoot
-    End Sub
-
-    Public Sub SetMyRSyntax(clsRNewSyntax As RSyntax)
-        clsRsyntax = clsRNewSyntax
-    End Sub
-
-    Private Sub nudSeq_ValueChanged(sender As Object, e As EventArgs) Handles nudFrom.ValueChanged, nudTo.ValueChanged, nudBy.ValueChanged
-        clsRseqFunction.SetRCommand("seq")
-        clsRseqFunction.AddParameter("from", nudFrom.Value.ToString())
-        clsRseqFunction.AddParameter("to", nudTo.Value.ToString())
-        clsRseqFunction.AddParameter("by", nudBy.Value.ToString())
-        clsRsyntax.AddParameter("probs", clsRFunctionParameter:=clsRseqFunction)
     End Sub
 
     Public Sub SetPlotOptions()
-        If Not dlgOneVarUseModel.chkProduceBootstrap.Checked Then
+        If Not dlgOneVarUseModel.ucrChkProduceBootstrap.Checked Then
             rdoCIcdf.Enabled = False
+            tbpBootstrapOptions.Enabled = False
             If rdoCIcdf.Checked Then
                 rdoPlotAll.Checked = True
             End If
         Else
             rdoCIcdf.Enabled = True
+            tbpBootstrapOptions.Enabled = True
         End If
     End Sub
 
-    Private Sub rdoInsertValues_CheckedChanged(sender As Object, e As EventArgs) Handles rdoInsertValues.CheckedChanged
-        If rdoInsertValues.Checked Then
-            ucrInputValues.Enabled = True
+    Private Sub ucrBase_ClickReturn(sender As Object, e As EventArgs) Handles ucrBase.ClickReturn
+        QuantileCommand()
+        CreateGraphs()
+    End Sub
+
+    Public Sub QuantileCommand()
+        If rdoSequence.Checked Then
+            clsOneVarQuantileFunction.AddParameter("probs", clsRFunctionParameter:=clsRSeqFunction)
         Else
-            ucrInputValues.Enabled = False
+            clsOneVarQuantileFunction.AddParameter("probs", strParameterValue:="c(" & ucrInputQuantiles.GetText & ")")
         End If
     End Sub
 
+    Private Sub InitialiseTabs()
+        For i = 0 To tbpOneVarUseModFit.TabCount - 1
+            tbpOneVarUseModFit.SelectedIndex = i
+        Next
+        tbpOneVarUseModFit.SelectedIndex = 0
+    End Sub
 End Class

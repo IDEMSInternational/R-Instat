@@ -39,7 +39,7 @@ Public Class dlgExportGraphAsImage
 
         ucrSelectedGraphReceiver.SetParameter(New RParameter("plot", 1))
         ucrSelectedGraphReceiver.SetParameterIsRFunction()
-        ucrSelectorGraphAsImage.SetItemType("graph")
+        ucrSelectedGraphReceiver.SetItemType("graph")
         ucrSelectedGraphReceiver.strSelectorHeading = "Graphs"
         ucrSelectedGraphReceiver.Selector = ucrSelectorGraphAsImage
         ucrSelectedGraphReceiver.SetMeAsReceiver()

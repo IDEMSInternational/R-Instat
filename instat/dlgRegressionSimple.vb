@@ -111,8 +111,8 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub SetTTest()
-        clsRTTest.SetRCommand("t.test")
         clsRTTest.SetPackageName("mosaic")
+        clsRTTest.SetRCommand("t.test")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRTTest)
         clsRTTest.AddParameter("conf.level", nudCI.Value.ToString())
         clsRTTest.AddParameter("data", clsRFunctionParameter:=ucrSelectorSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame)
@@ -134,8 +134,8 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub SetFTest()
-        clsRFTest.SetRCommand("var.test")
         clsRFTest.SetPackageName("stats")
+        clsRFTest.SetRCommand("var.test")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRFTest)
         clsRFTest.AddParameter("conf.level", nudCI.Value.ToString())
         clsRFTest.AddParameter("data", clsRFunctionParameter:=ucrSelectorSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame)
@@ -147,6 +147,7 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub SetWilcoxTest()
+        clsRWilcoxTest.SetPackageName("stats")
         clsRWilcoxTest.SetRCommand("wilcox.test")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRWilcoxTest)
         clsRWilcoxTest.AddParameter("conf.level", nudCI.Value.ToString())
@@ -158,6 +159,7 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub SetKruskalTest()
+        clsRKruskalTest.SetPackageName("stats")
         clsRKruskalTest.SetRCommand("kruskal.test")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRKruskalTest)
         clsModel.SetOperation("~")
@@ -184,7 +186,7 @@ Public Class dlgRegressionSimple
 
     Private Sub SetBinomTest()
         Dim clsyFunc, clsnFunc As New RFunction
-
+        clsRBinomial.SetRCommand("mosaic")
         clsRBinomial.SetRCommand("prop.test")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRBinomial)
         clsRBinomial.AddParameter("conf.level", nudCI.Value.ToString())
@@ -258,6 +260,7 @@ Public Class dlgRegressionSimple
         Dim clsxFunc As New RFunction
         Dim clsTFunc As New RFunction
 
+        clsRPoisson.SetPackageName("stats")
         clsRPoisson.SetRCommand("poisson.test")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRPoisson)
         clsRPoisson.AddParameter("conf.level", nudCI.Value.ToString())
@@ -352,7 +355,7 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrResponse.IsEmpty() AndAlso Not ucrExplanatory.IsEmpty() AndAlso ucrFamily.Enabled AndAlso ucrFamily.cboDistributions.Text <> "" AndAlso (chkSaveModel.Checked AndAlso Not ucrModelName.IsEmpty() OrElse Not chkSaveModel.Checked) Then
+        If Not ucrResponse.IsEmpty() AndAlso Not ucrExplanatory.IsEmpty() AndAlso ucrFamily.Enabled AndAlso Not ucrFamily.ucrInputDistributions.IsEmpty() AndAlso (chkSaveModel.Checked AndAlso Not ucrModelName.IsEmpty() OrElse Not chkSaveModel.Checked) Then
             ucrModelPreview.SetName(clsModel.ToScript)
             '            If rdoSpecific.Checked AndAlso (ucrFamily.clsCurrDistribution.strNameTag = "Poisson" OrElse ucrFamily.clsCurrDistribution.strNameTag = "Binomial") AndAlso Not (ucrLevel1.IsEmpty OrElse ucrLevel2.IsEmpty) Then
             ucrBase.OKEnabled(True)
@@ -402,7 +405,7 @@ Public Class dlgRegressionSimple
                 End If
             Else
                 If ucrFamily.lstCurrentDistributions.Count = 0 OrElse ucrResponse.IsEmpty() Then
-                    ucrFamily.cboDistributions.Text = ""
+                    ucrFamily.ucrInputDistributions.SetName("")
                     cmdModelOptions.Enabled = False
                 Else
                     cmdModelOptions.Enabled = True
@@ -506,9 +509,9 @@ Public Class dlgRegressionSimple
         End If
     End Sub
 
-    Private Sub ucrFamily_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrFamily.cboDistributionsIndexChanged
+    Private Sub ucrDistWithParameters_ucrInputDistributionsIndexChanged() Handles ucrFamily.DistributionsIndexChanged
         sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
-        sdgModelOptions.ucrFamily.cboDistributions.SelectedIndex = sdgModelOptions.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
+        sdgModelOptions.ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = sdgModelOptions.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
         sdgModelOptions.RestrictLink()
         ExplanatoryFunctionSelect()
         SetRCode()
@@ -518,7 +521,7 @@ Public Class dlgRegressionSimple
 
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
         sdgModelOptions.ShowDialog()
-        ucrFamily.cboDistributions.SelectedIndex = ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = sdgModelOptions.ucrFamily.clsCurrDistribution.strNameTag)
+        ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = sdgModelOptions.ucrFamily.clsCurrDistribution.strNameTag)
         Display()
     End Sub
 
@@ -624,7 +627,7 @@ Public Class dlgRegressionSimple
         Else
             ucrFamily.SetExactDistributions()
         End If
-        ucrFamily.cboDistributions.ResetText()
+        ucrFamily.ucrInputDistributions.SetName("")
         Display()
         SetRCode()
         TestOKEnabled()
