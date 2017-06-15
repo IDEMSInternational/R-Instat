@@ -45,13 +45,8 @@ Public Class dlgFromLibrary
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 156
         'fills the combo box
-        clsDataFunction.SetPackageName("utils")
         clsDataFunction.SetRCommand("data")
         FillPackagesCombo()
-        'TODO remove once control is updated
-        cboPackages.DropDownStyle = ComboBoxStyle.DropDownList
-        cboPackages.AutoCompleteMode = AutoCompleteMode.None
-        cboPackages.AutoCompleteSource = AutoCompleteSource.None
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -67,6 +62,7 @@ Public Class dlgFromLibrary
 
     Private Sub rdoDefaultDatasets_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDefaultDatasets.CheckedChanged, rdoInstatCollection.CheckedChanged
         If rdoDefaultDatasets.Checked Then
+            ucrBase.clsRsyntax.SetFunction("as.data.frame")
             cboPackages.Enabled = True
             lstCollection.Enabled = True
             grpCollection.Enabled = False
@@ -85,16 +81,13 @@ Public Class dlgFromLibrary
     Private Sub FillPackagesCombo()
         Dim strTempHolder As String = "lsPackagesHolder"
         Dim i As Integer
-        Dim lstAvailablePackages As String()
+        Dim lstAvailablePackages As CharacterVector
         cboPackages.Items.Clear()
-        'This is now a static list because
-        lstAvailablePackages = {"datasets", "reshape2", "lubridate", "plyr", "dplyr", "rtf", "openxlsx", "ggplot2", "extRemes", "GGally", "agridat", "DAAG", "FactoMineR", "plotrix", "candisc", "R6", "openair", "circular", "survival", "Evapotranspiration", "clifro", "devtools", "factoextra", "circlize", "CircStats", "gridExtra", "ggfortify", "rio", "readxl", "lme4", "dummies", "ggthemes", "lazyeval", "stringr", "httr", "jsonlite", "fitdistrplus", "visreg", "climdex.pcic", "mosaic", "ncdf4", "getPass", "RMySQL", "DBI", "EnvStats", "signmedian.test", "sjPlot", "sjmisc", "plotly", "svglite", "htmlTable", "rje", "faraway"}
-
-        'lstAvailablePackages = frmMain.clsRLink.RunInternalScriptGetValue(strPackages & "<-(.packages())").AsCharacter
+        lstAvailablePackages = frmMain.clsRLink.RunInternalScriptGetValue(strPackages & "<-(.packages())").AsCharacter
         For i = 0 To lstAvailablePackages.Length - 1
             Try
-                If frmMain.clsRLink.RunInternalScriptGetValue("nrow(data(package = " & Chr(34) & lstAvailablePackages(i) & Chr(34) & ")$results)").AsInteger(0) > 0 Then
-                    cboPackages.Items.Add(lstAvailablePackages(i))
+                If frmMain.clsRLink.RunInternalScriptGetValue("nrow(data(package = " & Chr(34) & lstAvailablePackages.AsCharacter(i) & Chr(34) & ")$results)").AsInteger(0) > 0 Then
+                    cboPackages.Items.Add(lstAvailablePackages.AsCharacter(i))
                 End If
             Catch ex As Exception
 
@@ -128,14 +121,12 @@ Public Class dlgFromLibrary
 
     Private Sub cboPackages_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboPackages.SelectedValueChanged
         loadDatasets(cboPackages.SelectedItem.ToString)
-        clsDataFunction.AddParameter("package", Chr(34) & cboPackages.SelectedItem.ToString & Chr(34))
         TestOkEnabled()
     End Sub
 
     Private Sub lstCollection_Click(sender As Object, e As EventArgs) Handles lstCollection.Click
-        ucrBase.clsRsyntax.SetCommandString(chkString(lstCollection.SelectedItems(0).SubItems(0).Text))
         ucrBase.clsRsyntax.SetAssignTo(chkString(lstCollection.SelectedItems(0).SubItems(0).Text), strTempDataframe:=chkString(lstCollection.SelectedItems(0).SubItems(0).Text))
-        'ucrBase.clsRsyntax.AddParameter("x", chkString(lstCollection.SelectedItems(0).SubItems(0).Text))
+        ucrBase.clsRsyntax.AddParameter("x", chkString(lstCollection.SelectedItems(0).SubItems(0).Text))
         clsDataFunction.AddParameter("X", chkString(lstCollection.SelectedItems(0).SubItems(0).Text))
 
         TestOkEnabled()
@@ -166,16 +157,14 @@ Public Class dlgFromLibrary
         If bChecked Then
             frmMain.clsRLink.RunScript(clsDataFunction.ToScript(), strComment:=ucrBase.strComment)
         Else
-            frmMain.clsRLink.RunScript(clsDataFunction.ToScript())
+            frmMain.clsRLink.RunScript(clsDataFunction.ToScript(), strComment:=ucrBase.strComment)
         End If
     End Sub
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
         Dim clsHelp As New RFunction
-        clsHelp.SetPackageName("utils")
         clsHelp.SetRCommand("help")
         clsHelp.AddParameter("topic", Chr(34) & lstCollection.SelectedItems(0).Text & Chr(34))
-        clsHelp.AddParameter("package", Chr(34) & cboPackages.SelectedItem & Chr(34))
         clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
         frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:=" dlgOpenFromLibrary Opening help page for" & " " & lstCollection.SelectedItems(0).Text & " " & "dataset")
     End Sub

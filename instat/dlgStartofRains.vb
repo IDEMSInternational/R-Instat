@@ -344,7 +344,7 @@ Public Class dlgStartofRains
 
     Private Sub RollingSumMethod()
         If chkTotalRainfall.Checked AndAlso Not ucrReceiverRainfall.IsEmpty Then
-            clsTRRollingSum.AddParameter("function_exp", Chr(34) & " zoo::rollapply(data = " & ucrReceiverRainfall.GetVariableNames(False) & " ,width = " & nudTROverDays.Value & ", FUN = sum, na.rm = FALSE, align='right', fill=NA)" & Chr(34))
+            clsTRRollingSum.AddParameter("function_exp", Chr(34) & " rollapply(data = " & ucrReceiverRainfall.GetVariableNames(False) & " ,width = " & nudTROverDays.Value & ", FUN = sum, na.rm = FALSE, align='right', fill=NA)" & Chr(34))
             clsTRRollingSum.AddParameter("type", Chr(34) & "calculation" & Chr(34))
             clsTRRollingSum.AddParameter("result_name", Chr(34) & "roll_sum_Rain" & Chr(34))
             clsTRRollingSum.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames & ")")
@@ -380,7 +380,7 @@ Public Class dlgStartofRains
     Private Sub RollingOfRainDays()
         '  If rolling of rain days one is checked Then
         clsRDRollingRainDays.AddParameter("type", Chr(34) & "calculation" & Chr(34))
-        clsRDRollingRainDays.AddParameter("function_exp", Chr(34) & "zoo::rollapply(data=rain_day, width = " & nudRDOutOfDays.Value & ", FUN = sum, na.rm = FALSE, align = 'right', fill=NA)" & Chr(34))
+        clsRDRollingRainDays.AddParameter("function_exp", Chr(34) & "rollapply(data=rain_day, width = " & nudRDOutOfDays.Value & ", FUN = sum, na.rm = FALSE, align = 'right', fill=NA)" & Chr(34))
         clsRDRollingRainDays.AddParameter("result_name", Chr(34) & "Rolling_Rain_Days" & Chr(34))
         clsRDRollingRainDays.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubRDRainDays1)
         clsSubRDRainDays1.AddParameter("sub1", clsRFunctionParameter:=clsRainyDays, bIncludeArgumentName:=False)
@@ -396,7 +396,7 @@ Public Class dlgStartofRains
             clsSubDSRainDays2.AddParameter("sub1", clsRFunctionParameter:=clsRainyDays, bIncludeArgumentName:=False)
             clsDSDrySpell.AddParameter("save", 0)
             clsDSDryPeriodTen.AddParameter("type", Chr(34) & "calculation" & Chr(34))
-            clsDSDryPeriodTen.AddParameter("function_exp", Chr(34) & "zoo::rollapply(data = Dry_Spell, width=" & nudDSLengthofTime.Value & ", FUN=max, na.rm = FALSE, align='left', fill=NA)" & Chr(34))
+            clsDSDryPeriodTen.AddParameter("function_exp", Chr(34) & "rollapply(data = Dry_Spell, width=" & nudDSLengthofTime.Value & ", FUN=max, na.rm = FALSE, align='left', fill=NA)" & Chr(34))
             clsDSDryPeriodTen.AddParameter("result_name", Chr(34) & "Dry_Spell" & Chr(34))
             clsDSDryPeriodTen.AddParameter("sub_calculations", clsRFunctionParameter:=clsDSDryPeriodTenList)
             clsDSDryPeriodTenList.AddParameter("sub1", clsRFunctionParameter:=clsDSDrySpell, bIncludeArgumentName:=False)
@@ -420,7 +420,7 @@ Public Class dlgStartofRains
     Private Sub DryPeriod()
         If chkDryPeriod.Checked Then
             clsDPRainInDays.AddParameter("type", Chr(34) & "calculation" & Chr(34))
-            clsDPRainInDays.AddParameter("function_exp", Chr(34) & "zoo::rollapply(data = " & ucrReceiverRainfall.GetVariableNames(False) & " ,width = " & nudDPRainPeriod.Value & ", FUN = sum, na.rm = FALSE, align='left', fill=NA)" & Chr(34))
+            clsDPRainInDays.AddParameter("function_exp", Chr(34) & "rollapply(data = " & ucrReceiverRainfall.GetVariableNames(False) & " ,width = " & nudDPRainPeriod.Value & ", FUN = sum, na.rm = FALSE, align='left', fill=NA)" & Chr(34))
             clsDPRainInDays.AddParameter("result_name", Chr(34) & "Rain_in_Days" & Chr(34))
             clsDPRainInDays.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames & ")")
             clsDPRainInDays.AddParameter("save", "0")
@@ -433,7 +433,7 @@ Public Class dlgStartofRains
             clsDPRain.AddParameter("save", 0)
 
             clsDPOverallInterval.AddParameter("type", Chr(34) & "calculation" & Chr(34))
-            clsDPOverallInterval.AddParameter("function_exp", Chr(34) & "zoo::rollapply(data = Above_Threshold ,width = (" & nudDPOverallInterval.Value & "-" & nudDPRainPeriod.Value & "+ 1), FUN = sum, na.rm = FALSE, align='left', fill=NA)" & Chr(34))
+            clsDPOverallInterval.AddParameter("function_exp", Chr(34) & "rollapply(data = Above_Threshold ,width = (" & nudDPOverallInterval.Value & "-" & nudDPRainPeriod.Value & "+ 1), FUN = sum, na.rm = FALSE, align='left', fill=NA)" & Chr(34))
             clsDPOverallInterval.AddParameter("result_name", Chr(34) & "DP_Overall_Interval_Rain" & Chr(34))
             clsDPOverallInterval.AddParameter("sub_calculations", clsRFunctionParameter:=clsDPOverallIntervalList)
             clsDPOverallIntervalList.AddParameter("sub1", clsRFunctionParameter:=clsDPRain, bIncludeArgumentName:=False)

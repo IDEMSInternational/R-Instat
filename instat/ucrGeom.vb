@@ -1,4 +1,5 @@
-﻿' Instat-R
+﻿
+' Instat-R
 ' Copyright (C) 2015
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -14,24 +15,21 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
-
 Public Class ucrGeom
     'Ucr Geom is used to select the geom that will be used for a specific graph/layer. It is used in ucrGeomListWithAes and ucrLayerParameters both ucr's of sdgLayerOptions. 
     'It stores the definition of the different Geoms, using instances of clsGeom, including their R names, the relevant/available parameters and their description (type of values, values, default, ...).
     Public lstAllGeoms As New List(Of Geoms)
-    'Public lstGgParameters As New List(Of RParameter)
+    Public lstGgParameters As New List(Of RParameter)
+    'Warning: This is used nowhere ...
     'Question: lstGgParameters lists of the ggplot parameters ? Let's delete ?
     Public clsCurrGeom As New Geoms
     Public clsGeomFunction As New RFunction
+    Public lstFunctionParameters As New List(Of RParameter)
     'Question: clsGeomFunction is the RFunction associated to the clsCurrGeom ? Could it be included in clsCurrGeom, if yes do we wish that ? Used together with clsGgplotAesFunction... ?
     'Similarly for lstFunctionParameters. Both, together with clsGgplotAesFunction are supposedly passed through to ucrAdditionalLayers and assigned to smth in ucrAdditionalLayers by calling  sdgLayerOption.SetupLayer which calls setup ? Still need to figure out when/how they are used though...
-    Public clsGlobalAesFunction As New RFunction
-    Public clsLocalAesFunction As RFunction
-    Public clsGgplotFunction As New RFunction
+    Public clsGgplotAesFunction As New RFunction
     Private bFirstLoad As Boolean = True
     Public strGlobalDataFrame As String = ""
-    Protected ucrBaseSelector As ucrSelectorByDataFrame
 
     Public Sub New()
 
@@ -42,73 +40,50 @@ Public Class ucrGeom
         CreateGeomList()
     End Sub
 
-    Public Overrides Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False)
-        Dim clsTempFunc As RFunction
-        Dim iGeomIndex As Integer
-
-        MyBase.SetRCode(clsNewCodeStructure, bReset)
-        If clsNewCodeStructure IsNot Nothing AndAlso TypeOf (clsNewCodeStructure) Is RFunction Then
-            clsTempFunc = TryCast(clsNewCodeStructure, RFunction)
-            If clsTempFunc IsNot Nothing AndAlso clsTempFunc.strRCommand IsNot Nothing Then
-                iGeomIndex = lstAllGeoms.FindIndex(Function(x) x.strGeomName = clsTempFunc.strRCommand)
-                If iGeomIndex <> -1 Then
-                    clsCurrGeom = lstAllGeoms(iGeomIndex)
-                    ucrInputGeoms.SetName(clsCurrGeom.strGeomName)
-                Else
-                    MsgBox("Developer error: Function set for " & Name & " is not a recognised geom.")
-                End If
-            Else
-                MsgBox("Developer error: Code set for " & Name & " is not an RFunction.")
-            End If
-        Else
-            MsgBox("Developer error: Code set for " & Name & " is not an RFunction.")
-        End If
-    End Sub
-
     Private Sub UcrGeoms_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseControl()
             bFirstLoad = False
-            ucrInputGeoms.SetDropDownStyleAsNonEditable()
         End If
     End Sub
 
     Private Sub InitialiseControl()
-        clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=clsGlobalAesFunction)
+        clsGeomFunction.AddParameter("mapping", clsRFunctionParameter:=clsGgplotAesFunction)
     End Sub
 
-    Public Overridable Sub Setup(clsNewGgplotFunction As RFunction, clsNewGeomFunc As RFunction, clsNewGlobalAesFunc As RFunction, clsNewLocalAes As RFunction, Optional bFixGeom As Boolean = False, Optional ucrNewBaseSelector As ucrSelectorByDataFrame = Nothing, Optional bApplyAesGlobally As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional bReset As Boolean = False, Optional strDataFrame As String = "")
+    Public Overridable Sub Setup(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bApplyAesGlobally As Boolean = True, Optional bIgnoreGlobalAes As Boolean = False, Optional iNumVariablesForGeoms As Integer = -1, Optional clsTempLocalAes As RFunction = Nothing)
         'Setup is used to setup the parameters of ucrGeom as well as ucrGeomListWithAes and ucrLayerParameters as they override Setup from ucrGeom. The Setup function is also used within sdgLayerOptions.SetupLayer which plays the same role for the whole sdlLayerOption.
         'These functions are called all together in the ucrAddLayers when a Layer is added or editted, as well as in specific plots dialogs such as dlgBoxPlot when the plot options sdgPlots (dealing with layers) is opened.
         Dim GeomCount As New Geoms
 
         'Question to be discussed: Never went back to this... don't understand what's happening...
-        'First we clear the content of the displayed list (in ucrInputGeoms) of available geoms as this may change between different setup's according to the parameter iNumVariablesForGeoms (see below). 
-        ucrInputGeoms.SetItems()
-        'Then we add geom names from our lstAllGeoms to ucrInputGeoms when the number of available variables to associate to geom Aes (iNumVariablesForGeom) is greater or equal to the number of mandatory Aes of that geom. Correct ?
+        'First we clear the content of the displayed list (in cboGeomList) of available geoms as this may change between different setup's according to the parameter iNumVariablesForGeoms (see below). 
+        cboGeomList.Items.Clear()
+        'Then we add geom names from our lstAllGeoms to cboGeomList when the number of available variables to associate to geom Aes (iNumVariablesForGeom) is greater or equal to the number of mandatory Aes of that geom. Correct ?
         For Each GeomCount In lstAllGeoms
-            If iNumVariablesForGeoms = -1 OrElse iNumVariablesForGeoms >= GeomCount.iNumMandatoryAes Then
-                ucrInputGeoms.AddItems({GeomCount.strGeomName})
+            If iNumVariablesForGeoms <= GeomCount.iNumMandatoryAes Then
+                'Warning: Should this not be greater or equal instead of lower or equal ? But then what would the default value be for iNumVariablesForGeom ? Not -1 !!
+                cboGeomList.Items.Add(GeomCount.strGeomName)
             End If
         Next
         'Next, the clsGeomFunction is set. Either this one is empty, or it has already been setup on the dialogue that is calling Setup...
-        SetGeomFunction(clsNewGeomFunc)
-        ucrInputGeoms.Enabled = Not bFixGeom
-        clsGlobalAesFunction = clsNewGlobalAesFunc
-        clsLocalAesFunction = clsNewLocalAes
-        clsGgplotFunction = clsNewGgplotFunction
-        ucrBaseSelector = ucrNewBaseSelector
-        If ucrBaseSelector IsNot Nothing Then
-            strGlobalDataFrame = ucrBaseSelector.strCurrentDataFrame
+        SetGeomFunction(clsTempGeomFunc)
+        'From the clsGeomFunction, the selected Geom in the cboGeomList is chosen. If clsGeomFunction is Nothing, then the default choice is geom_boxplot. Later, in cboGeomList_SelectedIndexChanged, the clsCurrGeom is chosen to be the selected geom, then the Rcommand of clsGeomFunction will be set according to the choice of clsCurrGeom. Hence the Rcommand sets the clsCurrGeom indirectly, then it is set by the clsCurrGeom. This looks like an inefficient loop, but it does no harm and actually sets clsGeomFunction when it was initially nothing.
+        If clsGeomFunction.strRCommand = Nothing OrElse cboGeomList.Items.IndexOf(clsGeomFunction.strRCommand) = -1 Then
+            cboGeomList.SelectedIndex = cboGeomList.Items.IndexOf("geom_boxplot")
         Else
-            strGlobalDataFrame = strDataFrame
+            cboGeomList.SelectedIndex = cboGeomList.Items.IndexOf(clsGeomFunction.strRCommand)
         End If
+        cboGeomList.Enabled = Not bFixGeom
+        clsGgplotAesFunction = clsTempAesFunc
+        clsGgplotAesFunction.SetRCommand("aes")
     End Sub
 
-    Public Overridable Sub SetGeomFunction(clsTempGeomFunc As RFunction, Optional bReset As Boolean = False)
+    Public Overridable Sub SetGeomFunction(clsTempGeomFunc As RFunction)
         clsGeomFunction = clsTempGeomFunc
-        SetRCode(clsGeomFunction, bReset)
     End Sub
+
+
 
     Public Sub CreateGeomList()
         Dim clsgeom_abline As New Geoms
@@ -1168,35 +1143,21 @@ Public Class ucrGeom
 
         lstAllGeoms.Add(clsgeom_vline)
     End Sub
-
-    Public Event GeomChanged()
-
-    Private Sub ucrInputGeoms_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputGeoms.ControlValueChanged
+    Public Event GeomChanged(sender As Object, e As EventArgs)
+    Private Sub cboGeomList_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboGeomList.SelectedIndexChanged
         Dim clsParam As New LayerParameter
         Dim iGeomIndex As Integer
-        Dim iPreviousGeomIndex As Integer
-
-        iGeomIndex = lstAllGeoms.FindIndex(Function(x) x.strGeomName = ucrInputGeoms.GetText())
-        iPreviousGeomIndex = lstAllGeoms.FindIndex(Function(x) x.strGeomName = clsGeomFunction.strRCommand)
-        If iGeomIndex <> -1 Then
-            clsCurrGeom = lstAllGeoms(iGeomIndex)
-            If clsGeomFunction.strRCommand <> clsCurrGeom.strGeomName Then
-                For Each clsParam In lstAllGeoms(iPreviousGeomIndex).clsLayerParameters
-                    clsGeomFunction.RemoveParameterByName(clsParam.strLayerParameterName)
-                Next
-                clsGeomFunction.SetRCommand(clsCurrGeom.strGeomName)
-                RaiseEvent GeomChanged()
-            Else
-                clsGeomFunction.SetRCommand(clsCurrGeom.strGeomName)
-            End If
+        'Here, the clsCurrGeom is chosen according to the selected geom in cboGeomList. Then the Rcommand of the GeomFunction is chosen accordingly.
+        clsCurrGeom = lstAllGeoms(cboGeomList.SelectedIndex)
+        'Erase layer parameters in the clsGeomFunction if geom in GeomFunction is different from CurrGeom... necessary to not have irrelevant parameters staying in the geom function when geom has changed... 
+        iGeomIndex = lstAllGeoms.FindIndex(Function(x) x.strGeomName = clsGeomFunction.strRCommand)
+        If iGeomIndex <> -1 AndAlso clsGeomFunction.strRCommand <> clsCurrGeom.strGeomName Then
+            For Each clsParam In lstAllGeoms(iGeomIndex).clsLayerParameters
+                clsGeomFunction.RemoveParameterByName(clsParam.strLayerParameterName)
+            Next
         End If
-    End Sub
+        clsGeomFunction.SetRCommand(clsCurrGeom.strGeomName)
 
-    Public Sub SetGeomName(strNewGeom As String)
-        ucrInputGeoms.SetName(strNewGeom)
+        RaiseEvent GeomChanged(sender, e)
     End Sub
-
-    Public Function GetGeomName() As String
-        Return ucrInputGeoms.GetText()
-    End Function
 End Class

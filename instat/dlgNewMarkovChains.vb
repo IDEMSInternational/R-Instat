@@ -164,7 +164,6 @@ Public Class dlgNewMarkovChains
         Dim strHarmonic As String = ""
 
         'Calculating RainDay
-        clsLagCombineFunction.SetPackageName("stringr")
         clsLagCombineFunction.SetRCommand("str_c")
         clsGreplFunction.SetRCommand("grepl")
         clsGreplFunction.AddParameter("pattern", Chr(39) & "NA" & Chr(39))

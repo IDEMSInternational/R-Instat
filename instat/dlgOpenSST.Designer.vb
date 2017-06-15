@@ -55,8 +55,8 @@ Partial Class dlgOpenSST
         Me.cmdOpenDataSet.Name = "cmdOpenDataSet"
         Me.cmdOpenDataSet.Size = New System.Drawing.Size(66, 23)
         Me.cmdOpenDataSet.TabIndex = 2
-        Me.cmdOpenDataSet.Tag = "Browse"
-        Me.cmdOpenDataSet.Text = "Browse"
+        Me.cmdOpenDataSet.Tag = "select_file"
+        Me.cmdOpenDataSet.Text = "Select File"
         Me.cmdOpenDataSet.UseVisualStyleBackColor = True
         '
         'lblFileOpenPath

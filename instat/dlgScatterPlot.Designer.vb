@@ -26,7 +26,6 @@ Partial Class dlgScatterPlot
         Me.lblFactorOptional = New System.Windows.Forms.Label()
         Me.lblXVariable = New System.Windows.Forms.Label()
         Me.cmdScatterPlotOptions = New System.Windows.Forms.Button()
-        Me.ucrChkLineofBestFit = New instat.ucrCheck()
         Me.ucrSaveScatterPlot = New instat.ucrSave()
         Me.ucrSelectorForScatter = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrVariablesAsFactorForScatter = New instat.ucrVariablesAsFactor()
@@ -75,17 +74,9 @@ Partial Class dlgScatterPlot
         Me.cmdScatterPlotOptions.Text = "Scatter Plot Options"
         Me.cmdScatterPlotOptions.UseVisualStyleBackColor = True
         '
-        'ucrChkLineofBestFit
-        '
-        Me.ucrChkLineofBestFit.Checked = False
-        Me.ucrChkLineofBestFit.Location = New System.Drawing.Point(10, 260)
-        Me.ucrChkLineofBestFit.Name = "ucrChkLineofBestFit"
-        Me.ucrChkLineofBestFit.Size = New System.Drawing.Size(173, 20)
-        Me.ucrChkLineofBestFit.TabIndex = 10
-        '
         'ucrSaveScatterPlot
         '
-        Me.ucrSaveScatterPlot.Location = New System.Drawing.Point(10, 285)
+        Me.ucrSaveScatterPlot.Location = New System.Drawing.Point(10, 269)
         Me.ucrSaveScatterPlot.Name = "ucrSaveScatterPlot"
         Me.ucrSaveScatterPlot.Size = New System.Drawing.Size(250, 24)
         Me.ucrSaveScatterPlot.TabIndex = 8
@@ -107,7 +98,6 @@ Partial Class dlgScatterPlot
         Me.ucrVariablesAsFactorForScatter.Name = "ucrVariablesAsFactorForScatter"
         Me.ucrVariablesAsFactorForScatter.Selector = Nothing
         Me.ucrVariablesAsFactorForScatter.Size = New System.Drawing.Size(125, 136)
-        Me.ucrVariablesAsFactorForScatter.strNcFilePath = ""
         Me.ucrVariablesAsFactorForScatter.TabIndex = 1
         Me.ucrVariablesAsFactorForScatter.ucrSelector = Nothing
         Me.ucrVariablesAsFactorForScatter.ucrVariableSelector = Nothing
@@ -120,7 +110,6 @@ Partial Class dlgScatterPlot
         Me.ucrFactorOptionalReceiver.Name = "ucrFactorOptionalReceiver"
         Me.ucrFactorOptionalReceiver.Selector = Nothing
         Me.ucrFactorOptionalReceiver.Size = New System.Drawing.Size(120, 20)
-        Me.ucrFactorOptionalReceiver.strNcFilePath = ""
         Me.ucrFactorOptionalReceiver.TabIndex = 5
         Me.ucrFactorOptionalReceiver.ucrSelector = Nothing
         '
@@ -132,13 +121,12 @@ Partial Class dlgScatterPlot
         Me.ucrReceiverX.Name = "ucrReceiverX"
         Me.ucrReceiverX.Selector = Nothing
         Me.ucrReceiverX.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverX.strNcFilePath = ""
         Me.ucrReceiverX.TabIndex = 3
         Me.ucrReceiverX.ucrSelector = Nothing
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 312)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 299)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 9
@@ -147,8 +135,7 @@ Partial Class dlgScatterPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(421, 368)
-        Me.Controls.Add(Me.ucrChkLineofBestFit)
+        Me.ClientSize = New System.Drawing.Size(421, 357)
         Me.Controls.Add(Me.ucrSaveScatterPlot)
         Me.Controls.Add(Me.ucrSelectorForScatter)
         Me.Controls.Add(Me.ucrVariablesAsFactorForScatter)
@@ -180,5 +167,4 @@ Partial Class dlgScatterPlot
     Friend WithEvents ucrVariablesAsFactorForScatter As ucrVariablesAsFactor
     Friend WithEvents ucrSelectorForScatter As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrSaveScatterPlot As ucrSave
-    Friend WithEvents ucrChkLineofBestFit As ucrCheck
 End Class

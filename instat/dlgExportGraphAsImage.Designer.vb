@@ -46,7 +46,7 @@ Partial Class dlgExportGraphAsImage
         Me.cmdBrowse.Name = "cmdBrowse"
         Me.cmdBrowse.Size = New System.Drawing.Size(75, 23)
         Me.cmdBrowse.TabIndex = 4
-        Me.cmdBrowse.Text = "Browse"
+        Me.cmdBrowse.Text = "Browse..."
         Me.cmdBrowse.UseVisualStyleBackColor = True
         '
         'ucrSelectedGraphReceiver

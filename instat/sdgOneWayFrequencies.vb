@@ -112,7 +112,7 @@ Public Class sdgOneWayFrequencies
         ucrInputVerticalLabels.SetItems(dctVerticalPositionLabel)
         ucrInputVerticalLabels.SetRDefault(Chr(34) & "bottom" & Chr(34))
         ucrInputVerticalLabels.bUpdateRCodeFromControl = False
-        InitialiseTabs()
+
         bControlsInitialised = True
     End Sub
 
@@ -139,16 +139,5 @@ Public Class sdgOneWayFrequencies
         ucrInputVerticalLabels.SetRCode(clsOneWayGraphFreq, bReset)
         ucrInputHorizontalLabels.SetRCode(clsOneWayGraphFreq, bReset)
         ucrInputGraphTitle.SetRCode(clsOneWayGraphFreq, bReset)
-
-        If bReset Then
-            tbpOneWayFrequencies.SelectedIndex = 0
-        End If
-    End Sub
-
-    Private Sub InitialiseTabs()
-        For i = 0 To tbpOneWayFrequencies.TabCount - 1
-            tbpOneWayFrequencies.SelectedIndex = i
-        Next
-        tbpOneWayFrequencies.SelectedIndex = 0
     End Sub
 End Class

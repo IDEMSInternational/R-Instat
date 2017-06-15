@@ -45,16 +45,14 @@ Public Class dlgMetadata
         '     Also need to get current values of metadata to set in ucrReceiverMetadataProperty
 
         clsLayerParam.strLayerParameterDataType = "list"
-        'To be updated, not correct
-        'ucrNewValue.SetControls(Nothing, clsLayerParam)
-        ucrNewValue.bIsActiveRControl = False
-
-        'ucrReceiverChooseProperty.Selector = ucrSelectByMetadata
-        'ucrReceiverChooseColumns.Selector = ucrSelectByMetadata
-        'ucrReceiverChooseProperty.SetMeAsReceiver()
-        ucrBase.iHelpTopicID = 53
-        'ucrReceiverChooseColumns.SetItemType("column")
-        'ucrReceiverChooseProperty.SetItemType("metadata")
+        ucrNewValue.clsLayerParam = clsLayerParam
+        ucrNewValue.SetControls()
+        ucrReceiverChooseProperty.Selector = ucrSelectByMetadata
+        ucrReceiverChooseColumns.Selector = ucrSelectByMetadata
+        ucrReceiverChooseProperty.SetMeAsReceiver()
+        ucrBase.iHelpTopicID = 391
+        ucrReceiverChooseColumns.SetItemType("column")
+        ucrReceiverChooseProperty.SetItemType("metadata")
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$append_to_variables_metadata")
         clsGetVarMetadata.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
         ucrCurrentValue.IsReadOnly = True
@@ -132,8 +130,7 @@ Public Class dlgMetadata
                 clsLayerParam.lstParameterStrings = strCurrMetadataValues.Distinct.ToArray
                 bListSet = True
             End If
-            'To be updated, not correct
-            ucrNewValue.SetControls(Nothing, clsLayerParam)
+            ucrNewValue.SetControls()
         End If
         If Not bSetCurrentValue Then
             ucrCurrentValue.SetName("")

@@ -50,12 +50,16 @@ Public Class dlgCalculator
 
     Private Sub SetDefaults()
         ucrCalc.ucrSaveResultInto.SetPrefix("Calc")
+        ucrCalc.ucrSaveResultInto.Reset()
+        ucrCalc.ucrInputCalOptions.Reset()
+        ucrCalc.ucrSelectorForCalculations.Reset()
         ucrCalc.ucrInputCalOptions.SetName("Basic")
-        ucrCalc.Reset()
         ucrCalc.chkShowArguments.Checked = False
         ucrCalc.chkSaveResultInto.Checked = True
         SaveResults()
         ucrCalc.ucrSelectorForCalculations.bUseCurrentFilter = False
+        ucrCalc.cmdDoy.Enabled = False
+        ucrCalc.cmdDek.Enabled = False
         ucrBase.Visible = True
     End Sub
 
@@ -119,7 +123,7 @@ Public Class dlgCalculator
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs)
         SetDefaults()
         TestOKEnabled()
     End Sub

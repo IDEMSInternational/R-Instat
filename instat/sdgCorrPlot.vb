@@ -42,7 +42,6 @@ Public Class sdgCorrPlot
 
     Public Sub GGPairs()
         dlgCorrelation.TempData()
-        clsRGraphics.SetPackageName("GGally")
         clsRGraphics.SetRCommand("ggpairs")
         dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
         dlgCorrelation.ucrBase.clsRsyntax.SetBaseRFunction(clsRGraphics)
@@ -51,7 +50,6 @@ Public Class sdgCorrPlot
 
     Public Sub GGcorr()
         'We still need to add more arguments to the ggcorr function 
-        clsRGGcorrGraphics.SetPackageName("GGally")
         clsRGGcorrGraphics.SetRCommand("ggcorr")
         clsRGGcorrGraphics.AddParameter("data", "NULL")
         clsRGGcorrGraphics.AddParameter("cor_matrix", clsRFunctionParameter:=dlgCorrelation.clsRCorrelation)
@@ -62,7 +60,6 @@ Public Class sdgCorrPlot
 
     Public Sub GGscatmatrix()
         dlgCorrelation.TempData()
-        clsRGGscatmatrix.SetPackageName("GGally")
         clsRGGscatmatrix.SetRCommand("ggscatmat")
         dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
         dlgCorrelation.ucrBase.clsRsyntax.SetBaseRFunction(clsRGGscatmatrix)

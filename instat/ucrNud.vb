@@ -133,15 +133,10 @@ Public Class ucrNud
     Protected Overrides Sub SetToValue(objTemp As Object)
         Dim dNewValue As Decimal
 
-        If objTemp Is Nothing Then
-            'If no value reset to a default value
-            nudUpDown.Value = nudUpDown.Minimum
+        If objTemp IsNot Nothing AndAlso Decimal.TryParse(objTemp, dNewValue) AndAlso dNewValue >= nudUpDown.Minimum AndAlso dNewValue <= nudUpDown.Maximum Then
+            nudUpDown.Value = dNewValue
         Else
-            If Decimal.TryParse(objTemp, dNewValue) AndAlso dNewValue >= nudUpDown.Minimum AndAlso dNewValue <= nudUpDown.Maximum Then
-                nudUpDown.Value = dNewValue
-            Else
-                MsgBox("Developer error: The value given cannot be converted to a decimal or is outside the range of the control. Value will be unchanged.")
-            End If
+            MsgBox("Developer error: The value given cannot be converted to a decimal or is outside the range of the control. Value will be unchanged.")
         End If
     End Sub
 End Class

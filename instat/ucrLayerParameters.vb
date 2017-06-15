@@ -19,7 +19,7 @@ Imports instat
 Public Class ucrLayerParameters
     Public lstLayerParameterControl As New List(Of ucrLayerParamsControls)
     Private bFirstLoad As Boolean = True
-    Public WithEvents ucrGeomWithAes As ucrGeomListWithParameters
+    Public WithEvents ucrGeomWithAes As UcrGeomListWithParameters
 
     Public Sub New()
 
@@ -40,30 +40,38 @@ Public Class ucrLayerParameters
     Private Sub InitialiseControl()
     End Sub
 
-    Public Overrides Sub Setup(clsNewGgplotFunction As RFunction, clsNewGeomFunc As RFunction, clsNewGlobalAesFunc As RFunction, clsNewLocalAes As RFunction, Optional bFixGeom As Boolean = False, Optional ucrNewBaseSelector As ucrSelectorByDataFrame = Nothing, Optional bApplyAesGlobally As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional bReset As Boolean = False, Optional strDataFrame As String = "")
-        MyBase.Setup(clsNewGgplotFunction, clsNewGeomFunc, clsNewGlobalAesFunc, clsNewLocalAes, bFixGeom, ucrNewBaseSelector, bApplyAesGlobally, iNumVariablesForGeoms, bReset, strDataFrame)
-        SetLayerParameters(bReset)
+    Public Overrides Sub Setup(clsTempGgPlot As RFunction, clsTempGeomFunc As RFunction, clsTempAesFunc As RFunction, Optional bFixAes As Boolean = False, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bApplyAesGlobally As Boolean = True, Optional bIgnoreGlobalAes As Boolean = False, Optional iNumVariablesForGeoms As Integer = -1, Optional clsTempLocalAes As RFunction = Nothing)
+        MyBase.Setup(clsTempGgPlot, clsTempGeomFunc, clsTempAesFunc, bFixAes, bFixGeom, strDataframe, bApplyAesGlobally, bIgnoreGlobalAes, iNumVariablesForGeoms, clsTempLocalAes)
+        SetLayerParameters()
     End Sub
 
-    Public Sub SetLayerParameters(Optional bReset As Boolean = False)
+    Public Overrides Sub SetGeomFunction(clsTempGeomFunc As RFunction)
+        MyBase.SetGeomFunction(clsTempGeomFunc)
+        For i = 0 To (lstLayerParameterControl.Count - 1)
+            lstLayerParameterControl(i).SetGeomFunction(clsGeomFunction)
+        Next
+    End Sub
+
+    Public Sub SetLayerParameters()
         Dim i As Integer = 0
         'fill the labels and checkboxes
         If clsCurrGeom IsNot Nothing Then
             For i = 0 To (lstLayerParameterControl.Count - 1)
                 If (i < clsCurrGeom.clsLayerParameters.Count) Then
-                    lstLayerParameterControl(i).SetControl(clsGeomFunction, clsCurrGeom.clsLayerParameters(i), bReset:=bReset)
+                    lstLayerParameterControl(i).SetLayerParameter(clsCurrGeom.clsLayerParameters(i))
                 Else
-                    lstLayerParameterControl(i).SetControl(clsGeomFunction, Nothing)
+                    lstLayerParameterControl(i).SetLayerParameter(Nothing)
                 End If
             Next
         End If
     End Sub
 
-    Private Sub ucrLayerParameters_GeomChanged() Handles Me.GeomChanged
+    Public Sub ucrLayerParameters_cboGeomListIndexChanged(sender As Object, e As EventArgs) Handles Me.GeomChanged
         If ucrGeomWithAes IsNot Nothing Then
-            ucrGeomWithAes.SetGeomName(GetGeomName())
+            ucrGeomWithAes.cboGeomList.SelectedItem = Me.cboGeomList.SelectedItem
         End If
-        SetLayerParameters(False)
+        SetLayerParameters()
     End Sub
+
 End Class
 

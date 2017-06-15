@@ -18,17 +18,8 @@ Imports instat.Translations
 Public Class dlgUseGraph
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    'Public clsLeftCommand As New RFunction
     Private clsUseGraphFunction As New RFunction
-    Private clsBaseOperator As New ROperator
-    Private clsThemeFunction As New RFunction
-    Private bResetSubdialog As Boolean = True
-    Private clsLabsFunction As New RFunction
-    Private clsXlabsFunction As New RFunction
-    Private clsYlabsFunction As New RFunction
-    Private clsXScalecontinuousFunction As New RFunction
-    Private clsYScalecontinuousFunction As New RFunction
-    Private clsFacetsFunction As New RFunction
-    Private dctThemeFunctions As New Dictionary(Of String, RFunction)
 
     Private Sub dlgUseGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -42,6 +33,7 @@ Public Class dlgUseGraph
         End If
         SetRCodeForControls(bReset)
         bReset = False
+
         TestOkEnabled()
     End Sub
 
@@ -49,15 +41,16 @@ Public Class dlgUseGraph
         ucrBase.iHelpTopicID = 430
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
+        cmdPlotOptions.Enabled = False         'Disabling this button temporarily before we get to subdialog for graphics sorted 
 
         ucrGraphsSelector.SetParameter(New RParameter("data_name", 0))
         ucrGraphsSelector.SetParameterIsString()
+        ucrGraphsSelector.SetItemType("graph")
 
         ucrGraphReceiver.SetParameter(New RParameter("graph_name", 1))
         ucrGraphReceiver.Selector = ucrGraphsSelector
         ucrGraphReceiver.strSelectorHeading = "Graphs"
         ucrGraphReceiver.SetParameterIsString()
-        ucrGraphReceiver.SetItemType("graph")
 
         ucrSaveGraph.SetPrefix("use_graph")
         ucrSaveGraph.SetSaveTypeAsGraph()
@@ -65,39 +58,27 @@ Public Class dlgUseGraph
         ucrSaveGraph.SetCheckBoxText("Save Graph")
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
+
+        'ucrBase.clsRsyntax.SetOperation("+")
+        'sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
     End Sub
 
     Private Sub SetDefaults()
         clsUseGraphFunction = New RFunction
-        clsBaseOperator = New ROperator
 
         ucrGraphReceiver.SetMeAsReceiver()
         ucrGraphsSelector.Reset()
         ucrSaveGraph.Reset()
 
-        clsBaseOperator.SetOperation("+")
-        clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsUseGraphFunction, iPosition:=0)
-
-        clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
-        clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
-        clsYlabsFunction = GgplotDefaults.clsYlabTitleFunction.Clone()
-        clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
-        clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
-        clsYScalecontinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone()
-        clsFacetsFunction = GgplotDefaults.clsFacetFunction.Clone()
-        dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
-        clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction
         clsUseGraphFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
-        clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrGraphsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        clsUseGraphFunction.SetAssignTo("last_graph", strTempDataframe:=ucrGraphsSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsUseGraphFunction)
 
-        ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
         TestOkEnabled()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrGraphsSelector.SetRCode(clsUseGraphFunction, bReset)
-        ucrGraphReceiver.SetRCode(clsUseGraphFunction, bReset)
-        ucrSaveGraph.SetRCode(clsBaseOperator, bReset)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -110,12 +91,9 @@ Public Class dlgUseGraph
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        SetRCodeForControls(True)
-        TestOkEnabled()
     End Sub
 
     Private Sub cmdPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdPlotOptions.Click
-        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewLabsFunction:=clsLabsFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabsFunction, clsNewFacetFunction:=clsFacetsFunction, ucrNewBaseSelector:=ucrGraphsSelector, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
     End Sub
 

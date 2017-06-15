@@ -22,98 +22,134 @@ Partial Class dlgOneVarUseModel
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.lblReceiverObject = New System.Windows.Forms.Label()
-        Me.cmdFitModelandBootstrap = New System.Windows.Forms.Button()
-        Me.ucrChkProduceBootstrap = New instat.ucrCheck()
-        Me.ucrSaveObjects = New instat.ucrSave()
-        Me.ucrNewDataFrameName = New instat.ucrSave()
+        Me.lblReceiver = New System.Windows.Forms.Label()
+        Me.cmdFitModel = New System.Windows.Forms.Button()
+        Me.cmdBootstrapOptions = New System.Windows.Forms.Button()
+        Me.chkSaveBootstrap = New System.Windows.Forms.CheckBox()
+        Me.chkProduceBootstrap = New System.Windows.Forms.CheckBox()
+        Me.chkSaveDataFrame = New System.Windows.Forms.CheckBox()
+        Me.ucrSaveObjects = New instat.ucrInputComboBox()
+        Me.ucrNewDataframeName = New instat.ucrInputComboBox()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrReceiverObject = New instat.ucrReceiverSingle()
-        Me.ucrSelectorUseModel = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiver = New instat.ucrReceiverSingle()
+        Me.ucrSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
         '
-        'lblReceiverObject
+        'lblReceiver
         '
-        Me.lblReceiverObject.AutoSize = True
-        Me.lblReceiverObject.Location = New System.Drawing.Point(239, 45)
-        Me.lblReceiverObject.Name = "lblReceiverObject"
-        Me.lblReceiverObject.Size = New System.Drawing.Size(86, 13)
-        Me.lblReceiverObject.TabIndex = 1
-        Me.lblReceiverObject.Text = "Selected Object:"
+        Me.lblReceiver.AutoSize = True
+        Me.lblReceiver.Location = New System.Drawing.Point(239, 42)
+        Me.lblReceiver.Name = "lblReceiver"
+        Me.lblReceiver.Size = New System.Drawing.Size(86, 13)
+        Me.lblReceiver.TabIndex = 1
+        Me.lblReceiver.Text = "Selected Object:"
         '
-        'cmdFitModelandBootstrap
+        'cmdFitModel
         '
-        Me.cmdFitModelandBootstrap.Location = New System.Drawing.Point(333, 200)
-        Me.cmdFitModelandBootstrap.Name = "cmdFitModelandBootstrap"
-        Me.cmdFitModelandBootstrap.Size = New System.Drawing.Size(76, 23)
-        Me.cmdFitModelandBootstrap.TabIndex = 7
-        Me.cmdFitModelandBootstrap.Text = "Options"
-        Me.cmdFitModelandBootstrap.UseVisualStyleBackColor = True
+        Me.cmdFitModel.Location = New System.Drawing.Point(275, 201)
+        Me.cmdFitModel.Name = "cmdFitModel"
+        Me.cmdFitModel.Size = New System.Drawing.Size(101, 23)
+        Me.cmdFitModel.TabIndex = 7
+        Me.cmdFitModel.Text = "Fit Model"
+        Me.cmdFitModel.UseVisualStyleBackColor = True
         '
-        'ucrChkProduceBootstrap
+        'cmdBootstrapOptions
         '
-        Me.ucrChkProduceBootstrap.Checked = False
-        Me.ucrChkProduceBootstrap.Location = New System.Drawing.Point(239, 88)
-        Me.ucrChkProduceBootstrap.Name = "ucrChkProduceBootstrap"
-        Me.ucrChkProduceBootstrap.Size = New System.Drawing.Size(172, 20)
-        Me.ucrChkProduceBootstrap.TabIndex = 3
+        Me.cmdBootstrapOptions.Location = New System.Drawing.Point(275, 167)
+        Me.cmdBootstrapOptions.Name = "cmdBootstrapOptions"
+        Me.cmdBootstrapOptions.Size = New System.Drawing.Size(101, 23)
+        Me.cmdBootstrapOptions.TabIndex = 6
+        Me.cmdBootstrapOptions.Text = "Bootstrap Options"
+        Me.cmdBootstrapOptions.UseVisualStyleBackColor = True
+        '
+        'chkSaveBootstrap
+        '
+        Me.chkSaveBootstrap.AutoSize = True
+        Me.chkSaveBootstrap.Location = New System.Drawing.Point(239, 112)
+        Me.chkSaveBootstrap.Name = "chkSaveBootstrap"
+        Me.chkSaveBootstrap.Size = New System.Drawing.Size(138, 17)
+        Me.chkSaveBootstrap.TabIndex = 4
+        Me.chkSaveBootstrap.Text = "Save Bootstrap Objects"
+        Me.chkSaveBootstrap.UseVisualStyleBackColor = True
+        '
+        'chkProduceBootstrap
+        '
+        Me.chkProduceBootstrap.AutoSize = True
+        Me.chkProduceBootstrap.Location = New System.Drawing.Point(239, 89)
+        Me.chkProduceBootstrap.Name = "chkProduceBootstrap"
+        Me.chkProduceBootstrap.Size = New System.Drawing.Size(114, 17)
+        Me.chkProduceBootstrap.TabIndex = 3
+        Me.chkProduceBootstrap.Text = "Produce Bootstrap"
+        Me.chkProduceBootstrap.UseVisualStyleBackColor = True
+        '
+        'chkSaveDataFrame
+        '
+        Me.chkSaveDataFrame.AutoSize = True
+        Me.chkSaveDataFrame.Location = New System.Drawing.Point(10, 204)
+        Me.chkSaveDataFrame.Name = "chkSaveDataFrame"
+        Me.chkSaveDataFrame.Size = New System.Drawing.Size(115, 17)
+        Me.chkSaveDataFrame.TabIndex = 8
+        Me.chkSaveDataFrame.Text = "Save to Dataframe"
+        Me.chkSaveDataFrame.UseVisualStyleBackColor = True
         '
         'ucrSaveObjects
         '
-        Me.ucrSaveObjects.Location = New System.Drawing.Point(239, 114)
+        Me.ucrSaveObjects.IsReadOnly = False
+        Me.ucrSaveObjects.Location = New System.Drawing.Point(239, 135)
         Me.ucrSaveObjects.Name = "ucrSaveObjects"
-        Me.ucrSaveObjects.Size = New System.Drawing.Size(189, 24)
-        Me.ucrSaveObjects.TabIndex = 4
+        Me.ucrSaveObjects.Size = New System.Drawing.Size(137, 21)
+        Me.ucrSaveObjects.TabIndex = 5
         '
-        'ucrNewDataFrameName
+        'ucrNewDataframeName
         '
-        Me.ucrNewDataFrameName.Location = New System.Drawing.Point(10, 200)
-        Me.ucrNewDataFrameName.Name = "ucrNewDataFrameName"
-        Me.ucrNewDataFrameName.Size = New System.Drawing.Size(265, 24)
-        Me.ucrNewDataFrameName.TabIndex = 6
+        Me.ucrNewDataframeName.IsReadOnly = False
+        Me.ucrNewDataframeName.Location = New System.Drawing.Point(128, 202)
+        Me.ucrNewDataframeName.Name = "ucrNewDataframeName"
+        Me.ucrNewDataframeName.Size = New System.Drawing.Size(138, 21)
+        Me.ucrNewDataframeName.TabIndex = 9
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 230)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 229)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 8
+        Me.ucrBase.TabIndex = 10
         '
-        'ucrReceiverObject
+        'ucrReceiver
         '
-        Me.ucrReceiverObject.frmParent = Me
-        Me.ucrReceiverObject.Location = New System.Drawing.Point(239, 60)
-        Me.ucrReceiverObject.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverObject.Name = "ucrReceiverObject"
-        Me.ucrReceiverObject.Selector = Nothing
-        Me.ucrReceiverObject.Size = New System.Drawing.Size(138, 20)
-        Me.ucrReceiverObject.strNcFilePath = ""
-        Me.ucrReceiverObject.TabIndex = 2
-        Me.ucrReceiverObject.ucrSelector = Nothing
+        Me.ucrReceiver.Location = New System.Drawing.Point(239, 57)
+        Me.ucrReceiver.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiver.Name = "ucrReceiver"
+        Me.ucrReceiver.Selector = Nothing
+        Me.ucrReceiver.Size = New System.Drawing.Size(138, 20)
+        Me.ucrReceiver.TabIndex = 2
         '
-        'ucrSelectorUseModel
+        'ucrSelector
         '
-        Me.ucrSelectorUseModel.bShowHiddenColumns = False
-        Me.ucrSelectorUseModel.bUseCurrentFilter = True
-        Me.ucrSelectorUseModel.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorUseModel.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorUseModel.Name = "ucrSelectorUseModel"
-        Me.ucrSelectorUseModel.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorUseModel.TabIndex = 0
+        Me.ucrSelector.bShowHiddenColumns = False
+        Me.ucrSelector.bUseCurrentFilter = True
+        Me.ucrSelector.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelector.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelector.Name = "ucrSelector"
+        Me.ucrSelector.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelector.TabIndex = 0
         '
         'dlgOneVarUseModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(417, 289)
-        Me.Controls.Add(Me.ucrChkProduceBootstrap)
+        Me.ClientSize = New System.Drawing.Size(423, 291)
         Me.Controls.Add(Me.ucrSaveObjects)
-        Me.Controls.Add(Me.ucrNewDataFrameName)
+        Me.Controls.Add(Me.ucrNewDataframeName)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.lblReceiverObject)
-        Me.Controls.Add(Me.ucrReceiverObject)
-        Me.Controls.Add(Me.ucrSelectorUseModel)
-        Me.Controls.Add(Me.cmdFitModelandBootstrap)
+        Me.Controls.Add(Me.lblReceiver)
+        Me.Controls.Add(Me.ucrReceiver)
+        Me.Controls.Add(Me.ucrSelector)
+        Me.Controls.Add(Me.cmdFitModel)
+        Me.Controls.Add(Me.cmdBootstrapOptions)
+        Me.Controls.Add(Me.chkSaveBootstrap)
+        Me.Controls.Add(Me.chkProduceBootstrap)
+        Me.Controls.Add(Me.chkSaveDataFrame)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -126,11 +162,14 @@ Partial Class dlgOneVarUseModel
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents lblReceiverObject As Label
-    Friend WithEvents ucrReceiverObject As ucrReceiverSingle
-    Friend WithEvents ucrSelectorUseModel As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents cmdFitModelandBootstrap As Button
-    Friend WithEvents ucrNewDataFrameName As ucrSave
-    Friend WithEvents ucrSaveObjects As ucrSave
-    Friend WithEvents ucrChkProduceBootstrap As ucrCheck
+    Friend WithEvents lblReceiver As Label
+    Friend WithEvents ucrReceiver As ucrReceiverSingle
+    Friend WithEvents ucrSelector As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents cmdFitModel As Button
+    Friend WithEvents cmdBootstrapOptions As Button
+    Friend WithEvents chkSaveBootstrap As CheckBox
+    Friend WithEvents chkProduceBootstrap As CheckBox
+    Friend WithEvents chkSaveDataFrame As CheckBox
+    Friend WithEvents ucrNewDataframeName As ucrInputComboBox
+    Friend WithEvents ucrSaveObjects As ucrInputComboBox
 End Class

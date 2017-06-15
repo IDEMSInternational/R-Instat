@@ -13,88 +13,66 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-Imports instat
 Imports instat.Translations
 
 Public Class dlgRecodeFactor
-    Private bFirstLoad As Boolean = True
-    Private clsReplaceFunction, clsRevalueFunction As RFunction
-    Private bReset As Boolean = True
+    Public bFirstLoad As Boolean = True
+    Private clsReplaceFunction As RFunction
+
     Private Sub dlgRecodeFactor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            bFirstLoad = False
-        End If
-        If bReset Then
             SetDefaults()
+            bFirstLoad = False
+        Else
+            ReopenDialog()
         End If
-        SetRCodeforControls(bReset)
-        bReset = False
-        autoTranslate(Me)
         TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.iHelpTopicID = 37
+        clsReplaceFunction = New RFunction
 
-        ucrReceiverFactor.SetParameter(New RParameter("x", 0))
+        ucrBase.clsRsyntax.SetFunction("revalue")
         ucrReceiverFactor.Selector = ucrSelectorForRecode
         ucrReceiverFactor.SetIncludedDataTypes({"factor"})
         ucrReceiverFactor.SetMeAsReceiver()
-        ucrReceiverFactor.SetParameterIsRFunction()
+        ucrBase.iHelpTopicID = 37
+
+        clsReplaceFunction.strRCommand = "c"
+        ucrBase.clsRsyntax.AddParameter("replace", clsRFunctionParameter:=clsReplaceFunction)
+
+        ucrInputColumnName.SetItemsTypeAsColumns()
+        ucrInputColumnName.SetDefaultTypeAsColumn()
+        ucrInputColumnName.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
 
         ucrFactorGrid.SetReceiver(ucrReceiverFactor)
         ucrFactorGrid.SetAsViewerOnly()
         ucrFactorGrid.bIncludeCopyOfLevels = True
         ucrFactorGrid.AddEditableColumns({"New Label"})
+        ucrFactorGrid.SetIncludeLevels(False)
 
-        ucrSaveNewColumn.SetSaveTypeAsColumn()
-        ucrSaveNewColumn.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
-        ucrSaveNewColumn.SetIsComboBox()
-        ucrSaveNewColumn.SetLabelText("New Column Name:")
+        ucrInputColumnName.SetValidationTypeAsRVariable()
     End Sub
 
     Private Sub SetDefaults()
-        clsReplaceFunction = New RFunction
-        clsRevalueFunction = New RFunction
-
         ucrSelectorForRecode.Reset()
         ucrSelectorForRecode.Focus()
         ucrFactorGrid.ResetText()
-        ucrSaveNewColumn.Reset()
-
-        clsRevalueFunction.SetPackageName("plyr")
-        clsRevalueFunction.SetRCommand("revalue")
-        clsRevalueFunction.AddParameter("replace", clsRFunctionParameter:=clsReplaceFunction)
-        clsRevalueFunction.SetAssignTo(strTemp:=ucrSaveNewColumn.GetText(), strTempDataframe:=ucrSelectorForRecode.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveNewColumn.GetText())
-
-        clsReplaceFunction.SetRCommand("c")
-
-        ucrBase.clsRsyntax.SetBaseRFunction(clsRevalueFunction)
-    End Sub
-
-    Private Sub SetRCodeforControls(bReset As Boolean)
-        SetRCode(Me, clsRevalueFunction, bReset)
-    End Sub
-
-    Private Sub TestOKEnabled()
-        If Not ucrReceiverFactor.IsEmpty AndAlso ucrSaveNewColumn.IsComplete AndAlso ucrFactorGrid.IsColumnComplete("New Label") Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
-    End Sub
-
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
-        SetRCodeforControls(True)
+        ucrInputColumnName.SetPrefix("Recode")
         TestOKEnabled()
     End Sub
 
-    Private Sub DefaultNewName()
-        If ((Not ucrSaveNewColumn.bUserTyped) AndAlso (Not ucrReceiverFactor.IsEmpty)) Then
-            ucrSaveNewColumn.SetPrefix(ucrReceiverFactor.GetVariableNames(bWithQuotes:=False) & "_recoded")
+    Private Sub ReopenDialog()
+
+    End Sub
+
+    Private Sub TestOKEnabled()
+        If Not ucrReceiverFactor.IsEmpty AndAlso ucrFactorGrid.IsColumnComplete("New Label") Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
@@ -106,24 +84,34 @@ Public Class dlgRecodeFactor
         strCurrentLabels = ucrFactorGrid.GetColumnAsList(ucrFactorGrid.strLabelsName, False)
         strNewLabels = ucrFactorGrid.GetColumnAsList("New Label", True)
         clsReplaceFunction.ClearParameters()
-
-        If ucrFactorGrid.IsColumnComplete("New Label") AndAlso strCurrentLabels.Count = strNewLabels.Count Then
+        If ucrFactorGrid.IsColumnComplete(ucrFactorGrid.strLabelsName) AndAlso strCurrentLabels.Count = strNewLabels.Count Then
             For i = 0 To strCurrentLabels.Count - 1
                 ' Backtick needed for names of the vector incase the levels are not valid R names
                 clsReplaceFunction.AddParameter(Chr(96) & strCurrentLabels(i) & Chr(96), strNewLabels(i))
             Next
-            ucrBase.clsRsyntax.AddParameter("replace", clsRFunctionParameter:=clsReplaceFunction)
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("replace")
         End If
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrReceiverFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlValueChanged
-        DefaultNewName()
+    Private Sub ucrReceiverFactor_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverFactor.SelectionChanged
+        If ucrReceiverFactor.IsEmpty Then
+            ucrBase.clsRsyntax.RemoveParameter("x")
+        Else
+            ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverFactor.GetVariables())
+        End If
+        TestOKEnabled()
     End Sub
 
-    Private Sub ucrReceiverFactor_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged, ucrSaveNewColumn.ControlContentsChanged
+    Private Sub ucrInputColumnName_NameChanged() Handles ucrInputColumnName.NameChanged
+        If ucrInputColumnName.IsEmpty Then
+            ucrBase.clsRsyntax.RemoveAssignTo()
+        Else
+            ucrBase.clsRsyntax.SetAssignTo(ucrInputColumnName.GetText(), strTempDataframe:=ucrSelectorForRecode.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrInputColumnName.GetText())
+        End If
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
     End Sub
 End Class

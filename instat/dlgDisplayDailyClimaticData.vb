@@ -34,46 +34,9 @@ Public Class dlgDisplayDailyClimaticData
 
     Private Sub InitialiseDialog()
 
-        ucrReceiverStations.Selector = ucrSelectorDisplayDailyClimaticData
-        ucrReceiverStations.SetClimaticType("station")
-        ucrReceiverStations.bAutoFill = True
-        ucrReceiverStations.SetMeAsReceiver()
-
-        ucrReceiverYear.Selector = ucrSelectorDisplayDailyClimaticData
-        ucrReceiverYear.SetClimaticType("year")
-        ucrReceiverYear.bAutoFill = True
-
-        ucrReceiverDate.Selector = ucrSelectorDisplayDailyClimaticData
-        ucrReceiverDate.SetClimaticType("date")
-        ucrReceiverDate.bAutoFill = True
-
-        ucrReceiverElements.Selector = ucrSelectorDisplayDailyClimaticData
-        ucrReceiverElements.SetParameter(New RParameter("x", 0))
-        ucrReceiverElements.SetParameterIsString()
-        ucrReceiverElements.bWithQuotes = False
-
-        ucrReceiverXaxis.Selector = ucrSelectorDisplayDailyClimaticData
-        ucrReceiverXaxis.SetClimaticType("doy")
-        ucrReceiverXaxis.bAutoFill = True
-
-        ucrNudUpperYaxis.SetLinkedDisplayControl(lblYaxisUpper)
-        ucrNudLowerYaxis.SetLinkedDisplayControl(lblYaxisLower)
-        ucrReceiverXaxis.SetLinkedDisplayControl(lblXaxis)
-
-        ucrPnlFrequencyDisplay.AddRadioButton(rdoTable)
-        ucrPnlFrequencyDisplay.AddRadioButton(rdoGraph)
-        ucrPnlFrequencyDisplay.AddRadioButton(rdoBoth)
-        ucrPnlFrequencyDisplay.AddToLinkedControls({ucrNudLowerYaxis, ucrNudUpperYaxis, ucrReceiverXaxis, ucrChkMissingRugPlot, ucrChkValuesOutsideYrange}, {rdoGraph, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlFrequencyDisplay.SetLinkedDisplayControl(grpGraph)
-        ucrChkMissingRugPlot.SetLinkedDisplayControl(grpGraph)
-        ucrChkMissingRugPlot.SetText("Indicate Missing Rug Plot")
-        ucrChkValuesOutsideYrange.SetText("Indicate  Values Outside Y Range")
-
     End Sub
 
     Private Sub SetDefaults()
-        ucrSelectorDisplayDailyClimaticData.Reset()
-        rdoTable.Enabled = False 'for now
 
     End Sub
 
@@ -82,12 +45,6 @@ Public Class dlgDisplayDailyClimaticData
     End Sub
 
     Private Sub TestOkEnabled()
-        ucrBase.OKEnabled(True)
-    End Sub
 
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
-        SetRCodeForControls(True)
-        TestOkEnabled()
     End Sub
 End Class

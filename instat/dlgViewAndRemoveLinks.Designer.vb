@@ -23,11 +23,11 @@ Partial Class dlgViewAndRemoveLinks
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblLinks = New System.Windows.Forms.Label()
-        Me.lblSelectedLink = New System.Windows.Forms.Label()
+        Me.lblLink = New System.Windows.Forms.Label()
         Me.rdoViewLink = New System.Windows.Forms.RadioButton()
         Me.rdoDeleteLink = New System.Windows.Forms.RadioButton()
         Me.ucrReceiverViewLinks = New instat.ucrReceiverSingle()
-        Me.ucrPnlLinks = New instat.UcrPanel()
+        Me.ucrpnlDeleteView = New instat.UcrPanel()
         Me.ucrSelectorLinks = New instat.ucrSelector()
         Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
@@ -35,28 +35,28 @@ Partial Class dlgViewAndRemoveLinks
         'lblLinks
         '
         Me.lblLinks.AutoSize = True
-        Me.lblLinks.Location = New System.Drawing.Point(12, 15)
+        Me.lblLinks.Location = New System.Drawing.Point(13, 13)
         Me.lblLinks.Name = "lblLinks"
         Me.lblLinks.Size = New System.Drawing.Size(35, 13)
-        Me.lblLinks.TabIndex = 0
+        Me.lblLinks.TabIndex = 3
         Me.lblLinks.Text = "Links:"
         '
-        'lblSelectedLink
+        'lblLink
         '
-        Me.lblSelectedLink.AutoSize = True
-        Me.lblSelectedLink.Location = New System.Drawing.Point(196, 28)
-        Me.lblSelectedLink.Name = "lblSelectedLink"
-        Me.lblSelectedLink.Size = New System.Drawing.Size(75, 13)
-        Me.lblSelectedLink.TabIndex = 2
-        Me.lblSelectedLink.Text = "Selected Link:"
+        Me.lblLink.AutoSize = True
+        Me.lblLink.Location = New System.Drawing.Point(153, 13)
+        Me.lblLink.Name = "lblLink"
+        Me.lblLink.Size = New System.Drawing.Size(30, 13)
+        Me.lblLink.TabIndex = 4
+        Me.lblLink.Text = "Link:"
         '
         'rdoViewLink
         '
         Me.rdoViewLink.AutoSize = True
-        Me.rdoViewLink.Location = New System.Drawing.Point(194, 74)
+        Me.rdoViewLink.Location = New System.Drawing.Point(163, 99)
         Me.rdoViewLink.Name = "rdoViewLink"
         Me.rdoViewLink.Size = New System.Drawing.Size(71, 17)
-        Me.rdoViewLink.TabIndex = 5
+        Me.rdoViewLink.TabIndex = 14
         Me.rdoViewLink.TabStop = True
         Me.rdoViewLink.Text = "View Link"
         Me.rdoViewLink.UseVisualStyleBackColor = True
@@ -64,10 +64,10 @@ Partial Class dlgViewAndRemoveLinks
         'rdoDeleteLink
         '
         Me.rdoDeleteLink.AutoSize = True
-        Me.rdoDeleteLink.Location = New System.Drawing.Point(194, 97)
+        Me.rdoDeleteLink.Location = New System.Drawing.Point(259, 99)
         Me.rdoDeleteLink.Name = "rdoDeleteLink"
         Me.rdoDeleteLink.Size = New System.Drawing.Size(79, 17)
-        Me.rdoDeleteLink.TabIndex = 6
+        Me.rdoDeleteLink.TabIndex = 15
         Me.rdoDeleteLink.TabStop = True
         Me.rdoDeleteLink.Text = "Delete Link"
         Me.rdoDeleteLink.UseVisualStyleBackColor = True
@@ -75,49 +75,48 @@ Partial Class dlgViewAndRemoveLinks
         'ucrReceiverViewLinks
         '
         Me.ucrReceiverViewLinks.frmParent = Me
-        Me.ucrReceiverViewLinks.Location = New System.Drawing.Point(194, 43)
+        Me.ucrReceiverViewLinks.Location = New System.Drawing.Point(153, 30)
         Me.ucrReceiverViewLinks.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverViewLinks.Name = "ucrReceiverViewLinks"
         Me.ucrReceiverViewLinks.Selector = Nothing
         Me.ucrReceiverViewLinks.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverViewLinks.strNcFilePath = ""
-        Me.ucrReceiverViewLinks.TabIndex = 3
+        Me.ucrReceiverViewLinks.TabIndex = 16
         Me.ucrReceiverViewLinks.ucrSelector = Nothing
         '
-        'ucrPnlLinks
+        'ucrpnlDeleteView
         '
-        Me.ucrPnlLinks.Location = New System.Drawing.Point(184, 66)
-        Me.ucrPnlLinks.Name = "ucrPnlLinks"
-        Me.ucrPnlLinks.Size = New System.Drawing.Size(130, 62)
-        Me.ucrPnlLinks.TabIndex = 4
+        Me.ucrpnlDeleteView.Location = New System.Drawing.Point(163, 84)
+        Me.ucrpnlDeleteView.Name = "ucrpnlDeleteView"
+        Me.ucrpnlDeleteView.Size = New System.Drawing.Size(187, 41)
+        Me.ucrpnlDeleteView.TabIndex = 13
         '
         'ucrSelectorLinks
         '
         Me.ucrSelectorLinks.bShowHiddenColumns = False
-        Me.ucrSelectorLinks.Location = New System.Drawing.Point(10, 30)
+        Me.ucrSelectorLinks.Location = New System.Drawing.Point(16, 30)
         Me.ucrSelectorLinks.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorLinks.Name = "ucrSelectorLinks"
         Me.ucrSelectorLinks.Size = New System.Drawing.Size(120, 98)
-        Me.ucrSelectorLinks.TabIndex = 1
+        Me.ucrSelectorLinks.TabIndex = 12
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 134)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 134)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 7
+        Me.ucrBase.TabIndex = 1
         '
         'dlgViewAndRemoveLinks
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(422, 191)
+        Me.ClientSize = New System.Drawing.Size(428, 193)
         Me.Controls.Add(Me.ucrReceiverViewLinks)
         Me.Controls.Add(Me.rdoDeleteLink)
         Me.Controls.Add(Me.rdoViewLink)
-        Me.Controls.Add(Me.ucrPnlLinks)
+        Me.Controls.Add(Me.ucrpnlDeleteView)
         Me.Controls.Add(Me.ucrSelectorLinks)
-        Me.Controls.Add(Me.lblSelectedLink)
+        Me.Controls.Add(Me.lblLink)
         Me.Controls.Add(Me.lblLinks)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -133,10 +132,10 @@ Partial Class dlgViewAndRemoveLinks
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents lblLinks As Label
-    Friend WithEvents lblSelectedLink As Label
+    Friend WithEvents lblLink As Label
     Friend WithEvents ucrSelectorLinks As ucrSelector
     Friend WithEvents rdoDeleteLink As RadioButton
     Friend WithEvents rdoViewLink As RadioButton
-    Friend WithEvents ucrPnlLinks As UcrPanel
+    Friend WithEvents ucrpnlDeleteView As UcrPanel
     Friend WithEvents ucrReceiverViewLinks As ucrReceiverSingle
 End Class

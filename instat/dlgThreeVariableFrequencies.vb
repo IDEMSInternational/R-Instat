@@ -19,9 +19,8 @@ Public Class dlgThreeVariableFrequencies
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
-    Private clsSjTab, clsSelect, clsSjPlot, clsGroupBy, clsGridArrange As New RFunction
+    Private clsSjTab, clsSelect, clsSjPlot, clsGroupBy As New RFunction
     Private clsTableBaseOperator, clsGraphBaseOperator As New ROperator
-    Private clsCurrBaseCode As RCodeStructure
 
     Private Sub dlgThreeVariableFrequencies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -39,7 +38,7 @@ Public Class dlgThreeVariableFrequencies
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 523
-        ucrChkWeights.Enabled = False ' temporary because of bug in R functions being used
+        ucrChkWeights.Enabled = False ' temporary for now
 
         ucrSelectorThreeVariableFrequencies.SetParameter(New RParameter("data", 0))
         ucrSelectorThreeVariableFrequencies.SetParameterIsrfunction()
@@ -108,8 +107,8 @@ Public Class dlgThreeVariableFrequencies
         ucrPnlFrequencyDisplay.AddRadioButton(rdoGraph)
         ucrPnlFrequencyDisplay.AddRadioButton(rdoBoth)
 
-        ucrPnlFrequencyDisplay.AddParameterPresentCondition(rdoTable, "sjtab")
-        ucrPnlFrequencyDisplay.AddParameterPresentCondition(rdoGraph, "sjplot")
+        ucrPnlFrequencyDisplay.AddFunctionNamesCondition(rdoTable, "sjtab")
+        ucrPnlFrequencyDisplay.AddFunctionNamesCondition(rdoGraph, "sjplot")
 
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkCount, {rdoTable, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrSaveGraph, {rdoGraph, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
@@ -130,13 +129,13 @@ Public Class dlgThreeVariableFrequencies
         ucrPnlFreqType.AddParameterValuesCondition(rdoCell, "margin", Chr(34) & "cell" & Chr(34))
         ucrPnlFreqType.AddParameterValuesCondition(rdoColumn, "margin", Chr(34) & "col" & Chr(34))
 
-        ' ucrSaveGraph.Enabled = False 'temporary for now
-        ucrSaveGraph.SetPrefix("three_way_freq")
-        ucrSaveGraph.SetSaveTypeAsGraph()
-        ucrSaveGraph.SetDataFrameSelector(ucrSelectorThreeVariableFrequencies.ucrAvailableDataFrames)
-        ucrSaveGraph.SetCheckBoxText("save graph")
-        ucrSaveGraph.SetIsComboBox()
-        ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
+        ucrSaveGraph.Enabled = False 'temporary for now
+        'ucrSaveGraph.SetPrefix("three_way_freq")
+        'ucrSaveGraph.SetSaveTypeAsGraph()
+        'ucrSaveGraph.SetDataFrameSelector(ucrSelectorThreeVariableFrequencies.ucrAvailableDataFrames)
+        'ucrSaveGraph.SetCheckBoxText("Save Graph")
+        'ucrSaveGraph.SetIsComboBox()
+        'ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
 
         ucrChkColumn.SetLinkedDisplayControl(grpFreqTypeTable)
     End Sub
@@ -146,7 +145,6 @@ Public Class dlgThreeVariableFrequencies
         clsSjPlot = New RFunction
         clsGroupBy = New RFunction
         clsSjTab = New RFunction
-        clsGridArrange = New RFunction
         clsTableBaseOperator = New ROperator
         clsGraphBaseOperator = New ROperator
 
@@ -181,14 +179,8 @@ Public Class dlgThreeVariableFrequencies
         clsSjPlot.AddParameter("fun", Chr(34) & "grpfrq" & Chr(34))
         clsSjPlot.AddParameter("show.prc", "TRUE")
         clsSjPlot.AddParameter("show.n", "TRUE")
-
-        clsGridArrange.SetPackageName("gridExtra")
-        clsGridArrange.SetRCommand("grid.arrange")
-        clsGridArrange.AddParameter("grobs", clsROperatorParameter:=clsGraphBaseOperator)
-
-        clsGridArrange.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorThreeVariableFrequencies.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        'clsGraphBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorThreeVariableFrequencies.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsTableBaseOperator)
-        clsCurrBaseCode = clsTableBaseOperator
         bResetSubdialog = True
     End Sub
 
@@ -216,13 +208,13 @@ Public Class dlgThreeVariableFrequencies
         ucrChkWeights.SetRCode(clsSjTab, bReset)
         ucrChkFlip.SetRCode(clsSjPlot, bReset)
         ucrPnlFreqType.SetRCode(clsSjPlot, bReset)
-        ucrPnlFrequencyDisplay.SetRCode(clsCurrBaseCode, bReset)
+        ucrPnlFrequencyDisplay.SetRCode(clsSjTab, bReset)
         ucrSelectorThreeVariableFrequencies.SetRCode(clsTableBaseOperator, bReset)
         ucrChkCell.SetRCode(clsSjTab, bReset)
         ucrChkColumn.SetRCode(clsSjTab, bReset)
         ucrChkRow.SetRCode(clsSjTab, bReset)
         ucrChkCount.SetRCode(clsSjTab, bReset)
-        ucrSaveGraph.SetRCode(clsGridArrange, bReset)
+        ucrSaveGraph.SetRCode(clsGraphBaseOperator, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -247,15 +239,12 @@ Public Class dlgThreeVariableFrequencies
         TestOkEnabled()
     End Sub
 
-
-    Private Sub SetBaseFunction()
+    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         If rdoTable.Checked OrElse rdoBoth.Checked Then
             ucrBase.clsRsyntax.SetBaseROperator(clsTableBaseOperator)
-            clsCurrBaseCode = clsTableBaseOperator
             ucrBase.clsRsyntax.iCallType = 0
         ElseIf rdoGraph.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsGridArrange)
-            clsCurrBaseCode = clsGraphBaseOperator
+            ucrBase.clsRsyntax.SetBaseROperator(clsGraphBaseOperator)
             ucrBase.clsRsyntax.iCallType = 3
         End If
     End Sub
@@ -268,16 +257,16 @@ Public Class dlgThreeVariableFrequencies
         Dim strAssignTo As String
 
         If rdoBoth.Checked Then
-            bIsAssigned = clsGridArrange.bIsAssigned
-            bToBeAssigned = clsGridArrange.bToBeAssigned
-            strAssignTo = clsGridArrange.strAssignTo
+            bIsAssigned = clsGraphBaseOperator.bIsAssigned
+            bToBeAssigned = clsGraphBaseOperator.bToBeAssigned
+            strAssignTo = clsGraphBaseOperator.strAssignTo
 
-            strGraph = clsGridArrange.ToScript(strTempScript)
+            strGraph = clsGraphBaseOperator.ToScript(strTempScript)
             frmMain.clsRLink.RunScript(strTempScript & strGraph, iCallType:=3)
 
-            clsGridArrange.bIsAssigned = bIsAssigned
-            clsGridArrange.bToBeAssigned = bToBeAssigned
-            clsGridArrange.strAssignTo = strAssignTo
+            clsGraphBaseOperator.bIsAssigned = bIsAssigned
+            clsGraphBaseOperator.bToBeAssigned = bToBeAssigned
+            clsGraphBaseOperator.strAssignTo = strAssignTo
         End If
     End Sub
 
@@ -318,7 +307,6 @@ Public Class dlgThreeVariableFrequencies
             ucrReceiverColumnFactor.SetParameter(clsColumnParam)
         End If
         ChangeLocation()
-        SetBaseFunction()
     End Sub
 
     Private Sub ucrPnlFreqType_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlFreqType.ControlContentsChanged

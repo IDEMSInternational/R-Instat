@@ -23,7 +23,9 @@ Public Class dlgCombineforGraphics
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
+
         End If
+
         If bReset Then
             SetDefaults()
         End If
@@ -33,41 +35,42 @@ Public Class dlgCombineforGraphics
         TestOkEnabled()
     End Sub
 
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 431
         ucrBase.clsRsyntax.iCallType = 3
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
-        ucrCombineGraphReceiver.SetParameter(New RParameter("grobs", 0))
-        ucrCombineGraphReceiver.SetParameterIsRFunction()
+
         ucrCombineGraphReceiver.Selector = ucrCombineGraphSelector
-        ucrCombineGraphReceiver.SetItemType("graph")
+        ucrCombineGraphSelector.SetItemType("graph")
         ucrCombineGraphReceiver.strSelectorHeading = "Graphs"
 
-        ucrSave.SetPrefix("combined_graph")
+        ucrCombineGraphReceiver.SetParameter(New RParameter("grobs", 0))
+        ucrCombineGraphReceiver.SetParameterIsRFunction()
+
+        ucrSave.SetPrefix("Combined_Graph")
         ucrSave.SetDataFrameSelector(ucrCombineGraphSelector.ucrAvailableDataFrames)
         ucrSave.SetSaveTypeAsGraph()
         ucrSave.SetCheckBoxText("Save Graph")
         ucrSave.SetIsComboBox()
         ucrSave.SetAssignToIfUncheckedValue("last_graph")
+
     End Sub
 
     Private Sub SetDefaults()
-        clsDefaultRFunction = New RFunction
-
         ucrCombineGraphReceiver.SetMeAsReceiver()
         ucrCombineGraphSelector.Reset()
         ucrSave.Reset()
 
-        clsDefaultRFunction.SetPackageName("gridExtra")
+        clsDefaultRFunction = New RFunction
         clsDefaultRFunction.SetRCommand("grid.arrange")
         clsDefaultRFunction.SetAssignTo("last_graph", strTempDataframe:=ucrCombineGraphSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
         bResetSubDialog = True
-    End Sub
-
-    Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -77,24 +80,19 @@ Public Class dlgCombineforGraphics
             ucrBase.OKEnabled(False)
         End If
     End Sub
-
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
 
-    Private Sub cmdLayout_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        'this SetRFunction is still empty in subdialog but will be fixed soon.
-        sdgCombineGraphOptions.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, bResetSubDialog)
-        sdgCombineGraphOptions.ShowDialog()
-        bResetSubDialog = False
-    End Sub
-
     Private Sub AllControls_ControlContentsChanged() Handles ucrCombineGraphReceiver.ControlContentsChanged, ucrSave.ControlContentsChanged
         TestOkEnabled()
     End Sub
-    Private Sub AllControl_ControlContentsChanged() Handles ucrCombineGraphReceiver.ControlContentsChanged
-        sdgCombineGraphOptions.SetDefaultRowAndColumns()
+    Private Sub cmdLayout_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        'this SetRFunction is still empty in subdialog but will be fixed soon.
+        sdgCombineGraphOptions.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, bResetSubDialog)
+        bResetSubDialog = False
+        sdgCombineGraphOptions.ShowDialog()
     End Sub
 End Class

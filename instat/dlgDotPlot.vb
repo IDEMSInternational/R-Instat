@@ -28,18 +28,13 @@ Public Class dlgDotPlot
     Private clsXlabsFunction As New RFunction
     Private clsYlabFunction As New RFunction
     Private clsXScalecontinuousFunction As New RFunction
-    Private clsYScalecontinuousFunction As New RFunction
     Private clsRFacetFunction As New RFunction
-    Private clsThemeFunction As New RFunction
-    Private dctThemeFunctions As New Dictionary(Of String, RFunction)
     Private bResetSubdialog As Boolean = True
     'strBinAxis stores the name of the axis along which the bins are made. Then strOtherAxis is the other axis (x or y)
     Private strBinAxis As String
     Private strOtherAxis As String
     'bEditAesFunction is used to avoid the aesthetics to be edited within clsRaesFunction when the receivers are actually setup according to the content of clsRaesFunction (for example coming back from LayerOptions).
     Private bEditAesFunction As Boolean
-    Private clsLocalRaesFunction As New RFunction
-    Private bResetDotLayerSubdialog As Boolean = True
 
     Private Sub dlgDotPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -145,16 +140,11 @@ Public Class dlgDotPlot
         clsRDotplotGeomFunction.SetRCommand("geom_dotplot")
         clsRDotplotGeomFunction.AddParameter("binaxis", Chr(34) & "x" & Chr(34))
 
-        clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
+        clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultTheme.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
-        clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
-        clsYScalecontinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone
         clsRFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
-        dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
-        clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction
-        clsLocalRaesFunction = GgplotDefaults.clsAesFunction.Clone()
 
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrDotPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
@@ -170,9 +160,9 @@ Public Class dlgDotPlot
         'This sub handles a call of the options which opens the LayerOptions sdg.
         Dim iIndex As Integer
         bEditAesFunction = False 'The content of the AesFunction should not be edited when we are setting up the dialogue according to the content of AesFunction, when coming back from LayerOptions.
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggPlotFunction, clsNewGeomFunc:=clsRDotplotGeomFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrDotPlotSelector, bApplyAesGlobally:=True, bReset:=bResetDotLayerSubdialog)
+
+        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggPlotFunction, clsTempGeomFunc:=clsRDotplotGeomFunction, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrDotPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True, bIgnoreGlobalAes:=False)
         sdgLayerOptions.ShowDialog()
-        bResetDotLayerSubdialog = False
         iIndex = clsRDotplotGeomFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "binaxis")
         If iIndex <> -1 AndAlso clsRDotplotGeomFunction.clsParameters(iIndex).strArgumentValue = Chr(34) & "y" & Chr(34) Then
             rdoYBinAxis.Checked = True
@@ -201,7 +191,7 @@ Public Class dlgDotPlot
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetRCode(clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, ucrNewBaseSelector:=ucrDotPlotSelector, bReset:=bResetSubdialog)
+        sdgPlots.SetRCode(clsBaseOperator, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, strNewDataFrame:=ucrDotPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
     End Sub

@@ -40,9 +40,6 @@ Public Class dlgCorrelation
         ucrReceiverMultipleColumns.SetDataType("numeric")
         ucrSaveModel.chkSaveModel.Text = "Result Name"
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        'TODO: Fix bugs produced when rdoScatterplotMatrix is checked. Disabled for now
-        sdgCorrPlot.rdoScatterplotMatrix.Enabled = False
-
         sdgCorrPlot.ucrSelectFactor.SetDataframe(ucrSelectorCorrelation.ucrAvailableDataFrames.strCurrDataFrame, bEnableDataframe:=False)
         nudConfidenceInterval.Minimum = 0
         nudConfidenceInterval.Maximum = 1
@@ -243,7 +240,7 @@ Public Class dlgCorrelation
             ucrBase.clsRsyntax.SetAssignTo(ucrSaveModel.ucrInputModelName.GetText(), strTempModel:=ucrSaveModel.ucrInputModelName.GetText(), strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
             ucrBase.clsRsyntax.iCallType = 0
-        ElseIf sdgCorrPlot.ucrSaveGraph.bSaveGraph Then
+        ElseIf sdgcorrplot.ucrSaveGraph.bSaveGraph Then
             ucrBase.clsRsyntax.SetAssignTo(sdgCorrPlot.ucrSaveGraph.strGraphName, strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=sdgCorrPlot.ucrSaveGraph.strGraphName)
             ucrBase.clsRsyntax.iCallType = 0
         Else

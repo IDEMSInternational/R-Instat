@@ -34,7 +34,7 @@ Public Class sdgAddNewDistribution
 
     End Sub
 
-    Private Sub ucrNewDistributions_ParameterChanged() Handles ucrNewDistributions.ControlContentsChanged
+    Private Sub ucrNewDistributions_ParameterChanged() Handles ucrNewDistributions.ParameterChanged
         newDist()
     End Sub
 

@@ -40,9 +40,6 @@ Public Class dlgWaterBalance
     End Sub
 
     Private Sub InitialiseDialog()
-
-        ucrBase.iHelpTopicID = 201
-
         clsAddKey.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
         clsDayFromAndTo.SetRCommand("instat_calculation$new")
         clsDayFromAndTo.SetAssignTo("Day_From_and_To")

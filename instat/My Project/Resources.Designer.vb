@@ -1003,24 +1003,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to DF1.
-        '''</summary>
-        Friend ReadOnly Property DF1() As String
-            Get
-                Return ResourceManager.GetString("DF1", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to DF2.
-        '''</summary>
-        Friend ReadOnly Property DF2() As String
-            Get
-                Return ResourceManager.GetString("DF2", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Looks up a localized string similar to Display.
         '''</summary>
         Friend ReadOnly Property Display() As String
@@ -3657,24 +3639,6 @@ Namespace My.Resources
         Friend ReadOnly Property Shape_2() As String
             Get
                 Return ResourceManager.GetString("Shape_2", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Shape1.
-        '''</summary>
-        Friend ReadOnly Property Shape1() As String
-            Get
-                Return ResourceManager.GetString("Shape1", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Shape2.
-        '''</summary>
-        Friend ReadOnly Property Shape2() As String
-            Get
-                Return ResourceManager.GetString("Shape2", resourceCulture)
             End Get
         End Property
         

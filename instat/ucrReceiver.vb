@@ -29,7 +29,6 @@ Public Class ucrReceiver
     Public bExcludeFromSelector As Boolean = False
     Public Event SelectionChanged(sender As Object, e As EventArgs)
     Public WithEvents frmParent As Form
-    Public bRemoveLabels As Boolean = False
 
     Public strDatabaseQuery As String = ""
 
@@ -41,7 +40,7 @@ Public Class ucrReceiver
     'If the control is used to set a parameter that is an RFunction i.e. x = InstatDataObject$get_columns_from_data()
     Protected bParameterIsRFunction As Boolean = False
     'The name of the data parameter in the get columns instat object method (should always be the same)
-    Protected strItemsParameterNameInRFunction As String = "col_names"
+    Protected strColumnsParameterNameInRFunction As String = "col_names"
 
     'Should quotes be used when bParameterIsString = False
     Public bWithQuotes As Boolean = True
@@ -69,14 +68,10 @@ Public Class ucrReceiver
     End Sub
 
     Public Overridable Sub RemoveSelected()
-        If IsCurrentReceiver() Then
+        If Selector IsNot Nothing Then
             Selector.LoadList()
         End If
     End Sub
-
-    Private Function IsCurrentReceiver() As Boolean
-        Return Selector IsNot Nothing AndAlso Selector.CurrentReceiver IsNot Nothing AndAlso Selector.CurrentReceiver.Equals(Me)
-    End Function
 
     Public Overridable Sub Remove(strItems As String())
 
@@ -104,7 +99,7 @@ Public Class ucrReceiver
         End Get
         Set(strFilePath As String)
             strPrvNcFilePath = strFilePath
-            If IsCurrentReceiver() Then
+            If Selector IsNot Nothing Then
                 Selector.LoadList()
             End If
         End Set
@@ -234,7 +229,7 @@ Public Class ucrReceiver
         '    lstExcludedMetadataProperties.RemoveAt(iExcludeIndex)
         'End If
 
-        If IsCurrentReceiver() Then
+        If Selector IsNot Nothing Then
             Selector.LoadList()
         End If
 
@@ -247,7 +242,7 @@ Public Class ucrReceiver
         If iIncludeIndex <> -1 Then
             lstIncludedMetadataProperties.RemoveAt(iIncludeIndex)
         End If
-        If IsCurrentReceiver() Then
+        If Selector IsNot Nothing Then
             Selector.LoadList()
         End If
 
@@ -260,7 +255,7 @@ Public Class ucrReceiver
         If iIncludeIndex <> -1 Then
             lstExcludedMetadataProperties.RemoveAt(iIncludeIndex)
         End If
-        If IsCurrentReceiver() Then
+        If Selector IsNot Nothing Then
             Selector.LoadList()
         End If
     End Sub
@@ -290,7 +285,7 @@ Public Class ucrReceiver
         '    lstIncludedMetadataProperties.RemoveAt(iIncludeIndex)
         'End If
 
-        If IsCurrentReceiver() Then
+        If Selector IsNot Nothing Then
             Selector.LoadList()
         End If
     End Sub
@@ -314,26 +309,7 @@ Public Class ucrReceiver
 
     Public Sub SetItemType(strNewType As String)
         strType = strNewType
-        Select Case strType
-            Case "column"
-                strItemsParameterNameInRFunction = "col_names"
-            Case "metadata"
-                'TODO what should this be?
-                strItemsParameterNameInRFunction = ""
-            Case "graph"
-                strItemsParameterNameInRFunction = "graph_name"
-            Case "model"
-                strItemsParameterNameInRFunction = "model_name"
-            Case "table"
-                strItemsParameterNameInRFunction = "table_name"
-            Case "filter"
-                strItemsParameterNameInRFunction = "filter_name"
-            Case "link"
-                strItemsParameterNameInRFunction = "link_name"
-            Case "object"
-                strItemsParameterNameInRFunction = "object_name"
-        End Select
-        If IsCurrentReceiver() Then
+        If Selector IsNot Nothing Then
             Selector.LoadList()
         End If
         bTypeSet = True
@@ -372,9 +348,9 @@ Public Class ucrReceiver
                         lstCurrentVariables = ExtractItemsFromRList(clsTempParameter.strArgumentValue)
                     End If
                 ElseIf bParameterIsRFunction AndAlso clsTempParameter.bIsFunction Then
-                    clsTempDataParameter = clsTempParameter.clsArgumentCodeStructure.GetParameter(strItemsParameterNameInRFunction)
+                    clsTempDataParameter = clsTempParameter.clsArgumentCodeStructure.GetParameter(strColumnsParameterNameInRFunction)
                     If clsTempDataParameter IsNot Nothing Then
-                        lstCurrentVariables = ExtractItemsFromRList(clsTempParameter.clsArgumentCodeStructure.GetParameter(strItemsParameterNameInRFunction).strArgumentValue)
+                        lstCurrentVariables = ExtractItemsFromRList(clsTempParameter.clsArgumentCodeStructure.GetParameter(strColumnsParameterNameInRFunction).strArgumentValue)
                     End If
                 End If
                 Clear()
@@ -444,9 +420,5 @@ Public Class ucrReceiver
 
     Protected Overrides Sub ResetControlValue()
         Clear()
-    End Sub
-
-    Public Overridable Sub SetTextColour(clrNew As Color)
-
     End Sub
 End Class

@@ -36,11 +36,8 @@ Public Class dlgOneVarCompareModels
         ucrBase.clsRsyntax.iCallType = 2
         UcrReceiver.Selector = ucrSelectorOneVarCompModels
         UcrReceiver.SetMeAsReceiver()
-        UcrReceiver.SetItemType("model")
-        ucrBase.clsRsyntax.SetFunction("fitdistrplus::gofstat")
-        'Temporry fix- If you run the second time it breaks, if the check box remains checked. Needs to be fixed
-        sdgOneVarCompareModels.chkCDF.Enabled = False
-
+        ucrBase.clsRsyntax.SetFunction("gofstat")
+        ucrSelectorOneVarCompModels.SetItemType("model")
         sdgOneVarCompareModels.SetModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
         sdgOneVarCompareModels.SetReceiver(UcrReceiver)
         sdgOneVarCompareModels.DisplayChiSquare()

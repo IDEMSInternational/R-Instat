@@ -44,12 +44,9 @@ Public Class ucrDataFrame
 
     Private Sub InitialiseControl()
         bUseCurrentFilter = True
+        SetRDefault("")
         lblDataFrame.AutoSize = True
         bUpdateRCodeFromControl = True
-        'TODO remove this once control updated
-        cboAvailableDataFrames.DropDownStyle = ComboBoxStyle.DropDownList
-        cboAvailableDataFrames.AutoCompleteMode = AutoCompleteMode.None
-        cboAvailableDataFrames.AutoCompleteSource = AutoCompleteSource.None
     End Sub
 
     Public Sub Reset()
