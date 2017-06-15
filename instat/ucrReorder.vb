@@ -227,7 +227,7 @@ Public Class ucrReorder
     End Sub
 
     'to update this to check if the order has changed
-    Public Function IsEmpty() As Boolean
+    Public Function isEmpty() As Boolean
         If lstAvailableData.Items.Count > 0 Then
             Return False
         Else
@@ -254,18 +254,14 @@ Public Class ucrReorder
         Dim strTemp As String()
         Dim chrTemp As CharacterVector
 
-        If objTemp Is Nothing Then
-            FillListView(New String() {})
+        If TypeOf objTemp Is String() Then
+            strTemp = CType(objTemp, String())
+            FillListView(strTemp)
+        ElseIf TypeOf objTemp Is CharacterVector Then
+            chrTemp = CType(objTemp, CharacterVector)
+            FillListView(chrTemp)
         Else
-            If TypeOf objTemp Is String() Then
-                strTemp = CType(objTemp, String())
-                FillListView(strTemp)
-            ElseIf TypeOf objTemp Is CharacterVector Then
-                chrTemp = CType(objTemp, CharacterVector)
-                FillListView(chrTemp)
-            Else
-                MsgBox("Developer error: Cannot set the value of " & Name & " because cannot convert value of object to String() or CharacterVector.")
-            End If
+            MsgBox("Developer error: Cannot set the value of " & Name & " because cannot convert value of object to String() or CharacterVector.")
         End If
     End Sub
 

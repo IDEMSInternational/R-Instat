@@ -82,11 +82,9 @@ Public Class dlgPolynomials
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrNudDegree.SetRCode(clsPolynomial, bReset)
-        ucrPnlType.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrPnlType.SetRCode(clsPolynomial, bReset)
         ucrSavePoly.SetRCode(clsPolynomial, bReset)
-        If rdoSimple.Checked OrElse rdoOrthogonal.Checked Then
-            ucrReceiverPolynomial.SetRCode(clsPolynomial, bReset)
-        End If
+        ucrReceiverPolynomial.SetRCode(clsPolynomial, bReset)
         ucrReceiverPolynomial.AddAdditionalCodeParameterPair(clsScale, New RParameter("x", 0), iAdditionalPairNo:=1)
         SetNewColumName()
     End Sub

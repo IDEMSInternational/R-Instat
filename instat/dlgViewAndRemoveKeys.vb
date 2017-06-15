@@ -35,9 +35,13 @@ Public Class dlgViewAndRemoveKeys
         bReset = False
     End Sub
 
+    Private Sub ReopenDialog() 'Temporary fixes remove key error on reopen of the dialog
+        ucrSelectorKeys.Reset()
+    End Sub
+
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.iCallType = 2
         ucrBase.iHelpTopicID = 505
+        ucrBase.clsRsyntax.iCallType = 2
 
         'Selector
         ucrSelectorKeys.SetParameter(New RParameter("data_name", 0))
@@ -49,12 +53,11 @@ Public Class dlgViewAndRemoveKeys
         ucrReceiverSelectedKey.Selector = ucrSelectorKeys
         ucrReceiverSelectedKey.SetMeAsReceiver()
         ucrReceiverSelectedKey.SetItemType("key")
-        ucrReceiverSelectedKey.strSelectorHeading = "Keys"
 
-        ucrPnlKeys.AddRadioButton(rdoViewKey)
-        ucrPnlKeys.AddRadioButton(rdoDeleteKey)
-        ucrPnlKeys.AddFunctionNamesCondition(rdoViewKey, frmMain.clsRLink.strInstatDataObject & "$get_keys")
-        ucrPnlKeys.AddFunctionNamesCondition(rdoDeleteKey, frmMain.clsRLink.strInstatDataObject & "$remove_key")
+        'Checkbox
+        ucrChkRemoveKey.SetText("Remove Key")
+        ucrChkRemoveKey.AddFunctionNamesCondition(True, frmMain.clsRLink.strInstatDataObject & "$remove_key")
+        ucrChkRemoveKey.AddFunctionNamesCondition(False, frmMain.clsRLink.strInstatDataObject & "$get_keys")
     End Sub
 
     Private Sub SetDefaults()
@@ -63,14 +66,13 @@ Public Class dlgViewAndRemoveKeys
 
         ucrSelectorKeys.Reset()
 
+        ' Set default RFunction as the base function
         clsGetKey.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_keys")
         clsRemoveKey.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_key")
-
         ucrBase.clsRsyntax.SetBaseRFunction(clsGetKey)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverSelectedKey.AddAdditionalCodeParameterPair(clsRemoveKey, New RParameter("key_name", 1), iAdditionalPairNo:=1)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
@@ -82,8 +84,8 @@ Public Class dlgViewAndRemoveKeys
         End If
     End Sub
 
-    Private Sub ReopenDialog() 'Temporary fixes remove key error on reopen of the dialog
-        ucrSelectorKeys.Reset()
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedKey.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -92,16 +94,12 @@ Public Class dlgViewAndRemoveKeys
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrPnlKeys_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlKeys.ControlValueChanged
-        If rdoDeleteKey.Checked Then
+    Private Sub ucrChkRemoveKey_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkRemoveKey.ControlValueChanged
+        If ucrChkRemoveKey.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsRemoveKey)
         Else
             ucrBase.clsRsyntax.SetBaseRFunction(clsGetKey)
         End If
         SetRCodeForControls(False)
-    End Sub
-
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedKey.ControlContentsChanged
-        TestOKEnabled()
     End Sub
 End Class

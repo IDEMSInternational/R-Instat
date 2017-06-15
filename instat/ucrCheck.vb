@@ -117,8 +117,6 @@ Public Class ucrCheck
                     End If
                 ElseIf bAddRemoveParameter Then
                     Return GetRCode().ContainsParameter(clsMainParameter)
-                Else
-                    Return Nothing
                 End If
             ElseIf clsMainParameter.bIsFunction OrElse clsMainParameter.bIsOperator Then
                 Return clsMainParameter.clsArgumentCodeStructure
@@ -133,15 +131,10 @@ Public Class ucrCheck
     Protected Overrides Sub SetToValue(objTemp As Object)
         Dim bTempValue As Boolean
 
-        If objTemp Is Nothing Then
-            'If no value reset to a default value
-            Checked = False
+        If Boolean.TryParse(objTemp, bTempValue) Then
+            Checked = bTempValue
         Else
-            If Boolean.TryParse(objTemp, bTempValue) Then
-                Checked = bTempValue
-            Else
-                MsgBox("Developer error: Cannot set the value of " & Name & " because cannot convert value of object to boolean.")
-            End If
+            MsgBox("Developer error: Cannot set the value of " & Name & " because cannot convert value of object to boolean.")
         End If
     End Sub
 

@@ -18,7 +18,6 @@ Public Class dlgCombineText
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private iColumnsUsed As Integer
-    Private clsDefaultFunction As New RFunction
 
     Private Sub dlgCombineText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -33,26 +32,33 @@ Public Class dlgCombineText
         autoTranslate(Me)
     End Sub
 
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
+    Private Sub ReopenDialog()
+        ColumnOrder()
+    End Sub
+
     Private Sub InitialiseDialog()
-        Dim dctSeparator As New Dictionary(Of String, String)
         ucrBase.iHelpTopicID = 345
 
-        ' ucrReceiver
-        ' ucrReceiverCombineText.SetParameter(New RParameter("columns"))
-        ' ucrReceiverCombineText. TODO: This cannot be either SetParameterIsString() or GetVariableNamesAsList()
-        ucrReceiverCombineText.Selector = ucrSelectorForCombineText
-        ucrReceiverCombineText.SetMeAsReceiver()
-        ucrReceiverCombineText.bUseFilteredData = False
-
-        ucrInputSeparator.SetParameter(New RParameter("sep", iNewPosition:=0))
+        ' Sort items in ucrInputSeparator
+        Dim dctSeparator As New Dictionary(Of String, String)
+        ucrInputSeparator.SetParameter(New RParameter("sep"))
         dctSeparator.Add("Space ( )", Chr(34) & " " & Chr(34))
-        dctSeparator.Add("No Space ()", Chr(34) & "" & Chr(34))
-        dctSeparator.Add("Period .", Chr(34) & "." & Chr(34))
+        dctSeparator.Add("Period .", Chr(34) & "." & Chr(34) & ")")
         dctSeparator.Add("Hyphen -", Chr(34) & "-" & Chr(34))
         dctSeparator.Add("Underscore _", Chr(34) & "_" & Chr(34))
         ucrInputSeparator.SetItems(dctSeparator)
-        ucrInputSeparator.SetRDefault(Chr(34) & "" & Chr(34))
-        ucrInputSeparator.bAllowNonConditionValues = True
+
+        ' ucrReceiver
+        ucrReceiverCombineText.SetParameter(New RParameter("columns"))
+        ' ucrReceiverCombineText.SetParameterIsString() ' reached problem: GetVariableNamesAsList()
+        ucrReceiverCombineText.Selector = ucrSelectorForCombineText
+        ucrReceiverCombineText.SetMeAsReceiver()
+        ucrReceiverCombineText.bUseFilteredData = False
+        ucrReceiverCombineText.SetIncludedDataTypes({"factor", "character"})
 
         ' ucrSaveColumn
         ucrSaveColumn.SetIsTextBox()
@@ -63,20 +69,29 @@ Public Class dlgCombineText
         iColumnsUsed = 0
     End Sub
 
+    ' got
+    'Combine <- stringr::str_c(X1=InstatDataObject$get_columns_from_data(use_current_filter=FALSE, col_names="variable",
+    'data_name="data1_stackedNoCarry"),
+    'X2=InstatDataObject$get_columns_from_data(use_current_filter=FALSE, col_names="value",
+    'data_name="data1_stackedNoCarry"), 
+    '###columns=c("variable","value"),###
+    ''sep=" ")
+
+    ' want
+    'Combine1 <- stringr::str_c(X2=InstatDataObject$get_columns_from_data(use_current_filter=FALSE, col_names="value",
+    'data_name="data1_stackedNoCarry"),
+    'X1=InstatDataObject$get_columns_from_data(use_current_filter=FALSE, col_names="variable", data_name="data1_stackedNoCarry"),
+    ''sep=" ")
+
     Private Sub SetDefaults()
-        clsDefaultFunction = New RFunction
+        Dim clsDefaultFunction As New RFunction
         ucrSelectorForCombineText.Reset()
 
-        clsDefaultFunction.SetPackageName("stringr")
-        clsDefaultFunction.SetRCommand("str_c")
-        clsDefaultFunction.AddParameter("sep", Chr(34) & " " & Chr(34), iPosition:=0)
+        clsDefaultFunction.SetRCommand("stringr::str_c")
+        clsDefaultFunction.AddParameter("sep", Chr(34) & " " & Chr(34))
         clsDefaultFunction.SetAssignTo(strTemp:=ucrSaveColumn.GetText(), strTempDataframe:=ucrSelectorForCombineText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveColumn.GetText())
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
-    End Sub
-
-    Private Sub SetRCodeforControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
     End Sub
 
     Private Sub TestOKEnabled()
@@ -85,10 +100,6 @@ Public Class dlgCombineText
         Else
             ucrBase.OKEnabled(False)
         End If
-    End Sub
-
-    Private Sub ReopenDialog()
-        ColumnOrder()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -108,16 +119,13 @@ Public Class dlgCombineText
             lstColumnFunction = ucrReceiverCombineText.GetVariablesAsList()
             iColumnsUsed = lstColumnFunction.Count
             For i = 0 To lstColumnFunction.Count - 1
-                ucrBase.clsRsyntax.AddParameter("X" & i + 1, clsRFunctionParameter:=lstColumnFunction(i), iPosition:=i + 1)
+                ucrBase.clsRsyntax.AddParameter("X" & i + 1, clsRFunctionParameter:=lstColumnFunction(i))
             Next
         End If
     End Sub
 
-    Private Sub ucrReceiverCombineText_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverCombineText.ControlValueChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveColumn.ControlContentsChanged, ucrReceiverCombineText.ControlContentsChanged
         ColumnOrder()
-    End Sub
-
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveColumn.ControlContentsChanged, ucrReceiverCombineText.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class

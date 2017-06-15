@@ -22,7 +22,6 @@ Public Class dlgNewSummaryTables
     Private bResetSubdialog As Boolean = False
     Private clsDefaultFunction As New RFunction
     Private lstCheckboxes As New List(Of ucrCheck)
-    Private bRCodeSet As Boolean = True
 
     Private Sub dlgNewSummaryTables_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -82,15 +81,14 @@ Public Class dlgNewSummaryTables
         ucrChkSummaries.SetText("Treat Summary Columns as a Further Factor")
         ucrChkSummaries.SetRDefault("FALSE")
 
+        ucrNudSigFigs.SetParameter(New RParameter("signif_fig", 14))
+        ucrNudSigFigs.SetRDefault(2)
+
         ucrChkHTMLTable.SetParameter(New RParameter("as_html", 13))
         ucrChkHTMLTable.SetText("HTML Table")
         ucrChkHTMLTable.SetRDefault("TRUE")
 
-        ucrNudSigFigs.SetParameter(New RParameter("signif_fig", 14))
-        ucrNudSigFigs.SetMinMax(0, 22)
-        ucrNudSigFigs.SetRDefault(2)
-
-        ucrReceiverWeights.SetParameter(New RParameter("weights", 17))
+        ucrReceiverWeights.SetParameter(New RParameter("weights", 16))
         ucrReceiverWeights.SetParameterIsString()
         ucrReceiverWeights.Selector = ucrSelectorSummaryTables
         ucrReceiverWeights.SetDataType("numeric")
@@ -108,7 +106,7 @@ Public Class dlgNewSummaryTables
         'temp disabled, not yet implemented in R function
         'ucrInputPageBy.SetParameter(New RParameter("page_by", 12))
         'temp added to prevent developer error while disabled
-        ucrInputPageBy.bIsActiveRControl = False
+        ucrInputPageBy.bAllowNonConditionValues = True
         'dctPageBy.Add("None", "NULL")
         'dctPageBy.Add("Variables", Chr(34) & "variables" & Chr(34))
         'dctPageBy.Add("Summaries", Chr(34) & "summaries" & Chr(34))
@@ -117,11 +115,11 @@ Public Class dlgNewSummaryTables
         'ucrInputPageBy.SetItems(dctPageBy)
         'ucrInputPageBy.SetRDefault(Chr(34) & "default" & Chr(34))
 
-        ucrChkRowNumbers.SetParameter(New RParameter("rnames", 18), bNewChangeParameterValue:=True)
+        ucrChkRowNumbers.SetParameter(New RParameter("rnames", 18))
         ucrChkRowNumbers.SetText("Show Row Names")
-        ucrChkRowNumbers.SetRDefault("TRUE") ' temporary fix, this is not the actual R-default but we need to not run this parameter
+        ucrChkRowNumbers.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
-        ucrSaveTable.SetPrefix("summary_table")
+        ucrSaveTable.SetPrefix("table")
         ucrSaveTable.SetSaveTypeAsTable()
         ucrSaveTable.SetDataFrameSelector(ucrSelectorSummaryTables.ucrAvailableDataFrames)
         ucrSaveTable.SetIsComboBox()
@@ -136,6 +134,7 @@ Public Class dlgNewSummaryTables
         ucrReceiverFactors.SetMeAsReceiver()
         ucrSelectorSummaryTables.Reset()
         ucrSaveTable.Reset()
+        ucrSaveTable.SetName("summary_table") ' change this to prefix later. currently, if this is prefix then it is blank
 
         clsSummariesList.SetRCommand("c")
         clsSummariesList.AddParameter("summary_mean", Chr(34) & "summary_mean" & Chr(34), bIncludeArgumentName:=False) ' TODO decide which default(s) to use?
@@ -151,11 +150,7 @@ Public Class dlgNewSummaryTables
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        'Prevents nud number of columns resetting until controls not synced with R code
-        bRCodeSet = False
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        bRCodeSet = True
-        SetMaxColumnFactors()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -188,7 +183,6 @@ Public Class dlgNewSummaryTables
     End Sub
 
     Private Sub PageBy()
-        'temp disabled as not implemented in function yet
         'If ucrChkDisplayMargins.Checked AndAlso (ucrReceiverSummaryCols.lstSelectedVariables.Items.Count > 1 OrElse clsSummariesList.clsParameters.Count > 1) Then ' TODO get this to work for clsSummariesList > 1
         '    clsDefaultFunction.AddParameter("page_by", "c(" & Chr(34) & "variables" & Chr(34) & "," & Chr(34) & "summaries" & Chr(34) & ")", iPosition:=13)
         '    ucrInputPageBy.SetName("Variables and Summaries")
@@ -227,7 +221,7 @@ Public Class dlgNewSummaryTables
         If ucrChkHTMLTable.Checked Then
             ucrBase.clsRsyntax.iCallType = 4
         Else
-            ucrBase.clsRsyntax.iCallType = 2
+            ucrBase.clsRsyntax.iCallType = 1
         End If
     End Sub
 
@@ -240,16 +234,10 @@ Public Class dlgNewSummaryTables
     End Sub
 
     Private Sub ucrReceiverFactors_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactors.ControlValueChanged
-        If bRCodeSet Then
-            SetMaxColumnFactors()
-        End If
+        ucrNudColumnFactors.Maximum = ucrReceiverFactors.lstSelectedVariables.Items.Count
     End Sub
 
     Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactors.ControlContentsChanged, ucrSaveTable.ControlContentsChanged, ucrChkWeight.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrNudSigFigs.ControlContentsChanged, ucrReceiverSummaryCols.ControlContentsChanged, ucrNudColumnFactors.ControlContentsChanged
         TestOKEnabled()
-    End Sub
-
-    Private Sub SetMaxColumnFactors()
-        ucrNudColumnFactors.Maximum = ucrReceiverFactors.lstSelectedVariables.Items.Count
     End Sub
 End Class

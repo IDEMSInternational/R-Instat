@@ -26,18 +26,15 @@ Public Class sdgOneVarCompareModels
     End Sub
 
     Public Sub InitialiseDialog()
-        clsRcdfcompFunction.SetPackageName("fitdistrplus")
         clsRcdfcompFunction.SetRCommand("cdfcomp")
-        clsRdenscompFunction.SetPackageName("fitdistrplus")
         clsRdenscompFunction.SetRCommand("denscomp")
-        clsRqqcompFunction.SetPackageName("fitdistrplus")
         clsRqqcompFunction.SetRCommand("qqcomp")
-        clsRppcompFunction.SetPackageName("fitdistrplus")
         clsRppcompFunction.SetRCommand("ppcomp")
         ucrDisplayChiData.SetValidationTypeAsRVariable()
     End Sub
 
     Public Sub SetDefaults()
+        chkCDF.Checked = True
         chkDensity.Checked = False
         chkPP.Checked = False
         chkQQ.Checked = False
@@ -105,19 +102,19 @@ Public Class sdgOneVarCompareModels
 
         If chkCDF.Checked Then
             clsRcdfcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
-            frmMain.clsRLink.RunScript(clsRcdfcompFunction.ToScript(), 3)
+            frmMain.clsRLink.RunScript(clsRcdfcompFunction.ToScript(), 2)
         End If
         If chkPP.Checked Then
             clsRppcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
-            frmMain.clsRLink.RunScript(clsRppcompFunction.ToScript(), 3)
+            frmMain.clsRLink.RunScript(clsRppcompFunction.ToScript(), 2)
         End If
         If chkQQ.Checked Then
             clsRqqcompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
-            frmMain.clsRLink.RunScript(clsRqqcompFunction.ToScript(), 3)
+            frmMain.clsRLink.RunScript(clsRqqcompFunction.ToScript(), 2)
         End If
         If chkDensity.Checked Then
             clsRdenscompFunction.AddParameter("ft", clsRFunctionParameter:=dlgOneVarCompareModels.UcrReceiver.GetVariables())
-            frmMain.clsRLink.RunScript(clsRdenscompFunction.ToScript(), 3)
+            frmMain.clsRLink.RunScript(clsRdenscompFunction.ToScript(), 2)
         End If
         If chkSaveChi.Checked Then
             frmMain.clsRLink.RunScript(clsOperatorforTable.ToScript(), 0)

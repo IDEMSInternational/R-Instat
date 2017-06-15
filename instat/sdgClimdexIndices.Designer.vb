@@ -25,7 +25,7 @@ Partial Class sdgClimdexIndices
         Me.components = New System.ComponentModel.Container()
         Me.ttClimdexIndices = New System.Windows.Forms.ToolTip(Me.components)
         Me.cmdHelp = New System.Windows.Forms.Button()
-        Me.tbpPrecipitation = New System.Windows.Forms.TabPage()
+        Me.tbPrecipitation = New System.Windows.Forms.TabPage()
         Me.grpPrecAnnual = New System.Windows.Forms.GroupBox()
         Me.ucrChkPrecExceedSpecifiedA = New instat.ucrCheck()
         Me.ucrChkMaxDrySpell = New instat.ucrCheck()
@@ -39,7 +39,7 @@ Partial Class sdgClimdexIndices
         Me.grpPrecAnnualMonthly = New System.Windows.Forms.GroupBox()
         Me.ucrChkMonthlyMax5dayPrec = New instat.ucrCheck()
         Me.ucrChkMonthlyMax1dayPrec = New instat.ucrCheck()
-        Me.tbpTemperature = New System.Windows.Forms.TabPage()
+        Me.tbTemperature = New System.Windows.Forms.TabPage()
         Me.grpTmaxTmin = New System.Windows.Forms.GroupBox()
         Me.grpTmaxTminAnnualMonthly = New System.Windows.Forms.GroupBox()
         Me.ucrChkMeanDiurnalTempRange = New instat.ucrCheck()
@@ -65,7 +65,7 @@ Partial Class sdgClimdexIndices
         Me.ucrChkColdSpellDI = New instat.ucrCheck()
         Me.ucrChkTropicalNights = New instat.ucrCheck()
         Me.ucrChkFrostDays = New instat.ucrCheck()
-        Me.tbpSettings = New System.Windows.Forms.TabPage()
+        Me.TbSettings = New System.Windows.Forms.TabPage()
         Me.ucrInputPrecQtiles = New instat.ucrInputTextBox()
         Me.ucrInputTempQtiles = New instat.ucrInputTextBox()
         Me.lblGSLMode = New System.Windows.Forms.Label()
@@ -94,12 +94,12 @@ Partial Class sdgClimdexIndices
         Me.ucrNudAnnualMissingDays = New instat.ucrNud()
         Me.lblN = New System.Windows.Forms.Label()
         Me.lblThreshold = New System.Windows.Forms.Label()
-        Me.tbpClimdex = New System.Windows.Forms.TabControl()
+        Me.tbClimdex = New System.Windows.Forms.TabControl()
         Me.ucrButtonsClimdexIndices = New instat.ucrButtonsSubdialogue()
-        Me.tbpPrecipitation.SuspendLayout()
+        Me.tbPrecipitation.SuspendLayout()
         Me.grpPrecAnnual.SuspendLayout()
         Me.grpPrecAnnualMonthly.SuspendLayout()
-        Me.tbpTemperature.SuspendLayout()
+        Me.tbTemperature.SuspendLayout()
         Me.grpTmaxTmin.SuspendLayout()
         Me.grpTmaxTminAnnualMonthly.SuspendLayout()
         Me.grpTmaxTminAnnual.SuspendLayout()
@@ -109,10 +109,10 @@ Partial Class sdgClimdexIndices
         Me.grpTmin.SuspendLayout()
         Me.grpTminAnnualMonthly.SuspendLayout()
         Me.grpTminAnnual.SuspendLayout()
-        Me.tbpSettings.SuspendLayout()
+        Me.TbSettings.SuspendLayout()
         Me.grpBaseRange.SuspendLayout()
         Me.grpMaxMissingDays.SuspendLayout()
-        Me.tbpClimdex.SuspendLayout()
+        Me.tbClimdex.SuspendLayout()
         Me.SuspendLayout()
         '
         'cmdHelp
@@ -124,17 +124,17 @@ Partial Class sdgClimdexIndices
         Me.cmdHelp.Text = "Indices Help"
         Me.cmdHelp.UseVisualStyleBackColor = True
         '
-        'tbpPrecipitation
+        'tbPrecipitation
         '
-        Me.tbpPrecipitation.Controls.Add(Me.grpPrecAnnual)
-        Me.tbpPrecipitation.Controls.Add(Me.grpPrecAnnualMonthly)
-        Me.tbpPrecipitation.Location = New System.Drawing.Point(4, 22)
-        Me.tbpPrecipitation.Name = "tbpPrecipitation"
-        Me.tbpPrecipitation.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpPrecipitation.Size = New System.Drawing.Size(468, 473)
-        Me.tbpPrecipitation.TabIndex = 3
-        Me.tbpPrecipitation.Text = "Precipitation"
-        Me.tbpPrecipitation.UseVisualStyleBackColor = True
+        Me.tbPrecipitation.Controls.Add(Me.grpPrecAnnual)
+        Me.tbPrecipitation.Controls.Add(Me.grpPrecAnnualMonthly)
+        Me.tbPrecipitation.Location = New System.Drawing.Point(4, 22)
+        Me.tbPrecipitation.Name = "tbPrecipitation"
+        Me.tbPrecipitation.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbPrecipitation.Size = New System.Drawing.Size(468, 473)
+        Me.tbPrecipitation.TabIndex = 3
+        Me.tbPrecipitation.Text = "Precipitation"
+        Me.tbPrecipitation.UseVisualStyleBackColor = True
         '
         'grpPrecAnnual
         '
@@ -253,18 +253,18 @@ Partial Class sdgClimdexIndices
         Me.ucrChkMonthlyMax1dayPrec.Size = New System.Drawing.Size(378, 18)
         Me.ucrChkMonthlyMax1dayPrec.TabIndex = 0
         '
-        'tbpTemperature
+        'tbTemperature
         '
-        Me.tbpTemperature.Controls.Add(Me.grpTmaxTmin)
-        Me.tbpTemperature.Controls.Add(Me.grpTmax)
-        Me.tbpTemperature.Controls.Add(Me.grpTmin)
-        Me.tbpTemperature.Location = New System.Drawing.Point(4, 22)
-        Me.tbpTemperature.Name = "tbpTemperature"
-        Me.tbpTemperature.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpTemperature.Size = New System.Drawing.Size(468, 473)
-        Me.tbpTemperature.TabIndex = 2
-        Me.tbpTemperature.Text = "Temperature"
-        Me.tbpTemperature.UseVisualStyleBackColor = True
+        Me.tbTemperature.Controls.Add(Me.grpTmaxTmin)
+        Me.tbTemperature.Controls.Add(Me.grpTmax)
+        Me.tbTemperature.Controls.Add(Me.grpTmin)
+        Me.tbTemperature.Location = New System.Drawing.Point(4, 22)
+        Me.tbTemperature.Name = "tbTemperature"
+        Me.tbTemperature.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbTemperature.Size = New System.Drawing.Size(468, 473)
+        Me.tbTemperature.TabIndex = 2
+        Me.tbTemperature.Text = "Temperature"
+        Me.tbTemperature.UseVisualStyleBackColor = True
         '
         'grpTmaxTmin
         '
@@ -497,40 +497,39 @@ Partial Class sdgClimdexIndices
         Me.ucrChkFrostDays.Size = New System.Drawing.Size(150, 18)
         Me.ucrChkFrostDays.TabIndex = 0
         '
-        'tbpSettings
+        'TbSettings
         '
-        Me.tbpSettings.Controls.Add(Me.ucrInputPrecQtiles)
-        Me.tbpSettings.Controls.Add(Me.ucrInputTempQtiles)
-        Me.tbpSettings.Controls.Add(Me.lblGSLMode)
-        Me.tbpSettings.Controls.Add(Me.ucrInputGSLMode)
-        Me.tbpSettings.Controls.Add(Me.grpBaseRange)
-        Me.tbpSettings.Controls.Add(Me.ucrChkCenterMean)
-        Me.tbpSettings.Controls.Add(Me.ucrChkSpellDISpanYear)
-        Me.tbpSettings.Controls.Add(Me.ucrChkNHemisphere)
-        Me.tbpSettings.Controls.Add(Me.ucrChkMaxSpellSpanYears)
-        Me.tbpSettings.Controls.Add(Me.ucrNudN)
-        Me.tbpSettings.Controls.Add(Me.ucrNudThreshold)
-        Me.tbpSettings.Controls.Add(Me.ucrNudMinBaseData)
-        Me.tbpSettings.Controls.Add(Me.lblFreq)
-        Me.tbpSettings.Controls.Add(Me.lblMinBaseData)
-        Me.tbpSettings.Controls.Add(Me.ucrInputFreq)
-        Me.tbpSettings.Controls.Add(Me.lblPrecQuantiles)
-        Me.tbpSettings.Controls.Add(Me.lblTempQuantiles)
-        Me.tbpSettings.Controls.Add(Me.grpMaxMissingDays)
-        Me.tbpSettings.Controls.Add(Me.lblN)
-        Me.tbpSettings.Controls.Add(Me.lblThreshold)
-        Me.tbpSettings.Location = New System.Drawing.Point(4, 22)
-        Me.tbpSettings.Name = "tbpSettings"
-        Me.tbpSettings.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpSettings.Size = New System.Drawing.Size(468, 473)
-        Me.tbpSettings.TabIndex = 0
-        Me.tbpSettings.Tag = ""
-        Me.tbpSettings.Text = "Settings"
-        Me.tbpSettings.UseVisualStyleBackColor = True
+        Me.TbSettings.Controls.Add(Me.ucrInputPrecQtiles)
+        Me.TbSettings.Controls.Add(Me.ucrInputTempQtiles)
+        Me.TbSettings.Controls.Add(Me.lblGSLMode)
+        Me.TbSettings.Controls.Add(Me.ucrInputGSLMode)
+        Me.TbSettings.Controls.Add(Me.grpBaseRange)
+        Me.TbSettings.Controls.Add(Me.ucrChkCenterMean)
+        Me.TbSettings.Controls.Add(Me.ucrChkSpellDISpanYear)
+        Me.TbSettings.Controls.Add(Me.ucrChkNHemisphere)
+        Me.TbSettings.Controls.Add(Me.ucrChkMaxSpellSpanYears)
+        Me.TbSettings.Controls.Add(Me.ucrNudN)
+        Me.TbSettings.Controls.Add(Me.ucrNudThreshold)
+        Me.TbSettings.Controls.Add(Me.ucrNudMinBaseData)
+        Me.TbSettings.Controls.Add(Me.lblFreq)
+        Me.TbSettings.Controls.Add(Me.lblMinBaseData)
+        Me.TbSettings.Controls.Add(Me.ucrInputFreq)
+        Me.TbSettings.Controls.Add(Me.lblPrecQuantiles)
+        Me.TbSettings.Controls.Add(Me.lblTempQuantiles)
+        Me.TbSettings.Controls.Add(Me.grpMaxMissingDays)
+        Me.TbSettings.Controls.Add(Me.lblN)
+        Me.TbSettings.Controls.Add(Me.lblThreshold)
+        Me.TbSettings.Location = New System.Drawing.Point(4, 22)
+        Me.TbSettings.Name = "TbSettings"
+        Me.TbSettings.Padding = New System.Windows.Forms.Padding(3)
+        Me.TbSettings.Size = New System.Drawing.Size(468, 473)
+        Me.TbSettings.TabIndex = 0
+        Me.TbSettings.Tag = ""
+        Me.TbSettings.Text = "Settings"
+        Me.TbSettings.UseVisualStyleBackColor = True
         '
         'ucrInputPrecQtiles
         '
-        Me.ucrInputPrecQtiles.AddQuotesIfUnrecognised = True
         Me.ucrInputPrecQtiles.IsMultiline = False
         Me.ucrInputPrecQtiles.IsReadOnly = False
         Me.ucrInputPrecQtiles.Location = New System.Drawing.Point(265, 179)
@@ -540,7 +539,6 @@ Partial Class sdgClimdexIndices
         '
         'ucrInputTempQtiles
         '
-        Me.ucrInputTempQtiles.AddQuotesIfUnrecognised = True
         Me.ucrInputTempQtiles.IsMultiline = False
         Me.ucrInputTempQtiles.IsReadOnly = False
         Me.ucrInputTempQtiles.Location = New System.Drawing.Point(265, 131)
@@ -560,7 +558,6 @@ Partial Class sdgClimdexIndices
         '
         'ucrInputGSLMode
         '
-        Me.ucrInputGSLMode.AddQuotesIfUnrecognised = True
         Me.ucrInputGSLMode.IsReadOnly = False
         Me.ucrInputGSLMode.Location = New System.Drawing.Point(11, 73)
         Me.ucrInputGSLMode.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
@@ -716,7 +713,6 @@ Partial Class sdgClimdexIndices
         '
         'ucrInputFreq
         '
-        Me.ucrInputFreq.AddQuotesIfUnrecognised = True
         Me.ucrInputFreq.IsReadOnly = False
         Me.ucrInputFreq.Location = New System.Drawing.Point(11, 24)
         Me.ucrInputFreq.Name = "ucrInputFreq"
@@ -821,16 +817,16 @@ Partial Class sdgClimdexIndices
         Me.lblThreshold.Tag = "Threshold"
         Me.lblThreshold.Text = "Threshold"
         '
-        'tbpClimdex
+        'tbClimdex
         '
-        Me.tbpClimdex.Controls.Add(Me.tbpSettings)
-        Me.tbpClimdex.Controls.Add(Me.tbpTemperature)
-        Me.tbpClimdex.Controls.Add(Me.tbpPrecipitation)
-        Me.tbpClimdex.Location = New System.Drawing.Point(8, 6)
-        Me.tbpClimdex.Name = "tbpClimdex"
-        Me.tbpClimdex.SelectedIndex = 0
-        Me.tbpClimdex.Size = New System.Drawing.Size(476, 499)
-        Me.tbpClimdex.TabIndex = 0
+        Me.tbClimdex.Controls.Add(Me.TbSettings)
+        Me.tbClimdex.Controls.Add(Me.tbTemperature)
+        Me.tbClimdex.Controls.Add(Me.tbPrecipitation)
+        Me.tbClimdex.Location = New System.Drawing.Point(8, 6)
+        Me.tbClimdex.Name = "tbClimdex"
+        Me.tbClimdex.SelectedIndex = 0
+        Me.tbClimdex.Size = New System.Drawing.Size(476, 499)
+        Me.tbClimdex.TabIndex = 0
         '
         'ucrButtonsClimdexIndices
         '
@@ -845,7 +841,7 @@ Partial Class sdgClimdexIndices
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(488, 557)
         Me.Controls.Add(Me.cmdHelp)
-        Me.Controls.Add(Me.tbpClimdex)
+        Me.Controls.Add(Me.tbClimdex)
         Me.Controls.Add(Me.ucrButtonsClimdexIndices)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
@@ -854,10 +850,10 @@ Partial Class sdgClimdexIndices
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Tag = "Indices"
         Me.Text = "Indices"
-        Me.tbpPrecipitation.ResumeLayout(False)
+        Me.tbPrecipitation.ResumeLayout(False)
         Me.grpPrecAnnual.ResumeLayout(False)
         Me.grpPrecAnnualMonthly.ResumeLayout(False)
-        Me.tbpTemperature.ResumeLayout(False)
+        Me.tbTemperature.ResumeLayout(False)
         Me.grpTmaxTmin.ResumeLayout(False)
         Me.grpTmaxTminAnnualMonthly.ResumeLayout(False)
         Me.grpTmaxTminAnnual.ResumeLayout(False)
@@ -867,13 +863,13 @@ Partial Class sdgClimdexIndices
         Me.grpTmin.ResumeLayout(False)
         Me.grpTminAnnualMonthly.ResumeLayout(False)
         Me.grpTminAnnual.ResumeLayout(False)
-        Me.tbpSettings.ResumeLayout(False)
-        Me.tbpSettings.PerformLayout()
+        Me.TbSettings.ResumeLayout(False)
+        Me.TbSettings.PerformLayout()
         Me.grpBaseRange.ResumeLayout(False)
         Me.grpBaseRange.PerformLayout()
         Me.grpMaxMissingDays.ResumeLayout(False)
         Me.grpMaxMissingDays.PerformLayout()
-        Me.tbpClimdex.ResumeLayout(False)
+        Me.tbClimdex.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -885,7 +881,7 @@ Partial Class sdgClimdexIndices
 
     End Sub
     Friend WithEvents cmdHelp As Button
-    Friend WithEvents tbpPrecipitation As TabPage
+    Friend WithEvents tbPrecipitation As TabPage
     Friend WithEvents grpPrecAnnual As GroupBox
     Friend WithEvents ucrChkPrecExceedSpecifiedA As ucrCheck
     Friend WithEvents ucrChkMaxDrySpell As ucrCheck
@@ -899,7 +895,7 @@ Partial Class sdgClimdexIndices
     Friend WithEvents grpPrecAnnualMonthly As GroupBox
     Friend WithEvents ucrChkMonthlyMax5dayPrec As ucrCheck
     Friend WithEvents ucrChkMonthlyMax1dayPrec As ucrCheck
-    Friend WithEvents tbpTemperature As TabPage
+    Friend WithEvents tbTemperature As TabPage
     Friend WithEvents grpTmaxTmin As GroupBox
     Friend WithEvents grpTmaxTminAnnualMonthly As GroupBox
     Friend WithEvents ucrChkMeanDiurnalTempRange As ucrCheck
@@ -925,7 +921,7 @@ Partial Class sdgClimdexIndices
     Friend WithEvents ucrChkColdSpellDI As ucrCheck
     Friend WithEvents ucrChkTropicalNights As ucrCheck
     Friend WithEvents ucrChkFrostDays As ucrCheck
-    Friend WithEvents tbpSettings As TabPage
+    Friend WithEvents TbSettings As TabPage
     Friend WithEvents lblGSLMode As Label
     Friend WithEvents ucrInputGSLMode As ucrInputComboBox
     Friend WithEvents grpBaseRange As GroupBox
@@ -952,7 +948,7 @@ Partial Class sdgClimdexIndices
     Friend WithEvents ucrNudAnnualMissingDays As ucrNud
     Friend WithEvents lblN As Label
     Friend WithEvents lblThreshold As Label
-    Friend WithEvents tbpClimdex As TabControl
+    Friend WithEvents tbClimdex As TabControl
     Friend WithEvents ucrInputTempQtiles As ucrInputTextBox
     Friend WithEvents ucrInputPrecQtiles As ucrInputTextBox
 End Class

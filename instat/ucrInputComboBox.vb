@@ -14,22 +14,10 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports System.ComponentModel
+Imports instat
 
 Public Class ucrInputComboBox
     Dim strItemsType As String = ""
-
-    Public Sub New()
-
-        ' This call is required by the designer.
-        InitializeComponent()
-
-        ' Add any initialization after the InitializeComponent() call.
-        bAllowNonConditionValues = False
-    End Sub
-
-    'temporary event which is only raised when index is changed
-    'NameChanged raised any time value is set (even if it's the same)
-    Public Event SelectionIndexChanged()
 
     Private Sub cboInput_Validating(sender As Object, e As CancelEventArgs) Handles cboInput.Validating
         Dim strCurrent As String
@@ -142,22 +130,12 @@ Public Class ucrInputComboBox
         Return cboInput.Text
     End Function
 
-    Public Sub SetItems(Optional strItems As String() = Nothing, Optional bClearExisting As Boolean = True, Optional bAddConditions As Boolean = False)
-        Dim dctValues As New Dictionary(Of String, String)
-        If bAddConditions Then
-            For Each strTemp As String In strItems
-                dctValues.Add(strTemp, strTemp)
-            Next
-            SetItems(dctValues, bClearExisting)
-        Else
-            If bClearExisting Then
-                cboInput.Items.Clear()
-            End If
-            If strItems IsNot Nothing Then
-                cboInput.Items.AddRange(strItems)
-            End If
-            AdjustComboBoxWidth(cboInput)
+    Public Sub SetItems(strItems As String(), Optional bClearExisting As Boolean = True)
+        If bClearExisting Then
+            cboInput.Items.Clear()
         End If
+        cboInput.Items.AddRange(strItems)
+        AdjustComboBoxWidth(cboInput)
     End Sub
 
     Public Sub SetItems(dctItemParameterValuePairs As Dictionary(Of String, String), Optional bClearExisting As Boolean = True)
@@ -176,10 +154,6 @@ Public Class ucrInputComboBox
             AddParameterValuesCondition(kvpTemp.Key, GetParameter().strArgumentName, kvpTemp.Value)
         Next
         AdjustComboBoxWidth(cboInput)
-    End Sub
-
-    Public Sub AddItems(strItems As String())
-        SetItems(strItems, bClearExisting:=False)
     End Sub
 
     Private Sub cboInput_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cboInput.KeyPress
@@ -203,15 +177,16 @@ Public Class ucrInputComboBox
     End Function
 
     Private Sub ucrInputComboBox_Load(sender As Object, e As EventArgs) Handles Me.Load
+        bAllowNonConditionValues = False
         FillItemTypes()
         If bFirstLoad Then
+            SetDropDownStyleAsEditable(True)
             bFirstLoad = False
         End If
     End Sub
 
     Private Sub cboInput_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboInput.SelectedIndexChanged
         OnNameChanged()
-        RaiseEvent SelectionIndexChanged()
     End Sub
 
     Private Sub ucrInputComboBox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Me.KeyPress

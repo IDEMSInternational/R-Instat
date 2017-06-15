@@ -16,7 +16,7 @@
 Imports instat.Translations
 
 Public Class dlgOneVarFitModel
-    Public clsROneVarFitModel, clsRLength, clsRMean, clsRTTest, clsVarTest, clsREnormTest, clsRNonSignTest, clsRWilcoxTest, clsRBinomTest, clsRPoissonTest, clsRplot, clsRfitdist, clsRStartValues, clsRBinomStart, clsRConvertVector, clsRConvertInteger, clsRConvertNumeric As New RFunction
+    Public clsRConvert, clsROneVarFitModel, clsRLength, clsRMean, clsRTTest, clsVarTest, clsREnormTest, clsRNonSignTest, clsRWilcoxTest, clsRBinomTest, clsRPoissonTest, clsRplot, clsRfitdist, clsRStartValues, clsRBinomStart As New RFunction
     Public clsFunctionOperator, clsFactorOperator As New ROperator
     Public bfirstload As Boolean = True
 
@@ -34,10 +34,6 @@ Public Class dlgOneVarFitModel
     Private Sub InitialiseDialog()
         sdgOneVarFitModDisplay.InitialiseDialog()
         sdgOneVarFitModel.InitialiseDialog()
-
-        clsROneVarFitModel.SetPackageName("fitdistrplus")
-        clsROneVarFitModel.SetRCommand("fitdist")
-
         UcrBase.iHelpTopicID = 296
         UcrBase.clsRsyntax.iCallType = 2
         UcrReceiver.Selector = ucrSelectorOneVarFitMod
@@ -59,9 +55,6 @@ Public Class dlgOneVarFitModel
         ucrOperator.SetItems({"==", "<", "<=", ">", ">=", "!="})
         ucrVariables.SetItemsTypeAsColumns()    'we want SetItemsTypeAs factors in the column
         rdoMeanWilcox.Checked = True
-
-        'temp disabled as only works for numeric columns currently
-        chkConvertToVariate.Enabled = False
     End Sub
 
     Private Sub SetDefaults()
@@ -71,9 +64,7 @@ Public Class dlgOneVarFitModel
         ucrSaveModel.SetPrefix("dist")
         nudCI.Value = 0.95
         BinomialConditions()
-        'temp set to False to fix bug in saving
-        chkSaveModel.Checked = False
-        ucrSaveModel.Visible = False
+        chkSaveModel.Checked = True
         ucrSaveModel.Reset()
         SetDataParameter()
         EnableOptions()
@@ -125,22 +116,21 @@ Public Class dlgOneVarFitModel
                 chkConvertToVariate.Visible = False
             Else
                 chkConvertToVariate.Visible = True
-                chkConvertToVariate.Checked = True
             End If
             If chkConvertToVariate.Checked Then
-                clsRConvertNumeric.SetRCommand("as.numeric")
-                clsRConvertNumeric.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
-                UcrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=clsRConvertNumeric)
+                clsRConvert.SetRCommand("as.numeric")
+                clsRConvert.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
+                UcrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=clsRConvert)
             Else
                 'TODO This is needed because fitdist checks is.vector on data which is FALSE when data has attributes
                 If ucrFamily.clsCurrDistribution.strNameTag = "Poisson" OrElse ucrFamily.clsCurrDistribution.strNameTag = "Geometric" Then
-                    clsRConvertInteger.SetRCommand("as.integer")
-                    clsRConvertInteger.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
-                    clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertInteger)
+                    clsRConvert.SetRCommand("as.integer")
+                    clsRConvert.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
+                    clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvert)
                 Else
-                    clsRConvertVector.SetRCommand("as.vector")
-                    clsRConvertVector.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
-                    clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertVector)
+                    clsRConvert.SetRCommand("as.vector")
+                    clsRConvert.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
+                    clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvert)
                 End If
                 If ucrFamily.clsCurrDistribution.strNameTag = "Extreme_Value" Or ucrFamily.clsCurrDistribution.strNameTag = "Binomial" Or ucrFamily.clsCurrDistribution.strNameTag = "Bernouli" Or ucrFamily.clsCurrDistribution.strNameTag = "Students_t" Or ucrFamily.clsCurrDistribution.strNameTag = "Chi_Square" Or ucrFamily.clsCurrDistribution.strNameTag = "F" Or ucrFamily.clsCurrDistribution.strNameTag = "Hypergeometric" Then
                     clsROneVarFitModel.AddParameter("start", clsRFunctionParameter:=clsRStartValues)
@@ -160,6 +150,7 @@ Public Class dlgOneVarFitModel
         clsRPoissonTest.ClearParameters()
         clsRBinomTest.ClearParameters()
         clsRTTest.ClearParameters()
+        clsRConvert.ClearParameters()
         clsRStartValues.ClearParameters()
         If rdoGeneral.Checked Then
             FitDistFunction()
@@ -203,6 +194,8 @@ Public Class dlgOneVarFitModel
 
     Public Sub FitDistFunction()
         UcrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModel)
+        clsROneVarFitModel.SetPackageName("fitdistrplus")
+        clsROneVarFitModel.SetRCommand("fitdist")
         clsROneVarFitModel.AddParameter("distr", Chr(34) & ucrFamily.clsCurrDistribution.strRName & Chr(34))
         SetDataParameter()
     End Sub
@@ -210,9 +203,9 @@ Public Class dlgOneVarFitModel
     Private Sub SetTTest()
         clsRTTest.SetRCommand("t.test")
         UcrBase.clsRsyntax.SetBaseRFunction(clsRTTest)
-        clsRConvertVector.SetRCommand("as.vector")
-        clsRConvertVector.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
-        clsRTTest.AddParameter("x", clsRFunctionParameter:=clsRConvertVector)
+        clsRConvert.SetRCommand("as.vector")
+        clsRConvert.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
+        clsRTTest.AddParameter("x", clsRFunctionParameter:=clsRConvert)
         clsRTTest.AddParameter("mu", nudHyp.Value.ToString)
         clsRTTest.AddParameter("conf.level", nudCI.Value.ToString)
     End Sub
@@ -221,9 +214,9 @@ Public Class dlgOneVarFitModel
         clsVarTest.SetPackageName("EnvStats")
         clsVarTest.SetRCommand("varTest")
         UcrBase.clsRsyntax.SetBaseRFunction(clsVarTest)
-        clsRConvertVector.SetRCommand("as.vector")
-        clsRConvertVector.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
-        clsVarTest.AddParameter("x", clsRFunctionParameter:=clsRConvertVector)
+        clsRConvert.SetRCommand("as.vector")
+        clsRConvert.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
+        clsVarTest.AddParameter("x", clsRFunctionParameter:=clsRConvert)
         clsVarTest.AddParameter("sigma.squared", nudHyp.Value.ToString)
         clsVarTest.AddParameter("conf.level", nudCI.Value.ToString)
     End Sub
@@ -231,9 +224,9 @@ Public Class dlgOneVarFitModel
     Private Sub SetEnormTest()
         clsREnormTest.SetRCommand("EnvStats::enorm")
         UcrBase.clsRsyntax.SetBaseRFunction(clsREnormTest)
-        clsRConvertVector.SetRCommand("as.vector")
-        clsRConvertVector.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
-        clsREnormTest.AddParameter("x", clsRFunctionParameter:=clsRConvertVector)
+        clsRConvert.SetRCommand("as.vector")
+        clsRConvert.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
+        clsREnormTest.AddParameter("x", clsRFunctionParameter:=clsRConvert)
         clsREnormTest.AddParameter("conf.level", nudCI.Value.ToString)
         ' what is the hyp nud?
     End Sub
@@ -300,19 +293,19 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub PlotResiduals()
+        clsRConvert.ClearParameters()
         clsRplot.SetRCommand("plot")
         clsRplot.AddParameter("x", clsRFunctionParameter:=clsRfitdist)
-        clsRfitdist.SetPackageName("fitdistrplus")
         clsRfitdist.SetRCommand("fitdist")
         clsRfitdist.AddParameter("distr", Chr(34) & ucrFamily.clsCurrDistribution.strRName & Chr(34))
         If ucrFamily.clsCurrDistribution.strNameTag = "Poisson" Then
-            clsRConvertInteger.SetRCommand("as.integer")
-            clsRConvertInteger.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
-            clsRfitdist.AddParameter("data", clsRFunctionParameter:=clsRConvertInteger)
+            clsRConvert.SetRCommand("as.integer")
+            clsRConvert.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
+            clsRfitdist.AddParameter("data", clsRFunctionParameter:=clsRConvert)
         Else
-            clsRConvertVector.SetRCommand("as.vector")
-            clsRConvertVector.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
-            clsRfitdist.AddParameter("data", clsRFunctionParameter:=clsRConvertVector)
+            clsRConvert.SetRCommand("as.vector")
+            clsRConvert.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
+            clsRfitdist.AddParameter("data", clsRFunctionParameter:=clsRConvert)
         End If
         If ucrFamily.clsCurrDistribution.strNameTag = "Bernouli" Then
             clsRfitdist.AddParameter("start", clsRFunctionParameter:=clsRBinomStart)
@@ -450,7 +443,7 @@ Public Class dlgOneVarFitModel
         DataTypeAccepted()
     End Sub
 
-    Private Sub ucrDistributions_cboDistributionsIndexChanged() Handles ucrFamily.ControlValueChanged
+    Private Sub ucrDistributions_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrFamily.cboDistributionsIndexChanged
         SetBaseFunction()
         BinomialConditions()
         SetDataParameter()

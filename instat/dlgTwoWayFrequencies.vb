@@ -32,8 +32,6 @@ Public Class dlgTwoWayFrequencies
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        'temp needed because of show/hiding bug
-        ChangeLocation()
         TestOkEnabled()
     End Sub
 
@@ -194,7 +192,7 @@ Public Class dlgTwoWayFrequencies
         ucrChkWeights.SetRCode(clsSjTab, bReset)
         ucrChkFlip.SetRCode(clsSjPlot, bReset)
         ucrPnlFreqType.SetRCode(clsSjPlot, bReset)
-        ucrPnlFreqDisplay.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrPnlFreqDisplay.SetRCode(clsSjTab, bReset)
         ucrSelectorTwoWayFrequencies.SetRCode(clsSjTab, bReset)
         ucrChkCell.SetRCode(clsSjTab, bReset)
         ucrChkColumn.SetRCode(clsSjTab, bReset)
@@ -205,7 +203,15 @@ Public Class dlgTwoWayFrequencies
     End Sub
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-
+        If rdoTable.Checked OrElse rdoBoth.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSjTab)
+            'ucrBase.clsRsyntax.bHTMLOutput = True
+            ucrBase.clsRsyntax.iCallType = 0
+        ElseIf rdoGraph.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSjPlot)
+            ' ucrBase.clsRsyntax.bHTMLOutput = False
+            ucrBase.clsRsyntax.iCallType = 3
+        End If
     End Sub
 
     Private Sub TestOkEnabled()
@@ -265,20 +271,13 @@ Public Class dlgTwoWayFrequencies
             grpFreqTypeGraph.Location = New Point(358, 166)
             Me.Size = New Size(496, 433)
         Else
-            If rdoGraph.Checked Then
-                grpFreqTypeGraph.Show()
-                grpFreqTypeTable.Hide()
-            ElseIf rdoTable.Checked Then
-                grpFreqTypeGraph.Hide()
-                grpFreqTypeTable.Show()
-            End If
             grpFreqTypeTable.Location = New Point(263, 166)
             grpFreqTypeGraph.Location = New Point(263, 166)
             Me.Size = New Size(437, 433)
         End If
     End Sub
 
-    Private Sub FlipAndDisplayTypeControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFlip.ControlValueChanged, ucrPnlFreqDisplay.ControlValueChanged
+    Private Sub ucrChkFlip_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFlip.ControlValueChanged, ucrPnlFreqDisplay.ControlValueChanged
         Dim clsRowParam As RParameter
         Dim clsColumnParam As RParameter
 
@@ -296,7 +295,6 @@ Public Class dlgTwoWayFrequencies
             ucrReceiverColumnFactor.SetParameter(clsColumnParam)
         End If
         ChangeLocation()
-        SetBaseFunction()
     End Sub
 
     Private Sub ucrPnlFreqType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFreqType.ControlValueChanged
@@ -321,17 +319,5 @@ Public Class dlgTwoWayFrequencies
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnFactor.ControlContentsChanged, ucrReceiverRowFactor.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
         TestOkEnabled()
-    End Sub
-
-    Private Sub SetBaseFunction()
-        If rdoTable.Checked OrElse rdoBoth.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsSjTab)
-            'ucrBase.clsRsyntax.bHTMLOutput = True
-            ucrBase.clsRsyntax.iCallType = 0
-        ElseIf rdoGraph.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsSjPlot)
-            ' ucrBase.clsRsyntax.bHTMLOutput = False
-            ucrBase.clsRsyntax.iCallType = 3
-        End If
     End Sub
 End Class

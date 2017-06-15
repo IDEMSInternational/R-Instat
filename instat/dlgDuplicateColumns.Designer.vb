@@ -61,7 +61,7 @@ Partial Class dlgDuplicateColumns
         Me.ucrInputColumnName.IsReadOnly = False
         Me.ucrInputColumnName.Location = New System.Drawing.Point(110, 209)
         Me.ucrInputColumnName.Name = "ucrInputColumnName"
-        Me.ucrInputColumnName.Size = New System.Drawing.Size(140, 21)
+        Me.ucrInputColumnName.Size = New System.Drawing.Size(200, 21)
         Me.ucrInputColumnName.TabIndex = 5
         '
         'ucrReceiverDuplicateColumns
@@ -95,7 +95,7 @@ Partial Class dlgDuplicateColumns
         Me.grpDuplicatedColumn.Controls.Add(Me.ucrPnlColPosition)
         Me.grpDuplicatedColumn.Location = New System.Drawing.Point(228, 92)
         Me.grpDuplicatedColumn.Name = "grpDuplicatedColumn"
-        Me.grpDuplicatedColumn.Size = New System.Drawing.Size(180, 110)
+        Me.grpDuplicatedColumn.Size = New System.Drawing.Size(179, 110)
         Me.grpDuplicatedColumn.TabIndex = 3
         Me.grpDuplicatedColumn.TabStop = False
         Me.grpDuplicatedColumn.Text = "Position of Duplicated Column"

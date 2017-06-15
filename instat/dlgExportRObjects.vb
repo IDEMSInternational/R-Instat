@@ -39,13 +39,13 @@ Public Class dlgExportRObjects
 
         ucrSelectorObjects.SetParameter(New RParameter("data_name", 1))
         ucrSelectorObjects.ucrAvailableDataFrames.SetParameterIsString()
+        ucrSelectorObjects.SetItemType("object")
 
         ucrReceiverObjects.SetParameter(New RParameter("object_name", 2))
         ucrReceiverObjects.SetParameterIsString()
         ucrReceiverObjects.Selector = ucrSelectorObjects
         ucrReceiverObjects.SetMeAsReceiver()
         ucrReceiverObjects.strSelectorHeading = "Objects"
-        ucrReceiverObjects.SetItemType("object")
 
         ucrInputExportFile.SetParameter(New RParameter("file", 0))
         ucrInputExportFile.IsReadOnly = True

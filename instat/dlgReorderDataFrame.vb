@@ -54,7 +54,7 @@ Public Class dlgReorderDataFrame
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrDataFrameToReorder.IsEmpty Then
+        If Not ucrDataFrameToReorder.isEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)

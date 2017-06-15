@@ -236,8 +236,8 @@ Partial Class dlgImportDataset
         Me.cmdOpenDataSet.Name = "cmdOpenDataSet"
         Me.cmdOpenDataSet.Size = New System.Drawing.Size(66, 23)
         Me.cmdOpenDataSet.TabIndex = 33
-        Me.cmdOpenDataSet.Tag = "browse"
-        Me.cmdOpenDataSet.Text = "Browse"
+        Me.cmdOpenDataSet.Tag = "select_file"
+        Me.cmdOpenDataSet.Text = "Select File"
         Me.cmdOpenDataSet.UseVisualStyleBackColor = True
         '
         'grpCSV

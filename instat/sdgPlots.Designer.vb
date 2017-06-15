@@ -63,11 +63,11 @@ Partial Class sdgPlots
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.lblFont = New System.Windows.Forms.Label()
         Me.cmdAllOptions = New System.Windows.Forms.Button()
+        Me.lblTheme = New System.Windows.Forms.Label()
         Me.ucrInputThemes = New instat.ucrInputComboBox()
         Me.tbpCoordinates = New System.Windows.Forms.TabPage()
         Me.lblWarning = New System.Windows.Forms.Label()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.urChkSelectTheme = New instat.ucrCheck()
         Me.tbpPlotsOptions.SuspendLayout()
         Me.tbpFacet.SuspendLayout()
         Me.tbpLayers.SuspendLayout()
@@ -91,7 +91,7 @@ Partial Class sdgPlots
         Me.tbpPlotsOptions.Location = New System.Drawing.Point(1, 3)
         Me.tbpPlotsOptions.Name = "tbpPlotsOptions"
         Me.tbpPlotsOptions.SelectedIndex = 0
-        Me.tbpPlotsOptions.Size = New System.Drawing.Size(507, 356)
+        Me.tbpPlotsOptions.Size = New System.Drawing.Size(480, 308)
         Me.tbpPlotsOptions.TabIndex = 0
         '
         'tbpFacet
@@ -114,7 +114,7 @@ Partial Class sdgPlots
         Me.tbpFacet.Location = New System.Drawing.Point(4, 22)
         Me.tbpFacet.Name = "tbpFacet"
         Me.tbpFacet.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpFacet.Size = New System.Drawing.Size(499, 330)
+        Me.tbpFacet.Size = New System.Drawing.Size(472, 282)
         Me.tbpFacet.TabIndex = 3
         Me.tbpFacet.Tag = "Facet"
         Me.tbpFacet.Text = "Facets"
@@ -270,7 +270,7 @@ Partial Class sdgPlots
         Me.tbpLayers.Location = New System.Drawing.Point(4, 22)
         Me.tbpLayers.Name = "tbpLayers"
         Me.tbpLayers.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpLayers.Size = New System.Drawing.Size(499, 330)
+        Me.tbpLayers.Size = New System.Drawing.Size(472, 282)
         Me.tbpLayers.TabIndex = 4
         Me.tbpLayers.Tag = "Layers"
         Me.tbpLayers.Text = "Layers"
@@ -295,7 +295,7 @@ Partial Class sdgPlots
         Me.tbpTitles.Location = New System.Drawing.Point(4, 22)
         Me.tbpTitles.Name = "tbpTitles"
         Me.tbpTitles.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpTitles.Size = New System.Drawing.Size(499, 330)
+        Me.tbpTitles.Size = New System.Drawing.Size(472, 282)
         Me.tbpTitles.TabIndex = 2
         Me.tbpTitles.Tag = "Titles"
         Me.tbpTitles.Text = "Titles"
@@ -435,7 +435,7 @@ Partial Class sdgPlots
         Me.tbpXAxis.Location = New System.Drawing.Point(4, 22)
         Me.tbpXAxis.Name = "tbpXAxis"
         Me.tbpXAxis.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpXAxis.Size = New System.Drawing.Size(499, 330)
+        Me.tbpXAxis.Size = New System.Drawing.Size(472, 282)
         Me.tbpXAxis.TabIndex = 5
         Me.tbpXAxis.Text = "X-Axis"
         Me.tbpXAxis.UseVisualStyleBackColor = True
@@ -444,7 +444,7 @@ Partial Class sdgPlots
         '
         Me.ucrXAxis.Location = New System.Drawing.Point(0, 1)
         Me.ucrXAxis.Name = "ucrXAxis"
-        Me.ucrXAxis.Size = New System.Drawing.Size(512, 322)
+        Me.ucrXAxis.Size = New System.Drawing.Size(470, 300)
         Me.ucrXAxis.TabIndex = 0
         '
         'tbpYAxis
@@ -453,7 +453,7 @@ Partial Class sdgPlots
         Me.tbpYAxis.Location = New System.Drawing.Point(4, 22)
         Me.tbpYAxis.Name = "tbpYAxis"
         Me.tbpYAxis.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpYAxis.Size = New System.Drawing.Size(499, 330)
+        Me.tbpYAxis.Size = New System.Drawing.Size(472, 282)
         Me.tbpYAxis.TabIndex = 6
         Me.tbpYAxis.Text = "Y-Axis"
         Me.tbpYAxis.UseVisualStyleBackColor = True
@@ -462,20 +462,20 @@ Partial Class sdgPlots
         '
         Me.ucrYAxis.Location = New System.Drawing.Point(0, 1)
         Me.ucrYAxis.Name = "ucrYAxis"
-        Me.ucrYAxis.Size = New System.Drawing.Size(496, 329)
+        Me.ucrYAxis.Size = New System.Drawing.Size(470, 300)
         Me.ucrYAxis.TabIndex = 0
         '
         'tbpTheme
         '
-        Me.tbpTheme.Controls.Add(Me.urChkSelectTheme)
         Me.tbpTheme.Controls.Add(Me.GroupBox1)
         Me.tbpTheme.Controls.Add(Me.lblFont)
         Me.tbpTheme.Controls.Add(Me.cmdAllOptions)
+        Me.tbpTheme.Controls.Add(Me.lblTheme)
         Me.tbpTheme.Controls.Add(Me.ucrInputThemes)
         Me.tbpTheme.Location = New System.Drawing.Point(4, 22)
         Me.tbpTheme.Name = "tbpTheme"
         Me.tbpTheme.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpTheme.Size = New System.Drawing.Size(499, 330)
+        Me.tbpTheme.Size = New System.Drawing.Size(472, 282)
         Me.tbpTheme.TabIndex = 1
         Me.tbpTheme.Tag = "Theme"
         Me.tbpTheme.Text = "Theme"
@@ -500,18 +500,27 @@ Partial Class sdgPlots
         '
         'cmdAllOptions
         '
-        Me.cmdAllOptions.Location = New System.Drawing.Point(297, 18)
+        Me.cmdAllOptions.Location = New System.Drawing.Point(275, 18)
         Me.cmdAllOptions.Name = "cmdAllOptions"
         Me.cmdAllOptions.Size = New System.Drawing.Size(78, 23)
         Me.cmdAllOptions.TabIndex = 2
         Me.cmdAllOptions.Text = "All Options"
         Me.cmdAllOptions.UseVisualStyleBackColor = True
         '
+        'lblTheme
+        '
+        Me.lblTheme.AutoSize = True
+        Me.lblTheme.Location = New System.Drawing.Point(8, 22)
+        Me.lblTheme.Name = "lblTheme"
+        Me.lblTheme.Size = New System.Drawing.Size(73, 13)
+        Me.lblTheme.TabIndex = 0
+        Me.lblTheme.Text = "Select Theme"
+        '
         'ucrInputThemes
         '
         Me.ucrInputThemes.AddQuotesIfUnrecognised = True
         Me.ucrInputThemes.IsReadOnly = False
-        Me.ucrInputThemes.Location = New System.Drawing.Point(109, 19)
+        Me.ucrInputThemes.Location = New System.Drawing.Point(87, 19)
         Me.ucrInputThemes.Name = "ucrInputThemes"
         Me.ucrInputThemes.Size = New System.Drawing.Size(171, 21)
         Me.ucrInputThemes.TabIndex = 1
@@ -522,7 +531,7 @@ Partial Class sdgPlots
         Me.tbpCoordinates.Location = New System.Drawing.Point(4, 22)
         Me.tbpCoordinates.Name = "tbpCoordinates"
         Me.tbpCoordinates.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpCoordinates.Size = New System.Drawing.Size(499, 330)
+        Me.tbpCoordinates.Size = New System.Drawing.Size(472, 282)
         Me.tbpCoordinates.TabIndex = 7
         Me.tbpCoordinates.Text = "Coordinates"
         Me.tbpCoordinates.UseVisualStyleBackColor = True
@@ -533,30 +542,22 @@ Partial Class sdgPlots
         Me.lblWarning.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblWarning.Location = New System.Drawing.Point(99, 93)
         Me.lblWarning.Name = "lblWarning"
-        Me.lblWarning.Size = New System.Drawing.Size(154, 20)
+        Me.lblWarning.Size = New System.Drawing.Size(213, 20)
         Me.lblWarning.TabIndex = 0
         Me.lblWarning.Text = "Not yet implemented"
         '
         'ucrBaseSubdialog
         '
-        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(164, 365)
+        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(170, 317)
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(160, 41)
         Me.ucrBaseSubdialog.TabIndex = 1
-        '
-        'urChkSelectTheme
-        '
-        Me.urChkSelectTheme.Checked = False
-        Me.urChkSelectTheme.Location = New System.Drawing.Point(6, 19)
-        Me.urChkSelectTheme.Name = "urChkSelectTheme"
-        Me.urChkSelectTheme.Size = New System.Drawing.Size(97, 20)
-        Me.urChkSelectTheme.TabIndex = 106
         '
         'sdgPlots
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(517, 399)
+        Me.ClientSize = New System.Drawing.Size(479, 350)
         Me.Controls.Add(Me.ucrBaseSubdialog)
         Me.Controls.Add(Me.tbpPlotsOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -600,6 +601,7 @@ Partial Class sdgPlots
     Friend WithEvents tbpXAxis As TabPage
     Friend WithEvents tbpYAxis As TabPage
     Friend WithEvents ucrInputThemes As ucrInputComboBox
+    Friend WithEvents lblTheme As Label
     Friend WithEvents cmdAllOptions As Button
     Friend WithEvents lblFont As Label
     Friend WithEvents ucrPlotsAdditionalLayers As ucrAdditionalLayers
@@ -630,7 +632,6 @@ Partial Class sdgPlots
     Friend WithEvents lblSubTitle As Label
     Friend WithEvents ucrInputGraphCaption As ucrInputTextBox
     Friend WithEvents ucrInputGraphSubTitle As ucrInputTextBox
-    Friend WithEvents urChkSelectTheme As ucrCheck
 End Class
 
 

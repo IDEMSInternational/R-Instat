@@ -26,51 +26,51 @@ Public Class sdgSummaries
     End Sub
 
     Public Sub InitialiseControls()
-        ucrChkNonMissing.SetParameter(New RParameter("summary_count_non_missing", 1), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_count_non_missing" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkNonMissing.SetParameter(New RParameter("summary_count_non_missing", 1), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkNonMissing.SetText("N Non Missing")
 
-        ucrChkNMissing.SetParameter(New RParameter("summary_count_missing", 2), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_count_missing" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkNMissing.SetParameter(New RParameter("summary_count_missing", 2), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkNMissing.SetText("N Missing")
 
-        ucrChkNTotal.SetParameter(New RParameter("summary_count", 3), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_count" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkNTotal.SetParameter(New RParameter("summary_count", 3), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkNTotal.SetText("N Total")
 
-        ucrChkMean.SetParameter(New RParameter("summary_mean", 4), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_mean" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkMean.SetParameter(New RParameter("summary_mean", 4), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkMean.SetText("Mean")
 
-        ucrChkMinimum.SetParameter(New RParameter("summary_min", 5), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_min" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkMinimum.SetParameter(New RParameter("summary_min", 5), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkMinimum.SetText("Minimum")
 
-        ucrChkMode.SetParameter(New RParameter("summary_mode", 6), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_mode" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkMode.SetParameter(New RParameter("summary_mode", 6), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkMode.SetText("Mode")
 
-        ucrChkMaximum.SetParameter(New RParameter("summary_max", 7), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_max" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkMaximum.SetParameter(New RParameter("summary_max", 7), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkMaximum.SetText("Maximum")
 
-        ucrChkMedian.SetParameter(New RParameter("summary_median", 8), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_median" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkMedian.SetParameter(New RParameter("summary_median", 8), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkMedian.SetText("Median")
 
-        ucrChkStdDev.SetParameter(New RParameter("summary_sd", 9), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_sd" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkStdDev.SetParameter(New RParameter("summary_sd", 9), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkStdDev.SetText("Standard Deviation")
 
-        ucrChkRange.SetParameter(New RParameter("summary_range", 10), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_range" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkRange.SetParameter(New RParameter("summary_range", 10), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkRange.SetText("Range")
 
-        ucrChkSum.SetParameter(New RParameter("summary_sum", 11), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_sum" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkSum.SetParameter(New RParameter("summary_sum", 11), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkSum.SetText("Sum")
 
-        ucrChkVariance.SetParameter(New RParameter("summary_var", 12), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_var" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkVariance.SetParameter(New RParameter("summary_var", 12), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkVariance.SetText("Variance")
 
-        ucrChkQuartiles.SetParameter(New RParameter("summary_quartiles", 13), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_quartiles" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkQuartiles.SetParameter(New RParameter("summary_quartiles", 13), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkQuartiles.Enabled = False 'To be enabled once quartiles summary function has is implemented in Instat object
         ucrChkQuartiles.SetText("Quartiles")
 
         lstCheckboxes = New List(Of ucrCheck)
         lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkVariance, ucrChkRange, ucrChkSum, ucrChkQuartiles})
         For Each ctrTemp As ucrCheck In lstCheckboxes
+            ctrTemp.SetParameterValue(Chr(34) & ctrTemp.GetParameter().strArgumentName & Chr(34))
             ctrTemp.SetParameterIncludeArgumentName(False)
-            ctrTemp.SetRDefault(Chr(34) & Chr(34))
         Next
         bControlsInitialised = True
     End Sub

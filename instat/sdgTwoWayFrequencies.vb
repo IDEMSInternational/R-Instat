@@ -114,7 +114,7 @@ Public Class sdgTwoWayFrequencies
 
         'Setting Plot parameter
         ucrPnlGraphType.AddToLinkedControls(ucrChkStack, {rdoBar}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
-        InitialiseTabs()
+
         'TODO: Investigate why when some variables are used for line graph this error is given "Breaks and labels are of different lengths"
         rdoLine.Enabled = False
         bControlsInitialised = True
@@ -155,9 +155,6 @@ Public Class sdgTwoWayFrequencies
             ucrInputTableTitle.Enabled = False
             ucrInputGraphTitle.Enabled = False
         End If
-        If bReset Then
-            tbpTwoWayFrequencies.SelectedIndex = 0
-        End If
     End Sub
 
     'This is a temporary solution to a known bug with sjPlot package
@@ -169,11 +166,5 @@ Public Class sdgTwoWayFrequencies
         Else
             clsTwoWayGraphFreq.RemoveParameterByName("show.values")
         End If
-    End Sub
-    Private Sub InitialiseTabs()
-        For i = 0 To tbpTwoWayFrequencies.TabCount - 1
-            tbpTwoWayFrequencies.SelectedIndex = i
-        Next
-        tbpTwoWayFrequencies.SelectedIndex = 0
     End Sub
 End Class

@@ -81,14 +81,12 @@ Public Class sdgSimpleRegOptions
 
     Public Sub ResidualPlots()
         clsRGraphics.SetOperation("+")
-        clsRResidualPlotsFunction.SetPackageName("ggplot2")
         clsRResidualPlotsFunction.SetRCommand("autoplot")
         clsRResidualPlotsFunction.AddParameter("object", clsRFunctionParameter:=clsRModelFunction)
         clsRgeom_point.SetRCommand("geom_point")
     End Sub
 
     Private Sub FittedModel()
-        clsRggplotFunction.SetPackageName("visreg")
         clsRggplotFunction.SetRCommand("visreg")
         clsRggplotFunction.AddParameter("fit", clsRFunctionParameter:=clsRModelFunction)
         If rdoConditional.Checked Then

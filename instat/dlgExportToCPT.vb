@@ -42,8 +42,7 @@ Public Class dlgExportToCPT
         ucrLocationDataFrame.Reset()
         ucrReceiverYears.SetMeAsReceiver()
         ucrChkLong.Checked = True
-        clsDefaultFunction.SetPackageName("rio")
-        clsDefaultFunction.SetRCommand("export")
+        clsDefaultFunction.SetRCommand("rio::export")
         clsDefaultFunction.AddParameter("x", clsRFunctionParameter:=clsOutput)
         clsDefaultFunction.AddParameter("sep", Chr(34) & "\t" & Chr(34))
         clsDefaultFunction.AddParameter("quote", "FALSE")

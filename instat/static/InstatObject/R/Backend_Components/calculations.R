@@ -1,4 +1,4 @@
-calculation <- R6::R6Class("calculation",
+calculation <- R6Class("calculation",
                          public = list(
                            initialize = function(function_name = "", parameters = list(), 
                                                  calculated_from = c(), is_recalculable = TRUE,
@@ -113,7 +113,7 @@ data_object$set("public", "save_calculation", function(calc) {
 #                             (saving the result without saving the calculation was decided not to be a sensible option - prevents recalculating etc.
 #                              saving calculation only is useful to reproduce results in output window without needing to save in a data frame e.g. single value summaries)  
 
-instat_calculation <- R6::R6Class("instat_calculation",
+instat_calculation <- R6Class("instat_calculation",
                        public = list(
                          initialize = function(function_exp = "", type = "", name = "", result_name = "", result_data_frame = "", manipulations = list(),
                                                sub_calculations = list(), calculated_from = list(), save = 0) {
@@ -391,7 +391,7 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
       }
       # Otherwise, there must be existing keys defined in the data frame
       else {
-        if(!self$has_key(overall_calc_from)) stop("Cannot merge calculated_from columns into exisiting data as there is no key defined in ", curr_data_list[[c_link_label]][["from_data_frame"]])
+        if(!self$has_key(overall_calc_from))  stop("Cannot merge calculated_from columns into exisiting data as there is no key defined in ", curr_data_list[[c_link_label]][["from_data_frame"]])
         overall_links <- self$get_keys(overall_calc_from)
       }
       if(!self$has_key(data_frame_name))  stop("Cannot merge calculated_from columns into exisiting data as there is no key defined in ", data_frame_name)
@@ -423,12 +423,12 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
       }
       if(join_into_overall) curr_data_list[[c_data_label]] <- full_join(curr_data_list[[c_data_label]], self$get_data_frame(data_frame_name, use_current_filter = FALSE), by = by)
       else {
-        curr_groups <- dplyr::groups(curr_data_list[[c_data_label]])
-        curr_data_list[[c_data_label]] <- dplyr::full_join(self$get_data_frame(data_frame_name, use_current_filter = FALSE), curr_data_list[[c_data_label]], by = by)
+        curr_groups <- groups(curr_data_list[[c_data_label]])
+        curr_data_list[[c_data_label]] <- full_join(self$get_data_frame(data_frame_name, use_current_filter = FALSE), curr_data_list[[c_data_label]], by = by)
         #TODO investigate better way to do this
         #     Any case where we don't want this?
         for(var in curr_groups) {
-          curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::group_by_(var, add = TRUE)
+          curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% group_by_(var, add = TRUE)
         }
         # The overall data is joined into the current sub calc, so the curr_data_list is "reset" to default values
         curr_data_list[[c_link_label]] <- list(from_data_frame = data_frame_name, link_cols = c())
@@ -437,7 +437,7 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
       }
     }
     # This is a character vector containing the column names in a format that can be passed to dplyr functions using Standard Evalulation
-    col_names_exp[[i]] <- lazyeval::interp(~ var, var = as.name(col_name))
+    col_names_exp[[i]] <- interp(~ var, var = as.name(col_name))
     i = i + 1
   }
   
@@ -445,33 +445,33 @@ instat_object$set("public", "apply_instat_calculation", function(calc, curr_data
   # the data is at the same "level" so the link is unchanged
   if(calc$type == "calculation") {
     if(calc$result_name %in% names(curr_data_list[[c_data_label]])) warning(calc$result_name, " is already a column in the existing data. The column will be replaced. This may have unintended consequences for the calculation")
-    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::mutate_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$result_name))
+    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% mutate_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$result_name))
   }
   # this type performs a summary
   # the data is not at a different "level" so the link is changed and link columns are the groups of the data before summarising
   # A merge is now required because the data is at a different "level"
   else if(calc$type == "summary") {
-    curr_data_list[[c_link_label]][["link_cols"]] <- as.character(dplyr::groups(curr_data_list[[c_data_label]]))
-    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::summarise_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$result_name))
+    curr_data_list[[c_link_label]][["link_cols"]] <- as.character(groups(curr_data_list[[c_data_label]]))
+    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% summarise_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$result_name))
     curr_data_list[[c_has_summary_label]] <- TRUE
   }
   # This type is grouping the data
   # The data remains unchanged so link and require merge remain unchanged
   else if(calc$type == "by") {
     # link unchanged
-    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::group_by_(.dots = col_names_exp, add = TRUE)
+    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% group_by_(.dots = col_names_exp, add = TRUE)
   }
   # This type is sorting the data
   # The rows are now in a different order so a merge is required
   else if(calc$type == "sort") {
-    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::arrange_(.dots = col_names_exp)
+    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% arrange_(.dots = col_names_exp)
     curr_data_list[[c_has_filter_label]] <- TRUE
   }
   # This type is filtering the data
   # The data is at the same "level" so the link is unchanged
   # The rows are now different so a merge is required
   else if(calc$type == "filter") {
-    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::filter_(.dots = as.formula(paste0("~", calc$function_exp)))
+    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% filter_(.dots = as.formula(paste0("~", calc$function_exp)))
     curr_data_list[[c_has_filter_label]] <- TRUE
   }
   # This type is when there is no main calculation but some sub_calculations

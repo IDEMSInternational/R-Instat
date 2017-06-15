@@ -43,10 +43,6 @@ Public Class dlgPrincipalComponentAnalysis
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBasePCA.clsRsyntax.SetPackageName("FactoMineR")
-        ucrBasePCA.clsRsyntax.SetFunction("PCA")
-        ucrBasePCA.clsRsyntax.iCallType = 0
-=======
         ucrBase.iHelpTopicID = 422
         ucrBase.clsRsyntax.iCallType = 0
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False

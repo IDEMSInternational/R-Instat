@@ -65,7 +65,6 @@ Public Class dlgAppend
         ucrSelectorDataframes.Reset()
         ucrSaveGraph.Reset()
 
-        clsBindRows.SetPackageName("dplyr")
         clsBindRows.SetRCommand("bind_rows")
         clsBindRows.AddParameter(".id", Chr(34) & "id" & Chr(34))
         clsBindRows.SetAssignTo(ucrSaveGraph.GetText(), strTempDataframe:=ucrSaveGraph.GetText())

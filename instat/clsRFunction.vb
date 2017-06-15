@@ -82,8 +82,6 @@ Public Class RFunction
 
         Dim clsRFunction As New RFunction
         Dim clsRParam As RParameter
-
-        clsRFunction.strPackageName = strPackageName
         clsRFunction.strRCommand = strRCommand
         clsRFunction.strAssignTo = strAssignTo
         clsRFunction.strAssignToDataFrame = strAssignToDataFrame

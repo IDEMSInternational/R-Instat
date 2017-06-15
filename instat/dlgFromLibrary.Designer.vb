@@ -42,7 +42,7 @@ Partial Class dlgFromLibrary
         Me.cmdLibraryCollection.Name = "cmdLibraryCollection"
         Me.cmdLibraryCollection.Size = New System.Drawing.Size(142, 23)
         Me.cmdLibraryCollection.TabIndex = 2
-        Me.cmdLibraryCollection.Text = "Browse"
+        Me.cmdLibraryCollection.Text = "Load file"
         Me.cmdLibraryCollection.UseVisualStyleBackColor = True
         '
         'lstCollection

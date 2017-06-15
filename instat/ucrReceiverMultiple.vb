@@ -81,13 +81,11 @@ Public Class ucrReceiverMultiple
         MyBase.Remove(strItems)
         Dim strTempItem As String
 
-        If strItems.Count > 0 Then
-            For Each strTempItem In strItems
-                lstSelectedVariables.Items.RemoveByKey(strTempItem)
-                Selector.RemoveFromVariablesList(strTempItem)
-            Next
-            OnSelectionChanged()
-        End If
+        For Each strTempItem In strItems
+            lstSelectedVariables.Items.RemoveByKey(strTempItem)
+            Selector.RemoveFromVariablesList(strTempItem)
+        Next
+        OnSelectionChanged()
     End Sub
 
     Public Overrides Sub Clear()
@@ -137,10 +135,6 @@ Public Class ucrReceiverMultiple
                         If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
                             clsGetVariablesFunc.AddParameter("force_as_data_frame", "FALSE")
                         End If
-                    End If
-                    If bRemoveLabels Then
-                        'temp fix to bug in sjPlot needing labels removed for factor columns
-                        clsGetVariablesFunc.AddParameter("remove_labels", "TRUE")
                     End If
                     If bUseFilteredData Then
                         If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then

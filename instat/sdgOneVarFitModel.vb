@@ -89,7 +89,7 @@ Public Class sdgOneVarFitModel
         SetPlotOptions()
     End Sub
 
-    Private Sub ucrDists_cboDistributionsIndexChanged() Handles ucrDists.ControlValueChanged
+    Private Sub ucrDists_cboDistributionsIndexChanged(sender As Object, e As EventArgs) Handles ucrDists.cboDistributionsIndexChanged
         SetPlotOptions()
     End Sub
 

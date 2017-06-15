@@ -24,12 +24,11 @@ Public Class sdgPlots
     Public clsRsyntax As New RSyntax
     'This clsRSyntax is linked with the ucrBase.clsRSyntax from the dlg calling sdgPLotOptions...
     Public clsRggplotFunction As New RFunction
-    Public clsGlobalAesFunction As New RFunction
+    Public clsAesFunction As New RFunction    'Warning: I m not sure this field is useful... Will all be revised when changing links though...
     Public clsLabsFunction As New RFunction
     Public clsFacetFunction As New RFunction
     Public clsXLabFunction As New RFunction
     Public clsXScalecontinuousFunction As New RFunction
-    Public clsYScalecontinuousFunction As New RFunction
     Public clsYLabFunction As New RFunction
     Public clsBaseOperator As New ROperator
     Private bControlsInitialised As Boolean = False
@@ -41,15 +40,15 @@ Public Class sdgPlots
     Private clsFacetVariablesOperator As New ROperator
     Private strFirstVariable As String
     Private strSecondvariable As String
-    Private clsThemeFunction As New RFunction
-    Private dctThemeFunctions As New Dictionary(Of String, RFunction)
     Private bRCodeSet As Boolean = False
-    Private bResetThemes As Boolean = True
-    Private ucrBaseSelector As ucrSelector
 
     'See bLayersDefaultIsGolobal below.
-
     Private Sub sdgPlots_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'If bFirstLoad Then
+        '    InitialiseDialog()
+        '    SetDefaults()
+        '    bFirstLoad = False
+        'End If
         autoTranslate(Me)
     End Sub
 
@@ -57,7 +56,6 @@ Public Class sdgPlots
         Dim dctThemes As New Dictionary(Of String, String)
         Dim strThemes As String()
 
-        ucrBaseSubdialog.iHelpTopicID = 136
         'facets tab 
         'Links the factor receivers, used for creating facets, with the selector. The variables need to be factors.
         ucr1stFactorReceiver.Selector = ucrFacetSelector
@@ -163,17 +161,13 @@ Public Class sdgPlots
         'ucrInputLegend.SetParameter(New RParameter("fill"))
 
         'X Axis tab
-        ucrXAxis.InitialiseControl()
+        'ucrXAxis.InitialiseControl()
 
         'Y Axis tab
-        ucrYAxis.InitialiseControl()
+        'ucrYAxis.InitialiseControl()
 
         'themes tab
-        urChkSelectTheme.SetText("Select Theme:")
-        ucrInputThemes.SetParameter(New RParameter("theme_name"))
-        urChkSelectTheme.AddToLinkedControls(ucrInputThemes, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="theme_grey")
-        urChkSelectTheme.AddParameterPresentCondition(True, "theme_name")
-        urChkSelectTheme.AddParameterPresentCondition(False, "theme_name", False)
+        ucrInputThemes.SetParameter(New RParameter("theme"))
         strThemes = GgplotDefaults.strThemes
         'Would prefer to do this through functions but auto updating function name not currently supported through combo box control
         For Each strTemp As String In strThemes
@@ -185,41 +179,35 @@ Public Class sdgPlots
         Next
         ucrInputThemes.SetItems(dctThemes)
         ucrInputThemes.SetRDefault("theme_grey()")
-        ucrInputThemes.SetDropDownStyleAsNonEditable()
 
+        'Corodiantes tab
         InitialiseTabs()
 
         'temporary disabled until implemented
         tbpLayers.Enabled = False
         tbpCoordinates.Enabled = False
         grpLegendTitle.Enabled = False
-        'cmdAllOptions.Enabled = False
+        cmdAllOptions.Enabled = False
         GroupBox1.Visible = False
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewYScalecontinuousFunction As RFunction = Nothing, Optional clsNewXScalecontinuousFunction As RFunction = Nothing, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsTitleFunction As RFunction = Nothing, Optional clsNewYLabTitleFunction As RFunction = Nothing, Optional clsNewFacetFunction As RFunction = Nothing, Optional clsNewThemeParam As RParameter = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewYScalecontinuousFunction As RFunction = Nothing, Optional clsNewXScalecontinuousFunction As RFunction = Nothing, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsTitleFunction As RFunction = Nothing, Optional clsNewYLabTitleFunction As RFunction = Nothing, Optional clsNewFacetFunction As RFunction = Nothing, Optional clsNewThemeParam As RParameter = Nothing, Optional strNewDataFrame As String = "", Optional bReset As Boolean = False)
         Dim clsTempParam As RParameter
 
         bRCodeSet = False
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
-        ucrBaseSelector = ucrNewBaseSelector
-        If ucrBaseSelector IsNot Nothing AndAlso ucrBaseSelector.strCurrentDataFrame <> "" Then
-            strDataFrame = ucrBaseSelector.strCurrentDataFrame
+        If strNewDataFrame <> "" Then
+            strDataFrame = strNewDataFrame
             ucrFacetSelector.SetDataframe(strDataFrame, False)
         End If
-        ucrFacetSelector.SetLinkedSelector(ucrBaseSelector)
         clsBaseOperator = clsNewOperator
-        clsGlobalAesFunction = clsNewGlobalAesFunction
         clsXLabFunction = clsNewXLabsTitleFunction
         clsYLabFunction = clsNewYLabTitleFunction
         clsXScalecontinuousFunction = clsNewXScalecontinuousFunction
-        clsYScalecontinuousFunction = clsNewYScalecontinuousFunction
         clsFacetFunction = clsNewFacetFunction
-        clsThemeFunction = clsNewThemeFunction
-        dctThemeFunctions = dctNewThemeFunctions
 
         If clsFacetFunction.ContainsParameter("facets") Then
             clsTempParam = clsFacetFunction.GetParameter("facets")
@@ -242,14 +230,13 @@ Public Class sdgPlots
         If clsNewThemeParam IsNot Nothing Then
             clsBaseOperator.AddParameter(clsNewThemeParam)
         Else
-            clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
+            clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultTheme.Clone())
         End If
 
         ucrInputGraphTitle.SetRCode(clsLabsFunction, bReset)
         ucrInputGraphSubTitle.SetRCode(clsLabsFunction, bReset)
         ucrInputGraphCaption.SetRCode(clsLabsFunction, bReset)
-        urChkSelectTheme.SetRCode(clsBaseOperator, bReset)
-        ucrInputThemes.SetRCode(clsBaseOperator, bReset)
+        ucrInputThemes.SetRCode(clsBaseOperator)
 
         'ucrInputLegend.SetRCode(clsNewLabsFunction, bReset)
         ucrPnlHorizonatalVertical.SetRCode(clsFacetFunction, bReset)
@@ -264,9 +251,8 @@ Public Class sdgPlots
         ucrChkIncludeFacets.SetRCode(clsBaseOperator, bReset)
 
         'axis controls
-        ucrXAxis.SetRCodeForControl(bIsXAxis:=True, strNewAxisType:=GetAxisType(True), clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrYAxis.SetRCodeForControl(bIsXAxis:=False, strNewAxisType:=GetAxisType(False), clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-
+        ucrXAxis.SetRCodeForControl(True, clsNewXYlabTitleFunction:=clsXLabFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrYAxis.SetRCodeForControl(False, clsNewXYlabTitleFunction:=clsYLabFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
         bRCodeSet = True
         AddRemoveLabs()
@@ -276,7 +262,6 @@ Public Class sdgPlots
         If bReset Then
             ucr1stFactorReceiver.SetMeAsReceiver()
             tbpPlotsOptions.SelectedIndex = 0
-            bResetThemes = True
         End If
         SetFacetParameters()
     End Sub
@@ -621,55 +606,6 @@ Public Class sdgPlots
 
     Private Sub ucrChkNoOfRowsOrColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNoOfRowsOrColumns.ControlValueChanged
         SetFacetParameters()
-    End Sub
-
-    Private Function GetAxisType(bIsX As Boolean) As String
-        Dim strAes As String
-
-        If bIsX Then
-            strAes = "x"
-        Else
-            strAes = "y"
-        End If
-        If clsGlobalAesFunction IsNot Nothing Then
-            If clsGlobalAesFunction.ContainsParameter(strAes) AndAlso clsGlobalAesFunction.GetParameter(strAes).strArgumentValue <> Chr(34) & Chr(34) Then
-                'Run R code to determine type
-                'Temp default to continuous
-                Return "Continuous"
-            Else
-                'When aes not present discrete scale function works
-                Return "Discrete"
-            End If
-        Else
-            Return "Discrete"
-        End If
-    End Function
-
-    Private Sub cmdAllOptions_Click(sender As Object, e As EventArgs) Handles cmdAllOptions.Click
-        sdgThemes.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, bReset:=bResetThemes)
-        Me.SendToBack()
-        sdgThemes.ShowDialog()
-        bResetThemes = False
-    End Sub
-
-    Private Sub ucrChkIncludeFacets_CheckedChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeFacets.ControlValueChanged, ucr2ndFactorReceiver.ControlValueChanged, ucr1stFactorReceiver.ControlValueChanged
-
-    End Sub
-
-    Private Sub ucrChkFreeSpace_CheckedChanged(ucrChangedControl As ucrCore) Handles ucrChkFreeSpace.ControlValueChanged
-
-    End Sub
-
-    Private Sub chkScales_CheckedChanged(ucrChangedControl As ucrCore) Handles ucrChkFreeScalesY.ControlValueChanged, ucrChkFreeScalesX.ControlValueChanged
-
-    End Sub
-
-    Private Sub ucrPnlHorizonatalVertical_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlHorizonatalVertical.ControlValueChanged, ucrChkMargin.ControlValueChanged
-
-    End Sub
-
-    Private Sub LabsControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputGraphTitle.ControlValueChanged, ucrInputGraphSubTitle.ControlValueChanged, ucrInputGraphCaption.ControlValueChanged
-
     End Sub
 
     'Warning/Task to be discussed: need to disable ok on dlg's when layers are not complete on subdialogues + warning message... 

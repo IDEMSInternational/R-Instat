@@ -71,7 +71,7 @@ climate_data$methods(date_col_check = function(date_format = "%d/%m/%Y", convert
   }
   if (.self$is_present(date_label)) {
     date_col = getvname(date_label)
-    if (!lubridate::is.Date(data[[date_col]])) {
+    if (!is.Date(data[[date_col]])) {
       if (messages) message("date column is not stored as Date class.")
       if (convert) {
         if (messages) message("Attempting to convert date column to Date class.")

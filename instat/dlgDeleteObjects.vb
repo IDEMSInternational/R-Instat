@@ -44,13 +44,13 @@ Public Class dlgDeleteObjects
         ' Selector
         ucrSelectorDeleteObject.SetParameter(New RParameter("data_name", 0))
         ucrSelectorDeleteObject.SetParameterIsString()
+        ucrSelectorDeleteObject.SetItemType("object")
 
         ' Receiver
         ucrReceiverObjectsToDelete.SetParameter(New RParameter("object_names", 1))
         ucrReceiverObjectsToDelete.SetParameterIsString()
         ucrReceiverObjectsToDelete.Selector = ucrSelectorDeleteObject
         ucrReceiverObjectsToDelete.SetMeAsReceiver()
-        ucrReceiverObjectsToDelete.SetItemType("object")
     End Sub
 
     Private Sub SetDefaults()

@@ -80,14 +80,6 @@ Public Class RParameter
         End If
     End Sub
 
-    Public Sub ClearAllArguments()
-        strArgumentValue = ""
-        clsArgumentCodeStructure = Nothing
-        bIsString = False
-        bIsOperator = False
-        bIsFunction = False
-    End Sub
-
     Public Function ToScript(ByRef strScript As String) As String
         Dim strRet As String = ""
 
@@ -125,7 +117,6 @@ Public Class RParameter
         clsTempRParam.bIsFunction = bIsFunction
         clsTempRParam.bIsOperator = bIsOperator
         clsTempRParam.bIsString = bIsString
-        clsTempRParam.iPosition = iPosition
         clsTempRParam.bIncludeArgumentName = bIncludeArgumentName
         If clsArgumentCodeStructure IsNot Nothing Then
             clsTempRParam.clsArgumentCodeStructure = clsArgumentCodeStructure.Clone

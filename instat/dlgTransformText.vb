@@ -19,7 +19,6 @@ Public Class dlgTransformText
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsConvertFunction, clsLengthFunction, clsPadFunction, clsTrimFunction, clsWordsFunction, clsSubstringFunction As New RFunction
-    Private bRCodeSet As Boolean = True
 
     Private Sub dlgTransformText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -36,9 +35,6 @@ Public Class dlgTransformText
     End Sub
 
     Private Sub InitialiseDialog()
-        Dim dctInputPad As New Dictionary(Of String, String)
-        Dim dctInputSeparator As New Dictionary(Of String, String)
-
         ucrBase.iHelpTopicID = 343
         ucrBase.clsRsyntax.bUseBaseFunction = True
 
@@ -81,16 +77,16 @@ Public Class dlgTransformText
         ucrPnlOperation.AddToLinkedControls(ucrNudWidth, {rdoPad}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         'ucrInputPad
+        Dim dctInputPad As New Dictionary(Of String, String)
         ucrInputPad.SetParameter(New RParameter("pad", 3))
-        dctInputPad.Add("Space ( )", Chr(34) & " " & Chr(34))
-        dctInputPad.Add("Hash #", Chr(34) & "#" & Chr(34))
-        dctInputPad.Add("Hyphen -", Chr(34) & "-" & Chr(34))
-        dctInputPad.Add("Period .", Chr(34) & "." & Chr(34))
-        dctInputPad.Add("Underscore _", Chr(34) & "_" & Chr(34))
+        dctInputPad.Add("Space", Chr(34) & " " & Chr(34))
+        dctInputPad.Add("Hash", Chr(34) & "#" & Chr(34))
+        dctInputPad.Add("Hyphen", Chr(34) & "-" & Chr(34))
+        dctInputPad.Add("Period", Chr(34) & "." & Chr(34))
+        dctInputPad.Add("Underscore", Chr(34) & "_" & Chr(34))
         ucrInputPad.SetItems(dctInputPad)
         ucrInputPad.SetLinkedDisplayControl(lblPad)
         ucrInputPad.SetRDefault(Chr(34) & " " & Chr(34))
-        ucrInputPad.bAllowNonConditionValues = True
 
         'ucrNudWidth
         ucrNudWidth.SetParameter(New RParameter("width", 1))
@@ -142,15 +138,15 @@ Public Class dlgTransformText
         ucrChkLastOr.AddParameterIsRFunctionCondition(True, "start", True)
 
         ' ucrInputSeparator
+        Dim dctInputSeparator As New Dictionary(Of String, String)
         ucrInputSeparator.SetParameter(New RParameter("sep", 3))
-        dctInputSeparator.Add("Space ( )", "fixed(" & Chr(34) & " " & Chr(34) & ")")
-        dctInputSeparator.Add("Colon :", Chr(34) & ":" & Chr(34))
-        dctInputSeparator.Add("Period .", "fixed(" & Chr(34) & "." & Chr(34) & ")")
-        dctInputSeparator.Add("Underscore _", Chr(34) & "_" & Chr(34))
+        dctInputSeparator.Add("Space", "fixed(" & Chr(34) & " " & Chr(34) & ")")
+        dctInputSeparator.Add("Colon", Chr(34) & ":" & Chr(34))
+        dctInputSeparator.Add("Period", "fixed(" & Chr(34) & "." & Chr(34) & ")")
+        dctInputSeparator.Add("Underscore", Chr(34) & "_" & Chr(34))
         ucrInputSeparator.SetItems(dctInputSeparator)
         ucrInputSeparator.SetLinkedDisplayControl(lblSeparator)
         ucrInputSeparator.SetRDefault("fixed(" & Chr(34) & " " & Chr(34) & ")")
-        ucrInputSeparator.bAllowNonConditionValues = True
 
         'rdoSubstring
         ucrPnlOperation.AddToLinkedControls(ucrNudFrom, {rdoSubstring}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -215,8 +211,6 @@ Public Class dlgTransformText
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        bRCodeSet = False
-
         ucrReceiverTransformText.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrNewColName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrPnlOperation.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
@@ -235,8 +229,6 @@ Public Class dlgTransformText
         ucrInputSeparator.SetRCode(clsWordsFunction, bReset)
         ucrNudFrom.SetRCode(clsSubstringFunction, bReset)
         ucrNudTo.SetRCode(clsSubstringFunction, bReset)
-
-        bRCodeSet = True
     End Sub
 
     Private Sub TestOkEnabled()
@@ -323,31 +315,29 @@ Public Class dlgTransformText
     End Sub
 
     Private Sub ucrPnl_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOperation.ControlValueChanged, ucrInputTo.ControlValueChanged
-        If bRCodeSet Then
-            If rdoLength.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsLengthFunction)
-            ElseIf rdoPad.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsPadFunction)
-            ElseIf rdoTrim.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsTrimFunction)
-            ElseIf rdoWords.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsWordsFunction)
-            ElseIf rdoSubstring.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsSubstringFunction)
-            ElseIf rdoConvertCase.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsConvertFunction)
-                Select Case ucrInputTo.GetText
-                    Case "Lower"
-                        ucrBase.clsRsyntax.SetFunction("str_to_lower")
-                    Case "Upper"
-                        ucrBase.clsRsyntax.SetFunction("str_to_upper")
-                    Case "Title"
-                        ucrBase.clsRsyntax.SetFunction("str_to_title")
-                End Select
-            End If
-            TestOkEnabled()
-            SetRCodeForControls(False)
+        If rdoLength.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsLengthFunction)
+        ElseIf rdoPad.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsPadFunction)
+        ElseIf rdoTrim.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsTrimFunction)
+        ElseIf rdoWords.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsWordsFunction)
+        ElseIf rdoSubstring.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSubstringFunction)
+        ElseIf rdoConvertCase.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsConvertFunction)
+            Select Case ucrInputTo.GetText
+                Case "Lower"
+                    ucrBase.clsRsyntax.SetFunction("str_to_lower")
+                Case "Upper"
+                    ucrBase.clsRsyntax.SetFunction("str_to_upper")
+                Case "Title"
+                    ucrBase.clsRsyntax.SetFunction("str_to_title")
+            End Select
         End If
+        TestOkEnabled()
+        SetRCodeForControls(False)
     End Sub
 
     Private Sub ucrWordsTab_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFirstOr.ControlValueChanged, ucrChkLastOr.ControlValueChanged, ucrPnlOperation.ControlValueChanged
