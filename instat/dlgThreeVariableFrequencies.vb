@@ -109,7 +109,7 @@ Public Class dlgThreeVariableFrequencies
         ucrPnlFrequencyDisplay.AddRadioButton(rdoBoth)
 
         ucrPnlFrequencyDisplay.AddParameterPresentCondition(rdoTable, "sjtab")
-        ucrPnlFrequencyDisplay.AddParameterPresentCondition(rdoGraph, "gridExtra")
+        ucrPnlFrequencyDisplay.AddParameterPresentCondition(rdoGraph, "sjplot")
 
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkCount, {rdoTable, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrSaveGraph, {rdoGraph, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
@@ -221,6 +221,7 @@ Public Class dlgThreeVariableFrequencies
         If rdoGraph.Checked OrElse rdoTable.Checked Then
             ucrPnlFrequencyDisplay.SetRCode(clsCurrBaseCode, bReset)
         End If
+
         ucrSelectorThreeVariableFrequencies.SetRCode(clsTableBaseOperator, bReset)
         ucrChkCell.SetRCode(clsSjTab, bReset)
         ucrChkColumn.SetRCode(clsSjTab, bReset)
