@@ -56,23 +56,22 @@ Public Class sdgOneVarUseModFit
         ucrNudTo.SetParameter(New RParameter("to", 2))
         ucrNudTo.SetMinMax(0, 1)
         ucrNudTo.Increment = 0.05
-        ucrNudFrom.SetRDefault(1)
+        ucrNudTo.SetRDefault(1)
 
         ucrNudBy.SetParameter(New RParameter("by", 3))
         ucrNudBy.SetMinMax(0.01, 1)
         ucrNudBy.Increment = 0.05
-        ucrNudFrom.SetRDefault(0.25)
+        ucrNudBy.SetRDefault(0.25)
 
         'function ran here is probs = c(VALUES)
-        dctQuantileValues.Add("0.25, 0.5, 0.75", "0.25, 0.5, 0.75")
-        dctQuantileValues.Add("0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9", "0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9")
         ucrInputQuantiles.SetParameter(New RParameter("x"))
+        dctQuantileValues.Add("0.25,0.5,0.75", Chr(34) & "0.25,0.5,0.75" & Chr(34))
+        dctQuantileValues.Add("0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9", Chr(34) & "0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9" & Chr(34))
         ucrInputQuantiles.SetItems(dctQuantileValues)
-        ucrInputQuantiles.SetDefaultState("0.25, 0.5, 0.75")
         ucrInputQuantiles.bAllowNonConditionValues = True
         ucrInputQuantiles.SetValidationTypeAsNumericList(dcmMin:=0, dcmMax:=1)
 
-        ucrPnlQuantiles.AddToLinkedControls(ucrInputQuantiles, {rdoInsertValues}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
+        ucrPnlQuantiles.AddToLinkedControls(ucrInputQuantiles, {rdoInsertValues}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.25,0.5,0.75")
         ucrPnlQuantiles.AddToLinkedControls(ucrNudTo, {rdoSequence}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
         ucrPnlQuantiles.AddToLinkedControls(ucrNudFrom, {rdoSequence}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
         ucrPnlQuantiles.AddToLinkedControls(ucrNudBy, {rdoSequence}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
@@ -122,6 +121,7 @@ Public Class sdgOneVarUseModFit
         ucrNudCI.SetRCode(clsOneVarQuantileFunction, bReset)
         ucrPnlPlots.SetRCode(clsRPlotFunction, bReset)
         ucrPnlQuantiles.SetRCode(clsRSeqFunction, bReset)
+        ucrInputQuantiles.SetRCode(clsOneVarQuantileFunction, bReset)
 
         If bReset Then
             tbpOneVarUseModFit.SelectedIndex = 0
@@ -191,7 +191,7 @@ Public Class sdgOneVarUseModFit
     Public Sub QuantileCommand()
         If rdoSequence.Checked Then
             clsOneVarQuantileFunction.AddParameter("probs", clsRFunctionParameter:=clsRSeqFunction)
-        Else
+        Else    
             clsOneVarQuantileFunction.AddParameter("probs", strParameterValue:="c(" & ucrInputQuantiles.GetText & ")")
         End If
     End Sub

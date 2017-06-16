@@ -110,6 +110,7 @@ Public Class dlgThreeVariableFrequencies
 
         ucrPnlFrequencyDisplay.AddParameterPresentCondition(rdoTable, "sjtab")
         ucrPnlFrequencyDisplay.AddParameterPresentCondition(rdoGraph, "sjplot")
+        'TODO have conditions on multiple functions for both option
 
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkCount, {rdoTable, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrSaveGraph, {rdoGraph, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
@@ -216,7 +217,10 @@ Public Class dlgThreeVariableFrequencies
         ucrChkWeights.SetRCode(clsSjTab, bReset)
         ucrChkFlip.SetRCode(clsSjPlot, bReset)
         ucrPnlFreqType.SetRCode(clsSjPlot, bReset)
-        ucrPnlFrequencyDisplay.SetRCode(clsCurrBaseCode, bReset)
+        If bReset OrElse Not rdoBoth.Checked Then
+            ucrPnlFrequencyDisplay.SetRCode(clsCurrBaseCode, bReset)
+        End If
+
         ucrSelectorThreeVariableFrequencies.SetRCode(clsTableBaseOperator, bReset)
         ucrChkCell.SetRCode(clsSjTab, bReset)
         ucrChkColumn.SetRCode(clsSjTab, bReset)
