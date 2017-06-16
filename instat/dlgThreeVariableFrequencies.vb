@@ -109,7 +109,7 @@ Public Class dlgThreeVariableFrequencies
         ucrPnlFrequencyDisplay.AddRadioButton(rdoBoth)
 
         ucrPnlFrequencyDisplay.AddParameterPresentCondition(rdoTable, "sjtab")
-        ucrPnlFrequencyDisplay.AddParameterPresentCondition(rdoGraph, "sjplot")
+        ucrPnlFrequencyDisplay.AddParameterPresentCondition(rdoGraph, "gridExtra")
 
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkCount, {rdoTable, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrSaveGraph, {rdoGraph, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
@@ -153,6 +153,8 @@ Public Class dlgThreeVariableFrequencies
         ucrSelectorThreeVariableFrequencies.Reset()
         ucrReceiverRowFactor.SetMeAsReceiver()
         ucrSaveGraph.Reset()
+        'To fix the problem of rdo both which does not satisfy the condition of having both functions present, line 111 & 112 
+        rdoTable.Checked = True
 
         clsTableBaseOperator.SetOperation("%>%")
         clsTableBaseOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupBy, iPosition:=1)
@@ -216,7 +218,9 @@ Public Class dlgThreeVariableFrequencies
         ucrChkWeights.SetRCode(clsSjTab, bReset)
         ucrChkFlip.SetRCode(clsSjPlot, bReset)
         ucrPnlFreqType.SetRCode(clsSjPlot, bReset)
-        ucrPnlFrequencyDisplay.SetRCode(clsCurrBaseCode, bReset)
+        If rdoGraph.Checked OrElse rdoTable.Checked Then
+            ucrPnlFrequencyDisplay.SetRCode(clsCurrBaseCode, bReset)
+        End If
         ucrSelectorThreeVariableFrequencies.SetRCode(clsTableBaseOperator, bReset)
         ucrChkCell.SetRCode(clsSjTab, bReset)
         ucrChkColumn.SetRCode(clsSjTab, bReset)
