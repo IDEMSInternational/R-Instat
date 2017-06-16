@@ -14,27 +14,30 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgSpells
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
     Private clsAddKey, clsSpellLength, clsMaxValueManipulation, clsSubSpellLength1 As New RFunction
-    Private clsMaxValue, clsMaxValueList As New RFunction
+    Private clsMaxValue, clsMaxValueList, clsMaxValueFunction As New RFunction
     Private clsDayFromAndTo, clsYearGroupDaily As New RFunction
+    Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator As New ROperator
     Private clsApplyInstatFunction, clsRRainday As New RFunction
+    Private clsRRaindayOperator, clsRRaindayAndOperator, clsRRaindayLowerOperator, clsRRaindayUpperOperator As New ROperator
     Private strCurrDataName As String = ""
-    Private strValuesUnder As String = ">="
 
     Private Sub dlgSpells_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstload Then
             InitialiseDialog()
-            SetDefaults()
             bFirstload = False
-            '        Else
-            '            ReopenDialog()
+        End If
+        If bReset Then
+            SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        bReset = False
         TestOKEnabled()
     End Sub
 
@@ -46,10 +49,10 @@ Public Class dlgSpells
         ucrSelectorForSpells.SetParameterIsString()
 
         ' Setting receivers
-        ucrReceiverRainfall.SetParameter(New RParameter("data", 0))
+        ucrReceiverRainfall.SetParameter(New RParameter("rain", 0))
         ucrReceiverRainfall.SetParameterIsString()
         ucrReceiverRainfall.bWithQuotes = False
-        ucrReceiverRainfall.SetParameterIncludeArgumentName(False)
+        '        ucrReceiverRainfall.SetParameterIncludeArgumentName(False)
         ucrReceiverRainfall.Selector = ucrSelectorForSpells
         ucrReceiverRainfall.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "rain" & Chr(34)})
         ucrReceiverRainfall.bAutoFill = True
@@ -68,15 +71,29 @@ Public Class dlgSpells
         ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
         ucrReceiverDate.bAutoFill = True
 
+        ucrReceiverDOY.SetParameter(New RParameter("day", 0))
+        ucrReceiverDOY.SetParameterIsString()
+        ucrReceiverDOY.bWithQuotes = False
         ucrReceiverDOY.Selector = ucrSelectorForSpells
         ucrReceiverDOY.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "doy" & Chr(34)})
         ucrReceiverDOY.bAutoFill = True
 
-        'clsRTransform.SetRCommand("instat_calculation$new")
-        'clsRTransform.SetAssignTo("transform_calculation")
-
         clsSubSpellLength1.SetRCommand("list")
         clsMaxValueList.SetRCommand("list")
+
+        ucrNudFrom.SetParameter(New RParameter("from", 1))
+        ucrNudFrom.SetMinMax(1, 365)
+
+        ucrNudTo.SetParameter(New RParameter("to", 1))
+        ucrNudTo.SetMinMax(2, 366)
+
+        ucrInputSpellLower.SetParameter(New RParameter("min", 1))
+        ucrInputSpellLower.SetValidationTypeAsNumeric()
+        ucrInputSpellLower.AddQuotesIfUnrecognised = False
+
+        ucrInputSpellUpper.SetParameter(New RParameter("max", 1))
+        ucrInputSpellUpper.SetValidationTypeAsNumeric()
+        ucrInputSpellUpper.AddQuotesIfUnrecognised = False
 
         'ucrInputCondition.SetParameter(New RParameter(""))
         'Dim dctCondition As New Dictionary(Of String, String)
@@ -106,6 +123,14 @@ Public Class dlgSpells
         clsRRainday = New RFunction
         clsSpellLength = New RFunction
         clsMaxValue = New RFunction
+        clsDayFromAndToOperator = New ROperator
+        clsDayFromOperator = New ROperator
+        clsDayToOperator = New ROperator
+        clsRRaindayOperator = New ROperator
+        clsRRaindayAndOperator = New ROperator
+        clsRRaindayLowerOperator = New ROperator
+        clsRRaindayUpperOperator = New ROperator
+        clsMaxValueFunction = New RFunction
 
         ucrSelectorForSpells.Reset()
         ucrReceiverDate.SetMeAsReceiver()
@@ -115,20 +140,38 @@ Public Class dlgSpells
 
         'DayFromandTo
         clsDayFromAndTo.SetRCommand("instat_calculation$new")
-        clsDayFromAndTo.AddParameter("function_exp", Chr(34) & ucrReceiverDOY.GetVariableNames(False) & ">=" & ucrNudFrom.Value & " & " & ucrReceiverDOY.GetVariableNames(False) & "<=" & ucrNudTo.Value & Chr(34))
-        clsDayFromAndTo.AddParameter("type", Chr(34) & "filter" & Chr(34))
+        clsDayFromAndTo.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
+        '        clsDayFromAndTo.AddParameter("function_exp", Chr(34) & clsDayFromAndToOperator.ToScript & Chr(34), iPosition:=1)
+        clsDayFromAndToOperator.SetOperation("&")
+        clsDayFromAndToOperator.AddParameter("from", clsROperatorParameter:=clsDayFromOperator, iPosition:=0)
+        clsDayFromOperator.SetOperation(">=")
+        clsDayFromOperator.AddParameter("from", 1)
+        clsDayFromAndToOperator.AddParameter("to", clsROperatorParameter:=clsDayToOperator, iPosition:=1)
+        clsDayToOperator.SetOperation("<=")
+        clsDayToOperator.AddParameter("to", 366)
 
         ' Year group
         clsYearGroupDaily.SetRCommand("instat_calculation$new")
         clsYearGroupDaily.AddParameter("type", Chr(34) & "by" & Chr(34))
 
-        ' rain_day option
+        ' rain_day
         clsRRainday.SetRCommand("instat_calculation$new")
-        clsRRainday.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=1)
-        clsRRainday.AddParameter("function_exp", Chr(34) & "ifelse(" & ucrReceiverRainfall.GetVariableNames(False) & " >= " & ucrInputSpellLower.GetText() & " & " & ucrReceiverRainfall.GetVariableNames(False) & " <= " & ucrInputSpellUpper.GetText() & ", 0,1)" & Chr(34), iPosition:=2)
-        clsRRainday.AddParameter("result_name", Chr(34) & "rain_day" & Chr(34), iPosition:=3)
-        clsRRainday.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames() & ")", iPosition:=0)
-        clsRRainday.AddParameter("save", "0", iPosition:=4)
+        clsRRainday.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
+        clsRRainday.AddParameter("result_name", Chr(34) & "rain_day" & Chr(34), iPosition:=2)
+        clsRRainday.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames() & ")", iPosition:=3)
+        clsRRainday.AddParameter("save", "0", iPosition:=6)
+        '        clsRRainday.AddParameter("function_exp", Chr(34) & clsRRaindayOperator.ToScript & Chr(34), iPosition:=1)
+        ' We have: match(Rain >= LOWER & Rain <= UPPER, 1, nomatch = 0)
+        clsRRaindayOperator.SetOperation(",")
+        clsRRaindayOperator.AddParameter("lower_upper_operators", clsROperatorParameter:=clsRRaindayAndOperator, iPosition:=0)
+        clsRRaindayOperator.AddParameter("right_side", "1, nomatch = 0", iPosition:=1)
+        clsRRaindayAndOperator.SetOperation("&")
+        clsRRaindayAndOperator.AddParameter("lower", clsROperatorParameter:=clsRRaindayLowerOperator, iPosition:=0)
+        clsRRaindayLowerOperator.SetOperation(">=")
+        clsRRaindayLowerOperator.AddParameter("min", 0, iPosition:=1)
+        clsRRaindayAndOperator.AddParameter("upper", clsROperatorParameter:=clsRRaindayUpperOperator, iPosition:=0)
+        clsRRaindayUpperOperator.SetOperation("<=")
+        clsRRaindayUpperOperator.AddParameter("max", 0.85, iPosition:=1)
 
         ' Spell Length
         clsSpellLength.SetRCommand("instat_calculation$new")
@@ -144,12 +187,14 @@ Public Class dlgSpells
 
         'Max Value
         clsMaxValue.SetRCommand("instat_calculation$new")
-        clsMaxValue.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=1)
-        clsMaxValue.AddParameter("function_exp", Chr(34) & "max(Dry_Spell)" & Chr(34), iPosition:=2)
+        clsMaxValue.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
+        clsMaxValue.AddParameter("function_exp", clsRFunctionParameter:=clsMaxValueFunction, iPosition:=1)
+        clsMaxValueFunction.SetRCommand("max")
+        clsMaxValueFunction.AddParameter("x", "Dry_Spell")
         clsMaxValue.AddParameter("result_name", Chr(34) & ucrSaveSpells.GetText() & Chr(34), iPosition:=3)
-        clsMaxValue.AddParameter("save", 2, iPosition:=4)
+        clsMaxValue.AddParameter("save", 2, iPosition:=6)
+        clsMaxValue.AddParameter("manipulations", clsRFunctionParameter:=clsMaxValueManipulation, iPosition:=5)
         clsMaxValue.SetAssignTo(ucrSaveSpells.ucrInputTextSave.GetText)
-        clsMaxValue.AddParameter("manipulations", clsRFunctionParameter:=clsMaxValueManipulation, iPosition:=4)
 
         clsApplyInstatFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         clsApplyInstatFunction.AddParameter("display", "FALSE", iPosition:=1)
@@ -160,6 +205,17 @@ Public Class dlgSpells
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        'For day:
+        ucrReceiverDOY.AddAdditionalCodeParameterPair(clsDayFromOperator, New RParameter("day", 0), iAdditionalPairNo:=1)
+        ucrReceiverDOY.SetRCode(clsDayToOperator, bReset)
+        ucrNudFrom.SetRCode(clsDayFromOperator, bReset)
+        ucrNudTo.SetRCode(clsDayToOperator, bReset)
+
+        ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsRRaindayLowerOperator, New RParameter("rain", 0), iAdditionalPairNo:=1)
+        ucrReceiverRainfall.SetRCode(clsRRaindayUpperOperator, bReset)
+        ucrInputSpellLower.SetRCode(clsRRaindayLowerOperator, bReset)
+        ucrInputSpellUpper.SetRCode(clsRRaindayUpperOperator, bReset)
+
         ucrReceiverDate.SetRCode(clsAddKey, bReset)
         ucrSelectorForSpells.SetRCode(clsAddKey, bReset)
     End Sub
@@ -179,29 +235,39 @@ Public Class dlgSpells
     End Sub
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        frmMain.clsRLink.RunScript(clsAddKey.ToScript, strComment:="Start of Rains: Defining Date column as key")
+        frmMain.clsRLink.RunScript(clsAddKey.ToScript, strComment:="Spells: Defining Date column as key")
         clsMaxValue.SetAssignTo("Spells_Rain")
         clsSpellLength.SetAssignTo("Dry_Spell")
         clsDayFromAndTo.SetAssignTo("Day_From_and_To")
         clsYearGroupDaily.SetAssignTo("grouping")
-        SubCalcForDrySpell()
-        SetGroupByFuncCalcFrom()
+        '        SetGroupByFuncCalcFrom()
+        clsDayFromAndTo.AddParameter("function_exp", Chr(34) & clsDayFromAndToOperator.ToScript & Chr(34), iPosition:=1)
+        clsRRainday.AddParameter("function_exp", Chr(34) & clsRRaindayOperator.ToScript & Chr(34), iPosition:=1)
+
         clsApplyInstatFunction.AddParameter("calc", clsRFunctionParameter:=clsMaxValue, iPosition:=1)
         ucrBase.clsRsyntax.SetBaseRFunction(clsApplyInstatFunction)
     End Sub
 
-    'Private Sub ucrPnlTransform_ControlContentsChanged(ucrChangedControl As ucrCore) Handles 
-    '    Dim bRain As Boolean = False
-    '    clsRRainday.AddParameter("function_exp", Chr(34) & "ifelse(" & ucrReceiverRainfall.GetVariableNames(False) & " >= " & ucrInputSpellLower.GetText() & " & " & ucrreceiverrain.GetVariableNames(False) & " <= " & ucrInputSpellUpper.GetText() & ", 0, 1)" & Chr(34))
-    '    clsSubCalcList.AddParameter("sub1", clsRFunctionParameter:=clsRRainday)
-    '        clsRTransform.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubCalcList, iPosition:=6)
-    '    SetAssignName()
-    'End Sub
+    'Setting up the days
+    Private Sub DayBoundaries()
+        clsDayFromAndTo.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")")
+    End Sub
 
-    Private Sub ucrSelectorForSpells_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrReceiverRainfall.ControlContentsChanged, ucrSelectorForSpells.ControlContentsChanged
-        strCurrDataName = Chr(34) & ucrSelectorForSpells.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34)
-        clsRRainday.AddParameter("function_exp", Chr(34) & "ifelse(" & ucrReceiverRainfall.GetVariableNames(False) & " >= " & ucrInputSpellLower.GetText() & " & " & ucrReceiverRainfall.GetVariableNames(False) & " <= " & ucrInputSpellUpper.GetText() & ", 0, 1)" & Chr(34), iPosition:=2)
-        clsRRainday.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames() & ")", iPosition:=0)
+    'Rainfall set up
+    Private Sub RainDayCalculation()
+        clsSubSpellLength1.AddParameter("sub1", clsRFunctionParameter:=clsRRainday, bIncludeArgumentName:=False)
+        clsSpellLength.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubSpellLength1)
+    End Sub
+
+    Private Sub RainyDaysMethod() ' run when ucrInputcondition changes
+        Select Case ucrInputCondition.GetText
+            Case "<= Amount of Rain"
+                clsRRaindayOperator.AddParameter("lower_operators", clsROperatorParameter:=clsRRaindayLowerOperator, iPosition:=0)
+            Case "Between" ' match(Rain>=LEFT & Rain<=RIGHT, 1, nomatch = 0)
+                clsRRaindayOperator.AddParameter("lower_upper_operators", clsROperatorParameter:=clsRRaindayAndOperator, iPosition:=0)
+            Case Else
+                clsRRaindayOperator.AddParameter("upper_operators", clsROperatorParameter:=clsRRaindayUpperOperator, iPosition:=0)
+        End Select
     End Sub
 
     Private Sub SetGroupByFuncCalcFrom()
@@ -209,7 +275,6 @@ Public Class dlgSpells
         Dim strGroupByCalcFrom As String = ""
         strCurrDataName = Chr(34) & ucrSelectorForSpells.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34)
         If Not ucrReceiverStation.IsEmpty Then
-            clsYearGroupDaily.SetAssignTo("grouping")
             clsMaxValue.AddParameter("manipulations", clsRFunctionParameter:=clsMaxValueManipulation, iPosition:=4)
 
             '            strGroupByCalcFrom = "list(" & strCurrDataName & "=" & ucrReceiverStation.GetVariableNames() & ")"
@@ -225,27 +290,7 @@ Public Class dlgSpells
         MaxValue()
     End Sub
 
-    Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
-        SetGroupByFuncCalcFrom()
-    End Sub
-
-    Private Sub ucrControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRainfall.ControlValueChanged
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrSpellBetween_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrInputSpellUpper.ControlContentsChanged, ucrInputSpellLower.ControlContentsChanged
-        clsMaxValueList.AddParameter("sub1", clsRFunctionParameter:=clsSpellLength, bIncludeArgumentName:=False, iPosition:=0)
-        clsMaxValue.AddParameter("sub_calculations", clsRFunctionParameter:=clsMaxValueList, iPosition:=7)
-        TestOKEnabled()
-        RainyDaysMethod()
-    End Sub
-
-    Private Sub ucrSelectorForStartofRains_DataFrameChanged()
-
-    End Sub
-
-    Private Sub MaxValue()
-        clsMaxValueManipulation.AddParameter("sub2", clsRFunctionParameter:=clsYearGroupDaily, bIncludeArgumentName:=False)
+    Private Sub MaxValue() ' would this class need to update when the days update? ' and when the year receiver changes
         clsMaxValueManipulation.AddParameter("sub3", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False)
         clsMaxValueList.AddParameter("sub1", clsRFunctionParameter:=clsSpellLength, bIncludeArgumentName:=False)
 
@@ -253,37 +298,51 @@ Public Class dlgSpells
         clsMaxValue.AddParameter("sub_calculations", clsRFunctionParameter:=clsMaxValueList)
     End Sub
 
-    Private Sub SubCalcForDrySpell()
-        clsSubSpellLength1.AddParameter("sub1", clsRFunctionParameter:=clsRRainday, bIncludeArgumentName:=False)
-        clsSpellLength.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubSpellLength1)
+    Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
+        SetGroupByFuncCalcFrom()
     End Sub
 
-    Private Sub RainyDaysMethod()
-        Select Case ucrInputCondition.GetText
-            Case "<= Amount of Rain"
-                clsRRainday.AddParameter("function_exp", Chr(34) & "match(" & ucrReceiverRainfall.GetVariableNames(False) & ">=" & ucrInputSpellLower.GetText & "," & "1, nomatch = 0" & ")" & Chr(34))
-            Case "Between" ' match(Rain>=LEFT & Rain<=RIGHT, 1, nomatch = 0)
-                clsRRainday.AddParameter("function_exp", Chr(34) & "match(" & ucrReceiverRainfall.GetVariableNames(False) & ">=" & ucrInputSpellLower.GetText & "&" & ucrReceiverRainfall.GetVariableNames(False) & "<=" & ucrInputSpellUpper.GetText & "," & "1, nomatch = 0" & ")" & Chr(34))
-            Case Else
-                clsRRainday.AddParameter("function_exp", Chr(34) & "match(" & ucrReceiverRainfall.GetVariableNames(False) & "<=" & ucrInputSpellLower.GetText & "," & "1, nomatch = 0" & ")" & Chr(34))
-        End Select
+    Private Sub ucrReceiverRainfall_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRainfall.ControlValueChanged
+        ' do I need to update this for when the data frame changes?
+        clsRRainday.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames() & ")", iPosition:=0)
+        RainyDaysMethod()
+        RainDayCalculation()
+
+        ' when rain_day changes, then clsSpellLength changes. So do I need to run everything again when rain_day changes?!
+        ' No, not if I do Assigns as it's just = the sub?
     End Sub
 
-    Private Sub Ifthenudschange() ' and if the receiver changes
-        clsDayFromAndTo.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")")
-        clsDayFromAndTo.AddParameter("function_exp", Chr(34) & ucrReceiverDOY.GetVariableNames(False) & ">=" & ucrNudFrom.Value & " & " & ucrReceiverDOY.GetVariableNames(False) & "<=" & ucrNudTo.Value & Chr(34))
+    Private Sub ucrReceivers_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRainfall.ControlValueChanged
+        ' when rain_day changes, then clsSpellLength changes. So do I need to run everything again when rain_day changes?!
+        clsMaxValueList.AddParameter("sub1", clsRFunctionParameter:=clsSpellLength, bIncludeArgumentName:=False, iPosition:=0)
     End Sub
 
-    Private Sub ucrReceiverYear_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverYear.SelectionChanged
+    Private Sub ucrSpellBetween_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrInputSpellUpper.ControlContentsChanged, ucrInputSpellLower.ControlContentsChanged
+        clsMaxValue.AddParameter("sub_calculations", clsRFunctionParameter:=clsMaxValueList, iPosition:=7)
+        TestOKEnabled()
+        RainyDaysMethod()
+    End Sub
+
+    Private Sub ucrSelectorForSpells_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrReceiverRainfall.ControlContentsChanged, ucrSelectorForSpells.ControlContentsChanged
+        strCurrDataName = Chr(34) & ucrSelectorForSpells.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34)
+    End Sub
+
+    Private Sub ucrReceiverDOY_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDOY.ControlValueChanged
+        DayBoundaries()
+    End Sub
+
+    Private Sub nudTo_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudTo.ControlValueChanged, ucrNudFrom.ControlValueChanged
+        DayBoundaries()
+    End Sub
+
+    Private Sub ucrReceiverYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlValueChanged
+        ' does this update if I change the data name?
         clsYearGroupDaily.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames & ")")
+        clsMaxValueManipulation.AddParameter("sub2", clsRFunctionParameter:=clsYearGroupDaily, bIncludeArgumentName:=False)
     End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRainfall.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged
         TestOKEnabled()
-    End Sub
-
-    Private Sub nudTo_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudTo.ControlValueChanged, ucrNudFrom.ControlValueChanged
-        Ifthenudschange()
     End Sub
 End Class
 
