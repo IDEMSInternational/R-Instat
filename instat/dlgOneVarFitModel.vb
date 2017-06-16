@@ -13,6 +13,7 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 
 Public Class dlgOneVarFitModel
@@ -47,7 +48,7 @@ Public Class dlgOneVarFitModel
         UcrReceiver.Selector = ucrSelectorOneVarFitMod
         UcrReceiver.SetMeAsReceiver()
 
-        ucrSaveModel.SetPrefix("one_way_freq")
+        ucrSaveModel.SetPrefix("dist")
         ucrSaveModel.SetSaveTypeAsModel()
         ucrSaveModel.SetDataFrameSelector(ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
         ucrSaveModel.SetCheckBoxText("Save Model")
@@ -59,11 +60,26 @@ Public Class dlgOneVarFitModel
         sdgOneVarFitModel.SetMyRFunction(clsROneVarFitModel)
         sdgOneVarFitModDisplay.SetDistribution(ucrFamily)
         sdgOneVarFitModel.SetDistribution(ucrFamily)
-        'ucrNudCI.Increment = 0.05
-        'ucrNudCI.DecimalPlaces = 2
-        'ucrNudHyp.DecimalPlaces = 2
-        'ucrNudCI.Maximum = 1
-        'ucrNudCI.Minimum = 0
+
+        ucrPnlGeneralExactCase.AddRadioButton(rdoGeneralCase)
+        ucrPnlGeneralExactCase.AddRadioButton(rdoExactCase)
+
+        ucrPnlStats.AddRadioButton(rdoEnorm)
+        ucrPnlStats.AddRadioButton(rdoMeanWilcox)
+        ucrPnlStats.AddRadioButton(rdoVarSign)
+        ucrPnlGeneralExactCase.AddToLinkedControls(ucrPnlStats, {rdoExactCase}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudCI, {rdoExactCase}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudCI.SetLinkedDisplayControl(lblConfidenceLimit)
+        ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudHyp, {rdoExactCase}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudHyp.SetLinkedDisplayControl(lblHyp)
+        ucrPnlStats.SetLinkedDisplayControl(grpConditions)
+
+        ucrNudCI.Increment = 0.05
+        ucrNudCI.DecimalPlaces = 2
+        ucrNudCI.SetMinMax(0, 1)
+
+        ucrNudHyp.DecimalPlaces = 2
+
         ucrOperator.SetItems({"==", "<", "<=", ">", ">=", "!="})
         dctucrOperator.Add("Equal to(==)", "==")
         ucrVariables.SetItemsTypeAsColumns()    'we want SetItemsTypeAs factors in the column
@@ -77,31 +93,26 @@ Public Class dlgOneVarFitModel
         ucrSelectorOneVarFitMod.Reset()
         ucrSelectorOneVarFitMod.Focus()
         ucrOperator.SetName("==")
-        ' instat.ucrSaveModel.SetPrefix("dist")
-
         clsROneVarFitModel.SetPackageName("fitdistrplus")
         clsROneVarFitModel.SetRCommand("fitdist")
 
-
         ucrNudCI.Value = 0.95
         BinomialConditions()
-        'temp set to False to fix bug in saving
-        ' chkSaveModel.Checked = False
-        ' instat.ucrSaveModel.Visible = False
-        ' instat.ucrSaveModel.Reset()
+        ucrSaveModel.Reset()
         SetDataParameter()
         EnableOptions()
-        AssignSaveModel()
         sdgOneVarFitModDisplay.SetDefaults()
         sdgOneVarFitModel.SetDefaults()
         SetBaseFunction()
         rdoGeneralCase.Checked = True
-        TestOKEnabled()
+        clsROneVarFitModel.SetAssignTo("last_model", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_model")
+        UcrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModel)
         SetDistributions()
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-
+        ucrPnlGeneralExactCase.SetRCode(clsROneVarFitModel, bReset)
+        UcrReceiver.AddAdditionalCodeParameterPair()
     End Sub
 
     Private Sub SetDistributions()
@@ -112,27 +123,17 @@ Public Class dlgOneVarFitModel
         End If
     End Sub
 
-    Private Sub ReopenDialog()
-    End Sub
-
     Private Sub TestOKEnabled()
-        'If (chkSaveModel.Checked AndAlso Not instat.ucrSaveModel.IsEmpty() OrElse Not chkSaveModel.Checked) AndAlso Not UcrReceiver.IsEmpty AndAlso MyBase.sdgOneVarFitModDisplay.TestOkEnabled() Then
-        '    UcrBase.OKEnabled(True)
-        'Else
-        '    UcrBase.OKEnabled(False)
-        'End If
+        If ucrSaveModel.IsComplete() AndAlso Not UcrReceiver.IsEmpty Then
+            UcrBase.OKEnabled(True)
+        Else
+            UcrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles UcrBase.ClickReset
         SetDefaults()
-    End Sub
-
-    Private Sub ucrSelectorOneVarFitMod_DataFrameChanged() Handles ucrSelectorOneVarFitMod.DataFrameChanged
-        AssignSaveModel()
-    End Sub
-
-    Private Sub ucrSaveModel_NameChanged()
-        AssignSaveModel()
+        SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
 
@@ -324,7 +325,7 @@ Public Class dlgOneVarFitModel
                 clsRBinomTest.AddParameter("x", clsROperatorParameter:=clsFunctionOperator)
                 clsFunctionOperator.SetOperation(ucrOperator.GetText())
                 clsFunctionOperator.AddParameter(iPosition:=0, clsRFunctionParameter:=UcrReceiver.GetVariables())
-                clsFunctionOperator.AddParameter(strParameterValue:=nudBinomialConditions.Value.ToString())
+                clsFunctionOperator.AddParameter(strParameterValue:=ucrNudBinomialConditions.Value.ToString())
             End If
         Else
             clsRBinomTest.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
@@ -357,31 +358,8 @@ Public Class dlgOneVarFitModel
         End If
     End Sub
 
-    Private Sub AssignSaveModel()
-        'If rdoGeneralCase.Checked Then
-        '    If chkSaveModel.Checked AndAlso Not instat.ucrSaveModel.IsEmpty Then
-        '        UcrBase.clsRsyntax.SetAssignTo(instat.ucrSaveModel.GetText, strTempModel:=instat.ucrSaveModel.GetText, strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-        '    Else
-        '        UcrBase.clsRsyntax.SetAssignTo("last_model", strTempModel:="last_model", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-        '    End If
-        'End If
-    End Sub
-
-
-
-    Private Sub chkSaveModel_CheckedChanged(sender As Object, e As EventArgs)
-        'If chkSaveModel.Checked Then
-        '    instat.ucrSaveModel.Visible = True
-        'Else
-        '    instat.ucrSaveModel.Visible = False
-        'End If
-        AssignSaveModel()
-        TestOKEnabled()
-    End Sub
-
     Private Sub UcrReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles UcrReceiver.SelectionChanged
         SetBaseFunction()
-        TestOKEnabled()
         EnableOptions()
         PlotResiduals()
         DataTypeAccepted()
@@ -397,7 +375,6 @@ Public Class dlgOneVarFitModel
         sdgOneVarFitModDisplay.ShowDialog()
         Display()
         EnableOptions()
-        TestOKEnabled()
     End Sub
 
     Private Sub EnableOptions()
@@ -412,7 +389,6 @@ Public Class dlgOneVarFitModel
 
     Private Sub chkConvertToVariate_CheckedChanged(sender As Object, e As EventArgs) Handles chkConvertToVariate.CheckedChanged
         SetDataParameter()
-        TestOKEnabled()
         Display()
     End Sub
 
@@ -479,7 +455,7 @@ Public Class dlgOneVarFitModel
         End If
     End Sub
 
-    Private Sub rdoButtons_CheckedChanged(sender As Object, e As EventArgs)
+    Private Sub ucrPnlGeneralExactCase_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGeneralExactCase.ControlValueChanged
         EnableOptions()
         BinomialConditions()
         sdgOneVarFitModel.OptimisationMethod()
@@ -488,7 +464,7 @@ Public Class dlgOneVarFitModel
         DataTypeAccepted()
     End Sub
 
-    Private Sub ucrDistributions_cboDistributionsIndexChanged() Handles ucrFamily.DistributionsIndexChanged, ucrFamily.ControlValueChanged
+    Private Sub ucrDistributions_cboDistributionsIndexChanged() Handles ucrFamily.DistributionsIndexChanged, ucrFamily.DistributionsIndexChanged
         SetBaseFunction()
         BinomialConditions()
         SetDataParameter()
@@ -496,13 +472,9 @@ Public Class dlgOneVarFitModel
         DataTypeAccepted()
     End Sub
 
-    Private Sub lbls_VisibleChanged(sender As Object, e As EventArgs) Handles lblHyp.VisibleChanged, lblConfidenceLimit.VisibleChanged, lblEquals.VisibleChanged, lblSuccessIf.VisibleChanged
+    Private Sub lbls_VisibleChanged(sender As Object, e As EventArgs) Handles lblEquals.VisibleChanged, lblSuccessIf.VisibleChanged, lblHyp.VisibleChanged, lblConfidenceLimit.VisibleChanged
         BinomialConditions()
     End Sub
-
-    'Private Sub nudCI_TextChanged(sender As Object, e As EventArgs) Handles nudCI.TextChanged
-    '    SetBaseFunction()
-    'End Sub
 
     Private Sub chkBinModify_CheckedChanged(sender As Object, e As EventArgs) Handles chkBinModify.CheckedChanged
         BinomialConditions()
@@ -519,14 +491,14 @@ Public Class dlgOneVarFitModel
                     lblEquals.Visible = True
                 Else
                     lblEquals.Visible = False
-                    nudBinomialConditions.Visible = True
+                    ucrNudBinomialConditions.Visible = True
                     ucrOperator.Visible = True
                     ucrVariables.Visible = False
                 End If
             Else
                 lblSuccessIf.Visible = False
                 lblEquals.Visible = False
-                nudBinomialConditions.Visible = False
+                ucrNudBinomialConditions.Visible = False
                 ucrOperator.Visible = False
                 ucrVariables.Visible = False
             End If
@@ -535,17 +507,17 @@ Public Class dlgOneVarFitModel
             chkBinModify.Checked = False
             lblSuccessIf.Visible = False
             lblEquals.Visible = False
-            nudBinomialConditions.Visible = False
+            ucrNudBinomialConditions.Visible = False
             ucrOperator.Visible = False
             ucrVariables.Visible = False
         End If
-        nudBinomialConditions.Value = 1
-        nudBinomialConditions.Maximum = Integer.MaxValue
-        nudBinomialConditions.Minimum = Integer.MinValue
+        ucrNudBinomialConditions.Value = 1
+        ucrNudBinomialConditions.Maximum = Integer.MaxValue
+        ucrNudBinomialConditions.Minimum = Integer.MinValue
         Display()
     End Sub
 
-    Private Sub nudBinomialConditions_ValueChanged(sender As Object, e As EventArgs) Handles nudBinomialConditions.ValueChanged
+    Private Sub ucrNudBinomialConditions_ValueChanged(sender As Object, e As EventArgs)
         SetBinomialTest()
     End Sub
 
@@ -554,8 +526,11 @@ Public Class dlgOneVarFitModel
         SetBinomialTest()
     End Sub
 
-    Private Sub rdoMean_VisibleChanged(sender As Object, e As EventArgs) Handles rdoMeanWilcox.VisibleChanged, rdoVarSign.VisibleChanged, rdoEnorm.VisibleChanged, rdoMeanWilcox.CheckedChanged, rdoVarSign.CheckedChanged, rdoEnorm.CheckedChanged
+    Private Sub rdoMean_VisibleChanged(sender As Object, e As EventArgs)
         Display()
         SetBaseFunction()
+
     End Sub
+
+
 End Class
