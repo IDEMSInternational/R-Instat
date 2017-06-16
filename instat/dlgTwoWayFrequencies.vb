@@ -148,7 +148,7 @@ Public Class dlgTwoWayFrequencies
         ucrSelectorTwoWayFrequencies.Reset()
         ucrReceiverRowFactor.SetMeAsReceiver()
         ucrSaveGraph.Reset()
-        'To fix the problem of rdo both which does not satisfy the condition of having both functions present, line 75 &76 
+        'To fix the problem of rdo both which does not satisfy the condition of having both functions present, line 121 & 122 
         rdoTable.Checked = True
 
         'Defining Table functions and default functions
