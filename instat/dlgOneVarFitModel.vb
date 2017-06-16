@@ -48,6 +48,9 @@ Public Class dlgOneVarFitModel
         UcrReceiver.Selector = ucrSelectorOneVarFitMod
         UcrReceiver.SetMeAsReceiver()
 
+        UcrReceiver.SetParameter(New RParameter("x"))
+        UcrReceiver.SetParameterIsRFunction()
+
         ucrSaveModel.SetPrefix("dist")
         ucrSaveModel.SetSaveTypeAsModel()
         ucrSaveModel.SetDataFrameSelector(ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
@@ -96,6 +99,8 @@ Public Class dlgOneVarFitModel
         clsROneVarFitModel.SetPackageName("fitdistrplus")
         clsROneVarFitModel.SetRCommand("fitdist")
 
+        ucrChkConvertVariate.SetText("Convert to Variate")
+        ucrChkConvertVariate.SetParameter(New RParameter("data"))
         ucrNudCI.Value = 0.95
         BinomialConditions()
         ucrSaveModel.Reset()
@@ -112,7 +117,21 @@ Public Class dlgOneVarFitModel
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrPnlGeneralExactCase.SetRCode(clsROneVarFitModel, bReset)
-        UcrReceiver.AddAdditionalCodeParameterPair()
+        UcrReceiver.SetRCode(clsRConvertVector, bReset)
+        ucrChkConvertVariate.SetRCode(clsRConvertNumeric, bReset)
+        UcrReceiver.AddAdditionalCodeParameterPair(clsRConvertNumeric, New RParameter("x"), iAdditionalPairNo:=1)
+        UcrReceiver.AddAdditionalCodeParameterPair(clsRConvertInteger, New RParameter("x"), iAdditionalPairNo:=2)
+        UcrReceiver.AddAdditionalCodeParameterPair(clsRWilcoxTest, New RParameter("x"), iAdditionalPairNo:=4)
+        UcrReceiver.AddAdditionalCodeParameterPair(clsRNonSignTest, New RParameter("x"), iAdditionalPairNo:=5)
+        UcrReceiver.AddAdditionalCodeParameterPair(clsRLength, New RParameter("x"), iAdditionalPairNo:=6)
+        UcrReceiver.AddAdditionalCodeParameterPair(clsRMean, New RParameter("x"), iAdditionalPairNo:=7)
+        UcrReceiver.AddAdditionalCodeParameterPair(clsRBinomTest, New RParameter("x"), iAdditionalPairNo:=8)
+        UcrReceiver.AddAdditionalCodeParameterPair(clsRBinomStart, New RParameter("x"), iAdditionalPairNo:=9)
+
+        ucrChkConvertVariate.AddAdditionalCodeParameterPair(clsROneVarFitModel, ucrChkConvertVariate.GetParameter(), iAdditionalPairNo:=1)
+        ucrChkConvertVariate.AddAdditionalCodeParameterPair(clsROneVarFitModel, ucrChkConvertVariate.GetParameter(), iAdditionalPairNo:=1)
+        ucrChkConvertVariate.AddAdditionalCodeParameterPair(clsROneVarFitModel, ucrChkConvertVariate.GetParameter(), iAdditionalPairNo:=1)
+
     End Sub
 
     Private Sub SetDistributions()
@@ -129,6 +148,7 @@ Public Class dlgOneVarFitModel
         Else
             UcrBase.OKEnabled(False)
         End If
+        UcrBase.OKEnabled(True)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles UcrBase.ClickReset
@@ -140,41 +160,37 @@ Public Class dlgOneVarFitModel
     Public Sub SetDataParameter()
         If Not UcrReceiver.IsEmpty Then
             If UcrReceiver.strCurrDataType = "numeric" OrElse UcrReceiver.strCurrDataType = "integer" Then
-                chkConvertToVariate.Checked = False
-                chkConvertToVariate.Visible = False
+                ucrChkConvertVariate.Checked = False
+                ucrChkConvertVariate.Visible = False
             Else
-                chkConvertToVariate.Visible = True
-                chkConvertToVariate.Checked = True
+                ucrChkConvertVariate.Visible = True
+                ucrChkConvertVariate.Checked = True
             End If
-            If chkConvertToVariate.Checked Then
+            If ucrChkConvertVariate.Checked Then
                 clsRConvertNumeric.SetPackageName("base")
                 clsRConvertNumeric.SetRCommand("as.numeric")
-                clsRConvertNumeric.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
                 UcrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=clsRConvertNumeric)
             Else
                 'TODO This is needed because fitdist checks is.vector on data which is FALSE when data has attributes
                 If ucrFamily.clsCurrDistribution.strNameTag = "Poisson" OrElse ucrFamily.clsCurrDistribution.strNameTag = "Geometric" Then
                     clsRConvertInteger.SetPackageName("base")
                     clsRConvertInteger.SetRCommand("as.integer")
-                    clsRConvertInteger.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
-                    clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertInteger)
+                    ' clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertInteger)
                 Else
                     clsRConvertVector.SetPackageName("base")
                     clsRConvertVector.SetRCommand("as.vector")
-                    clsRConvertVector.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
-                    clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertVector)
+                    'clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertVector)
                 End If
                 If ucrFamily.clsCurrDistribution.strNameTag = "Extreme_Value" Or ucrFamily.clsCurrDistribution.strNameTag = "Binomial" Or ucrFamily.clsCurrDistribution.strNameTag = "Bernouli" Or ucrFamily.clsCurrDistribution.strNameTag = "Students_t" Or ucrFamily.clsCurrDistribution.strNameTag = "Chi_Square" Or ucrFamily.clsCurrDistribution.strNameTag = "F" Or ucrFamily.clsCurrDistribution.strNameTag = "Hypergeometric" Then
                     clsROneVarFitModel.AddParameter("start", clsRFunctionParameter:=clsRStartValues)
                     clsRStartValues.SetPackageName("base")
                     clsRStartValues.SetRCommand("mean")
-                    clsRStartValues.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
                     ' TODO llplot() no longer works with starting values. However, the mle's will not plot without starting values for these variables
                 End If
             End If
         Else
-            chkConvertToVariate.Visible = False
-            UcrBase.clsRsyntax.RemoveParameter("data")
+            ucrChkConvertVariate.Visible = False
+            'UcrBase.clsRsyntax.RemoveParameter("data")
         End If
     End Sub
 
@@ -235,7 +251,6 @@ Public Class dlgOneVarFitModel
         clsRTTest.SetRCommand("t.test")
         UcrBase.clsRsyntax.SetBaseRFunction(clsRTTest)
         clsRConvertVector.SetRCommand("as.vector")
-        clsRConvertVector.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
         clsRTTest.AddParameter("x", clsRFunctionParameter:=clsRConvertVector)
         clsRTTest.AddParameter("mu", ucrNudHyp.Value.ToString)
         clsRTTest.AddParameter("conf.level", ucrNudCI.Value.ToString)
@@ -247,7 +262,6 @@ Public Class dlgOneVarFitModel
         UcrBase.clsRsyntax.SetBaseRFunction(clsVarTest)
         clsRConvertVector.SetPackageName("base")
         clsRConvertVector.SetRCommand("as.vector")
-        clsRConvertVector.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
         clsVarTest.AddParameter("x", clsRFunctionParameter:=clsRConvertVector)
         clsVarTest.AddParameter("sigma.squared", ucrNudHyp.Value.ToString)
         clsVarTest.AddParameter("conf.level", ucrNudCI.Value.ToString)
@@ -259,7 +273,6 @@ Public Class dlgOneVarFitModel
         UcrBase.clsRsyntax.SetBaseRFunction(clsREnormTest)
         clsRConvertVector.SetPackageName("base")
         clsRConvertVector.SetRCommand("as.vector")
-        clsRConvertVector.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
         clsREnormTest.AddParameter("x", clsRFunctionParameter:=clsRConvertVector)
         clsREnormTest.AddParameter("conf.level", ucrNudCI.Value.ToString)
         ' what is the hyp nud?
@@ -271,9 +284,7 @@ Public Class dlgOneVarFitModel
         UcrBase.clsRsyntax.SetBaseRFunction(clsRWilcoxTest)
         'clsRConvert.SetPackageName("base")
         'clsRConvert.SetRCommand("as.vector")
-        'clsRConvert.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
         'clsRWilcoxTest.AddParameter("x", clsRFunctionParameter:=clsRConvert)
-        clsRWilcoxTest.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
         clsRWilcoxTest.AddParameter("conf.level", ucrNudCI.Value.ToString)
         clsRWilcoxTest.AddParameter("mu", ucrNudHyp.Value.ToString)
     End Sub
@@ -282,7 +293,6 @@ Public Class dlgOneVarFitModel
         clsRNonSignTest.SetPackageName("signmedian.test")
         clsRNonSignTest.SetRCommand("signmedian.test")
         UcrBase.clsRsyntax.SetBaseRFunction(clsRNonSignTest)
-        clsRNonSignTest.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
         clsRNonSignTest.AddParameter("conf.level", ucrNudCI.Value.ToString)
         clsRNonSignTest.AddParameter("mu", ucrNudCI.Value.ToString)
     End Sub
@@ -300,10 +310,8 @@ Public Class dlgOneVarFitModel
         clsRPoissonTest.AddParameter("x", clsRFunctionParameter:=clsRLength)
         clsRLength.SetPackageName("base")
         clsRLength.SetRCommand("length")
-        clsRLength.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
         clsRMean.SetPackageName("base")
         clsRMean.SetRCommand("mean")
-        clsRMean.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
     End Sub
 
     Private Sub SetBinomialTest()
@@ -342,19 +350,16 @@ Public Class dlgOneVarFitModel
         If ucrFamily.clsCurrDistribution.strNameTag = "Poisson" Then
             clsRConvertInteger.SetPackageName("base")
             clsRConvertInteger.SetRCommand("as.integer")
-            clsRConvertInteger.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
             clsRfitdist.AddParameter("data", clsRFunctionParameter:=clsRConvertInteger)
         Else
             clsRConvertVector.SetPackageName("base")
             clsRConvertVector.SetRCommand("as.vector")
-            clsRConvertVector.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
             clsRfitdist.AddParameter("data", clsRFunctionParameter:=clsRConvertVector)
         End If
         If ucrFamily.clsCurrDistribution.strNameTag = "Bernouli" Then
             clsRfitdist.AddParameter("start", clsRFunctionParameter:=clsRBinomStart)
             clsRBinomStart.SetPackageName("base")
             clsRBinomStart.SetRCommand("mean")
-            clsRBinomStart.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
         End If
     End Sub
 
@@ -387,7 +392,7 @@ Public Class dlgOneVarFitModel
         End If
     End Sub
 
-    Private Sub chkConvertToVariate_CheckedChanged(sender As Object, e As EventArgs) Handles chkConvertToVariate.CheckedChanged
+    Private Sub chkConvertToVariate_CheckedChanged(sender As Object, e As EventArgs)
         SetDataParameter()
         Display()
     End Sub
@@ -417,7 +422,7 @@ Public Class dlgOneVarFitModel
         ElseIf rdoExactCase.Checked Then
             cmdFittingOptions.Visible = False
             cmdDisplayOptions.Visible = False
-            chkConvertToVariate.Visible = False
+            ucrChkConvertVariate.Visible = False
             grpConditions.Visible = True
             If ucrFamily.clsCurrDistribution.bIsExact = True Then
                 If ucrFamily.clsCurrDistribution.strNameTag = "Normal" Then
@@ -517,20 +522,21 @@ Public Class dlgOneVarFitModel
         Display()
     End Sub
 
-    Private Sub ucrNudBinomialConditions_ValueChanged(sender As Object, e As EventArgs)
-        SetBinomialTest()
-    End Sub
+    'Private Sub ucrNudBinomialConditions_ValueChanged(sender As Object, e As EventArgs)
+    '    SetBinomialTest()
+    'End Sub
 
     Private Sub cboVariables_TextChanged() Handles ucrVariables.NameChanged
         BinomialConditions()
         SetBinomialTest()
     End Sub
 
-    Private Sub rdoMean_VisibleChanged(sender As Object, e As EventArgs)
-        Display()
-        SetBaseFunction()
+    'Private Sub rdoMean_VisibleChanged(sender As Object, e As EventArgs)
+    '    Display()
+    '    SetBaseFunction()
+    'End Sub
 
+    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveModel.ControlContentsChanged, UcrReceiver.ControlContentsChanged
+        TestOKEnabled()
     End Sub
-
-
 End Class
