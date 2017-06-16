@@ -60,6 +60,7 @@ Partial Class sdgPlots
         Me.tbpYAxis = New System.Windows.Forms.TabPage()
         Me.ucrYAxis = New instat.ucrAxes()
         Me.tbpTheme = New System.Windows.Forms.TabPage()
+        Me.urChkSelectTheme = New instat.ucrCheck()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.lblFont = New System.Windows.Forms.Label()
         Me.cmdAllOptions = New System.Windows.Forms.Button()
@@ -67,7 +68,6 @@ Partial Class sdgPlots
         Me.tbpCoordinates = New System.Windows.Forms.TabPage()
         Me.lblWarning = New System.Windows.Forms.Label()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.urChkSelectTheme = New instat.ucrCheck()
         Me.tbpPlotsOptions.SuspendLayout()
         Me.tbpFacet.SuspendLayout()
         Me.tbpLayers.SuspendLayout()
@@ -481,6 +481,14 @@ Partial Class sdgPlots
         Me.tbpTheme.Text = "Theme"
         Me.tbpTheme.UseVisualStyleBackColor = True
         '
+        'urChkSelectTheme
+        '
+        Me.urChkSelectTheme.Checked = False
+        Me.urChkSelectTheme.Location = New System.Drawing.Point(6, 19)
+        Me.urChkSelectTheme.Name = "urChkSelectTheme"
+        Me.urChkSelectTheme.Size = New System.Drawing.Size(97, 20)
+        Me.urChkSelectTheme.TabIndex = 106
+        '
         'GroupBox1
         '
         Me.GroupBox1.Location = New System.Drawing.Point(8, 65)
@@ -543,14 +551,6 @@ Partial Class sdgPlots
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
         Me.ucrBaseSubdialog.Size = New System.Drawing.Size(160, 41)
         Me.ucrBaseSubdialog.TabIndex = 1
-        '
-        'urChkSelectTheme
-        '
-        Me.urChkSelectTheme.Checked = False
-        Me.urChkSelectTheme.Location = New System.Drawing.Point(6, 19)
-        Me.urChkSelectTheme.Name = "urChkSelectTheme"
-        Me.urChkSelectTheme.Size = New System.Drawing.Size(97, 20)
-        Me.urChkSelectTheme.TabIndex = 106
         '
         'sdgPlots
         '
