@@ -125,11 +125,11 @@ Public Class frmMain
                     'FileStream.Close()
                 End Using
             Catch ex As Exception
-                MsgBox("Error attempting to use file:" & strFilePath & vbNewLine & "The file may be in use by another program or the file does not contain an instance of InstatOptions." & vbNewLine & "System error message: " & ex.Message, MsgBoxStyle.Critical, "Error opening file")
+                MsgBox("Error attempting to use file:" & strFilePath & Environment.NewLine & "The file may be in use by another program or the file does not contain an instance of InstatOptions." & Environment.NewLine & "System error message: " & ex.Message, MsgBoxStyle.Critical, "Error opening file")
                 clsInstatOptions = New InstatOptions
             End Try
         Else
-            MsgBox("File:" & strFilePath & " does not exist." & vbNewLine & "File will not be loaded.", MsgBoxStyle.Critical)
+            MsgBox("File:" & strFilePath & " does not exist." & Environment.NewLine & "File will not be loaded.", MsgBoxStyle.Critical)
             clsInstatOptions = New InstatOptions
         End If
     End Sub
@@ -145,7 +145,7 @@ Public Class frmMain
                 'FileStream.Close()
             End Using
         Catch ex As Exception
-            MsgBox("Error attempting to save to file:" & strFilePath & vbNewLine & "The file may be in use by another program." & vbNewLine & "System error message: " & ex.Message, MsgBoxStyle.Critical, "Error saving to file")
+            MsgBox("Error attempting to save to file:" & strFilePath & Environment.NewLine & "The file may be in use by another program." & Environment.NewLine & "System error message: " & ex.Message, MsgBoxStyle.Critical, "Error saving to file")
         End Try
     End Sub
 
@@ -763,7 +763,7 @@ Public Class frmMain
                 clsRecentItems.saveOnClose()
                 SaveInstatOptions(Path.Combine(strAppDataPath, strInstatOptionsFile))
             Catch ex As Exception
-                MsgBox("Error attempting to save setting files to App Data folder." & vbNewLine & "System error message: " & ex.Message, MsgBoxStyle.Critical, "Error saving settings")
+                MsgBox("Error attempting to save setting files to App Data folder." & Environment.NewLine & "System error message: " & ex.Message, MsgBoxStyle.Critical, "Error saving settings")
             End Try
         Else
             e.Cancel = True
@@ -797,7 +797,7 @@ Public Class frmMain
                     'Send file name string specifying the location to save the rtf in.
                     ucrOutput.ucrRichTextBox.SaveRtf(dlgSaveFile.FileName)
                 Catch
-                    MsgBox("Could not save the output window." & vbNewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
+                    MsgBox("Could not save the output window." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
                 End Try
             End If
         End Using
@@ -812,7 +812,7 @@ Public Class frmMain
                 Try
                     File.WriteAllText(dlgSaveFile.FileName, frmLog.txtLog.Text)
                 Catch
-                    MsgBox("Could not save the log file." & vbNewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
+                    MsgBox("Could not save the log file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
                 End Try
             End If
         End Using
@@ -827,7 +827,7 @@ Public Class frmMain
                 Try
                     File.WriteAllText(dlgSaveFile.FileName, frmScript.txtScript.Text)
                 Catch
-                    MsgBox("Could not save the script file." & vbNewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
+                    MsgBox("Could not save the script file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
                 End Try
             End If
         End Using

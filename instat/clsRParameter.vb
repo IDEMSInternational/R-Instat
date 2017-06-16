@@ -132,4 +132,11 @@ Public Class RParameter
         End If
         Return clsTempRParam
     End Function
+
+    Public Function GetAllAssignTo(lstAssignTo As List(Of String)) As List(Of String)
+        If bIsFunction OrElse bIsOperator Then
+            clsArgumentCodeStructure.GetAllAssignTo(lstAssignTo)
+        End If
+        Return lstAssignTo
+    End Function
 End Class
