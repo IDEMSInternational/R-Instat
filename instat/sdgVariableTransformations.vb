@@ -16,41 +16,39 @@
 Imports instat.Translations
 Public Class sdgVariableTransformations
     Public clsRCIFunction As RFunction
-    Public clsRToFunction As New RFunction
+    Public clsRToFunction, clsLMorGLM As New RFunction
     Public clsRYVariable, clsRXVariable As ucrReceiverSingle
     Public clsRModel, clsRModel1 As ROperator
     Public clsModel0 As New ROperator
-    Public bFirstLoad As Boolean = True
+    Public bControlsInitialised As Boolean = True
     Private Sub sdgVariableTransformations_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+    End Sub
 
-        If bFirstLoad Then
-            SetDefaults()
-            bFirstLoad = False
+    Public Sub InitialiseControls()
+        ucrPnlGenerateFunctions.AddRadioButton(rdoIdentity)
+        ucrPnlGenerateFunctions.AddRadioButton(rdoLogBase10)
+        ucrPnlGenerateFunctions.AddRadioButton(rdoNaturallog)
+        ucrPnlGenerateFunctions.AddRadioButton(rdoPower)
+        ucrPnlGenerateFunctions.AddRadioButton(rdoSquareroot)
+
+        ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoLogBase10, "log10")
+        ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoSquareroot, "sqrt")
+        ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoNaturallog, "log")
+        ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoIdentity, {"log10", "power", "log", "sqrt"}, False)
+        ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoPower, "power")
+
+        bControlsInitialised = True
+    End Sub
+
+    Public Sub SetRCodeForControls(clsNewLMorGLM As RFunction, clsNewFunction As RFunction, clsRModelNew As ROperator, clsRYVariableNew As RFunction, clsRXVariableNew As RFunction, Optional bReset As Boolean = False)
+        If bControlsInitialised Then
+            InitialiseControls()
         End If
-    End Sub
-
-    Public Sub SetDefaults()
-        rdoNaturallog.Checked = False
-        rdoLogBase10.Checked = False
-        rdoSquareroot.Checked = False
-        rdoPower.Checked = False
-    End Sub
-
-    Public Sub SetRCIFunction(clsNewFunction As RFunction)
-        clsRCIFunction = clsNewFunction
-    End Sub
-
-    Public Sub SetRModelOperator(clsRModelNew As ROperator)
+        clsLMorGLM = clsNewLMorGLM
         clsRModel = clsRModelNew
-    End Sub
-
-    Public Sub SetRYVariable(clsRYVariableNew As ucrReceiverSingle)
-        clsRYVariable = clsRYVariableNew
-    End Sub
-
-    Public Sub SetRXVariable(clsRXVariableNew As ucrReceiverSingle)
-        clsRXVariable = clsRXVariableNew
+        clsRCIFunction = clsNewFunction
+        ucrPnlGenerateFunctions.SetRCode(clsLMorGLM, bReset)
     End Sub
 
     Private Sub ExplanatoryFunction(strFunctionName As String, strPower As String, Optional choice As Boolean = False)
@@ -68,8 +66,6 @@ Public Class sdgVariableTransformations
                 clsModel0.AddParameter(iPosition:=0, strParameterValue:=clsRXVariable.GetVariableNames(bWithQuotes:=False))
                 clsModel0.AddParameter(strParameterValue:=strPower)
                 clsRModel.AddParameter(iPosition:=i, clsROperatorParameter:=clsModel0.Clone())
-
-
             End If
         Else
             clsRToFunction.SetRCommand(strFunctionName)
@@ -89,7 +85,7 @@ Public Class sdgVariableTransformations
             ExplanatoryFunction("sqrt", 1, choice)
         End If
         If rdoPower.Checked Then
-            ExplanatoryFunction("power", nudPower.Value, choice)
+            ExplanatoryFunction("power", ucrNudPower.Value, choice)
         End If
     End Sub
 End Class
