@@ -109,6 +109,8 @@ Public Class dlgOneWayFrequencies
         ucrSelectorOneWayFreq.Reset()
         ucrReceiverOneWayFreq.SetMeAsReceiver()
         ucrSaveGraph.Reset()
+        'To fix the problem of rdo both which does not satisfy the condition of having both functions present, line 75 &76 
+        rdoTable.Checked = True
 
         clsPlotGrid.SetPackageName("sjPlot")
         clsPlotGrid.SetRCommand("plot_grid")
@@ -140,7 +142,10 @@ Public Class dlgOneWayFrequencies
 
         ucrReceiverWeights.SetRCode(clsSjTab, bReset)
         ucrReceiverOneWayFreq.SetRCode(clsSjTab, bReset)
-        ucrPnlFrequencies.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        If rdoGraph.Checked OrElse rdoTable.Checked Then
+            ucrPnlFrequencies.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        End If
+
         ucrChkWeights.SetRCode(clsSjTab, bReset)
         ucrPnlSort.SetRCode(clsSjTab, bReset)
         ucrChkFlip.SetRCode(clsSjPlot, bReset)
