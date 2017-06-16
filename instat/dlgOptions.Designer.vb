@@ -34,27 +34,27 @@ Partial Class dlgOptions
         Me.cmdOk = New System.Windows.Forms.Button()
         Me.tbcOptions = New System.Windows.Forms.TabControl()
         Me.tbpLanguages = New System.Windows.Forms.TabPage()
-        Me.pnLanguages = New System.Windows.Forms.Panel()
         Me.grpLanguage = New System.Windows.Forms.GroupBox()
         Me.rdoSpanish = New System.Windows.Forms.RadioButton()
         Me.rdoEnglish = New System.Windows.Forms.RadioButton()
         Me.rdoKiswahili = New System.Windows.Forms.RadioButton()
         Me.rdoFrench = New System.Windows.Forms.RadioButton()
+        Me.pnLanguages = New System.Windows.Forms.Panel()
         Me.tbpComments = New System.Windows.Forms.TabPage()
         Me.pnComments = New System.Windows.Forms.Panel()
         Me.lblComment = New System.Windows.Forms.Label()
         Me.txtComment = New System.Windows.Forms.TextBox()
         Me.tbpImport = New System.Windows.Forms.TabPage()
         Me.pnImportData = New System.Windows.Forms.Panel()
+        Me.ucrNudPreviewRows = New instat.ucrNud()
         Me.lblPreviewRows = New System.Windows.Forms.Label()
-        Me.nudPreviewRows = New System.Windows.Forms.NumericUpDown()
         Me.tbpOutputWindow = New System.Windows.Forms.TabPage()
+        Me.ucrChkShowRCommandsinOutputWindow = New instat.ucrCheck()
+        Me.ucrChkIncludeCommentsbyDefault = New instat.ucrCheck()
         Me.grpROptions = New System.Windows.Forms.GroupBox()
-        Me.chkShowSignifStars = New System.Windows.Forms.CheckBox()
+        Me.ucrChkShowSignifStars = New instat.ucrCheck()
+        Me.ucrNudDigits = New instat.ucrNud()
         Me.lblNoDigits = New System.Windows.Forms.Label()
-        Me.nudDigits = New System.Windows.Forms.NumericUpDown()
-        Me.chkShowRCommandsinOutputWindow = New System.Windows.Forms.CheckBox()
-        Me.chkIncludeCommentsbyDefault = New System.Windows.Forms.CheckBox()
         Me.pnFormatOptions = New System.Windows.Forms.Panel()
         Me.rtbCommentPreview = New System.Windows.Forms.RichTextBox()
         Me.rtbOutputPreview = New System.Windows.Forms.RichTextBox()
@@ -71,40 +71,39 @@ Partial Class dlgOptions
         Me.lblFont = New System.Windows.Forms.Label()
         Me.tbpCommands = New System.Windows.Forms.TabPage()
         Me.pnScriptOptions = New System.Windows.Forms.Panel()
-        Me.chkIncludeDefaultParams = New System.Windows.Forms.CheckBox()
+        Me.ucrChkIncludeDefaultParams = New instat.ucrCheck()
         Me.tbpDataView = New System.Windows.Forms.TabPage()
+        Me.ucrNudMaxRows = New instat.ucrNud()
         Me.lblMaxRows = New System.Windows.Forms.Label()
-        Me.nudMaxRows = New System.Windows.Forms.NumericUpDown()
         Me.tbpWorkingDirectory = New System.Windows.Forms.TabPage()
         Me.cmdWorkingDirectory = New System.Windows.Forms.Button()
         Me.lblWorkingDirectory = New System.Windows.Forms.Label()
+        Me.ucrWorkingDirectory = New instat.ucrInputTextBox()
         Me.tbpGraphDisplay = New System.Windows.Forms.TabPage()
+        Me.ucrPnlGraphDisplay = New instat.UcrPanel()
         Me.rdoDisplayinSeparateWindows = New System.Windows.Forms.RadioButton()
         Me.rdoDisplayinRViewer = New System.Windows.Forms.RadioButton()
         Me.rdoDisplayinOutputWindow = New System.Windows.Forms.RadioButton()
         Me.trOptions = New System.Windows.Forms.TreeView()
         Me.spltControls = New System.Windows.Forms.SplitContainer()
         Me.cmdFactoryReset = New System.Windows.Forms.Button()
-        Me.ucrWorkingDirectory = New instat.ucrInputTextBox()
+        Me.ucrPnlLanguage = New instat.UcrPanel()
         Me.tbcOptions.SuspendLayout()
         Me.tbpLanguages.SuspendLayout()
-        Me.pnLanguages.SuspendLayout()
         Me.grpLanguage.SuspendLayout()
+        Me.pnLanguages.SuspendLayout()
         Me.tbpComments.SuspendLayout()
         Me.pnComments.SuspendLayout()
         Me.tbpImport.SuspendLayout()
         Me.pnImportData.SuspendLayout()
-        CType(Me.nudPreviewRows, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tbpOutputWindow.SuspendLayout()
         Me.grpROptions.SuspendLayout()
-        CType(Me.nudDigits, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnFormatOptions.SuspendLayout()
         Me.tbpEditor.SuspendLayout()
         Me.pnFormatEditor.SuspendLayout()
         Me.tbpCommands.SuspendLayout()
         Me.pnScriptOptions.SuspendLayout()
         Me.tbpDataView.SuspendLayout()
-        CType(Me.nudMaxRows, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tbpWorkingDirectory.SuspendLayout()
         Me.tbpGraphDisplay.SuspendLayout()
         CType(Me.spltControls, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -183,22 +182,13 @@ Partial Class dlgOptions
         Me.tbpLanguages.Text = "Languages"
         Me.tbpLanguages.UseVisualStyleBackColor = True
         '
-        'pnLanguages
-        '
-        Me.pnLanguages.AutoSize = True
-        Me.pnLanguages.Controls.Add(Me.grpLanguage)
-        Me.pnLanguages.Location = New System.Drawing.Point(3, 3)
-        Me.pnLanguages.Name = "pnLanguages"
-        Me.pnLanguages.Size = New System.Drawing.Size(122, 126)
-        Me.pnLanguages.TabIndex = 1
-        '
         'grpLanguage
         '
         Me.grpLanguage.Controls.Add(Me.rdoSpanish)
         Me.grpLanguage.Controls.Add(Me.rdoEnglish)
         Me.grpLanguage.Controls.Add(Me.rdoKiswahili)
         Me.grpLanguage.Controls.Add(Me.rdoFrench)
-        Me.grpLanguage.Location = New System.Drawing.Point(10, 10)
+        Me.grpLanguage.Location = New System.Drawing.Point(4, 3)
         Me.grpLanguage.Name = "grpLanguage"
         Me.grpLanguage.Size = New System.Drawing.Size(109, 113)
         Me.grpLanguage.TabIndex = 2
@@ -248,6 +238,16 @@ Partial Class dlgOptions
         Me.rdoFrench.Tag = "French"
         Me.rdoFrench.Text = "French"
         Me.rdoFrench.UseVisualStyleBackColor = True
+        '
+        'pnLanguages
+        '
+        Me.pnLanguages.AutoSize = True
+        Me.pnLanguages.Controls.Add(Me.grpLanguage)
+        Me.pnLanguages.Controls.Add(Me.ucrPnlLanguage)
+        Me.pnLanguages.Location = New System.Drawing.Point(3, 3)
+        Me.pnLanguages.Name = "pnLanguages"
+        Me.pnLanguages.Size = New System.Drawing.Size(122, 126)
+        Me.pnLanguages.TabIndex = 1
         '
         'tbpComments
         '
@@ -303,12 +303,24 @@ Partial Class dlgOptions
         '
         Me.pnImportData.AutoSize = True
         Me.pnImportData.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.pnImportData.Controls.Add(Me.ucrNudPreviewRows)
         Me.pnImportData.Controls.Add(Me.lblPreviewRows)
-        Me.pnImportData.Controls.Add(Me.nudPreviewRows)
         Me.pnImportData.Location = New System.Drawing.Point(10, 10)
         Me.pnImportData.Name = "pnImportData"
-        Me.pnImportData.Size = New System.Drawing.Size(181, 30)
+        Me.pnImportData.Size = New System.Drawing.Size(186, 28)
         Me.pnImportData.TabIndex = 2
+        '
+        'ucrNudPreviewRows
+        '
+        Me.ucrNudPreviewRows.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPreviewRows.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudPreviewRows.Location = New System.Drawing.Point(133, 5)
+        Me.ucrNudPreviewRows.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudPreviewRows.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPreviewRows.Name = "ucrNudPreviewRows"
+        Me.ucrNudPreviewRows.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudPreviewRows.TabIndex = 3
+        Me.ucrNudPreviewRows.Value = New Decimal(New Integer() {10, 0, 0, 0})
         '
         'lblPreviewRows
         '
@@ -319,20 +331,11 @@ Partial Class dlgOptions
         Me.lblPreviewRows.TabIndex = 0
         Me.lblPreviewRows.Text = "Number of Preview Rows:"
         '
-        'nudPreviewRows
-        '
-        Me.nudPreviewRows.Location = New System.Drawing.Point(134, 7)
-        Me.nudPreviewRows.Minimum = New Decimal(New Integer() {10, 0, 0, 0})
-        Me.nudPreviewRows.Name = "nudPreviewRows"
-        Me.nudPreviewRows.Size = New System.Drawing.Size(44, 20)
-        Me.nudPreviewRows.TabIndex = 1
-        Me.nudPreviewRows.Value = New Decimal(New Integer() {10, 0, 0, 0})
-        '
         'tbpOutputWindow
         '
+        Me.tbpOutputWindow.Controls.Add(Me.ucrChkShowRCommandsinOutputWindow)
+        Me.tbpOutputWindow.Controls.Add(Me.ucrChkIncludeCommentsbyDefault)
         Me.tbpOutputWindow.Controls.Add(Me.grpROptions)
-        Me.tbpOutputWindow.Controls.Add(Me.chkShowRCommandsinOutputWindow)
-        Me.tbpOutputWindow.Controls.Add(Me.chkIncludeCommentsbyDefault)
         Me.tbpOutputWindow.Controls.Add(Me.pnFormatOptions)
         Me.tbpOutputWindow.Location = New System.Drawing.Point(4, 22)
         Me.tbpOutputWindow.Name = "tbpOutputWindow"
@@ -342,11 +345,27 @@ Partial Class dlgOptions
         Me.tbpOutputWindow.Text = "Output Window"
         Me.tbpOutputWindow.UseVisualStyleBackColor = True
         '
+        'ucrChkShowRCommandsinOutputWindow
+        '
+        Me.ucrChkShowRCommandsinOutputWindow.Checked = False
+        Me.ucrChkShowRCommandsinOutputWindow.Location = New System.Drawing.Point(10, 168)
+        Me.ucrChkShowRCommandsinOutputWindow.Name = "ucrChkShowRCommandsinOutputWindow"
+        Me.ucrChkShowRCommandsinOutputWindow.Size = New System.Drawing.Size(271, 20)
+        Me.ucrChkShowRCommandsinOutputWindow.TabIndex = 27
+        '
+        'ucrChkIncludeCommentsbyDefault
+        '
+        Me.ucrChkIncludeCommentsbyDefault.Checked = False
+        Me.ucrChkIncludeCommentsbyDefault.Location = New System.Drawing.Point(10, 145)
+        Me.ucrChkIncludeCommentsbyDefault.Name = "ucrChkIncludeCommentsbyDefault"
+        Me.ucrChkIncludeCommentsbyDefault.Size = New System.Drawing.Size(271, 20)
+        Me.ucrChkIncludeCommentsbyDefault.TabIndex = 26
+        '
         'grpROptions
         '
-        Me.grpROptions.Controls.Add(Me.chkShowSignifStars)
+        Me.grpROptions.Controls.Add(Me.ucrChkShowSignifStars)
+        Me.grpROptions.Controls.Add(Me.ucrNudDigits)
         Me.grpROptions.Controls.Add(Me.lblNoDigits)
-        Me.grpROptions.Controls.Add(Me.nudDigits)
         Me.grpROptions.Location = New System.Drawing.Point(10, 192)
         Me.grpROptions.Name = "grpROptions"
         Me.grpROptions.Size = New System.Drawing.Size(271, 93)
@@ -354,15 +373,25 @@ Partial Class dlgOptions
         Me.grpROptions.TabStop = False
         Me.grpROptions.Text = "R Options"
         '
-        'chkShowSignifStars
+        'ucrChkShowSignifStars
         '
-        Me.chkShowSignifStars.AutoSize = True
-        Me.chkShowSignifStars.Location = New System.Drawing.Point(7, 49)
-        Me.chkShowSignifStars.Name = "chkShowSignifStars"
-        Me.chkShowSignifStars.Size = New System.Drawing.Size(240, 17)
-        Me.chkShowSignifStars.TabIndex = 26
-        Me.chkShowSignifStars.Text = "Show stars on summary tables for coefficients"
-        Me.chkShowSignifStars.UseVisualStyleBackColor = True
+        Me.ucrChkShowSignifStars.Checked = False
+        Me.ucrChkShowSignifStars.Location = New System.Drawing.Point(7, 49)
+        Me.ucrChkShowSignifStars.Name = "ucrChkShowSignifStars"
+        Me.ucrChkShowSignifStars.Size = New System.Drawing.Size(255, 20)
+        Me.ucrChkShowSignifStars.TabIndex = 28
+        '
+        'ucrNudDigits
+        '
+        Me.ucrNudDigits.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDigits.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudDigits.Location = New System.Drawing.Point(152, 21)
+        Me.ucrNudDigits.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudDigits.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDigits.Name = "ucrNudDigits"
+        Me.ucrNudDigits.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudDigits.TabIndex = 27
+        Me.ucrNudDigits.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblNoDigits
         '
@@ -372,33 +401,6 @@ Partial Class dlgOptions
         Me.lblNoDigits.Size = New System.Drawing.Size(137, 13)
         Me.lblNoDigits.TabIndex = 1
         Me.lblNoDigits.Text = "Number of Digits to Display:"
-        '
-        'nudDigits
-        '
-        Me.nudDigits.Location = New System.Drawing.Point(152, 21)
-        Me.nudDigits.Name = "nudDigits"
-        Me.nudDigits.Size = New System.Drawing.Size(39, 20)
-        Me.nudDigits.TabIndex = 0
-        '
-        'chkShowRCommandsinOutputWindow
-        '
-        Me.chkShowRCommandsinOutputWindow.AutoSize = True
-        Me.chkShowRCommandsinOutputWindow.Location = New System.Drawing.Point(10, 168)
-        Me.chkShowRCommandsinOutputWindow.Name = "chkShowRCommandsinOutputWindow"
-        Me.chkShowRCommandsinOutputWindow.Size = New System.Drawing.Size(207, 17)
-        Me.chkShowRCommandsinOutputWindow.TabIndex = 24
-        Me.chkShowRCommandsinOutputWindow.Text = "Show R Commands in Output Window"
-        Me.chkShowRCommandsinOutputWindow.UseVisualStyleBackColor = True
-        '
-        'chkIncludeCommentsbyDefault
-        '
-        Me.chkIncludeCommentsbyDefault.AutoSize = True
-        Me.chkIncludeCommentsbyDefault.Location = New System.Drawing.Point(10, 145)
-        Me.chkIncludeCommentsbyDefault.Name = "chkIncludeCommentsbyDefault"
-        Me.chkIncludeCommentsbyDefault.Size = New System.Drawing.Size(164, 17)
-        Me.chkIncludeCommentsbyDefault.TabIndex = 24
-        Me.chkIncludeCommentsbyDefault.Text = "Include Comments by Default"
-        Me.chkIncludeCommentsbyDefault.UseVisualStyleBackColor = True
         '
         'pnFormatOptions
         '
@@ -554,29 +556,25 @@ Partial Class dlgOptions
         '
         'pnScriptOptions
         '
-        Me.pnScriptOptions.AutoSize = True
         Me.pnScriptOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.pnScriptOptions.Controls.Add(Me.chkIncludeDefaultParams)
+        Me.pnScriptOptions.Controls.Add(Me.ucrChkIncludeDefaultParams)
         Me.pnScriptOptions.Location = New System.Drawing.Point(10, 10)
         Me.pnScriptOptions.Name = "pnScriptOptions"
-        Me.pnScriptOptions.Size = New System.Drawing.Size(267, 23)
+        Me.pnScriptOptions.Size = New System.Drawing.Size(267, 28)
         Me.pnScriptOptions.TabIndex = 1
         '
-        'chkIncludeDefaultParams
+        'ucrChkIncludeDefaultParams
         '
-        Me.chkIncludeDefaultParams.AutoSize = True
-        Me.chkIncludeDefaultParams.Location = New System.Drawing.Point(3, 3)
-        Me.chkIncludeDefaultParams.Name = "chkIncludeDefaultParams"
-        Me.chkIncludeDefaultParams.Size = New System.Drawing.Size(261, 17)
-        Me.chkIncludeDefaultParams.TabIndex = 0
-        Me.chkIncludeDefaultParams.Tag = "Include_Default_Parameter_Values_in_R_Commands"
-        Me.chkIncludeDefaultParams.Text = "Include Default Parameter Values in R Commands"
-        Me.chkIncludeDefaultParams.UseVisualStyleBackColor = True
+        Me.ucrChkIncludeDefaultParams.Checked = False
+        Me.ucrChkIncludeDefaultParams.Location = New System.Drawing.Point(2, 2)
+        Me.ucrChkIncludeDefaultParams.Name = "ucrChkIncludeDefaultParams"
+        Me.ucrChkIncludeDefaultParams.Size = New System.Drawing.Size(261, 21)
+        Me.ucrChkIncludeDefaultParams.TabIndex = 3
         '
         'tbpDataView
         '
+        Me.tbpDataView.Controls.Add(Me.ucrNudMaxRows)
         Me.tbpDataView.Controls.Add(Me.lblMaxRows)
-        Me.tbpDataView.Controls.Add(Me.nudMaxRows)
         Me.tbpDataView.Location = New System.Drawing.Point(4, 22)
         Me.tbpDataView.Name = "tbpDataView"
         Me.tbpDataView.Padding = New System.Windows.Forms.Padding(3)
@@ -584,6 +582,18 @@ Partial Class dlgOptions
         Me.tbpDataView.TabIndex = 9
         Me.tbpDataView.Text = "Data View"
         Me.tbpDataView.UseVisualStyleBackColor = True
+        '
+        'ucrNudMaxRows
+        '
+        Me.ucrNudMaxRows.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaxRows.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudMaxRows.Location = New System.Drawing.Point(198, 15)
+        Me.ucrNudMaxRows.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMaxRows.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaxRows.Name = "ucrNudMaxRows"
+        Me.ucrNudMaxRows.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudMaxRows.TabIndex = 2
+        Me.ucrNudMaxRows.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblMaxRows
         '
@@ -593,15 +603,6 @@ Partial Class dlgOptions
         Me.lblMaxRows.Size = New System.Drawing.Size(185, 13)
         Me.lblMaxRows.TabIndex = 1
         Me.lblMaxRows.Text = "Maximum Number of Rows to Display:"
-        '
-        'nudMaxRows
-        '
-        Me.nudMaxRows.Location = New System.Drawing.Point(198, 15)
-        Me.nudMaxRows.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.nudMaxRows.Name = "nudMaxRows"
-        Me.nudMaxRows.Size = New System.Drawing.Size(62, 20)
-        Me.nudMaxRows.TabIndex = 0
-        Me.nudMaxRows.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'tbpWorkingDirectory
         '
@@ -634,11 +635,22 @@ Partial Class dlgOptions
         Me.lblWorkingDirectory.TabIndex = 0
         Me.lblWorkingDirectory.Text = "Working Directory:"
         '
+        'ucrWorkingDirectory
+        '
+        Me.ucrWorkingDirectory.AddQuotesIfUnrecognised = True
+        Me.ucrWorkingDirectory.IsMultiline = False
+        Me.ucrWorkingDirectory.IsReadOnly = False
+        Me.ucrWorkingDirectory.Location = New System.Drawing.Point(111, 17)
+        Me.ucrWorkingDirectory.Name = "ucrWorkingDirectory"
+        Me.ucrWorkingDirectory.Size = New System.Drawing.Size(282, 21)
+        Me.ucrWorkingDirectory.TabIndex = 1
+        '
         'tbpGraphDisplay
         '
         Me.tbpGraphDisplay.Controls.Add(Me.rdoDisplayinSeparateWindows)
         Me.tbpGraphDisplay.Controls.Add(Me.rdoDisplayinRViewer)
         Me.tbpGraphDisplay.Controls.Add(Me.rdoDisplayinOutputWindow)
+        Me.tbpGraphDisplay.Controls.Add(Me.ucrPnlGraphDisplay)
         Me.tbpGraphDisplay.Location = New System.Drawing.Point(4, 22)
         Me.tbpGraphDisplay.Name = "tbpGraphDisplay"
         Me.tbpGraphDisplay.Padding = New System.Windows.Forms.Padding(3)
@@ -647,9 +659,17 @@ Partial Class dlgOptions
         Me.tbpGraphDisplay.Text = "Graph Display"
         Me.tbpGraphDisplay.UseVisualStyleBackColor = True
         '
+        'ucrPnlGraphDisplay
+        '
+        Me.ucrPnlGraphDisplay.Location = New System.Drawing.Point(0, 3)
+        Me.ucrPnlGraphDisplay.Name = "ucrPnlGraphDisplay"
+        Me.ucrPnlGraphDisplay.Size = New System.Drawing.Size(169, 66)
+        Me.ucrPnlGraphDisplay.TabIndex = 3
+        '
         'rdoDisplayinSeparateWindows
         '
         Me.rdoDisplayinSeparateWindows.AutoSize = True
+        Me.rdoDisplayinSeparateWindows.Checked = True
         Me.rdoDisplayinSeparateWindows.Location = New System.Drawing.Point(6, 52)
         Me.rdoDisplayinSeparateWindows.Name = "rdoDisplayinSeparateWindows"
         Me.rdoDisplayinSeparateWindows.Size = New System.Drawing.Size(163, 17)
@@ -665,7 +685,6 @@ Partial Class dlgOptions
         Me.rdoDisplayinRViewer.Name = "rdoDisplayinRViewer"
         Me.rdoDisplayinRViewer.Size = New System.Drawing.Size(116, 17)
         Me.rdoDisplayinRViewer.TabIndex = 1
-        Me.rdoDisplayinRViewer.TabStop = True
         Me.rdoDisplayinRViewer.Text = "Display in R Viewer"
         Me.rdoDisplayinRViewer.UseVisualStyleBackColor = True
         '
@@ -676,7 +695,6 @@ Partial Class dlgOptions
         Me.rdoDisplayinOutputWindow.Name = "rdoDisplayinOutputWindow"
         Me.rdoDisplayinOutputWindow.Size = New System.Drawing.Size(147, 17)
         Me.rdoDisplayinOutputWindow.TabIndex = 1
-        Me.rdoDisplayinOutputWindow.TabStop = True
         Me.rdoDisplayinOutputWindow.Text = "Display in Output Window"
         Me.rdoDisplayinOutputWindow.UseVisualStyleBackColor = True
         '
@@ -738,13 +756,12 @@ Partial Class dlgOptions
         Me.cmdFactoryReset.Text = "Factory Reset"
         Me.cmdFactoryReset.UseVisualStyleBackColor = True
         '
-        'ucrWorkingDirectory
+        'ucrPnlLanguage
         '
-        Me.ucrWorkingDirectory.IsReadOnly = False
-        Me.ucrWorkingDirectory.Location = New System.Drawing.Point(111, 17)
-        Me.ucrWorkingDirectory.Name = "ucrWorkingDirectory"
-        Me.ucrWorkingDirectory.Size = New System.Drawing.Size(282, 21)
-        Me.ucrWorkingDirectory.TabIndex = 1
+        Me.ucrPnlLanguage.Location = New System.Drawing.Point(4, 1)
+        Me.ucrPnlLanguage.Name = "ucrPnlLanguage"
+        Me.ucrPnlLanguage.Size = New System.Drawing.Size(109, 115)
+        Me.ucrPnlLanguage.TabIndex = 0
         '
         'dlgOptions
         '
@@ -766,9 +783,9 @@ Partial Class dlgOptions
         Me.tbcOptions.ResumeLayout(False)
         Me.tbpLanguages.ResumeLayout(False)
         Me.tbpLanguages.PerformLayout()
-        Me.pnLanguages.ResumeLayout(False)
         Me.grpLanguage.ResumeLayout(False)
         Me.grpLanguage.PerformLayout()
+        Me.pnLanguages.ResumeLayout(False)
         Me.tbpComments.ResumeLayout(False)
         Me.tbpComments.PerformLayout()
         Me.pnComments.ResumeLayout(False)
@@ -777,12 +794,10 @@ Partial Class dlgOptions
         Me.tbpImport.PerformLayout()
         Me.pnImportData.ResumeLayout(False)
         Me.pnImportData.PerformLayout()
-        CType(Me.nudPreviewRows, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tbpOutputWindow.ResumeLayout(False)
         Me.tbpOutputWindow.PerformLayout()
         Me.grpROptions.ResumeLayout(False)
         Me.grpROptions.PerformLayout()
-        CType(Me.nudDigits, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnFormatOptions.ResumeLayout(False)
         Me.pnFormatOptions.PerformLayout()
         Me.tbpEditor.ResumeLayout(False)
@@ -790,12 +805,9 @@ Partial Class dlgOptions
         Me.pnFormatEditor.ResumeLayout(False)
         Me.pnFormatEditor.PerformLayout()
         Me.tbpCommands.ResumeLayout(False)
-        Me.tbpCommands.PerformLayout()
         Me.pnScriptOptions.ResumeLayout(False)
-        Me.pnScriptOptions.PerformLayout()
         Me.tbpDataView.ResumeLayout(False)
         Me.tbpDataView.PerformLayout()
-        CType(Me.nudMaxRows, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tbpWorkingDirectory.ResumeLayout(False)
         Me.tbpWorkingDirectory.PerformLayout()
         Me.tbpGraphDisplay.ResumeLayout(False)
@@ -826,7 +838,6 @@ Partial Class dlgOptions
     Friend WithEvents tbpImport As TabPage
     Friend WithEvents pnImportData As Panel
     Friend WithEvents lblPreviewRows As Label
-    Friend WithEvents nudPreviewRows As NumericUpDown
     Friend WithEvents tbpOutputWindow As TabPage
     Friend WithEvents pnFormatOptions As Panel
     Friend WithEvents rtbCommentPreview As RichTextBox
@@ -844,10 +855,8 @@ Partial Class dlgOptions
     Friend WithEvents lblFont As Label
     Friend WithEvents tbpCommands As TabPage
     Friend WithEvents pnScriptOptions As Panel
-    Friend WithEvents chkIncludeDefaultParams As CheckBox
     Friend WithEvents tbpDataView As TabPage
     Friend WithEvents lblMaxRows As Label
-    Friend WithEvents nudMaxRows As NumericUpDown
     Friend WithEvents tbpWorkingDirectory As TabPage
     Friend WithEvents cmdWorkingDirectory As Button
     Friend WithEvents ucrWorkingDirectory As ucrInputTextBox
@@ -858,11 +867,16 @@ Partial Class dlgOptions
     Friend WithEvents rdoDisplayinSeparateWindows As RadioButton
     Friend WithEvents rdoDisplayinRViewer As RadioButton
     Friend WithEvents rdoDisplayinOutputWindow As RadioButton
-    Friend WithEvents chkShowRCommandsinOutputWindow As CheckBox
-    Friend WithEvents chkIncludeCommentsbyDefault As CheckBox
     Friend WithEvents grpROptions As GroupBox
     Friend WithEvents lblNoDigits As Label
-    Friend WithEvents nudDigits As NumericUpDown
-    Friend WithEvents chkShowSignifStars As CheckBox
     Friend WithEvents cmdFactoryReset As Button
+    Friend WithEvents ucrNudPreviewRows As ucrNud
+    Friend WithEvents ucrNudDigits As ucrNud
+    Friend WithEvents ucrChkIncludeCommentsbyDefault As ucrCheck
+    Friend WithEvents ucrChkShowRCommandsinOutputWindow As ucrCheck
+    Friend WithEvents ucrChkShowSignifStars As ucrCheck
+    Friend WithEvents ucrChkIncludeDefaultParams As ucrCheck
+    Friend WithEvents ucrNudMaxRows As ucrNud
+    Friend WithEvents ucrPnlGraphDisplay As UcrPanel
+    Friend WithEvents ucrPnlLanguage As UcrPanel
 End Class
