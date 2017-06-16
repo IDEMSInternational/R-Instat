@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Imports RDotNet
 Public Class dlgAddLink
@@ -26,6 +27,8 @@ Public Class dlgAddLink
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
+        Else
+            ReopenDialog()
         End If
         If bReset Then
             SetDefaults()
@@ -42,10 +45,10 @@ Public Class dlgAddLink
         ucrDataSelectorFrom.SetParameter(New RParameter("from_data_frame", 0))
         ucrDataSelectorFrom.SetParameterIsString()
 
-        ucrDataSelectorTo.SetParameter(New RParameter("to_data_frame", 0))
+        ucrDataSelectorTo.SetParameter(New RParameter("to_data_frame", 1))
         ucrDataSelectorTo.SetParameterIsString()
 
-        ucrInputLinkName.SetParameter(New RParameter("link_name", 0))
+        ucrInputLinkName.SetParameter(New RParameter("link_name", 4))
         lvwLinkViewBox.Columns.Add("Name", 80, HorizontalAlignment.Left)
         lvwLinkViewBox.Columns.Add("Columns", 150, HorizontalAlignment.Left)
         ucrInputSelectedKey.IsReadOnly = True
@@ -56,10 +59,13 @@ Public Class dlgAddLink
 
         ucrDataSelectorFrom.Reset()
         ucrDataSelectorTo.Reset()
+        ucrInputLinkName.SetName("")
+
         UpdateKeys()
 
-        clsAddLink.AddParameter("type", Chr(34) & "keyed_link" & Chr(34))
         clsAddLink.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_link")
+        clsAddLink.AddParameter("type", Chr(34) & "keyed_link" & Chr(34), iPosition:=3)
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsAddLink)
     End Sub
 
@@ -68,7 +74,7 @@ Public Class dlgAddLink
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrDataSelectorFrom.cboAvailableDataFrames.Text <> "" AndAlso ucrDataSelectorTo.cboAvailableDataFrames.Text <> "" AndAlso Not ucrInputLinkName.IsEmpty AndAlso Not ucrInputSelectedKey.IsEmpty Then
+        If ucrDataSelectorFrom.cboAvailableDataFrames.Text <> "" AndAlso ucrDataSelectorTo.cboAvailableDataFrames.Text <> "" AndAlso Not ucrInputLinkName.IsEmpty AndAlso Not ucrInputSelectedKey.IsEmpty AndAlso IsSelectionValidKey() Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -79,6 +85,10 @@ Public Class dlgAddLink
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
+    End Sub
+
+    Private Sub ReopenDialog()
+        UpdateKeys() ' currently I may open the dialog, then realise I haven't set my keys, make my key, reopen this dlg and my key doesn't show up until I reset it.
     End Sub
 
     Public Sub UpdateKeys()
@@ -110,9 +120,11 @@ Public Class dlgAddLink
                 clsColumnNames.AddParameter("to_columns", "c(" & strKeyColumns & ")")
                 bCanAutoLink = chrKeyColumns.ToArray.All(Function(strCol) strColumnNames.Contains(strCol))
                 If bCanAutoLink Then
-                    lviTemp.ForeColor = Color.Green
+                    lviTemp.BackColor = Color.LightGreen
+                    ucrBase.OKEnabled(True)
                 Else
-                    lviTemp.ForeColor = Color.Red
+                    lviTemp.BackColor = Color.LightCoral
+                    ucrBase.OKEnabled(False)
                 End If
                 lvwLinkViewBox.Items.Add(lviTemp)
             End If
@@ -136,9 +148,6 @@ Public Class dlgAddLink
             clsAddLink.RemoveParameterByName("link_pairs")
             ucrInputSelectedKey.SetName("")
         End If
-    End Sub
-
-    Private Sub ucrDataSelectorFrom_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataSelectorFrom.ControlContentsChanged, ucrInputLinkName.ControlContentsChanged, ucrInputSelectedKey.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
@@ -146,4 +155,16 @@ Public Class dlgAddLink
         UpdateKeys()
         TestOKEnabled()
     End Sub
+
+    Private Sub ucrDataSelectorFrom_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataSelectorFrom.ControlContentsChanged, ucrInputLinkName.ControlContentsChanged, ucrInputSelectedKey.ControlContentsChanged
+        TestOKEnabled()
+    End Sub
+
+    Private Function IsSelectionValidKey() As Boolean
+        If lvwLinkViewBox.SelectedItems.Count = 1 Then
+            Return lvwLinkViewBox.SelectedItems(0).BackColor = Color.LightGreen
+        Else
+            Return False
+        End If
+    End Function
 End Class

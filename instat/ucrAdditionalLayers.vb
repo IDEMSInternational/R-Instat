@@ -81,7 +81,7 @@ Public Class ucrAdditionalLayers
         clsNewGeomFunction.SetPackageName("ggplot2")
         clsNewGeomFunction.SetRCommand("geom_boxplot")
 
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsNewGeomFunction, clsNewGlobalAesFunc:=clsGgplotAesFunction, clsNewLocalAes:=clsNewLocalAesFunction, bFixGeom:=False, strDataframe:=strGlobalDataFrame, bApplyAesGlobally:=(bSetGlobalIsDefault AndAlso lstLayers.Items.Count = 0), iTabToDisplay:=0)
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsNewGeomFunction, clsNewGlobalAesFunc:=clsGgplotAesFunction, clsNewLocalAes:=clsNewLocalAesFunction, bFixGeom:=False, ucrNewBaseSelector:=Nothing, bApplyAesGlobally:=(bSetGlobalIsDefault AndAlso lstLayers.Items.Count = 0), iTabToDisplay:=0, strDataframe:=strGlobalDataFrame)
         ParentForm.SendToBack()
         sdgLayerOptions.ShowDialog()
         strGlobalDataFrame = sdgLayerOptions.GetGlobalDataFrame()

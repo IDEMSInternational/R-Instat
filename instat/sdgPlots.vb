@@ -45,6 +45,7 @@ Public Class sdgPlots
     Private dctThemeFunctions As New Dictionary(Of String, RFunction)
     Private bRCodeSet As Boolean = False
     Private bResetThemes As Boolean = True
+    Private ucrBaseSelector As ucrSelector
 
     'See bLayersDefaultIsGolobal below.
 
@@ -56,6 +57,7 @@ Public Class sdgPlots
         Dim dctThemes As New Dictionary(Of String, String)
         Dim strThemes As String()
 
+        ucrBaseSubdialog.iHelpTopicID = 136
         'facets tab 
         'Links the factor receivers, used for creating facets, with the selector. The variables need to be factors.
         ucr1stFactorReceiver.Selector = ucrFacetSelector
@@ -167,7 +169,11 @@ Public Class sdgPlots
         ucrYAxis.InitialiseControl()
 
         'themes tab
-        ucrInputThemes.SetParameter(New RParameter("theme"))
+        urChkSelectTheme.SetText("Select Theme:")
+        ucrInputThemes.SetParameter(New RParameter("theme_name"))
+        urChkSelectTheme.AddToLinkedControls(ucrInputThemes, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="theme_grey")
+        urChkSelectTheme.AddParameterPresentCondition(True, "theme_name")
+        urChkSelectTheme.AddParameterPresentCondition(False, "theme_name", False)
         strThemes = GgplotDefaults.strThemes
         'Would prefer to do this through functions but auto updating function name not currently supported through combo box control
         For Each strTemp As String In strThemes
@@ -192,17 +198,19 @@ Public Class sdgPlots
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewYScalecontinuousFunction As RFunction = Nothing, Optional clsNewXScalecontinuousFunction As RFunction = Nothing, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsTitleFunction As RFunction = Nothing, Optional clsNewYLabTitleFunction As RFunction = Nothing, Optional clsNewFacetFunction As RFunction = Nothing, Optional clsNewThemeParam As RParameter = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional strNewDataFrame As String = "", Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewYScalecontinuousFunction As RFunction = Nothing, Optional clsNewXScalecontinuousFunction As RFunction = Nothing, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsTitleFunction As RFunction = Nothing, Optional clsNewYLabTitleFunction As RFunction = Nothing, Optional clsNewFacetFunction As RFunction = Nothing, Optional clsNewThemeParam As RParameter = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False)
         Dim clsTempParam As RParameter
 
         bRCodeSet = False
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
-        If strNewDataFrame <> "" Then
-            strDataFrame = strNewDataFrame
+        ucrBaseSelector = ucrNewBaseSelector
+        If ucrBaseSelector IsNot Nothing AndAlso ucrBaseSelector.strCurrentDataFrame <> "" Then
+            strDataFrame = ucrBaseSelector.strCurrentDataFrame
             ucrFacetSelector.SetDataframe(strDataFrame, False)
         End If
+        ucrFacetSelector.SetLinkedSelector(ucrBaseSelector)
         clsBaseOperator = clsNewOperator
         clsGlobalAesFunction = clsNewGlobalAesFunction
         clsXLabFunction = clsNewXLabsTitleFunction
@@ -240,7 +248,8 @@ Public Class sdgPlots
         ucrInputGraphTitle.SetRCode(clsLabsFunction, bReset)
         ucrInputGraphSubTitle.SetRCode(clsLabsFunction, bReset)
         ucrInputGraphCaption.SetRCode(clsLabsFunction, bReset)
-        ucrInputThemes.SetRCode(clsBaseOperator)
+        urChkSelectTheme.SetRCode(clsBaseOperator, bReset)
+        ucrInputThemes.SetRCode(clsBaseOperator, bReset)
 
         'ucrInputLegend.SetRCode(clsNewLabsFunction, bReset)
         ucrPnlHorizonatalVertical.SetRCode(clsFacetFunction, bReset)

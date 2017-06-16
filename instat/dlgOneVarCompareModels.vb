@@ -1,3 +1,4 @@
+
 ' R-Instat 
 ' Copyright (C) 2015
 '
@@ -135,3 +136,5 @@ Public Class dlgOneVarCompareModels
         clsReceiver = ucrReceiverCompareModels.GetVariables()
     End Sub
 End Class
+
+

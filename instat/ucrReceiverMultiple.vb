@@ -138,6 +138,10 @@ Public Class ucrReceiverMultiple
                             clsGetVariablesFunc.AddParameter("force_as_data_frame", "FALSE")
                         End If
                     End If
+                    If bRemoveLabels Then
+                        'temp fix to bug in sjPlot needing labels removed for factor columns
+                        clsGetVariablesFunc.AddParameter("remove_labels", "TRUE")
+                    End If
                     If bUseFilteredData Then
                         If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
                             clsGetVariablesFunc.AddParameter("use_current_filter", "TRUE")
