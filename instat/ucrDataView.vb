@@ -680,4 +680,15 @@ Public Class ucrDataView
         dlgAddComment.SetCurrentColumn(SelectedColumnsAsArray()(0), grdCurrSheet.Name)
         dlgAddComment.ShowDialog()
     End Sub
+
+    Public Sub SetCurrentDataFrame(strDataName As String)
+        Dim grdWorksheet As unvell.ReoGrid.Worksheet
+
+        If grdData IsNot Nothing Then
+            grdWorksheet = grdData.GetWorksheetByName(strDataName)
+            If grdWorksheet IsNot Nothing Then
+                grdData.CurrentWorksheet = grdWorksheet
+            End If
+        End If
+    End Sub
 End Class
