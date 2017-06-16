@@ -148,6 +148,8 @@ Public Class dlgTwoWayFrequencies
         ucrSelectorTwoWayFrequencies.Reset()
         ucrReceiverRowFactor.SetMeAsReceiver()
         ucrSaveGraph.Reset()
+        'To fix the problem of rdo both which does not satisfy the condition of having both functions present, line 121 & 122 
+        rdoTable.Checked = True
 
         'Defining Table functions and default functions
         clsSjTab.SetPackageName("sjPlot")
@@ -194,7 +196,9 @@ Public Class dlgTwoWayFrequencies
         ucrChkWeights.SetRCode(clsSjTab, bReset)
         ucrChkFlip.SetRCode(clsSjPlot, bReset)
         ucrPnlFreqType.SetRCode(clsSjPlot, bReset)
-        ucrPnlFreqDisplay.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        If rdoGraph.Checked OrElse rdoTable.Checked Then
+            ucrPnlFreqDisplay.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        End If
         ucrSelectorTwoWayFrequencies.SetRCode(clsSjTab, bReset)
         ucrChkCell.SetRCode(clsSjTab, bReset)
         ucrChkColumn.SetRCode(clsSjTab, bReset)
