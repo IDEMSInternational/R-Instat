@@ -16,14 +16,21 @@
         Get
             Dim clsTempParam As New RParameter
 
-            clsTempParam.SetArgumentName("theme")
+            clsTempParam.SetArgumentName("theme_name")
             clsTempParam.SetArgumentValue("theme_grey()")
             Return clsTempParam
         End Get
     End Property
 
-    Public Shared strThemes As String() = {"theme_bw", "theme_linedraw", "theme_light", "theme_minimal", "theme_classic", "theme_dark", "theme_void", "theme_base", "theme_calc", "theme_economist", "theme_few", "theme_fivethirtyeight", "theme_foundation", "theme_grey", "theme_gdocs", "theme_igray", "theme_map", "theme_par", "theme_solarized", "theme_hc", "theme_pander", "theme_solid", "theme_stata", "theme_tufte", "theme_wsj"}
-
+    Public Shared ReadOnly Property strThemes As String()
+        Get
+            Dim strTemp As String()
+            'TODO need to make proper functions and set package names
+            strTemp = {"theme_bw", "theme_linedraw", "theme_light", "theme_minimal", "theme_classic", "theme_dark", "theme_void", "theme_base", "theme_calc", "theme_economist", "theme_few", "theme_fivethirtyeight", "theme_foundation", "theme_grey", "theme_gdocs", "theme_igray", "theme_map", "theme_par", "theme_solarized", "theme_hc", "theme_pander", "theme_solid", "theme_stata", "theme_tufte", "theme_wsj"}
+            System.Array.Sort(Of String)(strTemp)
+            Return strTemp
+        End Get
+    End Property
 
     Public Shared ReadOnly Property clsXlabTitleFunction As RFunction
         Get
@@ -77,6 +84,15 @@
             clsFacetTempFunc.AddParameter("dir", Chr(34) & "h" & Chr(34))
             clsFacetTempFunc.AddParameter("facets", clsROperatorParameter:=clsFacetVariablesOp)
             Return clsFacetTempFunc
+        End Get
+    End Property
+
+    Public Shared ReadOnly Property clsAesFunction As RFunction
+        Get
+            Dim clslocalAesTempFunc As New RFunction
+            clslocalAesTempFunc.SetPackageName("ggplot2")
+            clslocalAesTempFunc.SetRCommand("aes")
+            Return clslocalAesTempFunc
         End Get
     End Property
 

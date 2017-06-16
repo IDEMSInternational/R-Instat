@@ -182,7 +182,7 @@ Public Class frmMain
     End Sub
 
     Private Sub FrequencyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificFrequency.Click
-        dlgFlatFrequencyTable.ShowDialog()
+        dlgFrequency.ShowDialog()
     End Sub
 
     Private Sub SummaryToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificSummary.Click
@@ -1399,6 +1399,14 @@ Public Class frmMain
 
     Private Sub DispalyClimaticDataToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DispalyClimaticDataToolStripMenuItem.Click
         dlgDisplayDailyClimaticData.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticPrepareClimaticSummaries_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareClimaticSummaries.Click
+        dlgClimaticSummary.ShowDialog()
+    End Sub
+
+    Public Sub SetCurrentDataFrame(strDataName As String)
+        ucrDataViewer.SetCurrentDataFrame(strDataName)
     End Sub
 
     'Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click

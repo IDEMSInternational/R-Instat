@@ -23,10 +23,12 @@ Partial Class dlgViewAndRemoveKeys
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblSelectedKey = New System.Windows.Forms.Label()
-        Me.ucrChkRemoveKey = New instat.ucrCheck()
         Me.ucrReceiverSelectedKey = New instat.ucrReceiverSingle()
         Me.ucrSelectorKeys = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.rdoDeleteKey = New System.Windows.Forms.RadioButton()
+        Me.rdoViewKey = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlKeys = New instat.UcrPanel()
         Me.SuspendLayout()
         '
         'lblSelectedKey
@@ -38,14 +40,6 @@ Partial Class dlgViewAndRemoveKeys
         Me.lblSelectedKey.TabIndex = 1
         Me.lblSelectedKey.Text = "Selected Key:"
         '
-        'ucrChkRemoveKey
-        '
-        Me.ucrChkRemoveKey.Checked = False
-        Me.ucrChkRemoveKey.Location = New System.Drawing.Point(266, 87)
-        Me.ucrChkRemoveKey.Name = "ucrChkRemoveKey"
-        Me.ucrChkRemoveKey.Size = New System.Drawing.Size(145, 20)
-        Me.ucrChkRemoveKey.TabIndex = 3
-        '
         'ucrReceiverSelectedKey
         '
         Me.ucrReceiverSelectedKey.frmParent = Me
@@ -54,7 +48,9 @@ Partial Class dlgViewAndRemoveKeys
         Me.ucrReceiverSelectedKey.Name = "ucrReceiverSelectedKey"
         Me.ucrReceiverSelectedKey.Selector = Nothing
         Me.ucrReceiverSelectedKey.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverSelectedKey.strNcFilePath = ""
         Me.ucrReceiverSelectedKey.TabIndex = 2
+        Me.ucrReceiverSelectedKey.ucrSelector = Nothing
         '
         'ucrSelectorKeys
         '
@@ -73,12 +69,43 @@ Partial Class dlgViewAndRemoveKeys
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 4
         '
+        'rdoDeleteKey
+        '
+        Me.rdoDeleteKey.AutoSize = True
+        Me.rdoDeleteKey.Location = New System.Drawing.Point(266, 125)
+        Me.rdoDeleteKey.Name = "rdoDeleteKey"
+        Me.rdoDeleteKey.Size = New System.Drawing.Size(77, 17)
+        Me.rdoDeleteKey.TabIndex = 9
+        Me.rdoDeleteKey.TabStop = True
+        Me.rdoDeleteKey.Text = "Delete Key"
+        Me.rdoDeleteKey.UseVisualStyleBackColor = True
+        '
+        'rdoViewKey
+        '
+        Me.rdoViewKey.AutoSize = True
+        Me.rdoViewKey.Location = New System.Drawing.Point(266, 102)
+        Me.rdoViewKey.Name = "rdoViewKey"
+        Me.rdoViewKey.Size = New System.Drawing.Size(69, 17)
+        Me.rdoViewKey.TabIndex = 8
+        Me.rdoViewKey.TabStop = True
+        Me.rdoViewKey.Text = "View Key"
+        Me.rdoViewKey.UseVisualStyleBackColor = True
+        '
+        'ucrPnlKeys
+        '
+        Me.ucrPnlKeys.Location = New System.Drawing.Point(266, 94)
+        Me.ucrPnlKeys.Name = "ucrPnlKeys"
+        Me.ucrPnlKeys.Size = New System.Drawing.Size(130, 62)
+        Me.ucrPnlKeys.TabIndex = 7
+        '
         'dlgViewAndRemoveKeys
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(424, 260)
-        Me.Controls.Add(Me.ucrChkRemoveKey)
+        Me.Controls.Add(Me.rdoDeleteKey)
+        Me.Controls.Add(Me.rdoViewKey)
+        Me.Controls.Add(Me.ucrPnlKeys)
         Me.Controls.Add(Me.lblSelectedKey)
         Me.Controls.Add(Me.ucrReceiverSelectedKey)
         Me.Controls.Add(Me.ucrSelectorKeys)
@@ -98,5 +125,7 @@ Partial Class dlgViewAndRemoveKeys
     Friend WithEvents ucrSelectorKeys As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverSelectedKey As ucrReceiverSingle
     Friend WithEvents lblSelectedKey As Label
-    Friend WithEvents ucrChkRemoveKey As ucrCheck
+    Friend WithEvents rdoDeleteKey As RadioButton
+    Friend WithEvents rdoViewKey As RadioButton
+    Friend WithEvents ucrPnlKeys As UcrPanel
 End Class

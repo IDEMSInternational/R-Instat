@@ -28,22 +28,21 @@ Public Class sdgLayerOptions
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-    End Sub
-
-    Private Sub sdgLayers_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
+    End Sub
+
+    Private Sub sdgLayers_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
         ucrLayerParameter.ucrGeomWithAes = ucrGeomWithAes
         ucrGeomWithAes.ucrLayersControl = ucrLayerParameter
+        ucrSdgLayerBase.iHelpTopicID = 569
         'Each ucrLayerParameter has a field of type ucrGeomListWithAes and reciprocally as both of them "collaborate to provide full description of a Layer".
         'The obvious linking is performed here in sdgLayerOptions.
     End Sub
@@ -52,19 +51,15 @@ Public Class sdgLayerOptions
         ucrGeomWithAes.Reset()
     End Sub
 
-    Private Sub ReopenDialog()
-
-    End Sub
-
-    Public Sub SetupLayer(clsNewGgPlot As RFunction, clsNewGeomFunc As RFunction, clsNewGlobalAesFunc As RFunction, clsNewLocalAes As RFunction, Optional bFixGeom As Boolean = False, Optional strDataframe As String = "", Optional bApplyAesGlobally As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional bReset As Boolean = False, Optional iTabToDisplay As Integer = 0)
+    Public Sub SetupLayer(clsNewGgPlot As RFunction, clsNewGeomFunc As RFunction, clsNewGlobalAesFunc As RFunction, clsNewLocalAes As RFunction, Optional bFixGeom As Boolean = False, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bApplyAesGlobally As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional bReset As Boolean = False, Optional iTabToDisplay As Integer = 0, Optional strDataFrame As String = "")
         If iTabToDisplay > 0 AndAlso iTabToDisplay <= tbcLayers.TabCount - 1 Then
             tbcLayers.SelectedIndex = iTabToDisplay
         End If
         clsGeomFunction = clsNewGeomFunc
         clsAesFunction = clsNewGlobalAesFunc
         clsGgplotFunction = clsNewGgPlot
-        ucrGeomWithAes.Setup(clsNewGgPlot, clsNewGeomFunc, clsNewGlobalAesFunc, clsNewLocalAes, bFixGeom, strDataframe, bApplyAesGlobally, iNumVariablesForGeoms, bReset)
-        ucrLayerParameter.Setup(clsNewGgPlot, clsNewGeomFunc, clsNewGlobalAesFunc, clsNewLocalAes, bFixGeom, strDataframe, bApplyAesGlobally, iNumVariablesForGeoms, bReset)
+        ucrGeomWithAes.Setup(clsNewGgPlot, clsNewGeomFunc, clsNewGlobalAesFunc, clsNewLocalAes, bFixGeom, ucrNewBaseSelector, bApplyAesGlobally, iNumVariablesForGeoms, bReset, strDataFrame)
+        ucrLayerParameter.Setup(clsNewGgPlot, clsNewGeomFunc, clsNewGlobalAesFunc, clsNewLocalAes, bFixGeom, ucrNewBaseSelector, bApplyAesGlobally, iNumVariablesForGeoms, bReset, strDataFrame)
     End Sub
 
     Public Function TestForOKEnabled() As Boolean
