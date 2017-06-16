@@ -64,7 +64,10 @@ Public Class dlgOptions
         ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinOutputWindow)
         ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinRViewer)
         ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinSeparateWindows)
-
+        ucrPnlLanguage.AddRadioButton(rdoKiswahili)
+        ucrPnlLanguage.AddRadioButton(rdoEnglish)
+        ucrPnlLanguage.AddRadioButton(rdoSpanish)
+        ucrPnlLanguage.AddRadioButton(rdoFrench)
         'ucrNudDigits.Minimum = 0
         'ucrNudDigits.Maximum = 22
     End Sub
@@ -77,7 +80,7 @@ Public Class dlgOptions
         SetEditorFont(frmMain.clsInstatOptions.fntEditor, frmMain.clsInstatOptions.clrEditor)
         ucrNudMaxRows.Value = frmMain.clsInstatOptions.iMaxRows
         ucrNudPreviewRows.Value = frmMain.clsInstatOptions.iPreviewRows
-        txtComment.Text = frmMain.clsInstatOptions.strComment
+        ucrInputComment.SetName(frmMain.clsInstatOptions.strComment)
         ucrWorkingDirectory.SetName(frmMain.clsInstatOptions.strWorkingDirectory)
         ucrChkIncludeCommentsbyDefault.Checked = frmMain.clsInstatOptions.bIncludeCommentDefault
         ucrChkShowRCommandsinOutputWindow.Checked = frmMain.clsInstatOptions.bCommandsinOutput
@@ -113,7 +116,7 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.SetFormatComment(fntComment, clrComment)
         frmMain.clsInstatOptions.SetFormatScript(fntCommand, clrCommand)
         frmMain.clsInstatOptions.SetFormatEditor(fntEditor, clrEditor)
-        frmMain.clsInstatOptions.SetComment(txtComment.Text)
+        frmMain.clsInstatOptions.SetComment(ucrInputComment.Text)
         frmMain.clsInstatOptions.SetPreviewRows(ucrNudPreviewRows.Value)
         frmMain.clsInstatOptions.SetMaxRows(ucrNudMaxRows.Value)
         frmMain.clsInstatOptions.SetLanguageCultureCode(strCurrLanguageCulture)
@@ -216,7 +219,7 @@ Public Class dlgOptions
         ApplyEnabled(False)
     End Sub
 
-    Private Sub LanguageChanged(sender As Object, e As EventArgs) Handles rdoKiswahili.CheckedChanged, rdoEnglish.CheckedChanged, rdoFrench.CheckedChanged, rdoSpanish.CheckedChanged
+    Private Sub ucrPnlLanguage_ControlValueChanged() Handles ucrPnlLanguage.ControlValueChanged
         If rdoKiswahili.Checked Then
             strCurrLanguageCulture = "sw-KE"
         ElseIf rdoFrench.Checked Then
@@ -229,7 +232,7 @@ Public Class dlgOptions
         ApplyEnabled(True)
     End Sub
 
-    Private Sub txtComment_TextChanged(sender As Object, e As EventArgs) Handles txtComment.TextChanged
+    Private Sub ucrInputComment_ControlContentsChanged() Handles ucrInputComment.ControlContentsChanged
         ApplyEnabled(True)
     End Sub
 
