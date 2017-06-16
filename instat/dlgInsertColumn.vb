@@ -54,6 +54,11 @@ Public Class dlgInsertColumn
         ucrPnlBeforeAfter.SetParameter(New RParameter("before", 1))
         ucrPnlBeforeAfter.AddRadioButton(rdoBefore, "TRUE")
         ucrPnlBeforeAfter.AddRadioButton(rdoAfter, "FALSE")
+        ucrPnlBeforeAfter.AddParameterValuesCondition(rdoBefore, "before", "TRUE")
+        ucrPnlBeforeAfter.AddParameterValuesCondition(rdoBefore, "before", "FALSE", False)
+        ucrPnlBeforeAfter.AddParameterValuesCondition(rdoAfter, "before", "FALSE")
+        ucrPnlBeforeAfter.AddParameterValuesCondition(rdoAfter, "before", "TRUE", False)
+
 
         ucrNudNumberOfRows.SetParameter(New RParameter("number_rows", 2))
         ucrNudNumberOfRows.SetMinMax(1, Integer.MaxValue)
@@ -157,7 +162,7 @@ Public Class dlgInsertColumn
         ucrInputPrefixForNewColumn.SetRCode(clsInsertColumnFunction, bReset)
         ucrReceiverColumnsToInsert.SetRCode(clsInsertColumnFunction, bReset)
         ucrSelectorInsertColumns.SetRCode(clsInsertColumnFunction, bReset)
-        ucrPnlColumnsOrRows.SetRCode(clsInsertColumnFunction, bReset)
+        ucrPnlColumnsOrRows.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrPnlInsertColumns.SetRCode(clsInsertColumnFunction, bReset)
         ucrInputBeforeAfter.SetRCode(clsInsertColumnFunction, bReset)
     End Sub
