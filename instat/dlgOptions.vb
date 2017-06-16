@@ -232,10 +232,6 @@ Public Class dlgOptions
         ApplyEnabled(True)
     End Sub
 
-    Private Sub ucrInputComment_ControlContentsChanged() Handles ucrInputComment.ControlContentsChanged
-        ApplyEnabled(True)
-    End Sub
-
     Private Sub cmdScriptChange_Click(sender As Object, e As EventArgs) Handles cmdCommandFormat.Click
         dlgFont.ShowColor = True
         dlgFont.MaxSize = 50
@@ -290,15 +286,7 @@ Public Class dlgOptions
 
     End Sub
 
-    Private Sub ucrNudPreviewRows_ValueChanged() Handles ucrNudPreviewRows.ControlValueChanged
-        ApplyEnabled(True)
-    End Sub
-
-    Private Sub ucrChkIncludeCommentsbyDefault_controlvaluechanged() Handles ucrChkIncludeCommentsbyDefault.ControlValueChanged
-        ApplyEnabled(True)
-    End Sub
-
-    Private Sub nudMaxRows_TextChanged() Handles ucrNudMaxRows.ControlValueChanged
+    Private Sub ucrNudPreviewRows_ValueChanged() Handles ucrNudPreviewRows.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged
         ApplyEnabled(True)
     End Sub
 
@@ -312,14 +300,6 @@ Public Class dlgOptions
         'End If
 
         'ApplyEnabled(True)
-    End Sub
-
-    Private Sub ucrChkIncludeDefaultParams_ControlValueChanged() Handles ucrChkIncludeDefaultParams.ControlValueChanged
-        ApplyEnabled(True)
-    End Sub
-
-    Private Sub chkShowRCommandsinOutputWindow_CheckedChanged() Handles ucrChkShowRCommandsinOutputWindow.ControlValueChanged
-        ApplyEnabled(True)
     End Sub
 
     Private Sub ApplyEnabled(bEnable As Boolean)
@@ -387,11 +367,4 @@ Public Class dlgOptions
         End If
     End Sub
 
-    Private Sub ucrNudDigits_ValueChanged() Handles ucrNudDigits.ControlValueChanged
-        ApplyEnabled(True)
-    End Sub
-
-    Private Sub ucrChkShowSignifStars_CheckedChanged() Handles ucrChkShowSignifStars.ControlValueChanged
-        ApplyEnabled(True)
-    End Sub
 End Class
