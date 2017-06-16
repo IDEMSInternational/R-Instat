@@ -22,28 +22,29 @@ Partial Class dlgOptions
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim TreeNode7 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Languages")
-        Dim TreeNode8 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Comments")
-        Dim TreeNode9 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Import")
-        Dim TreeNode10 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Output Window")
-        Dim TreeNode11 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Commands")
-        Dim TreeNode12 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Data View")
+        Dim TreeNode1 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Languages")
+        Dim TreeNode2 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Comments")
+        Dim TreeNode3 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Import")
+        Dim TreeNode4 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Output Window")
+        Dim TreeNode5 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Commands")
+        Dim TreeNode6 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Data View")
         Me.cmdApply = New System.Windows.Forms.Button()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.cmdCancel = New System.Windows.Forms.Button()
         Me.cmdOk = New System.Windows.Forms.Button()
         Me.tbcOptions = New System.Windows.Forms.TabControl()
         Me.tbpLanguages = New System.Windows.Forms.TabPage()
+        Me.pnLanguages = New System.Windows.Forms.Panel()
         Me.grpLanguage = New System.Windows.Forms.GroupBox()
         Me.rdoSpanish = New System.Windows.Forms.RadioButton()
         Me.rdoEnglish = New System.Windows.Forms.RadioButton()
         Me.rdoKiswahili = New System.Windows.Forms.RadioButton()
         Me.rdoFrench = New System.Windows.Forms.RadioButton()
-        Me.pnLanguages = New System.Windows.Forms.Panel()
+        Me.ucrPnlLanguage = New instat.UcrPanel()
         Me.tbpComments = New System.Windows.Forms.TabPage()
         Me.pnComments = New System.Windows.Forms.Panel()
+        Me.ucrInputComment = New instat.ucrInputTextBox()
         Me.lblComment = New System.Windows.Forms.Label()
-        Me.txtComment = New System.Windows.Forms.TextBox()
         Me.tbpImport = New System.Windows.Forms.TabPage()
         Me.pnImportData = New System.Windows.Forms.Panel()
         Me.ucrNudPreviewRows = New instat.ucrNud()
@@ -80,18 +81,17 @@ Partial Class dlgOptions
         Me.lblWorkingDirectory = New System.Windows.Forms.Label()
         Me.ucrWorkingDirectory = New instat.ucrInputTextBox()
         Me.tbpGraphDisplay = New System.Windows.Forms.TabPage()
-        Me.ucrPnlGraphDisplay = New instat.UcrPanel()
         Me.rdoDisplayinSeparateWindows = New System.Windows.Forms.RadioButton()
         Me.rdoDisplayinRViewer = New System.Windows.Forms.RadioButton()
         Me.rdoDisplayinOutputWindow = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlGraphDisplay = New instat.UcrPanel()
         Me.trOptions = New System.Windows.Forms.TreeView()
         Me.spltControls = New System.Windows.Forms.SplitContainer()
         Me.cmdFactoryReset = New System.Windows.Forms.Button()
-        Me.ucrPnlLanguage = New instat.UcrPanel()
         Me.tbcOptions.SuspendLayout()
         Me.tbpLanguages.SuspendLayout()
-        Me.grpLanguage.SuspendLayout()
         Me.pnLanguages.SuspendLayout()
+        Me.grpLanguage.SuspendLayout()
         Me.tbpComments.SuspendLayout()
         Me.pnComments.SuspendLayout()
         Me.tbpImport.SuspendLayout()
@@ -182,13 +182,23 @@ Partial Class dlgOptions
         Me.tbpLanguages.Text = "Languages"
         Me.tbpLanguages.UseVisualStyleBackColor = True
         '
+        'pnLanguages
+        '
+        Me.pnLanguages.AutoSize = True
+        Me.pnLanguages.Controls.Add(Me.grpLanguage)
+        Me.pnLanguages.Location = New System.Drawing.Point(3, 3)
+        Me.pnLanguages.Name = "pnLanguages"
+        Me.pnLanguages.Size = New System.Drawing.Size(122, 126)
+        Me.pnLanguages.TabIndex = 1
+        '
         'grpLanguage
         '
         Me.grpLanguage.Controls.Add(Me.rdoSpanish)
         Me.grpLanguage.Controls.Add(Me.rdoEnglish)
-        Me.grpLanguage.Controls.Add(Me.rdoKiswahili)
         Me.grpLanguage.Controls.Add(Me.rdoFrench)
-        Me.grpLanguage.Location = New System.Drawing.Point(4, 3)
+        Me.grpLanguage.Controls.Add(Me.rdoKiswahili)
+        Me.grpLanguage.Controls.Add(Me.ucrPnlLanguage)
+        Me.grpLanguage.Location = New System.Drawing.Point(3, 3)
         Me.grpLanguage.Name = "grpLanguage"
         Me.grpLanguage.Size = New System.Drawing.Size(109, 113)
         Me.grpLanguage.TabIndex = 2
@@ -199,7 +209,7 @@ Partial Class dlgOptions
         '
         Me.rdoSpanish.AutoSize = True
         Me.rdoSpanish.Enabled = False
-        Me.rdoSpanish.Location = New System.Drawing.Point(7, 88)
+        Me.rdoSpanish.Location = New System.Drawing.Point(6, 84)
         Me.rdoSpanish.Name = "rdoSpanish"
         Me.rdoSpanish.Size = New System.Drawing.Size(63, 17)
         Me.rdoSpanish.TabIndex = 2
@@ -209,7 +219,7 @@ Partial Class dlgOptions
         'rdoEnglish
         '
         Me.rdoEnglish.AutoSize = True
-        Me.rdoEnglish.Location = New System.Drawing.Point(7, 19)
+        Me.rdoEnglish.Location = New System.Drawing.Point(6, 19)
         Me.rdoEnglish.Name = "rdoEnglish"
         Me.rdoEnglish.Size = New System.Drawing.Size(59, 17)
         Me.rdoEnglish.TabIndex = 1
@@ -220,7 +230,7 @@ Partial Class dlgOptions
         'rdoKiswahili
         '
         Me.rdoKiswahili.AutoSize = True
-        Me.rdoKiswahili.Location = New System.Drawing.Point(7, 65)
+        Me.rdoKiswahili.Location = New System.Drawing.Point(6, 65)
         Me.rdoKiswahili.Name = "rdoKiswahili"
         Me.rdoKiswahili.Size = New System.Drawing.Size(65, 17)
         Me.rdoKiswahili.TabIndex = 3
@@ -231,7 +241,7 @@ Partial Class dlgOptions
         'rdoFrench
         '
         Me.rdoFrench.AutoSize = True
-        Me.rdoFrench.Location = New System.Drawing.Point(7, 42)
+        Me.rdoFrench.Location = New System.Drawing.Point(6, 42)
         Me.rdoFrench.Name = "rdoFrench"
         Me.rdoFrench.Size = New System.Drawing.Size(58, 17)
         Me.rdoFrench.TabIndex = 2
@@ -239,15 +249,12 @@ Partial Class dlgOptions
         Me.rdoFrench.Text = "French"
         Me.rdoFrench.UseVisualStyleBackColor = True
         '
-        'pnLanguages
+        'ucrPnlLanguage
         '
-        Me.pnLanguages.AutoSize = True
-        Me.pnLanguages.Controls.Add(Me.grpLanguage)
-        Me.pnLanguages.Controls.Add(Me.ucrPnlLanguage)
-        Me.pnLanguages.Location = New System.Drawing.Point(3, 3)
-        Me.pnLanguages.Name = "pnLanguages"
-        Me.pnLanguages.Size = New System.Drawing.Size(122, 126)
-        Me.pnLanguages.TabIndex = 1
+        Me.ucrPnlLanguage.Location = New System.Drawing.Point(0, 17)
+        Me.ucrPnlLanguage.Name = "ucrPnlLanguage"
+        Me.ucrPnlLanguage.Size = New System.Drawing.Size(103, 90)
+        Me.ucrPnlLanguage.TabIndex = 0
         '
         'tbpComments
         '
@@ -263,14 +270,23 @@ Partial Class dlgOptions
         '
         'pnComments
         '
-        Me.pnComments.AutoSize = True
         Me.pnComments.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.pnComments.Controls.Add(Me.ucrInputComment)
         Me.pnComments.Controls.Add(Me.lblComment)
-        Me.pnComments.Controls.Add(Me.txtComment)
         Me.pnComments.Location = New System.Drawing.Point(10, 10)
         Me.pnComments.Name = "pnComments"
         Me.pnComments.Size = New System.Drawing.Size(338, 29)
         Me.pnComments.TabIndex = 2
+        '
+        'ucrInputComment
+        '
+        Me.ucrInputComment.AddQuotesIfUnrecognised = True
+        Me.ucrInputComment.IsMultiline = False
+        Me.ucrInputComment.IsReadOnly = False
+        Me.ucrInputComment.Location = New System.Drawing.Point(58, 5)
+        Me.ucrInputComment.Name = "ucrInputComment"
+        Me.ucrInputComment.Size = New System.Drawing.Size(277, 21)
+        Me.ucrInputComment.TabIndex = 1
         '
         'lblComment
         '
@@ -281,13 +297,6 @@ Partial Class dlgOptions
         Me.lblComment.TabIndex = 0
         Me.lblComment.Tag = "Comment:"
         Me.lblComment.Text = "Comment:"
-        '
-        'txtComment
-        '
-        Me.txtComment.Location = New System.Drawing.Point(59, 6)
-        Me.txtComment.Name = "txtComment"
-        Me.txtComment.Size = New System.Drawing.Size(276, 20)
-        Me.txtComment.TabIndex = 1
         '
         'tbpImport
         '
@@ -659,13 +668,6 @@ Partial Class dlgOptions
         Me.tbpGraphDisplay.Text = "Graph Display"
         Me.tbpGraphDisplay.UseVisualStyleBackColor = True
         '
-        'ucrPnlGraphDisplay
-        '
-        Me.ucrPnlGraphDisplay.Location = New System.Drawing.Point(0, 3)
-        Me.ucrPnlGraphDisplay.Name = "ucrPnlGraphDisplay"
-        Me.ucrPnlGraphDisplay.Size = New System.Drawing.Size(169, 66)
-        Me.ucrPnlGraphDisplay.TabIndex = 3
-        '
         'rdoDisplayinSeparateWindows
         '
         Me.rdoDisplayinSeparateWindows.AutoSize = True
@@ -698,34 +700,41 @@ Partial Class dlgOptions
         Me.rdoDisplayinOutputWindow.Text = "Display in Output Window"
         Me.rdoDisplayinOutputWindow.UseVisualStyleBackColor = True
         '
+        'ucrPnlGraphDisplay
+        '
+        Me.ucrPnlGraphDisplay.Location = New System.Drawing.Point(0, 3)
+        Me.ucrPnlGraphDisplay.Name = "ucrPnlGraphDisplay"
+        Me.ucrPnlGraphDisplay.Size = New System.Drawing.Size(169, 66)
+        Me.ucrPnlGraphDisplay.TabIndex = 3
+        '
         'trOptions
         '
         Me.trOptions.Dock = System.Windows.Forms.DockStyle.Fill
         Me.trOptions.Location = New System.Drawing.Point(0, 0)
         Me.trOptions.Name = "trOptions"
-        TreeNode7.Name = "ndLanguages"
-        TreeNode7.Tag = "1"
-        TreeNode7.Text = "Languages"
-        TreeNode7.ToolTipText = "Choose different languages"
-        TreeNode8.Name = "ndComments"
-        TreeNode8.Tag = "2"
-        TreeNode8.Text = "Comments"
-        TreeNode8.ToolTipText = "Comments for the dialogs"
-        TreeNode9.Name = "ndImport"
-        TreeNode9.Tag = "3"
-        TreeNode9.Text = "Import"
-        TreeNode9.ToolTipText = "Import Data Settings"
-        TreeNode10.Name = "ndOutputWindow"
-        TreeNode10.Tag = "4"
-        TreeNode10.Text = "Output Window"
-        TreeNode10.ToolTipText = "Output Window Formatting Options"
-        TreeNode11.Name = "ndCommands"
-        TreeNode11.Tag = "8"
-        TreeNode11.Text = "Commands"
-        TreeNode11.ToolTipText = "Commands Options"
-        TreeNode12.Name = "ndDataView"
-        TreeNode12.Text = "Data View"
-        Me.trOptions.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode7, TreeNode8, TreeNode9, TreeNode10, TreeNode11, TreeNode12})
+        TreeNode1.Name = "ndLanguages"
+        TreeNode1.Tag = "1"
+        TreeNode1.Text = "Languages"
+        TreeNode1.ToolTipText = "Choose different languages"
+        TreeNode2.Name = "ndComments"
+        TreeNode2.Tag = "2"
+        TreeNode2.Text = "Comments"
+        TreeNode2.ToolTipText = "Comments for the dialogs"
+        TreeNode3.Name = "ndImport"
+        TreeNode3.Tag = "3"
+        TreeNode3.Text = "Import"
+        TreeNode3.ToolTipText = "Import Data Settings"
+        TreeNode4.Name = "ndOutputWindow"
+        TreeNode4.Tag = "4"
+        TreeNode4.Text = "Output Window"
+        TreeNode4.ToolTipText = "Output Window Formatting Options"
+        TreeNode5.Name = "ndCommands"
+        TreeNode5.Tag = "8"
+        TreeNode5.Text = "Commands"
+        TreeNode5.ToolTipText = "Commands Options"
+        TreeNode6.Name = "ndDataView"
+        TreeNode6.Text = "Data View"
+        Me.trOptions.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1, TreeNode2, TreeNode3, TreeNode4, TreeNode5, TreeNode6})
         Me.trOptions.Size = New System.Drawing.Size(184, 317)
         Me.trOptions.TabIndex = 0
         '
@@ -756,13 +765,6 @@ Partial Class dlgOptions
         Me.cmdFactoryReset.Text = "Factory Reset"
         Me.cmdFactoryReset.UseVisualStyleBackColor = True
         '
-        'ucrPnlLanguage
-        '
-        Me.ucrPnlLanguage.Location = New System.Drawing.Point(4, 1)
-        Me.ucrPnlLanguage.Name = "ucrPnlLanguage"
-        Me.ucrPnlLanguage.Size = New System.Drawing.Size(109, 115)
-        Me.ucrPnlLanguage.TabIndex = 0
-        '
         'dlgOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -783,11 +785,10 @@ Partial Class dlgOptions
         Me.tbcOptions.ResumeLayout(False)
         Me.tbpLanguages.ResumeLayout(False)
         Me.tbpLanguages.PerformLayout()
+        Me.pnLanguages.ResumeLayout(False)
         Me.grpLanguage.ResumeLayout(False)
         Me.grpLanguage.PerformLayout()
-        Me.pnLanguages.ResumeLayout(False)
         Me.tbpComments.ResumeLayout(False)
-        Me.tbpComments.PerformLayout()
         Me.pnComments.ResumeLayout(False)
         Me.pnComments.PerformLayout()
         Me.tbpImport.ResumeLayout(False)
@@ -834,7 +835,6 @@ Partial Class dlgOptions
     Friend WithEvents tbpComments As TabPage
     Friend WithEvents pnComments As Panel
     Friend WithEvents lblComment As Label
-    Friend WithEvents txtComment As TextBox
     Friend WithEvents tbpImport As TabPage
     Friend WithEvents pnImportData As Panel
     Friend WithEvents lblPreviewRows As Label
@@ -879,4 +879,5 @@ Partial Class dlgOptions
     Friend WithEvents ucrNudMaxRows As ucrNud
     Friend WithEvents ucrPnlGraphDisplay As UcrPanel
     Friend WithEvents ucrPnlLanguage As UcrPanel
+    Friend WithEvents ucrInputComment As ucrInputTextBox
 End Class
