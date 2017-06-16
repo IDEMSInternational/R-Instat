@@ -242,7 +242,7 @@ data_object$set("public", "get_data_frame", function(convert_to_character = FALS
     if(!include_hidden_columns && self$is_variables_metadata(is_hidden_label)) {
       hidden <- self$get_variables_metadata(property = is_hidden_label)
       hidden[is.na(hidden)] <- FALSE
-      out <- private$data[!self$get_variables_metadata(property = is_hidden_label)]
+      out <- private$data[!hidden]
     }
     else out <- private$data
     if(use_current_filter && self$filter_applied()) {
