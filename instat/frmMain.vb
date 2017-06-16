@@ -1405,6 +1405,10 @@ Public Class frmMain
         dlgClimaticSummary.ShowDialog()
     End Sub
 
+    Public Sub SetCurrentDataFrame(strDataName As String)
+        ucrDataViewer.SetCurrentDataFrame(strDataName)
+    End Sub
+
     'Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click
     '    'TEST temporary 
     '    'TESTING TO BE ERASED !!!!!!!
