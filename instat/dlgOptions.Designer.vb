@@ -38,8 +38,8 @@ Partial Class dlgOptions
         Me.grpLanguage = New System.Windows.Forms.GroupBox()
         Me.rdoSpanish = New System.Windows.Forms.RadioButton()
         Me.rdoEnglish = New System.Windows.Forms.RadioButton()
-        Me.rdoKiswahili = New System.Windows.Forms.RadioButton()
         Me.rdoFrench = New System.Windows.Forms.RadioButton()
+        Me.rdoKiswahili = New System.Windows.Forms.RadioButton()
         Me.ucrPnlLanguage = New instat.UcrPanel()
         Me.tbpComments = New System.Windows.Forms.TabPage()
         Me.pnComments = New System.Windows.Forms.Panel()
@@ -227,17 +227,6 @@ Partial Class dlgOptions
         Me.rdoEnglish.Text = "English"
         Me.rdoEnglish.UseVisualStyleBackColor = True
         '
-        'rdoKiswahili
-        '
-        Me.rdoKiswahili.AutoSize = True
-        Me.rdoKiswahili.Location = New System.Drawing.Point(6, 65)
-        Me.rdoKiswahili.Name = "rdoKiswahili"
-        Me.rdoKiswahili.Size = New System.Drawing.Size(65, 17)
-        Me.rdoKiswahili.TabIndex = 3
-        Me.rdoKiswahili.Tag = "Kiswahili"
-        Me.rdoKiswahili.Text = "Kiswahili"
-        Me.rdoKiswahili.UseVisualStyleBackColor = True
-        '
         'rdoFrench
         '
         Me.rdoFrench.AutoSize = True
@@ -248,6 +237,17 @@ Partial Class dlgOptions
         Me.rdoFrench.Tag = "French"
         Me.rdoFrench.Text = "French"
         Me.rdoFrench.UseVisualStyleBackColor = True
+        '
+        'rdoKiswahili
+        '
+        Me.rdoKiswahili.AutoSize = True
+        Me.rdoKiswahili.Location = New System.Drawing.Point(6, 65)
+        Me.rdoKiswahili.Name = "rdoKiswahili"
+        Me.rdoKiswahili.Size = New System.Drawing.Size(65, 17)
+        Me.rdoKiswahili.TabIndex = 3
+        Me.rdoKiswahili.Tag = "Kiswahili"
+        Me.rdoKiswahili.Text = "Kiswahili"
+        Me.rdoKiswahili.UseVisualStyleBackColor = True
         '
         'ucrPnlLanguage
         '
