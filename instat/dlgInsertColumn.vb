@@ -83,13 +83,7 @@ Public Class dlgInsertColumn
         ucrInputDefaultValue.SetRDefault("NA")
 
         ucrPnlInsertColumns.AddParameterValuesCondition(rdoAtStart, "before", "TRUE")
-        'ucrPnlInsertColumns.AddParameterValuesCondition(rdoAtStart, "before", "FALSE", False)
-        ' ucrPnlInsertColumns.AddParameterPresentCondition(rdoAtStart, "adjacent_column", False)
-
         ucrPnlInsertColumns.AddParameterValuesCondition(rdoAtEnd, "before", "FALSE")
-        'ucrPnlInsertColumns.AddParameterValuesCondition(rdoAtEnd, "before", "TRUE", False)
-        'ucrPnlInsertColumns.AddParameterPresentCondition(rdoAtEnd, "adjacent_column", False)
-
         ucrPnlInsertColumns.AddParameterValuesCondition(rdoBeforeAfter, "before", "TRUE")
         ucrPnlInsertColumns.AddParameterValuesCondition(rdoBeforeAfter, "before", "FALSE")
         ucrPnlInsertColumns.AddParameterPresentCondition(rdoBeforeAfter, "adjacent_column")
