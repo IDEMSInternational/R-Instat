@@ -335,11 +335,8 @@ Public Class dlgSpells
     End Sub
 
     Private Sub ucrReceiverRainfall_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRainfall.ControlValueChanged
-        ' do I need to update this for when the data frame changes?
         clsRRainday.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames() & ")", iPosition:=0)
         RainyDaysMethod()
-        ' when rain_day changes, then clsSpellLength changes. So do I need to run everything again when rain_day changes?!
-        ' No, not if I do Assigns as it's just = the sub?
     End Sub
 
     Private Sub ucrReceivers_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRainfall.ControlValueChanged
