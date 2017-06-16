@@ -55,10 +55,7 @@ Public Class dlgInsertColumn
         ucrPnlBeforeAfter.AddRadioButton(rdoBefore, "TRUE")
         ucrPnlBeforeAfter.AddRadioButton(rdoAfter, "FALSE")
         ucrPnlBeforeAfter.AddParameterValuesCondition(rdoBefore, "before", "TRUE")
-        ucrPnlBeforeAfter.AddParameterValuesCondition(rdoBefore, "before", "FALSE", False)
         ucrPnlBeforeAfter.AddParameterValuesCondition(rdoAfter, "before", "FALSE")
-        ucrPnlBeforeAfter.AddParameterValuesCondition(rdoAfter, "before", "TRUE", False)
-
 
         ucrNudNumberOfRows.SetParameter(New RParameter("number_rows", 2))
         ucrNudNumberOfRows.SetMinMax(1, Integer.MaxValue)
@@ -86,12 +83,12 @@ Public Class dlgInsertColumn
         ucrInputDefaultValue.SetRDefault("NA")
 
         ucrPnlInsertColumns.AddParameterValuesCondition(rdoAtStart, "before", "TRUE")
-        ucrPnlInsertColumns.AddParameterValuesCondition(rdoAtStart, "before", "FALSE", False)
-        ucrPnlInsertColumns.AddParameterPresentCondition(rdoAtStart, "adjacent_column", False)
+        'ucrPnlInsertColumns.AddParameterValuesCondition(rdoAtStart, "before", "FALSE", False)
+        ' ucrPnlInsertColumns.AddParameterPresentCondition(rdoAtStart, "adjacent_column", False)
 
         ucrPnlInsertColumns.AddParameterValuesCondition(rdoAtEnd, "before", "FALSE")
-        ucrPnlInsertColumns.AddParameterValuesCondition(rdoAtEnd, "before", "TRUE", False)
-        ucrPnlInsertColumns.AddParameterPresentCondition(rdoAtEnd, "adjacent_column", False)
+        'ucrPnlInsertColumns.AddParameterValuesCondition(rdoAtEnd, "before", "TRUE", False)
+        'ucrPnlInsertColumns.AddParameterPresentCondition(rdoAtEnd, "adjacent_column", False)
 
         ucrPnlInsertColumns.AddParameterValuesCondition(rdoBeforeAfter, "before", "TRUE")
         ucrPnlInsertColumns.AddParameterValuesCondition(rdoBeforeAfter, "before", "FALSE")
