@@ -114,12 +114,7 @@ Public Class dlgTwoWayFrequencies
 
         ucrPnlFreqDisplay.AddFunctionNamesCondition(rdoTable, "sjtab")
         ucrPnlFreqDisplay.AddFunctionNamesCondition(rdoGraph, "sjplot")
-
-        'Conditions for both requires checks on multiple functions
-        'Not yet implemented so this can cause a bug
-
-        'ucrPnlFreqDisplay.AddFunctionNamesCondition(rdoBoth, "sjtab")
-        'ucrPnlFreqDisplay.AddFunctionNamesCondition(rdoBoth, "sjplot")
+        'TODO conditions for both requires checks on multiple functions
 
         'Setting Display of the group boxes in the dialog
         ucrPnlFreqDisplay.AddToLinkedControls(ucrChkCount, {rdoTable, rdoBoth}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -148,8 +143,6 @@ Public Class dlgTwoWayFrequencies
         ucrSelectorTwoWayFrequencies.Reset()
         ucrReceiverRowFactor.SetMeAsReceiver()
         ucrSaveGraph.Reset()
-        'To fix the problem of rdo both which does not satisfy the condition of having both functions present, line 121 & 122 
-        rdoTable.Checked = True
 
         'Defining Table functions and default functions
         clsSjTab.SetPackageName("sjPlot")
@@ -196,7 +189,7 @@ Public Class dlgTwoWayFrequencies
         ucrChkWeights.SetRCode(clsSjTab, bReset)
         ucrChkFlip.SetRCode(clsSjPlot, bReset)
         ucrPnlFreqType.SetRCode(clsSjPlot, bReset)
-        If rdoGraph.Checked OrElse rdoTable.Checked Then
+        If bReset OrElse Not rdoBoth.Checked Then
             ucrPnlFreqDisplay.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         End If
         ucrSelectorTwoWayFrequencies.SetRCode(clsSjTab, bReset)
@@ -205,10 +198,6 @@ Public Class dlgTwoWayFrequencies
         ucrChkRow.SetRCode(clsSjTab, bReset)
         ucrChkCount.SetRCode(clsSjTab, bReset)
         ucrSaveGraph.SetRCode(clsSjPlot, bReset)
-
-    End Sub
-
-    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
 
     End Sub
 

@@ -70,10 +70,7 @@ Public Class dlgOneWayFrequencies
         'setting rdoGraph and rdoTable
         ucrPnlFrequencies.AddFunctionNamesCondition(rdoTable, "sjtab")
         ucrPnlFrequencies.AddFunctionNamesCondition(rdoGraph, "plot_grid")
-        'setting rdoBoth 
-        'This is incorrect but we can't currently do what's needed 
-        'ucrPnlFrequencies.AddFunctionNamesCondition(rdoBoth, "plot_grid")
-        'ucrPnlFrequencies.AddFunctionNamesCondition(rdoBoth, "sjtab")
+        'TODO be able to have conditions across multiple functions
 
         ucrPnlFrequencies.AddToLinkedControls(ucrChkFlip, {rdoGraph, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencies.AddToLinkedControls(ucrSaveGraph, {rdoGraph, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
@@ -109,8 +106,6 @@ Public Class dlgOneWayFrequencies
         ucrSelectorOneWayFreq.Reset()
         ucrReceiverOneWayFreq.SetMeAsReceiver()
         ucrSaveGraph.Reset()
-        'To fix the problem of rdo both which does not satisfy the condition of having both functions present, line 75 &76 
-        rdoTable.Checked = True
 
         clsPlotGrid.SetPackageName("sjPlot")
         clsPlotGrid.SetRCommand("plot_grid")
@@ -142,7 +137,7 @@ Public Class dlgOneWayFrequencies
 
         ucrReceiverWeights.SetRCode(clsSjTab, bReset)
         ucrReceiverOneWayFreq.SetRCode(clsSjTab, bReset)
-        If rdoGraph.Checked OrElse rdoTable.Checked Then
+        If bReset OrElse Not rdoBoth.Checked Then
             ucrPnlFrequencies.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         End If
 
@@ -223,11 +218,9 @@ Public Class dlgOneWayFrequencies
     Private Sub SetBaseFunction()
         If rdoTable.Checked OrElse rdoBoth.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjTab)
-            'ucrBase.clsRsyntax.bHTMLOutput = True
             ucrBase.clsRsyntax.iCallType = 0
         ElseIf rdoGraph.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsPlotGrid)
-            ' ucrBase.clsRsyntax.bHTMLOutput = False
             ucrBase.clsRsyntax.iCallType = 3
         End If
     End Sub
