@@ -952,10 +952,6 @@ Public Class frmMain
         dlgBarAndPieChart.ShowDialog()
     End Sub
 
-    Private Sub mnuDescribeOtherGraphicsDialogsCumulativeDistribution_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsCumulativeDistribution.Click
-        dlgCumulativeDistribution.ShowDialog()
-    End Sub
-
     Private Sub mnuOrganiseColumnMakeDate_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnMakeDate.Click
         dlgMakeDate.ShowDialog()
     End Sub
@@ -964,7 +960,7 @@ Public Class frmMain
         dlgClimdex.ShowDialog()
     End Sub
 
-    Private Sub mnuDescribeOtherGraphicsDialogsWindRose_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsWindRose.Click
+    Private Sub mnuDescribeOtherGraphicsDialogsWindRose_Click(sender As Object, e As EventArgs)
         dlgWindrose.ShowDialog()
     End Sub
 
@@ -1048,11 +1044,7 @@ Public Class frmMain
         dlgExportToCPT.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticDescribeMoreGraphsWindoRose_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeMoreGraphsWindoRose.Click
-        dlgWindrose.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimaticDescribeMoreGraphsCummulaiveDistribution_Click(sender As Object, e As EventArgs) Handles mnuClimaticDescribeMoreGraphsCummulaiveDistribution.Click
+    Private Sub mnuClimaticDescribeMoreGraphsCummulaiveDistribution_Click(sender As Object, e As EventArgs)
         dlgCumulativeDistribution.ShowDialog()
     End Sub
 
@@ -1349,7 +1341,7 @@ Public Class frmMain
         dlgStringDistance.ShowDialog()
     End Sub
 
-    Private Sub mnuDescribeOtherGraphicsDialogsInventoryPlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeOtherGraphicsDialogsInventoryPlot.Click
+    Private Sub mnuDescribeOtherGraphicsDialogsInventoryPlot_Click(sender As Object, e As EventArgs)
         dlgInventoryPlot.ShowDialog()
     End Sub
 
@@ -1408,6 +1400,19 @@ Public Class frmMain
     Public Sub SetCurrentDataFrame(strDataName As String)
         ucrDataViewer.SetCurrentDataFrame(strDataName)
     End Sub
+
+    Private Sub WindroseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WindroseToolStripMenuItem.Click
+        dlgWindrose.ShowDialog()
+    End Sub
+
+    Private Sub WindrosePlotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WindrosePlotToolStripMenuItem.Click
+        dlgWindrosePlot.ShowDialog()
+    End Sub
+
+    Private Sub CummulativeDistributionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CummulativeDistributionToolStripMenuItem.Click
+        dlgCumulativeDistribution.ShowDialog()
+    End Sub
+
 
     'Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click
     '    'TEST temporary 
