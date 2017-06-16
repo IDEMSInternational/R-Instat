@@ -36,11 +36,15 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub InitialiseDialog()
+        Dim dctucrOperator As New Dictionary(Of String, String)
+
+        UcrBase.iHelpTopicID = 296
         UcrBase.clsRsyntax.iCallType = 2
+        UcrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         sdgOneVarFitModDisplay.InitialiseDialog()
         sdgOneVarFitModel.InitialiseDialog()
 
-        UcrBase.iHelpTopicID = 296
+
 
         UcrReceiver.Selector = ucrSelectorOneVarFitMod
         UcrReceiver.SetMeAsReceiver()
@@ -52,22 +56,23 @@ Public Class dlgOneVarFitModel
         ucrSaveModel.SetIsComboBox()
         ucrSaveModel.SetAssignToIfUncheckedValue("last_model")
 
-        UcrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+
         sdgOneVarFitModDisplay.SetModelFunction(clsROneVarFitModel)
         sdgOneVarFitModel.SetMyRFunction(clsROneVarFitModel)
         sdgOneVarFitModDisplay.SetDistribution(ucrFamily)
         sdgOneVarFitModel.SetDistribution(ucrFamily)
-        ucrNudCI.Increment = 0.05
-        ucrNudCI.DecimalPlaces = 2
-        ucrNudHyp.DecimalPlaces = 2
-        ucrNudCI.Maximum = 1
-        ucrNudCI.Minimum = 0
+        'ucrNudCI.Increment = 0.05
+        'ucrNudCI.DecimalPlaces = 2
+        'ucrNudHyp.DecimalPlaces = 2
+        'ucrNudCI.Maximum = 1
+        'ucrNudCI.Minimum = 0
         ucrOperator.SetItems({"==", "<", "<=", ">", ">=", "!="})
+        dctucrOperator.Add("Equal to(==)", "==")
         ucrVariables.SetItemsTypeAsColumns()    'we want SetItemsTypeAs factors in the column
-        rdoMeanWilcox.Checked = True
+        ' rdoMeanWilcox.Checked = True
 
         'temp disabled as only works for numeric columns currently
-        chkConvertToVariate.Enabled = False
+        '.Enabled = False
     End Sub
 
     Private Sub SetDefaults()
@@ -92,7 +97,7 @@ Public Class dlgOneVarFitModel
         sdgOneVarFitModDisplay.SetDefaults()
         sdgOneVarFitModel.SetDefaults()
         SetBaseFunction()
-        rdoGeneral.Checked = True
+        rdoGeneralCase.Checked = True
         TestOKEnabled()
         SetDistributions()
     End Sub
@@ -102,9 +107,9 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub SetDistributions()
-        If rdoGeneral.Checked Then
+        If rdoGeneralCase.Checked Then
             ucrFamily.SetAllDistributions()
-        ElseIf rdoSpecific.Checked Then
+        ElseIf rdoExactCase.Checked Then
             ucrFamily.SetExactDistributions()
         End If
     End Sub
@@ -176,9 +181,9 @@ Public Class dlgOneVarFitModel
         clsRBinomTest.ClearParameters()
         clsRTTest.ClearParameters()
         clsRStartValues.ClearParameters()
-        If rdoGeneral.Checked Then
+        If rdoGeneralCase.Checked Then
             FitDistFunction()
-        ElseIf rdoSpecific.Checked Then
+        ElseIf rdoExactCase.Checked Then
             If ucrFamily.clsCurrDistribution.strNameTag = "Poisson" Then
                 SetPoissonTest()
             ElseIf ucrFamily.clsCurrDistribution.strNameTag = "Normal" Then
@@ -202,9 +207,9 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Public Sub DataTypeAccepted()
-        If rdoGeneral.Checked Then
+        If rdoGeneralCase.Checked Then
             UcrReceiver.SetIncludedDataTypes({"integer", "numeric", "character", "factor"})
-        ElseIf rdoSpecific.Checked Then
+        ElseIf rdoExactCase.Checked Then
             If ucrFamily.clsCurrDistribution.strNameTag = "Normal" Or ucrFamily.clsCurrDistribution.strNameTag = "Poisson" Then
                 UcrReceiver.SetIncludedDataTypes({"integer", "numeric"})
                 If (UcrReceiver.strCurrDataType = "factor" OrElse UcrReceiver.strCurrDataType = "character") Then
@@ -337,7 +342,7 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub AssignSaveModel()
-        'If rdoGeneral.Checked Then
+        'If rdoGeneralCase.Checked Then
         '    If chkSaveModel.Checked AndAlso Not instat.ucrSaveModel.IsEmpty Then
         '        UcrBase.clsRsyntax.SetAssignTo(instat.ucrSaveModel.GetText, strTempModel:=instat.ucrSaveModel.GetText, strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         '    Else
@@ -346,13 +351,7 @@ Public Class dlgOneVarFitModel
         'End If
     End Sub
 
-    Private Sub grpConditions_Enter(sender As Object, e As EventArgs) Handles grpConditions.Enter
 
-    End Sub
-
-    Private Sub ucrDistributions_cboDistributionsIndexChanged(ucrChangedControl As ucrCore) Handles ucrFamily.ControlValueChanged
-
-    End Sub
 
     Private Sub chkSaveModel_CheckedChanged(sender As Object, e As EventArgs)
         'If chkSaveModel.Checked Then
@@ -402,12 +401,12 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub UcrBase_ClickOk(sender As Object, e As EventArgs) Handles UcrBase.ClickOk
-        If rdoGeneral.Checked Then
+        If rdoGeneralCase.Checked Then
             sdgOneVarFitModDisplay.CreateGraphs()
             If sdgOneVarFitModel.rdoMle.Checked AndAlso (sdgOneVarFitModDisplay.rdoLoglik.Checked Or sdgOneVarFitModDisplay.rdoLik.Checked) Then
                 sdgOneVarFitModDisplay.RunLikelihoods()
             End If
-        ElseIf rdoSpecific.Checked Then
+        ElseIf rdoExactCase.Checked Then
             If ucrFamily.clsCurrDistribution.strNameTag = "Normal" OrElse ucrFamily.clsCurrDistribution.strNameTag = "Poisson" Then ' can remove this line once Bernouli residual plots are working
                 PlotResiduals()
                 frmMain.clsRLink.RunScript(clsRplot.ToScript(), 3)
@@ -416,14 +415,14 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub Display()
-        If rdoGeneral.Checked Then
+        If rdoGeneralCase.Checked Then
             cmdFittingOptions.Visible = True
             cmdDisplayOptions.Visible = True
             grpConditions.Visible = False
             rdoMeanWilcox.Visible = False
             rdoVarSign.Visible = False
             rdoEnorm.Visible = False
-        ElseIf rdoSpecific.Checked Then
+        ElseIf rdoExactCase.Checked Then
             cmdFittingOptions.Visible = False
             cmdDisplayOptions.Visible = False
             chkConvertToVariate.Visible = False
@@ -464,7 +463,7 @@ Public Class dlgOneVarFitModel
         End If
     End Sub
 
-    Private Sub rdoButtons_CheckedChanged(sender As Object, e As EventArgs) Handles rdoSpecific.CheckedChanged, rdoGeneral.CheckedChanged
+    Private Sub rdoButtons_CheckedChanged(sender As Object, e As EventArgs)
         EnableOptions()
         BinomialConditions()
         sdgOneVarFitModel.OptimisationMethod()
@@ -473,7 +472,7 @@ Public Class dlgOneVarFitModel
         DataTypeAccepted()
     End Sub
 
-    Private Sub ucrDistributions_cboDistributionsIndexChanged() Handles ucrFamily.DistributionsIndexChanged
+    Private Sub ucrDistributions_cboDistributionsIndexChanged() Handles ucrFamily.DistributionsIndexChanged, ucrFamily.ControlValueChanged
         SetBaseFunction()
         BinomialConditions()
         SetDataParameter()
@@ -495,7 +494,7 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub BinomialConditions()
-        If rdoSpecific.Checked AndAlso ucrFamily.clsCurrDistribution.strNameTag = "Bernouli" Then
+        If rdoExactCase.Checked AndAlso ucrFamily.clsCurrDistribution.strNameTag = "Bernouli" Then
             chkBinModify.Visible = True
             If chkBinModify.Checked Then
                 lblSuccessIf.Visible = True
