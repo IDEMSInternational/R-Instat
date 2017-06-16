@@ -23,9 +23,7 @@ Public Class dlgCombineforGraphics
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
-
         End If
-
         If bReset Then
             SetDefaults()
         End If
@@ -89,11 +87,14 @@ Public Class dlgCombineforGraphics
     Private Sub cmdLayout_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         'this SetRFunction is still empty in subdialog but will be fixed soon.
         sdgCombineGraphOptions.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, bResetSubDialog)
-        bResetSubDialog = False
         sdgCombineGraphOptions.ShowDialog()
+        bResetSubDialog = False
     End Sub
 
     Private Sub AllControls_ControlContentsChanged() Handles ucrCombineGraphReceiver.ControlContentsChanged, ucrSave.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+    Private Sub AllControl_ControlContentsChanged() Handles ucrCombineGraphReceiver.ControlContentsChanged
+        sdgCombineGraphOptions.SetDefaultRowAndColumns()
     End Sub
 End Class
