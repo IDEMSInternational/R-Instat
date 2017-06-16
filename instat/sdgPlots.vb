@@ -184,7 +184,7 @@ Public Class sdgPlots
             End If
         Next
         ucrInputThemes.SetItems(dctThemes)
-        ucrInputThemes.SetRDefault("theme_grey()")
+        ucrInputThemes.SetRDefault("grey")
         ucrInputThemes.SetDropDownStyleAsNonEditable()
 
         InitialiseTabs()
