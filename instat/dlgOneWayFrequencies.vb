@@ -72,8 +72,8 @@ Public Class dlgOneWayFrequencies
         ucrPnlFrequencies.AddFunctionNamesCondition(rdoGraph, "plot_grid")
         'setting rdoBoth 
         'This is incorrect but we can't currently do what's needed 
-        ucrPnlFrequencies.AddFunctionNamesCondition(rdoBoth, "plot_grid")
-        ucrPnlFrequencies.AddFunctionNamesCondition(rdoBoth, "sjtab")
+        'ucrPnlFrequencies.AddFunctionNamesCondition(rdoBoth, "plot_grid")
+        'ucrPnlFrequencies.AddFunctionNamesCondition(rdoBoth, "sjtab")
 
         ucrPnlFrequencies.AddToLinkedControls(ucrChkFlip, {rdoGraph, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencies.AddToLinkedControls(ucrSaveGraph, {rdoGraph, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
