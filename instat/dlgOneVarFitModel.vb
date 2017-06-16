@@ -19,43 +19,49 @@ Public Class dlgOneVarFitModel
     Public clsROneVarFitModel, clsRLength, clsRMean, clsRTTest, clsVarTest, clsREnormTest, clsRNonSignTest, clsRWilcoxTest, clsRBinomTest, clsRPoissonTest, clsRplot, clsRfitdist, clsRStartValues, clsRBinomStart, clsRConvertVector, clsRConvertInteger, clsRConvertNumeric As New RFunction
     Public clsFunctionOperator, clsFactorOperator As New ROperator
     Public bfirstload As Boolean = True
-
+    Public bReset As Boolean = True
+    Private bResetSubdialog As Boolean = False
     Private Sub dlgOneVarFitModel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autoTranslate(Me)
         If bfirstload Then
             InitialiseDialog()
-            SetDefaults()
             bfirstload = False
-        Else
-            ReopenDialog()
         End If
-        autoTranslate(Me)
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
+        UcrBase.clsRsyntax.iCallType = 2
         sdgOneVarFitModDisplay.InitialiseDialog()
         sdgOneVarFitModel.InitialiseDialog()
 
-        clsROneVarFitModel.SetPackageName("fitdistrplus")
-        clsROneVarFitModel.SetRCommand("fitdist")
-
         UcrBase.iHelpTopicID = 296
-        UcrBase.clsRsyntax.iCallType = 2
+
         UcrReceiver.Selector = ucrSelectorOneVarFitMod
         UcrReceiver.SetMeAsReceiver()
+
+        ucrSaveModel.SetPrefix("one_way_freq")
+        ucrSaveModel.SetSaveTypeAsModel()
         ucrSaveModel.SetDataFrameSelector(ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
-        ucrSaveModel.SetItemsTypeAsModels()
-        ucrSaveModel.SetDefaultTypeAsModel()
-        ucrSaveModel.SetValidationTypeAsRVariable()
+        ucrSaveModel.SetCheckBoxText("Save Model")
+        ucrSaveModel.SetIsComboBox()
+        ucrSaveModel.SetAssignToIfUncheckedValue("last_model")
+
         UcrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         sdgOneVarFitModDisplay.SetModelFunction(clsROneVarFitModel)
         sdgOneVarFitModel.SetMyRFunction(clsROneVarFitModel)
         sdgOneVarFitModDisplay.SetDistribution(ucrFamily)
         sdgOneVarFitModel.SetDistribution(ucrFamily)
-        nudCI.Increment = 0.05
-        nudCI.DecimalPlaces = 2
-        nudHyp.DecimalPlaces = 2
-        nudCI.Maximum = 1
-        nudCI.Minimum = 0
+        ucrNudCI.Increment = 0.05
+        ucrNudCI.DecimalPlaces = 2
+        ucrNudHyp.DecimalPlaces = 2
+        ucrNudCI.Maximum = 1
+        ucrNudCI.Minimum = 0
         ucrOperator.SetItems({"==", "<", "<=", ">", ">=", "!="})
         ucrVariables.SetItemsTypeAsColumns()    'we want SetItemsTypeAs factors in the column
         rdoMeanWilcox.Checked = True
@@ -68,13 +74,18 @@ Public Class dlgOneVarFitModel
         ucrSelectorOneVarFitMod.Reset()
         ucrSelectorOneVarFitMod.Focus()
         ucrOperator.SetName("==")
-        ucrSaveModel.SetPrefix("dist")
-        nudCI.Value = 0.95
+        ' instat.ucrSaveModel.SetPrefix("dist")
+
+        clsROneVarFitModel.SetPackageName("fitdistrplus")
+        clsROneVarFitModel.SetRCommand("fitdist")
+
+
+        ucrNudCI.Value = 0.95
         BinomialConditions()
         'temp set to False to fix bug in saving
-        chkSaveModel.Checked = False
-        ucrSaveModel.Visible = False
-        ucrSaveModel.Reset()
+        ' chkSaveModel.Checked = False
+        ' instat.ucrSaveModel.Visible = False
+        ' instat.ucrSaveModel.Reset()
         SetDataParameter()
         EnableOptions()
         AssignSaveModel()
@@ -84,6 +95,10 @@ Public Class dlgOneVarFitModel
         rdoGeneral.Checked = True
         TestOKEnabled()
         SetDistributions()
+    End Sub
+
+    Public Sub SetRCodeForControls(bReset As Boolean)
+
     End Sub
 
     Private Sub SetDistributions()
@@ -98,11 +113,11 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub TestOKEnabled()
-        If (chkSaveModel.Checked AndAlso Not ucrSaveModel.IsEmpty() OrElse Not chkSaveModel.Checked) AndAlso Not UcrReceiver.IsEmpty AndAlso sdgOneVarFitModDisplay.TestOkEnabled() Then
-            UcrBase.OKEnabled(True)
-        Else
-            UcrBase.OKEnabled(False)
-        End If
+        'If (chkSaveModel.Checked AndAlso Not instat.ucrSaveModel.IsEmpty() OrElse Not chkSaveModel.Checked) AndAlso Not UcrReceiver.IsEmpty AndAlso MyBase.sdgOneVarFitModDisplay.TestOkEnabled() Then
+        '    UcrBase.OKEnabled(True)
+        'Else
+        '    UcrBase.OKEnabled(False)
+        'End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles UcrBase.ClickReset
@@ -113,7 +128,7 @@ Public Class dlgOneVarFitModel
         AssignSaveModel()
     End Sub
 
-    Private Sub ucrSaveModel_NameChanged() Handles ucrSaveModel.NameChanged
+    Private Sub ucrSaveModel_NameChanged()
         AssignSaveModel()
         TestOKEnabled()
     End Sub
@@ -213,8 +228,8 @@ Public Class dlgOneVarFitModel
         clsRConvertVector.SetRCommand("as.vector")
         clsRConvertVector.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
         clsRTTest.AddParameter("x", clsRFunctionParameter:=clsRConvertVector)
-        clsRTTest.AddParameter("mu", nudHyp.Value.ToString)
-        clsRTTest.AddParameter("conf.level", nudCI.Value.ToString)
+        clsRTTest.AddParameter("mu", ucrNudHyp.Value.ToString)
+        clsRTTest.AddParameter("conf.level", ucrNudCI.Value.ToString)
     End Sub
 
     Private Sub SetVarTest()
@@ -224,8 +239,8 @@ Public Class dlgOneVarFitModel
         clsRConvertVector.SetRCommand("as.vector")
         clsRConvertVector.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
         clsVarTest.AddParameter("x", clsRFunctionParameter:=clsRConvertVector)
-        clsVarTest.AddParameter("sigma.squared", nudHyp.Value.ToString)
-        clsVarTest.AddParameter("conf.level", nudCI.Value.ToString)
+        clsVarTest.AddParameter("sigma.squared", ucrNudHyp.Value.ToString)
+        clsVarTest.AddParameter("conf.level", ucrNudCI.Value.ToString)
     End Sub
 
     Private Sub SetEnormTest()
@@ -234,7 +249,7 @@ Public Class dlgOneVarFitModel
         clsRConvertVector.SetRCommand("as.vector")
         clsRConvertVector.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
         clsREnormTest.AddParameter("x", clsRFunctionParameter:=clsRConvertVector)
-        clsREnormTest.AddParameter("conf.level", nudCI.Value.ToString)
+        clsREnormTest.AddParameter("conf.level", ucrNudCI.Value.ToString)
         ' what is the hyp nud?
     End Sub
 
@@ -245,8 +260,8 @@ Public Class dlgOneVarFitModel
         'clsRConvert.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
         'clsRWilcoxTest.AddParameter("x", clsRFunctionParameter:=clsRConvert)
         clsRWilcoxTest.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
-        clsRWilcoxTest.AddParameter("conf.level", nudCI.Value.ToString)
-        clsRWilcoxTest.AddParameter("mu", nudHyp.Value.ToString)
+        clsRWilcoxTest.AddParameter("conf.level", ucrNudCI.Value.ToString)
+        clsRWilcoxTest.AddParameter("mu", ucrNudHyp.Value.ToString)
     End Sub
 
     Private Sub SetNonSignTest()
@@ -254,8 +269,8 @@ Public Class dlgOneVarFitModel
         clsRNonSignTest.SetRCommand("signmedian.test")
         UcrBase.clsRsyntax.SetBaseRFunction(clsRNonSignTest)
         clsRNonSignTest.AddParameter("x", clsRFunctionParameter:=UcrReceiver.GetVariables())
-        clsRNonSignTest.AddParameter("conf.level", nudCI.Value.ToString)
-        clsRNonSignTest.AddParameter("mu", nudHyp.Value.ToString)
+        clsRNonSignTest.AddParameter("conf.level", ucrNudCI.Value.ToString)
+        clsRNonSignTest.AddParameter("mu", ucrNudCI.Value.ToString)
     End Sub
 
     Private Sub SetPoissonTest()
@@ -264,8 +279,8 @@ Public Class dlgOneVarFitModel
         End If
         clsRPoissonTest.SetRCommand("poisson.test")
         UcrBase.clsRsyntax.SetBaseRFunction(clsRPoissonTest)
-        clsRPoissonTest.AddParameter("r", nudHyp.Value.ToString)
-        clsRPoissonTest.AddParameter("conf.level", nudCI.Value.ToString)
+        clsRPoissonTest.AddParameter("r", ucrNudHyp.Value.ToString)
+        clsRPoissonTest.AddParameter("conf.level", ucrNudCI.Value.ToString)
         clsRPoissonTest.AddParameter("T", clsRFunctionParameter:=clsRMean)
         clsRPoissonTest.AddParameter("x", clsRFunctionParameter:=clsRLength)
         clsRLength.SetRCommand("length")
@@ -280,8 +295,8 @@ Public Class dlgOneVarFitModel
         End If
         clsRBinomTest.SetRCommand("binom.test")
         UcrBase.clsRsyntax.SetBaseRFunction(clsRBinomTest)
-        clsRBinomTest.AddParameter("p", nudHyp.Value.ToString)
-        clsRBinomTest.AddParameter("conf.level", nudCI.Value.ToString)
+        clsRBinomTest.AddParameter("p", ucrNudHyp.Value.ToString)
+        clsRBinomTest.AddParameter("conf.level", ucrNudCI.Value.ToString)
         If chkBinModify.Checked Then
             If UcrReceiver.strCurrDataType = "factor" OrElse UcrReceiver.strCurrDataType = "character" Then
                 clsRBinomTest.AddParameter("x", clsROperatorParameter:=clsFactorOperator)
@@ -322,21 +337,29 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub AssignSaveModel()
-        If rdoGeneral.Checked Then
-            If chkSaveModel.Checked AndAlso Not ucrSaveModel.IsEmpty Then
-                UcrBase.clsRsyntax.SetAssignTo(ucrSaveModel.GetText, strTempModel:=ucrSaveModel.GetText, strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-            Else
-                UcrBase.clsRsyntax.SetAssignTo("last_model", strTempModel:="last_model", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-            End If
-        End If
+        'If rdoGeneral.Checked Then
+        '    If chkSaveModel.Checked AndAlso Not instat.ucrSaveModel.IsEmpty Then
+        '        UcrBase.clsRsyntax.SetAssignTo(instat.ucrSaveModel.GetText, strTempModel:=instat.ucrSaveModel.GetText, strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        '    Else
+        '        UcrBase.clsRsyntax.SetAssignTo("last_model", strTempModel:="last_model", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        '    End If
+        'End If
     End Sub
 
-    Private Sub chkSaveModel_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveModel.CheckedChanged
-        If chkSaveModel.Checked Then
-            ucrSaveModel.Visible = True
-        Else
-            ucrSaveModel.Visible = False
-        End If
+    Private Sub grpConditions_Enter(sender As Object, e As EventArgs) Handles grpConditions.Enter
+
+    End Sub
+
+    Private Sub ucrDistributions_cboDistributionsIndexChanged(ucrChangedControl As ucrCore) Handles ucrFamily.ControlValueChanged
+
+    End Sub
+
+    Private Sub chkSaveModel_CheckedChanged(sender As Object, e As EventArgs)
+        'If chkSaveModel.Checked Then
+        '    instat.ucrSaveModel.Visible = True
+        'Else
+        '    instat.ucrSaveModel.Visible = False
+        'End If
         AssignSaveModel()
         TestOKEnabled()
     End Sub
@@ -413,11 +436,11 @@ Public Class dlgOneVarFitModel
                     rdoMeanWilcox.Text = "Compare Mean"
                     rdoVarSign.Text = "Compare Variance"
                     If rdoVarSign.Checked Then
-                        nudHyp.Minimum = 0.01
-                        nudHyp.Value = 1
+                        ucrNudHyp.Minimum = 0.01
+                        ucrNudHyp.Value = 1
                     Else
-                        nudHyp.Minimum = ucrFamily.clsCurrDistribution.lstExact(5)
-                        nudHyp.Value = ucrFamily.clsCurrDistribution.lstExact(2)
+                        ucrNudHyp.Minimum = ucrFamily.clsCurrDistribution.lstExact(5)
+                        ucrNudHyp.Value = ucrFamily.clsCurrDistribution.lstExact(2)
                     End If
                 ElseIf ucrFamily.clsCurrDistribution.strNameTag = "No_Distribution" Then
                     rdoMeanWilcox.Visible = True
@@ -425,18 +448,18 @@ Public Class dlgOneVarFitModel
                     rdoEnorm.Visible = False
                     rdoMeanWilcox.Text = "None-Wilcoxon"
                     rdoVarSign.Text = "None-Sign"
-                    nudHyp.Minimum = ucrFamily.clsCurrDistribution.lstExact(5)
-                    nudHyp.Value = ucrFamily.clsCurrDistribution.lstExact(2)
+                    ucrNudHyp.Minimum = ucrFamily.clsCurrDistribution.lstExact(5)
+                    ucrNudHyp.Value = ucrFamily.clsCurrDistribution.lstExact(2)
                 Else
-                    nudHyp.Minimum = ucrFamily.clsCurrDistribution.lstExact(5)
-                    nudHyp.Value = ucrFamily.clsCurrDistribution.lstExact(2)
+                    ucrNudHyp.Minimum = ucrFamily.clsCurrDistribution.lstExact(5)
+                    ucrNudHyp.Value = ucrFamily.clsCurrDistribution.lstExact(2)
                     rdoMeanWilcox.Visible = False
                     rdoVarSign.Visible = False
                     rdoEnorm.Visible = False
                 End If
-                nudHyp.Increment = ucrFamily.clsCurrDistribution.lstExact(3)
-                nudHyp.DecimalPlaces = ucrFamily.clsCurrDistribution.lstExact(4)
-                nudHyp.Maximum = ucrFamily.clsCurrDistribution.lstExact(6)
+                ucrNudHyp.Increment = ucrFamily.clsCurrDistribution.lstExact(3)
+                ucrNudHyp.DecimalPlaces = ucrFamily.clsCurrDistribution.lstExact(4)
+                ucrNudHyp.Maximum = ucrFamily.clsCurrDistribution.lstExact(6)
             End If
         End If
     End Sub
@@ -450,7 +473,7 @@ Public Class dlgOneVarFitModel
         DataTypeAccepted()
     End Sub
 
-    Private Sub ucrDistributions_cboDistributionsIndexChanged() Handles ucrFamily.ControlValueChanged
+    Private Sub ucrDistributions_cboDistributionsIndexChanged() Handles ucrFamily.DistributionsIndexChanged
         SetBaseFunction()
         BinomialConditions()
         SetDataParameter()
@@ -462,9 +485,9 @@ Public Class dlgOneVarFitModel
         BinomialConditions()
     End Sub
 
-    Private Sub nudCI_TextChanged(sender As Object, e As EventArgs) Handles nudCI.TextChanged, nudHyp.TextChanged
-        SetBaseFunction()
-    End Sub
+    'Private Sub nudCI_TextChanged(sender As Object, e As EventArgs) Handles nudCI.TextChanged
+    '    SetBaseFunction()
+    'End Sub
 
     Private Sub chkBinModify_CheckedChanged(sender As Object, e As EventArgs) Handles chkBinModify.CheckedChanged
         BinomialConditions()

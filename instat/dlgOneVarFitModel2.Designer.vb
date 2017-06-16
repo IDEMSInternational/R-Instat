@@ -23,7 +23,6 @@ Partial Class dlgOneVarFitModel
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.chkConvertToVariate = New System.Windows.Forms.CheckBox()
-        Me.chkSaveModel = New System.Windows.Forms.CheckBox()
         Me.cmdFittingOptions = New System.Windows.Forms.Button()
         Me.LblVariable = New System.Windows.Forms.Label()
         Me.cmdDisplayOptions = New System.Windows.Forms.Button()
@@ -31,16 +30,13 @@ Partial Class dlgOneVarFitModel
         Me.chkBinModify = New System.Windows.Forms.CheckBox()
         Me.lblSuccessIf = New System.Windows.Forms.Label()
         Me.lblConfidenceLimit = New System.Windows.Forms.Label()
-        Me.nudCI = New System.Windows.Forms.NumericUpDown()
         Me.rdoGeneral = New System.Windows.Forms.RadioButton()
         Me.rdoSpecific = New System.Windows.Forms.RadioButton()
-        Me.nudHyp = New System.Windows.Forms.NumericUpDown()
         Me.nudBinomialConditions = New System.Windows.Forms.NumericUpDown()
         Me.lblEquals = New System.Windows.Forms.Label()
         Me.ucrVariables = New instat.ucrInputComboBox()
         Me.ucrOperator = New instat.ucrInputComboBox()
         Me.ucrFamily = New instat.ucrDistributions()
-        Me.ucrSaveModel = New instat.ucrInputComboBox()
         Me.UcrReceiver = New instat.ucrReceiverSingle()
         Me.ucrSelectorOneVarFitMod = New instat.ucrSelectorByDataFrameAddRemove()
         Me.UcrBase = New instat.ucrButtons()
@@ -48,8 +44,12 @@ Partial Class dlgOneVarFitModel
         Me.rdoEnorm = New System.Windows.Forms.RadioButton()
         Me.rdoVarSign = New System.Windows.Forms.RadioButton()
         Me.rdoMeanWilcox = New System.Windows.Forms.RadioButton()
-        CType(Me.nudCI, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudHyp, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.rdoExactCase = New System.Windows.Forms.RadioButton()
+        Me.rdoGeneralCase = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlGeneralExactCase = New instat.UcrPanel()
+        Me.ucrSaveModel = New instat.ucrSave()
+        Me.ucrNudCI = New instat.ucrNud()
+        Me.ucrNudHyp = New instat.ucrNud()
         CType(Me.nudBinomialConditions, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpConditions.SuspendLayout()
         Me.SuspendLayout()
@@ -63,16 +63,6 @@ Partial Class dlgOneVarFitModel
         Me.chkConvertToVariate.TabIndex = 4
         Me.chkConvertToVariate.Text = "Convert to Variate"
         Me.chkConvertToVariate.UseVisualStyleBackColor = True
-        '
-        'chkSaveModel
-        '
-        Me.chkSaveModel.AutoSize = True
-        Me.chkSaveModel.Location = New System.Drawing.Point(10, 277)
-        Me.chkSaveModel.Name = "chkSaveModel"
-        Me.chkSaveModel.Size = New System.Drawing.Size(86, 17)
-        Me.chkSaveModel.TabIndex = 5
-        Me.chkSaveModel.Text = "Save Model:"
-        Me.chkSaveModel.UseVisualStyleBackColor = True
         '
         'cmdFittingOptions
         '
@@ -138,14 +128,6 @@ Partial Class dlgOneVarFitModel
         Me.lblConfidenceLimit.TabIndex = 22
         Me.lblConfidenceLimit.Text = "Confidence Limit:"
         '
-        'nudCI
-        '
-        Me.nudCI.DecimalPlaces = 2
-        Me.nudCI.Location = New System.Drawing.Point(100, 21)
-        Me.nudCI.Name = "nudCI"
-        Me.nudCI.Size = New System.Drawing.Size(58, 20)
-        Me.nudCI.TabIndex = 23
-        '
         'rdoGeneral
         '
         Me.rdoGeneral.AutoSize = True
@@ -167,13 +149,6 @@ Partial Class dlgOneVarFitModel
         Me.rdoSpecific.TabStop = True
         Me.rdoSpecific.Text = "Exact Solution"
         Me.rdoSpecific.UseVisualStyleBackColor = True
-        '
-        'nudHyp
-        '
-        Me.nudHyp.Location = New System.Drawing.Point(100, 51)
-        Me.nudHyp.Name = "nudHyp"
-        Me.nudHyp.Size = New System.Drawing.Size(58, 20)
-        Me.nudHyp.TabIndex = 29
         '
         'nudBinomialConditions
         '
@@ -217,15 +192,6 @@ Partial Class dlgOneVarFitModel
         Me.ucrFamily.Size = New System.Drawing.Size(219, 30)
         Me.ucrFamily.TabIndex = 11
         '
-        'ucrSaveModel
-        '
-        Me.ucrSaveModel.AddQuotesIfUnrecognised = True
-        Me.ucrSaveModel.IsReadOnly = False
-        Me.ucrSaveModel.Location = New System.Drawing.Point(92, 275)
-        Me.ucrSaveModel.Name = "ucrSaveModel"
-        Me.ucrSaveModel.Size = New System.Drawing.Size(137, 21)
-        Me.ucrSaveModel.TabIndex = 3
-        '
         'UcrReceiver
         '
         Me.UcrReceiver.frmParent = Me
@@ -257,15 +223,15 @@ Partial Class dlgOneVarFitModel
         '
         'grpConditions
         '
+        Me.grpConditions.Controls.Add(Me.ucrNudHyp)
+        Me.grpConditions.Controls.Add(Me.ucrNudCI)
         Me.grpConditions.Controls.Add(Me.rdoEnorm)
         Me.grpConditions.Controls.Add(Me.lblConfidenceLimit)
         Me.grpConditions.Controls.Add(Me.rdoVarSign)
-        Me.grpConditions.Controls.Add(Me.nudCI)
         Me.grpConditions.Controls.Add(Me.rdoMeanWilcox)
         Me.grpConditions.Controls.Add(Me.lblEquals)
         Me.grpConditions.Controls.Add(Me.lblHyp)
         Me.grpConditions.Controls.Add(Me.ucrVariables)
-        Me.grpConditions.Controls.Add(Me.nudHyp)
         Me.grpConditions.Controls.Add(Me.nudBinomialConditions)
         Me.grpConditions.Controls.Add(Me.chkBinModify)
         Me.grpConditions.Controls.Add(Me.lblSuccessIf)
@@ -311,20 +277,90 @@ Partial Class dlgOneVarFitModel
         Me.rdoMeanWilcox.TextAlign = System.Drawing.ContentAlignment.TopLeft
         Me.rdoMeanWilcox.UseVisualStyleBackColor = True
         '
+        'rdoExactCase
+        '
+        Me.rdoExactCase.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoExactCase.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoExactCase.FlatAppearance.BorderSize = 2
+        Me.rdoExactCase.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoExactCase.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoExactCase.Location = New System.Drawing.Point(586, 12)
+        Me.rdoExactCase.Name = "rdoExactCase"
+        Me.rdoExactCase.Size = New System.Drawing.Size(100, 28)
+        Me.rdoExactCase.TabIndex = 37
+        Me.rdoExactCase.Text = "Exact Solution"
+        Me.rdoExactCase.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoExactCase.UseVisualStyleBackColor = True
+        '
+        'rdoGeneralCase
+        '
+        Me.rdoGeneralCase.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoGeneralCase.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoGeneralCase.FlatAppearance.BorderSize = 2
+        Me.rdoGeneralCase.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoGeneralCase.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoGeneralCase.Location = New System.Drawing.Point(488, 12)
+        Me.rdoGeneralCase.Name = "rdoGeneralCase"
+        Me.rdoGeneralCase.Size = New System.Drawing.Size(100, 28)
+        Me.rdoGeneralCase.TabIndex = 36
+        Me.rdoGeneralCase.Text = "General Case"
+        Me.rdoGeneralCase.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoGeneralCase.UseVisualStyleBackColor = True
+        '
+        'ucrPnlGeneralExactCase
+        '
+        Me.ucrPnlGeneralExactCase.Location = New System.Drawing.Point(478, 8)
+        Me.ucrPnlGeneralExactCase.Name = "ucrPnlGeneralExactCase"
+        Me.ucrPnlGeneralExactCase.Size = New System.Drawing.Size(218, 35)
+        Me.ucrPnlGeneralExactCase.TabIndex = 35
+        '
+        'ucrSaveModel
+        '
+        Me.ucrSaveModel.Location = New System.Drawing.Point(10, 276)
+        Me.ucrSaveModel.Name = "ucrSaveModel"
+        Me.ucrSaveModel.Size = New System.Drawing.Size(255, 24)
+        Me.ucrSaveModel.TabIndex = 38
+        '
+        'ucrNudCI
+        '
+        Me.ucrNudCI.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCI.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudCI.Location = New System.Drawing.Point(100, 19)
+        Me.ucrNudCI.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudCI.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCI.Name = "ucrNudCI"
+        Me.ucrNudCI.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudCI.TabIndex = 39
+        Me.ucrNudCI.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudHyp
+        '
+        Me.ucrNudHyp.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudHyp.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudHyp.Location = New System.Drawing.Point(101, 49)
+        Me.ucrNudHyp.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudHyp.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudHyp.Name = "ucrNudHyp"
+        Me.ucrNudHyp.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudHyp.TabIndex = 40
+        Me.ucrNudHyp.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'dlgOneVarFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(461, 364)
-        Me.Controls.Add(Me.grpConditions)
+        Me.ClientSize = New System.Drawing.Size(905, 364)
         Me.Controls.Add(Me.ucrSaveModel)
+        Me.Controls.Add(Me.rdoExactCase)
+        Me.Controls.Add(Me.rdoGeneralCase)
+        Me.Controls.Add(Me.ucrPnlGeneralExactCase)
+        Me.Controls.Add(Me.grpConditions)
         Me.Controls.Add(Me.rdoSpecific)
         Me.Controls.Add(Me.rdoGeneral)
         Me.Controls.Add(Me.ucrFamily)
         Me.Controls.Add(Me.cmdDisplayOptions)
         Me.Controls.Add(Me.LblVariable)
         Me.Controls.Add(Me.cmdFittingOptions)
-        Me.Controls.Add(Me.chkSaveModel)
         Me.Controls.Add(Me.chkConvertToVariate)
         Me.Controls.Add(Me.UcrReceiver)
         Me.Controls.Add(Me.ucrSelectorOneVarFitMod)
@@ -335,8 +371,6 @@ Partial Class dlgOneVarFitModel
         Me.Name = "dlgOneVarFitModel"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "One Variable Fit Model"
-        CType(Me.nudCI, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudHyp, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.nudBinomialConditions, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpConditions.ResumeLayout(False)
         Me.grpConditions.PerformLayout()
@@ -348,9 +382,7 @@ Partial Class dlgOneVarFitModel
     Friend WithEvents UcrBase As ucrButtons
     Friend WithEvents ucrSelectorOneVarFitMod As ucrSelectorByDataFrameAddRemove
     Friend WithEvents UcrReceiver As ucrReceiverSingle
-    Friend WithEvents ucrSaveModel As ucrInputComboBox
     Friend WithEvents chkConvertToVariate As CheckBox
-    Friend WithEvents chkSaveModel As CheckBox
     Friend WithEvents cmdFittingOptions As Button
     Friend WithEvents LblVariable As Label
     Friend WithEvents cmdDisplayOptions As Button
@@ -359,11 +391,9 @@ Partial Class dlgOneVarFitModel
     Friend WithEvents chkBinModify As CheckBox
     Friend WithEvents lblSuccessIf As Label
     Friend WithEvents lblConfidenceLimit As Label
-    Friend WithEvents nudCI As NumericUpDown
     Friend WithEvents ucrOperator As ucrInputComboBox
     Friend WithEvents rdoGeneral As RadioButton
     Friend WithEvents rdoSpecific As RadioButton
-    Friend WithEvents nudHyp As NumericUpDown
     Friend WithEvents nudBinomialConditions As NumericUpDown
     Friend WithEvents ucrVariables As ucrInputComboBox
     Friend WithEvents lblEquals As Label
@@ -371,4 +401,10 @@ Partial Class dlgOneVarFitModel
     Friend WithEvents rdoEnorm As RadioButton
     Friend WithEvents rdoVarSign As RadioButton
     Friend WithEvents rdoMeanWilcox As RadioButton
+    Friend WithEvents rdoExactCase As RadioButton
+    Friend WithEvents rdoGeneralCase As RadioButton
+    Friend WithEvents ucrPnlGeneralExactCase As UcrPanel
+    Friend WithEvents ucrSaveModel As ucrSave
+    Friend WithEvents ucrNudHyp As ucrNud
+    Friend WithEvents ucrNudCI As ucrNud
 End Class
