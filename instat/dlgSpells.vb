@@ -24,7 +24,8 @@ Public Class dlgSpells
     Private clsDayFromAndTo, clsYearGroupDaily As New RFunction
     Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator As New ROperator
     Private clsApplyInstatFunction, clsRRainday, clsRRaindayMatch As New RFunction
-    Private clsRRaindayOperator, clsRRaindayAndOperator, clsRRaindayLowerOperator, clsRRaindayUpperOperator As New ROperator
+    Private clsRRaindayOperator, clsRRaindayAndOperator, clsRRaindayLowerOperator, clsRRaindayUpperOperator, clsAdditionalConditionReplaceOperator, clsAdditionalConditionReplaceOperator2 As New ROperator
+    Private clsAdditionalCondition, clsAdditionalConditionList, clsSubSpellLength2, clsAdditionalConditionReplaceFunction As New RFunction
     Private strCurrDataName As String = ""
 
     Private Sub dlgSpells_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -104,6 +105,8 @@ Public Class dlgSpells
 
         ucrInputCondition.SetItems({"<= Amount of Rain", "Between", ">= Amount of Rain"})
 
+        ucrChkConditional.SetText("Conditional on Rain at Start of Spell")
+
         ucrSaveSpells.SetDataFrameSelector(ucrSelectorForSpells.ucrAvailableDataFrames)
         ucrSaveSpells.SetLabelText("New Column Name:")
         ucrSaveSpells.SetIsTextBox()
@@ -131,6 +134,12 @@ Public Class dlgSpells
         clsRRaindayLowerOperator = New ROperator
         clsRRaindayUpperOperator = New ROperator
         clsMaxValueFunction = New RFunction
+        clsAdditionalCondition = New RFunction
+        clsAdditionalConditionList = New RFunction
+        clsSubSpellLength2 = New RFunction
+        clsAdditionalConditionReplaceFunction = New RFunction
+        clsAdditionalConditionReplaceOperator2 = New ROperator
+        clsAdditionalConditionReplaceOperator = New ROperator
 
         ucrSelectorForSpells.Reset()
         ucrReceiverDate.SetMeAsReceiver()
@@ -162,11 +171,7 @@ Public Class dlgSpells
         clsRRainday.AddParameter("save", "0", iPosition:=6)
         '        clsRRainday.AddParameter("function_exp", chr(34) & clsRRaindayMatch.ToScript & Chr(34), iPosition:=1)
         clsRRaindayMatch.SetRCommand("match")
-        clsRRaindayMatch.AddParameter("", clsROperatorParameter:=clsRRaindayOperator)
-        ' We have: match(Rain >= LOWER & Rain <= UPPER, 1, nomatch = 0)
-        clsRRaindayOperator.SetOperation(",")
-        clsRRaindayOperator.AddParameter("lower_upper_operators", clsROperatorParameter:=clsRRaindayAndOperator, iPosition:=0)
-        clsRRaindayOperator.AddParameter("right_side", "1, nomatch = 0", iPosition:=1)
+        clsRRaindayMatch.AddParameter("x", clsROperatorParameter:=clsRRaindayAndOperator)
         clsRRaindayAndOperator.SetOperation("&")
         clsRRaindayAndOperator.AddParameter("lower", clsROperatorParameter:=clsRRaindayLowerOperator, iPosition:=0)
         clsRRaindayLowerOperator.SetOperation(">=")
@@ -174,15 +179,28 @@ Public Class dlgSpells
         clsRRaindayAndOperator.AddParameter("upper", clsROperatorParameter:=clsRRaindayUpperOperator, iPosition:=0)
         clsRRaindayUpperOperator.SetOperation("<=")
         clsRRaindayUpperOperator.AddParameter("max", 0.85, iPosition:=1)
+        clsRRaindayMatch.AddParameter("table", "1", iPosition:=1)
+        clsRRaindayMatch.AddParameter("nomatch", "0", iPosition:=2)
 
+        ' We have: match(Rain >= LOWER & Rain <= UPPER, 1, nomatch = 0)
         ' Spell Length
         clsSpellLength.SetRCommand("instat_calculation$new")
         clsSpellLength.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
-        clsSpellLength.AddParameter("function_exp", Chr(34) & "cumsum(rain_day)-cummax((rain_day==0)*cumsum(rain_day))" & Chr(34), iPosition:=1)
         clsSpellLength.AddParameter("result_name", Chr(34) & "Dry_Spell" & Chr(34), iPosition:=2)
         clsSpellLength.AddParameter("save", 0, iPosition:=6)
 
         clsMaxValueManipulation.SetRCommand("list")
+
+        ' Additional Checkbox
+        clsAdditionalCondition.SetRCommand("instat_calculation$new")
+        clsAdditionalCondition.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
+        clsAdditionalCondition.AddParameter("result_name", Chr(34) & "rain_day2" & Chr(34), iPosition:=2)
+        clsAdditionalCondition.AddParameter("save", 0, iPosition:=6)
+        clsAdditionalConditionReplaceFunction.SetRCommand("replace")
+        clsAdditionalConditionReplaceFunction.AddParameter("x", "rain_day", iPosition:=0)
+        clsAdditionalConditionReplaceFunction.AddParameter("list", ucrNudFrom.Value - 1, iPosition:=1)
+        clsAdditionalConditionReplaceFunction.AddParameter("values", "0", iPosition:=2)
+        clsAdditionalConditionList.SetRCommand("list")
 
         'Max Value
         clsMaxValue.SetRCommand("instat_calculation$new")
@@ -203,6 +221,7 @@ Public Class dlgSpells
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrNudFrom.AddAdditionalCodeParameterPair(clsAdditionalConditionReplaceOperator2, New RParameter("list", 0), iAdditionalPairNo:=1)
         'For day:
         ucrReceiverDOY.AddAdditionalCodeParameterPair(clsDayFromOperator, New RParameter("day", 0), iAdditionalPairNo:=1)
         ucrReceiverDOY.SetRCode(clsDayToOperator, bReset)
@@ -243,6 +262,32 @@ Public Class dlgSpells
         clsMaxValue.AddParameter("function_exp", Chr(34) & clsMaxValueFunction.ToScript & Chr(34), iPosition:=1)
         clsRRainday.AddParameter("function_exp", chr(34) & clsRRaindayMatch.ToScript & Chr(34), iPosition:=1)
 
+        If ucrChkConditional.Checked Then
+            'clsSpellLength.RemoveParameterByName("function_exp")
+            'clsSpellLength.RemoveParameterByName("sub_calculations")
+            'clsSubSpellLength1.RemoveParameterByName("sub1")
+
+            clsAdditionalConditionList.AddParameter("sub1", clsRFunctionParameter:=clsRRainday)
+            clsAdditionalCondition.AddParameter("sub_calculation", clsRFunctionParameter:=clsAdditionalConditionList)
+
+            clsAdditionalCondition.AddParameter("function_exp", Chr(34) & clsAdditionalConditionReplaceFunction.ToScript & Chr(34))
+            clsAdditionalCondition.SetAssignTo("Additional_Condition")
+            clsSpellLength.AddParameter("function_exp", Chr(34) & "cumsum(rain_day2)-cummax((rain_day2==0)*cumsum(rain_day2))" & Chr(34))
+            clsSpellLength.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubSpellLength1)
+            clsSubSpellLength1.AddParameter("sub1", clsRFunctionParameter:=clsAdditionalCondition, bIncludeArgumentName:=False)
+        Else
+            clsSpellLength.AddParameter("function_exp", Chr(34) & "cumsum(rain_day)-cummax((rain_day==0)*cumsum(rain_day))" & Chr(34), iPosition:=1)
+            clsSpellLength.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubSpellLength1)
+            clsSubSpellLength1.AddParameter("sub1", clsRFunctionParameter:=clsRRainday, bIncludeArgumentName:=False)
+
+            'clsAdditionalCondition.RemoveParameterByName("function_exp")
+            'clsAdditionalCondition.RemoveParameterByName("sub_calculation")
+            'clsAdditionalConditionList.RemoveParameterByName("sub1")
+            'clsSpellLength.RemoveParameterByName("function_exp")
+            'clsSpellLength.RemoveParameterByName("sub_calculations")
+            ''            clsSubSpellLength2.RemoveParameterByName("sub1")
+        End If
+
         clsApplyInstatFunction.AddParameter("calc", clsRFunctionParameter:=clsMaxValue, iPosition:=1)
         ucrBase.clsRsyntax.SetBaseRFunction(clsApplyInstatFunction)
     End Sub
@@ -258,15 +303,15 @@ Public Class dlgSpells
         '    Case "<= Amount of Rain"
         '        clsRRaindayOperator.RemoveParameterByName("upper_operators")
         '        clsRRaindayOperator.RemoveParameterByName("lower_upper_operators")
-        '        clsRRaindayOperator.AddParameter("lower_operators", clsROperatorParameter:=clsRRaindayLowerOperator, iPosition:=0)
+        '        clsRRaindayOperator.AddParameter("x", clsROperatorParameter:=clsRRaindayLowerOperator, iPosition:=0)
         '    Case "Between" ' match(Rain>=LEFT & Rain<=RIGHT, 1, nomatch = 0)
         '        clsRRaindayOperator.RemoveParameterByName("upper_operators")
         '        clsRRaindayOperator.RemoveParameterByName("lower_operators")
-        '        clsRRaindayOperator.AddParameter("lower_upper_operators", clsROperatorParameter:=clsRRaindayAndOperator, iPosition:=0)
+        '        clsRRaindayOperator.AddParameter("x", clsROperatorParameter:=clsRRaindayAndOperator, iPosition:=0)
         '    Case Else
         '        clsRRaindayOperator.RemoveParameterByName("lower_operators")
         '        clsRRaindayOperator.RemoveParameterByName("lower_upper_operators")
-        '        clsRRaindayOperator.AddParameter("upper_operators", clsROperatorParameter:=clsRRaindayUpperOperator, iPosition:=0)
+        '        clsRRaindayOperator.AddParameter("x", clsROperatorParameter:=clsRRaindayUpperOperator, iPosition:=0)
         'End Select
         clsSubSpellLength1.AddParameter("sub1", clsRFunctionParameter:=clsRRainday, bIncludeArgumentName:=False)
         clsSpellLength.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubSpellLength1)
@@ -327,28 +372,14 @@ Public Class dlgSpells
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRainfall.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
+    Private Sub ucrNudFrom_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudFrom.ControlValueChanged
+        clsAdditionalConditionReplaceFunction.AddParameter("list", ucrNudFrom.Value - 1, iPosition:=1)
+    End Sub
 End Class
 
 'TODO: Make by Year and Station
 'TODO: Add functionality for chkbox
-
-'    Private Sub SetDefaults()
-'        ucrSelectorForSpells.Reset()
-'        ucrSaveSpells.Reset()
-
-'        TestOKEnabled()
-
-'        chkConditionRain.Checked = False
-'        nudFrom.Value = 1
-'        nudTo.Value = 366
-'        nudConditionLeft.Value = 0
-'        NudConditionRight.Value = 0.85
-'        ucrInputCondition.SetName("Between")
-'    End Sub
-
-'    Private Sub ReopenDialog()
-
-'    End Sub
 
 '    Private Sub DisplayForConditions()
 '        Select Case ucrInputCondition.GetText
@@ -361,10 +392,6 @@ End Class
 '        End Select
 '    End Sub
 
-'    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-'        SetDefaults()
-'    End Sub
-
 '    ' nud max and mins.
 '    Private Sub nudValues()
 '        '  nudFrom.Maximum = ucrNudTo.Value - 1
@@ -373,110 +400,5 @@ End Class
 '        'nudLengthofTime.Minimum = nudMaximumDays.Value + 1
 '    End Sub
 
-'    Private Sub DayFromAndToMethod()
 
-'    End Sub
-
-
-
-' Private Sub RainyDaysMethod()
-'        If chkConditionRain.Checked Then
-'            clsSpellLength.RemoveParameterByName("function_exp")
-'            clsSpellLength.RemoveParameterByName("sub_calculations")
-'            clsSubSpellLength1.RemoveParameterByName("sub1")
-
-'            clsAdditionalCondition.AddParameter("type", Chr(34) & "calculation" & Chr(34))
-'            clsAdditionalCondition.AddParameter("function_exp", Chr(34) & "replace(rain_day, " & (nudFrom.Value - 1) & ", 0)" & Chr(34))
-'            clsAdditionalCondition.AddParameter("result_name", Chr(34) & "rain_day2" & Chr(34))
-'            clsAdditionalCondition.AddParameter("sub_calculation", clsRFunctionParameter:=clsAdditionalConditionList)
-'            clsAdditionalConditionList.SetRCommand("list")
-'            clsAdditionalConditionList.AddParameter("sub1", clsRFunctionParameter:=clsRRainday)
-'            clsAdditionalCondition.AddParameter("save", 0)
-
-'            clsSpellLength.AddParameter("function_exp", Chr(34) & "cumsum(rain_day2)-cummax((rain_day2==0)*cumsum(rain_day2))" & Chr(34))
-'            clsSpellLength.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubSpellLength2)
-'            clsSubSpellLength2.AddParameter("sub1", clsRFunctionParameter:=clsAdditionalCondition, bIncludeArgumentName:=False)
-'        Else
-'            clsAdditionalCondition.RemoveParameterByName("type")
-'            clsAdditionalCondition.RemoveParameterByName("function_exp")
-'            clsAdditionalCondition.RemoveParameterByName("result_name")
-'            clsAdditionalCondition.RemoveParameterByName("sub_calculation")
-'            clsAdditionalCondition.RemoveParameterByName("save")
-'            clsAdditionalConditionList.RemoveParameterByName("sub1")
-'            clsSpellLength.RemoveParameterByName("function_exp")
-'            clsSpellLength.RemoveParameterByName("sub_calculations")
-'            clsSubSpellLength2.RemoveParameterByName("sub1")
-
-'            clsSpellLength.AddParameter("function_exp", Chr(34) & "cumsum(rain_day)-cummax((rain_day==0)*cumsum(rain_day))" & Chr(34))
-'            clsSpellLength.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubSpellLength1)
-'            clsSubSpellLength1.AddParameter("sub1", clsRFunctionParameter:=clsRRainday, bIncludeArgumentName:=False)
-'        End If
-'    End Sub
-
-'    Private Sub ucrInputCondition_NameChanged() Handles ucrInputCondition.NameChanged
-'        DisplayForConditions()
-'        RainyDaysMethod()
-'    End Sub
-
-'''''''''''''Private Sub MaxValue()
-'''''''''''''    clsMaxValueManipulation.SetRCommand("list")
-'''''''''''''    clsMaxValueManipulation.AddParameter("sub2", clsRFunctionParameter:=clsYearGroupDaily, bIncludeArgumentName:=False)
-'''''''''''''    clsMaxValueManipulation.AddParameter("sub3", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False)
-
-'''''''''''''    clsMaxValue.AddParameter("type", Chr(34) & "summary" & Chr(34))
-'''''''''''''    clsMaxValue.AddParameter("function_exp", Chr(34) & "max(Dry_Spell)" & Chr(34))
-'''''''''''''    clsMaxValue.AddParameter("manipulations", clsRFunctionParameter:=clsMaxValueManipulation)
-'''''''''''''    clsMaxValue.AddParameter("sub_calculations", clsRFunctionParameter:=clsMaxValueList)
-'''''''''''''    clsMaxValueList.AddParameter("sub1", clsRFunctionParameter:=clsSpellLength, bIncludeArgumentName:=False)
-'''''''''''''    clsMaxValue.AddParameter("result_name", Chr(34) & ucrSaveSpells.GetText() & Chr(34))
-'''''''''''''    clsMaxValue.AddParameter("save", 2)
-'''''''''''''End Sub
-
-'''''''''''''    Private Sub firstDayofTheYear()
-'''''''''''''        ucrBase.clsRsyntax.AddParameter("calc", clsRFunctionParameter:=clsMaxValue)
-'''''''''''''    End Sub
-
-'    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-'        DayFromAndToMethod()
-'        RainyDaysMethod()
-'        MaxValue()
-'    End Sub
-
-'    Private Sub nudToAndFrom_ControlValueChanged(sender As Object, e As EventArgs) Handles nudTo.TextChanged, nudFrom.TextChanged
-'        nudValues()
-'        DayFromAndToMethod()
-'        RainyDaysMethod()
-'        TestOKEnabled()
-'    End Sub
-
-'    Private Sub ucrReceiverDOY(sender As Object, e As EventArgs) Handles ucrReceiverDayOfYear.SelectionChanged
-'        DayFromAndToMethod()
-'        MaxValue()
-'        firstDayofTheYear()
-'        TestOKEnabled()
-'    End Sub
-
-'    Private Sub ucrReceiverRainfall_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverRainfall.SelectionChanged
-'        RainyDaysMethod()
-'        TestOKEnabled()
-'    End Sub
-
-
-'    Private Sub ConditionalRainNuds_valuechanged(sender As Object, e As EventArgs) Handles NudConditionRight.TextChanged, nudConditionLeft.TextChanged
-'        RainyDaysMethod()
-'        TestOKEnabled()
-'    End Sub
-
-'    Private Sub chkConditionRain_CheckedChanged(sender As Object, e As EventArgs) Handles chkConditionRain.CheckedChanged
-'        RainyDaysMethod()
-'    End Sub
-
-'    Private Sub ucrSaveSpells_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveSpells.ControlContentsChanged
-'        TestOKEnabled()
-'    End Sub
-
-'    Private Sub ucrSaveSpells_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveSpells.ControlValueChanged
-'''''''''''''        clsMaxValue.SetAssignTo(ucrSaveSpells.ucrInputTextSave.GetText)
-'        MaxValue()
-'    End Sub
 'End Class

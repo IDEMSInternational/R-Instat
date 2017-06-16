@@ -26,25 +26,25 @@ Partial Class dlgSpells
         Me.lblDate = New System.Windows.Forms.Label()
         Me.lblYear = New System.Windows.Forms.Label()
         Me.lblDOY = New System.Windows.Forms.Label()
-        Me.chkConditionRain = New System.Windows.Forms.CheckBox()
         Me.lblTo = New System.Windows.Forms.Label()
         Me.lblFrom = New System.Windows.Forms.Label()
         Me.lblThreshold = New System.Windows.Forms.Label()
         Me.grpRainParameters = New System.Windows.Forms.GroupBox()
+        Me.ucrNudTo = New instat.ucrNud()
+        Me.ucrNudFrom = New instat.ucrNud()
+        Me.ucrInputSpellLower = New instat.ucrInputTextBox()
+        Me.ucrInputCondition = New instat.ucrInputComboBox()
+        Me.ucrInputSpellUpper = New instat.ucrInputTextBox()
         Me.lblStation = New System.Windows.Forms.Label()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrSaveSpells = New instat.ucrSave()
         Me.ucrReceiverDOY = New instat.ucrReceiverSingle()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
-        Me.ucrNudTo = New instat.ucrNud()
-        Me.ucrNudFrom = New instat.ucrNud()
-        Me.ucrInputSpellLower = New instat.ucrInputTextBox()
-        Me.ucrInputCondition = New instat.ucrInputComboBox()
-        Me.ucrInputSpellUpper = New instat.ucrInputTextBox()
         Me.ucrReceiverRainfall = New instat.ucrReceiverSingle()
         Me.ucrSelectorForSpells = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrChkConditional = New instat.ucrCheck()
         Me.grpRainParameters.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -83,16 +83,6 @@ Partial Class dlgSpells
         Me.lblDOY.Size = New System.Drawing.Size(66, 13)
         Me.lblDOY.TabIndex = 7
         Me.lblDOY.Text = "Day of Year:"
-        '
-        'chkConditionRain
-        '
-        Me.chkConditionRain.AutoSize = True
-        Me.chkConditionRain.Location = New System.Drawing.Point(9, 326)
-        Me.chkConditionRain.Name = "chkConditionRain"
-        Me.chkConditionRain.Size = New System.Drawing.Size(193, 17)
-        Me.chkConditionRain.TabIndex = 13
-        Me.chkConditionRain.Text = "Conditional on Rain at Start of Spell"
-        Me.chkConditionRain.UseVisualStyleBackColor = True
         '
         'lblTo
         '
@@ -138,6 +128,59 @@ Partial Class dlgSpells
         Me.grpRainParameters.Size = New System.Drawing.Size(380, 74)
         Me.grpRainParameters.TabIndex = 9
         Me.grpRainParameters.TabStop = False
+        '
+        'ucrNudTo
+        '
+        Me.ucrNudTo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudTo.Location = New System.Drawing.Point(237, 14)
+        Me.ucrNudTo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTo.Name = "ucrNudTo"
+        Me.ucrNudTo.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudTo.TabIndex = 20
+        Me.ucrNudTo.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudFrom
+        '
+        Me.ucrNudFrom.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFrom.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudFrom.Location = New System.Drawing.Point(63, 14)
+        Me.ucrNudFrom.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFrom.Name = "ucrNudFrom"
+        Me.ucrNudFrom.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudFrom.TabIndex = 19
+        Me.ucrNudFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputSpellLower
+        '
+        Me.ucrInputSpellLower.AddQuotesIfUnrecognised = True
+        Me.ucrInputSpellLower.IsMultiline = False
+        Me.ucrInputSpellLower.IsReadOnly = False
+        Me.ucrInputSpellLower.Location = New System.Drawing.Point(63, 44)
+        Me.ucrInputSpellLower.Name = "ucrInputSpellLower"
+        Me.ucrInputSpellLower.Size = New System.Drawing.Size(63, 21)
+        Me.ucrInputSpellLower.TabIndex = 17
+        '
+        'ucrInputCondition
+        '
+        Me.ucrInputCondition.AddQuotesIfUnrecognised = True
+        Me.ucrInputCondition.IsReadOnly = False
+        Me.ucrInputCondition.Location = New System.Drawing.Point(132, 44)
+        Me.ucrInputCondition.Name = "ucrInputCondition"
+        Me.ucrInputCondition.Size = New System.Drawing.Size(97, 21)
+        Me.ucrInputCondition.TabIndex = 10
+        '
+        'ucrInputSpellUpper
+        '
+        Me.ucrInputSpellUpper.AddQuotesIfUnrecognised = True
+        Me.ucrInputSpellUpper.IsMultiline = False
+        Me.ucrInputSpellUpper.IsReadOnly = False
+        Me.ucrInputSpellUpper.Location = New System.Drawing.Point(237, 44)
+        Me.ucrInputSpellUpper.Name = "ucrInputSpellUpper"
+        Me.ucrInputSpellUpper.Size = New System.Drawing.Size(63, 21)
+        Me.ucrInputSpellUpper.TabIndex = 18
         '
         'lblStation
         '
@@ -203,59 +246,6 @@ Partial Class dlgSpells
         Me.ucrReceiverDate.TabIndex = 2
         Me.ucrReceiverDate.ucrSelector = Nothing
         '
-        'ucrNudTo
-        '
-        Me.ucrNudTo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTo.Location = New System.Drawing.Point(237, 14)
-        Me.ucrNudTo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTo.Name = "ucrNudTo"
-        Me.ucrNudTo.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudTo.TabIndex = 20
-        Me.ucrNudTo.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudFrom
-        '
-        Me.ucrNudFrom.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFrom.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudFrom.Location = New System.Drawing.Point(63, 14)
-        Me.ucrNudFrom.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFrom.Name = "ucrNudFrom"
-        Me.ucrNudFrom.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudFrom.TabIndex = 19
-        Me.ucrNudFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrInputSpellLower
-        '
-        Me.ucrInputSpellLower.AddQuotesIfUnrecognised = True
-        Me.ucrInputSpellLower.IsMultiline = False
-        Me.ucrInputSpellLower.IsReadOnly = False
-        Me.ucrInputSpellLower.Location = New System.Drawing.Point(63, 44)
-        Me.ucrInputSpellLower.Name = "ucrInputSpellLower"
-        Me.ucrInputSpellLower.Size = New System.Drawing.Size(63, 21)
-        Me.ucrInputSpellLower.TabIndex = 17
-        '
-        'ucrInputCondition
-        '
-        Me.ucrInputCondition.AddQuotesIfUnrecognised = True
-        Me.ucrInputCondition.IsReadOnly = False
-        Me.ucrInputCondition.Location = New System.Drawing.Point(132, 44)
-        Me.ucrInputCondition.Name = "ucrInputCondition"
-        Me.ucrInputCondition.Size = New System.Drawing.Size(97, 21)
-        Me.ucrInputCondition.TabIndex = 10
-        '
-        'ucrInputSpellUpper
-        '
-        Me.ucrInputSpellUpper.AddQuotesIfUnrecognised = True
-        Me.ucrInputSpellUpper.IsMultiline = False
-        Me.ucrInputSpellUpper.IsReadOnly = False
-        Me.ucrInputSpellUpper.Location = New System.Drawing.Point(237, 44)
-        Me.ucrInputSpellUpper.Name = "ucrInputSpellUpper"
-        Me.ucrInputSpellUpper.Size = New System.Drawing.Size(63, 21)
-        Me.ucrInputSpellUpper.TabIndex = 18
-        '
         'ucrReceiverRainfall
         '
         Me.ucrReceiverRainfall.frmParent = Me
@@ -285,15 +275,23 @@ Partial Class dlgSpells
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 11
         '
+        'ucrChkConditional
+        '
+        Me.ucrChkConditional.Checked = False
+        Me.ucrChkConditional.Location = New System.Drawing.Point(9, 323)
+        Me.ucrChkConditional.Name = "ucrChkConditional"
+        Me.ucrChkConditional.Size = New System.Drawing.Size(193, 20)
+        Me.ucrChkConditional.TabIndex = 17
+        '
         'dlgSpells
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(414, 431)
+        Me.Controls.Add(Me.ucrChkConditional)
         Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.ucrReceiverStation)
         Me.Controls.Add(Me.ucrSaveSpells)
-        Me.Controls.Add(Me.chkConditionRain)
         Me.Controls.Add(Me.ucrReceiverDOY)
         Me.Controls.Add(Me.ucrReceiverYear)
         Me.Controls.Add(Me.lblYear)
@@ -329,7 +327,6 @@ Partial Class dlgSpells
     Friend WithEvents lblYear As Label
     Friend WithEvents lblDOY As Label
     Friend WithEvents ucrReceiverDOY As ucrReceiverSingle
-    Friend WithEvents chkConditionRain As CheckBox
     Friend WithEvents grpRainParameters As GroupBox
     Friend WithEvents ucrInputCondition As ucrInputComboBox
     Friend WithEvents lblThreshold As Label
@@ -342,4 +339,5 @@ Partial Class dlgSpells
     Friend WithEvents ucrInputSpellUpper As ucrInputTextBox
     Friend WithEvents ucrNudTo As ucrNud
     Friend WithEvents ucrNudFrom As ucrNud
+    Friend WithEvents ucrChkConditional As ucrCheck
 End Class
