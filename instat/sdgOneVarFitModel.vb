@@ -50,7 +50,7 @@ Public Class sdgOneVarFitModel
     End Sub
 
     Public Sub Estimators()
-        If dlgOneVarFitModel.rdoGeneral.Checked Then
+        If dlgOneVarFitModel.rdoGeneralCase.Checked Then
             If rdoMle.Checked Then
                 clsROneVarFitModel.AddParameter("method", Chr(34) & "mle" & Chr(34))
             ElseIf rdoMme.Checked Then
@@ -67,7 +67,7 @@ Public Class sdgOneVarFitModel
     End Sub
 
     Public Sub OptimisationMethod()
-        If dlgOneVarFitModel.rdoGeneral.Checked Then
+        If dlgOneVarFitModel.rdoGeneralCase.Checked Then
             If rdoDefault.Checked Then
                 clsROneVarFitModel.AddParameter("optim.method", Chr(34) & "default" & Chr(34))
             ElseIf rdoNelderMead.Checked Then
