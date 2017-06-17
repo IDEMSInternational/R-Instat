@@ -159,6 +159,8 @@ Public Class ucrButtons
 
         'Clear variables from global environment
         lstAssignToVariables = clsRsyntax.GetAllAssignTo(New List(Of String))
+        'Don't want to remove the Instat Object if it's been assigned
+        lstAssignToVariables.RemoveAll(Function(x) x = frmMain.clsRLink.strInstatDataObject)
         clsRemoveFunc.ClearParameters()
         If lstAssignToVariables.Count = 1 Then
             clsRemoveFunc.AddParameter("x1", lstAssignToVariables(0), bIncludeArgumentName:=False)
