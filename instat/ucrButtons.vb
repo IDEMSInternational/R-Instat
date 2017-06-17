@@ -80,17 +80,17 @@ Public Class ucrButtons
 
     Private Sub Scripts(bRun As Boolean)
         Dim strComments As String
-        Dim bIsAssigned As Boolean
-        Dim bToBeAssigned As Boolean
-        Dim strAssignTo As String
         Dim lstBeforeScripts As List(Of String)
         Dim lstAfterScripts As List(Of String)
         Dim lstBeforeCodes As List(Of RCodeStructure)
         Dim lstAfterCodes As List(Of RCodeStructure)
-        Dim lstAssignToVariables As List(Of String)
         Dim bFirstCode As Boolean = True
         Dim clsRemoveFunc As New RFunction
         Dim clsRemoveListFun As New RFunction
+        Dim lstAssignTo As New List(Of String)
+        ' list of {RCodeStructure, strAssignTo, bToBeAssigned}
+        ' these are used to reset them correctly after eunning ToScript for the code
+        Dim dctFunctionAssignToValues As New Dictionary(Of RCodeStructure, String)
 
         clsRemoveFunc.SetRCommand("rm")
         clsRemoveListFun.SetRCommand("c")
@@ -102,10 +102,9 @@ Public Class ucrButtons
         If Not bRun AndAlso strComments <> "" Then
             frmMain.AddToScriptWindow("# " & strComments & Environment.NewLine)
         End If
-        'Also need to be getting strAssignToColumn, strAssignToDataFrame etc. maybe one method to get all as a list
-        bIsAssigned = clsRsyntax.GetbIsAssigned()
-        bToBeAssigned = clsRsyntax.GetbToBeAssigned()
-        strAssignTo = clsRsyntax.GetstrAssignTo()
+
+        'Get this list before doing ToScript then no need for global variable name
+        dctFunctionAssignToValues = clsRsyntax.GetAllAssignTo(New Dictionary(Of RCodeStructure, String))
 
         'Run additional before codes
         lstBeforeScripts = clsRsyntax.GetBeforeCodesScripts()
@@ -158,15 +157,16 @@ Public Class ucrButtons
         Next
 
         'Clear variables from global environment
-        lstAssignToVariables = clsRsyntax.GetAllAssignTo(New List(Of String))
-        'Don't want to remove the Instat Object if it's been assigned
-        lstAssignToVariables.RemoveAll(Function(x) x = frmMain.clsRLink.strInstatDataObject)
         clsRemoveFunc.ClearParameters()
-        If lstAssignToVariables.Count = 1 Then
-            clsRemoveFunc.AddParameter("x1", lstAssignToVariables(0), bIncludeArgumentName:=False)
-        ElseIf lstAssignToVariables.Count > 1 Then
-            For i As Integer = 0 To lstAssignToVariables.Count - 1
-                clsRemoveListFun.AddParameter(i, Chr(34) & lstAssignToVariables(i) & Chr(34), bIncludeArgumentName:=False)
+        lstAssignTo = dctFunctionAssignToValues.Values.ToList
+        lstAssignTo.RemoveAll(Function(x) x = frmMain.clsRLink.strInstatDataObject)
+        If lstAssignTo.Count = 1 Then
+            'Don't want to remove the Instat Object if it's been assigned
+            clsRemoveFunc.AddParameter("x1", lstAssignTo(0), bIncludeArgumentName:=False)
+
+        ElseIf lstAssignTo.Count > 1 Then
+            For i As Integer = 0 To lstAssignTo.Count - 1
+                clsRemoveListFun.AddParameter(i, Chr(34) & lstAssignTo(i) & Chr(34), bIncludeArgumentName:=False)
             Next
             clsRemoveFunc.AddParameter("list", clsRFunctionParameter:=clsRemoveListFun)
         End If
@@ -175,9 +175,11 @@ Public Class ucrButtons
         Else
             frmMain.AddToScriptWindow(clsRemoveFunc.ToScript())
         End If
-        clsRsyntax.SetbIsAssigned(bIsAssigned)
-        clsRsyntax.SetbToBeAssigned(bToBeAssigned)
-        clsRsyntax.SetstrAssignTo(strAssignTo)
+        For Each clsRCode As RCodeStructure In dctFunctionAssignToValues.Keys
+            clsRCode.bToBeAssigned = True
+            clsRCode.strAssignTo = dctFunctionAssignToValues(clsRCode)
+            clsRCode.bIsAssigned = False
+        Next
     End Sub
 
     Public Sub OKEnabled(bEnabled As Boolean)

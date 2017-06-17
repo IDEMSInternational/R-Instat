@@ -52,7 +52,6 @@ Public Class RCodeStructure
     'The name this code is represented by in the R global environment
     'This is used to clear the global environment of unused variables
     'Will be cleared after running unless bClearFromGlobal = False
-    Public strGlobalVariableName As String = ""
     Public bClearFromGlobal As Boolean = False
 
     Public Event ParametersChanged()
@@ -123,7 +122,6 @@ Public Class RCodeStructure
             If Not frmMain.clsRLink.bInstatObjectExists Then
                 frmMain.clsRLink.CreateNewInstatObject()
             End If
-            strGlobalVariableName = strAssignTo
             strScript = strScript & strAssignTo & " <- " & strTemp & Environment.NewLine
             If Not strAssignToDataFrame = "" AndAlso (Not strAssignToColumn = "" OrElse bAssignToColumnWithoutNames) Then
                 clsAddColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
@@ -385,15 +383,14 @@ Public Class RCodeStructure
         Return clsTemp
     End Function
 
-    Public Function GetAllAssignTo(lstAssignTo As List(Of String)) As List(Of String)
+    Public Function GetAllAssignTo(dctFunctionAssignToValues As Dictionary(Of RCodeStructure, String)) As Dictionary(Of RCodeStructure, String)
         SortParameters()
-        If strGlobalVariableName <> "" AndAlso Not lstAssignTo.Contains(strGlobalVariableName) Then
-            lstAssignTo.Add(strGlobalVariableName)
-            strGlobalVariableName = ""
+        If bToBeAssigned AndAlso Not dctFunctionAssignToValues.ContainsKey(Me) Then
+            dctFunctionAssignToValues.Add(Me, strAssignTo)
         End If
         For Each clsTempParam As RParameter In clsParameters
-            clsTempParam.GetAllAssignTo(lstAssignTo)
+            clsTempParam.GetAllAssignTo(dctFunctionAssignToValues)
         Next
-        Return lstAssignTo
+        Return dctFunctionAssignToValues
     End Function
 End Class
