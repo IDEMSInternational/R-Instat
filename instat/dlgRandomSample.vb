@@ -46,7 +46,8 @@ Public Class dlgRandomSample
         ucrNudNumberOfSamples.SetMinMax(1, Integer.MaxValue)
         ucrSelectorRandomSamples.bUseCurrentFilter = False
         ucrChkSetSeed.SetText("Set Seed")
-        ucrChkSetSeed.AddFunctionNamesCondition(False, "set.seed")
+        ucrChkSetSeed.AddRSyntaxFunctionNamesCondition(True, {"set.seed"})
+        ucrChkSetSeed.AddRSyntaxFunctionNamesCondition(False, {"set.seed"}, False)
         ucrChkSetSeed.AddToLinkedControls(ucrNudSeed, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=5)
 
         ucrNudSeed.SetParameter(New RParameter("seed", 0))
@@ -86,6 +87,7 @@ Public Class dlgRandomSample
     Private Sub SetRCodeforControls(bReset As Boolean)
         ucrNudSeed.SetRCode(clsSetSeed, bReset)
         ucrChkSetSeed.SetRCode(clsSetSeed, bReset)
+        ucrChkSetSeed.SetRSyntax(ucrBase.clsRsyntax, bReset)
         ucrSaveRandomSamples.SetRCode(clsMultipleSamplesFunction, bReset)
         ucrNudNumberOfSamples.SetRCode(clsMultipleSamplesFunction, bReset)
     End Sub
@@ -104,12 +106,6 @@ Public Class dlgRandomSample
         SetDefaults()
         SetRCodeforControls(True)
         TestOKEnabled()
-    End Sub
-
-    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        If ucrChkSetSeed.Checked Then
-            frmMain.clsRLink.RunScript(clsSetSeed.ToScript(), strComment:="dlgRandomSample: Setting the seed for random number generator")
-        End If
     End Sub
 
     Private Sub SetNewColumName()
@@ -157,5 +153,13 @@ Public Class dlgRandomSample
 
     Private Sub ucrDistWithParameters_ParameterChanged() Handles ucrDistWithParameters.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrChkSetSeed_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSetSeed.ControlValueChanged
+        If ucrChkSetSeed.Checked Then
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsSetSeed, iPosition:=0)
+        Else
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSetSeed)
+        End If
     End Sub
 End Class
