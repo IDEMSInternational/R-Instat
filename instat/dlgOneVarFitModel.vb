@@ -51,6 +51,12 @@ Public Class dlgOneVarFitModel
         UcrReceiver.SetParameter(New RParameter("x"))
         UcrReceiver.SetParameterIsRFunction()
 
+        ucrChkConvertVariate.SetText("Convert to Variate")
+        ucrChkConvertVariate.SetParameter(New RParameter("data"))
+
+        ucrNudHyp.SetParameter(New RParameter("mu"))
+
+
         ucrSaveModel.SetPrefix("dist")
         ucrSaveModel.SetSaveTypeAsModel()
         ucrSaveModel.SetDataFrameSelector(ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
@@ -93,24 +99,54 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub SetDefaults()
+        clsROneVarFitModel = New RFunction
+        clsRLength = New RFunction
+        clsRMean = New RFunction
+        clsRTTest = New RFunction
+        clsVarTest = New RFunction
+        clsREnormTest = New RFunction
+        clsRNonSignTest = New RFunction
+        clsRWilcoxTest = New RFunction
+        clsRBinomTest = New RFunction
+        clsRPoissonTest = New RFunction
+        clsRplot = New RFunction
+        clsRfitdist = New RFunction
+        clsRStartValues = New RFunction
+        clsRBinomStart = New RFunction
+        clsRConvertVector = New RFunction
+        clsRConvertInteger = New RFunction
+        clsRConvertNumeric = New RFunction
+
+        clsFunctionOperator = New ROperator
+        clsFactorOperator = New ROperator
+
         ucrSelectorOneVarFitMod.Reset()
-        ucrSelectorOneVarFitMod.Focus()
+        ucrSaveModel.Reset()
         ucrOperator.SetName("==")
         clsROneVarFitModel.SetPackageName("fitdistrplus")
         clsROneVarFitModel.SetRCommand("fitdist")
 
-        ucrChkConvertVariate.SetText("Convert to Variate")
-        ucrChkConvertVariate.SetParameter(New RParameter("data"))
+        clsRConvertNumeric.SetPackageName("base")
+        clsRConvertNumeric.SetRCommand("as.numeric")
+        clsRConvertInteger.SetPackageName("base")
+        clsRConvertInteger.SetRCommand("as.integer")
+        clsRConvertVector.SetPackageName("base")
+        clsRConvertVector.SetRCommand("as.vector")
+        clsRStartValues.SetPackageName("base")
+        clsRStartValues.SetRCommand("mean")
+        clsRfitdist.SetPackageName("fitdistrplus")
+        clsRfitdist.SetRCommand("fitdist")
         ucrNudCI.Value = 0.95
         BinomialConditions()
-        ucrSaveModel.Reset()
+
         SetDataParameter()
         EnableOptions()
         sdgOneVarFitModDisplay.SetDefaults()
         sdgOneVarFitModel.SetDefaults()
         SetBaseFunction()
         rdoGeneralCase.Checked = True
-        clsROneVarFitModel.SetAssignTo("last_model", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_model")
+        clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertInteger)
+        clsROneVarFitModel.SetAssignTo("last_model", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model")
         UcrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModel)
         SetDistributions()
     End Sub
@@ -119,6 +155,7 @@ Public Class dlgOneVarFitModel
         ucrPnlGeneralExactCase.SetRCode(clsROneVarFitModel, bReset)
         UcrReceiver.SetRCode(clsRConvertVector, bReset)
         ucrChkConvertVariate.SetRCode(clsRConvertNumeric, bReset)
+        ucrNudHyp.SetRCode(clsRTTest, bReset)
         UcrReceiver.AddAdditionalCodeParameterPair(clsRConvertNumeric, New RParameter("x"), iAdditionalPairNo:=1)
         UcrReceiver.AddAdditionalCodeParameterPair(clsRConvertInteger, New RParameter("x"), iAdditionalPairNo:=2)
         UcrReceiver.AddAdditionalCodeParameterPair(clsRWilcoxTest, New RParameter("x"), iAdditionalPairNo:=4)
@@ -132,6 +169,7 @@ Public Class dlgOneVarFitModel
         ucrChkConvertVariate.AddAdditionalCodeParameterPair(clsROneVarFitModel, ucrChkConvertVariate.GetParameter(), iAdditionalPairNo:=1)
         ucrChkConvertVariate.AddAdditionalCodeParameterPair(clsROneVarFitModel, ucrChkConvertVariate.GetParameter(), iAdditionalPairNo:=1)
 
+        ucrNudHyp.AddAdditionalCodeParameterPair(clsVarTest, New RParameter("sigma.squared"), iAdditionalPairNo:=1)
     End Sub
 
     Private Sub SetDistributions()
@@ -167,24 +205,17 @@ Public Class dlgOneVarFitModel
                 ucrChkConvertVariate.Checked = True
             End If
             If ucrChkConvertVariate.Checked Then
-                clsRConvertNumeric.SetPackageName("base")
-                clsRConvertNumeric.SetRCommand("as.numeric")
+
                 UcrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=clsRConvertNumeric)
             Else
                 'TODO This is needed because fitdist checks is.vector on data which is FALSE when data has attributes
                 If ucrFamily.clsCurrDistribution.strNameTag = "Poisson" OrElse ucrFamily.clsCurrDistribution.strNameTag = "Geometric" Then
-                    clsRConvertInteger.SetPackageName("base")
-                    clsRConvertInteger.SetRCommand("as.integer")
-                    ' clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertInteger)
+                    clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertInteger)
                 Else
-                    clsRConvertVector.SetPackageName("base")
-                    clsRConvertVector.SetRCommand("as.vector")
-                    'clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertVector)
+                    clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertVector)
                 End If
                 If ucrFamily.clsCurrDistribution.strNameTag = "Extreme_Value" Or ucrFamily.clsCurrDistribution.strNameTag = "Binomial" Or ucrFamily.clsCurrDistribution.strNameTag = "Bernouli" Or ucrFamily.clsCurrDistribution.strNameTag = "Students_t" Or ucrFamily.clsCurrDistribution.strNameTag = "Chi_Square" Or ucrFamily.clsCurrDistribution.strNameTag = "F" Or ucrFamily.clsCurrDistribution.strNameTag = "Hypergeometric" Then
                     clsROneVarFitModel.AddParameter("start", clsRFunctionParameter:=clsRStartValues)
-                    clsRStartValues.SetPackageName("base")
-                    clsRStartValues.SetRCommand("mean")
                     ' TODO llplot() no longer works with starting values. However, the mle's will not plot without starting values for these variables
                 End If
             End If
@@ -252,7 +283,7 @@ Public Class dlgOneVarFitModel
         UcrBase.clsRsyntax.SetBaseRFunction(clsRTTest)
         clsRConvertVector.SetRCommand("as.vector")
         clsRTTest.AddParameter("x", clsRFunctionParameter:=clsRConvertVector)
-        clsRTTest.AddParameter("mu", ucrNudHyp.Value.ToString)
+        'clsRTTest.AddParameter("mu", ucrNudHyp.Value.ToString)
         clsRTTest.AddParameter("conf.level", ucrNudCI.Value.ToString)
     End Sub
 
@@ -344,8 +375,6 @@ Public Class dlgOneVarFitModel
         clsRplot.SetPackageName("graphics")
         clsRplot.SetRCommand("plot")
         clsRplot.AddParameter("x", clsRFunctionParameter:=clsRfitdist)
-        clsRfitdist.SetPackageName("fitdistrplus")
-        clsRfitdist.SetRCommand("fitdist")
         clsRfitdist.AddParameter("distr", Chr(34) & ucrFamily.clsCurrDistribution.strRName & Chr(34))
         If ucrFamily.clsCurrDistribution.strNameTag = "Poisson" Then
             clsRConvertInteger.SetPackageName("base")
@@ -357,9 +386,9 @@ Public Class dlgOneVarFitModel
             clsRfitdist.AddParameter("data", clsRFunctionParameter:=clsRConvertVector)
         End If
         If ucrFamily.clsCurrDistribution.strNameTag = "Bernouli" Then
-            clsRfitdist.AddParameter("start", clsRFunctionParameter:=clsRBinomStart)
             clsRBinomStart.SetPackageName("base")
             clsRBinomStart.SetRCommand("mean")
+            clsRfitdist.AddParameter("start", clsRFunctionParameter:=clsRBinomStart)
         End If
     End Sub
 
