@@ -228,29 +228,23 @@ Public Class RSyntax
         Return lstAfterCodes
     End Function
 
-    Public Function GetAllAssignTo(lstAssignTo As List(Of String)) As List(Of String)
+    Public Function GetAllAssignTo(dctFunctionAssignToValues As Dictionary(Of RCodeStructure, String)) As Dictionary(Of RCodeStructure, String)
         If bUseBaseFunction Then
-            If clsBaseFunction.strGlobalVariableName <> "" AndAlso Not lstAssignTo.Contains(clsBaseFunction.strGlobalVariableName) Then
-                clsBaseFunction.GetAllAssignTo(lstAssignTo)
-            End If
+            clsBaseFunction.GetAllAssignTo(dctFunctionAssignToValues)
         ElseIf bUseBaseOperator Then
-            If clsBaseOperator.strGlobalVariableName <> "" AndAlso Not lstAssignTo.Contains(clsBaseOperator.strGlobalVariableName) Then
-                clsBaseOperator.GetAllAssignTo(lstAssignTo)
-            End If
+            clsBaseOperator.GetAllAssignTo(dctFunctionAssignToValues)
         ElseIf bUseCommandString Then
-            If clsBaseCommandString.strGlobalVariableName <> "" AndAlso Not lstAssignTo.Contains(clsBaseCommandString.strGlobalVariableName) Then
-                clsBaseCommandString.GetAllAssignTo(lstAssignTo)
-            End If
+            clsBaseCommandString.GetAllAssignTo(dctFunctionAssignToValues)
         End If
         lstBeforeCodes.Sort(AddressOf CompareCodePositions)
         For Each clsTempCode As RCodeStructure In lstBeforeCodes
-            clsTempCode.GetAllAssignTo(lstAssignTo)
+            clsTempCode.GetAllAssignTo(dctFunctionAssignToValues)
         Next
         lstAfterCodes.Sort(AddressOf CompareCodePositions)
         For Each clsTempCode As RCodeStructure In lstAfterCodes
-            clsTempCode.GetAllAssignTo(lstAssignTo)
+            clsTempCode.GetAllAssignTo(dctFunctionAssignToValues)
         Next
-        Return lstAssignTo
+        Return dctFunctionAssignToValues
     End Function
 
     Public Sub SortParameters()
