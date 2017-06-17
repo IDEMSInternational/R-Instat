@@ -16,12 +16,14 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+
 Public Class dlgOneVarCompareModels
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
-    Private clsGofStat, clsReceiver, clsRAsDataFrame, clsRcdfcompFunction, clsRdenscompFunction, clsRqqcompFunction, clsRppcompFunction As New RFunction
-    Private clsOperatorforTable, clsOperatorForBreaks As New ROperator
+    Private clsGofStat, clsReceiver, clsRAsDataFrame, clsCdfcompFunction, clsDenscompFunction, clsQqcompFunction, clsPpcompFunction As New RFunction
+    Private clsChisqtableOperator, clsChisqbreaksOperator As New ROperator
+
     Private Sub dlgOneVarCompareModels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -48,32 +50,45 @@ Public Class dlgOneVarCompareModels
         ucrReceiverCompareModels.SetParameterIsRFunction()
         ucrReceiverCompareModels.Selector = ucrSelectorOneVarCompModels
         ucrReceiverCompareModels.SetMeAsReceiver()
-
     End Sub
 
     Private Sub SetDefaults()
         clsGofStat = New RFunction
-        clsRppcompFunction = New RFunction
+        clsPpcompFunction = New RFunction
         clsReceiver = New RFunction
-        clsRdenscompFunction = New RFunction
-        clsRqqcompFunction = New RFunction
-        clsRqqcompFunction = New RFunction
-        clsOperatorForBreaks = New ROperator
-        clsOperatorforTable = New ROperator
+        clsDenscompFunction = New RFunction
+        clsQqcompFunction = New RFunction
+        clsQqcompFunction = New RFunction
+        clsChisqbreaksOperator = New ROperator
+        clsChisqtableOperator = New ROperator
 
         ucrSelectorOneVarCompModels.Reset()
 
         clsGofStat.SetPackageName("fitdistrplus")
         clsGofStat.SetRCommand("gofstat")
-        clsRcdfcompFunction.SetPackageName("fitdistrplus")
-        clsRcdfcompFunction.SetRCommand("cdfcomp")
 
-        clsOperatorforTable.SetOperation("$")
-        clsOperatorforTable.AddParameter(clsRFunctionParameter:=clsGofStat, iPosition:=0)
-        clsOperatorforTable.AddParameter(strParameterValue:="chisqtable")
+        clsCdfcompFunction.SetPackageName("fitdistrplus")
+        clsCdfcompFunction.SetRCommand("cdfcomp")
+
+        clsPpcompFunction.SetPackageName("fitdistrplus")
+        clsPpcompFunction.SetRCommand("ppcomp")
+
+        clsQqcompFunction.SetPackageName("fitdistrplus")
+        clsQqcompFunction.SetRCommand("qqcomp")
+
+        clsDenscompFunction.SetPackageName("fitdistrplus")
+        clsDenscompFunction.SetRCommand("denscomp")
+
+        clsChisqtableOperator.SetOperation("$")
+        clsChisqtableOperator.AddParameter(clsRFunctionParameter:=clsGofStat, iPosition:=0)
+        clsChisqtableOperator.AddParameter(strParameterValue:="chisqtable", iPosition:=1)
+
+        clsChisqbreaksOperator.SetOperation("$")
+        clsChisqbreaksOperator.AddParameter(clsRFunctionParameter:=clsGofStat, iPosition:=0)
+        clsChisqbreaksOperator.AddParameter(strParameterValue:="chisqbreaks", iPosition:=1)
 
         clsRAsDataFrame.SetRCommand("as.data.frame")
-        clsRAsDataFrame.AddParameter("x", clsROperatorParameter:=clsOperatorforTable)
+        clsRAsDataFrame.AddParameter("x", clsROperatorParameter:=clsChisqtableOperator)
 
         clsRAsDataFrame.SetAssignTo(ucrSelectorOneVarCompModels.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_ChiSquare", strTempDataframe:=ucrSelectorOneVarCompModels.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
 
@@ -87,7 +102,10 @@ Public Class dlgOneVarCompareModels
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverCompareModels.SetRCode(clsGofStat, bReset)
-        'SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrReceiverCompareModels.AddAdditionalCodeParameterPair(clsCdfcompFunction, New RParameter("ft", 0), iAdditionalPairNo:=1)
+        ucrReceiverCompareModels.AddAdditionalCodeParameterPair(clsPpcompFunction, New RParameter("ft", 0), iAdditionalPairNo:=2)
+        ucrReceiverCompareModels.AddAdditionalCodeParameterPair(clsQqcompFunction, New RParameter("ft", 0), iAdditionalPairNo:=3)
+        ucrReceiverCompareModels.AddAdditionalCodeParameterPair(clsDenscompFunction, New RParameter("ft", 0), iAdditionalPairNo:=4)
     End Sub
 
     Public Sub TestOKEnabled()
@@ -104,10 +122,6 @@ Public Class dlgOneVarCompareModels
         TestOKEnabled()
     End Sub
 
-    'Private Sub ReopenDialog()
-    '    sdgOneVarCompareModels.Reopen()
-    'End Sub
-
     Private Sub ucrSelectorOneVarCompModels_DataFrameChanged() Handles ucrSelectorOneVarCompModels.DataFrameChanged
         '    sdgOneVarCompareModels.DisplayChiSquare()
     End Sub
@@ -123,17 +137,13 @@ Public Class dlgOneVarCompareModels
     End Sub
 
     Private Sub cmdDisplayObjects_Click(sender As Object, e As EventArgs) Handles cmdDisplayObjects.Click
-        sdgOneVarCompareModels.SetRCode(clsGofStat, clsReceiver, clsRdenscompFunction, clsRcdfcompFunction, clsRqqcompFunction, clsRppcompFunction, clsRAsDataFrame, clsOperatorforTable, clsOperatorForBreaks, bResetSubdialog)
+        sdgOneVarCompareModels.SetRCode(ucrBase.clsRsyntax, clsGofStat, clsDenscompFunction, clsCdfcompFunction, clsQqcompFunction, clsPpcompFunction, clsRAsDataFrame, clsChisqtableOperator, clsChisqbreaksOperator, bResetSubdialog)
         bResetSubdialog = False
         sdgOneVarCompareModels.ShowDialog()
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        sdgOneVarCompareModels.CreateGraphs()
-    End Sub
-
-    Private Sub ucrReceiverCompare_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverCompareModels.ControlValueChanged
-        clsReceiver = ucrReceiverCompareModels.GetVariables()
+        'sdgOneVarCompareModels.CreateGraphs()
     End Sub
 End Class
 
