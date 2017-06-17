@@ -132,4 +132,11 @@ Public Class RParameter
         End If
         Return clsTempRParam
     End Function
+
+    Public Function GetAllAssignTo(dctAssignToValues As Dictionary(Of RCodeStructure, String)) As Dictionary(Of RCodeStructure, String)
+        If bIsFunction OrElse bIsOperator Then
+            clsArgumentCodeStructure.GetAllAssignTo(dctAssignToValues)
+        End If
+        Return dctAssignToValues
+    End Function
 End Class
