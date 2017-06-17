@@ -46,8 +46,8 @@ Public Class dlgRandomSample
         ucrNudNumberOfSamples.SetMinMax(1, Integer.MaxValue)
         ucrSelectorRandomSamples.bUseCurrentFilter = False
         ucrChkSetSeed.SetText("Set Seed")
-        ucrChkSetSeed.AddRSyntaxFunctionNamesCondition(True, {"set.seed"})
-        ucrChkSetSeed.AddRSyntaxFunctionNamesCondition(False, {"set.seed"}, False)
+        ucrChkSetSeed.AddRSyntaxContainsFunctionNamesCondition(True, {"set.seed"})
+        ucrChkSetSeed.AddRSyntaxContainsFunctionNamesCondition(False, {"set.seed"}, False)
         ucrChkSetSeed.AddToLinkedControls(ucrNudSeed, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=5)
 
         ucrNudSeed.SetParameter(New RParameter("seed", 0))

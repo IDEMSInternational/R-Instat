@@ -485,7 +485,7 @@ Public Class ucrCore
         AddCondition(objControlState, clsTempCond)
     End Sub
 
-    Public Sub AddRSyntaxFunctionNamesCondition(objControlState As Object, strFunctionNames As String(), Optional bNewIsPositive As Boolean = True)
+    Public Sub AddRSyntaxContainsFunctionNamesCondition(objControlState As Object, strFunctionNames As String(), Optional bNewIsPositive As Boolean = True)
         Dim clsTempCond As New Condition
 
         clsTempCond.SetRSyntaxFunctionNamesMultiple(strFunctionNames.ToList(), bNewIsPositive:=bNewIsPositive)
