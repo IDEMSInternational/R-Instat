@@ -385,19 +385,71 @@ Public Class RSyntax
         Return lstAfterCodes.Contains(clsNewRCode)
     End Function
 
-    Public Sub AddToBeforeCodes(clsNewRCode As RCodeStructure, Optional iPos As Integer = -1)
+    Public Function BeforeCodesContain(strFunctionName As String) As Boolean
+        Dim clsTempFunc As RFunction
+        For Each clsRCode As RCodeStructure In lstBeforeCodes
+            clsTempFunc = TryCast(clsRCode, RFunction)
+            If clsTempFunc IsNot Nothing AndAlso clsTempFunc.strRCommand = strFunctionName Then
+                Return True
+            End If
+        Next
+        Return False
+    End Function
+
+    Public Function AfterCodesContain(strFunctionName As String) As Boolean
+        Dim clsTempFunc As RFunction
+        For Each clsRCode As RCodeStructure In lstBeforeCodes
+            clsTempFunc = TryCast(clsRCode, RFunction)
+            If clsTempFunc IsNot Nothing AndAlso clsTempFunc.strRCommand = strFunctionName Then
+                Return True
+            End If
+        Next
+        Return False
+    End Function
+
+    Public Function ContainsCode(clsRCode As RCodeStructure) As Boolean
+        Return (clsBaseFunction IsNot Nothing AndAlso clsBaseFunction.Equals(clsRCode)) OrElse (clsBaseOperator.Equals(clsRCode) AndAlso clsBaseOperator.Equals(clsRCode)) OrElse BeforeCodesContain(clsRCode) OrElse AfterCodesContain(clsRCode)
+    End Function
+
+    Public Function ContainsFunctionName(strFunctionName As String) As Boolean
+        Return (clsBaseFunction IsNot Nothing AndAlso clsBaseFunction.strRCommand = strFunctionName) OrElse BeforeCodesContain(strFunctionName) OrElse AfterCodesContain(strFunctionName)
+    End Function
+
+    Public Function GetFunctionNames() As List(Of String)
+        Dim lstNames As New List(Of String)
+        Dim clsTempFunc As RFunction
+
+        If clsBaseFunction IsNot Nothing Then
+            lstNames.Add(clsBaseFunction.strRCommand)
+        End If
+        For Each clsRCode As RCodeStructure In lstBeforeCodes
+            clsTempFunc = TryCast(clsRCode, RFunction)
+            If clsTempFunc IsNot Nothing Then
+                lstNames.Add(clsTempFunc.strRCommand)
+            End If
+        Next
+        For Each clsRCode As RCodeStructure In lstAfterCodes
+            clsTempFunc = TryCast(clsRCode, RFunction)
+            If clsTempFunc IsNot Nothing Then
+                lstNames.Add(clsTempFunc.strRCommand)
+            End If
+        Next
+        Return lstNames
+    End Function
+
+    Public Sub AddToBeforeCodes(clsNewRCode As RCodeStructure, Optional iPosition As Integer = -1)
         If Not BeforeCodesContain(clsNewRCode) Then
             lstBeforeCodes.Add(clsNewRCode)
         End If
-        lstBeforeCodes.Find(Function(x) x.Equals(clsNewRCode)).iPosition = iPos
+        lstBeforeCodes.Find(Function(x) x.Equals(clsNewRCode)).iPosition = iPosition
     End Sub
 
-    Public Sub AddToAfterCodes(clsNewRCode As RCodeStructure, Optional iPos As Integer = -1)
+    Public Sub AddToAfterCodes(clsNewRCode As RCodeStructure, Optional iPosition As Integer = -1)
         If Not AfterCodesContain(clsNewRCode) Then
             lstAfterCodes.Add(clsNewRCode)
-            clsNewRCode.iPosition = iPos
+            clsNewRCode.iPosition = iPosition
         Else
-            lstAfterCodes.Find(Function(x) x.Equals(clsNewRCode)).iPosition = iPos
+            lstAfterCodes.Find(Function(x) x.Equals(clsNewRCode)).iPosition = iPosition
         End If
     End Sub
 
