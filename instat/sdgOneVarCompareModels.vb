@@ -1,5 +1,4 @@
-
-﻿' Instat-R
+' Instat-R
 ' Copyright (C) 2015
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -14,14 +13,15 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Imports instat
 Imports instat.Translations
 
 Public Class sdgOneVarCompareModels
     Private bControlsInitialised As Boolean = False
-    Private clsRcdfcompFunction, clsRdenscompFunction, clsRqqcompFunction, clsRppcompFunction, clsListFunction, clsRAsDataFrame, clsModel, clsRGofStat, clsRGofStat2, clsRReceiver, clsRsyntax, clsRPlotFunction, clsOperation As New RFunction
+    Private clsCdfcompFunction, clsDenscompFunction, clsQqcompFunction, clsPpcompFunction, clsListFunction, clsRAsDataFrame, clsModel, clsRGofStat, clsRPlotFunction, clsOperation As New RFunction
     Private clsOperatorforTable, clsOperatorForBreaks As New ROperator
-    Private WithEvents ucrRecs As ucrReceiver
-    Public bfirstload As Boolean = True
+    Private clsRSyntax As RSyntax
 
     Private Sub sdgOneVarCompareModels(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -29,23 +29,33 @@ Public Class sdgOneVarCompareModels
 
     Public Sub InitialiseControls()
 
+        InitialiseTabs()
+
         'ucrInputChiSquareBreaks
         ucrChkInputChiSquareBreakpoints.SetText("Input Chi-Square Breakpoints")
 
-        'ucrChkPlots
-        ucrChkCDF.AddFunctionNamesCondition(True, "cdfcomp")
+        ucrChkCDF.AddRSyntaxContainsFunctionNamesCondition(True, {"cdfcomp"})
+        ucrChkCDF.AddRSyntaxContainsFunctionNamesCondition(False, {"cdfcomp"}, False)
         ucrChkCDF.SetText("CDF")
 
         ucrChkDensity.SetText("Density")
+        ucrChkDensity.AddRSyntaxContainsFunctionNamesCondition(True, {"denscomp"})
+        ucrChkDensity.AddRSyntaxContainsFunctionNamesCondition(False, {"denscomp"}, False)
+
         ucrChkPP.SetText("PP")
+        ucrChkPP.AddRSyntaxContainsFunctionNamesCondition(True, {"ppcomp"})
+        ucrChkPP.AddRSyntaxContainsFunctionNamesCondition(False, {"ppcomp"}, False)
+
         ucrChkQQ.SetText("QQ")
-        InitialiseTabs()
+        ucrChkQQ.AddRSyntaxContainsFunctionNamesCondition(True, {"qqcomp"})
+        ucrChkQQ.AddRSyntaxContainsFunctionNamesCondition(False, {"qqcomp"}, False)
+
         'ucrSaveGOF
         ucrSaveGOF.SetPrefix("GOF")
-        ' ucrSaveGOF.SetSaveTypeAsModel() ' or graph?
         ucrSaveGOF.SetCheckBoxText("Save Fit")
         ucrSaveGOF.SetIsComboBox()
         ucrSaveGOF.SetAssignToIfUncheckedValue("last_model")
+        ' ucrSaveGOF.SetSaveTypeAsModel() ' or graph?
 
         'ucrSaveDisplayChi
         ' ucrSaveDisplayChi.SetPrefix("ChiSquare")
@@ -55,38 +65,41 @@ Public Class sdgOneVarCompareModels
         ucrSaveDisplayChi.SetAssignToIfUncheckedValue("last_DataFrame")
 
         'ucrSavePlot
-        ucrSavePlots.Enabled = False 'for now
+        ucrSavePlots.Visible = False 'hidden as would need to be able to save up to four graphs
         ucrSavePlots.SetPrefix("plots")
         ucrSavePlots.SetSaveTypeAsModel()
         ucrSavePlots.SetCheckBoxText("Save Plot")
         ucrSavePlots.SetIsComboBox()
         ucrSavePlots.SetAssignToIfUncheckedValue("last_model")
+
+        bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewRGofStat As RFunction, clsNewReceiver As RFunction, clsNewRdenscompFunction As RFunction, clsNewRcdfcompFunction As RFunction, clsNewRqqcompFunction As RFunction, clsNewRppcompFunction As RFunction, clsNewclsRAsDataFrame As RFunction, Optional clsNewOperatorforTable As ROperator = Nothing, Optional clsNewOperatorForBreaks As ROperator = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewRGofStat As RFunction, clsNewDenscompFunction As RFunction, clsNewCdfcompFunction As RFunction, clsNewQqcompFunction As RFunction, clsNewPpcompFunction As RFunction, clsNewclsRAsDataFrame As RFunction, Optional clsNewOperatorforTable As ROperator = Nothing, Optional clsNewOperatorForBreaks As ROperator = Nothing, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
-
-        clsRGofStat = clsNewRGofStat.Clone
-        clsRGofStat2 = clsNewRGofStat.Clone
-        clsRReceiver = clsNewReceiver
+        clsRSyntax = clsNewRSyntax
+        clsRGofStat = clsNewRGofStat
         clsOperatorforTable = clsNewOperatorforTable
         clsRAsDataFrame = clsNewclsRAsDataFrame
-        '  clsRPlotFunction = clsNewRPlotFunction
-        clsRdenscompFunction = clsNewRdenscompFunction
-        clsRcdfcompFunction = clsNewRcdfcompFunction
-        clsRqqcompFunction = clsNewRqqcompFunction
-        clsRppcompFunction = clsNewRppcompFunction
+        clsDenscompFunction = clsNewDenscompFunction
+        clsCdfcompFunction = clsNewCdfcompFunction
+        clsQqcompFunction = clsNewQqcompFunction
+        clsPpcompFunction = clsNewPpcompFunction
         clsOperatorForBreaks = clsNewOperatorForBreaks
 
         'Setting Rcode for the sub dialog
         ucrSaveGOF.SetRCode(clsRGofStat, bReset)
-        ucrChkCDF.SetRCode(clsRcdfcompFunction, bReset)
-        ucrChkDensity.SetRCode(clsRdenscompFunction, bReset)
+        ucrChkCDF.SetRSyntax(clsRSyntax, bReset)
+
+        ucrChkDensity.SetRSyntax(clsRSyntax, bReset)
+        ucrChkPP.SetRSyntax(clsRSyntax, bReset)
+        ucrChkQQ.SetRSyntax(clsRSyntax, bReset)
+        ucrChkCDF.SetRSyntax(clsRSyntax, bReset)
+
         ucrChkInputChiSquareBreakpoints.SetRCode(clsOperatorForBreaks, bReset)
-        ucrChkPP.SetRCode(clsRppcompFunction, bReset)
-        ucrChkQQ.SetRCode(clsRqqcompFunction, bReset)
+
         ucrSaveDisplayChi.SetRCode(clsRAsDataFrame, bReset)
 
         If bReset Then
@@ -97,35 +110,35 @@ Public Class sdgOneVarCompareModels
     Public Sub CreateGraphs()
         Dim strTemp As String = ""
 
-        If ucrChkCDF.Checked Then
-            clsRcdfcompFunction.SetPackageName("fitdistrplus")
-            clsRcdfcompFunction.SetRCommand("cdfcomp")
-            clsRcdfcompFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
-            frmMain.clsRLink.RunScript(clsRcdfcompFunction.ToScript(), 3)
-        End If
-        If ucrChkPP.Checked Then
-            clsRppcompFunction.SetPackageName("fitdistrplus")
-            clsRppcompFunction.SetRCommand("ppcomp")
-            clsRppcompFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
-            frmMain.clsRLink.RunScript(clsRppcompFunction.ToScript(), 3)
+        'If ucrChkCDF.Checked Then
+        '    clsCdfcompFunction.SetPackageName("fitdistrplus")
+        '    clsCdfcompFunction.SetRCommand("cdfcomp")
+        '    clsCdfcompFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
+        '    frmMain.clsRLink.RunScript(clsCdfcompFunction.ToScript(), 3)
+        'End If
+        'If ucrChkPP.Checked Then
+        '    clsPpcompFunction.SetPackageName("fitdistrplus")
+        '    clsPpcompFunction.SetRCommand("ppcomp")
+        '    clsPpcompFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
+        '    frmMain.clsRLink.RunScript(clsPpcompFunction.ToScript(), 3)
 
-        End If
-        If ucrChkQQ.Checked Then
-            clsRqqcompFunction.SetPackageName("fitdistrplus")
-            clsRqqcompFunction.SetRCommand("qqcomp")
-            clsRqqcompFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
-            frmMain.clsRLink.RunScript(clsRqqcompFunction.ToScript(), 3)
-        End If
-        If ucrChkDensity.Checked Then
-            clsRdenscompFunction.SetPackageName("fitdistrplus")
-            clsRdenscompFunction.SetRCommand("denscomp")
-            clsRdenscompFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
-            frmMain.clsRLink.RunScript(clsRdenscompFunction.ToScript(), 3)
-        End If
+        'End If
+        'If ucrChkQQ.Checked Then
+        '    clsQqcompFunction.SetPackageName("fitdistrplus")
+        '    clsQqcompFunction.SetRCommand("qqcomp")
+        '    clsQqcompFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
+        '    frmMain.clsRLink.RunScript(clsQqcompFunction.ToScript(), 3)
+        'End If
+        'If ucrChkDensity.Checked Then
+        '    clsDenscompFunction.SetPackageName("fitdistrplus")
+        '    clsDenscompFunction.SetRCommand("denscomp")
+        '    clsDenscompFunction.AddParameter("ft", clsRFunctionParameter:=clsRReceiver)
+        '    frmMain.clsRLink.RunScript(clsDenscompFunction.ToScript(), 3)
+        'End If
 
         If ucrSaveDisplayChi.IsComplete Then
             clsOperatorforTable.SetOperation("$")
-            clsOperatorforTable.AddParameter(clsRFunctionParameter:=clsRGofStat2, iPosition:=0)
+            clsOperatorforTable.AddParameter(clsRFunctionParameter:=clsRGofStat, iPosition:=0)
             clsOperatorforTable.AddParameter(strParameterValue:="chisqtable")
 
             frmMain.clsRLink.RunScript(clsOperatorforTable.ToScript(), 0)
@@ -148,6 +161,37 @@ Public Class sdgOneVarCompareModels
         tbpOneVarCompareModels.SelectedIndex = 0
     End Sub
 
+    Private Sub ucrChkCDF_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCDF.ControlValueChanged
+        If ucrChkCDF.Checked Then
+            clsRSyntax.AddToAfterCodes(clsCdfcompFunction, iPosition:=0)
+        Else
+            clsRSyntax.RemoveFromAfterCodes(clsCdfcompFunction)
+        End If
+    End Sub
+
+    Private Sub ucrChkPP_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPP.ControlValueChanged
+        If ucrChkPP.Checked Then
+            clsRSyntax.AddToAfterCodes(clsPpcompFunction, iPosition:=1)
+        Else
+            clsRSyntax.RemoveFromAfterCodes(clsPpcompFunction)
+        End If
+    End Sub
+
+    Private Sub ucrChkQQ_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkQQ.ControlValueChanged
+        If ucrChkQQ.Checked Then
+            clsRSyntax.AddToAfterCodes(clsQqcompFunction, iPosition:=2)
+        Else
+            clsRSyntax.RemoveFromAfterCodes(clsQqcompFunction)
+        End If
+    End Sub
+
+    Private Sub ucrChkDensity_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDensity.ControlValueChanged
+        If ucrChkDensity.Checked Then
+            clsRSyntax.AddToAfterCodes(clsDenscompFunction, iPosition:=3)
+        Else
+            clsRSyntax.RemoveFromAfterCodes(clsDenscompFunction)
+        End If
+    End Sub
 End Class
 
 
