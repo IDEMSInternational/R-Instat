@@ -48,13 +48,9 @@ Public Class ucrButtons
     Public Event ClickReset(sender As Object, e As EventArgs)
 
     Private Sub cmdOk_Click(sender As Object, e As EventArgs) Handles cmdOk.Click
-        Dim strComments As String = ""
-        Dim bIsAssigned As Boolean
-        Dim bToBeAssigned As Boolean
-        Dim strAssignTo As String
         Dim lstCurrentEnabled As New List(Of Boolean)
         Dim ctrTempControl As Control
-        Dim i As Integer
+        Dim j As Integer
 
         For Each ctrTempControl In ParentForm.Controls
             lstCurrentEnabled.Add(ctrTempControl.Enabled)
@@ -63,24 +59,9 @@ Public Class ucrButtons
         ParentForm.Cursor = Cursors.WaitCursor
 
         RaiseEvent BeforeClickOk(sender, e)
-
-        If chkComment.Checked Then
-            strComments = txtComment.Text
-        End If
-        bIsAssigned = clsRsyntax.GetbIsAssigned()
-        bToBeAssigned = clsRsyntax.GetbToBeAssigned()
-        strAssignTo = clsRsyntax.GetstrAssignTo()
-        'Also need to be getting strAssignToColumn, strAssignToDataFrame etc. maybe one method to get all as a list
-        frmMain.clsRLink.RunScript(clsRsyntax.GetScript(), clsRsyntax.iCallType, strComment:=strComments)
-
-        'This clears the script after it has been run, but leave the function and parameters in the base function
-        'so that it can be run exactly the same when reopened.
-        clsRsyntax.strScript = ""
-
+        Scripts(bRun:=True)
         RaiseEvent ClickOk(sender, e)
-        clsRsyntax.SetbIsAssigned(bIsAssigned)
-        clsRsyntax.SetbToBeAssigned(bToBeAssigned)
-        clsRsyntax.SetstrAssignTo(strAssignTo)
+
         'Need to be resetting other AssignTo values as well, maybe through single method
 
         'Warning: these reinitializing processes of the RSyntax parameters should probably be integrated at the end of GetScript. 
@@ -89,13 +70,116 @@ Public Class ucrButtons
         'In the process, we want the RSyntax parameters to be set as at the end of GetScript. Hence the reset needs to come after.
         'Eventually, all this should be more neatly incorporated in the RSyntax machinery...
         ParentForm.Hide()
-        i = 0
+        j = 0
         For Each ctrTempControl In ParentForm.Controls
-            ctrTempControl.Enabled = lstCurrentEnabled(i)
-            i = i + 1
+            ctrTempControl.Enabled = lstCurrentEnabled(j)
+            j = j + 1
         Next
         ParentForm.Cursor = Cursors.Default
+    End Sub
 
+    Private Sub Scripts(bRun As Boolean)
+        Dim strComments As String
+        Dim lstBeforeScripts As List(Of String)
+        Dim lstAfterScripts As List(Of String)
+        Dim lstBeforeCodes As List(Of RCodeStructure)
+        Dim lstAfterCodes As List(Of RCodeStructure)
+        Dim bFirstCode As Boolean = True
+        Dim clsRemoveFunc As New RFunction
+        Dim clsRemoveListFun As New RFunction
+        Dim lstAssignTo As New List(Of String)
+        ' list of {RCodeStructure, strAssignTo, bToBeAssigned}
+        ' these are used to reset them correctly after eunning ToScript for the code
+        Dim dctFunctionAssignToValues As New Dictionary(Of RCodeStructure, String)
+
+        clsRemoveFunc.SetRCommand("rm")
+        clsRemoveListFun.SetRCommand("c")
+        If chkComment.Checked Then
+            strComments = txtComment.Text
+        Else
+            strComments = ""
+        End If
+        If Not bRun AndAlso strComments <> "" Then
+            frmMain.AddToScriptWindow("# " & strComments & Environment.NewLine)
+        End If
+
+        'Get this list before doing ToScript then no need for global variable name
+        dctFunctionAssignToValues = clsRsyntax.GetAllAssignTo(New Dictionary(Of RCodeStructure, String))
+
+        'Run additional before codes
+        lstBeforeScripts = clsRsyntax.GetBeforeCodesScripts()
+        lstBeforeCodes = clsRsyntax.GetBeforeCodes()
+        For i As Integer = 0 To clsRsyntax.lstBeforeCodes.Count - 1
+            If bFirstCode Then
+                strComment = strComments
+                bFirstCode = False
+            Else
+                strComment = ""
+            End If
+            If bRun Then
+                frmMain.clsRLink.RunScript(lstBeforeScripts(i), iCallType:=lstBeforeCodes(i).iCallType, strComment:=strComment)
+            Else
+                frmMain.AddToScriptWindow(lstBeforeScripts(i))
+            End If
+        Next
+
+        'Run base code from RSyntax
+        If bRun Then
+            If bFirstCode Then
+                frmMain.clsRLink.RunScript(clsRsyntax.GetScript(), clsRsyntax.iCallType, strComment:=strComments)
+                bFirstCode = False
+            Else
+                frmMain.clsRLink.RunScript(clsRsyntax.GetScript(), clsRsyntax.iCallType, strComment:="")
+            End If
+        Else
+            frmMain.AddToScriptWindow(clsRsyntax.GetScript())
+        End If
+
+        'This clears the script after it has been run, but leave the function and parameters in the base function
+        'so that it can be run exactly the same when reopened.
+        clsRsyntax.strScript = ""
+
+        'Run additional after codes
+        lstAfterScripts = clsRsyntax.GetAfterCodesScripts()
+        lstAfterCodes = clsRsyntax.GetAfterCodes()
+        For i As Integer = 0 To lstAfterCodes.Count - 1
+            If bRun Then
+                If bFirstCode Then
+                    strComment = strComments
+                    bFirstCode = False
+                Else
+                    strComment = ""
+                End If
+                frmMain.clsRLink.RunScript(lstAfterScripts(i), iCallType:=lstAfterCodes(i).iCallType, strComment:=strComment)
+            Else
+                frmMain.AddToScriptWindow(lstAfterScripts(i))
+            End If
+        Next
+
+        'Clear variables from global environment
+        clsRemoveFunc.ClearParameters()
+        lstAssignTo = dctFunctionAssignToValues.Values.ToList
+        lstAssignTo.RemoveAll(Function(x) x = frmMain.clsRLink.strInstatDataObject)
+        If lstAssignTo.Count = 1 Then
+            'Don't want to remove the Instat Object if it's been assigned
+            clsRemoveFunc.AddParameter("x1", lstAssignTo(0), bIncludeArgumentName:=False)
+
+        ElseIf lstAssignTo.Count > 1 Then
+            For i As Integer = 0 To lstAssignTo.Count - 1
+                clsRemoveListFun.AddParameter(i, Chr(34) & lstAssignTo(i) & Chr(34), bIncludeArgumentName:=False)
+            Next
+            clsRemoveFunc.AddParameter("list", clsRFunctionParameter:=clsRemoveListFun)
+        End If
+        If bRun Then
+            frmMain.clsRLink.RunScript(clsRemoveFunc.ToScript(), iCallType:=0)
+        Else
+            frmMain.AddToScriptWindow(clsRemoveFunc.ToScript())
+        End If
+        For Each clsRCode As RCodeStructure In dctFunctionAssignToValues.Keys
+            clsRCode.bToBeAssigned = True
+            clsRCode.strAssignTo = dctFunctionAssignToValues(clsRCode)
+            clsRCode.bIsAssigned = False
+        Next
     End Sub
 
     Public Sub OKEnabled(bEnabled As Boolean)
@@ -129,8 +213,7 @@ Public Class ucrButtons
     End Sub
 
     Private Sub cmdPaste_Click(sender As Object, e As EventArgs) Handles cmdPaste.Click
-        'here we getscript but we don't reinitialise the AssignTo etc. for when pressing OK button ? ...
-        frmMain.AddToScriptWindow("# " & txtComment.Text & vbCrLf & clsRsyntax.GetScript())
+        Scripts(bRun:=False)
     End Sub
 
     Private Sub chkComment_CheckedChanged(sender As Object, e As EventArgs) Handles chkComment.CheckedChanged
@@ -146,25 +229,10 @@ Public Class ucrButtons
     End Sub
 
     Private Sub HelpContent()
-        ' (1) Use HelpNDoc's Help Context number. Not dependent on HelpNDoc.
         If iHelpTopicID > 0 Then
             Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, iHelpTopicID.ToString())
         Else
             Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TableOfContents)
-        End If
-
-        ' (2) Use HelpNDoc's Help ID. Dependent on how HelpNDoc complies .htm files using the Help ID
-        'Help.ShowHelp(Me, strHelpFilePath, HelpNavigator.Topic, "Maths.htm")
-
-        ' (3) Use constants or enums automatically generated by HelpNDoc (but needing manual
-        '     covertion from .bas) to refer to the Help Context numbers.
-        'Help.ShowHelp(Me, strHelpFilePath, HelpNavigator.TopicId, mHelpConstants.HELP_Maths.ToString)
-    End Sub
-    Private Sub chkComment_KeyPress(sender As Object, e As KeyPressEventArgs) Handles chkComment.KeyPress
-        If e.KeyChar = vbCr And chkComment.Checked = True Then
-            chkComment.Checked = False
-        ElseIf e.KeyChar = vbCr And chkComment.Checked = False Then
-            chkComment.Checked = True
         End If
     End Sub
 End Class
