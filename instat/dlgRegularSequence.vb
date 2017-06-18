@@ -35,17 +35,6 @@ Public Class dlgRegularSequence
         bReset = False
     End Sub
 
-    Private Sub SetRCodeForControls(bReset As Boolean)
-        bUpdateBy = False
-        ucrNewColumnName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrPnlSequenceType.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrInputFrom.SetRCode(clsSeqFunction, bReset)
-        ucrInputTo.SetRCode(clsSeqFunction, bReset)
-        ucrNudRepeatValues.SetRCode(clsRepFunction, bReset)
-        ucrInputInStepsOf.SetRCode(clsSeqFunction, bReset)
-        bUpdateBy = True
-    End Sub
-
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 30
 
@@ -71,13 +60,13 @@ Public Class dlgRegularSequence
         ucrPnlSequenceType.AddFunctionNamesCondition(rdoNumeric, {"seq", "rep"})
         'ucrPnlSequenceType.AddFunctionNamesCondition(rdoDates, "as.date")
 
-        ucrPnlSequenceType.AddToLinkedControls(ucrInputFrom, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=1)
+        ucrPnlSequenceType.AddToLinkedControls(ucrInputFrom, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
         ucrInputFrom.SetLinkedDisplayControl(lblFrom)
-        ucrPnlSequenceType.AddToLinkedControls(ucrInputTo, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=ucrSelectDataFrameRegularSequence.iDataFrameLength)
+        ucrPnlSequenceType.AddToLinkedControls(ucrInputTo, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=ucrSelectDataFrameRegularSequence.iDataFrameLength)
         ucrInputTo.SetLinkedDisplayControl(lblTo)
-        ucrPnlSequenceType.AddToLinkedControls(ucrInputInStepsOf, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=1)
+        ucrPnlSequenceType.AddToLinkedControls(ucrInputInStepsOf, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
         ucrInputInStepsOf.SetLinkedDisplayControl(lblInStepsOf)
-        ucrPnlSequenceType.AddToLinkedControls(ucrNudRepeatValues, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=1)
+        ucrPnlSequenceType.AddToLinkedControls(ucrNudRepeatValues, {rdoNumeric}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
         ucrNudRepeatValues.SetLinkedDisplayControl(lblRepeatValues)
         'ucrPnlSequenceType.AddToLinkedControls(dtpSelectorA, {rdoDates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         'ucrPnlSequenceType.AddToLinkedControls(dtpSelectorB, {rdoDates}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -92,8 +81,6 @@ Public Class dlgRegularSequence
         dtpSelectorB.Visible = False
         dtpSelectorA.Visible = False
         ucrChkDefineAsFactor.SetText("Define As Factor")
-        'ucrInputFrom.Visible = False
-        ' ucrInputTo.Visible = False
         CheckSequenceLength()
 
         'Temporarily disabled
@@ -108,18 +95,29 @@ Public Class dlgRegularSequence
         ucrNewColumnName.Reset()
 
         clsSeqFunction.SetRCommand("seq")
-        clsSeqFunction.AddParameter("from", 1)
+        ' clsSeqFunction.AddParameter("from", 1)
         clsSeqFunction.AddParameter("to", ucrSelectDataFrameRegularSequence.iDataFrameLength)
-        clsSeqFunction.AddParameter("by", 1)
+        '  clsSeqFunction.AddParameter("by", 1)
 
         clsRepFunction.SetRCommand("rep")
         clsRepFunction.AddParameter("x", clsRFunctionParameter:=clsSeqFunction)
-        clsRepFunction.AddParameter("each", 1)
+        ' clsRepFunction.AddParameter("each", 1)
         clsRepFunction.AddParameter("length.out", ucrSelectDataFrameRegularSequence.iDataFrameLength, iPosition:=3)
         'clsSeqFunction.SetAssignTo(ucrNewColumnName.GetText, strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText)
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnName.GetText, strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText)
         ucrBase.clsRsyntax.SetBaseRFunction(clsRepFunction)
         CheckSequenceLength()
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        bUpdateBy = False
+        ucrNewColumnName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrPnlSequenceType.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrInputFrom.SetRCode(clsSeqFunction, bReset)
+        ucrInputTo.SetRCode(clsSeqFunction, bReset)
+        ucrNudRepeatValues.SetRCode(clsRepFunction, bReset)
+        ucrInputInStepsOf.SetRCode(clsSeqFunction, bReset)
+        bUpdateBy = True
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -202,9 +200,11 @@ Public Class dlgRegularSequence
                 vecSequence = frmMain.clsRLink.RunInternalScriptGetValue(strRCommand, bSilent:=True).AsNumeric
                 ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnName.GetText, strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText)
                 If iLength < ucrSelectDataFrameRegularSequence.iDataFrameLength Then
-                    txtMessage.Text = "Sequence has been extended by repeating to match the length of the data frame."
+                    txtMessage.Text = "Sequence extended to match
+the length of the data frame."
                 ElseIf iLength > ucrSelectDataFrameRegularSequence.iDataFrameLength Then
-                    txtMessage.Text = "Sequence has been truncated to match the length of the data frame."
+                    txtMessage.Text = "Sequence truncated to match
+the length of the data frame."
                 End If
             Else
                 clsRepFunction.RemoveParameterByName("length.out")
