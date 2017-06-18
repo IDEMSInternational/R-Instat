@@ -76,6 +76,9 @@ Public Class dlgOneVarFitModel
         ucrPnlGeneralExactCase.AddRadioButton(rdoGeneralCase)
         ucrPnlGeneralExactCase.AddRadioButton(rdoExactCase)
 
+        ucrPnlGeneralExactCase.AddFunctionNamesCondition(rdoGeneralCase, "fitdist")
+        ucrPnlGeneralExactCase.AddFunctionNamesCondition(rdoGeneralCase, "fitdist", False)
+
         ucrPnlStats.AddRadioButton(rdoEnorm)
         ucrPnlStats.AddRadioButton(rdoMeanWilcox)
         ucrPnlStats.AddRadioButton(rdoVarSign)
@@ -291,7 +294,7 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Public Sub FitDistFunction()
-        UcrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModel)
+        ' UcrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModel)
         clsROneVarFitModel.AddParameter("distr", Chr(34) & ucrFamily.clsCurrDistribution.strRName & Chr(34))
         SetDataParameter()
     End Sub
@@ -409,13 +412,6 @@ Public Class dlgOneVarFitModel
             clsRBinomStart.SetRCommand("mean")
             clsRfitdist.AddParameter("start", clsRFunctionParameter:=clsRBinomStart)
         End If
-    End Sub
-
-    Private Sub UcrReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles UcrReceiver.SelectionChanged
-        SetBaseFunction()
-        EnableOptions()
-        PlotResiduals()
-        DataTypeAccepted()
     End Sub
 
     Private Sub cmdFittingOptions_Click(sender As Object, e As EventArgs) Handles cmdFittingOptions.Click
@@ -594,5 +590,12 @@ Public Class dlgOneVarFitModel
     Private Sub ucrPnlStats_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlStats.ControlValueChanged
         SetBaseFunction()
         Display()
+    End Sub
+
+    Private Sub UcrReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles UcrReceiver.ControlValueChanged
+        SetBaseFunction()
+        EnableOptions()
+        PlotResiduals()
+        DataTypeAccepted()
     End Sub
 End Class
