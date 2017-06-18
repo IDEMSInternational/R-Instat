@@ -78,6 +78,8 @@ Public Class clsGridLink
         clsGetDataFrame.AddParameter("convert_to_character", "TRUE")
         clsGetDataFrame.AddParameter("include_hidden_columns", "FALSE")
         clsGetDataFrame.AddParameter("use_current_filter", "TRUE")
+        clsGetDataFrame.AddParameter("max_cols", "30")
+        clsGetDataFrame.AddParameter("max_rows", iMaxRows)
         clsFilterApplied.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$filter_applied")
         clsSetDataFramesChanged.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_data_frames_changed")
         clsGetVariablesMetadata.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
@@ -317,6 +319,7 @@ Public Class clsGridLink
             clsGetColumnNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_names")
             clsGetColumnNames.AddParameter("data_name", Chr(34) & strName & Chr(34))
             clsGetColumnNames.AddParameter("include", "list(Is_Hidden = FALSE)")
+            clsGetColumnNames.AddParameter("max_no", "30")
             If bInstatObjectDataFrame AndAlso frmMain.clsRLink.bInstatObjectExists Then
                 expColNames = frmMain.clsRLink.RunInternalScriptGetValue(clsGetColumnNames.ToScript())
                 If expColNames IsNot Nothing AndAlso expColNames.Type <> Internals.SymbolicExpressionType.Null Then
@@ -328,10 +331,13 @@ Public Class clsGridLink
 
             If bInstatObjectDataFrame AndAlso frmMain.clsRLink.bInstatObjectExists AndAlso bIncludeDataTypes Then
                 If bInstatObjectDataFrame AndAlso frmMain.clsRLink.bInstatObjectExists Then
-                    clsGetVarMetaFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
+                    'clsGetVarMetaFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
+                    'clsGetVarMetaFunc.AddParameter("data_name", Chr(34) & strName & Chr(34))
+                    'clsGetVarMetaFunc.AddParameter("property", "data_type_label")
+                    'clsGetVarMetaFunc.AddParameter("column", strCurrColNames)
+                    clsGetVarMetaFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_data_types")
                     clsGetVarMetaFunc.AddParameter("data_name", Chr(34) & strName & Chr(34))
-                    clsGetVarMetaFunc.AddParameter("property", "data_type_label")
-                    clsGetVarMetaFunc.AddParameter("column", strCurrColNames)
+                    clsGetVarMetaFunc.AddParameter("columns", strCurrColNames)
                 Else
                     clsGetVarMetaFunc.SetRCommand("sapply")
                     clsGetVarMetaFunc.AddParameter("X", strName)
