@@ -42,6 +42,7 @@ Public Class dlgOneVarFitModel
         UcrBase.iHelpTopicID = 296
         UcrBase.clsRsyntax.iCallType = 2
         UcrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+
         sdgOneVarFitModDisplay.InitialiseDialog()
         sdgOneVarFitModel.InitialiseDialog()
 
@@ -56,6 +57,7 @@ Public Class dlgOneVarFitModel
 
         ucrNudHyp.SetParameter(New RParameter("mu"))
 
+        ucrNudCI.SetParameter(New RParameter("mu"))
 
         ucrSaveModel.SetPrefix("dist")
         ucrSaveModel.SetSaveTypeAsModel()
@@ -64,6 +66,7 @@ Public Class dlgOneVarFitModel
         ucrSaveModel.SetIsComboBox()
         ucrSaveModel.SetAssignToIfUncheckedValue("last_model")
 
+        ucrChkBinModify.SetText("Modify Conditions for 'Success'")
 
         sdgOneVarFitModDisplay.SetModelFunction(clsROneVarFitModel)
         sdgOneVarFitModel.SetMyRFunction(clsROneVarFitModel)
@@ -77,11 +80,14 @@ Public Class dlgOneVarFitModel
         ucrPnlStats.AddRadioButton(rdoMeanWilcox)
         ucrPnlStats.AddRadioButton(rdoVarSign)
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrPnlStats, {rdoExactCase}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudCI, {rdoExactCase}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudCI, {rdoExactCase}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.95)
         ucrNudCI.SetLinkedDisplayControl(lblConfidenceLimit)
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrNudHyp, {rdoExactCase}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudHyp.SetLinkedDisplayControl(lblHyp)
         ucrPnlStats.SetLinkedDisplayControl(grpConditions)
+
+        '  ucrPnlGeneralExactCase.AddToLinkedControls(ucrChkBinModify, {rdoExactCase}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
 
         ucrNudCI.Increment = 0.05
         ucrNudCI.DecimalPlaces = 2
@@ -89,9 +95,9 @@ Public Class dlgOneVarFitModel
 
         ucrNudHyp.DecimalPlaces = 2
 
-        ucrOperator.SetItems({"==", "<", "<=", ">", ">=", "!="})
-        dctucrOperator.Add("Equal to(==)", "==")
-        ucrVariables.SetItemsTypeAsColumns()    'we want SetItemsTypeAs factors in the column
+        ' ucrOperator.SetItems({"==", "<", "<=", ">", ">=", "!="})
+        ' dctucrOperator.Add("Equal to(==)", "==")
+        ' ucrVariables.SetItemsTypeAsColumns()    'we want SetItemsTypeAs factors in the column
         ' rdoMeanWilcox.Checked = True
 
         'temp disabled as only works for numeric columns currently
@@ -122,7 +128,7 @@ Public Class dlgOneVarFitModel
 
         ucrSelectorOneVarFitMod.Reset()
         ucrSaveModel.Reset()
-        ucrOperator.SetName("==")
+        ' ucrOperator.SetName("==")
         clsROneVarFitModel.SetPackageName("fitdistrplus")
         clsROneVarFitModel.SetRCommand("fitdist")
 
@@ -136,7 +142,6 @@ Public Class dlgOneVarFitModel
         clsRStartValues.SetRCommand("mean")
         clsRfitdist.SetPackageName("fitdistrplus")
         clsRfitdist.SetRCommand("fitdist")
-        ucrNudCI.Value = 0.95
         BinomialConditions()
 
         SetDataParameter()
@@ -144,7 +149,6 @@ Public Class dlgOneVarFitModel
         sdgOneVarFitModDisplay.SetDefaults()
         sdgOneVarFitModel.SetDefaults()
         SetBaseFunction()
-        rdoGeneralCase.Checked = True
         clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertInteger)
         clsROneVarFitModel.SetAssignTo("last_model", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model")
         UcrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModel)
@@ -158,18 +162,33 @@ Public Class dlgOneVarFitModel
         ucrNudHyp.SetRCode(clsRTTest, bReset)
         UcrReceiver.AddAdditionalCodeParameterPair(clsRConvertNumeric, New RParameter("x"), iAdditionalPairNo:=1)
         UcrReceiver.AddAdditionalCodeParameterPair(clsRConvertInteger, New RParameter("x"), iAdditionalPairNo:=2)
-        UcrReceiver.AddAdditionalCodeParameterPair(clsRWilcoxTest, New RParameter("x"), iAdditionalPairNo:=4)
-        UcrReceiver.AddAdditionalCodeParameterPair(clsRNonSignTest, New RParameter("x"), iAdditionalPairNo:=5)
+        UcrReceiver.AddAdditionalCodeParameterPair(clsRWilcoxTest, New RParameter("x"), iAdditionalPairNo:=3)
+        UcrReceiver.AddAdditionalCodeParameterPair(clsRNonSignTest, New RParameter("x"), iAdditionalPairNo:=4)
         UcrReceiver.AddAdditionalCodeParameterPair(clsRLength, New RParameter("x"), iAdditionalPairNo:=6)
         UcrReceiver.AddAdditionalCodeParameterPair(clsRMean, New RParameter("x"), iAdditionalPairNo:=7)
-        UcrReceiver.AddAdditionalCodeParameterPair(clsRBinomTest, New RParameter("x"), iAdditionalPairNo:=8)
-        UcrReceiver.AddAdditionalCodeParameterPair(clsRBinomStart, New RParameter("x"), iAdditionalPairNo:=9)
+        UcrReceiver.AddAdditionalCodeParameterPair(clsRBinomTest, New RParameter("x"), iAdditionalPairNo:=9)
+        UcrReceiver.AddAdditionalCodeParameterPair(clsRBinomStart, New RParameter("x"), iAdditionalPairNo:=10)
 
         ucrChkConvertVariate.AddAdditionalCodeParameterPair(clsROneVarFitModel, ucrChkConvertVariate.GetParameter(), iAdditionalPairNo:=1)
-        ucrChkConvertVariate.AddAdditionalCodeParameterPair(clsROneVarFitModel, ucrChkConvertVariate.GetParameter(), iAdditionalPairNo:=1)
-        ucrChkConvertVariate.AddAdditionalCodeParameterPair(clsROneVarFitModel, ucrChkConvertVariate.GetParameter(), iAdditionalPairNo:=1)
+        ucrChkConvertVariate.AddAdditionalCodeParameterPair(clsROneVarFitModel, ucrChkConvertVariate.GetParameter(), iAdditionalPairNo:=2)
+        ucrChkConvertVariate.AddAdditionalCodeParameterPair(clsROneVarFitModel, ucrChkConvertVariate.GetParameter(), iAdditionalPairNo:=3)
 
         ucrNudHyp.AddAdditionalCodeParameterPair(clsVarTest, New RParameter("sigma.squared"), iAdditionalPairNo:=1)
+        ucrNudHyp.AddAdditionalCodeParameterPair(clsVarTest, New RParameter("sigma.squared"), iAdditionalPairNo:=2)
+        ucrNudHyp.AddAdditionalCodeParameterPair(clsRWilcoxTest, New RParameter("mu"), iAdditionalPairNo:=3)
+        ucrNudHyp.AddAdditionalCodeParameterPair(clsRNonSignTest, New RParameter("mu"), iAdditionalPairNo:=4)
+        ucrNudHyp.AddAdditionalCodeParameterPair(clsRTTest, New RParameter("mu"), iAdditionalPairNo:=5)
+        ucrNudHyp.AddAdditionalCodeParameterPair(clsRBinomTest, New RParameter("p"), iAdditionalPairNo:=6)
+        'ucrNudHyp.AddAdditionalCodeParameterPair(clsRPoissonTest, New RParameter("r"), iAdditionalPairNo:=7)
+        ' ucrNudHyp.AddAdditionalCodeParameterPair(clsRPoissonTest, New RParameter("sigma.squared"), iAdditionalPairNo:=8)
+
+        ucrNudCI.AddAdditionalCodeParameterPair(clsRTTest, New RParameter("conf.level"), iAdditionalPairNo:=1)
+        ucrNudCI.AddAdditionalCodeParameterPair(clsVarTest, New RParameter("conf.level"), iAdditionalPairNo:=2)
+        ucrNudCI.AddAdditionalCodeParameterPair(clsREnormTest, New RParameter("conf.level"), iAdditionalPairNo:=3)
+        ucrNudCI.AddAdditionalCodeParameterPair(clsRWilcoxTest, New RParameter("conf.level"), iAdditionalPairNo:=4)
+        ucrNudCI.AddAdditionalCodeParameterPair(clsRNonSignTest, New RParameter("conf.level"), iAdditionalPairNo:=5)
+        ucrNudCI.AddAdditionalCodeParameterPair(clsRBinomTest, New RParameter("conf.level"), iAdditionalPairNo:=7)
+        '  ucrNudCI.AddAdditionalCodeParameterPair(clsRPoissonTest, New RParameter("conf.level"), iAdditionalPairNo:=6)
     End Sub
 
     Private Sub SetDistributions()
@@ -278,13 +297,13 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub SetTTest()
-        clsRTTest.SetPackageName("base")
+        clsRTTest.SetPackageName("stats")
         clsRTTest.SetRCommand("t.test")
         UcrBase.clsRsyntax.SetBaseRFunction(clsRTTest)
         clsRConvertVector.SetRCommand("as.vector")
         clsRTTest.AddParameter("x", clsRFunctionParameter:=clsRConvertVector)
         'clsRTTest.AddParameter("mu", ucrNudHyp.Value.ToString)
-        clsRTTest.AddParameter("conf.level", ucrNudCI.Value.ToString)
+        'clsRTTest.AddParameter("conf.level", ucrNudCI.Value.ToString)
     End Sub
 
     Private Sub SetVarTest()
@@ -295,7 +314,7 @@ Public Class dlgOneVarFitModel
         clsRConvertVector.SetRCommand("as.vector")
         clsVarTest.AddParameter("x", clsRFunctionParameter:=clsRConvertVector)
         clsVarTest.AddParameter("sigma.squared", ucrNudHyp.Value.ToString)
-        clsVarTest.AddParameter("conf.level", ucrNudCI.Value.ToString)
+        ' clsVarTest.AddParameter("conf.level", ucrNudCI.Value.ToString)
     End Sub
 
     Private Sub SetEnormTest()
@@ -305,7 +324,7 @@ Public Class dlgOneVarFitModel
         clsRConvertVector.SetPackageName("base")
         clsRConvertVector.SetRCommand("as.vector")
         clsREnormTest.AddParameter("x", clsRFunctionParameter:=clsRConvertVector)
-        clsREnormTest.AddParameter("conf.level", ucrNudCI.Value.ToString)
+        ' clsREnormTest.AddParameter("conf.level", ucrNudCI.Value.ToString)
         ' what is the hyp nud?
     End Sub
 
@@ -316,16 +335,16 @@ Public Class dlgOneVarFitModel
         'clsRConvert.SetPackageName("base")
         'clsRConvert.SetRCommand("as.vector")
         'clsRWilcoxTest.AddParameter("x", clsRFunctionParameter:=clsRConvert)
-        clsRWilcoxTest.AddParameter("conf.level", ucrNudCI.Value.ToString)
-        clsRWilcoxTest.AddParameter("mu", ucrNudHyp.Value.ToString)
+        ' clsRWilcoxTest.AddParameter("conf.level", ucrNudCI.Value.ToString)
+        ' clsRWilcoxTest.AddParameter("mu", ucrNudHyp.Value.ToString)
     End Sub
 
     Private Sub SetNonSignTest()
         clsRNonSignTest.SetPackageName("signmedian.test")
         clsRNonSignTest.SetRCommand("signmedian.test")
         UcrBase.clsRsyntax.SetBaseRFunction(clsRNonSignTest)
-        clsRNonSignTest.AddParameter("conf.level", ucrNudCI.Value.ToString)
-        clsRNonSignTest.AddParameter("mu", ucrNudCI.Value.ToString)
+        ' clsRNonSignTest.AddParameter("conf.level", ucrNudCI.Value.ToString)
+        'clsRNonSignTest.AddParameter("mu", ucrNudCI.Value.ToString)
     End Sub
 
     Private Sub SetPoissonTest()
@@ -335,8 +354,8 @@ Public Class dlgOneVarFitModel
         clsRPoissonTest.SetPackageName("stats")
         clsRPoissonTest.SetRCommand("poisson.test")
         UcrBase.clsRsyntax.SetBaseRFunction(clsRPoissonTest)
-        clsRPoissonTest.AddParameter("r", ucrNudHyp.Value.ToString)
-        clsRPoissonTest.AddParameter("conf.level", ucrNudCI.Value.ToString)
+        ' clsRPoissonTest.AddParameter("r", ucrNudHyp.Value.ToString)
+        ' clsRPoissonTest.AddParameter("conf.level", ucrNudCI.Value.ToString)
         clsRPoissonTest.AddParameter("T", clsRFunctionParameter:=clsRMean)
         clsRPoissonTest.AddParameter("x", clsRFunctionParameter:=clsRLength)
         clsRLength.SetPackageName("base")
@@ -352,9 +371,9 @@ Public Class dlgOneVarFitModel
         clsRBinomTest.SetPackageName("stats")
         clsRBinomTest.SetRCommand("binom.test")
         UcrBase.clsRsyntax.SetBaseRFunction(clsRBinomTest)
-        clsRBinomTest.AddParameter("p", ucrNudHyp.Value.ToString)
-        clsRBinomTest.AddParameter("conf.level", ucrNudCI.Value.ToString)
-        If chkBinModify.Checked Then
+        ' clsRBinomTest.AddParameter("p", ucrNudHyp.Value.ToString)
+        ' clsRBinomTest.AddParameter("conf.level", ucrNudCI.Value.ToString)
+        If ucrChkBinModify.Checked Then
             If UcrReceiver.strCurrDataType = "factor" OrElse UcrReceiver.strCurrDataType = "character" Then
                 clsRBinomTest.AddParameter("x", clsROperatorParameter:=clsFactorOperator)
                 clsFactorOperator.SetOperation("==")
@@ -461,11 +480,9 @@ Public Class dlgOneVarFitModel
                     rdoMeanWilcox.Text = "Compare Mean"
                     rdoVarSign.Text = "Compare Variance"
                     If rdoVarSign.Checked Then
-                        ucrNudHyp.Minimum = 0.01
-                        ucrNudHyp.Value = 1
+                        ucrNudHyp.SetMinMax(0.01, 1)
                     Else
-                        ucrNudHyp.Minimum = ucrFamily.clsCurrDistribution.lstExact(5)
-                        ucrNudHyp.Value = ucrFamily.clsCurrDistribution.lstExact(2)
+                        ucrNudHyp.SetMinMax(ucrFamily.clsCurrDistribution.lstExact(5), ucrNudHyp.Value = ucrFamily.clsCurrDistribution.lstExact(2))
                     End If
                 ElseIf ucrFamily.clsCurrDistribution.strNameTag = "No_Distribution" Then
                     rdoMeanWilcox.Visible = True
@@ -506,19 +523,19 @@ Public Class dlgOneVarFitModel
         DataTypeAccepted()
     End Sub
 
-    Private Sub lbls_VisibleChanged(sender As Object, e As EventArgs) Handles lblEquals.VisibleChanged, lblSuccessIf.VisibleChanged, lblHyp.VisibleChanged, lblConfidenceLimit.VisibleChanged
+    Private Sub lbls_VisibleChanged(sender As Object, e As EventArgs) Handles lblEquals.VisibleChanged, lblSuccessIf.VisibleChanged
         BinomialConditions()
     End Sub
 
-    Private Sub chkBinModify_CheckedChanged(sender As Object, e As EventArgs) Handles chkBinModify.CheckedChanged
+    Private Sub chkBinModify_CheckedChanged(sender As Object, e As EventArgs)
         BinomialConditions()
         SetBinomialTest()
     End Sub
 
     Private Sub BinomialConditions()
         If rdoExactCase.Checked AndAlso ucrFamily.clsCurrDistribution.strNameTag = "Bernouli" Then
-            chkBinModify.Visible = True
-            If chkBinModify.Checked Then
+            ucrChkBinModify.Visible = True
+            If ucrChkBinModify.Checked Then
                 lblSuccessIf.Visible = True
                 If UcrReceiver.strCurrDataType = "factor" Then
                     ucrVariables.Visible = True
@@ -537,8 +554,8 @@ Public Class dlgOneVarFitModel
                 ucrVariables.Visible = False
             End If
         Else
-            chkBinModify.Visible = False
-            chkBinModify.Checked = False
+            ucrChkBinModify.Visible = False
+            ucrChkBinModify.Checked = False
             lblSuccessIf.Visible = False
             lblEquals.Visible = False
             ucrNudBinomialConditions.Visible = False
@@ -567,5 +584,15 @@ Public Class dlgOneVarFitModel
 
     Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveModel.ControlContentsChanged, UcrReceiver.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrChkBinModify_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBinModify.ControlValueChanged
+        SetBinomialTest()
+        BinomialConditions()
+    End Sub
+
+    Private Sub ucrPnlStats_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlStats.ControlValueChanged
+        SetBaseFunction()
+        Display()
     End Sub
 End Class

@@ -25,7 +25,6 @@ Partial Class dlgOneVarFitModel
         Me.cmdFittingOptions = New System.Windows.Forms.Button()
         Me.LblVariable = New System.Windows.Forms.Label()
         Me.cmdDisplayOptions = New System.Windows.Forms.Button()
-        Me.chkBinModify = New System.Windows.Forms.CheckBox()
         Me.lblSuccessIf = New System.Windows.Forms.Label()
         Me.lblEquals = New System.Windows.Forms.Label()
         Me.ucrVariables = New instat.ucrInputComboBox()
@@ -34,21 +33,22 @@ Partial Class dlgOneVarFitModel
         Me.UcrReceiver = New instat.ucrReceiverSingle()
         Me.ucrSelectorOneVarFitMod = New instat.ucrSelectorByDataFrameAddRemove()
         Me.UcrBase = New instat.ucrButtons()
-        Me.grpConditions = New System.Windows.Forms.GroupBox()
-        Me.rdoEnorm = New System.Windows.Forms.RadioButton()
-        Me.ucrNudBinomialConditions = New instat.ucrNud()
-        Me.rdoVarSign = New System.Windows.Forms.RadioButton()
-        Me.ucrNudHyp = New instat.ucrNud()
-        Me.rdoMeanWilcox = New System.Windows.Forms.RadioButton()
         Me.ucrPnlStats = New instat.UcrPanel()
-        Me.ucrNudCI = New instat.ucrNud()
-        Me.lblConfidenceLimit = New System.Windows.Forms.Label()
-        Me.lblHyp = New System.Windows.Forms.Label()
         Me.ucrSaveModel = New instat.ucrSave()
         Me.rdoExactCase = New System.Windows.Forms.RadioButton()
         Me.rdoGeneralCase = New System.Windows.Forms.RadioButton()
         Me.ucrPnlGeneralExactCase = New instat.UcrPanel()
         Me.ucrChkConvertVariate = New instat.ucrCheck()
+        Me.grpConditions = New System.Windows.Forms.GroupBox()
+        Me.rdoEnorm = New System.Windows.Forms.RadioButton()
+        Me.ucrChkBinModify = New instat.ucrCheck()
+        Me.ucrNudBinomialConditions = New instat.ucrNud()
+        Me.rdoVarSign = New System.Windows.Forms.RadioButton()
+        Me.lblHyp = New System.Windows.Forms.Label()
+        Me.ucrNudHyp = New instat.ucrNud()
+        Me.lblConfidenceLimit = New System.Windows.Forms.Label()
+        Me.rdoMeanWilcox = New System.Windows.Forms.RadioButton()
+        Me.ucrNudCI = New instat.ucrNud()
         Me.grpConditions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -79,20 +79,10 @@ Partial Class dlgOneVarFitModel
         Me.cmdDisplayOptions.Text = "Display Options"
         Me.cmdDisplayOptions.UseVisualStyleBackColor = True
         '
-        'chkBinModify
-        '
-        Me.chkBinModify.AutoSize = True
-        Me.chkBinModify.Location = New System.Drawing.Point(8, 81)
-        Me.chkBinModify.Name = "chkBinModify"
-        Me.chkBinModify.Size = New System.Drawing.Size(172, 17)
-        Me.chkBinModify.TabIndex = 18
-        Me.chkBinModify.Text = "Modify Conditions for 'Success'"
-        Me.chkBinModify.UseVisualStyleBackColor = True
-        '
         'lblSuccessIf
         '
         Me.lblSuccessIf.AutoSize = True
-        Me.lblSuccessIf.Location = New System.Drawing.Point(5, 112)
+        Me.lblSuccessIf.Location = New System.Drawing.Point(6, 113)
         Me.lblSuccessIf.Name = "lblSuccessIf"
         Me.lblSuccessIf.Size = New System.Drawing.Size(66, 13)
         Me.lblSuccessIf.TabIndex = 19
@@ -161,123 +151,12 @@ Partial Class dlgOneVarFitModel
         Me.UcrBase.Size = New System.Drawing.Size(410, 52)
         Me.UcrBase.TabIndex = 0
         '
-        'grpConditions
-        '
-        Me.grpConditions.Controls.Add(Me.rdoEnorm)
-        Me.grpConditions.Controls.Add(Me.ucrNudBinomialConditions)
-        Me.grpConditions.Controls.Add(Me.rdoVarSign)
-        Me.grpConditions.Controls.Add(Me.ucrNudHyp)
-        Me.grpConditions.Controls.Add(Me.rdoMeanWilcox)
-        Me.grpConditions.Controls.Add(Me.ucrPnlStats)
-        Me.grpConditions.Controls.Add(Me.ucrNudCI)
-        Me.grpConditions.Controls.Add(Me.lblEquals)
-        Me.grpConditions.Controls.Add(Me.lblConfidenceLimit)
-        Me.grpConditions.Controls.Add(Me.lblHyp)
-        Me.grpConditions.Controls.Add(Me.ucrOperator)
-        Me.grpConditions.Controls.Add(Me.ucrVariables)
-        Me.grpConditions.Controls.Add(Me.chkBinModify)
-        Me.grpConditions.Controls.Add(Me.lblSuccessIf)
-        Me.grpConditions.Location = New System.Drawing.Point(249, 124)
-        Me.grpConditions.Name = "grpConditions"
-        Me.grpConditions.Size = New System.Drawing.Size(186, 145)
-        Me.grpConditions.TabIndex = 34
-        Me.grpConditions.TabStop = False
-        Me.grpConditions.Text = "Conditions"
-        '
-        'rdoEnorm
-        '
-        Me.rdoEnorm.AutoSize = True
-        Me.rdoEnorm.Location = New System.Drawing.Point(14, 121)
-        Me.rdoEnorm.Name = "rdoEnorm"
-        Me.rdoEnorm.Size = New System.Drawing.Size(54, 17)
-        Me.rdoEnorm.TabIndex = 45
-        Me.rdoEnorm.TabStop = True
-        Me.rdoEnorm.Text = "enorm"
-        Me.rdoEnorm.UseVisualStyleBackColor = True
-        '
-        'ucrNudBinomialConditions
-        '
-        Me.ucrNudBinomialConditions.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudBinomialConditions.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudBinomialConditions.Location = New System.Drawing.Point(128, 108)
-        Me.ucrNudBinomialConditions.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudBinomialConditions.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudBinomialConditions.Name = "ucrNudBinomialConditions"
-        Me.ucrNudBinomialConditions.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudBinomialConditions.TabIndex = 41
-        Me.ucrNudBinomialConditions.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'rdoVarSign
-        '
-        Me.rdoVarSign.AutoSize = True
-        Me.rdoVarSign.Location = New System.Drawing.Point(14, 98)
-        Me.rdoVarSign.Name = "rdoVarSign"
-        Me.rdoVarSign.Size = New System.Drawing.Size(112, 17)
-        Me.rdoVarSign.TabIndex = 44
-        Me.rdoVarSign.TabStop = True
-        Me.rdoVarSign.Text = "Compare Variance"
-        Me.rdoVarSign.UseVisualStyleBackColor = True
-        '
-        'ucrNudHyp
-        '
-        Me.ucrNudHyp.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudHyp.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudHyp.Location = New System.Drawing.Point(101, 49)
-        Me.ucrNudHyp.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudHyp.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudHyp.Name = "ucrNudHyp"
-        Me.ucrNudHyp.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudHyp.TabIndex = 40
-        Me.ucrNudHyp.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'rdoMeanWilcox
-        '
-        Me.rdoMeanWilcox.AutoSize = True
-        Me.rdoMeanWilcox.Location = New System.Drawing.Point(14, 75)
-        Me.rdoMeanWilcox.Name = "rdoMeanWilcox"
-        Me.rdoMeanWilcox.Size = New System.Drawing.Size(97, 17)
-        Me.rdoMeanWilcox.TabIndex = 43
-        Me.rdoMeanWilcox.TabStop = True
-        Me.rdoMeanWilcox.Text = "Compare Mean"
-        Me.rdoMeanWilcox.TextAlign = System.Drawing.ContentAlignment.TopLeft
-        Me.rdoMeanWilcox.UseVisualStyleBackColor = True
-        '
         'ucrPnlStats
         '
-        Me.ucrPnlStats.Location = New System.Drawing.Point(5, 70)
+        Me.ucrPnlStats.Location = New System.Drawing.Point(4, 65)
         Me.ucrPnlStats.Name = "ucrPnlStats"
         Me.ucrPnlStats.Size = New System.Drawing.Size(175, 73)
         Me.ucrPnlStats.TabIndex = 42
-        '
-        'ucrNudCI
-        '
-        Me.ucrNudCI.DecimalPlaces = New Decimal(New Integer() {2, 0, 0, 0})
-        Me.ucrNudCI.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudCI.Location = New System.Drawing.Point(100, 19)
-        Me.ucrNudCI.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudCI.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudCI.Name = "ucrNudCI"
-        Me.ucrNudCI.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudCI.TabIndex = 39
-        Me.ucrNudCI.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblConfidenceLimit
-        '
-        Me.lblConfidenceLimit.AutoSize = True
-        Me.lblConfidenceLimit.Location = New System.Drawing.Point(6, 24)
-        Me.lblConfidenceLimit.Name = "lblConfidenceLimit"
-        Me.lblConfidenceLimit.Size = New System.Drawing.Size(88, 13)
-        Me.lblConfidenceLimit.TabIndex = 22
-        Me.lblConfidenceLimit.Text = "Confidence Limit:"
-        '
-        'lblHyp
-        '
-        Me.lblHyp.AutoSize = True
-        Me.lblHyp.Location = New System.Drawing.Point(6, 51)
-        Me.lblHyp.Name = "lblHyp"
-        Me.lblHyp.Size = New System.Drawing.Size(83, 13)
-        Me.lblHyp.TabIndex = 17
-        Me.lblHyp.Text = "Null Hypothesis:"
         '
         'ucrSaveModel
         '
@@ -331,11 +210,130 @@ Partial Class dlgOneVarFitModel
         Me.ucrChkConvertVariate.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkConvertVariate.TabIndex = 42
         '
+        'grpConditions
+        '
+        Me.grpConditions.Controls.Add(Me.rdoEnorm)
+        Me.grpConditions.Controls.Add(Me.ucrChkBinModify)
+        Me.grpConditions.Controls.Add(Me.lblEquals)
+        Me.grpConditions.Controls.Add(Me.ucrNudBinomialConditions)
+        Me.grpConditions.Controls.Add(Me.ucrOperator)
+        Me.grpConditions.Controls.Add(Me.ucrVariables)
+        Me.grpConditions.Controls.Add(Me.rdoVarSign)
+        Me.grpConditions.Controls.Add(Me.lblSuccessIf)
+        Me.grpConditions.Controls.Add(Me.lblHyp)
+        Me.grpConditions.Controls.Add(Me.ucrNudHyp)
+        Me.grpConditions.Controls.Add(Me.ucrPnlStats)
+        Me.grpConditions.Controls.Add(Me.lblConfidenceLimit)
+        Me.grpConditions.Controls.Add(Me.rdoMeanWilcox)
+        Me.grpConditions.Controls.Add(Me.ucrNudCI)
+        Me.grpConditions.Location = New System.Drawing.Point(249, 123)
+        Me.grpConditions.Name = "grpConditions"
+        Me.grpConditions.Size = New System.Drawing.Size(186, 145)
+        Me.grpConditions.TabIndex = 34
+        Me.grpConditions.TabStop = False
+        Me.grpConditions.Text = "Conditions"
+        '
+        'rdoEnorm
+        '
+        Me.rdoEnorm.AutoSize = True
+        Me.rdoEnorm.Location = New System.Drawing.Point(14, 110)
+        Me.rdoEnorm.Name = "rdoEnorm"
+        Me.rdoEnorm.Size = New System.Drawing.Size(54, 17)
+        Me.rdoEnorm.TabIndex = 53
+        Me.rdoEnorm.TabStop = True
+        Me.rdoEnorm.Text = "enorm"
+        Me.rdoEnorm.UseVisualStyleBackColor = True
+        '
+        'ucrChkBinModify
+        '
+        Me.ucrChkBinModify.Checked = False
+        Me.ucrChkBinModify.Location = New System.Drawing.Point(6, 78)
+        Me.ucrChkBinModify.Name = "ucrChkBinModify"
+        Me.ucrChkBinModify.Size = New System.Drawing.Size(174, 20)
+        Me.ucrChkBinModify.TabIndex = 54
+        '
+        'ucrNudBinomialConditions
+        '
+        Me.ucrNudBinomialConditions.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudBinomialConditions.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudBinomialConditions.Location = New System.Drawing.Point(128, 97)
+        Me.ucrNudBinomialConditions.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudBinomialConditions.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudBinomialConditions.Name = "ucrNudBinomialConditions"
+        Me.ucrNudBinomialConditions.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudBinomialConditions.TabIndex = 50
+        Me.ucrNudBinomialConditions.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'rdoVarSign
+        '
+        Me.rdoVarSign.AutoSize = True
+        Me.rdoVarSign.Location = New System.Drawing.Point(14, 87)
+        Me.rdoVarSign.Name = "rdoVarSign"
+        Me.rdoVarSign.Size = New System.Drawing.Size(112, 17)
+        Me.rdoVarSign.TabIndex = 52
+        Me.rdoVarSign.TabStop = True
+        Me.rdoVarSign.Text = "Compare Variance"
+        Me.rdoVarSign.UseVisualStyleBackColor = True
+        '
+        'lblHyp
+        '
+        Me.lblHyp.AutoSize = True
+        Me.lblHyp.Location = New System.Drawing.Point(6, 40)
+        Me.lblHyp.Name = "lblHyp"
+        Me.lblHyp.Size = New System.Drawing.Size(83, 13)
+        Me.lblHyp.TabIndex = 46
+        Me.lblHyp.Text = "Null Hypothesis:"
+        '
+        'ucrNudHyp
+        '
+        Me.ucrNudHyp.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudHyp.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudHyp.Location = New System.Drawing.Point(101, 38)
+        Me.ucrNudHyp.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudHyp.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudHyp.Name = "ucrNudHyp"
+        Me.ucrNudHyp.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudHyp.TabIndex = 49
+        Me.ucrNudHyp.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblConfidenceLimit
+        '
+        Me.lblConfidenceLimit.AutoSize = True
+        Me.lblConfidenceLimit.Location = New System.Drawing.Point(6, 13)
+        Me.lblConfidenceLimit.Name = "lblConfidenceLimit"
+        Me.lblConfidenceLimit.Size = New System.Drawing.Size(88, 13)
+        Me.lblConfidenceLimit.TabIndex = 47
+        Me.lblConfidenceLimit.Text = "Confidence Limit:"
+        '
+        'rdoMeanWilcox
+        '
+        Me.rdoMeanWilcox.AutoSize = True
+        Me.rdoMeanWilcox.Location = New System.Drawing.Point(14, 64)
+        Me.rdoMeanWilcox.Name = "rdoMeanWilcox"
+        Me.rdoMeanWilcox.Size = New System.Drawing.Size(97, 17)
+        Me.rdoMeanWilcox.TabIndex = 51
+        Me.rdoMeanWilcox.TabStop = True
+        Me.rdoMeanWilcox.Text = "Compare Mean"
+        Me.rdoMeanWilcox.TextAlign = System.Drawing.ContentAlignment.TopLeft
+        Me.rdoMeanWilcox.UseVisualStyleBackColor = True
+        '
+        'ucrNudCI
+        '
+        Me.ucrNudCI.DecimalPlaces = New Decimal(New Integer() {2, 0, 0, 0})
+        Me.ucrNudCI.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudCI.Location = New System.Drawing.Point(100, 8)
+        Me.ucrNudCI.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudCI.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCI.Name = "ucrNudCI"
+        Me.ucrNudCI.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudCI.TabIndex = 48
+        Me.ucrNudCI.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'dlgOneVarFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(451, 402)
+        Me.ClientSize = New System.Drawing.Size(448, 402)
         Me.Controls.Add(Me.ucrChkConvertVariate)
         Me.Controls.Add(Me.rdoExactCase)
         Me.Controls.Add(Me.rdoGeneralCase)
@@ -369,24 +367,24 @@ Partial Class dlgOneVarFitModel
     Friend WithEvents LblVariable As Label
     Friend WithEvents cmdDisplayOptions As Button
     Friend WithEvents ucrFamily As ucrDistributions
-    Friend WithEvents chkBinModify As CheckBox
     Friend WithEvents lblSuccessIf As Label
     Friend WithEvents ucrOperator As ucrInputComboBox
     Friend WithEvents ucrVariables As ucrInputComboBox
     Friend WithEvents lblEquals As Label
-    Friend WithEvents grpConditions As GroupBox
     Friend WithEvents ucrSaveModel As ucrSave
     Friend WithEvents rdoExactCase As RadioButton
     Friend WithEvents rdoGeneralCase As RadioButton
     Friend WithEvents ucrPnlGeneralExactCase As UcrPanel
-    Friend WithEvents rdoEnorm As RadioButton
-    Friend WithEvents rdoVarSign As RadioButton
-    Friend WithEvents rdoMeanWilcox As RadioButton
-    Friend WithEvents ucrNudBinomialConditions As ucrNud
-    Friend WithEvents ucrNudHyp As ucrNud
-    Friend WithEvents ucrNudCI As ucrNud
-    Friend WithEvents lblConfidenceLimit As Label
-    Friend WithEvents lblHyp As Label
     Friend WithEvents ucrPnlStats As UcrPanel
     Friend WithEvents ucrChkConvertVariate As ucrCheck
+    Friend WithEvents rdoEnorm As RadioButton
+    Friend WithEvents ucrNudBinomialConditions As ucrNud
+    Friend WithEvents rdoVarSign As RadioButton
+    Friend WithEvents ucrNudHyp As ucrNud
+    Friend WithEvents rdoMeanWilcox As RadioButton
+    Friend WithEvents ucrNudCI As ucrNud
+    Friend WithEvents grpConditions As GroupBox
+    Friend WithEvents ucrChkBinModify As ucrCheck
+    Friend WithEvents lblConfidenceLimit As Label
+    Friend WithEvents lblHyp As Label
 End Class
