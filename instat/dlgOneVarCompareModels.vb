@@ -1,4 +1,3 @@
-
 ' R-Instat 
 ' Copyright (C) 2015
 '
@@ -42,14 +41,12 @@ Public Class dlgOneVarCompareModels
         ucrBase.iHelpTopicID = 174
         ucrBase.clsRsyntax.iCallType = 2
 
-        'ucrSelector
-        ucrSelectorOneVarCompModels.SetItemType("model")
-
         'ucrReceiver
         ucrReceiverCompareModels.SetParameter(New RParameter("f", 0))
         ucrReceiverCompareModels.SetParameterIsRFunction()
         ucrReceiverCompareModels.Selector = ucrSelectorOneVarCompModels
         ucrReceiverCompareModels.SetMeAsReceiver()
+        ucrReceiverCompareModels.SetItemType("model")
     End Sub
 
     Private Sub SetDefaults()
@@ -66,18 +63,23 @@ Public Class dlgOneVarCompareModels
 
         clsGofStat.SetPackageName("fitdistrplus")
         clsGofStat.SetRCommand("gofstat")
+        clsGofStat.iCallType = 3
 
         clsCdfcompFunction.SetPackageName("fitdistrplus")
         clsCdfcompFunction.SetRCommand("cdfcomp")
+        clsCdfcompFunction.iCallType = 3
 
         clsPpcompFunction.SetPackageName("fitdistrplus")
         clsPpcompFunction.SetRCommand("ppcomp")
+        clsPpcompFunction.iCallType = 3
 
         clsQqcompFunction.SetPackageName("fitdistrplus")
         clsQqcompFunction.SetRCommand("qqcomp")
+        clsQqcompFunction.iCallType = 3
 
         clsDenscompFunction.SetPackageName("fitdistrplus")
         clsDenscompFunction.SetRCommand("denscomp")
+        clsDenscompFunction.iCallType = 3
 
         clsChisqtableOperator.SetOperation("$")
         clsChisqtableOperator.AddParameter(clsRFunctionParameter:=clsGofStat, iPosition:=0)
@@ -86,6 +88,7 @@ Public Class dlgOneVarCompareModels
         clsChisqbreaksOperator.SetOperation("$")
         clsChisqbreaksOperator.AddParameter(clsRFunctionParameter:=clsGofStat, iPosition:=0)
         clsChisqbreaksOperator.AddParameter(strParameterValue:="chisqbreaks", iPosition:=1)
+        clsChisqbreaksOperator.iCallType = 2
 
         clsRAsDataFrame.SetRCommand("as.data.frame")
         clsRAsDataFrame.AddParameter("x", clsROperatorParameter:=clsChisqtableOperator)
@@ -93,6 +96,7 @@ Public Class dlgOneVarCompareModels
         clsRAsDataFrame.SetAssignTo(ucrSelectorOneVarCompModels.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_ChiSquare", strTempDataframe:=ucrSelectorOneVarCompModels.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsGofStat)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsCdfcompFunction, iPosition:=0)
         bResetSubdialog = True
     End Sub
 
@@ -122,28 +126,19 @@ Public Class dlgOneVarCompareModels
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrSelectorOneVarCompModels_DataFrameChanged() Handles ucrSelectorOneVarCompModels.DataFrameChanged
-        '    sdgOneVarCompareModels.DisplayChiSquare()
-    End Sub
-
-    Private Sub ucrReceiver_SelectionChanged(ucrChangedControl As ucrCore) Handles ucrReceiverCompareModels.ControlContentsChanged
+    Private Sub ucrReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverCompareModels.ControlValueChanged
         If ucrReceiverCompareModels.IsEmpty Then
             cmdDisplayObjects.Enabled = False
         Else
             cmdDisplayObjects.Enabled = True
         End If
         TestOKEnabled()
-        '        sdgOneVarCompareModels.SetModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
     End Sub
 
     Private Sub cmdDisplayObjects_Click(sender As Object, e As EventArgs) Handles cmdDisplayObjects.Click
         sdgOneVarCompareModels.SetRCode(ucrBase.clsRsyntax, clsGofStat, clsDenscompFunction, clsCdfcompFunction, clsQqcompFunction, clsPpcompFunction, clsRAsDataFrame, clsChisqtableOperator, clsChisqbreaksOperator, bResetSubdialog)
-        bResetSubdialog = False
         sdgOneVarCompareModels.ShowDialog()
-    End Sub
-
-    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        'sdgOneVarCompareModels.CreateGraphs()
+        bResetSubdialog = False
     End Sub
 End Class
 

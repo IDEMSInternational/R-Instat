@@ -20,7 +20,7 @@ Imports instat.Translations
 Public Class sdgOneVarCompareModels
     Private bControlsInitialised As Boolean = False
     Private clsCdfcompFunction, clsDenscompFunction, clsQqcompFunction, clsPpcompFunction, clsListFunction, clsRAsDataFrame, clsModel, clsRGofStat, clsRPlotFunction, clsOperation As New RFunction
-    Private clsOperatorforTable, clsOperatorForBreaks As New ROperator
+    Private clsChisqtableOperator, clsChisqbreaksOperator As New ROperator
     Private clsRSyntax As RSyntax
 
     Private Sub sdgOneVarCompareModels(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -32,7 +32,7 @@ Public Class sdgOneVarCompareModels
         InitialiseTabs()
 
         'ucrInputChiSquareBreaks
-        ucrChkInputChiSquareBreakpoints.SetText("Input Chi-Square Breakpoints")
+        ucrChkInputChiSquareBreakpoints.SetText("Display Chi-Square Breakpoints")
 
         ucrChkCDF.AddRSyntaxContainsFunctionNamesCondition(True, {"cdfcomp"})
         ucrChkCDF.AddRSyntaxContainsFunctionNamesCondition(False, {"cdfcomp"}, False)
@@ -55,7 +55,10 @@ Public Class sdgOneVarCompareModels
         ucrSaveGOF.SetCheckBoxText("Save Fit")
         ucrSaveGOF.SetIsComboBox()
         ucrSaveGOF.SetAssignToIfUncheckedValue("last_model")
-        ' ucrSaveGOF.SetSaveTypeAsModel() ' or graph?
+        ucrSaveGOF.SetSaveTypeAsModel()
+        'temp disabled until working
+        ucrSaveGOF.Enabled = False
+        ucrSaveGOF.ucrChkSave.Checked = False
 
         'ucrSaveDisplayChi
         ' ucrSaveDisplayChi.SetPrefix("ChiSquare")
@@ -63,6 +66,8 @@ Public Class sdgOneVarCompareModels
         ucrSaveDisplayChi.SetCheckBoxText("DisplayChi")
         ucrSaveDisplayChi.SetIsComboBox()
         ucrSaveDisplayChi.SetAssignToIfUncheckedValue("last_DataFrame")
+        'temp disabled until working
+        ucrSaveDisplayChi.Enabled = False
 
         'ucrSavePlot
         ucrSavePlots.Visible = False 'hidden as would need to be able to save up to four graphs
@@ -75,32 +80,31 @@ Public Class sdgOneVarCompareModels
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewRGofStat As RFunction, clsNewDenscompFunction As RFunction, clsNewCdfcompFunction As RFunction, clsNewQqcompFunction As RFunction, clsNewPpcompFunction As RFunction, clsNewclsRAsDataFrame As RFunction, Optional clsNewOperatorforTable As ROperator = Nothing, Optional clsNewOperatorForBreaks As ROperator = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewRGofStat As RFunction, clsNewDenscompFunction As RFunction, clsNewCdfcompFunction As RFunction, clsNewQqcompFunction As RFunction, clsNewPpcompFunction As RFunction, clsNewclsRAsDataFrame As RFunction, Optional clsNewChisqtableOperator As ROperator = Nothing, Optional clsNewChisqbreaksOperator As ROperator = Nothing, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
+
         clsRSyntax = clsNewRSyntax
         clsRGofStat = clsNewRGofStat
-        clsOperatorforTable = clsNewOperatorforTable
+        clsChisqtableOperator = clsNewChisqtableOperator
+        clsChisqbreaksOperator = clsNewChisqbreaksOperator
+
         clsRAsDataFrame = clsNewclsRAsDataFrame
         clsDenscompFunction = clsNewDenscompFunction
         clsCdfcompFunction = clsNewCdfcompFunction
         clsQqcompFunction = clsNewQqcompFunction
         clsPpcompFunction = clsNewPpcompFunction
-        clsOperatorForBreaks = clsNewOperatorForBreaks
 
-        'Setting Rcode for the sub dialog
-        ucrSaveGOF.SetRCode(clsRGofStat, bReset)
-        ucrChkCDF.SetRSyntax(clsRSyntax, bReset)
+        'ucrSaveGOF.SetRCode(clsRGofStat, bReset)
+        'ucrSaveDisplayChi.SetRCode(clsRAsDataFrame, bReset)
 
         ucrChkDensity.SetRSyntax(clsRSyntax, bReset)
         ucrChkPP.SetRSyntax(clsRSyntax, bReset)
         ucrChkQQ.SetRSyntax(clsRSyntax, bReset)
         ucrChkCDF.SetRSyntax(clsRSyntax, bReset)
 
-        ucrChkInputChiSquareBreakpoints.SetRCode(clsOperatorForBreaks, bReset)
-
-        ucrSaveDisplayChi.SetRCode(clsRAsDataFrame, bReset)
+        ucrChkInputChiSquareBreakpoints.SetRSyntax(clsRSyntax, bReset)
 
         If bReset Then
             tbpOneVarCompareModels.SelectedIndex = 0
@@ -136,21 +140,21 @@ Public Class sdgOneVarCompareModels
         '    frmMain.clsRLink.RunScript(clsDenscompFunction.ToScript(), 3)
         'End If
 
-        If ucrSaveDisplayChi.IsComplete Then
-            clsOperatorforTable.SetOperation("$")
-            clsOperatorforTable.AddParameter(clsRFunctionParameter:=clsRGofStat, iPosition:=0)
-            clsOperatorforTable.AddParameter(strParameterValue:="chisqtable")
+        'If ucrSaveDisplayChi.IsComplete Then
+        '    clsChisqtableOperator.SetOperation("$")
+        '    clsChisqtableOperator.AddParameter(clsRFunctionParameter:=clsRGofStat, iPosition:=0)
+        '    clsChisqtableOperator.AddParameter(strParameterValue:="chisqtable")
 
-            frmMain.clsRLink.RunScript(clsOperatorforTable.ToScript(), 0)
-            clsRAsDataFrame.ToScript(strTemp)
-            frmMain.clsRLink.RunScript(strTemp, 0)
-        End If
-        If ucrChkInputChiSquareBreakpoints.Checked Then
-            clsOperatorForBreaks.SetOperation("$")
-            clsOperatorForBreaks.AddParameter(iPosition:=0, clsRFunctionParameter:=clsRGofStat)
-            clsOperatorForBreaks.AddParameter(strParameterValue:="chisqbreaks")
-            frmMain.clsRLink.RunScript(clsOperatorForBreaks.ToScript(), 2)
-        End If
+        '    frmMain.clsRLink.RunScript(clsChisqtableOperator.ToScript(), 0)
+        '    clsRAsDataFrame.ToScript(strTemp)
+        '    frmMain.clsRLink.RunScript(strTemp, 0)
+        'End If
+        'If ucrChkInputChiSquareBreakpoints.Checked Then
+        '    clsChisqbreaksOperator.SetOperation("$")
+        '    clsChisqbreaksOperator.AddParameter(iPosition:=0, clsRFunctionParameter:=clsRGofStat)
+        '    clsChisqbreaksOperator.AddParameter(strParameterValue:="chisqbreaks")
+        '    frmMain.clsRLink.RunScript(clsChisqbreaksOperator.ToScript(), 2)
+        'End If
 
     End Sub
 
@@ -190,6 +194,14 @@ Public Class sdgOneVarCompareModels
             clsRSyntax.AddToAfterCodes(clsDenscompFunction, iPosition:=3)
         Else
             clsRSyntax.RemoveFromAfterCodes(clsDenscompFunction)
+        End If
+    End Sub
+
+    Private Sub ucrChkInputChiSquareBreakpoints_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkInputChiSquareBreakpoints.ControlValueChanged
+        If ucrChkInputChiSquareBreakpoints.Checked Then
+            clsRSyntax.AddToAfterCodes(clsChisqbreaksOperator, iPosition:=4)
+        Else
+            clsRSyntax.RemoveFromAfterCodes(clsChisqbreaksOperator)
         End If
     End Sub
 End Class
