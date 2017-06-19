@@ -61,8 +61,8 @@ Public Class sdgOneVarFitModDisplay
             InitialiseControls()
         End If
         clsModel = clsRNewOneVarFitModel
-        ucrPnlOptimisation.SetRCode(clsModel, bReset)
-        ucrPnlFitMethod.SetRCode(clsModel, bReset)
+        'ucrPnlOptimisation.SetRCode(clsModel, bReset)
+        'ucrPnlFitMethod.SetRCode(clsModel, bReset)
     End Sub
 
     Public Sub CreateGraphs()
@@ -120,7 +120,7 @@ Public Class sdgOneVarFitModDisplay
 
     ' looking into tab2
 
-    Public Sub rdoLikelihoods_CheckedChanged(sender As Object, e As EventArgs) Handles rdoLoglik.CheckedChanged, rdoLik.CheckedChanged
+    Public Sub rdoLikelihoods_CheckedChanged(sender As Object, e As EventArgs)
         If rdoLoglik.Checked Then
             clsRLogLikFunction.AddParameter("loglik", strParameterValue:="TRUE")
         ElseIf rdoLik.Checked Then
@@ -133,15 +133,15 @@ Public Class sdgOneVarFitModDisplay
     End Sub
 
 
-    Private Sub UcrSaveLikelihood_GraphNameChanged() Handles UcrSaveLikelihood.GraphNameChanged, UcrSaveLikelihood.SaveGraphCheckedChanged
-        If UcrSaveLikelihood.bSaveGraph Then
-            dlgOneVarFitModel.UcrBase.clsRsyntax.SetAssignTo(UcrSaveLikelihood.strGraphName, strTempDataframe:=dlgOneVarFitModel.ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=UcrSaveLikelihood.strGraphName)
+    Private Sub UcrSaveLikelihood_GraphNameChanged() Handles ucrSaveLikelihood.GraphNameChanged
+        If ucrSaveLikelihood.bSaveGraph Then
+            dlgOneVarFitModel.UcrBase.clsRsyntax.SetAssignTo(ucrSaveLikelihood.strGraphName, strTempDataframe:=dlgOneVarFitModel.ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveLikelihood.strGraphName)
         Else
             dlgOneVarFitModel.UcrBase.clsRsyntax.RemoveAssignTo()
         End If
     End Sub
 
-    Private Sub ucrSavePlots_GraphNameChanged() Handles ucrSavePlots.GraphNameChanged, ucrSavePlots.SaveGraphCheckedChanged
+    Private Sub ucrSavePlots_GraphNameChanged()
         If ucrSavePlots.bSaveGraph Then
             dlgOneVarFitModel.UcrBase.clsRsyntax.SetAssignTo(ucrSavePlots.strGraphName, strTempDataframe:=dlgOneVarFitModel.ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSavePlots.strGraphName)
         Else
@@ -149,7 +149,7 @@ Public Class sdgOneVarFitModDisplay
         End If
     End Sub
 
-    Private Sub VisibleSaveGraph_CheckedChanged(sender As Object, e As EventArgs) Handles rdoNoPlot.CheckedChanged, rdoNoLik.CheckedChanged
+    Private Sub VisibleSaveGraph_CheckedChanged(sender As Object, e As EventArgs)
         If rdoNoPlot.Checked Then
             ucrSavePlots.Visible = False
         Else
@@ -172,4 +172,15 @@ Public Class sdgOneVarFitModDisplay
         Return bOkEnabled
     End Function
 
+    Private Sub rdoPlotAll_CheckedChanged(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub rdoCDFPlot_CheckedChanged(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub rdoDensityPlot_CheckedChanged(sender As Object, e As EventArgs)
+
+    End Sub
 End Class
