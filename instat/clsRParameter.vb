@@ -132,4 +132,10 @@ Public Class RParameter
         End If
         Return clsTempRParam
     End Function
+
+    Public Sub GetAllAssignTo(lstCodes As List(Of RCodeStructure), lstValues As List(Of String))
+        If bIsFunction OrElse bIsOperator Then
+            clsArgumentCodeStructure.GetAllAssignTo(lstCodes, lstValues)
+        End If
+    End Sub
 End Class

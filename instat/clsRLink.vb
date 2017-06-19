@@ -55,13 +55,13 @@ Public Class RLink
         Try
             REngine.SetEnvironmentVariables()
         Catch ex As Exception
-            MsgBox(ex.Message & vbNewLine & "Ensure that the correct version of R is installed and restart the program.", MsgBoxStyle.Critical, "Cannot initialise R Link.")
+            MsgBox(ex.Message & Environment.NewLine & "Ensure that the correct version of R is installed and restart the program.", MsgBoxStyle.Critical, "Cannot initialise R Link.")
             Application.Exit()
         End Try
         Try
             clsEngine = REngine.GetInstance()
         Catch ex As Exception
-            MsgBox(ex.Message & vbNewLine & "Ensure that the correct version of R is installed and restart the program.", MsgBoxStyle.Critical, "Cannot initialise R Link.")
+            MsgBox(ex.Message & Environment.NewLine & "Ensure that the correct version of R is installed and restart the program.", MsgBoxStyle.Critical, "Cannot initialise R Link.")
             Application.Exit()
         End Try
         clsEngine.Initialize()
@@ -255,7 +255,7 @@ Public Class RLink
         End If
         If bOutput Then
             If strComment <> "" AndAlso bShowCommands Then
-                rtbOutput.AppendText(clrComments, fComments, strComment & Environment.NewLine, clrScript, fScript, strScript & Environment.NewLine)
+                rtbOutput.AppendText(clrComments, fComments, strComment & Environment.NewLine, clrScript, fScript, strScript.TrimEnd(Environment.NewLine.ToCharArray) & Environment.NewLine)
             Else
                 If strComment <> "" Then
                     rtbOutput.AppendText(clrComments, fComments, strComment & Environment.NewLine, clrScript)
@@ -267,7 +267,7 @@ Public Class RLink
         End If
 
         'If strScript.Length > 2000 Then
-        '    MsgBox("The following command cannot be run because it exceeds the character limit of 2000 characters for a command in R-Instat." & vbNewLine & strScript & vbNewLine & vbNewLine & "It may be possible to run the command directly in R.", MsgBoxStyle.Critical, "Cannot run command")
+        '    MsgBox("The following command cannot be run because it exceeds the character limit of 2000 characters for a command in R-Instat." & Environment.NewLine & strScript & Environment.NewLine & Environment.NewLine & "It may be possible to run the command directly in R.", MsgBoxStyle.Critical, "Cannot run command")
         If iCallType = 0 OrElse iCallType = 3 Then
             Try
                 If iCallType = 3 Then
@@ -298,7 +298,7 @@ Public Class RLink
                             lstTempGraphFiles = FileIO.FileSystem.GetFiles(strTempGraphsDirectory)
                         Catch e As Exception
                             lstTempGraphFiles = Nothing
-                            MsgBox(e.Message & vbNewLine & "A problem occured in getting the content of the temporary graphs directory: " & strTempGraphsDirectory & " Possible exceptions are described here: https://msdn.microsoft.com/en-us/library/kf41fdf4.aspx", MsgBoxStyle.Critical)
+                            MsgBox(e.Message & Environment.NewLine & "A problem occured in getting the content of the temporary graphs directory: " & strTempGraphsDirectory & " Possible exceptions are described here: https://msdn.microsoft.com/en-us/library/kf41fdf4.aspx", MsgBoxStyle.Critical)
                         End Try
                         If lstTempGraphFiles IsNot Nothing Then
                             iNumberOfFiles = CStr(lstTempGraphFiles.Count)
@@ -313,14 +313,14 @@ Public Class RLink
                                 Try
                                     My.Computer.FileSystem.DeleteFile(strFileName)
                                 Catch e As Exception
-                                    MsgBox(e.Message & vbNewLine & "A problem occured in attempting to delete the temporary file: " & strFileName & " The possible exceptions are described here: https://msdn.microsoft.com/en-us/library/tdx72k4b.aspx", MsgBoxStyle.Critical)
+                                    MsgBox(e.Message & Environment.NewLine & "A problem occured in attempting to delete the temporary file: " & strFileName & " The possible exceptions are described here: https://msdn.microsoft.com/en-us/library/tdx72k4b.aspx", MsgBoxStyle.Critical)
                                 End Try
                             Next
                         End If
                     End If
                 End If
             Catch e As Exception
-                MsgBox(e.Message & vbNewLine & "The error occurred in attempting to run the following R command(s):" & vbNewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
+                MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
             End Try
 
         ElseIf iCallType = 1 OrElse iCallType = 4 Then
@@ -332,21 +332,21 @@ Public Class RLink
 
                 End If
             Catch e As Exception
-                MsgBox(e.Message & vbNewLine & "The error occurred in attempting to run the following R command(s):" & vbNewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
+                MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
             End Try
         Else
-            If strScript.Trim(Environment.NewLine).LastIndexOf(Environment.NewLine) = -1 Then
+            If strScript.Trim(Environment.NewLine.ToCharArray).LastIndexOf(Environment.NewLine.ToCharArray) = -1 Then
                 strCapturedScript = "capture.output(" & strScript & ")"
             Else
-                strSplitScript = Left(strScript, strScript.Trim(Environment.NewLine).LastIndexOf(Environment.NewLine))
+                strSplitScript = Left(strScript, strScript.Trim(Environment.NewLine.ToCharArray).LastIndexOf(Environment.NewLine.ToCharArray))
                 If strSplitScript <> "" Then
                     Try
                         clsEngine.Evaluate(strSplitScript)
                     Catch e As Exception
-                        MsgBox(e.Message & vbNewLine & "The error occurred in attempting to run the following R command(s):" & vbNewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
+                        MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
                     End Try
                 End If
-                strSplitScript = Right(strScript, strScript.Length - strScript.Trim(Environment.NewLine).LastIndexOf(Environment.NewLine) - 2)
+                strSplitScript = Right(strScript, strScript.Length - strScript.Trim(Environment.NewLine.ToCharArray).LastIndexOf(Environment.NewLine.ToCharArray) - 2)
                 strCapturedScript = "capture.output(" & strSplitScript & ")"
             End If
             Try
@@ -354,7 +354,7 @@ Public Class RLink
                 strTemp = String.Join(Environment.NewLine, temp.AsCharacter())
                 strOutput = strOutput & strTemp & Environment.NewLine
             Catch e As Exception
-                MsgBox(e.Message & vbNewLine & "The error occurred in attempting to run the following R command(s):" & vbNewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
+                MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
             End Try
         End If
         If bOutput AndAlso strOutput IsNot Nothing AndAlso strOutput <> "" Then
@@ -377,7 +377,7 @@ Public Class RLink
         expTemp = Nothing
         strCommand = strVariableName & "<-" & strScript
         'If strCommand.Length > 2000 Then
-        'MsgBox("The following command cannot be run because it exceeds the character limit of 2000 characters for a command in R-Instat." & vbNewLine & strScript & vbNewLine & vbNewLine & "It may be possible to run the command directly in R.", MsgBoxStyle.Critical, "Cannot run command")
+        'MsgBox("The following command cannot be run because it exceeds the character limit of 2000 characters for a command in R-Instat." & Environment.NewLine & strScript & Environment.NewLine & Environment.NewLine & "It may be possible to run the command directly in R.", MsgBoxStyle.Critical, "Cannot run command")
         If clsEngine IsNot Nothing Then
             Try
                 'iRemaining = strScript.Length
@@ -385,14 +385,14 @@ Public Class RLink
                 'While iRemaining > 1000
                 '    iSplitIndex = strScript.Substring(iStartPoint).IndexOf(",") + iStartPoint
                 '    iRemaining = strScript.Length - iSplitIndex
-                '    strScript = strScript.Insert(iSplitIndex + 1, vbNewLine)
+                '    strScript = strScript.Insert(iSplitIndex + 1, Environment.NewLine)
                 '    iStartPoint = iSplitIndex + 1000
                 'End While
                 clsEngine.Evaluate(strCommand)
                 expTemp = clsEngine.GetSymbol(strVariableName)
             Catch ex As Exception
                 If Not bSilent Then
-                    MsgBox(ex.Message & vbNewLine & "The error occurred in attempting to run the following R command(s):" & vbNewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
+                    MsgBox(ex.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
                 End If
             End Try
         End If
@@ -408,7 +408,7 @@ Public Class RLink
             chrTemp = expTemp.AsCharacter()
         Catch ex As Exception
             If Not bSilent Then
-                MsgBox(ex.Message & vbNewLine & "The error occurred in attempting to run the following R command(s):" & vbNewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
+                MsgBox(ex.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
             End If
             chrTemp = Nothing
         End Try
@@ -422,7 +422,7 @@ Public Class RLink
 
         strCommand = strVariableName & "<-" & strScript
         'If strCommand.Length > 2000 Then
-        '    MsgBox("The following command cannot be run because it exceeds the character limit of 2000 characters for a command in R-Instat." & vbNewLine & strScript & vbNewLine & vbNewLine & "It may be possible to run the command directly in R.", MsgBoxStyle.Critical, "Cannot run command")
+        '    MsgBox("The following command cannot be run because it exceeds the character limit of 2000 characters for a command in R-Instat." & Environment.NewLine & strScript & Environment.NewLine & Environment.NewLine & "It may be possible to run the command directly in R.", MsgBoxStyle.Critical, "Cannot run command")
         '    Return False
         If clsEngine IsNot Nothing Then
             Try
@@ -430,7 +430,7 @@ Public Class RLink
                 'While iRemaining > 1000
                 '    iSplitIndex = strScript.Substring(1000).IndexOf(",")
                 '    iRemaining = strScript.Length - iSplitIndex
-                '    strScript = strScript.Insert(iSplitIndex + 1, vbNewLine)
+                '    strScript = strScript.Insert(iSplitIndex + 1, Environment.NewLine)
                 'End While
                 If strVariableName <> "" Then
                     clsEngine.Evaluate(strVariableName & "<-" & strScript)
@@ -440,7 +440,7 @@ Public Class RLink
                 Return True
             Catch ex As Exception
                 If Not bSilent Then
-                    MsgBox(ex.Message & vbNewLine & "The error occurred in attempting to run the following R command(s):" & vbNewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
+                    MsgBox(ex.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
                 End If
                 Return False
             End Try
