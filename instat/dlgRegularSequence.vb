@@ -48,7 +48,7 @@ Public Class dlgRegularSequence
 
         ucrInputInStepsOf.SetParameter(New RParameter("by", 2))
         ucrInputInStepsOf.AddQuotesIfUnrecognised = False
-        ucrInputInStepsOf.SetValidationTypeAsNumeric(dcmMin:=0)
+        ucrInputInStepsOf.SetValidationTypeAsNumeric(dcmMin:=0, bIncludeMin:=False)
 
         ucrNudRepeatValues.SetParameter(New RParameter("each", 1))
         ucrNudRepeatValues.SetMinMax(1, Integer.MaxValue)
@@ -142,7 +142,7 @@ Public Class dlgRegularSequence
                 ucrBase.OKEnabled(False)
             End If
         Else
- ucrBase.OKEnabled(False)
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
