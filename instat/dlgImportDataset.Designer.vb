@@ -48,6 +48,14 @@ Partial Class dlgImportDataset
         Me.ucrInputSeparator = New instat.ucrInputComboBox()
         Me.ucrInputEncoding = New instat.ucrInputComboBox()
         Me.grpExcel = New System.Windows.Forms.GroupBox()
+        Me.grpRDS = New System.Windows.Forms.GroupBox()
+        Me.ucrChkOverWrite = New instat.ucrCheck()
+        Me.ucrChkImportObjects = New instat.ucrCheck()
+        Me.ucrChkImportCalculations = New instat.ucrCheck()
+        Me.ucrChkImportChangesLog = New instat.ucrCheck()
+        Me.ucrChkImportFilters = New instat.ucrCheck()
+        Me.ucrChkImportMetadata = New instat.ucrCheck()
+        Me.ucrChkExistingData = New instat.ucrCheck()
         Me.ucrchkColumnNames = New instat.ucrCheck()
         Me.ucrNudxlRowsToSkip = New instat.ucrNud()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -64,14 +72,6 @@ Partial Class dlgImportDataset
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
         Me.ucrInputName = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
-        Me.grpRDS = New System.Windows.Forms.GroupBox()
-        Me.ucrChkOverWrite = New instat.ucrCheck()
-        Me.ucrChkImportObjects = New instat.ucrCheck()
-        Me.ucrChkImportCalculations = New instat.ucrCheck()
-        Me.ucrChkImportChangesLog = New instat.ucrCheck()
-        Me.ucrChkImportFilters = New instat.ucrCheck()
-        Me.ucrChkImportMetadata = New instat.ucrCheck()
-        Me.ucrChkExistingData = New instat.ucrCheck()
         Me.grpCSV.SuspendLayout()
         Me.grpExcel.SuspendLayout()
         Me.grpRDS.SuspendLayout()
@@ -242,7 +242,7 @@ Partial Class dlgImportDataset
         Me.grpCSV.Controls.Add(Me.lblLinesToSkip)
         Me.grpCSV.Controls.Add(Me.lblDecimal)
         Me.grpCSV.Controls.Add(Me.lblNAStrings)
-        Me.grpCSV.Location = New System.Drawing.Point(18, 85)
+        Me.grpCSV.Location = New System.Drawing.Point(9, 88)
         Me.grpCSV.Name = "grpCSV"
         Me.grpCSV.Size = New System.Drawing.Size(219, 346)
         Me.grpCSV.TabIndex = 34
@@ -360,13 +360,86 @@ Partial Class dlgImportDataset
         Me.grpExcel.Controls.Add(Me.ucrInputSheets)
         Me.grpExcel.Controls.Add(Me.lblRowToSkip)
         Me.grpExcel.Controls.Add(Me.lblSheets)
-        Me.grpExcel.Location = New System.Drawing.Point(669, 86)
+        Me.grpExcel.Location = New System.Drawing.Point(11, 88)
         Me.grpExcel.Name = "grpExcel"
         Me.grpExcel.Size = New System.Drawing.Size(217, 392)
         Me.grpExcel.TabIndex = 35
         Me.grpExcel.TabStop = False
         Me.grpExcel.Text = "Import Excel options"
         Me.grpExcel.Visible = False
+        '
+        'grpRDS
+        '
+        Me.grpRDS.Controls.Add(Me.ucrChkOverWrite)
+        Me.grpRDS.Controls.Add(Me.ucrChkImportObjects)
+        Me.grpRDS.Controls.Add(Me.ucrChkImportCalculations)
+        Me.grpRDS.Controls.Add(Me.ucrChkImportChangesLog)
+        Me.grpRDS.Controls.Add(Me.ucrChkImportFilters)
+        Me.grpRDS.Controls.Add(Me.ucrChkImportMetadata)
+        Me.grpRDS.Controls.Add(Me.ucrChkExistingData)
+        Me.grpRDS.Location = New System.Drawing.Point(13, 88)
+        Me.grpRDS.Name = "grpRDS"
+        Me.grpRDS.Size = New System.Drawing.Size(217, 166)
+        Me.grpRDS.TabIndex = 37
+        Me.grpRDS.TabStop = False
+        Me.grpRDS.Text = "Import RDS options"
+        Me.grpRDS.Visible = False
+        '
+        'ucrChkOverWrite
+        '
+        Me.ucrChkOverWrite.Checked = False
+        Me.ucrChkOverWrite.Location = New System.Drawing.Point(6, 134)
+        Me.ucrChkOverWrite.Name = "ucrChkOverWrite"
+        Me.ucrChkOverWrite.Size = New System.Drawing.Size(205, 20)
+        Me.ucrChkOverWrite.TabIndex = 49
+        '
+        'ucrChkImportObjects
+        '
+        Me.ucrChkImportObjects.Checked = False
+        Me.ucrChkImportObjects.Location = New System.Drawing.Point(6, 54)
+        Me.ucrChkImportObjects.Name = "ucrChkImportObjects"
+        Me.ucrChkImportObjects.Size = New System.Drawing.Size(205, 20)
+        Me.ucrChkImportObjects.TabIndex = 48
+        '
+        'ucrChkImportCalculations
+        '
+        Me.ucrChkImportCalculations.Checked = False
+        Me.ucrChkImportCalculations.Location = New System.Drawing.Point(6, 94)
+        Me.ucrChkImportCalculations.Name = "ucrChkImportCalculations"
+        Me.ucrChkImportCalculations.Size = New System.Drawing.Size(205, 20)
+        Me.ucrChkImportCalculations.TabIndex = 47
+        '
+        'ucrChkImportChangesLog
+        '
+        Me.ucrChkImportChangesLog.Checked = False
+        Me.ucrChkImportChangesLog.Location = New System.Drawing.Point(6, 114)
+        Me.ucrChkImportChangesLog.Name = "ucrChkImportChangesLog"
+        Me.ucrChkImportChangesLog.Size = New System.Drawing.Size(205, 20)
+        Me.ucrChkImportChangesLog.TabIndex = 46
+        '
+        'ucrChkImportFilters
+        '
+        Me.ucrChkImportFilters.Checked = False
+        Me.ucrChkImportFilters.Location = New System.Drawing.Point(6, 74)
+        Me.ucrChkImportFilters.Name = "ucrChkImportFilters"
+        Me.ucrChkImportFilters.Size = New System.Drawing.Size(205, 20)
+        Me.ucrChkImportFilters.TabIndex = 45
+        '
+        'ucrChkImportMetadata
+        '
+        Me.ucrChkImportMetadata.Checked = False
+        Me.ucrChkImportMetadata.Location = New System.Drawing.Point(6, 34)
+        Me.ucrChkImportMetadata.Name = "ucrChkImportMetadata"
+        Me.ucrChkImportMetadata.Size = New System.Drawing.Size(205, 20)
+        Me.ucrChkImportMetadata.TabIndex = 44
+        '
+        'ucrChkExistingData
+        '
+        Me.ucrChkExistingData.Checked = False
+        Me.ucrChkExistingData.Location = New System.Drawing.Point(6, 14)
+        Me.ucrChkExistingData.Name = "ucrChkExistingData"
+        Me.ucrChkExistingData.Size = New System.Drawing.Size(205, 20)
+        Me.ucrChkExistingData.TabIndex = 43
         '
         'ucrchkColumnNames
         '
@@ -523,84 +596,11 @@ Partial Class dlgImportDataset
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 27
         '
-        'grpRDS
-        '
-        Me.grpRDS.Controls.Add(Me.ucrChkOverWrite)
-        Me.grpRDS.Controls.Add(Me.ucrChkImportObjects)
-        Me.grpRDS.Controls.Add(Me.ucrChkImportCalculations)
-        Me.grpRDS.Controls.Add(Me.ucrChkImportChangesLog)
-        Me.grpRDS.Controls.Add(Me.ucrChkImportFilters)
-        Me.grpRDS.Controls.Add(Me.ucrChkImportMetadata)
-        Me.grpRDS.Controls.Add(Me.ucrChkExistingData)
-        Me.grpRDS.Location = New System.Drawing.Point(329, 56)
-        Me.grpRDS.Name = "grpRDS"
-        Me.grpRDS.Size = New System.Drawing.Size(217, 166)
-        Me.grpRDS.TabIndex = 37
-        Me.grpRDS.TabStop = False
-        Me.grpRDS.Text = "Import RDS options"
-        Me.grpRDS.Visible = False
-        '
-        'ucrChkOverWrite
-        '
-        Me.ucrChkOverWrite.Checked = False
-        Me.ucrChkOverWrite.Location = New System.Drawing.Point(6, 134)
-        Me.ucrChkOverWrite.Name = "ucrChkOverWrite"
-        Me.ucrChkOverWrite.Size = New System.Drawing.Size(205, 20)
-        Me.ucrChkOverWrite.TabIndex = 49
-        '
-        'ucrChkImportObjects
-        '
-        Me.ucrChkImportObjects.Checked = False
-        Me.ucrChkImportObjects.Location = New System.Drawing.Point(6, 54)
-        Me.ucrChkImportObjects.Name = "ucrChkImportObjects"
-        Me.ucrChkImportObjects.Size = New System.Drawing.Size(205, 20)
-        Me.ucrChkImportObjects.TabIndex = 48
-        '
-        'ucrChkImportCalculations
-        '
-        Me.ucrChkImportCalculations.Checked = False
-        Me.ucrChkImportCalculations.Location = New System.Drawing.Point(6, 94)
-        Me.ucrChkImportCalculations.Name = "ucrChkImportCalculations"
-        Me.ucrChkImportCalculations.Size = New System.Drawing.Size(205, 20)
-        Me.ucrChkImportCalculations.TabIndex = 47
-        '
-        'ucrChkImportChangesLog
-        '
-        Me.ucrChkImportChangesLog.Checked = False
-        Me.ucrChkImportChangesLog.Location = New System.Drawing.Point(6, 114)
-        Me.ucrChkImportChangesLog.Name = "ucrChkImportChangesLog"
-        Me.ucrChkImportChangesLog.Size = New System.Drawing.Size(205, 20)
-        Me.ucrChkImportChangesLog.TabIndex = 46
-        '
-        'ucrChkImportFilters
-        '
-        Me.ucrChkImportFilters.Checked = False
-        Me.ucrChkImportFilters.Location = New System.Drawing.Point(6, 74)
-        Me.ucrChkImportFilters.Name = "ucrChkImportFilters"
-        Me.ucrChkImportFilters.Size = New System.Drawing.Size(205, 20)
-        Me.ucrChkImportFilters.TabIndex = 45
-        '
-        'ucrChkImportMetadata
-        '
-        Me.ucrChkImportMetadata.Checked = False
-        Me.ucrChkImportMetadata.Location = New System.Drawing.Point(6, 34)
-        Me.ucrChkImportMetadata.Name = "ucrChkImportMetadata"
-        Me.ucrChkImportMetadata.Size = New System.Drawing.Size(205, 20)
-        Me.ucrChkImportMetadata.TabIndex = 44
-        '
-        'ucrChkExistingData
-        '
-        Me.ucrChkExistingData.Checked = False
-        Me.ucrChkExistingData.Location = New System.Drawing.Point(6, 14)
-        Me.ucrChkExistingData.Name = "ucrChkExistingData"
-        Me.ucrChkExistingData.Size = New System.Drawing.Size(205, 20)
-        Me.ucrChkExistingData.TabIndex = 43
-        '
         'dlgImportDataset
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(889, 499)
+        Me.ClientSize = New System.Drawing.Size(679, 499)
         Me.Controls.Add(Me.grpRDS)
         Me.Controls.Add(Me.lblNoPreview)
         Me.Controls.Add(Me.grpExcel)

@@ -97,24 +97,32 @@ Public Class dlgImportDataset
 
         ucrChkImportChangesLog.SetText("Import Changes log")
         ucrChkImportChangesLog.SetParameter(New RParameter("include_logs"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="")
+        ucrChkImportChangesLog.AddParameterPresentCondition(True, "include_logs")
 
         ucrChkExistingData.SetText("Keep existing data frames")
         ucrChkExistingData.SetParameter(New RParameter("keep_existing"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkExistingData.AddParameterPresentCondition(True, "keep_existing")
 
         ucrChkImportMetadata.SetText("Import metadata")
         ucrChkImportMetadata.SetParameter(New RParameter("include_metadata"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkImportMetadata.AddParameterPresentCondition(True, "include_metadata")
 
         ucrChkImportObjects.SetText("Import objects")
         ucrChkImportObjects.SetParameter(New RParameter("include_objects"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkImportObjects.AddParameterPresentCondition(True, "include_objects")
 
         ucrChkImportFilters.SetText("Import filters")
         ucrChkImportFilters.SetParameter(New RParameter("include_filters"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkImportFilters.AddParameterPresentCondition(True, "include_filters")
 
         ucrChkImportCalculations.SetText("Import calculations")
         ucrChkImportCalculations.SetParameter(New RParameter("include_calculations"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkImportCalculations.AddParameterPresentCondition(True, "include_calculations")
 
         ucrChkOverWrite.SetText("Overwrite existing if duplicates found")
         ucrChkOverWrite.SetParameter(New RParameter("overwrite_existing"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkOverWrite.AddParameterPresentCondition(True, "overwrite_existing")
+
         'temp disabled until can easily switch between fread and read.csv
 
         'ucrPnlRowNames.SetParameter(New RParameter("row.names"))
@@ -211,10 +219,6 @@ Public Class dlgImportDataset
         setExcelDefaults()
         SetRDSDefaults()
 
-        'clsImportCSV.AddParameter("encoding", Chr(34) & "unknown" & Chr(34))
-        'clsImportCSV.AddParameter("sep", Chr(34) & "auto" & Chr(34))
-        'clsImportCSV.AddParameter("header", Chr(34) & "auto" & Chr(34))
-        'clsImportCSV.AddParameter("dec", Chr(34) & "auto" & Chr(34))
     End Sub
 
 #Region "Shared options"
@@ -859,6 +863,18 @@ Public Class dlgImportDataset
             End If
         End If
         RefreshFrameView()
+    End Sub
+
+    Private Sub ucrInputXlMissingValueString_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputXlMissingValueString.ControlValueChanged
+
+    End Sub
+
+    Private Sub ucrInputNAStrings_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputNAStrings.ControlValueChanged
+
+    End Sub
+
+    Private Sub ucrInputName_NameChanged(ucrChangedControl As ucrCore) Handles ucrInputName.ControlValueChanged
+
     End Sub
 
     Private Sub lblRowVector_Click(sender As Object, e As EventArgs)
