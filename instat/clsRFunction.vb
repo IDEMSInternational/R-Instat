@@ -51,7 +51,16 @@ Public Class RFunction
             strTemp = strTemp & clsParameters(i).ToScript(strScript)
         Next
         strTemp = strTemp & ")"
-
+        If bToScriptAsRString Then
+            'TODO should also check assignment of parameters
+            If bToBeAssigned OrElse bIsAssigned Then
+                MsgBox("Developer error: Using bToScriptAsRString = True when RFunction is assigned will not produce the correct script. Remove assignment to use this options correctly.")
+            End If
+            'Cannot have double quotes ("") in the string because strTemp will be wrapped with ""
+            'In most cases signle quotes (') will give same functionality, though it's preferable to avoid this when constructing the RFunction
+            strTemp = strTemp.Replace(Chr(34), Chr(39))
+            strTemp = Chr(34) & strTemp & Chr(34)
+        End If
         Return MyBase.ToScript(strScript, strTemp)
     End Function
 
