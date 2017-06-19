@@ -50,7 +50,7 @@ Public Class clsRecentFiles
         File.WriteAllText(strRecentFilesPath, "")
         'Write each item to the file...
         For Each sPath In strListMRU
-            File.AppendAllText(strRecentFilesPath, sPath & vbCrLf)
+            File.AppendAllText(strRecentFilesPath, sPath & Environment.NewLine)
         Next
     End Sub
 
@@ -153,7 +153,7 @@ Public Class clsRecentFiles
             dlgImportDataset.strFilePathToUseOnLoad = DirectCast(sender, ToolStripItem).Tag.ToString().Substring(4)
             dlgImportDataset.ShowDialog()
         Else
-            iResult = MessageBox.Show(frmMain, "Error: File not accessible. It may have been renamed, moved or deleted." & vbNewLine & vbNewLine & "Would you like to remove this file from the list?", "Error accessing file", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
+            iResult = MessageBox.Show(frmMain, "Error: File not accessible. It may have been renamed, moved or deleted." & Environment.NewLine & Environment.NewLine & "Would you like to remove this file from the list?", "Error accessing file", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
             'removes the path to the non existent file
             If iResult = DialogResult.Yes Then
                 strListMRU.RemoveAt(strListMRU.FindLastIndex(Function(value As String)
