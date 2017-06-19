@@ -16,10 +16,9 @@
 Imports instat.Translations
 
 Public Class sdgOneVarFitModel
-    Public clsRConvert As New RFunction
+    'Public clsRConvert As New RFunction
     Public clsROneVarFitModel As New RFunction
     Private WithEvents ucrDists As ucrDistributions
-    Public bfirstload As Boolean = True
     Public bControlsInitialised As Boolean = False
 
     Private Sub sdgOneVarFitModDisplay(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -27,93 +26,102 @@ Public Class sdgOneVarFitModel
     End Sub
 
     Public Sub InitialiseControls()
-        clsROneVarFitModel.AddParameter("optim.method")
-        clsROneVarFitModel.AddParameter("method")
         ucrPnlFitMethod.AddRadioButton(rdoMle)
         ucrPnlFitMethod.AddRadioButton(rdoMme)
         ucrPnlFitMethod.AddRadioButton(rdoQme)
         ucrPnlFitMethod.AddRadioButton(rdoMge)
+
+        ucrPnlFitMethod.SetParameter(New RParameter("method"))
+        ucrPnlFitMethod.AddRadioButton(rdoMle, Chr(34) & "mle" & Chr(34))
+        ucrPnlFitMethod.AddRadioButton(rdoMme, Chr(34) & "mme" & Chr(34))
+        ucrPnlFitMethod.AddRadioButton(rdoQme, Chr(34) & "qme" & Chr(34))
+        'TODO needs a probs argument
+        ucrPnlFitMethod.AddRadioButton(rdoMge, Chr(34) & "mge" & Chr(34))
 
         ucrPnlOptimisation.AddRadioButton(rdoDefault)
         ucrPnlOptimisation.AddRadioButton(rdoNelderMead)
         ucrPnlOptimisation.AddRadioButton(rdoBFGS)
         ucrPnlOptimisation.AddRadioButton(rdoCG)
         ucrPnlOptimisation.AddRadioButton(rdoSANN)
+
+        ucrPnlOptimisation.SetParameter(New RParameter("optim.method"))
+        ucrPnlOptimisation.AddRadioButton(rdoDefault, Chr(34) & "default" & Chr(34))
+        ucrPnlOptimisation.AddRadioButton(rdoNelderMead, Chr(34) & "Nelder-Mead" & Chr(34))
+        ucrPnlOptimisation.AddRadioButton(rdoBFGS, Chr(34) & "BFGS" & Chr(34))
+        ucrPnlOptimisation.AddRadioButton(rdoCG, Chr(34) & "CG" & Chr(34))
+        ucrPnlOptimisation.AddRadioButton(rdoSANN, Chr(34) & "SANN" & Chr(34))
     End Sub
 
-    Public Sub SetDefaults()
-        'rdoQme.Enabled = False
-        'rdoDefault.Checked = True
-        'rdoMle.Checked = True
-        ''ucrBase.ihelptopicID = 
-    End Sub
+    'Public Sub SetDefaults()
+    '    'rdoQme.Enabled = False
+    '    'rdoDefault.Checked = True
+    '    'rdoMle.Checked = True
+    '    ''ucrBase.ihelptopicID = 
+    'End Sub
 
-    Public Sub SetMyRFunction(clsRNewOneVarFitModel As RFunction)
-        clsROneVarFitModel = clsRNewOneVarFitModel
-    End Sub
+    'Public Sub SetMyRFunction(clsRNewOneVarFitModel As RFunction)
+    '    clsROneVarFitModel = clsRNewOneVarFitModel
+    'End Sub
 
-    Private Sub rdoOptimMethod_CheckedChanged(sender As Object, e As EventArgs)
-        OptimisationMethod()
-    End Sub
+    'Private Sub rdoOptimMethod_CheckedChanged(sender As Object, e As EventArgs)
+    '    OptimisationMethod()
+    'End Sub
 
-    Public Sub rdoEstimators_CheckedChanged(sender As Object, e As EventArgs)
-        Estimators()
-    End Sub
+    'Public Sub rdoEstimators_CheckedChanged(sender As Object, e As EventArgs)
+    '    Estimators()
+    'End Sub
 
     Public Sub SetRCode(clsRNewOneVarFitModel As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
         clsROneVarFitModel = clsRNewOneVarFitModel
-        Estimators()
-        OptimisationMethod()
+        ucrPnlOptimisation.SetRCode(clsROneVarFitModel, bReset)
+        ucrPnlFitMethod.SetRCode(clsROneVarFitModel, bReset)
+
     End Sub
 
     Public Sub Estimators()
-        If dlgOneVarFitModel.rdoGeneralCase.Checked Then
-            If rdoMle.Checked Then
-                clsROneVarFitModel.AddParameter("method", Chr(34) & "mle" & Chr(34))
-            ElseIf rdoMme.Checked Then
-                clsROneVarFitModel.AddParameter("method", Chr(34) & "mme" & Chr(34))
-            ElseIf rdoQme.Checked Then
-                clsROneVarFitModel.AddParameter("method", Chr(34) & "qme" & Chr(34))
-                'TODO needs a probs argument
-            ElseIf rdoMge.Checked Then
-                clsROneVarFitModel.AddParameter("method", Chr(34) & "mge" & Chr(34))
-            End If
-        Else
-            clsROneVarFitModel.RemoveParameterByName("method")
-        End If
+        'If dlgOneVarFitModel.rdoGeneralCase.Checked Then
+        '    If rdoMle.Checked Then
+        '        clsROneVarFitModel.AddParameter("method", Chr(34) & "mle" & Chr(34))
+        '    ElseIf rdoMme.Checked Then
+        '        clsROneVarFitModel.AddParameter("method", Chr(34) & "mme" & Chr(34))
+        '    ElseIf rdoQme.Checked Then
+        '        clsROneVarFitModel.AddParameter("method", Chr(34) & "qme" & Chr(34))
+        '        'TODO needs a probs argument
+        '    ElseIf rdoMge.Checked Then
+        '        clsROneVarFitModel.AddParameter("method", Chr(34) & "mge" & Chr(34))
+        '    End If
+        'Else
+        '    clsROneVarFitModel.RemoveParameterByName("method")
+        'End If
     End Sub
 
     Public Sub OptimisationMethod()
-        If dlgOneVarFitModel.rdoGeneralCase.Checked Then
-            If rdoDefault.Checked Then
-                clsROneVarFitModel.AddParameter("optim.method", Chr(34) & "default" & Chr(34))
-            ElseIf rdoNelderMead.Checked Then
-                clsROneVarFitModel.AddParameter("optim.method", Chr(34) & "Nelder-Mead" & Chr(34))
-            ElseIf rdoBFGS.Checked Then
-                clsROneVarFitModel.AddParameter("optim.method", Chr(34) & "BFGS" & Chr(34))
-            ElseIf rdoCG.Checked Then
-                clsROneVarFitModel.AddParameter("optim.method", Chr(34) & "CG" & Chr(34))
-            ElseIf rdoSANN.Checked Then
-                clsROneVarFitModel.AddParameter("optim.method", Chr(34) & "SANN" & Chr(34))
-            End If
-        Else
-            clsROneVarFitModel.RemoveParameterByName("optim.method")
-        End If
+        'If dlgOneVarFitModel.rdoGeneralCase.Checked Then
+        'If rdoDefault.Checked Then
+        '        clsROneVarFitModel.AddParameter("optim.method", Chr(34) & "default" & Chr(34))
+        '    ElseIf rdoNelderMead.Checked Then
+        '        clsROneVarFitModel.AddParameter("optim.method", Chr(34) & "Nelder-Mead" & Chr(34))
+        '    ElseIf rdoBFGS.Checked Then
+        '        clsROneVarFitModel.AddParameter("optim.method", Chr(34) & "BFGS" & Chr(34))
+        '    ElseIf rdoCG.Checked Then
+        '        clsROneVarFitModel.AddParameter("optim.method", Chr(34) & "CG" & Chr(34))
+        '    ElseIf rdoSANN.Checked Then
+        '        clsROneVarFitModel.AddParameter("optim.method", Chr(34) & "SANN" & Chr(34))
+        '    End If
+        'Else
+        '    clsROneVarFitModel.RemoveParameterByName("optim.method")
+        'End If
     End Sub
 
-    Public Sub SetDistribution(ucrNewDists As ucrDistributions)
-        ucrDists = ucrNewDists
-        SetPlotOptions()
-    End Sub
+    'Public Sub SetDistribution(ucrNewDists As ucrDistributions)
+    '    'ucrDists = ucrNewDists
+    '    'SetPlotOptions()
+    'End Sub
 
     Private Sub ucrDists_cboDistributionsIndexChanged() Handles ucrDists.DistributionsIndexChanged
-        SetPlotOptions()
-    End Sub
-
-    Private Sub SetPlotOptions()
         If ucrDists.clsCurrDistribution IsNot Nothing AndAlso Not ucrDists.clsCurrDistribution.bIsContinuous Then
             rdoMge.Enabled = False
             If rdoMge.Checked Then
@@ -124,11 +132,15 @@ Public Class sdgOneVarFitModel
         End If
     End Sub
 
-    Private Sub TabPage1_Click(sender As Object, e As EventArgs)
+    'Private Sub SetPlotOptions()
+    '    If ucrDists.clsCurrDistribution IsNot Nothing AndAlso Not ucrDists.clsCurrDistribution.bIsContinuous Then
+    '        rdoMge.Enabled = False
+    '        If rdoMge.Checked Then
+    '            rdoMle.Checked = True
+    '        End If
+    '    Else
+    '        rdoMge.Enabled = True
+    '    End If
+    'End Sub
 
-    End Sub
-
-    Private Sub TabPage1_Click_1(sender As Object, e As EventArgs)
-
-    End Sub
 End Class

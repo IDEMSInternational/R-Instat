@@ -68,10 +68,10 @@ Public Class dlgOneVarFitModel
 
         ucrChkBinModify.SetText("Modify Conditions for 'Success'")
 
-        sdgOneVarFitModDisplay.SetModelFunction(clsROneVarFitModel)
-        sdgOneVarFitModel.SetMyRFunction(clsROneVarFitModel)
-        sdgOneVarFitModDisplay.SetDistribution(ucrFamily)
-        sdgOneVarFitModel.SetDistribution(ucrFamily)
+        ' sdgOneVarFitModDisplay.SetModelFunction(clsROneVarFitModel)
+        'sdgOneVarFitModel.SetMyRFunction(clsROneVarFitModel)
+        'sdgOneVarFitModDisplay.SetDistribution(ucrFamily)
+        'sdgOneVarFitModel.SetDistribution(ucrFamily)
 
         ucrPnlGeneralExactCase.AddRadioButton(rdoGeneralCase)
         ucrPnlGeneralExactCase.AddRadioButton(rdoExactCase)
@@ -150,7 +150,7 @@ Public Class dlgOneVarFitModel
         SetDataParameter()
         EnableOptions()
         sdgOneVarFitModDisplay.SetDefaults()
-        sdgOneVarFitModel.SetDefaults()
+        'sdgOneVarFitModel.SetDefaults()
         SetBaseFunction()
         clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertInteger)
         clsROneVarFitModel.SetAssignTo("last_model", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model")
@@ -397,6 +397,8 @@ Public Class dlgOneVarFitModel
     Private Sub PlotResiduals()
         clsRplot.SetPackageName("graphics")
         clsRplot.SetRCommand("plot")
+        clsRfitdist.SetPackageName("fitdistrplus")
+        clsRfitdist.SetRCommand("fitdist")
         clsRplot.AddParameter("x", clsRFunctionParameter:=clsRfitdist)
         clsRfitdist.AddParameter("distr", Chr(34) & ucrFamily.clsCurrDistribution.strRName & Chr(34))
         If ucrFamily.clsCurrDistribution.strNameTag = "Poisson" Then
