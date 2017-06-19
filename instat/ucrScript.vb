@@ -34,6 +34,6 @@ Public Class ucrScript
     End Sub
 
     Public Sub AppendText(strText As String)
-        txtScript.Text = txtScript.Text & vbCrLf & strText
+        txtScript.Text = txtScript.Text & Environment.NewLine & strText
     End Sub
 End Class
