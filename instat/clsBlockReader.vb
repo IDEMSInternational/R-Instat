@@ -21,7 +21,7 @@ Public Class BlockReader
     '[17:09:37] François Renaud: Also for the moment secondary and main R commands generated within a dialogue are in separate blocks, but this needs to be addressed from the point of view of RSyntax, Runscript, Output and BlockSelector before BlockReader get's edited.
     '[1711:29] Danny Parsons: yes that will all be In RSyntax
     '[17:11:50] Danny Parsons: although we will Then need a way To remove output from a block As there will be output between commands
-    '[17:20:11] François Renaud: aiaa, yes, that's true. Ok, I m thinking, maybe the easiest is to have different layers, runscript blocks and dialogue blocks. Output's can be padded with another type of symbol as vbcrlf or we could even imagine to have signatures provided by each dialogue... this would facilitate the repopulation of the dialogue when clicking on a block.
+    '[17:20:11] François Renaud: aiaa, yes, that's true. Ok, I m thinking, maybe the easiest is to have different layers, runscript blocks and dialogue blocks. Output's can be padded with another type of symbol as Environment.NewLine or we could even imagine to have signatures provided by each dialogue... this would facilitate the repopulation of the dialogue when clicking on a block.
 
     Private strComment As String 'The comment that is part of the block. 'Warning: only one comment per bloc for now... will need to go over this when secondary R-commands are taken in the same block.
     Private lstRCommands As List(Of RParameter) 'The list of RParameters that store the information about the RCommands.
@@ -52,7 +52,7 @@ Public Class BlockReader
     Public Sub ReadBlock(strBlockText As String)
         'This sub reads the block of text coming from the output window. 'need more commenting
         Dim lstLines As String()
-        lstLines = strBlockText.Split(vbCrLf)
+        lstLines = strBlockText.Split(Environment.NewLine)
         If lstRCommands Is Nothing Then
             lstRCommands = New List(Of RParameter)
         End If
