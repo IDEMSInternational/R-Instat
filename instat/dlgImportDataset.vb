@@ -581,7 +581,7 @@ Public Class dlgImportDataset
             Case "No"
                 clsReadCSV.AddParameter("header", "FALSE")
             Case Else
-                ' clsReadCSV.RemoveParameterByName("header")
+                clsReadCSV.RemoveParameterByName("header")
         End Select
         RefreshFrameView()
     End Sub
