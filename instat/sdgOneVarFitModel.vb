@@ -20,33 +20,53 @@ Public Class sdgOneVarFitModel
     Public clsROneVarFitModel As New RFunction
     Private WithEvents ucrDists As ucrDistributions
     Public bfirstload As Boolean = True
+    Public bControlsInitialised As Boolean = False
 
     Private Sub sdgOneVarFitModDisplay(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
 
-    Public Sub InitialiseDialog()
+    Public Sub InitialiseControls()
         clsROneVarFitModel.AddParameter("optim.method")
         clsROneVarFitModel.AddParameter("method")
+        ucrPnlFitMethod.AddRadioButton(rdoMle)
+        ucrPnlFitMethod.AddRadioButton(rdoMme)
+        ucrPnlFitMethod.AddRadioButton(rdoQme)
+        ucrPnlFitMethod.AddRadioButton(rdoMge)
+
+        ucrPnlOptimisation.AddRadioButton(rdoDefault)
+        ucrPnlOptimisation.AddRadioButton(rdoNelderMead)
+        ucrPnlOptimisation.AddRadioButton(rdoBFGS)
+        ucrPnlOptimisation.AddRadioButton(rdoCG)
+        ucrPnlOptimisation.AddRadioButton(rdoSANN)
     End Sub
 
     Public Sub SetDefaults()
-        rdoQme.Enabled = False
-        rdoDefault.Checked = True
-        rdoMle.Checked = True
-        'ucrBase.ihelptopicID = 
+        'rdoQme.Enabled = False
+        'rdoDefault.Checked = True
+        'rdoMle.Checked = True
+        ''ucrBase.ihelptopicID = 
     End Sub
 
     Public Sub SetMyRFunction(clsRNewOneVarFitModel As RFunction)
         clsROneVarFitModel = clsRNewOneVarFitModel
     End Sub
 
-    Private Sub rdoOptimMethod_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDefault.CheckedChanged, rdoNelderMead.CheckedChanged, rdoBFGS.CheckedChanged, rdoCG.CheckedChanged, rdoSANN.CheckedChanged
+    Private Sub rdoOptimMethod_CheckedChanged(sender As Object, e As EventArgs)
         OptimisationMethod()
     End Sub
 
-    Public Sub rdoEstimators_CheckedChanged(sender As Object, e As EventArgs) Handles rdoMle.CheckedChanged, rdoMme.CheckedChanged, rdoQme.CheckedChanged, rdoMge.CheckedChanged
+    Public Sub rdoEstimators_CheckedChanged(sender As Object, e As EventArgs)
         Estimators()
+    End Sub
+
+    Public Sub SetRCode(clsRNewOneVarFitModel As RFunction, Optional bReset As Boolean = False)
+        If Not bControlsInitialised Then
+            InitialiseControls()
+        End If
+        clsROneVarFitModel = clsRNewOneVarFitModel
+        Estimators()
+        OptimisationMethod()
     End Sub
 
     Public Sub Estimators()
@@ -104,4 +124,11 @@ Public Class sdgOneVarFitModel
         End If
     End Sub
 
+    Private Sub TabPage1_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub TabPage1_Click_1(sender As Object, e As EventArgs)
+
+    End Sub
 End Class
