@@ -16,7 +16,8 @@
 Imports instat.Translations
 
 Public Class sdgOneVarFitModDisplay
-    Private clsRplotFunction As New RFunction
+    Public clsRplotFunction, clsRplotPPComp, clsRplotCdfcomp, clsRplotQqComp, clsRplotDenscomp As RFunction
+    '  Private clsRplotFunction As New RFunction
     Private clsModel As New RFunction
     Private clsRLogLikFunction As New RFunction
     Private WithEvents ucrDists As ucrDistributions
@@ -46,32 +47,38 @@ Public Class sdgOneVarFitModDisplay
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetDefaults()
-        ' rdoPlotAll.Checked = True
-        ' rdoLoglik.Checked = True
-        'ucrSaveLikelihood.Enabled = False
-        'ucrBase.ihelptopicID = 
-        ' ucrSavePlots.strPrefix = "Plot"
-        ' ucrSaveLikelihood.strPrefix = "Likelihood"
-        'ucrSaveLikelihood.Reset()
-        ' ucrSavePlots.Reset()
-    End Sub
+    ' Public Sub SetDefaults()
+    ' rdoPlotAll.Checked = True
+    ' rdoLoglik.Checked = True
+    'ucrSaveLikelihood.Enabled = False
+    'ucrBase.ihelptopicID = 
+    ' ucrSavePlots.strPrefix = "Plot"
+    ' ucrSaveLikelihood.strPrefix = "Likelihood"
+    'ucrSaveLikelihood.Reset()
+    ' ucrSavePlots.Reset()
+    ' End Sub
 
-    Public Sub SetModelFunction(clsNewModel As RFunction)
-        clsModel = clsNewModel
-        clsRLogLikFunction.AddParameter("mlefit", clsRFunctionParameter:=clsModel)
-    End Sub
+    'Public Sub SetModelFunction(clsNewModel As RFunction)
+    '    clsModel = clsNewModel
+    '    clsRLogLikFunction.AddParameter("mlefit", clsRFunctionParameter:=clsModel)
+    'End Sub
 
     Public Sub SetDistribution(ucrNewDists As ucrDistributions)
         ucrDists = ucrNewDists
         SetPlotOptions()
     End Sub
 
-    Public Sub SetRCode(clsRNewOneVarFitModel As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsRNewOneVarFitModel As RFunction, clsNewRplotFunction As RFunction, clsNewRplotPPComp As RFunction, clsNewRplotCdfcomp As RFunction, clsNewRplotQqComp As RFunction, clsNewRplotDenscomp As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
         clsModel = clsRNewOneVarFitModel
+        clsRplotFunction = clsNewRplotFunction
+        clsRplotPPComp = clsNewRplotPPComp
+        clsRplotCdfcomp = clsNewRplotCdfcomp
+        clsRplotQqComp = clsNewRplotQqComp
+        clsRplotDenscomp = clsNewRplotDenscomp
+        clsRLogLikFunction.AddParameter("mlefit", clsRFunctionParameter:=clsModel)
         'ucrPnlOptimisation.SetRCode(clsModel, bReset)
         'ucrPnlFitMethod.SetRCode(clsModel, bReset)
         CreateGraphs()
@@ -79,35 +86,35 @@ Public Class sdgOneVarFitModDisplay
 
     Public Sub CreateGraphs()
         If rdoPlotAll.Checked Then
-            clsRplotFunction.ClearParameters()
-            clsRplotFunction.SetPackageName("")
-            clsRplotFunction.SetRCommand("plot")
+            'clsRplotFunction.ClearParameters()
+            'clsRplotFunction.SetPackageName("")
+            'clsRplotFunction.SetRCommand("plot")
             clsRplotFunction.AddParameter("x", clsRFunctionParameter:=clsModel)
-            frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 3)
+            ' frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 3)
         ElseIf rdoPPPlot.Checked Then
-            clsRplotFunction.ClearParameters()
-            clsRplotFunction.SetPackageName("fitdistrplus")
-            clsRplotFunction.SetRCommand("ppcomp")
+            'clsRplotFunction.ClearParameters()
+            'clsRplotFunction.SetPackageName("fitdistrplus")
+            'clsRplotFunction.SetRCommand("ppcomp")
             clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
-            frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 3)
+            ' frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 3)
         ElseIf rdoCDFPlot.Checked Then
-            clsRplotFunction.ClearParameters()
-            clsRplotFunction.SetPackageName("fitdistrplus")
-            clsRplotFunction.SetRCommand("cdfcomp")
+            'clsRplotFunction.ClearParameters()
+            'clsRplotFunction.SetPackageName("fitdistrplus")
+            'clsRplotFunction.SetRCommand("cdfcomp")
             clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
-            frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 3)
+            ' frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 3)
         ElseIf rdoQQPlot.Checked Then
-            clsRplotFunction.ClearParameters()
-            clsRplotFunction.SetPackageName("fitdistrplus")
-            clsRplotFunction.SetRCommand("qqcomp")
+            'clsRplotFunction.ClearParameters()
+            'clsRplotFunction.SetPackageName("fitdistrplus")
+            'clsRplotFunction.SetRCommand("qqcomp")
             clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
-            frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 3)
+            ' frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 3)
         ElseIf rdoDensityPlot.Checked Then
-            clsRplotFunction.ClearParameters()
-            clsRplotFunction.SetPackageName("fitdistrplus")
-            clsRplotFunction.SetRCommand("denscomp")
+            'clsRplotFunction.ClearParameters()
+            'clsRplotFunction.SetPackageName("fitdistrplus")
+            'clsRplotFunction.SetRCommand("denscomp")
             clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
-            frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 3)
+            '' frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 3)
         End If
     End Sub
 
@@ -168,9 +175,9 @@ Public Class sdgOneVarFitModDisplay
             ucrSavePlots.Visible = True
         End If
         If rdoNoLik.Checked Then
-            UcrSaveLikelihood.Visible = False
+            ucrSaveLikelihood.Visible = False
         Else
-            UcrSaveLikelihood.Visible = True
+            ucrSaveLikelihood.Visible = True
         End If
     End Sub
 
