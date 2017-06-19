@@ -169,7 +169,7 @@ Partial Class dlgSpells
         Me.ucrInputCondition.IsReadOnly = False
         Me.ucrInputCondition.Location = New System.Drawing.Point(132, 44)
         Me.ucrInputCondition.Name = "ucrInputCondition"
-        Me.ucrInputCondition.Size = New System.Drawing.Size(97, 21)
+        Me.ucrInputCondition.Size = New System.Drawing.Size(155, 21)
         Me.ucrInputCondition.TabIndex = 10
         '
         'ucrInputSpellUpper
@@ -177,7 +177,7 @@ Partial Class dlgSpells
         Me.ucrInputSpellUpper.AddQuotesIfUnrecognised = True
         Me.ucrInputSpellUpper.IsMultiline = False
         Me.ucrInputSpellUpper.IsReadOnly = False
-        Me.ucrInputSpellUpper.Location = New System.Drawing.Point(237, 44)
+        Me.ucrInputSpellUpper.Location = New System.Drawing.Point(293, 44)
         Me.ucrInputSpellUpper.Name = "ucrInputSpellUpper"
         Me.ucrInputSpellUpper.Size = New System.Drawing.Size(63, 21)
         Me.ucrInputSpellUpper.TabIndex = 18
