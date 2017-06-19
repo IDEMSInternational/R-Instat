@@ -13,7 +13,6 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 
 Public Class dlgStartofRains
@@ -174,7 +173,7 @@ Public Class dlgStartofRains
     End Sub
 
     Private Sub SetDefaults()
-        clsAddKey = New RFunction
+        '        clsAddKey = New RFunction
         clsAddKeyColName = New RFunction
         clsDayFromAndTo = New RFunction
         clsDayFromAndToOperator = New ROperator
@@ -259,7 +258,7 @@ Public Class dlgStartofRains
         clsFirstDOYPerYear.SetRCommand("instat_calculation$new")
         clsManipulationFirstDOYPerYear.SetRCommand("list")
         clsFirstDOYPerYear.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
-        clsFirstDOYPerYear.AddParameter("function_exp", Chr(34) & clsFirstDOYPerYearOperator.ToScript & Chr(34), iPosition:=1)
+        '        clsFirstDOYPerYear.AddParameter("function_exp", Chr(34) & clsFirstDOYPerYearOperator.ToScript & Chr(34), iPosition:=1)
         clsFirstDOYPerYearOperator.SetOperation("[")
         clsFirstDOYPerYearOperator.AddParameter("rightside", "1]", iPosition:=1)
         clsFirstDOYPerYear.AddParameter("result_name", Chr(34) & ucrSaveStartofRains.GetText() & Chr(34), iPosition:=2)
@@ -498,6 +497,7 @@ Public Class dlgStartofRains
             clsDPRainInDays.AddParameter("function_exp", Chr(34) & clsDPRainInDaysFunctionLead.ToScript & Chr(34), iPosition:=2)
             clsDPRainInDays.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames & ")")
         End If
+        clsFirstDOYPerYear.AddParameter("function_exp", Chr(34) & clsFirstDOYPerYearOperator.ToScript & Chr(34), iPosition:=1)
     End Sub
 
     Private Sub RainDays()
@@ -520,12 +520,12 @@ Public Class dlgStartofRains
         '        clsMaxValueManipulation.AddParameter("sub3", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False)
     End Sub
 
-    Private Sub ucrReceiverDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlValueChanged, ucrReceiverStation.ControlValueChanged
+    Private Sub ucrReceiverYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlValueChanged, ucrReceiverStation.ControlValueChanged
         ' does this update if I change the data name?
-        If Not ucrReceiverStation.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty Then
-            clsGroupBy.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDate.GetVariableNames & "," & strCurrDataName & "=" & ucrReceiverStation.GetVariableNames & ")")
+        If Not ucrReceiverStation.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty Then
+            clsGroupBy.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames & "," & strCurrDataName & "=" & ucrReceiverStation.GetVariableNames & ")")
         Else
-            clsGroupBy.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDate.GetVariableNames & ")")
+            clsGroupBy.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames & ")")
         End If
         clsManipulationFirstDOYPerYear.AddParameter("sub2", clsRFunctionParameter:=clsGroupBy, bIncludeArgumentName:=False)
     End Sub
@@ -589,6 +589,8 @@ Public Class dlgStartofRains
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(True)
+        TestOKEnabled()
     End Sub
 
     Private Sub grpRainParameters_Enter(sender As Object, e As EventArgs)
@@ -719,14 +721,6 @@ Public Class dlgStartofRains
         '    nudDPOverallInterval.Minimum = nudDPRainPeriod.Value + 1
         'End If
     End Sub
-
-    'Private Sub AddKeyMethod()
-    '    If Not ucrReceiverDate.IsEmpty Then
-    '        clsAddKey.AddParameter("col_name", ucrReceiverDate.GetVariableNames)
-    '    Else
-    '        clsAddKey.RemoveParameterByName("col_name")
-    '    End If
-    'End Sub
 
     Private Sub RainyDaysMethod()
         If ((Not ucrReceiverRainfall.IsEmpty) AndAlso (ucrNudThreshold.Text <> "")) Then
