@@ -47,16 +47,19 @@ Public Class dlgWindrose
         ucrReceiverWindSpeed.SetParameter(New RParameter("speed", 0))
         ucrReceiverWindSpeed.Selector = ucrWindRoseSelector
         ucrReceiverWindSpeed.SetIncludedDataTypes({"numeric"})
+        ucrReceiverWindSpeed.strSelectorHeading = "Numerics"
         ucrReceiverWindSpeed.SetParameterIsRFunction()
 
         ucrReceiverWindDirection.SetParameter(New RParameter("direction", 1))
         ucrReceiverWindDirection.Selector = ucrWindRoseSelector
         ucrReceiverWindDirection.SetIncludedDataTypes({"numeric"})
+        ucrReceiverWindDirection.strSelectorHeading = "Numerics"
         ucrReceiverWindDirection.SetParameterIsRFunction()
 
         ucrReceiverFacet.SetParameter(New RParameter("facet", 2))
         ucrReceiverFacet.Selector = ucrWindRoseSelector
         ucrReceiverFacet.SetIncludedDataTypes({"factor"})
+        ucrReceiverFacet.strSelectorHeading = "Factors"
         ucrReceiverFacet.SetParameterIsRFunction()
 
         ucrNudNoOfColumns.SetParameter(New RParameter("n_col", 7))
