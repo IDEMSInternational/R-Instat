@@ -239,7 +239,7 @@ Public Class clsGridLink
         UpdateGrids()
     End Sub
 
-    Public Sub FillSheet(dfTemp As DataFrame, strName As String, grdCurr As ReoGridControl, Optional bInstatObjectDataFrame As Boolean = False, Optional bIncludeDataTypes As Boolean = False, Optional iNewPosition As Integer = -1, Optional bFilterApplied As Boolean = False, Optional bCheckFreezeColumns As Boolean = False)
+    Public Sub FillSheet(dfTemp As DataFrame, strName As String, grdCurr As ReoGridControl, Optional bInstatObjectDataFrame As Boolean = False, Optional bIncludeDataTypes As Boolean = False, Optional iNewPosition As Integer = -1, Optional bFilterApplied As Boolean = False, Optional bCheckFreezeColumns As Boolean = False, Optional iRowMax As Integer = -1)
         Dim bFoundWorksheet As Boolean = False
         Dim tempWorkSheet As Worksheet
         Dim fillWorkSheet As Worksheet
@@ -257,7 +257,6 @@ Public Class clsGridLink
         Dim vecColumnColours As NumericVector
         Dim bApplyColumnColours As Boolean
         Dim i, j, k As Integer
-        Dim expColNames As SymbolicExpression
         Dim strCurrColNames As String = ""
         Dim strCurrHeader As String
         Dim lstColumnNames As New List(Of String)
@@ -294,7 +293,11 @@ Public Class clsGridLink
             fillWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_AllowAdjustRowHeight, False)
         Else
             fillWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_AllowAdjustRowHeight, True)
-            fillWorkSheet.Rows = Math.Min(iMaxRows, dfTemp.RowCount)
+            If iRowMax <> -1 Then
+                fillWorkSheet.Rows = Math.Min(iRowMax, dfTemp.RowCount)
+            Else
+                fillWorkSheet.Rows = dfTemp.RowCount
+            End If
             fillWorkSheet.SetRowsHeight(0, 1, 20)
             rngDataRange = New RangePosition(0, 0, fillWorkSheet.Rows, fillWorkSheet.Columns)
             fillWorkSheet.SetRangeDataFormat(rngDataRange, DataFormat.CellDataFormatFlag.Text)
