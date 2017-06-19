@@ -22,7 +22,8 @@ Public Class ucrCore
     'There may be duplicate values in the lists. For example, one parameter being added into multiple functions.
     Protected lstAllRCodes As List(Of RCodeStructure) = New List(Of RCodeStructure)({Nothing})
     Protected lstAllRParameters As List(Of RParameter) = New List(Of RParameter)({Nothing})
-
+    'Control may have conditions on RSyntax as a whole i.e. value depends on a function being in the RSyntax
+    Protected clsRSyntax As RSyntax = Nothing
     'Default value of the control
     'No specific type since it can be interpreted different by each control type
     Protected objRDefault As Object = Nothing
@@ -143,10 +144,10 @@ Public Class ucrCore
         If bIsActiveRControl Then
             'If the default state is set then the linked control will set the value for this control
             If objDefaultState Is Nothing Then
-                If clsRCode IsNot Nothing Then
+                If clsRCode IsNot Nothing OrElse clsRSyntax IsNot Nothing Then
                     For Each kvpTemp As KeyValuePair(Of Object, List(Of Condition)) In dctConditions
                         If kvpTemp.Value.Count > 0 Then
-                            If AllConditionsSatisfied(kvpTemp.Value, clsRCode, clsParameter) Then
+                            If AllConditionsSatisfied(kvpTemp.Value, clsRCode, clsParameter, clsRSyntax) Then
                                 If bConditionsMet Then
                                     MsgBox("Developer error: More than one state of control " & Name & " satisfies it's condition. Cannot determine how to set the control from the RCode. Modify conditions so that only one state can satisfy its conditions.")
                                 Else
@@ -223,6 +224,18 @@ Public Class ucrCore
     Public Overridable Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False)
         If clsRCode Is Nothing OrElse Not clsRCode.Equals(clsNewCodeStructure) Then
             clsRCode = clsNewCodeStructure
+            If bUpdateRCodeFromControl AndAlso CanUpdate() Then
+                UpdateRCode(bReset)
+            End If
+        End If
+        UpdateControl(bReset)
+    End Sub
+
+    'TODO in future may want to set RCode and RSyntax together if both needed for conditions
+    '     then would need method to add both at the same time
+    Public Overridable Sub SetRSyntax(clsNewRSyntax As RSyntax, Optional bReset As Boolean = False)
+        If clsRSyntax Is Nothing OrElse Not clsRSyntax.Equals(clsNewRSyntax) Then
+            clsRSyntax = clsNewRSyntax
             If bUpdateRCodeFromControl AndAlso CanUpdate() Then
                 UpdateRCode(bReset)
             End If
@@ -469,6 +482,20 @@ Public Class ucrCore
         Dim clsTempCond As New Condition
 
         clsTempCond.SetParameterValuesRFunctionNames(strParamName:=strParameterName, lstRCodeNames:=strFunctionNames.ToList(), bNewIsPositive:=bNewIsPositive)
+        AddCondition(objControlState, clsTempCond)
+    End Sub
+
+    Public Sub AddRSyntaxContainsFunctionNamesCondition(objControlState As Object, strFunctionNames As String(), Optional bNewIsPositive As Boolean = True)
+        Dim clsTempCond As New Condition
+
+        clsTempCond.SetRSyntaxFunctionNamesMultiple(strFunctionNames.ToList(), bNewIsPositive:=bNewIsPositive)
+        AddCondition(objControlState, clsTempCond)
+    End Sub
+
+    Public Sub AddRSyntaxContainCodeCondition(objControlState As Object, Optional bNewIsPositive As Boolean = True)
+        Dim clsTempCond As New Condition
+
+        clsTempCond.SetRSyntaxContainsCode(bNewIsPositive:=bNewIsPositive)
         AddCondition(objControlState, clsTempCond)
     End Sub
 

@@ -40,6 +40,8 @@ Public Class dlgOneVarUseModel
     End Sub
 
     Private Sub InitialiseDialog()
+        'Temp fix: Bugs on second running- an inifinite loop is created
+        sdgOneVarUseModFit.rdoCIcdf.Enabled = False
         ucrBase.iHelpTopicID = 375
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
