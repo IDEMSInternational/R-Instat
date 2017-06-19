@@ -44,7 +44,7 @@ Public Class dlgOneVarFitModel
         UcrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         sdgOneVarFitModDisplay.InitialiseDialog()
-        sdgOneVarFitModel.InitialiseDialog()
+        'sdgOneVarFitModel.InitialiseDialog()
 
         UcrReceiver.Selector = ucrSelectorOneVarFitMod
         UcrReceiver.SetMeAsReceiver()
@@ -156,6 +156,7 @@ Public Class dlgOneVarFitModel
         clsROneVarFitModel.SetAssignTo("last_model", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model")
         UcrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModel)
         SetDistributions()
+        bResetSubdialog = True
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
@@ -248,7 +249,7 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Public Sub SetBaseFunction()
-        clsROneVarFitModel.ClearParameters()
+        'clsROneVarFitModel.ClearParameters()
         clsRPoissonTest.ClearParameters()
         clsRBinomTest.ClearParameters()
         clsRTTest.ClearParameters()
@@ -294,7 +295,7 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Public Sub FitDistFunction()
-        ' UcrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModel)
+        UcrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModel)
         clsROneVarFitModel.AddParameter("distr", Chr(34) & ucrFamily.clsCurrDistribution.strRName & Chr(34))
         SetDataParameter()
     End Sub
@@ -374,8 +375,8 @@ Public Class dlgOneVarFitModel
         clsRBinomTest.SetPackageName("stats")
         clsRBinomTest.SetRCommand("binom.test")
         UcrBase.clsRsyntax.SetBaseRFunction(clsRBinomTest)
-        ' clsRBinomTest.AddParameter("p", ucrNudHyp.Value.ToString)
-        ' clsRBinomTest.AddParameter("conf.level", ucrNudCI.Value.ToString)
+        clsRBinomTest.AddParameter("p", ucrNudHyp.Value.ToString)
+        clsRBinomTest.AddParameter("conf.level", ucrNudCI.Value.ToString)
         If ucrChkBinModify.Checked Then
             If UcrReceiver.strCurrDataType = "factor" OrElse UcrReceiver.strCurrDataType = "character" Then
                 clsRBinomTest.AddParameter("x", clsROperatorParameter:=clsFactorOperator)
@@ -415,7 +416,10 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub cmdFittingOptions_Click(sender As Object, e As EventArgs) Handles cmdFittingOptions.Click
+        sdgOneVarFitModel.SetRCode(clsROneVarFitModel, bResetSubdialog)
+        bResetSubdialog = False
         sdgOneVarFitModel.ShowDialog()
+        TestOKEnabled()
         EnableOptions()
         Display()
     End Sub
@@ -511,7 +515,7 @@ Public Class dlgOneVarFitModel
         DataTypeAccepted()
     End Sub
 
-    Private Sub ucrDistributions_cboDistributionsIndexChanged() Handles ucrFamily.DistributionsIndexChanged, ucrFamily.DistributionsIndexChanged
+    Private Sub ucrDistributions_cboDistributionsIndexChanged() Handles ucrFamily.DistributionsIndexChanged
         SetBaseFunction()
         BinomialConditions()
         SetDataParameter()
@@ -521,11 +525,6 @@ Public Class dlgOneVarFitModel
 
     Private Sub lbls_VisibleChanged(sender As Object, e As EventArgs) Handles lblEquals.VisibleChanged, lblSuccessIf.VisibleChanged
         BinomialConditions()
-    End Sub
-
-    Private Sub chkBinModify_CheckedChanged(sender As Object, e As EventArgs)
-        BinomialConditions()
-        SetBinomialTest()
     End Sub
 
     Private Sub BinomialConditions()
