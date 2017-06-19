@@ -45,6 +45,7 @@ Public Class dlgOneWayFrequencies
         ucrReceiverOneWayFreq.SetParameterIsRFunction()
         ucrReceiverOneWayFreq.bForceAsDataFrame = True
         ucrReceiverOneWayFreq.Selector = ucrSelectorOneWayFreq
+        ucrReceiverOneWayFreq.strSelectorHeading = "Variables"
         'temp fix to bug in sjPlot
         ucrReceiverOneWayFreq.bRemoveLabels = True
 
@@ -52,6 +53,7 @@ Public Class dlgOneWayFrequencies
         ucrReceiverWeights.SetParameterIsRFunction()
         ucrReceiverWeights.Selector = ucrSelectorOneWayFreq
         ucrReceiverWeights.SetDataType("numeric")
+        ucrReceiverWeights.strSelectorHeading = "Numerics"
 
         ucrPnlSort.SetParameter(New RParameter("sort.frq", 3))
         ucrPnlSort.AddRadioButton(rdoNone, Chr(34) & "none" & Chr(34))

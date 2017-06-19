@@ -47,11 +47,13 @@ Public Class dlgColumnStats
         ucrReceiverSelectedVariables.SetParameter(New RParameter("columns_to_summarise", 1))
         ucrReceiverSelectedVariables.SetParameterIsString()
         ucrReceiverSelectedVariables.SetIncludedDataTypes({"numeric"})
+        ucrReceiverSelectedVariables.strSelectorHeading = "Numerics"
         ucrReceiverSelectedVariables.Selector = ucrSelectorForColumnStatistics
 
         ucrReceiverByFactor.SetParameter(New RParameter("factors", 2))
         ucrReceiverByFactor.Selector = ucrSelectorForColumnStatistics
         ucrReceiverByFactor.SetIncludedDataTypes({"factor"}) 'This needs to change
+        ucrReceiverByFactor.strSelectorHeading = "Factors"
         ucrReceiverByFactor.SetParameterIsString()
 
         ucrChkStoreResults.SetParameter(New RParameter("store_results", 3))
