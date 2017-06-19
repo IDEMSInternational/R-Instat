@@ -551,7 +551,6 @@ Public Class dlgWaterBalance
     'End Sub
 
     Private Sub ucrReceiverYear_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverYear.SelectionChanged
-        YearGroupDaily()
         TestOKEnabled()
     End Sub
 
