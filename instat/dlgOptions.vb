@@ -68,8 +68,6 @@ Public Class dlgOptions
         ucrPnlLanguage.AddRadioButton(rdoEnglish)
         ucrPnlLanguage.AddRadioButton(rdoSpanish)
         ucrPnlLanguage.AddRadioButton(rdoFrench)
-        'ucrNudDigits.Minimum = 0
-        'ucrNudDigits.Maximum = 22
     End Sub
 
     Private Sub LoadInstatOptions()
