@@ -300,7 +300,7 @@ Public Class dlgImportDataset
                 sReader = New StreamReader(ucrInputFilePath.GetText())
                 txtPreview.Text = ""
                 For i = 1 To intLines + nudSkip.Value + 1
-                    txtPreview.Text = txtPreview.Text & sReader.ReadLine() & vbCrLf
+                    txtPreview.Text = txtPreview.Text & sReader.ReadLine() & Environment.NewLine
                     If sReader.Peek() = -1 Then
                         Exit For
                     End If
