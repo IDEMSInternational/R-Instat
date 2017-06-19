@@ -28,6 +28,7 @@ Public Class clsGridLink
     Public bGrdMetadataChanged As Boolean
     Public bGrdVariablesMetadataChanged As Boolean
     Public iMaxRows As Integer
+    Public iMaxCols As Integer
     Private strMetadata As String
     Public fntText As Font = New Font("Microsoft Sans Serif", 10, FontStyle.Regular)
     Public clrText As Color = Color.Black
@@ -43,6 +44,7 @@ Public Class clsGridLink
         bGrdMetadataChanged = False
         bGrdVariablesMetadataChanged = False
         iMaxRows = 1000
+        iMaxCols = 30
     End Sub
 
     Public Sub UpdateGrids()
@@ -78,6 +80,8 @@ Public Class clsGridLink
         clsGetDataFrame.AddParameter("convert_to_character", "TRUE")
         clsGetDataFrame.AddParameter("include_hidden_columns", "FALSE")
         clsGetDataFrame.AddParameter("use_current_filter", "TRUE")
+        clsGetDataFrame.AddParameter("max_cols", iMaxCols)
+        clsGetDataFrame.AddParameter("max_rows", iMaxRows)
         clsFilterApplied.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$filter_applied")
         clsSetDataFramesChanged.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_data_frames_changed")
         clsGetVariablesMetadata.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
@@ -255,6 +259,8 @@ Public Class clsGridLink
         Dim i, j, k As Integer
         Dim expColNames As SymbolicExpression
         Dim strCurrColNames As String = ""
+        Dim strCurrHeader As String
+        Dim lstColumnNames As New List(Of String)
 
         iCount = 0
         For Each tempWorkSheet In grdCurr.Worksheets
@@ -314,24 +320,14 @@ Public Class clsGridLink
             FormatDataView(fillWorkSheet)
         End If
         Try
-            clsGetColumnNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_names")
-            clsGetColumnNames.AddParameter("data_name", Chr(34) & strName & Chr(34))
-            clsGetColumnNames.AddParameter("include", "list(Is_Hidden = FALSE)")
-            If bInstatObjectDataFrame AndAlso frmMain.clsRLink.bInstatObjectExists Then
-                expColNames = frmMain.clsRLink.RunInternalScriptGetValue(clsGetColumnNames.ToScript())
-                If expColNames IsNot Nothing AndAlso expColNames.Type <> Internals.SymbolicExpressionType.Null Then
-                    strCurrColNames = frmMain.clsRLink.GetListAsRString(expColNames.AsCharacter.ToList)
-                Else
-                    strCurrColNames = ""
-                End If
-            End If
+            lstColumnNames = dfTemp.ColumnNames.ToList
+            strCurrColNames = frmMain.clsRLink.GetListAsRString(lstColumnNames)
 
             If bInstatObjectDataFrame AndAlso frmMain.clsRLink.bInstatObjectExists AndAlso bIncludeDataTypes Then
                 If bInstatObjectDataFrame AndAlso frmMain.clsRLink.bInstatObjectExists Then
-                    clsGetVarMetaFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
+                    clsGetVarMetaFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_data_types")
                     clsGetVarMetaFunc.AddParameter("data_name", Chr(34) & strName & Chr(34))
-                    clsGetVarMetaFunc.AddParameter("property", "data_type_label")
-                    clsGetVarMetaFunc.AddParameter("column", strCurrColNames)
+                    clsGetVarMetaFunc.AddParameter("columns", strCurrColNames)
                 Else
                     clsGetVarMetaFunc.SetRCommand("sapply")
                     clsGetVarMetaFunc.AddParameter("X", strName)
@@ -341,33 +337,31 @@ Public Class clsGridLink
                 vecColumnDataTypes = frmMain.clsRLink.RunInternalScriptGetValue(clsGetVarMetaFunc.ToScript()).AsCharacter
 
                 For k = 0 To dfTemp.ColumnCount - 1
+                    strCurrHeader = lstColumnNames(k)
                     If vecColumnDataTypes(k).Contains("factor") AndAlso vecColumnDataTypes(k).Contains("ordered") Then
-                        fillWorkSheet.ColumnHeaders(k).Text = strColumnNames(k) & " (o.f)"
+                        fillWorkSheet.ColumnHeaders(k).Text = strCurrHeader & " (o.f)"
                         fillWorkSheet.ColumnHeaders(k).TextColor = Graphics.SolidColor.Blue
                     ElseIf vecColumnDataTypes(k).Contains("factor") Then
-                        fillWorkSheet.ColumnHeaders(k).Text = strColumnNames(k) & " (f)"
+                        fillWorkSheet.ColumnHeaders(k).Text = strCurrHeader & " (f)"
                         fillWorkSheet.ColumnHeaders(k).TextColor = Graphics.SolidColor.Blue
                     ElseIf vecColumnDataTypes(k).Contains("character") Then
-                        fillWorkSheet.ColumnHeaders(k).Text = strColumnNames(k) & " (c)"
+                        fillWorkSheet.ColumnHeaders(k).Text = strCurrHeader & " (c)"
                         fillWorkSheet.ColumnHeaders(k).TextColor = Graphics.SolidColor.DarkBlue
                     ElseIf vecColumnDataTypes(k).Contains("Date") Then
-                        fillWorkSheet.ColumnHeaders(k).Text = strColumnNames(k) & " (D)"
+                        fillWorkSheet.ColumnHeaders(k).Text = strCurrHeader & " (D)"
+                        fillWorkSheet.ColumnHeaders(k).TextColor = Graphics.SolidColor.DarkBlue
+                    ElseIf vecColumnDataTypes(k).Contains("logical") Then
+                        fillWorkSheet.ColumnHeaders(k).Text = strCurrHeader & " (l)"
                         fillWorkSheet.ColumnHeaders(k).TextColor = Graphics.SolidColor.DarkBlue
                     Else
-                        fillWorkSheet.ColumnHeaders(k).Text = strColumnNames(k)
+                        fillWorkSheet.ColumnHeaders(k).Text = strCurrHeader
                         fillWorkSheet.ColumnHeaders(k).TextColor = Graphics.SolidColor.DarkBlue
                     End If
                 Next
             Else
-                If strColumnNames IsNot Nothing Then
-                    For k = 0 To dfTemp.ColumnCount - 1
-                        fillWorkSheet.ColumnHeaders(k).Text = strColumnNames(k)
-                    Next
-                Else
-                    For k = 0 To dfTemp.ColumnCount - 1
-                        fillWorkSheet.ColumnHeaders(k).Text = ""
-                    Next
-                End If
+                For k = 0 To lstColumnNames.Count - 1
+                    fillWorkSheet.ColumnHeaders(k).Text = lstColumnNames(k)
+                Next
             End If
             grdCurr.CurrentWorksheet = fillWorkSheet
             If bInstatObjectDataFrame AndAlso frmMain.clsRLink.bInstatObjectExists Then
