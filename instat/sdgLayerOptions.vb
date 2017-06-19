@@ -52,9 +52,9 @@ Public Class sdgLayerOptions
     End Sub
 
     Public Sub SetupLayer(clsNewGgPlot As RFunction, clsNewGeomFunc As RFunction, clsNewGlobalAesFunc As RFunction, clsNewLocalAes As RFunction, Optional bFixGeom As Boolean = False, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bApplyAesGlobally As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional bReset As Boolean = False, Optional iTabToDisplay As Integer = 0, Optional strDataFrame As String = "")
-        'If iTabToDisplay > 0 AndAlso iTabToDisplay <= tbcLayers.TabCount - 1 Then
-        '    tbcLayers.SelectedIndex = iTabToDisplay
-        'End If
+        If iTabToDisplay > 0 AndAlso iTabToDisplay <= tbcLayers.TabCount - 1 Then
+            tbcLayers.SelectedIndex = iTabToDisplay
+        End If
         If bReset Then
             tbcLayers.SelectedIndex = 0
         End If
