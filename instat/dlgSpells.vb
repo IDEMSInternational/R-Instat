@@ -153,7 +153,7 @@ Public Class dlgSpells
         'DayFromandTo
         clsDayFromAndTo.SetRCommand("instat_calculation$new")
         clsDayFromAndTo.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
-        'clsDayFromAndTo.AddParameter("function_exp", Chr(34) & clsDayFromAndToOperator.ToScript & Chr(34), iPosition:=1)
+        clsDayFromAndTo.AddParameter("function_exp", clsDayFromAndToOperator.bToScriptAsRString = True, iPosition:=1)
         clsDayFromAndToOperator.SetOperation("&")
         clsDayFromAndToOperator.AddParameter("from", clsROperatorParameter:=clsDayFromOperator, iPosition:=0)
         clsDayFromOperator.SetOperation(">=")
@@ -172,7 +172,7 @@ Public Class dlgSpells
         clsRRainday.AddParameter("result_name", Chr(34) & "rain_day" & Chr(34), iPosition:=2)
         clsRRainday.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames() & ")", iPosition:=3)
         clsRRainday.AddParameter("save", "0", iPosition:=6)
-        '        clsRRainday.AddParameter("function_exp", Chr(34) & clsRRaindayMatch.ToScript & Chr(34), iPosition:=1)
+        clsRRainday.AddParameter("function_exp", clsRRaindayMatch.bToScriptAsRString = True, iPosition:=1)
         clsRRaindayMatch.SetRCommand("match")
         clsRRaindayMatch.AddParameter("x", clsROperatorParameter:=clsRRaindayAndOperator)
         clsRRaindayAndOperator.SetOperation("&")
@@ -257,14 +257,14 @@ Public Class dlgSpells
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         frmMain.clsRLink.RunScript(clsAddKey.ToScript, strComment:="Spells: Defining Date column as key")
-        clsDayFromAndTo.SetAssignTo("Day_From_and_To")
+        '        clsDayFromAndTo.SetAssignTo("Day_From_and_To")
         clsGroupBy.SetAssignTo("Grouping")
         clsMaxValue.SetAssignTo("Spells_Rain")
         clsSpellLength.SetAssignTo("Dry_Spell")
 
-        clsDayFromAndTo.AddParameter("function_exp", Chr(34) & clsDayFromAndToOperator.ToScript & Chr(34), iPosition:=1)
+        '        clsDayFromAndTo.AddParameter("function_exp", Chr(34) & clsDayFromAndToOperator.ToScript & Chr(34), iPosition:=1)
         clsMaxValue.AddParameter("function_exp", Chr(34) & clsMaxValueFunction.ToScript & Chr(34), iPosition:=1)
-        clsRRainday.AddParameter("function_exp", Chr(34) & clsRRaindayMatch.ToScript & Chr(34), iPosition:=1)
+        '        clsRRainday.AddParameter("function_exp", Chr(34) & clsRRaindayMatch.ToScript & Chr(34), iPosition:=1)
 
         If ucrChkConditional.Checked Then
             clsAdditionalConditionList.AddParameter("sub1", clsRFunctionParameter:=clsRRainday)
