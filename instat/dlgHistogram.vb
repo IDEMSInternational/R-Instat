@@ -215,6 +215,7 @@ Public Class dlgHistogram
         TempOptionsDisabledInMultipleVariablesCase()
     End Sub
 
+    'TODO remove vbCr not compatible with other code
     Private Sub rdoHistogram_KeyPress(sender As Object, e As KeyPressEventArgs) Handles rdoHistogram.KeyPress
         If e.KeyChar = vbCr Then
             rdoHistogram.Checked = True
