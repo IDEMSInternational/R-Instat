@@ -30,6 +30,7 @@ Public Class dlgCorrelation
         SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
+        ReopenDialog()
         TestOKEnabled()
     End Sub
 
@@ -61,7 +62,7 @@ Public Class dlgCorrelation
         sdgCorrPlot.ucrSelectFactor.SetDataframe(ucrSelectorCorrelation.ucrAvailableDataFrames.strCurrDataFrame, bEnableDataframe:=False)
 
         ucrNudConfidenceInterval.SetParameter(New RParameter("conf.level", 3))
-        ucrNudConfidenceInterval.SetMinMax(0, 100)
+        ucrNudConfidenceInterval.SetMinMax(0, 1)
         ucrNudConfidenceInterval.DecimalPlaces = 2
         ucrNudConfidenceInterval.Increment = 0.05
         ucrNudConfidenceInterval.SetRDefault(0.95)
@@ -75,22 +76,12 @@ Public Class dlgCorrelation
         ucrPnlMethod.AddRadioButton(rdoPearson, Chr(34) & "pearson" & Chr(34))
         ucrPnlMethod.AddRadioButton(rdoKendall, Chr(34) & "kendall" & Chr(34))
         ucrPnlMethod.AddRadioButton(rdoSpearman, Chr(34) & "spearman" & Chr(34))
-
-        ucrPnlMethod.AddParameterValuesCondition(rdoPearson, "method", "pearson")
-        ucrPnlMethod.AddParameterValuesCondition(rdoPearson, "method", "pearson", False)
-        ucrPnlMethod.AddParameterValuesCondition(rdoPearson, "method", "pearson", False)
-
-        ucrPnlMethod.AddParameterValuesCondition(rdoKendall, "method", "kendall")
-        ucrPnlMethod.AddParameterValuesCondition(rdoKendall, "method", "pearson", False)
-        ucrPnlMethod.AddParameterValuesCondition(rdoKendall, "method", "pearson", False)
-
-        ucrPnlMethod.AddParameterValuesCondition(rdoSpearman, "method", "spearman")
-        ucrPnlMethod.AddParameterValuesCondition(rdoSpearman, "method", "pearson", False)
-        ucrPnlMethod.AddParameterValuesCondition(rdoSpearman, "method", "pearson", False)
+        ucrPnlMethod.SetRDefault(Chr(34) & "pearson" & Chr(34))
 
         ucrPnlCompletePairwise.SetParameter(New RParameter("use", 5))
         ucrPnlCompletePairwise.AddRadioButton(rdoPairwise, Chr(34) & "pairwise.complete.obs" & Chr(34))
         ucrPnlCompletePairwise.AddRadioButton(rdoCompleteRowsOnly, Chr(34) & "complete.obs" & Chr(34))
+        ucrPnlCompletePairwise.SetRDefault(Chr(34) & "pairwise.complete.obs" & Chr(34))
         'ucrChk
         ucrChkCorrelationMatrix.SetText("Correlation Matrix")
 
@@ -111,6 +102,8 @@ Public Class dlgCorrelation
         clsCorrelationTestFunction.AddParameter("alternative", Chr(34) & "two.sided" & Chr(34))
         clsCorrelationTestFunction.AddParameter("exact", "NULL")
         clsCorrelationTestFunction.AddParameter("conf.level", "0.95")
+        clsCorrelationFunction.AddParameter("use", Chr(34) & "pairwise.complete.obs" & Chr(34))
+        clsCorrelationTestFunction.AddParameter("method", Chr(34) & "pearson" & Chr(34))
         ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationFunction)
 
         sdgCorrPlot.SetDefaults()
@@ -120,14 +113,13 @@ Public Class dlgCorrelation
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverMultipleColumns.AddAdditionalCodeParameterPair(clsCorrelationFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
-        'ucrNudConfidenceInterval.AddAdditionalCodeParameterPair(clsCorrelationFunction, New RParameter("conf.level", 3), iAdditionalPairNo:=1)
-
         ucrReceiverMultipleColumns.SetRCode(clsCorrelationFunction, bReset)
         ucrNudConfidenceInterval.SetRCode(clsCorrelationTestFunction, bReset)
         ucrReceiverFirstColumn.SetRCode(clsCorrelationTestFunction, bReset)
         ucrReceiverSecondColumn.SetRCode(clsCorrelationTestFunction, bReset)
-        ucrPnlColumns.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrPnlMethod.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrPnlColumns.SetRCode(clsCorrelationFunction, bReset)
+        ucrPnlMethod.SetRCode(clsCorrelationTestFunction, bReset)
+        ucrPnlCompletePairwise.SetRCode(clsCorrelationFunction, bReset)
     End Sub
 
     Public Sub TestOKEnabled()
@@ -152,6 +144,14 @@ Public Class dlgCorrelation
         'End If
     End Sub
 
+    Private Sub ReopenDialog()
+        If rdoMultipleColumns.Checked Then
+            grpMissing.Visible = True
+        Else
+            grpMissing.Visible = False
+        End If
+    End Sub
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
@@ -166,15 +166,19 @@ Public Class dlgCorrelation
         End If
     End Sub
 
-    Private Sub ucrReceiverFirstColumn_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstColumn.ControlContentsChanged, ucrReceiverSecondColumn.ControlContentsChanged
-        TestOKEnabled()
-    End Sub
-
     Private Sub ucrPnlPairwise_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlCompletePairwise.ControlValueChanged
         If rdoCompleteRowsOnly.Checked Then
             clsCorrelationFunction.AddParameter("use", Chr(34) & "pairwise.complete.obs" & Chr(34))
         ElseIf rdoPairwise.Checked Then
             clsCorrelationFunction.AddParameter("use", Chr(34) & "complete.obs" & Chr(34))
+        End If
+    End Sub
+
+    Private Sub ucrPnlColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumns.ControlValueChanged
+        If rdoTwoColumns.Checked Then
+            cmdOptions.Visible = False
+        ElseIf rdoMultipleColumns.Checked Then
+            cmdOptions.Visible = True
         End If
     End Sub
 
@@ -184,6 +188,10 @@ Public Class dlgCorrelation
             sdgCorrPlot.clsRGraphics.AddParameter("columns", ucrReceiverMultipleColumns.GetVariableNames())
             sdgCorrPlot.clsRGGscatmatrix.AddParameter("columns", ucrReceiverMultipleColumns.GetVariableNames)
         End If
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrReceiverFirstColumn_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstColumn.ControlContentsChanged, ucrReceiverSecondColumn.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
@@ -266,7 +274,7 @@ Public Class dlgCorrelation
     End Sub
 
     Private Sub cmdPlots_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgCorrPlot.ShowDialog()
+        'sdgCorrPlot.ShowDialog()
     End Sub
 
     Private Sub ucrReceiverMultipleColumns_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverMultipleColumns.SelectionChanged

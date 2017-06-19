@@ -28,24 +28,24 @@ Partial Class dlgCorrelation
         Me.rdoKendall = New System.Windows.Forms.RadioButton()
         Me.rdoPearson = New System.Windows.Forms.RadioButton()
         Me.rdoSpearman = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlMethod = New instat.UcrPanel()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.grpMissing = New System.Windows.Forms.GroupBox()
         Me.rdoCompleteRowsOnly = New System.Windows.Forms.RadioButton()
         Me.rdoPairwise = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlCompletePairwise = New instat.UcrPanel()
         Me.lblConfInterval = New System.Windows.Forms.Label()
         Me.rdoTwoColumns = New System.Windows.Forms.RadioButton()
         Me.rdoMultipleColumns = New System.Windows.Forms.RadioButton()
+        Me.ucrNudConfidenceInterval = New instat.ucrNud()
         Me.ucrChkCorrelationMatrix = New instat.ucrCheck()
         Me.ucrPnlColumns = New instat.UcrPanel()
         Me.ucrSaveModel = New instat.ucrSaveModel()
+        Me.ucrPnlMethod = New instat.UcrPanel()
         Me.ucrReceiverMultipleColumns = New instat.ucrReceiverMultiple()
+        Me.ucrPnlCompletePairwise = New instat.UcrPanel()
         Me.ucrReceiverSecondColumn = New instat.ucrReceiverSingle()
         Me.ucrReceiverFirstColumn = New instat.ucrReceiverSingle()
         Me.ucrSelectorCorrelation = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrNudConfidenceInterval = New instat.ucrNud()
         Me.grpMethod.SuspendLayout()
         Me.grpMissing.SuspendLayout()
         Me.SuspendLayout()
@@ -119,16 +119,9 @@ Partial Class dlgCorrelation
         Me.rdoSpearman.Text = "Spearman"
         Me.rdoSpearman.UseVisualStyleBackColor = True
         '
-        'ucrPnlMethod
-        '
-        Me.ucrPnlMethod.Location = New System.Drawing.Point(8, 17)
-        Me.ucrPnlMethod.Name = "ucrPnlMethod"
-        Me.ucrPnlMethod.Size = New System.Drawing.Size(255, 39)
-        Me.ucrPnlMethod.TabIndex = 16
-        '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(255, 189)
+        Me.cmdOptions.Location = New System.Drawing.Point(253, 189)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(120, 25)
         Me.cmdOptions.TabIndex = 9
@@ -173,13 +166,6 @@ Partial Class dlgCorrelation
         Me.rdoPairwise.Text = "Pairwise"
         Me.rdoPairwise.UseVisualStyleBackColor = True
         '
-        'ucrPnlCompletePairwise
-        '
-        Me.ucrPnlCompletePairwise.Location = New System.Drawing.Point(3, 17)
-        Me.ucrPnlCompletePairwise.Name = "ucrPnlCompletePairwise"
-        Me.ucrPnlCompletePairwise.Size = New System.Drawing.Size(189, 39)
-        Me.ucrPnlCompletePairwise.TabIndex = 17
-        '
         'lblConfInterval
         '
         Me.lblConfInterval.AutoSize = True
@@ -221,6 +207,18 @@ Partial Class dlgCorrelation
         Me.rdoMultipleColumns.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoMultipleColumns.UseVisualStyleBackColor = True
         '
+        'ucrNudConfidenceInterval
+        '
+        Me.ucrNudConfidenceInterval.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudConfidenceInterval.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudConfidenceInterval.Location = New System.Drawing.Point(360, 163)
+        Me.ucrNudConfidenceInterval.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudConfidenceInterval.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudConfidenceInterval.Name = "ucrNudConfidenceInterval"
+        Me.ucrNudConfidenceInterval.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudConfidenceInterval.TabIndex = 19
+        Me.ucrNudConfidenceInterval.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'ucrChkCorrelationMatrix
         '
         Me.ucrChkCorrelationMatrix.Checked = False
@@ -243,6 +241,13 @@ Partial Class dlgCorrelation
         Me.ucrSaveModel.Size = New System.Drawing.Size(267, 28)
         Me.ucrSaveModel.TabIndex = 12
         '
+        'ucrPnlMethod
+        '
+        Me.ucrPnlMethod.Location = New System.Drawing.Point(8, 17)
+        Me.ucrPnlMethod.Name = "ucrPnlMethod"
+        Me.ucrPnlMethod.Size = New System.Drawing.Size(255, 39)
+        Me.ucrPnlMethod.TabIndex = 16
+        '
         'ucrReceiverMultipleColumns
         '
         Me.ucrReceiverMultipleColumns.frmParent = Me
@@ -254,6 +259,13 @@ Partial Class dlgCorrelation
         Me.ucrReceiverMultipleColumns.strNcFilePath = ""
         Me.ucrReceiverMultipleColumns.TabIndex = 3
         Me.ucrReceiverMultipleColumns.ucrSelector = Nothing
+        '
+        'ucrPnlCompletePairwise
+        '
+        Me.ucrPnlCompletePairwise.Location = New System.Drawing.Point(3, 17)
+        Me.ucrPnlCompletePairwise.Name = "ucrPnlCompletePairwise"
+        Me.ucrPnlCompletePairwise.Size = New System.Drawing.Size(189, 39)
+        Me.ucrPnlCompletePairwise.TabIndex = 17
         '
         'ucrReceiverSecondColumn
         '
@@ -296,23 +308,11 @@ Partial Class dlgCorrelation
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 14
         '
-        'ucrNudConfidenceInterval
-        '
-        Me.ucrNudConfidenceInterval.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudConfidenceInterval.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudConfidenceInterval.Location = New System.Drawing.Point(360, 163)
-        Me.ucrNudConfidenceInterval.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudConfidenceInterval.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudConfidenceInterval.Name = "ucrNudConfidenceInterval"
-        Me.ucrNudConfidenceInterval.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudConfidenceInterval.TabIndex = 19
-        Me.ucrNudConfidenceInterval.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'dlgCorrelation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(546, 410)
+        Me.ClientSize = New System.Drawing.Size(504, 410)
         Me.Controls.Add(Me.ucrNudConfidenceInterval)
         Me.Controls.Add(Me.ucrChkCorrelationMatrix)
         Me.Controls.Add(Me.rdoTwoColumns)
