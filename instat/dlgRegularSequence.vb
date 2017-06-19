@@ -48,7 +48,7 @@ Public Class dlgRegularSequence
 
         ucrInputInStepsOf.SetParameter(New RParameter("by", 2))
         ucrInputInStepsOf.AddQuotesIfUnrecognised = False
-        ucrInputInStepsOf.SetValidationTypeAsNumeric(dcmMin:=1)
+        ucrInputInStepsOf.SetValidationTypeAsNumeric(dcmMin:=0)
 
         ucrNudRepeatValues.SetParameter(New RParameter("each", 1))
         ucrNudRepeatValues.SetMinMax(1, Integer.MaxValue)
@@ -202,9 +202,9 @@ Public Class dlgRegularSequence
                 vecSequence = frmMain.clsRLink.RunInternalScriptGetValue(strRCommand, bSilent:=True).AsNumeric
                 ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnName.GetText, strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText)
                 If iLength < ucrSelectDataFrameRegularSequence.iDataFrameLength Then
-                    txtMessage.Text = "Sequence extended to match the length of the data frame."
+                    txtMessage.Text = "Sequence extended to match" & Environment.NewLine & " the length of the data frame."
                 ElseIf iLength > ucrSelectDataFrameRegularSequence.iDataFrameLength Then
-                    txtMessage.Text = "Sequence truncated to match the length of the data frame."
+                    txtMessage.Text = "Sequence truncated to match" & Environment.NewLine & " the length of the data frame."
                 End If
             Else
                 clsRepFunction.RemoveParameterByName("length.out")
