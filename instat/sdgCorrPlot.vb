@@ -35,13 +35,13 @@ Public Class sdgCorrPlot
             Else
                 dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
             End If
-            dlgCorrelation.ucrBase.clsRsyntax.SetBaseRFunction(dlgCorrelation.clsRCorrelation)
+            ' dlgCorrelation.ucrBase.clsRsyntax.SetBaseRFunction(dlgCorrelation.clsRCorrelation)
         End If
         dlgCorrelation.TestOKEnabled()
     End Sub
 
     Public Sub GGPairs()
-        dlgCorrelation.TempData()
+        'dlgCorrelation.TempData()
         clsRGraphics.SetPackageName("GGally")
         clsRGraphics.SetRCommand("ggpairs")
         dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
@@ -54,14 +54,14 @@ Public Class sdgCorrPlot
         clsRGGcorrGraphics.SetPackageName("GGally")
         clsRGGcorrGraphics.SetRCommand("ggcorr")
         clsRGGcorrGraphics.AddParameter("data", "NULL")
-        clsRGGcorrGraphics.AddParameter("cor_matrix", clsRFunctionParameter:=dlgCorrelation.clsRCorrelation)
+        'clsRGGcorrGraphics.AddParameter("cor_matrix", clsRFunctionParameter:=dlgCorrelation.clsRCorrelation)
         dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
         dlgCorrelation.ucrBase.clsRsyntax.SetBaseRFunction(clsRGGcorrGraphics)
         dlgCorrelation.TestOKEnabled()
     End Sub
 
     Public Sub GGscatmatrix()
-        dlgCorrelation.TempData()
+        'dlgCorrelation.TempData()
         clsRGGscatmatrix.SetPackageName("GGally")
         clsRGGscatmatrix.SetRCommand("ggscatmat")
         dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
