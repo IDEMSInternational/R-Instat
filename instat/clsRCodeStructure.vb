@@ -54,6 +54,11 @@ Public Class RCodeStructure
     'Will be cleared after running unless bClearFromGlobal = False
     Public bClearFromGlobal As Boolean = False
 
+    ' If True when running ToScript the function will be returned as a string that could be passed to R
+    ' e.g. "seq(from = 1, to = 10)" instead of seq(from = 1, to = 10)
+    ' When True, assignment cannot be used for the function or its parameters
+    Public bToScriptAsRString As Boolean = False
+
     Public Event ParametersChanged()
 
     'Public ReadOnly Property OrderedIndices As List(Of Integer)
