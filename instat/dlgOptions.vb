@@ -116,7 +116,7 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.SetFormatComment(fntComment, clrComment)
         frmMain.clsInstatOptions.SetFormatScript(fntCommand, clrCommand)
         frmMain.clsInstatOptions.SetFormatEditor(fntEditor, clrEditor)
-        frmMain.clsInstatOptions.SetComment(ucrInputComment.Text)
+        frmMain.clsInstatOptions.SetComment(ucrInputComment.GetText)
         frmMain.clsInstatOptions.SetPreviewRows(ucrNudPreviewRows.Value)
         frmMain.clsInstatOptions.SetMaxRows(ucrNudMaxRows.Value)
         frmMain.clsInstatOptions.SetLanguageCultureCode(strCurrLanguageCulture)
