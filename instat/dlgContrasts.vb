@@ -166,7 +166,7 @@ Public Class dlgContrasts
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrSheet.AfterCellEdit
         If e.NewData.ToString() <> "" Then
             If Not IsNumeric(e.NewData) Then
-                MsgBox("Invalid value: " & e.NewData.ToString() & vbNewLine & "You entered a non numeric value. Please enter a numeric value ", MsgBoxStyle.Exclamation, "Invalid Value")
+                MsgBox("Invalid value: " & e.NewData.ToString() & Environment.NewLine & "You entered a non numeric value. Please enter a numeric value ", MsgBoxStyle.Exclamation, "Invalid Value")
                 e.EndReason = EndEditReason.Cancel
             ElseIf e.NewData Is Nothing Then
                 MsgBox("All the cells in the grid must not be empty", MsgBoxStyle.Exclamation)
