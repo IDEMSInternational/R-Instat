@@ -98,12 +98,14 @@ Public Class dlgBarAndPieChart
 
         ucrFactorReceiver.Selector = ucrBarChartSelector
         ucrFactorReceiver.SetIncludedDataTypes({"factor"})
+        ucrFactorReceiver.strSelectorHeading = "Factors"
         ucrFactorReceiver.SetParameter(New RParameter("x", 0))
         ucrFactorReceiver.bWithQuotes = False
         ucrFactorReceiver.SetParameterIsString()
 
         ucrSecondReceiver.Selector = ucrBarChartSelector
         ucrSecondReceiver.SetIncludedDataTypes({"factor"})
+        ucrSecondReceiver.strSelectorHeading = "Factors"
         ucrSecondReceiver.SetParameter(New RParameter("fill", 1))
         ucrSecondReceiver.bWithQuotes = False
         ucrSecondReceiver.SetParameterIsString()
