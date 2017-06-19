@@ -90,6 +90,7 @@ Public Class dlgStartofRains
         ucrNudTo.SetParameter(New RParameter("to", 0))
         ucrNudTo.SetMinMax(2, 366)
 
+        ucrNudThreshold.SetParameter(New RParameter("threshold", 1))
         ucrNudThreshold.DecimalPlaces = 2
 
         'Total Rainfall
@@ -429,6 +430,8 @@ Public Class dlgStartofRains
         ucrReceiverDOY.SetRCode(clsDayToOperator, bReset)
         ucrNudFrom.SetRCode(clsDayFromOperator, bReset)
         ucrNudTo.SetRCode(clsDayToOperator, bReset)
+
+        ucrNudThreshold.SetRCode(clsRainyDaysOperator, bReset)
 
         ucrReceiverStation.SetRCode(clsAddKeyColName, bReset)
         ucrReceiverDate.SetRCode(clsAddKeyColName, bReset)
