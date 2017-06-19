@@ -26,10 +26,10 @@ Public Class sdgOneVarFitModel
     End Sub
 
     Public Sub InitialiseControls()
-        ucrPnlFitMethod.AddRadioButton(rdoMle)
-        ucrPnlFitMethod.AddRadioButton(rdoMme)
-        ucrPnlFitMethod.AddRadioButton(rdoQme)
-        ucrPnlFitMethod.AddRadioButton(rdoMge)
+        'ucrPnlFitMethod.AddRadioButton(rdoMle)
+        'ucrPnlFitMethod.AddRadioButton(rdoMme)
+        'ucrPnlFitMethod.AddRadioButton(rdoQme)
+        'ucrPnlFitMethod.AddRadioButton(rdoMge)
 
         ucrPnlFitMethod.SetParameter(New RParameter("method"))
         ucrPnlFitMethod.AddRadioButton(rdoMle, Chr(34) & "mle" & Chr(34))
@@ -38,11 +38,11 @@ Public Class sdgOneVarFitModel
         'TODO needs a probs argument
         ucrPnlFitMethod.AddRadioButton(rdoMge, Chr(34) & "mge" & Chr(34))
 
-        ucrPnlOptimisation.AddRadioButton(rdoDefault)
-        ucrPnlOptimisation.AddRadioButton(rdoNelderMead)
-        ucrPnlOptimisation.AddRadioButton(rdoBFGS)
-        ucrPnlOptimisation.AddRadioButton(rdoCG)
-        ucrPnlOptimisation.AddRadioButton(rdoSANN)
+        'ucrPnlOptimisation.AddRadioButton(rdoDefault)
+        'ucrPnlOptimisation.AddRadioButton(rdoNelderMead)
+        'ucrPnlOptimisation.AddRadioButton(rdoBFGS)
+        'ucrPnlOptimisation.AddRadioButton(rdoCG)
+        'ucrPnlOptimisation.AddRadioButton(rdoSANN)
 
         ucrPnlOptimisation.SetParameter(New RParameter("optim.method"))
         ucrPnlOptimisation.AddRadioButton(rdoDefault, Chr(34) & "default" & Chr(34))
@@ -50,6 +50,7 @@ Public Class sdgOneVarFitModel
         ucrPnlOptimisation.AddRadioButton(rdoBFGS, Chr(34) & "BFGS" & Chr(34))
         ucrPnlOptimisation.AddRadioButton(rdoCG, Chr(34) & "CG" & Chr(34))
         ucrPnlOptimisation.AddRadioButton(rdoSANN, Chr(34) & "SANN" & Chr(34))
+        bControlsInitialised = True
     End Sub
 
     'Public Sub SetDefaults()
