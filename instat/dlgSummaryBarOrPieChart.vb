@@ -69,18 +69,21 @@ Public Class dlgSummaryBarOrPieChart
         ucrYReceiver.SetParameter(New RParameter("y", 1))
         ucrYReceiver.Selector = ucrSummaryBarSelector
         ucrYReceiver.SetIncludedDataTypes({"numeric"})
+        ucrYReceiver.strSelectorHeading = "Numerics"
         ucrYReceiver.bWithQuotes = False
         ucrYReceiver.SetParameterIsString()
 
         ucrFactorReceiver.SetParameter(New RParameter("x", 0))
         ucrFactorReceiver.Selector = ucrSummaryBarSelector
         ucrFactorReceiver.SetIncludedDataTypes({"factor"})
+        ucrFactorReceiver.strSelectorHeading = "Factors"
         ucrFactorReceiver.bWithQuotes = False
         ucrFactorReceiver.SetParameterIsString()
 
         ucrSecondFactorReceiver.SetParameter(New RParameter("fill", 2))
         ucrSecondFactorReceiver.Selector = ucrSummaryBarSelector
         ucrSecondFactorReceiver.SetIncludedDataTypes({"factor"})
+        ucrSecondFactorReceiver.strSelectorHeading = "Factors"
         ucrSecondFactorReceiver.bWithQuotes = False
         ucrSecondFactorReceiver.SetParameterIsString()
 
