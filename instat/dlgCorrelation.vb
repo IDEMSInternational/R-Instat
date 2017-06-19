@@ -16,21 +16,29 @@
 Imports instat.Translations
 
 Public Class dlgCorrelation
-    Public bFirstLoad As Boolean = True
+    Private bFirstload As Boolean = True
+    Private bReset As Boolean = True
     Public bIsTwoColumnFunction As Boolean
     Public clsRCorrelation As New RFunction
     Dim clsTempFunc As RFunction
+    Private clsCorrelationTestFunction, clsCorrelation As New RFunction
     Private Sub dlgCorrelation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         End If
-        TestOKEnabled()
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
         autoTranslate(Me)
+        TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 421
+
         ucrReceiverFirstColumn.Selector = ucrSelectorCorrelation
         ucrReceiverSecondColumn.Selector = ucrSelectorCorrelation
         ucrReceiverMultipleColumns.Selector = ucrSelectorCorrelation
@@ -47,12 +55,6 @@ Public Class dlgCorrelation
         nudConfidenceInterval.Minimum = 0
         nudConfidenceInterval.Maximum = 1
         nudConfidenceInterval.Increment = 0.05
-        ucrBase.iHelpTopicID = 421
-        'Help ID changed from 186
-    End Sub
-
-    Private Sub ReopenDialog()
-
     End Sub
 
     Private Sub SetDefaults()
@@ -66,8 +68,34 @@ Public Class dlgCorrelation
         ucrSaveModel.ucrInputModelName.SetName("Cor")
         ucrSaveModel.chkSaveModel.Checked = False
         ucrSaveModel.ucrInputModelName.Visible = False
-        chkCorrelationMatrix.Checked = True
+        'chkCorrelationMatrix.Checked = True
         TestOKEnabled()
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+
+    End Sub
+
+    Public Sub TestOKEnabled()
+        If rdoTwoColumns.Checked Then
+            ucrBase.clsRsyntax.RemoveAssignTo()
+            If (Not ucrReceiverFirstColumn.IsEmpty()) AndAlso (Not ucrReceiverSecondColumn.IsEmpty()) AndAlso (rdoPearson.Checked = True Or rdoKendall.Checked = True Or rdoSpearman.Checked = True) Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
+        ElseIf rdoMultipleColumns.Checked AndAlso ucrReceiverMultipleColumns.lstSelectedVariables.Items.Count > 1 AndAlso (rdoCompleteRowsOnly.Checked OrElse rdoPairwise.Checked) AndAlso (rdoPearson.Checked OrElse rdoKendall.Checked OrElse rdoSpearman.Checked) Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+        'If (rdoMultipleColumns.Checked) AndAlso (ucrSaveModel.chkSaveModel.Checked OrElse chkCorrelationMatrix.Checked OrElse sdgCorrPlot.rdoCorrelationPlot.Checked OrElse sdgCorrPlot.rdoScatterplotMatrix.Checked OrElse sdgCorrPlot.rdoPairwisePlot.Checked) Then
+        '    If (Not ucrReceiverMultipleColumns.IsEmpty()) AndAlso ucrReceiverMultipleColumns.lstSelectedVariables.Items.Count > 1 AndAlso (rdoCompleteRowsOnly.Checked OrElse rdoPairwise.Checked) AndAlso (rdoPearson.Checked OrElse rdoKendall.Checked OrElse rdoSpearman.Checked) Then
+        '        SaveModel()
+        '        TempData()
+        '        AssignModelName()
+        '    End If
+        'End If
     End Sub
 
     Private Sub ucrReceiverFirstColumn_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverFirstColumn.SelectionChanged
@@ -175,7 +203,7 @@ Public Class dlgCorrelation
         TestOKEnabled()
     End Sub
 
-    Private Sub ColumnTypeChanged(sender As Object, e As EventArgs) Handles rdoTwoColumns.CheckedChanged, rdoMultipleColumns.CheckedChanged
+    Private Sub ColumnTypeChanged(sender As Object, e As EventArgs)
         If rdoTwoColumns.Checked Then
             SetTwoColumnAsFunction()
         ElseIf rdoMultipleColumns.Checked Then
@@ -193,28 +221,6 @@ Public Class dlgCorrelation
         sdgCorrPlot.ShowDialog()
     End Sub
 
-    Public Sub TestOKEnabled()
-        If rdoTwoColumns.Checked Then
-            ucrBase.clsRsyntax.RemoveAssignTo()
-            If (Not ucrReceiverFirstColumn.IsEmpty()) AndAlso (Not ucrReceiverSecondColumn.IsEmpty()) AndAlso (rdoPearson.Checked = True Or rdoKendall.Checked = True Or rdoSpearman.Checked = True) Then
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
-            End If
-        ElseIf rdoMultipleColumns.Checked AndAlso ucrReceiverMultipleColumns.lstSelectedVariables.Items.Count > 1 AndAlso (rdoCompleteRowsOnly.Checked OrElse rdoPairwise.Checked) AndAlso (rdoPearson.Checked OrElse rdoKendall.Checked OrElse rdoSpearman.Checked) Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
-        If (rdoMultipleColumns.Checked) AndAlso (ucrSaveModel.chkSaveModel.Checked OrElse chkCorrelationMatrix.Checked OrElse sdgCorrPlot.rdoCorrelationPlot.Checked OrElse sdgCorrPlot.rdoScatterplotMatrix.Checked OrElse sdgCorrPlot.rdoPairwisePlot.Checked) Then
-            If (Not ucrReceiverMultipleColumns.IsEmpty()) AndAlso ucrReceiverMultipleColumns.lstSelectedVariables.Items.Count > 1 AndAlso (rdoCompleteRowsOnly.Checked OrElse rdoPairwise.Checked) AndAlso (rdoPearson.Checked OrElse rdoKendall.Checked OrElse rdoSpearman.Checked) Then
-                SaveModel()
-                TempData()
-                AssignModelName()
-            End If
-        End If
-    End Sub
-
     Public Sub TempData()
         clsTempFunc = ucrSelectorCorrelation.ucrAvailableDataFrames.clsCurrDataFrame.Clone()
         clsTempFunc.AddParameter("remove_attr", "TRUE")
@@ -229,13 +235,13 @@ Public Class dlgCorrelation
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        If rdoMultipleColumns.Checked AndAlso chkCorrelationMatrix.Checked AndAlso ((sdgCorrPlot.rdoPairwisePlot.Checked OrElse sdgCorrPlot.rdoCorrelationPlot.Checked OrElse sdgCorrPlot.rdoScatterplotMatrix.Checked)) Then
-            frmMain.clsRLink.RunScript(clsRCorrelation.ToScript(), 2)
-        End If
-        If ucrSaveModel.chkSaveModel.Checked AndAlso sdgCorrPlot.rdoNone.Checked AndAlso (chkCorrelationMatrix.Checked) Then
-            ucrBase.clsRsyntax.RemoveAssignTo()
-            frmMain.clsRLink.RunScript(clsRCorrelation.ToScript(), 2)
-        End If
+        'If rdoMultipleColumns.Checked AndAlso chkCorrelationMatrix.Checked AndAlso ((sdgCorrPlot.rdoPairwisePlot.Checked OrElse sdgCorrPlot.rdoCorrelationPlot.Checked OrElse sdgCorrPlot.rdoScatterplotMatrix.Checked)) Then
+        '    frmMain.clsRLink.RunScript(clsRCorrelation.ToScript(), 2)
+        'End If
+        'If ucrSaveModel.chkSaveModel.Checked AndAlso sdgCorrPlot.rdoNone.Checked AndAlso (chkCorrelationMatrix.Checked) Then
+        '    ucrBase.clsRsyntax.RemoveAssignTo()
+        '    frmMain.clsRLink.RunScript(clsRCorrelation.ToScript(), 2)
+        'End If
     End Sub
 
     Public Sub AssignModelName()
@@ -252,11 +258,11 @@ Public Class dlgCorrelation
         End If
     End Sub
     Public Sub SaveModel()
-        If chkCorrelationMatrix.Checked AndAlso sdgCorrPlot.rdoNone.Checked AndAlso rdoMultipleColumns.Checked Then
-            ucrSaveModel.Visible = True
-        Else
-            ucrSaveModel.Visible = False
-        End If
+        'If chkCorrelationMatrix.Checked AndAlso sdgCorrPlot.rdoNone.Checked AndAlso rdoMultipleColumns.Checked Then
+        '    ucrSaveModel.Visible = True
+        'Else
+        '    ucrSaveModel.Visible = False
+        'End If
     End Sub
 
     Private Sub ucrSaveModel_CheckedChanged(bChecked As Boolean) Handles ucrSaveModel.CheckedChanged
