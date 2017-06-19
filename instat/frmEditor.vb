@@ -112,7 +112,7 @@ Public Class frmEditor
     End Sub
 
     Private Sub mnuDeleteCol_Click(sender As Object, e As EventArgs) Handles mnuDeleteCol.Click
-        Dim deleteCol = MsgBox("Are you sure you want to delete these column(s)?" & vbNewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Column")
+        Dim deleteCol = MsgBox("Are you sure you want to delete these column(s)?" & Environment.NewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Column")
         If deleteCol = DialogResult.Yes Then
             clsDeleteColumns.AddParameter("cols", SelectedColumns())
             frmMain.clsRLink.RunScript(clsDeleteColumns.ToScript(), strComment:="Right click menu: Delete Column(s)")
@@ -239,7 +239,7 @@ Public Class frmEditor
     End Sub
 
     Private Sub mnuDeleteRows_Click(sender As Object, e As EventArgs) Handles mnuDeleteRows.Click
-        Dim Delete = MsgBox("Are you sure you want to delete these row(s)?" & vbNewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Row(s)")
+        Dim Delete = MsgBox("Are you sure you want to delete these row(s)?" & Environment.NewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Row(s)")
         If Delete = DialogResult.Yes Then
             clsDeleteRows.AddParameter("row_names", SelectedRows())
             frmMain.clsRLink.RunScript(clsDeleteRows.ToScript(), strComment:="Right Click menu: Delete row(s)")
@@ -293,7 +293,7 @@ Public Class frmEditor
 
     Private Sub deleteSheet_Click(sender As Object, e As EventArgs) Handles deleteSheet.Click
         Dim strScript As String
-        Dim Delete = MsgBox("Are you sure you want to delete this dataframe?" & vbNewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Sheet")
+        Dim Delete = MsgBox("Are you sure you want to delete this dataframe?" & Environment.NewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Sheet")
         If grdData.Worksheets.Count > 0 Then
             If Delete = DialogResult.Yes Then
                 strScript = frmMain.clsRLink.strInstatDataObject & "$delete_dataframe(data_name =" & Chr(34) & grdData.CurrentWorksheet.Name & Chr(34) & ")"
@@ -385,7 +385,7 @@ Public Class frmEditor
                 Case "factor"
                     chrCurrentFactorLevels = frmMain.clsRLink.RunInternalScriptGetValue(clsGetFactorLevels.ToScript()).AsCharacter
                     If Not chrCurrentFactorLevels.Contains(strNewValue) Then
-                        MsgBox("Invalid value: " & strNewValue & vbNewLine & "This column is: factor. Values must be an existing level of this factor column.", MsgBoxStyle.Exclamation, "Invalid Value")
+                        MsgBox("Invalid value: " & strNewValue & Environment.NewLine & "This column is: factor. Values must be an existing level of this factor column.", MsgBoxStyle.Exclamation, "Invalid Value")
                     Else
                         clsReplaceValue.AddParameter("new_value", Chr(34) & strNewValue & Chr(34))
                         bValid = True
@@ -395,14 +395,14 @@ Public Class frmEditor
                         clsReplaceValue.AddParameter("new_value", strNewValue)
                         bValid = True
                     Else
-                        MsgBox("Invalid value: " & strNewValue & vbNewLine & "This column is: numeric. Values must be numeric.", MsgBoxStyle.Exclamation, "Invalid Value")
+                        MsgBox("Invalid value: " & strNewValue & Environment.NewLine & "This column is: numeric. Values must be numeric.", MsgBoxStyle.Exclamation, "Invalid Value")
                     End If
                 Case "integer"
                     If Integer.TryParse(strNewValue, iValue) Then
                         clsReplaceValue.AddParameter("new_value", strNewValue)
                         bValid = True
                     Else
-                        MsgBox("Invalid value: " & strNewValue & vbNewLine & "This column is: integer. Values must be integer.", MsgBoxStyle.Exclamation, "Invalid Value")
+                        MsgBox("Invalid value: " & strNewValue & Environment.NewLine & "This column is: integer. Values must be integer.", MsgBoxStyle.Exclamation, "Invalid Value")
                     End If
                 'Currently removed as this is the class for a blank column
                 'Case "logical"
@@ -411,7 +411,7 @@ Public Class frmEditor
                 '        clsReplaceValue.AddParameter("new_value", e.NewData)
                 '        bValid = True
                 '    Else
-                '        MsgBox("Invalid value: " & e.NewData.ToString() & vbNewLine & "This column is: logical. Values must be logical (either TRUE or FALSE).", MsgBoxStyle.Exclamation, "Invalid Value")
+                '        MsgBox("Invalid value: " & e.NewData.ToString() & Environment.NewLine & "This column is: logical. Values must be logical (either TRUE or FALSE).", MsgBoxStyle.Exclamation, "Invalid Value")
                 '        e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
                 '    End If
                 'Case "character"
@@ -621,7 +621,7 @@ Public Class frmEditor
     Private Sub grdCurrSheet_BeforePaste(sender As Object, e As BeforeRangeOperationEventArgs) Handles grdCurrSheet.BeforePaste
         e.IsCancelled = True
         If Not e.Range.IsSingleCell Then
-            MsgBox("Pasting multiple cells is currently disabled. This feature will be included in future versions." & vbNewLine & "Try pasting one cell at a time.", MsgBoxStyle.Information, "Cannot paste multiple cells")
+            MsgBox("Pasting multiple cells is currently disabled. This feature will be included in future versions." & Environment.NewLine & "Try pasting one cell at a time.", MsgBoxStyle.Information, "Cannot paste multiple cells")
         Else
             ReplaceValueInData(Clipboard.GetText(), e.Range.Row, e.Range.Col)
         End If
@@ -635,7 +635,7 @@ Public Class frmEditor
 
     Private Sub grdCurrSheet_BeforeCellKeyDown(sender As Object, e As BeforeCellKeyDownEventArgs) Handles grdCurrSheet.BeforeCellKeyDown
         If e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back Then
-            MsgBox("Deleting cells is currently disabled. This feature will be included in future versions." & vbNewLine & "To remove a cell's value, replace the value with NA.", MsgBoxStyle.Information, "Cannot delete cells.")
+            MsgBox("Deleting cells is currently disabled. This feature will be included in future versions." & Environment.NewLine & "To remove a cell's value, replace the value with NA.", MsgBoxStyle.Information, "Cannot delete cells.")
             e.IsCancelled = True
         End If
     End Sub
