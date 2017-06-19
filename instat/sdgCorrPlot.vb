@@ -29,7 +29,7 @@ Public Class sdgCorrPlot
     End Sub
 
     Public Sub CorrelationMatrix()
-        If dlgCorrelation.rdoMultipleColumns.Checked AndAlso dlgCorrelation.chkCorrelationMatrix.Checked AndAlso Not rdoPairwisePlot.Checked AndAlso Not rdoCorrelationPlot.Checked AndAlso Not rdoScatterplotMatrix.Checked Then
+        If dlgCorrelation.rdoMultipleColumns.Checked AndAlso dlgCorrelation.ucrChkCorrelationMatrix.Checked AndAlso Not rdoPairwisePlot.Checked AndAlso Not rdoCorrelationPlot.Checked AndAlso Not rdoScatterplotMatrix.Checked Then
             If dlgCorrelation.ucrSaveModel.chkSaveModel.Checked Then
                 dlgCorrelation.ucrBase.clsRsyntax.iCallType = 0
             Else
@@ -72,7 +72,7 @@ Public Class sdgCorrPlot
     Public Sub SetDefaults()
         ucrSaveGraph.SetDataFrameSelector(dlgCorrelation.ucrSelectorCorrelation.ucrAvailableDataFrames)
         ucrSaveGraph.strPrefix = "CorGraph"
-        dlgCorrelation.chkCorrelationMatrix.Checked = True
+        dlgCorrelation.ucrChkCorrelationMatrix.Checked = True
         rdoNone.Checked = True
         tbSaveGraphs.Visible = False
         nudAlphaScatter.Value = 1
@@ -88,7 +88,7 @@ Public Class sdgCorrPlot
     End Sub
 
     Public Sub CorrOptions()
-        If dlgCorrelation.chkCorrelationMatrix.Checked Then
+        If dlgCorrelation.ucrChkCorrelationMatrix.Checked Then
             CorrelationMatrix()
         End If
         If rdoPairwisePlot.Checked Then
@@ -123,7 +123,7 @@ Public Class sdgCorrPlot
     End Sub
 
     Private Sub MatrixOrPlots(sender As Object, e As EventArgs) Handles rdoPairwisePlot.CheckedChanged, rdoCorrelationPlot.CheckedChanged, rdoScatterplotMatrix.CheckedChanged, rdoNone.CheckedChanged
-        If ((dlgCorrelation.chkCorrelationMatrix.Checked AndAlso Not rdoPairwisePlot.Checked AndAlso Not rdoCorrelationPlot.Checked AndAlso Not rdoScatterplotMatrix.Checked) OrElse (Not dlgCorrelation.chkCorrelationMatrix.Checked AndAlso rdoNone.Checked)) Then
+        If ((dlgCorrelation.ucrChkCorrelationMatrix.Checked AndAlso Not rdoPairwisePlot.Checked AndAlso Not rdoCorrelationPlot.Checked AndAlso Not rdoScatterplotMatrix.Checked) OrElse (Not dlgCorrelation.ucrChkCorrelationMatrix.Checked AndAlso rdoNone.Checked)) Then
             ucrSaveGraph.chkSaveGraph.Checked = False
             ucrSaveGraph.Visible = False
             tbSaveGraphs.Visible = False
