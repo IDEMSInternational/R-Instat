@@ -32,15 +32,20 @@ Public Class dlgStartofRains
 
     Private strCurrDataName As String = ""
     Public bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
+
     Private Sub dlgStartofRains_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
+        autoTranslate(Me)
         TestOKEnabled()
     End Sub
 
@@ -496,15 +501,13 @@ Public Class dlgStartofRains
         '        clsMaxValueManipulation.AddParameter("sub3", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False)
     End Sub
 
-    Private Sub ucrReceiverYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlValueChanged, ucrReceiverStation.ControlValueChanged
+    Private Sub ucrReceiverDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlValueChanged, ucrReceiverStation.ControlValueChanged
         ' does this update if I change the data name?
-        If Not ucrReceiverStation.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty Then
-            clsGroupBy.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames & "," & strCurrDataName & "=" & ucrReceiverStation.GetVariableNames & ")")
+        If Not ucrReceiverStation.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty Then
+            clsGroupBy.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDate.GetVariableNames & "," & strCurrDataName & "=" & ucrReceiverStation.GetVariableNames & ")")
         Else
-            clsGroupBy.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames & ")")
+            clsGroupBy.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDate.GetVariableNames & ")")
         End If
-        '        clsMaxValue.AddParameter("manipulations", clsRFunctionParameter:=clsMaxValueManipulation, iPosition:=5)
-        '        clsMaxValueManipulation.AddParameter("sub2", clsRFunctionParameter:=clsGroupBy, bIncludeArgumentName:=False)
         clsManipulationFirstDOYPerYear.AddParameter("sub2", clsRFunctionParameter:=clsGroupBy, bIncludeArgumentName:=False)
     End Sub
 
@@ -515,7 +518,6 @@ Public Class dlgStartofRains
     Private Sub TotalRainyDays()
         clsRDRollingRainDays.AddParameter("sub_calculations", clsRFunctionParameter:=clsRDRollingRainDaysSub)
         clsRDRollingRainDaysSub.AddParameter("sub1", clsRFunctionParameter:=clsRainyDays, bIncludeArgumentName:=False, iPosition:=0)
-
     End Sub
 
     Private Sub DrySpell()
@@ -533,6 +535,16 @@ Public Class dlgStartofRains
 
 
 
+
+
+
+
+
+
+
+
+
+
     Private Sub ucrReceiverDOY_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverDOY.SelectionChanged
         firstDayofTheYear()
         FirstDOYPerYear()
@@ -541,7 +553,6 @@ Public Class dlgStartofRains
 
     Private Sub ucrSelectorForStartofRains_DataFrameChanged() Handles ucrSelectorForStartofRains.DataFrameChanged
         strCurrDataName = Chr(34) & ucrSelectorForStartofRains.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34)
-        clsAddKey.AddParameter("data_name", strCurrDataName)
         firstDayofTheYear()
     End Sub
 
@@ -634,15 +645,6 @@ Public Class dlgStartofRains
         RainyDaysMethod()
         RollingSumMethod()
         DryPeriodOld()
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrReceiverYear_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverYear.SelectionChanged
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrReceiverDate_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverDate.SelectionChanged
-        'AddKeyMethod()
         TestOKEnabled()
     End Sub
 
