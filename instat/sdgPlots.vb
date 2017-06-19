@@ -62,6 +62,7 @@ Public Class sdgPlots
         'Links the factor receivers, used for creating facets, with the selector. The variables need to be factors.
         ucr1stFactorReceiver.Selector = ucrFacetSelector
         ucr1stFactorReceiver.SetIncludedDataTypes({"factor"})
+        ucr1stFactorReceiver.strSelectorHeading = "Factors"
         ucr1stFactorReceiver.SetParameter(New RParameter("var1", 0))
         ucr1stFactorReceiver.SetParameterIsString()
         ucr1stFactorReceiver.bWithQuotes = False
@@ -71,6 +72,7 @@ Public Class sdgPlots
 
         ucr2ndFactorReceiver.Selector = ucrFacetSelector
         ucr2ndFactorReceiver.SetIncludedDataTypes({"factor"})
+        ucr2ndFactorReceiver.strSelectorHeading = "Factors"
         ucr2ndFactorReceiver.SetParameter(New RParameter("var2", 1))
         ucr2ndFactorReceiver.SetParameterIsString()
         ucr2ndFactorReceiver.bWithQuotes = False
