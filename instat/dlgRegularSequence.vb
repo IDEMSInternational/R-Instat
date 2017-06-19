@@ -48,7 +48,7 @@ Public Class dlgRegularSequence
 
         ucrInputInStepsOf.SetParameter(New RParameter("by", 2))
         ucrInputInStepsOf.AddQuotesIfUnrecognised = False
-        ucrInputInStepsOf.SetValidationTypeAsNumeric(dcmMin:=0)
+        ucrInputInStepsOf.SetValidationTypeAsNumeric(dcmMin:=1)
 
         ucrNudRepeatValues.SetParameter(New RParameter("each", 1))
         ucrNudRepeatValues.SetMinMax(1, Integer.MaxValue)
@@ -116,7 +116,9 @@ Public Class dlgRegularSequence
         ucrInputFrom.SetRCode(clsSeqFunction, bReset)
         ucrInputTo.SetRCode(clsSeqFunction, bReset)
         ucrNudRepeatValues.SetRCode(clsRepFunction, bReset)
-        ucrInputInStepsOf.SetRCode(clsSeqFunction, bReset)
+        If bReset AndAlso (ucrInputFrom.GetText < ucrInputTo.GetText) Then
+            ucrInputInStepsOf.SetRCode(clsSeqFunction, bReset)
+        End If
         bUpdateBy = True
     End Sub
 
