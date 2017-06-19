@@ -43,7 +43,7 @@ Public Class dlgOneVarFitModel
         UcrBase.clsRsyntax.iCallType = 2
         UcrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
-        sdgOneVarFitModDisplay.InitialiseDialog()
+        'sdgOneVarFitModDisplay.InitialiseDialog()
         'sdgOneVarFitModel.InitialiseDialog()
 
         UcrReceiver.Selector = ucrSelectorOneVarFitMod
@@ -421,15 +421,18 @@ Public Class dlgOneVarFitModel
         sdgOneVarFitModel.SetRCode(clsROneVarFitModel, bResetSubdialog)
         bResetSubdialog = False
         sdgOneVarFitModel.ShowDialog()
-        TestOKEnabled()
         EnableOptions()
         Display()
+        TestOKEnabled()
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
+        sdgOneVarFitModDisplay.SetRCode(clsROneVarFitModel, bResetSubdialog)
+        bResetSubdialog = False
         sdgOneVarFitModDisplay.ShowDialog()
         Display()
         EnableOptions()
+        TestOKEnabled()
     End Sub
 
     Private Sub EnableOptions()
