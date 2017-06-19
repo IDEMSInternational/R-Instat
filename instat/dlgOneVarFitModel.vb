@@ -18,6 +18,7 @@ Imports instat.Translations
 
 Public Class dlgOneVarFitModel
     Public clsROneVarFitModel, clsRLength, clsRMean, clsRTTest, clsVarTest, clsREnormTest, clsRNonSignTest, clsRWilcoxTest, clsRBinomTest, clsRPoissonTest, clsRplot, clsRfitdist, clsRStartValues, clsRBinomStart, clsRConvertVector, clsRConvertInteger, clsRConvertNumeric As New RFunction
+    Public clsRplotFunction, clsRplotPPComp, clsRplotCdfcomp, clsRplotQqComp, clsRplotDenscomp As RFunction
     Public clsFunctionOperator, clsFactorOperator As New ROperator
     Public bfirstload As Boolean = True
     Public bReset As Boolean = True
@@ -182,6 +183,28 @@ Public Class dlgOneVarFitModel
         clsRBinomStart.SetPackageName("base")
         clsRConvertInteger.SetPackageName("base")
         'clsRConvert.SetPackageName("base")
+
+        'sdg
+        clsRplotFunction.SetPackageName("")
+        clsRplotFunction.SetRCommand("plot")
+        clsRplotFunction.iCallType = 3
+
+        clsRplotPPComp.SetPackageName("fitdistrplus")
+        clsRplotPPComp.SetRCommand("ppcomp")
+        clsRplotPPComp.iCallType = 3
+
+        clsRplotCdfcomp.SetPackageName("fitdistrplus")
+        clsRplotCdfcomp.SetRCommand("cdfcomp")
+        clsRplotCdfcomp.iCallType = 3
+
+        clsRplotQqComp.SetPackageName("fitdistrplus")
+        clsRplotQqComp.SetRCommand("qqcomp")
+        clsRplotQqComp.iCallType = 3
+
+        clsRplotDenscomp.SetPackageName("fitdistrplus")
+        clsRplotDenscomp.SetRCommand("denscomp")
+        clsRplotDenscomp.iCallType = 3
+
         SetDataParameter()
         EnableOptions()
 
@@ -207,6 +230,13 @@ Public Class dlgOneVarFitModel
         UcrReceiver.AddAdditionalCodeParameterPair(clsRMean, New RParameter("x"), iAdditionalPairNo:=7)
         UcrReceiver.AddAdditionalCodeParameterPair(clsRBinomTest, New RParameter("x"), iAdditionalPairNo:=9)
         UcrReceiver.AddAdditionalCodeParameterPair(clsRConvertVector, New RParameter("x"), iAdditionalPairNo:=10)
+
+        UcrReceiver.AddAdditionalCodeParameterPair(clsRplotFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
+        UcrReceiver.AddAdditionalCodeParameterPair(clsRplotPPComp, New RParameter("ft", 0), iAdditionalPairNo:=2)
+        UcrReceiver.AddAdditionalCodeParameterPair(clsRplotCdfcomp, New RParameter("ft", 0), iAdditionalPairNo:=3)
+        UcrReceiver.AddAdditionalCodeParameterPair(clsRplotQqComp, New RParameter("ft", 0), iAdditionalPairNo:=4)
+        UcrReceiver.AddAdditionalCodeParameterPair(clsRplotDenscomp, New RParameter("ft", 0), iAdditionalPairNo:=4)
+
 
         ucrChkConvertVariate.AddAdditionalCodeParameterPair(clsROneVarFitModel, ucrChkConvertVariate.GetParameter(), iAdditionalPairNo:=1)
         ucrChkConvertVariate.AddAdditionalCodeParameterPair(clsROneVarFitModel, ucrChkConvertVariate.GetParameter(), iAdditionalPairNo:=2)
@@ -285,10 +315,10 @@ Public Class dlgOneVarFitModel
 
     Public Sub SetBaseFunction()
         'clsROneVarFitModel.ClearParameters()
-        clsRPoissonTest.ClearParameters()
-        clsRBinomTest.ClearParameters()
-        clsRTTest.ClearParameters()
-        clsRStartValues.ClearParameters()
+        'clsRPoissonTest.ClearParameters()
+        'clsRBinomTest.ClearParameters()
+        'clsRTTest.ClearParameters()
+        'clsRStartValues.ClearParameters()
         If rdoGeneralCase.Checked Then
             FitDistFunction()
         ElseIf rdoExactCase.Checked Then
@@ -330,13 +360,12 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Public Sub FitDistFunction()
-        UcrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModel)
+        ' UcrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModel)
         clsROneVarFitModel.AddParameter("distr", Chr(34) & ucrFamily.clsCurrDistribution.strRName & Chr(34))
         SetDataParameter()
     End Sub
 
     Private Sub SetTTest()
-
         UcrBase.clsRsyntax.SetBaseRFunction(clsRTTest)
         clsRConvertVector.SetRCommand("as.vector")
         clsRTTest.AddParameter("x", clsRFunctionParameter:=clsRConvertVector)
@@ -353,7 +382,6 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub SetEnormTest()
-
         UcrBase.clsRsyntax.SetBaseRFunction(clsREnormTest)
         clsRConvertVector.SetRCommand("as.vector")
         clsREnormTest.AddParameter("x", clsRFunctionParameter:=clsRConvertVector)
@@ -362,7 +390,6 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub SetWilcoxTest()
-
         UcrBase.clsRsyntax.SetBaseRFunction(clsRWilcoxTest)
         'clsRConvert.SetRCommand("as.vector")
         'clsRWilcoxTest.AddParameter("x", clsRFunctionParameter:=clsRConvert)
@@ -442,7 +469,7 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        sdgOneVarFitModDisplay.SetRCode(clsROneVarFitModel, bResetSubdialog)
+        sdgOneVarFitModDisplay.SetRCode(clsROneVarFitModel, clsRplotFunction, clsRplotPPComp, clsRplotCdfcomp, clsRplotQqComp, clsRplotDenscomp, bResetSubdialog)
         bResetSubdialog = False
         sdgOneVarFitModDisplay.ShowDialog()
         Display()
