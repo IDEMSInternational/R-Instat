@@ -28,6 +28,7 @@ Public Class dlgImportDataset
     Dim strLibraryPath As String
     Dim strFileType As String
     Dim bCanImport As Boolean
+    Private bReset As Boolean = True
     Dim bComponentsInitialised As Boolean
     Public bStartOpenDialog As Boolean
     Public strFilePathToUseOnLoad As String
@@ -73,6 +74,8 @@ Public Class dlgImportDataset
             GetFileFromOpenDialog()
             bStartOpenDialog = False
         End If
+        SetRCodeForControls(bReset)
+        bReset = False
         TestOkEnabled()
     End Sub
 
@@ -84,6 +87,25 @@ Public Class dlgImportDataset
         ucrInputName.SetValidationTypeAsRVariable()
         strTempWorkbookName = "temp_workbook"
 
+        ucrChkStringsAsFactors.SetText("Convert Strings to Factor Columns")
+
+        ucrChkExistingData.SetText("Keep existing data frames")
+        ucrChkExistingData.SetParameter(New RParameter("keep_existing"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+
+        ucrChkImportMetadata.SetText("Import metadata")
+        ucrChkImportMetadata.SetParameter(New RParameter("include_metadata"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+
+        ucrChkImportObjects.SetText("Import objects")
+        ucrChkImportObjects.SetParameter(New RParameter("include_objects"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+
+        ucrChkImportFilters.SetText("Import filters")
+        ucrChkImportFilters.SetParameter(New RParameter("include_filters"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+
+        ucrChkImportCalculations.SetText("Import calculations")
+        ucrChkImportCalculations.SetParameter(New RParameter("include_calculations"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+
+        ucrChkOverWrite.SetText("Overwrite existing if duplicates found")
+        ucrChkOverWrite.SetParameter(New RParameter("overwrite_existing"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         'temp disabled until can easily switch between fread and read.csv
         rdoRowNamesYes.Enabled = False
         'disabled until issue is resolved: http://stackoverflow.com/questions/37635541/rio-r-package-can-i-import-a-csv-file-with-non-comma-separator
@@ -96,15 +118,15 @@ Public Class dlgImportDataset
         ucrInputFilePath.IsReadOnly = True
 
         'xl options settings
-        nudxlRowsToSkip.Maximum = Integer.MaxValue
+        ucrNudxlRowsToSkip.Maximum = Integer.MaxValue
 
         'csv options settings
         clsReadCSV.AddParameter("check.names", "TRUE")
         ucrInputEncoding.SetItems({"unknown"})
-        ucrInputSeparator.SetItems({"Automatic", ",", "Whitespace", ":", ";", "|", "^"})
+        ucrInputSeparator.SetItems({"Automatic", ", ", "Whitespace", ": ", ";", "|", "^"})
         ucrInputHeaders.SetItems({"Automatic", "Yes", "No"})
         ucrInputDecimal.SetItems({"Automatic", ".", ","})
-        nudSkip.Maximum = Integer.MaxValue
+        ucrNudSkip.Maximum = Integer.MaxValue
     End Sub
 
     Private Sub SetDefaults()
@@ -142,7 +164,9 @@ Public Class dlgImportDataset
 #Region "Dialog options"
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeForControls(True)
         RefreshFrameView()
+        TestOkEnabled()
     End Sub
 
     Private Sub TestOkEnabled()
@@ -198,6 +222,11 @@ Public Class dlgImportDataset
             End If
             TestOkEnabled()
         End Using
+    End Sub
+
+    Public Sub SetRCodeForControls(bReset As Boolean)
+        ucrChkExistingData.SetRCode(clsImportRDS, bReset)
+        ' ucrChkExistingData.AddAdditionalCodeParameterPair(cls)
     End Sub
 
     Public Sub SetDialogWithFile(strFilePath As String)
@@ -268,7 +297,7 @@ Public Class dlgImportDataset
                 clsReadXL.RemoveParameterByName("readxl")
             End If
             FillExcelSheetsAndRegions(strFilePath)
-            ucrInputName.Focus()
+
             'ucrInputName.SetName(strFileName, bSilent:=True)
         Else
             strFileType = strFileExt.Substring(1)
@@ -299,7 +328,7 @@ Public Class dlgImportDataset
             Try
                 sReader = New StreamReader(ucrInputFilePath.GetText())
                 txtPreview.Text = ""
-                For i = 1 To intLines + nudSkip.Value + 1
+                For i = 1 To intLines + ucrNudSkip.Value + 1
                     txtPreview.Text = txtPreview.Text & sReader.ReadLine() & Environment.NewLine
                     If sReader.Peek() = -1 Then
                         Exit For
@@ -406,99 +435,99 @@ Public Class dlgImportDataset
 
 #Region "RDS options"
     Private Sub SetRDSDefaults()
-        chkExistingData.Checked = True
-        chkImportObjects.Checked = True
-        chkImportMetadata.Checked = True
-        chkImportChangesLog.Checked = True
-        chkImportFilters.Checked = True
-        chkImportCalculations.Checked = True
-        chkOverWrite.Checked = False
+        'chkExistingData.Checked = True
+        'chkImportObjects.Checked = True
+        'chkImportMetadata.Checked = True
+        'chkImportChangesLog.Checked = True
+        'chkImportFilters.Checked = True
+        'chkImportCalculations.Checked = True
+        'chkOverWrite.Checked = False
     End Sub
 
 
-    Private Sub chkExisting_CheckStateChanged(sender As Object, e As EventArgs) Handles chkExistingData.CheckedChanged
-        If chkExistingData.Checked Then
-            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                clsImportRDS.AddParameter("keep_existing", "TRUE")
-            Else
-                clsImportRDS.RemoveParameterByName("keep_existing")
-            End If
-        Else
-            clsImportRDS.AddParameter("keep_existing", "FALSE")
-        End If
-    End Sub
+    'Private Sub chkExisting_CheckStateChanged(sender As Object, e As EventArgs)
+    '    If chkExistingData.Checked Then
+    '        If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+    '            clsImportRDS.AddParameter("keep_existing", "TRUE")
+    '        Else
+    '            clsImportRDS.RemoveParameterByName("keep_existing")
+    '        End If
+    '    Else
+    '        clsImportRDS.AddParameter("keep_existing", "FALSE")
+    '    End If
+    'End Sub
 
-    Private Sub chkLogs_CheckStateChanged(sender As Object, e As EventArgs) Handles chkImportChangesLog.CheckedChanged
-        If chkImportChangesLog.Checked Then
-            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                clsImportRDS.AddParameter("include_logs", "TRUE")
-            Else
-                clsImportRDS.RemoveParameterByName("include_logs")
-            End If
-        Else
-            clsImportRDS.RemoveParameterByName("include_logs")
-        End If
-    End Sub
+    'Private Sub chkLogs_CheckStateChanged(sender As Object, e As EventArgs)
+    '    If chkImportChangesLog.Checked Then
+    '        If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+    '            clsImportRDS.AddParameter("include_logs", "TRUE")
+    '        Else
+    '            clsImportRDS.RemoveParameterByName("include_logs")
+    '        End If
+    '    Else
+    '        clsImportRDS.RemoveParameterByName("include_logs")
+    '    End If
+    'End Sub
 
-    Private Sub chkOverWrite_CheckStateChanged(sender As Object, e As EventArgs) Handles chkOverWrite.CheckedChanged
-        If chkOverWrite.Checked Then
-            clsImportRDS.AddParameter("overwrite_existing", "TRUE")
-        Else
-            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                clsImportRDS.AddParameter("overwrite_existing", "FALSE")
-            Else
-                clsImportRDS.RemoveParameterByName("overwrite_existing")
-            End If
-        End If
-    End Sub
+    'Private Sub chkOverWrite_CheckStateChanged(sender As Object, e As EventArgs)
+    '    If chkOverWrite.Checked Then
+    '        clsImportRDS.AddParameter("overwrite_existing", "TRUE")
+    '    Else
+    '        If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+    '            clsImportRDS.AddParameter("overwrite_existing", "FALSE")
+    '        Else
+    '            clsImportRDS.RemoveParameterByName("overwrite_existing")
+    '        End If
+    '    End If
+    'End Sub
 
-    Private Sub chkMetadata_CheckStateChanged(sender As Object, e As EventArgs) Handles chkImportMetadata.CheckedChanged
-        If chkImportMetadata.Checked Then
-            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                clsImportRDS.AddParameter("include_metadata", "TRUE")
-            Else
-                clsImportRDS.RemoveParameterByName("include_metadata")
-            End If
-        Else
-            clsImportRDS.AddParameter("include_metadata", "FALSE")
-        End If
-    End Sub
+    'Private Sub chkMetadata_CheckStateChanged(sender As Object, e As EventArgs)
+    '    If chkImportMetadata.Checked Then
+    '        If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+    '            clsImportRDS.AddParameter("include_metadata", "TRUE")
+    '        Else
+    '            clsImportRDS.RemoveParameterByName("include_metadata")
+    '        End If
+    '    Else
+    '        clsImportRDS.AddParameter("include_metadata", "FALSE")
+    '    End If
+    'End Sub
 
-    Private Sub chkKeepFilters_CheckedChanged(sender As Object, e As EventArgs) Handles chkImportFilters.CheckedChanged
-        If chkImportFilters.Checked Then
-            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                clsImportRDS.AddParameter("include_filters", "TRUE")
-            Else
-                clsImportRDS.RemoveParameterByName("include_filters")
-            End If
-        Else
-            clsImportRDS.AddParameter("include_filters", "FALSE")
-        End If
-    End Sub
+    'Private Sub chkKeepFilters_CheckedChanged(sender As Object, e As EventArgs)
+    '    If chkImportFilters.Checked Then
+    '        If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+    '            clsImportRDS.AddParameter("include_filters", "TRUE")
+    '        Else
+    '            clsImportRDS.RemoveParameterByName("include_filters")
+    '        End If
+    '    Else
+    '        clsImportRDS.AddParameter("include_filters", "FALSE")
+    '    End If
+    'End Sub
 
-    Private Sub chkImportCalculations_CheckedChanged(sender As Object, e As EventArgs) Handles chkImportCalculations.CheckedChanged
-        If chkImportCalculations.Checked Then
-            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                clsImportRDS.AddParameter("include_calculations", "TRUE")
-            Else
-                clsImportRDS.RemoveParameterByName("include_calculations")
-            End If
-        Else
-            clsImportRDS.AddParameter("include_calculations", "FALSE")
-        End If
-    End Sub
+    'Private Sub chkImportCalculations_CheckedChanged(sender As Object, e As EventArgs)
+    '    If chkImportCalculations.Checked Then
+    '        If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+    '            clsImportRDS.AddParameter("include_calculations", "TRUE")
+    '        Else
+    '            clsImportRDS.RemoveParameterByName("include_calculations")
+    '        End If
+    '    Else
+    '        clsImportRDS.AddParameter("include_calculations", "FALSE")
+    '    End If
+    'End Sub
 
-    Private Sub chkKeepObjects_CheckStateChanged(sender As Object, e As EventArgs) Handles chkImportObjects.CheckStateChanged
-        If chkImportObjects.Checked Then
-            If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                clsImportRDS.AddParameter("include_objects", "TRUE")
-            Else
-                clsImportRDS.RemoveParameterByName("include_objects")
-            End If
-        Else
-            clsImportRDS.AddParameter("include_objects", "FALSE")
-        End If
-    End Sub
+    'Private Sub chkKeepObjects_CheckStateChanged(sender As Object, e As EventArgs)
+    '    If chkImportObjects.Checked Then
+    '        If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+    '            clsImportRDS.AddParameter("include_objects", "TRUE")
+    '        Else
+    '            clsImportRDS.RemoveParameterByName("include_objects")
+    '        End If
+    '    Else
+    '        clsImportRDS.AddParameter("include_objects", "FALSE")
+    '    End If
+    'End Sub
 
 #End Region
 
@@ -510,8 +539,8 @@ Public Class dlgImportDataset
         ucrInputHeaders.SetName("Automatic")
         ucrInputDecimal.SetName("Automatic")
         ucrInputNAStrings.SetName("NA")
-        nudSkip.Value = 0
-        chkStringsAsFactors.Checked = True
+        '  ucrNudSkip.Value = 0
+        'ucrChkStringsAsFactors.Checked = True
     End Sub
 
     Private Sub ucrInputEncoding_NameChanged() Handles ucrInputEncoding.NameChanged
@@ -525,7 +554,7 @@ Public Class dlgImportDataset
 
     End Sub
 
-    Private Sub rdoRowNames_CheckedChanged(sender As Object, e As EventArgs) Handles rdoRowNamesYes.CheckedChanged, rdoRowNamesNo.CheckedChanged
+    Private Sub rdoRowNames_CheckedChanged(sender As Object, e As EventArgs)
         If rdoRowNamesYes.Checked Then
             'TODO this is not an option for fread so have to change function here
             clsReadCSV.AddParameter("row.names", 1)
@@ -605,12 +634,12 @@ Public Class dlgImportDataset
         RefreshFrameView()
     End Sub
 
-    Private Sub nudSkips_TextChanged(sender As Object, e As EventArgs) Handles nudSkip.TextChanged
+    Private Sub nudSkips_TextChanged(sender As Object, e As EventArgs)
         If bComponentsInitialised Then
-            If nudSkip.Value = 0 Then
+            If ucrNudSkip.Value = 0 Then
                 clsReadCSV.RemoveParameterByName("skip")
             Else
-                clsReadCSV.AddParameter("skip", nudSkip.Value)
+                clsReadCSV.AddParameter("skip", ucrNudSkip.Value)
             End If
             'TODO R gives an error if skip is too large
             RefreshFilePreview()
@@ -627,9 +656,9 @@ Public Class dlgImportDataset
 #Region "Excel options"
 
     Private Sub setExcelDefaults()
-        nudxlRowsToSkip.Value = 0
+        ucrNudxlRowsToSkip.Value = 0
         XlSkipRowsParameter()
-        chkColumnNames.Checked = True
+        ucrchkColumnNames.Checked = True
         XlStringsAsFactorsParameter()
         XlColNamesParameter()
         ucrInputXlMissingValueString.SetName("")
@@ -676,17 +705,22 @@ Public Class dlgImportDataset
         'ucrInputNamedRegions.SetName("")
     End Sub
 
-    Private Sub nudxlRowsToSkip_TextChanged(sender As Object, e As EventArgs) Handles nudxlRowsToSkip.TextChanged
-        XlSkipRowsParameter()
-    End Sub
+    ' Private Sub nudxlRowsToSkip_TextChanged(sender As Object, e As EventArgs) Handles ucrNudxlRowsToSkip.ControlValueChanged
+    '   XlSkipRowsParameter()
+    '    ucrchkColumnNames.SetText("Trim Trailing WhiteSpace")
+    ' End Sub
+    'Private Sub nudxlRowsToSkip_TextChanged(sender As Object, e As EventArgs) Handles ucrchkColumnNames.ControlValueChanged
+    '    XlSkipRowsParameter()
+    '    ucrchkColumnNames.SetText("Trim Trailing WhiteSpace")
+    'End Sub
 
     Private Sub XlSkipRowsParameter()
         If bComponentsInitialised Then
-            If nudxlRowsToSkip.Text <> "" Then
-                If nudxlRowsToSkip.Value = 0 AndAlso Not frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+            If ucrNudxlRowsToSkip.Text <> "" Then
+                If ucrNudxlRowsToSkip.Value = 0 AndAlso Not frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
                     clsReadXL.RemoveParameterByName("skip")
                 Else
-                    clsReadXL.AddParameter("skip", nudxlRowsToSkip.Value)
+                    clsReadXL.AddParameter("skip", ucrNudxlRowsToSkip.Value)
                 End If
             Else
                 clsReadXL.RemoveParameterByName("skip")
@@ -695,9 +729,9 @@ Public Class dlgImportDataset
         End If
     End Sub
 
-    Private Sub chkColumnNames_CheckedChanged(sender As Object, e As EventArgs) Handles chkColumnNames.CheckedChanged
-        XlColNamesParameter()
-    End Sub
+    'Private Sub chkColumnNames_CheckedChanged(sender As Object, e As EventArgs) Handles ucrchkColumnNames.ControlValueChanged
+    '    XlColNamesParameter()
+    'End Sub
 
     Private Sub XlColNamesParameter()
         Dim strColNameParam As String
@@ -710,7 +744,7 @@ Public Class dlgImportDataset
             clsReadXL.RemoveParameterByName("colNames")
         End If
 
-        If chkColumnNames.Checked Then
+        If ucrchkColumnNames.Checked Then
             If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
                 clsReadXL.AddParameter(strColNameParam, "TRUE")
             Else
@@ -722,12 +756,12 @@ Public Class dlgImportDataset
         RefreshFrameView()
     End Sub
 
-    Private Sub chkStringsAsFactors_CheckedChanged(sender As Object, e As EventArgs) Handles chkStringsAsFactors.CheckedChanged
+    Private Sub chkStringsAsFactors_CheckedChanged(sender As Object, e As EventArgs)
         XlStringsAsFactorsParameter()
     End Sub
 
     Private Sub XlStringsAsFactorsParameter()
-        If chkStringsAsFactors.Checked Then
+        If ucrChkStringsAsFactors.Checked Then
             clsReadCSV.AddParameter("stringsAsFactors", "TRUE")
         Else
             If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
