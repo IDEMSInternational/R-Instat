@@ -81,6 +81,7 @@ Public Class dlgDotPlot
         ucrOtherAxisReceiver.SetParameterIsString()
         ucrOtherAxisReceiver.Selector = ucrDotPlotSelector
         ucrOtherAxisReceiver.SetIncludedDataTypes({"factor", "numeric"}) 'Warning: Even if having "factor" only could be more appropriate for the Axis that is not BinAxis, when coming back from the LayerOptions, where x and y can take both numeric and factor values, we would get bugs if numeric was not allowed.
+        ucrOtherAxisReceiver.strSelectorHeading = "Variables"
         ucrOtherAxisReceiver.bWithQuotes = False
         ucrOtherAxisReceiver.SetValuesToIgnore({Chr(34) & Chr(34)})
         ucrOtherAxisReceiver.bAddParameterIfEmpty = True
@@ -88,6 +89,7 @@ Public Class dlgDotPlot
         ucrFactorReceiver.SetParameter(New RParameter("fill", 2))
         ucrFactorReceiver.Selector = ucrDotPlotSelector
         ucrFactorReceiver.SetIncludedDataTypes({"factor"})
+        ucrFactorReceiver.strSelectorHeading = "Factors"
         ucrFactorReceiver.bWithQuotes = False
         ucrFactorReceiver.SetParameterIsString()
 
@@ -97,6 +99,7 @@ Public Class dlgDotPlot
         ucrVariablesAsFactorDotPlot.SetFactorReceiver(ucrOtherAxisReceiver) 'Could choose the ucrFactorReceiver for this purpose... 
         ucrVariablesAsFactorDotPlot.Selector = ucrDotPlotSelector
         ucrVariablesAsFactorDotPlot.SetIncludedDataTypes({"numeric", "factor"})
+        ucrVariablesAsFactorDotPlot.strSelectorHeading = "Variables"
         ucrVariablesAsFactorDotPlot.bWithQuotes = False
         ucrVariablesAsFactorDotPlot.SetParameterIsString()
 
