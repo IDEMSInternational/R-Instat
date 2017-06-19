@@ -72,7 +72,7 @@ Public Class dlgStack
         ucrStackDataInto.SetLinkedDisplayControl(lblStackDataInto)
 
         ucrChkStackMultipleSets.SetText("Stack multiple column sets")
-        ucrChkStackMultipleSets.AddToLinkedControls(ucrNudNoSets, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
+        ucrChkStackMultipleSets.AddToLinkedControls(ucrNudNoSets, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkStackMultipleSets.AddToLinkedControls(ucrChkCarryColumns, {False}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkStackMultipleSets.AddToLinkedControls(ucrStackDataInto, {False}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkStackMultipleSets.AddFunctionNamesCondition(True, "reshape")
@@ -125,6 +125,8 @@ Public Class dlgStack
 
         ucrChkStackMultipleSets.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
 
+        ucrNudNoSets.SetRCode(clsSplitColumnsInGroups, bReset)
+
         ucrSelectorStack.SetRCode(clsMeltFunction, bReset)
         ucrReceiverColumnsToBeStack.SetRCode(clsMeltFunction, bReset)
         ucrColumnsToCarryReceiver.SetRCode(clsMeltFunction, bReset)
@@ -136,25 +138,34 @@ Public Class dlgStack
         If bReset Then
             SetCarryColumnsOptions()
         End If
+        SetSingleOrMultipleOptions()
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrSaveNewDataName.IsComplete AndAlso Not ucrStackDataInto.IsEmpty() AndAlso Not ucrFactorInto.IsEmpty() Then
-            If Not ucrChkCarryColumns.Checked Then
-                If Not ucrReceiverColumnsToBeStack.IsEmpty() Then
-                    ucrBase.OKEnabled(True)
-                Else
-                    ucrBase.OKEnabled(False)
-                End If
+        If ucrChkStackMultipleSets.Checked Then
+            If ucrSaveNewDataName.IsComplete AndAlso Not ucrStackDataInto.IsEmpty() Then
+                ucrBase.OKEnabled(True)
             Else
-                If Not ucrColumnsToCarryReceiver.IsEmpty Then
-                    ucrBase.OKEnabled(True)
-                Else
-                    ucrBase.OKEnabled(False)
-                End If
+                ucrBase.OKEnabled(False)
             End If
         Else
-            ucrBase.OKEnabled(False)
+            If ucrSaveNewDataName.IsComplete AndAlso Not ucrStackDataInto.IsEmpty() AndAlso Not ucrFactorInto.IsEmpty() Then
+                If Not ucrChkCarryColumns.Checked Then
+                    If Not ucrReceiverColumnsToBeStack.IsEmpty() Then
+                        ucrBase.OKEnabled(True)
+                    Else
+                        ucrBase.OKEnabled(False)
+                    End If
+                Else
+                    If Not ucrColumnsToCarryReceiver.IsEmpty Then
+                        ucrBase.OKEnabled(True)
+                    Else
+                        ucrBase.OKEnabled(False)
+                    End If
+                End If
+            Else
+                ucrBase.OKEnabled(False)
+            End If
         End If
     End Sub
 
@@ -196,13 +207,21 @@ Public Class dlgStack
     End Sub
 
     Private Sub ucrChkStackMultipleSets_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkStackMultipleSets.ControlValueChanged
+        SetSingleOrMultipleOptions()
+    End Sub
+
+    Private Sub SetSingleOrMultipleOptions()
         If ucrChkStackMultipleSets.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsReshapeFunction)
+            ucrReceiverColumnsToBeStack.SetMeAsReceiver()
+            'This is needed in case the value in ucrFactorInto is the R default for melt ("variable")
+            'in which case it would have been removed from all functions (R default shared by all functions)
             If Not ucrFactorInto.IsEmpty Then
                 clsReshapeFunction.AddParameter("timevar", Chr(34) & ucrFactorInto.GetText() & Chr(34))
             End If
         Else
             ucrBase.clsRsyntax.SetBaseRFunction(clsMeltFunction)
         End If
+        TestOKEnabled()
     End Sub
 End Class
