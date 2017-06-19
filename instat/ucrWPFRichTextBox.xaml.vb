@@ -79,7 +79,7 @@ Public Class ucrWPFRichTextBox
         Catch e As Exception
             Console.WriteLine("The process failed: {0}", e.Message)
             'Temporarily adding a vb message box for debug purposes.
-            MsgBox(e.Message & vbNewLine & "A problem occured in attempting to create the directory: " & strDirectoryPath, MsgBoxStyle.Critical)
+            MsgBox(e.Message & Environment.NewLine & "A problem occured in attempting to create the directory: " & strDirectoryPath, MsgBoxStyle.Critical)
         End Try
     End Sub
 

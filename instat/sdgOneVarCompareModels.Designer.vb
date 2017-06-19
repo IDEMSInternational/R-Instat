@@ -23,210 +23,186 @@ Partial Class sdgOneVarCompareModels
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.ucrSubBase = New instat.ucrButtonsSubdialogue()
-        Me.chkSaveObjects = New System.Windows.Forms.CheckBox()
-        Me.chkSaveChi = New System.Windows.Forms.CheckBox()
-        Me.chkInputBreakpoints = New System.Windows.Forms.CheckBox()
-        Me.lblGoF = New System.Windows.Forms.Label()
-        Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.ucrDisplayChiData = New instat.ucrInputTextBox()
-        Me.ucrObjectName = New instat.ucrInputTextBox()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.ucrSavePlots = New instat.ucrSaveGraph()
-        Me.chkQQ = New System.Windows.Forms.CheckBox()
-        Me.chkCDF = New System.Windows.Forms.CheckBox()
-        Me.chkPP = New System.Windows.Forms.CheckBox()
-        Me.chkDensity = New System.Windows.Forms.CheckBox()
-        Me.TabControl1.SuspendLayout()
-        Me.TabPage1.SuspendLayout()
-        Me.TabPage2.SuspendLayout()
+        Me.tbpOneVarCompareModels = New System.Windows.Forms.TabControl()
+        Me.tbpFit = New System.Windows.Forms.TabPage()
+        Me.grpFitModel = New System.Windows.Forms.GroupBox()
+        Me.ucrSaveDisplayChi = New instat.ucrSave()
+        Me.ucrSaveGOF = New instat.ucrSave()
+        Me.ucrChkInputChiSquareBreakpoints = New instat.ucrCheck()
+        Me.tbpPlot = New System.Windows.Forms.TabPage()
+        Me.grpPlotOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrSavePlots = New instat.ucrSave()
+        Me.ucrChkQQ = New instat.ucrCheck()
+        Me.ucrChkPP = New instat.ucrCheck()
+        Me.ucrChkDensity = New instat.ucrCheck()
+        Me.ucrChkCDF = New instat.ucrCheck()
+        Me.tbpOneVarCompareModels.SuspendLayout()
+        Me.tbpFit.SuspendLayout()
+        Me.grpFitModel.SuspendLayout()
+        Me.tbpPlot.SuspendLayout()
+        Me.grpPlotOptions.SuspendLayout()
         Me.SuspendLayout()
         '
         'ucrSubBase
         '
-        Me.ucrSubBase.Location = New System.Drawing.Point(14, 168)
+        Me.ucrSubBase.Location = New System.Drawing.Point(51, 206)
         Me.ucrSubBase.Name = "ucrSubBase"
         Me.ucrSubBase.Size = New System.Drawing.Size(142, 30)
-        Me.ucrSubBase.TabIndex = 1
+        Me.ucrSubBase.TabIndex = 2
         '
-        'chkSaveObjects
+        'tbpOneVarCompareModels
         '
-        Me.chkSaveObjects.AutoSize = True
-        Me.chkSaveObjects.Location = New System.Drawing.Point(6, 29)
-        Me.chkSaveObjects.Name = "chkSaveObjects"
-        Me.chkSaveObjects.Size = New System.Drawing.Size(85, 17)
-        Me.chkSaveObjects.TabIndex = 1
-        Me.chkSaveObjects.Text = "Save Object"
-        Me.chkSaveObjects.UseVisualStyleBackColor = True
+        Me.tbpOneVarCompareModels.Controls.Add(Me.tbpFit)
+        Me.tbpOneVarCompareModels.Controls.Add(Me.tbpPlot)
+        Me.tbpOneVarCompareModels.Location = New System.Drawing.Point(2, 12)
+        Me.tbpOneVarCompareModels.Name = "tbpOneVarCompareModels"
+        Me.tbpOneVarCompareModels.SelectedIndex = 0
+        Me.tbpOneVarCompareModels.Size = New System.Drawing.Size(300, 188)
+        Me.tbpOneVarCompareModels.TabIndex = 3
         '
-        'chkSaveChi
+        'tbpFit
         '
-        Me.chkSaveChi.AutoSize = True
-        Me.chkSaveChi.Location = New System.Drawing.Point(6, 52)
-        Me.chkSaveChi.Name = "chkSaveChi"
-        Me.chkSaveChi.Size = New System.Drawing.Size(115, 17)
-        Me.chkSaveChi.TabIndex = 3
-        Me.chkSaveChi.Text = "Display Chi-Square"
-        Me.chkSaveChi.UseVisualStyleBackColor = True
+        Me.tbpFit.Controls.Add(Me.grpFitModel)
+        Me.tbpFit.Location = New System.Drawing.Point(4, 22)
+        Me.tbpFit.Name = "tbpFit"
+        Me.tbpFit.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpFit.Size = New System.Drawing.Size(292, 162)
+        Me.tbpFit.TabIndex = 0
+        Me.tbpFit.Text = "Fit"
+        Me.tbpFit.UseVisualStyleBackColor = True
         '
-        'chkInputBreakpoints
+        'grpFitModel
         '
-        Me.chkInputBreakpoints.AutoSize = True
-        Me.chkInputBreakpoints.Location = New System.Drawing.Point(6, 75)
-        Me.chkInputBreakpoints.Name = "chkInputBreakpoints"
-        Me.chkInputBreakpoints.Size = New System.Drawing.Size(164, 17)
-        Me.chkInputBreakpoints.TabIndex = 5
-        Me.chkInputBreakpoints.Text = "Input Chi-Square Breakpoints"
-        Me.chkInputBreakpoints.UseVisualStyleBackColor = True
+        Me.grpFitModel.Controls.Add(Me.ucrSaveDisplayChi)
+        Me.grpFitModel.Controls.Add(Me.ucrSaveGOF)
+        Me.grpFitModel.Controls.Add(Me.ucrChkInputChiSquareBreakpoints)
+        Me.grpFitModel.Location = New System.Drawing.Point(4, 5)
+        Me.grpFitModel.Name = "grpFitModel"
+        Me.grpFitModel.Size = New System.Drawing.Size(273, 100)
+        Me.grpFitModel.TabIndex = 1
+        Me.grpFitModel.TabStop = False
+        Me.grpFitModel.Text = "Goodness of Fit"
         '
-        'lblGoF
+        'ucrSaveDisplayChi
         '
-        Me.lblGoF.AutoSize = True
-        Me.lblGoF.Location = New System.Drawing.Point(6, 10)
-        Me.lblGoF.Name = "lblGoF"
-        Me.lblGoF.Size = New System.Drawing.Size(126, 13)
-        Me.lblGoF.TabIndex = 0
-        Me.lblGoF.Text = "Goodness of Fit Statistics"
+        Me.ucrSaveDisplayChi.Location = New System.Drawing.Point(6, 38)
+        Me.ucrSaveDisplayChi.Name = "ucrSaveDisplayChi"
+        Me.ucrSaveDisplayChi.Size = New System.Drawing.Size(260, 24)
+        Me.ucrSaveDisplayChi.TabIndex = 16
         '
-        'TabControl1
+        'ucrSaveGOF
         '
-        Me.TabControl1.Controls.Add(Me.TabPage1)
-        Me.TabControl1.Controls.Add(Me.TabPage2)
-        Me.TabControl1.Location = New System.Drawing.Point(10, 10)
-        Me.TabControl1.Name = "TabControl1"
-        Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(299, 152)
-        Me.TabControl1.TabIndex = 0
+        Me.ucrSaveGOF.Location = New System.Drawing.Point(6, 14)
+        Me.ucrSaveGOF.Name = "ucrSaveGOF"
+        Me.ucrSaveGOF.Size = New System.Drawing.Size(255, 24)
+        Me.ucrSaveGOF.TabIndex = 15
         '
-        'TabPage1
+        'ucrChkInputChiSquareBreakpoints
         '
-        Me.TabPage1.Controls.Add(Me.ucrDisplayChiData)
-        Me.TabPage1.Controls.Add(Me.ucrObjectName)
-        Me.TabPage1.Controls.Add(Me.chkSaveObjects)
-        Me.TabPage1.Controls.Add(Me.lblGoF)
-        Me.TabPage1.Controls.Add(Me.chkSaveChi)
-        Me.TabPage1.Controls.Add(Me.chkInputBreakpoints)
-        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(291, 126)
-        Me.TabPage1.TabIndex = 0
-        Me.TabPage1.Text = "Fit"
-        Me.TabPage1.UseVisualStyleBackColor = True
+        Me.ucrChkInputChiSquareBreakpoints.Checked = False
+        Me.ucrChkInputChiSquareBreakpoints.Location = New System.Drawing.Point(6, 69)
+        Me.ucrChkInputChiSquareBreakpoints.Name = "ucrChkInputChiSquareBreakpoints"
+        Me.ucrChkInputChiSquareBreakpoints.Size = New System.Drawing.Size(229, 20)
+        Me.ucrChkInputChiSquareBreakpoints.TabIndex = 3
         '
-        'ucrDisplayChiData
+        'tbpPlot
         '
-        Me.ucrDisplayChiData.IsReadOnly = False
-        Me.ucrDisplayChiData.Location = New System.Drawing.Point(129, 51)
-        Me.ucrDisplayChiData.Name = "ucrDisplayChiData"
-        Me.ucrDisplayChiData.Size = New System.Drawing.Size(139, 21)
-        Me.ucrDisplayChiData.TabIndex = 4
+        Me.tbpPlot.Controls.Add(Me.grpPlotOptions)
+        Me.tbpPlot.Location = New System.Drawing.Point(4, 22)
+        Me.tbpPlot.Name = "tbpPlot"
+        Me.tbpPlot.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpPlot.Size = New System.Drawing.Size(292, 162)
+        Me.tbpPlot.TabIndex = 1
+        Me.tbpPlot.Text = "Plot"
+        Me.tbpPlot.UseVisualStyleBackColor = True
         '
-        'ucrObjectName
+        'grpPlotOptions
         '
-        Me.ucrObjectName.IsReadOnly = False
-        Me.ucrObjectName.Location = New System.Drawing.Point(129, 27)
-        Me.ucrObjectName.Name = "ucrObjectName"
-        Me.ucrObjectName.Size = New System.Drawing.Size(139, 21)
-        Me.ucrObjectName.TabIndex = 2
-        '
-        'TabPage2
-        '
-        Me.TabPage2.Controls.Add(Me.ucrSavePlots)
-        Me.TabPage2.Controls.Add(Me.chkQQ)
-        Me.TabPage2.Controls.Add(Me.chkCDF)
-        Me.TabPage2.Controls.Add(Me.chkPP)
-        Me.TabPage2.Controls.Add(Me.chkDensity)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(291, 126)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "Plot"
-        Me.TabPage2.UseVisualStyleBackColor = True
+        Me.grpPlotOptions.Controls.Add(Me.ucrSavePlots)
+        Me.grpPlotOptions.Controls.Add(Me.ucrChkQQ)
+        Me.grpPlotOptions.Controls.Add(Me.ucrChkPP)
+        Me.grpPlotOptions.Controls.Add(Me.ucrChkDensity)
+        Me.grpPlotOptions.Controls.Add(Me.ucrChkCDF)
+        Me.grpPlotOptions.Location = New System.Drawing.Point(3, 3)
+        Me.grpPlotOptions.Name = "grpPlotOptions"
+        Me.grpPlotOptions.Size = New System.Drawing.Size(273, 152)
+        Me.grpPlotOptions.TabIndex = 2
+        Me.grpPlotOptions.TabStop = False
+        Me.grpPlotOptions.Text = "Plot Options"
         '
         'ucrSavePlots
         '
-        Me.ucrSavePlots.Location = New System.Drawing.Point(6, 95)
+        Me.ucrSavePlots.Location = New System.Drawing.Point(6, 122)
         Me.ucrSavePlots.Name = "ucrSavePlots"
-        Me.ucrSavePlots.Size = New System.Drawing.Size(265, 22)
+        Me.ucrSavePlots.Size = New System.Drawing.Size(260, 24)
         Me.ucrSavePlots.TabIndex = 4
         '
-        'chkQQ
+        'ucrChkQQ
         '
-        Me.chkQQ.AutoSize = True
-        Me.chkQQ.Location = New System.Drawing.Point(6, 75)
-        Me.chkQQ.Name = "chkQQ"
-        Me.chkQQ.Size = New System.Drawing.Size(42, 17)
-        Me.chkQQ.TabIndex = 3
-        Me.chkQQ.Text = "QQ"
-        Me.chkQQ.UseVisualStyleBackColor = True
+        Me.ucrChkQQ.Checked = False
+        Me.ucrChkQQ.Location = New System.Drawing.Point(6, 98)
+        Me.ucrChkQQ.Name = "ucrChkQQ"
+        Me.ucrChkQQ.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkQQ.TabIndex = 3
         '
-        'chkCDF
+        'ucrChkPP
         '
-        Me.chkCDF.AutoSize = True
-        Me.chkCDF.Location = New System.Drawing.Point(6, 6)
-        Me.chkCDF.Name = "chkCDF"
-        Me.chkCDF.Size = New System.Drawing.Size(47, 17)
-        Me.chkCDF.TabIndex = 0
-        Me.chkCDF.Text = "CDF"
-        Me.chkCDF.UseVisualStyleBackColor = True
+        Me.ucrChkPP.Checked = False
+        Me.ucrChkPP.Location = New System.Drawing.Point(6, 72)
+        Me.ucrChkPP.Name = "ucrChkPP"
+        Me.ucrChkPP.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkPP.TabIndex = 2
         '
-        'chkPP
+        'ucrChkDensity
         '
-        Me.chkPP.AutoSize = True
-        Me.chkPP.Location = New System.Drawing.Point(6, 52)
-        Me.chkPP.Name = "chkPP"
-        Me.chkPP.Size = New System.Drawing.Size(40, 17)
-        Me.chkPP.TabIndex = 2
-        Me.chkPP.Text = "PP"
-        Me.chkPP.UseVisualStyleBackColor = True
+        Me.ucrChkDensity.Checked = False
+        Me.ucrChkDensity.Location = New System.Drawing.Point(6, 46)
+        Me.ucrChkDensity.Name = "ucrChkDensity"
+        Me.ucrChkDensity.Size = New System.Drawing.Size(260, 20)
+        Me.ucrChkDensity.TabIndex = 1
         '
-        'chkDensity
+        'ucrChkCDF
         '
-        Me.chkDensity.AutoSize = True
-        Me.chkDensity.Location = New System.Drawing.Point(6, 29)
-        Me.chkDensity.Name = "chkDensity"
-        Me.chkDensity.Size = New System.Drawing.Size(61, 17)
-        Me.chkDensity.TabIndex = 1
-        Me.chkDensity.Text = "Density"
-        Me.chkDensity.UseVisualStyleBackColor = True
+        Me.ucrChkCDF.Checked = False
+        Me.ucrChkCDF.Location = New System.Drawing.Point(6, 20)
+        Me.ucrChkCDF.Name = "ucrChkCDF"
+        Me.ucrChkCDF.Size = New System.Drawing.Size(260, 20)
+        Me.ucrChkCDF.TabIndex = 0
         '
         'sdgOneVarCompareModels
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(321, 200)
+        Me.ClientSize = New System.Drawing.Size(303, 251)
+        Me.Controls.Add(Me.tbpOneVarCompareModels)
         Me.Controls.Add(Me.ucrSubBase)
-        Me.Controls.Add(Me.TabControl1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgOneVarCompareModels"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Display Options"
-        Me.TabControl1.ResumeLayout(False)
-        Me.TabPage1.ResumeLayout(False)
-        Me.TabPage1.PerformLayout()
-        Me.TabPage2.ResumeLayout(False)
-        Me.TabPage2.PerformLayout()
+        Me.tbpOneVarCompareModels.ResumeLayout(False)
+        Me.tbpFit.ResumeLayout(False)
+        Me.grpFitModel.ResumeLayout(False)
+        Me.tbpPlot.ResumeLayout(False)
+        Me.grpPlotOptions.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
 
     Friend WithEvents ucrSubBase As ucrButtonsSubdialogue
-    Friend WithEvents chkSaveObjects As CheckBox
-    Friend WithEvents chkSaveChi As CheckBox
-    Friend WithEvents chkInputBreakpoints As CheckBox
-    Friend WithEvents lblGoF As Label
-    Friend WithEvents TabControl1 As TabControl
-    Friend WithEvents TabPage1 As TabPage
-    Friend WithEvents TabPage2 As TabPage
-    Friend WithEvents chkCDF As CheckBox
-    Friend WithEvents chkDensity As CheckBox
-    Friend WithEvents chkPP As CheckBox
-    Friend WithEvents chkQQ As CheckBox
-    Friend WithEvents ucrObjectName As ucrInputTextBox
-    Friend WithEvents ucrSavePlots As ucrSaveGraph
-    Friend WithEvents ucrDisplayChiData As ucrInputTextBox
+    Friend WithEvents tbpOneVarCompareModels As TabControl
+    Friend WithEvents tbpFit As TabPage
+    Friend WithEvents grpFitModel As GroupBox
+    Friend WithEvents ucrSaveGOF As ucrSave
+    Friend WithEvents ucrChkInputChiSquareBreakpoints As ucrCheck
+    Friend WithEvents tbpPlot As TabPage
+    Friend WithEvents grpPlotOptions As GroupBox
+    Friend WithEvents ucrSavePlots As ucrSave
+    Friend WithEvents ucrChkQQ As ucrCheck
+    Friend WithEvents ucrChkPP As ucrCheck
+    Friend WithEvents ucrChkDensity As ucrCheck
+    Friend WithEvents ucrChkCDF As ucrCheck
+    Friend WithEvents ucrSaveDisplayChi As ucrSave
 End Class
