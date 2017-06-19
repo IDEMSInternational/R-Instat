@@ -22,12 +22,13 @@ Public Class sdgOneVarFitModDisplay
     Private WithEvents ucrDists As ucrDistributions
     Public clsRdataframe As ucrDataFrame
     Public bfirstload As Boolean = True
+    Public bControlsInitialised As Boolean = False
 
     Private Sub sdgOneVarFitModDisplay(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
 
-    Public Sub InitialiseDialog()
+    Public Sub InitialiseControls()
         UcrSaveLikelihood.SetDataFrameSelector(dlgOneVarFitModel.ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
         ucrSavePlots.SetDataFrameSelector(dlgOneVarFitModel.ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
         clsRLogLikFunction.SetPackageName("fitdistrplus")
@@ -53,6 +54,15 @@ Public Class sdgOneVarFitModDisplay
     Public Sub SetDistribution(ucrNewDists As ucrDistributions)
         ucrDists = ucrNewDists
         SetPlotOptions()
+    End Sub
+
+    Public Sub SetRCode(clsRNewOneVarFitModel As RFunction, Optional bReset As Boolean = False)
+        If Not bControlsInitialised Then
+            InitialiseControls()
+        End If
+        clsModel = clsRNewOneVarFitModel
+        ucrPnlOptimisation.SetRCode(clsModel, bReset)
+        ucrPnlFitMethod.SetRCode(clsModel, bReset)
     End Sub
 
     Public Sub CreateGraphs()
