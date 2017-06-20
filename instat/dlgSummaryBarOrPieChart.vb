@@ -111,6 +111,7 @@ Public Class dlgSummaryBarOrPieChart
         ucrYReceiver.SetMeAsReceiver()
         ucrSaveSummaryBar.Reset()
         bResetSubdialog = True
+        bResetSummaryBarLayerSubdialog = True
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
