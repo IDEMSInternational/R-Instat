@@ -99,22 +99,17 @@ Public Class ROperator
 
     Public Overrides Function Clone() As RCodeStructure
         Dim clsTempROperator As New ROperator
+        Dim clsTempCode As RCodeStructure
 
-        clsTempROperator.strOperation = strOperation
-        clsTempROperator.bBrackets = bBrackets
-        clsTempROperator.strAssignTo = strAssignTo
-        clsTempROperator.strAssignToDataFrame = strAssignToDataFrame
-        clsTempROperator.strAssignToColumn = strAssignToColumn
-        clsTempROperator.strAssignToModel = strAssignToModel
-        clsTempROperator.strAssignToGraph = strAssignToGraph
-        clsTempROperator.bToBeAssigned = bToBeAssigned
-        clsTempROperator.bIsAssigned = bIsAssigned
-        clsTempROperator.bForceIncludeOperation = bForceIncludeOperation
-        clsTempROperator.bAssignToIsPrefix = bAssignToIsPrefix
-
-        For Each clsParam As RParameter In MyBase.clsParameters
-            clsTempROperator.AddParameter(clsParam.Clone)
-        Next
+        clsTempCode = MyBase.Clone()
+        clsTempROperator = TryCast(clsTempCode, ROperator)
+        If clsTempROperator IsNot Nothing Then
+            clsTempROperator.bForceIncludeOperation = bForceIncludeOperation
+            clsTempROperator.strOperation = strOperation
+            clsTempROperator.bBrackets = bBrackets
+        Else
+            clsTempROperator = New ROperator
+        End If
         Return clsTempROperator
     End Function
 End Class
