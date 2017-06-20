@@ -86,19 +86,19 @@ Public Class dlgImportDataset
         strTempWorkbookName = "temp_workbook"
 
         ucrChkStringsAsFactors.SetText("Convert Strings to Factor Columns")
-        ucrChkStringsAsFactors.SetParameter(New RParameter("stringsAsFactors"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="")
+        ucrChkStringsAsFactors.SetParameter(New RParameter("stringsAsFactors"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkStringsAsFactors.AddFunctionNamesCondition(True, "import")
         ucrChkStringsAsFactors.AddFunctionNamesCondition(False, "import", False)
 
         ucrChkImportChangesLog.SetText("Import Changes log")
         ucrChkImportChangesLog.SetParameter(New RParameter("include_logs"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="")
-        ucrChkImportChangesLog.AddParameterPresentCondition(True, "include_logs")
-        ucrChkImportChangesLog.AddFunctionNamesCondition(False, "include_logs", False)
+        ucrChkImportChangesLog.AddParameterPresentCondition(True, frmMain.clsRLink.strInstatDataObject & "$import_RDS")
+        ucrChkImportChangesLog.AddFunctionNamesCondition(False, frmMain.clsRLink.strInstatDataObject & "$import_RDS", False)
 
         ucrChkExistingData.SetText("Keep existing data frames")
         ucrChkExistingData.SetParameter(New RParameter("keep_existing"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        ucrChkExistingData.AddParameterPresentCondition(True, "keep_existing")
-        ucrChkExistingData.AddFunctionNamesCondition(False, "keep_existing", False)
+        ucrChkExistingData.AddParameterPresentCondition(True, frmMain.clsRLink.strInstatDataObject & "$import_RDS")
+        ucrChkExistingData.AddFunctionNamesCondition(False, frmMain.clsRLink.strInstatDataObject & "$import_RDS", False)
 
 
         ucrChkImportMetadata.SetText("Import metadata")
@@ -122,19 +122,17 @@ Public Class dlgImportDataset
 
         ucrChkOverWrite.SetText("Overwrite existing if duplicates found")
         ucrChkOverWrite.SetParameter(New RParameter("overwrite_existing"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        ' ucrChkOverWrite.AddParameterPresentCondition(True, frmMain.clsRLink.strInstatDataObject & "$import_RDS")
+        ucrChkOverWrite.AddParameterPresentCondition(True, frmMain.clsRLink.strInstatDataObject & "$import_RDS")
 
 
         'temp disabled until can easily switch between fread and read.csv
         'TODO this is not an option for fread so have to change function here
 
         ucrPnlRowNames.SetParameter(New RParameter("row.names"))
-        ucrPnlRowNames.AddRadioButton(rdoRowNamesYes, Chr(34) & Chr(34))
-        ucrPnlRowNames.AddRadioButton(rdoRowNamesNo, Chr(34) & "NULL" & Chr(34))
-        ucrPnlRowNames.SetRDefault(Chr(34) & "NULL" & Chr(34))
-        rdoRowNamesYes.Enabled = False
-        'disabled until issue is resolved: http://stackoverflow.com/questions/37635541/rio-r-package-can-i-import-a-csv-file-with-non-comma-separator
-        ucrInputSeparator.Enabled = False
+        ucrPnlRowNames.AddRadioButton(rdoRowNamesYes, Chr(34) & "TRUE" & Chr(34))
+        ucrPnlRowNames.AddRadioButton(rdoRowNamesNo, Chr(34) & "FALSE" & Chr(34))
+        ucrPnlRowNames.SetRDefault(Chr(34) & "TRUE" & Chr(34))
+
 
         'hide since no longer using openxlsx package
         ucrInputNamedRegions.Hide()
@@ -144,20 +142,18 @@ Public Class dlgImportDataset
 
         ucrChkMissingValueStrings.SetText("Missing Value String")
         ucrInputNAStrings.SetParameter(New RParameter("na.strings"))
-        ucrChkMissingValueStrings.AddParameterPresentCondition(True, "na.strings")
         ucrChkMissingValueStrings.AddParameterPresentCondition(False, "na.strings", False)
+        ucrChkMissingValueStrings.AddToLinkedControls(ucrInputNAStrings, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
 
 
-        ' ucrInputEncoding.SetItems({"unknown"})
         ucrInputEncoding.SetParameter(New RParameter("encoding", 1))
         dctucrInputEncoding.Add("Unknown", Chr(34) & "unknown" & Chr(34))
         ucrInputEncoding.SetItems(dctucrInputEncoding)
         ucrInputEncoding.SetRDefault(Chr(34) & "unknown" & Chr(34))
         ucrInputEncoding.SetDropDownStyleAsNonEditable()
-        'csv options settings
-        ' clsImportCSV.AddParameter("check.names", "TRUE")
 
-        ' ucrInputSeparator.SetItems({"Automatic", ", ", "Whitespace", ": ", ";", "|", "^"})
+        'csv options settings
+
         ucrInputSeparator.SetParameter(New RParameter("sep"))
         dctucrInputSeparator.Add("Automatic", Chr(34) & "auto" & Chr(34))
         dctucrInputSeparator.Add("Comma(,)", Chr(34) & "," & Chr(34))
@@ -169,8 +165,7 @@ Public Class dlgImportDataset
         ucrInputSeparator.SetItems(dctucrInputSeparator)
         ucrInputSeparator.SetRDefault(Chr(34) & "auto" & Chr(34))
         ucrInputSeparator.SetDropDownStyleAsNonEditable()
-        'Check...Changed NO to FALSE!
-        'ucrInputHeaders.SetItems({"Automatic", "Yes", "No"})
+
         ucrInputHeaders.SetParameter(New RParameter("header"))
         dctucrInputHeaders.Add("Automatic", Chr(34) & "auto" & Chr(34))
         dctucrInputHeaders.Add("Yes", Chr(34) & "TRUE" & Chr(34))
@@ -179,9 +174,7 @@ Public Class dlgImportDataset
         ucrInputHeaders.SetRDefault(Chr(34) & "auto" & Chr(34))
         ucrInputHeaders.SetDropDownStyleAsNonEditable()
 
-        ' ucrInputDecimal.SetItems({"Automatic", ".", ","})
         ucrInputDecimal.SetParameter(New RParameter("dec"))
-        'dec param absent
         dctucrInputDecimal.Add("Automatic", Chr(34) & "auto" & Chr(34))
         dctucrInputDecimal.Add("Period(.)", Chr(34) & "." & Chr(34))
         dctucrInputDecimal.Add("Comma(,)", Chr(34) & "," & Chr(34))
@@ -208,7 +201,6 @@ Public Class dlgImportDataset
 
         ucrChkMaximumDataSize.SetText("Maximum Data Size")
         ucrInputMaximumDataSize.SetParameter(New RParameter("n_max"))
-        'ucrChkMaximumDataSize.AddParameterPresentCondition(True, "n_max")
         ucrChkMaximumDataSize.AddParameterPresentCondition(False, "n_max", False)
         ucrInputMaximumDataSize.AddQuotesIfUnrecognised = False
 
@@ -246,9 +238,7 @@ Public Class dlgImportDataset
         ucrInputXlMissingValueString.SetName("")
         clsImportCSV.AddParameter("skip", 0)
         clsImportExcel.AddParameter("skip", 0)
-
-        'rdoRowNamesNo.Checked = True
-        'ucrChkStringsAsFactors.Checked = True
+        clsImportCSV.AddParameter("row.names", "FALSE")
     End Sub
 
 #Region "Shared options"
@@ -389,7 +379,7 @@ Public Class dlgImportDataset
             ucrInputName.Hide()
             lblName.Hide()
             'ucrInputName.SetName(strFileName, bSilent:=True)
-        ElseIf strFileExt = ".csv" Then
+        ElseIf strFileExt = ".csv" OrElse strFileExt = ".DAT" Then
             clsImportCSV.AddParameter("file", Chr(34) & strFilePath & Chr(34))
             ucrBase.clsRsyntax.SetBaseRFunction(clsImportCSV)
             grpRDS.Hide()
@@ -397,9 +387,16 @@ Public Class dlgImportDataset
             grpCSV.Show()
             txtPreview.Enabled = True
             grdDataPreview.Enabled = True
-            strFileType = "csv"
             ucrInputName.SetName(strFileName, bSilent:=True)
+            If strFileExt = ".csv" Then
+                strFileType = "csv"
+                clsImportCSV.RemoveParameterByName("format")
+            Else
+                strFileType = "DAT"
+                clsImportCSV.AddParameter("format", Chr(34) & "txt" & Chr(34))
+            End If
             RefreshFilePreview()
+
         ElseIf strFileExt = ".xlsx" OrElse strFileExt = ".xls" Then
             clsImportExcel.AddParameter("file", Chr(34) & strFilePath & Chr(34))
             ucrBase.clsRsyntax.SetBaseRFunction(clsImportExcel)
@@ -543,47 +540,11 @@ Public Class dlgImportDataset
     End Sub
 #End Region
 
-    'Private Sub rdoRowNames_CheckedChanged() Handles ucrPnlRowNames.ControlValueChanged
-    '    If rdoRowNamesYes.Checked Then
-    '        TODO this Is Not an option for fread so have to change function here
-    '         clsImportCSV.AddParameter("row.names", 1)
-    '    Else
-    '        TODO find out what difference there Is between
-    '        row.names = NULL And row.names missing
-    '        disabled as import (fread) does Not support row.names
-    '        clsImportCSV.AddParameter("row.names", "NULL")
-    '        clsImportCSV.RemoveParameterByName("row.names")
-    '    End If
-    'End Sub
-
-
-    Private Sub ucrNudSkip_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudSkip.ControlValueChanged
-        If bComponentsInitialised Then
-            If ucrNudSkip.Value = 0 Then
-                clsImportCSV.RemoveParameterByName("skip")
-            Else
-                clsImportCSV.AddParameter("skip", ucrNudSkip.Value)
-            End If
-            'TODO R gives an error if skip is too large
-            RefreshFilePreview()
-            RefreshFrameView()
-        End If
-    End Sub
-
     Private Sub cmdOpenDataSet_Click(sender As Object, e As EventArgs) Handles cmdOpenDataSet.Click
         GetFileFromOpenDialog()
     End Sub
 
 #Region "Excel options"
-
-    Private Sub setExcelDefaults()
-        'ucrchkColumnNames.Checked = True
-
-    End Sub
-
-    Private Sub ucrChkMissingValueStrings_Load(sender As Object, e As EventArgs)
-
-    End Sub
 
     Private Sub FillExcelSheetsAndRegions(strFilePath As String)
         Dim i As Integer
@@ -675,6 +636,9 @@ Public Class dlgImportDataset
                     ucrInputName.SetName(ucrInputSheets.GetText(), bSilent:=True)
                 End If
             Else
+                If Not ucrInputName.UserTyped() Then
+                    ucrInputName.SetName(ucrInputSheets.GetText(), bSilent:=True)
+                End If
                 clsImportExcel.RemoveParameterByName("sheet")
                 clsImportExcel.RemoveParameterByName("which")
             End If
