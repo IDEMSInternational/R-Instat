@@ -36,6 +36,7 @@ Partial Class dlgImportDataset
         Me.lblLinesToSkip = New System.Windows.Forms.Label()
         Me.cmdOpenDataSet = New System.Windows.Forms.Button()
         Me.grpCSV = New System.Windows.Forms.GroupBox()
+        Me.ucrChkMissingValueStrings = New instat.ucrCheck()
         Me.ucrChkStringsAsFactors = New instat.ucrCheck()
         Me.ucrNudSkip = New instat.ucrNud()
         Me.rdoRowNamesNo = New System.Windows.Forms.RadioButton()
@@ -71,7 +72,6 @@ Partial Class dlgImportDataset
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
         Me.ucrInputName = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrChkMissingValueStrings = New instat.ucrCheck()
         Me.grpCSV.SuspendLayout()
         Me.grpExcel.SuspendLayout()
         Me.grpRDS.SuspendLayout()
@@ -233,13 +233,21 @@ Partial Class dlgImportDataset
         Me.grpCSV.Controls.Add(Me.lblSeparator)
         Me.grpCSV.Controls.Add(Me.lblLinesToSkip)
         Me.grpCSV.Controls.Add(Me.lblDecimal)
-        Me.grpCSV.Location = New System.Drawing.Point(449, 115)
+        Me.grpCSV.Location = New System.Drawing.Point(10, 86)
         Me.grpCSV.Name = "grpCSV"
         Me.grpCSV.Size = New System.Drawing.Size(219, 346)
         Me.grpCSV.TabIndex = 34
         Me.grpCSV.TabStop = False
         Me.grpCSV.Text = "Import csv Options"
         Me.grpCSV.Visible = False
+        '
+        'ucrChkMissingValueStrings
+        '
+        Me.ucrChkMissingValueStrings.Checked = False
+        Me.ucrChkMissingValueStrings.Location = New System.Drawing.Point(5, 225)
+        Me.ucrChkMissingValueStrings.Name = "ucrChkMissingValueStrings"
+        Me.ucrChkMissingValueStrings.Size = New System.Drawing.Size(173, 20)
+        Me.ucrChkMissingValueStrings.TabIndex = 51
         '
         'ucrChkStringsAsFactors
         '
@@ -351,7 +359,7 @@ Partial Class dlgImportDataset
         Me.grpExcel.Controls.Add(Me.ucrInputSheets)
         Me.grpExcel.Controls.Add(Me.lblRowToSkip)
         Me.grpExcel.Controls.Add(Me.lblSheets)
-        Me.grpExcel.Location = New System.Drawing.Point(11, 88)
+        Me.grpExcel.Location = New System.Drawing.Point(1, 0)
         Me.grpExcel.Name = "grpExcel"
         Me.grpExcel.Size = New System.Drawing.Size(217, 392)
         Me.grpExcel.TabIndex = 35
@@ -465,12 +473,13 @@ Partial Class dlgImportDataset
         '
         Me.grpRDS.Controls.Add(Me.ucrChkOverWrite)
         Me.grpRDS.Controls.Add(Me.ucrChkImportObjects)
+        Me.grpRDS.Controls.Add(Me.grpExcel)
         Me.grpRDS.Controls.Add(Me.ucrChkImportCalculations)
         Me.grpRDS.Controls.Add(Me.ucrChkImportChangesLog)
         Me.grpRDS.Controls.Add(Me.ucrChkImportFilters)
         Me.grpRDS.Controls.Add(Me.ucrChkImportMetadata)
         Me.grpRDS.Controls.Add(Me.ucrChkExistingData)
-        Me.grpRDS.Location = New System.Drawing.Point(226, 24)
+        Me.grpRDS.Location = New System.Drawing.Point(11, 86)
         Me.grpRDS.Name = "grpRDS"
         Me.grpRDS.Size = New System.Drawing.Size(217, 166)
         Me.grpRDS.TabIndex = 37
@@ -586,14 +595,6 @@ Partial Class dlgImportDataset
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 27
         '
-        'ucrChkMissingValueStrings
-        '
-        Me.ucrChkMissingValueStrings.Checked = False
-        Me.ucrChkMissingValueStrings.Location = New System.Drawing.Point(5, 225)
-        Me.ucrChkMissingValueStrings.Name = "ucrChkMissingValueStrings"
-        Me.ucrChkMissingValueStrings.Size = New System.Drawing.Size(173, 20)
-        Me.ucrChkMissingValueStrings.TabIndex = 51
-        '
         'dlgImportDataset
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -601,7 +602,6 @@ Partial Class dlgImportDataset
         Me.ClientSize = New System.Drawing.Size(679, 499)
         Me.Controls.Add(Me.grpRDS)
         Me.Controls.Add(Me.lblNoPreview)
-        Me.Controls.Add(Me.grpExcel)
         Me.Controls.Add(Me.grpCSV)
         Me.Controls.Add(Me.ucrInputFilePath)
         Me.Controls.Add(Me.lblCannotImport)
