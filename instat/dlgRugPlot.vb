@@ -98,6 +98,7 @@ Public Class dlgRugPlot
         ucrSaveGraph.Reset()
         ucrRugPlotSelector.Reset()
         bResetSubdialog = True
+        bResetRugLayerSubdialog = True
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)

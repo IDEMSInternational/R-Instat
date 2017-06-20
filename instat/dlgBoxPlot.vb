@@ -128,6 +128,7 @@ Public Class dlgBoxplot
         ucrSaveBoxplot.Reset()
         sdgPlots.Reset()
         bResetSubdialog = True
+        bResetBoxLayerSubdialog = True
         'rdoBoxplot.Checked = True
         'These chk boxes add features to the BoxPlot when ticked. See SetCorrdFlip and chkVarwidth_CheckedChanged. By default they are unticked.
         clsBaseOperator.SetOperation("+")
