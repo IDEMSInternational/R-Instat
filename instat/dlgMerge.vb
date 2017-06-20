@@ -22,6 +22,8 @@ Public Class dlgMerge
     Private clsByList As RFunction
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = True
+    Private ttJoinType As New ToolTip
+    Private dctJoinTexts As New Dictionary(Of String, String)
 
     ' This dialog has a bug when using numeric and integer columns as the joining columns.
     ' Issue reported here: https://github.com/hadley/dplyr/issues/2164
@@ -48,16 +50,25 @@ Public Class dlgMerge
         ucrBase.iHelpTopicID = 60
 
         'sdgMerge.SetRSyntax(ucrBase.clsRsyntax)
-        dctJoinTypes.Add("Left Join", "left_join")
         dctJoinTypes.Add("Full Join", "full_join")
+        dctJoinTypes.Add("Left Join", "left_join")
         dctJoinTypes.Add("Right Join", "right_join")
+        dctJoinTypes.Add("Inner Join", "inner_join")
         dctJoinTypes.Add("Semi Join", "semi_join")
         dctJoinTypes.Add("Anti Join", "anti_join")
         ucrInputJoinType.SetItems(dctItemParameterValuePairs:=dctJoinTypes, bSetCondtions:=False)
 
-        ucrInputJoinType.AddFunctionNamesCondition("Left Join", "left_join")
+        dctJoinTexts.Add("Full Join", "Include all rows and all columns from both data frames. Where there are not matching values, returns NA for the one missing.")
+        dctJoinTexts.Add("Left Join", "Include all rows from the 1st data frame, and all columns from both data frames." & Environment.NewLine & "Rows in the 1st data frame with no match in the second data frame will have NA values in the new columns." & Environment.NewLine & "If there are multiple matches, all combinations of the matches are included.")
+        dctJoinTexts.Add("Right Join", "Include all rows from the 2nd data frame, and all columns from both data frames." & Environment.NewLine & "Rows in the second data frame with no match in the 1st data frame will have NA values in the new columns." & Environment.NewLine & "If there are multiple matches, all combinations of the matches are included.")
+        dctJoinTexts.Add("Inner Join", "Include all rows from the 1st data frame where there are matching values in the 2nd data frame, and all columns from both data frames." & Environment.NewLine & "If there are multiple matches, all combination of the matches are included.")
+        dctJoinTexts.Add("Semi Join", "Include all rows from the 1st data frame where there are matching values in the 2nd data frame, keeping just columns from the 1st data frame." & Environment.NewLine & "(A semi join differs from an inner join because an inner join will include one row of the 1st data frame for each matching row of the 2nd data frame, where a semi join will never duplicate rows of the 1st data frame.)")
+        dctJoinTexts.Add("Anti Join", "Include all rows from the 1st data frame where there are not matching values the 2nd data frame, keeping just columns from the 1st data frame.")
+
         ucrInputJoinType.AddFunctionNamesCondition("Full Join", "full_join")
+        ucrInputJoinType.AddFunctionNamesCondition("Left Join", "left_join")
         ucrInputJoinType.AddFunctionNamesCondition("Right Join", "right_join")
+        ucrInputJoinType.AddFunctionNamesCondition("Inner Join", "inner_join")
         ucrInputJoinType.AddFunctionNamesCondition("Semi Join", "semi_join")
         ucrInputJoinType.AddFunctionNamesCondition("Anti Join", "anti_join")
         ucrInputJoinType.SetDropDownStyleAsNonEditable()
@@ -86,7 +97,7 @@ Public Class dlgMerge
         ucrSaveMerge.Reset()
 
         clsMerge.SetPackageName("dplyr")
-        clsMerge.SetRCommand("left_join")
+        clsMerge.SetRCommand("full_join")
 
         clsByList.SetRCommand("c")
 
@@ -122,19 +133,31 @@ Public Class dlgMerge
     End Sub
 
     Private Sub ucrInputJoinType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputJoinType.ControlValueChanged
+        Dim bFound As Boolean = True
+
         If Not ucrInputJoinType.IsEmpty() Then
             Select Case ucrInputJoinType.GetText()
-                Case "Left Join"
-                    clsMerge.SetRCommand("left_join")
                 Case "Full Join"
                     clsMerge.SetRCommand("full_join")
+                Case "Left Join"
+                    clsMerge.SetRCommand("left_join")
                 Case "Right Join"
                     clsMerge.SetRCommand("right_join")
+                Case "Inner Join"
+                    clsMerge.SetRCommand("inner_join")
                 Case "Semi Join"
                     clsMerge.SetRCommand("semi_join")
                 Case "Anti Join"
                     clsMerge.SetRCommand("anti_join")
+                Case Else
+                    bFound = False
             End Select
+            'This stops the tool tip popping up during selection
+            ttJoinType.Active = False
+            If bFound Then
+                ttJoinType.SetToolTip(ucrInputJoinType.cboInput, dctJoinTexts(ucrInputJoinType.GetText()))
+                ttJoinType.Active = True
+            End If
         End If
     End Sub
 
