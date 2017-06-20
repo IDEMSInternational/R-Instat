@@ -93,7 +93,7 @@ Public Class dlgCorrelation
         ucrPnlCompletePairwise.AddRadioButton(rdoPairwise, Chr(34) & "complete.obs" & Chr(34))
         ucrPnlCompletePairwise.SetRDefault(Chr(34) & "pairwise.complete.obs" & Chr(34))
         'ucrChk
-        ucrChkCorrelationMatrix.SetParameter(New RParameter("cor_matrix", 6))
+        'ucrChkCorrelationMatrix.SetParameter(New RParameter("cor_matrix", 6))
         ucrChkCorrelationMatrix.SetText("Correlation Matrix")
 
         ucrPnlColumns.AddToLinkedControls({ucrReceiverFirstColumn, ucrNudConfidenceInterval, ucrReceiverSecondColumn}, {rdoTwoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
