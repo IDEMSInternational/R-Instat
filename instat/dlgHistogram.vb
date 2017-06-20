@@ -102,6 +102,7 @@ Public Class dlgHistogram
         ucrHistogramSelector.Reset()
         ucrSaveHist.Reset()
         bResetSubdialog = True
+        bResetHistLayerSubdialog = True
         TempOptionsDisabledInMultipleVariablesCase()
 
         clsBaseOperator.SetOperation("+")
