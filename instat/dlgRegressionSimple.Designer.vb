@@ -36,6 +36,16 @@ Partial Class dlgRegressionSimple
         Me.lblFactor = New System.Windows.Forms.Label()
         Me.lblHyp1 = New System.Windows.Forms.Label()
         Me.grpParameters = New System.Windows.Forms.GroupBox()
+        Me.ucrChkFunction = New instat.ucrCheck()
+        Me.ucrNudSuccess = New instat.ucrNud()
+        Me.lblSuccess = New System.Windows.Forms.Label()
+        Me.ucrInputLevel2 = New instat.ucrInputComboBox()
+        Me.ucrInputLevel1 = New instat.ucrInputComboBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblLevel1 = New System.Windows.Forms.Label()
+        Me.rdoKruskalTest = New System.Windows.Forms.RadioButton()
+        Me.rdoWilcoxonTest = New System.Windows.Forms.RadioButton()
+        Me.ucrpnlKruskalWilcoxonTest = New instat.UcrPanel()
         Me.ucrNudHypothesis = New instat.ucrNud()
         Me.ucrChkPairedTest = New instat.ucrCheck()
         Me.ucrNudCI = New instat.ucrNud()
@@ -50,21 +60,11 @@ Partial Class dlgRegressionSimple
         Me.ucrSelectorSimpleReg = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrFamily = New instat.ucrDistributions()
         Me.ucrBase = New instat.ucrButtons()
-        Me.rdoGeneralCase = New System.Windows.Forms.RadioButton()
-        Me.rdoTwoSample = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlModelType = New instat.UcrPanel()
         Me.ucrChkConvertToVariate = New instat.ucrCheck()
         Me.ucrSaveModels = New instat.ucrSave()
-        Me.ucrChkFunction = New instat.ucrCheck()
-        Me.ucrpnlKruskalWilcoxonTest = New instat.UcrPanel()
-        Me.rdoWilcoxonTest = New System.Windows.Forms.RadioButton()
-        Me.rdoKruskalTest = New System.Windows.Forms.RadioButton()
-        Me.lblLevel1 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.ucrInputLevel1 = New instat.ucrInputComboBox()
-        Me.ucrInputLevel2 = New instat.ucrInputComboBox()
-        Me.lblSuccess = New System.Windows.Forms.Label()
-        Me.ucrNudSuccess = New instat.ucrNud()
+        Me.rdoTwoSample = New System.Windows.Forms.RadioButton()
+        Me.rdoGeneralCase = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlModelType = New instat.UcrPanel()
         Me.grpParameters.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -138,6 +138,7 @@ Partial Class dlgRegressionSimple
         '
         'grpParameters
         '
+        Me.grpParameters.Controls.Add(Me.ucrChkFunction)
         Me.grpParameters.Controls.Add(Me.ucrNudSuccess)
         Me.grpParameters.Controls.Add(Me.lblSuccess)
         Me.grpParameters.Controls.Add(Me.ucrInputLevel2)
@@ -159,6 +160,70 @@ Partial Class dlgRegressionSimple
         resources.ApplyResources(Me.grpParameters, "grpParameters")
         Me.grpParameters.Name = "grpParameters"
         Me.grpParameters.TabStop = False
+        '
+        'ucrChkFunction
+        '
+        Me.ucrChkFunction.Checked = False
+        resources.ApplyResources(Me.ucrChkFunction, "ucrChkFunction")
+        Me.ucrChkFunction.Name = "ucrChkFunction"
+        '
+        'ucrNudSuccess
+        '
+        Me.ucrNudSuccess.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSuccess.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudSuccess, "ucrNudSuccess")
+        Me.ucrNudSuccess.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSuccess.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSuccess.Name = "ucrNudSuccess"
+        Me.ucrNudSuccess.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblSuccess
+        '
+        resources.ApplyResources(Me.lblSuccess, "lblSuccess")
+        Me.lblSuccess.Name = "lblSuccess"
+        '
+        'ucrInputLevel2
+        '
+        Me.ucrInputLevel2.AddQuotesIfUnrecognised = True
+        Me.ucrInputLevel2.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputLevel2, "ucrInputLevel2")
+        Me.ucrInputLevel2.Name = "ucrInputLevel2"
+        '
+        'ucrInputLevel1
+        '
+        Me.ucrInputLevel1.AddQuotesIfUnrecognised = True
+        Me.ucrInputLevel1.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputLevel1, "ucrInputLevel1")
+        Me.ucrInputLevel1.Name = "ucrInputLevel1"
+        '
+        'Label1
+        '
+        resources.ApplyResources(Me.Label1, "Label1")
+        Me.Label1.Name = "Label1"
+        '
+        'lblLevel1
+        '
+        resources.ApplyResources(Me.lblLevel1, "lblLevel1")
+        Me.lblLevel1.Name = "lblLevel1"
+        '
+        'rdoKruskalTest
+        '
+        resources.ApplyResources(Me.rdoKruskalTest, "rdoKruskalTest")
+        Me.rdoKruskalTest.Name = "rdoKruskalTest"
+        Me.rdoKruskalTest.TabStop = True
+        Me.rdoKruskalTest.UseVisualStyleBackColor = True
+        '
+        'rdoWilcoxonTest
+        '
+        resources.ApplyResources(Me.rdoWilcoxonTest, "rdoWilcoxonTest")
+        Me.rdoWilcoxonTest.Name = "rdoWilcoxonTest"
+        Me.rdoWilcoxonTest.TabStop = True
+        Me.rdoWilcoxonTest.UseVisualStyleBackColor = True
+        '
+        'ucrpnlKruskalWilcoxonTest
+        '
+        resources.ApplyResources(Me.ucrpnlKruskalWilcoxonTest, "ucrpnlKruskalWilcoxonTest")
+        Me.ucrpnlKruskalWilcoxonTest.Name = "ucrpnlKruskalWilcoxonTest"
         '
         'ucrNudHypothesis
         '
@@ -258,31 +323,6 @@ Partial Class dlgRegressionSimple
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'rdoGeneralCase
-        '
-        resources.ApplyResources(Me.rdoGeneralCase, "rdoGeneralCase")
-        Me.rdoGeneralCase.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoGeneralCase.FlatAppearance.BorderSize = 2
-        Me.rdoGeneralCase.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoGeneralCase.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.rdoGeneralCase.Name = "rdoGeneralCase"
-        Me.rdoGeneralCase.UseVisualStyleBackColor = True
-        '
-        'rdoTwoSample
-        '
-        resources.ApplyResources(Me.rdoTwoSample, "rdoTwoSample")
-        Me.rdoTwoSample.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoTwoSample.FlatAppearance.BorderSize = 2
-        Me.rdoTwoSample.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoTwoSample.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoTwoSample.Name = "rdoTwoSample"
-        Me.rdoTwoSample.UseVisualStyleBackColor = True
-        '
-        'ucrPnlModelType
-        '
-        resources.ApplyResources(Me.ucrPnlModelType, "ucrPnlModelType")
-        Me.ucrPnlModelType.Name = "ucrPnlModelType"
-        '
         'ucrChkConvertToVariate
         '
         Me.ucrChkConvertToVariate.Checked = False
@@ -294,80 +334,38 @@ Partial Class dlgRegressionSimple
         resources.ApplyResources(Me.ucrSaveModels, "ucrSaveModels")
         Me.ucrSaveModels.Name = "ucrSaveModels"
         '
-        'ucrChkFunction
+        'rdoTwoSample
         '
-        Me.ucrChkFunction.Checked = False
-        resources.ApplyResources(Me.ucrChkFunction, "ucrChkFunction")
-        Me.ucrChkFunction.Name = "ucrChkFunction"
+        resources.ApplyResources(Me.rdoTwoSample, "rdoTwoSample")
+        Me.rdoTwoSample.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoTwoSample.FlatAppearance.BorderSize = 2
+        Me.rdoTwoSample.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoTwoSample.Name = "rdoTwoSample"
+        Me.rdoTwoSample.UseVisualStyleBackColor = True
         '
-        'ucrpnlKruskalWilcoxonTest
+        'rdoGeneralCase
         '
-        resources.ApplyResources(Me.ucrpnlKruskalWilcoxonTest, "ucrpnlKruskalWilcoxonTest")
-        Me.ucrpnlKruskalWilcoxonTest.Name = "ucrpnlKruskalWilcoxonTest"
+        resources.ApplyResources(Me.rdoGeneralCase, "rdoGeneralCase")
+        Me.rdoGeneralCase.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoGeneralCase.FlatAppearance.BorderSize = 2
+        Me.rdoGeneralCase.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoGeneralCase.Name = "rdoGeneralCase"
+        Me.rdoGeneralCase.UseVisualStyleBackColor = True
         '
-        'rdoWilcoxonTest
+        'ucrPnlModelType
         '
-        resources.ApplyResources(Me.rdoWilcoxonTest, "rdoWilcoxonTest")
-        Me.rdoWilcoxonTest.Name = "rdoWilcoxonTest"
-        Me.rdoWilcoxonTest.TabStop = True
-        Me.rdoWilcoxonTest.UseVisualStyleBackColor = True
-        '
-        'rdoKruskalTest
-        '
-        resources.ApplyResources(Me.rdoKruskalTest, "rdoKruskalTest")
-        Me.rdoKruskalTest.Name = "rdoKruskalTest"
-        Me.rdoKruskalTest.TabStop = True
-        Me.rdoKruskalTest.UseVisualStyleBackColor = True
-        '
-        'lblLevel1
-        '
-        resources.ApplyResources(Me.lblLevel1, "lblLevel1")
-        Me.lblLevel1.Name = "lblLevel1"
-        '
-        'Label1
-        '
-        resources.ApplyResources(Me.Label1, "Label1")
-        Me.Label1.Name = "Label1"
-        '
-        'ucrInputLevel1
-        '
-        Me.ucrInputLevel1.AddQuotesIfUnrecognised = True
-        Me.ucrInputLevel1.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputLevel1, "ucrInputLevel1")
-        Me.ucrInputLevel1.Name = "ucrInputLevel1"
-        '
-        'ucrInputLevel2
-        '
-        Me.ucrInputLevel2.AddQuotesIfUnrecognised = True
-        Me.ucrInputLevel2.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputLevel2, "ucrInputLevel2")
-        Me.ucrInputLevel2.Name = "ucrInputLevel2"
-        '
-        'lblSuccess
-        '
-        resources.ApplyResources(Me.lblSuccess, "lblSuccess")
-        Me.lblSuccess.Name = "lblSuccess"
-        '
-        'ucrNudSuccess
-        '
-        Me.ucrNudSuccess.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSuccess.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudSuccess, "ucrNudSuccess")
-        Me.ucrNudSuccess.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudSuccess.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSuccess.Name = "ucrNudSuccess"
-        Me.ucrNudSuccess.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        resources.ApplyResources(Me.ucrPnlModelType, "ucrPnlModelType")
+        Me.ucrPnlModelType.Name = "ucrPnlModelType"
         '
         'dlgRegressionSimple
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrChkFunction)
         Me.Controls.Add(Me.ucrSaveModels)
-        Me.Controls.Add(Me.ucrChkConvertToVariate)
-        Me.Controls.Add(Me.rdoGeneralCase)
         Me.Controls.Add(Me.rdoTwoSample)
+        Me.Controls.Add(Me.rdoGeneralCase)
         Me.Controls.Add(Me.ucrPnlModelType)
+        Me.Controls.Add(Me.ucrChkConvertToVariate)
         Me.Controls.Add(Me.grpParameters)
         Me.Controls.Add(Me.lblFactor)
         Me.Controls.Add(Me.lblNumeric)
@@ -419,9 +417,6 @@ Partial Class dlgRegressionSimple
     Friend WithEvents lblConfidenceInterval As Label
     Friend WithEvents lblDifferenceInMeans As Label
     Friend WithEvents ucrChkConvertToVariate As ucrCheck
-    Friend WithEvents rdoGeneralCase As RadioButton
-    Friend WithEvents rdoTwoSample As RadioButton
-    Friend WithEvents ucrPnlModelType As UcrPanel
     Friend WithEvents ucrChkPairedTest As ucrCheck
     Friend WithEvents rdoCompareVariance As RadioButton
     Friend WithEvents rdoCompareMeans As RadioButton
@@ -439,4 +434,7 @@ Partial Class dlgRegressionSimple
     Friend WithEvents ucrInputLevel1 As ucrInputComboBox
     Friend WithEvents Label1 As Label
     Friend WithEvents lblLevel1 As Label
+    Friend WithEvents rdoTwoSample As RadioButton
+    Friend WithEvents rdoGeneralCase As RadioButton
+    Friend WithEvents ucrPnlModelType As UcrPanel
 End Class
