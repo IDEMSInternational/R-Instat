@@ -46,10 +46,11 @@ Public Class sdgOneVarUseModFit
         ucrPnlQuantiles.AddRadioButton(rdoSequence)
         ucrPnlQuantiles.AddRadioButton(rdoInsertValues)
 
-        ucrPnlQuantiles.AddRSyntaxContainsFunctionNamesCondition(rdoSequence, {"seq"})
-        ucrPnlQuantiles.AddRSyntaxContainsFunctionNamesCondition(rdoInsertValues, {"quantile"})
-        'ucrPnlQuantiles.AddFunctionNamesCondition(rdoSequence, "seq")
-        'ucrPnlQuantiles.AddFunctionNamesCondition(rdoInsertValues, "quantile")
+        'ucrPnlQuantiles.AddRSyntaxContainsFunctionNamesCondition(rdoSequence, {"seq"})
+        'ucrPnlQuantiles.AddRSyntaxContainsFunctionNamesCondition(rdoInsertValues, {"quantile"})
+
+        ucrPnlQuantiles.AddFunctionNamesCondition(rdoSequence, "seq")
+        ucrPnlQuantiles.AddFunctionNamesCondition(rdoInsertValues, "quantile")
 
         '1. Function ran here is probs = seq(from = , to = , by =)
         ucrNudFrom.SetParameter(New RParameter("from", 1))
@@ -91,23 +92,23 @@ Public Class sdgOneVarUseModFit
         ucrPnlPlots.AddRadioButton(rdoDensityPlot)
         ucrPnlPlots.AddRadioButton(rdoCIcdf)
 
-        ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoNoPlot, {""})
-        ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoPlotAll, {"plot"})
-        ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoPPPlot, {"ppcomp"})
-        ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoCDFPlot, {"cdfcomp"})
-        ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoQQPlot, {"qqcomp"})
-        ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoDensityPlot, {"denscomp"})
-        ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoCIcdf, {"cicdfplot"})
-        ucrPnlPlots.bAllowNonConditionValues = True
+        'ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoNoPlot, {""})
+        'ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoPlotAll, {"plot"})
+        'ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoPPPlot, {"ppcomp"})
+        'ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoCDFPlot, {"cdfcomp"})
+        'ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoQQPlot, {"qqcomp"})
+        'ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoDensityPlot, {"denscomp"})
+        'ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoCIcdf, {"cicdfplot"})
 
 
-        'ucrPnlPlots.AddFunctionNamesCondition(rdoNoPlot, "")
-        'ucrPnlPlots.AddFunctionNamesCondition(rdoPlotAll, "plot")
-        'ucrPnlPlots.AddFunctionNamesCondition(rdoPPPlot, "ppcomp")
-        'ucrPnlPlots.AddFunctionNamesCondition(rdoCDFPlot, "cdfcomp")
-        'ucrPnlPlots.AddFunctionNamesCondition(rdoQQPlot, "qqcomp")
-        'ucrPnlPlots.AddFunctionNamesCondition(rdoDensityPlot, "denscomp")
-        'ucrPnlPlots.AddFunctionNamesCondition(rdoCIcdf, "CIcdfplot")
+
+        ucrPnlPlots.AddFunctionNamesCondition(rdoNoPlot, "")
+        ucrPnlPlots.AddFunctionNamesCondition(rdoPlotAll, "plot")
+        ucrPnlPlots.AddFunctionNamesCondition(rdoPPPlot, "ppcomp")
+        ucrPnlPlots.AddFunctionNamesCondition(rdoCDFPlot, "cdfcomp")
+        ucrPnlPlots.AddFunctionNamesCondition(rdoQQPlot, "qqcomp")
+        ucrPnlPlots.AddFunctionNamesCondition(rdoDensityPlot, "denscomp")
+        ucrPnlPlots.AddFunctionNamesCondition(rdoCIcdf, "CIcdfplot")
         InitialiseTabs()
         SetPlotOptions()
 
@@ -139,8 +140,8 @@ Public Class sdgOneVarUseModFit
         ucrChkParametric.SetRCode(clsOneVarRBootFunction, bReset)
         ucrNudIterations.SetRCode(clsOneVarRBootFunction, bReset)
         ucrNudCI.SetRCode(clsOneVarQuantileFunction, bReset)
-        ucrPnlPlots.SetRSyntax(clsRSyntax, bReset)
-        ucrPnlQuantiles.SetRSyntax(clsRSyntax, bReset)
+        ucrPnlPlots.SetRCode(clsRPlotAllFunction, bReset)
+        ucrPnlQuantiles.SetRCode(clsRSeqFunction, bReset)
         ucrInputQuantiles.SetRCode(clsOneVarQuantileFunction, bReset)
 
         If bReset Then
