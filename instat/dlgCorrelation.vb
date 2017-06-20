@@ -41,7 +41,27 @@ Public Class dlgCorrelation
         ucrReceiverFirstColumn.SetParameter(New RParameter("x", 0))
         ucrReceiverFirstColumn.SetParameterIsRFunction()
         ucrReceiverFirstColumn.Selector = ucrSelectorCorrelation
+        ucrReceiverFirstColumn.strSelectorHeading = "Numerics"
+        ucrReceiverMultipleColumns.Selector = ucrSelectorCorrelation
         ucrReceiverFirstColumn.SetDataType("numeric")
+        ucrReceiverFirstColumn.SetMeAsReceiver()
+
+        ucrReceiverSecondColumn.SetParameter(New RParameter("y", 1))
+        ucrReceiverSecondColumn.SetParameterIsRFunction()
+        ucrReceiverSecondColumn.strSelectorHeading = "Numerics"
+        ucrReceiverSecondColumn.Selector = ucrSelectorCorrelation
+        ucrReceiverSecondColumn.SetDataType("numeric")
+        ucrReceiverSecondColumn.SetMeAsReceiver()
+        ucrSelectorCorrelation.Focus()
+
+        ucrReceiverMultipleColumns.Selector = ucrSelectorCorrelation
+        ucrReceiverMultipleColumns.strSelectorHeading = "Numerics"
+        ucrReceiverMultipleColumns.SetParameterIsRFunction()
+        ucrReceiverMultipleColumns.SetDataType("numeric")
+        ucrReceiverMultipleColumns.SetMeAsReceiver()
+
+        ucrSelectorCorrelation.Focus()
+
 
         ucrSaveModel.chkSaveModel.Text = "Result Name"
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
