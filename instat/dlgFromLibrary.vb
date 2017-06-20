@@ -52,6 +52,7 @@ Public Class dlgFromLibrary
         cboPackages.DropDownStyle = ComboBoxStyle.DropDownList
         cboPackages.AutoCompleteMode = AutoCompleteMode.None
         cboPackages.AutoCompleteSource = AutoCompleteSource.None
+        lstCollection.HideSelection = False
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
