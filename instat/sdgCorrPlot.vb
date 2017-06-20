@@ -16,17 +16,68 @@
 Imports instat.Translations
 
 Public Class sdgCorrPlot
-    Public clsRGGscatmatrix, clsRGGcorrGraphics, clsRGraphics As New RFunction
+    Public clsRGGscatmatrix, clsRGGcorrGraphicsFunction, clsRGraphicsFuction As New RFunction
     Public bFirstLoad As Boolean = True
+    Private bControlsInitialised As Boolean = False
     Public strDataFrame As String
 
     Private Sub sdgCorrPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        If bFirstLoad Then
-            SetDefaults()
-            bFirstLoad = False
-        End If
     End Sub
+
+    Public Sub InitialiseControls()
+        ucrNudMaximumSize.SetParameter(New RParameter("max_size", 1))
+        ucrNudMaximumSize.SetMinMax(1, 10)
+        ucrNudMinimunSize.SetParameter(New RParameter("min_size", 2))
+        ucrNudMinimunSize.SetMinMax(1, 5)
+
+        ucrNudAlphaCorr.SetParameter(New RParameter("label_alpha", 3))
+        ucrNudAlphaCorr.SetMinMax(0, 1)
+        ucrNudAlphaCorr.DecimalPlaces = 2
+        ucrNudAlphaCorr.Increment = 0.01
+
+        Dim dctGeom As New Dictionary(Of String, String)
+        ucrInputComboGeom.SetParameter(New RParameter("geom", 3))
+        dctGeom.Add("tile", Chr(34) & "tile" & Chr(34))
+        dctGeom.Add("circle", Chr(34) & "circle" & Chr(34))
+        dctGeom.Add("text", Chr(34) & "text" & Chr(34))
+        dctGeom.Add("blank", Chr(34) & "blank" & Chr(34))
+        ucrInputComboGeom.SetItems(dctGeom)
+        ucrInputComboGeom.SetRDefault("tile")
+        ucrInputComboGeom.SetDropDownStyleAsNonEditable()
+    End Sub
+
+    Public Sub SetRFunction(clscorrelationFunction As RFunction, Optional bReset As Boolean = False)
+        If Not bControlsInitialised Then
+            InitialiseControls()
+        End If
+        clsRGGcorrGraphicsFunction = clscorrelationFunction
+        clsRGGcorrGraphicsFunction.SetPackageName("GGally")
+        clsRGGcorrGraphicsFunction.SetRCommand("ggcorr")
+        clsRGraphicsFuction.SetPackageName("GGally")
+        clsRGraphicsFuction.SetRCommand("ggpairs")
+
+        'settingRcode for subdialog
+        ucrNudMaximumSize.SetRCode(clsRGGcorrGraphicsFunction, bReset)
+        ucrNudMinimunSize.SetRCode(clsRGGcorrGraphicsFunction, bReset)
+        ucrInputComboGeom.SetRCode(clsRGGcorrGraphicsFunction, bReset)
+
+        dlgCorrelation.ucrBase.clsRsyntax.SetBaseRFunction(clsRGraphicsFuction)
+        'If bReset Then
+        '    tbCorrelationPlot.SelectedIndex = 0
+        'End If
+    End Sub
+
+    'Private Sub chkCorrelationPlotItems_CheckedChanged(sender As Object, e As EventArgs) Handles chkLabel.CheckedChanged
+    '    If chkLabel.Checked Then
+    '        clsRGGcorrGraphicsFunction.AddParameter("label", "TRUE")
+    '    Else
+    '        clsRGGcorrGraphicsFunction.AddParameter("label", "FALSE")
+    '    End If
+    '    clsRGGcorrGraphicsFunction.AddParameter("min_size", ucrNudMinimunSize.Value.ToString)
+    '    clsRGGcorrGraphicsFunction.AddParameter("max_size", ucrNudMaximumSize.Value.ToString)
+    '    clsRGGcorrGraphicsFunction.AddParameter("label_alpha", ucrNudAlphaCorr.Value.ToString)
+    'End Sub
 
     Public Sub CorrelationMatrix()
         If dlgCorrelation.rdoMultipleColumns.Checked AndAlso dlgCorrelation.ucrChkCorrelationMatrix.Checked AndAlso Not rdoPairwisePlot.Checked AndAlso Not rdoCorrelationPlot.Checked AndAlso Not rdoScatterplotMatrix.Checked Then
@@ -41,27 +92,24 @@ Public Class sdgCorrPlot
     End Sub
 
     Public Sub GGPairs()
-        dlgCorrelation.TempData()
-        clsRGraphics.SetPackageName("GGally")
-        clsRGraphics.SetRCommand("ggpairs")
+        'dlgCorrelation.TempData()
+
         dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
-        dlgCorrelation.ucrBase.clsRsyntax.SetBaseRFunction(clsRGraphics)
+
         dlgCorrelation.TestOKEnabled()
     End Sub
 
     Public Sub GGcorr()
         'We still need to add more arguments to the ggcorr function 
-        clsRGGcorrGraphics.SetPackageName("GGally")
-        clsRGGcorrGraphics.SetRCommand("ggcorr")
-        clsRGGcorrGraphics.AddParameter("data", "NULL")
-        clsRGGcorrGraphics.AddParameter("cor_matrix", clsRFunctionParameter:=dlgCorrelation.clsCorrelationFunction)
+        clsRGGcorrGraphicsFunction.AddParameter("data", "NULL")
+        clsRGGcorrGraphicsFunction.AddParameter("cor_matrix", clsRFunctionParameter:=dlgCorrelation.clsCorrelationFunction)
         dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
-        dlgCorrelation.ucrBase.clsRsyntax.SetBaseRFunction(clsRGGcorrGraphics)
+        dlgCorrelation.ucrBase.clsRsyntax.SetBaseRFunction(clsRGGcorrGraphicsFunction)
         dlgCorrelation.TestOKEnabled()
     End Sub
 
     Public Sub GGscatmatrix()
-        dlgCorrelation.TempData()
+        'dlgCorrelation.TempData()
         clsRGGscatmatrix.SetPackageName("GGally")
         clsRGGscatmatrix.SetRCommand("ggscatmat")
         dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
@@ -76,9 +124,9 @@ Public Class sdgCorrPlot
         rdoNone.Checked = True
         tbSaveGraphs.Visible = False
         nudAlphaScatter.Value = 1
-        nudAlphaCorr.Value = 1
+        ucrNudAlphaCorr.Value = 1
         ucrSelectFactor.Reset()
-        cmbgeom.SelectedItem = "tile"
+        'cmbgeom.SelectedItem = "tile"
         chkColour.Checked = False
         chkLabel.Checked = False
         ucrReceiveFactor.Selector = ucrSelectFactor
@@ -165,42 +213,27 @@ Public Class sdgCorrPlot
         dlgCorrelation.TestOKEnabled()
     End Sub
 
-    Private Sub chkCorrelationPlotItems_CheckedChanged(sender As Object, e As EventArgs) Handles chkLabel.CheckedChanged, nudMaximumSize.ValueChanged, nudMinimunSize.ValueChanged, nudAlphaCorr.ValueChanged
-        If chkLabel.Checked Then
-            clsRGGcorrGraphics.AddParameter("label", "TRUE")
-        Else
-            clsRGGcorrGraphics.AddParameter("label", "FALSE")
-        End If
-        clsRGGcorrGraphics.AddParameter("min_size", nudMinimunSize.Value.ToString)
-        clsRGGcorrGraphics.AddParameter("max_size", nudMaximumSize.Value.ToString)
-        clsRGGcorrGraphics.AddParameter("label_alpha", nudAlphaCorr.Value.ToString)
-    End Sub
-
     Private Sub ucrReceiveFactor_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiveFactor.SelectionChanged
         ColourbyFactor()
     End Sub
 
-    Private Sub cmbgeom_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbgeom.SelectedIndexChanged
-        If cmbgeom.SelectedItem = "circle" Then
-            lblMaximumSize.Enabled = True
-            lblMinimumSize.Enabled = True
-            nudMaximumSize.Enabled = True
-            nudMinimunSize.Enabled = True
-            clsRGGcorrGraphics.AddParameter("min_size", nudMinimunSize.Value.ToString)
-            clsRGGcorrGraphics.AddParameter("max_size", nudMaximumSize.Value.ToString)
-        Else
-            lblMaximumSize.Enabled = False
-            lblMinimumSize.Enabled = False
-            nudMaximumSize.Enabled = False
-            nudMinimunSize.Enabled = False
-            clsRGGcorrGraphics.RemoveParameterByName("min_size")
-            clsRGGcorrGraphics.RemoveParameterByName("max_size")
-        End If
-        clsRGGcorrGraphics.AddParameter("geom", Chr(34) & cmbgeom.SelectedItem.ToString & Chr(34))
-    End Sub
-
-    Private Sub nudAlpha_ValueChanged(sender As Object, e As EventArgs) Handles nudAlphaScatter.ValueChanged
-        clsRGGscatmatrix.AddParameter("alpha", nudAlphaScatter.Value.ToString)
+    Private Sub cmbgeom_SelectedIndexChanged(sender As Object, e As EventArgs)
+        'If cmbgeom.SelectedItem = "circle" Then
+        lblMaximumSize.Enabled = True
+        lblMinimumSize.Enabled = True
+        ucrNudMaximumSize.Enabled = True
+        ucrNudMinimunSize.Enabled = True
+        clsRGGcorrGraphicsFunction.AddParameter("min_size", ucrNudMinimunSize.Value.ToString)
+        clsRGGcorrGraphicsFunction.AddParameter("max_size", ucrNudMaximumSize.Value.ToString)
+        'Else
+        lblMaximumSize.Enabled = False
+        lblMinimumSize.Enabled = False
+        ucrNudMaximumSize.Enabled = False
+        ucrNudMinimunSize.Enabled = False
+        clsRGGcorrGraphicsFunction.RemoveParameterByName("min_size")
+        clsRGGcorrGraphicsFunction.RemoveParameterByName("max_size")
+        ' End If
+        'clsRGGcorrGraphicsFunction.AddParameter("geom", Chr(34) & cmbgeom.SelectedItem.ToString & Chr(34))
     End Sub
 
     Public Sub SetDataFrame(strNewDataFrame As String)
