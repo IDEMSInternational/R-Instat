@@ -89,16 +89,34 @@ Public Class RFunction
 
     Public Overrides Function Clone() As RCodeStructure
         Dim clsRFunction As New RFunction
-        Dim clsTempCode As RCodeStructure
+        Dim clsRParam As RParameter
 
-        clsTempCode = MyBase.Clone()
-        clsRFunction = TryCast(clsTempCode, RFunction)
-        If clsRFunction IsNot Nothing Then
-            clsRFunction.strPackageName = strPackageName
-            clsRFunction.strRCommand = strRCommand
-        Else
-            clsRFunction = New RFunction
-        End If
+        'RCode properties
+        clsRFunction.strAssignTo = strAssignTo
+        clsRFunction.strAssignToDataFrame = strAssignToDataFrame
+        clsRFunction.strAssignToColumn = strAssignToColumn
+        clsRFunction.strAssignToModel = strAssignToModel
+        clsRFunction.strAssignToGraph = strAssignToGraph
+        clsRFunction.strAssignToTable = strAssignToTable
+        clsRFunction.bToBeAssigned = bToBeAssigned
+        clsRFunction.bIsAssigned = bIsAssigned
+        clsRFunction.bAssignToIsPrefix = bAssignToIsPrefix
+        clsRFunction.bAssignToColumnWithoutNames = bAssignToColumnWithoutNames
+        clsRFunction.bInsertColumnBefore = bInsertColumnBefore
+        clsRFunction.iNumberOfAddedParameters = iNumberOfAddedParameters
+        clsRFunction.iPosition = iPosition
+        clsRFunction.iCallType = iCallType
+        clsRFunction.bExcludeAssignedFunctionOutput = bExcludeAssignedFunctionOutput
+        clsRFunction.bClearFromGlobal = bClearFromGlobal
+        clsRFunction.bToScriptAsRString = bToScriptAsRString
+        For Each clsRParam In clsParameters
+            clsRFunction.AddParameter(clsRParam.Clone)
+        Next
+
+        'RFunction specific properties
+        clsRFunction.strPackageName = strPackageName
+        clsRFunction.strRCommand = strRCommand
+
         Return clsRFunction
     End Function
 
