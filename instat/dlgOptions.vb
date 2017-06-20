@@ -291,19 +291,6 @@ Public Class dlgOptions
     Private Sub ucrNudPreviewRows_ValueChanged() Handles ucrNudMaxCols.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged
         ApplyEnabled(True)
     End Sub
-
-    Private Sub rdoDisplayinOutputWindow_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDisplayinOutputWindow.CheckedChanged, rdoDisplayinSeparateWindows.CheckedChanged, rdoDisplayinRViewer.CheckedChanged
-        'If rdoDisplayinOutputWindow.Checked Then
-        '    strGraphDisplayOption = "view_output_window"
-        'ElseIf rdoDisplayinSeparateWindows.Checked Then
-        '    strGraphDisplayOption = "view_separate_window"
-        'ElseIf rdoDisplayinRViewer.Checked Then
-        '    strGraphDisplayOption = "view_R_viewer"
-        'End If
-
-        'ApplyEnabled(True)
-    End Sub
-
     Private Sub ApplyEnabled(bEnable As Boolean)
         cmdApply.Enabled = bEnable
         cmdOk.Enabled = bEnable
