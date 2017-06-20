@@ -46,7 +46,9 @@ Public Class dlgOptions
         'ucrBase.iHelpTopicID = 336
         Dim strPreviewText As String
         ucrNudMaxRows.Maximum = Integer.MaxValue
+        ucrNudMaxCols.Maximum = Integer.MaxValue
         ucrNudMaxRows.Increment = 10
+        ucrNudMaxCols.Increment = 5
         strPreviewText = "R-Instat 2016"
         rtbCommandPreview.Text = strPreviewText
         rtbCommentPreview.Text = strPreviewText
@@ -77,6 +79,7 @@ Public Class dlgOptions
         SetCommentFont(frmMain.clsInstatOptions.fntComment, frmMain.clsInstatOptions.clrComment)
         SetEditorFont(frmMain.clsInstatOptions.fntEditor, frmMain.clsInstatOptions.clrEditor)
         ucrNudMaxRows.Value = frmMain.clsInstatOptions.iMaxRows
+        ucrNudMaxCols.Value = frmMain.clsInstatOptions.iMaxCols
         ucrNudPreviewRows.Value = frmMain.clsInstatOptions.iPreviewRows
         ucrInputComment.SetName(frmMain.clsInstatOptions.strComment)
         ucrWorkingDirectory.SetName(frmMain.clsInstatOptions.strWorkingDirectory)
@@ -117,6 +120,7 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.SetComment(ucrInputComment.GetText)
         frmMain.clsInstatOptions.SetPreviewRows(ucrNudPreviewRows.Value)
         frmMain.clsInstatOptions.SetMaxRows(ucrNudMaxRows.Value)
+        frmMain.clsInstatOptions.SetMaxCols(ucrNudMaxCols.Value)
         frmMain.clsInstatOptions.SetLanguageCultureCode(strCurrLanguageCulture)
         frmMain.clsInstatOptions.SetWorkingDirectory(strWorkingDirectory)
         frmMain.clsInstatOptions.SetGraphDisplayOption(strGraphDisplayOption)
@@ -284,7 +288,7 @@ Public Class dlgOptions
 
     End Sub
 
-    Private Sub ucrNudPreviewRows_ValueChanged() Handles ucrNudPreviewRows.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged
+    Private Sub ucrNudPreviewRows_ValueChanged() Handles ucrNudMaxCols.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged
         ApplyEnabled(True)
     End Sub
 

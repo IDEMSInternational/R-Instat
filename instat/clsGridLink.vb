@@ -28,6 +28,7 @@ Public Class clsGridLink
     Public bGrdMetadataChanged As Boolean
     Public bGrdVariablesMetadataChanged As Boolean
     Public iMaxRows As Integer
+    Public iMaxCols As Integer
     Private strMetadata As String
     Public fntText As Font = New Font("Microsoft Sans Serif", 10, FontStyle.Regular)
     Public clrText As Color = Color.Black
@@ -43,6 +44,7 @@ Public Class clsGridLink
         bGrdMetadataChanged = False
         bGrdVariablesMetadataChanged = False
         iMaxRows = 1000
+        iMaxCols = 30
     End Sub
 
     Public Sub UpdateGrids()
@@ -277,7 +279,8 @@ Public Class clsGridLink
         If iNewPosition <> -1 AndAlso iNewPosition <> iCurrPosition AndAlso iNewPosition < grdCurr.Worksheets.Count Then
             grdCurr.MoveWorksheet(fillWorkSheet, iNewPosition)
         End If
-        fillWorkSheet.Columns = dfTemp.ColumnCount
+        'replaced this to fill columns with the iMaxCols
+        fillWorkSheet.Columns = Math.Min(iMaxCols, dfTemp.ColumnCount)
         strColumnNames = dfTemp.ColumnNames
         If dfTemp.RowCount = 0 Then
             fillWorkSheet.Rows = 1
@@ -444,6 +447,19 @@ Public Class clsGridLink
 
     Public Sub SetMaxRows(iRows As Integer)
         iMaxRows = iRows
+        bGrdDataChanged = True
+        bGrdMetadataChanged = True
+        bGrdVariablesMetadataChanged = True
+        'TODO This causes the last sheet to be current sheet after running this.
+        '     Need to change how this is done so that the current sheet is remembered before changing.
+        If frmMain.clsRLink.bInstatObjectExists Then
+            frmMain.clsRLink.RunInternalScript(frmMain.clsRLink.strInstatDataObject & "$data_objects_changed <- TRUE")
+        End If
+        UpdateGrids()
+    End Sub
+
+    Public Sub SetMaxCols(iCols As Integer)
+        iMaxCols = iCols
         bGrdDataChanged = True
         bGrdMetadataChanged = True
         bGrdVariablesMetadataChanged = True
