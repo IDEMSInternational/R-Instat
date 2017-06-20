@@ -25,6 +25,10 @@ Partial Class sdgCorrPlot
         Me.tbSaveGraphs = New System.Windows.Forms.TabControl()
         Me.tbPairwisePlot = New System.Windows.Forms.TabPage()
         Me.tbCorrelationPlot = New System.Windows.Forms.TabPage()
+        Me.ucrInputComboGeom = New instat.ucrInputComboBox()
+        Me.ucrNudAlphaCorr = New instat.ucrNud()
+        Me.ucrNudMaximumSize = New instat.ucrNud()
+        Me.ucrNudMinimunSize = New instat.ucrNud()
         Me.chkLabel = New System.Windows.Forms.CheckBox()
         Me.lblMaximumSize = New System.Windows.Forms.Label()
         Me.lblLabelAlpha = New System.Windows.Forms.Label()
@@ -37,22 +41,19 @@ Partial Class sdgCorrPlot
         Me.lblAlpha = New System.Windows.Forms.Label()
         Me.nudAlphaScatter = New System.Windows.Forms.NumericUpDown()
         Me.ucrReceiveFactor = New instat.ucrReceiverSingle()
-        Me.rdoScatterplotMatrix = New System.Windows.Forms.RadioButton()
-        Me.rdoCorrelationPlot = New System.Windows.Forms.RadioButton()
-        Me.rdoPairwisePlot = New System.Windows.Forms.RadioButton()
-        Me.rdoNone = New System.Windows.Forms.RadioButton()
         Me.grpGraphs = New System.Windows.Forms.GroupBox()
         Me.ucrBaseSdgCorrPlot = New instat.ucrButtonsSubdialogue()
         Me.ucrSaveGraph = New instat.ucrSaveGraph()
-        Me.ucrNudMinimunSize = New instat.ucrNud()
-        Me.ucrNudMaximumSize = New instat.ucrNud()
-        Me.ucrNudAlphaCorr = New instat.ucrNud()
-        Me.ucrInputComboGeom = New instat.ucrInputComboBox()
+        Me.ucrPnlGraphType = New instat.UcrPanel()
+        Me.rdoNone = New System.Windows.Forms.RadioButton()
+        Me.rdoPairwisePlot = New System.Windows.Forms.RadioButton()
+        Me.rdoCorrelationPlot = New System.Windows.Forms.RadioButton()
+        Me.rdoScatterMatrix = New System.Windows.Forms.RadioButton()
         Me.tbSaveGraphs.SuspendLayout()
+        Me.tbPairwisePlot.SuspendLayout()
         Me.tbCorrelationPlot.SuspendLayout()
         Me.tbScatterplotMatrix.SuspendLayout()
         CType(Me.nudAlphaScatter, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.grpGraphs.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbSaveGraphs
@@ -68,6 +69,7 @@ Partial Class sdgCorrPlot
         '
         'tbPairwisePlot
         '
+        Me.tbPairwisePlot.Controls.Add(Me.grpGraphs)
         Me.tbPairwisePlot.Location = New System.Drawing.Point(4, 22)
         Me.tbPairwisePlot.Name = "tbPairwisePlot"
         Me.tbPairwisePlot.Padding = New System.Windows.Forms.Padding(3)
@@ -96,6 +98,51 @@ Partial Class sdgCorrPlot
         Me.tbCorrelationPlot.Tag = "Correlation_Plot"
         Me.tbCorrelationPlot.Text = "Correlation Plot"
         Me.tbCorrelationPlot.UseVisualStyleBackColor = True
+        '
+        'ucrInputComboGeom
+        '
+        Me.ucrInputComboGeom.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboGeom.IsReadOnly = False
+        Me.ucrInputComboGeom.Location = New System.Drawing.Point(51, 17)
+        Me.ucrInputComboGeom.Name = "ucrInputComboGeom"
+        Me.ucrInputComboGeom.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputComboGeom.TabIndex = 31
+        '
+        'ucrNudAlphaCorr
+        '
+        Me.ucrNudAlphaCorr.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAlphaCorr.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudAlphaCorr.Location = New System.Drawing.Point(243, 73)
+        Me.ucrNudAlphaCorr.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudAlphaCorr.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAlphaCorr.Name = "ucrNudAlphaCorr"
+        Me.ucrNudAlphaCorr.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudAlphaCorr.TabIndex = 30
+        Me.ucrNudAlphaCorr.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudMaximumSize
+        '
+        Me.ucrNudMaximumSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaximumSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudMaximumSize.Location = New System.Drawing.Point(244, 47)
+        Me.ucrNudMaximumSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMaximumSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaximumSize.Name = "ucrNudMaximumSize"
+        Me.ucrNudMaximumSize.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudMaximumSize.TabIndex = 29
+        Me.ucrNudMaximumSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudMinimunSize
+        '
+        Me.ucrNudMinimunSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMinimunSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudMinimunSize.Location = New System.Drawing.Point(80, 47)
+        Me.ucrNudMinimunSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMinimunSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMinimunSize.Name = "ucrNudMinimunSize"
+        Me.ucrNudMinimunSize.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudMinimunSize.TabIndex = 28
+        Me.ucrNudMinimunSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'chkLabel
         '
@@ -229,59 +276,9 @@ Partial Class sdgCorrPlot
         Me.ucrReceiveFactor.TabIndex = 12
         Me.ucrReceiveFactor.ucrSelector = Nothing
         '
-        'rdoScatterplotMatrix
-        '
-        Me.rdoScatterplotMatrix.AutoSize = True
-        Me.rdoScatterplotMatrix.Location = New System.Drawing.Point(177, 41)
-        Me.rdoScatterplotMatrix.Name = "rdoScatterplotMatrix"
-        Me.rdoScatterplotMatrix.Size = New System.Drawing.Size(107, 17)
-        Me.rdoScatterplotMatrix.TabIndex = 3
-        Me.rdoScatterplotMatrix.Tag = "Scatterplot_Matrix"
-        Me.rdoScatterplotMatrix.Text = "Scatterplot Matrix"
-        Me.rdoScatterplotMatrix.UseVisualStyleBackColor = True
-        '
-        'rdoCorrelationPlot
-        '
-        Me.rdoCorrelationPlot.AutoSize = True
-        Me.rdoCorrelationPlot.Location = New System.Drawing.Point(177, 19)
-        Me.rdoCorrelationPlot.Name = "rdoCorrelationPlot"
-        Me.rdoCorrelationPlot.Size = New System.Drawing.Size(96, 17)
-        Me.rdoCorrelationPlot.TabIndex = 1
-        Me.rdoCorrelationPlot.Tag = "Correlation_Plot"
-        Me.rdoCorrelationPlot.Text = "Correlation Plot"
-        Me.rdoCorrelationPlot.UseVisualStyleBackColor = True
-        '
-        'rdoPairwisePlot
-        '
-        Me.rdoPairwisePlot.AutoSize = True
-        Me.rdoPairwisePlot.Location = New System.Drawing.Point(6, 41)
-        Me.rdoPairwisePlot.Name = "rdoPairwisePlot"
-        Me.rdoPairwisePlot.Size = New System.Drawing.Size(85, 17)
-        Me.rdoPairwisePlot.TabIndex = 2
-        Me.rdoPairwisePlot.Tag = "Pairwise_Plot"
-        Me.rdoPairwisePlot.Text = "Pairwise Plot"
-        Me.rdoPairwisePlot.UseVisualStyleBackColor = True
-        '
-        'rdoNone
-        '
-        Me.rdoNone.AutoSize = True
-        Me.rdoNone.Checked = True
-        Me.rdoNone.Location = New System.Drawing.Point(6, 19)
-        Me.rdoNone.Name = "rdoNone"
-        Me.rdoNone.Size = New System.Drawing.Size(51, 17)
-        Me.rdoNone.TabIndex = 0
-        Me.rdoNone.TabStop = True
-        Me.rdoNone.Tag = "None"
-        Me.rdoNone.Text = "None"
-        Me.rdoNone.UseVisualStyleBackColor = True
-        '
         'grpGraphs
         '
-        Me.grpGraphs.Controls.Add(Me.rdoScatterplotMatrix)
-        Me.grpGraphs.Controls.Add(Me.rdoCorrelationPlot)
-        Me.grpGraphs.Controls.Add(Me.rdoPairwisePlot)
-        Me.grpGraphs.Controls.Add(Me.rdoNone)
-        Me.grpGraphs.Location = New System.Drawing.Point(10, 6)
+        Me.grpGraphs.Location = New System.Drawing.Point(19, 74)
         Me.grpGraphs.Name = "grpGraphs"
         Me.grpGraphs.Size = New System.Drawing.Size(348, 64)
         Me.grpGraphs.TabIndex = 0
@@ -303,57 +300,67 @@ Partial Class sdgCorrPlot
         Me.ucrSaveGraph.Size = New System.Drawing.Size(236, 22)
         Me.ucrSaveGraph.TabIndex = 2
         '
-        'ucrNudMinimunSize
+        'ucrPnlGraphType
         '
-        Me.ucrNudMinimunSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMinimunSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMinimunSize.Location = New System.Drawing.Point(80, 47)
-        Me.ucrNudMinimunSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudMinimunSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMinimunSize.Name = "ucrNudMinimunSize"
-        Me.ucrNudMinimunSize.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudMinimunSize.TabIndex = 28
-        Me.ucrNudMinimunSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrPnlGraphType.Location = New System.Drawing.Point(17, 22)
+        Me.ucrPnlGraphType.Name = "ucrPnlGraphType"
+        Me.ucrPnlGraphType.Size = New System.Drawing.Size(323, 44)
+        Me.ucrPnlGraphType.TabIndex = 4
         '
-        'ucrNudMaximumSize
+        'rdoNone
         '
-        Me.ucrNudMaximumSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMaximumSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMaximumSize.Location = New System.Drawing.Point(244, 47)
-        Me.ucrNudMaximumSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudMaximumSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMaximumSize.Name = "ucrNudMaximumSize"
-        Me.ucrNudMaximumSize.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudMaximumSize.TabIndex = 29
-        Me.ucrNudMaximumSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.rdoNone.AutoSize = True
+        Me.rdoNone.Location = New System.Drawing.Point(33, 22)
+        Me.rdoNone.Name = "rdoNone"
+        Me.rdoNone.Size = New System.Drawing.Size(51, 17)
+        Me.rdoNone.TabIndex = 5
+        Me.rdoNone.TabStop = True
+        Me.rdoNone.Text = "None"
+        Me.rdoNone.UseVisualStyleBackColor = True
         '
-        'ucrNudAlphaCorr
+        'rdoPairwisePlot
         '
-        Me.ucrNudAlphaCorr.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAlphaCorr.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudAlphaCorr.Location = New System.Drawing.Point(243, 73)
-        Me.ucrNudAlphaCorr.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudAlphaCorr.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAlphaCorr.Name = "ucrNudAlphaCorr"
-        Me.ucrNudAlphaCorr.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudAlphaCorr.TabIndex = 30
-        Me.ucrNudAlphaCorr.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.rdoPairwisePlot.AutoSize = True
+        Me.rdoPairwisePlot.Location = New System.Drawing.Point(33, 45)
+        Me.rdoPairwisePlot.Name = "rdoPairwisePlot"
+        Me.rdoPairwisePlot.Size = New System.Drawing.Size(85, 17)
+        Me.rdoPairwisePlot.TabIndex = 6
+        Me.rdoPairwisePlot.TabStop = True
+        Me.rdoPairwisePlot.Text = "Pairwise Plot"
+        Me.rdoPairwisePlot.UseVisualStyleBackColor = True
         '
-        'ucrInputComboGeom
+        'rdoCorrelationPlot
         '
-        Me.ucrInputComboGeom.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboGeom.IsReadOnly = False
-        Me.ucrInputComboGeom.Location = New System.Drawing.Point(51, 17)
-        Me.ucrInputComboGeom.Name = "ucrInputComboGeom"
-        Me.ucrInputComboGeom.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputComboGeom.TabIndex = 31
+        Me.rdoCorrelationPlot.AutoSize = True
+        Me.rdoCorrelationPlot.Location = New System.Drawing.Point(217, 22)
+        Me.rdoCorrelationPlot.Name = "rdoCorrelationPlot"
+        Me.rdoCorrelationPlot.Size = New System.Drawing.Size(96, 17)
+        Me.rdoCorrelationPlot.TabIndex = 7
+        Me.rdoCorrelationPlot.TabStop = True
+        Me.rdoCorrelationPlot.Text = "Correlation Plot"
+        Me.rdoCorrelationPlot.UseVisualStyleBackColor = True
+        '
+        'rdoScatterMatrix
+        '
+        Me.rdoScatterMatrix.AutoSize = True
+        Me.rdoScatterMatrix.Location = New System.Drawing.Point(217, 45)
+        Me.rdoScatterMatrix.Name = "rdoScatterMatrix"
+        Me.rdoScatterMatrix.Size = New System.Drawing.Size(74, 17)
+        Me.rdoScatterMatrix.TabIndex = 8
+        Me.rdoScatterMatrix.TabStop = True
+        Me.rdoScatterMatrix.Text = "Dot Graph"
+        Me.rdoScatterMatrix.UseVisualStyleBackColor = True
         '
         'sdgCorrPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(371, 428)
-        Me.Controls.Add(Me.grpGraphs)
+        Me.Controls.Add(Me.rdoScatterMatrix)
+        Me.Controls.Add(Me.rdoCorrelationPlot)
+        Me.Controls.Add(Me.rdoPairwisePlot)
+        Me.Controls.Add(Me.rdoNone)
+        Me.Controls.Add(Me.ucrPnlGraphType)
         Me.Controls.Add(Me.ucrBaseSdgCorrPlot)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.tbSaveGraphs)
@@ -365,14 +372,14 @@ Partial Class sdgCorrPlot
         Me.Tag = "Correlation_Display_and_Graphics"
         Me.Text = "Correlation Display and Graphics"
         Me.tbSaveGraphs.ResumeLayout(False)
+        Me.tbPairwisePlot.ResumeLayout(False)
         Me.tbCorrelationPlot.ResumeLayout(False)
         Me.tbCorrelationPlot.PerformLayout()
         Me.tbScatterplotMatrix.ResumeLayout(False)
         Me.tbScatterplotMatrix.PerformLayout()
         CType(Me.nudAlphaScatter, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.grpGraphs.ResumeLayout(False)
-        Me.grpGraphs.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -392,14 +399,15 @@ Partial Class sdgCorrPlot
     Friend WithEvents ucrReceiveFactor As ucrReceiverSingle
     Friend WithEvents lblFactorVariable As Label
     Friend WithEvents ucrSelectFactor As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents rdoScatterplotMatrix As RadioButton
-    Friend WithEvents rdoCorrelationPlot As RadioButton
-    Friend WithEvents rdoPairwisePlot As RadioButton
-    Friend WithEvents rdoNone As RadioButton
     Friend WithEvents grpGraphs As GroupBox
     Friend WithEvents nudAlphaScatter As NumericUpDown
     Friend WithEvents ucrNudMinimunSize As ucrNud
     Friend WithEvents ucrNudMaximumSize As ucrNud
     Friend WithEvents ucrNudAlphaCorr As ucrNud
     Friend WithEvents ucrInputComboGeom As ucrInputComboBox
+    Friend WithEvents ucrPnlGraphType As UcrPanel
+    Friend WithEvents rdoScatterMatrix As RadioButton
+    Friend WithEvents rdoCorrelationPlot As RadioButton
+    Friend WithEvents rdoPairwisePlot As RadioButton
+    Friend WithEvents rdoNone As RadioButton
 End Class
