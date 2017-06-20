@@ -111,6 +111,7 @@ Public Class dlgLinePlot
         ucrSave.Reset()
         ucrVariablesAsFactorForLinePlot.SetMeAsReceiver()
         bResetSubdialog = True
+        bResetLineLayerSubdialog = True
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
