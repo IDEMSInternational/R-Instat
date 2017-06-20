@@ -147,4 +147,8 @@ Public Class ucrSelectorByDataFrame
         MyBase.AddAdditionalCodeParameterPair(clsNewRCode, clsNewRParameter, iAdditionalPairNo)
         ucrAvailableDataFrames.AddAdditionalCodeParameterPair(clsNewRCode, clsNewRParameter, iAdditionalPairNo)
     End Sub
+
+    Public Sub SetLabelText(strText As String)
+        ucrAvailableDataFrames.SetLabelText(strText)
+    End Sub
 End Class
