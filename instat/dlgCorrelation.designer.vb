@@ -28,10 +28,12 @@ Partial Class dlgCorrelation
         Me.rdoKendall = New System.Windows.Forms.RadioButton()
         Me.rdoPearson = New System.Windows.Forms.RadioButton()
         Me.rdoSpearman = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlMethod = New instat.UcrPanel()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.grpMissing = New System.Windows.Forms.GroupBox()
         Me.rdoCompleteRowsOnly = New System.Windows.Forms.RadioButton()
         Me.rdoPairwise = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlCompletePairwise = New instat.UcrPanel()
         Me.lblConfInterval = New System.Windows.Forms.Label()
         Me.rdoTwoColumns = New System.Windows.Forms.RadioButton()
         Me.rdoMultipleColumns = New System.Windows.Forms.RadioButton()
@@ -39,9 +41,7 @@ Partial Class dlgCorrelation
         Me.ucrChkCorrelationMatrix = New instat.ucrCheck()
         Me.ucrPnlColumns = New instat.UcrPanel()
         Me.ucrSaveModel = New instat.ucrSaveModel()
-        Me.ucrPnlMethod = New instat.UcrPanel()
         Me.ucrReceiverMultipleColumns = New instat.ucrReceiverMultiple()
-        Me.ucrPnlCompletePairwise = New instat.UcrPanel()
         Me.ucrReceiverSecondColumn = New instat.ucrReceiverSingle()
         Me.ucrReceiverFirstColumn = New instat.ucrReceiverSingle()
         Me.ucrSelectorCorrelation = New instat.ucrSelectorByDataFrameAddRemove()
@@ -119,6 +119,13 @@ Partial Class dlgCorrelation
         Me.rdoSpearman.Text = "Spearman"
         Me.rdoSpearman.UseVisualStyleBackColor = True
         '
+        'ucrPnlMethod
+        '
+        Me.ucrPnlMethod.Location = New System.Drawing.Point(8, 17)
+        Me.ucrPnlMethod.Name = "ucrPnlMethod"
+        Me.ucrPnlMethod.Size = New System.Drawing.Size(255, 39)
+        Me.ucrPnlMethod.TabIndex = 16
+        '
         'cmdOptions
         '
         Me.cmdOptions.Location = New System.Drawing.Point(253, 189)
@@ -165,6 +172,13 @@ Partial Class dlgCorrelation
         Me.rdoPairwise.Tag = "Pairwise"
         Me.rdoPairwise.Text = "Pairwise"
         Me.rdoPairwise.UseVisualStyleBackColor = True
+        '
+        'ucrPnlCompletePairwise
+        '
+        Me.ucrPnlCompletePairwise.Location = New System.Drawing.Point(3, 17)
+        Me.ucrPnlCompletePairwise.Name = "ucrPnlCompletePairwise"
+        Me.ucrPnlCompletePairwise.Size = New System.Drawing.Size(189, 39)
+        Me.ucrPnlCompletePairwise.TabIndex = 17
         '
         'lblConfInterval
         '
@@ -224,7 +238,7 @@ Partial Class dlgCorrelation
         Me.ucrChkCorrelationMatrix.Checked = False
         Me.ucrChkCorrelationMatrix.Location = New System.Drawing.Point(294, 305)
         Me.ucrChkCorrelationMatrix.Name = "ucrChkCorrelationMatrix"
-        Me.ucrChkCorrelationMatrix.Size = New System.Drawing.Size(162, 20)
+        Me.ucrChkCorrelationMatrix.Size = New System.Drawing.Size(198, 20)
         Me.ucrChkCorrelationMatrix.TabIndex = 18
         '
         'ucrPnlColumns
@@ -241,13 +255,6 @@ Partial Class dlgCorrelation
         Me.ucrSaveModel.Size = New System.Drawing.Size(267, 28)
         Me.ucrSaveModel.TabIndex = 12
         '
-        'ucrPnlMethod
-        '
-        Me.ucrPnlMethod.Location = New System.Drawing.Point(8, 17)
-        Me.ucrPnlMethod.Name = "ucrPnlMethod"
-        Me.ucrPnlMethod.Size = New System.Drawing.Size(255, 39)
-        Me.ucrPnlMethod.TabIndex = 16
-        '
         'ucrReceiverMultipleColumns
         '
         Me.ucrReceiverMultipleColumns.frmParent = Me
@@ -259,13 +266,6 @@ Partial Class dlgCorrelation
         Me.ucrReceiverMultipleColumns.strNcFilePath = ""
         Me.ucrReceiverMultipleColumns.TabIndex = 3
         Me.ucrReceiverMultipleColumns.ucrSelector = Nothing
-        '
-        'ucrPnlCompletePairwise
-        '
-        Me.ucrPnlCompletePairwise.Location = New System.Drawing.Point(3, 17)
-        Me.ucrPnlCompletePairwise.Name = "ucrPnlCompletePairwise"
-        Me.ucrPnlCompletePairwise.Size = New System.Drawing.Size(189, 39)
-        Me.ucrPnlCompletePairwise.TabIndex = 17
         '
         'ucrReceiverSecondColumn
         '

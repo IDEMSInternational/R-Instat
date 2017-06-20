@@ -18,7 +18,8 @@ Imports instat.Translations
 Public Class dlgCorrelation
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
-    Private clsCorrelationTestFunction, clsCorrelationFunction As New RFunction
+    Public clsCorrelationTestFunction, clsCorrelationFunction As New RFunction
+    Dim clsTempFunction As RFunction
     Private Sub dlgCorrelation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             InitialiseDialog()
@@ -79,8 +80,8 @@ Public Class dlgCorrelation
         ucrPnlMethod.SetRDefault(Chr(34) & "pearson" & Chr(34))
 
         ucrPnlCompletePairwise.SetParameter(New RParameter("use", 5))
-        ucrPnlCompletePairwise.AddRadioButton(rdoPairwise, Chr(34) & "pairwise.complete.obs" & Chr(34))
-        ucrPnlCompletePairwise.AddRadioButton(rdoCompleteRowsOnly, Chr(34) & "complete.obs" & Chr(34))
+        ucrPnlCompletePairwise.AddRadioButton(rdoCompleteRowsOnly, Chr(34) & "pairwise.complete.obs" & Chr(34))
+        ucrPnlCompletePairwise.AddRadioButton(rdoPairwise, Chr(34) & "complete.obs" & Chr(34))
         ucrPnlCompletePairwise.SetRDefault(Chr(34) & "pairwise.complete.obs" & Chr(34))
         'ucrChk
         ucrChkCorrelationMatrix.SetText("Correlation Matrix")
@@ -184,7 +185,7 @@ Public Class dlgCorrelation
 
     Public Sub ucrReceiverMultipleColumns_SelectionChanged() Handles ucrReceiverMultipleColumns.SelectionChanged
         If Not ucrReceiverMultipleColumns.IsEmpty() Then
-            ' clsRCorrelation.AddParameter("x", clsRFunctionParameter:=ucrReceiverMultipleColumns.GetVariables())
+            clsCorrelationFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverMultipleColumns.GetVariables())
             sdgCorrPlot.clsRGraphics.AddParameter("columns", ucrReceiverMultipleColumns.GetVariableNames())
             sdgCorrPlot.clsRGGscatmatrix.AddParameter("columns", ucrReceiverMultipleColumns.GetVariableNames)
         End If
@@ -195,73 +196,9 @@ Public Class dlgCorrelation
         TestOKEnabled()
     End Sub
 
-    'Private Sub rdoForMethodsCheckedChanged(sender As Object, e As EventArgs) Handles rdoPearson.CheckedChanged, rdoKendall.CheckedChanged, rdoSpearman.CheckedChanged
-    '    If rdoPearson.Checked Then
-    '        clsRCorrelation.AddParameter("method", Chr(34) & "pearson" & Chr(34))
-    '        If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-    '            clsRCorrelation.AddParameter("method", Chr(34) & "pearson" & Chr(34))
-    '        Else
-    '            clsRCorrelation.RemoveParameterByName("method")
-    '        End If
-    '    ElseIf rdoKendall.Checked Then
-    '        clsRCorrelation.AddParameter("method", Chr(34) & "kendall" & Chr(34))
-
-    '    ElseIf rdoSpearman.Checked Then
-    '        clsRCorrelation.AddParameter("method", Chr(34) & "spearman" & Chr(34))
-    '    Else
-    '        clsRCorrelation.RemoveParameterByName("method")
-    '    End If
-    'End Sub
-
-    'Private Sub SetTwoColumnAsFunction()
-    '    ucrBase.clsRsyntax.iCallType = 2
-    '    ucrReceiverFirstColumn.SetMeAsReceiver()
-    '    'clsRCorrelation.SetRCommand("cor.test")
-    '    ucrBase.clsRsyntax.SetBaseRFunction(clsRCorrelation)
-    '    grpMissing.Visible = False
-    '    cmdOptions.Visible = False
-    '    lblConfInterval.Visible = True
-    '    'nudConfidenceInterval.Visible = True
-    '    ucrReceiverFirstColumn.Visible = True
-    '    ucrReceiverSecondColumn.Visible = True
-    '    ucrReceiverMultipleColumns.Visible = False
-    '    clsRCorrelation.RemoveParameterByName("use")
-    '    ' If nudConfidenceInterval.Value.ToString = "" Then
-    '    'nudConfidenceInterval.Value = 0.95
-    '    'End If
-    '    'clsRCorrelation.AddParameter("conf.level", nudConfidenceInterval.Value.ToString)
-    '    clsRCorrelation.AddParameter("x", clsRFunctionParameter:=ucrReceiverFirstColumn.GetVariables())
-    '    clsRCorrelation.AddParameter("y", clsRFunctionParameter:=ucrReceiverSecondColumn.GetVariables())
-    '    'clsRCorrelation.AddParameter("alternative", Chr(34) & "two.sided" & Chr(34))
-    '    'clsRCorrelation.AddParameter("exact", "NULL")
-    '    bIsTwoColumnFunction = True
-    '    TestOKEnabled()
-    'End Sub
-
-    Private Sub nudConfidenceInterval_ValueChanged(sender As Object, e As EventArgs)
-        'clsRCorrelation.AddParameter("conf.level", nudConfidenceInterval.Value.ToString)
+    Private Sub cmdPlots_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgCorrPlot.ShowDialog()
     End Sub
-
-    'Public Sub SetMultipleColumnAsFunction()
-    '    ucrBase.clsRsyntax.iCallType = 0
-    '    ucrReceiverMultipleColumns.SetMeAsReceiver()
-    '    'clsRCorrelation.SetRCommand("cor")
-    '    grpMissing.Visible = True
-    '    cmdOptions.Visible = True
-    '    lblConfInterval.Visible = False
-    '    'nudConfidenceInterval.Visible = False
-    '    ucrReceiverFirstColumn.Visible = False
-    '    ucrReceiverSecondColumn.Visible = False
-    '    ucrReceiverMultipleColumns.Visible = True
-    '    'clsRCorrelation.RemoveParameterByName("alternative")
-    '    'clsRCorrelation.RemoveParameterByName("exact")
-    '    'clsRCorrelation.RemoveParameterByName("conf.level")
-    '    'clsRCorrelation.RemoveParameterByName("y")
-    '    'SetUseParameter()
-    '    clsRCorrelation.AddParameter("x", clsRFunctionParameter:=ucrReceiverMultipleColumns.GetVariables())
-    '    'bIsTwoColumnFunction = False
-    '    TestOKEnabled()
-    'End Sub
 
     Private Sub ColumnTypeChanged(sender As Object, e As EventArgs)
         If rdoTwoColumns.Checked Then
@@ -273,48 +210,40 @@ Public Class dlgCorrelation
         TestOKEnabled()
     End Sub
 
-    Private Sub cmdPlots_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        'sdgCorrPlot.ShowDialog()
+    Public Sub TempData()
+        clsTempFunction = ucrSelectorCorrelation.ucrAvailableDataFrames.clsCurrDataFrame.Clone()
+        clsTempFunction.AddParameter("remove_attr", "TRUE")
+        sdgCorrPlot.clsRGraphics.AddParameter("data", clsRFunctionParameter:=clsTempFunction)
+        sdgCorrPlot.clsRGGscatmatrix.AddParameter("data", clsRFunctionParameter:=clsTempFunction)
     End Sub
 
-    Private Sub ucrReceiverMultipleColumns_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverMultipleColumns.SelectionChanged
-
+    Private Sub ucrSelectorCorrelation_DataFrameChanged() Handles ucrSelectorCorrelation.DataFrameChanged
+        TestOKEnabled()
+        sdgCorrPlot.chkColour.Checked = False
+        sdgCorrPlot.SetDataFrame(strNewDataFrame:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
     End Sub
-
-    'Public Sub TempData()
-    '    clsTempFunc = ucrSelectorCorrelation.ucrAvailableDataFrames.clsCurrDataFrame.Clone()
-    '    clsTempFunc.AddParameter("remove_attr", "TRUE")
-    '    sdgCorrPlot.clsRGraphics.AddParameter("data", clsRFunctionParameter:=clsTempFunc)
-    '    sdgCorrPlot.clsRGGscatmatrix.AddParameter("data", clsRFunctionParameter:=clsTempFunc)
-    'End Sub
-
-    'Private Sub ucrSelectorCorrelation_DataFrameChanged() Handles ucrSelectorCorrelation.DataFrameChanged
-    '    TestOKEnabled()
-    '    sdgCorrPlot.chkColour.Checked = False
-    '    sdgCorrPlot.SetDataFrame(strNewDataFrame:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-    'End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        'If rdoMultipleColumns.Checked AndAlso chkCorrelationMatrix.Checked AndAlso ((sdgCorrPlot.rdoPairwisePlot.Checked OrElse sdgCorrPlot.rdoCorrelationPlot.Checked OrElse sdgCorrPlot.rdoScatterplotMatrix.Checked)) Then
-        '    frmMain.clsRLink.RunScript(clsRCorrelation.ToScript(), 2)
-        'End If
-        'If ucrSaveModel.chkSaveModel.Checked AndAlso sdgCorrPlot.rdoNone.Checked AndAlso (chkCorrelationMatrix.Checked) Then
-        '    ucrBase.clsRsyntax.RemoveAssignTo()
-        '    frmMain.clsRLink.RunScript(clsRCorrelation.ToScript(), 2)
-        'End If
+        If rdoMultipleColumns.Checked AndAlso ucrChkCorrelationMatrix.Checked AndAlso ((sdgCorrPlot.rdoPairwisePlot.Checked OrElse sdgCorrPlot.rdoCorrelationPlot.Checked OrElse sdgCorrPlot.rdoScatterplotMatrix.Checked)) Then
+            frmMain.clsRLink.RunScript(clsCorrelationFunction.ToScript(), 2)
+        End If
+        If ucrSaveModel.chkSaveModel.Checked AndAlso sdgCorrPlot.rdoNone.Checked AndAlso (ucrChkCorrelationMatrix.Checked) Then
+            ucrBase.clsRsyntax.RemoveAssignTo()
+            frmMain.clsRLink.RunScript(clsCorrelationFunction.ToScript(), 2)
+        End If
     End Sub
 
-    'Public Sub AssignModelName()
-    '    If ucrSaveModel.chkSaveModel.Checked AndAlso ucrSaveModel.ucrInputModelName.GetText() <> "" AndAlso rdoMultipleColumns.Checked AndAlso sdgCorrPlot.rdoNone.Checked Then
-    '        ucrBase.clsRsyntax.SetAssignTo(ucrSaveModel.ucrInputModelName.GetText(), strTempModel:=ucrSaveModel.ucrInputModelName.GetText(), strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
-    '        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-    '        ucrBase.clsRsyntax.iCallType = 0
-    '    ElseIf sdgCorrPlot.ucrSaveGraph.bSaveGraph Then
-    '        ucrBase.clsRsyntax.SetAssignTo(sdgCorrPlot.ucrSaveGraph.strGraphName, strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=sdgCorrPlot.ucrSaveGraph.strGraphName)
-    '        ucrBase.clsRsyntax.iCallType = 0
-    '    Else
-    '        ucrBase.clsRsyntax.iCallType = 2
-    '        ucrBase.clsRsyntax.RemoveAssignTo()
-    '    End If
-    'End Sub
+    Public Sub AssignModelName()
+        If ucrSaveModel.chkSaveModel.Checked AndAlso ucrSaveModel.ucrInputModelName.GetText() <> "" AndAlso rdoMultipleColumns.Checked AndAlso sdgCorrPlot.rdoNone.Checked Then
+            ucrBase.clsRsyntax.SetAssignTo(ucrSaveModel.ucrInputModelName.GetText(), strTempModel:=ucrSaveModel.ucrInputModelName.GetText(), strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
+            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+            ucrBase.clsRsyntax.iCallType = 0
+        ElseIf sdgCorrPlot.ucrSaveGraph.bSaveGraph Then
+            ucrBase.clsRsyntax.SetAssignTo(sdgCorrPlot.ucrSaveGraph.strGraphName, strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=sdgCorrPlot.ucrSaveGraph.strGraphName)
+            ucrBase.clsRsyntax.iCallType = 0
+        Else
+            ucrBase.clsRsyntax.iCallType = 2
+            ucrBase.clsRsyntax.RemoveAssignTo()
+        End If
+    End Sub
 End Class
