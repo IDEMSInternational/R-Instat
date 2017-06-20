@@ -128,10 +128,17 @@ Public Class dlgImportDataset
         'temp disabled until can easily switch between fread and read.csv
         'TODO this is not an option for fread so have to change function here
 
-        ucrPnlRowNames.SetParameter(New RParameter("row.names"))
-        ucrPnlRowNames.AddRadioButton(rdoRowNamesYes, Chr(34) & "TRUE" & Chr(34))
-        ucrPnlRowNames.AddRadioButton(rdoRowNamesNo, Chr(34) & "FALSE" & Chr(34))
-        ucrPnlRowNames.SetRDefault(Chr(34) & "TRUE" & Chr(34))
+        'temp disabled until can easily switch between fread and read.csv
+        'disabled until issue is resolved: http://stackoverflow.com/questions/37635541/rio-r-package-can-i-import-a-csv-file-with-non-comma-separator
+        ucrInputSeparator.Enabled = False
+        ucrPnlRowNames.Enabled = False
+        rdoRowNamesYes.Enabled = False
+        rdoRowNamesNo.Enabled = False
+        ucrPnlRowNames.bAllowNonConditionValues = True
+        'ucrPnlRowNames.SetParameter(New RParameter("row.names"))
+        'ucrPnlRowNames.AddRadioButton(rdoRowNamesYes, Chr(34) & "TRUE" & Chr(34))
+        'ucrPnlRowNames.AddRadioButton(rdoRowNamesNo, Chr(34) & "FALSE" & Chr(34))
+        'ucrPnlRowNames.SetRDefault(Chr(34) & "TRUE" & Chr(34))
 
 
         'hide since no longer using openxlsx package
@@ -238,7 +245,6 @@ Public Class dlgImportDataset
         ucrInputXlMissingValueString.SetName("")
         clsImportCSV.AddParameter("skip", 0)
         clsImportExcel.AddParameter("skip", 0)
-        clsImportCSV.AddParameter("row.names", "FALSE")
     End Sub
 
 #Region "Shared options"
@@ -476,7 +482,7 @@ Public Class dlgImportDataset
                 clsImportCSV.AddParameter("nrows", intLines)
             ElseIf strFileType = "xlsx" Then
                 'iPosition = 0 is needed because of a bug in rio::import
-                'clsReadXL.AddParameter("rows", "1:" & intLines, iPosition:=0)
+                'clsImportExcel.AddParameter("rows", "1:" & intLines, iPosition:=0)
             End If
             lblCannotImport.Hide()
             lblNoPreview.Hide()
@@ -498,7 +504,7 @@ Public Class dlgImportDataset
                     ucrBase.clsRsyntax.RemoveParameter("nrows")
                     ucrBase.clsRsyntax.RemoveParameter("rows")
                     'If readXL is not the base function this may be needed.
-                    'clsReadXL.RemoveParameterByName("rows")
+                    ' clsImportExcel.RemoveParameterByName("rows")
                     ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned = bToBeAssigned
                     Try
                         frmMain.clsGrids.FillSheet(dfTemp, strTempDataFrameName, grdDataPreview, bIncludeDataTypes:=False)
@@ -620,6 +626,19 @@ Public Class dlgImportDataset
         frmMetaData.Show()
     End Sub
 
+    'Not implemented yet
+    'Private Sub rdoRowNames_CheckedChanged(sender As Object, e As EventArgs) Handles rdoRowNamesYes.CheckedChanged, rdoRowNamesNo.CheckedChanged
+    '    If rdoRowNamesYes.Checked Then
+    '        'TODO this is not an option for fread so have to change function here
+    '        clsReadCSV.AddParameter("row.names", 1)
+    '    Else
+    '        'TODO find out what difference there is between
+    '        'row.names = NULL and row.names missing
+    '        'disabled as import (fread) does not support row.names
+    '        'clsReadCSV.AddParameter("row.names", "NULL")
+    '        clsReadCSV.RemoveParameterByName("row.names")
+    '    End If
+    'End Sub
 
     Private Sub ucrInputSheets_ControlValueChanged() Handles ucrInputSheets.ControlValueChanged
         If Not ucrInputSheets.IsEmpty() Then
