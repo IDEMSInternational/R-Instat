@@ -17,6 +17,7 @@ Imports instat.Translations
 Imports System.IO
 Imports RDotNet
 Imports System.ComponentModel
+Imports instat
 
 Public Class dlgImportDataset
 
@@ -87,16 +88,18 @@ Public Class dlgImportDataset
         ucrChkStringsAsFactors.SetText("Convert Strings to Factor Columns")
         ucrChkStringsAsFactors.SetParameter(New RParameter("stringsAsFactors"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="")
         ucrChkStringsAsFactors.AddFunctionNamesCondition(True, "import")
+        ucrChkStringsAsFactors.AddFunctionNamesCondition(False, "import", False)
 
         ucrChkImportChangesLog.SetText("Import Changes log")
         ucrChkImportChangesLog.SetParameter(New RParameter("include_logs"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="")
-        ucrChkImportChangesLog.AddFunctionNamesCondition(True, frmMain.clsRLink.strInstatDataObject & "$import_RDS")
-        ucrChkImportChangesLog.AddFunctionNamesCondition(False, frmMain.clsRLink.strInstatDataObject & "$import_RDS", False)
+        ucrChkImportChangesLog.AddParameterPresentCondition(True, "include_logs")
+        ucrChkImportChangesLog.AddFunctionNamesCondition(False, "include_logs", False)
 
         ucrChkExistingData.SetText("Keep existing data frames")
         ucrChkExistingData.SetParameter(New RParameter("keep_existing"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        ucrChkExistingData.AddFunctionNamesCondition(True, frmMain.clsRLink.strInstatDataObject & "$import_RDS")
-        ucrChkExistingData.AddFunctionNamesCondition(False, frmMain.clsRLink.strInstatDataObject & "$import_RDS", False)
+        ucrChkExistingData.AddParameterPresentCondition(True, "keep_existing")
+        ucrChkExistingData.AddFunctionNamesCondition(False, "keep_existing", False)
+
 
         ucrChkImportMetadata.SetText("Import metadata")
         ucrChkImportMetadata.SetParameter(New RParameter("include_metadata"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
@@ -199,15 +202,19 @@ Public Class dlgImportDataset
         ucrchkColumnNames.SetParameter(New RParameter("trim_ws"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrchkColumnNames.SetText("Trim Trailing WhiteSpace")
 
-        'xl options settings
         ucrNudxlRowsToSkip.SetParameter(New RParameter("skip"))
+
         ucrNudxlRowsToSkip.Maximum = Integer.MaxValue
 
         ucrChkMaximumDataSize.SetText("Maximum Data Size")
         ucrInputMaximumDataSize.SetParameter(New RParameter("n_max"))
-        ucrChkMaximumDataSize.AddParameterPresentCondition(True, "n_max")
+        'ucrChkMaximumDataSize.AddParameterPresentCondition(True, "n_max")
         ucrChkMaximumDataSize.AddParameterPresentCondition(False, "n_max", False)
+        ucrInputMaximumDataSize.AddQuotesIfUnrecognised = False
+
+        ucrChkMaximumDataSize.AddToLinkedControls(ucrInputMaximumDataSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=100000)
     End Sub
+
 
     Private Sub SetDefaults()
 
@@ -273,7 +280,6 @@ Public Class dlgImportDataset
         Else
             ucrBase.OKEnabled(False)
         End If
-        ucrBase.OKEnabled(True)
     End Sub
 #End Region
 
@@ -403,13 +409,6 @@ Public Class dlgImportDataset
             txtPreview.Text = ""
             txtPreview.Enabled = False
             grdDataPreview.Enabled = True
-            If strFileExt = ".xlsx" Then
-                strFileType = "xlsx"
-                clsImportExcel.AddParameter("readxl", "FALSE")
-            Else
-                strFileType = "xls"
-                clsImportExcel.RemoveParameterByName("readxl")
-            End If
             FillExcelSheetsAndRegions(strFilePath)
 
             'ucrInputName.SetName(strFileName, bSilent:=True)
@@ -693,6 +692,10 @@ Public Class dlgImportDataset
         If strFileType = "RDS" Then
             frmMain.strSaveFilePath = ucrInputFilePath.GetText()
         End If
+    End Sub
+
+    Private Sub ucrInputName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputName.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 
     'Private Sub ucrInputNamedRegions_ControlValueChanged() Handles ucrInputNamedRegions.ControlValueChanged
