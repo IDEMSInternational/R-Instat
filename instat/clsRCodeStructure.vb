@@ -54,6 +54,11 @@ Public Class RCodeStructure
     'Will be cleared after running unless bClearFromGlobal = False
     Public bClearFromGlobal As Boolean = False
 
+    ' If True when running ToScript the function will be returned as a string that could be passed to R
+    ' e.g. "seq(from = 1, to = 10)" instead of seq(from = 1, to = 10)
+    ' When True, assignment cannot be used for the function or its parameters
+    Public bToScriptAsRString As Boolean = False
+
     Public Event ParametersChanged()
 
     'Public ReadOnly Property OrderedIndices As List(Of Integer)
@@ -383,14 +388,14 @@ Public Class RCodeStructure
         Return clsTemp
     End Function
 
-    Public Function GetAllAssignTo(dctFunctionAssignToValues As Dictionary(Of RCodeStructure, String)) As Dictionary(Of RCodeStructure, String)
+    Public Sub GetAllAssignTo(lstCodes As List(Of RCodeStructure), lstValues As List(Of String))
         SortParameters()
-        If bToBeAssigned AndAlso Not dctFunctionAssignToValues.ContainsKey(Me) Then
-            dctFunctionAssignToValues.Add(Me, strAssignTo)
+        If bToBeAssigned AndAlso Not lstCodes.Contains(Me) Then
+            lstCodes.Add(Me)
+            lstValues.Add(strAssignTo)
         End If
         For Each clsTempParam As RParameter In clsParameters
-            clsTempParam.GetAllAssignTo(dctFunctionAssignToValues)
+            clsTempParam.GetAllAssignTo(lstCodes, lstValues)
         Next
-        Return dctFunctionAssignToValues
-    End Function
+    End Sub
 End Class

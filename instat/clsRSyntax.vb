@@ -228,24 +228,23 @@ Public Class RSyntax
         Return lstAfterCodes
     End Function
 
-    Public Function GetAllAssignTo(dctFunctionAssignToValues As Dictionary(Of RCodeStructure, String)) As Dictionary(Of RCodeStructure, String)
+    Public Sub GetAllAssignTo(lstCodes As List(Of RCodeStructure), lstValues As List(Of String))
         If bUseBaseFunction Then
-            clsBaseFunction.GetAllAssignTo(dctFunctionAssignToValues)
+            clsBaseFunction.GetAllAssignTo(lstCodes, lstValues)
         ElseIf bUseBaseOperator Then
-            clsBaseOperator.GetAllAssignTo(dctFunctionAssignToValues)
+            clsBaseOperator.GetAllAssignTo(lstCodes, lstValues)
         ElseIf bUseCommandString Then
-            clsBaseCommandString.GetAllAssignTo(dctFunctionAssignToValues)
+            clsBaseCommandString.GetAllAssignTo(lstCodes, lstValues)
         End If
         lstBeforeCodes.Sort(AddressOf CompareCodePositions)
         For Each clsTempCode As RCodeStructure In lstBeforeCodes
-            clsTempCode.GetAllAssignTo(dctFunctionAssignToValues)
+            clsTempCode.GetAllAssignTo(lstCodes, lstValues)
         Next
         lstAfterCodes.Sort(AddressOf CompareCodePositions)
         For Each clsTempCode As RCodeStructure In lstAfterCodes
-            clsTempCode.GetAllAssignTo(dctFunctionAssignToValues)
+            clsTempCode.GetAllAssignTo(lstCodes, lstValues)
         Next
-        Return dctFunctionAssignToValues
-    End Function
+    End Sub
 
     Public Sub SortParameters()
         'This sub is used to reorder the parameters according to their Position property.
