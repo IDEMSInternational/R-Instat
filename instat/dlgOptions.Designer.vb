@@ -88,6 +88,8 @@ Partial Class dlgOptions
         Me.trOptions = New System.Windows.Forms.TreeView()
         Me.spltControls = New System.Windows.Forms.SplitContainer()
         Me.cmdFactoryReset = New System.Windows.Forms.Button()
+        Me.lblMaxCols = New System.Windows.Forms.Label()
+        Me.ucrNudMaxCols = New instat.ucrNud()
         Me.tbcOptions.SuspendLayout()
         Me.tbpLanguages.SuspendLayout()
         Me.pnLanguages.SuspendLayout()
@@ -582,6 +584,8 @@ Partial Class dlgOptions
         '
         'tbpDataView
         '
+        Me.tbpDataView.Controls.Add(Me.ucrNudMaxCols)
+        Me.tbpDataView.Controls.Add(Me.lblMaxCols)
         Me.tbpDataView.Controls.Add(Me.ucrNudMaxRows)
         Me.tbpDataView.Controls.Add(Me.lblMaxRows)
         Me.tbpDataView.Location = New System.Drawing.Point(4, 22)
@@ -596,7 +600,7 @@ Partial Class dlgOptions
         '
         Me.ucrNudMaxRows.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxRows.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMaxRows.Location = New System.Drawing.Point(198, 15)
+        Me.ucrNudMaxRows.Location = New System.Drawing.Point(220, 15)
         Me.ucrNudMaxRows.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMaxRows.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxRows.Name = "ucrNudMaxRows"
@@ -765,6 +769,27 @@ Partial Class dlgOptions
         Me.cmdFactoryReset.Text = "Factory Reset"
         Me.cmdFactoryReset.UseVisualStyleBackColor = True
         '
+        'lblMaxCols
+        '
+        Me.lblMaxCols.AutoSize = True
+        Me.lblMaxCols.Location = New System.Drawing.Point(10, 44)
+        Me.lblMaxCols.Name = "lblMaxCols"
+        Me.lblMaxCols.Size = New System.Drawing.Size(198, 13)
+        Me.lblMaxCols.TabIndex = 1
+        Me.lblMaxCols.Text = "Maximum Number of Columns to Display:"
+        '
+        'ucrNudMaxCols
+        '
+        Me.ucrNudMaxCols.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaxCols.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudMaxCols.Location = New System.Drawing.Point(221, 41)
+        Me.ucrNudMaxCols.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMaxCols.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaxCols.Name = "ucrNudMaxCols"
+        Me.ucrNudMaxCols.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudMaxCols.TabIndex = 2
+        Me.ucrNudMaxCols.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'dlgOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -880,4 +905,6 @@ Partial Class dlgOptions
     Friend WithEvents ucrPnlGraphDisplay As UcrPanel
     Friend WithEvents ucrPnlLanguage As UcrPanel
     Friend WithEvents ucrInputComment As ucrInputTextBox
+    Friend WithEvents ucrNudMaxCols As ucrNud
+    Friend WithEvents lblMaxCols As Label
 End Class
