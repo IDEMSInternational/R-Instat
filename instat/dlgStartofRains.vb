@@ -17,7 +17,7 @@ Imports instat.Translations
 
 Public Class dlgStartofRains
     Public clsRainyDays, clsRainyDaysFunction, clsFirstDOYPerYear, clsManipulationFirstDOYPerYear, clsCombinedFilter, clsCombinedList As New RFunction
-    Private clsDayFromAndTo, clsGroupBy, clsAddKey, clsAddKeyColName As New RFunction
+    Private clsDayFromAndTo, clsGroupBy, clsAddKey, clsAddKeyColName, clsApplyInstatFunction As New RFunction
     Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator, clsRainyDaysOperator, clsFirstDOYPerYearOperator As New ROperator
     'Total Rainfall classes
     Private clsTRRollingSum, clsTRRollingSumFunction, clsTRWetSpell, clsTRWetSpellList, clsTRWetSpellFunction As New RFunction
@@ -114,7 +114,6 @@ Public Class dlgStartofRains
         'ucrChkTotalRainfall.AddParameterPresentCondition(ucrNudTROverDays, {True})
         'ucrChkTotalRainfall.AddParameterPresentCondition(ucrPnlTRCalculateBy, {True})
 
-
         ' pecentile adds a function, check for amount.
 
         ' nud
@@ -143,9 +142,6 @@ Public Class dlgStartofRains
 
         'ucrNudRDOutOfDays.SetMinMax(1, 366)  what is appropriate here?
 
-        '        ucrChkNumberOfRainyDays.AddParameterPresentCondition(ucrNudRDMinimumDays, {True})
-        '        ucrChkNumberOfRainyDays.AddParameterPresentCondition(ucrNudRDOutOfDays, {True})
-
         'Dry Spell
         clsDSParameter.SetArgumentName("sub1")
         ucrChkDrySpell.SetParameter(clsDSParameter, bNewChangeParameterValue:=False)
@@ -156,8 +152,7 @@ Public Class dlgStartofRains
         ucrNudDSMaximumDays.SetLinkedDisplayControl(lblDSMaximumDays)
         ucrNudDSLengthOfTime.SetParameter(New RParameter("width", 1))
         ' what is a min/max for this
-        '        ucrChkDrySpell.AddParameterPresentCondition(ucrNudDSLengthOfTime, {True})
-        '       ucrChkDrySpell.AddParameterPresentCondition(ucrNudDSMaximumDays, {True})
+
 
         ' Dry Period
         clsDPParameter.SetArgumentName("sub5")
@@ -177,17 +172,7 @@ Public Class dlgStartofRains
         ucrChkDryPeriod.AddToLinkedControls(ucrNudDPMaxRain, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkDryPeriod.AddToLinkedControls(ucrNudDPOverallInterval, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkDryPeriod.AddToLinkedControls(ucrNudDPRainPeriod, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        '        ucrChkDryPeriod.AddParameterPresentCondition(ucrNudDPMaxRain, {True})
-        '        ucrChkDryPeriod.AddParameterPresentCondition(ucrNudDPOverallInterval, {True})
-        '        ucrChkDryPeriod.AddParameterPresentCondition(ucrNudDPRainPeriod, {True})
 
-        'clsMinimumRainfall.SetRCommand("instat_calculation$new")
-        'clsMinimumRainfall.SetAssignTo("Minimum_Rainfall")
-
-
-        'clsWithinThirtyDays.SetRCommand("instat_calculation$new")
-        'clsWithinThirtyDays.SetAssignTo("dry_spell_10")
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$apply_instat_calculation")
 
         ucrReceiverYear.Selector = ucrSelectorForStartofRains
         ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
@@ -243,6 +228,7 @@ Public Class dlgStartofRains
         clsDPOverallIntervalFunction = New RFunction
         clsDPOverallIntervalFunctionOperator = New ROperator
         clsDPOverallIntervalFunctionOperatorRight = New ROperator
+        clsApplyInstatFunction = New RFunction
 
         ucrReceiverDate.SetMeAsReceiver()
         ucrSaveStartofRains.Reset()
@@ -460,6 +446,12 @@ Public Class dlgStartofRains
 
         clsDPParameter.SetArgument(clsDPOverallInterval)
 
+        clsApplyInstatFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
+        clsApplyInstatFunction.AddParameter("display", "FALSE", iPosition:=1)
+
+        'Base Function
+        ucrBase.clsRsyntax.SetBaseRFunction(clsApplyInstatFunction)
+
         'ucrNudTRAmount.Value = 20
         'ucrNudDSMaximumDays.Value = 10
         'DefaultNudValue()
@@ -520,7 +512,7 @@ Public Class dlgStartofRains
         clsManipulationFirstDOYPerYear.AddParameter("sub3", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False)
         clsFirstDOYPerYear.AddParameter("manipulations", clsRFunctionParameter:=clsManipulationFirstDOYPerYear, iPosition:=5) ' if I run this in SetDefaults, will this update automatically
         clsFirstDOYPerYear.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")", iPosition:=4)
-        ucrBase.clsRsyntax.AddParameter("calc", clsRFunctionParameter:=clsFirstDOYPerYear)
+        clsApplyInstatFunction.AddParameter("calc", clsRFunctionParameter:=clsFirstDOYPerYear, iPosition:=0)
 
         If ucrChkTotalRainfall.Checked Then
             TotalRainfall()
@@ -588,7 +580,6 @@ Public Class dlgStartofRains
 
     Private Sub DryPeriod()
         clsDPRainInDays.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames & ")", iPosition:=5)
-        clsDPRainInDays.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames & ")")
     End Sub
 
     Private Sub CombinedFilter()

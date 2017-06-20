@@ -88,27 +88,18 @@ Public Class RFunction
     End Sub
 
     Public Overrides Function Clone() As RCodeStructure
-
         Dim clsRFunction As New RFunction
-        Dim clsRParam As RParameter
+        Dim clsTempCode As RCodeStructure
 
-        clsRFunction.strPackageName = strPackageName
-        clsRFunction.strRCommand = strRCommand
-        clsRFunction.strAssignTo = strAssignTo
-        clsRFunction.strAssignToDataFrame = strAssignToDataFrame
-        clsRFunction.strAssignToColumn = strAssignToColumn
-        clsRFunction.strAssignToModel = strAssignToModel
-        clsRFunction.strAssignToGraph = strAssignToGraph
-        clsRFunction.bToBeAssigned = bToBeAssigned
-        clsRFunction.bIsAssigned = bIsAssigned
-        clsRFunction.bAssignToIsPrefix = bAssignToIsPrefix
-
-        For Each clsRParam In clsParameters
-            clsRFunction.AddParameter(clsRParam.Clone)
-        Next
-
+        clsTempCode = MyBase.Clone()
+        clsRFunction = TryCast(clsTempCode, RFunction)
+        If clsRFunction IsNot Nothing Then
+            clsRFunction.strPackageName = strPackageName
+            clsRFunction.strRCommand = strRCommand
+        Else
+            clsRFunction = New RFunction
+        End If
         Return clsRFunction
-
     End Function
 
     Public ReadOnly Property iParameterCount() As Integer
