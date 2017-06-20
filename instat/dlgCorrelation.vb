@@ -43,18 +43,6 @@ Public Class dlgCorrelation
         ucrReceiverFirstColumn.Selector = ucrSelectorCorrelation
         ucrReceiverFirstColumn.SetDataType("numeric")
 
-        ucrReceiverSecondColumn.SetParameter(New RParameter("y", 1))
-        ucrReceiverSecondColumn.SetParameterIsRFunction()
-        ucrReceiverSecondColumn.Selector = ucrSelectorCorrelation
-        ucrReceiverSecondColumn.SetDataType("numeric")
-
-        ucrReceiverMultipleColumns.Selector = ucrSelectorCorrelation
-        ucrReceiverMultipleColumns.SetParameterIsRFunction()
-        ucrReceiverMultipleColumns.SetDataType("numeric")
-        ucrReceiverMultipleColumns.SetMeAsReceiver()
-
-        ucrSelectorCorrelation.Focus()
-
         ucrSaveModel.chkSaveModel.Text = "Result Name"
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         'TODO: Fix bugs produced when rdoScatterplotMatrix is checked. Disabled for now

@@ -45,11 +45,14 @@ Public Class dlgTwoWayFrequencies
         ucrReceiverRowFactor.Selector = ucrSelectorTwoWayFrequencies
         ucrReceiverWeights.Selector = ucrSelectorTwoWayFrequencies
         ucrReceiverColumnFactor.SetDataType("factor")
+        ucrReceiverColumnFactor.strSelectorHeading = "Factors"
         ucrReceiverWeights.SetDataType("numeric")
+        ucrReceiverWeights.strSelectorHeading = "Numerics"
 
         'setting receivers parameters
         ucrReceiverRowFactor.SetParameter(New RParameter("var.row", 1))
         ucrReceiverRowFactor.SetParameterIsString()
+        ucrReceiverRowFactor.strSelectorHeading = "Variables"
         ucrReceiverRowFactor.bWithQuotes = False
         ucrReceiverRowFactor.SetParameterIncludeArgumentName(False)
 

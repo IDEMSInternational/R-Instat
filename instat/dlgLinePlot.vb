@@ -63,6 +63,7 @@ Public Class dlgLinePlot
         ucrReceiverX.SetParameter(New RParameter("x", 0))
         ucrReceiverX.Selector = ucrLinePlotSelector
         ucrReceiverX.SetIncludedDataTypes({"numeric", "factor"})
+        ucrReceiverX.strSelectorHeading = "Variables"
         ucrReceiverX.bWithQuotes = False
         ucrReceiverX.SetParameterIsString()
         ucrReceiverX.SetValuesToIgnore({Chr(34) & Chr(34)})
@@ -71,6 +72,7 @@ Public Class dlgLinePlot
         ucrFactorOptionalReceiver.SetParameter(New RParameter("colour", 2))
         ucrFactorOptionalReceiver.Selector = ucrLinePlotSelector
         ucrFactorOptionalReceiver.SetIncludedDataTypes({"factor"})
+        ucrFactorOptionalReceiver.strSelectorHeading = "Factors"
         ucrFactorOptionalReceiver.bWithQuotes = False
         ucrFactorOptionalReceiver.SetParameterIsString()
 
@@ -78,6 +80,7 @@ Public Class dlgLinePlot
         ucrVariablesAsFactorForLinePlot.SetFactorReceiver(ucrFactorOptionalReceiver)
         ucrVariablesAsFactorForLinePlot.Selector = ucrLinePlotSelector
         ucrVariablesAsFactorForLinePlot.SetIncludedDataTypes({"numeric", "factor"})
+        ucrVariablesAsFactorForLinePlot.strSelectorHeading = "Varibles"
         ucrVariablesAsFactorForLinePlot.SetParameterIsString()
         ucrVariablesAsFactorForLinePlot.bWithQuotes = False
         ucrVariablesAsFactorForLinePlot.SetValuesToIgnore({Chr(34) & Chr(34)})
