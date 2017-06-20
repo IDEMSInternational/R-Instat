@@ -384,8 +384,30 @@ Public Class RCodeStructure
     End Sub
 
     Public Overridable Function Clone() As RCodeStructure
-        Dim clsTemp As New RCodeStructure
-        Return clsTemp
+        Dim clsTempCode As New RCodeStructure
+        Dim clsRParam As RParameter
+
+        clsTempCode.strAssignTo = strAssignTo
+        clsTempCode.strAssignToDataFrame = strAssignToDataFrame
+        clsTempCode.strAssignToColumn = strAssignToColumn
+        clsTempCode.strAssignToModel = strAssignToModel
+        clsTempCode.strAssignToGraph = strAssignToGraph
+        clsTempCode.strAssignToTable = strAssignToTable
+        clsTempCode.bToBeAssigned = bToBeAssigned
+        clsTempCode.bIsAssigned = bIsAssigned
+        clsTempCode.bAssignToIsPrefix = bAssignToIsPrefix
+        clsTempCode.bAssignToColumnWithoutNames = bAssignToColumnWithoutNames
+        clsTempCode.bInsertColumnBefore = bInsertColumnBefore
+        clsTempCode.iNumberOfAddedParameters = iNumberOfAddedParameters
+        clsTempCode.iPosition = iPosition
+        clsTempCode.iCallType = iCallType
+        clsTempCode.bExcludeAssignedFunctionOutput = bExcludeAssignedFunctionOutput
+        clsTempCode.bClearFromGlobal = bClearFromGlobal
+        clsTempCode.bToScriptAsRString = bToScriptAsRString
+        For Each clsRParam In clsParameters
+            clsTempCode.AddParameter(clsRParam.Clone)
+        Next
+        Return clsTempCode
     End Function
 
     Public Sub GetAllAssignTo(lstCodes As List(Of RCodeStructure), lstValues As List(Of String))
