@@ -128,7 +128,7 @@ Public Class dlgDotPlot
         ucrDotPlotSelector.Reset()
         ucrSaveDotPlot.Reset()
         bResetSubdialog = True
-
+        bResetDotLayerSubdialog = True
         'I am not sure we need this
         bEditAesFunction = True
 
