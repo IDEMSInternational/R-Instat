@@ -42,7 +42,7 @@ Public Class ucrGeom
         CreateGeomList()
     End Sub
 
-    Public Overrides Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False)
+    Public Overrides Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False, Optional bUpdate As Boolean = True)
         Dim clsTempFunc As RFunction
         Dim iGeomIndex As Integer
 

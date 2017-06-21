@@ -132,7 +132,7 @@ Public Class ucrSelectorByDataFrame
         End If
     End Function
 
-    Public Overrides Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False)
+    Public Overrides Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False, Optional bUpdate As Boolean = True)
         MyBase.SetRCode(clsNewCodeStructure, bReset)
         ucrAvailableDataFrames.SetRCode(clsNewCodeStructure, bReset)
     End Sub
