@@ -282,7 +282,8 @@ Public Class clsGridLink
         If iNewPosition <> -1 AndAlso iNewPosition <> iCurrPosition AndAlso iNewPosition < grdCurr.Worksheets.Count Then
             grdCurr.MoveWorksheet(fillWorkSheet, iNewPosition)
         End If
-        fillWorkSheet.Columns = dfTemp.ColumnCount
+        'replaced this to fill columns with the iMaxCols
+        fillWorkSheet.Columns = Math.Min(iMaxCols, dfTemp.ColumnCount)
         strColumnNames = dfTemp.ColumnNames
         If dfTemp.RowCount = 0 Then
             fillWorkSheet.Rows = 1
@@ -441,6 +442,19 @@ Public Class clsGridLink
 
     Public Sub SetMaxRows(iRows As Integer)
         iMaxRows = iRows
+        bGrdDataChanged = True
+        bGrdMetadataChanged = True
+        bGrdVariablesMetadataChanged = True
+        'TODO This causes the last sheet to be current sheet after running this.
+        '     Need to change how this is done so that the current sheet is remembered before changing.
+        If frmMain.clsRLink.bInstatObjectExists Then
+            frmMain.clsRLink.RunInternalScript(frmMain.clsRLink.strInstatDataObject & "$data_objects_changed <- TRUE")
+        End If
+        UpdateGrids()
+    End Sub
+
+    Public Sub SetMaxCols(iCols As Integer)
+        iMaxCols = iCols
         bGrdDataChanged = True
         bGrdMetadataChanged = True
         bGrdVariablesMetadataChanged = True
