@@ -220,4 +220,8 @@ Public Class ucrDataFrame
             frmMain.SetCurrentDataFrame(cboAvailableDataFrames.Text)
         End If
     End Sub
+
+    Public Sub SetLabelText(strText As String)
+        lblDataFrame.Text = strText
+    End Sub
 End Class

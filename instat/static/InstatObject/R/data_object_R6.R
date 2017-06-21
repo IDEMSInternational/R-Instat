@@ -107,6 +107,9 @@ data_object$set("public", "set_data", function(new_data, messages=TRUE, check_na
     ind <- zoo::index(new_data)
     new_data <- data.frame(index = ind, value = new_data)
   }
+  else if(is.array(new_data)) {
+    new_data <- as.data.frame(new_data)
+  }
   else if(is.vector(new_data) && !is.list(new_data)) {
     new_data <- as.data.frame(new_data)
   }
