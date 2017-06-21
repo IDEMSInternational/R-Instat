@@ -62,9 +62,9 @@ Partial Class dlgRegressionSimple
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrChkConvertToVariate = New instat.ucrCheck()
         Me.ucrSaveModels = New instat.ucrSave()
+        Me.ucrPnlModelType = New instat.UcrPanel()
         Me.rdoTwoSample = New System.Windows.Forms.RadioButton()
         Me.rdoGeneralCase = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlModelType = New instat.UcrPanel()
         Me.grpParameters.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -147,7 +147,6 @@ Partial Class dlgRegressionSimple
         Me.grpParameters.Controls.Add(Me.lblLevel1)
         Me.grpParameters.Controls.Add(Me.rdoKruskalTest)
         Me.grpParameters.Controls.Add(Me.rdoWilcoxonTest)
-        Me.grpParameters.Controls.Add(Me.ucrpnlKruskalWilcoxonTest)
         Me.grpParameters.Controls.Add(Me.ucrNudHypothesis)
         Me.grpParameters.Controls.Add(Me.ucrChkPairedTest)
         Me.grpParameters.Controls.Add(Me.ucrNudCI)
@@ -334,6 +333,11 @@ Partial Class dlgRegressionSimple
         resources.ApplyResources(Me.ucrSaveModels, "ucrSaveModels")
         Me.ucrSaveModels.Name = "ucrSaveModels"
         '
+        'ucrPnlModelType
+        '
+        resources.ApplyResources(Me.ucrPnlModelType, "ucrPnlModelType")
+        Me.ucrPnlModelType.Name = "ucrPnlModelType"
+        '
         'rdoTwoSample
         '
         resources.ApplyResources(Me.rdoTwoSample, "rdoTwoSample")
@@ -352,24 +356,20 @@ Partial Class dlgRegressionSimple
         Me.rdoGeneralCase.Name = "rdoGeneralCase"
         Me.rdoGeneralCase.UseVisualStyleBackColor = True
         '
-        'ucrPnlModelType
-        '
-        resources.ApplyResources(Me.ucrPnlModelType, "ucrPnlModelType")
-        Me.ucrPnlModelType.Name = "ucrPnlModelType"
-        '
         'dlgRegressionSimple
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrSaveModels)
         Me.Controls.Add(Me.rdoTwoSample)
         Me.Controls.Add(Me.rdoGeneralCase)
+        Me.Controls.Add(Me.ucrSaveModels)
         Me.Controls.Add(Me.ucrPnlModelType)
         Me.Controls.Add(Me.ucrChkConvertToVariate)
         Me.Controls.Add(Me.grpParameters)
         Me.Controls.Add(Me.lblFactor)
         Me.Controls.Add(Me.lblNumeric)
         Me.Controls.Add(Me.ucrModelPreview)
+        Me.Controls.Add(Me.ucrpnlKruskalWilcoxonTest)
         Me.Controls.Add(Me.ucrExplanatory)
         Me.Controls.Add(Me.ucrResponse)
         Me.Controls.Add(Me.lblModelPreview)
@@ -434,7 +434,7 @@ Partial Class dlgRegressionSimple
     Friend WithEvents ucrInputLevel1 As ucrInputComboBox
     Friend WithEvents Label1 As Label
     Friend WithEvents lblLevel1 As Label
+    Friend WithEvents ucrPnlModelType As UcrPanel
     Friend WithEvents rdoTwoSample As RadioButton
     Friend WithEvents rdoGeneralCase As RadioButton
-    Friend WithEvents ucrPnlModelType As UcrPanel
 End Class
