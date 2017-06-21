@@ -351,7 +351,7 @@ Public Class ucrCore
     End Function
 
     Public Overridable Function IsRDefault() As Boolean
-        Return clsParameter IsNot Nothing AndAlso objRDefault IsNot Nothing AndAlso objRDefault.Equals(clsParameter.strArgumentValue)
+        Return clsParameter IsNot Nothing AndAlso clsParameter.strArgumentValue IsNot Nothing AndAlso objRDefault IsNot Nothing AndAlso objRDefault.Equals(clsParameter.strArgumentValue)
     End Function
 
     Public Overridable Function CanAddParameter() As Boolean
