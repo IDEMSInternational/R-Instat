@@ -358,4 +358,12 @@ Public Class ucrSave
     Public Sub AddAdditionalRCode(clsNewRCode As RCodeStructure, Optional iAdditionalPairNo As Integer = -1)
         AddAdditionalCodeParameterPair(clsNewRCode, Nothing, iAdditionalPairNo)
     End Sub
+
+    Public Function UserTyped() As Boolean
+        If bIsComboBox Then
+            Return ucrInputComboSave.bUserTyped
+        Else
+            Return ucrInputTextSave.bUserTyped
+        End If
+    End Function
 End Class
