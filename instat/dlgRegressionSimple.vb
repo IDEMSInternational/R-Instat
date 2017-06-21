@@ -280,39 +280,20 @@ Public Class dlgRegressionSimple
 
     End Sub
 
-    Private Sub rdoCompareVariance_CheckedChanged(sender As Object, e As EventArgs)
 
-    End Sub
-
-    Private Sub ucrInputLevel2_Load(sender As Object, e As EventArgs) Handles ucrInputLevel2.Load
-
-    End Sub
-
-    Private Sub ucrPnlModelType_Load_1(sender As Object, e As EventArgs) Handles ucrPnlModelType.Load
-
-    End Sub
-
-    Private Sub rdoTable_CheckedChanged_1(sender As Object, e As EventArgs) Handles rdoGeneralCase.CheckedChanged
-
-    End Sub
-
-    Private Sub ucrChkConvertToVariate_Load(sender As Object, e As EventArgs) Handles ucrChkConvertToVariate.Load
-
-    End Sub
-
-    Private Sub ucrResponse_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrResponse.ControlValueChanged
+    Private Sub ucrResponse_ControlValueChanged(ucrChangedControl As ucrCore)
         clsRYVariable = ucrResponse.GetVariables
     End Sub
 
 
-    Private Sub ucrSelectorSimpleReg_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorSimpleReg.ControlContentsChanged
+    Private Sub ucrSelectorSimpleReg_ControlContentsChanged(ucrChangedControl As ucrCore)
         ConvertToVariate()
         TestOKEnabled()
         DataTypeAccepted()
         SetEnableDists()
     End Sub
 
-    Private Sub ucrExplanatory_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrExplanatory.ControlValueChanged
+    Private Sub ucrExplanatory_ControlValueChanged(ucrChangedControl As ucrCore)
         clsRXVariable = ucrExplanatory.GetVariables
     End Sub
 
@@ -320,7 +301,7 @@ Public Class dlgRegressionSimple
 
     End Sub
 
-    Private Sub rdoTable_CheckedChanged(sender As Object, e As EventArgs)
+    Private Sub rdoGeneralCase_CheckedChanged(sender As Object, e As EventArgs)
 
     End Sub
 
@@ -561,7 +542,7 @@ Public Class dlgRegressionSimple
         End If
     End Sub
 
-    Private Sub ucrSelectorSimpleReg_DataFrameChanged() Handles ucrSelectorSimpleReg.DataFrameChanged
+    Private Sub ucrSelectorSimpleReg_DataFrameChanged()
         AssignModelName()
         SetRCode()
     End Sub
@@ -609,7 +590,7 @@ Public Class dlgRegressionSimple
         ucrFamily.Enabled = Not ucrResponse.IsEmpty
     End Sub
 
-    Private Sub ucrExplanatory_SelectionChanged(sender As Object, e As EventArgs) Handles ucrExplanatory.SelectionChanged
+    Private Sub ucrExplanatory_SelectionChanged(sender As Object, e As EventArgs)
         If Not ucrExplanatory.IsEmpty Then
             '            ucrLevel1.SetItems({ucrExplanatory.GetItemType("Levels")})
         End If
@@ -804,7 +785,7 @@ Public Class dlgRegressionSimple
         SetEnableDists()
     End Sub
 
-    Private Sub ucrResponse_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrResponse.ControlContentsChanged
+    Private Sub ucrResponse_ControlContentsChanged(ucrChangedControl As ucrCore)
         TestOKEnabled()
     End Sub
 End Class
