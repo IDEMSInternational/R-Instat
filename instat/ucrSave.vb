@@ -48,16 +48,11 @@ Public Class ucrSave
         bShowLabel = True
         bShowCheckBox = False
         LabelOrCheckboxSettings()
-        If bIsComboBox Then
-            iTemp = lblSaveText.Location.X + lblSaveText.Size.Width - ucrInputComboSave.Location.X
-            If iTemp > 0 Then
-                ucrInputComboSave.Width = ucrInputComboSave.Size.Width - iTemp
-            End If
-        Else
-            iTemp = lblSaveText.Location.X + lblSaveText.Size.Width - ucrInputTextSave.Location.X
-            If iTemp > 0 Then
-                ucrInputTextSave.Width = ucrInputComboSave.Size.Width - iTemp
-            End If
+        'Do for both in case text/combo not set yet, or will change at run time
+        iTemp = lblSaveText.Location.X + lblSaveText.Size.Width - ucrInputComboSave.Location.X
+        If iTemp > 0 Then
+            ucrInputComboSave.Width = ucrInputComboSave.Size.Width - iTemp
+            ucrInputTextSave.Width = ucrInputComboSave.Width
         End If
     End Sub
 
