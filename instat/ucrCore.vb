@@ -221,14 +221,16 @@ Public Class ucrCore
         UpdateLinkedControls(bReset)
     End Sub
 
-    Public Overridable Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False)
+    Public Overridable Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False, Optional bUpdate As Boolean = True)
         If clsRCode Is Nothing OrElse Not clsRCode.Equals(clsNewCodeStructure) Then
             clsRCode = clsNewCodeStructure
-            If bUpdateRCodeFromControl AndAlso CanUpdate() Then
+            If bUpdateRCodeFromControl AndAlso CanUpdate() Then 'andalso bUpdate?
                 UpdateRCode(bReset)
             End If
         End If
-        UpdateControl(bReset)
+        If bUpdate Then
+            UpdateControl(bReset)
+        End If
     End Sub
 
     'TODO in future may want to set RCode and RSyntax together if both needed for conditions
