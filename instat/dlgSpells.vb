@@ -20,8 +20,8 @@ Public Class dlgSpells
     Private bReset As Boolean = True
     Private clsAddKey, clsSpellLength, clsMaxValueManipulation, clsSubSpellLength1 As New RFunction
     Private clsMaxValue, clsMaxValueList, clsMaxValueFunction As New RFunction
-    Private clsDayFromAndTo, clsGroupBy, clsAddKeyColName, clsDayFromAndToCalcFrom As New RFunction
-    Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator, clsDayFromAndToCalcFromOp As New ROperator
+    Private clsDayFromAndTo, clsGroupBy, clsAddKeyColName As New RFunction
+    Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator As New ROperator
     Private clsApplyInstatFunction, clsRRainday, clsRRaindayMatch As New RFunction
     Private clsRRaindayOperator, clsRRaindayAndOperator, clsRRaindayLowerOperator, clsRRaindayUpperOperator, clsAdditionalConditionReplaceOperator, clsAdditionalConditionReplaceOperator2 As New ROperator
     Private clsAdditionalCondition, clsAdditionalConditionList, clsSubSpellLength2, clsAdditionalConditionReplaceFunction As New RFunction
@@ -162,11 +162,6 @@ Public Class dlgSpells
         clsDayFromAndToOperator.AddParameter("to", clsROperatorParameter:=clsDayToOperator, iPosition:=1)
         clsDayToOperator.SetOperation("<=")
         clsDayToOperator.AddParameter("to", 366)
-        clsDayFromAndToCalcFrom.SetRCommand("list")
-        clsDayFromAndToCalcFrom.AddParameter("x", clsROperatorParameter:=clsDayFromAndToCalcFromOp)
-        clsDayFromAndToCalcFromOp.SetOperation("=")
-        clsDayFromAndToCalcFromOp.AddParameter("x", strCurrDataName, iPosition:=0)
-        clsDayFromAndTo.AddParameter("calculated_from", clsRFunctionParameter:=clsDayFromAndToCalcFrom)
 
         ' group
         clsGroupBy.SetRCommand("instat_calculation$new")
@@ -188,7 +183,7 @@ Public Class dlgSpells
         clsRRaindayLowerOperator.AddParameter("min", 0, iPosition:=1)
         clsRRaindayAndOperator.AddParameter("upper", clsROperatorParameter:=clsRRaindayUpperOperator, iPosition:=0)
         clsRRaindayUpperOperator.SetOperation("<=")
-        clsRRaindayUpperOperator.AddParameter("max", 0.85, iPosition:=1)
+        clsRRaindayUpperOperator.AddParameter("max", 0.85, iPosition:=1) ' why 0.85?
         clsRRaindayMatch.AddParameter("table", "1", iPosition:=1)
         clsRRaindayMatch.AddParameter("nomatch", "0", iPosition:=2)
 
@@ -224,6 +219,7 @@ Public Class dlgSpells
         clsMaxValue.AddParameter("result_name", Chr(34) & ucrSaveSpells.GetText() & Chr(34), iPosition:=3)
         clsMaxValue.AddParameter("save", 2, iPosition:=6)
         clsMaxValue.SetAssignTo(ucrSaveSpells.GetText)
+        clsMaxValue.SetAssignTo("Spells_Rain")
 
         clsApplyInstatFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         clsApplyInstatFunction.AddParameter("display", "FALSE", iPosition:=1)
@@ -237,7 +233,6 @@ Public Class dlgSpells
         ucrNudFrom.AddAdditionalCodeParameterPair(clsAdditionalConditionReplaceOperator2, New RParameter("list", 0), iAdditionalPairNo:=1)
         'For day:
         ucrReceiverDOY.AddAdditionalCodeParameterPair(clsDayFromOperator, New RParameter("doy", 0), iAdditionalPairNo:=1)
-        ucrReceiverDOY.AddAdditionalCodeParameterPair(clsDayFromAndToCalcFromOp, New RParameter("X", 1), iAdditionalPairNo:=2)
         ucrReceiverDOY.SetRCode(clsDayToOperator, bReset)
         ucrNudFrom.SetRCode(clsDayFromOperator, bReset)
         ucrNudTo.SetRCode(clsDayToOperator, bReset)
@@ -270,13 +265,13 @@ Public Class dlgSpells
         frmMain.clsRLink.RunScript(clsAddKey.ToScript, strComment:="Spells: Defining column(s) as key")
         '        clsDayFromAndTo.SetAssignTo("Day_From_and_To")
         clsGroupBy.SetAssignTo("Grouping") ' TODO: When to do .SetAssignTo?
-        clsMaxValue.SetAssignTo("Spells_Rain")
         clsSpellLength.SetAssignTo("Dry_Spell")
 
-        If ucrChkConditional.Checked Then 'TODO: A more efficient way here?
+        If ucrChkConditional.Checked Then
             clsAdditionalConditionList.AddParameter("sub1", clsRFunctionParameter:=clsRRainday)
             clsAdditionalCondition.AddParameter("sub_calculation", clsRFunctionParameter:=clsAdditionalConditionList)
 
+            clsAdditionalCondition.AddParameter("function_exp", Chr(34) & clsAdditionalConditionReplaceFunction.ToScript & Chr(34))
             clsAdditionalCondition.SetAssignTo("Additional_Condition")
             clsSpellLength.AddParameter("function_exp", Chr(34) & "cumsum(rain_day2)-cummax((rain_day2==0)*cumsum(rain_day2))" & Chr(34))
             clsSpellLength.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubSpellLength1)
@@ -292,13 +287,12 @@ Public Class dlgSpells
     End Sub
 
     Private Sub DayBoundaries() ' TODO: What to do about the calculated_from, sub1, etc
-        '        clsDayFromAndTo.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")")
+        clsDayFromAndTo.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")")
         clsMaxValue.AddParameter("manipulations", clsRFunctionParameter:=clsMaxValueManipulation, iPosition:=5)
         clsMaxValueManipulation.AddParameter("sub3", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False)
     End Sub
 
     Private Sub RainyDaysMethod()
-        clsRRainday.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames() & ")", iPosition:=0)
         clsSubSpellLength1.AddParameter("sub1", clsRFunctionParameter:=clsRRainday, bIncludeArgumentName:=False)
         clsSpellLength.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubSpellLength1)
     End Sub
@@ -324,6 +318,7 @@ Public Class dlgSpells
     End Sub
 
     Private Sub ucrReceiverRainfall_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRainfall.ControlValueChanged
+        clsRRainday.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames() & ")", iPosition:=0)
         clsMaxValue.AddParameter("sub_calculations", clsRFunctionParameter:=clsMaxValueList, iPosition:=4)
         clsMaxValueList.AddParameter("sub1", clsRFunctionParameter:=clsSpellLength, bIncludeArgumentName:=False, iPosition:=0)
         RainyDaysMethod()
@@ -342,6 +337,8 @@ Public Class dlgSpells
 
     Private Sub ucrReceiverDOY_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDOY.ControlValueChanged
         DayBoundaries()
+        clsMaxValue.AddParameter("manipulations", clsRFunctionParameter:=clsMaxValueManipulation, iPosition:=5)
+        clsMaxValueManipulation.AddParameter("sub3", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False)
     End Sub
 
     Private Sub ucrReceiverYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlValueChanged, ucrReceiverStation.ControlValueChanged
