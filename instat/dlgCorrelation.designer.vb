@@ -28,20 +28,20 @@ Partial Class dlgCorrelation
         Me.rdoKendall = New System.Windows.Forms.RadioButton()
         Me.rdoPearson = New System.Windows.Forms.RadioButton()
         Me.rdoSpearman = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlMethod = New instat.UcrPanel()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.grpMissing = New System.Windows.Forms.GroupBox()
         Me.rdoCompleteRowsOnly = New System.Windows.Forms.RadioButton()
         Me.rdoPairwise = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlCompletePairwise = New instat.UcrPanel()
         Me.lblConfInterval = New System.Windows.Forms.Label()
         Me.rdoTwoColumns = New System.Windows.Forms.RadioButton()
         Me.rdoMultipleColumns = New System.Windows.Forms.RadioButton()
+        Me.ucrSaveModel = New instat.ucrSave()
         Me.ucrNudConfidenceInterval = New instat.ucrNud()
         Me.ucrChkCorrelationMatrix = New instat.ucrCheck()
         Me.ucrPnlColumns = New instat.UcrPanel()
-        Me.ucrSaveModel = New instat.ucrSaveModel()
+        Me.ucrPnlMethod = New instat.UcrPanel()
         Me.ucrReceiverMultipleColumns = New instat.ucrReceiverMultiple()
+        Me.ucrPnlCompletePairwise = New instat.UcrPanel()
         Me.ucrReceiverSecondColumn = New instat.ucrReceiverSingle()
         Me.ucrReceiverFirstColumn = New instat.ucrReceiverSingle()
         Me.ucrSelectorCorrelation = New instat.ucrSelectorByDataFrameAddRemove()
@@ -119,13 +119,6 @@ Partial Class dlgCorrelation
         Me.rdoSpearman.Text = "Spearman"
         Me.rdoSpearman.UseVisualStyleBackColor = True
         '
-        'ucrPnlMethod
-        '
-        Me.ucrPnlMethod.Location = New System.Drawing.Point(8, 17)
-        Me.ucrPnlMethod.Name = "ucrPnlMethod"
-        Me.ucrPnlMethod.Size = New System.Drawing.Size(255, 39)
-        Me.ucrPnlMethod.TabIndex = 16
-        '
         'cmdOptions
         '
         Me.cmdOptions.Location = New System.Drawing.Point(253, 189)
@@ -173,13 +166,6 @@ Partial Class dlgCorrelation
         Me.rdoPairwise.Text = "Pairwise"
         Me.rdoPairwise.UseVisualStyleBackColor = True
         '
-        'ucrPnlCompletePairwise
-        '
-        Me.ucrPnlCompletePairwise.Location = New System.Drawing.Point(3, 17)
-        Me.ucrPnlCompletePairwise.Name = "ucrPnlCompletePairwise"
-        Me.ucrPnlCompletePairwise.Size = New System.Drawing.Size(189, 39)
-        Me.ucrPnlCompletePairwise.TabIndex = 17
-        '
         'lblConfInterval
         '
         Me.lblConfInterval.AutoSize = True
@@ -221,6 +207,13 @@ Partial Class dlgCorrelation
         Me.rdoMultipleColumns.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoMultipleColumns.UseVisualStyleBackColor = True
         '
+        'ucrSaveModel
+        '
+        Me.ucrSaveModel.Location = New System.Drawing.Point(18, 305)
+        Me.ucrSaveModel.Name = "ucrSaveModel"
+        Me.ucrSaveModel.Size = New System.Drawing.Size(270, 24)
+        Me.ucrSaveModel.TabIndex = 20
+        '
         'ucrNudConfidenceInterval
         '
         Me.ucrNudConfidenceInterval.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
@@ -236,9 +229,9 @@ Partial Class dlgCorrelation
         'ucrChkCorrelationMatrix
         '
         Me.ucrChkCorrelationMatrix.Checked = False
-        Me.ucrChkCorrelationMatrix.Location = New System.Drawing.Point(294, 305)
+        Me.ucrChkCorrelationMatrix.Location = New System.Drawing.Point(303, 305)
         Me.ucrChkCorrelationMatrix.Name = "ucrChkCorrelationMatrix"
-        Me.ucrChkCorrelationMatrix.Size = New System.Drawing.Size(198, 20)
+        Me.ucrChkCorrelationMatrix.Size = New System.Drawing.Size(180, 20)
         Me.ucrChkCorrelationMatrix.TabIndex = 18
         '
         'ucrPnlColumns
@@ -248,12 +241,12 @@ Partial Class dlgCorrelation
         Me.ucrPnlColumns.Size = New System.Drawing.Size(335, 36)
         Me.ucrPnlColumns.TabIndex = 15
         '
-        'ucrSaveModel
+        'ucrPnlMethod
         '
-        Me.ucrSaveModel.Location = New System.Drawing.Point(10, 306)
-        Me.ucrSaveModel.Name = "ucrSaveModel"
-        Me.ucrSaveModel.Size = New System.Drawing.Size(267, 28)
-        Me.ucrSaveModel.TabIndex = 12
+        Me.ucrPnlMethod.Location = New System.Drawing.Point(8, 17)
+        Me.ucrPnlMethod.Name = "ucrPnlMethod"
+        Me.ucrPnlMethod.Size = New System.Drawing.Size(255, 39)
+        Me.ucrPnlMethod.TabIndex = 16
         '
         'ucrReceiverMultipleColumns
         '
@@ -266,6 +259,13 @@ Partial Class dlgCorrelation
         Me.ucrReceiverMultipleColumns.strNcFilePath = ""
         Me.ucrReceiverMultipleColumns.TabIndex = 3
         Me.ucrReceiverMultipleColumns.ucrSelector = Nothing
+        '
+        'ucrPnlCompletePairwise
+        '
+        Me.ucrPnlCompletePairwise.Location = New System.Drawing.Point(3, 17)
+        Me.ucrPnlCompletePairwise.Name = "ucrPnlCompletePairwise"
+        Me.ucrPnlCompletePairwise.Size = New System.Drawing.Size(189, 39)
+        Me.ucrPnlCompletePairwise.TabIndex = 17
         '
         'ucrReceiverSecondColumn
         '
@@ -313,12 +313,12 @@ Partial Class dlgCorrelation
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(504, 410)
+        Me.Controls.Add(Me.ucrSaveModel)
         Me.Controls.Add(Me.ucrNudConfidenceInterval)
         Me.Controls.Add(Me.ucrChkCorrelationMatrix)
         Me.Controls.Add(Me.rdoTwoColumns)
         Me.Controls.Add(Me.rdoMultipleColumns)
         Me.Controls.Add(Me.ucrPnlColumns)
-        Me.Controls.Add(Me.ucrSaveModel)
         Me.Controls.Add(Me.grpMethod)
         Me.Controls.Add(Me.ucrReceiverMultipleColumns)
         Me.Controls.Add(Me.lblConfInterval)
@@ -361,7 +361,6 @@ Partial Class dlgCorrelation
     Friend WithEvents rdoCompleteRowsOnly As RadioButton
     Friend WithEvents lblConfInterval As Label
     Friend WithEvents ucrReceiverMultipleColumns As ucrReceiverMultiple
-    Friend WithEvents ucrSaveModel As ucrSaveModel
     Friend WithEvents rdoTwoColumns As RadioButton
     Friend WithEvents rdoMultipleColumns As RadioButton
     Friend WithEvents ucrPnlColumns As UcrPanel
@@ -369,4 +368,5 @@ Partial Class dlgCorrelation
     Friend WithEvents ucrPnlMethod As UcrPanel
     Friend WithEvents ucrPnlCompletePairwise As UcrPanel
     Friend WithEvents ucrNudConfidenceInterval As ucrNud
+    Friend WithEvents ucrSaveModel As ucrSave
 End Class

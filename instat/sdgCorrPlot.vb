@@ -13,14 +13,15 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat
 Imports instat.Translations
-
 Public Class sdgCorrPlot
-    Public clsRGGscatmatrix, clsRGGcorrGraphicsFunction, clsRGraphicsFuction As New RFunction
+    Public clsRGGscatmatrix, clsRGGcorrGraphicsFunction, clsCorrelationFunction, clsRGraphicsFuction As New RFunction
     Public bFirstLoad As Boolean = True
     Private bControlsInitialised As Boolean = False
     Public strDataFrame As String
+    Private clsRsyntax As RSyntax
 
     Private Sub sdgCorrPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -47,9 +48,22 @@ Public Class sdgCorrPlot
         ucrNudAlpha.DecimalPlaces = 2
         ucrNudAlpha.Increment = 0.01
 
+        ucrChkLabel.SetParameter(New RParameter("label", 4))
+        ucrChkLabel.SetText("label")
+
+        ucrSaveGraph.SetPrefix("CorGraph")
+        ucrSaveGraph.SetSaveTypeAsGraph()
+        ucrSaveGraph.SetCheckBoxText("Save Graph:")
+        ucrSaveGraph.SetIsComboBox()
+
+        ucrPnlGraphType.AddRSyntaxContainsFunctionNamesCondition(rdoCorrelationPlot, {"ggcorr"})
+        ucrPnlGraphType.AddRSyntaxContainsFunctionNamesCondition(rdoNone, {"ggcorr"}, False)
+        ucrPnlGraphType.AddRSyntaxContainsFunctionNamesCondition(rdoPairwisePlot, {"ggcorr"}, False)
+        ucrPnlGraphType.AddRSyntaxContainsFunctionNamesCondition(rdoScatterPlotMatrix, {"ggcorr"}, False)
+
+        'rdoNone.Checked = True
         ucrChkColor.SetParameter(New RParameter("color"))
         ucrChkColor.SetText("colour By Factor")
-
 
         Dim dctGeom As New Dictionary(Of String, String)
         ucrInputComboGeom.SetParameter(New RParameter("geom", 3))
@@ -62,36 +76,28 @@ Public Class sdgCorrPlot
         ucrInputComboGeom.SetDropDownStyleAsNonEditable()
     End Sub
 
-    Public Sub SetRFunction(clscorrelationFunction As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewcorrelationFunction As RFunction, clsNewRGGcorrGraphicsFunction As RFunction, clsNewRGGscatmatrix As RFunction, clsNewRGraphicsFuction As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
-        clsRGGcorrGraphicsFunction = New RFunction
-        clsRGGcorrGraphicsFunction = clscorrelationFunction
-        clsRGGcorrGraphicsFunction.SetPackageName("GGally")
-        clsRGGcorrGraphicsFunction.SetRCommand("ggcorr")
-        clsRGraphicsFuction.SetPackageName("GGally")
-        clsRGraphicsFuction.SetRCommand("ggpairs")
-        clsRGGscatmatrix.SetPackageName("GGally")
-        clsRGGscatmatrix.SetRCommand("ggscatmat")
-
+        clsCorrelationFunction = clsNewcorrelationFunction
+        clsRGGcorrGraphicsFunction = clsNewRGGcorrGraphicsFunction
         'settingRcode for subdialog
         ucrNudMaximumSize.SetRCode(clsRGGcorrGraphicsFunction, bReset)
         ucrNudMinimunSize.SetRCode(clsRGGcorrGraphicsFunction, bReset)
         ucrInputComboGeom.SetRCode(clsRGGcorrGraphicsFunction, bReset)
-        clsRGGcorrGraphicsFunction.AddParameter("geom", Chr(34) & "tile" & Chr(34))
-        clsRGGcorrGraphicsFunction.AddParameter("data", "NULL")
-        clsRGGcorrGraphicsFunction.AddParameter("cor_matrix", clsRFunctionParameter:=dlgCorrelation.clsCorrelationFunction)
-        dlgCorrelation.ucrBase.clsRsyntax.iCallType = 3
-        dlgCorrelation.ucrBase.clsRsyntax.SetBaseRFunction(clsRGGcorrGraphicsFunction)
+        ucrChkLabel.SetRCode(clsNewRGGcorrGraphicsFunction, bReset)
+        ucrSaveGraph.SetRCode(clsNewRGGcorrGraphicsFunction, bReset)
+
+        ucrPnlGraphType.SetRSyntax(clsRsyntax, bReset)
 
         If bReset Then
             tbSaveGraphs.SelectedIndex = 0
         End If
     End Sub
 
-    Private Sub chkCorrelationPlotItems_CheckedChanged(sender As Object, e As EventArgs) Handles chkLabel.CheckedChanged
-        If chkLabel.Checked Then
+    Private Sub ucrChkLabel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLabel.ControlValueChanged
+        If ucrChkLabel.Checked Then
             clsRGGcorrGraphicsFunction.AddParameter("label", "TRUE")
         Else
             clsRGGcorrGraphicsFunction.AddParameter("label", "FALSE")
@@ -114,7 +120,7 @@ Public Class sdgCorrPlot
 
     Private Sub ucrPnlGraphType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGraphType.ControlValueChanged
         If ((dlgCorrelation.ucrChkCorrelationMatrix.Checked AndAlso Not rdoPairwisePlot.Checked AndAlso Not rdoCorrelationPlot.Checked AndAlso Not rdoScatterPlotMatrix.Checked) OrElse (Not dlgCorrelation.ucrChkCorrelationMatrix.Checked AndAlso rdoNone.Checked)) Then
-            ucrSaveGraph.chkSaveGraph.Checked = False
+            'ucrSaveGraph.chkSaveGraph.Checked = False
             ucrSaveGraph.Visible = False
             tbSaveGraphs.Visible = False
         Else
@@ -149,34 +155,30 @@ Public Class sdgCorrPlot
         End If
         dlgCorrelation.TestOKEnabled()
         CorrOptions()
+
+        'If rdoCorrelationPlot.Checked Then
+        'clsRsyntax.AddToAfterCodes(clsRGGcorrGraphicsFunction, iPosition:=0)
+        'Else
+        'clsRsyntax.RemoveFromAfterCodes(clsRGGcorrGraphicsFunction)
+        'End If
     End Sub
 
-    Public Sub CorrelationMatrix()
-        If dlgCorrelation.rdoMultipleColumns.Checked AndAlso dlgCorrelation.ucrChkCorrelationMatrix.Checked AndAlso Not rdoPairwisePlot.Checked AndAlso Not rdoCorrelationPlot.Checked AndAlso Not rdoScatterPlotMatrix.Checked Then
-            If dlgCorrelation.ucrSaveModel.chkSaveModel.Checked Then
-                dlgCorrelation.ucrBase.clsRsyntax.iCallType = 0
-            Else
-                dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
-            End If
-            dlgCorrelation.ucrBase.clsRsyntax.SetBaseRFunction(dlgCorrelation.clsCorrelationFunction)
-        End If
-        dlgCorrelation.TestOKEnabled()
-    End Sub
+    'Public Sub CorrelationMatrix()
+    '    If dlgCorrelation.rdoMultipleColumns.Checked AndAlso dlgCorrelation.ucrChkCorrelationMatrix.Checked AndAlso Not rdoPairwisePlot.Checked AndAlso Not rdoCorrelationPlot.Checked AndAlso Not rdoScatterPlotMatrix.Checked Then
+    '        If dlgCorrelation.ucrSaveModel.chkSaveModel.Checked Then
+    '            dlgCorrelation.ucrBase.clsRsyntax.iCallType = 0
+    '        Else
+    '            dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
+    '        End If
+    '        dlgCorrelation.ucrBase.clsRsyntax.SetBaseRFunction(dlgCorrelation.clsCorrelationFunction)
+    '    End If
+    '    dlgCorrelation.TestOKEnabled()
+    'End Sub
 
     Public Sub GGPairs()
-        'dlgCorrelation.TempData()
         dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
         dlgCorrelation.TestOKEnabled()
     End Sub
-
-    ' Public Sub GGcorr()
-    'We still need to add more arguments to the ggcorr function 
-    'clsRGGcorrGraphicsFunction.AddParameter("data", "NULL")
-    'clsRGGcorrGraphicsFunction.AddParameter("cor_matrix", clsRFunctionParameter:=dlgCorrelation.clsCorrelationFunction)
-    'dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
-    'dlgCorrelation.ucrBase.clsRsyntax.SetBaseRFunction(clsRGGcorrGraphicsFunction)
-    'dlgCorrelation.TestOKEnabled()
-    'End Sub
 
     'Public Sub GGscatmatrix()
     '    'dlgCorrelation.TempData()
@@ -188,16 +190,10 @@ Public Class sdgCorrPlot
 
     Public Sub SetDefaults()
         ucrSaveGraph.SetDataFrameSelector(dlgCorrelation.ucrSelectorCorrelation.ucrAvailableDataFrames)
-        ucrSaveGraph.strPrefix = "CorGraph"
         dlgCorrelation.ucrChkCorrelationMatrix.Checked = True
         rdoNone.Checked = True
         tbSaveGraphs.Visible = False
-        ucrNudAlpha.Value = 1
-        ucrNudAlphaCorr.Value = 1
         ucrSelectFactor.Reset()
-        'cmbgeom.SelectedItem = "tile"
-        'chkColour.Checked = False
-        chkLabel.Checked = False
         ucrReceiveFactor.Selector = ucrSelectFactor
         ucrReceiveFactor.SetDataType("factor")
         ucrSelectFactor.Reset()
@@ -206,12 +202,12 @@ Public Class sdgCorrPlot
 
     Public Sub CorrOptions()
         If dlgCorrelation.ucrChkCorrelationMatrix.Checked Then
-            CorrelationMatrix()
+            ' CorrelationMatrix()
         End If
         If rdoPairwisePlot.Checked Then
             GGPairs()
         End If
-        If rdoScatterplotMatrix.Checked Then
+        If rdoScatterPlotMatrix.Checked Then
             'GGscatmatrix()
         End If
         If rdoCorrelationPlot.Checked Then
@@ -226,24 +222,20 @@ Public Class sdgCorrPlot
     Public Sub ColourbyFactor()
         'If chkColour.Checked = True Then
         ucrSelectFactor.Visible = True
-            ucrReceiveFactor.Visible = True
-            lblFactorVariable.Visible = True
-            clsRGGscatmatrix.AddParameter("color", ucrReceiveFactor.GetVariableNames)
+        ucrReceiveFactor.Visible = True
+        lblFactorVariable.Visible = True
+        clsRGGscatmatrix.AddParameter("color", ucrReceiveFactor.GetVariableNames)
         ' ElseIf chkColour.Checked = False Then
         clsRGGscatmatrix.AddParameter("color", "NULL")
-            ucrSelectFactor.Visible = False
-            ucrReceiveFactor.Visible = False
-            lblFactorVariable.Visible = False
+        ucrSelectFactor.Visible = False
+        ucrReceiveFactor.Visible = False
+        lblFactorVariable.Visible = False
         ' Else
         clsRGGscatmatrix.RemoveParameterByName("color")
         ' End If
     End Sub
 
-    Private Sub MatrixOrPlots(ucrChangedControl As ucrCore)
-
-    End Sub
-
-    Private Sub ucrSaveGraph_GraphNameChanged() Handles ucrSaveGraph.GraphNameChanged, ucrSaveGraph.SaveGraphCheckedChanged
+    Private Sub ucrSaveGraph_GraphNameChanged()
         dlgCorrelation.TestOKEnabled()
     End Sub
 
@@ -255,4 +247,5 @@ Public Class sdgCorrPlot
         strDataFrame = strNewDataFrame
         ucrSelectFactor.SetDataframe(strDataFrame, False)
     End Sub
+
 End Class
