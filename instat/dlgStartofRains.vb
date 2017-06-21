@@ -453,7 +453,7 @@ Public Class dlgStartofRains
         clsCombineOperator.SetOperation("&")
 
         ' run always
-        '        clsCombineOperator.AddParameter("rainfall", clsROperatorParameter:=clsRainCombineOperator, iPosition:=0)
+        clsCombineOperator.AddParameter("rainfall", clsROperatorParameter:=clsRainCombineOperator, iPosition:=0)
         clsRainCombineOperator.SetOperation(">=")
         clsRainCombineOperator.AddParameter("rainThreshold", 0.85, iPosition:=1)
 
@@ -462,21 +462,17 @@ Public Class dlgStartofRains
         clsTRCombineOperator.SetOperation(">")
         clsTRCombineOperator.AddParameter("TRLeft", strRollSumRain, iPosition:=0)
 
+        'ucrPnlTRCalculateBy.AddParameterValuesCondition(rdoTRPercentile, "TRRight", 20)
+        'ucrPnlTRCalculateBy.AddParameterValuesCondition(rdoTRAmount, "TRRight", strWetSpell)
 
-
-        ucrPnlTRCalculateBy.AddParameterValuesCondition(rdoTRPercentile, "TRRight", 20)
-        ucrPnlTRCalculateBy.AddParameterValuesCondition(rdoTRAmount, "TRRight", strWetSpell)
-
-        clsTRCombineOperator.AddParameter("TRRight", 20, iPosition:=1) ' ucrNudTRAmount
-        clsTRCombineOperator.AddParameter("TRRight", strWetSpell, iPosition:=1)
-
-
+        'clsTRCombineOperator.AddParameter("TRRight", 20, iPosition:=1) ' ucrNudTRAmount
+        'clsTRCombineOperator.AddParameter("TRRight", strWetSpell, iPosition:=1)
 
         'If rdoTRAmount.Checked Then ucrNudTRAmount
         'ElseIf rdoTRPercentile.Checked Then strWetSpell
 
         ' run if chkRD is checked
-        '        clsCombineOperator.AddParameter("raindays", clsROperatorParameter:=clsRDCombineOperator, iPosition:=2)
+        '       clsCombineOperator.AddParameter("raindays", clsROperatorParameter:=clsRDCombineOperator, iPosition:=2)
         clsRDCombineOperator.SetOperation(">=")
         clsRDCombineOperator.AddParameter("RDleft", strRollingRainDays, iPosition:=0)
         clsRDCombineOperator.AddParameter("RDMin", 2, iPosition:=1)
@@ -489,12 +485,10 @@ Public Class dlgStartofRains
 
         ' run if chkDP is checked
         ' issue here as everything is hard coded
-        ''        clsCombineOperator.AddParameter("dryperiod", clsROperatorParameter:=clsDPCombineOperator, iPosition:=4)
-        'clsDPCombineOperator.SetOperation("==")
-        'clsDPCombineOperator.AddParameter("DPleft", strDPOverallIntervalRain, iPosition:=0)
-        'clsDPCombineOperator.AddParameter("DPMax", 0, iPosition:=1)
-
-
+        '        clsCombineOperator.AddParameter("dryperiod", clsROperatorParameter:=clsDPCombineOperator, iPosition:=4)
+        clsDPCombineOperator.SetOperation("==")
+        clsDPCombineOperator.AddParameter("DPleft", strDPOverallIntervalRain, iPosition:=0)
+        clsDPCombineOperator.AddParameter("DPMax", 0, iPosition:=1)
         ' First DOY
         clsFirstDOYPerYearOperator.bToScriptAsRString = True
         clsFirstDOYPerYear.SetRCommand("instat_calculation$new")
@@ -564,7 +558,6 @@ Public Class dlgStartofRains
         ' Combine
         ucrNudRDMinimumDays.SetRCode(clsRDCombineOperator, bReset)
         ucrNudDSMaximumDays.SetRCode(clsDSCombineOperator, bReset)
-
     End Sub
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
@@ -692,7 +685,7 @@ Public Class dlgStartofRains
         '    'Else
         '    '    ucrBase.OKEnabled(False)
         '    'End If
-    End Sub
+    End Sub ' ucrNudDPRainPeriod, ucrNudDPMaxRain, ucrNudDPOverallInterval
 
 
 
