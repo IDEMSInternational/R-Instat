@@ -209,7 +209,6 @@ Imports RDotNet
 
     Public Sub SetPreviewRows(intlines As Integer)
         iPreviewRows = intlines
-        dlgImportDataset.setLinesToRead(iPreviewRows)
     End Sub
 
     Public Sub SetComment(strText As String)
