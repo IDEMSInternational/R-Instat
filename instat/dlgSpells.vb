@@ -166,6 +166,7 @@ Public Class dlgSpells
         ' group
         clsGroupBy.SetRCommand("instat_calculation$new")
         clsGroupBy.AddParameter("type", Chr(34) & "by" & Chr(34))
+        clsGroupBy.SetAssignTo("Grouping")
 
         ' rain_day
         clsRRaindayMatch.bToScriptAsRString = True
@@ -193,6 +194,7 @@ Public Class dlgSpells
         clsSpellLength.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsSpellLength.AddParameter("result_name", Chr(34) & "Dry_Spell" & Chr(34), iPosition:=2)
         clsSpellLength.AddParameter("save", 0, iPosition:=6)
+        clsSpellLength.SetAssignTo("Dry_Spell")
 
         clsMaxValueManipulation.SetRCommand("list")
 
@@ -264,8 +266,6 @@ Public Class dlgSpells
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         frmMain.clsRLink.RunScript(clsAddKey.ToScript, strComment:="Spells: Defining column(s) as key")
         '        clsDayFromAndTo.SetAssignTo("Day_From_and_To")
-        clsGroupBy.SetAssignTo("Grouping") ' TODO: When to do .SetAssignTo?
-        clsSpellLength.SetAssignTo("Dry_Spell")
 
         If ucrChkConditional.Checked Then
             clsAdditionalConditionList.AddParameter("sub1", clsRFunctionParameter:=clsRRainday)
