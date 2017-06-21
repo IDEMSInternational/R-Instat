@@ -34,26 +34,20 @@ Partial Class dlgRegressionSimple
         Me.lblModelPreview = New System.Windows.Forms.Label()
         Me.lblNumeric = New System.Windows.Forms.Label()
         Me.lblFactor = New System.Windows.Forms.Label()
-        Me.lblHyp1 = New System.Windows.Forms.Label()
-        Me.grpParameters = New System.Windows.Forms.GroupBox()
-        Me.ucrChkFunction = New instat.ucrCheck()
-        Me.ucrNudSuccess = New instat.ucrNud()
-        Me.lblSuccess = New System.Windows.Forms.Label()
-        Me.ucrInputLevel2 = New instat.ucrInputComboBox()
-        Me.ucrInputLevel1 = New instat.ucrInputComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.lblLevel1 = New System.Windows.Forms.Label()
         Me.rdoKruskalTest = New System.Windows.Forms.RadioButton()
         Me.rdoWilcoxonTest = New System.Windows.Forms.RadioButton()
-        Me.ucrpnlKruskalWilcoxonTest = New instat.UcrPanel()
         Me.ucrNudHypothesis = New instat.ucrNud()
         Me.ucrChkPairedTest = New instat.ucrCheck()
         Me.ucrNudCI = New instat.ucrNud()
-        Me.rdoCompareVariance = New System.Windows.Forms.RadioButton()
-        Me.rdoCompareMeans = New System.Windows.Forms.RadioButton()
         Me.ucrPnlMeansAndVariance = New instat.UcrPanel()
         Me.lblConfidenceInterval = New System.Windows.Forms.Label()
         Me.lblDifferenceInMeans = New System.Windows.Forms.Label()
+        Me.ucrChkFunction = New instat.ucrCheck()
+        Me.ucrNudSuccess = New instat.ucrNud()
+        Me.ucrInputLevel2 = New instat.ucrInputComboBox()
+        Me.ucrInputLevel1 = New instat.ucrInputComboBox()
+        Me.lblLevel1 = New System.Windows.Forms.Label()
         Me.ucrModelPreview = New instat.ucrInputTextBox()
         Me.ucrExplanatory = New instat.ucrReceiverSingle()
         Me.ucrResponse = New instat.ucrReceiverSingle()
@@ -65,7 +59,6 @@ Partial Class dlgRegressionSimple
         Me.ucrPnlModelType = New instat.UcrPanel()
         Me.rdoTwoSample = New System.Windows.Forms.RadioButton()
         Me.rdoGeneralCase = New System.Windows.Forms.RadioButton()
-        Me.grpParameters.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblResidualMsg
@@ -131,79 +124,10 @@ Partial Class dlgRegressionSimple
         resources.ApplyResources(Me.lblFactor, "lblFactor")
         Me.lblFactor.Name = "lblFactor"
         '
-        'lblHyp1
-        '
-        resources.ApplyResources(Me.lblHyp1, "lblHyp1")
-        Me.lblHyp1.Name = "lblHyp1"
-        '
-        'grpParameters
-        '
-        Me.grpParameters.Controls.Add(Me.ucrChkFunction)
-        Me.grpParameters.Controls.Add(Me.ucrNudSuccess)
-        Me.grpParameters.Controls.Add(Me.lblSuccess)
-        Me.grpParameters.Controls.Add(Me.ucrInputLevel2)
-        Me.grpParameters.Controls.Add(Me.ucrInputLevel1)
-        Me.grpParameters.Controls.Add(Me.Label1)
-        Me.grpParameters.Controls.Add(Me.lblLevel1)
-        Me.grpParameters.Controls.Add(Me.rdoKruskalTest)
-        Me.grpParameters.Controls.Add(Me.rdoWilcoxonTest)
-        Me.grpParameters.Controls.Add(Me.ucrNudHypothesis)
-        Me.grpParameters.Controls.Add(Me.ucrChkPairedTest)
-        Me.grpParameters.Controls.Add(Me.ucrNudCI)
-        Me.grpParameters.Controls.Add(Me.rdoCompareVariance)
-        Me.grpParameters.Controls.Add(Me.rdoCompareMeans)
-        Me.grpParameters.Controls.Add(Me.ucrPnlMeansAndVariance)
-        Me.grpParameters.Controls.Add(Me.lblHyp1)
-        Me.grpParameters.Controls.Add(Me.lblConfidenceInterval)
-        Me.grpParameters.Controls.Add(Me.lblDifferenceInMeans)
-        resources.ApplyResources(Me.grpParameters, "grpParameters")
-        Me.grpParameters.Name = "grpParameters"
-        Me.grpParameters.TabStop = False
-        '
-        'ucrChkFunction
-        '
-        Me.ucrChkFunction.Checked = False
-        resources.ApplyResources(Me.ucrChkFunction, "ucrChkFunction")
-        Me.ucrChkFunction.Name = "ucrChkFunction"
-        '
-        'ucrNudSuccess
-        '
-        Me.ucrNudSuccess.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSuccess.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudSuccess, "ucrNudSuccess")
-        Me.ucrNudSuccess.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudSuccess.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSuccess.Name = "ucrNudSuccess"
-        Me.ucrNudSuccess.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblSuccess
-        '
-        resources.ApplyResources(Me.lblSuccess, "lblSuccess")
-        Me.lblSuccess.Name = "lblSuccess"
-        '
-        'ucrInputLevel2
-        '
-        Me.ucrInputLevel2.AddQuotesIfUnrecognised = True
-        Me.ucrInputLevel2.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputLevel2, "ucrInputLevel2")
-        Me.ucrInputLevel2.Name = "ucrInputLevel2"
-        '
-        'ucrInputLevel1
-        '
-        Me.ucrInputLevel1.AddQuotesIfUnrecognised = True
-        Me.ucrInputLevel1.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputLevel1, "ucrInputLevel1")
-        Me.ucrInputLevel1.Name = "ucrInputLevel1"
-        '
         'Label1
         '
         resources.ApplyResources(Me.Label1, "Label1")
         Me.Label1.Name = "Label1"
-        '
-        'lblLevel1
-        '
-        resources.ApplyResources(Me.lblLevel1, "lblLevel1")
-        Me.lblLevel1.Name = "lblLevel1"
         '
         'rdoKruskalTest
         '
@@ -218,11 +142,6 @@ Partial Class dlgRegressionSimple
         Me.rdoWilcoxonTest.Name = "rdoWilcoxonTest"
         Me.rdoWilcoxonTest.TabStop = True
         Me.rdoWilcoxonTest.UseVisualStyleBackColor = True
-        '
-        'ucrpnlKruskalWilcoxonTest
-        '
-        resources.ApplyResources(Me.ucrpnlKruskalWilcoxonTest, "ucrpnlKruskalWilcoxonTest")
-        Me.ucrpnlKruskalWilcoxonTest.Name = "ucrpnlKruskalWilcoxonTest"
         '
         'ucrNudHypothesis
         '
@@ -250,20 +169,6 @@ Partial Class dlgRegressionSimple
         Me.ucrNudCI.Name = "ucrNudCI"
         Me.ucrNudCI.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'rdoCompareVariance
-        '
-        resources.ApplyResources(Me.rdoCompareVariance, "rdoCompareVariance")
-        Me.rdoCompareVariance.Name = "rdoCompareVariance"
-        Me.rdoCompareVariance.TabStop = True
-        Me.rdoCompareVariance.UseVisualStyleBackColor = True
-        '
-        'rdoCompareMeans
-        '
-        resources.ApplyResources(Me.rdoCompareMeans, "rdoCompareMeans")
-        Me.rdoCompareMeans.Name = "rdoCompareMeans"
-        Me.rdoCompareMeans.TabStop = True
-        Me.rdoCompareMeans.UseVisualStyleBackColor = True
-        '
         'ucrPnlMeansAndVariance
         '
         resources.ApplyResources(Me.ucrPnlMeansAndVariance, "ucrPnlMeansAndVariance")
@@ -278,6 +183,41 @@ Partial Class dlgRegressionSimple
         '
         resources.ApplyResources(Me.lblDifferenceInMeans, "lblDifferenceInMeans")
         Me.lblDifferenceInMeans.Name = "lblDifferenceInMeans"
+        '
+        'ucrChkFunction
+        '
+        Me.ucrChkFunction.Checked = False
+        resources.ApplyResources(Me.ucrChkFunction, "ucrChkFunction")
+        Me.ucrChkFunction.Name = "ucrChkFunction"
+        '
+        'ucrNudSuccess
+        '
+        Me.ucrNudSuccess.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSuccess.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudSuccess, "ucrNudSuccess")
+        Me.ucrNudSuccess.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSuccess.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSuccess.Name = "ucrNudSuccess"
+        Me.ucrNudSuccess.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputLevel2
+        '
+        Me.ucrInputLevel2.AddQuotesIfUnrecognised = True
+        Me.ucrInputLevel2.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputLevel2, "ucrInputLevel2")
+        Me.ucrInputLevel2.Name = "ucrInputLevel2"
+        '
+        'ucrInputLevel1
+        '
+        Me.ucrInputLevel1.AddQuotesIfUnrecognised = True
+        Me.ucrInputLevel1.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputLevel1, "ucrInputLevel1")
+        Me.ucrInputLevel1.Name = "ucrInputLevel1"
+        '
+        'lblLevel1
+        '
+        resources.ApplyResources(Me.lblLevel1, "lblLevel1")
+        Me.lblLevel1.Name = "lblLevel1"
         '
         'ucrModelPreview
         '
@@ -362,14 +302,26 @@ Partial Class dlgRegressionSimple
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.rdoTwoSample)
         Me.Controls.Add(Me.rdoGeneralCase)
+        Me.Controls.Add(Me.ucrNudCI)
+        Me.Controls.Add(Me.lblDifferenceInMeans)
+        Me.Controls.Add(Me.lblConfidenceInterval)
+        Me.Controls.Add(Me.ucrChkPairedTest)
+        Me.Controls.Add(Me.ucrNudHypothesis)
+        Me.Controls.Add(Me.rdoWilcoxonTest)
+        Me.Controls.Add(Me.rdoKruskalTest)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.ucrNudSuccess)
+        Me.Controls.Add(Me.ucrInputLevel1)
+        Me.Controls.Add(Me.lblLevel1)
+        Me.Controls.Add(Me.ucrInputLevel2)
+        Me.Controls.Add(Me.ucrChkFunction)
         Me.Controls.Add(Me.ucrSaveModels)
+        Me.Controls.Add(Me.ucrPnlMeansAndVariance)
         Me.Controls.Add(Me.ucrPnlModelType)
         Me.Controls.Add(Me.ucrChkConvertToVariate)
-        Me.Controls.Add(Me.grpParameters)
         Me.Controls.Add(Me.lblFactor)
         Me.Controls.Add(Me.lblNumeric)
         Me.Controls.Add(Me.ucrModelPreview)
-        Me.Controls.Add(Me.ucrpnlKruskalWilcoxonTest)
         Me.Controls.Add(Me.ucrExplanatory)
         Me.Controls.Add(Me.ucrResponse)
         Me.Controls.Add(Me.lblModelPreview)
@@ -388,8 +340,6 @@ Partial Class dlgRegressionSimple
         Me.ShowIcon = False
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
         Me.Tag = "Simple_Regression"
-        Me.grpParameters.ResumeLayout(False)
-        Me.grpParameters.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -412,14 +362,10 @@ Partial Class dlgRegressionSimple
     Friend WithEvents ucrModelPreview As ucrInputTextBox
     Friend WithEvents lblNumeric As Label
     Friend WithEvents lblFactor As Label
-    Friend WithEvents lblHyp1 As Label
-    Friend WithEvents grpParameters As GroupBox
     Friend WithEvents lblConfidenceInterval As Label
     Friend WithEvents lblDifferenceInMeans As Label
     Friend WithEvents ucrChkConvertToVariate As ucrCheck
     Friend WithEvents ucrChkPairedTest As ucrCheck
-    Friend WithEvents rdoCompareVariance As RadioButton
-    Friend WithEvents rdoCompareMeans As RadioButton
     Friend WithEvents ucrPnlMeansAndVariance As UcrPanel
     Friend WithEvents ucrSaveModels As ucrSave
     Friend WithEvents ucrNudCI As ucrNud
@@ -427,9 +373,7 @@ Partial Class dlgRegressionSimple
     Friend WithEvents ucrChkFunction As ucrCheck
     Friend WithEvents rdoKruskalTest As RadioButton
     Friend WithEvents rdoWilcoxonTest As RadioButton
-    Friend WithEvents ucrpnlKruskalWilcoxonTest As UcrPanel
     Friend WithEvents ucrNudSuccess As ucrNud
-    Friend WithEvents lblSuccess As Label
     Friend WithEvents ucrInputLevel2 As ucrInputComboBox
     Friend WithEvents ucrInputLevel1 As ucrInputComboBox
     Friend WithEvents Label1 As Label
