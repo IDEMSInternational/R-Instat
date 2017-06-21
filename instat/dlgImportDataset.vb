@@ -550,7 +550,7 @@ Public Class dlgImportDataset
                 dfTemp = expTemp.AsDataFrame
                 If dfTemp IsNot Nothing Then
                     Try
-                        frmMain.clsGrids.FillSheet(dfTemp, strTempDataFrameName, grdDataPreview, bIncludeDataTypes:=False)
+                        frmMain.clsGrids.FillSheet(dfTemp, strTempDataFrameName, grdDataPreview, bIncludeDataTypes:=False, iColMax:=frmMain.clsInstatOptions.iMaxCols)
                         grdDataPreview.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
                         grdDataPreview.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, True)
                         grdDataPreview.Enabled = True
