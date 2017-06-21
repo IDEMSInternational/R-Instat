@@ -316,7 +316,7 @@ Public Class dlgStartofRains
         clsTRWetSpell.AddParameter("function_exp", clsRFunctionParameter:=clsTRWetSpellFunction, iPosition:=1)
         clsTRWetSpellFunction.SetRCommand("quantile")
         clsTRWetSpellFunction.AddParameter("x", "roll_sum_Rain", iPosition:=0)
-        clsTRWetSpellFunction.AddParameter("probs", 0.8, iPosition:=1) ' do I write: 0.8 or "0.8"?
+        clsTRWetSpellFunction.AddParameter("probs", 0.8, iPosition:=1)
         clsTRWetSpellFunction.AddParameter("na.rm", "TRUE", iPosition:=2)
         clsTRWetSpell.AddParameter("result_name", Chr(34) & "wet_spell" & Chr(34), iPosition:=2)
         clsTRWetSpell.AddParameter("sub_calculations", clsRFunctionParameter:=clsTRWetSpellList, iPosition:=5) ' check position
@@ -341,11 +341,13 @@ Public Class dlgStartofRains
         clsRDRollingRainDaysFunction.AddParameter("width", 2, iPosition:=1) ' default = 2?
         clsRDRollingRainDaysFunction.AddParameter("FUN", "sum", iPosition:=2)
         clsRDRollingRainDaysFunction.AddParameter("na.rm", "FALSE", iPosition:=3)
-        clsRDRollingRainDaysFunction.AddParameter("align", Chr(39) & "right" & Chr(39), iPosition:=4) ' check this is chr(39) for '
+        clsRDRollingRainDaysFunction.AddParameter("align", Chr(39) & "right" & Chr(39), iPosition:=4)
         clsRDRollingRainDaysFunction.AddParameter("fill", "NA", iPosition:=5)
         clsRDRollingRainDays.AddParameter("result_name", Chr(34) & "Rolling_Rain_Days" & Chr(34), iPosition:=2)
         clsRDRollingRainDays.AddParameter("save", 0, iPosition:=6)
         clsRDRollingRainDays.SetAssignTo("Rolling_rain")
+        clsRDRollingRainDays.AddParameter("sub_calculations", clsRFunctionParameter:=clsRDRollingRainDaysSub)
+        clsRDRollingRainDaysSub.AddParameter("sub1", clsRFunctionParameter:=clsRainyDays, bIncludeArgumentName:=False, iPosition:=0)
 
         clsRDParameter.SetArgument(clsRDRollingRainDays)
 
@@ -379,6 +381,7 @@ Public Class dlgStartofRains
         clsDSDryPeriodTen.SetAssignTo("Dry_Period_10")
 
         clsDSParameter.SetArgument(clsDSDryPeriodTen)
+
 
         'DRY PERIOD
         clsDPRainInDaysFunctionLead.bToScriptAsRString = True
@@ -522,18 +525,15 @@ Public Class dlgStartofRains
             TotalRainyDays()
         End If
 
-        If ucrChkDrySpell.Checked Then
-        End If
-
         If ucrChkDryPeriod.Checked Then
-
             DryPeriod()
         End If
+
         CombinedFilter()
     End Sub
 
     Private Sub RainDays()
-        clsRainyDays.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames(True) & ")", iPosition:=5) ' is that meant to be True?
+        clsRainyDays.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames() & ")", iPosition:=5)
     End Sub
 
     Private Sub DayBoundaries()
@@ -567,15 +567,17 @@ Public Class dlgStartofRains
     End Sub
 
     Private Sub TotalRainyDays()
-        clsRDRollingRainDays.AddParameter("sub_calculations", clsRFunctionParameter:=clsRDRollingRainDaysSub)
-        clsRDRollingRainDaysSub.AddParameter("sub1", clsRFunctionParameter:=clsRainyDays, bIncludeArgumentName:=False, iPosition:=0)
+        'clsRDRollingRainDays.AddParameter("sub_calculations", clsRFunctionParameter:=clsRDRollingRainDaysSub)
+        'clsRDRollingRainDaysSub.AddParameter("sub1", clsRFunctionParameter:=clsRainyDays, bIncludeArgumentName:=False, iPosition:=0)
     End Sub
 
+    'issue with width =
+
     Private Sub DrySpell()
+        clsDSDryPeriodTenList.AddParameter("sub1", clsRFunctionParameter:=clsDSDrySpell, bIncludeArgumentName:=False)
+        clsDSDryPeriodTen.AddParameter("sub_calculations", clsRFunctionParameter:=clsDSDryPeriodTenList, iPosition:=5)
         clsDSDrySpell.AddParameter("sub_calculations", clsRFunctionParameter:=clsDSDrySpellSub, iPosition:=4)
         clsDSDrySpellSub.AddParameter("sub1", clsRFunctionParameter:=clsRainyDays, bIncludeArgumentName:=False)
-        clsDSDryPeriodTen.AddParameter("sub_calculations", clsRFunctionParameter:=clsDSDryPeriodTenList, iPosition:=5)
-        clsDSDryPeriodTenList.AddParameter("sub1", clsRFunctionParameter:=clsDSDrySpell, bIncludeArgumentName:=False)
     End Sub
 
     Private Sub DryPeriod()
@@ -601,6 +603,28 @@ Public Class dlgStartofRains
         Else
             'clsCombinedList.RemoveParameterByName("sub3")
         End If
+
+        Dim clsCombineOperatorTR = New ROperator
+        Dim clsCombineOperatorRD = New ROperator
+        Dim clsCombineOperatorDS = New ROperator
+        Dim clsCombineOperatorDP = New ROperator
+
+        clsCombineOperatorTR.SetOperation("&")
+        clsCombineOperatorTR.AddParameter("TR", ) ' total rainall
+        clsCombineOperatorTR.AddParameter("Else", clsROperatorParameter:=clsCombineOperatorRD) ' others
+
+        clsCombineOperatorRD.SetOperation("&")
+        clsCombineOperatorRD.AddParameter("RD", ) ' Rainy days
+        clsCombineOperatorRD.AddParameter("Else", clsROperatorParameter:=clsCombineOperatorDS) ' Rainy days
+
+        clsCombineOperatorDS.SetOperation("&")
+        clsCombineOperatorDS.AddParameter("DS", ) 'Dry spells
+        clsCombineOperatorDS.AddParameter("Else", clsROperatorParameter:=clsCombineOperatorDP)
+
+        clsCombineOperatorDP.SetOperation("&")
+        clsCombineOperatorDP.AddParameter("DP", ) ' Dry Period
+        clsCombineOperatorDP.AddParameter("Else", ) 'clsRFunctionParameter:=)
+
         If ucrChkNumberOfRainyDays.Checked Then
             strTempFunExpression = strTempFunExpression & "Rolling_Rain_Days >= " & ucrNudRDMinimumDays.Value & " & "
             '            clsCombinedList.AddParameter("sub2", clsRFunctionParameter:=clsRDRollingRainDays, bIncludeArgumentName:=False)
@@ -628,6 +652,7 @@ Public Class dlgStartofRains
 
     Private Sub ucrChkDryPeriod_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDryPeriod.ControlValueChanged, ucrChkDrySpell.ControlValueChanged, ucrChkNumberOfRainyDays.ControlValueChanged, ucrChkTotalRainfall.ControlValueChanged
         CombinedFilter()
+
     End Sub
 
 
