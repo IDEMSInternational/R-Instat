@@ -88,27 +88,36 @@ Public Class RFunction
     End Sub
 
     Public Overrides Function Clone() As RCodeStructure
-
         Dim clsRFunction As New RFunction
         Dim clsRParam As RParameter
 
-        clsRFunction.strPackageName = strPackageName
-        clsRFunction.strRCommand = strRCommand
+        'RCode properties
         clsRFunction.strAssignTo = strAssignTo
         clsRFunction.strAssignToDataFrame = strAssignToDataFrame
         clsRFunction.strAssignToColumn = strAssignToColumn
         clsRFunction.strAssignToModel = strAssignToModel
         clsRFunction.strAssignToGraph = strAssignToGraph
+        clsRFunction.strAssignToTable = strAssignToTable
         clsRFunction.bToBeAssigned = bToBeAssigned
         clsRFunction.bIsAssigned = bIsAssigned
         clsRFunction.bAssignToIsPrefix = bAssignToIsPrefix
-
+        clsRFunction.bAssignToColumnWithoutNames = bAssignToColumnWithoutNames
+        clsRFunction.bInsertColumnBefore = bInsertColumnBefore
+        clsRFunction.iNumberOfAddedParameters = iNumberOfAddedParameters
+        clsRFunction.iPosition = iPosition
+        clsRFunction.iCallType = iCallType
+        clsRFunction.bExcludeAssignedFunctionOutput = bExcludeAssignedFunctionOutput
+        clsRFunction.bClearFromGlobal = bClearFromGlobal
+        clsRFunction.bToScriptAsRString = bToScriptAsRString
         For Each clsRParam In clsParameters
             clsRFunction.AddParameter(clsRParam.Clone)
         Next
 
-        Return clsRFunction
+        'RFunction specific properties
+        clsRFunction.strPackageName = strPackageName
+        clsRFunction.strRCommand = strRCommand
 
+        Return clsRFunction
     End Function
 
     Public ReadOnly Property iParameterCount() As Integer
