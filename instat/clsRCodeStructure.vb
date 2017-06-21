@@ -38,7 +38,7 @@ Public Class RCodeStructure
     Public bAssignToColumnWithoutNames As Boolean = False
     Public bInsertColumnBefore As Boolean = False
     Public clsParameters As New List(Of RParameter)
-    Private iNumberOfAddedParameters As Integer = 0 'This might be temporary, it enables to have a default name for parameters...
+    Protected iNumberOfAddedParameters As Integer = 0 'This might be temporary, it enables to have a default name for parameters...
     'Currently only used when this is in RSyntax as a before/after code to determine position code should be run in the list
     'Similar behaviour to parameter positions
     Public iPosition = -1
