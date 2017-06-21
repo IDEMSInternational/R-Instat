@@ -51,7 +51,16 @@ Public Class RFunction
             strTemp = strTemp & clsParameters(i).ToScript(strScript)
         Next
         strTemp = strTemp & ")"
-
+        If bToScriptAsRString Then
+            'TODO should also check assignment of parameters
+            If bToBeAssigned OrElse bIsAssigned Then
+                MsgBox("Developer error: Using bToScriptAsRString = True when RFunction is assigned will not produce the correct script. Remove assignment to use this options correctly.")
+            End If
+            'Cannot have double quotes ("") in the string because strTemp will be wrapped with ""
+            'In most cases signle quotes (') will give same functionality, though it's preferable to avoid this when constructing the RFunction
+            strTemp = strTemp.Replace(Chr(34), Chr(39))
+            strTemp = Chr(34) & strTemp & Chr(34)
+        End If
         Return MyBase.ToScript(strScript, strTemp)
     End Function
 
@@ -79,27 +88,36 @@ Public Class RFunction
     End Sub
 
     Public Overrides Function Clone() As RCodeStructure
-
         Dim clsRFunction As New RFunction
         Dim clsRParam As RParameter
 
-        clsRFunction.strPackageName = strPackageName
-        clsRFunction.strRCommand = strRCommand
+        'RCode properties
         clsRFunction.strAssignTo = strAssignTo
         clsRFunction.strAssignToDataFrame = strAssignToDataFrame
         clsRFunction.strAssignToColumn = strAssignToColumn
         clsRFunction.strAssignToModel = strAssignToModel
         clsRFunction.strAssignToGraph = strAssignToGraph
+        clsRFunction.strAssignToTable = strAssignToTable
         clsRFunction.bToBeAssigned = bToBeAssigned
         clsRFunction.bIsAssigned = bIsAssigned
         clsRFunction.bAssignToIsPrefix = bAssignToIsPrefix
-
+        clsRFunction.bAssignToColumnWithoutNames = bAssignToColumnWithoutNames
+        clsRFunction.bInsertColumnBefore = bInsertColumnBefore
+        clsRFunction.iNumberOfAddedParameters = iNumberOfAddedParameters
+        clsRFunction.iPosition = iPosition
+        clsRFunction.iCallType = iCallType
+        clsRFunction.bExcludeAssignedFunctionOutput = bExcludeAssignedFunctionOutput
+        clsRFunction.bClearFromGlobal = bClearFromGlobal
+        clsRFunction.bToScriptAsRString = bToScriptAsRString
         For Each clsRParam In clsParameters
             clsRFunction.AddParameter(clsRParam.Clone)
         Next
 
-        Return clsRFunction
+        'RFunction specific properties
+        clsRFunction.strPackageName = strPackageName
+        clsRFunction.strRCommand = strRCommand
 
+        Return clsRFunction
     End Function
 
     Public ReadOnly Property iParameterCount() As Integer
