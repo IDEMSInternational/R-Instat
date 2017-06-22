@@ -52,7 +52,6 @@ Public Class dlgSpells
         ucrReceiverRainfall.SetParameter(New RParameter("rain", 0))
         ucrReceiverRainfall.SetParameterIsRFunction()
         ucrReceiverRainfall.bWithQuotes = False
-        '        ucrReceiverRainfall.SetParameterIncludeArgumentName(False)
         ucrReceiverRainfall.Selector = ucrSelectorForSpells
         ucrReceiverRainfall.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "rain" & Chr(34)})
         ucrReceiverRainfall.bAutoFill = True
@@ -194,7 +193,7 @@ Public Class dlgSpells
         clsRRaindayLowerOperator.AddParameter("min", 0, iPosition:=1)
         clsRRaindayAndOperator.AddParameter("upper", clsROperatorParameter:=clsRRaindayUpperOperator, iPosition:=0)
         clsRRaindayUpperOperator.SetOperation("<=")
-        clsRRaindayUpperOperator.AddParameter("max", 0.85, iPosition:=1) ' why 0.85?
+        clsRRaindayUpperOperator.AddParameter("max", 0.85, iPosition:=1)
         clsRRaindayMatch.AddParameter("table", "1", iPosition:=1)
         clsRRaindayMatch.AddParameter("nomatch", "0", iPosition:=2)
 
@@ -207,7 +206,6 @@ Public Class dlgSpells
         clsSpellLength.AddParameter("function_exp", Chr(34) & "cumsum(" & strRainDay & ")-cummax((" & strRainDay & "==0)*cumsum(" & strRainDay & "))" & Chr(34))
         clsSpellLength.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubSpellLength1)
         clsSpellLength.SetAssignTo(strDrySpell)
-
         clsMaxValueManipulation.SetRCommand("list")
 
         ' Additional Checkbox
@@ -237,6 +235,8 @@ Public Class dlgSpells
         clsMaxValue.AddParameter("save", 2, iPosition:=6)
         clsMaxValue.SetAssignTo(ucrSaveSpells.GetText)
         clsMaxValue.SetAssignTo("Spells_Rain")
+        clsMaxValue.AddParameter("sub_calculations", clsRFunctionParameter:=clsMaxValueList, iPosition:=4)
+        clsMaxValueList.AddParameter("sub1", clsRFunctionParameter:=clsSpellLength, bIncludeArgumentName:=False, iPosition:=0)
 
         clsApplyInstatFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         clsApplyInstatFunction.AddParameter("calc", clsRFunctionParameter:=clsMaxValue, iPosition:=0)
@@ -295,11 +295,6 @@ Public Class dlgSpells
         clsMaxValueManipulation.AddParameter("sub3", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False)
     End Sub
 
-    Private Sub RainyDaysMethod()
-        clsSubSpellLength1.AddParameter("sub1", clsRFunctionParameter:=clsRRainday, bIncludeArgumentName:=False)
-        clsSpellLength.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubSpellLength1)
-    End Sub
-
     Private Sub ucrInputSpellLower_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSpellLower.ControlValueChanged, ucrInputSpellUpper.ControlValueChanged, ucrInputCondition.ControlValueChanged
         Select Case ucrInputCondition.GetText
             Case "<= Amount of Rain"
@@ -322,9 +317,6 @@ Public Class dlgSpells
 
     Private Sub ucrReceiverRainfall_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRainfall.ControlValueChanged
         clsRRainday.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames() & ")", iPosition:=0)
-        clsMaxValue.AddParameter("sub_calculations", clsRFunctionParameter:=clsMaxValueList, iPosition:=4)
-        clsMaxValueList.AddParameter("sub1", clsRFunctionParameter:=clsSpellLength, bIncludeArgumentName:=False, iPosition:=0)
-        RainyDaysMethod()
     End Sub
 
     Private Sub ucrSelectorForSpells_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrReceiverRainfall.ControlContentsChanged, ucrSelectorForSpells.ControlContentsChanged
@@ -332,8 +324,6 @@ Public Class dlgSpells
     End Sub
 
     Private Sub nudValues()
-        '  nudFrom.Maximum = ucrNudTo.Value - 1
-        ' ucrNudTo.Minimum = nudFrom.Value + 1
         'nudMaximumDays.Maximum = nudLengthofTime.Value - 1
         'nudLengthofTime.Minimum = nudMaximumDays.Value + 1
     End Sub
