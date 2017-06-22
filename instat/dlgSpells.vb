@@ -117,6 +117,10 @@ Public Class dlgSpells
     End Sub
 
     Private Sub SetDefaults()
+        Dim strRainDay As String = "rain_day"
+        Dim strDrySpell As String = "Dry_Spell"
+        Dim strRainDay2 As String = "rain_day2"
+
         clsApplyInstatFunction = New RFunction
         clsMaxValueManipulation = New RFunction
         clsDayFromAndTo = New RFunction
@@ -172,7 +176,7 @@ Public Class dlgSpells
         clsRRaindayMatch.bToScriptAsRString = True
         clsRRainday.SetRCommand("instat_calculation$new")
         clsRRainday.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
-        clsRRainday.AddParameter("result_name", Chr(34) & "rain_day" & Chr(34), iPosition:=2)
+        clsRRainday.AddParameter("result_name", Chr(34) & strRainDay & Chr(34), iPosition:=2)
         clsRRainday.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames() & ")", iPosition:=3)
         clsRRainday.AddParameter("save", "0", iPosition:=6)
         clsRRainday.AddParameter("function_exp", clsRFunctionParameter:=clsRRaindayMatch, iPosition:=1)
@@ -192,9 +196,9 @@ Public Class dlgSpells
         ' Spell Length
         clsSpellLength.SetRCommand("instat_calculation$new")
         clsSpellLength.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
-        clsSpellLength.AddParameter("result_name", Chr(34) & "Dry_Spell" & Chr(34), iPosition:=2)
+        clsSpellLength.AddParameter("result_name", Chr(34) & strDrySpell & Chr(34), iPosition:=2)
         clsSpellLength.AddParameter("save", 0, iPosition:=6)
-        clsSpellLength.SetAssignTo("Dry_Spell")
+        clsSpellLength.SetAssignTo(strDrySpell)
 
         clsMaxValueManipulation.SetRCommand("list")
 
@@ -203,10 +207,10 @@ Public Class dlgSpells
         clsAdditionalCondition.SetRCommand("instat_calculation$new")
         clsAdditionalCondition.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsAdditionalCondition.AddParameter("function_exp", clsRFunctionParameter:=clsAdditionalConditionReplaceFunction, iPosition:=1)
-        clsAdditionalCondition.AddParameter("result_name", Chr(34) & "rain_day2" & Chr(34), iPosition:=2)
+        clsAdditionalCondition.AddParameter("result_name", Chr(34) & strRainDay2 & Chr(34), iPosition:=2)
         clsAdditionalCondition.AddParameter("save", 0, iPosition:=6)
         clsAdditionalConditionReplaceFunction.SetRCommand("replace")
-        clsAdditionalConditionReplaceFunction.AddParameter("x", "rain_day", iPosition:=0)
+        clsAdditionalConditionReplaceFunction.AddParameter("x", strRainDay, iPosition:=0)
         clsAdditionalConditionReplaceFunction.AddParameter("list", ucrNudFrom.Value - 1, iPosition:=1)
         clsAdditionalConditionReplaceFunction.AddParameter("values", "0", iPosition:=2)
         clsAdditionalConditionList.SetRCommand("list")
@@ -217,15 +221,15 @@ Public Class dlgSpells
         clsMaxValue.AddParameter("type", Chr(34) & "summary" & Chr(34), iPosition:=0)
         clsMaxValue.AddParameter("function_exp", clsRFunctionParameter:=clsMaxValueFunction, iPosition:=1)
         clsMaxValueFunction.SetRCommand("max")
-        clsMaxValueFunction.AddParameter("x", "Dry_Spell")
+        clsMaxValueFunction.AddParameter("x", strDrySpell)
         clsMaxValue.AddParameter("result_name", Chr(34) & ucrSaveSpells.GetText() & Chr(34), iPosition:=3)
         clsMaxValue.AddParameter("save", 2, iPosition:=6)
         clsMaxValue.SetAssignTo(ucrSaveSpells.GetText)
         clsMaxValue.SetAssignTo("Spells_Rain")
 
         clsApplyInstatFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
-        clsApplyInstatFunction.AddParameter("display", "FALSE", iPosition:=1)
         clsApplyInstatFunction.AddParameter("calc", clsRFunctionParameter:=clsMaxValue, iPosition:=0)
+        clsApplyInstatFunction.AddParameter("display", "FALSE", iPosition:=1)
 
         'Base Function
         ucrBase.clsRsyntax.SetBaseRFunction(clsApplyInstatFunction)
@@ -267,23 +271,24 @@ Public Class dlgSpells
         frmMain.clsRLink.RunScript(clsAddKey.ToScript, strComment:="Spells: Defining column(s) as key")
         '        clsDayFromAndTo.SetAssignTo("Day_From_and_To")
 
+
+        ' conditional is checked:
+        ' clsSpellLength has a different function expression. Can't it have the same? And strRainDay2 = strRainDay1 and overwrites itself
+
         If ucrChkConditional.Checked Then
             clsAdditionalConditionList.AddParameter("sub1", clsRFunctionParameter:=clsRRainday)
             clsAdditionalCondition.AddParameter("sub_calculation", clsRFunctionParameter:=clsAdditionalConditionList)
 
             clsAdditionalCondition.AddParameter("function_exp", Chr(34) & clsAdditionalConditionReplaceFunction.ToScript & Chr(34))
             clsAdditionalCondition.SetAssignTo("Additional_Condition")
-            clsSpellLength.AddParameter("function_exp", Chr(34) & "cumsum(rain_day2)-cummax((rain_day2==0)*cumsum(rain_day2))" & Chr(34))
+            clsSpellLength.AddParameter("function_exp", Chr(34) & "cumsum(" & strRainDay2 & ")-cummax((" & strRainDay2 & "==0)*cumsum(" & strRainDay2 & "))" & Chr(34))
             clsSpellLength.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubSpellLength1)
             clsSubSpellLength1.AddParameter("sub1", clsRFunctionParameter:=clsAdditionalCondition, bIncludeArgumentName:=False)
         Else
-            clsSpellLength.AddParameter("function_exp", Chr(34) & "cumsum(rain_day)-cummax((rain_day==0)*cumsum(rain_day))" & Chr(34), iPosition:=1)
+            clsSpellLength.AddParameter("function_exp", Chr(34) & "cumsum(" & strRainDay & ")-cummax((" & strRainDay & "==0)*cumsum(" & strRainDay & "))" & Chr(34))
             clsSpellLength.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubSpellLength1)
             clsSubSpellLength1.AddParameter("sub1", clsRFunctionParameter:=clsRRainday, bIncludeArgumentName:=False)
         End If
-
-        clsApplyInstatFunction.AddParameter("calc", clsRFunctionParameter:=clsMaxValue, iPosition:=1)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsApplyInstatFunction)
     End Sub
 
     Private Sub DayBoundaries() ' TODO: What to do about the calculated_from, sub1, etc
