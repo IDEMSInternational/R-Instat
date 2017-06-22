@@ -64,17 +64,20 @@ Public Class dlgRugPlot
         ucrVariablesAsFactorForRugPlot.SetFactorReceiver(ucrFactorOptionalReceiver)
         ucrVariablesAsFactorForRugPlot.Selector = ucrRugPlotSelector
         ucrVariablesAsFactorForRugPlot.SetIncludedDataTypes({"factor", "numeric"})
+        ucrVariablesAsFactorForRugPlot.strSelectorHeading = "Variables"
         ucrVariablesAsFactorForRugPlot.bWithQuotes = False
 
         ucrReceiverX.SetParameter(New RParameter("x", 0))
         ucrReceiverX.SetParameterIsString()
         ucrReceiverX.Selector = ucrRugPlotSelector
         ucrReceiverX.SetIncludedDataTypes({"factor", "numeric"})
+        ucrReceiverX.strSelectorHeading = "Variables"
         ucrReceiverX.bWithQuotes = False
 
         ucrFactorOptionalReceiver.SetParameter(New RParameter("colour", 2))
         ucrFactorOptionalReceiver.Selector = ucrRugPlotSelector
         ucrFactorOptionalReceiver.SetIncludedDataTypes({"factor", "numeric"})
+        ucrFactorOptionalReceiver.strSelectorHeading = "Variables"
         ucrFactorOptionalReceiver.bWithQuotes = False
         ucrFactorOptionalReceiver.SetParameterIsString()
 
@@ -95,6 +98,7 @@ Public Class dlgRugPlot
         ucrSaveGraph.Reset()
         ucrRugPlotSelector.Reset()
         bResetSubdialog = True
+        bResetRugLayerSubdialog = True
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
