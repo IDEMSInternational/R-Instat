@@ -46,7 +46,7 @@ Public Class ucrGeom
         Dim clsTempFunc As RFunction
         Dim iGeomIndex As Integer
 
-        MyBase.SetRCode(clsNewCodeStructure, bReset)
+        MyBase.SetRCode(clsNewCodeStructure, bReset, bUpdate = True)
         If clsNewCodeStructure IsNot Nothing AndAlso TypeOf (clsNewCodeStructure) Is RFunction Then
             clsTempFunc = TryCast(clsNewCodeStructure, RFunction)
             If clsTempFunc IsNot Nothing AndAlso clsTempFunc.strRCommand IsNot Nothing Then
