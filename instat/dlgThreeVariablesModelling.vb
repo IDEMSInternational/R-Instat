@@ -161,7 +161,6 @@ Public Class dlgThreeVariableModelling
         Else
             ucrBaseThreeVariableModelling.OKEnabled(False)
         End If
-
     End Sub
 
     Public Sub ResponseConvert()
@@ -198,14 +197,11 @@ Public Class dlgThreeVariableModelling
 
     Private Sub ucrResponse_SelectionChanged() Handles ucrReceiverResponse.ControlValueChanged, ucrChkConvertToVariate.ControlValueChanged
         ResponseConvert()
-        TestOKEnabled()
     End Sub
 
     Private Sub ucrFirstExplanatory_SelectionChanged() Handles ucrReceiverFirstExplanatory.ControlValueChanged
         ExplanatoryFunctionSelect(ucrReceiverFirstExplanatory, ucrChkFirstFunction)
-        TestOKEnabled()
     End Sub
-
 
     Private Sub ExplanatoryFunctionSelect(currentReceiver As ucrReceiverSingle, ucrChkFunction As ucrCheck)
         Dim strExplanatoryType As String
@@ -213,7 +209,9 @@ Public Class dlgThreeVariableModelling
             strExplanatoryType = frmMain.clsRLink.GetDataType(ucrSelectorThreeVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, currentReceiver.GetVariableNames(bWithQuotes:=False))
             If strExplanatoryType = "numeric" Or strExplanatoryType = "positive integer" Or strExplanatoryType = "integer" Then
                 ucrChkFunction.Visible = True
+
             Else
+
                 ucrChkFunction.Checked = False
                 ucrChkFunction.Visible = False
             End If
@@ -248,10 +246,8 @@ Public Class dlgThreeVariableModelling
         'ucrModelPreview.SetName(clsModel.ToScript)
     End Sub
 
-    Private Sub chkSecondFunction_CheckedChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSecondExplanatory.ControlValueChanged
-
+    Private Sub chkSecondFunction_CheckedChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSecondExplanatory.ControlValueChanged, ucrChkSecondFunction.ControlValueChanged
         ExplanatoryFunctionSelect(ucrReceiverSecondExplanatory, ucrChkSecondFunction)
-        TestOKEnabled()
     End Sub
 
     Private Sub ucrBaseThreeVariableModelling_ClickReset(sender As Object, e As EventArgs) Handles ucrBaseThreeVariableModelling.ClickReset
@@ -302,27 +298,28 @@ Public Class dlgThreeVariableModelling
         'sdgModelOptions.ShowDialog()
         ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = sdgModelOptions.ucrFamily.clsCurrDistribution.strNameTag)
     End Sub
-    Private Sub chkResponseFunction_CheckedChanged(sender As Object, e As EventArgs)
+    Private Sub chkResponseFunction_CheckedChanged() Handles ucrChkResponseFunction.ControlValueChanged
         If ucrChkResponseFunction.Checked Then
             ' sdgVariableTransformations.ShowDialog()
         End If
         ExplanatoryFunctionSelect(ucrReceiverResponse, ucrChkResponseFunction)
-        TestOKEnabled()
     End Sub
 
-    Private Sub chkFirstFunction_CheckedChanged(sender As Object, e As EventArgs)
+    Private Sub chkFirstFunction_CheckedChanged() Handles ucrChkFirstFunction.ControlValueChanged
         If ucrChkFirstFunction.Checked Then
             'sdgVariableTransformations.ShowDialog()
         End If
         ExplanatoryFunctionSelect(ucrReceiverFirstExplanatory, ucrChkFirstFunction)
-        TestOKEnabled()
     End Sub
 
-    Private Sub chkSecondFunction_CheckedChanged(sender As Object, e As EventArgs)
+    Private Sub chkSecondFunction_CheckedChanged() Handles ucrChkSecondFunction.ControlValueChanged
         If ucrChkSecondFunction.Checked Then
-            sdgVariableTransformations.ShowDialog()
+            ' sdgVariableTransformations.ShowDialog()
         End If
         ExplanatoryFunctionSelect(ucrReceiverSecondExplanatory, ucrChkSecondFunction)
+    End Sub
+
+    Private Sub ucrReceiverFirstExplanatory_contents() Handles ucrReceiverResponse.ControlContentsChanged, ucrReceiverFirstExplanatory.ControlContentsChanged, ucrReceiverSecondExplanatory.ControlContentsChanged, ucrModelOperator.ControlContentsChanged
         TestOKEnabled()
     End Sub
 

@@ -168,7 +168,7 @@ Partial Class dlgThreeVariableModelling
         Me.ucrChkConvertToVariate.Checked = False
         Me.ucrChkConvertToVariate.Location = New System.Drawing.Point(353, 32)
         Me.ucrChkConvertToVariate.Name = "ucrChkConvertToVariate"
-        Me.ucrChkConvertToVariate.Size = New System.Drawing.Size(152, 20)
+        Me.ucrChkConvertToVariate.Size = New System.Drawing.Size(136, 20)
         Me.ucrChkConvertToVariate.TabIndex = 25
         '
         'ucrChkResponseFunction
@@ -238,7 +238,7 @@ Partial Class dlgThreeVariableModelling
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(515, 353)
+        Me.ClientSize = New System.Drawing.Size(493, 353)
         Me.Controls.Add(Me.ucrSaveModel)
         Me.Controls.Add(Me.ucrChkSecondFunction)
         Me.Controls.Add(Me.ucrReceiverSecondExplanatory)
