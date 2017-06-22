@@ -49,13 +49,10 @@ Partial Class dlgRegressionSimple
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSaveModels = New instat.ucrSave()
         Me.ucrPnlModelType = New instat.UcrPanel()
-        Me.rdoCompareVariance = New System.Windows.Forms.RadioButton()
         Me.lblHyp1 = New System.Windows.Forms.Label()
-        Me.rdoCompareMeans = New System.Windows.Forms.RadioButton()
         Me.grpParameters = New System.Windows.Forms.GroupBox()
         Me.rdoTwoSample = New System.Windows.Forms.RadioButton()
         Me.rdoGeneralCase = New System.Windows.Forms.RadioButton()
-        Me.UcrPanel1 = New instat.UcrPanel()
         Me.ucrChkConvertToVariate = New instat.ucrCheck()
         Me.lblFactor = New System.Windows.Forms.Label()
         Me.lblNumeric = New System.Windows.Forms.Label()
@@ -64,6 +61,8 @@ Partial Class dlgRegressionSimple
         Me.ucrSelectorSimpleReg = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblExplanatory = New System.Windows.Forms.Label()
         Me.lblResponse = New System.Windows.Forms.Label()
+        Me.rdoCompareMeans = New System.Windows.Forms.RadioButton()
+        Me.rdoCompareVariance = New System.Windows.Forms.RadioButton()
         Me.grpParameters.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -231,34 +230,20 @@ Partial Class dlgRegressionSimple
         resources.ApplyResources(Me.ucrPnlModelType, "ucrPnlModelType")
         Me.ucrPnlModelType.Name = "ucrPnlModelType"
         '
-        'rdoCompareVariance
-        '
-        resources.ApplyResources(Me.rdoCompareVariance, "rdoCompareVariance")
-        Me.rdoCompareVariance.Name = "rdoCompareVariance"
-        Me.rdoCompareVariance.TabStop = True
-        Me.rdoCompareVariance.UseVisualStyleBackColor = True
-        '
         'lblHyp1
         '
         resources.ApplyResources(Me.lblHyp1, "lblHyp1")
         Me.lblHyp1.Name = "lblHyp1"
         '
-        'rdoCompareMeans
-        '
-        resources.ApplyResources(Me.rdoCompareMeans, "rdoCompareMeans")
-        Me.rdoCompareMeans.Name = "rdoCompareMeans"
-        Me.rdoCompareMeans.TabStop = True
-        Me.rdoCompareMeans.UseVisualStyleBackColor = True
-        '
         'grpParameters
         '
+        Me.grpParameters.Controls.Add(Me.rdoCompareVariance)
         Me.grpParameters.Controls.Add(Me.Label1)
         Me.grpParameters.Controls.Add(Me.rdoKruskalTest)
         Me.grpParameters.Controls.Add(Me.rdoWilcoxonTest)
         Me.grpParameters.Controls.Add(Me.ucrNudHypothesis)
         Me.grpParameters.Controls.Add(Me.ucrChkPairedTest)
         Me.grpParameters.Controls.Add(Me.ucrNudCI)
-        Me.grpParameters.Controls.Add(Me.rdoCompareVariance)
         Me.grpParameters.Controls.Add(Me.rdoCompareMeans)
         Me.grpParameters.Controls.Add(Me.ucrPnlMeansAndVariance)
         Me.grpParameters.Controls.Add(Me.lblHyp1)
@@ -285,11 +270,6 @@ Partial Class dlgRegressionSimple
         Me.rdoGeneralCase.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoGeneralCase.Name = "rdoGeneralCase"
         Me.rdoGeneralCase.UseVisualStyleBackColor = True
-        '
-        'UcrPanel1
-        '
-        resources.ApplyResources(Me.UcrPanel1, "UcrPanel1")
-        Me.UcrPanel1.Name = "UcrPanel1"
         '
         'ucrChkConvertToVariate
         '
@@ -344,13 +324,26 @@ Partial Class dlgRegressionSimple
         Me.lblResponse.Name = "lblResponse"
         Me.lblResponse.Tag = "Response_Variable"
         '
+        'rdoCompareMeans
+        '
+        resources.ApplyResources(Me.rdoCompareMeans, "rdoCompareMeans")
+        Me.rdoCompareMeans.Name = "rdoCompareMeans"
+        Me.rdoCompareMeans.TabStop = True
+        Me.rdoCompareMeans.UseVisualStyleBackColor = True
+        '
+        'rdoCompareVariance
+        '
+        resources.ApplyResources(Me.rdoCompareVariance, "rdoCompareVariance")
+        Me.rdoCompareVariance.Name = "rdoCompareVariance"
+        Me.rdoCompareVariance.TabStop = True
+        Me.rdoCompareVariance.UseVisualStyleBackColor = True
+        '
         'dlgRegressionSimple
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.rdoTwoSample)
         Me.Controls.Add(Me.rdoGeneralCase)
-        Me.Controls.Add(Me.UcrPanel1)
         Me.Controls.Add(Me.ucrChkConvertToVariate)
         Me.Controls.Add(Me.lblFactor)
         Me.Controls.Add(Me.lblNumeric)
@@ -382,7 +375,6 @@ Partial Class dlgRegressionSimple
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
         Me.Tag = "Simple_Regression"
         Me.grpParameters.ResumeLayout(False)
-        Me.grpParameters.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -414,12 +406,9 @@ Partial Class dlgRegressionSimple
     Friend WithEvents lblLevel1 As Label
     Friend WithEvents ucrPnlModelType As UcrPanel
     Friend WithEvents grpParameters As GroupBox
-    Friend WithEvents rdoCompareVariance As RadioButton
-    Friend WithEvents rdoCompareMeans As RadioButton
     Friend WithEvents lblHyp1 As Label
     Friend WithEvents rdoTwoSample As RadioButton
     Friend WithEvents rdoGeneralCase As RadioButton
-    Friend WithEvents UcrPanel1 As UcrPanel
     Friend WithEvents ucrChkConvertToVariate As ucrCheck
     Friend WithEvents lblFactor As Label
     Friend WithEvents lblNumeric As Label
@@ -428,4 +417,6 @@ Partial Class dlgRegressionSimple
     Friend WithEvents ucrSelectorSimpleReg As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblExplanatory As Label
     Friend WithEvents lblResponse As Label
+    Friend WithEvents rdoCompareMeans As RadioButton
+    Friend WithEvents rdoCompareVariance As RadioButton
 End Class

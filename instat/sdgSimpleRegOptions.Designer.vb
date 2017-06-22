@@ -48,8 +48,21 @@ Partial Class sdgSimpleRegOptions
         Me.rdoConditional = New System.Windows.Forms.RadioButton()
         Me.ucrPnlPlotType = New instat.UcrPanel()
         Me.tbResiduals = New System.Windows.Forms.TabPage()
+        Me.rdoCooksDistanceLeverage = New System.Windows.Forms.RadioButton()
+        Me.rdoCooksDistance = New System.Windows.Forms.RadioButton()
+        Me.rdoResidualsLeverage = New System.Windows.Forms.RadioButton()
+        Me.rdoScaleLocation = New System.Windows.Forms.RadioButton()
+        Me.rdoQQ = New System.Windows.Forms.RadioButton()
+        Me.rdoResidualsFitted = New System.Windows.Forms.RadioButton()
         Me.grpIndividualPlots = New System.Windows.Forms.GroupBox()
         Me.grpMultiplePlots = New System.Windows.Forms.GroupBox()
+        Me.rdoSixPlots3Rows = New System.Windows.Forms.RadioButton()
+        Me.rdoFourPlots = New System.Windows.Forms.RadioButton()
+        Me.rdoSixPlots2Rows = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlMutiplePlots = New instat.UcrPanel()
+        Me.ucrPnlIndividualPlots = New instat.UcrPanel()
+        Me.ucrChkIndividualPlots = New instat.ucrCheck()
+        Me.ucrChkMultiplePlots = New instat.ucrCheck()
         Me.tbDisplay = New System.Windows.Forms.TabPage()
         Me.ucrNudDisplayCLevel = New instat.ucrNud()
         Me.ucrChkPvalues = New instat.ucrCheck()
@@ -60,28 +73,11 @@ Partial Class sdgSimpleRegOptions
         Me.lblDisplayCLevel = New System.Windows.Forms.Label()
         Me.tbRegOptions = New System.Windows.Forms.TabControl()
         Me.tbSave = New System.Windows.Forms.TabPage()
-        Me.ucrChkLeverage = New instat.ucrCheck()
-        Me.ucrChkStdResiduals = New instat.ucrCheck()
-        Me.ucrChkResiduals = New instat.ucrCheck()
-        Me.ucrChkFittedValues = New instat.ucrCheck()
-        Me.ucrLeverageColumnName = New instat.ucrInputComboBox()
-        Me.ucrStdResidualsColumnName = New instat.ucrInputComboBox()
-        Me.ucrResidualsColumnName = New instat.ucrInputComboBox()
-        Me.ucrFittedColumnName = New instat.ucrInputComboBox()
+        Me.ucrSaveLeverageColumnName = New instat.ucrSave()
+        Me.ucrSaveStdResidualsColumnName = New instat.ucrSave()
+        Me.ucrSaveResidualsColumnName = New instat.ucrSave()
+        Me.ucrSaveFittedColumnName = New instat.ucrSave()
         Me.ucrSdgButtons = New instat.ucrButtonsSubdialogue()
-        Me.ucrChkMultiplePlots = New instat.ucrCheck()
-        Me.ucrChkIndividualPlots = New instat.ucrCheck()
-        Me.ucrPnlIndividualPlots = New instat.UcrPanel()
-        Me.rdoCooksDistanceLeverage = New System.Windows.Forms.RadioButton()
-        Me.rdoCooksDistance = New System.Windows.Forms.RadioButton()
-        Me.rdoResidualsLeverage = New System.Windows.Forms.RadioButton()
-        Me.rdoScaleLocation = New System.Windows.Forms.RadioButton()
-        Me.rdoQQ = New System.Windows.Forms.RadioButton()
-        Me.rdoResidualsFitted = New System.Windows.Forms.RadioButton()
-        Me.rdoSixPlots3Rows = New System.Windows.Forms.RadioButton()
-        Me.rdoFourPlots = New System.Windows.Forms.RadioButton()
-        Me.rdoSixPlots2Rows = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlMutiplePlots = New instat.UcrPanel()
         Me.tbGraphics.SuspendLayout()
         Me.tcGraphics.SuspendLayout()
         Me.tbModel.SuspendLayout()
@@ -374,11 +370,11 @@ Partial Class sdgSimpleRegOptions
         Me.tbResiduals.Controls.Add(Me.rdoScaleLocation)
         Me.tbResiduals.Controls.Add(Me.rdoQQ)
         Me.tbResiduals.Controls.Add(Me.rdoResidualsFitted)
+        Me.tbResiduals.Controls.Add(Me.grpIndividualPlots)
+        Me.tbResiduals.Controls.Add(Me.grpMultiplePlots)
         Me.tbResiduals.Controls.Add(Me.ucrPnlIndividualPlots)
         Me.tbResiduals.Controls.Add(Me.ucrChkIndividualPlots)
         Me.tbResiduals.Controls.Add(Me.ucrChkMultiplePlots)
-        Me.tbResiduals.Controls.Add(Me.grpIndividualPlots)
-        Me.tbResiduals.Controls.Add(Me.grpMultiplePlots)
         Me.tbResiduals.Location = New System.Drawing.Point(4, 22)
         Me.tbResiduals.Name = "tbResiduals"
         Me.tbResiduals.Padding = New System.Windows.Forms.Padding(3)
@@ -387,6 +383,78 @@ Partial Class sdgSimpleRegOptions
         Me.tbResiduals.Tag = "Residuals"
         Me.tbResiduals.Text = "Residuals"
         Me.tbResiduals.UseVisualStyleBackColor = True
+        '
+        'rdoCooksDistanceLeverage
+        '
+        Me.rdoCooksDistanceLeverage.AutoSize = True
+        Me.rdoCooksDistanceLeverage.Location = New System.Drawing.Point(25, 212)
+        Me.rdoCooksDistanceLeverage.Name = "rdoCooksDistanceLeverage"
+        Me.rdoCooksDistanceLeverage.Size = New System.Drawing.Size(159, 17)
+        Me.rdoCooksDistanceLeverage.TabIndex = 35
+        Me.rdoCooksDistanceLeverage.TabStop = True
+        Me.rdoCooksDistanceLeverage.Tag = "Cook's_Distance_v_Leverage"
+        Me.rdoCooksDistanceLeverage.Text = "Cook's Distance v Leverage"
+        Me.rdoCooksDistanceLeverage.UseVisualStyleBackColor = True
+        '
+        'rdoCooksDistance
+        '
+        Me.rdoCooksDistance.AutoSize = True
+        Me.rdoCooksDistance.Location = New System.Drawing.Point(189, 212)
+        Me.rdoCooksDistance.Name = "rdoCooksDistance"
+        Me.rdoCooksDistance.Size = New System.Drawing.Size(102, 17)
+        Me.rdoCooksDistance.TabIndex = 34
+        Me.rdoCooksDistance.TabStop = True
+        Me.rdoCooksDistance.Tag = "Cook's_Distance"
+        Me.rdoCooksDistance.Text = "Cook's Distance"
+        Me.rdoCooksDistance.UseVisualStyleBackColor = True
+        '
+        'rdoResidualsLeverage
+        '
+        Me.rdoResidualsLeverage.AutoSize = True
+        Me.rdoResidualsLeverage.Location = New System.Drawing.Point(25, 189)
+        Me.rdoResidualsLeverage.Name = "rdoResidualsLeverage"
+        Me.rdoResidualsLeverage.Size = New System.Drawing.Size(128, 17)
+        Me.rdoResidualsLeverage.TabIndex = 33
+        Me.rdoResidualsLeverage.TabStop = True
+        Me.rdoResidualsLeverage.Tag = "Residuals_v_Leverage"
+        Me.rdoResidualsLeverage.Text = "Residuals v Leverage"
+        Me.rdoResidualsLeverage.UseVisualStyleBackColor = True
+        '
+        'rdoScaleLocation
+        '
+        Me.rdoScaleLocation.AutoSize = True
+        Me.rdoScaleLocation.Location = New System.Drawing.Point(189, 189)
+        Me.rdoScaleLocation.Name = "rdoScaleLocation"
+        Me.rdoScaleLocation.Size = New System.Drawing.Size(96, 17)
+        Me.rdoScaleLocation.TabIndex = 32
+        Me.rdoScaleLocation.TabStop = True
+        Me.rdoScaleLocation.Tag = "Scale-Location"
+        Me.rdoScaleLocation.Text = "Scale-Location"
+        Me.rdoScaleLocation.UseVisualStyleBackColor = True
+        '
+        'rdoQQ
+        '
+        Me.rdoQQ.AutoSize = True
+        Me.rdoQQ.Location = New System.Drawing.Point(189, 166)
+        Me.rdoQQ.Name = "rdoQQ"
+        Me.rdoQQ.Size = New System.Drawing.Size(44, 17)
+        Me.rdoQQ.TabIndex = 31
+        Me.rdoQQ.TabStop = True
+        Me.rdoQQ.Tag = "Q-Q"
+        Me.rdoQQ.Text = "Q-Q"
+        Me.rdoQQ.UseVisualStyleBackColor = True
+        '
+        'rdoResidualsFitted
+        '
+        Me.rdoResidualsFitted.AutoSize = True
+        Me.rdoResidualsFitted.Location = New System.Drawing.Point(25, 166)
+        Me.rdoResidualsFitted.Name = "rdoResidualsFitted"
+        Me.rdoResidualsFitted.Size = New System.Drawing.Size(109, 17)
+        Me.rdoResidualsFitted.TabIndex = 30
+        Me.rdoResidualsFitted.TabStop = True
+        Me.rdoResidualsFitted.Tag = "Residuals_v_Fitted"
+        Me.rdoResidualsFitted.Text = "Residuals v Fitted"
+        Me.rdoResidualsFitted.UseVisualStyleBackColor = True
         '
         'grpIndividualPlots
         '
@@ -409,6 +477,72 @@ Partial Class sdgSimpleRegOptions
         Me.grpMultiplePlots.TabIndex = 0
         Me.grpMultiplePlots.TabStop = False
         Me.grpMultiplePlots.Tag = ""
+        '
+        'rdoSixPlots3Rows
+        '
+        Me.rdoSixPlots3Rows.AutoSize = True
+        Me.rdoSixPlots3Rows.Location = New System.Drawing.Point(173, 18)
+        Me.rdoSixPlots3Rows.Name = "rdoSixPlots3Rows"
+        Me.rdoSixPlots3Rows.Size = New System.Drawing.Size(102, 17)
+        Me.rdoSixPlots3Rows.TabIndex = 43
+        Me.rdoSixPlots3Rows.TabStop = True
+        Me.rdoSixPlots3Rows.Tag = "Six_Plots(3 rows)"
+        Me.rdoSixPlots3Rows.Text = "Six Plots(3 rows)"
+        Me.rdoSixPlots3Rows.UseVisualStyleBackColor = True
+        '
+        'rdoFourPlots
+        '
+        Me.rdoFourPlots.AutoSize = True
+        Me.rdoFourPlots.Location = New System.Drawing.Point(9, 18)
+        Me.rdoFourPlots.Name = "rdoFourPlots"
+        Me.rdoFourPlots.Size = New System.Drawing.Size(72, 17)
+        Me.rdoFourPlots.TabIndex = 42
+        Me.rdoFourPlots.TabStop = True
+        Me.rdoFourPlots.Tag = "Four_Plots"
+        Me.rdoFourPlots.Text = "Four Plots"
+        Me.rdoFourPlots.UseVisualStyleBackColor = True
+        '
+        'rdoSixPlots2Rows
+        '
+        Me.rdoSixPlots2Rows.AutoSize = True
+        Me.rdoSixPlots2Rows.Location = New System.Drawing.Point(9, 41)
+        Me.rdoSixPlots2Rows.Name = "rdoSixPlots2Rows"
+        Me.rdoSixPlots2Rows.Size = New System.Drawing.Size(105, 17)
+        Me.rdoSixPlots2Rows.TabIndex = 41
+        Me.rdoSixPlots2Rows.TabStop = True
+        Me.rdoSixPlots2Rows.Tag = "Six_Plots(2 rows)"
+        Me.rdoSixPlots2Rows.Text = "Six_Plots(2 rows)"
+        Me.rdoSixPlots2Rows.UseVisualStyleBackColor = True
+        '
+        'ucrPnlMutiplePlots
+        '
+        Me.ucrPnlMutiplePlots.Location = New System.Drawing.Point(4, 12)
+        Me.ucrPnlMutiplePlots.Name = "ucrPnlMutiplePlots"
+        Me.ucrPnlMutiplePlots.Size = New System.Drawing.Size(268, 56)
+        Me.ucrPnlMutiplePlots.TabIndex = 40
+        '
+        'ucrPnlIndividualPlots
+        '
+        Me.ucrPnlIndividualPlots.Location = New System.Drawing.Point(20, 164)
+        Me.ucrPnlIndividualPlots.Name = "ucrPnlIndividualPlots"
+        Me.ucrPnlIndividualPlots.Size = New System.Drawing.Size(268, 68)
+        Me.ucrPnlIndividualPlots.TabIndex = 29
+        '
+        'ucrChkIndividualPlots
+        '
+        Me.ucrChkIndividualPlots.Checked = False
+        Me.ucrChkIndividualPlots.Location = New System.Drawing.Point(6, 123)
+        Me.ucrChkIndividualPlots.Name = "ucrChkIndividualPlots"
+        Me.ucrChkIndividualPlots.Size = New System.Drawing.Size(113, 20)
+        Me.ucrChkIndividualPlots.TabIndex = 23
+        '
+        'ucrChkMultiplePlots
+        '
+        Me.ucrChkMultiplePlots.Checked = False
+        Me.ucrChkMultiplePlots.Location = New System.Drawing.Point(6, 7)
+        Me.ucrChkMultiplePlots.Name = "ucrChkMultiplePlots"
+        Me.ucrChkMultiplePlots.Size = New System.Drawing.Size(113, 20)
+        Me.ucrChkMultiplePlots.TabIndex = 22
         '
         'tbDisplay
         '
@@ -503,14 +637,10 @@ Partial Class sdgSimpleRegOptions
         '
         'tbSave
         '
-        Me.tbSave.Controls.Add(Me.ucrChkLeverage)
-        Me.tbSave.Controls.Add(Me.ucrChkStdResiduals)
-        Me.tbSave.Controls.Add(Me.ucrChkResiduals)
-        Me.tbSave.Controls.Add(Me.ucrChkFittedValues)
-        Me.tbSave.Controls.Add(Me.ucrLeverageColumnName)
-        Me.tbSave.Controls.Add(Me.ucrStdResidualsColumnName)
-        Me.tbSave.Controls.Add(Me.ucrResidualsColumnName)
-        Me.tbSave.Controls.Add(Me.ucrFittedColumnName)
+        Me.tbSave.Controls.Add(Me.ucrSaveLeverageColumnName)
+        Me.tbSave.Controls.Add(Me.ucrSaveStdResidualsColumnName)
+        Me.tbSave.Controls.Add(Me.ucrSaveResidualsColumnName)
+        Me.tbSave.Controls.Add(Me.ucrSaveFittedColumnName)
         Me.tbSave.Location = New System.Drawing.Point(4, 22)
         Me.tbSave.Name = "tbSave"
         Me.tbSave.Padding = New System.Windows.Forms.Padding(3)
@@ -520,73 +650,33 @@ Partial Class sdgSimpleRegOptions
         Me.tbSave.Text = "Save"
         Me.tbSave.UseVisualStyleBackColor = True
         '
-        'ucrChkLeverage
+        'ucrSaveLeverageColumnName
         '
-        Me.ucrChkLeverage.Checked = False
-        Me.ucrChkLeverage.Location = New System.Drawing.Point(6, 91)
-        Me.ucrChkLeverage.Name = "ucrChkLeverage"
-        Me.ucrChkLeverage.Size = New System.Drawing.Size(113, 20)
-        Me.ucrChkLeverage.TabIndex = 23
+        Me.ucrSaveLeverageColumnName.Location = New System.Drawing.Point(6, 90)
+        Me.ucrSaveLeverageColumnName.Name = "ucrSaveLeverageColumnName"
+        Me.ucrSaveLeverageColumnName.Size = New System.Drawing.Size(255, 24)
+        Me.ucrSaveLeverageColumnName.TabIndex = 27
         '
-        'ucrChkStdResiduals
+        'ucrSaveStdResidualsColumnName
         '
-        Me.ucrChkStdResiduals.Checked = False
-        Me.ucrChkStdResiduals.Location = New System.Drawing.Point(6, 65)
-        Me.ucrChkStdResiduals.Name = "ucrChkStdResiduals"
-        Me.ucrChkStdResiduals.Size = New System.Drawing.Size(113, 20)
-        Me.ucrChkStdResiduals.TabIndex = 22
+        Me.ucrSaveStdResidualsColumnName.Location = New System.Drawing.Point(6, 60)
+        Me.ucrSaveStdResidualsColumnName.Name = "ucrSaveStdResidualsColumnName"
+        Me.ucrSaveStdResidualsColumnName.Size = New System.Drawing.Size(255, 24)
+        Me.ucrSaveStdResidualsColumnName.TabIndex = 26
         '
-        'ucrChkResiduals
+        'ucrSaveResidualsColumnName
         '
-        Me.ucrChkResiduals.Checked = False
-        Me.ucrChkResiduals.Location = New System.Drawing.Point(6, 39)
-        Me.ucrChkResiduals.Name = "ucrChkResiduals"
-        Me.ucrChkResiduals.Size = New System.Drawing.Size(113, 20)
-        Me.ucrChkResiduals.TabIndex = 21
+        Me.ucrSaveResidualsColumnName.Location = New System.Drawing.Point(6, 30)
+        Me.ucrSaveResidualsColumnName.Name = "ucrSaveResidualsColumnName"
+        Me.ucrSaveResidualsColumnName.Size = New System.Drawing.Size(255, 24)
+        Me.ucrSaveResidualsColumnName.TabIndex = 25
         '
-        'ucrChkFittedValues
+        'ucrSaveFittedColumnName
         '
-        Me.ucrChkFittedValues.Checked = False
-        Me.ucrChkFittedValues.Location = New System.Drawing.Point(6, 13)
-        Me.ucrChkFittedValues.Name = "ucrChkFittedValues"
-        Me.ucrChkFittedValues.Size = New System.Drawing.Size(113, 20)
-        Me.ucrChkFittedValues.TabIndex = 20
-        '
-        'ucrLeverageColumnName
-        '
-        Me.ucrLeverageColumnName.AddQuotesIfUnrecognised = True
-        Me.ucrLeverageColumnName.IsReadOnly = False
-        Me.ucrLeverageColumnName.Location = New System.Drawing.Point(128, 93)
-        Me.ucrLeverageColumnName.Name = "ucrLeverageColumnName"
-        Me.ucrLeverageColumnName.Size = New System.Drawing.Size(115, 21)
-        Me.ucrLeverageColumnName.TabIndex = 19
-        '
-        'ucrStdResidualsColumnName
-        '
-        Me.ucrStdResidualsColumnName.AddQuotesIfUnrecognised = True
-        Me.ucrStdResidualsColumnName.IsReadOnly = False
-        Me.ucrStdResidualsColumnName.Location = New System.Drawing.Point(128, 66)
-        Me.ucrStdResidualsColumnName.Name = "ucrStdResidualsColumnName"
-        Me.ucrStdResidualsColumnName.Size = New System.Drawing.Size(115, 21)
-        Me.ucrStdResidualsColumnName.TabIndex = 17
-        '
-        'ucrResidualsColumnName
-        '
-        Me.ucrResidualsColumnName.AddQuotesIfUnrecognised = True
-        Me.ucrResidualsColumnName.IsReadOnly = False
-        Me.ucrResidualsColumnName.Location = New System.Drawing.Point(128, 39)
-        Me.ucrResidualsColumnName.Name = "ucrResidualsColumnName"
-        Me.ucrResidualsColumnName.Size = New System.Drawing.Size(115, 21)
-        Me.ucrResidualsColumnName.TabIndex = 15
-        '
-        'ucrFittedColumnName
-        '
-        Me.ucrFittedColumnName.AddQuotesIfUnrecognised = True
-        Me.ucrFittedColumnName.IsReadOnly = False
-        Me.ucrFittedColumnName.Location = New System.Drawing.Point(128, 12)
-        Me.ucrFittedColumnName.Name = "ucrFittedColumnName"
-        Me.ucrFittedColumnName.Size = New System.Drawing.Size(115, 21)
-        Me.ucrFittedColumnName.TabIndex = 13
+        Me.ucrSaveFittedColumnName.Location = New System.Drawing.Point(6, 9)
+        Me.ucrSaveFittedColumnName.Name = "ucrSaveFittedColumnName"
+        Me.ucrSaveFittedColumnName.Size = New System.Drawing.Size(255, 24)
+        Me.ucrSaveFittedColumnName.TabIndex = 24
         '
         'ucrSdgButtons
         '
@@ -594,144 +684,6 @@ Partial Class sdgSimpleRegOptions
         Me.ucrSdgButtons.Name = "ucrSdgButtons"
         Me.ucrSdgButtons.Size = New System.Drawing.Size(142, 30)
         Me.ucrSdgButtons.TabIndex = 0
-        '
-        'ucrChkMultiplePlots
-        '
-        Me.ucrChkMultiplePlots.Checked = False
-        Me.ucrChkMultiplePlots.Location = New System.Drawing.Point(6, 7)
-        Me.ucrChkMultiplePlots.Name = "ucrChkMultiplePlots"
-        Me.ucrChkMultiplePlots.Size = New System.Drawing.Size(113, 20)
-        Me.ucrChkMultiplePlots.TabIndex = 22
-        '
-        'ucrChkIndividualPlots
-        '
-        Me.ucrChkIndividualPlots.Checked = False
-        Me.ucrChkIndividualPlots.Location = New System.Drawing.Point(6, 123)
-        Me.ucrChkIndividualPlots.Name = "ucrChkIndividualPlots"
-        Me.ucrChkIndividualPlots.Size = New System.Drawing.Size(113, 20)
-        Me.ucrChkIndividualPlots.TabIndex = 23
-        '
-        'ucrPnlIndividualPlots
-        '
-        Me.ucrPnlIndividualPlots.Location = New System.Drawing.Point(20, 164)
-        Me.ucrPnlIndividualPlots.Name = "ucrPnlIndividualPlots"
-        Me.ucrPnlIndividualPlots.Size = New System.Drawing.Size(268, 68)
-        Me.ucrPnlIndividualPlots.TabIndex = 29
-        '
-        'rdoCooksDistanceLeverage
-        '
-        Me.rdoCooksDistanceLeverage.AutoSize = True
-        Me.rdoCooksDistanceLeverage.Location = New System.Drawing.Point(25, 212)
-        Me.rdoCooksDistanceLeverage.Name = "rdoCooksDistanceLeverage"
-        Me.rdoCooksDistanceLeverage.Size = New System.Drawing.Size(159, 17)
-        Me.rdoCooksDistanceLeverage.TabIndex = 35
-        Me.rdoCooksDistanceLeverage.TabStop = True
-        Me.rdoCooksDistanceLeverage.Tag = "Cook's_Distance_v_Leverage"
-        Me.rdoCooksDistanceLeverage.Text = "Cook's Distance v Leverage"
-        Me.rdoCooksDistanceLeverage.UseVisualStyleBackColor = True
-        '
-        'rdoCooksDistance
-        '
-        Me.rdoCooksDistance.AutoSize = True
-        Me.rdoCooksDistance.Location = New System.Drawing.Point(189, 212)
-        Me.rdoCooksDistance.Name = "rdoCooksDistance"
-        Me.rdoCooksDistance.Size = New System.Drawing.Size(102, 17)
-        Me.rdoCooksDistance.TabIndex = 34
-        Me.rdoCooksDistance.TabStop = True
-        Me.rdoCooksDistance.Tag = "Cook's_Distance"
-        Me.rdoCooksDistance.Text = "Cook's Distance"
-        Me.rdoCooksDistance.UseVisualStyleBackColor = True
-        '
-        'rdoResidualsLeverage
-        '
-        Me.rdoResidualsLeverage.AutoSize = True
-        Me.rdoResidualsLeverage.Location = New System.Drawing.Point(25, 189)
-        Me.rdoResidualsLeverage.Name = "rdoResidualsLeverage"
-        Me.rdoResidualsLeverage.Size = New System.Drawing.Size(128, 17)
-        Me.rdoResidualsLeverage.TabIndex = 33
-        Me.rdoResidualsLeverage.TabStop = True
-        Me.rdoResidualsLeverage.Tag = "Residuals_v_Leverage"
-        Me.rdoResidualsLeverage.Text = "Residuals v Leverage"
-        Me.rdoResidualsLeverage.UseVisualStyleBackColor = True
-        '
-        'rdoScaleLocation
-        '
-        Me.rdoScaleLocation.AutoSize = True
-        Me.rdoScaleLocation.Location = New System.Drawing.Point(189, 189)
-        Me.rdoScaleLocation.Name = "rdoScaleLocation"
-        Me.rdoScaleLocation.Size = New System.Drawing.Size(96, 17)
-        Me.rdoScaleLocation.TabIndex = 32
-        Me.rdoScaleLocation.TabStop = True
-        Me.rdoScaleLocation.Tag = "Scale-Location"
-        Me.rdoScaleLocation.Text = "Scale-Location"
-        Me.rdoScaleLocation.UseVisualStyleBackColor = True
-        '
-        'rdoQQ
-        '
-        Me.rdoQQ.AutoSize = True
-        Me.rdoQQ.Location = New System.Drawing.Point(189, 166)
-        Me.rdoQQ.Name = "rdoQQ"
-        Me.rdoQQ.Size = New System.Drawing.Size(44, 17)
-        Me.rdoQQ.TabIndex = 31
-        Me.rdoQQ.TabStop = True
-        Me.rdoQQ.Tag = "Q-Q"
-        Me.rdoQQ.Text = "Q-Q"
-        Me.rdoQQ.UseVisualStyleBackColor = True
-        '
-        'rdoResidualsFitted
-        '
-        Me.rdoResidualsFitted.AutoSize = True
-        Me.rdoResidualsFitted.Location = New System.Drawing.Point(25, 166)
-        Me.rdoResidualsFitted.Name = "rdoResidualsFitted"
-        Me.rdoResidualsFitted.Size = New System.Drawing.Size(109, 17)
-        Me.rdoResidualsFitted.TabIndex = 30
-        Me.rdoResidualsFitted.TabStop = True
-        Me.rdoResidualsFitted.Tag = "Residuals_v_Fitted"
-        Me.rdoResidualsFitted.Text = "Residuals v Fitted"
-        Me.rdoResidualsFitted.UseVisualStyleBackColor = True
-        '
-        'rdoSixPlots3Rows
-        '
-        Me.rdoSixPlots3Rows.AutoSize = True
-        Me.rdoSixPlots3Rows.Location = New System.Drawing.Point(173, 18)
-        Me.rdoSixPlots3Rows.Name = "rdoSixPlots3Rows"
-        Me.rdoSixPlots3Rows.Size = New System.Drawing.Size(102, 17)
-        Me.rdoSixPlots3Rows.TabIndex = 43
-        Me.rdoSixPlots3Rows.TabStop = True
-        Me.rdoSixPlots3Rows.Tag = "Six_Plots(3 rows)"
-        Me.rdoSixPlots3Rows.Text = "Six Plots(3 rows)"
-        Me.rdoSixPlots3Rows.UseVisualStyleBackColor = True
-        '
-        'rdoFourPlots
-        '
-        Me.rdoFourPlots.AutoSize = True
-        Me.rdoFourPlots.Location = New System.Drawing.Point(9, 18)
-        Me.rdoFourPlots.Name = "rdoFourPlots"
-        Me.rdoFourPlots.Size = New System.Drawing.Size(72, 17)
-        Me.rdoFourPlots.TabIndex = 42
-        Me.rdoFourPlots.TabStop = True
-        Me.rdoFourPlots.Tag = "Four_Plots"
-        Me.rdoFourPlots.Text = "Four Plots"
-        Me.rdoFourPlots.UseVisualStyleBackColor = True
-        '
-        'rdoSixPlots2Rows
-        '
-        Me.rdoSixPlots2Rows.AutoSize = True
-        Me.rdoSixPlots2Rows.Location = New System.Drawing.Point(9, 41)
-        Me.rdoSixPlots2Rows.Name = "rdoSixPlots2Rows"
-        Me.rdoSixPlots2Rows.Size = New System.Drawing.Size(105, 17)
-        Me.rdoSixPlots2Rows.TabIndex = 41
-        Me.rdoSixPlots2Rows.TabStop = True
-        Me.rdoSixPlots2Rows.Tag = "Six_Plots(2 rows)"
-        Me.rdoSixPlots2Rows.Text = "Six_Plots(2 rows)"
-        Me.rdoSixPlots2Rows.UseVisualStyleBackColor = True
-        '
-        'ucrPnlMutiplePlots
-        '
-        Me.ucrPnlMutiplePlots.Location = New System.Drawing.Point(4, 12)
-        Me.ucrPnlMutiplePlots.Name = "ucrPnlMutiplePlots"
-        Me.ucrPnlMutiplePlots.Size = New System.Drawing.Size(268, 56)
-        Me.ucrPnlMutiplePlots.TabIndex = 40
         '
         'sdgSimpleRegOptions
         '
@@ -779,10 +731,6 @@ Partial Class sdgSimpleRegOptions
     Friend WithEvents chkPvalues As CheckBox
     Friend WithEvents tbRegOptions As TabControl
     Friend WithEvents tbSave As TabPage
-    Friend WithEvents ucrFittedColumnName As ucrInputComboBox
-    Friend WithEvents ucrLeverageColumnName As ucrInputComboBox
-    Friend WithEvents ucrStdResidualsColumnName As ucrInputComboBox
-    Friend WithEvents ucrResidualsColumnName As ucrInputComboBox
     Friend WithEvents grpPlotType As GroupBox
     Friend WithEvents grpScale As GroupBox
     Friend WithEvents nudWhiteSpace As NumericUpDown
@@ -798,10 +746,6 @@ Partial Class sdgSimpleRegOptions
     Friend WithEvents ucrChkModel As ucrCheck
     Friend WithEvents ucrNudDisplayCLevel As ucrNud
     Friend WithEvents ucrChkPvalues As ucrCheck
-    Friend WithEvents ucrChkLeverage As ucrCheck
-    Friend WithEvents ucrChkStdResiduals As ucrCheck
-    Friend WithEvents ucrChkResiduals As ucrCheck
-    Friend WithEvents ucrChkFittedValues As ucrCheck
     Friend WithEvents ucrChkRugs As ucrCheck
     Friend WithEvents ucrChkJitter As ucrCheck
     Friend WithEvents ucrChkPartial As ucrCheck
@@ -832,4 +776,8 @@ Partial Class sdgSimpleRegOptions
     Friend WithEvents rdoFourPlots As RadioButton
     Friend WithEvents rdoSixPlots2Rows As RadioButton
     Friend WithEvents ucrPnlMutiplePlots As UcrPanel
+    Friend WithEvents ucrSaveFittedColumnName As ucrSave
+    Friend WithEvents ucrSaveLeverageColumnName As ucrSave
+    Friend WithEvents ucrSaveStdResidualsColumnName As ucrSave
+    Friend WithEvents ucrSaveResidualsColumnName As ucrSave
 End Class
