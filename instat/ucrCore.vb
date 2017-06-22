@@ -224,7 +224,7 @@ Public Class ucrCore
     Public Overridable Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False, Optional bUpdate As Boolean = True)
         If clsRCode Is Nothing OrElse Not clsRCode.Equals(clsNewCodeStructure) Then
             clsRCode = clsNewCodeStructure
-            If bUpdateRCodeFromControl AndAlso CanUpdate() Then 'andalso bUpdate?
+            If bUpdateRCodeFromControl AndAlso CanUpdate() AndAlso bUpdate Then
                 UpdateRCode(bReset)
             End If
         End If
