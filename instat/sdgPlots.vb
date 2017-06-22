@@ -269,11 +269,11 @@ Public Class sdgPlots
         ucrXAxis.SetRCodeForControl(bIsXAxis:=True, strNewAxisType:=GetAxisType(True), clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
         ucrYAxis.SetRCodeForControl(bIsXAxis:=False, strNewAxisType:=GetAxisType(False), clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
-        ucrPlotsAdditionalLayers.SetAesFunction(clsGlobalAesFunction)
-        ''The following two setup the ucrAdditionalLayers on the sdgPlots. Shares the global ggplot function, as well as the whole PLots RSyntax.
-        ucrPlotsAdditionalLayers.SetGGplotFunction(clsRggplotFunction)
-        ucrPlotsAdditionalLayers.SetBaseOperator(clsBaseOperator)
-
+        'ucrPlotsAdditionalLayers.SetAesFunction(clsGlobalAesFunction)
+        '''The following two setup the ucrAdditionalLayers on the sdgPlots. Shares the global ggplot function, as well as the whole PLots RSyntax.
+        'ucrPlotsAdditionalLayers.SetGGplotFunction(clsRggplotFunction)
+        'ucrPlotsAdditionalLayers.SetBaseOperator(clsBaseOperator)
+        ucrPlotsAdditionalLayers.SetRCodeForControl(clsNewBaseOperator:=clsBaseOperator, clsRNewggplotFunc:=clsRggplotFunction, clsNewAesFunc:=clsGlobalAesFunction, bReset:=bReset)
         bRCodeSet = True
         AddRemoveLabs()
         AddRemoveFacets()
