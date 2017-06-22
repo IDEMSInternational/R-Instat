@@ -21,6 +21,7 @@ Public Class ucrAdditionalLayers
     Public clsGgplotAesFunction As RFunction
     'clsRggplotFunction is the global ggplot function that takes as mapping parameter clsGgplotAesFunction. clsRggplotFunction is linked through to sdgLayerOptions where it might be modified when sdgLayerOptions.chkApplyOnAllLyers is ticked for instance.
     Public bFirstLoad As Boolean = True
+    Public bReset As Boolean = True
     Public lstLayerComplete As New List(Of Boolean)
     Public iLayerIndex As Integer
     Private strGlobalDataFrame As String
@@ -50,10 +51,20 @@ Public Class ucrAdditionalLayers
         clsGgplotAesFunction = clsAesFunc
     End Sub
 
+    Public Sub SetRCodeForControl(Optional clsNewBaseOperator As ROperator = Nothing, Optional clsRNewggplotFunc As RFunction = Nothing, Optional clsNewAesFunc As RFunction = Nothing, Optional bReset As Boolean = False)
+        clsBaseOperator = clsNewBaseOperator
+        clsGgplotAesFunction = clsNewAesFunc
+        clsRggplotFunction = clsRNewggplotFunc
+    End Sub
+
     Private Sub ucrAdditionalLayers_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             SetDefaults()
             bFirstLoad = False
+        End If
+        If bReset Then
+            SetDefaults()
+            bReset = False
         End If
     End Sub
 
