@@ -100,16 +100,10 @@ Public Class sdgSimpleRegOptions
         ucrChkMultiplePlots.AddToLinkedControls(ucrChkJitter, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
         ucrChkMultiplePlots.AddToLinkedControls(ucrChkConfIntervalband, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
 
-        'grpPlotType.Enabled = True
-        'grpScale.Enabled = True
-        'ucrNudDisplayCLevel.Enabled = True
-        'ucrNudWhiteSpace.Enabled = True
-        ' ucrChkPartial.Enabled = True
-        ' ucrChkRugs.Enabled = True
-        'ucrChkJitter.Enabled = True
-        ' ucrChkConfIntervalband.Enabled = True
-        'ucrChkIndividualPlots.Checked = False
-        'ucrChkMultiplePlots.Checked = False
+
+        ucrPnlMutiplePlots.AddRSyntaxContainsFunctionNamesCondition(rdoFourPlots, {"autoplot"})
+        ucrPnlMutiplePlots.AddRSyntaxContainsFunctionNamesCondition(rdoFourPlots, {"autoplot"})
+        ucrPnlMutiplePlots.AddRSyntaxContainsFunctionNamesCondition(rdoFourPlots, {"autoplot"})
         bControlsInitialised = True
     End Sub
 
@@ -140,7 +134,7 @@ Public Class sdgSimpleRegOptions
         ucrChkANOVA.SetRSyntax(clsRSyntax, bReset)
         ucrChkDisplayCLimits.SetRSyntax(clsRSyntax, bReset)
         ucrChkPvalues.SetRSyntax(clsRSyntax, bReset)
-
+       ' ucrPnlMutiplePlots.SetRSyntax(clsRSyntax)
     End Sub
 
     Private Sub ucrChkANOVA_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkANOVA.ControlValueChanged
@@ -322,18 +316,26 @@ Public Class sdgSimpleRegOptions
         If rdoFourPlots.Checked Then
             clsRResidualPlotsFunction.AddParameter("ncol", 2)
             clsRResidualPlotsFunction.RemoveParameterByName("which")
-            clsRGraphics.SetOperatorParameter(True, clsRFunc:=clsRResidualPlotsFunction)
-            clsRGraphics.SetOperatorParameter(False, clsRFunc:=clsRgeom_point)
+            clsRGraphicsOperator.AddParameter("reidual", clsRFunctionParameter:=clsRResidualPlotsFunction)
+            clsRGraphicsOperator.AddParameter("geom_point", clsRFunctionParameter:=clsRgeom_point)
+            'clsRSyntax.AddToAfterCodes(clsRGraphicsOperator, iPosition:=6)
         ElseIf rdoSixPlots2Rows.Checked Then
             clsRResidualPlotsFunction.AddParameter("ncol", 3)
             clsRResidualPlotsFunction.AddParameter("which", "1:6")
-            clsRGraphics.SetOperatorParameter(True, clsRFunc:=clsRResidualPlotsFunction)
-            clsRGraphics.SetOperatorParameter(False, clsRFunc:=clsRgeom_point)
+            clsRGraphicsOperator.AddParameter("reidual", clsRFunctionParameter:=clsRResidualPlotsFunction)
+            clsRGraphicsOperator.AddParameter("geom_point", clsRFunctionParameter:=clsRgeom_point)
+            'clsRSyntax.AddToAfterCodes(clsRGraphicsOperator, iPosition:=7)
         ElseIf rdoSixPlots3Rows.Checked Then
             clsRResidualPlotsFunction.AddParameter("ncol", 2)
             clsRResidualPlotsFunction.AddParameter("which", "1:6")
-            clsRGraphics.SetOperatorParameter(True, clsRFunc:=clsRResidualPlotsFunction)
-            clsRGraphics.SetOperatorParameter(False, clsRFunc:=clsRgeom_point)
+            clsRGraphicsOperator.AddParameter("reidual", clsRFunctionParameter:=clsRResidualPlotsFunction)
+            clsRGraphicsOperator.AddParameter("geom_point", clsRFunctionParameter:=clsRgeom_point)
+            ' clsRSyntax.AddToAfterCodes(clsRGraphicsOperator, iPosition:=8)
+        Else
+            ' clsRSyntax.RemoveFromAfterCodes(clsRGraphicsOperator)
+        End If
+        If (rdoFourPlots.Checked Or rdoSixPlots2Rows.Checked Or rdoSixPlots3Rows.Checked Or rdoResidualsFitted.Checked Or rdoQQ.Checked Or rdoResidualsLeverage.Checked Or rdoScaleLocation.Checked Or rdoCooksDistance.Checked Or rdoCooksDistanceLeverage.Checked) Then
+            'clsRSyntax.AddToAfterCodes(clsRGraphicsOperator, iPosition:=6)
         End If
     End Sub
 
