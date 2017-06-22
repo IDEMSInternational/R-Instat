@@ -1,27 +1,10 @@
 ﻿Public Class clsRegressionDefaults
-    Public Shared ReadOnly Property clsDefaultFitted As RFunction
-        Get
-            Dim clsRFittedValues As New RFunction
-            Dim clsRWriteFitted, clsRModelFunction As New RFunction
-
-            'ucrSave (sdgSimpleRegOptions) Fitted Values
-            clsRFittedValues.SetRCommand("fitted")
-            clsRModelFunction.SetRCommand("")
-            clsRFittedValues.AddParameter("object", clsRFunctionParameter:=clsDefaultRLmOrGLM)
-            clsRWriteFitted.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
-            clsRWriteFitted.AddParameter("col_data", clsRFunctionParameter:=clsRFittedValues)
-            Return clsRWriteFitted
-        End Get
-    End Property
-
     Public Shared ReadOnly Property clsDefaultRLmOrGLM As RFunction
         Get
 
             Dim clsRModelFunction As New RFunction
-            
 
             clsRModelFunction.SetRCommand("lm")
-            'clsRModelFunction.AddParameter("formula", clsROperatorParameter:=clsDefaultFormulaOperator, iPosition:=1)
             Return clsRModelFunction
         End Get
     End Property
@@ -120,6 +103,17 @@
             Return clsDefaultRggplotFunction
         End Get
     End Property
+
+    Public Shared ReadOnly Property clsDefaultFitted As RFunction
+        Get
+            Dim clsRFittedValues As New RFunction
+            Dim clsRWriteFitted, clsRModelFunction As New RFunction
+
+            clsRWriteFitted.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
+            Return clsRWriteFitted
+        End Get
+    End Property
+
 
     Public Shared ReadOnly Property clsDefaultRWriteFitted As RFunction
         Get
