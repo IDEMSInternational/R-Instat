@@ -419,33 +419,79 @@ Public Class RLink
         End If
     End Function
 
-    Private Function Evaluate(strScript As String, Optional bSilent As Boolean = False) As Boolean
+    Private Function Evaluate(strScript As String, Optional bSilent As Boolean = False, Optional bSeparateThread As Boolean = True) As Boolean
+        Dim thrRScript As Threading.Thread
+        Dim thrDelay As Threading.Thread
+        Dim thrWaitDisplay As Threading.Thread
+        Dim evtWaitHandleWaitDisplayDone As New System.Threading.AutoResetEvent(False)
+        Dim evtWaitHandleDelayDone As New System.Threading.AutoResetEvent(False)
+        Dim bReturn As Boolean = True
+
         If clsEngine IsNot Nothing Then
             Try
-                clsEngine.Evaluate(strScript)
-                Return True
+                If bSeparateThread Then
+                    thrRScript = New Threading.Thread(Sub()
+                                                          Try
+                                                              clsEngine.Evaluate(strScript)
+                                                          Catch ex As Exception
+                                                              If Not bSilent Then
+                                                                  MsgBox(ex.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
+                                                              End If
+                                                              bReturn = False
+                                                          End Try
+                                                      End Sub)
+                    thrDelay = New Threading.Thread(Sub()
+                                                        Dim t As New Stopwatch
+                                                        t.Start()
+                                                        While t.ElapsedMilliseconds < 500 AndAlso thrRScript.IsAlive
+                                                            Threading.Thread.Sleep(50)
+                                                            Console.WriteLine(t.ElapsedMilliseconds)
+                                                        End While
+                                                        evtWaitHandleDelayDone.Set()
+                                                    End Sub)
+                    thrWaitDisplay = New Threading.Thread(Sub()
+                                                              'frmWaiting.Show()
+                                                              While thrRScript.IsAlive
+                                                                  Threading.Thread.Sleep(50)
+                                                                  Application.DoEvents()
+                                                              End While
+                                                              'frmWaiting.Hide()
+                                                              evtWaitHandleWaitDisplayDone.Set()
+                                                          End Sub)
+                    thrRScript.Start()
+                    thrDelay.Start()
+                    evtWaitHandleDelayDone.WaitOne()
+                    If thrRScript.IsAlive Then
+                        thrWaitDisplay.Start()
+                        evtWaitHandleWaitDisplayDone.WaitOne()
+                    End If
+                Else
+                    clsEngine.Evaluate(strScript)
+                End If
             Catch ex As Exception
                 If Not bSilent Then
                     MsgBox(ex.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
                 End If
-                Return False
+                bReturn = False
             End Try
         Else
-            Return False
+            bReturn = False
         End If
+        Return bReturn
     End Function
 
     Private Function GetSymbol(strSymbol As String, Optional bSilent As Boolean = False) As SymbolicExpression
-        Dim expTemp As SymbolicExpression
+        Dim expTemp As SymbolicExpression = Nothing
 
-        Try
-            expTemp = clsEngine.GetSymbol(strSymbol)
-        Catch ex As Exception
-            If Not bSilent Then
-                MsgBox(ex.Message & Environment.NewLine & "The error occurred in attempting to retrieve:" & strSymbol, MsgBoxStyle.Critical, "Error retrieving R variable")
-            End If
-            expTemp = Nothing
-        End Try
+        If clsEngine IsNot Nothing Then
+            Try
+                expTemp = clsEngine.GetSymbol(strSymbol)
+            Catch ex As Exception
+                If Not bSilent Then
+                    MsgBox(ex.Message & Environment.NewLine & "The error occurred in attempting to retrieve:" & strSymbol, MsgBoxStyle.Critical, "Error retrieving R variable")
+                End If
+            End Try
+        End If
         Return expTemp
     End Function
 
