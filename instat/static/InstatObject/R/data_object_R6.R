@@ -1073,17 +1073,19 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
       else stop("If specified, 'factor_values' must be either 'force_ordinals' or 'force_values'")
     }
     else if(to_type %in% c("factor", "ordered_factor")) {
-      ordered <- (to_type == "ordered_factor")
+      make_ordered <- (to_type == "ordered_factor")
       if(set_decimals) curr_col <- round(curr_col, digits = set_digits)
       if(ignore_labels) {
-        new_col <- factor(curr_col, ordered = ordered)
+        new_col <- factor(curr_col, ordered = make_ordered)
       }
       else {
         if(self$is_variables_metadata(labels_label, col_name)) {
           new_col <- sjmisc::to_label(curr_col, add.non.labelled = TRUE)
+          #TODO work out how to do ordered correctly
+		  #if(make_ordered) new_col <- ordered(new_col)
         }
         else {
-          new_col <- factor(curr_col, ordered = ordered)
+          new_col <- factor(curr_col, ordered = make_ordered)
           if(is.numeric(curr_col) && !self$is_variables_metadata(labels_label, col_name)) {
             labs <- sort(unique(curr_col))
             names(labs) <- labs
