@@ -111,6 +111,7 @@ Public Class dlgStartofRains
         ucrPnlTRCalculateBy.AddParameterPresentCondition(rdoTRAmount, "TRAmount")
 
         ucrNudTRAmount.SetParameter(New RParameter("TRAmount", 1, False), False)
+        ucrNudTRAmount.SetMinMax(1, Integer.MaxValue)
 
         ucrChkTotalRainfall.SetParameter(New RParameter("sub3", clsTRRollingSum, 1, False), False)
         ucrChkNumberOfRainyDays.AddAdditionalCodeParameterPair(clsCombineOperator, New RParameter("totalrainfall", clsTRCombineOperator, 1, False), iAdditionalPairNo:=1)
@@ -134,13 +135,14 @@ Public Class dlgStartofRains
 
         ucrNudRDMinimumDays.SetParameter(New RParameter("RDMin", 1))
         ucrNudRDMinimumDays.SetLinkedDisplayControl(lblRDMinimum)
+        ucrNudRDMinimumDays.SetMinMax(1, 366)
 
         ucrNudRDOutOfDays.SetParameter(New RParameter("width", 1))
         ucrNudRDOutOfDays.SetLinkedDisplayControl(lblRDWidth)
+        ucrNudRDOutOfDays.SetMinMax(1, 366)
 
         ucrChkNumberOfRainyDays.AddToLinkedControls(ucrNudRDMinimumDays, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
         ucrChkNumberOfRainyDays.AddToLinkedControls(ucrNudRDOutOfDays, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
-        'ucrNudRDOutOfDays.SetMinMax(1, 366)  what is appropriate here?
 
         'Dry Spell
         ucrChkDrySpell.SetParameter(New RParameter("sub1", clsDSDryPeriodTen, 3, False), False)
@@ -150,9 +152,12 @@ Public Class dlgStartofRains
         ucrChkDrySpell.AddToLinkedControls(ucrNudDSMaximumDays, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=9)
         ucrNudDSLengthOfTime.SetLinkedDisplayControl(lblDSLengthofTime)
         ucrNudDSMaximumDays.SetLinkedDisplayControl(lblDSMaximumDays)
+
         ucrNudDSLengthOfTime.SetParameter(New RParameter("width", 1))
+        ucrNudDSLengthOfTime.SetMinMax(1, 366)
+
         ucrNudDSMaximumDays.SetParameter(New RParameter("DSMax", 1))
-        ' what is a min/max for this
+        ucrNudDSMaximumDays.SetMinMax(1, 366)
 
         ' Dry Period
         ucrChkDryPeriod.SetParameter(New RParameter("sub5", clsDPOverallInterval, 3, False), False)
@@ -161,14 +166,16 @@ Public Class dlgStartofRains
 
         ucrNudDPRainPeriod.SetParameter(New RParameter("width", 1))
         ucrNudDPRainPeriod.SetLinkedDisplayControl(lblDPLength)
+        ucrNudDPRainPeriod.SetMinMax(1, 366)
 
         ucrNudDPMaxRain.SetParameter(New RParameter("right", 1))
         ucrNudDPMaxRain.SetLinkedDisplayControl(lblDPMaxRain)
+        ucrNudDPMaxRain.SetMinMax(1, Integer.MaxValue)
 
         ucrNudDPOverallInterval.SetParameter(New RParameter("Overall", 0))
         ucrNudDPOverallInterval.SetLinkedDisplayControl(lblDPOverallInterval)
+        ucrNudDPOverallInterval.SetMinMax(1, 366)
 
-        ' minmax?
         ucrChkDryPeriod.AddToLinkedControls(ucrNudDPMaxRain, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=40)
         ucrChkDryPeriod.AddToLinkedControls(ucrNudDPOverallInterval, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=45)
         ucrChkDryPeriod.AddToLinkedControls(ucrNudDPRainPeriod, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=30)
