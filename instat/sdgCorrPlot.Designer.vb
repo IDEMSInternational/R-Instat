@@ -59,10 +59,10 @@ Partial Class sdgCorrPlot
         Me.tbSaveGraphs.Controls.Add(Me.tbPairwisePlot)
         Me.tbSaveGraphs.Controls.Add(Me.tbCorrelationPlot)
         Me.tbSaveGraphs.Controls.Add(Me.tbScatterplotMatrix)
-        Me.tbSaveGraphs.Location = New System.Drawing.Point(10, 87)
+        Me.tbSaveGraphs.Location = New System.Drawing.Point(10, 100)
         Me.tbSaveGraphs.Name = "tbSaveGraphs"
         Me.tbSaveGraphs.SelectedIndex = 0
-        Me.tbSaveGraphs.Size = New System.Drawing.Size(348, 271)
+        Me.tbSaveGraphs.Size = New System.Drawing.Size(348, 264)
         Me.tbSaveGraphs.TabIndex = 1
         '
         'tbPairwisePlot
@@ -90,7 +90,7 @@ Partial Class sdgCorrPlot
         Me.tbCorrelationPlot.Location = New System.Drawing.Point(4, 22)
         Me.tbCorrelationPlot.Name = "tbCorrelationPlot"
         Me.tbCorrelationPlot.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbCorrelationPlot.Size = New System.Drawing.Size(340, 245)
+        Me.tbCorrelationPlot.Size = New System.Drawing.Size(340, 238)
         Me.tbCorrelationPlot.TabIndex = 1
         Me.tbCorrelationPlot.Tag = "Correlation_Plot"
         Me.tbCorrelationPlot.Text = "Correlation Plot"
@@ -115,7 +115,7 @@ Partial Class sdgCorrPlot
         '
         'ucrNudAlphaCorr
         '
-        Me.ucrNudAlphaCorr.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAlphaCorr.DecimalPlaces = New Decimal(New Integer() {2, 0, 0, 0})
         Me.ucrNudAlphaCorr.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudAlphaCorr.Location = New System.Drawing.Point(243, 73)
         Me.ucrNudAlphaCorr.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
@@ -123,7 +123,7 @@ Partial Class sdgCorrPlot
         Me.ucrNudAlphaCorr.Name = "ucrNudAlphaCorr"
         Me.ucrNudAlphaCorr.Size = New System.Drawing.Size(50, 20)
         Me.ucrNudAlphaCorr.TabIndex = 30
-        Me.ucrNudAlphaCorr.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAlphaCorr.Value = New Decimal(New Integer() {100, 0, 0, 131072})
         '
         'ucrNudMaximumSize
         '
@@ -271,7 +271,7 @@ Partial Class sdgCorrPlot
         'rdoNone
         '
         Me.rdoNone.AutoSize = True
-        Me.rdoNone.Location = New System.Drawing.Point(35, 22)
+        Me.rdoNone.Location = New System.Drawing.Point(36, 33)
         Me.rdoNone.Name = "rdoNone"
         Me.rdoNone.Size = New System.Drawing.Size(51, 17)
         Me.rdoNone.TabIndex = 5
@@ -282,7 +282,7 @@ Partial Class sdgCorrPlot
         'rdoPairwisePlot
         '
         Me.rdoPairwisePlot.AutoSize = True
-        Me.rdoPairwisePlot.Location = New System.Drawing.Point(33, 46)
+        Me.rdoPairwisePlot.Location = New System.Drawing.Point(35, 58)
         Me.rdoPairwisePlot.Name = "rdoPairwisePlot"
         Me.rdoPairwisePlot.Size = New System.Drawing.Size(85, 17)
         Me.rdoPairwisePlot.TabIndex = 6
@@ -293,7 +293,7 @@ Partial Class sdgCorrPlot
         'rdoCorrelationPlot
         '
         Me.rdoCorrelationPlot.AutoSize = True
-        Me.rdoCorrelationPlot.Location = New System.Drawing.Point(218, 22)
+        Me.rdoCorrelationPlot.Location = New System.Drawing.Point(218, 32)
         Me.rdoCorrelationPlot.Name = "rdoCorrelationPlot"
         Me.rdoCorrelationPlot.Size = New System.Drawing.Size(96, 17)
         Me.rdoCorrelationPlot.TabIndex = 7
@@ -304,7 +304,7 @@ Partial Class sdgCorrPlot
         'rdoScatterPlotMatrix
         '
         Me.rdoScatterPlotMatrix.AutoSize = True
-        Me.rdoScatterPlotMatrix.Location = New System.Drawing.Point(217, 46)
+        Me.rdoScatterPlotMatrix.Location = New System.Drawing.Point(218, 57)
         Me.rdoScatterPlotMatrix.Name = "rdoScatterPlotMatrix"
         Me.rdoScatterPlotMatrix.Size = New System.Drawing.Size(90, 17)
         Me.rdoScatterPlotMatrix.TabIndex = 8
@@ -314,18 +314,18 @@ Partial Class sdgCorrPlot
         '
         'GroupBox1
         '
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 0)
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 2)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(346, 81)
+        Me.GroupBox1.Size = New System.Drawing.Size(346, 98)
         Me.GroupBox1.TabIndex = 9
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Graphs"
         '
         'ucrPnlGraphType
         '
-        Me.ucrPnlGraphType.Location = New System.Drawing.Point(18, 12)
+        Me.ucrPnlGraphType.Location = New System.Drawing.Point(25, 21)
         Me.ucrPnlGraphType.Name = "ucrPnlGraphType"
-        Me.ucrPnlGraphType.Size = New System.Drawing.Size(322, 63)
+        Me.ucrPnlGraphType.Size = New System.Drawing.Size(310, 73)
         Me.ucrPnlGraphType.TabIndex = 4
         '
         'ucrBaseSdgCorrPlot
@@ -346,15 +346,15 @@ Partial Class sdgCorrPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(371, 428)
+        Me.ClientSize = New System.Drawing.Size(365, 428)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.rdoScatterPlotMatrix)
         Me.Controls.Add(Me.rdoCorrelationPlot)
         Me.Controls.Add(Me.rdoPairwisePlot)
         Me.Controls.Add(Me.rdoNone)
-        Me.Controls.Add(Me.ucrPnlGraphType)
         Me.Controls.Add(Me.ucrBaseSdgCorrPlot)
         Me.Controls.Add(Me.tbSaveGraphs)
+        Me.Controls.Add(Me.ucrPnlGraphType)
         Me.Controls.Add(Me.GroupBox1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False

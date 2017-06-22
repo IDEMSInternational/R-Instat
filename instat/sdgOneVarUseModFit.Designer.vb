@@ -334,7 +334,7 @@ Partial Class sdgOneVarUseModFit
         '
         'ucrPnlPlots
         '
-        Me.ucrPnlPlots.Location = New System.Drawing.Point(6, 6)
+        Me.ucrPnlPlots.Location = New System.Drawing.Point(8, 8)
         Me.ucrPnlPlots.Name = "ucrPnlPlots"
         Me.ucrPnlPlots.Size = New System.Drawing.Size(227, 165)
         Me.ucrPnlPlots.TabIndex = 0

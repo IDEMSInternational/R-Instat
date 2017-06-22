@@ -18,8 +18,7 @@ Imports instat.Translations
 Public Class dlgCorrelation
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
-    Public clsCorrelationTestFunction, clsRGGcorrGraphicsFunction, clsRGraphicsFuction, clsRGGscatmatrixFunction, clsCorrelationFunction As New RFunction
-    Dim clsTempFunction As RFunction
+    Private clsCorrelationTestFunction, clsRGGcorrGraphicsFunction, clsRGraphicsFuction, clsRGGscatmatrixFunction, clsCorrelationFunction As New RFunction
     Private bResetSubdialog As Boolean = False
     Private Sub dlgCorrelation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -45,27 +44,24 @@ Public Class dlgCorrelation
         ucrReceiverFirstColumn.strSelectorHeading = "Numerics"
         ucrReceiverMultipleColumns.Selector = ucrSelectorCorrelation
         ucrReceiverFirstColumn.SetDataType("numeric")
-        ucrReceiverFirstColumn.SetMeAsReceiver()
 
         ucrReceiverSecondColumn.SetParameter(New RParameter("y", 1))
         ucrReceiverSecondColumn.SetParameterIsRFunction()
         ucrReceiverSecondColumn.strSelectorHeading = "Numerics"
         ucrReceiverSecondColumn.Selector = ucrSelectorCorrelation
         ucrReceiverSecondColumn.SetDataType("numeric")
-        ucrSelectorCorrelation.Focus()
 
         ucrReceiverMultipleColumns.Selector = ucrSelectorCorrelation
         ucrReceiverMultipleColumns.strSelectorHeading = "Numerics"
         ucrReceiverMultipleColumns.SetParameterIsRFunction()
         ucrReceiverMultipleColumns.SetDataType("numeric")
 
-        ucrSelectorCorrelation.Focus()
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         'TODO: Fix bugs produced when rdoScatterplotMatrix is checked. Disabled for now
         sdgCorrPlot.rdoScatterPlotMatrix.Enabled = False
-
-        'sdgCorrPlot.ucrSelectFactor.SetDataframe(ucrSelectorCorrelation.ucrAvailableDataFrames.strCurrDataFrame, bEnableDataframe:=False)
+        'Disabled because it is not yet functioning.
+        sdgCorrPlot.rdoPairwisePlot.Enabled = False
 
         ucrNudConfidenceInterval.SetParameter(New RParameter("conf.level", 3))
         ucrNudConfidenceInterval.SetMinMax(0, 1)
@@ -108,7 +104,6 @@ Public Class dlgCorrelation
     Private Sub SetDefaults()
         clsCorrelationTestFunction = New RFunction
         clsCorrelationFunction = New RFunction
-        ucrBase.clsRsyntax.iCallType = 2
         clsRGGcorrGraphicsFunction = New RFunction
         clsRGraphicsFuction = New RFunction
         'clsRGGscatmatrixFunction = New RFunction
@@ -130,7 +125,9 @@ Public Class dlgCorrelation
         clsCorrelationTestFunction.AddParameter("conf.level", "0.95")
         clsCorrelationFunction.AddParameter("use", Chr(34) & "pairwise.complete.obs" & Chr(34))
         clsCorrelationTestFunction.AddParameter("method", Chr(34) & "pearson" & Chr(34))
+        ucrBase.clsRsyntax.iCallType = 2
         clsCorrelationTestFunction.iCallType = 2
+        clsRGGcorrGraphicsFunction.iCallType = 3
         ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationFunction)
     End Sub
 
@@ -206,7 +203,7 @@ Public Class dlgCorrelation
 
     Private Sub ucrPnlColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumns.ControlValueChanged
         If rdoTwoColumns.Checked Then
-            ucrReceiverSecondColumn.SetMeAsReceiver()
+            ucrReceiverFirstColumn.SetMeAsReceiver()
             cmdOptions.Visible = False
         ElseIf rdoMultipleColumns.Checked Then
             ucrReceiverMultipleColumns.SetMeAsReceiver()
