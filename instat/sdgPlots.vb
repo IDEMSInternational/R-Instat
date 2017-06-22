@@ -62,6 +62,7 @@ Public Class sdgPlots
         'Links the factor receivers, used for creating facets, with the selector. The variables need to be factors.
         ucr1stFactorReceiver.Selector = ucrFacetSelector
         ucr1stFactorReceiver.SetIncludedDataTypes({"factor"})
+        ucr1stFactorReceiver.strSelectorHeading = "Factors"
         ucr1stFactorReceiver.SetParameter(New RParameter("var1", 0))
         ucr1stFactorReceiver.SetParameterIsString()
         ucr1stFactorReceiver.bWithQuotes = False
@@ -71,6 +72,7 @@ Public Class sdgPlots
 
         ucr2ndFactorReceiver.Selector = ucrFacetSelector
         ucr2ndFactorReceiver.SetIncludedDataTypes({"factor"})
+        ucr2ndFactorReceiver.strSelectorHeading = "Factors"
         ucr2ndFactorReceiver.SetParameter(New RParameter("var2", 1))
         ucr2ndFactorReceiver.SetParameterIsString()
         ucr2ndFactorReceiver.bWithQuotes = False
@@ -169,7 +171,11 @@ Public Class sdgPlots
         ucrYAxis.InitialiseControl()
 
         'themes tab
+        urChkSelectTheme.SetText("Select Theme:")
         ucrInputThemes.SetParameter(New RParameter("theme_name"))
+        urChkSelectTheme.AddToLinkedControls(ucrInputThemes, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="theme_grey")
+        urChkSelectTheme.AddParameterPresentCondition(True, "theme_name")
+        urChkSelectTheme.AddParameterPresentCondition(False, "theme_name", False)
         strThemes = GgplotDefaults.strThemes
         'Would prefer to do this through functions but auto updating function name not currently supported through combo box control
         For Each strTemp As String In strThemes
@@ -244,7 +250,8 @@ Public Class sdgPlots
         ucrInputGraphTitle.SetRCode(clsLabsFunction, bReset)
         ucrInputGraphSubTitle.SetRCode(clsLabsFunction, bReset)
         ucrInputGraphCaption.SetRCode(clsLabsFunction, bReset)
-        ucrInputThemes.SetRCode(clsBaseOperator)
+        urChkSelectTheme.SetRCode(clsBaseOperator, bReset)
+        ucrInputThemes.SetRCode(clsBaseOperator, bReset)
 
         'ucrInputLegend.SetRCode(clsNewLabsFunction, bReset)
         ucrPnlHorizonatalVertical.SetRCode(clsFacetFunction, bReset)

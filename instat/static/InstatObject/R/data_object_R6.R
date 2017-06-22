@@ -8,7 +8,6 @@ data_object <- R6::R6Class("data_object",
                                                  start_point=1, filters = list(), objects = list(),
                                                  calculations = list(), keys = list(), keep_attributes = TRUE)
 {
-                             
   # Set up the data object
   self$set_data(data, messages)
   self$set_changes(list())
@@ -107,6 +106,9 @@ data_object$set("public", "set_data", function(new_data, messages=TRUE, check_na
   else if(is.ts(new_data)) {
     ind <- zoo::index(new_data)
     new_data <- data.frame(index = ind, value = new_data)
+  }
+  else if(is.array(new_data)) {
+    new_data <- as.data.frame(new_data)
   }
   else if(is.vector(new_data) && !is.list(new_data)) {
     new_data <- as.data.frame(new_data)
@@ -237,12 +239,12 @@ data_object$set("public", "set_metadata_changed", function(new_val) {
 }
 )
 
-data_object$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "", stack_data = FALSE, remove_attr = FALSE, retain_attr = FALSE, ...) {
+data_object$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "", stack_data = FALSE, remove_attr = FALSE, retain_attr = FALSE, max_cols, max_rows, ...) {
   if(!stack_data) {
     if(!include_hidden_columns && self$is_variables_metadata(is_hidden_label)) {
       hidden <- self$get_variables_metadata(property = is_hidden_label)
       hidden[is.na(hidden)] <- FALSE
-      out <- private$data[!self$get_variables_metadata(property = is_hidden_label)]
+      out <- private$data[!hidden]
     }
     else out <- private$data
     if(use_current_filter && self$filter_applied()) {
@@ -277,7 +279,8 @@ data_object$set("public", "get_data_frame", function(convert_to_character = FALS
         }
       }
     }
-    
+    if(!missing(max_cols) && max_cols < ncol(out)) out <- out[1:max_cols]
+    if(!missing(max_rows) && max_rows < nrow(out)) out <- out[1:max_rows, ]
     if(convert_to_character) {
       decimal_places = self$get_variables_metadata(property = signif_figures_label, column = names(out), error_if_no_property = FALSE)
       decimal_places[is.na(decimal_places)] <- 0
@@ -311,8 +314,15 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
   else {
     out <- list()
     #curr_data <- self$get_data_frame(use_current_filter = FALSE)
-    curr_data <- private$data
-    for(i in seq_along(names(curr_data))) {
+    if(missing(column)) {
+      curr_data <- private$data
+      cols <- names(curr_data)
+    }
+    else {
+      cols <- column
+      curr_data <- private$data[ ,column]
+    }
+    for(i in seq_along(cols)) {
       col <- curr_data[[i]]
       ind <- which(names(attributes(col)) == "levels")
       if(length(ind) > 0) col_attributes <- attributes(col)[-ind]
@@ -345,7 +355,7 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
     if(all(c(name_label, label_label) %in% names(out))) out <- out[ ,c(c(name_label, label_label), setdiff(names(out), c(name_label, label_label)))]
     else if(name_label %in% names(out)) out <- out[ ,c(name_label, setdiff(names(out), name_label))]
     #row.names(out) <- self$get_column_names()
-    row.names(out) <- names(private$data)
+    row.names(out) <- cols
     if(data_type != "all") {
       if(data_type == "numeric") {
         out <- out[out[[data_type_label]] %in% c("numeric", "integer"), ]
@@ -377,6 +387,12 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
     if(convert_to_character && missing(property)) return(convert_to_character_matrix(out, FALSE))
     else return(out)
   }
+}
+)
+
+data_object$set("public", "get_column_data_types", function(columns) {
+  if(missing(columns)) return(as.vector(sapply(private$data, class)))
+  else return(as.vector(sapply(private$data[columns], class, USE.NAMES = FALSE)))
 }
 )
 
@@ -510,7 +526,8 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
 #A bug in sjPlot requires removing labels when a factor column already has labels, using remove_labels for this if needed.
 data_object$set("public", "get_columns_from_data", function(col_names, force_as_data_frame = FALSE, use_current_filter = TRUE, remove_labels = FALSE) {
   if(missing(col_names)) stop("no col_names to return")
-  if(!all(col_names %in% self$get_column_names())) stop("Not all column names were found in data")
+  #if(!all(col_names %in% self$get_column_names())) stop("Not all column names were found in data")
+  if(!all(col_names %in% names(private$data))) stop("Not all column names were found in data")
   
   if(length(col_names)==1) {
     if(force_as_data_frame) {
@@ -769,7 +786,6 @@ data_object$set("public", "replace_value_in_data", function(col_names, rows, old
 )
 
 data_object$set("public", "append_to_metadata", function(property, new_value = "") {
-  
   if(missing(property)) stop("property must be specified.")
   
   if (!is.character(property)) stop("property must be of type: character")
@@ -784,7 +800,8 @@ data_object$set("public", "append_to_variables_metadata", function(col_names, pr
   if(missing(property)) stop("property must be specified.")
   if(!is.character(property)) stop("property must be a character")
   if(!missing(col_names)) {
-    if(!all(col_names %in% self$get_column_names())) stop("Not all of ", paste(col_names, collapse = ","), " found in data.")
+    #if(!all(col_names %in% self$get_column_names())) stop("Not all of ", paste(col_names, collapse = ","), " found in data.")
+    if(!all(col_names %in% names(private$data))) stop("Not all of ", paste(col_names, collapse = ","), " found in data.")
     for(curr_col in col_names) {
       attr(private$data[[curr_col]], property) <- new_val
       self$append_to_changes(list(Added_variables_metadata, curr_col, property))
@@ -1224,7 +1241,7 @@ data_object$set("public", "get_column_count", function(col_name, new_level_names
 }
 )
 
-data_object$set("public", "get_column_names", function(as_list = FALSE, include = list(), exclude = list(), excluded_items = c()) {
+data_object$set("public", "get_column_names", function(as_list = FALSE, include = list(), exclude = list(), excluded_items = c(), max_no) {
   if(length(include) == 0 && length(exclude) == 0) out <- names(private$data)
   else {
     if(data_type_label %in% names(include) && "numeric" %in% include[[data_type_label]]) {
@@ -1233,13 +1250,14 @@ data_object$set("public", "get_column_names", function(as_list = FALSE, include 
     if(data_type_label %in% names(exclude) && "numeric" %in% exclude[[data_type_label]]) {
       exclude[[data_type_label]] = c(exclude[[data_type_label]], "integer")
     }
-    col_names <- self$get_column_names()
+    #col_names <- self$get_column_names()
+    col_names <- names(private$data)
     out = c()
     i = 1
     for(col in col_names) {
       if(length(include) > 0 || length(exclude) > 0) {
         curr_var_metadata <- self$get_variables_metadata(column = col, direct_from_attributes = TRUE)
-        if(!data_type_label %in% names(curr_var_metadata)) curr_var_metadata[[data_type_label]] <- class(self$get_columns_from_data(col_names = col))
+        if(!data_type_label %in% names(curr_var_metadata)) curr_var_metadata[[data_type_label]] <- class(private$data[[col]])
         #TODO this is a temp compatibility solution for how the class of ordered factor used to be shown when getting metadata
         if(length(curr_var_metadata[[data_type_label]]) == 2 && all(curr_var_metadata[[data_type_label]] %in% c("ordered", "factor"))) curr_var_metadata[[data_type_label]] <- "ordered,factor"
         if(all(c(names(include), names(exclude)) %in% names(curr_var_metadata)) && all(sapply(names(include), function(prop) curr_var_metadata[[prop]] %in% include[[prop]]))
@@ -1250,6 +1268,7 @@ data_object$set("public", "get_column_names", function(as_list = FALSE, include 
       else out <- c(out, col)
       i = i + 1
     }
+    if(!missing(max_no) && max_no < length(out)) out <- out[1:max_no]
   }
   if(length(excluded_items) > 0) {
     ex_ind = which(out %in% excluded_items)
@@ -1268,7 +1287,7 @@ data_object$set("public", "get_column_names", function(as_list = FALSE, include 
 #TODO: Are there other types needed here?
 data_object$set("public", "get_data_type", function(col_name = "") {
   if(!(col_name %in% self$get_column_names())) {
-    stop(paste(col_name, "is not a column in", get_metadata(data_name_label)))
+    stop(paste(col_name, "is not a column in", self$get_metadata(data_name_label)))
   }
   type = ""
   curr_col <- self$get_columns_from_data(col_name, use_current_filter = FALSE)

@@ -35,7 +35,7 @@ Public Class dlgBarAndPieChart
     Private bReset As Boolean = True
     Private bFirstLoad As Boolean = True
     Private bResetSubdialog As Boolean = True
-    Private bResetLayerSubdialog As Boolean = True
+    Private bResetBarLayerSubdialog As Boolean = True
 
     Private Sub cmdOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -98,12 +98,14 @@ Public Class dlgBarAndPieChart
 
         ucrFactorReceiver.Selector = ucrBarChartSelector
         ucrFactorReceiver.SetIncludedDataTypes({"factor"})
+        ucrFactorReceiver.strSelectorHeading = "Factors"
         ucrFactorReceiver.SetParameter(New RParameter("x", 0))
         ucrFactorReceiver.bWithQuotes = False
         ucrFactorReceiver.SetParameterIsString()
 
         ucrSecondReceiver.Selector = ucrBarChartSelector
         ucrSecondReceiver.SetIncludedDataTypes({"factor"})
+        ucrSecondReceiver.strSelectorHeading = "Factors"
         ucrSecondReceiver.SetParameter(New RParameter("fill", 1))
         ucrSecondReceiver.bWithQuotes = False
         ucrSecondReceiver.SetParameterIsString()
@@ -141,6 +143,7 @@ Public Class dlgBarAndPieChart
         ucrFactorReceiver.SetMeAsReceiver()
         ucrSaveBar.Reset()
         bResetSubdialog = True
+        bResetBarLayerSubdialog = True
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
@@ -213,8 +216,9 @@ Public Class dlgBarAndPieChart
 
     Private Sub cmdBarChartOptions_Click(sender As Object, e As EventArgs) Handles cmdBarChartOptions.Click
         'What should global and local aes be?
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomBarFunction, clsNewGlobalAesFunc:=clsBarAesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrBarChartSelector, bApplyAesGlobally:=True, bReset:=bResetLayerSubdialog)
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomBarFunction, clsNewGlobalAesFunc:=clsBarAesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrBarChartSelector, bApplyAesGlobally:=True, bReset:=bResetBarLayerSubdialog)
         sdgLayerOptions.ShowDialog()
+        bResetBarLayerSubdialog = False
         If clsBarAesFunction.ContainsParameter("x") Then
             ucrFactorReceiver.Add(clsBarAesFunction.GetParameter("x").strArgumentValue)
         Else
@@ -229,8 +233,9 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub cmdPieChartOptions_Click(sender As Object, e As EventArgs) Handles cmdPieChartOptions.Click
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomBarFunction, clsNewGlobalAesFunc:=clsPieAesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrBarChartSelector, bApplyAesGlobally:=True, bReset:=bResetLayerSubdialog)
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomBarFunction, clsNewGlobalAesFunc:=clsPieAesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrBarChartSelector, bApplyAesGlobally:=True, bReset:=bResetBarLayerSubdialog)
         sdgLayerOptions.ShowDialog()
+        bResetBarLayerSubdialog = False
         'temp fix - should instead be setting R code of the receivers here
         If Not clsPieAesFunction.ContainsParameter("x") Then
             clsPieAesFunction.AddParameter("x", Chr(34) & Chr(34))

@@ -45,11 +45,14 @@ Public Class dlgTwoWayFrequencies
         ucrReceiverRowFactor.Selector = ucrSelectorTwoWayFrequencies
         ucrReceiverWeights.Selector = ucrSelectorTwoWayFrequencies
         ucrReceiverColumnFactor.SetDataType("factor")
+        ucrReceiverColumnFactor.strSelectorHeading = "Factors"
         ucrReceiverWeights.SetDataType("numeric")
+        ucrReceiverWeights.strSelectorHeading = "Numerics"
 
         'setting receivers parameters
         ucrReceiverRowFactor.SetParameter(New RParameter("var.row", 1))
         ucrReceiverRowFactor.SetParameterIsString()
+        ucrReceiverRowFactor.strSelectorHeading = "Variables"
         ucrReceiverRowFactor.bWithQuotes = False
         ucrReceiverRowFactor.SetParameterIncludeArgumentName(False)
 
@@ -114,12 +117,7 @@ Public Class dlgTwoWayFrequencies
 
         ucrPnlFreqDisplay.AddFunctionNamesCondition(rdoTable, "sjtab")
         ucrPnlFreqDisplay.AddFunctionNamesCondition(rdoGraph, "sjplot")
-
-        'Conditions for both requires checks on multiple functions
-        'Not yet implemented so this can cause a bug
-
-        'ucrPnlFreqDisplay.AddFunctionNamesCondition(rdoBoth, "sjtab")
-        'ucrPnlFreqDisplay.AddFunctionNamesCondition(rdoBoth, "sjplot")
+        'TODO conditions for both requires checks on multiple functions
 
         'Setting Display of the group boxes in the dialog
         ucrPnlFreqDisplay.AddToLinkedControls(ucrChkCount, {rdoTable, rdoBoth}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -194,17 +192,15 @@ Public Class dlgTwoWayFrequencies
         ucrChkWeights.SetRCode(clsSjTab, bReset)
         ucrChkFlip.SetRCode(clsSjPlot, bReset)
         ucrPnlFreqType.SetRCode(clsSjPlot, bReset)
-        ucrPnlFreqDisplay.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        If bReset OrElse Not rdoBoth.Checked Then
+            ucrPnlFreqDisplay.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        End If
         ucrSelectorTwoWayFrequencies.SetRCode(clsSjTab, bReset)
         ucrChkCell.SetRCode(clsSjTab, bReset)
         ucrChkColumn.SetRCode(clsSjTab, bReset)
         ucrChkRow.SetRCode(clsSjTab, bReset)
         ucrChkCount.SetRCode(clsSjTab, bReset)
         ucrSaveGraph.SetRCode(clsSjPlot, bReset)
-
-    End Sub
-
-    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
 
     End Sub
 
