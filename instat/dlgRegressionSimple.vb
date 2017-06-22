@@ -18,8 +18,8 @@ Imports instat
 Imports instat.Translations
 Public Class dlgRegressionSimple
     Public bFirstLoad As Boolean = True
-    Public clsModel, clsFormulaOperator, clsFunctionOperation, clsPoissonOperation, clsPoissonOperation2, clsRBinomialOperation, clsRBinomialOperation2, clsRBinomialOperation3 As New ROperator
-    Public clsRPoisson, clsRModelsFunction, clsRWriteFitted, clsRFittedValues, clsRSummaryFunction, clsRestpvalFunction, clsRanovaFunction, clsRConfint, clsRaovpvalFunction, clsRModelFunction, clsRaovFunction, clsRTTest, clsRFTest, clsRKruskalTest, clsRBinomial, clsRWilcoxTest, clsRConvert, clsRCIFunction, clsRFactor, clsRFactor2, clsRNumeric, clsGLM, clsxFunc, clsRMean, clsRMean2, clsRGroup, clsRGroup2, clsRLmOrGLM, clsRYVariable, clsRXVariable, clsTFunc, clsRLength As New RFunction
+    Public clsModel, clsFormulaOperator, clsRGraphicsOperator, clsFunctionOperation, clsPoissonOperation, clsPoissonOperation2, clsRBinomialOperation, clsRBinomialOperation2, clsRBinomialOperation3 As New ROperator
+    Public clsRPoisson, clsRgeom_point, clsRResidualPlots, clsRModelsFunction, clsRWriteFitted, clsRFittedValues, clsRSummaryFunction, clsRestpvalFunction, clsRanovaFunction, clsRConfint, clsRaovpvalFunction, clsRModelFunction, clsRaovFunction, clsRTTest, clsRFTest, clsRKruskalTest, clsRBinomial, clsRWilcoxTest, clsRConvert, clsRCIFunction, clsRFactor, clsRFactor2, clsRNumeric, clsGLM, clsxFunc, clsRMean, clsRMean2, clsRGroup, clsRGroup2, clsRLmOrGLM, clsRYVariable, clsRXVariable, clsTFunc, clsRLength As New RFunction
 
     Private bReset As Boolean = True
     Public bResetSubDialog As Boolean = False
@@ -77,6 +77,10 @@ Public Class dlgRegressionSimple
 
         ucrPnlModelType.AddRadioButton(rdoGeneralCase)
         ucrPnlModelType.AddRadioButton(rdoTwoSample)
+        ucrPnlModelType.AddFunctionNamesCondition(rdoTwoSample, "t.test")
+        ucrPnlModelType.AddFunctionNamesCondition(rdoTwoSample, "lm", False)
+        ucrPnlModelType.AddFunctionNamesCondition(rdoGeneralCase, "lm")
+
 
         ucrPnlModelType.AddToLinkedControls(ucrModelPreview, {rdoGeneralCase}, bNewLinkedChangeToDefaultState:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrModelPreview.SetLinkedDisplayControl(lblModelPreview)
@@ -128,6 +132,7 @@ Public Class dlgRegressionSimple
     Private Sub SetDefaults()
         clsFormulaOperator = New ROperator
         clsPoissonOperation = New ROperator
+        clsRGraphicsOperator = New ROperator
 
         clsRLmOrGLM = New RFunction
         clsGLM = New RFunction
@@ -149,6 +154,8 @@ Public Class dlgRegressionSimple
         clsRWriteFitted = New RFunction
         clsRSummaryFunction = New RFunction
         clsRanovaFunction = New RFunction
+        clsRResidualPlots = New RFunction
+        clsRgeom_point = New RFunction
         'clsFormulaOperator = clsRegressionDefaults.clsDefaultFormulaOperator.Clone
 
         ucrSelectorSimpleReg.Reset()
@@ -157,17 +164,28 @@ Public Class dlgRegressionSimple
         ucrModelPreview.Reset()
 
 
+
         DataTypeAccepted()
 
-        clsFormulaOperator = clsRegressionDefaults.clsDefaultFormulaOperator
+        clsRGraphicsOperator = clsRegressionDefaults.clsDefaultRGraphicsOperator.Clone
+        clsFormulaOperator = clsRegressionDefaults.clsDefaultFormulaOperator.Clone
+        clsRGraphicsOperator.iCallType = 3
 
         clsRLmOrGLM = clsRegressionDefaults.clsDefaultRLmOrGLM.Clone
         clsRLmOrGLM.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
+
+        'Residual Plots
+        clsRResidualPlots = clsRegressionDefaults.clsDefaultRResidualPlots.Clone
+        clsRResidualPlots.AddParameter("object", clsRFunctionParameter:=clsRLmOrGLM)
+
+        clsRgeom_point = clsRegressionDefaults.clsDefaultRgeom_pointFunction.Clone
+
 
         clsRaovFunction.SetPackageName("stats")
         clsRaovFunction.SetRCommand("anova")
         clsRaovFunction.AddParameter("", clsRFunctionParameter:=clsRLmOrGLM)
         clsRaovFunction.iCallType = 2
+
 
         'Model
         clsRModelsFunction = clsRegressionDefaults.clsDefaultModel.Clone
@@ -288,7 +306,7 @@ Public Class dlgRegressionSimple
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
         Display()
-        sdgSimpleRegOptions.SetRCode(ucrBase.clsRsyntax, clsNewRanovaFunction:=clsRanovaFunction, clsNewRSummaryFunction:=clsRSummaryFunction, clsNewRConfint:=clsRConfint, clsNewRModelsFunction:=clsRModelsFunction, clsNewRaovpvalFunction:=clsRaovpvalFunction, clsNewRestpvalFunction:=clsRestpvalFunction, clsNewRLmOrGLM:=clsRLmOrGLM, clsNewRXVariable:=clsRXVariable, clsNewRYVariable:=clsRYVariable, clsNewRWriteFitted:=clsRWriteFitted, clsNewRFittedValues:=clsRFittedValues, bReset:=bResetOptionsSubDialog)
+        sdgSimpleRegOptions.SetRCode(ucrBase.clsRsyntax, clsNewRGraphicsOperator:=clsRGraphicsOperator, clsNewRanovaFunction:=clsRanovaFunction, clsNewRSummaryFunction:=clsRSummaryFunction, clsNewRgeom_point:=clsRgeom_point, clsNewRResidualPlots:=clsRResidualPlots, clsNewRConfint:=clsRConfint, clsNewRModelsFunction:=clsRModelsFunction, clsNewRaovpvalFunction:=clsRaovpvalFunction, clsNewRestpvalFunction:=clsRestpvalFunction, clsNewRLmOrGLM:=clsRLmOrGLM, clsNewRXVariable:=clsRXVariable, clsNewRYVariable:=clsRYVariable, clsNewRWriteFitted:=clsRWriteFitted, clsNewRFittedValues:=clsRFittedValues, bReset:=bResetOptionsSubDialog)
         bResetOptionsSubDialog = False
         sdgSimpleRegOptions.ShowDialog()
     End Sub
