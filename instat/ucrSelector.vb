@@ -122,7 +122,7 @@ Public Class ucrSelector
     End Sub
 
     Public Sub AddAll()
-        If CurrentReceiver IsNot Nothing AndAlso (lstAvailableVariable.SelectedItems.Count > 0) Then
+        If CurrentReceiver IsNot Nothing Then
             SelectAll()
             Add()
         End If
