@@ -13,7 +13,6 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 
 Public Class dlgStartofRains
@@ -33,7 +32,6 @@ Public Class dlgStartofRains
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private strWetSpell As String = "wet_spell"
-    Private strRollSumRain As String = "roll_sum_Rain"
 
     Private Sub dlgStartofRains_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -106,7 +104,7 @@ Public Class dlgStartofRains
         ucrPnlTRCalculateBy.AddRadioButton(rdoTRPercentile)
         ucrPnlTRCalculateBy.AddParameterPresentCondition(rdoTRAmount, "sub4", False)
         ucrPnlTRCalculateBy.AddParameterPresentCondition(rdoTRPercentile, "sub4")
-        ucrPnlTRCalculateBy.AddToLinkedControls(ucrNudTRPercentile, {rdoTRPercentile}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.85)
+        ucrPnlTRCalculateBy.AddToLinkedControls(ucrNudTRPercentile, {rdoTRPercentile}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.8)
         ucrPnlTRCalculateBy.AddToLinkedControls(ucrNudTRAmount, {rdoTRAmount}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=20)
         ucrPnlTRCalculateBy.SetLinkedDisplayControl(lblTRVal)
         ucrPnlTRCalculateBy.AddParameterPresentCondition(rdoTRPercentile, "TRPerc")
@@ -194,6 +192,7 @@ Public Class dlgStartofRains
         Dim strRainInDays As String = "Rain_in_Days"
         Dim strAboveThreshold As String = "Above_Threshold"
         Dim strDPOverallIntervalRain As String = "DP_Overall_Interval_Rain"
+        Dim strRollSumRain As String = "roll_sum_Rain"
 
         clsAddKey.Clear()
         clsAddKeyColName.Clear()
@@ -457,7 +456,6 @@ Public Class dlgStartofRains
         clsRainCombineOperator.AddParameter("rainThreshold", 0.85, iPosition:=1)
 
         ' run if chkTR is checked
-        '        clsCombineOperator.AddParameter("totalrainfall", clsROperatorParameter:=clsTRCombineOperator, iPosition:=1)
         clsTRCombineOperator.SetOperation(">")
         clsTRCombineOperator.AddParameter("TRLeft", strRollSumRain, iPosition:=0)
 
@@ -498,11 +496,6 @@ Public Class dlgStartofRains
         'DefaultNudValue()
     End Sub
 
-    ' in the lead, this Is because we want to count the NEXT x days with less than y days of rain. Without lead, we were counting the current day
-    '2. If the user wishes to start from day 122, then the nud can say 122. BUT, the value that we call has to be 121. This can be fixed properly when we have more time, but for now will do
-    ' does that start from 122 mess up the lead()??
-    ' add to start of rains to sort the order at the end
-
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverDOY.AddAdditionalCodeParameterPair(clsDayFromOperator, New RParameter("doy", 0), iAdditionalPairNo:=1)
         ucrReceiverDOY.AddAdditionalCodeParameterPair(clsFirstDOYPerYearOperator, New RParameter("doy", 0), iAdditionalPairNo:=2)
@@ -513,7 +506,7 @@ Public Class dlgStartofRains
         ucrNudThreshold.AddAdditionalCodeParameterPair(clsRainCombineOperator, New RParameter("rainThreshold", 1), iAdditionalPairNo:=1)
         ucrNudDPRainPeriod.AddAdditionalCodeParameterPair(clsDPOverallIntervalFunctionOperatorRight, New RParameter("Rain", 0), iAdditionalPairNo:=1)
 
-        ucrReceiverDOY.SetRCode(clsDayToOperator, bReset) ' false in these brackets, when in initialise
+        ucrReceiverDOY.SetRCode(clsDayToOperator, bReset)
         ucrNudFrom.SetRCode(clsDayFromOperator, bReset)
         ucrNudTo.SetRCode(clsDayToOperator, bReset)
 
