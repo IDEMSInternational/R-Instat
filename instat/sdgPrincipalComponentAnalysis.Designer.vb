@@ -1,5 +1,4 @@
-﻿
-<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class sdgPrincipalComponentAnalysis
     Inherits System.Windows.Forms.Form
 
@@ -25,38 +24,38 @@ Partial Class sdgPrincipalComponentAnalysis
     Private Sub InitializeComponent()
         Me.tbRegOptions = New System.Windows.Forms.TabControl()
         Me.tbDisplay = New System.Windows.Forms.TabPage()
-        Me.chkRotation = New System.Windows.Forms.CheckBox()
-        Me.chkEigenVectors = New System.Windows.Forms.CheckBox()
-        Me.chkEigenValues = New System.Windows.Forms.CheckBox()
         Me.tbGraphics = New System.Windows.Forms.TabPage()
         Me.rdoBarPlot = New System.Windows.Forms.RadioButton()
         Me.rdoIndividualsPlot = New System.Windows.Forms.RadioButton()
         Me.grpScree = New System.Windows.Forms.GroupBox()
-        Me.ucrLabel = New instat.ucrInputComboBox()
-        Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
         Me.lblFactorVariable = New System.Windows.Forms.Label()
-        Me.ucrSelectorFactor = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblChoiceScree = New System.Windows.Forms.Label()
-        Me.chkPercentageScree = New System.Windows.Forms.CheckBox()
         Me.grpGeom = New System.Windows.Forms.GroupBox()
         Me.rdoBoth = New System.Windows.Forms.RadioButton()
         Me.rdoTwo = New System.Windows.Forms.RadioButton()
         Me.rdoOne = New System.Windows.Forms.RadioButton()
         Me.lblDim = New System.Windows.Forms.Label()
-        Me.nudDim1 = New System.Windows.Forms.NumericUpDown()
-        Me.nudDim2 = New System.Windows.Forms.NumericUpDown()
         Me.rdoBiplot = New System.Windows.Forms.RadioButton()
         Me.rdoVariablesPlot = New System.Windows.Forms.RadioButton()
         Me.rdoScreePlot = New System.Windows.Forms.RadioButton()
         Me.tbSave = New System.Windows.Forms.TabPage()
+        Me.ucrChkRotation = New instat.ucrCheck()
+        Me.ucrChkEigenvectors = New instat.ucrCheck()
+        Me.ucrChkEigenvalues = New instat.ucrCheck()
+        Me.ucrSelectorFactor = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrChkIncludePercentage = New instat.ucrCheck()
+        Me.ucrNudDim2 = New instat.ucrNud()
+        Me.ucrNudDim = New instat.ucrNud()
+        Me.ucrLabel = New instat.ucrInputComboBox()
+        Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
+        Me.ucrPnlGeom = New instat.UcrPanel()
+        Me.ucrPnlGraphics = New instat.UcrPanel()
         Me.ucrSdgButtons = New instat.ucrButtonsSubdialogue()
         Me.tbRegOptions.SuspendLayout()
         Me.tbDisplay.SuspendLayout()
         Me.tbGraphics.SuspendLayout()
         Me.grpScree.SuspendLayout()
         Me.grpGeom.SuspendLayout()
-        CType(Me.nudDim1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.nudDim2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'tbRegOptions
@@ -72,9 +71,9 @@ Partial Class sdgPrincipalComponentAnalysis
         '
         'tbDisplay
         '
-        Me.tbDisplay.Controls.Add(Me.chkRotation)
-        Me.tbDisplay.Controls.Add(Me.chkEigenVectors)
-        Me.tbDisplay.Controls.Add(Me.chkEigenValues)
+        Me.tbDisplay.Controls.Add(Me.ucrChkRotation)
+        Me.tbDisplay.Controls.Add(Me.ucrChkEigenvectors)
+        Me.tbDisplay.Controls.Add(Me.ucrChkEigenvalues)
         Me.tbDisplay.Location = New System.Drawing.Point(4, 22)
         Me.tbDisplay.Name = "tbDisplay"
         Me.tbDisplay.Padding = New System.Windows.Forms.Padding(3)
@@ -84,39 +83,6 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbDisplay.Text = "Display"
         Me.tbDisplay.UseVisualStyleBackColor = True
         '
-        'chkRotation
-        '
-        Me.chkRotation.AutoSize = True
-        Me.chkRotation.Location = New System.Drawing.Point(10, 60)
-        Me.chkRotation.Name = "chkRotation"
-        Me.chkRotation.Size = New System.Drawing.Size(66, 17)
-        Me.chkRotation.TabIndex = 2
-        Me.chkRotation.Tag = "Rotation"
-        Me.chkRotation.Text = "Rotation"
-        Me.chkRotation.UseVisualStyleBackColor = True
-        '
-        'chkEigenVectors
-        '
-        Me.chkEigenVectors.AutoSize = True
-        Me.chkEigenVectors.Location = New System.Drawing.Point(10, 37)
-        Me.chkEigenVectors.Name = "chkEigenVectors"
-        Me.chkEigenVectors.Size = New System.Drawing.Size(88, 17)
-        Me.chkEigenVectors.TabIndex = 1
-        Me.chkEigenVectors.Tag = "Eigen_Vectors"
-        Me.chkEigenVectors.Text = "Eigenvectors"
-        Me.chkEigenVectors.UseVisualStyleBackColor = True
-        '
-        'chkEigenValues
-        '
-        Me.chkEigenValues.AutoSize = True
-        Me.chkEigenValues.Location = New System.Drawing.Point(10, 14)
-        Me.chkEigenValues.Name = "chkEigenValues"
-        Me.chkEigenValues.Size = New System.Drawing.Size(84, 17)
-        Me.chkEigenValues.TabIndex = 0
-        Me.chkEigenValues.Tag = "Eigen_Values"
-        Me.chkEigenValues.Text = "Eigenvalues"
-        Me.chkEigenValues.UseVisualStyleBackColor = True
-        '
         'tbGraphics
         '
         Me.tbGraphics.Controls.Add(Me.rdoBarPlot)
@@ -125,6 +91,7 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbGraphics.Controls.Add(Me.rdoBiplot)
         Me.tbGraphics.Controls.Add(Me.rdoVariablesPlot)
         Me.tbGraphics.Controls.Add(Me.rdoScreePlot)
+        Me.tbGraphics.Controls.Add(Me.ucrPnlGraphics)
         Me.tbGraphics.Location = New System.Drawing.Point(4, 22)
         Me.tbGraphics.Name = "tbGraphics"
         Me.tbGraphics.Padding = New System.Windows.Forms.Padding(3)
@@ -158,39 +125,22 @@ Partial Class sdgPrincipalComponentAnalysis
         '
         'grpScree
         '
+        Me.grpScree.Controls.Add(Me.ucrSelectorFactor)
+        Me.grpScree.Controls.Add(Me.ucrChkIncludePercentage)
+        Me.grpScree.Controls.Add(Me.ucrNudDim2)
+        Me.grpScree.Controls.Add(Me.ucrNudDim)
         Me.grpScree.Controls.Add(Me.ucrLabel)
         Me.grpScree.Controls.Add(Me.ucrReceiverFactor)
         Me.grpScree.Controls.Add(Me.lblFactorVariable)
-        Me.grpScree.Controls.Add(Me.ucrSelectorFactor)
         Me.grpScree.Controls.Add(Me.lblChoiceScree)
-        Me.grpScree.Controls.Add(Me.chkPercentageScree)
         Me.grpScree.Controls.Add(Me.grpGeom)
         Me.grpScree.Controls.Add(Me.lblDim)
-        Me.grpScree.Controls.Add(Me.nudDim1)
-        Me.grpScree.Controls.Add(Me.nudDim2)
         Me.grpScree.Location = New System.Drawing.Point(10, 136)
         Me.grpScree.Name = "grpScree"
         Me.grpScree.Size = New System.Drawing.Size(365, 212)
         Me.grpScree.TabIndex = 34
         Me.grpScree.TabStop = False
         Me.grpScree.Text = "Plot Options"
-        '
-        'ucrLabel
-        '
-        Me.ucrLabel.IsReadOnly = False
-        Me.ucrLabel.Location = New System.Drawing.Point(55, 101)
-        Me.ucrLabel.Name = "ucrLabel"
-        Me.ucrLabel.Size = New System.Drawing.Size(137, 21)
-        Me.ucrLabel.TabIndex = 18
-        '
-        'ucrReceiverFactor
-        '
-        Me.ucrReceiverFactor.Location = New System.Drawing.Point(228, 50)
-        Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
-        Me.ucrReceiverFactor.Selector = Nothing
-        Me.ucrReceiverFactor.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverFactor.TabIndex = 5
         '
         'lblFactorVariable
         '
@@ -202,16 +152,6 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.lblFactorVariable.Tag = "Factor_Variable"
         Me.lblFactorVariable.Text = "Factor Variable:"
         '
-        'ucrSelectorFactor
-        '
-        Me.ucrSelectorFactor.bShowHiddenColumns = False
-        Me.ucrSelectorFactor.bUseCurrentFilter = True
-        Me.ucrSelectorFactor.Location = New System.Drawing.Point(10, 16)
-        Me.ucrSelectorFactor.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorFactor.Name = "ucrSelectorFactor"
-        Me.ucrSelectorFactor.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorFactor.TabIndex = 3
-        '
         'lblChoiceScree
         '
         Me.lblChoiceScree.AutoSize = True
@@ -221,21 +161,12 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.lblChoiceScree.TabIndex = 8
         Me.lblChoiceScree.Tag = "Choice:"
         '
-        'chkPercentageScree
-        '
-        Me.chkPercentageScree.AutoSize = True
-        Me.chkPercentageScree.Location = New System.Drawing.Point(10, 71)
-        Me.chkPercentageScree.Name = "chkPercentageScree"
-        Me.chkPercentageScree.Size = New System.Drawing.Size(124, 17)
-        Me.chkPercentageScree.TabIndex = 15
-        Me.chkPercentageScree.Text = "Include Percentages"
-        Me.chkPercentageScree.UseVisualStyleBackColor = True
-        '
         'grpGeom
         '
         Me.grpGeom.Controls.Add(Me.rdoBoth)
         Me.grpGeom.Controls.Add(Me.rdoTwo)
         Me.grpGeom.Controls.Add(Me.rdoOne)
+        Me.grpGeom.Controls.Add(Me.ucrPnlGeom)
         Me.grpGeom.Location = New System.Drawing.Point(11, 18)
         Me.grpGeom.Name = "grpGeom"
         Me.grpGeom.Size = New System.Drawing.Size(197, 45)
@@ -284,20 +215,6 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.lblDim.TabIndex = 15
         Me.lblDim.Text = "Dimensions to Plot:"
         '
-        'nudDim1
-        '
-        Me.nudDim1.Location = New System.Drawing.Point(110, 70)
-        Me.nudDim1.Name = "nudDim1"
-        Me.nudDim1.Size = New System.Drawing.Size(41, 20)
-        Me.nudDim1.TabIndex = 16
-        '
-        'nudDim2
-        '
-        Me.nudDim2.Location = New System.Drawing.Point(165, 70)
-        Me.nudDim2.Name = "nudDim2"
-        Me.nudDim2.Size = New System.Drawing.Size(41, 20)
-        Me.nudDim2.TabIndex = 17
-        '
         'rdoBiplot
         '
         Me.rdoBiplot.AutoSize = True
@@ -344,6 +261,107 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbSave.Text = "Save"
         Me.tbSave.UseVisualStyleBackColor = True
         '
+        'ucrChkRotation
+        '
+        Me.ucrChkRotation.Checked = False
+        Me.ucrChkRotation.Location = New System.Drawing.Point(18, 67)
+        Me.ucrChkRotation.Name = "ucrChkRotation"
+        Me.ucrChkRotation.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkRotation.TabIndex = 5
+        '
+        'ucrChkEigenvectors
+        '
+        Me.ucrChkEigenvectors.Checked = False
+        Me.ucrChkEigenvectors.Location = New System.Drawing.Point(18, 41)
+        Me.ucrChkEigenvectors.Name = "ucrChkEigenvectors"
+        Me.ucrChkEigenvectors.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkEigenvectors.TabIndex = 4
+        '
+        'ucrChkEigenvalues
+        '
+        Me.ucrChkEigenvalues.Checked = False
+        Me.ucrChkEigenvalues.Location = New System.Drawing.Point(18, 15)
+        Me.ucrChkEigenvalues.Name = "ucrChkEigenvalues"
+        Me.ucrChkEigenvalues.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkEigenvalues.TabIndex = 3
+        '
+        'ucrSelectorFactor
+        '
+        Me.ucrSelectorFactor.bShowHiddenColumns = False
+        Me.ucrSelectorFactor.bUseCurrentFilter = True
+        Me.ucrSelectorFactor.Location = New System.Drawing.Point(10, 18)
+        Me.ucrSelectorFactor.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorFactor.Name = "ucrSelectorFactor"
+        Me.ucrSelectorFactor.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorFactor.TabIndex = 3
+        '
+        'ucrChkIncludePercentage
+        '
+        Me.ucrChkIncludePercentage.Checked = False
+        Me.ucrChkIncludePercentage.Location = New System.Drawing.Point(11, 70)
+        Me.ucrChkIncludePercentage.Name = "ucrChkIncludePercentage"
+        Me.ucrChkIncludePercentage.Size = New System.Drawing.Size(138, 20)
+        Me.ucrChkIncludePercentage.TabIndex = 21
+        '
+        'ucrNudDim2
+        '
+        Me.ucrNudDim2.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDim2.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudDim2.Location = New System.Drawing.Point(175, 70)
+        Me.ucrNudDim2.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudDim2.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDim2.Name = "ucrNudDim2"
+        Me.ucrNudDim2.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudDim2.TabIndex = 20
+        Me.ucrNudDim2.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudDim
+        '
+        Me.ucrNudDim.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDim.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudDim.Location = New System.Drawing.Point(110, 70)
+        Me.ucrNudDim.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudDim.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDim.Name = "ucrNudDim"
+        Me.ucrNudDim.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudDim.TabIndex = 19
+        Me.ucrNudDim.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrLabel
+        '
+        Me.ucrLabel.AddQuotesIfUnrecognised = True
+        Me.ucrLabel.IsReadOnly = False
+        Me.ucrLabel.Location = New System.Drawing.Point(55, 101)
+        Me.ucrLabel.Name = "ucrLabel"
+        Me.ucrLabel.Size = New System.Drawing.Size(137, 21)
+        Me.ucrLabel.TabIndex = 18
+        '
+        'ucrReceiverFactor
+        '
+        Me.ucrReceiverFactor.frmParent = Nothing
+        Me.ucrReceiverFactor.Location = New System.Drawing.Point(228, 50)
+        Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
+        Me.ucrReceiverFactor.Selector = Nothing
+        Me.ucrReceiverFactor.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverFactor.strNcFilePath = ""
+        Me.ucrReceiverFactor.TabIndex = 5
+        Me.ucrReceiverFactor.ucrSelector = Nothing
+        '
+        'ucrPnlGeom
+        '
+        Me.ucrPnlGeom.Location = New System.Drawing.Point(4, 17)
+        Me.ucrPnlGeom.Name = "ucrPnlGeom"
+        Me.ucrPnlGeom.Size = New System.Drawing.Size(191, 22)
+        Me.ucrPnlGeom.TabIndex = 3
+        '
+        'ucrPnlGraphics
+        '
+        Me.ucrPnlGraphics.Location = New System.Drawing.Point(3, 6)
+        Me.ucrPnlGraphics.Name = "ucrPnlGraphics"
+        Me.ucrPnlGraphics.Size = New System.Drawing.Size(167, 124)
+        Me.ucrPnlGraphics.TabIndex = 4
+        '
         'ucrSdgButtons
         '
         Me.ucrSdgButtons.Location = New System.Drawing.Point(116, 385)
@@ -355,7 +373,7 @@ Partial Class sdgPrincipalComponentAnalysis
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(399, 412)
+        Me.ClientSize = New System.Drawing.Size(395, 412)
         Me.Controls.Add(Me.tbRegOptions)
         Me.Controls.Add(Me.ucrSdgButtons)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -367,15 +385,12 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.Text = "PCA Options"
         Me.tbRegOptions.ResumeLayout(False)
         Me.tbDisplay.ResumeLayout(False)
-        Me.tbDisplay.PerformLayout()
         Me.tbGraphics.ResumeLayout(False)
         Me.tbGraphics.PerformLayout()
         Me.grpScree.ResumeLayout(False)
         Me.grpScree.PerformLayout()
         Me.grpGeom.ResumeLayout(False)
         Me.grpGeom.PerformLayout()
-        CType(Me.nudDim1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.nudDim2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -384,15 +399,12 @@ Partial Class sdgPrincipalComponentAnalysis
     Friend WithEvents tbRegOptions As TabControl
     Friend WithEvents tbDisplay As TabPage
     Friend WithEvents tbGraphics As TabPage
-    Friend WithEvents chkEigenValues As CheckBox
-    Friend WithEvents chkEigenVectors As CheckBox
     Friend WithEvents tbSave As TabPage
     Friend WithEvents rdoIndividualsPlot As RadioButton
     Friend WithEvents rdoBiplot As RadioButton
     Friend WithEvents rdoVariablesPlot As RadioButton
     Friend WithEvents rdoScreePlot As RadioButton
     Friend WithEvents rdoBarPlot As RadioButton
-    Friend WithEvents chkRotation As CheckBox
     Friend WithEvents ucrSelectorFactor As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblFactorVariable As Label
     Friend WithEvents lblChoiceScree As Label
@@ -400,11 +412,16 @@ Partial Class sdgPrincipalComponentAnalysis
     Friend WithEvents rdoBoth As RadioButton
     Friend WithEvents rdoTwo As RadioButton
     Friend WithEvents rdoOne As RadioButton
-    Friend WithEvents nudDim2 As NumericUpDown
-    Friend WithEvents nudDim1 As NumericUpDown
     Friend WithEvents lblDim As Label
-    Friend WithEvents chkPercentageScree As CheckBox
     Friend WithEvents ucrReceiverFactor As ucrReceiverSingle
     Friend WithEvents grpScree As GroupBox
     Friend WithEvents ucrLabel As ucrInputComboBox
+    Friend WithEvents ucrChkRotation As ucrCheck
+    Friend WithEvents ucrChkEigenvectors As ucrCheck
+    Friend WithEvents ucrChkEigenvalues As ucrCheck
+    Friend WithEvents ucrNudDim2 As ucrNud
+    Friend WithEvents ucrNudDim As ucrNud
+    Friend WithEvents ucrPnlGeom As UcrPanel
+    Friend WithEvents ucrPnlGraphics As UcrPanel
+    Friend WithEvents ucrChkIncludePercentage As ucrCheck
 End Class
