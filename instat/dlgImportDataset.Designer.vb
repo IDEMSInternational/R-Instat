@@ -415,7 +415,6 @@ Partial Class dlgImportDataset
         '
         'ucrInputMaxRowsExcel
         '
-        Me.ucrInputMaxRowsExcel.AddQuotesIfUnrecognised = True
         Me.ucrInputMaxRowsExcel.IsMultiline = False
         Me.ucrInputMaxRowsExcel.IsReadOnly = False
         Me.ucrInputMaxRowsExcel.Location = New System.Drawing.Point(6, 194)
@@ -425,7 +424,6 @@ Partial Class dlgImportDataset
         '
         'ucrInputMissingValueStringExcel
         '
-        Me.ucrInputMissingValueStringExcel.AddQuotesIfUnrecognised = True
         Me.ucrInputMissingValueStringExcel.IsMultiline = False
         Me.ucrInputMissingValueStringExcel.IsReadOnly = False
         Me.ucrInputMissingValueStringExcel.Location = New System.Drawing.Point(10, 90)
@@ -435,7 +433,6 @@ Partial Class dlgImportDataset
         '
         'ucrInputNamedRegions
         '
-        Me.ucrInputNamedRegions.AddQuotesIfUnrecognised = True
         Me.ucrInputNamedRegions.IsReadOnly = False
         Me.ucrInputNamedRegions.Location = New System.Drawing.Point(10, 90)
         Me.ucrInputNamedRegions.Name = "ucrInputNamedRegions"
@@ -444,7 +441,6 @@ Partial Class dlgImportDataset
         '
         'ucrInputSelectSheetExcel
         '
-        Me.ucrInputSelectSheetExcel.AddQuotesIfUnrecognised = True
         Me.ucrInputSelectSheetExcel.IsReadOnly = False
         Me.ucrInputSelectSheetExcel.Location = New System.Drawing.Point(6, 43)
         Me.ucrInputSelectSheetExcel.Name = "ucrInputSelectSheetExcel"
@@ -543,7 +539,6 @@ Partial Class dlgImportDataset
         '
         'ucrInputHeadersCSV
         '
-        Me.ucrInputHeadersCSV.AddQuotesIfUnrecognised = True
         Me.ucrInputHeadersCSV.IsReadOnly = False
         Me.ucrInputHeadersCSV.Location = New System.Drawing.Point(9, 82)
         Me.ucrInputHeadersCSV.Name = "ucrInputHeadersCSV"
@@ -552,7 +547,6 @@ Partial Class dlgImportDataset
         '
         'ucrInputNAStringsCSV
         '
-        Me.ucrInputNAStringsCSV.AddQuotesIfUnrecognised = True
         Me.ucrInputNAStringsCSV.IsMultiline = False
         Me.ucrInputNAStringsCSV.IsReadOnly = False
         Me.ucrInputNAStringsCSV.Location = New System.Drawing.Point(117, 236)
@@ -562,7 +556,6 @@ Partial Class dlgImportDataset
         '
         'ucrInputDecimalCSV
         '
-        Me.ucrInputDecimalCSV.AddQuotesIfUnrecognised = True
         Me.ucrInputDecimalCSV.IsReadOnly = False
         Me.ucrInputDecimalCSV.Location = New System.Drawing.Point(74, 196)
         Me.ucrInputDecimalCSV.Name = "ucrInputDecimalCSV"
@@ -571,7 +564,6 @@ Partial Class dlgImportDataset
         '
         'ucrInputSeparatorCSV
         '
-        Me.ucrInputSeparatorCSV.AddQuotesIfUnrecognised = True
         Me.ucrInputSeparatorCSV.IsReadOnly = False
         Me.ucrInputSeparatorCSV.Location = New System.Drawing.Point(74, 154)
         Me.ucrInputSeparatorCSV.Name = "ucrInputSeparatorCSV"
@@ -580,7 +572,6 @@ Partial Class dlgImportDataset
         '
         'ucrInputEncodingCSV
         '
-        Me.ucrInputEncodingCSV.AddQuotesIfUnrecognised = True
         Me.ucrInputEncodingCSV.IsReadOnly = False
         Me.ucrInputEncodingCSV.Location = New System.Drawing.Point(62, 25)
         Me.ucrInputEncodingCSV.Name = "ucrInputEncodingCSV"
@@ -589,7 +580,6 @@ Partial Class dlgImportDataset
         '
         'ucrInputFilePath
         '
-        Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
         Me.ucrInputFilePath.IsMultiline = False
         Me.ucrInputFilePath.IsReadOnly = False
         Me.ucrInputFilePath.Location = New System.Drawing.Point(39, 23)
