@@ -14,49 +14,67 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
-Imports System.IO
 Imports RDotNet
 
 Public Class dlgFromLibrary
-    Dim strLibraryTemp As String = "dfLibrary"
-    Dim strPackages As String = "dfPackagesList"
-    Dim strLibraryPath As String = frmMain.strStaticPath & "\" & "Library"
-    Dim bFirstLoad As Boolean = True
-    Dim clsDataFunction As New RFunction
-
+    Private strLibraryTemp As String = "dfLibrary"
+    Private strPackages As String = "dfPackagesList"
+    Private strLibraryPath As String = frmMain.strStaticPath & "\" & "Library"
+    Private bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
+    Private clsDataFunction As New RFunction
+    Private dctPackages As New Dictionary(Of String, String)
     Private Sub dlgFromLibrary_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
-            '
-            SetDefaults()
             bFirstLoad = False
         End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeforControls(bReset)
+        bReset = False
         TestOkEnabled()
     End Sub
-
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        ucrInputPackages.SetRCode(clsDataFunction, bReset)
+        ucrPnlOptions.SetRCode(clsDataFunction, bReset)
+    End Sub
     Private Sub SetDefaults()
-        rdoDefaultDatasets.Checked = True
-        cboPackages.SelectedItem = "datasets"
-        loadDatasets(cboPackages.SelectedItem.ToString)
+        loadDatasets(ucrInputPackages.GetText)
+        ucrInputPackages.SetName("datasets")
         EnableHelp()
+        cmdLibraryCollection.Visible = False
+        clsDataFunction.SetPackageName("utils")
+        clsDataFunction.SetRCommand("data")
+        clsDataFunction.AddParameter("package", Chr(34) & "datasets" & Chr(34))
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDataFunction)
     End Sub
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 156
-        'fills the combo box
-        clsDataFunction.SetPackageName("utils")
-        clsDataFunction.SetRCommand("data")
+        ucrInputPackages.SetParameter(New RParameter("package"))
         FillPackagesCombo()
-        'TODO remove once control is updated
-        cboPackages.DropDownStyle = ComboBoxStyle.DropDownList
-        cboPackages.AutoCompleteMode = AutoCompleteMode.None
-        cboPackages.AutoCompleteSource = AutoCompleteSource.None
         lstCollection.HideSelection = False
+        ucrInputPackages.cboInput.DropDownStyle = ComboBoxStyle.DropDownList
+        ucrInputPackages.cboInput.AutoCompleteMode = AutoCompleteMode.None
+        ucrInputPackages.cboInput.AutoCompleteSource = AutoCompleteSource.None
+
+        ucrInputPackages.SetDropDownStyleAsNonEditable()
+        ucrPnlOptions.AddRadioButton(rdoDefaultDatasets)
+        ucrPnlOptions.AddRadioButton(rdoInstatCollection)
+        ucrPnlOptions.bAllowNonConditionValues = True
+        ucrPnlOptions.AddParameterPresentCondition(rdoDefaultDatasets, "package", True)
+        ucrPnlOptions.AddParameterPresentCondition(rdoInstatCollection, "package", False)
+        ucrPnlOptions.AddToLinkedControls(ucrInputPackages, {rdoDefaultDatasets}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrInputPackages.SetLinkedDisplayControl(lblFromPackage)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeforControls(bReset)
+        TestOkEnabled()
     End Sub
 
     Private Sub cmdLibraryCollection_Click(sender As Object, e As EventArgs) Handles cmdLibraryCollection.Click
@@ -66,19 +84,18 @@ Public Class dlgFromLibrary
         Me.Hide()
     End Sub
 
-    Private Sub rdoDefaultDatasets_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDefaultDatasets.CheckedChanged, rdoInstatCollection.CheckedChanged
+    Private Sub rdoDefaultDatasets_CheckedChanged() Handles ucrPnlOptions.ControlValueChanged
+        'this is done manually as because lstCollection doesnt inherit from core 
         If rdoDefaultDatasets.Checked Then
-            cboPackages.Enabled = True
+            ucrInputPackages.Enabled = True
             lstCollection.Enabled = True
-            grpCollection.Enabled = False
             If Not bFirstLoad Then
-                loadDatasets(cboPackages.SelectedItem.ToString)
+                loadDatasets(ucrInputPackages.GetText.ToString)
+            ElseIf rdoInstatCollection.Checked Then
+                lstCollection.Items.Clear()
+                lstCollection.Enabled = False
+                ucrInputPackages.Enabled = False
             End If
-        ElseIf rdoInstatCollection.Checked Then
-            lstCollection.Items.Clear()
-            lstCollection.Enabled = False
-            cboPackages.Enabled = False
-            grpCollection.Enabled = True
         End If
         TestOkEnabled()
     End Sub
@@ -87,20 +104,72 @@ Public Class dlgFromLibrary
         Dim strTempHolder As String = "lsPackagesHolder"
         Dim i As Integer
         Dim lstAvailablePackages As String()
-        cboPackages.Items.Clear()
+        ucrInputPackages.Reset()
         'This is now a static list because
         lstAvailablePackages = {"datasets", "reshape2", "lubridate", "plyr", "dplyr", "rtf", "openxlsx", "ggplot2", "extRemes", "GGally", "agridat", "DAAG", "FactoMineR", "plotrix", "candisc", "R6", "openair", "circular", "survival", "Evapotranspiration", "clifro", "devtools", "factoextra", "circlize", "CircStats", "gridExtra", "ggfortify", "rio", "readxl", "lme4", "dummies", "ggthemes", "lazyeval", "stringr", "httr", "jsonlite", "fitdistrplus", "visreg", "climdex.pcic", "mosaic", "ncdf4", "getPass", "RMySQL", "DBI", "EnvStats", "signmedian.test", "sjPlot", "sjmisc", "plotly", "svglite", "htmlTable", "rje", "faraway"}
 
-        'lstAvailablePackages = frmMain.clsRLink.RunInternalScriptGetValue(strPackages & "<-(.packages())").AsCharacter
+        ''lstAvailablePackages = frmMain.clsRLink.RunInternalScriptGetValue(strPackages & "<-(.packages())").AsCharacter
+
         For i = 0 To lstAvailablePackages.Length - 1
             Try
                 If frmMain.clsRLink.RunInternalScriptGetValue("nrow(data(package = " & Chr(34) & lstAvailablePackages(i) & Chr(34) & ")$results)").AsInteger(0) > 0 Then
-                    cboPackages.Items.Add(lstAvailablePackages(i))
+                    ucrInputPackages.SetItems({lstAvailablePackages(i)})
                 End If
             Catch ex As Exception
 
             End Try
         Next
+        dctPackages.Add("datasets", Chr(34) & "datasets" & Chr(34))
+        dctPackages.Add("reshape2", Chr(34) & "reshape2" & Chr(34))
+        dctPackages.Add("lubridate", Chr(34) & "lubridate" & Chr(34))
+        dctPackages.Add("plyr", Chr(34) & "plyr" & Chr(34))
+        dctPackages.Add("dplyr", Chr(34) & "dplyr" & Chr(34))
+        dctPackages.Add("rtf", Chr(34) & "rtf" & Chr(34))
+        dctPackages.Add("openxlsx", Chr(34) & "openxlsx" & Chr(34))
+        dctPackages.Add("ggplot2", Chr(34) & "ggplot2" & Chr(34))
+        dctPackages.Add("extRemes", Chr(34) & "extRemes" & Chr(34))
+        dctPackages.Add("GGally", Chr(34) & "GGally" & Chr(34))
+        dctPackages.Add("agridat", Chr(34) & "agridat" & Chr(34))
+        dctPackages.Add("DAAG", Chr(34) & "DAAG" & Chr(34))
+        dctPackages.Add("FactoMineR", Chr(34) & "FactoMineR" & Chr(34))
+        dctPackages.Add("plotrix", Chr(34) & "plotrix" & Chr(34))
+        dctPackages.Add("candisc", Chr(34) & "candisc" & Chr(34))
+        dctPackages.Add("R6", Chr(34) & "R6" & Chr(34))
+        dctPackages.Add("openair", Chr(34) & "openair" & Chr(34))
+        dctPackages.Add("circular", Chr(34) & "circular" & Chr(34))
+        dctPackages.Add("survival", Chr(34) & "survival" & Chr(34))
+        dctPackages.Add("Evapotranspiration", Chr(34) & "Evapotranspiration" & Chr(34))
+        dctPackages.Add("clifro", Chr(34) & "clifro" & Chr(34))
+        dctPackages.Add("devtools", Chr(34) & "devtools" & Chr(34))
+        dctPackages.Add("factoextra", Chr(34) & "factoextra" & Chr(34))
+        dctPackages.Add("circlize", Chr(34) & "circlize" & Chr(34))
+        dctPackages.Add("CircStats", Chr(34) & "CircStats" & Chr(34))
+        dctPackages.Add("gridExtra", Chr(34) & "gridExtra" & Chr(34))
+        dctPackages.Add("rio", Chr(34) & "rio" & Chr(34))
+        dctPackages.Add("readxl", Chr(34) & "readxl" & Chr(34))
+        dctPackages.Add("lme4", Chr(34) & "lme4" & Chr(34))
+        dctPackages.Add("dummies", Chr(34) & "dummies" & Chr(34))
+        dctPackages.Add("ggthemes", Chr(34) & "ggthemes" & Chr(34))
+        dctPackages.Add("lazyeval", Chr(34) & "lazyeval" & Chr(34))
+        dctPackages.Add("stringr", Chr(34) & "stringr" & Chr(34))
+        dctPackages.Add("httr", Chr(34) & "httr" & Chr(34))
+        dctPackages.Add("jsonlite", Chr(34) & "jsonlite" & Chr(34))
+        dctPackages.Add("fitdistrplus", Chr(34) & "fitdistrplus" & Chr(34))
+        dctPackages.Add("visreg", Chr(34) & "visreg" & Chr(34))
+        dctPackages.Add("climdex.pcic", Chr(34) & "climdex.pcic" & Chr(34))
+        dctPackages.Add("mosaic", Chr(34) & "mosaic" & Chr(34))
+        dctPackages.Add("ncdf4", Chr(34) & "ncdf4" & Chr(34))
+        dctPackages.Add("getPass", Chr(34) & "getPass" & Chr(34))
+        dctPackages.Add("RMySQL", Chr(34) & "RMySQL" & Chr(34))
+        dctPackages.Add("DBI", Chr(34) & "DBI" & Chr(34))
+        dctPackages.Add("sjmisc", Chr(34) & "sjmisc" & Chr(34))
+        dctPackages.Add("plotly", Chr(34) & "plotly" & Chr(34))
+        dctPackages.Add("svglite", Chr(34) & "svglite" & Chr(34))
+        dctPackages.Add("htmlTable", Chr(34) & "htmlTable" & Chr(34))
+        dctPackages.Add("rje", Chr(34) & "rje" & Chr(34))
+        dctPackages.Add("faraway", Chr(34) & "faraway" & Chr(34))
+        ucrInputPackages.SetItems(dctPackages)
+        ucrInputPackages.SetDropDownStyleAsNonEditable()
     End Sub
 
     Private Sub FillListView(dfDataframe As DataFrame)
@@ -127,18 +196,15 @@ Public Class dlgFromLibrary
 
     End Sub
 
-    Private Sub cboPackages_SelectedValueChanged(sender As Object, e As EventArgs) Handles cboPackages.SelectedValueChanged
-        loadDatasets(cboPackages.SelectedItem.ToString)
-        clsDataFunction.AddParameter("package", Chr(34) & cboPackages.SelectedItem.ToString & Chr(34))
+    Private Sub cboPackages_SelectedValueChanged() Handles ucrInputPackages.ControlValueChanged
+        loadDatasets(ucrInputPackages.GetText())
         TestOkEnabled()
     End Sub
 
     Private Sub lstCollection_Click(sender As Object, e As EventArgs) Handles lstCollection.Click
         ucrBase.clsRsyntax.SetCommandString(chkString(lstCollection.SelectedItems(0).SubItems(0).Text))
         ucrBase.clsRsyntax.SetAssignTo(chkString(lstCollection.SelectedItems(0).SubItems(0).Text), strTempDataframe:=chkString(lstCollection.SelectedItems(0).SubItems(0).Text))
-        'ucrBase.clsRsyntax.AddParameter("x", chkString(lstCollection.SelectedItems(0).SubItems(0).Text))
         clsDataFunction.AddParameter("X", chkString(lstCollection.SelectedItems(0).SubItems(0).Text))
-
         TestOkEnabled()
     End Sub
 
@@ -162,6 +228,7 @@ Public Class dlgFromLibrary
     End Function
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
+        'i leave this this way, because we dont have an option of adding strComment on AddToBeforeCodes
         Dim bChecked As Boolean
         bChecked = ucrBase.chkComment.Checked
         If bChecked Then
@@ -176,11 +243,10 @@ Public Class dlgFromLibrary
         clsHelp.SetPackageName("utils")
         clsHelp.SetRCommand("help")
         clsHelp.AddParameter("topic", Chr(34) & lstCollection.SelectedItems(0).Text & Chr(34))
-        clsHelp.AddParameter("package", Chr(34) & cboPackages.SelectedItem & Chr(34))
+        clsHelp.AddParameter("package", Chr(34) & ucrInputPackages.cboInput.SelectedItem & Chr(34))
         clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
         frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:=" dlgOpenFromLibrary Opening help page for" & " " & lstCollection.SelectedItems(0).Text & " " & "dataset")
     End Sub
-
     Private Sub EnableHelp()
         If rdoDefaultDatasets.Checked AndAlso lstCollection.SelectedItems.Count > 0 Then
             cmdHelp.Enabled = True
@@ -189,4 +255,14 @@ Public Class dlgFromLibrary
         End If
     End Sub
 
+    Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged
+        'lstCollection and cmdLibraryCollection are not core so have to be shown manually 
+        If rdoDefaultDatasets.Checked Then
+            lstCollection.Visible = True
+            cmdLibraryCollection.Visible = False
+        Else
+            lstCollection.Visible = False
+            cmdLibraryCollection.Visible = True
+        End If
+    End Sub
 End Class
