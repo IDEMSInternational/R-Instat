@@ -218,7 +218,7 @@ Partial Class sdgCorrPlot
         '
         Me.ucrNudAlpha.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudAlpha.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudAlpha.Location = New System.Drawing.Point(42, 10)
+        Me.ucrNudAlpha.Location = New System.Drawing.Point(45, 10)
         Me.ucrNudAlpha.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudAlpha.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudAlpha.Name = "ucrNudAlpha"

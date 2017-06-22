@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgCorrelation
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
-    Public clsCorrelationTestFunction, clsRGGcorrGraphicsFunction, clsRGraphicsFuction, clsRGGscatmatrix, clsCorrelationFunction As New RFunction
+    Public clsCorrelationTestFunction, clsRGGcorrGraphicsFunction, clsRGraphicsFuction, clsRGGscatmatrixFunction, clsCorrelationFunction As New RFunction
     Dim clsTempFunction As RFunction
     Private bResetSubdialog As Boolean = False
     Private Sub dlgCorrelation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -52,14 +52,12 @@ Public Class dlgCorrelation
         ucrReceiverSecondColumn.strSelectorHeading = "Numerics"
         ucrReceiverSecondColumn.Selector = ucrSelectorCorrelation
         ucrReceiverSecondColumn.SetDataType("numeric")
-        ucrReceiverSecondColumn.SetMeAsReceiver()
         ucrSelectorCorrelation.Focus()
 
         ucrReceiverMultipleColumns.Selector = ucrSelectorCorrelation
         ucrReceiverMultipleColumns.strSelectorHeading = "Numerics"
         ucrReceiverMultipleColumns.SetParameterIsRFunction()
         ucrReceiverMultipleColumns.SetDataType("numeric")
-        ucrReceiverMultipleColumns.SetMeAsReceiver()
 
         ucrSelectorCorrelation.Focus()
 
@@ -67,7 +65,7 @@ Public Class dlgCorrelation
         'TODO: Fix bugs produced when rdoScatterplotMatrix is checked. Disabled for now
         sdgCorrPlot.rdoScatterPlotMatrix.Enabled = False
 
-        sdgCorrPlot.ucrSelectFactor.SetDataframe(ucrSelectorCorrelation.ucrAvailableDataFrames.strCurrDataFrame, bEnableDataframe:=False)
+        'sdgCorrPlot.ucrSelectFactor.SetDataframe(ucrSelectorCorrelation.ucrAvailableDataFrames.strCurrDataFrame, bEnableDataframe:=False)
 
         ucrNudConfidenceInterval.SetParameter(New RParameter("conf.level", 3))
         ucrNudConfidenceInterval.SetMinMax(0, 1)
@@ -92,7 +90,6 @@ Public Class dlgCorrelation
         ucrPnlCompletePairwise.SetRDefault(Chr(34) & "pairwise.complete.obs" & Chr(34))
 
         'ucrChk
-        'ucrChkCorrelationMatrix.SetParameter(New RParameter("cor_matrix", 6))
         ucrChkCorrelationMatrix.SetText("Correlation Matrix")
 
         ucrSaveModel.SetPrefix("Cor")
@@ -114,16 +111,17 @@ Public Class dlgCorrelation
         ucrBase.clsRsyntax.iCallType = 2
         clsRGGcorrGraphicsFunction = New RFunction
         clsRGraphicsFuction = New RFunction
-        clsRGGscatmatrix = New RFunction
+        'clsRGGscatmatrixFunction = New RFunction
         bResetSubdialog = True
 
         ucrSelectorCorrelation.Reset()
+        ucrSaveModel.Reset()
         clsRGGcorrGraphicsFunction.SetPackageName("GGally")
         clsRGGcorrGraphicsFunction.SetRCommand("ggcorr")
+        'clsRGGscatmatrixFunction.SetPackageName("GGally")
+        'clsRGGscatmatrixFunction.SetRCommand("ggscatmat")
         clsRGraphicsFuction.SetPackageName("GGally")
         clsRGraphicsFuction.SetRCommand("ggpairs")
-        clsRGGscatmatrix.SetPackageName("GGally")
-        clsRGGscatmatrix.SetRCommand("ggscatmat")
 
         clsCorrelationTestFunction.SetRCommand("cor.test")
         clsCorrelationFunction.SetRCommand("cor")
@@ -132,20 +130,15 @@ Public Class dlgCorrelation
         clsCorrelationTestFunction.AddParameter("conf.level", "0.95")
         clsCorrelationFunction.AddParameter("use", Chr(34) & "pairwise.complete.obs" & Chr(34))
         clsCorrelationTestFunction.AddParameter("method", Chr(34) & "pearson" & Chr(34))
-
-        clsRGGcorrGraphicsFunction.AddParameter("geom", Chr(34) & "tile" & Chr(34))
-        clsRGGcorrGraphicsFunction.AddParameter("data", "NULL")
-        clsRGGcorrGraphicsFunction.AddParameter("cor_matrix", clsRFunctionParameter:=clsCorrelationFunction)
-
         clsRGGcorrGraphicsFunction.iCallType = 3
+
         clsCorrelationFunction.iCallType = 2
         clsCorrelationTestFunction.iCallType = 2
         ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationFunction)
     End Sub
 
     Private Sub cmdPlots_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        ucrBase.clsRsyntax.AddToAfterCodes(clsRGGcorrGraphicsFunction, iPosition:=0)
-        sdgCorrPlot.SetRCode(ucrBase.clsRsyntax, clsCorrelationFunction, clsRGGcorrGraphicsFunction, clsRGGscatmatrix, clsRGraphicsFuction, bResetSubdialog)
+        sdgCorrPlot.SetRCode(ucrBase.clsRsyntax, clsCorrelationFunction, clsRGGcorrGraphicsFunction, clsRGGscatmatrixFunction, clsRGraphicsFuction, bReset:=bResetSubdialog)
         sdgCorrPlot.ShowDialog()
         bResetSubdialog = False
     End Sub
@@ -216,8 +209,10 @@ Public Class dlgCorrelation
 
     Private Sub ucrPnlColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumns.ControlValueChanged
         If rdoTwoColumns.Checked Then
+            ucrReceiverSecondColumn.SetMeAsReceiver()
             cmdOptions.Visible = False
         ElseIf rdoMultipleColumns.Checked Then
+            ucrReceiverMultipleColumns.SetMeAsReceiver()
             cmdOptions.Visible = True
         End If
     End Sub
