@@ -54,6 +54,7 @@ Public Class dlgThreeVariableFrequencies
         ucrReceiverColumnFactor.SetParameter(New RParameter("var.col", 2))
         ucrReceiverColumnFactor.Selector = ucrSelectorThreeVariableFrequencies
         ucrReceiverColumnFactor.SetDataType("factor")
+        ucrReceiverColumnFactor.strSelectorHeading = "Factors"
         ucrReceiverColumnFactor.SetParameterIsString()
         ucrReceiverColumnFactor.bWithQuotes = False
         ucrReceiverColumnFactor.SetParameterIncludeArgumentName(False)
@@ -61,7 +62,7 @@ Public Class dlgThreeVariableFrequencies
 
         ucrReceiverGroupsBy1st.SetParameter(New RParameter("x", 0))
         ucrReceiverGroupsBy1st.Selector = ucrSelectorThreeVariableFrequencies
-        ucrReceiverGroupsBy1st.SetDataType("factor")
+        ucrReceiverGroupsBy1st.strSelectorHeading = "Factors"
         ucrReceiverGroupsBy1st.SetParameterIsString()
         ucrReceiverGroupsBy1st.bWithQuotes = False
         ucrReceiverGroupsBy1st.SetParameterIncludeArgumentName(False)
@@ -70,6 +71,7 @@ Public Class dlgThreeVariableFrequencies
         ucrReceiverGroupBy2nd.SetParameter(New RParameter("y", 0))
         ucrReceiverGroupBy2nd.Selector = ucrSelectorThreeVariableFrequencies
         ucrReceiverGroupBy2nd.SetDataType("factor")
+        ucrReceiverGroupBy2nd.strSelectorHeading = "Factors"
         ucrReceiverGroupBy2nd.SetParameterIsString()
         ucrReceiverGroupBy2nd.bWithQuotes = False
         ucrReceiverGroupBy2nd.SetParameterIncludeArgumentName(False)
@@ -110,6 +112,7 @@ Public Class dlgThreeVariableFrequencies
 
         ucrPnlFrequencyDisplay.AddParameterPresentCondition(rdoTable, "sjtab")
         ucrPnlFrequencyDisplay.AddParameterPresentCondition(rdoGraph, "sjplot")
+        'TODO have conditions on multiple functions for both option
 
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkCount, {rdoTable, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrSaveGraph, {rdoGraph, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
@@ -216,7 +219,10 @@ Public Class dlgThreeVariableFrequencies
         ucrChkWeights.SetRCode(clsSjTab, bReset)
         ucrChkFlip.SetRCode(clsSjPlot, bReset)
         ucrPnlFreqType.SetRCode(clsSjPlot, bReset)
-        ucrPnlFrequencyDisplay.SetRCode(clsCurrBaseCode, bReset)
+        If bReset OrElse Not rdoBoth.Checked Then
+            ucrPnlFrequencyDisplay.SetRCode(clsCurrBaseCode, bReset)
+        End If
+
         ucrSelectorThreeVariableFrequencies.SetRCode(clsTableBaseOperator, bReset)
         ucrChkCell.SetRCode(clsSjTab, bReset)
         ucrChkColumn.SetRCode(clsSjTab, bReset)
