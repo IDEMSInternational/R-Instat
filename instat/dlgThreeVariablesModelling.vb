@@ -45,6 +45,7 @@ Public Class dlgThreeVariableModelling
         ucrBaseThreeVariableModelling.iHelpTopicID = 369
         ucrBaseThreeVariableModelling.clsRsyntax.bExcludeAssignedFunctionOutput = False
         clsModel1.bBrackets = False
+        ucrChkConvertToVariate.Enabled = False
 
         ucrReceiverResponse.Selector = ucrSelectorThreeVariableModelling
         ucrReceiverFirstExplanatory.Selector = ucrSelectorThreeVariableModelling
@@ -142,6 +143,10 @@ Public Class dlgThreeVariableModelling
 
         ResponseConvert()
         ModelOperator()
+
+        ucrChkResponseFunction.Visible = False
+        ucrChkSecondFunction.Visible = False
+        ucrChkFirstFunction.Visible = False
 
         ' sdgSimpleRegOptions.SetDefaults()
         'sdgModelOptions.SetDefaults()
@@ -295,7 +300,7 @@ Public Class dlgThreeVariableModelling
     End Sub
 
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
-        'sdgModelOptions.ShowDialog()
+        sdgModelOptions.ShowDialog()
         ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = sdgModelOptions.ucrFamily.clsCurrDistribution.strNameTag)
     End Sub
     Private Sub chkResponseFunction_CheckedChanged() Handles ucrChkResponseFunction.ControlValueChanged
