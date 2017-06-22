@@ -189,10 +189,6 @@ Public Class dlgRegressionSimple
 
         DataTypeAccepted()
 
-        clsRGraphicsOperator = clsRegressionDefaults.clsDefaultRGraphicsOperator.Clone
-        clsFormulaOperator = clsRegressionDefaults.clsDefaultFormulaOperator.Clone
-        clsRGraphicsOperator.iCallType = 3
-
         clsRLmOrGLM = clsRegressionDefaults.clsDefaultRLmOrGLM.Clone
         clsRLmOrGLM.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
 
@@ -200,7 +196,13 @@ Public Class dlgRegressionSimple
         clsRResidualPlots = clsRegressionDefaults.clsDefaultRResidualPlots.Clone
         clsRResidualPlots.AddParameter("object", clsRFunctionParameter:=clsRLmOrGLM)
 
+
+
+        clsRGraphicsOperator = clsRegressionDefaults.clsDefaultRGraphicsOperator.Clone
+        clsFormulaOperator = clsRegressionDefaults.clsDefaultFormulaOperator.Clone
         clsRgeom_point = clsRegressionDefaults.clsDefaultRgeom_pointFunction.Clone
+        clsRGraphicsOperator.AddParameter("geom_point", clsRFunctionParameter:=clsRgeom_point)
+        clsRGraphicsOperator.iCallType = 3
 
 
         clsRaovFunction.SetPackageName("stats")

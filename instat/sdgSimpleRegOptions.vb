@@ -318,22 +318,14 @@ Public Class sdgSimpleRegOptions
             clsRResidualPlotsFunction.AddParameter("ncol", 2)
             clsRResidualPlotsFunction.RemoveParameterByName("which")
             clsRGraphicsOperator.AddParameter("reidual", clsRFunctionParameter:=clsRResidualPlotsFunction)
-            clsRGraphicsOperator.AddParameter("geom_point", clsRFunctionParameter:=clsRgeom_point)
-            'clsRSyntax.AddToAfterCodes(clsRGraphicsOperator, iPosition:=6)
         ElseIf rdoSixPlots2Rows.Checked Then
             clsRResidualPlotsFunction.AddParameter("ncol", 3)
             clsRResidualPlotsFunction.AddParameter("which", "1:6")
             clsRGraphicsOperator.AddParameter("reidual", clsRFunctionParameter:=clsRResidualPlotsFunction)
-            clsRGraphicsOperator.AddParameter("geom_point", clsRFunctionParameter:=clsRgeom_point)
-            'clsRSyntax.AddToAfterCodes(clsRGraphicsOperator, iPosition:=7)
         ElseIf rdoSixPlots3Rows.Checked Then
             clsRResidualPlotsFunction.AddParameter("ncol", 2)
             clsRResidualPlotsFunction.AddParameter("which", "1:6")
             clsRGraphicsOperator.AddParameter("reidual", clsRFunctionParameter:=clsRResidualPlotsFunction)
-            clsRGraphicsOperator.AddParameter("geom_point", clsRFunctionParameter:=clsRgeom_point)
-            ' clsRSyntax.AddToAfterCodes(clsRGraphicsOperator, iPosition:=8)
-        Else
-            ' clsRSyntax.RemoveFromAfterCodes(clsRGraphicsOperator)
         End If
         If (rdoFourPlots.Checked Or rdoSixPlots2Rows.Checked Or rdoSixPlots3Rows.Checked Or rdoResidualsFitted.Checked Or rdoQQ.Checked Or rdoResidualsLeverage.Checked Or rdoScaleLocation.Checked Or rdoCooksDistance.Checked Or rdoCooksDistanceLeverage.Checked) Then
             clsRSyntax.AddToAfterCodes(clsRGraphicsOperator, iPosition:=6)
@@ -416,89 +408,26 @@ Public Class sdgSimpleRegOptions
 
     End Sub
 
-    Private Sub ucrFittedColumnName_NameChanged()
-        FittedValues()
-    End Sub
+    ' disabled until working
 
     Private Sub FittedValues()
-        ' clsRFittedValues.SetRCommand("fitted")
-        'clsRFittedValues.AddParameter("object", clsRFunctionParameter:=clsRModelFunction)
-        ' clsRWriteFitted.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
         clsRWriteFitted.AddParameter("data_name", Chr(34) & clsRDataFrame.cboAvailableDataFrames.Text & Chr(34))
         clsRWriteFitted.AddParameter("col_name", Chr(34) & ucrSaveFittedColumnName.GetText & Chr(34))
-        'clsRWriteFitted.AddParameter("col_data", clsRFunctionParameter:=clsRFittedValues)
-    End Sub
-
-    Private Sub ucrResidualsColumnName_NameChanged()
-        Residuals()
     End Sub
 
     Private Sub Residuals()
-        'clsRResiduals.SetRCommand("resid")
-        'clsRResiduals.AddParameter("object", clsRFunctionParameter:=clsRModelFunction)
-        'clsRWriteResiduals.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
         clsRWriteResiduals.AddParameter("data_name", Chr(34) & clsRDataFrame.cboAvailableDataFrames.Text & Chr(34))
         clsRWriteResiduals.AddParameter("col_name", Chr(34) & ucrSaveResidualsColumnName.GetText & Chr(34))
-        'clsRWriteResiduals.AddParameter("col_data", clsRFunctionParameter:=clsRResiduals)
-    End Sub
-
-    Private Sub ucrStdResidualsColumnName_NameChanged()
-        StdResiduals()
     End Sub
 
     Private Sub StdResiduals()
-        '    clsRStdResiduals.SetRCommand("rstandard")
-        '    clsRStdResiduals.AddParameter("model", clsRFunctionParameter:=clsRModelFunction)
-        '    clsRWriteStdResiduals.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
         clsRWriteStdResiduals.AddParameter("data_name", Chr(34) & clsRDataFrame.cboAvailableDataFrames.Text & Chr(34))
         clsRWriteStdResiduals.AddParameter("col_name", Chr(34) & ucrSaveStdResidualsColumnName.GetText & Chr(34))
-        '    clsRWriteStdResiduals.AddParameter("col_data", clsRFunctionParameter:=clsRStdResiduals)
-    End Sub
-
-    Private Sub ucrLeverageColumnName_NameChanged()
-        Leverage()
     End Sub
 
     Private Sub Leverage()
-        'clsRLeverage.SetRCommand("hatvalues")
-        'clsRLeverage.AddParameter("model", clsRFunctionParameter:=clsRModelFunction)
-        'clsRWriteLeverage.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
-        'clsRWriteLeverage.AddParameter("data_name", Chr(34) & clsRDataFrame.cboAvailableDataFrames.Text & Chr(34))
-        'clsRWriteLeverage.AddParameter("col_name", Chr(34) & ucrLeverageColumnName.GetText & Chr(34))
-        'clsRWriteLeverage.AddParameter("col_data", clsRFunctionParameter:=clsRLeverage)
+        clsRWriteLeverage.AddParameter("data_name", Chr(34) & clsRDataFrame.cboAvailableDataFrames.Text & Chr(34))
+        clsRWriteLeverage.AddParameter("col_name", Chr(34) & ucrSaveLeverageColumnName.GetText & Chr(34))
     End Sub
-
-    Private Sub chkLeverage_CheckedChanged(sender As Object, e As EventArgs)
-        'If ucrChkLeverage.Checked Then
-        '    ucrLeverageColumnName.Enabled = True
-        'Else
-        '    ucrLeverageColumnName.Enabled = False
-        'End If
-    End Sub
-
-    Private Sub chkResiduals_CheckedChanged(sender As Object, e As EventArgs)
-        'If ucrChkResiduals.Checked Then
-        '    ucrResidualsColumnName.Enabled = True
-        'Else
-        '    ucrResidualsColumnName.Enabled = False
-        'End If
-    End Sub
-
-    Private Sub chkStdResiduals_CheckedChanged(sender As Object, e As EventArgs)
-        'If ucrChkStdResiduals.Checked Then
-        '    ucrStdResidualsColumnName.Enabled = True
-        'Else
-        '    ucrStdResidualsColumnName.Enabled = False
-        'End If
-    End Sub
-
-    Private Sub chkFittedValues_CheckedChanged(sender As Object, e As EventArgs)
-        'If ucrChkFittedValues.Checked Then
-        '    ucrSaveFittedColumnName.Enabled = True
-        'Else
-        '    ucrSaveFittedColumnName.Enabled = False
-        'End If
-    End Sub
-
 
 End Class
