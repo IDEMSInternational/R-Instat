@@ -806,13 +806,12 @@ Public Class RLink
         Dim clsGetColumnType As New RFunction
         Dim expDateType As SymbolicExpression
 
-        clsGetColumnType.SetRCommand(strInstatDataObject & "$get_variables_metadata")
+        clsGetColumnType.SetRCommand(strInstatDataObject & "$get_column_data_types")
         clsGetColumnType.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
-        clsGetColumnType.AddParameter("column", Chr(34) & strColumnName & Chr(34))
-        clsGetColumnType.AddParameter("property", Chr(34) & "class" & Chr(34))
+        clsGetColumnType.AddParameter("columns", Chr(34) & strColumnName & Chr(34))
         expDateType = RunInternalScriptGetValue(clsGetColumnType.ToScript(), bSilent:=True)
-        If expDateType IsNot Nothing AndAlso Not expDateType.Type = Internals.SymbolicExpressionType.Null Then
-            strDataType = expDateType.AsCharacter(0)
+        If expDateType IsNot Nothing AndAlso expDateType.Type <> Internals.SymbolicExpressionType.Null Then
+            strDataType = String.Join(",", expDateType.AsCharacter)
         Else
             strDataType = ""
         End If
@@ -907,8 +906,8 @@ Public Class RLink
             clsIsVarMetadata.AddParameter("column", Chr(34) & strColumn & Chr(34))
         End If
         clsIsVarMetadata.AddParameter("property", Chr(34) & strProperty & Chr(34))
-        expIsVar = RunInternalScriptGetValue(clsIsVarMetadata.ToScript())
-        If expIsVar IsNot Nothing AndAlso expIsVar.Type = Internals.SymbolicExpressionType.Null Then
+        expIsVar = RunInternalScriptGetValue(clsIsVarMetadata.ToScript(), bSilent:=True)
+        If expIsVar IsNot Nothing AndAlso expIsVar.Type <> Internals.SymbolicExpressionType.Null Then
             bIsVarMetadata = expIsVar.AsLogical(0)
         Else
             bIsVarMetadata = False
