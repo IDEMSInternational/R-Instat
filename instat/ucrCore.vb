@@ -94,7 +94,7 @@ Public Class ucrCore
 
     'Update the control based on the code in RCodeStructure
     'bReset : should the control reset to the default value if the parameter is not present in the code
-    Public Overridable Sub UpdateControl(Optional bReset As Boolean = False)
+    Public Overridable Sub UpdateControl(Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
         Dim clsTempRCode As RCodeStructure
         Dim clsTempRParameter As RParameter
         Dim clsTempCloneParameter As RParameter
@@ -113,21 +113,26 @@ Public Class ucrCore
                             'Not an issue if controls do not need to share parameters
                             'This is needed so that if this parameter is contained in functions in multiple dialogs,
                             'the parameter only changes the functions in the currently open dialog
-                            clsTempCloneParameter = GetParameter(i).Clone()
-                            If Not bUpdateRCodeFromControl AndAlso bChangeParameterValue Then
-                                clsTempCloneParameter.ClearAllArguments()
+                            If bCloneIfNeeded Then
+                                clsTempCloneParameter = GetParameter(i).Clone()
+                            Else
+                                clsTempCloneParameter = GetParameter(i)
                             End If
-                            SetParameter(clsTempCloneParameter, i)
 
-                            'If the control has a default state then it's linked control will set the value and we should not set to R default
-                            If objDefaultState Is Nothing Then
-                                If objRDefault IsNot Nothing Then
-                                    SetToRDefault()
+                            If Not bUpdateRCodeFromControl AndAlso bChangeParameterValue Then
+                                    clsTempCloneParameter.ClearAllArguments()
                                 End If
-                                'If there is no R default the value should remain nothing and SetControlValue() will set an apppropriate "empty" value
+                                SetParameter(clsTempCloneParameter, i)
+
+                                'If the control has a default state then it's linked control will set the value and we should not set to R default
+                                If objDefaultState Is Nothing Then
+                                    If objRDefault IsNot Nothing Then
+                                        SetToRDefault()
+                                    End If
+                                    'If there is no R default the value should remain nothing and SetControlValue() will set an apppropriate "empty" value
+                                End If
                             End If
                         End If
-                    End If
                 Else
                 End If
             Else
@@ -221,7 +226,7 @@ Public Class ucrCore
         UpdateLinkedControls(bReset)
     End Sub
 
-    Public Overridable Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False, Optional bUpdate As Boolean = True)
+    Public Overridable Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False, Optional bUpdate As Boolean = True, Optional bCloneIfNeeded As Boolean = False)
         If clsRCode Is Nothing OrElse Not clsRCode.Equals(clsNewCodeStructure) Then
             clsRCode = clsNewCodeStructure
             If bUpdateRCodeFromControl AndAlso CanUpdate() AndAlso bUpdate Then
@@ -229,7 +234,7 @@ Public Class ucrCore
             End If
         End If
         If bUpdate Then
-            UpdateControl(bReset)
+            UpdateControl(bReset:=bReset, bCloneIfNeeded:=bCloneIfNeeded)
         End If
     End Sub
 
