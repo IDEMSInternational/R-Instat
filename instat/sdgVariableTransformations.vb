@@ -13,12 +13,13 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 Public Class sdgVariableTransformations
     Public clsRCIFunction As RFunction
     Public clsRToFunction, clsLMorGLM As New RFunction
-    Public clsRYVariable, clsRXVariable As ucrReceiverSingle
-    Public clsRModel, clsRModel1 As ROperator
+    Public clsRYVariable, clsRXVariable As String
+    Public clsRModel, clsRModel1, clsFormulaOperator As ROperator
     Public clsModel0 As New ROperator
     Public bControlsInitialised As Boolean = True
     Private Sub sdgVariableTransformations_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -26,29 +27,33 @@ Public Class sdgVariableTransformations
     End Sub
 
     Public Sub InitialiseControls()
-        ucrPnlGenerateFunctions.AddRadioButton(rdoIdentity)
-        ucrPnlGenerateFunctions.AddRadioButton(rdoLogBase10)
-        ucrPnlGenerateFunctions.AddRadioButton(rdoNaturallog)
-        ucrPnlGenerateFunctions.AddRadioButton(rdoPower)
-        ucrPnlGenerateFunctions.AddRadioButton(rdoSquareroot)
+        'ucrPnlGenerateFunctions.AddRadioButton(rdoIdentity)
+        'ucrPnlGenerateFunctions.AddRadioButton(rdoLogBase10)
+        'ucrPnlGenerateFunctions.AddRadioButton(rdoNaturallog)
+        'ucrPnlGenerateFunctions.AddRadioButton(rdoPower)
+        'ucrPnlGenerateFunctions.AddRadioButton(rdoSquareroot)
 
-        ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoLogBase10, "log10")
-        ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoSquareroot, "sqrt")
-        ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoNaturallog, "log")
-        ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoIdentity, {"log10", "power", "log", "sqrt"}, False)
-        ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoPower, "power")
+        'ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoLogBase10, "log10")
+        'ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoSquareroot, "sqrt")
+        'ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoNaturallog, "log")
+        'ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoIdentity, {"log10", "power", "log", "sqrt"}, False)
+        'ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoPower, "power")
 
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCodeForControls(clsNewLMorGLM As RFunction, clsNewFunction As RFunction, clsRModelNew As ROperator, clsRYVariableNew As RFunction, clsRXVariableNew As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRCodeForControls(clsNewLMorGLM As RFunction, clsNewFunction As RFunction, clsNewFormulaOperator As ROperator, clsRModelNew As ROperator, clsRYVariableNew As String, clsRXVariableNew As String, Optional bReset As Boolean = False)
         If bControlsInitialised Then
             InitialiseControls()
         End If
         clsLMorGLM = clsNewLMorGLM
+        clsRXVariable = clsRXVariableNew
+        clsRYVariable = clsRYVariableNew
         clsRModel = clsRModelNew
+        clsFormulaOperator = clsNewFormulaOperator
         clsRCIFunction = clsNewFunction
         ucrPnlGenerateFunctions.SetRCode(clsLMorGLM, bReset)
+
     End Sub
 
     Private Sub ExplanatoryFunction(strFunctionName As String, strPower As String, Optional choice As Boolean = False)
@@ -63,15 +68,26 @@ Public Class sdgVariableTransformations
                 'clsRModel.AddParameter(False, strParameterValue:=clsRYVariable.GetVariableNames(bWithQuotes:=False))
                 clsModel0.SetOperation("^")
                 clsModel0.bBrackets = False
-                clsModel0.AddParameter(iPosition:=0, strParameterValue:=clsRXVariable.GetVariableNames(bWithQuotes:=False))
+                'clsModel0.AddParameter(iPosition:=0, strParameterValue:=clsRXVariable.GetVariableNames(bWithQuotes:=False))
                 clsModel0.AddParameter(strParameterValue:=strPower)
-                clsRModel.AddParameter(iPosition:=i, clsROperatorParameter:=clsModel0.Clone())
+                clsModel0.AddParameter("x", clsRXVariable, bIncludeArgumentName:=False)
+                clsFormulaOperator.AddParameter(iPosition:=i, clsROperatorParameter:=clsModel0)
             End If
-        Else
+        ElseIf rdoLogBase10.Checked Then
             clsRToFunction.SetRCommand(strFunctionName)
-            clsRToFunction.AddParameter("x", clsRXVariable.GetVariableNames(bWithQuotes:=False))
-            clsRModel.AddParameter(iPosition:=i, clsRFunctionParameter:=clsRToFunction.Clone())
+            clsRToFunction.AddParameter("x", clsRXVariable, bIncludeArgumentName:=False)
+            clsFormulaOperator.AddParameter(iPosition:=i, strParameterValue:="x", clsRFunctionParameter:=clsRToFunction)
+            'clsLMorGLM.AddParameter(iPosition:=1, clsRFunctionParameter:=clsRToFunction)
         End If
+
+    End Sub
+
+    Private Sub ucrPnlGenerateFunctions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGenerateFunctions.ControlValueChanged
+        'If rdoLogBase10.Checked Then
+        '    clsRToFunction.SetRCommand("log10")
+        '    clsRToFunction.AddParameter("x", clsRXVariable, bIncludeArgumentName:=False)
+        '    clsFormulaOperator.AddParameter("x", clsRFunctionParameter:=clsRToFunction)
+        'End If
     End Sub
 
     Public Sub ModelFunction(Optional choice As Boolean = False)
