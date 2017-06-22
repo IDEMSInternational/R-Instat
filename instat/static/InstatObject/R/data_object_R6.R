@@ -1184,9 +1184,9 @@ data_object$set("public", "set_factor_levels", function(col_name, new_labels, ne
   }
   else if(set_new_labels && self$is_variables_metadata(labels_label, col_name)) {
     labels_list <- self$get_variables_metadata(property = labels_label, column = col_name, direct_from_attributes = TRUE)
-    names(labels_list) <- as.character(new_labels[1:length(old_levels)])
+    names(labels_list) <- as.character(new_labels[1:length(old_labels)])
     if(length(new_labels) > length(old_lables)) {
-      extra_labels <- seq(from = max(labels_list) + 1, length.out = (length(new_labels) - length(old_levels)))
+      extra_labels <- seq(from = max(labels_list) + 1, length.out = (length(new_labels) - length(old_labels)))
       names(extra_labels) <- new_labels[!new_labels %in% names(labels_list)]
       labels_list <- c(labels_list, extra_labels)
     }
