@@ -335,7 +335,7 @@ Public Class sdgSimpleRegOptions
             ' clsRSyntax.RemoveFromAfterCodes(clsRGraphicsOperator)
         End If
         If (rdoFourPlots.Checked Or rdoSixPlots2Rows.Checked Or rdoSixPlots3Rows.Checked Or rdoResidualsFitted.Checked Or rdoQQ.Checked Or rdoResidualsLeverage.Checked Or rdoScaleLocation.Checked Or rdoCooksDistance.Checked Or rdoCooksDistanceLeverage.Checked) Then
-            'clsRSyntax.AddToAfterCodes(clsRGraphicsOperator, iPosition:=6)
+            clsRSyntax.AddToAfterCodes(clsRGraphicsOperator, iPosition:=6)
         End If
     End Sub
 
