@@ -46,9 +46,9 @@ Partial Class sdgCorrPlot
         Me.rdoCorrelationPlot = New System.Windows.Forms.RadioButton()
         Me.rdoScatterPlotMatrix = New System.Windows.Forms.RadioButton()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.ucrPnlGraphType = New instat.UcrPanel()
-        Me.ucrBaseSdgCorrPlot = New instat.ucrButtonsSubdialogue()
         Me.ucrSaveGraph = New instat.ucrSave()
+        Me.ucrBaseSdgCorrPlot = New instat.ucrButtonsSubdialogue()
+        Me.ucrPnlGraphType = New instat.UcrPanel()
         Me.tbSaveGraphs.SuspendLayout()
         Me.tbCorrelationPlot.SuspendLayout()
         Me.tbScatterplotMatrix.SuspendLayout()
@@ -70,7 +70,7 @@ Partial Class sdgCorrPlot
         Me.tbPairwisePlot.Location = New System.Drawing.Point(4, 22)
         Me.tbPairwisePlot.Name = "tbPairwisePlot"
         Me.tbPairwisePlot.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbPairwisePlot.Size = New System.Drawing.Size(340, 245)
+        Me.tbPairwisePlot.Size = New System.Drawing.Size(340, 238)
         Me.tbPairwisePlot.TabIndex = 0
         Me.tbPairwisePlot.Tag = "Pairwise_Plot"
         Me.tbPairwisePlot.Text = "Pairwise Plot"
@@ -200,7 +200,7 @@ Partial Class sdgCorrPlot
         Me.tbScatterplotMatrix.Location = New System.Drawing.Point(4, 22)
         Me.tbScatterplotMatrix.Name = "tbScatterplotMatrix"
         Me.tbScatterplotMatrix.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbScatterplotMatrix.Size = New System.Drawing.Size(340, 245)
+        Me.tbScatterplotMatrix.Size = New System.Drawing.Size(340, 238)
         Me.tbScatterplotMatrix.TabIndex = 2
         Me.tbScatterplotMatrix.Tag = "Scatterplot_Matrix"
         Me.tbScatterplotMatrix.Text = "Scatterplot Matrix"
@@ -275,7 +275,6 @@ Partial Class sdgCorrPlot
         Me.rdoNone.Name = "rdoNone"
         Me.rdoNone.Size = New System.Drawing.Size(51, 17)
         Me.rdoNone.TabIndex = 5
-        Me.rdoNone.TabStop = True
         Me.rdoNone.Text = "None"
         Me.rdoNone.UseVisualStyleBackColor = True
         '
@@ -286,7 +285,6 @@ Partial Class sdgCorrPlot
         Me.rdoPairwisePlot.Name = "rdoPairwisePlot"
         Me.rdoPairwisePlot.Size = New System.Drawing.Size(85, 17)
         Me.rdoPairwisePlot.TabIndex = 6
-        Me.rdoPairwisePlot.TabStop = True
         Me.rdoPairwisePlot.Text = "Pairwise Plot"
         Me.rdoPairwisePlot.UseVisualStyleBackColor = True
         '
@@ -297,7 +295,6 @@ Partial Class sdgCorrPlot
         Me.rdoCorrelationPlot.Name = "rdoCorrelationPlot"
         Me.rdoCorrelationPlot.Size = New System.Drawing.Size(96, 17)
         Me.rdoCorrelationPlot.TabIndex = 7
-        Me.rdoCorrelationPlot.TabStop = True
         Me.rdoCorrelationPlot.Text = "Correlation Plot"
         Me.rdoCorrelationPlot.UseVisualStyleBackColor = True
         '
@@ -308,32 +305,17 @@ Partial Class sdgCorrPlot
         Me.rdoScatterPlotMatrix.Name = "rdoScatterPlotMatrix"
         Me.rdoScatterPlotMatrix.Size = New System.Drawing.Size(90, 17)
         Me.rdoScatterPlotMatrix.TabIndex = 8
-        Me.rdoScatterPlotMatrix.TabStop = True
         Me.rdoScatterPlotMatrix.Text = "Scatter Matrix"
         Me.rdoScatterPlotMatrix.UseVisualStyleBackColor = True
         '
         'GroupBox1
         '
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 2)
+        Me.GroupBox1.Location = New System.Drawing.Point(8, -3)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(346, 98)
         Me.GroupBox1.TabIndex = 9
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Graphs"
-        '
-        'ucrPnlGraphType
-        '
-        Me.ucrPnlGraphType.Location = New System.Drawing.Point(25, 21)
-        Me.ucrPnlGraphType.Name = "ucrPnlGraphType"
-        Me.ucrPnlGraphType.Size = New System.Drawing.Size(310, 73)
-        Me.ucrPnlGraphType.TabIndex = 4
-        '
-        'ucrBaseSdgCorrPlot
-        '
-        Me.ucrBaseSdgCorrPlot.Location = New System.Drawing.Point(108, 392)
-        Me.ucrBaseSdgCorrPlot.Name = "ucrBaseSdgCorrPlot"
-        Me.ucrBaseSdgCorrPlot.Size = New System.Drawing.Size(142, 30)
-        Me.ucrBaseSdgCorrPlot.TabIndex = 3
         '
         'ucrSaveGraph
         '
@@ -342,11 +324,25 @@ Partial Class sdgCorrPlot
         Me.ucrSaveGraph.Size = New System.Drawing.Size(319, 24)
         Me.ucrSaveGraph.TabIndex = 21
         '
+        'ucrBaseSdgCorrPlot
+        '
+        Me.ucrBaseSdgCorrPlot.Location = New System.Drawing.Point(108, 392)
+        Me.ucrBaseSdgCorrPlot.Name = "ucrBaseSdgCorrPlot"
+        Me.ucrBaseSdgCorrPlot.Size = New System.Drawing.Size(142, 30)
+        Me.ucrBaseSdgCorrPlot.TabIndex = 3
+        '
+        'ucrPnlGraphType
+        '
+        Me.ucrPnlGraphType.Location = New System.Drawing.Point(16, 16)
+        Me.ucrPnlGraphType.Name = "ucrPnlGraphType"
+        Me.ucrPnlGraphType.Size = New System.Drawing.Size(319, 73)
+        Me.ucrPnlGraphType.TabIndex = 4
+        '
         'sdgCorrPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(365, 428)
+        Me.ClientSize = New System.Drawing.Size(363, 428)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.rdoScatterPlotMatrix)
         Me.Controls.Add(Me.rdoCorrelationPlot)

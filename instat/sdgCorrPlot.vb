@@ -16,10 +16,9 @@
 
 Imports instat.Translations
 Public Class sdgCorrPlot
-    Public clsRGGscatmatrixFunction, clsRGGcorrGraphicsFunction, clsCorrelationFunction, clsRGraphicsFuction As New RFunction
+    Public clsRGGscatmatrixFunction, clsRGGcorrGraphicsFunction, clsCorrelationFunction, clsRGraphicsFuction, clsRTempFunction As New RFunction
     Public bFirstLoad As Boolean = True
     Private bControlsInitialised As Boolean = False
-    Public strDataFrame As String
     Private clsRsyntax As RSyntax
 
     Private Sub sdgCorrPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -67,32 +66,6 @@ Public Class sdgCorrPlot
         ucrReceiveFactor.SetDataType("factor")
         ucrSelectFactor.Reset()
 
-        ucrPnlGraphType.AddRadioButton(rdoNone)
-        ucrPnlGraphType.AddRadioButton(rdoCorrelationPlot)
-        ucrPnlGraphType.AddRadioButton(rdoPairwisePlot)
-        ucrPnlGraphType.AddRadioButton(rdoScatterPlotMatrix)
-
-        ucrPnlGraphType.AddFunctionNamesCondition(rdoCorrelationPlot, "ggcorr")
-        ucrPnlGraphType.AddFunctionNamesCondition(rdoNone, "ggcorr", False)
-        ucrPnlGraphType.AddFunctionNamesCondition(rdoPairwisePlot, "ggcorr", False)
-        ucrPnlGraphType.AddFunctionNamesCondition(rdoScatterPlotMatrix, "ggcorr", False)
-
-        ucrPnlGraphType.AddFunctionNamesCondition(rdoNone, "")
-        ucrPnlGraphType.AddFunctionNamesCondition(rdoCorrelationPlot, "", False)
-        ucrPnlGraphType.AddFunctionNamesCondition(rdoPairwisePlot, "", False)
-        ucrPnlGraphType.AddFunctionNamesCondition(rdoScatterPlotMatrix, "", False)
-
-        ucrPnlGraphType.AddFunctionNamesCondition(rdoScatterPlotMatrix, "ggscatmat")
-        ucrPnlGraphType.AddFunctionNamesCondition(rdoNone, "ggscatmat", False)
-        ucrPnlGraphType.AddFunctionNamesCondition(rdoPairwisePlot, "ggscatmat", False)
-        ucrPnlGraphType.AddFunctionNamesCondition(rdoCorrelationPlot, "ggscatmat", False)
-
-        ucrPnlGraphType.AddFunctionNamesCondition(rdoScatterPlotMatrix, "ggpairs")
-        ucrPnlGraphType.AddFunctionNamesCondition(rdoNone, "ggpairs", False)
-        ucrPnlGraphType.AddFunctionNamesCondition(rdoPairwisePlot, "ggpairs", False)
-        ucrPnlGraphType.AddFunctionNamesCondition(rdoCorrelationPlot, "ggpairs", False)
-
-
         Dim dctGeom As New Dictionary(Of String, String)
         ucrInputComboGeom.SetParameter(New RParameter("geom", 3))
         dctGeom.Add("tile", Chr(34) & "tile" & Chr(34))
@@ -102,16 +75,29 @@ Public Class sdgCorrPlot
         ucrInputComboGeom.SetItems(dctGeom)
         ucrInputComboGeom.SetRDefault(Chr(34) & "tile" & Chr(34))
         ucrInputComboGeom.SetDropDownStyleAsNonEditable()
+
+        ucrPnlGraphType.AddRadioButton(rdoNone)
+        ucrPnlGraphType.AddRadioButton(rdoCorrelationPlot)
+        ucrPnlGraphType.AddRadioButton(rdoPairwisePlot)
+        ucrPnlGraphType.AddRadioButton(rdoScatterPlotMatrix)
+
+        ucrPnlGraphType.AddFunctionNamesCondition(rdoCorrelationPlot, "ggcorr")
+        ucrPnlGraphType.AddFunctionNamesCondition(rdoScatterPlotMatrix, "ggpairs")
+        ucrPnlGraphType.AddFunctionNamesCondition(rdoScatterPlotMatrix, "ggscatmat")
+        ucrPnlGraphType.AddFunctionNamesCondition(rdoNone, "")
+
     End Sub
 
-    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewcorrelationFunction As RFunction, clsNewRGGcorrGraphicsFunction As RFunction, clsNewRGGscatmatrixFunction As RFunction, clsNewRGraphicsFuction As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewcorrelationFunction As RFunction, clsNewRGGcorrGraphicsFunction As RFunction, clsNewRGraphicsFuction As RFunction, clsNewRTempFunction As RFunction, clsNewRGGscatmatrixFunction As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
         clsRsyntax = clsNewRSyntax
         clsCorrelationFunction = clsNewcorrelationFunction
         clsRGGcorrGraphicsFunction = clsNewRGGcorrGraphicsFunction
-        'clsRGGscatmatrixFunction = clsNewRGGscatmatrixFunction
+        clsRGraphicsFuction = clsNewRGraphicsFuction
+        clsRTempFunction = clsNewRTempFunction
+        clsRGGscatmatrixFunction = clsNewRGGscatmatrixFunction
 
         'settingRcode for subdialog
         ucrNudMaximumSize.SetRCode(clsRGGcorrGraphicsFunction, bReset)
@@ -119,15 +105,10 @@ Public Class sdgCorrPlot
         ucrInputComboGeom.SetRCode(clsRGGcorrGraphicsFunction, bReset)
         ucrChkLabel.SetRCode(clsRGGcorrGraphicsFunction, bReset)
         ucrSaveGraph.SetRCode(clsRGGcorrGraphicsFunction, bReset)
-        'ucrChkColor.SetRCode(clsNewRGGscatmatrixFunction, bReset)
-        ucrPnlGraphType.SetRCode(clsNewRGGcorrGraphicsFunction, bReset)
+        ucrChkColor.SetRCode(clsRGGscatmatrixFunction, bReset)
+        ucrPnlGraphType.SetRCode(clsRGGcorrGraphicsFunction, bReset)
 
-        clsRGGcorrGraphicsFunction.AddParameter("cor_matrix", clsRFunctionParameter:=clsCorrelationFunction)
-        clsRGGcorrGraphicsFunction.AddParameter("geom", Chr(34) & "tile" & Chr(34))
-        clsRGGcorrGraphicsFunction.AddParameter("data", "NULL")
-        clsNewRGGscatmatrixFunction.AddParameter("color", "NULL")
         clsCorrelationFunction.iCallType = 2
-
         ucrPnlGraphType.SetRSyntax(clsRsyntax, bReset)
         If bReset Then
             tbSaveGraphs.SelectedIndex = 0
@@ -158,7 +139,6 @@ Public Class sdgCorrPlot
 
     Private Sub ucrPnlGraphType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGraphType.ControlValueChanged
         If ((dlgCorrelation.ucrChkCorrelationMatrix.Checked AndAlso Not rdoPairwisePlot.Checked AndAlso Not rdoCorrelationPlot.Checked AndAlso Not rdoScatterPlotMatrix.Checked) OrElse (Not dlgCorrelation.ucrChkCorrelationMatrix.Checked AndAlso rdoNone.Checked)) Then
-            'ucrSaveGraph.chkSaveGraph.Checked = False
             ucrSaveGraph.Visible = False
             tbSaveGraphs.Visible = False
         Else
@@ -192,14 +172,24 @@ Public Class sdgCorrPlot
 
         If rdoCorrelationPlot.Checked Then
             dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
+            clsRGGcorrGraphicsFunction.iCallType = 3
             clsRsyntax.AddToAfterCodes(clsRGGcorrGraphicsFunction, iPosition:=1)
-            'clsRsyntax.RemoveFromAfterCodes(clsRGGscatmatrixFunction)
+            clsRsyntax.RemoveFromAfterCodes(clsRGraphicsFuction)
+            clsRsyntax.RemoveFromAfterCodes(clsRGGscatmatrixFunction)
+        ElseIf rdoPairwisePlot.Checked Then
+            dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
+            clsRGraphicsFuction.iCallType = 3
+            clsRsyntax.AddToAfterCodes(clsRGraphicsFuction, iPosition:=2)
+            clsRsyntax.RemoveFromAfterCodes(clsRGGcorrGraphicsFunction)
         ElseIf rdoScatterPlotMatrix.Checked Then
-            'clsRsyntax.AddToAfterCodes(clsRGGscatmatrixFunction, iPosition:=1)
+            dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
+            clsRGGscatmatrixFunction.iCallType = 3
+            clsRsyntax.AddToAfterCodes(clsRGGscatmatrixFunction, iPosition:=1)
             clsRsyntax.RemoveFromAfterCodes(clsRGGcorrGraphicsFunction)
-        Else
+        ElseIf rdoNone.Checked Then
             clsRsyntax.RemoveFromAfterCodes(clsRGGcorrGraphicsFunction)
-            'clsRsyntax.RemoveFromAfterCodes(clsRGGscatmatrixFunction)
+            clsRsyntax.RemoveFromAfterCodes(clsRGraphicsFuction)
+            clsRsyntax.RemoveFromAfterCodes(clsRGGscatmatrixFunction)
         End If
     End Sub
 End Class
