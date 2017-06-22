@@ -141,24 +141,24 @@ Partial Class sdgSimpleRegOptions
         '
         Me.ucrNudWhiteSpace.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudWhiteSpace.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudWhiteSpace.Location = New System.Drawing.Point(115, 147)
+        Me.ucrNudWhiteSpace.Location = New System.Drawing.Point(112, 150)
         Me.ucrNudWhiteSpace.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudWhiteSpace.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudWhiteSpace.Name = "ucrNudWhiteSpace"
         Me.ucrNudWhiteSpace.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudWhiteSpace.TabIndex = 27
+        Me.ucrNudWhiteSpace.TabIndex = 29
         Me.ucrNudWhiteSpace.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudGraphicsCLevel
         '
         Me.ucrNudGraphicsCLevel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudGraphicsCLevel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudGraphicsCLevel.Location = New System.Drawing.Point(115, 121)
+        Me.ucrNudGraphicsCLevel.Location = New System.Drawing.Point(112, 124)
         Me.ucrNudGraphicsCLevel.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudGraphicsCLevel.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudGraphicsCLevel.Name = "ucrNudGraphicsCLevel"
         Me.ucrNudGraphicsCLevel.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudGraphicsCLevel.TabIndex = 26
+        Me.ucrNudGraphicsCLevel.TabIndex = 28
         Me.ucrNudGraphicsCLevel.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrChkRugs
@@ -652,28 +652,28 @@ Partial Class sdgSimpleRegOptions
         '
         'ucrSaveLeverageColumnName
         '
-        Me.ucrSaveLeverageColumnName.Location = New System.Drawing.Point(6, 90)
+        Me.ucrSaveLeverageColumnName.Location = New System.Drawing.Point(9, 92)
         Me.ucrSaveLeverageColumnName.Name = "ucrSaveLeverageColumnName"
         Me.ucrSaveLeverageColumnName.Size = New System.Drawing.Size(255, 24)
         Me.ucrSaveLeverageColumnName.TabIndex = 27
         '
         'ucrSaveStdResidualsColumnName
         '
-        Me.ucrSaveStdResidualsColumnName.Location = New System.Drawing.Point(6, 60)
+        Me.ucrSaveStdResidualsColumnName.Location = New System.Drawing.Point(9, 65)
         Me.ucrSaveStdResidualsColumnName.Name = "ucrSaveStdResidualsColumnName"
         Me.ucrSaveStdResidualsColumnName.Size = New System.Drawing.Size(255, 24)
         Me.ucrSaveStdResidualsColumnName.TabIndex = 26
         '
         'ucrSaveResidualsColumnName
         '
-        Me.ucrSaveResidualsColumnName.Location = New System.Drawing.Point(6, 30)
+        Me.ucrSaveResidualsColumnName.Location = New System.Drawing.Point(9, 38)
         Me.ucrSaveResidualsColumnName.Name = "ucrSaveResidualsColumnName"
         Me.ucrSaveResidualsColumnName.Size = New System.Drawing.Size(255, 24)
         Me.ucrSaveResidualsColumnName.TabIndex = 25
         '
         'ucrSaveFittedColumnName
         '
-        Me.ucrSaveFittedColumnName.Location = New System.Drawing.Point(6, 9)
+        Me.ucrSaveFittedColumnName.Location = New System.Drawing.Point(9, 11)
         Me.ucrSaveFittedColumnName.Name = "ucrSaveFittedColumnName"
         Me.ucrSaveFittedColumnName.Size = New System.Drawing.Size(255, 24)
         Me.ucrSaveFittedColumnName.TabIndex = 24
@@ -754,8 +754,6 @@ Partial Class sdgSimpleRegOptions
     Friend WithEvents rdoResponse As RadioButton
     Friend WithEvents rdoLinear As RadioButton
     Friend WithEvents ucrPnlScale As UcrPanel
-    Friend WithEvents ucrNudWhiteSpace As ucrNud
-    Friend WithEvents ucrNudGraphicsCLevel As ucrNud
     Friend WithEvents rdoContrast As RadioButton
     Friend WithEvents rdoConditional As RadioButton
     Friend WithEvents ucrPnlPlotType As UcrPanel
@@ -780,4 +778,6 @@ Partial Class sdgSimpleRegOptions
     Friend WithEvents ucrSaveLeverageColumnName As ucrSave
     Friend WithEvents ucrSaveStdResidualsColumnName As ucrSave
     Friend WithEvents ucrSaveResidualsColumnName As ucrSave
+    Friend WithEvents ucrNudWhiteSpace As ucrNud
+    Friend WithEvents ucrNudGraphicsCLevel As ucrNud
 End Class

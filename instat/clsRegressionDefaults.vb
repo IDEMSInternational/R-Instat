@@ -112,4 +112,49 @@
         End Get
     End Property
 
+    Public Shared ReadOnly Property clsDefaultRggplot As RFunction
+        Get
+            Dim clsDefaultRggplotFunction As New RFunction
+            clsDefaultRggplotFunction.SetPackageName("visreg")
+            clsDefaultRggplotFunction.SetRCommand("visreg")
+            Return clsDefaultRggplotFunction
+        End Get
+    End Property
+
+    Public Shared ReadOnly Property clsDefaultRWriteFitted As RFunction
+        Get
+            Dim clsDefaultRWriteFittedFunction As New RFunction
+
+            clsDefaultRWriteFittedFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
+            Return clsDefaultRWriteFittedFunction
+        End Get
+    End Property
+
+    Public Shared ReadOnly Property clsDefaultRWriteResiduals As RFunction
+        Get
+            Dim clsDefaultRWriteResidualsFunc As New RFunction
+
+            clsDefaultRWriteResidualsFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
+            Return clsDefaultRWriteResidualsFunc
+        End Get
+    End Property
+
+    Public Shared ReadOnly Property clsDefaultRWriteStdResiduals As RFunction
+        Get
+            Dim clsDefaultRWriteStdResidualsFunc As New RFunction
+
+            clsDefaultRWriteStdResidualsFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
+            Return clsDefaultRWriteStdResidualsFunc
+        End Get
+    End Property
+
+    Public Shared ReadOnly Property clsDefaultRWriteLeverage As RFunction
+        Get
+            Dim clsDefaultRWriteLeverageFunc As New RFunction
+
+            clsDefaultRWriteLeverageFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
+            Return clsDefaultRWriteLeverageFunc
+        End Get
+    End Property
+
 End Class
