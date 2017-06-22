@@ -19,7 +19,8 @@ Public Class sdgSimpleRegOptions
     Public clsRModelFunction As RFunction
     Public clsRDataFrame As ucrDataFrame
     Public clsRGraphicsOperator As ROperator
-    Public clsRYVariable, clsRXVariable, clsRSummaryFunction, clsRanovaFunction, clsRConfint, clsRLmOrGLM As RFunction
+    Public clsRYVariable, clsRXVariable As String
+    Public clsRSummaryFunction, clsRanovaFunction, clsRConfint, clsRLmOrGLM As RFunction
     Public clsRGraphics As New RSyntax
     Private clsRSyntax As RSyntax
     Public clsRaovFunction, clsRaovpvalFunction, clsRestpvalFunction, clsRResidualPlotsFunction, clsRgeom_point, clsRPredFunction, clsRDFFunction, clsRFittedValues, clsRWriteFitted, clsRResiduals, clsRWriteResiduals, clsRStdResiduals, clsRWriteStdResiduals, clsRLeverage, clsRWriteLeverage As New RFunction
@@ -108,7 +109,7 @@ Public Class sdgSimpleRegOptions
     End Sub
 
     ' Optional clsRGraphicsOperator As RFunction = Nothing,
-    Public Sub SetRCode(clsNewRSyntax As RSyntax, Optional clsNewRanovaFunction As RFunction = Nothing, Optional clsNewRSummaryFunction As RFunction = Nothing, Optional clsNewRConfint As RFunction = Nothing, Optional clsNewRModelsFunction As RFunction = Nothing, Optional clsNewRaovpvalFunction As RFunction = Nothing, Optional clsNewRgeom_point As RFunction = Nothing, Optional clsNewRResidualPlots As RFunction = Nothing, Optional clsNewRestpvalFunction As RFunction = Nothing, Optional clsNewRLmOrGLM As RFunction = Nothing, Optional clsNewRModelFunction As RFunction = Nothing, Optional clsNewRXVariable As RFunction = Nothing, Optional clsNewRYVariable As RFunction = Nothing, Optional clsNewRWriteFitted As RFunction = Nothing, Optional clsNewRFittedValues As RFunction = Nothing, Optional clsNewRGraphicsOperator As ROperator = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewRSyntax As RSyntax, Optional clsNewRanovaFunction As RFunction = Nothing, Optional clsNewRSummaryFunction As RFunction = Nothing, Optional clsNewRConfint As RFunction = Nothing, Optional clsNewRModelsFunction As RFunction = Nothing, Optional clsNewRaovpvalFunction As RFunction = Nothing, Optional clsNewRgeom_point As RFunction = Nothing, Optional clsNewRResidualPlots As RFunction = Nothing, Optional clsNewRestpvalFunction As RFunction = Nothing, Optional clsNewRLmOrGLM As RFunction = Nothing, Optional clsNewRModelFunction As RFunction = Nothing, Optional clsNewRXVariable As String = Nothing, Optional clsNewRYVariable As String = Nothing, Optional clsNewRWriteFitted As RFunction = Nothing, Optional clsNewRFittedValues As RFunction = Nothing, Optional clsNewRGraphicsOperator As ROperator = Nothing, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
@@ -134,7 +135,7 @@ Public Class sdgSimpleRegOptions
         ucrChkANOVA.SetRSyntax(clsRSyntax, bReset)
         ucrChkDisplayCLimits.SetRSyntax(clsRSyntax, bReset)
         ucrChkPvalues.SetRSyntax(clsRSyntax, bReset)
-       ' ucrPnlMutiplePlots.SetRSyntax(clsRSyntax)
+        ' ucrPnlMutiplePlots.SetRSyntax(clsRSyntax)
     End Sub
 
     Private Sub ucrChkANOVA_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkANOVA.ControlValueChanged
