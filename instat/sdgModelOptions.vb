@@ -15,19 +15,20 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class sdgModelOptions
-    Public clsRCIFunction As RFunction
-    Public bFirstLoad As Boolean
+    Private bControlsInitialised As Boolean = False
+    Public clsRCIFunction As New RFunction
+    Public bFirstLoad As Boolean = True
 
-    Public Sub New()
+    'Public Sub New()
 
-        ' This call is required by the designer.
-        InitializeComponent()
+    '    ' This call is required by the designer.
+    '    InitializeComponent()
 
-        ' Add any initialization after the InitializeComponent() call.
-        clsRCIFunction = New RFunction
-        ucrFamily.SetGLMDistributions()
-        bFirstLoad = True
-    End Sub
+    '    ' Add any initialization after the InitializeComponent() call.
+    '    clsRCIFunction = New RFunction
+    '    ucrFamily.SetGLMDistributions()
+    '    bFirstLoad = True
+    'End Sub
 
     Private Sub sdgModelOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -38,17 +39,35 @@ Public Class sdgModelOptions
         End If
 
     End Sub
+    Public Sub InitialiseControls()
 
-    Private Sub InitialiseDialog()
+        ucrPnlLinkFunctions.AddRadioButton(rdoIdentity)
+        ucrPnlLinkFunctions.AddRadioButton(rdoCauchit)
+        ucrPnlLinkFunctions.AddRadioButton(rdocloglog)
+        ucrPnlLinkFunctions.AddRadioButton(rdoLog)
+        ucrPnlLinkFunctions.AddRadioButton(rdoSqrt)
+        ucrPnlLinkFunctions.AddRadioButton(rdoProbit)
+        ucrPnlLinkFunctions.AddRadioButton(rdoLogit)
+        ucrPnlLinkFunctions.AddRadioButton(rdoMuSquaredInverse)
+        ucrPnlLinkFunctions.AddRadioButton(rdoInverse)
+
+    End Sub
+
+    Public Sub SetRFunction(clsNewRCIFunction As RFunction, Optional bReset As Boolean = False)
+        If Not bControlsInitialised Then
+            InitialiseControls()
+        End If
+        clsRCIFunction = clsNewRCIFunction
+        ucrPnlLinkFunctions.SetRCode(clsRCIFunction, bReset)
     End Sub
 
     Public Sub SetDefaults()
         RestrictLink()
     End Sub
 
-    Public Sub SetRCIFunction(clsNewFunction As RFunction)
-        clsRCIFunction = clsNewFunction
-    End Sub
+    'Public Sub SetRCIFunction(clsNewFunction As RFunction)
+    '    clsRCIFunction = clsNewFunction
+    'End Sub
 
     Private Sub ResetLinks()
         rdoIdentity.Checked = False
@@ -159,7 +178,7 @@ Public Class sdgModelOptions
         clsRCIFunction.AddParameter("link", Chr(34) & strLinkFunction & Chr(34))
     End Sub
 
-    Private Sub rdoCauchit_CheckedChanged(sender As Object, e As EventArgs) Handles rdoCauchit.CheckedChanged, rdocloglog.CheckedChanged, rdoIdentity.CheckedChanged, rdoInverse.CheckedChanged, rdoLog.CheckedChanged, rdoLogit.CheckedChanged, rdoMuSquaredInverse.CheckedChanged, rdoProbit.CheckedChanged, rdoSqrt.CheckedChanged
+    Private Sub ucrPnlLinkFunctions_contents() Handles ucrPnlLinkFunctions.ControlValueChanged
         LinkFunction()
     End Sub
 End Class
