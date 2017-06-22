@@ -161,24 +161,13 @@ Public Class dlgRegressionSimple
 
         clsFormulaOperator = clsRegressionDefaults.clsDefaultFormulaOperator
 
-        'clsFormulaOperator.SetOperation("~")
-        ' clsFormulaOperator.AddParameter("y", 1, iPosition:=0)
-        ' clsFormulaOperator.AddParameter("x", 1, iPosition:=1)
-
         clsRLmOrGLM = clsRegressionDefaults.clsDefaultRLmOrGLM.Clone
         clsRLmOrGLM.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
-
-
-
-
 
         clsRaovFunction.SetPackageName("stats")
         clsRaovFunction.SetRCommand("anova")
         clsRaovFunction.AddParameter("", clsRFunctionParameter:=clsRLmOrGLM)
         clsRaovFunction.iCallType = 2
-
-
-        clsRLmOrGLM.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
 
         'Model
         clsRModelsFunction = clsRegressionDefaults.clsDefaultModel.Clone
