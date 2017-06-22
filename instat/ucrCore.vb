@@ -119,20 +119,20 @@ Public Class ucrCore
                                 clsTempCloneParameter = GetParameter(i)
                             End If
 
-                            If Not bUpdateRCodeFromControl AndAlso bChangeParameterValue Then
-                                    clsTempCloneParameter.ClearAllArguments()
-                                End If
-                                SetParameter(clsTempCloneParameter, i)
+                            If Not bUpdateRCodeFromControl AndAlso bChangeParameterValue AndAlso objDefaultState Is Nothing Then
+                                clsTempCloneParameter.ClearAllArguments()
+                            End If
+                            SetParameter(clsTempCloneParameter, i)
 
-                                'If the control has a default state then it's linked control will set the value and we should not set to R default
-                                If objDefaultState Is Nothing Then
-                                    If objRDefault IsNot Nothing Then
-                                        SetToRDefault()
-                                    End If
-                                    'If there is no R default the value should remain nothing and SetControlValue() will set an apppropriate "empty" value
+                            'If the control has a default state then it's linked control will set the value and we should not set to R default
+                            If objDefaultState Is Nothing Then
+                                If objRDefault IsNot Nothing Then
+                                    SetToRDefault()
                                 End If
+                                'If there is no R default the value should remain nothing and SetControlValue() will set an apppropriate "empty" value
                             End If
                         End If
+                    End If
                 Else
                 End If
             Else
