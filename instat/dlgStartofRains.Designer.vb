@@ -156,7 +156,7 @@ Partial Class dlgStartofRains
         'lblDPOverallInterval
         '
         Me.lblDPOverallInterval.AutoSize = True
-        Me.lblDPOverallInterval.Location = New System.Drawing.Point(497, 146)
+        Me.lblDPOverallInterval.Location = New System.Drawing.Point(502, 146)
         Me.lblDPOverallInterval.Name = "lblDPOverallInterval"
         Me.lblDPOverallInterval.Size = New System.Drawing.Size(117, 13)
         Me.lblDPOverallInterval.TabIndex = 24
@@ -189,7 +189,7 @@ Partial Class dlgStartofRains
         'lblDPLength
         '
         Me.lblDPLength.AutoSize = True
-        Me.lblDPLength.Location = New System.Drawing.Point(311, 146)
+        Me.lblDPLength.Location = New System.Drawing.Point(327, 147)
         Me.lblDPLength.Name = "lblDPLength"
         Me.lblDPLength.Size = New System.Drawing.Size(100, 13)
         Me.lblDPLength.TabIndex = 22
@@ -215,7 +215,7 @@ Partial Class dlgStartofRains
         'lblDPMaxRain
         '
         Me.lblDPMaxRain.AutoSize = True
-        Me.lblDPMaxRain.Location = New System.Drawing.Point(142, 146)
+        Me.lblDPMaxRain.Location = New System.Drawing.Point(159, 146)
         Me.lblDPMaxRain.Name = "lblDPMaxRain"
         Me.lblDPMaxRain.Size = New System.Drawing.Size(79, 13)
         Me.lblDPMaxRain.TabIndex = 20
@@ -265,7 +265,7 @@ Partial Class dlgStartofRains
         'lblRDMinimum
         '
         Me.lblRDMinimum.AutoSize = True
-        Me.lblRDMinimum.Location = New System.Drawing.Point(142, 83)
+        Me.lblRDMinimum.Location = New System.Drawing.Point(187, 82)
         Me.lblRDMinimum.Name = "lblRDMinimum"
         Me.lblRDMinimum.Size = New System.Drawing.Size(51, 13)
         Me.lblRDMinimum.TabIndex = 10
@@ -274,7 +274,7 @@ Partial Class dlgStartofRains
         'lblTROverDays
         '
         Me.lblTROverDays.AutoSize = True
-        Me.lblTROverDays.Location = New System.Drawing.Point(142, 26)
+        Me.lblTROverDays.Location = New System.Drawing.Point(182, 26)
         Me.lblTROverDays.Name = "lblTROverDays"
         Me.lblTROverDays.Size = New System.Drawing.Size(60, 13)
         Me.lblTROverDays.TabIndex = 1
@@ -284,7 +284,7 @@ Partial Class dlgStartofRains
         'lblRDWidth
         '
         Me.lblRDWidth.AutoSize = True
-        Me.lblRDWidth.Location = New System.Drawing.Point(311, 83)
+        Me.lblRDWidth.Location = New System.Drawing.Point(361, 82)
         Me.lblRDWidth.Name = "lblRDWidth"
         Me.lblRDWidth.Size = New System.Drawing.Size(66, 13)
         Me.lblRDWidth.TabIndex = 12
