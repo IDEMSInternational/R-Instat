@@ -63,10 +63,9 @@ Public Class sdgSimpleRegOptions
         ucrChkMultiplePlots.SetText("Multiple Plots")
         ucrChkIndividualPlots.SetText("Individual Plots")
         ucrChkFittedModel.SetText("Fitted Model")
-        ucrChkPartial.SetText("Partial")
-        ucrChkRugs.SetText("Rugs")
-        ucrChkJitter.SetText("Jitter")
-        ucrChkConfIntervalband.SetText("C.I band")
+
+
+
 
         ucrSaveFittedColumnName.SetPrefix("Fitted")
         ucrSaveFittedColumnName.SetSaveTypeAsColumn()
@@ -98,6 +97,7 @@ Public Class sdgSimpleRegOptions
         ucrChkMultiplePlots.AddToLinkedControls(ucrNudWhiteSpace, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
         ucrChkMultiplePlots.AddToLinkedControls(ucrChkPartial, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
         ucrChkMultiplePlots.AddToLinkedControls(ucrChkRugs, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
+        ucrChkRugs.AddToLinkedControls(ucrPnlPartial12, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
         ucrChkMultiplePlots.AddToLinkedControls(ucrChkJitter, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
         ucrChkMultiplePlots.AddToLinkedControls(ucrChkConfIntervalband, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
 
@@ -105,11 +105,75 @@ Public Class sdgSimpleRegOptions
         ucrPnlMutiplePlots.AddRSyntaxContainsFunctionNamesCondition(rdoFourPlots, {"autoplot"})
         ucrPnlMutiplePlots.AddRSyntaxContainsFunctionNamesCondition(rdoFourPlots, {"autoplot"})
         ucrPnlMutiplePlots.AddRSyntaxContainsFunctionNamesCondition(rdoFourPlots, {"autoplot"})
+
+        ucrPnlPlotType.SetParameter(New RParameter("type"))
+        ucrPnlPlotType.AddRadioButton(rdoContrast, Chr(34) & "conditional" & Chr(34))
+        ucrPnlPlotType.AddRadioButton(rdoConditional, Chr(34) & "contrast" & Chr(34))
+
+        ucrPnlScale.SetParameter(New RParameter("scale"))
+        ucrPnlScale.AddRadioButton(rdoLinear, Chr(34) & "linear" & Chr(34))
+        ucrPnlScale.AddRadioButton(rdoResponse, Chr(34) & "response" & Chr(34))
+
+        ucrChkRugs.SetText("Rugs")
+        ucrPnlPartial12.SetParameter(New RParameter("rug"))
+        ucrPnlPartial12.AddRadioButton(rdo1, "1")
+        ucrPnlPartial12.AddRadioButton(rdo2, "2")
+        ucrPnlPartial12.AddRadioButton(rdoPartial, "TRUE") 'To obtain partial: to be produced rug=T & partial=T(Default of partial is TRUE)
+
+        ucrChkJitter.SetText("Jitter")
+        ucrChkJitter.SetParameter(New RParameter("jitter"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkJitter.SetRDefault("FALSE")
+
+        ucrNudGraphicsCLevel.SetParameter(New RParameter("alpha"))
+        ucrNudWhiteSpace.SetParameter(New RParameter("whitespace"))
+
+        ucrChkPartial.SetText("Partial")
+        ucrChkPartial.SetParameter(New RParameter("partial"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkPartial.SetRDefault("TRUE")
+
+        ucrChkConfIntervalband.SetText("C.I band")
+        ucrChkConfIntervalband.SetParameter(New RParameter("band"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkPartial.SetRDefault("TRUE")
+
+        'Save Plots (Save tab)
+        'Save Fitted Column Names
+        ucrSaveFittedColumnName.SetPrefix("Fitted")
+        ucrSaveFittedColumnName.SetSaveTypeAsDataFrame()
+        ucrSaveFittedColumnName.SetCheckBoxText("Fitted Values")
+        ucrSaveFittedColumnName.SetIsComboBox()
+        ucrSaveFittedColumnName.SetAssignToIfUncheckedValue("last_fitted")
+        ucrSaveFittedColumnName.Enabled = False ' disabled until working
+
+        'Save Residuals Column Names
+        ucrSaveResidualsColumnName.SetPrefix("Resids")
+        ucrSaveResidualsColumnName.SetSaveTypeAsDataFrame()
+        ucrSaveResidualsColumnName.SetCheckBoxText("Residuals")
+        ucrSaveResidualsColumnName.SetIsComboBox()
+        ucrSaveResidualsColumnName.SetAssignToIfUncheckedValue("last_residual")
+        ucrSaveResidualsColumnName.Enabled = False ' disabled until working
+
+        'Save StdResiduals Column Names
+        ucrSaveStdResidualsColumnName.SetPrefix("Sresids")
+        ucrSaveStdResidualsColumnName.SetSaveTypeAsDataFrame()
+        ucrSaveStdResidualsColumnName.SetCheckBoxText("Std Residuals")
+        ucrSaveStdResidualsColumnName.SetIsComboBox()
+        ucrSaveStdResidualsColumnName.SetAssignToIfUncheckedValue("last_stdresidual")
+        ucrSaveStdResidualsColumnName.Enabled = False ' disabled until working
+
+        'Save Leverage Column Names
+        ucrSaveLeverageColumnName.SetPrefix("Lever")
+        ucrSaveLeverageColumnName.SetSaveTypeAsDataFrame()
+        ucrSaveLeverageColumnName.SetCheckBoxText("Leverage")
+        ucrSaveLeverageColumnName.SetIsComboBox()
+        ucrSaveLeverageColumnName.SetAssignToIfUncheckedValue("last_leverage")
+        ucrSaveLeverageColumnName.Enabled = False ' disabled until working
+
         bControlsInitialised = True
     End Sub
 
-    ' Optional clsRGraphicsOperator As RFunction = Nothing,
-    Public Sub SetRCode(clsNewRSyntax As RSyntax, Optional clsNewRanovaFunction As RFunction = Nothing, Optional clsNewRSummaryFunction As RFunction = Nothing, Optional clsNewRConfint As RFunction = Nothing, Optional clsNewRModelsFunction As RFunction = Nothing, Optional clsNewRaovpvalFunction As RFunction = Nothing, Optional clsNewRgeom_point As RFunction = Nothing, Optional clsNewRResidualPlots As RFunction = Nothing, Optional clsNewRestpvalFunction As RFunction = Nothing, Optional clsNewRLmOrGLM As RFunction = Nothing, Optional clsNewRModelFunction As RFunction = Nothing, Optional clsNewRXVariable As String = Nothing, Optional clsNewRYVariable As String = Nothing, Optional clsNewRWriteFitted As RFunction = Nothing, Optional clsNewRFittedValues As RFunction = Nothing, Optional clsNewRGraphicsOperator As ROperator = Nothing, Optional bReset As Boolean = False)
+    'Optional clsNewRWriteLeverage As RFunction = Nothing,
+    'Optional clsRWriteResiduals As RFunction = Nothing,
+    Public Sub SetRCode(clsNewRSyntax As RSyntax, Optional clsNewRanovaFunction As RFunction = Nothing, Optional clsNewRSummaryFunction As RFunction = Nothing, Optional clsNewRConfint As RFunction = Nothing, Optional clsNewRggplotFunction As RFunction = Nothing, Optional clsNewRModelsFunction As RFunction = Nothing, Optional clsNewRaovpvalFunction As RFunction = Nothing, Optional clsNewRgeom_point As RFunction = Nothing, Optional clsNewRWriteResiduals As RFunction = Nothing, Optional clsNewRResidualPlots As RFunction = Nothing, Optional clsNewRestpvalFunction As RFunction = Nothing, Optional clsNewRWriteLeverage As RFunction = Nothing, Optional clsNewRWriteStdResiduals As RFunction = Nothing, Optional clsNewRLmOrGLM As RFunction = Nothing, Optional clsNewRModelFunction As RFunction = Nothing, Optional clsNewRXVariable As String = Nothing, Optional clsNewRYVariable As String = Nothing, Optional clsNewRWriteFitted As RFunction = Nothing, Optional clsNewRFittedValues As RFunction = Nothing, Optional clsNewRGraphicsOperator As ROperator = Nothing, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
@@ -129,12 +193,23 @@ Public Class sdgSimpleRegOptions
         clsRanovaFunction = clsNewRanovaFunction
         clsRgeom_point = clsNewRgeom_point
         clsRResidualPlotsFunction = clsNewRResidualPlots
+        clsRggplotFunction = clsNewRggplotFunction
+        clsRWriteResiduals = clsNewRWriteResiduals
+        clsRWriteStdResiduals = clsNewRWriteStdResiduals
+        clsRWriteLeverage = clsNewRWriteLeverage
 
         ucrChkModel.SetRSyntax(clsRSyntax, bReset)
         ucrChkEstimates.SetRSyntax(clsRSyntax, bReset)
         ucrChkANOVA.SetRSyntax(clsRSyntax, bReset)
         ucrChkDisplayCLimits.SetRSyntax(clsRSyntax, bReset)
         ucrChkPvalues.SetRSyntax(clsRSyntax, bReset)
+        ucrPnlScale.SetRSyntax(clsRSyntax, bReset)
+        ucrPnlPlotType.SetRSyntax(clsRSyntax, bReset)
+        ucrChkJitter.SetRCode(clsRggplotFunction, bReset)
+        ucrNudGraphicsCLevel.SetRCode(clsRggplotFunction, bReset)
+        ucrNudWhiteSpace.SetRCode(clsRggplotFunction, bReset)
+        ucrChkPartial.SetRCode(clsRggplotFunction, bReset)
+        ucrPnlPartial12.SetRCode(clsRggplotFunction, bReset)
         ' ucrPnlMutiplePlots.SetRSyntax(clsRSyntax)
     End Sub
 
@@ -178,20 +253,19 @@ Public Class sdgSimpleRegOptions
             clsRSyntax.RemoveFromAfterCodes(clsRestpvalFunction)
         End If
     End Sub
-    'Public Sub SetRModelFunction(clsRModelFunc As RFunction)
-    '    clsRModelFunction = clsRModelFunc
-    'End Sub
+
+    Private Sub ucrChkFittedModel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFittedModel.ControlValueChanged
+        If ucrChkFittedModel.Checked Then
+            clsRggplotFunction.AddParameter("gg", "TRUE")
+            clsRSyntax.AddToAfterCodes(clsRggplotFunction, iPosition:=6)
+        Else
+            clsRSyntax.RemoveFromAfterCodes(clsRggplotFunction)
+        End If
+    End Sub
 
     Public Sub SetRDataFrame(clsRDataFr As ucrDataFrame)
         clsRDataFrame = clsRDataFr
     End Sub
-
-    'Public Sub SetRYVariable(clsRYVar As ucrReceiverSingle)
-    '    clsRYVariable = clsRYVar
-    'End Sub
-    'Public Sub SetRXVariable(clsRXVar As ucrReceiverSingle)
-    '    clsRXVariable = clsRXVar
-    'End Sub
 
 
     Public Sub ResidualPlots()
@@ -202,49 +276,6 @@ Public Class sdgSimpleRegOptions
         'clsRgeom_point.SetRCommand("geom_point")
     End Sub
 
-    Private Sub FittedModel()
-        clsRggplotFunction.SetPackageName("visreg")
-        clsRggplotFunction.SetRCommand("visreg")
-        clsRggplotFunction.AddParameter("fit", clsRFunctionParameter:=clsRModelFunction)
-        If rdoConditional.Checked Then
-            clsRggplotFunction.AddParameter("type", Chr(34) & "conditional" & Chr(34))
-        ElseIf rdoContrast.Checked Then
-            clsRggplotFunction.AddParameter("type", Chr(34) & "contrast" & Chr(34))
-        End If
-        If rdoLinear.Checked Then
-            clsRggplotFunction.AddParameter("scale", Chr(34) & "linear" & Chr(34))
-        ElseIf rdoResponse.Checked Then
-            clsRggplotFunction.AddParameter("scale", Chr(34) & "response" & Chr(34))
-        End If
-        If ucrChkJitter.Checked Then
-            clsRggplotFunction.AddParameter("jitter", "TRUE")
-        Else
-            clsRggplotFunction.RemoveParameterByName("jitter")
-        End If
-        clsRggplotFunction.AddParameter("alpha", nudGraphicsCLevel.Value)
-        clsRggplotFunction.AddParameter("whitespace", nudWhiteSpace.Value)
-        If ucrChkPartial.Checked Then
-            clsRggplotFunction.AddParameter("partial", "TRUE")
-        Else
-            clsRggplotFunction.AddParameter("partial", "FALSE")
-        End If
-        If ucrChkConfIntervalband.Checked = False Then
-            clsRggplotFunction.AddParameter("band", "FALSE")
-        Else
-            clsRggplotFunction.RemoveParameterByName("band")
-        End If
-        If ucrChkRugs.Checked Then
-            If rdo1.Checked Then
-                clsRggplotFunction.AddParameter("rug", 1)
-            ElseIf rdo2.Checked Then
-                clsRggplotFunction.AddParameter("rug", 2)
-            End If
-        Else
-            clsRggplotFunction.RemoveParameterByName("rug")
-        End If
-        clsRggplotFunction.AddParameter("gg", "TRUE")
-    End Sub
-
     Private Sub ConfidenceInterval()
         clsRCIFunction.SetRCommand("confint")
         clsRCIFunction.AddParameter("object", clsRFunctionParameter:=clsRModelFunction)
@@ -252,37 +283,6 @@ Public Class sdgSimpleRegOptions
         frmMain.clsRLink.RunScript(clsRCIFunction.ToScript(), 2)
     End Sub
 
-    Private Sub chkPartial_CheckedChanged(sender As Object, e As EventArgs)
-        FittedModel()
-    End Sub
-
-    Private Sub chkRugs_CheckedChanged(sender As Object, e As EventArgs)
-        If ucrChkRugs.Checked Then
-            grpRugs.Enabled = True
-            rdoPartial.Checked = True
-        End If
-        FittedModel()
-    End Sub
-
-    Private Sub rdoPartial_CheckedChanged(sender As Object, e As EventArgs)
-        FittedModel()
-    End Sub
-
-    Private Sub rdo1_CheckedChanged(sender As Object, e As EventArgs)
-        FittedModel()
-    End Sub
-
-    Private Sub rdo2_CheckedChanged(sender As Object, e As EventArgs)
-        FittedModel()
-    End Sub
-
-    Private Sub rdoConditional_CheckedChanged(sender As Object, e As EventArgs)
-        FittedModel()
-    End Sub
-
-    Private Sub rdoContrast_CheckedChanged(sender As Object, e As EventArgs)
-        FittedModel()
-    End Sub
 
     Private Sub chkMultiplePlots_CheckedChanged(sender As Object, e As EventArgs)
         GraphMultiplePlots()
@@ -382,138 +382,17 @@ Public Class sdgSimpleRegOptions
         clsRGraphics.SetOperatorParameter(False, clsRFunc:=clsRgeom_point)
     End Sub
 
-    Private Sub FittedModel_CheckedChanged(sender As Object, e As EventArgs) Handles rdoContrast.CheckedChanged, rdoConditional.CheckedChanged, rdoPartial.CheckedChanged, rdo1.CheckedChanged, rdo2.CheckedChanged
-        FittedModel()
-    End Sub
-
-    Private Sub CheckRugs_CheckedChanged(sender As Object, e As EventArgs)
-        GraphFittedModel()
-    End Sub
-
-    Private Sub DisplayTabDefaults()
-        'chkANOVA.Checked = True
-        'chkModel.Checked = True
-        'chkEstimates.Checked = True
-        'chkPvalues.Enabled = True
-        'chkPvalues.Checked = True
-        'chkDisplayCLimits.Checked = False
-        'lblDisplayCLevel.Enabled = False
-        'nudDisplayCLevel.Enabled = False
-    End Sub
-
-    Private Sub SaveTab()
-        'ucrFittedColumnName.SetPrefix("Fitted")
-        'ucrFittedColumnName.SetItemsTypeAsColumns()
-        'ucrFittedColumnName.SetDefaultTypeAsColumn()
-        'ucrFittedColumnName.SetDataFrameSelector(clsRDataFrame)
-        'ucrFittedColumnName.SetValidationTypeAsRVariable()
-
-        'ucrResidualsColumnName.SetPrefix("Resids")
-        'ucrResidualsColumnName.SetItemsTypeAsColumns()
-        'ucrResidualsColumnName.SetDefaultTypeAsColumn()
-        'ucrResidualsColumnName.SetDataFrameSelector(clsRDataFrame)
-        'ucrResidualsColumnName.SetValidationTypeAsRVariable()
-
-        'ucrStdResidualsColumnName.SetPrefix("Sresids")
-        'ucrStdResidualsColumnName.SetItemsTypeAsColumns()
-        'ucrStdResidualsColumnName.SetDefaultTypeAsColumn()
-        'ucrStdResidualsColumnName.SetDataFrameSelector(clsRDataFrame)
-        'ucrStdResidualsColumnName.SetValidationTypeAsRVariable()
-        'ucrLeverageColumnName.SetPrefix("Lever")
-        'ucrLeverageColumnName.SetItemsTypeAsColumns()
-        'ucrLeverageColumnName.SetDefaultTypeAsColumn()
-        'ucrLeverageColumnName.SetDataFrameSelector(clsRDataFrame)
-        'ucrLeverageColumnName.SetValidationTypeAsRVariable()
-        'ucrSaveFittedColumnName.Enabled = False
-        ' ucrResidualsColumnName.Enabled = False
-        'ucrStdResidualsColumnName.Enabled = False
-        ' ucrLeverageColumnName.Enabled = False
-        'ucrChkFittedValues.Checked = False
-        'ucrChkLeverage.Checked = False
-        ' ucrChkStdResiduals.Checked = False
-        'ucrChkResiduals.Checked = False
-    End Sub
-
     Private Sub GraphsTabDefaults()
-        GraphFittedModel()
+
         GraphMultiplePlots()
         GraphIndividualPlots()
     End Sub
 
     Public Sub SetDefaults()
-        DisplayTabDefaults()
-        SaveTab()
         GraphsTabDefaults()
         ucrChkFittedModel.Checked = False
         ucrChkMultiplePlots.Checked = False
         ucrChkIndividualPlots.Checked = False
-    End Sub
-
-    Private Sub pvalues()
-        If (ucrChkANOVA.Checked Or ucrChkEstimates.Checked) Then
-            chkPvalues.Enabled = True
-        Else
-            chkPvalues.Enabled = False
-        End If
-    End Sub
-
-    Private Sub chkanovatable_checkedchanged(sender As Object, e As EventArgs)
-        pvalues()
-    End Sub
-
-    Private Sub chkestimates_checkedchanged(sender As Object, e As EventArgs)
-        pvalues()
-    End Sub
-
-    Private Sub GraphFittedModel()
-        If (ucrChkFittedModel.Checked) Then
-            grpPlotType.Enabled = True
-            grpScale.Enabled = True
-            ucrNudDisplayCLevel.Enabled = True
-            nudWhiteSpace.Enabled = True
-            ucrChkPartial.Enabled = True
-            ucrChkRugs.Enabled = True
-            ucrChkJitter.Enabled = True
-            ucrChkConfIntervalband.Enabled = True
-            ucrChkIndividualPlots.Checked = False
-            ucrChkMultiplePlots.Checked = False
-        Else
-            grpPlotType.Enabled = False
-            grpScale.Enabled = False
-            ucrNudDisplayCLevel.Enabled = False
-            nudWhiteSpace.Enabled = False
-            ucrChkPartial.Enabled = False
-            ucrChkRugs.Enabled = False
-            ucrChkJitter.Enabled = False
-            ucrChkConfIntervalband.Enabled = False
-        End If
-        rdoConditional.Checked = True
-        rdoLinear.Checked = True
-        ucrNudDisplayCLevel.Value = 0.05
-        nudWhiteSpace.Value = 0.2
-        rdoPartial.Checked = True
-        If ucrChkRugs.Checked = True Then
-            grpRugs.Enabled = True
-        Else
-            grpRugs.Enabled = False
-        End If
-        If (ucrChkDisplayCLimits.Checked) Then
-            lblDisplayCLevel.Enabled = True
-            ucrNudDisplayCLevel.Enabled = True
-        Else
-            lblDisplayCLevel.Enabled = False
-            ucrNudDisplayCLevel.Enabled = False
-        End If
-
-    End Sub
-
-    Private Sub chkFittedModel_CheckedChanged(sender As Object, e As EventArgs)
-        GraphFittedModel()
-    End Sub
-
-    Private Sub chkDisplayCLimits_CheckedChanged(sender As Object, e As EventArgs)
-        GraphFittedModel()
-        DisplayConfidence()
     End Sub
 
     Private Sub DisplayConfidence()
@@ -527,48 +406,14 @@ Public Class sdgSimpleRegOptions
     End Sub
 
     Public Sub RegOptions()
-        'If (ucrChkANOVA.Checked) Then
-        '    If (chkPvalues.Checked) Then
-        '        AnovaTablePvalues()
-        '    Else
-        '        AnovaTable()
-        '    End If
-        'End If
-        'If (ucrChkEstimates.Checked) Then
-        '    If (chkPvalues.Checked) Then
-        '        EstimatesPvalues()
-        '    Else
-        '        Estimates()
-        '    End If
-        'End If
-        'If (ucrChkModel.Checked) Then
-        '    Model()
-        'End If
         If (ucrChkDisplayCLimits.Checked) Then
             ConfidenceInterval()
         End If
         If (rdoFourPlots.Checked Or rdoSixPlots2Rows.Checked Or rdoSixPlots3Rows.Checked Or rdoResidualsFitted.Checked Or rdoQQ.Checked Or rdoResidualsLeverage.Checked Or rdoScaleLocation.Checked Or rdoCooksDistance.Checked Or rdoCooksDistanceLeverage.Checked) Then
             frmMain.clsRLink.RunScript(clsRGraphics.GetScript, 3)
         End If
-        If (ucrChkFittedModel.Checked) Then
-            frmMain.clsRLink.RunScript(clsRggplotFunction.ToScript(), 3)
-        End If
-        'If ucrChkFittedValues.Checked Then
-        '    FittedValues()
-        '    frmMain.clsRLink.RunScript(clsRWriteFitted.ToScript(), 3)
-        'End If
-        'If ucrChkResiduals.Checked Then
-        '    Residuals()
-        '    frmMain.clsRLink.RunScript(clsRWriteResiduals.ToScript(), 3)
-        'End If
-        'If ucrChkStdResiduals.Checked Then
-        '    StdResiduals()
-        '    frmMain.clsRLink.RunScript(clsRWriteStdResiduals.ToScript(), 3)
-        'End If
-        'If ucrChkLeverage.Checked Then
-        '    Leverage()
-        '    frmMain.clsRLink.RunScript(clsRWriteLeverage.ToScript(), 3)
-        'End If
+
+
     End Sub
 
     Private Sub ucrFittedColumnName_NameChanged()
@@ -592,8 +437,8 @@ Public Class sdgSimpleRegOptions
         'clsRResiduals.SetRCommand("resid")
         'clsRResiduals.AddParameter("object", clsRFunctionParameter:=clsRModelFunction)
         'clsRWriteResiduals.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
-        'clsRWriteResiduals.AddParameter("data_name", Chr(34) & clsRDataFrame.cboAvailableDataFrames.Text & Chr(34))
-        'clsRWriteResiduals.AddParameter("col_name", Chr(34) & ucrResidualsColumnName.GetText & Chr(34))
+        clsRWriteResiduals.AddParameter("data_name", Chr(34) & clsRDataFrame.cboAvailableDataFrames.Text & Chr(34))
+        clsRWriteResiduals.AddParameter("col_name", Chr(34) & ucrSaveResidualsColumnName.GetText & Chr(34))
         'clsRWriteResiduals.AddParameter("col_data", clsRFunctionParameter:=clsRResiduals)
     End Sub
 
@@ -605,8 +450,8 @@ Public Class sdgSimpleRegOptions
         '    clsRStdResiduals.SetRCommand("rstandard")
         '    clsRStdResiduals.AddParameter("model", clsRFunctionParameter:=clsRModelFunction)
         '    clsRWriteStdResiduals.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
-        '    clsRWriteStdResiduals.AddParameter("data_name", Chr(34) & clsRDataFrame.cboAvailableDataFrames.Text & Chr(34))
-        '    clsRWriteStdResiduals.AddParameter("col_name", Chr(34) & ucrStdResidualsColumnName.GetText & Chr(34))
+        clsRWriteStdResiduals.AddParameter("data_name", Chr(34) & clsRDataFrame.cboAvailableDataFrames.Text & Chr(34))
+        clsRWriteStdResiduals.AddParameter("col_name", Chr(34) & ucrSaveStdResidualsColumnName.GetText & Chr(34))
         '    clsRWriteStdResiduals.AddParameter("col_data", clsRFunctionParameter:=clsRStdResiduals)
     End Sub
 

@@ -27,17 +27,17 @@ Public Class sdgVariableTransformations
     End Sub
 
     Public Sub InitialiseControls()
-        'ucrPnlGenerateFunctions.AddRadioButton(rdoIdentity)
-        'ucrPnlGenerateFunctions.AddRadioButton(rdoLogBase10)
-        'ucrPnlGenerateFunctions.AddRadioButton(rdoNaturallog)
-        'ucrPnlGenerateFunctions.AddRadioButton(rdoPower)
-        'ucrPnlGenerateFunctions.AddRadioButton(rdoSquareroot)
+        ucrPnlGenerateFunctions.AddRadioButton(rdoIdentity)
+        ucrPnlGenerateFunctions.AddRadioButton(rdoLogBase10)
+        ucrPnlGenerateFunctions.AddRadioButton(rdoNaturallog)
+        ucrPnlGenerateFunctions.AddRadioButton(rdoPower)
+        ucrPnlGenerateFunctions.AddRadioButton(rdoSquareroot)
 
-        'ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoLogBase10, "log10")
-        'ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoSquareroot, "sqrt")
-        'ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoNaturallog, "log")
-        'ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoIdentity, {"log10", "power", "log", "sqrt"}, False)
-        'ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoPower, "power")
+        ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoLogBase10, "log10")
+        ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoSquareroot, "sqrt")
+        ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoNaturallog, "log")
+        ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoIdentity, {"log10", "power", "log", "sqrt"}, False)
+        ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoPower, "power")
 
         bControlsInitialised = True
     End Sub
@@ -68,26 +68,17 @@ Public Class sdgVariableTransformations
                 'clsRModel.AddParameter(False, strParameterValue:=clsRYVariable.GetVariableNames(bWithQuotes:=False))
                 clsModel0.SetOperation("^")
                 clsModel0.bBrackets = False
-                'clsModel0.AddParameter(iPosition:=0, strParameterValue:=clsRXVariable.GetVariableNames(bWithQuotes:=False))
                 clsModel0.AddParameter(strParameterValue:=strPower)
                 clsModel0.AddParameter("x", clsRXVariable, bIncludeArgumentName:=False)
-                clsFormulaOperator.AddParameter(iPosition:=i, clsROperatorParameter:=clsModel0)
+                clsFormulaOperator.AddParameter("x", clsROperatorParameter:=clsModel0, iPosition:=1)
             End If
-        ElseIf rdoLogBase10.Checked Then
+
+        Else
             clsRToFunction.SetRCommand(strFunctionName)
             clsRToFunction.AddParameter("x", clsRXVariable, bIncludeArgumentName:=False)
-            clsFormulaOperator.AddParameter(iPosition:=i, strParameterValue:="x", clsRFunctionParameter:=clsRToFunction)
-            'clsLMorGLM.AddParameter(iPosition:=1, clsRFunctionParameter:=clsRToFunction)
+            clsFormulaOperator.AddParameter("x", clsRFunctionParameter:=clsRToFunction, iPosition:=1)
         End If
 
-    End Sub
-
-    Private Sub ucrPnlGenerateFunctions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGenerateFunctions.ControlValueChanged
-        'If rdoLogBase10.Checked Then
-        '    clsRToFunction.SetRCommand("log10")
-        '    clsRToFunction.AddParameter("x", clsRXVariable, bIncludeArgumentName:=False)
-        '    clsFormulaOperator.AddParameter("x", clsRFunctionParameter:=clsRToFunction)
-        'End If
     End Sub
 
     Public Sub ModelFunction(Optional choice As Boolean = False)
@@ -104,4 +95,5 @@ Public Class sdgVariableTransformations
             ExplanatoryFunction("power", ucrNudPower.Value, choice)
         End If
     End Sub
+
 End Class
