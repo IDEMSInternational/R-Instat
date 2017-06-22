@@ -147,7 +147,7 @@ Public Class dlgStartofRains
         'clsDSParameter.SetArgumentName("sub1")
         'ucrChkDrySpell.SetParameter(clsDSParameter, bNewChangeParameterValue:=False)
         ucrChkDrySpell.SetParameter(New RParameter("sub1", clsDSDryPeriodTen, 3, False), False)
-        ucrChkNumberOfRainyDays.AddAdditionalCodeParameterPair(clsCombineOperator, New RParameter("dryspell", clsDSCombineOperator, 3, False), iAdditionalPairNo:=1)
+        ucrChkDrySpell.AddAdditionalCodeParameterPair(clsCombineOperator, New RParameter("dryspell", clsDSCombineOperator, 3, False), iAdditionalPairNo:=1)
         ucrChkDrySpell.SetText("Dry Spell")
         ucrChkDrySpell.AddToLinkedControls(ucrNudDSLengthOfTime, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkDrySpell.AddToLinkedControls(ucrNudDSMaximumDays, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -159,7 +159,7 @@ Public Class dlgStartofRains
 
         ' Dry Period
         ucrChkDryPeriod.SetParameter(New RParameter("sub5", clsDPOverallInterval, 3, False), False)
-        ucrChkNumberOfRainyDays.AddAdditionalCodeParameterPair(clsCombineOperator, New RParameter("dryperiod", clsDPCombineOperator, 4, False), iAdditionalPairNo:=1)
+        ucrChkDryPeriod.AddAdditionalCodeParameterPair(clsCombineOperator, New RParameter("dryperiod", clsDPCombineOperator, 4, False), iAdditionalPairNo:=1)
         'clsDPParameter.SetArgumentName("sub5")
         'ucrChkDryPeriod.SetParameter(clsDPParameter, bNewChangeParameterValue:=False)
         ucrChkDryPeriod.SetText("Dry Period")
