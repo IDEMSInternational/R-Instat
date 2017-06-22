@@ -233,13 +233,14 @@ Public Class RLink
 
     Public Sub RunScript(strScript As String, Optional iCallType As Integer = 0, Optional strComment As String = "")
         Dim strCapturedScript As String
-        Dim temp As RDotNet.SymbolicExpression
-        Dim strTemp As String
+        Dim expTemp As RDotNet.SymbolicExpression
+        Dim strTemp As String = ""
         Dim strOutput As String
         Dim strScriptWithComment As String
         Dim strSplitScript As String
         Dim strTempGraphsDirectory As String
         Dim clsPNGFunction As New RFunction
+        Dim strTempAssignTo As String = ".temp_val"
 
         strTempGraphsDirectory = System.IO.Path.Combine(System.IO.Path.GetTempPath() & "R_Instat_Temp_Graphs")
         strOutput = ""
@@ -275,18 +276,19 @@ Public Class RLink
                         clsPNGFunction.SetPackageName("grDevices")
                         clsPNGFunction.SetRCommand("png")
                         clsPNGFunction.AddParameter("filename", Chr(34) & System.IO.Path.Combine(strTempGraphsDirectory & "/Graph.png").Replace("\", "/") & Chr(34))
+                        'TODO make these options
                         clsPNGFunction.AddParameter("width", 4000)
                         clsPNGFunction.AddParameter("height", 4000)
                         clsPNGFunction.AddParameter("res", 500)
-                        clsEngine.Evaluate(clsPNGFunction.ToScript())
+                        Evaluate(clsPNGFunction.ToScript())
                         'need to boost resolution of the devices, it's not as good as with ggsave.
                     End If
                 End If
-                clsEngine.Evaluate(strScript)
+                Evaluate(strScript)
                 If iCallType = 3 Then
                     If strGraphDisplayOption = "view_output_window" OrElse strGraphDisplayOption = "view_separate_window" Then
                         'add an R script (maybe in the form of one of our methods) that copies divices to the temp directory, using the default device production... use dev.list() and dev.copy() with arguments device = the devices in the list and which = jpeg devices with different paths leading to the temp directory, using a paste() method to find different names for the files
-                        clsEngine.Evaluate("graphics.off()") 'not quite sure if this would work, otherwise find the right way to close the appropriate devices.
+                        Evaluate("graphics.off()") 'not quite sure if this would work, otherwise find the right way to close the appropriate devices.
                         'clsEngine.Evaluate("ggsave(" & Chr(34) & strTempGraphsDirectory.Replace("\", "/") & "Graph.jpg" & Chr(34) & ")")
                         'This sub is used to display graphics in the output window when necessary.
                         'This sub is checking the temp directory "R_Instat_Temp_Graphs", created during setup to see if there are any graphs to display. If there are some, then it sends them to the output window, and removes them from the directory.
@@ -322,14 +324,15 @@ Public Class RLink
             Catch e As Exception
                 MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
             End Try
-
         ElseIf iCallType = 1 OrElse iCallType = 4 Then
             Try
-                temp = clsEngine.Evaluate(strScript)
-                strTemp = String.Join(Environment.NewLine, temp.AsCharacter())
-                strOutput = strOutput & strTemp & Environment.NewLine
-                If iCallType = 4 Then
-
+                'TODO check this is valid syntax in all cases
+                '     i.e. this is potentially: x <- y <- 1
+                Evaluate(strTempAssignTo & " <- " & strScript)
+                expTemp = GetSymbol(strTempAssignTo)
+                If expTemp IsNot Nothing Then
+                    strTemp = String.Join(Environment.NewLine, expTemp.AsCharacter())
+                    strOutput = strOutput & strTemp & Environment.NewLine
                 End If
             Catch e As Exception
                 MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
@@ -341,7 +344,7 @@ Public Class RLink
                 strSplitScript = Left(strScript, strScript.Trim(Environment.NewLine.ToCharArray).LastIndexOf(Environment.NewLine.ToCharArray))
                 If strSplitScript <> "" Then
                     Try
-                        clsEngine.Evaluate(strSplitScript)
+                        Evaluate(strSplitScript)
                     Catch e As Exception
                         MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
                     End Try
@@ -350,9 +353,12 @@ Public Class RLink
                 strCapturedScript = "capture.output(" & strSplitScript & ")"
             End If
             Try
-                temp = clsEngine.Evaluate(strCapturedScript)
-                strTemp = String.Join(Environment.NewLine, temp.AsCharacter())
-                strOutput = strOutput & strTemp & Environment.NewLine
+                Evaluate(strTempAssignTo & " <- " & strCapturedScript)
+                expTemp = GetSymbol(strTempAssignTo)
+                If expTemp IsNot Nothing Then
+                    strTemp = String.Join(Environment.NewLine, expTemp.AsCharacter())
+                    strOutput = strOutput & strTemp & Environment.NewLine
+                End If
             Catch e As Exception
                 MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
             End Try
@@ -370,31 +376,12 @@ Public Class RLink
     Public Function RunInternalScriptGetValue(strScript As String, Optional strVariableName As String = ".temp_value", Optional bSilent As Boolean = False) As SymbolicExpression
         Dim expTemp As SymbolicExpression
         Dim strCommand As String
-        'Dim iSplitIndex As Integer
-        'Dim iRemaining As Integer
-        'Dim iStartPoint As Integer
 
         expTemp = Nothing
         strCommand = strVariableName & "<-" & strScript
-        'If strCommand.Length > 2000 Then
-        'MsgBox("The following command cannot be run because it exceeds the character limit of 2000 characters for a command in R-Instat." & Environment.NewLine & strScript & Environment.NewLine & Environment.NewLine & "It may be possible to run the command directly in R.", MsgBoxStyle.Critical, "Cannot run command")
         If clsEngine IsNot Nothing Then
-            Try
-                'iRemaining = strScript.Length
-                'iStartPoint = 1000
-                'While iRemaining > 1000
-                '    iSplitIndex = strScript.Substring(iStartPoint).IndexOf(",") + iStartPoint
-                '    iRemaining = strScript.Length - iSplitIndex
-                '    strScript = strScript.Insert(iSplitIndex + 1, Environment.NewLine)
-                '    iStartPoint = iSplitIndex + 1000
-                'End While
-                clsEngine.Evaluate(strCommand)
-                expTemp = clsEngine.GetSymbol(strVariableName)
-            Catch ex As Exception
-                If Not bSilent Then
-                    MsgBox(ex.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
-                End If
-            End Try
+            Evaluate(strCommand, bSilent:=bSilent)
+            expTemp = GetSymbol(strVariableName, bSilent:=bSilent)
         End If
         Return expTemp
     End Function
@@ -416,27 +403,26 @@ Public Class RLink
     End Function
 
     Public Function RunInternalScript(strScript As String, Optional strVariableName As String = "", Optional bSilent As Boolean = False) As Boolean
-        'Dim iSplitIndex As Integer
-        'Dim iRemaining As Integer
         Dim strCommand As String
+        Dim bReturn As Boolean
 
-        strCommand = strVariableName & "<-" & strScript
-        'If strCommand.Length > 2000 Then
-        '    MsgBox("The following command cannot be run because it exceeds the character limit of 2000 characters for a command in R-Instat." & Environment.NewLine & strScript & Environment.NewLine & Environment.NewLine & "It may be possible to run the command directly in R.", MsgBoxStyle.Critical, "Cannot run command")
-        '    Return False
+        If strVariableName <> "" Then
+            strCommand = strVariableName & "<-" & strScript
+        Else
+            strCommand = strScript
+        End If
+        If clsEngine IsNot Nothing Then
+            bReturn = Evaluate(strCommand, bSilent:=bSilent)
+            Return bReturn
+        Else
+            Return False
+        End If
+    End Function
+
+    Private Function Evaluate(strScript As String, Optional bSilent As Boolean = False) As Boolean
         If clsEngine IsNot Nothing Then
             Try
-                'iRemaining = strScript.Length
-                'While iRemaining > 1000
-                '    iSplitIndex = strScript.Substring(1000).IndexOf(",")
-                '    iRemaining = strScript.Length - iSplitIndex
-                '    strScript = strScript.Insert(iSplitIndex + 1, Environment.NewLine)
-                'End While
-                If strVariableName <> "" Then
-                    clsEngine.Evaluate(strVariableName & "<-" & strScript)
-                Else
-                    clsEngine.Evaluate(strScript)
-                End If
+                clsEngine.Evaluate(strScript)
                 Return True
             Catch ex As Exception
                 If Not bSilent Then
@@ -449,6 +435,19 @@ Public Class RLink
         End If
     End Function
 
+    Private Function GetSymbol(strSymbol As String, Optional bSilent As Boolean = False) As SymbolicExpression
+        Dim expTemp As SymbolicExpression
+
+        Try
+            expTemp = clsEngine.GetSymbol(strSymbol)
+        Catch ex As Exception
+            If Not bSilent Then
+                MsgBox(ex.Message & Environment.NewLine & "The error occurred in attempting to retrieve:" & strSymbol, MsgBoxStyle.Critical, "Error retrieving R variable")
+            End If
+            expTemp = Nothing
+        End Try
+        Return expTemp
+    End Function
 
     Public Function GetDefaultDataFrameName(strPrefix As String, Optional iStartIndex As Integer = 1, Optional bIncludeIndex As Boolean = True) As String
         Dim strTemp As String
