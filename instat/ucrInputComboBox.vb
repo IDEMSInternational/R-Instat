@@ -146,7 +146,7 @@ Public Class ucrInputComboBox
         Dim dctValues As New Dictionary(Of String, String)
         If bAddConditions Then
             For Each strTemp As String In strItems
-                dctValues.Add(strTemp, strTemp)
+                dctValues.Add(strTemp, Chr(34) & strTemp & Chr(34))
             Next
             SetItems(dctValues, bClearExisting)
         Else
