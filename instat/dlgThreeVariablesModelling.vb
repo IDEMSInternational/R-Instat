@@ -18,6 +18,7 @@ Imports instat.Translations
 Public Class dlgThreeVariableModelling
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Public bResetSubdialog As Boolean = False
     Public clsRCIFunction, clsRConvert, clsRLmOrGLM As New RFunction
     Public clsRSingleModelFunction As RFunction
     Dim clsModel, clsModel1 As New ROperator
@@ -156,6 +157,7 @@ Public Class dlgThreeVariableModelling
 
         ucrBaseThreeVariableModelling.clsRsyntax.SetBaseRFunction(clsRLmOrGLM)
         clsRLmOrGLM.SetAssignTo(ucrSaveModel.GetText, strTempDataframe:=ucrSelectorThreeVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:=ucrSaveModel.GetText, bAssignToIsPrefix:=True)
+        bResetSubdialog = True
 
     End Sub
 
@@ -300,6 +302,7 @@ Public Class dlgThreeVariableModelling
     End Sub
 
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
+        sdgModelOptions.SetRFunction(clsRCIFunction, bResetSubdialog)
         sdgModelOptions.ShowDialog()
         ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = sdgModelOptions.ucrFamily.clsCurrDistribution.strNameTag)
     End Sub
