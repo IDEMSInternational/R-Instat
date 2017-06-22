@@ -130,9 +130,6 @@ Public Class dlgCorrelation
         clsCorrelationTestFunction.AddParameter("conf.level", "0.95")
         clsCorrelationFunction.AddParameter("use", Chr(34) & "pairwise.complete.obs" & Chr(34))
         clsCorrelationTestFunction.AddParameter("method", Chr(34) & "pearson" & Chr(34))
-        clsRGGcorrGraphicsFunction.iCallType = 3
-
-        clsCorrelationFunction.iCallType = 2
         clsCorrelationTestFunction.iCallType = 2
         ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationFunction)
     End Sub

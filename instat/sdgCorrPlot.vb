@@ -173,6 +173,8 @@ Public Class sdgCorrPlot
         End If
 
         If rdoCorrelationPlot.Checked Then
+            clsRGGcorrGraphicsFunction.iCallType = 3
+            clsCorrelationFunction.iCallType = 2
             clsRsyntax.AddToAfterCodes(clsRGGcorrGraphicsFunction, iPosition:=0)
             'clsRsyntax.RemoveFromAfterCodes(clsRGGscatmatrixFunction)
         ElseIf rdoScatterPlotMatrix.Checked Then
