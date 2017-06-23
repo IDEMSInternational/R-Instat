@@ -258,8 +258,8 @@ Public Class ucrInputComboBox
         cboCurrent.DropDownWidth = iWidth
     End Sub
 
-    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
-        MyBase.UpdateControl(bReset)
+    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
+        MyBase.UpdateControl(bReset:=bReset, bCloneIfNeeded:=bCloneIfNeeded)
     End Sub
 
     Public Sub SetDropDownStyleAsNonEditable()

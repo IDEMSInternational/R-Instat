@@ -83,6 +83,12 @@ Public Class RFunction
         Return Nothing
     End Function
 
+    Public Overrides Sub Clear()
+        SetRCommand("")
+        SetPackageName("")
+        MyBase.Clear()
+    End Sub
+
     Public Overrides Sub ClearParameters()
         MyBase.ClearParameters()
     End Sub
