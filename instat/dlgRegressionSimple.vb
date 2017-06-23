@@ -216,8 +216,8 @@ Public Class dlgRegressionSimple
         'FitModel
         clsRggplotFunction = clsRegressionDefaults.clsDefaultRggplot.Clone
         clsRggplotFunction.AddParameter("type", Chr(34) & "conditional" & Chr(34))
-        ' clsRggplotFunction.AddParameter("scale", Chr(34) & "linear" & Chr(34))
         ' clsRggplotFunction.AddParameter("rug", "TRUE")
+        clsRggplotFunction.AddParameter("alpha", clsRFunctionParameter:=clsRLmOrGLM)
         clsRggplotFunction.AddParameter("fit", clsRFunctionParameter:=clsRLmOrGLM)
         clsRggplotFunction.iCallType = 3
 
