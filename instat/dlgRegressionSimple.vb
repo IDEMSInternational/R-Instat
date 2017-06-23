@@ -14,20 +14,14 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgRegressionSimple
     Public bFirstLoad As Boolean = True
     Public clsModel, clsFormulaOperator, clsRGraphicsOperator, clsFunctionOperation, clsPoissonOperation, clsPoissonOperation2, clsRBinomialOperation, clsRBinomialOperation2, clsRBinomialOperation3 As New ROperator
     Public clsRPoisson, clsRggplotFunction, clsRLeverage, clsRWriteLeverage, clsRResiduals, clsRStdResiduals, clsRWriteResiduals, clsRWriteStdResiduals, clsRgeom_point, clsRResidualPlots, clsRModelsFunction, clsRWriteFitted, clsRFittedValues, clsRSummaryFunction, clsRestpvalFunction, clsRanovaFunction, clsRConfint, clsRaovpvalFunction, clsRModelFunction, clsRaovFunction, clsRTTest, clsRFTest, clsRKruskalTest, clsRBinomial, clsRWilcoxTest, clsRConvert, clsRCIFunction, clsRFactor, clsRFactor2, clsRNumeric, clsGLM, clsxFunc, clsRMean, clsRMean2, clsRGroup, clsRGroup2, clsRLmOrGLM, clsTFunc, clsRLength As New RFunction
-    Public clsRYVariable, clsRXVariable As String
-
-    Private Sub ucrExplanatory_Load() Handles ucrExplanatory.ControlValueChanged
-
-    End Sub
-
+    Public clsRYVariable, clsRXVariable, ModelPreview As String
     Private bReset As Boolean = True
-
-
     Public bResetSubDialog As Boolean = False
     Public bResetOptionsSubDialog As Boolean = False
     Private Sub dlgRegressionSimple_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -58,6 +52,14 @@ Public Class dlgRegressionSimple
         'ucrNudHypothesis.AddAdditionalCodeParameterPair(clsRPoisson, New RParameter("r"), 1)
     End Sub
 
+    Private Sub Preview()
+        Dim ResponseVar As String
+        Dim ExplanatoryVar As String
+        ResponseVar = ucrResponse.GetVariableNames(bWithQuotes:=False)
+        ExplanatoryVar = ucrExplanatory.GetVariableNames(bWithQuotes:=False)
+        ModelPreview = ResponseVar & "~" & ExplanatoryVar
+    End Sub
+
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.iCallType = 2
 
@@ -82,8 +84,6 @@ Public Class dlgRegressionSimple
         ucrSaveModels.SetDataFrameSelector(ucrSelectorSimpleReg.ucrAvailableDataFrames)
         ucrSaveModels.SetCheckBoxText("Save Model")
         ucrSaveModels.SetIsComboBox()
-
-
 
         ucrPnlMeansAndVariance.AddRadioButton(rdoCompareMeans)
         ucrPnlMeansAndVariance.AddRadioButton(rdoCompareVariance)
@@ -196,6 +196,7 @@ Public Class dlgRegressionSimple
         clsRLmOrGLM = clsRegressionDefaults.clsDefaultRLmOrGLM.Clone
         clsRLmOrGLM.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
 
+
         'Residual Plots
         clsRResidualPlots = clsRegressionDefaults.clsDefaultRResidualPlots.Clone
         clsRResidualPlots.AddParameter("object", clsRFunctionParameter:=clsRLmOrGLM)
@@ -210,6 +211,9 @@ Public Class dlgRegressionSimple
 
         'FitModel
         clsRggplotFunction = clsRegressionDefaults.clsDefaultRggplot.Clone
+        clsRggplotFunction.AddParameter("type", Chr(34) & "conditional" & Chr(34))
+        clsRggplotFunction.AddParameter("scale", Chr(34) & "linear" & Chr(34))
+        clsRggplotFunction.AddParameter("rug", "TRUE")
         clsRggplotFunction.AddParameter("fit", clsRFunctionParameter:=clsRLmOrGLM)
         clsRggplotFunction.iCallType = 3
 
@@ -370,6 +374,7 @@ Public Class dlgRegressionSimple
 
     Private Sub ucrResponse_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrResponse.ControlValueChanged
         clsRYVariable = ucrResponse.GetVariableNames(bWithQuotes:=False)
+        Preview()
     End Sub
 
 
@@ -382,6 +387,7 @@ Public Class dlgRegressionSimple
 
     Private Sub ucrExplanatory_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrExplanatory.ControlValueChanged
         clsRXVariable = ucrExplanatory.GetVariableNames(bWithQuotes:=False)
+        Preview()
     End Sub
 
 
@@ -570,10 +576,6 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub SetRCode()
-        'clsRPoisson.ClearParameters()
-        'clsRBinomial.ClearParameters()
-        'clsRTTest.ClearParameters()
-        'clsRLmOrGLM.ClearParameters()
         If rdoGeneralCase.Checked Then
             If (ucrFamily.clsCurrDistribution.strNameTag = "Normal") Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsRLmOrGLM)
@@ -603,22 +605,23 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub TestOKEnabled()
-        '  If Not ucrResponse.IsEmpty() AndAlso Not ucrExplanatory.IsEmpty() AndAlso ucrFamily.Enabled AndAlso Not ucrFamily.ucrInputDistributions.IsEmpty() AndAlso (ucrSaveModels.IsComplete) Then
-        'ucrModelPreview.SetName(clsRLmOrGLM.ToScript)
-        '            If rdoSpecific.Checked AndAlso (ucrFamily.clsCurrDistribution.strNameTag = "Poisson" OrElse ucrFamily.clsCurrDistribution.strNameTag = "Binomial") AndAlso Not (ucrLevel1.IsEmpty OrElse ucrLevel2.IsEmpty) Then
-        'ucrBase.OKEnabled(True)
-        '            Else
-        '           ucrBase.OKEnabled(False)
-        '      End If
-        'If rdoGeneralCase.Checked Then
-        'ucrBase.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsModel)
-        'End If
-        'Else
-        'ucrBase.OKEnabled(False)
-        ' End If
-        If Not ucrResponse.IsEmpty() Then
+        If Not ucrResponse.IsEmpty() AndAlso Not ucrExplanatory.IsEmpty() AndAlso (ucrSaveModels.IsComplete) Then
+            ucrModelPreview.SetName(ModelPreview)
+            'If rdoSpecific.Checked AndAlso (ucrFamily.clsCurrDistribution.strNameTag = "Poisson" OrElse ucrFamily.clsCurrDistribution.strNameTag = "Binomial") AndAlso Not (ucrLevel1.IsEmpty OrElse ucrLevel2.IsEmpty) Then
+            '    ucrBase.OKEnabled(True)
+            'Else
+            '    ucrBase.OKEnabled(False)
+            'End If
+            'If rdoGeneralCase.Checked Then
+            '    ucrBase.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsModel)
+            'End If
             ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
         End If
+        'If Not ucrResponse.IsEmpty() Then
+        '    ucrBase.OKEnabled(True)
+        'End If
     End Sub
 
     Private Sub ucrSelectorSimpleReg_DataFrameChanged() Handles ucrSelectorSimpleReg.ControlValueChanged
@@ -662,7 +665,6 @@ Public Class dlgRegressionSimple
                 ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
             End If
         End If
-        TestOKEnabled()
     End Sub
 
     Public Sub SetEnableDists()
@@ -854,5 +856,9 @@ Public Class dlgRegressionSimple
 
     Private Sub ucrResponse_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrResponse.ControlValueChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrPnlModelType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlModelType.ControlValueChanged
+        SetRCode()
     End Sub
 End Class
