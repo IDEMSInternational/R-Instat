@@ -280,7 +280,7 @@ Public Class ucrSave
         OnControlContentsChanged()
     End Sub
 
-    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
+    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
         Dim clsMainRCode As RCodeStructure
 
         clsMainRCode = GetRCode()

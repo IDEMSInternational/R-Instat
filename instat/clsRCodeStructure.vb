@@ -102,8 +102,13 @@ Public Class RCodeStructure
         strAssignToDataFrame = ""
         strAssignToColumn = ""
         strAssignToModel = ""
+        strAssignToGraph = ""
+        strAssignToTable = ""
         bToBeAssigned = False
         bIsAssigned = False
+        bAssignToIsPrefix = False
+        bAssignToColumnWithoutNames = False
+        bInsertColumnBefore = False
     End Sub
 
     Public Overridable Function ToScript(Optional ByRef strScript As String = "", Optional strTemp As String = "") As String
@@ -317,6 +322,7 @@ Public Class RCodeStructure
         'It will be called only in places where it is necessary ie before ToScript or RemoveAdditionalParameters in ROperator.
         clsParameters.Sort(AddressOf CompareParametersPosition)
     End Sub
+
     Private Function CompareParametersPosition(ByVal clsMain As RParameter, ByVal clsRelative As RParameter) As Integer
         'Compares two RParameters according to their Position property. If x is "smaller" than y, then return -1, if they are "equal" return 0 else return 1.
         If clsMain.Position = clsRelative.Position Then
@@ -377,8 +383,21 @@ Public Class RCodeStructure
         Return (clsParameters.FindIndex(Function(x) x.strArgumentName = strParameterName) <> -1)
     End Function
 
+    Public Overridable Sub Clear()
+        'todo tidy up iPosition 
+        iPosition = -1
+        iCallType = 0
+        bExcludeAssignedFunctionOutput = True
+        'todo shouldn't this be true by default
+        bClearFromGlobal = False
+        bToScriptAsRString = False
+        RemoveAssignTo()
+        ClearParameters()
+    End Sub
+
     Public Overridable Sub ClearParameters()
         clsParameters.Clear()
+        iNumberOfAddedParameters = 0
         bIsAssigned = False
         OnParametersChanged()
     End Sub
