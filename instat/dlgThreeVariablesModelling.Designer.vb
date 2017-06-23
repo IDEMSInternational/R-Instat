@@ -79,7 +79,7 @@ Partial Class dlgThreeVariableModelling
         '
         'cmdDisplayOptions
         '
-        Me.cmdDisplayOptions.Location = New System.Drawing.Point(286, 268)
+        Me.cmdDisplayOptions.Location = New System.Drawing.Point(317, 265)
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
         Me.cmdDisplayOptions.Size = New System.Drawing.Size(122, 23)
         Me.cmdDisplayOptions.TabIndex = 16
@@ -90,7 +90,7 @@ Partial Class dlgThreeVariableModelling
         'lblModelPreview
         '
         Me.lblModelPreview.AutoSize = True
-        Me.lblModelPreview.Location = New System.Drawing.Point(6, 249)
+        Me.lblModelPreview.Location = New System.Drawing.Point(6, 271)
         Me.lblModelPreview.Name = "lblModelPreview"
         Me.lblModelPreview.Size = New System.Drawing.Size(80, 13)
         Me.lblModelPreview.TabIndex = 10
@@ -99,7 +99,7 @@ Partial Class dlgThreeVariableModelling
         '
         'cmdModelOptions
         '
-        Me.cmdModelOptions.Location = New System.Drawing.Point(286, 214)
+        Me.cmdModelOptions.Location = New System.Drawing.Point(315, 214)
         Me.cmdModelOptions.Name = "cmdModelOptions"
         Me.cmdModelOptions.Size = New System.Drawing.Size(122, 23)
         Me.cmdModelOptions.TabIndex = 13
@@ -118,7 +118,7 @@ Partial Class dlgThreeVariableModelling
         '
         'ucrSaveModel
         '
-        Me.ucrSaveModel.Location = New System.Drawing.Point(9, 270)
+        Me.ucrSaveModel.Location = New System.Drawing.Point(9, 298)
         Me.ucrSaveModel.Name = "ucrSaveModel"
         Me.ucrSaveModel.Size = New System.Drawing.Size(255, 24)
         Me.ucrSaveModel.TabIndex = 30
@@ -205,14 +205,14 @@ Partial Class dlgThreeVariableModelling
         Me.ucrModelPreview.AddQuotesIfUnrecognised = True
         Me.ucrModelPreview.IsMultiline = False
         Me.ucrModelPreview.IsReadOnly = False
-        Me.ucrModelPreview.Location = New System.Drawing.Point(91, 243)
+        Me.ucrModelPreview.Location = New System.Drawing.Point(91, 267)
         Me.ucrModelPreview.Name = "ucrModelPreview"
-        Me.ucrModelPreview.Size = New System.Drawing.Size(176, 21)
+        Me.ucrModelPreview.Size = New System.Drawing.Size(221, 21)
         Me.ucrModelPreview.TabIndex = 11
         '
         'ucrFamily
         '
-        Me.ucrFamily.Location = New System.Drawing.Point(9, 203)
+        Me.ucrFamily.Location = New System.Drawing.Point(9, 211)
         Me.ucrFamily.Name = "ucrFamily"
         Me.ucrFamily.Size = New System.Drawing.Size(225, 43)
         Me.ucrFamily.TabIndex = 12
@@ -229,7 +229,7 @@ Partial Class dlgThreeVariableModelling
         '
         'ucrBaseThreeVariableModelling
         '
-        Me.ucrBaseThreeVariableModelling.Location = New System.Drawing.Point(9, 297)
+        Me.ucrBaseThreeVariableModelling.Location = New System.Drawing.Point(4, 329)
         Me.ucrBaseThreeVariableModelling.Name = "ucrBaseThreeVariableModelling"
         Me.ucrBaseThreeVariableModelling.Size = New System.Drawing.Size(404, 54)
         Me.ucrBaseThreeVariableModelling.TabIndex = 17
@@ -238,7 +238,7 @@ Partial Class dlgThreeVariableModelling
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(493, 353)
+        Me.ClientSize = New System.Drawing.Size(493, 386)
         Me.Controls.Add(Me.ucrSaveModel)
         Me.Controls.Add(Me.ucrChkSecondFunction)
         Me.Controls.Add(Me.ucrReceiverSecondExplanatory)

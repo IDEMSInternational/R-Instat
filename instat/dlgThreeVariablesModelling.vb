@@ -139,6 +139,7 @@ Public Class dlgThreeVariableModelling
 
         clsRCIFunction.SetRCommand(ucrFamily.clsCurrDistribution.strGLMFunctionName)
 
+
         clsRLmOrGLM.SetRCommand("lm")
         clsRLmOrGLM.AddParameter("formula", clsROperatorParameter:=clsModel, iPosition:=0)
 
@@ -294,18 +295,35 @@ Public Class dlgThreeVariableModelling
         If (ucrFamily.clsCurrDistribution.strNameTag = "Normal") Then
             ucrBaseThreeVariableModelling.clsRsyntax.SetFunction("lm")
             ucrBaseThreeVariableModelling.clsRsyntax.RemoveParameter("family")
+        ElseIf (ucrFamily.clsCurrDistribution.strNameTag = "Gamma" Or ucrFamily.clsCurrDistribution.strNameTag = "Poisson" Or ucrFamily.clsCurrDistribution.strNameTag = "Quasipoisson") Then
+            clsRCIFunction.SetRCommand(ucrFamily.clsCurrDistribution.strGLMFunctionName)
+            ucrBaseThreeVariableModelling.clsRsyntax.SetFunction("glm")
+            ucrBaseThreeVariableModelling.clsRsyntax.AddParameter("family", clsRFunctionParameter:=clsRCIFunction)
+            clsRCIFunction.AddParameter("link", "log")
+
+        ElseIf (ucrFamily.clsCurrDistribution.strNameTag = "Quasi") Then
+            clsRCIFunction.SetRCommand(ucrFamily.clsCurrDistribution.strGLMFunctionName)
+            ucrBaseThreeVariableModelling.clsRsyntax.SetFunction("glm")
+            ucrBaseThreeVariableModelling.clsRsyntax.AddParameter("family", clsRFunctionParameter:=clsRCIFunction)
+            clsRCIFunction.AddParameter("link", "identity")
+
+        ElseIf (ucrFamily.clsCurrDistribution.strNameTag = "Inverse_Gaussian") Then
+            clsRCIFunction.SetRCommand(ucrFamily.clsCurrDistribution.strGLMFunctionName)
+            ucrBaseThreeVariableModelling.clsRsyntax.SetFunction("glm")
+            ucrBaseThreeVariableModelling.clsRsyntax.AddParameter("family", clsRFunctionParameter:=clsRCIFunction)
+            clsRCIFunction.AddParameter("link", "1/mu^2")
         Else
             clsRCIFunction.SetRCommand(ucrFamily.clsCurrDistribution.strGLMFunctionName)
             ucrBaseThreeVariableModelling.clsRsyntax.SetFunction("glm")
             ucrBaseThreeVariableModelling.clsRsyntax.AddParameter("family", clsRFunctionParameter:=clsRCIFunction)
+            clsRCIFunction.AddParameter("link", "logit")
         End If
+
     End Sub
 
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
         sdgModelOptions.SetRFunction(clsRCIFunction, bResetSubdialog)
         sdgModelOptions.ShowDialog()
-        sdgModelOptions.RestrictLink()
-
         ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = sdgModelOptions.ucrFamily.clsCurrDistribution.strNameTag)
         bResetSubdialog = False
     End Sub
