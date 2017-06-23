@@ -199,8 +199,8 @@ Public Class dlgRegressionSimple
         'Residual Plots
         clsRResidualPlots = clsRegressionDefaults.clsDefaultRResidualPlots.Clone
         clsRResidualPlots.AddParameter("object", clsRFunctionParameter:=clsRLmOrGLM)
-
         clsRgeom_point = clsRegressionDefaults.clsDefaultRgeom_pointFunction.Clone
+        clsRGraphicsOperator.AddParameter("geom_point", clsRFunctionParameter:=clsRgeom_point, iPosition:=1)
 
 
         clsRaovFunction.SetPackageName("stats")
