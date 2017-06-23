@@ -287,9 +287,9 @@ Public Class dlgThreeVariableModelling
     End Sub
 
     Public Sub ucrFamily_cboDistributionsIndexChanged() Handles ucrFamily.DistributionsIndexChanged
-        'sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
-        '  sdgModelOptions.ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = sdgModelOptions.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
-        'sdgModelOptions.RestrictLink()
+        sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
+        sdgModelOptions.ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = sdgModelOptions.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
+        sdgModelOptions.RestrictLink()
         'TODO:   Include multinomial as an option And the appropriate function
         If (ucrFamily.clsCurrDistribution.strNameTag = "Normal") Then
             ucrBaseThreeVariableModelling.clsRsyntax.SetFunction("lm")
@@ -304,7 +304,10 @@ Public Class dlgThreeVariableModelling
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
         sdgModelOptions.SetRFunction(clsRCIFunction, bResetSubdialog)
         sdgModelOptions.ShowDialog()
+        sdgModelOptions.RestrictLink()
+
         ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = sdgModelOptions.ucrFamily.clsCurrDistribution.strNameTag)
+        bResetSubdialog = False
     End Sub
     Private Sub chkResponseFunction_CheckedChanged() Handles ucrChkResponseFunction.ControlValueChanged
         If ucrChkResponseFunction.Checked Then

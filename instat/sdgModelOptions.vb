@@ -27,13 +27,13 @@ Public Class sdgModelOptions
 
         ucrPnlLinkFunctions.SetParameter(New RParameter("link", 0))
 
-        ucrPnlLinkFunctions.AddRadioButton(rdoidentity, Chr(34) & "identity" & Chr(34))
+        ucrPnlLinkFunctions.AddRadioButton(rdoIdentity, Chr(34) & "identity" & Chr(34))
         ucrPnlLinkFunctions.AddRadioButton(rdoCauchit, Chr(34) & "cauchit" & Chr(34))
         ucrPnlLinkFunctions.AddRadioButton(rdocloglog, Chr(34) & "cloglog" & Chr(34))
-        ucrPnlLinkFunctions.AddRadioButton(rdolog, Chr(34) & "log" & Chr(34))
+        ucrPnlLinkFunctions.AddRadioButton(rdoLog, Chr(34) & "log" & Chr(34))
         ucrPnlLinkFunctions.AddRadioButton(rdoSqrt, Chr(34) & "sqrt" & Chr(34))
         ucrPnlLinkFunctions.AddRadioButton(rdoProbit, Chr(34) & "probit" & Chr(34))
-        ucrPnlLinkFunctions.AddRadioButton(rdologit, Chr(34) & "logit" & Chr(34))
+        ucrPnlLinkFunctions.AddRadioButton(rdoLogit, Chr(34) & "logit" & Chr(34))
         ucrPnlLinkFunctions.AddRadioButton(rdoMuSquaredInverse, Chr(34) & "1/mu^2" & Chr(34))
         ucrPnlLinkFunctions.AddRadioButton(rdoInverse, Chr(34) & "inverse" & Chr(34))
         bControlsInitialised = True
@@ -84,13 +84,13 @@ Public Class sdgModelOptions
         ResetLinks()
         If strFamilyName = "Normal" Then
             rdoIdentity.Enabled = True
-            rdoIdentity.Checked = True
+            'rdoIdentity.Checked = True
             rdoInverse.Enabled = True
             rdoLog.Enabled = True
         End If
         If strFamilyName = "Binomial" Or strFamilyName = "Quasibinomial" Then
             rdoLogit.Enabled = True
-            rdoLogit.Checked = True
+            'rdoLogit.Checked = True
             rdoCauchit.Enabled = True
             rdocloglog.Enabled = True
             rdoLog.Enabled = True
@@ -99,25 +99,25 @@ Public Class sdgModelOptions
         If strFamilyName = "Gamma" Then
             rdoInverse.Enabled = True
             rdoLog.Enabled = True
-            rdoLog.Checked = True
+            ' rdoLog.Checked = True
             rdoIdentity.Enabled = True
         End If
         If strFamilyName = "Poisson" Or strFamilyName = "Quasipoisson" Then
             rdoLog.Enabled = True
-            rdoLog.Checked = True
+            '  rdoLog.Checked = True
             rdoIdentity.Enabled = True
             rdoSqrt.Enabled = True
         End If
         If strFamilyName = "Inverse_Gaussian" Then
             rdoMuSquaredInverse.Enabled = True
-            rdoMuSquaredInverse.Checked = True
+            ' rdoMuSquaredInverse.Checked = True
             rdoIdentity.Enabled = True
             rdoInverse.Enabled = True
             rdoLog.Enabled = True
         End If
         If strFamilyName = "Quasi" Then
             rdoIdentity.Enabled = True
-            rdoIdentity.Checked = True
+            ' rdoIdentity.Checked = True
             rdocloglog.Enabled = True
             rdoInverse.Enabled = True
             rdoLog.Enabled = True
