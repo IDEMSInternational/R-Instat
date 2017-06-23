@@ -51,8 +51,8 @@ Public Class sdgSimpleRegOptions
         ucrNudDisplayCLevel.SetLinkedDisplayControl(lblDisplayCLevel)
 
 
-        ucrChkMultiplePlots.SetText("Multiple Plots")
-        ucrChkIndividualPlots.SetText("Individual Plots")
+
+
         ucrChkFittedModel.SetText("Fitted Model")
 
         ucrSaveFittedColumnName.SetPrefix("Fitted")
@@ -80,15 +80,7 @@ Public Class sdgSimpleRegOptions
         ucrSaveLeverageColumnName.SetDataFrameSelector(clsRDataFrame)
         ucrSaveLeverageColumnName.SetAssignToIfUncheckedValue("last_Lever")
 
-        'Graphics Model
-        ucrChkMultiplePlots.AddToLinkedControls(ucrNudDisplayCLevel, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
-        ucrChkMultiplePlots.AddToLinkedControls(ucrNudWhiteSpace, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
-        ucrChkMultiplePlots.AddToLinkedControls(ucrChkPartial, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
-        ucrChkMultiplePlots.AddToLinkedControls(ucrChkRugs, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
-        ucrChkRugs.AddToLinkedControls(ucrPnlPartial12, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
-        ucrChkMultiplePlots.AddToLinkedControls(ucrChkJitter, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
-        ucrChkMultiplePlots.AddToLinkedControls(ucrChkConfIntervalband, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
-
+        'Multiple Plots (Autoplot function)
         ucrPnlMutiplePlots.AddRadioButton(rdoFourPlots)
         ucrPnlMutiplePlots.AddRadioButton(rdoSixPlots2Rows)
         ucrPnlMutiplePlots.AddRadioButton(rdoSixPlots3Rows)
@@ -96,13 +88,52 @@ Public Class sdgSimpleRegOptions
         ucrPnlMutiplePlots.AddRSyntaxContainsFunctionNamesCondition(rdoSixPlots2Rows, {"autoplot"})
         ucrPnlMutiplePlots.AddRSyntaxContainsFunctionNamesCondition(rdoSixPlots3Rows, {"autoplot"})
 
+        ucrChkMultiplePlots.AddFunctionNamesCondition(False, "autoplot")
+        ucrChkMultiplePlots.SetText("Multiple Plots")
+        ucrChkMultiplePlots.AddToLinkedControls(ucrPnlMutiplePlots, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoFourPlots)
+        ' ucrPnlMutiplePlots.SetLinkedDisplayControl(grpMultiplePlots)
+
+        'Individual Plots (Autoplot function)
+        ucrPnlIndividualPlots.AddRadioButton(rdoResidualsFitted)
+        ucrPnlIndividualPlots.AddRadioButton(rdoQQ)
+        ucrPnlIndividualPlots.AddRadioButton(rdoResidualsLeverage)
+        ucrPnlIndividualPlots.AddRadioButton(rdoScaleLocation)
+        ucrPnlIndividualPlots.AddRadioButton(rdoCooksDistanceLeverage)
+        ucrPnlIndividualPlots.AddRadioButton(rdoCooksDistance)
+        ucrPnlIndividualPlots.AddRSyntaxContainsFunctionNamesCondition(rdoResidualsFitted, {"autoplot"})
+        ucrPnlIndividualPlots.AddRSyntaxContainsFunctionNamesCondition(rdoQQ, {"autoplot"})
+        ucrPnlIndividualPlots.AddRSyntaxContainsFunctionNamesCondition(rdoResidualsLeverage, {"autoplot"})
+        ucrPnlIndividualPlots.AddRSyntaxContainsFunctionNamesCondition(rdoScaleLocation, {"autoplot"})
+        ucrPnlIndividualPlots.AddRSyntaxContainsFunctionNamesCondition(rdoCooksDistanceLeverage, {"autoplot"})
+        ucrPnlIndividualPlots.AddRSyntaxContainsFunctionNamesCondition(rdoCooksDistance, {"autoplot"})
+
+        ucrChkIndividualPlots.AddFunctionNamesCondition(False, "autoplot")
+        ucrChkIndividualPlots.SetText("Individual Plots")
+        ucrChkIndividualPlots.AddToLinkedControls(ucrPnlIndividualPlots, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoResidualsFitted)
+        'ucrPnlIndividualPlots.SetLinkedDisplayControl(grpIndividualPlots)
+
+        'Fitting Models Plots (Visreg)
+        ucrChkFittedModel.AddFunctionNamesCondition(False, "visreg")
+        ''type
         ucrPnlPlotType.SetParameter(New RParameter("type"))
         ucrPnlPlotType.AddRadioButton(rdoConditional, Chr(34) & "conditional" & Chr(34))
         ucrPnlPlotType.AddRadioButton(rdoContrast, Chr(34) & "contrast" & Chr(34))
+        ucrChkFittedModel.AddToLinkedControls(ucrPnlPlotType, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
 
+        ''scale
         ucrPnlScale.SetParameter(New RParameter("scale"))
         ucrPnlScale.AddRadioButton(rdoLinear, Chr(34) & "linear" & Chr(34))
         ucrPnlScale.AddRadioButton(rdoResponse, Chr(34) & "response" & Chr(34))
+        ucrChkFittedModel.AddToLinkedControls(ucrPnlScale, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
+        ucrPnlScale.SetRDefault(Chr(34) & "linear" & Chr(34))
+
+        ucrChkFittedModel.AddToLinkedControls(ucrNudWhiteSpace, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
+        ucrChkFittedModel.AddToLinkedControls(ucrChkPartial, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
+        ucrChkFittedModel.AddToLinkedControls(ucrChkRugs, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
+        ucrChkRugs.AddToLinkedControls(ucrPnlPartial12, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
+        ucrChkFittedModel.AddToLinkedControls(ucrChkJitter, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
+        ucrChkFittedModel.AddToLinkedControls(ucrChkConfIntervalband, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
+
 
         ucrChkRugs.SetText("Rugs")
         ucrPnlPartial12.SetParameter(New RParameter("rug"))
@@ -116,6 +147,9 @@ Public Class sdgSimpleRegOptions
         ucrChkJitter.SetRDefault("FALSE")
 
         ucrNudGraphicsCLevel.SetParameter(New RParameter("alpha"))
+        ucrNudGraphicsCLevel.DecimalPlaces = 2
+        ucrNudGraphicsCLevel.Increment = 0.01
+        ucrNudGraphicsCLevel.SetMinMax(0, 1)
         ucrNudWhiteSpace.SetParameter(New RParameter("whitespace"))
 
         ucrChkPartial.SetText("Partial")
@@ -201,7 +235,11 @@ Public Class sdgSimpleRegOptions
         ucrNudWhiteSpace.SetRCode(clsRggplotFunction, bReset)
         ucrChkPartial.SetRCode(clsRggplotFunction, bReset)
         ucrPnlPartial12.SetRCode(clsRggplotFunction, bReset)
-        ' ucrPnlMutiplePlots.SetRSyntax(clsRSyntax)
+        ucrChkIndividualPlots.SetRCode(clsRResidualPlotsFunction, bReset)
+        ucrPnlIndividualPlots.SetRCode(clsRResidualPlotsFunction, bReset)
+        ucrChkMultiplePlots.SetRCode(clsRResidualPlotsFunction, bReset)
+        ucrPnlMutiplePlots.SetRCode(clsRResidualPlotsFunction, bReset)
+        ucrChkFittedModel.SetRCode(clsRggplotFunction, bReset)
     End Sub
 
     Private Sub ucrChkANOVA_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkANOVA.ControlValueChanged
@@ -258,15 +296,6 @@ Public Class sdgSimpleRegOptions
         clsRDataFrame = clsRDataFr
     End Sub
 
-
-    Public Sub ResidualPlots()
-        'clsRGraphics.SetOperation("+")
-        'clsRResidualPlotsFunction.SetPackageName("ggplot2")
-        'clsRResidualPlotsFunction.SetRCommand("autoplot")
-        'clsRResidualPlotsFunction.AddParameter("object", clsRFunctionParameter:=clsRModelFunction)
-        'clsRgeom_point.SetRCommand("geom_point")
-    End Sub
-
     Private Sub ConfidenceInterval()
         clsRCIFunction.SetRCommand("confint")
         clsRCIFunction.AddParameter("object", clsRFunctionParameter:=clsRModelFunction)
@@ -276,29 +305,29 @@ Public Class sdgSimpleRegOptions
 
 
     Private Sub chkMultiplePlots_CheckedChanged(sender As Object, e As EventArgs)
-        GraphMultiplePlots()
+        'GraphMultiplePlots()
     End Sub
 
     Private Sub GraphMultiplePlots()
-        If ucrChkMultiplePlots.Checked Then
-            ucrChkFittedModel.Checked = False
-            ucrChkIndividualPlots.Checked = False
-            grpMultiplePlots.Enabled = True
-            rdoFourPlots.Checked = True
-        Else
-            grpMultiplePlots.Enabled = False
-        End If
+        'If ucrChkMultiplePlots.Checked Then
+        '    ucrChkFittedModel.Checked = False
+        '    ucrChkIndividualPlots.Checked = False
+        '    grpMultiplePlots.Enabled = True
+        '    rdoFourPlots.Checked = True
+        'Else
+        '    grpMultiplePlots.Enabled = False
+        'End If
     End Sub
 
     Private Sub GraphIndividualPlots()
-        If ucrChkIndividualPlots.Checked Then
-            ucrChkFittedModel.Checked = False
-            ucrChkMultiplePlots.Checked = False
-            grpIndividualPlots.Enabled = True
-            rdoResidualsFitted.Checked = True
-        Else
-            grpIndividualPlots.Enabled = False
-        End If
+        'If ucrChkIndividualPlots.Checked Then
+        '    ucrChkFittedModel.Checked = False
+        '    ucrChkMultiplePlots.Checked = False
+        '    grpIndividualPlots.Enabled = True
+        '    rdoResidualsFitted.Checked = True
+        'Else
+        '    grpIndividualPlots.Enabled = False
+        'End If
     End Sub
 
     Private Sub chkIndividualPlots_CheckedChanged(sender As Object, e As EventArgs)

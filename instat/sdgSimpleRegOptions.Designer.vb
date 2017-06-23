@@ -370,11 +370,11 @@ Partial Class sdgSimpleRegOptions
         Me.tbResiduals.Controls.Add(Me.rdoScaleLocation)
         Me.tbResiduals.Controls.Add(Me.rdoQQ)
         Me.tbResiduals.Controls.Add(Me.rdoResidualsFitted)
-        Me.tbResiduals.Controls.Add(Me.grpIndividualPlots)
         Me.tbResiduals.Controls.Add(Me.grpMultiplePlots)
         Me.tbResiduals.Controls.Add(Me.ucrPnlIndividualPlots)
         Me.tbResiduals.Controls.Add(Me.ucrChkIndividualPlots)
         Me.tbResiduals.Controls.Add(Me.ucrChkMultiplePlots)
+        Me.tbResiduals.Controls.Add(Me.grpIndividualPlots)
         Me.tbResiduals.Location = New System.Drawing.Point(4, 22)
         Me.tbResiduals.Name = "tbResiduals"
         Me.tbResiduals.Padding = New System.Windows.Forms.Padding(3)

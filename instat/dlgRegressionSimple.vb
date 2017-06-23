@@ -41,10 +41,12 @@ Public Class dlgRegressionSimple
     Private Sub SetRCodeForControls(bReset)
         ucrResponse.SetRCode(clsFormulaOperator, bReset)
         ucrExplanatory.SetRCode(clsFormulaOperator, bReset)
-        ucrSelectorSimpleReg.SetRCode(clsRLmOrGLM, bReset)
+        ucrSelectorSimpleReg.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrPnlModelType.SetRCode(clsRLmOrGLM, bReset)
-        ucrSaveModels.SetRCode(clsRLmOrGLM, bReset)
-        ' ucrSelectorSimpleReg.AddAdditionalCodeParameterPair(clsGLM, ucrSelectorSimpleReg.GetParameter, 1)
+        ucrSaveModels.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ' ucrResponse.AddAdditionalCodeParameterPair(clsGLM, ucrResponse.GetParameter, iAdditionalPairNo:=1)
+        ' ucrExplanatory.AddAdditionalCodeParameterPair(clsGLM, ucrExplanatory.GetParameter, iAdditionalPairNo:=1)
+        'ucrSelectorSimpleReg.AddAdditionalCodeParameterPair(clsGLM, New RParameter("data"), iAdditionalPairNo:=1)
         ' ucrSelectorSimpleReg.AddAdditionalCodeParameterPair(clsGLM, ucrSelectorSimpleReg.GetParameter, 1)
         ' ucrSelectorSimpleReg.AddAdditionalCodeParameterPair(clsRTTest, ucrSelectorSimpleReg.GetParameter, 2)
         ' ucrResponse.AddAdditionalCodeParameterPair(clsRConvert, New RParameter("x", 1))
@@ -63,7 +65,7 @@ Public Class dlgRegressionSimple
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.iCallType = 2
 
-        cmdModelOptions.Enabled = False
+        ' cmdModelOptions.Enabled = False
 
         ucrResponse.Selector = ucrSelectorSimpleReg
         ucrExplanatory.Selector = ucrSelectorSimpleReg
@@ -139,7 +141,7 @@ Public Class dlgRegressionSimple
         'sdgSimpleRegOptions.SetRDataFrame(ucrSelectorSimpleReg.ucrAvailableDataFrames)
         'sdgSimpleRegOptions.SetRYVariable(ucrResponse)
         ' sdgSimpleRegOptions.SetRXVariable(ucrExplanatory)
-        ' sdgModelOptions.SetRCIFunction(clsRCIFunction)
+        sdgModelOptions.SetRCIFunction(clsRCIFunction)
 
 
     End Sub
@@ -195,6 +197,8 @@ Public Class dlgRegressionSimple
 
         clsRLmOrGLM = clsRegressionDefaults.clsDefaultRLmOrGLM.Clone
         clsRLmOrGLM.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
+        clsGLM.SetRCommand("glm")
+        clsGLM.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
 
 
         'Residual Plots
@@ -212,8 +216,8 @@ Public Class dlgRegressionSimple
         'FitModel
         clsRggplotFunction = clsRegressionDefaults.clsDefaultRggplot.Clone
         clsRggplotFunction.AddParameter("type", Chr(34) & "conditional" & Chr(34))
-        clsRggplotFunction.AddParameter("scale", Chr(34) & "linear" & Chr(34))
-        clsRggplotFunction.AddParameter("rug", "TRUE")
+        ' clsRggplotFunction.AddParameter("scale", Chr(34) & "linear" & Chr(34))
+        ' clsRggplotFunction.AddParameter("rug", "TRUE")
         clsRggplotFunction.AddParameter("fit", clsRFunctionParameter:=clsRLmOrGLM)
         clsRggplotFunction.iCallType = 3
 
@@ -287,9 +291,6 @@ Public Class dlgRegressionSimple
         clsRPoisson.SetPackageName("stats")
         clsRPoisson.SetRCommand("poisson.test")
 
-        clsGLM.SetRCommand("glm")
-        clsGLM.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator)
-
         clsRFTest.SetPackageName("stats")
         clsRFTest.SetRCommand("var.test")
 
@@ -312,7 +313,7 @@ Public Class dlgRegressionSimple
         clsRLmOrGLM.SetAssignTo(ucrSaveModels.GetText, strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model", bAssignToIsPrefix:=True)
 
         'sdgSimpleRegOptions.SetDefaults()
-        'sdgModelOptions.SetDefaults()
+        sdgModelOptions.SetDefaults()
         ucrModelPreview.SetName("")
         SetRCode()
         ucrFamily.SetGLMDistributions()
@@ -353,7 +354,7 @@ Public Class dlgRegressionSimple
 
     Private Sub ucrChkFunction_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFunction.ControlValueChanged
         If ucrChkFunction.Checked Then
-            sdgVariableTransformations.SetRCodeForControls(clsNewLMorGLM:=clsRLmOrGLM, clsNewFormulaOperator:=clsFormulaOperator, bReset:=bResetSubDialog, clsRXVariableNew:=clsRXVariable, clsRYVariableNew:=clsRYVariable, clsRModelNew:=clsModel, clsNewFunction:=clsRCIFunction)
+            sdgVariableTransformations.SetRCodeForControls(clsNewLMorGLM:=clsRLmOrGLM, clsNewFormulaOperator:=clsFormulaOperator, bReset:=bResetSubDialog, clsRXVariableNew:=clsRXVariable, clsRYVariableNew:=clsRYVariable, clsRModelNew:=clsModel)
             sdgVariableTransformations.ShowDialog()
             ExplanatoryFunctionSelect()
             bResetSubDialog = False
@@ -375,6 +376,7 @@ Public Class dlgRegressionSimple
     Private Sub ucrResponse_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrResponse.ControlValueChanged
         clsRYVariable = ucrResponse.GetVariableNames(bWithQuotes:=False)
         Preview()
+        SetEnableDists()
     End Sub
 
 
@@ -382,7 +384,6 @@ Public Class dlgRegressionSimple
         ConvertToVariate()
         TestOKEnabled()
         DataTypeAccepted()
-        SetEnableDists()
     End Sub
 
     Private Sub ucrExplanatory_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrExplanatory.ControlValueChanged
@@ -391,10 +392,10 @@ Public Class dlgRegressionSimple
     End Sub
 
 
-    'Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
-    '    sdgModelOptions.ShowDialog()
-    '    ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = sdgModelOptions.ucrFamily.clsCurrDistribution.strNameTag)
-    'End Sub
+    Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
+        sdgModelOptions.ShowDialog()
+        ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = sdgModelOptions.ucrFamily.clsCurrDistribution.strNameTag)
+    End Sub
 
     Private Sub SetTTest()
 
@@ -625,7 +626,6 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub ucrSelectorSimpleReg_DataFrameChanged() Handles ucrSelectorSimpleReg.ControlValueChanged
-        AssignModelName()
         SetRCode()
     End Sub
 
@@ -655,7 +655,7 @@ Public Class dlgRegressionSimple
             Else
                 If ucrFamily.lstCurrentDistributions.Count = 0 OrElse ucrResponse.IsEmpty() Then
                     ucrFamily.ucrInputDistributions.SetName("")
-                    cmdModelOptions.Enabled = False
+                    ' cmdModelOptions.Enabled = False
                 Else
                     cmdModelOptions.Enabled = True
                 End If
@@ -709,10 +709,7 @@ Public Class dlgRegressionSimple
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-    End Sub
-
-    Private Sub ucrModelName_NameChanged()
-        AssignModelName()
+        SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
 
@@ -728,22 +725,7 @@ Public Class dlgRegressionSimple
         'Else
         '    ucrModelName.Visible = False
         'End If
-        AssignModelName()
         TestOKEnabled()
-    End Sub
-
-    Private Sub AssignModelName()
-        'If chkSaveModel.Checked AndAlso Not ucrModelName.IsEmpty Then
-        '    ucrBase.clsRsyntax.SetAssignTo(ucrModelName.GetText, strTempModel:=ucrModelName.GetText, strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-        '    If rdoGeneral.Checked Then
-        '        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
-        '    Else
-        '        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        '    End If
-        'Else
-        '    ucrBase.clsRsyntax.SetAssignTo("last_model", strTempModel:="last_model", strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-        '    ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        'End If
     End Sub
 
     Private Sub chkFunction_CheckedChanged() Handles ucrChkFunction.ControlValueChanged
@@ -835,20 +817,10 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub rdoTop_CheckedChanged(sender As Object, e As EventArgs)
-        If rdoGeneralCase.Checked Then
-            ucrFamily.SetGLMDistributions()
-        Else
-            ucrFamily.SetExactDistributions()
-        End If
-        ucrFamily.ucrInputDistributions.SetName("")
-        SetRCode()
-        TestOKEnabled()
-        DataTypeAccepted()
-        AssignModelName()
-        ConvertToVariate()
+
     End Sub
 
-    Private Sub ucrFamily_EnabledChanged(sender As Object, e As EventArgs) Handles ucrFamily.EnabledChanged
+    Private Sub ucrFamily_EnabledChanged() Handles ucrFamily.EnabledChanged
         DataTypeAccepted()
         TestOKEnabled()
         SetEnableDists()
@@ -859,6 +831,15 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub ucrPnlModelType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlModelType.ControlValueChanged
+        If rdoGeneralCase.Checked Then
+            ucrFamily.SetGLMDistributions()
+        Else
+            ucrFamily.SetExactDistributions()
+        End If
+        ucrFamily.ucrInputDistributions.SetName("")
         SetRCode()
+        TestOKEnabled()
+        DataTypeAccepted()
+        ConvertToVariate()
     End Sub
 End Class
