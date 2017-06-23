@@ -37,7 +37,6 @@ Partial Class dlgSpells
         Me.ucrInputSpellUpper = New instat.ucrInputTextBox()
         Me.lblStation = New System.Windows.Forms.Label()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
-        Me.ucrSaveSpells = New instat.ucrSave()
         Me.ucrReceiverDOY = New instat.ucrReceiverSingle()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
@@ -45,6 +44,8 @@ Partial Class dlgSpells
         Me.ucrSelectorForSpells = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrChkConditional = New instat.ucrCheck()
+        Me.ucrInputNewColumnName = New instat.ucrInputTextBox()
+        Me.lblNewColumnName = New System.Windows.Forms.Label()
         Me.grpRainParameters.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -203,13 +204,6 @@ Partial Class dlgSpells
         Me.ucrReceiverStation.TabIndex = 16
         Me.ucrReceiverStation.ucrSelector = Nothing
         '
-        'ucrSaveSpells
-        '
-        Me.ucrSaveSpells.Location = New System.Drawing.Point(9, 349)
-        Me.ucrSaveSpells.Name = "ucrSaveSpells"
-        Me.ucrSaveSpells.Size = New System.Drawing.Size(290, 24)
-        Me.ucrSaveSpells.TabIndex = 14
-        '
         'ucrReceiverDOY
         '
         Me.ucrReceiverDOY.frmParent = Me
@@ -283,15 +277,35 @@ Partial Class dlgSpells
         Me.ucrChkConditional.Size = New System.Drawing.Size(193, 20)
         Me.ucrChkConditional.TabIndex = 17
         '
+        'ucrInputNewColumnName
+        '
+        Me.ucrInputNewColumnName.AddQuotesIfUnrecognised = True
+        Me.ucrInputNewColumnName.IsMultiline = False
+        Me.ucrInputNewColumnName.IsReadOnly = False
+        Me.ucrInputNewColumnName.Location = New System.Drawing.Point(113, 350)
+        Me.ucrInputNewColumnName.Name = "ucrInputNewColumnName"
+        Me.ucrInputNewColumnName.Size = New System.Drawing.Size(187, 21)
+        Me.ucrInputNewColumnName.TabIndex = 18
+        '
+        'lblNewColumnName
+        '
+        Me.lblNewColumnName.AutoSize = True
+        Me.lblNewColumnName.Location = New System.Drawing.Point(6, 352)
+        Me.lblNewColumnName.Name = "lblNewColumnName"
+        Me.lblNewColumnName.Size = New System.Drawing.Size(101, 13)
+        Me.lblNewColumnName.TabIndex = 21
+        Me.lblNewColumnName.Text = "New Column Name:"
+        '
         'dlgSpells
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(414, 431)
+        Me.ClientSize = New System.Drawing.Size(412, 428)
+        Me.Controls.Add(Me.lblNewColumnName)
+        Me.Controls.Add(Me.ucrInputNewColumnName)
         Me.Controls.Add(Me.ucrChkConditional)
         Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.ucrReceiverStation)
-        Me.Controls.Add(Me.ucrSaveSpells)
         Me.Controls.Add(Me.ucrReceiverDOY)
         Me.Controls.Add(Me.ucrReceiverYear)
         Me.Controls.Add(Me.lblYear)
@@ -332,7 +346,6 @@ Partial Class dlgSpells
     Friend WithEvents lblThreshold As Label
     Friend WithEvents lblFrom As Label
     Friend WithEvents lblTo As Label
-    Friend WithEvents ucrSaveSpells As ucrSave
     Friend WithEvents lblStation As Label
     Friend WithEvents ucrReceiverStation As ucrReceiverSingle
     Friend WithEvents ucrInputSpellLower As ucrInputTextBox
@@ -340,4 +353,6 @@ Partial Class dlgSpells
     Friend WithEvents ucrNudTo As ucrNud
     Friend WithEvents ucrNudFrom As ucrNud
     Friend WithEvents ucrChkConditional As ucrCheck
+    Friend WithEvents lblNewColumnName As Label
+    Friend WithEvents ucrInputNewColumnName As ucrInputTextBox
 End Class
