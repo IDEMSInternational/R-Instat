@@ -19,7 +19,7 @@ Public Class dlgWaterBalance
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
     Private clsAddKey, clsAddKeyColName, clsGroupBy, clsDayFromAndTo As New RFunction
-    Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator As New ROperator
+    Private clsDayFromAndToOperator, clsDayFromOperator, clsDayToOperator, clsWaterBalanceOperator, clsDifferenceOperation As New ROperator
     '60
     Private clsWBReplaceNAMax, clsWBReplaceNAMaxFunction, clsWBReplaceNAMaxFunctionList, clsWBWaterBalanceMax, clsWBWaterFilterMax, clsWBWaterFilterMaxList, clsWBFirstWaterBalanceMax, clsWBFirstWaterBalanceManipulationMax, clsWaterBalanceMaxList, clsReduceFunctionMax, clsPMinFunctionMax, clsPMaxFunctionMax As RFunction
     Private clsWBWaterFilterMaxOperator, clsWBFirstWaterBalanceMaxOperator, clsPMaxOperatorMax As New ROperator
@@ -27,7 +27,7 @@ Public Class dlgWaterBalance
     Private clsWBReplaceNAMin, clsWBReplaceNAMinFunction, clsWBReplaceNAMinFunctionList, clsWBWaterBalanceMin, clsWBWaterFilterMin, clsWBWaterFilterMinList, clsWBFirstWaterBalanceMin, clsWBFirstWaterBalanceMinList, clsWBWaterBalanceMinList, clsReduceFunctionMin, clsPMinFunctionMin, clsPMaxFunctionMin As New RFunction
     Private clsWBWaterFilterMinOperator, clsWBFirstWaterBalanceMinOperator, clsPMaxOperatorMin As New ROperator
 
-    Private clsWaterEndRainsBase, clsWaterBalBase, clsFirstWaterBalanceYear, clsWaterBalanceList, clsWaterBalanceCalc, clsWaterBalance As New RFunction
+    Private clsWaterEndRainsBase, clsWaterBalBase, clsFirstWaterBalanceYear, clsWaterBalanceList, clsWaterBalanceCalc, clsWaterBalanceFunction, clsWaterBalance As New RFunction
     Public clsDifference, clsDifferenceList As New RFunction
     Private strCurrDataName As String = ""
 
@@ -89,25 +89,10 @@ Public Class dlgWaterBalance
         ucrNudWBLessThan.Increment = 10
 
 
-        clsWBReplaceNAMin.SetRCommand("instat_calculation$new")
-        clsWBWaterBalanceMin.SetRCommand("instat_calculation$new")
         clsWBWaterFilterMin.SetRCommand("instat_calculation$new")
 
 
-
-        '' for clarity when it runs
-        'clsWBReplaceNAMax.SetAssignTo("Replace_NA_Max")
-        'clsWBReplaceNAMin.SetAssignTo("Replace_NA_Min")
-        'clsWBWaterBalanceMin.SetAssignTo("Water_Balance_Min")
-        'clsWBWaterFilterMin.SetAssignTo("Water_Filter_0")
-        'clsWBFirstWaterBalanceMax.SetAssignTo("First_Water_Balance_Max")
-        'clsWBFirstWaterBalanceMin.SetAssignTo("First_Water_Balance_Min")
-
-
-
         'save
-        'clsREndofRains.SetRCommand("instat_calculation$new")
-        'clsREndofRains.SetAssignTo("end_of_rains_calculation")
         ucrPnlEndofRains.AddRadioButton(rdoRain)
         ucrPnlEndofRains.AddRadioButton(rdoWaterBalance)
         ucrPnlEndofRains.AddRadioButton(rdoBoth)
@@ -130,16 +115,13 @@ Public Class dlgWaterBalance
         ucrNudTo.SetParameter(New RParameter("to", 1))
         ucrNudTo.SetMinMax(2, 366)
 
+        'ucrInputEndRainColName.SetParameter(New RParameter("result_name"))
+        'ucrInputEndRainColName.SetName("End_of_rains")
+        'ucrInputEndRainColName.SetLinkedDisplayControl(lblEndRainsColName)
 
-
-
-        ucrInputEndRainColName.SetParameter(New RParameter("result_name"))
-        ucrInputEndRainColName.SetName("End_of_rains")
-        ucrInputEndRainColName.SetLinkedDisplayControl(lblEndRainsColName)
-
-        ucrInputWBColName.SetParameter(New RParameter("result_name"))
-        ucrInputWBColName.SetName("Water_bal")
-        ucrInputWBColName.SetLinkedDisplayControl(lblWBColName)
+        'ucrInputWBColName.SetParameter(New RParameter("result_name"))
+        'ucrInputWBColName.SetName("Water_bal")
+        'ucrInputWBColName.SetLinkedDisplayControl(lblWBColName)
 
         'ucrPnlEndofRains.AddToLinkedControls({ucrInputEndRainColName}, {rdoRain}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
         'ucrPnlEndofRains.AddToLinkedControls({ucrInputWBColName}, {rdoWaterBalance}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
@@ -148,6 +130,14 @@ Public Class dlgWaterBalance
 
     Private Sub SetDefaults()
         Dim strWaterBalanceMax As String = "Water_Balance_Max"
+        Dim strFirstWaterBalanceMax As String = "First_Water_Balance_Max"
+        Dim strReplaceNAMax As String = "Replace_NA_Max"
+
+        Dim strFirstWaterBalanceMin As String = "First_Water_Balance_Min"
+        Dim strReplaceNAMin As String = "Replace_NA_Min"
+        Dim strWaterBalanceMin As String = "Water_Balance_Min"
+
+        Dim strDifference As String = "Difference"
 
         clsAddKey.Clear()
         clsAddKeyColName.Clear()
@@ -186,14 +176,16 @@ Public Class dlgWaterBalance
         clsWaterBalanceMaxList.Clear()
 
         clsDifference.Clear()
+        clsDifferenceOperation.Clear()
         clsWaterBalance.Clear()
+        clsWaterBalanceFunction.Clear()
+        clsWaterBalanceOperator.Clear()
 
         ucrSelectorForWaterBalance.Reset()
         ucrReceiverDate.SetMeAsReceiver()
 
 
         clsWaterBalanceMaxList.SetRCommand("list")
-        clsWBWaterBalanceMinList.SetRCommand("list")
         clsWBWaterFilterMinList.SetRCommand("list")
         clsWBFirstWaterBalanceMinList.SetRCommand("list")
 
@@ -236,7 +228,7 @@ Public Class dlgWaterBalance
         clsWBReplaceNAMaxFunctionList.SetRCommand("is.na")
         clsWBReplaceNAMaxFunction.AddParameter("values", 60, iPosition:=2) ' are we replacing wiht 60? Shouldnt we replace with max. capacity amount??
         'Chr(34) & "replace(" & ucrReceiverRainfall.GetVariableNames(False) & ", is.na( " & ucrReceiverRainfall.GetVariableNames(False) & "), 60)" & Chr(34))
-        clsWBReplaceNAMax.AddParameter("result_name", Chr(34) & "Replace_NA_Max" & Chr(34), iPosition:=2)
+        clsWBReplaceNAMax.AddParameter("result_name", Chr(34) & strReplaceNAMax & Chr(34), iPosition:=2)
         clsWBReplaceNAMax.AddParameter("save", "0", iPosition:=3)
         clsWBReplaceNAMax.SetAssignTo("Replace_NA_Max")
 
@@ -255,7 +247,7 @@ Public Class dlgWaterBalance
         clsPMaxOperatorMax.AddParameter("evaporation", 5, iPosition:=1, bIncludeArgumentName:=False)
         clsPMaxFunctionMax.AddParameter("0", 0, iPosition:=1)
         clsPMinFunctionMax.AddParameter("capacity", 60, iPosition:=1, bIncludeArgumentName:=False)
-        clsReduceFunctionMax.AddParameter("replace_na", "Replace_NA_Max", iPosition:=1, bIncludeArgumentName:=False)
+        clsReduceFunctionMax.AddParameter("replace_na", strReplaceNAMax, iPosition:=1, bIncludeArgumentName:=False)
         clsReduceFunctionMax.AddParameter("accumulate", "TRUE", iPosition:=2)
 
         '"Reduce(function(x, y) pmin(pmax(x + y - " & ucrInputEvaporation.GetText & ", 0), " & ucrNudCapacity.Value & "), Replace_NA_Max, accumulate=TRUE)" & Chr(34))
@@ -282,7 +274,7 @@ Public Class dlgWaterBalance
         clsWBFirstWaterBalanceMaxOperator.SetOperation("[")
         clsWBFirstWaterBalanceMaxOperator.AddParameter("right", "1]", iPosition:=1)
         ' Chr(34) & ucrReceiverDOY.GetVariableNames(False) & "[" & 1 & "]" & Chr(34)) ' THIS IS without quotes. Is that as before?
-        clsWBFirstWaterBalanceMax.AddParameter("result_name", Chr(34) & "First_Water_Balance_Max" & Chr(34), iPosition:=3)
+        clsWBFirstWaterBalanceMax.AddParameter("result_name", Chr(34) & strFirstWaterBalanceMax & Chr(34), iPosition:=3)
         clsWBFirstWaterBalanceMax.AddParameter("save", "0", iPosition:=6)
         clsWBFirstWaterBalanceMax.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")", iPosition:=4)
         clsWBFirstWaterBalanceMax.AddParameter("manipulations", clsRFunctionParameter:=clsWBFirstWaterBalanceManipulationMax, iPosition:=5)
@@ -300,12 +292,14 @@ Public Class dlgWaterBalance
         clsWBReplaceNAMinFunction.AddParameter("list", clsRFunctionParameter:=clsWBReplaceNAMinFunctionList, iPosition:=1)
         clsWBReplaceNAMinFunctionList.SetRCommand("is.na")
         clsWBReplaceNAMinFunction.AddParameter("values", 0, iPosition:=2)
-        clsWBReplaceNAMin.AddParameter("result_name", Chr(34) & "Replace_NA_Min" & Chr(34), iPosition:=2)
+        clsWBReplaceNAMin.AddParameter("result_name", Chr(34) & strReplaceNAMin & Chr(34), iPosition:=2)
         clsWBReplaceNAMin.AddParameter("save", "0", iPosition:=6)
         clsWBReplaceNAMin.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames() & ")")
         clsWBReplaceNAMin.SetAssignTo("Replace_NA_Min")
 
         clsReduceFunctionMin.bToScriptAsRString = True
+        clsWBWaterBalanceMinList.SetRCommand("list")
+        clsWBWaterBalanceMin.SetRCommand("instat_calculation$new")
         clsWBWaterBalanceMin.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsWBWaterBalanceMin.AddParameter("function_exp", clsRFunctionParameter:=clsReduceFunctionMin, iPosition:=0)
         clsReduceFunctionMin.SetRCommand("Reduce")
@@ -319,21 +313,21 @@ Public Class dlgWaterBalance
         clsPMaxOperatorMin.AddParameter("evaporation", 5, iPosition:=1, bIncludeArgumentName:=False)
         clsPMaxFunctionMin.AddParameter("0", 0, iPosition:=1)
         clsPMinFunctionMin.AddParameter("capacity", 60, iPosition:=1, bIncludeArgumentName:=False)
-        clsReduceFunctionMin.AddParameter("replace_na", "Replace_NA_Min", iPosition:=1, bIncludeArgumentName:=False)
+        clsReduceFunctionMin.AddParameter("replace_na", strReplaceNAMin, iPosition:=1, bIncludeArgumentName:=False)
         clsReduceFunctionMin.AddParameter("accumulate", "TRUE", iPosition:=2)
-        clsWBWaterBalanceMin.AddParameter("result_name", Chr(34) & "Water_Balance_Min" & Chr(34), iPosition:=2)
+        clsWBWaterBalanceMin.AddParameter("result_name", Chr(34) & strWaterBalanceMin & Chr(34), iPosition:=2)
         clsWBWaterBalanceMin.AddParameter("save", "0", iPosition:=6)
         clsWBWaterBalanceMin.AddParameter("sub_calculations", clsRFunctionParameter:=clsWBWaterBalanceMinList)
         clsWBWaterBalanceMinList.AddParameter("sub1", clsRFunctionParameter:=clsWBReplaceNAMin)
         clsWBWaterBalanceMin.SetAssignTo("Water_Balance_Min")
 
         clsWBWaterFilterMinOperator.bToScriptAsRString = True
-        clsWBWaterFilterMin.SetRCommand("instat_calculation$new")
+        clsWBWaterFilterMin.SetRCommand("instat_calculation$New")
         clsWBWaterFilterMinList.SetRCommand("list")
         clsWBWaterFilterMin.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
         clsWBWaterFilterMin.AddParameter("function_exp", clsROperatorParameter:=clsWBWaterFilterMinOperator, iPosition:=1)
         clsWBWaterFilterMinOperator.SetOperation("<=")
-        clsWBWaterFilterMinOperator.AddParameter("x", "Water_Balance_Min", iPosition:=0)
+        clsWBWaterFilterMinOperator.AddParameter("x", strWaterBalanceMin, iPosition:=0)
         clsWBWaterFilterMinOperator.AddParameter("rightMin", 40, iPosition:=1)
         clsWBWaterFilterMin.AddParameter("sub_calculations", clsRFunctionParameter:=clsWBWaterFilterMinList)
         clsWBWaterFilterMinList.AddParameter("sub1", clsRFunctionParameter:=clsWBWaterBalanceMin)
@@ -346,7 +340,7 @@ Public Class dlgWaterBalance
         clsWBFirstWaterBalanceMinOperator.SetOperation("[")
         clsWBFirstWaterBalanceMinOperator.AddParameter("right", "1]", iPosition:=1)
         ' Chr(34) & ucrReceiverDOY.GetVariableNames(False) & "[" & 1 & "]" & Chr(34)) ' THIS IS without quotes. Is that as before?
-        clsWBFirstWaterBalanceMin.AddParameter("result_name", Chr(34) & "First_Water_Balance_Min" & Chr(34), iPosition:=3)
+        clsWBFirstWaterBalanceMin.AddParameter("result_name", Chr(34) & strFirstWaterBalanceMin & Chr(34), iPosition:=3)
         clsWBFirstWaterBalanceMin.AddParameter("save", "0", iPosition:=6)
         clsWBFirstWaterBalanceMin.SetAssignTo("First_Water_Balance_Min")
         clsWBFirstWaterBalanceMin.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")", iPosition:=4)
@@ -355,13 +349,15 @@ Public Class dlgWaterBalance
         clsWBFirstWaterBalanceMinList.AddParameter("sub2", clsRFunctionParameter:=clsGroupBy, bIncludeArgumentName:=False)
         clsWBFirstWaterBalanceMinList.AddParameter("sub3", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False)
 
-
+        clsDifferenceOperation.bToScriptAsRString = True
         clsDifferenceList.SetRCommand("list")
         clsDifference.SetRCommand("instat_calculation$new")
         clsDifference.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
-        'clsDifference.AddParameter("function_exp", Chr(34) & ucrInputEndRainColName.GetText() & " - First_Water_Balance_Max" & Chr(34))
-        ' fix above
-        clsDifference.AddParameter("result_name", Chr(34) & "Difference" & Chr(34), iPosition:=2)
+        clsDifference.AddParameter("function_exp", clsROperatorParameter:=clsDifferenceOperation, iPosition:=1)
+        clsDifferenceOperation.SetOperation("-")
+        clsDifferenceOperation.AddParameter("left", strFirstWaterBalanceMin)
+        clsDifferenceOperation.AddParameter("left", strFirstWaterBalanceMax)
+        clsDifference.AddParameter("result_name", Chr(34) & strDifference & Chr(34), iPosition:=2)
         clsDifference.AddParameter("sub_calculations", clsRFunctionParameter:=clsDifferenceList, iPosition:=3)
         clsDifferenceList.AddParameter("sub1", clsRFunctionParameter:=clsWBFirstWaterBalanceMin, iPosition:=0)
         clsDifferenceList.AddParameter("sub2", clsRFunctionParameter:=clsWBFirstWaterBalanceMax, iPosition:=1)
@@ -369,11 +365,19 @@ Public Class dlgWaterBalance
         clsDifference.SetAssignTo("Difference")
 
         'Difference
+        clsWaterBalanceFunction.bToScriptAsRString = True
         clsWaterBalanceList.SetRCommand("list")
         clsWaterBalance.SetRCommand("instat_calculation$new")
         clsWaterBalance.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
-        ' sort below
-        clsWaterBalance.AddParameter("function_exp", Chr(34) & "replace(" & ucrInputEndRainColName.GetText() & ", Difference != 0, NA)" & Chr(34), iPosition:=1)
+        clsWaterBalance.AddParameter("function_exp", clsRFunctionParameter:=clsWaterBalanceFunction, iPosition:=1)
+        clsWaterBalanceFunction.SetRCommand("replace")
+        clsWaterBalanceFunction.AddParameter("x", strFirstWaterBalanceMin, iPosition:=0)
+        clsWaterBalanceFunction.AddParameter("list", strDifference & "!= 0", iPosition:=1) 'clsROperatorParameter:=clsWaterBalanceOperator, iPosition:=1)
+        'clsWaterBalanceOperator.SetOperation("!=")
+        'clsWaterBalanceOperator.AddParameter("Difference", strDifference, iPosition:=0, bIncludeArgumentName:=False)
+        'clsWaterBalanceOperator.AddParameter("Zero", 0, iPosition:=1, bIncludeArgumentName:=False)
+        clsWaterBalanceFunction.AddParameter("values", "NA", iPosition:=2)
+        'Chr(34) & "replace(" & First_Water_Balance_Min & ", Difference != 0, NA)" & Chr(34), iPosition:=1)
         clsWaterBalance.AddParameter("result_name", Chr(34) & ucrInputWBColName.GetText() & Chr(34), iPosition:=2)
         clsWaterBalance.AddParameter("sub_calculations", clsRFunctionParameter:=clsWaterBalanceList, iPosition:=3)
         clsWaterBalanceList.AddParameter("sub1", clsRFunctionParameter:=clsWBFirstWaterBalanceMin, iPosition:=0, bIncludeArgumentName:=False)
@@ -382,7 +386,6 @@ Public Class dlgWaterBalance
         clsWaterBalance.SetAssignTo("Water_Balance")
 
 
-        'TODO: Fix the new two function_exp's
 
         'ucrNudCapacity.Value = 60
         'ucrInputEvaporation.SetName("5")
@@ -390,7 +393,6 @@ Public Class dlgWaterBalance
         'ucrNudAmount.Value = 0
 
         '        WaterBalance()
-        clsWaterBalance.AddParameter("result_name", Chr(34) & "Water_bal" & Chr(34))
         clsWaterEndRainsBase.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         '        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$apply_instat_calculation")
 
@@ -439,6 +441,8 @@ Public Class dlgWaterBalance
 
         ucrInputEvaporation.SetRCode(clsPMaxOperatorMax, bReset)
         ucrNudCapacity.SetRCode(clsPMinFunctionMax, bReset)
+        ucrInputEndRainColName.SetRCode(clsWaterBalanceFunction, bReset)
+
     End Sub
 
     Private Sub ReopenDialog()
@@ -534,19 +538,19 @@ Public Class dlgWaterBalance
 
     '        'clsReplaceNA0.AddParameter("type", Chr(34) & "calculation" & Chr(34))
     '        'clsReplaceNA0.AddParameter("function_exp", Chr(34) & "replace(" & ucrReceiverRainfall.GetVariableNames(False) & ", is.na(" & ucrReceiverRainfall.GetVariableNames(False) & "), 0)" & Chr(34))
-    '        'clsReplaceNA0.AddParameter("result_name", Chr(34) & "Replace_NA_Min" & Chr(34))
+    '        'clsReplaceNA0.AddParameter("result_name", Chr(34) & strReplaceNAMin & Chr(34))
     '        'clsReplaceNA0.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames() & ")")
     '        'clsReplaceNA0.AddParameter("save", "0")
 
     '        'clsWaterBalance0.AddParameter("type", Chr(34) & "calculation" & Chr(34))
     '        'clsWaterBalance0.AddParameter("function_exp", Chr(34) & "Reduce(function(x, y) pmin(pmax(x + y - " & ucrInputEvaporation.GetText & ", 0), " & ucrNudCapacity.Value & "), Replace_NA_Min, accumulate=TRUE)" & Chr(34))
-    '        'clsWaterBalance0.AddParameter("result_name", Chr(34) & "Water_Balance_Min" & Chr(34))
+    '        'clsWaterBalance0.AddParameter("result_name", Chr(34) & strWaterBalanceMin" & Chr(34))
     '        'clsWaterBalance0.AddParameter("sub_calculations", clsRFunctionParameter:=clsWaterBalance0List)
     '        'clsWaterBalance0List.AddParameter("sub1", clsRFunctionParameter:=clsReplaceNA0)
     '        'clsWaterBalance0.AddParameter("save", "0")
 
     '        'clsWaterFilter0.AddParameter("type", Chr(34) & "filter" & Chr(34))
-    '        'clsWaterFilter0.AddParameter("function_exp", Chr(34) & "Water_Balance_Min <= " & ucrNudWBLessThan.Value & Chr(34))
+    '        'clsWaterFilter0.AddParameter("function_exp", Chr(34) & strWaterBalanceMin <= " & ucrNudWBLessThan.Value & Chr(34))
     '        'clsWaterFilter0.AddParameter("sub_calculations", clsRFunctionParameter:=clsWaterFilter0List)
     '        'clsWaterFilter0List.AddParameter("sub1", clsRFunctionParameter:=clsWaterBalance0)
 
@@ -564,7 +568,7 @@ Public Class dlgWaterBalance
     '    Private Sub FirstWaterBalancePerYear() ' error occurs when clsDifference runs
     '        clsDifference.AddParameter("type", Chr(34) & "calculation" & Chr(34))
     '        clsDifference.AddParameter("function_exp", Chr(34) & ucrInputEndRainColName.GetText() & " - First_Water_Balance_Max" & Chr(34))
-    '        clsDifference.AddParameter("result_name", Chr(34) & "Difference" & Chr(34))
+    '        clsDifference.AddParameter("result_name", Chr(34) & strDifference & Chr(34))
     '        clsDifference.AddParameter("sub_calculations", clsRFunctionParameter:=clsDifferenceList)
     '        clsDifferenceList.AddParameter("sub1", clsRFunctionParameter:=clsWBFirstWaterBalanceMin)
     '        clsDifferenceList.AddParameter("sub2", clsRFunctionParameter:=clsWBFirstWaterBalanceMax)
@@ -654,7 +658,7 @@ Public Class dlgWaterBalance
     '    Private Sub PanelOptions()
     '        If rdoRain.Checked Then
     '            clsWBFirstWaterBalanceMin.AddParameter("save", "2")
-    '            clsWBFirstWaterBalanceMin.SetAssignTo("First_Water_Balance_Min")
+    '            clsWBFirstWaterBalanceMin.SetAssignTo(strFirstWaterBalanceMin)
     '            clsWaterEndRainsBase.AddParameter("calc", clsRFunctionParameter:=clsWBFirstWaterBalanceMin)
     '            ucrBase.clsRsyntax.SetBaseRFunction(clsWaterEndRainsBase)
     '        ElseIf rdoWaterBalance.Checked Then
@@ -665,7 +669,7 @@ Public Class dlgWaterBalance
     '            'ucrBase.clsRsyntax.SetBaseRFunction(clsWaterBalBase)
     '            clsWaterBalance.AddParameter("save", "2")
     '            clsWBFirstWaterBalanceMin.AddParameter("save", "0")
-    '            clsWBFirstWaterBalanceMin.SetAssignTo("First_Water_Balance_Min")
+    '            clsWBFirstWaterBalanceMin.SetAssignTo(strFirstWaterBalanceMin)
     '            clsWaterBalance.SetAssignTo("Water_Balance")
     '            'clsReplaceNA.AddParameter("function_exp", Chr(34) & "replace(" & ucrReceiverRainfall.GetVariableNames(False) & ", is.na(" & ucrReceiverRainfall.GetVariableNames(False) & ")," & ucrNudCapacity.Value & ")" & Chr(34))
     '            'clsSubCalcList.AddParameter("sub1", clsRFunctionParameter:=clsReplaceNA)
@@ -675,7 +679,7 @@ Public Class dlgWaterBalance
     '            clsWaterBalance.AddParameter("save", "2")
     '            clsWBFirstWaterBalanceMin.AddParameter("save", "2")
 
-    '            clsWBFirstWaterBalanceMin.SetAssignTo("First_Water_Balance_Min")
+    '            clsWBFirstWaterBalanceMin.SetAssignTo(strFirstWaterBalanceMin)
     '            clsWaterBalance.SetAssignTo("Water_Balance")
     '            clsWaterEndRainsBase.AddParameter("calc", clsRFunctionParameter:=clsWaterBalance)
     '            ucrBase.clsRsyntax.SetBaseRFunction(clsWaterEndRainsBase)
