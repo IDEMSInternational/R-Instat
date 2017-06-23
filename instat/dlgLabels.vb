@@ -73,7 +73,7 @@ Public Class dlgLabels
         ucrSelectorForLabels.SetParameter(New RParameter("data_name", 0))
         ucrSelectorForLabels.SetParameterIsString()
 
-        ucrChkAddLevels.SetText("Add Levels")
+        ucrChkAddLevels.SetText("Add Level Numbers")
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
