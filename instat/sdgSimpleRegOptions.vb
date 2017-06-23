@@ -50,22 +50,10 @@ Public Class sdgSimpleRegOptions
         ucrChkPvalues.AddToLinkedControls(ucrNudDisplayCLevel, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.95)
         ucrNudDisplayCLevel.SetLinkedDisplayControl(lblDisplayCLevel)
 
-        ' ucrChkFittedValues.SetText("Fitted Values")
-        ' ucrChkResiduals.SetText("Residuals")
-        ' ucrChkStdResiduals.SetText("Std Residuals")
-        'ucrChkLeverage.SetText("Leverage")
-
-        ' ucrChkFittedValues.AddToLinkedControls(ucrFittedColumnName, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.95)
-        ' ucrChkResiduals.AddToLinkedControls(ucrResidualsColumnName, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.95)
-        ' ucrChkStdResiduals.AddToLinkedControls(ucrStdResidualsColumnName, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.95)
-        '  ucrChkLeverage.AddToLinkedControls(ucrLeverageColumnName, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.95)
 
         ucrChkMultiplePlots.SetText("Multiple Plots")
         ucrChkIndividualPlots.SetText("Individual Plots")
         ucrChkFittedModel.SetText("Fitted Model")
-
-
-
 
         ucrSaveFittedColumnName.SetPrefix("Fitted")
         ucrSaveFittedColumnName.SetSaveTypeAsColumn()
@@ -101,10 +89,12 @@ Public Class sdgSimpleRegOptions
         ucrChkMultiplePlots.AddToLinkedControls(ucrChkJitter, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
         ucrChkMultiplePlots.AddToLinkedControls(ucrChkConfIntervalband, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
 
-
+        ucrPnlMutiplePlots.AddRadioButton(rdoFourPlots)
+        ucrPnlMutiplePlots.AddRadioButton(rdoSixPlots2Rows)
+        ucrPnlMutiplePlots.AddRadioButton(rdoSixPlots3Rows)
         ucrPnlMutiplePlots.AddRSyntaxContainsFunctionNamesCondition(rdoFourPlots, {"autoplot"})
-        ucrPnlMutiplePlots.AddRSyntaxContainsFunctionNamesCondition(rdoFourPlots, {"autoplot"})
-        ucrPnlMutiplePlots.AddRSyntaxContainsFunctionNamesCondition(rdoFourPlots, {"autoplot"})
+        ucrPnlMutiplePlots.AddRSyntaxContainsFunctionNamesCondition(rdoSixPlots2Rows, {"autoplot"})
+        ucrPnlMutiplePlots.AddRSyntaxContainsFunctionNamesCondition(rdoSixPlots3Rows, {"autoplot"})
 
         ucrPnlPlotType.SetParameter(New RParameter("type"))
         ucrPnlPlotType.AddRadioButton(rdoContrast, Chr(34) & "conditional" & Chr(34))
@@ -317,15 +307,15 @@ Public Class sdgSimpleRegOptions
         If rdoFourPlots.Checked Then
             clsRResidualPlotsFunction.AddParameter("ncol", 2)
             clsRResidualPlotsFunction.RemoveParameterByName("which")
-            clsRGraphicsOperator.AddParameter("reidual", clsRFunctionParameter:=clsRResidualPlotsFunction)
+            clsRGraphicsOperator.AddParameter("reidual", clsRFunctionParameter:=clsRResidualPlotsFunction,iPosition:=0)
         ElseIf rdoSixPlots2Rows.Checked Then
             clsRResidualPlotsFunction.AddParameter("ncol", 3)
             clsRResidualPlotsFunction.AddParameter("which", "1:6")
-            clsRGraphicsOperator.AddParameter("reidual", clsRFunctionParameter:=clsRResidualPlotsFunction)
+            clsRGraphicsOperator.AddParameter("reidual", clsRFunctionParameter:=clsRResidualPlotsFunction, iPosition:=0)
         ElseIf rdoSixPlots3Rows.Checked Then
             clsRResidualPlotsFunction.AddParameter("ncol", 2)
             clsRResidualPlotsFunction.AddParameter("which", "1:6")
-            clsRGraphicsOperator.AddParameter("reidual", clsRFunctionParameter:=clsRResidualPlotsFunction)
+            clsRGraphicsOperator.AddParameter("reidual", clsRFunctionParameter:=clsRResidualPlotsFunction, iPosition:=0)
         End If
         If (rdoFourPlots.Checked Or rdoSixPlots2Rows.Checked Or rdoSixPlots3Rows.Checked Or rdoResidualsFitted.Checked Or rdoQQ.Checked Or rdoResidualsLeverage.Checked Or rdoScaleLocation.Checked Or rdoCooksDistance.Checked Or rdoCooksDistanceLeverage.Checked) Then
             clsRSyntax.AddToAfterCodes(clsRGraphicsOperator, iPosition:=6)
