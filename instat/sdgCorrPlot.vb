@@ -17,6 +17,7 @@
 Imports instat.Translations
 Public Class sdgCorrPlot
     Public clsRGGscatmatrixFunction, clsRGGcorrGraphicsFunction, clsCorrelationFunction, clsRGraphicsFuction, clsRTempFunction As New RFunction
+    Private clsColFunction As String
     Public bFirstLoad As Boolean = True
     Private bControlsInitialised As Boolean = False
     Private clsRsyntax As RSyntax
@@ -84,11 +85,10 @@ Public Class sdgCorrPlot
         ucrPnlGraphType.AddFunctionNamesCondition(rdoCorrelationPlot, "ggcorr")
         ucrPnlGraphType.AddFunctionNamesCondition(rdoScatterPlotMatrix, "ggpairs")
         ucrPnlGraphType.AddFunctionNamesCondition(rdoScatterPlotMatrix, "ggscatmat")
-        ucrPnlGraphType.AddFunctionNamesCondition(rdoNone, "")
-
+        ucrPnlGraphType.AddFunctionNamesCondition(rdoNone, {"ggcorr", "ggpairs", "ggscatmat"}, False)
     End Sub
 
-    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewcorrelationFunction As RFunction, clsNewRGGcorrGraphicsFunction As RFunction, clsNewRGraphicsFuction As RFunction, clsNewRTempFunction As RFunction, clsNewRGGscatmatrixFunction As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsNewcorrelationFunction As RFunction, clsNewRGGcorrGraphicsFunction As RFunction, clsNewRGraphicsFuction As RFunction, clsNewRTempFunction As RFunction, clsNewRGGscatmatrixFunction As RFunction, clsNewColFunction As String, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
@@ -97,6 +97,7 @@ Public Class sdgCorrPlot
         clsRGGcorrGraphicsFunction = clsNewRGGcorrGraphicsFunction
         clsRGraphicsFuction = clsNewRGraphicsFuction
         clsRTempFunction = clsNewRTempFunction
+        clsColFunction = clsNewColFunction
         clsRGGscatmatrixFunction = clsNewRGGscatmatrixFunction
 
         'settingRcode for subdialog
@@ -106,10 +107,11 @@ Public Class sdgCorrPlot
         ucrChkLabel.SetRCode(clsRGGcorrGraphicsFunction, bReset)
         ucrSaveGraph.SetRCode(clsRGGcorrGraphicsFunction, bReset)
         ucrChkColor.SetRCode(clsRGGscatmatrixFunction, bReset)
+
         ucrPnlGraphType.SetRCode(clsRGGcorrGraphicsFunction, bReset)
 
+        clsRGraphicsFuction.AddParameter("columns", clsColFunction)
         clsCorrelationFunction.iCallType = 2
-        ucrPnlGraphType.SetRSyntax(clsRsyntax, bReset)
         If bReset Then
             tbSaveGraphs.SelectedIndex = 0
         End If

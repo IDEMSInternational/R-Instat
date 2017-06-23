@@ -14,11 +14,13 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgCorrelation
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
-    Private clsCorrelationTestFunction, clsRGGcorrGraphicsFunction, clsRGraphicsFuction, clsRGGscatmatrixFunction, clsCorrelationFunction, clsRTempFunction As New RFunction
+    Private clsCorrelationTestFunction, clsRGGcorrGraphicsFunction, clsRGraphicsFuction, clsRGGscatMatrixFunction, clsCorrelationFunction, clsRTempFunction, clsTempFunc As New RFunction
+    Private clsColFunction As String
     Private bResetSubdialog As Boolean = False
     Private Sub dlgCorrelation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -105,7 +107,8 @@ Public Class dlgCorrelation
         clsCorrelationFunction = New RFunction
         clsRGGcorrGraphicsFunction = New RFunction
         clsRGraphicsFuction = New RFunction
-        clsRGGscatmatrixFunction = New RFunction
+        clsRGGscatMatrixFunction = New RFunction
+        clsTempFunc = New RFunction
         bResetSubdialog = True
 
         ucrSelectorCorrelation.Reset()
@@ -125,9 +128,10 @@ Public Class dlgCorrelation
         clsCorrelationFunction.AddParameter("use", Chr(34) & "pairwise.complete.obs" & Chr(34))
         clsCorrelationTestFunction.AddParameter("method", Chr(34) & "pearson" & Chr(34))
         clsRGGcorrGraphicsFunction.AddParameter("cor_matrix", clsRFunctionParameter:=clsCorrelationFunction)
-        clsRGraphicsFuction.AddParameter("remove_attr", "TRUE")
-        'clsRGraphicsFuction.AddParameter("columns", clsRFunctionParameter:=dlgCorrelation.ucrReceiverMultipleColumns.GetVariables)
-        clsRGraphicsFuction.AddParameter("data", clsRFunctionParameter:=ucrSelectorCorrelation.ucrAvailableDataFrames.clsCurrDataFrame)
+        clsTempFunc = ucrSelectorCorrelation.ucrAvailableDataFrames.clsCurrDataFrame
+        clsTempFunc.AddParameter("remove_attr", "TRUE")
+        clsRGraphicsFuction.AddParameter("data", clsRFunctionParameter:=clsTempFunc)
+        clsRGGscatMatrixFunction.AddParameter("data", clsRFunctionParameter:=clsTempFunc)
         clsRGGcorrGraphicsFunction.AddParameter("data", "NULL")
 
         ucrBase.clsRsyntax.iCallType = 2
@@ -136,7 +140,7 @@ Public Class dlgCorrelation
     End Sub
 
     Private Sub cmdPlots_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgCorrPlot.SetRCode(ucrBase.clsRsyntax, clsCorrelationFunction, clsRGGcorrGraphicsFunction, clsRGraphicsFuction, clsRTempFunction, clsRGGscatmatrixFunction, bReset:=bResetSubdialog)
+        sdgCorrPlot.SetRCode(ucrBase.clsRsyntax, clsCorrelationFunction, clsRGGcorrGraphicsFunction, clsRGraphicsFuction, clsRTempFunction, clsRGGscatmatrixFunction, clsColFunction, bReset:=bResetSubdialog)
         sdgCorrPlot.ShowDialog()
         bResetSubdialog = False
     End Sub
@@ -218,5 +222,9 @@ Public Class dlgCorrelation
 
     Private Sub ucrReceiverFirstColumn_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstColumn.ControlContentsChanged, ucrReceiverSecondColumn.ControlContentsChanged, ucrReceiverMultipleColumns.ControlContentsChanged, ucrPnlColumns.ControlContentsChanged, ucrPnlCompletePairwise.ControlContentsChanged, ucrPnlMethod.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrReceiverMultipleColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleColumns.ControlValueChanged
+        clsColFunction = ucrReceiverMultipleColumns.GetVariableNames()
     End Sub
 End Class
