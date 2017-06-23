@@ -43,7 +43,6 @@ Public Class dlgSpells
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 200
-        Dim dctInputSumPairs As New Dictionary(Of String, String)
 
         ucrSelectorForSpells.SetParameter(New RParameter("data_name", 0))
         ucrSelectorForSpells.SetParameterIsString()
@@ -106,7 +105,6 @@ Public Class dlgSpells
         ucrInputNewColumnName.SetParameter(New RParameter("result_name", 2))
         ucrInputNewColumnName.SetDataFrameSelector(ucrSelectorForSpells.ucrAvailableDataFrames)
         ucrInputNewColumnName.SetName("Spells")
-        '        ucrInputNewColumnName.SetSaveTypeAsColumn()
     End Sub
 
     Private Sub SetDefaults()
@@ -139,7 +137,7 @@ Public Class dlgSpells
 
         ucrSelectorForSpells.Reset()
         ucrReceiverDate.SetMeAsReceiver()
-        ucrInputCondition.SetName("Between") 'TODO1: set item/name as this
+        ucrInputCondition.SetName("Between")
 
         ' key
         clsAddKey.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
@@ -185,7 +183,6 @@ Public Class dlgSpells
         clsRRaindayMatch.AddParameter("table", "1", iPosition:=1)
         clsRRaindayMatch.AddParameter("nomatch", "0", iPosition:=2)
 
-        ' We have: match(Rain >= LOWER & Rain <= UPPER, 1, nomatch = 0)
         ' Spell Length
         clsSpellLength.SetRCommand("instat_calculation$new")
         clsSpellLength.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
