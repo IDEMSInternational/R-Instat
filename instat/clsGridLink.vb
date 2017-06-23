@@ -106,7 +106,7 @@ Public Class clsGridLink
                     dfTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataFrame.ToScript()).AsDataFrame
                     clsFilterApplied.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
                     If frmMain.clsRLink.RunInternalScriptGetValue(clsFilterApplied.ToScript()).AsLogical(0) Then
-                        FillSheet(dfTemp, strDataName, grdData, bInstatObjectDataFrame:=True, bIncludeDataTypes:=True, iNewPosition:=i, bFilterApplied:=True, bCheckFreezeColumns:=True)
+                        FillSheet(dfTemp, strDataName, grdData, bInstatObjectDataFrame:=True, bIncludeDataTypes:=True, iNewPosition:=i, bFilterApplied:=True, bCheckFreezeColumns:=True, iRowMax:=iMaxRows, iColMax:=iMaxCols)
                     Else
                         FillSheet(dfTemp, strDataName, grdData, bInstatObjectDataFrame:=True, bIncludeDataTypes:=True, iNewPosition:=i, bFilterApplied:=False, bCheckFreezeColumns:=True)
                     End If
@@ -121,7 +121,8 @@ Public Class clsGridLink
                     expVarMetadata = frmMain.clsRLink.RunInternalScriptGetValue(clsGetVariablesMetadata.ToScript())
                     If expVarMetadata IsNot Nothing AndAlso expVarMetadata.Type <> Internals.SymbolicExpressionType.Null Then
                         dfTemp = expVarMetadata.AsDataFrame()
-                        FillSheet(dfTemp, strDataName, grdVariablesMetadata)
+                        'TODO test if column limit is needed for stability in metadata grids
+                        FillSheet(dfTemp, strDataName, grdVariablesMetadata, iColMax:=iMaxCols)
                         clsSetVariablesMetadataChanged.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
                         clsSetVariablesMetadataChanged.AddParameter("new_val", "TRUE")
                         frmMain.clsRLink.RunInternalScript(clsSetVariablesMetadataChanged.ToScript())
@@ -176,7 +177,8 @@ Public Class clsGridLink
         If bGrdMetadataExists And (bGrdMetadataChanged Or bRMetadataChanged) Then
             clsGetCombinedMetadata.AddParameter("convert_to_character", "TRUE")
             dfTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetCombinedMetadata.ToScript()).AsDataFrame()
-            FillSheet(dfTemp, "metadata", grdMetadata)
+            'TODO test if column limit is needed for stability in metadata grids
+            FillSheet(dfTemp, "metadata", grdMetadata, iColMax:=iMaxCols)
             clsSetMetadataChanged.AddParameter("new_val", "TRUE")
             frmMain.clsRLink.RunInternalScript(clsSetMetadataChanged.ToScript())
         End If
@@ -239,7 +241,7 @@ Public Class clsGridLink
         UpdateGrids()
     End Sub
 
-    Public Sub FillSheet(dfTemp As DataFrame, strName As String, grdCurr As ReoGridControl, Optional bInstatObjectDataFrame As Boolean = False, Optional bIncludeDataTypes As Boolean = False, Optional iNewPosition As Integer = -1, Optional bFilterApplied As Boolean = False, Optional bCheckFreezeColumns As Boolean = False)
+    Public Sub FillSheet(dfTemp As DataFrame, strName As String, grdCurr As ReoGridControl, Optional bInstatObjectDataFrame As Boolean = False, Optional bIncludeDataTypes As Boolean = False, Optional iNewPosition As Integer = -1, Optional bFilterApplied As Boolean = False, Optional bCheckFreezeColumns As Boolean = False, Optional iRowMax As Integer = -1, Optional iColMax As Integer = -1)
         Dim bFoundWorksheet As Boolean = False
         Dim tempWorkSheet As Worksheet
         Dim fillWorkSheet As Worksheet
@@ -257,7 +259,6 @@ Public Class clsGridLink
         Dim vecColumnColours As NumericVector
         Dim bApplyColumnColours As Boolean
         Dim i, j, k As Integer
-        Dim expColNames As SymbolicExpression
         Dim strCurrColNames As String = ""
         Dim strCurrHeader As String
         Dim lstColumnNames As New List(Of String)
@@ -283,7 +284,12 @@ Public Class clsGridLink
         If iNewPosition <> -1 AndAlso iNewPosition <> iCurrPosition AndAlso iNewPosition < grdCurr.Worksheets.Count Then
             grdCurr.MoveWorksheet(fillWorkSheet, iNewPosition)
         End If
-        fillWorkSheet.Columns = dfTemp.ColumnCount
+        'replaced this to fill columns with the iMaxCols
+        If iColMax <> -1 Then
+            fillWorkSheet.Columns = Math.Min(iColMax, dfTemp.ColumnCount)
+        Else
+            fillWorkSheet.Columns = dfTemp.ColumnCount
+        End If
         strColumnNames = dfTemp.ColumnNames
         If dfTemp.RowCount = 0 Then
             fillWorkSheet.Rows = 1
@@ -294,7 +300,11 @@ Public Class clsGridLink
             fillWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_AllowAdjustRowHeight, False)
         Else
             fillWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_AllowAdjustRowHeight, True)
-            fillWorkSheet.Rows = Math.Min(iMaxRows, dfTemp.RowCount)
+            If iRowMax <> -1 Then
+                fillWorkSheet.Rows = Math.Min(iRowMax, dfTemp.RowCount)
+            Else
+                fillWorkSheet.Rows = dfTemp.RowCount
+            End If
             fillWorkSheet.SetRowsHeight(0, 1, 20)
             rngDataRange = New RangePosition(0, 0, fillWorkSheet.Rows, fillWorkSheet.Columns)
             fillWorkSheet.SetRangeDataFormat(rngDataRange, DataFormat.CellDataFormatFlag.Text)
@@ -438,6 +448,19 @@ Public Class clsGridLink
 
     Public Sub SetMaxRows(iRows As Integer)
         iMaxRows = iRows
+        bGrdDataChanged = True
+        bGrdMetadataChanged = True
+        bGrdVariablesMetadataChanged = True
+        'TODO This causes the last sheet to be current sheet after running this.
+        '     Need to change how this is done so that the current sheet is remembered before changing.
+        If frmMain.clsRLink.bInstatObjectExists Then
+            frmMain.clsRLink.RunInternalScript(frmMain.clsRLink.strInstatDataObject & "$data_objects_changed <- TRUE")
+        End If
+        UpdateGrids()
+    End Sub
+
+    Public Sub SetMaxCols(iCols As Integer)
+        iMaxCols = iCols
         bGrdDataChanged = True
         bGrdMetadataChanged = True
         bGrdVariablesMetadataChanged = True
