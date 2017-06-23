@@ -42,7 +42,7 @@ Public Class sdgVariableTransformations
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCodeForControls(clsNewLMorGLM As RFunction, clsNewFunction As RFunction, clsNewFormulaOperator As ROperator, clsRModelNew As ROperator, clsRYVariableNew As String, clsRXVariableNew As String, Optional bReset As Boolean = False)
+    Public Sub SetRCodeForControls(clsNewLMorGLM As RFunction, clsNewFormulaOperator As ROperator, clsRModelNew As ROperator, clsRYVariableNew As String, clsRXVariableNew As String, Optional bReset As Boolean = False)
         If bControlsInitialised Then
             InitialiseControls()
         End If
@@ -51,7 +51,6 @@ Public Class sdgVariableTransformations
         clsRYVariable = clsRYVariableNew
         clsRModel = clsRModelNew
         clsFormulaOperator = clsNewFormulaOperator
-        clsRCIFunction = clsNewFunction
         ucrPnlGenerateFunctions.SetRCode(clsLMorGLM, bReset)
 
     End Sub
