@@ -16,6 +16,7 @@
 
 Imports RDotNet
 Imports unvell.ReoGrid
+Imports System.IO
 
 Public Class RLink
     ' R interface class. Each instance of the class has its own REngine instance
@@ -23,6 +24,11 @@ Public Class RLink
     Public strClimateObject As String = "ClimateObject"
     Dim strInstatObjectPath As String = "/InstatObject/R" 'path to the Instat object
     Public strInstatDataObject As String = "InstatDataObject"
+
+    Private strLogFilePath As String = Path.Combine(Path.GetTempPath, "R-Instat_debug_log.txt")
+    Private bFirstRCode As Boolean = True
+    Private bDebugLogExists As Boolean = False
+
     Public clsEngine As REngine
     Public rtbOutput As New ucrWPFRichTextBox
     Public txtLog As New TextBox
@@ -231,7 +237,7 @@ Public Class RLink
         Return strNextDefault
     End Function
 
-    Public Sub RunScript(strScript As String, Optional iCallType As Integer = 0, Optional strComment As String = "")
+    Public Sub RunScript(strScript As String, Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bSeparateThread As Boolean = True)
         Dim strCapturedScript As String
         Dim expTemp As RDotNet.SymbolicExpression
         Dim strTemp As String = ""
@@ -284,11 +290,11 @@ Public Class RLink
                         'need to boost resolution of the devices, it's not as good as with ggsave.
                     End If
                 End If
-                Evaluate(strScript)
+                Evaluate(strScript, bSilent:=False, bSeparateThread:=bSeparateThread)
                 If iCallType = 3 Then
                     If strGraphDisplayOption = "view_output_window" OrElse strGraphDisplayOption = "view_separate_window" Then
                         'add an R script (maybe in the form of one of our methods) that copies divices to the temp directory, using the default device production... use dev.list() and dev.copy() with arguments device = the devices in the list and which = jpeg devices with different paths leading to the temp directory, using a paste() method to find different names for the files
-                        Evaluate("graphics.off()") 'not quite sure if this would work, otherwise find the right way to close the appropriate devices.
+                        Evaluate("graphics.off()", bSilent:=False, bSeparateThread:=bSeparateThread) 'not quite sure if this would work, otherwise find the right way to close the appropriate devices.
                         'clsEngine.Evaluate("ggsave(" & Chr(34) & strTempGraphsDirectory.Replace("\", "/") & "Graph.jpg" & Chr(34) & ")")
                         'This sub is used to display graphics in the output window when necessary.
                         'This sub is checking the temp directory "R_Instat_Temp_Graphs", created during setup to see if there are any graphs to display. If there are some, then it sends them to the output window, and removes them from the directory.
@@ -328,7 +334,7 @@ Public Class RLink
             Try
                 'TODO check this is valid syntax in all cases
                 '     i.e. this is potentially: x <- y <- 1
-                Evaluate(strTempAssignTo & " <- " & strScript)
+                Evaluate(strTempAssignTo & " <- " & strScript, bSilent:=False, bSeparateThread:=bSeparateThread)
                 expTemp = GetSymbol(strTempAssignTo)
                 If expTemp IsNot Nothing Then
                     strTemp = String.Join(Environment.NewLine, expTemp.AsCharacter())
@@ -344,7 +350,7 @@ Public Class RLink
                 strSplitScript = Left(strScript, strScript.Trim(Environment.NewLine.ToCharArray).LastIndexOf(Environment.NewLine.ToCharArray))
                 If strSplitScript <> "" Then
                     Try
-                        Evaluate(strSplitScript)
+                        Evaluate(strSplitScript, bSilent:=False, bSeparateThread:=bSeparateThread)
                     Catch e As Exception
                         MsgBox(e.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
                     End Try
@@ -353,7 +359,7 @@ Public Class RLink
                 strCapturedScript = "capture.output(" & strSplitScript & ")"
             End If
             Try
-                Evaluate(strTempAssignTo & " <- " & strCapturedScript)
+                Evaluate(strTempAssignTo & " <- " & strCapturedScript, bSilent:=False, bSeparateThread:=bSeparateThread)
                 expTemp = GetSymbol(strTempAssignTo)
                 If expTemp IsNot Nothing Then
                     strTemp = String.Join(Environment.NewLine, expTemp.AsCharacter())
@@ -373,24 +379,24 @@ Public Class RLink
         frmMain.clsGrids.UpdateGrids()
     End Sub
 
-    Public Function RunInternalScriptGetValue(strScript As String, Optional strVariableName As String = ".temp_value", Optional bSilent As Boolean = False) As SymbolicExpression
+    Public Function RunInternalScriptGetValue(strScript As String, Optional strVariableName As String = ".temp_value", Optional bSilent As Boolean = False, Optional bSeparateThread As Boolean = True) As SymbolicExpression
         Dim expTemp As SymbolicExpression
         Dim strCommand As String
 
         expTemp = Nothing
         strCommand = strVariableName & "<-" & strScript
         If clsEngine IsNot Nothing Then
-            Evaluate(strCommand, bSilent:=bSilent)
+            Evaluate(strCommand, bSilent:=bSilent, bSeparateThread:=bSeparateThread)
             expTemp = GetSymbol(strVariableName, bSilent:=bSilent)
         End If
         Return expTemp
     End Function
 
-    Public Function RunInternalScriptGetOutput(strScript As String, Optional bSilent As Boolean = False) As CharacterVector
+    Public Function RunInternalScriptGetOutput(strScript As String, Optional bSilent As Boolean = False, Optional bSeparateThread As Boolean = True) As CharacterVector
         Dim chrTemp As CharacterVector
         Dim expTemp As SymbolicExpression
 
-        expTemp = RunInternalScriptGetValue("capture.output(" & strScript & ")", bSilent:=bSilent)
+        expTemp = RunInternalScriptGetValue("capture.output(" & strScript & ")", bSilent:=bSilent, bSeparateThread:=bSeparateThread)
         Try
             chrTemp = expTemp.AsCharacter()
         Catch ex As Exception
@@ -402,7 +408,7 @@ Public Class RLink
         Return chrTemp
     End Function
 
-    Public Function RunInternalScript(strScript As String, Optional strVariableName As String = "", Optional bSilent As Boolean = False) As Boolean
+    Public Function RunInternalScript(strScript As String, Optional strVariableName As String = "", Optional bSilent As Boolean = False, Optional bSeparateThread As Boolean = True) As Boolean
         Dim strCommand As String
         Dim bReturn As Boolean
 
@@ -412,7 +418,7 @@ Public Class RLink
             strCommand = strScript
         End If
         If clsEngine IsNot Nothing Then
-            bReturn = Evaluate(strCommand, bSilent:=bSilent)
+            bReturn = Evaluate(strCommand, bSilent:=bSilent, bSeparateThread:=bSeparateThread)
             Return bReturn
         Else
             Return False
@@ -428,6 +434,40 @@ Public Class RLink
         Dim bReturn As Boolean = True
 
         If clsEngine IsNot Nothing Then
+            If bFirstRCode Then
+                Try
+                    File.WriteAllText(strLogFilePath, "")
+                    Using w As StreamWriter = File.AppendText(strLogFilePath)
+                        w.WriteLine("****************************")
+                        w.WriteLine("R-Instat debugging log file")
+                        w.WriteLine("****************************")
+                        w.WriteLine("Version: " & My.Application.Info.Version.ToString())
+                        w.WriteLine("****************************")
+                        w.WriteLine("Created on: " & DateTime.Now)
+                        w.WriteLine("User: " & Environment.UserName)
+                        w.WriteLine("****************************")
+                    End Using
+                    bDebugLogExists = True
+                Catch ex As Exception
+                    MsgBox("Could not create debug log file at:" & strLogFilePath & Environment.NewLine & ex.Message, MsgBoxStyle.Exclamation, "Debug Log File")
+                    bDebugLogExists = False
+                Finally
+                    bFirstRCode = False
+                End Try
+            End If
+            Try
+                If bDebugLogExists Then
+                    Dim ts As New Stopwatch
+                    ts.Start()
+                    Using w As StreamWriter = File.AppendText(strLogFilePath)
+                        w.WriteLine(strScript)
+                    End Using
+                    ts.Stop()
+                    Console.WriteLine(ts.ElapsedMilliseconds)
+                End If
+            Catch ex As Exception
+                MsgBox("Could not add text to debug log file at:" & strLogFilePath & Environment.NewLine & ex.Message, MsgBoxStyle.Exclamation, "Debug Log File")
+            End Try
             Try
                 If bSeparateThread Then
                     thrRScript = New Threading.Thread(Sub()
@@ -444,15 +484,14 @@ Public Class RLink
                                                         Dim t As New Stopwatch
                                                         t.Start()
                                                         While t.ElapsedMilliseconds < 500 AndAlso thrRScript.IsAlive
-                                                            Threading.Thread.Sleep(50)
-                                                            Console.WriteLine(t.ElapsedMilliseconds)
+                                                            Threading.Thread.Sleep(5)
                                                         End While
                                                         evtWaitHandleDelayDone.Set()
                                                     End Sub)
                     thrWaitDisplay = New Threading.Thread(Sub()
                                                               'frmWaiting.Show()
                                                               While thrRScript.IsAlive
-                                                                  Threading.Thread.Sleep(50)
+                                                                  Threading.Thread.Sleep(5)
                                                                   Application.DoEvents()
                                                               End While
                                                               'frmWaiting.Hide()

@@ -22,7 +22,6 @@ Imports System.ComponentModel
 Imports System.Runtime.Serialization.Formatters.Binary
 
 Public Class frmMain
-
     Public clsRLink As New RLink
     Public clsGrids As New clsGridLink
     Public strStaticPath As String
@@ -36,6 +35,7 @@ Public Class frmMain
     Public strSaveFilePath As String
     Private mnuItems As New List(Of Form)
     Private ctrActive As Control
+    Private WithEvents timer As New System.Windows.Forms.Timer
 
     'This is the default data frame to appear in the data frame selector
     'If "" the current worksheet will be used
@@ -43,9 +43,18 @@ Public Class frmMain
     '     User can choose a default data frame or set the default as the current worksheet
     Public strDefaultDataFrame As String = ""
 
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+    End Sub
+
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         InitialiseOutputWindow()
-
+        timer.Interval = 5000
+        timer.Start()
         mnuHelpAboutRInstat.Visible = False
 
         clsGrids.SetDataViewer(ucrDataViewer)
@@ -1411,6 +1420,14 @@ Public Class frmMain
 
     Private Sub CummulativeDistributionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CummulativeDistributionToolStripMenuItem.Click
         dlgCumulativeDistribution.ShowDialog()
+    End Sub
+
+    Private Sub timer_Tick(sender As Object, e As EventArgs) Handles timer.Tick
+        timer.Stop()
+        'Check if idle
+
+        'Save file
+        timer.Start()
     End Sub
 
 
