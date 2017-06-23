@@ -29,9 +29,9 @@ Partial Class sdgModelOptions
         Me.rdoCauchit = New System.Windows.Forms.RadioButton()
         Me.rdoProbit = New System.Windows.Forms.RadioButton()
         Me.grpLinkFunctions = New System.Windows.Forms.GroupBox()
-        Me.rdologit = New System.Windows.Forms.RadioButton()
-        Me.rdolog = New System.Windows.Forms.RadioButton()
-        Me.rdoidentity = New System.Windows.Forms.RadioButton()
+        Me.rdoIdentity = New System.Windows.Forms.RadioButton()
+        Me.rdoLog = New System.Windows.Forms.RadioButton()
+        Me.rdoLogit = New System.Windows.Forms.RadioButton()
         Me.ucrFamily = New instat.ucrDistributions()
         Me.ucrPnlLinkFunctions = New instat.UcrPanel()
         Me.ucrButtonsSDGModelOptions = New instat.ucrButtonsSubdialogue()
@@ -112,9 +112,9 @@ Partial Class sdgModelOptions
         '
         'grpLinkFunctions
         '
-        Me.grpLinkFunctions.Controls.Add(Me.rdoidentity)
-        Me.grpLinkFunctions.Controls.Add(Me.rdolog)
-        Me.grpLinkFunctions.Controls.Add(Me.rdologit)
+        Me.grpLinkFunctions.Controls.Add(Me.rdoIdentity)
+        Me.grpLinkFunctions.Controls.Add(Me.rdoLog)
+        Me.grpLinkFunctions.Controls.Add(Me.rdoLogit)
         Me.grpLinkFunctions.Controls.Add(Me.rdocloglog)
         Me.grpLinkFunctions.Controls.Add(Me.rdoSqrt)
         Me.grpLinkFunctions.Controls.Add(Me.rdoMuSquaredInverse)
@@ -129,35 +129,35 @@ Partial Class sdgModelOptions
         Me.grpLinkFunctions.TabStop = False
         Me.grpLinkFunctions.Text = "LinkFunctions"
         '
-        'rdologit
+        'rdoIdentity
         '
-        Me.rdologit.AutoSize = True
-        Me.rdologit.Location = New System.Drawing.Point(15, 71)
-        Me.rdologit.Name = "rdologit"
-        Me.rdologit.Size = New System.Drawing.Size(44, 17)
-        Me.rdologit.TabIndex = 10
-        Me.rdologit.Text = "logit"
-        Me.rdologit.UseVisualStyleBackColor = True
+        Me.rdoIdentity.AutoSize = True
+        Me.rdoIdentity.Location = New System.Drawing.Point(15, 22)
+        Me.rdoIdentity.Name = "rdoIdentity"
+        Me.rdoIdentity.Size = New System.Drawing.Size(59, 17)
+        Me.rdoIdentity.TabIndex = 12
+        Me.rdoIdentity.Text = "Identity"
+        Me.rdoIdentity.UseVisualStyleBackColor = True
         '
-        'rdolog
+        'rdoLog
         '
-        Me.rdolog.AutoSize = True
-        Me.rdolog.Location = New System.Drawing.Point(15, 47)
-        Me.rdolog.Name = "rdolog"
-        Me.rdolog.Size = New System.Drawing.Size(39, 17)
-        Me.rdolog.TabIndex = 11
-        Me.rdolog.Text = "log"
-        Me.rdolog.UseVisualStyleBackColor = True
+        Me.rdoLog.AutoSize = True
+        Me.rdoLog.Location = New System.Drawing.Point(15, 47)
+        Me.rdoLog.Name = "rdoLog"
+        Me.rdoLog.Size = New System.Drawing.Size(43, 17)
+        Me.rdoLog.TabIndex = 11
+        Me.rdoLog.Text = "Log"
+        Me.rdoLog.UseVisualStyleBackColor = True
         '
-        'rdoidentity
+        'rdoLogit
         '
-        Me.rdoidentity.AutoSize = True
-        Me.rdoidentity.Location = New System.Drawing.Point(15, 22)
-        Me.rdoidentity.Name = "rdoidentity"
-        Me.rdoidentity.Size = New System.Drawing.Size(58, 17)
-        Me.rdoidentity.TabIndex = 12
-        Me.rdoidentity.Text = "identity"
-        Me.rdoidentity.UseVisualStyleBackColor = True
+        Me.rdoLogit.AutoSize = True
+        Me.rdoLogit.Location = New System.Drawing.Point(15, 71)
+        Me.rdoLogit.Name = "rdoLogit"
+        Me.rdoLogit.Size = New System.Drawing.Size(48, 17)
+        Me.rdoLogit.TabIndex = 10
+        Me.rdoLogit.Text = "Logit"
+        Me.rdoLogit.UseVisualStyleBackColor = True
         '
         'ucrFamily
         '
@@ -211,7 +211,7 @@ Partial Class sdgModelOptions
     Friend WithEvents ucrPnlLinkFunctions As UcrPanel
     Friend WithEvents grpLinkFunctions As GroupBox
     Friend WithEvents ucrFamily As ucrDistributions
-    Friend WithEvents rdoidentity As RadioButton
-    Friend WithEvents rdolog As RadioButton
-    Friend WithEvents rdologit As RadioButton
+    Friend WithEvents rdoIdentity As RadioButton
+    Friend WithEvents rdoLog As RadioButton
+    Friend WithEvents rdoLogit As RadioButton
 End Class
