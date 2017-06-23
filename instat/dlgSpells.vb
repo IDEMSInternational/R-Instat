@@ -124,30 +124,29 @@ Public Class dlgSpells
         Dim strRainDay As String = "rain_day"
         Dim strDrySpell As String = "Dry_Spell"
 
-        'TODO: make these .clear
-        clsApplyInstatFunction = New RFunction
-        clsMaxValueManipulation = New RFunction
-        clsDayFromAndTo = New RFunction
-        clsGroupBy = New RFunction
-        clsAddKey = New RFunction
-        clsAddKeyColName = New RFunction
-        clsRRainday = New RFunction
-        clsSpellLength = New RFunction
-        clsMaxValue = New RFunction
-        clsDayFromAndToOperator = New ROperator
-        clsDayFromOperator = New ROperator
-        clsDayToOperator = New ROperator
-        clsRRaindayOperator = New ROperator
-        clsRRaindayAndOperator = New ROperator
-        clsRRaindayLowerOperator = New ROperator
-        clsRRaindayUpperOperator = New ROperator
-        clsMaxValueFunction = New RFunction
-        clsAdditionalCondition = New RFunction
-        clsAdditionalConditionList = New RFunction
-        clsSubSpellLength2 = New RFunction
-        clsAdditionalConditionReplaceFunction = New RFunction
-        clsAdditionalConditionReplaceOperator2 = New ROperator
-        clsAdditionalConditionReplaceOperator = New ROperator
+        clsApplyInstatFunction.Clear()
+        clsMaxValueManipulation.Clear()
+        clsDayFromAndTo.Clear()
+        clsGroupBy.Clear()
+        clsAddKey.Clear()
+        clsAddKeyColName.Clear()
+        clsRRainday.Clear()
+        clsSpellLength.Clear()
+        clsMaxValue.Clear()
+        clsDayFromAndToOperator.Clear()
+        clsDayFromOperator.Clear()
+        clsDayToOperator.Clear()
+        clsRRaindayOperator.Clear()
+        clsRRaindayAndOperator.Clear()
+        clsRRaindayLowerOperator.Clear()
+        clsRRaindayUpperOperator.Clear()
+        clsMaxValueFunction.Clear()
+        clsAdditionalCondition.Clear()
+        clsAdditionalConditionList.Clear()
+        clsSubSpellLength2.Clear()
+        clsAdditionalConditionReplaceFunction.Clear()
+        clsAdditionalConditionReplaceOperator2.Clear()
+        clsAdditionalConditionReplaceOperator.Clear()
 
         ucrSelectorForSpells.Reset()
         ucrReceiverDate.SetMeAsReceiver()
@@ -237,6 +236,8 @@ Public Class dlgSpells
         clsMaxValue.SetAssignTo("Spells_Rain")
         clsMaxValue.AddParameter("sub_calculations", clsRFunctionParameter:=clsMaxValueList, iPosition:=4)
         clsMaxValueList.AddParameter("sub1", clsRFunctionParameter:=clsSpellLength, bIncludeArgumentName:=False, iPosition:=0)
+        clsMaxValueManipulation.AddParameter("sub2", clsRFunctionParameter:=clsGroupBy, bIncludeArgumentName:=False)
+        clsMaxValueManipulation.AddParameter("sub3", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False)
 
         clsApplyInstatFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         clsApplyInstatFunction.AddParameter("calc", clsRFunctionParameter:=clsMaxValue, iPosition:=0)
@@ -248,13 +249,13 @@ Public Class dlgSpells
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrNudFrom.AddAdditionalCodeParameterPair(clsAdditionalConditionReplaceOperator2, New RParameter("list", 0), iAdditionalPairNo:=1)
-        'For day:
         ucrReceiverDOY.AddAdditionalCodeParameterPair(clsDayFromOperator, New RParameter("doy", 0), iAdditionalPairNo:=1)
+        ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsRRaindayLowerOperator, New RParameter("rain", 0), iAdditionalPairNo:=1)
+
         ucrReceiverDOY.SetRCode(clsDayToOperator, bReset)
         ucrNudFrom.SetRCode(clsDayFromOperator, bReset)
         ucrNudTo.SetRCode(clsDayToOperator, bReset)
 
-        ucrReceiverRainfall.AddAdditionalCodeParameterPair(clsRRaindayLowerOperator, New RParameter("rain", 0), iAdditionalPairNo:=1)
         ucrReceiverRainfall.SetRCode(clsRRaindayUpperOperator, bReset)
         ucrInputSpellLower.SetRCode(clsRRaindayLowerOperator, bReset)
         ucrInputSpellUpper.SetRCode(clsRRaindayUpperOperator, bReset)
@@ -281,6 +282,8 @@ Public Class dlgSpells
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         frmMain.clsRLink.RunScript(clsAddKey.ToScript, strComment:="Spells: Defining column(s) as key")
 
+        clsMaxValue.AddParameter("manipulations", clsRFunctionParameter:=clsMaxValueManipulation, iPosition:=5) 'TODO: move/fix this
+
         ' conditional is checked:
         If ucrChkConditional.Checked Then
             clsSubSpellLength1.AddParameter("sub1", clsRFunctionParameter:=clsAdditionalCondition, bIncludeArgumentName:=False)
@@ -289,11 +292,22 @@ Public Class dlgSpells
         End If
     End Sub
 
-    Private Sub DayBoundaries() ' TODO: What to do about the calculated_from, sub1, etc
+    Private Sub DayBoundaries()
         clsDayFromAndTo.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverDOY.GetVariableNames() & ")")
-        clsMaxValue.AddParameter("manipulations", clsRFunctionParameter:=clsMaxValueManipulation, iPosition:=5)
-        clsMaxValueManipulation.AddParameter("sub3", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False)
     End Sub
+
+    Private Sub RainDays()
+        clsRRainday.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames() & ")", iPosition:=0)
+    End Sub
+
+    Private Sub TotalRainfall()
+    End Sub
+
+    Private Sub DryPeriod()
+    End Sub
+
+
+
 
     Private Sub ucrInputSpellLower_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSpellLower.ControlValueChanged, ucrInputSpellUpper.ControlValueChanged, ucrInputCondition.ControlValueChanged
         Select Case ucrInputCondition.GetText
@@ -316,22 +330,16 @@ Public Class dlgSpells
     End Sub
 
     Private Sub ucrReceiverRainfall_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRainfall.ControlValueChanged
-        clsRRainday.AddParameter("calculated_from", " list(" & strCurrDataName & "=" & ucrReceiverRainfall.GetVariableNames() & ")", iPosition:=0)
-    End Sub
-
-    Private Sub ucrSelectorForSpells_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrReceiverRainfall.ControlContentsChanged, ucrSelectorForSpells.ControlContentsChanged
-        strCurrDataName = Chr(34) & ucrSelectorForSpells.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34)
-    End Sub
-
-    Private Sub nudValues()
-        'nudMaximumDays.Maximum = nudLengthofTime.Value - 1
-        'nudLengthofTime.Minimum = nudMaximumDays.Value + 1
+        RainDays()
     End Sub
 
     Private Sub ucrReceiverDOY_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDOY.ControlValueChanged
         DayBoundaries()
-        clsMaxValue.AddParameter("manipulations", clsRFunctionParameter:=clsMaxValueManipulation, iPosition:=5)
-        clsMaxValueManipulation.AddParameter("sub3", clsRFunctionParameter:=clsDayFromAndTo, bIncludeArgumentName:=False)
+    End Sub
+
+    Private Sub ucrSelectorForSpells_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrReceiverRainfall.ControlContentsChanged, ucrSelectorForSpells.ControlContentsChanged
+        strCurrDataName = Chr(34) & ucrSelectorForSpells.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34)
+        RainDays()
     End Sub
 
     Private Sub ucrReceiverYear_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlValueChanged, ucrReceiverStation.ControlValueChanged
@@ -341,8 +349,12 @@ Public Class dlgSpells
         Else
             clsGroupBy.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames & ")")
         End If
-        clsMaxValue.AddParameter("manipulations", clsRFunctionParameter:=clsMaxValueManipulation, iPosition:=5)
-        clsMaxValueManipulation.AddParameter("sub2", clsRFunctionParameter:=clsGroupBy, bIncludeArgumentName:=False)
+    End Sub
+
+
+    Private Sub nudValues()
+        'nudMaximumDays.Maximum = nudLengthofTime.Value - 1
+        'nudLengthofTime.Minimum = nudMaximumDays.Value + 1
     End Sub
 
     Private Sub ucrNudFrom_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudFrom.ControlValueChanged
