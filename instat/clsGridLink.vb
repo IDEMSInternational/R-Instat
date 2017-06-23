@@ -106,7 +106,7 @@ Public Class clsGridLink
                     dfTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataFrame.ToScript()).AsDataFrame
                     clsFilterApplied.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
                     If frmMain.clsRLink.RunInternalScriptGetValue(clsFilterApplied.ToScript()).AsLogical(0) Then
-                        FillSheet(dfTemp, strDataName, grdData, bInstatObjectDataFrame:=True, bIncludeDataTypes:=True, iNewPosition:=i, bFilterApplied:=True, bCheckFreezeColumns:=True)
+                        FillSheet(dfTemp, strDataName, grdData, bInstatObjectDataFrame:=True, bIncludeDataTypes:=True, iNewPosition:=i, bFilterApplied:=True, bCheckFreezeColumns:=True, iRowMax:=iMaxRows, iColMax:=iMaxCols)
                     Else
                         FillSheet(dfTemp, strDataName, grdData, bInstatObjectDataFrame:=True, bIncludeDataTypes:=True, iNewPosition:=i, bFilterApplied:=False, bCheckFreezeColumns:=True)
                     End If
@@ -121,7 +121,8 @@ Public Class clsGridLink
                     expVarMetadata = frmMain.clsRLink.RunInternalScriptGetValue(clsGetVariablesMetadata.ToScript())
                     If expVarMetadata IsNot Nothing AndAlso expVarMetadata.Type <> Internals.SymbolicExpressionType.Null Then
                         dfTemp = expVarMetadata.AsDataFrame()
-                        FillSheet(dfTemp, strDataName, grdVariablesMetadata)
+                        'TODO test if column limit is needed for stability in metadata grids
+                        FillSheet(dfTemp, strDataName, grdVariablesMetadata, iColMax:=iMaxCols)
                         clsSetVariablesMetadataChanged.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
                         clsSetVariablesMetadataChanged.AddParameter("new_val", "TRUE")
                         frmMain.clsRLink.RunInternalScript(clsSetVariablesMetadataChanged.ToScript())
@@ -176,7 +177,8 @@ Public Class clsGridLink
         If bGrdMetadataExists And (bGrdMetadataChanged Or bRMetadataChanged) Then
             clsGetCombinedMetadata.AddParameter("convert_to_character", "TRUE")
             dfTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetCombinedMetadata.ToScript()).AsDataFrame()
-            FillSheet(dfTemp, "metadata", grdMetadata)
+            'TODO test if column limit is needed for stability in metadata grids
+            FillSheet(dfTemp, "metadata", grdMetadata, iColMax:=iMaxCols)
             clsSetMetadataChanged.AddParameter("new_val", "TRUE")
             frmMain.clsRLink.RunInternalScript(clsSetMetadataChanged.ToScript())
         End If
@@ -239,7 +241,7 @@ Public Class clsGridLink
         UpdateGrids()
     End Sub
 
-    Public Sub FillSheet(dfTemp As DataFrame, strName As String, grdCurr As ReoGridControl, Optional bInstatObjectDataFrame As Boolean = False, Optional bIncludeDataTypes As Boolean = False, Optional iNewPosition As Integer = -1, Optional bFilterApplied As Boolean = False, Optional bCheckFreezeColumns As Boolean = False, Optional iRowMax As Integer = -1)
+    Public Sub FillSheet(dfTemp As DataFrame, strName As String, grdCurr As ReoGridControl, Optional bInstatObjectDataFrame As Boolean = False, Optional bIncludeDataTypes As Boolean = False, Optional iNewPosition As Integer = -1, Optional bFilterApplied As Boolean = False, Optional bCheckFreezeColumns As Boolean = False, Optional iRowMax As Integer = -1, Optional iColMax As Integer = -1)
         Dim bFoundWorksheet As Boolean = False
         Dim tempWorkSheet As Worksheet
         Dim fillWorkSheet As Worksheet
@@ -283,7 +285,11 @@ Public Class clsGridLink
             grdCurr.MoveWorksheet(fillWorkSheet, iNewPosition)
         End If
         'replaced this to fill columns with the iMaxCols
-        fillWorkSheet.Columns = Math.Min(iMaxCols, dfTemp.ColumnCount)
+        If iColMax <> -1 Then
+            fillWorkSheet.Columns = Math.Min(iColMax, dfTemp.ColumnCount)
+        Else
+            fillWorkSheet.Columns = dfTemp.ColumnCount
+        End If
         strColumnNames = dfTemp.ColumnNames
         If dfTemp.RowCount = 0 Then
             fillWorkSheet.Rows = 1

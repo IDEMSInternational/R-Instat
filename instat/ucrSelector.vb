@@ -122,7 +122,7 @@ Public Class ucrSelector
     End Sub
 
     Public Sub AddAll()
-        If CurrentReceiver IsNot Nothing AndAlso (lstAvailableVariable.SelectedItems.Count > 0) Then
+        If CurrentReceiver IsNot Nothing Then
             SelectAll()
             Add()
         End If
@@ -339,9 +339,9 @@ Public Class ucrSelector
         lstAvailableVariable.EndUpdate()
     End Sub
 
-    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
+    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
         If bHasOwnParameter Then
-            MyBase.UpdateControl(bReset)
+            MyBase.UpdateControl(bReset:=bReset, bCloneIfNeeded:=bCloneIfNeeded)
         End If
     End Sub
 
