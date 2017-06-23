@@ -126,8 +126,8 @@ Partial Class sdgSimpleRegOptions
         Me.tbModel.Controls.Add(Me.grpRugs)
         Me.tbModel.Controls.Add(Me.lblWhiteSpace)
         Me.tbModel.Controls.Add(Me.lblGraphicsSignLevel)
-        Me.tbModel.Controls.Add(Me.grpScale)
         Me.tbModel.Controls.Add(Me.grpPlotType)
+        Me.tbModel.Controls.Add(Me.grpScale)
         Me.tbModel.Location = New System.Drawing.Point(4, 22)
         Me.tbModel.Name = "tbModel"
         Me.tbModel.Padding = New System.Windows.Forms.Padding(3)
@@ -577,7 +577,7 @@ Partial Class sdgSimpleRegOptions
         'ucrChkPvalues
         '
         Me.ucrChkPvalues.Checked = False
-        Me.ucrChkPvalues.Location = New System.Drawing.Point(142, 45)
+        Me.ucrChkPvalues.Location = New System.Drawing.Point(147, 35)
         Me.ucrChkPvalues.Name = "ucrChkPvalues"
         Me.ucrChkPvalues.Size = New System.Drawing.Size(113, 20)
         Me.ucrChkPvalues.TabIndex = 11
@@ -585,7 +585,7 @@ Partial Class sdgSimpleRegOptions
         'ucrChkEstimates
         '
         Me.ucrChkEstimates.Checked = False
-        Me.ucrChkEstimates.Location = New System.Drawing.Point(10, 65)
+        Me.ucrChkEstimates.Location = New System.Drawing.Point(10, 59)
         Me.ucrChkEstimates.Name = "ucrChkEstimates"
         Me.ucrChkEstimates.Size = New System.Drawing.Size(113, 20)
         Me.ucrChkEstimates.TabIndex = 10
@@ -593,7 +593,7 @@ Partial Class sdgSimpleRegOptions
         'ucrChkDisplayCLimits
         '
         Me.ucrChkDisplayCLimits.Checked = False
-        Me.ucrChkDisplayCLimits.Location = New System.Drawing.Point(10, 88)
+        Me.ucrChkDisplayCLimits.Location = New System.Drawing.Point(10, 83)
         Me.ucrChkDisplayCLimits.Name = "ucrChkDisplayCLimits"
         Me.ucrChkDisplayCLimits.Size = New System.Drawing.Size(113, 20)
         Me.ucrChkDisplayCLimits.TabIndex = 9
@@ -601,7 +601,7 @@ Partial Class sdgSimpleRegOptions
         'ucrChkANOVA
         '
         Me.ucrChkANOVA.Checked = False
-        Me.ucrChkANOVA.Location = New System.Drawing.Point(10, 38)
+        Me.ucrChkANOVA.Location = New System.Drawing.Point(10, 35)
         Me.ucrChkANOVA.Name = "ucrChkANOVA"
         Me.ucrChkANOVA.Size = New System.Drawing.Size(113, 20)
         Me.ucrChkANOVA.TabIndex = 8
@@ -609,7 +609,7 @@ Partial Class sdgSimpleRegOptions
         'ucrChkModel
         '
         Me.ucrChkModel.Checked = False
-        Me.ucrChkModel.Location = New System.Drawing.Point(10, 15)
+        Me.ucrChkModel.Location = New System.Drawing.Point(10, 11)
         Me.ucrChkModel.Name = "ucrChkModel"
         Me.ucrChkModel.Size = New System.Drawing.Size(113, 20)
         Me.ucrChkModel.TabIndex = 7
