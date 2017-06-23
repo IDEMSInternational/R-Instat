@@ -47,6 +47,9 @@ Public Class sdgSimpleRegOptions
         ucrChkPvalues.SetText("P-Values")
         ucrChkPvalues.AddFunctionNamesCondition(True, "anova")
 
+        ucrChkPvalues.AddToLinkedControls(ucrNudDisplayCLevel, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.95)
+        ucrNudDisplayCLevel.SetLinkedDisplayControl(lblDisplayCLevel)
+
         ucrNudDisplayCLevel.SetParameter(New RParameter("level"))
         ucrNudDisplayCLevel.DecimalPlaces = 2
         ucrNudDisplayCLevel.Increment = 0.01
@@ -55,6 +58,8 @@ Public Class sdgSimpleRegOptions
         ucrChkDisplayCLimits.AddParameterPresentCondition(False, "level")
         ucrChkDisplayCLimits.AddToLinkedControls(ucrNudDisplayCLevel, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.95)
         ucrNudDisplayCLevel.SetLinkedDisplayControl(lblDisplayCLevel)
+
+
 
 
         ucrChkFittedModel.SetText("Fitted Model")
@@ -95,6 +100,7 @@ Public Class sdgSimpleRegOptions
         ucrChkMultiplePlots.AddFunctionNamesCondition(False, "autoplot")
         ucrChkMultiplePlots.SetText("Multiple Plots")
         ucrChkMultiplePlots.AddToLinkedControls(ucrPnlMutiplePlots, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoFourPlots)
+        ' ucrPnlMutiplePlots.SetLinkedDisplayControl(grpMultiplePlots)
 
         'Individual Plots (Autoplot function)
         ucrPnlIndividualPlots.AddRadioButton(rdoResidualsFitted)
@@ -113,6 +119,7 @@ Public Class sdgSimpleRegOptions
         ucrChkIndividualPlots.AddFunctionNamesCondition(False, "autoplot")
         ucrChkIndividualPlots.SetText("Individual Plots")
         ucrChkIndividualPlots.AddToLinkedControls(ucrPnlIndividualPlots, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoResidualsFitted)
+        'ucrPnlIndividualPlots.SetLinkedDisplayControl(grpIndividualPlots)
 
         'Fitting Models Plots (Visreg)
         ucrChkFittedModel.AddFunctionNamesCondition(False, "visreg")
@@ -129,8 +136,7 @@ Public Class sdgSimpleRegOptions
         ucrChkFittedModel.AddToLinkedControls(ucrPnlScale, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
         ucrPnlScale.SetRDefault(Chr(34) & "linear" & Chr(34))
 
-        ucrChkFittedModel.AddToLinkedControls(ucrNudWhiteSpace, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.2)
-        ucrNudWhiteSpace.SetLinkedDisplayControl(lblWhiteSpace)
+        ucrChkFittedModel.AddToLinkedControls(ucrNudWhiteSpace, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
         ucrChkFittedModel.AddToLinkedControls(ucrChkPartial, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
         ucrChkFittedModel.AddToLinkedControls(ucrChkRugs, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
         ucrChkRugs.AddToLinkedControls(ucrPnlPartial12, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
@@ -230,6 +236,7 @@ Public Class sdgSimpleRegOptions
         clsRWriteStdResiduals = clsNewRWriteStdResiduals
         clsRWriteLeverage = clsNewRWriteLeverage
 
+
         ucrChkModel.SetRCode(clsRModelsFunction, bReset)
         ucrChkEstimates.SetRCode(clsRSummaryFunction, bReset)
         ucrChkANOVA.SetRCode(clsRanovaFunction, bReset)
@@ -248,7 +255,6 @@ Public Class sdgSimpleRegOptions
         ucrChkMultiplePlots.SetRCode(clsRResidualPlotsFunction, bReset)
         ucrPnlMutiplePlots.SetRCode(clsRResidualPlotsFunction, bReset)
         ucrChkFittedModel.SetRCode(clsRggplotFunction, bReset)
-
     End Sub
 
     Private Sub ucrChkANOVA_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkANOVA.ControlValueChanged
