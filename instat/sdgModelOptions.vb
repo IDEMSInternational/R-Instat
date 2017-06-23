@@ -19,37 +19,24 @@ Public Class sdgModelOptions
     Public clsRCIFunction As New RFunction
     Public bFirstLoad As Boolean = True
 
-    'Public Sub New()
-
-    '    ' This call is required by the designer.
-    '    InitializeComponent()
-
-    '    ' Add any initialization after the InitializeComponent() call.
-    '    clsRCIFunction = New RFunction
-    '    ucrFamily.SetGLMDistributions()
-    '    bFirstLoad = True
-    'End Sub
-
     Private Sub sdgModelOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-
-        If bFirstLoad Then
-            SetDefaults()
-            bFirstLoad = False
-        End If
-
     End Sub
+
     Public Sub InitialiseControls()
 
-        ucrPnlLinkFunctions.AddRadioButton(rdoIdentity)
-        ucrPnlLinkFunctions.AddRadioButton(rdoCauchit)
-        ucrPnlLinkFunctions.AddRadioButton(rdocloglog)
-        ucrPnlLinkFunctions.AddRadioButton(rdoLog)
-        ucrPnlLinkFunctions.AddRadioButton(rdoSqrt)
-        ucrPnlLinkFunctions.AddRadioButton(rdoProbit)
-        ucrPnlLinkFunctions.AddRadioButton(rdoLogit)
-        ucrPnlLinkFunctions.AddRadioButton(rdoMuSquaredInverse)
-        ucrPnlLinkFunctions.AddRadioButton(rdoInverse)
+        ucrPnlLinkFunctions.SetParameter(New RParameter("link", 0))
+
+        ucrPnlLinkFunctions.AddRadioButton(rdoidentity, Chr(34) & "identity" & Chr(34))
+        ucrPnlLinkFunctions.AddRadioButton(rdoCauchit, Chr(34) & "cauchit" & Chr(34))
+        ucrPnlLinkFunctions.AddRadioButton(rdocloglog, Chr(34) & "cloglog" & Chr(34))
+        ucrPnlLinkFunctions.AddRadioButton(rdolog, Chr(34) & "log" & Chr(34))
+        ucrPnlLinkFunctions.AddRadioButton(rdoSqrt, Chr(34) & "sqrt" & Chr(34))
+        ucrPnlLinkFunctions.AddRadioButton(rdoProbit, Chr(34) & "probit" & Chr(34))
+        ucrPnlLinkFunctions.AddRadioButton(rdologit, Chr(34) & "logit" & Chr(34))
+        ucrPnlLinkFunctions.AddRadioButton(rdoMuSquaredInverse, Chr(34) & "1/mu^2" & Chr(34))
+        ucrPnlLinkFunctions.AddRadioButton(rdoInverse, Chr(34) & "inverse" & Chr(34))
+        bControlsInitialised = True
 
     End Sub
 
@@ -64,10 +51,6 @@ Public Class sdgModelOptions
     Public Sub SetDefaults()
         RestrictLink()
     End Sub
-
-    'Public Sub SetRCIFunction(clsNewFunction As RFunction)
-    '    clsRCIFunction = clsNewFunction
-    'End Sub
 
     Private Sub ResetLinks()
         rdoIdentity.Checked = False
@@ -91,7 +74,7 @@ Public Class sdgModelOptions
         rdoSqrt.Enabled = False
     End Sub
 
-    Public Sub ucrFamily_cboDistributionsIndexChanged() Handles ucrFamily.ControlValueChanged
+    Public Sub ucrFamily_cboDistributionsIndexChanged() Handles ucrFamily.DistributionsIndexChanged
         RestrictLink()
     End Sub
 
@@ -143,42 +126,6 @@ Public Class sdgModelOptions
             rdoProbit.Enabled = True
             rdoSqrt.Enabled = True
         End If
-        LinkFunction()
     End Sub
 
-    Public Sub LinkFunction()
-        Dim strLinkFunction As String = ""
-        If rdoInverse.Checked Then
-            strLinkFunction = "inverse"
-        End If
-        If rdoIdentity.Checked Then
-            strLinkFunction = "identity"
-        End If
-        If rdoLog.Checked Then
-            strLinkFunction = "log"
-        End If
-        If rdoLogit.Checked Then
-            strLinkFunction = "logit"
-        End If
-        If rdoProbit.Checked Then
-            strLinkFunction = "probit"
-        End If
-        If rdoCauchit.Checked Then
-            strLinkFunction = "cauchit"
-        End If
-        If rdocloglog.Checked Then
-            strLinkFunction = "cloglog"
-        End If
-        If rdoSqrt.Checked Then
-            strLinkFunction = "sqrt"
-        End If
-        If rdoMuSquaredInverse.Checked Then
-            strLinkFunction = "1/mu^2"
-        End If
-        clsRCIFunction.AddParameter("link", Chr(34) & strLinkFunction & Chr(34))
-    End Sub
-
-    Private Sub ucrPnlLinkFunctions_contents() Handles ucrPnlLinkFunctions.ControlValueChanged
-        LinkFunction()
-    End Sub
 End Class
