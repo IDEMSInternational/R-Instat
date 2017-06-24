@@ -207,6 +207,8 @@ Partial Class dlgRegressionSimple
         Me.grpParameters.Controls.Add(Me.ucrNudCI)
         Me.grpParameters.Controls.Add(Me.lblConfidenceInterval)
         Me.grpParameters.Controls.Add(Me.lblDifferenceInMeans)
+        Me.grpParameters.Controls.Add(Me.lblHyp1)
+        Me.grpParameters.Controls.Add(Me.ucrPnlMeansAndVariance)
         resources.ApplyResources(Me.grpParameters, "grpParameters")
         Me.grpParameters.Name = "grpParameters"
         Me.grpParameters.TabStop = False
@@ -313,9 +315,7 @@ Partial Class dlgRegressionSimple
         Me.Controls.Add(Me.lblFactor)
         Me.Controls.Add(Me.lblNumeric)
         Me.Controls.Add(Me.rdoCompareMeans)
-        Me.Controls.Add(Me.lblHyp1)
         Me.Controls.Add(Me.ucrExplanatory)
-        Me.Controls.Add(Me.ucrPnlMeansAndVariance)
         Me.Controls.Add(Me.ucrResponse)
         Me.Controls.Add(Me.ucrSelectorSimpleReg)
         Me.Controls.Add(Me.lblExplanatory)
