@@ -25,13 +25,15 @@ Public Class RLink
     Dim strInstatObjectPath As String = "/InstatObject/R" 'path to the Instat object
     Public strInstatDataObject As String = "InstatDataObject"
 
-    Private strLogFilePath As String = Path.Combine(Path.GetTempPath, "R-Instat_debug_log.txt")
+    Private strDebugLogFolderPath As String = Path.Combine(Path.GetTempPath, "R-Instat_debug_logs")
     Private bFirstRCode As Boolean = True
     Private bDebugLogExists As Boolean = False
-
+    Private bAutoSaveLogExists As Boolean = False
+    Private bFirstLogCode As Boolean = True
     Public bRCodeRunning As Boolean = False
 
     Public clsEngine As REngine
+    Public bREngineInitialised As Boolean = False
     Public rtbOutput As New ucrWPFRichTextBox
     Public txtLog As New TextBox
     Public bLog As Boolean = False
@@ -55,24 +57,48 @@ Public Class RLink
 
     Private grdDataView As ReoGridControl
 
-    Public Sub New(Optional bWithInstatObj As Boolean = False, Optional bWithClimsoft As Boolean = False)
-
-    End Sub
-
-    Public Sub SetEngine()
+    Public Sub StartREngine(Optional strScript As String = "", Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bSeparateThread As Boolean = True)
         Try
             REngine.SetEnvironmentVariables()
         Catch ex As Exception
-            MsgBox(ex.Message & Environment.NewLine & "Ensure that the correct version of R is installed and restart the program.", MsgBoxStyle.Critical, "Cannot initialise R Link.")
+            MsgBox(ex.Message & Environment.NewLine & "Ensure that the correct version of R is installed and restart the program.", MsgBoxStyle.Critical, "Cannot initialise R connection.")
             Application.Exit()
         End Try
         Try
             clsEngine = REngine.GetInstance()
         Catch ex As Exception
-            MsgBox(ex.Message & Environment.NewLine & "Ensure that the correct version of R is installed and restart the program.", MsgBoxStyle.Critical, "Cannot initialise R Link.")
+            MsgBox(ex.Message & Environment.NewLine & "Ensure that the correct version of R is installed and restart the program.", MsgBoxStyle.Critical, "Cannot initialise R connection.")
             Application.Exit()
         End Try
         clsEngine.Initialize()
+        If strScript = "" Then
+            strScript = GetRSetupScript()
+            iCallType = 0
+            strComment = ""
+            bSeparateThread = True
+        End If
+        RunScript(strScript:=strScript, iCallType:=iCallType, strComment:=strComment, bSeparateThread:=bSeparateThread)
+        'TODO is this ok to set here?
+        bInstatObjectExists = True
+    End Sub
+
+    Public Sub CloseREngine()
+        If clsEngine IsNot Nothing Then
+            Try
+                clsEngine.Dispose()
+            Catch ex As Exception
+                MsgBox("Could not dispose for the connection to R" & Environment.NewLine & ex.Message, MsgBoxStyle.Exclamation, "Cannot close R connection.")
+            End Try
+        End If
+    End Sub
+
+    Public Sub LoadInstatDataObjectFromFile(strFile As String, Optional strComment As String = "")
+        Dim clsReadRDS As New RFunction
+
+        clsReadRDS.SetRCommand("readRDS")
+        clsReadRDS.AddParameter("file", strFile.Replace("\", "/"))
+        RunScript(clsReadRDS.ToScript(), strComment:=strComment)
+        bInstatObjectExists = True
     End Sub
 
     Public Sub SetDataViewGrid(grdNewDataGrid As ReoGridControl)
@@ -239,6 +265,44 @@ Public Class RLink
         Return strNextDefault
     End Function
 
+    Private Sub AppendToAutoSaveLog(strScript As String)
+        Try
+            If bFirstLogCode Then
+                'File.WriteAllText(frmMain.strAutoSaveLogFilePath, "")
+                bAutoSaveLogExists = True
+            End If
+            If bAutoSaveLogExists Then
+                'Using w As StreamWriter = File.AppendText(frmMain.strAutoSaveLogFilePath)
+                'w.WriteLine(strScript)
+                'End Using
+            End If
+        Catch ex As Exception
+            'MsgBox("Could not add script to auto save log file at:" & frmMain.strAutoSaveLogFilePath & Environment.NewLine & ex.Message, MsgBoxStyle.Exclamation, "Auot save Log File")
+            bAutoSaveLogExists = False
+        Finally
+            bFirstLogCode = False
+        End Try
+    End Sub
+
+    Public Sub RunLogFile(strFilePath As String, Optional bDeleteFile As Boolean = False)
+        Dim strLines() As String
+        Dim strScript As String
+
+        Try
+            If File.Exists(strFilePath) Then
+                strLines = File.ReadAllLines(strFilePath)
+                strScript = String.Join(Environment.NewLine, strLines)
+                'Delete before running in case this is an auto save 
+                If bDeleteFile Then
+                    File.Delete(strFilePath)
+                End If
+                RunScript(strScript)
+            End If
+        Catch ex As Exception
+            MsgBox("Could not read log file at:" & strFilePath & Environment.NewLine & ex.Message, MsgBoxStyle.Exclamation, "Cannot Read Log File")
+        End Try
+    End Sub
+
     Public Sub RunScript(strScript As String, Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bSeparateThread As Boolean = True)
         Dim strCapturedScript As String
         Dim expTemp As RDotNet.SymbolicExpression
@@ -261,6 +325,7 @@ Public Class RLink
         End If
         If bLog Then
             txtLog.Text = txtLog.Text & strScriptWithComment & Environment.NewLine
+            AppendToAutoSaveLog(strScriptWithComment & Environment.NewLine)
         End If
         If bOutput Then
             If strComment <> "" AndAlso bShowCommands Then
@@ -442,20 +507,20 @@ Public Class RLink
         If clsEngine IsNot Nothing Then
             If bFirstRCode Then
                 Try
-                    File.WriteAllText(strLogFilePath, "")
-                    Using w As StreamWriter = File.AppendText(strLogFilePath)
-                        w.WriteLine("****************************")
-                        w.WriteLine("R-Instat debugging log file")
-                        w.WriteLine("****************************")
-                        w.WriteLine("Version: " & My.Application.Info.Version.ToString())
-                        w.WriteLine("****************************")
-                        w.WriteLine("Created on: " & DateTime.Now)
-                        w.WriteLine("User: " & Environment.UserName)
-                        w.WriteLine("****************************")
+                    File.WriteAllText(strDebugLogFolderPath, "")
+                    Using w As StreamWriter = File.AppendText(strDebugLogFolderPath)
+                        w.WriteLine("# ****************************")
+                        w.WriteLine("# R-Instat debugging log file")
+                        w.WriteLine("# ****************************")
+                        w.WriteLine("# Version: " & My.Application.Info.Version.ToString())
+                        w.WriteLine("# ****************************")
+                        w.WriteLine("# Created on: " & DateTime.Now)
+                        w.WriteLine("# User: " & Environment.UserName)
+                        w.WriteLine("# ****************************")
                     End Using
                     bDebugLogExists = True
                 Catch ex As Exception
-                    MsgBox("Could not create debug log file at:" & strLogFilePath & Environment.NewLine & ex.Message, MsgBoxStyle.Exclamation, "Debug Log File")
+                    MsgBox("Could not create debug log file at:" & strDebugLogFolderPath & Environment.NewLine & ex.Message, MsgBoxStyle.Exclamation, "Debug Log File")
                     bDebugLogExists = False
                 Finally
                     bFirstRCode = False
@@ -465,14 +530,14 @@ Public Class RLink
                 If bDebugLogExists Then
                     Dim ts As New Stopwatch
                     ts.Start()
-                    Using w As StreamWriter = File.AppendText(strLogFilePath)
+                    Using w As StreamWriter = File.AppendText(strDebugLogFolderPath)
                         w.WriteLine(strScript)
                     End Using
                     ts.Stop()
                     Console.WriteLine(ts.ElapsedMilliseconds)
                 End If
             Catch ex As Exception
-                MsgBox("Could not add text to debug log file at:" & strLogFilePath & Environment.NewLine & ex.Message, MsgBoxStyle.Exclamation, "Debug Log File")
+                MsgBox("Could not add text to debug log file at:" & strDebugLogFolderPath & Environment.NewLine & ex.Message, MsgBoxStyle.Exclamation, "Debug Log File")
             End Try
             Try
                 If bSeparateThread Then
@@ -566,16 +631,27 @@ Public Class RLink
         Return strTemp
     End Function
 
-    Public Sub RSetup()
-        'run script to load libraries
-        frmMain.Cursor = Cursors.WaitCursor
-        frmSetupLoading.Show()
-        RunScript("setwd('" & frmMain.strStaticPath.Replace("\", "/") & strInstatObjectPath & "')", strComment:="Setting the working directory") 'This is bad the wd should be flexible and not automatically set to the instat object directory 
-        RunScript("source(" & Chr(34) & "Rsetup.R" & Chr(34) & ")", strComment:="Sourcing the Instat Object R code")
-        CreateNewInstatObject()
-        frmSetupLoading.Close()
-        frmMain.Cursor = Cursors.Default
-    End Sub
+    Public Function GetRSetupScript() As String
+        Dim clsSetWd As New RFunction
+        Dim clsSource As New RFunction
+        Dim clsCreateIO As New ROperator
+        Dim strScript As String = ""
+
+        clsSetWd.SetRCommand("setwd")
+        clsSetWd.AddParameter("dir", Chr(34) & Path.Combine(frmMain.strStaticPath.Replace("\", "/") & strInstatObjectPath) & Chr(34)) 'This is bad the wd should be flexible and not automatically set to the instat object directory 
+        clsSource.SetRCommand("source")
+        clsSource.AddParameter("file", Chr(34) & "Rsetup.R" & Chr(34))
+        clsCreateIO.SetOperation("<-")
+        clsCreateIO.AddParameter("left", strInstatDataObject, iPosition:=0)
+        clsCreateIO.AddParameter("right", "instat_object$new()", iPosition:=1)
+
+        strScript = ""
+        strScript = strScript & clsSetWd.ToScript() & Environment.NewLine
+        strScript = strScript & clsSource.ToScript() & Environment.NewLine
+        strScript = strScript & clsCreateIO.ToScript()
+
+        Return strScript
+    End Function
 
     Public Sub CreateNewInstatObject()
         RunScript(strInstatDataObject & " <- instat_object$new()", strComment:="Defining new Instat Object")
