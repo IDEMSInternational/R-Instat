@@ -36,6 +36,8 @@ Public Class frmMain
     Private mnuItems As New List(Of Form)
     Private ctrActive As Control
     Private WithEvents timer As New System.Windows.Forms.Timer
+    Private iAutoSaveTime As Integer = 300000
+    Private strAutoSaveDataFilePath As String = Path.Combine(Path.GetTempPath, "R-Instat_auto_save.rds")
 
     'This is the default data frame to appear in the data frame selector
     'If "" the current worksheet will be used
@@ -53,8 +55,7 @@ Public Class frmMain
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         InitialiseOutputWindow()
-        timer.Interval = 5000
-        timer.Start()
+
         mnuHelpAboutRInstat.Visible = False
 
         clsGrids.SetDataViewer(ucrDataViewer)
@@ -76,6 +77,11 @@ Public Class frmMain
         'Do this before setting up R Link becuase setup edits Output window which is changed by Options
         LoadInstatOptions()
 
+        'Do this after loading options because interval depends on options
+        timer.Interval = iAutoSaveTime
+        timer.Start()
+        AddHandler System.Windows.Forms.Application.Idle, AddressOf Application_Idle
+
         'Sets up R source files
         clsRLink.RSetup()
 
@@ -83,6 +89,18 @@ Public Class frmMain
         clsRecentItems.setToolStripItems(mnuFile, mnuTbShowLast10, sepStart, sepEnd)
         'checks existence of MRU list
         clsRecentItems.checkOnLoad()
+    End Sub
+
+    Private Sub Application_Idle(sender As Object, e As EventArgs)
+        If Not timer.Enabled AndAlso (ActiveForm Is Nothing OrElse ActiveForm.Equals(Me)) AndAlso Not clsRLink.bRCodeRunning Then
+            AutoSaveData()
+            timer.Start()
+        End If
+    End Sub
+
+    Private Sub CheckAutoSave()
+        If File.Exists(strAutoSaveDataFilePath) Then
+        End If
     End Sub
 
     Private Sub InitialiseOutputWindow()
@@ -771,12 +789,36 @@ Public Class frmMain
                 End If
                 clsRecentItems.saveOnClose()
                 SaveInstatOptions(Path.Combine(strAppDataPath, strInstatOptionsFile))
+                DeleteAutoSaveData()
             Catch ex As Exception
                 MsgBox("Error attempting to save setting files to App Data folder." & Environment.NewLine & "System error message: " & ex.Message, MsgBoxStyle.Critical, "Error saving settings")
             End Try
         Else
             e.Cancel = True
         End If
+    End Sub
+
+    Public Sub AutoSaveData()
+        Dim clsSaveRDS As New RFunction
+
+        If clsRLink.bInstatObjectExists Then
+            clsSaveRDS.SetRCommand("saveRDS")
+            clsSaveRDS.AddParameter("object", clsRLink.strInstatDataObject)
+            clsSaveRDS.AddParameter("file", Chr(34) & strAutoSaveDataFilePath.Replace("\", "/") & Chr(34))
+            Dim t As New Stopwatch
+            t.Start()
+            clsRLink.RunInternalScript(clsSaveRDS.ToScript())
+            t.Stop()
+            Console.WriteLine("save time: " & t.ElapsedMilliseconds)
+        End If
+    End Sub
+
+    Public Sub DeleteAutoSaveData()
+        Try
+            File.Delete(strAutoSaveDataFilePath)
+        Catch ex As Exception
+            MsgBox("Could not delete auto save data file at: " & strAutoSaveDataFilePath & Environment.NewLine & ex.Message)
+        End Try
     End Sub
 
     Private Sub mnuOrganiseDataObjectHideDataframes_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataObjectHideDataframes.Click
@@ -1424,12 +1466,7 @@ Public Class frmMain
 
     Private Sub timer_Tick(sender As Object, e As EventArgs) Handles timer.Tick
         timer.Stop()
-        'Check if idle
-
-        'Save file
-        timer.Start()
     End Sub
-
 
     'Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click
     '    'TEST temporary 

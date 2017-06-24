@@ -29,6 +29,8 @@ Public Class RLink
     Private bFirstRCode As Boolean = True
     Private bDebugLogExists As Boolean = False
 
+    Public bRCodeRunning As Boolean = False
+
     Public clsEngine As REngine
     Public rtbOutput As New ucrWPFRichTextBox
     Public txtLog As New TextBox
@@ -433,6 +435,10 @@ Public Class RLink
         Dim evtWaitHandleDelayDone As New System.Threading.AutoResetEvent(False)
         Dim bReturn As Boolean = True
 
+        While bRCodeRunning
+            Threading.Thread.Sleep(5)
+        End While
+        bRCodeRunning = True
         If clsEngine IsNot Nothing Then
             If bFirstRCode Then
                 Try
@@ -516,6 +522,7 @@ Public Class RLink
         Else
             bReturn = False
         End If
+        bRCodeRunning = False
         Return bReturn
     End Function
 
