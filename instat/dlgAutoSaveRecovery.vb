@@ -115,6 +115,7 @@ Public Class dlgAutoSaveRecovery
         If File.Exists(strAutoSavedDataFilePaths(0)) AndAlso Not ucrInputSavedPathData.IsEmpty() Then
             Try
                 File.Copy(strAutoSavedDataFilePaths(0), ucrInputSavedPathData.GetText())
+                File.Delete(strAutoSavedDataFilePaths(0))
             Catch ex As Exception
                 MsgBox("Could not copy data file from: " & strAutoSavedDataFilePaths(0) & " to: " & ucrInputSavedPathData.GetText() & Environment.NewLine & ex.Message)
             End Try
@@ -122,6 +123,7 @@ Public Class dlgAutoSaveRecovery
         If File.Exists(strAutoSavedLogFilePaths(0)) AndAlso Not ucrInputSavedPathLog.IsEmpty() Then
             Try
                 File.Copy(strAutoSavedLogFilePaths(0), ucrInputSavedPathLog.GetText())
+                File.Delete(strAutoSavedLogFilePaths(0))
             Catch ex As Exception
                 MsgBox("Could not copy log file from: " & strAutoSavedLogFilePaths(0) & " to: " & ucrInputSavedPathLog.GetText() & Environment.NewLine & ex.Message)
             End Try
@@ -129,6 +131,7 @@ Public Class dlgAutoSaveRecovery
         If File.Exists(strAutoSavedLogFilePaths(0)) AndAlso Not ucrInputSavedPathDebuggingLog.IsEmpty() Then
             Try
                 File.Copy(strAutoSavedLogFilePaths(0), ucrInputSavedPathLog.GetText())
+                File.Delete(strAutoSavedLogFilePaths(0))
             Catch ex As Exception
                 MsgBox("Could not copy debugging log file from: " & strAutoSavedDebuggingLogFilePaths(0) & " to: " & ucrInputSavedPathDebuggingLog.GetText() & Environment.NewLine & ex.Message, "Are you finished?")
             End Try
