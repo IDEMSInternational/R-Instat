@@ -25,12 +25,14 @@ Public Class RLink
     Dim strInstatObjectPath As String = "/InstatObject/R" 'path to the Instat object
     Public strInstatDataObject As String = "InstatDataObject"
 
-    Private strDebugLogFolderPath As String = Path.Combine(Path.GetTempPath, "R-Instat_debug_logs")
     Private bFirstRCode As Boolean = True
     Private bDebugLogExists As Boolean = False
     Private bAutoSaveLogExists As Boolean = False
     Private bFirstLogCode As Boolean = True
     Public bRCodeRunning As Boolean = False
+
+    Public strAutoSaveLogFilePath As String = ""
+    Public strAutoSaveDebugLogFilePath As String = ""
 
     Public clsEngine As REngine
     Public bREngineInitialised As Boolean = False
@@ -74,7 +76,7 @@ Public Class RLink
         If strScript = "" Then
             strScript = GetRSetupScript()
             iCallType = 0
-            strComment = ""
+            strComment = "Setting working directory, sources R code and loading R packages"
             bSeparateThread = True
         End If
         RunScript(strScript:=strScript, iCallType:=iCallType, strComment:=strComment, bSeparateThread:=bSeparateThread)
@@ -266,40 +268,32 @@ Public Class RLink
     End Function
 
     Private Sub AppendToAutoSaveLog(strScript As String)
+        Dim strTempFile As String
+        Dim i As Integer = 1
         Try
             If bFirstLogCode Then
-                'File.WriteAllText(frmMain.strAutoSaveLogFilePath, "")
+                If Not Directory.Exists(frmMain.strAutoSaveLogFolderPath) Then
+                    Directory.CreateDirectory(frmMain.strAutoSaveLogFolderPath)
+                End If
+                strTempFile = "log.R"
+                While File.Exists(Path.Combine(frmMain.strAutoSaveLogFolderPath, strTempFile))
+                    i = i + 1
+                    strTempFile = "log" & i & ".R"
+                End While
+                strAutoSaveLogFilePath = Path.Combine(frmMain.strAutoSaveLogFolderPath, strTempFile)
+                File.WriteAllText(strAutoSaveLogFilePath, "")
                 bAutoSaveLogExists = True
             End If
             If bAutoSaveLogExists Then
-                'Using w As StreamWriter = File.AppendText(frmMain.strAutoSaveLogFilePath)
-                'w.WriteLine(strScript)
-                'End Using
+                Using w As StreamWriter = File.AppendText(strAutoSaveLogFilePath)
+                    w.WriteLine(strScript)
+                End Using
             End If
         Catch ex As Exception
             'MsgBox("Could not add script to auto save log file at:" & frmMain.strAutoSaveLogFilePath & Environment.NewLine & ex.Message, MsgBoxStyle.Exclamation, "Auot save Log File")
             bAutoSaveLogExists = False
         Finally
             bFirstLogCode = False
-        End Try
-    End Sub
-
-    Public Sub RunLogFile(strFilePath As String, Optional bDeleteFile As Boolean = False)
-        Dim strLines() As String
-        Dim strScript As String
-
-        Try
-            If File.Exists(strFilePath) Then
-                strLines = File.ReadAllLines(strFilePath)
-                strScript = String.Join(Environment.NewLine, strLines)
-                'Delete before running in case this is an auto save 
-                If bDeleteFile Then
-                    File.Delete(strFilePath)
-                End If
-                RunScript(strScript)
-            End If
-        Catch ex As Exception
-            MsgBox("Could not read log file at:" & strFilePath & Environment.NewLine & ex.Message, MsgBoxStyle.Exclamation, "Cannot Read Log File")
         End Try
     End Sub
 
@@ -325,7 +319,6 @@ Public Class RLink
         End If
         If bLog Then
             txtLog.Text = txtLog.Text & strScriptWithComment & Environment.NewLine
-            AppendToAutoSaveLog(strScriptWithComment & Environment.NewLine)
         End If
         If bOutput Then
             If strComment <> "" AndAlso bShowCommands Then
@@ -443,6 +436,7 @@ Public Class RLink
                 rtbOutput.AppendText(clrOutput, fOutput, strOutput)
             End If
         End If
+        AppendToAutoSaveLog(strScriptWithComment & Environment.NewLine)
         frmMain.clsGrids.UpdateGrids()
     End Sub
 
@@ -499,6 +493,8 @@ Public Class RLink
         Dim evtWaitHandleWaitDisplayDone As New System.Threading.AutoResetEvent(False)
         Dim evtWaitHandleDelayDone As New System.Threading.AutoResetEvent(False)
         Dim bReturn As Boolean = True
+        Dim i As Integer = 1
+        Dim strTempFile As String
 
         While bRCodeRunning
             Threading.Thread.Sleep(5)
@@ -507,8 +503,17 @@ Public Class RLink
         If clsEngine IsNot Nothing Then
             If bFirstRCode Then
                 Try
-                    File.WriteAllText(strDebugLogFolderPath, "")
-                    Using w As StreamWriter = File.AppendText(strDebugLogFolderPath)
+                    If Not Directory.Exists(frmMain.strAutoSaveDebugLogFolderPath) Then
+                        Directory.CreateDirectory(frmMain.strAutoSaveDebugLogFolderPath)
+                    End If
+                    strTempFile = "debug_log.R"
+                    While File.Exists(Path.Combine(frmMain.strAutoSaveDebugLogFolderPath, strTempFile))
+                        i = i + 1
+                        strTempFile = "debug_log" & i & ".R"
+                    End While
+                    strAutoSaveDebugLogFilePath = Path.Combine(frmMain.strAutoSaveDebugLogFolderPath, strTempFile)
+                    File.WriteAllText(strAutoSaveDebugLogFilePath, "")
+                    Using w As StreamWriter = File.AppendText(strAutoSaveDebugLogFilePath)
                         w.WriteLine("# ****************************")
                         w.WriteLine("# R-Instat debugging log file")
                         w.WriteLine("# ****************************")
@@ -520,7 +525,7 @@ Public Class RLink
                     End Using
                     bDebugLogExists = True
                 Catch ex As Exception
-                    MsgBox("Could not create debug log file at:" & strDebugLogFolderPath & Environment.NewLine & ex.Message, MsgBoxStyle.Exclamation, "Debug Log File")
+                    MsgBox("Could not create debug log file at:" & strAutoSaveDebugLogFilePath & Environment.NewLine & ex.Message, MsgBoxStyle.Exclamation, "Debug Log File")
                     bDebugLogExists = False
                 Finally
                     bFirstRCode = False
@@ -530,14 +535,14 @@ Public Class RLink
                 If bDebugLogExists Then
                     Dim ts As New Stopwatch
                     ts.Start()
-                    Using w As StreamWriter = File.AppendText(strDebugLogFolderPath)
+                    Using w As StreamWriter = File.AppendText(strAutoSaveDebugLogFilePath)
                         w.WriteLine(strScript)
                     End Using
                     ts.Stop()
                     Console.WriteLine(ts.ElapsedMilliseconds)
                 End If
             Catch ex As Exception
-                MsgBox("Could not add text to debug log file at:" & strDebugLogFolderPath & Environment.NewLine & ex.Message, MsgBoxStyle.Exclamation, "Debug Log File")
+                MsgBox("Could not add text to debug log file at:" & strAutoSaveDebugLogFilePath & Environment.NewLine & ex.Message, MsgBoxStyle.Exclamation, "Debug Log File")
             End Try
             Try
                 If bSeparateThread Then
