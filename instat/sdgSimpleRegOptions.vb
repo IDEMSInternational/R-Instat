@@ -25,6 +25,7 @@ Public Class sdgSimpleRegOptions
     Private clsRSyntax As RSyntax
     Public clsRaovFunction, clsRaovpvalFunction, clsRestpvalFunction, clsRResidualPlotsFunction, clsRgeom_point, clsRPredFunction, clsRDFFunction, clsRFittedValues, clsRWriteFitted, clsRResiduals, clsRWriteResiduals, clsRStdResiduals, clsRWriteStdResiduals, clsRLeverage, clsRWriteLeverage As New RFunction
     Public clsRggplotFunction, clsRaesFunction, clsRStat_smooth, clsRModelsFunction, clsRCIFunction, clsR_ribbon, clsRaes_ribbon As New RFunction
+
     Public bControlsInitialised As Boolean = False
 
     Private Sub sdgSimpleRegOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -171,40 +172,40 @@ Public Class sdgSimpleRegOptions
 
         ucrChkConfIntervalband.SetText("C.I band")
         ucrChkConfIntervalband.SetParameter(New RParameter("band"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        ucrChkPartial.SetRDefault("TRUE")
+        ucrChkConfIntervalband.SetRDefault("TRUE")
 
-        'Save Plots (Save tab)
-        'Save Fitted Column Names
-        ucrSaveFittedColumnName.SetPrefix("Fitted")
-        ucrSaveFittedColumnName.SetSaveTypeAsDataFrame()
-        ucrSaveFittedColumnName.SetCheckBoxText("Fitted Values")
-        ucrSaveFittedColumnName.SetIsComboBox()
-        ucrSaveFittedColumnName.SetAssignToIfUncheckedValue("last_fitted")
-        ucrSaveFittedColumnName.Enabled = False ' disabled until working
+        ''Save Plots (Save tab)
+        ''Save Fitted Column Names
+        'ucrSaveFittedColumnName.SetPrefix("Fitted")
+        'ucrSaveFittedColumnName.SetSaveTypeAsDataFrame()
+        'ucrSaveFittedColumnName.SetCheckBoxText("Fitted Values")
+        'ucrSaveFittedColumnName.SetIsComboBox()
+        'ucrSaveFittedColumnName.SetAssignToIfUncheckedValue("last_fitted")
+        '' ucrSaveFittedColumnName.Enabled = False ' disabled until working
 
-        'Save Residuals Column Names
-        ucrSaveResidualsColumnName.SetPrefix("Resids")
-        ucrSaveResidualsColumnName.SetSaveTypeAsDataFrame()
-        ucrSaveResidualsColumnName.SetCheckBoxText("Residuals")
-        ucrSaveResidualsColumnName.SetIsComboBox()
-        ucrSaveResidualsColumnName.SetAssignToIfUncheckedValue("last_residual")
-        ucrSaveResidualsColumnName.Enabled = False ' disabled until working
+        ''Save Residuals Column Names
+        'ucrSaveResidualsColumnName.SetPrefix("Resids")
+        'ucrSaveResidualsColumnName.SetSaveTypeAsDataFrame()
+        'ucrSaveResidualsColumnName.SetCheckBoxText("Residuals")
+        'ucrSaveResidualsColumnName.SetIsComboBox()
+        'ucrSaveResidualsColumnName.SetAssignToIfUncheckedValue("last_residual")
+        ''ucrSaveResidualsColumnName.Enabled = False ' disabled until working
 
-        'Save StdResiduals Column Names
-        ucrSaveStdResidualsColumnName.SetPrefix("Sresids")
-        ucrSaveStdResidualsColumnName.SetSaveTypeAsDataFrame()
-        ucrSaveStdResidualsColumnName.SetCheckBoxText("Std Residuals")
-        ucrSaveStdResidualsColumnName.SetIsComboBox()
-        ucrSaveStdResidualsColumnName.SetAssignToIfUncheckedValue("last_stdresidual")
-        ucrSaveStdResidualsColumnName.Enabled = False ' disabled until working
+        ''Save StdResiduals Column Names
+        'ucrSaveStdResidualsColumnName.SetPrefix("Sresids")
+        'ucrSaveStdResidualsColumnName.SetSaveTypeAsDataFrame()
+        'ucrSaveStdResidualsColumnName.SetCheckBoxText("Std Residuals")
+        'ucrSaveStdResidualsColumnName.SetIsComboBox()
+        'ucrSaveStdResidualsColumnName.SetAssignToIfUncheckedValue("last_stdresidual")
+        ''ucrSaveStdResidualsColumnName.Enabled = False ' disabled until working
 
-        'Save Leverage Column Names
-        ucrSaveLeverageColumnName.SetPrefix("Lever")
-        ucrSaveLeverageColumnName.SetSaveTypeAsDataFrame()
-        ucrSaveLeverageColumnName.SetCheckBoxText("Leverage")
-        ucrSaveLeverageColumnName.SetIsComboBox()
-        ucrSaveLeverageColumnName.SetAssignToIfUncheckedValue("last_leverage")
-        ucrSaveLeverageColumnName.Enabled = False ' disabled until working
+        ''Save Leverage Column Names
+        'ucrSaveLeverageColumnName.SetPrefix("Lever")
+        'ucrSaveLeverageColumnName.SetSaveTypeAsDataFrame()
+        'ucrSaveLeverageColumnName.SetCheckBoxText("Leverage")
+        'ucrSaveLeverageColumnName.SetIsComboBox()
+        'ucrSaveLeverageColumnName.SetAssignToIfUncheckedValue("last_leverage")
+        '' ucrSaveLeverageColumnName.Enabled = False ' disabled until working
 
         bControlsInitialised = True
     End Sub
@@ -249,12 +250,19 @@ Public Class sdgSimpleRegOptions
         ucrNudGraphicsCLevel.SetRCode(clsRggplotFunction, bReset)
         ucrNudWhiteSpace.SetRCode(clsRggplotFunction, bReset)
         ucrChkPartial.SetRCode(clsRggplotFunction, bReset)
+        ucrChkConfIntervalband.SetRCode(clsRggplotFunction, bReset)
         ucrPnlPartial12.SetRCode(clsRggplotFunction, bReset)
         ucrChkIndividualPlots.SetRCode(clsRResidualPlotsFunction, bReset)
         ucrPnlIndividualPlots.SetRCode(clsRResidualPlotsFunction, bReset)
         ucrChkMultiplePlots.SetRCode(clsRResidualPlotsFunction, bReset)
         ucrPnlMutiplePlots.SetRCode(clsRResidualPlotsFunction, bReset)
         ucrChkFittedModel.SetRCode(clsRggplotFunction, bReset)
+
+        'ucrSaveFittedColumnName.SetRCode(clsRWriteFitted, bReset)
+        'ucrSaveResidualsColumnName.SetRCode(clsRWriteResiduals, bReset)
+        'ucrSaveStdResidualsColumnName.SetRCode(clsRWriteStdResiduals, bReset)
+        'ucrSaveLeverageColumnName.SetRCode(clsRWriteLeverage, bReset)
+
     End Sub
 
     Private Sub ucrChkANOVA_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkANOVA.ControlValueChanged
@@ -416,31 +424,44 @@ Public Class sdgSimpleRegOptions
         If (ucrChkDisplayCLimits.Checked) Then
             ConfidenceInterval()
         End If
-        If (rdoFourPlots.Checked Or rdoSixPlots2Rows.Checked Or rdoSixPlots3Rows.Checked Or rdoResidualsFitted.Checked Or rdoQQ.Checked Or rdoResidualsLeverage.Checked Or rdoScaleLocation.Checked Or rdoCooksDistance.Checked Or rdoCooksDistanceLeverage.Checked) Then
-            frmMain.clsRLink.RunScript(clsRGraphics.GetScript, 3)
-        End If
     End Sub
 
     ' disabled until working
 
-    Private Sub FittedValues()
+    Private Sub ucrSaveFittedColumnName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveFittedColumnName.ControlValueChanged
         clsRWriteFitted.AddParameter("data_name", Chr(34) & clsRDataFrame.cboAvailableDataFrames.Text & Chr(34))
         clsRWriteFitted.AddParameter("col_name", Chr(34) & ucrSaveFittedColumnName.GetText & Chr(34))
+        clsRSyntax.AddToAfterCodes(clsRWriteFitted, iPosition:=8)
+        clsRSyntax.RemoveFromAfterCodes(clsRWriteResiduals)
+        clsRSyntax.RemoveFromAfterCodes(clsRWriteStdResiduals)
+        clsRSyntax.RemoveFromAfterCodes(clsRWriteLeverage)
     End Sub
 
-    Private Sub Residuals()
-        clsRWriteResiduals.AddParameter("data_name", Chr(34) & clsRDataFrame.cboAvailableDataFrames.Text & Chr(34))
-        clsRWriteResiduals.AddParameter("col_name", Chr(34) & ucrSaveResidualsColumnName.GetText & Chr(34))
+    Private Sub ucrSaveResidualsColumnName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveResidualsColumnName.ControlValueChanged
+        'clsRWriteResiduals.AddParameter("data_name", Chr(34) & clsRDataFrame.cboAvailableDataFrames.Text & Chr(34))
+        'clsRWriteResiduals.AddParameter("col_name", Chr(34) & ucrSaveResidualsColumnName.GetText & Chr(34))
+        'clsRSyntax.AddToAfterCodes(clsRWriteResiduals, iPosition:=9)
+        'clsRSyntax.RemoveFromAfterCodes(clsRWriteFitted)
+        'clsRSyntax.RemoveFromAfterCodes(clsRWriteStdResiduals)
+        'clsRSyntax.RemoveFromAfterCodes(clsRWriteLeverage)
     End Sub
 
-    Private Sub StdResiduals()
-        clsRWriteStdResiduals.AddParameter("data_name", Chr(34) & clsRDataFrame.cboAvailableDataFrames.Text & Chr(34))
-        clsRWriteStdResiduals.AddParameter("col_name", Chr(34) & ucrSaveStdResidualsColumnName.GetText & Chr(34))
+    Private Sub ucrSaveStdResidualsColumnName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveStdResidualsColumnName.ControlValueChanged
+        'clsRWriteStdResiduals.AddParameter("data_name", Chr(34) & clsRDataFrame.cboAvailableDataFrames.Text & Chr(34))
+        'clsRWriteStdResiduals.AddParameter("col_name", Chr(34) & ucrSaveStdResidualsColumnName.GetText & Chr(34))
+        'clsRSyntax.AddToAfterCodes(clsRWriteStdResiduals, iPosition:=10)
+        'clsRSyntax.RemoveFromAfterCodes(clsRWriteFitted)
+        'clsRSyntax.RemoveFromAfterCodes(clsRWriteResiduals)
+        'clsRSyntax.RemoveFromAfterCodes(clsRWriteLeverage)
     End Sub
 
-    Private Sub Leverage()
-        clsRWriteLeverage.AddParameter("data_name", Chr(34) & clsRDataFrame.cboAvailableDataFrames.Text & Chr(34))
-        clsRWriteLeverage.AddParameter("col_name", Chr(34) & ucrSaveLeverageColumnName.GetText & Chr(34))
+    Private Sub ucrSaveLeverageColumnName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveLeverageColumnName.ControlValueChanged
+        'clsRWriteLeverage.AddParameter("data_name", Chr(34) & clsRDataFrame.cboAvailableDataFrames.Text & Chr(34))
+        'clsRWriteLeverage.AddParameter("col_name", Chr(34) & ucrSaveLeverageColumnName.GetText & Chr(34))
+        'clsRSyntax.AddToAfterCodes(clsRWriteLeverage, iPosition:=11)
+        'clsRSyntax.RemoveFromAfterCodes(clsRWriteStdResiduals)
+        'clsRSyntax.RemoveFromAfterCodes(clsRWriteResiduals)
+        'clsRSyntax.RemoveFromAfterCodes(clsRWriteFitted)
     End Sub
 
 End Class

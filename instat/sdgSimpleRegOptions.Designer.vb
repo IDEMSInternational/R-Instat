@@ -39,14 +39,14 @@ Partial Class sdgSimpleRegOptions
         Me.ucrPnlPartial12 = New instat.UcrPanel()
         Me.lblWhiteSpace = New System.Windows.Forms.Label()
         Me.lblGraphicsSignLevel = New System.Windows.Forms.Label()
-        Me.grpScale = New System.Windows.Forms.GroupBox()
-        Me.rdoResponse = New System.Windows.Forms.RadioButton()
-        Me.rdoLinear = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlScale = New instat.UcrPanel()
         Me.grpPlotType = New System.Windows.Forms.GroupBox()
         Me.rdoContrast = New System.Windows.Forms.RadioButton()
         Me.rdoConditional = New System.Windows.Forms.RadioButton()
         Me.ucrPnlPlotType = New instat.UcrPanel()
+        Me.grpScale = New System.Windows.Forms.GroupBox()
+        Me.rdoResponse = New System.Windows.Forms.RadioButton()
+        Me.rdoLinear = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlScale = New instat.UcrPanel()
         Me.tbResiduals = New System.Windows.Forms.TabPage()
         Me.rdoCooksDistanceLeverage = New System.Windows.Forms.RadioButton()
         Me.rdoCooksDistance = New System.Windows.Forms.RadioButton()
@@ -54,12 +54,12 @@ Partial Class sdgSimpleRegOptions
         Me.rdoScaleLocation = New System.Windows.Forms.RadioButton()
         Me.rdoQQ = New System.Windows.Forms.RadioButton()
         Me.rdoResidualsFitted = New System.Windows.Forms.RadioButton()
-        Me.grpIndividualPlots = New System.Windows.Forms.GroupBox()
         Me.grpMultiplePlots = New System.Windows.Forms.GroupBox()
         Me.rdoSixPlots3Rows = New System.Windows.Forms.RadioButton()
         Me.rdoFourPlots = New System.Windows.Forms.RadioButton()
         Me.rdoSixPlots2Rows = New System.Windows.Forms.RadioButton()
         Me.ucrPnlMutiplePlots = New instat.UcrPanel()
+        Me.grpIndividualPlots = New System.Windows.Forms.GroupBox()
         Me.ucrPnlIndividualPlots = New instat.UcrPanel()
         Me.ucrChkIndividualPlots = New instat.ucrCheck()
         Me.ucrChkMultiplePlots = New instat.ucrCheck()
@@ -82,8 +82,8 @@ Partial Class sdgSimpleRegOptions
         Me.tcGraphics.SuspendLayout()
         Me.tbModel.SuspendLayout()
         Me.grpRugs.SuspendLayout()
-        Me.grpScale.SuspendLayout()
         Me.grpPlotType.SuspendLayout()
+        Me.grpScale.SuspendLayout()
         Me.tbResiduals.SuspendLayout()
         Me.grpMultiplePlots.SuspendLayout()
         Me.tbDisplay.SuspendLayout()
@@ -276,6 +276,48 @@ Partial Class sdgSimpleRegOptions
         Me.lblGraphicsSignLevel.Tag = "Significance_Level:"
         Me.lblGraphicsSignLevel.Text = "Significance Level:"
         '
+        'grpPlotType
+        '
+        Me.grpPlotType.Controls.Add(Me.rdoContrast)
+        Me.grpPlotType.Controls.Add(Me.rdoConditional)
+        Me.grpPlotType.Controls.Add(Me.ucrPnlPlotType)
+        Me.grpPlotType.Location = New System.Drawing.Point(10, 33)
+        Me.grpPlotType.Name = "grpPlotType"
+        Me.grpPlotType.Size = New System.Drawing.Size(111, 75)
+        Me.grpPlotType.TabIndex = 5
+        Me.grpPlotType.TabStop = False
+        Me.grpPlotType.Tag = "Plot_type"
+        Me.grpPlotType.Text = "Plot type"
+        '
+        'rdoContrast
+        '
+        Me.rdoContrast.AutoSize = True
+        Me.rdoContrast.Location = New System.Drawing.Point(9, 42)
+        Me.rdoContrast.Name = "rdoContrast"
+        Me.rdoContrast.Size = New System.Drawing.Size(64, 17)
+        Me.rdoContrast.TabIndex = 33
+        Me.rdoContrast.Tag = "Contrast"
+        Me.rdoContrast.Text = "Contrast"
+        Me.rdoContrast.UseVisualStyleBackColor = True
+        '
+        'rdoConditional
+        '
+        Me.rdoConditional.AutoSize = True
+        Me.rdoConditional.Location = New System.Drawing.Point(9, 19)
+        Me.rdoConditional.Name = "rdoConditional"
+        Me.rdoConditional.Size = New System.Drawing.Size(77, 17)
+        Me.rdoConditional.TabIndex = 32
+        Me.rdoConditional.Tag = "Conditional"
+        Me.rdoConditional.Text = "Conditional"
+        Me.rdoConditional.UseVisualStyleBackColor = True
+        '
+        'ucrPnlPlotType
+        '
+        Me.ucrPnlPlotType.Location = New System.Drawing.Point(9, 19)
+        Me.ucrPnlPlotType.Name = "ucrPnlPlotType"
+        Me.ucrPnlPlotType.Size = New System.Drawing.Size(77, 43)
+        Me.ucrPnlPlotType.TabIndex = 31
+        '
         'grpScale
         '
         Me.grpScale.Controls.Add(Me.rdoResponse)
@@ -320,48 +362,6 @@ Partial Class sdgSimpleRegOptions
         Me.ucrPnlScale.Size = New System.Drawing.Size(94, 43)
         Me.ucrPnlScale.TabIndex = 28
         '
-        'grpPlotType
-        '
-        Me.grpPlotType.Controls.Add(Me.rdoContrast)
-        Me.grpPlotType.Controls.Add(Me.rdoConditional)
-        Me.grpPlotType.Controls.Add(Me.ucrPnlPlotType)
-        Me.grpPlotType.Location = New System.Drawing.Point(10, 33)
-        Me.grpPlotType.Name = "grpPlotType"
-        Me.grpPlotType.Size = New System.Drawing.Size(111, 75)
-        Me.grpPlotType.TabIndex = 5
-        Me.grpPlotType.TabStop = False
-        Me.grpPlotType.Tag = "Plot_type"
-        Me.grpPlotType.Text = "Plot type"
-        '
-        'rdoContrast
-        '
-        Me.rdoContrast.AutoSize = True
-        Me.rdoContrast.Location = New System.Drawing.Point(9, 42)
-        Me.rdoContrast.Name = "rdoContrast"
-        Me.rdoContrast.Size = New System.Drawing.Size(64, 17)
-        Me.rdoContrast.TabIndex = 33
-        Me.rdoContrast.Tag = "Contrast"
-        Me.rdoContrast.Text = "Contrast"
-        Me.rdoContrast.UseVisualStyleBackColor = True
-        '
-        'rdoConditional
-        '
-        Me.rdoConditional.AutoSize = True
-        Me.rdoConditional.Location = New System.Drawing.Point(9, 19)
-        Me.rdoConditional.Name = "rdoConditional"
-        Me.rdoConditional.Size = New System.Drawing.Size(77, 17)
-        Me.rdoConditional.TabIndex = 32
-        Me.rdoConditional.Tag = "Conditional"
-        Me.rdoConditional.Text = "Conditional"
-        Me.rdoConditional.UseVisualStyleBackColor = True
-        '
-        'ucrPnlPlotType
-        '
-        Me.ucrPnlPlotType.Location = New System.Drawing.Point(9, 19)
-        Me.ucrPnlPlotType.Name = "ucrPnlPlotType"
-        Me.ucrPnlPlotType.Size = New System.Drawing.Size(77, 43)
-        Me.ucrPnlPlotType.TabIndex = 31
-        '
         'tbResiduals
         '
         Me.tbResiduals.Controls.Add(Me.rdoCooksDistanceLeverage)
@@ -371,10 +371,10 @@ Partial Class sdgSimpleRegOptions
         Me.tbResiduals.Controls.Add(Me.rdoQQ)
         Me.tbResiduals.Controls.Add(Me.rdoResidualsFitted)
         Me.tbResiduals.Controls.Add(Me.grpMultiplePlots)
+        Me.tbResiduals.Controls.Add(Me.grpIndividualPlots)
         Me.tbResiduals.Controls.Add(Me.ucrPnlIndividualPlots)
         Me.tbResiduals.Controls.Add(Me.ucrChkIndividualPlots)
         Me.tbResiduals.Controls.Add(Me.ucrChkMultiplePlots)
-        Me.tbResiduals.Controls.Add(Me.grpIndividualPlots)
         Me.tbResiduals.Location = New System.Drawing.Point(4, 22)
         Me.tbResiduals.Name = "tbResiduals"
         Me.tbResiduals.Padding = New System.Windows.Forms.Padding(3)
@@ -456,15 +456,6 @@ Partial Class sdgSimpleRegOptions
         Me.rdoResidualsFitted.Text = "Residuals v Fitted"
         Me.rdoResidualsFitted.UseVisualStyleBackColor = True
         '
-        'grpIndividualPlots
-        '
-        Me.grpIndividualPlots.Location = New System.Drawing.Point(10, 149)
-        Me.grpIndividualPlots.Name = "grpIndividualPlots"
-        Me.grpIndividualPlots.Size = New System.Drawing.Size(278, 89)
-        Me.grpIndividualPlots.TabIndex = 1
-        Me.grpIndividualPlots.TabStop = False
-        Me.grpIndividualPlots.Tag = ""
-        '
         'grpMultiplePlots
         '
         Me.grpMultiplePlots.Controls.Add(Me.rdoSixPlots3Rows)
@@ -520,6 +511,15 @@ Partial Class sdgSimpleRegOptions
         Me.ucrPnlMutiplePlots.Name = "ucrPnlMutiplePlots"
         Me.ucrPnlMutiplePlots.Size = New System.Drawing.Size(268, 56)
         Me.ucrPnlMutiplePlots.TabIndex = 40
+        '
+        'grpIndividualPlots
+        '
+        Me.grpIndividualPlots.Location = New System.Drawing.Point(10, 149)
+        Me.grpIndividualPlots.Name = "grpIndividualPlots"
+        Me.grpIndividualPlots.Size = New System.Drawing.Size(278, 89)
+        Me.grpIndividualPlots.TabIndex = 1
+        Me.grpIndividualPlots.TabStop = False
+        Me.grpIndividualPlots.Tag = ""
         '
         'ucrPnlIndividualPlots
         '
@@ -705,10 +705,10 @@ Partial Class sdgSimpleRegOptions
         Me.tbModel.PerformLayout()
         Me.grpRugs.ResumeLayout(False)
         Me.grpRugs.PerformLayout()
-        Me.grpScale.ResumeLayout(False)
-        Me.grpScale.PerformLayout()
         Me.grpPlotType.ResumeLayout(False)
         Me.grpPlotType.PerformLayout()
+        Me.grpScale.ResumeLayout(False)
+        Me.grpScale.PerformLayout()
         Me.tbResiduals.ResumeLayout(False)
         Me.tbResiduals.PerformLayout()
         Me.grpMultiplePlots.ResumeLayout(False)

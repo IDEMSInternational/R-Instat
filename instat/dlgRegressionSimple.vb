@@ -248,18 +248,19 @@ Public Class dlgRegressionSimple
         clsRestpvalFunction.iCallType = 2
 
         'ucrSave (sdgSimpleRegOptions) Fitted Values
+        clsRWriteFitted = clsRegressionDefaults.clsDefaultRWriteFitted.Clone
         clsRFittedValues.SetPackageName("stats")
         clsRFittedValues.SetRCommand("fitted")
         clsRFittedValues.AddParameter("object", clsRFunctionParameter:=clsRLmOrGLM)
-        clsRWriteFitted = clsRegressionDefaults.clsDefaultRWriteFitted.Clone
         clsRWriteFitted.AddParameter("col_data", clsRFunctionParameter:=clsRFittedValues)
+
         clsRWriteFitted.iCallType = 3
 
         'ucrSave (sdgSimpleRegOptions) Residuals
+        clsRWriteResiduals = clsRegressionDefaults.clsDefaultRWriteResiduals.Clone
         clsRResiduals.SetPackageName("stats")
         clsRResiduals.SetRCommand("resid")
         clsRResiduals.AddParameter("object", clsRFunctionParameter:=clsRLmOrGLM)
-        clsRWriteResiduals = clsRegressionDefaults.clsDefaultRWriteResiduals.Clone
         clsRWriteResiduals.AddParameter("col_data", clsRFunctionParameter:=clsRResiduals)
         clsRWriteResiduals.iCallType = 3
 
