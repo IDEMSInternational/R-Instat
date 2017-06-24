@@ -260,6 +260,7 @@ Public Class dlgImportDataset
 
         clsImportExcel.SetPackageName("rio")
         clsImportExcel.SetRCommand("import")
+        clsImportExcel.AddParameter("guess_max", "Inf")
 
         clsImportCSV.SetPackageName("rio")
         clsImportCSV.SetRCommand("import")
