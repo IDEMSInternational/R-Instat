@@ -37,7 +37,10 @@ Public Class frmMain
     Private ctrActive As Control
     Private WithEvents timer As New System.Windows.Forms.Timer
     Private iAutoSaveTime As Integer = 300000
-    Private strAutoSaveDataFilePath As String = Path.Combine(Path.GetTempPath, "R-Instat_auto_save.rds")
+    Public strAutoSaveDataFolderPath As String = Path.Combine(Path.GetTempPath, "R-Instat_data_auto_save")
+    Public strAutoSaveLogFolderPath As String = Path.Combine(Path.GetTempPath, "R-Instat_log_auto_save")
+    Public strCurrentAutoSaveDataFilePath As String
+    Public strCurrentAutoSaveLogFilePath As String
 
     'This is the default data frame to appear in the data frame selector
     'If "" the current worksheet will be used
@@ -69,7 +72,7 @@ Public Class frmMain
         strInstatOptionsFile = "Options.bin"
         strSaveFilePath = ""
 
-        clsRLink.SetEngine()
+        StartREngine()
 
         'Setting the properties of R Interface
         clsRLink.SetLog(ucrLogWindow.txtLog)
@@ -80,15 +83,15 @@ Public Class frmMain
         'Do this after loading options because interval depends on options
         timer.Interval = iAutoSaveTime
         timer.Start()
-        AddHandler System.Windows.Forms.Application.Idle, AddressOf Application_Idle
 
-        'Sets up R source files
-        clsRLink.RSetup()
+        AddHandler System.Windows.Forms.Application.Idle, AddressOf Application_Idle
 
         'Sets up the Recent items
         clsRecentItems.setToolStripItems(mnuFile, mnuTbShowLast10, sepStart, sepEnd)
         'checks existence of MRU list
         clsRecentItems.checkOnLoad()
+
+        CheckAutoSave()
     End Sub
 
     Private Sub Application_Idle(sender As Object, e As EventArgs)
@@ -98,8 +101,44 @@ Public Class frmMain
         End If
     End Sub
 
+    Private Sub StartREngine()
+        Dim iLogFiles As Integer = 0
+        Dim iDataFiles As Integer = 0
+        Dim strScript As String = ""
+        Dim strDataFilePath As String = ""
+        Dim strAutoSavedLogFilePaths() As String = Nothing
+        Dim strAutoSavedDataFilePaths() As String = Nothing
+
+        If Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1 Then
+            clsRLink.StartREngine(clsRLink.GetRSetupScript())
+        Else
+            If (Directory.Exists(strAutoSaveLogFolderPath)) Then
+                strAutoSavedLogFilePaths = My.Computer.FileSystem.GetFiles(strAutoSaveLogFolderPath).ToArray
+                iLogFiles = strAutoSavedLogFilePaths.Count
+            End If
+            If Directory.Exists(strAutoSaveDataFolderPath) Then
+                strAutoSavedDataFilePaths = My.Computer.FileSystem.GetFiles(strAutoSaveDataFolderPath).ToArray
+                iDataFiles = strAutoSavedDataFilePaths.Count
+            End If
+            If iLogFiles > 0 OrElse iDataFiles > 0 Then
+                If MsgBox("We have detected that R-Instat may have closed unexpectadly. Would you like to see auto recovery options?", MessageBoxButtons.YesNo, "Auto Recovery") Then
+                    dlgAutoSaveRecovery.strAutoSavedLogFilePaths = strAutoSavedLogFilePaths
+                    dlgAutoSaveRecovery.strAutoSavedDataFilePaths = strAutoSavedDataFilePaths
+                    dlgAutoSaveRecovery.ShowDialog()
+                    strScript = dlgAutoSaveRecovery.GetScript()
+                    strDataFilePath = dlgAutoSaveRecovery.GetDataFilePath()
+                End If
+            End If
+            clsRLink.StartREngine(strScript)
+            If strDataFilePath <> "" Then
+                clsRLink.LoadInstatDataObjectFromFile(strDataFilePath, strComment:="Loading auto recovered data file")
+            End If
+        End If
+    End Sub
+
     Private Sub CheckAutoSave()
-        If File.Exists(strAutoSaveDataFilePath) Then
+        If File.Exists(strAutoSaveDataFolderPath) OrElse File.Exists(strAutoSaveLogFolderPath) Then
+            MsgBox("R-Instat did not close properly!", MsgBoxStyle.MsgBoxHelp)
         End If
     End Sub
 
@@ -790,6 +829,7 @@ Public Class frmMain
                 clsRecentItems.saveOnClose()
                 SaveInstatOptions(Path.Combine(strAppDataPath, strInstatOptionsFile))
                 DeleteAutoSaveData()
+                clsRLink.CloseREngine()
             Catch ex As Exception
                 MsgBox("Error attempting to save setting files to App Data folder." & Environment.NewLine & "System error message: " & ex.Message, MsgBoxStyle.Critical, "Error saving settings")
             End Try
@@ -804,7 +844,7 @@ Public Class frmMain
         If clsRLink.bInstatObjectExists Then
             clsSaveRDS.SetRCommand("saveRDS")
             clsSaveRDS.AddParameter("object", clsRLink.strInstatDataObject)
-            clsSaveRDS.AddParameter("file", Chr(34) & strAutoSaveDataFilePath.Replace("\", "/") & Chr(34))
+            clsSaveRDS.AddParameter("file", Chr(34) & strAutoSaveDataFolderPath.Replace("\", "/") & Chr(34))
             Dim t As New Stopwatch
             t.Start()
             clsRLink.RunInternalScript(clsSaveRDS.ToScript())
@@ -815,9 +855,17 @@ Public Class frmMain
 
     Public Sub DeleteAutoSaveData()
         Try
-            File.Delete(strAutoSaveDataFilePath)
+            File.Delete(strCurrentAutoSaveDataFilePath)
         Catch ex As Exception
-            MsgBox("Could not delete auto save data file at: " & strAutoSaveDataFilePath & Environment.NewLine & ex.Message)
+            MsgBox("Could not delete auto save data file at: " & strCurrentAutoSaveDataFilePath & Environment.NewLine & ex.Message)
+        End Try
+    End Sub
+
+    Public Sub DeleteAutoSaveLog()
+        Try
+            File.Delete(strCurrentAutoSaveLogFilePath)
+        Catch ex As Exception
+            MsgBox("Could not delete auto save log file at: " & strCurrentAutoSaveLogFilePath & Environment.NewLine & ex.Message)
         End Try
     End Sub
 
