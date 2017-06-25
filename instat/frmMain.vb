@@ -127,6 +127,7 @@ Public Class frmMain
                 If MsgBox("We have detected that R-Instat may have closed unexpectadly last time." & Environment.NewLine & "Would you like to see auto recovery options?", MessageBoxButtons.YesNo, "Auto Recovery") = MsgBoxResult.Yes Then
                     dlgAutoSaveRecovery.strAutoSavedLogFilePaths = strAutoSavedLogFilePaths
                     dlgAutoSaveRecovery.strAutoSavedDataFilePaths = strAutoSavedDataFilePaths
+                    dlgAutoSaveRecovery.strAutoSavedDebuggingLogFilePaths = strAutoSavedDebugLogFilePaths
                     dlgAutoSaveRecovery.ShowDialog()
                     strScript = dlgAutoSaveRecovery.GetScript()
                     strDataFilePath = dlgAutoSaveRecovery.GetDataFilePath()
