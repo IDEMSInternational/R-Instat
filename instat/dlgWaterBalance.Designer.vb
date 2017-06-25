@@ -32,13 +32,15 @@ Partial Class dlgWaterBalance
         Me.rdoBoth = New System.Windows.Forms.RadioButton()
         Me.rdoRain = New System.Windows.Forms.RadioButton()
         Me.lblStation = New System.Windows.Forms.Label()
-        Me.lblAmount = New System.Windows.Forms.Label()
+        Me.lblThreshold = New System.Windows.Forms.Label()
         Me.lblTotalOverDays = New System.Windows.Forms.Label()
         Me.lblWaterBalanceLessThan = New System.Windows.Forms.Label()
         Me.lblEndRainsColName = New System.Windows.Forms.Label()
         Me.lblWBColName = New System.Windows.Forms.Label()
         Me.lblTo = New System.Windows.Forms.Label()
         Me.rdoWaterBalance = New System.Windows.Forms.RadioButton()
+        Me.ucrNudTotalOverDays = New instat.ucrNud()
+        Me.ucrNudThreshold = New instat.ucrNud()
         Me.ucrChkEndOfRains = New instat.ucrCheck()
         Me.ucrChkEvaporationAsReceiver = New instat.ucrCheck()
         Me.ucrReceiverEvaporation = New instat.ucrReceiverSingle()
@@ -49,8 +51,6 @@ Partial Class dlgWaterBalance
         Me.ucrNudCapacity = New instat.ucrNud()
         Me.ucrInputWBColName = New instat.ucrInputTextBox()
         Me.ucrInputEndRainColName = New instat.ucrInputTextBox()
-        Me.ucrNudAmount = New instat.ucrNud()
-        Me.ucrNudTotalOverDays = New instat.ucrNud()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrPnlEndofRains = New instat.UcrPanel()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
@@ -169,14 +169,14 @@ Partial Class dlgWaterBalance
         Me.lblStation.TabIndex = 32
         Me.lblStation.Text = "Station:"
         '
-        'lblAmount
+        'lblThreshold
         '
-        Me.lblAmount.AutoSize = True
-        Me.lblAmount.Location = New System.Drawing.Point(158, 369)
-        Me.lblAmount.Name = "lblAmount"
-        Me.lblAmount.Size = New System.Drawing.Size(83, 13)
-        Me.lblAmount.TabIndex = 35
-        Me.lblAmount.Text = "Amount of Rain:"
+        Me.lblThreshold.AutoSize = True
+        Me.lblThreshold.Location = New System.Drawing.Point(153, 369)
+        Me.lblThreshold.Name = "lblThreshold"
+        Me.lblThreshold.Size = New System.Drawing.Size(57, 13)
+        Me.lblThreshold.TabIndex = 35
+        Me.lblThreshold.Text = "Threshold:"
         '
         'lblTotalOverDays
         '
@@ -244,6 +244,30 @@ Partial Class dlgWaterBalance
         Me.rdoWaterBalance.Text = "Water Balance"
         Me.rdoWaterBalance.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoWaterBalance.UseVisualStyleBackColor = True
+        '
+        'ucrNudTotalOverDays
+        '
+        Me.ucrNudTotalOverDays.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTotalOverDays.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudTotalOverDays.Location = New System.Drawing.Point(395, 367)
+        Me.ucrNudTotalOverDays.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudTotalOverDays.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTotalOverDays.Name = "ucrNudTotalOverDays"
+        Me.ucrNudTotalOverDays.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudTotalOverDays.TabIndex = 0
+        Me.ucrNudTotalOverDays.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudThreshold
+        '
+        Me.ucrNudThreshold.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudThreshold.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudThreshold.Location = New System.Drawing.Point(209, 366)
+        Me.ucrNudThreshold.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudThreshold.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudThreshold.Name = "ucrNudThreshold"
+        Me.ucrNudThreshold.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudThreshold.TabIndex = 34
+        Me.ucrNudThreshold.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrChkEndOfRains
         '
@@ -349,30 +373,6 @@ Partial Class dlgWaterBalance
         Me.ucrInputEndRainColName.Size = New System.Drawing.Size(167, 21)
         Me.ucrInputEndRainColName.TabIndex = 50
         '
-        'ucrNudAmount
-        '
-        Me.ucrNudAmount.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAmount.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudAmount.Location = New System.Drawing.Point(242, 367)
-        Me.ucrNudAmount.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudAmount.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAmount.Name = "ucrNudAmount"
-        Me.ucrNudAmount.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudAmount.TabIndex = 34
-        Me.ucrNudAmount.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudTotalOverDays
-        '
-        Me.ucrNudTotalOverDays.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTotalOverDays.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudTotalOverDays.Location = New System.Drawing.Point(395, 367)
-        Me.ucrNudTotalOverDays.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudTotalOverDays.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTotalOverDays.Name = "ucrNudTotalOverDays"
-        Me.ucrNudTotalOverDays.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudTotalOverDays.TabIndex = 0
-        Me.ucrNudTotalOverDays.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'ucrReceiverStation
         '
         Me.ucrReceiverStation.frmParent = Me
@@ -474,8 +474,8 @@ Partial Class dlgWaterBalance
         Me.ClientSize = New System.Drawing.Size(732, 512)
         Me.Controls.Add(Me.ucrNudTotalOverDays)
         Me.Controls.Add(Me.lblTotalOverDays)
-        Me.Controls.Add(Me.ucrNudAmount)
-        Me.Controls.Add(Me.lblAmount)
+        Me.Controls.Add(Me.ucrNudThreshold)
+        Me.Controls.Add(Me.lblThreshold)
         Me.Controls.Add(Me.ucrChkEndOfRains)
         Me.Controls.Add(Me.ucrChkEvaporationAsReceiver)
         Me.Controls.Add(Me.ucrReceiverEvaporation)
@@ -541,8 +541,8 @@ Partial Class dlgWaterBalance
     Friend WithEvents rdoBoth As RadioButton
     Friend WithEvents rdoRain As RadioButton
     Friend WithEvents ucrPnlEndofRains As UcrPanel
-    Friend WithEvents lblAmount As Label
-    Friend WithEvents ucrNudAmount As ucrNud
+    Friend WithEvents lblThreshold As Label
+    Friend WithEvents ucrNudThreshold As ucrNud
     Friend WithEvents lblTotalOverDays As Label
     Friend WithEvents ucrNudTotalOverDays As ucrNud
     Friend WithEvents ucrNudWBLessThan As ucrNud
