@@ -42,11 +42,11 @@ Public Class ucrGeom
         CreateGeomList()
     End Sub
 
-    Public Overrides Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False)
+    Public Overrides Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False, Optional bUpdate As Boolean = True, Optional bCloneIfNeeded As Boolean = False)
         Dim clsTempFunc As RFunction
         Dim iGeomIndex As Integer
 
-        MyBase.SetRCode(clsNewCodeStructure, bReset)
+        MyBase.SetRCode(clsNewCodeStructure, bReset, bUpdate, bCloneIfNeeded)
         If clsNewCodeStructure IsNot Nothing AndAlso TypeOf (clsNewCodeStructure) Is RFunction Then
             clsTempFunc = TryCast(clsNewCodeStructure, RFunction)
             If clsTempFunc IsNot Nothing AndAlso clsTempFunc.strRCommand IsNot Nothing Then
