@@ -39,11 +39,11 @@ Public Class dlgCanonicalCorrelationAnalysis
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.iCallType = 0
+        ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.iHelpTopicID = 423
 
-        cmdCCAOptions.Enabled = False
+        'cmdCCAOptions.Enabled = False
 
         ' note: canne have the same variables in both receivers.
 
@@ -106,12 +106,12 @@ Public Class dlgCanonicalCorrelationAnalysis
 
     Private Sub cmdCCAOptions_Click(sender As Object, e As EventArgs) Handles cmdCCAOptions.Click
         '        sdgCanonicalCorrelation.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, bResetSubdialog)
-        '        bResetSubdialog = False
-        '  sdgCanonicalCorrelation.ShowDialog()
+        bResetSubdialog = False
+        sdgCanonicalCorrelation.ShowDialog()
     End Sub
 
     Private Sub ucrBaseCCA_clickok(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        '     sdgCanonicalCorrelation.CCAOptions()
+        sdgCanonicalCorrelation.CCAOptions()
     End Sub
 
     Private Sub ucrSaveResult_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlContentsChanged, ucrReceiverXvariables.ControlContentsChanged, ucrReceiverYvariables.ControlContentsChanged
