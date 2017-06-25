@@ -260,6 +260,7 @@ Public Class dlgImportDataset
 
         clsImportExcel.SetPackageName("rio")
         clsImportExcel.SetRCommand("import")
+        clsImportExcel.AddParameter("guess_max", "Inf")
 
         clsImportCSV.SetPackageName("rio")
         clsImportCSV.SetRCommand("import")
@@ -550,7 +551,7 @@ Public Class dlgImportDataset
                 dfTemp = expTemp.AsDataFrame
                 If dfTemp IsNot Nothing Then
                     Try
-                        frmMain.clsGrids.FillSheet(dfTemp, strTempDataFrameName, grdDataPreview, bIncludeDataTypes:=False, iColMax:=frmMain.clsInstatOptions.iMaxCols)
+                        frmMain.clsGrids.FillSheet(dfTemp, strTempDataFrameName, grdDataPreview, bIncludeDataTypes:=False, iColMax:=frmMain.clsGrids.iMaxCols)
                         grdDataPreview.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
                         grdDataPreview.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, True)
                         grdDataPreview.Enabled = True

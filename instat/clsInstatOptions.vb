@@ -114,7 +114,7 @@ Imports RDotNet
             SetMaxRows(DEFAULTiMaxRows)
         End If
 
-        If iMaxRows.HasValue Then
+        If iMaxCols.HasValue Then
             SetMaxCols(iMaxCols)
         Else
             SetMaxCols(DEFAULTiMaxCols)
