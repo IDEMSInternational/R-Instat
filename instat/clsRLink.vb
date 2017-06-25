@@ -79,9 +79,8 @@ Public Class RLink
             strComment = "Setting working directory, sources R code and loading R packages"
             bSeparateThread = True
         End If
-        RunScript(strScript:=strScript, iCallType:=iCallType, strComment:=strComment, bSeparateThread:=bSeparateThread)
-        'TODO is this ok to set here?
         bInstatObjectExists = True
+        RunScript(strScript:=strScript, iCallType:=iCallType, strComment:=strComment, bSeparateThread:=bSeparateThread)
     End Sub
 
     Public Sub CloseREngine()
