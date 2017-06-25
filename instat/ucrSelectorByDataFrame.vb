@@ -87,8 +87,8 @@ Public Class ucrSelectorByDataFrame
         OnControlValueChanged()
     End Sub
 
-    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
-        MyBase.UpdateControl(bReset)
+    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
+        MyBase.UpdateControl(bReset, bCloneIfNeeded)
         ucrAvailableDataFrames.UpdateControl(bReset)
     End Sub
 
@@ -132,8 +132,8 @@ Public Class ucrSelectorByDataFrame
         End If
     End Function
 
-    Public Overrides Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False)
-        MyBase.SetRCode(clsNewCodeStructure, bReset)
+    Public Overrides Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False, Optional bUpdate As Boolean = True, Optional bCloneIfNeeded As Boolean = False)
+        MyBase.SetRCode(clsNewCodeStructure, bReset, bUpdate, bCloneIfNeeded)
         ucrAvailableDataFrames.SetRCode(clsNewCodeStructure, bReset)
     End Sub
 
