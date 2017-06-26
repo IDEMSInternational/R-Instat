@@ -85,14 +85,16 @@ Public Class dlgStringHandling
         ucrPnlFixedRegex.AddFunctionNamesCondition(rdoRegex, "regex")
 
         'temporary disabling
-        cmdDBackSlah.Visible = False
-        cmdWBackSlash.Visible = False
-        cmdBbackSlash.Visible = False
-        cmdSbackSlash.Visible = False
-        cmdBackSlashb.Visible = False
-        cmdBackSlashw.Visible = False
-        cmdBackSlashs.Visible = False
-        cmdBackSlashd.Visible = False
+        grpRegex.Enabled = False
+        ucrChkIncludeRegularExpressions.Enabled = False
+        'cmdDBackSlah.Visible = False
+        'cmdWBackSlash.Visible = False
+        'cmdBbackSlash.Visible = False
+        'cmdSbackSlash.Visible = False
+        'cmdBackSlashb.Visible = False
+        'cmdBackSlashw.Visible = False
+        'cmdBackSlashs.Visible = False
+        'cmdBackSlashd.Visible = False
     End Sub
 
     Private Sub SetDefaults()

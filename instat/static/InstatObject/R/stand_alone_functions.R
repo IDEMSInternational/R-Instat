@@ -481,3 +481,9 @@ get_column_attributes <- function(x, drop = c("class", "levels")) {
   tmp_attr <- tmp_attr[!names(tmp_attr) %in% drop]
   return(tmp_attr)
 }
+
+split_items_in_groups <- function(items, num) {
+  if(length(items) %% num != 0) stop("The number of items must be divisible by the number of groups")
+  x <- split(items, rep(1:num, each = length(items)/num))
+  return(x)
+}

@@ -33,9 +33,24 @@ Public Class RParameter
     Public Sub New()
     End Sub
 
-    Public Sub New(strParameterName As String, Optional iNewPosition As Integer = -1)
+    Public Sub New(strParameterName As String, Optional iNewPosition As Integer = -1, Optional bNewIncludeArgumentName As Boolean = True)
         SetArgumentName(strParameterName)
         Position = iNewPosition
+        bIncludeArgumentName = bNewIncludeArgumentName
+    End Sub
+
+    Public Sub New(strParameterName As String, strParamValue As String, Optional iNewPosition As Integer = -1, Optional bNewIncludeArgumentName As Boolean = True)
+        SetArgumentName(strParameterName)
+        SetArgumentValue(strParamValue)
+        Position = iNewPosition
+        bIncludeArgumentName = bNewIncludeArgumentName
+    End Sub
+
+    Public Sub New(strParameterName As String, strParamValue As RCodeStructure, Optional iNewPosition As Integer = -1, Optional bNewIncludeArgumentName As Boolean = True)
+        SetArgumentName(strParameterName)
+        SetArgument(strParamValue)
+        Position = iNewPosition
+        bIncludeArgumentName = bNewIncludeArgumentName
     End Sub
 
     ''Public Event PositionChanged()
@@ -132,4 +147,10 @@ Public Class RParameter
         End If
         Return clsTempRParam
     End Function
+
+    Public Sub GetAllAssignTo(lstCodes As List(Of RCodeStructure), lstValues As List(Of String))
+        If bIsFunction OrElse bIsOperator Then
+            clsArgumentCodeStructure.GetAllAssignTo(lstCodes, lstValues)
+        End If
+    End Sub
 End Class

@@ -38,7 +38,26 @@ Public Class RCodeStructure
     Public bAssignToColumnWithoutNames As Boolean = False
     Public bInsertColumnBefore As Boolean = False
     Public clsParameters As New List(Of RParameter)
-    Private iNumberOfAddedParameters As Integer = 0 'This might be temporary, it enables to have a default name for parameters...
+    Protected iNumberOfAddedParameters As Integer = 0 'This might be temporary, it enables to have a default name for parameters...
+    'Currently only used when this is in RSyntax as a before/after code to determine position code should be run in the list
+    'Similar behaviour to parameter positions
+    Public iPosition = -1
+
+    'Currently only used when this is in RSyntax as a before/after code to determine position code should be run in the list
+    'This is because RSyntax has iCallType & bExcludeAssignedFunctionOutput which it uses for the base code
+    'Eventually migrate these out of RSyntax
+    Public iCallType As Integer = 0
+    Public bExcludeAssignedFunctionOutput As Boolean = True
+
+    'The name this code is represented by in the R global environment
+    'This is used to clear the global environment of unused variables
+    'Will be cleared after running unless bClearFromGlobal = False
+    Public bClearFromGlobal As Boolean = False
+
+    ' If True when running ToScript the function will be returned as a string that could be passed to R
+    ' e.g. "seq(from = 1, to = 10)" instead of seq(from = 1, to = 10)
+    ' When True, assignment cannot be used for the function or its parameters
+    Public bToScriptAsRString As Boolean = False
 
     Public Event ParametersChanged()
 
@@ -83,8 +102,13 @@ Public Class RCodeStructure
         strAssignToDataFrame = ""
         strAssignToColumn = ""
         strAssignToModel = ""
+        strAssignToGraph = ""
+        strAssignToTable = ""
         bToBeAssigned = False
         bIsAssigned = False
+        bAssignToIsPrefix = False
+        bAssignToColumnWithoutNames = False
+        bInsertColumnBefore = False
     End Sub
 
     Public Overridable Function ToScript(Optional ByRef strScript As String = "", Optional strTemp As String = "") As String
@@ -105,10 +129,7 @@ Public Class RCodeStructure
         End If
 
         If bToBeAssigned Then
-            If Not frmMain.clsRLink.bInstatObjectExists Then
-                frmMain.clsRLink.CreateNewInstatObject()
-            End If
-            strScript = strScript & strAssignTo & " <- " & strTemp & vbCrLf
+            strScript = strScript & strAssignTo & " <- " & strTemp & Environment.NewLine
             If Not strAssignToDataFrame = "" AndAlso (Not strAssignToColumn = "" OrElse bAssignToColumnWithoutNames) Then
                 clsAddColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
                 clsAddColumns.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
@@ -130,7 +151,7 @@ Public Class RCodeStructure
                         clsAddColumns.AddParameter("before", "FALSE")
                     End If
                 End If
-                strScript = strScript & clsAddColumns.ToScript() & vbCrLf
+                strScript = strScript & clsAddColumns.ToScript() & Environment.NewLine
 
                 clsGetColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
                 clsGetColumns.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
@@ -145,7 +166,7 @@ Public Class RCodeStructure
                     clsAddModels.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
                     clsGetModels.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
                 End If
-                strScript = strScript & clsAddModels.ToScript() & vbCrLf
+                strScript = strScript & clsAddModels.ToScript() & Environment.NewLine
 
                 clsGetModels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_models")
                 clsGetModels.AddParameter("model_name", Chr(34) & strAssignToModel & Chr(34))
@@ -158,7 +179,7 @@ Public Class RCodeStructure
                     clsAddGraphs.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
                     clsGetGraphs.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
                 End If
-                strScript = strScript & clsAddGraphs.ToScript() & vbCrLf
+                strScript = strScript & clsAddGraphs.ToScript() & Environment.NewLine
 
                 clsGetGraphs.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
                 clsGetGraphs.AddParameter("graph_name", Chr(34) & strAssignToGraph & Chr(34))
@@ -171,7 +192,7 @@ Public Class RCodeStructure
                     clsAddTables.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
                     clsGetTables.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
                 End If
-                strScript = strScript & clsAddTables.ToScript() & vbCrLf
+                strScript = strScript & clsAddTables.ToScript() & Environment.NewLine
 
                 clsGetTables.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_tables")
                 clsGetTables.AddParameter("table_name", Chr(34) & strAssignToTable & Chr(34))
@@ -181,7 +202,7 @@ Public Class RCodeStructure
                 clsDataList.SetRCommand("list")
                 clsDataList.AddParameter(strAssignToDataFrame, strAssignTo)
                 clsAddData.AddParameter("data_tables", clsRFunctionParameter:=clsDataList)
-                strScript = strScript & clsAddData.ToScript() & vbCrLf
+                strScript = strScript & clsAddData.ToScript() & Environment.NewLine
 
                 clsGetData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
                 clsGetData.AddParameter("data_name", Chr(34) & strAssignToDataFrame & Chr(34))
@@ -298,6 +319,7 @@ Public Class RCodeStructure
         'It will be called only in places where it is necessary ie before ToScript or RemoveAdditionalParameters in ROperator.
         clsParameters.Sort(AddressOf CompareParametersPosition)
     End Sub
+
     Private Function CompareParametersPosition(ByVal clsMain As RParameter, ByVal clsRelative As RParameter) As Integer
         'Compares two RParameters according to their Position property. If x is "smaller" than y, then return -1, if they are "equal" return 0 else return 1.
         If clsMain.Position = clsRelative.Position Then
@@ -358,15 +380,60 @@ Public Class RCodeStructure
         Return (clsParameters.FindIndex(Function(x) x.strArgumentName = strParameterName) <> -1)
     End Function
 
+    Public Overridable Sub Clear()
+        'todo tidy up iPosition 
+        iPosition = -1
+        iCallType = 0
+        bExcludeAssignedFunctionOutput = True
+        'todo shouldn't this be true by default
+        bClearFromGlobal = False
+        bToScriptAsRString = False
+        RemoveAssignTo()
+        ClearParameters()
+    End Sub
+
     Public Overridable Sub ClearParameters()
         clsParameters.Clear()
+        iNumberOfAddedParameters = 0
         bIsAssigned = False
         OnParametersChanged()
     End Sub
 
     Public Overridable Function Clone() As RCodeStructure
-        Dim clsTemp As New RCodeStructure
-        Return clsTemp
+        Dim clsTempCode As New RCodeStructure
+        Dim clsRParam As RParameter
+
+        clsTempCode.strAssignTo = strAssignTo
+        clsTempCode.strAssignToDataFrame = strAssignToDataFrame
+        clsTempCode.strAssignToColumn = strAssignToColumn
+        clsTempCode.strAssignToModel = strAssignToModel
+        clsTempCode.strAssignToGraph = strAssignToGraph
+        clsTempCode.strAssignToTable = strAssignToTable
+        clsTempCode.bToBeAssigned = bToBeAssigned
+        clsTempCode.bIsAssigned = bIsAssigned
+        clsTempCode.bAssignToIsPrefix = bAssignToIsPrefix
+        clsTempCode.bAssignToColumnWithoutNames = bAssignToColumnWithoutNames
+        clsTempCode.bInsertColumnBefore = bInsertColumnBefore
+        clsTempCode.iNumberOfAddedParameters = iNumberOfAddedParameters
+        clsTempCode.iPosition = iPosition
+        clsTempCode.iCallType = iCallType
+        clsTempCode.bExcludeAssignedFunctionOutput = bExcludeAssignedFunctionOutput
+        clsTempCode.bClearFromGlobal = bClearFromGlobal
+        clsTempCode.bToScriptAsRString = bToScriptAsRString
+        For Each clsRParam In clsParameters
+            clsTempCode.AddParameter(clsRParam.Clone)
+        Next
+        Return clsTempCode
     End Function
 
+    Public Sub GetAllAssignTo(lstCodes As List(Of RCodeStructure), lstValues As List(Of String))
+        SortParameters()
+        If bToBeAssigned AndAlso Not lstCodes.Contains(Me) Then
+            lstCodes.Add(Me)
+            lstValues.Add(strAssignTo)
+        End If
+        For Each clsTempParam As RParameter In clsParameters
+            clsTempParam.GetAllAssignTo(lstCodes, lstValues)
+        Next
+    End Sub
 End Class
