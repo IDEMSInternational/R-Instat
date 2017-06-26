@@ -502,15 +502,15 @@ Public Class RLink
         If clsEngine IsNot Nothing Then
             If bFirstRCode Then
                 Try
-                    If Not Directory.Exists(frmMain.strAutoSaveDebugLogFolderPath) Then
-                        Directory.CreateDirectory(frmMain.strAutoSaveDebugLogFolderPath)
+                    If Not Directory.Exists(frmMain.strAutoSaveInternalLogFolderPath) Then
+                        Directory.CreateDirectory(frmMain.strAutoSaveInternalLogFolderPath)
                     End If
                     strTempFile = "debug_log.R"
-                    While File.Exists(Path.Combine(frmMain.strAutoSaveDebugLogFolderPath, strTempFile))
+                    While File.Exists(Path.Combine(frmMain.strAutoSaveInternalLogFolderPath, strTempFile))
                         i = i + 1
                         strTempFile = "debug_log" & i & ".R"
                     End While
-                    strAutoSaveDebugLogFilePath = Path.Combine(frmMain.strAutoSaveDebugLogFolderPath, strTempFile)
+                    strAutoSaveDebugLogFilePath = Path.Combine(frmMain.strAutoSaveInternalLogFolderPath, strTempFile)
                     File.WriteAllText(strAutoSaveDebugLogFilePath, "")
                     Using w As StreamWriter = File.AppendText(strAutoSaveDebugLogFilePath)
                         w.WriteLine("# ****************************")
@@ -564,12 +564,12 @@ Public Class RLink
                                                         evtWaitHandleDelayDone.Set()
                                                     End Sub)
                     thrWaitDisplay = New Threading.Thread(Sub()
-                                                              'frmWaiting.Show()
+                                                              frmSetupLoading.Show()
                                                               While thrRScript.IsAlive
                                                                   Threading.Thread.Sleep(5)
                                                                   Application.DoEvents()
                                                               End While
-                                                              'frmWaiting.Hide()
+                                                              frmSetupLoading.Hide()
                                                               evtWaitHandleWaitDisplayDone.Set()
                                                           End Sub)
                     thrRScript.Start()
