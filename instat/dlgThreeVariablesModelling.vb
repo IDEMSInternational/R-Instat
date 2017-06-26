@@ -57,10 +57,10 @@ Public Class dlgThreeVariableModelling
         sdgSimpleRegOptions.SetRDataFrame(ucrSelectorThreeVariableModelling.ucrAvailableDataFrames)
         sdgSimpleRegOptions.SetRYVariable(ucrResponse)
         sdgSimpleRegOptions.SetRXVariable(ucrFirstExplanatory)
-        sdgVariableTransformations.SetRYVariable(ucrResponse)
-        sdgVariableTransformations.SetRModelOperator(clsModel1)
-        sdgModelOptions.SetRCIFunction(clsRCIFunction)
-        sdgVariableTransformations.SetRCIFunction(clsRCIFunction)
+        'sdgVariableTransformations.SetRYVariable(ucrResponse)
+        'sdgVariableTransformations.SetRModelOperator(clsModel1)
+        'sdgModelOptions.SetRCIFunction(clsRCIFunction)
+        'sdgVariableTransformations.SetRCIFunction(clsRCIFunction)
         AssignModelName()
         ucrModelName.SetValidationTypeAsRVariable()
     End Sub
@@ -169,7 +169,7 @@ Public Class dlgThreeVariableModelling
                 chkFunction.Visible = False
             End If
             If currentReceiver.Name = "ucrFirstExplanatory" Then
-                sdgVariableTransformations.SetRXVariable(ucrFirstExplanatory)
+                '   sdgVariableTransformations.SetRXVariable(ucrFirstExplanatory)
                 If chkFirstFunction.Checked Then
                     sdgVariableTransformations.ModelFunction(True)
                 Else
@@ -178,7 +178,7 @@ Public Class dlgThreeVariableModelling
                 End If
             End If
             If currentReceiver.Name = "ucrSecondExplanatory" Then
-                sdgVariableTransformations.SetRXVariable(ucrSecondExplanatory)
+                ' sdgVariableTransformations.SetRXVariable(ucrSecondExplanatory)
                 If chkSecondFunction.Checked Then
                     sdgVariableTransformations.ModelFunction(False)
                 Else

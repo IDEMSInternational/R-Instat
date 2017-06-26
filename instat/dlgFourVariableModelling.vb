@@ -55,10 +55,10 @@ Public Class dlgFourVariableModelling
         sdgSimpleRegOptions.SetRDataFrame(ucrSelectorFourVariableModelling.ucrAvailableDataFrames)
         sdgSimpleRegOptions.SetRYVariable(ucrResponse)
         sdgSimpleRegOptions.SetRXVariable(ucrFirstExplanatory)
-        sdgVariableTransformations.SetRYVariable(ucrResponse)
-        sdgVariableTransformations.SetRModelOperator(clsModel1)
-        sdgModelOptions.SetRCIFunction(clsRCIFunction)
-        sdgVariableTransformations.SetRCIFunction(clsRCIFunction)
+        'sdgVariableTransformations.SetRYVariable(ucrResponse)
+        'sdgVariableTransformations.SetRModelOperator(clsModel1)
+        'sdgModelOptions.SetRCIFunction(clsRCIFunction)
+        'sdgVariableTransformations.SetRCIFunction(clsRCIFunction)
         AssignModelName()
     End Sub
 
@@ -164,7 +164,7 @@ Public Class dlgFourVariableModelling
                 chkFirstFunction.Visible = False
             End If
             If currentReceiver.Name = "ucrFirstExplanatory" Then
-                sdgVariableTransformations.SetRXVariable(ucrFirstExplanatory)
+                'sdgVariableTransformations.SetRXVariable(ucrFirstExplanatory)
                 If chkFirstFunction.Checked Then
                     sdgVariableTransformations.ModelFunction(True)
                 Else

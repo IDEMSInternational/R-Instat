@@ -50,10 +50,10 @@ Public Class dlgFitModel
         ucrInputModelPreview.IsReadOnly = True
         sdgSimpleRegOptions.SetRDataFrame(ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames)
         sdgSimpleRegOptions.SetRYVariable(ucrReceiverResponseVar)
-        sdgVariableTransformations.SetRYVariable(ucrReceiverResponseVar)
-        sdgVariableTransformations.SetRModelOperator(clsModel)
-        sdgModelOptions.SetRCIFunction(clsRCIFunction)
-        sdgVariableTransformations.SetRCIFunction(clsRCIFunction)
+        'sdgVariableTransformations.SetRYVariable(ucrReceiverResponseVar)
+        'sdgVariableTransformations.SetRModelOperator(clsModel)
+        'sdgModelOptions.SetRCIFunction(clsRCIFunction)
+        'sdgVariableTransformations.SetRCIFunction(clsRCIFunction)
         AssignModelName()
     End Sub
 
