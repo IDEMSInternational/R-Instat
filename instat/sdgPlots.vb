@@ -62,6 +62,7 @@ Public Class sdgPlots
         'Links the factor receivers, used for creating facets, with the selector. The variables need to be factors.
         ucr1stFactorReceiver.Selector = ucrFacetSelector
         ucr1stFactorReceiver.SetIncludedDataTypes({"factor"})
+        ucr1stFactorReceiver.strSelectorHeading = "Factors"
         ucr1stFactorReceiver.SetParameter(New RParameter("var1", 0))
         ucr1stFactorReceiver.SetParameterIsString()
         ucr1stFactorReceiver.bWithQuotes = False
@@ -71,6 +72,7 @@ Public Class sdgPlots
 
         ucr2ndFactorReceiver.Selector = ucrFacetSelector
         ucr2ndFactorReceiver.SetIncludedDataTypes({"factor"})
+        ucr2ndFactorReceiver.strSelectorHeading = "Factors"
         ucr2ndFactorReceiver.SetParameter(New RParameter("var2", 1))
         ucr2ndFactorReceiver.SetParameterIsString()
         ucr2ndFactorReceiver.bWithQuotes = False
@@ -245,27 +247,27 @@ Public Class sdgPlots
             clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         End If
 
-        ucrInputGraphTitle.SetRCode(clsLabsFunction, bReset)
-        ucrInputGraphSubTitle.SetRCode(clsLabsFunction, bReset)
-        ucrInputGraphCaption.SetRCode(clsLabsFunction, bReset)
-        urChkSelectTheme.SetRCode(clsBaseOperator, bReset)
-        ucrInputThemes.SetRCode(clsBaseOperator, bReset)
+        ucrInputGraphTitle.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputGraphSubTitle.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputGraphCaption.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
+        urChkSelectTheme.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
+        ucrInputThemes.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
 
         'ucrInputLegend.SetRCode(clsNewLabsFunction, bReset)
-        ucrPnlHorizonatalVertical.SetRCode(clsFacetFunction, bReset)
-        ucr1stFactorReceiver.SetRCode(clsFacetVariablesOperator, bReset)
-        ucr2ndFactorReceiver.SetRCode(clsFacetVariablesOperator, bReset)
+        ucrPnlHorizonatalVertical.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
+        ucr1stFactorReceiver.SetRCode(clsFacetVariablesOperator, bReset, bCloneIfNeeded:=True)
+        ucr2ndFactorReceiver.SetRCode(clsFacetVariablesOperator, bReset, bCloneIfNeeded:=True)
 
-        ucrChkMargin.SetRCode(clsFacetFunction, bReset)
-        ucrChkFreeSpace.SetRCode(clsFacetFunction, bReset)
-        ucrChkFreeScalesX.SetRCode(clsFacetFunction, bReset)
-        ucrChkFreeScalesY.SetRCode(clsFacetFunction, bReset)
-        ucrNudNumberofRows.SetRCode(clsFacetFunction, bReset)
-        ucrChkIncludeFacets.SetRCode(clsBaseOperator, bReset)
+        ucrChkMargin.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkFreeSpace.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkFreeScalesX.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkFreeScalesY.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudNumberofRows.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkIncludeFacets.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
 
         'axis controls
-        ucrXAxis.SetRCodeForControl(bIsXAxis:=True, strNewAxisType:=GetAxisType(True), clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
-        ucrYAxis.SetRCodeForControl(bIsXAxis:=False, strNewAxisType:=GetAxisType(False), clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
+        ucrXAxis.SetRCodeForControl(bIsXAxis:=True, strNewAxisType:=GetAxisType(True), clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset, bCloneIfNeeded:=True)
+        ucrYAxis.SetRCodeForControl(bIsXAxis:=False, strNewAxisType:=GetAxisType(False), clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset, bCloneIfNeeded:=True)
 
 
         bRCodeSet = True

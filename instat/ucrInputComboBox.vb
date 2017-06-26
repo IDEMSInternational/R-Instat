@@ -38,7 +38,7 @@ Public Class ucrInputComboBox
         If bAutoChangeOnLeave Then
             If Not IsValid(strCurrent) Then
                 'TODO This message should contain the same message from ValidateText()
-                'Select Case MsgBox(Chr(34) & strCurrent & Chr(34) & " is an invalid name." & vbNewLine & "Would you like it to be automatically corrected?", vbYesNo, "Invalid Name")
+                'Select Case MsgBox(Chr(34) & strCurrent & Chr(34) & " is an invalid name." & Environment.NewLine & "Would you like it to be automatically corrected?", vbYesNo, "Invalid Name")
                 '    Case MsgBoxResult.Yes
                 '        SetName(frmMain.clsRLink.MakeValidText(strCurrent))
                 '    Case Else
@@ -146,7 +146,7 @@ Public Class ucrInputComboBox
         Dim dctValues As New Dictionary(Of String, String)
         If bAddConditions Then
             For Each strTemp As String In strItems
-                dctValues.Add(strTemp, strTemp)
+                dctValues.Add(strTemp, Chr(34) & strTemp & Chr(34))
             Next
             SetItems(dctValues, bClearExisting)
         Else
@@ -160,20 +160,24 @@ Public Class ucrInputComboBox
         End If
     End Sub
 
-    Public Sub SetItems(dctItemParameterValuePairs As Dictionary(Of String, String), Optional bClearExisting As Boolean = True)
+    Public Sub SetItems(dctItemParameterValuePairs As Dictionary(Of String, String), Optional bClearExisting As Boolean = True, Optional bSetCondtions As Boolean = True)
         Dim kvpTemp As KeyValuePair(Of String, String)
 
         If bClearExisting Then
             cboInput.Items.Clear()
             dctDisplayParameterValues.Clear()
         End If
-        If GetParameter() Is Nothing Then
-            MsgBox("Developer error: Parameter must be set before items can be set. Modify setup for " & Name & " so that the parameter is set first.")
+        If bSetCondtions Then
+            If GetParameter() Is Nothing Then
+                MsgBox("Developer error: Parameter must be set before items can be set. Modify setup for " & Name & " so that the parameter is set first.")
+            End If
         End If
         For Each kvpTemp In dctItemParameterValuePairs
             cboInput.Items.Add(kvpTemp.Key)
             dctDisplayParameterValues.Add(kvpTemp.Key, kvpTemp.Value)
-            AddParameterValuesCondition(kvpTemp.Key, GetParameter().strArgumentName, kvpTemp.Value)
+            If bSetCondtions Then
+                AddParameterValuesCondition(kvpTemp.Key, GetParameter().strArgumentName, kvpTemp.Value)
+            End If
         Next
         AdjustComboBoxWidth(cboInput)
     End Sub
@@ -254,8 +258,8 @@ Public Class ucrInputComboBox
         cboCurrent.DropDownWidth = iWidth
     End Sub
 
-    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
-        MyBase.UpdateControl(bReset)
+    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
+        MyBase.UpdateControl(bReset:=bReset, bCloneIfNeeded:=bCloneIfNeeded)
     End Sub
 
     Public Sub SetDropDownStyleAsNonEditable()
