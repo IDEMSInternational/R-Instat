@@ -36,15 +36,7 @@ Partial Class dlgRegressionSimple
         Me.lblNumeric = New System.Windows.Forms.Label()
         Me.lblExplanatory = New System.Windows.Forms.Label()
         Me.lblResponse = New System.Windows.Forms.Label()
-        Me.grpParameters = New System.Windows.Forms.GroupBox()
-        Me.lblConfidenceInterval = New System.Windows.Forms.Label()
-        Me.rdoCompareVariance = New System.Windows.Forms.RadioButton()
-        Me.rdoCompareMeans = New System.Windows.Forms.RadioButton()
-        Me.lblDifferenceInMeans = New System.Windows.Forms.Label()
-        Me.ucrChkPairedTest = New instat.ucrCheck()
         Me.ucrPnlMeansAndVariance = New instat.UcrPanel()
-        Me.ucrNudHypothesis = New instat.ucrNud()
-        Me.ucrNudCI = New instat.ucrNud()
         Me.ucrSaveModels = New instat.ucrSave()
         Me.ucrChkConvertToVariate = New instat.ucrCheck()
         Me.ucrExplanatory = New instat.ucrReceiverSingle()
@@ -55,6 +47,14 @@ Partial Class dlgRegressionSimple
         Me.ucrModelPreview = New instat.ucrInputTextBox()
         Me.ucrFamily = New instat.ucrDistributions()
         Me.ucrBase = New instat.ucrButtons()
+        Me.rdoCompareMeans = New System.Windows.Forms.RadioButton()
+        Me.rdoCompareVariance = New System.Windows.Forms.RadioButton()
+        Me.grpParameters = New System.Windows.Forms.GroupBox()
+        Me.lblDifferenceInMeans = New System.Windows.Forms.Label()
+        Me.lblConfidenceInterval = New System.Windows.Forms.Label()
+        Me.ucrNudHypothesis = New instat.ucrNud()
+        Me.ucrChkPairedTest = New instat.ucrCheck()
+        Me.ucrNudCI = New instat.ucrNud()
         Me.grpParameters.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -139,76 +139,10 @@ Partial Class dlgRegressionSimple
         Me.lblResponse.Name = "lblResponse"
         Me.lblResponse.Tag = "Response_Variable"
         '
-        'grpParameters
-        '
-        Me.grpParameters.Controls.Add(Me.ucrChkPairedTest)
-        Me.grpParameters.Controls.Add(Me.rdoCompareVariance)
-        Me.grpParameters.Controls.Add(Me.lblDifferenceInMeans)
-        Me.grpParameters.Controls.Add(Me.rdoCompareMeans)
-        Me.grpParameters.Controls.Add(Me.ucrPnlMeansAndVariance)
-        Me.grpParameters.Controls.Add(Me.ucrNudHypothesis)
-        Me.grpParameters.Controls.Add(Me.ucrNudCI)
-        Me.grpParameters.Controls.Add(Me.lblConfidenceInterval)
-        resources.ApplyResources(Me.grpParameters, "grpParameters")
-        Me.grpParameters.Name = "grpParameters"
-        Me.grpParameters.TabStop = False
-        '
-        'lblConfidenceInterval
-        '
-        resources.ApplyResources(Me.lblConfidenceInterval, "lblConfidenceInterval")
-        Me.lblConfidenceInterval.Name = "lblConfidenceInterval"
-        '
-        'rdoCompareVariance
-        '
-        resources.ApplyResources(Me.rdoCompareVariance, "rdoCompareVariance")
-        Me.rdoCompareVariance.Name = "rdoCompareVariance"
-        Me.rdoCompareVariance.TabStop = True
-        Me.rdoCompareVariance.Tag = ""
-        Me.rdoCompareVariance.UseVisualStyleBackColor = True
-        '
-        'rdoCompareMeans
-        '
-        resources.ApplyResources(Me.rdoCompareMeans, "rdoCompareMeans")
-        Me.rdoCompareMeans.Name = "rdoCompareMeans"
-        Me.rdoCompareMeans.TabStop = True
-        Me.rdoCompareMeans.Tag = ""
-        Me.rdoCompareMeans.UseVisualStyleBackColor = True
-        '
-        'lblDifferenceInMeans
-        '
-        resources.ApplyResources(Me.lblDifferenceInMeans, "lblDifferenceInMeans")
-        Me.lblDifferenceInMeans.Name = "lblDifferenceInMeans"
-        '
-        'ucrChkPairedTest
-        '
-        Me.ucrChkPairedTest.Checked = False
-        resources.ApplyResources(Me.ucrChkPairedTest, "ucrChkPairedTest")
-        Me.ucrChkPairedTest.Name = "ucrChkPairedTest"
-        '
         'ucrPnlMeansAndVariance
         '
         resources.ApplyResources(Me.ucrPnlMeansAndVariance, "ucrPnlMeansAndVariance")
         Me.ucrPnlMeansAndVariance.Name = "ucrPnlMeansAndVariance"
-        '
-        'ucrNudHypothesis
-        '
-        Me.ucrNudHypothesis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudHypothesis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudHypothesis, "ucrNudHypothesis")
-        Me.ucrNudHypothesis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudHypothesis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudHypothesis.Name = "ucrNudHypothesis"
-        Me.ucrNudHypothesis.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudCI
-        '
-        Me.ucrNudCI.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudCI.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudCI, "ucrNudCI")
-        Me.ucrNudCI.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudCI.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudCI.Name = "ucrNudCI"
-        Me.ucrNudCI.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrSaveModels
         '
@@ -275,6 +209,72 @@ Partial Class dlgRegressionSimple
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'rdoCompareMeans
+        '
+        resources.ApplyResources(Me.rdoCompareMeans, "rdoCompareMeans")
+        Me.rdoCompareMeans.Name = "rdoCompareMeans"
+        Me.rdoCompareMeans.TabStop = True
+        Me.rdoCompareMeans.Tag = ""
+        Me.rdoCompareMeans.UseVisualStyleBackColor = True
+        '
+        'rdoCompareVariance
+        '
+        resources.ApplyResources(Me.rdoCompareVariance, "rdoCompareVariance")
+        Me.rdoCompareVariance.Name = "rdoCompareVariance"
+        Me.rdoCompareVariance.TabStop = True
+        Me.rdoCompareVariance.Tag = ""
+        Me.rdoCompareVariance.UseVisualStyleBackColor = True
+        '
+        'grpParameters
+        '
+        Me.grpParameters.Controls.Add(Me.lblDifferenceInMeans)
+        Me.grpParameters.Controls.Add(Me.lblConfidenceInterval)
+        Me.grpParameters.Controls.Add(Me.ucrNudHypothesis)
+        Me.grpParameters.Controls.Add(Me.ucrChkPairedTest)
+        Me.grpParameters.Controls.Add(Me.ucrNudCI)
+        Me.grpParameters.Controls.Add(Me.rdoCompareMeans)
+        Me.grpParameters.Controls.Add(Me.rdoCompareVariance)
+        Me.grpParameters.Controls.Add(Me.ucrPnlMeansAndVariance)
+        resources.ApplyResources(Me.grpParameters, "grpParameters")
+        Me.grpParameters.Name = "grpParameters"
+        Me.grpParameters.TabStop = False
+        '
+        'lblDifferenceInMeans
+        '
+        resources.ApplyResources(Me.lblDifferenceInMeans, "lblDifferenceInMeans")
+        Me.lblDifferenceInMeans.Name = "lblDifferenceInMeans"
+        '
+        'lblConfidenceInterval
+        '
+        resources.ApplyResources(Me.lblConfidenceInterval, "lblConfidenceInterval")
+        Me.lblConfidenceInterval.Name = "lblConfidenceInterval"
+        '
+        'ucrNudHypothesis
+        '
+        Me.ucrNudHypothesis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudHypothesis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudHypothesis, "ucrNudHypothesis")
+        Me.ucrNudHypothesis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudHypothesis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudHypothesis.Name = "ucrNudHypothesis"
+        Me.ucrNudHypothesis.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkPairedTest
+        '
+        Me.ucrChkPairedTest.Checked = False
+        resources.ApplyResources(Me.ucrChkPairedTest, "ucrChkPairedTest")
+        Me.ucrChkPairedTest.Name = "ucrChkPairedTest"
+        '
+        'ucrNudCI
+        '
+        Me.ucrNudCI.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCI.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudCI, "ucrNudCI")
+        Me.ucrNudCI.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudCI.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCI.Name = "ucrNudCI"
+        Me.ucrNudCI.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'dlgRegressionSimple
         '
         resources.ApplyResources(Me, "$this")
@@ -336,13 +336,13 @@ Partial Class dlgRegressionSimple
     Friend WithEvents lblExplanatory As Label
     Friend WithEvents lblResponse As Label
     Friend WithEvents ucrSaveModels As ucrSave
-    Friend WithEvents grpParameters As GroupBox
-    Friend WithEvents ucrNudCI As ucrNud
-    Friend WithEvents ucrNudHypothesis As ucrNud
-    Friend WithEvents ucrChkPairedTest As ucrCheck
-    Friend WithEvents lblConfidenceInterval As Label
+    Friend WithEvents ucrPnlMeansAndVariance As UcrPanel
     Friend WithEvents rdoCompareVariance As RadioButton
     Friend WithEvents rdoCompareMeans As RadioButton
-    Friend WithEvents ucrPnlMeansAndVariance As UcrPanel
+    Friend WithEvents grpParameters As GroupBox
+    Friend WithEvents ucrChkPairedTest As ucrCheck
+    Friend WithEvents ucrNudHypothesis As ucrNud
+    Friend WithEvents ucrNudCI As ucrNud
     Friend WithEvents lblDifferenceInMeans As Label
+    Friend WithEvents lblConfidenceInterval As Label
 End Class
