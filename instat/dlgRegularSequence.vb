@@ -155,10 +155,10 @@ Public Class dlgRegularSequence
     End Sub
 
     Private Sub SetBaseFunction()
-        If ucrNudRepeatValues.Value > 1 Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsRepFunction)
-        Else
+        If ucrNudRepeatValues.Value = 1 Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsSeqFunction)
+        Else
+            ucrBase.clsRsyntax.SetBaseRFunction(clsRepFunction)
         End If
 
     End Sub
@@ -227,13 +227,13 @@ Public Class dlgRegularSequence
         CheckSequenceLength()
     End Sub
 
-    Private Sub ucrNudRepeatValues_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudRepeatValues.ControlContentsChanged
+    Private Sub ucrNudRepeatValues_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudRepeatValues.ControlValueChanged
         SetBaseFunction()
         CheckSequenceLength()
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrInputFrom_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFrom.ControlValueChanged, ucrInputTo.ControlValueChanged, ucrInputInStepsOf.ControlValueChanged
+    Private Sub ucrInputFrom_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFrom.ControlContentsChanged, ucrInputTo.ControlContentsChanged, ucrInputInStepsOf.ControlContentsChanged
         If bUpdateBy Then
             SetInStepsOfParameter()
         End If

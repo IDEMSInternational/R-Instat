@@ -48,16 +48,11 @@ Public Class ucrSave
         bShowLabel = True
         bShowCheckBox = False
         LabelOrCheckboxSettings()
-        If bIsComboBox Then
-            iTemp = lblSaveText.Location.X + lblSaveText.Size.Width - ucrInputComboSave.Location.X
-            If iTemp > 0 Then
-                ucrInputComboSave.Width = ucrInputComboSave.Size.Width - iTemp
-            End If
-        Else
-            iTemp = lblSaveText.Location.X + lblSaveText.Size.Width - ucrInputTextSave.Location.X
-            If iTemp > 0 Then
-                ucrInputTextSave.Width = ucrInputComboSave.Size.Width - iTemp
-            End If
+        'Do for both in case text/combo not set yet, or will change at run time
+        iTemp = lblSaveText.Location.X + lblSaveText.Size.Width - ucrInputComboSave.Location.X
+        If iTemp > 0 Then
+            ucrInputComboSave.Width = ucrInputComboSave.Size.Width - iTemp
+            ucrInputTextSave.Width = ucrInputComboSave.Width
         End If
     End Sub
 
@@ -285,7 +280,7 @@ Public Class ucrSave
         OnControlContentsChanged()
     End Sub
 
-    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
+    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
         Dim clsMainRCode As RCodeStructure
 
         clsMainRCode = GetRCode()
@@ -358,4 +353,12 @@ Public Class ucrSave
     Public Sub AddAdditionalRCode(clsNewRCode As RCodeStructure, Optional iAdditionalPairNo As Integer = -1)
         AddAdditionalCodeParameterPair(clsNewRCode, Nothing, iAdditionalPairNo)
     End Sub
+
+    Public Function UserTyped() As Boolean
+        If bIsComboBox Then
+            Return ucrInputComboSave.bUserTyped
+        Else
+            Return ucrInputTextSave.bUserTyped
+        End If
+    End Function
 End Class

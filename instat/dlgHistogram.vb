@@ -72,6 +72,7 @@ Public Class dlgHistogram
         ucrFactorReceiver.SetParameter(New RParameter("fill", 1))
         ucrFactorReceiver.Selector = ucrHistogramSelector
         ucrFactorReceiver.SetIncludedDataTypes({"factor"})
+        ucrFactorReceiver.strSelectorHeading = "Factors"
         'can put in colour for density and polygon but fill for Histogram
         ucrFactorReceiver.bWithQuotes = False
         ucrFactorReceiver.SetParameterIsString()
@@ -80,6 +81,7 @@ Public Class dlgHistogram
         ucrVariablesAsFactorforHist.SetFactorReceiver(ucrFactorReceiver)
         ucrVariablesAsFactorforHist.Selector = ucrHistogramSelector
         ucrVariablesAsFactorforHist.SetIncludedDataTypes({"numeric"})
+        ucrVariablesAsFactorforHist.strSelectorHeading = "Numerics"
         ucrVariablesAsFactorforHist.bWithQuotes = False
         ucrVariablesAsFactorforHist.SetParameterIsString()
 
@@ -100,6 +102,7 @@ Public Class dlgHistogram
         ucrHistogramSelector.Reset()
         ucrSaveHist.Reset()
         bResetSubdialog = True
+        bResetHistLayerSubdialog = True
         TempOptionsDisabledInMultipleVariablesCase()
 
         clsBaseOperator.SetOperation("+")
