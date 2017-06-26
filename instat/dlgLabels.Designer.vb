@@ -53,9 +53,9 @@ Partial Class dlgLabels
         'ucrChkIncludeLevelNumbers
         '
         Me.ucrChkIncludeLevelNumbers.Checked = False
-        Me.ucrChkIncludeLevelNumbers.Location = New System.Drawing.Point(395, 246)
+        Me.ucrChkIncludeLevelNumbers.Location = New System.Drawing.Point(388, 246)
         Me.ucrChkIncludeLevelNumbers.Name = "ucrChkIncludeLevelNumbers"
-        Me.ucrChkIncludeLevelNumbers.Size = New System.Drawing.Size(126, 20)
+        Me.ucrChkIncludeLevelNumbers.Size = New System.Drawing.Size(135, 20)
         Me.ucrChkIncludeLevelNumbers.TabIndex = 6
         '
         'ucrReceiverLabels
