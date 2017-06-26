@@ -37,6 +37,8 @@ Public Class dlgView
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 32
+        'Needed because window may pop up window which will disappear in a separate thread
+        ucrBase.clsRsyntax.bSeparateThread = False
 
         ucrReceiverView.SetParameter(New RParameter("x", 0))
         ucrReceiverView.SetParameterIsRFunction()

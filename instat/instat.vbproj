@@ -167,6 +167,12 @@
     <Compile Include="dlgAddLink.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgAutoSaveRecovery.Designer.vb">
+      <DependentUpon>dlgAutoSaveRecovery.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgAutoSaveRecovery.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgCalculationsSummary.Designer.vb">
       <DependentUpon>dlgCalculationsSummary.vb</DependentUpon>
     </Compile>
@@ -2214,6 +2220,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgAddLink.resx">
       <DependentUpon>dlgAddLink.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgAutoSaveRecovery.resx">
+      <DependentUpon>dlgAutoSaveRecovery.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCalculationsSummary.fr-FR.resx">
       <DependentUpon>dlgCalculationsSummary.vb</DependentUpon>
