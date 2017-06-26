@@ -23,12 +23,12 @@ Partial Class dlgLabels
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.lblFactor = New System.Windows.Forms.Label()
+        Me.cmdAddLevel = New System.Windows.Forms.Button()
+        Me.ucrChkIncludeLevelNumbers = New instat.ucrCheck()
         Me.ucrReceiverLabels = New instat.ucrReceiverSingle()
         Me.ucrFactorLabels = New instat.ucrFactor()
         Me.ucrSelectorForLabels = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.cmdAddLevel = New System.Windows.Forms.Button()
-        Me.ucrChkAddLevels = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblFactor
@@ -40,6 +40,23 @@ Partial Class dlgLabels
         Me.lblFactor.TabIndex = 3
         Me.lblFactor.Tag = "Factor_Selected:"
         Me.lblFactor.Text = "Factor Selected:"
+        '
+        'cmdAddLevel
+        '
+        Me.cmdAddLevel.Location = New System.Drawing.Point(256, 243)
+        Me.cmdAddLevel.Name = "cmdAddLevel"
+        Me.cmdAddLevel.Size = New System.Drawing.Size(96, 23)
+        Me.cmdAddLevel.TabIndex = 5
+        Me.cmdAddLevel.Text = "Add Factor Level"
+        Me.cmdAddLevel.UseVisualStyleBackColor = True
+        '
+        'ucrChkIncludeLevelNumbers
+        '
+        Me.ucrChkIncludeLevelNumbers.Checked = False
+        Me.ucrChkIncludeLevelNumbers.Location = New System.Drawing.Point(395, 246)
+        Me.ucrChkIncludeLevelNumbers.Name = "ucrChkIncludeLevelNumbers"
+        Me.ucrChkIncludeLevelNumbers.Size = New System.Drawing.Size(126, 20)
+        Me.ucrChkIncludeLevelNumbers.TabIndex = 6
         '
         'ucrReceiverLabels
         '
@@ -63,6 +80,7 @@ Partial Class dlgLabels
         Me.ucrFactorLabels.shtCurrSheet = Nothing
         Me.ucrFactorLabels.Size = New System.Drawing.Size(267, 171)
         Me.ucrFactorLabels.TabIndex = 2
+        Me.ucrFactorLabels.ucrChkLevels = Nothing
         '
         'ucrSelectorForLabels
         '
@@ -81,29 +99,12 @@ Partial Class dlgLabels
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
         '
-        'cmdAddLevel
-        '
-        Me.cmdAddLevel.Location = New System.Drawing.Point(256, 243)
-        Me.cmdAddLevel.Name = "cmdAddLevel"
-        Me.cmdAddLevel.Size = New System.Drawing.Size(75, 23)
-        Me.cmdAddLevel.TabIndex = 5
-        Me.cmdAddLevel.Text = "Add Level"
-        Me.cmdAddLevel.UseVisualStyleBackColor = True
-        '
-        'ucrChkAddLevels
-        '
-        Me.ucrChkAddLevels.Checked = False
-        Me.ucrChkAddLevels.Location = New System.Drawing.Point(344, 245)
-        Me.ucrChkAddLevels.Name = "ucrChkAddLevels"
-        Me.ucrChkAddLevels.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkAddLevels.TabIndex = 6
-        '
         'dlgLabels
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(533, 332)
-        Me.Controls.Add(Me.ucrChkAddLevels)
+        Me.Controls.Add(Me.ucrChkIncludeLevelNumbers)
         Me.Controls.Add(Me.cmdAddLevel)
         Me.Controls.Add(Me.ucrReceiverLabels)
         Me.Controls.Add(Me.lblFactor)
@@ -128,5 +129,5 @@ Partial Class dlgLabels
     Friend WithEvents lblFactor As Label
     Friend WithEvents ucrReceiverLabels As ucrReceiverSingle
     Friend WithEvents cmdAddLevel As Button
-    Friend WithEvents ucrChkAddLevels As ucrCheck
+    Friend WithEvents ucrChkIncludeLevelNumbers As ucrCheck
 End Class
