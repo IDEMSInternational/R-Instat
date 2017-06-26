@@ -94,7 +94,7 @@ Public Class ucrCore
 
     'Update the control based on the code in RCodeStructure
     'bReset : should the control reset to the default value if the parameter is not present in the code
-    Public Overridable Sub UpdateControl(Optional bReset As Boolean = False)
+    Public Overridable Sub UpdateControl(Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
         Dim clsTempRCode As RCodeStructure
         Dim clsTempRParameter As RParameter
         Dim clsTempCloneParameter As RParameter
@@ -113,8 +113,13 @@ Public Class ucrCore
                             'Not an issue if controls do not need to share parameters
                             'This is needed so that if this parameter is contained in functions in multiple dialogs,
                             'the parameter only changes the functions in the currently open dialog
-                            clsTempCloneParameter = GetParameter(i).Clone()
-                            If Not bUpdateRCodeFromControl AndAlso bChangeParameterValue Then
+                            If bCloneIfNeeded Then
+                                clsTempCloneParameter = GetParameter(i).Clone()
+                            Else
+                                clsTempCloneParameter = GetParameter(i)
+                            End If
+
+                            If Not bUpdateRCodeFromControl AndAlso bChangeParameterValue AndAlso objDefaultState Is Nothing Then
                                 clsTempCloneParameter.ClearAllArguments()
                             End If
                             SetParameter(clsTempCloneParameter, i)
@@ -144,7 +149,7 @@ Public Class ucrCore
         If bIsActiveRControl Then
             'If the default state is set then the linked control will set the value for this control
             If objDefaultState Is Nothing Then
-                If clsRCode IsNot Nothing Then
+                If clsRCode IsNot Nothing OrElse clsRSyntax IsNot Nothing Then
                     For Each kvpTemp As KeyValuePair(Of Object, List(Of Condition)) In dctConditions
                         If kvpTemp.Value.Count > 0 Then
                             If AllConditionsSatisfied(kvpTemp.Value, clsRCode, clsParameter, clsRSyntax) Then
@@ -221,14 +226,16 @@ Public Class ucrCore
         UpdateLinkedControls(bReset)
     End Sub
 
-    Public Overridable Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False)
+    Public Overridable Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False, Optional bUpdate As Boolean = True, Optional bCloneIfNeeded As Boolean = False)
         If clsRCode Is Nothing OrElse Not clsRCode.Equals(clsNewCodeStructure) Then
             clsRCode = clsNewCodeStructure
-            If bUpdateRCodeFromControl AndAlso CanUpdate() Then
+            If bUpdateRCodeFromControl AndAlso CanUpdate() AndAlso bUpdate Then
                 UpdateRCode(bReset)
             End If
         End If
-        UpdateControl(bReset)
+        If bUpdate Then
+            UpdateControl(bReset:=bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        End If
     End Sub
 
     'TODO in future may want to set RCode and RSyntax together if both needed for conditions
@@ -351,7 +358,7 @@ Public Class ucrCore
     End Function
 
     Public Overridable Function IsRDefault() As Boolean
-        Return clsParameter IsNot Nothing AndAlso objRDefault IsNot Nothing AndAlso objRDefault.Equals(clsParameter.strArgumentValue)
+        Return clsParameter IsNot Nothing AndAlso clsParameter.strArgumentValue IsNot Nothing AndAlso objRDefault IsNot Nothing AndAlso objRDefault.Equals(clsParameter.strArgumentValue)
     End Function
 
     Public Overridable Function CanAddParameter() As Boolean

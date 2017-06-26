@@ -23,7 +23,7 @@ Partial Class dlgOneVarCompareModels
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
-        Me.UcrReceiver = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverCompareModels = New instat.ucrReceiverMultiple()
         Me.ucrSelectorOneVarCompModels = New instat.ucrSelectorByDataFrameAddRemove()
         Me.cmdDisplayObjects = New System.Windows.Forms.Button()
         Me.lblReceiver = New System.Windows.Forms.Label()
@@ -36,14 +36,17 @@ Partial Class dlgOneVarCompareModels
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 4
         '
-        'UcrReceiver
+        'ucrReceiverCompareModels
         '
-        Me.UcrReceiver.Location = New System.Drawing.Point(251, 60)
-        Me.UcrReceiver.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiver.Name = "UcrReceiver"
-        Me.UcrReceiver.Selector = Nothing
-        Me.UcrReceiver.Size = New System.Drawing.Size(120, 100)
-        Me.UcrReceiver.TabIndex = 2
+        Me.ucrReceiverCompareModels.frmParent = Me
+        Me.ucrReceiverCompareModels.Location = New System.Drawing.Point(250, 60)
+        Me.ucrReceiverCompareModels.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverCompareModels.Name = "ucrReceiverCompareModels"
+        Me.ucrReceiverCompareModels.Selector = Nothing
+        Me.ucrReceiverCompareModels.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverCompareModels.strNcFilePath = ""
+        Me.ucrReceiverCompareModels.TabIndex = 2
+        Me.ucrReceiverCompareModels.ucrSelector = Nothing
         '
         'ucrSelectorOneVarCompModels
         '
@@ -57,17 +60,17 @@ Partial Class dlgOneVarCompareModels
         '
         'cmdDisplayObjects
         '
-        Me.cmdDisplayObjects.Location = New System.Drawing.Point(280, 167)
+        Me.cmdDisplayObjects.Location = New System.Drawing.Point(307, 176)
         Me.cmdDisplayObjects.Name = "cmdDisplayObjects"
-        Me.cmdDisplayObjects.Size = New System.Drawing.Size(91, 23)
+        Me.cmdDisplayObjects.Size = New System.Drawing.Size(101, 23)
         Me.cmdDisplayObjects.TabIndex = 3
-        Me.cmdDisplayObjects.Text = "Display Objects"
+        Me.cmdDisplayObjects.Text = "Display Objects..."
         Me.cmdDisplayObjects.UseVisualStyleBackColor = True
         '
         'lblReceiver
         '
         Me.lblReceiver.AutoSize = True
-        Me.lblReceiver.Location = New System.Drawing.Point(250, 44)
+        Me.lblReceiver.Location = New System.Drawing.Point(250, 45)
         Me.lblReceiver.Name = "lblReceiver"
         Me.lblReceiver.Size = New System.Drawing.Size(97, 13)
         Me.lblReceiver.TabIndex = 1
@@ -77,11 +80,11 @@ Partial Class dlgOneVarCompareModels
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(426, 262)
+        Me.ClientSize = New System.Drawing.Size(417, 262)
         Me.Controls.Add(Me.lblReceiver)
         Me.Controls.Add(Me.cmdDisplayObjects)
         Me.Controls.Add(Me.ucrSelectorOneVarCompModels)
-        Me.Controls.Add(Me.UcrReceiver)
+        Me.Controls.Add(Me.ucrReceiverCompareModels)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -95,7 +98,7 @@ Partial Class dlgOneVarCompareModels
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents UcrReceiver As ucrReceiverMultiple
+    Friend WithEvents ucrReceiverCompareModels As ucrReceiverMultiple
     Friend WithEvents ucrSelectorOneVarCompModels As ucrSelectorByDataFrameAddRemove
     Friend WithEvents cmdDisplayObjects As Button
     Friend WithEvents lblReceiver As Label
