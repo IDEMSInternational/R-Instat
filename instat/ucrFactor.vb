@@ -68,6 +68,7 @@ Public Class ucrFactor
 
     Private Sub ucrFactor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         grdFactorData.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, False)
+        'TODO possibly don't need to do this now as linking will fill the grid (but counts etc. need to be updated)
         RefreshFactorData()
     End Sub
 
@@ -457,13 +458,17 @@ Public Class ucrFactor
         End If
     End Sub
 
-    Public Sub SetColumn(strValues As String(), iColumnIndex As Integer)
+    Public Sub SetColumn(strValues As String(), iColumnIndex As Integer, Optional bSilent As Boolean = True)
         Dim i As Integer
         If shtCurrSheet IsNot Nothing Then
             If strValues.Count <> shtCurrSheet.RowCount Then
-                MsgBox("Developer error: Cannot set value of control " & Name & " because the list of values does not match the number of levels.")
+                If Not bSilent Then
+                    MsgBox("Developer error: Cannot set value of control " & Name & " because the list of values does not match the number of levels.")
+                End If
             ElseIf iColumnIndex < 0 OrElse iColumnIndex >= shtCurrSheet.ColumnCount Then
-                MsgBox("Developer error: Cannot set value of control " & Name & " because there is no column at index " & iColumnIndex & " in the grid.")
+                If Not bSilent Then
+                    MsgBox("Developer error: Cannot set value of control " & Name & " because there is no column at index " & iColumnIndex & " in the grid.")
+                End If
             Else
                 For i = 0 To shtCurrSheet.RowCount - 1
                     shtCurrSheet(i, iColumnIndex) = strValues(i)
@@ -477,7 +482,7 @@ Public Class ucrFactor
     End Sub
 
     Private Sub grdFactorData_Leave(sender As Object, e As EventArgs) Handles grdFactorData.Leave
-        If shtCurrSheet.IsEditing Then
+        If shtCurrSheet IsNot Nothing AndAlso shtCurrSheet.IsEditing Then
             shtCurrSheet.EndEdit(unvell.ReoGrid.EndEditReason.NormalFinish)
         End If
     End Sub
@@ -509,7 +514,7 @@ Public Class ucrFactor
 
     Private Sub shtCurrSheet_BeforeCellKeyDown(sender As Object, e As BeforeCellKeyDownEventArgs) Handles shtCurrSheet.BeforeCellKeyDown
         If e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back Then
-            MsgBox("Deleting cells is currently disabled. This feature will be included in future versions." & vbNewLine & "To remove a cell's value, replace the value with NA.", MsgBoxStyle.Information, "Cannot delete cells.")
+            MsgBox("Deleting cells is currently disabled. This feature will be included in future versions." & Environment.NewLine & "To remove a cell's value, replace the value with NA.", MsgBoxStyle.Information, "Cannot delete cells.")
             e.IsCancelled = True
         End If
     End Sub
@@ -554,7 +559,7 @@ Public Class ucrFactor
     Private Sub shtCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles shtCurrSheet.AfterCellEdit
         If shtCurrSheet.ColumnHeaders(e.Cell.Column).Text = strLevelsName AndAlso e.NewData.ToString() <> "" Then
             If Not IsNumeric(e.NewData) Then
-                MsgBox("Invalid value: " & e.NewData.ToString() & vbNewLine & "Levels must be numeric values.", MsgBoxStyle.Exclamation, "Invalid Value")
+                MsgBox("Invalid value: " & e.NewData.ToString() & Environment.NewLine & "Levels must be numeric values.", MsgBoxStyle.Exclamation, "Invalid Value")
                 e.EndReason = EndEditReason.Cancel
             End If
         End If

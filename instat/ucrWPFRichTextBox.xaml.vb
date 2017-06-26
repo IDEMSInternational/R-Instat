@@ -79,34 +79,34 @@ Public Class ucrWPFRichTextBox
         Catch e As Exception
             Console.WriteLine("The process failed: {0}", e.Message)
             'Temporarily adding a vb message box for debug purposes.
-            MsgBox(e.Message & vbNewLine & "A problem occured in attempting to create the directory: " & strDirectoryPath, MsgBoxStyle.Critical)
+            MsgBox(e.Message & Environment.NewLine & "A problem occured in attempting to create the directory: " & strDirectoryPath, MsgBoxStyle.Critical)
         End Try
     End Sub
 
     Public Sub DisplayGraph(strImageLocation As String)
         'Adds a graph to the output window.
         Dim blkParagraph As Documents.Paragraph
-        Dim conImage As Windows.Documents.InlineUIContainer
-        Dim UIEimage As New Windows.Controls.Image()
-        Dim bimg As New Windows.Media.Imaging.BitmapImage()
-        Dim thickness As New Windows.Thickness(1)
+        Dim conImage As System.Windows.Documents.InlineUIContainer
+        Dim UIEimage As New System.Windows.Controls.Image()
+        Dim bimg As New System.Windows.Media.Imaging.BitmapImage()
+        Dim thickness As New System.Windows.Thickness(1)
         Using fstream As New IO.FileStream(strImageLocation, IO.FileMode.Open, IO.FileAccess.Read, IO.FileShare.Read)
             bimg.BeginInit()
-            bimg.CacheOption = Windows.Media.Imaging.BitmapCacheOption.OnLoad
+            bimg.CacheOption = System.Windows.Media.Imaging.BitmapCacheOption.OnLoad
             bimg.StreamSource = fstream
             bimg.EndInit()
         End Using
         bimg.Freeze()
         UIEimage.Source = bimg
-        UIEimage.Stretch = Windows.Media.Stretch.Uniform
-        UIEimage.StretchDirection = Windows.Controls.StretchDirection.DownOnly
-        conImage = New Windows.Documents.InlineUIContainer(UIEimage)
+        UIEimage.Stretch = System.Windows.Media.Stretch.Uniform
+        UIEimage.StretchDirection = System.Windows.Controls.StretchDirection.DownOnly
+        conImage = New System.Windows.Documents.InlineUIContainer(UIEimage)
         blkParagraph = New Documents.Paragraph(conImage)
         blkParagraph.BorderThickness = thickness
-        blkParagraph.BorderBrush = Windows.Media.Brushes.Black
+        blkParagraph.BorderBrush = System.Windows.Media.Brushes.Black
         blkParagraph.Padding = thickness
         rtbOutput.Document.Blocks.Add(blkParagraph)
-        rtbOutput.Document.Blocks.Add(New Windows.Documents.Paragraph)
+        rtbOutput.Document.Blocks.Add(New System.Windows.Documents.Paragraph)
         rtbOutput.ScrollToEnd()
         'TESTING TO BE REMOVED
         'Dim strStargazer As String = "<table style=" & Chr(34) & "text-align:center" & Chr(34) & "><tr><td colspan=" & Chr(34) & "6" & Chr(34) & " style=" & Chr(34) & "border-bottom:  1px solid black" & Chr(34) & "></td></tr><tr><td style=" & Chr(34) & "text-align:Left" & Chr(34) & ">Statistic</td><td>N</td><td>Mean</td><td>St. Dev.</td><td>Min</td><td>Max</td></tr>
@@ -164,19 +164,19 @@ Public Class ucrWPFRichTextBox
         End If
     End Sub
 
-    Public Sub CopyUIElementToClipboard(element As Windows.FrameworkElement)
+    Public Sub CopyUIElementToClipboard(element As System.Windows.FrameworkElement)
         'This sub is used to copy the image in a UIElement to the clipboard. It is called within the CopyImage sub on the frmOutputWindow.
         Dim width As Double = element.ActualWidth
         Dim Height As Double = element.ActualHeight
-        Dim bmpCopied As Windows.Media.Imaging.RenderTargetBitmap = New Windows.Media.Imaging.RenderTargetBitmap(Convert.ToInt32(width), Convert.ToInt32(Height), 96, 96, Windows.Media.PixelFormats.Default)
-        Dim drawingVisual As Windows.Media.DrawingVisual = New Windows.Media.DrawingVisual()
+        Dim bmpCopied As System.Windows.Media.Imaging.RenderTargetBitmap = New System.Windows.Media.Imaging.RenderTargetBitmap(Convert.ToInt32(width), Convert.ToInt32(Height), 96, 96, System.Windows.Media.PixelFormats.Default)
+        Dim drawingVisual As System.Windows.Media.DrawingVisual = New System.Windows.Media.DrawingVisual()
 
-        Using drawingContext As Windows.Media.DrawingContext = drawingVisual.RenderOpen()
-            Dim visualBrush As New Windows.Media.VisualBrush(element)
-            drawingContext.DrawRectangle(visualBrush, Nothing, New Windows.Rect(New Windows.Point(), New Windows.Size(width, Height)))
+        Using drawingContext As System.Windows.Media.DrawingContext = drawingVisual.RenderOpen()
+            Dim visualBrush As New System.Windows.Media.VisualBrush(element)
+            drawingContext.DrawRectangle(visualBrush, Nothing, New System.Windows.Rect(New System.Windows.Point(), New System.Windows.Size(width, Height)))
         End Using
         bmpCopied.Render(drawingVisual)
-        Windows.Clipboard.SetImage(bmpCopied)
+        System.Windows.Clipboard.SetImage(bmpCopied)
     End Sub
 
     Public Sub SaveRtf(ByVal strFileName As String)

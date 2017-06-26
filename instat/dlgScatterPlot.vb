@@ -13,6 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 
 Public Class dlgScatterPlot
@@ -24,6 +25,7 @@ Public Class dlgScatterPlot
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = True
+    Private bResetlayerSubdialog As Boolean = True
     Private clsLabsFunction As New RFunction
     Private clsXlabsFunction As New RFunction
     Private clsYlabsFunction As New RFunction
@@ -32,6 +34,9 @@ Public Class dlgScatterPlot
     Private clsFacetsFunction As New RFunction
     Private clsThemeFunction As New RFunction
     Private dctThemeFunctions As New Dictionary(Of String, RFunction)
+    Dim strReceiverXVarType As String = ""
+    Dim strReceiverYSingleVarType As String = ""
+    Dim strReceiverYMultipleVarType As String = ""
 
     Private Sub dlgScatterPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -45,6 +50,7 @@ Public Class dlgScatterPlot
         SetRCodeForControls(bReset)
         bReset = False
         TestOkEnabled()
+        CheckIfNumeric()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -63,6 +69,7 @@ Public Class dlgScatterPlot
         ucrVariablesAsFactorForScatter.Selector = ucrSelectorForScatter
         ucrVariablesAsFactorForScatter.SetFactorReceiver(ucrFactorOptionalReceiver)
         ucrVariablesAsFactorForScatter.SetIncludedDataTypes({"factor", "numeric"})
+        ucrVariablesAsFactorForScatter.strSelectorHeading = "Variables"
         ucrVariablesAsFactorForScatter.SetValuesToIgnore({Chr(34) & Chr(34)})
         ucrVariablesAsFactorForScatter.bAddParameterIfEmpty = True
 
@@ -71,6 +78,7 @@ Public Class dlgScatterPlot
         ucrReceiverX.bWithQuotes = False
         ucrReceiverX.Selector = ucrSelectorForScatter
         ucrReceiverX.SetIncludedDataTypes({"factor", "numeric"})
+        ucrReceiverX.strSelectorHeading = "Variables"
         ucrReceiverX.SetValuesToIgnore({Chr(34) & Chr(34)})
         ucrReceiverX.bAddParameterIfEmpty = True
 
@@ -79,9 +87,11 @@ Public Class dlgScatterPlot
         ucrFactorOptionalReceiver.bWithQuotes = False
         ucrFactorOptionalReceiver.Selector = ucrSelectorForScatter
         ucrFactorOptionalReceiver.SetIncludedDataTypes({"factor", "numeric"})
+        ucrFactorOptionalReceiver.strSelectorHeading = "Variables"
 
         clsGeomSmoothFunc.SetPackageName("ggplot2")
         clsGeomSmoothFunc.SetRCommand("geom_smooth")
+        clsGeomSmoothFunc.AddParameter("method", Chr(34) & "lm" & Chr(34))
         clsGeomSmoothParameter.SetArgumentName("geom_smooth")
         clsGeomSmoothParameter.SetArgument(clsGeomSmoothFunc)
         ucrChkLineofBestFit.SetText("Add Line of Best Fit")
@@ -105,6 +115,7 @@ Public Class dlgScatterPlot
         ucrSaveScatterPlot.Reset()
         sdgPlots.Reset()
         bResetSubdialog = True
+        bResetlayerSubdialog = True
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
@@ -169,9 +180,10 @@ Public Class dlgScatterPlot
 
     Private Sub cmdScatterPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdScatterPlotOptions.Click
         'SetupLayer sends the components storing the plot info (clsRaesFunction, clsRggplotFunction, ...) of dlgScatteredPlot through to sdgLayerOptions where these will be edited.
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRScatterGeomFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorForScatter, bApplyAesGlobally:=True)
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRScatterGeomFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrSelectorForScatter, bApplyAesGlobally:=True, bReset:=bResetlayerSubdialog)
         'Coming from the sdgLayerOptions, clsRaesFunction and others has been modified. One then needs to display these modifications on the dlgScatteredPlot.
         sdgLayerOptions.ShowDialog()
+        bResetlayerSubdialog = False
         'The aesthetics parameters on the main dialog are repopulated as required. 
         For Each clsParam In clsRaesFunction.clsParameters
             If clsParam.strArgumentName = "x" Then
@@ -193,7 +205,31 @@ Public Class dlgScatterPlot
             End If
         Next
     End Sub
-    Private Sub ucrSaveScatterPlot_ContentsChanged() Handles ucrSaveScatterPlot.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrVariablesAsFactorForScatter.ControlContentsChanged
+    Private Sub ucrSaveScatterPlot_ContentsChanged() Handles ucrSaveScatterPlot.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrVariablesAsFactorForScatter.ControlContentsChanged, ucrSaveScatterPlot.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub CheckIfNumeric()
+        'strReceiverXVarType = ucrReceiverX.strCurrDataType
+        'strReceiverYSingleVarType = ucrVariablesAsFactorForScatter.ucrSingleVariable.strCurrDataType
+
+        'If (ucrVariablesAsFactorForScatter.ucrMultipleVariables.GetCurrentItemTypes.Count > 0) Then
+        '    strReceiverYMultipleVarType = ucrVariablesAsFactorForScatter.ucrMultipleVariables.GetCurrentItemTypes.Item(0) 'how about the others as this just gets for the first one 
+        'Else
+        '    strReceiverYMultipleVarType = ""
+        'End If
+
+        'If (Not ucrVariablesAsFactorForScatter.IsEmpty() AndAlso Not ucrReceiverX.IsEmpty()) Then
+        '    If ((strReceiverXVarType = "numeric" OrElse strReceiverXVarType = "integer") AndAlso (strReceiverYSingleVarType = "numeric" OrElse strReceiverYSingleVarType = "integer")) OrElse (strReceiverYMultipleVarType = "numeric" OrElse strReceiverYMultipleVarType = "integer") Then
+        '        ucrChkLineofBestFit.Enabled = True
+        '    End If
+        'Else
+        '    ucrChkLineofBestFit.Enabled = False
+        '    clsBaseOperator.RemoveParameterByName("geom_smooth")
+        'End If
+    End Sub
+
+    Private Sub ucrVariablesAsFactorForScatter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForScatter.ControlContentsChanged, ucrReceiverX.ControlContentsChanged
+        ' CheckIfNumeric()
     End Sub
 End Class

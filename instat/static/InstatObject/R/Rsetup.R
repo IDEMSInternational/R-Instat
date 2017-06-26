@@ -1,5 +1,5 @@
 # Necessary packages for the Instat Object
-packs_lib <- c("reshape2", "lubridate","plyr", "dplyr", "rtf", "openxlsx", "ggplot2", "extRemes", "GGally", "agridat", "DAAG", "FactoMineR", "plotrix", "candisc", "R6", "openair", "circular", "survival", "Evapotranspiration", "clifro", "devtools", "factoextra", "circlize", "CircStats", "gridExtra", "ggfortify", "rio", "readxl", "lme4", "dummies", "ggthemes", "lazyeval", "stringr", "httr", "jsonlite", "fitdistrplus", "visreg", "climdex.pcic", "mosaic", "ncdf4", "getPass", "RMySQL", "DBI", "EnvStats", "signmedian.test", "sjPlot", "sjmisc", "plotly", "svglite", "htmlTable", "rje")
+packs_lib <- c("reshape2", "lubridate","plyr", "dplyr", "rtf", "openxlsx", "ggplot2", "extRemes", "GGally", "agridat", "DAAG", "FactoMineR", "plotrix", "candisc", "R6", "openair", "circular", "survival", "Evapotranspiration", "clifro", "devtools", "factoextra", "circlize", "CircStats", "gridExtra", "ggfortify", "rio", "readxl", "lme4", "dummies", "ggthemes", "lazyeval", "stringr", "httr", "jsonlite", "fitdistrplus", "visreg", "climdex.pcic", "mosaic", "ncdf4", "getPass", "RMySQL", "DBI", "EnvStats", "signmedian.test", "sjPlot", "sjmisc", "plotly", "svglite", "htmlTable", "rje", "tidyr")
 # Packages including dependencies (generated from miniCRAN package)
 packs <- c("abind", "agridat", "arm", "assertthat", "backports", 
            "base64enc", "BH", "bindr", "bindrcpp", "bitops", "blme", "boot", 
@@ -67,10 +67,10 @@ versions <- c("1.4-5", "1.12", "1.9-3", "0.2.0", "1.1.0", "0.1-3",
               "0.3-2", "1.0.2", "3.98-1.7", "1.8-2", "2.1.14", "1.8-0")
 
 success <- invisible(mapply(function(p, v) length(find.package(p, quiet = TRUE)) > 0 && compareVersion(as.character(packageVersion(p)), v) >= 0, packs, versions))
-print(success)
 if(!all(success)) install.packages(names(success)[!success], repos = paste0("file:///", getwd(), "/extras"), type = "win.binary")
 
-for(pack in c("plyr", "dplyr", "ggplot2", "svglite")) {
+# ggthemes temp added because themes list doesn't contain package names
+for(pack in c("plyr", "dplyr", "ggplot2", "ggthemes", "svglite")) {
  library(pack, character.only = TRUE)
 }
 
