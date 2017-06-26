@@ -46,10 +46,10 @@ Public Class dlgFitModel
         ucrReceiverResponseVar.Selector = ucrSelectorByDataFrameAddRemoveForFitModel
         ucrReceiverResponseVar.SetMeAsReceiver()
         ucrModelName.SetValidationTypeAsRVariable()
-        sdgSimpleRegOptions.SetRModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
+        'sdgSimpleRegOptions.SetRModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
         ucrInputModelPreview.IsReadOnly = True
         sdgSimpleRegOptions.SetRDataFrame(ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames)
-        sdgSimpleRegOptions.SetRYVariable(ucrReceiverResponseVar)
+        'sdgSimpleRegOptions.SetRYVariable(ucrReceiverResponseVar)
         'sdgVariableTransformations.SetRYVariable(ucrReceiverResponseVar)
         'sdgVariableTransformations.SetRModelOperator(clsModel)
         'sdgModelOptions.SetRCIFunction(clsRCIFunction)
@@ -66,12 +66,12 @@ Public Class dlgFitModel
         chkConvertToVariate.Checked = False
         chkConvertToVariate.Visible = False
         ucrModelName.SetName("reg")
-        sdgSimpleRegOptions.SetDefaults()
+        'sdgSimpleRegOptions.SetDefaults()
         sdgModelOptions.SetDefaults()
         ResponseConvert()
-        sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
+        ' sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
         sdgSimpleRegOptions.lblDisplayCLevel.Enabled = True
-        sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
+        'sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
         TestOKEnabled()
     End Sub
 

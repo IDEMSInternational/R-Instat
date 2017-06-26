@@ -174,13 +174,13 @@ Public Class dlgFitCorruptionModel
     End Sub
 
     Private Sub LoadSubdialog()
-        sdgSimpleRegOptions.SetRModelFunction(clsCorruptionModel)
+        'sdgSimpleRegOptions.SetRModelFunction(clsCorruptionModel)
         sdgSimpleRegOptions.SetRDataFrame(ucrSelectorFitModel.ucrAvailableDataFrames)
-        sdgSimpleRegOptions.SetRYVariable(ucrReceiverOutput)
-        sdgSimpleRegOptions.SetDefaults()
-        sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
+        ' sdgSimpleRegOptions.SetRYVariable(ucrReceiverOutput)
+        ' sdgSimpleRegOptions.SetDefaults()
+        ' sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
         sdgSimpleRegOptions.lblDisplayCLevel.Enabled = True
-        sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
+        ' sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
     End Sub
 
     Private Sub ucrReceiverOutput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOutput.ControlValueChanged, ucrReceiverControlVariables.ControlValueChanged, ucrReceiverIndicators.ControlValueChanged
