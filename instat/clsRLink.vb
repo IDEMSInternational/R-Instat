@@ -564,12 +564,12 @@ Public Class RLink
                                                         evtWaitHandleDelayDone.Set()
                                                     End Sub)
                     thrWaitDisplay = New Threading.Thread(Sub()
-                                                              'frmWaiting.Show()
+                                                              frmSetupLoading.Show()
                                                               While thrRScript.IsAlive
                                                                   Threading.Thread.Sleep(5)
                                                                   Application.DoEvents()
                                                               End While
-                                                              'frmWaiting.Hide()
+                                                              frmSetupLoading.Hide()
                                                               evtWaitHandleWaitDisplayDone.Set()
                                                           End Sub)
                     thrRScript.Start()
