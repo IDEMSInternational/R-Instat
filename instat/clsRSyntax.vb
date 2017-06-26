@@ -14,9 +14,8 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
 Public Class RSyntax
-    'RSyntax is intended to store all the R-commands that are raised by the activity of a dialogue. 
+    'RSyntax is intended to store all the R-commands that are raised by the activity of a dialog. 
     'So far, it consists in a main R-command (Base), that takes the form of: 
     '- an "RFunction", dealing with R-commands of the form __(__=__, __=__, ...), 
     '- "ROperator", dealing with R-commands of the form: __+__, 
@@ -28,6 +27,10 @@ Public Class RSyntax
     Public clsBaseCommandString As New RCodeStructure
     Public strCommandString As String = ""
 
+    'Lists of code structures which run before/after the the base code
+    Public lstBeforeCodes As New List(Of RCodeStructure)
+    Public lstAfterCodes As New List(Of RCodeStructure)
+
     Public bUseBaseFunction As Boolean = False
     Public bUseBaseOperator As Boolean = False
     Public bUseCommandString As Boolean = False
@@ -37,6 +40,8 @@ Public Class RSyntax
     Public strScript As String
     Public i As Integer
     Public bExcludeAssignedFunctionOutput As Boolean = True
+
+    Public bSeparateThread As Boolean = True
 
     Public Sub SetFunction(strFunctionName As String)
         'Warning: confusing name
@@ -57,14 +62,17 @@ Public Class RSyntax
         End If
     End Sub
 
+    'Both SetFunction and SetBaseRFunction set the Base R-command to the RFunction type, 
+    'and set the clsBaseFunction by giving respectively the desired RFunction as parameter, or the R-command that characterizes the desired RFunction as parameter.
     Public Sub SetBaseRFunction(clsFunction As RFunction)
         clsBaseFunction = clsFunction
         bUseBaseFunction = True
         bUseBaseOperator = False
         bUseCommandString = False
     End Sub
-    'Both SetFunction and SetBaseRFunction set the Base R-command to the RFunction type, 
-    'and set the clsBaseFunction by giving respectively the desired RFunction as parameter, or the R-command that characterizes the desired RFunction as parameter.
+
+    'Similarly, both SetBaseROperator and SetOperation set the Base R-command to the ROperator type, 
+    'and set the clsBaseOperator by giving respectively the desired ROperator itself as parameter, or the desired R-command that characterize the desired ROperator as parameters.
     Public Sub SetBaseROperator(clsOperator As ROperator)
         clsBaseOperator = clsOperator
         bUseBaseFunction = False
@@ -78,15 +86,14 @@ Public Class RSyntax
         bUseBaseOperator = True
         bUseCommandString = False
     End Sub
-    'Similarly, both SetBaseROperator and SetOperation set the Base R-command to the ROperator type, 
-    'and set the clsBaseOperator by giving respectively the desired ROperator itself as parameter, or the desired R-command that characterize the desired ROperator as parameters.
+
+    'In the string case, the class used for the Base R-command is simply a string...
     Public Sub SetCommandString(strCommand As String)
         strCommandString = strCommand
         bUseBaseFunction = False
         bUseBaseOperator = False
         bUseCommandString = True
     End Sub
-    'In the string case, the class used for the Base R-command is simply a string...
 
     Public Sub SetAssignTo(strAssignToName As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional strTempGraph As String = "", Optional bAssignToIsPrefix As Boolean = False, Optional bAssignToColumnWithoutNames As Boolean = False, Optional bInsertColumnBefore As Boolean = False)
         If bUseBaseOperator Then
@@ -168,13 +175,11 @@ Public Class RSyntax
     End Sub
 
     Public Function GetScript() As String
-
         Dim strTemp As String = ""
 
         If bUseBaseFunction Then
             strTemp = clsBaseFunction.ToScript(strScript)
-        End If
-        If bUseBaseOperator Then
+        ElseIf bUseBaseOperator Then
             strTemp = clsBaseOperator.ToScript(strScript)
         ElseIf bUseCommandString Then
             strTemp = clsBaseCommandString.ToScript(strScript, strCommandString)
@@ -186,6 +191,79 @@ Public Class RSyntax
             End If
         End If
         Return strScript & strTemp
+    End Function
+
+    Private Function GetScriptsFromCodeList(lstCodes As List(Of RCodeStructure)) As List(Of String)
+        Dim strScript As String = ""
+        Dim strTemp As String = ""
+        Dim lstScripts As New List(Of String)
+
+        For Each clsTempCode In lstCodes
+            strTemp = clsTempCode.ToScript(strScript)
+            'Sometimes the output of the R-command we deal with should not be part of the script... That's only the case when this output has already been assigned.
+            If clsTempCode.bExcludeAssignedFunctionOutput AndAlso clsTempCode.bIsAssigned Then
+                lstScripts.Add(strScript)
+            Else
+                lstScripts.Add(strScript & strTemp)
+            End If
+        Next
+        Return lstScripts
+    End Function
+
+    Public Function GetBeforeCodesScripts() As List(Of String)
+        lstBeforeCodes.Sort(AddressOf CompareCodePositions)
+        Return GetScriptsFromCodeList(lstBeforeCodes)
+    End Function
+
+    Public Function GetBeforeCodes() As List(Of RCodeStructure)
+        lstBeforeCodes.Sort(AddressOf CompareCodePositions)
+        Return lstBeforeCodes
+    End Function
+
+    Public Function GetAfterCodesScripts() As List(Of String)
+        lstAfterCodes.Sort(AddressOf CompareCodePositions)
+        Return GetScriptsFromCodeList(lstAfterCodes)
+    End Function
+
+    Public Function GetAfterCodes() As List(Of RCodeStructure)
+        lstAfterCodes.Sort(AddressOf CompareCodePositions)
+        Return lstAfterCodes
+    End Function
+
+    Public Sub GetAllAssignTo(lstCodes As List(Of RCodeStructure), lstValues As List(Of String))
+        If bUseBaseFunction Then
+            clsBaseFunction.GetAllAssignTo(lstCodes, lstValues)
+        ElseIf bUseBaseOperator Then
+            clsBaseOperator.GetAllAssignTo(lstCodes, lstValues)
+        ElseIf bUseCommandString Then
+            clsBaseCommandString.GetAllAssignTo(lstCodes, lstValues)
+        End If
+        lstBeforeCodes.Sort(AddressOf CompareCodePositions)
+        For Each clsTempCode As RCodeStructure In lstBeforeCodes
+            clsTempCode.GetAllAssignTo(lstCodes, lstValues)
+        Next
+        lstAfterCodes.Sort(AddressOf CompareCodePositions)
+        For Each clsTempCode As RCodeStructure In lstAfterCodes
+            clsTempCode.GetAllAssignTo(lstCodes, lstValues)
+        Next
+    End Sub
+
+    Public Sub SortParameters()
+        'This sub is used to reorder the parameters according to their Position property.
+        'It will be called only in places where it is necessary ie before ToScript or RemoveAdditionalParameters in ROperator.
+    End Sub
+
+    Private Function CompareCodePositions(ByVal clsMain As RCodeStructure, ByVal clsRelative As RCodeStructure) As Integer
+        'Compares two RParameters according to their Position property. If x is "smaller" than y, then return -1, if they are "equal" return 0 else return 1.
+        If clsMain.iPosition = clsRelative.iPosition Then
+            Return 0
+        ElseIf clsRelative.iPosition = -1 Then
+            Return -1
+        ElseIf clsMain.iPosition = -1 Then
+            Return 1
+        Else
+            Return clsMain.iPosition.CompareTo(clsRelative.iPosition)
+        End If
     End Function
 
     Public Function GetbIsAssigned() As Boolean
@@ -298,5 +376,89 @@ Public Class RSyntax
         ElseIf bUseCommandString Then
             clsBaseCommandString.strAssignToDataFrame = strNew
         End If
+    End Sub
+
+    Public Function BeforeCodesContain(clsNewRCode As RCodeStructure) As Boolean
+        Return lstBeforeCodes.Contains(clsNewRCode)
+    End Function
+
+    Public Function AfterCodesContain(clsNewRCode As RCodeStructure) As Boolean
+        Return lstAfterCodes.Contains(clsNewRCode)
+    End Function
+
+    Public Function BeforeCodesContain(strFunctionName As String) As Boolean
+        Dim clsTempFunc As RFunction
+        For Each clsRCode As RCodeStructure In lstBeforeCodes
+            clsTempFunc = TryCast(clsRCode, RFunction)
+            If clsTempFunc IsNot Nothing AndAlso clsTempFunc.strRCommand = strFunctionName Then
+                Return True
+            End If
+        Next
+        Return False
+    End Function
+
+    Public Function AfterCodesContain(strFunctionName As String) As Boolean
+        Dim clsTempFunc As RFunction
+        For Each clsRCode As RCodeStructure In lstBeforeCodes
+            clsTempFunc = TryCast(clsRCode, RFunction)
+            If clsTempFunc IsNot Nothing AndAlso clsTempFunc.strRCommand = strFunctionName Then
+                Return True
+            End If
+        Next
+        Return False
+    End Function
+
+    Public Function ContainsCode(clsRCode As RCodeStructure) As Boolean
+        Return (clsBaseFunction IsNot Nothing AndAlso clsBaseFunction.Equals(clsRCode)) OrElse (clsBaseOperator.Equals(clsRCode) AndAlso clsBaseOperator.Equals(clsRCode)) OrElse BeforeCodesContain(clsRCode) OrElse AfterCodesContain(clsRCode)
+    End Function
+
+    Public Function ContainsFunctionName(strFunctionName As String) As Boolean
+        Return (clsBaseFunction IsNot Nothing AndAlso clsBaseFunction.strRCommand = strFunctionName) OrElse BeforeCodesContain(strFunctionName) OrElse AfterCodesContain(strFunctionName)
+    End Function
+
+    Public Function GetFunctionNames() As List(Of String)
+        Dim lstNames As New List(Of String)
+        Dim clsTempFunc As RFunction
+
+        If clsBaseFunction IsNot Nothing Then
+            lstNames.Add(clsBaseFunction.strRCommand)
+        End If
+        For Each clsRCode As RCodeStructure In lstBeforeCodes
+            clsTempFunc = TryCast(clsRCode, RFunction)
+            If clsTempFunc IsNot Nothing Then
+                lstNames.Add(clsTempFunc.strRCommand)
+            End If
+        Next
+        For Each clsRCode As RCodeStructure In lstAfterCodes
+            clsTempFunc = TryCast(clsRCode, RFunction)
+            If clsTempFunc IsNot Nothing Then
+                lstNames.Add(clsTempFunc.strRCommand)
+            End If
+        Next
+        Return lstNames
+    End Function
+
+    Public Sub AddToBeforeCodes(clsNewRCode As RCodeStructure, Optional iPosition As Integer = -1)
+        If Not BeforeCodesContain(clsNewRCode) Then
+            lstBeforeCodes.Add(clsNewRCode)
+        End If
+        lstBeforeCodes.Find(Function(x) x.Equals(clsNewRCode)).iPosition = iPosition
+    End Sub
+
+    Public Sub AddToAfterCodes(clsNewRCode As RCodeStructure, Optional iPosition As Integer = -1)
+        If Not AfterCodesContain(clsNewRCode) Then
+            lstAfterCodes.Add(clsNewRCode)
+            clsNewRCode.iPosition = iPosition
+        Else
+            lstAfterCodes.Find(Function(x) x.Equals(clsNewRCode)).iPosition = iPosition
+        End If
+    End Sub
+
+    Public Sub RemoveFromBeforeCodes(clsNewRCode As RCodeStructure)
+        lstBeforeCodes.Remove(clsNewRCode)
+    End Sub
+
+    Public Sub RemoveFromAfterCodes(clsNewRCode As RCodeStructure)
+        lstAfterCodes.Remove(clsNewRCode)
     End Sub
 End Class

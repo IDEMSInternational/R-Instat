@@ -63,6 +63,7 @@ Public Class dlgCumulativeDistribution
         ucrFactorReceiver.SetParameter(New RParameter("colour", 1))
         ucrFactorReceiver.Selector = ucrCumDistSelector
         ucrFactorReceiver.SetIncludedDataTypes({"factor"})
+        ucrFactorReceiver.strSelectorHeading = "Factors"
         ucrFactorReceiver.SetParameterIsString()
         ucrFactorReceiver.bWithQuotes = False
 
@@ -70,6 +71,7 @@ Public Class dlgCumulativeDistribution
         ucrVariablesAsFactorforCumDist.SetFactorReceiver(ucrFactorReceiver)
         ucrVariablesAsFactorforCumDist.Selector = ucrCumDistSelector
         ucrVariablesAsFactorforCumDist.SetIncludedDataTypes({"numeric"})
+        ucrVariablesAsFactorforCumDist.strSelectorHeading = "Numerics"
         ucrVariablesAsFactorforCumDist.SetParameterIsString()
         ucrVariablesAsFactorforCumDist.bWithQuotes = False
 
