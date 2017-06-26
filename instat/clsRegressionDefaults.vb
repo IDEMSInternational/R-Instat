@@ -1,5 +1,5 @@
 ﻿Public Class clsRegressionDefaults
-    Public Shared ReadOnly Property clsDefaultRLmOrGLM As RFunction
+    Public Shared ReadOnly Property clsDefaultRLmFunction As RFunction
         Get
 
             Dim clsRModelFunction As New RFunction
@@ -104,50 +104,12 @@
         End Get
     End Property
 
-    Public Shared ReadOnly Property clsDefaultFitted As RFunction
+    Public Shared ReadOnly Property clsDefaultAddColumnsToData As RFunction
         Get
-            Dim clsRFittedValues As New RFunction
-            Dim clsRWriteFitted, clsRModelFunction As New RFunction
+            Dim clsDefaultAddColumnsToDataFunction As New RFunction
 
-            clsRWriteFitted.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
-            Return clsRWriteFitted
-        End Get
-    End Property
-
-
-    Public Shared ReadOnly Property clsDefaultRWriteFitted As RFunction
-        Get
-            Dim clsDefaultRWriteFittedFunction As New RFunction
-
-            clsDefaultRWriteFittedFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
-            Return clsDefaultRWriteFittedFunction
-        End Get
-    End Property
-
-    Public Shared ReadOnly Property clsDefaultRWriteResiduals As RFunction
-        Get
-            Dim clsDefaultRWriteResidualsFunc As New RFunction
-
-            clsDefaultRWriteResidualsFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
-            Return clsDefaultRWriteResidualsFunc
-        End Get
-    End Property
-
-    Public Shared ReadOnly Property clsDefaultRWriteStdResiduals As RFunction
-        Get
-            Dim clsDefaultRWriteStdResidualsFunc As New RFunction
-
-            clsDefaultRWriteStdResidualsFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
-            Return clsDefaultRWriteStdResidualsFunc
-        End Get
-    End Property
-
-    Public Shared ReadOnly Property clsDefaultRWriteLeverage As RFunction
-        Get
-            Dim clsDefaultRWriteLeverageFunc As New RFunction
-
-            clsDefaultRWriteLeverageFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
-            Return clsDefaultRWriteLeverageFunc
+            clsDefaultAddColumnsToDataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
+            Return clsDefaultAddColumnsToDataFunction
         End Get
     End Property
 

@@ -36,7 +36,7 @@ Public Class dlgThreeVariableModelling
 
     Private Sub InitialiseDialog()
         'Temporary fix: function autoplot does not support glm/lm models
-        sdgSimpleRegOptions.chkMultiplePlots.Enabled = False
+        'sdgSimpleRegOptions.chkMultiplePlots.Enabled = False
         ucrBaseThreeVariableModelling.clsRsyntax.iCallType = 2
         ucrBaseThreeVariableModelling.clsRsyntax.SetFunction("")
         ucrBaseThreeVariableModelling.iHelpTopicID = 369
@@ -53,10 +53,10 @@ Public Class dlgThreeVariableModelling
         ucrModelName.SetItemsTypeAsModels()
         ucrModelName.SetDefaultTypeAsModel()
         ucrModelPreview.IsReadOnly = True
-        sdgSimpleRegOptions.SetRModelFunction(ucrBaseThreeVariableModelling.clsRsyntax.clsBaseFunction)
+        'sdgSimpleRegOptions.SetRModelFunction(ucrBaseThreeVariableModelling.clsRsyntax.clsBaseFunction)
         sdgSimpleRegOptions.SetRDataFrame(ucrSelectorThreeVariableModelling.ucrAvailableDataFrames)
-        sdgSimpleRegOptions.SetRYVariable(ucrResponse)
-        sdgSimpleRegOptions.SetRXVariable(ucrFirstExplanatory)
+        ' sdgSimpleRegOptions.SetRYVariable(ucrResponse)
+        'sdgSimpleRegOptions.SetRXVariable(ucrFirstExplanatory)
         'sdgVariableTransformations.SetRYVariable(ucrResponse)
         'sdgVariableTransformations.SetRModelOperator(clsModel1)
         'sdgModelOptions.SetRCIFunction(clsRCIFunction)
@@ -85,15 +85,15 @@ Public Class dlgThreeVariableModelling
         chkFirstFunction.Visible = False
         chkSecondFunction.Checked = False
         chkSecondFunction.Visible = False
-        sdgSimpleRegOptions.SetDefaults()
+        'sdgSimpleRegOptions.SetDefaults()
         sdgModelOptions.SetDefaults()
         ucrModelName.Reset()
         ucrModelPreview.Reset()
         ResponseConvert()
         ModelOperator()
-        sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
+        'sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
         sdgSimpleRegOptions.lblDisplayCLevel.Enabled = True
-        sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
+        '' sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
         TestOKEnabled()
     End Sub
 

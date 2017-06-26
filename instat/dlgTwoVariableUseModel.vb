@@ -43,9 +43,9 @@ Public Class dlgTwoVariableUseModel
 
     Private Sub InitialiseDialog()
         'Temporary fix: Bugs if you run the dialogue the second time
-        sdgSimpleRegOptions.chkFittedModel.Enabled = False
+        ' sdgSimpleRegOptions.chkFittedModel.Enabled = False
         'autoplot function does not support glm/lm models
-        sdgSimpleRegOptions.chkFittedModel.Enabled = False
+        '  sdgSimpleRegOptions.chkFittedModel.Enabled = False
         'ucrBase.iHelpTopicID = 
         ucrBaseUseModel.clsRsyntax.SetOperation("+")
         ucrReceiverUseModel.SetItemType("model")
@@ -53,7 +53,7 @@ Public Class dlgTwoVariableUseModel
         clsRCommand.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_models")
         ucrBaseUseModel.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRCommand)
         ucrModel.IsReadOnly = True
-        sdgSimpleRegOptions.SetRModelFunction(clsRCommand)
+        ' sdgSimpleRegOptions.SetRModelFunction(clsRCommand)
         sdgSimpleRegOptions.SetRDataFrame(ucrSelectorUseModel.ucrAvailableDataFrames)
         ucrReceiverUseModel.strSelectorHeading = "Models"
     End Sub
