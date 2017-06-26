@@ -97,24 +97,43 @@ Public Class ROperator
         OnParametersChanged()
     End Sub
 
+    Public Overrides Sub Clear()
+        SetOperation("")
+        bForceIncludeOperation = False
+        MyBase.Clear()
+    End Sub
+
     Public Overrides Function Clone() As RCodeStructure
         Dim clsTempROperator As New ROperator
+        Dim clsRParam As RParameter
 
-        clsTempROperator.strOperation = strOperation
-        clsTempROperator.bBrackets = bBrackets
+        'RCode properties
         clsTempROperator.strAssignTo = strAssignTo
         clsTempROperator.strAssignToDataFrame = strAssignToDataFrame
         clsTempROperator.strAssignToColumn = strAssignToColumn
         clsTempROperator.strAssignToModel = strAssignToModel
         clsTempROperator.strAssignToGraph = strAssignToGraph
+        clsTempROperator.strAssignToTable = strAssignToTable
         clsTempROperator.bToBeAssigned = bToBeAssigned
         clsTempROperator.bIsAssigned = bIsAssigned
-        clsTempROperator.bForceIncludeOperation = bForceIncludeOperation
         clsTempROperator.bAssignToIsPrefix = bAssignToIsPrefix
-
-        For Each clsParam As RParameter In MyBase.clsParameters
-            clsTempROperator.AddParameter(clsParam.Clone)
+        clsTempROperator.bAssignToColumnWithoutNames = bAssignToColumnWithoutNames
+        clsTempROperator.bInsertColumnBefore = bInsertColumnBefore
+        clsTempROperator.iNumberOfAddedParameters = iNumberOfAddedParameters
+        clsTempROperator.iPosition = iPosition
+        clsTempROperator.iCallType = iCallType
+        clsTempROperator.bExcludeAssignedFunctionOutput = bExcludeAssignedFunctionOutput
+        clsTempROperator.bClearFromGlobal = bClearFromGlobal
+        clsTempROperator.bToScriptAsRString = bToScriptAsRString
+        For Each clsRParam In clsParameters
+            clsTempROperator.AddParameter(clsRParam.Clone)
         Next
+
+        'ROperator specific properties
+        clsTempROperator.bForceIncludeOperation = bForceIncludeOperation
+        clsTempROperator.strOperation = strOperation
+        clsTempROperator.bBrackets = bBrackets
+
         Return clsTempROperator
     End Function
 End Class

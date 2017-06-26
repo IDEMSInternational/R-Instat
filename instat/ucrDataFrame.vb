@@ -172,12 +172,12 @@ Public Class ucrDataFrame
         Clipboard.SetText(cboAvailableDataFrames.SelectedText)
     End Sub
 
-    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
+    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
         Dim clsTempDataParameter As RParameter
         Dim strDataFrameName As String = ""
         Dim clsMainParameter As RParameter
 
-        MyBase.UpdateControl()
+        MyBase.UpdateControl(bReset:=bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
         clsMainParameter = GetParameter()
         If clsMainParameter IsNot Nothing Then
@@ -219,5 +219,9 @@ Public Class ucrDataFrame
         If frmMain.clsInstatOptions.bChangeDataFrame Then
             frmMain.SetCurrentDataFrame(cboAvailableDataFrames.Text)
         End If
+    End Sub
+
+    Public Sub SetLabelText(strText As String)
+        lblDataFrame.Text = strText
     End Sub
 End Class

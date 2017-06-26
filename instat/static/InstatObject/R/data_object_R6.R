@@ -107,6 +107,9 @@ data_object$set("public", "set_data", function(new_data, messages=TRUE, check_na
     ind <- zoo::index(new_data)
     new_data <- data.frame(index = ind, value = new_data)
   }
+  else if(is.array(new_data)) {
+    new_data <- as.data.frame(new_data)
+  }
   else if(is.vector(new_data) && !is.list(new_data)) {
     new_data <- as.data.frame(new_data)
   }
@@ -1070,17 +1073,19 @@ data_object$set("public", "convert_column_to_type", function(col_names = c(), to
       else stop("If specified, 'factor_values' must be either 'force_ordinals' or 'force_values'")
     }
     else if(to_type %in% c("factor", "ordered_factor")) {
-      ordered <- (to_type == "ordered_factor")
+      make_ordered <- (to_type == "ordered_factor")
       if(set_decimals) curr_col <- round(curr_col, digits = set_digits)
       if(ignore_labels) {
-        new_col <- factor(curr_col, ordered = ordered)
+        new_col <- factor(curr_col, ordered = make_ordered)
       }
       else {
         if(self$is_variables_metadata(labels_label, col_name)) {
           new_col <- sjmisc::to_label(curr_col, add.non.labelled = TRUE)
+          #TODO work out how to do ordered correctly
+		  #if(make_ordered) new_col <- ordered(new_col)
         }
         else {
-          new_col <- factor(curr_col, ordered = ordered)
+          new_col <- factor(curr_col, ordered = make_ordered)
           if(is.numeric(curr_col) && !self$is_variables_metadata(labels_label, col_name)) {
             labs <- sort(unique(curr_col))
             names(labs) <- labs
@@ -1181,9 +1186,9 @@ data_object$set("public", "set_factor_levels", function(col_name, new_labels, ne
   }
   else if(set_new_labels && self$is_variables_metadata(labels_label, col_name)) {
     labels_list <- self$get_variables_metadata(property = labels_label, column = col_name, direct_from_attributes = TRUE)
-    names(labels_list) <- as.character(new_labels[1:length(old_levels)])
+    names(labels_list) <- as.character(new_labels[1:length(old_labels)])
     if(length(new_labels) > length(old_lables)) {
-      extra_labels <- seq(from = max(labels_list) + 1, length.out = (length(new_labels) - length(old_levels)))
+      extra_labels <- seq(from = max(labels_list) + 1, length.out = (length(new_labels) - length(old_labels)))
       names(extra_labels) <- new_labels[!new_labels %in% names(labels_list)]
       labels_list <- c(labels_list, extra_labels)
     }
