@@ -20,6 +20,7 @@ Public Class dlgCanonicalCorrelationAnalysis
     Public bFirstLoad As Boolean = True
     Private bResetSubdialog As Boolean = False
     Private bReset As Boolean = True
+    Private clsRCanCorFunction, clsRCoefFunction, clsRGraphicsFunction As New RFunction
 
     Private Sub dlgCanonicalCorrelationAnalysis_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -46,7 +47,6 @@ Public Class dlgCanonicalCorrelationAnalysis
         'cmdCCAOptions.Enabled = False
 
         ' note: canne have the same variables in both receivers.
-
         ' Y Variable Selector
         ucrReceiverYvariables.SetParameter(New RParameter("y", 0))
         ucrReceiverYvariables.SetParameterIsRFunction()
@@ -77,6 +77,10 @@ Public Class dlgCanonicalCorrelationAnalysis
 
     Private Sub SetDefaults()
         Dim clsDefaultFunction As New RFunction
+        clsRGraphicsFunction = New RFunction
+        clsRCanCorFunction = New RFunction
+        clsRCoefFunction = New RFunction
+
         ucrSelectorCCA.Reset()
         ucrSaveResult.Reset()
         ucrReceiverXvariables.SetMeAsReceiver()
@@ -84,6 +88,21 @@ Public Class dlgCanonicalCorrelationAnalysis
         'Define the default RFunction
         clsDefaultFunction.SetRCommand("cancor")
         clsDefaultFunction.SetAssignTo("last_CCA", strTempModel:="last_CCA", strTempDataframe:=ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
+        'sdg functions
+        'clsRCanCorFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+        'clsRCoefFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+        clsRGraphicsFunction.SetPackageName("GGally")
+        clsRGraphicsFunction.SetRCommand("ggpairs")
+
+        clsRCanCorFunction.AddParameter("data_name", Chr(34) & ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+        clsRCanCorFunction.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
+        clsRCanCorFunction.AddParameter("value1", Chr(34) & "cancor" & Chr(34))
+        'frmMain.clsRLink.RunScript(clsRCanCorFunction.ToScript(), 2)
+
+        clsRCoefFunction.AddParameter("data_name", Chr(34) & ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+        clsRCoefFunction.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
+        clsRCoefFunction.AddParameter("value1", Chr(34) & "coef" & Chr(34))
+        'frmMain.clsRLink.RunScript(clsRCoefFunction.ToScript(), 2)
 
         ' Set default RFunction as the base function
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
@@ -105,7 +124,7 @@ Public Class dlgCanonicalCorrelationAnalysis
     End Sub
 
     Private Sub cmdCCAOptions_Click(sender As Object, e As EventArgs) Handles cmdCCAOptions.Click
-        '        sdgCanonicalCorrelation.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, bResetSubdialog)
+        sdgCanonicalCorrelation.SetRFunction(ucrBase.clsRsyntax, clsRCanCorFunction, clsRCoefFunction, clsRGraphicsFunction, bResetSubdialog)
         bResetSubdialog = False
         sdgCanonicalCorrelation.ShowDialog()
     End Sub
