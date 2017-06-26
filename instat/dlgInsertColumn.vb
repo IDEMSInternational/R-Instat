@@ -75,6 +75,7 @@ Public Class dlgInsertColumn
         ucrPnlInsertColumns.AddRadioButton(rdoAtStart, "TRUE")
         ucrPnlInsertColumns.AddRadioButton(rdoAtEnd, "FALSE")
         ucrPnlInsertColumns.AddRadioButton(rdoBeforeAfter, "TRUE")
+        ucrPnlInsertColumns.SetRDefault("FALSE")
 
         ucrNudNumberOfColumns.SetParameter(New RParameter("num_cols", 4))
         ucrNudNumberOfColumns.SetRDefault(1)
@@ -86,9 +87,7 @@ Public Class dlgInsertColumn
         ucrPnlInsertColumns.AddParameterValuesCondition(rdoAtStart, "before", "TRUE")
         ucrPnlInsertColumns.AddParameterValuesCondition(rdoAtEnd, "before", "FALSE")
         ucrPnlInsertColumns.AddParameterPresentCondition(rdoBeforeAfter, "adjacent_column")
-        ucrPnlInsertColumns.SetRDefault("FALSE")
-        'temp fix
-        ucrPnlInsertColumns.bAllowNonConditionValues = True
+
         ucrPnlInsertColumns.AddToLinkedControls(ucrInputBeforeAfter, {rdoBeforeAfter}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlInsertColumns.AddToLinkedControls(ucrReceiverColumnsToInsert, {rdoBeforeAfter}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlColumnsOrRows.AddToLinkedControls(ucrPnlInsertColumns, {rdoInsertColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
