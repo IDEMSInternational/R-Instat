@@ -14,14 +14,17 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Imports RDotNet
+
 Public Class dlgRegularSequence
     Dim bIsExtended As Boolean = False
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsSeqFunction, clsRepFunction As New RFunction
     Private bUpdateBy As Boolean = False
+
     Private Sub dlgRegularSequence_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -99,24 +102,44 @@ Public Class dlgRegularSequence
         clsSeqFunction.AddParameter("to", ucrSelectDataFrameRegularSequence.iDataFrameLength)
         clsSeqFunction.AddParameter("by", 1)
 
-
         clsRepFunction.SetRCommand("rep")
         clsRepFunction.AddParameter("x", clsRFunctionParameter:=clsSeqFunction)
         clsRepFunction.AddParameter("each", 1)
         clsRepFunction.AddParameter("length.out", ucrSelectDataFrameRegularSequence.iDataFrameLength, iPosition:=3)
+
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnName.GetText, strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText)
         ucrBase.clsRsyntax.SetBaseRFunction(clsRepFunction)
-        CheckSequenceLength()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        Dim strBy As String
+        Dim dcmBy As Decimal
+
         bUpdateBy = False
+        'Set to base function so that control is set correctly
+        'After then set to nothing so that updating is done manually
         ucrNewColumnName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrNewColumnName.SetRCode(Nothing, bReset:=False, bUpdate:=False)
         ucrPnlSequenceType.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrInputFrom.SetRCode(clsSeqFunction, bReset)
         ucrInputTo.SetRCode(clsSeqFunction, bReset)
         ucrNudRepeatValues.SetRCode(clsRepFunction, bReset)
+        If clsSeqFunction.ContainsParameter("by") Then
+            strBy = clsSeqFunction.GetParameter("by").strArgumentValue
+            If strBy IsNot Nothing Then
+                If Decimal.TryParse(strBy, dcmBy) Then
+                    ucrInputInStepsOf.SetName(Math.Abs(dcmBy))
+                Else
+                    ucrInputInStepsOf.SetName("")
+                End If
+            Else
+                ucrInputInStepsOf.SetName("")
+            End If
+        Else
+            ucrInputInStepsOf.SetName("")
+        End If
         bUpdateBy = True
+        CheckSequenceLength()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -144,12 +167,21 @@ Public Class dlgRegularSequence
     End Sub
 
     Private Sub SetInStepsOfParameter()
+        Dim dcmTo As Decimal
+        Dim dcmFrom As Decimal
+
         If Not ucrInputTo.IsEmpty AndAlso Not ucrInputFrom.IsEmpty Then
-            If Convert.ToDecimal(ucrInputTo.GetText) >= Convert.ToDecimal(ucrInputFrom.GetText) Then
-                clsSeqFunction.AddParameter("by", ucrInputInStepsOf.GetText)
+            If Decimal.TryParse(ucrInputTo.GetText, dcmTo) AndAlso Decimal.TryParse(ucrInputFrom.GetText, dcmFrom) Then
+                If dcmTo >= dcmFrom Then
+                    clsSeqFunction.AddParameter("by", ucrInputInStepsOf.GetText)
+                Else
+                    clsSeqFunction.AddParameter("by", "-" & ucrInputInStepsOf.GetText)
+                End If
             Else
-                clsSeqFunction.AddParameter("by", "-" & ucrInputInStepsOf.GetText)
+                clsSeqFunction.RemoveParameterByName("by")
             End If
+        Else
+            clsSeqFunction.RemoveParameterByName("by")
         End If
         CheckSequenceLength()
     End Sub
@@ -159,8 +191,9 @@ Public Class dlgRegularSequence
             ucrBase.clsRsyntax.SetBaseRFunction(clsSeqFunction)
         Else
             ucrBase.clsRsyntax.SetBaseRFunction(clsRepFunction)
+            clsSeqFunction.RemoveAssignTo()
         End If
-
+        SetAssignTo()
     End Sub
 
     'Private Sub dtpSelectorA_ValueChanged(sender As Object, e As EventArgs) Handles dtpSelectorA.ValueChanged
@@ -180,7 +213,7 @@ Public Class dlgRegularSequence
         Dim bIsAssigned As Boolean
         Dim bToBeAssigned As Boolean
 
-        txtMessage.Text = ""
+        lblMessage.Text = ""
         Try
             bIsAssigned = ucrBase.clsRsyntax.clsBaseFunction.bIsAssigned
             bToBeAssigned = ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned
@@ -199,13 +232,13 @@ Public Class dlgRegularSequence
                 vecSequence = frmMain.clsRLink.RunInternalScriptGetValue(strRCommand, bSilent:=True).AsNumeric
                 ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnName.GetText, strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText)
                 If iLength < ucrSelectDataFrameRegularSequence.iDataFrameLength Then
-                    txtMessage.Text = "Sequence extended to match" & Environment.NewLine & " the length of the data frame."
+                    lblMessage.Text = "Sequence extended to match" & Environment.NewLine & "the length of the data frame."
                 ElseIf iLength > ucrSelectDataFrameRegularSequence.iDataFrameLength Then
-                    txtMessage.Text = "Sequence truncated to match" & Environment.NewLine & " the length of the data frame."
+                    lblMessage.Text = "Sequence truncated to match" & Environment.NewLine & "the length of the data frame."
                 End If
             Else
                 clsRepFunction.RemoveParameterByName("length.out")
-                txtMessage.Text = "Sequence matches the length of the data frame."
+                lblMessage.Text = "Sequence matches the length of the data frame."
             End If
             txtGetPreview.Text = ""
             txtGetPreview.Text = String.Join(", ", vecSequence.AsCharacter())
@@ -213,33 +246,45 @@ Public Class dlgRegularSequence
             ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned = bToBeAssigned
         Catch ex As Exception
             txtGetPreview.Text = ""
-            txtMessage.Text = "No preview available."
+            lblMessage.Text = "No preview available."
         End Try
     End Sub
 
     Private Sub ucrSelectDataFrameRegularSequence_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectDataFrameRegularSequence.ControlValueChanged
         If ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text <> "" Then
             Try
-                ucrInputTo.txtInput.Text = frmMain.clsRLink.GetDataFrameLength(ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text)
+                ucrInputTo.SetName(frmMain.clsRLink.GetDataFrameLength(ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text))
             Catch ex As Exception
+                ucrInputTo.SetName("")
             End Try
         End If
-        CheckSequenceLength()
+        SetAssignTo()
     End Sub
 
-    Private Sub ucrNudRepeatValues_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudRepeatValues.ControlValueChanged
+    Private Sub ucrNudRepeatValues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudRepeatValues.ControlValueChanged
         SetBaseFunction()
         CheckSequenceLength()
-        TestOKEnabled()
     End Sub
 
-    Private Sub ucrInputFrom_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFrom.ControlContentsChanged, ucrInputTo.ControlContentsChanged, ucrInputInStepsOf.ControlContentsChanged
+    Private Sub ucrInputFrom_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFrom.ControlValueChanged, ucrInputTo.ControlValueChanged, ucrInputInStepsOf.ControlValueChanged
         If bUpdateBy Then
             SetInStepsOfParameter()
         End If
     End Sub
 
-    Private Sub ucrNewColumnName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewColumnName.ControlContentsChanged, ucrInputTo.ControlContentsChanged, ucrInputFrom.ControlContentsChanged, ucrInputInStepsOf.ControlContentsChanged, ucrPnlSequenceType.ControlContentsChanged, ucrSelectDataFrameRegularSequence.ControlContentsChanged
+    Private Sub ucrNewColumnName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewColumnName.ControlContentsChanged, ucrInputTo.ControlContentsChanged, ucrInputFrom.ControlContentsChanged, ucrInputInStepsOf.ControlContentsChanged, ucrPnlSequenceType.ControlContentsChanged, ucrSelectDataFrameRegularSequence.ControlContentsChanged, ucrInputFrom.ControlContentsChanged, ucrInputTo.ControlContentsChanged, ucrInputInStepsOf.ControlContentsChanged, ucrNudRepeatValues.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrNewColumnName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNewColumnName.ControlValueChanged
+        SetAssignTo()
+    End Sub
+
+    Private Sub SetAssignTo()
+        If ucrNewColumnName.GetText() <> "" AndAlso ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text <> "" Then
+            ucrBase.clsRsyntax.SetAssignTo(ucrNewColumnName.GetText(), strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText())
+        Else
+            ucrBase.clsRsyntax.RemoveAssignTo()
+        End If
     End Sub
 End Class
