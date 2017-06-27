@@ -114,7 +114,7 @@ Public Class ucrButtons
                 strComment = ""
             End If
             If bRun Then
-                frmMain.clsRLink.RunScript(lstBeforeScripts(i), iCallType:=lstBeforeCodes(i).iCallType, strComment:=strComment)
+                frmMain.clsRLink.RunScript(lstBeforeScripts(i), iCallType:=lstBeforeCodes(i).iCallType, strComment:=strComment, bSeparateThread:=clsRsyntax.bSeparateThread)
             Else
                 frmMain.AddToScriptWindow(lstBeforeScripts(i))
             End If
@@ -123,11 +123,12 @@ Public Class ucrButtons
         'Run base code from RSyntax
         If bRun Then
             If bFirstCode Then
-                frmMain.clsRLink.RunScript(clsRsyntax.GetScript(), clsRsyntax.iCallType, strComment:=strComments)
+                strComment = strComments
                 bFirstCode = False
             Else
-                frmMain.clsRLink.RunScript(clsRsyntax.GetScript(), clsRsyntax.iCallType, strComment:="")
+                strComment = ""
             End If
+            frmMain.clsRLink.RunScript(clsRsyntax.GetScript(), clsRsyntax.iCallType, strComment:=strComment, bSeparateThread:=clsRsyntax.bSeparateThread)
         Else
             frmMain.AddToScriptWindow(clsRsyntax.GetScript())
         End If
@@ -147,7 +148,7 @@ Public Class ucrButtons
                 Else
                     strComment = ""
                 End If
-                frmMain.clsRLink.RunScript(lstAfterScripts(i), iCallType:=lstAfterCodes(i).iCallType, strComment:=strComment)
+                frmMain.clsRLink.RunScript(lstAfterScripts(i), iCallType:=lstAfterCodes(i).iCallType, strComment:=strComment, bSeparateThread:=clsRsyntax.bSeparateThread)
             Else
                 frmMain.AddToScriptWindow(lstAfterScripts(i))
             End If
