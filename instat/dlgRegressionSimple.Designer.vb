@@ -35,6 +35,15 @@ Partial Class dlgRegressionSimple
         Me.lblNumeric = New System.Windows.Forms.Label()
         Me.lblExplanatory = New System.Windows.Forms.Label()
         Me.lblResponse = New System.Windows.Forms.Label()
+        Me.grpParameters = New System.Windows.Forms.GroupBox()
+        Me.lblDifferenceInMeans = New System.Windows.Forms.Label()
+        Me.ucrNudHypothesis = New instat.ucrNud()
+        Me.ucrNudCI = New instat.ucrNud()
+        Me.lblConfidenceInterval = New System.Windows.Forms.Label()
+        Me.ucrChkPairedTest = New instat.ucrCheck()
+        Me.rdoCompareVariance = New System.Windows.Forms.RadioButton()
+        Me.rdoCompareMeans = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlMeansAndVariance = New instat.UcrPanel()
         Me.ucrSaveModels = New instat.ucrSave()
         Me.ucrChkConvertToVariate = New instat.ucrCheck()
         Me.ucrReceiverExplanatory = New instat.ucrReceiverSingle()
@@ -45,15 +54,6 @@ Partial Class dlgRegressionSimple
         Me.ucrModelPreview = New instat.ucrInputTextBox()
         Me.ucrDistributionChoice = New instat.ucrDistributions()
         Me.ucrBase = New instat.ucrButtons()
-        Me.grpParameters = New System.Windows.Forms.GroupBox()
-        Me.lblDifferenceInMeans = New System.Windows.Forms.Label()
-        Me.ucrNudHypothesis = New instat.ucrNud()
-        Me.ucrNudCI = New instat.ucrNud()
-        Me.lblConfidenceInterval = New System.Windows.Forms.Label()
-        Me.ucrChkPairedTest = New instat.ucrCheck()
-        Me.rdoCompareVariance = New System.Windows.Forms.RadioButton()
-        Me.rdoCompareMeans = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlMeansAndVariance = New instat.UcrPanel()
         Me.grpParameters.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -187,94 +187,6 @@ Partial Class dlgRegressionSimple
         Me.lblResponse.Size = New System.Drawing.Size(100, 23)
         Me.lblResponse.TabIndex = 24
         '
-        'ucrSaveModels
-        '
-        Me.ucrSaveModels.Location = New System.Drawing.Point(9, 285)
-        Me.ucrSaveModels.Name = "ucrSaveModels"
-        Me.ucrSaveModels.Size = New System.Drawing.Size(291, 24)
-        Me.ucrSaveModels.TabIndex = 1
-        '
-        'ucrChkConvertToVariate
-        '
-        Me.ucrChkConvertToVariate.Checked = False
-        Me.ucrChkConvertToVariate.Location = New System.Drawing.Point(267, 92)
-        Me.ucrChkConvertToVariate.Name = "ucrChkConvertToVariate"
-        Me.ucrChkConvertToVariate.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkConvertToVariate.TabIndex = 4
-        '
-        'ucrReceiverExplanatory
-        '
-        Me.ucrReceiverExplanatory.frmParent = Me
-        Me.ucrReceiverExplanatory.Location = New System.Drawing.Point(267, 135)
-        Me.ucrReceiverExplanatory.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverExplanatory.Name = "ucrReceiverExplanatory"
-        Me.ucrReceiverExplanatory.Selector = Nothing
-        Me.ucrReceiverExplanatory.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverExplanatory.strNcFilePath = ""
-        Me.ucrReceiverExplanatory.TabIndex = 22
-        Me.ucrReceiverExplanatory.ucrSelector = Nothing
-        '
-        'ucrReceiverResponse
-        '
-        Me.ucrReceiverResponse.frmParent = Me
-        Me.ucrReceiverResponse.Location = New System.Drawing.Point(267, 69)
-        Me.ucrReceiverResponse.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverResponse.Name = "ucrReceiverResponse"
-        Me.ucrReceiverResponse.Selector = Nothing
-        Me.ucrReceiverResponse.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverResponse.strNcFilePath = ""
-        Me.ucrReceiverResponse.TabIndex = 4
-        Me.ucrReceiverResponse.ucrSelector = Nothing
-        '
-        'ucrSelectorSimpleReg
-        '
-        Me.ucrSelectorSimpleReg.bShowHiddenColumns = False
-        Me.ucrSelectorSimpleReg.bUseCurrentFilter = True
-        Me.ucrSelectorSimpleReg.Location = New System.Drawing.Point(10, 37)
-        Me.ucrSelectorSimpleReg.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorSimpleReg.Name = "ucrSelectorSimpleReg"
-        Me.ucrSelectorSimpleReg.Size = New System.Drawing.Size(226, 186)
-        Me.ucrSelectorSimpleReg.TabIndex = 2
-        '
-        'ucrChkFunction
-        '
-        Me.ucrChkFunction.Checked = False
-        Me.ucrChkFunction.Location = New System.Drawing.Point(489, 86)
-        Me.ucrChkFunction.Name = "ucrChkFunction"
-        Me.ucrChkFunction.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkFunction.TabIndex = 0
-        '
-        'ucrPnlModelType
-        '
-        Me.ucrPnlModelType.Location = New System.Drawing.Point(143, -5)
-        Me.ucrPnlModelType.Name = "ucrPnlModelType"
-        Me.ucrPnlModelType.Size = New System.Drawing.Size(219, 54)
-        Me.ucrPnlModelType.TabIndex = 3
-        '
-        'ucrModelPreview
-        '
-        Me.ucrModelPreview.AddQuotesIfUnrecognised = True
-        Me.ucrModelPreview.IsMultiline = False
-        Me.ucrModelPreview.IsReadOnly = False
-        Me.ucrModelPreview.Location = New System.Drawing.Point(96, 258)
-        Me.ucrModelPreview.Name = "ucrModelPreview"
-        Me.ucrModelPreview.Size = New System.Drawing.Size(204, 21)
-        Me.ucrModelPreview.TabIndex = 23
-        '
-        'ucrDistributionChoice
-        '
-        Me.ucrDistributionChoice.Location = New System.Drawing.Point(9, 226)
-        Me.ucrDistributionChoice.Name = "ucrDistributionChoice"
-        Me.ucrDistributionChoice.Size = New System.Drawing.Size(208, 27)
-        Me.ucrDistributionChoice.TabIndex = 24
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 317)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(406, 54)
-        Me.ucrBase.TabIndex = 17
-        '
         'grpParameters
         '
         Me.grpParameters.Controls.Add(Me.lblDifferenceInMeans)
@@ -363,6 +275,94 @@ Partial Class dlgRegressionSimple
         Me.ucrPnlMeansAndVariance.Name = "ucrPnlMeansAndVariance"
         Me.ucrPnlMeansAndVariance.Size = New System.Drawing.Size(187, 76)
         Me.ucrPnlMeansAndVariance.TabIndex = 17
+        '
+        'ucrSaveModels
+        '
+        Me.ucrSaveModels.Location = New System.Drawing.Point(9, 285)
+        Me.ucrSaveModels.Name = "ucrSaveModels"
+        Me.ucrSaveModels.Size = New System.Drawing.Size(291, 24)
+        Me.ucrSaveModels.TabIndex = 1
+        '
+        'ucrChkConvertToVariate
+        '
+        Me.ucrChkConvertToVariate.Checked = False
+        Me.ucrChkConvertToVariate.Location = New System.Drawing.Point(267, 92)
+        Me.ucrChkConvertToVariate.Name = "ucrChkConvertToVariate"
+        Me.ucrChkConvertToVariate.Size = New System.Drawing.Size(120, 20)
+        Me.ucrChkConvertToVariate.TabIndex = 4
+        '
+        'ucrReceiverExplanatory
+        '
+        Me.ucrReceiverExplanatory.frmParent = Me
+        Me.ucrReceiverExplanatory.Location = New System.Drawing.Point(267, 135)
+        Me.ucrReceiverExplanatory.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverExplanatory.Name = "ucrReceiverExplanatory"
+        Me.ucrReceiverExplanatory.Selector = Nothing
+        Me.ucrReceiverExplanatory.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverExplanatory.strNcFilePath = ""
+        Me.ucrReceiverExplanatory.TabIndex = 22
+        Me.ucrReceiverExplanatory.ucrSelector = Nothing
+        '
+        'ucrReceiverResponse
+        '
+        Me.ucrReceiverResponse.frmParent = Me
+        Me.ucrReceiverResponse.Location = New System.Drawing.Point(267, 69)
+        Me.ucrReceiverResponse.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverResponse.Name = "ucrReceiverResponse"
+        Me.ucrReceiverResponse.Selector = Nothing
+        Me.ucrReceiverResponse.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverResponse.strNcFilePath = ""
+        Me.ucrReceiverResponse.TabIndex = 4
+        Me.ucrReceiverResponse.ucrSelector = Nothing
+        '
+        'ucrSelectorSimpleReg
+        '
+        Me.ucrSelectorSimpleReg.bShowHiddenColumns = False
+        Me.ucrSelectorSimpleReg.bUseCurrentFilter = True
+        Me.ucrSelectorSimpleReg.Location = New System.Drawing.Point(10, 37)
+        Me.ucrSelectorSimpleReg.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorSimpleReg.Name = "ucrSelectorSimpleReg"
+        Me.ucrSelectorSimpleReg.Size = New System.Drawing.Size(226, 186)
+        Me.ucrSelectorSimpleReg.TabIndex = 2
+        '
+        'ucrChkFunction
+        '
+        Me.ucrChkFunction.Checked = False
+        Me.ucrChkFunction.Location = New System.Drawing.Point(489, 86)
+        Me.ucrChkFunction.Name = "ucrChkFunction"
+        Me.ucrChkFunction.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkFunction.TabIndex = 0
+        '
+        'ucrPnlModelType
+        '
+        Me.ucrPnlModelType.Location = New System.Drawing.Point(143, -5)
+        Me.ucrPnlModelType.Name = "ucrPnlModelType"
+        Me.ucrPnlModelType.Size = New System.Drawing.Size(219, 54)
+        Me.ucrPnlModelType.TabIndex = 3
+        '
+        'ucrModelPreview
+        '
+        Me.ucrModelPreview.AddQuotesIfUnrecognised = True
+        Me.ucrModelPreview.IsMultiline = False
+        Me.ucrModelPreview.IsReadOnly = False
+        Me.ucrModelPreview.Location = New System.Drawing.Point(96, 258)
+        Me.ucrModelPreview.Name = "ucrModelPreview"
+        Me.ucrModelPreview.Size = New System.Drawing.Size(204, 21)
+        Me.ucrModelPreview.TabIndex = 23
+        '
+        'ucrDistributionChoice
+        '
+        Me.ucrDistributionChoice.Location = New System.Drawing.Point(9, 226)
+        Me.ucrDistributionChoice.Name = "ucrDistributionChoice"
+        Me.ucrDistributionChoice.Size = New System.Drawing.Size(208, 27)
+        Me.ucrDistributionChoice.TabIndex = 24
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(9, 317)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(406, 54)
+        Me.ucrBase.TabIndex = 17
         '
         'dlgRegressionSimple
         '
