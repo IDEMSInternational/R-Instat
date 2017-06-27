@@ -148,6 +148,7 @@
     <Compile Include="clsBlockReader.vb" />
     <Compile Include="clsCondition.vb" />
     <Compile Include="clsGgplotDefaults.vb" />
+    <Compile Include="clsInstatOptionsDefaults.vb" />
     <Compile Include="clsRCodeStructure.vb" />
     <Compile Include="dlgAddComment.Designer.vb">
       <DependentUpon>dlgAddComment.vb</DependentUpon>

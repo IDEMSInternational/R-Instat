@@ -40,7 +40,7 @@ Public Class frmMain
 
     Public strAutoSaveDataFolderPath As String = Path.Combine(Path.GetTempPath, "R-Instat_data_auto_save")
     Public strAutoSaveLogFolderPath As String = Path.Combine(Path.GetTempPath, "R-Instat_log_auto_save")
-    Public strAutoSaveDebugLogFolderPath As String = Path.Combine(Path.GetTempPath, "R-Instat_debug_log_auto_save")
+    Public strAutoSaveInternalLogFolderPath As String = Path.Combine(Path.GetTempPath, "R-Instat_debug_log_auto_save")
 
     Public strCurrentAutoSaveDataFilePath As String = ""
 
@@ -100,12 +100,12 @@ Public Class frmMain
 
     Private Sub AutoRecoverAndStartREngine()
         Dim iLogFiles As Integer = 0
-        Dim iDebugLog As Integer = 0
+        Dim iInternalLogFiles As Integer = 0
         Dim iDataFiles As Integer = 0
         Dim strScript As String = ""
         Dim strDataFilePath As String = ""
         Dim strAutoSavedLogFilePaths() As String = Nothing
-        Dim strAutoSavedDebugLogFilePaths() As String = Nothing
+        Dim strAutoSavedInternalLogFilePaths() As String = Nothing
         Dim strAutoSavedDataFilePaths() As String = Nothing
 
         If Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1 Then
@@ -115,9 +115,9 @@ Public Class frmMain
                 strAutoSavedLogFilePaths = My.Computer.FileSystem.GetFiles(strAutoSaveLogFolderPath).ToArray
                 iLogFiles = strAutoSavedLogFilePaths.Count
             End If
-            If (Directory.Exists(strAutoSaveDebugLogFolderPath)) Then
-                strAutoSavedDebugLogFilePaths = My.Computer.FileSystem.GetFiles(strAutoSaveDebugLogFolderPath).ToArray
-                iDebugLog = strAutoSavedDebugLogFilePaths.Count
+            If (Directory.Exists(strAutoSaveInternalLogFolderPath)) Then
+                strAutoSavedInternalLogFilePaths = My.Computer.FileSystem.GetFiles(strAutoSaveInternalLogFolderPath).ToArray
+                iInternalLogFiles = strAutoSavedInternalLogFilePaths.Count
             End If
             If Directory.Exists(strAutoSaveDataFolderPath) Then
                 strAutoSavedDataFilePaths = My.Computer.FileSystem.GetFiles(strAutoSaveDataFolderPath).ToArray
@@ -127,10 +127,32 @@ Public Class frmMain
                 If MsgBox("We have detected that R-Instat may have closed unexpectadly last time." & Environment.NewLine & "Would you like to see auto recovery options?", MessageBoxButtons.YesNo, "Auto Recovery") = MsgBoxResult.Yes Then
                     dlgAutoSaveRecovery.strAutoSavedLogFilePaths = strAutoSavedLogFilePaths
                     dlgAutoSaveRecovery.strAutoSavedDataFilePaths = strAutoSavedDataFilePaths
-                    dlgAutoSaveRecovery.strAutoSavedDebuggingLogFilePaths = strAutoSavedDebugLogFilePaths
+                    dlgAutoSaveRecovery.strAutoSavedInternalLogFilePaths = strAutoSavedInternalLogFilePaths
                     dlgAutoSaveRecovery.ShowDialog()
                     strScript = dlgAutoSaveRecovery.GetScript()
                     strDataFilePath = dlgAutoSaveRecovery.GetDataFilePath()
+                Else
+                    If iLogFiles > 0 Then
+                        Try
+                            File.Delete(strAutoSavedLogFilePaths(0))
+                        Catch ex As Exception
+                            MsgBox("Could not delete backup log file" & Environment.NewLine, "Error deleting file")
+                        End Try
+                    End If
+                    If iInternalLogFiles > 0 Then
+                        Try
+                            File.Delete(strAutoSavedInternalLogFilePaths(0))
+                        Catch ex As Exception
+                            MsgBox("Could not delete backup internal log file." & Environment.NewLine & ex.Message, "Error deleting file")
+                        End Try
+                    End If
+                    If iDataFiles > 0 Then
+                        Try
+                            File.Delete(strAutoSavedDataFilePaths(0))
+                        Catch ex As Exception
+                            MsgBox("Could not delete back data file." & Environment.NewLine & ex.Message, "Error deleting file")
+                        End Try
+                    End If
                 End If
             End If
             clsRLink.StartREngine(strScript)

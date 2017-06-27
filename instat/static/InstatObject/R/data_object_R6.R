@@ -320,7 +320,7 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
     }
     else {
       cols <- column
-      curr_data <- private$data[ ,column]
+      curr_data <- private$data[column]
     }
     for(i in seq_along(cols)) {
       col <- curr_data[[i]]
@@ -352,8 +352,8 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
     #rbind.fill safer alternative currently
     out <- plyr::rbind.fill(out)
     out <- as.data.frame(out)
-    if(all(c(name_label, label_label) %in% names(out))) out <- out[ ,c(c(name_label, label_label), setdiff(names(out), c(name_label, label_label)))]
-    else if(name_label %in% names(out)) out <- out[ ,c(name_label, setdiff(names(out), name_label))]
+    if(all(c(name_label, label_label) %in% names(out))) out <- out[c(c(name_label, label_label), setdiff(names(out), c(name_label, label_label)))]
+    else if(name_label %in% names(out)) out <- out[c(name_label, setdiff(names(out), name_label))]
     #row.names(out) <- self$get_column_names()
     row.names(out) <- cols
     if(data_type != "all") {
