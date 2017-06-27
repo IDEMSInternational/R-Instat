@@ -281,6 +281,26 @@ Public Class dlgMakeDate
         bUseSelectedColumn = True
     End Sub
 
+    Private Sub SelectorHeader()
+        If rdoSingleColumn.Checked Then
+            If rdoDefaultFormat.Checked Then
+                ucrReceiverForDate.strSelectorHeading = "Factors"
+            ElseIf rdoSpecifyOrigin.Checked
+                ucrReceiverForDate.strSelectorHeading = "Numerics"
+            Else
+                ucrReceiverForDate.strSelectorHeading = "Variables"
+            End If
+        ElseIf rdoTwoColumns.Checked Then
+            ucrReceiverYearTwo.strSelectorHeading = "Variables"
+            ucrReceiverDayTwo.strSelectorHeading = "Variables"
+        Else
+            ucrReceiverYearThree.strSelectorHeading = "Variables"
+            ucrReceiverMonthThree.strSelectorHeading = "Variables"
+            ucrReceiverDayThree.strSelectorHeading = "Variables"
+        End If
+
+    End Sub
+
     Private Sub SetDefaultColumn()
         rdoSingleColumn.Checked = True
         SetRCodeForControls(True)
@@ -342,6 +362,7 @@ Public Class dlgMakeDate
             ucrBase.clsRsyntax.SetBaseRFunction(clsMakeYearMonthDay)
         End If
         SetReceivers()
+        SelectorHeader()
         SetRCodeForControls(False)
     End Sub
 
@@ -369,6 +390,7 @@ Public Class dlgMakeDate
         Else
             ucrReceiverForDate.SetIncludedDataTypes({"numeric", "character", "factor", "integer"})
         End If
+        SelectorHeader()
     End Sub
 
     'Temporary fix: This should be deleted since - this should be automatic
