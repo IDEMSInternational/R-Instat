@@ -143,6 +143,7 @@ Public Class dlgOneVarFitModel
         ' ucrOperator.SetName("==")
         clsROneVarFitModel.SetPackageName("fitdistrplus")
         clsROneVarFitModel.SetRCommand("fitdist")
+        clsROneVarFitModel.AddParameter("method", Chr(34) & "mle" & Chr(34))
 
         clsRConvertNumeric.SetPackageName("base")
         clsRConvertNumeric.SetRCommand("as.numeric")
@@ -224,7 +225,7 @@ Public Class dlgOneVarFitModel
         clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertInteger)
         clsROneVarFitModel.SetAssignTo("last_model", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model")
         UcrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModel)
-
+        UcrBase.clsRsyntax.AddToAfterCodes(clsRplotFunction, iPosition:=1)
         SetDistributions()
         bResetSubdialog = True
     End Sub
