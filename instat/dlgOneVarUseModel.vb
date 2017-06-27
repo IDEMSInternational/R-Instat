@@ -99,15 +99,23 @@ Public Class dlgOneVarUseModel
 
         clsRplotCDFfunction.SetPackageName("fitdistrplus")
         clsRplotCDFfunction.SetRCommand("cdfcomp")
+        clsRplotCDFfunction.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34))
         clsRplotCDFfunction.iCallType = 3
 
         clsRplotQQfunction.SetPackageName("fitdistrplus")
         clsRplotQQfunction.SetRCommand("qqcomp")
+        clsRplotQQfunction.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34))
         clsRplotQQfunction.iCallType = 3
 
         clsRplotDensfunction.SetPackageName("fitdistrplus")
         clsRplotDensfunction.SetRCommand("denscomp")
+        clsRplotDensfunction.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34))
         clsRplotDensfunction.iCallType = 3
+
+        clsRplotPPfunction.SetPackageName("fitdistrplus")
+        clsRplotPPfunction.SetRCommand("ppcomp")
+        clsRplotPPfunction.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34))
+        clsRplotPPfunction.iCallType = 3
 
         clsRplotCIfunction.SetPackageName("fitdistrplus")
         clsRplotCIfunction.SetRCommand("CIcdfplot")
@@ -123,7 +131,6 @@ Public Class dlgOneVarUseModel
 
         clsQuantileFunction.SetRCommand("quantile")
         clsQuantileFunction.AddParameter("probs", clsRFunctionParameter:=clsSeqFunction)
-        clsQuantileFunction.iCallType = 2
 
         clsRBootFunction.SetPackageName("fitdistrplus")
         clsRBootFunction.SetRCommand("bootdist")
