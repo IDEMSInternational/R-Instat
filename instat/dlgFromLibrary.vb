@@ -129,7 +129,11 @@ Public Class dlgFromLibrary
         If dfDataframe IsNot Nothing Then
             For i As Integer = 0 To dfDataframe.RowCount - 1
                 lstItem = lstCollection.Items.Add(dfDataframe(i, 0))
-                lstItem.SubItems.Add(dfDataframe(i, 1))
+                If dfDataframe.ColumnCount > 1 Then
+                    lstItem.SubItems.Add(dfDataframe(i, 1))
+                Else
+                    lstItem.SubItems.Add("")
+                End If
             Next
         End If
     End Sub
