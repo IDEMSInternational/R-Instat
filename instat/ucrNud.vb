@@ -45,6 +45,23 @@ Public Class ucrNud
         End If
     End Sub
 
+    Public Overrides Function IsRDefault() As Boolean
+        Dim clsParam As RParameter
+        Dim dTempParamValue As Decimal
+        Dim dTempRDefault As Decimal
+
+        clsParam = GetParameter()
+        If clsParam IsNot Nothing AndAlso clsParam.strArgumentValue IsNot Nothing AndAlso objRDefault IsNot Nothing Then
+            If Decimal.TryParse(clsParam.strArgumentValue, dTempParamValue) AndAlso Decimal.TryParse(objRDefault, dTempRDefault) Then
+                Return dTempRDefault = dTempParamValue
+            Else
+                Return False
+            End If
+        Else
+            Return False
+        End If
+    End Function
+
     Public Property Minimum As Decimal
         Get
             Return nudUpDown.Minimum

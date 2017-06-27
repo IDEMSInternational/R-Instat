@@ -150,7 +150,7 @@ Public Class clsRecentFiles
             'dlgImportDataset.SetFilePath(DirectCast(sender, ToolStripItem).Tag.ToString().Substring(4))
             'dlgImportDataset.SetDataName(Path.GetFileNameWithoutExtension(sender.ToString))
             'Not working as I would like because of the changes made to the Import Dataset
-            dlgImportDataset.strFilePathToUseOnLoad = DirectCast(sender, ToolStripItem).Tag.ToString().Substring(4)
+            dlgImportDataset.strFileToOpenOn = DirectCast(sender, ToolStripItem).Tag.ToString().Substring(4)
             dlgImportDataset.ShowDialog()
         Else
             iResult = MessageBox.Show(frmMain, "Error: File not accessible. It may have been renamed, moved or deleted." & Environment.NewLine & Environment.NewLine & "Would you like to remove this file from the list?", "Error accessing file", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
