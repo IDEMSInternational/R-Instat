@@ -140,15 +140,15 @@ Public Class sdgOneVarUseModFit
         clsRplotCIfunction = clsNewplotCIfunction
         clsRNoPlotfunction = clsNewNoPlotfunction
         'Setting Rcode for the sub dialog
-        ucrNudFrom.SetRCode(clsRSeqFunction, bReset)
-        ucrNudTo.SetRCode(clsRSeqFunction, bReset)
-        ucrNudBy.SetRCode(clsRSeqFunction, bReset)
-        ucrChkParametric.SetRCode(clsOneVarRBootFunction, bReset)
-        ucrNudIterations.SetRCode(clsOneVarRBootFunction, bReset)
-        ucrNudCI.SetRCode(clsOneVarQuantileFunction, bReset)
+        ucrNudFrom.SetRCode(clsRSeqFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudTo.SetRCode(clsRSeqFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudBy.SetRCode(clsRSeqFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkParametric.SetRCode(clsOneVarRBootFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudIterations.SetRCode(clsOneVarRBootFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudCI.SetRCode(clsOneVarQuantileFunction, bReset, bCloneIfNeeded:=True)
         ucrPnlPlots.SetRSyntax(clsRSyntax, bReset)
-        ucrPnlQuantiles.SetRCode(clsRSeqFunction, bReset)
-        ucrInputQuantiles.SetRCode(clsOneVarQuantileFunction, bReset)
+        ucrPnlQuantiles.SetRCode(clsRSeqFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputQuantiles.SetRCode(clsOneVarQuantileFunction, bReset, bCloneIfNeeded:=True)
 
         If bReset Then
             tbpOneVarUseModFit.SelectedIndex = 0
