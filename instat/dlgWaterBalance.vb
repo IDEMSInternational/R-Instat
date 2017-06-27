@@ -411,13 +411,14 @@ Public Class dlgWaterBalance
         clsWaterBalanceFunction.AddParameter("list", strDifference & "!= 0", iPosition:=1) 'clsROperatorParameter:=clsWaterBalanceOperator, iPosition:=1)
         clsWaterBalanceFunction.AddParameter("values", "NA", iPosition:=2)
         'Chr(34) & "replace(" & First_Water_Balance_Min & ", Difference != 0, NA)" & Chr(34), iPosition:=1)
-        clsWaterBalance.AddParameter("result_name", Chr(34) & "test" & Chr(34)) 'Chr(34) & ucrInputWBColName.GetText() & Chr(34), iPosition:=2)
+        clsWaterBalance.AddParameter("result_name", Chr(34) & ucrInputWBColName.GetText() & Chr(34), iPosition:=2)
         clsWaterBalance.AddParameter("sub_calculations", clsRFunctionParameter:=clsWaterBalanceList, iPosition:=3)
         clsWaterBalanceList.AddParameter("sub1", clsRFunctionParameter:=clsWBFirstWaterBalanceMin, iPosition:=0, bIncludeArgumentName:=False)
         clsWaterBalanceList.AddParameter("sub2", clsRFunctionParameter:=clsDifference, iPosition:=1, bIncludeArgumentName:=False)
         clsWaterBalance.AddParameter("save", "2", iPosition:=6)
         clsWaterBalance.SetAssignTo("Water_Balance")
 
+        'TODO: only run this is End of Season is checked
         clsWaterEndRainsBase.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         clsWaterEndRainsBase.AddParameter("display", "FALSE")
         clsWaterEndRainsBase.AddParameter("calc", clsRFunctionParameter:=clsWaterBalance)
@@ -471,6 +472,7 @@ Public Class dlgWaterBalance
         clsEndRainLastInstance.AddParameter("save", "2", iPosition:=6)
         clsEndRainLastInstance.SetAssignTo("End_of_Rains")
 
+        'TODO: only run this if end of rains is checked:
         clsEndRainBase.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         clsEndRainBase.AddParameter("display", "FALSE")
         clsEndRainBase.AddParameter("calc", clsRFunctionParameter:=clsEndRainLastInstance)
@@ -542,6 +544,10 @@ Public Class dlgWaterBalance
         TestOKEnabled()
     End Sub
 
+    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
+        frmMain.clsRLink.RunScript(clsAddKey.ToScript, strComment:="Water Balance: Defining column(s) as key")
+    End Sub
+
     Private Sub GroupBy()
         If Not ucrReceiverStation.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty Then
             clsGroupBy.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverYear.GetVariableNames & "," & strCurrDataName & "=" & ucrReceiverStation.GetVariableNames & ")")
@@ -577,31 +583,5 @@ Public Class dlgWaterBalance
         DayBoundaries()
         EndRainRollingSum()
         EndSeason()
-    End Sub
-
-    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        frmMain.clsRLink.RunScript(clsAddKey.ToScript, strComment:="Water Balance: Defining column(s) as key")
-        ''FirstDayofTheYear()
-        ''DayFromAndToMethod()
-
-        ''WaterBalance()
-        'FirstWaterBalancePerYear()
-        'DayFromAndToMethod()
-        'WaterBalance()
-        'clsReplaceNA.SetAssignTo("replace_NA")
-
-        ' PanelOptions()
-    End Sub
-
-    Private Sub ucrChkEndOfSeason_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEndOfSeason.ControlValueChanged
-        If ucrChkEndOfSeason.Checked Then
-            ucrBase.clsRsyntax.AddToAfterCodes(clsWaterEndRainsBase, iPosition:=0) ' not sure about this
-        End If
-    End Sub
-
-    Private Sub ucrChkEndOfRains_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEndOfRains.ControlValueChanged
-        If ucrChkEndOfRains.Checked Then
-            ucrBase.clsRsyntax.AddToAfterCodes(clsEndRainBase, iPosition:=0) ' not sure about this
-        End If
     End Sub
 End Class
