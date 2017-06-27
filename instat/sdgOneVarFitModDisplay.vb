@@ -35,8 +35,11 @@ Public Class sdgOneVarFitModDisplay
         ucrPnlLikelihood.SetParameter(New RParameter("loglik"))
         ucrPnlLikelihood.AddRadioButton(rdoLoglik, "TRUE")
         ucrPnlLikelihood.AddRadioButton(rdoLik, "FALSE")
-
         ucrPnlLikelihood.SetRDefault("TRUE")
+
+        ucrChkPLotLogLik.AddToLinkedControls(ucrPnlLikelihood, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkPLotLogLik.AddParameterPresentCondition(True, "loglik")
+        ucrChkPLotLogLik.AddParameterPresentCondition(False, "loglik", False)
         ucrChkPLotLogLik.SetText("Plot Likelihood")
 
         ucrPnlPlots.AddRadioButton(rdoNoPlot)
@@ -79,6 +82,7 @@ Public Class sdgOneVarFitModDisplay
         clsRLogLikFunction.AddParameter("mlefit", clsRFunctionParameter:=clsModel)
         ucrPnlLikelihood.SetRCode(clsRLogLikFunction, bReset)
         ucrChkPLotLogLik.SetRCode(clsRLogLikFunction, bReset)
+        ucrPnlPlots.SetRCode(clsRplotFunction, bReset)
     End Sub
 
     Private Sub ucrPnlPlots_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlPlots.ControlValueChanged
@@ -130,10 +134,6 @@ Public Class sdgOneVarFitModDisplay
         End If
     End Sub
 
-    Private Sub sdgOneVarFitModDisplay_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    End Sub
-
     Private Sub ucrDists_cboDistributionsIndexChanged() Handles ucrDists.DistributionsIndexChanged
         SetPlotOptions()
     End Sub
@@ -179,12 +179,11 @@ Public Class sdgOneVarFitModDisplay
     '    ucrSaveLikelihood.Visible = True
     '    End If
     'End Sub
-
-    Private Sub ucrPnlLikelihood_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlLikelihood.ControlValueChanged
-        If rdoLoglik.Checked Then
-            clsRSyntax.AddToAfterCodes(clsRLogLikFunction, iPosition:=2)
-        ElseIf rdoLik.Checked Then
-            clsRSyntax.AddToAfterCodes(clsRLogLikFunction, iPosition:=2)
+    Private Sub ucrChkPLotLogLik_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPLotLogLik.ControlValueChanged, ucrPnlLikelihood.ControlValueChanged
+        If ucrChkPLotLogLik.Checked Then
+            If rdoLoglik.Checked OrElse rdoLik.Checked Then
+                clsRSyntax.AddToAfterCodes(clsRLogLikFunction, iPosition:=2)
+            End If
         Else
             clsRSyntax.RemoveFromAfterCodes(clsRLogLikFunction)
         End If

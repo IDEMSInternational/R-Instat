@@ -50,6 +50,7 @@ Public Class sdgOneVarFitModel
         ucrPnlOptimisation.AddRadioButton(rdoBFGS, Chr(34) & "BFGS" & Chr(34))
         ucrPnlOptimisation.AddRadioButton(rdoCG, Chr(34) & "CG" & Chr(34))
         ucrPnlOptimisation.AddRadioButton(rdoSANN, Chr(34) & "SANN" & Chr(34))
+        ucrPnlOptimisation.SetRDefault(Chr(34) & "default" & Chr(34))
         bControlsInitialised = True
     End Sub
 
