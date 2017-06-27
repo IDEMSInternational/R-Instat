@@ -23,11 +23,14 @@ Public Class dlgAutoSaveRecovery
     Private strLoadDateFilePath As String
     Public strAutoSavedDataFilePaths() As String
     Public strAutoSavedLogFilePaths() As String
-    Public strAutoSavedDebuggingLogFilePaths() As String
+    Public strAutoSavedInternalLogFilePaths() As String
     Private bUserClose As Boolean = True
 
     Private Sub dlgAutoSaveRecovery_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ucrChkSendDebuggingLog.SetText("Send Debugging Log to R-Instat Team")
+        'temporary - not yet implemented
+        ucrChkSendInternalLog.Visible = False
+
+        ucrChkSendInternalLog.SetText("Send Debugging Log to R-Instat Team")
         strScript = ""
         strLoadDateFilePath = ""
         If strAutoSavedDataFilePaths IsNot Nothing AndAlso strAutoSavedDataFilePaths.Count > 0 Then
@@ -48,19 +51,19 @@ Public Class dlgAutoSaveRecovery
             cmdSaveLog.Enabled = False
             cmdRunLog.Enabled = False
         End If
-        If strAutoSavedDebuggingLogFilePaths IsNot Nothing AndAlso strAutoSavedDebuggingLogFilePaths.Count > 0 Then
-            lblBackupDebuggingLogDetected.Text = "Backup Debugging Log File Detected"
-            cmdSaveDebuggingLog.Enabled = True
-            ucrChkSendDebuggingLog.Visible = True
-            ucrChkSendDebuggingLog.Checked = True
+        If strAutoSavedInternalLogFilePaths IsNot Nothing AndAlso strAutoSavedInternalLogFilePaths.Count > 0 Then
+            lblBackupInternalLogDetected.Text = "Backup Debugging Log File Detected"
+            cmdSaveInternalLog.Enabled = True
+            ucrChkSendInternalLog.Visible = True
+            ucrChkSendInternalLog.Checked = True
         Else
-            lblBackupDebuggingLogDetected.Text = "No Backup Debugging Log File Detected"
-            cmdSaveDebuggingLog.Enabled = False
-            ucrChkSendDebuggingLog.Visible = False
-            ucrChkSendDebuggingLog.Checked = False
+            lblBackupInternalLogDetected.Text = "No Backup Debugging Log File Detected"
+            cmdSaveInternalLog.Enabled = False
+            ucrChkSendInternalLog.Visible = False
+            ucrChkSendInternalLog.Checked = False
         End If
         ucrInputSavedPathData.IsReadOnly = True
-        ucrInputSavedPathDebuggingLog.IsReadOnly = True
+        ucrInputSavedPathInternalLog.IsReadOnly = True
         ucrInputSavedPathLog.IsReadOnly = True
 
         cmdNewSession.Enabled = True
@@ -99,41 +102,47 @@ Public Class dlgAutoSaveRecovery
         End Using
     End Sub
 
-    Private Sub cmdSaveDebuggingLog_Click(sender As Object, e As EventArgs) Handles cmdSaveDebuggingLog.Click
+    Private Sub cmdSaveDebuggingLog_Click(sender As Object, e As EventArgs) Handles cmdSaveInternalLog.Click
         Using dlgSave As New SaveFileDialog
             dlgSave.Title = "Save Debugging Log File"
             dlgSave.Filter = "R script file (*.R)|*.R"
             If dlgSave.ShowDialog() = DialogResult.OK Then
-                ucrInputSavedPathDebuggingLog.SetName(dlgSave.FileName)
+                ucrInputSavedPathInternalLog.SetName(dlgSave.FileName)
             Else
-                ucrInputSavedPathDebuggingLog.SetName("")
+                ucrInputSavedPathInternalLog.SetName("")
             End If
         End Using
     End Sub
 
     Private Sub SaveFiles()
-        If strAutoSavedDataFilePaths IsNot Nothing AndAlso strAutoSavedDataFilePaths.Count > 0 AndAlso File.Exists(strAutoSavedDataFilePaths(0)) AndAlso Not ucrInputSavedPathData.IsEmpty() Then
+        If strAutoSavedDataFilePaths IsNot Nothing AndAlso strAutoSavedDataFilePaths.Count > 0 AndAlso File.Exists(strAutoSavedDataFilePaths(0)) Then
             Try
-                File.Copy(strAutoSavedDataFilePaths(0), ucrInputSavedPathData.GetText(), True)
+                If Not ucrInputSavedPathData.IsEmpty() Then
+                    File.Copy(strAutoSavedDataFilePaths(0), ucrInputSavedPathData.GetText(), True)
+                End If
                 File.Delete(strAutoSavedDataFilePaths(0))
             Catch ex As Exception
-                MsgBox("Could not copy data file from: " & strAutoSavedDataFilePaths(0) & " to: " & ucrInputSavedPathData.GetText() & Environment.NewLine & ex.Message)
+                MsgBox("Could not copy and/or delete data file." & Environment.NewLine & ex.Message, "Error copying/deleting file")
             End Try
         End If
-        If strAutoSavedLogFilePaths IsNot Nothing AndAlso strAutoSavedLogFilePaths.Count > 0 AndAlso File.Exists(strAutoSavedLogFilePaths(0)) AndAlso Not ucrInputSavedPathLog.IsEmpty() Then
+        If strAutoSavedLogFilePaths IsNot Nothing AndAlso strAutoSavedLogFilePaths.Count > 0 AndAlso File.Exists(strAutoSavedLogFilePaths(0)) Then
             Try
-                File.Copy(strAutoSavedLogFilePaths(0), ucrInputSavedPathLog.GetText(), True)
+                If Not ucrInputSavedPathLog.IsEmpty() Then
+                    File.Copy(strAutoSavedLogFilePaths(0), ucrInputSavedPathLog.GetText(), True)
+                End If
                 File.Delete(strAutoSavedLogFilePaths(0))
             Catch ex As Exception
-                MsgBox("Could not copy log file from: " & strAutoSavedLogFilePaths(0) & " to: " & ucrInputSavedPathLog.GetText() & Environment.NewLine & ex.Message)
+                MsgBox("Could not copy and/or delete log file." & Environment.NewLine & ex.Message, "Error copying/deleting file")
             End Try
         End If
-        If strAutoSavedDebuggingLogFilePaths IsNot Nothing AndAlso strAutoSavedDebuggingLogFilePaths.Count > 0 AndAlso File.Exists(strAutoSavedDebuggingLogFilePaths(0)) AndAlso Not ucrInputSavedPathDebuggingLog.IsEmpty() Then
+        If strAutoSavedInternalLogFilePaths IsNot Nothing AndAlso strAutoSavedInternalLogFilePaths.Count > 0 AndAlso File.Exists(strAutoSavedInternalLogFilePaths(0)) Then
             Try
-                File.Copy(strAutoSavedDebuggingLogFilePaths(0), ucrInputSavedPathDebuggingLog.GetText(), True)
-                File.Delete(strAutoSavedDebuggingLogFilePaths(0))
+                If Not ucrInputSavedPathInternalLog.IsEmpty() Then
+                    File.Copy(strAutoSavedInternalLogFilePaths(0), ucrInputSavedPathInternalLog.GetText(), True)
+                End If
+                File.Delete(strAutoSavedInternalLogFilePaths(0))
             Catch ex As Exception
-                MsgBox("Could not copy debugging log file from: " & strAutoSavedDebuggingLogFilePaths(0) & " to: " & ucrInputSavedPathDebuggingLog.GetText() & Environment.NewLine & ex.Message, "Are you finished?")
+                MsgBox("Could not copy and/or delete internal log file." & Environment.NewLine & ex.Message, "Error copying/deleting file")
             End Try
         End If
     End Sub
@@ -145,7 +154,7 @@ Public Class dlgAutoSaveRecovery
                 Try
                     strScript = File.ReadAllText(strAutoSavedLogFilePaths(0))
                 Catch ex As Exception
-                    MsgBox("Could not read log file at: " & strAutoSavedLogFilePaths(0) & Environment.NewLine & ex.Message)
+                    MsgBox("Could not read log file." & Environment.NewLine & ex.Message, "Cannot read file")
                     strScript = ""
                 End Try
             End If
