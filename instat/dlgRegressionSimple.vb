@@ -135,8 +135,6 @@ Public Class dlgRegressionSimple
 
         ucrPnlMeansAndVariance.AddToLinkedControls(ucrNudHypothesis, {rdoCompareVariance}, bNewLinkedDisabledIfParameterMissing:=True)
 
-
-
         ' sdgSimpleRegOptions.SetRModelFunction(clsRLmOrGLM)
         sdgSimpleRegOptions.SetRDataFrame(ucrSelectorSimpleReg.ucrAvailableDataFrames)
         'sdgSimpleRegOptions.SetRYVariable(ucrResponse)
@@ -186,8 +184,6 @@ Public Class dlgRegressionSimple
         ucrResponse.SetMeAsReceiver()
         ucrSelectorSimpleReg.Focus()
         ucrModelPreview.Reset()
-
-
 
         DataTypeAccepted()
 

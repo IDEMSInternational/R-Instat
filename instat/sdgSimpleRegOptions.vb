@@ -25,15 +25,6 @@ Public Class sdgSimpleRegOptions
     Private clsRSyntax As RSyntax
     Public clsRaovFunction, clsRaovpvalFunction, clsRestpvalFunction, clsRResidualPlotsFunction, clsRgeom_point, clsRPredFunction, clsRDFFunction, clsRFittedValues, clsRWriteFitted, clsRResiduals, clsRWriteResiduals, clsRStdResiduals, clsRWriteStdResiduals, clsRLeverage, clsRWriteLeverage As New RFunction
     Public clsRggplotFunction, clsRaesFunction, clsRStat_smooth, clsRModelsFunction, clsRCIFunction, clsR_ribbon, clsRaes_ribbon As New RFunction
-
-    Private Sub rdoLinear_CheckedChanged(sender As Object, e As EventArgs) Handles rdoLinear.CheckedChanged
-
-    End Sub
-
-    Private Sub rdoResponse_CheckedChanged(sender As Object, e As EventArgs) Handles rdoResponse.CheckedChanged
-
-    End Sub
-
     Public bControlsInitialised As Boolean = False
 
     Private Sub sdgSimpleRegOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -67,12 +58,6 @@ Public Class sdgSimpleRegOptions
         ucrChkDisplayCLimits.AddParameterPresentCondition(False, "level")
         ucrChkDisplayCLimits.AddToLinkedControls(ucrNudDisplayCLevel, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.95)
         ucrNudDisplayCLevel.SetLinkedDisplayControl(lblDisplayCLevel)
-
-
-
-
-        ucrChkFittedModel.SetText("Fitted Model")
-
 
         'Multiple Plots (Autoplot function)
         ucrPnlMutiplePlots.AddRadioButton(rdoFourPlots)
@@ -111,6 +96,7 @@ Public Class sdgSimpleRegOptions
         'ucrPnlIndividualPlots.SetLinkedDisplayControl(grpIndividualPlots)
 
         'Fitting Models Plots (Visreg)
+        ucrChkFittedModel.SetText("Fitted Model")
         ucrChkFittedModel.AddFunctionNamesCondition(False, "visreg", False)
         ucrChkFittedModel.AddFunctionNamesCondition(True, "visreg")
         ''type
@@ -145,9 +131,6 @@ Public Class sdgSimpleRegOptions
         ucrChkRugs.AddToLinkedControls(ucrPnlPartial12, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoPartial)
         ucrChkFittedModel.AddToLinkedControls(ucrChkJitter, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
         ucrChkFittedModel.AddToLinkedControls(ucrChkConfIntervalband, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
-
-
-
 
         ucrChkJitter.SetText("Jitter")
         ucrChkJitter.SetParameter(New RParameter("jitter"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
@@ -315,43 +298,6 @@ Public Class sdgSimpleRegOptions
         clsRDataFrame = clsRDataFr
     End Sub
 
-    Private Sub ConfidenceInterval()
-        clsRCIFunction.SetRCommand("confint")
-        clsRCIFunction.AddParameter("object", clsRFunctionParameter:=clsRModelFunction)
-        DisplayConfidence()
-        frmMain.clsRLink.RunScript(clsRCIFunction.ToScript(), 2)
-    End Sub
-
-
-    Private Sub chkMultiplePlots_CheckedChanged(sender As Object, e As EventArgs)
-        'GraphMultiplePlots()
-    End Sub
-
-    Private Sub GraphMultiplePlots()
-        'If ucrChkMultiplePlots.Checked Then
-        '    ucrChkFittedModel.Checked = False
-        '    ucrChkIndividualPlots.Checked = False
-        '    grpMultiplePlots.Enabled = True
-        '    rdoFourPlots.Checked = True
-        'Else
-        '    grpMultiplePlots.Enabled = False
-        'End If
-    End Sub
-
-    Private Sub GraphIndividualPlots()
-        'If ucrChkIndividualPlots.Checked Then
-        '    ucrChkFittedModel.Checked = False
-        '    ucrChkMultiplePlots.Checked = False
-        '    grpIndividualPlots.Enabled = True
-        '    rdoResidualsFitted.Checked = True
-        'Else
-        '    grpIndividualPlots.Enabled = False
-        'End If
-    End Sub
-
-    Private Sub chkIndividualPlots_CheckedChanged(sender As Object, e As EventArgs)
-        GraphIndividualPlots()
-    End Sub
     Private Sub ucrPnlMutiplePlots_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMutiplePlots.ControlValueChanged, ucrPnlIndividualPlots.ControlValueChanged
         'Multiple Plots
         If ucrChkMultiplePlots.Checked Then
@@ -405,24 +351,6 @@ Public Class sdgSimpleRegOptions
             End If
         End If
     End Sub
-
-    Private Sub DisplayConfidence()
-        If (ucrChkDisplayCLimits.Checked = True) Then
-            clsRCIFunction.AddParameter("level", ucrNudDisplayCLevel.Value)
-        ElseIf (ucrChkDisplayCLimits.Checked = False) Then
-            clsRCIFunction.AddParameter("level", "")
-        Else
-            clsRCIFunction.RemoveParameterByName("level")
-        End If
-    End Sub
-
-    Public Sub RegOptions()
-        If (ucrChkDisplayCLimits.Checked) Then
-            ConfidenceInterval()
-        End If
-    End Sub
-
-    ' disabled until working
 
     Private Sub ucrSaveFittedColumnName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveFittedColumnName.ControlValueChanged
         clsRFittedValues.SetPackageName("stats")
