@@ -18,6 +18,7 @@ Imports instat.Translations
 Public Class sdgCanonicalCorrelation
     Public strModelName As String
     Public clsTempFunction As String
+    Public clsTempFun As String
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
     Public clsRCanCorFunction, clsRCoefFunction, clsRGraphicsFunction As New RFunction
@@ -27,9 +28,10 @@ Public Class sdgCanonicalCorrelation
     End Sub
 
     Public Sub InitialiseControls()
-        'ucrPnlVariables.SetParameter(New RParameter("columns", 1))
         ucrPnlVariables.AddRadioButton(rdoXVariables)
         ucrPnlVariables.AddRadioButton(rdoYVariables)
+        ucrPnlVariables.AddParameterPresentCondition(rdoXVariables, dlgCanonicalCorrelationAnalysis.ucrReceiverXvariables.GetVariableNames())
+        ucrPnlVariables.AddParameterPresentCondition(rdoYVariables, dlgCanonicalCorrelationAnalysis.ucrReceiverYvariables.GetVariableNames())
 
         ucrChkCanonicalCorrelations.SetText("canonical Correlations")
         ucrChkCoefficients.SetText("Coefficients")
@@ -38,7 +40,7 @@ Public Class sdgCanonicalCorrelation
 
     End Sub
 
-    Public Sub SetRFunction(clsNewRSyntax As RSyntax, clsNewRCanCorFunction As RFunction, clsNewRCoefFunction As RFunction, clsNewRGraphicsFunction As RFunction, clsNewTempFunction As String, Optional bReset As Boolean = False)
+    Public Sub SetRFunction(clsNewRSyntax As RSyntax, clsNewRCanCorFunction As RFunction, clsNewRCoefFunction As RFunction, clsNewRGraphicsFunction As RFunction, clsNewTempFunction As String, clsNewTempFun As String, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
@@ -48,15 +50,20 @@ Public Class sdgCanonicalCorrelation
         clsRCoefFunction = clsNewRCoefFunction
         clsRGraphicsFunction = clsNewRGraphicsFunction
         clsTempFunction = clsNewTempFunction
+        clsTempFun = clsNewTempFun
 
+        clsRCanCorFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+        clsRCoefFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+        clsRGraphicsFunction.SetPackageName("GGally")
+        clsRGraphicsFunction.SetRCommand("ggpairs")
         clsRCanCorFunction.AddParameter("data_name", Chr(34) & dlgCanonicalCorrelationAnalysis.ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-        'clsRCanCorFunction.AddParameter("model_name", clsTempFunction)
-
-        clsRCanCorFunction.AddParameter("model_name", Chr(34) & clsTempFunction & Chr(34))
+        'clsRCanCorFunction.AddParameter("model_name", Chr(34) & clsTempFunction & Chr(34))
+        clsRCanCorFunction.AddParameter("value1", Chr(34) & "cor" & Chr(34))
         clsRCoefFunction.AddParameter("data_name", Chr(34) & dlgCanonicalCorrelationAnalysis.ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+        'clsRCoefFunction.AddParameter("model_name", Chr(34) & clsTempFunction & Chr(34))
         clsRCoefFunction.AddParameter("model_name", Chr(34) & dlgCanonicalCorrelationAnalysis.strModelName & Chr(34))
-        clsRCanCorFunction.AddParameter("value1", Chr(34) & "cancor" & Chr(34))
-        clsRCoefFunction.AddParameter("value1", Chr(34) & "coef" & Chr(34))
+        clsRCoefFunction.AddParameter("value1", Chr(34) & "xcoef" & Chr(34))
+        'clsRCoefFunction.AddParameter("value2", Chr(34) & "ycoef" & Chr(34))
 
         clsTempFunc = dlgCanonicalCorrelationAnalysis.ucrSelectorCCA.ucrAvailableDataFrames.clsCurrDataFrame.Clone()
         clsTempFunc.AddParameter("remove_attr", "TRUE")
@@ -67,25 +74,26 @@ Public Class sdgCanonicalCorrelation
         End If
     End Sub
 
-    Private Sub Cancor()
-        'clsRCanCorFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
-        'clsRCanCorFunction.AddParameter("data_name", Chr(34) & dlgCanonicalCorrelationAnalysis.ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-        'clsRCanCorFunction.AddParameter("model_name", Chr(34) & dlgCanonicalCorrelationAnalysis.strModelName & Chr(34))
-        'clsRCanCorFunction.AddParameter("value1", Chr(34) & "cancor" & Chr(34))
-        'frmMain.clsRLink.RunScript(clsRCanCorFunction.ToScript(), 2)
-    End Sub
+    'Private Sub Cancor()
+    '    clsRCanCorFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+    '    clsRCanCorFunction.AddParameter("data_name", Chr(34) & dlgCanonicalCorrelationAnalysis.ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+    '    clsRCanCorFunction.AddParameter("model_name", Chr(34) & dlgCanonicalCorrelationAnalysis.strModelName & Chr(34))
+    '    clsRCanCorFunction.AddParameter("value1", Chr(34) & "cancor" & Chr(34))
+    '    frmMain.clsRLink.RunScript(clsRCanCorFunction.ToScript(), 2)
+    'End Sub
 
-    Private Sub Coef()
-        'clsRCoefFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
-        'clsRCoefFunction.AddParameter("data_name", Chr(34) & dlgCanonicalCorrelationAnalysis.ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-        'clsRCoefFunction.AddParameter("model_name", Chr(34) & dlgCanonicalCorrelationAnalysis.strModelName & Chr(34))
-        'clsRCoefFunction.AddParameter("value1", Chr(34) & "coef" & Chr(34))
-        'frmMain.clsRLink.RunScript(clsRCoefFunction.ToScript(), 2)
-    End Sub
+    'Private Sub Coef()
+    '    clsRCoefFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+    '    clsRCoefFunction.AddParameter("data_name", Chr(34) & dlgCanonicalCorrelationAnalysis.ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+    '    clsRCoefFunction.AddParameter("model_name", Chr(34) & dlgCanonicalCorrelationAnalysis.strModelName & Chr(34))
+    '    clsRCoefFunction.AddParameter("value1", Chr(34) & "coef" & Chr(34))
+    '    frmMain.clsRLink.RunScript(clsRCoefFunction.ToScript(), 2)
+    'End Sub
 
     Private Sub ucrChkCanonicalCorrelations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCanonicalCorrelations.ControlValueChanged
-        clsRCanCorFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+        clsRCanCorFunction.AddParameter("model_name", Chr(34) & clsTempFunction & Chr(34))
         If ucrChkCanonicalCorrelations.Checked Then
+            clsRCanCorFunction.iCallType = 2
             clsRSyntax.AddToAfterCodes(clsRCanCorFunction, iPosition:=0)
         Else
             clsRSyntax.RemoveFromAfterCodes(clsRCanCorFunction)
@@ -93,8 +101,9 @@ Public Class sdgCanonicalCorrelation
     End Sub
 
     Private Sub ucrChkCoefficients_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCoefficients.ControlValueChanged
-        clsRCoefFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+        clsRCoefFunction.AddParameter("model_name", Chr(34) & clsTempFunction & Chr(34))
         If ucrChkCoefficients.Checked Then
+            clsRCoefFunction.iCallType = 2
             clsRSyntax.AddToAfterCodes(clsRCoefFunction, iPosition:=1)
         Else
             clsRSyntax.RemoveFromAfterCodes(clsRCoefFunction)
@@ -102,7 +111,11 @@ Public Class sdgCanonicalCorrelation
     End Sub
 
     Private Sub ucrChkPairwisePlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPairwisePlot.ControlValueChanged
-        If ucrChkPairwisePlot.Checked Then
+        If rdoXVariables.Checked Then
+            clsRGraphicsFunction.iCallType = 3
+            clsRSyntax.AddToAfterCodes(clsRGraphicsFunction, iPosition:=2)
+        ElseIf rdoYVariables.Checked Then
+            clsRGraphicsFunction.iCallType = 3
             clsRSyntax.AddToAfterCodes(clsRGraphicsFunction, iPosition:=2)
         Else
             clsRSyntax.RemoveFromAfterCodes(clsRGraphicsFunction)
@@ -110,8 +123,6 @@ Public Class sdgCanonicalCorrelation
     End Sub
 
     Private Sub ucrPnlVariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlVariables.ControlValueChanged
-        clsRGraphicsFunction.SetPackageName("GGally")
-        clsRGraphicsFunction.SetRCommand("ggpairs")
         If rdoXVariables.Checked Then
             clsRGraphicsFunction.AddParameter("columns", dlgCanonicalCorrelationAnalysis.ucrReceiverXvariables.GetVariableNames())
         Else
@@ -120,7 +131,7 @@ Public Class sdgCanonicalCorrelation
         If rdoYVariables.Checked Then
             clsRGraphicsFunction.AddParameter("columns", dlgCanonicalCorrelationAnalysis.ucrReceiverYvariables.GetVariableNames())
         Else
-            'clsRGraphicsFunction.RemoveParameter("columns")
+            'clsRGraphicsFunction.RemoveParameter("columns", )
         End If
 
     End Sub
@@ -148,15 +159,15 @@ Public Class sdgCanonicalCorrelation
     'End Sub
 
     Private Sub GGPairs()
-        'Dim clsTempFunc As RFunction
+        Dim clsTempFunc As RFunction
 
         'temp solution to fix bug in ggpairs function
-        'clsTempFunc = dlgCanonicalCorrelationAnalysis.ucrSelectorCCA.ucrAvailableDataFrames.clsCurrDataFrame.Clone()
-        'clsTempFunc.AddParameter("remove_attr", "TRUE")
+        clsTempFunc = dlgCanonicalCorrelationAnalysis.ucrSelectorCCA.ucrAvailableDataFrames.clsCurrDataFrame.Clone()
+        clsTempFunc.AddParameter("remove_attr", "TRUE")
 
         'clsRGraphics.SetPackageName("GGally")
         'clsRGraphics.SetFunction("ggpairs")
-        'clsRGraphicsFunction.AddParameter("data", clsRFunctionParameter:=clsTempFunc)
+        clsRGraphicsFunction.AddParameter("data", clsRFunctionParameter:=clsTempFunc)
         'frmMain.clsRLink.RunScript(clsRGraphicsFunction.ToScript(), 2)
     End Sub
 
@@ -184,7 +195,7 @@ Public Class sdgCanonicalCorrelation
     '    If rdoYVariables.Checked Then
     '        clsRGraphics.AddParameter("columns", dlgCanonicalCorrelationAnalysis.ucrReceiverYvariables.GetVariableNames())
     '    Else
-    '        clsRGraphics.RemoveParameter("columns")
+    '       clsRGraphics.RemoveParameter("columns")
     '    End If
     'End Sub
 

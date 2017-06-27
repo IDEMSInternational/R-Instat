@@ -17,12 +17,12 @@
 Imports instat
 Imports instat.Translations
 Public Class dlgCanonicalCorrelationAnalysis
-    Public strModelName As String
+    Public strModelName As String = ""
     Public bFirstLoad As Boolean = True
     Private bResetSubdialog As Boolean = False
     Private bReset As Boolean = True
     Private clsRCanCorFunction, clsRCoefFunction, clsRGraphicsFunction As New RFunction
-    Private clsTempFunction As String
+    Private clsTempFunction, clsTempFun As String
 
     Private Sub dlgCanonicalCorrelationAnalysis_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -92,11 +92,11 @@ Public Class dlgCanonicalCorrelationAnalysis
         clsDefaultFunction.SetAssignTo("last_CCA", strTempModel:="last_CCA", strTempDataframe:=ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
 
         clsRCanCorFunction.AddParameter("data_name", Chr(34) & ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-        'clsRCanCorFunction.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
+        clsRCanCorFunction.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
         clsRCanCorFunction.AddParameter("value1", Chr(34) & "cancor" & Chr(34))
 
         clsRCoefFunction.AddParameter("data_name", Chr(34) & ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-        'clsRCoefFunction.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
+        clsRCoefFunction.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
         clsRCoefFunction.AddParameter("value1", Chr(34) & "coef" & Chr(34))
 
         ' Set default RFunction as the base function
@@ -120,7 +120,7 @@ Public Class dlgCanonicalCorrelationAnalysis
     End Sub
 
     Private Sub cmdCCAOptions_Click(sender As Object, e As EventArgs) Handles cmdCCAOptions.Click
-        sdgCanonicalCorrelation.SetRFunction(ucrBase.clsRsyntax, clsRCanCorFunction, clsRCoefFunction, clsRGraphicsFunction, clsTempFunction, bResetSubdialog)
+        sdgCanonicalCorrelation.SetRFunction(ucrBase.clsRsyntax, clsRCanCorFunction, clsRCoefFunction, clsRGraphicsFunction, clsTempFunction, clsTempFun, bResetSubdialog)
         bResetSubdialog = False
         sdgCanonicalCorrelation.ShowDialog()
     End Sub
@@ -134,6 +134,7 @@ Public Class dlgCanonicalCorrelationAnalysis
     End Sub
 
     Private Sub ucrSaveResult_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlValueChanged
+        clsTempFun = ucrSaveResult.GetText
         clsTempFunction = ucrSaveResult.GetText
     End Sub
 End Class

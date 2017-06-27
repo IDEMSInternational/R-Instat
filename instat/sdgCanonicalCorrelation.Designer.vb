@@ -24,14 +24,14 @@ Partial Class sdgCanonicalCorrelation
     Private Sub InitializeComponent()
         Me.tbRegOptions = New System.Windows.Forms.TabControl()
         Me.tbDisplay = New System.Windows.Forms.TabPage()
-        Me.ucrChkCoefficients = New instat.ucrCheck()
-        Me.ucrChkCanonicalCorrelations = New instat.ucrCheck()
         Me.tbGraphics = New System.Windows.Forms.TabPage()
-        Me.ucrChkPairwisePlot = New instat.ucrCheck()
         Me.rdoYVariables = New System.Windows.Forms.RadioButton()
         Me.rdoXVariables = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlVariables = New instat.UcrPanel()
+        Me.ucrChkCoefficients = New instat.ucrCheck()
+        Me.ucrChkCanonicalCorrelations = New instat.ucrCheck()
+        Me.ucrChkPairwisePlot = New instat.ucrCheck()
         Me.ucrSdgButtons = New instat.ucrButtonsSubdialogue()
+        Me.ucrPnlVariables = New instat.UcrPanel()
         Me.tbRegOptions.SuspendLayout()
         Me.tbDisplay.SuspendLayout()
         Me.tbGraphics.SuspendLayout()
@@ -60,22 +60,6 @@ Partial Class sdgCanonicalCorrelation
         Me.tbDisplay.Text = "Display"
         Me.tbDisplay.UseVisualStyleBackColor = True
         '
-        'ucrChkCoefficients
-        '
-        Me.ucrChkCoefficients.Checked = False
-        Me.ucrChkCoefficients.Location = New System.Drawing.Point(10, 38)
-        Me.ucrChkCoefficients.Name = "ucrChkCoefficients"
-        Me.ucrChkCoefficients.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkCoefficients.TabIndex = 3
-        '
-        'ucrChkCanonicalCorrelations
-        '
-        Me.ucrChkCanonicalCorrelations.Checked = False
-        Me.ucrChkCanonicalCorrelations.Location = New System.Drawing.Point(6, 10)
-        Me.ucrChkCanonicalCorrelations.Name = "ucrChkCanonicalCorrelations"
-        Me.ucrChkCanonicalCorrelations.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkCanonicalCorrelations.TabIndex = 2
-        '
         'tbGraphics
         '
         Me.tbGraphics.Controls.Add(Me.ucrChkPairwisePlot)
@@ -91,18 +75,10 @@ Partial Class sdgCanonicalCorrelation
         Me.tbGraphics.Text = "Graphics"
         Me.tbGraphics.UseVisualStyleBackColor = True
         '
-        'ucrChkPairwisePlot
-        '
-        Me.ucrChkPairwisePlot.Checked = False
-        Me.ucrChkPairwisePlot.Location = New System.Drawing.Point(18, 12)
-        Me.ucrChkPairwisePlot.Name = "ucrChkPairwisePlot"
-        Me.ucrChkPairwisePlot.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkPairwisePlot.TabIndex = 4
-        '
         'rdoYVariables
         '
         Me.rdoYVariables.AutoSize = True
-        Me.rdoYVariables.Location = New System.Drawing.Point(28, 68)
+        Me.rdoYVariables.Location = New System.Drawing.Point(30, 68)
         Me.rdoYVariables.Name = "rdoYVariables"
         Me.rdoYVariables.Size = New System.Drawing.Size(78, 17)
         Me.rdoYVariables.TabIndex = 3
@@ -123,12 +99,29 @@ Partial Class sdgCanonicalCorrelation
         Me.rdoXVariables.Text = "X Variables"
         Me.rdoXVariables.UseVisualStyleBackColor = True
         '
-        'ucrPnlVariables
+        'ucrChkCoefficients
         '
-        Me.ucrPnlVariables.Location = New System.Drawing.Point(21, 34)
-        Me.ucrPnlVariables.Name = "ucrPnlVariables"
-        Me.ucrPnlVariables.Size = New System.Drawing.Size(88, 58)
-        Me.ucrPnlVariables.TabIndex = 5
+        Me.ucrChkCoefficients.Checked = False
+        Me.ucrChkCoefficients.Location = New System.Drawing.Point(10, 38)
+        Me.ucrChkCoefficients.Name = "ucrChkCoefficients"
+        Me.ucrChkCoefficients.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkCoefficients.TabIndex = 3
+        '
+        'ucrChkCanonicalCorrelations
+        '
+        Me.ucrChkCanonicalCorrelations.Checked = False
+        Me.ucrChkCanonicalCorrelations.Location = New System.Drawing.Point(11, 10)
+        Me.ucrChkCanonicalCorrelations.Name = "ucrChkCanonicalCorrelations"
+        Me.ucrChkCanonicalCorrelations.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkCanonicalCorrelations.TabIndex = 2
+        '
+        'ucrChkPairwisePlot
+        '
+        Me.ucrChkPairwisePlot.Checked = False
+        Me.ucrChkPairwisePlot.Location = New System.Drawing.Point(28, 12)
+        Me.ucrChkPairwisePlot.Name = "ucrChkPairwisePlot"
+        Me.ucrChkPairwisePlot.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkPairwisePlot.TabIndex = 4
         '
         'ucrSdgButtons
         '
@@ -136,6 +129,13 @@ Partial Class sdgCanonicalCorrelation
         Me.ucrSdgButtons.Name = "ucrSdgButtons"
         Me.ucrSdgButtons.Size = New System.Drawing.Size(142, 30)
         Me.ucrSdgButtons.TabIndex = 0
+        '
+        'ucrPnlVariables
+        '
+        Me.ucrPnlVariables.Location = New System.Drawing.Point(21, 34)
+        Me.ucrPnlVariables.Name = "ucrPnlVariables"
+        Me.ucrPnlVariables.Size = New System.Drawing.Size(88, 58)
+        Me.ucrPnlVariables.TabIndex = 5
         '
         'sdgCanonicalCorrelation
         '
