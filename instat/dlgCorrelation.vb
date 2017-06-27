@@ -265,4 +265,11 @@ Public Class dlgCorrelation
     Private Sub ucrSaveModel_CheckedChanged(bChecked As Boolean) Handles ucrSaveModel.CheckedChanged
         TestOKEnabled()
     End Sub
+
+    'Very bad temporary solution! Whole dialog needs to be fixed properly!
+    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
+        If sdgCorrPlot.rdoPairwisePlot.Checked OrElse sdgCorrPlot.rdoScatterplotMatrix.Checked OrElse sdgCorrPlot.rdoCorrelationPlot.Checked Then
+            ucrBase.clsRsyntax.iCallType = 3
+        End If
+    End Sub
 End Class
