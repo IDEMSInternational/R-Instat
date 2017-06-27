@@ -28,17 +28,17 @@ Partial Class dlgAutoSaveRecovery
         Me.cmdLoadData = New System.Windows.Forms.Button()
         Me.lblBackupLogDetected = New System.Windows.Forms.Label()
         Me.cmdSaveLog = New System.Windows.Forms.Button()
-        Me.cmdSaveDebuggingLog = New System.Windows.Forms.Button()
-        Me.lblBackupDebuggingLogDetected = New System.Windows.Forms.Label()
+        Me.cmdSaveInternalLog = New System.Windows.Forms.Button()
+        Me.lblBackupInternalLogDetected = New System.Windows.Forms.Label()
         Me.cmdSaveData = New System.Windows.Forms.Button()
         Me.lblBackupDataDetected = New System.Windows.Forms.Label()
         Me.lblDataSavedTo = New System.Windows.Forms.Label()
         Me.ucrInputSavedPathData = New instat.ucrInputTextBox()
         Me.ucrInputSavedPathLog = New instat.ucrInputTextBox()
         Me.lblLogSavedTo = New System.Windows.Forms.Label()
-        Me.ucrInputSavedPathDebuggingLog = New instat.ucrInputTextBox()
-        Me.lblDebuggingLogSavedTo = New System.Windows.Forms.Label()
-        Me.ucrChkSendDebuggingLog = New instat.ucrCheck()
+        Me.ucrInputSavedPathInternalLog = New instat.ucrInputTextBox()
+        Me.lblInternalLogSavedTo = New System.Windows.Forms.Label()
+        Me.ucrChkSendInternalLog = New instat.ucrCheck()
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.grpSavingOptions = New System.Windows.Forms.GroupBox()
         Me.grpEndChoice = New System.Windows.Forms.GroupBox()
@@ -103,23 +103,23 @@ Partial Class dlgAutoSaveRecovery
         Me.cmdSaveLog.Text = "Save Backup Log..."
         Me.cmdSaveLog.UseVisualStyleBackColor = True
         '
-        'cmdSaveDebuggingLog
+        'cmdSaveInternalLog
         '
-        Me.cmdSaveDebuggingLog.Location = New System.Drawing.Point(203, 115)
-        Me.cmdSaveDebuggingLog.Name = "cmdSaveDebuggingLog"
-        Me.cmdSaveDebuggingLog.Size = New System.Drawing.Size(176, 29)
-        Me.cmdSaveDebuggingLog.TabIndex = 7
-        Me.cmdSaveDebuggingLog.Text = "Save Backup Debugging Log..."
-        Me.cmdSaveDebuggingLog.UseVisualStyleBackColor = True
+        Me.cmdSaveInternalLog.Location = New System.Drawing.Point(203, 115)
+        Me.cmdSaveInternalLog.Name = "cmdSaveInternalLog"
+        Me.cmdSaveInternalLog.Size = New System.Drawing.Size(176, 29)
+        Me.cmdSaveInternalLog.TabIndex = 7
+        Me.cmdSaveInternalLog.Text = "Save Backup Internal Log..."
+        Me.cmdSaveInternalLog.UseVisualStyleBackColor = True
         '
-        'lblBackupDebuggingLogDetected
+        'lblBackupInternalLogDetected
         '
-        Me.lblBackupDebuggingLogDetected.AutoSize = True
-        Me.lblBackupDebuggingLogDetected.Location = New System.Drawing.Point(11, 123)
-        Me.lblBackupDebuggingLogDetected.Name = "lblBackupDebuggingLogDetected"
-        Me.lblBackupDebuggingLogDetected.Size = New System.Drawing.Size(186, 13)
-        Me.lblBackupDebuggingLogDetected.TabIndex = 6
-        Me.lblBackupDebuggingLogDetected.Text = "Backup Debugging Log File Detected"
+        Me.lblBackupInternalLogDetected.AutoSize = True
+        Me.lblBackupInternalLogDetected.Location = New System.Drawing.Point(11, 123)
+        Me.lblBackupInternalLogDetected.Name = "lblBackupInternalLogDetected"
+        Me.lblBackupInternalLogDetected.Size = New System.Drawing.Size(169, 13)
+        Me.lblBackupInternalLogDetected.TabIndex = 6
+        Me.lblBackupInternalLogDetected.Text = "Backup Internal Log File Detected"
         '
         'cmdSaveData
         '
@@ -177,32 +177,32 @@ Partial Class dlgAutoSaveRecovery
         Me.lblLogSavedTo.TabIndex = 13
         Me.lblLogSavedTo.Text = "Saving at:"
         '
-        'ucrInputSavedPathDebuggingLog
+        'ucrInputSavedPathInternalLog
         '
-        Me.ucrInputSavedPathDebuggingLog.AddQuotesIfUnrecognised = True
-        Me.ucrInputSavedPathDebuggingLog.IsMultiline = False
-        Me.ucrInputSavedPathDebuggingLog.IsReadOnly = False
-        Me.ucrInputSavedPathDebuggingLog.Location = New System.Drawing.Point(468, 123)
-        Me.ucrInputSavedPathDebuggingLog.Name = "ucrInputSavedPathDebuggingLog"
-        Me.ucrInputSavedPathDebuggingLog.Size = New System.Drawing.Size(258, 21)
-        Me.ucrInputSavedPathDebuggingLog.TabIndex = 16
+        Me.ucrInputSavedPathInternalLog.AddQuotesIfUnrecognised = True
+        Me.ucrInputSavedPathInternalLog.IsMultiline = False
+        Me.ucrInputSavedPathInternalLog.IsReadOnly = False
+        Me.ucrInputSavedPathInternalLog.Location = New System.Drawing.Point(468, 123)
+        Me.ucrInputSavedPathInternalLog.Name = "ucrInputSavedPathInternalLog"
+        Me.ucrInputSavedPathInternalLog.Size = New System.Drawing.Size(258, 21)
+        Me.ucrInputSavedPathInternalLog.TabIndex = 16
         '
-        'lblDebuggingLogSavedTo
+        'lblInternalLogSavedTo
         '
-        Me.lblDebuggingLogSavedTo.AutoSize = True
-        Me.lblDebuggingLogSavedTo.Location = New System.Drawing.Point(398, 125)
-        Me.lblDebuggingLogSavedTo.Name = "lblDebuggingLogSavedTo"
-        Me.lblDebuggingLogSavedTo.Size = New System.Drawing.Size(55, 13)
-        Me.lblDebuggingLogSavedTo.TabIndex = 15
-        Me.lblDebuggingLogSavedTo.Text = "Saving at:"
+        Me.lblInternalLogSavedTo.AutoSize = True
+        Me.lblInternalLogSavedTo.Location = New System.Drawing.Point(398, 125)
+        Me.lblInternalLogSavedTo.Name = "lblInternalLogSavedTo"
+        Me.lblInternalLogSavedTo.Size = New System.Drawing.Size(55, 13)
+        Me.lblInternalLogSavedTo.TabIndex = 15
+        Me.lblInternalLogSavedTo.Text = "Saving at:"
         '
-        'ucrChkSendDebuggingLog
+        'ucrChkSendInternalLog
         '
-        Me.ucrChkSendDebuggingLog.Checked = False
-        Me.ucrChkSendDebuggingLog.Location = New System.Drawing.Point(12, 254)
-        Me.ucrChkSendDebuggingLog.Name = "ucrChkSendDebuggingLog"
-        Me.ucrChkSendDebuggingLog.Size = New System.Drawing.Size(266, 20)
-        Me.ucrChkSendDebuggingLog.TabIndex = 17
+        Me.ucrChkSendInternalLog.Checked = False
+        Me.ucrChkSendInternalLog.Location = New System.Drawing.Point(12, 254)
+        Me.ucrChkSendInternalLog.Name = "ucrChkSendInternalLog"
+        Me.ucrChkSendInternalLog.Size = New System.Drawing.Size(266, 20)
+        Me.ucrChkSendInternalLog.TabIndex = 17
         '
         'cmdHelp
         '
@@ -218,10 +218,10 @@ Partial Class dlgAutoSaveRecovery
         Me.grpSavingOptions.Controls.Add(Me.lblBackupDataDetected)
         Me.grpSavingOptions.Controls.Add(Me.lblBackupLogDetected)
         Me.grpSavingOptions.Controls.Add(Me.cmdSaveLog)
-        Me.grpSavingOptions.Controls.Add(Me.ucrInputSavedPathDebuggingLog)
-        Me.grpSavingOptions.Controls.Add(Me.lblBackupDebuggingLogDetected)
-        Me.grpSavingOptions.Controls.Add(Me.lblDebuggingLogSavedTo)
-        Me.grpSavingOptions.Controls.Add(Me.cmdSaveDebuggingLog)
+        Me.grpSavingOptions.Controls.Add(Me.ucrInputSavedPathInternalLog)
+        Me.grpSavingOptions.Controls.Add(Me.lblBackupInternalLogDetected)
+        Me.grpSavingOptions.Controls.Add(Me.lblInternalLogSavedTo)
+        Me.grpSavingOptions.Controls.Add(Me.cmdSaveInternalLog)
         Me.grpSavingOptions.Controls.Add(Me.ucrInputSavedPathLog)
         Me.grpSavingOptions.Controls.Add(Me.cmdSaveData)
         Me.grpSavingOptions.Controls.Add(Me.lblLogSavedTo)
@@ -254,7 +254,7 @@ Partial Class dlgAutoSaveRecovery
         Me.Controls.Add(Me.grpEndChoice)
         Me.Controls.Add(Me.grpSavingOptions)
         Me.Controls.Add(Me.cmdHelp)
-        Me.Controls.Add(Me.ucrChkSendDebuggingLog)
+        Me.Controls.Add(Me.ucrChkSendInternalLog)
         Me.Controls.Add(Me.lblAutoRecoverMessage)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -275,17 +275,17 @@ Partial Class dlgAutoSaveRecovery
     Friend WithEvents cmdLoadData As Button
     Friend WithEvents lblBackupLogDetected As Label
     Friend WithEvents cmdSaveLog As Button
-    Friend WithEvents cmdSaveDebuggingLog As Button
-    Friend WithEvents lblBackupDebuggingLogDetected As Label
+    Friend WithEvents cmdSaveInternalLog As Button
+    Friend WithEvents lblBackupInternalLogDetected As Label
     Friend WithEvents cmdSaveData As Button
     Friend WithEvents lblBackupDataDetected As Label
     Friend WithEvents lblDataSavedTo As Label
     Friend WithEvents ucrInputSavedPathData As ucrInputTextBox
     Friend WithEvents ucrInputSavedPathLog As ucrInputTextBox
     Friend WithEvents lblLogSavedTo As Label
-    Friend WithEvents ucrInputSavedPathDebuggingLog As ucrInputTextBox
-    Friend WithEvents lblDebuggingLogSavedTo As Label
-    Friend WithEvents ucrChkSendDebuggingLog As ucrCheck
+    Friend WithEvents ucrInputSavedPathInternalLog As ucrInputTextBox
+    Friend WithEvents lblInternalLogSavedTo As Label
+    Friend WithEvents ucrChkSendInternalLog As ucrCheck
     Friend WithEvents cmdHelp As Button
     Friend WithEvents grpSavingOptions As GroupBox
     Friend WithEvents grpEndChoice As GroupBox
