@@ -200,7 +200,7 @@ Partial Class dlgWaterBalance
         'lblEndRainsColName
         '
         Me.lblEndRainsColName.AutoSize = True
-        Me.lblEndRainsColName.Location = New System.Drawing.Point(6, 410)
+        Me.lblEndRainsColName.Location = New System.Drawing.Point(6, 436)
         Me.lblEndRainsColName.Name = "lblEndRainsColName"
         Me.lblEndRainsColName.Size = New System.Drawing.Size(140, 13)
         Me.lblEndRainsColName.TabIndex = 51
@@ -210,7 +210,7 @@ Partial Class dlgWaterBalance
         'lblWBColName
         '
         Me.lblWBColName.AutoSize = True
-        Me.lblWBColName.Location = New System.Drawing.Point(6, 436)
+        Me.lblWBColName.Location = New System.Drawing.Point(6, 409)
         Me.lblWBColName.Name = "lblWBColName"
         Me.lblWBColName.Size = New System.Drawing.Size(149, 13)
         Me.lblWBColName.TabIndex = 53
@@ -358,7 +358,7 @@ Partial Class dlgWaterBalance
         Me.ucrInputWBColName.AddQuotesIfUnrecognised = True
         Me.ucrInputWBColName.IsMultiline = False
         Me.ucrInputWBColName.IsReadOnly = False
-        Me.ucrInputWBColName.Location = New System.Drawing.Point(158, 432)
+        Me.ucrInputWBColName.Location = New System.Drawing.Point(158, 405)
         Me.ucrInputWBColName.Name = "ucrInputWBColName"
         Me.ucrInputWBColName.Size = New System.Drawing.Size(167, 21)
         Me.ucrInputWBColName.TabIndex = 52
@@ -368,7 +368,7 @@ Partial Class dlgWaterBalance
         Me.ucrInputEndRainColName.AddQuotesIfUnrecognised = True
         Me.ucrInputEndRainColName.IsMultiline = False
         Me.ucrInputEndRainColName.IsReadOnly = False
-        Me.ucrInputEndRainColName.Location = New System.Drawing.Point(158, 407)
+        Me.ucrInputEndRainColName.Location = New System.Drawing.Point(158, 432)
         Me.ucrInputEndRainColName.Name = "ucrInputEndRainColName"
         Me.ucrInputEndRainColName.Size = New System.Drawing.Size(167, 21)
         Me.ucrInputEndRainColName.TabIndex = 50
@@ -471,7 +471,7 @@ Partial Class dlgWaterBalance
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(732, 512)
+        Me.ClientSize = New System.Drawing.Size(543, 512)
         Me.Controls.Add(Me.ucrNudTotalOverDays)
         Me.Controls.Add(Me.lblTotalOverDays)
         Me.Controls.Add(Me.ucrNudThreshold)
