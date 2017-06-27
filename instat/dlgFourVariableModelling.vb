@@ -58,14 +58,14 @@ Public Class dlgFourVariableModelling
         dctOperators1.Add("Aestrik(*)", Chr(34) & "*" & Chr(34))
         dctOperators1.Add("Forward slash(/)", Chr(34) & "/" & Chr(34))
         dctOperators1.Add("|", Chr(34) & "|" & Chr(34))
-        ucrInputModelOperators1.SetItems()
+        ucrInputModelOperators1.SetItems(dctOperators1)
 
         Dim dctOperators2 As New Dictionary(Of String, String)
         dctOperators2.Add("Plus(+)", Chr(34) & "+" & Chr(34))
         dctOperators2.Add("Aestrik(*)", Chr(34) & "*" & Chr(34))
         dctOperators2.Add("Forward slash(/)", Chr(34) & "/" & Chr(34))
         dctOperators2.Add("|", Chr(34) & "|" & Chr(34))
-        ucrInputModelOperators2.SetItems()
+        ucrInputModelOperators2.SetItems(dctOperators2)
 
 
         sdgSimpleRegOptions.SetRModelFunction(ucrBaseFourVariableModelling.clsRsyntax.clsBaseFunction)
