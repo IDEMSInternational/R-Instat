@@ -24,6 +24,7 @@ Partial Class sdgOneVarFitModDisplay
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtonsSubdialogue()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.ucrSavePlots = New instat.ucrSave()
         Me.rdoPPPlot = New System.Windows.Forms.RadioButton()
         Me.rdoQQPlot = New System.Windows.Forms.RadioButton()
         Me.rdoDensityPlot = New System.Windows.Forms.RadioButton()
@@ -33,12 +34,11 @@ Partial Class sdgOneVarFitModDisplay
         Me.ucrPnlPlots = New instat.UcrPanel()
         Me.tbcPlots = New System.Windows.Forms.TabControl()
         Me.tbclikelihood = New System.Windows.Forms.TabPage()
+        Me.ucrChkPLotLogLik = New instat.ucrCheck()
         Me.ucrSaveLikelihood = New instat.ucrSave()
-        Me.rdoNoLik = New System.Windows.Forms.RadioButton()
         Me.rdoLik = New System.Windows.Forms.RadioButton()
         Me.rdoLoglik = New System.Windows.Forms.RadioButton()
         Me.ucrPnlLikelihood = New instat.UcrPanel()
-        Me.ucrSavePlots = New instat.ucrSave()
         Me.TabPage1.SuspendLayout()
         Me.tbcPlots.SuspendLayout()
         Me.tbclikelihood.SuspendLayout()
@@ -68,6 +68,13 @@ Partial Class sdgOneVarFitModDisplay
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Plots"
         Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'ucrSavePlots
+        '
+        Me.ucrSavePlots.Location = New System.Drawing.Point(3, 155)
+        Me.ucrSavePlots.Name = "ucrSavePlots"
+        Me.ucrSavePlots.Size = New System.Drawing.Size(248, 24)
+        Me.ucrSavePlots.TabIndex = 13
         '
         'rdoPPPlot
         '
@@ -122,12 +129,10 @@ Partial Class sdgOneVarFitModDisplay
         'rdoNoPlot
         '
         Me.rdoNoPlot.AutoSize = True
-        Me.rdoNoPlot.Checked = True
         Me.rdoNoPlot.Location = New System.Drawing.Point(8, 6)
         Me.rdoNoPlot.Name = "rdoNoPlot"
         Me.rdoNoPlot.Size = New System.Drawing.Size(60, 17)
         Me.rdoNoPlot.TabIndex = 7
-        Me.rdoNoPlot.TabStop = True
         Me.rdoNoPlot.Text = "No Plot"
         Me.rdoNoPlot.UseVisualStyleBackColor = True
         '
@@ -150,8 +155,8 @@ Partial Class sdgOneVarFitModDisplay
         '
         'tbclikelihood
         '
+        Me.tbclikelihood.Controls.Add(Me.ucrChkPLotLogLik)
         Me.tbclikelihood.Controls.Add(Me.ucrSaveLikelihood)
-        Me.tbclikelihood.Controls.Add(Me.rdoNoLik)
         Me.tbclikelihood.Controls.Add(Me.rdoLik)
         Me.tbclikelihood.Controls.Add(Me.rdoLoglik)
         Me.tbclikelihood.Controls.Add(Me.ucrPnlLikelihood)
@@ -163,6 +168,14 @@ Partial Class sdgOneVarFitModDisplay
         Me.tbclikelihood.Text = "Likelihood"
         Me.tbclikelihood.UseVisualStyleBackColor = True
         '
+        'ucrChkPLotLogLik
+        '
+        Me.ucrChkPLotLogLik.Checked = False
+        Me.ucrChkPLotLogLik.Location = New System.Drawing.Point(6, 11)
+        Me.ucrChkPLotLogLik.Name = "ucrChkPLotLogLik"
+        Me.ucrChkPLotLogLik.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkPLotLogLik.TabIndex = 12
+        '
         'ucrSaveLikelihood
         '
         Me.ucrSaveLikelihood.Location = New System.Drawing.Point(8, 151)
@@ -170,20 +183,10 @@ Partial Class sdgOneVarFitModDisplay
         Me.ucrSaveLikelihood.Size = New System.Drawing.Size(248, 24)
         Me.ucrSaveLikelihood.TabIndex = 11
         '
-        'rdoNoLik
-        '
-        Me.rdoNoLik.AutoSize = True
-        Me.rdoNoLik.Location = New System.Drawing.Point(8, 53)
-        Me.rdoNoLik.Name = "rdoNoLik"
-        Me.rdoNoLik.Size = New System.Drawing.Size(60, 17)
-        Me.rdoNoLik.TabIndex = 10
-        Me.rdoNoLik.Text = "No Plot"
-        Me.rdoNoLik.UseVisualStyleBackColor = True
-        '
         'rdoLik
         '
         Me.rdoLik.AutoSize = True
-        Me.rdoLik.Location = New System.Drawing.Point(8, 30)
+        Me.rdoLik.Location = New System.Drawing.Point(10, 60)
         Me.rdoLik.Name = "rdoLik"
         Me.rdoLik.Size = New System.Drawing.Size(94, 17)
         Me.rdoLik.TabIndex = 9
@@ -194,7 +197,7 @@ Partial Class sdgOneVarFitModDisplay
         '
         Me.rdoLoglik.AutoSize = True
         Me.rdoLoglik.Checked = True
-        Me.rdoLoglik.Location = New System.Drawing.Point(8, 7)
+        Me.rdoLoglik.Location = New System.Drawing.Point(10, 37)
         Me.rdoLoglik.Name = "rdoLoglik"
         Me.rdoLoglik.Size = New System.Drawing.Size(115, 17)
         Me.rdoLoglik.TabIndex = 8
@@ -204,17 +207,10 @@ Partial Class sdgOneVarFitModDisplay
         '
         'ucrPnlLikelihood
         '
-        Me.ucrPnlLikelihood.Location = New System.Drawing.Point(3, 6)
+        Me.ucrPnlLikelihood.Location = New System.Drawing.Point(3, 37)
         Me.ucrPnlLikelihood.Name = "ucrPnlLikelihood"
-        Me.ucrPnlLikelihood.Size = New System.Drawing.Size(163, 110)
+        Me.ucrPnlLikelihood.Size = New System.Drawing.Size(122, 40)
         Me.ucrPnlLikelihood.TabIndex = 7
-        '
-        'ucrSavePlots
-        '
-        Me.ucrSavePlots.Location = New System.Drawing.Point(3, 155)
-        Me.ucrSavePlots.Name = "ucrSavePlots"
-        Me.ucrSavePlots.Size = New System.Drawing.Size(248, 24)
-        Me.ucrSavePlots.TabIndex = 13
         '
         'sdgOneVarFitModDisplay
         '
@@ -248,10 +244,10 @@ Partial Class sdgOneVarFitModDisplay
     Friend WithEvents rdoNoPlot As RadioButton
     Friend WithEvents ucrPnlPlots As UcrPanel
     Friend WithEvents tbclikelihood As TabPage
-    Friend WithEvents rdoNoLik As RadioButton
     Friend WithEvents rdoLik As RadioButton
     Friend WithEvents rdoLoglik As RadioButton
     Friend WithEvents ucrPnlLikelihood As UcrPanel
     Friend WithEvents ucrSaveLikelihood As ucrSave
     Friend WithEvents ucrSavePlots As ucrSave
+    Friend WithEvents ucrChkPLotLogLik As ucrCheck
 End Class
