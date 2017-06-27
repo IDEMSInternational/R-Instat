@@ -282,23 +282,13 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub SelectorHeader()
-        If rdoSingleColumn.Checked Then
-            If rdoDefaultFormat.Checked Then
-                ucrReceiverForDate.strSelectorHeading = "Factors"
-            ElseIf rdoSpecifyOrigin.Checked
-                ucrReceiverForDate.strSelectorHeading = "Numerics"
-            Else
-                ucrReceiverForDate.strSelectorHeading = "Variables"
-            End If
-        ElseIf rdoTwoColumns.Checked Then
-            ucrReceiverYearTwo.strSelectorHeading = "Variables"
-            ucrReceiverDayTwo.strSelectorHeading = "Variables"
+        If rdoDefaultFormat.Checked Then
+            ucrReceiverForDate.strSelectorHeading = "Factors"
+        ElseIf rdoSpecifyOrigin.Checked
+            ucrReceiverForDate.strSelectorHeading = "Numerics"
         Else
-            ucrReceiverYearThree.strSelectorHeading = "Variables"
-            ucrReceiverMonthThree.strSelectorHeading = "Variables"
-            ucrReceiverDayThree.strSelectorHeading = "Variables"
+            ucrReceiverForDate.strSelectorHeading = "Variables"
         End If
-
     End Sub
 
     Private Sub SetDefaultColumn()
@@ -362,7 +352,6 @@ Public Class dlgMakeDate
             ucrBase.clsRsyntax.SetBaseRFunction(clsMakeYearMonthDay)
         End If
         SetReceivers()
-        SelectorHeader()
         SetRCodeForControls(False)
     End Sub
 
