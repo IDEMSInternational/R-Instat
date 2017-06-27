@@ -1,5 +1,5 @@
 ﻿Public Class clsRegressionDefaults
-    Public Shared ReadOnly Property clsDefaultRLmFunction As RFunction
+    Public Shared ReadOnly Property clsDefaultLmFunction As RFunction
         Get
 
             Dim clsRModelFunction As New RFunction
