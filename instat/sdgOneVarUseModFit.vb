@@ -232,47 +232,49 @@ Public Class sdgOneVarUseModFit
     End Sub
 
     Private Sub ucrPnlPlots_ControlValueChanged() Handles ucrPnlPlots.ControlValueChanged
-        If rdoCDFPlot.Checked Then
-            clsRSyntax.AddToAfterCodes(clsRplotCDFfunction, iPosition:=0)
-            clsRSyntax.SetBaseRFunction(clsRplotCDFfunction)
-        Else
-            clsRSyntax.RemoveFromAfterCodes(clsRplotCDFfunction)
-        End If
         If rdoPlotAll.Checked Then
-            clsRSyntax.AddToAfterCodes(clsRPlotAllFunction, iPosition:=0)
-            clsRSyntax.SetBaseRFunction(clsRPlotAllFunction)
+            clsRSyntax.AddToAfterCodes(clsRPlotAllFunction, iPosition:=1)
+            'clsRSyntax.SetBaseRFunction(clsRPlotAllFunction)
         Else
             clsRSyntax.RemoveFromAfterCodes(clsRPlotAllFunction)
         End If
         If rdoPPPlot.Checked Then
-            clsRSyntax.AddToAfterCodes(clsRplotPPfunction, iPosition:=0)
-            clsRSyntax.SetBaseRFunction(clsRplotPPfunction)
+            clsRSyntax.AddToAfterCodes(clsRplotPPfunction, iPosition:=2)
+            '  clsRSyntax.SetBaseRFunction(clsRplotPPfunction)
         Else
             clsRSyntax.RemoveFromAfterCodes(clsRplotPPfunction)
         End If
         If rdoQQPlot.Checked Then
-            clsRSyntax.AddToAfterCodes(clsRplotQQfunction, iPosition:=0)
-            clsRSyntax.SetBaseRFunction(clsRplotQQfunction)
+            clsRSyntax.AddToAfterCodes(clsRplotQQfunction, iPosition:=3)
+            ' clsRSyntax.SetBaseRFunction(clsRplotQQfunction)
         Else
             clsRSyntax.RemoveFromAfterCodes(clsRplotQQfunction)
         End If
         If rdoDensityPlot.Checked Then
-            clsRSyntax.AddToAfterCodes(clsRplotDensfunction, iPosition:=0)
-            clsRSyntax.SetBaseRFunction(clsRplotDensfunction)
+            clsRSyntax.AddToAfterCodes(clsRplotDensfunction, iPosition:=4)
+            '   clsRSyntax.SetBaseRFunction(clsRplotDensfunction)
         Else
             clsRSyntax.RemoveFromAfterCodes(clsRplotDensfunction)
         End If
         If rdoCIcdf.Checked Then
-            clsRSyntax.AddToAfterCodes(clsRplotCIfunction, iPosition:=0)
-            clsRSyntax.SetBaseRFunction(clsRplotCIfunction)
+            clsRSyntax.AddToAfterCodes(clsRplotCIfunction, iPosition:=5)
+            clsRplotCIfunction.AddParameter("b", clsRFunctionParameter:=clsOneVarRBootFunction)
+            clsRplotCIfunction.AddParameter("CI.cdfplot", Chr(34) & "quantile" & Chr(34))
+            'clsRSyntax.SetBaseRFunction(clsRplotCIfunction)
         Else
             clsRSyntax.RemoveFromAfterCodes(clsRplotCIfunction)
         End If
         If rdoNoPlot.Checked Then
-            clsRSyntax.AddToAfterCodes(clsRNoPlotfunction, iPosition:=0)
+            clsRSyntax.AddToAfterCodes(clsRNoPlotfunction, iPosition:=6)
             clsRSyntax.SetBaseRFunction(clsRNoPlotfunction)
         Else
             clsRSyntax.RemoveFromAfterCodes(clsRNoPlotfunction)
+        End If
+        If rdoCDFPlot.Checked Then
+            clsRSyntax.AddToAfterCodes(clsRplotCDFfunction, iPosition:=7)
+            'clsRSyntax.SetBaseRFunction(clsRplotCDFfunction)
+        Else
+            clsRSyntax.RemoveFromAfterCodes(clsRplotCDFfunction)
         End If
 
     End Sub

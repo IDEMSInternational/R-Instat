@@ -110,7 +110,7 @@ Public Class dlgOneVarUseModel
         clsRplotDensfunction.iCallType = 3
 
         clsRplotCIfunction.SetPackageName("fitdistrplus")
-        clsRplotCIfunction.SetRCommand("cicdfplot")
+        clsRplotCIfunction.SetRCommand("CIcdfplot")
         clsRplotCIfunction.iCallType = 3
 
         'Temporary as we think of how to implement No plot option
@@ -123,6 +123,7 @@ Public Class dlgOneVarUseModel
 
         clsQuantileFunction.SetRCommand("quantile")
         clsQuantileFunction.AddParameter("probs", clsRFunctionParameter:=clsSeqFunction)
+        clsQuantileFunction.iCallType = 2
 
         clsRBootFunction.SetPackageName("fitdistrplus")
         clsRBootFunction.SetRCommand("bootdist")
@@ -133,7 +134,7 @@ Public Class dlgOneVarUseModel
         clsQuantileFunction.SetAssignTo(ucrNewDataFrameName.GetText, strTempModel:="last_model", strTempDataframe:=ucrSelectorUseModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         'clsRBootFunction.SetAssignTo(ucrSaveObjects.GetText, strTempModel:="last_bootstrap", strTempDataframe:=ucrSelectorUseModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         ucrBase.clsRsyntax.SetBaseRFunction(clsQuantileFunction)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsRPlotAllFunction, iPosition:=0)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsRPlotAllFunction, iPosition:=1)
         bResetSubdialog = True
     End Sub
 
@@ -212,7 +213,4 @@ Public Class dlgOneVarUseModel
         TestOKEnabled()
     End Sub
 
-    'Private Sub ucrReceiverObject_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverObject.ControlValueChanged
-    '    clsReceiver = ucrReceiverObject.GetVariables()
-    'End Sub
 End Class
