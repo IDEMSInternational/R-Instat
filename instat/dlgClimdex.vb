@@ -51,24 +51,29 @@ Public Class dlgClimdex
         'ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {"date"})
         ucrReceiverDate.bAutoFill = True
         ucrReceiverDate.SetParameterIsString()
+        ucrReceiverDate.strSelectorHeading = "Date"
 
         ucrReceiverTmax.SetParameter(New RParameter("col_name"))
         ucrReceiverTmax.Selector = ucrSelectorClimdex
         ucrReceiverTmax.SetClimaticType("temp_max")
         ucrReceiverTmax.bAutoFill = True
         ucrReceiverTmax.SetParameterIsString()
+        ucrReceiverTmax.strSelectorHeading = "Numerics"
 
         ucrReceiverTmin.SetParameter(New RParameter("col_name"))
         ucrReceiverTmin.Selector = ucrSelectorClimdex
         ucrReceiverTmin.SetClimaticType("temp_min")
         ucrReceiverTmin.bAutoFill = True
         ucrReceiverTmin.SetParameterIsString()
+        ucrReceiverTmin.strSelectorHeading = "Numerics"
+
 
         ucrReceiverPrec.SetParameter(New RParameter("col_name"))
         ucrReceiverPrec.Selector = ucrSelectorClimdex
         ucrReceiverPrec.SetClimaticType("rain")
         ucrReceiverPrec.bAutoFill = True
         ucrReceiverPrec.SetParameterIsString()
+        ucrReceiverPrec.strSelectorHeading = "Numerics"
 
         ucrChkSave.SetText("Save Indices")
         ucrChkSave.bChangeParameterValue = False
