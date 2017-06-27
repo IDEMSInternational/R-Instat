@@ -17,7 +17,7 @@ Imports instat
 Imports instat.Translations
 
 Public Class dlgOneVarFitModel
-    Public clsROneVarFitModel, clsRLength, clsRMean, clsRTTest, clsVarTest, clsREnormTest, clsRNonSignTest, clsRWilcoxTest, clsRBinomTest, clsRPoissonTest, clsRplot, clsRfitdist, clsRStartValues, clsRBinomStart, clsRConvertVector, clsRConvertInteger, clsRConvertNumeric As New RFunction
+    Public clsROneVarFitModel, clsRLogLikFunction, clsRLength, clsRMean, clsRTTest, clsVarTest, clsREnormTest, clsRNonSignTest, clsRWilcoxTest, clsRBinomTest, clsRPoissonTest, clsRplot, clsRfitdist, clsRStartValues, clsRBinomStart, clsRConvertVector, clsRConvertInteger, clsRConvertNumeric As New RFunction
     Public clsRplotFunction, clsRplotPPComp, clsRplotCdfcomp, clsRplotQqComp, clsRplotDenscomp As RFunction
     Public clsFunctionOperator, clsFactorOperator As New ROperator
     Public bfirstload As Boolean = True
@@ -46,6 +46,8 @@ Public Class dlgOneVarFitModel
 
         'sdgOneVarFitModDisplay.InitialiseDialog()
         'sdgOneVarFitModel.InitialiseDialog()
+
+
 
         UcrReceiver.Selector = ucrSelectorOneVarFitMod
         UcrReceiver.SetMeAsReceiver()
@@ -78,7 +80,7 @@ Public Class dlgOneVarFitModel
         ucrPnlGeneralExactCase.AddRadioButton(rdoExactCase)
 
         ucrPnlGeneralExactCase.AddFunctionNamesCondition(rdoGeneralCase, "fitdist")
-        ucrPnlGeneralExactCase.AddFunctionNamesCondition(rdoGeneralCase, "fitdist", False)
+        ucrPnlGeneralExactCase.AddFunctionNamesCondition(rdoExactCase, "fitdist", False)
 
         ucrPnlStats.AddRadioButton(rdoEnorm)
         ucrPnlStats.AddRadioButton(rdoMeanWilcox)
@@ -126,6 +128,12 @@ Public Class dlgOneVarFitModel
         clsRConvertVector = New RFunction
         clsRConvertInteger = New RFunction
         clsRConvertNumeric = New RFunction
+        clsRplotFunction = New RFunction
+        clsRplotPPComp = New RFunction
+        clsRplotCdfcomp = New RFunction
+        clsRplotQqComp = New RFunction
+        clsRplotDenscomp = New RFunction
+        clsRLogLikFunction = New RFunction
 
         clsFunctionOperator = New ROperator
         clsFactorOperator = New ROperator
@@ -185,7 +193,7 @@ Public Class dlgOneVarFitModel
         'clsRConvert.SetPackageName("base")
 
         'sdg
-        clsRplotFunction.SetPackageName("")
+        clsRplotFunction.SetPackageName("graphics")
         clsRplotFunction.SetRCommand("plot")
         clsRplotFunction.iCallType = 3
 
@@ -205,6 +213,10 @@ Public Class dlgOneVarFitModel
         clsRplotDenscomp.SetRCommand("denscomp")
         clsRplotDenscomp.iCallType = 3
 
+        clsRLogLikFunction.SetPackageName("fitdistrplus")
+        clsRLogLikFunction.SetRCommand("llplot")
+        clsRLogLikFunction.iCallType = 3
+
         SetDataParameter()
         EnableOptions()
 
@@ -212,14 +224,14 @@ Public Class dlgOneVarFitModel
         clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertInteger)
         clsROneVarFitModel.SetAssignTo("last_model", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model")
         UcrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModel)
-        UcrBase.clsRsyntax.AddToAfterCodes(clsRplot, iPosition:=0)
+
         SetDistributions()
         bResetSubdialog = True
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrPnlGeneralExactCase.SetRCode(clsROneVarFitModel, bReset)
-        UcrReceiver.SetRCode(clsRBinomStart, bReset)
+        UcrReceiver.SetRCode(clsRConvertVector, bReset)
         ucrChkConvertVariate.SetRCode(clsRConvertNumeric, bReset)
         ucrNudHyp.SetRCode(clsRTTest, bReset)
         UcrReceiver.AddAdditionalCodeParameterPair(clsRConvertNumeric, New RParameter("x"), iAdditionalPairNo:=1)
@@ -469,7 +481,7 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        sdgOneVarFitModDisplay.SetRCode(clsROneVarFitModel, clsRplotFunction, clsRplotPPComp, clsRplotCdfcomp, clsRplotQqComp, clsRplotDenscomp, bResetSubdialog)
+        sdgOneVarFitModDisplay.SetRCode(UcrBase.clsRsyntax, clsRNewOneVarFitModel:=clsROneVarFitModel, clsNewRLogLikFunction:=clsRLogLikFunction, clsNewRplotFunction:=clsRplotFunction, clsNewRplotPPComp:=clsRplotPPComp, clsNewRplotCdfcomp:=clsRplotCdfcomp, clsNewRplotQqComp:=clsRplotQqComp, clsNewRplotDenscomp:=clsRplotDenscomp, bReset:=bResetSubdialog)
         bResetSubdialog = False
         sdgOneVarFitModDisplay.ShowDialog()
         Display()
@@ -494,10 +506,9 @@ Public Class dlgOneVarFitModel
 
     Private Sub UcrBase_ClickOk(sender As Object, e As EventArgs) Handles UcrBase.ClickOk
         If rdoGeneralCase.Checked Then
-            sdgOneVarFitModDisplay.CreateGraphs()
-            If sdgOneVarFitModel.rdoMle.Checked AndAlso (sdgOneVarFitModDisplay.rdoLoglik.Checked Or sdgOneVarFitModDisplay.rdoLik.Checked) Then
-                sdgOneVarFitModDisplay.RunLikelihoods()
-            End If
+            ' If sdgOneVarFitModel.rdoMle.Checked AndAlso (sdgOneVarFitModDisplay.rdoLoglik.Checked Or sdgOneVarFitModDisplay.rdoLik.Checked) Then
+            ' sdgOneVarFitModDisplay.RunLikelihoods()
+            'End If
         ElseIf rdoExactCase.Checked Then
             If ucrFamily.clsCurrDistribution.strNameTag = "Normal" OrElse ucrFamily.clsCurrDistribution.strNameTag = "Poisson" Then ' can remove this line once Bernouli residual plots are working
                 PlotResiduals()
