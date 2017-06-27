@@ -36,7 +36,7 @@ Public Class dlgThreeVariableModelling
 
     Private Sub InitialiseDialog()
         'Temporary fix: function autoplot does not support glm/lm models
-        sdgSimpleRegOptions.chkMultiplePlots.Enabled = False
+        'sdgSimpleRegOptions.chkMultiplePlots.Enabled = False
         ucrBaseThreeVariableModelling.clsRsyntax.iCallType = 2
         ucrBaseThreeVariableModelling.clsRsyntax.SetFunction("")
         ucrBaseThreeVariableModelling.iHelpTopicID = 369
@@ -53,14 +53,14 @@ Public Class dlgThreeVariableModelling
         ucrModelName.SetItemsTypeAsModels()
         ucrModelName.SetDefaultTypeAsModel()
         ucrModelPreview.IsReadOnly = True
-        sdgSimpleRegOptions.SetRModelFunction(ucrBaseThreeVariableModelling.clsRsyntax.clsBaseFunction)
+        'sdgSimpleRegOptions.SetRModelFunction(ucrBaseThreeVariableModelling.clsRsyntax.clsBaseFunction)
         sdgSimpleRegOptions.SetRDataFrame(ucrSelectorThreeVariableModelling.ucrAvailableDataFrames)
-        sdgSimpleRegOptions.SetRYVariable(ucrResponse)
-        sdgSimpleRegOptions.SetRXVariable(ucrFirstExplanatory)
-        sdgVariableTransformations.SetRYVariable(ucrResponse)
-        sdgVariableTransformations.SetRModelOperator(clsModel1)
-        sdgModelOptions.SetRCIFunction(clsRCIFunction)
-        sdgVariableTransformations.SetRCIFunction(clsRCIFunction)
+        ' sdgSimpleRegOptions.SetRYVariable(ucrResponse)
+        'sdgSimpleRegOptions.SetRXVariable(ucrFirstExplanatory)
+        'sdgVariableTransformations.SetRYVariable(ucrResponse)
+        'sdgVariableTransformations.SetRModelOperator(clsModel1)
+        'sdgModelOptions.SetRCIFunction(clsRCIFunction)
+        'sdgVariableTransformations.SetRCIFunction(clsRCIFunction)
         AssignModelName()
         ucrModelName.SetValidationTypeAsRVariable()
     End Sub
@@ -85,15 +85,15 @@ Public Class dlgThreeVariableModelling
         chkFirstFunction.Visible = False
         chkSecondFunction.Checked = False
         chkSecondFunction.Visible = False
-        sdgSimpleRegOptions.SetDefaults()
+        'sdgSimpleRegOptions.SetDefaults()
         sdgModelOptions.SetDefaults()
         ucrModelName.Reset()
         ucrModelPreview.Reset()
         ResponseConvert()
         ModelOperator()
-        sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
+        'sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
         sdgSimpleRegOptions.lblDisplayCLevel.Enabled = True
-        sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
+        '' sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
         TestOKEnabled()
     End Sub
 
@@ -169,7 +169,7 @@ Public Class dlgThreeVariableModelling
                 chkFunction.Visible = False
             End If
             If currentReceiver.Name = "ucrFirstExplanatory" Then
-                sdgVariableTransformations.SetRXVariable(ucrFirstExplanatory)
+                '   sdgVariableTransformations.SetRXVariable(ucrFirstExplanatory)
                 If chkFirstFunction.Checked Then
                     sdgVariableTransformations.ModelFunction(True)
                 Else
@@ -178,7 +178,7 @@ Public Class dlgThreeVariableModelling
                 End If
             End If
             If currentReceiver.Name = "ucrSecondExplanatory" Then
-                sdgVariableTransformations.SetRXVariable(ucrSecondExplanatory)
+                ' sdgVariableTransformations.SetRXVariable(ucrSecondExplanatory)
                 If chkSecondFunction.Checked Then
                     sdgVariableTransformations.ModelFunction(False)
                 Else
@@ -214,7 +214,7 @@ Public Class dlgThreeVariableModelling
     End Sub
 
     Private Sub ucrBaseThreeVariableModelling_ClickOk(sender As Object, e As EventArgs) Handles ucrBaseThreeVariableModelling.ClickOk
-        sdgSimpleRegOptions.RegOptions()
+        ' sdgSimpleRegOptions.RegOptions()
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click

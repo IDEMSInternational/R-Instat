@@ -50,15 +50,15 @@ Public Class dlgFourVariableModelling
         ucrInputModelOperators1.SetItems({"+", "*", ":", "/", "|"})
         ucrInputModelOperators2.SetItems({"+", "*", ":", "/", "|"})
         ucrModelName.SetValidationTypeAsRVariable()
-        sdgSimpleRegOptions.SetRModelFunction(ucrBaseFourVariableModelling.clsRsyntax.clsBaseFunction)
+        '  sdgSimpleRegOptions.SetRModelFunction(ucrBaseFourVariableModelling.clsRsyntax.clsBaseFunction)
         ucrModelPreview.IsReadOnly = True
         sdgSimpleRegOptions.SetRDataFrame(ucrSelectorFourVariableModelling.ucrAvailableDataFrames)
-        sdgSimpleRegOptions.SetRYVariable(ucrResponse)
-        sdgSimpleRegOptions.SetRXVariable(ucrFirstExplanatory)
-        sdgVariableTransformations.SetRYVariable(ucrResponse)
-        sdgVariableTransformations.SetRModelOperator(clsModel1)
-        sdgModelOptions.SetRCIFunction(clsRCIFunction)
-        sdgVariableTransformations.SetRCIFunction(clsRCIFunction)
+        'sdgSimpleRegOptions.SetRYVariable(ucrResponse)
+        ' sdgSimpleRegOptions.SetRXVariable(ucrFirstExplanatory)
+        'sdgVariableTransformations.SetRYVariable(ucrResponse)
+        'sdgVariableTransformations.SetRModelOperator(clsModel1)
+        'sdgModelOptions.SetRCIFunction(clsRCIFunction)
+        'sdgVariableTransformations.SetRCIFunction(clsRCIFunction)
         AssignModelName()
     End Sub
 
@@ -79,7 +79,7 @@ Public Class dlgFourVariableModelling
         chkFirstFunction.Checked = False
         chkFirstFunction.Visible = False
         ucrModelName.SetName("reg")
-        sdgSimpleRegOptions.SetDefaults()
+        ' sdgSimpleRegOptions.SetDefaults()
         sdgModelOptions.SetDefaults()
         ResponseConvert()
         TestOKEnabled()
@@ -164,7 +164,7 @@ Public Class dlgFourVariableModelling
                 chkFirstFunction.Visible = False
             End If
             If currentReceiver.Name = "ucrFirstExplanatory" Then
-                sdgVariableTransformations.SetRXVariable(ucrFirstExplanatory)
+                'sdgVariableTransformations.SetRXVariable(ucrFirstExplanatory)
                 If chkFirstFunction.Checked Then
                     sdgVariableTransformations.ModelFunction(True)
                 Else
@@ -194,7 +194,7 @@ Public Class dlgFourVariableModelling
     End Sub
 
     Private Sub ucrBaseFourVariableModelling_ClickOk(sender As Object, e As EventArgs) Handles ucrBaseFourVariableModelling.ClickOk
-        sdgSimpleRegOptions.RegOptions()
+        'sdgSimpleRegOptions.RegOptions()
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
@@ -237,30 +237,30 @@ Public Class dlgFourVariableModelling
         sdgModelOptions.RestrictLink()
         'TODO:   Include multinomial as an option And the appropriate function
         If (ucrFamily.clsCurrDistribution.strNameTag = "Normal" And ucrInputModelOperators2.GetText <> "|") Then
-            sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
+            'sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
             sdgSimpleRegOptions.lblDisplayCLevel.Enabled = True
-            sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
+            'sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
             ucrBaseFourVariableModelling.clsRsyntax.SetFunction("lm")
             ucrBaseFourVariableModelling.clsRsyntax.RemoveParameter("family")
         ElseIf (ucrFamily.clsCurrDistribution.strNameTag = "Normal" And ucrInputModelOperators2.GetText = "|") Then
-            sdgSimpleRegOptions.chkDisplayCLimits.Checked = False
-            sdgSimpleRegOptions.chkDisplayCLimits.Enabled = False
+            ' sdgSimpleRegOptions.chkDisplayCLimits.Checked = False
+            ' sdgSimpleRegOptions.chkDisplayCLimits.Enabled = False
             sdgSimpleRegOptions.lblDisplayCLevel.Enabled = False
-            sdgSimpleRegOptions.nudDisplayCLevel.Enabled = False
+            ' sdgSimpleRegOptions.nudDisplayCLevel.Enabled = False
             ucrBaseFourVariableModelling.clsRsyntax.SetFunction("lmer")
             ucrBaseFourVariableModelling.clsRsyntax.RemoveParameter("family")
         ElseIf (ucrFamily.clsCurrDistribution.strNameTag <> "Normal" And ucrInputModelOperators2.GetText = "|") Then
-            sdgSimpleRegOptions.chkDisplayCLimits.Checked = False
-            sdgSimpleRegOptions.chkDisplayCLimits.Enabled = False
+            'sdgSimpleRegOptions.chkDisplayCLimits.Checked = False
+            'sdgSimpleRegOptions.chkDisplayCLimits.Enabled = False
             sdgSimpleRegOptions.lblDisplayCLevel.Enabled = False
-            sdgSimpleRegOptions.nudDisplayCLevel.Enabled = False
+            'sdgSimpleRegOptions.nudDisplayCLevel.Enabled = False
             clsRCIFunction.SetRCommand(ucrFamily.clsCurrDistribution.strGLMFunctionName)
             ucrBaseFourVariableModelling.clsRsyntax.SetFunction("glmer")
             ucrBaseFourVariableModelling.clsRsyntax.AddParameter("family", clsRFunctionParameter:=clsRCIFunction)
         Else
-            sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
+            ' sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
             sdgSimpleRegOptions.lblDisplayCLevel.Enabled = True
-            sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
+            'sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
             clsRCIFunction.SetRCommand(ucrFamily.clsCurrDistribution.strGLMFunctionName)
             ucrBaseFourVariableModelling.clsRsyntax.SetFunction("glm")
             ucrBaseFourVariableModelling.clsRsyntax.AddParameter("family", clsRFunctionParameter:=clsRCIFunction)

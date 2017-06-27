@@ -150,6 +150,7 @@
     <Compile Include="clsGgplotDefaults.vb" />
     <Compile Include="clsInstatOptionsDefaults.vb" />
     <Compile Include="clsRCodeStructure.vb" />
+    <Compile Include="clsRegressionDefaults.vb" />
     <Compile Include="dlgAddComment.Designer.vb">
       <DependentUpon>dlgAddComment.vb</DependentUpon>
     </Compile>
