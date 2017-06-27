@@ -68,6 +68,7 @@ Public Class ucrFactor
 
     Private Sub ucrFactor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         grdFactorData.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, False)
+        'TODO possibly don't need to do this now as linking will fill the grid (but counts etc. need to be updated)
         RefreshFactorData()
     End Sub
 
@@ -457,13 +458,17 @@ Public Class ucrFactor
         End If
     End Sub
 
-    Public Sub SetColumn(strValues As String(), iColumnIndex As Integer)
+    Public Sub SetColumn(strValues As String(), iColumnIndex As Integer, Optional bSilent As Boolean = True)
         Dim i As Integer
         If shtCurrSheet IsNot Nothing Then
             If strValues.Count <> shtCurrSheet.RowCount Then
-                MsgBox("Developer error: Cannot set value of control " & Name & " because the list of values does not match the number of levels.")
+                If Not bSilent Then
+                    MsgBox("Developer error: Cannot set value of control " & Name & " because the list of values does not match the number of levels.")
+                End If
             ElseIf iColumnIndex < 0 OrElse iColumnIndex >= shtCurrSheet.ColumnCount Then
-                MsgBox("Developer error: Cannot set value of control " & Name & " because there is no column at index " & iColumnIndex & " in the grid.")
+                If Not bSilent Then
+                    MsgBox("Developer error: Cannot set value of control " & Name & " because there is no column at index " & iColumnIndex & " in the grid.")
+                End If
             Else
                 For i = 0 To shtCurrSheet.RowCount - 1
                     shtCurrSheet(i, iColumnIndex) = strValues(i)
