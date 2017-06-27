@@ -324,6 +324,9 @@ Public Class ucrDataView
     End Sub
 
     Public Sub UpdateCurrentWorksheet()
+        Dim iRowCount As Integer
+        Dim iColumnCount As Integer
+
         grdCurrSheet = grdData.CurrentWorksheet
         If grdCurrSheet IsNot Nothing AndAlso frmMain.clsRLink.GetDataFrameNames().Contains(grdCurrSheet.Name) Then
             UpdateRFunctionDataFrameParameters()
@@ -331,10 +334,13 @@ Public Class ucrDataView
             frmMain.tstatus.Text = grdCurrSheet.Name
             grdCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
             grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
-            lblRowDisplay.Text = "Showing " & grdCurrSheet.RowCount & " rows of " & frmMain.clsRLink.GetDataFrameLength(grdCurrSheet.Name, True)
+            iRowCount = frmMain.clsRLink.GetDataFrameLength(grdCurrSheet.Name, True)
+            iColumnCount = frmMain.clsRLink.GetDataFrameColumnCount(grdCurrSheet.Name)
+            lblRowDisplay.Text = "Showing " & grdCurrSheet.RowCount & " of " & iRowCount & " rows"
             If frmMain.clsRLink.RunInternalScriptGetValue(clsFilterApplied.ToScript()).AsLogical(0) Then
                 lblRowDisplay.Text = lblRowDisplay.Text & " (" & frmMain.clsRLink.GetDataFrameLength(grdCurrSheet.Name, False) & ")"
             End If
+            lblRowDisplay.Text = lblRowDisplay.Text & " | Showing " & grdCurrSheet.ColumnCount & " of " & iColumnCount & " columns"
         Else
             frmMain.tstatus.Text = "No data loaded"
             lblRowDisplay.Text = ""
@@ -653,7 +659,7 @@ Public Class ucrDataView
     Private Sub ViewSheet_Click(sender As Object, e As EventArgs) Handles ViewSheet.Click
         clsViewDataFrame.AddParameter("x", clsRFunctionParameter:=clsGetDataFrame)
         clsViewDataFrame.AddParameter("title", Chr(34) & grdCurrSheet.Name & Chr(34))
-        frmMain.clsRLink.RunScript(clsViewDataFrame.ToScript, strComment:="Right Click Menu: View R Data Frame")
+        frmMain.clsRLink.RunScript(clsViewDataFrame.ToScript, strComment:="Right Click Menu: View R Data Frame", bSeparateThread:=False)
     End Sub
 
     Private Sub mnuConvertDate_Click(sender As Object, e As EventArgs) Handles mnuConvertToDate.Click

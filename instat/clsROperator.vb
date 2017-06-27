@@ -56,9 +56,18 @@ Public Class ROperator
             strTemp = strTemp & Chr(32) & strOperation & Chr(32)
             strTemp = strTemp & clsParam.ToScript(strScript)
         Next
+        If bToScriptAsRString Then
+            'TODO should also check assignment of parameters
+            If bToBeAssigned OrElse bIsAssigned Then
+                MsgBox("Developer error: Using bToScriptAsRString = True when RFunction is assigned will not produce the correct script. Remove assignment to use this options correctly.")
+            End If
+            'Cannot have double quotes ("") in the string because strTemp will be wrapped with ""
+            'In most cases signle quotes (') will give same functionality, though it's preferable to avoid this when constructing the RFunction
+            strTemp = strTemp.Replace(Chr(34), Chr(39))
+            strTemp = Chr(34) & strTemp & Chr(34)
+        End If
         Return MyBase.ToScript(strScript, strTemp)
     End Function
-
 
     Public Overrides Sub AddParameter(clsParam As RParameter)
         clsParam.bIncludeArgumentName = False 'We don't want to allow names in operator parameters...
@@ -88,24 +97,43 @@ Public Class ROperator
         OnParametersChanged()
     End Sub
 
+    Public Overrides Sub Clear()
+        SetOperation("")
+        bForceIncludeOperation = False
+        MyBase.Clear()
+    End Sub
+
     Public Overrides Function Clone() As RCodeStructure
         Dim clsTempROperator As New ROperator
+        Dim clsRParam As RParameter
 
-        clsTempROperator.strOperation = strOperation
-        clsTempROperator.bBrackets = bBrackets
+        'RCode properties
         clsTempROperator.strAssignTo = strAssignTo
         clsTempROperator.strAssignToDataFrame = strAssignToDataFrame
         clsTempROperator.strAssignToColumn = strAssignToColumn
         clsTempROperator.strAssignToModel = strAssignToModel
         clsTempROperator.strAssignToGraph = strAssignToGraph
+        clsTempROperator.strAssignToTable = strAssignToTable
         clsTempROperator.bToBeAssigned = bToBeAssigned
         clsTempROperator.bIsAssigned = bIsAssigned
-        clsTempROperator.bForceIncludeOperation = bForceIncludeOperation
         clsTempROperator.bAssignToIsPrefix = bAssignToIsPrefix
-
-        For Each clsParam As RParameter In MyBase.clsParameters
-            clsTempROperator.AddParameter(clsParam.Clone)
+        clsTempROperator.bAssignToColumnWithoutNames = bAssignToColumnWithoutNames
+        clsTempROperator.bInsertColumnBefore = bInsertColumnBefore
+        clsTempROperator.iNumberOfAddedParameters = iNumberOfAddedParameters
+        clsTempROperator.iPosition = iPosition
+        clsTempROperator.iCallType = iCallType
+        clsTempROperator.bExcludeAssignedFunctionOutput = bExcludeAssignedFunctionOutput
+        clsTempROperator.bClearFromGlobal = bClearFromGlobal
+        clsTempROperator.bToScriptAsRString = bToScriptAsRString
+        For Each clsRParam In clsParameters
+            clsTempROperator.AddParameter(clsRParam.Clone)
         Next
+
+        'ROperator specific properties
+        clsTempROperator.bForceIncludeOperation = bForceIncludeOperation
+        clsTempROperator.strOperation = strOperation
+        clsTempROperator.bBrackets = bBrackets
+
         Return clsTempROperator
     End Function
 End Class

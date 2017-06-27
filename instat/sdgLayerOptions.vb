@@ -43,6 +43,7 @@ Public Class sdgLayerOptions
         ucrLayerParameter.ucrGeomWithAes = ucrGeomWithAes
         ucrGeomWithAes.ucrLayersControl = ucrLayerParameter
         ucrSdgLayerBase.iHelpTopicID = 569
+        tbcLayers.SelectedIndex = 0
         'Each ucrLayerParameter has a field of type ucrGeomListWithAes and reciprocally as both of them "collaborate to provide full description of a Layer".
         'The obvious linking is performed here in sdgLayerOptions.
     End Sub
@@ -52,8 +53,12 @@ Public Class sdgLayerOptions
     End Sub
 
     Public Sub SetupLayer(clsNewGgPlot As RFunction, clsNewGeomFunc As RFunction, clsNewGlobalAesFunc As RFunction, clsNewLocalAes As RFunction, Optional bFixGeom As Boolean = False, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bApplyAesGlobally As Boolean = True, Optional iNumVariablesForGeoms As Integer = -1, Optional bReset As Boolean = False, Optional iTabToDisplay As Integer = 0, Optional strDataFrame As String = "")
-        If iTabToDisplay > 0 AndAlso iTabToDisplay <= tbcLayers.TabCount - 1 Then
-            tbcLayers.SelectedIndex = iTabToDisplay
+        'If iTabToDisplay > 0 AndAlso iTabToDisplay <= tbcLayers.TabCount - 1 Then
+        '    tbcLayers.SelectedIndex = iTabToDisplay
+        'End If
+
+        If bReset Then
+            tbcLayers.SelectedIndex = 0
         End If
         clsGeomFunction = clsNewGeomFunc
         clsAesFunction = clsNewGlobalAesFunc
