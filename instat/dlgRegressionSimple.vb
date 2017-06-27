@@ -135,10 +135,7 @@ Public Class dlgRegressionSimple
 
         ucrPnlMeansAndVariance.AddToLinkedControls(ucrNudHypothesis, {rdoCompareVariance}, bNewLinkedDisabledIfParameterMissing:=True)
 
-        ' sdgSimpleRegOptions.SetRModelFunction(clsRLmOrGLM)
         sdgSimpleRegOptions.SetRDataFrame(ucrSelectorSimpleReg.ucrAvailableDataFrames)
-        'sdgSimpleRegOptions.SetRYVariable(ucrResponse)
-        ' sdgSimpleRegOptions.SetRXVariable(ucrExplanatory)
         sdgModelOptions.SetRCIFunction(clsRCIFunction)
 
 
@@ -184,6 +181,7 @@ Public Class dlgRegressionSimple
         ucrResponse.SetMeAsReceiver()
         ucrSelectorSimpleReg.Focus()
         ucrModelPreview.Reset()
+        ucrModelPreview.SetName("")
 
         DataTypeAccepted()
 
@@ -193,7 +191,7 @@ Public Class dlgRegressionSimple
 
         clsRLmOrGLM = clsRegressionDefaults.clsDefaultRLmFunction.Clone
         clsRLmOrGLM.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
-        clsGLM.SetRCommand("glm")
+        clsGLM = clsRegressionDefaults.clsDefaultGlmFunction.Clone
         clsGLM.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
 
 
@@ -297,9 +295,8 @@ Public Class dlgRegressionSimple
 
         clsRLmOrGLM.SetAssignTo(ucrSaveModels.GetText, strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model", bAssignToIsPrefix:=True)
 
-        'sdgSimpleRegOptions.SetDefaults()
+
         sdgModelOptions.SetDefaults()
-        ucrModelPreview.SetName("")
         SetRCode()
         ucrFamily.SetGLMDistributions()
 
@@ -610,13 +607,13 @@ Public Class dlgRegressionSimple
                 If ucrChkConvertToVariate.Checked Then
 
                     clsRConvert.AddParameter("x", ucrResponse.GetVariableNames(bWithQuotes:=False))
-                    clsModel.AddParameter(iPosition:=0, clsRFunctionParameter:=clsRConvert)
-                    clsModel.AddParameter(clsRFunctionParameter:=ucrExplanatory.GetVariables())
+                    clsRLmOrGLM.AddParameter("x", clsRFunctionParameter:=clsRConvert)
+                    clsRLmOrGLM.AddParameter("x", clsRFunctionParameter:=ucrExplanatory.GetVariables())
                     ucrFamily.RecieverDatatype("numeric")
                 Else
-                    clsModel.AddParameter(iPosition:=0, clsRFunctionParameter:=ucrResponse.GetVariables())
-                    clsModel.AddParameter(clsRFunctionParameter:=ucrExplanatory.GetVariables())
-                    clsModel.AddParameter(iPosition:=0, strParameterValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
+                    'clsModel.AddParameter(iPosition:=0, clsRFunctionParameter:=ucrResponse.GetVariables())
+                    ' clsModel.AddParameter(clsRFunctionParameter:=ucrExplanatory.GetVariables())
+                    'clsModel.AddParameter(iPosition:=0, strParameterValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
                     ucrFamily.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
                 End If
             Else

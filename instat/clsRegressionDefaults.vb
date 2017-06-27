@@ -9,6 +9,16 @@
         End Get
     End Property
 
+    Public Shared ReadOnly Property clsDefaultGlmFunction As RFunction
+        Get
+
+            Dim clsDefaultGlmFunc As New RFunction
+
+            clsDefaultGlmFunc.SetRCommand("glm")
+            Return clsDefaultGlmFunc
+        End Get
+    End Property
+
     Public Shared ReadOnly Property clsDefaultRGraphicsOperator As ROperator
         Get
 
