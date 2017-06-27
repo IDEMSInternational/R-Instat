@@ -308,7 +308,6 @@ Public Class dlgRegressionSimple
         ucrFamily.SetGLMDistributions()
 
         SetEnableDists()
-        TestOKEnabled()
         bResetSubDialog = True
         bResetOptionsSubDialog = True
     End Sub
@@ -354,15 +353,14 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub ucrResponse_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrResponse.ControlValueChanged
-        clsRYVariable = ucrResponse.GetVariableNames(bWithQuotes:=False)
         Preview()
+        clsRYVariable = ucrResponse.GetVariableNames(bWithQuotes:=False)
         SetEnableDists()
     End Sub
 
 
     Private Sub ucrSelectorSimpleReg_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorSimpleReg.ControlValueChanged
         ConvertToVariate()
-        TestOKEnabled()
         DataTypeAccepted()
     End Sub
 
@@ -674,8 +672,8 @@ Public Class dlgRegressionSimple
         SetRCode()
         ExplanatoryFunctionSelect()
         DataTypeAccepted()
-        ' clsRXVariable = ucrExplanatory.GetVariableNames(bWithQuotes:=False)
         Preview()
+        clsRXVariable = ucrExplanatory.GetVariableNames(bWithQuotes:=False)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -766,12 +764,6 @@ Public Class dlgRegressionSimple
         '  End If
     End Sub
 
-    Private Sub chkboxes_VisibleChanged(sender As Object, e As EventArgs)
-        ' ExplanatoryFunctionSelect()
-        ConvertToVariate()
-        TestOKEnabled()
-    End Sub
-
     Public Sub SetEnableDists()
         ucrFamily.Enabled = Not ucrResponse.IsEmpty
     End Sub
@@ -781,7 +773,7 @@ Public Class dlgRegressionSimple
         SetEnableDists()
     End Sub
 
-    Private Sub ucrResponse_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrResponse.ControlValueChanged, ucrPnlModelType.ControlValueChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrResponse.ControlContentsChanged, ucrPnlModelType.ControlContentsChanged, ucrExplanatory.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
