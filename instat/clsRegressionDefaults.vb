@@ -31,7 +31,6 @@
 
     Public Shared ReadOnly Property clsDefaultFormulaOperator As ROperator
         Get
-
             Dim clsFormulaOperator As New ROperator
 
             clsFormulaOperator.SetOperation("~")
