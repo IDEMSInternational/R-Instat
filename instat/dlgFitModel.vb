@@ -279,6 +279,6 @@ Public Class dlgFitModel
         ChooseRFunction()
     End Sub
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        sdgSimpleRegOptions.RegOptions()
+        'sdgSimpleRegOptions.RegOptions()
     End Sub
 End Class

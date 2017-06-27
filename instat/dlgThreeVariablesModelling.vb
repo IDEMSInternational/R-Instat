@@ -214,7 +214,7 @@ Public Class dlgThreeVariableModelling
     End Sub
 
     Private Sub ucrBaseThreeVariableModelling_ClickOk(sender As Object, e As EventArgs) Handles ucrBaseThreeVariableModelling.ClickOk
-        sdgSimpleRegOptions.RegOptions()
+        ' sdgSimpleRegOptions.RegOptions()
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click

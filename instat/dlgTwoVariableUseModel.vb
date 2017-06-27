@@ -67,7 +67,7 @@ Public Class dlgTwoVariableUseModel
     End Sub
 
     Private Sub ucrBaseUseModel_ClickOk(sender As Object, e As EventArgs) Handles ucrBaseUseModel.ClickOk
-        sdgSimpleRegOptions.RegOptions()
+        'sdgSimpleRegOptions.RegOptions()
     End Sub
 
     Private Sub TestOkEnabled()
