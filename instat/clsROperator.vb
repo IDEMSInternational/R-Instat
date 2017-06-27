@@ -97,6 +97,12 @@ Public Class ROperator
         OnParametersChanged()
     End Sub
 
+    Public Overrides Sub Clear()
+        SetOperation("")
+        bForceIncludeOperation = False
+        MyBase.Clear()
+    End Sub
+
     Public Overrides Function Clone() As RCodeStructure
         Dim clsTempROperator As New ROperator
         Dim clsRParam As RParameter
