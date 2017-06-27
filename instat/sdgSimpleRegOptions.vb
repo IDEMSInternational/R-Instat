@@ -26,6 +26,14 @@ Public Class sdgSimpleRegOptions
     Public clsRaovFunction, clsRaovpvalFunction, clsRestpvalFunction, clsRResidualPlotsFunction, clsRgeom_point, clsRPredFunction, clsRDFFunction, clsRFittedValues, clsRWriteFitted, clsRResiduals, clsRWriteResiduals, clsRStdResiduals, clsRWriteStdResiduals, clsRLeverage, clsRWriteLeverage As New RFunction
     Public clsRggplotFunction, clsRaesFunction, clsRStat_smooth, clsRModelsFunction, clsRCIFunction, clsR_ribbon, clsRaes_ribbon As New RFunction
 
+    Private Sub rdoLinear_CheckedChanged(sender As Object, e As EventArgs) Handles rdoLinear.CheckedChanged
+
+    End Sub
+
+    Private Sub rdoResponse_CheckedChanged(sender As Object, e As EventArgs) Handles rdoResponse.CheckedChanged
+
+    End Sub
+
     Public bControlsInitialised As Boolean = False
 
     Private Sub sdgSimpleRegOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -218,7 +226,7 @@ Public Class sdgSimpleRegOptions
         clsRggplotFunction = clsNewRggplotFunction
         'clsRWriteResiduals = clsNewRWriteResiduals
         ' clsRWriteStdResiduals = clsNewRWriteStdResiduals
-        clsRWriteLeverage = clsNewRWriteLeverage
+        'clsRWriteLeverage = clsNewRWriteLeverage
 
 
         ucrChkModel.SetRCode(clsRModelsFunction, bReset)
@@ -421,16 +429,16 @@ Public Class sdgSimpleRegOptions
         clsRFittedValues.SetRCommand("fitted")
         clsRFittedValues.AddParameter("object", clsRFunctionParameter:=clsRLmOrGLM)
         clsRWriteFitted.AddParameter("col_data", clsRFunctionParameter:=clsRFittedValues)
-        'clsRSyntax.AddToAfterCodes(clsRWriteFitted, iPosition:=8)
+        clsRSyntax.AddToAfterCodes(clsRWriteFitted, iPosition:=8)
     End Sub
 
     Private Sub ucrSaveResidualsColumnName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveResidualsColumnName.ControlValueChanged
-        'clsRResiduals.SetPackageName("stats")
-        'clsRResiduals.SetRCommand("resid")
-        'clsRResiduals.AddParameter("object", clsRFunctionParameter:=clsRLmOrGLM)
-        'clsRWriteResiduals.AddParameter("col_data", clsRFunctionParameter:=clsRResiduals)
-        ' clsRSyntax.AddToAfterCodes(clsRWriteResiduals, iPosition:=9)
-        '    clsRSyntax.RemoveFromAfterCodes(clsRWriteFitted)
+        clsRResiduals.SetPackageName("stats")
+        clsRResiduals.SetRCommand("resid")
+        clsRResiduals.AddParameter("object", clsRFunctionParameter:=clsRLmOrGLM)
+        clsRWriteResiduals.AddParameter("col_data", clsRFunctionParameter:=clsRResiduals)
+        clsRSyntax.AddToAfterCodes(clsRWriteResiduals, iPosition:=9)
+        ' clsRSyntax.RemoveFromAfterCodes(clsRWriteFitted)
         '    clsRSyntax.RemoveFromAfterCodes(clsRWriteStdResiduals)
         '    clsRSyntax.RemoveFromAfterCodes(clsRWriteLeverage)
     End Sub
@@ -440,7 +448,7 @@ Public Class sdgSimpleRegOptions
         clsRStdResiduals.SetRCommand("rstandard")
         clsRStdResiduals.AddParameter("model", clsRFunctionParameter:=clsRLmOrGLM)
         clsRWriteStdResiduals.AddParameter("col_data", clsRFunctionParameter:=clsRStdResiduals)
-        'clsRSyntax.AddToAfterCodes(clsRWriteStdResiduals, iPosition:=10)
+        clsRSyntax.AddToAfterCodes(clsRWriteStdResiduals, iPosition:=10)
         '   clsRSyntax.RemoveFromAfterCodes(clsRWriteFitted)
         '  clsRSyntax.RemoveFromAfterCodes(clsRWriteResiduals)
         ' clsRSyntax.RemoveFromAfterCodes(clsRWriteLeverage)
@@ -451,7 +459,7 @@ Public Class sdgSimpleRegOptions
         clsRLeverage.SetRCommand("hatvalues")
         clsRLeverage.AddParameter("model", clsRFunctionParameter:=clsRLmOrGLM)
         clsRWriteLeverage.AddParameter("col_data", clsRFunctionParameter:=clsRLeverage)
-        ' clsRSyntax.AddToAfterCodes(clsRWriteLeverage, iPosition:=11)
+        clsRSyntax.AddToAfterCodes(clsRWriteLeverage, iPosition:=11)
         'clsRSyntax.RemoveFromAfterCodes(clsRWriteStdResiduals)
         'clsRSyntax.RemoveFromAfterCodes(clsRWriteResiduals)
         'clsRSyntax.RemoveFromAfterCodes(clsRWriteFitted)
