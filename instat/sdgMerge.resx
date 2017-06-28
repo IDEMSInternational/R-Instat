@@ -120,25 +120,4 @@
   <metadata name="ttJoinDetails.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="rdoSemiJoin.ToolTip" xml:space="preserve">
-    <value>Include all rows from the 1st data frame where there are matching values in the 2nd data frame, keeping just columns from the 1st data frame. 
-(A semi join differs from an inner join because an inner join will return one row of the 1st data frame for each matching row of the 2nd data frame,
-where a semi join will never duplicate rows of the 1st data frame.)</value>
-  </data>
-  <data name="rdoRightJoin.ToolTip" xml:space="preserve">
-    <value>Include all rows from the 2nd data frame, and all columns from both data frames.
-Rows in the second data frame with no match in the 1st data frame will have NA values in the new columns. 
-If there are multiple matches, all combinations of the matches are included.
-</value>
-  </data>
-  <data name="rdoLeftJoin.ToolTip" xml:space="preserve">
-    <value>Include all rows from the 1st data frame, and all columns from both data frames.
-Rows in the 1st data frame with no match in the second data frame will have NA values in the new columns. 
-If there are multiple matches, all combinations of the matches are returned.</value>
-  </data>
-  <data name="rdoInnerJoin.ToolTip" xml:space="preserve">
-    <value>Include all rows from the 1st data frame where there are matching values in the 2nd data frame,
-and all columns from both data frames. 
-If there are multiple matches, all combination of the matches are included.</value>
-  </data>
 </root>

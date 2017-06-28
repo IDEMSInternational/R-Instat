@@ -87,8 +87,8 @@ Public Class ucrSelectorByDataFrame
         OnControlValueChanged()
     End Sub
 
-    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
-        MyBase.UpdateControl(bReset)
+    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
+        MyBase.UpdateControl(bReset, bCloneIfNeeded)
         ucrAvailableDataFrames.UpdateControl(bReset)
     End Sub
 
@@ -132,8 +132,8 @@ Public Class ucrSelectorByDataFrame
         End If
     End Function
 
-    Public Overrides Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False)
-        MyBase.SetRCode(clsNewCodeStructure, bReset)
+    Public Overrides Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False, Optional bUpdate As Boolean = True, Optional bCloneIfNeeded As Boolean = False)
+        MyBase.SetRCode(clsNewCodeStructure, bReset, bUpdate, bCloneIfNeeded)
         ucrAvailableDataFrames.SetRCode(clsNewCodeStructure, bReset)
     End Sub
 
@@ -146,5 +146,9 @@ Public Class ucrSelectorByDataFrame
     Public Overrides Sub AddAdditionalCodeParameterPair(clsNewRCode As RCodeStructure, clsNewRParameter As RParameter, Optional iAdditionalPairNo As Integer = -1)
         MyBase.AddAdditionalCodeParameterPair(clsNewRCode, clsNewRParameter, iAdditionalPairNo)
         ucrAvailableDataFrames.AddAdditionalCodeParameterPair(clsNewRCode, clsNewRParameter, iAdditionalPairNo)
+    End Sub
+
+    Public Sub SetLabelText(strText As String)
+        ucrAvailableDataFrames.SetLabelText(strText)
     End Sub
 End Class
