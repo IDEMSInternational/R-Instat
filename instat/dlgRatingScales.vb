@@ -58,11 +58,13 @@ Public Class dlgRatingScales
         ucrReceiverOrderedFactors.SetParameter(New RParameter("items", 0))
         ucrReceiverOrderedFactors.SetParameterIsRFunction()
         ucrReceiverOrderedFactors.bForceAsDataFrame = True
+        ucrReceiverOrderedFactors.strSelectorHeading = "Variables"
         ucrReceiverOrderedFactors.Selector = ucrSelectorRatingScale
 
         ucrReceiverWeights.SetParameter(New RParameter("weight.by", 1))
         ucrReceiverWeights.SetParameterIsRFunction()
         ucrReceiverWeights.SetDataType("numeric")
+        ucrReceiverWeights.strSelectorHeading = "Numerics"
         ucrReceiverWeights.Selector = ucrSelectorRatingScale
 
         'ucrPnlSortsjp.likert
