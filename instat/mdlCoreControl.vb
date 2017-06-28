@@ -82,11 +82,11 @@ Module mdlCoreControl
         Next
     End Sub
 
-    Public Function AllConditionsSatisfied(lstConditions As List(Of Condition), clsRCode As RCodeStructure, Optional clsParameter As RParameter = Nothing)
+    Public Function AllConditionsSatisfied(lstConditions As List(Of Condition), clsRCode As RCodeStructure, Optional clsParameter As RParameter = Nothing, Optional clsRSyntax As RSyntax = Nothing)
         Dim bTemp As Boolean = True
 
         For Each clsTempCond In lstConditions
-            If Not clsTempCond.IsSatisfied(clsRCode, clsParameter) Then
+            If Not clsTempCond.IsSatisfied(clsRCode, clsParameter, clsRSyntax) Then
                 bTemp = False
                 Exit For
             End If
@@ -94,6 +94,7 @@ Module mdlCoreControl
         Return bTemp
     End Function
 
+    'TODO This fails when items in the list contain "," as it splits values inside
     Public Function ExtractItemsFromRList(strTemp As String) As String()
         Dim lstVariables As String()
         If strTemp.StartsWith("c(") Then

@@ -46,14 +46,14 @@ Public Class dlgFitModel
         ucrReceiverResponseVar.Selector = ucrSelectorByDataFrameAddRemoveForFitModel
         ucrReceiverResponseVar.SetMeAsReceiver()
         ucrModelName.SetValidationTypeAsRVariable()
-        sdgSimpleRegOptions.SetRModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
+        'sdgSimpleRegOptions.SetRModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
         ucrInputModelPreview.IsReadOnly = True
         sdgSimpleRegOptions.SetRDataFrame(ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames)
-        sdgSimpleRegOptions.SetRYVariable(ucrReceiverResponseVar)
-        sdgVariableTransformations.SetRYVariable(ucrReceiverResponseVar)
-        sdgVariableTransformations.SetRModelOperator(clsModel)
-        sdgModelOptions.SetRCIFunction(clsRCIFunction)
-        sdgVariableTransformations.SetRCIFunction(clsRCIFunction)
+        'sdgSimpleRegOptions.SetRYVariable(ucrReceiverResponseVar)
+        'sdgVariableTransformations.SetRYVariable(ucrReceiverResponseVar)
+        'sdgVariableTransformations.SetRModelOperator(clsModel)
+        'sdgModelOptions.SetRCIFunction(clsRCIFunction)
+        'sdgVariableTransformations.SetRCIFunction(clsRCIFunction)
         AssignModelName()
     End Sub
 
@@ -66,12 +66,12 @@ Public Class dlgFitModel
         chkConvertToVariate.Checked = False
         chkConvertToVariate.Visible = False
         ucrModelName.SetName("reg")
-        sdgSimpleRegOptions.SetDefaults()
+        'sdgSimpleRegOptions.SetDefaults()
         sdgModelOptions.SetDefaults()
         ResponseConvert()
-        sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
-        sdgSimpleRegOptions.lblDisplayCLevel.Enabled = True
-        sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
+        ' sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
+        sdgSimpleRegOptions.lblConfLevel.Enabled = True
+        'sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
         TestOKEnabled()
     End Sub
 
@@ -167,7 +167,7 @@ Public Class dlgFitModel
 
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
         sdgModelOptions.ShowDialog()
-        ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = sdgModelOptions.ucrFamily.clsCurrDistribution.strNameTag)
+        ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = sdgModelOptions.ucrDistributionChoice.clsCurrDistribution.strNameTag)
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
@@ -205,7 +205,7 @@ Public Class dlgFitModel
                 clsModel.AddParameter(iPosition:=0, strParameterValue:=ucrReceiverResponseVar.GetVariableNames(bWithQuotes:=False))
                 ucrFamily.RecieverDatatype(ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverResponseVar.GetVariableNames(bWithQuotes:=False))
             End If
-            sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
+            sdgModelOptions.ucrDistributionChoice.RecieverDatatype(ucrFamily.strDataType)
         End If
 
         If ucrFamily.lstCurrentDistributions.Count = 0 Or ucrReceiverResponseVar.IsEmpty() Then
@@ -253,8 +253,8 @@ Public Class dlgFitModel
     End Sub
 
     Public Sub ChooseRFunction()
-        sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
-        sdgModelOptions.ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = sdgModelOptions.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
+        sdgModelOptions.ucrDistributionChoice.RecieverDatatype(ucrFamily.strDataType)
+        sdgModelOptions.ucrDistributionChoice.ucrInputDistributions.cboInput.SelectedIndex = sdgModelOptions.ucrDistributionChoice.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
         sdgModelOptions.RestrictLink()
         'TODO:   Include multinomial as an option And the appropriate function
         'If (ucrFamily.clsCurrDistribution.strNameTag = "Normal") Then
@@ -279,6 +279,6 @@ Public Class dlgFitModel
         ChooseRFunction()
     End Sub
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        sdgSimpleRegOptions.RegOptions()
+        'sdgSimpleRegOptions.RegOptions()
     End Sub
 End Class

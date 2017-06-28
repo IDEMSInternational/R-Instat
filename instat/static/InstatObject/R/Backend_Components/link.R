@@ -165,7 +165,7 @@ instat_object$set("public", "get_linked_to_definition", function(from_data_frame
     for(curr_link in private$.links) {
       for(curr_link_pairs in curr_link$link_columns) {
         if(length(link_pairs) == length(curr_link_pairs) && setequal(link_pairs, names(curr_link_pairs))) {
-          return(list(to_data_name, as.vector(curr_link_pairs)))
+          return(list(to_data_name, as.vector(curr_link_pairs[link_pairs])))
         }
       }
     }
