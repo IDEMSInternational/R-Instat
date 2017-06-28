@@ -92,7 +92,7 @@ Public Class dlgThreeVariableModelling
         ResponseConvert()
         ModelOperator()
         'sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
-        sdgSimpleRegOptions.lblDisplayCLevel.Enabled = True
+        sdgSimpleRegOptions.lblConfLevel.Enabled = True
         '' sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
         TestOKEnabled()
     End Sub
@@ -132,7 +132,7 @@ Public Class dlgThreeVariableModelling
                 clsModel.AddParameter(iPosition:=0, strParameterValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
                 ucrFamily.RecieverDatatype(ucrSelectorThreeVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
             End If
-            sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
+            sdgModelOptions.ucrDistributionChoice.RecieverDatatype(ucrFamily.strDataType)
         End If
         If ucrFamily.lstCurrentDistributions.Count = 0 Or ucrResponse.IsEmpty() Then
             ucrFamily.Enabled = False
@@ -257,8 +257,8 @@ Public Class dlgThreeVariableModelling
     End Sub
 
     Public Sub ucrFamily_cboDistributionsIndexChanged() Handles ucrFamily.DistributionsIndexChanged
-        sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
-        sdgModelOptions.ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = sdgModelOptions.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
+        sdgModelOptions.ucrDistributionChoice.RecieverDatatype(ucrFamily.strDataType)
+        sdgModelOptions.ucrDistributionChoice.ucrInputDistributions.cboInput.SelectedIndex = sdgModelOptions.ucrDistributionChoice.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
         sdgModelOptions.RestrictLink()
         'TODO:   Include multinomial as an option And the appropriate function
         If (ucrFamily.clsCurrDistribution.strNameTag = "Normal") Then
@@ -273,7 +273,7 @@ Public Class dlgThreeVariableModelling
 
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
         sdgModelOptions.ShowDialog()
-        ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = sdgModelOptions.ucrFamily.clsCurrDistribution.strNameTag)
+        ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = sdgModelOptions.ucrDistributionChoice.clsCurrDistribution.strNameTag)
     End Sub
 
     Private Sub chkResponseFunction_CheckedChanged(sender As Object, e As EventArgs) Handles chkResponseFunction.CheckedChanged
