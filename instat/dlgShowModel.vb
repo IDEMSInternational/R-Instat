@@ -34,27 +34,32 @@ Public Class dlgShowModel
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverExpressionForTablePlus.AddAdditionalCodeParameterPair(clsProbabilities, ucrReceiverExpressionForTablePlus.GetParameter, 1)
+
+        ucrReceiverExpressionForTablePlus.AddAdditionalCodeParameterPair(clsProbabilities, New RParameter("q", 1), 1)
+        ucrInputProbabilities.AddAdditionalCodeParameterPair(clsProbabilities, New RParameter("q", 1), 1)
         ucrChkDisplayGraphResults.AddAdditionalCodeParameterPair(clsProbabilities, ucrChkDisplayGraphResults.GetParameter, 1)
-        ucrPnlDistTypes.SetRCode(clsProbabilities)
-        ucrDistributionsFOrTablePlus.SetRCode(clsProbabilities)
+        ucrPnlDistTypes.SetRCode(clsQuantiles)
         ucrReceiverExpressionForTablePlus.SetRCode(clsQuantiles)
         ucrChkDisplayGraphResults.SetRCode(clsQuantiles)
         ucrInputProbabilities.SetRCode(clsQuantiles)
+        ucrSaveGraphResults.SetRCode(clsQuantiles)
+        ucrDistributionsFOrTablePlus.SetRCode(clsQuantiles)
+
     End Sub
 
     Private Sub TestOKEnabled()
-        If (Not ucrReceiverExpressionForTablePlus.IsEmpty) OrElse (Not ucrInputProbabilities.IsEmpty) Then
-            ucrBase.OKEnabled(True)
+        If ucrDistributionsFOrTablePlus.bParametersFilled Then
+            If ((Not ucrReceiverExpressionForTablePlus.IsEmpty) OrElse (Not ucrInputProbabilities.IsEmpty)) Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
     Private Sub InitialiseDialog()
-        '  ucrBase.clsRsyntax.iCallType = 2
-
-
         ucrBase.iHelpTopicID = 157
         ucrReceiverExpressionForTablePlus.Selector = ucrSelectorForDataFrame
         ucrReceiverExpressionForTablePlus.SetMeAsReceiver()
@@ -64,28 +69,35 @@ Public Class dlgShowModel
         ucrPnlDistTypes.AddRadioButton(rdoQuantiles)
 
         ucrPnlDistTypes.AddFunctionNamesCondition(rdoQuantiles, "qdist")
-        ucrPnlDistTypes.AddFunctionNamesCondition(rdoQuantiles, "pdist")
+        ucrPnlDistTypes.AddFunctionNamesCondition(rdoProbabilities, "pdist")
 
         ucrSaveGraphResults.SetDataFrameSelector(ucrSelectorForDataFrame.ucrAvailableDataFrames)
         ucrSaveGraphResults.SetSaveTypeAsColumn()
         ucrSaveGraphResults.SetIsComboBox()
         ucrSaveGraphResults.SetLabelText("Save Graph  Result:")
 
-
-        ucrInputProbabilities.SetParameter(New RParameter("q"))
+        ucrInputProbabilities.SetParameter(New RParameter("p", 1))
         ucrInputProbabilities.AddQuotesIfUnrecognised = False
         ucrInputProbabilities.SetValidationTypeAsNumericList()
 
-        ucrReceiverExpressionForTablePlus.SetParameter(New RParameter("q"))
+        ucrReceiverExpressionForTablePlus.SetParameter(New RParameter("p", 1))
         ucrReceiverExpressionForTablePlus.SetParameterIsRFunction()
 
+        ucrChkEnterValues.AddParameterIsRFunctionCondition(ucrReceiverExpressionForTablePlus, "q")
+        ucrChkEnterValues.AddParameterIsRFunctionCondition(ucrReceiverExpressionForTablePlus, "p")
+        ucrChkEnterValues.AddParameterIsRFunctionCondition(ucrInputProbabilities, "q", False)
+        ucrChkEnterValues.AddParameterIsRFunctionCondition(ucrInputProbabilities, "p", False)
+
+        ucrDistributionsFOrTablePlus.SetRDistributions()
+        ucrDistributionsFOrTablePlus.SetParameters()
+
         ucrChkEnterValues.SetText("Enter value(s)")
-        ucrChkDisplayGraphResults.SetParameter(New RParameter("plot"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkDisplayGraphResults.SetParameter(New RParameter("plot", 2), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkDisplayGraphResults.SetRDefault("TRUE")
         ucrChkDisplayGraphResults.SetText("Display Graph Results")
 
-        ucrChkEnterValues.AddToLinkedControls(ucrReceiverExpressionForTablePlus, {False}, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkEnterValues.AddToLinkedControls(ucrInputProbabilities, {True}, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=0.5)
+        ucrChkEnterValues.AddToLinkedControls(ucrReceiverExpressionForTablePlus, {False})
+        ucrChkEnterValues.AddToLinkedControls(ucrInputProbabilities, {True}, objNewDefaultState:=0.5)
         ucrChkEnterValues.AddToLinkedControls(ucrSaveGraphResults, {False}, bNewLinkedHideIfParameterMissing:=True)
 
     End Sub
@@ -102,13 +114,15 @@ Public Class dlgShowModel
         clsProbabilities.SetPackageName("mosaic")
         clsQuantiles.SetPackageName("mosaic")
 
+        receiverlabels()
+        SetNewColumName()
+        SetItems()
+        DisplayTableResults()
+        ResetFunctions()
         clsProbabilities.SetRCommand("pdist")
         clsQuantiles.SetRCommand("qdist")
 
-        receiverlabels()
-        SaveResults()
-        SetItems()
-        DisplayTableResults()
+        clsQuantiles.SetAssignTo(strTemp:=ucrSaveGraphResults.GetText, strTempDataframe:=ucrSelectorForDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveGraphResults.GetText, bAssignToIsPrefix:=True)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsQuantiles)
 
@@ -124,6 +138,20 @@ Public Class dlgShowModel
         End If
     End Sub
 
+    Private Sub SetNewColumName()
+        If rdoProbabilities.Checked Then
+            ucrSaveGraphResults.SetAssignToBooleans(bTempAssignToIsPrefix:=False)
+            If Not ucrSaveGraphResults.bUserTyped Then
+                ucrSaveGraphResults.SetPrefix("Prob")
+            End If
+        Else
+            ucrSaveGraphResults.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
+            If Not ucrSaveGraphResults.bUserTyped Then
+                ucrSaveGraphResults.SetPrefix("Quant")
+            End If
+        End If
+    End Sub
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
@@ -136,22 +164,10 @@ Public Class dlgShowModel
             clsProbabilities.AddParameter("q", "c(" & ucrInputProbabilities.GetText & ")")
             clsQuantiles.RemoveParameterByName("p")
         Else
-            clsQuantiles.AddParameter("p", "c(" & ucrInputProbabilities.GetText & ")")
             ucrBase.clsRsyntax.SetBaseRFunction(clsQuantiles)
+            clsQuantiles.AddParameter("p", "c(" & ucrInputProbabilities.GetText & ")")
             clsProbabilities.RemoveParameterByName("q")
         End If
-    End Sub
-
-    Private Sub SaveResults()
-        'If ucrSaveGraphResults.ucrChkSave.Checked AndAlso Not ucrChkEnterValues.Checked Then
-        '    '  ucrInputNewColNameforTablePlus.Visible = True
-        '    ucrBase.clsRsyntax.SetAssignTo(ucrInputNewColNameforTablePlus.GetText(), strTempColumn:=ucrInputNewColNameforTablePlus.GetText(), strTempDataframe:=ucrSelectorForDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToIsPrefix:=False)
-        '    ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
-        'Else
-        '    ucrBase.clsRsyntax.RemoveAssignTo()
-        '    ucrInputNewColNameforTablePlus.Visible = False
-        '    ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        'End If
     End Sub
 
     Private Sub receiverlabels()
@@ -174,13 +190,29 @@ Public Class dlgShowModel
 
     Private Sub ucrDistributionsFOrTablePlus_ParameterChanged() Handles ucrDistributionsFOrTablePlus.ControlValueChanged, ucrDistributionsFOrTablePlus.DistributionsIndexChanged
         receiverlabels()
+        TestOKEnabled()
     End Sub
 
-    Private Sub ucrChkEnterValues_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkEnterValues.ControlContentsChanged
+    Private Sub ucrChkEnterValues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEnterValues.ControlValueChanged
+        ResetFunctions()
+    End Sub
+
+    Private Sub ResetFunctions()
         If ucrChkEnterValues.Checked Then
             ucrSelectorForDataFrame.SetVariablesVisible(False)
+            ucrSelectorForDataFrame.Reset()
+            SetName()
         Else
             ucrSelectorForDataFrame.SetVariablesVisible(True)
+            ucrInputProbabilities.ResetText()
+        End If
+    End Sub
+
+    Private Sub SetName()
+        If rdoProbabilities.Checked Then
+            ucrInputProbabilities.SetName("1")
+        Else
+            ucrInputProbabilities.SetName("0.5")
         End If
     End Sub
 
@@ -203,6 +235,8 @@ Public Class dlgShowModel
 
     Private Sub ucrPnlDistTypes_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlDistTypes.ControlContentsChanged
         SetItems()
+        SetName()
+        SetNewColumName()
     End Sub
 
     Private Sub ucrPnlDistTypes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDistTypes.ControlValueChanged
@@ -212,4 +246,9 @@ Public Class dlgShowModel
     Private Sub ucrInputProbabilities_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputProbabilities.ControlValueChanged
         PqParameters()
     End Sub
+
+    Private Sub ucrReceiverExpressionForTablePlus_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpressionForTablePlus.ControlContentsChanged, ucrInputProbabilities.ControlContentsChanged
+        TestOKEnabled()
+    End Sub
+
 End Class
