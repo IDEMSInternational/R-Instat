@@ -166,7 +166,7 @@ Partial Class dlgShowModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(500, 372)
+        Me.ClientSize = New System.Drawing.Size(494, 372)
         Me.Controls.Add(Me.ucrSaveGraphResults)
         Me.Controls.Add(Me.ucrChkEnterValues)
         Me.Controls.Add(Me.ucrChkDisplayGraphResults)
