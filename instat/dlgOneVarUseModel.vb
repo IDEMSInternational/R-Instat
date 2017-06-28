@@ -141,14 +141,14 @@ Public Class dlgOneVarUseModel
         clsQuantileFunction.SetAssignTo(ucrNewDataFrameName.GetText, strTempModel:="last_model", strTempDataframe:=ucrSelectorUseModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         'clsRBootFunction.SetAssignTo(ucrSaveObjects.GetText, strTempModel:="last_bootstrap", strTempDataframe:=ucrSelectorUseModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         ucrBase.clsRsyntax.SetBaseRFunction(clsQuantileFunction)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsRPlotAllFunction, iPosition:=1)
+        '   ucrBase.clsRsyntax.AddToAfterCodes(clsRPlotAllFunction, iPosition:=2)
         bResetSubdialog = True
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverObject.SetRCode(clsQuantileFunction, bReset)
+        ucrReceiverObject.SetRCode(clsRPlotAllFunction, bReset)
         ucrReceiverObject.AddAdditionalCodeParameterPair(clsRBootFunction, New RParameter("f", 0), iAdditionalPairNo:=1)
-        ucrReceiverObject.AddAdditionalCodeParameterPair(clsRPlotAllFunction, New RParameter("x", 0), iAdditionalPairNo:=2)
+        ucrReceiverObject.AddAdditionalCodeParameterPair(clsQuantileFunction, New RParameter("x", 0), iAdditionalPairNo:=2)
         ucrReceiverObject.AddAdditionalCodeParameterPair(clsRplotPPfunction, New RParameter("ft", 0), iAdditionalPairNo:=3)
         ucrReceiverObject.AddAdditionalCodeParameterPair(clsRplotCDFfunction, New RParameter("ft", 0), iAdditionalPairNo:=4)
         ucrReceiverObject.AddAdditionalCodeParameterPair(clsRplotQQfunction, New RParameter("ft", 0), iAdditionalPairNo:=5)
@@ -207,12 +207,13 @@ Public Class dlgOneVarUseModel
 
     Private Sub ucrChkProduceBootstrap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkProduceBootstrap.ControlValueChanged
         If ucrChkProduceBootstrap.Checked Then
-            ucrBase.clsRsyntax.AddToAfterCodes(clsRBootFunction, iPosition:=0)
             clsQuantileFunction.AddParameter("x", clsRFunctionParameter:=clsRBootFunction)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsRBootFunction, iPosition:=1)
         Else
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsRBootFunction)
             clsQuantileFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverObject.GetVariables())
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRBootFunction)
         End If
+        ucrBase.clsRsyntax.SetBaseRFunction(clsQuantileFunction)
         sdgOneVarUseModFit.SetPlotOptions()
     End Sub
 

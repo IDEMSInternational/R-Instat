@@ -92,29 +92,29 @@ Public Class sdgOneVarUseModFit
         ucrPnlPlots.AddRadioButton(rdoDensityPlot)
         ucrPnlPlots.AddRadioButton(rdoCIcdf)
 
-        ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoNoPlot, {""})
-        ' ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoNoPlot, {""}, False)
-        ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoPlotAll, {"plot"})
-        'ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoPlotAll, {"plot"}, False)
-        ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoPPPlot, {"ppcomp"})
-        'ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoPPPlot, {"ppcomp"}, False)
-        ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoCDFPlot, {"cdfcomp"})
-        'ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoCDFPlot, {"cdfcomp"}, False)
-        ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoQQPlot, {"qqcomp"})
-        ' ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoQQPlot, {"qqcomp"}, False)
-        ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoDensityPlot, {"denscomp"})
-        'ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoDensityPlot, {"denscomp"}, False)
-        ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoCIcdf, {"cicdfplot"})
-        'ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoCIcdf, {"cicdfplot"}, False)
+        'ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoNoPlot, {""})
+        '' ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoNoPlot, {""}, False)
+        'ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoPlotAll, {"plot"})
+        ''ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoPlotAll, {"plot"}, False)
+        'ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoPPPlot, {"ppcomp"})
+        ''ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoPPPlot, {"ppcomp"}, False)
+        'ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoCDFPlot, {"cdfcomp"})
+        ''ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoCDFPlot, {"cdfcomp"}, False)
+        'ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoQQPlot, {"qqcomp"})
+        '' ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoQQPlot, {"qqcomp"}, False)
+        'ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoDensityPlot, {"denscomp"})
+        ''ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoDensityPlot, {"denscomp"}, False)
+        'ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoCIcdf, {"cicdfplot"})
+        ''ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoCIcdf, {"cicdfplot"}, False)
 
 
-        'ucrPnlPlots.AddFunctionNamesCondition(rdoNoPlot, "")
-        'ucrPnlPlots.AddFunctionNamesCondition(rdoPlotAll, "plot")
-        'ucrPnlPlots.AddFunctionNamesCondition(rdoPPPlot, "ppcomp")
-        'ucrPnlPlots.AddFunctionNamesCondition(rdoCDFPlot, "cdfcomp")
-        'ucrPnlPlots.AddFunctionNamesCondition(rdoQQPlot, "qqcomp")
-        'ucrPnlPlots.AddFunctionNamesCondition(rdoDensityPlot, "denscomp")
-        'ucrPnlPlots.AddFunctionNamesCondition(rdoCIcdf, "CIcdfplot")
+        ucrPnlPlots.AddFunctionNamesCondition(rdoNoPlot, "")
+        ucrPnlPlots.AddFunctionNamesCondition(rdoPlotAll, "plot")
+        ucrPnlPlots.AddFunctionNamesCondition(rdoPPPlot, "ppcomp")
+        ucrPnlPlots.AddFunctionNamesCondition(rdoCDFPlot, "cdfcomp")
+        ucrPnlPlots.AddFunctionNamesCondition(rdoQQPlot, "qqcomp")
+        ucrPnlPlots.AddFunctionNamesCondition(rdoDensityPlot, "denscomp")
+        ucrPnlPlots.AddFunctionNamesCondition(rdoCIcdf, "CIcdfplot")
         InitialiseTabs()
         SetPlotOptions()
 
@@ -146,8 +146,8 @@ Public Class sdgOneVarUseModFit
         ucrChkParametric.SetRCode(clsOneVarRBootFunction, bReset, bCloneIfNeeded:=True)
         ucrNudIterations.SetRCode(clsOneVarRBootFunction, bReset, bCloneIfNeeded:=True)
         ucrNudCI.SetRCode(clsOneVarQuantileFunction, bReset, bCloneIfNeeded:=True)
-        ucrPnlPlots.SetRSyntax(clsRSyntax, bReset)
-        ucrPnlQuantiles.SetRCode(clsRSeqFunction, bReset, bCloneIfNeeded:=True)
+        ucrPnlPlots.SetRCode(clsRPlotAllFunction, bReset)
+        ucrPnlQuantiles.SetRCode(clsRSeqFunction, bReset,)
         ucrInputQuantiles.SetRCode(clsOneVarQuantileFunction, bReset, bCloneIfNeeded:=True)
 
         If bReset Then
@@ -213,7 +213,7 @@ Public Class sdgOneVarUseModFit
 
     Private Sub ucrBase_ClickReturn(sender As Object, e As EventArgs) Handles ucrBase.ClickReturn
         QuantileCommand()
-        CreateGraphs()
+        ' CreateGraphs()
     End Sub
 
     Public Sub QuantileCommand()
@@ -233,50 +233,57 @@ Public Class sdgOneVarUseModFit
 
     Private Sub ucrPnlPlots_ControlValueChanged() Handles ucrPnlPlots.ControlValueChanged
         If rdoPlotAll.Checked Then
-            clsRSyntax.AddToAfterCodes(clsRPlotAllFunction, iPosition:=1)
-            'clsRSyntax.SetBaseRFunction(clsRPlotAllFunction)
-        Else
-            clsRSyntax.RemoveFromAfterCodes(clsRPlotAllFunction)
-        End If
-        If rdoPPPlot.Checked Then
-            clsRSyntax.AddToAfterCodes(clsRplotPPfunction, iPosition:=2)
-            '  clsRSyntax.SetBaseRFunction(clsRplotPPfunction)
-        Else
             clsRSyntax.RemoveFromAfterCodes(clsRplotPPfunction)
-        End If
-        If rdoQQPlot.Checked Then
-            clsRSyntax.AddToAfterCodes(clsRplotQQfunction, iPosition:=3)
-            ' clsRSyntax.SetBaseRFunction(clsRplotQQfunction)
-        Else
             clsRSyntax.RemoveFromAfterCodes(clsRplotQQfunction)
-        End If
-        If rdoDensityPlot.Checked Then
-            clsRSyntax.AddToAfterCodes(clsRplotDensfunction, iPosition:=4)
-            '   clsRSyntax.SetBaseRFunction(clsRplotDensfunction)
-        Else
             clsRSyntax.RemoveFromAfterCodes(clsRplotDensfunction)
-        End If
-        If rdoCIcdf.Checked Then
-            clsRSyntax.AddToAfterCodes(clsRplotCIfunction, iPosition:=5)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotCDFfunction)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotCIfunction)
+            clsRSyntax.AddToAfterCodes(clsRPlotAllFunction, iPosition:=2)
+        ElseIf rdoPPPlot.Checked Then
+            clsRSyntax.RemoveFromAfterCodes(clsRPlotAllFunction)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotQQfunction)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotDensfunction)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotCDFfunction)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotCIfunction)
+            clsRSyntax.AddToAfterCodes(clsRplotPPfunction, iPosition:=2)
+        ElseIf rdoQQPlot.Checked Then
+            clsRSyntax.RemoveFromAfterCodes(clsRplotPPfunction)
+            clsRSyntax.RemoveFromAfterCodes(clsRPlotAllFunction)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotDensfunction)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotCDFfunction)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotCIfunction)
+            clsRSyntax.AddToAfterCodes(clsRplotQQfunction, iPosition:=2)
+        ElseIf rdoDensityPlot.Checked Then
+            clsRSyntax.RemoveFromAfterCodes(clsRplotPPfunction)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotQQfunction)
+            clsRSyntax.RemoveFromAfterCodes(clsRPlotAllFunction)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotCDFfunction)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotCIfunction)
+            clsRSyntax.AddToAfterCodes(clsRplotDensfunction, iPosition:=2)
+        ElseIf rdoCIcdf.Checked Then
+            clsRSyntax.RemoveFromAfterCodes(clsRplotPPfunction)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotQQfunction)
+            clsRSyntax.RemoveFromAfterCodes(clsRPlotAllFunction)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotCDFfunction)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotDensfunction)
+            clsRSyntax.AddToAfterCodes(clsRplotCIfunction, iPosition:=2)
             clsRplotCIfunction.AddParameter("b", clsRFunctionParameter:=clsOneVarRBootFunction)
             clsRplotCIfunction.AddParameter("CI.cdfplot", Chr(34) & "quantile" & Chr(34))
-            'clsRSyntax.SetBaseRFunction(clsRplotCIfunction)
-        Else
-            clsRSyntax.RemoveFromAfterCodes(clsRplotCIfunction)
-        End If
-        If rdoNoPlot.Checked Then
-            clsRSyntax.AddToAfterCodes(clsRNoPlotfunction, iPosition:=6)
-            clsRSyntax.SetBaseRFunction(clsRNoPlotfunction)
-        Else
-            clsRSyntax.RemoveFromAfterCodes(clsRNoPlotfunction)
-        End If
-        If rdoCDFPlot.Checked Then
-            clsRSyntax.AddToAfterCodes(clsRplotCDFfunction, iPosition:=7)
-            'clsRSyntax.SetBaseRFunction(clsRplotCDFfunction)
-        Else
+        ElseIf rdoNoPlot.Checked Then
+            clsRSyntax.RemoveFromAfterCodes(clsRplotPPfunction)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotQQfunction)
+            clsRSyntax.RemoveFromAfterCodes(clsRPlotAllFunction)
             clsRSyntax.RemoveFromAfterCodes(clsRplotCDFfunction)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotCIfunction)
+            clsRSyntax.AddToAfterCodes(clsRNoPlotfunction, iPosition:=2)
+        ElseIf rdoCDFPlot.Checked Then
+            clsRSyntax.RemoveFromAfterCodes(clsRplotPPfunction)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotQQfunction)
+            clsRSyntax.RemoveFromAfterCodes(clsRPlotAllFunction)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotDensfunction)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotCIfunction)
+            clsRSyntax.AddToAfterCodes(clsRplotCDFfunction, iPosition:=2)
         End If
-
     End Sub
 
 End Class
