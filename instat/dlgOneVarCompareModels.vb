@@ -67,18 +67,22 @@ Public Class dlgOneVarCompareModels
 
         clsCdfcompFunction.SetPackageName("fitdistrplus")
         clsCdfcompFunction.SetRCommand("cdfcomp")
+        clsCdfcompFunction.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34))
         clsCdfcompFunction.iCallType = 3
 
         clsPpcompFunction.SetPackageName("fitdistrplus")
         clsPpcompFunction.SetRCommand("ppcomp")
+        clsPpcompFunction.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34))
         clsPpcompFunction.iCallType = 3
 
         clsQqcompFunction.SetPackageName("fitdistrplus")
         clsQqcompFunction.SetRCommand("qqcomp")
+        clsQqcompFunction.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34))
         clsQqcompFunction.iCallType = 3
 
         clsDenscompFunction.SetPackageName("fitdistrplus")
         clsDenscompFunction.SetRCommand("denscomp")
+        clsDenscompFunction.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34))
         clsDenscompFunction.iCallType = 3
 
         clsChisqtableOperator.SetOperation("$")

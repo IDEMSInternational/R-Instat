@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgOneVarUseModel
     Public bfirstload As Boolean = True
@@ -141,7 +140,7 @@ Public Class dlgOneVarUseModel
         clsQuantileFunction.SetAssignTo(ucrNewDataFrameName.GetText, strTempModel:="last_model", strTempDataframe:=ucrSelectorUseModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         'clsRBootFunction.SetAssignTo(ucrSaveObjects.GetText, strTempModel:="last_bootstrap", strTempDataframe:=ucrSelectorUseModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         ucrBase.clsRsyntax.SetBaseRFunction(clsQuantileFunction)
-        '   ucrBase.clsRsyntax.AddToAfterCodes(clsRPlotAllFunction, iPosition:=2)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsRPlotAllFunction, iPosition:=1)
         bResetSubdialog = True
     End Sub
 
@@ -208,7 +207,7 @@ Public Class dlgOneVarUseModel
     Private Sub ucrChkProduceBootstrap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkProduceBootstrap.ControlValueChanged
         If ucrChkProduceBootstrap.Checked Then
             clsQuantileFunction.AddParameter("x", clsRFunctionParameter:=clsRBootFunction)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsRBootFunction, iPosition:=1)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsRBootFunction, iPosition:=0)
         Else
             clsQuantileFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverObject.GetVariables())
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRBootFunction)
