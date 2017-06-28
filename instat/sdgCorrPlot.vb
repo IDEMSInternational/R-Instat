@@ -34,6 +34,8 @@ Public Class sdgCorrPlot
         dlgCorrelation.ucrBase.clsRsyntax.iCallType = 0
         ucrChkLabel.SetParameter(New RParameter("label", 4))
         ucrChkLabel.SetText("label")
+        ucrNudAlphaCorr.SetMinMax(0, 1)
+        ucrNudAlphaCorr.Increment = 0.01
 
         ucrSaveGraph.SetPrefix("CorGraph")
         ucrSaveGraph.SetSaveTypeAsGraph()
@@ -87,14 +89,14 @@ Public Class sdgCorrPlot
         clsRGGscatmatrixFunction = clsNewRGGscatmatrixFunction
 
         'settingRcode for subdialog
-        ucrNudMaximumSize.SetRCode(clsRGGcorrGraphicsFunction, bReset)
-        ucrNudMinimunSize.SetRCode(clsRGGcorrGraphicsFunction, bReset)
-        ucrInputComboGeom.SetRCode(clsRGGcorrGraphicsFunction, bReset)
-        ucrChkLabel.SetRCode(clsRGGcorrGraphicsFunction, bReset)
-        ucrSaveGraph.SetRCode(clsRGGcorrGraphicsFunction, bReset)
-        ucrChkColor.SetRCode(clsRGGscatmatrixFunction, bReset)
+        ucrNudMaximumSize.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudMinimunSize.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputComboGeom.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkLabel.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
+        ucrSaveGraph.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkColor.SetRCode(clsRGGscatmatrixFunction, bReset, bCloneIfNeeded:=True)
 
-        ucrPnlGraphType.SetRCode(clsRGGcorrGraphicsFunction, bReset)
+        ucrPnlGraphType.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
 
         clsRGraphicsFuction.AddParameter("columns", clsColFunction)
         clsCorrelationFunction.iCallType = 2
