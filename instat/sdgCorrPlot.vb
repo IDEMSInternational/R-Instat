@@ -32,20 +32,6 @@ Public Class sdgCorrPlot
         ucrNudMinimunSize.SetParameter(New RParameter("min_size", 2))
         ucrNudMinimunSize.SetMinMax(1, 5)
         dlgCorrelation.ucrBase.clsRsyntax.iCallType = 0
-
-        ucrNudAlphaCorr.SetParameter(New RParameter("label_alpha", 3))
-        ucrNudAlphaCorr.SetMinMax(0, 1)
-        ucrNudAlphaCorr.DecimalPlaces = 2
-        ucrNudAlphaCorr.Increment = 0.01
-
-        ucrNudAlpha.SetParameter(New RParameter("alpha"))
-        ucrNudAlpha.SetMinMax(0, 1)
-        ucrNudAlpha.DecimalPlaces = 2
-        ucrNudAlpha.Increment = 0.01
-
-        ucrChkColor.SetParameter(New RParameter("color"))
-        ucrChkColor.SetText("colour By Factor")
-
         ucrChkLabel.SetParameter(New RParameter("label", 4))
         ucrChkLabel.SetText("label")
 

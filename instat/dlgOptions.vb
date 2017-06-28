@@ -45,8 +45,10 @@ Public Class dlgOptions
     Private Sub InitialiseDialog()
         'ucrBase.iHelpTopicID = 336
         Dim strPreviewText As String
-        nudMaxRows.Maximum = Integer.MaxValue
-        nudMaxRows.Increment = 10
+        ucrNudMaxRows.Maximum = Integer.MaxValue
+        ucrNudMaxCols.Maximum = Integer.MaxValue
+        ucrNudMaxRows.Increment = 10
+        ucrNudMaxCols.Increment = 5
         strPreviewText = "R-Instat 2016"
         rtbCommandPreview.Text = strPreviewText
         rtbCommentPreview.Text = strPreviewText
@@ -56,24 +58,35 @@ Public Class dlgOptions
         rdoFrench.Enabled = False
         rdoKiswahili.Enabled = False
         rdoSpanish.Enabled = False
-        nudDigits.Minimum = 0
-        nudDigits.Maximum = 22
+        ucrNudDigits.SetMinMax(0, 22)
+        ucrChkIncludeCommentsbyDefault.SetText("Include Comments by Default")
+        ucrChkShowRCommandsinOutputWindow.SetText(" Show R Commands in Output Window")
+        ucrChkShowSignifStars.SetText("Show stars on summary tables for coefficients")
+        ucrChkIncludeDefaultParams.SetText("Include Default Parameter Values in R Commands")
+        ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinOutputWindow)
+        ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinRViewer)
+        ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinSeparateWindows)
+        ucrPnlLanguage.AddRadioButton(rdoKiswahili)
+        ucrPnlLanguage.AddRadioButton(rdoEnglish)
+        ucrPnlLanguage.AddRadioButton(rdoSpanish)
+        ucrPnlLanguage.AddRadioButton(rdoFrench)
     End Sub
 
     Private Sub LoadInstatOptions()
-        chkIncludeDefaultParams.Checked = frmMain.clsInstatOptions.bIncludeRDefaultParameters
+        ucrChkIncludeDefaultParams.Checked = frmMain.clsInstatOptions.bIncludeRDefaultParameters
         SetOutputFont(frmMain.clsInstatOptions.fntOutput, frmMain.clsInstatOptions.clrOutput)
         SetCommandFont(frmMain.clsInstatOptions.fntScript, frmMain.clsInstatOptions.clrScript)
         SetCommentFont(frmMain.clsInstatOptions.fntComment, frmMain.clsInstatOptions.clrComment)
         SetEditorFont(frmMain.clsInstatOptions.fntEditor, frmMain.clsInstatOptions.clrEditor)
-        nudMaxRows.Value = frmMain.clsInstatOptions.iMaxRows
-        nudPreviewRows.Value = frmMain.clsInstatOptions.iPreviewRows
-        txtComment.Text = frmMain.clsInstatOptions.strComment
+        ucrNudMaxRows.Value = frmMain.clsInstatOptions.iMaxRows
+        ucrNudMaxCols.Value = frmMain.clsInstatOptions.iMaxCols
+        ucrNudPreviewRows.Value = frmMain.clsInstatOptions.iPreviewRows
+        ucrInputComment.SetName(frmMain.clsInstatOptions.strComment)
         ucrWorkingDirectory.SetName(frmMain.clsInstatOptions.strWorkingDirectory)
-        chkIncludeCommentsbyDefault.Checked = frmMain.clsInstatOptions.bIncludeCommentDefault
-        chkShowRCommandsinOutputWindow.Checked = frmMain.clsInstatOptions.bCommandsinOutput
-        nudDigits.Value = frmMain.clsInstatOptions.iDigits
-        chkShowSignifStars.Checked = frmMain.clsInstatOptions.bShowSignifStars
+        ucrChkIncludeCommentsbyDefault.Checked = frmMain.clsInstatOptions.bIncludeCommentDefault
+        ucrChkShowRCommandsinOutputWindow.Checked = frmMain.clsInstatOptions.bCommandsinOutput
+        ucrNudDigits.Value = frmMain.clsInstatOptions.iDigits
+        ucrChkShowSignifStars.Checked = frmMain.clsInstatOptions.bShowSignifStars
 
         Select Case frmMain.clsInstatOptions.strLanguageCultureCode
             Case "en-GB"
@@ -99,21 +112,22 @@ Public Class dlgOptions
     End Sub
 
     Private Sub SetInstatOptions()
-        frmMain.clsInstatOptions.bIncludeRDefaultParameters = chkIncludeDefaultParams.Checked
+        frmMain.clsInstatOptions.bIncludeRDefaultParameters = ucrChkIncludeDefaultParams.Checked
         frmMain.clsInstatOptions.SetFormatOutput(fntOutput, clrOutput)
         frmMain.clsInstatOptions.SetFormatComment(fntComment, clrComment)
         frmMain.clsInstatOptions.SetFormatScript(fntCommand, clrCommand)
         frmMain.clsInstatOptions.SetFormatEditor(fntEditor, clrEditor)
-        frmMain.clsInstatOptions.SetComment(txtComment.Text)
-        frmMain.clsInstatOptions.SetPreviewRows(nudPreviewRows.Value)
-        frmMain.clsInstatOptions.SetMaxRows(nudMaxRows.Value)
+        frmMain.clsInstatOptions.SetComment(ucrInputComment.GetText)
+        frmMain.clsInstatOptions.SetPreviewRows(ucrNudPreviewRows.Value)
+        frmMain.clsInstatOptions.SetMaxRows(ucrNudMaxRows.Value)
+        frmMain.clsInstatOptions.SetMaxCols(ucrNudMaxCols.Value)
         frmMain.clsInstatOptions.SetLanguageCultureCode(strCurrLanguageCulture)
         frmMain.clsInstatOptions.SetWorkingDirectory(strWorkingDirectory)
         frmMain.clsInstatOptions.SetGraphDisplayOption(strGraphDisplayOption)
-        frmMain.clsInstatOptions.bIncludeCommentDefault = chkIncludeCommentsbyDefault.Checked
-        frmMain.clsInstatOptions.SetCommandInOutpt(chkShowRCommandsinOutputWindow.Checked)
-        frmMain.clsInstatOptions.SetDigits(nudDigits.Value)
-        frmMain.clsInstatOptions.SetSignifStars(chkShowSignifStars.Checked)
+        frmMain.clsInstatOptions.bIncludeCommentDefault = ucrChkIncludeCommentsbyDefault.Checked
+        frmMain.clsInstatOptions.SetCommandInOutpt(ucrChkShowRCommandsinOutputWindow.Checked)
+        frmMain.clsInstatOptions.SetDigits(ucrNudDigits.Value)
+        frmMain.clsInstatOptions.SetSignifStars(ucrChkShowSignifStars.Checked)
     End Sub
 
     Private Sub SetView()
@@ -207,7 +221,7 @@ Public Class dlgOptions
         ApplyEnabled(False)
     End Sub
 
-    Private Sub LanguageChanged(sender As Object, e As EventArgs) Handles rdoKiswahili.CheckedChanged, rdoEnglish.CheckedChanged, rdoFrench.CheckedChanged, rdoSpanish.CheckedChanged
+    Private Sub ucrPnlLanguage_ControlValueChanged() Handles ucrPnlLanguage.ControlValueChanged
         If rdoKiswahili.Checked Then
             strCurrLanguageCulture = "sw-KE"
         ElseIf rdoFrench.Checked Then
@@ -217,10 +231,6 @@ Public Class dlgOptions
         ElseIf rdoSpanish.Checked Then
             strCurrLanguageCulture = "es-ES"
         End If
-        ApplyEnabled(True)
-    End Sub
-
-    Private Sub txtComment_TextChanged(sender As Object, e As EventArgs) Handles txtComment.TextChanged
         ApplyEnabled(True)
     End Sub
 
@@ -278,38 +288,9 @@ Public Class dlgOptions
 
     End Sub
 
-    Private Sub nudNoLines_ValueChanged(sender As Object, e As EventArgs) Handles nudPreviewRows.TextChanged
+    Private Sub ucrNudPreviewRows_ValueChanged() Handles ucrNudMaxCols.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged
         ApplyEnabled(True)
     End Sub
-
-    Private Sub chkIncludeDefaultParams_CheckedChanged(sender As Object, e As EventArgs) Handles chkIncludeDefaultParams.CheckedChanged
-        ApplyEnabled(True)
-    End Sub
-
-    Private Sub nudMaxRows_TextChanged(sender As Object, e As EventArgs) Handles nudMaxRows.TextChanged
-        ApplyEnabled(True)
-    End Sub
-
-    Private Sub rdoDisplayinOutputWindow_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDisplayinOutputWindow.CheckedChanged, rdoDisplayinSeparateWindows.CheckedChanged, rdoDisplayinRViewer.CheckedChanged
-        If rdoDisplayinOutputWindow.Checked Then
-            strGraphDisplayOption = "view_output_window"
-        ElseIf rdoDisplayinSeparateWindows.Checked Then
-            strGraphDisplayOption = "view_separate_window"
-        ElseIf rdoDisplayinRViewer.Checked Then
-            strGraphDisplayOption = "view_R_viewer"
-        End If
-
-        ApplyEnabled(True)
-    End Sub
-
-    Private Sub chkDefault_CheckedChanged(sender As Object, e As EventArgs) Handles chkIncludeCommentsbyDefault.CheckedChanged
-        ApplyEnabled(True)
-    End Sub
-
-    Private Sub chkShowRCommandsinOutputWindow_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowRCommandsinOutputWindow.CheckedChanged
-        ApplyEnabled(True)
-    End Sub
-
     Private Sub ApplyEnabled(bEnable As Boolean)
         cmdApply.Enabled = bEnable
         cmdOk.Enabled = bEnable
@@ -324,6 +305,10 @@ Public Class dlgOptions
         rtbOutputPreview.SelectionLength = 0
     End Sub
 
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
+        Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "336")
+    End Sub
+
     Private Sub cmdFactoryReset_Click(sender As Object, e As EventArgs) Handles cmdFactoryReset.Click
         Dim msgFactoryReset = MsgBox("Are you sure you want to reset to factory defaults?", MessageBoxButtons.YesNo, "Factory Reset")
         If msgFactoryReset = DialogResult.Yes Then
@@ -333,6 +318,16 @@ Public Class dlgOptions
         End If
     End Sub
 
+    Private Sub ucrPnlGraphDisplay_ControlValueChanged() Handles ucrPnlGraphDisplay.ControlValueChanged
+        If rdoDisplayinOutputWindow.Checked Then
+            strGraphDisplayOption = "view_output_window"
+        ElseIf rdoDisplayinSeparateWindows.Checked Then
+            strGraphDisplayOption = "view_separate_window"
+        ElseIf rdoDisplayinRViewer.Checked Then
+            strGraphDisplayOption = "view_R_viewer"
+        End If
+        ApplyEnabled(True)
+    End Sub
     Private Sub SetCommandFont(fntNew As Font, clrNew As Color)
         fntCommand = fntNew
         clrCommand = clrNew
@@ -365,11 +360,4 @@ Public Class dlgOptions
         End If
     End Sub
 
-    Private Sub nudDigits_ValueChanged(sender As Object, e As EventArgs) Handles nudDigits.ValueChanged
-        ApplyEnabled(True)
-    End Sub
-
-    Private Sub chkShowSignifStars_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowSignifStars.CheckedChanged
-        ApplyEnabled(True)
-    End Sub
 End Class
