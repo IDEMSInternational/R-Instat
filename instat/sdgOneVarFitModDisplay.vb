@@ -56,8 +56,8 @@ Public Class sdgOneVarFitModDisplay
         ucrPnlPlots.AddFunctionNamesCondition(rdoQQPlot, "qqcomp")
         ucrPnlPlots.AddFunctionNamesCondition(rdoPPPlot, "ppcomp")
 
-        ucrSaveLikelihood.SetDataFrameSelector(dlgOneVarFitModel.ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
-        ucrSavePlots.SetDataFrameSelector(dlgOneVarFitModel.ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
+        ' ucrSaveLikelihood.SetDataFrameSelector(dlgOneVarFitModel.ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
+        ' ucrSavePlots.SetDataFrameSelector(dlgOneVarFitModel.ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
 
         bControlsInitialised = True
     End Sub
@@ -79,7 +79,6 @@ Public Class sdgOneVarFitModDisplay
         clsRplotQqComp = clsNewRplotQqComp
         clsRplotDenscomp = clsNewRplotDenscomp
         clsRLogLikFunction = clsNewRLogLikFunction
-        clsRLogLikFunction.AddParameter("mlefit", clsRFunctionParameter:=clsModel)
         ucrPnlLikelihood.SetRCode(clsRLogLikFunction, bReset)
         ucrChkPLotLogLik.SetRCode(clsRLogLikFunction, bReset)
         ucrPnlPlots.SetRCode(clsRplotFunction, bReset)

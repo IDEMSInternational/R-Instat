@@ -223,9 +223,9 @@ Public Class dlgOneVarFitModel
 
         SetBaseFunction()
         clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertInteger)
+        clsRLogLikFunction.AddParameter("mlefit", clsRFunctionParameter:=clsROneVarFitModel)
         clsROneVarFitModel.SetAssignTo("last_model", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model")
         UcrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModel)
-        UcrBase.clsRsyntax.AddToAfterCodes(clsRplotFunction, iPosition:=1)
         SetDistributions()
         bResetSubdialog = True
     End Sub
@@ -239,12 +239,12 @@ Public Class dlgOneVarFitModel
         UcrReceiver.AddAdditionalCodeParameterPair(clsRConvertInteger, New RParameter("x"), iAdditionalPairNo:=2)
         UcrReceiver.AddAdditionalCodeParameterPair(clsRWilcoxTest, New RParameter("x"), iAdditionalPairNo:=3)
         UcrReceiver.AddAdditionalCodeParameterPair(clsRNonSignTest, New RParameter("x"), iAdditionalPairNo:=4)
-        UcrReceiver.AddAdditionalCodeParameterPair(clsRLength, New RParameter("x"), iAdditionalPairNo:=6)
-        UcrReceiver.AddAdditionalCodeParameterPair(clsRMean, New RParameter("x"), iAdditionalPairNo:=7)
-        UcrReceiver.AddAdditionalCodeParameterPair(clsRBinomTest, New RParameter("x"), iAdditionalPairNo:=9)
-        UcrReceiver.AddAdditionalCodeParameterPair(clsRConvertVector, New RParameter("x"), iAdditionalPairNo:=10)
+        ' UcrReceiver.AddAdditionalCodeParameterPair(clsRLength, New RParameter("x"), iAdditionalPairNo:=6)
+        '  UcrReceiver.AddAdditionalCodeParameterPair(clsRMean, New RParameter("x"), iAdditionalPairNo:=7)
+        ' UcrReceiver.AddAdditionalCodeParameterPair(clsRBinomTest, New RParameter("x"), iAdditionalPairNo:=9)
+        '  UcrReceiver.AddAdditionalCodeParameterPair(clsRConvertVector, New RParameter("x"), iAdditionalPairNo:=10)
 
-        UcrReceiver.AddAdditionalCodeParameterPair(clsRplotFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
+        '  UcrReceiver.AddAdditionalCodeParameterPair(clsRplotFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
         UcrReceiver.AddAdditionalCodeParameterPair(clsRplotPPComp, New RParameter("ft", 0), iAdditionalPairNo:=2)
         UcrReceiver.AddAdditionalCodeParameterPair(clsRplotCdfcomp, New RParameter("ft", 0), iAdditionalPairNo:=3)
         UcrReceiver.AddAdditionalCodeParameterPair(clsRplotQqComp, New RParameter("ft", 0), iAdditionalPairNo:=4)
@@ -268,8 +268,8 @@ Public Class dlgOneVarFitModel
         ucrNudCI.AddAdditionalCodeParameterPair(clsVarTest, New RParameter("conf.level"), iAdditionalPairNo:=2)
         ucrNudCI.AddAdditionalCodeParameterPair(clsREnormTest, New RParameter("conf.level"), iAdditionalPairNo:=3)
         ucrNudCI.AddAdditionalCodeParameterPair(clsRWilcoxTest, New RParameter("conf.level"), iAdditionalPairNo:=4)
-        ucrNudCI.AddAdditionalCodeParameterPair(clsRNonSignTest, New RParameter("conf.level"), iAdditionalPairNo:=5)
-        ucrNudCI.AddAdditionalCodeParameterPair(clsRBinomTest, New RParameter("conf.level"), iAdditionalPairNo:=7)
+        ' ucrNudCI.AddAdditionalCodeParameterPair(clsRNonSignTest, New RParameter("conf.level"), iAdditionalPairNo:=5)
+        '  ucrNudCI.AddAdditionalCodeParameterPair(clsRBinomTest, New RParameter("conf.level"), iAdditionalPairNo:=7)
         '  ucrNudCI.AddAdditionalCodeParameterPair(clsRPoissonTest, New RParameter("conf.level"), iAdditionalPairNo:=6)
     End Sub
 
@@ -616,7 +616,7 @@ Public Class dlgOneVarFitModel
             ucrOperator.Visible = False
             ucrVariables.Visible = False
         End If
-        ucrNudBinomialConditions.Value = 1
+        ' ucrNudBinomialConditions.Value = 1
         ucrNudBinomialConditions.Maximum = Integer.MaxValue
         ucrNudBinomialConditions.Minimum = Integer.MinValue
         Display()
