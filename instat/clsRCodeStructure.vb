@@ -129,9 +129,6 @@ Public Class RCodeStructure
         End If
 
         If bToBeAssigned Then
-            If Not frmMain.clsRLink.bInstatObjectExists Then
-                frmMain.clsRLink.CreateNewInstatObject()
-            End If
             strScript = strScript & strAssignTo & " <- " & strTemp & Environment.NewLine
             If Not strAssignToDataFrame = "" AndAlso (Not strAssignToColumn = "" OrElse bAssignToColumnWithoutNames) Then
                 clsAddColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")

@@ -61,7 +61,6 @@ Partial Class dlgStartofRains
         Me.lblDate = New System.Windows.Forms.Label()
         Me.lblYear = New System.Windows.Forms.Label()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSaveStartofRains = New instat.ucrSave()
         Me.lblStation = New System.Windows.Forms.Label()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
@@ -69,6 +68,8 @@ Partial Class dlgStartofRains
         Me.ucrReceiverDOY = New instat.ucrReceiverSingle()
         Me.ucrReceiverRainfall = New instat.ucrReceiverSingle()
         Me.ucrSelectorForStartofRains = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.lblNewColumnName = New System.Windows.Forms.Label()
+        Me.ucrInputNewColumnName = New instat.ucrInputTextBox()
         Me.grpConditionsForSatrtofRains.SuspendLayout()
         Me.grpRainParameters.SuspendLayout()
         Me.SuspendLayout()
@@ -493,13 +494,6 @@ Partial Class dlgStartofRains
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 14
         '
-        'ucrSaveStartofRains
-        '
-        Me.ucrSaveStartofRains.Location = New System.Drawing.Point(9, 464)
-        Me.ucrSaveStartofRains.Name = "ucrSaveStartofRains"
-        Me.ucrSaveStartofRains.Size = New System.Drawing.Size(316, 24)
-        Me.ucrSaveStartofRains.TabIndex = 13
-        '
         'lblStation
         '
         Me.lblStation.AutoSize = True
@@ -579,14 +573,34 @@ Partial Class dlgStartofRains
         Me.ucrSelectorForStartofRains.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorForStartofRains.TabIndex = 0
         '
+        'lblNewColumnName
+        '
+        Me.lblNewColumnName.AutoSize = True
+        Me.lblNewColumnName.Location = New System.Drawing.Point(6, 472)
+        Me.lblNewColumnName.Name = "lblNewColumnName"
+        Me.lblNewColumnName.Size = New System.Drawing.Size(101, 13)
+        Me.lblNewColumnName.TabIndex = 23
+        Me.lblNewColumnName.Text = "New Column Name:"
+        '
+        'ucrInputNewColumnName
+        '
+        Me.ucrInputNewColumnName.AddQuotesIfUnrecognised = True
+        Me.ucrInputNewColumnName.IsMultiline = False
+        Me.ucrInputNewColumnName.IsReadOnly = False
+        Me.ucrInputNewColumnName.Location = New System.Drawing.Point(113, 470)
+        Me.ucrInputNewColumnName.Name = "ucrInputNewColumnName"
+        Me.ucrInputNewColumnName.Size = New System.Drawing.Size(187, 21)
+        Me.ucrInputNewColumnName.TabIndex = 22
+        '
         'dlgStartofRains
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(696, 550)
+        Me.Controls.Add(Me.lblNewColumnName)
+        Me.Controls.Add(Me.ucrInputNewColumnName)
         Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.ucrReceiverStation)
-        Me.Controls.Add(Me.ucrSaveStartofRains)
         Me.Controls.Add(Me.ucrReceiverYear)
         Me.Controls.Add(Me.lblYear)
         Me.Controls.Add(Me.lblDate)
@@ -641,7 +655,6 @@ Partial Class dlgStartofRains
     Friend WithEvents lblDPOverallInterval As Label
     Friend WithEvents lblDPLength As Label
     Friend WithEvents lblDPMaxRain As Label
-    Friend WithEvents ucrSaveStartofRains As ucrSave
     Friend WithEvents ucrNudTROverDays As ucrNud
     Friend WithEvents ucrNudTRPercentile As ucrNud
     Friend WithEvents lblStation As Label
@@ -662,4 +675,6 @@ Partial Class dlgStartofRains
     Friend WithEvents ucrNudDPMaxRain As ucrNud
     Friend WithEvents ucrChkDrySpell As ucrCheck
     Friend WithEvents ucrChkDryPeriod As ucrCheck
+    Friend WithEvents lblNewColumnName As Label
+    Friend WithEvents ucrInputNewColumnName As ucrInputTextBox
 End Class

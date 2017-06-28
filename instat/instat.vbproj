@@ -148,7 +148,9 @@
     <Compile Include="clsBlockReader.vb" />
     <Compile Include="clsCondition.vb" />
     <Compile Include="clsGgplotDefaults.vb" />
+    <Compile Include="clsInstatOptionsDefaults.vb" />
     <Compile Include="clsRCodeStructure.vb" />
+    <Compile Include="clsRegressionDefaults.vb" />
     <Compile Include="dlgAddComment.Designer.vb">
       <DependentUpon>dlgAddComment.vb</DependentUpon>
     </Compile>
@@ -165,6 +167,12 @@
       <DependentUpon>dlgAddLink.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgAddLink.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgAutoSaveRecovery.Designer.vb">
+      <DependentUpon>dlgAutoSaveRecovery.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgAutoSaveRecovery.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgCalculationsSummary.Designer.vb">
@@ -2214,6 +2222,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgAddLink.resx">
       <DependentUpon>dlgAddLink.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgAutoSaveRecovery.resx">
+      <DependentUpon>dlgAutoSaveRecovery.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCalculationsSummary.fr-FR.resx">
       <DependentUpon>dlgCalculationsSummary.vb</DependentUpon>
