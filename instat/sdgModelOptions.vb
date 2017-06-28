@@ -76,13 +76,13 @@ Public Class sdgModelOptions
         rdoSqrt.Enabled = False
     End Sub
 
-    Public Sub ucrFamily_cboDistributionsIndexChanged() Handles ucrFamily.DistributionsIndexChanged
+    Public Sub ucrFamily_cboDistributionsIndexChanged() Handles ucrDistributionChoice.DistributionsIndexChanged
         RestrictLink()
     End Sub
 
     Public Sub RestrictLink()
         Dim strFamilyName As String
-        strFamilyName = ucrFamily.clsCurrDistribution.strNameTag
+        strFamilyName = ucrDistributionChoice.clsCurrDistribution.strNameTag
         ResetLinks()
         If strFamilyName = "Normal" Then
             rdoIdentity.Enabled = True

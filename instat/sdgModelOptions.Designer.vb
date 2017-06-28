@@ -32,8 +32,8 @@ Partial Class sdgModelOptions
         Me.rdoIdentity = New System.Windows.Forms.RadioButton()
         Me.rdoLog = New System.Windows.Forms.RadioButton()
         Me.rdoLogit = New System.Windows.Forms.RadioButton()
-        Me.ucrFamily = New instat.ucrDistributions()
         Me.ucrPnlLinkFunctions = New instat.UcrPanel()
+        Me.ucrDistributionChoice = New instat.ucrDistributions()
         Me.ucrButtonsSDGModelOptions = New instat.ucrButtonsSubdialogue()
         Me.grpLinkFunctions.SuspendLayout()
         Me.SuspendLayout()
@@ -159,19 +159,19 @@ Partial Class sdgModelOptions
         Me.rdoLogit.Text = "Logit"
         Me.rdoLogit.UseVisualStyleBackColor = True
         '
-        'ucrFamily
-        '
-        Me.ucrFamily.Location = New System.Drawing.Point(13, 12)
-        Me.ucrFamily.Name = "ucrFamily"
-        Me.ucrFamily.Size = New System.Drawing.Size(208, 27)
-        Me.ucrFamily.TabIndex = 10
-        '
         'ucrPnlLinkFunctions
         '
         Me.ucrPnlLinkFunctions.Location = New System.Drawing.Point(6, 19)
         Me.ucrPnlLinkFunctions.Name = "ucrPnlLinkFunctions"
         Me.ucrPnlLinkFunctions.Size = New System.Drawing.Size(225, 79)
         Me.ucrPnlLinkFunctions.TabIndex = 9
+        '
+        'ucrDistributionChoice
+        '
+        Me.ucrDistributionChoice.Location = New System.Drawing.Point(13, 12)
+        Me.ucrDistributionChoice.Name = "ucrDistributionChoice"
+        Me.ucrDistributionChoice.Size = New System.Drawing.Size(208, 27)
+        Me.ucrDistributionChoice.TabIndex = 10
         '
         'ucrButtonsSDGModelOptions
         '
@@ -185,7 +185,7 @@ Partial Class sdgModelOptions
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(263, 204)
-        Me.Controls.Add(Me.ucrFamily)
+        Me.Controls.Add(Me.ucrDistributionChoice)
         Me.Controls.Add(Me.grpLinkFunctions)
         Me.Controls.Add(Me.ucrButtonsSDGModelOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -210,7 +210,7 @@ Partial Class sdgModelOptions
     Friend WithEvents rdoProbit As RadioButton
     Friend WithEvents ucrPnlLinkFunctions As UcrPanel
     Friend WithEvents grpLinkFunctions As GroupBox
-    Friend WithEvents ucrFamily As ucrDistributions
+    Friend WithEvents ucrDistributionChoice As ucrDistributions
     Friend WithEvents rdoIdentity As RadioButton
     Friend WithEvents rdoLog As RadioButton
     Friend WithEvents rdoLogit As RadioButton
