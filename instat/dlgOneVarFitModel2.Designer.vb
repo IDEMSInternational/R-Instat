@@ -30,20 +30,20 @@ Partial Class dlgOneVarFitModel
         Me.rdoExactCase = New System.Windows.Forms.RadioButton()
         Me.rdoGeneralCase = New System.Windows.Forms.RadioButton()
         Me.grpConditions = New System.Windows.Forms.GroupBox()
-        Me.grpVarAndWilcox = New System.Windows.Forms.GroupBox()
-        Me.rdoMeanWilcox = New System.Windows.Forms.RadioButton()
-        Me.rdoVarSign = New System.Windows.Forms.RadioButton()
         Me.lblHyp = New System.Windows.Forms.Label()
         Me.lblConfidenceLimit = New System.Windows.Forms.Label()
+        Me.grpVarAndWilcox = New System.Windows.Forms.GroupBox()
         Me.rdoEnorm = New System.Windows.Forms.RadioButton()
+        Me.rdoMeanWilcox = New System.Windows.Forms.RadioButton()
+        Me.rdoVarSign = New System.Windows.Forms.RadioButton()
         Me.grpVarAndWilcoxSign = New System.Windows.Forms.GroupBox()
         Me.rdoWilcoxSignTest = New System.Windows.Forms.RadioButton()
         Me.rdoVarSignTest = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlWilcoxVarTest = New instat.UcrPanel()
+        Me.ucrPnlStats = New instat.UcrPanel()
         Me.ucrChkConvertVariate = New instat.ucrCheck()
         Me.ucrPnlGeneralExactCase = New instat.UcrPanel()
         Me.ucrSaveModel = New instat.ucrSave()
-        Me.ucrPnlWilcoxVarTest = New instat.UcrPanel()
-        Me.ucrPnlStats = New instat.UcrPanel()
         Me.ucrChkBinModify = New instat.ucrCheck()
         Me.ucrNudBinomialConditions = New instat.ucrNud()
         Me.ucrOperator = New instat.ucrInputComboBox()
@@ -136,6 +136,8 @@ Partial Class dlgOneVarFitModel
         '
         'grpConditions
         '
+        Me.grpConditions.Controls.Add(Me.grpVarAndWilcoxSign)
+        Me.grpConditions.Controls.Add(Me.grpVarAndWilcox)
         Me.grpConditions.Controls.Add(Me.ucrChkBinModify)
         Me.grpConditions.Controls.Add(Me.lblEquals)
         Me.grpConditions.Controls.Add(Me.ucrNudBinomialConditions)
@@ -153,17 +155,46 @@ Partial Class dlgOneVarFitModel
         Me.grpConditions.TabStop = False
         Me.grpConditions.Text = "Conditions"
         '
+        'lblHyp
+        '
+        Me.lblHyp.AutoSize = True
+        Me.lblHyp.Location = New System.Drawing.Point(6, 40)
+        Me.lblHyp.Name = "lblHyp"
+        Me.lblHyp.Size = New System.Drawing.Size(83, 13)
+        Me.lblHyp.TabIndex = 46
+        Me.lblHyp.Text = "Null Hypothesis:"
+        '
+        'lblConfidenceLimit
+        '
+        Me.lblConfidenceLimit.AutoSize = True
+        Me.lblConfidenceLimit.Location = New System.Drawing.Point(6, 13)
+        Me.lblConfidenceLimit.Name = "lblConfidenceLimit"
+        Me.lblConfidenceLimit.Size = New System.Drawing.Size(88, 13)
+        Me.lblConfidenceLimit.TabIndex = 47
+        Me.lblConfidenceLimit.Text = "Confidence Limit:"
+        '
         'grpVarAndWilcox
         '
         Me.grpVarAndWilcox.Controls.Add(Me.rdoEnorm)
         Me.grpVarAndWilcox.Controls.Add(Me.rdoMeanWilcox)
         Me.grpVarAndWilcox.Controls.Add(Me.rdoVarSign)
         Me.grpVarAndWilcox.Controls.Add(Me.ucrPnlStats)
-        Me.grpVarAndWilcox.Location = New System.Drawing.Point(44, 201)
+        Me.grpVarAndWilcox.Location = New System.Drawing.Point(7, 60)
         Me.grpVarAndWilcox.Name = "grpVarAndWilcox"
         Me.grpVarAndWilcox.Size = New System.Drawing.Size(130, 75)
         Me.grpVarAndWilcox.TabIndex = 55
         Me.grpVarAndWilcox.TabStop = False
+        '
+        'rdoEnorm
+        '
+        Me.rdoEnorm.AutoSize = True
+        Me.rdoEnorm.Location = New System.Drawing.Point(10, 50)
+        Me.rdoEnorm.Name = "rdoEnorm"
+        Me.rdoEnorm.Size = New System.Drawing.Size(54, 17)
+        Me.rdoEnorm.TabIndex = 65
+        Me.rdoEnorm.TabStop = True
+        Me.rdoEnorm.Text = "enorm"
+        Me.rdoEnorm.UseVisualStyleBackColor = True
         '
         'rdoMeanWilcox
         '
@@ -188,41 +219,12 @@ Partial Class dlgOneVarFitModel
         Me.rdoVarSign.Text = "Compare Variance"
         Me.rdoVarSign.UseVisualStyleBackColor = True
         '
-        'lblHyp
-        '
-        Me.lblHyp.AutoSize = True
-        Me.lblHyp.Location = New System.Drawing.Point(6, 40)
-        Me.lblHyp.Name = "lblHyp"
-        Me.lblHyp.Size = New System.Drawing.Size(83, 13)
-        Me.lblHyp.TabIndex = 46
-        Me.lblHyp.Text = "Null Hypothesis:"
-        '
-        'lblConfidenceLimit
-        '
-        Me.lblConfidenceLimit.AutoSize = True
-        Me.lblConfidenceLimit.Location = New System.Drawing.Point(6, 13)
-        Me.lblConfidenceLimit.Name = "lblConfidenceLimit"
-        Me.lblConfidenceLimit.Size = New System.Drawing.Size(88, 13)
-        Me.lblConfidenceLimit.TabIndex = 47
-        Me.lblConfidenceLimit.Text = "Confidence Limit:"
-        '
-        'rdoEnorm
-        '
-        Me.rdoEnorm.AutoSize = True
-        Me.rdoEnorm.Location = New System.Drawing.Point(10, 50)
-        Me.rdoEnorm.Name = "rdoEnorm"
-        Me.rdoEnorm.Size = New System.Drawing.Size(54, 17)
-        Me.rdoEnorm.TabIndex = 65
-        Me.rdoEnorm.TabStop = True
-        Me.rdoEnorm.Text = "enorm"
-        Me.rdoEnorm.UseVisualStyleBackColor = True
-        '
         'grpVarAndWilcoxSign
         '
         Me.grpVarAndWilcoxSign.Controls.Add(Me.rdoWilcoxSignTest)
         Me.grpVarAndWilcoxSign.Controls.Add(Me.rdoVarSignTest)
         Me.grpVarAndWilcoxSign.Controls.Add(Me.ucrPnlWilcoxVarTest)
-        Me.grpVarAndWilcoxSign.Location = New System.Drawing.Point(42, 205)
+        Me.grpVarAndWilcoxSign.Location = New System.Drawing.Point(5, 64)
         Me.grpVarAndWilcoxSign.Name = "grpVarAndWilcoxSign"
         Me.grpVarAndWilcoxSign.Size = New System.Drawing.Size(127, 71)
         Me.grpVarAndWilcoxSign.TabIndex = 62
@@ -251,6 +253,20 @@ Partial Class dlgOneVarFitModel
         Me.rdoVarSignTest.Text = "Compare Vaiance"
         Me.rdoVarSignTest.UseVisualStyleBackColor = True
         '
+        'ucrPnlWilcoxVarTest
+        '
+        Me.ucrPnlWilcoxVarTest.Location = New System.Drawing.Point(6, 11)
+        Me.ucrPnlWilcoxVarTest.Name = "ucrPnlWilcoxVarTest"
+        Me.ucrPnlWilcoxVarTest.Size = New System.Drawing.Size(117, 48)
+        Me.ucrPnlWilcoxVarTest.TabIndex = 63
+        '
+        'ucrPnlStats
+        '
+        Me.ucrPnlStats.Location = New System.Drawing.Point(6, 10)
+        Me.ucrPnlStats.Name = "ucrPnlStats"
+        Me.ucrPnlStats.Size = New System.Drawing.Size(118, 63)
+        Me.ucrPnlStats.TabIndex = 63
+        '
         'ucrChkConvertVariate
         '
         Me.ucrChkConvertVariate.Checked = False
@@ -272,20 +288,6 @@ Partial Class dlgOneVarFitModel
         Me.ucrSaveModel.Name = "ucrSaveModel"
         Me.ucrSaveModel.Size = New System.Drawing.Size(255, 24)
         Me.ucrSaveModel.TabIndex = 38
-        '
-        'ucrPnlWilcoxVarTest
-        '
-        Me.ucrPnlWilcoxVarTest.Location = New System.Drawing.Point(6, 11)
-        Me.ucrPnlWilcoxVarTest.Name = "ucrPnlWilcoxVarTest"
-        Me.ucrPnlWilcoxVarTest.Size = New System.Drawing.Size(117, 48)
-        Me.ucrPnlWilcoxVarTest.TabIndex = 63
-        '
-        'ucrPnlStats
-        '
-        Me.ucrPnlStats.Location = New System.Drawing.Point(6, 10)
-        Me.ucrPnlStats.Name = "ucrPnlStats"
-        Me.ucrPnlStats.Size = New System.Drawing.Size(118, 63)
-        Me.ucrPnlStats.TabIndex = 63
         '
         'ucrChkBinModify
         '
@@ -390,8 +392,6 @@ Partial Class dlgOneVarFitModel
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(448, 402)
-        Me.Controls.Add(Me.grpVarAndWilcoxSign)
-        Me.Controls.Add(Me.grpVarAndWilcox)
         Me.Controls.Add(Me.ucrChkConvertVariate)
         Me.Controls.Add(Me.rdoExactCase)
         Me.Controls.Add(Me.rdoGeneralCase)
