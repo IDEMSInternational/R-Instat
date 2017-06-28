@@ -80,8 +80,8 @@ Public Class dlgShowModel
         ucrReceiverExpressionForTablePlus.SetParameterIsRFunction()
 
         ucrChkEnterValues.SetText("Enter value(s)")
-        ucrChkDisplayGraphResults.SetParameter(New RParameter("plot"))
-        ucrChkDisplayGraphResults.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkDisplayGraphResults.SetParameter(New RParameter("plot"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkDisplayGraphResults.SetRDefault("TRUE")
         ucrChkDisplayGraphResults.SetText("Display Graph Results")
 
         ucrChkEnterValues.AddToLinkedControls(ucrReceiverExpressionForTablePlus, {False}, bNewLinkedHideIfParameterMissing:=True)
@@ -134,9 +134,11 @@ Public Class dlgShowModel
         If rdoProbabilities.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsProbabilities)
             clsProbabilities.AddParameter("q", "c(" & ucrInputProbabilities.GetText & ")")
+            clsQuantiles.RemoveParameterByName("p")
         Else
             clsQuantiles.AddParameter("p", "c(" & ucrInputProbabilities.GetText & ")")
             ucrBase.clsRsyntax.SetBaseRFunction(clsQuantiles)
+            clsProbabilities.RemoveParameterByName("q")
         End If
     End Sub
 
@@ -170,16 +172,6 @@ Public Class dlgShowModel
         End If
     End Sub
 
-    Private Sub ucrReceiverExpressionForTablePlus_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverExpressionForTablePlus.SelectionChanged
-        receiverlabels()
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrInputProbabilities_ContentsChanged() Handles ucrInputProbabilities.ContentsChanged
-        receiverlabels()
-        TestOKEnabled()
-    End Sub
-
     Private Sub ucrDistributionsFOrTablePlus_ParameterChanged() Handles ucrDistributionsFOrTablePlus.ControlValueChanged, ucrDistributionsFOrTablePlus.DistributionsIndexChanged
         receiverlabels()
     End Sub
@@ -192,12 +184,6 @@ Public Class dlgShowModel
         End If
     End Sub
 
-    Private Sub ucrPnlDistTypes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDistTypes.ControlValueChanged
-        PqParameters()
-        SetItems()
-        receiverlabels()
-    End Sub
-
     Private Sub DisplayTableResults()
         If ucrChkDisplayGraphResults.Checked Then
             ucrBase.clsRsyntax.iCallType = 3
@@ -208,5 +194,22 @@ Public Class dlgShowModel
 
     Private Sub ucrChkDisplayGraphResults_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayGraphResults.ControlValueChanged
         DisplayTableResults()
+    End Sub
+
+    Private Sub ucrDistributionsFOrTablePlus_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrDistributionsFOrTablePlus.ControlContentsChanged
+        receiverlabels()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrPnlDistTypes_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlDistTypes.ControlContentsChanged
+        SetItems()
+    End Sub
+
+    Private Sub ucrPnlDistTypes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDistTypes.ControlValueChanged
+        receiverlabels()
+    End Sub
+
+    Private Sub ucrInputProbabilities_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputProbabilities.ControlValueChanged
+        PqParameters()
     End Sub
 End Class
