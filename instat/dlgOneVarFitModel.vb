@@ -115,7 +115,7 @@ Public Class dlgOneVarFitModel
         ucrNudHyp.DecimalPlaces = 2
         ucrNudHyp.SetMinMax(0.00, Integer.MaxValue)
 
-        ' ucrOperator.SetItems({"==", "<", "<=", ">", ">=", "!="})
+        ucrOperator.SetItems({"==", "<", "<=", ">", ">=", "!="})
         dctucrOperator.Add("(==)", "==")
         dctucrOperator.Add("<", "<")
         dctucrOperator.Add("(<=)", "<=")
@@ -292,7 +292,7 @@ Public Class dlgOneVarFitModel
         ucrNudCI.AddAdditionalCodeParameterPair(clsREnormTest, New RParameter("conf.level"), iAdditionalPairNo:=3)
         ucrNudCI.AddAdditionalCodeParameterPair(clsRWilcoxTest, New RParameter("conf.level"), iAdditionalPairNo:=4)
         ucrNudCI.AddAdditionalCodeParameterPair(clsRNonSignTest, New RParameter("conf.level"), iAdditionalPairNo:=5)
-        'ucrNudCI.AddAdditionalCodeParameterPair(clsRBinomTest, New RParameter("conf.level"), iAdditionalPairNo:=7)
+        ucrNudCI.AddAdditionalCodeParameterPair(clsRBinomTest, New RParameter("conf.level"), iAdditionalPairNo:=7)
         '  ucrNudCI.AddAdditionalCodeParameterPair(clsRPoissonTest, New RParameter("conf.level"), iAdditionalPairNo:=6)
     End Sub
 
