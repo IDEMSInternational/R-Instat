@@ -186,7 +186,7 @@ Public Class ucrAxes
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCodeForControl(bIsXAxis As Boolean, Optional strNewAxisType As String = "Continuous", Optional clsNewXYScaleContinuousFunction As RFunction = Nothing, Optional clsNewXYlabTitleFunction As RFunction = Nothing, Optional clsNewBaseOperator As ROperator = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCodeForControl(bIsXAxis As Boolean, Optional strNewAxisType As String = "Continuous", Optional clsNewXYScaleContinuousFunction As RFunction = Nothing, Optional clsNewXYlabTitleFunction As RFunction = Nothing, Optional clsNewBaseOperator As ROperator = Nothing, Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
         Dim clsTempBreaksParam As RParameter
         Dim clsTempMinorBreaksParam As RParameter
 
@@ -255,40 +255,40 @@ Public Class ucrAxes
             clsMinorBreaksSeqFunction.SetRCommand("seq")
         End If
 
-        ucrPnlAxisTitle.SetRCode(clsXYlabTitleFunction, bReset)
-        ucrInputTitle.SetRCode(clsXYlabTitleFunction, bReset)
+        ucrPnlAxisTitle.SetRCode(clsXYlabTitleFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrInputTitle.SetRCode(clsXYlabTitleFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
         'scales functions
-        ucrPnlScales.SetRCode(clsXYScaleContinuousFunction, bReset)
-        ucrInputLowerLimit.SetRCode(clsLimitsFunction, bReset)
-        ucrInputUpperLimit.SetRCode(clsLimitsFunction, bReset)
+        ucrPnlScales.SetRCode(clsXYScaleContinuousFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrInputLowerLimit.SetRCode(clsLimitsFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrInputUpperLimit.SetRCode(clsLimitsFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
-        ucrInputPosition.SetRCode(clsXYScaleContinuousFunction, bReset)
-        ucrChkPosition.SetRCode(clsXYScaleContinuousFunction, bReset)
+        ucrInputPosition.SetRCode(clsXYScaleContinuousFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrChkPosition.SetRCode(clsXYScaleContinuousFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
-        ucrChkNaValue.SetRCode(clsXYScaleContinuousFunction, bReset)
-        ucrInputRelaceMissingvalues.SetRCode(clsXYScaleContinuousFunction, bReset)
+        ucrChkNaValue.SetRCode(clsXYScaleContinuousFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrInputRelaceMissingvalues.SetRCode(clsXYScaleContinuousFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
-        ucrChkTransformation.SetRCode(clsXYScaleContinuousFunction, bReset)
-        ucrInputTransformation.SetRCode(clsXYScaleContinuousFunction, bReset)
+        ucrChkTransformation.SetRCode(clsXYScaleContinuousFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrInputTransformation.SetRCode(clsXYScaleContinuousFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
-        ucrChkExpand.SetRCode(clsXYScaleContinuousFunction, bReset)
+        ucrChkExpand.SetRCode(clsXYScaleContinuousFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
-        ucrPnlMajorBreaks.SetRCode(clsXYScaleContinuousFunction, bReset)
-        ucrInputMajorBreaksCustom.SetRCode(clsXYScaleContinuousFunction, bReset)
-        ucrInputMajorBreaksLabels.SetRCode(clsXYScaleContinuousFunction, bReset)
+        ucrPnlMajorBreaks.SetRCode(clsXYScaleContinuousFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrInputMajorBreaksCustom.SetRCode(clsXYScaleContinuousFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrInputMajorBreaksLabels.SetRCode(clsXYScaleContinuousFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
         'Temp disabled, not yet implemented
-        ucrInputMajorBreaksInStepsOf.SetRCode(clsMajorBreaksSeqFunction, bReset)
-        ucrInputMajorBreaksTo.SetRCode(clsMajorBreaksSeqFunction, bReset)
-        ucrInputMajorBreaksFrom.SetRCode(clsMajorBreaksSeqFunction, bReset)
+        ucrInputMajorBreaksInStepsOf.SetRCode(clsMajorBreaksSeqFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrInputMajorBreaksTo.SetRCode(clsMajorBreaksSeqFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrInputMajorBreaksFrom.SetRCode(clsMajorBreaksSeqFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
-        ucrPnlMinorBreaks.SetRCode(clsXYScaleContinuousFunction, bReset)
-        ucrInputMinorBreaksFrom.SetRCode(clsMinorBreaksSeqFunction, bReset)
-        ucrInputMinorBreaksTo.SetRCode(clsMinorBreaksSeqFunction, bReset)
-        ucrInputMinorBreaksInStepsOf.SetRCode(clsMinorBreaksSeqFunction, bReset)
+        ucrPnlMinorBreaks.SetRCode(clsXYScaleContinuousFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrInputMinorBreaksFrom.SetRCode(clsMinorBreaksSeqFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrInputMinorBreaksTo.SetRCode(clsMinorBreaksSeqFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrInputMinorBreaksInStepsOf.SetRCode(clsMinorBreaksSeqFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
-        ucrChkLabels.SetRCode(clsXYScaleContinuousFunction, bReset)
+        ucrChkLabels.SetRCode(clsXYScaleContinuousFunction, bReset, bCloneIfNeeded:=bCloneIfNeeded)
         bRCodeSet = True
         SetLabel()
         AddRemoveContinuousXYScales()
