@@ -15,39 +15,43 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class sdgModelOptions
-    Public clsRCIFunction As RFunction
-    Public bFirstLoad As Boolean
-
-    Public Sub New()
-
-        ' This call is required by the designer.
-        InitializeComponent()
-
-        ' Add any initialization after the InitializeComponent() call.
-        clsRCIFunction = New RFunction
-        ucrFamily.SetGLMDistributions()
-        bFirstLoad = True
-    End Sub
+    Private bControlsInitialised As Boolean = False
+    Public clsRCIFunction As New RFunction
+    Public bFirstLoad As Boolean = True
 
     Private Sub sdgModelOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+    End Sub
 
-        If bFirstLoad Then
-            SetDefaults()
-            bFirstLoad = False
-        End If
+    Public Sub InitialiseControls()
+
+        ucrPnlLinkFunctions.SetParameter(New RParameter("link", 0))
+
+
+        ucrPnlLinkFunctions.AddRadioButton(rdoIdentity, Chr(34) & "identity" & Chr(34))
+        ucrPnlLinkFunctions.AddRadioButton(rdoCauchit, Chr(34) & "cauchit" & Chr(34))
+        ucrPnlLinkFunctions.AddRadioButton(rdocloglog, Chr(34) & "cloglog" & Chr(34))
+        ucrPnlLinkFunctions.AddRadioButton(rdoLog, Chr(34) & "log" & Chr(34))
+        ucrPnlLinkFunctions.AddRadioButton(rdoSqrt, Chr(34) & "sqrt" & Chr(34))
+        ucrPnlLinkFunctions.AddRadioButton(rdoProbit, Chr(34) & "probit" & Chr(34))
+        ucrPnlLinkFunctions.AddRadioButton(rdoLogit, Chr(34) & "logit" & Chr(34))
+        ucrPnlLinkFunctions.AddRadioButton(rdoMuSquaredInverse, Chr(34) & "1/mu^2" & Chr(34))
+        ucrPnlLinkFunctions.AddRadioButton(rdoInverse, Chr(34) & "inverse" & Chr(34))
+
+        bControlsInitialised = True
 
     End Sub
 
-    Private Sub InitialiseDialog()
+    Public Sub SetRFunction(clsNewRCIFunction As RFunction, Optional bReset As Boolean = False)
+        If Not bControlsInitialised Then
+            InitialiseControls()
+        End If
+        clsRCIFunction = clsNewRCIFunction
+        ucrPnlLinkFunctions.SetRCode(clsRCIFunction, bReset)
     End Sub
 
     Public Sub SetDefaults()
         RestrictLink()
-    End Sub
-
-    Public Sub SetRCIFunction(clsNewFunction As RFunction)
-        clsRCIFunction = clsNewFunction
     End Sub
 
     Private Sub ResetLinks()
@@ -82,13 +86,13 @@ Public Class sdgModelOptions
         ResetLinks()
         If strFamilyName = "Normal" Then
             rdoIdentity.Enabled = True
-            rdoIdentity.Checked = True
+            ' rdoIdentity.Checked = True
             rdoInverse.Enabled = True
             rdoLog.Enabled = True
         End If
         If strFamilyName = "Binomial" Or strFamilyName = "Quasibinomial" Then
             rdoLogit.Enabled = True
-            rdoLogit.Checked = True
+            ' rdoLogit.Checked = True
             rdoCauchit.Enabled = True
             rdocloglog.Enabled = True
             rdoLog.Enabled = True
@@ -97,25 +101,25 @@ Public Class sdgModelOptions
         If strFamilyName = "Gamma" Then
             rdoInverse.Enabled = True
             rdoLog.Enabled = True
-            rdoLog.Checked = True
+            ' rdoLog.Checked = True
             rdoIdentity.Enabled = True
         End If
         If strFamilyName = "Poisson" Or strFamilyName = "Quasipoisson" Then
             rdoLog.Enabled = True
-            rdoLog.Checked = True
+            'rdoLog.Checked = True
             rdoIdentity.Enabled = True
             rdoSqrt.Enabled = True
         End If
         If strFamilyName = "Inverse_Gaussian" Then
             rdoMuSquaredInverse.Enabled = True
-            rdoMuSquaredInverse.Checked = True
+            ' rdoMuSquaredInverse.Checked = True
             rdoIdentity.Enabled = True
             rdoInverse.Enabled = True
             rdoLog.Enabled = True
         End If
         If strFamilyName = "Quasi" Then
             rdoIdentity.Enabled = True
-            rdoIdentity.Checked = True
+            'rdoIdentity.Checked = True
             rdocloglog.Enabled = True
             rdoInverse.Enabled = True
             rdoLog.Enabled = True
@@ -124,42 +128,6 @@ Public Class sdgModelOptions
             rdoProbit.Enabled = True
             rdoSqrt.Enabled = True
         End If
-        LinkFunction()
     End Sub
 
-    Public Sub LinkFunction()
-        Dim strLinkFunction As String = ""
-        If rdoInverse.Checked Then
-            strLinkFunction = "inverse"
-        End If
-        If rdoIdentity.Checked Then
-            strLinkFunction = "identity"
-        End If
-        If rdoLog.Checked Then
-            strLinkFunction = "log"
-        End If
-        If rdoLogit.Checked Then
-            strLinkFunction = "logit"
-        End If
-        If rdoProbit.Checked Then
-            strLinkFunction = "probit"
-        End If
-        If rdoCauchit.Checked Then
-            strLinkFunction = "cauchit"
-        End If
-        If rdocloglog.Checked Then
-            strLinkFunction = "cloglog"
-        End If
-        If rdoSqrt.Checked Then
-            strLinkFunction = "sqrt"
-        End If
-        If rdoMuSquaredInverse.Checked Then
-            strLinkFunction = "1/mu^2"
-        End If
-        clsRCIFunction.AddParameter("link", Chr(34) & strLinkFunction & Chr(34))
-    End Sub
-
-    Private Sub rdoCauchit_CheckedChanged(sender As Object, e As EventArgs) Handles rdoCauchit.CheckedChanged, rdocloglog.CheckedChanged, rdoIdentity.CheckedChanged, rdoInverse.CheckedChanged, rdoLog.CheckedChanged, rdoLogit.CheckedChanged, rdoMuSquaredInverse.CheckedChanged, rdoProbit.CheckedChanged, rdoSqrt.CheckedChanged
-        LinkFunction()
-    End Sub
 End Class
