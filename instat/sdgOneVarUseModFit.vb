@@ -17,7 +17,7 @@
 Imports instat.Translations
 Public Class sdgOneVarUseModFit
     Private bControlsInitialised As Boolean = False
-    Private clsRSeqFunction, clsOneVarRBootFunction, clsOneVarQuantileFunction, clsRBootFunction, clsRReceiver, clsRPlotAllFunction, clsRplotPPfunction, clsRplotCDFfunction, clsRplotQQfunction, clsRplotDensfunction, clsRplotCIfunction, clsRNoPlotfunction As New RFunction
+    Private clsRSeqFunction, clsOneVarRBootFunction, clsOneVarQuantileFunction, clsRBootFunction, clsRReceiver, clsRPlotAllFunction, clsRplotPPfunction, clsRplotCDFfunction, clsRplotQQfunction, clsRplotDensfunction, clsRplotCIfunction As New RFunction
     Private clsRSyntax As RSyntax
     Public bfirstload As Boolean = True
 
@@ -122,7 +122,7 @@ Public Class sdgOneVarUseModFit
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRcode(ClsNewRSyntax As RSyntax, clsNewRSeqFunction As RFunction, clsNewRBootFunction As RFunction, clsNewQuantileFunction As RFunction, clsNewReceiver As RFunction, clsNewPlotAllFunction As RFunction, clsNewplotPPfunction As RFunction, clsNewplotCDFfunction As RFunction, clsNewplotQQfunction As RFunction, clsNewplotDensfunction As RFunction, clsNewplotCIfunction As RFunction, clsNewNoPlotfunction As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRcode(ClsNewRSyntax As RSyntax, clsNewRSeqFunction As RFunction, clsNewRBootFunction As RFunction, clsNewQuantileFunction As RFunction, clsNewReceiver As RFunction, clsNewPlotAllFunction As RFunction, clsNewplotPPfunction As RFunction, clsNewplotCDFfunction As RFunction, clsNewplotQQfunction As RFunction, clsNewplotDensfunction As RFunction, clsNewplotCIfunction As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
@@ -138,7 +138,7 @@ Public Class sdgOneVarUseModFit
         clsRplotQQfunction = clsNewplotQQfunction
         clsRplotDensfunction = clsNewplotDensfunction
         clsRplotCIfunction = clsNewplotCIfunction
-        clsRNoPlotfunction = clsNewNoPlotfunction
+        'clsRNoPlotfunction = clsNewNoPlotfunction
         'Setting Rcode for the sub dialog
         ucrNudFrom.SetRCode(clsRSeqFunction, bReset, bCloneIfNeeded:=True)
         ucrNudTo.SetRCode(clsRSeqFunction, bReset, bCloneIfNeeded:=True)
@@ -275,7 +275,7 @@ Public Class sdgOneVarUseModFit
             clsRSyntax.RemoveFromAfterCodes(clsRPlotAllFunction)
             clsRSyntax.RemoveFromAfterCodes(clsRplotCDFfunction)
             clsRSyntax.RemoveFromAfterCodes(clsRplotCIfunction)
-            clsRSyntax.AddToAfterCodes(clsRNoPlotfunction, iPosition:=1)
+            ' clsRSyntax.AddToAfterCodes(clsRNoPlotfunction, iPosition:=1)
         ElseIf rdoCDFPlot.Checked Then
             clsRSyntax.RemoveFromAfterCodes(clsRplotPPfunction)
             clsRSyntax.RemoveFromAfterCodes(clsRplotQQfunction)

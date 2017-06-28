@@ -19,7 +19,7 @@ Public Class dlgOneVarUseModel
     Public bfirstload As Boolean = True
     Public bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
-    Public clsRBootFunction, clsQuantileFunction, clsSeqFunction, clsReceiver, clsRPlotAllFunction, clsRplotPPfunction, clsRplotCDFfunction, clsRplotQQfunction, clsRplotDensfunction, clsRplotCIfunction, clsRNoPlotfunction As New RFunction
+    Public clsRBootFunction, clsQuantileFunction, clsSeqFunction, clsReceiver, clsRPlotAllFunction, clsRplotPPfunction, clsRplotCDFfunction, clsRplotQQfunction, clsRplotDensfunction, clsRplotCIfunction As New RFunction
     Private clsRSyntax As RSyntax
     'temp fix to deciding if plot should be included
     'won't be needed once RSyntax can contain multiple functions
@@ -85,7 +85,7 @@ Public Class dlgOneVarUseModel
         clsRplotQQfunction = New RFunction
         clsRplotDensfunction = New RFunction
         clsRplotCIfunction = New RFunction
-        clsRNoPlotfunction = New RFunction
+        ' clsRNoPlotfunction = New RFunction
 
         ucrSelectorUseModel.Reset()
         ucrSaveObjects.Enabled = False ' temporary
@@ -121,7 +121,7 @@ Public Class dlgOneVarUseModel
         clsRplotCIfunction.iCallType = 3
 
         'Temporary as we think of how to implement No plot option
-        clsRNoPlotfunction.SetRCommand("")
+        '  clsRNoPlotfunction.SetRCommand("")
 
         clsSeqFunction.SetRCommand("seq")
         clsSeqFunction.AddParameter("from", 0)
@@ -197,7 +197,7 @@ Public Class dlgOneVarUseModel
     'End Sub
 
     Private Sub cmdFitModel_Click(sender As Object, e As EventArgs) Handles cmdFitModelandBootstrap.Click
-        sdgOneVarUseModFit.SetRcode(ucrBase.clsRsyntax, clsSeqFunction, clsRBootFunction, clsQuantileFunction, clsReceiver, clsRPlotAllFunction, clsRplotPPfunction, clsRplotCDFfunction, clsRplotQQfunction, clsRplotDensfunction, clsRplotCIfunction, clsRNoPlotfunction, bResetSubdialog)
+        sdgOneVarUseModFit.SetRcode(ucrBase.clsRsyntax, clsSeqFunction, clsRBootFunction, clsQuantileFunction, clsReceiver, clsRPlotAllFunction, clsRplotPPfunction, clsRplotCDFfunction, clsRplotQQfunction, clsRplotDensfunction, clsRplotCIfunction, bResetSubdialog)
         bPlot = Not sdgOneVarUseModFit.rdoNoPlot.Checked
         sdgOneVarUseModFit.ShowDialog()
         sdgOneVarUseModFit.SetPlotOptions()
