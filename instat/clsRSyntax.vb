@@ -41,6 +41,8 @@ Public Class RSyntax
     Public i As Integer
     Public bExcludeAssignedFunctionOutput As Boolean = True
 
+    Public bSeparateThread As Boolean = True
+
     Public Sub SetFunction(strFunctionName As String)
         'Warning: confusing name
         clsBaseFunction.SetRCommand(strFunctionName)

@@ -94,6 +94,7 @@ Module mdlCoreControl
         Return bTemp
     End Function
 
+    'TODO This fails when items in the list contain "," as it splits values inside
     Public Function ExtractItemsFromRList(strTemp As String) As String()
         Dim lstVariables As String()
         If strTemp.StartsWith("c(") Then

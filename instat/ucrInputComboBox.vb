@@ -146,7 +146,7 @@ Public Class ucrInputComboBox
         Dim dctValues As New Dictionary(Of String, String)
         If bAddConditions Then
             For Each strTemp As String In strItems
-                dctValues.Add(strTemp, strTemp)
+                dctValues.Add(strTemp, Chr(34) & strTemp & Chr(34))
             Next
             SetItems(dctValues, bClearExisting)
         Else
@@ -258,8 +258,8 @@ Public Class ucrInputComboBox
         cboCurrent.DropDownWidth = iWidth
     End Sub
 
-    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
-        MyBase.UpdateControl(bReset)
+    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
+        MyBase.UpdateControl(bReset:=bReset, bCloneIfNeeded:=bCloneIfNeeded)
     End Sub
 
     Public Sub SetDropDownStyleAsNonEditable()
