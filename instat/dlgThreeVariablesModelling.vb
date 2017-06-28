@@ -101,7 +101,7 @@ Public Class dlgThreeVariableModelling
         'sdgModelOptions.SetRCIFunction(clsRCIFunction)
         'sdgVariableTransformations.SetRCIFunction(clsRCIFunction)
         ' AssignModelName()
-
+        ucrModelName.SetValidationTypeAsRVariable()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Object)
@@ -128,6 +128,19 @@ Public Class dlgThreeVariableModelling
         ucrModelOperator.SetName("+")
         ucrModelOperator.Reset()
         ucrSaveModel.Reset()
+        chkSaveModel.Checked = True
+        ucrModelName.Visible = True
+        chkConvertToVariate.Checked = False
+        chkConvertToVariate.Visible = False
+        chkResponseFunction.Checked = False
+        chkResponseFunction.Visible = False
+        chkFirstFunction.Checked = False
+        chkFirstFunction.Visible = False
+        chkSecondFunction.Checked = False
+        chkSecondFunction.Visible = False
+        'sdgSimpleRegOptions.SetDefaults()
+        sdgModelOptions.SetDefaults()
+        ucrModelName.Reset()
         ucrModelPreview.Reset()
 
 
@@ -145,7 +158,6 @@ Public Class dlgThreeVariableModelling
 
         ResponseConvert()
         ModelOperator()
-
         ucrChkResponseFunction.Visible = False
         ucrChkSecondFunction.Visible = False
         ucrChkFirstFunction.Visible = False
@@ -160,6 +172,10 @@ Public Class dlgThreeVariableModelling
         clsRLmOrGLM.SetAssignTo(ucrSaveModel.GetText, strTempDataframe:=ucrSelectorThreeVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:=ucrSaveModel.GetText, bAssignToIsPrefix:=True)
         bResetSubdialog = True
 
+        'sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
+        sdgSimpleRegOptions.lblConfLevel.Enabled = True
+        '' sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
+        TestOKEnabled()
     End Sub
 
     Public Sub TestOKEnabled()
@@ -192,6 +208,7 @@ Public Class dlgThreeVariableModelling
             sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
         Else
             ucrChkConvertToVariate.Visible = False
+            sdgModelOptions.ucrDistributionChoice.RecieverDatatype(ucrFamily.strDataType)
         End If
         If ucrFamily.lstCurrentDistributions.Count = 0 Or ucrReceiverResponse.IsEmpty() Then
             ucrFamily.Enabled = False
@@ -288,8 +305,8 @@ Public Class dlgThreeVariableModelling
     End Sub
 
     Public Sub ucrFamily_cboDistributionsIndexChanged() Handles ucrFamily.DistributionsIndexChanged
-        sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
-        sdgModelOptions.ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = sdgModelOptions.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
+        sdgModelOptions.ucrDistributionChoice.RecieverDatatype(ucrFamily.strDataType)
+        sdgModelOptions.ucrDistributionChoice.ucrInputDistributions.cboInput.SelectedIndex = sdgModelOptions.ucrDistributionChoice.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
         sdgModelOptions.RestrictLink()
         'TODO:   Include multinomial as an option And the appropriate function
         If (ucrFamily.clsCurrDistribution.strNameTag = "Normal") Then
