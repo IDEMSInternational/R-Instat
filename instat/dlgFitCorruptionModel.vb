@@ -179,7 +179,7 @@ Public Class dlgFitCorruptionModel
         ' sdgSimpleRegOptions.SetRYVariable(ucrReceiverOutput)
         ' sdgSimpleRegOptions.SetDefaults()
         ' sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
-        sdgSimpleRegOptions.lblDisplayCLevel.Enabled = True
+        sdgSimpleRegOptions.lblConfLevel.Enabled = True
         ' sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
     End Sub
 

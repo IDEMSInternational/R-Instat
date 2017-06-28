@@ -43,13 +43,12 @@
         Get
             Dim clsDefaultRestpvalFunction As New RFunction
 
-            clsDefaultRestpvalFunction.SetPackageName("base")
             clsDefaultRestpvalFunction.SetRCommand("summary")
             Return clsDefaultRestpvalFunction
         End Get
     End Property
 
-    Public Shared ReadOnly Property clsDefaultRConfinterval As RFunction
+    Public Shared ReadOnly Property clsDefaultConfint As RFunction
         Get
             Dim clsDefaultRConfint As New RFunction
             clsDefaultRConfint.SetPackageName("stats")
@@ -67,7 +66,7 @@
         End Get
     End Property
 
-    Public Shared ReadOnly Property clsDefaultRanovaFunction As RFunction
+    Public Shared ReadOnly Property clsDefaultAnovaFunction As RFunction
         Get
             Dim clsDefaultRaovFunction As New RFunction
             clsDefaultRaovFunction.SetPackageName("stats")
@@ -76,8 +75,7 @@
         End Get
     End Property
 
-
-    Public Shared ReadOnly Property clsDefaultModel As RFunction
+    Public Shared ReadOnly Property clsDefaultFormulaFunction As RFunction
         Get
             Dim clsDefaultRModelsFunction As New RFunction
             clsDefaultRModelsFunction.SetPackageName("stats")
@@ -86,12 +84,12 @@
         End Get
     End Property
 
-    Public Shared ReadOnly Property clsDefaultRResidualPlots As RFunction
+    Public Shared ReadOnly Property clsDefaultAutoplot As RFunction
         Get
-            Dim clsDefaultRResidualPlotsFunction As New RFunction
-            clsDefaultRResidualPlotsFunction.SetPackageName("ggplot2")
-            clsDefaultRResidualPlotsFunction.SetRCommand("autoplot")
-            Return clsDefaultRResidualPlotsFunction
+            Dim clsAutoplot As New RFunction
+            clsAutoplot.SetRCommand("autoplot")
+            clsAutoplot.iCallType = 3
+            Return clsAutoplot
         End Get
     End Property
 
@@ -101,15 +99,6 @@
             clsDefaultRgeom_point.SetPackageName("ggplot2")
             clsDefaultRgeom_point.SetRCommand("geom_point")
             Return clsDefaultRgeom_point
-        End Get
-    End Property
-
-    Public Shared ReadOnly Property clsDefaultRggplot As RFunction
-        Get
-            Dim clsDefaultRggplotFunction As New RFunction
-            clsDefaultRggplotFunction.SetPackageName("visreg")
-            clsDefaultRggplotFunction.SetRCommand("visreg")
-            Return clsDefaultRggplotFunction
         End Get
     End Property
 
