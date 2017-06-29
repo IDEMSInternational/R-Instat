@@ -327,7 +327,7 @@ Public Class dlgRegressionSimple
     Private Sub ucrDistWithParameters_ucrInputDistributionsIndexChanged() Handles ucrDistributionChoice.DistributionsIndexChanged
         'sdgModelOptions.ucrFamily.RecieverDatatype(ucrDistributionChoice.strDataType)
         'sdgModelOptions.ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = sdgModelOptions.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrDistributionChoice.clsCurrDistribution.strNameTag)
-        'sdgModelOptions.RestrictLink()
+        'sdgModelOptions.RestrictLink()ModelFunction
         ExplanatoryFunctionSelect()
         SetBaseFunction()
         DataTypeAccepted()
@@ -377,7 +377,6 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub SetTTest()
-
         ucrBase.clsRsyntax.SetBaseRFunction(clsRTTest)
         ' clsRTTest.AddParameter("conf.level", nudCI.Value.ToString())
         clsRTTest.AddParameter("data", clsRFunctionParameter:=ucrSelectorSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame)
@@ -399,7 +398,6 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub SetFTest()
-
         ucrBase.clsRsyntax.SetBaseRFunction(clsRFTest)
         '   clsRFTest.AddParameter("conf.level", nudCI.Value.ToString())
         clsRFTest.AddParameter("data", clsRFunctionParameter:=ucrSelectorSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame)
@@ -423,7 +421,6 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub SetKruskalTest()
-
         ucrBase.clsRsyntax.SetBaseRFunction(clsRKruskalTest)
         clsModel.SetOperation("~")
         clsModel.AddParameter(iPosition:=0, clsRFunctionParameter:=ucrReceiverResponse.GetVariables())
@@ -437,7 +434,6 @@ Public Class dlgRegressionSimple
         clsRBinomial.SetRCommand("prop.test")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRBinomial)
         '  clsRBinomial.AddParameter("conf.level", nudCI.Value.ToString())
-
         clsRLength.AddParameter("x", clsRFunctionParameter:=clsRLength)
         clsRLength.AddParameter("x", ucrReceiverResponse.GetVariables().ToScript & "[" & clsRGroup.ToScript & "]")
         clsRGroup.AddParameter("x", clsROperatorParameter:=clsPoissonOperation)
@@ -512,9 +508,6 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub SetPoissonTest()
-
-
-
         ' poisson.test(x = c(length(x=Calls[Group == 1]), length(x=Calls[Group == 2])), T =c(mean(Calls[Group == 1]), mean(Calls[Group == 2])))
 
         ' clsPoissonOperation.AddParameter(strParameterValue:=ucrLevel1.GetText())
@@ -533,8 +526,6 @@ Public Class dlgRegressionSimple
         clsTFunc.AddParameter("m1", clsRFunctionParameter:=clsRMean, bIncludeArgumentName:=False)
         clsTFunc.AddParameter("m2", clsRFunctionParameter:=clsRMean2, bIncludeArgumentName:=False)
         clsRPoisson.AddParameter("T", clsRFunctionParameter:=clsTFunc)
-
-
 
         clsRMean2.SetRCommand("mean")
         clsRMean2.AddParameter("x", clsRFunctionParameter:=clsRGroup)

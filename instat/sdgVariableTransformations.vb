@@ -27,18 +27,11 @@ Public Class sdgVariableTransformations
     End Sub
 
     Public Sub InitialiseControls()
-        ucrPnlGenerateFunctions.AddRadioButton(rdoIdentity)
-        ucrPnlGenerateFunctions.AddRadioButton(rdoLogBase10)
-        ucrPnlGenerateFunctions.AddRadioButton(rdoNaturallog)
-        ucrPnlGenerateFunctions.AddRadioButton(rdoPower)
-        ucrPnlGenerateFunctions.AddRadioButton(rdoSquareroot)
-
-        'ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoLogBase10, "log10")
-        'ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoSquareroot, "sqrt")
-        'ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoNaturallog, "log")
-        'ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoIdentity, {"log10", "power", "log", "sqrt"}, False)
-        'ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoPower, "power")
-
+        ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoLogBase10, "log10")
+        ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoSquareroot, "sqrt")
+        ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoNaturallog, "log")
+        ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoIdentity, {"log10", "power", "log", "sqrt"}, False)
+        ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoPower, "power")
         bControlsInitialised = True
     End Sub
 
