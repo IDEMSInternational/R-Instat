@@ -139,8 +139,10 @@ Public Class dlgOneVarUseModel
 
         clsQuantileFunction.SetAssignTo(ucrNewDataFrameName.GetText, strTempModel:="last_model", strTempDataframe:=ucrSelectorUseModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         'clsRBootFunction.SetAssignTo(ucrSaveObjects.GetText, strTempModel:="last_bootstrap", strTempDataframe:=ucrSelectorUseModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsQuantileFunction)
+        ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.AddToAfterCodes(clsRPlotAllFunction, iPosition:=1)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsQuantileFunction)
+
         bResetSubdialog = True
     End Sub
 
