@@ -1549,12 +1549,8 @@ Public Class frmMain
         ucrDataViewer.SetCurrentDataFrame(strDataName)
     End Sub
 
-    Private Sub WindroseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WindroseToolStripMenuItem.Click
+    Private Sub WindroseToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgWindrose.ShowDialog()
-    End Sub
-
-    Private Sub WindrosePlotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WindrosePlotToolStripMenuItem.Click
-        dlgWindrosePlot.ShowDialog()
     End Sub
 
     Private Sub CummulativeDistributionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CummulativeDistributionToolStripMenuItem.Click
