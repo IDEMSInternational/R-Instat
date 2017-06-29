@@ -152,7 +152,7 @@ Partial Class sdgOneVarUseModFit
         '
         'ucrNudBy
         '
-        Me.ucrNudBy.DecimalPlaces = New Decimal(New Integer() {2, 0, 0, 0})
+        Me.ucrNudBy.DecimalPlaces = New Decimal(New Integer() {3, 0, 0, 0})
         Me.ucrNudBy.Increment = New Decimal(New Integer() {5, 0, 0, 131072})
         Me.ucrNudBy.Location = New System.Drawing.Point(79, 91)
         Me.ucrNudBy.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -207,12 +207,10 @@ Partial Class sdgOneVarUseModFit
         'rdoSequence
         '
         Me.rdoSequence.AutoSize = True
-        Me.rdoSequence.Checked = True
         Me.rdoSequence.Location = New System.Drawing.Point(11, 12)
         Me.rdoSequence.Name = "rdoSequence"
         Me.rdoSequence.Size = New System.Drawing.Size(121, 17)
         Me.rdoSequence.TabIndex = 0
-        Me.rdoSequence.TabStop = True
         Me.rdoSequence.Text = "Sequence of Values"
         Me.rdoSequence.UseVisualStyleBackColor = True
         '
@@ -263,12 +261,10 @@ Partial Class sdgOneVarUseModFit
         'rdoNoPlot
         '
         Me.rdoNoPlot.AutoSize = True
-        Me.rdoNoPlot.Checked = True
         Me.rdoNoPlot.Location = New System.Drawing.Point(11, 12)
         Me.rdoNoPlot.Name = "rdoNoPlot"
         Me.rdoNoPlot.Size = New System.Drawing.Size(60, 17)
         Me.rdoNoPlot.TabIndex = 0
-        Me.rdoNoPlot.TabStop = True
         Me.rdoNoPlot.Text = "No Plot"
         Me.rdoNoPlot.UseVisualStyleBackColor = True
         '
