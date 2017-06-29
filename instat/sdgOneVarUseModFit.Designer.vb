@@ -152,11 +152,11 @@ Partial Class sdgOneVarUseModFit
         '
         'ucrNudBy
         '
-        Me.ucrNudBy.DecimalPlaces = New Decimal(New Integer() {3, 0, 0, 0})
+        Me.ucrNudBy.DecimalPlaces = New Decimal(New Integer() {2, 0, 0, 0})
         Me.ucrNudBy.Increment = New Decimal(New Integer() {5, 0, 0, 131072})
         Me.ucrNudBy.Location = New System.Drawing.Point(79, 91)
         Me.ucrNudBy.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudBy.Minimum = New Decimal(New Integer() {1, 0, 0, 196608})
+        Me.ucrNudBy.Minimum = New Decimal(New Integer() {1, 0, 0, 131072})
         Me.ucrNudBy.Name = "ucrNudBy"
         Me.ucrNudBy.Size = New System.Drawing.Size(53, 20)
         Me.ucrNudBy.TabIndex = 7
