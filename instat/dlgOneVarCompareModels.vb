@@ -98,9 +98,9 @@ Public Class dlgOneVarCompareModels
         clsRAsDataFrame.AddParameter("x", clsROperatorParameter:=clsChisqtableOperator)
 
         clsRAsDataFrame.SetAssignTo(ucrSelectorOneVarCompModels.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_ChiSquare", strTempDataframe:=ucrSelectorOneVarCompModels.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-
-        ucrBase.clsRsyntax.SetBaseRFunction(clsGofStat)
+        ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.AddToAfterCodes(clsCdfcompFunction, iPosition:=0)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsGofStat)
         bResetSubdialog = True
     End Sub
 

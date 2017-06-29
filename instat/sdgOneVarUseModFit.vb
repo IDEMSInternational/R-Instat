@@ -30,12 +30,12 @@ Public Class sdgOneVarUseModFit
 
         ucrNudIterations.SetParameter(New RParameter("niter", 1))
         ucrNudIterations.SetMinMax(1, 10001)
-        ucrNudIterations.SetRDefault(1001)
+        ucrNudIterations.SetDefaultState(1001)
         ucrNudIterations.Increment = 100
 
         ucrNudCI.SetParameter(New RParameter("CI.level", 1))
         ucrNudCI.SetMinMax(0, 1)
-        ucrNudCI.SetRDefault(0.95)
+        ucrNudCI.SetDefaultState(0.95)
         ucrNudCI.Increment = 0.05
 
         ucrChkParametric.SetParameter(New RParameter("bootmethod", 2), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "param" & Chr(34), strNewValueIfUnchecked:=Chr(34) & "nonparam" & Chr(34))
@@ -56,30 +56,30 @@ Public Class sdgOneVarUseModFit
         ucrNudFrom.SetParameter(New RParameter("from", 1))
         ucrNudFrom.SetMinMax(0, 1)
         ucrNudFrom.Increment = 0.05
-        ucrNudFrom.SetRDefault(0)
+        '  ucrNudFrom.SetRDefault(0)
 
         ucrNudTo.SetParameter(New RParameter("to", 2))
         ucrNudTo.SetMinMax(0, 1)
         ucrNudTo.Increment = 0.05
-        ucrNudTo.SetRDefault(1)
+        ' ucrNudTo.SetRDefault(1)
 
         ucrNudBy.SetParameter(New RParameter("by", 3))
         ucrNudBy.SetMinMax(0.01, 1)
         ucrNudBy.Increment = 0.05
-        ucrNudBy.SetRDefault(0.25)
+        'ucrNudBy.SetRDefault(0.25)
 
         'function ran here is probs = c(VALUES)
-        ucrInputQuantiles.SetParameter(New RParameter("x"))
-        dctQuantileValues.Add("0.25,0.5,0.75", Chr(34) & "0.25,0.5,0.75" & Chr(34))
-        dctQuantileValues.Add("0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9", Chr(34) & "0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9" & Chr(34))
+        ucrInputQuantiles.SetParameter(New RParameter("y"))
+        dctQuantileValues.Add("0.25,0.5,0.75", "0.25,0.5,0.75")
+        dctQuantileValues.Add("0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9", "0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9")
         ucrInputQuantiles.SetItems(dctQuantileValues)
         ucrInputQuantiles.bAllowNonConditionValues = True
         ucrInputQuantiles.SetValidationTypeAsNumericList(dcmMin:=0, dcmMax:=1)
 
         ucrPnlQuantiles.AddToLinkedControls(ucrInputQuantiles, {rdoInsertValues}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="0.25,0.5,0.75")
-        ucrPnlQuantiles.AddToLinkedControls(ucrNudTo, {rdoSequence}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
-        ucrPnlQuantiles.AddToLinkedControls(ucrNudFrom, {rdoSequence}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
-        ucrPnlQuantiles.AddToLinkedControls(ucrNudBy, {rdoSequence}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
+        ucrPnlQuantiles.AddToLinkedControls(ucrNudTo, {rdoSequence}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        ucrPnlQuantiles.AddToLinkedControls(ucrNudFrom, {rdoSequence}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrPnlQuantiles.AddToLinkedControls(ucrNudBy, {rdoSequence}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.25)
         ucrNudTo.SetLinkedDisplayControl(lblTo)
         ucrNudFrom.SetLinkedDisplayControl(lblFrom)
         ucrNudBy.SetLinkedDisplayControl(lblBy)
@@ -221,6 +221,7 @@ Public Class sdgOneVarUseModFit
             clsOneVarQuantileFunction.AddParameter("probs", clsRFunctionParameter:=clsRSeqFunction)
         Else
             clsOneVarQuantileFunction.AddParameter("probs", strParameterValue:="c(" & ucrInputQuantiles.GetText & ")")
+            clsOneVarQuantileFunction.RemoveParameterByName("y")
         End If
     End Sub
 
@@ -268,7 +269,7 @@ Public Class sdgOneVarUseModFit
             clsRSyntax.RemoveFromAfterCodes(clsRplotDensfunction)
             clsRSyntax.AddToAfterCodes(clsRplotCIfunction, iPosition:=1)
             clsRplotCIfunction.AddParameter("b", clsRFunctionParameter:=clsOneVarRBootFunction)
-            clsRplotCIfunction.AddParameter("CI.cdfplot", Chr(34) & "quantile" & Chr(34))
+            clsRplotCIfunction.AddParameter("CI.output", Chr(34) & "quantile" & Chr(34))
         ElseIf rdoNoPlot.Checked Then
             clsRSyntax.RemoveFromAfterCodes(clsRplotPPfunction)
             clsRSyntax.RemoveFromAfterCodes(clsRplotQQfunction)
