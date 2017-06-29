@@ -166,7 +166,7 @@ Public Class dlgFourVariableModelling
             If currentReceiver.Name = "ucrFirstExplanatory" Then
                 'sdgVariableTransformations.SetRXVariable(ucrFirstExplanatory)
                 If chkFirstFunction.Checked Then
-                    sdgVariableTransformations.ModelFunction(True)
+                    'sdgVariableTransformations.ModelFunction(True)
                 Else
                     sdgVariableTransformations.rdoIdentity.Checked = True
                     clsModel1.AddParameter(True, strParameterValue:=currentReceiver.GetVariableNames(bWithQuotes:=False))

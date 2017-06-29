@@ -14,16 +14,24 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgThreeVariableModelling
 
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Public bResetSubdialog As Boolean = False
+    Public bResetModelOptions As Boolean = False
+    Public bResetDisplayOptions As Boolean = False
+    Public bResetFirstFunction As Boolean = False
+    Public bResetSecondFunction As Boolean = False
     Public bRCodeSet As Boolean = False
     Public clsFamilyFunction, clsAsNumeric, clsLM, clsGLM, clsLMOrGLM As New RFunction
     Public clsRSingleModelFunction As RFunction
-    Dim clsFormulaOperator, clsExplanatoryOperator As New ROperator
+    Private clsFormulaOperator, clsExplanatoryOperator As New ROperator
+    Private clsFirstTransformFunction As RFunction
+    Private clsFirstPowerOperator As ROperator
+    Private clsSecondTransformFunction As RFunction
+    Private clsSecondPowerOperator As ROperator
 
     Private Sub dlgThreeVariableModelling_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -45,28 +53,29 @@ Public Class dlgThreeVariableModelling
         ucrBase.iHelpTopicID = 369
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
-        ucrChkConvertToNumeric.Enabled = False
-
         ucrSelectorThreeVariableModelling.SetParameter(New RParameter("data", 0))
         ucrSelectorThreeVariableModelling.SetParameterIsrfunction()
 
         'The main parameter will be in the as.numeric() function since it's always present there
-        ucrReceiverResponse.SetParameter(New RParameter("x", 1))
+        ucrReceiverResponse.SetParameter(New RParameter("x", 0))
         ucrReceiverResponse.SetParameterIsString()
         ucrReceiverResponse.bWithQuotes = False
         ucrReceiverResponse.Selector = ucrSelectorThreeVariableModelling
 
-        ucrReceiverFirstExplanatory.SetParameter(New RParameter("exp1", 1))
+        'The main parameter will be in the transformation function since it's always present there
+        ucrReceiverFirstExplanatory.SetParameter(New RParameter("x", 0))
         ucrReceiverFirstExplanatory.SetParameterIsString()
         ucrReceiverFirstExplanatory.bWithQuotes = False
         ucrReceiverFirstExplanatory.Selector = ucrSelectorThreeVariableModelling
 
-        ucrReceiverSecondExplanatory.SetParameter(New RParameter("exp2", 1))
+        'The main parameter will be in the transformation function since it's always present there
+        ucrReceiverSecondExplanatory.SetParameter(New RParameter("x", 0))
         ucrReceiverSecondExplanatory.SetParameterIsString()
         ucrReceiverSecondExplanatory.bWithQuotes = False
         ucrReceiverSecondExplanatory.Selector = ucrSelectorThreeVariableModelling
 
         ucrDistributionChoice.SetGLMDistributions()
+        ucrDistributionChoice.SetFunctionIsDistFunction()
 
         ucrSaveModel.SetPrefix("reg")
         ucrSaveModel.SetDataFrameSelector(ucrSelectorThreeVariableModelling.ucrAvailableDataFrames)
@@ -75,28 +84,17 @@ Public Class dlgThreeVariableModelling
         ucrSaveModel.SetIsComboBox()
         ucrSaveModel.SetAssignToIfUncheckedValue("last_model")
 
-        ucrChkConvertToNumeric.SetText("Convert to  Variate")
+        ucrChkConvertToNumeric.SetText("Convert to Variate")
         ucrChkConvertToNumeric.AddParameterIsRFunctionCondition(True, "y", True)
         ucrChkConvertToNumeric.AddParameterIsRFunctionCondition(False, "y", False)
-
-        ucrChkFirstFunction.SetText("Function")
-        ucrChkSecondFunction.SetText("Function")
-        ucrChkResponseFunction.SetText("Function")
 
         ucrInputModelOperator.SetItems({"+", "*", ":", "/"})
         ucrInputModelOperator.SetDropDownStyleAsNonEditable()
 
         ucrModelPreview.IsReadOnly = True
 
-        'sdgSimpleRegOptions.SetRModelFunction(ucrBaseThreeVariableModelling.clsRsyntax.clsBaseFunction)
-        'sdgSimpleRegOptions.SetRDataFrame(ucrSelectorThreeVariableModelling.ucrAvailableDataFrames)
-        'sdgSimpleRegOptions.SetRYVariable(ucrReceiverResponse)
-        'sdgSimpleRegOptions.SetRXVariable(ucrReceiverFirstExplanatory)
-        'sdgVariableTransformations.SetRYVariable(ucrReceiverResponse)
-        'sdgVariableTransformations.SetRModelOperator(clsModel1)
-        'sdgModelOptions.SetRCIFunction(clsRCIFunction)
-        'sdgVariableTransformations.SetRCIFunction(clsRCIFunction)
-        ' AssignModelName()
+        'temp hidden until working
+        cmdResponseFunction.Visible = False
     End Sub
 
     Private Sub SetDefaults()
@@ -104,12 +102,18 @@ Public Class dlgThreeVariableModelling
         clsAsNumeric = New RFunction
         clsLM = New RFunction
         clsGLM = New RFunction
+        clsFirstTransformFunction = New RFunction
+        clsFirstPowerOperator = New ROperator
+        clsSecondTransformFunction = New RFunction
+        clsSecondPowerOperator = New ROperator
 
         clsFormulaOperator = New ROperator
         clsExplanatoryOperator = New ROperator
 
         ucrSelectorThreeVariableModelling.Reset()
         ucrReceiverResponse.SetMeAsReceiver()
+
+        ucrBase.clsRsyntax.ClearCodes()
 
         clsExplanatoryOperator.SetOperation("+")
         clsExplanatoryOperator.bBrackets = False
@@ -131,15 +135,21 @@ Public Class dlgThreeVariableModelling
         clsGLM.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=0)
         clsGLM.AddParameter("family", clsRFunctionParameter:=clsFamilyFunction)
 
-        ' sdgSimpleRegOptions.SetDefaults()
-        'sdgModelOptions.SetDefaults()
-        'sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
-        'sdgSimpleRegOptions.lblDisplayCLevel.Enabled = True
-        ' sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
+        clsFirstPowerOperator.SetOperation("^")
+        clsFirstPowerOperator.AddParameter("power", 2, iPosition:=1)
+        clsFirstPowerOperator.bBrackets = False
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsLM)
+        clsSecondPowerOperator.SetOperation("^")
+        clsSecondPowerOperator.AddParameter("power", 2, iPosition:=1)
+        clsSecondPowerOperator.bBrackets = False
+
         clsLM.SetAssignTo(ucrSaveModel.GetText, strTempDataframe:=ucrSelectorThreeVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:=ucrSaveModel.GetText, bAssignToIsPrefix:=True)
-        bResetSubdialog = True
+        clsGLM.SetAssignTo(ucrSaveModel.GetText, strTempDataframe:=ucrSelectorThreeVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:=ucrSaveModel.GetText, bAssignToIsPrefix:=True)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsLM)
+        bResetModelOptions = True
+        bResetDisplayOptions = True
+        bResetFirstFunction = True
+        bResetSecondFunction = True
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Object)
@@ -147,15 +157,20 @@ Public Class dlgThreeVariableModelling
 
         ucrSaveModel.AddAdditionalRCode(clsGLM, 1)
         ucrSelectorThreeVariableModelling.AddAdditionalCodeParameterPair(clsGLM, ucrSelectorThreeVariableModelling.GetParameter(), 1)
+        ucrReceiverFirstExplanatory.AddAdditionalCodeParameterPair(clsFirstPowerOperator, New RParameter("x", 0), 1)
+        ucrReceiverSecondExplanatory.AddAdditionalCodeParameterPair(clsSecondPowerOperator, New RParameter("x", 0), 1)
+
         ucrInputModelOperator.SetName(clsExplanatoryOperator.strOperation)
         ucrChkConvertToNumeric.SetRCode(clsFormulaOperator, bReset)
         ucrSelectorThreeVariableModelling.SetRCode(clsLM, bReset)
         ucrSaveModel.SetRCode(clsLM, bReset)
         ucrDistributionChoice.SetRCode(clsFamilyFunction, bReset)
         ucrReceiverResponse.SetRCode(clsAsNumeric, bReset)
-        ucrReceiverFirstExplanatory.SetRCode(clsExplanatoryOperator, bReset)
-        ucrReceiverSecondExplanatory.SetRCode(clsExplanatoryOperator, bReset)
+        ucrReceiverFirstExplanatory.SetRCode(clsFirstTransformFunction, bReset)
+        ucrReceiverSecondExplanatory.SetRCode(clsSecondTransformFunction, bReset)
         bRCodeSet = True
+        FirstExplanatoryFunctionEnabled()
+        SecondExplanatoryFunctionEnabled()
         TestOKEnabled()
     End Sub
 
@@ -176,88 +191,47 @@ Public Class dlgThreeVariableModelling
     End Sub
 
     Public Sub ResponseConvert()
-        If Not ucrReceiverResponse.IsEmpty Then
-            ucrDistributionChoice.RecieverDatatype(ucrSelectorThreeVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverResponse.GetVariableNames(bWithQuotes:=False))
-            If ucrReceiverResponse.strCurrDataType = "numeric" OrElse ucrReceiverResponse.strCurrDataType = "integer" Then
-                ucrChkConvertToNumeric.Checked = False
-                ucrChkConvertToNumeric.Visible = False
-            Else
-                ucrChkConvertToNumeric.Visible = True
-            End If
-            If ucrChkConvertToNumeric.Checked Then
-                clsFormulaOperator.AddParameter("y", clsRFunctionParameter:=clsAsNumeric, iPosition:=0)
-                ucrDistributionChoice.RecieverDatatype("numeric")
-            Else
-                clsFormulaOperator.AddParameter("y", ucrReceiverResponse.GetVariableNames(False), iPosition:=0)
+        If bRCodeSet Then
+            If Not ucrReceiverResponse.IsEmpty Then
                 ucrDistributionChoice.RecieverDatatype(ucrSelectorThreeVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverResponse.GetVariableNames(bWithQuotes:=False))
+                If ucrReceiverResponse.strCurrDataType = "numeric" Then
+                    ucrChkConvertToNumeric.Checked = False
+                    ucrChkConvertToNumeric.Visible = False
+                    'temp disabled
+                    'cmdResponseFunction.Visible = True
+                Else
+                    ucrChkConvertToNumeric.Visible = True
+                    'temp disabled
+                    'cmdResponseFunction.Visible = False
+                End If
+                If ucrChkConvertToNumeric.Checked Then
+                    clsFormulaOperator.AddParameter("y", clsRFunctionParameter:=clsAsNumeric, iPosition:=0)
+                    ucrDistributionChoice.RecieverDatatype("numeric")
+                Else
+                    clsFormulaOperator.AddParameter("y", ucrReceiverResponse.GetVariableNames(False), iPosition:=0)
+                    ucrDistributionChoice.RecieverDatatype(ucrSelectorThreeVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverResponse.GetVariableNames(bWithQuotes:=False))
+                End If
+            Else
+                ucrChkConvertToNumeric.Visible = False
+                'temp disabled
+                'cmdResponseFunction.Visible = False
             End If
-        Else
-            ucrChkConvertToNumeric.Visible = False
-            'sdgModelOptions.ucrDistributionChoice.RecieverDatatype(ucrFamily.strDataType)
-        End If
-        If ucrDistributionChoice.lstCurrentDistributions.Count = 0 Or ucrReceiverResponse.IsEmpty() Then
-            ucrDistributionChoice.Enabled = False
-            ucrDistributionChoice.ucrInputDistributions.SetName("")
-            cmdModelOptions.Enabled = False
-        Else
-            ucrDistributionChoice.Enabled = True
-            cmdModelOptions.Enabled = True
+            If ucrDistributionChoice.lstCurrentDistributions.Count = 0 OrElse ucrReceiverResponse.IsEmpty() Then
+                ucrDistributionChoice.Enabled = False
+                ucrDistributionChoice.ucrInputDistributions.SetName("")
+                cmdModelOptions.Enabled = False
+            Else
+                ucrDistributionChoice.Enabled = True
+                cmdModelOptions.Enabled = True
+            End If
+            UpdatePreview()
+            TestOKEnabled()
         End If
     End Sub
 
     Private Sub ResponseControls_ControlValueChanged() Handles ucrReceiverResponse.ControlValueChanged, ucrChkConvertToNumeric.ControlValueChanged
         ResponseConvert()
         UpdatePreview()
-    End Sub
-
-    Private Sub ucrFirstExplanatory_SelectionChanged() Handles ucrReceiverFirstExplanatory.ControlValueChanged
-        ExplanatoryFunctionSelect(ucrReceiverFirstExplanatory, ucrChkFirstFunction)
-        UpdatePreview()
-    End Sub
-
-    Private Sub ExplanatoryFunctionSelect(currentReceiver As ucrReceiverSingle, ucrChkFunction As ucrCheck)
-        'Dim strExplanatoryType As String
-        'If Not currentReceiver.IsEmpty Then
-        '    strExplanatoryType = frmMain.clsRLink.GetDataType(ucrSelectorThreeVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, currentReceiver.GetVariableNames(bWithQuotes:=False))
-        '    If strExplanatoryType = "numeric" Or strExplanatoryType = "positive integer" Or strExplanatoryType = "integer" Then
-        '        ucrChkFunction.Visible = True
-        '    Else
-        '        ucrChkFunction.Checked = False
-        '        ucrChkFunction.Visible = False
-        '    End If
-        '    If currentReceiver.Name = "ucrReceiverFirstExplanatory" Then
-        '        'sdgVariableTransformations.SetRXVariable(ucrReceiverFirstExplanatory)
-        '        If ucrChkFirstFunction.Checked Then
-        '            '  sdgVariableTransformations.ModelFunction(True)
-        '        Else
-        '            'sdgVariableTransformations.rdoIdentity.Checked = True
-        '            clsExplanatoryOperator.AddParameter(iPosition:=0, strParameterValue:=currentReceiver.GetVariableNames(False))
-        '        End If
-        '    End If
-        '    If currentReceiver.Name = "ucrReceiverSecondExplanatory" Then
-        '        'sdgVariableTransformations.SetRXVariable(ucrReceiverSecondExplanatory)
-        '        If ucrChkSecondFunction.Checked Then
-        '            'sdgVariableTransformations.ModelFunction(False)
-        '        Else
-        '            ' sdgVariableTransformations.rdoIdentity.Checked = True
-        '            clsExplanatoryOperator.AddParameter(iPosition:=1, strParameterValue:=currentReceiver.GetVariableNames(False))
-        '        End If
-        '    End If
-        '    'Applying function to response variable 
-        '    'If currentReceiver.Name = "ucrResponse" Then
-        '    'sdgVariableTransformations.SetRYVariable(ucrResponse)
-        '    'If chkResponseFunction.Checked Then
-        '    'sdgVariableTransformations.ModelFunction(True)
-        '    'Else
-        '    'sdgVariableTransformations.rdoIdentity.Checked = True
-        '    'clsModel.AddParameter(True, strParameterValue:=currentReceiver.GetVariableNames(False))
-        '    'End If
-        'End If
-        ''ucrModelPreview.SetName(clsModel.ToScript)
-    End Sub
-
-    Private Sub ucrReceiverSecondExplanatory_CheckedChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSecondExplanatory.ControlValueChanged, ucrChkSecondFunction.ControlValueChanged
-        ExplanatoryFunctionSelect(ucrReceiverSecondExplanatory, ucrChkSecondFunction)
     End Sub
 
     Private Sub ucrBaseThreeVariableModelling_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -268,6 +242,7 @@ Public Class dlgThreeVariableModelling
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
         sdgSimpleRegOptions.ShowDialog()
+        bResetDisplayOptions = False
     End Sub
 
     Private Sub SetExplanatoryOperator()
@@ -282,7 +257,6 @@ Public Class dlgThreeVariableModelling
         End If
         ucrBase.clsRsyntax.SetBaseRFunction(clsLMOrGLM)
         'Update display functions to contain correct model
-        clsFormulaOperator.AddParameter("x", clsRFunctionParameter:=clsLMOrGLM)
         'clsAnovaFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM)
         'clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM)
         'clsConfint.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM)
@@ -291,98 +265,99 @@ Public Class dlgThreeVariableModelling
     End Sub
 
     Public Sub ucrFamily_cboDistributionsIndexChanged() Handles ucrDistributionChoice.DistributionsIndexChanged
+        SetBaseFunction()
         'TODO:   Include multinomial as an option And the appropriate function
-        If (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal") Then
-        ElseIf (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Gamma" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Quasipoisson") Then
-            clsFamilyFunction.SetRCommand(ucrDistributionChoice.clsCurrDistribution.strGLMFunctionName)
-            ucrBase.clsRsyntax.SetFunction("glm")
-            ucrBase.clsRsyntax.AddParameter("family", clsRFunctionParameter:=clsFamilyFunction)
-            clsFamilyFunction.AddParameter("link", "log")
-        ElseIf (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Quasi") Then
-            clsFamilyFunction.SetRCommand(ucrDistributionChoice.clsCurrDistribution.strGLMFunctionName)
-            ucrBase.clsRsyntax.SetFunction("glm")
-            ucrBase.clsRsyntax.AddParameter("family", clsRFunctionParameter:=clsFamilyFunction)
-            clsFamilyFunction.AddParameter("link", "identity")
-        ElseIf (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Inverse_Gaussian") Then
-            clsFamilyFunction.SetRCommand(ucrDistributionChoice.clsCurrDistribution.strGLMFunctionName)
-            ucrBase.clsRsyntax.SetFunction("glm")
-            ucrBase.clsRsyntax.AddParameter("family", clsRFunctionParameter:=clsFamilyFunction)
-            clsFamilyFunction.AddParameter("link", "1/mu^2")
-        Else
-            clsFamilyFunction.SetRCommand(ucrDistributionChoice.clsCurrDistribution.strGLMFunctionName)
-            ucrBase.clsRsyntax.SetFunction("glm")
-            ucrBase.clsRsyntax.AddParameter("family", clsRFunctionParameter:=clsFamilyFunction)
-            clsFamilyFunction.AddParameter("link", "logit")
-        End If
+        'If (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal") Then
+        'ElseIf (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Gamma" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Quasipoisson") Then
+        '    clsFamilyFunction.SetRCommand(ucrDistributionChoice.clsCurrDistribution.strGLMFunctionName)
+        '    ucrBase.clsRsyntax.SetFunction("glm")
+        '    ucrBase.clsRsyntax.AddParameter("family", clsRFunctionParameter:=clsFamilyFunction)
+        '    clsFamilyFunction.AddParameter("link", "log")
+        'ElseIf (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Quasi") Then
+        '    clsFamilyFunction.SetRCommand(ucrDistributionChoice.clsCurrDistribution.strGLMFunctionName)
+        '    ucrBase.clsRsyntax.SetFunction("glm")
+        '    ucrBase.clsRsyntax.AddParameter("family", clsRFunctionParameter:=clsFamilyFunction)
+        '    clsFamilyFunction.AddParameter("link", "identity")
+        'ElseIf (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Inverse_Gaussian") Then
+        '    clsFamilyFunction.SetRCommand(ucrDistributionChoice.clsCurrDistribution.strGLMFunctionName)
+        '    ucrBase.clsRsyntax.SetFunction("glm")
+        '    ucrBase.clsRsyntax.AddParameter("family", clsRFunctionParameter:=clsFamilyFunction)
+        '    clsFamilyFunction.AddParameter("link", "1/mu^2")
+        'Else
+        '    clsFamilyFunction.SetRCommand(ucrDistributionChoice.clsCurrDistribution.strGLMFunctionName)
+        '    ucrBase.clsRsyntax.SetFunction("glm")
+        '    ucrBase.clsRsyntax.AddParameter("family", clsRFunctionParameter:=clsFamilyFunction)
+        '    clsFamilyFunction.AddParameter("link", "logit")
+        'End If
     End Sub
 
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
-        sdgModelOptions.SetRFunction(clsFamilyFunction, bResetSubdialog)
+        sdgModelOptions.SetRFunction(clsFamilyFunction, bResetModelOptions)
         sdgModelOptions.ShowDialog()
         ucrDistributionChoice.ucrInputDistributions.cboInput.SelectedIndex = ucrDistributionChoice.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = sdgModelOptions.ucrDistributionChoice.clsCurrDistribution.strNameTag)
-        bResetSubdialog = False
+        bResetModelOptions = False
     End Sub
 
-    Private Sub ucrChkResponseFunction_CheckedChanged() Handles ucrChkResponseFunction.ControlValueChanged
-        If ucrChkResponseFunction.Checked Then
-            sdgVariableTransformations.ShowDialog()
-        End If
-        ExplanatoryFunctionSelect(ucrReceiverResponse, ucrChkResponseFunction)
+    Private Sub cmdFirstExplanatoryFunction_Click(sender As Object, e As EventArgs) Handles cmdFirstExplanatoryFunction.Click
+        sdgVariableTransformations.SetRCodeForControls(clsNewFormulaOperator:=clsExplanatoryOperator, clsNewTransformParameter:=clsExplanatoryOperator.GetParameter("exp1"), clsNewTransformFunction:=clsFirstTransformFunction, clsNewPowerOperator:=clsFirstPowerOperator, strVariableName:=ucrReceiverFirstExplanatory.GetVariableNames(False), bReset:=bResetFirstFunction)
+        sdgVariableTransformations.ShowDialog()
+        bResetFirstFunction = False
+        UpdatePreview()
     End Sub
 
-    Private Sub ucrChkFirstFunction_CheckedChanged() Handles ucrChkFirstFunction.ControlValueChanged
-        If ucrChkFirstFunction.Checked Then
-            sdgVariableTransformations.ShowDialog()
-        End If
-        ExplanatoryFunctionSelect(ucrReceiverFirstExplanatory, ucrChkFirstFunction)
-    End Sub
-
-    Private Sub ucrChkSecondFunction_CheckedChanged() Handles ucrChkSecondFunction.ControlValueChanged
-        If ucrChkSecondFunction.Checked Then
-            sdgVariableTransformations.ShowDialog()
-        End If
-        ExplanatoryFunctionSelect(ucrReceiverSecondExplanatory, ucrChkSecondFunction)
+    Private Sub cmdSecondExplanatoryFunction_Click(sender As Object, e As EventArgs) Handles cmdSecondExplanatoryFunction.Click
+        sdgVariableTransformations.SetRCodeForControls(clsNewFormulaOperator:=clsExplanatoryOperator, clsNewTransformParameter:=clsExplanatoryOperator.GetParameter("exp2"), clsNewTransformFunction:=clsSecondTransformFunction, clsNewPowerOperator:=clsSecondPowerOperator, strVariableName:=ucrReceiverSecondExplanatory.GetVariableNames(False), bReset:=bResetSecondFunction)
+        sdgVariableTransformations.ShowDialog()
+        bResetSecondFunction = False
+        UpdatePreview()
     End Sub
 
     Private Sub ucrReceiverFirstExplanatory_contents() Handles ucrReceiverResponse.ControlContentsChanged, ucrReceiverFirstExplanatory.ControlContentsChanged, ucrReceiverSecondExplanatory.ControlContentsChanged, ucrInputModelOperator.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
-    Private Sub ExplanatoryControls_ControlValueChanged() Handles ucrInputModelOperator.ControlValueChanged, ucrReceiverFirstExplanatory.ControlValueChanged, ucrReceiverSecondExplanatory.ControlValueChanged
+    Private Sub ucrInputModelOperator_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputModelOperator.ControlValueChanged
         SetExplanatoryOperator()
         UpdatePreview()
     End Sub
 
-    Public Sub ConvertToNumeric()
+    Private Sub ucrReceiverFirstExplanatory_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstExplanatory.ControlValueChanged
         If bRCodeSet Then
-            If Not ucrReceiverResponse.IsEmpty Then
-                ucrDistributionChoice.RecieverDatatype(ucrSelectorThreeVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverResponse.GetVariableNames(bWithQuotes:=False))
-                If ucrDistributionChoice.strDataType = "numeric" Then
-                    ucrChkConvertToNumeric.Checked = False
-                    ucrChkConvertToNumeric.Visible = False
-                Else
-                    ucrChkConvertToNumeric.Visible = True
-                End If
-                If ucrChkConvertToNumeric.Checked Then
-                    clsFormulaOperator.AddParameter("y", clsRFunctionParameter:=clsAsNumeric, iPosition:=0)
-                    ucrDistributionChoice.RecieverDatatype("numeric")
-                Else
-                    clsFormulaOperator.AddParameter("y", ucrReceiverResponse.GetVariableNames(False), iPosition:=0)
-                    ucrDistributionChoice.RecieverDatatype(ucrSelectorThreeVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverResponse.GetVariableNames(bWithQuotes:=False))
-                End If
+            If Not ucrReceiverFirstExplanatory.IsEmpty Then
+                clsExplanatoryOperator.AddParameter("exp1", ucrReceiverFirstExplanatory.GetVariableNames(False), iPosition:=0)
             Else
-                ucrChkConvertToNumeric.Visible = False
-                If ucrDistributionChoice.lstCurrentDistributions.Count = 0 OrElse ucrReceiverResponse.IsEmpty() Then
-                    ucrDistributionChoice.ucrInputDistributions.SetName("")
-                    ucrDistributionChoice.Enabled = False
-                    cmdModelOptions.Enabled = False
-                Else
-                    cmdModelOptions.Enabled = True
-                    ucrDistributionChoice.Enabled = True
-                End If
+                clsExplanatoryOperator.RemoveParameterByName("exp1")
             End If
-            UpdatePreview()
-            TestOKEnabled()
+        End If
+        FirstExplanatoryFunctionEnabled()
+        UpdatePreview()
+    End Sub
+
+    Private Sub ucrReceiverSecondExplanatory_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSecondExplanatory.ControlValueChanged
+        If bRCodeSet Then
+            If Not ucrReceiverSecondExplanatory.IsEmpty Then
+                clsExplanatoryOperator.AddParameter("exp2", ucrReceiverSecondExplanatory.GetVariableNames(False), iPosition:=1)
+            Else
+                clsExplanatoryOperator.RemoveParameterByName("exp2")
+            End If
+        End If
+        SecondExplanatoryFunctionEnabled()
+        UpdatePreview()
+    End Sub
+
+    Private Sub FirstExplanatoryFunctionEnabled()
+        If Not ucrReceiverFirstExplanatory.IsEmpty AndAlso {"numeric", "integer"}.Contains(ucrReceiverFirstExplanatory.strCurrDataType) Then
+            cmdFirstExplanatoryFunction.Enabled = True
+        Else
+            cmdFirstExplanatoryFunction.Enabled = False
+        End If
+    End Sub
+
+    Private Sub SecondExplanatoryFunctionEnabled()
+        If Not ucrReceiverSecondExplanatory.IsEmpty AndAlso {"numeric", "integer"}.Contains(ucrReceiverSecondExplanatory.strCurrDataType) Then
+            cmdSecondExplanatoryFunction.Enabled = True
+        Else
+            cmdSecondExplanatoryFunction.Enabled = False
         End If
     End Sub
 End Class

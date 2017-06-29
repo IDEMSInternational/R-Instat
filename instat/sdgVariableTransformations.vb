@@ -15,84 +15,86 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat
 Imports instat.Translations
+
 Public Class sdgVariableTransformations
-    Public clsRCIFunction As RFunction
-    Public clsRToFunction, clsLMorGLM As New RFunction
-    Public clsRYVariable, clsRXVariable As String
-    Public clsRModel, clsRModel1, clsFormulaOperator As ROperator
-    Public clsModel0 As New ROperator
-    Public bControlsInitialised As Boolean = True
+    Public clsTransformationCode As RCodeStructure
+    Public clsTransformationFunction As RFunction
+    Public clsContainingCode As RCodeStructure
+    Public clsTransformParameter As RParameter
+    Public clsPowerOperator As ROperator
+    Public bControlsInitialised As Boolean = False
+    Public strCurrentVariableName As String
+
     Private Sub sdgVariableTransformations_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
 
     Public Sub InitialiseControls()
-        ucrPnlGenerateFunctions.AddRadioButton(rdoIdentity)
-        ucrPnlGenerateFunctions.AddRadioButton(rdoLogBase10)
-        ucrPnlGenerateFunctions.AddRadioButton(rdoNaturallog)
-        ucrPnlGenerateFunctions.AddRadioButton(rdoPower)
-        ucrPnlGenerateFunctions.AddRadioButton(rdoSquareroot)
+        ucrPnlChooseFunction.AddRadioButton(rdoIdentity)
+        ucrPnlChooseFunction.AddRadioButton(rdoLogBase10)
+        ucrPnlChooseFunction.AddRadioButton(rdoNaturalLog)
+        ucrPnlChooseFunction.AddRadioButton(rdoPower)
+        ucrPnlChooseFunction.AddRadioButton(rdoSquareRoot)
+        ucrPnlChooseFunction.AddToLinkedControls(ucrNudPower, {rdoPower}, bNewLinkedDisabledIfParameterMissing:=True)
 
-        'ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoLogBase10, "log10")
-        'ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoSquareroot, "sqrt")
-        'ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoNaturallog, "log")
-        'ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoIdentity, {"log10", "power", "log", "sqrt"}, False)
-        'ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoPower, "power")
+        'temp disabled as need to use I(x ^ 2) instead of x ^ 2 as this has different meaning in a formula
+        rdoPower.Enabled = False
 
+        ucrNudPower.SetParameter(New RParameter("power", 1))
+        ucrNudPower.SetMinMax(Integer.MinValue, Integer.MaxValue)
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCodeForControls(clsNewLMorGLM As RFunction, clsNewFormulaOperator As ROperator, clsRModelNew As ROperator, clsRYVariableNew As String, clsRXVariableNew As String, Optional bReset As Boolean = False)
-        If bControlsInitialised Then
+    Public Sub SetRCodeForControls(clsNewFormulaOperator As ROperator, clsNewTransformParameter As RParameter, clsNewTransformFunction As RFunction, clsNewPowerOperator As ROperator, strVariableName As String, Optional bReset As Boolean = False)
+        Dim strParamName As String
+        If Not bControlsInitialised Then
             InitialiseControls()
         End If
-        clsLMorGLM = clsNewLMorGLM
-        clsRXVariable = clsRXVariableNew
-        clsRYVariable = clsRYVariableNew
-        clsRModel = clsRModelNew
-        clsFormulaOperator = clsNewFormulaOperator
-        ucrPnlGenerateFunctions.SetRCode(clsLMorGLM, bReset)
+        strCurrentVariableName = strVariableName
+        clsTransformationFunction = clsNewTransformFunction
+        clsPowerOperator = clsNewPowerOperator
+        clsTransformParameter = clsNewTransformParameter
+        clsContainingCode = clsNewFormulaOperator
+        strParamName = clsTransformParameter.strArgumentName
 
+        ucrPnlChooseFunction.ClearConditions()
+        ucrPnlChooseFunction.AddParameterIsStringCondition(rdoIdentity, strParamName)
+        ucrPnlChooseFunction.AddParameterValueFunctionNamesCondition(rdoLogBase10, strParamName, "log10")
+        ucrPnlChooseFunction.AddParameterValueFunctionNamesCondition(rdoSquareRoot, strParamName, "sqrt")
+        ucrPnlChooseFunction.AddParameterValueFunctionNamesCondition(rdoNaturalLog, strParamName, "log")
+        ucrPnlChooseFunction.AddParameterIsROperatorCondition(rdoPower, strParamName)
+
+        ucrPnlChooseFunction.SetRCode(clsContainingCode, bReset, bCloneIfNeeded:=True)
+        ucrNudPower.SetRCode(clsPowerOperator, bReset, bCloneIfNeeded:=True)
+        UpdatePreview()
     End Sub
 
-    Private Sub ExplanatoryFunction(strFunctionName As String, strPower As String, Optional choice As Boolean = False)
-        Dim i As Integer 'This is temporary, will need to change this method...
-        If choice Then
-            i = 0
+    Private Sub ucrPnlGenerateFunctions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlChooseFunction.ControlValueChanged
+        If rdoIdentity.Checked Then
+            clsTransformParameter.SetArgumentValue(strCurrentVariableName)
         Else
-            i = -1
-        End If
-        If strFunctionName = "power" Then
-            If strPower <> "1" Then
-                'clsRModel.AddParameter(False, strParameterValue:=clsRYVariable.GetVariableNames(bWithQuotes:=False))
-                clsModel0.SetOperation("^")
-                clsModel0.bBrackets = False
-                clsModel0.AddParameter(strParameterValue:=strPower)
-                clsModel0.AddParameter("x", clsRXVariable, bIncludeArgumentName:=False)
-                clsFormulaOperator.AddParameter("x", clsROperatorParameter:=clsModel0, iPosition:=1)
+            If rdoPower.Checked Then
+                clsTransformationCode = clsPowerOperator
+            Else
+                If rdoLogBase10.Checked Then
+                    clsTransformationFunction.SetRCommand("log10")
+                ElseIf rdoNaturalLog.Checked Then
+                    clsTransformationFunction.SetRCommand("log")
+                ElseIf rdoSquareRoot.Checked Then
+                    clsTransformationFunction.SetRCommand("sqrt")
+                End If
+                clsTransformationCode = clsTransformationFunction
             End If
-
-        Else
-            clsRToFunction.SetRCommand(strFunctionName)
-            clsRToFunction.AddParameter("x", clsRXVariable, bIncludeArgumentName:=False)
-            clsFormulaOperator.AddParameter("x", clsRFunctionParameter:=clsRToFunction, iPosition:=1)
+            clsTransformParameter.SetArgument(clsTransformationCode)
         End If
-
+        UpdatePreview()
     End Sub
 
-    Public Sub ModelFunction(Optional choice As Boolean = False)
-        If rdoLogBase10.Checked Then
-            ExplanatoryFunction("log10", 1, choice)
-        End If
-        If rdoNaturallog.Checked Then
-            ExplanatoryFunction("log", 1, choice)
-        End If
-        If rdoSquareroot.Checked Then
-            ExplanatoryFunction("sqrt", 1, choice)
-        End If
-        If rdoPower.Checked Then
-            ExplanatoryFunction("power", ucrNudPower.Value, choice)
-        End If
+    Private Sub UpdatePreview()
+        ucrInputPreview.SetName(clsTransformParameter.ToScript(""))
     End Sub
 
+    Private Sub ucrNudPower_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudPower.ControlValueChanged
+        UpdatePreview()
+    End Sub
 End Class

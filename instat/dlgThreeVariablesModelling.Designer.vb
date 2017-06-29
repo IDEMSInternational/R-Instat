@@ -29,13 +29,13 @@ Partial Class dlgThreeVariableModelling
         Me.lblModelPreview = New System.Windows.Forms.Label()
         Me.cmdModelOptions = New System.Windows.Forms.Button()
         Me.lblModelOperator = New System.Windows.Forms.Label()
+        Me.cmdFirstExplanatoryFunction = New System.Windows.Forms.Button()
+        Me.cmdSecondExplanatoryFunction = New System.Windows.Forms.Button()
+        Me.cmdResponseFunction = New System.Windows.Forms.Button()
         Me.ucrSaveModel = New instat.ucrSave()
-        Me.ucrChkSecondFunction = New instat.ucrCheck()
         Me.ucrReceiverSecondExplanatory = New instat.ucrReceiverSingle()
-        Me.ucrChkFirstFunction = New instat.ucrCheck()
         Me.ucrReceiverFirstExplanatory = New instat.ucrReceiverSingle()
         Me.ucrChkConvertToNumeric = New instat.ucrCheck()
-        Me.ucrChkResponseFunction = New instat.ucrCheck()
         Me.ucrReceiverResponse = New instat.ucrReceiverSingle()
         Me.ucrInputModelOperator = New instat.ucrInputComboBox()
         Me.ucrModelPreview = New instat.ucrInputTextBox()
@@ -116,20 +116,39 @@ Partial Class dlgThreeVariableModelling
         Me.lblModelOperator.TabIndex = 21
         Me.lblModelOperator.Text = "Model Operator:"
         '
+        'cmdFirstExplanatoryFunction
+        '
+        Me.cmdFirstExplanatoryFunction.Location = New System.Drawing.Point(382, 86)
+        Me.cmdFirstExplanatoryFunction.Name = "cmdFirstExplanatoryFunction"
+        Me.cmdFirstExplanatoryFunction.Size = New System.Drawing.Size(67, 20)
+        Me.cmdFirstExplanatoryFunction.TabIndex = 31
+        Me.cmdFirstExplanatoryFunction.Text = "Function..."
+        Me.cmdFirstExplanatoryFunction.UseVisualStyleBackColor = True
+        '
+        'cmdSecondExplanatoryFunction
+        '
+        Me.cmdSecondExplanatoryFunction.Location = New System.Drawing.Point(384, 172)
+        Me.cmdSecondExplanatoryFunction.Name = "cmdSecondExplanatoryFunction"
+        Me.cmdSecondExplanatoryFunction.Size = New System.Drawing.Size(67, 20)
+        Me.cmdSecondExplanatoryFunction.TabIndex = 32
+        Me.cmdSecondExplanatoryFunction.Text = "Function..."
+        Me.cmdSecondExplanatoryFunction.UseVisualStyleBackColor = True
+        '
+        'cmdResponseFunction
+        '
+        Me.cmdResponseFunction.Location = New System.Drawing.Point(382, 38)
+        Me.cmdResponseFunction.Name = "cmdResponseFunction"
+        Me.cmdResponseFunction.Size = New System.Drawing.Size(67, 20)
+        Me.cmdResponseFunction.TabIndex = 33
+        Me.cmdResponseFunction.Text = "Function..."
+        Me.cmdResponseFunction.UseVisualStyleBackColor = True
+        '
         'ucrSaveModel
         '
         Me.ucrSaveModel.Location = New System.Drawing.Point(10, 298)
         Me.ucrSaveModel.Name = "ucrSaveModel"
         Me.ucrSaveModel.Size = New System.Drawing.Size(255, 24)
         Me.ucrSaveModel.TabIndex = 30
-        '
-        'ucrChkSecondFunction
-        '
-        Me.ucrChkSecondFunction.Checked = False
-        Me.ucrChkSecondFunction.Location = New System.Drawing.Point(384, 173)
-        Me.ucrChkSecondFunction.Name = "ucrChkSecondFunction"
-        Me.ucrChkSecondFunction.Size = New System.Drawing.Size(136, 20)
-        Me.ucrChkSecondFunction.TabIndex = 29
         '
         'ucrReceiverSecondExplanatory
         '
@@ -142,14 +161,6 @@ Partial Class dlgThreeVariableModelling
         Me.ucrReceiverSecondExplanatory.strNcFilePath = ""
         Me.ucrReceiverSecondExplanatory.TabIndex = 28
         Me.ucrReceiverSecondExplanatory.ucrSelector = Nothing
-        '
-        'ucrChkFirstFunction
-        '
-        Me.ucrChkFirstFunction.Checked = False
-        Me.ucrChkFirstFunction.Location = New System.Drawing.Point(384, 87)
-        Me.ucrChkFirstFunction.Name = "ucrChkFirstFunction"
-        Me.ucrChkFirstFunction.Size = New System.Drawing.Size(136, 20)
-        Me.ucrChkFirstFunction.TabIndex = 27
         '
         'ucrReceiverFirstExplanatory
         '
@@ -166,18 +177,10 @@ Partial Class dlgThreeVariableModelling
         'ucrChkConvertToNumeric
         '
         Me.ucrChkConvertToNumeric.Checked = False
-        Me.ucrChkConvertToNumeric.Location = New System.Drawing.Point(384, 39)
+        Me.ucrChkConvertToNumeric.Location = New System.Drawing.Point(384, 38)
         Me.ucrChkConvertToNumeric.Name = "ucrChkConvertToNumeric"
         Me.ucrChkConvertToNumeric.Size = New System.Drawing.Size(136, 20)
         Me.ucrChkConvertToNumeric.TabIndex = 25
-        '
-        'ucrChkResponseFunction
-        '
-        Me.ucrChkResponseFunction.Checked = False
-        Me.ucrChkResponseFunction.Location = New System.Drawing.Point(384, 39)
-        Me.ucrChkResponseFunction.Name = "ucrChkResponseFunction"
-        Me.ucrChkResponseFunction.Size = New System.Drawing.Size(118, 20)
-        Me.ucrChkResponseFunction.TabIndex = 24
         '
         'ucrReceiverResponse
         '
@@ -205,9 +208,9 @@ Partial Class dlgThreeVariableModelling
         Me.ucrModelPreview.AddQuotesIfUnrecognised = True
         Me.ucrModelPreview.IsMultiline = False
         Me.ucrModelPreview.IsReadOnly = False
-        Me.ucrModelPreview.Location = New System.Drawing.Point(88, 267)
+        Me.ucrModelPreview.Location = New System.Drawing.Point(93, 268)
         Me.ucrModelPreview.Name = "ucrModelPreview"
-        Me.ucrModelPreview.Size = New System.Drawing.Size(221, 21)
+        Me.ucrModelPreview.Size = New System.Drawing.Size(321, 21)
         Me.ucrModelPreview.TabIndex = 11
         '
         'ucrDistributionChoice
@@ -239,13 +242,13 @@ Partial Class dlgThreeVariableModelling
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(543, 386)
+        Me.Controls.Add(Me.cmdResponseFunction)
+        Me.Controls.Add(Me.cmdSecondExplanatoryFunction)
+        Me.Controls.Add(Me.cmdFirstExplanatoryFunction)
         Me.Controls.Add(Me.ucrSaveModel)
-        Me.Controls.Add(Me.ucrChkSecondFunction)
         Me.Controls.Add(Me.ucrReceiverSecondExplanatory)
-        Me.Controls.Add(Me.ucrChkFirstFunction)
         Me.Controls.Add(Me.ucrReceiverFirstExplanatory)
         Me.Controls.Add(Me.ucrChkConvertToNumeric)
-        Me.Controls.Add(Me.ucrChkResponseFunction)
         Me.Controls.Add(Me.ucrReceiverResponse)
         Me.Controls.Add(Me.lblModelOperator)
         Me.Controls.Add(Me.ucrInputModelOperator)
@@ -284,11 +287,11 @@ Partial Class dlgThreeVariableModelling
     Friend WithEvents ucrInputModelOperator As ucrInputComboBox
     Friend WithEvents lblModelOperator As Label
     Friend WithEvents ucrReceiverResponse As ucrReceiverSingle
-    Friend WithEvents ucrChkResponseFunction As ucrCheck
     Friend WithEvents ucrChkConvertToNumeric As ucrCheck
     Friend WithEvents ucrReceiverFirstExplanatory As ucrReceiverSingle
-    Friend WithEvents ucrChkFirstFunction As ucrCheck
     Friend WithEvents ucrReceiverSecondExplanatory As ucrReceiverSingle
-    Friend WithEvents ucrChkSecondFunction As ucrCheck
     Friend WithEvents ucrSaveModel As ucrSave
+    Friend WithEvents cmdSecondExplanatoryFunction As Button
+    Friend WithEvents cmdFirstExplanatoryFunction As Button
+    Friend WithEvents cmdResponseFunction As Button
 End Class
