@@ -538,7 +538,6 @@ Public Class RLink
                         w.WriteLine(strScript)
                     End Using
                     ts.Stop()
-                    Console.WriteLine(ts.ElapsedMilliseconds)
                 End If
             Catch ex As Exception
                 MsgBox("Could not add text to debug log file at:" & strAutoSaveDebugLogFilePath & Environment.NewLine & ex.Message, MsgBoxStyle.Exclamation, "Debug Log File")

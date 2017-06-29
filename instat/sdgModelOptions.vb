@@ -72,7 +72,7 @@ Public Class sdgModelOptions
         rdoSqrt.Enabled = False
     End Sub
 
-    Public Sub ucrFamily_cboDistributionsIndexChanged() Handles ucrFamily.ControlValueChanged
+    Public Sub ucrFamily_cboDistributionsIndexChanged() Handles ucrFamily.DistributionsIndexChanged
         RestrictLink()
     End Sub
 

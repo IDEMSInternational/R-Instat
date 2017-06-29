@@ -91,6 +91,7 @@
         bIsRSyntaxContainsCode = False
         bIsParameterValuesRFunctionNames = False
         strParameterName = strParamName
+        bIsPositive = bNewIsPositive
         If Not {"string", "RFunction", "ROperator"}.Contains(strType) Then
             MsgBox("Developer error: strType must be either string, RFunction or ROperator.")
             strParameterType = ""
