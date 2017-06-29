@@ -23,14 +23,14 @@ Partial Class sdgVariableTransformations
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.grpGeneralFunctions = New System.Windows.Forms.GroupBox()
-        Me.ucrButtonsSDGVarTransform = New instat.ucrButtonsSubdialogue()
-        Me.ucrPnlGenerateFunctions = New instat.UcrPanel()
+        Me.ucrNudPower = New instat.ucrNud()
         Me.rdoIdentity = New System.Windows.Forms.RadioButton()
         Me.rdoNaturallog = New System.Windows.Forms.RadioButton()
         Me.rdoPower = New System.Windows.Forms.RadioButton()
         Me.rdoSquareroot = New System.Windows.Forms.RadioButton()
         Me.rdoLogBase10 = New System.Windows.Forms.RadioButton()
-        Me.ucrNudPower = New instat.ucrNud()
+        Me.ucrPnlGenerateFunctions = New instat.UcrPanel()
+        Me.ucrButtonsSDGVarTransform = New instat.ucrButtonsSubdialogue()
         Me.grpGeneralFunctions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -45,25 +45,23 @@ Partial Class sdgVariableTransformations
         Me.grpGeneralFunctions.Controls.Add(Me.ucrPnlGenerateFunctions)
         Me.grpGeneralFunctions.Location = New System.Drawing.Point(10, 10)
         Me.grpGeneralFunctions.Name = "grpGeneralFunctions"
-        Me.grpGeneralFunctions.Size = New System.Drawing.Size(151, 146)
+        Me.grpGeneralFunctions.Size = New System.Drawing.Size(151, 153)
         Me.grpGeneralFunctions.TabIndex = 1
         Me.grpGeneralFunctions.TabStop = False
         Me.grpGeneralFunctions.Tag = "General_Functions"
         Me.grpGeneralFunctions.Text = "General Functions"
         '
-        'ucrButtonsSDGVarTransform
+        'ucrNudPower
         '
-        Me.ucrButtonsSDGVarTransform.Location = New System.Drawing.Point(10, 162)
-        Me.ucrButtonsSDGVarTransform.Name = "ucrButtonsSDGVarTransform"
-        Me.ucrButtonsSDGVarTransform.Size = New System.Drawing.Size(142, 30)
-        Me.ucrButtonsSDGVarTransform.TabIndex = 2
-        '
-        'ucrPnlGenerateFunctions
-        '
-        Me.ucrPnlGenerateFunctions.Location = New System.Drawing.Point(6, 19)
-        Me.ucrPnlGenerateFunctions.Name = "ucrPnlGenerateFunctions"
-        Me.ucrPnlGenerateFunctions.Size = New System.Drawing.Size(136, 121)
-        Me.ucrPnlGenerateFunctions.TabIndex = 3
+        Me.ucrNudPower.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPower.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudPower.Location = New System.Drawing.Point(83, 118)
+        Me.ucrNudPower.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudPower.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPower.Name = "ucrNudPower"
+        Me.ucrNudPower.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudPower.TabIndex = 17
+        Me.ucrNudPower.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'rdoIdentity
         '
@@ -125,23 +123,25 @@ Partial Class sdgVariableTransformations
         Me.rdoLogBase10.Text = "Log Base 10"
         Me.rdoLogBase10.UseVisualStyleBackColor = True
         '
-        'ucrNudPower
+        'ucrPnlGenerateFunctions
         '
-        Me.ucrNudPower.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPower.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPower.Location = New System.Drawing.Point(83, 118)
-        Me.ucrNudPower.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudPower.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPower.Name = "ucrNudPower"
-        Me.ucrNudPower.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudPower.TabIndex = 17
-        Me.ucrNudPower.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrPnlGenerateFunctions.Location = New System.Drawing.Point(6, 19)
+        Me.ucrPnlGenerateFunctions.Name = "ucrPnlGenerateFunctions"
+        Me.ucrPnlGenerateFunctions.Size = New System.Drawing.Size(136, 128)
+        Me.ucrPnlGenerateFunctions.TabIndex = 3
+        '
+        'ucrButtonsSDGVarTransform
+        '
+        Me.ucrButtonsSDGVarTransform.Location = New System.Drawing.Point(10, 169)
+        Me.ucrButtonsSDGVarTransform.Name = "ucrButtonsSDGVarTransform"
+        Me.ucrButtonsSDGVarTransform.Size = New System.Drawing.Size(142, 30)
+        Me.ucrButtonsSDGVarTransform.TabIndex = 2
         '
         'sdgVariableTransformations
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(171, 199)
+        Me.ClientSize = New System.Drawing.Size(171, 211)
         Me.Controls.Add(Me.ucrButtonsSDGVarTransform)
         Me.Controls.Add(Me.grpGeneralFunctions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow

@@ -33,17 +33,6 @@ Partial Class dlgRegressionSimple
         Me.rdoGeneralCase = New System.Windows.Forms.RadioButton()
         Me.lblFactor = New System.Windows.Forms.Label()
         Me.lblNumeric = New System.Windows.Forms.Label()
-        Me.lblExplanatory = New System.Windows.Forms.Label()
-        Me.lblResponse = New System.Windows.Forms.Label()
-        Me.grpParameters = New System.Windows.Forms.GroupBox()
-        Me.lblDifferenceInMeans = New System.Windows.Forms.Label()
-        Me.ucrNudHypothesis = New instat.ucrNud()
-        Me.ucrNudCI = New instat.ucrNud()
-        Me.lblConfidenceInterval = New System.Windows.Forms.Label()
-        Me.ucrChkPairedTest = New instat.ucrCheck()
-        Me.rdoCompareVariance = New System.Windows.Forms.RadioButton()
-        Me.rdoCompareMeans = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlMeansAndVariance = New instat.UcrPanel()
         Me.ucrSaveModels = New instat.ucrSave()
         Me.ucrChkConvertToVariate = New instat.ucrCheck()
         Me.ucrReceiverExplanatory = New instat.ucrReceiverSingle()
@@ -54,6 +43,15 @@ Partial Class dlgRegressionSimple
         Me.ucrModelPreview = New instat.ucrInputTextBox()
         Me.ucrDistributionChoice = New instat.ucrDistributions()
         Me.ucrBase = New instat.ucrButtons()
+        Me.grpParameters = New System.Windows.Forms.GroupBox()
+        Me.rdoCompareVariance = New System.Windows.Forms.RadioButton()
+        Me.rdoCompareMeans = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlMeansAndVariance = New instat.UcrPanel()
+        Me.ucrChkPairedTest = New instat.ucrCheck()
+        Me.ucrNudHypothesis = New instat.ucrNud()
+        Me.ucrNudCI = New instat.ucrNud()
+        Me.lblDifferenceInMeans = New System.Windows.Forms.Label()
+        Me.lblConfidenceInterval = New System.Windows.Forms.Label()
         Me.grpParameters.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -94,7 +92,7 @@ Partial Class dlgRegressionSimple
         'cmdDisplayOptions
         '
         Me.cmdDisplayOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDisplayOptions.Location = New System.Drawing.Point(325, 286)
+        Me.cmdDisplayOptions.Location = New System.Drawing.Point(325, 328)
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
         Me.cmdDisplayOptions.Size = New System.Drawing.Size(110, 23)
         Me.cmdDisplayOptions.TabIndex = 16
@@ -105,7 +103,7 @@ Partial Class dlgRegressionSimple
         'cmdModelOptions
         '
         Me.cmdModelOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdModelOptions.Location = New System.Drawing.Point(325, 259)
+        Me.cmdModelOptions.Location = New System.Drawing.Point(325, 301)
         Me.cmdModelOptions.Name = "cmdModelOptions"
         Me.cmdModelOptions.Size = New System.Drawing.Size(110, 23)
         Me.cmdModelOptions.TabIndex = 15
@@ -117,7 +115,7 @@ Partial Class dlgRegressionSimple
         '
         Me.lblModelPreview.AutoSize = True
         Me.lblModelPreview.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblModelPreview.Location = New System.Drawing.Point(10, 262)
+        Me.lblModelPreview.Location = New System.Drawing.Point(10, 304)
         Me.lblModelPreview.Name = "lblModelPreview"
         Me.lblModelPreview.Size = New System.Drawing.Size(80, 13)
         Me.lblModelPreview.TabIndex = 11
@@ -132,7 +130,7 @@ Partial Class dlgRegressionSimple
         Me.rdoTwoSample.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoTwoSample.Location = New System.Drawing.Point(249, 11)
         Me.rdoTwoSample.Name = "rdoTwoSample"
-        Me.rdoTwoSample.Size = New System.Drawing.Size(100, 28)
+        Me.rdoTwoSample.Size = New System.Drawing.Size(121, 28)
         Me.rdoTwoSample.TabIndex = 21
         Me.rdoTwoSample.Text = "Two Sample"
         Me.rdoTwoSample.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -145,9 +143,9 @@ Partial Class dlgRegressionSimple
         Me.rdoGeneralCase.FlatAppearance.BorderSize = 2
         Me.rdoGeneralCase.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoGeneralCase.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoGeneralCase.Location = New System.Drawing.Point(151, 11)
+        Me.rdoGeneralCase.Location = New System.Drawing.Point(130, 11)
         Me.rdoGeneralCase.Name = "rdoGeneralCase"
-        Me.rdoGeneralCase.Size = New System.Drawing.Size(100, 28)
+        Me.rdoGeneralCase.Size = New System.Drawing.Size(121, 28)
         Me.rdoGeneralCase.TabIndex = 20
         Me.rdoGeneralCase.Text = "General Case"
         Me.rdoGeneralCase.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -173,112 +171,9 @@ Partial Class dlgRegressionSimple
         Me.lblNumeric.TabIndex = 3
         Me.lblNumeric.Text = "Response Variable:"
         '
-        'lblExplanatory
-        '
-        Me.lblExplanatory.Location = New System.Drawing.Point(0, 0)
-        Me.lblExplanatory.Name = "lblExplanatory"
-        Me.lblExplanatory.Size = New System.Drawing.Size(100, 23)
-        Me.lblExplanatory.TabIndex = 23
-        '
-        'lblResponse
-        '
-        Me.lblResponse.Location = New System.Drawing.Point(0, 0)
-        Me.lblResponse.Name = "lblResponse"
-        Me.lblResponse.Size = New System.Drawing.Size(100, 23)
-        Me.lblResponse.TabIndex = 24
-        '
-        'grpParameters
-        '
-        Me.grpParameters.Controls.Add(Me.lblDifferenceInMeans)
-        Me.grpParameters.Controls.Add(Me.ucrNudHypothesis)
-        Me.grpParameters.Controls.Add(Me.ucrNudCI)
-        Me.grpParameters.Controls.Add(Me.lblConfidenceInterval)
-        Me.grpParameters.Controls.Add(Me.ucrChkPairedTest)
-        Me.grpParameters.Controls.Add(Me.rdoCompareVariance)
-        Me.grpParameters.Controls.Add(Me.rdoCompareMeans)
-        Me.grpParameters.Controls.Add(Me.ucrPnlMeansAndVariance)
-        Me.grpParameters.Location = New System.Drawing.Point(489, 131)
-        Me.grpParameters.Name = "grpParameters"
-        Me.grpParameters.Size = New System.Drawing.Size(200, 100)
-        Me.grpParameters.TabIndex = 0
-        Me.grpParameters.TabStop = False
-        '
-        'lblDifferenceInMeans
-        '
-        Me.lblDifferenceInMeans.Location = New System.Drawing.Point(540, 256)
-        Me.lblDifferenceInMeans.Name = "lblDifferenceInMeans"
-        Me.lblDifferenceInMeans.Size = New System.Drawing.Size(100, 23)
-        Me.lblDifferenceInMeans.TabIndex = 19
-        '
-        'ucrNudHypothesis
-        '
-        Me.ucrNudHypothesis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudHypothesis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudHypothesis.Location = New System.Drawing.Point(578, 220)
-        Me.ucrNudHypothesis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudHypothesis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudHypothesis.Name = "ucrNudHypothesis"
-        Me.ucrNudHypothesis.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudHypothesis.TabIndex = 13
-        Me.ucrNudHypothesis.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudCI
-        '
-        Me.ucrNudCI.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudCI.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudCI.Location = New System.Drawing.Point(554, 223)
-        Me.ucrNudCI.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudCI.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudCI.Name = "ucrNudCI"
-        Me.ucrNudCI.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudCI.TabIndex = 15
-        Me.ucrNudCI.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblConfidenceInterval
-        '
-        Me.lblConfidenceInterval.Location = New System.Drawing.Point(589, 243)
-        Me.lblConfidenceInterval.Name = "lblConfidenceInterval"
-        Me.lblConfidenceInterval.Size = New System.Drawing.Size(100, 23)
-        Me.lblConfidenceInterval.TabIndex = 18
-        '
-        'ucrChkPairedTest
-        '
-        Me.ucrChkPairedTest.Checked = False
-        Me.ucrChkPairedTest.Location = New System.Drawing.Point(489, 140)
-        Me.ucrChkPairedTest.Name = "ucrChkPairedTest"
-        Me.ucrChkPairedTest.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkPairedTest.TabIndex = 14
-        '
-        'rdoCompareVariance
-        '
-        Me.rdoCompareVariance.Location = New System.Drawing.Point(0, 0)
-        Me.rdoCompareVariance.Name = "rdoCompareVariance"
-        Me.rdoCompareVariance.Size = New System.Drawing.Size(104, 24)
-        Me.rdoCompareVariance.TabIndex = 20
-        Me.rdoCompareVariance.TabStop = True
-        Me.rdoCompareVariance.Tag = ""
-        Me.rdoCompareVariance.UseVisualStyleBackColor = True
-        '
-        'rdoCompareMeans
-        '
-        Me.rdoCompareMeans.Location = New System.Drawing.Point(0, 0)
-        Me.rdoCompareMeans.Name = "rdoCompareMeans"
-        Me.rdoCompareMeans.Size = New System.Drawing.Size(104, 24)
-        Me.rdoCompareMeans.TabIndex = 21
-        Me.rdoCompareMeans.TabStop = True
-        Me.rdoCompareMeans.Tag = ""
-        Me.rdoCompareMeans.UseVisualStyleBackColor = True
-        '
-        'ucrPnlMeansAndVariance
-        '
-        Me.ucrPnlMeansAndVariance.Location = New System.Drawing.Point(489, 286)
-        Me.ucrPnlMeansAndVariance.Name = "ucrPnlMeansAndVariance"
-        Me.ucrPnlMeansAndVariance.Size = New System.Drawing.Size(187, 76)
-        Me.ucrPnlMeansAndVariance.TabIndex = 17
-        '
         'ucrSaveModels
         '
-        Me.ucrSaveModels.Location = New System.Drawing.Point(9, 285)
+        Me.ucrSaveModels.Location = New System.Drawing.Point(9, 327)
         Me.ucrSaveModels.Name = "ucrSaveModels"
         Me.ucrSaveModels.Size = New System.Drawing.Size(291, 24)
         Me.ucrSaveModels.TabIndex = 1
@@ -319,7 +214,7 @@ Partial Class dlgRegressionSimple
         '
         Me.ucrSelectorSimpleReg.bShowHiddenColumns = False
         Me.ucrSelectorSimpleReg.bUseCurrentFilter = True
-        Me.ucrSelectorSimpleReg.Location = New System.Drawing.Point(10, 37)
+        Me.ucrSelectorSimpleReg.Location = New System.Drawing.Point(10, 49)
         Me.ucrSelectorSimpleReg.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorSimpleReg.Name = "ucrSelectorSimpleReg"
         Me.ucrSelectorSimpleReg.Size = New System.Drawing.Size(226, 186)
@@ -328,16 +223,16 @@ Partial Class dlgRegressionSimple
         'ucrChkFunction
         '
         Me.ucrChkFunction.Checked = False
-        Me.ucrChkFunction.Location = New System.Drawing.Point(489, 86)
+        Me.ucrChkFunction.Location = New System.Drawing.Point(267, 158)
         Me.ucrChkFunction.Name = "ucrChkFunction"
         Me.ucrChkFunction.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkFunction.TabIndex = 0
         '
         'ucrPnlModelType
         '
-        Me.ucrPnlModelType.Location = New System.Drawing.Point(143, -5)
+        Me.ucrPnlModelType.Location = New System.Drawing.Point(120, 3)
         Me.ucrPnlModelType.Name = "ucrPnlModelType"
-        Me.ucrPnlModelType.Size = New System.Drawing.Size(219, 54)
+        Me.ucrPnlModelType.Size = New System.Drawing.Size(267, 43)
         Me.ucrPnlModelType.TabIndex = 3
         '
         'ucrModelPreview
@@ -345,30 +240,130 @@ Partial Class dlgRegressionSimple
         Me.ucrModelPreview.AddQuotesIfUnrecognised = True
         Me.ucrModelPreview.IsMultiline = False
         Me.ucrModelPreview.IsReadOnly = False
-        Me.ucrModelPreview.Location = New System.Drawing.Point(96, 258)
+        Me.ucrModelPreview.Location = New System.Drawing.Point(96, 300)
         Me.ucrModelPreview.Name = "ucrModelPreview"
         Me.ucrModelPreview.Size = New System.Drawing.Size(204, 21)
         Me.ucrModelPreview.TabIndex = 23
         '
         'ucrDistributionChoice
         '
-        Me.ucrDistributionChoice.Location = New System.Drawing.Point(9, 226)
+        Me.ucrDistributionChoice.Location = New System.Drawing.Point(9, 268)
         Me.ucrDistributionChoice.Name = "ucrDistributionChoice"
         Me.ucrDistributionChoice.Size = New System.Drawing.Size(208, 27)
         Me.ucrDistributionChoice.TabIndex = 24
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 317)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 359)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(406, 54)
         Me.ucrBase.TabIndex = 17
+        '
+        'grpParameters
+        '
+        Me.grpParameters.Controls.Add(Me.rdoCompareVariance)
+        Me.grpParameters.Controls.Add(Me.rdoCompareMeans)
+        Me.grpParameters.Controls.Add(Me.ucrPnlMeansAndVariance)
+        Me.grpParameters.Controls.Add(Me.ucrChkPairedTest)
+        Me.grpParameters.Controls.Add(Me.ucrNudHypothesis)
+        Me.grpParameters.Controls.Add(Me.ucrNudCI)
+        Me.grpParameters.Controls.Add(Me.lblDifferenceInMeans)
+        Me.grpParameters.Controls.Add(Me.lblConfidenceInterval)
+        Me.grpParameters.Location = New System.Drawing.Point(252, 158)
+        Me.grpParameters.Name = "grpParameters"
+        Me.grpParameters.Size = New System.Drawing.Size(183, 137)
+        Me.grpParameters.TabIndex = 25
+        Me.grpParameters.TabStop = False
+        Me.grpParameters.Text = "Parameters"
+        '
+        'rdoCompareVariance
+        '
+        Me.rdoCompareVariance.AutoSize = True
+        Me.rdoCompareVariance.Location = New System.Drawing.Point(13, 90)
+        Me.rdoCompareVariance.Name = "rdoCompareVariance"
+        Me.rdoCompareVariance.Size = New System.Drawing.Size(112, 17)
+        Me.rdoCompareVariance.TabIndex = 37
+        Me.rdoCompareVariance.TabStop = True
+        Me.rdoCompareVariance.Tag = ""
+        Me.rdoCompareVariance.Text = "Compare Variance"
+        Me.rdoCompareVariance.UseVisualStyleBackColor = True
+        '
+        'rdoCompareMeans
+        '
+        Me.rdoCompareMeans.AutoSize = True
+        Me.rdoCompareMeans.Location = New System.Drawing.Point(13, 67)
+        Me.rdoCompareMeans.Name = "rdoCompareMeans"
+        Me.rdoCompareMeans.Size = New System.Drawing.Size(102, 17)
+        Me.rdoCompareMeans.TabIndex = 36
+        Me.rdoCompareMeans.TabStop = True
+        Me.rdoCompareMeans.Tag = ""
+        Me.rdoCompareMeans.Text = "Compare Means"
+        Me.rdoCompareMeans.UseVisualStyleBackColor = True
+        '
+        'ucrPnlMeansAndVariance
+        '
+        Me.ucrPnlMeansAndVariance.Location = New System.Drawing.Point(8, 67)
+        Me.ucrPnlMeansAndVariance.Name = "ucrPnlMeansAndVariance"
+        Me.ucrPnlMeansAndVariance.Size = New System.Drawing.Size(94, 43)
+        Me.ucrPnlMeansAndVariance.TabIndex = 35
+        '
+        'ucrChkPairedTest
+        '
+        Me.ucrChkPairedTest.Checked = False
+        Me.ucrChkPairedTest.Location = New System.Drawing.Point(13, 113)
+        Me.ucrChkPairedTest.Name = "ucrChkPairedTest"
+        Me.ucrChkPairedTest.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkPairedTest.TabIndex = 34
+        '
+        'ucrNudHypothesis
+        '
+        Me.ucrNudHypothesis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudHypothesis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudHypothesis.Location = New System.Drawing.Point(121, 46)
+        Me.ucrNudHypothesis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudHypothesis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudHypothesis.Name = "ucrNudHypothesis"
+        Me.ucrNudHypothesis.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudHypothesis.TabIndex = 33
+        Me.ucrNudHypothesis.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudCI
+        '
+        Me.ucrNudCI.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCI.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudCI.Location = New System.Drawing.Point(121, 20)
+        Me.ucrNudCI.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudCI.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCI.Name = "ucrNudCI"
+        Me.ucrNudCI.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudCI.TabIndex = 32
+        Me.ucrNudCI.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblDifferenceInMeans
+        '
+        Me.lblDifferenceInMeans.AutoSize = True
+        Me.lblDifferenceInMeans.Location = New System.Drawing.Point(10, 46)
+        Me.lblDifferenceInMeans.Name = "lblDifferenceInMeans"
+        Me.lblDifferenceInMeans.Size = New System.Drawing.Size(106, 13)
+        Me.lblDifferenceInMeans.TabIndex = 31
+        Me.lblDifferenceInMeans.Tag = ""
+        Me.lblDifferenceInMeans.Text = "Difference In Means:"
+        '
+        'lblConfidenceInterval
+        '
+        Me.lblConfidenceInterval.AutoSize = True
+        Me.lblConfidenceInterval.Location = New System.Drawing.Point(10, 21)
+        Me.lblConfidenceInterval.Name = "lblConfidenceInterval"
+        Me.lblConfidenceInterval.Size = New System.Drawing.Size(102, 13)
+        Me.lblConfidenceInterval.TabIndex = 30
+        Me.lblConfidenceInterval.Tag = ""
+        Me.lblConfidenceInterval.Text = "Confidence Interval:"
         '
         'dlgRegressionSimple
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(721, 372)
+        Me.ClientSize = New System.Drawing.Size(445, 421)
         Me.Controls.Add(Me.grpParameters)
         Me.Controls.Add(Me.ucrSaveModels)
         Me.Controls.Add(Me.rdoTwoSample)
@@ -379,8 +374,6 @@ Partial Class dlgRegressionSimple
         Me.Controls.Add(Me.ucrReceiverExplanatory)
         Me.Controls.Add(Me.ucrReceiverResponse)
         Me.Controls.Add(Me.ucrSelectorSimpleReg)
-        Me.Controls.Add(Me.lblExplanatory)
-        Me.Controls.Add(Me.lblResponse)
         Me.Controls.Add(Me.ucrChkFunction)
         Me.Controls.Add(Me.ucrPnlModelType)
         Me.Controls.Add(Me.ucrModelPreview)
@@ -400,6 +393,7 @@ Partial Class dlgRegressionSimple
         Me.Tag = "Simple_Regression"
         Me.Text = "Two Variable Fit Model"
         Me.grpParameters.ResumeLayout(False)
+        Me.grpParameters.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -424,16 +418,14 @@ Partial Class dlgRegressionSimple
     Friend WithEvents ucrReceiverExplanatory As ucrReceiverSingle
     Friend WithEvents ucrReceiverResponse As ucrReceiverSingle
     Friend WithEvents ucrSelectorSimpleReg As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents lblExplanatory As Label
-    Friend WithEvents lblResponse As Label
     Friend WithEvents ucrSaveModels As ucrSave
     Friend WithEvents grpParameters As GroupBox
-    Friend WithEvents rdoCompareVariance As RadioButton
-    Friend WithEvents rdoCompareMeans As RadioButton
-    Friend WithEvents ucrPnlMeansAndVariance As UcrPanel
-    Friend WithEvents ucrChkPairedTest As ucrCheck
-    Friend WithEvents lblConfidenceInterval As Label
     Friend WithEvents ucrNudHypothesis As ucrNud
     Friend WithEvents ucrNudCI As ucrNud
     Friend WithEvents lblDifferenceInMeans As Label
+    Friend WithEvents lblConfidenceInterval As Label
+    Friend WithEvents ucrChkPairedTest As ucrCheck
+    Friend WithEvents rdoCompareVariance As RadioButton
+    Friend WithEvents rdoCompareMeans As RadioButton
+    Friend WithEvents ucrPnlMeansAndVariance As UcrPanel
 End Class
