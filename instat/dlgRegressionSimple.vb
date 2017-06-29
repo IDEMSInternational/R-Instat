@@ -328,9 +328,9 @@ Public Class dlgRegressionSimple
         'sdgModelOptions.ucrFamily.RecieverDatatype(ucrDistributionChoice.strDataType)
         'sdgModelOptions.ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = sdgModelOptions.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrDistributionChoice.clsCurrDistribution.strNameTag)
         'sdgModelOptions.RestrictLink()ModelFunction
-        ExplanatoryFunctionSelect()
         SetBaseFunction()
         DataTypeAccepted()
+        ExplanatoryFunctionSelect()
     End Sub
 
     Public Sub DataTypeAccepted()
@@ -688,10 +688,10 @@ Public Class dlgRegressionSimple
 
     Private Sub ucrExplanatory_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExplanatory.ControlValueChanged
         SetBaseFunction()
-        ExplanatoryFunctionSelect()
         DataTypeAccepted()
         UpdatePreview()
         clsRXVariable = ucrReceiverExplanatory.GetVariableNames(bWithQuotes:=False)
+        ExplanatoryFunctionSelect()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -800,9 +800,9 @@ Public Class dlgRegressionSimple
         Else
             ucrDistributionChoice.SetExactDistributions()
         End If
-        ExplanatoryFunctionSelect()
         SetBaseFunction()
         ConvertToVariate()
         DataTypeAccepted()
+        ExplanatoryFunctionSelect()
     End Sub
 End Class

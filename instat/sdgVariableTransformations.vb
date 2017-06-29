@@ -27,6 +27,7 @@ Public Class sdgVariableTransformations
     End Sub
 
     Public Sub InitialiseControls()
+        '  ucrPnlGenerateFunctions.AddToLinkedControls(ucrNudPower, {rdoPower}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoLogBase10, "log10")
         ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoSquareroot, "sqrt")
         ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoNaturallog, "log")
@@ -44,11 +45,12 @@ Public Class sdgVariableTransformations
         clsRYVariable = clsRYVariableNew
         clsRModel = clsRModelNew
         clsFormulaOperator = clsNewFormulaOperator
-        ucrPnlGenerateFunctions.SetRCode(clsLMorGLM, bReset)
-
+        '  ucrPnlGenerateFunctions.SetRCode(clsLMorGLM, bReset)
+        ' ucrNudPower.SetRCode(clsModel0, bReset)
     End Sub
 
     Private Sub ExplanatoryFunction(strFunctionName As String, strPower As String, Optional choice As Boolean = False)
+        clsModel0 = New ROperator
         Dim i As Integer 'This is temporary, will need to change this method...
         If choice Then
             i = 0
@@ -57,14 +59,14 @@ Public Class sdgVariableTransformations
         End If
         If strFunctionName = "power" Then
             If strPower <> "1" Then
-                'clsRModel.AddParameter(False, strParameterValue:=clsRYVariable.GetVariableNames(bWithQuotes:=False))
                 clsModel0.SetOperation("^")
                 clsModel0.bBrackets = False
-                clsModel0.AddParameter(strParameterValue:=strPower)
-                clsModel0.AddParameter("x", clsRXVariable, bIncludeArgumentName:=False)
-                clsFormulaOperator.AddParameter("x", clsROperatorParameter:=clsModel0, iPosition:=1)
+                clsModel0.AddParameter(strParameterValue:=strPower, iPosition:=2)
+                clsModel0.AddParameter("x", clsRXVariable, iPosition:=0)
+                clsFormulaOperator.AddParameter("Xx", clsROperatorParameter:=clsModel0, iPosition:=1)
+                'TEMP FIX
+                clsFormulaOperator.RemoveParameterByName("x")
             End If
-
         Else
             clsRToFunction.SetRCommand(strFunctionName)
             clsRToFunction.AddParameter("x", clsRXVariable, bIncludeArgumentName:=False)
@@ -84,8 +86,11 @@ Public Class sdgVariableTransformations
             ExplanatoryFunction("sqrt", 1, choice)
         End If
         If rdoPower.Checked Then
-            ExplanatoryFunction("power", ucrNudPower.Value, choice)
+            ExplanatoryFunction("power", ucrNudPower.GetText, choice)
         End If
     End Sub
 
+    Private Sub ucrNudPower_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudPower.ControlValueChanged
+        ModelFunction()
+    End Sub
 End Class
