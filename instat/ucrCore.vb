@@ -240,14 +240,14 @@ Public Class ucrCore
 
     'TODO in future may want to set RCode and RSyntax together if both needed for conditions
     '     then would need method to add both at the same time
-    Public Overridable Sub SetRSyntax(clsNewRSyntax As RSyntax, Optional bReset As Boolean = False)
+    Public Overridable Sub SetRSyntax(clsNewRSyntax As RSyntax, Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
         If clsRSyntax Is Nothing OrElse Not clsRSyntax.Equals(clsNewRSyntax) Then
             clsRSyntax = clsNewRSyntax
             If bUpdateRCodeFromControl AndAlso CanUpdate() Then
                 UpdateRCode(bReset)
             End If
         End If
-        UpdateControl(bReset)
+        UpdateControl(bReset, bCloneIfNeeded:=bCloneIfNeeded)
     End Sub
 
     Protected Overridable Function CanUpdate()
@@ -560,7 +560,7 @@ Public Class ucrCore
             lstAllRCodes.Add(clsNewRCode)
             lstAllRParameters.Add(clsNewRParameter)
         Else
-            MsgBox("Developer error: Cannot add additional RCode and RParameter pair because the addional pair number is out of bounds of the current pairs.")
+            MsgBox("Developer error: Cannot add additional RCode and RParameter pair because the additional pair number is out of bounds of the current pairs.")
         End If
     End Sub
 
