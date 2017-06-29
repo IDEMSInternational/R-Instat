@@ -40,6 +40,7 @@ Public Class dlgCombine
 
         'ucrReceiver
         ucrFactorsReceiver.SetParameter(New RParameter("x"))
+        ucrFactorsReceiver.strSelectorHeading = "Factors"
         ucrFactorsReceiver.SetParameterIsRFunction()
         ucrFactorsReceiver.Selector = ucrSelectorCombineFactors
         ucrFactorsReceiver.SetMeAsReceiver()
