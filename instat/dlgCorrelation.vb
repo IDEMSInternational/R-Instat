@@ -117,8 +117,8 @@ Public Class dlgCorrelation
         clsRGGcorrGraphicsFunction.SetRCommand("ggcorr")
         clsRGraphicsFuction.SetPackageName("GGally")
         clsRGraphicsFuction.SetRCommand("ggpairs")
-        clsRGGscatmatrixFunction.SetPackageName("GGally")
-        clsRGGscatmatrixFunction.SetRCommand("ggscatmat")
+        clsRGGscatMatrixFunction.SetPackageName("GGally")
+        clsRGGscatMatrixFunction.SetRCommand("ggscatmat")
 
         clsCorrelationTestFunction.SetRCommand("cor.test")
         clsCorrelationFunction.SetRCommand("cor")
