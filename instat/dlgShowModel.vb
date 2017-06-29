@@ -72,7 +72,7 @@ Public Class dlgShowModel
         ucrPnlDistTypes.AddFunctionNamesCondition(rdoProbabilities, "pdist")
 
         ucrSaveGraphResults.SetDataFrameSelector(ucrSelectorForDataFrame.ucrAvailableDataFrames)
-        ucrSaveGraphResults.SetSaveTypeAsColumn()
+        ucrSaveGraphResults.SetSaveTypeAsModel()
         ucrSaveGraphResults.SetIsComboBox()
         ucrSaveGraphResults.SetLabelText("Save Graph  Result:")
 
@@ -195,6 +195,7 @@ Public Class dlgShowModel
 
     Private Sub ucrChkEnterValues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEnterValues.ControlValueChanged
         ResetFunctions()
+        DisplayTableResults()
     End Sub
 
     Private Sub ResetFunctions()
@@ -218,9 +219,15 @@ Public Class dlgShowModel
 
     Private Sub DisplayTableResults()
         If ucrChkDisplayGraphResults.Checked Then
+            ucrSaveGraphResults.SetAssignToBooleans(bTempAssignToIsPrefix:=False)
             ucrBase.clsRsyntax.iCallType = 3
         Else
-            ucrBase.clsRsyntax.iCallType = 2
+            If ucrChkEnterValues.Checked Then
+                ucrSaveGraphResults.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
+            Else
+                ucrSaveGraphResults.SetAssignToBooleans(bTempAssignToIsPrefix:=False)
+                ucrBase.clsRsyntax.iCallType = 2
+            End If
         End If
     End Sub
 
