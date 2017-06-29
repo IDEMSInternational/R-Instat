@@ -80,7 +80,6 @@ Public Class dlgFourVariableModelling
         chkFirstFunction.Visible = False
         ucrModelName.SetName("reg")
         ' sdgSimpleRegOptions.SetDefaults()
-        sdgModelOptions.SetDefaults()
         ResponseConvert()
         TestOKEnabled()
     End Sub
@@ -234,7 +233,7 @@ Public Class dlgFourVariableModelling
     Public Sub ChooseRFunction()
         sdgModelOptions.ucrDistributionChoice.RecieverDatatype(ucrFamily.strDataType)
         sdgModelOptions.ucrDistributionChoice.ucrInputDistributions.cboInput.SelectedIndex = sdgModelOptions.ucrDistributionChoice.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
-        sdgModelOptions.RestrictLink()
+        sdgModelOptions.SetLinkFunctionsAvailable()
         'TODO:   Include multinomial as an option And the appropriate function
         If (ucrFamily.clsCurrDistribution.strNameTag = "Normal" And ucrInputModelOperators2.GetText <> "|") Then
             'sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True

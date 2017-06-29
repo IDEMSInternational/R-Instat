@@ -266,6 +266,7 @@ Public Class dlgThreeVariableModelling
 
     Public Sub ucrFamily_cboDistributionsIndexChanged() Handles ucrDistributionChoice.DistributionsIndexChanged
         SetBaseFunction()
+        clsFamilyFunction.RemoveParameterByName("link")
         'TODO:   Include multinomial as an option And the appropriate function
         'If (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal") Then
         'ElseIf (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Gamma" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Quasipoisson") Then
@@ -292,9 +293,17 @@ Public Class dlgThreeVariableModelling
     End Sub
 
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
-        sdgModelOptions.SetRFunction(clsFamilyFunction, bResetModelOptions)
+        Dim clsTempParam As RParameter = Nothing
+
+        sdgModelOptions.SetRCodeForControls(ucrDistributionChoice, clsFamilyFunction, bResetModelOptions)
         sdgModelOptions.ShowDialog()
+        If clsFamilyFunction.ContainsParameter("link") Then
+            clsTempParam = clsFamilyFunction.GetParameter("link")
+        End If
         ucrDistributionChoice.ucrInputDistributions.cboInput.SelectedIndex = ucrDistributionChoice.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = sdgModelOptions.ucrDistributionChoice.clsCurrDistribution.strNameTag)
+        If clsTempParam IsNot Nothing Then
+            clsFamilyFunction.AddParameter(clsTempParam)
+        End If
         bResetModelOptions = False
     End Sub
 
