@@ -250,7 +250,7 @@ Public Class dlgThreeVariableModelling
     End Sub
 
     Private Sub SetBaseFunction()
-        If (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal") Then
+        If (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal") AndAlso (Not clsFamilyFunction.ContainsParameter("link") OrElse clsFamilyFunction.GetParameter("link").strArgumentValue = Chr(34) & "identity" & Chr(34)) Then
             clsLMOrGLM = clsLM
         Else
             clsLMOrGLM = clsGLM
@@ -297,6 +297,7 @@ Public Class dlgThreeVariableModelling
 
         sdgModelOptions.SetRCodeForControls(ucrDistributionChoice, clsFamilyFunction, bResetModelOptions)
         sdgModelOptions.ShowDialog()
+        bResetModelOptions = False
         If clsFamilyFunction.ContainsParameter("link") Then
             clsTempParam = clsFamilyFunction.GetParameter("link")
         End If
@@ -304,7 +305,7 @@ Public Class dlgThreeVariableModelling
         If clsTempParam IsNot Nothing Then
             clsFamilyFunction.AddParameter(clsTempParam)
         End If
-        bResetModelOptions = False
+        SetBaseFunction()
     End Sub
 
     Private Sub cmdFirstExplanatoryFunction_Click(sender As Object, e As EventArgs) Handles cmdFirstExplanatoryFunction.Click
