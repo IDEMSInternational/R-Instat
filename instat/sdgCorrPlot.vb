@@ -55,6 +55,7 @@ Public Class sdgCorrPlot
         ucrReceiveFactor.Selector = ucrSelectFactor
         ucrReceiveFactor.SetDataType("factor")
         ucrSelectFactor.Reset()
+        ucrSaveGraph.Reset()
 
         ucrPnlGraphType.AddToLinkedControls(ucrInputComboGeom, {rdoCorrelationPlot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGraphType.AddToLinkedControls(ucrNudMinimunSize, {rdoCorrelationPlot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -65,6 +66,7 @@ Public Class sdgCorrPlot
         ucrNudMinimunSize.SetLinkedDisplayControl(lblMinimumSize)
         ucrNudMaximumSize.SetLinkedDisplayControl(lblMaximumSize)
         ucrNudAlphaCorr.SetLinkedDisplayControl(lblLabelAlpha)
+        ucrPnlGraphType.SetLinkedDisplayControl(grpOptions)
 
         ucrPnlGraphType.AddToLinkedControls(ucrSelectFactor, {rdoScatterPlotMatrix}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGraphType.AddToLinkedControls(ucrReceiveFactor, {rdoScatterPlotMatrix}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -108,14 +110,13 @@ Public Class sdgCorrPlot
         clsRGGscatmatrixFunction = clsNewRGGscatmatrixFunction
 
         'settingRcode for subdialog
-        ucrNudMaximumSize.SetRSyntax(clsRsyntax, bReset)
-        ucrNudMinimunSize.SetRSyntax(clsRsyntax, bReset)
+        ucrNudMaximumSize.SetRCode(clsRGGcorrGraphicsFunction, bReset)
+        ucrNudMinimunSize.SetRCode(clsRGGcorrGraphicsFunction, bReset)
         ucrInputComboGeom.SetRCode(clsRGGcorrGraphicsFunction, bReset)
         ucrChkLabel.SetRSyntax(clsRsyntax, bReset)
-        ucrSaveGraph.SetRSyntax(clsRsyntax, bReset)
+        ucrSaveGraph.SetRCode(clsRGGcorrGraphicsFunction, bReset)
         ucrChkColor.SetRSyntax(clsRsyntax, bReset)
         ucrPnlGraphType.SetRSyntax(clsRsyntax, bReset)
-
         clsRGraphicsFuction.AddParameter("columns", clsColFunction)
         clsCorrelationFunction.iCallType = 2
     End Sub
@@ -157,7 +158,7 @@ Public Class sdgCorrPlot
         ElseIf rdoScatterPlotMatrix.Checked Then
             dlgCorrelation.ucrBase.clsRsyntax.iCallType = 2
             clsRGGscatmatrixFunction.iCallType = 3
-            clsRsyntax.AddToAfterCodes(clsRGGscatmatrixFunction, iPosition:=1)
+            clsRsyntax.AddToAfterCodes(clsRGGscatmatrixFunction, iPosition:=3)
             clsRsyntax.RemoveFromAfterCodes(clsRGGcorrGraphicsFunction)
         ElseIf rdoNone.Checked Then
             clsRsyntax.RemoveFromAfterCodes(clsRGGcorrGraphicsFunction)
