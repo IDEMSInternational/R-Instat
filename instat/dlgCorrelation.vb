@@ -53,7 +53,7 @@ Public Class dlgCorrelation
         ucrReceiverSecondColumn.Selector = ucrSelectorCorrelation
         ucrReceiverSecondColumn.SetDataType("numeric")
 
-        'ucrReceiverMultipleColumns.SetParameter(New RParameter("columns", 2))
+        ucrReceiverMultipleColumns.SetParameter(New RParameter("x", 2))
         ucrReceiverMultipleColumns.Selector = ucrSelectorCorrelation
         ucrReceiverMultipleColumns.strSelectorHeading = "Numerics"
         ucrReceiverMultipleColumns.SetParameterIsRFunction()
@@ -115,10 +115,13 @@ Public Class dlgCorrelation
         ucrSaveModel.Reset()
         clsRGGcorrGraphicsFunction.SetPackageName("GGally")
         clsRGGcorrGraphicsFunction.SetRCommand("ggcorr")
+        clsRGGcorrGraphicsFunction.iCallType = 3
         clsRGraphicsFuction.SetPackageName("GGally")
         clsRGraphicsFuction.SetRCommand("ggpairs")
+        clsRGraphicsFuction.iCallType = 3
         clsRGGscatMatrixFunction.SetPackageName("GGally")
         clsRGGscatMatrixFunction.SetRCommand("ggscatmat")
+        clsRGGscatMatrixFunction.iCallType = 3
 
         clsCorrelationTestFunction.SetRCommand("cor.test")
         clsCorrelationFunction.SetRCommand("cor")
@@ -136,6 +139,7 @@ Public Class dlgCorrelation
 
         ucrBase.clsRsyntax.iCallType = 2
         clsCorrelationTestFunction.iCallType = 2
+        ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationFunction)
     End Sub
 
@@ -147,8 +151,6 @@ Public Class dlgCorrelation
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverMultipleColumns.AddAdditionalCodeParameterPair(clsCorrelationFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
-
-        ucrReceiverMultipleColumns.SetRCode(clsCorrelationFunction, bReset)
         ucrNudConfidenceInterval.SetRCode(clsCorrelationTestFunction, bReset)
         ucrReceiverFirstColumn.SetRCode(clsCorrelationTestFunction, bReset)
         ucrReceiverSecondColumn.SetRCode(clsCorrelationTestFunction, bReset)
