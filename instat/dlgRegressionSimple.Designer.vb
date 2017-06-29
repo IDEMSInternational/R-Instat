@@ -44,14 +44,14 @@ Partial Class dlgRegressionSimple
         Me.ucrDistributionChoice = New instat.ucrDistributions()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpParameters = New System.Windows.Forms.GroupBox()
+        Me.rdoCompareVariance = New System.Windows.Forms.RadioButton()
+        Me.rdoCompareMeans = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlMeansAndVariance = New instat.UcrPanel()
+        Me.ucrChkPairedTest = New instat.ucrCheck()
         Me.ucrNudHypothesis = New instat.ucrNud()
         Me.ucrNudCI = New instat.ucrNud()
         Me.lblDifferenceInMeans = New System.Windows.Forms.Label()
         Me.lblConfidenceInterval = New System.Windows.Forms.Label()
-        Me.ucrChkPairedTest = New instat.ucrCheck()
-        Me.rdoCompareVariance = New System.Windows.Forms.RadioButton()
-        Me.rdoCompareMeans = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlMeansAndVariance = New instat.UcrPanel()
         Me.grpParameters.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -276,6 +276,45 @@ Partial Class dlgRegressionSimple
         Me.grpParameters.TabStop = False
         Me.grpParameters.Text = "Parameters"
         '
+        'rdoCompareVariance
+        '
+        Me.rdoCompareVariance.AutoSize = True
+        Me.rdoCompareVariance.Location = New System.Drawing.Point(13, 90)
+        Me.rdoCompareVariance.Name = "rdoCompareVariance"
+        Me.rdoCompareVariance.Size = New System.Drawing.Size(112, 17)
+        Me.rdoCompareVariance.TabIndex = 37
+        Me.rdoCompareVariance.TabStop = True
+        Me.rdoCompareVariance.Tag = ""
+        Me.rdoCompareVariance.Text = "Compare Variance"
+        Me.rdoCompareVariance.UseVisualStyleBackColor = True
+        '
+        'rdoCompareMeans
+        '
+        Me.rdoCompareMeans.AutoSize = True
+        Me.rdoCompareMeans.Location = New System.Drawing.Point(13, 67)
+        Me.rdoCompareMeans.Name = "rdoCompareMeans"
+        Me.rdoCompareMeans.Size = New System.Drawing.Size(102, 17)
+        Me.rdoCompareMeans.TabIndex = 36
+        Me.rdoCompareMeans.TabStop = True
+        Me.rdoCompareMeans.Tag = ""
+        Me.rdoCompareMeans.Text = "Compare Means"
+        Me.rdoCompareMeans.UseVisualStyleBackColor = True
+        '
+        'ucrPnlMeansAndVariance
+        '
+        Me.ucrPnlMeansAndVariance.Location = New System.Drawing.Point(8, 67)
+        Me.ucrPnlMeansAndVariance.Name = "ucrPnlMeansAndVariance"
+        Me.ucrPnlMeansAndVariance.Size = New System.Drawing.Size(94, 43)
+        Me.ucrPnlMeansAndVariance.TabIndex = 35
+        '
+        'ucrChkPairedTest
+        '
+        Me.ucrChkPairedTest.Checked = False
+        Me.ucrChkPairedTest.Location = New System.Drawing.Point(13, 113)
+        Me.ucrChkPairedTest.Name = "ucrChkPairedTest"
+        Me.ucrChkPairedTest.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkPairedTest.TabIndex = 34
+        '
         'ucrNudHypothesis
         '
         Me.ucrNudHypothesis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
@@ -319,45 +358,6 @@ Partial Class dlgRegressionSimple
         Me.lblConfidenceInterval.TabIndex = 30
         Me.lblConfidenceInterval.Tag = ""
         Me.lblConfidenceInterval.Text = "Confidence Interval:"
-        '
-        'ucrChkPairedTest
-        '
-        Me.ucrChkPairedTest.Checked = False
-        Me.ucrChkPairedTest.Location = New System.Drawing.Point(13, 113)
-        Me.ucrChkPairedTest.Name = "ucrChkPairedTest"
-        Me.ucrChkPairedTest.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkPairedTest.TabIndex = 34
-        '
-        'rdoCompareVariance
-        '
-        Me.rdoCompareVariance.AutoSize = True
-        Me.rdoCompareVariance.Location = New System.Drawing.Point(13, 90)
-        Me.rdoCompareVariance.Name = "rdoCompareVariance"
-        Me.rdoCompareVariance.Size = New System.Drawing.Size(112, 17)
-        Me.rdoCompareVariance.TabIndex = 37
-        Me.rdoCompareVariance.TabStop = True
-        Me.rdoCompareVariance.Tag = ""
-        Me.rdoCompareVariance.Text = "Compare Variance"
-        Me.rdoCompareVariance.UseVisualStyleBackColor = True
-        '
-        'rdoCompareMeans
-        '
-        Me.rdoCompareMeans.AutoSize = True
-        Me.rdoCompareMeans.Location = New System.Drawing.Point(13, 67)
-        Me.rdoCompareMeans.Name = "rdoCompareMeans"
-        Me.rdoCompareMeans.Size = New System.Drawing.Size(102, 17)
-        Me.rdoCompareMeans.TabIndex = 36
-        Me.rdoCompareMeans.TabStop = True
-        Me.rdoCompareMeans.Tag = ""
-        Me.rdoCompareMeans.Text = "Compare Means"
-        Me.rdoCompareMeans.UseVisualStyleBackColor = True
-        '
-        'ucrPnlMeansAndVariance
-        '
-        Me.ucrPnlMeansAndVariance.Location = New System.Drawing.Point(8, 67)
-        Me.ucrPnlMeansAndVariance.Name = "ucrPnlMeansAndVariance"
-        Me.ucrPnlMeansAndVariance.Size = New System.Drawing.Size(94, 43)
-        Me.ucrPnlMeansAndVariance.TabIndex = 35
         '
         'dlgRegressionSimple
         '

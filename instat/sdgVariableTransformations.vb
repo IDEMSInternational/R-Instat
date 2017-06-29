@@ -87,7 +87,7 @@ Public Class sdgVariableTransformations
         End If
     End Sub
 
-    Private Sub ucrNudPower_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudPower.ControlValueChanged
+    Private Sub ucrNudPower_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudPower.ControlValueChanged, ucrPnlGenerateFunctions.ControlValueChanged
         ModelFunction()
     End Sub
 End Class

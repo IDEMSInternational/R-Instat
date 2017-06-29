@@ -171,7 +171,7 @@ Public Class dlgRegressionSimple
         ucrSelectorSimpleReg.Reset()
         ucrReceiverResponse.SetMeAsReceiver()
         ucrModelPreview.SetName("")
-
+        ExplanatoryFunctionSelect()
         'DataTypeAccepted()
 
         clsRGraphicsOperator = clsRegressionDefaults.clsDefaultRGraphicsOperator.Clone
@@ -263,14 +263,7 @@ Public Class dlgRegressionSimple
         clsRStdResiduals.AddParameter("model", clsRFunctionParameter:=clsLM)
         clsRWriteStdResiduals.AddParameter("col_data", clsRFunctionParameter:=clsRStdResiduals)
 
-        'ucrSave (sdgSimpleRegOptions) Leverage
-        clsRWriteLeverage = clsRegressionDefaults.clsDefaultAddColumnsToData.Clone
-        clsRLeverage.SetPackageName("stats")
-        clsRLeverage.SetRCommand("hatvalues")
-        clsRLeverage.AddParameter("model", clsRFunctionParameter:=clsLMOrGLM)
-        clsRWriteLeverage.AddParameter("col_data", clsRFunctionParameter:=clsRLeverage)
-        clsRWriteLeverage.SetAssignTo(sdgSimpleRegOptions.ucrSaveLeverageColumnName.GetText, strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=sdgSimpleRegOptions.ucrSaveLeverageColumnName.GetText, bAssignToIsPrefix:=True)
-        'clsRWriteLeverage.iCallType = 3
+
         '####
 
         clsAsNumeric.SetRCommand("as.numeric")
@@ -305,11 +298,20 @@ Public Class dlgRegressionSimple
         clsGLM.SetAssignTo(ucrSaveModels.GetText, strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model", bAssignToIsPrefix:=True)
         clsLMOrGLM = clsLM
 
+        'ucrSave (sdgSimpleRegOptions) Leverage
+        clsRLeverage.SetPackageName("stats")
+        clsRLeverage.SetRCommand("hatvalues")
+        clsRLeverage.AddParameter("model", clsRFunctionParameter:=clsLM)
+        clsRWriteLeverage.AddParameter("col_data", clsRFunctionParameter:=clsRLeverage)
+        clsRWriteLeverage.SetAssignTo(sdgSimpleRegOptions.ucrSaveLeverageColumnName.GetText, strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=sdgSimpleRegOptions.ucrSaveLeverageColumnName.GetText, bAssignToIsPrefix:=True)
+        clsRWriteLeverage = clsRegressionDefaults.clsDefaultAddColumnsToData.Clone
+        'clsRWriteLeverage.iCallType = 3
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsLM)
         ucrBase.clsRsyntax.AddToAfterCodes(clsAnovaFunction, 1)
         ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, 2)
 
-        ucrBase.clsRsyntax.AddToAfterCodes(clsRWriteLeverage, 3)
+        'ucrBase.clsRsyntax.AddToAfterCodes(clsRWriteLeverage, 3)
 
         bResetSubDialog = True
         bResetOptionsSubDialog = True
@@ -385,6 +387,8 @@ Public Class dlgRegressionSimple
             sdgVariableTransformations.ShowDialog()
             ExplanatoryFunctionSelect()
             bResetSubDialog = False
+        Else
+            sdgVariableTransformations.Hide()
         End If
     End Sub
 
@@ -714,6 +718,9 @@ Public Class dlgRegressionSimple
                 sdgVariableTransformations.rdoIdentity.Checked = True
                 'clsRLmOrGLM.AddParameter(strParameterValue:=ucrExplanatory.GetVariableNames(bWithQuotes:=False))
             End If
+        Else
+            ucrChkFunction.Checked = False
+            ucrChkFunction.Visible = False
         End If
     End Sub
 
@@ -735,6 +742,7 @@ Public Class dlgRegressionSimple
         If ucrChkFunction.Checked Then
             ExplanatoryFunctionSelect()
         End If
+        UpdatePreview()
     End Sub
 
     Private Sub Display()
