@@ -27,7 +27,6 @@ Public Class sdgVariableTransformations
     End Sub
 
     Public Sub InitialiseControls()
-        '  ucrPnlGenerateFunctions.AddToLinkedControls(ucrNudPower, {rdoPower}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoLogBase10, "log10")
         ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoSquareroot, "sqrt")
         ucrPnlGenerateFunctions.AddFunctionNamesCondition(rdoNaturallog, "log")
@@ -45,8 +44,6 @@ Public Class sdgVariableTransformations
         clsRYVariable = clsRYVariableNew
         clsRModel = clsRModelNew
         clsFormulaOperator = clsNewFormulaOperator
-        '  ucrPnlGenerateFunctions.SetRCode(clsLMorGLM, bReset)
-        ' ucrNudPower.SetRCode(clsModel0, bReset)
     End Sub
 
     Private Sub ExplanatoryFunction(strFunctionName As String, strPower As String, Optional choice As Boolean = False)
@@ -63,7 +60,7 @@ Public Class sdgVariableTransformations
                 clsModel0.bBrackets = False
                 clsModel0.AddParameter(strParameterValue:=strPower, iPosition:=2)
                 clsModel0.AddParameter("x", clsRXVariable, iPosition:=0)
-                clsFormulaOperator.AddParameter("Xx", clsROperatorParameter:=clsModel0, iPosition:=1)
+                clsFormulaOperator.AddParameter("xx", clsROperatorParameter:=clsModel0, iPosition:=1)
                 'TEMP FIX
                 clsFormulaOperator.RemoveParameterByName("x")
             End If

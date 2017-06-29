@@ -225,6 +225,8 @@ Public Class dlgRegressionSimple
         '  clsRaovpvalFunction.AddParameter("", clsRFunctionParameter:=clsRLmOrGLM)
         clsRestpvalFunction.iCallType = 2
 
+        'Save tab -sdgSimpleRegOptions
+        '####
         'ucrSave (sdgSimpleRegOptions) Fitted Values
         clsRWriteFitted = clsRegressionDefaults.clsDefaultAddColumnsToData.Clone
         clsRWriteFitted.SetAssignTo(sdgSimpleRegOptions.ucrSaveFittedColumnName.GetText, strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=sdgSimpleRegOptions.ucrSaveFittedColumnName.GetText, bAssignToIsPrefix:=True)
@@ -240,10 +242,36 @@ Public Class dlgRegressionSimple
         clsRWriteStdResiduals.SetAssignTo(sdgSimpleRegOptions.ucrSaveStdResidualsColumnName.GetText, strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=sdgSimpleRegOptions.ucrSaveStdResidualsColumnName.GetText, bAssignToIsPrefix:=True)
         ' clsRWriteStdResiduals.iCallType = 3
 
+
+        clsRResiduals.SetPackageName("stats")
+        clsRResiduals.SetRCommand("resid")
+        clsRResiduals.AddParameter("object", clsRFunctionParameter:=clsLM)
+        clsRWriteResiduals.AddParameter("col_data", clsRFunctionParameter:=clsLM)
+
+        clsRFittedValues.SetPackageName("stats")
+        clsRFittedValues.SetRCommand("fitted")
+        clsRFittedValues.AddParameter("object", clsRFunctionParameter:=clsLM)
+        clsRWriteFitted.AddParameter("col_data", clsRFunctionParameter:=clsRFittedValues)
+
+        clsRResiduals.SetPackageName("stats")
+        clsRResiduals.SetRCommand("resid")
+        clsRResiduals.AddParameter("object", clsRFunctionParameter:=clsLM)
+        clsRWriteResiduals.AddParameter("col_data", clsRFunctionParameter:=clsRResiduals)
+
+        clsRStdResiduals.SetPackageName("stats")
+        clsRStdResiduals.SetRCommand("rstandard")
+        clsRStdResiduals.AddParameter("model", clsRFunctionParameter:=clsLM)
+        clsRWriteStdResiduals.AddParameter("col_data", clsRFunctionParameter:=clsRStdResiduals)
+
         'ucrSave (sdgSimpleRegOptions) Leverage
         clsRWriteLeverage = clsRegressionDefaults.clsDefaultAddColumnsToData.Clone
+        clsRLeverage.SetPackageName("stats")
+        clsRLeverage.SetRCommand("hatvalues")
+        clsRLeverage.AddParameter("model", clsRFunctionParameter:=clsLMOrGLM)
+        clsRWriteLeverage.AddParameter("col_data", clsRFunctionParameter:=clsRLeverage)
         clsRWriteLeverage.SetAssignTo(sdgSimpleRegOptions.ucrSaveLeverageColumnName.GetText, strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=sdgSimpleRegOptions.ucrSaveLeverageColumnName.GetText, bAssignToIsPrefix:=True)
         'clsRWriteLeverage.iCallType = 3
+        '####
 
         clsAsNumeric.SetRCommand("as.numeric")
 
@@ -280,6 +308,8 @@ Public Class dlgRegressionSimple
         ucrBase.clsRsyntax.SetBaseRFunction(clsLM)
         ucrBase.clsRsyntax.AddToAfterCodes(clsAnovaFunction, 1)
         ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, 2)
+
+        ucrBase.clsRsyntax.AddToAfterCodes(clsRWriteLeverage, 3)
 
         bResetSubDialog = True
         bResetOptionsSubDialog = True
@@ -359,7 +389,7 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        sdgSimpleRegOptions.SetRCode(ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewConfint:=clsConfint, clsNewVisReg:=clsVisReg, clsNewAutoplot:=clsAutoPlot, bReset:=bResetOptionsSubDialog)
+        sdgSimpleRegOptions.SetRCode(ucrBase.clsRsyntax, clsNewRWriteLeverage:=clsRWriteLeverage, clsNewRLmOrGLM:=clsLMOrGLM, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewConfint:=clsConfint, clsNewVisReg:=clsVisReg, clsNewAutoplot:=clsAutoPlot, bReset:=bResetOptionsSubDialog)
         sdgSimpleRegOptions.ShowDialog()
         bResetOptionsSubDialog = False
     End Sub
@@ -560,6 +590,7 @@ Public Class dlgRegressionSimple
             clsConfint.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM)
             clsVisReg.AddParameter("fit", clsRFunctionParameter:=clsLMOrGLM)
             clsAutoPlot.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM)
+            clsRGraphicsOperator.AddParameter("reidual", clsRFunctionParameter:=clsAutoPlot, iPosition:=0)
         ElseIf rdoTwoSample.Checked Then
             If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal" Then
                 If rdoCompareMeans.Checked Then
