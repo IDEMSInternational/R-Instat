@@ -44,7 +44,7 @@ Public Class dlgShowModel
         ucrInputProbabilities.SetRCode(clsQuantiles)
         ucrSaveGraphResults.SetRCode(clsQuantiles)
         ucrDistributionsFOrTablePlus.SetRCode(clsQuantiles)
-
+        ucrChkEnterValues.SetRCode(clsQuantiles)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -83,11 +83,6 @@ Public Class dlgShowModel
         ucrReceiverExpressionForTablePlus.SetParameter(New RParameter("p", 1))
         ucrReceiverExpressionForTablePlus.SetParameterIsRFunction()
 
-        ucrChkEnterValues.AddParameterIsRFunctionCondition(ucrReceiverExpressionForTablePlus, "q")
-        ucrChkEnterValues.AddParameterIsRFunctionCondition(ucrReceiverExpressionForTablePlus, "p")
-        ucrChkEnterValues.AddParameterIsRFunctionCondition(ucrInputProbabilities, "q", False)
-        ucrChkEnterValues.AddParameterIsRFunctionCondition(ucrInputProbabilities, "p", False)
-
         ucrDistributionsFOrTablePlus.SetRDistributions()
         ucrDistributionsFOrTablePlus.SetParameters()
 
@@ -96,10 +91,13 @@ Public Class dlgShowModel
         ucrChkDisplayGraphResults.SetRDefault("TRUE")
         ucrChkDisplayGraphResults.SetText("Display Graph Results")
 
-        ucrChkEnterValues.AddToLinkedControls(ucrReceiverExpressionForTablePlus, {False})
-        ucrChkEnterValues.AddToLinkedControls(ucrInputProbabilities, {True}, objNewDefaultState:=0.5)
+        ucrChkEnterValues.AddToLinkedControls(ucrReceiverExpressionForTablePlus, {False}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkEnterValues.AddToLinkedControls(ucrInputProbabilities, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkEnterValues.AddToLinkedControls(ucrSaveGraphResults, {False}, bNewLinkedHideIfParameterMissing:=True)
-
+        ucrChkEnterValues.AddParameterIsRFunctionCondition(False, "q", True)
+        ucrChkEnterValues.AddParameterIsRFunctionCondition(False, "p", True)
+        ucrChkEnterValues.AddParameterIsRFunctionCondition(True, "q", False)
+        ucrChkEnterValues.AddParameterIsRFunctionCondition(True, "p", False)
     End Sub
 
     Private Sub SetDefaults()
@@ -116,8 +114,10 @@ Public Class dlgShowModel
 
         receiverlabels()
         SetNewColumName()
+
         SetItems()
         DisplayTableResults()
+
         ResetFunctions()
         clsProbabilities.SetRCommand("pdist")
         clsQuantiles.SetRCommand("qdist")
