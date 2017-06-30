@@ -36,8 +36,8 @@ Public Class sdgOneVarFitModDisplay
         ucrPnlLikelihood.SetRDefault("TRUE")
 
         ucrChkPLotLogLik.AddToLinkedControls(ucrPnlLikelihood, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkPLotLogLik.AddRSyntaxContainCodeCondition("loglik")
-        ucrChkPLotLogLik.AddRSyntaxContainCodeCondition("loglik", False)
+        ucrChkPLotLogLik.AddParameterPresentCondition(True, "loglik")
+        ucrChkPLotLogLik.AddParameterValuesCondition(False, "loglik", False)
         ucrChkPLotLogLik.SetText("Plot Likelihood")
 
         ucrPnlPlots.AddRadioButton(rdoNoPlot)
@@ -88,10 +88,10 @@ Public Class sdgOneVarFitModDisplay
         clsRplotQqComp = clsNewRplotQqComp
         clsRplotDenscomp = clsNewRplotDenscomp
         clsRLogLikFunction = clsNewRLogLikFunction
-        ucrSavePlots.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
-        ucrSaveLikelihood.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
-        ucrPnlLikelihood.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
-        ucrChkPLotLogLik.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
+        ucrSavePlots.SetRCode(clsRplotFunction, bReset, bCloneIfNeeded:=True)
+        ucrSaveLikelihood.SetRCode(clsRLogLikFunction, bReset, bCloneIfNeeded:=True)
+        ucrPnlLikelihood.SetRCode(clsRLogLikFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkPLotLogLik.SetRCode(clsRLogLikFunction, bReset, bCloneIfNeeded:=True)
         ucrPnlPlots.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
     End Sub
 

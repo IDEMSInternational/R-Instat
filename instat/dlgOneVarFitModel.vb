@@ -573,8 +573,6 @@ Public Class dlgOneVarFitModel
     Private Sub ucrPnlGeneralExactCase_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGeneralExactCase.ControlValueChanged
         EnableOptions()
         BinomialConditions()
-        sdgOneVarFitModel.OptimisationMethod()
-        sdgOneVarFitModel.Estimators()
         SetDistributions()
         DataTypeAccepted()
     End Sub
