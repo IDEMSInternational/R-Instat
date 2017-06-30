@@ -43,6 +43,7 @@ Public Class dlgAppend
         ucrReceiverAppendDataframe.Selector = ucrSelectorDataframes
         ucrReceiverAppendDataframe.SetMeAsReceiver()
         ucrReceiverAppendDataframe.SetItemType("dataframe")
+        ucrReceiverAppendDataframe.strSelectorHeading = "Data Frames"
 
         'chkID
         SetParameter({ucrChkIncludeIDColumn, ucrInputIDColName}, New RParameter(".id", 1))
