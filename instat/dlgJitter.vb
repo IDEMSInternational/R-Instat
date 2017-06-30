@@ -33,6 +33,7 @@ Public Class dlgJitter
     Private Sub InitialiseDialog()
         ucrReceiverJitter.Selector = ucrSelectorForJitter
         ucrReceiverJitter.SetMeAsReceiver()
+        ucrReceiverJitter.strSelectorHeading = "Numerics"
         ucrBase.clsRsyntax.SetOperation("+")
         clsRunif.SetRCommand("runif")
         ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRunif)
@@ -149,4 +150,5 @@ Public Class dlgJitter
     Private Sub ucrSelectorForJitter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForJitter.ControlValueChanged
         LengthOfDataset()
     End Sub
+
 End Class

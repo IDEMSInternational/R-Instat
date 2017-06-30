@@ -38,11 +38,12 @@ Public Class dlgPolynomials
         ucrReceiverPolynomial.Selector = ucrSelectorForPolynomial
         ucrReceiverPolynomial.SetMeAsReceiver()
         ucrReceiverPolynomial.SetIncludedDataTypes({"numeric"})
+        ucrReceiverPolynomial.strSelectorHeading = "Numerics"
         ucrReceiverPolynomial.SetParameterIsRFunction()
 
         ucrPnlType.SetParameter(New RParameter("raw", 1))
         ucrPnlType.AddRadioButton(rdoSimple, "TRUE")
-        ucrPnlType.AddRadioButton(rdoCentered, "TRUE")
+        ucrPnlType.AddRadioButton(rdoCentred, "TRUE")
         ucrPnlType.AddRadioButton(rdoOrthogonal, "FALSE")
         ucrPnlType.SetRDefault("FALSE")
 
@@ -50,8 +51,8 @@ Public Class dlgPolynomials
         ucrPnlType.AddParameterValueFunctionNamesCondition(rdoOrthogonal, "x", "scale", False)
         ucrPnlType.AddParameterValuesCondition(rdoSimple, "raw", "TRUE")
         ucrPnlType.AddParameterValueFunctionNamesCondition(rdoSimple, "x", "scale", False)
-        ucrPnlType.AddParameterValuesCondition(rdoCentered, "raw", "TRUE")
-        ucrPnlType.AddParameterValueFunctionNamesCondition(rdoCentered, "x", "scale")
+        ucrPnlType.AddParameterValuesCondition(rdoCentred, "raw", "TRUE")
+        ucrPnlType.AddParameterValueFunctionNamesCondition(rdoCentred, "x", "scale")
 
         ucrNudDegree.SetParameter(New RParameter("degree", 2))
         ucrNudDegree.Minimum = 1
@@ -124,7 +125,7 @@ Public Class dlgPolynomials
     End Sub
 
     Private Sub ucrPnl_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlType.ControlValueChanged
-        If rdoCentered.Checked Then
+        If rdoCentred.Checked Then
             clsPolynomial.AddParameter("x", clsRFunctionParameter:=clsScale)
         Else
             clsPolynomial.AddParameter("x", clsRFunctionParameter:=ucrReceiverPolynomial.GetVariables)

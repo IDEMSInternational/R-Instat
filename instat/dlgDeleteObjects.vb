@@ -51,6 +51,8 @@ Public Class dlgDeleteObjects
         ucrReceiverObjectsToDelete.Selector = ucrSelectorDeleteObject
         ucrReceiverObjectsToDelete.SetMeAsReceiver()
         ucrReceiverObjectsToDelete.SetItemType("object")
+        ucrReceiverObjectsToDelete.strSelectorHeading = "Objects"
+
     End Sub
 
     Private Sub SetDefaults()
