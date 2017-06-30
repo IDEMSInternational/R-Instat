@@ -243,7 +243,6 @@ Public Class dlgStartofRains
         clsDPCombineOperator.Clear()
 
         ucrReceiverDate.SetMeAsReceiver()
-        ucrInputNewColumnName.SetName("start")
         ucrSelectorForStartofRains.Reset()
 
         ' Adding a key
@@ -485,7 +484,7 @@ Public Class dlgStartofRains
         clsFirstDOYPerYear.AddParameter("function_exp", clsROperatorParameter:=clsFirstDOYPerYearOperator, iPosition:=1)
         clsFirstDOYPerYearOperator.SetOperation("[")
         clsFirstDOYPerYearOperator.AddParameter("rightside", "1 ]", iPosition:=1)
-        clsFirstDOYPerYear.AddParameter("result_name", Chr(34) & ucrInputNewColumnName.GetText() & Chr(34), iPosition:=2)
+        clsFirstDOYPerYear.AddParameter("result_name", Chr(34) & "start" & Chr(34), iPosition:=2)
         clsFirstDOYPerYear.AddParameter("save", 2, iPosition:=6)
         clsFirstDOYPerYear.SetAssignTo("Start_of_Rains")
 
