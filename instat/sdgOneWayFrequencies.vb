@@ -124,21 +124,21 @@ Public Class sdgOneWayFrequencies
         clsOneWayGraphFreq = clsNewSjpFrq
         clsOneWayPlotGrid = clsNewPlotGrid
 
-        ucrChkMedian.SetRCode(clsOneWayTableFreq, bReset)
-        ucrChkShowSummary.SetRCode(clsOneWayTableFreq, bReset)
-        ucrChkHighlightedRows.SetRCode(clsOneWayTableFreq, bReset)
-        ucrNudDecimalPlaces.SetRCode(clsOneWayTableFreq, bReset)
-        ucrInputOmitZero.SetRCode(clsOneWayTableFreq, bReset)
-        ucrInputCountsName.SetRCode(clsOneWayTableFreq, bReset)
-        ucrChkCountName.SetRCode(clsOneWayTableFreq, bReset)
+        ucrChkMedian.SetRCode(clsOneWayTableFreq, bReset, bCloneIfNeeded:=True)
+        ucrChkShowSummary.SetRCode(clsOneWayTableFreq, bReset, bCloneIfNeeded:=True)
+        ucrChkHighlightedRows.SetRCode(clsOneWayTableFreq, bReset, bCloneIfNeeded:=True)
+        ucrNudDecimalPlaces.SetRCode(clsOneWayTableFreq, bReset, bCloneIfNeeded:=True)
+        ucrInputOmitZero.SetRCode(clsOneWayTableFreq, bReset, bCloneIfNeeded:=True)
+        ucrInputCountsName.SetRCode(clsOneWayTableFreq, bReset, bCloneIfNeeded:=True)
+        ucrChkCountName.SetRCode(clsOneWayTableFreq, bReset, bCloneIfNeeded:=True)
 
-        ucrChkShowCount.SetRCode(clsOneWayGraphFreq, bReset)
-        ucrChkShowPercentage.SetRCode(clsOneWayGraphFreq, bReset)
-        ucrChkShowMissing.SetRCode(clsOneWayGraphFreq, bReset)
-        ucrPnlGraphType.SetRCode(clsOneWayGraphFreq, bReset)
-        ucrInputVerticalLabels.SetRCode(clsOneWayGraphFreq, bReset)
-        ucrInputHorizontalLabels.SetRCode(clsOneWayGraphFreq, bReset)
-        ucrInputGraphTitle.SetRCode(clsOneWayGraphFreq, bReset)
+        ucrChkShowCount.SetRCode(clsOneWayGraphFreq, bReset, bCloneIfNeeded:=True)
+        ucrChkShowPercentage.SetRCode(clsOneWayGraphFreq, bReset, bCloneIfNeeded:=True)
+        ucrChkShowMissing.SetRCode(clsOneWayGraphFreq, bReset, bCloneIfNeeded:=True)
+        ucrPnlGraphType.SetRCode(clsOneWayGraphFreq, bReset, bCloneIfNeeded:=True)
+        ucrInputVerticalLabels.SetRCode(clsOneWayGraphFreq, bReset, bCloneIfNeeded:=True)
+        ucrInputHorizontalLabels.SetRCode(clsOneWayGraphFreq, bReset, bCloneIfNeeded:=True)
+        ucrInputGraphTitle.SetRCode(clsOneWayGraphFreq, bReset, bCloneIfNeeded:=True)
 
         If bReset Then
             tbpOneWayFrequencies.SelectedIndex = 0
