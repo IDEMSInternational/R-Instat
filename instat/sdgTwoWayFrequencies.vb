@@ -130,23 +130,23 @@ Public Class sdgTwoWayFrequencies
         bUseTitle = bNewUseTitle
 
         'Setting Rcode for the sub dialogue
-        ucrChkShowSummary.SetRCode(clsTwoWayTableFreq, bReset)
-        ucrChkBackgroundColour.SetRCode(clsTwoWayTableFreq, bReset)
-        ucrNudDecimalPlaces.SetRCode(clsTwoWayTableFreq, bReset)
-        ucrChkMissingValues.SetRCode(clsTwoWayTableFreq, bReset)
-        ucrInputTotalsName.SetRCode(clsTwoWayTableFreq, bReset)
-        ucrChkTotalColumnName.SetRCode(clsTwoWayTableFreq, bReset)
-        ucrChkShowCount.SetRCode(clsTwoWayGraphFreq, bReset)
-        ucrChkStack.SetRCode(clsTwoWayGraphFreq, bReset)
-        ucrChkShowPercentage.SetRCode(clsTwoWayGraphFreq, bReset)
-        ucrChkShowModelSummary.SetRCode(clsTwoWayGraphFreq, bReset)
-        ucrPnlGraphType.SetRCode(clsTwoWayGraphFreq, bReset)
-        ucrInputVerticalLabels.SetRCode(clsTwoWayGraphFreq, bReset)
-        ucrInputHorizontalLabels.SetRCode(clsTwoWayGraphFreq, bReset)
+        ucrChkShowSummary.SetRCode(clsTwoWayTableFreq, bReset, bCloneIfNeeded:=True)
+        ucrChkBackgroundColour.SetRCode(clsTwoWayTableFreq, bReset, bCloneIfNeeded:=True)
+        ucrNudDecimalPlaces.SetRCode(clsTwoWayTableFreq, bReset, bCloneIfNeeded:=True)
+        ucrChkMissingValues.SetRCode(clsTwoWayTableFreq, bReset, bCloneIfNeeded:=True)
+        ucrInputTotalsName.SetRCode(clsTwoWayTableFreq, bReset, bCloneIfNeeded:=True)
+        ucrChkTotalColumnName.SetRCode(clsTwoWayTableFreq, bReset, bCloneIfNeeded:=True)
+        ucrChkShowCount.SetRCode(clsTwoWayGraphFreq, bReset, bCloneIfNeeded:=True)
+        ucrChkStack.SetRCode(clsTwoWayGraphFreq, bReset, bCloneIfNeeded:=True)
+        ucrChkShowPercentage.SetRCode(clsTwoWayGraphFreq, bReset, bCloneIfNeeded:=True)
+        ucrChkShowModelSummary.SetRCode(clsTwoWayGraphFreq, bReset, bCloneIfNeeded:=True)
+        ucrPnlGraphType.SetRCode(clsTwoWayGraphFreq, bReset, bCloneIfNeeded:=True)
+        ucrInputVerticalLabels.SetRCode(clsTwoWayGraphFreq, bReset, bCloneIfNeeded:=True)
+        ucrInputHorizontalLabels.SetRCode(clsTwoWayGraphFreq, bReset, bCloneIfNeeded:=True)
 
         If bUseTitle Then
-            ucrInputTableTitle.SetRCode(clsTwoWayTableFreq, bReset)
-            ucrInputGraphTitle.SetRCode(clsTwoWayGraphFreq, bReset)
+            ucrInputTableTitle.SetRCode(clsTwoWayTableFreq, bReset, bCloneIfNeeded:=True)
+            ucrInputGraphTitle.SetRCode(clsTwoWayGraphFreq, bReset, bCloneIfNeeded:=True)
             ucrInputTableTitle.Enabled = True
             ucrInputGraphTitle.Enabled = True
         Else
