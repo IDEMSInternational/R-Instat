@@ -17,7 +17,7 @@
 Imports instat
 Imports instat.Translations
 
-Public Class dlgRegressionSimple
+Public Class dlgTwoVariableFitModel
     Public bFirstLoad As Boolean = True
     Public clsModel, clsRGraphicsOperator, clsFunctionOperation, clsPoissonOperation, clsPoissonOperation2, clsRBinomialOperation, clsRBinomialOperation2, clsRBinomialOperation3 As New ROperator
     Public clsRPoisson, clsVisReg, clsRLeverage, clsRWriteLeverage, clsRResiduals, clsRStdResiduals, clsRWriteResiduals, clsRWriteStdResiduals, clsRgeom_point, clsAutoPlot, clsRWriteFitted, clsRFittedValues, clsRestpvalFunction, clsRaovpvalFunction, clsRModelFunction, clsRaovFunction, clsRTTest, clsRFTest, clsRKruskalTest, clsRBinomial, clsRWilcoxTest, clsFamilyFunction, clsRFactor, clsRFactor2, clsRNumeric, clsxFunc, clsRMean, clsRMean2, clsRGroup, clsRGroup2, clsTFunc, clsRLength As New RFunction
@@ -36,9 +36,9 @@ Public Class dlgRegressionSimple
     Private bReset As Boolean = True
     Public bResetSubDialog As Boolean = False
     Public bResetOptionsSubDialog As Boolean = False
-     Public bResetFirstFunction As Boolean = False
+    Public bResetFirstFunction As Boolean = False
 
-    Private Sub dlgRegressionSimple_Load(sender As Object, e As EventArgs) Handles Me.Load
+    Private Sub dlgTwoVariableFitModel_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
