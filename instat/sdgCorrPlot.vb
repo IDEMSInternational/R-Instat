@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class sdgCorrPlot
     Public clsRGGscatmatrixFunction, clsRGGcorrGraphicsFunction, clsCorrelationFunction, clsRGraphicsFuction, clsRTempFunction As New RFunction
@@ -168,6 +167,8 @@ Public Class sdgCorrPlot
             clsRsyntax.RemoveFromAfterCodes(clsRGraphicsFuction)
             clsRsyntax.RemoveFromAfterCodes(clsRGGscatmatrixFunction)
         End If
-        Visibility()
+        If rdoCorrelationPlot.Checked Then
+            Visibility()
+        End If
     End Sub
 End Class
