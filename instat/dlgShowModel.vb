@@ -41,7 +41,7 @@ Public Class dlgShowModel
         ucrReceiverExpressionForTablePlus.SetRCode(clsQuantiles, bReset)
         ucrChkDisplayGraphResults.SetRCode(clsQuantiles, bReset)
         ucrInputProbabilities.SetRCode(clsQuantiles, bReset)
-        ucrSaveGraphResults.SetRCode(clsQuantiles, bReset)
+        ucrSaveGraphResults.SetRCode(clsQuantiles)
         ucrDistributionsFOrTablePlus.SetRCode(clsQuantiles, bReset)
         ucrChkEnterValues.SetRCode(clsQuantiles, bReset)
     End Sub
@@ -91,7 +91,7 @@ Public Class dlgShowModel
         ucrChkDisplayGraphResults.SetText("Display Graph Results")
 
         ucrChkEnterValues.AddToLinkedControls(ucrReceiverExpressionForTablePlus, {False}, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkEnterValues.AddToLinkedControls(ucrInputProbabilities, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkEnterValues.AddToLinkedControls(ucrInputProbabilities, {True}, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=0.5)
         ucrChkEnterValues.AddParameterIsRFunctionCondition(False, "q", True)
         ucrChkEnterValues.AddParameterIsRFunctionCondition(False, "p", True)
         ucrChkEnterValues.AddParameterIsRFunctionCondition(True, "q", False)
@@ -105,13 +105,14 @@ Public Class dlgShowModel
 
         ucrSelectorForDataFrame.Reset()
         ucrInputProbabilities.Reset()
+
+        SetNewColumName()
         ucrSaveGraphResults.Reset()
 
         clsProbabilities.SetPackageName("mosaic")
         clsQuantiles.SetPackageName("mosaic")
 
         receiverlabels()
-        SetNewColumName()
 
         SetItems()
         DisplayTableResults()
@@ -120,7 +121,7 @@ Public Class dlgShowModel
         clsProbabilities.SetRCommand("pdist")
         clsQuantiles.SetRCommand("qdist")
 
-        clsQuantiles.SetAssignTo(strTemp:=ucrSaveGraphResults.GetText, strTempDataframe:=ucrSelectorForDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveGraphResults.GetText, bAssignToIsPrefix:=True)
+        clsQuantiles.SetAssignTo(ucrSaveGraphResults.GetText, strTempDataframe:=ucrSelectorForDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveGraphResults.GetText, bAssignToIsPrefix:=True)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsQuantiles)
 
