@@ -73,17 +73,17 @@ Public Class ucrElementRectControl
         clsThemeFunction = clsNewThemeFunction
         clsElementLine = clsNewElementLine
 
-        ucrNudRectSize.SetRCode(clsElementLine, bReset)
-        ucrChkRectSize.SetRCode(clsElementLine, bReset)
+        ucrNudRectSize.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=True)
+        ucrChkRectSize.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=True)
 
-        ucrRectColors.SetRCode(clsElementLine, bReset)
-        ucrChkRectColour.SetRCode(clsElementLine, bReset)
+        ucrRectColors.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=True)
+        ucrChkRectColour.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=True)
 
-        ucrRectFill.SetRCode(clsElementLine, bReset)
-        ucrChkRectFill.SetRCode(clsElementLine, bReset)
+        ucrRectFill.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=True)
+        ucrChkRectFill.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=True)
 
-        ucrInputRectLineType.SetRCode(clsElementLine, bReset)
-        ucrChkRectLineType.SetRCode(clsElementLine, bReset)
+        ucrInputRectLineType.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=True)
+        ucrChkRectLineType.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=True)
 
         AddRemoveElementLineAxis()
     End Sub
