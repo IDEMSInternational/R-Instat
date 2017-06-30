@@ -41,7 +41,7 @@ Public Class dlgShowModel
         ucrReceiverExpressionForTablePlus.SetRCode(clsQuantiles, bReset)
         ucrChkDisplayGraphResults.SetRCode(clsQuantiles, bReset)
         ucrInputProbabilities.SetRCode(clsQuantiles, bReset)
-        ucrSaveGraphResults.SetRCode(clsQuantiles)
+        ucrSaveGraphResults.SetRCode(clsQuantiles, bReset)
         ucrDistributionsFOrTablePlus.SetRCode(clsQuantiles, bReset)
         ucrChkEnterValues.SetRCode(clsQuantiles, bReset)
     End Sub
@@ -103,10 +103,10 @@ Public Class dlgShowModel
         clsQuantiles = New RFunction
         clsProbabilities = New RFunction
 
+        ucrSaveGraphResults.SetPrefix("Quant")
         ucrSelectorForDataFrame.Reset()
         ucrInputProbabilities.Reset()
 
-        SetNewColumName()
         ucrSaveGraphResults.Reset()
 
         clsProbabilities.SetPackageName("mosaic")
@@ -121,7 +121,7 @@ Public Class dlgShowModel
         clsProbabilities.SetRCommand("pdist")
         clsQuantiles.SetRCommand("qdist")
 
-        clsQuantiles.SetAssignTo(ucrSaveGraphResults.GetText, strTempDataframe:=ucrSelectorForDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveGraphResults.GetText, bAssignToIsPrefix:=True)
+        clsQuantiles.SetAssignTo(ucrSaveGraphResults.GetText, strTempDataframe:=ucrSelectorForDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveGraphResults.GetText)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsQuantiles)
 
@@ -139,12 +139,10 @@ Public Class dlgShowModel
 
     Private Sub SetNewColumName()
         If rdoProbabilities.Checked Then
-            ucrSaveGraphResults.SetAssignToBooleans(bTempAssignToIsPrefix:=False)
             If Not ucrSaveGraphResults.bUserTyped Then
                 ucrSaveGraphResults.SetPrefix("Prob")
             End If
         Else
-            ucrSaveGraphResults.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
             If Not ucrSaveGraphResults.bUserTyped Then
                 ucrSaveGraphResults.SetPrefix("Quant")
             End If
