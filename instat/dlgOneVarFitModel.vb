@@ -17,7 +17,7 @@ Imports instat
 Imports instat.Translations
 
 Public Class dlgOneVarFitModel
-    Public clsROneVarFitModel, clsRLogLikFunction, clsRLength, clsRMean, clsRTTest, clsVarTest, clsREnormTest, clsRNonSignTest, clsRWilcoxTest, clsRBinomTest, clsRPoissonTest, clsRplot, clsRfitdist, clsRStartValues, clsRBinomStart, clsRConvertVector, clsRConvertInteger, clsRConvertNumeric As New RFunction
+    Public clsROneVarFitModel, clsFamilyFunction, clsRLogLikFunction, clsRLength, clsRMean, clsRTTest, clsVarTest, clsREnormTest, clsRNonSignTest, clsRWilcoxTest, clsRBinomTest, clsRPoissonTest, clsRplot, clsRfitdist, clsRStartValues, clsRBinomStart, clsRConvertVector, clsRConvertInteger, clsRConvertNumeric As New RFunction
     Public clsRplotFunction, clsRplotPPComp, clsRplotCdfcomp, clsRplotQqComp, clsRplotDenscomp As RFunction
     Public clsFunctionOperator, clsFactorOperator As New ROperator
     Public bfirstload As Boolean = True
@@ -43,6 +43,9 @@ Public Class dlgOneVarFitModel
         UcrBase.iHelpTopicID = 296
         UcrBase.clsRsyntax.iCallType = 2
         UcrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+
+        ucrDistributionChoice.SetGLMDistributions()
+        ucrDistributionChoice.SetFunctionIsDistFunction()
 
         UcrReceiver.Selector = ucrSelectorOneVarFitMod
         UcrReceiver.SetMeAsReceiver()
@@ -150,6 +153,7 @@ Public Class dlgOneVarFitModel
         clsRplotQqComp = New RFunction
         clsRplotDenscomp = New RFunction
         clsRLogLikFunction = New RFunction
+        clsFamilyFunction = New RFunction
 
         clsFunctionOperator = New ROperator
         clsFactorOperator = New ROperator
@@ -172,6 +176,8 @@ Public Class dlgOneVarFitModel
         clsRStartValues.SetRCommand("mean")
         clsRfitdist.SetPackageName("fitdistrplus")
         clsRfitdist.SetRCommand("fitdist")
+        clsFamilyFunction = ucrDistributionChoice.clsCurrRFunction
+        'clsFamilyFunction.SetRCommand(ucrDistributionChoice.clsCurrDistribution.strGLMFunctionName)
         BinomialConditions()
 
         'Exact Case
@@ -246,7 +252,10 @@ Public Class dlgOneVarFitModel
         clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertInteger)
         clsRLogLikFunction.AddParameter("mlefit", clsRFunctionParameter:=clsROneVarFitModel)
         clsROneVarFitModel.SetAssignTo(ucrSaveModel.GetText, strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:=ucrSaveModel.GetText)
+        UcrBase.clsRsyntax.ClearCodes()
         UcrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModel)
+        clsRplotFunction.AddParameter("x", clsRFunctionParameter:=clsROneVarFitModel)
+        UcrBase.clsRsyntax.AddToAfterCodes(clsRplotFunction, iPosition:=1)
         SetDistributions()
         bResetSubdialog = True
     End Sub
@@ -258,6 +267,7 @@ Public Class dlgOneVarFitModel
         UcrReceiver.SetRCode(clsRConvertVector, bReset)
         ucrChkConvertVariate.SetRCode(clsRConvertNumeric, bReset)
         ucrNudHyp.SetRCode(clsRTTest, bReset)
+        ucrDistributionChoice.SetRCode(clsFamilyFunction, bReset)
         UcrReceiver.AddAdditionalCodeParameterPair(clsRConvertNumeric, New RParameter("x"), iAdditionalPairNo:=1)
         UcrReceiver.AddAdditionalCodeParameterPair(clsRConvertInteger, New RParameter("x"), iAdditionalPairNo:=2)
         UcrReceiver.AddAdditionalCodeParameterPair(clsRWilcoxTest, New RParameter("x"), iAdditionalPairNo:=3)
@@ -265,13 +275,13 @@ Public Class dlgOneVarFitModel
         UcrReceiver.AddAdditionalCodeParameterPair(clsRLength, New RParameter("x"), iAdditionalPairNo:=5)
         UcrReceiver.AddAdditionalCodeParameterPair(clsRMean, New RParameter("x"), iAdditionalPairNo:=6)
         UcrReceiver.AddAdditionalCodeParameterPair(clsRBinomTest, New RParameter("x"), iAdditionalPairNo:=7)
-        '  UcrReceiver.AddAdditionalCodeParameterPair(clsRConvertVector, New RParameter("x"), iAdditionalPairNo:=8)
+        UcrReceiver.AddAdditionalCodeParameterPair(clsRStartValues, New RParameter("x"), iAdditionalPairNo:=8)
 
-        UcrReceiver.AddAdditionalCodeParameterPair(clsRplotFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
-        UcrReceiver.AddAdditionalCodeParameterPair(clsRplotPPComp, New RParameter("ft", 0), iAdditionalPairNo:=2)
-        UcrReceiver.AddAdditionalCodeParameterPair(clsRplotCdfcomp, New RParameter("ft", 0), iAdditionalPairNo:=3)
-        UcrReceiver.AddAdditionalCodeParameterPair(clsRplotQqComp, New RParameter("ft", 0), iAdditionalPairNo:=4)
-        UcrReceiver.AddAdditionalCodeParameterPair(clsRplotDenscomp, New RParameter("ft", 0), iAdditionalPairNo:=4)
+        'UcrReceiver.AddAdditionalCodeParameterPair(clsRplotFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
+        'UcrReceiver.AddAdditionalCodeParameterPair(clsRplotPPComp, New RParameter("ft", 0), iAdditionalPairNo:=2)
+        'UcrReceiver.AddAdditionalCodeParameterPair(clsRplotCdfcomp, New RParameter("ft", 0), iAdditionalPairNo:=3)
+        'UcrReceiver.AddAdditionalCodeParameterPair(clsRplotQqComp, New RParameter("ft", 0), iAdditionalPairNo:=4)
+        'UcrReceiver.AddAdditionalCodeParameterPair(clsRplotDenscomp, New RParameter("ft", 0), iAdditionalPairNo:=4)
 
         ucrSaveModel.SetRCode(clsROneVarFitModel, bReset)
         ucrChkConvertVariate.AddAdditionalCodeParameterPair(clsROneVarFitModel, ucrChkConvertVariate.GetParameter(), iAdditionalPairNo:=1)
@@ -309,9 +319,9 @@ Public Class dlgOneVarFitModel
 
     Private Sub SetDistributions()
         If rdoGeneralCase.Checked Then
-            ucrFamily.SetAllDistributions()
+            ucrDistributionChoice.SetAllDistributions()
         ElseIf rdoExactCase.Checked Then
-            ucrFamily.SetExactDistributions()
+            ucrDistributionChoice.SetExactDistributions()
         End If
     End Sub
 
@@ -344,19 +354,19 @@ Public Class dlgOneVarFitModel
                 UcrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=clsRConvertNumeric)
             Else
                 'TODO This is needed because fitdist checks is.vector on data which is FALSE when data has attributes
-                If ucrFamily.clsCurrDistribution.strNameTag = "Poisson" OrElse ucrFamily.clsCurrDistribution.strNameTag = "Geometric" Then
+                If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" OrElse ucrDistributionChoice.clsCurrDistribution.strNameTag = "Geometric" Then
                     clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertInteger)
                 Else
                     clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertVector)
                 End If
-                If ucrFamily.clsCurrDistribution.strNameTag = "Extreme_Value" Or ucrFamily.clsCurrDistribution.strNameTag = "Binomial" Or ucrFamily.clsCurrDistribution.strNameTag = "Bernouli" Or ucrFamily.clsCurrDistribution.strNameTag = "Students_t" Or ucrFamily.clsCurrDistribution.strNameTag = "Chi_Square" Or ucrFamily.clsCurrDistribution.strNameTag = "F" Or ucrFamily.clsCurrDistribution.strNameTag = "Hypergeometric" Then
+                If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Extreme_Value" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Binomial" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bernouli" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Students_t" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Chi_Square" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "F" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Hypergeometric" Then
                     clsROneVarFitModel.AddParameter("start", clsRFunctionParameter:=clsRStartValues)
                     ' TODO llplot() no longer works with starting values. However, the mle's will not plot without starting values for these variables
                 End If
             End If
         Else
             ucrChkConvertVariate.Visible = False
-            'UcrBase.clsRsyntax.RemoveParameter("data")
+            UcrBase.clsRsyntax.RemoveParameter("data")
         End If
     End Sub
 
@@ -365,16 +375,16 @@ Public Class dlgOneVarFitModel
         If rdoGeneralCase.Checked Then
             FitDistFunction()
         ElseIf rdoExactCase.Checked Then
-            If ucrFamily.clsCurrDistribution.strNameTag = "Poisson" Then
+            If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" Then
                 grpVarAndWilcoxSign.Hide()
                 grpVarAndWilcox.Hide()
-                If ucrFamily.clsCurrDistribution.strNameTag = "Poisson" AndAlso (UcrReceiver.strCurrDataType = "factor" OrElse UcrReceiver.strCurrDataType = "character") Then
+                If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" AndAlso (UcrReceiver.strCurrDataType = "factor" OrElse UcrReceiver.strCurrDataType = "character") Then
                     UcrReceiver.Clear()
                 End If
                 clsRPoissonTest.AddParameter("T", clsRFunctionParameter:=clsRMean)
                 clsRPoissonTest.AddParameter("x", clsRFunctionParameter:=clsRLength)
                 UcrBase.clsRsyntax.SetBaseRFunction(clsRPoissonTest)
-            ElseIf ucrFamily.clsCurrDistribution.strNameTag = "Normal" Then
+            ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal" Then
                 grpVarAndWilcox.Show()
                 grpVarAndWilcoxSign.Hide()
                 If rdoExactCase.Checked Then
@@ -394,7 +404,7 @@ Public Class dlgOneVarFitModel
                         UcrBase.clsRsyntax.SetBaseRFunction(clsVarTest)
                     End If
                 End If
-            ElseIf ucrFamily.clsCurrDistribution.strNameTag = "Bernouli" Then
+            ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bernouli" Then
                 grpVarAndWilcoxSign.Hide()
                 grpVarAndWilcox.Hide()
                 SetBinomialTest()
@@ -416,7 +426,7 @@ Public Class dlgOneVarFitModel
         If rdoGeneralCase.Checked Then
             UcrReceiver.SetIncludedDataTypes({"integer", "numeric", "character", "factor"})
         ElseIf rdoExactCase.Checked Then
-            If ucrFamily.clsCurrDistribution.strNameTag = "Normal" Or ucrFamily.clsCurrDistribution.strNameTag = "Poisson" Then
+            If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" Then
                 UcrReceiver.SetIncludedDataTypes({"integer", "numeric"})
                 If (UcrReceiver.strCurrDataType = "factor" OrElse UcrReceiver.strCurrDataType = "character") Then
                     UcrReceiver.Clear()
@@ -430,12 +440,12 @@ Public Class dlgOneVarFitModel
 
     Public Sub FitDistFunction()
         ' UcrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModel)
-        clsROneVarFitModel.AddParameter("distr", Chr(34) & ucrFamily.clsCurrDistribution.strRName & Chr(34))
+        clsROneVarFitModel.AddParameter("distr", Chr(34) & ucrDistributionChoice.clsCurrDistribution.strRName & Chr(34))
         SetDataParameter()
     End Sub
 
     Private Sub SetBinomialTest()
-        If ucrFamily.clsCurrDistribution.strNameTag = "Binomial" Then
+        If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Binomial" Then
             UcrReceiver.SetDataType(strTemp:="integer" OrElse "numeric" OrElse "character" OrElse "factor")
         End If
         If ucrChkBinModify.Checked Then
@@ -458,21 +468,21 @@ Public Class dlgOneVarFitModel
 
     Private Sub PlotResiduals()
         clsRplot.AddParameter("x", clsRFunctionParameter:=clsRfitdist)
-        clsRfitdist.AddParameter("distr", Chr(34) & ucrFamily.clsCurrDistribution.strRName & Chr(34))
-        If ucrFamily.clsCurrDistribution.strNameTag = "Poisson" Then
+        clsRfitdist.AddParameter("distr", Chr(34) & ucrDistributionChoice.clsCurrDistribution.strRName & Chr(34))
+        If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" Then
             clsRConvertInteger.SetRCommand("as.integer")
             clsRfitdist.AddParameter("data", clsRFunctionParameter:=clsRConvertInteger)
         Else
             clsRConvertVector.SetRCommand("as.vector")
             clsRfitdist.AddParameter("data", clsRFunctionParameter:=clsRConvertVector)
         End If
-        If ucrFamily.clsCurrDistribution.strNameTag = "Bernouli" Then
+        If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bernouli" Then
             clsRBinomStart.SetRCommand("mean")
             clsRfitdist.AddParameter("start", clsRFunctionParameter:=clsRBinomStart)
         End If
     End Sub
 
-    Private Sub cmdFittingOptions_Click(sender As Object, e As EventArgs) Handles cmdFittingOptions.Click
+    Private Sub cmdFittingOptions_Click(sender As Object, e As EventArgs)
         sdgOneVarFitModel.SetRCode(clsROneVarFitModel, bResetSubdialog)
         bResetSubdialog = False
         sdgOneVarFitModel.ShowDialog()
@@ -481,7 +491,7 @@ Public Class dlgOneVarFitModel
         TestOKEnabled()
     End Sub
 
-    Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
+    Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs)
         sdgOneVarFitModDisplay.SetRCode(UcrBase.clsRsyntax, clsRNewOneVarFitModel:=clsROneVarFitModel, clsNewRLogLikFunction:=clsRLogLikFunction, clsNewRplotFunction:=clsRplotFunction, clsNewRplotPPComp:=clsRplotPPComp, clsNewRplotCdfcomp:=clsRplotCdfcomp, clsNewRplotQqComp:=clsRplotQqComp, clsNewRplotDenscomp:=clsRplotDenscomp, bReset:=bResetSubdialog)
         bResetSubdialog = False
         sdgOneVarFitModDisplay.ShowDialog()
@@ -506,7 +516,7 @@ Public Class dlgOneVarFitModel
             ' sdgOneVarFitModDisplay.RunLikelihoods()
             'End If
         ElseIf rdoExactCase.Checked Then
-            If ucrFamily.clsCurrDistribution.strNameTag = "Normal" OrElse ucrFamily.clsCurrDistribution.strNameTag = "Poisson" Then ' can remove this line once Bernouli residual plots are working
+            If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal" OrElse ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" Then ' can remove this line once Bernouli residual plots are working
                 PlotResiduals()
                 'frmMain.clsRLink.RunScript(clsRplot.ToScript(), 3)
             End If
@@ -527,8 +537,8 @@ Public Class dlgOneVarFitModel
             cmdDisplayOptions.Visible = False
             ucrChkConvertVariate.Visible = False
             grpConditions.Visible = True
-            If ucrFamily.clsCurrDistribution.bIsExact = True Then
-                If ucrFamily.clsCurrDistribution.strNameTag = "Normal" Then
+            If ucrDistributionChoice.clsCurrDistribution.bIsExact = True Then
+                If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal" Then
                     grpVarAndWilcoxSign.Hide()
                     grpVarAndWilcox.Show()
                     'rdoMeanWilcox.Visible = True
@@ -539,9 +549,9 @@ Public Class dlgOneVarFitModel
                     If rdoVarSign.Checked Then
                         ucrNudHyp.SetMinMax(0.01, 1)
                     Else
-                        ucrNudHyp.SetMinMax(ucrFamily.clsCurrDistribution.lstExact(5), ucrNudHyp.Value = ucrFamily.clsCurrDistribution.lstExact(2))
+                        ucrNudHyp.SetMinMax(ucrDistributionChoice.clsCurrDistribution.lstExact(5), ucrNudHyp.Value = ucrDistributionChoice.clsCurrDistribution.lstExact(2))
                     End If
-                ElseIf ucrFamily.clsCurrDistribution.strNameTag = "No_Distribution" Then
+                ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "No_Distribution" Then
                     grpVarAndWilcox.Hide()
                     grpVarAndWilcoxSign.Show()
 
@@ -551,20 +561,20 @@ Public Class dlgOneVarFitModel
                     ' rdoEnorm.Visible = False
                     ' rdoMeanWilcox.Text = "None-Wilcoxon"
                     ' rdoVarSign.Text = "None-Sign"
-                    ucrNudHyp.Minimum = ucrFamily.clsCurrDistribution.lstExact(5)
-                    ucrNudHyp.Value = ucrFamily.clsCurrDistribution.lstExact(2)
+                    ucrNudHyp.Minimum = ucrDistributionChoice.clsCurrDistribution.lstExact(5)
+                    ucrNudHyp.Value = ucrDistributionChoice.clsCurrDistribution.lstExact(2)
                 Else
-                    ucrNudHyp.Minimum = ucrFamily.clsCurrDistribution.lstExact(5)
-                    ucrNudHyp.Value = ucrFamily.clsCurrDistribution.lstExact(2)
+                    ucrNudHyp.Minimum = ucrDistributionChoice.clsCurrDistribution.lstExact(5)
+                    ucrNudHyp.Value = ucrDistributionChoice.clsCurrDistribution.lstExact(2)
                     'grpVarAndWilcoxSign.Hide()
                     ' grpVarAndWilcox.Hide()
                     'rdoMeanWilcox.Visible = False
                     ' rdoVarSign.Visible = False
                     ' rdoEnorm.Visible = False
                 End If
-                ucrNudHyp.Increment = ucrFamily.clsCurrDistribution.lstExact(3)
-                ucrNudHyp.DecimalPlaces = ucrFamily.clsCurrDistribution.lstExact(4)
-                ucrNudHyp.Maximum = ucrFamily.clsCurrDistribution.lstExact(6)
+                ucrNudHyp.Increment = ucrDistributionChoice.clsCurrDistribution.lstExact(3)
+                ucrNudHyp.DecimalPlaces = ucrDistributionChoice.clsCurrDistribution.lstExact(4)
+                ucrNudHyp.Maximum = ucrDistributionChoice.clsCurrDistribution.lstExact(6)
             End If
         End If
     End Sub
@@ -578,7 +588,7 @@ Public Class dlgOneVarFitModel
         DataTypeAccepted()
     End Sub
 
-    Private Sub ucrDistributions_cboDistributionsIndexChanged() Handles ucrFamily.DistributionsIndexChanged
+    Private Sub ucrDistributions_cboDistributionsIndexChanged() Handles ucrDistributionChoice.DistributionsIndexChanged
         SetBaseFunction()
         BinomialConditions()
         SetDataParameter()
@@ -592,7 +602,7 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub BinomialConditions()
-        If rdoExactCase.Checked AndAlso ucrFamily.clsCurrDistribution.strNameTag = "Bernouli" Then
+        If rdoExactCase.Checked AndAlso ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bernouli" Then
             'ucrChkBinModify.Enabled = True
             ucrChkBinModify.Visible = True
             If ucrChkBinModify.Checked Then

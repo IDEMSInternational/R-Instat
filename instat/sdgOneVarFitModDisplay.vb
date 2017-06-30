@@ -49,12 +49,12 @@ Public Class sdgOneVarFitModDisplay
         ucrPnlPlots.AddRadioButton(rdoQQPlot)
         ucrPnlPlots.AddRadioButton(rdoPPPlot)
 
-        ucrPnlPlots.AddFunctionNamesCondition(rdoNoPlot, {"plot", "cdfcomp", "denscomp", "qqcomp", "ppcomp"}, False)
-        ucrPnlPlots.AddFunctionNamesCondition(rdoPlotAll, "plot")
-        ucrPnlPlots.AddFunctionNamesCondition(rdoCDFPlot, "cdfcomp")
-        ucrPnlPlots.AddFunctionNamesCondition(rdoDensityPlot, "denscomp")
-        ucrPnlPlots.AddFunctionNamesCondition(rdoQQPlot, "qqcomp")
-        ucrPnlPlots.AddFunctionNamesCondition(rdoPPPlot, "ppcomp")
+        ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoNoPlot, {"plot", "cdfcomp", "denscomp", "qqcomp", "ppcomp"}, False)
+        ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoPlotAll, {"plot"})
+        ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoCDFPlot, {"cdfcomp"})
+        ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoDensityPlot, {"denscomp"})
+        ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoQQPlot, {"qqcomp"})
+        ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoPPPlot, {"ppcomp"})
 
         ' ucrSaveLikelihood.SetDataFrameSelector(dlgOneVarFitModel.ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
         ' ucrSavePlots.SetDataFrameSelector(dlgOneVarFitModel.ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
@@ -79,14 +79,13 @@ Public Class sdgOneVarFitModDisplay
         clsRplotQqComp = clsNewRplotQqComp
         clsRplotDenscomp = clsNewRplotDenscomp
         clsRLogLikFunction = clsNewRLogLikFunction
-        ucrPnlLikelihood.SetRCode(clsRLogLikFunction, bReset)
-        ucrChkPLotLogLik.SetRCode(clsRLogLikFunction, bReset)
-        ucrPnlPlots.SetRCode(clsRplotFunction, bReset)
+        ucrPnlLikelihood.SetRCode(clsRLogLikFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkPLotLogLik.SetRCode(clsRLogLikFunction, bReset, bCloneIfNeeded:=True)
+        ucrPnlPlots.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
     End Sub
 
     Private Sub ucrPnlPlots_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlPlots.ControlValueChanged
         If rdoPlotAll.Checked Then
-            clsRplotFunction.AddParameter("x", clsRFunctionParameter:=clsModel)
             clsRSyntax.AddToAfterCodes(clsRplotFunction, iPosition:=1)
             clsRSyntax.RemoveFromAfterCodes(clsRplotDenscomp)
             clsRSyntax.RemoveFromAfterCodes(clsRplotQqComp)
