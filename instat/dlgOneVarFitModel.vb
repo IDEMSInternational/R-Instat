@@ -44,11 +44,6 @@ Public Class dlgOneVarFitModel
         UcrBase.clsRsyntax.iCallType = 2
         UcrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
-        'sdgOneVarFitModDisplay.InitialiseDialog()
-        'sdgOneVarFitModel.InitialiseDialog()
-
-
-
         UcrReceiver.Selector = ucrSelectorOneVarFitMod
         UcrReceiver.SetMeAsReceiver()
 
@@ -70,7 +65,6 @@ Public Class dlgOneVarFitModel
         ucrSaveModel.SetAssignToIfUncheckedValue("last_model")
 
         ucrChkBinModify.SetText("Modify Conditions for 'Success'")
-
         ' sdgOneVarFitModDisplay.SetModelFunction(clsROneVarFitModel)
         'sdgOneVarFitModel.SetMyRFunction(clsROneVarFitModel)
         'sdgOneVarFitModDisplay.SetDistribution(ucrFamily)
@@ -122,6 +116,9 @@ Public Class dlgOneVarFitModel
         dctucrOperator.Add("(>)", ">")
         dctucrOperator.Add("(>=)", ">=")
         dctucrOperator.Add("(!=)", "!=")
+
+        'Disabled for now
+        rdoExactCase.Enabled = False
         'ucrOperator.SetItems(dctucrOperator)
         ' ucrVariables.SetItemsTypeAsColumns()    'we want SetItemsTypeAs factors in the column
 
@@ -159,7 +156,8 @@ Public Class dlgOneVarFitModel
 
         ucrSelectorOneVarFitMod.Reset()
         ucrSaveModel.Reset()
-        ' ucrOperator.SetName("==")
+
+        'General Case
         clsROneVarFitModel.SetPackageName("fitdistrplus")
         clsROneVarFitModel.SetRCommand("fitdist")
         clsROneVarFitModel.AddParameter("method", Chr(34) & "mle" & Chr(34))
@@ -175,6 +173,8 @@ Public Class dlgOneVarFitModel
         clsRfitdist.SetPackageName("fitdistrplus")
         clsRfitdist.SetRCommand("fitdist")
         BinomialConditions()
+
+        'Exact Case
 
         'TTest
         clsRTTest.SetPackageName("stats")
@@ -245,7 +245,7 @@ Public Class dlgOneVarFitModel
         SetBaseFunction()
         clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertInteger)
         clsRLogLikFunction.AddParameter("mlefit", clsRFunctionParameter:=clsROneVarFitModel)
-        clsROneVarFitModel.SetAssignTo("last_model", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model")
+        clsROneVarFitModel.SetAssignTo(ucrSaveModel.GetText, strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:=ucrSaveModel.GetText)
         UcrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModel)
         SetDistributions()
         bResetSubdialog = True
@@ -273,7 +273,7 @@ Public Class dlgOneVarFitModel
         UcrReceiver.AddAdditionalCodeParameterPair(clsRplotQqComp, New RParameter("ft", 0), iAdditionalPairNo:=4)
         UcrReceiver.AddAdditionalCodeParameterPair(clsRplotDenscomp, New RParameter("ft", 0), iAdditionalPairNo:=4)
 
-
+        ucrSaveModel.SetRCode(clsROneVarFitModel, bReset)
         ucrChkConvertVariate.AddAdditionalCodeParameterPair(clsROneVarFitModel, ucrChkConvertVariate.GetParameter(), iAdditionalPairNo:=1)
         ucrChkConvertVariate.AddAdditionalCodeParameterPair(clsROneVarFitModel, ucrChkConvertVariate.GetParameter(), iAdditionalPairNo:=2)
         ucrChkConvertVariate.AddAdditionalCodeParameterPair(clsROneVarFitModel, ucrChkConvertVariate.GetParameter(), iAdditionalPairNo:=3)
@@ -500,11 +500,6 @@ Public Class dlgOneVarFitModel
         End If
     End Sub
 
-    Private Sub chkConvertToVariate_CheckedChanged(sender As Object, e As EventArgs)
-        SetDataParameter()
-        Display()
-    End Sub
-
     Private Sub UcrBase_ClickOk(sender As Object, e As EventArgs) Handles UcrBase.ClickOk
         If rdoGeneralCase.Checked Then
             ' If sdgOneVarFitModel.rdoMle.Checked AndAlso (sdgOneVarFitModDisplay.rdoLoglik.Checked Or sdgOneVarFitModDisplay.rdoLik.Checked) Then
@@ -656,5 +651,8 @@ Public Class dlgOneVarFitModel
         DataTypeAccepted()
     End Sub
 
-
+    Private Sub ucrChkConvertVariate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkConvertVariate.ControlValueChanged
+        SetDataParameter()
+        Display()
+    End Sub
 End Class
