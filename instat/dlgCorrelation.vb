@@ -93,6 +93,7 @@ Public Class dlgCorrelation
         ucrSaveModel.SetDataFrameSelector(ucrSelectorCorrelation.ucrAvailableDataFrames)
         ucrSaveModel.SetCheckBoxText("Result Name:")
         ucrSaveModel.SetIsComboBox()
+        ucrSaveModel.SetAssignToIfUncheckedValue("last_model")
 
         ucrPnlColumns.AddToLinkedControls({ucrReceiverFirstColumn, ucrNudConfidenceInterval, ucrReceiverSecondColumn}, {rdoTwoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlColumns.AddToLinkedControls({ucrReceiverMultipleColumns}, {rdoMultipleColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -135,9 +136,9 @@ Public Class dlgCorrelation
         clsRGraphicsFuction.AddParameter("data", clsRFunctionParameter:=clsTempFunc)
         clsRGGscatMatrixFunction.AddParameter("data", clsRFunctionParameter:=clsTempFunc)
         clsRGGcorrGraphicsFunction.AddParameter("data", "NULL")
-
+        clsCorrelationFunction.SetAssignTo("last_model", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model")
+        clsCorrelationTestFunction.SetAssignTo("last_model", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model")
         ucrBase.clsRsyntax.iCallType = 2
-        'clsCorrelationTestFunction.iCallType = 2
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationFunction)
     End Sub
@@ -157,6 +158,7 @@ Public Class dlgCorrelation
         ucrPnlMethod.SetRCode(clsCorrelationTestFunction, bReset)
         ucrPnlCompletePairwise.SetRCode(clsCorrelationFunction, bReset)
         ucrSaveModel.SetRCode(clsCorrelationFunction, bReset)
+        ucrSaveModel.AddAdditionalRCode(clsCorrelationTestFunction, 1)
     End Sub
 
     Public Sub TestOKEnabled()

@@ -112,6 +112,7 @@ Public Class sdgCorrPlot
         ucrInputComboGeom.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
         ucrChkLabel.SetRSyntax(clsRsyntax, bReset)
         ucrSaveGraph.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
+        ucrSaveGraph.AddAdditionalRCode(clsRGraphicsFuction, 1)
         ucrChkColor.SetRSyntax(clsRsyntax, bReset)
         ucrPnlGraphType.SetRSyntax(clsRsyntax, bReset)
         clsRGraphicsFuction.AddParameter("columns", clsColFunction)
