@@ -351,7 +351,7 @@ Public Class dlgRegressionSimple
 
     Private Sub ucrChkFunction_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFunction.ControlValueChanged
         If ucrChkFunction.Checked Then
-            sdgVariableTransformations.SetRCodeForControls(clsNewLMorGLM:=clsLMOrGLM, clsNewFormulaOperator:=clsFormulaOperator, bReset:=bResetSubDialog, clsRXVariableNew:=clsRXVariable, clsRYVariableNew:=clsRYVariable, clsRModelNew:=clsModel)
+            'sdgVariableTransformations.SetRCodeForControls(clsNewLMorGLM:=clsLMOrGLM, clsNewFormulaOperator:=clsFormulaOperator, bReset:=bResetSubDialog, clsRXVariableNew:=clsRXVariable, clsRYVariableNew:=clsRYVariable, clsRModelNew:=clsModel)
             sdgVariableTransformations.ShowDialog()
             ExplanatoryFunctionSelect()
             bResetSubDialog = False
@@ -687,7 +687,7 @@ Public Class dlgRegressionSimple
                 ucrChkFunction.Visible = False
             End If
             If ucrChkFunction.Checked Then
-                sdgVariableTransformations.ModelFunction(False)
+                'sdgVariableTransformations.ModelFunction(False)
             Else
                 sdgVariableTransformations.rdoIdentity.Checked = True
                 'clsRLmOrGLM.AddParameter(strParameterValue:=ucrExplanatory.GetVariableNames(bWithQuotes:=False))
