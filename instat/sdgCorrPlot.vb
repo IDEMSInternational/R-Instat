@@ -27,20 +27,25 @@ Public Class sdgCorrPlot
     End Sub
 
     Public Sub InitialiseControls()
+        Dim dctGeom As New Dictionary(Of String, String)
+        dlgCorrelation.ucrBase.clsRsyntax.iCallType = 0
+
         ucrNudMaximumSize.SetParameter(New RParameter("max_size", 1))
         ucrNudMaximumSize.SetMinMax(1, 10)
+
         ucrNudMinimunSize.SetParameter(New RParameter("min_size", 2))
         ucrNudMinimunSize.SetMinMax(1, 5)
-        dlgCorrelation.ucrBase.clsRsyntax.iCallType = 0
+
         ucrChkLabel.SetParameter(New RParameter("label", 4))
         ucrChkLabel.SetText("label")
+
         ucrNudAlphaCorr.SetMinMax(0, 1)
         ucrNudAlphaCorr.Increment = 0.01
 
         ucrSaveGraph.SetPrefix("CorGraph")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(dlgCorrelation.ucrSelectorCorrelation.ucrAvailableDataFrames)
-        ucrSaveGraph.SetCheckBoxText("Save Graph:")
+        ucrSaveGraph.SetCheckBoxText("Save Graph")
         ucrSaveGraph.SetIsComboBox()
 
         ucrReceiveFactor.SetParameter(New RParameter("data", 1))
@@ -50,9 +55,6 @@ Public Class sdgCorrPlot
         ucrReceiveFactor.SetDataType("factor")
         ucrReceiveFactor.SetMeAsReceiver()
 
-        ucrSelectFactor.Reset()
-        ucrReceiveFactor.Selector = ucrSelectFactor
-        ucrReceiveFactor.SetDataType("factor")
         ucrSelectFactor.Reset()
 
         ucrPnlGraphType.AddToLinkedControls(ucrInputComboGeom, {rdoCorrelationPlot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -73,7 +75,6 @@ Public Class sdgCorrPlot
         ucrReceiveFactor.SetLinkedDisplayControl(lblFactorVariable)
         ucrNudAlpha.SetLinkedDisplayControl(lblAlpha)
 
-        Dim dctGeom As New Dictionary(Of String, String)
         ucrInputComboGeom.SetParameter(New RParameter("geom", 3))
         dctGeom.Add("Tile", Chr(34) & "tile" & Chr(34))
         dctGeom.Add("Circle", Chr(34) & "circle" & Chr(34))

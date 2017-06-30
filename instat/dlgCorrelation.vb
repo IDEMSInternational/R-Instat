@@ -60,7 +60,6 @@ Public Class dlgCorrelation
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         'TODO: Fix bugs produced when rdoScatterplotMatrix is checked. Disabled for now
-        ucrChkCorrelationMatrix.Enabled = False
         sdgCorrPlot.rdoScatterPlotMatrix.Enabled = False
 
         ucrNudConfidenceInterval.SetParameter(New RParameter("conf.level", 3))
@@ -87,16 +86,20 @@ Public Class dlgCorrelation
 
         'ucrChk
         ucrChkCorrelationMatrix.SetText("Correlation Matrix")
+        ucrChkCorrelationMatrix.Enabled = False
 
         ucrSaveModel.SetPrefix("Cor")
         ucrSaveModel.SetSaveTypeAsModel()
         ucrSaveModel.SetDataFrameSelector(ucrSelectorCorrelation.ucrAvailableDataFrames)
-        ucrSaveModel.SetCheckBoxText("Result Name:")
+        ucrSaveModel.SetCheckBoxText("Result Name")
         ucrSaveModel.SetIsComboBox()
         ucrSaveModel.SetAssignToIfUncheckedValue("last_model")
 
         ucrPnlColumns.AddToLinkedControls({ucrReceiverFirstColumn, ucrNudConfidenceInterval, ucrReceiverSecondColumn}, {rdoTwoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrReceiverFirstColumn.SetLinkedDisplayControl(lblFirstColumn)
+        ucrReceiverSecondColumn.SetLinkedDisplayControl(lblSecondColumn)
         ucrPnlColumns.AddToLinkedControls({ucrReceiverMultipleColumns}, {rdoMultipleColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrReceiverMultipleColumns.SetLinkedDisplayControl(lblSelectedVariables)
         ucrNudConfidenceInterval.SetLinkedDisplayControl(lblConfInterval)
         ucrPnlColumns.AddToLinkedControls(ucrPnlCompletePairwise, {rdoMultipleColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlCompletePairwise.SetLinkedDisplayControl(grpMissing)
@@ -113,40 +116,41 @@ Public Class dlgCorrelation
 
         ucrSelectorCorrelation.Reset()
         ucrSaveModel.Reset()
-        clsRGGcorrGraphicsFunction.SetPackageName("GGally")
-        clsRGGcorrGraphicsFunction.SetRCommand("ggcorr")
-        clsRGGcorrGraphicsFunction.iCallType = 3
+
+        clsTempFunc = ucrSelectorCorrelation.ucrAvailableDataFrames.clsCurrDataFrame
+        clsTempFunc.AddParameter("remove_attr", "TRUE")
+
         clsRGraphicsFuction.SetPackageName("GGally")
         clsRGraphicsFuction.SetRCommand("ggpairs")
         clsRGraphicsFuction.iCallType = 3
+        clsRGraphicsFuction.AddParameter("data", clsRFunctionParameter:=clsTempFunc)
+
         clsRGGscatMatrixFunction.SetPackageName("GGally")
         clsRGGscatMatrixFunction.SetRCommand("ggscatmat")
         clsRGGscatMatrixFunction.iCallType = 3
+        clsRGGscatMatrixFunction.AddParameter("data", clsRFunctionParameter:=clsTempFunc)
 
         clsCorrelationTestFunction.SetRCommand("cor.test")
-        clsCorrelationFunction.SetRCommand("cor")
         clsCorrelationTestFunction.AddParameter("alternative", Chr(34) & "two.sided" & Chr(34))
         clsCorrelationTestFunction.AddParameter("exact", "NULL")
         clsCorrelationTestFunction.AddParameter("conf.level", "0.95")
-        clsCorrelationFunction.AddParameter("use", Chr(34) & "pairwise.complete.obs" & Chr(34))
         clsCorrelationTestFunction.AddParameter("method", Chr(34) & "pearson" & Chr(34))
+
+        clsCorrelationFunction.SetRCommand("cor")
+        clsCorrelationFunction.AddParameter("use", Chr(34) & "pairwise.complete.obs" & Chr(34))
+
+        clsRGGcorrGraphicsFunction.SetPackageName("GGally")
+        clsRGGcorrGraphicsFunction.SetRCommand("ggcorr")
+        clsRGGcorrGraphicsFunction.iCallType = 3
         clsRGGcorrGraphicsFunction.AddParameter("cor_matrix", clsRFunctionParameter:=clsCorrelationFunction)
-        clsTempFunc = ucrSelectorCorrelation.ucrAvailableDataFrames.clsCurrDataFrame
-        clsTempFunc.AddParameter("remove_attr", "TRUE")
-        clsRGraphicsFuction.AddParameter("data", clsRFunctionParameter:=clsTempFunc)
-        clsRGGscatMatrixFunction.AddParameter("data", clsRFunctionParameter:=clsTempFunc)
         clsRGGcorrGraphicsFunction.AddParameter("data", "NULL")
-        clsCorrelationFunction.SetAssignTo("last_model", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model")
+
         clsCorrelationTestFunction.SetAssignTo("last_model", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model")
+        clsCorrelationFunction.SetAssignTo("last_model", strTempDataframe:=ucrSelectorCorrelation.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model")
+
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationFunction)
-    End Sub
-
-    Private Sub cmdPlots_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgCorrPlot.SetRCode(ucrBase.clsRsyntax, clsCorrelationFunction, clsRGGcorrGraphicsFunction, clsRGraphicsFuction, clsRTempFunction, clsRGGscatmatrixFunction, clsColFunction, bReset:=bResetSubdialog)
-        sdgCorrPlot.ShowDialog()
-        bResetSubdialog = False
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -183,18 +187,24 @@ Public Class dlgCorrelation
         'End If
     End Sub
 
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOKEnabled()
+    End Sub
+
+    Private Sub cmdPlots_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgCorrPlot.SetRCode(ucrBase.clsRsyntax, clsCorrelationFunction, clsRGGcorrGraphicsFunction, clsRGraphicsFuction, clsRTempFunction, clsRGGscatMatrixFunction, clsColFunction, bReset:=bResetSubdialog)
+        sdgCorrPlot.ShowDialog()
+        bResetSubdialog = False
+    End Sub
+
     Private Sub ReopenDialog()
         If rdoMultipleColumns.Checked Then
             grpMissing.Visible = True
         Else
             grpMissing.Visible = False
         End If
-    End Sub
-
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
-        SetRCodeForControls(True)
-        TestOKEnabled()
     End Sub
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
