@@ -181,7 +181,7 @@ Public Class dlgStartofRains
         'save
         ucrInputNewColumnName.SetParameter(New RParameter("result_name", 2))
         ucrInputNewColumnName.SetDataFrameSelector(ucrSelectorForStartofRains.ucrAvailableDataFrames)
-        ucrInputNewColumnName.SetName("Start_of_Rains")
+        ucrInputNewColumnName.SetName("start")
     End Sub
 
     Private Sub SetDefaults()
@@ -243,7 +243,7 @@ Public Class dlgStartofRains
         clsDPCombineOperator.Clear()
 
         ucrReceiverDate.SetMeAsReceiver()
-        ucrInputNewColumnName.SetName("Start_of_Rains")
+        ucrInputNewColumnName.SetName("start")
         ucrSelectorForStartofRains.Reset()
 
         ' Adding a key
