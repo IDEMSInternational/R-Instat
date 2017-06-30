@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class sdgCorrPlot
     Public clsRGGscatmatrixFunction, clsRGGcorrGraphicsFunction, clsCorrelationFunction, clsRGraphicsFuction, clsRTempFunction As New RFunction
@@ -54,7 +55,6 @@ Public Class sdgCorrPlot
         ucrReceiveFactor.Selector = ucrSelectFactor
         ucrReceiveFactor.SetDataType("factor")
         ucrSelectFactor.Reset()
-        ucrSaveGraph.Reset()
 
         ucrPnlGraphType.AddToLinkedControls(ucrInputComboGeom, {rdoCorrelationPlot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGraphType.AddToLinkedControls(ucrNudMinimunSize, {rdoCorrelationPlot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -76,10 +76,10 @@ Public Class sdgCorrPlot
 
         Dim dctGeom As New Dictionary(Of String, String)
         ucrInputComboGeom.SetParameter(New RParameter("geom", 3))
-        dctGeom.Add("tile", Chr(34) & "tile" & Chr(34))
-        dctGeom.Add("circle", Chr(34) & "circle" & Chr(34))
-        dctGeom.Add("text", Chr(34) & "text" & Chr(34))
-        dctGeom.Add("blank", Chr(34) & "blank" & Chr(34))
+        dctGeom.Add("Tile", Chr(34) & "tile" & Chr(34))
+        dctGeom.Add("Circle", Chr(34) & "circle" & Chr(34))
+        dctGeom.Add("Text", Chr(34) & "text" & Chr(34))
+        dctGeom.Add("Blank", Chr(34) & "blank" & Chr(34))
         ucrInputComboGeom.SetItems(dctGeom)
         ucrInputComboGeom.SetRDefault(Chr(34) & "tile" & Chr(34))
         ucrInputComboGeom.SetDropDownStyleAsNonEditable()
@@ -108,15 +108,16 @@ Public Class sdgCorrPlot
         clsColFunction = clsNewColFunction
         clsRGGscatmatrixFunction = clsNewRGGscatmatrixFunction
 
-        ucrNudMaximumSize.SetRCode(clsRGGcorrGraphicsFunction, bReset)
-        ucrNudMinimunSize.SetRCode(clsRGGcorrGraphicsFunction, bReset)
-        ucrInputComboGeom.SetRCode(clsRGGcorrGraphicsFunction, bReset)
+        ucrNudMaximumSize.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudMinimunSize.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputComboGeom.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
         ucrChkLabel.SetRSyntax(clsRsyntax, bReset)
-        ucrSaveGraph.SetRCode(clsRGGcorrGraphicsFunction, bReset)
+        ucrSaveGraph.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
         ucrChkColor.SetRSyntax(clsRsyntax, bReset)
         ucrPnlGraphType.SetRSyntax(clsRsyntax, bReset)
         clsRGraphicsFuction.AddParameter("columns", clsColFunction)
         clsCorrelationFunction.iCallType = 2
+        Visibility()
     End Sub
 
     Private Sub ucrChkLabel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLabel.ControlValueChanged
@@ -127,18 +128,22 @@ Public Class sdgCorrPlot
         End If
     End Sub
 
-    Private Sub ucrInputComboGeom_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboGeom.ControlValueChanged
-        If ucrInputComboGeom.cboInput.SelectedItem = "circle" Then
+    Private Sub Visibility()
+        If ucrInputComboGeom.cboInput.SelectedItem = "Circle" Then
             ucrNudMinimunSize.Visible = True
             lblMinimumSize.Visible = True
             ucrNudMaximumSize.Visible = True
             lblMaximumSize.Visible = True
-        ElseIf ucrInputComboGeom.cboInput.SelectedItem <> "circle" Then
+        Else
             ucrNudMinimunSize.Visible = False
             lblMinimumSize.Visible = False
             ucrNudMaximumSize.Visible = False
             lblMaximumSize.Visible = False
         End If
+    End Sub
+
+    Private Sub ucrInputComboGeom_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboGeom.ControlValueChanged
+        Visibility()
     End Sub
 
     Private Sub ucrPnlGraphType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGraphType.ControlValueChanged
@@ -163,5 +168,6 @@ Public Class sdgCorrPlot
             clsRsyntax.RemoveFromAfterCodes(clsRGraphicsFuction)
             clsRsyntax.RemoveFromAfterCodes(clsRGGscatmatrixFunction)
         End If
+        Visibility()
     End Sub
 End Class
