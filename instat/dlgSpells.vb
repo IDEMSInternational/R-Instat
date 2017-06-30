@@ -54,22 +54,26 @@ Public Class dlgSpells
         ucrReceiverRainfall.Selector = ucrSelectorForSpells
         ucrReceiverRainfall.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "rain" & Chr(34)})
         ucrReceiverRainfall.bAutoFill = True
+        ucrReceiverRainfall.strSelectorHeading = "Numerics"
 
         ucrReceiverStation.SetParameter(New RParameter("station", 1, False))
         ucrReceiverStation.SetParameterIsString()
         ucrReceiverStation.Selector = ucrSelectorForSpells
         ucrReceiverStation.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "station" & Chr(34)})
         ucrReceiverStation.bAutoFill = True
+        ucrReceiverStation.strSelectorHeading = "Factors"
 
         ucrReceiverYear.Selector = ucrSelectorForSpells
         ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
         ucrReceiverYear.bAutoFill = True
+        ucrReceiverYear.strSelectorHeading = "Numerics"
 
         ucrReceiverDate.SetParameter(New RParameter("date", 0, False))
         ucrReceiverDate.SetParameterIsString()
         ucrReceiverDate.Selector = ucrSelectorForSpells
         ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
         ucrReceiverDate.bAutoFill = True
+        ucrReceiverDate.strSelectorHeading = "Date"
 
         ucrReceiverDOY.SetParameter(New RParameter("day", 0))
         ucrReceiverDOY.SetParameterIsString()
@@ -77,6 +81,7 @@ Public Class dlgSpells
         ucrReceiverDOY.Selector = ucrSelectorForSpells
         ucrReceiverDOY.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "doy" & Chr(34)})
         ucrReceiverDOY.bAutoFill = True
+        ucrReceiverDOY.strSelectorHeading = "Numerics"
 
         clsSubSpellLength1.SetRCommand("list")
         clsMaxValueList.SetRCommand("list")
