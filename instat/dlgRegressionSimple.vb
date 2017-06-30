@@ -126,8 +126,6 @@ Public Class dlgRegressionSimple
         ucrPnlMeansAndVariance.SetLinkedDisplayControl(grpParameters)
         ucrPnlMeansAndVariance.AddToLinkedControls(ucrNudHypothesis, {rdoCompareVariance}, bNewLinkedDisabledIfParameterMissing:=True)
 
-        'sdgSimpleRegOptions.SetRDataFrame(ucrSelectorSimpleReg.ucrAvailableDataFrames)
-        'sdgModelOptions.SetRCIFunction(clsRCIFunction)
     End Sub
 
     Private Sub SetDefaults()
@@ -171,8 +169,6 @@ Public Class dlgRegressionSimple
         ucrSelectorSimpleReg.Reset()
         ucrReceiverResponse.SetMeAsReceiver()
         ucrModelPreview.SetName("")
-
-        'DataTypeAccepted()
 
         clsRGraphicsOperator = clsRegressionDefaults.clsDefaultRGraphicsOperator.Clone
         clsFormulaOperator = clsRegressionDefaults.clsDefaultFormulaOperator.Clone
