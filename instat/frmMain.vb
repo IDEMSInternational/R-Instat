@@ -123,8 +123,8 @@ Public Class frmMain
                 strAutoSavedDataFilePaths = My.Computer.FileSystem.GetFiles(strAutoSaveDataFolderPath).ToArray
                 iDataFiles = strAutoSavedDataFilePaths.Count
             End If
-            If iLogFiles > 0 OrElse iDataFiles > 0 Then
-                If MsgBox("We have detected that R-Instat may have closed unexpectadly last time." & Environment.NewLine & "Would you like to see auto recovery options?", MessageBoxButtons.YesNo, "Auto Recovery") = MsgBoxResult.Yes Then
+            If iLogFiles > 0 OrElse iDataFiles > 0 OrElse iInternalLogFiles > 0 Then
+                If MsgBox("We have detected that R-Instat may have closed unexpectedly last time." & Environment.NewLine & "Would you like to see auto recovery options?", MessageBoxButtons.YesNo, "Auto Recovery") = MsgBoxResult.Yes Then
                     dlgAutoSaveRecovery.strAutoSavedLogFilePaths = strAutoSavedLogFilePaths
                     dlgAutoSaveRecovery.strAutoSavedDataFilePaths = strAutoSavedDataFilePaths
                     dlgAutoSaveRecovery.strAutoSavedInternalLogFilePaths = strAutoSavedInternalLogFilePaths
@@ -879,7 +879,7 @@ Public Class frmMain
                     i = i + 1
                     strTempFile = "data" & i & ".rds"
                 End While
-                strCurrentAutoSaveDataFilePath = strTempFile
+                strCurrentAutoSaveDataFilePath = Path.Combine(strAutoSaveDataFolderPath, strTempFile)
             End If
             clsSaveRDS.SetRCommand("saveRDS")
             clsSaveRDS.AddParameter("object", clsRLink.strInstatDataObject)
@@ -1549,12 +1549,8 @@ Public Class frmMain
         ucrDataViewer.SetCurrentDataFrame(strDataName)
     End Sub
 
-    Private Sub WindroseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WindroseToolStripMenuItem.Click
+    Private Sub WindroseToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgWindrose.ShowDialog()
-    End Sub
-
-    Private Sub WindrosePlotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WindrosePlotToolStripMenuItem.Click
-        dlgWindrosePlot.ShowDialog()
     End Sub
 
     Private Sub CummulativeDistributionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CummulativeDistributionToolStripMenuItem.Click
