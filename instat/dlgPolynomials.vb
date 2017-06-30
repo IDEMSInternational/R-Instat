@@ -38,6 +38,7 @@ Public Class dlgPolynomials
         ucrReceiverPolynomial.Selector = ucrSelectorForPolynomial
         ucrReceiverPolynomial.SetMeAsReceiver()
         ucrReceiverPolynomial.SetIncludedDataTypes({"numeric"})
+        ucrReceiverPolynomial.strSelectorHeading = "Numerics"
         ucrReceiverPolynomial.SetParameterIsRFunction()
 
         ucrPnlType.SetParameter(New RParameter("raw", 1))

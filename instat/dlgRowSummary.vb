@@ -41,7 +41,8 @@ Public Class dlgRowSummary
         ucrReceiverForRowSummaries.SetParameter(New RParameter("X", 0))
         ucrReceiverForRowSummaries.Selector = ucrSelectorForRowSummaries
         ucrReceiverForRowSummaries.SetMeAsReceiver()
-        ucrReceiverForRowSummaries.SetDataType("numeric")
+        ucrReceiverForRowSummaries.strSelectorHeading = "Numerics"
+        ucrReceiverForRowSummaries.SetIncludedDataTypes({"numeric"})
         ucrReceiverForRowSummaries.bUseFilteredData = False
         ucrReceiverForRowSummaries.bForceAsDataFrame = True
         ucrReceiverForRowSummaries.SetParameterIsRFunction()
