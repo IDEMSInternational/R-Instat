@@ -19,13 +19,13 @@ Imports instat.Translations
 Public Class sdgSimpleRegOptions
     Public clsRModelFunction As RFunction
     Public clsRDataFrame As ucrDataFrame
-    Public clsRGraphicsOperator As ROperator
     Public clsRYVariable, clsRXVariable As String
     Public clsRLmOrGLM As RFunction
     Public clsRGraphics As New RSyntax
     Private clsRSyntax As RSyntax
     Public clsRaovFunction, clsRaovpvalFunction, clsRestpvalFunction, clsAutoplot, clsRgeom_point, clsRPredFunction, clsRDFFunction, clsRFittedValues, clsRWriteFitted, clsRResiduals, clsRWriteResiduals, clsRStdResiduals, clsRWriteStdResiduals, clsRLeverage, clsRWriteLeverage As New RFunction
     Public clsVisReg, clsRaesFunction, clsRStat_smooth, clsR_ribbon, clsRaes_ribbon As New RFunction
+    Public clsWhichFunction As RFunction
 
     'Display tab functions
     Public clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As RFunction
@@ -215,7 +215,7 @@ Public Class sdgSimpleRegOptions
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewRSyntax As RSyntax, Optional clsNewFormulaFunction As RFunction = Nothing, Optional clsNewAnovaFunction As RFunction = Nothing, Optional clsNewRSummaryFunction As RFunction = Nothing, Optional clsNewConfint As RFunction = Nothing, Optional clsNewVisReg As RFunction = Nothing, Optional clsNewRaovpvalFunction As RFunction = Nothing, Optional clsNewRgeom_point As RFunction = Nothing, Optional clsNewRWriteResiduals As RFunction = Nothing, Optional clsNewAutoplot As RFunction = Nothing, Optional clsNewRestpvalFunction As RFunction = Nothing, Optional clsNewRWriteLeverage As RFunction = Nothing, Optional clsNewRWriteStdResiduals As RFunction = Nothing, Optional clsNewRLmOrGLM As RFunction = Nothing, Optional clsNewRModelFunction As RFunction = Nothing, Optional clsNewRXVariable As String = Nothing, Optional clsNewRYVariable As String = Nothing, Optional clsNewRWriteFitted As RFunction = Nothing, Optional clsNewRFittedValues As RFunction = Nothing, Optional clsNewRGraphicsOperator As ROperator = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewRSyntax As RSyntax, Optional clsNewFormulaFunction As RFunction = Nothing, Optional clsNewAnovaFunction As RFunction = Nothing, Optional clsNewRSummaryFunction As RFunction = Nothing, Optional clsNewConfint As RFunction = Nothing, Optional clsNewVisReg As RFunction = Nothing, Optional clsNewRaovpvalFunction As RFunction = Nothing, Optional clsNewRgeom_point As RFunction = Nothing, Optional clsNewRWriteResiduals As RFunction = Nothing, Optional clsNewAutoplot As RFunction = Nothing, Optional clsNewRestpvalFunction As RFunction = Nothing, Optional clsNewRWriteLeverage As RFunction = Nothing, Optional clsNewRWriteStdResiduals As RFunction = Nothing, Optional clsNewRLmOrGLM As RFunction = Nothing, Optional clsNewRModelFunction As RFunction = Nothing, Optional clsNewRXVariable As String = Nothing, Optional clsNewRYVariable As String = Nothing, Optional clsNewRWriteFitted As RFunction = Nothing, Optional clsNewRFittedValues As RFunction = Nothing, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
@@ -230,7 +230,6 @@ Public Class sdgSimpleRegOptions
         'Graph functions
         clsVisReg = clsNewVisReg
 
-        clsRGraphicsOperator = clsNewRGraphicsOperator
         clsRLmOrGLM = clsNewRLmOrGLM
         clsRestpvalFunction = clsNewRestpvalFunction
         clsRModelFunction = clsNewRModelFunction
@@ -245,6 +244,17 @@ Public Class sdgSimpleRegOptions
         clsRWriteStdResiduals = clsNewRWriteStdResiduals
         clsRWriteLeverage = clsNewRWriteLeverage
 
+        If clsAutoplot.ContainsParameter("which") Then
+            clsWhichFunction = clsAutoplot.GetParameter("which").clsArgumentCodeStructure
+        Else
+            clsWhichFunction = New RFunction
+            clsWhichFunction.SetRCommand("c")
+            clsWhichFunction.AddParameter("1", "1", bIncludeArgumentName:=False)
+            clsWhichFunction.AddParameter("2", "2", bIncludeArgumentName:=False)
+            clsWhichFunction.AddParameter("3", "3", bIncludeArgumentName:=False)
+            clsWhichFunction.AddParameter("5", "5", bIncludeArgumentName:=False)
+            clsAutoplot.AddParameter("which", clsRFunctionParameter:=clsWhichFunction)
+        End If
         'Display tab controls
         ucrChkModel.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
         ucrChkANOVA.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
@@ -293,7 +303,6 @@ Public Class sdgSimpleRegOptions
         ElseIf rdoScaleLocation.Checked Then
             clsAutoplot.RemoveParameterByName("ncol")
             clsAutoplot.AddParameter("which", 3)
-
         End If
 
         'Multiple plots
@@ -349,9 +358,11 @@ Public Class sdgSimpleRegOptions
         End If
     End Sub
 
-    Private Sub ucrChkMultiplePlots_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMultiplePlots.ControlValueChanged
-        If ucrChkMultiplePlots.Checked Then
-            clsRSyntax.AddToAfterCodes(clsAutoplot, iPosition:=4)
+    Private Sub ucrPnlMutiplePlots_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMutiplePlots.ControlValueChanged, ucrPnlIndividualPlots.ControlValueChanged
+        'Individual Plots and Multiple Plots
+        SetWhichParameter()
+        If ucrChkIndividualPlots.Checked OrElse ucrChkMultiplePlots.Checked Then
+            clsRSyntax.AddToAfterCodes(clsAutoplot, iPosition:=5)
         Else
             clsRSyntax.RemoveFromAfterCodes(clsAutoplot)
         End If
@@ -361,36 +372,55 @@ Public Class sdgSimpleRegOptions
         clsRDataFrame = clsRDataFr
     End Sub
 
-    Private Sub ucrPnlMutiplePlots_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMutiplePlots.ControlValueChanged, ucrPnlIndividualPlots.ControlValueChanged
-        'Individual Plots and Multiple Plots
-        If ucrChkIndividualPlots.Checked OrElse ucrChkMultiplePlots.Checked Then
-            If (rdoResidualsFitted.Checked OrElse rdoQQ.Checked OrElse rdoResidualsLeverage.Checked OrElse rdoScaleLocation.Checked OrElse rdoCooksDistance.Checked OrElse rdoCooksDistanceLeverage.Checked OrElse rdoFourPlots.Checked OrElse rdoSixPlots2Rows.Checked OrElse rdoSixPlots3Rows.Checked) Then
-                clsRSyntax.AddToAfterCodes(clsRGraphicsOperator, iPosition:=6)
-            End If
-        Else
-            clsRSyntax.RemoveFromAfterCodes(clsRGraphicsOperator)
-        End If
-    End Sub
-
-    Private Sub ucrSaveFittedColumnName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveFittedColumnName.ControlValueChanged
-        ' clsRSyntax.AddToAfterCodes(clsRWriteFitted, iPosition:=8)
-    End Sub
-
-    Private Sub ucrSaveResidualsColumnName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveResidualsColumnName.ControlValueChanged
-        'clsRSyntax.AddToAfterCodes(clsRWriteResiduals, iPosition:=9)
-    End Sub
-
-    Private Sub ucrSaveStdResidualsColumnName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveStdResidualsColumnName.ControlValueChanged
-        'clsRSyntax.AddToAfterCodes(clsRWriteStdResiduals, iPosition:=10)
-    End Sub
-
-    Private Sub ucrSaveLeverageColumnName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveLeverageColumnName.ControlValueChanged
-        'clsRSyntax.AddToAfterCodes(clsRWriteLeverage, iPosition:=11)
-    End Sub
-
     Private Sub ucrchkRugs_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkRugs.ControlValueChanged
         If ucrChkRugs.Checked Then
             rdoPartial.Checked = True
+        End If
+    End Sub
+
+    Private Sub SetWhichParameter()
+        'Add rdoNon for none option
+        'If rdoNone.Checked Then
+        '    clsAutoplot.RemoveParameterByName("which")
+        'End If
+        'Make this a radio button and this an ElseIf
+        If ucrChkMultiplePlots.Checked Then
+            If rdoFourPlots.Checked Then
+                clsWhichFunction.ClearParameters()
+                clsWhichFunction.AddParameter("1", "1", bIncludeArgumentName:=False)
+                clsWhichFunction.AddParameter("2", "2", bIncludeArgumentName:=False)
+                clsWhichFunction.AddParameter("3", "3", bIncludeArgumentName:=False)
+                clsWhichFunction.AddParameter("5", "5", bIncludeArgumentName:=False)
+                'remove 2 rows vs. 3 rows option and just have six plots option
+            ElseIf rdoSixPlots2Rows.Checked Then
+                clsWhichFunction.AddParameter("1", "1", bIncludeArgumentName:=False)
+                clsWhichFunction.AddParameter("2", "2", bIncludeArgumentName:=False)
+                clsWhichFunction.AddParameter("3", "3", bIncludeArgumentName:=False)
+                clsWhichFunction.AddParameter("4", "4", bIncludeArgumentName:=False)
+                clsWhichFunction.AddParameter("5", "5", bIncludeArgumentName:=False)
+                clsWhichFunction.AddParameter("6", "6", bIncludeArgumentName:=False)
+            End If
+            'Make this a radio button
+        ElseIf ucrChkIndividualPlots.Checked Then
+            'Make these all into check boxes
+            If rdoResidualsFitted.Checked Then
+                clsWhichFunction.AddParameter("1", "1", bIncludeArgumentName:=False)
+            End If
+            If rdoQQ.Checked Then
+                clsWhichFunction.AddParameter("2", "2", bIncludeArgumentName:=False)
+            End If
+            If rdoScaleLocation.Checked Then
+                clsWhichFunction.AddParameter("3", "3", bIncludeArgumentName:=False)
+            End If
+            If rdoCooksDistance.Checked Then
+                clsWhichFunction.AddParameter("4", "4", bIncludeArgumentName:=False)
+            End If
+            If rdoResidualsLeverage.Checked Then
+                clsWhichFunction.AddParameter("5", "5", bIncludeArgumentName:=False)
+            End If
+            If rdoCooksDistanceLeverage.Checked Then
+                clsWhichFunction.AddParameter("6", "6", bIncludeArgumentName:=False)
+            End If
         End If
     End Sub
 End Class
