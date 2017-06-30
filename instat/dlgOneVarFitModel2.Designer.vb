@@ -28,17 +28,17 @@ Partial Class dlgOneVarFitModel
         Me.rdoExactCase = New System.Windows.Forms.RadioButton()
         Me.rdoGeneralCase = New System.Windows.Forms.RadioButton()
         Me.grpConditions = New System.Windows.Forms.GroupBox()
-        Me.cmdDisplayOptions = New System.Windows.Forms.Button()
         Me.grpVarAndWilcoxSign = New System.Windows.Forms.GroupBox()
         Me.rdoWilcoxSignTest = New System.Windows.Forms.RadioButton()
         Me.rdoVarSignTest = New System.Windows.Forms.RadioButton()
-        Me.cmdFittingOptions = New System.Windows.Forms.Button()
         Me.grpVarAndWilcox = New System.Windows.Forms.GroupBox()
         Me.rdoEnorm = New System.Windows.Forms.RadioButton()
         Me.rdoMeanWilcox = New System.Windows.Forms.RadioButton()
         Me.rdoVarSign = New System.Windows.Forms.RadioButton()
         Me.lblHyp = New System.Windows.Forms.Label()
         Me.lblConfidenceLimit = New System.Windows.Forms.Label()
+        Me.cmdDisplayOptions = New System.Windows.Forms.Button()
+        Me.cmdFittingOptions = New System.Windows.Forms.Button()
         Me.ucrChkConvertVariate = New instat.ucrCheck()
         Me.ucrPnlGeneralExactCase = New instat.UcrPanel()
         Me.ucrSaveModel = New instat.ucrSave()
@@ -137,15 +137,6 @@ Partial Class dlgOneVarFitModel
         Me.grpConditions.TabStop = False
         Me.grpConditions.Text = "Conditions"
         '
-        'cmdDisplayOptions
-        '
-        Me.cmdDisplayOptions.Location = New System.Drawing.Point(294, 283)
-        Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
-        Me.cmdDisplayOptions.Size = New System.Drawing.Size(92, 23)
-        Me.cmdDisplayOptions.TabIndex = 44
-        Me.cmdDisplayOptions.Text = "Display Options"
-        Me.cmdDisplayOptions.UseVisualStyleBackColor = True
-        '
         'grpVarAndWilcoxSign
         '
         Me.grpVarAndWilcoxSign.Controls.Add(Me.rdoWilcoxSignTest)
@@ -179,15 +170,6 @@ Partial Class dlgOneVarFitModel
         Me.rdoVarSignTest.TabStop = True
         Me.rdoVarSignTest.Text = "Compare Vaiance"
         Me.rdoVarSignTest.UseVisualStyleBackColor = True
-        '
-        'cmdFittingOptions
-        '
-        Me.cmdFittingOptions.Location = New System.Drawing.Point(294, 312)
-        Me.cmdFittingOptions.Name = "cmdFittingOptions"
-        Me.cmdFittingOptions.Size = New System.Drawing.Size(92, 23)
-        Me.cmdFittingOptions.TabIndex = 43
-        Me.cmdFittingOptions.Text = "Fitting Options"
-        Me.cmdFittingOptions.UseVisualStyleBackColor = True
         '
         'grpVarAndWilcox
         '
@@ -252,6 +234,24 @@ Partial Class dlgOneVarFitModel
         Me.lblConfidenceLimit.Size = New System.Drawing.Size(88, 13)
         Me.lblConfidenceLimit.TabIndex = 47
         Me.lblConfidenceLimit.Text = "Confidence Limit:"
+        '
+        'cmdDisplayOptions
+        '
+        Me.cmdDisplayOptions.Location = New System.Drawing.Point(294, 309)
+        Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
+        Me.cmdDisplayOptions.Size = New System.Drawing.Size(92, 23)
+        Me.cmdDisplayOptions.TabIndex = 44
+        Me.cmdDisplayOptions.Text = "Display Options"
+        Me.cmdDisplayOptions.UseVisualStyleBackColor = True
+        '
+        'cmdFittingOptions
+        '
+        Me.cmdFittingOptions.Location = New System.Drawing.Point(294, 280)
+        Me.cmdFittingOptions.Name = "cmdFittingOptions"
+        Me.cmdFittingOptions.Size = New System.Drawing.Size(92, 23)
+        Me.cmdFittingOptions.TabIndex = 43
+        Me.cmdFittingOptions.Text = "Fitting Options"
+        Me.cmdFittingOptions.UseVisualStyleBackColor = True
         '
         'ucrChkConvertVariate
         '
