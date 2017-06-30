@@ -50,6 +50,7 @@ Public Class dlgStandardiseCountryNames
         ucrReceiverCountryNames.SetParameter(New RParameter("country_columns", 1))
         ucrReceiverCountryNames.SetParameterIsString()
         ucrReceiverCountryNames.SetIncludedDataTypes({"factor", "character"})
+        ucrReceiverCountryNames.strSelectorHeading = "Characters"
         ucrReceiverCountryNames.Selector = ucrSelectorStandardiseCountry
         ucrReceiverCountryNames.SetMeAsReceiver()
     End Sub

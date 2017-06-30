@@ -47,22 +47,27 @@ Public Class dlgTransformClimatic
         ucrReceiverData.bWithQuotes = False
         ucrReceiverData.SetParameterIncludeArgumentName(False)
         ucrReceiverData.Selector = ucrSelectorTransform
+        ucrReceiverData.strSelectorHeading = "Numerics"
 
         ucrReceiverStation.Selector = ucrSelectorTransform
         ucrReceiverStation.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "station" & Chr(34)})
         ucrReceiverStation.bAutoFill = True
+        ucrReceiverStation.strSelectorHeading = "Factors"
 
         ucrReceiverYear.Selector = ucrSelectorTransform
         ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
         ucrReceiverYear.bAutoFill = True
+        ucrReceiverYear.strSelectorHeading = "Numerics"
 
         ucrReceiverDate.Selector = ucrSelectorTransform
         ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
         ucrReceiverDate.bAutoFill = True
+        ucrReceiverDate.strSelectorHeading = "Date"
 
         ucrReceiverDOY.Selector = ucrSelectorTransform
         ucrReceiverDOY.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "doy" & Chr(34)})
         ucrReceiverDOY.bAutoFill = True
+        ucrReceiverDOY.strSelectorHeading = "Numerics"
 
         'clsRTransform.SetRCommand("instat_calculation$new")
         'clsRTransform.SetAssignTo("transform_calculation")
