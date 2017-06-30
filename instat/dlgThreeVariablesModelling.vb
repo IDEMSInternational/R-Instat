@@ -25,9 +25,12 @@ Public Class dlgThreeVariableModelling
     Public bResetFirstFunction As Boolean = False
     Public bResetSecondFunction As Boolean = False
     Public bRCodeSet As Boolean = False
-    Public clsFamilyFunction, clsAsNumeric, clsLM, clsGLM, clsLMOrGLM As New RFunction
-    Public clsRSingleModelFunction As RFunction
-    Private clsFormulaOperator, clsExplanatoryOperator As New ROperator
+    Public clsFamilyFunction, clsVisReg, clsAutoPlot As New RFunction
+    Public clsRSingleModelFunction, clsFormulaFunction, clsAnovaFunction, clsSummaryFunction, clsConfint As RFunction
+    Public clsFormulaOperator As ROperator
+    Public clsGLM, clsLM, clsLMOrGLM, clsAsNumeric As RFunction
+
+    Private clsExplanatoryOperator As New ROperator
     Private clsFirstTransformFunction As RFunction
     Private clsFirstPowerOperator As ROperator
     Private clsSecondTransformFunction As RFunction
@@ -102,6 +105,12 @@ Public Class dlgThreeVariableModelling
         clsAsNumeric = New RFunction
         clsLM = New RFunction
         clsGLM = New RFunction
+        clsFormulaFunction = New RFunction
+        clsSummaryFunction = New RFunction
+        clsConfint = New RFunction
+        clsVisReg = New RFunction
+        clsAutoPlot = New RFunction
+
         clsFirstTransformFunction = New RFunction
         clsFirstPowerOperator = New ROperator
         clsSecondTransformFunction = New RFunction
@@ -123,16 +132,17 @@ Public Class dlgThreeVariableModelling
 
         clsAsNumeric.SetRCommand("as.numeric")
 
-        clsFormulaOperator.SetOperation("~")
+        clsFormulaOperator = clsRegressionDefaults.clsDefaultFormulaOperator.Clone
         clsFormulaOperator.AddParameter("x", clsROperatorParameter:=clsExplanatoryOperator, iPosition:=1)
 
-        clsFamilyFunction = ucrDistributionChoice.clsCurrRFunction
 
         clsLM = clsRegressionDefaults.clsDefaultLmFunction.Clone()
         clsLM.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=0)
 
         clsGLM = clsRegressionDefaults.clsDefaultGlmFunction.Clone()
         clsGLM.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=0)
+
+        clsFamilyFunction = ucrDistributionChoice.clsCurrRFunction
         clsGLM.AddParameter("family", clsRFunctionParameter:=clsFamilyFunction)
 
         clsFirstPowerOperator.SetOperation("^")
@@ -143,9 +153,41 @@ Public Class dlgThreeVariableModelling
         clsSecondPowerOperator.AddParameter("power", 2, iPosition:=1)
         clsSecondPowerOperator.bBrackets = False
 
+        'Residual Plots
+        clsAutoPlot = clsRegressionDefaults.clsDefaultAutoplot.Clone
+
+        'Model
+        clsFormulaFunction = clsRegressionDefaults.clsDefaultFormulaFunction.Clone
+        clsFormulaFunction.iCallType = 2
+
+        'Summary
+        clsSummaryFunction = clsRegressionDefaults.clsDefaultSummary.Clone
+        clsSummaryFunction.iCallType = 2
+
+        'ANOVA
+        clsAnovaFunction = clsRegressionDefaults.clsDefaultAnovaFunction.Clone
+        clsAnovaFunction.iCallType = 2
+
+        'Confidence Interval
+        clsConfint = clsRegressionDefaults.clsDefaultConfint.Clone
+        clsConfint.iCallType = 2
+
+        'FitModel
+        clsVisReg.SetPackageName("visreg")
+        clsVisReg.SetRCommand("visreg")
+        clsVisReg.AddParameter("type", Chr(34) & "conditional" & Chr(34))
+        clsVisReg.AddParameter("gg", "TRUE")
+        clsVisReg.iCallType = 3
+
         clsLM.SetAssignTo(ucrSaveModel.GetText, strTempDataframe:=ucrSelectorThreeVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:=ucrSaveModel.GetText, bAssignToIsPrefix:=True)
         clsGLM.SetAssignTo(ucrSaveModel.GetText, strTempDataframe:=ucrSelectorThreeVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:=ucrSaveModel.GetText, bAssignToIsPrefix:=True)
         ucrBase.clsRsyntax.SetBaseRFunction(clsLM)
+
+        ucrBase.clsRsyntax.AddToAfterCodes(clsAnovaFunction, 1)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, 2)
+        clsLMOrGLM = clsLM
+
+
         bResetModelOptions = True
         bResetDisplayOptions = True
         bResetFirstFunction = True
@@ -230,6 +272,7 @@ Public Class dlgThreeVariableModelling
     End Sub
 
     Private Sub ResponseControls_ControlValueChanged() Handles ucrReceiverResponse.ControlValueChanged, ucrChkConvertToNumeric.ControlValueChanged
+        SetBaseFunction()
         ResponseConvert()
         UpdatePreview()
     End Sub
@@ -241,6 +284,7 @@ Public Class dlgThreeVariableModelling
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
+        sdgSimpleRegOptions.SetRCode(ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewConfint:=clsConfint, clsNewVisReg:=clsVisReg, clsNewAutoplot:=clsAutoPlot, bReset:=bResetDisplayOptions)
         sdgSimpleRegOptions.ShowDialog()
         bResetDisplayOptions = False
     End Sub
@@ -250,18 +294,23 @@ Public Class dlgThreeVariableModelling
     End Sub
 
     Private Sub SetBaseFunction()
-        If (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal") AndAlso (Not clsFamilyFunction.ContainsParameter("link") OrElse clsFamilyFunction.GetParameter("link").strArgumentValue = Chr(34) & "identity" & Chr(34)) Then
-            clsLMOrGLM = clsLM
-        Else
-            clsLMOrGLM = clsGLM
+        If Not ucrReceiverFirstExplanatory.IsEmpty AndAlso Not ucrReceiverSecondExplanatory.IsEmpty AndAlso Not ucrReceiverResponse.IsEmpty Then
+
+            If (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal") AndAlso (Not clsFamilyFunction.ContainsParameter("link") OrElse clsFamilyFunction.GetParameter("link").strArgumentValue = Chr(34) & "identity" & Chr(34)) Then
+                clsLMOrGLM = clsLM
+            Else
+                clsLMOrGLM = clsGLM
+            End If
+
+            'Update display functions to contain correct model
+            clsFormulaFunction.AddParameter("x", clsRFunctionParameter:=clsLMOrGLM)
+            clsAnovaFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM)
+            clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM)
+            clsConfint.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM)
+            clsVisReg.AddParameter("fit", clsRFunctionParameter:=clsLMOrGLM)
+            clsAutoPlot.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsLMOrGLM)
         End If
-        ucrBase.clsRsyntax.SetBaseRFunction(clsLMOrGLM)
-        'Update display functions to contain correct model
-        'clsAnovaFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM)
-        'clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM)
-        'clsConfint.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM)
-        'clsVisReg.AddParameter("fit", clsRFunctionParameter:=clsLMOrGLM)
-        'clsAutoPlot.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM)
     End Sub
 
     Public Sub ucrFamily_cboDistributionsIndexChanged() Handles ucrDistributionChoice.DistributionsIndexChanged
@@ -339,6 +388,7 @@ Public Class dlgThreeVariableModelling
                 clsExplanatoryOperator.RemoveParameterByName("exp1")
             End If
         End If
+        SetBaseFunction()
         FirstExplanatoryFunctionEnabled()
         UpdatePreview()
     End Sub
@@ -351,6 +401,7 @@ Public Class dlgThreeVariableModelling
                 clsExplanatoryOperator.RemoveParameterByName("exp2")
             End If
         End If
+        SetBaseFunction()
         SecondExplanatoryFunctionEnabled()
         UpdatePreview()
     End Sub
@@ -369,5 +420,9 @@ Public Class dlgThreeVariableModelling
         Else
             cmdSecondExplanatoryFunction.Enabled = False
         End If
+    End Sub
+
+    Private Sub ucrSelectorThreeVariableModelling_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorThreeVariableModelling.ControlValueChanged
+        SetBaseFunction()
     End Sub
 End Class
