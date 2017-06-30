@@ -45,17 +45,21 @@ Public Class dlgNewMarkovChains
         ucrReceiverStation.Selector = ucrSelectorMarkovChains
         ucrReceiverStation.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "station" & Chr(34)})
         ucrReceiverStation.bAutoFill = True
+        ucrReceiverStation.strSelectorHeading = "Factors"
         ucrReceiverDate.Selector = ucrSelectorMarkovChains
         ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
         ucrReceiverDate.bAutoFill = True
+        ucrReceiverDate.strSelectorHeading = "Date"
 
         ucrReceiverDOY.Selector = ucrSelectorMarkovChains
         ucrReceiverDOY.bAutoFill = True
+        ucrReceiverDOY.strSelectorHeading = "Numerics"
 
         'ucrReceiverDOY.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "doy" & Chr(34)})
         ucrReceiverRainfall.Selector = ucrSelectorMarkovChains
         ucrReceiverRainfall.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "rain" & Chr(34)})
         ucrReceiverRainfall.bAutoFill = True
+        ucrReceiverRainfall.strSelectorHeading = "Numerics"
 
         ucrReceiverAdditionalVariables.Selector = ucrSelectorMarkovChains
         ucrBase.iHelpTopicID = 491
