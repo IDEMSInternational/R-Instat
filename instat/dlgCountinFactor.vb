@@ -41,6 +41,7 @@ Public Class dlgCountinFactor
         ucrCountReceiver.SetParameterIsRFunction()
         ucrCountReceiver.Selector = ucrCountSelector
         ucrCountReceiver.SetIncludedDataTypes({"factor"})
+        ucrCountReceiver.strSelectorHeading = "Factors"
         ucrCountReceiver.SetMeAsReceiver()
         ucrCountReceiver.bUseFilteredData = False
 
