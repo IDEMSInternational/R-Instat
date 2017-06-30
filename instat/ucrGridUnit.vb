@@ -57,10 +57,10 @@ Public Class ucrGridUnit
         clsThemeFunction = clsNewThemeFunction
         clsUnit = clsNewUnit
 
-        ucrChkUnits.SetRCode(clsUnit, bReset)
-        ucrInputUnits.SetRCode(clsUnit, bReset)
-        ucrInputData.SetRCode(clsUnit, bReset)
-        ucrInputVector.SetRCode(clsUnit, bReset)
+        ucrChkUnits.SetRCode(clsUnit, bReset, bCloneIfNeeded:=True)
+        ucrInputUnits.SetRCode(clsUnit, bReset, bCloneIfNeeded:=True)
+        ucrInputData.SetRCode(clsUnit, bReset, bCloneIfNeeded:=True)
+        ucrInputVector.SetRCode(clsUnit, bReset, bCloneIfNeeded:=True)
     End Sub
 
     Private Sub AddRemoveElementLineAxis()
