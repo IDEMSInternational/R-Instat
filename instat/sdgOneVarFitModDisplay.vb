@@ -56,9 +56,6 @@ Public Class sdgOneVarFitModDisplay
         ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoQQPlot, {"qqcomp"})
         ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoPPPlot, {"ppcomp"})
 
-        ' ucrSaveLikelihood.SetDataFrameSelector(dlgOneVarFitModel.ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
-        ' ucrSavePlots.SetDataFrameSelector(dlgOneVarFitModel.ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
-
         bControlsInitialised = True
     End Sub
 
@@ -86,38 +83,29 @@ Public Class sdgOneVarFitModDisplay
 
     Private Sub ucrPnlPlots_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlPlots.ControlValueChanged
         If rdoPlotAll.Checked Then
-            clsRSyntax.AddToAfterCodes(clsRplotFunction, iPosition:=1)
             clsRSyntax.RemoveFromAfterCodes(clsRplotDenscomp)
             clsRSyntax.RemoveFromAfterCodes(clsRplotQqComp)
             clsRSyntax.RemoveFromAfterCodes(clsRplotCdfcomp)
             clsRSyntax.RemoveFromAfterCodes(clsRplotPPComp)
         ElseIf rdoPPPlot.Checked Then
-            clsRplotPPComp.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34))
-            clsRplotPPComp.AddParameter("ft", clsRFunctionParameter:=clsModel)
             clsRSyntax.AddToAfterCodes(clsRplotPPComp, iPosition:=1)
             clsRSyntax.RemoveFromAfterCodes(clsRplotDenscomp)
             clsRSyntax.RemoveFromAfterCodes(clsRplotQqComp)
             clsRSyntax.RemoveFromAfterCodes(clsRplotCdfcomp)
             clsRSyntax.RemoveFromAfterCodes(clsRplotFunction)
         ElseIf rdoCDFPlot.Checked Then
-            clsRplotCdfcomp.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34))
-            clsRplotCdfcomp.AddParameter("ft", clsRFunctionParameter:=clsModel)
             clsRSyntax.AddToAfterCodes(clsRplotCdfcomp, iPosition:=1)
             clsRSyntax.RemoveFromAfterCodes(clsRplotDenscomp)
             clsRSyntax.RemoveFromAfterCodes(clsRplotQqComp)
             clsRSyntax.RemoveFromAfterCodes(clsRplotPPComp)
             clsRSyntax.RemoveFromAfterCodes(clsRplotFunction)
         ElseIf rdoQQPlot.Checked Then
-            clsRplotQqComp.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34))
-            clsRplotQqComp.AddParameter("ft", clsRFunctionParameter:=clsModel)
             clsRSyntax.AddToAfterCodes(clsRplotQqComp, iPosition:=1)
             clsRSyntax.RemoveFromAfterCodes(clsRplotDenscomp)
             clsRSyntax.RemoveFromAfterCodes(clsRplotCdfcomp)
             clsRSyntax.RemoveFromAfterCodes(clsRplotPPComp)
             clsRSyntax.RemoveFromAfterCodes(clsRplotFunction)
         ElseIf rdoDensityPlot.Checked Then
-            clsRplotDenscomp.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34))
-            clsRplotDenscomp.AddParameter("ft", clsRFunctionParameter:=clsModel)
             clsRSyntax.AddToAfterCodes(clsRplotDenscomp, iPosition:=1)
             clsRSyntax.RemoveFromAfterCodes(clsRplotQqComp)
             clsRSyntax.RemoveFromAfterCodes(clsRplotCdfcomp)
