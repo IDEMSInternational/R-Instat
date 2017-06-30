@@ -65,7 +65,7 @@ Partial Class dlgColumnStructure
         Me.ucrChkColourColumnsByStructure.Checked = False
         Me.ucrChkColourColumnsByStructure.Location = New System.Drawing.Point(10, 206)
         Me.ucrChkColourColumnsByStructure.Name = "ucrChkColourColumnsByStructure"
-        Me.ucrChkColourColumnsByStructure.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkColourColumnsByStructure.Size = New System.Drawing.Size(210, 20)
         Me.ucrChkColourColumnsByStructure.TabIndex = 7
         '
         'ucrReceiverMeasurement
@@ -125,7 +125,7 @@ Partial Class dlgColumnStructure
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 394)
+        Me.ClientSize = New System.Drawing.Size(415, 391)
         Me.Controls.Add(Me.ucrChkColourColumnsByStructure)
         Me.Controls.Add(Me.lblMeasurement)
         Me.Controls.Add(Me.lblTreatment)
