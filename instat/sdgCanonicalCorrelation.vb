@@ -52,24 +52,17 @@ Public Class sdgCanonicalCorrelation
         clsTempFunction = clsNewTempFunction
         clsTempFun = clsNewTempFun
 
-        clsRCanCorFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
-        clsRCoefFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
-        clsRGraphicsFunction.SetPackageName("GGally")
-        clsRGraphicsFunction.SetRCommand("ggpairs")
         clsRCanCorFunction.AddParameter("data_name", Chr(34) & dlgCanonicalCorrelationAnalysis.ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-        'clsRCanCorFunction.AddParameter("model_name", Chr(34) & clsTempFunction & Chr(34))
+        clsRCanCorFunction.AddParameter("model_name", Chr(34) & clsTempFunction & Chr(34))
         clsRCanCorFunction.AddParameter("value1", Chr(34) & "cor" & Chr(34))
         clsRCoefFunction.AddParameter("data_name", Chr(34) & dlgCanonicalCorrelationAnalysis.ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-        'clsRCoefFunction.AddParameter("model_name", Chr(34) & clsTempFunction & Chr(34))
-        clsRCoefFunction.AddParameter("model_name", Chr(34) & dlgCanonicalCorrelationAnalysis.strModelName & Chr(34))
+        clsRCoefFunction.AddParameter("model_name", Chr(34) & clsTempFunction & Chr(34))
         clsRCoefFunction.AddParameter("value1", Chr(34) & "xcoef" & Chr(34))
-        'clsRCoefFunction.AddParameter("value2", Chr(34) & "ycoef" & Chr(34))
 
         clsTempFunc = dlgCanonicalCorrelationAnalysis.ucrSelectorCCA.ucrAvailableDataFrames.clsCurrDataFrame.Clone()
         clsTempFunc.AddParameter("remove_attr", "TRUE")
         clsRGraphicsFunction.AddParameter("data", clsRFunctionParameter:=clsTempFunc)
 
-        ucrPnlVariables.SetRSyntax(clsRSyntax, bReset)
         bControlsInitialised = True
         If bReset Then
             tbRegOptions.SelectedIndex = 0

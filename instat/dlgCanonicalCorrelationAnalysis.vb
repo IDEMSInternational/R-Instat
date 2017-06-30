@@ -90,6 +90,11 @@ Public Class dlgCanonicalCorrelationAnalysis
         clsDefaultFunction.SetRCommand("cancor")
         clsDefaultFunction.SetAssignTo("last_CCA", strTempModel:="last_CCA", strTempDataframe:=ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
 
+        clsRCanCorFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+        clsRCoefFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+        clsRGraphicsFunction.SetPackageName("GGally")
+        clsRGraphicsFunction.SetRCommand("ggpairs")
+
         clsRCanCorFunction.AddParameter("data_name", Chr(34) & ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
         clsRCanCorFunction.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
         clsRCanCorFunction.AddParameter("value1", Chr(34) & "cancor" & Chr(34))
@@ -99,6 +104,7 @@ Public Class dlgCanonicalCorrelationAnalysis
         clsRCoefFunction.AddParameter("value1", Chr(34) & "coef" & Chr(34))
 
         ' Set default RFunction as the base function
+        ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
         bResetSubdialog = True
     End Sub
@@ -128,12 +134,12 @@ Public Class dlgCanonicalCorrelationAnalysis
         'sdgCanonicalCorrelation.CCAOptions()
     End Sub
 
-    Private Sub ucrSaveResult_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlContentsChanged, ucrReceiverXvariables.ControlContentsChanged, ucrReceiverYvariables.ControlContentsChanged
-        TestOKEnabled()
+    Private Sub ucrSaveResult_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlValueChanged
+        'clsTempFun = ucrSaveResult.GetText
+        clsTempFunction = ucrSaveResult.GetText
     End Sub
 
-    Private Sub ucrSaveResult_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlValueChanged
-        clsTempFun = ucrSaveResult.GetText
-        clsTempFunction = ucrSaveResult.GetText
+    Private Sub ucrSaveResult_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlContentsChanged, ucrReceiverXvariables.ControlContentsChanged, ucrReceiverYvariables.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class
