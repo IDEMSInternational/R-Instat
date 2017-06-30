@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgCorrelation
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class dlgCorrelation
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblFirstColumn = New System.Windows.Forms.Label()
         Me.lblSecondColumn = New System.Windows.Forms.Label()
@@ -28,10 +28,12 @@ Partial Class dlgCorrelation
         Me.rdoKendall = New System.Windows.Forms.RadioButton()
         Me.rdoPearson = New System.Windows.Forms.RadioButton()
         Me.rdoSpearman = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlMethod = New instat.UcrPanel()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.grpMissing = New System.Windows.Forms.GroupBox()
         Me.rdoCompleteRowsOnly = New System.Windows.Forms.RadioButton()
         Me.rdoPairwise = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlCompletePairwise = New instat.UcrPanel()
         Me.lblConfInterval = New System.Windows.Forms.Label()
         Me.rdoTwoColumns = New System.Windows.Forms.RadioButton()
         Me.rdoMultipleColumns = New System.Windows.Forms.RadioButton()
@@ -39,13 +41,12 @@ Partial Class dlgCorrelation
         Me.ucrNudConfidenceInterval = New instat.ucrNud()
         Me.ucrChkCorrelationMatrix = New instat.ucrCheck()
         Me.ucrPnlColumns = New instat.UcrPanel()
-        Me.ucrPnlMethod = New instat.UcrPanel()
         Me.ucrReceiverMultipleColumns = New instat.ucrReceiverMultiple()
-        Me.ucrPnlCompletePairwise = New instat.UcrPanel()
         Me.ucrReceiverSecondColumn = New instat.ucrReceiverSingle()
         Me.ucrReceiverFirstColumn = New instat.ucrReceiverSingle()
         Me.ucrSelectorCorrelation = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.lblSelectedVariables = New System.Windows.Forms.Label()
         Me.grpMethod.SuspendLayout()
         Me.grpMissing.SuspendLayout()
         Me.SuspendLayout()
@@ -53,7 +54,7 @@ Partial Class dlgCorrelation
         'lblFirstColumn
         '
         Me.lblFirstColumn.AutoSize = True
-        Me.lblFirstColumn.Location = New System.Drawing.Point(255, 55)
+        Me.lblFirstColumn.Location = New System.Drawing.Point(258, 75)
         Me.lblFirstColumn.Name = "lblFirstColumn"
         Me.lblFirstColumn.Size = New System.Drawing.Size(67, 13)
         Me.lblFirstColumn.TabIndex = 4
@@ -63,7 +64,7 @@ Partial Class dlgCorrelation
         'lblSecondColumn
         '
         Me.lblSecondColumn.AutoSize = True
-        Me.lblSecondColumn.Location = New System.Drawing.Point(255, 106)
+        Me.lblSecondColumn.Location = New System.Drawing.Point(258, 127)
         Me.lblSecondColumn.Name = "lblSecondColumn"
         Me.lblSecondColumn.Size = New System.Drawing.Size(85, 13)
         Me.lblSecondColumn.TabIndex = 6
@@ -76,10 +77,10 @@ Partial Class dlgCorrelation
         Me.grpMethod.Controls.Add(Me.rdoPearson)
         Me.grpMethod.Controls.Add(Me.rdoSpearman)
         Me.grpMethod.Controls.Add(Me.ucrPnlMethod)
-        Me.grpMethod.Location = New System.Drawing.Point(10, 230)
+        Me.grpMethod.Location = New System.Drawing.Point(9, 227)
         Me.grpMethod.Name = "grpMethod"
         Me.grpMethod.Size = New System.Drawing.Size(246, 65)
-        Me.grpMethod.TabIndex = 11
+        Me.grpMethod.TabIndex = 10
         Me.grpMethod.TabStop = False
         Me.grpMethod.Tag = "Method"
         Me.grpMethod.Text = "Method"
@@ -119,14 +120,21 @@ Partial Class dlgCorrelation
         Me.rdoSpearman.Text = "Spearman"
         Me.rdoSpearman.UseVisualStyleBackColor = True
         '
+        'ucrPnlMethod
+        '
+        Me.ucrPnlMethod.Location = New System.Drawing.Point(8, 17)
+        Me.ucrPnlMethod.Name = "ucrPnlMethod"
+        Me.ucrPnlMethod.Size = New System.Drawing.Size(229, 39)
+        Me.ucrPnlMethod.TabIndex = 0
+        '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(256, 189)
+        Me.cmdOptions.Location = New System.Drawing.Point(286, 345)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(120, 25)
-        Me.cmdOptions.TabIndex = 10
-        Me.cmdOptions.Tag = "Options..."
-        Me.cmdOptions.Text = "Options..."
+        Me.cmdOptions.TabIndex = 16
+        Me.cmdOptions.Tag = "Options"
+        Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'grpMissing
@@ -134,10 +142,10 @@ Partial Class dlgCorrelation
         Me.grpMissing.Controls.Add(Me.rdoCompleteRowsOnly)
         Me.grpMissing.Controls.Add(Me.rdoPairwise)
         Me.grpMissing.Controls.Add(Me.ucrPnlCompletePairwise)
-        Me.grpMissing.Location = New System.Drawing.Point(258, 230)
+        Me.grpMissing.Location = New System.Drawing.Point(257, 227)
         Me.grpMissing.Name = "grpMissing"
         Me.grpMissing.Size = New System.Drawing.Size(199, 65)
-        Me.grpMissing.TabIndex = 12
+        Me.grpMissing.TabIndex = 11
         Me.grpMissing.TabStop = False
         Me.grpMissing.Tag = "Missing"
         Me.grpMissing.Text = "Missing"
@@ -166,13 +174,20 @@ Partial Class dlgCorrelation
         Me.rdoPairwise.Text = "Pairwise"
         Me.rdoPairwise.UseVisualStyleBackColor = True
         '
+        'ucrPnlCompletePairwise
+        '
+        Me.ucrPnlCompletePairwise.Location = New System.Drawing.Point(3, 17)
+        Me.ucrPnlCompletePairwise.Name = "ucrPnlCompletePairwise"
+        Me.ucrPnlCompletePairwise.Size = New System.Drawing.Size(189, 39)
+        Me.ucrPnlCompletePairwise.TabIndex = 0
+        '
         'lblConfInterval
         '
         Me.lblConfInterval.AutoSize = True
-        Me.lblConfInterval.Location = New System.Drawing.Point(256, 167)
+        Me.lblConfInterval.Location = New System.Drawing.Point(9, 302)
         Me.lblConfInterval.Name = "lblConfInterval"
         Me.lblConfInterval.Size = New System.Drawing.Size(102, 13)
-        Me.lblConfInterval.TabIndex = 8
+        Me.lblConfInterval.TabIndex = 12
         Me.lblConfInterval.Text = "Confidence Interval:"
         '
         'rdoTwoColumns
@@ -182,9 +197,9 @@ Partial Class dlgCorrelation
         Me.rdoTwoColumns.FlatAppearance.BorderSize = 2
         Me.rdoTwoColumns.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoTwoColumns.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoTwoColumns.Location = New System.Drawing.Point(77, 10)
+        Me.rdoTwoColumns.Location = New System.Drawing.Point(102, 10)
         Me.rdoTwoColumns.Name = "rdoTwoColumns"
-        Me.rdoTwoColumns.Size = New System.Drawing.Size(141, 27)
+        Me.rdoTwoColumns.Size = New System.Drawing.Size(127, 27)
         Me.rdoTwoColumns.TabIndex = 1
         Me.rdoTwoColumns.TabStop = True
         Me.rdoTwoColumns.Text = "Two Columns"
@@ -198,9 +213,9 @@ Partial Class dlgCorrelation
         Me.rdoMultipleColumns.FlatAppearance.BorderSize = 2
         Me.rdoMultipleColumns.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoMultipleColumns.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoMultipleColumns.Location = New System.Drawing.Point(217, 10)
+        Me.rdoMultipleColumns.Location = New System.Drawing.Point(227, 10)
         Me.rdoMultipleColumns.Name = "rdoMultipleColumns"
-        Me.rdoMultipleColumns.Size = New System.Drawing.Size(165, 27)
+        Me.rdoMultipleColumns.Size = New System.Drawing.Size(127, 27)
         Me.rdoMultipleColumns.TabIndex = 2
         Me.rdoMultipleColumns.TabStop = True
         Me.rdoMultipleColumns.Text = "Multiple Columns"
@@ -209,68 +224,54 @@ Partial Class dlgCorrelation
         '
         'ucrSaveModel
         '
-        Me.ucrSaveModel.Location = New System.Drawing.Point(10, 305)
+        Me.ucrSaveModel.Location = New System.Drawing.Point(9, 349)
         Me.ucrSaveModel.Name = "ucrSaveModel"
         Me.ucrSaveModel.Size = New System.Drawing.Size(257, 24)
-        Me.ucrSaveModel.TabIndex = 13
+        Me.ucrSaveModel.TabIndex = 15
         '
         'ucrNudConfidenceInterval
         '
         Me.ucrNudConfidenceInterval.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudConfidenceInterval.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudConfidenceInterval.Location = New System.Drawing.Point(360, 163)
+        Me.ucrNudConfidenceInterval.Location = New System.Drawing.Point(113, 298)
         Me.ucrNudConfidenceInterval.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudConfidenceInterval.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudConfidenceInterval.Name = "ucrNudConfidenceInterval"
         Me.ucrNudConfidenceInterval.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudConfidenceInterval.TabIndex = 9
+        Me.ucrNudConfidenceInterval.TabIndex = 13
         Me.ucrNudConfidenceInterval.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrChkCorrelationMatrix
         '
         Me.ucrChkCorrelationMatrix.Checked = False
-        Me.ucrChkCorrelationMatrix.Location = New System.Drawing.Point(284, 306)
+        Me.ucrChkCorrelationMatrix.Location = New System.Drawing.Point(9, 323)
         Me.ucrChkCorrelationMatrix.Name = "ucrChkCorrelationMatrix"
         Me.ucrChkCorrelationMatrix.Size = New System.Drawing.Size(171, 20)
         Me.ucrChkCorrelationMatrix.TabIndex = 14
         '
         'ucrPnlColumns
         '
-        Me.ucrPnlColumns.Location = New System.Drawing.Point(61, 6)
+        Me.ucrPnlColumns.Location = New System.Drawing.Point(86, 6)
         Me.ucrPnlColumns.Name = "ucrPnlColumns"
         Me.ucrPnlColumns.Size = New System.Drawing.Size(335, 36)
         Me.ucrPnlColumns.TabIndex = 0
         '
-        'ucrPnlMethod
-        '
-        Me.ucrPnlMethod.Location = New System.Drawing.Point(8, 17)
-        Me.ucrPnlMethod.Name = "ucrPnlMethod"
-        Me.ucrPnlMethod.Size = New System.Drawing.Size(229, 39)
-        Me.ucrPnlMethod.TabIndex = 0
-        '
         'ucrReceiverMultipleColumns
         '
         Me.ucrReceiverMultipleColumns.frmParent = Me
-        Me.ucrReceiverMultipleColumns.Location = New System.Drawing.Point(255, 55)
+        Me.ucrReceiverMultipleColumns.Location = New System.Drawing.Point(258, 90)
         Me.ucrReceiverMultipleColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultipleColumns.Name = "ucrReceiverMultipleColumns"
         Me.ucrReceiverMultipleColumns.Selector = Nothing
         Me.ucrReceiverMultipleColumns.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverMultipleColumns.strNcFilePath = ""
-        Me.ucrReceiverMultipleColumns.TabIndex = 4
+        Me.ucrReceiverMultipleColumns.TabIndex = 9
         Me.ucrReceiverMultipleColumns.ucrSelector = Nothing
-        '
-        'ucrPnlCompletePairwise
-        '
-        Me.ucrPnlCompletePairwise.Location = New System.Drawing.Point(3, 17)
-        Me.ucrPnlCompletePairwise.Name = "ucrPnlCompletePairwise"
-        Me.ucrPnlCompletePairwise.Size = New System.Drawing.Size(189, 39)
-        Me.ucrPnlCompletePairwise.TabIndex = 0
         '
         'ucrReceiverSecondColumn
         '
         Me.ucrReceiverSecondColumn.frmParent = Me
-        Me.ucrReceiverSecondColumn.Location = New System.Drawing.Point(255, 122)
+        Me.ucrReceiverSecondColumn.Location = New System.Drawing.Point(258, 142)
         Me.ucrReceiverSecondColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSecondColumn.Name = "ucrReceiverSecondColumn"
         Me.ucrReceiverSecondColumn.Selector = Nothing
@@ -282,7 +283,7 @@ Partial Class dlgCorrelation
         'ucrReceiverFirstColumn
         '
         Me.ucrReceiverFirstColumn.frmParent = Me
-        Me.ucrReceiverFirstColumn.Location = New System.Drawing.Point(255, 70)
+        Me.ucrReceiverFirstColumn.Location = New System.Drawing.Point(258, 90)
         Me.ucrReceiverFirstColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFirstColumn.Name = "ucrReceiverFirstColumn"
         Me.ucrReceiverFirstColumn.Selector = Nothing
@@ -303,16 +304,27 @@ Partial Class dlgCorrelation
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 344)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 376)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 15
+        Me.ucrBase.TabIndex = 17
+        '
+        'lblSelectedVariables
+        '
+        Me.lblSelectedVariables.AutoSize = True
+        Me.lblSelectedVariables.Location = New System.Drawing.Point(258, 75)
+        Me.lblSelectedVariables.Name = "lblSelectedVariables"
+        Me.lblSelectedVariables.Size = New System.Drawing.Size(53, 13)
+        Me.lblSelectedVariables.TabIndex = 8
+        Me.lblSelectedVariables.Tag = ""
+        Me.lblSelectedVariables.Text = "Variables:"
         '
         'dlgCorrelation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(462, 410)
+        Me.ClientSize = New System.Drawing.Size(461, 436)
+        Me.Controls.Add(Me.lblSelectedVariables)
         Me.Controls.Add(Me.ucrSaveModel)
         Me.Controls.Add(Me.ucrNudConfidenceInterval)
         Me.Controls.Add(Me.ucrChkCorrelationMatrix)
@@ -369,4 +381,5 @@ Partial Class dlgCorrelation
     Friend WithEvents ucrPnlCompletePairwise As UcrPanel
     Friend WithEvents ucrNudConfidenceInterval As ucrNud
     Friend WithEvents ucrSaveModel As ucrSave
+    Friend WithEvents lblSelectedVariables As Label
 End Class
