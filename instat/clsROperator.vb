@@ -33,38 +33,40 @@ Public Class ROperator
     Public Overrides Function ToScript(Optional ByRef strScript As String = "", Optional strTemp As String = "") As String
         'Parameters are sorted in the appropriate order and then the script is built.
         SortParameters()
-        If clsParameters(0) IsNot Nothing Then
-            If clsParameters(0).bIsOperator AndAlso bBrackets Then
-                strTemp = strTemp & "(" & clsParameters(0).ToScript(strScript) & ")"
-            Else
-                strTemp = strTemp & clsParameters(0).ToScript(strScript)
-            End If
-            'If there's only one parameter and bForceIncludeOperation then we include the operator
-            'The position of the operator depends on the parameter position
-            If bForceIncludeOperation AndAlso clsParameters.Count = 1 Then
-                If clsParameters(0).Position = 0 Then
-                    strTemp = strTemp & Chr(32) & strOperation & Chr(32)
+        If clsParameters.Count > 0 Then
+            If clsParameters(0) IsNot Nothing Then
+                If clsParameters(0).bIsOperator AndAlso bBrackets Then
+                    strTemp = strTemp & "(" & clsParameters(0).ToScript(strScript) & ")"
                 Else
-                    strTemp = Chr(32) & strOperation & Chr(32) & strTemp
+                    strTemp = strTemp & clsParameters(0).ToScript(strScript)
                 End If
+                'If there's only one parameter and bForceIncludeOperation then we include the operator
+                'The position of the operator depends on the parameter position
+                If bForceIncludeOperation AndAlso clsParameters.Count = 1 Then
+                    If clsParameters(0).Position = 0 Then
+                        strTemp = strTemp & Chr(32) & strOperation & Chr(32)
+                    Else
+                        strTemp = Chr(32) & strOperation & Chr(32) & strTemp
+                    End If
+                End If
+            Else
+                'message
             End If
-        Else
-            'message
-        End If
-        For Each clsParam In clsParameters.GetRange(1, clsParameters.Count - 1)
-            'If bIncludeOperation Then
-            strTemp = strTemp & Chr(32) & strOperation & Chr(32)
-            strTemp = strTemp & clsParam.ToScript(strScript)
-        Next
-        If bToScriptAsRString Then
-            'TODO should also check assignment of parameters
-            If bToBeAssigned OrElse bIsAssigned Then
-                MsgBox("Developer error: Using bToScriptAsRString = True when RFunction is assigned will not produce the correct script. Remove assignment to use this options correctly.")
+            For Each clsParam In clsParameters.GetRange(1, clsParameters.Count - 1)
+                'If bIncludeOperation Then
+                strTemp = strTemp & Chr(32) & strOperation & Chr(32)
+                strTemp = strTemp & clsParam.ToScript(strScript)
+            Next
+            If bToScriptAsRString Then
+                'TODO should also check assignment of parameters
+                If bToBeAssigned OrElse bIsAssigned Then
+                    MsgBox("Developer error: Using bToScriptAsRString = True when RFunction is assigned will not produce the correct script. Remove assignment to use this options correctly.")
+                End If
+                'Cannot have double quotes ("") in the string because strTemp will be wrapped with ""
+                'In most cases signle quotes (') will give same functionality, though it's preferable to avoid this when constructing the RFunction
+                strTemp = strTemp.Replace(Chr(34), Chr(39))
+                strTemp = Chr(34) & strTemp & Chr(34)
             End If
-            'Cannot have double quotes ("") in the string because strTemp will be wrapped with ""
-            'In most cases signle quotes (') will give same functionality, though it's preferable to avoid this when constructing the RFunction
-            strTemp = strTemp.Replace(Chr(34), Chr(39))
-            strTemp = Chr(34) & strTemp & Chr(34)
         End If
         Return MyBase.ToScript(strScript, strTemp)
     End Function
@@ -95,6 +97,12 @@ Public Class ROperator
             clsParameters.Clear()
         End If
         OnParametersChanged()
+    End Sub
+
+    Public Overrides Sub Clear()
+        SetOperation("")
+        bForceIncludeOperation = False
+        MyBase.Clear()
     End Sub
 
     Public Overrides Function Clone() As RCodeStructure

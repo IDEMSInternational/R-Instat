@@ -94,7 +94,7 @@ Public Class ucrCore
 
     'Update the control based on the code in RCodeStructure
     'bReset : should the control reset to the default value if the parameter is not present in the code
-    Public Overridable Sub UpdateControl(Optional bReset As Boolean = False)
+    Public Overridable Sub UpdateControl(Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
         Dim clsTempRCode As RCodeStructure
         Dim clsTempRParameter As RParameter
         Dim clsTempCloneParameter As RParameter
@@ -113,8 +113,13 @@ Public Class ucrCore
                             'Not an issue if controls do not need to share parameters
                             'This is needed so that if this parameter is contained in functions in multiple dialogs,
                             'the parameter only changes the functions in the currently open dialog
-                            clsTempCloneParameter = GetParameter(i).Clone()
-                            If Not bUpdateRCodeFromControl AndAlso bChangeParameterValue Then
+                            If bCloneIfNeeded Then
+                                clsTempCloneParameter = GetParameter(i).Clone()
+                            Else
+                                clsTempCloneParameter = GetParameter(i)
+                            End If
+
+                            If Not bUpdateRCodeFromControl AndAlso bChangeParameterValue AndAlso objDefaultState Is Nothing Then
                                 clsTempCloneParameter.ClearAllArguments()
                             End If
                             SetParameter(clsTempCloneParameter, i)
@@ -221,26 +226,28 @@ Public Class ucrCore
         UpdateLinkedControls(bReset)
     End Sub
 
-    Public Overridable Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False)
+    Public Overridable Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False, Optional bUpdate As Boolean = True, Optional bCloneIfNeeded As Boolean = False)
         If clsRCode Is Nothing OrElse Not clsRCode.Equals(clsNewCodeStructure) Then
             clsRCode = clsNewCodeStructure
-            If bUpdateRCodeFromControl AndAlso CanUpdate() Then
+            If clsRCode IsNot Nothing AndAlso bUpdateRCodeFromControl AndAlso CanUpdate() AndAlso bUpdate Then
                 UpdateRCode(bReset)
             End If
         End If
-        UpdateControl(bReset)
+        If bUpdate Then
+            UpdateControl(bReset:=bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        End If
     End Sub
 
     'TODO in future may want to set RCode and RSyntax together if both needed for conditions
     '     then would need method to add both at the same time
-    Public Overridable Sub SetRSyntax(clsNewRSyntax As RSyntax, Optional bReset As Boolean = False)
+    Public Overridable Sub SetRSyntax(clsNewRSyntax As RSyntax, Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
         If clsRSyntax Is Nothing OrElse Not clsRSyntax.Equals(clsNewRSyntax) Then
             clsRSyntax = clsNewRSyntax
             If bUpdateRCodeFromControl AndAlso CanUpdate() Then
                 UpdateRCode(bReset)
             End If
         End If
-        UpdateControl(bReset)
+        UpdateControl(bReset, bCloneIfNeeded:=bCloneIfNeeded)
     End Sub
 
     Protected Overridable Function CanUpdate()
@@ -553,7 +560,7 @@ Public Class ucrCore
             lstAllRCodes.Add(clsNewRCode)
             lstAllRParameters.Add(clsNewRParameter)
         Else
-            MsgBox("Developer error: Cannot add additional RCode and RParameter pair because the addional pair number is out of bounds of the current pairs.")
+            MsgBox("Developer error: Cannot add additional RCode and RParameter pair because the additional pair number is out of bounds of the current pairs.")
         End If
     End Sub
 
