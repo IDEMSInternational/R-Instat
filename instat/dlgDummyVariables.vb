@@ -46,6 +46,7 @@ Public Class dlgDummyVariables
         ucrReceiverFactor.Selector = ucrSelectorDummyVariable
         ucrReceiverFactor.SetMeAsReceiver()
         ucrReceiverFactor.SetIncludedDataTypes({"factor"})
+        ucrReceiverFactor.strSelectorHeading = "Factors"
         ucrReceiverFactor.SetParameterIsRFunction()
 
         'Set RadioBattons : Parameters yet to be set up
