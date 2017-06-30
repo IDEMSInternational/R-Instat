@@ -243,13 +243,16 @@ Public Class dlgOneVarFitModel
         SetBaseFunction()
         SetDistributions()
 
-        clsROneVarFitModel.SetAssignTo(ucrSaveModel.GetText, strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:=ucrSaveModel.GetText)
+        clsROneVarFitModel.SetAssignTo("last_model", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model")
+        clsRLogLikFunction.SetAssignTo("last_likelihood", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_likelihood")
+        clsRplotFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_graph")
 
         UcrBase.clsRsyntax.ClearCodes()
         UcrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModel)
 
         clsRplotFunction.AddParameter("x", clsRFunctionParameter:=clsROneVarFitModel)
         UcrBase.clsRsyntax.AddToAfterCodes(clsRplotFunction, iPosition:=1)
+        UcrBase.clsRsyntax.AddToAfterCodes(clsRLogLikFunction, iPosition:=2)
 
         bResetSubdialog = True
     End Sub

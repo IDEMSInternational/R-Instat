@@ -54,6 +54,20 @@ Public Class sdgOneVarFitModDisplay
         ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoQQPlot, {"qqcomp"})
         ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoPPPlot, {"ppcomp"})
 
+        ucrSavePlots.SetPrefix("plot")
+        ucrSavePlots.SetSaveTypeAsGraph()
+        ucrSavePlots.SetDataFrameSelector(dlgOneVarFitModel.ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
+        ucrSavePlots.SetCheckBoxText("Save Graph")
+        ucrSavePlots.SetIsComboBox()
+        ucrSavePlots.SetAssignToIfUncheckedValue("last_graph")
+
+        ucrSaveLikelihood.SetPrefix("likelihood")
+        ucrSaveLikelihood.SetSaveTypeAsGraph()
+        ucrSaveLikelihood.SetDataFrameSelector(dlgOneVarFitModel.ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
+        ucrSaveLikelihood.SetCheckBoxText("Save Graph")
+        ucrSaveLikelihood.SetIsComboBox()
+        ucrSaveLikelihood.SetAssignToIfUncheckedValue("last_likelihood")
+
         bControlsInitialised = True
     End Sub
 
@@ -74,7 +88,9 @@ Public Class sdgOneVarFitModDisplay
         clsRplotQqComp = clsNewRplotQqComp
         clsRplotDenscomp = clsNewRplotDenscomp
         clsRLogLikFunction = clsNewRLogLikFunction
-        ucrPnlLikelihood.SetRCode(clsRLogLikFunction, bReset, bCloneIfNeeded:=True)
+        ucrSavePlots.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
+        ucrSaveLikelihood.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
+        ucrPnlLikelihood.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
         ucrChkPLotLogLik.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
         ucrPnlPlots.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
     End Sub
