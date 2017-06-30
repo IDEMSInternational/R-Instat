@@ -41,8 +41,6 @@ Partial Class dlgCountinFactor
         '
         'ucrNewColName
         '
-        Me.ucrNewColName.bAddRemoveParameter = True
-        Me.ucrNewColName.bChangeParameterValue = True
         Me.ucrNewColName.Location = New System.Drawing.Point(9, 210)
         Me.ucrNewColName.Name = "ucrNewColName"
         Me.ucrNewColName.Size = New System.Drawing.Size(255, 24)
@@ -51,27 +49,25 @@ Partial Class dlgCountinFactor
         'UcrDialogDisabled1
         '
         Me.UcrDialogDisabled1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.UcrDialogDisabled1.Location = New System.Drawing.Point(126, 83)
+        Me.UcrDialogDisabled1.Location = New System.Drawing.Point(96, 98)
         Me.UcrDialogDisabled1.Name = "UcrDialogDisabled1"
-        Me.UcrDialogDisabled1.Size = New System.Drawing.Size(150, 92)
+        Me.UcrDialogDisabled1.Size = New System.Drawing.Size(209, 106)
         Me.UcrDialogDisabled1.TabIndex = 6
         '
         'ucrCountReceiver
         '
-        Me.ucrCountReceiver.bAddRemoveParameter = True
-        Me.ucrCountReceiver.bChangeParameterValue = True
         Me.ucrCountReceiver.frmParent = Me
         Me.ucrCountReceiver.Location = New System.Drawing.Point(269, 60)
         Me.ucrCountReceiver.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrCountReceiver.Name = "ucrCountReceiver"
         Me.ucrCountReceiver.Selector = Nothing
         Me.ucrCountReceiver.Size = New System.Drawing.Size(130, 20)
+        Me.ucrCountReceiver.strNcFilePath = ""
         Me.ucrCountReceiver.TabIndex = 2
+        Me.ucrCountReceiver.ucrSelector = Nothing
         '
         'ucrCountSelector
         '
-        Me.ucrCountSelector.bAddRemoveParameter = True
-        Me.ucrCountSelector.bChangeParameterValue = True
         Me.ucrCountSelector.bShowHiddenColumns = False
         Me.ucrCountSelector.bUseCurrentFilter = True
         Me.ucrCountSelector.Location = New System.Drawing.Point(9, 9)
