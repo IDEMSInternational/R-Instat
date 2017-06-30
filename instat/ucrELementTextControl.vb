@@ -99,29 +99,29 @@ Public Class ucrELementTextControl
         clsThemeFunction = clsNewThemeFunction
         clsElementText = clsNewElementText
 
-        ucrNudAngle.SetRCode(clsElementText, bReset)
-        ucrChkAngle.SetRCode(clsElementText, bReset)
+        ucrNudAngle.SetRCode(clsElementText, bReset, bCloneIfNeeded:=True)
+        ucrChkAngle.SetRCode(clsElementText, bReset, bCloneIfNeeded:=True)
 
-        ucrNudHjust.SetRCode(clsElementText, bReset)
-        ucrChkHjust.SetRCode(clsElementText, bReset)
+        ucrNudHjust.SetRCode(clsElementText, bReset, bCloneIfNeeded:=True)
+        ucrChkHjust.SetRCode(clsElementText, bReset, bCloneIfNeeded:=True)
 
-        ucrNudLineHeight.SetRCode(clsElementText, bReset)
-        ucrChkLineHeight.SetRCode(clsElementText, bReset)
+        ucrNudLineHeight.SetRCode(clsElementText, bReset, bCloneIfNeeded:=True)
+        ucrChkLineHeight.SetRCode(clsElementText, bReset, bCloneIfNeeded:=True)
 
-        ucrNudsize.SetRCode(clsElementText, bReset)
-        ucrChkSize.SetRCode(clsElementText, bReset)
+        ucrNudsize.SetRCode(clsElementText, bReset, bCloneIfNeeded:=True)
+        ucrChkSize.SetRCode(clsElementText, bReset, bCloneIfNeeded:=True)
 
-        ucrNudVjust.SetRCode(clsElementText, bReset)
-        ucrChkVjust.SetRCode(clsElementText, bReset)
+        ucrNudVjust.SetRCode(clsElementText, bReset, bCloneIfNeeded:=True)
+        ucrChkVjust.SetRCode(clsElementText, bReset, bCloneIfNeeded:=True)
 
-        ucrTextColors.SetRCode(clsElementText, bReset)
-        ucrChkTextColour.SetRCode(clsElementText, bReset)
+        ucrTextColors.SetRCode(clsElementText, bReset, bCloneIfNeeded:=True)
+        ucrChkTextColour.SetRCode(clsElementText, bReset, bCloneIfNeeded:=True)
 
-        ucrInputTextFace.SetRCode(clsElementText, bReset)
-        ucrChkTextFace.SetRCode(clsElementText, bReset)
+        ucrInputTextFace.SetRCode(clsElementText, bReset, bCloneIfNeeded:=True)
+        ucrChkTextFace.SetRCode(clsElementText, bReset, bCloneIfNeeded:=True)
 
-        ucrInputTextFamily.SetRCode(clsElementText, bReset)
-        ucrChkTextFamily.SetRCode(clsElementText, bReset)
+        ucrInputTextFamily.SetRCode(clsElementText, bReset, bCloneIfNeeded:=True)
+        ucrChkTextFamily.SetRCode(clsElementText, bReset, bCloneIfNeeded:=True)
 
         AddRemoveElementAxis()
     End Sub
