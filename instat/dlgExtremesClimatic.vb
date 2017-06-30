@@ -43,24 +43,29 @@ Public Class dlgExtremesClimatic
         ucrReceiverYear.Selector = ucrSelectorClimaticExtremes
         ucrReceiverYear.SetClimaticType("year")
         ucrReceiverYear.bAutoFill = True
+        ucrReceiverYear.strSelectorHeading = "Numerics"
 
         ucrReceiverStations.Selector = ucrSelectorClimaticExtremes
         ucrReceiverStations.SetClimaticType("station")
         ucrReceiverStations.bAutoFill = True
+        ucrReceiverStations.strSelectorHeading = "Factors"
 
         ucrReceiverDate.SetClimaticType("date")
         ucrReceiverDate.SetMeAsReceiver()
         ucrReceiverDate.Selector = ucrSelectorClimaticExtremes
         ucrReceiverDate.bAutoFill = True
+        ucrReceiverDate.strSelectorHeading = "Date"
 
         ucrReceiverDOY.SetClimaticType("doy")
         ucrReceiverDOY.Selector = ucrSelectorClimaticExtremes
         ucrReceiverDOY.bAutoFill = True
+        ucrReceiverDOY.strSelectorHeading = "Numerics"
 
         ucrReceiverElement.SetParameter(New RParameter("x", 0))
         ucrReceiverElement.Selector = ucrSelectorClimaticExtremes
         ucrReceiverElement.SetParameterIsString()
         ucrReceiverElement.bWithQuotes = False
+        ucrReceiverElement.strSelectorHeading = "Numerics"
 
         'ucrRdoOptions
         ucrPnlExtremesType.AddRadioButton(rdoMinMax)
