@@ -68,10 +68,6 @@ Public Class dlgOneVarFitModel
         ucrSaveModel.SetAssignToIfUncheckedValue("last_model")
 
         ucrChkBinModify.SetText("Modify Conditions for 'Success'")
-        ' sdgOneVarFitModDisplay.SetModelFunction(clsROneVarFitModel)
-        'sdgOneVarFitModel.SetMyRFunction(clsROneVarFitModel)
-        'sdgOneVarFitModDisplay.SetDistribution(ucrFamily)
-        'sdgOneVarFitModel.SetDistribution(ucrFamily)
 
         ucrPnlGeneralExactCase.AddRadioButton(rdoGeneralCase)
         ucrPnlGeneralExactCase.AddRadioButton(rdoExactCase)
@@ -177,7 +173,6 @@ Public Class dlgOneVarFitModel
         clsRfitdist.SetPackageName("fitdistrplus")
         clsRfitdist.SetRCommand("fitdist")
         clsFamilyFunction = ucrDistributionChoice.clsCurrRFunction
-        'clsFamilyFunction.SetRCommand(ucrDistributionChoice.clsCurrDistribution.strGLMFunctionName)
         BinomialConditions()
 
         'Exact Case
@@ -276,12 +271,6 @@ Public Class dlgOneVarFitModel
         UcrReceiver.AddAdditionalCodeParameterPair(clsRMean, New RParameter("x"), iAdditionalPairNo:=6)
         UcrReceiver.AddAdditionalCodeParameterPair(clsRBinomTest, New RParameter("x"), iAdditionalPairNo:=7)
         UcrReceiver.AddAdditionalCodeParameterPair(clsRStartValues, New RParameter("x"), iAdditionalPairNo:=8)
-
-        'UcrReceiver.AddAdditionalCodeParameterPair(clsRplotFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
-        'UcrReceiver.AddAdditionalCodeParameterPair(clsRplotPPComp, New RParameter("ft", 0), iAdditionalPairNo:=2)
-        'UcrReceiver.AddAdditionalCodeParameterPair(clsRplotCdfcomp, New RParameter("ft", 0), iAdditionalPairNo:=3)
-        'UcrReceiver.AddAdditionalCodeParameterPair(clsRplotQqComp, New RParameter("ft", 0), iAdditionalPairNo:=4)
-        'UcrReceiver.AddAdditionalCodeParameterPair(clsRplotDenscomp, New RParameter("ft", 0), iAdditionalPairNo:=4)
 
         ucrSaveModel.SetRCode(clsROneVarFitModel, bReset)
         ucrChkConvertVariate.AddAdditionalCodeParameterPair(clsROneVarFitModel, ucrChkConvertVariate.GetParameter(), iAdditionalPairNo:=1)
