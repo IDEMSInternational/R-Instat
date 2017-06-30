@@ -39,6 +39,7 @@ Public Class dlgRecodeNumericIntoQuantiles
         ucrReceiverNumeric.Selector = ucrSelectorRecodeNumeric
         ucrReceiverNumeric.SetMeAsReceiver()
         ucrReceiverNumeric.SetDataType("numeric")
+        ucrReceiverNumeric.strSelectorHeading = "Numerics"
 
         ucrNudQuantileAlgorithm.SetParameter(New RParameter("type", 1))
         ucrNudQuantileAlgorithm.SetMinMax(1, 9)

@@ -45,6 +45,7 @@ Public Class dlgReferenceLevel
         ucrReceiverReferenceLevels.Selector = ucrSelectorForReferenceLevels
         ucrReceiverReferenceLevels.SetMeAsReceiver()
         ucrReceiverReferenceLevels.SetIncludedDataTypes({"factor"})
+        ucrReceiverReferenceLevels.strSelectorHeading = "Factors"
         ucrReceiverReferenceLevels.SetExcludedDataTypes({"ordered,factor"})
 
         ucrFactorReferenceLevels.SetParameter(New RParameter("new_ref_level", 2))
