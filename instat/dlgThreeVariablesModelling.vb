@@ -185,6 +185,7 @@ Public Class dlgThreeVariableModelling
 
         ucrBase.clsRsyntax.AddToAfterCodes(clsAnovaFunction, 1)
         ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, 2)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsAutoPlot, 5)
         clsLMOrGLM = clsLM
 
 
@@ -304,11 +305,11 @@ Public Class dlgThreeVariableModelling
 
             'Update display functions to contain correct model
             clsFormulaFunction.AddParameter("x", clsRFunctionParameter:=clsLMOrGLM)
-            clsAnovaFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM)
-            clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM)
-            clsConfint.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM)
-            clsVisReg.AddParameter("fit", clsRFunctionParameter:=clsLMOrGLM)
-            clsAutoPlot.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM)
+            clsAnovaFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
+            clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
+            clsConfint.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
+            clsVisReg.AddParameter("fit", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
+            clsAutoPlot.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
             ucrBase.clsRsyntax.SetBaseRFunction(clsLMOrGLM)
         End If
     End Sub
@@ -316,29 +317,6 @@ Public Class dlgThreeVariableModelling
     Public Sub ucrFamily_cboDistributionsIndexChanged() Handles ucrDistributionChoice.DistributionsIndexChanged
         SetBaseFunction()
         clsFamilyFunction.RemoveParameterByName("link")
-        'TODO:   Include multinomial as an option And the appropriate function
-        'If (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal") Then
-        'ElseIf (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Gamma" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Quasipoisson") Then
-        '    clsFamilyFunction.SetRCommand(ucrDistributionChoice.clsCurrDistribution.strGLMFunctionName)
-        '    ucrBase.clsRsyntax.SetFunction("glm")
-        '    ucrBase.clsRsyntax.AddParameter("family", clsRFunctionParameter:=clsFamilyFunction)
-        '    clsFamilyFunction.AddParameter("link", "log")
-        'ElseIf (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Quasi") Then
-        '    clsFamilyFunction.SetRCommand(ucrDistributionChoice.clsCurrDistribution.strGLMFunctionName)
-        '    ucrBase.clsRsyntax.SetFunction("glm")
-        '    ucrBase.clsRsyntax.AddParameter("family", clsRFunctionParameter:=clsFamilyFunction)
-        '    clsFamilyFunction.AddParameter("link", "identity")
-        'ElseIf (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Inverse_Gaussian") Then
-        '    clsFamilyFunction.SetRCommand(ucrDistributionChoice.clsCurrDistribution.strGLMFunctionName)
-        '    ucrBase.clsRsyntax.SetFunction("glm")
-        '    ucrBase.clsRsyntax.AddParameter("family", clsRFunctionParameter:=clsFamilyFunction)
-        '    clsFamilyFunction.AddParameter("link", "1/mu^2")
-        'Else
-        '    clsFamilyFunction.SetRCommand(ucrDistributionChoice.clsCurrDistribution.strGLMFunctionName)
-        '    ucrBase.clsRsyntax.SetFunction("glm")
-        '    ucrBase.clsRsyntax.AddParameter("family", clsRFunctionParameter:=clsFamilyFunction)
-        '    clsFamilyFunction.AddParameter("link", "logit")
-        'End If
     End Sub
 
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
