@@ -44,6 +44,7 @@ Public Class dlgSplitText
         ucrReceiverSplitTextColumn.SetMeAsReceiver()
         ucrReceiverSplitTextColumn.bUseFilteredData = False
         ucrReceiverSplitTextColumn.SetIncludedDataTypes({"factor", "character"})
+        ucrReceiverSplitTextColumn.strSelectorHeading = "Characters"
 
         ucrInputPattern.SetParameter(New RParameter("pattern", 1))
         dctPatternPairs.Add("Space ( )", Chr(34) & " " & Chr(34))

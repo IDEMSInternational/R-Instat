@@ -58,6 +58,7 @@ Public Class dlgRenameObjects
         ucrReceiverCurrentName.SetMeAsReceiver()
         ucrReceiverCurrentName.SetParameterIsString()
         ucrReceiverCurrentName.SetItemType("object")
+        ucrReceiverCurrentName.strSelectorHeading = "Objects"
 
         'ucrNewName
         ucrInputNewName.SetParameter(New RParameter("new_name", 2))
