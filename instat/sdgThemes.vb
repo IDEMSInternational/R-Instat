@@ -358,20 +358,20 @@ Public Class sdgThemes
 
         ucrPlotMargin.SetRCodeForControl("plot.margin", clsUnitPlotMargin, clsNewThemeFunction:=clsThemeFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset)
 
-        urChkLegendPosition.SetRCode(clsThemeFunction, bReset)
-        ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset)
+        urChkLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLegendPosition.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
 
-        ucrChkLegendBox.SetRCode(clsThemeFunction, bReset)
-        ucrInputLegendBox.SetRCode(clsThemeFunction, bReset)
+        ucrChkLegendBox.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLegendBox.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
 
-        urChkLegendBoxJust.SetRCode(clsThemeFunction, bReset)
-        ucrInputLegendBoxJust.SetRCode(clsThemeFunction, bReset)
+        urChkLegendBoxJust.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLegendBoxJust.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
 
-        ucrChkLegendDirection.SetRCode(clsThemeFunction, bReset)
-        ucrInputLegendDirection.SetRCode(clsThemeFunction, bReset)
+        ucrChkLegendDirection.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLegendDirection.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
 
-        ucrChkLegendJustification.SetRCode(clsThemeFunction, bReset)
-        ucrInputLegendJustification.SetRCode(clsThemeFunction, bReset)
+        ucrChkLegendJustification.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLegendJustification.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
         AddRemoveElementParameters()
     End Sub
 
