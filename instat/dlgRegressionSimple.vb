@@ -107,7 +107,6 @@ Public Class dlgRegressionSimple
         '###################################
 
         ' Two sample controls
-
         ucrNudCI.SetParameter(New RParameter("conf.level"))
         ucrNudCI.SetLinkedDisplayControl(lblConfidenceInterval)
         ucrNudCI.SetLinkedDisplayControl(grpParameters)
@@ -121,8 +120,6 @@ Public Class dlgRegressionSimple
 
         ucrChkPairedTest.SetText("Paired Text")
         ucrChkPairedTest.Enabled = False 'for the time being
-
-        'ucrPnlModelType.AddToLinkedControls(ucrChkFunction, {rdoge}, bNewLinkedChangeToDefaultState:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=True)
 
         ucrNudHypothesis.SetParameter(New RParameter("r"))
 
@@ -336,7 +333,6 @@ Public Class dlgRegressionSimple
         'sdgModelOptions.ucrFamily.RecieverDatatype(ucrDistributionChoice.strDataType)
         'sdgModelOptions.ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = sdgModelOptions.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrDistributionChoice.clsCurrDistribution.strNameTag)
         'sdgModelOptions.RestrictLink()
-        ExplanatoryFunctionSelect()
         SetBaseFunction()
         DataTypeAccepted()
     End Sub
@@ -356,15 +352,6 @@ Public Class dlgRegressionSimple
             ucrReceiverExplanatory.SetIncludedDataTypes({"integer", "numeric", "character", "factor"})
         End If
     End Sub
-
-    'Private Sub ucrChkFunction_ControlValueChanged(ucrChangedControl As ucrCore)
-    '    If ucrChkFunction.Checked Then
-    '        'sdgVariableTransformations.SetRCodeForControls(clsNewLMorGLM:=clsLMOrGLM, clsNewFormulaOperator:=clsFormulaOperator, bReset:=bResetSubDialog, clsRXVariableNew:=clsRXVariable, clsRYVariableNew:=clsRYVariable, clsRModelNew:=clsModel)
-    '        sdgVariableTransformations.ShowDialog()
-    '        ExplanatoryFunctionSelect()
-    '        bResetSubDialog = False
-    '    End If
-    'End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
         sdgSimpleRegOptions.SetRCode(ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewConfint:=clsConfint, clsNewVisReg:=clsVisReg, clsNewAutoplot:=clsAutoPlot, bReset:=bResetOptionsSubDialog)
@@ -688,29 +675,10 @@ Public Class dlgRegressionSimple
         ConvertToVariate()
     End Sub
 
-    Private Sub ExplanatoryFunctionSelect()
-        'Dim strExplanatoryType As String
-        'If Not ucrReceiverExplanatory.IsEmpty AndAlso rdoGeneralCase.Checked Then
-        '    strExplanatoryType = frmMain.clsRLink.GetDataType(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverExplanatory.GetVariableNames(bWithQuotes:=False))
-        '    If rdoGeneralCase.Checked AndAlso (strExplanatoryType = "numeric" OrElse strExplanatoryType = "positive integer" OrElse strExplanatoryType = "integer") Then
-        '        ucrChkFunction.Visible = True
-        '    Else
-        '        ucrChkFunction.Checked = False
-        '        ucrChkFunction.Visible = False
-        '    End If
-        '    If ucrChkFunction.Checked Then
-        '        'sdgVariableTransformations.ModelFunction(False)
-        '    Else
-        '        sdgVariableTransformations.rdoIdentity.Checked = True
-        '        'clsRLmOrGLM.AddParameter(strParameterValue:=ucrExplanatory.GetVariableNames(bWithQuotes:=False))
-        '    End If
-        'End If
-    End Sub
-
     Private Sub ucrExplanatory_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExplanatory.ControlValueChanged
         If bRCodeSet Then
             If Not ucrReceiverExplanatory.IsEmpty Then
-                clsFormulaOperator.AddParameter("exp1", ucrReceiverExplanatory.GetVariableNames(False), iPosition:=0)
+                clsFormulaOperator.AddParameter("exp1", ucrReceiverExplanatory.GetVariableNames(False), iPosition:=1)
             Else
                 clsFormulaOperator.RemoveParameterByName("exp1")
             End If
@@ -735,12 +703,6 @@ Public Class dlgRegressionSimple
         SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
-
-    ' Private Sub chkFunction_CheckedChanged(ucrChangedControl As ucrCore) Handles ucrChkFunction.ControlValueChanged
-    'If ucrChkFunction.Checked Then
-    '    ExplanatoryFunctionSelect()
-    'End If
-    'End Sub
 
     Private Sub Display()
         'If rdoGeneral.Checked Then
@@ -836,7 +798,6 @@ Public Class dlgRegressionSimple
         Else
             ucrDistributionChoice.SetExactDistributions()
         End If
-        ExplanatoryFunctionSelect()
         SetBaseFunction()
         ConvertToVariate()
         DataTypeAccepted()
