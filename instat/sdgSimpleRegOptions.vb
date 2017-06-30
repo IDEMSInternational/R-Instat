@@ -113,6 +113,25 @@ Public Class sdgSimpleRegOptions
         ucrPnlIndividualPlots.AddRadioButton(rdoCooksDistanceLeverage)
         ucrPnlIndividualPlots.AddRadioButton(rdoCooksDistance)
 
+        ucrPnlIndividualPlots.AddParameterValuesCondition(rdoResidualsFitted, "which", "1")
+        ucrPnlIndividualPlots.AddParameterValuesCondition(rdoResidualsFitted, "ncol", False)
+
+        ucrPnlIndividualPlots.AddParameterValuesCondition(rdoQQ, "which", "2")
+        ucrPnlIndividualPlots.AddParameterValuesCondition(rdoQQ, "ncol", False)
+
+        ucrPnlIndividualPlots.AddParameterValuesCondition(rdoResidualsLeverage, "which", "5")
+        ucrPnlIndividualPlots.AddParameterValuesCondition(rdoResidualsLeverage, "ncol", False)
+
+        ucrPnlIndividualPlots.AddParameterValuesCondition(rdoScaleLocation, "which", "3")
+        ucrPnlIndividualPlots.AddParameterValuesCondition(rdoScaleLocation, "ncol", False)
+
+        ucrPnlIndividualPlots.AddParameterValuesCondition(rdoCooksDistanceLeverage, "which", "6")
+        ucrPnlIndividualPlots.AddParameterValuesCondition(rdoCooksDistanceLeverage, "ncol", False)
+
+        ucrPnlIndividualPlots.AddParameterValuesCondition(rdoCooksDistance, "which", "4")
+        ucrPnlIndividualPlots.AddParameterValuesCondition(rdoCooksDistance, "ncol", False)
+
+
         ucrChkIndividualPlots.AddFunctionNamesCondition(False, "autoplot", False)
         'ucrChkIndividualPlots.AddFunctionNamesCondition(True, "autoplot")
         ucrChkIndividualPlots.SetText("Individual Plots")
@@ -257,22 +276,22 @@ Public Class sdgSimpleRegOptions
         'Individual plots
 
         If rdoQQ.Checked Then
-            ' clsAutoplot.RemoveParameterByName("ncol")
+            clsAutoplot.RemoveParameterByName("ncol")
             clsAutoplot.AddParameter("which", 2)
         ElseIf rdoResidualsFitted.Checked Then
-            '  clsAutoplot.RemoveParameterByName("ncol")
+            clsAutoplot.RemoveParameterByName("ncol")
             clsAutoplot.AddParameter("which", 1)
         ElseIf rdoResidualsLeverage.Checked Then
-            ' clsAutoplot.RemoveParameterByName("ncol")
+            clsAutoplot.RemoveParameterByName("ncol")
             clsAutoplot.AddParameter("which", 5)
         ElseIf rdoCooksDistanceLeverage.Checked Then
-            ' clsAutoplot.RemoveParameterByName("ncol")
+            clsAutoplot.RemoveParameterByName("ncol")
             clsAutoplot.AddParameter("which", 6)
         ElseIf rdoCooksDistance.Checked Then
-            'clsAutoplot.RemoveParameterByName("ncol")
+            clsAutoplot.RemoveParameterByName("ncol")
             clsAutoplot.AddParameter("which", 4)
         ElseIf rdoScaleLocation.Checked Then
-            'clsAutoplot.RemoveParameterByName("ncol")
+            clsAutoplot.RemoveParameterByName("ncol")
             clsAutoplot.AddParameter("which", 3)
 
         End If
@@ -288,8 +307,6 @@ Public Class sdgSimpleRegOptions
             clsAutoplot.AddParameter("ncol", 2)
             clsAutoplot.AddParameter("which", "1:6")
         End If
-
-
     End Sub
 
     Private Sub ucrChkModel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkModel.ControlValueChanged
