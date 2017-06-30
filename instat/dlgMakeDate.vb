@@ -281,6 +281,16 @@ Public Class dlgMakeDate
         bUseSelectedColumn = True
     End Sub
 
+    Private Sub SelectorHeader()
+        If rdoDefaultFormat.Checked Then
+            ucrReceiverForDate.strSelectorHeading = "Factors"
+        ElseIf rdoSpecifyOrigin.Checked
+            ucrReceiverForDate.strSelectorHeading = "Numerics"
+        Else
+            ucrReceiverForDate.strSelectorHeading = "Variables"
+        End If
+    End Sub
+
     Private Sub SetDefaultColumn()
         rdoSingleColumn.Checked = True
         SetRCodeForControls(True)
@@ -369,6 +379,7 @@ Public Class dlgMakeDate
         Else
             ucrReceiverForDate.SetIncludedDataTypes({"numeric", "character", "factor", "integer"})
         End If
+        SelectorHeader()
     End Sub
 
     'Temporary fix: This should be deleted since - this should be automatic
