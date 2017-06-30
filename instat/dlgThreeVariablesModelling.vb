@@ -35,7 +35,6 @@ Public Class dlgThreeVariableModelling
     Private clsFirstPowerOperator As ROperator
     Private clsSecondTransformFunction As RFunction
     Private clsSecondPowerOperator As ROperator
-    Public bResetOptionsSubDialog As Boolean = False
 
     Private Sub dlgThreeVariableModelling_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -285,9 +284,9 @@ Public Class dlgThreeVariableModelling
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        sdgSimpleRegOptions.SetRCode(ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewConfint:=clsConfint, clsNewVisReg:=clsVisReg, clsNewAutoplot:=clsAutoPlot, bReset:=bResetOptionsSubDialog)
+        sdgSimpleRegOptions.SetRCode(ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewConfint:=clsConfint, clsNewVisReg:=clsVisReg, clsNewAutoplot:=clsAutoPlot, bReset:=bResetDisplayOptions)
         sdgSimpleRegOptions.ShowDialog()
-        bResetOptionsSubDialog = False
+        bResetDisplayOptions = False
     End Sub
 
     Private Sub SetExplanatoryOperator()
