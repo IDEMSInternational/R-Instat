@@ -148,7 +148,9 @@
     <Compile Include="clsBlockReader.vb" />
     <Compile Include="clsCondition.vb" />
     <Compile Include="clsGgplotDefaults.vb" />
+    <Compile Include="clsInstatOptionsDefaults.vb" />
     <Compile Include="clsRCodeStructure.vb" />
+    <Compile Include="clsRegressionDefaults.vb" />
     <Compile Include="dlgAddComment.Designer.vb">
       <DependentUpon>dlgAddComment.vb</DependentUpon>
     </Compile>
@@ -165,6 +167,12 @@
       <DependentUpon>dlgAddLink.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgAddLink.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgAutoSaveRecovery.Designer.vb">
+      <DependentUpon>dlgAutoSaveRecovery.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgAutoSaveRecovery.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgCalculationsSummary.Designer.vb">
@@ -1884,12 +1892,6 @@
     <Compile Include="dlgWaterBalance.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgWindrosePlot.designer.vb">
-      <DependentUpon>dlgWindrosePlot.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgWindrosePlot.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgYearRaincount.designer.vb">
       <DependentUpon>dlgYearRaincount.vb</DependentUpon>
     </Compile>
@@ -2214,6 +2216,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgAddLink.resx">
       <DependentUpon>dlgAddLink.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgAutoSaveRecovery.resx">
+      <DependentUpon>dlgAutoSaveRecovery.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCalculationsSummary.fr-FR.resx">
       <DependentUpon>dlgCalculationsSummary.vb</DependentUpon>
@@ -4079,15 +4084,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgWaterBalance.sw-KE.resx">
       <DependentUpon>dlgWaterBalance.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgWindrosePlot.fr-FR.resx">
-      <DependentUpon>dlgWindrosePlot.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgWindrosePlot.resx">
-      <DependentUpon>dlgWindrosePlot.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgWindrosePlot.sw-KE.resx">
-      <DependentUpon>dlgWindrosePlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgYearRaincount.fr-FR.resx">
       <DependentUpon>dlgYearRaincount.vb</DependentUpon>

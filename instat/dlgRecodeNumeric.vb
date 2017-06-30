@@ -39,6 +39,7 @@ Public Class dlgRecodeNumeric
         ucrReceiverRecode.SetMeAsReceiver()
         ucrReceiverRecode.SetIncludedDataTypes({"numeric"})
         ucrBase.clsRsyntax.SetFunction("cut")
+        ucrReceiverRecode.strSelectorHeading = "Numerics"
         ucrBase.clsRsyntax.AddParameter("include.lowest", "TRUE")
         ucrBase.clsRsyntax.AddParameter("dig.lab", "10")
         ucrInputRecode.SetItemsTypeAsColumns()

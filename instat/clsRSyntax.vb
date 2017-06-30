@@ -41,6 +41,8 @@ Public Class RSyntax
     Public i As Integer
     Public bExcludeAssignedFunctionOutput As Boolean = True
 
+    Public bSeparateThread As Boolean = True
+
     Public Sub SetFunction(strFunctionName As String)
         'Warning: confusing name
         clsBaseFunction.SetRCommand(strFunctionName)
@@ -458,5 +460,17 @@ Public Class RSyntax
 
     Public Sub RemoveFromAfterCodes(clsNewRCode As RCodeStructure)
         lstAfterCodes.Remove(clsNewRCode)
+    End Sub
+
+    Public Sub ClearCodes()
+        lstBeforeCodes = New List(Of RCodeStructure)
+        lstAfterCodes = New List(Of RCodeStructure)
+        clsBaseFunction = Nothing
+        clsBaseOperator = Nothing
+        clsBaseCommandString = Nothing
+        strCommandString = ""
+        bUseBaseFunction = False
+        bUseBaseOperator = False
+        bUseCommandString = False
     End Sub
 End Class
