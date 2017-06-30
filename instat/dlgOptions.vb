@@ -62,6 +62,7 @@ Public Class dlgOptions
         ucrChkIncludeCommentsbyDefault.SetText("Include Comments by Default")
         ucrChkShowRCommandsinOutputWindow.SetText(" Show R Commands in Output Window")
         ucrChkShowSignifStars.SetText("Show stars on summary tables for coefficients")
+        ucrChkShowDataonGrid.SetText("Display dialog's selected data frame in grid")
         ucrChkIncludeDefaultParams.SetText("Include Default Parameter Values in R Commands")
         ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinOutputWindow)
         ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinRViewer)
@@ -87,6 +88,7 @@ Public Class dlgOptions
         ucrChkShowRCommandsinOutputWindow.Checked = frmMain.clsInstatOptions.bCommandsinOutput
         ucrNudDigits.Value = frmMain.clsInstatOptions.iDigits
         ucrChkShowSignifStars.Checked = frmMain.clsInstatOptions.bShowSignifStars
+        ucrChkShowDataonGrid.Checked = frmMain.clsInstatOptions.bChangeDataFrame
 
         Select Case frmMain.clsInstatOptions.strLanguageCultureCode
             Case "en-GB"
@@ -128,6 +130,7 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.SetCommandInOutpt(ucrChkShowRCommandsinOutputWindow.Checked)
         frmMain.clsInstatOptions.SetDigits(ucrNudDigits.Value)
         frmMain.clsInstatOptions.SetSignifStars(ucrChkShowSignifStars.Checked)
+        frmMain.clsInstatOptions.SetChangeDataFrame(ucrChkShowDataonGrid.Checked)
     End Sub
 
     Private Sub SetView()
@@ -288,7 +291,7 @@ Public Class dlgOptions
 
     End Sub
 
-    Private Sub ucrNudPreviewRows_ValueChanged() Handles ucrNudMaxCols.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged
+    Private Sub ucrNudPreviewRows_ValueChanged() Handles ucrNudMaxCols.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged
         ApplyEnabled(True)
     End Sub
     Private Sub ApplyEnabled(bEnable As Boolean)
