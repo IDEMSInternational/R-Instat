@@ -95,9 +95,9 @@ Partial Class dlgFromLibrary
         Me.rdoDefaultDatasets.FlatAppearance.BorderSize = 2
         Me.rdoDefaultDatasets.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoDefaultDatasets.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoDefaultDatasets.Location = New System.Drawing.Point(7, 12)
+        Me.rdoDefaultDatasets.Location = New System.Drawing.Point(69, 12)
         Me.rdoDefaultDatasets.Name = "rdoDefaultDatasets"
-        Me.rdoDefaultDatasets.Size = New System.Drawing.Size(124, 28)
+        Me.rdoDefaultDatasets.Size = New System.Drawing.Size(135, 28)
         Me.rdoDefaultDatasets.TabIndex = 20
         Me.rdoDefaultDatasets.TabStop = True
         Me.rdoDefaultDatasets.Tag = ""
@@ -113,7 +113,7 @@ Partial Class dlgFromLibrary
         Me.rdoInstatCollection.FlatAppearance.BorderSize = 2
         Me.rdoInstatCollection.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoInstatCollection.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoInstatCollection.Location = New System.Drawing.Point(129, 12)
+        Me.rdoInstatCollection.Location = New System.Drawing.Point(202, 12)
         Me.rdoInstatCollection.Name = "rdoInstatCollection"
         Me.rdoInstatCollection.Size = New System.Drawing.Size(157, 28)
         Me.rdoInstatCollection.TabIndex = 21
@@ -143,9 +143,9 @@ Partial Class dlgFromLibrary
         '
         'ucrPnlOptions
         '
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(5, 2)
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(59, 2)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        Me.ucrPnlOptions.Size = New System.Drawing.Size(297, 44)
+        Me.ucrPnlOptions.Size = New System.Drawing.Size(316, 44)
         Me.ucrPnlOptions.TabIndex = 19
         '
         'dlgFromLibrary
