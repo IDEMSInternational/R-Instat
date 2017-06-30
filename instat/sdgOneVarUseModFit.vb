@@ -30,7 +30,7 @@ Public Class sdgOneVarUseModFit
 
         ucrNudIterations.SetParameter(New RParameter("niter", 1))
         ucrNudIterations.SetMinMax(1, 10001)
-        ucrNudIterations.SetDefaultState(1001)
+        ucrNudIterations.SetRDefault(1001)
         ucrNudIterations.Increment = 100
 
         ucrNudCI.SetParameter(New RParameter("CI.level", 1))
