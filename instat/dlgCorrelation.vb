@@ -137,7 +137,7 @@ Public Class dlgCorrelation
         clsRGGcorrGraphicsFunction.AddParameter("data", "NULL")
 
         ucrBase.clsRsyntax.iCallType = 2
-        clsCorrelationTestFunction.iCallType = 2
+        'clsCorrelationTestFunction.iCallType = 2
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationFunction)
     End Sub
@@ -156,7 +156,7 @@ Public Class dlgCorrelation
         ucrPnlColumns.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrPnlMethod.SetRCode(clsCorrelationTestFunction, bReset)
         ucrPnlCompletePairwise.SetRCode(clsCorrelationFunction, bReset)
-        ucrSaveModel.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrSaveModel.SetRCode(clsCorrelationFunction, bReset)
     End Sub
 
     Public Sub TestOKEnabled()
