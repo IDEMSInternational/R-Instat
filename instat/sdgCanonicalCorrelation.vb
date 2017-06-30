@@ -30,8 +30,8 @@ Public Class sdgCanonicalCorrelation
     Public Sub InitialiseControls()
         ucrPnlVariables.AddRadioButton(rdoXVariables)
         ucrPnlVariables.AddRadioButton(rdoYVariables)
-        ucrPnlVariables.AddParameterPresentCondition(rdoXVariables, dlgCanonicalCorrelationAnalysis.ucrReceiverXvariables.GetVariableNames())
-        ucrPnlVariables.AddParameterPresentCondition(rdoYVariables, dlgCanonicalCorrelationAnalysis.ucrReceiverYvariables.GetVariableNames())
+        ucrPnlVariables.AddRSyntaxContainCodeCondition(rdoXVariables)
+        ucrPnlVariables.AddRSyntaxContainCodeCondition(rdoYVariables)
 
         ucrChkCanonicalCorrelations.SetText("canonical Correlations")
         ucrChkCoefficients.SetText("Coefficients")
@@ -69,6 +69,8 @@ Public Class sdgCanonicalCorrelation
         clsTempFunc.AddParameter("remove_attr", "TRUE")
         clsRGraphicsFunction.AddParameter("data", clsRFunctionParameter:=clsTempFunc)
 
+        ucrPnlVariables.SetRSyntax(clsRSyntax, bReset)
+        bControlsInitialised = True
         If bReset Then
             tbRegOptions.SelectedIndex = 0
         End If
