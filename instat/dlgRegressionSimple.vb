@@ -21,9 +21,10 @@ Public Class dlgRegressionSimple
     Public bFirstLoad As Boolean = True
     Public clsModel, clsRGraphicsOperator, clsFunctionOperation, clsPoissonOperation, clsPoissonOperation2, clsRBinomialOperation, clsRBinomialOperation2, clsRBinomialOperation3 As New ROperator
     Public clsRPoisson, clsVisReg, clsRLeverage, clsRWriteLeverage, clsRResiduals, clsRStdResiduals, clsRWriteResiduals, clsRWriteStdResiduals, clsRgeom_point, clsAutoPlot, clsRWriteFitted, clsRFittedValues, clsRestpvalFunction, clsRaovpvalFunction, clsRModelFunction, clsRaovFunction, clsRTTest, clsRFTest, clsRKruskalTest, clsRBinomial, clsRWilcoxTest, clsFamilyFunction, clsRFactor, clsRFactor2, clsRNumeric, clsxFunc, clsRMean, clsRMean2, clsRGroup, clsRGroup2, clsTFunc, clsRLength As New RFunction
+    Private clsTransformFunction As RFunction
 
     'General case codes
-    Public clsFormulaOperator As ROperator
+    Public clsFormulaOperator, clsPowerOperator As ROperator
     Public clsGLM, clsLM, clsLMOrGLM, clsAsNumeric As RFunction
 
     'Display options codes
@@ -35,6 +36,7 @@ Public Class dlgRegressionSimple
     Private bReset As Boolean = True
     Public bResetSubDialog As Boolean = False
     Public bResetOptionsSubDialog As Boolean = False
+     Public bResetFirstFunction As Boolean = False
 
     Private Sub dlgRegressionSimple_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
@@ -121,7 +123,6 @@ Public Class dlgRegressionSimple
         ucrChkPairedTest.Enabled = False 'for the time being
 
         'ucrPnlModelType.AddToLinkedControls(ucrChkFunction, {rdoge}, bNewLinkedChangeToDefaultState:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=True)
-        ucrChkFunction.SetText("Function")
 
         ucrNudHypothesis.SetParameter(New RParameter("r"))
 
@@ -136,6 +137,7 @@ Public Class dlgRegressionSimple
         clsFormulaOperator = New ROperator
         clsPoissonOperation = New ROperator
         clsRGraphicsOperator = New ROperator
+        clsPowerOperator = New ROperator
 
         ucrBase.clsRsyntax.ClearCodes()
         clsLM = New RFunction
@@ -167,6 +169,7 @@ Public Class dlgRegressionSimple
         clsAutoPlot = New RFunction
         clsRgeom_point = New RFunction
         clsVisReg = New RFunction
+        clsTransformFunction = New RFunction
 
         ucrSelectorSimpleReg.Reset()
         ucrReceiverResponse.SetMeAsReceiver()
@@ -183,6 +186,10 @@ Public Class dlgRegressionSimple
 
         clsGLM = clsRegressionDefaults.clsDefaultGlmFunction.Clone
         clsGLM.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
+
+        clsPowerOperator.SetOperation("^")
+        clsPowerOperator.AddParameter("power", 2, iPosition:=1)
+        clsPowerOperator.bBrackets = False
 
         'Residual Plots
         clsAutoPlot = clsRegressionDefaults.clsDefaultAutoplot.Clone
@@ -283,6 +290,7 @@ Public Class dlgRegressionSimple
 
         bResetSubDialog = True
         bResetOptionsSubDialog = True
+        bResetFirstFunction = True
     End Sub
 
     Private Sub SetRCodeForControls(bReset)
@@ -292,7 +300,7 @@ Public Class dlgRegressionSimple
         ucrSelectorSimpleReg.AddAdditionalCodeParameterPair(clsGLM, ucrSelectorSimpleReg.GetParameter(), 1)
         ucrSaveModels.AddAdditionalRCode(clsGLM, 1)
         ucrReceiverResponse.SetRCode(clsAsNumeric, bReset)
-        ucrReceiverExplanatory.SetRCode(clsFormulaOperator, bReset)
+        ucrReceiverExplanatory.SetRCode(clsTransformFunction, bReset)
         ucrPnlModelType.SetRCode(clsLMOrGLM, bReset)
         ucrSelectorSimpleReg.SetRCode(clsLM, bReset)
         ucrChkConvertToVariate.SetRCode(clsFormulaOperator)
@@ -349,14 +357,14 @@ Public Class dlgRegressionSimple
         End If
     End Sub
 
-    Private Sub ucrChkFunction_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFunction.ControlValueChanged
-        If ucrChkFunction.Checked Then
-            'sdgVariableTransformations.SetRCodeForControls(clsNewLMorGLM:=clsLMOrGLM, clsNewFormulaOperator:=clsFormulaOperator, bReset:=bResetSubDialog, clsRXVariableNew:=clsRXVariable, clsRYVariableNew:=clsRYVariable, clsRModelNew:=clsModel)
-            sdgVariableTransformations.ShowDialog()
-            ExplanatoryFunctionSelect()
-            bResetSubDialog = False
-        End If
-    End Sub
+    'Private Sub ucrChkFunction_ControlValueChanged(ucrChangedControl As ucrCore)
+    '    If ucrChkFunction.Checked Then
+    '        'sdgVariableTransformations.SetRCodeForControls(clsNewLMorGLM:=clsLMOrGLM, clsNewFormulaOperator:=clsFormulaOperator, bReset:=bResetSubDialog, clsRXVariableNew:=clsRXVariable, clsRYVariableNew:=clsRYVariable, clsRModelNew:=clsModel)
+    '        sdgVariableTransformations.ShowDialog()
+    '        ExplanatoryFunctionSelect()
+    '        bResetSubDialog = False
+    '    End If
+    'End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
         sdgSimpleRegOptions.SetRCode(ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewConfint:=clsConfint, clsNewVisReg:=clsVisReg, clsNewAutoplot:=clsAutoPlot, bReset:=bResetOptionsSubDialog)
@@ -374,6 +382,13 @@ Public Class dlgRegressionSimple
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
         sdgModelOptions.ShowDialog()
         ucrDistributionChoice.ucrInputDistributions.cboInput.SelectedIndex = ucrDistributionChoice.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = sdgModelOptions.ucrDistributionChoice.clsCurrDistribution.strNameTag)
+    End Sub
+
+    Private Sub cmdExplanatoryFunction_Click(sender As Object, e As EventArgs) Handles cmdExplanatoryFunction.Click
+        sdgVariableTransformations.SetRCodeForControls(clsNewFormulaOperator:=clsFormulaOperator, clsNewTransformParameter:=clsFormulaOperator.GetParameter("exp1"), clsNewTransformFunction:=clsTransformFunction, clsNewPowerOperator:=clsPowerOperator, strVariableName:=ucrReceiverExplanatory.GetVariableNames(False), bReset:=bResetFirstFunction)
+        sdgVariableTransformations.ShowDialog()
+        bResetFirstFunction = False
+        UpdatePreview()
     End Sub
 
     Private Sub SetTTest()
@@ -512,9 +527,6 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub SetPoissonTest()
-
-
-
         ' poisson.test(x = c(length(x=Calls[Group == 1]), length(x=Calls[Group == 2])), T =c(mean(Calls[Group == 1]), mean(Calls[Group == 2])))
 
         ' clsPoissonOperation.AddParameter(strParameterValue:=ucrLevel1.GetText())
@@ -677,30 +689,45 @@ Public Class dlgRegressionSimple
     End Sub
 
     Private Sub ExplanatoryFunctionSelect()
-        Dim strExplanatoryType As String
-        If Not ucrReceiverExplanatory.IsEmpty AndAlso rdoGeneralCase.Checked Then
-            strExplanatoryType = frmMain.clsRLink.GetDataType(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverExplanatory.GetVariableNames(bWithQuotes:=False))
-            If rdoGeneralCase.Checked AndAlso (strExplanatoryType = "numeric" OrElse strExplanatoryType = "positive integer" OrElse strExplanatoryType = "integer") Then
-                ucrChkFunction.Visible = True
-            Else
-                ucrChkFunction.Checked = False
-                ucrChkFunction.Visible = False
-            End If
-            If ucrChkFunction.Checked Then
-                'sdgVariableTransformations.ModelFunction(False)
-            Else
-                sdgVariableTransformations.rdoIdentity.Checked = True
-                'clsRLmOrGLM.AddParameter(strParameterValue:=ucrExplanatory.GetVariableNames(bWithQuotes:=False))
-            End If
-        End If
+        'Dim strExplanatoryType As String
+        'If Not ucrReceiverExplanatory.IsEmpty AndAlso rdoGeneralCase.Checked Then
+        '    strExplanatoryType = frmMain.clsRLink.GetDataType(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverExplanatory.GetVariableNames(bWithQuotes:=False))
+        '    If rdoGeneralCase.Checked AndAlso (strExplanatoryType = "numeric" OrElse strExplanatoryType = "positive integer" OrElse strExplanatoryType = "integer") Then
+        '        ucrChkFunction.Visible = True
+        '    Else
+        '        ucrChkFunction.Checked = False
+        '        ucrChkFunction.Visible = False
+        '    End If
+        '    If ucrChkFunction.Checked Then
+        '        'sdgVariableTransformations.ModelFunction(False)
+        '    Else
+        '        sdgVariableTransformations.rdoIdentity.Checked = True
+        '        'clsRLmOrGLM.AddParameter(strParameterValue:=ucrExplanatory.GetVariableNames(bWithQuotes:=False))
+        '    End If
+        'End If
     End Sub
 
     Private Sub ucrExplanatory_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExplanatory.ControlValueChanged
-        SetBaseFunction()
-        ExplanatoryFunctionSelect()
-        DataTypeAccepted()
+        If bRCodeSet Then
+            If Not ucrReceiverExplanatory.IsEmpty Then
+                clsFormulaOperator.AddParameter("exp1", ucrReceiverExplanatory.GetVariableNames(False), iPosition:=0)
+            Else
+                clsFormulaOperator.RemoveParameterByName("exp1")
+            End If
+        End If
+        FirstExplanatoryFunctionEnabled()
         UpdatePreview()
+        SetBaseFunction()
+        DataTypeAccepted()
         clsRXVariable = ucrReceiverExplanatory.GetVariableNames(bWithQuotes:=False)
+    End Sub
+
+    Private Sub FirstExplanatoryFunctionEnabled()
+        If Not ucrReceiverExplanatory.IsEmpty AndAlso {"numeric", "integer"}.Contains(ucrReceiverExplanatory.strCurrDataType) Then
+            cmdExplanatoryFunction.Enabled = True
+        Else
+            cmdExplanatoryFunction.Enabled = False
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -709,11 +736,11 @@ Public Class dlgRegressionSimple
         TestOKEnabled()
     End Sub
 
-    Private Sub chkFunction_CheckedChanged(ucrChangedControl As ucrCore) Handles ucrChkFunction.ControlValueChanged
-        If ucrChkFunction.Checked Then
-            ExplanatoryFunctionSelect()
-        End If
-    End Sub
+    ' Private Sub chkFunction_CheckedChanged(ucrChangedControl As ucrCore) Handles ucrChkFunction.ControlValueChanged
+    'If ucrChkFunction.Checked Then
+    '    ExplanatoryFunctionSelect()
+    'End If
+    'End Sub
 
     Private Sub Display()
         'If rdoGeneral.Checked Then

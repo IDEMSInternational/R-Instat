@@ -38,20 +38,20 @@ Partial Class dlgRegressionSimple
         Me.ucrReceiverExplanatory = New instat.ucrReceiverSingle()
         Me.ucrReceiverResponse = New instat.ucrReceiverSingle()
         Me.ucrSelectorSimpleReg = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrChkFunction = New instat.ucrCheck()
         Me.ucrPnlModelType = New instat.UcrPanel()
         Me.ucrModelPreview = New instat.ucrInputTextBox()
         Me.ucrDistributionChoice = New instat.ucrDistributions()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpParameters = New System.Windows.Forms.GroupBox()
+        Me.rdoCompareVariance = New System.Windows.Forms.RadioButton()
+        Me.rdoCompareMeans = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlMeansAndVariance = New instat.UcrPanel()
+        Me.ucrChkPairedTest = New instat.ucrCheck()
         Me.ucrNudHypothesis = New instat.ucrNud()
         Me.ucrNudCI = New instat.ucrNud()
         Me.lblDifferenceInMeans = New System.Windows.Forms.Label()
         Me.lblConfidenceInterval = New System.Windows.Forms.Label()
-        Me.ucrChkPairedTest = New instat.ucrCheck()
-        Me.rdoCompareVariance = New System.Windows.Forms.RadioButton()
-        Me.rdoCompareMeans = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlMeansAndVariance = New instat.UcrPanel()
+        Me.cmdExplanatoryFunction = New System.Windows.Forms.Button()
         Me.grpParameters.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -128,7 +128,7 @@ Partial Class dlgRegressionSimple
         Me.rdoTwoSample.FlatAppearance.BorderSize = 2
         Me.rdoTwoSample.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoTwoSample.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoTwoSample.Location = New System.Drawing.Point(249, 11)
+        Me.rdoTwoSample.Location = New System.Drawing.Point(222, 11)
         Me.rdoTwoSample.Name = "rdoTwoSample"
         Me.rdoTwoSample.Size = New System.Drawing.Size(121, 28)
         Me.rdoTwoSample.TabIndex = 21
@@ -143,7 +143,7 @@ Partial Class dlgRegressionSimple
         Me.rdoGeneralCase.FlatAppearance.BorderSize = 2
         Me.rdoGeneralCase.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoGeneralCase.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoGeneralCase.Location = New System.Drawing.Point(130, 11)
+        Me.rdoGeneralCase.Location = New System.Drawing.Point(103, 11)
         Me.rdoGeneralCase.Name = "rdoGeneralCase"
         Me.rdoGeneralCase.Size = New System.Drawing.Size(121, 28)
         Me.rdoGeneralCase.TabIndex = 20
@@ -220,17 +220,9 @@ Partial Class dlgRegressionSimple
         Me.ucrSelectorSimpleReg.Size = New System.Drawing.Size(226, 186)
         Me.ucrSelectorSimpleReg.TabIndex = 2
         '
-        'ucrChkFunction
-        '
-        Me.ucrChkFunction.Checked = False
-        Me.ucrChkFunction.Location = New System.Drawing.Point(267, 158)
-        Me.ucrChkFunction.Name = "ucrChkFunction"
-        Me.ucrChkFunction.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkFunction.TabIndex = 0
-        '
         'ucrPnlModelType
         '
-        Me.ucrPnlModelType.Location = New System.Drawing.Point(120, 3)
+        Me.ucrPnlModelType.Location = New System.Drawing.Point(93, 3)
         Me.ucrPnlModelType.Name = "ucrPnlModelType"
         Me.ucrPnlModelType.Size = New System.Drawing.Size(267, 43)
         Me.ucrPnlModelType.TabIndex = 3
@@ -269,12 +261,51 @@ Partial Class dlgRegressionSimple
         Me.grpParameters.Controls.Add(Me.ucrNudCI)
         Me.grpParameters.Controls.Add(Me.lblDifferenceInMeans)
         Me.grpParameters.Controls.Add(Me.lblConfidenceInterval)
-        Me.grpParameters.Location = New System.Drawing.Point(252, 158)
+        Me.grpParameters.Location = New System.Drawing.Point(267, 157)
         Me.grpParameters.Name = "grpParameters"
         Me.grpParameters.Size = New System.Drawing.Size(183, 137)
         Me.grpParameters.TabIndex = 25
         Me.grpParameters.TabStop = False
         Me.grpParameters.Text = "Parameters"
+        '
+        'rdoCompareVariance
+        '
+        Me.rdoCompareVariance.AutoSize = True
+        Me.rdoCompareVariance.Location = New System.Drawing.Point(13, 90)
+        Me.rdoCompareVariance.Name = "rdoCompareVariance"
+        Me.rdoCompareVariance.Size = New System.Drawing.Size(112, 17)
+        Me.rdoCompareVariance.TabIndex = 37
+        Me.rdoCompareVariance.TabStop = True
+        Me.rdoCompareVariance.Tag = ""
+        Me.rdoCompareVariance.Text = "Compare Variance"
+        Me.rdoCompareVariance.UseVisualStyleBackColor = True
+        '
+        'rdoCompareMeans
+        '
+        Me.rdoCompareMeans.AutoSize = True
+        Me.rdoCompareMeans.Location = New System.Drawing.Point(13, 67)
+        Me.rdoCompareMeans.Name = "rdoCompareMeans"
+        Me.rdoCompareMeans.Size = New System.Drawing.Size(102, 17)
+        Me.rdoCompareMeans.TabIndex = 36
+        Me.rdoCompareMeans.TabStop = True
+        Me.rdoCompareMeans.Tag = ""
+        Me.rdoCompareMeans.Text = "Compare Means"
+        Me.rdoCompareMeans.UseVisualStyleBackColor = True
+        '
+        'ucrPnlMeansAndVariance
+        '
+        Me.ucrPnlMeansAndVariance.Location = New System.Drawing.Point(8, 67)
+        Me.ucrPnlMeansAndVariance.Name = "ucrPnlMeansAndVariance"
+        Me.ucrPnlMeansAndVariance.Size = New System.Drawing.Size(94, 43)
+        Me.ucrPnlMeansAndVariance.TabIndex = 35
+        '
+        'ucrChkPairedTest
+        '
+        Me.ucrChkPairedTest.Checked = False
+        Me.ucrChkPairedTest.Location = New System.Drawing.Point(13, 113)
+        Me.ucrChkPairedTest.Name = "ucrChkPairedTest"
+        Me.ucrChkPairedTest.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkPairedTest.TabIndex = 34
         '
         'ucrNudHypothesis
         '
@@ -320,50 +351,21 @@ Partial Class dlgRegressionSimple
         Me.lblConfidenceInterval.Tag = ""
         Me.lblConfidenceInterval.Text = "Confidence Interval:"
         '
-        'ucrChkPairedTest
+        'cmdExplanatoryFunction
         '
-        Me.ucrChkPairedTest.Checked = False
-        Me.ucrChkPairedTest.Location = New System.Drawing.Point(13, 113)
-        Me.ucrChkPairedTest.Name = "ucrChkPairedTest"
-        Me.ucrChkPairedTest.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkPairedTest.TabIndex = 34
-        '
-        'rdoCompareVariance
-        '
-        Me.rdoCompareVariance.AutoSize = True
-        Me.rdoCompareVariance.Location = New System.Drawing.Point(13, 90)
-        Me.rdoCompareVariance.Name = "rdoCompareVariance"
-        Me.rdoCompareVariance.Size = New System.Drawing.Size(112, 17)
-        Me.rdoCompareVariance.TabIndex = 37
-        Me.rdoCompareVariance.TabStop = True
-        Me.rdoCompareVariance.Tag = ""
-        Me.rdoCompareVariance.Text = "Compare Variance"
-        Me.rdoCompareVariance.UseVisualStyleBackColor = True
-        '
-        'rdoCompareMeans
-        '
-        Me.rdoCompareMeans.AutoSize = True
-        Me.rdoCompareMeans.Location = New System.Drawing.Point(13, 67)
-        Me.rdoCompareMeans.Name = "rdoCompareMeans"
-        Me.rdoCompareMeans.Size = New System.Drawing.Size(102, 17)
-        Me.rdoCompareMeans.TabIndex = 36
-        Me.rdoCompareMeans.TabStop = True
-        Me.rdoCompareMeans.Tag = ""
-        Me.rdoCompareMeans.Text = "Compare Means"
-        Me.rdoCompareMeans.UseVisualStyleBackColor = True
-        '
-        'ucrPnlMeansAndVariance
-        '
-        Me.ucrPnlMeansAndVariance.Location = New System.Drawing.Point(8, 67)
-        Me.ucrPnlMeansAndVariance.Name = "ucrPnlMeansAndVariance"
-        Me.ucrPnlMeansAndVariance.Size = New System.Drawing.Size(94, 43)
-        Me.ucrPnlMeansAndVariance.TabIndex = 35
+        Me.cmdExplanatoryFunction.Location = New System.Drawing.Point(267, 162)
+        Me.cmdExplanatoryFunction.Name = "cmdExplanatoryFunction"
+        Me.cmdExplanatoryFunction.Size = New System.Drawing.Size(67, 20)
+        Me.cmdExplanatoryFunction.TabIndex = 33
+        Me.cmdExplanatoryFunction.Text = "Function..."
+        Me.cmdExplanatoryFunction.UseVisualStyleBackColor = True
         '
         'dlgRegressionSimple
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(445, 421)
+        Me.ClientSize = New System.Drawing.Size(454, 421)
+        Me.Controls.Add(Me.cmdExplanatoryFunction)
         Me.Controls.Add(Me.grpParameters)
         Me.Controls.Add(Me.ucrSaveModels)
         Me.Controls.Add(Me.rdoTwoSample)
@@ -374,7 +376,6 @@ Partial Class dlgRegressionSimple
         Me.Controls.Add(Me.ucrReceiverExplanatory)
         Me.Controls.Add(Me.ucrReceiverResponse)
         Me.Controls.Add(Me.ucrSelectorSimpleReg)
-        Me.Controls.Add(Me.ucrChkFunction)
         Me.Controls.Add(Me.ucrPnlModelType)
         Me.Controls.Add(Me.ucrModelPreview)
         Me.Controls.Add(Me.lblModelPreview)
@@ -408,7 +409,6 @@ Partial Class dlgRegressionSimple
     Friend WithEvents ucrDistributionChoice As ucrDistributions
     Friend WithEvents lblModelPreview As Label
     Friend WithEvents ucrModelPreview As ucrInputTextBox
-    Friend WithEvents ucrChkFunction As ucrCheck
     Friend WithEvents ucrPnlModelType As UcrPanel
     Friend WithEvents rdoTwoSample As RadioButton
     Friend WithEvents rdoGeneralCase As RadioButton
@@ -428,4 +428,5 @@ Partial Class dlgRegressionSimple
     Friend WithEvents rdoCompareVariance As RadioButton
     Friend WithEvents rdoCompareMeans As RadioButton
     Friend WithEvents ucrPnlMeansAndVariance As UcrPanel
+    Friend WithEvents cmdExplanatoryFunction As Button
 End Class
