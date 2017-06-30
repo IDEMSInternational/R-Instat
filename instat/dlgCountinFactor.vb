@@ -51,8 +51,6 @@ Public Class dlgCountinFactor
         ucrNewColName.SetSaveTypeAsColumn()
         ucrNewColName.SetDataFrameSelector(ucrCountSelector.ucrAvailableDataFrames)
         ucrNewColName.SetLabelText("New Column Name:")
-
-        ucrBase.OKEnabled(False) ' temporary
     End Sub
 
     Private Sub SetDefaults()
@@ -61,11 +59,11 @@ Public Class dlgCountinFactor
         ucrCountSelector.Reset()
         ucrNewColName.Reset()
 
+        clsDefaultFunction.SetPackageName("dae")
         clsDefaultFunction.SetRCommand("fac.nested")
         clsDefaultFunction.SetAssignTo(strTemp:=ucrNewColName.GetText(), strTempDataframe:=ucrCountSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText())
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, True)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -73,11 +71,11 @@ Public Class dlgCountinFactor
     End Sub
 
     Private Sub TestOkEnabled()
-        'If Not ucrCountReceiver.IsEmpty AndAlso ucrNewColName.IsComplete Then ' temporarily disabled
-        '    ucrBase.OKEnabled(True)
-        'Else
-        '    ucrBase.OKEnabled(False)
-        'End If
+        If Not ucrCountReceiver.IsEmpty AndAlso ucrNewColName.IsComplete Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
