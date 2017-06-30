@@ -50,15 +50,15 @@ Public Class dlgFourVariableModelling
         ucrInputModelOperators1.SetItems({"+", "*", ":", "/", "|"})
         ucrInputModelOperators2.SetItems({"+", "*", ":", "/", "|"})
         ucrModelName.SetValidationTypeAsRVariable()
-        sdgSimpleRegOptions.SetRModelFunction(ucrBaseFourVariableModelling.clsRsyntax.clsBaseFunction)
+        '  sdgSimpleRegOptions.SetRModelFunction(ucrBaseFourVariableModelling.clsRsyntax.clsBaseFunction)
         ucrModelPreview.IsReadOnly = True
         sdgSimpleRegOptions.SetRDataFrame(ucrSelectorFourVariableModelling.ucrAvailableDataFrames)
-        sdgSimpleRegOptions.SetRYVariable(ucrResponse)
-        sdgSimpleRegOptions.SetRXVariable(ucrFirstExplanatory)
-        sdgVariableTransformations.SetRYVariable(ucrResponse)
-        sdgVariableTransformations.SetRModelOperator(clsModel1)
-        sdgModelOptions.SetRCIFunction(clsRCIFunction)
-        sdgVariableTransformations.SetRCIFunction(clsRCIFunction)
+        'sdgSimpleRegOptions.SetRYVariable(ucrResponse)
+        ' sdgSimpleRegOptions.SetRXVariable(ucrFirstExplanatory)
+        'sdgVariableTransformations.SetRYVariable(ucrResponse)
+        'sdgVariableTransformations.SetRModelOperator(clsModel1)
+        'sdgModelOptions.SetRCIFunction(clsRCIFunction)
+        'sdgVariableTransformations.SetRCIFunction(clsRCIFunction)
         AssignModelName()
     End Sub
 
@@ -79,8 +79,7 @@ Public Class dlgFourVariableModelling
         chkFirstFunction.Checked = False
         chkFirstFunction.Visible = False
         ucrModelName.SetName("reg")
-        sdgSimpleRegOptions.SetDefaults()
-        sdgModelOptions.SetDefaults()
+        ' sdgSimpleRegOptions.SetDefaults()
         ResponseConvert()
         TestOKEnabled()
     End Sub
@@ -125,7 +124,7 @@ Public Class dlgFourVariableModelling
                 clsModel.AddParameter(iPosition:=0, strParameterValue:=ucrResponse.GetVariableNames(bWithQuotes:=False))
                 ucrFamily.RecieverDatatype(ucrSelectorFourVariableModelling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrResponse.GetVariableNames(bWithQuotes:=False))
             End If
-            sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
+            sdgModelOptions.ucrDistributionChoice.RecieverDatatype(ucrFamily.strDataType)
         End If
 
         If ucrFamily.lstCurrentDistributions.Count = 0 Or ucrResponse.IsEmpty() Then
@@ -164,9 +163,9 @@ Public Class dlgFourVariableModelling
                 chkFirstFunction.Visible = False
             End If
             If currentReceiver.Name = "ucrFirstExplanatory" Then
-                sdgVariableTransformations.SetRXVariable(ucrFirstExplanatory)
+                'sdgVariableTransformations.SetRXVariable(ucrFirstExplanatory)
                 If chkFirstFunction.Checked Then
-                    sdgVariableTransformations.ModelFunction(True)
+                    'sdgVariableTransformations.ModelFunction(True)
                 Else
                     sdgVariableTransformations.rdoIdentity.Checked = True
                     clsModel1.AddParameter(True, strParameterValue:=currentReceiver.GetVariableNames(bWithQuotes:=False))
@@ -194,7 +193,7 @@ Public Class dlgFourVariableModelling
     End Sub
 
     Private Sub ucrBaseFourVariableModelling_ClickOk(sender As Object, e As EventArgs) Handles ucrBaseFourVariableModelling.ClickOk
-        sdgSimpleRegOptions.RegOptions()
+        'sdgSimpleRegOptions.RegOptions()
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
@@ -232,35 +231,35 @@ Public Class dlgFourVariableModelling
     End Sub
 
     Public Sub ChooseRFunction()
-        sdgModelOptions.ucrFamily.RecieverDatatype(ucrFamily.strDataType)
-        sdgModelOptions.ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = sdgModelOptions.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
-        sdgModelOptions.RestrictLink()
+        sdgModelOptions.ucrDistributionChoice.RecieverDatatype(ucrFamily.strDataType)
+        sdgModelOptions.ucrDistributionChoice.ucrInputDistributions.cboInput.SelectedIndex = sdgModelOptions.ucrDistributionChoice.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
+        sdgModelOptions.SetLinkFunctionsAvailable()
         'TODO:   Include multinomial as an option And the appropriate function
         If (ucrFamily.clsCurrDistribution.strNameTag = "Normal" And ucrInputModelOperators2.GetText <> "|") Then
-            sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
-            sdgSimpleRegOptions.lblDisplayCLevel.Enabled = True
-            sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
+            'sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
+            sdgSimpleRegOptions.lblConfLevel.Enabled = True
+            'sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
             ucrBaseFourVariableModelling.clsRsyntax.SetFunction("lm")
             ucrBaseFourVariableModelling.clsRsyntax.RemoveParameter("family")
         ElseIf (ucrFamily.clsCurrDistribution.strNameTag = "Normal" And ucrInputModelOperators2.GetText = "|") Then
-            sdgSimpleRegOptions.chkDisplayCLimits.Checked = False
-            sdgSimpleRegOptions.chkDisplayCLimits.Enabled = False
-            sdgSimpleRegOptions.lblDisplayCLevel.Enabled = False
-            sdgSimpleRegOptions.nudDisplayCLevel.Enabled = False
+            ' sdgSimpleRegOptions.chkDisplayCLimits.Checked = False
+            ' sdgSimpleRegOptions.chkDisplayCLimits.Enabled = False
+            sdgSimpleRegOptions.lblConfLevel.Enabled = False
+            ' sdgSimpleRegOptions.nudDisplayCLevel.Enabled = False
             ucrBaseFourVariableModelling.clsRsyntax.SetFunction("lmer")
             ucrBaseFourVariableModelling.clsRsyntax.RemoveParameter("family")
         ElseIf (ucrFamily.clsCurrDistribution.strNameTag <> "Normal" And ucrInputModelOperators2.GetText = "|") Then
-            sdgSimpleRegOptions.chkDisplayCLimits.Checked = False
-            sdgSimpleRegOptions.chkDisplayCLimits.Enabled = False
-            sdgSimpleRegOptions.lblDisplayCLevel.Enabled = False
-            sdgSimpleRegOptions.nudDisplayCLevel.Enabled = False
+            'sdgSimpleRegOptions.chkDisplayCLimits.Checked = False
+            'sdgSimpleRegOptions.chkDisplayCLimits.Enabled = False
+            sdgSimpleRegOptions.lblConfLevel.Enabled = False
+            'sdgSimpleRegOptions.nudDisplayCLevel.Enabled = False
             clsRCIFunction.SetRCommand(ucrFamily.clsCurrDistribution.strGLMFunctionName)
             ucrBaseFourVariableModelling.clsRsyntax.SetFunction("glmer")
             ucrBaseFourVariableModelling.clsRsyntax.AddParameter("family", clsRFunctionParameter:=clsRCIFunction)
         Else
-            sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
-            sdgSimpleRegOptions.lblDisplayCLevel.Enabled = True
-            sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
+            ' sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
+            sdgSimpleRegOptions.lblConfLevel.Enabled = True
+            'sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
             clsRCIFunction.SetRCommand(ucrFamily.clsCurrDistribution.strGLMFunctionName)
             ucrBaseFourVariableModelling.clsRsyntax.SetFunction("glm")
             ucrBaseFourVariableModelling.clsRsyntax.AddParameter("family", clsRFunctionParameter:=clsRCIFunction)
@@ -273,7 +272,7 @@ Public Class dlgFourVariableModelling
 
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
         sdgModelOptions.ShowDialog()
-        ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = sdgModelOptions.ucrFamily.clsCurrDistribution.strNameTag)
+        ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = sdgModelOptions.ucrDistributionChoice.clsCurrDistribution.strNameTag)
     End Sub
 
     Private Sub chkFirstFunction_CheckedChanged(sender As Object, e As EventArgs) Handles chkFirstFunction.CheckedChanged
