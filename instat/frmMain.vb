@@ -22,20 +22,27 @@ Imports System.ComponentModel
 Imports System.Runtime.Serialization.Formatters.Binary
 
 Public Class frmMain
-
     Public clsRLink As New RLink
     Public clsGrids As New clsGridLink
     Public strStaticPath As String
-    Public strHelpFilePath As String
+    Public strHelpFilePath As String = "Help\R-Instat.chm"
     Public strAppDataPath As String
-    Public strInstatOptionsFile As String
+    Public strInstatOptionsFile As String = "Options.bin"
     Public clsInstatOptions As InstatOptions
     Public clsRecentItems As New clsRecentFiles
     Public strCurrentDataFrame As String
     Public dlgLastDialog As Form
-    Public strSaveFilePath As String
+    Public strSaveFilePath As String = ""
     Private mnuItems As New List(Of Form)
     Private ctrActive As Control
+    Private WithEvents timer As New System.Windows.Forms.Timer
+    Private iAutoSaveDataTime As Integer = 300000
+
+    Public strAutoSaveDataFolderPath As String = Path.Combine(Path.GetTempPath, "R-Instat_data_auto_save")
+    Public strAutoSaveLogFolderPath As String = Path.Combine(Path.GetTempPath, "R-Instat_log_auto_save")
+    Public strAutoSaveInternalLogFolderPath As String = Path.Combine(Path.GetTempPath, "R-Instat_debug_log_auto_save")
+
+    Public strCurrentAutoSaveDataFilePath As String = ""
 
     'This is the default data frame to appear in the data frame selector
     'If "" the current worksheet will be used
@@ -43,37 +50,116 @@ Public Class frmMain
     '     User can choose a default data frame or set the default as the current worksheet
     Public strDefaultDataFrame As String = ""
 
-    Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        InitialiseOutputWindow()
+    Public Sub New()
 
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+    End Sub
+
+    Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        'temporary
         mnuHelpAboutRInstat.Visible = False
 
+        InitialiseOutputWindow()
         clsGrids.SetDataViewer(ucrDataViewer)
         clsGrids.SetMetadata(ucrDataFrameMeta.grdMetaData)
         clsGrids.SetVariablesMetadata(ucrColumnMeta.grdVariables)
 
-        SetToDefaultLayout()
-        strStaticPath = Path.GetFullPath("static")
-        strHelpFilePath = "Help\R-Instat.chm"
-        strAppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "RInstat\")
-        strInstatOptionsFile = "Options.bin"
-        strSaveFilePath = ""
-
-        clsRLink.SetEngine()
-
-        'Setting the properties of R Interface
         clsRLink.SetLog(ucrLogWindow.txtLog)
 
-        'Do this before setting up R Link becuase setup edits Output window which is changed by Options
+        SetToDefaultLayout()
+        strStaticPath = Path.GetFullPath("static")
+        strAppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "RInstat\")
+
+        AutoRecoverAndStartREngine()
+
+        'Do this after setting up R Link becuase setup edits Output window which is changed by Options
         LoadInstatOptions()
 
-        'Sets up R source files
-        clsRLink.RSetup()
+        'Do this after loading options because interval depends on options
+        timer.Interval = iAutoSaveDataTime
+        timer.Start()
+
+        AddHandler System.Windows.Forms.Application.Idle, AddressOf Application_Idle
 
         'Sets up the Recent items
         clsRecentItems.setToolStripItems(mnuFile, mnuTbShowLast10, sepStart, sepEnd)
         'checks existence of MRU list
         clsRecentItems.checkOnLoad()
+    End Sub
+
+    Private Sub Application_Idle(sender As Object, e As EventArgs)
+        If Not timer.Enabled AndAlso (ActiveForm Is Nothing OrElse ActiveForm.Equals(Me)) AndAlso Not clsRLink.bRCodeRunning Then
+            AutoSaveData()
+            timer.Start()
+        End If
+    End Sub
+
+    Private Sub AutoRecoverAndStartREngine()
+        Dim iLogFiles As Integer = 0
+        Dim iInternalLogFiles As Integer = 0
+        Dim iDataFiles As Integer = 0
+        Dim strScript As String = ""
+        Dim strDataFilePath As String = ""
+        Dim strAutoSavedLogFilePaths() As String = Nothing
+        Dim strAutoSavedInternalLogFilePaths() As String = Nothing
+        Dim strAutoSavedDataFilePaths() As String = Nothing
+
+        If Process.GetProcessesByName(Path.GetFileNameWithoutExtension(Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1 Then
+            clsRLink.StartREngine(clsRLink.GetRSetupScript())
+        Else
+            If (Directory.Exists(strAutoSaveLogFolderPath)) Then
+                strAutoSavedLogFilePaths = My.Computer.FileSystem.GetFiles(strAutoSaveLogFolderPath).ToArray
+                iLogFiles = strAutoSavedLogFilePaths.Count
+            End If
+            If (Directory.Exists(strAutoSaveInternalLogFolderPath)) Then
+                strAutoSavedInternalLogFilePaths = My.Computer.FileSystem.GetFiles(strAutoSaveInternalLogFolderPath).ToArray
+                iInternalLogFiles = strAutoSavedInternalLogFilePaths.Count
+            End If
+            If Directory.Exists(strAutoSaveDataFolderPath) Then
+                strAutoSavedDataFilePaths = My.Computer.FileSystem.GetFiles(strAutoSaveDataFolderPath).ToArray
+                iDataFiles = strAutoSavedDataFilePaths.Count
+            End If
+            If iLogFiles > 0 OrElse iDataFiles > 0 OrElse iInternalLogFiles > 0 Then
+                If MsgBox("We have detected that R-Instat may have closed unexpectedly last time." & Environment.NewLine & "Would you like to see auto recovery options?", MessageBoxButtons.YesNo, "Auto Recovery") = MsgBoxResult.Yes Then
+                    dlgAutoSaveRecovery.strAutoSavedLogFilePaths = strAutoSavedLogFilePaths
+                    dlgAutoSaveRecovery.strAutoSavedDataFilePaths = strAutoSavedDataFilePaths
+                    dlgAutoSaveRecovery.strAutoSavedInternalLogFilePaths = strAutoSavedInternalLogFilePaths
+                    dlgAutoSaveRecovery.ShowDialog()
+                    strScript = dlgAutoSaveRecovery.GetScript()
+                    strDataFilePath = dlgAutoSaveRecovery.GetDataFilePath()
+                Else
+                    If iLogFiles > 0 Then
+                        Try
+                            File.Delete(strAutoSavedLogFilePaths(0))
+                        Catch ex As Exception
+                            MsgBox("Could not delete backup log file" & Environment.NewLine, "Error deleting file")
+                        End Try
+                    End If
+                    If iInternalLogFiles > 0 Then
+                        Try
+                            File.Delete(strAutoSavedInternalLogFilePaths(0))
+                        Catch ex As Exception
+                            MsgBox("Could not delete backup internal log file." & Environment.NewLine & ex.Message, "Error deleting file")
+                        End Try
+                    End If
+                    If iDataFiles > 0 Then
+                        Try
+                            File.Delete(strAutoSavedDataFilePaths(0))
+                        Catch ex As Exception
+                            MsgBox("Could not delete back data file." & Environment.NewLine & ex.Message, "Error deleting file")
+                        End Try
+                    End If
+                End If
+            End If
+            clsRLink.StartREngine(strScript)
+            If strDataFilePath <> "" Then
+                clsRLink.LoadInstatDataObjectFromFile(strDataFilePath, strComment:="Loading auto recovered data file")
+            End If
+        End If
     End Sub
 
     Private Sub InitialiseOutputWindow()
@@ -615,7 +701,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuModelTwoVariablesFitModel_Click(sender As Object, e As EventArgs) Handles mnuModelTwoVariablesFitModel.Click
-        dlgRegressionSimple.ShowDialog()
+        dlgTwoVariableFitModel.ShowDialog()
     End Sub
 
     Private Sub mnuModelOtherOneVariableExactResults_Click(sender As Object, e As EventArgs) Handles mnuModelOtherOneVariableExactResults.Click
@@ -631,7 +717,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuModelOtherTwoVariablesSimpleRegression_Click(sender As Object, e As EventArgs) Handles mnuModelOtherTwoVariablesSimpleRegression.Click
-        dlgRegressionSimple.ShowDialog()
+        dlgTwoVariableFitModel.ShowDialog()
     End Sub
 
     Private Sub mnuModelOtherTwoVariablesOneWayANOVA_Click(sender As Object, e As EventArgs) Handles mnuModelOtherTwoVariablesOneWayANOVA.Click
@@ -676,9 +762,9 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuToolsClearOutputWindow_Click(sender As Object, e As EventArgs) Handles mnuToolsClearOutputWindow.Click
-        Dim dlgResponse As DialogResult
-        dlgResponse = MessageBox.Show("Are you sure you want to clear the Output Window?", "Clear Output Window", MessageBoxButtons.YesNo)
-        If dlgResponse = DialogResult.Yes Then
+        Dim rstResponse As DialogResult
+        rstResponse = MessageBox.Show("Are you sure you want to clear the Output Window?", "Clear Output Window", MessageBoxButtons.YesNo)
+        If rstResponse = DialogResult.Yes Then
             ucrOutput.ucrRichTextBox.rtbOutput.Document.Blocks.Clear() 'To b checked
         End If
     End Sub
@@ -754,19 +840,81 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        Dim close = MsgBox("Are you sure you want to exit R-Instat?", MessageBoxButtons.YesNo, "Exit")
-        If close = DialogResult.Yes Then
+        Dim bClose As DialogResult = DialogResult.Yes
+
+        If e.CloseReason = CloseReason.UserClosing Then
+            bClose = MsgBox("Are you sure you want to exit R-Instat?", MessageBoxButtons.YesNo, "Exit")
+        End If
+        If bClose = DialogResult.Yes Then
             Try
                 If (Not System.IO.Directory.Exists(strAppDataPath)) Then
                     System.IO.Directory.CreateDirectory(strAppDataPath)
                 End If
                 clsRecentItems.saveOnClose()
                 SaveInstatOptions(Path.Combine(strAppDataPath, strInstatOptionsFile))
+                DeleteAutoSaveData()
+                DeleteAutoSaveLog()
+                DeleteAutoSaveDebugLog()
+                clsRLink.CloseREngine()
             Catch ex As Exception
                 MsgBox("Error attempting to save setting files to App Data folder." & Environment.NewLine & "System error message: " & ex.Message, MsgBoxStyle.Critical, "Error saving settings")
             End Try
         Else
             e.Cancel = True
+        End If
+    End Sub
+
+    Public Sub AutoSaveData()
+        Dim clsSaveRDS As New RFunction
+        Dim strTempFile As String
+        Dim i As Integer = 0
+
+        If clsRLink.bInstatObjectExists Then
+            If Not Directory.Exists(strAutoSaveDataFolderPath) Then
+                Directory.CreateDirectory(strAutoSaveDataFolderPath)
+            End If
+            If strCurrentAutoSaveDataFilePath = "" Then
+                strTempFile = "data.rds"
+                While File.Exists(Path.Combine(strAutoSaveDataFolderPath, strTempFile))
+                    i = i + 1
+                    strTempFile = "data" & i & ".rds"
+                End While
+                strCurrentAutoSaveDataFilePath = Path.Combine(strAutoSaveDataFolderPath, strTempFile)
+            End If
+            clsSaveRDS.SetRCommand("saveRDS")
+            clsSaveRDS.AddParameter("object", clsRLink.strInstatDataObject)
+            clsSaveRDS.AddParameter("file", Chr(34) & strCurrentAutoSaveDataFilePath.Replace("\", "/") & Chr(34))
+            clsRLink.RunInternalScript(clsSaveRDS.ToScript())
+        End If
+    End Sub
+
+    Public Sub DeleteAutoSaveData()
+        If strCurrentAutoSaveDataFilePath <> "" Then
+            Try
+                File.Delete(strCurrentAutoSaveDataFilePath)
+            Catch ex As Exception
+                MsgBox("Could not delete auto save data file at: " & strCurrentAutoSaveDataFilePath & Environment.NewLine & ex.Message)
+            End Try
+        End If
+    End Sub
+
+    Public Sub DeleteAutoSaveLog()
+        If clsRLink.strAutoSaveLogFilePath <> "" Then
+            Try
+                File.Delete(clsRLink.strAutoSaveLogFilePath)
+            Catch ex As Exception
+                MsgBox("Could not delete auto save log file at: " & clsRLink.strAutoSaveLogFilePath & Environment.NewLine & ex.Message)
+            End Try
+        End If
+    End Sub
+
+    Public Sub DeleteAutoSaveDebugLog()
+        If clsRLink.strAutoSaveDebugLogFilePath <> "" Then
+            Try
+                File.Delete(clsRLink.strAutoSaveDebugLogFilePath)
+            Catch ex As Exception
+                MsgBox("Could not delete auto save debug log file at: " & clsRLink.strAutoSaveDebugLogFilePath & Environment.NewLine & ex.Message)
+            End Try
         End If
     End Sub
 
@@ -1401,18 +1549,17 @@ Public Class frmMain
         ucrDataViewer.SetCurrentDataFrame(strDataName)
     End Sub
 
-    Private Sub WindroseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WindroseToolStripMenuItem.Click
+    Private Sub WindroseToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgWindrose.ShowDialog()
-    End Sub
-
-    Private Sub WindrosePlotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WindrosePlotToolStripMenuItem.Click
-        dlgWindrosePlot.ShowDialog()
     End Sub
 
     Private Sub CummulativeDistributionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CummulativeDistributionToolStripMenuItem.Click
         dlgCumulativeDistribution.ShowDialog()
     End Sub
 
+    Private Sub timer_Tick(sender As Object, e As EventArgs) Handles timer.Tick
+        timer.Stop()
+    End Sub
 
     'Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click
     '    'TEST temporary 
