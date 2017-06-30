@@ -68,19 +68,23 @@ Public Class dlgExportToCPT
         ucrReceiverMultipleDataColumns.SetParameterIsString()
         ucrReceiverMultipleDataColumns.SetLinkedDisplayControl(lblDataColumns)
 
+
         ucrReceiverDataColumn.Selector = ucrSSTDataframe
         ucrReceiverDataColumn.SetParameter(New RParameter("sst_cols", 4))
         ucrReceiverDataColumn.SetParameterIsString()
         ucrReceiverDataColumn.SetLinkedDisplayControl(lblDataColumn)
+        ucrReceiverDataColumn.strSelectorHeading = "Numerics"
 
         ucrReceiverYears.Selector = ucrSSTDataframe
         ucrReceiverYears.SetParameter(New RParameter("year_col", 5))
         ucrReceiverYears.SetParameterIsString()
+        ucrReceiverYears.strSelectorHeading = "Numerics"
 
         ucrReceiverStations.Selector = ucrSSTDataframe
         ucrReceiverStations.SetParameter(New RParameter("station_col", 6))
         ucrReceiverStations.SetParameterIsString()
         ucrReceiverStations.SetLinkedDisplayControl(lblStations)
+        ucrReceiverStations.strSelectorHeading = "Factors"
 
         ucrChkLong.SetParameter(New RParameter("long", 7))
         ucrChkLong.SetText("Long Data Format")
