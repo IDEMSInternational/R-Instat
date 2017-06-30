@@ -27,7 +27,6 @@ Public Class sdgCorrPlot
     End Sub
 
     Public Sub InitialiseControls()
-
         ucrNudMaximumSize.SetParameter(New RParameter("max_size", 1))
         ucrNudMaximumSize.SetMinMax(1, 10)
         ucrNudMinimunSize.SetParameter(New RParameter("min_size", 2))
@@ -109,7 +108,6 @@ Public Class sdgCorrPlot
         clsColFunction = clsNewColFunction
         clsRGGscatmatrixFunction = clsNewRGGscatmatrixFunction
 
-        'settingRcode for subdialog
         ucrNudMaximumSize.SetRCode(clsRGGcorrGraphicsFunction, bReset)
         ucrNudMinimunSize.SetRCode(clsRGGcorrGraphicsFunction, bReset)
         ucrInputComboGeom.SetRCode(clsRGGcorrGraphicsFunction, bReset)
