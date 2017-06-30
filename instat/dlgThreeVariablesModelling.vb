@@ -127,6 +127,7 @@ Public Class dlgThreeVariableModelling
         clsExplanatoryOperator.SetOperation("+")
         clsExplanatoryOperator.bBrackets = False
 
+        ucrDistributionChoice.SetDataType("numeric")
         ucrSaveModel.Reset()
         ucrModelPreview.Reset()
 
@@ -134,7 +135,6 @@ Public Class dlgThreeVariableModelling
 
         clsFormulaOperator = clsRegressionDefaults.clsDefaultFormulaOperator.Clone
         clsFormulaOperator.AddParameter("x", clsROperatorParameter:=clsExplanatoryOperator, iPosition:=1)
-
 
         clsLM = clsRegressionDefaults.clsDefaultLmFunction.Clone()
         clsLM.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=0)
