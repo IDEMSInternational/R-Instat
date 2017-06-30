@@ -45,6 +45,7 @@ Public Class dlgReorderLevels
         ucrReceiverFactor.Selector = ucrSelectorFactorLevelsToReorder
         ucrReceiverFactor.SetMeAsReceiver()
         ucrReceiverFactor.SetIncludedDataTypes({"factor"})
+        ucrReceiverFactor.strSelectorHeading = "Factors"
         ucrReceiverFactor.SetParameterIsString()
 
         'Set reorder scroll list view & datatype accepted
