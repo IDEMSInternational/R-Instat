@@ -330,7 +330,6 @@ Public Class dlgTwoVariableFitModel
         'sdgModelOptions.ucrFamily.RecieverDatatype(ucrDistributionChoice.strDataType)
         'sdgModelOptions.ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = sdgModelOptions.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrDistributionChoice.clsCurrDistribution.strNameTag)
         'sdgModelOptions.RestrictLink()
-        ExplanatoryFunctionSelect()
         SetBaseFunction()
         DataTypeAccepted()
     End Sub
