@@ -22,7 +22,7 @@ Partial Class sdgModelOptions
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.rdocloglog = New System.Windows.Forms.RadioButton()
+        Me.rdoCloglog = New System.Windows.Forms.RadioButton()
         Me.rdoSqrt = New System.Windows.Forms.RadioButton()
         Me.rdoMuSquaredInverse = New System.Windows.Forms.RadioButton()
         Me.rdoInverse = New System.Windows.Forms.RadioButton()
@@ -32,23 +32,23 @@ Partial Class sdgModelOptions
         Me.rdoIdentity = New System.Windows.Forms.RadioButton()
         Me.rdoLog = New System.Windows.Forms.RadioButton()
         Me.rdoLogit = New System.Windows.Forms.RadioButton()
-        Me.ucrFamily = New instat.ucrDistributions()
         Me.ucrPnlLinkFunctions = New instat.UcrPanel()
+        Me.ucrDistributionChoice = New instat.ucrDistributions()
         Me.ucrButtonsSDGModelOptions = New instat.ucrButtonsSubdialogue()
         Me.grpLinkFunctions.SuspendLayout()
         Me.SuspendLayout()
         '
-        'rdocloglog
+        'rdoCloglog
         '
-        Me.rdocloglog.AutoSize = True
-        Me.rdocloglog.Cursor = System.Windows.Forms.Cursors.Default
-        Me.rdocloglog.Location = New System.Drawing.Point(85, 23)
-        Me.rdocloglog.Name = "rdocloglog"
-        Me.rdocloglog.Size = New System.Drawing.Size(59, 17)
-        Me.rdocloglog.TabIndex = 1
-        Me.rdocloglog.Tag = "cloglog"
-        Me.rdocloglog.Text = "cloglog"
-        Me.rdocloglog.UseVisualStyleBackColor = True
+        Me.rdoCloglog.AutoSize = True
+        Me.rdoCloglog.Cursor = System.Windows.Forms.Cursors.Default
+        Me.rdoCloglog.Location = New System.Drawing.Point(85, 23)
+        Me.rdoCloglog.Name = "rdoCloglog"
+        Me.rdoCloglog.Size = New System.Drawing.Size(59, 17)
+        Me.rdoCloglog.TabIndex = 1
+        Me.rdoCloglog.Tag = "cloglog"
+        Me.rdoCloglog.Text = "cloglog"
+        Me.rdoCloglog.UseVisualStyleBackColor = True
         '
         'rdoSqrt
         '
@@ -115,19 +115,19 @@ Partial Class sdgModelOptions
         Me.grpLinkFunctions.Controls.Add(Me.rdoIdentity)
         Me.grpLinkFunctions.Controls.Add(Me.rdoLog)
         Me.grpLinkFunctions.Controls.Add(Me.rdoLogit)
-        Me.grpLinkFunctions.Controls.Add(Me.rdocloglog)
+        Me.grpLinkFunctions.Controls.Add(Me.rdoCloglog)
         Me.grpLinkFunctions.Controls.Add(Me.rdoSqrt)
         Me.grpLinkFunctions.Controls.Add(Me.rdoMuSquaredInverse)
         Me.grpLinkFunctions.Controls.Add(Me.rdoInverse)
         Me.grpLinkFunctions.Controls.Add(Me.rdoCauchit)
         Me.grpLinkFunctions.Controls.Add(Me.rdoProbit)
         Me.grpLinkFunctions.Controls.Add(Me.ucrPnlLinkFunctions)
-        Me.grpLinkFunctions.Location = New System.Drawing.Point(13, 57)
+        Me.grpLinkFunctions.Location = New System.Drawing.Point(12, 57)
         Me.grpLinkFunctions.Name = "grpLinkFunctions"
         Me.grpLinkFunctions.Size = New System.Drawing.Size(239, 104)
         Me.grpLinkFunctions.TabIndex = 11
         Me.grpLinkFunctions.TabStop = False
-        Me.grpLinkFunctions.Text = "LinkFunctions"
+        Me.grpLinkFunctions.Text = "Link Function"
         '
         'rdoIdentity
         '
@@ -159,13 +159,6 @@ Partial Class sdgModelOptions
         Me.rdoLogit.Text = "Logit"
         Me.rdoLogit.UseVisualStyleBackColor = True
         '
-        'ucrFamily
-        '
-        Me.ucrFamily.Location = New System.Drawing.Point(13, 12)
-        Me.ucrFamily.Name = "ucrFamily"
-        Me.ucrFamily.Size = New System.Drawing.Size(208, 27)
-        Me.ucrFamily.TabIndex = 10
-        '
         'ucrPnlLinkFunctions
         '
         Me.ucrPnlLinkFunctions.Location = New System.Drawing.Point(6, 19)
@@ -173,9 +166,16 @@ Partial Class sdgModelOptions
         Me.ucrPnlLinkFunctions.Size = New System.Drawing.Size(225, 79)
         Me.ucrPnlLinkFunctions.TabIndex = 9
         '
+        'ucrDistributionChoice
+        '
+        Me.ucrDistributionChoice.Location = New System.Drawing.Point(12, 12)
+        Me.ucrDistributionChoice.Name = "ucrDistributionChoice"
+        Me.ucrDistributionChoice.Size = New System.Drawing.Size(208, 27)
+        Me.ucrDistributionChoice.TabIndex = 10
+        '
         'ucrButtonsSDGModelOptions
         '
-        Me.ucrButtonsSDGModelOptions.Location = New System.Drawing.Point(34, 163)
+        Me.ucrButtonsSDGModelOptions.Location = New System.Drawing.Point(60, 170)
         Me.ucrButtonsSDGModelOptions.Name = "ucrButtonsSDGModelOptions"
         Me.ucrButtonsSDGModelOptions.Size = New System.Drawing.Size(142, 30)
         Me.ucrButtonsSDGModelOptions.TabIndex = 2
@@ -185,7 +185,7 @@ Partial Class sdgModelOptions
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(263, 204)
-        Me.Controls.Add(Me.ucrFamily)
+        Me.Controls.Add(Me.ucrDistributionChoice)
         Me.Controls.Add(Me.grpLinkFunctions)
         Me.Controls.Add(Me.ucrButtonsSDGModelOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -202,7 +202,7 @@ Partial Class sdgModelOptions
     End Sub
 
     Friend WithEvents ucrButtonsSDGModelOptions As ucrButtonsSubdialogue
-    Friend WithEvents rdocloglog As RadioButton
+    Friend WithEvents rdoCloglog As RadioButton
     Friend WithEvents rdoSqrt As RadioButton
     Friend WithEvents rdoMuSquaredInverse As RadioButton
     Friend WithEvents rdoInverse As RadioButton
@@ -210,7 +210,7 @@ Partial Class sdgModelOptions
     Friend WithEvents rdoProbit As RadioButton
     Friend WithEvents ucrPnlLinkFunctions As UcrPanel
     Friend WithEvents grpLinkFunctions As GroupBox
-    Friend WithEvents ucrFamily As ucrDistributions
+    Friend WithEvents ucrDistributionChoice As ucrDistributions
     Friend WithEvents rdoIdentity As RadioButton
     Friend WithEvents rdoLog As RadioButton
     Friend WithEvents rdoLogit As RadioButton

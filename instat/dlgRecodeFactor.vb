@@ -41,6 +41,7 @@ Public Class dlgRecodeFactor
         ucrReceiverFactor.SetParameter(New RParameter("x", 0))
         ucrReceiverFactor.Selector = ucrSelectorForRecode
         ucrReceiverFactor.SetIncludedDataTypes({"factor"})
+        ucrReceiverFactor.strSelectorHeading = "Factors"
         ucrReceiverFactor.SetMeAsReceiver()
         ucrReceiverFactor.SetParameterIsRFunction()
 

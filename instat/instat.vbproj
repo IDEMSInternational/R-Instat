@@ -1892,12 +1892,6 @@
     <Compile Include="dlgWaterBalance.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgWindrosePlot.designer.vb">
-      <DependentUpon>dlgWindrosePlot.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgWindrosePlot.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgYearRaincount.designer.vb">
       <DependentUpon>dlgYearRaincount.vb</DependentUpon>
     </Compile>
@@ -4090,15 +4084,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgWaterBalance.sw-KE.resx">
       <DependentUpon>dlgWaterBalance.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgWindrosePlot.fr-FR.resx">
-      <DependentUpon>dlgWindrosePlot.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgWindrosePlot.resx">
-      <DependentUpon>dlgWindrosePlot.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgWindrosePlot.sw-KE.resx">
-      <DependentUpon>dlgWindrosePlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgYearRaincount.fr-FR.resx">
       <DependentUpon>dlgYearRaincount.vb</DependentUpon>

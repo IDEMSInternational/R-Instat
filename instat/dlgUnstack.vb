@@ -42,6 +42,7 @@ Public Class dlgUnstack
         ucrFactorToUnstackReceiver.SetMeAsReceiver()
         ucrBase.iHelpTopicID = 58
         ucrFactorToUnstackReceiver.SetDataType("factor")
+        ucrFactorToUnstackReceiver.strSelectorHeading = "Factors"
         ucrIDColumns.Selector = ucrSelectorForunstack
         clsFormula.SetOperation("~")
         clsFormula.bBrackets = False
