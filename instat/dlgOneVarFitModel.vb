@@ -294,6 +294,7 @@ Public Class dlgOneVarFitModel
         '  ucrNudCI.AddAdditionalCodeParameterPair(clsRPoissonTest, New RParameter("conf.level"), iAdditionalPairNo:=6)
     End Sub
 
+
     Private Sub ucrPnlStats_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlStats.ControlValueChanged
         SetBaseFunction()
         Display()
@@ -370,6 +371,7 @@ Public Class dlgOneVarFitModel
             clsRplotQqComp.AddParameter("ft", clsRFunctionParameter:=clsROneVarFitModel)
             clsRplotDenscomp.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34))
             clsRplotDenscomp.AddParameter("ft", clsRFunctionParameter:=clsROneVarFitModel)
+            clsRLogLikFunction.AddParameter("mlefit", clsRFunctionParameter:=clsROneVarFitModel)
         ElseIf rdoExactCase.Checked Then
             If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" Then
                 grpVarAndWilcoxSign.Hide()
@@ -472,7 +474,7 @@ Public Class dlgOneVarFitModel
         End If
     End Sub
 
-    Private Sub cmdFittingOptions_Click(sender As Object, e As EventArgs)
+    Private Sub cmdFittingOptions_Click(sender As Object, e As EventArgs) Handles cmdFittingOptions.Click
         sdgOneVarFitModel.SetRCode(clsROneVarFitModel, bResetSubdialog)
         bResetSubdialog = False
         sdgOneVarFitModel.ShowDialog()
@@ -481,7 +483,7 @@ Public Class dlgOneVarFitModel
         TestOKEnabled()
     End Sub
 
-    Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs)
+    Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
         sdgOneVarFitModDisplay.SetRCode(UcrBase.clsRsyntax, clsRNewOneVarFitModel:=clsROneVarFitModel, clsNewRLogLikFunction:=clsRLogLikFunction, clsNewRplotFunction:=clsRplotFunction, clsNewRplotPPComp:=clsRplotPPComp, clsNewRplotCdfcomp:=clsRplotCdfcomp, clsNewRplotQqComp:=clsRplotQqComp, clsNewRplotDenscomp:=clsRplotDenscomp, bReset:=bResetSubdialog)
         bResetSubdialog = False
         sdgOneVarFitModDisplay.ShowDialog()
