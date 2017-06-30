@@ -34,17 +34,16 @@ Public Class dlgShowModel
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-
         ucrReceiverExpressionForTablePlus.AddAdditionalCodeParameterPair(clsProbabilities, New RParameter("q", 1), 1)
         ucrInputProbabilities.AddAdditionalCodeParameterPair(clsProbabilities, New RParameter("q", 1), 1)
         ucrChkDisplayGraphResults.AddAdditionalCodeParameterPair(clsProbabilities, ucrChkDisplayGraphResults.GetParameter, 1)
-        ucrPnlDistTypes.SetRCode(clsQuantiles)
-        ucrReceiverExpressionForTablePlus.SetRCode(clsQuantiles)
-        ucrChkDisplayGraphResults.SetRCode(clsQuantiles)
-        ucrInputProbabilities.SetRCode(clsQuantiles)
-        ucrSaveGraphResults.SetRCode(clsQuantiles)
-        ucrDistributionsFOrTablePlus.SetRCode(clsQuantiles)
-        ucrChkEnterValues.SetRCode(clsQuantiles)
+        ucrPnlDistTypes.SetRCode(clsQuantiles, bReset)
+        ucrReceiverExpressionForTablePlus.SetRCode(clsQuantiles, bReset)
+        ucrChkDisplayGraphResults.SetRCode(clsQuantiles, bReset)
+        ucrInputProbabilities.SetRCode(clsQuantiles, bReset)
+        ucrSaveGraphResults.SetRCode(clsQuantiles, bReset)
+        ucrDistributionsFOrTablePlus.SetRCode(clsQuantiles, bReset)
+        ucrChkEnterValues.SetRCode(clsQuantiles, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -72,9 +71,9 @@ Public Class dlgShowModel
         ucrPnlDistTypes.AddFunctionNamesCondition(rdoProbabilities, "pdist")
 
         ucrSaveGraphResults.SetDataFrameSelector(ucrSelectorForDataFrame.ucrAvailableDataFrames)
-        ucrSaveGraphResults.SetSaveTypeAsModel()
+        ucrSaveGraphResults.SetSaveTypeAsColumn()
         ucrSaveGraphResults.SetIsComboBox()
-        ucrSaveGraphResults.SetLabelText("Save Graph  Result:")
+        ucrSaveGraphResults.SetCheckBoxText("Save Graph  Result:")
 
         ucrInputProbabilities.SetParameter(New RParameter("p", 1))
         ucrInputProbabilities.AddQuotesIfUnrecognised = False
@@ -93,7 +92,6 @@ Public Class dlgShowModel
 
         ucrChkEnterValues.AddToLinkedControls(ucrReceiverExpressionForTablePlus, {False}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkEnterValues.AddToLinkedControls(ucrInputProbabilities, {True}, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkEnterValues.AddToLinkedControls(ucrSaveGraphResults, {False}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkEnterValues.AddParameterIsRFunctionCondition(False, "q", True)
         ucrChkEnterValues.AddParameterIsRFunctionCondition(False, "p", True)
         ucrChkEnterValues.AddParameterIsRFunctionCondition(True, "q", False)
@@ -219,13 +217,10 @@ Public Class dlgShowModel
 
     Private Sub DisplayTableResults()
         If ucrChkDisplayGraphResults.Checked Then
-            ucrSaveGraphResults.SetAssignToBooleans(bTempAssignToIsPrefix:=False)
             ucrBase.clsRsyntax.iCallType = 3
         Else
             If ucrChkEnterValues.Checked Then
-                ucrSaveGraphResults.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
             Else
-                ucrSaveGraphResults.SetAssignToBooleans(bTempAssignToIsPrefix:=False)
                 ucrBase.clsRsyntax.iCallType = 2
             End If
         End If
