@@ -701,7 +701,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuModelTwoVariablesFitModel_Click(sender As Object, e As EventArgs) Handles mnuModelTwoVariablesFitModel.Click
-        dlgRegressionSimple.ShowDialog()
+        dlgTwoVariableFitModel.ShowDialog()
     End Sub
 
     Private Sub mnuModelOtherOneVariableExactResults_Click(sender As Object, e As EventArgs) Handles mnuModelOtherOneVariableExactResults.Click
@@ -717,7 +717,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuModelOtherTwoVariablesSimpleRegression_Click(sender As Object, e As EventArgs) Handles mnuModelOtherTwoVariablesSimpleRegression.Click
-        dlgRegressionSimple.ShowDialog()
+        dlgTwoVariableFitModel.ShowDialog()
     End Sub
 
     Private Sub mnuModelOtherTwoVariablesOneWayANOVA_Click(sender As Object, e As EventArgs) Handles mnuModelOtherTwoVariablesOneWayANOVA.Click

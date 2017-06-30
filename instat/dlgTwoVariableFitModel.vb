@@ -107,6 +107,7 @@ Public Class dlgTwoVariableFitModel
         '###################################
 
         ' Two sample controls
+
         ucrNudCI.SetParameter(New RParameter("conf.level"))
         ucrNudCI.SetLinkedDisplayControl(lblConfidenceInterval)
         ucrNudCI.SetLinkedDisplayControl(grpParameters)
@@ -329,6 +330,7 @@ Public Class dlgTwoVariableFitModel
         'sdgModelOptions.ucrFamily.RecieverDatatype(ucrDistributionChoice.strDataType)
         'sdgModelOptions.ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = sdgModelOptions.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrDistributionChoice.clsCurrDistribution.strNameTag)
         'sdgModelOptions.RestrictLink()
+        ExplanatoryFunctionSelect()
         SetBaseFunction()
         DataTypeAccepted()
     End Sub
@@ -671,7 +673,7 @@ Public Class dlgTwoVariableFitModel
         ConvertToVariate()
     End Sub
 
-    Private Sub ucrExplanatory_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExplanatory.ControlValueChanged
+        Private Sub ucrExplanatory_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExplanatory.ControlValueChanged
         If bRCodeSet Then
             If Not ucrReceiverExplanatory.IsEmpty Then
                 clsFormulaOperator.AddParameter("exp1", ucrReceiverExplanatory.GetVariableNames(False), iPosition:=1)
