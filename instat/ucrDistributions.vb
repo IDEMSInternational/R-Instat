@@ -45,12 +45,12 @@ Public Class ucrDistributions
         strDataType = ""
         CreateDistributions()
         bFirstLoad = True
+        ucrInputDistributions.SetDropDownStyleAsNonEditable()
     End Sub
 
     Private Sub ucrDistributions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             SetDistributions()
-            ucrInputDistributions.SetDropDownStyleAsNonEditable()
             bFirstLoad = False
         End If
     End Sub
@@ -593,6 +593,11 @@ Public Class ucrDistributions
 
     Public Sub RecieverDatatype(strNewType As String)
         strDataType = strNewType
+        SetDistributions()
+    End Sub
+
+    Public Sub SetDataType(strNewDataType As String)
+        strDataType = strNewDataType
         SetDistributions()
     End Sub
 

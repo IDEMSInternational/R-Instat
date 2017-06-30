@@ -70,6 +70,7 @@ Public Class dlgContrasts
         ucrReceiverForContrasts.Selector = ucrSelectorForContrast
         ucrReceiverForContrasts.SetMeAsReceiver()
         ucrReceiverForContrasts.SetIncludedDataTypes({"factor"})
+        ucrReceiverForContrasts.strSelectorHeading = "Factors"
         ucrBase.iHelpTopicID = 353
 
         Dim dctContrastTypes As New Dictionary(Of String, String)
