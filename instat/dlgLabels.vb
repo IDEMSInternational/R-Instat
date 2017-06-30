@@ -36,10 +36,11 @@ Public Class dlgLabels
 
     Private Sub SetRCodeforControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        TestOKEnabled()
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverLabels.IsEmpty() AndAlso ucrFactorLabels.IsColumnComplete(ucrFactorLabels.strLabelsName) AndAlso (ucrChkAddLevels.Visible AndAlso Not ucrChkAddLevels.Checked OrElse (ucrFactorLabels.IsColumnComplete(ucrFactorLabels.strLevelsName))) Then
+        If Not ucrReceiverLabels.IsEmpty() AndAlso ucrFactorLabels.IsColumnComplete(ucrFactorLabels.strLabelsName) AndAlso (ucrChkIncludeLevelNumbers.Visible AndAlso Not ucrChkIncludeLevelNumbers.Checked OrElse (ucrFactorLabels.IsColumnComplete(ucrFactorLabels.strLevelsName))) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -52,6 +53,7 @@ Public Class dlgLabels
         ucrSelectorForLabels.Focus()
         clsViewLabels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_factor_levels")
         ucrBase.clsRsyntax.SetBaseRFunction(clsViewLabels)
+        AddLevelButtonEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -62,18 +64,19 @@ Public Class dlgLabels
         ucrFactorLabels.SetAsViewerOnly()
         ucrFactorLabels.AddEditableColumns({ucrFactorLabels.strLevelsName, ucrFactorLabels.strLabelsName})
         ucrFactorLabels.SetIsGridColumn(ucrFactorLabels.strLabelsName)
-        ucrFactorLabels.SetLevelsCheckbox(ucrChkAddLevels)
+        ucrFactorLabels.SetLevelsCheckbox(ucrChkIncludeLevelNumbers)
 
         ucrReceiverLabels.SetParameter(New RParameter("col_name", 1))
         ucrReceiverLabels.SetParameterIsString()
         ucrReceiverLabels.Selector = ucrSelectorForLabels
         ucrReceiverLabels.SetMeAsReceiver()
         ucrReceiverLabels.SetIncludedDataTypes({"factor"})
+        ucrReceiverLabels.strSelectorHeading = "Factors"
 
         ucrSelectorForLabels.SetParameter(New RParameter("data_name", 0))
         ucrSelectorForLabels.SetParameterIsString()
 
-        ucrChkAddLevels.SetText("Add Levels")
+        ucrChkIncludeLevelNumbers.SetText("Include Level Numbers")
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -88,13 +91,17 @@ Public Class dlgLabels
     End Sub
 
     Private Sub ucrReceiverLabels_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLabels.ControlContentsChanged, ucrFactorLabels.ControlContentsChanged
-        cmdAddLevel.Enabled = ucrFactorLabels.grdFactorData.Visible
+        AddLevelButtonEnabled()
         TestOKEnabled()
     End Sub
 
+    Private Sub AddLevelButtonEnabled()
+        cmdAddLevel.Enabled = ucrFactorLabels.grdFactorData.Visible AndAlso Not ucrReceiverLabels.IsEmpty
+    End Sub
+
     'TODO modify factor control to be able to manage two parameters from different columns
-    Private Sub ucrFactorLabels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorLabels.ControlValueChanged, ucrChkAddLevels.ControlValueChanged
-        If (ucrChkAddLevels.Checked OrElse Not ucrChkAddLevels.Visible) AndAlso ucrFactorLabels.IsColumnComplete(ucrFactorLabels.strLevelsName) Then
+    Private Sub ucrFactorLabels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorLabels.ControlValueChanged, ucrChkIncludeLevelNumbers.ControlValueChanged
+        If (ucrChkIncludeLevelNumbers.Checked OrElse Not ucrChkIncludeLevelNumbers.Visible) AndAlso ucrFactorLabels.IsColumnComplete(ucrFactorLabels.strLevelsName) Then
             clsViewLabels.AddParameter("new_levels", strParameterValue:=ucrFactorLabels.GetColumnInFactorSheet(ucrFactorLabels.strLevelsName, bWithQuotes:=False))
         Else
             clsViewLabels.RemoveParameterByName("new_levels")
