@@ -63,7 +63,7 @@ Public Class ucrElementRectControl
     End Sub
 
 
-    Public Sub SetRCodeForControl(strNewLegend As String, clsNewElementLine As RFunction, clsNewThemeFunction As RFunction, clsNewBaseOperator As ROperator, Optional bReset As Boolean = False)
+    Public Sub SetRCodeForControl(strNewLegend As String, clsNewElementLine As RFunction, clsNewThemeFunction As RFunction, clsNewBaseOperator As ROperator, Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
         If Not bInitialiseControls Then
             InitialiseControl()
         End If
@@ -73,17 +73,17 @@ Public Class ucrElementRectControl
         clsThemeFunction = clsNewThemeFunction
         clsElementLine = clsNewElementLine
 
-        ucrNudRectSize.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=True)
-        ucrChkRectSize.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=True)
+        ucrNudRectSize.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrChkRectSize.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
-        ucrRectColors.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=True)
-        ucrChkRectColour.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=True)
+        ucrRectColors.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrChkRectColour.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
-        ucrRectFill.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=True)
-        ucrChkRectFill.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=True)
+        ucrRectFill.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrChkRectFill.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
-        ucrInputRectLineType.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=True)
-        ucrChkRectLineType.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=True)
+        ucrInputRectLineType.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrChkRectLineType.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
         AddRemoveElementLineAxis()
     End Sub
