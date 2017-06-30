@@ -67,7 +67,6 @@ Public Class dlgFitModel
         chkConvertToVariate.Visible = False
         ucrModelName.SetName("reg")
         'sdgSimpleRegOptions.SetDefaults()
-        sdgModelOptions.SetDefaults()
         ResponseConvert()
         ' sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
         sdgSimpleRegOptions.lblConfLevel.Enabled = True
@@ -255,7 +254,7 @@ Public Class dlgFitModel
     Public Sub ChooseRFunction()
         sdgModelOptions.ucrDistributionChoice.RecieverDatatype(ucrFamily.strDataType)
         sdgModelOptions.ucrDistributionChoice.ucrInputDistributions.cboInput.SelectedIndex = sdgModelOptions.ucrDistributionChoice.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrFamily.clsCurrDistribution.strNameTag)
-        sdgModelOptions.RestrictLink()
+        sdgModelOptions.SetLinkFunctionsAvailable()
         'TODO:   Include multinomial as an option And the appropriate function
         'If (ucrFamily.clsCurrDistribution.strNameTag = "Normal") Then
         '    ucrBase.clsRsyntax.SetFunction("lm")
