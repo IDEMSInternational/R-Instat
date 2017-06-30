@@ -41,6 +41,7 @@ Public Class dlgFactorDataFrame
 
         ' ucrreceiver
         ucrReceiverFactorDataFrame.SetParameter(New RParameter("factor", 1))
+        ucrReceiverFactorDataFrame.strSelectorHeading = "Factors"
         ucrReceiverFactorDataFrame.SetParameterIsString()
         ucrReceiverFactorDataFrame.Selector = ucrSelectorFactorDataFrame
         ucrReceiverFactorDataFrame.SetMeAsReceiver()
