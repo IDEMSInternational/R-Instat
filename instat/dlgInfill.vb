@@ -40,12 +40,15 @@ Public Class dlgInfill
         ucrReceiverDate.SetDataType("Date")
         ucrReceiverDate.SetParameter(New RParameter("date_name", 1))
         ucrReceiverDate.SetParameterIsString()
+        ucrReceiverDate.strSelectorHeading = "Date"
 
         'Set ucrreceiver factors
         ucrReceiverFactors.SetIncludedDataTypes({"factor"})
         ucrReceiverFactors.Selector = ucrInfillSelector
+        ucrReceiverFactors.strSelectorHeading = "Factors"
         ucrReceiverFactors.SetParameter(New RParameter("factors", 2))
         ucrReceiverFactors.SetParameterIsString()
+        ucrReceiverFactors.strSelectorHeading = "Factors"
 
         'Set data frame parameter
         ucrInfillSelector.SetParameter(New RParameter("data_name", 0))
