@@ -28,32 +28,32 @@ Partial Class dlgOneVarFitModel
         Me.rdoExactCase = New System.Windows.Forms.RadioButton()
         Me.rdoGeneralCase = New System.Windows.Forms.RadioButton()
         Me.grpConditions = New System.Windows.Forms.GroupBox()
+        Me.cmdDisplayOptions = New System.Windows.Forms.Button()
         Me.grpVarAndWilcoxSign = New System.Windows.Forms.GroupBox()
         Me.rdoWilcoxSignTest = New System.Windows.Forms.RadioButton()
         Me.rdoVarSignTest = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlWilcoxVarTest = New instat.UcrPanel()
+        Me.cmdFittingOptions = New System.Windows.Forms.Button()
         Me.grpVarAndWilcox = New System.Windows.Forms.GroupBox()
         Me.rdoEnorm = New System.Windows.Forms.RadioButton()
         Me.rdoMeanWilcox = New System.Windows.Forms.RadioButton()
         Me.rdoVarSign = New System.Windows.Forms.RadioButton()
+        Me.lblHyp = New System.Windows.Forms.Label()
+        Me.lblConfidenceLimit = New System.Windows.Forms.Label()
+        Me.ucrChkConvertVariate = New instat.ucrCheck()
+        Me.ucrPnlGeneralExactCase = New instat.UcrPanel()
+        Me.ucrSaveModel = New instat.ucrSave()
+        Me.ucrPnlWilcoxVarTest = New instat.UcrPanel()
         Me.ucrPnlStats = New instat.UcrPanel()
         Me.ucrChkBinModify = New instat.ucrCheck()
         Me.ucrNudBinomialConditions = New instat.ucrNud()
         Me.ucrOperator = New instat.ucrInputComboBox()
         Me.ucrVariables = New instat.ucrInputComboBox()
-        Me.lblHyp = New System.Windows.Forms.Label()
         Me.ucrNudHyp = New instat.ucrNud()
-        Me.lblConfidenceLimit = New System.Windows.Forms.Label()
         Me.ucrNudCI = New instat.ucrNud()
-        Me.ucrChkConvertVariate = New instat.ucrCheck()
-        Me.ucrPnlGeneralExactCase = New instat.UcrPanel()
-        Me.ucrSaveModel = New instat.ucrSave()
         Me.ucrDistributionChoice = New instat.ucrDistributions()
         Me.UcrReceiver = New instat.ucrReceiverSingle()
         Me.ucrSelectorOneVarFitMod = New instat.ucrSelectorByDataFrameAddRemove()
         Me.UcrBase = New instat.ucrButtons()
-        Me.cmdDisplayOptions = New System.Windows.Forms.Button()
-        Me.cmdFittingOptions = New System.Windows.Forms.Button()
         Me.grpConditions.SuspendLayout()
         Me.grpVarAndWilcoxSign.SuspendLayout()
         Me.grpVarAndWilcox.SuspendLayout()
@@ -118,9 +118,7 @@ Partial Class dlgOneVarFitModel
         '
         'grpConditions
         '
-        Me.grpConditions.Controls.Add(Me.cmdDisplayOptions)
         Me.grpConditions.Controls.Add(Me.grpVarAndWilcoxSign)
-        Me.grpConditions.Controls.Add(Me.cmdFittingOptions)
         Me.grpConditions.Controls.Add(Me.grpVarAndWilcox)
         Me.grpConditions.Controls.Add(Me.ucrChkBinModify)
         Me.grpConditions.Controls.Add(Me.lblEquals)
@@ -138,6 +136,15 @@ Partial Class dlgOneVarFitModel
         Me.grpConditions.TabIndex = 34
         Me.grpConditions.TabStop = False
         Me.grpConditions.Text = "Conditions"
+        '
+        'cmdDisplayOptions
+        '
+        Me.cmdDisplayOptions.Location = New System.Drawing.Point(294, 283)
+        Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
+        Me.cmdDisplayOptions.Size = New System.Drawing.Size(92, 23)
+        Me.cmdDisplayOptions.TabIndex = 44
+        Me.cmdDisplayOptions.Text = "Display Options"
+        Me.cmdDisplayOptions.UseVisualStyleBackColor = True
         '
         'grpVarAndWilcoxSign
         '
@@ -173,12 +180,14 @@ Partial Class dlgOneVarFitModel
         Me.rdoVarSignTest.Text = "Compare Vaiance"
         Me.rdoVarSignTest.UseVisualStyleBackColor = True
         '
-        'ucrPnlWilcoxVarTest
+        'cmdFittingOptions
         '
-        Me.ucrPnlWilcoxVarTest.Location = New System.Drawing.Point(6, 11)
-        Me.ucrPnlWilcoxVarTest.Name = "ucrPnlWilcoxVarTest"
-        Me.ucrPnlWilcoxVarTest.Size = New System.Drawing.Size(117, 48)
-        Me.ucrPnlWilcoxVarTest.TabIndex = 63
+        Me.cmdFittingOptions.Location = New System.Drawing.Point(294, 312)
+        Me.cmdFittingOptions.Name = "cmdFittingOptions"
+        Me.cmdFittingOptions.Size = New System.Drawing.Size(92, 23)
+        Me.cmdFittingOptions.TabIndex = 43
+        Me.cmdFittingOptions.Text = "Fitting Options"
+        Me.cmdFittingOptions.UseVisualStyleBackColor = True
         '
         'grpVarAndWilcox
         '
@@ -226,6 +235,53 @@ Partial Class dlgOneVarFitModel
         Me.rdoVarSign.Text = "Compare Variance"
         Me.rdoVarSign.UseVisualStyleBackColor = True
         '
+        'lblHyp
+        '
+        Me.lblHyp.AutoSize = True
+        Me.lblHyp.Location = New System.Drawing.Point(6, 40)
+        Me.lblHyp.Name = "lblHyp"
+        Me.lblHyp.Size = New System.Drawing.Size(83, 13)
+        Me.lblHyp.TabIndex = 46
+        Me.lblHyp.Text = "Null Hypothesis:"
+        '
+        'lblConfidenceLimit
+        '
+        Me.lblConfidenceLimit.AutoSize = True
+        Me.lblConfidenceLimit.Location = New System.Drawing.Point(6, 13)
+        Me.lblConfidenceLimit.Name = "lblConfidenceLimit"
+        Me.lblConfidenceLimit.Size = New System.Drawing.Size(88, 13)
+        Me.lblConfidenceLimit.TabIndex = 47
+        Me.lblConfidenceLimit.Text = "Confidence Limit:"
+        '
+        'ucrChkConvertVariate
+        '
+        Me.ucrChkConvertVariate.Checked = False
+        Me.ucrChkConvertVariate.Location = New System.Drawing.Point(249, 94)
+        Me.ucrChkConvertVariate.Name = "ucrChkConvertVariate"
+        Me.ucrChkConvertVariate.Size = New System.Drawing.Size(156, 20)
+        Me.ucrChkConvertVariate.TabIndex = 42
+        '
+        'ucrPnlGeneralExactCase
+        '
+        Me.ucrPnlGeneralExactCase.Location = New System.Drawing.Point(67, 7)
+        Me.ucrPnlGeneralExactCase.Name = "ucrPnlGeneralExactCase"
+        Me.ucrPnlGeneralExactCase.Size = New System.Drawing.Size(266, 35)
+        Me.ucrPnlGeneralExactCase.TabIndex = 39
+        '
+        'ucrSaveModel
+        '
+        Me.ucrSaveModel.Location = New System.Drawing.Point(10, 308)
+        Me.ucrSaveModel.Name = "ucrSaveModel"
+        Me.ucrSaveModel.Size = New System.Drawing.Size(255, 24)
+        Me.ucrSaveModel.TabIndex = 38
+        '
+        'ucrPnlWilcoxVarTest
+        '
+        Me.ucrPnlWilcoxVarTest.Location = New System.Drawing.Point(6, 11)
+        Me.ucrPnlWilcoxVarTest.Name = "ucrPnlWilcoxVarTest"
+        Me.ucrPnlWilcoxVarTest.Size = New System.Drawing.Size(117, 48)
+        Me.ucrPnlWilcoxVarTest.TabIndex = 63
+        '
         'ucrPnlStats
         '
         Me.ucrPnlStats.Location = New System.Drawing.Point(6, 10)
@@ -271,15 +327,6 @@ Partial Class dlgOneVarFitModel
         Me.ucrVariables.Size = New System.Drawing.Size(88, 21)
         Me.ucrVariables.TabIndex = 32
         '
-        'lblHyp
-        '
-        Me.lblHyp.AutoSize = True
-        Me.lblHyp.Location = New System.Drawing.Point(6, 40)
-        Me.lblHyp.Name = "lblHyp"
-        Me.lblHyp.Size = New System.Drawing.Size(83, 13)
-        Me.lblHyp.TabIndex = 46
-        Me.lblHyp.Text = "Null Hypothesis:"
-        '
         'ucrNudHyp
         '
         Me.ucrNudHyp.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
@@ -291,15 +338,6 @@ Partial Class dlgOneVarFitModel
         Me.ucrNudHyp.Size = New System.Drawing.Size(50, 20)
         Me.ucrNudHyp.TabIndex = 49
         Me.ucrNudHyp.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblConfidenceLimit
-        '
-        Me.lblConfidenceLimit.AutoSize = True
-        Me.lblConfidenceLimit.Location = New System.Drawing.Point(6, 13)
-        Me.lblConfidenceLimit.Name = "lblConfidenceLimit"
-        Me.lblConfidenceLimit.Size = New System.Drawing.Size(88, 13)
-        Me.lblConfidenceLimit.TabIndex = 47
-        Me.lblConfidenceLimit.Text = "Confidence Limit:"
         '
         'ucrNudCI
         '
@@ -313,31 +351,9 @@ Partial Class dlgOneVarFitModel
         Me.ucrNudCI.TabIndex = 48
         Me.ucrNudCI.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrChkConvertVariate
-        '
-        Me.ucrChkConvertVariate.Checked = False
-        Me.ucrChkConvertVariate.Location = New System.Drawing.Point(249, 94)
-        Me.ucrChkConvertVariate.Name = "ucrChkConvertVariate"
-        Me.ucrChkConvertVariate.Size = New System.Drawing.Size(156, 20)
-        Me.ucrChkConvertVariate.TabIndex = 42
-        '
-        'ucrPnlGeneralExactCase
-        '
-        Me.ucrPnlGeneralExactCase.Location = New System.Drawing.Point(67, 7)
-        Me.ucrPnlGeneralExactCase.Name = "ucrPnlGeneralExactCase"
-        Me.ucrPnlGeneralExactCase.Size = New System.Drawing.Size(266, 35)
-        Me.ucrPnlGeneralExactCase.TabIndex = 39
-        '
-        'ucrSaveModel
-        '
-        Me.ucrSaveModel.Location = New System.Drawing.Point(10, 283)
-        Me.ucrSaveModel.Name = "ucrSaveModel"
-        Me.ucrSaveModel.Size = New System.Drawing.Size(255, 24)
-        Me.ucrSaveModel.TabIndex = 38
-        '
         'ucrDistributionChoice
         '
-        Me.ucrDistributionChoice.Location = New System.Drawing.Point(10, 246)
+        Me.ucrDistributionChoice.Location = New System.Drawing.Point(10, 269)
         Me.ucrDistributionChoice.Name = "ucrDistributionChoice"
         Me.ucrDistributionChoice.Size = New System.Drawing.Size(219, 30)
         Me.ucrDistributionChoice.TabIndex = 11
@@ -366,36 +382,20 @@ Partial Class dlgOneVarFitModel
         '
         'UcrBase
         '
-        Me.UcrBase.Location = New System.Drawing.Point(10, 316)
+        Me.UcrBase.Location = New System.Drawing.Point(10, 341)
         Me.UcrBase.Name = "UcrBase"
         Me.UcrBase.Size = New System.Drawing.Size(410, 52)
         Me.UcrBase.TabIndex = 0
-        '
-        'cmdDisplayOptions
-        '
-        Me.cmdDisplayOptions.Location = New System.Drawing.Point(60, 152)
-        Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
-        Me.cmdDisplayOptions.Size = New System.Drawing.Size(92, 23)
-        Me.cmdDisplayOptions.TabIndex = 44
-        Me.cmdDisplayOptions.Text = "Display Options"
-        Me.cmdDisplayOptions.UseVisualStyleBackColor = True
-        '
-        'cmdFittingOptions
-        '
-        Me.cmdFittingOptions.Location = New System.Drawing.Point(59, 123)
-        Me.cmdFittingOptions.Name = "cmdFittingOptions"
-        Me.cmdFittingOptions.Size = New System.Drawing.Size(92, 23)
-        Me.cmdFittingOptions.TabIndex = 43
-        Me.cmdFittingOptions.Text = "Fitting Options"
-        Me.cmdFittingOptions.UseVisualStyleBackColor = True
         '
         'dlgOneVarFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(448, 402)
+        Me.ClientSize = New System.Drawing.Size(448, 403)
+        Me.Controls.Add(Me.cmdDisplayOptions)
         Me.Controls.Add(Me.ucrChkConvertVariate)
         Me.Controls.Add(Me.rdoExactCase)
+        Me.Controls.Add(Me.cmdFittingOptions)
         Me.Controls.Add(Me.rdoGeneralCase)
         Me.Controls.Add(Me.ucrPnlGeneralExactCase)
         Me.Controls.Add(Me.ucrSaveModel)
