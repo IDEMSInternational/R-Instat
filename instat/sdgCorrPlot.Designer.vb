@@ -27,6 +27,7 @@ Partial Class sdgCorrPlot
         Me.rdoCorrelationPlot = New System.Windows.Forms.RadioButton()
         Me.rdoScatterPlotMatrix = New System.Windows.Forms.RadioButton()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.ucrPnlGraphType = New instat.UcrPanel()
         Me.lblFactorVariable = New System.Windows.Forms.Label()
         Me.lblAlpha = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
@@ -45,7 +46,6 @@ Partial Class sdgCorrPlot
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrChkColor = New instat.ucrCheck()
         Me.ucrBaseSdgCorrPlot = New instat.ucrButtonsSubdialogue()
-        Me.ucrPnlGraphType = New instat.UcrPanel()
         Me.GroupBox1.SuspendLayout()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
@@ -99,6 +99,13 @@ Partial Class sdgCorrPlot
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Graphs"
+        '
+        'ucrPnlGraphType
+        '
+        Me.ucrPnlGraphType.Location = New System.Drawing.Point(12, 19)
+        Me.ucrPnlGraphType.Name = "ucrPnlGraphType"
+        Me.ucrPnlGraphType.Size = New System.Drawing.Size(318, 73)
+        Me.ucrPnlGraphType.TabIndex = 1
         '
         'lblFactorVariable
         '
@@ -235,7 +242,7 @@ Partial Class sdgCorrPlot
         '
         Me.ucrSelectFactor.bShowHiddenColumns = False
         Me.ucrSelectFactor.bUseCurrentFilter = True
-        Me.ucrSelectFactor.Location = New System.Drawing.Point(10, 161)
+        Me.ucrSelectFactor.Location = New System.Drawing.Point(15, 161)
         Me.ucrSelectFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectFactor.Name = "ucrSelectFactor"
         Me.ucrSelectFactor.Size = New System.Drawing.Size(226, 188)
@@ -275,7 +282,7 @@ Partial Class sdgCorrPlot
         'ucrChkColor
         '
         Me.ucrChkColor.Checked = False
-        Me.ucrChkColor.Location = New System.Drawing.Point(11, 137)
+        Me.ucrChkColor.Location = New System.Drawing.Point(15, 137)
         Me.ucrChkColor.Name = "ucrChkColor"
         Me.ucrChkColor.Size = New System.Drawing.Size(141, 19)
         Me.ucrChkColor.TabIndex = 9
@@ -287,18 +294,11 @@ Partial Class sdgCorrPlot
         Me.ucrBaseSdgCorrPlot.Size = New System.Drawing.Size(142, 30)
         Me.ucrBaseSdgCorrPlot.TabIndex = 14
         '
-        'ucrPnlGraphType
-        '
-        Me.ucrPnlGraphType.Location = New System.Drawing.Point(12, 19)
-        Me.ucrPnlGraphType.Name = "ucrPnlGraphType"
-        Me.ucrPnlGraphType.Size = New System.Drawing.Size(318, 73)
-        Me.ucrPnlGraphType.TabIndex = 1
-        '
         'sdgCorrPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(365, 452)
+        Me.ClientSize = New System.Drawing.Size(366, 452)
         Me.Controls.Add(Me.ucrSelectFactor)
         Me.Controls.Add(Me.ucrNudAlpha)
         Me.Controls.Add(Me.grpOptions)
