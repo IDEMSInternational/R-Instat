@@ -554,6 +554,7 @@ Public Class RLink
                                                               bReturn = False
                                                           End Try
                                                       End Sub)
+                    thrRScript.IsBackground = True
                     thrDelay = New Threading.Thread(Sub()
                                                         Dim t As New Stopwatch
                                                         t.Start()
@@ -562,6 +563,7 @@ Public Class RLink
                                                         End While
                                                         evtWaitHandleDelayDone.Set()
                                                     End Sub)
+                    thrDelay.IsBackground = True
                     thrWaitDisplay = New Threading.Thread(Sub()
                                                               frmSetupLoading.Show()
                                                               While thrRScript.IsAlive
@@ -571,6 +573,7 @@ Public Class RLink
                                                               frmSetupLoading.Hide()
                                                               evtWaitHandleWaitDisplayDone.Set()
                                                           End Sub)
+                    thrWaitDisplay.IsBackground = True
                     thrRScript.Start()
                     thrDelay.Start()
                     evtWaitHandleDelayDone.WaitOne()
