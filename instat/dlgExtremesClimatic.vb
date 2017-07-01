@@ -43,23 +43,27 @@ Public Class dlgExtremesClimatic
         ucrReceiverYear.Selector = ucrSelectorClimaticExtremes
         ucrReceiverYear.SetClimaticType("year")
         ucrReceiverYear.bAutoFill = True
-        ucrReceiverYear.strSelectorHeading = "Numerics"
+        ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
+        ucrReceiverYear.strSelectorHeading = "Year Variables"
 
         ucrReceiverStations.Selector = ucrSelectorClimaticExtremes
         ucrReceiverStations.SetClimaticType("station")
         ucrReceiverStations.bAutoFill = True
-        ucrReceiverStations.strSelectorHeading = "Factors"
+        ucrReceiverStations.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "station" & Chr(34)})
+        ucrReceiverStations.strSelectorHeading = "Station Variables"
 
         ucrReceiverDate.SetClimaticType("date")
         ucrReceiverDate.SetMeAsReceiver()
         ucrReceiverDate.Selector = ucrSelectorClimaticExtremes
         ucrReceiverDate.bAutoFill = True
-        ucrReceiverDate.strSelectorHeading = "Date"
+        ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
+        ucrReceiverDate.strSelectorHeading = "Date Variables"
 
         ucrReceiverDOY.SetClimaticType("doy")
         ucrReceiverDOY.Selector = ucrSelectorClimaticExtremes
         ucrReceiverDOY.bAutoFill = True
-        ucrReceiverDOY.strSelectorHeading = "Numerics"
+        ucrReceiverDOY.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "doy" & Chr(34)})
+        ucrReceiverDOY.strSelectorHeading = "Day variables"
 
         ucrReceiverElement.SetParameter(New RParameter("x", 0))
         ucrReceiverElement.Selector = ucrSelectorClimaticExtremes
