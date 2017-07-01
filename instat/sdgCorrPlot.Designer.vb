@@ -27,25 +27,25 @@ Partial Class sdgCorrPlot
         Me.rdoCorrelationPlot = New System.Windows.Forms.RadioButton()
         Me.rdoScatterPlotMatrix = New System.Windows.Forms.RadioButton()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.ucrPnlGraphType = New instat.UcrPanel()
         Me.lblFactorVariable = New System.Windows.Forms.Label()
         Me.lblAlpha = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
-        Me.ucrChkLabel = New instat.ucrCheck()
         Me.lblgeom = New System.Windows.Forms.Label()
-        Me.ucrNudAlphaCorr = New instat.ucrNud()
-        Me.ucrInputComboGeom = New instat.ucrInputComboBox()
-        Me.ucrNudMaximumSize = New instat.ucrNud()
         Me.lblMaximumSize = New System.Windows.Forms.Label()
-        Me.ucrNudMinimunSize = New instat.ucrNud()
         Me.lblMinimumSize = New System.Windows.Forms.Label()
         Me.lblLabelAlpha = New System.Windows.Forms.Label()
         Me.ucrSelectFactor = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrNudAlpha = New instat.ucrNud()
+        Me.ucrChkLabel = New instat.ucrCheck()
+        Me.ucrNudAlphaCorr = New instat.ucrNud()
+        Me.ucrInputComboGeom = New instat.ucrInputComboBox()
+        Me.ucrNudMaximumSize = New instat.ucrNud()
+        Me.ucrNudMinimunSize = New instat.ucrNud()
         Me.ucrReceiveFactor = New instat.ucrReceiverSingle()
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrChkColor = New instat.ucrCheck()
         Me.ucrBaseSdgCorrPlot = New instat.ucrButtonsSubdialogue()
+        Me.ucrPnlGraphType = New instat.UcrPanel()
         Me.GroupBox1.SuspendLayout()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
@@ -100,13 +100,6 @@ Partial Class sdgCorrPlot
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Graphs"
         '
-        'ucrPnlGraphType
-        '
-        Me.ucrPnlGraphType.Location = New System.Drawing.Point(12, 19)
-        Me.ucrPnlGraphType.Name = "ucrPnlGraphType"
-        Me.ucrPnlGraphType.Size = New System.Drawing.Size(318, 73)
-        Me.ucrPnlGraphType.TabIndex = 1
-        '
         'lblFactorVariable
         '
         Me.lblFactorVariable.AutoSize = True
@@ -145,14 +138,6 @@ Partial Class sdgCorrPlot
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
         '
-        'ucrChkLabel
-        '
-        Me.ucrChkLabel.Checked = False
-        Me.ucrChkLabel.Location = New System.Drawing.Point(51, 51)
-        Me.ucrChkLabel.Name = "ucrChkLabel"
-        Me.ucrChkLabel.Size = New System.Drawing.Size(145, 20)
-        Me.ucrChkLabel.TabIndex = 4
-        '
         'lblgeom
         '
         Me.lblgeom.AutoSize = True
@@ -163,39 +148,6 @@ Partial Class sdgCorrPlot
         Me.lblgeom.Tag = "geom"
         Me.lblgeom.Text = "Geom:"
         '
-        'ucrNudAlphaCorr
-        '
-        Me.ucrNudAlphaCorr.DecimalPlaces = New Decimal(New Integer() {2, 0, 0, 0})
-        Me.ucrNudAlphaCorr.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudAlphaCorr.Location = New System.Drawing.Point(125, 81)
-        Me.ucrNudAlphaCorr.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudAlphaCorr.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAlphaCorr.Name = "ucrNudAlphaCorr"
-        Me.ucrNudAlphaCorr.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudAlphaCorr.TabIndex = 8
-        Me.ucrNudAlphaCorr.Value = New Decimal(New Integer() {100, 0, 0, 131072})
-        '
-        'ucrInputComboGeom
-        '
-        Me.ucrInputComboGeom.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboGeom.IsReadOnly = False
-        Me.ucrInputComboGeom.Location = New System.Drawing.Point(51, 15)
-        Me.ucrInputComboGeom.Name = "ucrInputComboGeom"
-        Me.ucrInputComboGeom.Size = New System.Drawing.Size(73, 21)
-        Me.ucrInputComboGeom.TabIndex = 1
-        '
-        'ucrNudMaximumSize
-        '
-        Me.ucrNudMaximumSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMaximumSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMaximumSize.Location = New System.Drawing.Point(125, 144)
-        Me.ucrNudMaximumSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudMaximumSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMaximumSize.Name = "ucrNudMaximumSize"
-        Me.ucrNudMaximumSize.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudMaximumSize.TabIndex = 6
-        Me.ucrNudMaximumSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'lblMaximumSize
         '
         Me.lblMaximumSize.AutoSize = True
@@ -205,18 +157,6 @@ Partial Class sdgCorrPlot
         Me.lblMaximumSize.TabIndex = 5
         Me.lblMaximumSize.Tag = "Maximum_Size"
         Me.lblMaximumSize.Text = "Maximum Size:"
-        '
-        'ucrNudMinimunSize
-        '
-        Me.ucrNudMinimunSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMinimunSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMinimunSize.Location = New System.Drawing.Point(125, 109)
-        Me.ucrNudMinimunSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudMinimunSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMinimunSize.Name = "ucrNudMinimunSize"
-        Me.ucrNudMinimunSize.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudMinimunSize.TabIndex = 3
-        Me.ucrNudMinimunSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblMinimumSize
         '
@@ -260,6 +200,59 @@ Partial Class sdgCorrPlot
         Me.ucrNudAlpha.TabIndex = 8
         Me.ucrNudAlpha.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
+        'ucrChkLabel
+        '
+        Me.ucrChkLabel.Checked = False
+        Me.ucrChkLabel.Location = New System.Drawing.Point(51, 51)
+        Me.ucrChkLabel.Name = "ucrChkLabel"
+        Me.ucrChkLabel.Size = New System.Drawing.Size(145, 20)
+        Me.ucrChkLabel.TabIndex = 4
+        '
+        'ucrNudAlphaCorr
+        '
+        Me.ucrNudAlphaCorr.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAlphaCorr.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudAlphaCorr.Location = New System.Drawing.Point(125, 81)
+        Me.ucrNudAlphaCorr.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudAlphaCorr.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAlphaCorr.Name = "ucrNudAlphaCorr"
+        Me.ucrNudAlphaCorr.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudAlphaCorr.TabIndex = 8
+        Me.ucrNudAlphaCorr.Value = New Decimal(New Integer() {100, 0, 0, 131072})
+        '
+        'ucrInputComboGeom
+        '
+        Me.ucrInputComboGeom.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboGeom.IsReadOnly = False
+        Me.ucrInputComboGeom.Location = New System.Drawing.Point(51, 15)
+        Me.ucrInputComboGeom.Name = "ucrInputComboGeom"
+        Me.ucrInputComboGeom.Size = New System.Drawing.Size(73, 21)
+        Me.ucrInputComboGeom.TabIndex = 1
+        '
+        'ucrNudMaximumSize
+        '
+        Me.ucrNudMaximumSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaximumSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudMaximumSize.Location = New System.Drawing.Point(125, 144)
+        Me.ucrNudMaximumSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMaximumSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaximumSize.Name = "ucrNudMaximumSize"
+        Me.ucrNudMaximumSize.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudMaximumSize.TabIndex = 6
+        Me.ucrNudMaximumSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudMinimunSize
+        '
+        Me.ucrNudMinimunSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMinimunSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudMinimunSize.Location = New System.Drawing.Point(125, 109)
+        Me.ucrNudMinimunSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMinimunSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMinimunSize.Name = "ucrNudMinimunSize"
+        Me.ucrNudMinimunSize.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudMinimunSize.TabIndex = 3
+        Me.ucrNudMinimunSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'ucrReceiveFactor
         '
         Me.ucrReceiveFactor.frmParent = Me
@@ -294,14 +287,21 @@ Partial Class sdgCorrPlot
         Me.ucrBaseSdgCorrPlot.Size = New System.Drawing.Size(142, 30)
         Me.ucrBaseSdgCorrPlot.TabIndex = 14
         '
+        'ucrPnlGraphType
+        '
+        Me.ucrPnlGraphType.Location = New System.Drawing.Point(12, 19)
+        Me.ucrPnlGraphType.Name = "ucrPnlGraphType"
+        Me.ucrPnlGraphType.Size = New System.Drawing.Size(318, 73)
+        Me.ucrPnlGraphType.TabIndex = 1
+        '
         'sdgCorrPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(366, 452)
         Me.Controls.Add(Me.ucrSelectFactor)
-        Me.Controls.Add(Me.ucrNudAlpha)
         Me.Controls.Add(Me.grpOptions)
+        Me.Controls.Add(Me.ucrNudAlpha)
         Me.Controls.Add(Me.ucrReceiveFactor)
         Me.Controls.Add(Me.lblAlpha)
         Me.Controls.Add(Me.ucrSaveGraph)
