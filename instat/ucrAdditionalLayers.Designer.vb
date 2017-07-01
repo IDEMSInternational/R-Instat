@@ -61,9 +61,9 @@ Partial Class ucrAdditionalLayers
         Me.lblLayers.AutoSize = True
         Me.lblLayers.Location = New System.Drawing.Point(4, 13)
         Me.lblLayers.Name = "lblLayers"
-        Me.lblLayers.Size = New System.Drawing.Size(90, 13)
+        Me.lblLayers.Size = New System.Drawing.Size(41, 13)
         Me.lblLayers.TabIndex = 5
-        Me.lblLayers.Text = "Additional Layers:"
+        Me.lblLayers.Text = "Layers:"
         '
         'lstLayers
         '
@@ -73,6 +73,7 @@ Partial Class ucrAdditionalLayers
         Me.lstLayers.TabIndex = 4
         Me.lstLayers.UseCompatibleStateImageBehavior = False
         Me.lstLayers.View = System.Windows.Forms.View.List
+        Me.lstLayers.FullRowSelect = True
         '
         'ucrAdditionalLayers
         '
