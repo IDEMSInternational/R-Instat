@@ -477,21 +477,21 @@ Public Class dlgOneVarFitModel
         End If
     End Sub
 
-    Private Sub cmdFittingOptions_Click(sender As Object, e As EventArgs) Handles cmdFittingOptions.Click
-        sdgOneVarFitModel.SetRCode(ucrBase.clsRsyntax, clsROneVarFitModel, clsNewRLogLikFunction:=clsRLogLikFunction, ucrNewDistribution:=ucrDistribution, bReset:=bResetSubdialog)
-        bResetSubdialog = False
-        sdgOneVarFitModel.ShowDialog()
-        EnableOptions()
-        Display()
-        TestOKEnabled()
-    End Sub
-
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
         sdgOneVarFitModDisplay.SetRCode(ucrBase.clsRsyntax, clsRNewOneVarFitModel:=clsROneVarFitModel, clsNewRLogLikFunction:=clsRLogLikFunction, clsNewRplotFunction:=clsRplotFunction, clsNewRplotPPComp:=clsRplotPPComp, clsNewRplotCdfcomp:=clsRplotCdfcomp, clsNewRplotQqComp:=clsRplotQqComp, clsNewRplotDenscomp:=clsRplotDenscomp, ucrNewDistribution:=ucrDistribution, bReset:=bResetSubdialog)
         bResetSubdialog = False
         sdgOneVarFitModDisplay.ShowDialog()
         Display()
         EnableOptions()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub cmdFittingOptions_Click(sender As Object, e As EventArgs) Handles cmdFittingOptions.Click
+        sdgOneVarFitModel.SetRCode(ucrBase.clsRsyntax, clsROneVarFitModel, clsNewRLogLikFunction:=clsRLogLikFunction, ucrNewDistribution:=ucrDistribution, bReset:=bResetSubdialog)
+        bResetSubdialog = False
+        sdgOneVarFitModel.ShowDialog()
+        EnableOptions()
+        Display()
         TestOKEnabled()
     End Sub
 
