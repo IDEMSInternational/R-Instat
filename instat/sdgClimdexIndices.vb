@@ -401,52 +401,28 @@ Public Class sdgClimdexIndices
         End If
     End Sub
 
-    Private Sub lblN_Click(sender As Object, e As EventArgs) Handles lblN.Click
-
-    End Sub
-
-    Private Sub ucrInputPrecQtiles_Load(sender As Object, e As EventArgs) Handles ucrInputPrecQtiles.Load
-
-    End Sub
-
-    Private Sub lblPrecQuantiles_Click(sender As Object, e As EventArgs) Handles lblPrecQuantiles.Click
-
-    End Sub
-
-    Private Sub ucrInputTempQtiles_Load(sender As Object, e As EventArgs) Handles ucrInputTempQtiles.Load
-
-    End Sub
-
-    Private Sub lblTempQuantiles_Click(sender As Object, e As EventArgs) Handles lblTempQuantiles.Click
-
-    End Sub
-
-    Private Sub grpBaseRange_Enter(sender As Object, e As EventArgs) Handles grpBaseRange.Enter
-
-    End Sub
-
     Public Sub SetRFunction(clsNewRFunction As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
         clsNewClimdexInput = clsNewRFunction
-        ucrNudN.SetRCode(clsNewClimdexInput, bReset)
-        ucrNudThreshold.SetRCode(clsRTwoArg3, bReset)
-        ucrNudAnnualMissingDays.SetRCode(clsRMaxMisingDays, bReset)
-        ucrNudMothlyMissingDays.SetRCode(clsRMaxMisingDays, bReset)
-        ucrNudLowerBase.SetRCode(clsRBaseRange, bReset)
-        ucrNudUpperBase.SetRCode(clsRBaseRange, bReset)
-        ucrNudMinBaseData.SetRCode(clsNewClimdexInput, bReset)
-        ucrInputFreq.SetRCode(clsRTwoArg1, bReset)
-        ucrInputFreq.SetRCode(clsRThreeArg, bReset)
-        ucrInputFreq.SetRCode(clsRWriteDf, bReset)
-        ucrInputTempQtiles.SetRCode(clsRTempQTiles, bReset)
-        ucrInputPrecQtiles.SetRCode(clsRPrecQTiles, bReset)
-        ucrChkNHemisphere.SetRCode(clsNewClimdexInput, bReset)
-        ucrChkCenterMean.SetRCode(clsRThreeArg, bReset)
-        ucrChkMaxSpellSpanYears.SetRCode(clsRTwoArg4, bReset)
-        ucrChkSpellDISpanYear.SetRCode(clsRTwoArg5, bReset)
-        ucrInputGSLMode.SetRCode(clsRTwoArg2, bReset)
+        ucrNudN.SetRCode(clsNewClimdexInput, bReset, bCloneIfNeeded:=True)
+        ucrNudThreshold.SetRCode(clsRTwoArg3, bReset, bCloneIfNeeded:=True)
+        ucrNudAnnualMissingDays.SetRCode(clsRMaxMisingDays, bReset, bCloneIfNeeded:=True)
+        ucrNudMothlyMissingDays.SetRCode(clsRMaxMisingDays, bReset, bCloneIfNeeded:=True)
+        ucrNudLowerBase.SetRCode(clsRBaseRange, bReset, bCloneIfNeeded:=True)
+        ucrNudUpperBase.SetRCode(clsRBaseRange, bReset, bCloneIfNeeded:=True)
+        ucrNudMinBaseData.SetRCode(clsNewClimdexInput, bReset, bCloneIfNeeded:=True)
+        ucrInputFreq.SetRCode(clsRTwoArg1, bReset, bCloneIfNeeded:=True)
+        ucrInputFreq.SetRCode(clsRThreeArg, bReset, bCloneIfNeeded:=True)
+        ucrInputFreq.SetRCode(clsRWriteDf, bReset, bCloneIfNeeded:=True)
+        ucrInputTempQtiles.SetRCode(clsRTempQTiles, bReset, bCloneIfNeeded:=True)
+        ucrInputPrecQtiles.SetRCode(clsRPrecQTiles, bReset, bCloneIfNeeded:=True)
+        ucrChkNHemisphere.SetRCode(clsNewClimdexInput, bReset, bCloneIfNeeded:=True)
+        ucrChkCenterMean.SetRCode(clsRThreeArg, bReset, bCloneIfNeeded:=True)
+        ucrChkMaxSpellSpanYears.SetRCode(clsRTwoArg4, bReset, bCloneIfNeeded:=True)
+        ucrChkSpellDISpanYear.SetRCode(clsRTwoArg5, bReset, bCloneIfNeeded:=True)
+        ucrInputGSLMode.SetRCode(clsRTwoArg2, bReset, bCloneIfNeeded:=True)
         IndicesType()
 
         If bReset Then
