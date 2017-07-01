@@ -32,14 +32,19 @@ Public Class sdgCorrPlot
 
         ucrNudMaximumSize.SetParameter(New RParameter("max_size", 1))
         ucrNudMaximumSize.SetMinMax(1, 10)
+        ucrNudMaximumSize.SetRDefault("6")
 
         ucrNudMinimunSize.SetParameter(New RParameter("min_size", 2))
         ucrNudMinimunSize.SetMinMax(1, 5)
+        ucrNudMinimunSize.SetRDefault("2")
 
         ucrChkLabel.SetParameter(New RParameter("label", 4))
         ucrChkLabel.SetText("Label")
+        ucrChkLabel.SetRDefault("FALSE")
 
+        ucrNudAlphaCorr.SetParameter(New RParameter("label_alpha", 5))
         ucrNudAlphaCorr.SetMinMax(0, 1)
+        ucrNudAlphaCorr.DecimalPlaces = 2
         ucrNudAlphaCorr.Increment = 0.01
 
         ucrSaveGraph.SetPrefix("CorGraph")
@@ -63,7 +68,7 @@ Public Class sdgCorrPlot
         ucrPnlGraphType.AddToLinkedControls(ucrNudMaximumSize, {rdoCorrelationPlot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGraphType.AddToLinkedControls(ucrNudAlphaCorr, {rdoCorrelationPlot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGraphType.AddToLinkedControls(ucrChkLabel, {rdoCorrelationPlot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputComboGeom.SetLinkedDisplayControl(lblgeom)
+        ucrPnlGraphType.AddToLinkedControls(ucrSaveGraph, {rdoPairwisePlot, rdoCorrelationPlot, rdoScatterPlotMatrix}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudMinimunSize.SetLinkedDisplayControl(lblMinimumSize)
         ucrNudMaximumSize.SetLinkedDisplayControl(lblMaximumSize)
         ucrNudAlphaCorr.SetLinkedDisplayControl(lblLabelAlpha)
@@ -111,6 +116,7 @@ Public Class sdgCorrPlot
         ucrNudMaximumSize.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
         ucrNudMinimunSize.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
         ucrInputComboGeom.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudAlphaCorr.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
         ucrChkLabel.SetRSyntax(clsRsyntax, bReset)
         ucrSaveGraph.AddAdditionalRCode(clsRGraphicsFuction, 1)
         ucrSaveGraph.SetRCode(clsRGGcorrGraphicsFunction, bReset, bCloneIfNeeded:=True)
