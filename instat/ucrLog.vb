@@ -28,11 +28,14 @@ Public Class ucrLog
         clsInstatOptions = New InstatOptions
         Dim clsProcessStart As New RFunction
         Dim strLogFilename As String = "RInstatLog.R"
+        Dim strWD As String = clsInstatOptions.strWorkingDirectory
+
         Try
-            File.WriteAllText(Path.Combine(clsInstatOptions.strWorkingDirectory, strLogFilename), txtLog.Text)
+            File.WriteAllText(Path.Combine(strWD, strLogFilename), txtLog.Text)
+            Process.Start(strWD & "\" & strLogFilename)
         Catch
             MsgBox("Could not save the log file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
         End Try
-        Process.Start(clsInstatOptions.strWorkingDirectory & "\" & strLogFilename)
+
     End Sub
 End Class
