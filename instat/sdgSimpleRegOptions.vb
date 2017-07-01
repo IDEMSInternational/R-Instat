@@ -166,35 +166,35 @@ Public Class sdgSimpleRegOptions
         ucrChkConfIntervalband.SetParameter(New RParameter("band"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkConfIntervalband.SetRDefault("TRUE")
 
-        ''Save Plots (Save tab)
-        ''Save Fitted Column Names
-        ucrSaveFittedColumnName.SetPrefix("Fitted")
-        ucrSaveFittedColumnName.SetSaveTypeAsColumn()
-        ucrSaveFittedColumnName.SetCheckBoxText("Fitted Values")
-        ucrSaveFittedColumnName.SetIsComboBox()
-        ucrSaveFittedColumnName.SetDataFrameSelector(clsRDataFrame)
+        '''Save Plots (Save tab)
+        '''Save Fitted Column Names
+        'ucrSaveFittedColumnName.SetPrefix("Fitted")
+        'ucrSaveFittedColumnName.SetSaveTypeAsColumn()
+        'ucrSaveFittedColumnName.SetCheckBoxText("Fitted Values")
+        'ucrSaveFittedColumnName.SetIsComboBox()
+        'ucrSaveFittedColumnName.SetDataFrameSelector(clsRDataFrame)
 
 
-        ' save residuals column names
-        ucrSaveResidualsColumnName.SetPrefix("Resids")
-        ucrSaveResidualsColumnName.SetSaveTypeAsColumn()
-        ucrSaveResidualsColumnName.SetCheckBoxText("residuals")
-        ucrSaveResidualsColumnName.SetIsComboBox()
-        ucrSaveResidualsColumnName.SetDataFrameSelector(clsRDataFrame)
+        '' save residuals column names
+        'ucrSaveResidualsColumnName.SetPrefix("Resids")
+        'ucrSaveResidualsColumnName.SetSaveTypeAsColumn()
+        'ucrSaveResidualsColumnName.SetCheckBoxText("residuals")
+        'ucrSaveResidualsColumnName.SetIsComboBox()
+        'ucrSaveResidualsColumnName.SetDataFrameSelector(clsRDataFrame)
 
-        ' save stdresiduals column names
-        ucrSaveStdResidualsColumnName.SetPrefix("Sresids")
-        ucrSaveStdResidualsColumnName.SetSaveTypeAsColumn()
-        ucrSaveStdResidualsColumnName.SetIsComboBox()
-        ucrSaveStdResidualsColumnName.SetCheckBoxText("std residuals")
-        ucrSaveStdResidualsColumnName.SetDataFrameSelector(clsRDataFrame)
+        '' save stdresiduals column names
+        'ucrSaveStdResidualsColumnName.SetPrefix("Sresids")
+        'ucrSaveStdResidualsColumnName.SetSaveTypeAsColumn()
+        'ucrSaveStdResidualsColumnName.SetIsComboBox()
+        'ucrSaveStdResidualsColumnName.SetCheckBoxText("std residuals")
+        'ucrSaveStdResidualsColumnName.SetDataFrameSelector(clsRDataFrame)
 
-        'save leverage column names
-        ucrSaveLeverageColumnName.SetPrefix("Lever")
-        ucrSaveLeverageColumnName.SetSaveTypeAsColumn()
-        ucrSaveLeverageColumnName.SetIsComboBox()
-        ucrSaveLeverageColumnName.SetCheckBoxText("leverage")
-        ucrSaveLeverageColumnName.SetDataFrameSelector(clsRDataFrame)
+        ''save leverage column names
+        'ucrSaveLeverageColumnName.SetPrefix("Lever")
+        'ucrSaveLeverageColumnName.SetSaveTypeAsColumn()
+        'ucrSaveLeverageColumnName.SetIsComboBox()
+        'ucrSaveLeverageColumnName.SetCheckBoxText("leverage")
+        'ucrSaveLeverageColumnName.SetDataFrameSelector(clsRDataFrame)
 
         bControlsInitialised = True
     End Sub
