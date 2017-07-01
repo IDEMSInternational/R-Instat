@@ -22,8 +22,13 @@ Partial Class ucrLog
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.txtLog = New System.Windows.Forms.TextBox()
+        Me.mnuContextLogFile = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.mnuOpenLogFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblHeader = New System.Windows.Forms.Label()
+        Me.mnuCopy = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuContextLogFile.SuspendLayout()
         Me.SuspendLayout()
         '
         'txtLog
@@ -31,6 +36,7 @@ Partial Class ucrLog
         Me.txtLog.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtLog.ContextMenuStrip = Me.mnuContextLogFile
         Me.txtLog.Location = New System.Drawing.Point(0, 20)
         Me.txtLog.Multiline = True
         Me.txtLog.Name = "txtLog"
@@ -39,6 +45,18 @@ Partial Class ucrLog
         Me.txtLog.Size = New System.Drawing.Size(531, 395)
         Me.txtLog.TabIndex = 0
         Me.txtLog.TabStop = False
+        '
+        'mnuContextLogFile
+        '
+        Me.mnuContextLogFile.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOpenLogFile, Me.mnuCopy})
+        Me.mnuContextLogFile.Name = "mnuContextLogFile"
+        Me.mnuContextLogFile.Size = New System.Drawing.Size(153, 70)
+        '
+        'mnuOpenLogFile
+        '
+        Me.mnuOpenLogFile.Name = "mnuOpenLogFile"
+        Me.mnuOpenLogFile.Size = New System.Drawing.Size(152, 22)
+        Me.mnuOpenLogFile.Text = "Open Log File"
         '
         'lblHeader
         '
@@ -53,6 +71,12 @@ Partial Class ucrLog
         Me.lblHeader.Text = "Log"
         Me.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'mnuCopy
+        '
+        Me.mnuCopy.Name = "mnuCopy"
+        Me.mnuCopy.Size = New System.Drawing.Size(152, 22)
+        Me.mnuCopy.Text = "Copy"
+        '
         'ucrLog
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -61,6 +85,7 @@ Partial Class ucrLog
         Me.Controls.Add(Me.txtLog)
         Me.Name = "ucrLog"
         Me.Size = New System.Drawing.Size(531, 415)
+        Me.mnuContextLogFile.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -68,4 +93,7 @@ Partial Class ucrLog
 
     Friend WithEvents txtLog As TextBox
     Friend WithEvents lblHeader As Label
+    Friend WithEvents mnuContextLogFile As ContextMenuStrip
+    Friend WithEvents mnuOpenLogFile As ToolStripMenuItem
+    Friend WithEvents mnuCopy As ToolStripMenuItem
 End Class
