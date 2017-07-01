@@ -32,6 +32,7 @@ Public Class ucrGeom
     Private bFirstLoad As Boolean = True
     Public strGlobalDataFrame As String = ""
     Protected ucrBaseSelector As ucrSelectorByDataFrame
+    Private iCurrentGeomIndex As Integer = -1
 
     Public Sub New()
 
@@ -1173,18 +1174,20 @@ Public Class ucrGeom
 
     Private Sub ucrInputGeoms_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputGeoms.ControlValueChanged
         Dim clsParam As New LayerParameter
-        Dim iGeomIndex As Integer
-        Dim iPreviousGeomIndex As Integer
+        Dim iNewGeomIndex As Integer
 
-        iGeomIndex = lstAllGeoms.FindIndex(Function(x) x.strGeomName = ucrInputGeoms.GetText())
-        iPreviousGeomIndex = lstAllGeoms.FindIndex(Function(x) x.strGeomName = clsGeomFunction.strRCommand)
-        If iGeomIndex <> -1 Then
-            clsCurrGeom = lstAllGeoms(iGeomIndex)
-            If clsGeomFunction.strRCommand <> clsCurrGeom.strGeomName Then
-                For Each clsParam In lstAllGeoms(iPreviousGeomIndex).clsLayerParameters
+        iNewGeomIndex = lstAllGeoms.FindIndex(Function(x) x.strGeomName = ucrInputGeoms.GetText())
+        If iCurrentGeomIndex = -1 Then
+            iCurrentGeomIndex = lstAllGeoms.FindIndex(Function(x) x.strGeomName = clsGeomFunction.strRCommand)
+        End If
+        If iNewGeomIndex <> -1 Then
+            clsCurrGeom = lstAllGeoms(iNewGeomIndex)
+            If iNewGeomIndex <> iCurrentGeomIndex Then
+                For Each clsParam In lstAllGeoms(iCurrentGeomIndex).clsLayerParameters
                     clsGeomFunction.RemoveParameterByName(clsParam.strLayerParameterName)
                 Next
                 clsGeomFunction.SetRCommand(clsCurrGeom.strGeomName)
+                iCurrentGeomIndex = iNewGeomIndex
                 RaiseEvent GeomChanged()
             Else
                 clsGeomFunction.SetRCommand(clsCurrGeom.strGeomName)
