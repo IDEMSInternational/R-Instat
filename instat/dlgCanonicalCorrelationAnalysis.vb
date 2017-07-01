@@ -14,14 +14,13 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgCanonicalCorrelationAnalysis
     Public strModelName As String = ""
     Public bFirstLoad As Boolean = True
     Private bResetSubdialog As Boolean = False
     Private bReset As Boolean = True
-    Private clsDefaultFunction, clsRCanCorFunction, clsRCoefFunction, clsRGraphicsFunction As New RFunction
+    Private clsDefaultFunction, clsRCanCorFunction, clsRXCoefFunction, clsRYCoefFunction, clsRGraphicsFunction As New RFunction
     Private clsTempFunction, clsXvarFunction, clsYvarFunction, clsTempFunc As String
 
     Private Sub dlgCanonicalCorrelationAnalysis_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -43,11 +42,8 @@ Public Class dlgCanonicalCorrelationAnalysis
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.iHelpTopicID = 423
-
-        'cmdCCAOptions.Enabled = False
 
         ' note: canne have the same variables in both receivers.
         ' Y Variable Selector
@@ -74,15 +70,12 @@ Public Class dlgCanonicalCorrelationAnalysis
 
     End Sub
 
-    Private Sub ReopenDialog()
-
-    End Sub
-
     Private Sub SetDefaults()
         clsDefaultFunction = New RFunction
         clsRGraphicsFunction = New RFunction
         clsRCanCorFunction = New RFunction
-        clsRCoefFunction = New RFunction
+        clsRXCoefFunction = New RFunction
+        clsRYCoefFunction = New RFunction
 
         ucrSelectorCCA.Reset()
         ucrSaveResult.Reset()
@@ -93,24 +86,19 @@ Public Class dlgCanonicalCorrelationAnalysis
         clsDefaultFunction.SetAssignTo("last_CCA", strTempModel:="last_CCA", strTempDataframe:=ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
 
         clsRCanCorFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
-        clsRCoefFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+        clsRXCoefFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+        clsRYCoefFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
         clsRGraphicsFunction.SetPackageName("GGally")
         clsRGraphicsFunction.SetRCommand("ggpairs")
-
         clsRCanCorFunction.AddParameter("data_name", Chr(34) & ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
         clsRCanCorFunction.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
         clsRCanCorFunction.AddParameter("value1", Chr(34) & "cancor" & Chr(34))
-
-        clsRCoefFunction.AddParameter("data_name", Chr(34) & ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-        clsRCoefFunction.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
-        clsRCoefFunction.AddParameter("value1", Chr(34) & "coef" & Chr(34))
 
         ' Set default RFunction as the base function
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
         bResetSubdialog = True
     End Sub
-
 
     Private Sub TestOKEnabled()
         If ucrSaveResult.IsComplete() AndAlso ucrReceiverYvariables.lstSelectedVariables.Items.Count > 1 AndAlso ucrReceiverXvariables.lstSelectedVariables.Items.Count > 1 Then
@@ -127,7 +115,7 @@ Public Class dlgCanonicalCorrelationAnalysis
     End Sub
 
     Private Sub cmdCCAOptions_Click(sender As Object, e As EventArgs) Handles cmdCCAOptions.Click
-        sdgCanonicalCorrelation.SetRFunction(ucrBase.clsRsyntax, clsRCanCorFunction, clsRCoefFunction, clsRGraphicsFunction, clsTempFunction, clsXvarFunction, clsYvarFunction, clsTempFunc, bResetSubdialog)
+        sdgCanonicalCorrelation.SetRFunction(ucrBase.clsRsyntax, clsRCanCorFunction, clsRXCoefFunction, clsRYCoefFunction, clsRGraphicsFunction, clsTempFunction, clsXvarFunction, clsYvarFunction, clsTempFunc, bResetSubdialog)
         bResetSubdialog = False
         sdgCanonicalCorrelation.ShowDialog()
     End Sub

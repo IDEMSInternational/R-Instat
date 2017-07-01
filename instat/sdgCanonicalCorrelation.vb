@@ -14,12 +14,12 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class sdgCanonicalCorrelation
-    Public strModelName As String
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
-    Public clsRCanCorFunction, clsRCoefFunction, clsRGraphicsFunction As New RFunction
+    Public clsRCanCorFunction, clsRXCoefFunction, clsRYCoefFunction, clsRGraphicsFunction As New RFunction
     Public clsTempFunction, clsXvarFunction, clsYvarFunction, clsTempFun As String
     Private clsRSyntax As RSyntax
     Private Sub sdgCanonicalCorrelation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -35,17 +35,18 @@ Public Class sdgCanonicalCorrelation
         ucrChkCanonicalCorrelations.SetText("canonical Correlations")
         ucrChkCoefficients.SetText("Coefficients")
         ucrChkPairwisePlot.SetText("Pairwise Plot")
-        ucrChkPairwisePlot.AddToLinkedControls(ucrPnlVariables, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkPairwisePlot.AddToLinkedControls(ucrPnlVariables, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=rdoXVariables)
     End Sub
 
-    Public Sub SetRFunction(clsNewRSyntax As RSyntax, clsNewRCanCorFunction As RFunction, clsNewRCoefFunction As RFunction, clsNewRGraphicsFunction As RFunction, clsNewTempFunction As String, clsNewXvarFunction As String, clsNewYvarFunction As String, clsNewTempFun As String, Optional bReset As Boolean = False)
+    Public Sub SetRFunction(clsNewRSyntax As RSyntax, clsNewRCanCorFunction As RFunction, clsNewRXCoefFunction As RFunction, clsNewRYCoefFunction As RFunction, clsNewRGraphicsFunction As RFunction, clsNewTempFunction As String, clsNewXvarFunction As String, clsNewYvarFunction As String, clsNewTempFun As String, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
         Dim clsTempFunc As RFunction
         clsRSyntax = clsNewRSyntax
         clsRCanCorFunction = clsNewRCanCorFunction
-        clsRCoefFunction = clsNewRCoefFunction
+        clsRXCoefFunction = clsNewRXCoefFunction
+        clsRYCoefFunction = clsNewRYCoefFunction
         clsRGraphicsFunction = clsNewRGraphicsFunction
         clsTempFunction = clsNewTempFunction
         clsXvarFunction = clsNewXvarFunction
@@ -55,34 +56,20 @@ Public Class sdgCanonicalCorrelation
         clsRCanCorFunction.AddParameter("data_name", Chr(34) & clsTempFun & Chr(34))
         clsRCanCorFunction.AddParameter("model_name", Chr(34) & clsTempFunction & Chr(34))
         clsRCanCorFunction.AddParameter("value1", Chr(34) & "cor" & Chr(34))
-        clsRCoefFunction.AddParameter("data_name", Chr(34) & clsTempFun & Chr(34))
-        clsRCoefFunction.AddParameter("model_name", Chr(34) & clsTempFunction & Chr(34))
-        clsRCoefFunction.AddParameter("value1", Chr(34) & "xcoef" & Chr(34))
+        clsRXCoefFunction.AddParameter("data_name", Chr(34) & clsTempFun & Chr(34))
+        clsRXCoefFunction.AddParameter("model_name", Chr(34) & clsTempFunction & Chr(34))
+        clsRXCoefFunction.AddParameter("value1", Chr(34) & "xcoef" & Chr(34))
+        clsRYCoefFunction.AddParameter("data_name", Chr(34) & clsTempFun & Chr(34))
+        clsRYCoefFunction.AddParameter("model_name", Chr(34) & clsTempFunction & Chr(34))
+        clsRYCoefFunction.AddParameter("value1", Chr(34) & "ycoef" & Chr(34))
         clsTempFunc = dlgCanonicalCorrelationAnalysis.ucrSelectorCCA.ucrAvailableDataFrames.clsCurrDataFrame.Clone()
         clsTempFunc.AddParameter("remove_attr", "TRUE")
         clsRGraphicsFunction.AddParameter("data", clsRFunctionParameter:=clsTempFunc)
-
         bControlsInitialised = True
         If bReset Then
             tbRegOptions.SelectedIndex = 0
         End If
     End Sub
-
-    'Private Sub Cancor()
-    '    clsRCanCorFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
-    '    clsRCanCorFunction.AddParameter("data_name", Chr(34) & dlgCanonicalCorrelationAnalysis.ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-    '    clsRCanCorFunction.AddParameter("model_name", Chr(34) & dlgCanonicalCorrelationAnalysis.strModelName & Chr(34))
-    '    clsRCanCorFunction.AddParameter("value1", Chr(34) & "cancor" & Chr(34))
-    '    frmMain.clsRLink.RunScript(clsRCanCorFunction.ToScript(), 2)
-    'End Sub
-
-    'Private Sub Coef()
-    '    clsRCoefFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
-    '    clsRCoefFunction.AddParameter("data_name", Chr(34) & dlgCanonicalCorrelationAnalysis.ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-    '    clsRCoefFunction.AddParameter("model_name", Chr(34) & dlgCanonicalCorrelationAnalysis.strModelName & Chr(34))
-    '    clsRCoefFunction.AddParameter("value1", Chr(34) & "coef" & Chr(34))
-    '    frmMain.clsRLink.RunScript(clsRCoefFunction.ToScript(), 2)
-    'End Sub
 
     Private Sub ucrChkCanonicalCorrelations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCanonicalCorrelations.ControlValueChanged
         If ucrChkCanonicalCorrelations.Checked Then
@@ -95,91 +82,29 @@ Public Class sdgCanonicalCorrelation
 
     Private Sub ucrChkCoefficients_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCoefficients.ControlValueChanged
         If ucrChkCoefficients.Checked Then
-            clsRCoefFunction.iCallType = 2
-            clsRSyntax.AddToAfterCodes(clsRCoefFunction, iPosition:=1)
+            clsRXCoefFunction.iCallType = 2
+            clsRYCoefFunction.iCallType = 2
+            clsRSyntax.AddToAfterCodes(clsRXCoefFunction, iPosition:=1)
+            clsRSyntax.AddToAfterCodes(clsRYCoefFunction, iPosition:=2)
         Else
-            clsRSyntax.RemoveFromAfterCodes(clsRCoefFunction)
+            clsRSyntax.RemoveFromAfterCodes(clsRYCoefFunction)
+            clsRSyntax.RemoveFromAfterCodes(clsRXCoefFunction)
         End If
     End Sub
 
-    Private Sub ucrPnlVariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlVariables.ControlValueChanged
-        If rdoXVariables.Checked Then
-            clsRGraphicsFunction.AddParameter("columns", clsXvarFunction)
-            clsRGraphicsFunction.iCallType = 3
-            clsRSyntax.AddToAfterCodes(clsRGraphicsFunction, iPosition:=2)
-        Else
-            clsRSyntax.RemoveFromAfterCodes(clsRGraphicsFunction)
-        End If
-        If rdoYVariables.Checked Then
-            clsRGraphicsFunction.AddParameter("columns", clsYvarFunction)
-            clsRGraphicsFunction.iCallType = 3
-            clsRSyntax.AddToAfterCodes(clsRGraphicsFunction, iPosition:=2)
-        Else
-            clsRSyntax.RemoveFromAfterCodes(clsRGraphicsFunction)
+    Private Sub ucrChkPairwisePlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPairwisePlot.ControlValueChanged
+        If ucrChkPairwisePlot.Checked Then
+            If rdoXVariables.Checked Then
+                clsRGraphicsFunction.AddParameter("columns", clsXvarFunction)
+                clsRGraphicsFunction.iCallType = 3
+                clsRSyntax.AddToAfterCodes(clsRGraphicsFunction, iPosition:=2)
+            ElseIf rdoYVariables.Checked Then
+                clsRGraphicsFunction.AddParameter("columns", clsYvarFunction)
+                clsRGraphicsFunction.iCallType = 3
+                clsRSyntax.AddToAfterCodes(clsRGraphicsFunction, iPosition:=2)
+            Else
+                clsRSyntax.RemoveFromAfterCodes(clsRGraphicsFunction)
+            End If
         End If
     End Sub
-
-    'Public Sub SetDefaults()
-    '    ucrChkCanonicalCorrelations.Checked = True
-    '    ucrChkCoefficients.Checked = True
-    '    ucrChkPairwisePlot.Checked = False
-    '    rdoXVariables.Checked = False
-    '    rdoYVariables.Checked = False
-    '    rdoXVariables.Enabled = False
-    '    rdoYVariables.Enabled = False
-    'End Sub
-
-    'Public Sub CCAOptions()
-    '    If (ucrChkCanonicalCorrelations.Checked) Then
-    '        Cancor()
-    '    End If
-    '    If (ucrChkCoefficients.Checked) Then
-    '        Coef()
-    '    End If
-    '    If (ucrChkPairwisePlot.Checked = True) Then
-    '        GGPairs()
-    '    End If
-    'End Sub
-
-    Private Sub GGPairs()
-        'Dim clsTempFunc As RFunction
-
-        'temp solution to fix bug in ggpairs function
-        'clsTempFunc = dlgCanonicalCorrelationAnalysis.ucrSelectorCCA.ucrAvailableDataFrames.clsCurrDataFrame.Clone()
-        'clsTempFunc.AddParameter("remove_attr", "TRUE")
-
-        'clsRGraphics.SetPackageName("GGally")
-        'clsRGraphics.SetFunction("ggpairs")
-        'clsRGraphicsFunction.AddParameter("data", clsRFunctionParameter:=clsTempFunc)
-        'frmMain.clsRLink.RunScript(clsRGraphicsFunction.ToScript(), 2)
-    End Sub
-
-    'Private Sub chkPairwisePlot_CheckedChanged(sender As Object, e As EventArgs)
-    '    If ucrChkPairwisePlot.Checked Then
-    '        rdoXVariables.Enabled = True
-    '        rdoYVariables.Enabled = True
-    '        rdoXVariables.Checked = True
-    '    Else
-    '        rdoXVariables.Checked = False
-    '        rdoXVariables.Enabled = False
-    '        rdoYVariables.Enabled = False
-    '    End If
-    'End Sub
-
-    'Private Sub rdoXVariables_CheckedChanged(sender As Object, e As EventArgs) Handles rdoXVariables.CheckedChanged
-    '    If rdoXVariables.Checked Then
-    '        clsRGraphics.AddParameter("columns", dlgCanonicalCorrelationAnalysis.ucrReceiverXvariables.GetVariableNames())
-    '    Else
-    '        clsRGraphics.RemoveParameter("columns")
-    '    End If
-    'End Sub
-
-    'Private Sub rdoYVariables_CheckedChanged(sender As Object, e As EventArgs) Handles rdoYVariables.CheckedChanged
-    '    If rdoYVariables.Checked Then
-    '        clsRGraphics.AddParameter("columns", dlgCanonicalCorrelationAnalysis.ucrReceiverYvariables.GetVariableNames())
-    '    Else
-    '       clsRGraphics.RemoveParameter("columns")
-    '    End If
-    'End Sub
-
 End Class
