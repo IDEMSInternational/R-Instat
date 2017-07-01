@@ -32,10 +32,15 @@ Public Class ucrLog
 
         Try
             File.WriteAllText(Path.Combine(strWD, strLogFilename), txtLog.Text)
-            Process.Start(strWD & "\" & strLogFilename)
+            Process.Start(Path.Combine(strWD, strLogFilename))
         Catch
             MsgBox("Could not save the log file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
         End Try
 
+    End Sub
+
+    Private Sub CopyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CopyToolStripMenuItem.Click
+        txtLog.SelectAll()
+        txtLog.Copy()
     End Sub
 End Class
