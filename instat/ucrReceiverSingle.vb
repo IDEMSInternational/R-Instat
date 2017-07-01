@@ -268,11 +268,9 @@ Public Class ucrReceiverSingle
     Public Sub CheckAutoFill()
         If bAutoFill Then
             If Selector IsNot Nothing Then
-                If lstIncludedMetadataProperties.Count > 0 OrElse lstExcludedMetadataProperties.Count > 0 OrElse Selector.lstIncludedMetadataProperties.Count > 0 OrElse Selector.lstIncludedMetadataProperties.Count Then
-                    SetMeAsReceiver()
-                    If Selector.lstAvailableVariable.Items.Count = 1 Then
-                        Add(Selector.lstAvailableVariable.Items(0).Text, Selector.strCurrentDataFrame)
-                    End If
+                SetMeAsReceiver()
+                If Selector.lstAvailableVariable.Items.Count = 1 Then
+                    Add(Selector.lstAvailableVariable.Items(0).Text, Selector.strCurrentDataFrame)
                 End If
             End If
         End If
