@@ -54,7 +54,7 @@ Public Class dlgOneVarFitModel
         UcrReceiver.SetParameterIsRFunction()
 
         ucrChkConvertVariate.SetText("Convert to Variate")
-        ucrChkConvertVariate.SetParameter(New RParameter("data"))
+        ' ucrChkConvertVariate.SetParameter(New RParameter("data"))
 
         ucrNudHyp.SetParameter(New RParameter("mu"))
 
@@ -252,7 +252,7 @@ Public Class dlgOneVarFitModel
 
         clsRplotFunction.AddParameter("x", clsRFunctionParameter:=clsROneVarFitModel)
         UcrBase.clsRsyntax.AddToAfterCodes(clsRplotFunction, iPosition:=1)
-        UcrBase.clsRsyntax.AddToAfterCodes(clsRLogLikFunction, iPosition:=2)
+        'UcrBase.clsRsyntax.AddToAfterCodes(clsRLogLikFunction, iPosition:=2)
 
         bResetSubdialog = True
     End Sub
@@ -262,7 +262,7 @@ Public Class dlgOneVarFitModel
         ucrPnlStats.SetRCode(clsRTTest, bReset)
         ucrPnlWilcoxVarTest.SetRCode(clsRWilcoxTest, bReset)
         UcrReceiver.SetRCode(clsRConvertVector, bReset)
-        ucrChkConvertVariate.SetRCode(clsRConvertNumeric, bReset)
+        ' ucrChkConvertVariate.SetRCode(clsRConvertNumeric, bReset)
         ucrNudHyp.SetRCode(clsRTTest, bReset)
         ucrDistributionChoice.SetRCode(clsFamilyFunction, bReset)
         UcrReceiver.AddAdditionalCodeParameterPair(clsRConvertNumeric, New RParameter("x"), iAdditionalPairNo:=1)
@@ -276,8 +276,8 @@ Public Class dlgOneVarFitModel
 
         ucrSaveModel.SetRCode(clsROneVarFitModel, bReset)
         ucrChkConvertVariate.AddAdditionalCodeParameterPair(clsROneVarFitModel, ucrChkConvertVariate.GetParameter(), iAdditionalPairNo:=1)
-        ucrChkConvertVariate.AddAdditionalCodeParameterPair(clsROneVarFitModel, ucrChkConvertVariate.GetParameter(), iAdditionalPairNo:=2)
-        ucrChkConvertVariate.AddAdditionalCodeParameterPair(clsROneVarFitModel, ucrChkConvertVariate.GetParameter(), iAdditionalPairNo:=3)
+        'ucrChkConvertVariate.AddAdditionalCodeParameterPair(clsROneVarFitModel, ucrChkConvertVariate.GetParameter(), iAdditionalPairNo:=2)
+        'ucrChkConvertVariate.AddAdditionalCodeParameterPair(clsROneVarFitModel, ucrChkConvertVariate.GetParameter(), iAdditionalPairNo:=3)
 
         ucrNudHyp.AddAdditionalCodeParameterPair(clsVarTest, New RParameter("sigma.squared"), iAdditionalPairNo:=1)
         ucrNudHyp.AddAdditionalCodeParameterPair(clsVarTest, New RParameter("sigma.squared"), iAdditionalPairNo:=2)
@@ -341,8 +341,7 @@ Public Class dlgOneVarFitModel
                 ucrChkConvertVariate.Checked = True
             End If
             If ucrChkConvertVariate.Checked Then
-
-                UcrBase.clsRsyntax.AddParameter("data", clsRFunctionParameter:=clsRConvertNumeric)
+                clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertNumeric)
             Else
                 'TODO This is needed because fitdist checks is.vector on data which is FALSE when data has attributes
                 If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" OrElse ucrDistributionChoice.clsCurrDistribution.strNameTag = "Geometric" Then
@@ -357,7 +356,7 @@ Public Class dlgOneVarFitModel
             End If
         Else
             ucrChkConvertVariate.Visible = False
-            UcrBase.clsRsyntax.RemoveParameter("data")
+            clsROneVarFitModel.RemoveParameterByName("data")
         End If
     End Sub
 
@@ -487,7 +486,7 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        sdgOneVarFitModDisplay.SetRCode(UcrBase.clsRsyntax, clsRNewOneVarFitModel:=clsROneVarFitModel, clsNewRLogLikFunction:=clsRLogLikFunction, clsNewRplotFunction:=clsRplotFunction, clsNewRplotPPComp:=clsRplotPPComp, clsNewRplotCdfcomp:=clsRplotCdfcomp, clsNewRplotQqComp:=clsRplotQqComp, clsNewRplotDenscomp:=clsRplotDenscomp, bReset:=bResetSubdialog)
+        sdgOneVarFitModDisplay.SetRCode(UcrBase.clsRsyntax, clsRNewOneVarFitModel:=clsROneVarFitModel, clsNewRLogLikFunction:=clsRLogLikFunction, clsNewRplotFunction:=clsRplotFunction, clsNewRplotPPComp:=clsRplotPPComp, clsNewRplotCdfcomp:=clsRplotCdfcomp, clsNewRplotQqComp:=clsRplotQqComp, clsNewRplotDenscomp:=clsRplotDenscomp, clsNewFamilyFunction:=clsFamilyFunction, bReset:=bResetSubdialog)
         bResetSubdialog = False
         sdgOneVarFitModDisplay.ShowDialog()
         Display()
@@ -545,8 +544,6 @@ Public Class dlgOneVarFitModel
                 ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "No_Distribution" Then
                     grpVarAndWilcox.Hide()
                     grpVarAndWilcoxSign.Show()
-
-
                     'rdoMeanWilcox.Visible = True
                     'rdoVarSign.Visible = True
                     ' rdoEnorm.Visible = False
