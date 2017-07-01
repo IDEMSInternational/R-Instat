@@ -72,7 +72,9 @@ Public Class UcrPanel
                 clsTempParam.SetArgumentValue(strNewValue)
             Else
                 If Not bAllowNonConditionValues Then
-                    MsgBox("Developer error: No parameter value is associated to the currently checked radio button. Cannot update parameter.")
+                    'Removed because some radio buttons may not set a value for the parameter (but other radio buttons do)
+                    'e.g. Insert Rows/Columns dialog
+                    'MsgBox("Developer error: No parameter value is associated to the currently checked radio button. Cannot update parameter.")
                 End If
             End If
         End If
