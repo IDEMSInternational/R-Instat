@@ -41,6 +41,7 @@ Public Class dlgShowModel
         ucrReceiverExpressionForTablePlus.SetRCode(clsQuantiles, bReset)
         ucrChkDisplayGraphResults.SetRCode(clsQuantiles, bReset)
         ucrInputProbabilities.SetRCode(clsQuantiles, bReset)
+        ucrSaveGraphResults.AddAdditionalRCode(clsProbabilities, 1)
         ucrSaveGraphResults.SetRCode(clsQuantiles, bReset)
         ucrDistributionsFOrTablePlus.SetRCode(clsQuantiles, bReset)
         ucrChkEnterValues.SetRCode(clsQuantiles, bReset)
@@ -70,10 +71,12 @@ Public Class dlgShowModel
         ucrPnlDistTypes.AddFunctionNamesCondition(rdoQuantiles, "qdist")
         ucrPnlDistTypes.AddFunctionNamesCondition(rdoProbabilities, "pdist")
 
-        ucrSaveGraphResults.SetDataFrameSelector(ucrSelectorForDataFrame.ucrAvailableDataFrames)
-        ucrSaveGraphResults.SetSaveTypeAsColumn()
+        ucrSaveGraphResults.SetPrefix("Quant")
+        ucrSaveGraphResults.SetSaveTypeAsGraph()
         ucrSaveGraphResults.SetIsComboBox()
+        ucrSaveGraphResults.SetDataFrameSelector(ucrSelectorForDataFrame.ucrAvailableDataFrames)
         ucrSaveGraphResults.SetCheckBoxText("Save Graph  Result:")
+        ucrSaveGraphResults.SetAssignToIfUncheckedValue("last_graph")
 
         ucrInputProbabilities.SetParameter(New RParameter("p", 1))
         ucrInputProbabilities.AddQuotesIfUnrecognised = False
@@ -103,10 +106,8 @@ Public Class dlgShowModel
         clsQuantiles = New RFunction
         clsProbabilities = New RFunction
 
-        ucrSaveGraphResults.SetPrefix("Quant")
         ucrSelectorForDataFrame.Reset()
         ucrInputProbabilities.Reset()
-
         ucrSaveGraphResults.Reset()
 
         clsProbabilities.SetPackageName("mosaic")
@@ -121,7 +122,7 @@ Public Class dlgShowModel
         clsProbabilities.SetRCommand("pdist")
         clsQuantiles.SetRCommand("qdist")
 
-        clsQuantiles.SetAssignTo(ucrSaveGraphResults.GetText, strTempDataframe:=ucrSelectorForDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveGraphResults.GetText)
+        clsQuantiles.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorForDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsQuantiles)
 
@@ -251,5 +252,4 @@ Public Class dlgShowModel
     Private Sub ucrReceiverExpressionForTablePlus_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpressionForTablePlus.ControlContentsChanged, ucrInputProbabilities.ControlContentsChanged
         TestOKEnabled()
     End Sub
-
 End Class
