@@ -68,6 +68,7 @@ Public Class dlgCanonicalCorrelationAnalysis
         ucrSaveResult.SetDataFrameSelector(ucrSelectorCCA.ucrAvailableDataFrames)
         ucrSaveResult.SetAssignToIfUncheckedValue("last_CCA")
 
+        ucrBase.clsRsyntax.iCallType = 2
     End Sub
 
     Private Sub SetDefaults()
@@ -93,7 +94,12 @@ Public Class dlgCanonicalCorrelationAnalysis
         clsRCanCorFunction.AddParameter("data_name", Chr(34) & ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
         clsRCanCorFunction.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
         clsRCanCorFunction.AddParameter("value1", Chr(34) & "cancor" & Chr(34))
-
+        clsRCanCorFunction.AddParameter("model_name", Chr(34) & clsTempFunction & Chr(34))
+        clsRCanCorFunction.AddParameter("value1", Chr(34) & "cor" & Chr(34))
+        clsRXCoefFunction.AddParameter("model_name", Chr(34) & clsTempFunction & Chr(34))
+        clsRXCoefFunction.AddParameter("value1", Chr(34) & "xcoef" & Chr(34))
+        clsRYCoefFunction.AddParameter("model_name", Chr(34) & clsTempFunction & Chr(34))
+        clsRYCoefFunction.AddParameter("value1", Chr(34) & "ycoef" & Chr(34))
         ' Set default RFunction as the base function
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
@@ -120,16 +126,8 @@ Public Class dlgCanonicalCorrelationAnalysis
         sdgCanonicalCorrelation.ShowDialog()
     End Sub
 
-    Private Sub ucrBaseCCA_clickok(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        'sdgCanonicalCorrelation.CCAOptions()
-    End Sub
-
     Private Sub ucrSaveResult_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlValueChanged
         clsTempFunction = ucrSaveResult.GetText
-    End Sub
-
-    Private Sub ucrSaveResult_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlContentsChanged, ucrReceiverXvariables.ControlContentsChanged, ucrReceiverYvariables.ControlContentsChanged
-        TestOKEnabled()
     End Sub
 
     Private Sub ucrReceiverXvariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverXvariables.ControlValueChanged
@@ -142,5 +140,9 @@ Public Class dlgCanonicalCorrelationAnalysis
 
     Private Sub ucrSelectorCCA_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorCCA.ControlValueChanged
         clsTempFunc = ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem
+    End Sub
+
+    Private Sub ucrSaveResult_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlContentsChanged, ucrReceiverXvariables.ControlContentsChanged, ucrReceiverYvariables.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class
