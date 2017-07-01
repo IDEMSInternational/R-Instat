@@ -50,6 +50,7 @@ Public Class dlgViewAndRemoveKeys
         ucrReceiverSelectedKey.SetMeAsReceiver()
         ucrReceiverSelectedKey.SetItemType("key")
         ucrReceiverSelectedKey.strSelectorHeading = "Keys"
+        ucrReceiverSelectedKey.bAutoFill = True
 
         ucrPnlKeys.AddRadioButton(rdoViewKey)
         ucrPnlKeys.AddRadioButton(rdoDeleteKey)
