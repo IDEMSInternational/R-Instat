@@ -14,14 +14,15 @@
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgCanonicalCorrelationAnalysis
     Public strModelName As String = ""
     Public bFirstLoad As Boolean = True
     Private bResetSubdialog As Boolean = False
     Private bReset As Boolean = True
-    Private clsRCanCorFunction, clsRCoefFunction, clsRGraphicsFunction As New RFunction
-    Private clsTempFunction, clsTempFun As String
+    Private clsDefaultFunction, clsRCanCorFunction, clsRCoefFunction, clsRGraphicsFunction As New RFunction
+    Private clsTempFunction, clsXvarFunction, clsYvarFunction, clsTempFunc As String
 
     Private Sub dlgCanonicalCorrelationAnalysis_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -38,6 +39,7 @@ Public Class dlgCanonicalCorrelationAnalysis
 
     Private Sub SetRCodeforControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrSaveResult.SetRCode(clsDefaultFunction, bReset)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -77,7 +79,7 @@ Public Class dlgCanonicalCorrelationAnalysis
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
+        clsDefaultFunction = New RFunction
         clsRGraphicsFunction = New RFunction
         clsRCanCorFunction = New RFunction
         clsRCoefFunction = New RFunction
@@ -125,7 +127,7 @@ Public Class dlgCanonicalCorrelationAnalysis
     End Sub
 
     Private Sub cmdCCAOptions_Click(sender As Object, e As EventArgs) Handles cmdCCAOptions.Click
-        sdgCanonicalCorrelation.SetRFunction(ucrBase.clsRsyntax, clsRCanCorFunction, clsRCoefFunction, clsRGraphicsFunction, clsTempFunction, clsTempFun, bResetSubdialog)
+        sdgCanonicalCorrelation.SetRFunction(ucrBase.clsRsyntax, clsRCanCorFunction, clsRCoefFunction, clsRGraphicsFunction, clsTempFunction, clsXvarFunction, clsYvarFunction, clsTempFunc, bResetSubdialog)
         bResetSubdialog = False
         sdgCanonicalCorrelation.ShowDialog()
     End Sub
@@ -135,11 +137,22 @@ Public Class dlgCanonicalCorrelationAnalysis
     End Sub
 
     Private Sub ucrSaveResult_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlValueChanged
-        'clsTempFun = ucrSaveResult.GetText
         clsTempFunction = ucrSaveResult.GetText
     End Sub
 
     Private Sub ucrSaveResult_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlContentsChanged, ucrReceiverXvariables.ControlContentsChanged, ucrReceiverYvariables.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrReceiverXvariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverXvariables.ControlValueChanged
+        clsXvarFunction = ucrReceiverXvariables.GetVariableNames()
+    End Sub
+
+    Private Sub ucrReceiverYvariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYvariables.ControlValueChanged
+        clsYvarFunction = ucrReceiverYvariables.GetVariableNames()
+    End Sub
+
+    Private Sub ucrSelectorCCA_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorCCA.ControlValueChanged
+        clsTempFunc = ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem
     End Sub
 End Class
