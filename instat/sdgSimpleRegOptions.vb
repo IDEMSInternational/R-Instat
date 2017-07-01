@@ -166,8 +166,8 @@ Public Class sdgSimpleRegOptions
         ucrChkConfIntervalband.SetParameter(New RParameter("band"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkConfIntervalband.SetRDefault("TRUE")
 
-        '''Save Plots (Save tab)
-        '''Save Fitted Column Names
+        'Save Plots (Save tab)
+        'Save Fitted Column Names
         'ucrSaveFittedColumnName.SetPrefix("Fitted")
         'ucrSaveFittedColumnName.SetSaveTypeAsColumn()
         'ucrSaveFittedColumnName.SetCheckBoxText("Fitted Values")
