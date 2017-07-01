@@ -95,7 +95,7 @@ Public Class dlgShowModel
         clsProbabilities.SetRCommand("pdist")
         clsQuantiles.SetRCommand("qdist")
 
-        clsQuantiles.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorForDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        clsQuantiles.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorForDataFrame.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph", bAssignToIsPrefix:=True)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsQuantiles)
 
@@ -140,11 +140,11 @@ Public Class dlgShowModel
     Private Sub SetNewColumName()
         If rdoProbabilities.Checked Then
             If Not ucrSaveGraphResults.bUserTyped Then
-                ucrSaveGraphResults.SetPrefix("Prob")
+                ucrSaveGraphResults.SetPrefix("prob")
             End If
         Else
             If Not ucrSaveGraphResults.bUserTyped Then
-                ucrSaveGraphResults.SetPrefix("Quant")
+                ucrSaveGraphResults.SetPrefix("quant")
             End If
         End If
     End Sub
