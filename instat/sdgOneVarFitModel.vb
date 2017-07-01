@@ -53,31 +53,31 @@ Public Class sdgOneVarFitModel
 
     End Sub
 
-    'Public Sub SetDistribution(ucrNewDists As ucrDistributions)
-    '    'ucrDists = ucrNewDists
-    '    'SetPlotOptions()
-    'End Sub
+    Public Sub SetDistribution(ucrNewDists As ucrDistributions)
+        ucrDists = ucrNewDists
+        SetPlotOptions()
+    End Sub
 
-    'Private Sub ucrDists_cboDistributionsIndexChanged() Handles ucrDists.DistributionsIndexChanged
-    '    If ucrDists.clsCurrDistribution IsNot Nothing AndAlso Not ucrDists.clsCurrDistribution.bIsContinuous Then
-    '        rdoMge.Enabled = False
-    '        If rdoMge.Checked Then
-    '            rdoMle.Checked = True
-    '        End If
-    '    Else
-    '        rdoMge.Enabled = True
-    '    End If
-    'End Sub
+    Private Sub ucrDists_cboDistributionsIndexChanged() Handles ucrDists.DistributionsIndexChanged
+        If ucrDists.clsCurrDistribution IsNot Nothing AndAlso Not ucrDists.clsCurrDistribution.bIsContinuous Then
+            rdoMge.Enabled = False
+            If rdoMge.Checked Then
+                rdoMle.Checked = True
+            End If
+        Else
+            rdoMge.Enabled = True
+        End If
+    End Sub
 
-    'Private Sub SetPlotOptions()
-    '    If ucrDists.clsCurrDistribution IsNot Nothing AndAlso Not ucrDists.clsCurrDistribution.bIsContinuous Then
-    '        rdoMge.Enabled = False
-    '        If rdoMge.Checked Then
-    '            rdoMle.Checked = True
-    '        End If
-    '    Else
-    '        rdoMge.Enabled = True
-    '    End If
-    'End Sub
+    Private Sub SetPlotOptions()
+        If ucrDists.clsCurrDistribution IsNot Nothing AndAlso Not ucrDists.clsCurrDistribution.bIsContinuous Then
+            rdoMge.Enabled = False
+            If rdoMge.Checked Then
+                rdoMle.Checked = True
+            End If
+        Else
+            rdoMge.Enabled = True
+        End If
+    End Sub
 
 End Class
