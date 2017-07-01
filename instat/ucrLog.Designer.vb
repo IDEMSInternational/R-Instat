@@ -24,9 +24,10 @@ Partial Class ucrLog
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.txtLog = New System.Windows.Forms.TextBox()
-        Me.lblHeader = New System.Windows.Forms.Label()
         Me.mnuContextLogFile = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuOpenLogFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.lblHeader = New System.Windows.Forms.Label()
+        Me.mnuCopy = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuContextLogFile.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -45,6 +46,18 @@ Partial Class ucrLog
         Me.txtLog.TabIndex = 0
         Me.txtLog.TabStop = False
         '
+        'mnuContextLogFile
+        '
+        Me.mnuContextLogFile.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOpenLogFile, Me.mnuCopy})
+        Me.mnuContextLogFile.Name = "mnuContextLogFile"
+        Me.mnuContextLogFile.Size = New System.Drawing.Size(153, 70)
+        '
+        'mnuOpenLogFile
+        '
+        Me.mnuOpenLogFile.Name = "mnuOpenLogFile"
+        Me.mnuOpenLogFile.Size = New System.Drawing.Size(152, 22)
+        Me.mnuOpenLogFile.Text = "Open Log File"
+        '
         'lblHeader
         '
         Me.lblHeader.BackColor = System.Drawing.Color.FromArgb(CType(CType(35, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(190, Byte), Integer))
@@ -58,17 +71,11 @@ Partial Class ucrLog
         Me.lblHeader.Text = "Log"
         Me.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'mnuContextLogFile
+        'mnuCopy
         '
-        Me.mnuContextLogFile.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOpenLogFile})
-        Me.mnuContextLogFile.Name = "mnuContextLogFile"
-        Me.mnuContextLogFile.Size = New System.Drawing.Size(148, 26)
-        '
-        'mnuOpenLogFile
-        '
-        Me.mnuOpenLogFile.Name = "mnuOpenLogFile"
-        Me.mnuOpenLogFile.Size = New System.Drawing.Size(152, 22)
-        Me.mnuOpenLogFile.Text = "Open Log File"
+        Me.mnuCopy.Name = "mnuCopy"
+        Me.mnuCopy.Size = New System.Drawing.Size(152, 22)
+        Me.mnuCopy.Text = "Copy"
         '
         'ucrLog
         '
@@ -88,4 +95,5 @@ Partial Class ucrLog
     Friend WithEvents lblHeader As Label
     Friend WithEvents mnuContextLogFile As ContextMenuStrip
     Friend WithEvents mnuOpenLogFile As ToolStripMenuItem
+    Friend WithEvents mnuCopy As ToolStripMenuItem
 End Class
