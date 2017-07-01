@@ -384,7 +384,7 @@ Partial Class ucrGeomListWithParameters
         Me.ucrChkIgnoreGlobalAes.Checked = False
         Me.ucrChkIgnoreGlobalAes.Location = New System.Drawing.Point(5, 280)
         Me.ucrChkIgnoreGlobalAes.Name = "ucrChkIgnoreGlobalAes"
-        Me.ucrChkIgnoreGlobalAes.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkIgnoreGlobalAes.Size = New System.Drawing.Size(230, 20)
         Me.ucrChkIgnoreGlobalAes.TabIndex = 7
         '
         'ucrChkApplyOnAllLayers
@@ -392,10 +392,10 @@ Partial Class ucrGeomListWithParameters
         Me.ucrChkApplyOnAllLayers.Checked = False
         Me.ucrChkApplyOnAllLayers.Location = New System.Drawing.Point(5, 254)
         Me.ucrChkApplyOnAllLayers.Name = "ucrChkApplyOnAllLayers"
-        Me.ucrChkApplyOnAllLayers.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkApplyOnAllLayers.Size = New System.Drawing.Size(230, 20)
         Me.ucrChkApplyOnAllLayers.TabIndex = 8
         '
-        'UcrGeomListWithParameters
+        'ucrGeomListWithParameters
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.Controls.Add(Me.ucrChkApplyOnAllLayers)
@@ -403,7 +403,7 @@ Partial Class ucrGeomListWithParameters
         Me.Controls.Add(Me.grpAesList)
         Me.Controls.Add(Me.lblAesList)
         Me.Controls.Add(Me.ucrGeomWithAesSelector)
-        Me.Name = "UcrGeomListWithParameters"
+        Me.Name = "ucrGeomListWithParameters"
         Me.Size = New System.Drawing.Size(467, 399)
         Me.Controls.SetChildIndex(Me.ucrGeomWithAesSelector, 0)
         Me.Controls.SetChildIndex(Me.lblAesList, 0)
