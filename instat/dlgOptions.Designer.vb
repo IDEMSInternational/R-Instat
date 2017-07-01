@@ -74,6 +74,8 @@ Partial Class dlgOptions
         Me.pnScriptOptions = New System.Windows.Forms.Panel()
         Me.ucrChkIncludeDefaultParams = New instat.ucrCheck()
         Me.tbpDataView = New System.Windows.Forms.TabPage()
+        Me.ucrNudMaxCols = New instat.ucrNud()
+        Me.lblMaxCols = New System.Windows.Forms.Label()
         Me.ucrNudMaxRows = New instat.ucrNud()
         Me.lblMaxRows = New System.Windows.Forms.Label()
         Me.tbpWorkingDirectory = New System.Windows.Forms.TabPage()
@@ -88,8 +90,7 @@ Partial Class dlgOptions
         Me.trOptions = New System.Windows.Forms.TreeView()
         Me.spltControls = New System.Windows.Forms.SplitContainer()
         Me.cmdFactoryReset = New System.Windows.Forms.Button()
-        Me.lblMaxCols = New System.Windows.Forms.Label()
-        Me.ucrNudMaxCols = New instat.ucrNud()
+        Me.ucrChkShowDataonGrid = New instat.ucrCheck()
         Me.tbcOptions.SuspendLayout()
         Me.tbpLanguages.SuspendLayout()
         Me.pnLanguages.SuspendLayout()
@@ -584,6 +585,7 @@ Partial Class dlgOptions
         '
         'tbpDataView
         '
+        Me.tbpDataView.Controls.Add(Me.ucrChkShowDataonGrid)
         Me.tbpDataView.Controls.Add(Me.ucrNudMaxCols)
         Me.tbpDataView.Controls.Add(Me.lblMaxCols)
         Me.tbpDataView.Controls.Add(Me.ucrNudMaxRows)
@@ -595,6 +597,27 @@ Partial Class dlgOptions
         Me.tbpDataView.TabIndex = 9
         Me.tbpDataView.Text = "Data View"
         Me.tbpDataView.UseVisualStyleBackColor = True
+        '
+        'ucrNudMaxCols
+        '
+        Me.ucrNudMaxCols.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaxCols.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudMaxCols.Location = New System.Drawing.Point(221, 41)
+        Me.ucrNudMaxCols.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMaxCols.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaxCols.Name = "ucrNudMaxCols"
+        Me.ucrNudMaxCols.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudMaxCols.TabIndex = 2
+        Me.ucrNudMaxCols.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblMaxCols
+        '
+        Me.lblMaxCols.AutoSize = True
+        Me.lblMaxCols.Location = New System.Drawing.Point(10, 44)
+        Me.lblMaxCols.Name = "lblMaxCols"
+        Me.lblMaxCols.Size = New System.Drawing.Size(198, 13)
+        Me.lblMaxCols.TabIndex = 1
+        Me.lblMaxCols.Text = "Maximum Number of Columns to Display:"
         '
         'ucrNudMaxRows
         '
@@ -769,26 +792,13 @@ Partial Class dlgOptions
         Me.cmdFactoryReset.Text = "Factory Reset"
         Me.cmdFactoryReset.UseVisualStyleBackColor = True
         '
-        'lblMaxCols
+        'ucrChkShowDataonGrid
         '
-        Me.lblMaxCols.AutoSize = True
-        Me.lblMaxCols.Location = New System.Drawing.Point(10, 44)
-        Me.lblMaxCols.Name = "lblMaxCols"
-        Me.lblMaxCols.Size = New System.Drawing.Size(198, 13)
-        Me.lblMaxCols.TabIndex = 1
-        Me.lblMaxCols.Text = "Maximum Number of Columns to Display:"
-        '
-        'ucrNudMaxCols
-        '
-        Me.ucrNudMaxCols.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMaxCols.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMaxCols.Location = New System.Drawing.Point(221, 41)
-        Me.ucrNudMaxCols.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudMaxCols.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMaxCols.Name = "ucrNudMaxCols"
-        Me.ucrNudMaxCols.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudMaxCols.TabIndex = 2
-        Me.ucrNudMaxCols.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrChkShowDataonGrid.Checked = False
+        Me.ucrChkShowDataonGrid.Location = New System.Drawing.Point(13, 78)
+        Me.ucrChkShowDataonGrid.Name = "ucrChkShowDataonGrid"
+        Me.ucrChkShowDataonGrid.Size = New System.Drawing.Size(257, 20)
+        Me.ucrChkShowDataonGrid.TabIndex = 3
         '
         'dlgOptions
         '
@@ -907,4 +917,5 @@ Partial Class dlgOptions
     Friend WithEvents ucrInputComment As ucrInputTextBox
     Friend WithEvents ucrNudMaxCols As ucrNud
     Friend WithEvents lblMaxCols As Label
+    Friend WithEvents ucrChkShowDataonGrid As ucrCheck
 End Class
