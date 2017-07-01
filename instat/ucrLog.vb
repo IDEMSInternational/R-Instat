@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports System.IO
 Public Class ucrLog
-    Public clsInstatOptions As InstatOptions
+    Public strRInstatLogFilesFolderPath As String = Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), "R-Instat_Log_files")
     Public Sub CopyText()
         txtLog.Copy()
     End Sub
@@ -25,22 +25,25 @@ Public Class ucrLog
     End Sub
 
     Private Sub mnuOpenLogFile_Click(sender As Object, e As EventArgs) Handles mnuOpenLogFile.Click
-        clsInstatOptions = New InstatOptions
         Dim clsProcessStart As New RFunction
-        Dim strLogFilename As String = "RInstatLog.R"
-        Dim strWD As String = clsInstatOptions.strWorkingDirectory
+        Dim strLogFilename As String = ""
+        Dim i As Integer
 
         Try
-            File.WriteAllText(Path.Combine(strWD, strLogFilename), txtLog.Text)
-            Process.Start(Path.Combine(strWD, strLogFilename))
+            If Not Directory.Exists(strRInstatLogFilesFolderPath) Then
+                Directory.CreateDirectory(strRInstatLogFilesFolderPath)
+            End If
+            strLogFilename = "RInstatLog.R"
+
+            While File.Exists(Path.Combine(strRInstatLogFilesFolderPath, strLogFilename))
+                i = i + 1
+                strLogFilename = "RInstatLog" & i & ".R"
+            End While
+            File.WriteAllText(Path.Combine(strRInstatLogFilesFolderPath, strLogFilename), txtLog.Text)
+            Process.Start(Path.Combine(strRInstatLogFilesFolderPath, strLogFilename))
         Catch
             MsgBox("Could not save the log file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
+            End
         End Try
-
-    End Sub
-
-    Private Sub CopyToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CopyToolStripMenuItem.Click
-        txtLog.SelectAll()
-        txtLog.Copy()
     End Sub
 End Class
