@@ -58,10 +58,12 @@ Public Class sdgCanonicalCorrelation
         clsRCoefFunction.AddParameter("data_name", Chr(34) & dlgCanonicalCorrelationAnalysis.ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
         clsRCoefFunction.AddParameter("model_name", Chr(34) & clsTempFunction & Chr(34))
         clsRCoefFunction.AddParameter("value1", Chr(34) & "xcoef" & Chr(34))
-
         clsTempFunc = dlgCanonicalCorrelationAnalysis.ucrSelectorCCA.ucrAvailableDataFrames.clsCurrDataFrame.Clone()
         clsTempFunc.AddParameter("remove_attr", "TRUE")
         clsRGraphicsFunction.AddParameter("data", clsRFunctionParameter:=clsTempFunc)
+
+        clsRCoefFunction.AddParameter("model_name", Chr(34) & clsTempFunction & Chr(34))
+        clsRCanCorFunction.AddParameter("model_name", Chr(34) & clsTempFunction & Chr(34))
 
         bControlsInitialised = True
         If bReset Then
@@ -86,7 +88,6 @@ Public Class sdgCanonicalCorrelation
     'End Sub
 
     Private Sub ucrChkCanonicalCorrelations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCanonicalCorrelations.ControlValueChanged
-        clsRCanCorFunction.AddParameter("model_name", Chr(34) & clsTempFunction & Chr(34))
         If ucrChkCanonicalCorrelations.Checked Then
             clsRCanCorFunction.iCallType = 2
             clsRSyntax.AddToAfterCodes(clsRCanCorFunction, iPosition:=0)
@@ -96,7 +97,6 @@ Public Class sdgCanonicalCorrelation
     End Sub
 
     Private Sub ucrChkCoefficients_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCoefficients.ControlValueChanged
-        clsRCoefFunction.AddParameter("model_name", Chr(34) & clsTempFunction & Chr(34))
         If ucrChkCoefficients.Checked Then
             clsRCoefFunction.iCallType = 2
             clsRSyntax.AddToAfterCodes(clsRCoefFunction, iPosition:=1)
