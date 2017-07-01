@@ -13,8 +13,9 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
+Imports System.IO
 Public Class ucrLog
+    Public clsInstatOptions As InstatOptions
     Public Sub CopyText()
         txtLog.Copy()
     End Sub
@@ -24,19 +25,14 @@ Public Class ucrLog
     End Sub
 
     Private Sub mnuOpenLogFile_Click(sender As Object, e As EventArgs) Handles mnuOpenLogFile.Click
+        clsInstatOptions = New InstatOptions
         Dim clsProcessStart As New RFunction
-        Dim strLogFilename As String = ""
-        Dim dlgOpenLogFile As New OpenFileDialog
-        clsProcessStart.SetRCommand("Process.Start")
-        dlgOpenLogFile.Filter = "All R files|*.R;|All files|*.*;"
-        dlgOpenLogFile.Title = "load Log File"
-        dlgOpenLogFile.Title = "load Log from file"
-        If dlgOpenLogFile.ShowDialog() = DialogResult.OK Then
-            If dlgOpenLogFile.FileName <> "" Then
-                strLogFilename = dlgOpenLogFile.FileName
-            End If
-        End If
-        clsProcessStart.AddParameter("filename", strLogFilename, bIncludeArgumentName:=False)
-        frmMain.clsRLink.RunScript(clsProcessStart.ToScript, strComment:="Loading Script")
+        Dim strLogFilename As String = "RInstatLog.R"
+        Try
+            File.WriteAllText(Path.Combine(clsInstatOptions.strWorkingDirectory, strLogFilename), txtLog.Text)
+        Catch
+            MsgBox("Could not save the log file." & Environment.NewLine & "The file may be in use by another program or you may not have access to write to the specified location.", MsgBoxStyle.Critical)
+        End Try
+        Process.Start(clsInstatOptions.strWorkingDirectory & "\" & strLogFilename)
     End Sub
 End Class
