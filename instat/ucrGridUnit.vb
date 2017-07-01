@@ -47,7 +47,7 @@ Public Class ucrGridUnit
         strUnit = strNewAxis
     End Sub
 
-    Public Sub SetRCodeForControl(strNewUnit As String, clsNewUnit As RFunction, clsNewThemeFunction As RFunction, clsNewBaseOperator As ROperator, Optional bReset As Boolean = False)
+    Public Sub SetRCodeForControl(strNewUnit As String, clsNewUnit As RFunction, clsNewThemeFunction As RFunction, clsNewBaseOperator As ROperator, Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
         If Not bInitialiseControls Then
             InitialiseControl()
         End If
@@ -57,10 +57,10 @@ Public Class ucrGridUnit
         clsThemeFunction = clsNewThemeFunction
         clsUnit = clsNewUnit
 
-        ucrChkUnits.SetRCode(clsUnit, bReset)
-        ucrInputUnits.SetRCode(clsUnit, bReset)
-        ucrInputData.SetRCode(clsUnit, bReset)
-        ucrInputVector.SetRCode(clsUnit, bReset)
+        ucrChkUnits.SetRCode(clsUnit, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrInputUnits.SetRCode(clsUnit, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrInputData.SetRCode(clsUnit, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrInputVector.SetRCode(clsUnit, bReset, bCloneIfNeeded:=bCloneIfNeeded)
     End Sub
 
     Private Sub AddRemoveElementLineAxis()
