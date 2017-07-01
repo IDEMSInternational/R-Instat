@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.Threading
@@ -38,6 +38,8 @@ Imports RDotNet
     Public iDigits As Nullable(Of Integer)
     Public bShowSignifStars As Nullable(Of Boolean)
     Public bChangeDataFrame As Nullable(Of Boolean)
+    Public bAutoSaveData As Nullable(Of Boolean)
+    Public iAutoSaveDataMinutes As Nullable(Of Integer)
 
     Public Sub New(Optional bSetOptions As Boolean = True)
         'TODO Is this sensible to do in constructor?
@@ -62,6 +64,9 @@ Imports RDotNet
         lstColourPalette = clsInstatOptionsDefaults.DEFAULTlstColourPalette
         iDigits = clsInstatOptionsDefaults.DEFAULTiDigits
         bShowSignifStars = clsInstatOptionsDefaults.DEFAULTbShowSignifStars
+        bChangeDataFrame = clsInstatOptionsDefaults.DEFAULTbChangeDataFrame
+        bAutoSaveData = clsInstatOptionsDefaults.DEFAULTbAutoSaveData
+        iAutoSaveDataMinutes = clsInstatOptionsDefaults.DEFAULTiAutoSaveDataMinutes
         If bSetOptions Then
             SetOptions()
         End If
@@ -174,6 +179,18 @@ Imports RDotNet
             SetColorPalette(lstColourPalette)
         Else
             SetColorPalette(clsInstatOptionsDefaults.DEFAULTlstColourPalette)
+        End If
+
+        If bAutoSaveData.HasValue Then
+            SetAutoSaveData(bAutoSaveData)
+        Else
+            SetAutoSaveData(clsInstatOptionsDefaults.DEFAULTbAutoSaveData)
+        End If
+
+        If iAutoSaveDataMinutes.HasValue Then
+            SetAutoSaveDataMinutes(iAutoSaveDataMinutes)
+        Else
+            SetAutoSaveDataMinutes(clsInstatOptionsDefaults.DEFAULTiAutoSaveDataMinutes)
         End If
     End Sub
 
@@ -324,5 +341,13 @@ Imports RDotNet
 
     Public Sub SetIncludeRDefaultParameters(bNewInclude As Boolean)
         bIncludeRDefaultParameters = bNewInclude
+    End Sub
+
+    Public Sub SetAutoSaveData(bNewAutoSave As Boolean)
+        bAutoSaveData = bNewAutoSave
+    End Sub
+
+    Public Sub SetAutoSaveDataMinutes(iNewMinutes As Integer)
+        iAutoSaveDataMinutes = iNewMinutes
     End Sub
 End Class
