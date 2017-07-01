@@ -143,6 +143,7 @@ Public Class dlgSpells
         ucrSelectorForSpells.Reset()
         ucrReceiverDate.SetMeAsReceiver()
         ucrInputCondition.SetName("Between")
+        ucrInputNewColumnName.SetName("Spells")
 
         ' key
         clsAddKey.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
