@@ -63,7 +63,7 @@ Public Class ucrElementRectControl
     End Sub
 
 
-    Public Sub SetRCodeForControl(strNewLegend As String, clsNewElementLine As RFunction, clsNewThemeFunction As RFunction, clsNewBaseOperator As ROperator, Optional bReset As Boolean = False)
+    Public Sub SetRCodeForControl(strNewLegend As String, clsNewElementLine As RFunction, clsNewThemeFunction As RFunction, clsNewBaseOperator As ROperator, Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
         If Not bInitialiseControls Then
             InitialiseControl()
         End If
@@ -73,17 +73,17 @@ Public Class ucrElementRectControl
         clsThemeFunction = clsNewThemeFunction
         clsElementLine = clsNewElementLine
 
-        ucrNudRectSize.SetRCode(clsElementLine, bReset)
-        ucrChkRectSize.SetRCode(clsElementLine, bReset)
+        ucrNudRectSize.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrChkRectSize.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
-        ucrRectColors.SetRCode(clsElementLine, bReset)
-        ucrChkRectColour.SetRCode(clsElementLine, bReset)
+        ucrRectColors.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrChkRectColour.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
-        ucrRectFill.SetRCode(clsElementLine, bReset)
-        ucrChkRectFill.SetRCode(clsElementLine, bReset)
+        ucrRectFill.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrChkRectFill.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
-        ucrInputRectLineType.SetRCode(clsElementLine, bReset)
-        ucrChkRectLineType.SetRCode(clsElementLine, bReset)
+        ucrInputRectLineType.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrChkRectLineType.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
         AddRemoveElementLineAxis()
     End Sub

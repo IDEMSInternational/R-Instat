@@ -18,10 +18,10 @@ Public Class frmSetupLoading
 
     Private Sub frmSetupLoading_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Eventually have multiple messages and rotate what is shown each time
-        lblMessage.Text = "Did you know that R-Instat was developed in Africa by African Maths Initiative (AMI)?" & Environment.NewLine & "Click here to find out more AMI and the partners who helped make R-Instat a success."
+        lblMessage.Text = "Did you know that R-Instat was developed in Africa by African Maths Initiative (AMI)?" & Environment.NewLine & "Click here to find out more about AMI and the partners who helped make R-Instat a success."
 
         'Optional hyperlink when clicking on the message
-        strHyperlink = "https://chuffed.org/project/africandatainitiative"
+        strHyperlink = "http://africandata.org"
         lblMessage.Cursor = Cursors.Hand
     End Sub
 

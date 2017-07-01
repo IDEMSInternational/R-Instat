@@ -38,8 +38,6 @@ Public Class dlgStartofRains
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
         If bReset Then
             SetDefaults()
@@ -48,10 +46,6 @@ Public Class dlgStartofRains
         bReset = False
         autoTranslate(Me)
         TestOKEnabled()
-    End Sub
-
-    Private Sub ReopenDialog()
-        SetRCodeForControls(bReset)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -185,8 +179,9 @@ Public Class dlgStartofRains
         ucrReceiverYear.bAutoFill = True
 
         'save
+        ucrInputNewColumnName.SetParameter(New RParameter("result_name", 2))
         ucrInputNewColumnName.SetDataFrameSelector(ucrSelectorForStartofRains.ucrAvailableDataFrames)
-        ucrInputNewColumnName.SetName("Start_of_Rains")
+        ucrInputNewColumnName.SetName("start")
     End Sub
 
     Private Sub SetDefaults()
@@ -248,7 +243,6 @@ Public Class dlgStartofRains
         clsDPCombineOperator.Clear()
 
         ucrReceiverDate.SetMeAsReceiver()
-        ucrInputNewColumnName.Reset()
         ucrSelectorForStartofRains.Reset()
 
         ' Adding a key
@@ -264,10 +258,10 @@ Public Class dlgStartofRains
         clsDayFromAndToOperator.SetOperation("&")
         clsDayFromAndToOperator.AddParameter("from", clsROperatorParameter:=clsDayFromOperator, iPosition:=0)
         clsDayFromOperator.SetOperation(">=")
-        clsDayFromOperator.AddParameter("from", 1)
+        clsDayFromOperator.AddParameter("from", 1, iPosition:=1)
         clsDayFromAndToOperator.AddParameter("to", clsROperatorParameter:=clsDayToOperator, iPosition:=1)
         clsDayToOperator.SetOperation("<=")
-        clsDayToOperator.AddParameter("to", 366)
+        clsDayToOperator.AddParameter("to", 366, iPosition:=1)
         clsDayFromAndTo.SetAssignTo("Day_From_and_To")
 
         ' group
@@ -490,7 +484,7 @@ Public Class dlgStartofRains
         clsFirstDOYPerYear.AddParameter("function_exp", clsROperatorParameter:=clsFirstDOYPerYearOperator, iPosition:=1)
         clsFirstDOYPerYearOperator.SetOperation("[")
         clsFirstDOYPerYearOperator.AddParameter("rightside", "1 ]", iPosition:=1)
-        clsFirstDOYPerYear.AddParameter("result_name", Chr(34) & ucrInputNewColumnName.GetText() & Chr(34), iPosition:=2)
+        clsFirstDOYPerYear.AddParameter("result_name", Chr(34) & "start" & Chr(34), iPosition:=2)
         clsFirstDOYPerYear.AddParameter("save", 2, iPosition:=6)
         clsFirstDOYPerYear.SetAssignTo("Start_of_Rains")
 
@@ -523,6 +517,7 @@ Public Class dlgStartofRains
         ucrReceiverStation.SetRCode(clsAddKeyColName, bReset)
         ucrReceiverDate.SetRCode(clsAddKeyColName, bReset)
         ucrSelectorForStartofRains.SetRCode(clsAddKey, bReset)
+        ucrInputNewColumnName.SetRCode(clsFirstDOYPerYear, bReset)
 
         'Total Rainfall
         ucrChkTotalRainfall.SetRCode(clsCombinedList, bReset)
