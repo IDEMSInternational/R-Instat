@@ -73,6 +73,7 @@ Partial Class ucrAdditionalLayers
         Me.lstLayers.TabIndex = 4
         Me.lstLayers.UseCompatibleStateImageBehavior = False
         Me.lstLayers.View = System.Windows.Forms.View.List
+        Me.lstLayers.FullRowSelect = True
         '
         'ucrAdditionalLayers
         '
