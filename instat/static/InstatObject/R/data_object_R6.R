@@ -1483,13 +1483,27 @@ data_object$set("public", "filter_string", function(filter_name) {
   for(condition in curr_filter$filter_conditions) {
     if(i != 1) out = paste(out, "&&")
     out = paste0(out, " (", condition[["column"]], " ", condition[["operation"]])
-    if(condition[["operation"]] == "%in%") out = paste0(out, " c(", paste(condition[["value"]], collapse = ","), ")")
+    if(condition[["operation"]] == "%in%") out = paste0(out, " c(", paste(paste0("'", condition[["value"]], "'"), collapse = ","), ")")
     else out = paste(out, condition[["value"]])
     out = paste0(out , ")")
     i = i + 1
   }
   out = paste(out, ")")
   return(out)
+}
+)
+
+data_object$set("public", "get_filter_as_instat_calculation", function(filter_name) {
+  if(!filter_name %in% names(private$filters)) stop(filter_name, " not found.")
+  curr_filter <- self$get_filter(filter_name)
+  filter_string <- self$filter_string(filter_name)
+  calc_from <- list()
+  for(condition in curr_filter$filter_conditions) {
+    calc_from[[length(calc_from) + 1]] <- condition[["column"]]
+  }
+  names(calc_from) <- rep(self$get_metadata(data_name_label), length(calc_from))
+  calc <- instat_calculation$new(type="filter", function_exp = filter_string, calculated_from = calc_from)
+  return(calc)
 }
 )
 
