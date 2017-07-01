@@ -46,4 +46,11 @@ Public Class ucrLog
             End
         End Try
     End Sub
+
+    Private Sub mnuCopy_Click(sender As Object, e As EventArgs) Handles mnuCopy.Click
+        If txtLog.SelectionLength = 0 Then
+            txtLog.SelectAll()
+        End If
+        txtLog.Copy()
+    End Sub
 End Class
