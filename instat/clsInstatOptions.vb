@@ -38,6 +38,8 @@ Imports RDotNet
     Public iDigits As Nullable(Of Integer)
     Public bShowSignifStars As Nullable(Of Boolean)
     Public bChangeDataFrame As Nullable(Of Boolean)
+    Public bAutoSaveData As Nullable(Of Boolean)
+    Public iAutoSaveDataMinutes As Nullable(Of Integer)
 
     Public Sub New(Optional bSetOptions As Boolean = True)
         'TODO Is this sensible to do in constructor?
@@ -62,6 +64,9 @@ Imports RDotNet
         lstColourPalette = clsInstatOptionsDefaults.DEFAULTlstColourPalette
         iDigits = clsInstatOptionsDefaults.DEFAULTiDigits
         bShowSignifStars = clsInstatOptionsDefaults.DEFAULTbShowSignifStars
+        bChangeDataFrame = clsInstatOptionsDefaults.DEFAULTbChangeDataFrame
+        bAutoSaveData = clsInstatOptionsDefaults.DEFAULTbAutoSaveData
+        iAutoSaveDataMinutes = clsInstatOptionsDefaults.DEFAULTiAutoSaveDataMinutes
         If bSetOptions Then
             SetOptions()
         End If
@@ -174,6 +179,18 @@ Imports RDotNet
             SetColorPalette(lstColourPalette)
         Else
             SetColorPalette(clsInstatOptionsDefaults.DEFAULTlstColourPalette)
+        End If
+
+        If bAutoSaveData.HasValue Then
+            SetAutoSaveData(bAutoSaveData)
+        Else
+            SetAutoSaveData(clsInstatOptionsDefaults.DEFAULTbAutoSaveData)
+        End If
+
+        If iAutoSaveDataMinutes.HasValue Then
+            SetAutoSaveDataMinutes(iAutoSaveDataMinutes)
+        Else
+            SetAutoSaveDataMinutes(clsInstatOptionsDefaults.DEFAULTiAutoSaveDataMinutes)
         End If
     End Sub
 
@@ -324,5 +341,13 @@ Imports RDotNet
 
     Public Sub SetIncludeRDefaultParameters(bNewInclude As Boolean)
         bIncludeRDefaultParameters = bNewInclude
+    End Sub
+
+    Public Sub SetAutoSaveData(bNewAutoSave As Boolean)
+        bAutoSaveData = bNewAutoSave
+    End Sub
+
+    Public Sub SetAutoSaveDataMinutes(iNewMinutes As Integer)
+        iAutoSaveDataMinutes = iNewMinutes
     End Sub
 End Class
