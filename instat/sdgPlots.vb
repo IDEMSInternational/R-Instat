@@ -270,10 +270,10 @@ Public Class sdgPlots
         ucrYAxis.SetRCodeForControl(bIsXAxis:=False, strNewAxisType:=GetAxisType(False), clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset, bCloneIfNeeded:=True)
 
         'ucrPlotsAdditionalLayers.SetAesFunction(clsGlobalAesFunction)
-        '''The following two setup the ucrAdditionalLayers on the sdgPlots. Shares the global ggplot function, as well as the whole PLots RSyntax.
+        'The following two setup the ucrAdditionalLayers on the sdgPlots. Shares the global ggplot function, as well as the whole PLots RSyntax.
         'ucrPlotsAdditionalLayers.SetGGplotFunction(clsRggplotFunction)
         'ucrPlotsAdditionalLayers.SetBaseOperator(clsBaseOperator)
-        ucrPlotsAdditionalLayers.SetRCodeForControl(clsNewBaseOperator:=clsBaseOperator, clsRNewggplotFunc:=clsRggplotFunction, clsNewAesFunc:=clsGlobalAesFunction, bReset:=bReset)
+        ucrPlotsAdditionalLayers.SetRCodeForControl(clsNewBaseOperator:=clsBaseOperator, clsRNewggplotFunc:=clsRggplotFunction, clsNewAesFunc:=clsGlobalAesFunction, strNewGlobalDataFrame:=strDataFrame, bReset:=bReset)
         bRCodeSet = True
         AddRemoveLabs()
         AddRemoveFacets()
@@ -585,13 +585,6 @@ Public Class sdgPlots
 
     Private Sub ucrChkFreeSpace_CheckedChanged() Handles ucrChkFreeSpace.ControlValueChanged
         SetFacetParameters()
-    End Sub
-
-    'Question to be discussed/Task: This is the kind of subs that could go into a SetupPlotOptions procedure... also only called in two specific plots and not in the others ... Why ? (to be explored)
-    Public Sub SetGgplotFunction(clsGgplotFunc As RFunction)
-        'When the link for clsRggplotFunction has been changed, the ucrAdditionalLayers GgplotFunction needs to be updated.
-        clsRggplotFunction = clsGgplotFunc
-        ucrPlotsAdditionalLayers.SetGGplotFunction(clsRggplotFunction)
     End Sub
 
     Public Sub SetDataFrame(strNewDataFrame As String)

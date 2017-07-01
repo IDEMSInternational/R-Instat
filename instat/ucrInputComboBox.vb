@@ -142,11 +142,15 @@ Public Class ucrInputComboBox
         Return cboInput.Text
     End Function
 
-    Public Sub SetItems(Optional strItems As String() = Nothing, Optional bClearExisting As Boolean = True, Optional bAddConditions As Boolean = False)
+    Public Sub SetItems(Optional strItems As String() = Nothing, Optional bClearExisting As Boolean = True, Optional bAddConditions As Boolean = False, Optional bAddQuotes As Boolean = True)
         Dim dctValues As New Dictionary(Of String, String)
         If bAddConditions Then
             For Each strTemp As String In strItems
-                dctValues.Add(strTemp, Chr(34) & strTemp & Chr(34))
+                If bAddQuotes Then
+                    dctValues.Add(strTemp, Chr(34) & strTemp & Chr(34))
+                Else
+                    dctValues.Add(strTemp, strTemp)
+                End If
             Next
             SetItems(dctValues, bClearExisting)
         Else
