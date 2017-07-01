@@ -90,16 +90,16 @@ Public Class sdgMerge
             tbcMergeOptions.SelectedIndex = 0
         End If
 
-        ucrPnlMergeByOptions.SetRCode(clsMerge, bReset)
-        ucrChkMergeWithSubsetFirst.SetRCode(clsMerge, bReset)
-        ucrChkMergeWithSubsetSecond.SetRCode(clsMerge, bReset)
+        ucrPnlMergeByOptions.SetRCode(clsMerge, bReset, bCloneIfNeeded:=True)
+        ucrChkMergeWithSubsetFirst.SetRCode(clsMerge, bReset, bCloneIfNeeded:=True)
+        ucrChkMergeWithSubsetSecond.SetRCode(clsMerge, bReset, bCloneIfNeeded:=True)
         If ucrChkMergeWithSubsetFirst.Checked Then
-            ucrReceiverFirstSelected.SetRCode(clsMerge, bReset)
+            ucrReceiverFirstSelected.SetRCode(clsMerge, bReset, bCloneIfNeeded:=True)
         Else
             ucrReceiverFirstSelected.Clear()
         End If
         If ucrChkMergeWithSubsetSecond.Checked Then
-            ucrReceiverSecondSelected.SetRCode(clsMerge, bReset)
+            ucrReceiverSecondSelected.SetRCode(clsMerge, bReset, bCloneIfNeeded:=True)
         Else
             ucrReceiverSecondSelected.Clear()
         End If
