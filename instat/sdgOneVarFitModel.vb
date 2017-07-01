@@ -13,12 +13,15 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 
 Public Class sdgOneVarFitModel
     Public clsROneVarFitModel As New RFunction
-    Private WithEvents ucrDists As ucrDistributions
+    Private clsRLogLikFunction As New RFunction
+    Private WithEvents ucrDistribution As ucrDistributions
     Public bControlsInitialised As Boolean = False
+    Private clsRSyntax As RSyntax
 
     Private Sub sdgOneVarFitModDisplay(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -43,23 +46,20 @@ Public Class sdgOneVarFitModel
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsRNewOneVarFitModel As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewRSyntax As RSyntax, clsRNewOneVarFitModel As RFunction, Optional clsNewRLogLikFunction As RFunction = Nothing, Optional ucrNewDistribution As ucrDistributions = Nothing, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
+        clsRSyntax = clsNewRSyntax
+        clsRLogLikFunction = clsNewRLogLikFunction
+        ucrDistribution = ucrNewDistribution
         clsROneVarFitModel = clsRNewOneVarFitModel
         ucrPnlOptimisation.SetRCode(clsROneVarFitModel, bReset)
         ucrPnlFitMethod.SetRCode(clsROneVarFitModel, bReset)
-
     End Sub
 
-    Public Sub SetDistribution(ucrNewDists As ucrDistributions)
-        ucrDists = ucrNewDists
-        SetPlotOptions()
-    End Sub
-
-    Private Sub ucrDists_cboDistributionsIndexChanged() Handles ucrDists.DistributionsIndexChanged
-        If ucrDists.clsCurrDistribution IsNot Nothing AndAlso Not ucrDists.clsCurrDistribution.bIsContinuous Then
+    Private Sub ucrDistribution_cboDistributionsIndexChanged() Handles ucrDistribution.DistributionsIndexChanged
+        If ucrDistribution.clsCurrDistribution IsNot Nothing AndAlso Not ucrDistribution.clsCurrDistribution.bIsContinuous Then
             rdoMge.Enabled = False
             If rdoMge.Checked Then
                 rdoMle.Checked = True
@@ -70,7 +70,7 @@ Public Class sdgOneVarFitModel
     End Sub
 
     Private Sub SetPlotOptions()
-        If ucrDists.clsCurrDistribution IsNot Nothing AndAlso Not ucrDists.clsCurrDistribution.bIsContinuous Then
+        If ucrDistribution.clsCurrDistribution IsNot Nothing AndAlso Not ucrDistribution.clsCurrDistribution.bIsContinuous Then
             rdoMge.Enabled = False
             If rdoMge.Checked Then
                 rdoMle.Checked = True
@@ -80,4 +80,11 @@ Public Class sdgOneVarFitModel
         End If
     End Sub
 
+    Private Sub ucrPnlFitMethod_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFitMethod.ControlValueChanged
+        If rdoMle.Checked Then
+            clsRSyntax.AddToAfterCodes(clsRLogLikFunction, iPosition:=2)
+        Else
+            clsRSyntax.RemoveFromAfterCodes(clsRLogLikFunction)
+        End If
+    End Sub
 End Class

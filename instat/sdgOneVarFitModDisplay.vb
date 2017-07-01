@@ -19,8 +19,8 @@ Imports instat.Translations
 Public Class sdgOneVarFitModDisplay
     Public clsRplotFunction, clsRplotPPComp, clsRplotCdfcomp, clsRplotQqComp, clsRplotDenscomp As RFunction
     Private clsModel As New RFunction
-    Private clsRLogLikFunction, clsFamilyFunction As New RFunction
-    Private WithEvents ucrDists As ucrDistributions
+    Private clsRLogLikFunction As New RFunction
+    Private WithEvents ucrDistribution As ucrDistributions
     Public bfirstload As Boolean = True
     Private clsRSyntax As RSyntax
     Public bControlsInitialised As Boolean = False
@@ -71,12 +71,7 @@ Public Class sdgOneVarFitModDisplay
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetDistribution(ucrNewDists As ucrDistributions)
-        ucrDists = ucrNewDists
-        SetPlotOptions()
-    End Sub
-
-    Public Sub SetRCode(clsNewRSyntax As RSyntax, Optional clsRNewOneVarFitModel As RFunction = Nothing, Optional clsNewRLogLikFunction As RFunction = Nothing, Optional clsNewRplotFunction As RFunction = Nothing, Optional clsNewRplotPPComp As RFunction = Nothing, Optional clsNewRplotCdfcomp As RFunction = Nothing, Optional clsNewRplotQqComp As RFunction = Nothing, Optional clsNewRplotDenscomp As RFunction = Nothing, Optional clsNewFamilyFunction As RFunction = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewRSyntax As RSyntax, Optional clsRNewOneVarFitModel As RFunction = Nothing, Optional clsNewRLogLikFunction As RFunction = Nothing, Optional clsNewRplotFunction As RFunction = Nothing, Optional clsNewRplotPPComp As RFunction = Nothing, Optional clsNewRplotCdfcomp As RFunction = Nothing, Optional clsNewRplotQqComp As RFunction = Nothing, Optional clsNewRplotDenscomp As RFunction = Nothing, Optional ucrNewDistribution As ucrDistributions = Nothing, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
@@ -88,16 +83,18 @@ Public Class sdgOneVarFitModDisplay
         clsRplotQqComp = clsNewRplotQqComp
         clsRplotDenscomp = clsNewRplotDenscomp
         clsRLogLikFunction = clsNewRLogLikFunction
-        clsFamilyFunction = clsNewFamilyFunction
-        ucrSavePlots.SetRCode(clsRplotFunction, bReset, bCloneIfNeeded:=True)
+        ucrDistribution = ucrNewDistribution
+        ucrPnlPlots.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
+        ucrSavePlots.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
         ucrSaveLikelihood.SetRCode(clsRLogLikFunction, bReset, bCloneIfNeeded:=True)
         ucrPnlLikelihood.SetRCode(clsRLogLikFunction, bReset, bCloneIfNeeded:=True)
         ucrChkPLotLogLik.SetRCode(clsRLogLikFunction, bReset, bCloneIfNeeded:=True)
-        ucrPnlPlots.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
+        SetPlotOptions()
     End Sub
 
     Private Sub ucrPnlPlots_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlPlots.ControlValueChanged
         If rdoPlotAll.Checked Then
+            clsRSyntax.AddToAfterCodes(clsRplotFunction, iPosition:=1)
             clsRSyntax.RemoveFromAfterCodes(clsRplotDenscomp)
             clsRSyntax.RemoveFromAfterCodes(clsRplotQqComp)
             clsRSyntax.RemoveFromAfterCodes(clsRplotCdfcomp)
@@ -135,12 +132,12 @@ Public Class sdgOneVarFitModDisplay
         End If
     End Sub
 
-    Private Sub ucrDists_cboDistributionsIndexChanged() Handles ucrDists.DistributionsIndexChanged
+    Private Sub ucrDistribution_cboDistributionsIndexChanged() Handles ucrDistribution.DistributionsIndexChanged
         SetPlotOptions()
     End Sub
 
     Private Sub SetPlotOptions()
-        If ucrDists.clsCurrDistribution IsNot Nothing AndAlso Not ucrDists.clsCurrDistribution.bIsContinuous Then
+        If ucrDistribution.clsCurrDistribution IsNot Nothing AndAlso Not ucrDistribution.clsCurrDistribution.bIsContinuous Then
             rdoDensityPlot.Enabled = False
             rdoQQPlot.Enabled = False
             rdoPPPlot.Enabled = False
@@ -155,7 +152,7 @@ Public Class sdgOneVarFitModDisplay
     End Sub
 
     Private Sub ucrChkPLotLogLik_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPLotLogLik.ControlValueChanged, ucrPnlLikelihood.ControlValueChanged
-        If ucrChkPLotLogLik.Checked Then
+        If ucrChkPLotLogLik.Checked AndAlso sdgOneVarFitModel.rdoMle.Checked Then
             If rdoLoglik.Checked OrElse rdoLik.Checked Then
                 clsRSyntax.AddToAfterCodes(clsRLogLikFunction, iPosition:=2)
             End If
