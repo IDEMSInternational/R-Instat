@@ -22,4 +22,21 @@ Public Class ucrLog
     Public Sub SelectAllText()
         txtLog.SelectAll()
     End Sub
+
+    Private Sub mnuOpenLogFile_Click(sender As Object, e As EventArgs) Handles mnuOpenLogFile.Click
+        Dim clsProcessStart As New RFunction
+        Dim strLogFilename As String = ""
+        Dim dlgOpenLogFile As New OpenFileDialog
+        clsProcessStart.SetRCommand("Process.Start")
+        dlgOpenLogFile.Filter = "All R files|*.R;|All files|*.*;"
+        dlgOpenLogFile.Title = "load Log File"
+        dlgOpenLogFile.Title = "load Log from file"
+        If dlgOpenLogFile.ShowDialog() = DialogResult.OK Then
+            If dlgOpenLogFile.FileName <> "" Then
+                strLogFilename = dlgOpenLogFile.FileName
+            End If
+        End If
+        clsProcessStart.AddParameter("filename", strLogFilename, bIncludeArgumentName:=False)
+        frmMain.clsRLink.RunScript(clsProcessStart.ToScript, strComment:="Loading Script")
+    End Sub
 End Class

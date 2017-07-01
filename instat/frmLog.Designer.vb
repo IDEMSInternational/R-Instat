@@ -22,16 +22,11 @@ Partial Class frmLog
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Me.txtLog = New System.Windows.Forms.TextBox()
-        Me.mnuContextLogFile = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.mnuOpenLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuContextLogFile.SuspendLayout()
         Me.SuspendLayout()
         '
         'txtLog
         '
-        Me.txtLog.ContextMenuStrip = Me.mnuContextLogFile
         Me.txtLog.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtLog.Location = New System.Drawing.Point(0, 0)
         Me.txtLog.Multiline = True
@@ -42,18 +37,6 @@ Partial Class frmLog
         Me.txtLog.TabIndex = 0
         Me.txtLog.TabStop = False
         '
-        'mnuContextLogFile
-        '
-        Me.mnuContextLogFile.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOpenLogFile})
-        Me.mnuContextLogFile.Name = "mnuContextLogFile"
-        Me.mnuContextLogFile.Size = New System.Drawing.Size(148, 26)
-        '
-        'mnuOpenLogFile
-        '
-        Me.mnuOpenLogFile.Name = "mnuOpenLogFile"
-        Me.mnuOpenLogFile.Size = New System.Drawing.Size(147, 22)
-        Me.mnuOpenLogFile.Text = "Open Log File"
-        '
         'frmLog
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -63,13 +46,10 @@ Partial Class frmLog
         Me.Name = "frmLog"
         Me.ShowIcon = False
         Me.Text = "Log Window"
-        Me.mnuContextLogFile.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents txtLog As TextBox
-    Friend WithEvents mnuContextLogFile As ContextMenuStrip
-    Friend WithEvents mnuOpenLogFile As ToolStripMenuItem
 End Class
