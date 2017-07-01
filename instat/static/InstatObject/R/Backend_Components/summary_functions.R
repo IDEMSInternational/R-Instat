@@ -185,6 +185,13 @@ instat_object$set("public", "calculate_summary", function(data_name, columns_to_
       sub_calculations[[length(sub_calculations) + 1]] <- summary_calculation
     }
   }
+  if(self$filter_applied(data_name)) {
+    curr_filter <- self$get_current_filter(data_name)
+    curr_filter_name <- curr_filter[["name"]]
+    curr_filter_calc <- self$get_filter_as_instat_calculation(data_name, curr_filter_name)
+    print(curr_filter_calc$function_exp)
+    manipulations <- c(curr_filter_calc, manipulations)
+  }
   combined_calc_sum <- instat_calculation$new(type="combination", sub_calculations = sub_calculations, manipulations = manipulations)
   out <- self$apply_instat_calculation(combined_calc_sum)
   if(return_output) {

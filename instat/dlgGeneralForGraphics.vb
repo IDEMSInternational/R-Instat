@@ -65,7 +65,6 @@ Public Class dlgGeneralForGraphics
 
     Private Sub SetDefaults()
         iLayerIndex = 0
-        ucrAdditionalLayers.Reset()
         lstLayerComplete.Clear()
         strGlobalDataFrame = ""
         bDataFrameSet = False
@@ -86,9 +85,7 @@ Public Class dlgGeneralForGraphics
 
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
 
-        ucrAdditionalLayers.SetBaseOperator(clsBaseOperator)
-        ucrAdditionalLayers.SetGGplotFunction(clsGgplotFunction)
-        ucrAdditionalLayers.SetAesFunction(clsGlobalAesFunction)
+        ucrAdditionalLayers.SetRCodeForControl(clsNewBaseOperator:=clsBaseOperator, clsRNewggplotFunc:=clsGgplotFunction, clsNewAesFunc:=clsGlobalAesFunction, strNewGlobalDataFrame:=strGlobalDataFrame, bReset:=True)
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()

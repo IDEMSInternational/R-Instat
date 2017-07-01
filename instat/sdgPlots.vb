@@ -192,7 +192,7 @@ Public Class sdgPlots
         InitialiseTabs()
 
         'temporary disabled until implemented
-        tbpLayers.Enabled = False
+        ' tbpLayers.Enabled = False
         tbpCoordinates.Enabled = False
         grpLegendTitle.Enabled = False
         'cmdAllOptions.Enabled = False
@@ -269,7 +269,11 @@ Public Class sdgPlots
         ucrXAxis.SetRCodeForControl(bIsXAxis:=True, strNewAxisType:=GetAxisType(True), clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset, bCloneIfNeeded:=True)
         ucrYAxis.SetRCodeForControl(bIsXAxis:=False, strNewAxisType:=GetAxisType(False), clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset, bCloneIfNeeded:=True)
 
-
+        'ucrPlotsAdditionalLayers.SetAesFunction(clsGlobalAesFunction)
+        'The following two setup the ucrAdditionalLayers on the sdgPlots. Shares the global ggplot function, as well as the whole PLots RSyntax.
+        'ucrPlotsAdditionalLayers.SetGGplotFunction(clsRggplotFunction)
+        'ucrPlotsAdditionalLayers.SetBaseOperator(clsBaseOperator)
+        ucrPlotsAdditionalLayers.SetRCodeForControl(clsNewBaseOperator:=clsBaseOperator, clsRNewggplotFunc:=clsRggplotFunction, clsNewAesFunc:=clsGlobalAesFunction, strNewGlobalDataFrame:=strDataFrame, bReset:=bReset)
         bRCodeSet = True
         AddRemoveLabs()
         AddRemoveFacets()
@@ -583,13 +587,6 @@ Public Class sdgPlots
         SetFacetParameters()
     End Sub
 
-    'Question to be discussed/Task: This is the kind of subs that could go into a SetupPlotOptions procedure... also only called in two specific plots and not in the others ... Why ? (to be explored)
-    Public Sub SetGgplotFunction(clsGgplotFunc As RFunction)
-        'When the link for clsRggplotFunction has been changed, the ucrAdditionalLayers GgplotFunction needs to be updated.
-        clsRggplotFunction = clsGgplotFunc
-        ucrPlotsAdditionalLayers.SetGGplotFunction(clsRggplotFunction)
-    End Sub
-
     Public Sub SetDataFrame(strNewDataFrame As String)
         strDataFrame = strNewDataFrame
         ucrFacetSelector.SetDataframe(strDataFrame, False)
@@ -653,27 +650,6 @@ Public Class sdgPlots
         sdgThemes.ShowDialog()
         bResetThemes = False
     End Sub
-
-    Private Sub ucrChkIncludeFacets_CheckedChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeFacets.ControlValueChanged, ucr2ndFactorReceiver.ControlValueChanged, ucr1stFactorReceiver.ControlValueChanged
-
-    End Sub
-
-    Private Sub ucrChkFreeSpace_CheckedChanged(ucrChangedControl As ucrCore) Handles ucrChkFreeSpace.ControlValueChanged
-
-    End Sub
-
-    Private Sub chkScales_CheckedChanged(ucrChangedControl As ucrCore) Handles ucrChkFreeScalesY.ControlValueChanged, ucrChkFreeScalesX.ControlValueChanged
-
-    End Sub
-
-    Private Sub ucrPnlHorizonatalVertical_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlHorizonatalVertical.ControlValueChanged, ucrChkMargin.ControlValueChanged
-
-    End Sub
-
-    Private Sub LabsControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputGraphTitle.ControlValueChanged, ucrInputGraphSubTitle.ControlValueChanged, ucrInputGraphCaption.ControlValueChanged
-
-    End Sub
-
     'Warning/Task to be discussed: need to disable ok on dlg's when layers are not complete on subdialogues + warning message... 
     'Warning: actually this will be very hard to implement until the global aes, set from the main layer are properly communicated to plots. Global aes might fill in missing mandatory aes...
 End Class
