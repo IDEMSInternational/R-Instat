@@ -20,11 +20,5 @@ Public Class frmLog
         frmMain.mnuViewLog.Checked = Me.Visible
     End Sub
 
-    Private Sub mnuOpenLogFile_Click(sender As Object, e As EventArgs)
 
-    End Sub
-
-    Private Sub frmLog_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    End Sub
 End Class
