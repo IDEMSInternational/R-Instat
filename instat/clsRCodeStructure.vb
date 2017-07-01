@@ -37,6 +37,7 @@ Public Class RCodeStructure
     Public bAssignToIsPrefix As Boolean = False
     Public bAssignToColumnWithoutNames As Boolean = False
     Public bInsertColumnBefore As Boolean = False
+    Public bRequireCorrectLength As Boolean = True
     Public clsParameters As New List(Of RParameter)
     Protected iNumberOfAddedParameters As Integer = 0 'This might be temporary, it enables to have a default name for parameters...
     'Currently only used when this is in RSyntax as a before/after code to determine position code should be run in the list
@@ -73,7 +74,7 @@ Public Class RCodeStructure
     End Sub
 
     'Most methods from RFunction/ROperator have been moved here
-    Public Sub SetAssignTo(strTemp As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional strTempGraph As String = "", Optional strTempTable As String = "", Optional bAssignToIsPrefix As Boolean = False, Optional bAssignToColumnWithoutNames As Boolean = False, Optional bInsertColumnBefore As Boolean = False)
+    Public Sub SetAssignTo(strTemp As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional strTempGraph As String = "", Optional strTempTable As String = "", Optional bAssignToIsPrefix As Boolean = False, Optional bAssignToColumnWithoutNames As Boolean = False, Optional bInsertColumnBefore As Boolean = False, Optional bRequireCorrectLength As Boolean = True)
         strAssignTo = strTemp
         If Not strTempDataframe = "" Then
             strAssignToDataFrame = strTempDataframe
@@ -95,6 +96,7 @@ Public Class RCodeStructure
         Me.bAssignToIsPrefix = bAssignToIsPrefix
         Me.bAssignToColumnWithoutNames = bAssignToColumnWithoutNames
         Me.bInsertColumnBefore = bInsertColumnBefore
+        Me.bRequireCorrectLength = bRequireCorrectLength
     End Sub
 
     Public Sub RemoveAssignTo()
@@ -150,6 +152,9 @@ Public Class RCodeStructure
                     If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
                         clsAddColumns.AddParameter("before", "FALSE")
                     End If
+                End If
+                If Not bRequireCorrectLength Then
+                    clsAddColumns.AddParameter("require_correct_length", "FALSE")
                 End If
                 strScript = strScript & clsAddColumns.ToScript() & Environment.NewLine
 
