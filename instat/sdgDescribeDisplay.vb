@@ -57,13 +57,13 @@ Public Class sdgDescribeDisplay
         End If
         clsRFreqDispOptions = clsNewFreqRFunction
         clsRAnovaDispOptions = clsNewAnovaRFunction
-        ucrChkAddMargins.SetRCode(clsRFreqDispOptions, bReset)
-        ucrChkTranspose.SetRCode(clsRFreqDispOptions, bReset)
-        ucrChkProportions.SetRCode(clsRFreqDispOptions, bReset)
-        ucrChkPercentages.SetRCode(clsRFreqDispOptions, bReset)
-        ucrChkMeans.SetRCode(clsRAnovaDispOptions, bReset)
-        ucrChkSignifStars.SetRCode(clsRAnovaDispOptions, bReset)
-        ucrChkSignifLevel.SetRCode(clsRAnovaDispOptions, bReset)
+        ucrChkAddMargins.SetRCode(clsRFreqDispOptions, bReset, bCloneIfNeeded:=True)
+        ucrChkTranspose.SetRCode(clsRFreqDispOptions, bReset, bCloneIfNeeded:=True)
+        ucrChkProportions.SetRCode(clsRFreqDispOptions, bReset, bCloneIfNeeded:=True)
+        ucrChkPercentages.SetRCode(clsRFreqDispOptions, bReset, bCloneIfNeeded:=True)
+        ucrChkMeans.SetRCode(clsRAnovaDispOptions, bReset, bCloneIfNeeded:=True)
+        ucrChkSignifStars.SetRCode(clsRAnovaDispOptions, bReset, bCloneIfNeeded:=True)
+        ucrChkSignifLevel.SetRCode(clsRAnovaDispOptions, bReset, bCloneIfNeeded:=True)
         GrpBoxEnable()
     End Sub
 
