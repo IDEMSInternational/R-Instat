@@ -33,32 +33,6 @@ Public Class dlgShowModel
         TestOKEnabled()
     End Sub
 
-    Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverExpressionForTablePlus.AddAdditionalCodeParameterPair(clsProbabilities, New RParameter("q", 1), 1)
-        ucrInputProbabilities.AddAdditionalCodeParameterPair(clsProbabilities, New RParameter("q", 1), 1)
-        ucrChkDisplayGraphResults.AddAdditionalCodeParameterPair(clsProbabilities, ucrChkDisplayGraphResults.GetParameter, 1)
-        ucrPnlDistTypes.SetRCode(clsQuantiles, bReset)
-        ucrReceiverExpressionForTablePlus.SetRCode(clsQuantiles, bReset)
-        ucrChkDisplayGraphResults.SetRCode(clsQuantiles, bReset)
-        ucrInputProbabilities.SetRCode(clsQuantiles, bReset)
-        ucrSaveGraphResults.AddAdditionalRCode(clsProbabilities, 1)
-        ucrSaveGraphResults.SetRCode(clsQuantiles, bReset)
-        ucrDistributionsFOrTablePlus.SetRCode(clsQuantiles, bReset)
-        ucrChkEnterValues.SetRCode(clsQuantiles, bReset)
-    End Sub
-
-    Private Sub TestOKEnabled()
-        If ucrDistributionsFOrTablePlus.bParametersFilled Then
-            If ((Not ucrReceiverExpressionForTablePlus.IsEmpty) OrElse (Not ucrInputProbabilities.IsEmpty)) Then
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
-            End If
-        Else
-            ucrBase.OKEnabled(False)
-        End If
-    End Sub
-
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 157
         ucrReceiverExpressionForTablePlus.Selector = ucrSelectorForDataFrame
@@ -127,6 +101,33 @@ Public Class dlgShowModel
         ucrBase.clsRsyntax.SetBaseRFunction(clsQuantiles)
 
     End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrReceiverExpressionForTablePlus.AddAdditionalCodeParameterPair(clsProbabilities, New RParameter("q", 1), 1)
+        ucrInputProbabilities.AddAdditionalCodeParameterPair(clsProbabilities, New RParameter("q", 1), 1)
+        ucrChkDisplayGraphResults.AddAdditionalCodeParameterPair(clsProbabilities, ucrChkDisplayGraphResults.GetParameter, 1)
+        ucrPnlDistTypes.SetRCode(clsQuantiles, bReset)
+        ucrReceiverExpressionForTablePlus.SetRCode(clsQuantiles, bReset)
+        ucrChkDisplayGraphResults.SetRCode(clsQuantiles, bReset)
+        ucrInputProbabilities.SetRCode(clsQuantiles, bReset)
+        ucrSaveGraphResults.AddAdditionalRCode(clsProbabilities, 1)
+        ucrSaveGraphResults.SetRCode(clsQuantiles, bReset)
+        ucrDistributionsFOrTablePlus.SetRCode(clsQuantiles, bReset)
+        ucrChkEnterValues.SetRCode(clsQuantiles, bReset)
+    End Sub
+
+    Private Sub TestOKEnabled()
+        If ucrDistributionsFOrTablePlus.bParametersFilled Then
+            If ((Not ucrReceiverExpressionForTablePlus.IsEmpty) OrElse (Not ucrInputProbabilities.IsEmpty)) Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
+        Else
+            ucrBase.OKEnabled(False)
+        End If
+    End Sub
+
 
     Private Sub SetItems()
         If rdoProbabilities.Checked Then
