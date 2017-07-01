@@ -76,7 +76,6 @@ Public Class dlgShowModel
     End Sub
 
     Private Sub SetDefaults()
-
         clsQuantiles = New RFunction
         clsProbabilities = New RFunction
 
@@ -88,11 +87,11 @@ Public Class dlgShowModel
         clsQuantiles.SetPackageName("mosaic")
 
         receiverlabels()
-
         SetItems()
         DisplayTableResults()
-
         ResetFunctions()
+        SetNewColumName()
+
         clsProbabilities.SetRCommand("pdist")
         clsQuantiles.SetRCommand("qdist")
 
@@ -127,7 +126,6 @@ Public Class dlgShowModel
             ucrBase.OKEnabled(False)
         End If
     End Sub
-
 
     Private Sub SetItems()
         If rdoProbabilities.Checked Then

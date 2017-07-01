@@ -159,7 +159,7 @@ Partial Class dlgShowModel
         '
         Me.ucrSaveGraphResults.Location = New System.Drawing.Point(12, 281)
         Me.ucrSaveGraphResults.Name = "ucrSaveGraphResults"
-        Me.ucrSaveGraphResults.Size = New System.Drawing.Size(423, 24)
+        Me.ucrSaveGraphResults.Size = New System.Drawing.Size(220, 24)
         Me.ucrSaveGraphResults.TabIndex = 19
         '
         'dlgShowModel
