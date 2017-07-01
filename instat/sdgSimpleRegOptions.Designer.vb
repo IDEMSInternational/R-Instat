@@ -612,6 +612,7 @@ Partial Class sdgSimpleRegOptions
         '
         'ucrSaveLeverageColumnName
         '
+        Me.ucrSaveLeverageColumnName.Enabled = False
         Me.ucrSaveLeverageColumnName.Location = New System.Drawing.Point(9, 92)
         Me.ucrSaveLeverageColumnName.Name = "ucrSaveLeverageColumnName"
         Me.ucrSaveLeverageColumnName.Size = New System.Drawing.Size(255, 24)
@@ -619,6 +620,7 @@ Partial Class sdgSimpleRegOptions
         '
         'ucrSaveStdResidualsColumnName
         '
+        Me.ucrSaveStdResidualsColumnName.Enabled = False
         Me.ucrSaveStdResidualsColumnName.Location = New System.Drawing.Point(9, 65)
         Me.ucrSaveStdResidualsColumnName.Name = "ucrSaveStdResidualsColumnName"
         Me.ucrSaveStdResidualsColumnName.Size = New System.Drawing.Size(255, 24)
@@ -626,6 +628,7 @@ Partial Class sdgSimpleRegOptions
         '
         'ucrSaveResidualsColumnName
         '
+        Me.ucrSaveResidualsColumnName.Enabled = False
         Me.ucrSaveResidualsColumnName.Location = New System.Drawing.Point(9, 38)
         Me.ucrSaveResidualsColumnName.Name = "ucrSaveResidualsColumnName"
         Me.ucrSaveResidualsColumnName.Size = New System.Drawing.Size(255, 24)
@@ -633,6 +636,7 @@ Partial Class sdgSimpleRegOptions
         '
         'ucrSaveFittedColumnName
         '
+        Me.ucrSaveFittedColumnName.Enabled = False
         Me.ucrSaveFittedColumnName.Location = New System.Drawing.Point(9, 11)
         Me.ucrSaveFittedColumnName.Name = "ucrSaveFittedColumnName"
         Me.ucrSaveFittedColumnName.Size = New System.Drawing.Size(255, 24)

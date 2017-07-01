@@ -1,4 +1,5 @@
-﻿Public Class frmLog
+﻿Imports RDotNet
+Public Class frmLog
     Protected Overrides Sub OnFormClosing(ByVal e As FormClosingEventArgs)
         MyBase.OnFormClosing(e)
         If Not e.Cancel AndAlso e.CloseReason = CloseReason.UserClosing Then
@@ -18,5 +19,6 @@
     Private Sub frmLog_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
         frmMain.mnuViewLog.Checked = Me.Visible
     End Sub
+
 
 End Class
