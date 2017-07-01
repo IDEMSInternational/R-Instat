@@ -13,88 +13,135 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 
 Public Class sdgOneVarFitModDisplay
-    Private clsRplotFunction As New RFunction
+    Public clsRplotFunction, clsRplotPPComp, clsRplotCdfcomp, clsRplotQqComp, clsRplotDenscomp As RFunction
     Private clsModel As New RFunction
     Private clsRLogLikFunction As New RFunction
-    Private WithEvents ucrDists As ucrDistributions
-    Public clsRdataframe As ucrDataFrame
+    Private WithEvents ucrDistribution As ucrDistributions
     Public bfirstload As Boolean = True
+    Private clsRSyntax As RSyntax
+    Public bControlsInitialised As Boolean = False
 
     Private Sub sdgOneVarFitModDisplay(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
 
-    Public Sub InitialiseDialog()
-        UcrSaveLikelihood.SetDataFrameSelector(dlgOneVarFitModel.ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
+    Public Sub InitialiseControls()
+        ucrPnlLikelihood.SetParameter(New RParameter("loglik"))
+        ucrPnlLikelihood.AddRadioButton(rdoLoglik, "TRUE")
+        ucrPnlLikelihood.AddRadioButton(rdoLik, "FALSE")
+        ucrPnlLikelihood.SetRDefault("TRUE")
+
+        ucrChkPLotLogLik.AddToLinkedControls(ucrPnlLikelihood, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkPLotLogLik.AddParameterPresentCondition(True, "loglik")
+        ucrChkPLotLogLik.AddParameterValuesCondition(False, "loglik", False)
+        ucrChkPLotLogLik.SetText("Plot Likelihood")
+
+        ucrPnlPlots.AddRadioButton(rdoNoPlot)
+        ucrPnlPlots.AddRadioButton(rdoPlotAll)
+        ucrPnlPlots.AddRadioButton(rdoCDFPlot)
+        ucrPnlPlots.AddRadioButton(rdoDensityPlot)
+        ucrPnlPlots.AddRadioButton(rdoQQPlot)
+        ucrPnlPlots.AddRadioButton(rdoPPPlot)
+
+        ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoNoPlot, {"plot", "cdfcomp", "denscomp", "qqcomp", "ppcomp"}, False)
+        ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoPlotAll, {"plot"})
+        ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoCDFPlot, {"cdfcomp"})
+        ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoDensityPlot, {"denscomp"})
+        ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoQQPlot, {"qqcomp"})
+        ucrPnlPlots.AddRSyntaxContainsFunctionNamesCondition(rdoPPPlot, {"ppcomp"})
+
+        ucrSavePlots.SetPrefix("plot")
+        ucrSavePlots.SetSaveTypeAsGraph()
         ucrSavePlots.SetDataFrameSelector(dlgOneVarFitModel.ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
-        clsRLogLikFunction.SetPackageName("fitdistrplus")
-        clsRLogLikFunction.SetRCommand("llplot")
+        ucrSavePlots.SetCheckBoxText("Save Graph")
+        ucrSavePlots.SetIsComboBox()
+        ucrSavePlots.SetAssignToIfUncheckedValue("last_graph")
+
+        ucrSaveLikelihood.SetPrefix("likelihood")
+        ucrSaveLikelihood.SetSaveTypeAsGraph()
+        ucrSaveLikelihood.SetDataFrameSelector(dlgOneVarFitModel.ucrSelectorOneVarFitMod.ucrAvailableDataFrames)
+        ucrSaveLikelihood.SetCheckBoxText("Save Graph")
+        ucrSaveLikelihood.SetIsComboBox()
+        ucrSaveLikelihood.SetAssignToIfUncheckedValue("last_likelihood")
+
+        bControlsInitialised = True
     End Sub
 
-    Public Sub SetDefaults()
-        rdoPlotAll.Checked = True
-        rdoLoglik.Checked = True
-        'ucrSaveLikelihood.Enabled = False
-        'ucrBase.ihelptopicID = 
-        ucrSavePlots.strPrefix = "Plot"
-        UcrSaveLikelihood.strPrefix = "Likelihood"
-        UcrSaveLikelihood.Reset()
-        ucrSavePlots.Reset()
-    End Sub
-
-    Public Sub SetModelFunction(clsNewModel As RFunction)
-        clsModel = clsNewModel
-        clsRLogLikFunction.AddParameter("mlefit", clsRFunctionParameter:=clsModel)
-    End Sub
-
-    Public Sub SetDistribution(ucrNewDists As ucrDistributions)
-        ucrDists = ucrNewDists
+    Public Sub SetRCode(clsNewRSyntax As RSyntax, Optional clsRNewOneVarFitModel As RFunction = Nothing, Optional clsNewRLogLikFunction As RFunction = Nothing, Optional clsNewRplotFunction As RFunction = Nothing, Optional clsNewRplotPPComp As RFunction = Nothing, Optional clsNewRplotCdfcomp As RFunction = Nothing, Optional clsNewRplotQqComp As RFunction = Nothing, Optional clsNewRplotDenscomp As RFunction = Nothing, Optional ucrNewDistribution As ucrDistributions = Nothing, Optional bReset As Boolean = False)
+        If Not bControlsInitialised Then
+            InitialiseControls()
+        End If
+        clsRSyntax = clsNewRSyntax
+        clsModel = clsRNewOneVarFitModel
+        clsRplotFunction = clsNewRplotFunction
+        clsRplotPPComp = clsNewRplotPPComp
+        clsRplotCdfcomp = clsNewRplotCdfcomp
+        clsRplotQqComp = clsNewRplotQqComp
+        clsRplotDenscomp = clsNewRplotDenscomp
+        clsRLogLikFunction = clsNewRLogLikFunction
+        ucrDistribution = ucrNewDistribution
+        ucrPnlPlots.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
+        ucrSavePlots.AddAdditionalRCode(clsRplotDenscomp, 1)
+        ucrSavePlots.AddAdditionalRCode(clsRplotQqComp, 2)
+        ucrSavePlots.AddAdditionalRCode(clsRplotCdfcomp, 3)
+        ucrSavePlots.AddAdditionalRCode(clsRplotPPComp, 4)
+        ucrSavePlots.SetRCode(clsRplotFunction, bReset, bCloneIfNeeded:=True)
+        ucrPnlLikelihood.SetRCode(clsRLogLikFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkPLotLogLik.SetRCode(clsRLogLikFunction, bReset, bCloneIfNeeded:=True)
+        ucrSaveLikelihood.SetRCode(clsRLogLikFunction, bReset, bCloneIfNeeded:=True)
         SetPlotOptions()
     End Sub
 
-    Public Sub CreateGraphs()
+    Private Sub ucrPnlPlots_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlPlots.ControlValueChanged
         If rdoPlotAll.Checked Then
-            clsRplotFunction.ClearParameters()
-            clsRplotFunction.SetPackageName("")
-            clsRplotFunction.SetRCommand("plot")
-            clsRplotFunction.AddParameter("x", clsRFunctionParameter:=clsModel)
-            frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 3)
+            clsRSyntax.AddToAfterCodes(clsRplotFunction, iPosition:=1)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotDenscomp)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotQqComp)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotCdfcomp)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotPPComp)
         ElseIf rdoPPPlot.Checked Then
-            clsRplotFunction.ClearParameters()
-            clsRplotFunction.SetPackageName("fitdistrplus")
-            clsRplotFunction.SetRCommand("ppcomp")
-            clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
-            frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 3)
+            clsRSyntax.AddToAfterCodes(clsRplotPPComp, iPosition:=1)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotDenscomp)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotQqComp)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotCdfcomp)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotFunction)
         ElseIf rdoCDFPlot.Checked Then
-            clsRplotFunction.ClearParameters()
-            clsRplotFunction.SetPackageName("fitdistrplus")
-            clsRplotFunction.SetRCommand("cdfcomp")
-            clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
-            frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 3)
+            clsRSyntax.AddToAfterCodes(clsRplotCdfcomp, iPosition:=1)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotDenscomp)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotQqComp)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotPPComp)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotFunction)
         ElseIf rdoQQPlot.Checked Then
-            clsRplotFunction.ClearParameters()
-            clsRplotFunction.SetPackageName("fitdistrplus")
-            clsRplotFunction.SetRCommand("qqcomp")
-            clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
-            frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 3)
+            clsRSyntax.AddToAfterCodes(clsRplotQqComp, iPosition:=1)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotDenscomp)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotCdfcomp)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotPPComp)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotFunction)
         ElseIf rdoDensityPlot.Checked Then
-            clsRplotFunction.ClearParameters()
-            clsRplotFunction.SetPackageName("fitdistrplus")
-            clsRplotFunction.SetRCommand("denscomp")
-            clsRplotFunction.AddParameter("ft", clsRFunctionParameter:=clsModel)
-            frmMain.clsRLink.RunScript(clsRplotFunction.ToScript(), 3)
+            clsRSyntax.AddToAfterCodes(clsRplotDenscomp, iPosition:=1)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotQqComp)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotCdfcomp)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotPPComp)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotFunction)
+        Else
+            clsRSyntax.RemoveFromAfterCodes(clsRplotDenscomp)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotQqComp)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotCdfcomp)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotPPComp)
+            clsRSyntax.RemoveFromAfterCodes(clsRplotFunction)
         End If
     End Sub
 
-    Private Sub ucrDists_cboDistributionsIndexChanged() Handles ucrDists.ControlValueChanged
+    Private Sub ucrDistribution_cboDistributionsIndexChanged() Handles ucrDistribution.DistributionsIndexChanged
         SetPlotOptions()
     End Sub
 
     Private Sub SetPlotOptions()
-        If ucrDists.clsCurrDistribution IsNot Nothing AndAlso Not ucrDists.clsCurrDistribution.bIsContinuous Then
+        If ucrDistribution.clsCurrDistribution IsNot Nothing AndAlso Not ucrDistribution.clsCurrDistribution.bIsContinuous Then
             rdoDensityPlot.Enabled = False
             rdoQQPlot.Enabled = False
             rdoPPPlot.Enabled = False
@@ -108,58 +155,13 @@ Public Class sdgOneVarFitModDisplay
         End If
     End Sub
 
-    ' looking into tab2
-
-    Public Sub rdoLikelihoods_CheckedChanged(sender As Object, e As EventArgs) Handles rdoLoglik.CheckedChanged, rdoLik.CheckedChanged
-        If rdoLoglik.Checked Then
-            clsRLogLikFunction.AddParameter("loglik", strParameterValue:="TRUE")
-        ElseIf rdoLik.Checked Then
-            clsRLogLikFunction.AddParameter("loglik", strParameterValue:="FALSE")
+    Private Sub ucrChkPLotLogLik_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPLotLogLik.ControlValueChanged, ucrPnlLikelihood.ControlValueChanged
+        If ucrChkPLotLogLik.Checked AndAlso sdgOneVarFitModel.rdoMle.Checked Then
+            If rdoLoglik.Checked OrElse rdoLik.Checked Then
+                clsRSyntax.AddToAfterCodes(clsRLogLikFunction, iPosition:=2)
+            End If
+        Else
+            clsRSyntax.RemoveFromAfterCodes(clsRLogLikFunction)
         End If
     End Sub
-
-    Public Sub RunLikelihoods()
-        frmMain.clsRLink.RunScript(clsRLogLikFunction.ToScript(), 3)
-    End Sub
-
-
-    Private Sub UcrSaveLikelihood_GraphNameChanged() Handles UcrSaveLikelihood.GraphNameChanged, UcrSaveLikelihood.SaveGraphCheckedChanged
-        If UcrSaveLikelihood.bSaveGraph Then
-            dlgOneVarFitModel.UcrBase.clsRsyntax.SetAssignTo(UcrSaveLikelihood.strGraphName, strTempDataframe:=dlgOneVarFitModel.ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=UcrSaveLikelihood.strGraphName)
-        Else
-            dlgOneVarFitModel.UcrBase.clsRsyntax.RemoveAssignTo()
-        End If
-    End Sub
-
-    Private Sub ucrSavePlots_GraphNameChanged() Handles ucrSavePlots.GraphNameChanged, ucrSavePlots.SaveGraphCheckedChanged
-        If ucrSavePlots.bSaveGraph Then
-            dlgOneVarFitModel.UcrBase.clsRsyntax.SetAssignTo(ucrSavePlots.strGraphName, strTempDataframe:=dlgOneVarFitModel.ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSavePlots.strGraphName)
-        Else
-            dlgOneVarFitModel.UcrBase.clsRsyntax.RemoveAssignTo()
-        End If
-    End Sub
-
-    Private Sub VisibleSaveGraph_CheckedChanged(sender As Object, e As EventArgs) Handles rdoNoPlot.CheckedChanged, rdoNoLik.CheckedChanged
-        If rdoNoPlot.Checked Then
-            ucrSavePlots.Visible = False
-        Else
-            ucrSavePlots.Visible = True
-        End If
-        If rdoNoLik.Checked Then
-            UcrSaveLikelihood.Visible = False
-        Else
-            UcrSaveLikelihood.Visible = True
-        End If
-    End Sub
-
-    Public Function TestOkEnabled() As Boolean
-        Dim bOkEnabled As Boolean
-        If (ucrSavePlots.chkSaveGraph.Checked AndAlso Not ucrSavePlots.ucrInputGraphName.IsEmpty OrElse Not ucrSavePlots.chkSaveGraph.Checked) AndAlso (UcrSaveLikelihood.chkSaveGraph.Checked AndAlso Not UcrSaveLikelihood.ucrInputGraphName.IsEmpty OrElse Not UcrSaveLikelihood.chkSaveGraph.Checked) Then
-            bOkEnabled = True
-        Else
-            bOkEnabled = False
-        End If
-        Return bOkEnabled
-    End Function
-
 End Class

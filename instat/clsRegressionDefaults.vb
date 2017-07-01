@@ -87,8 +87,16 @@
     Public Shared ReadOnly Property clsDefaultAutoplot As RFunction
         Get
             Dim clsAutoplot As New RFunction
+            Dim clsWhichFuntion As New RFunction
+
             clsAutoplot.SetRCommand("autoplot")
             clsAutoplot.iCallType = 3
+            clsWhichFuntion.SetRCommand("c")
+            clsWhichFuntion.AddParameter("1", "1", bIncludeArgumentName:=False)
+            clsWhichFuntion.AddParameter("2", "2", bIncludeArgumentName:=False)
+            clsWhichFuntion.AddParameter("3", "3", bIncludeArgumentName:=False)
+            clsWhichFuntion.AddParameter("5", "5", bIncludeArgumentName:=False)
+            clsAutoplot.AddParameter("which", clsRFunctionParameter:=clsWhichFuntion, iPosition:=1)
             Return clsAutoplot
         End Get
     End Property

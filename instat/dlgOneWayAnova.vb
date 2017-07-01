@@ -37,6 +37,9 @@ Public Class dlgOneWayANOVA
         ucrYVariate.Selector = ucrAddRemoveDataFrame
         ucrFactor.Selector = ucrAddRemoveDataFrame
         ucrFactor.SetDataType("factor")
+        ucrFactor.strSelectorHeading = "Factors"
+        ucrYVariate.SetDataType("numeric")
+        ucrYVariate.strSelectorHeading = "Numerics"
         clsModel.SetOperation("~")
 
         autoTranslate(Me)
