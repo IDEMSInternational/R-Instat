@@ -494,6 +494,7 @@ Public Class RLink
         Dim bReturn As Boolean = True
         Dim i As Integer = 1
         Dim strTempFile As String
+        Dim bErrorMessageOpen As Boolean = False
 
         While bRCodeRunning
             Threading.Thread.Sleep(5)
@@ -549,7 +550,9 @@ Public Class RLink
                                                               clsEngine.Evaluate(strScript)
                                                           Catch ex As Exception
                                                               If Not bSilent Then
+                                                                  bErrorMessageOpen = True
                                                                   MsgBox(ex.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
+                                                                  bErrorMessageOpen = False
                                                               End If
                                                               bReturn = False
                                                           End Try
@@ -567,6 +570,9 @@ Public Class RLink
                     thrWaitDisplay = New Threading.Thread(Sub()
                                                               frmSetupLoading.Show()
                                                               While thrRScript.IsAlive
+                                                                  If bErrorMessageOpen Then
+                                                                      frmSetupLoading.Hide()
+                                                                  End If
                                                                   Threading.Thread.Sleep(5)
                                                                   Application.DoEvents()
                                                               End While
