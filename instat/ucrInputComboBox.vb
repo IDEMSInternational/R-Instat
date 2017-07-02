@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,8 +11,9 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports System.ComponentModel
 
 Public Class ucrInputComboBox
@@ -142,11 +143,15 @@ Public Class ucrInputComboBox
         Return cboInput.Text
     End Function
 
-    Public Sub SetItems(Optional strItems As String() = Nothing, Optional bClearExisting As Boolean = True, Optional bAddConditions As Boolean = False)
+    Public Sub SetItems(Optional strItems As String() = Nothing, Optional bClearExisting As Boolean = True, Optional bAddConditions As Boolean = False, Optional bAddQuotes As Boolean = True)
         Dim dctValues As New Dictionary(Of String, String)
         If bAddConditions Then
             For Each strTemp As String In strItems
-                dctValues.Add(strTemp, Chr(34) & strTemp & Chr(34))
+                If bAddQuotes Then
+                    dctValues.Add(strTemp, Chr(34) & strTemp & Chr(34))
+                Else
+                    dctValues.Add(strTemp, strTemp)
+                End If
             Next
             SetItems(dctValues, bClearExisting)
         Else

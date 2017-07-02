@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class sdgSimpleRegOptions
     Inherits System.Windows.Forms.Form
 
@@ -612,6 +628,7 @@ Partial Class sdgSimpleRegOptions
         '
         'ucrSaveLeverageColumnName
         '
+        Me.ucrSaveLeverageColumnName.Enabled = False
         Me.ucrSaveLeverageColumnName.Location = New System.Drawing.Point(9, 92)
         Me.ucrSaveLeverageColumnName.Name = "ucrSaveLeverageColumnName"
         Me.ucrSaveLeverageColumnName.Size = New System.Drawing.Size(255, 24)
@@ -619,6 +636,7 @@ Partial Class sdgSimpleRegOptions
         '
         'ucrSaveStdResidualsColumnName
         '
+        Me.ucrSaveStdResidualsColumnName.Enabled = False
         Me.ucrSaveStdResidualsColumnName.Location = New System.Drawing.Point(9, 65)
         Me.ucrSaveStdResidualsColumnName.Name = "ucrSaveStdResidualsColumnName"
         Me.ucrSaveStdResidualsColumnName.Size = New System.Drawing.Size(255, 24)
@@ -626,6 +644,7 @@ Partial Class sdgSimpleRegOptions
         '
         'ucrSaveResidualsColumnName
         '
+        Me.ucrSaveResidualsColumnName.Enabled = False
         Me.ucrSaveResidualsColumnName.Location = New System.Drawing.Point(9, 38)
         Me.ucrSaveResidualsColumnName.Name = "ucrSaveResidualsColumnName"
         Me.ucrSaveResidualsColumnName.Size = New System.Drawing.Size(255, 24)
@@ -633,6 +652,7 @@ Partial Class sdgSimpleRegOptions
         '
         'ucrSaveFittedColumnName
         '
+        Me.ucrSaveFittedColumnName.Enabled = False
         Me.ucrSaveFittedColumnName.Location = New System.Drawing.Point(9, 11)
         Me.ucrSaveFittedColumnName.Name = "ucrSaveFittedColumnName"
         Me.ucrSaveFittedColumnName.Size = New System.Drawing.Size(255, 24)

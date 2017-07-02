@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat
@@ -26,6 +26,7 @@ Public Class ucrReceiverMetadataProperty
         clsLayerParam = clsNewLayerParam
         'This sub adapts the ucrReceiverMetadataProperty to the type of layer parameter, it's default value, the available values etc, stored within clsLayerParam.
         ClearCodeAndParameters()
+        ucrInputCboParamValue.SetDropDownStyleAsNonEditable()
         If clsLayerParam IsNot Nothing Then
             If clsLayerParam.strLayerParameterDataType = "numeric" Then
                 If clsLayerParam.lstParameterStrings.Count >= 1 Then
@@ -59,6 +60,7 @@ Public Class ucrReceiverMetadataProperty
             ctrActive.Visible = True
             'Needed to remove conditions from previous use of control
             ctrActive.ClearConditions()
+            'Prevents parameter being cleared when setting R code (doesn't actually cause update)
             ctrActive.bUpdateRCodeFromControl = True
             ctrActive.bAddRemoveParameter = False
             clsTempParam = New RParameter(clsLayerParam.strLayerParameterName)
@@ -70,16 +72,16 @@ Public Class ucrReceiverMetadataProperty
 
             If ctrActive.Equals(ucrInputCboParamValue) Then
                 If clsLayerParam.strLayerParameterDataType = "boolean" Then
-                    ucrInputCboParamValue.SetItems({"TRUE", "FALSE"}, bAddConditions:=True)
+                    ucrInputCboParamValue.SetItems({"TRUE", "FALSE"}, bAddConditions:=True, bAddQuotes:=False)
                 ElseIf clsLayerParam.strLayerParameterDataType = "list" Then
                     If clsLayerParam.lstParameterStrings IsNot Nothing AndAlso clsLayerParam.lstParameterStrings.Count > 0 Then
-                        ucrInputCboParamValue.SetItems(clsLayerParam.lstParameterStrings, bAddConditions:=True)
+                        ucrInputCboParamValue.SetItems(clsLayerParam.lstParameterStrings, bAddConditions:=True, bAddQuotes:=False)
                     Else
                         ucrInputCboParamValue.SetItems()
                     End If
                 End If
             End If
-            ctrActive.SetRCode(clsNewRCode, bReset)
+            ctrActive.SetRCode(clsNewRCode, bReset, bCloneIfNeeded:=True)
         End If
     End Sub
 

@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgShowModel
     Inherits System.Windows.Forms.Form
 
@@ -52,7 +68,7 @@ Partial Class dlgShowModel
         Me.lblProbValues.Location = New System.Drawing.Point(243, 49)
         Me.lblProbValues.Name = "lblProbValues"
         Me.lblProbValues.Size = New System.Drawing.Size(63, 13)
-        Me.lblProbValues.TabIndex = 9
+        Me.lblProbValues.TabIndex = 3
         Me.lblProbValues.Text = "Probabilities"
         '
         'ucrDistributionsFOrTablePlus
@@ -60,7 +76,7 @@ Partial Class dlgShowModel
         Me.ucrDistributionsFOrTablePlus.Location = New System.Drawing.Point(246, 97)
         Me.ucrDistributionsFOrTablePlus.Name = "ucrDistributionsFOrTablePlus"
         Me.ucrDistributionsFOrTablePlus.Size = New System.Drawing.Size(247, 185)
-        Me.ucrDistributionsFOrTablePlus.TabIndex = 11
+        Me.ucrDistributionsFOrTablePlus.TabIndex = 5
         '
         'ucrSelectorForDataFrame
         '
@@ -70,7 +86,7 @@ Partial Class dlgShowModel
         Me.ucrSelectorForDataFrame.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForDataFrame.Name = "ucrSelectorForDataFrame"
         Me.ucrSelectorForDataFrame.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorForDataFrame.TabIndex = 3
+        Me.ucrSelectorForDataFrame.TabIndex = 2
         '
         'ucrReceiverExpressionForTablePlus
         '
@@ -89,7 +105,7 @@ Partial Class dlgShowModel
         Me.ucrBase.Location = New System.Drawing.Point(9, 311)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.TabIndex = 11
         '
         'ucrInputProbabilities
         '
@@ -98,7 +114,7 @@ Partial Class dlgShowModel
         Me.ucrInputProbabilities.Location = New System.Drawing.Point(246, 72)
         Me.ucrInputProbabilities.Name = "ucrInputProbabilities"
         Me.ucrInputProbabilities.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputProbabilities.TabIndex = 13
+        Me.ucrInputProbabilities.TabIndex = 4
         '
         'rdoProbabilities
         '
@@ -110,7 +126,7 @@ Partial Class dlgShowModel
         Me.rdoProbabilities.Location = New System.Drawing.Point(114, 14)
         Me.rdoProbabilities.Name = "rdoProbabilities"
         Me.rdoProbabilities.Size = New System.Drawing.Size(118, 27)
-        Me.rdoProbabilities.TabIndex = 15
+        Me.rdoProbabilities.TabIndex = 0
         Me.rdoProbabilities.TabStop = True
         Me.rdoProbabilities.Text = "Probabilities"
         Me.rdoProbabilities.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -126,7 +142,7 @@ Partial Class dlgShowModel
         Me.rdoQuantiles.Location = New System.Drawing.Point(231, 14)
         Me.rdoQuantiles.Name = "rdoQuantiles"
         Me.rdoQuantiles.Size = New System.Drawing.Size(128, 27)
-        Me.rdoQuantiles.TabIndex = 16
+        Me.rdoQuantiles.TabIndex = 1
         Me.rdoQuantiles.TabStop = True
         Me.rdoQuantiles.Text = "Quantiles"
         Me.rdoQuantiles.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -145,7 +161,7 @@ Partial Class dlgShowModel
         Me.ucrChkDisplayGraphResults.Location = New System.Drawing.Point(12, 242)
         Me.ucrChkDisplayGraphResults.Name = "ucrChkDisplayGraphResults"
         Me.ucrChkDisplayGraphResults.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkDisplayGraphResults.TabIndex = 18
+        Me.ucrChkDisplayGraphResults.TabIndex = 6
         '
         'ucrChkEnterValues
         '
@@ -153,14 +169,14 @@ Partial Class dlgShowModel
         Me.ucrChkEnterValues.Location = New System.Drawing.Point(12, 262)
         Me.ucrChkEnterValues.Name = "ucrChkEnterValues"
         Me.ucrChkEnterValues.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkEnterValues.TabIndex = 18
+        Me.ucrChkEnterValues.TabIndex = 8
         '
         'ucrSaveGraphResults
         '
         Me.ucrSaveGraphResults.Location = New System.Drawing.Point(12, 281)
         Me.ucrSaveGraphResults.Name = "ucrSaveGraphResults"
-        Me.ucrSaveGraphResults.Size = New System.Drawing.Size(423, 24)
-        Me.ucrSaveGraphResults.TabIndex = 19
+        Me.ucrSaveGraphResults.Size = New System.Drawing.Size(270, 24)
+        Me.ucrSaveGraphResults.TabIndex = 10
         '
         'dlgShowModel
         '
