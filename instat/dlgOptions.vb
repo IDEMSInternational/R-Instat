@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.ComponentModel
@@ -49,6 +49,9 @@ Public Class dlgOptions
         ucrNudMaxCols.Maximum = Integer.MaxValue
         ucrNudMaxRows.Increment = 10
         ucrNudMaxCols.Increment = 5
+        ucrNudMinutes.Maximum = Integer.MaxValue
+        ucrNudMinutes.Increment = 1
+        ucrNudMinutes.Minimum = 1
         strPreviewText = "R-Instat 2016"
         rtbCommandPreview.Text = strPreviewText
         rtbCommentPreview.Text = strPreviewText
@@ -62,7 +65,11 @@ Public Class dlgOptions
         ucrChkIncludeCommentsbyDefault.SetText("Include Comments by Default")
         ucrChkShowRCommandsinOutputWindow.SetText(" Show R Commands in Output Window")
         ucrChkShowSignifStars.SetText("Show stars on summary tables for coefficients")
+        ucrChkShowDataonGrid.SetText("Display dialog's selected data frame in grid")
         ucrChkIncludeDefaultParams.SetText("Include Default Parameter Values in R Commands")
+        ucrChkAutoSave.SetText("Auto save a backup of data")
+        ucrChkAutoSave.AddToLinkedControls(ucrNudMinutes, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudMinutes.SetLinkedDisplayControl(lblMinutes)
         ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinOutputWindow)
         ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinRViewer)
         ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinSeparateWindows)
@@ -74,12 +81,14 @@ Public Class dlgOptions
 
     Private Sub LoadInstatOptions()
         ucrChkIncludeDefaultParams.Checked = frmMain.clsInstatOptions.bIncludeRDefaultParameters
+        ucrChkAutoSave.Checked = frmMain.clsInstatOptions.bAutoSaveData
         SetOutputFont(frmMain.clsInstatOptions.fntOutput, frmMain.clsInstatOptions.clrOutput)
         SetCommandFont(frmMain.clsInstatOptions.fntScript, frmMain.clsInstatOptions.clrScript)
         SetCommentFont(frmMain.clsInstatOptions.fntComment, frmMain.clsInstatOptions.clrComment)
         SetEditorFont(frmMain.clsInstatOptions.fntEditor, frmMain.clsInstatOptions.clrEditor)
         ucrNudMaxRows.Value = frmMain.clsInstatOptions.iMaxRows
         ucrNudMaxCols.Value = frmMain.clsInstatOptions.iMaxCols
+        ucrNudMinutes.Value = frmMain.clsInstatOptions.iAutoSaveDataMinutes
         ucrNudPreviewRows.Value = frmMain.clsInstatOptions.iPreviewRows
         ucrInputComment.SetName(frmMain.clsInstatOptions.strComment)
         ucrWorkingDirectory.SetName(frmMain.clsInstatOptions.strWorkingDirectory)
@@ -87,6 +96,7 @@ Public Class dlgOptions
         ucrChkShowRCommandsinOutputWindow.Checked = frmMain.clsInstatOptions.bCommandsinOutput
         ucrNudDigits.Value = frmMain.clsInstatOptions.iDigits
         ucrChkShowSignifStars.Checked = frmMain.clsInstatOptions.bShowSignifStars
+        ucrChkShowDataonGrid.Checked = frmMain.clsInstatOptions.bChangeDataFrame
 
         Select Case frmMain.clsInstatOptions.strLanguageCultureCode
             Case "en-GB"
@@ -113,6 +123,7 @@ Public Class dlgOptions
 
     Private Sub SetInstatOptions()
         frmMain.clsInstatOptions.bIncludeRDefaultParameters = ucrChkIncludeDefaultParams.Checked
+        frmMain.clsInstatOptions.bAutoSaveData = ucrChkAutoSave.Checked
         frmMain.clsInstatOptions.SetFormatOutput(fntOutput, clrOutput)
         frmMain.clsInstatOptions.SetFormatComment(fntComment, clrComment)
         frmMain.clsInstatOptions.SetFormatScript(fntCommand, clrCommand)
@@ -121,6 +132,7 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.SetPreviewRows(ucrNudPreviewRows.Value)
         frmMain.clsInstatOptions.SetMaxRows(ucrNudMaxRows.Value)
         frmMain.clsInstatOptions.SetMaxCols(ucrNudMaxCols.Value)
+        frmMain.clsInstatOptions.SetAutoSaveData(ucrNudMinutes.Value)
         frmMain.clsInstatOptions.SetLanguageCultureCode(strCurrLanguageCulture)
         frmMain.clsInstatOptions.SetWorkingDirectory(strWorkingDirectory)
         frmMain.clsInstatOptions.SetGraphDisplayOption(strGraphDisplayOption)
@@ -128,6 +140,7 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.SetCommandInOutpt(ucrChkShowRCommandsinOutputWindow.Checked)
         frmMain.clsInstatOptions.SetDigits(ucrNudDigits.Value)
         frmMain.clsInstatOptions.SetSignifStars(ucrChkShowSignifStars.Checked)
+        frmMain.clsInstatOptions.SetChangeDataFrame(ucrChkShowDataonGrid.Checked)
     End Sub
 
     Private Sub SetView()
@@ -288,7 +301,7 @@ Public Class dlgOptions
 
     End Sub
 
-    Private Sub ucrNudPreviewRows_ValueChanged() Handles ucrNudMaxCols.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged
+    Private Sub ucrNudPreviewRows_ValueChanged() Handles ucrNudMaxCols.ControlValueChanged, ucrNudMinutes.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged, ucrChkAutoSave.ControlValueChanged
         ApplyEnabled(True)
     End Sub
     Private Sub ApplyEnabled(bEnable As Boolean)
@@ -307,6 +320,14 @@ Public Class dlgOptions
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
         Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "336")
+    End Sub
+
+    Private Sub ucrChkAutoSave_ControlValueChanged() Handles ucrChkAutoSave.ControlValueChanged
+        If ucrChkAutoSave.Checked Then
+            lblEvery.Visible = True
+        Else
+            lblEvery.Visible = False
+        End If
     End Sub
 
     Private Sub cmdFactoryReset_Click(sender As Object, e As EventArgs) Handles cmdFactoryReset.Click

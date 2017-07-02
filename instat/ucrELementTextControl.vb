@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class ucrELementTextControl
@@ -89,7 +89,7 @@ Public Class ucrELementTextControl
         strAxis = strNewAxis
     End Sub
 
-    Public Sub SetRCodeForControl(strNewAxis As String, clsNewElementText As RFunction, clsNewThemeFunction As RFunction, clsNewBaseOperator As ROperator, Optional bReset As Boolean = False)
+    Public Sub SetRCodeForControl(strNewAxis As String, clsNewElementText As RFunction, clsNewThemeFunction As RFunction, clsNewBaseOperator As ROperator, Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
         If Not bInitialiseControls Then
             InitialiseControl()
         End If
@@ -99,29 +99,29 @@ Public Class ucrELementTextControl
         clsThemeFunction = clsNewThemeFunction
         clsElementText = clsNewElementText
 
-        ucrNudAngle.SetRCode(clsElementText, bReset)
-        ucrChkAngle.SetRCode(clsElementText, bReset)
+        ucrNudAngle.SetRCode(clsElementText, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrChkAngle.SetRCode(clsElementText, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
-        ucrNudHjust.SetRCode(clsElementText, bReset)
-        ucrChkHjust.SetRCode(clsElementText, bReset)
+        ucrNudHjust.SetRCode(clsElementText, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrChkHjust.SetRCode(clsElementText, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
-        ucrNudLineHeight.SetRCode(clsElementText, bReset)
-        ucrChkLineHeight.SetRCode(clsElementText, bReset)
+        ucrNudLineHeight.SetRCode(clsElementText, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrChkLineHeight.SetRCode(clsElementText, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
-        ucrNudsize.SetRCode(clsElementText, bReset)
-        ucrChkSize.SetRCode(clsElementText, bReset)
+        ucrNudsize.SetRCode(clsElementText, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrChkSize.SetRCode(clsElementText, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
-        ucrNudVjust.SetRCode(clsElementText, bReset)
-        ucrChkVjust.SetRCode(clsElementText, bReset)
+        ucrNudVjust.SetRCode(clsElementText, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrChkVjust.SetRCode(clsElementText, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
-        ucrTextColors.SetRCode(clsElementText, bReset)
-        ucrChkTextColour.SetRCode(clsElementText, bReset)
+        ucrTextColors.SetRCode(clsElementText, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrChkTextColour.SetRCode(clsElementText, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
-        ucrInputTextFace.SetRCode(clsElementText, bReset)
-        ucrChkTextFace.SetRCode(clsElementText, bReset)
+        ucrInputTextFace.SetRCode(clsElementText, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrChkTextFace.SetRCode(clsElementText, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
-        ucrInputTextFamily.SetRCode(clsElementText, bReset)
-        ucrChkTextFamily.SetRCode(clsElementText, bReset)
+        ucrInputTextFamily.SetRCode(clsElementText, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrChkTextFamily.SetRCode(clsElementText, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
         AddRemoveElementAxis()
     End Sub
