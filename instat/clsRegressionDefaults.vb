@@ -1,4 +1,20 @@
-﻿Public Class clsRegressionDefaults
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Public Class clsRegressionDefaults
     Public Shared ReadOnly Property clsDefaultLmFunction As RFunction
         Get
 
@@ -87,8 +103,16 @@
     Public Shared ReadOnly Property clsDefaultAutoplot As RFunction
         Get
             Dim clsAutoplot As New RFunction
+            Dim clsWhichFuntion As New RFunction
+
             clsAutoplot.SetRCommand("autoplot")
             clsAutoplot.iCallType = 3
+            clsWhichFuntion.SetRCommand("c")
+            clsWhichFuntion.AddParameter("1", "1", bIncludeArgumentName:=False)
+            clsWhichFuntion.AddParameter("2", "2", bIncludeArgumentName:=False)
+            clsWhichFuntion.AddParameter("3", "3", bIncludeArgumentName:=False)
+            clsWhichFuntion.AddParameter("5", "5", bIncludeArgumentName:=False)
+            clsAutoplot.AddParameter("which", clsRFunctionParameter:=clsWhichFuntion, iPosition:=1)
             Return clsAutoplot
         End Get
     End Property
