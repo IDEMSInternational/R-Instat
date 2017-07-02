@@ -89,7 +89,7 @@ Partial Class sdgOneVarFitModDisplay
         '
         Me.ucrSavePlots.Location = New System.Drawing.Point(10, 148)
         Me.ucrSavePlots.Name = "ucrSavePlots"
-        Me.ucrSavePlots.Size = New System.Drawing.Size(248, 24)
+        Me.ucrSavePlots.Size = New System.Drawing.Size(261, 24)
         Me.ucrSavePlots.TabIndex = 7
         '
         'rdoPPPlot
@@ -196,7 +196,7 @@ Partial Class sdgOneVarFitModDisplay
         '
         Me.ucrSaveLikelihood.Location = New System.Drawing.Point(10, 148)
         Me.ucrSaveLikelihood.Name = "ucrSaveLikelihood"
-        Me.ucrSaveLikelihood.Size = New System.Drawing.Size(248, 24)
+        Me.ucrSaveLikelihood.Size = New System.Drawing.Size(263, 24)
         Me.ucrSaveLikelihood.TabIndex = 4
         '
         'rdoLik
