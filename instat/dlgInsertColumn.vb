@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
@@ -19,6 +19,7 @@ Public Class dlgInsertColumn
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
     Private clsInsertRowFunction, clsInsertColumnFunction As New RFunction
+
     Private Sub dlgInsertColumn_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             InitialiseDialog()
@@ -54,6 +55,8 @@ Public Class dlgInsertColumn
         ucrPnlBeforeAfter.SetParameter(New RParameter("before", 1))
         ucrPnlBeforeAfter.AddRadioButton(rdoBefore, "TRUE")
         ucrPnlBeforeAfter.AddRadioButton(rdoAfter, "FALSE")
+        ucrPnlBeforeAfter.AddParameterValuesCondition(rdoBefore, "before", "TRUE")
+        ucrPnlBeforeAfter.AddParameterValuesCondition(rdoAfter, "before", "FALSE")
 
         ucrNudNumberOfRows.SetParameter(New RParameter("number_rows", 2))
         ucrNudNumberOfRows.SetMinMax(1, Integer.MaxValue)
@@ -65,13 +68,7 @@ Public Class dlgInsertColumn
         dctBeforeAfter.Add("Before", "TRUE")
         dctBeforeAfter.Add("After", "FALSE")
         ucrInputBeforeAfter.SetItems(dctBeforeAfter)
-        ucrInputBeforeAfter.SetRDefault("FALSE")
         ucrInputBeforeAfter.SetDropDownStyleAsNonEditable()
-
-        ucrPnlInsertColumns.SetParameter(New RParameter("before", 3))
-        ucrPnlInsertColumns.AddRadioButton(rdoAtStart, "TRUE")
-        ucrPnlInsertColumns.AddRadioButton(rdoAtEnd, "FALSE")
-        ucrPnlInsertColumns.AddRadioButton(rdoBeforeAfter, "TRUE")
 
         ucrNudNumberOfColumns.SetParameter(New RParameter("num_cols", 4))
         ucrNudNumberOfColumns.SetRDefault(1)
@@ -80,28 +77,28 @@ Public Class dlgInsertColumn
         ucrInputDefaultValue.SetParameter(New RParameter("col_data", 5))
         ucrInputDefaultValue.SetRDefault("NA")
 
-        ucrPnlInsertColumns.AddParameterValuesCondition(rdoAtStart, "before", "TRUE")
-        ucrPnlInsertColumns.AddParameterValuesCondition(rdoAtStart, "before", "FALSE", False)
+        ucrPnlInsertColumns.SetParameter(New RParameter("before", 3))
+        ucrPnlInsertColumns.AddRadioButton(rdoAtStart, "TRUE")
+        ucrPnlInsertColumns.AddRadioButton(rdoAtEnd, "FALSE")
+        ucrPnlInsertColumns.AddRadioButton(rdoBeforeAfter)
+
         ucrPnlInsertColumns.AddParameterPresentCondition(rdoAtStart, "adjacent_column", False)
-
-        ucrPnlInsertColumns.AddParameterValuesCondition(rdoAtEnd, "before", "FALSE")
-        ucrPnlInsertColumns.AddParameterValuesCondition(rdoAtEnd, "before", "TRUE", False)
         ucrPnlInsertColumns.AddParameterPresentCondition(rdoAtEnd, "adjacent_column", False)
-
-        ucrPnlInsertColumns.AddParameterValuesCondition(rdoBeforeAfter, "before", "TRUE")
-        ucrPnlInsertColumns.AddParameterValuesCondition(rdoBeforeAfter, "before", "FALSE")
         ucrPnlInsertColumns.AddParameterPresentCondition(rdoBeforeAfter, "adjacent_column")
-        ucrPnlInsertColumns.SetRDefault("FALSE")
 
-        ucrPnlInsertColumns.AddToLinkedControls(ucrInputBeforeAfter, {rdoBeforeAfter}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlInsertColumns.AddToLinkedControls(ucrReceiverColumnsToInsert, {rdoBeforeAfter}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlColumnsOrRows.AddToLinkedControls(ucrPnlInsertColumns, {rdoInsertColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlColumnsOrRows.AddToLinkedControls(ucrNudNumberOfColumns, {rdoInsertColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlColumnsOrRows.AddToLinkedControls(ucrInputDefaultValue, {rdoInsertColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlInsertColumns.AddToLinkedControls(ucrInputBeforeAfter, {rdoBeforeAfter}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlInsertColumns.AddToLinkedControls(ucrReceiverColumnsToInsert, {rdoBeforeAfter}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+
+        ucrPnlInsertColumns.SetLinkedDisplayControl(grpInsert)
+
+        ucrPnlColumnsOrRows.AddToLinkedControls(ucrPnlInsertColumns, {rdoInsertColumns}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlColumnsOrRows.AddToLinkedControls(ucrNudNumberOfColumns, {rdoInsertColumns}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlColumnsOrRows.AddToLinkedControls(ucrInputDefaultValue, {rdoInsertColumns}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlColumnsOrRows.AddToLinkedControls(ucrInputPrefixForNewColumn, {rdoInsertColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlColumnsOrRows.AddToLinkedControls(ucrPnlBeforeAfter, {rdoInsertRows}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlColumnsOrRows.AddToLinkedControls(ucrNudNumberOfRows, {rdoInsertRows}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlColumnsOrRows.AddToLinkedControls(ucrNudStartRow, {rdoInsertRows}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlColumnsOrRows.AddToLinkedControls(ucrPnlBeforeAfter, {rdoInsertRows}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlColumnsOrRows.AddToLinkedControls(ucrNudNumberOfRows, {rdoInsertRows}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlColumnsOrRows.AddToLinkedControls(ucrNudStartRow, {rdoInsertRows}, bNewLinkedHideIfParameterMissing:=True)
+
 
         ucrNudNumberOfColumns.SetLinkedDisplayControl(lblNumberOfColumnsToInsert)
         ucrInputDefaultValue.SetLinkedDisplayControl(lblDefaultValue)
@@ -112,7 +109,6 @@ Public Class dlgInsertColumn
         ucrPnlBeforeAfter.SetLinkedDisplayControl(grpOptions)
         ucrNudNumberOfRows.SetLinkedDisplayControl(lblNumberOfRowsToInsert)
         ucrNudStartRow.SetLinkedDisplayControl(lblStartPos)
-        ucrPnlInsertColumns.SetLinkedDisplayControl(grpInsert)
         ucrReceiverColumnsToInsert.SetLinkedDisplayControl(lblColumn)
     End Sub
 
@@ -139,6 +135,11 @@ Public Class dlgInsertColumn
     End Sub
 
     Private Sub ReopenDialog()
+        If rdoInsertColumns.Checked Then
+            grpInsert.Visible = True
+        ElseIf rdoInsertRows.Checked Then
+            grpOptions.Visible = True
+        End If
         ucrSelectorInsertColumns.Reset()
         ucrNudStartRow.SetMinMax(1, ucrSelectorInsertColumns.ucrAvailableDataFrames.iDataFrameLength)
         If ucrSelectorInsertColumns.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
@@ -157,7 +158,7 @@ Public Class dlgInsertColumn
         ucrInputPrefixForNewColumn.SetRCode(clsInsertColumnFunction, bReset)
         ucrReceiverColumnsToInsert.SetRCode(clsInsertColumnFunction, bReset)
         ucrSelectorInsertColumns.SetRCode(clsInsertColumnFunction, bReset)
-        ucrPnlColumnsOrRows.SetRCode(clsInsertColumnFunction, bReset)
+        ucrPnlColumnsOrRows.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrPnlInsertColumns.SetRCode(clsInsertColumnFunction, bReset)
         ucrInputBeforeAfter.SetRCode(clsInsertColumnFunction, bReset)
     End Sub
@@ -191,14 +192,6 @@ Public Class dlgInsertColumn
             ucrBase.clsRsyntax.SetBaseRFunction(clsInsertColumnFunction)
         ElseIf rdoInsertRows.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsInsertRowFunction)
-        End If
-    End Sub
-
-    Private Sub ucrPnlStartEnd_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlInsertColumns.ControlValueChanged
-        If rdoAtEnd.Checked Then
-            clsInsertColumnFunction.AddParameter("before", "FALSE")
-        ElseIf rdoAtStart.Checked
-            clsInsertColumnFunction.AddParameter("before", "TRUE")
         End If
     End Sub
 
