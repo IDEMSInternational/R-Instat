@@ -87,7 +87,7 @@ Partial Class dlgFourVariableModelling
         '
         'cmdModelOptions
         '
-        Me.cmdModelOptions.Location = New System.Drawing.Point(309, 281)
+        Me.cmdModelOptions.Location = New System.Drawing.Point(237, 298)
         Me.cmdModelOptions.Name = "cmdModelOptions"
         Me.cmdModelOptions.Size = New System.Drawing.Size(106, 23)
         Me.cmdModelOptions.TabIndex = 30
@@ -98,7 +98,7 @@ Partial Class dlgFourVariableModelling
         'lblModelPreview
         '
         Me.lblModelPreview.AutoSize = True
-        Me.lblModelPreview.Location = New System.Drawing.Point(9, 285)
+        Me.lblModelPreview.Location = New System.Drawing.Point(11, 353)
         Me.lblModelPreview.Name = "lblModelPreview"
         Me.lblModelPreview.Size = New System.Drawing.Size(80, 13)
         Me.lblModelPreview.TabIndex = 27
@@ -107,7 +107,7 @@ Partial Class dlgFourVariableModelling
         '
         'cmdDisplayOptions
         '
-        Me.cmdDisplayOptions.Location = New System.Drawing.Point(309, 310)
+        Me.cmdDisplayOptions.Location = New System.Drawing.Point(349, 298)
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
         Me.cmdDisplayOptions.Size = New System.Drawing.Size(106, 23)
         Me.cmdDisplayOptions.TabIndex = 33
@@ -129,7 +129,7 @@ Partial Class dlgFourVariableModelling
         'chkSaveModel
         '
         Me.chkSaveModel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.chkSaveModel.Location = New System.Drawing.Point(10, 308)
+        Me.chkSaveModel.Location = New System.Drawing.Point(12, 376)
         Me.chkSaveModel.Name = "chkSaveModel"
         Me.chkSaveModel.Size = New System.Drawing.Size(104, 24)
         Me.chkSaveModel.TabIndex = 31
@@ -192,62 +192,77 @@ Partial Class dlgFourVariableModelling
         '
         'ucrModelName
         '
+        Me.ucrModelName.AddQuotesIfUnrecognised = True
         Me.ucrModelName.IsReadOnly = False
-        Me.ucrModelName.Location = New System.Drawing.Point(91, 310)
+        Me.ucrModelName.Location = New System.Drawing.Point(119, 379)
         Me.ucrModelName.Name = "ucrModelName"
         Me.ucrModelName.Size = New System.Drawing.Size(203, 21)
         Me.ucrModelName.TabIndex = 36
         '
         'ucrThirdExplanatoryVariable
         '
+        Me.ucrThirdExplanatoryVariable.frmParent = Me
         Me.ucrThirdExplanatoryVariable.Location = New System.Drawing.Point(266, 250)
         Me.ucrThirdExplanatoryVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrThirdExplanatoryVariable.Name = "ucrThirdExplanatoryVariable"
         Me.ucrThirdExplanatoryVariable.Selector = Nothing
         Me.ucrThirdExplanatoryVariable.Size = New System.Drawing.Size(128, 26)
+        Me.ucrThirdExplanatoryVariable.strNcFilePath = ""
         Me.ucrThirdExplanatoryVariable.TabIndex = 35
+        Me.ucrThirdExplanatoryVariable.ucrSelector = Nothing
         '
         'ucrModelPreview
         '
+        Me.ucrModelPreview.AddQuotesIfUnrecognised = True
+        Me.ucrModelPreview.IsMultiline = False
         Me.ucrModelPreview.IsReadOnly = False
-        Me.ucrModelPreview.Location = New System.Drawing.Point(91, 281)
+        Me.ucrModelPreview.Location = New System.Drawing.Point(93, 349)
         Me.ucrModelPreview.Name = "ucrModelPreview"
-        Me.ucrModelPreview.Size = New System.Drawing.Size(203, 21)
+        Me.ucrModelPreview.Size = New System.Drawing.Size(361, 21)
         Me.ucrModelPreview.TabIndex = 28
         '
         'ucrFamily
         '
-        Me.ucrFamily.Location = New System.Drawing.Point(10, 193)
+        Me.ucrFamily.Location = New System.Drawing.Point(14, 298)
         Me.ucrFamily.Name = "ucrFamily"
         Me.ucrFamily.Size = New System.Drawing.Size(225, 35)
         Me.ucrFamily.TabIndex = 29
         '
         'ucrSecondExplanatoryVariable
         '
+        Me.ucrSecondExplanatoryVariable.frmParent = Me
         Me.ucrSecondExplanatoryVariable.Location = New System.Drawing.Point(266, 175)
         Me.ucrSecondExplanatoryVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSecondExplanatoryVariable.Name = "ucrSecondExplanatoryVariable"
         Me.ucrSecondExplanatoryVariable.Selector = Nothing
         Me.ucrSecondExplanatoryVariable.Size = New System.Drawing.Size(128, 27)
+        Me.ucrSecondExplanatoryVariable.strNcFilePath = ""
         Me.ucrSecondExplanatoryVariable.TabIndex = 26
+        Me.ucrSecondExplanatoryVariable.ucrSelector = Nothing
         '
         'ucrFirstExplanatory
         '
+        Me.ucrFirstExplanatory.frmParent = Me
         Me.ucrFirstExplanatory.Location = New System.Drawing.Point(266, 99)
         Me.ucrFirstExplanatory.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrFirstExplanatory.Name = "ucrFirstExplanatory"
         Me.ucrFirstExplanatory.Selector = Nothing
         Me.ucrFirstExplanatory.Size = New System.Drawing.Size(128, 23)
+        Me.ucrFirstExplanatory.strNcFilePath = ""
         Me.ucrFirstExplanatory.TabIndex = 22
+        Me.ucrFirstExplanatory.ucrSelector = Nothing
         '
         'ucrResponse
         '
+        Me.ucrResponse.frmParent = Me
         Me.ucrResponse.Location = New System.Drawing.Point(266, 44)
         Me.ucrResponse.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrResponse.Name = "ucrResponse"
         Me.ucrResponse.Selector = Nothing
         Me.ucrResponse.Size = New System.Drawing.Size(128, 22)
+        Me.ucrResponse.strNcFilePath = ""
         Me.ucrResponse.TabIndex = 19
+        Me.ucrResponse.ucrSelector = Nothing
         '
         'ucrSelectorFourVariableModelling
         '
@@ -261,13 +276,14 @@ Partial Class dlgFourVariableModelling
         '
         'ucrBaseFourVariableModelling
         '
-        Me.ucrBaseFourVariableModelling.Location = New System.Drawing.Point(10, 338)
+        Me.ucrBaseFourVariableModelling.Location = New System.Drawing.Point(10, 406)
         Me.ucrBaseFourVariableModelling.Name = "ucrBaseFourVariableModelling"
         Me.ucrBaseFourVariableModelling.Size = New System.Drawing.Size(405, 52)
         Me.ucrBaseFourVariableModelling.TabIndex = 0
         '
         'ucrInputModelOperators1
         '
+        Me.ucrInputModelOperators1.AddQuotesIfUnrecognised = True
         Me.ucrInputModelOperators1.IsReadOnly = False
         Me.ucrInputModelOperators1.Location = New System.Drawing.Point(355, 124)
         Me.ucrInputModelOperators1.Name = "ucrInputModelOperators1"
@@ -276,6 +292,7 @@ Partial Class dlgFourVariableModelling
         '
         'ucrInputModelOperators2
         '
+        Me.ucrInputModelOperators2.AddQuotesIfUnrecognised = True
         Me.ucrInputModelOperators2.IsReadOnly = False
         Me.ucrInputModelOperators2.Location = New System.Drawing.Point(355, 201)
         Me.ucrInputModelOperators2.Name = "ucrInputModelOperators2"
@@ -286,7 +303,7 @@ Partial Class dlgFourVariableModelling
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(524, 398)
+        Me.ClientSize = New System.Drawing.Size(513, 460)
         Me.Controls.Add(Me.ucrInputModelOperators2)
         Me.Controls.Add(Me.ucrInputModelOperators1)
         Me.Controls.Add(Me.lblSecondOperator)
