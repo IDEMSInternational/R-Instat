@@ -41,6 +41,7 @@ Public Class dlgTransposeColumns
         ucrReceiverColumsToTranspose.SetParameterIsRFunction()
         ucrReceiverColumsToTranspose.Selector = ucrSelectorTransposeColumns
         ucrReceiverColumsToTranspose.SetMeAsReceiver()
+        ucrReceiverColumsToTranspose.bForceAsDataFrame = True
 
         'The checkbox is not yet implemented in the updated code as it was not implemented in pre-updated code
         ucrChkNameNewColumns.SetText("Name New Columns")
