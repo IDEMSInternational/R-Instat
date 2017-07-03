@@ -83,13 +83,23 @@ instat_object$set("public", "append_summaries_to_data_object", function(out, dat
 } 
 )
 
-instat_object$set("public", "calculate_summary", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), store_results = TRUE, drop = TRUE, na.rm = FALSE, return_output = FALSE, summary_name = NA, weights = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, perc_return_all = FALSE, ...) {
+instat_object$set("public", "calculate_summary", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), store_results = TRUE, drop = TRUE, na.rm = FALSE, return_output = FALSE, summary_name = NA, weights = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, perc_return_all = FALSE, silent = FALSE, ...) {
   include_columns_to_summarise <- TRUE
   if(is.null(columns_to_summarise) || length(columns_to_summarise) == 0) {
     # temporary fix for doing counts of a data frame
     # dplyr cannot count data frame groups without passing a column (https://stackoverflow.com/questions/44217265/passing-correct-data-frame-from-within-dplyrsummarise)
     # This is a known issue (https://github.com/tidyverse/dplyr/issues/2752)
-    if(length(summaries) != 1 || summaries != count_label) stop("When there are no columns to summarise can only use count function as summary")
+    if(length(summaries) != 1 || summaries != count_label) {
+      mes <- "When there are no columns to summarise can only use count function as summary"
+      if(silent) {
+        warning(mes, "Continuing summaries by using count only.")
+        columns_to_summarise <- self$get_column_names(data_name)[1]
+        summaries <- count_label
+      }
+      else {
+        stop(mes)
+      }
+    }
     else columns_to_summarise <- self$get_column_names(data_name)[1]
     include_columns_to_summarise <- FALSE
   }
