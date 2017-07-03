@@ -52,7 +52,7 @@ Public Class ucrReorder
                 lstAvailableData.Columns.Add("Objects")
         End Select
         lstAvailableData.Columns(0).Width = -2
-        loadList()
+        LoadList()
     End Sub
 
     Private Sub cmdUp_Click(sender As Object, e As EventArgs) Handles cmdUp.Click
@@ -158,16 +158,16 @@ Public Class ucrReorder
 
     Public Sub setDataframes(dfDataframes As ucrDataFrame)
         ucrDataFrameList = dfDataframes
-        loadList()
+        LoadList()
     End Sub
 
     Public Sub setReceiver(dfSingle As ucrReceiverSingle)
         ucrReceiver = dfSingle
-        loadList()
+        LoadList()
     End Sub
 
-    Public Sub loadList()
-        Dim vecNames As CharacterVector
+    Public Sub LoadList()
+        Dim vecNames As CharacterVector = Nothing
         Select Case strDataType
             Case "column"
                 If ucrDataFrameList IsNot Nothing AndAlso ucrDataFrameList.cboAvailableDataFrames.Text <> "" Then
@@ -219,11 +219,11 @@ Public Class ucrReorder
     End Sub
 
     Private Sub ucrDataFrameList_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrDataFrameList.DataFrameChanged
-        loadList()
+        LoadList()
     End Sub
 
     Private Sub ucrReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiver.SelectionChanged
-        loadList()
+        LoadList()
     End Sub
 
     'to update this to check if the order has changed
@@ -270,7 +270,6 @@ Public Class ucrReorder
     End Sub
 
     Private Sub ucrReorder_OrderChanged() Handles Me.OrderChanged
-
         OnControlValueChanged()
     End Sub
 
@@ -279,5 +278,9 @@ Public Class ucrReorder
             clsTempParam = New RParameter
         End If
         clsTempParam.SetArgumentValue(GetVariableNames(bWithQuotes))
+    End Sub
+
+    Private Sub ucrReorder_Load(sender As Object, e As EventArgs) Handles Me.Load
+        LoadList()
     End Sub
 End Class
