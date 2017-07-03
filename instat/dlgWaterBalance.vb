@@ -65,12 +65,14 @@ Public Class dlgWaterBalance
         ucrReceiverStation.Selector = ucrSelectorForWaterBalance
         ucrReceiverStation.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "station" & Chr(34)})
         ucrReceiverStation.bAutoFill = True
+        ucrReceiverStation.strSelectorHeading = "Station Variables"
 
         ucrReceiverDate.SetParameter(New RParameter("date", 0))
         ucrReceiverDate.SetParameterIsString()
         ucrReceiverDate.Selector = ucrSelectorForWaterBalance
         ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
         ucrReceiverDate.bAutoFill = True
+        ucrReceiverDate.strSelectorHeading = "Date Variables"
 
         ucrReceiverDOY.SetParameter(New RParameter("day", 0))
         ucrReceiverDOY.SetParameterIsString()
@@ -78,6 +80,7 @@ Public Class dlgWaterBalance
         ucrReceiverDOY.Selector = ucrSelectorForWaterBalance
         ucrReceiverDOY.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "doy" & Chr(34)})
         ucrReceiverDOY.bAutoFill = True
+        ucrReceiverDOY.strSelectorHeading = "Day Variables"
 
         ucrReceiverRainfall.SetParameter(New RParameter("x", 0))
         ucrReceiverRainfall.SetParameterIsRFunction()
@@ -85,10 +88,12 @@ Public Class dlgWaterBalance
         ucrReceiverRainfall.Selector = ucrSelectorForWaterBalance
         ucrReceiverRainfall.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "rain" & Chr(34)})
         ucrReceiverRainfall.bAutoFill = True
+        ucrReceiverRainfall.strSelectorHeading = "Rain Variables"
 
         ucrReceiverYear.Selector = ucrSelectorForWaterBalance
         ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
         ucrReceiverYear.bAutoFill = True
+        ucrReceiverYear.strSelectorHeading = "Year Variables"
 
         'Days
         ucrNudFrom.SetParameter(New RParameter("from", 1))
