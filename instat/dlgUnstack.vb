@@ -108,6 +108,12 @@ Public Class dlgUnstack
         End If
     End Sub
 
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeforControls(True)
+        TestOKEnabled()
+    End Sub
+
     Private Sub ReopenDialog()
     End Sub
 
@@ -115,16 +121,6 @@ Public Class dlgUnstack
         If (Not ucrNewDFName.bUserTyped) AndAlso ucrSelectorForUnstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
             ucrNewDFName.SetName(ucrSelectorForUnstack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_unstacked")
         End If
-    End Sub
-
-    Private Sub ucrSelector_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForUnstack.ControlValueChanged
-        NewDefaultName()
-    End Sub
-
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
-        SetRCodeforControls(True)
-        TestOKEnabled()
     End Sub
 
     Private Sub SetFormula()
@@ -138,6 +134,10 @@ Public Class dlgUnstack
                 i = i + 1
             Next
         End If
+    End Sub
+
+    Private Sub ucrSelector_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForUnstack.ControlValueChanged
+        NewDefaultName()
     End Sub
 
     Private Sub ucrReceiverFormula_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrIDColumns.ControlValueChanged, ucrFactorToUnstackReceiver.ControlValueChanged
