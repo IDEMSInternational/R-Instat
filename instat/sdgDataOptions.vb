@@ -38,8 +38,6 @@ Public Class sdgDataOptions
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
     End Sub
 
