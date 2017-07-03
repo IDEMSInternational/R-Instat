@@ -41,11 +41,11 @@ Partial Class dlgColumnStats
         Me.lblSelectedVariables = New System.Windows.Forms.Label()
         Me.lblByFactors = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.cmdSummaries = New System.Windows.Forms.Button()
         Me.ucrChkStoreResults = New instat.ucrCheck()
         Me.ucrChkOmitMissing = New instat.ucrCheck()
         Me.ucrChkPrintOutput = New instat.ucrCheck()
         Me.ucrChkDropUnusedLevels = New instat.ucrCheck()
-        Me.cmdSummaries = New System.Windows.Forms.Button()
         Me.ucrReceiverByFactor = New instat.ucrReceiverMultiple()
         Me.ucrReceiverSelectedVariables = New instat.ucrReceiverMultiple()
         Me.ucrSelectorForColumnStatistics = New instat.ucrSelectorByDataFrameAddRemove()
@@ -84,6 +84,16 @@ Partial Class dlgColumnStats
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
         '
+        'cmdSummaries
+        '
+        Me.cmdSummaries.Location = New System.Drawing.Point(265, 292)
+        Me.cmdSummaries.Name = "cmdSummaries"
+        Me.cmdSummaries.Size = New System.Drawing.Size(77, 23)
+        Me.cmdSummaries.TabIndex = 6
+        Me.cmdSummaries.Tag = "Summaries"
+        Me.cmdSummaries.Text = "Summaries..."
+        Me.cmdSummaries.UseVisualStyleBackColor = True
+        '
         'ucrChkStoreResults
         '
         Me.ucrChkStoreResults.Checked = False
@@ -116,16 +126,6 @@ Partial Class dlgColumnStats
         Me.ucrChkDropUnusedLevels.Size = New System.Drawing.Size(148, 20)
         Me.ucrChkDropUnusedLevels.TabIndex = 2
         '
-        'cmdSummaries
-        '
-        Me.cmdSummaries.Location = New System.Drawing.Point(330, 294)
-        Me.cmdSummaries.Name = "cmdSummaries"
-        Me.cmdSummaries.Size = New System.Drawing.Size(77, 23)
-        Me.cmdSummaries.TabIndex = 6
-        Me.cmdSummaries.Tag = "Summaries"
-        Me.cmdSummaries.Text = "Summaries..."
-        Me.cmdSummaries.UseVisualStyleBackColor = True
-        '
         'ucrReceiverByFactor
         '
         Me.ucrReceiverByFactor.frmParent = Me
@@ -134,7 +134,9 @@ Partial Class dlgColumnStats
         Me.ucrReceiverByFactor.Name = "ucrReceiverByFactor"
         Me.ucrReceiverByFactor.Selector = Nothing
         Me.ucrReceiverByFactor.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverByFactor.strNcFilePath = ""
         Me.ucrReceiverByFactor.TabIndex = 4
+        Me.ucrReceiverByFactor.ucrSelector = Nothing
         '
         'ucrReceiverSelectedVariables
         '
@@ -144,7 +146,9 @@ Partial Class dlgColumnStats
         Me.ucrReceiverSelectedVariables.Name = "ucrReceiverSelectedVariables"
         Me.ucrReceiverSelectedVariables.Selector = Nothing
         Me.ucrReceiverSelectedVariables.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverSelectedVariables.strNcFilePath = ""
         Me.ucrReceiverSelectedVariables.TabIndex = 2
+        Me.ucrReceiverSelectedVariables.ucrSelector = Nothing
         '
         'ucrSelectorForColumnStatistics
         '

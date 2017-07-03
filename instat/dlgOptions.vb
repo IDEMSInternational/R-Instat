@@ -19,6 +19,8 @@ Imports System.Globalization
 Imports System.Threading
 Imports instat.Translations
 Imports System.IO
+Imports instat
+
 Public Class dlgOptions
     Public strCurrLanguageCulture As String
     Public strOutputWindowDisplay As String
@@ -52,7 +54,11 @@ Public Class dlgOptions
         ucrNudMinutes.Maximum = Integer.MaxValue
         ucrNudMinutes.Increment = 1
         ucrNudMinutes.Minimum = 1
-        strPreviewText = "R-Instat 2016"
+        ucrNudWaitSeconds.Minimum = 1
+        ucrNudWaitSeconds.Maximum = Integer.MaxValue
+        ucrNudWaitSeconds.Increment = 0.5
+
+        strPreviewText = "R-Instat 2017"
         rtbCommandPreview.Text = strPreviewText
         rtbCommentPreview.Text = strPreviewText
         rtbOutputPreview.Text = strPreviewText
@@ -68,6 +74,7 @@ Public Class dlgOptions
         ucrChkShowDataonGrid.SetText("Display dialog's selected data frame in grid")
         ucrChkIncludeDefaultParams.SetText("Include Default Parameter Values in R Commands")
         ucrChkAutoSave.SetText("Auto save a backup of data")
+        ucrChkShowWaitDialog.SetText("Show waiting dialog when command takes longer than")
         ucrChkAutoSave.AddToLinkedControls(ucrNudMinutes, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudMinutes.SetLinkedDisplayControl(lblMinutes)
         ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinOutputWindow)
@@ -97,17 +104,18 @@ Public Class dlgOptions
         ucrNudDigits.Value = frmMain.clsInstatOptions.iDigits
         ucrChkShowSignifStars.Checked = frmMain.clsInstatOptions.bShowSignifStars
         ucrChkShowDataonGrid.Checked = frmMain.clsInstatOptions.bChangeDataFrame
-
+        ucrChkShowWaitDialog.Checked = frmMain.clsInstatOptions.bShowWaitDialog
+        ucrNudWaitSeconds.Value = frmMain.clsInstatOptions.iWaitTimeDelaySeconds
         Select Case frmMain.clsInstatOptions.strLanguageCultureCode
             Case "en-GB"
                 rdoEnglish.Checked = True
-            ' temp disabled as not functioning
-            'Case "fr-FR"
-            '    rdoFrench.Checked = True
-            'Case "sw-KE"
-            '    rdoKiswahili.Checked = True
-            'Case "es-ES"
-            '    rdoSpanish.Checked = True
+                ' temp disabled as not functioning
+                'Case "fr-FR"
+                '    rdoFrench.Checked = True
+                'Case "sw-KE"
+                '    rdoKiswahili.Checked = True
+                'Case "es-ES"
+                '    rdoSpanish.Checked = True
             Case Else
                 rdoEnglish.Checked = True
         End Select
@@ -141,6 +149,8 @@ Public Class dlgOptions
         frmMain.clsInstatOptions.SetDigits(ucrNudDigits.Value)
         frmMain.clsInstatOptions.SetSignifStars(ucrChkShowSignifStars.Checked)
         frmMain.clsInstatOptions.SetChangeDataFrame(ucrChkShowDataonGrid.Checked)
+        frmMain.clsInstatOptions.SetShowWaitDialog(ucrChkShowWaitDialog.Checked)
+        frmMain.clsInstatOptions.SetWaitTimeDelaySeconds(ucrNudWaitSeconds.Value)
     End Sub
 
     Private Sub SetView()
@@ -301,9 +311,10 @@ Public Class dlgOptions
 
     End Sub
 
-    Private Sub ucrNudPreviewRows_ValueChanged() Handles ucrNudMaxCols.ControlValueChanged, ucrNudMinutes.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged, ucrChkAutoSave.ControlValueChanged
+    Private Sub AllControls_ControlValueChanged() Handles ucrNudMaxCols.ControlValueChanged, ucrNudMinutes.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged, ucrChkAutoSave.ControlValueChanged, ucrChkShowWaitDialog.ControlValueChanged, ucrNudWaitSeconds.ControlValueChanged
         ApplyEnabled(True)
     End Sub
+
     Private Sub ApplyEnabled(bEnable As Boolean)
         cmdApply.Enabled = bEnable
         cmdOk.Enabled = bEnable
@@ -381,4 +392,8 @@ Public Class dlgOptions
         End If
     End Sub
 
+    Private Sub ucrChkShowWaitDialog_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkShowWaitDialog.ControlValueChanged
+        ucrNudWaitSeconds.Enabled = ucrChkShowWaitDialog.Checked
+        lblWaitSeconds.Enabled = ucrChkShowWaitDialog.Checked
+    End Sub
 End Class

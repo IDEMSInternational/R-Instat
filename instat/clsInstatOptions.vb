@@ -40,6 +40,8 @@ Imports RDotNet
     Public bChangeDataFrame As Nullable(Of Boolean)
     Public bAutoSaveData As Nullable(Of Boolean)
     Public iAutoSaveDataMinutes As Nullable(Of Integer)
+    Public bShowWaitDialog As Nullable(Of Boolean)
+    Public iWaitTimeDelaySeconds As Nullable(Of Integer)
 
     Public Sub New(Optional bSetOptions As Boolean = True)
         'TODO Is this sensible to do in constructor?
@@ -67,6 +69,8 @@ Imports RDotNet
         bChangeDataFrame = clsInstatOptionsDefaults.DEFAULTbChangeDataFrame
         bAutoSaveData = clsInstatOptionsDefaults.DEFAULTbAutoSaveData
         iAutoSaveDataMinutes = clsInstatOptionsDefaults.DEFAULTiAutoSaveDataMinutes
+        bShowWaitDialog = clsInstatOptionsDefaults.DEFAULTbShowWaitDialog
+        iWaitTimeDelaySeconds = clsInstatOptionsDefaults.DEFAULTiWaitTimeDelaySeconds
         If bSetOptions Then
             SetOptions()
         End If
@@ -191,6 +195,18 @@ Imports RDotNet
             SetAutoSaveDataMinutes(iAutoSaveDataMinutes)
         Else
             SetAutoSaveDataMinutes(clsInstatOptionsDefaults.DEFAULTiAutoSaveDataMinutes)
+        End If
+
+        If bShowWaitDialog.HasValue Then
+            SetShowWaitDialog(bShowWaitDialog)
+        Else
+            SetShowWaitDialog(clsInstatOptionsDefaults.DEFAULTbShowWaitDialog)
+        End If
+
+        If iWaitTimeDelaySeconds.HasValue Then
+            SetWaitTimeDelaySeconds(iWaitTimeDelaySeconds)
+        Else
+            SetWaitTimeDelaySeconds(clsInstatOptionsDefaults.DEFAULTiWaitTimeDelaySeconds)
         End If
     End Sub
 
@@ -349,5 +365,15 @@ Imports RDotNet
 
     Public Sub SetAutoSaveDataMinutes(iNewMinutes As Integer)
         iAutoSaveDataMinutes = iNewMinutes
+    End Sub
+
+    Public Sub SetShowWaitDialog(bNewShow As Boolean)
+        bShowWaitDialog = bNewShow
+        frmMain.clsRLink.SetShowWaitDialog(bShowWaitDialog)
+    End Sub
+
+    Public Sub SetWaitTimeDelaySeconds(iNewTimeInSeconds As Integer)
+        iWaitTimeDelaySeconds = iNewTimeInSeconds
+        frmMain.clsRLink.SetWaitDelayTime(iWaitTimeDelaySeconds)
     End Sub
 End Class

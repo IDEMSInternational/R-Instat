@@ -154,6 +154,7 @@ Public Class ucrSelector
     'End Sub
 
     Public Sub ShowDataOptionsDialog()
+        sdgDataOptions.SetCurrentDataFrame(strCurrentDataFrame, False)
         sdgDataOptions.ShowDialog()
         SetDataOptionsSettings()
     End Sub
