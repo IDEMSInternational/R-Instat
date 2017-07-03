@@ -3,7 +3,7 @@ data_object$set("public", "merge_data", function(new_data, by = NULL, type = "le
   #TODO how to use match argument with dplyr join functions
   old_metadata <- attributes(private$data)
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
-  
+
   if(type == "left") {
     new_data <- dplyr::left_join(curr_data, new_data, by)
   }
@@ -100,7 +100,7 @@ instat_object$set("public", "calculate_summary", function(data_name, columns_to_
   if(!store_results) save <- 0
   else save <- 2
   
-  summaries_display <- sapply(summaries, function(x) ifelse(startsWith(x, "summary_"), substring(x, 9), x))
+  summaries_display <- as.vector(sapply(summaries, function(x) ifelse(startsWith(x, "summary_"), substring(x, 9), x)))
   
   if(percentage_type == "factors") {
     manip_factors <- intersect(factors, perc_total_factors)
@@ -178,7 +178,8 @@ instat_object$set("public", "calculate_summary", function(data_name, columns_to_
         if(!perc_decimal) {
           function_exp <- paste0("(", function_exp, ") * 100")
         }
-        summary_calculation <- instat_calculation$new(type = "calculation", result_name = paste0("perc_", result_name),
+        perc_result_name <- paste0("perc_", result_name)
+        summary_calculation <- instat_calculation$new(type = "calculation", result_name = perc_result_name,
                                                       function_exp = function_exp,
                                                       calculated_from = list(), save = save, sub_calculations = list(totals_calculation, values_calculation))
       }
@@ -189,7 +190,6 @@ instat_object$set("public", "calculate_summary", function(data_name, columns_to_
     curr_filter <- self$get_current_filter(data_name)
     curr_filter_name <- curr_filter[["name"]]
     curr_filter_calc <- self$get_filter_as_instat_calculation(data_name, curr_filter_name)
-    print(curr_filter_calc$function_exp)
     manipulations <- c(curr_filter_calc, manipulations)
   }
   combined_calc_sum <- instat_calculation$new(type="combination", sub_calculations = sub_calculations, manipulations = manipulations)

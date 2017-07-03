@@ -668,8 +668,8 @@ instat_object$set("public", "anova_tables", function(data_name, x_col_names, y_c
 } 
 )
 
-instat_object$set("public", "remove_columns_in_data", function(data_name, cols) {
-  self$get_data_objects(data_name)$remove_columns_in_data(cols = cols)
+instat_object$set("public", "remove_columns_in_data", function(data_name, cols, allow_delete_all = FALSE) {
+  self$get_data_objects(data_name)$remove_columns_in_data(cols = cols, allow_delete_all = allow_delete_all)
 } 
 )
 
