@@ -177,6 +177,7 @@ Public Class dlgPrincipalComponentAnalysis
         clsRBarPlot0.SetOperation("+")
         clsRBarPlot.SetOperation("+")
         clsRFactor.SetRCommand("cbind")
+
         clsRMelt.SetRCommand("melt")
         clsRMelt.AddParameter("", clsRFunctionParameter:=clsREigenVectors) ' not sure if this will work!
         clsRFactor.AddParameter("", clsRFunctionParameter:=clsRMelt)
@@ -226,13 +227,13 @@ Public Class dlgPrincipalComponentAnalysis
         'sdgPrincipalComponentAnalysis.PCAOptions()
         ' this is wrong. just here for now.
         If sdgPrincipalComponentAnalysis.ucrChkEigenvalues.Checked Then
-            frmMain.clsRLink.RunScript(clsREigenValues.ToScript(), 2)
+            'frmMain.clsRLink.RunScript(clsREigenValues.ToScript(), 2)
         End If
         If sdgPrincipalComponentAnalysis.ucrChkEigenvectors.Checked Then
-            frmMain.clsRLink.RunScript(clsREigenVectors.ToScript(), 2)
+            'frmMain.clsRLink.RunScript(clsREigenVectors.ToScript(), 2)
         End If
         If sdgPrincipalComponentAnalysis.ucrChkRotation.Checked Then
-            frmMain.clsRLink.RunScript(clsRRotation.ToScript(), 2)
+            'frmMain.clsRLink.RunScript(clsRRotation.ToScript(), 2)
         End If
         If sdgPrincipalComponentAnalysis.rdoScreePlot.Checked Then
             frmMain.clsRLink.RunScript(clsRScreePlot.GetScript(), 3)
@@ -248,7 +249,7 @@ Public Class dlgPrincipalComponentAnalysis
     End Sub
 
     Private Sub cmdPCAOptions_Click(sender As Object, e As EventArgs) Handles cmdPCAOptions.Click
-        sdgPrincipalComponentAnalysis.SetRFunction(clsREigenValues, clsREigenVectors, clsRRotation, clsRScreePlotFunction, clsRVariablesPlotFunction, clsRIndividualsPlotFunction, clsRBiplotFunction, clsRFactor, bResetSubdialog)
+        sdgPrincipalComponentAnalysis.SetRFunction(ucrBase.clsRsyntax, clsREigenValues, clsREigenVectors, clsRRotation, clsRScreePlotFunction, clsRVariablesPlotFunction, clsRIndividualsPlotFunction, clsRBiplotFunction, clsRFactor, bResetSubdialog)
         bResetSubdialog = False
         sdgPrincipalComponentAnalysis.ShowDialog()
     End Sub

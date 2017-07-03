@@ -51,6 +51,7 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.ucrPnlGeom = New instat.UcrPanel()
         Me.ucrPnlGraphics = New instat.UcrPanel()
         Me.ucrSdgButtons = New instat.ucrButtonsSubdialogue()
+        Me.rdoNoPlot = New System.Windows.Forms.RadioButton()
         Me.tbRegOptions.SuspendLayout()
         Me.tbDisplay.SuspendLayout()
         Me.tbGraphics.SuspendLayout()
@@ -85,6 +86,7 @@ Partial Class sdgPrincipalComponentAnalysis
         '
         'tbGraphics
         '
+        Me.tbGraphics.Controls.Add(Me.rdoNoPlot)
         Me.tbGraphics.Controls.Add(Me.rdoBarPlot)
         Me.tbGraphics.Controls.Add(Me.rdoIndividualsPlot)
         Me.tbGraphics.Controls.Add(Me.grpScree)
@@ -104,7 +106,7 @@ Partial Class sdgPrincipalComponentAnalysis
         'rdoBarPlot
         '
         Me.rdoBarPlot.AutoSize = True
-        Me.rdoBarPlot.Location = New System.Drawing.Point(10, 106)
+        Me.rdoBarPlot.Location = New System.Drawing.Point(10, 132)
         Me.rdoBarPlot.Name = "rdoBarPlot"
         Me.rdoBarPlot.Size = New System.Drawing.Size(61, 17)
         Me.rdoBarPlot.TabIndex = 5
@@ -115,7 +117,7 @@ Partial Class sdgPrincipalComponentAnalysis
         'rdoIndividualsPlot
         '
         Me.rdoIndividualsPlot.AutoSize = True
-        Me.rdoIndividualsPlot.Location = New System.Drawing.Point(10, 60)
+        Me.rdoIndividualsPlot.Location = New System.Drawing.Point(10, 86)
         Me.rdoIndividualsPlot.Name = "rdoIndividualsPlot"
         Me.rdoIndividualsPlot.Size = New System.Drawing.Size(96, 17)
         Me.rdoIndividualsPlot.TabIndex = 2
@@ -135,9 +137,9 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.grpScree.Controls.Add(Me.lblChoiceScree)
         Me.grpScree.Controls.Add(Me.grpGeom)
         Me.grpScree.Controls.Add(Me.lblDim)
-        Me.grpScree.Location = New System.Drawing.Point(10, 136)
+        Me.grpScree.Location = New System.Drawing.Point(10, 156)
         Me.grpScree.Name = "grpScree"
-        Me.grpScree.Size = New System.Drawing.Size(365, 212)
+        Me.grpScree.Size = New System.Drawing.Size(365, 192)
         Me.grpScree.TabIndex = 34
         Me.grpScree.TabStop = False
         Me.grpScree.Text = "Plot Options"
@@ -218,7 +220,7 @@ Partial Class sdgPrincipalComponentAnalysis
         'rdoBiplot
         '
         Me.rdoBiplot.AutoSize = True
-        Me.rdoBiplot.Location = New System.Drawing.Point(10, 83)
+        Me.rdoBiplot.Location = New System.Drawing.Point(10, 109)
         Me.rdoBiplot.Name = "rdoBiplot"
         Me.rdoBiplot.Size = New System.Drawing.Size(51, 17)
         Me.rdoBiplot.TabIndex = 3
@@ -229,7 +231,7 @@ Partial Class sdgPrincipalComponentAnalysis
         'rdoVariablesPlot
         '
         Me.rdoVariablesPlot.AutoSize = True
-        Me.rdoVariablesPlot.Location = New System.Drawing.Point(10, 37)
+        Me.rdoVariablesPlot.Location = New System.Drawing.Point(10, 63)
         Me.rdoVariablesPlot.Name = "rdoVariablesPlot"
         Me.rdoVariablesPlot.Size = New System.Drawing.Size(89, 17)
         Me.rdoVariablesPlot.TabIndex = 1
@@ -240,12 +242,10 @@ Partial Class sdgPrincipalComponentAnalysis
         'rdoScreePlot
         '
         Me.rdoScreePlot.AutoSize = True
-        Me.rdoScreePlot.Checked = True
-        Me.rdoScreePlot.Location = New System.Drawing.Point(10, 14)
+        Me.rdoScreePlot.Location = New System.Drawing.Point(10, 38)
         Me.rdoScreePlot.Name = "rdoScreePlot"
         Me.rdoScreePlot.Size = New System.Drawing.Size(74, 17)
         Me.rdoScreePlot.TabIndex = 0
-        Me.rdoScreePlot.TabStop = True
         Me.rdoScreePlot.Tag = "Scree_Plot"
         Me.rdoScreePlot.Text = "Scree Plot"
         Me.rdoScreePlot.UseVisualStyleBackColor = True
@@ -357,9 +357,9 @@ Partial Class sdgPrincipalComponentAnalysis
         '
         'ucrPnlGraphics
         '
-        Me.ucrPnlGraphics.Location = New System.Drawing.Point(3, 6)
+        Me.ucrPnlGraphics.Location = New System.Drawing.Point(6, 6)
         Me.ucrPnlGraphics.Name = "ucrPnlGraphics"
-        Me.ucrPnlGraphics.Size = New System.Drawing.Size(167, 124)
+        Me.ucrPnlGraphics.Size = New System.Drawing.Size(207, 144)
         Me.ucrPnlGraphics.TabIndex = 4
         '
         'ucrSdgButtons
@@ -368,6 +368,17 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.ucrSdgButtons.Name = "ucrSdgButtons"
         Me.ucrSdgButtons.Size = New System.Drawing.Size(142, 30)
         Me.ucrSdgButtons.TabIndex = 1
+        '
+        'rdoNoPlot
+        '
+        Me.rdoNoPlot.AutoSize = True
+        Me.rdoNoPlot.Location = New System.Drawing.Point(10, 14)
+        Me.rdoNoPlot.Name = "rdoNoPlot"
+        Me.rdoNoPlot.Size = New System.Drawing.Size(60, 17)
+        Me.rdoNoPlot.TabIndex = 35
+        Me.rdoNoPlot.Tag = "Scree_Plot"
+        Me.rdoNoPlot.Text = "No Plot"
+        Me.rdoNoPlot.UseVisualStyleBackColor = True
         '
         'sdgPrincipalComponentAnalysis
         '
@@ -424,4 +435,5 @@ Partial Class sdgPrincipalComponentAnalysis
     Friend WithEvents ucrPnlGeom As UcrPanel
     Friend WithEvents ucrPnlGraphics As UcrPanel
     Friend WithEvents ucrChkIncludePercentage As ucrCheck
+    Friend WithEvents rdoNoPlot As RadioButton
 End Class

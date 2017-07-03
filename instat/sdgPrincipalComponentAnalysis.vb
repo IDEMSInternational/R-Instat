@@ -13,6 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License k
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat
 Imports instat.Translations
 Public Class sdgPrincipalComponentAnalysis
     Private bControlsInitialised As Boolean = False
@@ -23,7 +24,7 @@ Public Class sdgPrincipalComponentAnalysis
     Public clsRScores, clsPCAModel, clsRVariablesPlotFunction, clsRVariablesPlotTheme, clsRCoord, clsRContrib, clsREig, clsRFactor, clsRMelt As New RFunction
     Public clsRScreePlotFunction, clsRScreePlotTheme, clsRIndividualsPlotFunction, clsRIndividualsPlotTheme, clsRBiplotFunction, clsRBiplotTheme, clsRBarPlotFunction, clsRBarPlotGeom, clsRBarPlotFacet, clsRBarPlotAes As New RFunction
     'Public clsRScreePlot, clsRVariablesPlot, clsRIndividualsPlot, clsRBiplot As New RSyntax
-
+    Private clsRsyntax As RSyntax
     Dim clsRBarPlot, clsRBarPlot0 As New ROperator
 
     Private Sub sdgPrincipalComponentAnalysis_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -50,17 +51,22 @@ Public Class sdgPrincipalComponentAnalysis
         ucrChkRotation.SetText("Rotation")
         ucrChkRotation.SetValueIfChecked(2)
 
+        ucrNudDim.SetMinMax(1, 2)
+        ucrNudDim2.SetMinMax(1, 2)
+
+        ucrPnlGraphics.AddRadioButton(rdoNoPlot)
         ucrPnlGraphics.AddRadioButton(rdoScreePlot)
         ucrPnlGraphics.AddRadioButton(rdoVariablesPlot)
         ucrPnlGraphics.AddRadioButton(rdoIndividualsPlot)
         ucrPnlGraphics.AddRadioButton(rdoBiplot)
         ucrPnlGraphics.AddRadioButton(rdoBarPlot)
 
-        ucrPnlGraphics.AddFunctionNamesCondition(rdoScreePlot, "fviz_screeplot") ' need to link these rdos with their class. This will be like "Add additional base function"
-        ucrPnlGraphics.AddFunctionNamesCondition(rdoVariablesPlot, "fviz_pca_var")
-        ucrPnlGraphics.AddFunctionNamesCondition(rdoIndividualsPlot, "fviz_pca_ind")
-        ucrPnlGraphics.AddFunctionNamesCondition(rdoBiplot, "fviz_pca_biplot")
-        ucrPnlGraphics.AddFunctionNamesCondition(rdoBarPlot, "ggplot")
+        ucrPnlGraphics.AddRSyntaxContainsFunctionNamesCondition(rdoScreePlot, {"fviz_screeplot"}) ' need to link these rdos with their class. This will be like "Add additional base function"
+        ucrPnlGraphics.AddRSyntaxContainsFunctionNamesCondition(rdoVariablesPlot, {"fviz_pca_var"})
+        ucrPnlGraphics.AddRSyntaxContainsFunctionNamesCondition(rdoIndividualsPlot, {"fviz_pca_ind"})
+        ucrPnlGraphics.AddRSyntaxContainsFunctionNamesCondition(rdoBiplot, {"fviz_pca_biplot"})
+        ucrPnlGraphics.AddRSyntaxContainsFunctionNamesCondition(rdoBarPlot, {"ggplot"})
+        ucrPnlGraphics.AddRSyntaxContainsFunctionNamesCondition(rdoNoPlot, {"fviz_screeplot", "fviz_pca_var", "fviz_pca_ind", "fviz_pca_biplot", "ggplot"}, False)
 
         ucrPnlGeom.SetParameter(New RParameter("geom"))
         ucrPnlGeom.AddRadioButton(rdoOne, Chr(34) & "bar" & Chr(34))
@@ -100,19 +106,73 @@ Public Class sdgPrincipalComponentAnalysis
         ucrPnlGraphics.AddToLinkedControls(ucrSelectorFactor, {rdoBarPlot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrPnlGraphics.AddToLinkedControls(ucrReceiverFactor, {rdoBarPlot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrReceiverFactor.SetLinkedDisplayControl(lblFactorVariable)
+        bControlsInitialised = True
     End Sub
 
+    Public Sub SetRFunction(clsNewRsyntax As RSyntax, clsNewREigenValues As RFunction, clsNewREigenVectors As RFunction, clsNewRRotation As RFunction, clsNewScreePlotFunction As RFunction, clsNewVariablesPlotFunction As RFunction, clsNewIndividualsPlotFunction As RFunction, clsNewBiplotFunction As RFunction, clsNewBarPlotFunction As RFunction, Optional bReset As Boolean = False)
+        If Not bControlsInitialised Then
+            InitialiseControls()
+        End If
+        clsRsyntax = clsNewRsyntax
+        clsREigenValues = clsNewREigenValues
+        clsREigenVectors = clsNewREigenVectors
+        clsRRotation = clsNewRRotation
+        clsRScreePlotFunction = clsNewScreePlotFunction
+        clsRVariablesPlotFunction = clsNewVariablesPlotFunction
+        clsRIndividualsPlotFunction = clsNewIndividualsPlotFunction
+        clsRBiplotFunction = clsNewBiplotFunction
+        clsRFactor = clsNewBarPlotFunction
+
+        ucrPnlGeom.AddAdditionalCodeParameterPair(clsRVariablesPlotFunction, clsNewRParameter:=New RParameter("Geom"), iAdditionalPairNo:=1)
+        ucrPnlGeom.AddAdditionalCodeParameterPair(clsRIndividualsPlotFunction, clsNewRParameter:=New RParameter("Geom"), iAdditionalPairNo:=2)
+        ucrPnlGeom.AddAdditionalCodeParameterPair(clsRBiplotFunction, clsNewRParameter:=New RParameter("Geom"), iAdditionalPairNo:=3)
+        ucrPnlGeom.SetRCode(clsRScreePlotFunction, bReset)
+
+        ucrLabel.AddAdditionalCodeParameterPair(clsRVariablesPlotFunction, New RParameter("label"), iAdditionalPairNo:=1)
+        ucrLabel.AddAdditionalCodeParameterPair(clsRIndividualsPlotFunction, New RParameter("label"), iAdditionalPairNo:=2)
+        ucrLabel.AddAdditionalCodeParameterPair(clsRBiplotFunction, New RParameter("label"), iAdditionalPairNo:=3)
+        ucrLabel.SetRCode(clsRScreePlotFunction, bReset)
+
+        ucrReceiverFactor.SetRCode(clsRFactor, bReset, bCloneIfNeeded:=True)
+        ucrChkIncludePercentage.SetRSyntax(clsRsyntax, bReset)
+        ucrChkEigenvalues.SetRSyntax(clsRsyntax, bReset)
+        ucrChkEigenvectors.SetRSyntax(clsRsyntax, bReset)
+        ucrChkRotation.SetRSyntax(clsRsyntax, bReset)
+        ucrPnlGraphics.SetRSyntax(clsRsyntax, bReset)
+        ucrLabel.SetRCode(clsRVariablesPlotFunction, bReset)
+    End Sub
+
+    Private Sub ucrChkEigenvalues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEigenvalues.ControlValueChanged
+        clsRsyntax.AddToAfterCodes(clsREigenValues, iPosition:=1)
+        clsREigenValues.iCallType = 2
+    End Sub
+
+    Private Sub ucrChkEigenvectors_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEigenvectors.ControlValueChanged
+        clsRsyntax.AddToAfterCodes(clsREigenVectors, iPosition:=2)
+        clsREigenVectors.iCallType = 2
+    End Sub
+
+    Private Sub ucrChkRotation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkRotation.ControlValueChanged
+        clsRsyntax.AddToAfterCodes(clsRRotation, iPosition:=3)
+        clsRRotation.iCallType = 2
+    End Sub
+
+    Private Sub ucrPnlGraphics_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGraphics.ControlValueChanged
+        If rdoScreePlot.Checked Then
+
+        End If
+    End Sub
     Private Sub InitialiseDialog()
-        ucrNudDim.Minimum = 1
-        ucrNudDim2.Minimum = 1
+        'ucrNudDim.Minimum = 1
+        'ucrNudDim2.Minimum = 1
     End Sub
 
     Public Sub SetDefaults()
         ucrSelectorFactor.Focus()
         ucrChkIncludePercentage.Checked = False
         rdoScreePlot.Checked = True
-        ucrNudDim.Value = 1
-        ucrNudDim2.Value = 2
+        'ucrNudDim.Value = 1
+        'ucrNudDim2.Value = 2
         rdoBoth.Checked = True
         Dimensions()
         DisplayOptions()
@@ -215,38 +275,6 @@ Public Class sdgPrincipalComponentAnalysis
     Private Sub rdoPlots_CheckedChanged(sender As Object, e As EventArgs) Handles rdoScreePlot.CheckedChanged, rdoBarPlot.CheckedChanged, rdoBiplot.CheckedChanged, rdoVariablesPlot.CheckedChanged, rdoIndividualsPlot.CheckedChanged
         DisplayOptions()
         GeomChecked()
-    End Sub
-
-    Public Sub SetRFunction(clsNewREigenValues As RFunction, clsNewREigenVectors As RFunction, clsNewRRotation As RFunction, clsNewScreePlotFunction As RFunction, clsNewVariablesPlotFunction As RFunction, clsNewIndividualsPlotFunction As RFunction, clsNewBiplotFunction As RFunction, clsNewBarPlotFunction As RFunction, Optional bReset As Boolean = False)
-        If Not bControlsInitialised Then
-            InitialiseControls()
-        End If
-        clsREigenValues = clsNewREigenValues
-        clsREigenVectors = clsNewREigenVectors
-        clsRRotation = clsNewRRotation
-        clsRScreePlotFunction = clsNewScreePlotFunction
-        clsRVariablesPlotFunction = clsNewVariablesPlotFunction
-        clsRIndividualsPlotFunction = clsNewIndividualsPlotFunction
-        clsRBiplotFunction = clsNewBiplotFunction
-        clsRFactor = clsNewBarPlotFunction
-
-        ucrChkEigenvalues.SetRCode(clsREigenValues, bReset)
-        ucrChkEigenvectors.SetRCode(clsREigenVectors, bReset)
-        ucrChkRotation.SetRCode(clsRRotation, bReset)
-
-        ucrPnlGeom.AddAdditionalCodeParameterPair(clsRVariablesPlotFunction, clsNewRParameter:=New RParameter("Geom"), iAdditionalPairNo:=1)
-        ucrPnlGeom.AddAdditionalCodeParameterPair(clsRIndividualsPlotFunction, clsNewRParameter:=New RParameter("Geom"), iAdditionalPairNo:=2)
-        ucrPnlGeom.AddAdditionalCodeParameterPair(clsRBiplotFunction, clsNewRParameter:=New RParameter("Geom"), iAdditionalPairNo:=3)
-        ucrPnlGeom.SetRCode(clsRScreePlotFunction, bReset)
-
-        ucrLabel.AddAdditionalCodeParameterPair(clsRVariablesPlotFunction, New RParameter("label"), iAdditionalPairNo:=1)
-        ucrLabel.AddAdditionalCodeParameterPair(clsRIndividualsPlotFunction, New RParameter("label"), iAdditionalPairNo:=2)
-        ucrLabel.AddAdditionalCodeParameterPair(clsRBiplotFunction, New RParameter("label"), iAdditionalPairNo:=3)
-        ucrLabel.SetRCode(clsRScreePlotFunction, bReset)
-
-        ucrChkIncludePercentage.SetRCode(clsRScreePlotFunction, bReset)
-
-        ucrReceiverFactor.SetRCode(clsRFactor, bReset)
     End Sub
 
     ' One of the options in the "Graphics" tab is what should be plotted on the graph. These options can change depending on which radio button is selected. This sub is about running the correct code for each graphic options
