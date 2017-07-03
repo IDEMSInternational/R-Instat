@@ -59,6 +59,10 @@ Public Class RLink
 
     Private grdDataView As ReoGridControl
 
+    Private bShowWaitDialog As Boolean = True
+    'Time in seconds to wait before showing waiting dialog
+    Private iWaitDelay As Integer = 2
+
     Public Sub StartREngine(Optional strScript As String = "", Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bSeparateThread As Boolean = True)
         Try
             REngine.SetEnvironmentVariables()
@@ -561,14 +565,16 @@ Public Class RLink
                     thrDelay = New Threading.Thread(Sub()
                                                         Dim t As New Stopwatch
                                                         t.Start()
-                                                        While t.ElapsedMilliseconds < 500 AndAlso thrRScript.IsAlive
+                                                        While t.ElapsedMilliseconds < (iWaitDelay * 1000) AndAlso thrRScript.IsAlive
                                                             Threading.Thread.Sleep(5)
                                                         End While
                                                         evtWaitHandleDelayDone.Set()
                                                     End Sub)
                     thrDelay.IsBackground = True
                     thrWaitDisplay = New Threading.Thread(Sub()
-                                                              frmSetupLoading.Show()
+                                                              If bShowWaitDialog Then
+                                                                  frmSetupLoading.Show()
+                                                              End If
                                                               While thrRScript.IsAlive
                                                                   If bErrorMessageOpen Then
                                                                       frmSetupLoading.Hide()
@@ -1094,4 +1100,16 @@ Public Class RLink
         End If
         Return bIsVarMetadata
     End Function
+
+    Public Sub SetShowWaitDialog(bNewShow As Boolean)
+        bShowWaitDialog = bNewShow
+    End Sub
+
+    Public Sub SetWaitDelayTime(iTimeInSeconds As Integer)
+        If iTimeInSeconds <= 0 Then
+            MsgBox("Wait time must be a positive integer. Resetting to default of 2 seconds.", MsgBoxStyle.Exclamation, "Invalid value")
+            iTimeInSeconds = 2
+        End If
+        iWaitDelay = iTimeInSeconds
+    End Sub
 End Class
