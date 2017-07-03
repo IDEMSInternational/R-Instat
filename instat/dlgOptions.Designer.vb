@@ -90,7 +90,9 @@ Partial Class dlgOptions
         Me.cmdEditorFont = New System.Windows.Forms.Button()
         Me.lblFont = New System.Windows.Forms.Label()
         Me.tbpCommands = New System.Windows.Forms.TabPage()
-        Me.pnScriptOptions = New System.Windows.Forms.Panel()
+        Me.lblWaitSeconds = New System.Windows.Forms.Label()
+        Me.ucrChkShowWaitDialog = New instat.ucrCheck()
+        Me.ucrNudWaitSeconds = New instat.ucrNud()
         Me.ucrChkIncludeDefaultParams = New instat.ucrCheck()
         Me.tbpDataView = New System.Windows.Forms.TabPage()
         Me.lblEvery = New System.Windows.Forms.Label()
@@ -129,7 +131,6 @@ Partial Class dlgOptions
         Me.tbpEditor.SuspendLayout()
         Me.pnFormatEditor.SuspendLayout()
         Me.tbpCommands.SuspendLayout()
-        Me.pnScriptOptions.SuspendLayout()
         Me.tbpDataView.SuspendLayout()
         Me.tbpWorkingDirectory.SuspendLayout()
         Me.tbpGraphDisplay.SuspendLayout()
@@ -634,7 +635,10 @@ Partial Class dlgOptions
         '
         'tbpCommands
         '
-        Me.tbpCommands.Controls.Add(Me.pnScriptOptions)
+        Me.tbpCommands.Controls.Add(Me.lblWaitSeconds)
+        Me.tbpCommands.Controls.Add(Me.ucrChkShowWaitDialog)
+        Me.tbpCommands.Controls.Add(Me.ucrNudWaitSeconds)
+        Me.tbpCommands.Controls.Add(Me.ucrChkIncludeDefaultParams)
         Me.tbpCommands.Location = New System.Drawing.Point(4, 22)
         Me.tbpCommands.Name = "tbpCommands"
         Me.tbpCommands.Padding = New System.Windows.Forms.Padding(3)
@@ -644,19 +648,39 @@ Partial Class dlgOptions
         Me.tbpCommands.Text = "Commands"
         Me.tbpCommands.UseVisualStyleBackColor = True
         '
-        'pnScriptOptions
+        'lblWaitSeconds
         '
-        Me.pnScriptOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.pnScriptOptions.Controls.Add(Me.ucrChkIncludeDefaultParams)
-        Me.pnScriptOptions.Location = New System.Drawing.Point(10, 10)
-        Me.pnScriptOptions.Name = "pnScriptOptions"
-        Me.pnScriptOptions.Size = New System.Drawing.Size(267, 28)
-        Me.pnScriptOptions.TabIndex = 1
+        Me.lblWaitSeconds.AutoSize = True
+        Me.lblWaitSeconds.Location = New System.Drawing.Point(357, 50)
+        Me.lblWaitSeconds.Name = "lblWaitSeconds"
+        Me.lblWaitSeconds.Size = New System.Drawing.Size(47, 13)
+        Me.lblWaitSeconds.TabIndex = 8
+        Me.lblWaitSeconds.Text = "seconds"
+        '
+        'ucrChkShowWaitDialog
+        '
+        Me.ucrChkShowWaitDialog.Checked = False
+        Me.ucrChkShowWaitDialog.Location = New System.Drawing.Point(6, 47)
+        Me.ucrChkShowWaitDialog.Name = "ucrChkShowWaitDialog"
+        Me.ucrChkShowWaitDialog.Size = New System.Drawing.Size(293, 20)
+        Me.ucrChkShowWaitDialog.TabIndex = 6
+        '
+        'ucrNudWaitSeconds
+        '
+        Me.ucrNudWaitSeconds.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWaitSeconds.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudWaitSeconds.Location = New System.Drawing.Point(305, 47)
+        Me.ucrNudWaitSeconds.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudWaitSeconds.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWaitSeconds.Name = "ucrNudWaitSeconds"
+        Me.ucrNudWaitSeconds.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudWaitSeconds.TabIndex = 5
+        Me.ucrNudWaitSeconds.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrChkIncludeDefaultParams
         '
         Me.ucrChkIncludeDefaultParams.Checked = False
-        Me.ucrChkIncludeDefaultParams.Location = New System.Drawing.Point(2, 2)
+        Me.ucrChkIncludeDefaultParams.Location = New System.Drawing.Point(6, 20)
         Me.ucrChkIncludeDefaultParams.Name = "ucrChkIncludeDefaultParams"
         Me.ucrChkIncludeDefaultParams.Size = New System.Drawing.Size(261, 21)
         Me.ucrChkIncludeDefaultParams.TabIndex = 3
@@ -907,7 +931,7 @@ Partial Class dlgOptions
         Me.pnFormatEditor.ResumeLayout(False)
         Me.pnFormatEditor.PerformLayout()
         Me.tbpCommands.ResumeLayout(False)
-        Me.pnScriptOptions.ResumeLayout(False)
+        Me.tbpCommands.PerformLayout()
         Me.tbpDataView.ResumeLayout(False)
         Me.tbpDataView.PerformLayout()
         Me.tbpWorkingDirectory.ResumeLayout(False)
@@ -951,7 +975,6 @@ Partial Class dlgOptions
     Friend WithEvents cmdEditorFont As Button
     Friend WithEvents lblFont As Label
     Friend WithEvents tbpCommands As TabPage
-    Friend WithEvents pnScriptOptions As Panel
     Friend WithEvents tbpDataView As TabPage
     Friend WithEvents lblMaxRows As Label
     Friend WithEvents tbpWorkingDirectory As TabPage
@@ -984,4 +1007,7 @@ Partial Class dlgOptions
     Friend WithEvents ucrNudMinutes As ucrNud
     Friend WithEvents lblMinutes As Label
     Friend WithEvents lblEvery As Label
+    Friend WithEvents lblWaitSeconds As Label
+    Friend WithEvents ucrChkShowWaitDialog As ucrCheck
+    Friend WithEvents ucrNudWaitSeconds As ucrNud
 End Class
