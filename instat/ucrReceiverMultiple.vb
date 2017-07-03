@@ -352,6 +352,7 @@ Public Class ucrReceiverMultiple
         Dim strDataTypes As New List(Of String)
         Dim strDataFrame As String
         Dim strCurrentType As String
+        Dim expTypes As SymbolicExpression
 
         If Selector IsNot Nothing Then
             If bTypeSet Then
@@ -366,7 +367,10 @@ Public Class ucrReceiverMultiple
                 clsGetDataType.AddParameter("property", "data_type_label")
                 clsGetDataType.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
                 clsGetDataType.AddParameter("column", GetVariableNames())
-                strDataTypes = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript()).AsCharacter.ToList()
+                expTypes = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript(), bSilent:=True)
+                If expTypes IsNot Nothing AndAlso expTypes.Type <> Internals.SymbolicExpressionType.Null Then
+                    strDataTypes = expTypes.AsCharacter.ToList()
+                End If
                 If bUnique Then
                     strDataTypes = strDataTypes.Distinct().ToList()
                 End If
