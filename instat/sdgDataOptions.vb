@@ -20,6 +20,7 @@ Imports RDotNet
 Public Class sdgDataOptions
     Public bFirstLoad As Boolean
     Private clsFilterPreview As RFunction
+    Private strCurrentDataFrame As String
 
     Public Sub New()
 
@@ -56,10 +57,6 @@ Public Class sdgDataOptions
         rdoAllDialogs.Checked = True
     End Sub
 
-    Private Sub ReopenDialog()
-        ucrSelectorFilters.Reset()
-    End Sub
-
     Public Property ShowHiddenColumns As Boolean
         Get
             Return chkShowHiddenColumns.Checked
@@ -70,9 +67,12 @@ Public Class sdgDataOptions
     End Property
 
     Private Sub cmdNewFilter_Click(sender As Object, e As EventArgs) Handles cmdDefineNewFilter.Click
+        sdgCreateFilter.ucrCreateFilter.SetDefaultDataFrame(strCurrentDataFrame)
         sdgCreateFilter.ShowDialog()
         If sdgCreateFilter.bFilterDefined Then
             frmMain.clsRLink.RunScript(sdgCreateFilter.clsCurrentFilter.ToScript(), strComment:="Create Filter subdialog: Created new filter")
+            ucrSelectorFilters.SetDataframe(sdgCreateFilter.ucrCreateFilter.ucrSelectorForFitler.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            ucrReceiverFilter.Add(sdgCreateFilter.ucrCreateFilter.ucrInputFilterName.GetText())
         End If
         ucrSelectorFilters.LoadList()
     End Sub
@@ -95,10 +95,17 @@ Public Class sdgDataOptions
         If Not ucrReceiverFilter.IsEmpty() Then
             clsFilterPreview.AddParameter("filter_name", ucrReceiverFilter.GetVariableNames())
             ucrInputFilterPreview.SetName(frmMain.clsRLink.RunInternalScriptGetValue(clsFilterPreview.ToScript()).AsCharacter(0))
+        Else
+            ucrInputFilterPreview.SetName("")
         End If
     End Sub
 
     Private Sub ucrSelectorFilters_DataFrameChanged() Handles ucrSelectorFilters.DataFrameChanged
         clsFilterPreview.AddParameter("data_name", Chr(34) & ucrSelectorFilters.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
+    End Sub
+
+    Public Sub SetCurrentDataFrame(strNewDataFrame As String, Optional bEnabled As Boolean = False)
+        strCurrentDataFrame = strNewDataFrame
+        ucrSelectorFilters.SetDataframe(strCurrentDataFrame, bEnabled)
     End Sub
 End Class
