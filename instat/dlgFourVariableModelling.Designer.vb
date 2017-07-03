@@ -38,52 +38,29 @@ Partial Class dlgFourVariableModelling
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.chkFirstFunction = New System.Windows.Forms.CheckBox()
-        Me.chkConvertToVariate = New System.Windows.Forms.CheckBox()
         Me.cmdModelOptions = New System.Windows.Forms.Button()
         Me.lblModelPreview = New System.Windows.Forms.Label()
         Me.cmdDisplayOptions = New System.Windows.Forms.Button()
         Me.lblSecondExplanatoryVariable = New System.Windows.Forms.Label()
-        Me.chkSaveModel = New System.Windows.Forms.CheckBox()
         Me.lblFirstExplanatoryVariable = New System.Windows.Forms.Label()
         Me.lblResponse = New System.Windows.Forms.Label()
         Me.lblThirdExplanatoryVariable = New System.Windows.Forms.Label()
         Me.lblFirstOperator = New System.Windows.Forms.Label()
         Me.lblSecondOperator = New System.Windows.Forms.Label()
-        Me.ucrModelName = New instat.ucrInputComboBox()
-        Me.ucrThirdExplanatoryVariable = New instat.ucrReceiverSingle()
+        Me.ucrInputModelOperators2 = New instat.ucrInputComboBox()
+        Me.ucrInputModelOperators1 = New instat.ucrInputComboBox()
+        Me.ucrReceiverThirdExplanatory = New instat.ucrReceiverSingle()
         Me.ucrModelPreview = New instat.ucrInputTextBox()
-        Me.ucrFamily = New instat.ucrDistributions()
-        Me.ucrSecondExplanatoryVariable = New instat.ucrReceiverSingle()
-        Me.ucrFirstExplanatory = New instat.ucrReceiverSingle()
-        Me.ucrResponse = New instat.ucrReceiverSingle()
+        Me.ucrDistributionChoice = New instat.ucrDistributions()
+        Me.ucrReceiverSecondExplanatory = New instat.ucrReceiverSingle()
+        Me.ucrReceiverFirstExplanatory = New instat.ucrReceiverSingle()
+        Me.ucrReceiverResponse = New instat.ucrReceiverSingle()
         Me.ucrSelectorFourVariableModelling = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBaseFourVariableModelling = New instat.ucrButtons()
-        Me.ucrInputModelOperators1 = New instat.ucrInputComboBox()
-        Me.ucrInputModelOperators2 = New instat.ucrInputComboBox()
+        Me.ucrSaveModel = New instat.ucrSave()
+        Me.ucrChkConvertToNumeric = New instat.ucrCheck()
+        Me.cmdFunction = New System.Windows.Forms.Button()
         Me.SuspendLayout()
-        '
-        'chkFirstFunction
-        '
-        Me.chkFirstFunction.AutoSize = True
-        Me.chkFirstFunction.Location = New System.Drawing.Point(406, 99)
-        Me.chkFirstFunction.Name = "chkFirstFunction"
-        Me.chkFirstFunction.Size = New System.Drawing.Size(67, 17)
-        Me.chkFirstFunction.TabIndex = 23
-        Me.chkFirstFunction.Tag = "Function"
-        Me.chkFirstFunction.Text = "Function"
-        Me.chkFirstFunction.UseVisualStyleBackColor = True
-        '
-        'chkConvertToVariate
-        '
-        Me.chkConvertToVariate.AutoSize = True
-        Me.chkConvertToVariate.Location = New System.Drawing.Point(406, 44)
-        Me.chkConvertToVariate.Name = "chkConvertToVariate"
-        Me.chkConvertToVariate.Size = New System.Drawing.Size(111, 17)
-        Me.chkConvertToVariate.TabIndex = 20
-        Me.chkConvertToVariate.Tag = "Convert_to_Variate"
-        Me.chkConvertToVariate.Text = "Convert to Variate"
-        Me.chkConvertToVariate.UseVisualStyleBackColor = True
         '
         'cmdModelOptions
         '
@@ -125,17 +102,6 @@ Partial Class dlgFourVariableModelling
         Me.lblSecondExplanatoryVariable.TabIndex = 25
         Me.lblSecondExplanatoryVariable.Tag = "Second_Explanatory_Variable:"
         Me.lblSecondExplanatoryVariable.Text = "Second Explanatory Variable:"
-        '
-        'chkSaveModel
-        '
-        Me.chkSaveModel.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.chkSaveModel.Location = New System.Drawing.Point(12, 376)
-        Me.chkSaveModel.Name = "chkSaveModel"
-        Me.chkSaveModel.Size = New System.Drawing.Size(104, 24)
-        Me.chkSaveModel.TabIndex = 31
-        Me.chkSaveModel.Tag = "Save_Model"
-        Me.chkSaveModel.Text = "Save Model"
-        Me.chkSaveModel.UseVisualStyleBackColor = True
         '
         'lblFirstExplanatoryVariable
         '
@@ -190,79 +156,88 @@ Partial Class dlgFourVariableModelling
         Me.lblSecondOperator.Tag = "Operator:"
         Me.lblSecondOperator.Text = "Operator:"
         '
-        'ucrModelName
+        'ucrInputModelOperators2
         '
-        Me.ucrModelName.AddQuotesIfUnrecognised = True
-        Me.ucrModelName.IsReadOnly = False
-        Me.ucrModelName.Location = New System.Drawing.Point(119, 379)
-        Me.ucrModelName.Name = "ucrModelName"
-        Me.ucrModelName.Size = New System.Drawing.Size(203, 21)
-        Me.ucrModelName.TabIndex = 36
+        Me.ucrInputModelOperators2.AddQuotesIfUnrecognised = True
+        Me.ucrInputModelOperators2.IsReadOnly = False
+        Me.ucrInputModelOperators2.Location = New System.Drawing.Point(355, 201)
+        Me.ucrInputModelOperators2.Name = "ucrInputModelOperators2"
+        Me.ucrInputModelOperators2.Size = New System.Drawing.Size(39, 21)
+        Me.ucrInputModelOperators2.TabIndex = 43
         '
-        'ucrThirdExplanatoryVariable
+        'ucrInputModelOperators1
         '
-        Me.ucrThirdExplanatoryVariable.frmParent = Me
-        Me.ucrThirdExplanatoryVariable.Location = New System.Drawing.Point(266, 250)
-        Me.ucrThirdExplanatoryVariable.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrThirdExplanatoryVariable.Name = "ucrThirdExplanatoryVariable"
-        Me.ucrThirdExplanatoryVariable.Selector = Nothing
-        Me.ucrThirdExplanatoryVariable.Size = New System.Drawing.Size(128, 26)
-        Me.ucrThirdExplanatoryVariable.strNcFilePath = ""
-        Me.ucrThirdExplanatoryVariable.TabIndex = 35
-        Me.ucrThirdExplanatoryVariable.ucrSelector = Nothing
+        Me.ucrInputModelOperators1.AddQuotesIfUnrecognised = True
+        Me.ucrInputModelOperators1.IsReadOnly = False
+        Me.ucrInputModelOperators1.Location = New System.Drawing.Point(355, 124)
+        Me.ucrInputModelOperators1.Name = "ucrInputModelOperators1"
+        Me.ucrInputModelOperators1.Size = New System.Drawing.Size(39, 21)
+        Me.ucrInputModelOperators1.TabIndex = 42
+        '
+        'ucrReceiverThirdExplanatory
+        '
+        Me.ucrReceiverThirdExplanatory.frmParent = Me
+        Me.ucrReceiverThirdExplanatory.Location = New System.Drawing.Point(266, 250)
+        Me.ucrReceiverThirdExplanatory.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverThirdExplanatory.Name = "ucrReceiverThirdExplanatory"
+        Me.ucrReceiverThirdExplanatory.Selector = Nothing
+        Me.ucrReceiverThirdExplanatory.Size = New System.Drawing.Size(128, 26)
+        Me.ucrReceiverThirdExplanatory.strNcFilePath = ""
+        Me.ucrReceiverThirdExplanatory.TabIndex = 35
+        Me.ucrReceiverThirdExplanatory.ucrSelector = Nothing
         '
         'ucrModelPreview
         '
         Me.ucrModelPreview.AddQuotesIfUnrecognised = True
         Me.ucrModelPreview.IsMultiline = False
         Me.ucrModelPreview.IsReadOnly = False
-        Me.ucrModelPreview.Location = New System.Drawing.Point(93, 349)
+        Me.ucrModelPreview.Location = New System.Drawing.Point(96, 349)
         Me.ucrModelPreview.Name = "ucrModelPreview"
         Me.ucrModelPreview.Size = New System.Drawing.Size(361, 21)
         Me.ucrModelPreview.TabIndex = 28
         '
-        'ucrFamily
+        'ucrDistributionChoice
         '
-        Me.ucrFamily.Location = New System.Drawing.Point(14, 298)
-        Me.ucrFamily.Name = "ucrFamily"
-        Me.ucrFamily.Size = New System.Drawing.Size(225, 35)
-        Me.ucrFamily.TabIndex = 29
+        Me.ucrDistributionChoice.Location = New System.Drawing.Point(14, 298)
+        Me.ucrDistributionChoice.Name = "ucrDistributionChoice"
+        Me.ucrDistributionChoice.Size = New System.Drawing.Size(225, 35)
+        Me.ucrDistributionChoice.TabIndex = 29
         '
-        'ucrSecondExplanatoryVariable
+        'ucrReceiverSecondExplanatory
         '
-        Me.ucrSecondExplanatoryVariable.frmParent = Me
-        Me.ucrSecondExplanatoryVariable.Location = New System.Drawing.Point(266, 175)
-        Me.ucrSecondExplanatoryVariable.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSecondExplanatoryVariable.Name = "ucrSecondExplanatoryVariable"
-        Me.ucrSecondExplanatoryVariable.Selector = Nothing
-        Me.ucrSecondExplanatoryVariable.Size = New System.Drawing.Size(128, 27)
-        Me.ucrSecondExplanatoryVariable.strNcFilePath = ""
-        Me.ucrSecondExplanatoryVariable.TabIndex = 26
-        Me.ucrSecondExplanatoryVariable.ucrSelector = Nothing
+        Me.ucrReceiverSecondExplanatory.frmParent = Me
+        Me.ucrReceiverSecondExplanatory.Location = New System.Drawing.Point(266, 175)
+        Me.ucrReceiverSecondExplanatory.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverSecondExplanatory.Name = "ucrReceiverSecondExplanatory"
+        Me.ucrReceiverSecondExplanatory.Selector = Nothing
+        Me.ucrReceiverSecondExplanatory.Size = New System.Drawing.Size(128, 27)
+        Me.ucrReceiverSecondExplanatory.strNcFilePath = ""
+        Me.ucrReceiverSecondExplanatory.TabIndex = 26
+        Me.ucrReceiverSecondExplanatory.ucrSelector = Nothing
         '
-        'ucrFirstExplanatory
+        'ucrReceiverFirstExplanatory
         '
-        Me.ucrFirstExplanatory.frmParent = Me
-        Me.ucrFirstExplanatory.Location = New System.Drawing.Point(266, 99)
-        Me.ucrFirstExplanatory.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrFirstExplanatory.Name = "ucrFirstExplanatory"
-        Me.ucrFirstExplanatory.Selector = Nothing
-        Me.ucrFirstExplanatory.Size = New System.Drawing.Size(128, 23)
-        Me.ucrFirstExplanatory.strNcFilePath = ""
-        Me.ucrFirstExplanatory.TabIndex = 22
-        Me.ucrFirstExplanatory.ucrSelector = Nothing
+        Me.ucrReceiverFirstExplanatory.frmParent = Me
+        Me.ucrReceiverFirstExplanatory.Location = New System.Drawing.Point(266, 99)
+        Me.ucrReceiverFirstExplanatory.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFirstExplanatory.Name = "ucrReceiverFirstExplanatory"
+        Me.ucrReceiverFirstExplanatory.Selector = Nothing
+        Me.ucrReceiverFirstExplanatory.Size = New System.Drawing.Size(128, 23)
+        Me.ucrReceiverFirstExplanatory.strNcFilePath = ""
+        Me.ucrReceiverFirstExplanatory.TabIndex = 22
+        Me.ucrReceiverFirstExplanatory.ucrSelector = Nothing
         '
-        'ucrResponse
+        'ucrReceiverResponse
         '
-        Me.ucrResponse.frmParent = Me
-        Me.ucrResponse.Location = New System.Drawing.Point(266, 44)
-        Me.ucrResponse.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrResponse.Name = "ucrResponse"
-        Me.ucrResponse.Selector = Nothing
-        Me.ucrResponse.Size = New System.Drawing.Size(128, 22)
-        Me.ucrResponse.strNcFilePath = ""
-        Me.ucrResponse.TabIndex = 19
-        Me.ucrResponse.ucrSelector = Nothing
+        Me.ucrReceiverResponse.frmParent = Me
+        Me.ucrReceiverResponse.Location = New System.Drawing.Point(266, 44)
+        Me.ucrReceiverResponse.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverResponse.Name = "ucrReceiverResponse"
+        Me.ucrReceiverResponse.Selector = Nothing
+        Me.ucrReceiverResponse.Size = New System.Drawing.Size(128, 22)
+        Me.ucrReceiverResponse.strNcFilePath = ""
+        Me.ucrReceiverResponse.TabIndex = 19
+        Me.ucrReceiverResponse.ucrSelector = Nothing
         '
         'ucrSelectorFourVariableModelling
         '
@@ -281,50 +256,55 @@ Partial Class dlgFourVariableModelling
         Me.ucrBaseFourVariableModelling.Size = New System.Drawing.Size(405, 52)
         Me.ucrBaseFourVariableModelling.TabIndex = 0
         '
-        'ucrInputModelOperators1
+        'ucrSaveModel
         '
-        Me.ucrInputModelOperators1.AddQuotesIfUnrecognised = True
-        Me.ucrInputModelOperators1.IsReadOnly = False
-        Me.ucrInputModelOperators1.Location = New System.Drawing.Point(355, 124)
-        Me.ucrInputModelOperators1.Name = "ucrInputModelOperators1"
-        Me.ucrInputModelOperators1.Size = New System.Drawing.Size(39, 21)
-        Me.ucrInputModelOperators1.TabIndex = 42
+        Me.ucrSaveModel.Location = New System.Drawing.Point(10, 376)
+        Me.ucrSaveModel.Name = "ucrSaveModel"
+        Me.ucrSaveModel.Size = New System.Drawing.Size(255, 24)
+        Me.ucrSaveModel.TabIndex = 44
         '
-        'ucrInputModelOperators2
+        'ucrChkConvertToNumeric
         '
-        Me.ucrInputModelOperators2.AddQuotesIfUnrecognised = True
-        Me.ucrInputModelOperators2.IsReadOnly = False
-        Me.ucrInputModelOperators2.Location = New System.Drawing.Point(355, 201)
-        Me.ucrInputModelOperators2.Name = "ucrInputModelOperators2"
-        Me.ucrInputModelOperators2.Size = New System.Drawing.Size(39, 21)
-        Me.ucrInputModelOperators2.TabIndex = 43
+        Me.ucrChkConvertToNumeric.Checked = False
+        Me.ucrChkConvertToNumeric.Location = New System.Drawing.Point(397, 44)
+        Me.ucrChkConvertToNumeric.Name = "ucrChkConvertToNumeric"
+        Me.ucrChkConvertToNumeric.Size = New System.Drawing.Size(136, 20)
+        Me.ucrChkConvertToNumeric.TabIndex = 45
+        '
+        'cmdFunction
+        '
+        Me.cmdFunction.Location = New System.Drawing.Point(398, 99)
+        Me.cmdFunction.Name = "cmdFunction"
+        Me.cmdFunction.Size = New System.Drawing.Size(67, 20)
+        Me.cmdFunction.TabIndex = 46
+        Me.cmdFunction.Text = "Function..."
+        Me.cmdFunction.UseVisualStyleBackColor = True
         '
         'dlgFourVariableModelling
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(513, 460)
+        Me.ClientSize = New System.Drawing.Size(546, 460)
+        Me.Controls.Add(Me.cmdFunction)
+        Me.Controls.Add(Me.ucrChkConvertToNumeric)
+        Me.Controls.Add(Me.ucrSaveModel)
         Me.Controls.Add(Me.ucrInputModelOperators2)
         Me.Controls.Add(Me.ucrInputModelOperators1)
         Me.Controls.Add(Me.lblSecondOperator)
         Me.Controls.Add(Me.lblFirstOperator)
-        Me.Controls.Add(Me.ucrModelName)
         Me.Controls.Add(Me.lblThirdExplanatoryVariable)
-        Me.Controls.Add(Me.ucrThirdExplanatoryVariable)
-        Me.Controls.Add(Me.chkFirstFunction)
-        Me.Controls.Add(Me.chkConvertToVariate)
+        Me.Controls.Add(Me.ucrReceiverThirdExplanatory)
         Me.Controls.Add(Me.cmdModelOptions)
         Me.Controls.Add(Me.lblModelPreview)
         Me.Controls.Add(Me.ucrModelPreview)
         Me.Controls.Add(Me.cmdDisplayOptions)
-        Me.Controls.Add(Me.ucrFamily)
+        Me.Controls.Add(Me.ucrDistributionChoice)
         Me.Controls.Add(Me.lblSecondExplanatoryVariable)
-        Me.Controls.Add(Me.ucrSecondExplanatoryVariable)
-        Me.Controls.Add(Me.chkSaveModel)
+        Me.Controls.Add(Me.ucrReceiverSecondExplanatory)
         Me.Controls.Add(Me.lblFirstExplanatoryVariable)
         Me.Controls.Add(Me.lblResponse)
-        Me.Controls.Add(Me.ucrFirstExplanatory)
-        Me.Controls.Add(Me.ucrResponse)
+        Me.Controls.Add(Me.ucrReceiverFirstExplanatory)
+        Me.Controls.Add(Me.ucrReceiverResponse)
         Me.Controls.Add(Me.ucrSelectorFourVariableModelling)
         Me.Controls.Add(Me.ucrBaseFourVariableModelling)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -340,26 +320,25 @@ Partial Class dlgFourVariableModelling
     End Sub
 
     Friend WithEvents ucrBaseFourVariableModelling As ucrButtons
-    Friend WithEvents chkFirstFunction As CheckBox
-    Friend WithEvents chkConvertToVariate As CheckBox
     Friend WithEvents cmdModelOptions As Button
     Friend WithEvents lblModelPreview As Label
     Friend WithEvents ucrModelPreview As ucrInputTextBox
     Friend WithEvents cmdDisplayOptions As Button
-    Friend WithEvents ucrFamily As ucrDistributions
+    Friend WithEvents ucrDistributionChoice As ucrDistributions
     Friend WithEvents lblSecondExplanatoryVariable As Label
-    Friend WithEvents ucrSecondExplanatoryVariable As ucrReceiverSingle
-    Friend WithEvents chkSaveModel As CheckBox
+    Friend WithEvents ucrReceiverSecondExplanatory As ucrReceiverSingle
     Friend WithEvents lblFirstExplanatoryVariable As Label
     Friend WithEvents lblResponse As Label
-    Friend WithEvents ucrFirstExplanatory As ucrReceiverSingle
-    Friend WithEvents ucrResponse As ucrReceiverSingle
+    Friend WithEvents ucrReceiverFirstExplanatory As ucrReceiverSingle
+    Friend WithEvents ucrReceiverResponse As ucrReceiverSingle
     Friend WithEvents ucrSelectorFourVariableModelling As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblThirdExplanatoryVariable As Label
-    Friend WithEvents ucrThirdExplanatoryVariable As ucrReceiverSingle
-    Friend WithEvents ucrModelName As ucrInputComboBox
+    Friend WithEvents ucrReceiverThirdExplanatory As ucrReceiverSingle
     Friend WithEvents lblFirstOperator As Label
     Friend WithEvents lblSecondOperator As Label
     Friend WithEvents ucrInputModelOperators1 As ucrInputComboBox
     Friend WithEvents ucrInputModelOperators2 As ucrInputComboBox
+    Friend WithEvents ucrSaveModel As ucrSave
+    Friend WithEvents ucrChkConvertToNumeric As ucrCheck
+    Friend WithEvents cmdFunction As Button
 End Class
