@@ -61,17 +61,21 @@ Public Class sdgPrincipalComponentAnalysis
         ucrPnlGraphics.AddRadioButton(rdoBiplot)
         ucrPnlGraphics.AddRadioButton(rdoBarPlot)
 
+        ucrPnlGraphics.AddRSyntaxContainsFunctionNamesCondition(rdoNoPlot, {"fviz_screeplot", "fviz_pca_var", "fviz_pca_ind", "fviz_pca_biplot", "ggplot"}, False)
         ucrPnlGraphics.AddRSyntaxContainsFunctionNamesCondition(rdoScreePlot, {"fviz_screeplot"}) ' need to link these rdos with their class. This will be like "Add additional base function"
         ucrPnlGraphics.AddRSyntaxContainsFunctionNamesCondition(rdoVariablesPlot, {"fviz_pca_var"})
         ucrPnlGraphics.AddRSyntaxContainsFunctionNamesCondition(rdoIndividualsPlot, {"fviz_pca_ind"})
         ucrPnlGraphics.AddRSyntaxContainsFunctionNamesCondition(rdoBiplot, {"fviz_pca_biplot"})
         ucrPnlGraphics.AddRSyntaxContainsFunctionNamesCondition(rdoBarPlot, {"ggplot"})
-        ucrPnlGraphics.AddRSyntaxContainsFunctionNamesCondition(rdoNoPlot, {"fviz_screeplot", "fviz_pca_var", "fviz_pca_ind", "fviz_pca_biplot", "ggplot"}, False)
 
         ucrPnlGeom.SetParameter(New RParameter("geom"))
         ucrPnlGeom.AddRadioButton(rdoOne, Chr(34) & "bar" & Chr(34))
         ucrPnlGeom.AddRadioButton(rdoTwo, Chr(34) & "line" & Chr(34))
         ucrPnlGeom.AddRadioButton(rdoBoth, "c(" & Chr(34) & "bar" & Chr(34) & "," & Chr(34) & "line" & Chr(34) & ")")
+
+        ucrPnlGeom.AddParameterPresentCondition(rdoOne, Chr(34) & "bar" & Chr(34))
+        ucrPnlGeom.AddParameterPresentCondition(rdoTwo, Chr(34) & "line" & Chr(34))
+        ucrPnlGeom.AddParameterPresentCondition(rdoBoth, "c(" & Chr(34) & "bar" & Chr(34) & "," & Chr(34) & "line" & Chr(34) & ")")
 
         ucrChkIncludePercentage.SetParameter(New RParameter("addlabels"))
         ucrChkIncludePercentage.SetText("Include Percentages")
@@ -140,6 +144,7 @@ Public Class sdgPrincipalComponentAnalysis
         ucrChkRotation.SetRSyntax(clsRsyntax, bReset)
         ucrPnlGraphics.SetRSyntax(clsRsyntax, bReset)
         ucrLabel.SetRCode(clsRVariablesPlotFunction, bReset)
+        ucrPnlGeom.SetRSyntax(clsRsyntax, bReset)
     End Sub
 
     Private Sub ucrChkEigenvalues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEigenvalues.ControlValueChanged
@@ -159,7 +164,26 @@ Public Class sdgPrincipalComponentAnalysis
 
     Private Sub ucrPnlGraphics_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGraphics.ControlValueChanged
         If rdoScreePlot.Checked Then
-
+            clsRsyntax.AddToAfterCodes(clsRScreePlotFunction, iPosition:=4)
+            clsRScreePlotFunction.iCallType = 3
+        ElseIf rdoVariablesPlot.Checked Then
+            clsRsyntax.AddToAfterCodes(clsRVariablesPlotFunction, iPosition:=5)
+            clsRVariablesPlotFunction.iCallType = 3
+        ElseIf rdoIndividualsPlot.Checked Then
+            clsRsyntax.AddToAfterCodes(clsRIndividualsPlotFunction, iPosition:=6)
+            clsRIndividualsPlotFunction.iCallType = 3
+        ElseIf rdoBiplot.Checked Then
+            clsRsyntax.AddToAfterCodes(clsRBiplotFunction, iPosition:=6)
+            clsRBiplotFunction.iCallType = 3
+        ElseIf rdoBarPlot.Checked Then
+            clsRsyntax.AddToAfterCodes(clsRBarPlot, iPosition:=6)
+            clsRBarPlot.iCallType = 3
+        ElseIf rdoNoPlot.Checked Then
+            clsRsyntax.RemoveFromAfterCodes(clsRScreePlotFunction)
+            clsRsyntax.RemoveFromAfterCodes(clsRVariablesPlotFunction)
+            clsRsyntax.RemoveFromAfterCodes(clsRIndividualsPlotFunction)
+            clsRsyntax.RemoveFromAfterCodes(clsRBiplotFunction)
+            clsRsyntax.RemoveFromAfterCodes(clsRBarPlot)
         End If
     End Sub
     Private Sub InitialiseDialog()
@@ -233,7 +257,7 @@ Public Class sdgPrincipalComponentAnalysis
     Private Sub DisplayOptions()
         'Dim dctOptionsForLabel As Dictionary(Of String, String)
         If rdoScreePlot.Checked Then
-            lblChoiceScree.Text = "Choice:"
+            lblChoiceScree.Text = "Choice: "
             rdoOne.Text = "Bar"
             rdoTwo.Text = "Line"
             'ucrLabel.SetItems({"variance", "eigenvalue"})

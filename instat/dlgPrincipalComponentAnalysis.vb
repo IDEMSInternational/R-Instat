@@ -236,15 +236,15 @@ Public Class dlgPrincipalComponentAnalysis
             'frmMain.clsRLink.RunScript(clsRRotation.ToScript(), 2)
         End If
         If sdgPrincipalComponentAnalysis.rdoScreePlot.Checked Then
-            frmMain.clsRLink.RunScript(clsRScreePlot.GetScript(), 3)
+            'frmMain.clsRLink.RunScript(clsRScreePlot.GetScript(), 3)
         ElseIf sdgPrincipalComponentAnalysis.rdoVariablesPlot.Checked Then
-            frmMain.clsRLink.RunScript(clsRVariablesPlot.GetScript(), 3)
+            'frmMain.clsRLink.RunScript(clsRVariablesPlot.GetScript(), 3)
         ElseIf sdgPrincipalComponentAnalysis.rdoIndividualsPlot.Checked Then
-            frmMain.clsRLink.RunScript(clsRIndividualsPlot.GetScript(), 3)
+            'frmMain.clsRLink.RunScript(clsRIndividualsPlot.GetScript(), 3)
         ElseIf sdgPrincipalComponentAnalysis.rdoBiplot.Checked Then
-            frmMain.clsRLink.RunScript(clsRBiplot.GetScript(), 3)
+            'frmMain.clsRLink.RunScript(clsRBiplot.GetScript(), 3)
         ElseIf sdgPrincipalComponentAnalysis.rdoBarPlot.Checked Then
-            frmMain.clsRLink.RunScript(clsRBarPlot.ToScript, 3)
+            'frmMain.clsRLink.RunScript(clsRBarPlot.ToScript, 3)
         End If
     End Sub
 
