@@ -451,7 +451,9 @@ Public Class RLink
         strCommand = strVariableName & "<-" & strScript
         If clsEngine IsNot Nothing Then
             Evaluate(strCommand, bSilent:=bSilent, bSeparateThread:=bSeparateThread)
-            expTemp = GetSymbol(strVariableName, bSilent:=bSilent)
+            expTemp = GetSymbol(strVariableName, bSilent:=True)
+            'Very important to remove the variable after getting it othewise could be returning wrong variable later if a command gives an error
+            Evaluate("rm(" & strVariableName & ")", bSilent:=bSilent, bSeparateThread:=bSeparateThread)
         End If
         Return expTemp
     End Function

@@ -506,6 +506,7 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
     }
     if(use_col_name_as_prefix) curr_col_name = self$get_next_default_column_name(col_name)
     else curr_col_name = col_name[[i]]
+    curr_col_name <- make.names(curr_col_name)
     new_col_names <- c(new_col_names, curr_col_name)
     if(curr_col_name %in% self$get_column_names()) {
       message(paste("A column named", curr_col_name, "already exists. The column will be replaced in the data"))
