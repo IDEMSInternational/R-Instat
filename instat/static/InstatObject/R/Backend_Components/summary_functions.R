@@ -235,33 +235,33 @@ instat_object$set("public", "summary", function(data_name, columns_to_summarise,
     else if(col_data_type == "Date") {
       #To be defined
     }
-    if(length(column_summaries) != 0) {
-      calc <- calculation$new(type = "summary", parameters = list(data_name = data_name, columns_to_summarise = col_new, summaries = column_summaries, factors = factors, store_results = store_results, drop = drop, return_output = return_output, summary_name = summary_name, add_cols = add_cols, ... = ...),  filters = filter_names, calculated_from = calculated_from)
-      results <- self$apply_calculation(calc)
-      if(!is.null(results)) {
-        results <- as.data.frame(t(results[,-1]))
-        #row_names(results) <- get_summary_calculation_names(calc, column_summaries, col_new, calc_filters)
-        names(results) <- col_new
-        #use summaries as row names for now. This needs to change in the long run
-        row.names(results) <- column_summaries
-        if(i == 1) {
-          calc_columns <- results
-        }
-        else {
-          calc_columns <- merge(calc_columns, results, by=0, all=TRUE, sort = FALSE)#Sort should be user defined
-          #we need to clarify which filters are being used
-          rownames(calc_columns)=calc_columns$Row.names
-          calc_columns<-calc_columns[,-1]
-        }
-        i = i + 1
-      }
-      else {
-        warning("There is no output to return")
-        calc_columns <- NULL
-      }
+    if(length(column_summaries) == 0) {
+      results <- data.frame(matrix(ncol = length(summaries) + 1))
+      names(results) <- c(".id", summaries)
+      column_summaries <- summaries
     }
     else {
-      warning("There is no output to return")
+      calc <- calculation$new(type = "summary", parameters = list(data_name = data_name, columns_to_summarise = col_new, summaries = column_summaries, factors = factors, store_results = store_results, drop = drop, return_output = return_output, summary_name = summary_name, add_cols = add_cols, ... = ...),  filters = filter_names, calculated_from = calculated_from)
+      results <- self$apply_calculation(calc)
+    }
+    if(!is.null(results)) {
+      results <- as.data.frame(t(results[,-1]))
+      #row_names(results) <- get_summary_calculation_names(calc, column_summaries, col_new, calc_filters)
+      names(results) <- col_new
+      #use summaries as row names for now. This needs to change in the long run
+      row.names(results) <- column_summaries
+      if(i == 1) {
+        calc_columns <- results
+      }
+      else {
+        calc_columns <- merge(calc_columns, results, by=0, all=TRUE, sort = FALSE)#Sort should be user defined
+        #we need to clarify which filters are being used
+        rownames(calc_columns)=calc_columns$Row.names
+        calc_columns<-calc_columns[,-1]
+      }
+      i = i + 1
+    }
+    else {
       calc_columns <- NULL
     }
   }
