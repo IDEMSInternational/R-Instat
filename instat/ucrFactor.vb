@@ -139,6 +139,7 @@ Public Class ucrFactor
         Dim iLabelsCol As Integer
         Dim iFreqCol As Integer
         Dim strColType As String
+        Dim expDataFrame As SymbolicExpression
 
         grdFactorData.Worksheets.Clear()
         ' Contains allows ordered factors to be included
@@ -157,43 +158,46 @@ Public Class ucrFactor
                 End If
                 clsConvertToCharacter.SetRCommand("convert_to_character_matrix")
                 clsConvertToCharacter.AddParameter("data", clsRFunctionParameter:=clsGetFactorData)
-                dfTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsConvertToCharacter.ToScript()).AsDataFrame
-                frmMain.clsGrids.FillSheet(dfTemp, "Factor Data", grdFactorData)
-                shtCurrSheet = grdFactorData.CurrentWorksheet
-                shtCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
-                bShowGrid = True
-                shtCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
-                iLevelsCol = GetColumnIndex(strLevelsName)
-                iLabelsCol = GetColumnIndex(strLabelsName)
-                iFreqCol = GetColumnIndex(strFreqName)
-                If bIncludeCopyOfLevels Then
-                    shtCurrSheet.AppendCols(1)
-                    shtCurrSheet.ColumnHeaders(shtCurrSheet.ColumnCount - 1).Text = "New Label"
-                    For i = 0 To shtCurrSheet.RowCount - 1
-                        shtCurrSheet(i, shtCurrSheet.ColumnCount - 1) = shtCurrSheet(i, iLabelsCol)
-                    Next
-                End If
-                If strExtraColumn <> "" Then
-                    shtCurrSheet.AppendCols(1)
-                    shtCurrSheet.ColumnHeaders(shtCurrSheet.ColumnCount - 1).Text = strExtraColumn
-                End If
-                If bIsSelector Then
-                    iSelectorColumnIndex = shtCurrSheet.ColumnCount
-                    shtCurrSheet.AppendCols(1)
-                    If bIsMultipleSelector Then
-                        shtCurrSheet.ColumnHeaders(iSelectorColumnIndex).DefaultCellBody = GetType(CheckBoxCell)
-                        shtCurrSheet.ColumnHeaders(iSelectorColumnIndex).Text = strSelectorColumnName
-                        InitialiseSelected()
-                    Else
-                        shtCurrSheet.ColumnHeaders(iSelectorColumnIndex).Text = strSelectorColumnName
-                        shtCurrSheet.ColumnHeaders(iSelectorColumnIndex).DefaultCellBody = GetType(RadioButtonCell)
-                        InitialiseSelected()
-                        Dim rgpselectcolumn As New RadioButtonGroup
+                expDataFrame = frmMain.clsRLink.RunInternalScriptGetValue(clsConvertToCharacter.ToScript(), bSilent:=True)
+                If expDataFrame IsNot Nothing AndAlso expDataFrame.Type <> Internals.SymbolicExpressionType.Null Then
+                    dfTemp = expDataFrame.AsDataFrame
+                    frmMain.clsGrids.FillSheet(dfTemp, "Factor Data", grdFactorData)
+                    shtCurrSheet = grdFactorData.CurrentWorksheet
+                    shtCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
+                    bShowGrid = True
+                    shtCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
+                    iLevelsCol = GetColumnIndex(strLevelsName)
+                    iLabelsCol = GetColumnIndex(strLabelsName)
+                    iFreqCol = GetColumnIndex(strFreqName)
+                    If bIncludeCopyOfLevels Then
+                        shtCurrSheet.AppendCols(1)
+                        shtCurrSheet.ColumnHeaders(shtCurrSheet.ColumnCount - 1).Text = "New Label"
                         For i = 0 To shtCurrSheet.RowCount - 1
-                            Dim rdotemp As New RadioButtonCell
-                            rdotemp.RadioGroup = rgpselectcolumn
-                            shtCurrSheet(i, iSelectorColumnIndex) = rdotemp
+                            shtCurrSheet(i, shtCurrSheet.ColumnCount - 1) = shtCurrSheet(i, iLabelsCol)
                         Next
+                    End If
+                    If strExtraColumn <> "" Then
+                        shtCurrSheet.AppendCols(1)
+                        shtCurrSheet.ColumnHeaders(shtCurrSheet.ColumnCount - 1).Text = strExtraColumn
+                    End If
+                    If bIsSelector Then
+                        iSelectorColumnIndex = shtCurrSheet.ColumnCount
+                        shtCurrSheet.AppendCols(1)
+                        If bIsMultipleSelector Then
+                            shtCurrSheet.ColumnHeaders(iSelectorColumnIndex).DefaultCellBody = GetType(CheckBoxCell)
+                            shtCurrSheet.ColumnHeaders(iSelectorColumnIndex).Text = strSelectorColumnName
+                            InitialiseSelected()
+                        Else
+                            shtCurrSheet.ColumnHeaders(iSelectorColumnIndex).Text = strSelectorColumnName
+                            shtCurrSheet.ColumnHeaders(iSelectorColumnIndex).DefaultCellBody = GetType(RadioButtonCell)
+                            InitialiseSelected()
+                            Dim rgpselectcolumn As New RadioButtonGroup
+                            For i = 0 To shtCurrSheet.RowCount - 1
+                                Dim rdotemp As New RadioButtonCell
+                                rdotemp.RadioGroup = rgpselectcolumn
+                                shtCurrSheet(i, iSelectorColumnIndex) = rdotemp
+                            Next
+                        End If
                     End If
                 End If
             End If
