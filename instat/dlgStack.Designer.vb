@@ -70,7 +70,7 @@ Partial Class dlgStack
         Me.lblStackDataInto.Location = New System.Drawing.Point(10, 275)
         Me.lblStackDataInto.Name = "lblStackDataInto"
         Me.lblStackDataInto.Size = New System.Drawing.Size(85, 13)
-        Me.lblStackDataInto.TabIndex = 7
+        Me.lblStackDataInto.TabIndex = 10
         Me.lblStackDataInto.Tag = "Stack_Data_Into"
         Me.lblStackDataInto.Text = "Stack Data Into:"
         '
@@ -80,7 +80,7 @@ Partial Class dlgStack
         Me.lblFactorInto.Location = New System.Drawing.Point(10, 243)
         Me.lblFactorInto.Name = "lblFactorInto"
         Me.lblFactorInto.Size = New System.Drawing.Size(61, 13)
-        Me.lblFactorInto.TabIndex = 5
+        Me.lblFactorInto.TabIndex = 8
         Me.lblFactorInto.Tag = "Factor_Into"
         Me.lblFactorInto.Text = "Factor Into:"
         '
@@ -88,12 +88,12 @@ Partial Class dlgStack
         '
         Me.ucrNudNoSets.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNoSets.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNoSets.Location = New System.Drawing.Point(210, 209)
+        Me.ucrNudNoSets.Location = New System.Drawing.Point(210, 208)
         Me.ucrNudNoSets.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNoSets.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNoSets.Name = "ucrNudNoSets"
         Me.ucrNudNoSets.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudNoSets.TabIndex = 12
+        Me.ucrNudNoSets.TabIndex = 7
         Me.ucrNudNoSets.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrChkStackMultipleSets
@@ -101,15 +101,15 @@ Partial Class dlgStack
         Me.ucrChkStackMultipleSets.Checked = False
         Me.ucrChkStackMultipleSets.Location = New System.Drawing.Point(10, 209)
         Me.ucrChkStackMultipleSets.Name = "ucrChkStackMultipleSets"
-        Me.ucrChkStackMultipleSets.Size = New System.Drawing.Size(148, 20)
-        Me.ucrChkStackMultipleSets.TabIndex = 11
+        Me.ucrChkStackMultipleSets.Size = New System.Drawing.Size(160, 20)
+        Me.ucrChkStackMultipleSets.TabIndex = 5
         '
         'ucrSaveNewDataName
         '
         Me.ucrSaveNewDataName.Location = New System.Drawing.Point(10, 301)
         Me.ucrSaveNewDataName.Name = "ucrSaveNewDataName"
         Me.ucrSaveNewDataName.Size = New System.Drawing.Size(266, 20)
-        Me.ucrSaveNewDataName.TabIndex = 9
+        Me.ucrSaveNewDataName.TabIndex = 12
         '
         'ucrChkCarryColumns
         '
@@ -129,7 +129,7 @@ Partial Class dlgStack
         Me.ucrStackDataInto.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrStackDataInto.Name = "ucrStackDataInto"
         Me.ucrStackDataInto.Size = New System.Drawing.Size(165, 21)
-        Me.ucrStackDataInto.TabIndex = 8
+        Me.ucrStackDataInto.TabIndex = 11
         '
         'ucrFactorInto
         '
@@ -140,7 +140,7 @@ Partial Class dlgStack
         Me.ucrFactorInto.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrFactorInto.Name = "ucrFactorInto"
         Me.ucrFactorInto.Size = New System.Drawing.Size(165, 21)
-        Me.ucrFactorInto.TabIndex = 6
+        Me.ucrFactorInto.TabIndex = 9
         '
         'ucrColumnsToCarryReceiver
         '
@@ -166,11 +166,11 @@ Partial Class dlgStack
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 331)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 328)
         Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 10
+        Me.ucrBase.TabIndex = 13
         '
         'ucrReceiverColumnsToBeStack
         '
@@ -187,17 +187,17 @@ Partial Class dlgStack
         'lblSets
         '
         Me.lblSets.AutoSize = True
-        Me.lblSets.Location = New System.Drawing.Point(176, 212)
+        Me.lblSets.Location = New System.Drawing.Point(176, 211)
         Me.lblSets.Name = "lblSets"
         Me.lblSets.Size = New System.Drawing.Size(31, 13)
-        Me.lblSets.TabIndex = 13
+        Me.lblSets.TabIndex = 6
         Me.lblSets.Text = "Sets:"
         '
         'dlgStack
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(416, 386)
+        Me.ClientSize = New System.Drawing.Size(415, 383)
         Me.Controls.Add(Me.lblSets)
         Me.Controls.Add(Me.ucrNudNoSets)
         Me.Controls.Add(Me.ucrChkStackMultipleSets)
