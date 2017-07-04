@@ -25,7 +25,9 @@ Public Class ucrButtonsSubdialogue
     End Sub
 
     Private Sub cmdReturn_Click(sender As Object, e As EventArgs) Handles cmdReturn.Click
+        Enabled = False
         RaiseEvent ClickReturn(sender, e)
+        Enabled = True
         Me.ParentForm.Close()
     End Sub
 
