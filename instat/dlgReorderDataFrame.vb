@@ -80,7 +80,7 @@ Public Class dlgReorderDataFrame
         TestOkEnabled()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameToReorder.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore)
         TestOkEnabled()
     End Sub
 End Class
