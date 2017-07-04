@@ -50,6 +50,9 @@ Public Class dlgDescribeOneVariable
         ucrReceiverDescribeOneVar.SetParameter(New RParameter("object", 0))
         ucrReceiverDescribeOneVar.SetParameterIsRFunction()
 
+        ucrNudMaxSum.SetParameter(New RParameter("maxsum"))
+        ucrNudMaxSum.SetRDefault("7")
+
         ucrChkOmitMissing.SetText("Omit Missing Values")
         ucrChkOmitMissing.SetRDefault("FALSE")
         ucrChkOmitMissing.SetParameter(New RParameter("na.rm"))
@@ -59,6 +62,8 @@ Public Class dlgDescribeOneVariable
         ucrChkCustomise.SetText("Customise")
         ucrChkCustomise.AddFunctionNamesCondition(True, frmMain.clsRLink.strInstatDataObject & "$summary")
         ucrChkCustomise.AddFunctionNamesCondition(False, "summary")
+        ucrChkCustomise.AddToLinkedControls(ucrNudMaxSum, {False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudMaxSum.SetLinkedDisplayControl(lblMaxSum)
 
         ucrChkSaveResult.SetText("Save Result") 'this is disabled in the initial implementation
         ucrChkSaveResult.Enabled = False
@@ -81,6 +86,7 @@ Public Class dlgDescribeOneVariable
         clsSummariesList.AddParameter("summary_sum", Chr(34) & "summary_sum" & Chr(34), bIncludeArgumentName:=False)
 
         clsSummaryFunction.SetRCommand("summary")
+        clsSummaryFunction.AddParameter("maxsum", 7)
 
         clsInstatSummaryFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary")
         clsInstatSummaryFunction.AddParameter("return_output", "TRUE")
@@ -93,6 +99,7 @@ Public Class dlgDescribeOneVariable
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrChkOmitMissing.AddAdditionalCodeParameterPair(clsInstatSummaryFunction, ucrChkOmitMissing.GetParameter(), iAdditionalPairNo:=1)
 
+        ucrNudMaxSum.SetRCode(clsSummaryFunction, bReset)
         ucrReceiverDescribeOneVar.SetRCode(clsSummaryFunction, bReset)
         ucrChkOmitMissing.SetRCode(clsSummaryFunction, bReset)
         ucrChkCustomise.SetRCode(ucrBaseDescribeOneVar.clsRsyntax.clsBaseFunction, bReset)
