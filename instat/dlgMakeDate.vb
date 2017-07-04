@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,8 +11,9 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat
 Imports instat.Translations
 Public Class dlgMakeDate
@@ -281,6 +282,16 @@ Public Class dlgMakeDate
         bUseSelectedColumn = True
     End Sub
 
+    Private Sub SelectorHeader()
+        If rdoDefaultFormat.Checked Then
+            ucrReceiverForDate.strSelectorHeading = "Factors"
+        ElseIf rdoSpecifyOrigin.Checked
+            ucrReceiverForDate.strSelectorHeading = "Numerics"
+        Else
+            ucrReceiverForDate.strSelectorHeading = "Variables"
+        End If
+    End Sub
+
     Private Sub SetDefaultColumn()
         rdoSingleColumn.Checked = True
         SetRCodeForControls(True)
@@ -369,6 +380,7 @@ Public Class dlgMakeDate
         Else
             ucrReceiverForDate.SetIncludedDataTypes({"numeric", "character", "factor", "integer"})
         End If
+        SelectorHeader()
     End Sub
 
     'Temporary fix: This should be deleted since - this should be automatic

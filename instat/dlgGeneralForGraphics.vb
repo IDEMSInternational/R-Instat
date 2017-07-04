@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,8 +11,9 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 
 Public Class dlgGeneralForGraphics
@@ -65,7 +66,6 @@ Public Class dlgGeneralForGraphics
 
     Private Sub SetDefaults()
         iLayerIndex = 0
-        ucrAdditionalLayers.Reset()
         lstLayerComplete.Clear()
         strGlobalDataFrame = ""
         bDataFrameSet = False
@@ -86,9 +86,7 @@ Public Class dlgGeneralForGraphics
 
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
 
-        ucrAdditionalLayers.SetBaseOperator(clsBaseOperator)
-        ucrAdditionalLayers.SetGGplotFunction(clsGgplotFunction)
-        ucrAdditionalLayers.SetAesFunction(clsGlobalAesFunction)
+        ucrAdditionalLayers.SetRCodeForControl(clsNewBaseOperator:=clsBaseOperator, clsRNewggplotFunc:=clsGgplotFunction, clsNewAesFunc:=clsGlobalAesFunction, strNewGlobalDataFrame:=strGlobalDataFrame, bReset:=True)
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()

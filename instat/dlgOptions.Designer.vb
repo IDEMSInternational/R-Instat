@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgOptions
     Inherits System.Windows.Forms.Form
 
@@ -32,6 +48,9 @@ Partial Class dlgOptions
         Me.cmdHelp = New System.Windows.Forms.Button()
         Me.cmdCancel = New System.Windows.Forms.Button()
         Me.cmdOk = New System.Windows.Forms.Button()
+        Me.spltControls = New System.Windows.Forms.SplitContainer()
+        Me.cmdFactoryReset = New System.Windows.Forms.Button()
+        Me.trOptions = New System.Windows.Forms.TreeView()
         Me.tbcOptions = New System.Windows.Forms.TabControl()
         Me.tbpLanguages = New System.Windows.Forms.TabPage()
         Me.pnLanguages = New System.Windows.Forms.Panel()
@@ -71,9 +90,18 @@ Partial Class dlgOptions
         Me.cmdEditorFont = New System.Windows.Forms.Button()
         Me.lblFont = New System.Windows.Forms.Label()
         Me.tbpCommands = New System.Windows.Forms.TabPage()
-        Me.pnScriptOptions = New System.Windows.Forms.Panel()
+        Me.lblWaitSeconds = New System.Windows.Forms.Label()
+        Me.ucrChkShowWaitDialog = New instat.ucrCheck()
+        Me.ucrNudWaitSeconds = New instat.ucrNud()
         Me.ucrChkIncludeDefaultParams = New instat.ucrCheck()
         Me.tbpDataView = New System.Windows.Forms.TabPage()
+        Me.lblEvery = New System.Windows.Forms.Label()
+        Me.lblMinutes = New System.Windows.Forms.Label()
+        Me.ucrChkAutoSave = New instat.ucrCheck()
+        Me.ucrChkShowDataonGrid = New instat.ucrCheck()
+        Me.ucrNudMinutes = New instat.ucrNud()
+        Me.ucrNudMaxCols = New instat.ucrNud()
+        Me.lblMaxCols = New System.Windows.Forms.Label()
         Me.ucrNudMaxRows = New instat.ucrNud()
         Me.lblMaxRows = New System.Windows.Forms.Label()
         Me.tbpWorkingDirectory = New System.Windows.Forms.TabPage()
@@ -85,11 +113,10 @@ Partial Class dlgOptions
         Me.rdoDisplayinRViewer = New System.Windows.Forms.RadioButton()
         Me.rdoDisplayinOutputWindow = New System.Windows.Forms.RadioButton()
         Me.ucrPnlGraphDisplay = New instat.UcrPanel()
-        Me.trOptions = New System.Windows.Forms.TreeView()
-        Me.spltControls = New System.Windows.Forms.SplitContainer()
-        Me.cmdFactoryReset = New System.Windows.Forms.Button()
-        Me.lblMaxCols = New System.Windows.Forms.Label()
-        Me.ucrNudMaxCols = New instat.ucrNud()
+        CType(Me.spltControls, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.spltControls.Panel1.SuspendLayout()
+        Me.spltControls.Panel2.SuspendLayout()
+        Me.spltControls.SuspendLayout()
         Me.tbcOptions.SuspendLayout()
         Me.tbpLanguages.SuspendLayout()
         Me.pnLanguages.SuspendLayout()
@@ -104,14 +131,9 @@ Partial Class dlgOptions
         Me.tbpEditor.SuspendLayout()
         Me.pnFormatEditor.SuspendLayout()
         Me.tbpCommands.SuspendLayout()
-        Me.pnScriptOptions.SuspendLayout()
         Me.tbpDataView.SuspendLayout()
         Me.tbpWorkingDirectory.SuspendLayout()
         Me.tbpGraphDisplay.SuspendLayout()
-        CType(Me.spltControls, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.spltControls.Panel1.SuspendLayout()
-        Me.spltControls.Panel2.SuspendLayout()
-        Me.spltControls.SuspendLayout()
         Me.SuspendLayout()
         '
         'cmdApply
@@ -153,6 +175,64 @@ Partial Class dlgOptions
         Me.cmdOk.Tag = "Ok"
         Me.cmdOk.Text = "Ok"
         Me.cmdOk.UseVisualStyleBackColor = True
+        '
+        'spltControls
+        '
+        Me.spltControls.Location = New System.Drawing.Point(5, 1)
+        Me.spltControls.Name = "spltControls"
+        '
+        'spltControls.Panel1
+        '
+        Me.spltControls.Panel1.Controls.Add(Me.cmdFactoryReset)
+        Me.spltControls.Panel1.Controls.Add(Me.trOptions)
+        '
+        'spltControls.Panel2
+        '
+        Me.spltControls.Panel2.Controls.Add(Me.tbcOptions)
+        Me.spltControls.Size = New System.Drawing.Size(760, 317)
+        Me.spltControls.SplitterDistance = 184
+        Me.spltControls.TabIndex = 8
+        '
+        'cmdFactoryReset
+        '
+        Me.cmdFactoryReset.Location = New System.Drawing.Point(13, 287)
+        Me.cmdFactoryReset.Name = "cmdFactoryReset"
+        Me.cmdFactoryReset.Size = New System.Drawing.Size(100, 23)
+        Me.cmdFactoryReset.TabIndex = 13
+        Me.cmdFactoryReset.Tag = "Help"
+        Me.cmdFactoryReset.Text = "Factory Reset"
+        Me.cmdFactoryReset.UseVisualStyleBackColor = True
+        '
+        'trOptions
+        '
+        Me.trOptions.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.trOptions.Location = New System.Drawing.Point(0, 0)
+        Me.trOptions.Name = "trOptions"
+        TreeNode1.Name = "ndLanguages"
+        TreeNode1.Tag = "1"
+        TreeNode1.Text = "Languages"
+        TreeNode1.ToolTipText = "Choose different languages"
+        TreeNode2.Name = "ndComments"
+        TreeNode2.Tag = "2"
+        TreeNode2.Text = "Comments"
+        TreeNode2.ToolTipText = "Comments for the dialogs"
+        TreeNode3.Name = "ndImport"
+        TreeNode3.Tag = "3"
+        TreeNode3.Text = "Import"
+        TreeNode3.ToolTipText = "Import Data Settings"
+        TreeNode4.Name = "ndOutputWindow"
+        TreeNode4.Tag = "4"
+        TreeNode4.Text = "Output Window"
+        TreeNode4.ToolTipText = "Output Window Formatting Options"
+        TreeNode5.Name = "ndCommands"
+        TreeNode5.Tag = "8"
+        TreeNode5.Text = "Commands"
+        TreeNode5.ToolTipText = "Commands Options"
+        TreeNode6.Name = "ndDataView"
+        TreeNode6.Text = "Data View"
+        Me.trOptions.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1, TreeNode2, TreeNode3, TreeNode4, TreeNode5, TreeNode6})
+        Me.trOptions.Size = New System.Drawing.Size(184, 317)
+        Me.trOptions.TabIndex = 0
         '
         'tbcOptions
         '
@@ -555,7 +635,10 @@ Partial Class dlgOptions
         '
         'tbpCommands
         '
-        Me.tbpCommands.Controls.Add(Me.pnScriptOptions)
+        Me.tbpCommands.Controls.Add(Me.lblWaitSeconds)
+        Me.tbpCommands.Controls.Add(Me.ucrChkShowWaitDialog)
+        Me.tbpCommands.Controls.Add(Me.ucrNudWaitSeconds)
+        Me.tbpCommands.Controls.Add(Me.ucrChkIncludeDefaultParams)
         Me.tbpCommands.Location = New System.Drawing.Point(4, 22)
         Me.tbpCommands.Name = "tbpCommands"
         Me.tbpCommands.Padding = New System.Windows.Forms.Padding(3)
@@ -565,25 +648,50 @@ Partial Class dlgOptions
         Me.tbpCommands.Text = "Commands"
         Me.tbpCommands.UseVisualStyleBackColor = True
         '
-        'pnScriptOptions
+        'lblWaitSeconds
         '
-        Me.pnScriptOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.pnScriptOptions.Controls.Add(Me.ucrChkIncludeDefaultParams)
-        Me.pnScriptOptions.Location = New System.Drawing.Point(10, 10)
-        Me.pnScriptOptions.Name = "pnScriptOptions"
-        Me.pnScriptOptions.Size = New System.Drawing.Size(267, 28)
-        Me.pnScriptOptions.TabIndex = 1
+        Me.lblWaitSeconds.AutoSize = True
+        Me.lblWaitSeconds.Location = New System.Drawing.Point(357, 50)
+        Me.lblWaitSeconds.Name = "lblWaitSeconds"
+        Me.lblWaitSeconds.Size = New System.Drawing.Size(47, 13)
+        Me.lblWaitSeconds.TabIndex = 8
+        Me.lblWaitSeconds.Text = "seconds"
+        '
+        'ucrChkShowWaitDialog
+        '
+        Me.ucrChkShowWaitDialog.Checked = False
+        Me.ucrChkShowWaitDialog.Location = New System.Drawing.Point(6, 47)
+        Me.ucrChkShowWaitDialog.Name = "ucrChkShowWaitDialog"
+        Me.ucrChkShowWaitDialog.Size = New System.Drawing.Size(293, 20)
+        Me.ucrChkShowWaitDialog.TabIndex = 6
+        '
+        'ucrNudWaitSeconds
+        '
+        Me.ucrNudWaitSeconds.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWaitSeconds.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudWaitSeconds.Location = New System.Drawing.Point(305, 47)
+        Me.ucrNudWaitSeconds.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudWaitSeconds.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudWaitSeconds.Name = "ucrNudWaitSeconds"
+        Me.ucrNudWaitSeconds.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudWaitSeconds.TabIndex = 5
+        Me.ucrNudWaitSeconds.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrChkIncludeDefaultParams
         '
         Me.ucrChkIncludeDefaultParams.Checked = False
-        Me.ucrChkIncludeDefaultParams.Location = New System.Drawing.Point(2, 2)
+        Me.ucrChkIncludeDefaultParams.Location = New System.Drawing.Point(6, 20)
         Me.ucrChkIncludeDefaultParams.Name = "ucrChkIncludeDefaultParams"
         Me.ucrChkIncludeDefaultParams.Size = New System.Drawing.Size(261, 21)
         Me.ucrChkIncludeDefaultParams.TabIndex = 3
         '
         'tbpDataView
         '
+        Me.tbpDataView.Controls.Add(Me.lblEvery)
+        Me.tbpDataView.Controls.Add(Me.lblMinutes)
+        Me.tbpDataView.Controls.Add(Me.ucrChkAutoSave)
+        Me.tbpDataView.Controls.Add(Me.ucrChkShowDataonGrid)
+        Me.tbpDataView.Controls.Add(Me.ucrNudMinutes)
         Me.tbpDataView.Controls.Add(Me.ucrNudMaxCols)
         Me.tbpDataView.Controls.Add(Me.lblMaxCols)
         Me.tbpDataView.Controls.Add(Me.ucrNudMaxRows)
@@ -595,6 +703,73 @@ Partial Class dlgOptions
         Me.tbpDataView.TabIndex = 9
         Me.tbpDataView.Text = "Data View"
         Me.tbpDataView.UseVisualStyleBackColor = True
+        '
+        'lblEvery
+        '
+        Me.lblEvery.AutoSize = True
+        Me.lblEvery.Location = New System.Drawing.Point(255, 104)
+        Me.lblEvery.Name = "lblEvery"
+        Me.lblEvery.Size = New System.Drawing.Size(34, 13)
+        Me.lblEvery.TabIndex = 4
+        Me.lblEvery.Text = "Every"
+        '
+        'lblMinutes
+        '
+        Me.lblMinutes.AutoSize = True
+        Me.lblMinutes.Location = New System.Drawing.Point(362, 104)
+        Me.lblMinutes.Name = "lblMinutes"
+        Me.lblMinutes.Size = New System.Drawing.Size(44, 13)
+        Me.lblMinutes.TabIndex = 4
+        Me.lblMinutes.Text = "Minutes"
+        '
+        'ucrChkAutoSave
+        '
+        Me.ucrChkAutoSave.Checked = False
+        Me.ucrChkAutoSave.Location = New System.Drawing.Point(13, 104)
+        Me.ucrChkAutoSave.Name = "ucrChkAutoSave"
+        Me.ucrChkAutoSave.Size = New System.Drawing.Size(236, 20)
+        Me.ucrChkAutoSave.TabIndex = 3
+        '
+        'ucrChkShowDataonGrid
+        '
+        Me.ucrChkShowDataonGrid.Checked = False
+        Me.ucrChkShowDataonGrid.Location = New System.Drawing.Point(13, 78)
+        Me.ucrChkShowDataonGrid.Name = "ucrChkShowDataonGrid"
+        Me.ucrChkShowDataonGrid.Size = New System.Drawing.Size(257, 20)
+        Me.ucrChkShowDataonGrid.TabIndex = 3
+        '
+        'ucrNudMinutes
+        '
+        Me.ucrNudMinutes.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMinutes.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudMinutes.Location = New System.Drawing.Point(305, 104)
+        Me.ucrNudMinutes.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMinutes.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMinutes.Name = "ucrNudMinutes"
+        Me.ucrNudMinutes.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudMinutes.TabIndex = 2
+        Me.ucrNudMinutes.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudMaxCols
+        '
+        Me.ucrNudMaxCols.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaxCols.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudMaxCols.Location = New System.Drawing.Point(221, 41)
+        Me.ucrNudMaxCols.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMaxCols.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaxCols.Name = "ucrNudMaxCols"
+        Me.ucrNudMaxCols.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudMaxCols.TabIndex = 2
+        Me.ucrNudMaxCols.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblMaxCols
+        '
+        Me.lblMaxCols.AutoSize = True
+        Me.lblMaxCols.Location = New System.Drawing.Point(10, 44)
+        Me.lblMaxCols.Name = "lblMaxCols"
+        Me.lblMaxCols.Size = New System.Drawing.Size(198, 13)
+        Me.lblMaxCols.TabIndex = 1
+        Me.lblMaxCols.Text = "Maximum Number of Columns to Display:"
         '
         'ucrNudMaxRows
         '
@@ -711,85 +886,6 @@ Partial Class dlgOptions
         Me.ucrPnlGraphDisplay.Size = New System.Drawing.Size(169, 66)
         Me.ucrPnlGraphDisplay.TabIndex = 3
         '
-        'trOptions
-        '
-        Me.trOptions.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.trOptions.Location = New System.Drawing.Point(0, 0)
-        Me.trOptions.Name = "trOptions"
-        TreeNode1.Name = "ndLanguages"
-        TreeNode1.Tag = "1"
-        TreeNode1.Text = "Languages"
-        TreeNode1.ToolTipText = "Choose different languages"
-        TreeNode2.Name = "ndComments"
-        TreeNode2.Tag = "2"
-        TreeNode2.Text = "Comments"
-        TreeNode2.ToolTipText = "Comments for the dialogs"
-        TreeNode3.Name = "ndImport"
-        TreeNode3.Tag = "3"
-        TreeNode3.Text = "Import"
-        TreeNode3.ToolTipText = "Import Data Settings"
-        TreeNode4.Name = "ndOutputWindow"
-        TreeNode4.Tag = "4"
-        TreeNode4.Text = "Output Window"
-        TreeNode4.ToolTipText = "Output Window Formatting Options"
-        TreeNode5.Name = "ndCommands"
-        TreeNode5.Tag = "8"
-        TreeNode5.Text = "Commands"
-        TreeNode5.ToolTipText = "Commands Options"
-        TreeNode6.Name = "ndDataView"
-        TreeNode6.Text = "Data View"
-        Me.trOptions.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode1, TreeNode2, TreeNode3, TreeNode4, TreeNode5, TreeNode6})
-        Me.trOptions.Size = New System.Drawing.Size(184, 317)
-        Me.trOptions.TabIndex = 0
-        '
-        'spltControls
-        '
-        Me.spltControls.Location = New System.Drawing.Point(5, 1)
-        Me.spltControls.Name = "spltControls"
-        '
-        'spltControls.Panel1
-        '
-        Me.spltControls.Panel1.Controls.Add(Me.cmdFactoryReset)
-        Me.spltControls.Panel1.Controls.Add(Me.trOptions)
-        '
-        'spltControls.Panel2
-        '
-        Me.spltControls.Panel2.Controls.Add(Me.tbcOptions)
-        Me.spltControls.Size = New System.Drawing.Size(760, 317)
-        Me.spltControls.SplitterDistance = 184
-        Me.spltControls.TabIndex = 8
-        '
-        'cmdFactoryReset
-        '
-        Me.cmdFactoryReset.Location = New System.Drawing.Point(13, 287)
-        Me.cmdFactoryReset.Name = "cmdFactoryReset"
-        Me.cmdFactoryReset.Size = New System.Drawing.Size(100, 23)
-        Me.cmdFactoryReset.TabIndex = 13
-        Me.cmdFactoryReset.Tag = "Help"
-        Me.cmdFactoryReset.Text = "Factory Reset"
-        Me.cmdFactoryReset.UseVisualStyleBackColor = True
-        '
-        'lblMaxCols
-        '
-        Me.lblMaxCols.AutoSize = True
-        Me.lblMaxCols.Location = New System.Drawing.Point(10, 44)
-        Me.lblMaxCols.Name = "lblMaxCols"
-        Me.lblMaxCols.Size = New System.Drawing.Size(198, 13)
-        Me.lblMaxCols.TabIndex = 1
-        Me.lblMaxCols.Text = "Maximum Number of Columns to Display:"
-        '
-        'ucrNudMaxCols
-        '
-        Me.ucrNudMaxCols.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMaxCols.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMaxCols.Location = New System.Drawing.Point(221, 41)
-        Me.ucrNudMaxCols.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudMaxCols.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMaxCols.Name = "ucrNudMaxCols"
-        Me.ucrNudMaxCols.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudMaxCols.TabIndex = 2
-        Me.ucrNudMaxCols.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'dlgOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -807,6 +903,10 @@ Partial Class dlgOptions
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Options"
         Me.Text = "Options"
+        Me.spltControls.Panel1.ResumeLayout(False)
+        Me.spltControls.Panel2.ResumeLayout(False)
+        CType(Me.spltControls, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.spltControls.ResumeLayout(False)
         Me.tbcOptions.ResumeLayout(False)
         Me.tbpLanguages.ResumeLayout(False)
         Me.tbpLanguages.PerformLayout()
@@ -831,17 +931,13 @@ Partial Class dlgOptions
         Me.pnFormatEditor.ResumeLayout(False)
         Me.pnFormatEditor.PerformLayout()
         Me.tbpCommands.ResumeLayout(False)
-        Me.pnScriptOptions.ResumeLayout(False)
+        Me.tbpCommands.PerformLayout()
         Me.tbpDataView.ResumeLayout(False)
         Me.tbpDataView.PerformLayout()
         Me.tbpWorkingDirectory.ResumeLayout(False)
         Me.tbpWorkingDirectory.PerformLayout()
         Me.tbpGraphDisplay.ResumeLayout(False)
         Me.tbpGraphDisplay.PerformLayout()
-        Me.spltControls.Panel1.ResumeLayout(False)
-        Me.spltControls.Panel2.ResumeLayout(False)
-        CType(Me.spltControls, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.spltControls.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -879,7 +975,6 @@ Partial Class dlgOptions
     Friend WithEvents cmdEditorFont As Button
     Friend WithEvents lblFont As Label
     Friend WithEvents tbpCommands As TabPage
-    Friend WithEvents pnScriptOptions As Panel
     Friend WithEvents tbpDataView As TabPage
     Friend WithEvents lblMaxRows As Label
     Friend WithEvents tbpWorkingDirectory As TabPage
@@ -907,4 +1002,12 @@ Partial Class dlgOptions
     Friend WithEvents ucrInputComment As ucrInputTextBox
     Friend WithEvents ucrNudMaxCols As ucrNud
     Friend WithEvents lblMaxCols As Label
+    Friend WithEvents ucrChkShowDataonGrid As ucrCheck
+    Friend WithEvents ucrChkAutoSave As ucrCheck
+    Friend WithEvents ucrNudMinutes As ucrNud
+    Friend WithEvents lblMinutes As Label
+    Friend WithEvents lblEvery As Label
+    Friend WithEvents lblWaitSeconds As Label
+    Friend WithEvents ucrChkShowWaitDialog As ucrCheck
+    Friend WithEvents ucrNudWaitSeconds As ucrNud
 End Class

@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgRegularSequence
     Inherits System.Windows.Forms.Form
 
@@ -32,14 +48,13 @@ Partial Class dlgRegularSequence
         Me.dtpSelectorB = New System.Windows.Forms.DateTimePicker()
         Me.dtpSelectorA = New System.Windows.Forms.DateTimePicker()
         Me.lblLength = New System.Windows.Forms.Label()
-        Me.lblTimes1 = New System.Windows.Forms.Label()
+        Me.lblTimes = New System.Windows.Forms.Label()
         Me.lblRepeatValues = New System.Windows.Forms.Label()
         Me.lblInStepsOf = New System.Windows.Forms.Label()
         Me.lblTo = New System.Windows.Forms.Label()
         Me.lblFrom = New System.Windows.Forms.Label()
         Me.lblPreview = New System.Windows.Forms.Label()
         Me.txtGetPreview = New System.Windows.Forms.RichTextBox()
-        Me.txtMessage = New System.Windows.Forms.TextBox()
         Me.grpSequenceType = New System.Windows.Forms.GroupBox()
         Me.rdoNumeric = New System.Windows.Forms.RadioButton()
         Me.rdoDates = New System.Windows.Forms.RadioButton()
@@ -47,6 +62,7 @@ Partial Class dlgRegularSequence
         Me.ucrNewColumnName = New instat.ucrSave()
         Me.ucrSelectDataFrameRegularSequence = New instat.ucrDataFrame()
         Me.ucrBase = New instat.ucrButtons()
+        Me.lblMessage = New System.Windows.Forms.Label()
         Me.grpSequenceDefinition.SuspendLayout()
         Me.grpSequenceType.SuspendLayout()
         Me.SuspendLayout()
@@ -62,7 +78,7 @@ Partial Class dlgRegularSequence
         Me.grpSequenceDefinition.Controls.Add(Me.dtpSelectorB)
         Me.grpSequenceDefinition.Controls.Add(Me.dtpSelectorA)
         Me.grpSequenceDefinition.Controls.Add(Me.lblLength)
-        Me.grpSequenceDefinition.Controls.Add(Me.lblTimes1)
+        Me.grpSequenceDefinition.Controls.Add(Me.lblTimes)
         Me.grpSequenceDefinition.Controls.Add(Me.lblRepeatValues)
         Me.grpSequenceDefinition.Controls.Add(Me.lblInStepsOf)
         Me.grpSequenceDefinition.Controls.Add(Me.lblTo)
@@ -159,15 +175,15 @@ Partial Class dlgRegularSequence
         Me.lblLength.Tag = "Length"
         Me.lblLength.Text = "Length:"
         '
-        'lblTimes1
+        'lblTimes
         '
-        Me.lblTimes1.AutoSize = True
-        Me.lblTimes1.Location = New System.Drawing.Point(152, 106)
-        Me.lblTimes1.Name = "lblTimes1"
-        Me.lblTimes1.Size = New System.Drawing.Size(41, 13)
-        Me.lblTimes1.TabIndex = 10
-        Me.lblTimes1.Tag = "Times"
-        Me.lblTimes1.Text = "Time(s)"
+        Me.lblTimes.AutoSize = True
+        Me.lblTimes.Location = New System.Drawing.Point(152, 106)
+        Me.lblTimes.Name = "lblTimes"
+        Me.lblTimes.Size = New System.Drawing.Size(41, 13)
+        Me.lblTimes.TabIndex = 10
+        Me.lblTimes.Tag = "Times"
+        Me.lblTimes.Text = "Time(s)"
         '
         'lblRepeatValues
         '
@@ -226,19 +242,9 @@ Partial Class dlgRegularSequence
         '
         Me.txtGetPreview.Location = New System.Drawing.Point(221, 65)
         Me.txtGetPreview.Name = "txtGetPreview"
-        Me.txtGetPreview.Size = New System.Drawing.Size(171, 172)
+        Me.txtGetPreview.Size = New System.Drawing.Size(185, 172)
         Me.txtGetPreview.TabIndex = 4
         Me.txtGetPreview.Text = ""
-        '
-        'txtMessage
-        '
-        Me.txtMessage.Enabled = False
-        Me.txtMessage.Location = New System.Drawing.Point(221, 239)
-        Me.txtMessage.Multiline = True
-        Me.txtMessage.Name = "txtMessage"
-        Me.txtMessage.ReadOnly = True
-        Me.txtMessage.Size = New System.Drawing.Size(171, 58)
-        Me.txtMessage.TabIndex = 5
         '
         'grpSequenceType
         '
@@ -308,14 +314,23 @@ Partial Class dlgRegularSequence
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 7
         '
+        'lblMessage
+        '
+        Me.lblMessage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblMessage.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblMessage.Location = New System.Drawing.Point(221, 245)
+        Me.lblMessage.Name = "lblMessage"
+        Me.lblMessage.Size = New System.Drawing.Size(185, 52)
+        Me.lblMessage.TabIndex = 8
+        '
         'dlgRegularSequence
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(418, 387)
+        Me.Controls.Add(Me.lblMessage)
         Me.Controls.Add(Me.grpSequenceType)
         Me.Controls.Add(Me.ucrNewColumnName)
-        Me.Controls.Add(Me.txtMessage)
         Me.Controls.Add(Me.txtGetPreview)
         Me.Controls.Add(Me.grpSequenceDefinition)
         Me.Controls.Add(Me.lblPreview)
@@ -345,13 +360,12 @@ Partial Class dlgRegularSequence
     Friend WithEvents ucrSelectDataFrameRegularSequence As ucrDataFrame
     Friend WithEvents lblPreview As Label
     Friend WithEvents lblLength As Label
-    Friend WithEvents lblTimes1 As Label
+    Friend WithEvents lblTimes As Label
     Friend WithEvents lblRepeatValues As Label
     Friend WithEvents dtpSelectorA As DateTimePicker
     Friend WithEvents dtpSelectorB As DateTimePicker
     Friend WithEvents txtGetPreview As RichTextBox
     Friend WithEvents ucrDataFrameLengthForRegularSequence As ucrDataFrameLength
-    Friend WithEvents txtMessage As TextBox
     Friend WithEvents ucrNewColumnName As ucrSave
     Friend WithEvents grpSequenceType As GroupBox
     Friend WithEvents rdoNumeric As RadioButton
@@ -362,4 +376,5 @@ Partial Class dlgRegularSequence
     Friend WithEvents ucrInputFrom As ucrInputTextBox
     Friend WithEvents ucrNudRepeatValues As ucrNud
     Friend WithEvents ucrChkDefineAsFactor As ucrCheck
+    Friend WithEvents lblMessage As Label
 End Class

@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgLabels
     Inherits System.Windows.Forms.Form
 
@@ -23,12 +39,12 @@ Partial Class dlgLabels
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.lblFactor = New System.Windows.Forms.Label()
+        Me.cmdAddLevel = New System.Windows.Forms.Button()
+        Me.ucrChkIncludeLevelNumbers = New instat.ucrCheck()
         Me.ucrReceiverLabels = New instat.ucrReceiverSingle()
         Me.ucrFactorLabels = New instat.ucrFactor()
         Me.ucrSelectorForLabels = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.cmdAddLevel = New System.Windows.Forms.Button()
-        Me.ucrChkAddLevels = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblFactor
@@ -40,6 +56,23 @@ Partial Class dlgLabels
         Me.lblFactor.TabIndex = 3
         Me.lblFactor.Tag = "Factor_Selected:"
         Me.lblFactor.Text = "Factor Selected:"
+        '
+        'cmdAddLevel
+        '
+        Me.cmdAddLevel.Location = New System.Drawing.Point(115, 287)
+        Me.cmdAddLevel.Name = "cmdAddLevel"
+        Me.cmdAddLevel.Size = New System.Drawing.Size(96, 23)
+        Me.cmdAddLevel.TabIndex = 5
+        Me.cmdAddLevel.Text = "Add Factor Level"
+        Me.cmdAddLevel.UseVisualStyleBackColor = True
+        '
+        'ucrChkIncludeLevelNumbers
+        '
+        Me.ucrChkIncludeLevelNumbers.Checked = False
+        Me.ucrChkIncludeLevelNumbers.Location = New System.Drawing.Point(115, 316)
+        Me.ucrChkIncludeLevelNumbers.Name = "ucrChkIncludeLevelNumbers"
+        Me.ucrChkIncludeLevelNumbers.Size = New System.Drawing.Size(135, 20)
+        Me.ucrChkIncludeLevelNumbers.TabIndex = 6
         '
         'ucrReceiverLabels
         '
@@ -61,8 +94,9 @@ Partial Class dlgLabels
         Me.ucrFactorLabels.Location = New System.Drawing.Point(256, 66)
         Me.ucrFactorLabels.Name = "ucrFactorLabels"
         Me.ucrFactorLabels.shtCurrSheet = Nothing
-        Me.ucrFactorLabels.Size = New System.Drawing.Size(267, 171)
+        Me.ucrFactorLabels.Size = New System.Drawing.Size(336, 299)
         Me.ucrFactorLabels.TabIndex = 2
+        Me.ucrFactorLabels.ucrChkLevels = Nothing
         '
         'ucrSelectorForLabels
         '
@@ -76,34 +110,17 @@ Partial Class dlgLabels
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 272)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 376)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
-        '
-        'cmdAddLevel
-        '
-        Me.cmdAddLevel.Location = New System.Drawing.Point(256, 243)
-        Me.cmdAddLevel.Name = "cmdAddLevel"
-        Me.cmdAddLevel.Size = New System.Drawing.Size(75, 23)
-        Me.cmdAddLevel.TabIndex = 5
-        Me.cmdAddLevel.Text = "Add Level"
-        Me.cmdAddLevel.UseVisualStyleBackColor = True
-        '
-        'ucrChkAddLevels
-        '
-        Me.ucrChkAddLevels.Checked = False
-        Me.ucrChkAddLevels.Location = New System.Drawing.Point(344, 245)
-        Me.ucrChkAddLevels.Name = "ucrChkAddLevels"
-        Me.ucrChkAddLevels.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkAddLevels.TabIndex = 6
         '
         'dlgLabels
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(533, 332)
-        Me.Controls.Add(Me.ucrChkAddLevels)
+        Me.ClientSize = New System.Drawing.Size(604, 431)
+        Me.Controls.Add(Me.ucrChkIncludeLevelNumbers)
         Me.Controls.Add(Me.cmdAddLevel)
         Me.Controls.Add(Me.ucrReceiverLabels)
         Me.Controls.Add(Me.lblFactor)
@@ -128,5 +145,5 @@ Partial Class dlgLabels
     Friend WithEvents lblFactor As Label
     Friend WithEvents ucrReceiverLabels As ucrReceiverSingle
     Friend WithEvents cmdAddLevel As Button
-    Friend WithEvents ucrChkAddLevels As ucrCheck
+    Friend WithEvents ucrChkIncludeLevelNumbers As ucrCheck
 End Class

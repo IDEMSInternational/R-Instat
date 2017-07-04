@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,8 +11,9 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 Public Class dlgFitCorruptionModel
     Private bFirstLoad As Boolean = True
@@ -174,13 +175,13 @@ Public Class dlgFitCorruptionModel
     End Sub
 
     Private Sub LoadSubdialog()
-        sdgSimpleRegOptions.SetRModelFunction(clsCorruptionModel)
+        'sdgSimpleRegOptions.SetRModelFunction(clsCorruptionModel)
         sdgSimpleRegOptions.SetRDataFrame(ucrSelectorFitModel.ucrAvailableDataFrames)
-        sdgSimpleRegOptions.SetRYVariable(ucrReceiverOutput)
-        sdgSimpleRegOptions.SetDefaults()
-        sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
-        sdgSimpleRegOptions.lblDisplayCLevel.Enabled = True
-        sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
+        ' sdgSimpleRegOptions.SetRYVariable(ucrReceiverOutput)
+        ' sdgSimpleRegOptions.SetDefaults()
+        ' sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
+        sdgSimpleRegOptions.lblConfLevel.Enabled = True
+        ' sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
     End Sub
 
     Private Sub ucrReceiverOutput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOutput.ControlValueChanged, ucrReceiverControlVariables.ControlValueChanged, ucrReceiverIndicators.ControlValueChanged
@@ -189,6 +190,6 @@ Public Class dlgFitCorruptionModel
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        sdgSimpleRegOptions.RegOptions()
+        'sdgSimpleRegOptions.RegOptions()
     End Sub
 End Class
