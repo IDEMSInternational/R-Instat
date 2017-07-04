@@ -51,7 +51,7 @@ Partial Class ucrReorder
         Me.cmdTop.AutoSize = True
         Me.cmdTop.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.cmdTop.Image = Global.instat.My.Resources.Resources.arrows_top
-        Me.cmdTop.Location = New System.Drawing.Point(130, 14)
+        Me.cmdTop.Location = New System.Drawing.Point(171, 29)
         Me.cmdTop.Name = "cmdTop"
         Me.cmdTop.Size = New System.Drawing.Size(22, 22)
         Me.cmdTop.TabIndex = 0
@@ -63,7 +63,7 @@ Partial Class ucrReorder
         Me.cmdUp.AutoSize = True
         Me.cmdUp.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.cmdUp.Image = Global.instat.My.Resources.Resources.arrows_up
-        Me.cmdUp.Location = New System.Drawing.Point(130, 43)
+        Me.cmdUp.Location = New System.Drawing.Point(171, 63)
         Me.cmdUp.Name = "cmdUp"
         Me.cmdUp.Size = New System.Drawing.Size(22, 22)
         Me.cmdUp.TabIndex = 1
@@ -75,7 +75,7 @@ Partial Class ucrReorder
         Me.cmdDown.AutoSize = True
         Me.cmdDown.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.cmdDown.Image = Global.instat.My.Resources.Resources.arrows_down
-        Me.cmdDown.Location = New System.Drawing.Point(130, 72)
+        Me.cmdDown.Location = New System.Drawing.Point(171, 111)
         Me.cmdDown.Name = "cmdDown"
         Me.cmdDown.Size = New System.Drawing.Size(22, 22)
         Me.cmdDown.TabIndex = 2
@@ -87,7 +87,7 @@ Partial Class ucrReorder
         Me.cmdBottom.AutoSize = True
         Me.cmdBottom.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.cmdBottom.Image = Global.instat.My.Resources.Resources.arrows_bottom
-        Me.cmdBottom.Location = New System.Drawing.Point(130, 101)
+        Me.cmdBottom.Location = New System.Drawing.Point(171, 142)
         Me.cmdBottom.Name = "cmdBottom"
         Me.cmdBottom.Size = New System.Drawing.Size(22, 22)
         Me.cmdBottom.TabIndex = 3
@@ -98,10 +98,10 @@ Partial Class ucrReorder
         Me.lstAvailableData.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lstAvailableData.FullRowSelect = True
         Me.lstAvailableData.Location = New System.Drawing.Point(3, 3)
         Me.lstAvailableData.Name = "lstAvailableData"
-        Me.lstAvailableData.Size = New System.Drawing.Size(121, 133)
-        Me.lstAvailableData.FullRowSelect = True
+        Me.lstAvailableData.Size = New System.Drawing.Size(156, 180)
         Me.lstAvailableData.TabIndex = 5
         Me.lstAvailableData.UseCompatibleStateImageBehavior = False
         Me.lstAvailableData.View = System.Windows.Forms.View.Details
@@ -116,7 +116,7 @@ Partial Class ucrReorder
         Me.Controls.Add(Me.cmdUp)
         Me.Controls.Add(Me.cmdTop)
         Me.Name = "ucrReorder"
-        Me.Size = New System.Drawing.Size(154, 139)
+        Me.Size = New System.Drawing.Size(211, 195)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
