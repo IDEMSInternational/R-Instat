@@ -1445,6 +1445,16 @@ Public Class frmMain
     End Sub
 
     Private Sub CountryNamesCorrectionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CountryNamesCorrectionsToolStripMenuItem.Click
+        Dim lstDataNames As List(Of String)
+
+        lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
+        If lstDataNames.Count > 0 Then
+            dlgStandardiseCountryNames.strDefaultDataFrame = lstDataNames(0)
+            dlgStandardiseCountryNames.strDefaultColumn = clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_country_label")
+        Else
+            dlgStandardiseCountryNames.strDefaultDataFrame = ""
+            dlgStandardiseCountryNames.strDefaultColumn = ""
+        End If
         dlgStandardiseCountryNames.ShowDialog()
     End Sub
 
