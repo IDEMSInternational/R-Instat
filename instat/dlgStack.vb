@@ -1,4 +1,5 @@
-﻿' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -10,10 +11,9 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgStack
     Private clsMeltFunction As New RFunction
@@ -71,7 +71,7 @@ Public Class dlgStack
         ucrStackDataInto.SetRDefault(Chr(34) & "value" & Chr(34))
         ucrStackDataInto.SetLinkedDisplayControl(lblStackDataInto)
 
-        ucrChkStackMultipleSets.SetText("Stack multiple column sets")
+        ucrChkStackMultipleSets.SetText("Stack Multiple Column Sets")
         ucrChkStackMultipleSets.AddToLinkedControls(ucrNudNoSets, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkStackMultipleSets.AddToLinkedControls(ucrChkCarryColumns, {False}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkStackMultipleSets.AddToLinkedControls(ucrStackDataInto, {False}, bNewLinkedHideIfParameterMissing:=True)

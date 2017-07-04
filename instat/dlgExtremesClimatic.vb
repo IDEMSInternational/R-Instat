@@ -1,5 +1,5 @@
-﻿'' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,8 +11,9 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 Public Class dlgExtremesClimatic
     Private bFirstload As Boolean = True
@@ -43,24 +44,33 @@ Public Class dlgExtremesClimatic
         ucrReceiverYear.Selector = ucrSelectorClimaticExtremes
         ucrReceiverYear.SetClimaticType("year")
         ucrReceiverYear.bAutoFill = True
+        ucrReceiverYear.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "year" & Chr(34)})
+        ucrReceiverYear.strSelectorHeading = "Year Variables"
 
         ucrReceiverStations.Selector = ucrSelectorClimaticExtremes
         ucrReceiverStations.SetClimaticType("station")
         ucrReceiverStations.bAutoFill = True
+        ucrReceiverStations.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "station" & Chr(34)})
+        ucrReceiverStations.strSelectorHeading = "Station Variables"
 
         ucrReceiverDate.SetClimaticType("date")
         ucrReceiverDate.SetMeAsReceiver()
         ucrReceiverDate.Selector = ucrSelectorClimaticExtremes
         ucrReceiverDate.bAutoFill = True
+        ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
+        ucrReceiverDate.strSelectorHeading = "Date Variables"
 
         ucrReceiverDOY.SetClimaticType("doy")
         ucrReceiverDOY.Selector = ucrSelectorClimaticExtremes
         ucrReceiverDOY.bAutoFill = True
+        ucrReceiverDOY.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "doy" & Chr(34)})
+        ucrReceiverDOY.strSelectorHeading = "Day variables"
 
         ucrReceiverElement.SetParameter(New RParameter("x", 0))
         ucrReceiverElement.Selector = ucrSelectorClimaticExtremes
         ucrReceiverElement.SetParameterIsString()
         ucrReceiverElement.bWithQuotes = False
+        ucrReceiverElement.strSelectorHeading = "Numerics"
 
         'ucrRdoOptions
         ucrPnlExtremesType.AddRadioButton(rdoMinMax)

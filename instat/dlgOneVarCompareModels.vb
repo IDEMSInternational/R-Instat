@@ -1,5 +1,5 @@
-' R-Instat 
-' Copyright (C) 2015
+' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
@@ -67,18 +67,22 @@ Public Class dlgOneVarCompareModels
 
         clsCdfcompFunction.SetPackageName("fitdistrplus")
         clsCdfcompFunction.SetRCommand("cdfcomp")
+        clsCdfcompFunction.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34))
         clsCdfcompFunction.iCallType = 3
 
         clsPpcompFunction.SetPackageName("fitdistrplus")
         clsPpcompFunction.SetRCommand("ppcomp")
+        clsPpcompFunction.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34))
         clsPpcompFunction.iCallType = 3
 
         clsQqcompFunction.SetPackageName("fitdistrplus")
         clsQqcompFunction.SetRCommand("qqcomp")
+        clsQqcompFunction.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34))
         clsQqcompFunction.iCallType = 3
 
         clsDenscompFunction.SetPackageName("fitdistrplus")
         clsDenscompFunction.SetRCommand("denscomp")
+        clsDenscompFunction.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34))
         clsDenscompFunction.iCallType = 3
 
         clsChisqtableOperator.SetOperation("$")
@@ -94,9 +98,9 @@ Public Class dlgOneVarCompareModels
         clsRAsDataFrame.AddParameter("x", clsROperatorParameter:=clsChisqtableOperator)
 
         clsRAsDataFrame.SetAssignTo(ucrSelectorOneVarCompModels.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_ChiSquare", strTempDataframe:=ucrSelectorOneVarCompModels.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-
-        ucrBase.clsRsyntax.SetBaseRFunction(clsGofStat)
+        ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.AddToAfterCodes(clsCdfcompFunction, iPosition:=0)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsGofStat)
         bResetSubdialog = True
     End Sub
 

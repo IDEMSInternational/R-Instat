@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports RDotNet
@@ -46,6 +46,8 @@ Public Class ucrReceiverSingle
     Public Overrides Sub Add(strItem As String, Optional strDataFrame As String = "")
         Dim clsGetDataType As New RFunction
         Dim strCurrentItemType As String
+        Dim expColumnType As SymbolicExpression
+        Dim bRemove As Boolean = False
 
         'Would prefer to have remove selected but that will first clear the receiver
         'This has issues when reading RSyntax and filling receivers e.g. in Specific plot dialogs
@@ -85,10 +87,22 @@ Public Class ucrReceiverSingle
                         ElseIf strItem = "value" Then
                             strCurrDataType = ""
                         Else
-                            strCurrDataType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript()).AsCharacter(0)
+                            expColumnType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript(), bSilent:=True)
+                            If expColumnType IsNot Nothing AndAlso expColumnType.Type <> Internals.SymbolicExpressionType.Null Then
+                                strCurrDataType = expColumnType.AsCharacter(0)
+                            Else
+                                strCurrDataType = ""
+                                bRemove = True
+                            End If
                         End If
                     Else
-                        strCurrDataType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript()).AsCharacter(0)
+                        expColumnType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript(), bSilent:=True)
+                        If expColumnType IsNot Nothing AndAlso expColumnType.Type <> Internals.SymbolicExpressionType.Null Then
+                            strCurrDataType = expColumnType.AsCharacter(0)
+                        Else
+                            strCurrDataType = ""
+                            bRemove = True
+                        End If
                     End If
                 End If
             Else
@@ -97,6 +111,9 @@ Public Class ucrReceiverSingle
             strDataFrameName = strDataFrame
             txtReceiverSingle.Text = strItem
             Selector.AddToVariablesList(strItem)
+            If bRemove Then
+                RemoveSelected()
+            End If
         End If
     End Sub
 
@@ -268,11 +285,9 @@ Public Class ucrReceiverSingle
     Public Sub CheckAutoFill()
         If bAutoFill Then
             If Selector IsNot Nothing Then
-                If lstIncludedMetadataProperties.Count > 0 OrElse lstExcludedMetadataProperties.Count > 0 OrElse Selector.lstIncludedMetadataProperties.Count > 0 OrElse Selector.lstIncludedMetadataProperties.Count Then
-                    SetMeAsReceiver()
-                    If Selector.lstAvailableVariable.Items.Count = 1 Then
-                        Add(Selector.lstAvailableVariable.Items(0).Text, Selector.strCurrentDataFrame)
-                    End If
+                SetMeAsReceiver()
+                If Selector.lstAvailableVariable.Items.Count = 1 Then
+                    Add(Selector.lstAvailableVariable.Items(0).Text, Selector.strCurrentDataFrame)
                 End If
             End If
         End If

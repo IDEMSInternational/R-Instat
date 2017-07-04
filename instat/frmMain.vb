@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,8 +11,9 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports RDotNet
 Imports System.IO
 Imports System.Globalization
@@ -36,7 +37,7 @@ Public Class frmMain
     Private mnuItems As New List(Of Form)
     Private ctrActive As Control
     Private WithEvents timer As New System.Windows.Forms.Timer
-    Private iAutoSaveDataTime As Integer = 300000
+    Private iAutoSaveDataMilliseconds As Integer
 
     Public strAutoSaveDataFolderPath As String = Path.Combine(Path.GetTempPath, "R-Instat_data_auto_save")
     Public strAutoSaveLogFolderPath As String = Path.Combine(Path.GetTempPath, "R-Instat_log_auto_save")
@@ -80,7 +81,8 @@ Public Class frmMain
         LoadInstatOptions()
 
         'Do this after loading options because interval depends on options
-        timer.Interval = iAutoSaveDataTime
+        'Interval is in milliseconds and option is in minutes
+        timer.Interval = (clsInstatOptions.iAutoSaveDataMinutes * 60 * 100)
         timer.Start()
 
         AddHandler System.Windows.Forms.Application.Idle, AddressOf Application_Idle
@@ -92,8 +94,9 @@ Public Class frmMain
     End Sub
 
     Private Sub Application_Idle(sender As Object, e As EventArgs)
-        If Not timer.Enabled AndAlso (ActiveForm Is Nothing OrElse ActiveForm.Equals(Me)) AndAlso Not clsRLink.bRCodeRunning Then
+        If clsInstatOptions.bAutoSaveData AndAlso Not timer.Enabled AndAlso (ActiveForm Is Nothing OrElse ActiveForm.Equals(Me)) AndAlso Not clsRLink.bRCodeRunning Then
             AutoSaveData()
+            timer.Interval = (clsInstatOptions.iAutoSaveDataMinutes * 60 * 1000)
             timer.Start()
         End If
     End Sub
@@ -123,8 +126,8 @@ Public Class frmMain
                 strAutoSavedDataFilePaths = My.Computer.FileSystem.GetFiles(strAutoSaveDataFolderPath).ToArray
                 iDataFiles = strAutoSavedDataFilePaths.Count
             End If
-            If iLogFiles > 0 OrElse iDataFiles > 0 Then
-                If MsgBox("We have detected that R-Instat may have closed unexpectadly last time." & Environment.NewLine & "Would you like to see auto recovery options?", MessageBoxButtons.YesNo, "Auto Recovery") = MsgBoxResult.Yes Then
+            If iLogFiles > 0 OrElse iDataFiles > 0 OrElse iInternalLogFiles > 0 Then
+                If MsgBox("We have detected that R-Instat may have closed unexpectedly last time." & Environment.NewLine & "Would you like to see auto recovery options?", MessageBoxButtons.YesNo, "Auto Recovery") = MsgBoxResult.Yes Then
                     dlgAutoSaveRecovery.strAutoSavedLogFilePaths = strAutoSavedLogFilePaths
                     dlgAutoSaveRecovery.strAutoSavedDataFilePaths = strAutoSavedDataFilePaths
                     dlgAutoSaveRecovery.strAutoSavedInternalLogFilePaths = strAutoSavedInternalLogFilePaths
@@ -701,7 +704,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuModelTwoVariablesFitModel_Click(sender As Object, e As EventArgs) Handles mnuModelTwoVariablesFitModel.Click
-        dlgRegressionSimple.ShowDialog()
+        dlgTwoVariableFitModel.ShowDialog()
     End Sub
 
     Private Sub mnuModelOtherOneVariableExactResults_Click(sender As Object, e As EventArgs) Handles mnuModelOtherOneVariableExactResults.Click
@@ -717,7 +720,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuModelOtherTwoVariablesSimpleRegression_Click(sender As Object, e As EventArgs) Handles mnuModelOtherTwoVariablesSimpleRegression.Click
-        dlgRegressionSimple.ShowDialog()
+        dlgTwoVariableFitModel.ShowDialog()
     End Sub
 
     Private Sub mnuModelOtherTwoVariablesOneWayANOVA_Click(sender As Object, e As EventArgs) Handles mnuModelOtherTwoVariablesOneWayANOVA.Click
@@ -879,7 +882,7 @@ Public Class frmMain
                     i = i + 1
                     strTempFile = "data" & i & ".rds"
                 End While
-                strCurrentAutoSaveDataFilePath = strTempFile
+                strCurrentAutoSaveDataFilePath = Path.Combine(strAutoSaveDataFolderPath, strTempFile)
             End If
             clsSaveRDS.SetRCommand("saveRDS")
             clsSaveRDS.AddParameter("object", clsRLink.strInstatDataObject)
@@ -1549,12 +1552,8 @@ Public Class frmMain
         ucrDataViewer.SetCurrentDataFrame(strDataName)
     End Sub
 
-    Private Sub WindroseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WindroseToolStripMenuItem.Click
+    Private Sub WindroseToolStripMenuItem_Click(sender As Object, e As EventArgs)
         dlgWindrose.ShowDialog()
-    End Sub
-
-    Private Sub WindrosePlotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles WindrosePlotToolStripMenuItem.Click
-        dlgWindrosePlot.ShowDialog()
     End Sub
 
     Private Sub CummulativeDistributionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CummulativeDistributionToolStripMenuItem.Click
