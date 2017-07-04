@@ -57,7 +57,8 @@ Public Class dlgOneVarFitModel
         ucrReceiverVariable.SetParameterIsRFunction()
 
         ucrChkConvertVariate.SetText("Convert to Variate")
-        ' ucrChkConvertVariate.SetParameter(New RParameter("data"))
+        ucrChkConvertVariate.AddParameterIsRFunctionCondition(True, "data", True)
+        ucrChkConvertVariate.AddParameterIsRFunctionCondition(False, "data", False)
 
         ucrNudHyp.SetParameter(New RParameter("mu"))
 
@@ -265,7 +266,7 @@ Public Class dlgOneVarFitModel
         ucrPnlStats.SetRCode(clsRTTest, bReset)
         ucrPnlWilcoxVarTest.SetRCode(clsRWilcoxTest, bReset)
         ucrReceiverVariable.SetRCode(clsRConvertVector, bReset)
-        ' ucrChkConvertVariate.SetRCode(clsRConvertNumeric, bReset)
+        ucrChkConvertVariate.SetRCode(clsRConvertNumeric, bReset)
         ucrNudHyp.SetRCode(clsRTTest, bReset)
         ucrDistributionChoice.SetRCode(clsFamilyFunction, bReset)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRConvertNumeric, New RParameter("x"), iAdditionalPairNo:=1)
@@ -278,9 +279,7 @@ Public Class dlgOneVarFitModel
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRStartValues, New RParameter("x"), iAdditionalPairNo:=8)
 
         ucrSaveModel.SetRCode(clsROneVarFitModel, bReset)
-        ucrChkConvertVariate.AddAdditionalCodeParameterPair(clsROneVarFitModel, ucrChkConvertVariate.GetParameter(), iAdditionalPairNo:=1)
-        'ucrChkConvertVariate.AddAdditionalCodeParameterPair(clsROneVarFitModel, ucrChkConvertVariate.GetParameter(), iAdditionalPairNo:=2)
-        'ucrChkConvertVariate.AddAdditionalCodeParameterPair(clsROneVarFitModel, ucrChkConvertVariate.GetParameter(), iAdditionalPairNo:=3)
+        ' ucrChkConvertVariate.AddAdditionalCodeParameterPair(clsROneVarFitModel, ucrChkConvertVariate.GetParameter(), iAdditionalPairNo:=1)
 
         ucrNudHyp.AddAdditionalCodeParameterPair(clsVarTest, New RParameter("sigma.squared"), iAdditionalPairNo:=1)
         ucrNudHyp.AddAdditionalCodeParameterPair(clsVarTest, New RParameter("sigma.squared"), iAdditionalPairNo:=2)
@@ -324,7 +323,6 @@ Public Class dlgOneVarFitModel
         Else
             ucrBase.OKEnabled(False)
         End If
-        ucrBase.OKEnabled(True)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -340,6 +338,7 @@ Public Class dlgOneVarFitModel
                 ucrChkConvertVariate.Visible = False
             Else
                 ucrChkConvertVariate.Visible = True
+                ucrChkConvertVariate.Enabled = False
                 ucrChkConvertVariate.Checked = True
             End If
             If ucrChkConvertVariate.Checked Then
