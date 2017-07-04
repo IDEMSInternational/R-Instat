@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class ucrGeomListWithParameters
     Inherits instat.ucrGeom
 
@@ -384,7 +400,7 @@ Partial Class ucrGeomListWithParameters
         Me.ucrChkIgnoreGlobalAes.Checked = False
         Me.ucrChkIgnoreGlobalAes.Location = New System.Drawing.Point(5, 280)
         Me.ucrChkIgnoreGlobalAes.Name = "ucrChkIgnoreGlobalAes"
-        Me.ucrChkIgnoreGlobalAes.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkIgnoreGlobalAes.Size = New System.Drawing.Size(230, 20)
         Me.ucrChkIgnoreGlobalAes.TabIndex = 7
         '
         'ucrChkApplyOnAllLayers
@@ -392,10 +408,10 @@ Partial Class ucrGeomListWithParameters
         Me.ucrChkApplyOnAllLayers.Checked = False
         Me.ucrChkApplyOnAllLayers.Location = New System.Drawing.Point(5, 254)
         Me.ucrChkApplyOnAllLayers.Name = "ucrChkApplyOnAllLayers"
-        Me.ucrChkApplyOnAllLayers.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkApplyOnAllLayers.Size = New System.Drawing.Size(230, 20)
         Me.ucrChkApplyOnAllLayers.TabIndex = 8
         '
-        'UcrGeomListWithParameters
+        'ucrGeomListWithParameters
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.Controls.Add(Me.ucrChkApplyOnAllLayers)
@@ -403,7 +419,7 @@ Partial Class ucrGeomListWithParameters
         Me.Controls.Add(Me.grpAesList)
         Me.Controls.Add(Me.lblAesList)
         Me.Controls.Add(Me.ucrGeomWithAesSelector)
-        Me.Name = "UcrGeomListWithParameters"
+        Me.Name = "ucrGeomListWithParameters"
         Me.Size = New System.Drawing.Size(467, 399)
         Me.Controls.SetChildIndex(Me.ucrGeomWithAesSelector, 0)
         Me.Controls.SetChildIndex(Me.lblAesList, 0)

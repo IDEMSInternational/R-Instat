@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class ucrElementLineControl
@@ -60,7 +60,7 @@ Public Class ucrElementLineControl
         strAxisLine = strNewAxis
     End Sub
 
-    Public Sub SetRCodeForControl(strNewAxisLine As String, clsNewElementLine As RFunction, clsNewThemeFunction As RFunction, clsNewBaseOperator As ROperator, Optional bReset As Boolean = False)
+    Public Sub SetRCodeForControl(strNewAxisLine As String, clsNewElementLine As RFunction, clsNewThemeFunction As RFunction, clsNewBaseOperator As ROperator, Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
         If Not bInitialiseControls Then
             InitialiseControl()
         End If
@@ -70,17 +70,17 @@ Public Class ucrElementLineControl
         clsThemeFunction = clsNewThemeFunction
         clsElementLine = clsNewElementLine
 
-        ucrNudLineSize.SetRCode(clsElementLine, bReset)
-        ucrChkLineSize.SetRCode(clsElementLine, bReset)
+        ucrNudLineSize.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrChkLineSize.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
-        ucrLineColors.SetRCode(clsElementLine, bReset)
-        ucrChkLineColour.SetRCode(clsElementLine, bReset)
+        ucrLineColors.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrChkLineColour.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
-        ucrInputLineLineType.SetRCode(clsElementLine, bReset)
-        ucrChkLineLineType.SetRCode(clsElementLine, bReset)
+        ucrInputLineLineType.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrChkLineLineType.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
 
-        ucrInputLineLineEnd.SetRCode(clsElementLine, bReset)
-        ucrChkLineLineEnd.SetRCode(clsElementLine, bReset)
+        ucrInputLineLineEnd.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
+        ucrChkLineLineEnd.SetRCode(clsElementLine, bReset, bCloneIfNeeded:=bCloneIfNeeded)
         AddRemoveElementLineAxis()
     End Sub
 
@@ -109,7 +109,4 @@ Public Class ucrElementLineControl
         grpTickMarks.Text = strlabel
     End Sub
 
-    Private Sub ucrChkLineLineType_Load(sender As Object, e As EventArgs) Handles ucrChkLineLineType.Load
-
-    End Sub
 End Class

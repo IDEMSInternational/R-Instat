@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgOneVariableGraph
     Inherits System.Windows.Forms.Form
 
@@ -71,6 +87,7 @@ Partial Class dlgOneVariableGraph
         'rdoSingleGraphs
         '
         Me.rdoSingleGraphs.AutoSize = True
+        Me.rdoSingleGraphs.Enabled = False
         Me.rdoSingleGraphs.Location = New System.Drawing.Point(10, 65)
         Me.rdoSingleGraphs.Name = "rdoSingleGraphs"
         Me.rdoSingleGraphs.Size = New System.Drawing.Size(91, 17)
@@ -131,7 +148,9 @@ Partial Class dlgOneVariableGraph
         Me.ucrReceiverOneVarGraph.Name = "ucrReceiverOneVarGraph"
         Me.ucrReceiverOneVarGraph.Selector = Nothing
         Me.ucrReceiverOneVarGraph.Size = New System.Drawing.Size(123, 110)
+        Me.ucrReceiverOneVarGraph.strNcFilePath = ""
         Me.ucrReceiverOneVarGraph.TabIndex = 2
+        Me.ucrReceiverOneVarGraph.ucrSelector = Nothing
         '
         'ucrSelectorOneVarGraph
         '
