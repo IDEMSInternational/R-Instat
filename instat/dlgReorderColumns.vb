@@ -53,9 +53,9 @@ Public Class dlgReorderColumns
         ucrDataFrameSelect.SetParameter(New RParameter("data_name", 0))
         ucrDataFrameSelect.SetParameterIsString()
 
-        UcrReorder1.SetParameter(New RParameter("col_order", 1))
-        UcrReorder1.setDataType("column")
-        UcrReorder1.setDataframes(ucrDataFrameSelect)
+        ucrReorderColumns.SetParameter(New RParameter("col_order", 1))
+        ucrReorderColumns.setDataType("column")
+        ucrReorderColumns.setDataframes(ucrDataFrameSelect)
     End Sub
 
     Private Sub SetDefaults()
@@ -73,7 +73,7 @@ Public Class dlgReorderColumns
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not UcrReorder1.IsEmpty Then
+        If Not ucrReorderColumns.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
