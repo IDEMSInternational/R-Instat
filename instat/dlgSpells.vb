@@ -1,5 +1,5 @@
-﻿'' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
@@ -73,7 +73,7 @@ Public Class dlgSpells
         ucrReceiverDate.Selector = ucrSelectorForSpells
         ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
         ucrReceiverDate.bAutoFill = True
-        ucrReceiverDate.strSelectorHeading = "Date variables"
+        ucrReceiverDate.strSelectorHeading = "Date Variables"
 
         ucrReceiverDOY.SetParameter(New RParameter("day", 0))
         ucrReceiverDOY.SetParameterIsString()
@@ -81,7 +81,7 @@ Public Class dlgSpells
         ucrReceiverDOY.Selector = ucrSelectorForSpells
         ucrReceiverDOY.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "doy" & Chr(34)})
         ucrReceiverDOY.bAutoFill = True
-        ucrReceiverDOY.strSelectorHeading = "Day variables"
+        ucrReceiverDOY.strSelectorHeading = "Day Variables"
 
         clsSubSpellLength1.SetRCommand("list")
         clsMaxValueList.SetRCommand("list")
