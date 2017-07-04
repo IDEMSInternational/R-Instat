@@ -59,7 +59,9 @@ Partial Class dlgFourVariableModelling
         Me.ucrBaseFourVariableModelling = New instat.ucrButtons()
         Me.ucrSaveModel = New instat.ucrSave()
         Me.ucrChkConvertToNumeric = New instat.ucrCheck()
-        Me.cmdFunction = New System.Windows.Forms.Button()
+        Me.cmdFirstExplanatoryFunction = New System.Windows.Forms.Button()
+        Me.cmdSecondExplanatoryFunction = New System.Windows.Forms.Button()
+        Me.cmdThirdExplanatoryFunction = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'cmdModelOptions
@@ -271,21 +273,41 @@ Partial Class dlgFourVariableModelling
         Me.ucrChkConvertToNumeric.Size = New System.Drawing.Size(136, 20)
         Me.ucrChkConvertToNumeric.TabIndex = 45
         '
-        'cmdFunction
+        'cmdFirstExplanatoryFunction
         '
-        Me.cmdFunction.Location = New System.Drawing.Point(398, 99)
-        Me.cmdFunction.Name = "cmdFunction"
-        Me.cmdFunction.Size = New System.Drawing.Size(67, 20)
-        Me.cmdFunction.TabIndex = 46
-        Me.cmdFunction.Text = "Function..."
-        Me.cmdFunction.UseVisualStyleBackColor = True
+        Me.cmdFirstExplanatoryFunction.Location = New System.Drawing.Point(400, 98)
+        Me.cmdFirstExplanatoryFunction.Name = "cmdFirstExplanatoryFunction"
+        Me.cmdFirstExplanatoryFunction.Size = New System.Drawing.Size(67, 20)
+        Me.cmdFirstExplanatoryFunction.TabIndex = 46
+        Me.cmdFirstExplanatoryFunction.Text = "Function..."
+        Me.cmdFirstExplanatoryFunction.UseVisualStyleBackColor = True
+        '
+        'cmdSecondExplanatoryFunction
+        '
+        Me.cmdSecondExplanatoryFunction.Location = New System.Drawing.Point(400, 174)
+        Me.cmdSecondExplanatoryFunction.Name = "cmdSecondExplanatoryFunction"
+        Me.cmdSecondExplanatoryFunction.Size = New System.Drawing.Size(67, 20)
+        Me.cmdSecondExplanatoryFunction.TabIndex = 47
+        Me.cmdSecondExplanatoryFunction.Text = "Function..."
+        Me.cmdSecondExplanatoryFunction.UseVisualStyleBackColor = True
+        '
+        'cmdThirdExplanatoryFunction
+        '
+        Me.cmdThirdExplanatoryFunction.Location = New System.Drawing.Point(400, 250)
+        Me.cmdThirdExplanatoryFunction.Name = "cmdThirdExplanatoryFunction"
+        Me.cmdThirdExplanatoryFunction.Size = New System.Drawing.Size(67, 20)
+        Me.cmdThirdExplanatoryFunction.TabIndex = 48
+        Me.cmdThirdExplanatoryFunction.Text = "Function..."
+        Me.cmdThirdExplanatoryFunction.UseVisualStyleBackColor = True
         '
         'dlgFourVariableModelling
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(546, 460)
-        Me.Controls.Add(Me.cmdFunction)
+        Me.Controls.Add(Me.cmdThirdExplanatoryFunction)
+        Me.Controls.Add(Me.cmdSecondExplanatoryFunction)
+        Me.Controls.Add(Me.cmdFirstExplanatoryFunction)
         Me.Controls.Add(Me.ucrChkConvertToNumeric)
         Me.Controls.Add(Me.ucrSaveModel)
         Me.Controls.Add(Me.ucrInputModelOperators2)
@@ -340,5 +362,7 @@ Partial Class dlgFourVariableModelling
     Friend WithEvents ucrInputModelOperators2 As ucrInputComboBox
     Friend WithEvents ucrSaveModel As ucrSave
     Friend WithEvents ucrChkConvertToNumeric As ucrCheck
-    Friend WithEvents cmdFunction As Button
+    Friend WithEvents cmdFirstExplanatoryFunction As Button
+    Friend WithEvents cmdThirdExplanatoryFunction As Button
+    Friend WithEvents cmdSecondExplanatoryFunction As Button
 End Class
