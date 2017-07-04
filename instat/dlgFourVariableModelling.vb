@@ -238,8 +238,8 @@ Public Class dlgFourVariableModelling
         ucrDistributionChoice.SetRCode(clsFamilyFunction, bReset)
         ucrReceiverResponse.SetRCode(clsRNumeric, bReset)
         ucrReceiverFirstExplanatory.SetRCode(clsFirstTransformFunction, bReset)
-        ucrReceiverSecondExplanatory.SetRCode(clsFirstTransformFunction, bReset)
-        ucrReceiverThirdExplanatory.SetRCode(clsFirstTransformFunction, bReset)
+        ucrReceiverSecondExplanatory.SetRCode(clsFormulaOperator2, bReset)
+        ucrReceiverThirdExplanatory.SetRCode(clsFormulaOperator2, bReset)
 
         bRCodeSet = True
         ExplanatoryFunctionEnabled()
