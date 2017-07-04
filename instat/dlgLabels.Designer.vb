@@ -59,7 +59,7 @@ Partial Class dlgLabels
         '
         'cmdAddLevel
         '
-        Me.cmdAddLevel.Location = New System.Drawing.Point(256, 243)
+        Me.cmdAddLevel.Location = New System.Drawing.Point(115, 287)
         Me.cmdAddLevel.Name = "cmdAddLevel"
         Me.cmdAddLevel.Size = New System.Drawing.Size(96, 23)
         Me.cmdAddLevel.TabIndex = 5
@@ -69,7 +69,7 @@ Partial Class dlgLabels
         'ucrChkIncludeLevelNumbers
         '
         Me.ucrChkIncludeLevelNumbers.Checked = False
-        Me.ucrChkIncludeLevelNumbers.Location = New System.Drawing.Point(388, 246)
+        Me.ucrChkIncludeLevelNumbers.Location = New System.Drawing.Point(115, 316)
         Me.ucrChkIncludeLevelNumbers.Name = "ucrChkIncludeLevelNumbers"
         Me.ucrChkIncludeLevelNumbers.Size = New System.Drawing.Size(135, 20)
         Me.ucrChkIncludeLevelNumbers.TabIndex = 6
@@ -94,7 +94,7 @@ Partial Class dlgLabels
         Me.ucrFactorLabels.Location = New System.Drawing.Point(256, 66)
         Me.ucrFactorLabels.Name = "ucrFactorLabels"
         Me.ucrFactorLabels.shtCurrSheet = Nothing
-        Me.ucrFactorLabels.Size = New System.Drawing.Size(267, 171)
+        Me.ucrFactorLabels.Size = New System.Drawing.Size(336, 299)
         Me.ucrFactorLabels.TabIndex = 2
         Me.ucrFactorLabels.ucrChkLevels = Nothing
         '
@@ -110,7 +110,7 @@ Partial Class dlgLabels
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 272)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 376)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 53)
         Me.ucrBase.TabIndex = 0
@@ -119,7 +119,7 @@ Partial Class dlgLabels
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(533, 332)
+        Me.ClientSize = New System.Drawing.Size(604, 431)
         Me.Controls.Add(Me.ucrChkIncludeLevelNumbers)
         Me.Controls.Add(Me.cmdAddLevel)
         Me.Controls.Add(Me.ucrReceiverLabels)
