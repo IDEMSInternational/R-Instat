@@ -506,6 +506,7 @@ data_object$set("public", "add_columns_to_data", function(col_name = "", col_dat
     }
     if(use_col_name_as_prefix) curr_col_name = self$get_next_default_column_name(col_name)
     else curr_col_name = col_name[[i]]
+    curr_col_name <- make.names(curr_col_name)
     new_col_names <- c(new_col_names, curr_col_name)
     if(curr_col_name %in% self$get_column_names()) {
       message(paste("A column named", curr_col_name, "already exists. The column will be replaced in the data"))
@@ -629,8 +630,15 @@ data_object$set("public", "rename_column_in_data", function(curr_col_name = "", 
 }
 )
 
-data_object$set("public", "remove_columns_in_data", function(cols=c()) {
-  if(length(cols) == self$get_column_count()) stop("Cannot delete all columns through this function. Use delete_dataframe to delete the data.")
+data_object$set("public", "remove_columns_in_data", function(cols=c(), allow_delete_all = FALSE) {
+  if(length(cols) == self$get_column_count()) {
+    if(allow_delete_all) {
+      warning("You are deleting all columns in the data frame.")
+    }
+    else {
+      stop("Cannot delete all columns through this function. Use delete_dataframe to delete the data.")
+    }
+  }
   for(col_name in cols) {
     # Column name must be character
     if(!is.character(col_name)) {

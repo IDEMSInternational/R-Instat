@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgTwoVariableFitModel
     Inherits System.Windows.Forms.Form
 
@@ -92,7 +108,7 @@ Partial Class dlgTwoVariableFitModel
         'cmdDisplayOptions
         '
         Me.cmdDisplayOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDisplayOptions.Location = New System.Drawing.Point(325, 328)
+        Me.cmdDisplayOptions.Location = New System.Drawing.Point(341, 364)
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
         Me.cmdDisplayOptions.Size = New System.Drawing.Size(110, 23)
         Me.cmdDisplayOptions.TabIndex = 16
@@ -103,7 +119,7 @@ Partial Class dlgTwoVariableFitModel
         'cmdModelOptions
         '
         Me.cmdModelOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdModelOptions.Location = New System.Drawing.Point(325, 301)
+        Me.cmdModelOptions.Location = New System.Drawing.Point(341, 336)
         Me.cmdModelOptions.Name = "cmdModelOptions"
         Me.cmdModelOptions.Size = New System.Drawing.Size(110, 23)
         Me.cmdModelOptions.TabIndex = 15
@@ -115,7 +131,7 @@ Partial Class dlgTwoVariableFitModel
         '
         Me.lblModelPreview.AutoSize = True
         Me.lblModelPreview.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblModelPreview.Location = New System.Drawing.Point(10, 304)
+        Me.lblModelPreview.Location = New System.Drawing.Point(10, 339)
         Me.lblModelPreview.Name = "lblModelPreview"
         Me.lblModelPreview.Size = New System.Drawing.Size(80, 13)
         Me.lblModelPreview.TabIndex = 11
@@ -155,7 +171,7 @@ Partial Class dlgTwoVariableFitModel
         '
         Me.lblFactor.AutoSize = True
         Me.lblFactor.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblFactor.Location = New System.Drawing.Point(264, 117)
+        Me.lblFactor.Location = New System.Drawing.Point(264, 147)
         Me.lblFactor.Name = "lblFactor"
         Me.lblFactor.Size = New System.Drawing.Size(106, 13)
         Me.lblFactor.TabIndex = 6
@@ -165,7 +181,7 @@ Partial Class dlgTwoVariableFitModel
         '
         Me.lblNumeric.AutoSize = True
         Me.lblNumeric.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNumeric.Location = New System.Drawing.Point(264, 55)
+        Me.lblNumeric.Location = New System.Drawing.Point(264, 85)
         Me.lblNumeric.Name = "lblNumeric"
         Me.lblNumeric.Size = New System.Drawing.Size(99, 13)
         Me.lblNumeric.TabIndex = 3
@@ -173,7 +189,7 @@ Partial Class dlgTwoVariableFitModel
         '
         'ucrSaveModels
         '
-        Me.ucrSaveModels.Location = New System.Drawing.Point(9, 327)
+        Me.ucrSaveModels.Location = New System.Drawing.Point(10, 366)
         Me.ucrSaveModels.Name = "ucrSaveModels"
         Me.ucrSaveModels.Size = New System.Drawing.Size(291, 24)
         Me.ucrSaveModels.TabIndex = 1
@@ -181,7 +197,7 @@ Partial Class dlgTwoVariableFitModel
         'ucrChkConvertToVariate
         '
         Me.ucrChkConvertToVariate.Checked = False
-        Me.ucrChkConvertToVariate.Location = New System.Drawing.Point(267, 92)
+        Me.ucrChkConvertToVariate.Location = New System.Drawing.Point(267, 122)
         Me.ucrChkConvertToVariate.Name = "ucrChkConvertToVariate"
         Me.ucrChkConvertToVariate.Size = New System.Drawing.Size(120, 20)
         Me.ucrChkConvertToVariate.TabIndex = 4
@@ -189,7 +205,7 @@ Partial Class dlgTwoVariableFitModel
         'ucrReceiverExplanatory
         '
         Me.ucrReceiverExplanatory.frmParent = Me
-        Me.ucrReceiverExplanatory.Location = New System.Drawing.Point(267, 135)
+        Me.ucrReceiverExplanatory.Location = New System.Drawing.Point(267, 165)
         Me.ucrReceiverExplanatory.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverExplanatory.Name = "ucrReceiverExplanatory"
         Me.ucrReceiverExplanatory.Selector = Nothing
@@ -201,7 +217,7 @@ Partial Class dlgTwoVariableFitModel
         'ucrReceiverResponse
         '
         Me.ucrReceiverResponse.frmParent = Me
-        Me.ucrReceiverResponse.Location = New System.Drawing.Point(267, 69)
+        Me.ucrReceiverResponse.Location = New System.Drawing.Point(267, 99)
         Me.ucrReceiverResponse.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverResponse.Name = "ucrReceiverResponse"
         Me.ucrReceiverResponse.Selector = Nothing
@@ -232,21 +248,21 @@ Partial Class dlgTwoVariableFitModel
         Me.ucrModelPreview.AddQuotesIfUnrecognised = True
         Me.ucrModelPreview.IsMultiline = False
         Me.ucrModelPreview.IsReadOnly = False
-        Me.ucrModelPreview.Location = New System.Drawing.Point(96, 300)
+        Me.ucrModelPreview.Location = New System.Drawing.Point(97, 337)
         Me.ucrModelPreview.Name = "ucrModelPreview"
         Me.ucrModelPreview.Size = New System.Drawing.Size(204, 21)
         Me.ucrModelPreview.TabIndex = 23
         '
         'ucrDistributionChoice
         '
-        Me.ucrDistributionChoice.Location = New System.Drawing.Point(9, 268)
+        Me.ucrDistributionChoice.Location = New System.Drawing.Point(10, 244)
         Me.ucrDistributionChoice.Name = "ucrDistributionChoice"
         Me.ucrDistributionChoice.Size = New System.Drawing.Size(208, 27)
         Me.ucrDistributionChoice.TabIndex = 24
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 359)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 396)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(406, 54)
         Me.ucrBase.TabIndex = 17
@@ -261,7 +277,7 @@ Partial Class dlgTwoVariableFitModel
         Me.grpParameters.Controls.Add(Me.ucrNudCI)
         Me.grpParameters.Controls.Add(Me.lblDifferenceInMeans)
         Me.grpParameters.Controls.Add(Me.lblConfidenceInterval)
-        Me.grpParameters.Location = New System.Drawing.Point(267, 157)
+        Me.grpParameters.Location = New System.Drawing.Point(268, 187)
         Me.grpParameters.Name = "grpParameters"
         Me.grpParameters.Size = New System.Drawing.Size(183, 137)
         Me.grpParameters.TabIndex = 25
@@ -353,18 +369,18 @@ Partial Class dlgTwoVariableFitModel
         '
         'cmdExplanatoryFunction
         '
-        Me.cmdExplanatoryFunction.Location = New System.Drawing.Point(267, 162)
+        Me.cmdExplanatoryFunction.Location = New System.Drawing.Point(267, 192)
         Me.cmdExplanatoryFunction.Name = "cmdExplanatoryFunction"
-        Me.cmdExplanatoryFunction.Size = New System.Drawing.Size(67, 20)
+        Me.cmdExplanatoryFunction.Size = New System.Drawing.Size(103, 23)
         Me.cmdExplanatoryFunction.TabIndex = 33
         Me.cmdExplanatoryFunction.Text = "Function..."
         Me.cmdExplanatoryFunction.UseVisualStyleBackColor = True
         '
-        'dlgRegressionSimple
+        'dlgTwoVariableFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(454, 421)
+        Me.ClientSize = New System.Drawing.Size(466, 452)
         Me.Controls.Add(Me.cmdExplanatoryFunction)
         Me.Controls.Add(Me.grpParameters)
         Me.Controls.Add(Me.ucrSaveModels)
@@ -387,7 +403,7 @@ Partial Class dlgTwoVariableFitModel
         Me.HelpButton = True
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgRegressionSimple"
+        Me.Name = "dlgTwoVariableFitModel"
         Me.ShowIcon = False
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
