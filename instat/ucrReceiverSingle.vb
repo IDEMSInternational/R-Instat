@@ -46,6 +46,8 @@ Public Class ucrReceiverSingle
     Public Overrides Sub Add(strItem As String, Optional strDataFrame As String = "")
         Dim clsGetDataType As New RFunction
         Dim strCurrentItemType As String
+        Dim expColumnType As SymbolicExpression
+        Dim bRemove As Boolean = False
 
         'Would prefer to have remove selected but that will first clear the receiver
         'This has issues when reading RSyntax and filling receivers e.g. in Specific plot dialogs
@@ -85,10 +87,22 @@ Public Class ucrReceiverSingle
                         ElseIf strItem = "value" Then
                             strCurrDataType = ""
                         Else
-                            strCurrDataType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript()).AsCharacter(0)
+                            expColumnType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript(), bSilent:=True)
+                            If expColumnType IsNot Nothing AndAlso expColumnType.Type <> Internals.SymbolicExpressionType.Null Then
+                                strCurrDataType = expColumnType.AsCharacter(0)
+                            Else
+                                strCurrDataType = ""
+                                bRemove = True
+                            End If
                         End If
                     Else
-                        strCurrDataType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript()).AsCharacter(0)
+                        expColumnType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript(), bSilent:=True)
+                        If expColumnType IsNot Nothing AndAlso expColumnType.Type <> Internals.SymbolicExpressionType.Null Then
+                            strCurrDataType = expColumnType.AsCharacter(0)
+                        Else
+                            strCurrDataType = ""
+                            bRemove = True
+                        End If
                     End If
                 End If
             Else
@@ -97,6 +111,9 @@ Public Class ucrReceiverSingle
             strDataFrameName = strDataFrame
             txtReceiverSingle.Text = strItem
             Selector.AddToVariablesList(strItem)
+            If bRemove Then
+                RemoveSelected()
+            End If
         End If
     End Sub
 

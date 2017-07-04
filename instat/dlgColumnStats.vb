@@ -92,6 +92,8 @@ Public Class dlgColumnStats
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
         clsDefaultFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList)
+        'Prevents an error if user chooses non count summaries with no columns to summarise
+        clsDefaultFunction.AddParameter("silent", "TRUE")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
         bResetSubdialog = True
     End Sub
@@ -101,7 +103,7 @@ Public Class dlgColumnStats
     End Sub
 
     Public Sub TestOKEnabled()
-        If Not ucrReceiverSelectedVariables.IsEmpty AndAlso Not ucrReceiverByFactor.IsEmpty AndAlso Not clsSummariesList.clsParameters.Count = 0 Then
+        If Not ucrReceiverByFactor.IsEmpty AndAlso Not clsSummariesList.clsParameters.Count = 0 Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)

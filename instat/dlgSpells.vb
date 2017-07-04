@@ -73,7 +73,7 @@ Public Class dlgSpells
         ucrReceiverDate.Selector = ucrSelectorForSpells
         ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
         ucrReceiverDate.bAutoFill = True
-        ucrReceiverDate.strSelectorHeading = "Date variables"
+        ucrReceiverDate.strSelectorHeading = "Date Variables"
 
         ucrReceiverDOY.SetParameter(New RParameter("day", 0))
         ucrReceiverDOY.SetParameterIsString()
@@ -81,7 +81,7 @@ Public Class dlgSpells
         ucrReceiverDOY.Selector = ucrSelectorForSpells
         ucrReceiverDOY.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "doy" & Chr(34)})
         ucrReceiverDOY.bAutoFill = True
-        ucrReceiverDOY.strSelectorHeading = "Day variables"
+        ucrReceiverDOY.strSelectorHeading = "Day Variables"
 
         clsSubSpellLength1.SetRCommand("list")
         clsMaxValueList.SetRCommand("list")

@@ -59,6 +59,10 @@ Public Class RLink
 
     Private grdDataView As ReoGridControl
 
+    Private bShowWaitDialog As Boolean = True
+    'Time in seconds to wait before showing waiting dialog
+    Private iWaitDelay As Integer = 2
+
     Public Sub StartREngine(Optional strScript As String = "", Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bSeparateThread As Boolean = True)
         Try
             REngine.SetEnvironmentVariables()
@@ -447,7 +451,9 @@ Public Class RLink
         strCommand = strVariableName & "<-" & strScript
         If clsEngine IsNot Nothing Then
             Evaluate(strCommand, bSilent:=bSilent, bSeparateThread:=bSeparateThread)
-            expTemp = GetSymbol(strVariableName, bSilent:=bSilent)
+            expTemp = GetSymbol(strVariableName, bSilent:=True)
+            'Very important to remove the variable after getting it othewise could be returning wrong variable later if a command gives an error
+            Evaluate("rm(" & strVariableName & ")", bSilent:=bSilent, bSeparateThread:=bSeparateThread)
         End If
         Return expTemp
     End Function
@@ -494,6 +500,7 @@ Public Class RLink
         Dim bReturn As Boolean = True
         Dim i As Integer = 1
         Dim strTempFile As String
+        Dim bErrorMessageOpen As Boolean = False
 
         While bRCodeRunning
             Threading.Thread.Sleep(5)
@@ -549,7 +556,9 @@ Public Class RLink
                                                               clsEngine.Evaluate(strScript)
                                                           Catch ex As Exception
                                                               If Not bSilent Then
+                                                                  bErrorMessageOpen = True
                                                                   MsgBox(ex.Message & Environment.NewLine & "The error occurred in attempting to run the following R command(s):" & Environment.NewLine & strScript, MsgBoxStyle.Critical, "Error running R command(s)")
+                                                                  bErrorMessageOpen = False
                                                               End If
                                                               bReturn = False
                                                           End Try
@@ -558,15 +567,20 @@ Public Class RLink
                     thrDelay = New Threading.Thread(Sub()
                                                         Dim t As New Stopwatch
                                                         t.Start()
-                                                        While t.ElapsedMilliseconds < 500 AndAlso thrRScript.IsAlive
+                                                        While t.ElapsedMilliseconds < (iWaitDelay * 1000) AndAlso thrRScript.IsAlive
                                                             Threading.Thread.Sleep(5)
                                                         End While
                                                         evtWaitHandleDelayDone.Set()
                                                     End Sub)
                     thrDelay.IsBackground = True
                     thrWaitDisplay = New Threading.Thread(Sub()
-                                                              frmSetupLoading.Show()
+                                                              If bShowWaitDialog Then
+                                                                  frmSetupLoading.Show()
+                                                              End If
                                                               While thrRScript.IsAlive
+                                                                  If bErrorMessageOpen Then
+                                                                      frmSetupLoading.Hide()
+                                                                  End If
                                                                   Threading.Thread.Sleep(5)
                                                                   Application.DoEvents()
                                                               End While
@@ -1088,4 +1102,16 @@ Public Class RLink
         End If
         Return bIsVarMetadata
     End Function
+
+    Public Sub SetShowWaitDialog(bNewShow As Boolean)
+        bShowWaitDialog = bNewShow
+    End Sub
+
+    Public Sub SetWaitDelayTime(iTimeInSeconds As Integer)
+        If iTimeInSeconds <= 0 Then
+            MsgBox("Wait time must be a positive integer. Resetting to default of 2 seconds.", MsgBoxStyle.Exclamation, "Invalid value")
+            iTimeInSeconds = 2
+        End If
+        iWaitDelay = iTimeInSeconds
+    End Sub
 End Class
