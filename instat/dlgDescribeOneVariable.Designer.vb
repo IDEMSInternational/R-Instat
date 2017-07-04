@@ -74,7 +74,7 @@ Partial Class dlgDescribeOneVariable
         Me.ucrBaseDescribeOneVar.Location = New System.Drawing.Point(10, 288)
         Me.ucrBaseDescribeOneVar.Name = "ucrBaseDescribeOneVar"
         Me.ucrBaseDescribeOneVar.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBaseDescribeOneVar.TabIndex = 7
+        Me.ucrBaseDescribeOneVar.TabIndex = 9
         '
         'ucrReceiverDescribeOneVar
         '
@@ -104,7 +104,7 @@ Partial Class dlgDescribeOneVariable
         Me.ucrChkOmitMissing.Location = New System.Drawing.Point(10, 235)
         Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
         Me.ucrChkOmitMissing.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkOmitMissing.TabIndex = 5
+        Me.ucrChkOmitMissing.TabIndex = 7
         '
         'ucrChkSaveResult
         '
@@ -112,7 +112,7 @@ Partial Class dlgDescribeOneVariable
         Me.ucrChkSaveResult.Location = New System.Drawing.Point(10, 262)
         Me.ucrChkSaveResult.Name = "ucrChkSaveResult"
         Me.ucrChkSaveResult.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkSaveResult.TabIndex = 6
+        Me.ucrChkSaveResult.TabIndex = 8
         '
         'ucrChkCustomise
         '
@@ -128,7 +128,7 @@ Partial Class dlgDescribeOneVariable
         Me.lblMaxSum.Location = New System.Drawing.Point(7, 210)
         Me.lblMaxSum.Name = "lblMaxSum"
         Me.lblMaxSum.Size = New System.Drawing.Size(129, 13)
-        Me.lblMaxSum.TabIndex = 49
+        Me.lblMaxSum.TabIndex = 5
         Me.lblMaxSum.Text = "Number of Levels Shown:"
         '
         'ucrNudMaxSum
@@ -140,7 +140,7 @@ Partial Class dlgDescribeOneVariable
         Me.ucrNudMaxSum.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxSum.Name = "ucrNudMaxSum"
         Me.ucrNudMaxSum.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudMaxSum.TabIndex = 50
+        Me.ucrNudMaxSum.TabIndex = 6
         Me.ucrNudMaxSum.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'dlgDescribeOneVariable
