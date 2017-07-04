@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 
 Public Class sdgSimpleRegOptions
@@ -24,7 +23,7 @@ Public Class sdgSimpleRegOptions
     Public clsRLmOrGLM As RFunction
     Public clsRGraphics As New RSyntax
     Private clsRSyntax As RSyntax
-    Public clsRaovFunction, clsRaovpvalFunction, clsRestpvalFunction, clsAutoplot, clsRgeom_point, clsRPredFunction, clsRDFFunction, clsRFittedValues, clsRWriteFitted, clsRResiduals, clsRWriteResiduals, clsRStdResiduals, clsRWriteStdResiduals, clsRLeverage, clsRWriteLeverage As New RFunction
+    Public clsRAovFunction, clsRAovPValFunction, clsREstPValFunction, clsAutoplot, clsRgeom_point, clsRPredFunction, clsRDFFunction, clsRFittedValues, clsRWriteFitted, clsRResiduals, clsRWriteResiduals, clsRStdResiduals, clsRWriteStdResiduals, clsRLeverage, clsRWriteLeverage As New RFunction
     Public clsVisReg, clsRaesFunction, clsRStat_smooth, clsR_ribbon, clsRaes_ribbon As New RFunction
     Public clsWhichFunction As RFunction
     Public bRCodeSet As Boolean = True
@@ -218,7 +217,7 @@ Public Class sdgSimpleRegOptions
         '' save residuals column names
         'ucrSaveResidualsColumnName.SetPrefix("Resids")
         'ucrSaveResidualsColumnName.SetSaveTypeAsColumn()
-        ucrSaveResidualsColumnName.SetCheckBoxText("residuals")
+        ucrSaveResidualsColumnName.SetCheckBoxText("Residuals")
         'ucrSaveResidualsColumnName.SetIsComboBox()
         'ucrSaveResidualsColumnName.SetDataFrameSelector(clsRDataFrame)
 
@@ -226,14 +225,14 @@ Public Class sdgSimpleRegOptions
         'ucrSaveStdResidualsColumnName.SetPrefix("Sresids")
         'ucrSaveStdResidualsColumnName.SetSaveTypeAsColumn()
         'ucrSaveStdResidualsColumnName.SetIsComboBox()
-        ucrSaveStdResidualsColumnName.SetCheckBoxText("std residuals")
+        ucrSaveStdResidualsColumnName.SetCheckBoxText("Std Residuals")
         'ucrSaveStdResidualsColumnName.SetDataFrameSelector(clsRDataFrame)
 
         ''save leverage column names
         'ucrSaveLeverageColumnName.SetPrefix("Lever")
         'ucrSaveLeverageColumnName.SetSaveTypeAsColumn()
         'ucrSaveLeverageColumnName.SetIsComboBox()
-        ucrSaveLeverageColumnName.SetCheckBoxText("leverage")
+        ucrSaveLeverageColumnName.SetCheckBoxText("Leverage")
         'ucrSaveLeverageColumnName.SetDataFrameSelector(clsRDataFrame)
 
         bControlsInitialised = True
@@ -256,13 +255,13 @@ Public Class sdgSimpleRegOptions
         clsVisReg = clsNewVisReg
 
         clsRLmOrGLM = clsNewRLmOrGLM
-        clsRestpvalFunction = clsNewRestpvalFunction
+        clsREstPValFunction = clsNewRestpvalFunction
         clsRModelFunction = clsNewRModelFunction
         clsRXVariable = clsNewRXVariable
         clsRYVariable = clsNewRYVariable
         clsRWriteFitted = clsNewRWriteFitted
         clsRFittedValues = clsNewRFittedValues
-        clsRaovpvalFunction = clsNewRaovpvalFunction
+        clsRAovPValFunction = clsNewRaovpvalFunction
         clsRgeom_point = clsNewRgeom_point
         clsAutoplot = clsNewAutoplot
         clsRWriteResiduals = clsNewRWriteResiduals
