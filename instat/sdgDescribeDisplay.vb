@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,8 +11,9 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 Public Class sdgDescribeDisplay
     Public bControlsInitialised As Boolean = False
@@ -57,13 +58,13 @@ Public Class sdgDescribeDisplay
         End If
         clsRFreqDispOptions = clsNewFreqRFunction
         clsRAnovaDispOptions = clsNewAnovaRFunction
-        ucrChkAddMargins.SetRCode(clsRFreqDispOptions, bReset)
-        ucrChkTranspose.SetRCode(clsRFreqDispOptions, bReset)
-        ucrChkProportions.SetRCode(clsRFreqDispOptions, bReset)
-        ucrChkPercentages.SetRCode(clsRFreqDispOptions, bReset)
-        ucrChkMeans.SetRCode(clsRAnovaDispOptions, bReset)
-        ucrChkSignifStars.SetRCode(clsRAnovaDispOptions, bReset)
-        ucrChkSignifLevel.SetRCode(clsRAnovaDispOptions, bReset)
+        ucrChkAddMargins.SetRCode(clsRFreqDispOptions, bReset, bCloneIfNeeded:=True)
+        ucrChkTranspose.SetRCode(clsRFreqDispOptions, bReset, bCloneIfNeeded:=True)
+        ucrChkProportions.SetRCode(clsRFreqDispOptions, bReset, bCloneIfNeeded:=True)
+        ucrChkPercentages.SetRCode(clsRFreqDispOptions, bReset, bCloneIfNeeded:=True)
+        ucrChkMeans.SetRCode(clsRAnovaDispOptions, bReset, bCloneIfNeeded:=True)
+        ucrChkSignifStars.SetRCode(clsRAnovaDispOptions, bReset, bCloneIfNeeded:=True)
+        ucrChkSignifLevel.SetRCode(clsRAnovaDispOptions, bReset, bCloneIfNeeded:=True)
         GrpBoxEnable()
     End Sub
 

@@ -1,4 +1,5 @@
-﻿' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -10,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
@@ -61,12 +62,14 @@ Public Class dlgStartofRains
         ucrReceiverStation.Selector = ucrSelectorForStartofRains
         ucrReceiverStation.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "station" & Chr(34)})
         ucrReceiverStation.bAutoFill = True
+        ucrReceiverStation.strSelectorHeading = "Station Variables"
 
         ucrReceiverDate.SetParameter(New RParameter("date", 0, False))
         ucrReceiverDate.SetParameterIsString()
         ucrReceiverDate.Selector = ucrSelectorForStartofRains
         ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
         ucrReceiverDate.bAutoFill = True
+        ucrReceiverDate.strSelectorHeading = "Date Variables"
 
         ucrReceiverDOY.SetParameter(New RParameter("day", 0))
         ucrReceiverDOY.SetParameterIsString()
@@ -74,14 +77,17 @@ Public Class dlgStartofRains
         ucrReceiverDOY.Selector = ucrSelectorForStartofRains
         ucrReceiverDOY.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "doy" & Chr(34)})
         ucrReceiverDOY.bAutoFill = True
+        ucrReceiverDOY.strSelectorHeading = "Day Variables"
 
         ucrReceiverRainfall.SetParameter(New RParameter("data", 0))
         ucrReceiverRainfall.SetParameterIsRFunction()
         ucrReceiverRainfall.bWithQuotes = False
-        '        ucrReceiverRainfall.SetParameterIncludeArgumentName(False)
+        ucrReceiverRainfall.strSelectorHeading = "Rain Variables"
         ucrReceiverRainfall.Selector = ucrSelectorForStartofRains
         ucrReceiverRainfall.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "rain" & Chr(34)})
         ucrReceiverRainfall.bAutoFill = True
+
+        ucrReceiverYear.strSelectorHeading = "Year Variables"
 
         'Days
         ucrNudFrom.SetParameter(New RParameter("from", 0))
