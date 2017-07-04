@@ -127,9 +127,9 @@ Partial Class dlgDescribeOneVariable
         Me.lblMaxSum.AutoSize = True
         Me.lblMaxSum.Location = New System.Drawing.Point(7, 210)
         Me.lblMaxSum.Name = "lblMaxSum"
-        Me.lblMaxSum.Size = New System.Drawing.Size(129, 13)
-        Me.lblMaxSum.TabIndex = 5
-        Me.lblMaxSum.Text = "Number of Levels Shown:"
+        Me.lblMaxSum.Size = New System.Drawing.Size(133, 13)
+        Me.lblMaxSum.TabIndex = 0
+        Me.lblMaxSum.Text = "Max Factor Levels Shown:"
         '
         'ucrNudMaxSum
         '
