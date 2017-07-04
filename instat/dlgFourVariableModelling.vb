@@ -131,17 +131,7 @@ Public Class dlgFourVariableModelling
         clsOverallExplanatoryOperator.SetOperation("*")
         ' clsSecondExplanatoryOperator.AddParameter(iPosition:=0, strParameterValue:=ucrReceiverSecondExplanatory.GetVariableNames(bWithQuotes:=False))
         clsOverallExplanatoryOperator.AddParameter("operator1&2", clsROperatorParameter:=clsFirstAndSecondExplanatoryOperator, iPosition:=0)
-        clsOverallExplanatoryOperator.AddParameter("var4", ucrReceiverThirdExplanatory.GetVariableNames, iPosition:=1)
-        clsOverallExplanatoryOperator.bBrackets = False
-
         clsFirstAndSecondExplanatoryOperator.SetOperation("+")
-        '  clsFirstExplanatoryOperator.AddParameter(strParameterValue:="(" & clsSecondExplanatoryOperator.ToScript.ToString & ")")
-        clsFirstAndSecondExplanatoryOperator.AddParameter("var2", ucrReceiverFirstExplanatory.GetVariableNames, iPosition:=1)
-        clsFirstAndSecondExplanatoryOperator.AddParameter("var3", ucrReceiverSecondExplanatory.GetVariableNames, iPosition:=2)
-        clsFirstAndSecondExplanatoryOperator.bBrackets = False
-
-
-
         ucrDistributionChoice.SetDataType("numeric")
         ucrSaveModel.Reset()
         ucrModelPreview.Reset()
@@ -248,9 +238,9 @@ Public Class dlgFourVariableModelling
         ucrSaveModel.SetRCode(clsLM, bReset)
         ucrDistributionChoice.SetRCode(clsFamilyFunction, bReset)
         ucrReceiverResponse.SetRCode(clsRNumeric, bReset)
-        ucrReceiverFirstExplanatory.SetRCode(clsFirstTransformFunction, bReset)
-        ucrReceiverSecondExplanatory.SetRCode(clsFirstAndSecondExplanatoryOperator, bReset)
-        ucrReceiverThirdExplanatory.SetRCode(clsOverallExplanatoryOperator, bReset)
+        '  ucrReceiverFirstExplanatory.SetRCode(clsFirstTransformFunction, bReset)
+        'ucrReceiverSecondExplanatory.SetRCode(clsFirstAndSecondExplanatoryOperator, bReset)
+        ' ucrReceiverThirdExplanatory.SetRCode(clsOverallExplanatoryOperator, bReset)
 
         bRCodeSet = True
         ExplanatoryFunctionEnabled()
@@ -432,18 +422,18 @@ Public Class dlgFourVariableModelling
     Private Sub ucrFirstExplanatory_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstExplanatory.ControlValueChanged, ucrReceiverSecondExplanatory.ControlValueChanged, ucrReceiverThirdExplanatory.ControlValueChanged
         If bRCodeSet Then
             If Not ucrReceiverFirstExplanatory.IsEmpty Then
-                clsFirstAndSecondExplanatoryOperator.AddParameter("var2", ucrReceiverFirstExplanatory.GetVariableNames(False), iPosition:=0)
+                clsFirstAndSecondExplanatoryOperator.AddParameter("var2", ucrReceiverFirstExplanatory.GetVariableNames(False), iPosition:=1)
             Else
                 clsFirstAndSecondExplanatoryOperator.RemoveParameterByName("var2")
             End If
-            'If Not ucrReceiverSecondExplanatory.IsEmpty Then
-            '    clsSecondExplanatoryOperator.AddParameter("exp", ucrReceiverSecondExplanatory.GetVariableNames(False), iPosition:=0)
-            'Else
-            '    clsSecondExplanatoryOperator.RemoveParameterByName("exp")
-            'End If
+            If Not ucrReceiverSecondExplanatory.IsEmpty Then
+                clsFirstAndSecondExplanatoryOperator.AddParameter("var3", ucrReceiverSecondExplanatory.GetVariableNames(False), iPosition:=2)
+            Else
+                clsFirstAndSecondExplanatoryOperator.RemoveParameterByName("var3")
+            End If
 
             If Not ucrReceiverThirdExplanatory.IsEmpty Then
-                clsOverallExplanatoryOperator.AddParameter("var4", ucrReceiverThirdExplanatory.GetVariableNames(False), iPosition:=3)
+                clsOverallExplanatoryOperator.AddParameter("var4", ucrReceiverThirdExplanatory.GetVariableNames(False), iPosition:=1)
             Else
                 clsOverallExplanatoryOperator.RemoveParameterByName("var4")
             End If
