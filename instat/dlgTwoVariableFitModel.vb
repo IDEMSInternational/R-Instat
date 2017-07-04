@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 
 Public Class dlgTwoVariableFitModel
@@ -113,11 +112,9 @@ Public Class dlgTwoVariableFitModel
         ucrNudCI.SetLinkedDisplayControl(grpParameters)
         ucrNudCI.DecimalPlaces = 2
 
-
         ucrNudHypothesis.SetLinkedDisplayControl(lblDifferenceInMeans)
         ucrNudHypothesis.SetLinkedDisplayControl(grpParameters)
         ucrNudHypothesis.DecimalPlaces = 2
-
 
         ucrChkPairedTest.SetText("Paired Text")
         ucrChkPairedTest.Enabled = False 'for the time being
@@ -126,7 +123,6 @@ Public Class dlgTwoVariableFitModel
 
         ucrPnlMeansAndVariance.SetLinkedDisplayControl(grpParameters)
         ucrPnlMeansAndVariance.AddToLinkedControls(ucrNudHypothesis, {rdoCompareVariance}, bNewLinkedDisabledIfParameterMissing:=True)
-
     End Sub
 
     Private Sub SetDefaults()
@@ -134,7 +130,6 @@ Public Class dlgTwoVariableFitModel
         clsPoissonOperation = New ROperator
         clsRGraphicsOperator = New ROperator
         clsPowerOperator = New ROperator
-
         ucrBase.clsRsyntax.ClearCodes()
         clsLM = New RFunction
         clsGLM = New RFunction
@@ -191,7 +186,6 @@ Public Class dlgTwoVariableFitModel
 
         clsRgeom_point = clsRegressionDefaults.clsDefaultRgeom_pointFunction.Clone
         clsRGraphicsOperator.AddParameter("geom_point", clsRFunctionParameter:=clsRgeom_point, iPosition:=1)
-
 
         clsRaovFunction.SetPackageName("stats")
         clsRaovFunction.SetRCommand("anova")
@@ -252,7 +246,6 @@ Public Class dlgTwoVariableFitModel
         clsFamilyFunction = ucrDistributionChoice.clsCurrRFunction
         'clsFamilyFunction.SetRCommand(ucrDistributionChoice.clsCurrDistribution.strGLMFunctionName)
         clsGLM.AddParameter("family", clsRFunctionParameter:=clsFamilyFunction)
-
 
         clsRTTest.SetPackageName("mosaic")
         clsRTTest.SetRCommand("t.test")
@@ -319,20 +312,64 @@ Public Class dlgTwoVariableFitModel
         ConvertToVariate()
     End Sub
 
+    Private Sub TestOKEnabled()
+        If rdoGeneralCase.Checked Then
+            If Not ucrReceiverResponse.IsEmpty() AndAlso Not ucrReceiverExplanatory.IsEmpty() AndAlso ucrSaveModels.IsComplete AndAlso Not ucrDistributionChoice.ucrInputDistributions.IsEmpty Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
+        Else
+            'TODO
+        End If
+        'If Not ucrReceiverResponse.IsEmpty() AndAlso Not ucrReceiverExplanatory.IsEmpty() AndAlso (ucrSaveModels.IsComplete) Then
+        '    'If rdoSpecific.Checked AndAlso (ucrFamily.clsCurrDistribution.strNameTag = "Poisson" OrElse ucrFamily.clsCurrDistribution.strNameTag = "Binomial") AndAlso Not (ucrLevel1.IsEmpty OrElse ucrLevel2.IsEmpty) Then
+        '    '    ucrBase.OKEnabled(True)
+        '    'Else
+        '    '    ucrBase.OKEnabled(False)
+        '    'End If
+        '    'If rdoGeneralCase.Checked Then
+        '    '    ucrBase.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsModel)
+        '    'End If
+        '    ucrBase.OKEnabled(True)
+        'Else
+        '    ucrBase.OKEnabled(False)
+        'End If
+        ''If Not ucrResponse.IsEmpty() Then
+        ''    ucrBase.OKEnabled(True)
+        ''End If
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOKEnabled()
+    End Sub
+
+    Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
+        sdgSimpleRegOptions.SetRCode(ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewConfint:=clsConfint, clsNewVisReg:=clsVisReg, clsNewAutoplot:=clsAutoPlot, bReset:=bResetOptionsSubDialog)
+        sdgSimpleRegOptions.ShowDialog()
+        bResetOptionsSubDialog = False
+    End Sub
+
+    Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
+        sdgModelOptions.ShowDialog()
+        ucrDistributionChoice.ucrInputDistributions.cboInput.SelectedIndex = ucrDistributionChoice.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = sdgModelOptions.ucrDistributionChoice.clsCurrDistribution.strNameTag)
+    End Sub
+
+    Private Sub cmdExplanatoryFunction_Click(sender As Object, e As EventArgs) Handles cmdExplanatoryFunction.Click
+        sdgVariableTransformations.SetRCodeForControls(clsNewFormulaOperator:=clsFormulaOperator, clsNewTransformParameter:=clsFormulaOperator.GetParameter("exp1"), clsNewTransformFunction:=clsTransformFunction, clsNewPowerOperator:=clsPowerOperator, strVariableName:=ucrReceiverExplanatory.GetVariableNames(False), bReset:=bResetFirstFunction)
+        sdgVariableTransformations.ShowDialog()
+        bResetFirstFunction = False
+        UpdatePreview()
+    End Sub
+
     Private Sub UpdatePreview()
         If Not ucrReceiverResponse.IsEmpty AndAlso Not ucrReceiverExplanatory.IsEmpty Then
             ucrModelPreview.SetName(clsFormulaOperator.ToScript())
         Else
             ucrModelPreview.SetName("")
         End If
-    End Sub
-
-    Private Sub ucrDistWithParameters_ucrInputDistributionsIndexChanged() Handles ucrDistributionChoice.DistributionsIndexChanged
-        'sdgModelOptions.ucrFamily.RecieverDatatype(ucrDistributionChoice.strDataType)
-        'sdgModelOptions.ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = sdgModelOptions.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrDistributionChoice.clsCurrDistribution.strNameTag)
-        'sdgModelOptions.RestrictLink()
-        SetBaseFunction()
-        DataTypeAccepted()
     End Sub
 
     Public Sub DataTypeAccepted()
@@ -351,33 +388,7 @@ Public Class dlgTwoVariableFitModel
         End If
     End Sub
 
-    Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        sdgSimpleRegOptions.SetRCode(ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewConfint:=clsConfint, clsNewVisReg:=clsVisReg, clsNewAutoplot:=clsAutoPlot, bReset:=bResetOptionsSubDialog)
-        sdgSimpleRegOptions.ShowDialog()
-        bResetOptionsSubDialog = False
-    End Sub
-
-    Private Sub ucrResponse_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverResponse.ControlValueChanged
-        UpdatePreview()
-        ConvertToVariate()
-        clsRYVariable = ucrReceiverResponse.GetVariableNames(bWithQuotes:=False)
-        SetEnableDists()
-    End Sub
-
-    Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
-        sdgModelOptions.ShowDialog()
-        ucrDistributionChoice.ucrInputDistributions.cboInput.SelectedIndex = ucrDistributionChoice.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = sdgModelOptions.ucrDistributionChoice.clsCurrDistribution.strNameTag)
-    End Sub
-
-    Private Sub cmdExplanatoryFunction_Click(sender As Object, e As EventArgs) Handles cmdExplanatoryFunction.Click
-        sdgVariableTransformations.SetRCodeForControls(clsNewFormulaOperator:=clsFormulaOperator, clsNewTransformParameter:=clsFormulaOperator.GetParameter("exp1"), clsNewTransformFunction:=clsTransformFunction, clsNewPowerOperator:=clsPowerOperator, strVariableName:=ucrReceiverExplanatory.GetVariableNames(False), bReset:=bResetFirstFunction)
-        sdgVariableTransformations.ShowDialog()
-        bResetFirstFunction = False
-        UpdatePreview()
-    End Sub
-
     Private Sub SetTTest()
-
         ucrBase.clsRsyntax.SetBaseRFunction(clsRTTest)
         ' clsRTTest.AddParameter("conf.level", nudCI.Value.ToString())
         clsRTTest.AddParameter("data", clsRFunctionParameter:=ucrSelectorSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame)
@@ -399,7 +410,6 @@ Public Class dlgTwoVariableFitModel
     End Sub
 
     Private Sub SetFTest()
-
         ucrBase.clsRsyntax.SetBaseRFunction(clsRFTest)
         '   clsRFTest.AddParameter("conf.level", nudCI.Value.ToString())
         clsRFTest.AddParameter("data", clsRFunctionParameter:=ucrSelectorSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame)
@@ -423,7 +433,6 @@ Public Class dlgTwoVariableFitModel
     End Sub
 
     Private Sub SetKruskalTest()
-
         ucrBase.clsRsyntax.SetBaseRFunction(clsRKruskalTest)
         clsModel.SetOperation("~")
         clsModel.AddParameter(iPosition:=0, clsRFunctionParameter:=ucrReceiverResponse.GetVariables())
@@ -444,7 +453,6 @@ Public Class dlgTwoVariableFitModel
         clsPoissonOperation.SetOperation("==")
         clsPoissonOperation.AddParameter(iPosition:=0, clsRFunctionParameter:=ucrReceiverExplanatory.GetVariables())
 
-
         clsRBinomial.AddParameter("data", ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         clsRBinomial.AddParameter("x", clsRFunctionParameter:=clsyFunc)
         clsRBinomial.AddParameter("n", clsRFunctionParameter:=clsnFunc)
@@ -459,7 +467,6 @@ Public Class dlgTwoVariableFitModel
         clsnFunc.AddParameter("l3", clsRFunctionParameter:=clsRLength, bIncludeArgumentName:=False)
         clsnFunc.AddParameter("l4", clsRFunctionParameter:=clsRLength, bIncludeArgumentName:=False)
 
-
         ' Success if LABEL = ...
         'c(length(x=ucrResponse[LevelOne]&SuccessIf]), length(x=ucrResponse[LevelTwo&SuccessIf]))
         '  LengthOne
@@ -473,7 +480,6 @@ Public Class dlgTwoVariableFitModel
         clsRLength.AddParameter("x", clsRFunctionParameter:=clsRLength)
         clsRLength.AddParameter("x", ucrReceiverResponse.GetVariables().ToScript & "[" & clsRFactor2.ToScript & "&" & clsRNumeric.ToScript & "]")
 
-
         ' Total counts for each level:
         ' c(length(x=ucrResponse[LevelOne]), length(ucrResponse[LevelTwo]))
 
@@ -484,7 +490,6 @@ Public Class dlgTwoVariableFitModel
         clsRLength.SetRCommand("length")
         clsRLength.AddParameter("x", clsRFunctionParameter:=clsRLength)
         clsRLength.AddParameter("x", ucrReceiverResponse.GetVariables().ToScript & "[" & clsRFactor2.ToScript & "]")
-
 
         ' The three groups of interest:
         '' x=ucrExplanatory == Level1
@@ -530,8 +535,6 @@ Public Class dlgTwoVariableFitModel
         clsTFunc.AddParameter("m1", clsRFunctionParameter:=clsRMean, bIncludeArgumentName:=False)
         clsTFunc.AddParameter("m2", clsRFunctionParameter:=clsRMean2, bIncludeArgumentName:=False)
         clsRPoisson.AddParameter("T", clsRFunctionParameter:=clsTFunc)
-
-
 
         clsRMean2.SetRCommand("mean")
         clsRMean2.AddParameter("x", clsRFunctionParameter:=clsRGroup)
@@ -587,38 +590,6 @@ Public Class dlgTwoVariableFitModel
         End If
     End Sub
 
-    Private Sub TestOKEnabled()
-        If rdoGeneralCase.Checked Then
-            If Not ucrReceiverResponse.IsEmpty() AndAlso Not ucrReceiverExplanatory.IsEmpty() AndAlso ucrSaveModels.IsComplete AndAlso Not ucrDistributionChoice.ucrInputDistributions.IsEmpty Then
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
-            End If
-        Else
-            'TODO
-        End If
-        'If Not ucrReceiverResponse.IsEmpty() AndAlso Not ucrReceiverExplanatory.IsEmpty() AndAlso (ucrSaveModels.IsComplete) Then
-        '    'If rdoSpecific.Checked AndAlso (ucrFamily.clsCurrDistribution.strNameTag = "Poisson" OrElse ucrFamily.clsCurrDistribution.strNameTag = "Binomial") AndAlso Not (ucrLevel1.IsEmpty OrElse ucrLevel2.IsEmpty) Then
-        '    '    ucrBase.OKEnabled(True)
-        '    'Else
-        '    '    ucrBase.OKEnabled(False)
-        '    'End If
-        '    'If rdoGeneralCase.Checked Then
-        '    '    ucrBase.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsModel)
-        '    'End If
-        '    ucrBase.OKEnabled(True)
-        'Else
-        '    ucrBase.OKEnabled(False)
-        'End If
-        ''If Not ucrResponse.IsEmpty() Then
-        ''    ucrBase.OKEnabled(True)
-        ''End If
-    End Sub
-
-    Private Sub ucrSelectorSimpleReg_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorSimpleReg.ControlValueChanged
-        SetBaseFunction()
-    End Sub
-
     Public Sub ConvertToVariate()
         If bRCodeSet Then
             If rdoGeneralCase.Checked Then
@@ -662,6 +633,25 @@ Public Class dlgTwoVariableFitModel
         End If
     End Sub
 
+    Private Sub ucrDistWithParameters_ucrInputDistributionsIndexChanged() Handles ucrDistributionChoice.DistributionsIndexChanged
+        'sdgModelOptions.ucrFamily.RecieverDatatype(ucrDistributionChoice.strDataType)
+        'sdgModelOptions.ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = sdgModelOptions.ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = ucrDistributionChoice.clsCurrDistribution.strNameTag)
+        'sdgModelOptions.RestrictLink()
+        SetBaseFunction()
+        DataTypeAccepted()
+    End Sub
+
+    Private Sub ucrResponse_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverResponse.ControlValueChanged
+        UpdatePreview()
+        ConvertToVariate()
+        clsRYVariable = ucrReceiverResponse.GetVariableNames(bWithQuotes:=False)
+        SetEnableDists()
+    End Sub
+
+    Private Sub ucrSelectorSimpleReg_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorSimpleReg.ControlValueChanged
+        SetBaseFunction()
+    End Sub
+
     Private Sub ucrExplanatory_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverExplanatory.SelectionChanged
         If Not ucrReceiverExplanatory.IsEmpty Then
             'ucrLevel1.SetItems({ucrExplanatory.GetItemType("Levels")})
@@ -673,7 +663,7 @@ Public Class dlgTwoVariableFitModel
         ConvertToVariate()
     End Sub
 
-        Private Sub ucrExplanatory_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExplanatory.ControlValueChanged
+    Private Sub ucrExplanatory_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExplanatory.ControlValueChanged
         If bRCodeSet Then
             If Not ucrReceiverExplanatory.IsEmpty Then
                 clsFormulaOperator.AddParameter("exp1", ucrReceiverExplanatory.GetVariableNames(False), iPosition:=1)
@@ -694,12 +684,6 @@ Public Class dlgTwoVariableFitModel
         Else
             cmdExplanatoryFunction.Enabled = False
         End If
-    End Sub
-
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
-        SetRCodeForControls(True)
-        TestOKEnabled()
     End Sub
 
     Private Sub Display()
@@ -786,10 +770,6 @@ Public Class dlgTwoVariableFitModel
         DataTypeAccepted()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverResponse.ControlContentsChanged, ucrPnlModelType.ControlContentsChanged, ucrReceiverExplanatory.ControlContentsChanged
-        TestOKEnabled()
-    End Sub
-
     Private Sub ucrPnlModelType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlModelType.ControlValueChanged
         If rdoGeneralCase.Checked Then
             ucrDistributionChoice.SetGLMDistributions()
@@ -799,5 +779,9 @@ Public Class dlgTwoVariableFitModel
         SetBaseFunction()
         ConvertToVariate()
         DataTypeAccepted()
+    End Sub
+
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverResponse.ControlContentsChanged, ucrPnlModelType.ControlContentsChanged, ucrReceiverExplanatory.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class
