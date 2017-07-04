@@ -14,13 +14,14 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgCanonicalCorrelationAnalysis
     Public strModelName As String = ""
     Public bFirstLoad As Boolean = True
     Private bResetSubdialog As Boolean = False
     Private bReset As Boolean = True
+    Private clsDefaultFunction, clsRCanCorFunction, clsRXCoefFunction, clsRYCoefFunction, clsRGraphicsFunction As New RFunction
+    Private clsTempFunction, clsXvarFunction, clsYvarFunction, clsTempFunc As String
 
     Private Sub dlgCanonicalCorrelationAnalysis_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -37,17 +38,14 @@ Public Class dlgCanonicalCorrelationAnalysis
 
     Private Sub SetRCodeforControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrSaveResult.SetRCode(clsDefaultFunction, bReset)
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.iCallType = 0
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.iHelpTopicID = 423
 
-        cmdCCAOptions.Enabled = False
-
         ' note: canne have the same variables in both receivers.
-
         ' Y Variable Selector
         ucrReceiverYvariables.SetParameter(New RParameter("y", 0))
         ucrReceiverYvariables.SetParameterIsRFunction()
@@ -70,14 +68,16 @@ Public Class dlgCanonicalCorrelationAnalysis
         ucrSaveResult.SetDataFrameSelector(ucrSelectorCCA.ucrAvailableDataFrames)
         ucrSaveResult.SetAssignToIfUncheckedValue("last_CCA")
 
-    End Sub
-
-    Private Sub ReopenDialog()
-
+        ucrBase.clsRsyntax.iCallType = 2
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
+        clsDefaultFunction = New RFunction
+        clsRGraphicsFunction = New RFunction
+        clsRCanCorFunction = New RFunction
+        clsRXCoefFunction = New RFunction
+        clsRYCoefFunction = New RFunction
+
         ucrSelectorCCA.Reset()
         ucrSaveResult.Reset()
         ucrReceiverXvariables.SetMeAsReceiver()
@@ -86,8 +86,23 @@ Public Class dlgCanonicalCorrelationAnalysis
         clsDefaultFunction.SetRCommand("cancor")
         clsDefaultFunction.SetAssignTo("last_CCA", strTempModel:="last_CCA", strTempDataframe:=ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
 
+        clsRCanCorFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+        clsRXCoefFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+        clsRYCoefFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
+        clsRGraphicsFunction.SetPackageName("GGally")
+        clsRGraphicsFunction.SetRCommand("ggpairs")
+        clsRCanCorFunction.AddParameter("data_name", Chr(34) & ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+        clsRCanCorFunction.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
+        clsRCanCorFunction.AddParameter("value1", Chr(34) & "cancor" & Chr(34))
+        clsRCanCorFunction.AddParameter("model_name", Chr(34) & clsTempFunction & Chr(34))
+        clsRCanCorFunction.AddParameter("value1", Chr(34) & "cor" & Chr(34))
+        clsRXCoefFunction.AddParameter("model_name", Chr(34) & clsTempFunction & Chr(34))
+        clsRXCoefFunction.AddParameter("value1", Chr(34) & "xcoef" & Chr(34))
+        clsRYCoefFunction.AddParameter("model_name", Chr(34) & clsTempFunction & Chr(34))
+        clsRYCoefFunction.AddParameter("value1", Chr(34) & "ycoef" & Chr(34))
         ' Set default RFunction as the base function
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        ucrBase.clsRsyntax.ClearCodes()
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
         bResetSubdialog = True
     End Sub
 
@@ -106,13 +121,25 @@ Public Class dlgCanonicalCorrelationAnalysis
     End Sub
 
     Private Sub cmdCCAOptions_Click(sender As Object, e As EventArgs) Handles cmdCCAOptions.Click
-        '        sdgCanonicalCorrelation.SetRFunction(ucrBase.clsRsyntax.clsBaseFunction, bResetSubdialog)
-        '        bResetSubdialog = False
-        '  sdgCanonicalCorrelation.ShowDialog()
+        sdgCanonicalCorrelation.SetRFunction(ucrBase.clsRsyntax, clsRCanCorFunction, clsRXCoefFunction, clsRYCoefFunction, clsRGraphicsFunction, clsTempFunction, clsXvarFunction, clsYvarFunction, clsTempFunc, bResetSubdialog)
+        bResetSubdialog = False
+        sdgCanonicalCorrelation.ShowDialog()
     End Sub
 
-    Private Sub ucrBaseCCA_clickok(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        '     sdgCanonicalCorrelation.CCAOptions()
+    Private Sub ucrSaveResult_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlValueChanged
+        clsTempFunction = ucrSaveResult.GetText
+    End Sub
+
+    Private Sub ucrReceiverXvariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverXvariables.ControlValueChanged
+        clsXvarFunction = ucrReceiverXvariables.GetVariableNames()
+    End Sub
+
+    Private Sub ucrReceiverYvariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYvariables.ControlValueChanged
+        clsYvarFunction = ucrReceiverYvariables.GetVariableNames()
+    End Sub
+
+    Private Sub ucrSelectorCCA_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorCCA.ControlValueChanged
+        clsTempFunc = ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem
     End Sub
 
     Private Sub ucrSaveResult_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlContentsChanged, ucrReceiverXvariables.ControlContentsChanged, ucrReceiverYvariables.ControlContentsChanged
