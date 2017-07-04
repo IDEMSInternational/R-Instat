@@ -3336,14 +3336,14 @@ Partial Class frmMain
         'mnuCorruptionDefineCorruptionData
         '
         Me.mnuCorruptionDefineCorruptionData.Name = "mnuCorruptionDefineCorruptionData"
-        Me.mnuCorruptionDefineCorruptionData.Size = New System.Drawing.Size(248, 22)
+        Me.mnuCorruptionDefineCorruptionData.Size = New System.Drawing.Size(292, 22)
         Me.mnuCorruptionDefineCorruptionData.Text = "Define Procurement Data..."
         '
         'mnuProcurementPrepare
         '
         Me.mnuProcurementPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CountryNamesCorrectionsToolStripMenuItem, Me.MergeAdditionalDataToolStripMenuItem, Me.FilterToolStripMenuItem, Me.UseAwardDateToolStripMenuItem, Me.UseSignatureDateToolStripMenuItem, Me.SetRefLevelToolStripMenuItem, Me.DefineContractValueCategoriesToolStripMenuItem, Me.RecodeNumericIntoQuantilesToolStripMenuItem})
         Me.mnuProcurementPrepare.Name = "mnuProcurementPrepare"
-        Me.mnuProcurementPrepare.Size = New System.Drawing.Size(248, 22)
+        Me.mnuProcurementPrepare.Size = New System.Drawing.Size(292, 22)
         Me.mnuProcurementPrepare.Text = "Prepare..."
         '
         'CountryNamesCorrectionsToolStripMenuItem
@@ -3398,7 +3398,7 @@ Partial Class frmMain
         '
         Me.mnuProcurementDescribe.Enabled = False
         Me.mnuProcurementDescribe.Name = "mnuProcurementDescribe"
-        Me.mnuProcurementDescribe.Size = New System.Drawing.Size(248, 22)
+        Me.mnuProcurementDescribe.Size = New System.Drawing.Size(292, 22)
         Me.mnuProcurementDescribe.Text = "Describe"
         '
         'DefineOutputsToolStripMenuItem
@@ -3411,32 +3411,32 @@ Partial Class frmMain
         '
         Me.mnuProcurementModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementModelFitModelToolStripMenuItem})
         Me.mnuProcurementModel.Name = "mnuProcurementModel"
-        Me.mnuProcurementModel.Size = New System.Drawing.Size(248, 22)
+        Me.mnuProcurementModel.Size = New System.Drawing.Size(292, 22)
         Me.mnuProcurementModel.Text = "Model..."
         '
         'mnuProcurementModelFitModelToolStripMenuItem
         '
         Me.mnuProcurementModelFitModelToolStripMenuItem.Name = "mnuProcurementModelFitModelToolStripMenuItem"
-        Me.mnuProcurementModelFitModelToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.mnuProcurementModelFitModelToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
         Me.mnuProcurementModelFitModelToolStripMenuItem.Text = "Fit Model..."
         '
         'DefineRedFlagsToolStripMenuItem
         '
         Me.DefineRedFlagsToolStripMenuItem.Name = "DefineRedFlagsToolStripMenuItem"
-        Me.DefineRedFlagsToolStripMenuItem.Size = New System.Drawing.Size(248, 22)
-        Me.DefineRedFlagsToolStripMenuItem.Text = "Define Red Flags..."
+        Me.DefineRedFlagsToolStripMenuItem.Size = New System.Drawing.Size(292, 22)
+        Me.DefineRedFlagsToolStripMenuItem.Text = "Define Red Flag Variables..."
         '
         'CalculateCRIToolStripMenuItem
         '
         Me.CalculateCRIToolStripMenuItem.Name = "CalculateCRIToolStripMenuItem"
-        Me.CalculateCRIToolStripMenuItem.Size = New System.Drawing.Size(248, 22)
+        Me.CalculateCRIToolStripMenuItem.Size = New System.Drawing.Size(292, 22)
         Me.CalculateCRIToolStripMenuItem.Text = "Calculate Corruption Risk Index..."
         '
         'TestsAndChecksToolStripMenuItem
         '
         Me.TestsAndChecksToolStripMenuItem.Enabled = False
         Me.TestsAndChecksToolStripMenuItem.Name = "TestsAndChecksToolStripMenuItem"
-        Me.TestsAndChecksToolStripMenuItem.Size = New System.Drawing.Size(248, 22)
+        Me.TestsAndChecksToolStripMenuItem.Size = New System.Drawing.Size(292, 22)
         Me.TestsAndChecksToolStripMenuItem.Text = "Tests and Checks..."
         '
         'mnuTools

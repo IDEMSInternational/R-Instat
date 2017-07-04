@@ -22,9 +22,11 @@ Public Class dlgDefineCRI
     Dim strSelectedColumn As String = ""
     Dim strSelectedDataFrame As String = ""
     Private bResetSubdialog As Boolean = False
-    Private clsCalculation As New ROperator
+    Private clsCalculationComponents As New ROperator
+    Private clsCalculationScaled As New ROperator
     Private clsDefineFunction As New RFunction
     Private i As Integer = 0
+    Private strWeightColumn As String = "Weight"
 
     Private Sub dlgDefineCRI_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -61,20 +63,23 @@ Public Class dlgDefineCRI
         ucrReceiverRedFlag.SetMeAsReceiver()
         ucrReceiverRedFlag.SetIncludedDataTypes({"numeric", "logical", "factor"})
         ucrReceiverRedFlag.AddIncludedMetadataProperty("Is_Corruption_Index", {"TRUE"})
-        'ucrReceiverRedFlag.AddExcludedMetadataProperty("Is_Corruption_Red_Flag", {"FALSE"})
 
         'ucrChk
-        ucrChkScaleNumeric.SetText("Scale Numeric")
+        ucrChkScaleNumeric.SetText("Scale Numeric Variables")
+        ucrChkScaleNumeric.Enabled = False
 
         'grd
         ucrGridWeights.SetReceiver(ucrReceiverRedFlag)
         ucrGridWeights.SetAsViewerOnly()
-        ucrGridWeights.strExtraColumn = "Weights"
-        ucrGridWeights.AddEditableColumns({"Weights"})
+        ucrGridWeights.bIncludeLevels = False
+        ucrGridWeights.strExtraColumn = strWeightColumn
+        ucrGridWeights.AddEditableColumns({strWeightColumn})
 
         'lstbox
         lstIndexComponents.Columns.Add("Component")
         lstIndexComponents.Columns.Add("Weight(s)")
+
+        ucrInputCRIPreview.txtInput.Multiline = True
 
         'save
         ucrSaveCRI.SetDataFrameSelector(ucrSelectorCRI.ucrAvailableDataFrames)
@@ -85,15 +90,25 @@ Public Class dlgDefineCRI
     End Sub
 
     Private Sub SetDefaults()
-        clsCalculation = New ROperator
+        clsCalculationComponents = New ROperator
         clsDefineFunction = New RFunction
+        clsCalculationScaled = New ROperator
 
         'Reset 
         ucrSelectorCRI.Reset()
+
         lstIndexComponents.Items.Clear()
+        lstIndexComponents.Columns(0).Width = 95
+        lstIndexComponents.Columns(1).Width = 70
+
         ucrInputCRIPreview.SetName("")
-        ucrNudWeights.Value = 0
-        clsCalculation.SetOperation("+")
+        ucrNudWeights.Value = 1
+
+        clsCalculationComponents.SetOperation("+")
+
+        clsCalculationScaled.SetOperation("/")
+        clsCalculationScaled.AddParameter("left", clsROperatorParameter:=clsCalculationComponents, iPosition:=0)
+        clsCalculationScaled.bToScriptAsRString = True
 
         ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         ucrBase.clsRsyntax.AddParameter("calc", clsRFunctionParameter:=clsDefineFunction)
@@ -103,6 +118,8 @@ Public Class dlgDefineCRI
         clsDefineFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34))
         clsDefineFunction.AddParameter("save", 2)
         clsDefineFunction.AddParameter("result_name", Chr(34) & ucrSaveCRI.GetText() & Chr(34))
+        clsDefineFunction.AddParameter("function_exp", clsROperatorParameter:=clsCalculationScaled)
+
         bResetSubdialog = True
         DisplayRedFlag()
         EnableDeleteButton()
@@ -126,7 +143,7 @@ Public Class dlgDefineCRI
     End Sub
 
     Private Sub TestOKEnabled()
-        If lstIndexComponents.Items.Count > 0 AndAlso ucrNudWeights.GetText <> "" AndAlso ucrSaveCRI.IsComplete Then
+        If lstIndexComponents.Items.Count > 0 AndAlso ucrSaveCRI.IsComplete Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -142,7 +159,7 @@ Public Class dlgDefineCRI
                     cmdAddComponent.Enabled = False
                 End If
             Else
-                If ucrGridWeights.IsColumnComplete(2) Then
+                If ucrGridWeights.IsColumnComplete(strWeightColumn) Then
                     cmdAddComponent.Enabled = True
                 Else
                     cmdAddComponent.Enabled = False
@@ -178,46 +195,59 @@ Public Class dlgDefineCRI
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudWeights.ControlContentsChanged
         EnableAddButton()
-        TestOKEnabled()
     End Sub
 
     Private Sub cmdAddComponent_Click(sender As Object, e As EventArgs) Handles cmdAddComponent.Click
-        Dim lviCondition As ListViewItem
+        Dim lviCondition As ListViewItem = Nothing
         Dim clsTempOp As ROperator
         Dim clsTempFactorOp As ROperator
         Dim strList As String = ""
-        Dim strExpression As String
+        Dim iWeightColumn As Integer = -1
+        Dim bFound As Boolean = False
 
         clsTempOp = New ROperator
+        iWeightColumn = ucrGridWeights.GetColumnIndex(strWeightColumn)
+        For j = 0 To lstIndexComponents.Items.Count - 1
+            If lstIndexComponents.Items(j).Text = ucrReceiverRedFlag.GetVariableNames(False) Then
+                lviCondition = lstIndexComponents.Items(j)
+                bFound = True
+                Exit For
+            End If
+        Next
+        If Not bFound Then
+            lviCondition = New ListViewItem({ucrReceiverRedFlag.GetVariableNames(False), ""})
+        End If
         If ucrReceiverRedFlag.strCurrDataType = "numeric" OrElse ucrReceiverRedFlag.strCurrDataType = "integer" OrElse ucrReceiverRedFlag.strCurrDataType = "logical" Then
-            lviCondition = New ListViewItem({ucrReceiverRedFlag.GetVariableNames(False), ucrNudWeights.Value})
+            lviCondition.SubItems(1).Text = ucrNudWeights.Value
             clsTempOp.SetOperation("*")
             clsTempOp.AddParameter("column", ucrReceiverRedFlag.GetVariableNames(False), iPosition:=0)
             clsTempOp.AddParameter("weight", ucrNudWeights.Value, iPosition:=1)
-        ElseIf ucrReceiverRedFlag.strCurrDataType = "factor" Then
-            lviCondition = New ListViewItem({ucrReceiverRedFlag.GetVariableNames(False), ucrGridWeights.GetColumnInFactorSheet(2, False)})
+        ElseIf ucrReceiverRedFlag.strCurrDataType = "factor" AndAlso iWeightColumn <> -1 Then
+            lviCondition.SubItems(1).Text = ucrGridWeights.GetColumnInFactorSheet(strWeightColumn, False)
             clsTempOp.SetOperation("+")
             For j As Integer = 0 To ucrGridWeights.grdFactorData.CurrentWorksheet.RowCount - 1
                 clsTempFactorOp = New ROperator
                 clsTempFactorOp.SetOperation("*")
                 clsTempFactorOp.AddParameter("factor_level" & j, "(" & ucrReceiverRedFlag.GetVariableNames(False) & "==" & Chr(39) & ucrGridWeights.grdFactorData.CurrentWorksheet(j, 0) & Chr(39) & ")", iPosition:=1)
-                clsTempFactorOp.AddParameter("level_weight" & j, ucrGridWeights.grdFactorData.CurrentWorksheet(j, 2), iPosition:=1)
+                clsTempFactorOp.AddParameter("level_weight" & j, ucrGridWeights.grdFactorData.CurrentWorksheet(j, iWeightColumn), iPosition:=1)
                 clsTempOp.AddParameter("factor_comp" & j, clsROperatorParameter:=clsTempFactorOp, iPosition:=j)
             Next
         Else
             lviCondition = New ListViewItem
             'TODO Give error here
         End If
-        clsCalculation.AddParameter("comp" & i, clsROperatorParameter:=clsTempOp.Clone(), iPosition:=i)
-        lstIndexComponents.Items.Add(lviCondition)
-
+        If Not bFound Then
+            lviCondition.Tag = i
+            lstIndexComponents.Items.Add(lviCondition)
+        End If
+        clsCalculationComponents.AddParameter(lviCondition.Tag, clsROperatorParameter:=clsTempOp.Clone(), iPosition:=lviCondition.Tag)
         'If clsFilterView.clsParameters.Count = 0 Then
         '    clsFilterView.AddParameter(iPosition:=0, clsROperatorParameter:=(clsCurrentConditionView))
         'Else
         '    clsFilterView.AddParameter(strParameterName:="Condition" & clsFilterView.clsParameters.Count - 1, clsROperatorParameter:=(clsCurrentConditionView))
         'End If
-        lstIndexComponents.Columns(0).Width = -2
-        lstIndexComponents.Columns(1).Width = -2
+        'lstIndexComponents.Columns(0).Width = -2
+        'lstIndexComponents.Columns(1).Width = -2
         'ucrFilterPreview.SetName(clsFilterView.ToScript())
         ucrReceiverRedFlag.Clear()
         'RaiseEvent FilterChanged()
@@ -232,26 +262,58 @@ Public Class dlgDefineCRI
         Next
         strList = strList & ")"
         clsDefineFunction.AddParameter("calculated_from", strList)
-        strExpression = Chr(34) & "(" & clsCalculation.ToScript() & ")" & "/" & lstIndexComponents.Items.Count & Chr(34)
-        clsDefineFunction.AddParameter("function_exp", strExpression)
-        ucrInputCRIPreview.SetName(strExpression)
+        SetCalculationScale()
+        UpdatePreview()
         TestOKEnabled()
         i = i + 1
     End Sub
 
-    ' This is currently empty, but will be coded in the future
-    Private Sub cmdEdit_Click(sender As Object, e As EventArgs) Handles cmdEdit.Click
+    Private Sub UpdatePreview()
+        If lstIndexComponents.Items.Count > 0 Then
+            ucrInputCRIPreview.SetName(clsCalculationScaled.ToScript().Trim(Chr(34)))
+        Else
+            ucrInputCRIPreview.SetName("")
+        End If
+    End Sub
 
+    Private Sub SetCalculationScale()
+        clsCalculationScaled.AddParameter("right", lstIndexComponents.Items.Count, iPosition:=1)
+    End Sub
+
+    Private Sub cmdEdit_Click(sender As Object, e As EventArgs) Handles cmdEdit.Click
+        EditComponent()
+    End Sub
+
+    Private Sub EditComponent()
+        Dim lviCondition As ListViewItem
+        Dim strCol As String
+        Dim iWeightColumn As Integer
+        Dim strIndexValues() As String
+
+        If lstIndexComponents.SelectedItems.Count = 1 Then
+            lviCondition = lstIndexComponents.SelectedItems(0)
+            strCol = lviCondition.Text
+            ucrReceiverRedFlag.Add(strCol, ucrSelectorCRI.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            iWeightColumn = ucrGridWeights.GetColumnIndex(strWeightColumn)
+            If ucrReceiverRedFlag.strCurrDataType = "numeric" OrElse ucrReceiverRedFlag.strCurrDataType = "integer" OrElse ucrReceiverRedFlag.strCurrDataType = "logical" Then
+                ucrNudWeights.Value = lviCondition.SubItems(1).Text
+            ElseIf ucrReceiverRedFlag.strCurrDataType = "factor" AndAlso iWeightColumn <> -1 Then
+                strIndexValues = ExtractItemsFromRList(lviCondition.SubItems(1).Text)
+                ucrGridWeights.SetColumn(strIndexValues, iWeightColumn, bSilent:=False)
+            Else
+                MsgBox("Cannot detect column or column data in the data. Editing of this component not possible", MsgBoxStyle.Exclamation, "Cannot edit component")
+            End If
+        End If
     End Sub
 
     Private Sub cmdDelete_Click(sender As Object, e As EventArgs) Handles cmdDelete.Click
-        '        Dim iIndex As Integer
-
-        '        For Each lviTemp As ListViewItem In lstRedFlags.SelectedItems
-        '            iIndex = lstRedFlags.Items.IndexOf(lviTemp)
-        '            lstRedFlags.Items.Remove(lviTemp)
-        '            lstFlagList.RemoveAt(iIndex)
-        '        Next
+        For Each lviTemp As ListViewItem In lstIndexComponents.SelectedItems
+            lviTemp.Remove()
+            clsCalculationComponents.RemoveParameterByName(lviTemp.Tag)
+        Next
+        SetCalculationScale()
+        UpdatePreview()
+        TestOKEnabled()
     End Sub
 
     Private Sub lstRedFlags_SelectedIndexChanged(sender As Object, e As EventArgs)
@@ -273,7 +335,7 @@ Public Class dlgDefineCRI
 
     Private Sub ucrSelectorCRI_DataFrameChanged() Handles ucrSelectorCRI.DataFrameChanged
         lstIndexComponents.Items.Clear()
-        clsCalculation.ClearParameters()
+        clsCalculationComponents.ClearParameters()
         clsDefineFunction.RemoveParameterByName("function_expression")
         clsDefineFunction.RemoveParameterByName("calculated_from")
         i = 0
@@ -291,5 +353,14 @@ Public Class dlgDefineCRI
 
     Private Sub ucrSaveCRI_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveCRI.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub lstIndexComponents_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstIndexComponents.SelectedIndexChanged
+        cmdEdit.Enabled = (lstIndexComponents.SelectedItems.Count > 0)
+        cmdDelete.Enabled = (lstIndexComponents.SelectedItems.Count > 0)
+    End Sub
+
+    Private Sub lstIndexComponents_DoubleClick(sender As Object, e As EventArgs) Handles lstIndexComponents.DoubleClick
+        EditComponent()
     End Sub
 End Class
