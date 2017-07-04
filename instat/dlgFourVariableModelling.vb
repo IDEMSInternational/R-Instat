@@ -52,7 +52,7 @@ Public Class dlgFourVariableModelling
         ucrSelectorFourVariableModelling.SetParameter(New RParameter("data", 0))
         ucrSelectorFourVariableModelling.SetParameterIsrfunction()
 
-        ucrReceiverResponse.SetParameter(New RParameter("var1", 1))
+        ucrReceiverResponse.SetParameter(New RParameter("x", 1))
         ucrReceiverResponse.SetParameterIsString()
         ucrReceiverResponse.bWithQuotes = False
         ucrReceiverResponse.Selector = ucrSelectorFourVariableModelling
@@ -128,7 +128,7 @@ Public Class dlgFourVariableModelling
         ucrReceiverResponse.SetMeAsReceiver()
         ucrBaseFourVariableModelling.clsRsyntax.ClearCodes()
 
-        clsOverallExplanatoryOperator.SetOperation("|")
+        clsOverallExplanatoryOperator.SetOperation("*")
         ' clsSecondExplanatoryOperator.AddParameter(iPosition:=0, strParameterValue:=ucrReceiverSecondExplanatory.GetVariableNames(bWithQuotes:=False))
         clsOverallExplanatoryOperator.AddParameter("operator1&2", clsROperatorParameter:=clsFirstAndSecondExplanatoryOperator, iPosition:=0)
         clsOverallExplanatoryOperator.AddParameter("var4", ucrReceiverThirdExplanatory.GetVariableNames, iPosition:=1)
@@ -175,7 +175,9 @@ Public Class dlgFourVariableModelling
 
         clsGlmer.SetPackageName("lme4")
         clsGlmer.SetRCommand("glmer")
+        clsGlmer.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=0)
         clsGlmer.AddParameter("family", clsRFunctionParameter:=clsFamilyFunction)
+
 
         clsFamilyFunction = ucrDistributionChoice.clsCurrRFunction
         clsGLM.AddParameter("family", clsRFunctionParameter:=clsFamilyFunction)
@@ -447,7 +449,7 @@ Public Class dlgFourVariableModelling
             End If
 
         End If
-            SetBaseFunction()
+        SetBaseFunction()
         ExplanatoryFunctionEnabled()
         UpdatePreview()
     End Sub
@@ -456,9 +458,14 @@ Public Class dlgFourVariableModelling
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrInputModelOperators1_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputModelOperators1.ControlValueChanged, ucrInputModelOperators2.ControlValueChanged
+    Private Sub ucrInputModelOperators1_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputModelOperators1.ControlValueChanged
         SetBaseFunction()
         SetFirstExplanatoryOperator()
+        UpdatePreview()
+    End Sub
+
+    Private Sub ucrInputModelOperators2_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputModelOperators2.ControlValueChanged
+        SetBaseFunction()
         SetSecondExplanatoryOperator()
         UpdatePreview()
     End Sub
