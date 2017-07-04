@@ -42,8 +42,8 @@ Partial Class ucrLog
         Me.txtLog = New System.Windows.Forms.TextBox()
         Me.mnuContextLogFile = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuOpenLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.lblHeader = New System.Windows.Forms.Label()
         Me.mnuCopy = New System.Windows.Forms.ToolStripMenuItem()
+        Me.lblHeader = New System.Windows.Forms.Label()
         Me.mnuContextLogFile.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -66,13 +66,19 @@ Partial Class ucrLog
         '
         Me.mnuContextLogFile.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuOpenLogFile, Me.mnuCopy})
         Me.mnuContextLogFile.Name = "mnuContextLogFile"
-        Me.mnuContextLogFile.Size = New System.Drawing.Size(153, 70)
+        Me.mnuContextLogFile.Size = New System.Drawing.Size(148, 48)
         '
         'mnuOpenLogFile
         '
         Me.mnuOpenLogFile.Name = "mnuOpenLogFile"
-        Me.mnuOpenLogFile.Size = New System.Drawing.Size(152, 22)
+        Me.mnuOpenLogFile.Size = New System.Drawing.Size(147, 22)
         Me.mnuOpenLogFile.Text = "Open Log File"
+        '
+        'mnuCopy
+        '
+        Me.mnuCopy.Name = "mnuCopy"
+        Me.mnuCopy.Size = New System.Drawing.Size(147, 22)
+        Me.mnuCopy.Text = "Copy"
         '
         'lblHeader
         '
@@ -86,12 +92,6 @@ Partial Class ucrLog
         Me.lblHeader.TabIndex = 8
         Me.lblHeader.Text = "Log"
         Me.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'mnuCopy
-        '
-        Me.mnuCopy.Name = "mnuCopy"
-        Me.mnuCopy.Size = New System.Drawing.Size(152, 22)
-        Me.mnuCopy.Text = "Copy"
         '
         'ucrLog
         '
