@@ -130,8 +130,8 @@ Public Class dlgFourVariableModelling
 
         clsOverallExplanatoryOperator.SetOperation("|")
         ' clsSecondExplanatoryOperator.AddParameter(iPosition:=0, strParameterValue:=ucrReceiverSecondExplanatory.GetVariableNames(bWithQuotes:=False))
-        clsOverallExplanatoryOperator.AddParameter("opt1", clsROperatorParameter:=clsFirstAndSecondExplanatoryOperator)
-        clsOverallExplanatoryOperator.AddParameter("var4", ucrReceiverThirdExplanatory.GetVariableNames, iPosition:=3)
+        clsOverallExplanatoryOperator.AddParameter("operator1&2", clsROperatorParameter:=clsFirstAndSecondExplanatoryOperator, iPosition:=0)
+        clsOverallExplanatoryOperator.AddParameter("var4", ucrReceiverThirdExplanatory.GetVariableNames, iPosition:=1)
         clsOverallExplanatoryOperator.bBrackets = False
 
         clsFirstAndSecondExplanatoryOperator.SetOperation("+")
