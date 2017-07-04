@@ -62,7 +62,7 @@ Partial Class sdgOneVarFitModel
         '
         Me.tbFittingOptions.Controls.Add(Me.tbFittingMethod)
         Me.tbFittingOptions.Controls.Add(Me.tbOptimisationMethod)
-        Me.tbFittingOptions.Location = New System.Drawing.Point(5, 12)
+        Me.tbFittingOptions.Location = New System.Drawing.Point(5, 7)
         Me.tbFittingOptions.Name = "tbFittingOptions"
         Me.tbFittingOptions.SelectedIndex = 0
         Me.tbFittingOptions.Size = New System.Drawing.Size(201, 177)
@@ -214,7 +214,7 @@ Partial Class sdgOneVarFitModel
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(33, 195)
+        Me.ucrBase.Location = New System.Drawing.Point(33, 191)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(142, 30)
         Me.ucrBase.TabIndex = 1
@@ -223,7 +223,7 @@ Partial Class sdgOneVarFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(209, 228)
+        Me.ClientSize = New System.Drawing.Size(209, 225)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.tbFittingOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
