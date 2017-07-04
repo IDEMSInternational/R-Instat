@@ -398,7 +398,7 @@ Public Class dlgFourVariableModelling
     End Sub
 
     Private Sub cmdFunction_Click(sender As Object, e As EventArgs) Handles cmdFunction.Click
-        sdgVariableTransformations.SetRCodeForControls(clsNewFormulaOperator:=clsFirstAndSecondExplanatoryOperator, clsNewTransformParameter:=clsFirstAndSecondExplanatoryOperator.GetParameter("exp"), clsNewTransformFunction:=clsFirstTransformFunction, clsNewPowerOperator:=clsFirstPowerOperator, strVariableName:=ucrReceiverFirstExplanatory.GetVariableNames(False), bReset:=bResetFunction)
+        sdgVariableTransformations.SetRCodeForControls(clsNewFormulaOperator:=clsFirstAndSecondExplanatoryOperator, clsNewTransformParameter:=clsFirstAndSecondExplanatoryOperator.GetParameter("var3"), clsNewTransformFunction:=clsFirstTransformFunction, clsNewPowerOperator:=clsFirstPowerOperator, strVariableName:=ucrReceiverFirstExplanatory.GetVariableNames(False), bReset:=bResetFunction)
         sdgVariableTransformations.ShowDialog()
         bResetFunction = False
         UpdatePreview()
