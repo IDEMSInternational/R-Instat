@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,8 +11,9 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat
 Public Class UcrPanel
     Public dctRadioButtonValues As New Dictionary(Of RadioButton, String)
@@ -72,7 +73,9 @@ Public Class UcrPanel
                 clsTempParam.SetArgumentValue(strNewValue)
             Else
                 If Not bAllowNonConditionValues Then
-                    MsgBox("Developer error: No parameter value is associated to the currently checked radio button. Cannot update parameter.")
+                    'Removed because some radio buttons may not set a value for the parameter (but other radio buttons do)
+                    'e.g. Insert Rows/Columns dialog
+                    'MsgBox("Developer error: No parameter value is associated to the currently checked radio button. Cannot update parameter.")
                 End If
             End If
         End If
