@@ -69,7 +69,6 @@ Partial Class sdgSimpleRegOptions
         Me.rdoFourPlots = New System.Windows.Forms.RadioButton()
         Me.rdoChooseIndividual = New System.Windows.Forms.RadioButton()
         Me.ucrPnlMutiplePlots = New instat.UcrPanel()
-        Me.ucrChkResidualPlots = New instat.ucrCheck()
         Me.grpIndividualPlots = New System.Windows.Forms.GroupBox()
         Me.ucrChkCooksDistance = New instat.ucrCheck()
         Me.ucrChkResidualsFitted = New instat.ucrCheck()
@@ -77,6 +76,7 @@ Partial Class sdgSimpleRegOptions
         Me.ucrChkResidualsLeverage = New instat.ucrCheck()
         Me.ucrChkQQ = New instat.ucrCheck()
         Me.ucrChkCooksDistanceLeverage = New instat.ucrCheck()
+        Me.ucrChkResidualPlots = New instat.ucrCheck()
         Me.tbDisplay = New System.Windows.Forms.TabPage()
         Me.ucrNudConfLevel = New instat.ucrNud()
         Me.ucrChkPvalues = New instat.ucrCheck()
@@ -85,7 +85,7 @@ Partial Class sdgSimpleRegOptions
         Me.ucrChkANOVA = New instat.ucrCheck()
         Me.ucrChkModel = New instat.ucrCheck()
         Me.lblConfLevel = New System.Windows.Forms.Label()
-        Me.tbRegOptions = New System.Windows.Forms.TabControl()
+        Me.tbpRegOptions = New System.Windows.Forms.TabControl()
         Me.tbSave = New System.Windows.Forms.TabPage()
         Me.ucrSaveLeverageColumnName = New instat.ucrSave()
         Me.ucrSaveStdResidualsColumnName = New instat.ucrSave()
@@ -102,7 +102,7 @@ Partial Class sdgSimpleRegOptions
         Me.grpMultiplePlots.SuspendLayout()
         Me.grpIndividualPlots.SuspendLayout()
         Me.tbDisplay.SuspendLayout()
-        Me.tbRegOptions.SuspendLayout()
+        Me.tbpRegOptions.SuspendLayout()
         Me.tbSave.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -179,7 +179,7 @@ Partial Class sdgSimpleRegOptions
         'ucrChkRugs
         '
         Me.ucrChkRugs.Checked = False
-        Me.ucrChkRugs.Location = New System.Drawing.Point(115, 179)
+        Me.ucrChkRugs.Location = New System.Drawing.Point(126, 179)
         Me.ucrChkRugs.Name = "ucrChkRugs"
         Me.ucrChkRugs.Size = New System.Drawing.Size(113, 20)
         Me.ucrChkRugs.TabIndex = 10
@@ -197,13 +197,13 @@ Partial Class sdgSimpleRegOptions
         Me.ucrChkPartial.Checked = False
         Me.ucrChkPartial.Location = New System.Drawing.Point(10, 178)
         Me.ucrChkPartial.Name = "ucrChkPartial"
-        Me.ucrChkPartial.Size = New System.Drawing.Size(113, 20)
+        Me.ucrChkPartial.Size = New System.Drawing.Size(109, 20)
         Me.ucrChkPartial.TabIndex = 9
         '
         'ucrChkConfIntervalband
         '
         Me.ucrChkConfIntervalband.Checked = False
-        Me.ucrChkConfIntervalband.Location = New System.Drawing.Point(115, 202)
+        Me.ucrChkConfIntervalband.Location = New System.Drawing.Point(126, 202)
         Me.ucrChkConfIntervalband.Name = "ucrChkConfIntervalband"
         Me.ucrChkConfIntervalband.Size = New System.Drawing.Size(113, 20)
         Me.ucrChkConfIntervalband.TabIndex = 0
@@ -380,8 +380,8 @@ Partial Class sdgSimpleRegOptions
         'tbResiduals
         '
         Me.tbResiduals.Controls.Add(Me.grpMultiplePlots)
-        Me.tbResiduals.Controls.Add(Me.ucrChkResidualPlots)
         Me.tbResiduals.Controls.Add(Me.grpIndividualPlots)
+        Me.tbResiduals.Controls.Add(Me.ucrChkResidualPlots)
         Me.tbResiduals.Location = New System.Drawing.Point(4, 22)
         Me.tbResiduals.Name = "tbResiduals"
         Me.tbResiduals.Padding = New System.Windows.Forms.Padding(3)
@@ -448,14 +448,6 @@ Partial Class sdgSimpleRegOptions
         Me.ucrPnlMutiplePlots.Size = New System.Drawing.Size(223, 69)
         Me.ucrPnlMutiplePlots.TabIndex = 2
         '
-        'ucrChkResidualPlots
-        '
-        Me.ucrChkResidualPlots.Checked = False
-        Me.ucrChkResidualPlots.Location = New System.Drawing.Point(10, 7)
-        Me.ucrChkResidualPlots.Name = "ucrChkResidualPlots"
-        Me.ucrChkResidualPlots.Size = New System.Drawing.Size(113, 20)
-        Me.ucrChkResidualPlots.TabIndex = 0
-        '
         'grpIndividualPlots
         '
         Me.grpIndividualPlots.Controls.Add(Me.ucrChkCooksDistance)
@@ -519,6 +511,14 @@ Partial Class sdgSimpleRegOptions
         Me.ucrChkCooksDistanceLeverage.Name = "ucrChkCooksDistanceLeverage"
         Me.ucrChkCooksDistanceLeverage.Size = New System.Drawing.Size(164, 20)
         Me.ucrChkCooksDistanceLeverage.TabIndex = 4
+        '
+        'ucrChkResidualPlots
+        '
+        Me.ucrChkResidualPlots.Checked = False
+        Me.ucrChkResidualPlots.Location = New System.Drawing.Point(10, 7)
+        Me.ucrChkResidualPlots.Name = "ucrChkResidualPlots"
+        Me.ucrChkResidualPlots.Size = New System.Drawing.Size(113, 20)
+        Me.ucrChkResidualPlots.TabIndex = 0
         '
         'tbDisplay
         '
@@ -600,16 +600,16 @@ Partial Class sdgSimpleRegOptions
         Me.lblConfLevel.Tag = "Confidence_Level:"
         Me.lblConfLevel.Text = "Confidence Level:"
         '
-        'tbRegOptions
+        'tbpRegOptions
         '
-        Me.tbRegOptions.Controls.Add(Me.tbDisplay)
-        Me.tbRegOptions.Controls.Add(Me.tbGraphics)
-        Me.tbRegOptions.Controls.Add(Me.tbSave)
-        Me.tbRegOptions.Location = New System.Drawing.Point(2, 3)
-        Me.tbRegOptions.Name = "tbRegOptions"
-        Me.tbRegOptions.SelectedIndex = 0
-        Me.tbRegOptions.Size = New System.Drawing.Size(321, 342)
-        Me.tbRegOptions.TabIndex = 0
+        Me.tbpRegOptions.Controls.Add(Me.tbDisplay)
+        Me.tbpRegOptions.Controls.Add(Me.tbGraphics)
+        Me.tbpRegOptions.Controls.Add(Me.tbSave)
+        Me.tbpRegOptions.Location = New System.Drawing.Point(2, 3)
+        Me.tbpRegOptions.Name = "tbpRegOptions"
+        Me.tbpRegOptions.SelectedIndex = 0
+        Me.tbpRegOptions.Size = New System.Drawing.Size(321, 342)
+        Me.tbpRegOptions.TabIndex = 0
         '
         'tbSave
         '
@@ -670,7 +670,7 @@ Partial Class sdgSimpleRegOptions
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(322, 378)
-        Me.Controls.Add(Me.tbRegOptions)
+        Me.Controls.Add(Me.tbpRegOptions)
         Me.Controls.Add(Me.ucrSdgButtons)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -695,7 +695,7 @@ Partial Class sdgSimpleRegOptions
         Me.grpIndividualPlots.ResumeLayout(False)
         Me.tbDisplay.ResumeLayout(False)
         Me.tbDisplay.PerformLayout()
-        Me.tbRegOptions.ResumeLayout(False)
+        Me.tbpRegOptions.ResumeLayout(False)
         Me.tbSave.ResumeLayout(False)
         Me.ResumeLayout(False)
 
@@ -709,7 +709,7 @@ Partial Class sdgSimpleRegOptions
     Friend WithEvents tbDisplay As TabPage
     Friend WithEvents lblConfLevel As Label
     Friend WithEvents chkPvalues As CheckBox
-    Friend WithEvents tbRegOptions As TabControl
+    Friend WithEvents tbpRegOptions As TabControl
     Friend WithEvents tbSave As TabPage
     Friend WithEvents grpPlotType As GroupBox
     Friend WithEvents grpScale As GroupBox
@@ -751,11 +751,11 @@ Partial Class sdgSimpleRegOptions
     Friend WithEvents ucrSaveStdResidualsColumnName As ucrSave
     Friend WithEvents ucrSaveResidualsColumnName As ucrSave
     Friend WithEvents ucrNudWhiteSpace As ucrNud
-    Friend WithEvents ucrNudGraphicsCLevel As ucrNud
     Friend WithEvents ucrChkCooksDistance As ucrCheck
     Friend WithEvents ucrChkScaleLocation As ucrCheck
     Friend WithEvents ucrChkQQ As ucrCheck
     Friend WithEvents ucrChkResidualsLeverage As ucrCheck
     Friend WithEvents ucrChkCooksDistanceLeverage As ucrCheck
     Friend WithEvents ucrChkResidualsFitted As ucrCheck
+    Friend WithEvents ucrNudGraphicsCLevel As ucrNud
 End Class
