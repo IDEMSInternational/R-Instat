@@ -200,7 +200,7 @@ Public Class sdgSimpleRegOptions
         'Save Fitted Column Names
         'ucrSaveFittedColumnName.SetPrefix("Fitted")
         'ucrSaveFittedColumnName.SetSaveTypeAsColumn()
-        'ucrSaveFittedColumnName.SetCheckBoxText("Fitted Values")
+        ucrSaveFittedColumnName.SetCheckBoxText("Fitted Values")
         'ucrSaveFittedColumnName.SetIsComboBox()
         'ucrSaveFittedColumnName.SetDataFrameSelector(clsRDataFrame)
 
@@ -208,7 +208,7 @@ Public Class sdgSimpleRegOptions
         '' save residuals column names
         'ucrSaveResidualsColumnName.SetPrefix("Resids")
         'ucrSaveResidualsColumnName.SetSaveTypeAsColumn()
-        'ucrSaveResidualsColumnName.SetCheckBoxText("residuals")
+        ucrSaveResidualsColumnName.SetCheckBoxText("residuals")
         'ucrSaveResidualsColumnName.SetIsComboBox()
         'ucrSaveResidualsColumnName.SetDataFrameSelector(clsRDataFrame)
 
@@ -216,14 +216,14 @@ Public Class sdgSimpleRegOptions
         'ucrSaveStdResidualsColumnName.SetPrefix("Sresids")
         'ucrSaveStdResidualsColumnName.SetSaveTypeAsColumn()
         'ucrSaveStdResidualsColumnName.SetIsComboBox()
-        'ucrSaveStdResidualsColumnName.SetCheckBoxText("std residuals")
+        ucrSaveStdResidualsColumnName.SetCheckBoxText("std residuals")
         'ucrSaveStdResidualsColumnName.SetDataFrameSelector(clsRDataFrame)
 
         ''save leverage column names
         'ucrSaveLeverageColumnName.SetPrefix("Lever")
         'ucrSaveLeverageColumnName.SetSaveTypeAsColumn()
         'ucrSaveLeverageColumnName.SetIsComboBox()
-        'ucrSaveLeverageColumnName.SetCheckBoxText("leverage")
+        ucrSaveLeverageColumnName.SetCheckBoxText("leverage")
         'ucrSaveLeverageColumnName.SetDataFrameSelector(clsRDataFrame)
 
         bControlsInitialised = True
