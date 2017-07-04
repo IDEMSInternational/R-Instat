@@ -90,11 +90,11 @@ Public Class dlgCanonicalCorrelationAnalysis
         clsRGraphicsFunction.SetRCommand("ggpairs")
         clsRCanCorFunction.AddParameter("data_name", Chr(34) & ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
         clsRCanCorFunction.AddParameter("value1", Chr(34) & "cancor" & Chr(34))
-        clsRCanCorFunction.AddParameter("model_name", Chr(34) & clsTempFunction & Chr(34))
+        clsRCanCorFunction.AddParameter("model_name", Chr(34) & ucrSaveResult.GetText & Chr(34))
         clsRCanCorFunction.AddParameter("value1", Chr(34) & "cor" & Chr(34))
-        clsRXCoefFunction.AddParameter("model_name", Chr(34) & clsTempFunction & Chr(34))
+        clsRXCoefFunction.AddParameter("model_name", Chr(34) & ucrSaveResult.GetText & Chr(34))
         clsRXCoefFunction.AddParameter("value1", Chr(34) & "xcoef" & Chr(34))
-        clsRYCoefFunction.AddParameter("model_name", Chr(34) & clsTempFunction & Chr(34))
+        clsRYCoefFunction.AddParameter("model_name", Chr(34) & ucrSaveResult.GetText & Chr(34))
         clsRYCoefFunction.AddParameter("value1", Chr(34) & "ycoef" & Chr(34))
         ' Set default RFunction as the base function
         ucrBase.clsRsyntax.ClearCodes()
@@ -120,10 +120,6 @@ Public Class dlgCanonicalCorrelationAnalysis
         sdgCanonicalCorrelation.SetRFunction(ucrBase.clsRsyntax, clsRCanCorFunction, clsRXCoefFunction, clsRYCoefFunction, clsRGraphicsFunction, clsTempFunction, clsXvarFunction, clsYvarFunction, clsTempFunc, bResetSubdialog)
         bResetSubdialog = False
         sdgCanonicalCorrelation.ShowDialog()
-    End Sub
-
-    Private Sub ucrSaveResult_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlValueChanged
-        clsTempFunction = ucrSaveResult.GetText
     End Sub
 
     Private Sub ucrReceiverXvariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverXvariables.ControlValueChanged
