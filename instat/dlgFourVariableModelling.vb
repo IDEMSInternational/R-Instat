@@ -28,7 +28,8 @@ Public Class dlgFourVariableModelling
     Public clsFormulaOperator As ROperator
     Private clsFirstPowerOperator As ROperator
     Public clsFirstAndSecondExplanatoryOperator, clsOverallExplanatoryOperator As New ROperator
-    Private clsFirstTransformFunction, clsAnovaFunction, clsLMOrGLM, clsLmer, clsGlmer As RFunction
+    Private clsAnovaFunction, clsLMOrGLM, clsLmer, clsGlmer As RFunction
+    Private clsFirstTransformFunction, clsSecondTransformFunction, clsThirdTransformFunction As RFunction
 
     Private Sub dlgFourVariableModelling_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -115,6 +116,8 @@ Public Class dlgFourVariableModelling
         clsVisReg = New RFunction
         clsAutoPlot = New RFunction
         clsFirstTransformFunction = New RFunction
+        clsSecondTransformFunction = New RFunction
+        clsThirdTransformFunction = New RFunction
         clsLmer = New RFunction
         clsLMOrGLM = New RFunction
         clsGlmer = New RFunction
@@ -129,9 +132,9 @@ Public Class dlgFourVariableModelling
         ucrBaseFourVariableModelling.clsRsyntax.ClearCodes()
 
         clsOverallExplanatoryOperator.SetOperation("*")
-        ' clsSecondExplanatoryOperator.AddParameter(iPosition:=0, strParameterValue:=ucrReceiverSecondExplanatory.GetVariableNames(bWithQuotes:=False))
         clsOverallExplanatoryOperator.AddParameter("operator1&2", clsROperatorParameter:=clsFirstAndSecondExplanatoryOperator, iPosition:=0)
         clsFirstAndSecondExplanatoryOperator.SetOperation("+")
+        
         ucrDistributionChoice.SetDataType("numeric")
         ucrSaveModel.Reset()
         ucrModelPreview.Reset()
@@ -238,12 +241,14 @@ Public Class dlgFourVariableModelling
         ucrSaveModel.SetRCode(clsLM, bReset)
         ucrDistributionChoice.SetRCode(clsFamilyFunction, bReset)
         ucrReceiverResponse.SetRCode(clsRNumeric, bReset)
-        '  ucrReceiverFirstExplanatory.SetRCode(clsFirstTransformFunction, bReset)
-        'ucrReceiverSecondExplanatory.SetRCode(clsFirstAndSecondExplanatoryOperator, bReset)
-        ' ucrReceiverThirdExplanatory.SetRCode(clsOverallExplanatoryOperator, bReset)
+        ucrReceiverFirstExplanatory.SetRCode(clsFirstTransformFunction, bReset)
+        ucrReceiverSecondExplanatory.SetRCode(clsSecondTransformFunction, bReset)
+        ucrReceiverThirdExplanatory.SetRCode(clsThirdTransformFunction, bReset)
 
         bRCodeSet = True
-        ExplanatoryFunctionEnabled()
+        FirstExplanatoryFunctionEnabled()
+        SecondExplanatoryFunctionEnabled()
+        ThirdExplanatoryFunctionEnabled()
         TestOKEnabled()
 
     End Sub
@@ -303,11 +308,27 @@ Public Class dlgFourVariableModelling
         End If
     End Sub
 
-    Private Sub ExplanatoryFunctionEnabled()
-        If Not ucrReceiverResponse.IsEmpty AndAlso {"numeric", "integer"}.Contains(ucrReceiverFirstExplanatory.strCurrDataType) Then
-            cmdFunction.Enabled = True
+    Private Sub FirstExplanatoryFunctionEnabled()
+        If Not ucrReceiverFirstExplanatory.IsEmpty AndAlso {"numeric", "integer"}.Contains(ucrReceiverFirstExplanatory.strCurrDataType) Then
+            cmdFirstExplanatoryFunction.Enabled = True
         Else
-            cmdFunction.Enabled = False
+            cmdFirstExplanatoryFunction.Enabled = False
+        End If
+    End Sub
+
+    Private Sub SecondExplanatoryFunctionEnabled()
+        If Not ucrReceiverSecondExplanatory.IsEmpty AndAlso {"numeric", "integer"}.Contains(ucrReceiverSecondExplanatory.strCurrDataType) Then
+            cmdSecondExplanatoryFunction.Enabled = True
+        Else
+            cmdSecondExplanatoryFunction.Enabled = False
+        End If
+    End Sub
+
+    Private Sub ThirdExplanatoryFunctionEnabled()
+        If Not ucrReceiverThirdExplanatory.IsEmpty AndAlso {"numeric", "integer"}.Contains(ucrReceiverThirdExplanatory.strCurrDataType) Then
+            cmdThirdExplanatoryFunction.Enabled = True
+        Else
+            cmdThirdExplanatoryFunction.Enabled = False
         End If
     End Sub
 
@@ -389,8 +410,22 @@ Public Class dlgFourVariableModelling
         SetBaseFunction()
     End Sub
 
-    Private Sub cmdFunction_Click(sender As Object, e As EventArgs) Handles cmdFunction.Click
-        sdgVariableTransformations.SetRCodeForControls(clsNewFormulaOperator:=clsFirstAndSecondExplanatoryOperator, clsNewTransformParameter:=clsFirstAndSecondExplanatoryOperator.GetParameter("var3"), clsNewTransformFunction:=clsFirstTransformFunction, clsNewPowerOperator:=clsFirstPowerOperator, strVariableName:=ucrReceiverFirstExplanatory.GetVariableNames(False), bReset:=bResetFunction)
+    Private Sub cmdFirstFunction_Click(sender As Object, e As EventArgs) Handles cmdFirstExplanatoryFunction.Click
+        sdgVariableTransformations.SetRCodeForControls(clsNewFormulaOperator:=clsFirstAndSecondExplanatoryOperator, clsNewTransformParameter:=clsFirstAndSecondExplanatoryOperator.GetParameter("var2"), clsNewTransformFunction:=clsFirstTransformFunction, clsNewPowerOperator:=clsFirstPowerOperator, strVariableName:=ucrReceiverFirstExplanatory.GetVariableNames(False), bReset:=bResetFunction)
+        sdgVariableTransformations.ShowDialog()
+        bResetFunction = False
+        UpdatePreview()
+    End Sub
+
+    Private Sub cmdSecondFunction_Click(sender As Object, e As EventArgs) Handles cmdSecondExplanatoryFunction.Click
+        sdgVariableTransformations.SetRCodeForControls(clsNewFormulaOperator:=clsFirstAndSecondExplanatoryOperator, clsNewTransformParameter:=clsFirstAndSecondExplanatoryOperator.GetParameter("var3"), clsNewTransformFunction:=clsSecondTransformFunction, clsNewPowerOperator:=clsFirstPowerOperator, strVariableName:=ucrReceiverFirstExplanatory.GetVariableNames(False), bReset:=bResetFunction)
+        sdgVariableTransformations.ShowDialog()
+        bResetFunction = False
+        UpdatePreview()
+    End Sub
+
+    Private Sub cmdThirdFunction_Click(sender As Object, e As EventArgs) Handles cmdThirdExplanatoryFunction.Click
+        sdgVariableTransformations.SetRCodeForControls(clsNewFormulaOperator:=clsFirstAndSecondExplanatoryOperator, clsNewTransformParameter:=clsOverallExplanatoryOperator.GetParameter("var4"), clsNewTransformFunction:=clsThirdTransformFunction, clsNewPowerOperator:=clsFirstPowerOperator, strVariableName:=ucrReceiverFirstExplanatory.GetVariableNames(False), bReset:=bResetFunction)
         sdgVariableTransformations.ShowDialog()
         bResetFunction = False
         UpdatePreview()
@@ -440,7 +475,9 @@ Public Class dlgFourVariableModelling
 
         End If
         SetBaseFunction()
-        ExplanatoryFunctionEnabled()
+        FirstExplanatoryFunctionEnabled()
+        SecondExplanatoryFunctionEnabled()
+        ThirdExplanatoryFunctionEnabled()
         UpdatePreview()
     End Sub
 
