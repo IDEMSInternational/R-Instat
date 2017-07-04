@@ -50,7 +50,7 @@ Public Class dlgDescribeOneVariable
         ucrReceiverDescribeOneVar.SetParameter(New RParameter("object", 0))
         ucrReceiverDescribeOneVar.SetParameterIsRFunction()
 
-        ucrNudMaxSum.SetParameter(New RParameter("maxsum"))
+        ucrNudMaxSum.SetParameter(New RParameter("maxsum", 2))
         ucrNudMaxSum.SetRDefault("7")
 
         ucrChkOmitMissing.SetText("Omit Missing Values")
