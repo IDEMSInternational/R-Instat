@@ -167,6 +167,7 @@ Public Class dlgTwoVariableFitModel
         clsVisReg = New RFunction
         clsTransformFunction = New RFunction
 
+        ucrSaveModels.Reset()
         ucrSelectorSimpleReg.Reset()
         ucrReceiverResponse.SetMeAsReceiver()
         ucrModelPreview.SetName("")
