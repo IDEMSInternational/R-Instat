@@ -20,7 +20,6 @@ Public Class ucrLog
     Public Sub CopyText()
         txtLog.Copy()
     End Sub
-
     Public Sub SelectAllText()
         txtLog.SelectAll()
     End Sub
@@ -53,5 +52,11 @@ Public Class ucrLog
             txtLog.SelectAll()
         End If
         txtLog.Copy()
+    End Sub
+
+    Private Sub txtLog_TextChanged(sender As Object, e As EventArgs) Handles txtLog.TextChanged
+        txtLog.SelectionStart = txtLog.Text.Length
+        txtLog.ScrollToCaret()
+        txtLog.Refresh()
     End Sub
 End Class
