@@ -82,7 +82,7 @@ Public Class frmMain
 
         'Do this after loading options because interval depends on options
         'Interval is in milliseconds and option is in minutes
-        timer.Interval = (clsInstatOptions.iAutoSaveDataMinutes * 60 * 100)
+        timer.Interval = (clsInstatOptions.iAutoSaveDataMinutes * 60 * 1000)
         timer.Start()
 
         AddHandler System.Windows.Forms.Application.Idle, AddressOf Application_Idle
@@ -1340,7 +1340,7 @@ Public Class frmMain
         dlgRestrict.ShowDialog()
     End Sub
 
-    Private Sub AaToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles AaToolStripMenuItem1.Click
+    Private Sub mnuProcurementModelFitModelToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuProcurementModelFitModelToolStripMenuItem.Click
         dlgFitCorruptionModel.ShowDialog()
     End Sub
 
@@ -1376,7 +1376,7 @@ Public Class frmMain
         dlgDefineCorruptionOutputs.ShowDialog()
     End Sub
 
-    Private Sub DefineCorruptionFreeCategoriesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DefineCorruptionFreeCategoriesToolStripMenuItem.Click
+    Private Sub DefineCorruptionFreeCategoriesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SetRefLevelToolStripMenuItem.Click
         Dim lstDataNames As List(Of String)
 
         lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
@@ -1445,6 +1445,16 @@ Public Class frmMain
     End Sub
 
     Private Sub CountryNamesCorrectionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CountryNamesCorrectionsToolStripMenuItem.Click
+        Dim lstDataNames As List(Of String)
+
+        lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
+        If lstDataNames.Count > 0 Then
+            dlgStandardiseCountryNames.strDefaultDataFrame = lstDataNames(0)
+            dlgStandardiseCountryNames.strDefaultColumn = clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_country_label")
+        Else
+            dlgStandardiseCountryNames.strDefaultDataFrame = ""
+            dlgStandardiseCountryNames.strDefaultColumn = ""
+        End If
         dlgStandardiseCountryNames.ShowDialog()
     End Sub
 
