@@ -46,8 +46,8 @@ Partial Class sdgCanonicalCorrelation
         Me.ucrChkCoefficients = New instat.ucrCheck()
         Me.ucrChkCanonicalCorrelations = New instat.ucrCheck()
         Me.ucrChkPairwisePlot = New instat.ucrCheck()
-        Me.ucrSdgButtons = New instat.ucrButtonsSubdialogue()
         Me.ucrPnlVariables = New instat.UcrPanel()
+        Me.ucrSdgButtons = New instat.ucrButtonsSubdialogue()
         Me.tbRegOptions.SuspendLayout()
         Me.tbDisplay.SuspendLayout()
         Me.tbGraphics.SuspendLayout()
@@ -121,7 +121,7 @@ Partial Class sdgCanonicalCorrelation
         Me.ucrChkCoefficients.Location = New System.Drawing.Point(10, 38)
         Me.ucrChkCoefficients.Name = "ucrChkCoefficients"
         Me.ucrChkCoefficients.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkCoefficients.TabIndex = 3
+        Me.ucrChkCoefficients.TabIndex = 1
         '
         'ucrChkCanonicalCorrelations
         '
@@ -129,7 +129,7 @@ Partial Class sdgCanonicalCorrelation
         Me.ucrChkCanonicalCorrelations.Location = New System.Drawing.Point(11, 10)
         Me.ucrChkCanonicalCorrelations.Name = "ucrChkCanonicalCorrelations"
         Me.ucrChkCanonicalCorrelations.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkCanonicalCorrelations.TabIndex = 2
+        Me.ucrChkCanonicalCorrelations.TabIndex = 0
         '
         'ucrChkPairwisePlot
         '
@@ -139,19 +139,19 @@ Partial Class sdgCanonicalCorrelation
         Me.ucrChkPairwisePlot.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkPairwisePlot.TabIndex = 4
         '
-        'ucrSdgButtons
-        '
-        Me.ucrSdgButtons.Location = New System.Drawing.Point(41, 201)
-        Me.ucrSdgButtons.Name = "ucrSdgButtons"
-        Me.ucrSdgButtons.Size = New System.Drawing.Size(142, 30)
-        Me.ucrSdgButtons.TabIndex = 0
-        '
         'ucrPnlVariables
         '
         Me.ucrPnlVariables.Location = New System.Drawing.Point(21, 34)
         Me.ucrPnlVariables.Name = "ucrPnlVariables"
         Me.ucrPnlVariables.Size = New System.Drawing.Size(88, 58)
         Me.ucrPnlVariables.TabIndex = 5
+        '
+        'ucrSdgButtons
+        '
+        Me.ucrSdgButtons.Location = New System.Drawing.Point(41, 201)
+        Me.ucrSdgButtons.Name = "ucrSdgButtons"
+        Me.ucrSdgButtons.Size = New System.Drawing.Size(142, 30)
+        Me.ucrSdgButtons.TabIndex = 1
         '
         'sdgCanonicalCorrelation
         '
