@@ -134,7 +134,7 @@ Partial Class dlgTwoVariableFitModel
         Me.lblModelPreview.Location = New System.Drawing.Point(10, 339)
         Me.lblModelPreview.Name = "lblModelPreview"
         Me.lblModelPreview.Size = New System.Drawing.Size(80, 13)
-        Me.lblModelPreview.TabIndex = 11
+        Me.lblModelPreview.TabIndex = 12
         Me.lblModelPreview.Text = "Model Preview:"
         '
         'rdoTwoSample
@@ -147,7 +147,7 @@ Partial Class dlgTwoVariableFitModel
         Me.rdoTwoSample.Location = New System.Drawing.Point(222, 11)
         Me.rdoTwoSample.Name = "rdoTwoSample"
         Me.rdoTwoSample.Size = New System.Drawing.Size(121, 28)
-        Me.rdoTwoSample.TabIndex = 21
+        Me.rdoTwoSample.TabIndex = 2
         Me.rdoTwoSample.Text = "Two Sample"
         Me.rdoTwoSample.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoTwoSample.UseVisualStyleBackColor = True
@@ -162,7 +162,7 @@ Partial Class dlgTwoVariableFitModel
         Me.rdoGeneralCase.Location = New System.Drawing.Point(103, 11)
         Me.rdoGeneralCase.Name = "rdoGeneralCase"
         Me.rdoGeneralCase.Size = New System.Drawing.Size(121, 28)
-        Me.rdoGeneralCase.TabIndex = 20
+        Me.rdoGeneralCase.TabIndex = 1
         Me.rdoGeneralCase.Text = "General Case"
         Me.rdoGeneralCase.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoGeneralCase.UseVisualStyleBackColor = True
@@ -174,7 +174,7 @@ Partial Class dlgTwoVariableFitModel
         Me.lblFactor.Location = New System.Drawing.Point(264, 147)
         Me.lblFactor.Name = "lblFactor"
         Me.lblFactor.Size = New System.Drawing.Size(106, 13)
-        Me.lblFactor.TabIndex = 6
+        Me.lblFactor.TabIndex = 7
         Me.lblFactor.Text = "Explanatory Variable:"
         '
         'lblNumeric
@@ -184,7 +184,7 @@ Partial Class dlgTwoVariableFitModel
         Me.lblNumeric.Location = New System.Drawing.Point(264, 85)
         Me.lblNumeric.Name = "lblNumeric"
         Me.lblNumeric.Size = New System.Drawing.Size(99, 13)
-        Me.lblNumeric.TabIndex = 3
+        Me.lblNumeric.TabIndex = 4
         Me.lblNumeric.Text = "Response Variable:"
         '
         'ucrSaveModels
@@ -192,7 +192,7 @@ Partial Class dlgTwoVariableFitModel
         Me.ucrSaveModels.Location = New System.Drawing.Point(10, 366)
         Me.ucrSaveModels.Name = "ucrSaveModels"
         Me.ucrSaveModels.Size = New System.Drawing.Size(291, 24)
-        Me.ucrSaveModels.TabIndex = 1
+        Me.ucrSaveModels.TabIndex = 14
         '
         'ucrChkConvertToVariate
         '
@@ -200,7 +200,7 @@ Partial Class dlgTwoVariableFitModel
         Me.ucrChkConvertToVariate.Location = New System.Drawing.Point(267, 122)
         Me.ucrChkConvertToVariate.Name = "ucrChkConvertToVariate"
         Me.ucrChkConvertToVariate.Size = New System.Drawing.Size(120, 20)
-        Me.ucrChkConvertToVariate.TabIndex = 4
+        Me.ucrChkConvertToVariate.TabIndex = 6
         '
         'ucrReceiverExplanatory
         '
@@ -211,7 +211,7 @@ Partial Class dlgTwoVariableFitModel
         Me.ucrReceiverExplanatory.Selector = Nothing
         Me.ucrReceiverExplanatory.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverExplanatory.strNcFilePath = ""
-        Me.ucrReceiverExplanatory.TabIndex = 22
+        Me.ucrReceiverExplanatory.TabIndex = 8
         Me.ucrReceiverExplanatory.ucrSelector = Nothing
         '
         'ucrReceiverResponse
@@ -223,7 +223,7 @@ Partial Class dlgTwoVariableFitModel
         Me.ucrReceiverResponse.Selector = Nothing
         Me.ucrReceiverResponse.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverResponse.strNcFilePath = ""
-        Me.ucrReceiverResponse.TabIndex = 4
+        Me.ucrReceiverResponse.TabIndex = 5
         Me.ucrReceiverResponse.ucrSelector = Nothing
         '
         'ucrSelectorSimpleReg
@@ -234,14 +234,14 @@ Partial Class dlgTwoVariableFitModel
         Me.ucrSelectorSimpleReg.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorSimpleReg.Name = "ucrSelectorSimpleReg"
         Me.ucrSelectorSimpleReg.Size = New System.Drawing.Size(226, 186)
-        Me.ucrSelectorSimpleReg.TabIndex = 2
+        Me.ucrSelectorSimpleReg.TabIndex = 3
         '
         'ucrPnlModelType
         '
         Me.ucrPnlModelType.Location = New System.Drawing.Point(93, 3)
         Me.ucrPnlModelType.Name = "ucrPnlModelType"
         Me.ucrPnlModelType.Size = New System.Drawing.Size(267, 43)
-        Me.ucrPnlModelType.TabIndex = 3
+        Me.ucrPnlModelType.TabIndex = 0
         '
         'ucrModelPreview
         '
@@ -251,14 +251,14 @@ Partial Class dlgTwoVariableFitModel
         Me.ucrModelPreview.Location = New System.Drawing.Point(97, 337)
         Me.ucrModelPreview.Name = "ucrModelPreview"
         Me.ucrModelPreview.Size = New System.Drawing.Size(204, 21)
-        Me.ucrModelPreview.TabIndex = 23
+        Me.ucrModelPreview.TabIndex = 13
         '
         'ucrDistributionChoice
         '
         Me.ucrDistributionChoice.Location = New System.Drawing.Point(10, 244)
         Me.ucrDistributionChoice.Name = "ucrDistributionChoice"
         Me.ucrDistributionChoice.Size = New System.Drawing.Size(208, 27)
-        Me.ucrDistributionChoice.TabIndex = 24
+        Me.ucrDistributionChoice.TabIndex = 11
         '
         'ucrBase
         '
@@ -280,7 +280,7 @@ Partial Class dlgTwoVariableFitModel
         Me.grpParameters.Location = New System.Drawing.Point(268, 187)
         Me.grpParameters.Name = "grpParameters"
         Me.grpParameters.Size = New System.Drawing.Size(183, 137)
-        Me.grpParameters.TabIndex = 25
+        Me.grpParameters.TabIndex = 9
         Me.grpParameters.TabStop = False
         Me.grpParameters.Text = "Parameters"
         '
@@ -290,7 +290,7 @@ Partial Class dlgTwoVariableFitModel
         Me.rdoCompareVariance.Location = New System.Drawing.Point(13, 90)
         Me.rdoCompareVariance.Name = "rdoCompareVariance"
         Me.rdoCompareVariance.Size = New System.Drawing.Size(112, 17)
-        Me.rdoCompareVariance.TabIndex = 37
+        Me.rdoCompareVariance.TabIndex = 6
         Me.rdoCompareVariance.TabStop = True
         Me.rdoCompareVariance.Tag = ""
         Me.rdoCompareVariance.Text = "Compare Variance"
@@ -302,7 +302,7 @@ Partial Class dlgTwoVariableFitModel
         Me.rdoCompareMeans.Location = New System.Drawing.Point(13, 67)
         Me.rdoCompareMeans.Name = "rdoCompareMeans"
         Me.rdoCompareMeans.Size = New System.Drawing.Size(102, 17)
-        Me.rdoCompareMeans.TabIndex = 36
+        Me.rdoCompareMeans.TabIndex = 5
         Me.rdoCompareMeans.TabStop = True
         Me.rdoCompareMeans.Tag = ""
         Me.rdoCompareMeans.Text = "Compare Means"
@@ -313,7 +313,7 @@ Partial Class dlgTwoVariableFitModel
         Me.ucrPnlMeansAndVariance.Location = New System.Drawing.Point(8, 67)
         Me.ucrPnlMeansAndVariance.Name = "ucrPnlMeansAndVariance"
         Me.ucrPnlMeansAndVariance.Size = New System.Drawing.Size(94, 43)
-        Me.ucrPnlMeansAndVariance.TabIndex = 35
+        Me.ucrPnlMeansAndVariance.TabIndex = 4
         '
         'ucrChkPairedTest
         '
@@ -321,7 +321,7 @@ Partial Class dlgTwoVariableFitModel
         Me.ucrChkPairedTest.Location = New System.Drawing.Point(13, 113)
         Me.ucrChkPairedTest.Name = "ucrChkPairedTest"
         Me.ucrChkPairedTest.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkPairedTest.TabIndex = 34
+        Me.ucrChkPairedTest.TabIndex = 7
         '
         'ucrNudHypothesis
         '
@@ -332,7 +332,7 @@ Partial Class dlgTwoVariableFitModel
         Me.ucrNudHypothesis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudHypothesis.Name = "ucrNudHypothesis"
         Me.ucrNudHypothesis.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudHypothesis.TabIndex = 33
+        Me.ucrNudHypothesis.TabIndex = 3
         Me.ucrNudHypothesis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudCI
@@ -344,7 +344,7 @@ Partial Class dlgTwoVariableFitModel
         Me.ucrNudCI.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudCI.Name = "ucrNudCI"
         Me.ucrNudCI.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudCI.TabIndex = 32
+        Me.ucrNudCI.TabIndex = 1
         Me.ucrNudCI.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblDifferenceInMeans
@@ -353,7 +353,7 @@ Partial Class dlgTwoVariableFitModel
         Me.lblDifferenceInMeans.Location = New System.Drawing.Point(10, 46)
         Me.lblDifferenceInMeans.Name = "lblDifferenceInMeans"
         Me.lblDifferenceInMeans.Size = New System.Drawing.Size(106, 13)
-        Me.lblDifferenceInMeans.TabIndex = 31
+        Me.lblDifferenceInMeans.TabIndex = 2
         Me.lblDifferenceInMeans.Tag = ""
         Me.lblDifferenceInMeans.Text = "Difference In Means:"
         '
@@ -363,7 +363,7 @@ Partial Class dlgTwoVariableFitModel
         Me.lblConfidenceInterval.Location = New System.Drawing.Point(10, 21)
         Me.lblConfidenceInterval.Name = "lblConfidenceInterval"
         Me.lblConfidenceInterval.Size = New System.Drawing.Size(102, 13)
-        Me.lblConfidenceInterval.TabIndex = 30
+        Me.lblConfidenceInterval.TabIndex = 0
         Me.lblConfidenceInterval.Tag = ""
         Me.lblConfidenceInterval.Text = "Confidence Interval:"
         '
@@ -372,7 +372,7 @@ Partial Class dlgTwoVariableFitModel
         Me.cmdExplanatoryFunction.Location = New System.Drawing.Point(267, 192)
         Me.cmdExplanatoryFunction.Name = "cmdExplanatoryFunction"
         Me.cmdExplanatoryFunction.Size = New System.Drawing.Size(103, 23)
-        Me.cmdExplanatoryFunction.TabIndex = 33
+        Me.cmdExplanatoryFunction.TabIndex = 10
         Me.cmdExplanatoryFunction.Text = "Function..."
         Me.cmdExplanatoryFunction.UseVisualStyleBackColor = True
         '
