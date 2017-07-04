@@ -86,7 +86,7 @@ Public Class dlgReorderColumns
         TestOkEnabled()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore)
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReorderColumns.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
