@@ -74,7 +74,7 @@ Public Class dlgReorderObjects
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
-    Private Sub ucrReorderObjects_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReorderObjects.ControlContentsChanged
+    Private Sub ucrReorderObjects_ControlContentsChanged(ucrChangedControl As ucrCore)
         TestOKEnabled()
     End Sub
 End Class
