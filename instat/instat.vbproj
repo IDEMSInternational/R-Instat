@@ -4931,12 +4931,6 @@
     <Content Include="static\Library\Procurement\country_level.RDS">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\Library\Procurement\WB_raw_and_calculated_df.RDS">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Procurement\wb_raw_calc_instat_obj.RDS">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="static\Help\R-Instat.pdf" />
     <Content Include="static\Library\Climatic\WKenyaRain.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -5566,6 +5560,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\InstatObject\R\extras\bin\windows\contrib\3.4\zoo_1.8-0.zip">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\Library\Procurement\WorldBankProcDataFrame.rds">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\Library\Procurement\WorldBankProcInstatObject.RDS">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
