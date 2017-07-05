@@ -247,6 +247,9 @@ Public Class dlgMakeDate
         clsHelp = New RFunction
 
         clsHelp.SetRCommand("help")
+        clsHelp.AddParameter("topic", "strptime")
+        clsHelp.AddParameter("package", Chr(34) & "base" & Chr(34))
+
         clsDateFunction.SetRCommand("as.Date")
         clsMakeYearDay.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_date_yeardoy")
         clsMakeYearMonthDay.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_date_yearmonthday")
@@ -377,9 +380,7 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
-        clsHelp.AddParameter("topic", "strptime")
-        clsHelp.AddParameter("package", Chr(34) & "base" & Chr(34))
-        frmMain.
+               frmMain.clsRLink.RunScript(clsHelp.ToScript())
     End Sub
 
     Private Sub ucrPnlFormat_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFormat.ControlValueChanged, ucrInputFormat.ControlValueChanged, ucrInputOrigin.ControlValueChanged
