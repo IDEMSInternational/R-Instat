@@ -871,8 +871,12 @@ Public Class frmMain
         Dim clsSaveRDS As New RFunction
         Dim strTempFile As String
         Dim i As Integer = 0
+        Dim strCurrentStatus As String
 
+        strCurrentStatus = tstatus.Text
         If clsRLink.bInstatObjectExists Then
+            tstatus.Text = "Auto saving data..."
+            Cursor = Cursors.WaitCursor
             If Not Directory.Exists(strAutoSaveDataFolderPath) Then
                 Directory.CreateDirectory(strAutoSaveDataFolderPath)
             End If
@@ -887,7 +891,9 @@ Public Class frmMain
             clsSaveRDS.SetRCommand("saveRDS")
             clsSaveRDS.AddParameter("object", clsRLink.strInstatDataObject)
             clsSaveRDS.AddParameter("file", Chr(34) & strCurrentAutoSaveDataFilePath.Replace("\", "/") & Chr(34))
-            clsRLink.RunInternalScript(clsSaveRDS.ToScript())
+            clsRLink.RunInternalScript(clsSaveRDS.ToScript(), bSilent:=True, bShowWaitDialogOverride:=False)
+            tstatus.Text = strCurrentStatus
+            Cursor = Cursors.Default
         End If
     End Sub
 
