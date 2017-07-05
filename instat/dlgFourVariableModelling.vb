@@ -95,16 +95,7 @@ Public Class dlgFourVariableModelling
         ucrInputModelOperators2.SetItems({"+", "*", ":", "/", "|"})
         ucrInputModelOperators2.SetDropDownStyleAsNonEditable()
 
-        '  sdgSimpleRegOptions.SetRModelFunction(ucrBaseFourVariableModelling.clsRsyntax.clsBaseFunction)
         ucrModelPreview.IsReadOnly = True
-        sdgSimpleRegOptions.SetRDataFrame(ucrSelectorFourVariableModelling.ucrAvailableDataFrames)
-        'sdgSimpleRegOptions.SetRYVariable(ucrResponse)
-        ' sdgSimpleRegOptions.SetRXVariable(ucrFirstExplanatory)
-        'sdgVariableTransformations.SetRYVariable(ucrResponse)
-        'sdgVariableTransformations.SetRModelOperator(clsModel1)
-        'sdgModelOptions.SetRCIFunction(clsRCIFunction)
-        'sdgVariableTransformations.SetRCIFunction(clsRCIFunction)
-        'AssignModelName()
     End Sub
 
     Private Sub SetDefaults()
@@ -226,7 +217,6 @@ Public Class dlgFourVariableModelling
         bResetFirstFunction = True
         bResetSecondFunction = True
         bResetThirdFunction = True
-        ' sdgSimpleRegOptions.SetDefaults()
         ResponseConvert()
         TestOKEnabled()
     End Sub
@@ -338,23 +328,10 @@ Public Class dlgFourVariableModelling
         End If
     End Sub
 
-    Private Sub ucrReceiverSecondExplanatory_ControlValueChanged() Handles ucrReceiverSecondExplanatory.ControlValueChanged
-        '   clsSecondExplanatoryOperator.AddParameter("var2", ucrReceiverSecondExplanatory.GetVariableNames(bWithQuotes:=False))
-    End Sub
-
-    Private Sub ucrReceiverThird_ControlValueChanged() Handles ucrReceiverThirdExplanatory.ControlValueChanged
-        '     clsFormulaOperator.AddParameter("var3", clsROperatorParameter:=clsSecondExplanatoryOperator, iPosition:=2)
-        'clsSecondExplanatoryOperator.AddParameter("var3", ucrReceiverThirdExplanatory.GetVariableNames(bWithQuotes:=False))
-    End Sub
-
     Private Sub ucrBaseFourVariableModelling_ClickReset(sender As Object, e As EventArgs) Handles ucrBaseFourVariableModelling.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
-    End Sub
-
-    Private Sub ucrBaseFourVariableModelling_ClickOk(sender As Object, e As EventArgs) Handles ucrBaseFourVariableModelling.ClickOk
-        'sdgSimpleRegOptions.RegOptions()
     End Sub
 
     Public Sub SetBaseFunction()
@@ -362,24 +339,24 @@ Public Class dlgFourVariableModelling
             'TODO:   Include multinomial as an option And the appropriate function
             If (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal" And ucrInputModelOperators2.GetText <> "|") Then
                 'sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
-                sdgSimpleRegOptions.lblConfLevel.Enabled = True
+                'sdgSimpleRegOptions.lblConfLevel.Enabled = True
                 'sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
                 clsLMOrGLM = clsLM
             ElseIf (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal" And ucrInputModelOperators2.GetText = "|") Then
                 ' sdgSimpleRegOptions.chkDisplayCLimits.Checked = False
                 ' sdgSimpleRegOptions.chkDisplayCLimits.Enabled = False
-                sdgSimpleRegOptions.lblConfLevel.Enabled = False
+                ' sdgSimpleRegOptions.lblConfLevel.Enabled = False
                 ' sdgSimpleRegOptions.nudDisplayCLevel.Enabled = False
                 clsLMOrGLM = clsLmer
             ElseIf (ucrDistributionChoice.clsCurrDistribution.strNameTag <> "Normal" And ucrInputModelOperators2.GetText = "|") Then
                 'sdgSimpleRegOptions.chkDisplayCLimits.Checked = False
                 'sdgSimpleRegOptions.chkDisplayCLimits.Enabled = False
-                sdgSimpleRegOptions.lblConfLevel.Enabled = False
+                ' sdgSimpleRegOptions.lblConfLevel.Enabled = False
                 'sdgSimpleRegOptions.nudDisplayCLevel.Enabled = False
                 clsLMOrGLM = clsGlmer
             Else
                 ' sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
-                sdgSimpleRegOptions.lblConfLevel.Enabled = True
+                ' sdgSimpleRegOptions.lblConfLevel.Enabled = True
                 'sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
                 clsLMOrGLM = clsGLM
             End If
