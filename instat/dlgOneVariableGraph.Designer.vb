@@ -87,6 +87,7 @@ Partial Class dlgOneVariableGraph
         'rdoSingleGraphs
         '
         Me.rdoSingleGraphs.AutoSize = True
+        Me.rdoSingleGraphs.Enabled = False
         Me.rdoSingleGraphs.Location = New System.Drawing.Point(10, 65)
         Me.rdoSingleGraphs.Name = "rdoSingleGraphs"
         Me.rdoSingleGraphs.Size = New System.Drawing.Size(91, 17)
@@ -147,7 +148,9 @@ Partial Class dlgOneVariableGraph
         Me.ucrReceiverOneVarGraph.Name = "ucrReceiverOneVarGraph"
         Me.ucrReceiverOneVarGraph.Selector = Nothing
         Me.ucrReceiverOneVarGraph.Size = New System.Drawing.Size(123, 110)
+        Me.ucrReceiverOneVarGraph.strNcFilePath = ""
         Me.ucrReceiverOneVarGraph.TabIndex = 2
+        Me.ucrReceiverOneVarGraph.ucrSelector = Nothing
         '
         'ucrSelectorOneVarGraph
         '

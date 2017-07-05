@@ -408,7 +408,7 @@ Public Class ucrInput
                 If bIsNumericInput Then
                     If Not IsNumeric(strVal) AndAlso (Not (bAllowInf AndAlso ({"Inf", "-Inf"}.Contains(strVal)))) Then
                         Return 2
-                    ElseIf strVal > dcmMaximum OrElse strVal < dcmMinimum Then
+                    ElseIf IsNumeric(strVal) AndAlso (strVal > dcmMaximum OrElse strVal < dcmMinimum) Then
                         Return 3
                     End If
                     clsTempParam.SetArgumentValue(strVal)
