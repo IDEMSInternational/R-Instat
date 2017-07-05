@@ -27,7 +27,7 @@ Public Class dlgFourVariableModelling
     Public clsRSingleModelFunction, clsRNumeric, clsGLM, clsLM, clsFormulaFunction, clsSummaryFunction, clsConfint As RFunction
     Public clsFormulaOperator As ROperator
     Private clsFirstPowerOperator As ROperator
-    Public clsFirstAndSecondExplanatoryOperator, clsOverallExplanatoryOperator As New ROperator
+    Public clsSecoandndThirdExplanatoryOpertor, clsOverallExplanatoryOperator As New ROperator
     Private clsAnovaFunction, clsLMOrGLM, clsLmer, clsGlmer As RFunction
     Private clsFirstTransformFunction, clsSecondTransformFunction, clsThirdTransformFunction As RFunction
 
@@ -58,17 +58,17 @@ Public Class dlgFourVariableModelling
         ucrReceiverResponse.bWithQuotes = False
         ucrReceiverResponse.Selector = ucrSelectorFourVariableModelling
 
-        ucrReceiverFirstExplanatory.SetParameter(New RParameter("var2", 2))
+        ucrReceiverFirstExplanatory.SetParameter(New RParameter("x", 2))
         ucrReceiverFirstExplanatory.SetParameterIsString()
         ucrReceiverFirstExplanatory.bWithQuotes = False
         ucrReceiverFirstExplanatory.Selector = ucrSelectorFourVariableModelling
 
-        ucrReceiverSecondExplanatory.SetParameter(New RParameter("var3", 3))
+        ucrReceiverSecondExplanatory.SetParameter(New RParameter("x", 3))
         ucrReceiverSecondExplanatory.SetParameterIsString()
         ucrReceiverSecondExplanatory.bWithQuotes = False
         ucrReceiverSecondExplanatory.Selector = ucrSelectorFourVariableModelling
 
-        ucrReceiverThirdExplanatory.SetParameter(New RParameter("var4", 4))
+        ucrReceiverThirdExplanatory.SetParameter(New RParameter("x", 4))
         ucrReceiverThirdExplanatory.SetParameterIsString()
         ucrReceiverThirdExplanatory.bWithQuotes = False
         ucrReceiverThirdExplanatory.Selector = ucrSelectorFourVariableModelling
@@ -124,17 +124,16 @@ Public Class dlgFourVariableModelling
 
         clsFirstPowerOperator = New ROperator
         clsFormulaOperator = New ROperator
-        clsFirstAndSecondExplanatoryOperator = New ROperator
+        clsSecoandndThirdExplanatoryOpertor = New ROperator
         clsOverallExplanatoryOperator = New ROperator
 
         ucrSelectorFourVariableModelling.Reset()
         ucrReceiverResponse.SetMeAsReceiver()
         ucrBaseFourVariableModelling.clsRsyntax.ClearCodes()
 
-        clsOverallExplanatoryOperator.SetOperation("*")
-        clsOverallExplanatoryOperator.AddParameter("operator1&2", clsROperatorParameter:=clsFirstAndSecondExplanatoryOperator, iPosition:=0)
-        clsFirstAndSecondExplanatoryOperator.SetOperation("+")
-        
+        clsSecoandndThirdExplanatoryOpertor.SetOperation("*")
+        clsSecoandndThirdExplanatoryOpertor.bBrackets = False
+
         ucrDistributionChoice.SetDataType("numeric")
         ucrSaveModel.Reset()
         ucrModelPreview.Reset()
@@ -143,18 +142,11 @@ Public Class dlgFourVariableModelling
 
         clsFormulaOperator = clsRegressionDefaults.clsDefaultFormulaOperator.Clone
         clsFormulaOperator.AddParameter("operator", clsROperatorParameter:=clsOverallExplanatoryOperator, iPosition:=3)
-        'clsFormulaOperator.AddParameter("var3", clsROperatorParameter:=clsSecondExplanatoryOperator, iPosition:=2)
+        clsFormulaOperator.bBrackets = False
 
-        'clsFirstAndSecondExplanatoryOperator.AddParameter("var2", clsROperatorParameter:=clsFirstExplanatoryOperator, iPosition:=1)
-        'clsFirstAndSecondExplanatoryOperator.AddParameter("var3", clsROperatorParameter:=clsSecondExplanatoryOperator, iPosition:=2)
-
-
-        '  clsFormulaOperator2.SetOperation("*")
-        '  clsFormulaOperator2.AddParameter("x", clsROperatorParameter:=clsSecondExplanatoryOperator, iPosition:=1)
-
-        '    clsFormulaOperator.AddParameter("y", clsROperatorParameter:=clsSecondExplanatoryOperator, iPosition:=2)
-
-
+        clsOverallExplanatoryOperator.SetOperation("+")
+        clsOverallExplanatoryOperator.AddParameter("operator2&3", clsROperatorParameter:=clsSecoandndThirdExplanatoryOpertor, iPosition:=1)
+        clsOverallExplanatoryOperator.bBrackets = False
 
         clsLM = clsRegressionDefaults.clsDefaultLmFunction.Clone()
         clsLM.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=0)
@@ -233,8 +225,8 @@ Public Class dlgFourVariableModelling
         ucrSelectorFourVariableModelling.AddAdditionalCodeParameterPair(clsGlmer, ucrSelectorFourVariableModelling.GetParameter(), 2)
         ucrSelectorFourVariableModelling.AddAdditionalCodeParameterPair(clsLmer, ucrSelectorFourVariableModelling.GetParameter(), 3)
 
-        ucrInputModelOperators1.SetName(clsFirstAndSecondExplanatoryOperator.strOperation)
-        ucrInputModelOperators2.SetName(clsOverallExplanatoryOperator.strOperation)
+        ucrInputModelOperators1.SetName(clsOverallExplanatoryOperator.strOperation)
+        ucrInputModelOperators2.SetName(clsSecoandndThirdExplanatoryOpertor.strOperation)
 
         ucrChkConvertToNumeric.SetRCode(clsFormulaOperator, bReset)
         ucrSelectorFourVariableModelling.SetRCode(clsLM, bReset)
@@ -255,10 +247,6 @@ Public Class dlgFourVariableModelling
 
     Public Sub TestOKEnabled()
         If (Not ucrReceiverResponse.IsEmpty()) AndAlso (Not ucrReceiverFirstExplanatory.IsEmpty()) AndAlso (Not ucrReceiverSecondExplanatory.IsEmpty()) AndAlso (Not ucrReceiverThirdExplanatory.IsEmpty()) AndAlso (ucrInputModelOperators1.GetText <> "") AndAlso (ucrInputModelOperators2.GetText <> "") Then
-            ' clsModel2.bBrackets = False
-            ' clsModel1.AddParameter(strParameterValue:="(" & clsModel2.ToScript.ToString & ")")
-            ' clsModel1.SetOperation(ucrInputModelOperators1.GetText)
-            ' clsModel1.bBrackets = False
             ucrBaseFourVariableModelling.OKEnabled(True)
         Else
             ucrBaseFourVariableModelling.OKEnabled(False)
@@ -411,21 +399,21 @@ Public Class dlgFourVariableModelling
     End Sub
 
     Private Sub cmdFirstFunction_Click(sender As Object, e As EventArgs) Handles cmdFirstExplanatoryFunction.Click
-        sdgVariableTransformations.SetRCodeForControls(clsNewFormulaOperator:=clsFirstAndSecondExplanatoryOperator, clsNewTransformParameter:=clsFirstAndSecondExplanatoryOperator.GetParameter("var2"), clsNewTransformFunction:=clsFirstTransformFunction, clsNewPowerOperator:=clsFirstPowerOperator, strVariableName:=ucrReceiverFirstExplanatory.GetVariableNames(False), bReset:=bResetFunction)
+        sdgVariableTransformations.SetRCodeForControls(clsNewFormulaOperator:=clsOverallExplanatoryOperator, clsNewTransformParameter:=clsOverallExplanatoryOperator.GetParameter("var2"), clsNewTransformFunction:=clsFirstTransformFunction, clsNewPowerOperator:=clsFirstPowerOperator, strVariableName:=ucrReceiverFirstExplanatory.GetVariableNames(False), bReset:=bResetFunction)
         sdgVariableTransformations.ShowDialog()
         bResetFunction = False
         UpdatePreview()
     End Sub
 
     Private Sub cmdSecondFunction_Click(sender As Object, e As EventArgs) Handles cmdSecondExplanatoryFunction.Click
-        sdgVariableTransformations.SetRCodeForControls(clsNewFormulaOperator:=clsFirstAndSecondExplanatoryOperator, clsNewTransformParameter:=clsFirstAndSecondExplanatoryOperator.GetParameter("var3"), clsNewTransformFunction:=clsSecondTransformFunction, clsNewPowerOperator:=clsFirstPowerOperator, strVariableName:=ucrReceiverFirstExplanatory.GetVariableNames(False), bReset:=bResetFunction)
+        sdgVariableTransformations.SetRCodeForControls(clsNewFormulaOperator:=clsSecoandndThirdExplanatoryOpertor, clsNewTransformParameter:=clsSecoandndThirdExplanatoryOpertor.GetParameter("var3"), clsNewTransformFunction:=clsSecondTransformFunction, clsNewPowerOperator:=clsFirstPowerOperator, strVariableName:=ucrReceiverSecondExplanatory.GetVariableNames(False), bReset:=bResetFunction)
         sdgVariableTransformations.ShowDialog()
         bResetFunction = False
         UpdatePreview()
     End Sub
 
     Private Sub cmdThirdFunction_Click(sender As Object, e As EventArgs) Handles cmdThirdExplanatoryFunction.Click
-        sdgVariableTransformations.SetRCodeForControls(clsNewFormulaOperator:=clsFirstAndSecondExplanatoryOperator, clsNewTransformParameter:=clsOverallExplanatoryOperator.GetParameter("var4"), clsNewTransformFunction:=clsThirdTransformFunction, clsNewPowerOperator:=clsFirstPowerOperator, strVariableName:=ucrReceiverFirstExplanatory.GetVariableNames(False), bReset:=bResetFunction)
+        sdgVariableTransformations.SetRCodeForControls(clsNewFormulaOperator:=clsSecoandndThirdExplanatoryOpertor, clsNewTransformParameter:=clsSecoandndThirdExplanatoryOpertor.GetParameter("var4"), clsNewTransformFunction:=clsThirdTransformFunction, clsNewPowerOperator:=clsFirstPowerOperator, strVariableName:=ucrReceiverThirdExplanatory.GetVariableNames(False), bReset:=bResetFunction)
         sdgVariableTransformations.ShowDialog()
         bResetFunction = False
         UpdatePreview()
@@ -446,37 +434,49 @@ Public Class dlgFourVariableModelling
         SetBaseFunction()
     End Sub
 
-    Private Sub SetFirstExplanatoryOperator()
-        clsFirstAndSecondExplanatoryOperator.SetOperation(ucrInputModelOperators1.GetText())
+    Private Sub SetOverallExplanatoryOperator()
+        clsOverallExplanatoryOperator.SetOperation(ucrInputModelOperators1.GetText())
     End Sub
 
-    Private Sub SetSecondExplanatoryOperator()
-        clsOverallExplanatoryOperator.SetOperation(ucrInputModelOperators2.GetText())
+    Private Sub SetSecondandThirdExplanatoryOperator()
+        clsSecoandndThirdExplanatoryOpertor.SetOperation(ucrInputModelOperators2.GetText())
     End Sub
 
-    Private Sub ucrFirstExplanatory_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstExplanatory.ControlValueChanged, ucrReceiverSecondExplanatory.ControlValueChanged, ucrReceiverThirdExplanatory.ControlValueChanged
+    Private Sub ucrFirstExplanatory_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstExplanatory.ControlValueChanged
         If bRCodeSet Then
             If Not ucrReceiverFirstExplanatory.IsEmpty Then
-                clsFirstAndSecondExplanatoryOperator.AddParameter("var2", ucrReceiverFirstExplanatory.GetVariableNames(False), iPosition:=1)
+                clsOverallExplanatoryOperator.AddParameter("var2", ucrReceiverFirstExplanatory.GetVariableNames(False), iPosition:=0)
             Else
-                clsFirstAndSecondExplanatoryOperator.RemoveParameterByName("var2")
+                clsOverallExplanatoryOperator.RemoveParameterByName("var2")
             End If
-            If Not ucrReceiverSecondExplanatory.IsEmpty Then
-                clsFirstAndSecondExplanatoryOperator.AddParameter("var3", ucrReceiverSecondExplanatory.GetVariableNames(False), iPosition:=2)
-            Else
-                clsFirstAndSecondExplanatoryOperator.RemoveParameterByName("var3")
-            End If
-
-            If Not ucrReceiverThirdExplanatory.IsEmpty Then
-                clsOverallExplanatoryOperator.AddParameter("var4", ucrReceiverThirdExplanatory.GetVariableNames(False), iPosition:=1)
-            Else
-                clsOverallExplanatoryOperator.RemoveParameterByName("var4")
-            End If
-
         End If
         SetBaseFunction()
         FirstExplanatoryFunctionEnabled()
+        UpdatePreview()
+    End Sub
+
+    Private Sub ucrReceiverSecondExplanatory_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSecondExplanatory.ControlValueChanged
+        If bRCodeSet Then
+            If Not ucrReceiverSecondExplanatory.IsEmpty Then
+                clsSecoandndThirdExplanatoryOpertor.AddParameter("var3", ucrReceiverSecondExplanatory.GetVariableNames(False), iPosition:=0)
+            Else
+                clsSecoandndThirdExplanatoryOpertor.RemoveParameterByName("var3")
+            End If
+        End If
+        SetBaseFunction()
         SecondExplanatoryFunctionEnabled()
+        UpdatePreview()
+    End Sub
+
+    Private Sub ucrReceiverThirdExplanatory_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverThirdExplanatory.ControlValueChanged
+        If bRCodeSet Then
+            If Not ucrReceiverThirdExplanatory.IsEmpty Then
+                clsSecoandndThirdExplanatoryOpertor.AddParameter("var4", ucrReceiverThirdExplanatory.GetVariableNames(False), iPosition:=1)
+            Else
+                clsSecoandndThirdExplanatoryOpertor.RemoveParameterByName("var4")
+            End If
+        End If
+        SetBaseFunction()
         ThirdExplanatoryFunctionEnabled()
         UpdatePreview()
     End Sub
@@ -487,13 +487,13 @@ Public Class dlgFourVariableModelling
 
     Private Sub ucrInputModelOperators1_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputModelOperators1.ControlValueChanged
         SetBaseFunction()
-        SetFirstExplanatoryOperator()
+        SetOverallExplanatoryOperator()
         UpdatePreview()
     End Sub
 
     Private Sub ucrInputModelOperators2_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputModelOperators2.ControlValueChanged
         SetBaseFunction()
-        SetSecondExplanatoryOperator()
+        SetSecondandThirdExplanatoryOperator()
         UpdatePreview()
     End Sub
 End Class
