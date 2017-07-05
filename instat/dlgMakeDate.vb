@@ -23,7 +23,7 @@ Public Class dlgMakeDate
     Dim bUseSelectedColumn As Boolean = False
     Dim strSelectedColumn As String = ""
     Dim strSelectedDataFrame As String = ""
-    Private clsDateFunction, clsMakeYearDay, clsMakeYearMonthDay As New RFunction
+    Private clsDateFunction, clsMakeYearDay, clsHelp, clsMakeYearMonthDay As New RFunction
     Private Sub dlgMakeDate_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -244,7 +244,9 @@ Public Class dlgMakeDate
         clsDateFunction = New RFunction
         clsMakeYearDay = New RFunction
         clsMakeYearMonthDay = New RFunction
+        clsHelp = New RFunction
 
+        clsHelp.SetRCommand("help")
         clsDateFunction.SetRCommand("as.Date")
         clsMakeYearDay.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_date_yeardoy")
         clsMakeYearMonthDay.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_date_yearmonthday")
@@ -372,6 +374,12 @@ Public Class dlgMakeDate
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDayTwo.ControlContentsChanged, ucrSaveDate.ControlContentsChanged, ucrReceiverYearTwo.ControlContentsChanged, ucrReceiverForDate.ControlContentsChanged, ucrReceiverYearThree.ControlContentsChanged, ucrReceiverMonthThree.ControlContentsChanged, ucrReceiverDayThree.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
+        clsHelp.AddParameter("topic", "strptime")
+        clsHelp.AddParameter("package", Chr(34) & "base" & Chr(34))
+        frmMain.
     End Sub
 
     Private Sub ucrPnlFormat_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFormat.ControlValueChanged, ucrInputFormat.ControlValueChanged, ucrInputOrigin.ControlValueChanged
