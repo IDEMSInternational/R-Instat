@@ -448,7 +448,6 @@ Partial Class frmMain
         Me.MergeAdditionalDataToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FilterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UseAwardDateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.UseSignatureDateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SetRefLevelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DefineContractValueCategoriesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RecodeNumericIntoQuantilesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -3344,7 +3343,7 @@ Partial Class frmMain
         '
         'mnuProcurementPrepare
         '
-        Me.mnuProcurementPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CountryNamesCorrectionsToolStripMenuItem, Me.MergeAdditionalDataToolStripMenuItem, Me.FilterToolStripMenuItem, Me.UseAwardDateToolStripMenuItem, Me.UseSignatureDateToolStripMenuItem, Me.SetRefLevelToolStripMenuItem, Me.DefineContractValueCategoriesToolStripMenuItem, Me.RecodeNumericIntoQuantilesToolStripMenuItem})
+        Me.mnuProcurementPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CountryNamesCorrectionsToolStripMenuItem, Me.MergeAdditionalDataToolStripMenuItem, Me.FilterToolStripMenuItem, Me.UseAwardDateToolStripMenuItem, Me.SetRefLevelToolStripMenuItem, Me.DefineContractValueCategoriesToolStripMenuItem, Me.RecodeNumericIntoQuantilesToolStripMenuItem})
         Me.mnuProcurementPrepare.Name = "mnuProcurementPrepare"
         Me.mnuProcurementPrepare.Size = New System.Drawing.Size(292, 22)
         Me.mnuProcurementPrepare.Text = "Prepare"
@@ -3365,19 +3364,13 @@ Partial Class frmMain
         '
         Me.FilterToolStripMenuItem.Name = "FilterToolStripMenuItem"
         Me.FilterToolStripMenuItem.Size = New System.Drawing.Size(256, 22)
-        Me.FilterToolStripMenuItem.Text = "Filter by Country (and other)..."
+        Me.FilterToolStripMenuItem.Text = "Filter by Country (or other)..."
         '
         'UseAwardDateToolStripMenuItem
         '
         Me.UseAwardDateToolStripMenuItem.Name = "UseAwardDateToolStripMenuItem"
         Me.UseAwardDateToolStripMenuItem.Size = New System.Drawing.Size(256, 22)
-        Me.UseAwardDateToolStripMenuItem.Text = "Use Award Date..."
-        '
-        'UseSignatureDateToolStripMenuItem
-        '
-        Me.UseSignatureDateToolStripMenuItem.Name = "UseSignatureDateToolStripMenuItem"
-        Me.UseSignatureDateToolStripMenuItem.Size = New System.Drawing.Size(256, 22)
-        Me.UseSignatureDateToolStripMenuItem.Text = "Use Signature Date..."
+        Me.UseAwardDateToolStripMenuItem.Text = "Use Award Date (or other)..."
         '
         'SetRefLevelToolStripMenuItem
         '
@@ -4120,7 +4113,6 @@ Partial Class frmMain
     Friend WithEvents MergeAdditionalDataToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents FilterToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents UseAwardDateToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents UseSignatureDateToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SetRefLevelToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DefineContractValueCategoriesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DefineRedFlagsToolStripMenuItem As ToolStripMenuItem
