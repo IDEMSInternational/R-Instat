@@ -19,7 +19,7 @@ Public Class sdgCanonicalCorrelation
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
     Public clsRCanCorFunction, clsRXCoefFunction, clsRYCoefFunction, clsRGraphicsFunction As New RFunction
-    Public clsTempFunction, clsXvarFunction, clsYvarFunction, clsTempFun As String
+    Public strTempFunction, strXvarFunction, strYvarFunction, strTempFunc As String
     Private clsRSyntax As RSyntax
     Private Sub sdgCanonicalCorrelation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -38,6 +38,8 @@ Public Class sdgCanonicalCorrelation
         ucrChkCoefficients.SetText("Coefficients")
 
         ucrChkPairwisePlot.AddRSyntaxContainsFunctionNamesCondition(True, {"ggpairs"})
+        ucrChkPairwisePlot.AddRSyntaxContainsFunctionNamesCondition(False, {"ggpairs"}, False)
+
         ucrChkPairwisePlot.SetText("Pairwise Plot")
         ucrChkPairwisePlot.AddToLinkedControls(ucrPnlVariables, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoXVariables)
     End Sub
@@ -46,33 +48,26 @@ Public Class sdgCanonicalCorrelation
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
-        Dim clsTempFunc As RFunction
+        '  Dim clsTempFunc As RFunction
         clsRSyntax = clsNewRSyntax
         clsRCanCorFunction = clsNewRCanCorFunction
         clsRXCoefFunction = clsNewRXCoefFunction
         clsRYCoefFunction = clsNewRYCoefFunction
         clsRGraphicsFunction = clsNewRGraphicsFunction
-        clsTempFunction = clsNewTempFunction
-        clsXvarFunction = clsNewXvarFunction
-        clsYvarFunction = clsNewYvarFunction
-        clsTempFun = clsNewTempFun
+        strTempFunction = clsNewTempFunction
+        strXvarFunction = clsNewXvarFunction
+        strYvarFunction = clsNewYvarFunction
+        strTempFunc = clsNewTempFun
 
         ucrChkCanonicalCorrelations.SetRSyntax(clsRSyntax, bReset)
         ucrChkCoefficients.SetRSyntax(clsRSyntax, bReset)
         ucrChkPairwisePlot.SetRSyntax(clsRSyntax, bReset)
 
-        clsRYCoefFunction.AddParameter("data_name", Chr(34) & clsTempFun & Chr(34))
-        clsRXCoefFunction.AddParameter("data_name", Chr(34) & clsTempFun & Chr(34))
-        clsRCanCorFunction.AddParameter("data_name", Chr(34) & clsTempFun & Chr(34))
-        clsTempFunc = dlgCanonicalCorrelationAnalysis.ucrSelectorCCA.ucrAvailableDataFrames.clsCurrDataFrame.Clone()
-        clsTempFunc.AddParameter("remove_attr", "TRUE")
-        clsRGraphicsFunction.AddParameter("data", clsRFunctionParameter:=clsTempFunc)
         bControlsInitialised = True
     End Sub
 
     Private Sub ucrChkCanonicalCorrelations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCanonicalCorrelations.ControlValueChanged
         If ucrChkCanonicalCorrelations.Checked Then
-            clsRCanCorFunction.iCallType = 2
             clsRSyntax.AddToAfterCodes(clsRCanCorFunction, iPosition:=0)
         Else
             clsRSyntax.RemoveFromAfterCodes(clsRCanCorFunction)
@@ -81,8 +76,6 @@ Public Class sdgCanonicalCorrelation
 
     Private Sub ucrChkCoefficients_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCoefficients.ControlValueChanged
         If ucrChkCoefficients.Checked Then
-            clsRXCoefFunction.iCallType = 2
-            clsRYCoefFunction.iCallType = 2
             clsRSyntax.AddToAfterCodes(clsRXCoefFunction, iPosition:=1)
             clsRSyntax.AddToAfterCodes(clsRYCoefFunction, iPosition:=2)
         Else
@@ -94,12 +87,10 @@ Public Class sdgCanonicalCorrelation
     Private Sub ucrChkPairwisePlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPairwisePlot.ControlValueChanged, ucrPnlVariables.ControlValueChanged
         If ucrChkPairwisePlot.Checked Then
             If rdoXVariables.Checked Then
-                clsRGraphicsFunction.AddParameter("columns", clsXvarFunction)
-                clsRGraphicsFunction.iCallType = 3
+                'clsRGraphicsFunction.AddParameter("columns", clsXvarFunction)
                 clsRSyntax.AddToAfterCodes(clsRGraphicsFunction, iPosition:=2)
             ElseIf rdoYVariables.Checked Then
-                clsRGraphicsFunction.AddParameter("columns", clsYvarFunction)
-                clsRGraphicsFunction.iCallType = 3
+                'clsRGraphicsFunction.AddParameter("columns", clsYvarFunction)
                 clsRSyntax.AddToAfterCodes(clsRGraphicsFunction, iPosition:=2)
             Else
                 clsRSyntax.RemoveFromAfterCodes(clsRGraphicsFunction)
