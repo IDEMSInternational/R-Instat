@@ -61,6 +61,8 @@ Public Class frmMain
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        SetMainMenusEnabled(False)
+        Cursor = Cursors.WaitCursor
         'temporary
         mnuHelpAboutRInstat.Visible = False
 
@@ -91,6 +93,22 @@ Public Class frmMain
         clsRecentItems.setToolStripItems(mnuFile, mnuTbShowLast10, sepStart, sepEnd)
         'checks existence of MRU list
         clsRecentItems.checkOnLoad()
+        Cursor = Cursors.Default
+        SetMainMenusEnabled(True)
+    End Sub
+
+    Private Sub SetMainMenusEnabled(bEnabled As Boolean)
+        mnuFile.Enabled = bEnabled
+        mnuEdit.Enabled = bEnabled
+        mnuPrepare.Enabled = bEnabled
+        mnuDescribe.Enabled = bEnabled
+        mnuModel.Enabled = bEnabled
+        mnuClimatic.Enabled = bEnabled
+        mnuProcurement.Enabled = bEnabled
+        mnuTools.Enabled = bEnabled
+        mnuView.Enabled = bEnabled
+        mnuHelp.Enabled = bEnabled
+        Tool_strip.Enabled = bEnabled
     End Sub
 
     Private Sub Application_Idle(sender As Object, e As EventArgs)
