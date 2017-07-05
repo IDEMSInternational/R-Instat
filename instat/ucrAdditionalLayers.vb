@@ -70,6 +70,7 @@ Public Class ucrAdditionalLayers
         sdgLayerOptions.ShowDialog()
         strGlobalDataFrame = sdgLayerOptions.GetGlobalDataFrame()
         AddLayers(clsNewGeomFunction.strRCommand)
+        sdgLayerOptions.tbcLayers.SelectedIndex = 0
     End Sub
 
     Private Sub SetEditDeleteEnabled()
