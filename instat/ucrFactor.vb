@@ -210,6 +210,7 @@ Public Class ucrFactor
             shtCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, Not bIsEditable)
             shtCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
             shtCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.View_ShowRowHeader, False)
+            shtCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToFillSerial, False)
             shtCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
             shtCurrSheet.ColumnHeaders(0).Width = 30
             If iLevelsCol <> -1 Then
