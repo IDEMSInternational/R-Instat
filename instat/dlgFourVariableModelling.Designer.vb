@@ -69,7 +69,7 @@ Partial Class dlgFourVariableModelling
         Me.cmdModelOptions.Location = New System.Drawing.Point(237, 298)
         Me.cmdModelOptions.Name = "cmdModelOptions"
         Me.cmdModelOptions.Size = New System.Drawing.Size(106, 23)
-        Me.cmdModelOptions.TabIndex = 30
+        Me.cmdModelOptions.TabIndex = 18
         Me.cmdModelOptions.Tag = "Model_Options"
         Me.cmdModelOptions.Text = "Model Options..."
         Me.cmdModelOptions.UseVisualStyleBackColor = True
@@ -80,7 +80,7 @@ Partial Class dlgFourVariableModelling
         Me.lblModelPreview.Location = New System.Drawing.Point(11, 353)
         Me.lblModelPreview.Name = "lblModelPreview"
         Me.lblModelPreview.Size = New System.Drawing.Size(80, 13)
-        Me.lblModelPreview.TabIndex = 27
+        Me.lblModelPreview.TabIndex = 20
         Me.lblModelPreview.Tag = "Model_Preview:"
         Me.lblModelPreview.Text = "Model Preview:"
         '
@@ -89,7 +89,7 @@ Partial Class dlgFourVariableModelling
         Me.cmdDisplayOptions.Location = New System.Drawing.Point(349, 298)
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
         Me.cmdDisplayOptions.Size = New System.Drawing.Size(106, 23)
-        Me.cmdDisplayOptions.TabIndex = 33
+        Me.cmdDisplayOptions.TabIndex = 19
         Me.cmdDisplayOptions.Tag = "Display_Options"
         Me.cmdDisplayOptions.Text = "Display Options..."
         Me.cmdDisplayOptions.UseVisualStyleBackColor = True
@@ -101,7 +101,7 @@ Partial Class dlgFourVariableModelling
         Me.lblSecondExplanatoryVariable.Location = New System.Drawing.Point(266, 158)
         Me.lblSecondExplanatoryVariable.Name = "lblSecondExplanatoryVariable"
         Me.lblSecondExplanatoryVariable.Size = New System.Drawing.Size(146, 13)
-        Me.lblSecondExplanatoryVariable.TabIndex = 25
+        Me.lblSecondExplanatoryVariable.TabIndex = 9
         Me.lblSecondExplanatoryVariable.Tag = "Second_Explanatory_Variable:"
         Me.lblSecondExplanatoryVariable.Text = "Second Explanatory Variable:"
         '
@@ -112,7 +112,7 @@ Partial Class dlgFourVariableModelling
         Me.lblFirstExplanatoryVariable.Location = New System.Drawing.Point(266, 83)
         Me.lblFirstExplanatoryVariable.Name = "lblFirstExplanatoryVariable"
         Me.lblFirstExplanatoryVariable.Size = New System.Drawing.Size(128, 13)
-        Me.lblFirstExplanatoryVariable.TabIndex = 21
+        Me.lblFirstExplanatoryVariable.TabIndex = 4
         Me.lblFirstExplanatoryVariable.Tag = "First_Explanatory_Variable:"
         Me.lblFirstExplanatoryVariable.Text = "First Explanatory Variable:"
         '
@@ -123,7 +123,7 @@ Partial Class dlgFourVariableModelling
         Me.lblResponse.Location = New System.Drawing.Point(266, 29)
         Me.lblResponse.Name = "lblResponse"
         Me.lblResponse.Size = New System.Drawing.Size(99, 13)
-        Me.lblResponse.TabIndex = 18
+        Me.lblResponse.TabIndex = 1
         Me.lblResponse.Tag = "Response_Variable:"
         Me.lblResponse.Text = "Response Variable:"
         '
@@ -134,7 +134,7 @@ Partial Class dlgFourVariableModelling
         Me.lblThirdExplanatoryVariable.Location = New System.Drawing.Point(266, 233)
         Me.lblThirdExplanatoryVariable.Name = "lblThirdExplanatoryVariable"
         Me.lblThirdExplanatoryVariable.Size = New System.Drawing.Size(133, 13)
-        Me.lblThirdExplanatoryVariable.TabIndex = 34
+        Me.lblThirdExplanatoryVariable.TabIndex = 14
         Me.lblThirdExplanatoryVariable.Tag = "Third_Explanatory_Variable:"
         Me.lblThirdExplanatoryVariable.Text = "Third Explanatory Variable:"
         '
@@ -144,7 +144,7 @@ Partial Class dlgFourVariableModelling
         Me.lblFirstOperator.Location = New System.Drawing.Point(292, 127)
         Me.lblFirstOperator.Name = "lblFirstOperator"
         Me.lblFirstOperator.Size = New System.Drawing.Size(51, 13)
-        Me.lblFirstOperator.TabIndex = 40
+        Me.lblFirstOperator.TabIndex = 7
         Me.lblFirstOperator.Tag = "Operator:"
         Me.lblFirstOperator.Text = "Operator:"
         '
@@ -154,7 +154,7 @@ Partial Class dlgFourVariableModelling
         Me.lblSecondOperator.Location = New System.Drawing.Point(292, 205)
         Me.lblSecondOperator.Name = "lblSecondOperator"
         Me.lblSecondOperator.Size = New System.Drawing.Size(51, 13)
-        Me.lblSecondOperator.TabIndex = 41
+        Me.lblSecondOperator.TabIndex = 12
         Me.lblSecondOperator.Tag = "Operator:"
         Me.lblSecondOperator.Text = "Operator:"
         '
@@ -165,7 +165,7 @@ Partial Class dlgFourVariableModelling
         Me.ucrInputModelOperators2.Location = New System.Drawing.Point(355, 201)
         Me.ucrInputModelOperators2.Name = "ucrInputModelOperators2"
         Me.ucrInputModelOperators2.Size = New System.Drawing.Size(39, 21)
-        Me.ucrInputModelOperators2.TabIndex = 43
+        Me.ucrInputModelOperators2.TabIndex = 13
         '
         'ucrInputModelOperators1
         '
@@ -174,7 +174,7 @@ Partial Class dlgFourVariableModelling
         Me.ucrInputModelOperators1.Location = New System.Drawing.Point(355, 124)
         Me.ucrInputModelOperators1.Name = "ucrInputModelOperators1"
         Me.ucrInputModelOperators1.Size = New System.Drawing.Size(39, 21)
-        Me.ucrInputModelOperators1.TabIndex = 42
+        Me.ucrInputModelOperators1.TabIndex = 8
         '
         'ucrReceiverThirdExplanatory
         '
@@ -185,7 +185,7 @@ Partial Class dlgFourVariableModelling
         Me.ucrReceiverThirdExplanatory.Selector = Nothing
         Me.ucrReceiverThirdExplanatory.Size = New System.Drawing.Size(128, 26)
         Me.ucrReceiverThirdExplanatory.strNcFilePath = ""
-        Me.ucrReceiverThirdExplanatory.TabIndex = 35
+        Me.ucrReceiverThirdExplanatory.TabIndex = 15
         Me.ucrReceiverThirdExplanatory.ucrSelector = Nothing
         '
         'ucrModelPreview
@@ -196,14 +196,14 @@ Partial Class dlgFourVariableModelling
         Me.ucrModelPreview.Location = New System.Drawing.Point(96, 349)
         Me.ucrModelPreview.Name = "ucrModelPreview"
         Me.ucrModelPreview.Size = New System.Drawing.Size(361, 21)
-        Me.ucrModelPreview.TabIndex = 28
+        Me.ucrModelPreview.TabIndex = 21
         '
         'ucrDistributionChoice
         '
         Me.ucrDistributionChoice.Location = New System.Drawing.Point(14, 298)
         Me.ucrDistributionChoice.Name = "ucrDistributionChoice"
         Me.ucrDistributionChoice.Size = New System.Drawing.Size(225, 35)
-        Me.ucrDistributionChoice.TabIndex = 29
+        Me.ucrDistributionChoice.TabIndex = 17
         '
         'ucrReceiverSecondExplanatory
         '
@@ -214,7 +214,7 @@ Partial Class dlgFourVariableModelling
         Me.ucrReceiverSecondExplanatory.Selector = Nothing
         Me.ucrReceiverSecondExplanatory.Size = New System.Drawing.Size(128, 27)
         Me.ucrReceiverSecondExplanatory.strNcFilePath = ""
-        Me.ucrReceiverSecondExplanatory.TabIndex = 26
+        Me.ucrReceiverSecondExplanatory.TabIndex = 10
         Me.ucrReceiverSecondExplanatory.ucrSelector = Nothing
         '
         'ucrReceiverFirstExplanatory
@@ -226,7 +226,7 @@ Partial Class dlgFourVariableModelling
         Me.ucrReceiverFirstExplanatory.Selector = Nothing
         Me.ucrReceiverFirstExplanatory.Size = New System.Drawing.Size(128, 23)
         Me.ucrReceiverFirstExplanatory.strNcFilePath = ""
-        Me.ucrReceiverFirstExplanatory.TabIndex = 22
+        Me.ucrReceiverFirstExplanatory.TabIndex = 5
         Me.ucrReceiverFirstExplanatory.ucrSelector = Nothing
         '
         'ucrReceiverResponse
@@ -238,7 +238,7 @@ Partial Class dlgFourVariableModelling
         Me.ucrReceiverResponse.Selector = Nothing
         Me.ucrReceiverResponse.Size = New System.Drawing.Size(128, 22)
         Me.ucrReceiverResponse.strNcFilePath = ""
-        Me.ucrReceiverResponse.TabIndex = 19
+        Me.ucrReceiverResponse.TabIndex = 2
         Me.ucrReceiverResponse.ucrSelector = Nothing
         '
         'ucrSelectorFourVariableModelling
@@ -249,21 +249,21 @@ Partial Class dlgFourVariableModelling
         Me.ucrSelectorFourVariableModelling.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorFourVariableModelling.Name = "ucrSelectorFourVariableModelling"
         Me.ucrSelectorFourVariableModelling.Size = New System.Drawing.Size(225, 208)
-        Me.ucrSelectorFourVariableModelling.TabIndex = 17
+        Me.ucrSelectorFourVariableModelling.TabIndex = 0
         '
         'ucrBaseFourVariableModelling
         '
         Me.ucrBaseFourVariableModelling.Location = New System.Drawing.Point(10, 406)
         Me.ucrBaseFourVariableModelling.Name = "ucrBaseFourVariableModelling"
         Me.ucrBaseFourVariableModelling.Size = New System.Drawing.Size(405, 52)
-        Me.ucrBaseFourVariableModelling.TabIndex = 0
+        Me.ucrBaseFourVariableModelling.TabIndex = 23
         '
         'ucrSaveModel
         '
         Me.ucrSaveModel.Location = New System.Drawing.Point(10, 376)
         Me.ucrSaveModel.Name = "ucrSaveModel"
         Me.ucrSaveModel.Size = New System.Drawing.Size(255, 24)
-        Me.ucrSaveModel.TabIndex = 44
+        Me.ucrSaveModel.TabIndex = 22
         '
         'ucrChkConvertToNumeric
         '
@@ -271,14 +271,14 @@ Partial Class dlgFourVariableModelling
         Me.ucrChkConvertToNumeric.Location = New System.Drawing.Point(397, 44)
         Me.ucrChkConvertToNumeric.Name = "ucrChkConvertToNumeric"
         Me.ucrChkConvertToNumeric.Size = New System.Drawing.Size(136, 20)
-        Me.ucrChkConvertToNumeric.TabIndex = 45
+        Me.ucrChkConvertToNumeric.TabIndex = 3
         '
         'cmdFirstExplanatoryFunction
         '
         Me.cmdFirstExplanatoryFunction.Location = New System.Drawing.Point(400, 98)
         Me.cmdFirstExplanatoryFunction.Name = "cmdFirstExplanatoryFunction"
         Me.cmdFirstExplanatoryFunction.Size = New System.Drawing.Size(67, 20)
-        Me.cmdFirstExplanatoryFunction.TabIndex = 46
+        Me.cmdFirstExplanatoryFunction.TabIndex = 6
         Me.cmdFirstExplanatoryFunction.Text = "Function..."
         Me.cmdFirstExplanatoryFunction.UseVisualStyleBackColor = True
         '
@@ -287,7 +287,7 @@ Partial Class dlgFourVariableModelling
         Me.cmdSecondExplanatoryFunction.Location = New System.Drawing.Point(400, 174)
         Me.cmdSecondExplanatoryFunction.Name = "cmdSecondExplanatoryFunction"
         Me.cmdSecondExplanatoryFunction.Size = New System.Drawing.Size(67, 20)
-        Me.cmdSecondExplanatoryFunction.TabIndex = 47
+        Me.cmdSecondExplanatoryFunction.TabIndex = 11
         Me.cmdSecondExplanatoryFunction.Text = "Function..."
         Me.cmdSecondExplanatoryFunction.UseVisualStyleBackColor = True
         '
@@ -296,7 +296,7 @@ Partial Class dlgFourVariableModelling
         Me.cmdThirdExplanatoryFunction.Location = New System.Drawing.Point(400, 250)
         Me.cmdThirdExplanatoryFunction.Name = "cmdThirdExplanatoryFunction"
         Me.cmdThirdExplanatoryFunction.Size = New System.Drawing.Size(67, 20)
-        Me.cmdThirdExplanatoryFunction.TabIndex = 48
+        Me.cmdThirdExplanatoryFunction.TabIndex = 16
         Me.cmdThirdExplanatoryFunction.Text = "Function..."
         Me.cmdThirdExplanatoryFunction.UseVisualStyleBackColor = True
         '
