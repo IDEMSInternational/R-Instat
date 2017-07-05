@@ -448,7 +448,6 @@ Partial Class frmMain
         Me.MergeAdditionalDataToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FilterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.UseAwardDateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.UseSignatureDateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SetRefLevelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DefineContractValueCategoriesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RecodeNumericIntoQuantilesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -458,7 +457,8 @@ Partial Class frmMain
         Me.mnuProcurementModelFitModelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DefineRedFlagsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CalculateCRIToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TestsAndChecksToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ProcurementUseCRI = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementUseCRISummariseCRIbyCountry = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuTools = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsRunRCode = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuToolsRestartR = New System.Windows.Forms.ToolStripMenuItem()
@@ -474,6 +474,8 @@ Partial Class frmMain
         Me.splMetadata = New System.Windows.Forms.SplitContainer()
         Me.splLogScript = New System.Windows.Forms.SplitContainer()
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
+        Me.mnuProcurementDescribeOneVar = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuProcurementDescribeTwoVar = New System.Windows.Forms.ToolStripMenuItem()
         Me.ucrColumnMeta = New instat.ucrColumnMetadata()
         Me.ucrDataFrameMeta = New instat.ucrDataFrameMetadata()
         Me.ucrLogWindow = New instat.ucrLog()
@@ -3328,7 +3330,7 @@ Partial Class frmMain
         '
         'mnuProcurement
         '
-        Me.mnuProcurement.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCorruptionDefineCorruptionData, Me.mnuProcurementPrepare, Me.mnuProcurementDescribe, Me.DefineOutputsToolStripMenuItem, Me.mnuProcurementModel, Me.DefineRedFlagsToolStripMenuItem, Me.CalculateCRIToolStripMenuItem, Me.TestsAndChecksToolStripMenuItem})
+        Me.mnuProcurement.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCorruptionDefineCorruptionData, Me.mnuProcurementPrepare, Me.mnuProcurementDescribe, Me.DefineOutputsToolStripMenuItem, Me.mnuProcurementModel, Me.DefineRedFlagsToolStripMenuItem, Me.CalculateCRIToolStripMenuItem, Me.ProcurementUseCRI})
         Me.mnuProcurement.Name = "mnuProcurement"
         Me.mnuProcurement.Size = New System.Drawing.Size(88, 20)
         Me.mnuProcurement.Text = "Procurement"
@@ -3341,10 +3343,10 @@ Partial Class frmMain
         '
         'mnuProcurementPrepare
         '
-        Me.mnuProcurementPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CountryNamesCorrectionsToolStripMenuItem, Me.MergeAdditionalDataToolStripMenuItem, Me.FilterToolStripMenuItem, Me.UseAwardDateToolStripMenuItem, Me.UseSignatureDateToolStripMenuItem, Me.SetRefLevelToolStripMenuItem, Me.DefineContractValueCategoriesToolStripMenuItem, Me.RecodeNumericIntoQuantilesToolStripMenuItem})
+        Me.mnuProcurementPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CountryNamesCorrectionsToolStripMenuItem, Me.MergeAdditionalDataToolStripMenuItem, Me.FilterToolStripMenuItem, Me.UseAwardDateToolStripMenuItem, Me.SetRefLevelToolStripMenuItem, Me.DefineContractValueCategoriesToolStripMenuItem, Me.RecodeNumericIntoQuantilesToolStripMenuItem})
         Me.mnuProcurementPrepare.Name = "mnuProcurementPrepare"
         Me.mnuProcurementPrepare.Size = New System.Drawing.Size(292, 22)
-        Me.mnuProcurementPrepare.Text = "Prepare..."
+        Me.mnuProcurementPrepare.Text = "Prepare"
         '
         'CountryNamesCorrectionsToolStripMenuItem
         '
@@ -3362,19 +3364,13 @@ Partial Class frmMain
         '
         Me.FilterToolStripMenuItem.Name = "FilterToolStripMenuItem"
         Me.FilterToolStripMenuItem.Size = New System.Drawing.Size(256, 22)
-        Me.FilterToolStripMenuItem.Text = "Filter by Country (and other)..."
+        Me.FilterToolStripMenuItem.Text = "Filter by Country (or other)..."
         '
         'UseAwardDateToolStripMenuItem
         '
         Me.UseAwardDateToolStripMenuItem.Name = "UseAwardDateToolStripMenuItem"
         Me.UseAwardDateToolStripMenuItem.Size = New System.Drawing.Size(256, 22)
-        Me.UseAwardDateToolStripMenuItem.Text = "Use Award Date..."
-        '
-        'UseSignatureDateToolStripMenuItem
-        '
-        Me.UseSignatureDateToolStripMenuItem.Name = "UseSignatureDateToolStripMenuItem"
-        Me.UseSignatureDateToolStripMenuItem.Size = New System.Drawing.Size(256, 22)
-        Me.UseSignatureDateToolStripMenuItem.Text = "Use Signature Date..."
+        Me.UseAwardDateToolStripMenuItem.Text = "Use Award Date (or other)..."
         '
         'SetRefLevelToolStripMenuItem
         '
@@ -3396,7 +3392,7 @@ Partial Class frmMain
         '
         'mnuProcurementDescribe
         '
-        Me.mnuProcurementDescribe.Enabled = False
+        Me.mnuProcurementDescribe.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementDescribeOneVar, Me.mnuProcurementDescribeTwoVar})
         Me.mnuProcurementDescribe.Name = "mnuProcurementDescribe"
         Me.mnuProcurementDescribe.Size = New System.Drawing.Size(292, 22)
         Me.mnuProcurementDescribe.Text = "Describe"
@@ -3412,7 +3408,7 @@ Partial Class frmMain
         Me.mnuProcurementModel.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementModelFitModelToolStripMenuItem})
         Me.mnuProcurementModel.Name = "mnuProcurementModel"
         Me.mnuProcurementModel.Size = New System.Drawing.Size(292, 22)
-        Me.mnuProcurementModel.Text = "Model..."
+        Me.mnuProcurementModel.Text = "Model"
         '
         'mnuProcurementModelFitModelToolStripMenuItem
         '
@@ -3430,14 +3426,20 @@ Partial Class frmMain
         '
         Me.CalculateCRIToolStripMenuItem.Name = "CalculateCRIToolStripMenuItem"
         Me.CalculateCRIToolStripMenuItem.Size = New System.Drawing.Size(292, 22)
-        Me.CalculateCRIToolStripMenuItem.Text = "Calculate Corruption Risk Index..."
+        Me.CalculateCRIToolStripMenuItem.Text = "Calculate Corruption Risk Index (CRI)..."
         '
-        'TestsAndChecksToolStripMenuItem
+        'ProcurementUseCRI
         '
-        Me.TestsAndChecksToolStripMenuItem.Enabled = False
-        Me.TestsAndChecksToolStripMenuItem.Name = "TestsAndChecksToolStripMenuItem"
-        Me.TestsAndChecksToolStripMenuItem.Size = New System.Drawing.Size(292, 22)
-        Me.TestsAndChecksToolStripMenuItem.Text = "Tests and Checks..."
+        Me.ProcurementUseCRI.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcurementUseCRISummariseCRIbyCountry})
+        Me.ProcurementUseCRI.Name = "ProcurementUseCRI"
+        Me.ProcurementUseCRI.Size = New System.Drawing.Size(292, 22)
+        Me.ProcurementUseCRI.Text = "Use CRI"
+        '
+        'mnuProcurementUseCRISummariseCRIbyCountry
+        '
+        Me.mnuProcurementUseCRISummariseCRIbyCountry.Name = "mnuProcurementUseCRISummariseCRIbyCountry"
+        Me.mnuProcurementUseCRISummariseCRIbyCountry.Size = New System.Drawing.Size(278, 22)
+        Me.mnuProcurementUseCRISummariseCRIbyCountry.Text = "Summarise CRI by Country (or other)..."
         '
         'mnuTools
         '
@@ -3615,6 +3617,18 @@ Partial Class frmMain
         Me.splDataOutput.SplitterDistance = 385
         Me.splDataOutput.SplitterWidth = 5
         Me.splDataOutput.TabIndex = 0
+        '
+        'mnuProcurementDescribeOneVar
+        '
+        Me.mnuProcurementDescribeOneVar.Name = "mnuProcurementDescribeOneVar"
+        Me.mnuProcurementDescribeOneVar.Size = New System.Drawing.Size(320, 22)
+        Me.mnuProcurementDescribeOneVar.Text = "One Variable Frequencies..."
+        '
+        'mnuProcurementDescribeTwoVar
+        '
+        Me.mnuProcurementDescribeTwoVar.Name = "mnuProcurementDescribeTwoVar"
+        Me.mnuProcurementDescribeTwoVar.Size = New System.Drawing.Size(320, 22)
+        Me.mnuProcurementDescribeTwoVar.Text = "Two Variable Frequencies by Sector (or other)..."
         '
         'ucrColumnMeta
         '
@@ -4099,13 +4113,12 @@ Partial Class frmMain
     Friend WithEvents MergeAdditionalDataToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents FilterToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents UseAwardDateToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents UseSignatureDateToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SetRefLevelToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DefineContractValueCategoriesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DefineRedFlagsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents mnuProcurementModelFitModelToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CalculateCRIToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents TestsAndChecksToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ProcurementUseCRI As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator33 As ToolStripSeparator
     Friend WithEvents mnuDescribeOneVariableFrequencies As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator34 As ToolStripSeparator
@@ -4161,4 +4174,7 @@ Partial Class frmMain
     Friend WithEvents WindroseToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents WindrosePlotToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CummulativeDistributionToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents mnuProcurementUseCRISummariseCRIbyCountry As ToolStripMenuItem
+    Friend WithEvents mnuProcurementDescribeOneVar As ToolStripMenuItem
+    Friend WithEvents mnuProcurementDescribeTwoVar As ToolStripMenuItem
 End Class
