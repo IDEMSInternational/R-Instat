@@ -35,28 +35,24 @@ Public Class dlgCanonicalCorrelationAnalysis
         autoTranslate(Me)
     End Sub
 
-    Private Sub SetRCodeforControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-    End Sub
-
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.iHelpTopicID = 423
 
         ' note: canne have the same variables in both receivers.
         ' Y Variable Selector
-        ucrReceiverYvariables.SetParameter(New RParameter("y", 0))
-        ucrReceiverYvariables.SetParameterIsRFunction()
-        ucrReceiverYvariables.Selector = ucrSelectorCCA
-        ucrReceiverYvariables.SetDataType("numeric")
-        ucrReceiverYvariables.strSelectorHeading = "Numerics"
+        ucrReceiverYVariables.SetParameter(New RParameter("y", 0))
+        ucrReceiverYVariables.SetParameterIsRFunction()
+        ucrReceiverYVariables.Selector = ucrSelectorCCA
+        ucrReceiverYVariables.SetDataType("numeric")
+        ucrReceiverYVariables.strSelectorHeading = "Numerics"
 
         ' X Variable Selector
-        ucrReceiverXvariables.SetParameter(New RParameter("x", 1))
-        ucrReceiverXvariables.SetParameterIsRFunction()
-        ucrReceiverXvariables.Selector = ucrSelectorCCA
-        ucrReceiverXvariables.SetDataType("numeric")
-        ucrReceiverXvariables.strSelectorHeading = "Numerics"
+        ucrReceiverXVariables.SetParameter(New RParameter("x", 1))
+        ucrReceiverXVariables.SetParameterIsRFunction()
+        ucrReceiverXVariables.Selector = ucrSelectorCCA
+        ucrReceiverXVariables.SetDataType("numeric")
+        ucrReceiverXVariables.strSelectorHeading = "Numerics"
 
         'ucrSaveResult
         ucrSaveResult.SetCheckBoxText("Save Result")
@@ -77,7 +73,7 @@ Public Class dlgCanonicalCorrelationAnalysis
 
         ucrSelectorCCA.Reset()
         ucrSaveResult.Reset()
-        ucrReceiverXvariables.SetMeAsReceiver()
+        ucrReceiverXVariables.SetMeAsReceiver()
 
         'Define the default RFunction
         clsDefaultFunction.SetRCommand("cancor")
@@ -102,8 +98,12 @@ Public Class dlgCanonicalCorrelationAnalysis
         bResetSubdialog = True
     End Sub
 
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
     Private Sub TestOKEnabled()
-        If ucrSaveResult.IsComplete() AndAlso ucrReceiverYvariables.lstSelectedVariables.Items.Count > 1 AndAlso ucrReceiverXvariables.lstSelectedVariables.Items.Count > 1 Then
+        If ucrSaveResult.IsComplete() AndAlso ucrReceiverYVariables.lstSelectedVariables.Items.Count > 1 AndAlso ucrReceiverXVariables.lstSelectedVariables.Items.Count > 1 Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -126,19 +126,19 @@ Public Class dlgCanonicalCorrelationAnalysis
         clsTempFunction = ucrSaveResult.GetText
     End Sub
 
-    Private Sub ucrReceiverXvariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverXvariables.ControlValueChanged
-        clsXvarFunction = ucrReceiverXvariables.GetVariableNames()
+    Private Sub ucrReceiverXvariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverXVariables.ControlValueChanged
+        clsXvarFunction = ucrReceiverXVariables.GetVariableNames()
     End Sub
 
-    Private Sub ucrReceiverYvariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYvariables.ControlValueChanged
-        clsYvarFunction = ucrReceiverYvariables.GetVariableNames()
+    Private Sub ucrReceiverYvariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYVariables.ControlValueChanged
+        clsYvarFunction = ucrReceiverYVariables.GetVariableNames()
     End Sub
 
     Private Sub ucrSelectorCCA_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorCCA.ControlValueChanged
         clsTempFunc = ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem
     End Sub
 
-    Private Sub ucrSaveResult_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlContentsChanged, ucrReceiverXvariables.ControlContentsChanged, ucrReceiverYvariables.ControlContentsChanged
+    Private Sub ucrSaveResult_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlContentsChanged, ucrReceiverXVariables.ControlContentsChanged, ucrReceiverYVariables.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class

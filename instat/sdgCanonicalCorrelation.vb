@@ -31,7 +31,7 @@ Public Class sdgCanonicalCorrelation
 
         ucrChkCanonicalCorrelations.AddRSyntaxContainsFunctionNamesCondition(True, {frmMain.clsRLink.strInstatDataObject & "$get_from_model"})
         ucrChkCanonicalCorrelations.AddRSyntaxContainsFunctionNamesCondition(False, {frmMain.clsRLink.strInstatDataObject & "$get_from_model"}, False)
-        ucrChkCanonicalCorrelations.SetText("canonical Correlations")
+        ucrChkCanonicalCorrelations.SetText("Canonical Correlations")
 
         ucrChkCoefficients.AddRSyntaxContainsFunctionNamesCondition(True, {frmMain.clsRLink.strInstatDataObject & "$get_from_model"})
         ucrChkCoefficients.AddRSyntaxContainsFunctionNamesCondition(False, {frmMain.clsRLink.strInstatDataObject & "$get_from_model"}, False)
@@ -68,9 +68,6 @@ Public Class sdgCanonicalCorrelation
         clsTempFunc.AddParameter("remove_attr", "TRUE")
         clsRGraphicsFunction.AddParameter("data", clsRFunctionParameter:=clsTempFunc)
         bControlsInitialised = True
-        If bReset Then
-            tbRegOptions.SelectedIndex = 0
-        End If
     End Sub
 
     Private Sub ucrChkCanonicalCorrelations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCanonicalCorrelations.ControlValueChanged
