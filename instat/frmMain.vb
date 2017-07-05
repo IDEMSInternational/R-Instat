@@ -1574,13 +1574,19 @@ Public Class frmMain
         timer.Stop()
     End Sub
 
-    'Private Sub TESTToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TESTToolStripMenuItem.Click
-    '    'TEST temporary 
-    '    'TESTING TO BE ERASED !!!!!!!
-    '    Dim clsTestStargizer As New RFunction
-    '    clsTestStargizer.SetRCommand("stargazer::stargazer")
-    '    clsTestStargizer.AddParameter("None", "attitude", bIncludeArgumentName:=False)
-    '    clsTestStargizer.AddParameter("type", Chr(34) & "html" & Chr(34))
-    '    clsRLink.RunScript(clsTestStargizer.ToScript(), True, "Helloooooooo Stargizer power", True)
-    'End Sub
+    Private Sub mnuProcurementUseCRISummariseCRIbyCountry_Click(sender As Object, e As EventArgs) Handles mnuProcurementUseCRISummariseCRIbyCountry.Click
+        Dim lstDataNames As List(Of String)
+
+        lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
+        If lstDataNames.Count > 0 Then
+            dlgColumnStats.strDefaultDataFrame = lstDataNames(0)
+            dlgColumnStats.strDefaultVariables = clsRLink.GetCRIColumnNames(lstDataNames(0))
+            dlgColumnStats.strDefaultFactors = {clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_country_label")}
+        Else
+            dlgColumnStats.strDefaultDataFrame = ""
+            dlgColumnStats.strDefaultVariables = Nothing
+            dlgColumnStats.strDefaultFactors = Nothing
+        End If
+        dlgColumnStats.ShowDialog()
+    End Sub
 End Class
