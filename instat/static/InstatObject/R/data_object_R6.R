@@ -2515,6 +2515,19 @@ data_object$set("public","is_corruption_type_present", function(type) {
 }
 )
 
+instat_object$set("public","get_CRI_column_names", function(data_name) {
+  self$get_data_objects(data_name)$get_CRI_column_names()
+}
+)
+
+# Temporary since metadata not added to CRI columns when calculated
+data_object$set("public","get_CRI_column_names", function() {
+  col_names <- self$get_column_names()
+  CRI_cols <- col_names[startsWith(col_names, "CRI")]
+  return(CRI_cols)
+}
+)
+
 instat_object$set("public","get_corruption_column_name", function(data_name, type) {
   self$get_data_objects(data_name)$get_corruption_column_name(type)
 }
