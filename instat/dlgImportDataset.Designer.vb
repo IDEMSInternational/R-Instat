@@ -52,26 +52,29 @@ Partial Class dlgImportDataset
         Me.cmdBrowse = New System.Windows.Forms.Button()
         Me.grpCSV = New System.Windows.Forms.GroupBox()
         Me.lblNAStringsCSV = New System.Windows.Forms.Label()
+        Me.ucrChkStringsAsFactorsCSV = New instat.ucrCheck()
+        Me.ucrNudLinesToSkipCSV = New instat.ucrNud()
         Me.rdoRowNamesNoCSV = New System.Windows.Forms.RadioButton()
         Me.rdoRowNamesYesCSV = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlRowNamesCSV = New instat.UcrPanel()
+        Me.ucrInputHeadersCSV = New instat.ucrInputComboBox()
+        Me.ucrInputNAStringsCSV = New instat.ucrInputTextBox()
+        Me.ucrInputDecimalCSV = New instat.ucrInputComboBox()
+        Me.ucrInputSeparatorCSV = New instat.ucrInputComboBox()
+        Me.ucrInputEncodingCSV = New instat.ucrInputComboBox()
         Me.grpExcel = New System.Windows.Forms.GroupBox()
-        Me.lblMissingValueStringExcel = New System.Windows.Forms.Label()
-        Me.lblNamedRegion = New System.Windows.Forms.Label()
-        Me.lblRowToSkipExcel = New System.Windows.Forms.Label()
-        Me.lblSelectSheetExcel = New System.Windows.Forms.Label()
-        Me.grpRDS = New System.Windows.Forms.GroupBox()
-        Me.lblCannotImport = New System.Windows.Forms.Label()
-        Me.lblNoPreview = New System.Windows.Forms.Label()
-        Me.lblLinesToPreview = New System.Windows.Forms.Label()
-        Me.ucrNudPreviewLines = New instat.ucrNud()
         Me.ucrChkMaxRowsExcel = New instat.ucrCheck()
         Me.ucrChkTrimWSExcel = New instat.ucrCheck()
         Me.ucrNudRowsToSkipExcel = New instat.ucrNud()
         Me.ucrInputMaxRowsExcel = New instat.ucrInputTextBox()
+        Me.lblMissingValueStringExcel = New System.Windows.Forms.Label()
         Me.ucrInputMissingValueStringExcel = New instat.ucrInputTextBox()
         Me.ucrInputNamedRegions = New instat.ucrInputComboBox()
+        Me.lblNamedRegion = New System.Windows.Forms.Label()
         Me.ucrInputSelectSheetExcel = New instat.ucrInputComboBox()
-        Me.ucrSaveFile = New instat.ucrSave()
+        Me.lblRowToSkipExcel = New System.Windows.Forms.Label()
+        Me.lblSelectSheetExcel = New System.Windows.Forms.Label()
+        Me.grpRDS = New System.Windows.Forms.GroupBox()
         Me.ucrChkOverwriteRDS = New instat.ucrCheck()
         Me.ucrChkImportObjectsRDS = New instat.ucrCheck()
         Me.ucrChkImportCalculationsRDS = New instat.ucrCheck()
@@ -79,14 +82,11 @@ Partial Class dlgImportDataset
         Me.ucrChkImportFiltersRDS = New instat.ucrCheck()
         Me.ucrChkImportMetadataRDS = New instat.ucrCheck()
         Me.ucrChkKeepExistingDataRDS = New instat.ucrCheck()
-        Me.ucrChkStringsAsFactorsCSV = New instat.ucrCheck()
-        Me.ucrNudLinesToSkipCSV = New instat.ucrNud()
-        Me.ucrPnlRowNamesCSV = New instat.UcrPanel()
-        Me.ucrInputHeadersCSV = New instat.ucrInputComboBox()
-        Me.ucrInputNAStringsCSV = New instat.ucrInputTextBox()
-        Me.ucrInputDecimalCSV = New instat.ucrInputComboBox()
-        Me.ucrInputSeparatorCSV = New instat.ucrInputComboBox()
-        Me.ucrInputEncodingCSV = New instat.ucrInputComboBox()
+        Me.lblCannotImport = New System.Windows.Forms.Label()
+        Me.lblNoPreview = New System.Windows.Forms.Label()
+        Me.lblLinesToPreview = New System.Windows.Forms.Label()
+        Me.ucrNudPreviewLines = New instat.ucrNud()
+        Me.ucrSaveFile = New instat.ucrSave()
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpCSV.SuspendLayout()
@@ -257,6 +257,26 @@ Partial Class dlgImportDataset
         Me.lblNAStringsCSV.TabIndex = 48
         Me.lblNAStringsCSV.Text = "Missing Value String"
         '
+        'ucrChkStringsAsFactorsCSV
+        '
+        Me.ucrChkStringsAsFactorsCSV.Checked = False
+        Me.ucrChkStringsAsFactorsCSV.Location = New System.Drawing.Point(8, 307)
+        Me.ucrChkStringsAsFactorsCSV.Name = "ucrChkStringsAsFactorsCSV"
+        Me.ucrChkStringsAsFactorsCSV.Size = New System.Drawing.Size(206, 20)
+        Me.ucrChkStringsAsFactorsCSV.TabIndex = 43
+        '
+        'ucrNudLinesToSkipCSV
+        '
+        Me.ucrNudLinesToSkipCSV.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLinesToSkipCSV.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudLinesToSkipCSV.Location = New System.Drawing.Point(86, 275)
+        Me.ucrNudLinesToSkipCSV.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
+        Me.ucrNudLinesToSkipCSV.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLinesToSkipCSV.Name = "ucrNudLinesToSkipCSV"
+        Me.ucrNudLinesToSkipCSV.Size = New System.Drawing.Size(62, 20)
+        Me.ucrNudLinesToSkipCSV.TabIndex = 47
+        Me.ucrNudLinesToSkipCSV.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'rdoRowNamesNoCSV
         '
         Me.rdoRowNamesNoCSV.AutoSize = True
@@ -281,6 +301,59 @@ Partial Class dlgImportDataset
         Me.rdoRowNamesYesCSV.Text = "Yes"
         Me.rdoRowNamesYesCSV.UseVisualStyleBackColor = True
         '
+        'ucrPnlRowNamesCSV
+        '
+        Me.ucrPnlRowNamesCSV.Location = New System.Drawing.Point(15, 124)
+        Me.ucrPnlRowNamesCSV.Name = "ucrPnlRowNamesCSV"
+        Me.ucrPnlRowNamesCSV.Size = New System.Drawing.Size(113, 24)
+        Me.ucrPnlRowNamesCSV.TabIndex = 44
+        '
+        'ucrInputHeadersCSV
+        '
+        Me.ucrInputHeadersCSV.AddQuotesIfUnrecognised = True
+        Me.ucrInputHeadersCSV.IsReadOnly = False
+        Me.ucrInputHeadersCSV.Location = New System.Drawing.Point(9, 82)
+        Me.ucrInputHeadersCSV.Name = "ucrInputHeadersCSV"
+        Me.ucrInputHeadersCSV.Size = New System.Drawing.Size(149, 21)
+        Me.ucrInputHeadersCSV.TabIndex = 43
+        '
+        'ucrInputNAStringsCSV
+        '
+        Me.ucrInputNAStringsCSV.AddQuotesIfUnrecognised = True
+        Me.ucrInputNAStringsCSV.IsMultiline = False
+        Me.ucrInputNAStringsCSV.IsReadOnly = False
+        Me.ucrInputNAStringsCSV.Location = New System.Drawing.Point(117, 236)
+        Me.ucrInputNAStringsCSV.Name = "ucrInputNAStringsCSV"
+        Me.ucrInputNAStringsCSV.Size = New System.Drawing.Size(94, 21)
+        Me.ucrInputNAStringsCSV.TabIndex = 39
+        '
+        'ucrInputDecimalCSV
+        '
+        Me.ucrInputDecimalCSV.AddQuotesIfUnrecognised = True
+        Me.ucrInputDecimalCSV.IsReadOnly = False
+        Me.ucrInputDecimalCSV.Location = New System.Drawing.Point(74, 196)
+        Me.ucrInputDecimalCSV.Name = "ucrInputDecimalCSV"
+        Me.ucrInputDecimalCSV.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputDecimalCSV.TabIndex = 36
+        '
+        'ucrInputSeparatorCSV
+        '
+        Me.ucrInputSeparatorCSV.AddQuotesIfUnrecognised = True
+        Me.ucrInputSeparatorCSV.IsReadOnly = False
+        Me.ucrInputSeparatorCSV.Location = New System.Drawing.Point(74, 154)
+        Me.ucrInputSeparatorCSV.Name = "ucrInputSeparatorCSV"
+        Me.ucrInputSeparatorCSV.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputSeparatorCSV.TabIndex = 35
+        '
+        'ucrInputEncodingCSV
+        '
+        Me.ucrInputEncodingCSV.AddQuotesIfUnrecognised = True
+        Me.ucrInputEncodingCSV.IsReadOnly = False
+        Me.ucrInputEncodingCSV.Location = New System.Drawing.Point(62, 25)
+        Me.ucrInputEncodingCSV.Name = "ucrInputEncodingCSV"
+        Me.ucrInputEncodingCSV.Size = New System.Drawing.Size(149, 21)
+        Me.ucrInputEncodingCSV.TabIndex = 33
+        '
         'grpExcel
         '
         Me.grpExcel.Controls.Add(Me.ucrChkMaxRowsExcel)
@@ -302,6 +375,44 @@ Partial Class dlgImportDataset
         Me.grpExcel.Text = "Import Excel options"
         Me.grpExcel.Visible = False
         '
+        'ucrChkMaxRowsExcel
+        '
+        Me.ucrChkMaxRowsExcel.Checked = False
+        Me.ucrChkMaxRowsExcel.Location = New System.Drawing.Point(6, 168)
+        Me.ucrChkMaxRowsExcel.Name = "ucrChkMaxRowsExcel"
+        Me.ucrChkMaxRowsExcel.Size = New System.Drawing.Size(173, 20)
+        Me.ucrChkMaxRowsExcel.TabIndex = 50
+        '
+        'ucrChkTrimWSExcel
+        '
+        Me.ucrChkTrimWSExcel.Checked = False
+        Me.ucrChkTrimWSExcel.Location = New System.Drawing.Point(9, 116)
+        Me.ucrChkTrimWSExcel.Name = "ucrChkTrimWSExcel"
+        Me.ucrChkTrimWSExcel.Size = New System.Drawing.Size(170, 20)
+        Me.ucrChkTrimWSExcel.TabIndex = 39
+        '
+        'ucrNudRowsToSkipExcel
+        '
+        Me.ucrNudRowsToSkipExcel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRowsToSkipExcel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudRowsToSkipExcel.Location = New System.Drawing.Point(84, 138)
+        Me.ucrNudRowsToSkipExcel.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudRowsToSkipExcel.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRowsToSkipExcel.Name = "ucrNudRowsToSkipExcel"
+        Me.ucrNudRowsToSkipExcel.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudRowsToSkipExcel.TabIndex = 42
+        Me.ucrNudRowsToSkipExcel.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputMaxRowsExcel
+        '
+        Me.ucrInputMaxRowsExcel.AddQuotesIfUnrecognised = True
+        Me.ucrInputMaxRowsExcel.IsMultiline = False
+        Me.ucrInputMaxRowsExcel.IsReadOnly = False
+        Me.ucrInputMaxRowsExcel.Location = New System.Drawing.Point(6, 194)
+        Me.ucrInputMaxRowsExcel.Name = "ucrInputMaxRowsExcel"
+        Me.ucrInputMaxRowsExcel.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputMaxRowsExcel.TabIndex = 40
+        '
         'lblMissingValueStringExcel
         '
         Me.lblMissingValueStringExcel.AutoSize = True
@@ -311,6 +422,25 @@ Partial Class dlgImportDataset
         Me.lblMissingValueStringExcel.TabIndex = 19
         Me.lblMissingValueStringExcel.Text = "Missing Value String"
         '
+        'ucrInputMissingValueStringExcel
+        '
+        Me.ucrInputMissingValueStringExcel.AddQuotesIfUnrecognised = True
+        Me.ucrInputMissingValueStringExcel.IsMultiline = False
+        Me.ucrInputMissingValueStringExcel.IsReadOnly = False
+        Me.ucrInputMissingValueStringExcel.Location = New System.Drawing.Point(10, 90)
+        Me.ucrInputMissingValueStringExcel.Name = "ucrInputMissingValueStringExcel"
+        Me.ucrInputMissingValueStringExcel.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputMissingValueStringExcel.TabIndex = 18
+        '
+        'ucrInputNamedRegions
+        '
+        Me.ucrInputNamedRegions.AddQuotesIfUnrecognised = True
+        Me.ucrInputNamedRegions.IsReadOnly = False
+        Me.ucrInputNamedRegions.Location = New System.Drawing.Point(10, 90)
+        Me.ucrInputNamedRegions.Name = "ucrInputNamedRegions"
+        Me.ucrInputNamedRegions.Size = New System.Drawing.Size(154, 21)
+        Me.ucrInputNamedRegions.TabIndex = 16
+        '
         'lblNamedRegion
         '
         Me.lblNamedRegion.AutoSize = True
@@ -319,6 +449,15 @@ Partial Class dlgImportDataset
         Me.lblNamedRegion.Size = New System.Drawing.Size(90, 13)
         Me.lblNamedRegion.TabIndex = 17
         Me.lblNamedRegion.Text = "or Named Region"
+        '
+        'ucrInputSelectSheetExcel
+        '
+        Me.ucrInputSelectSheetExcel.AddQuotesIfUnrecognised = True
+        Me.ucrInputSelectSheetExcel.IsReadOnly = False
+        Me.ucrInputSelectSheetExcel.Location = New System.Drawing.Point(6, 43)
+        Me.ucrInputSelectSheetExcel.Name = "ucrInputSelectSheetExcel"
+        Me.ucrInputSelectSheetExcel.Size = New System.Drawing.Size(154, 21)
+        Me.ucrInputSelectSheetExcel.TabIndex = 15
         '
         'lblRowToSkipExcel
         '
@@ -354,121 +493,6 @@ Partial Class dlgImportDataset
         Me.grpRDS.TabStop = False
         Me.grpRDS.Text = "Import RDS options"
         Me.grpRDS.Visible = False
-        '
-        'lblCannotImport
-        '
-        Me.lblCannotImport.AutoSize = True
-        Me.lblCannotImport.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCannotImport.Location = New System.Drawing.Point(262, 316)
-        Me.lblCannotImport.Name = "lblCannotImport"
-        Me.lblCannotImport.Size = New System.Drawing.Size(389, 40)
-        Me.lblCannotImport.TabIndex = 33
-        Me.lblCannotImport.Text = "Cannot import this file with the current options. " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Modify options or select a di" &
-    "fferent file."
-        Me.lblCannotImport.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.lblCannotImport.Visible = False
-        '
-        'lblNoPreview
-        '
-        Me.lblNoPreview.AutoSize = True
-        Me.lblNoPreview.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblNoPreview.Location = New System.Drawing.Point(298, 318)
-        Me.lblNoPreview.Name = "lblNoPreview"
-        Me.lblNoPreview.Size = New System.Drawing.Size(302, 18)
-        Me.lblNoPreview.TabIndex = 38
-        Me.lblNoPreview.Text = "Preview not yet implemented for this file type."
-        Me.lblNoPreview.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.lblNoPreview.Visible = False
-        '
-        'lblLinesToPreview
-        '
-        Me.lblLinesToPreview.AutoSize = True
-        Me.lblLinesToPreview.Location = New System.Drawing.Point(519, 239)
-        Me.lblLinesToPreview.Name = "lblLinesToPreview"
-        Me.lblLinesToPreview.Size = New System.Drawing.Size(88, 13)
-        Me.lblLinesToPreview.TabIndex = 41
-        Me.lblLinesToPreview.Text = "Lines to Preview:"
-        '
-        'ucrNudPreviewLines
-        '
-        Me.ucrNudPreviewLines.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPreviewLines.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPreviewLines.Location = New System.Drawing.Point(613, 236)
-        Me.ucrNudPreviewLines.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudPreviewLines.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPreviewLines.Name = "ucrNudPreviewLines"
-        Me.ucrNudPreviewLines.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudPreviewLines.TabIndex = 40
-        Me.ucrNudPreviewLines.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkMaxRowsExcel
-        '
-        Me.ucrChkMaxRowsExcel.Checked = False
-        Me.ucrChkMaxRowsExcel.Location = New System.Drawing.Point(6, 168)
-        Me.ucrChkMaxRowsExcel.Name = "ucrChkMaxRowsExcel"
-        Me.ucrChkMaxRowsExcel.Size = New System.Drawing.Size(173, 20)
-        Me.ucrChkMaxRowsExcel.TabIndex = 50
-        '
-        'ucrChkTrimWSExcel
-        '
-        Me.ucrChkTrimWSExcel.Checked = False
-        Me.ucrChkTrimWSExcel.Location = New System.Drawing.Point(9, 116)
-        Me.ucrChkTrimWSExcel.Name = "ucrChkTrimWSExcel"
-        Me.ucrChkTrimWSExcel.Size = New System.Drawing.Size(170, 20)
-        Me.ucrChkTrimWSExcel.TabIndex = 39
-        '
-        'ucrNudRowsToSkipExcel
-        '
-        Me.ucrNudRowsToSkipExcel.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRowsToSkipExcel.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudRowsToSkipExcel.Location = New System.Drawing.Point(84, 138)
-        Me.ucrNudRowsToSkipExcel.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudRowsToSkipExcel.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRowsToSkipExcel.Name = "ucrNudRowsToSkipExcel"
-        Me.ucrNudRowsToSkipExcel.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudRowsToSkipExcel.TabIndex = 42
-        Me.ucrNudRowsToSkipExcel.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrInputMaxRowsExcel
-        '
-        Me.ucrInputMaxRowsExcel.IsMultiline = False
-        Me.ucrInputMaxRowsExcel.IsReadOnly = False
-        Me.ucrInputMaxRowsExcel.Location = New System.Drawing.Point(6, 194)
-        Me.ucrInputMaxRowsExcel.Name = "ucrInputMaxRowsExcel"
-        Me.ucrInputMaxRowsExcel.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputMaxRowsExcel.TabIndex = 40
-        '
-        'ucrInputMissingValueStringExcel
-        '
-        Me.ucrInputMissingValueStringExcel.IsMultiline = False
-        Me.ucrInputMissingValueStringExcel.IsReadOnly = False
-        Me.ucrInputMissingValueStringExcel.Location = New System.Drawing.Point(10, 90)
-        Me.ucrInputMissingValueStringExcel.Name = "ucrInputMissingValueStringExcel"
-        Me.ucrInputMissingValueStringExcel.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputMissingValueStringExcel.TabIndex = 18
-        '
-        'ucrInputNamedRegions
-        '
-        Me.ucrInputNamedRegions.IsReadOnly = False
-        Me.ucrInputNamedRegions.Location = New System.Drawing.Point(10, 90)
-        Me.ucrInputNamedRegions.Name = "ucrInputNamedRegions"
-        Me.ucrInputNamedRegions.Size = New System.Drawing.Size(154, 21)
-        Me.ucrInputNamedRegions.TabIndex = 16
-        '
-        'ucrInputSelectSheetExcel
-        '
-        Me.ucrInputSelectSheetExcel.IsReadOnly = False
-        Me.ucrInputSelectSheetExcel.Location = New System.Drawing.Point(6, 43)
-        Me.ucrInputSelectSheetExcel.Name = "ucrInputSelectSheetExcel"
-        Me.ucrInputSelectSheetExcel.Size = New System.Drawing.Size(154, 21)
-        Me.ucrInputSelectSheetExcel.TabIndex = 15
-        '
-        'ucrSaveFile
-        '
-        Me.ucrSaveFile.Location = New System.Drawing.Point(10, 52)
-        Me.ucrSaveFile.Name = "ucrSaveFile"
-        Me.ucrSaveFile.Size = New System.Drawing.Size(220, 24)
-        Me.ucrSaveFile.TabIndex = 39
         '
         'ucrChkOverwriteRDS
         '
@@ -526,76 +550,62 @@ Partial Class dlgImportDataset
         Me.ucrChkKeepExistingDataRDS.Size = New System.Drawing.Size(205, 20)
         Me.ucrChkKeepExistingDataRDS.TabIndex = 43
         '
-        'ucrChkStringsAsFactorsCSV
+        'lblCannotImport
         '
-        Me.ucrChkStringsAsFactorsCSV.Checked = False
-        Me.ucrChkStringsAsFactorsCSV.Location = New System.Drawing.Point(8, 307)
-        Me.ucrChkStringsAsFactorsCSV.Name = "ucrChkStringsAsFactorsCSV"
-        Me.ucrChkStringsAsFactorsCSV.Size = New System.Drawing.Size(206, 20)
-        Me.ucrChkStringsAsFactorsCSV.TabIndex = 43
+        Me.lblCannotImport.AutoSize = True
+        Me.lblCannotImport.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCannotImport.Location = New System.Drawing.Point(262, 316)
+        Me.lblCannotImport.Name = "lblCannotImport"
+        Me.lblCannotImport.Size = New System.Drawing.Size(389, 40)
+        Me.lblCannotImport.TabIndex = 33
+        Me.lblCannotImport.Text = "Cannot import this file with the current options. " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Modify options or select a di" &
+    "fferent file."
+        Me.lblCannotImport.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.lblCannotImport.Visible = False
         '
-        'ucrNudLinesToSkipCSV
+        'lblNoPreview
         '
-        Me.ucrNudLinesToSkipCSV.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLinesToSkipCSV.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudLinesToSkipCSV.Location = New System.Drawing.Point(86, 275)
-        Me.ucrNudLinesToSkipCSV.Maximum = New Decimal(New Integer() {1000000, 0, 0, 0})
-        Me.ucrNudLinesToSkipCSV.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLinesToSkipCSV.Name = "ucrNudLinesToSkipCSV"
-        Me.ucrNudLinesToSkipCSV.Size = New System.Drawing.Size(62, 20)
-        Me.ucrNudLinesToSkipCSV.TabIndex = 47
-        Me.ucrNudLinesToSkipCSV.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.lblNoPreview.AutoSize = True
+        Me.lblNoPreview.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblNoPreview.Location = New System.Drawing.Point(298, 318)
+        Me.lblNoPreview.Name = "lblNoPreview"
+        Me.lblNoPreview.Size = New System.Drawing.Size(302, 18)
+        Me.lblNoPreview.TabIndex = 38
+        Me.lblNoPreview.Text = "Preview not yet implemented for this file type."
+        Me.lblNoPreview.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.lblNoPreview.Visible = False
         '
-        'ucrPnlRowNamesCSV
+        'lblLinesToPreview
         '
-        Me.ucrPnlRowNamesCSV.Location = New System.Drawing.Point(15, 124)
-        Me.ucrPnlRowNamesCSV.Name = "ucrPnlRowNamesCSV"
-        Me.ucrPnlRowNamesCSV.Size = New System.Drawing.Size(113, 24)
-        Me.ucrPnlRowNamesCSV.TabIndex = 44
+        Me.lblLinesToPreview.AutoSize = True
+        Me.lblLinesToPreview.Location = New System.Drawing.Point(519, 239)
+        Me.lblLinesToPreview.Name = "lblLinesToPreview"
+        Me.lblLinesToPreview.Size = New System.Drawing.Size(88, 13)
+        Me.lblLinesToPreview.TabIndex = 41
+        Me.lblLinesToPreview.Text = "Lines to Preview:"
         '
-        'ucrInputHeadersCSV
+        'ucrNudPreviewLines
         '
-        Me.ucrInputHeadersCSV.IsReadOnly = False
-        Me.ucrInputHeadersCSV.Location = New System.Drawing.Point(9, 82)
-        Me.ucrInputHeadersCSV.Name = "ucrInputHeadersCSV"
-        Me.ucrInputHeadersCSV.Size = New System.Drawing.Size(149, 21)
-        Me.ucrInputHeadersCSV.TabIndex = 43
+        Me.ucrNudPreviewLines.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPreviewLines.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudPreviewLines.Location = New System.Drawing.Point(613, 236)
+        Me.ucrNudPreviewLines.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudPreviewLines.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPreviewLines.Name = "ucrNudPreviewLines"
+        Me.ucrNudPreviewLines.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudPreviewLines.TabIndex = 40
+        Me.ucrNudPreviewLines.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrInputNAStringsCSV
+        'ucrSaveFile
         '
-        Me.ucrInputNAStringsCSV.IsMultiline = False
-        Me.ucrInputNAStringsCSV.IsReadOnly = False
-        Me.ucrInputNAStringsCSV.Location = New System.Drawing.Point(117, 236)
-        Me.ucrInputNAStringsCSV.Name = "ucrInputNAStringsCSV"
-        Me.ucrInputNAStringsCSV.Size = New System.Drawing.Size(94, 21)
-        Me.ucrInputNAStringsCSV.TabIndex = 39
-        '
-        'ucrInputDecimalCSV
-        '
-        Me.ucrInputDecimalCSV.IsReadOnly = False
-        Me.ucrInputDecimalCSV.Location = New System.Drawing.Point(74, 196)
-        Me.ucrInputDecimalCSV.Name = "ucrInputDecimalCSV"
-        Me.ucrInputDecimalCSV.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputDecimalCSV.TabIndex = 36
-        '
-        'ucrInputSeparatorCSV
-        '
-        Me.ucrInputSeparatorCSV.IsReadOnly = False
-        Me.ucrInputSeparatorCSV.Location = New System.Drawing.Point(74, 154)
-        Me.ucrInputSeparatorCSV.Name = "ucrInputSeparatorCSV"
-        Me.ucrInputSeparatorCSV.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputSeparatorCSV.TabIndex = 35
-        '
-        'ucrInputEncodingCSV
-        '
-        Me.ucrInputEncodingCSV.IsReadOnly = False
-        Me.ucrInputEncodingCSV.Location = New System.Drawing.Point(62, 25)
-        Me.ucrInputEncodingCSV.Name = "ucrInputEncodingCSV"
-        Me.ucrInputEncodingCSV.Size = New System.Drawing.Size(149, 21)
-        Me.ucrInputEncodingCSV.TabIndex = 33
+        Me.ucrSaveFile.Location = New System.Drawing.Point(10, 52)
+        Me.ucrSaveFile.Name = "ucrSaveFile"
+        Me.ucrSaveFile.Size = New System.Drawing.Size(220, 24)
+        Me.ucrSaveFile.TabIndex = 39
         '
         'ucrInputFilePath
         '
+        Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
         Me.ucrInputFilePath.IsMultiline = False
         Me.ucrInputFilePath.IsReadOnly = False
         Me.ucrInputFilePath.Location = New System.Drawing.Point(39, 23)

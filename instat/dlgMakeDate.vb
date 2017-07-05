@@ -182,7 +182,7 @@ Public Class dlgMakeDate
         ''linking up ucrinputs for format and origin
         ucrPnlFormat.AddToLinkedControls(ucrInputFormat, {rdoSpecifyFormat}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Year-Month-Day")
         ucrPnlFormat.AddToLinkedControls(ucrInputOrigin, {rdoSpecifyOrigin}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Excel")
-       
+
         'when rdoTwoColumn is checked
         ucrPnlDate.AddToLinkedControls(ucrReceiverYearTwo, {rdoTwoColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverYearTwo.SetLinkedDisplayControl(lblYearTwo)
@@ -210,11 +210,11 @@ Public Class dlgMakeDate
         ucrReceiverYearThree.SetLinkedDisplayControl(grpThreeColumns)
 
         'TODO - To be linked uplater with the ucrinputFomat
-        ucrChkMore.SetText("More")
-        ucrChkMore.Enabled = False
+        'ucrChkMore.SetText("More")
+        ' ucrChkMore.Enabled = False
         grpFormatField.Enabled = False
-        ucrPnlDate.AddToLinkedControls(ucrChkMore, {rdoSingleColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkMore.SetLinkedDisplayControl(grpFormatField)
+        'ucrPnlDate.AddToLinkedControls(ucrChkMore, {rdoSingleColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ' ucrChkMore.SetLinkedDisplayControl(grpFormatField)
 
         'ucrChkMore.AddToLinkedControls(ucrInputMonth, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         'ucrInputMonth.SetLinkedDisplayControl(lblMonth)
@@ -262,7 +262,7 @@ Public Class dlgMakeDate
         ucrInputComboBoxMonthTwo.SetRCode(clsMakeYearDay, bReset)
         ucrChkTwoDigitYear.SetRCode(clsMakeYearDay, bReset)
 
-        ucrChkMore.SetRCode(clsDateFunction, bReset)
+        'ucrChkMore.SetRCode(clsDateFunction, bReset)
 
         ucrPnlFormat.SetRCode(clsDateFunction, bReset)
 
