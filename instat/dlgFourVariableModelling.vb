@@ -255,6 +255,7 @@ Public Class dlgFourVariableModelling
     Public Sub TestOKEnabled()
         If (Not ucrReceiverResponse.IsEmpty()) AndAlso (Not ucrReceiverFirstExplanatory.IsEmpty()) AndAlso (Not ucrReceiverSecondExplanatory.IsEmpty()) AndAlso (Not ucrReceiverThirdExplanatory.IsEmpty()) AndAlso (ucrInputModelOperators1.GetText <> "") AndAlso (ucrInputModelOperators2.GetText <> "") Then
             ucrBaseFourVariableModelling.OKEnabled(True)
+            UpdatePreview()
         Else
             ucrBaseFourVariableModelling.OKEnabled(False)
         End If
@@ -299,7 +300,7 @@ Public Class dlgFourVariableModelling
                 ucrDistributionChoice.Enabled = True
                 cmdModelOptions.Enabled = True
             End If
-            UpdatePreview()
+            ' UpdatePreview()
             TestOKEnabled()
         End If
     End Sub
@@ -417,7 +418,7 @@ Public Class dlgFourVariableModelling
     Private Sub ucrResponse_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverResponse.ControlValueChanged, ucrChkConvertToNumeric.ControlValueChanged, ucrReceiverSecondExplanatory.ControlValueChanged
         SetBaseFunction()
         ResponseConvert()
-        UpdatePreview()
+        '   UpdatePreview()
     End Sub
 
     Private Sub ucrDistributionChoice_DistributionsIndexChanged() Handles ucrDistributionChoice.DistributionsIndexChanged
@@ -447,7 +448,7 @@ Public Class dlgFourVariableModelling
         End If
         SetBaseFunction()
         FirstExplanatoryFunctionEnabled()
-        UpdatePreview()
+        '  UpdatePreview()
     End Sub
 
     Private Sub ucrReceiverSecondExplanatory_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSecondExplanatory.ControlValueChanged
@@ -460,7 +461,7 @@ Public Class dlgFourVariableModelling
         End If
         SetBaseFunction()
         SecondExplanatoryFunctionEnabled()
-        UpdatePreview()
+        '   UpdatePreview()
     End Sub
 
     Private Sub ucrReceiverThirdExplanatory_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverThirdExplanatory.ControlValueChanged
@@ -473,7 +474,7 @@ Public Class dlgFourVariableModelling
         End If
         SetBaseFunction()
         ThirdExplanatoryFunctionEnabled()
-        UpdatePreview()
+        '  UpdatePreview()
     End Sub
 
     Private Sub ucrReceiverFirstExplanatory_contents() Handles ucrReceiverResponse.ControlContentsChanged, ucrReceiverFirstExplanatory.ControlContentsChanged, ucrReceiverSecondExplanatory.ControlContentsChanged, ucrInputModelOperators1.ControlContentsChanged, ucrInputModelOperators2.ControlContentsChanged, ucrReceiverThirdExplanatory.ControlContentsChanged
