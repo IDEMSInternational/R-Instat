@@ -35,5 +35,8 @@ Public Class ucrScript
 
     Public Sub AppendText(strText As String)
         txtScript.Text = txtScript.Text & Environment.NewLine & strText
+        txtScript.SelectionStart = txtScript.Text.Length
+        txtScript.ScrollToCaret()
+        txtScript.Refresh()
     End Sub
 End Class

@@ -21,6 +21,9 @@ Public Class dlgColumnStats
     Private clsSummariesList As New RFunction
     Private bResetSubdialog As Boolean = False
     Private clsDefaultFunction As New RFunction
+    Public strDefaultDataFrame As String = ""
+    Public strDefaultVariables() As String
+    Public strDefaultFactors() As String
 
     Private Sub dlgColumnStats_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -31,6 +34,7 @@ Public Class dlgColumnStats
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetDefaultColumns()
         bReset = False
         autoTranslate(Me)
         TestOKEnabled()
@@ -100,6 +104,25 @@ Public Class dlgColumnStats
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
+    Private Sub SetDefaultColumns()
+        If strDefaultDataFrame <> "" Then
+            ucrSelectorForColumnStatistics.SetDataframe(strDefaultDataFrame)
+        End If
+        If strDefaultVariables IsNot Nothing AndAlso strDefaultVariables.Count > 0 Then
+            For Each strVar As String In strDefaultVariables
+                ucrReceiverSelectedVariables.Add(strVar, strDefaultDataFrame)
+            Next
+        End If
+        If strDefaultFactors IsNot Nothing AndAlso strDefaultFactors.Count > 0 Then
+            For Each strVar As String In strDefaultFactors
+                ucrReceiverByFactor.Add(strVar, strDefaultDataFrame)
+            Next
+        End If
+        strDefaultDataFrame = ""
+        strDefaultVariables = Nothing
+        strDefaultFactors = Nothing
     End Sub
 
     Public Sub TestOKEnabled()
