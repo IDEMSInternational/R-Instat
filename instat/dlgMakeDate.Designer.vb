@@ -116,7 +116,7 @@ Partial Class dlgMakeDate
         Me.ucrChkTwoDigitYear.Location = New System.Drawing.Point(130, 34)
         Me.ucrChkTwoDigitYear.Name = "ucrChkTwoDigitYear"
         Me.ucrChkTwoDigitYear.Size = New System.Drawing.Size(88, 20)
-        Me.ucrChkTwoDigitYear.TabIndex = 1
+        Me.ucrChkTwoDigitYear.TabIndex = 47
         '
         'ucrNudCutoff
         '
@@ -165,7 +165,7 @@ Partial Class dlgMakeDate
         Me.ucrReceiverYearTwo.Selector = Nothing
         Me.ucrReceiverYearTwo.Size = New System.Drawing.Size(95, 20)
         Me.ucrReceiverYearTwo.strNcFilePath = ""
-        Me.ucrReceiverYearTwo.TabIndex = 0
+        Me.ucrReceiverYearTwo.TabIndex = 43
         Me.ucrReceiverYearTwo.ucrSelector = Nothing
         '
         'lblDayofYear
@@ -202,7 +202,7 @@ Partial Class dlgMakeDate
         Me.grpSingleColumn.Location = New System.Drawing.Point(256, 51)
         Me.grpSingleColumn.Name = "grpSingleColumn"
         Me.grpSingleColumn.Size = New System.Drawing.Size(254, 307)
-        Me.grpSingleColumn.TabIndex = 5
+        Me.grpSingleColumn.TabIndex = 6
         Me.grpSingleColumn.TabStop = False
         Me.grpSingleColumn.Text = "Single Column"
         '
@@ -344,7 +344,7 @@ Partial Class dlgMakeDate
         Me.ucrReceiverForDate.Selector = Nothing
         Me.ucrReceiverForDate.Size = New System.Drawing.Size(129, 20)
         Me.ucrReceiverForDate.strNcFilePath = ""
-        Me.ucrReceiverForDate.TabIndex = 1
+        Me.ucrReceiverForDate.TabIndex = 46
         Me.ucrReceiverForDate.ucrSelector = Nothing
         '
         'ucrInputFormat
@@ -390,7 +390,7 @@ Partial Class dlgMakeDate
         Me.lblYearOption.Location = New System.Drawing.Point(116, 16)
         Me.lblYearOption.Name = "lblYearOption"
         Me.lblYearOption.Size = New System.Drawing.Size(66, 13)
-        Me.lblYearOption.TabIndex = 0
+        Me.lblYearOption.TabIndex = 70
         Me.lblYearOption.Text = "Year Option:"
         '
         'lblMonthOption
@@ -493,7 +493,7 @@ Partial Class dlgMakeDate
         Me.rdoThreeColumns.Location = New System.Drawing.Point(315, 11)
         Me.rdoThreeColumns.Name = "rdoThreeColumns"
         Me.rdoThreeColumns.Size = New System.Drawing.Size(161, 28)
-        Me.rdoThreeColumns.TabIndex = 3
+        Me.rdoThreeColumns.TabIndex = 21
         Me.rdoThreeColumns.Text = "Year - Month - Day"
         Me.rdoThreeColumns.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoThreeColumns.UseVisualStyleBackColor = True
@@ -508,7 +508,7 @@ Partial Class dlgMakeDate
         Me.rdoTwoColumns.Location = New System.Drawing.Point(175, 11)
         Me.rdoTwoColumns.Name = "rdoTwoColumns"
         Me.rdoTwoColumns.Size = New System.Drawing.Size(151, 28)
-        Me.rdoTwoColumns.TabIndex = 2
+        Me.rdoTwoColumns.TabIndex = 20
         Me.rdoTwoColumns.Text = "Year and Day of Year"
         Me.rdoTwoColumns.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoTwoColumns.UseVisualStyleBackColor = True
@@ -523,7 +523,7 @@ Partial Class dlgMakeDate
         Me.rdoSingleColumn.Location = New System.Drawing.Point(42, 11)
         Me.rdoSingleColumn.Name = "rdoSingleColumn"
         Me.rdoSingleColumn.Size = New System.Drawing.Size(137, 28)
-        Me.rdoSingleColumn.TabIndex = 1
+        Me.rdoSingleColumn.TabIndex = 0
         Me.rdoSingleColumn.Text = "Single Column"
         Me.rdoSingleColumn.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.rdoSingleColumn.UseVisualStyleBackColor = True
@@ -551,7 +551,7 @@ Partial Class dlgMakeDate
         Me.ucrPnlDate.Location = New System.Drawing.Point(33, 7)
         Me.ucrPnlDate.Name = "ucrPnlDate"
         Me.ucrPnlDate.Size = New System.Drawing.Size(450, 35)
-        Me.ucrPnlDate.TabIndex = 0
+        Me.ucrPnlDate.TabIndex = 18
         '
         'ucrSaveDate
         '
