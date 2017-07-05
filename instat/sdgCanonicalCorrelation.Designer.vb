@@ -78,12 +78,10 @@ Partial Class sdgCanonicalCorrelation
         'rdoYVariables
         '
         Me.rdoYVariables.AutoSize = True
-        Me.rdoYVariables.Checked = True
         Me.rdoYVariables.Location = New System.Drawing.Point(46, 67)
         Me.rdoYVariables.Name = "rdoYVariables"
         Me.rdoYVariables.Size = New System.Drawing.Size(78, 17)
         Me.rdoYVariables.TabIndex = 3
-        Me.rdoYVariables.TabStop = True
         Me.rdoYVariables.Tag = "Y_Variables"
         Me.rdoYVariables.Text = "Y Variables"
         Me.rdoYVariables.UseVisualStyleBackColor = True
@@ -96,7 +94,6 @@ Partial Class sdgCanonicalCorrelation
         Me.rdoXVariables.Name = "rdoXVariables"
         Me.rdoXVariables.Size = New System.Drawing.Size(78, 17)
         Me.rdoXVariables.TabIndex = 2
-        Me.rdoXVariables.TabStop = True
         Me.rdoXVariables.Tag = "X_Variables"
         Me.rdoXVariables.Text = "X Variables"
         Me.rdoXVariables.UseVisualStyleBackColor = True

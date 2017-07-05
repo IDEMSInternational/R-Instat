@@ -79,6 +79,7 @@ Public Class dlgCanonicalCorrelationAnalysis
         clsDefaultFunction.SetRCommand("cancor")
         clsDefaultFunction.SetAssignTo("last_CCA", strTempModel:="last_CCA", strTempDataframe:=ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
 
+
         clsRCanCorFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
         clsRXCoefFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
         clsRYCoefFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
@@ -86,11 +87,8 @@ Public Class dlgCanonicalCorrelationAnalysis
         clsRGraphicsFunction.SetRCommand("ggpairs")
         clsRCanCorFunction.AddParameter("data_name", Chr(34) & ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
         clsRCanCorFunction.AddParameter("value1", Chr(34) & "cancor" & Chr(34))
-        clsRCanCorFunction.AddParameter("model_name", Chr(34) & clsTempFunction & Chr(34))
         clsRCanCorFunction.AddParameter("value1", Chr(34) & "cor" & Chr(34))
-        clsRXCoefFunction.AddParameter("model_name", Chr(34) & clsTempFunction & Chr(34))
         clsRXCoefFunction.AddParameter("value1", Chr(34) & "xcoef" & Chr(34))
-        clsRYCoefFunction.AddParameter("model_name", Chr(34) & clsTempFunction & Chr(34))
         clsRYCoefFunction.AddParameter("value1", Chr(34) & "ycoef" & Chr(34))
         ' Set default RFunction as the base function
         ucrBase.clsRsyntax.ClearCodes()
@@ -124,6 +122,16 @@ Public Class dlgCanonicalCorrelationAnalysis
 
     Private Sub ucrSaveResult_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlValueChanged
         clsTempFunction = ucrSaveResult.GetText
+
+        If ucrSaveResult.ucrChkSave.Checked Then
+            clsRCanCorFunction.AddParameter("model_name", Chr(34) & clsTempFunction & Chr(34))
+            clsRXCoefFunction.AddParameter("model_name", Chr(34) & clsTempFunction & Chr(34))
+            clsRYCoefFunction.AddParameter("model_name", Chr(34) & clsTempFunction & Chr(34))
+        Else
+            clsRCanCorFunction.AddParameter("model_name", Chr(34) & "last_CCA" & Chr(34))
+            clsRXCoefFunction.AddParameter("model_name", Chr(34) & "last_CCA" & Chr(34))
+            clsRYCoefFunction.AddParameter("model_name", Chr(34) & "last_CCA" & Chr(34))
+        End If
     End Sub
 
     Private Sub ucrReceiverXvariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverXVariables.ControlValueChanged
