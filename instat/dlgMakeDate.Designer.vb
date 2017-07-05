@@ -38,6 +38,7 @@ Partial Class dlgMakeDate
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgMakeDate))
         Me.grpTwoColumns = New System.Windows.Forms.GroupBox()
         Me.ucrChkTwoDigitYear = New instat.ucrCheck()
         Me.ucrNudCutoff = New instat.ucrNud()
@@ -49,7 +50,6 @@ Partial Class dlgMakeDate
         Me.ucrReceiverDayTwo = New instat.ucrReceiverSingle()
         Me.grpSingleColumn = New System.Windows.Forms.GroupBox()
         Me.grpFormatField = New System.Windows.Forms.GroupBox()
-        Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -83,10 +83,13 @@ Partial Class dlgMakeDate
         Me.rdoTwoColumns = New System.Windows.Forms.RadioButton()
         Me.rdoSingleColumn = New System.Windows.Forms.RadioButton()
         Me.ucrPnlDate = New instat.UcrPanel()
+        Me.grpFormats = New System.Windows.Forms.GroupBox()
+        Me.txtTextDateFormats = New System.Windows.Forms.RichTextBox()
         Me.grpTwoColumns.SuspendLayout()
         Me.grpSingleColumn.SuspendLayout()
         Me.grpFormatField.SuspendLayout()
         Me.grpThreeColumns.SuspendLayout()
+        Me.grpFormats.SuspendLayout()
         Me.SuspendLayout()
         '
         'grpTwoColumns
@@ -204,7 +207,6 @@ Partial Class dlgMakeDate
         '
         'grpFormatField
         '
-        Me.grpFormatField.Controls.Add(Me.RichTextBox1)
         Me.grpFormatField.Controls.Add(Me.Label1)
         Me.grpFormatField.Controls.Add(Me.Label2)
         Me.grpFormatField.Controls.Add(Me.Label3)
@@ -219,14 +221,6 @@ Partial Class dlgMakeDate
         Me.grpFormatField.TabIndex = 63
         Me.grpFormatField.TabStop = False
         Me.grpFormatField.Text = "Format Field"
-        '
-        'RichTextBox1
-        '
-        Me.RichTextBox1.Location = New System.Drawing.Point(5, 12)
-        Me.RichTextBox1.Name = "RichTextBox1"
-        Me.RichTextBox1.Size = New System.Drawing.Size(226, 143)
-        Me.RichTextBox1.TabIndex = 63
-        Me.RichTextBox1.Text = "Year options"
         '
         'Label1
         '
@@ -490,14 +484,14 @@ Partial Class dlgMakeDate
         '
         'ucrSaveDate
         '
-        Me.ucrSaveDate.Location = New System.Drawing.Point(10, 333)
+        Me.ucrSaveDate.Location = New System.Drawing.Point(10, 348)
         Me.ucrSaveDate.Name = "ucrSaveDate"
-        Me.ucrSaveDate.Size = New System.Drawing.Size(255, 24)
+        Me.ucrSaveDate.Size = New System.Drawing.Size(237, 24)
         Me.ucrSaveDate.TabIndex = 10
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 364)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 379)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(417, 54)
         Me.ucrBase.TabIndex = 9
@@ -564,11 +558,30 @@ Partial Class dlgMakeDate
         Me.ucrPnlDate.Size = New System.Drawing.Size(450, 35)
         Me.ucrPnlDate.TabIndex = 18
         '
+        'grpFormats
+        '
+        Me.grpFormats.Controls.Add(Me.txtTextDateFormats)
+        Me.grpFormats.Location = New System.Drawing.Point(253, 197)
+        Me.grpFormats.Name = "grpFormats"
+        Me.grpFormats.Size = New System.Drawing.Size(245, 176)
+        Me.grpFormats.TabIndex = 64
+        Me.grpFormats.TabStop = False
+        Me.grpFormats.Text = "Specify Format Description"
+        '
+        'txtTextDateFormats
+        '
+        Me.txtTextDateFormats.Location = New System.Drawing.Point(10, 17)
+        Me.txtTextDateFormats.Name = "txtTextDateFormats"
+        Me.txtTextDateFormats.Size = New System.Drawing.Size(226, 144)
+        Me.txtTextDateFormats.TabIndex = 64
+        Me.txtTextDateFormats.Text = resources.GetString("txtTextDateFormats.Text")
+        '
         'dlgMakeDate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(522, 427)
+        Me.ClientSize = New System.Drawing.Size(522, 442)
+        Me.Controls.Add(Me.grpFormats)
         Me.Controls.Add(Me.rdoThreeColumns)
         Me.Controls.Add(Me.rdoTwoColumns)
         Me.Controls.Add(Me.rdoSingleColumn)
@@ -593,6 +606,7 @@ Partial Class dlgMakeDate
         Me.grpFormatField.PerformLayout()
         Me.grpThreeColumns.ResumeLayout(False)
         Me.grpThreeColumns.PerformLayout()
+        Me.grpFormats.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -637,9 +651,10 @@ Partial Class dlgMakeDate
     Friend WithEvents UcrInputComboBox2 As ucrInputComboBox
     Friend WithEvents UcrInputComboBox3 As ucrInputComboBox
     Friend WithEvents UcrInputComboBox4 As ucrInputComboBox
-    Friend WithEvents RichTextBox1 As RichTextBox
     Friend WithEvents rdoThreeColumns As RadioButton
     Friend WithEvents rdoTwoColumns As RadioButton
     Friend WithEvents rdoSingleColumn As RadioButton
     Friend WithEvents ucrPnlDate As UcrPanel
+    Friend WithEvents grpFormats As GroupBox
+    Friend WithEvents txtTextDateFormats As RichTextBox
 End Class

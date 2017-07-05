@@ -197,14 +197,14 @@ Public Class dlgMakeDate
         ucrReceiverDayThree.SetLinkedDisplayControl(lblDayofMonth)
         ucrPnlDate.AddToLinkedControls(ucrInputYearOption, {rdoThreeColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="4 Digit")
         ucrInputYearOption.SetLinkedDisplayControl(lblYearOption)
-        ucrPnlDate.AddToLinkedControls(ucrInputMonthOption, {rdoThreeColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Numerical")
+        ucrPnlDate.AddToLinkedControls(ucrInputMonthOption, {rdoThreeColumns}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Numeric")
         ucrInputMonthOption.SetLinkedDisplayControl(lblMonthOption)
         ucrReceiverYearThree.SetLinkedDisplayControl(grpThreeColumns)
 
         'TODO - To be linked uplater with the ucrinputFomat
         'ucrChkMore.SetText("More")
         ' ucrChkMore.Enabled = False
-        grpFormatField.Enabled = False
+        grpFormatField.Visible = False
         'ucrPnlDate.AddToLinkedControls(ucrChkMore, {rdoSingleColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ' ucrChkMore.SetLinkedDisplayControl(grpFormatField)
 
@@ -216,7 +216,6 @@ Public Class dlgMakeDate
         'ucrInputDay.SetLinkedDisplayControl(lblDay)
         'ucrChkMore.AddToLinkedControls(ucrInputSeparator, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         'ucrInputSeparator.SetLinkedDisplayControl(lblSeparator)
-
         ucrPnlDate.AddToLinkedControls(ucrPnlFormat, {rdoSingleColumn}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoDefaultFormat)
     End Sub
 
@@ -362,19 +361,18 @@ Public Class dlgMakeDate
 
     Private Sub ucrPnlFormat_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFormat.ControlValueChanged, ucrInputFormat.ControlValueChanged, ucrInputOrigin.ControlValueChanged
         If rdoDefaultFormat.Checked Then
+            grpFormats.Hide()
             ucrReceiverForDate.SetIncludedDataTypes({"character", "factor"})
             ucrBase.clsRsyntax.RemoveParameter("format")
             ucrBase.clsRsyntax.RemoveParameter("origin")
         ElseIf rdoSpecifyOrigin.Checked
+            grpFormats.Hide()
             ucrReceiverForDate.SetIncludedDataTypes({"numeric"})
         Else
             ucrReceiverForDate.SetIncludedDataTypes({"numeric", "character", "factor", "integer"})
+            grpFormats.Show()
         End If
         SelectorHeader()
-    End Sub
-
-    Private Sub grpTwoColumns_Enter(sender As Object, e As EventArgs) Handles grpTwoColumns.Enter
-
     End Sub
 
     'Temporary fix: This should be deleted since - this should be automatic
@@ -387,9 +385,4 @@ Public Class dlgMakeDate
             grpThreeColumns.Visible = True
         End If
     End Sub
-
-    Private Sub ucrPnDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDate.ControlValueChanged
-
-    End Sub
-
 End Class
