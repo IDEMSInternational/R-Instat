@@ -125,7 +125,7 @@ Public Class clsGridLink
                         'TODO test if column limit is needed for stability in metadata grids
                         FillSheet(dfTemp, strDataName, grdVariablesMetadata, iColMax:=iMaxCols)
                         clsSetVariablesMetadataChanged.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
-                        clsSetVariablesMetadataChanged.AddParameter("new_val", "TRUE")
+                        clsSetVariablesMetadataChanged.AddParameter("new_val", "FALSE")
                         frmMain.clsRLink.RunInternalScript(clsSetVariablesMetadataChanged.ToScript())
                     Else
                         bGrdVariablesMetadataExists = False
