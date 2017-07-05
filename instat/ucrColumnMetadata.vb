@@ -107,7 +107,7 @@ Public Class ucrColumnMetadata
                 strComment = "Edited variables metadata value"
             End If
             Try
-                frmMain.clsRLink.RunScript(strScript, strComment:=strComment)
+                RunScriptFromColumnMetadata(strScript, strComment:=strComment)
             Catch
                 e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
             End Try
@@ -156,5 +156,13 @@ Public Class ucrColumnMetadata
         If grdCurrSheet IsNot Nothing Then
             grdCurrSheet.SelectAll()
         End If
+    End Sub
+
+    Private Sub RunScriptFromColumnMetadata(strScript As String, Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing)
+        Cursor = Cursors.WaitCursor
+        grdVariables.Enabled = False
+        frmMain.clsRLink.RunScript(strScript:=strScript, iCallType:=iCallType, strComment:=strComment, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+        grdVariables.Enabled = True
+        Cursor = Cursors.Default
     End Sub
 End Class
