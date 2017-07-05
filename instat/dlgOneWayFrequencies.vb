@@ -23,6 +23,8 @@ Public Class dlgOneWayFrequencies
     Private bResetSubdialog As Boolean = False
     Private clsSjTab As New RFunction
     Private clsSjPlot, clsPlotGrid As New RFunction
+    Public strDefaultDataFrame As String = ""
+    Public strDefaultColumns() As String = Nothing
 
     Private Sub dlgOneWayFrequencies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -34,6 +36,7 @@ Public Class dlgOneWayFrequencies
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetDefaultColumn()
         bReset = False
         TestOkEnabled()
     End Sub
@@ -149,6 +152,19 @@ Public Class dlgOneWayFrequencies
         ucrChkGroupData.SetRCode(clsSjTab, bReset)
         ucrNudGroups.SetRCode(clsSjTab, bReset)
         ucrSaveGraph.SetRCode(clsPlotGrid, bReset)
+    End Sub
+
+    Private Sub SetDefaultColumn()
+        If strDefaultDataFrame <> "" Then
+            ucrSelectorOneWayFreq.SetDataframe(strDefaultDataFrame)
+        End If
+        If strDefaultColumns IsNot Nothing AndAlso strDefaultColumns.Count > 0 Then
+            For Each strVar As String In strDefaultColumns
+                ucrReceiverOneWayFreq.Add(strVar, strDefaultDataFrame)
+            Next
+        End If
+        strDefaultDataFrame = ""
+        strDefaultColumns = Nothing
     End Sub
 
     Private Sub TestOkEnabled()
