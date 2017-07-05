@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 
 Public Class sdgSimpleRegOptions
@@ -24,7 +23,7 @@ Public Class sdgSimpleRegOptions
     Public clsRLmOrGLM As RFunction
     Public clsRGraphics As New RSyntax
     Private clsRSyntax As RSyntax
-    Public clsRaovFunction, clsRaovpvalFunction, clsRestpvalFunction, clsAutoplot, clsRgeom_point, clsRPredFunction, clsRDFFunction, clsRFittedValues, clsRWriteFitted, clsRResiduals, clsRWriteResiduals, clsRStdResiduals, clsRWriteStdResiduals, clsRLeverage, clsRWriteLeverage As New RFunction
+    Public clsRAovFunction, clsRAovPValFunction, clsREstPValFunction, clsAutoplot, clsRgeom_point, clsRPredFunction, clsRDFFunction, clsRFittedValues, clsRWriteFitted, clsRResiduals, clsRWriteResiduals, clsRStdResiduals, clsRWriteStdResiduals, clsRLeverage, clsRWriteLeverage As New RFunction
     Public clsVisReg, clsRaesFunction, clsRStat_smooth, clsR_ribbon, clsRaes_ribbon As New RFunction
     Public clsWhichFunction As RFunction
     Public bRCodeSet As Boolean = True
@@ -39,6 +38,8 @@ Public Class sdgSimpleRegOptions
     End Sub
 
     Private Sub InitialiseControls()
+
+        InitialiseTabs()
 
         'Display tab controls
         '###########################################
@@ -80,13 +81,21 @@ Public Class sdgSimpleRegOptions
         ucrChkFittedModel.SetText("Fitted Model")
         ucrChkFittedModel.AddRSyntaxContainsFunctionNamesCondition(True, {"visreg"}, True)
         ucrChkFittedModel.AddRSyntaxContainsFunctionNamesCondition(False, {"visreg"}, False)
-        ucrChkFittedModel.AddToLinkedControls(ucrNudWhiteSpace, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
-        ucrChkFittedModel.AddToLinkedControls(ucrChkPartial, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
-        ucrChkFittedModel.AddToLinkedControls(ucrChkRugs, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
-        ucrChkFittedModel.AddToLinkedControls(ucrChkJitter, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
-        ucrChkFittedModel.AddToLinkedControls(ucrChkConfIntervalband, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
-        ucrChkFittedModel.AddToLinkedControls(ucrPnlPlotType, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
-        ucrChkFittedModel.AddToLinkedControls(ucrPnlScale, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
+        ucrChkFittedModel.AddToLinkedControls(ucrNudWhiteSpace, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkFittedModel.AddToLinkedControls(ucrNudGraphicsCLevel, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkFittedModel.AddToLinkedControls(ucrChkPartial, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkFittedModel.AddToLinkedControls(ucrChkRugs, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkFittedModel.AddToLinkedControls(ucrChkJitter, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkFittedModel.AddToLinkedControls(ucrChkConfIntervalband, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkFittedModel.AddToLinkedControls(ucrPnlPlotType, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkFittedModel.AddToLinkedControls(ucrPnlScale, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudGraphicsCLevel.SetLinkedDisplayControl(lblGraphicsSignLevel)
+        ucrNudWhiteSpace.SetLinkedDisplayControl(lblWhiteSpace)
+        ucrPnlPlotType.SetLinkedDisplayControl(grpPlotType)
+        ucrPnlScale.SetLinkedDisplayControl(grpScale)
+        ucrPnlPartial12.SetLinkedDisplayControl(grpRugs)
+        ucrPnlMutiplePlots.SetLinkedDisplayControl(grpMultiplePlots)
+        ucrChkResidualsFitted.SetLinkedDisplayControl(grpIndividualPlots)
 
         'Multiple plots
         ucrChkResidualPlots.SetText("Residual Plots")
@@ -177,7 +186,7 @@ Public Class sdgSimpleRegOptions
         ucrNudWhiteSpace.SetMinMax(0, 1)
         ucrNudWhiteSpace.SetRDefault(0.2)
 
-        ucrChkRugs.AddToLinkedControls(ucrPnlPartial12, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoPartial)
+        ucrChkRugs.AddToLinkedControls(ucrPnlPartial12, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoPartial)
 
         ucrChkJitter.SetText("Jitter")
         ucrChkJitter.SetParameter(New RParameter("jitter"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
@@ -208,7 +217,7 @@ Public Class sdgSimpleRegOptions
         '' save residuals column names
         'ucrSaveResidualsColumnName.SetPrefix("Resids")
         'ucrSaveResidualsColumnName.SetSaveTypeAsColumn()
-        ucrSaveResidualsColumnName.SetCheckBoxText("residuals")
+        ucrSaveResidualsColumnName.SetCheckBoxText("Residuals")
         'ucrSaveResidualsColumnName.SetIsComboBox()
         'ucrSaveResidualsColumnName.SetDataFrameSelector(clsRDataFrame)
 
@@ -216,14 +225,14 @@ Public Class sdgSimpleRegOptions
         'ucrSaveStdResidualsColumnName.SetPrefix("Sresids")
         'ucrSaveStdResidualsColumnName.SetSaveTypeAsColumn()
         'ucrSaveStdResidualsColumnName.SetIsComboBox()
-        ucrSaveStdResidualsColumnName.SetCheckBoxText("std residuals")
+        ucrSaveStdResidualsColumnName.SetCheckBoxText("Std Residuals")
         'ucrSaveStdResidualsColumnName.SetDataFrameSelector(clsRDataFrame)
 
         ''save leverage column names
         'ucrSaveLeverageColumnName.SetPrefix("Lever")
         'ucrSaveLeverageColumnName.SetSaveTypeAsColumn()
         'ucrSaveLeverageColumnName.SetIsComboBox()
-        ucrSaveLeverageColumnName.SetCheckBoxText("leverage")
+        ucrSaveLeverageColumnName.SetCheckBoxText("Leverage")
         'ucrSaveLeverageColumnName.SetDataFrameSelector(clsRDataFrame)
 
         bControlsInitialised = True
@@ -246,13 +255,13 @@ Public Class sdgSimpleRegOptions
         clsVisReg = clsNewVisReg
 
         clsRLmOrGLM = clsNewRLmOrGLM
-        clsRestpvalFunction = clsNewRestpvalFunction
+        clsREstPValFunction = clsNewRestpvalFunction
         clsRModelFunction = clsNewRModelFunction
         clsRXVariable = clsNewRXVariable
         clsRYVariable = clsNewRYVariable
         clsRWriteFitted = clsNewRWriteFitted
         clsRFittedValues = clsNewRFittedValues
-        clsRaovpvalFunction = clsNewRaovpvalFunction
+        clsRAovPValFunction = clsNewRaovpvalFunction
         clsRgeom_point = clsNewRgeom_point
         clsAutoplot = clsNewAutoplot
         clsRWriteResiduals = clsNewRWriteResiduals
@@ -304,6 +313,11 @@ Public Class sdgSimpleRegOptions
         ucrSaveResidualsColumnName.SetRCode(clsRWriteResiduals, bReset)
         ucrSaveStdResidualsColumnName.SetRCode(clsRWriteStdResiduals, bReset)
         ucrSaveLeverageColumnName.SetRSyntax(clsRSyntax, bReset, bCloneIfNeeded:=True)
+
+        If bReset Then
+            tbpRegOptions.SelectedIndex = 0
+        End If
+
         bRCodeSet = True
     End Sub
 
@@ -426,4 +440,13 @@ Public Class sdgSimpleRegOptions
     Private Sub ucrChkResidualsFitted_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkResidualsFitted.ControlValueChanged, ucrChkQQ.ControlValueChanged, ucrChkScaleLocation.ControlValueChanged, ucrChkCooksDistance.ControlValueChanged, ucrChkResidualsLeverage.ControlValueChanged, ucrChkCooksDistanceLeverage.ControlValueChanged
         SetWhichParameter()
     End Sub
+
+    Private Sub InitialiseTabs()
+        For i = 0 To tbpRegOptions.TabCount - 1
+            tbpRegOptions.SelectedIndex = i
+        Next
+        tbpRegOptions.TabPages(2).Enabled = False
+        tbpRegOptions.SelectedIndex = 0
+    End Sub
+
 End Class
