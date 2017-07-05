@@ -17,38 +17,59 @@
 Imports instat.Translations
 Public Class dlgFitModel
     Public bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
     Public clsRCIFunction, clsRConvert As New RFunction
-    Dim clsModel As New ROperator
+    Private clsModel As New ROperator
     Private Sub dlgFitModel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
-
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
         autoTranslate(Me)
+        TestOKEnabled()
     End Sub
 
+    Private Sub SetRCodeForControls(bReset As Boolean)
+
+    End Sub
+
+
     Private Sub InitialiseDialog()
+
         ucrBase.clsRsyntax.iCallType = 2
-        clsModel.SetOperation("~")
+
         ucrBase.clsRsyntax.SetFunction("")
+
         ucrModelName.SetDataFrameSelector(ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames)
         ucrModelName.SetPrefix("reg")
-        ucrModelName.SetItemsTypeAsModels()
-        ucrModelName.SetDefaultTypeAsModel()
+        ucrModelName.SetIsComboBox()
+        ucrModelName.SetSaveTypeAsModel()
+        ucrModelName.SetAssignToIfUncheckedValue("last_model")
+        ucrModelName.SetCheckBoxText("Save Model:")
+
         ucrBase.iHelpTopicID = 371
         ucrFamily.SetGLMDistributions()
+
         ucrReceiverExpressionFitModel.Clear()
         ucrReceiverExpressionFitModel.Selector = ucrSelectorByDataFrameAddRemoveForFitModel
         ucrReceiverResponseVar.Selector = ucrSelectorByDataFrameAddRemoveForFitModel
         ucrReceiverResponseVar.SetMeAsReceiver()
-        ucrModelName.SetValidationTypeAsRVariable()
-        'sdgSimpleRegOptions.SetRModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
+
         ucrInputModelPreview.IsReadOnly = True
+
+        'sdgSimpleRegOptions.SetRModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
+
         sdgSimpleRegOptions.SetRDataFrame(ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames)
+
+        ucrConvertToVariate.AddFunctionNamesCondition(True, "as.numeric")
+        ucrConvertToVariate.SetText("Convert to Variate")
+        ucrConvertToVariate.SetParameter(New RParameter("x", 0))
+
         'sdgSimpleRegOptions.SetRYVariable(ucrReceiverResponseVar)
         'sdgVariableTransformations.SetRYVariable(ucrReceiverResponseVar)
         'sdgVariableTransformations.SetRModelOperator(clsModel)
@@ -58,13 +79,15 @@ Public Class dlgFitModel
     End Sub
 
     Private Sub SetDefaults()
+        clsModel = New ROperator
+        clsRCIFunction = New RFunction
+        clsRConvert = New RFunction
+
         ucrSelectorByDataFrameAddRemoveForFitModel.Reset()
         ucrReceiverResponseVar.SetMeAsReceiver()
         ucrSelectorByDataFrameAddRemoveForFitModel.Focus()
-        chkSaveModel.Checked = True
-        ucrModelName.Visible = True
-        chkConvertToVariate.Checked = False
-        chkConvertToVariate.Visible = False
+
+        clsModel.SetOperation("~")
         ucrModelName.SetName("reg")
         'sdgSimpleRegOptions.SetDefaults()
         ResponseConvert()
@@ -72,10 +95,6 @@ Public Class dlgFitModel
         sdgSimpleRegOptions.lblConfLevel.Enabled = True
         'sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
         TestOKEnabled()
-    End Sub
-
-    Private Sub ReopenDialog()
-
     End Sub
 
     Private Sub TestOKEnabled()
@@ -189,13 +208,13 @@ Public Class dlgFitModel
             ucrFamily.RecieverDatatype(ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverResponseVar.GetVariableNames(bWithQuotes:=False))
 
             If ucrFamily.strDataType = "numeric" Then
-                chkConvertToVariate.Checked = False
-                chkConvertToVariate.Visible = False
+                ucrConvertToVariate.Checked = False
+                ucrConvertToVariate.Visible = False
             Else
-                chkConvertToVariate.Visible = True
+                ucrConvertToVariate.Visible = True
             End If
 
-            If chkConvertToVariate.Checked Then
+            If ucrConvertToVariate.Checked Then
                 clsRConvert.SetRCommand("as.numeric")
                 clsRConvert.AddParameter("x", ucrReceiverResponseVar.GetVariableNames(bWithQuotes:=False))
                 clsModel.AddParameter(iPosition:=0, clsRFunctionParameter:=clsRConvert)
@@ -221,32 +240,20 @@ Public Class dlgFitModel
         TestOKEnabled()
     End Sub
 
-    Private Sub chkConvertToVariate_CheckedChanged(sender As Object, e As EventArgs) Handles chkConvertToVariate.CheckedChanged
+    Private Sub chkConvertToVariate_CheckedChanged(sender As Object, e As EventArgs)
         ResponseConvert()
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrModelName_NameChanged() Handles ucrModelName.NameChanged
-        AssignModelName()
-        TestOKEnabled()
-    End Sub
-
-    Private Sub chkModelName_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveModel.CheckedChanged
-        If chkSaveModel.Checked Then
-            ucrModelName.Visible = True
-        Else
-            ucrModelName.Visible = False
-        End If
+    Private Sub ucrModelName_NameChanged()
         AssignModelName()
         TestOKEnabled()
     End Sub
 
     Private Sub AssignModelName()
-        If chkSaveModel.Checked AndAlso Not ucrModelName.IsEmpty Then
-            ucrBase.clsRsyntax.SetAssignTo(ucrModelName.GetText, strTempModel:=ucrModelName.GetText, strTempDataframe:=ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        If ucrModelName.ucrChkSave.Checked AndAlso Not ucrModelName.IsComplete Then
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
         Else
-            ucrBase.clsRsyntax.SetAssignTo("last_model", strTempModel:="last_model", strTempDataframe:=ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
     End Sub
@@ -277,6 +284,7 @@ Public Class dlgFitModel
     Public Sub ucrFamily_cboDistributionsIndexChanged() Handles ucrFamily.ControlValueChanged
         ChooseRFunction()
     End Sub
+
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         'sdgSimpleRegOptions.RegOptions()
     End Sub
