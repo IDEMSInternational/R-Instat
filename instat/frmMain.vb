@@ -1584,7 +1584,6 @@ Public Class frmMain
         If lstDataNames.Count > 0 Then
             dlgOneWayFrequencies.strDefaultDataFrame = lstDataNames(0)
             lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_country_label"))
-            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_winner_name_label"))
             lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_single_bidder_label"))
             lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_all_bids_label"))
             lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_procurement_type_3_label"))
