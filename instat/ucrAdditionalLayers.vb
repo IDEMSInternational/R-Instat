@@ -67,10 +67,10 @@ Public Class ucrAdditionalLayers
 
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsNewGeomFunction, clsNewGlobalAesFunc:=clsGlobalAesFunction, clsNewLocalAes:=clsNewLocalAesFunction, bFixGeom:=False, ucrNewBaseSelector:=Nothing, bApplyAesGlobally:=(bSetGlobalIsDefault AndAlso lstLayers.Items.Count = 0), iTabToDisplay:=0, strDataFrame:=strGlobalDataFrame)
         ParentForm.SendToBack()
+        sdgLayerOptions.tbcLayers.SelectedIndex = 0
         sdgLayerOptions.ShowDialog()
         strGlobalDataFrame = sdgLayerOptions.GetGlobalDataFrame()
         AddLayers(clsNewGeomFunction.strRCommand)
-        sdgLayerOptions.tbcLayers.SelectedIndex = 0
     End Sub
 
     Private Sub SetEditDeleteEnabled()
