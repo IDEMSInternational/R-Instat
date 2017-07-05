@@ -1422,20 +1422,6 @@ Public Class frmMain
         dlgUseDate.ShowDialog()
     End Sub
 
-    Private Sub UseSignatureDateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UseSignatureDateToolStripMenuItem.Click
-        Dim lstDataNames As List(Of String)
-
-        lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
-        If lstDataNames.Count > 0 Then
-            dlgUseDate.strDefaultDataFrame = lstDataNames(0)
-            dlgUseDate.strDefaultColumn = clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_signature_date_label")
-        Else
-            dlgUseDate.strDefaultDataFrame = ""
-            dlgUseDate.strDefaultColumn = ""
-        End If
-        dlgUseDate.ShowDialog()
-    End Sub
-
     Private Sub mnuDescribeOneVariableFrequencies_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableFrequencies.Click
         dlgOneWayFrequencies.ShowDialog()
     End Sub
@@ -1588,5 +1574,41 @@ Public Class frmMain
             dlgColumnStats.strDefaultFactors = Nothing
         End If
         dlgColumnStats.ShowDialog()
+    End Sub
+
+    Private Sub mnuProcurementDescribeOneVar_Click(sender As Object, e As EventArgs) Handles mnuProcurementDescribeOneVar.Click
+        Dim lstDataNames As List(Of String)
+        Dim lstColumns As New List(Of String)
+
+        lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
+        If lstDataNames.Count > 0 Then
+            dlgOneWayFrequencies.strDefaultDataFrame = lstDataNames(0)
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_country_label"))
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_single_bidder_label"))
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_all_bids_label"))
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_procurement_type_3_label"))
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_tax_haven_label"))
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_contract_sector_label"))
+            lstColumns.RemoveAll(Function(x) x = "")
+            dlgOneWayFrequencies.strDefaultColumns = lstColumns.ToArray()
+        Else
+            dlgOneWayFrequencies.strDefaultDataFrame = ""
+            dlgOneWayFrequencies.strDefaultColumns = Nothing
+        End If
+        dlgOneWayFrequencies.ShowDialog()
+    End Sub
+
+    Private Sub mnuProcurementDescribeTwoVar_Click(sender As Object, e As EventArgs) Handles mnuProcurementDescribeTwoVar.Click
+        Dim lstDataNames As List(Of String)
+
+        lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
+        If lstDataNames.Count > 0 Then
+            dlgTwoWayFrequencies.strDefaultDataFrame = lstDataNames(0)
+            dlgTwoWayFrequencies.strDefaultColumnVariable = clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_contract_sector_label")
+        Else
+            dlgTwoWayFrequencies.strDefaultDataFrame = ""
+            dlgTwoWayFrequencies.strDefaultColumnVariable = Nothing
+        End If
+        dlgTwoWayFrequencies.ShowDialog()
     End Sub
 End Class
