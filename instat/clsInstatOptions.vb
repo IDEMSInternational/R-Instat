@@ -211,17 +211,13 @@ Imports RDotNet
     End Sub
 
     Public Sub SetMaxRows(iRows As Integer)
-        If (iMaxRows.HasValue AndAlso iRows <> iMaxRows) OrElse Not iMaxRows.HasValue Then
-            iMaxRows = iRows
-            frmMain.clsGrids.SetMaxRows(iMaxRows)
-        End If
+        iMaxRows = iRows
+        frmMain.clsGrids.SetMaxRows(iMaxRows)
     End Sub
 
     Public Sub SetMaxCols(iCols As Integer)
-        If (iMaxCols.HasValue AndAlso iCols <> iMaxCols) OrElse Not iMaxCols.HasValue Then
-            iMaxCols = iCols
-            frmMain.clsGrids.SetMaxCols(iMaxCols)
-        End If
+        iMaxCols = iCols
+        frmMain.clsGrids.SetMaxCols(iMaxCols)
     End Sub
 
     Public Sub SetFormatOutput(fntNew As Font, clrNew As Color)
