@@ -2593,7 +2593,6 @@ Partial Class frmMain
         '
         'mnuFileCloseData
         '
-        Me.mnuFileCloseData.Enabled = False
         Me.mnuFileCloseData.Name = "mnuFileCloseData"
         Me.mnuFileCloseData.Size = New System.Drawing.Size(213, 22)
         Me.mnuFileCloseData.Text = "Close Data File"
