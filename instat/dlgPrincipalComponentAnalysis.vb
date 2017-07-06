@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgPrincipalComponentAnalysis
     Public bFirstLoad As Boolean = True
@@ -140,6 +139,7 @@ Public Class dlgPrincipalComponentAnalysis
         clsRScreePlot.SetOperation("+")
         clsRScreePlotFunction.SetPackageName("factoextra")
         clsRScreePlotFunction.SetRCommand("fviz_screeplot")
+        clsRScreePlotFunction.iCallType = 3
         clsRScreePlotFunction.AddParameter("X", clsRFunctionParameter:=clsPCAFunction)
         clsRScreePlotTheme.SetPackageName("ggplot2")
         clsRScreePlotTheme.SetRCommand("theme_minimal")
@@ -150,6 +150,7 @@ Public Class dlgPrincipalComponentAnalysis
         clsRVariablesPlot.SetOperation("+")
         clsRVariablesPlotFunction.SetPackageName("factoextra")
         clsRVariablesPlotFunction.SetRCommand("fviz_pca_var")
+        clsRVariablesPlotFunction.iCallType = 3
         clsRVariablesPlotFunction.AddParameter("X", clsRFunctionParameter:=clsPCAFunction)
         clsRVariablesPlotTheme.SetPackageName("ggplot2")
         clsRVariablesPlotTheme.SetRCommand("theme_minimal")
@@ -160,6 +161,7 @@ Public Class dlgPrincipalComponentAnalysis
         clsRIndividualsPlot.SetOperation("+")
         clsRIndividualsPlotFunction.SetPackageName("factoextra")
         clsRIndividualsPlotFunction.SetRCommand("fviz_pca_ind")
+        clsRIndividualsPlotFunction.iCallType = 3
         clsRIndividualsPlotFunction.AddParameter("X", clsRFunctionParameter:=clsPCAFunction)
         clsRIndividualsPlotTheme.SetPackageName("ggplot2")
         clsRIndividualsPlotTheme.SetRCommand("theme_minimal")
@@ -170,6 +172,7 @@ Public Class dlgPrincipalComponentAnalysis
         clsRBiplot.SetOperation("+")
         clsRBiplotFunction.SetPackageName("factoextra")
         clsRBiplotFunction.SetRCommand("fviz_pca_biplot")
+        clsRBiplotFunction.iCallType = 3
         clsRBiplotFunction.AddParameter("X", clsRFunctionParameter:=clsPCAFunction)
         clsRBiplotTheme.SetPackageName("ggplot2")
         clsRBiplotTheme.SetRCommand("theme_minimal")
@@ -177,6 +180,7 @@ Public Class dlgPrincipalComponentAnalysis
         clsRBiplot.SetOperatorParameter(False, clsRFunc:=clsRBiplotTheme)
 
         ' Barplot
+
         clsRBarPlot0.SetOperation("+")
         clsRBarPlot.SetOperation("+")
         clsRFactor.SetRCommand("cbind")
@@ -186,6 +190,7 @@ Public Class dlgPrincipalComponentAnalysis
         clsRFactor.AddParameter("", clsRFunctionParameter:=clsRMelt)
         clsRBarPlotFunction.SetPackageName("ggplot2")
         clsRBarPlotFunction.SetRCommand("ggplot")
+        clsRBarPlot.iCallType = 3
         clsRBarPlotFunction.AddParameter("data", clsRFunctionParameter:=clsRFactor)
         clsRBarPlotGeom.SetPackageName("ggplot2")
         clsRBarPlotGeom.SetRCommand("geom_bar")
@@ -269,19 +274,7 @@ Public Class dlgPrincipalComponentAnalysis
     End Sub
 
     Private Sub ComponentsMinimum()
-        If ucrReceiverMultiplePCA.IsEmpty Then
-            ucrNudNumberOfComp.Minimum = 0
-            ucrNudNumberOfComp.Value = 0
-        ElseIf ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count = 1 Then
-            ucrNudNumberOfComp.Minimum = 2
-        ElseIf ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count > 1 Then
-            ucrNudNumberOfComp.Minimum = 2
-            If ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count > 5 Then
-                ucrNudNumberOfComp.Value = 5
-            Else
-                ucrNudNumberOfComp.Value = ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count
-            End If
-        End If
+
     End Sub
 
     Private Sub ucrSelectorPCA_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorPCA.ControlValueChanged
@@ -316,18 +309,31 @@ Public Class dlgPrincipalComponentAnalysis
         If ucrSaveResult.ucrChkSave.Checked Then
             clsREigenValues.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
             clsREigenVectors.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
-            'clsRRotationCoord.AddParameter("model_name", Chr(34) & strTempFunction & Chr(34))
+            clsRRotationCoord.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
             clsRRotationEig.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
         Else
             clsREigenValues.AddParameter("model_name", Chr(34) & "last_PCA" & Chr(34))
             clsREigenVectors.AddParameter("model_name", Chr(34) & "last_PCA" & Chr(34))
             clsRRotationEig.AddParameter("model_name", Chr(34) & "last_PCA" & Chr(34))
-            'clsRRotationCoord.AddParameter("model_name", Chr(34) & "last_CCA" & Chr(34))
+            clsRRotationCoord.AddParameter("model_name", Chr(34) & "last_CCA" & Chr(34))
         End If
     End Sub
 
     Private Sub ucrReceiverMultiplePCA_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultiplePCA.ControlValueChanged, ucrNudNumberOfComp.ControlValueChanged
-        ComponentsMinimum()
+        If ucrReceiverMultiplePCA.IsEmpty Then
+            ucrNudNumberOfComp.Minimum = 0
+            ucrNudNumberOfComp.Value = 0
+        ElseIf ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count = 1 Then
+            ucrNudNumberOfComp.Minimum = 2
+        ElseIf ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count > 1 Then
+            ucrNudNumberOfComp.Minimum = 2
+            If ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count > 5 Then
+                ucrNudNumberOfComp.Value = 5
+            Else
+                ucrNudNumberOfComp.Value = ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count
+            End If
+        End If
+        'ComponentsMinimum()
         '        sdgPrincipalComponentAnalysis.Dimensions()
     End Sub
 
