@@ -352,8 +352,8 @@ data_object$set("public", "get_variables_metadata", function(data_type = "all", 
     #rbind.fill safer alternative currently
     out <- plyr::rbind.fill(out)
     out <- as.data.frame(out)
-    if(all(c(name_label, label_label) %in% names(out))) out <- out[c(c(name_label, label_label), setdiff(names(out), c(name_label, label_label)))]
-    else if(name_label %in% names(out)) out <- out[c(name_label, setdiff(names(out), name_label))]
+    if(all(c(name_label, label_label) %in% names(out))) out <- out[c(c(name_label, label_label), sort(setdiff(names(out), c(name_label, label_label))))]
+    else if(name_label %in% names(out)) out <- out[c(name_label, sort(setdiff(names(out), name_label)))]
     #row.names(out) <- self$get_column_names()
     row.names(out) <- cols
     if(data_type != "all") {
@@ -2440,15 +2440,15 @@ all_primary_corruption_country_level_column_types <- c(corruption_country_label,
 )
 
 # Column metadata for corruption colums
-corruption_type_label = "Corruption_Type"
-corruption_output_label = "Is_Corruption_Output"
+corruption_type_label = "Procurement_Type"
+corruption_output_label = "Is_Corruption_Risk_Output"
 corruption_red_flag_label = "Is_Corruption_Red_Flag"
-corruption_index_label = "Is_Corruption_Index"
+corruption_index_label = "Is_CRI_Component"
 
 # Data frame metadata for corruption dataframes
-corruption_data_label = "Is_Corruption_Data"
-corruption_contract_level_label = "Contract Level"
-corruption_country_level_label = "Country Level"
+corruption_data_label = "Is_Procurement_Data"
+corruption_contract_level_label = "Contract_Level"
+corruption_country_level_label = "Country_Level"
 
 
 instat_object$set("public","define_corruption_outputs", function(data_name, output_columns = c()) {
@@ -2484,18 +2484,18 @@ data_object$set("public","define_red_flags", function(red_flags = c()) {
 }
 )
 
-instat_object$set("public","define_as_corruption", function(data_name, primary_types = c(), calculated_types = c(), country_data_name, country_types, auto_generate = TRUE) {
+instat_object$set("public","define_as_procurement", function(data_name, primary_types = c(), calculated_types = c(), country_data_name, country_types, auto_generate = TRUE) {
   self$append_to_dataframe_metadata(data_name, corruption_data_label, corruption_contract_level_label)
-  self$get_data_objects(data_name)$set_corruption_types(primary_types, calculated_types, auto_generate)
+  self$get_data_objects(data_name)$set_procurement_types(primary_types, calculated_types, auto_generate)
   if(!missing(country_data_name)) {
-    self$define_as_corruption_country_level_data(data_name = country_data_name, contract_level_data_name = data_name, types = country_types, auto_generate = auto_generate)
+    self$define_as_procurement_country_level_data(data_name = country_data_name, contract_level_data_name = data_name, types = country_types, auto_generate = auto_generate)
   }
 }
 )
 
-instat_object$set("public","define_as_corruption_country_level_data", function(data_name, contract_level_data_name, types = c(), auto_generate = TRUE) {
+instat_object$set("public","define_as_procurement_country_level_data", function(data_name, contract_level_data_name, types = c(), auto_generate = TRUE) {
   self$append_to_dataframe_metadata(data_name, corruption_data_label, corruption_country_level_label)
-  self$get_data_objects(data_name)$define_as_corruption_country_level_data(types, auto_generate)
+  self$get_data_objects(data_name)$define_as_procurement_country_level_data(types, auto_generate)
   contract_level_country_name <- self$get_corruption_column_name(contract_level_data_name, corruption_country_label)
   country_level_country_name <- self$get_corruption_column_name(data_name, corruption_country_label)
   if(contract_level_country_name == "" || country_level_country_name == "") stop("country column must be defined in the contract level data and country level data.")
@@ -2505,7 +2505,7 @@ instat_object$set("public","define_as_corruption_country_level_data", function(d
 }
 )
 
-data_object$set("public","define_as_corruption_country_level_data", function(types = c(), auto_generate = TRUE) {
+data_object$set("public","define_as_procurement_country_level_data", function(types = c(), auto_generate = TRUE) {
   invisible(sapply(names(types), function(x) self$append_to_variables_metadata(types[[x]], corruption_type_label, x)))
 }
 )
@@ -2544,7 +2544,7 @@ data_object$set("public","get_corruption_column_name", function(type) {
 }
 )
 
-data_object$set("public","set_corruption_types", function(primary_types = c(), calculated_types = c(), auto_generate = TRUE) {
+data_object$set("public","set_procurement_types", function(primary_types = c(), calculated_types = c(), auto_generate = TRUE) {
   if(!all(names(primary_types) %in% all_primary_corruption_column_types)) stop("Cannot recognise the following primary corruption data types: ", paste(names(primary_types)[!names(primary_types) %in% all_primary_corruption_column_types], collapse = ", "))
   if(!all(names(calculated_types) %in% all_calculated_corruption_column_types)) stop("Cannot recognise the following calculated corruption data types: ", paste(names(calculated_types)[!names(calculated_types) %in% all_calculated_corruption_column_types], collapse = ", "))
   if(!all(c(primary_types, calculated_types) %in% self$get_column_names())) stop("The following columns do not exist in the data:", paste(c(primary_types, calculated_types)[!(c(primary_types, calculated_types) %in% self$get_column_names())], collapse = ", "))
