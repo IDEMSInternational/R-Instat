@@ -20,6 +20,9 @@ Public Class dlgTwoWayFrequencies
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
     Private clsSjTab, clsSjPlot As New RFunction
+    Public strDefaultDataFrame As String = ""
+    Public strDefaultColumnVariable As String = ""
+    Public strDefaultRowVariable As String = ""
 
     Private Sub dlgTwoWayFrequencies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -31,6 +34,7 @@ Public Class dlgTwoWayFrequencies
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetDefaultVariables()
         bReset = False
         'temp needed because of show/hiding bug
         ChangeLocation()
@@ -202,6 +206,21 @@ Public Class dlgTwoWayFrequencies
         ucrChkCount.SetRCode(clsSjTab, bReset)
         ucrSaveGraph.SetRCode(clsSjPlot, bReset)
 
+    End Sub
+
+    Private Sub SetDefaultVariables()
+        If strDefaultDataFrame <> "" Then
+            ucrSelectorTwoWayFrequencies.SetDataframe(strDefaultDataFrame)
+        End If
+        If strDefaultColumnVariable <> "" Then
+            ucrReceiverColumnFactor.Add(strDefaultColumnVariable, strDefaultDataFrame)
+        End If
+        If strDefaultRowVariable <> "" Then
+            ucrReceiverRowFactor.Add(strDefaultRowVariable, strDefaultDataFrame)
+        End If
+        strDefaultDataFrame = ""
+        strDefaultRowVariable = ""
+        strDefaultColumnVariable = ""
     End Sub
 
     Private Sub TestOkEnabled()

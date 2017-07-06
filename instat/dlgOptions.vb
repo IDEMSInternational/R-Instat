@@ -48,9 +48,9 @@ Public Class dlgOptions
         'ucrBase.iHelpTopicID = 336
         Dim strPreviewText As String
         ucrNudMaxRows.Maximum = Integer.MaxValue
-        ucrNudMaxCols.Maximum = Integer.MaxValue
         ucrNudMaxRows.Increment = 10
-        ucrNudMaxCols.Increment = 5
+        ucrNudMaxCols.Maximum = Integer.MaxValue
+        ucrNudMaxCols.Increment = 1
         ucrNudMinutes.Maximum = Integer.MaxValue
         ucrNudMinutes.Increment = 1
         ucrNudMinutes.Minimum = 1
@@ -210,6 +210,11 @@ Public Class dlgOptions
     End Sub
 
     Private Sub cmdApply_Click(sender As Object, e As EventArgs) Handles cmdApply.Click
+        Cursor = Cursors.WaitCursor
+        cmdApply.Enabled = False
+        cmdOk.Enabled = False
+        cmdCancel.Enabled = False
+        cmdHelp.Enabled = False
         SetInstatOptions()
         autoTranslate(Me)
 
@@ -241,7 +246,12 @@ Public Class dlgOptions
             autoTranslate(frmVariables)
         End If
         'disables the command after running it
+        cmdApply.Enabled = True
+        cmdOk.Enabled = True
+        cmdCancel.Enabled = True
+        cmdHelp.Enabled = True
         ApplyEnabled(False)
+        Cursor = Cursors.Default
     End Sub
 
     Private Sub ucrPnlLanguage_ControlValueChanged() Handles ucrPnlLanguage.ControlValueChanged
