@@ -61,6 +61,8 @@ Public Class frmMain
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        SetMainMenusEnabled(False)
+        Cursor = Cursors.WaitCursor
         'temporary
         mnuHelpAboutRInstat.Visible = False
 
@@ -91,6 +93,22 @@ Public Class frmMain
         clsRecentItems.setToolStripItems(mnuFile, mnuTbShowLast10, sepStart, sepEnd)
         'checks existence of MRU list
         clsRecentItems.checkOnLoad()
+        Cursor = Cursors.Default
+        SetMainMenusEnabled(True)
+    End Sub
+
+    Private Sub SetMainMenusEnabled(bEnabled As Boolean)
+        mnuFile.Enabled = bEnabled
+        mnuEdit.Enabled = bEnabled
+        mnuPrepare.Enabled = bEnabled
+        mnuDescribe.Enabled = bEnabled
+        mnuModel.Enabled = bEnabled
+        mnuClimatic.Enabled = bEnabled
+        mnuProcurement.Enabled = bEnabled
+        mnuTools.Enabled = bEnabled
+        mnuView.Enabled = bEnabled
+        mnuHelp.Enabled = bEnabled
+        Tool_strip.Enabled = bEnabled
     End Sub
 
     Private Sub Application_Idle(sender As Object, e As EventArgs)
@@ -871,8 +889,12 @@ Public Class frmMain
         Dim clsSaveRDS As New RFunction
         Dim strTempFile As String
         Dim i As Integer = 0
+        Dim strCurrentStatus As String
 
+        strCurrentStatus = tstatus.Text
         If clsRLink.bInstatObjectExists Then
+            tstatus.Text = "Auto saving data..."
+            Cursor = Cursors.WaitCursor
             If Not Directory.Exists(strAutoSaveDataFolderPath) Then
                 Directory.CreateDirectory(strAutoSaveDataFolderPath)
             End If
@@ -887,7 +909,9 @@ Public Class frmMain
             clsSaveRDS.SetRCommand("saveRDS")
             clsSaveRDS.AddParameter("object", clsRLink.strInstatDataObject)
             clsSaveRDS.AddParameter("file", Chr(34) & strCurrentAutoSaveDataFilePath.Replace("\", "/") & Chr(34))
-            clsRLink.RunInternalScript(clsSaveRDS.ToScript())
+            clsRLink.RunInternalScript(clsSaveRDS.ToScript(), bSilent:=True, bShowWaitDialogOverride:=False)
+            tstatus.Text = strCurrentStatus
+            Cursor = Cursors.Default
         End If
     End Sub
 
@@ -1422,20 +1446,6 @@ Public Class frmMain
         dlgUseDate.ShowDialog()
     End Sub
 
-    Private Sub UseSignatureDateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UseSignatureDateToolStripMenuItem.Click
-        Dim lstDataNames As List(Of String)
-
-        lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
-        If lstDataNames.Count > 0 Then
-            dlgUseDate.strDefaultDataFrame = lstDataNames(0)
-            dlgUseDate.strDefaultColumn = clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_signature_date_label")
-        Else
-            dlgUseDate.strDefaultDataFrame = ""
-            dlgUseDate.strDefaultColumn = ""
-        End If
-        dlgUseDate.ShowDialog()
-    End Sub
-
     Private Sub mnuDescribeOneVariableFrequencies_Click(sender As Object, e As EventArgs) Handles mnuDescribeOneVariableFrequencies.Click
         dlgOneWayFrequencies.ShowDialog()
     End Sub
@@ -1588,5 +1598,41 @@ Public Class frmMain
             dlgColumnStats.strDefaultFactors = Nothing
         End If
         dlgColumnStats.ShowDialog()
+    End Sub
+
+    Private Sub mnuProcurementDescribeOneVar_Click(sender As Object, e As EventArgs) Handles mnuProcurementDescribeOneVar.Click
+        Dim lstDataNames As List(Of String)
+        Dim lstColumns As New List(Of String)
+
+        lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
+        If lstDataNames.Count > 0 Then
+            dlgOneWayFrequencies.strDefaultDataFrame = lstDataNames(0)
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_country_label"))
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_single_bidder_label"))
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_all_bids_label"))
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_procurement_type_3_label"))
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_tax_haven_label"))
+            lstColumns.Add(clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_contract_sector_label"))
+            lstColumns.RemoveAll(Function(x) x = "")
+            dlgOneWayFrequencies.strDefaultColumns = lstColumns.ToArray()
+        Else
+            dlgOneWayFrequencies.strDefaultDataFrame = ""
+            dlgOneWayFrequencies.strDefaultColumns = Nothing
+        End If
+        dlgOneWayFrequencies.ShowDialog()
+    End Sub
+
+    Private Sub mnuProcurementDescribeTwoVar_Click(sender As Object, e As EventArgs) Handles mnuProcurementDescribeTwoVar.Click
+        Dim lstDataNames As List(Of String)
+
+        lstDataNames = clsRLink.GetCorruptionContractDataFrameNames()
+        If lstDataNames.Count > 0 Then
+            dlgTwoWayFrequencies.strDefaultDataFrame = lstDataNames(0)
+            dlgTwoWayFrequencies.strDefaultColumnVariable = clsRLink.GetCorruptionColumnOfType(lstDataNames(0), "corruption_contract_sector_label")
+        Else
+            dlgTwoWayFrequencies.strDefaultDataFrame = ""
+            dlgTwoWayFrequencies.strDefaultColumnVariable = Nothing
+        End If
+        dlgTwoWayFrequencies.ShowDialog()
     End Sub
 End Class
