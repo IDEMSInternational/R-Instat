@@ -43,13 +43,13 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.ucrChkEigenvectors = New instat.ucrCheck()
         Me.ucrChkEigenvalues = New instat.ucrCheck()
         Me.tbGraphics = New System.Windows.Forms.TabPage()
+        Me.rdoPoint = New System.Windows.Forms.RadioButton()
         Me.rdoNoPlot = New System.Windows.Forms.RadioButton()
+        Me.rdoTextIndividual = New System.Windows.Forms.RadioButton()
+        Me.rdoBothIndividual = New System.Windows.Forms.RadioButton()
         Me.rdoBarPlot = New System.Windows.Forms.RadioButton()
         Me.rdoIndividualsPlot = New System.Windows.Forms.RadioButton()
         Me.grpScree = New System.Windows.Forms.GroupBox()
-        Me.rdoPoint = New System.Windows.Forms.RadioButton()
-        Me.rdoTextIndividual = New System.Windows.Forms.RadioButton()
-        Me.rdoBothIndividual = New System.Windows.Forms.RadioButton()
         Me.ucrSelectorFactor = New instat.ucrSelectorByDataFrameAddRemove()
         Me.rdoArrow = New System.Windows.Forms.RadioButton()
         Me.rdoTextVariable = New System.Windows.Forms.RadioButton()
@@ -71,11 +71,11 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.ucrInputLabel2 = New instat.ucrInputComboBox()
         Me.ucrInputLabel1 = New instat.ucrInputComboBox()
         Me.ucrPnlVariablesPlot = New instat.UcrPanel()
-        Me.ucrPnlIndividualPlot = New instat.UcrPanel()
         Me.rdoBiplot = New System.Windows.Forms.RadioButton()
         Me.rdoVariablesPlot = New System.Windows.Forms.RadioButton()
         Me.rdoScreePlot = New System.Windows.Forms.RadioButton()
         Me.ucrPnlGraphics = New instat.UcrPanel()
+        Me.ucrPnlIndividualPlot = New instat.UcrPanel()
         Me.tbSave = New System.Windows.Forms.TabPage()
         Me.ucrSdgButtons = New instat.ucrButtonsSubdialogue()
         Me.tbRegOptions.SuspendLayout()
@@ -136,10 +136,7 @@ Partial Class sdgPrincipalComponentAnalysis
         '
         'tbGraphics
         '
-        Me.tbGraphics.Controls.Add(Me.rdoPoint)
         Me.tbGraphics.Controls.Add(Me.rdoNoPlot)
-        Me.tbGraphics.Controls.Add(Me.rdoTextIndividual)
-        Me.tbGraphics.Controls.Add(Me.rdoBothIndividual)
         Me.tbGraphics.Controls.Add(Me.rdoBarPlot)
         Me.tbGraphics.Controls.Add(Me.rdoIndividualsPlot)
         Me.tbGraphics.Controls.Add(Me.grpScree)
@@ -147,7 +144,6 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbGraphics.Controls.Add(Me.rdoVariablesPlot)
         Me.tbGraphics.Controls.Add(Me.rdoScreePlot)
         Me.tbGraphics.Controls.Add(Me.ucrPnlGraphics)
-        Me.tbGraphics.Controls.Add(Me.ucrPnlIndividualPlot)
         Me.tbGraphics.Location = New System.Drawing.Point(4, 22)
         Me.tbGraphics.Name = "tbGraphics"
         Me.tbGraphics.Padding = New System.Windows.Forms.Padding(3)
@@ -156,6 +152,17 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbGraphics.Tag = "Graphics"
         Me.tbGraphics.Text = "Graphics"
         Me.tbGraphics.UseVisualStyleBackColor = True
+        '
+        'rdoPoint
+        '
+        Me.rdoPoint.AutoSize = True
+        Me.rdoPoint.Location = New System.Drawing.Point(228, 146)
+        Me.rdoPoint.Name = "rdoPoint"
+        Me.rdoPoint.Size = New System.Drawing.Size(49, 17)
+        Me.rdoPoint.TabIndex = 40
+        Me.rdoPoint.TabStop = True
+        Me.rdoPoint.Text = "Point"
+        Me.rdoPoint.UseVisualStyleBackColor = True
         '
         'rdoNoPlot
         '
@@ -167,6 +174,28 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.rdoNoPlot.Tag = "Scree_Plot"
         Me.rdoNoPlot.Text = "No Plot"
         Me.rdoNoPlot.UseVisualStyleBackColor = True
+        '
+        'rdoTextIndividual
+        '
+        Me.rdoTextIndividual.AutoSize = True
+        Me.rdoTextIndividual.Location = New System.Drawing.Point(284, 146)
+        Me.rdoTextIndividual.Name = "rdoTextIndividual"
+        Me.rdoTextIndividual.Size = New System.Drawing.Size(46, 17)
+        Me.rdoTextIndividual.TabIndex = 41
+        Me.rdoTextIndividual.TabStop = True
+        Me.rdoTextIndividual.Text = "Text"
+        Me.rdoTextIndividual.UseVisualStyleBackColor = True
+        '
+        'rdoBothIndividual
+        '
+        Me.rdoBothIndividual.AutoSize = True
+        Me.rdoBothIndividual.Location = New System.Drawing.Point(339, 146)
+        Me.rdoBothIndividual.Name = "rdoBothIndividual"
+        Me.rdoBothIndividual.Size = New System.Drawing.Size(47, 17)
+        Me.rdoBothIndividual.TabIndex = 42
+        Me.rdoBothIndividual.TabStop = True
+        Me.rdoBothIndividual.Text = "Both"
+        Me.rdoBothIndividual.UseVisualStyleBackColor = True
         '
         'rdoBarPlot
         '
@@ -192,9 +221,12 @@ Partial Class sdgPrincipalComponentAnalysis
         '
         'grpScree
         '
+        Me.grpScree.Controls.Add(Me.rdoPoint)
         Me.grpScree.Controls.Add(Me.ucrSelectorFactor)
         Me.grpScree.Controls.Add(Me.rdoArrow)
+        Me.grpScree.Controls.Add(Me.rdoTextIndividual)
         Me.grpScree.Controls.Add(Me.rdoTextVariable)
+        Me.grpScree.Controls.Add(Me.rdoBothIndividual)
         Me.grpScree.Controls.Add(Me.rdoBothVariables)
         Me.grpScree.Controls.Add(Me.lblLabel)
         Me.grpScree.Controls.Add(Me.lblChoice)
@@ -203,6 +235,7 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.grpScree.Controls.Add(Me.ucrNudDim)
         Me.grpScree.Controls.Add(Me.ucrReceiverFactor)
         Me.grpScree.Controls.Add(Me.lblFactorVariable)
+        Me.grpScree.Controls.Add(Me.ucrPnlIndividualPlot)
         Me.grpScree.Controls.Add(Me.lblChoiceScree)
         Me.grpScree.Controls.Add(Me.grpGeom)
         Me.grpScree.Controls.Add(Me.lblDim)
@@ -215,39 +248,6 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.grpScree.TabIndex = 34
         Me.grpScree.TabStop = False
         Me.grpScree.Text = "Plot Options"
-        '
-        'rdoPoint
-        '
-        Me.rdoPoint.AutoSize = True
-        Me.rdoPoint.Location = New System.Drawing.Point(184, 63)
-        Me.rdoPoint.Name = "rdoPoint"
-        Me.rdoPoint.Size = New System.Drawing.Size(49, 17)
-        Me.rdoPoint.TabIndex = 40
-        Me.rdoPoint.TabStop = True
-        Me.rdoPoint.Text = "Point"
-        Me.rdoPoint.UseVisualStyleBackColor = True
-        '
-        'rdoTextIndividual
-        '
-        Me.rdoTextIndividual.AutoSize = True
-        Me.rdoTextIndividual.Location = New System.Drawing.Point(240, 63)
-        Me.rdoTextIndividual.Name = "rdoTextIndividual"
-        Me.rdoTextIndividual.Size = New System.Drawing.Size(46, 17)
-        Me.rdoTextIndividual.TabIndex = 41
-        Me.rdoTextIndividual.TabStop = True
-        Me.rdoTextIndividual.Text = "Text"
-        Me.rdoTextIndividual.UseVisualStyleBackColor = True
-        '
-        'rdoBothIndividual
-        '
-        Me.rdoBothIndividual.AutoSize = True
-        Me.rdoBothIndividual.Location = New System.Drawing.Point(295, 63)
-        Me.rdoBothIndividual.Name = "rdoBothIndividual"
-        Me.rdoBothIndividual.Size = New System.Drawing.Size(47, 17)
-        Me.rdoBothIndividual.TabIndex = 42
-        Me.rdoBothIndividual.TabStop = True
-        Me.rdoBothIndividual.Text = "Both"
-        Me.rdoBothIndividual.UseVisualStyleBackColor = True
         '
         'ucrSelectorFactor
         '
@@ -461,13 +461,6 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.ucrPnlVariablesPlot.Size = New System.Drawing.Size(184, 55)
         Me.ucrPnlVariablesPlot.TabIndex = 4
         '
-        'ucrPnlIndividualPlot
-        '
-        Me.ucrPnlIndividualPlot.Location = New System.Drawing.Point(170, 37)
-        Me.ucrPnlIndividualPlot.Name = "ucrPnlIndividualPlot"
-        Me.ucrPnlIndividualPlot.Size = New System.Drawing.Size(187, 66)
-        Me.ucrPnlIndividualPlot.TabIndex = 43
-        '
         'rdoBiplot
         '
         Me.rdoBiplot.AutoSize = True
@@ -507,6 +500,13 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.ucrPnlGraphics.Name = "ucrPnlGraphics"
         Me.ucrPnlGraphics.Size = New System.Drawing.Size(207, 144)
         Me.ucrPnlGraphics.TabIndex = 4
+        '
+        'ucrPnlIndividualPlot
+        '
+        Me.ucrPnlIndividualPlot.Location = New System.Drawing.Point(214, 120)
+        Me.ucrPnlIndividualPlot.Name = "ucrPnlIndividualPlot"
+        Me.ucrPnlIndividualPlot.Size = New System.Drawing.Size(187, 66)
+        Me.ucrPnlIndividualPlot.TabIndex = 43
         '
         'tbSave
         '
