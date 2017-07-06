@@ -149,7 +149,7 @@ Public Class clsRecentFiles
                 ' hook into the click event handler so we can open the file later...
                 AddHandler clsItem.Click, AddressOf mnuFileMRU_Click
                 ' insert into DropDownItems list...
-                mnuFile.DropDownItems.Insert(mnuFile.DropDownItems.Count - 2, clsItem)
+                mnuFile.DropDownItems.Insert(mnuFile.DropDownItems.Count - 1, clsItem)
             Next
 
             ' show separator
