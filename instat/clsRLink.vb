@@ -1136,4 +1136,21 @@ Public Class RLink
         End If
         iWaitDelay = iTimeInSeconds
     End Sub
+
+    Public Sub CloseData()
+        Dim clsRm As New RFunction
+        Dim clsCreateIO As New ROperator
+
+        clsRm.SetRCommand("rm")
+        clsRm.AddParameter("x", strInstatDataObject)
+
+        clsCreateIO.SetOperation("<-")
+        clsCreateIO.AddParameter("left", strInstatDataObject, iPosition:=0)
+        clsCreateIO.AddParameter("right", "instat_object$new()", iPosition:=1)
+
+        bInstatObjectExists = False
+        RunScript(clsRm.ToScript(), strComment:="Closing data")
+        bInstatObjectExists = True
+        RunScript(clsCreateIO.ToScript(), strComment:="Creating New Instat Object")
+    End Sub
 End Class
