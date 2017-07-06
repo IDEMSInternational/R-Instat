@@ -314,10 +314,10 @@ Public Class dlgPrincipalComponentAnalysis
     Private Sub ucrSaveResult_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlValueChanged
         strModelName = ucrSaveResult.GetText
         If ucrSaveResult.ucrChkSave.Checked Then
-            clsREigenValues.AddParameter("model_name", Chr(34) & strTempFunction & Chr(34))
-            clsREigenVectors.AddParameter("model_name", Chr(34) & strTempFunction & Chr(34))
+            clsREigenValues.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
+            clsREigenVectors.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
             'clsRRotationCoord.AddParameter("model_name", Chr(34) & strTempFunction & Chr(34))
-            clsRRotationEig.AddParameter("model_name", Chr(34) & strTempFunction & Chr(34))
+            clsRRotationEig.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
         Else
             clsREigenValues.AddParameter("model_name", Chr(34) & "last_PCA" & Chr(34))
             clsREigenVectors.AddParameter("model_name", Chr(34) & "last_PCA" & Chr(34))
