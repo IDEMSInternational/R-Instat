@@ -91,6 +91,8 @@ Public Class dlgFitModel
 
     Private Sub SetDefaults()
         clsFormulaOperator = New ROperator
+
+        ucrBase.clsRsyntax.ClearCodes()
         clsRCIFunction = New RFunction
         clsRConvert = New RFunction
         clsSummaryFunction = New RFunction
@@ -114,6 +116,8 @@ Public Class dlgFitModel
         ucrReceiverExpressionFitModel.Selector = ucrSelectorByDataFrameAddRemoveForFitModel
         ucrReceiverResponseVar.Selector = ucrSelectorByDataFrameAddRemoveForFitModel
         ucrReceiverResponseVar.SetMeAsReceiver()
+        ucrInputModelPreview.SetName("")
+
 
         ucrInputModelPreview.IsReadOnly = True
 
@@ -167,17 +171,15 @@ Public Class dlgFitModel
 
     Private Sub TestOKEnabled()
         If (Not ucrReceiverResponseVar.IsEmpty()) AndAlso (Not ucrReceiverExpressionFitModel.IsEmpty()) Then
-            'ucrBase.clsRsyntax.AddParameter("formula", clsROperatorParameter:=clsModel)
             ucrBase.OKEnabled(True)
-            'ucrInputModelPreview.SetName(clsModel.ToScript)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
-    Private Sub ucrReceiverExpressionFitModel_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverExpressionFitModel.SelectionChanged
-        clsLM.AddParameter(strParameterValue:=ucrReceiverExpressionFitModel.GetVariableNames(False))
-        TestOKEnabled()
-    End Sub
+    'Private Sub ucrReceiverExpressionFitModel_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverExpressionFitModel.SelectionChanged
+    '    clsLM.AddParameter(strParameterValue:=ucrReceiverExpressionFitModel.GetVariableNames(False))
+    '    TestOKEnabled()
+    'End Sub
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
@@ -329,11 +331,15 @@ Public Class dlgFitModel
 
     Private Sub ucrReceiverExpressionFitModel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpressionFitModel.ControlValueChanged, ucrReceiverResponseVar.ControlValueChanged
         ResponseConvert()
-        UpdatePreview()
     End Sub
 
     Private Sub ucrConvertToVariate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrConvertToVariate.ControlValueChanged
         ResponseConvert()
+        TestOKEnabled()
+    End Sub
+
+    Private Sub ucrReceiverExpressionFitModel_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpressionFitModel.ControlContentsChanged, ucrReceiverResponseVar.ControlContentsChanged
+        UpdatePreview()
         TestOKEnabled()
     End Sub
 End Class
