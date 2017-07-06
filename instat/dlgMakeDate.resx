@@ -126,7 +126,7 @@ Day of the year
 %j- Decimal day of the year	
 
 Month Options
-%m- Month (decimal number)
+%m- Month (Number 1-12)
 %b- Abbreviated month	
 %B- Full month
 

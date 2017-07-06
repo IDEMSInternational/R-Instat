@@ -363,9 +363,13 @@ Public Class dlgMakeDate
         If rdoSingleColumn.Checked Then
             ucrReceiverForDate.SetMeAsReceiver()
         ElseIf rdoTwoColumns.Checked
+            grpFormats.Hide()
+            cmdHelp.Visible = False
             ucrReceiverYearTwo.SetMeAsReceiver()
         Else
             ucrReceiverYearThree.SetMeAsReceiver()
+            grpFormats.Hide()
+            cmdHelp.Visible = False
         End If
     End Sub
 
@@ -396,6 +400,7 @@ Public Class dlgMakeDate
         Else
             ucrReceiverForDate.SetIncludedDataTypes({"numeric", "character", "factor", "integer"})
             grpFormats.Show()
+            cmdHelp.Visible = True
         End If
         SelectorHeader()
     End Sub

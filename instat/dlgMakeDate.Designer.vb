@@ -356,7 +356,7 @@ Partial Class dlgMakeDate
         Me.grpFormats.Size = New System.Drawing.Size(252, 174)
         Me.grpFormats.TabIndex = 64
         Me.grpFormats.TabStop = False
-        Me.grpFormats.Text = "Specify Format Description"
+        Me.grpFormats.Text = "Format Description"
         '
         'txtTextDateFormats
         '
