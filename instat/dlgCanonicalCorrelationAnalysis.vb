@@ -39,8 +39,6 @@ Public Class dlgCanonicalCorrelationAnalysis
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.iHelpTopicID = 423
 
-        ' note: canne have the same variables in both receivers.
-        ' Y Variable Selector
         ucrSelectorCCA.SetParameter(New RParameter("data", 0))
         ucrSelectorCCA.SetParameterIsrfunction()
 
@@ -97,33 +95,16 @@ Public Class dlgCanonicalCorrelationAnalysis
         clsRYCoefFunction.AddParameter("data_name", Chr(34) & strTempFunc & Chr(34))
         clsRXCoefFunction.AddParameter("data_name", Chr(34) & strTempFunc & Chr(34))
         clsRCanCorFunction.AddParameter("data_name", Chr(34) & strTempFunc & Chr(34))
-        ' clsRCanCorFunction.AddParameter("data_name", Chr(34) & ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-        clsRCanCorFunction.AddParameter("value1", Chr(34) & "cancor" & Chr(34))
         clsRCanCorFunction.AddParameter("value1", Chr(34) & "cor" & Chr(34))
         clsRXCoefFunction.AddParameter("value1", Chr(34) & "xcoef" & Chr(34))
         clsRYCoefFunction.AddParameter("value1", Chr(34) & "ycoef" & Chr(34))
-        ' Set default RFunction as the base function
+
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
         bResetSubdialog = True
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
-        Dim clsTempParamColumn As RParameter
-        '  Dim clsTempDataName As RParameter
-
-        clsTempParamColumn = New RParameter("columns", 3)
-        ' clsTempDataName = New RParameter("data_name", 0)
-
-        ' SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrReceiverXVariables.AddAdditionalCodeParameterPair(clsRGraphicsFunction, clsTempParamColumn, iAdditionalPairNo:=1)
-        clsTempParamColumn.bIncludeArgumentName = False
-        ucrReceiverYVariables.AddAdditionalCodeParameterPair(clsRGraphicsFunction, clsTempParamColumn, iAdditionalPairNo:=1)
-        clsTempParamColumn.bIncludeArgumentName = False
-
-        ' ucrSelectorCCA.AddAdditionalCodeParameterPair(clsRXCoefFunction, New RParameter("data_name", 0), iAdditionalPairNo:=1)
-        'ucrSelectorCCA.AddAdditionalCodeParameterPair(clsRYCoefFunction, New RParameter("data_name", 0), iAdditionalPairNo:=2)
-        ' ucrSelectorCCA.AddAdditionalCodeParameterPair(clsRCanCorFunction, New RParameter("data_name", 0), iAdditionalPairNo:=3)
         ucrSelectorCCA.SetRCode(clsRGraphicsFunction, bReset)
         ucrSaveResult.SetRCode(clsDefaultFunction, bReset)
         ucrReceiverXVariables.SetRCode(clsDefaultFunction, bReset)
