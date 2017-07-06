@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,8 +11,9 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat
 Imports instat.Translations
 Public Class dlgClimdex
@@ -38,28 +39,81 @@ Public Class dlgClimdex
         TestOkEnabled()
     End Sub
 
+    Private Sub InitialiseDialog()
+        ucrBaseClimdex.iHelpTopicID = 190
+        ucrBaseClimdex.clsRsyntax.iCallType = 0
+
+        ucrSelectorClimdex.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorClimdex.SetParameterIsString()
+
+        ucrReceiverDate.SetParameter(New RParameter("col_name"))
+        ucrReceiverDate.Selector = ucrSelectorClimdex
+        ucrReceiverDate.SetClimaticType("date")
+        'ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {"date"})
+        ucrReceiverDate.bAutoFill = True
+        ucrReceiverDate.SetParameterIsString()
+        ucrReceiverDate.strSelectorHeading = "Date"
+
+        ucrReceiverTmax.SetParameter(New RParameter("col_name"))
+        ucrReceiverTmax.Selector = ucrSelectorClimdex
+        ucrReceiverTmax.SetClimaticType("temp_max")
+        ucrReceiverTmax.bAutoFill = True
+        ucrReceiverTmax.SetParameterIsString()
+        ucrReceiverTmax.strSelectorHeading = "Numerics"
+
+        ucrReceiverTmin.SetParameter(New RParameter("col_name"))
+        ucrReceiverTmin.Selector = ucrSelectorClimdex
+        ucrReceiverTmin.SetClimaticType("temp_min")
+        ucrReceiverTmin.bAutoFill = True
+        ucrReceiverTmin.SetParameterIsString()
+        ucrReceiverTmin.strSelectorHeading = "Numerics"
+
+
+        ucrReceiverPrec.SetParameter(New RParameter("col_name"))
+        ucrReceiverPrec.Selector = ucrSelectorClimdex
+        ucrReceiverPrec.SetClimaticType("rain")
+        ucrReceiverPrec.bAutoFill = True
+        ucrReceiverPrec.SetParameterIsString()
+        ucrReceiverPrec.strSelectorHeading = "Numerics"
+
+        ucrChkSave.SetText("Save Indices")
+        ucrChkSave.bChangeParameterValue = False
+    End Sub
+
     Private Sub SetDefaults()
+        clsDefaultFunction = New RFunction
+        clsRTmax = New RFunction
+        clsRTmin = New RFunction
+        clsRPrec = New RFunction
+        clsRDate = New RFunction
+        clsRPCIct = New RFunction
+        clsRChar = New RFunction
+
         ucrSelectorClimdex.Reset()
         ucrSelectorClimdex.Focus()
         ucrReceiverDate.SetMeAsReceiver()
         ucrChkSave.Checked = True
 
         'Define the default RFunction
+        clsDefaultFunction.SetPackageName("climdex.pcic")
         clsDefaultFunction.SetRCommand("climdexInput.raw")
+        clsDefaultFunction.SetAssignTo("climdex_input")
+
         clsRTmax.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
         clsRTmin.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
         clsRPrec.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
         clsRDate.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+
+        clsRPCIct.SetPackageName("PCICt")
         clsRPCIct.SetRCommand("as.PCICt")
-        clsRChar.SetRCommand("as.character")
         clsRPCIct.AddParameter("cal", Chr(34) & "gregorian" & Chr(34))
 
+        clsRChar.SetRCommand("as.character")
         clsRChar.AddParameter("x", clsRFunctionParameter:=clsRDate)
         clsRPCIct.AddParameter("x", clsRFunctionParameter:=clsRChar)
-        clsDefaultFunction.SetAssignTo("climdex_input")
 
         ' Set default RFunction as the base function
-        ucrBaseClimdex.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        ucrBaseClimdex.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
         'add rfunction as parameters of the main function here
         ucrBaseClimdex.clsRsyntax.AddParameter("tmax", clsRFunctionParameter:=clsRTmax)
         ucrBaseClimdex.clsRsyntax.AddParameter("tmax.dates", clsRFunctionParameter:=clsRPCIct)
@@ -72,40 +126,16 @@ Public Class dlgClimdex
         bResetSubdialog = True
     End Sub
 
-    Private Sub InitialiseDialog()
-        ucrBaseClimdex.iHelpTopicID = 190
-        ucrBaseClimdex.clsRsyntax.iCallType = 0
-
-        ucrSelectorClimdex.SetParameter(New RParameter("data_name", 0))
-        ucrSelectorClimdex.SetParameterIsString()
-
-        ucrReceiverDate.Selector = ucrSelectorClimdex
-        ucrReceiverDate.SetClimaticType("date")
-        'ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {"date"})
-        ucrReceiverDate.bAutoFill = True
-        ucrReceiverDate.SetParameter(New RParameter("col_name"))
-        ucrReceiverDate.SetParameterIsString()
-
-        ucrReceiverTmax.Selector = ucrSelectorClimdex
-        ucrReceiverTmax.SetClimaticType("temp_max")
-        ucrReceiverTmax.bAutoFill = True
-        ucrReceiverTmax.SetParameter(New RParameter("col_name"))
-        ucrReceiverTmax.SetParameterIsString()
-
-        ucrReceiverTmin.Selector = ucrSelectorClimdex
-        ucrReceiverTmin.SetClimaticType("temp_min")
-        ucrReceiverTmin.bAutoFill = True
-        ucrReceiverTmin.SetParameter(New RParameter("col_name"))
-        ucrReceiverTmin.SetParameterIsString()
-
-        ucrReceiverPrec.Selector = ucrSelectorClimdex
-        ucrReceiverPrec.SetClimaticType("rain")
-        ucrReceiverPrec.bAutoFill = True
-        ucrReceiverPrec.SetParameter(New RParameter("col_name"))
-        ucrReceiverPrec.SetParameterIsString()
-
-        ucrChkSave.SetText("Save indices")
-        ucrChkSave.bChangeParameterValue = False
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrSelectorClimdex.SetRCode(clsRDate, bReset)
+        ucrSelectorClimdex.SetRCode(clsRTmax, bReset)
+        ucrSelectorClimdex.SetRCode(clsRTmin, bReset)
+        ucrSelectorClimdex.SetRCode(clsRPrec, bReset)
+        ucrSelectorClimdex.SetRCode(sdgClimdexIndices.clsRWriteDf, bReset)
+        ucrReceiverDate.SetRCode(clsRDate, bReset)
+        ucrReceiverTmax.SetRCode(clsRTmax, bReset)
+        ucrReceiverTmin.SetRCode(clsRTmin, bReset)
+        ucrReceiverPrec.SetRCode(clsRPrec, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -121,22 +151,20 @@ Public Class dlgClimdex
 
     End Sub
 
-    Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrSelectorClimdex.SetRCode(clsRDate, bReset)
-        ucrSelectorClimdex.SetRCode(clsRTmax, bReset)
-        ucrSelectorClimdex.SetRCode(clsRTmin, bReset)
-        ucrSelectorClimdex.SetRCode(clsRPrec, bReset)
-        ucrSelectorClimdex.SetRCode(sdgClimdexIndices.clsRWriteDf, bReset)
-        ucrReceiverDate.SetRCode(clsRDate, bReset)
-        ucrReceiverTmax.SetRCode(clsRTmax, bReset)
-        ucrReceiverTmin.SetRCode(clsRTmin, bReset)
-        ucrReceiverPrec.SetRCode(clsRPrec, bReset)
-    End Sub
-
     Private Sub ucrBaseClimdex_ClickReset(sender As Object, e As EventArgs) Handles ucrBaseClimdex.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
+    End Sub
+
+    Private Sub cmdIndices_Click(sender As Object, e As EventArgs) Handles cmdIndices.Click
+        sdgClimdexIndices.SetRFunction(ucrBaseClimdex.clsRsyntax.clsBaseFunction, bResetSubdialog)
+        bResetSubdialog = False
+        sdgClimdexIndices.ShowDialog()
+    End Sub
+
+    Private Sub ucrBaseClimdex_clickok(sender As Object, e As EventArgs) Handles ucrBaseClimdex.ClickOk
+        sdgClimdexIndices.IndicesOptions(bSaveIndex)
     End Sub
 
     Private Sub AddRemoveDates()
@@ -163,23 +191,8 @@ Public Class dlgClimdex
         End If
     End Sub
 
-    Private Sub cmdIndices_Click(sender As Object, e As EventArgs) Handles cmdIndices.Click
-        sdgClimdexIndices.SetRFunction(ucrBaseClimdex.clsRsyntax.clsBaseFunction, bResetSubdialog)
-        bResetSubdialog = False
-        sdgClimdexIndices.ShowDialog()
-    End Sub
-
-    Private Sub ucrBaseClimdex_clickok(sender As Object, e As EventArgs) Handles ucrBaseClimdex.ClickOk
-        sdgClimdexIndices.IndicesOptions(bSaveIndex)
-    End Sub
-
     Private Sub AssignName()
         ucrBaseClimdex.clsRsyntax.SetAssignTo("climdex_input")
-    End Sub
-
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorClimdex.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverPrec.ControlContentsChanged, ucrReceiverTmax.ControlContentsChanged, ucrReceiverTmin.ControlContentsChanged
-        TestOkEnabled()
-        sdgClimdexIndices.IndicesType() 'is this the right implementation?
     End Sub
 
     Private Sub ucrChkSave_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkSave.ControlContentsChanged
@@ -188,5 +201,10 @@ Public Class dlgClimdex
         Else
             bSaveIndex = False
         End If
+    End Sub
+
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorClimdex.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverPrec.ControlContentsChanged, ucrReceiverTmax.ControlContentsChanged, ucrReceiverTmin.ControlContentsChanged
+        TestOkEnabled()
+        sdgClimdexIndices.IndicesType() 'is this the right implementation?
     End Sub
 End Class

@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,8 +11,9 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 Public Class dlgPrincipalComponentAnalysis
     Public bFirstLoad As Boolean = True
@@ -32,10 +33,12 @@ Public Class dlgPrincipalComponentAnalysis
     End Sub
 
     Private Sub InitialiseDialog()
+        ucrBasePCA.clsRsyntax.SetPackageName("FactoMineR")
         ucrBasePCA.clsRsyntax.SetFunction("PCA")
         ucrBasePCA.clsRsyntax.iCallType = 0
         ucrReceiverMultiplePCA.Selector = ucrSelectorPCA
         ucrReceiverMultiplePCA.SetDataType("numeric")
+        ucrReceiverMultiplePCA.strSelectorHeading = "Numerics"
         ucrResultName.SetDefaultTypeAsModel()
         ucrResultName.SetItemsTypeAsModels()
         ucrResultName.SetValidationTypeAsRVariable()

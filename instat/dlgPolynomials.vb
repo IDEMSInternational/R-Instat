@@ -1,16 +1,19 @@
-﻿'Instat-R
-'Copyright (C) 2015
-'This program is free software: you can redistribute it and/or modify
-'it under the terms of the GNU General Public License as published by
-'the Free Software Foundation, either version 3 of the License, or
-'(at your option) any later version.
-'This program is distributed in the hope that it will be useful,
-'but WITHOUT ANY WARRANTY; without even the implied warranty of
-'MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-'GNU General Public License for more details.
-'You should have received a copy of the GNU General Public License k
-'along with this program.  If not, see <http://www.gnu.org/licenses/>.
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 Public Class dlgPolynomials
     Public bFirstLoad As Boolean = True
@@ -38,11 +41,12 @@ Public Class dlgPolynomials
         ucrReceiverPolynomial.Selector = ucrSelectorForPolynomial
         ucrReceiverPolynomial.SetMeAsReceiver()
         ucrReceiverPolynomial.SetIncludedDataTypes({"numeric"})
+        ucrReceiverPolynomial.strSelectorHeading = "Numerics"
         ucrReceiverPolynomial.SetParameterIsRFunction()
 
         ucrPnlType.SetParameter(New RParameter("raw", 1))
         ucrPnlType.AddRadioButton(rdoSimple, "TRUE")
-        ucrPnlType.AddRadioButton(rdoCentered, "TRUE")
+        ucrPnlType.AddRadioButton(rdoCentred, "TRUE")
         ucrPnlType.AddRadioButton(rdoOrthogonal, "FALSE")
         ucrPnlType.SetRDefault("FALSE")
 
@@ -50,8 +54,8 @@ Public Class dlgPolynomials
         ucrPnlType.AddParameterValueFunctionNamesCondition(rdoOrthogonal, "x", "scale", False)
         ucrPnlType.AddParameterValuesCondition(rdoSimple, "raw", "TRUE")
         ucrPnlType.AddParameterValueFunctionNamesCondition(rdoSimple, "x", "scale", False)
-        ucrPnlType.AddParameterValuesCondition(rdoCentered, "raw", "TRUE")
-        ucrPnlType.AddParameterValueFunctionNamesCondition(rdoCentered, "x", "scale")
+        ucrPnlType.AddParameterValuesCondition(rdoCentred, "raw", "TRUE")
+        ucrPnlType.AddParameterValueFunctionNamesCondition(rdoCentred, "x", "scale")
 
         ucrNudDegree.SetParameter(New RParameter("degree", 2))
         ucrNudDegree.Minimum = 1
@@ -82,9 +86,11 @@ Public Class dlgPolynomials
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrNudDegree.SetRCode(clsPolynomial, bReset)
-        ucrPnlType.SetRCode(clsPolynomial, bReset)
+        ucrPnlType.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrSavePoly.SetRCode(clsPolynomial, bReset)
-        ucrReceiverPolynomial.SetRCode(clsPolynomial, bReset)
+        If rdoSimple.Checked OrElse rdoOrthogonal.Checked Then
+            ucrReceiverPolynomial.SetRCode(clsPolynomial, bReset)
+        End If
         ucrReceiverPolynomial.AddAdditionalCodeParameterPair(clsScale, New RParameter("x", 0), iAdditionalPairNo:=1)
         SetNewColumName()
     End Sub
@@ -122,7 +128,7 @@ Public Class dlgPolynomials
     End Sub
 
     Private Sub ucrPnl_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlType.ControlValueChanged
-        If rdoCentered.Checked Then
+        If rdoCentred.Checked Then
             clsPolynomial.AddParameter("x", clsRFunctionParameter:=clsScale)
         Else
             clsPolynomial.AddParameter("x", clsRFunctionParameter:=ucrReceiverPolynomial.GetVariables)

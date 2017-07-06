@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat
@@ -35,6 +35,7 @@ Public Class ucrInput
     Private bLastSilent As Boolean = False
     Private bPrivateAddQuotesIfUnrecognised As Boolean = True
     Protected dctDisplayParameterValues As New Dictionary(Of String, String)
+    Protected bFirstLoad As Boolean = True
 
     Public Sub New()
 
@@ -42,7 +43,7 @@ Public Class ucrInput
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        bUpdateRCodeFromControl = True
+        bUpdateRCodeFromControl = False
     End Sub
 
     Public Overridable Sub SetName(strName As String, Optional bSilent As Boolean = False)
@@ -96,6 +97,11 @@ Public Class ucrInput
         SetDefaultName()
     End Sub
 
+    Public Sub SetDefaultTypeAsTable()
+        strDefaultType = "Table"
+        SetDefaultName()
+    End Sub
+
     Public Sub SetDefaultTypeAsDataFrame()
         strDefaultType = "Data Frame"
         SetDefaultName()
@@ -140,7 +146,15 @@ Public Class ucrInput
                 If ucrDataFrameSelector IsNot Nothing AndAlso ucrDataFrameSelector.cboAvailableDataFrames.Text <> "" Then
                     SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetModelNames(ucrDataFrameSelector.cboAvailableDataFrames.Text)))
                 Else
-                    SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetModelNames()))
+                    'temp disabled as causing bug and not currently needed
+                    'SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetModelNames()))
+                End If
+            ElseIf strDefaultType = "Table" Then
+                If ucrDataFrameSelector IsNot Nothing AndAlso ucrDataFrameSelector.cboAvailableDataFrames.Text <> "" Then
+                    SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetTableNames(ucrDataFrameSelector.cboAvailableDataFrames.Text)))
+                Else
+                    'temp disabled as causing bug and not currently needed
+                    'SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetTableNames()))
                 End If
             ElseIf strDefaultType = "Data Frame" Then
                 SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetDataFrameNames()))
@@ -148,7 +162,8 @@ Public Class ucrInput
                 If ucrDataFrameSelector IsNot Nothing AndAlso ucrDataFrameSelector.cboAvailableDataFrames.Text <> "" Then
                     SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetGraphNames(ucrDataFrameSelector.cboAvailableDataFrames.Text)))
                 Else
-                    SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetGraphNames()))
+                    'temp disabled as causing bug and not currently needed
+                    'SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetGraphNames()))
                 End If
             ElseIf strDefaultType = "Filter" Then
                 If ucrDataFrameSelector IsNot Nothing AndAlso ucrDataFrameSelector.cboAvailableDataFrames.Text <> "" Then
@@ -192,6 +207,24 @@ Public Class ucrInput
                     strRange = strRange & "< " & dcmMaximum.ToString()
                 End If
             End If
+        ElseIf strValidationType = "NumericList" Then
+            If dcmMinimum <> Double.MinValue Then
+                If bMinimumIncluded Then
+                    strRange = ">= " & dcmMinimum.ToString()
+                Else
+                    strRange = "> " & dcmMinimum.ToString()
+                End If
+                If dcmMaximum <> Double.MaxValue Then
+                    strRange = strRange & " and "
+                End If
+            End If
+            If dcmMaximum <> Double.MaxValue Then
+                If bMaximumIncluded Then
+                    strRange = strRange & "<= " & dcmMaximum.ToString()
+                Else
+                    strRange = strRange & "< " & dcmMaximum.ToString()
+                End If
+            End If
         End If
         Return strRange
     End Function
@@ -200,8 +233,16 @@ Public Class ucrInput
         strValidationType = "List"
     End Sub
 
-    Public Sub SetValidationTypeAsNumericList(Optional bNewAllowInf As Boolean = False)
+    Public Sub SetValidationTypeAsNumericList(Optional bNewAllowInf As Boolean = False, Optional bIncludeMin As Boolean = True, Optional dcmMin As Double = Double.MinValue, Optional dcmMax As Double = Double.MaxValue, Optional bIncludeMax As Boolean = True)
+        ' Dim Dmax As Double = Maximum
+        ' Dim Dmin As Double = Minimum
         strValidationType = "NumericList"
+        If dcmMin <> Double.MinValue Then
+            dcmMinimum = dcmMin
+        End If
+        If dcmMax <> Double.MaxValue Then
+            dcmMaximum = dcmMax
+        End If
         bAllowInf = bNewAllowInf
     End Sub
 
@@ -258,6 +299,8 @@ Public Class ucrInput
                 Select Case strValidationType
                     Case "RVariable"
                         MsgBox("This name cannot start with a dot followed by a number/nothing", vbOKOnly)
+                    Case "NumericList"
+                        MsgBox("Each item in the list must be " & GetNumericRange(), vbOKOnly, "Validation Error")
                 End Select
             Case 4
                 Select Case strValidationType
@@ -268,9 +311,11 @@ Public Class ucrInput
                 Select Case strValidationType
                     Case "RVariable"
                         MsgBox("This name contains an invalid character", vbOKOnly)
+
                 End Select
         End Select
         Return (iValidationCode = 0)
+
     End Function
 
     'Returns integer as code for validation
@@ -345,6 +390,7 @@ Public Class ucrInput
     ' 0 : string is valid
     ' 1 : an item is empty
     ' 2 : an item is not numeric
+    ' 3 : an item is between max and min values
     Public Function ValidateList(strText As String, Optional bIsNumericInput As Boolean = False, Optional bAllowInf As Boolean = False) As Integer
         Dim strItems As String()
         Dim strTemp As String
@@ -362,8 +408,8 @@ Public Class ucrInput
                 If bIsNumericInput Then
                     If Not IsNumeric(strVal) AndAlso (Not (bAllowInf AndAlso ({"Inf", "-Inf"}.Contains(strVal)))) Then
                         Return 2
-                        'MsgBox("Textbox requires a list of numbers separated by commas.", vbOKOnly, "Validation Error")
-                        'txtNumericItems.Focus()
+                    ElseIf IsNumeric(strVal) AndAlso (strVal > dcmMaximum OrElse strVal < dcmMinimum) Then
+                        Return 3
                     End If
                     clsTempParam.SetArgumentValue(strVal)
                 Else
@@ -391,7 +437,6 @@ Public Class ucrInput
         If Not bUserTyped Then
             SetDefaultName()
         End If
-        'RaiseEvent NameChanged()
     End Sub
 
     Private Sub ucrInput_TextChanged(sender As Object, e As EventArgs) Handles Me.TextChanged
@@ -410,6 +455,9 @@ Public Class ucrInput
     Protected Overrides Sub SetToValue(objTemp As Object)
         If objTemp IsNot Nothing Then
             SetName(objTemp.ToString())
+        Else
+            'If no value reset to a default value
+            SetName("")
         End If
     End Sub
 
@@ -472,4 +520,8 @@ Public Class ucrInput
         Next
         Return False
     End Function
+
+    Protected Overrides Sub ResetControlValue()
+        SetName("")
+    End Sub
 End Class

@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,8 +11,10 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Imports instat
 Imports instat.Translations
 Public Class sdgPlots
     'Question to be discussed (later: need to explore first)/Exploration Task: In order to uniformise the code, could create a PlotOptionsSetup where all the necessary links between specific plots and plot options are made ? For the moment all these are scattered around. Might be necessary to have this flexibility though... 
@@ -23,429 +25,572 @@ Public Class sdgPlots
     Public clsRsyntax As New RSyntax
     'This clsRSyntax is linked with the ucrBase.clsRSyntax from the dlg calling sdgPLotOptions...
     Public clsRggplotFunction As New RFunction
-    Public clsAesFunction As New RFunction 'Warning: I m not sure this field is useful... Will all be revised when changing links though...
-    Public clsRFacetFunction As New RFunction
+    Public clsGlobalAesFunction As New RFunction
+    Public clsLabsFunction As New RFunction
+    Public clsFacetFunction As New RFunction
     Public clsXLabFunction As New RFunction
+    Public clsXScalecontinuousFunction As New RFunction
+    Public clsYScalecontinuousFunction As New RFunction
     Public clsYLabFunction As New RFunction
-    Public clsRThemeFunction As New RFunction
-    Public clsRLegendFunction As New RFunction
-    Public clsGraphTitleFunction As New RFunction
-    Public clsLegendFunction As New RFunction
+    Public clsBaseOperator As New ROperator
+    Private bControlsInitialised As Boolean = False
     'All the previous RFunctions will eventually be stored as parameters (or parameters of parameters) within the RSyntax building the big Ggplot command "ggplot(...) + geom_..(..) + ... + theme(...) + scales(...) ..."
     'They are treated separately from the RSyntax for the sake of clarity, then sinked in eventually.
     Public bFirstLoad As Boolean = True
     Public strDataFrame As String
     Private bAdditionalLayersSetGlobal As Boolean
+    Private clsFacetVariablesOperator As New ROperator
+    Private strFirstVariable As String
+    Private strSecondvariable As String
+    Private clsThemeFunction As New RFunction
+    Private dctThemeFunctions As New Dictionary(Of String, RFunction)
+    Private bRCodeSet As Boolean = False
+    Private bResetThemes As Boolean = True
+    Private ucrBaseSelector As ucrSelector
+
     'See bLayersDefaultIsGolobal below.
+
     Private Sub sdgPlots_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If bFirstLoad Then
-            InitialiseDialog()
-            SetDefaults()
-            bFirstLoad = False
-        End If
         autoTranslate(Me)
     End Sub
 
-    Public Sub DisableLayersTab()
-        tabLayers.Enabled = False
-    End Sub
+    Public Sub InitialiseControls()
+        Dim dctThemes As New Dictionary(Of String, String)
+        Dim strThemes As String()
 
-    Public Sub EnableLayersTab()
-        tabLayers.Enabled = True
-    End Sub
-    Public Sub SetDefaults()
-        TitleDefaults()
-        chkIncludeFacets.Checked = False
-        IncludeFacets()
-        nudNumberofRows.Value = 1
-        ucrFacetSelector.Reset()
-
-        ucr1stFactorReceiver.SetMeAsReceiver()
-        ucrInputGraphTitle.SetName("")
-        ucrPlotsAdditionalLayers.Reset()
-        'Note that the following two don't reset the bisX and RSyntaxAxis ... So no need to set these again.
-        ucrXAxis.Reset()
-        ucrYAxis.Reset()
-        ucrInputThemes.SetName("theme_grey")
-        rdoLegendTitleAuto.Checked = True
-        LegendDefaults()
-        bLayersDefaultIsGlobal = False
-
-    End Sub
-
-    Private Sub TitleDefaults()
-        chkDisplayLegendTitle.Checked = True
-        chkOverwriteLegendTitle.Checked = False
-        ucrInputLegend.Visible = False
-        ucrInputGraphTitle.Reset()
-    End Sub
-
-    Public Sub Reset()
-        SetDefaults()
-    End Sub
-
-    Private Sub InitialiseDialog()
-        InitialiseTabs()
-        CreateThemes()
-        FacetsReceiversSetup()
-        'The following sets up the clsGgplotAesFunction in ucrAdditionalLayers. Not sure this should happen in the initialise dialog... Not sure of the objective either... It is never linked to the main dlg anyway...
-        ucrPlotsAdditionalLayers.SetAesFunction(clsAesFunction)
-        'The following two setup the ucrAdditionalLayers on the sdgPlots. Shares the global ggplot function, as well as the whole PLots RSyntax.
-        ucrPlotsAdditionalLayers.SetGGplotFunction(clsRggplotFunction)
-        ucrPlotsAdditionalLayers.SetRSyntax(clsRsyntax)
-        'This is necessary to make sure the minimum number of fixed rows or columns is 1.
-        nudNumberofRows.Minimum = 1
-
-        'Set's the X Axis tab to X mode and the YAxis tab to Y mode (each tab contains a generic ucrAxis with internal X or Y boolean setting).
-        'Also carry the RSyntax through to these ucr's .
-        ucrXAxis.SetXorY(True)
-        ucrXAxis.SetRsyntaxAxis(clsRsyntax)
-        ucrYAxis.SetXorY(False)
-        ucrYAxis.SetRsyntaxAxis(clsRsyntax)
-    End Sub
-    Private Sub InitialiseTabs()
-        'Question: Tabs are set in turn as selected, using their index. Then the first tab is set as selected again. For some reason this initialises the tabs ?
-        For i = 0 To tabctrlBoxSubdialog.TabCount - 1
-            tabctrlBoxSubdialog.SelectedIndex = i
-        Next
-        tabctrlBoxSubdialog.TabPages(6).Enabled = False
-        tabctrlBoxSubdialog.SelectedIndex = 0
-    End Sub
-
-    Private Sub CreateThemes()
-        'Adds the available themes in the relevant "Themes combo box".
-        Dim strThemes() As String
-        strThemes = {"theme_bw", "theme_linedraw", "theme_light", "theme_minimal", "theme_classic", "theme_dark", "theme_void", "theme_base", "theme_calc", "theme_economist", "theme_few", "theme_fivethirtyeight", "theme_foundation", "theme_grey", "theme_gdocs", "theme_igray", "theme_map", "theme_par", "theme_solarized", "theme_hc", "theme_pander", "theme_solid", "theme_stata", "theme_tufte", "theme_wsj"}
-        Array.Sort(strThemes)
-        ucrInputThemes.SetItems(strThemes)
-        'Task: Need to implement theme options. The "All Options" button is temporarily disabled.
-        cmdAllOptions.Enabled = False
-    End Sub
-    Private Sub FacetsReceiversSetup()
+        ucrBaseSubdialog.iHelpTopicID = 136
+        'facets tab 
         'Links the factor receivers, used for creating facets, with the selector. The variables need to be factors.
         ucr1stFactorReceiver.Selector = ucrFacetSelector
         ucr1stFactorReceiver.SetIncludedDataTypes({"factor"})
+        ucr1stFactorReceiver.strSelectorHeading = "Factors"
+        ucr1stFactorReceiver.SetParameter(New RParameter("var1", 0))
+        ucr1stFactorReceiver.SetParameterIsString()
+        ucr1stFactorReceiver.bWithQuotes = False
+        ucr1stFactorReceiver.SetLinkedDisplayControl(lblFactor1)
+        ucr1stFactorReceiver.SetValuesToIgnore({"."})
+        ucr1stFactorReceiver.bUpdateRCodeFromControl = False
+
         ucr2ndFactorReceiver.Selector = ucrFacetSelector
         ucr2ndFactorReceiver.SetIncludedDataTypes({"factor"})
+        ucr2ndFactorReceiver.strSelectorHeading = "Factors"
+        ucr2ndFactorReceiver.SetParameter(New RParameter("var2", 1))
+        ucr2ndFactorReceiver.SetParameterIsString()
+        ucr2ndFactorReceiver.bWithQuotes = False
+        ucr2ndFactorReceiver.SetLinkedDisplayControl(lblFactor2)
+        ucr2ndFactorReceiver.SetValuesToIgnore({"."})
+        ucr2ndFactorReceiver.bUpdateRCodeFromControl = False
+
+        ucrChkIncludeFacets.SetText("Include Facets")
+        ucrChkIncludeFacets.AddParameterPresentCondition(True, "facets", True)
+        ucrChkIncludeFacets.AddParameterPresentCondition(False, "facets", False)
+
+        ucrChkMargin.SetText("Margins")
+        ucrChkMargin.SetParameter(New RParameter("margins"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=False)
+        ucrChkMargin.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkMargin.SetRDefault("FALSE")
+
+        ucrChkNoOfRowsOrColumns.AddFunctionNamesCondition(True, "facet_wrap", True)
+        ucrChkNoOfRowsOrColumns.AddParameterPresentCondition(True, {"ncol", "nrow"}, True)
+        ucrChkNoOfRowsOrColumns.AddFunctionNamesCondition(False, "facet_wrap", False)
+        'ucrChkNoOfRowsOrColumns.AddParameterPresentCondition(False, {"ncol", "nrow"}, False)
+        ucrChkNoOfRowsOrColumns.SetText("Fixed Number of Rows")
+
+        ucrNudNumberofRows.SetParameter(New RParameter("nrow"))
+        ucrNudNumberofRows.bAddRemoveParameter = False
+
+        ucrChkFreeScalesX.SetText("Free Scales X")
+        ucrChkFreeScalesX.SetParameter(New RParameter("scales"))
+        ucrChkFreeScalesX.AddParameterValuesCondition(True, "scales", {Chr(34) & "free" & Chr(34), Chr(34) & "free_x" & Chr(34)})
+        ucrChkFreeScalesX.AddParameterValuesCondition(False, "scales", {Chr(34) & "free" & Chr(34), Chr(34) & "free_x" & Chr(34)}, False)
+        ucrChkFreeScalesX.bChangeParameterValue = False
+        ucrChkFreeScalesX.bAddRemoveParameter = False
+
+        ucrChkFreeScalesY.SetText("Free Scales Y")
+        ucrChkFreeScalesY.SetParameter(New RParameter("scales"))
+        ucrChkFreeScalesY.AddParameterValuesCondition(True, "scales", {Chr(34) & "free" & Chr(34), Chr(34) & "free_y" & Chr(34)})
+        ucrChkFreeScalesY.AddParameterValuesCondition(False, "scales", {Chr(34) & "free" & Chr(34), Chr(34) & "free_y" & Chr(34)}, False)
+        ucrChkFreeScalesY.bChangeParameterValue = False
+        ucrChkFreeScalesY.bAddRemoveParameter = False
+
+        'TODO space can be either: "fixed", "free", "free_x", "free_y"
+        '     currently only implemented "free" or "fixed"
+        ucrChkFreeSpace.SetText("Free Space")
+        ucrChkFreeSpace.SetParameter(New RParameter("space"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=False, strNewValueIfChecked:=Chr(34) & "free" & Chr(34), strNewValueIfUnchecked:=Chr(34) & "fixed" & Chr(34))
+        ucrChkFreeSpace.SetRDefault(Chr(34) & "fixed" & Chr(34))
+        ucrChkFreeSpace.AddToLinkedControls(ucrChkNoOfRowsOrColumns, {False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        'Not setting parameter to write because of complex conditions for adding/removing this parameter
+        'Conditions in place for reading function
+        ucrPnlHorizonatalVertical.SetParameter(New RParameter("dir"))
+        ucrPnlHorizonatalVertical.bChangeParameterValue = False
+        ucrPnlHorizonatalVertical.AddRadioButton(rdoVertical)
+        ucrPnlHorizonatalVertical.AddRadioButton(rdoHorizontal)
+        ucrPnlHorizonatalVertical.AddParameterValuesCondition(rdoVertical, "dir", Chr(34) & "v" & Chr(34))
+        ucrPnlHorizonatalVertical.AddParameterValuesCondition(rdoHorizontal, "dir", Chr(34) & "h" & Chr(34))
+        ucrPnlHorizonatalVertical.SetRDefault(Chr(34) & "h" & Chr(34))
+
+        ucrChkIncludeFacets.AddToLinkedControls(ucrFacetSelector, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeFacets.AddToLinkedControls(ucr1stFactorReceiver, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeFacets.AddToLinkedControls(ucr2ndFactorReceiver, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeFacets.AddToLinkedControls(ucrPnlHorizonatalVertical, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeFacets.AddToLinkedControls(ucrChkMargin, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeFacets.AddToLinkedControls(ucrChkFreeScalesX, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeFacets.AddToLinkedControls(ucrChkFreeScalesY, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeFacets.AddToLinkedControls(ucrChkFreeSpace, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        'layers tab 
+
+        'titles tab
+
+        ucrInputGraphTitle.SetParameter(New RParameter("title"))
+        ucrInputGraphSubTitle.SetParameter(New RParameter("subtitle"))
+        ucrInputGraphCaption.SetParameter(New RParameter("caption"))
+
+        'TODO what about the subtitle argument of labs?
+        'TODO what about the caption argument of labs?
+
+        'legend titles are more complex than this, suggest we disable until later
+        'ucrPnlLegendTitle.AddRadioButton(rdoLegendTitleAuto)
+        'ucrPnlLegendTitle.AddRadioButton(rdoLegendTitleCustom)
+        'ucrPnlLegendTitle.AddParameterPresentCondition(rdoLegendTitleAuto, "labs", False)
+        'ucrPnlLegendTitle.AddParameterPresentCondition(rdoLegendTitleAuto, "labs", True)
+        'ucrPnlLegendTitle.AddToLinkedControls(ucrChkDisplayLegendTitle, {rdoLegendTitleCustom}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        'ucrChkDisplayLegendTitle.SetText("Display")
+        'ucrChkDisplayLegendTitle.AddToLinkedControls(ucrChkOverwriteLegendTitle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        'ucrChkOverwriteLegendTitle.SetText("Overwrite Title")
+        'ucrChkOverwriteLegendTitle.AddToLinkedControls(ucrInputLegend, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        'ucrInputLegend.SetParameter(New RParameter("fill"))
+
+        'X Axis tab
+        ucrXAxis.InitialiseControl()
+
+        'Y Axis tab
+        ucrYAxis.InitialiseControl()
+
+        'themes tab
+        urChkSelectTheme.SetText("Select Theme:")
+        ucrInputThemes.SetParameter(New RParameter("theme_name"))
+        urChkSelectTheme.AddToLinkedControls(ucrInputThemes, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="theme_grey")
+        urChkSelectTheme.AddParameterPresentCondition(True, "theme_name")
+        urChkSelectTheme.AddParameterPresentCondition(False, "theme_name", False)
+        strThemes = GgplotDefaults.strThemes
+        'Would prefer to do this through functions but auto updating function name not currently supported through combo box control
+        For Each strTemp As String In strThemes
+            If strTemp.StartsWith("theme_") Then
+                dctThemes.Add(strTemp.Remove(0, 6), strTemp & "()")
+            Else
+                dctThemes.Add(strTemp, strTemp & "()")
+            End If
+        Next
+        ucrInputThemes.SetItems(dctThemes)
+        ucrInputThemes.SetRDefault("theme_grey()")
+        ucrInputThemes.SetDropDownStyleAsNonEditable()
+
+        InitialiseTabs()
+
+        'temporary disabled until implemented
+        ' tbpLayers.Enabled = False
+        tbpCoordinates.Enabled = False
+        grpLegendTitle.Enabled = False
+        'cmdAllOptions.Enabled = False
+        GroupBox1.Visible = False
+        bControlsInitialised = True
     End Sub
 
-    Private Sub IncludeFacets()
-        'If the user wants facets, the facets options need to be shown, otherwise hide them.
-        If chkIncludeFacets.Checked Then
-            ucrFacetSelector.Visible = True
-            ucr1stFactorReceiver.Visible = True
-            ucr2ndFactorReceiver.Visible = True
-            lblFactor1.Visible = True
-            lblFactor2.Visible = True
-            rdoHorizontal.Visible = True
-            rdoHorizontal.Checked = True
-            rdoVertical.Visible = True
-            chkNoOfRowsOrColumns.Checked = False
-            nudNumberofRows.Visible = True
-            chkMargin.Checked = False
-            chkFreeScalesX.Checked = False
-            chkFreeScalesY.Checked = False
-            chkFreeSpace.Checked = False
-            chkMargin.Visible = True
-            chkFreeScalesX.Visible = True
-            chkFreeScalesY.Visible = True
-            chkFreeSpace.Visible = True
-            'In case IncludeFacets is checked, the facets need to be set. Still might not be included as RSyntax parameter if no no variable has been set for faceting, but this is then decided in the IncludeFacetsParameter below.
-            SetFacets()
-            SecondFactorReceiverEnabled()
-            chkNoOfRowsOrColumns.Visible = True
-        Else
-            ucrFacetSelector.Visible = False
-            ucr1stFactorReceiver.Visible = False
-            ucr2ndFactorReceiver.Visible = False
-            lblFactor1.Visible = False
-            lblFactor2.Visible = False
-            rdoHorizontal.Visible = False
-            rdoVertical.Visible = False
-            chkMargin.Visible = False
-            chkFreeScalesX.Visible = False
-            chkFreeScalesY.Visible = False
-            chkNoOfRowsOrColumns.Visible = False
-            nudNumberofRows.Visible = False
-            chkFreeSpace.Visible = False
+    Public Sub SetRCode(clsNewOperator As ROperator, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewYScalecontinuousFunction As RFunction = Nothing, Optional clsNewXScalecontinuousFunction As RFunction = Nothing, Optional clsNewLabsFunction As RFunction = Nothing, Optional clsNewXLabsTitleFunction As RFunction = Nothing, Optional clsNewYLabTitleFunction As RFunction = Nothing, Optional clsNewFacetFunction As RFunction = Nothing, Optional clsNewThemeParam As RParameter = Nothing, Optional clsNewThemeFunction As RFunction = Nothing, Optional dctNewThemeFunctions As Dictionary(Of String, RFunction) = Nothing, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False)
+        Dim clsTempParam As RParameter
+
+        bRCodeSet = False
+        If Not bControlsInitialised Then
+            InitialiseControls()
         End If
-        'Then the RSyntax is populated with the appropriate facet parameter (as part of the whole ggplot script) or not.
-        IncludeFacetsParameter()
+        ucrBaseSelector = ucrNewBaseSelector
+        If ucrBaseSelector IsNot Nothing AndAlso ucrBaseSelector.strCurrentDataFrame <> "" Then
+            strDataFrame = ucrBaseSelector.strCurrentDataFrame
+            ucrFacetSelector.SetDataframe(strDataFrame, False)
+        End If
+        ucrFacetSelector.SetLinkedSelector(ucrBaseSelector)
+        clsBaseOperator = clsNewOperator
+        clsGlobalAesFunction = clsNewGlobalAesFunction
+        clsXLabFunction = clsNewXLabsTitleFunction
+        clsYLabFunction = clsNewYLabTitleFunction
+        clsXScalecontinuousFunction = clsNewXScalecontinuousFunction
+        clsYScalecontinuousFunction = clsNewYScalecontinuousFunction
+        clsFacetFunction = clsNewFacetFunction
+        clsThemeFunction = clsNewThemeFunction
+        dctThemeFunctions = dctNewThemeFunctions
+
+        If clsFacetFunction.ContainsParameter("facets") Then
+            clsTempParam = clsFacetFunction.GetParameter("facets")
+            If clsTempParam.bIsOperator AndAlso clsTempParam.clsArgumentCodeStructure IsNot Nothing Then
+                clsFacetVariablesOperator = clsTempParam.clsArgumentCodeStructure
+            Else
+                clsFacetVariablesOperator = New ROperator("~")
+            End If
+        Else
+            clsFacetVariablesOperator = New ROperator("~")
+        End If
+        clsFacetVariablesOperator.bForceIncludeOperation = True
+        clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetVariablesOperator)
+        If clsNewLabsFunction IsNot Nothing Then
+            clsLabsFunction = clsNewLabsFunction
+        Else
+            clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
+        End If
+
+        If clsNewThemeParam IsNot Nothing Then
+            clsBaseOperator.AddParameter(clsNewThemeParam)
+        Else
+            clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
+        End If
+
+        ucrInputGraphTitle.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputGraphSubTitle.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputGraphCaption.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
+        urChkSelectTheme.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
+        ucrInputThemes.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
+
+        'ucrInputLegend.SetRCode(clsNewLabsFunction, bReset)
+        ucrPnlHorizonatalVertical.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
+        ucr1stFactorReceiver.SetRCode(clsFacetVariablesOperator, bReset, bCloneIfNeeded:=True)
+        ucr2ndFactorReceiver.SetRCode(clsFacetVariablesOperator, bReset, bCloneIfNeeded:=True)
+
+        ucrChkMargin.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkFreeSpace.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkFreeScalesX.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkFreeScalesY.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudNumberofRows.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkIncludeFacets.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
+
+        'axis controls
+        ucrXAxis.SetRCodeForControl(bIsXAxis:=True, strNewAxisType:=GetAxisType(True), clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset, bCloneIfNeeded:=True)
+        ucrYAxis.SetRCodeForControl(bIsXAxis:=False, strNewAxisType:=GetAxisType(False), clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset, bCloneIfNeeded:=True)
+
+        'ucrPlotsAdditionalLayers.SetAesFunction(clsGlobalAesFunction)
+        'The following two setup the ucrAdditionalLayers on the sdgPlots. Shares the global ggplot function, as well as the whole PLots RSyntax.
+        'ucrPlotsAdditionalLayers.SetGGplotFunction(clsRggplotFunction)
+        'ucrPlotsAdditionalLayers.SetBaseOperator(clsBaseOperator)
+        ucrPlotsAdditionalLayers.SetRCodeForControl(clsNewBaseOperator:=clsBaseOperator, clsRNewggplotFunc:=clsRggplotFunction, clsNewAesFunc:=clsGlobalAesFunction, strNewGlobalDataFrame:=strDataFrame, bReset:=bReset)
+        bRCodeSet = True
+        AddRemoveLabs()
+        AddRemoveFacets()
+        SetScaleParameter()
+        SecondFactorReceiverEnabled()
+        If bReset Then
+            ucr1stFactorReceiver.SetMeAsReceiver()
+            tbpPlotsOptions.SelectedIndex = 0
+            bResetThemes = True
+        End If
+        SetFacetParameters()
     End Sub
 
-    Private Sub SetFacets()
+    Private Sub SetFacetParameters()
         'Depending on the settings on the dialog, this function sets the Facets command, stored within clsRFacetFunction.
         'Then IncludeFacetsParameter() will add the facets command to the ggplot script as a parameter within RSyntax (unless no factor has been for fasceting, as R requires at least one facets argument).
         'The choice between grid and wrap is done systematically depending on the chosen settings.
-        Dim clsTempOp As New ROperator
-        Dim strSingleFactor As String
-        clsTempOp.SetOperation("~")
         'The following two parameters (of the facet function) will be reset in this sub according to the settings selected on the dialog. They need to be cleared in case they are not relevant anymore for example if margins has been checked (they are specific to facet_wrap).
-        clsRFacetFunction.RemoveParameterByName("nrow")
-        clsRFacetFunction.RemoveParameterByName("ncol")
-
-        If (Not ucr1stFactorReceiver.IsEmpty() AndAlso ucr2ndFactorReceiver.IsEmpty()) Then
-
-            strSingleFactor = ucr1stFactorReceiver.GetVariableNames(False)
-
-            'There are two types of fasceting provided by ggplot2: grid and wrap. Grid works like a contigency table, wrap just rearranges a long list of plots into a grid. 
-            'If two receivers are filled, only grid can be used. In case only one receiver is filled, grid will still be in use if one of the grid parameters is set such as "margins" or "free space". In other cases, wrap will be used.
-            'In the grid case, the place of the argument, left or right, in the facets parameter of the facets function is determined by/determines the choice "vertical" or "horizontal" faceting. In the wrap case, the argument "dir" is set to vertical or horizontal accordingly.
-            If rdoHorizontal.Checked AndAlso ((Not chkMargin.Checked AndAlso Not chkFreeSpace.Checked) OrElse chkNoOfRowsOrColumns.Checked) Then
-                clsRFacetFunction.SetRCommand("facet_wrap")
-                clsTempOp.AddParameter(iPosition:=0, strParameterValue:="")
-                clsTempOp.AddParameter(strParameterValue:=strSingleFactor)
-                clsRFacetFunction.AddParameter("dir", Chr(34) & "h" & Chr(34))
-                SetFixRowColumnParameter()
-                'As there are only a left and a right parameter for clsTempOp, no need to specify a parameter name, the default "right" will be used.
-                'The boolean argument "false" is there to indicate we don't want quotes.
-            ElseIf rdoVertical.Checked AndAlso ((Not chkMargin.Checked AndAlso Not chkFreeSpace.Checked) OrElse chkNoOfRowsOrColumns.Checked) Then
-                clsRFacetFunction.SetRCommand("facet_wrap")
-                clsTempOp.AddParameter(iPosition:=0, strParameterValue:="")
-                clsTempOp.AddParameter(strParameterValue:=strSingleFactor)
-                clsRFacetFunction.AddParameter("dir", Chr(34) & "v" & Chr(34))
-                SetFixRowColumnParameter()
+        If bRCodeSet Then
+            FacetsNumberOfRowsOrColumns()
+            If (Not ucr1stFactorReceiver.IsEmpty() AndAlso ucr2ndFactorReceiver.IsEmpty()) Then
+                'There are two types of fasceting provided by ggplot2: grid and wrap. Grid works like a contigency table, wrap just rearranges a long list of plots into a grid. 
+                'If two receivers are filled, only grid can be used. In case only one receiver is filled, grid will still be in use if one of the grid parameters is set such as "margins" or "free space". In other cases, wrap will be used.
+                'In the grid case, the place of the argument, left or right, in the facets parameter of the facets function is determined by/determines the choice "vertical" or "horizontal" faceting. In the wrap case, the argument "dir" is set to vertical or horizontal accordingly.
+                ucr1stFactorReceiver.SetParameterPosition(1)
+                ucr2ndFactorReceiver.SetParameterPosition(0)
+                clsFacetVariablesOperator.RemoveParameter(ucr2ndFactorReceiver.GetParameter())
+                If rdoHorizontal.Checked AndAlso ((Not ucrChkMargin.Checked AndAlso Not ucrChkFreeSpace.Checked) OrElse (ucrChkNoOfRowsOrColumns.Visible AndAlso ucrChkNoOfRowsOrColumns.Checked)) Then
+                    clsFacetFunction.SetRCommand("facet_wrap")
+                    clsFacetFunction.AddParameter("dir", Chr(34) & "h" & Chr(34))
+                ElseIf (rdoVertical.Checked AndAlso ((Not ucrChkMargin.Checked AndAlso Not ucrChkFreeSpace.Checked)) OrElse (ucrChkNoOfRowsOrColumns.Visible AndAlso ucrChkNoOfRowsOrColumns.Checked)) Then
+                    clsFacetFunction.SetRCommand("facet_wrap")
+                    clsFacetFunction.AddParameter("dir", Chr(34) & "v" & Chr(34))
+                Else
+                    clsFacetFunction.SetRCommand("facet_grid")
+                    If rdoVertical.Checked Then
+                        ucr1stFactorReceiver.SetParameterPosition(0)
+                        ucr2ndFactorReceiver.SetParameterPosition(1)
+                        ucr2ndFactorReceiver.SetParameterValue(".")
+                        clsFacetVariablesOperator.AddParameter(ucr2ndFactorReceiver.GetParameter())
+                    End If
+                    clsFacetFunction.RemoveParameterByName("dir")
+                End If
+            ElseIf Not ucr1stFactorReceiver.IsEmpty() AndAlso Not ucr2ndFactorReceiver.IsEmpty() Then
+                ucr1stFactorReceiver.SetParameterPosition(0)
+                ucr2ndFactorReceiver.SetParameterPosition(1)
+                clsFacetFunction.SetRCommand("facet_grid")
+                clsFacetFunction.RemoveParameterByName("dir")
+            End If
+            If clsFacetFunction.strRCommand = "facet_grid" Then
+                clsFacetFunction.AddParameter(ucrChkFreeSpace.GetParameter())
+                If ucrChkMargin.Checked Then
+                    clsFacetFunction.AddParameter(ucrChkMargin.GetParameter())
+                Else
+                    clsFacetFunction.RemoveParameter(ucrChkMargin.GetParameter())
+                End If
+                clsFacetFunction.RemoveParameter(ucrNudNumberofRows.GetParameter())
             Else
-                'Warning: could be refined a little...
-                RemoveWrapParameters()
-                clsRFacetFunction.SetRCommand("facet_grid")
-                clsTempOp.AddParameter(strParameterValue:=".")
-                clsTempOp.AddParameter(iPosition:=0, strParameterValue:=strSingleFactor)
+                clsFacetFunction.RemoveParameterByName("space")
+                clsFacetFunction.RemoveParameterByName("margins")
                 If rdoHorizontal.Checked Then
-                    clsTempOp.AddParameter(strParameterValue:=ucr1stFactorReceiver.GetVariableNames(False))
-                    clsTempOp.AddParameter(iPosition:=0, strParameterValue:=".")
+                    ucrChkNoOfRowsOrColumns.SetText("Fixed Number of Rows")
+                    ucrNudNumberofRows.ChangeParameterName("nrow")
                 ElseIf rdoVertical.Checked Then
-                    clsTempOp.AddParameter(iPosition:=0, strParameterValue:=ucr1stFactorReceiver.GetVariableNames(False))
-                    clsTempOp.AddParameter(strParameterValue:=".")
+                    ucrChkNoOfRowsOrColumns.SetText("Fixed Number of Columns")
+                    ucrNudNumberofRows.ChangeParameterName("ncol")
+                End If
+                If ucrChkNoOfRowsOrColumns.Checked Then
+                    clsFacetFunction.AddParameter(ucrNudNumberofRows.GetParameter())
+                Else
+                    clsFacetFunction.RemoveParameter(ucrNudNumberofRows.GetParameter())
                 End If
             End If
-            clsRFacetFunction.AddParameter("facets", clsROperatorParameter:=clsTempOp)
-
-        ElseIf Not ucr1stFactorReceiver.IsEmpty() AndAlso Not ucr2ndFactorReceiver.IsEmpty() Then
-            clsRFacetFunction.SetRCommand("facet_grid")
-            RemoveWrapParameters()
-            If rdoHorizontal.Checked Then
-                clsTempOp.AddParameter(strParameterValue:=ucr1stFactorReceiver.GetVariableNames(False))
-                clsTempOp.AddParameter(iPosition:=0, strParameterValue:=ucr2ndFactorReceiver.GetVariableNames(False))
-            ElseIf rdoVertical.Checked Then
-                clsTempOp.AddParameter(iPosition:=0, strParameterValue:=ucr1stFactorReceiver.GetVariableNames(False))
-                clsTempOp.AddParameter(strParameterValue:=ucr2ndFactorReceiver.GetVariableNames(False))
-            End If
-            clsRFacetFunction.AddParameter("facets", clsROperatorParameter:=clsTempOp)
-        Else
-            clsRFacetFunction.RemoveParameterByName("facets")
         End If
+    End Sub
+
+    Public Sub DisableLayersTab()
+        tbpLayers.Enabled = False
+    End Sub
+
+    Public Sub EnableLayersTab()
+        tbpLayers.Enabled = True
+    End Sub
+
+    Public Sub SetDefaults()
+        ' ucrChkIncludeFacets.Checked = False
+        'IncludeFacets()
+        'ucrNudNumberofRows.Value = 1
+        'ucrFacetSelector.Reset()
+
+        'ucrPlotsAdditionalLayers.Reset()
+        ''Note that the following two don't reset the bisX and RSyntaxAxis ... So no need to set these again.
+        'ucrXAxis.Reset()
+        'ucrYAxis.Reset()
+        'rdoLegendTitleAuto.Checked = True
+        'bLayersDefaultIsGlobal = False
+    End Sub
+
+    Private Sub InitialiseDialog()
+        'InitialiseTabs()
+        'CreateThemes()
+        ''The following sets up the clsGgplotAesFunction in ucrAdditionalLayers. Not sure this should happen in the initialise dialog... Not sure of the objective either... It is never linked to the main dlg anyway...
+        'ucrPlotsAdditionalLayers.SetAesFunction(clsAesFunction)
+        ''The following two setup the ucrAdditionalLayers on the sdgPlots. Shares the global ggplot function, as well as the whole PLots RSyntax.
+        'ucrPlotsAdditionalLayers.SetGGplotFunction(clsRggplotFunction)
+        'ucrPlotsAdditionalLayers.SetRSyntax(clsRsyntax)
+        ''This is necessary to make sure the minimum number of fixed rows or columns is 1.
+        'ucrNudNumberofRows.Minimum = 1
+
+        ''Set's the X Axis tab to X mode and the YAxis tab to Y mode (each tab contains a generic ucrAxis with internal X or Y boolean setting).
+        ''Also carry the RSyntax through to these ucr's .
+
+        ' Dim clsNewSeqFunction As RFunction, clsNewTitleFunction As RFunction, clsNewScalecontinuousFunction As RFunction)
+        'ucrXAxis.SetXorY(True)
+        'ucrXAxis.SetRsyntaxAxis(clsRsyntax)
+
+        'ucrYAxis.SetXorY(False)
+        'ucrYAxis.SetRsyntaxAxis(clsRsyntax)
+    End Sub
+
+    'To be removed but affects multiple dialogs
+    Public Sub SetRSyntax(Optional clsRSyntax As RSyntax = Nothing)
+
+    End Sub
+
+    'To be removed but affects multiple dialogs
+    Public Sub Reset()
+
+    End Sub
+
+    Private Sub InitialiseTabs()
+        For i = 0 To tbpPlotsOptions.TabCount - 1
+            tbpPlotsOptions.SelectedIndex = i
+        Next
+        tbpPlotsOptions.TabPages(6).Enabled = False
+        tbpPlotsOptions.SelectedIndex = 0
+    End Sub
+
+    Private Sub AddRemoveFacets()
+        If bRCodeSet Then
+            'TODO What are the conditions for including facets
+            If ucrChkIncludeFacets.Checked AndAlso Not ucr1stFactorReceiver.IsEmpty Then
+                clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
+            Else
+                clsBaseOperator.RemoveParameterByName("facets")
+            End If
+        End If
+    End Sub
+
+    Private Sub SetFacets()
+        ''Depending on the settings on the dialog, this function sets the Facets command, stored within clsRFacetFunction.
+        ''Then IncludeFacetsParameter() will add the facets command to the ggplot script as a parameter within RSyntax (unless no factor has been for fasceting, as R requires at least one facets argument).
+        ''The choice between grid and wrap is done systematically depending on the chosen settings.
+
+        ''The following two parameters (of the facet function) will be reset in this sub according to the settings selected on the dialog. They need to be cleared in case they are not relevant anymore for example if margins has been checked (they are specific to facet_wrap).
+        ''clsRFacetFunction.RemoveParameterByName("nrow")
+        ''clsRFacetFunction.RemoveParameterByName("ncol")
+        'If (Not ucr1stFactorReceiver.IsEmpty() AndAlso ucr2ndFactorReceiver.IsEmpty()) Then
+
+        '    strSingleFactor = ucr1stFactorReceiver.GetVariableNames(False)
+
+        '    'There are two types of fasceting provided by ggplot2: grid and wrap. Grid works like a contigency table, wrap just rearranges a long list of plots into a grid. 
+        '    'If two receivers are filled, only grid can be used. In case only one receiver is filled, grid will still be in use if one of the grid parameters is set such as "margins" or "free space". In other cases, wrap will be used.
+        '    'In the grid case, the place of the argument, left or right, in the facets parameter of the facets function is determined by/determines the choice "vertical" or "horizontal" faceting. In the wrap case, the argument "dir" is set to vertical or horizontal accordingly.
+        '    If rdoHorizontal.Checked AndAlso ((Not ucrChkMargin.Checked AndAlso Not ucrChkFreeSpace.Checked) OrElse ucrChkNoOfRowsOrColumns.Checked) Then
+        '        clsRFacetFunction.SetRCommand("facet_wrap")
+        '        clsTempOp.AddParameter(iPosition:=0, strParameterValue:="")
+        '        clsTempOp.AddParameter(strParameterValue:=strSingleFactor)
+        '        clsRFacetFunction.AddParameter("dir", Chr(34) & "h" & Chr(34))
+        '        SetFixRowColumnParameter()
+        '        'As there are only a left and a right parameter for clsTempOp, no need to specify a parameter name, the default "right" will be used.
+        '        'The boolean argument "false" is there to indicate we don't want quotes.
+        '    ElseIf rdoVertical.Checked AndAlso ((Not ucrChkMargin.Checked AndAlso Not ucrChkFreeSpace.Checked) OrElse ucrChkNoOfRowsOrColumns.Checked) Then
+        '        clsRFacetFunction.SetRCommand("facet_wrap")
+        '        clsTempOp.AddParameter(iPosition:=0, strParameterValue:="")
+        '        clsTempOp.AddParameter(strParameterValue:=strSingleFactor)
+        '        clsRFacetFunction.AddParameter("dir", Chr(34) & "v" & Chr(34))
+        '        SetFixRowColumnParameter()
+        '    Else
+        '        'Warning: could be refined a little...
+        '        RemoveWrapParameters()
+        '        clsRFacetFunction.SetRCommand("facet_grid")
+        '        clsTempOp.AddParameter(strParameterValue:=".")
+        '        clsTempOp.AddParameter(iPosition:=0, strParameterValue:=strSingleFactor)
+        '        If rdoHorizontal.Checked Then
+        '            clsTempOp.AddParameter(strParameterValue:=ucr1stFactorReceiver.GetVariableNames(False))
+        '            clsTempOp.AddParameter(iPosition:=0, strParameterValue:=".")
+        '        ElseIf rdoVertical.Checked Then
+        '            clsTempOp.AddParameter(iPosition:=0, strParameterValue:=ucr1stFactorReceiver.GetVariableNames(False))
+        '            clsTempOp.AddParameter(strParameterValue:=".")
+        '        End If
+        '    End If
+        '    clsRFacetFunction.AddParameter("facets", clsROperatorParameter:=clsTempOp)
+
+        'ElseIf Not ucr1stFactorReceiver.IsEmpty() AndAlso Not ucr2ndFactorReceiver.IsEmpty() Then
+        '    clsRFacetFunction.SetRCommand("facet_grid")
+        '    RemoveWrapParameters()
+        '    If rdoHorizontal.Checked Then
+        '        clsTempOp.AddParameter(strParameterValue:=ucr1stFactorReceiver.GetVariableNames(False))
+        '        clsTempOp.AddParameter(iPosition:=0, strParameterValue:=ucr2ndFactorReceiver.GetVariableNames(False))
+        '    ElseIf rdoVertical.Checked Then
+        '        clsTempOp.AddParameter(iPosition:=0, strParameterValue:=ucr1stFactorReceiver.GetVariableNames(False))
+        '        clsTempOp.AddParameter(strParameterValue:=ucr2ndFactorReceiver.GetVariableNames(False))
+        '    End If
+        '    clsRFacetFunction.AddParameter("facets", clsROperatorParameter:=clsTempOp)
+        'Else
+        '    clsRFacetFunction.RemoveParameterByName("facets")
+        'End If
     End Sub
 
     Private Sub RemoveWrapParameters()
         'This sub is called when the clsRFacet function's RCommand is changed from wrap to grid to remove the parameters that are only relevant in the wrap case.
-        clsRFacetFunction.RemoveParameterByName("dir")
-        clsRFacetFunction.RemoveParameterByName("ncol")
-        clsRFacetFunction.RemoveParameterByName("nrow")
+        'clsRFacetFunction.RemoveParameterByName("dir")
+        'clsRFacetFunction.RemoveParameterByName("ncol")
+        'clsRFacetFunction.RemoveParameterByName("nrow")
     End Sub
 
     Private Sub SetFixRowColumnParameter()
         'This sub is called in the wrap case to set up the parameter fixing the number of rows or columns when working in the horizontal or vertical case.
-        If chkNoOfRowsOrColumns.Checked Then
-            If rdoHorizontal.Checked Then
-                clsRFacetFunction.AddParameter("nrow", nudNumberofRows.Value)
-                clsRFacetFunction.RemoveParameterByName("ncol")
-            Else
-                clsRFacetFunction.RemoveParameterByName("nrow")
-                clsRFacetFunction.AddParameter("ncol", nudNumberofRows.Value)
-            End If
-        Else
-            clsRFacetFunction.RemoveParameterByName("ncol")
-            clsRFacetFunction.RemoveParameterByName("nrow")
-        End If
+        'If ucrChkNoOfRowsOrColumns.Checked Then
+        '    If rdoHorizontal.Checked Then
+        '        clsRFacetFunction.AddParameter("nrow", ucrNudNumberofRows.Value)
+        '        clsRFacetFunction.RemoveParameterByName("ncol")
+        '    Else
+        '        clsRFacetFunction.RemoveParameterByName("nrow")
+        '        clsRFacetFunction.AddParameter("ncol", ucrNudNumberofRows.Value)
+        '    End If
+        'Else
+        '    clsRFacetFunction.RemoveParameterByName("ncol")
+        '    clsRFacetFunction.RemoveParameterByName("nrow")
+        'End If
     End Sub
 
-    Private Sub IncludeFacetsParameter()
-        If chkIncludeFacets.Checked AndAlso Not ucr1stFactorReceiver.IsEmpty() Then
-            clsRsyntax.AddOperatorParameter("facet", clsRFunc:=clsRFacetFunction)
-        Else
-            clsRsyntax.RemoveOperatorParameter("facet")
-        End If
-    End Sub
-
-    Private Sub chkIncludeFacets_CheckedChanged(sender As Object, e As EventArgs) Handles chkIncludeFacets.CheckedChanged
-        IncludeFacets()
+    Private Sub ucrChkIncludeFacets_CheckedChanged() Handles ucrChkIncludeFacets.ControlValueChanged, ucr1stFactorReceiver.ControlValueChanged, ucr2ndFactorReceiver.ControlValueChanged
         FacetsNumberOfRowsOrColumns()
+        AddRemoveFacets()
     End Sub
 
-    Private Sub SetScaleOption()
+    Private Sub SetScaleParameter()
         'This sub is setting the right scale parameter in the clsRFacetFunctions, according to the scale chk boxes. 
         'It only needs to be called when these are modified, as this parameter is common to both facets_grid and facets_wrap. Although graphics on the same row or column in facets_grid share the y or x axis respectively. Still different rows might benefit from having different y-axis scales for instance.
         'Warning: ggplot allows the extra parameter "space" in the facet_grid case. That one takes as values "free" or "fixed" (with quotes). It determines whether the size of rows and columns should adapt to the range of the scale.
-        If chkFreeScalesX.Checked AndAlso chkFreeScalesY.Checked Then
-            clsRFacetFunction.AddParameter("scales", Chr(34) & "free" & Chr(34))
-        ElseIf chkFreeScalesX.Checked AndAlso Not chkFreeScalesY.Checked Then
-            clsRFacetFunction.AddParameter("scales", Chr(34) & "free_x" & Chr(34))
-        ElseIf Not chkFreeScalesX.Checked AndAlso chkFreeScalesY.Checked Then
-            clsRFacetFunction.AddParameter("scales", Chr(34) & "free_y" & Chr(34))
-        Else
-            clsRFacetFunction.RemoveParameterByName("scales")
-        End If
-    End Sub
-
-    Private Sub chkScales_CheckedChanged(sender As Object, e As EventArgs) Handles chkFreeScalesX.CheckedChanged, chkFreeScalesY.CheckedChanged
-        SetScaleOption()
-        SetFacets()
-    End Sub
-    Private Sub FacetsNumberOfRowsOrColumns()
-        'This sub decides whether the option to fix the number of rows or columns should be available or not.
-        'When chkMargin is checked, or when both receivers are used (i.e. the second optional is filled), facet_grid is used, and thus the number of rows or columns can't be fixed.
-        If chkIncludeFacets.Checked Then
-            If (chkMargin.Checked OrElse chkFreeSpace.Checked OrElse (Not ucr2ndFactorReceiver.IsEmpty)) Then
-                chkNoOfRowsOrColumns.Checked = False
-                chkNoOfRowsOrColumns.Visible = False
-                nudNumberofRows.Visible = False
+        If bRCodeSet Then
+            If ucrChkFreeScalesX.Checked AndAlso ucrChkFreeScalesY.Checked Then
+                clsFacetFunction.AddParameter("scales", Chr(34) & "free" & Chr(34))
+            ElseIf ucrChkFreeScalesX.Checked Then
+                clsFacetFunction.AddParameter("scales", Chr(34) & "free_x" & Chr(34))
+            ElseIf ucrChkFreeScalesY.Checked Then
+                clsFacetFunction.AddParameter("scales", Chr(34) & "free_y" & Chr(34))
             Else
-                chkNoOfRowsOrColumns.Visible = True
-                nudNumberofRows.Visible = chkNoOfRowsOrColumns.Checked
+                clsFacetFunction.RemoveParameterByName("scales")
             End If
         End If
     End Sub
 
-    Private Sub ucr1stFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucr1stFactorReceiver.SelectionChanged
-        SetFacets()
-        IncludeFacetsParameter()
+    Private Sub chkScales_CheckedChanged() Handles ucrChkFreeScalesX.ControlValueChanged, ucrChkFreeScalesY.ControlValueChanged
+        SetScaleParameter()
+    End Sub
+
+    Private Sub FacetsNumberOfRowsOrColumns()
+        'This Sub() decides whether the option to fix the number of rows Or columns should be available Or Not.
+        'When ucrChkMargin Is checked, Or when both receivers are used (i.e. the second optional Is filled), facet_grid Is used, And thus the number of rows Or columns can't be fixed.
+        If ucrChkIncludeFacets.Checked Then
+            If ucrChkMargin.Checked OrElse ucrChkFreeSpace.Checked OrElse Not ucr2ndFactorReceiver.IsEmpty Then
+                ucrChkNoOfRowsOrColumns.Visible = False
+                ucrNudNumberofRows.Visible = False
+            Else
+                ucrChkNoOfRowsOrColumns.Visible = True
+                ucrNudNumberofRows.Visible = ucrChkNoOfRowsOrColumns.Checked
+            End If
+        Else
+            ucrChkNoOfRowsOrColumns.Visible = False
+            ucrNudNumberofRows.Visible = False
+        End If
+    End Sub
+
+    Private Sub FactorReceivers_ControlValueChanged() Handles ucr1stFactorReceiver.ControlValueChanged, ucr2ndFactorReceiver.ControlValueChanged
         SecondFactorReceiverEnabled()
+        SetFacetParameters()
     End Sub
 
     Private Sub SecondFactorReceiverEnabled()
-        If ucr1stFactorReceiver.IsEmpty() Then
-            ucr2ndFactorReceiver.Enabled = False
-        Else ucr2ndFactorReceiver.Enabled = True
-        End If
-    End Sub
-
-    Private Sub ucr2ndFactorReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucr2ndFactorReceiver.SelectionChanged
-        FacetsNumberOfRowsOrColumns()
-        SetFacets()
-    End Sub
-
-    Private Sub rdoHorVer_CheckedChanged(sender As Object, e As EventArgs) Handles rdoHorizontal.CheckedChanged, rdoVertical.CheckedChanged
-        If rdoHorizontal.Checked Then
-            chkNoOfRowsOrColumns.Text = "Fixed Number of Rows"
-        ElseIf rdoVertical.Checked Then
-            chkNoOfRowsOrColumns.Text = "Fixed Number of Columns"
-        End If
-        SetFacets()
-    End Sub
-
-    Private Sub chkNoOfRowsOrColumns_CheckedChanged(sender As Object, e As EventArgs) Handles chkNoOfRowsOrColumns.CheckedChanged
-        nudNumberofRows.Visible = chkNoOfRowsOrColumns.Checked
-        SetFacets()
-    End Sub
-
-    Private Sub nudNumberofRows_TextChanged(sender As Object, e As EventArgs) Handles nudNumberofRows.TextChanged
-        SetFacets()
-    End Sub
-
-    Private Sub chkMargin_CheckedChanged(sender As Object, e As EventArgs) Handles chkMargin.CheckedChanged
-        If chkMargin.Checked Then
-            clsRFacetFunction.AddParameter("margins", "TRUE")
-        Else
-            clsRFacetFunction.RemoveParameterByName("margins")
-        End If
-        FacetsNumberOfRowsOrColumns()
-        SetFacets()
-    End Sub
-
-    Private Sub chkFreeSpace_CheckedChanged(sender As Object, e As EventArgs) Handles chkFreeSpace.CheckedChanged
-        If chkMargin.Checked Then
-            clsRFacetFunction.AddParameter("space", Chr(34) & "free" & Chr(34))
-        Else
-            clsRFacetFunction.RemoveParameterByName("space")
-        End If
-        FacetsNumberOfRowsOrColumns()
-        SetFacets()
-    End Sub
-
-    Private Sub ucrInputThemes_NameChanged() Handles ucrInputThemes.NameChanged
-        If Not ucrInputThemes.IsEmpty Then
-            clsRThemeFunction.SetRCommand(ucrInputThemes.GetText())
-            If ucrInputThemes.GetText() = "theme_grey" Then
-                If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                    clsRsyntax.AddOperatorParameter("theme", clsRFunc:=clsRThemeFunction)
-                Else
-                    clsRsyntax.RemoveOperatorParameter("theme")
+        If bRCodeSet Then
+            If ucr1stFactorReceiver.IsEmpty() Then
+                ucr2ndFactorReceiver.Clear()
+                ucr2ndFactorReceiver.Enabled = False
+                If ucrFacetSelector.CurrentReceiver IsNot Nothing AndAlso ucrFacetSelector.CurrentReceiver.Equals(ucr2ndFactorReceiver) Then
+                    ucr1stFactorReceiver.SetMeAsReceiver()
                 End If
             Else
-                clsRsyntax.AddOperatorParameter("theme", clsRFunc:=clsRThemeFunction)
+                ucr2ndFactorReceiver.Enabled = True
             End If
-        Else
-            clsRsyntax.RemoveOperatorParameter("theme")
         End If
     End Sub
 
-    Private Sub chkChangeLegendTitle_CheckedChanged(sender As Object, e As EventArgs) Handles chkDisplayLegendTitle.CheckedChanged
-        'The Overwrite Legend Title check box should only be available when the Display Legend Title is ticked.
-        If chkDisplayLegendTitle.Checked Then
-            chkOverwriteLegendTitle.Visible = True
-        Else
-            chkOverwriteLegendTitle.Visible = False
-        End If
+    Private Sub ucrPnlHorizonatalVertical_ControlValueChanged() Handles ucrPnlHorizonatalVertical.ControlValueChanged, ucrChkMargin.ControlValueChanged
+        SetFacetParameters()
     End Sub
 
-    'Question to be discussed/Task: This is the kind of subs that could go into a SetupPlotOptions procedure... also only called in two specific plots and not in the others ... Why ? (to be explored)
-    Public Sub SetGgplotFunction(clsGgplotFunc As RFunction)
-        'When the link for clsRggplotFunction has been changed, the ucrAdditionalLayers GgplotFunction needs to be updated.
-        clsRggplotFunction = clsGgplotFunc
-        ucrPlotsAdditionalLayers.SetGGplotFunction(clsRggplotFunction)
+    Private Sub ucrChkMargin_CheckedChanged() Handles ucrChkMargin.ControlValueChanged
+        'If ucrChkMargin.Checked Then
+        '    clsRFacetFunction.AddParameter("margins", "TRUE")
+        'Else
+        '    clsRFacetFunction.RemoveParameterByName("margins")
+        'End If
+        ' FacetsNumberOfRowsOrColumns()
+        'SetFacets()
+    End Sub
+
+    Private Sub ucrChkFreeSpace_CheckedChanged() Handles ucrChkFreeSpace.ControlValueChanged
+        SetFacetParameters()
     End Sub
 
     Public Sub SetDataFrame(strNewDataFrame As String)
         strDataFrame = strNewDataFrame
         ucrFacetSelector.SetDataframe(strDataFrame, False)
-    End Sub
-
-    Public Sub SetRSyntax(clsRSyntaxIn As RSyntax)
-        'When the link for RSyntax has been changed, the ucrAdditionalLayers RSyntax needs to be updated.
-        clsRsyntax = clsRSyntaxIn
-        ucrPlotsAdditionalLayers.SetRSyntax(clsRsyntax)
-    End Sub
-
-
-    Private Sub ucrInputGraphTitle_NameChanged() Handles ucrInputGraphTitle.NameChanged
-        If Not ucrInputGraphTitle.IsEmpty Then
-            clsGraphTitleFunction.SetRCommand("ggtitle")
-            clsGraphTitleFunction.AddParameter("label", Chr(34) & ucrInputGraphTitle.GetText() & Chr(34))
-            clsRsyntax.AddOperatorParameter("ggtitle", clsRFunc:=clsGraphTitleFunction)
-        Else
-            clsRsyntax.RemoveOperatorParameter("ggtitle")
-        End If
-    End Sub
-
-    Private Sub chkOverwriteLegendTitle_CheckedChanged(sender As Object, e As EventArgs) Handles chkOverwriteLegendTitle.CheckedChanged
-        If chkOverwriteLegendTitle.Checked Then
-            ucrInputLegend.Visible = True
-        Else
-            ucrInputLegend.Visible = False
-            ucrInputLegend.ResetText()
-        End If
-    End Sub
-
-    Public Sub LegendDefaults()
-        If rdoLegendTitleAuto.Checked Then
-            chkDisplayLegendTitle.Visible = False
-            chkOverwriteLegendTitle.Visible = False
-            chkOverwriteLegendTitle.Checked = False
-            ucrInputLegend.Visible = False
-            ucrInputLegend.ResetText()
-        ElseIf rdoLegendTitleCustom.Checked Then
-            chkDisplayLegendTitle.Visible = True
-            chkOverwriteLegendTitle.Visible = True
-        End If
-    End Sub
-
-    Private Sub rdoLegendTitleAuto_CheckedChanged(sender As Object, e As EventArgs) Handles rdoLegendTitleAuto.CheckedChanged
-        LegendDefaults()
-    End Sub
-
-    Private Sub rdoLegendTitleCustom_CheckedChanged(sender As Object, e As EventArgs) Handles rdoLegendTitleCustom.CheckedChanged
-        LegendDefaults()
     End Sub
 
     Public Property bLayersDefaultIsGlobal As Boolean
@@ -460,18 +605,52 @@ Public Class sdgPlots
         End Set
     End Property
 
-    Private Sub ucrInputLegend_NameChanged() Handles ucrInputLegend.NameChanged
-        If rdoLegendTitleCustom.Checked AndAlso (Not ucrInputLegend.IsEmpty()) Then
-            clsLegendFunction.SetRCommand("labs")
-            clsLegendFunction.AddParameter("fill", Chr(34) & ucrInputLegend.GetText() & Chr(34))
-            clsRsyntax.AddOperatorParameter("labs", clsRFunc:=clsLegendFunction)
-        ElseIf rdoLegendTitleAuto.Checked Then
-            clsRsyntax.RemoveOperatorParameter("labs")
+    Private Sub AddRemoveLabs()
+        If bRCodeSet Then
+            If Not ucrInputGraphTitle.IsEmpty() OrElse Not ucrInputGraphSubTitle.IsEmpty() OrElse Not ucrInputGraphCaption.IsEmpty() Then
+                clsBaseOperator.AddParameter("labs", clsRFunctionParameter:=clsLabsFunction)
+            Else
+                clsBaseOperator.RemoveParameterByName("labs")
+            End If
         End If
     End Sub
 
+    Private Sub LabsControls_ControlValueChanged() Handles ucrInputGraphTitle.ControlValueChanged, ucrInputGraphSubTitle.ControlValueChanged, ucrInputGraphCaption.ControlValueChanged
+        AddRemoveLabs()
+    End Sub
 
+    Private Sub ucrChkNoOfRowsOrColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNoOfRowsOrColumns.ControlValueChanged
+        SetFacetParameters()
+    End Sub
 
+    Private Function GetAxisType(bIsX As Boolean) As String
+        Dim strAes As String
+
+        If bIsX Then
+            strAes = "x"
+        Else
+            strAes = "y"
+        End If
+        If clsGlobalAesFunction IsNot Nothing Then
+            If clsGlobalAesFunction.ContainsParameter(strAes) AndAlso clsGlobalAesFunction.GetParameter(strAes).strArgumentValue <> Chr(34) & Chr(34) Then
+                'Run R code to determine type
+                'Temp default to continuous
+                Return "Continuous"
+            Else
+                'When aes not present discrete scale function works
+                Return "Discrete"
+            End If
+        Else
+            Return "Discrete"
+        End If
+    End Function
+
+    Private Sub cmdAllOptions_Click(sender As Object, e As EventArgs) Handles cmdAllOptions.Click
+        sdgThemes.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, bReset:=bResetThemes)
+        Me.SendToBack()
+        sdgThemes.ShowDialog()
+        bResetThemes = False
+    End Sub
     'Warning/Task to be discussed: need to disable ok on dlg's when layers are not complete on subdialogues + warning message... 
     'Warning: actually this will be very hard to implement until the global aes, set from the main layer are properly communicated to plots. Global aes might fill in missing mandatory aes...
 End Class

@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,8 +11,9 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat
 Imports instat.Translations
 Public Class sdgClimdexIndices
@@ -179,11 +180,13 @@ Public Class sdgClimdexIndices
 
         clsNewClimdexInput.AddParameter("base.range", clsRFunctionParameter:=clsRBaseRange)
         clsNewClimdexInput.AddParameter("max.missing.days", clsRFunctionParameter:=clsRMaxMisingDays)
+
         ucrInputFreq.SetParameter(New RParameter("freq"))
         dctInputFreqPairs.Add("annual", Chr(34) & "annual" & Chr(34))
         dctInputFreqPairs.Add("monthly", Chr(34) & "monthly" & Chr(34))
         ucrInputFreq.SetItems(dctInputFreqPairs)
-        ucrInputFreq.cboInput.SelectedItem = "annual"
+        ucrInputFreq.SetRDefault(Chr(34) & "annual" & Chr(34))
+        ucrInputFreq.SetDropDownStyleAsNonEditable()
 
         ucrInputTempQtiles.SetParameter(New RParameter("x"))
         ucrInputTempQtiles.SetValidationTypeAsNumericList()
@@ -222,7 +225,8 @@ Public Class sdgClimdexIndices
         dctNumericPairs.Add("GSL_max", Chr(34) & "GSL_max" & Chr(34))
         dctNumericPairs.Add("GSL_sum", Chr(34) & "GSL_sum" & Chr(34))
         ucrInputGSLMode.SetItems(dctNumericPairs)
-        ucrInputGSLMode.cboInput.SelectedItem = "GSL"
+        ucrInputGSLMode.SetDropDownStyleAsNonEditable()
+        ucrInputGSLMode.SetRDefault(Chr(34) & "GSL" & Chr(34))
 
         lstGroupboxes = New List(Of GroupBox)
         lstGroupboxes.AddRange({grpPrecAnnual, grpPrecAnnualMonthly, grpTmaxAnnual, grpTmaxAnnualMonthly, grpTminAnnual, grpTminAnnualMonthly, grpTmaxTminAnnual, grpTmaxTminAnnualMonthly})
@@ -262,6 +266,15 @@ Public Class sdgClimdexIndices
         clsRTwoArg4.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsDefaultFunction)
         clsRTwoArg5.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsDefaultFunction)
         clsRThreeArg.AddParameter("ci", clsRFunctionParameter:=dlgClimdex.clsDefaultFunction)
+
+        clsROneArg.SetPackageName("climdex.pcic")
+        clsRTwoArg1.SetPackageName("climdex.pcic")
+        clsRTwoArg2.SetPackageName("climdex.pcic")
+        clsRTwoArg3.SetPackageName("climdex.pcic")
+        clsRTwoArg4.SetPackageName("climdex.pcic")
+        clsRTwoArg5.SetPackageName("climdex.pcic")
+        clsRThreeArg.SetPackageName("climdex.pcic")
+        InitialiseTabs()
         bControlsInitialised = True
     End Sub
 
@@ -389,53 +402,33 @@ Public Class sdgClimdexIndices
         End If
     End Sub
 
-    Private Sub lblN_Click(sender As Object, e As EventArgs) Handles lblN.Click
-
-    End Sub
-
-    Private Sub ucrInputPrecQtiles_Load(sender As Object, e As EventArgs) Handles ucrInputPrecQtiles.Load
-
-    End Sub
-
-    Private Sub lblPrecQuantiles_Click(sender As Object, e As EventArgs) Handles lblPrecQuantiles.Click
-
-    End Sub
-
-    Private Sub ucrInputTempQtiles_Load(sender As Object, e As EventArgs) Handles ucrInputTempQtiles.Load
-
-    End Sub
-
-    Private Sub lblTempQuantiles_Click(sender As Object, e As EventArgs) Handles lblTempQuantiles.Click
-
-    End Sub
-
-    Private Sub grpBaseRange_Enter(sender As Object, e As EventArgs) Handles grpBaseRange.Enter
-
-    End Sub
-
     Public Sub SetRFunction(clsNewRFunction As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
         clsNewClimdexInput = clsNewRFunction
-        ucrNudN.SetRCode(clsNewClimdexInput, bReset)
-        ucrNudThreshold.SetRCode(clsRTwoArg3, bReset)
-        ucrNudAnnualMissingDays.SetRCode(clsRMaxMisingDays, bReset)
-        ucrNudMothlyMissingDays.SetRCode(clsRMaxMisingDays, bReset)
-        ucrNudLowerBase.SetRCode(clsRBaseRange, bReset)
-        ucrNudUpperBase.SetRCode(clsRBaseRange, bReset)
-        ucrNudMinBaseData.SetRCode(clsNewClimdexInput, bReset)
-        ucrInputFreq.SetRCode(clsRTwoArg1, bReset)
-        ucrInputFreq.SetRCode(clsRThreeArg, bReset)
-        ucrInputFreq.SetRCode(clsRWriteDf, bReset)
-        ucrInputTempQtiles.SetRCode(clsRTempQTiles, bReset)
-        ucrInputPrecQtiles.SetRCode(clsRPrecQTiles, bReset)
-        ucrChkNHemisphere.SetRCode(clsNewClimdexInput, bReset)
-        ucrChkCenterMean.SetRCode(clsRThreeArg, bReset)
-        ucrChkMaxSpellSpanYears.SetRCode(clsRTwoArg4, bReset)
-        ucrChkSpellDISpanYear.SetRCode(clsRTwoArg5, bReset)
-        ucrInputGSLMode.SetRCode(clsRTwoArg2, bReset)
+        ucrNudN.SetRCode(clsNewClimdexInput, bReset, bCloneIfNeeded:=True)
+        ucrNudThreshold.SetRCode(clsRTwoArg3, bReset, bCloneIfNeeded:=True)
+        ucrNudAnnualMissingDays.SetRCode(clsRMaxMisingDays, bReset, bCloneIfNeeded:=True)
+        ucrNudMothlyMissingDays.SetRCode(clsRMaxMisingDays, bReset, bCloneIfNeeded:=True)
+        ucrNudLowerBase.SetRCode(clsRBaseRange, bReset, bCloneIfNeeded:=True)
+        ucrNudUpperBase.SetRCode(clsRBaseRange, bReset, bCloneIfNeeded:=True)
+        ucrNudMinBaseData.SetRCode(clsNewClimdexInput, bReset, bCloneIfNeeded:=True)
+        ucrInputFreq.SetRCode(clsRTwoArg1, bReset, bCloneIfNeeded:=True)
+        ucrInputFreq.SetRCode(clsRThreeArg, bReset, bCloneIfNeeded:=True)
+        ucrInputFreq.SetRCode(clsRWriteDf, bReset, bCloneIfNeeded:=True)
+        ucrInputTempQtiles.SetRCode(clsRTempQTiles, bReset, bCloneIfNeeded:=True)
+        ucrInputPrecQtiles.SetRCode(clsRPrecQTiles, bReset, bCloneIfNeeded:=True)
+        ucrChkNHemisphere.SetRCode(clsNewClimdexInput, bReset, bCloneIfNeeded:=True)
+        ucrChkCenterMean.SetRCode(clsRThreeArg, bReset, bCloneIfNeeded:=True)
+        ucrChkMaxSpellSpanYears.SetRCode(clsRTwoArg4, bReset, bCloneIfNeeded:=True)
+        ucrChkSpellDISpanYear.SetRCode(clsRTwoArg5, bReset, bCloneIfNeeded:=True)
+        ucrInputGSLMode.SetRCode(clsRTwoArg2, bReset, bCloneIfNeeded:=True)
         IndicesType()
+
+        If bReset Then
+            tbpClimdex.SelectedIndex = 0
+        End If
     End Sub
 
     Private Sub GroupBoxControl(TempGroupBox As GroupBox)
@@ -563,5 +556,14 @@ Public Class sdgClimdexIndices
 
     Private Sub ucrInputFreq_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFreq.ControlContentsChanged
         IndicesType()
+    End Sub
+
+    Private Sub InitialiseTabs()
+        For i = 0 To tbpClimdex.TabCount - 1
+            tbpClimdex.SelectedIndex = i
+        Next
+        tbpClimdex.TabPages(2).Enabled = False
+        tbpClimdex.TabPages(1).Enabled = False
+        tbpClimdex.SelectedIndex = 0
     End Sub
 End Class

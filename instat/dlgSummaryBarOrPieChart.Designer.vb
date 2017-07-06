@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgSummaryBarOrPieChart
     Inherits System.Windows.Forms.Form
 
@@ -30,6 +46,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.cmdPieChartOptions = New System.Windows.Forms.Button()
         Me.rdoBarChart = New System.Windows.Forms.RadioButton()
         Me.rdoPieChart = New System.Windows.Forms.RadioButton()
+        Me.rdoTable = New System.Windows.Forms.RadioButton()
         Me.ucrSaveSummaryBar = New instat.ucrSave()
         Me.ucrSecondFactorReceiver = New instat.ucrReceiverSingle()
         Me.ucrFactorReceiver = New instat.ucrReceiverSingle()
@@ -106,7 +123,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.rdoBarChart.FlatAppearance.BorderSize = 2
         Me.rdoBarChart.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoBarChart.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoBarChart.Location = New System.Drawing.Point(101, 9)
+        Me.rdoBarChart.Location = New System.Drawing.Point(67, 10)
         Me.rdoBarChart.Name = "rdoBarChart"
         Me.rdoBarChart.Size = New System.Drawing.Size(100, 27)
         Me.rdoBarChart.TabIndex = 1
@@ -123,7 +140,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.rdoPieChart.FlatAppearance.BorderSize = 2
         Me.rdoPieChart.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoPieChart.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoPieChart.Location = New System.Drawing.Point(199, 9)
+        Me.rdoPieChart.Location = New System.Drawing.Point(165, 10)
         Me.rdoPieChart.Name = "rdoPieChart"
         Me.rdoPieChart.Size = New System.Drawing.Size(100, 27)
         Me.rdoPieChart.TabIndex = 2
@@ -131,6 +148,23 @@ Partial Class dlgSummaryBarOrPieChart
         Me.rdoPieChart.Text = "Pie Chart"
         Me.rdoPieChart.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoPieChart.UseVisualStyleBackColor = True
+        '
+        'rdoTable
+        '
+        Me.rdoTable.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoTable.Enabled = False
+        Me.rdoTable.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoTable.FlatAppearance.BorderSize = 2
+        Me.rdoTable.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoTable.Location = New System.Drawing.Point(261, 10)
+        Me.rdoTable.Name = "rdoTable"
+        Me.rdoTable.Size = New System.Drawing.Size(100, 27)
+        Me.rdoTable.TabIndex = 0
+        Me.rdoTable.TabStop = True
+        Me.rdoTable.Text = "Tables"
+        Me.rdoTable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoTable.UseVisualStyleBackColor = True
         '
         'ucrSaveSummaryBar
         '
@@ -147,6 +181,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.ucrSecondFactorReceiver.Name = "ucrSecondFactorReceiver"
         Me.ucrSecondFactorReceiver.Selector = Nothing
         Me.ucrSecondFactorReceiver.Size = New System.Drawing.Size(120, 26)
+        Me.ucrSecondFactorReceiver.strNcFilePath = ""
         Me.ucrSecondFactorReceiver.TabIndex = 9
         Me.ucrSecondFactorReceiver.ucrSelector = Nothing
         '
@@ -158,6 +193,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.ucrFactorReceiver.Name = "ucrFactorReceiver"
         Me.ucrFactorReceiver.Selector = Nothing
         Me.ucrFactorReceiver.Size = New System.Drawing.Size(120, 20)
+        Me.ucrFactorReceiver.strNcFilePath = ""
         Me.ucrFactorReceiver.TabIndex = 7
         Me.ucrFactorReceiver.ucrSelector = Nothing
         '
@@ -169,6 +205,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.ucrYReceiver.Name = "ucrYReceiver"
         Me.ucrYReceiver.Selector = Nothing
         Me.ucrYReceiver.Size = New System.Drawing.Size(120, 20)
+        Me.ucrYReceiver.strNcFilePath = ""
         Me.ucrYReceiver.TabIndex = 5
         Me.ucrYReceiver.ucrSelector = Nothing
         '
@@ -191,9 +228,9 @@ Partial Class dlgSummaryBarOrPieChart
         '
         'ucrPnlOptions
         '
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(88, 2)
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(54, 3)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        Me.ucrPnlOptions.Size = New System.Drawing.Size(216, 35)
+        Me.ucrPnlOptions.Size = New System.Drawing.Size(307, 35)
         Me.ucrPnlOptions.TabIndex = 0
         '
         'dlgSummaryBarOrPieChart
@@ -201,6 +238,7 @@ Partial Class dlgSummaryBarOrPieChart
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(425, 371)
+        Me.Controls.Add(Me.rdoTable)
         Me.Controls.Add(Me.rdoPieChart)
         Me.Controls.Add(Me.ucrSaveSummaryBar)
         Me.Controls.Add(Me.rdoBarChart)
@@ -243,4 +281,5 @@ Partial Class dlgSummaryBarOrPieChart
     Friend WithEvents ucrSaveSummaryBar As ucrSave
     Friend WithEvents rdoBarChart As RadioButton
     Friend WithEvents ucrPnlOptions As UcrPanel
+    Friend WithEvents rdoTable As RadioButton
 End Class

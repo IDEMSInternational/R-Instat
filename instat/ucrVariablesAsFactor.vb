@@ -1,4 +1,20 @@
-﻿Imports instat
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Imports instat
 
 Public Class ucrVariablesAsFactor
     Public bSingleVariable As Boolean
@@ -96,7 +112,7 @@ Public Class ucrVariablesAsFactor
         For i = 0 To ucrMultipleVariables.lstSelectedVariables.Items.Count - 1
             lstVariablesFromSelector.Remove(ucrMultipleVariables.lstSelectedVariables.Items(i).Text)
         Next
-
+        lstVariablesFromSelector.RemoveAll(Function(x) x = "value")
         If lstVariablesFromSelector.Count = 1 Then
             If bWithQuotes Then
                 strIDVars = Chr(34) & lstVariablesFromSelector(0) & Chr(34)
@@ -164,6 +180,9 @@ Public Class ucrVariablesAsFactor
                 ucrFactorReceiver.SetStackedFactorMode(False)
             End If
             ucrSingleVariable.SetMeAsReceiver()
+            If Selector IsNot Nothing Then
+                Selector.bIsStacked = False
+            End If
         Else
             ucrSingleVariable.Visible = False
             ucrMultipleVariables.Visible = True
@@ -177,6 +196,9 @@ Public Class ucrVariablesAsFactor
                 ucrVariableSelector.ucrAvailableDataFrames.clsCurrDataFrame.AddParameter("id.vars", GetIDVarNamesFromSelector())
             End If
             ucrMultipleVariables.SetMeAsReceiver()
+            If Selector IsNot Nothing Then
+                Selector.bIsStacked = True
+            End If
         End If
         OnControlValueChanged()
     End Sub
@@ -273,9 +295,9 @@ Public Class ucrVariablesAsFactor
                         lstCurrentVariables = ExtractItemsFromRList(clsTempParameter.strArgumentValue)
                     End If
                 ElseIf bParameterIsRFunction AndAlso clsTempParameter.bIsFunction Then
-                    clsTempDataParameter = clsTempParameter.clsArgumentCodeStructure.GetParameter(strColumnsParameterNameInRFunction)
+                    clsTempDataParameter = clsTempParameter.clsArgumentCodeStructure.GetParameter(strItemsParameterNameInRFunction)
                     If clsTempDataParameter IsNot Nothing Then
-                        lstCurrentVariables = ExtractItemsFromRList(clsTempParameter.clsArgumentCodeStructure.GetParameter(strColumnsParameterNameInRFunction).strArgumentValue)
+                        lstCurrentVariables = ExtractItemsFromRList(clsTempParameter.clsArgumentCodeStructure.GetParameter(strItemsParameterNameInRFunction).strArgumentValue)
                     End If
                 End If
                 Clear()
@@ -321,7 +343,6 @@ Public Class ucrVariablesAsFactor
             MyBase.Selector = ucrNewSelector
             ucrSingleVariable.Selector = ucrNewSelector
             ucrMultipleVariables.Selector = ucrNewSelector
-
             If ucrNewSelector IsNot Nothing Then
                 ucrVariableSelector = TryCast(ucrNewSelector, ucrSelectorByDataFrame)
                 If ucrVariableSelector Is Nothing Then

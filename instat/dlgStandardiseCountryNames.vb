@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,17 +11,16 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
 Public Class dlgStandardiseCountryNames
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Dim bUseSelectedColumn As Boolean = False
-    Dim strSelectedColumn As String = ""
-    Dim strSelectedDataFrame As String = ""
     Private clsStandardiseCountryNames As New RFunction
+    Public strDefaultDataFrame As String = ""
+    Public strDefaultColumn As String = ""
 
     Private Sub dlgStandardiseCountryNames_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -29,51 +28,40 @@ Public Class dlgStandardiseCountryNames
             InitialiseDialog()
             bFirstLoad = False
         End If
-        If bUseSelectedColumn Then
-            SetDefaultColumn()
-        End If
         If bReset Then
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetDefaultColumn()
         bReset = False
     End Sub
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 530
 
-        'selector
+        'ucrSelector
         ucrSelectorStandardiseCountry.SetParameter(New RParameter("data_name", 0))
         ucrSelectorStandardiseCountry.SetParameterIsString()
 
-        'ucrreceiver
+        'ucrReceiver
         ucrReceiverCountryNames.SetParameter(New RParameter("country_columns", 1))
         ucrReceiverCountryNames.SetParameterIsString()
         ucrReceiverCountryNames.SetIncludedDataTypes({"factor", "character"})
+        ucrReceiverCountryNames.strSelectorHeading = "Characters"
         ucrReceiverCountryNames.Selector = ucrSelectorStandardiseCountry
         ucrReceiverCountryNames.SetMeAsReceiver()
     End Sub
 
     Private Sub SetDefaults()
         clsStandardiseCountryNames = New RFunction
+
         ucrSelectorStandardiseCountry.Reset()
+
         clsStandardiseCountryNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$standardise_country_names")
         ucrBase.clsRsyntax.SetBaseRFunction(clsStandardiseCountryNames)
     End Sub
 
-    Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
-        strSelectedColumn = strColumn
-        strSelectedDataFrame = strDataFrame
-        bUseSelectedColumn = True
-    End Sub
-
-    Private Sub SetDefaultColumn()
-        ucrSelectorStandardiseCountry.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem = strSelectedDataFrame
-        ucrReceiverCountryNames.Add(strSelectedColumn, strSelectedDataFrame)
-        bUseSelectedColumn = False
-    End Sub
-
-    Public Sub SetRCodeForControls(bReset As Boolean)
+    Private Sub SetRCodeForControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
@@ -89,6 +77,17 @@ Public Class dlgStandardiseCountryNames
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
+    End Sub
+
+    Private Sub SetDefaultColumn()
+        If strDefaultDataFrame <> "" Then
+            ucrSelectorStandardiseCountry.SetDataframe(strDefaultDataFrame)
+        End If
+        If strDefaultColumn <> "" Then
+            ucrReceiverCountryNames.Add(strDefaultColumn, strDefaultDataFrame)
+        End If
+        strDefaultDataFrame = ""
+        strDefaultColumn = ""
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverCountryNames.ControlContentsChanged

@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat
@@ -52,7 +52,7 @@ Public Class ucrReorder
                 lstAvailableData.Columns.Add("Objects")
         End Select
         lstAvailableData.Columns(0).Width = -2
-        loadList()
+        LoadList()
     End Sub
 
     Private Sub cmdUp_Click(sender As Object, e As EventArgs) Handles cmdUp.Click
@@ -158,16 +158,16 @@ Public Class ucrReorder
 
     Public Sub setDataframes(dfDataframes As ucrDataFrame)
         ucrDataFrameList = dfDataframes
-        loadList()
+        LoadList()
     End Sub
 
     Public Sub setReceiver(dfSingle As ucrReceiverSingle)
         ucrReceiver = dfSingle
-        loadList()
+        LoadList()
     End Sub
 
-    Public Sub loadList()
-        Dim vecNames As CharacterVector
+    Public Sub LoadList()
+        Dim vecNames As CharacterVector = Nothing
         Select Case strDataType
             Case "column"
                 If ucrDataFrameList IsNot Nothing AndAlso ucrDataFrameList.cboAvailableDataFrames.Text <> "" Then
@@ -219,15 +219,15 @@ Public Class ucrReorder
     End Sub
 
     Private Sub ucrDataFrameList_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrDataFrameList.DataFrameChanged
-        loadList()
+        LoadList()
     End Sub
 
     Private Sub ucrReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiver.SelectionChanged
-        loadList()
+        LoadList()
     End Sub
 
     'to update this to check if the order has changed
-    Public Function isEmpty() As Boolean
+    Public Function IsEmpty() As Boolean
         If lstAvailableData.Items.Count > 0 Then
             Return False
         Else
@@ -254,19 +254,22 @@ Public Class ucrReorder
         Dim strTemp As String()
         Dim chrTemp As CharacterVector
 
-        If TypeOf objTemp Is String() Then
-            strTemp = CType(objTemp, String())
-            FillListView(strTemp)
-        ElseIf TypeOf objTemp Is CharacterVector Then
-            chrTemp = CType(objTemp, CharacterVector)
-            FillListView(chrTemp)
+        If objTemp Is Nothing Then
+            FillListView(New String() {})
         Else
-            MsgBox("Developer error: Cannot set the value of " & Name & " because cannot convert value of object to String() or CharacterVector.")
+            If TypeOf objTemp Is String() Then
+                strTemp = CType(objTemp, String())
+                FillListView(strTemp)
+            ElseIf TypeOf objTemp Is CharacterVector Then
+                chrTemp = CType(objTemp, CharacterVector)
+                FillListView(chrTemp)
+            Else
+                MsgBox("Developer error: Cannot set the value of " & Name & " because cannot convert value of object to String() or CharacterVector.")
+            End If
         End If
     End Sub
 
     Private Sub ucrReorder_OrderChanged() Handles Me.OrderChanged
-
         OnControlValueChanged()
     End Sub
 
@@ -275,5 +278,9 @@ Public Class ucrReorder
             clsTempParam = New RParameter
         End If
         clsTempParam.SetArgumentValue(GetVariableNames(bWithQuotes))
+    End Sub
+
+    Private Sub ucrReorder_Load(sender As Object, e As EventArgs) Handles Me.Load
+        LoadList()
     End Sub
 End Class

@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,78 +11,79 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports instat.Translations
-Public Class dlgLabels
-    Public bFirstLoad As Boolean = True
-    Private Sub dlgLabels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
 
+Imports instat
+Imports instat.Translations
+
+Public Class dlgLabels
+    Private bFirstLoad As Boolean = True
+    Private bReset As Boolean = True
+    Private clsViewLabels As New RFunction
+
+    Private Sub dlgLabels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
         End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeforControls(bReset)
+        bReset = False
+        autoTranslate(Me)
+    End Sub
+
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
         TestOKEnabled()
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverLabels.IsEmpty() AndAlso ucrFactorLabels.IsColumnComplete(0) Then
+        If Not ucrReceiverLabels.IsEmpty() AndAlso ucrFactorLabels.IsColumnComplete(ucrFactorLabels.strLabelsName) AndAlso (ucrChkIncludeLevelNumbers.Visible AndAlso Not ucrChkIncludeLevelNumbers.Checked OrElse (ucrFactorLabels.IsColumnComplete(ucrFactorLabels.strLevelsName))) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
-
-    End Sub
-
-    Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$set_factor_levels")
-        ucrBase.iHelpTopicID = 35
-        ucrReceiverLabels.Selector = ucrSelectorForLabels
-        ucrReceiverLabels.SetMeAsReceiver()
-
-        ucrReceiverLabels.SetIncludedDataTypes({"factor"})
-        ucrFactorLabels.SetReceiver(ucrReceiverLabels)
-        ucrFactorLabels.SetAsViewerOnly()
-        ucrFactorLabels.AddEditableColumns({"Levels"})
     End Sub
 
     Private Sub SetDefaults()
+        clsViewLabels = New RFunction
         ucrSelectorForLabels.Reset()
         ucrSelectorForLabels.Focus()
-        SetNewLevels()
+        clsViewLabels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_factor_levels")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsViewLabels)
+        AddLevelButtonEnabled()
+    End Sub
+
+    Private Sub InitialiseDialog()
+        ucrBase.iHelpTopicID = 35
+
+        ucrFactorLabels.SetParameter(New RParameter("new_labels", 2))
+        ucrFactorLabels.SetReceiver(ucrReceiverLabels)
+        ucrFactorLabels.SetAsViewerOnly()
+        ucrFactorLabels.AddEditableColumns({ucrFactorLabels.strLevelsName, ucrFactorLabels.strLabelsName})
+        ucrFactorLabels.SetIsGridColumn(ucrFactorLabels.strLabelsName)
+        ucrFactorLabels.SetLevelsCheckbox(ucrChkIncludeLevelNumbers)
+
+        ucrReceiverLabels.SetParameter(New RParameter("col_name", 1))
+        ucrReceiverLabels.SetParameterIsString()
+        ucrReceiverLabels.Selector = ucrSelectorForLabels
+        ucrReceiverLabels.SetMeAsReceiver()
+        ucrReceiverLabels.SetIncludedDataTypes({"factor"})
+        ucrReceiverLabels.strSelectorHeading = "Factors"
+
+        ucrSelectorForLabels.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorForLabels.SetParameterIsString()
+
+        ucrChkIncludeLevelNumbers.SetText("Include Level Numbers")
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        SetRCodeforControls(True)
         TestOKEnabled()
-    End Sub
-
-    Private Sub ucrFactorLabels_GridContentChanged() Handles ucrFactorLabels.GridContentChanged
-        SetNewLevels()
-    End Sub
-
-    Private Sub SetNewLevels()
-        If ucrFactorLabels.IsColumnComplete(0) Then
-            ucrBase.clsRsyntax.AddParameter("new_levels", ucrFactorLabels.GetColumnInFactorSheet(iColumn:=0))
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("new_levels")
-        End If
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrReceiverLabels_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverLabels.SelectionChanged
-        If Not ucrReceiverLabels.IsEmpty Then
-            ucrBase.clsRsyntax.AddParameter("col_name", ucrReceiverLabels.GetVariableNames())
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("col_name")
-        End If
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrSelectorForLabels_DataFrameChanged() Handles ucrSelectorForLabels.DataFrameChanged
-        ucrBase.clsRsyntax.AddParameter("data_name", Chr(34) & ucrSelectorForLabels.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
     End Sub
 
     Private Sub cmdAddLevel_Click(sender As Object, e As EventArgs) Handles cmdAddLevel.Click
@@ -90,8 +91,21 @@ Public Class dlgLabels
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrFactorLabels_GridVisibleChanged() Handles ucrFactorLabels.GridVisibleChanged
-        cmdAddLevel.Enabled = ucrFactorLabels.grdFactorData.Visible
+    Private Sub ucrReceiverLabels_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLabels.ControlContentsChanged, ucrFactorLabels.ControlContentsChanged
+        AddLevelButtonEnabled()
         TestOKEnabled()
+    End Sub
+
+    Private Sub AddLevelButtonEnabled()
+        cmdAddLevel.Enabled = ucrFactorLabels.grdFactorData.Visible AndAlso Not ucrReceiverLabels.IsEmpty
+    End Sub
+
+    'TODO modify factor control to be able to manage two parameters from different columns
+    Private Sub ucrFactorLabels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorLabels.ControlValueChanged, ucrChkIncludeLevelNumbers.ControlValueChanged
+        If (ucrChkIncludeLevelNumbers.Checked OrElse Not ucrChkIncludeLevelNumbers.Visible) AndAlso ucrFactorLabels.IsColumnComplete(ucrFactorLabels.strLevelsName) Then
+            clsViewLabels.AddParameter("new_levels", strParameterValue:=ucrFactorLabels.GetColumnInFactorSheet(ucrFactorLabels.strLevelsName, bWithQuotes:=False))
+        Else
+            clsViewLabels.RemoveParameterByName("new_levels")
+        End If
     End Sub
 End Class

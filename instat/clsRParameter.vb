@@ -1,5 +1,5 @@
-﻿' Instat+R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class RParameter
@@ -33,9 +33,24 @@ Public Class RParameter
     Public Sub New()
     End Sub
 
-    Public Sub New(strParameterName As String, Optional iNewPosition As Integer = -1)
+    Public Sub New(strParameterName As String, Optional iNewPosition As Integer = -1, Optional bNewIncludeArgumentName As Boolean = True)
         SetArgumentName(strParameterName)
         Position = iNewPosition
+        bIncludeArgumentName = bNewIncludeArgumentName
+    End Sub
+
+    Public Sub New(strParameterName As String, strParamValue As String, Optional iNewPosition As Integer = -1, Optional bNewIncludeArgumentName As Boolean = True)
+        SetArgumentName(strParameterName)
+        SetArgumentValue(strParamValue)
+        Position = iNewPosition
+        bIncludeArgumentName = bNewIncludeArgumentName
+    End Sub
+
+    Public Sub New(strParameterName As String, strParamValue As RCodeStructure, Optional iNewPosition As Integer = -1, Optional bNewIncludeArgumentName As Boolean = True)
+        SetArgumentName(strParameterName)
+        SetArgument(strParamValue)
+        Position = iNewPosition
+        bIncludeArgumentName = bNewIncludeArgumentName
     End Sub
 
     ''Public Event PositionChanged()
@@ -80,6 +95,14 @@ Public Class RParameter
         End If
     End Sub
 
+    Public Sub ClearAllArguments()
+        strArgumentValue = ""
+        clsArgumentCodeStructure = Nothing
+        bIsString = False
+        bIsOperator = False
+        bIsFunction = False
+    End Sub
+
     Public Function ToScript(ByRef strScript As String) As String
         Dim strRet As String = ""
 
@@ -117,10 +140,17 @@ Public Class RParameter
         clsTempRParam.bIsFunction = bIsFunction
         clsTempRParam.bIsOperator = bIsOperator
         clsTempRParam.bIsString = bIsString
+        clsTempRParam.iPosition = iPosition
         clsTempRParam.bIncludeArgumentName = bIncludeArgumentName
         If clsArgumentCodeStructure IsNot Nothing Then
             clsTempRParam.clsArgumentCodeStructure = clsArgumentCodeStructure.Clone
         End If
         Return clsTempRParam
     End Function
+
+    Public Sub GetAllAssignTo(lstCodes As List(Of RCodeStructure), lstValues As List(Of String))
+        If bIsFunction OrElse bIsOperator Then
+            clsArgumentCodeStructure.GetAllAssignTo(lstCodes, lstValues)
+        End If
+    End Sub
 End Class

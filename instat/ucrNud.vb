@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat
@@ -44,6 +44,23 @@ Public Class ucrNud
             End If
         End If
     End Sub
+
+    Public Overrides Function IsRDefault() As Boolean
+        Dim clsParam As RParameter
+        Dim dTempParamValue As Decimal
+        Dim dTempRDefault As Decimal
+
+        clsParam = GetParameter()
+        If clsParam IsNot Nothing AndAlso clsParam.strArgumentValue IsNot Nothing AndAlso objRDefault IsNot Nothing Then
+            If Decimal.TryParse(clsParam.strArgumentValue, dTempParamValue) AndAlso Decimal.TryParse(objRDefault, dTempRDefault) Then
+                Return dTempRDefault = dTempParamValue
+            Else
+                Return False
+            End If
+        Else
+            Return False
+        End If
+    End Function
 
     Public Property Minimum As Decimal
         Get
@@ -133,10 +150,15 @@ Public Class ucrNud
     Protected Overrides Sub SetToValue(objTemp As Object)
         Dim dNewValue As Decimal
 
-        If objTemp IsNot Nothing AndAlso Decimal.TryParse(objTemp, dNewValue) AndAlso dNewValue >= nudUpDown.Minimum AndAlso dNewValue <= nudUpDown.Maximum Then
-            nudUpDown.Value = dNewValue
+        If objTemp Is Nothing Then
+            'If no value reset to a default value
+            nudUpDown.Value = nudUpDown.Minimum
         Else
-            MsgBox("Developer error: The value given cannot be converted to a decimal or is outside the range of the control. Value will be unchanged.")
+            If Decimal.TryParse(objTemp, dNewValue) AndAlso dNewValue >= nudUpDown.Minimum AndAlso dNewValue <= nudUpDown.Maximum Then
+                nudUpDown.Value = dNewValue
+            Else
+                MsgBox("Developer error: The value given cannot be converted to a decimal or is outside the range of the control. Value will be unchanged.")
+            End If
         End If
     End Sub
 End Class

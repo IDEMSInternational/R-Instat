@@ -1,5 +1,5 @@
-﻿' Instat+R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,14 +11,18 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class ROperator
     Inherits RCodeStructure
-    Public bForceIncludeOperation As Boolean = True
+    Public bForceIncludeOperation As Boolean = False
     Public strOperation As String
     Public bBrackets As Boolean = True
+
+    Public Sub New(Optional strOp As String = "", Optional bBracketsTemp As Boolean = True)
+        SetOperation(strOp, bBracketsTemp)
+    End Sub
 
     Public Sub SetOperation(strTemp As String, Optional bBracketsTemp As Boolean = True)
         strOperation = strTemp
@@ -29,24 +33,43 @@ Public Class ROperator
     Public Overrides Function ToScript(Optional ByRef strScript As String = "", Optional strTemp As String = "") As String
         'Parameters are sorted in the appropriate order and then the script is built.
         SortParameters()
-        If clsParameters(0) IsNot Nothing Then
-            If clsParameters(0).bIsOperator AndAlso bBrackets Then
-                strTemp = strTemp & "(" & clsParameters(0).ToScript(strScript) & ")"
+        If clsParameters.Count > 0 Then
+            If clsParameters(0) IsNot Nothing Then
+                If clsParameters(0).bIsOperator AndAlso bBrackets Then
+                    strTemp = strTemp & "(" & clsParameters(0).ToScript(strScript) & ")"
+                Else
+                    strTemp = strTemp & clsParameters(0).ToScript(strScript)
+                End If
+                'If there's only one parameter and bForceIncludeOperation then we include the operator
+                'The position of the operator depends on the parameter position
+                If bForceIncludeOperation AndAlso clsParameters.Count = 1 Then
+                    If clsParameters(0).Position = 0 Then
+                        strTemp = strTemp & Chr(32) & strOperation & Chr(32)
+                    Else
+                        strTemp = Chr(32) & strOperation & Chr(32) & strTemp
+                    End If
+                End If
             Else
-                strTemp = strTemp & clsParameters(0).ToScript(strScript)
+                'message
             End If
-        Else
-            'message
+            For Each clsParam In clsParameters.GetRange(1, clsParameters.Count - 1)
+                'If bIncludeOperation Then
+                strTemp = strTemp & Chr(32) & strOperation & Chr(32)
+                strTemp = strTemp & clsParam.ToScript(strScript)
+            Next
+            If bToScriptAsRString Then
+                'TODO should also check assignment of parameters
+                If bToBeAssigned OrElse bIsAssigned Then
+                    MsgBox("Developer error: Using bToScriptAsRString = True when RFunction is assigned will not produce the correct script. Remove assignment to use this options correctly.")
+                End If
+                'Cannot have double quotes ("") in the string because strTemp will be wrapped with ""
+                'In most cases signle quotes (') will give same functionality, though it's preferable to avoid this when constructing the RFunction
+                strTemp = strTemp.Replace(Chr(34), Chr(39))
+                strTemp = Chr(34) & strTemp & Chr(34)
+            End If
         End If
-
-        For Each clsParam In clsParameters.GetRange(1, clsParameters.Count - 1)
-            'If bIncludeOperation Then
-            strTemp = strTemp & Chr(32) & strOperation & Chr(32)
-            strTemp = strTemp & clsParam.ToScript(strScript)
-        Next
         Return MyBase.ToScript(strScript, strTemp)
     End Function
-
 
     Public Overrides Sub AddParameter(clsParam As RParameter)
         clsParam.bIncludeArgumentName = False 'We don't want to allow names in operator parameters...
@@ -76,24 +99,43 @@ Public Class ROperator
         OnParametersChanged()
     End Sub
 
+    Public Overrides Sub Clear()
+        SetOperation("")
+        bForceIncludeOperation = False
+        MyBase.Clear()
+    End Sub
+
     Public Overrides Function Clone() As RCodeStructure
         Dim clsTempROperator As New ROperator
+        Dim clsRParam As RParameter
 
-        clsTempROperator.strOperation = strOperation
-        clsTempROperator.bBrackets = bBrackets
+        'RCode properties
         clsTempROperator.strAssignTo = strAssignTo
         clsTempROperator.strAssignToDataFrame = strAssignToDataFrame
         clsTempROperator.strAssignToColumn = strAssignToColumn
         clsTempROperator.strAssignToModel = strAssignToModel
         clsTempROperator.strAssignToGraph = strAssignToGraph
+        clsTempROperator.strAssignToTable = strAssignToTable
         clsTempROperator.bToBeAssigned = bToBeAssigned
         clsTempROperator.bIsAssigned = bIsAssigned
-        clsTempROperator.bForceIncludeOperation = bForceIncludeOperation
         clsTempROperator.bAssignToIsPrefix = bAssignToIsPrefix
-
-        For Each clsParam As RParameter In MyBase.clsParameters
-            clsTempROperator.AddParameter(clsParam.Clone)
+        clsTempROperator.bAssignToColumnWithoutNames = bAssignToColumnWithoutNames
+        clsTempROperator.bInsertColumnBefore = bInsertColumnBefore
+        clsTempROperator.iNumberOfAddedParameters = iNumberOfAddedParameters
+        clsTempROperator.iPosition = iPosition
+        clsTempROperator.iCallType = iCallType
+        clsTempROperator.bExcludeAssignedFunctionOutput = bExcludeAssignedFunctionOutput
+        clsTempROperator.bClearFromGlobal = bClearFromGlobal
+        clsTempROperator.bToScriptAsRString = bToScriptAsRString
+        For Each clsRParam In clsParameters
+            clsTempROperator.AddParameter(clsRParam.Clone)
         Next
+
+        'ROperator specific properties
+        clsTempROperator.bForceIncludeOperation = bForceIncludeOperation
+        clsTempROperator.strOperation = strOperation
+        clsTempROperator.bBrackets = bBrackets
+
         Return clsTempROperator
     End Function
 End Class

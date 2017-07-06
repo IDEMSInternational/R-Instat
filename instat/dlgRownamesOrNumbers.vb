@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
@@ -19,7 +19,7 @@ Imports instat.Translations
 Public Class dlgRowNamesOrNumbers
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Dim sort As RFunction
+    Private clsRowNamesFunction As New RFunction
 
     Private Sub dlgRowNamesOrNumbers_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -36,17 +36,20 @@ Public Class dlgRowNamesOrNumbers
         TestOKEnabled()
     End Sub
 
-    Private Sub TestOKEnabled()
-        If (ucrSelectorRowNames.ucrAvailableDataFrames.cboAvailableDataFrames.Text = "") OrElse (rdoCopyfromColumn.Checked AndAlso ucrReceiverRowNames.IsEmpty) Then
-            ucrBase.OKEnabled(False)
-        Else
-            ucrBase.OKEnabled(True)
-        End If
-    End Sub
-
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 178
 
+        ' selector
+        ucrSelectorRowNames.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorRowNames.SetParameterIsString()
+
+        'ucrReceiverSingle
+        ucrReceiverRowNames.SetParameter(New RParameter("row_names", 1))
+        ucrReceiverRowNames.SetParameterIsRFunction()
+        ucrReceiverRowNames.Selector = ucrSelectorRowNames
+        ucrReceiverRowNames.SetMeAsReceiver()
+
+        ' main rdo options
         ucrPnlOverallOptions.AddRadioButton(rdoCopytoFirstColumn)
         ucrPnlOverallOptions.AddRadioButton(rdoCopyfromColumn)
         ucrPnlOverallOptions.AddRadioButton(rdoResetintoPositiveIntegers)
@@ -64,44 +67,53 @@ Public Class dlgRowNamesOrNumbers
         ucrPnlOverallOptions.AddToLinkedControls(ucrChkAsNumeric, {rdoSortbyRowNames}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         'ucrPnlSortOptions
-        ucrPnlSortOptions.SetParameter(New RParameter("decreasing", 3))
+        ucrPnlSortOptions.SetParameter(New RParameter("decreasing", 2))
         ucrPnlSortOptions.AddRadioButton(rdoSortAscending, "FALSE")
         ucrPnlSortOptions.AddRadioButton(rdoSortDescending, "TRUE")
         ucrPnlSortOptions.SetRDefault("TRUE")
 
-        ' selector
-        ucrSelectorRowNames.SetParameter(New RParameter("data_name", 0))
-        ucrSelectorRowNames.SetParameterIsString()
+        'ucrChkAsNumeric
+        ucrChkAsNumeric.SetParameter(New RParameter("row_names_as_numeric", 5))
+        ucrChkAsNumeric.SetText("Treat Row Names as Numeric")
+        ucrChkAsNumeric.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkAsNumeric.SetRDefault("TRUE")
 
         'ucrNewColumnName
         ucrNewColumnName.SetIsTextBox()
-        ucrNewColumnName.SetPrefix("Row_names")
+        ucrNewColumnName.SetPrefix("row_names")
         ucrNewColumnName.SetSaveTypeAsColumn()
         ucrNewColumnName.SetDataFrameSelector(ucrSelectorRowNames.ucrAvailableDataFrames)
         ucrNewColumnName.SetLabelText("Column Name:")
         ucrNewColumnName.SetAssignToBooleans(bTempInsertColumnBefore:=True)
-
-        'ucrReceiverSingle
-        ucrReceiverRowNames.SetParameter(New RParameter("row_names", 1))
-        ucrReceiverRowNames.SetParameterIsRFunction()
-        ucrReceiverRowNames.Selector = ucrSelectorRowNames
-        ucrReceiverRowNames.SetMeAsReceiver()
-
-        'ucrChkAsNumeric
-        ucrChkAsNumeric.SetParameter(New RParameter("row_names_as_numeric"))
-        ucrChkAsNumeric.SetText("Treat Row Names as Numeric")
-        ucrChkAsNumeric.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkAsNumeric.SetRDefault("TRUE")
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
+        clsRowNamesFunction = New RFunction
+
         ucrNewColumnName.Reset()
         ucrSelectorRowNames.Reset()
 
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_row_names")
-        clsDefaultFunction.SetAssignTo(strTemp:=ucrNewColumnName.GetText(), strTempDataframe:=ucrSelectorRowNames.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText(), bInsertColumnBefore:=True)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        clsRowNamesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_row_names")
+        clsRowNamesFunction.SetAssignTo(strTemp:=ucrNewColumnName.GetText(), strTempDataframe:=ucrSelectorRowNames.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText(), bInsertColumnBefore:=True)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRowNamesFunction)
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+    End Sub
+
+    Private Sub TestOKEnabled()
+        If (ucrSelectorRowNames.ucrAvailableDataFrames.cboAvailableDataFrames.Text = "") OrElse (rdoCopyfromColumn.Checked AndAlso ucrReceiverRowNames.IsEmpty) Then
+            ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
+        End If
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrPnl_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOverallOptions.ControlValueChanged
@@ -120,17 +132,7 @@ Public Class dlgRowNamesOrNumbers
         End If
     End Sub
 
-    Public Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-    End Sub
-
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
-        SetRCodeForControls(True)
-        TestOKEnabled()
-    End Sub
-
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorRowNames.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorRowNames.ControlContentsChanged, ucrPnlOverallOptions.ControlContentsChanged, ucrReceiverRowNames.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class

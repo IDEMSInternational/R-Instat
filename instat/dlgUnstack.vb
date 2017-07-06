@@ -1,4 +1,5 @@
-﻿' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -10,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
@@ -37,10 +38,12 @@ Public Class dlgUnstack
     Private Sub InitialiseDialog()
         ucrFactorToUnstackReceiver.Selector = ucrSelectorForunstack
         ucrColumnToUnstackReceiver.Selector = ucrSelectorForunstack
+        ucrBase.clsRsyntax.SetPackageName("reshape2")
         ucrBase.clsRsyntax.SetFunction("dcast")
         ucrFactorToUnstackReceiver.SetMeAsReceiver()
         ucrBase.iHelpTopicID = 58
         ucrFactorToUnstackReceiver.SetDataType("factor")
+        ucrFactorToUnstackReceiver.strSelectorHeading = "Factors"
         ucrIDColumns.Selector = ucrSelectorForunstack
         clsFormula.SetOperation("~")
         clsFormula.bBrackets = False

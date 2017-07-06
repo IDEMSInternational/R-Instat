@@ -1,5 +1,5 @@
 # a link can contain multiple ways to link two data frames
-link <- R6Class("link",
+link <- R6::R6Class("link",
                        public = list(
                          initialize = function(from_data_frame = "", to_data_frame = "", type = "", link_columns = list()) {
                            self$from_data_frame <- from_data_frame
@@ -165,7 +165,7 @@ instat_object$set("public", "get_linked_to_definition", function(from_data_frame
     for(curr_link in private$.links) {
       for(curr_link_pairs in curr_link$link_columns) {
         if(length(link_pairs) == length(curr_link_pairs) && setequal(link_pairs, names(curr_link_pairs))) {
-          return(list(to_data_name, as.vector(curr_link_pairs)))
+          return(list(to_data_name, as.vector(curr_link_pairs[link_pairs])))
         }
       }
     }

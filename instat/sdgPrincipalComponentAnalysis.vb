@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,8 +11,9 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 Public Class sdgPrincipalComponentAnalysis
     Public bFirstLoad As Boolean = True
@@ -95,6 +96,7 @@ Public Class sdgPrincipalComponentAnalysis
     'Code for running Screeplot if it is selected in the "Graphics" tab
     Private Sub ScreePlot()
         clsRScreePlot.SetOperation("+")
+        clsRScreePlotFunction.SetPackageName("factoextra")
         clsRScreePlotFunction.SetRCommand("fviz_screeplot")
         clsRScreePlotFunction.AddParameter("X", clsRFunctionParameter:=dlgPrincipalComponentAnalysis.ucrBasePCA.clsRsyntax.clsBaseFunction)
         clsRScreePlotTheme.SetRCommand("theme_minimal")
@@ -111,20 +113,24 @@ Public Class sdgPrincipalComponentAnalysis
     'Code for running Variables Plot if it is selected in the "Graphics" tab
     Private Sub VariablesPlot()
         clsRVariablesPlot.SetOperation("+")
+        clsRVariablesPlotFunction.SetPackageName("factoextra")
         clsRVariablesPlotFunction.SetRCommand("fviz_pca_var")
         clsRVariablesPlotFunction.AddParameter("X", clsRFunctionParameter:=dlgPrincipalComponentAnalysis.ucrBasePCA.clsRsyntax.clsBaseFunction)
+        clsRVariablesPlotTheme.SetPackageName("ggplot2")
         clsRVariablesPlotTheme.SetRCommand("theme_minimal")
         clsRVariablesPlot.SetOperatorParameter(True, clsRFunc:=clsRVariablesPlotFunction)
         clsRVariablesPlot.SetOperatorParameter(False, clsRFunc:=clsRVariablesPlotTheme)
-        clsRVariablesPlotFunction.AddParameter("axes", "c(" & nudDim1.Value & "," & nudDim2.Value & ")")
+        clsRVariablesPlotFunction.AddParameter("axes", "c(" & nudDim1.Value & ", " & nudDim2.Value & ")")
         frmMain.clsRLink.RunScript(clsRVariablesPlot.GetScript(), 3)
     End Sub
 
     'Code for running Individuals Plot if it is selected in the "Graphics" tab
     Private Sub IndividualsPlot()
         clsRIndividualsPlot.SetOperation("+")
+        clsRIndividualsPlotFunction.SetPackageName("factoextra")
         clsRIndividualsPlotFunction.SetRCommand("fviz_pca_ind")
         clsRIndividualsPlotFunction.AddParameter("X", clsRFunctionParameter:=dlgPrincipalComponentAnalysis.ucrBasePCA.clsRsyntax.clsBaseFunction)
+        clsRIndividualsPlotTheme.SetPackageName("ggplot2")
         clsRIndividualsPlotTheme.SetRCommand("theme_minimal")
         clsRIndividualsPlot.SetOperatorParameter(True, clsRFunc:=clsRIndividualsPlotFunction)
         clsRIndividualsPlot.SetOperatorParameter(False, clsRFunc:=clsRIndividualsPlotTheme)
@@ -135,8 +141,10 @@ Public Class sdgPrincipalComponentAnalysis
     'Code for running Biplot if it is selected in the "Graphics" tab
     Private Sub Biplot()
         clsRBiplot.SetOperation("+")
+        clsRBiplotFunction.SetPackageName("factoextra")
         clsRBiplotFunction.SetRCommand("fviz_pca_biplot")
         clsRBiplotFunction.AddParameter("X", clsRFunctionParameter:=dlgPrincipalComponentAnalysis.ucrBasePCA.clsRsyntax.clsBaseFunction)
+        clsRBarPlotFunction.SetPackageName("ggplot")
         clsRBiplotTheme.SetRCommand("theme_minimal")
         clsRBiplot.SetOperatorParameter(True, clsRFunc:=clsRBiplotFunction)
         clsRBiplot.SetOperatorParameter(False, clsRFunc:=clsRBiplotTheme)
@@ -153,15 +161,19 @@ Public Class sdgPrincipalComponentAnalysis
         clsRMelt.AddParameter("", clsRFunctionParameter:=clsREigenVectors)
         clsRFactor.AddParameter("factor_col", ucrReceiverFactor.GetVariableNames)
         clsRFactor.AddParameter("", clsRFunctionParameter:=clsRMelt)
+        clsRBarPlotFunction.SetPackageName("ggplot2")
         clsRBarPlotFunction.SetRCommand("ggplot")
         clsRBarPlotFunction.AddParameter("data", clsRFunctionParameter:=clsRFactor)
+        clsRBarPlotGeom.SetPackageName("ggplot2")
         clsRBarPlotGeom.SetRCommand("geom_bar")
+        clsRBarPlotAes.SetPackageName("ggplot2")
         clsRBarPlotAes.SetRCommand("aes")
         clsRBarPlotAes.AddParameter("x", "Var1")
         clsRBarPlotAes.AddParameter("y", "value")
         clsRBarPlotAes.AddParameter("fill", "factor_col")
         clsRBarPlotGeom.AddParameter("", clsRFunctionParameter:=clsRBarPlotAes)
         clsRBarPlotGeom.AddParameter("stat", Chr(34) & "identity" & Chr(34))
+        clsRBarPlotFacet.SetPackageName("ggplot2")
         clsRBarPlotFacet.SetRCommand("facet_wrap")
         clsRBarPlotFacet.AddParameter("", "~Var2")
         clsRBarPlot0.AddParameter(iPosition:=0, clsRFunctionParameter:=clsRBarPlotFunction)

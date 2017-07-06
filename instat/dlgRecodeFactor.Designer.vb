@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgRecodeFactor
     Inherits System.Windows.Forms.Form
 
@@ -23,12 +39,11 @@ Partial Class dlgRecodeFactor
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSelectorForRecode = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
         Me.lblFactor = New System.Windows.Forms.Label()
+        Me.ucrSaveNewColumn = New instat.ucrSave()
         Me.ucrFactorGrid = New instat.ucrFactor()
-        Me.ucrInputColumnName = New instat.ucrInputComboBox()
-        Me.lblNewColumnName = New System.Windows.Forms.Label()
+        Me.ucrSelectorForRecode = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -36,7 +51,47 @@ Partial Class dlgRecodeFactor
         Me.ucrBase.Location = New System.Drawing.Point(10, 335)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.TabIndex = 5
+        '
+        'ucrReceiverFactor
+        '
+        Me.ucrReceiverFactor.frmParent = Me
+        Me.ucrReceiverFactor.Location = New System.Drawing.Point(248, 60)
+        Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
+        Me.ucrReceiverFactor.Selector = Nothing
+        Me.ucrReceiverFactor.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverFactor.strNcFilePath = ""
+        Me.ucrReceiverFactor.TabIndex = 2
+        Me.ucrReceiverFactor.ucrSelector = Nothing
+        '
+        'lblFactor
+        '
+        Me.lblFactor.AutoSize = True
+        Me.lblFactor.Location = New System.Drawing.Point(248, 45)
+        Me.lblFactor.Name = "lblFactor"
+        Me.lblFactor.Size = New System.Drawing.Size(85, 13)
+        Me.lblFactor.TabIndex = 1
+        Me.lblFactor.Text = "Factor Selected:"
+        '
+        'ucrSaveNewColumn
+        '
+        Me.ucrSaveNewColumn.Location = New System.Drawing.Point(10, 305)
+        Me.ucrSaveNewColumn.Name = "ucrSaveNewColumn"
+        Me.ucrSaveNewColumn.Size = New System.Drawing.Size(229, 24)
+        Me.ucrSaveNewColumn.TabIndex = 4
+        '
+        'ucrFactorGrid
+        '
+        Me.ucrFactorGrid.AutoSize = True
+        Me.ucrFactorGrid.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrFactorGrid.clsReceiver = Nothing
+        Me.ucrFactorGrid.Location = New System.Drawing.Point(248, 87)
+        Me.ucrFactorGrid.Name = "ucrFactorGrid"
+        Me.ucrFactorGrid.shtCurrSheet = Nothing
+        Me.ucrFactorGrid.Size = New System.Drawing.Size(288, 221)
+        Me.ucrFactorGrid.TabIndex = 3
+        Me.ucrFactorGrid.ucrChkLevels = Nothing
         '
         'ucrSelectorForRecode
         '
@@ -46,61 +101,14 @@ Partial Class dlgRecodeFactor
         Me.ucrSelectorForRecode.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForRecode.Name = "ucrSelectorForRecode"
         Me.ucrSelectorForRecode.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorForRecode.TabIndex = 1
-        '
-        'ucrReceiverFactor
-        '
-        Me.ucrReceiverFactor.Location = New System.Drawing.Point(255, 50)
-        Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
-        Me.ucrReceiverFactor.Selector = Nothing
-        Me.ucrReceiverFactor.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverFactor.TabIndex = 2
-        '
-        'lblFactor
-        '
-        Me.lblFactor.AutoSize = True
-        Me.lblFactor.Location = New System.Drawing.Point(255, 35)
-        Me.lblFactor.Name = "lblFactor"
-        Me.lblFactor.Size = New System.Drawing.Size(85, 13)
-        Me.lblFactor.TabIndex = 3
-        Me.lblFactor.Text = "Factor Selected:"
-        '
-        'ucrFactorGrid
-        '
-        Me.ucrFactorGrid.AutoSize = True
-        Me.ucrFactorGrid.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrFactorGrid.clsReceiver = Nothing
-        Me.ucrFactorGrid.Location = New System.Drawing.Point(255, 77)
-        Me.ucrFactorGrid.Name = "ucrFactorGrid"
-        Me.ucrFactorGrid.shtCurrSheet = Nothing
-        Me.ucrFactorGrid.Size = New System.Drawing.Size(288, 221)
-        Me.ucrFactorGrid.TabIndex = 4
-        '
-        'ucrInputColumnName
-        '
-        Me.ucrInputColumnName.IsReadOnly = False
-        Me.ucrInputColumnName.Location = New System.Drawing.Point(111, 308)
-        Me.ucrInputColumnName.Name = "ucrInputColumnName"
-        Me.ucrInputColumnName.Size = New System.Drawing.Size(178, 21)
-        Me.ucrInputColumnName.TabIndex = 5
-        '
-        'lblNewColumnName
-        '
-        Me.lblNewColumnName.AutoSize = True
-        Me.lblNewColumnName.Location = New System.Drawing.Point(7, 311)
-        Me.lblNewColumnName.Name = "lblNewColumnName"
-        Me.lblNewColumnName.Size = New System.Drawing.Size(101, 13)
-        Me.lblNewColumnName.TabIndex = 7
-        Me.lblNewColumnName.Text = "New Column Name:"
+        Me.ucrSelectorForRecode.TabIndex = 0
         '
         'dlgRecodeFactor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(555, 396)
-        Me.Controls.Add(Me.lblNewColumnName)
-        Me.Controls.Add(Me.ucrInputColumnName)
+        Me.ClientSize = New System.Drawing.Size(545, 389)
+        Me.Controls.Add(Me.ucrSaveNewColumn)
         Me.Controls.Add(Me.ucrFactorGrid)
         Me.Controls.Add(Me.lblFactor)
         Me.Controls.Add(Me.ucrReceiverFactor)
@@ -122,6 +130,5 @@ Partial Class dlgRecodeFactor
     Friend WithEvents ucrReceiverFactor As ucrReceiverSingle
     Friend WithEvents lblFactor As Label
     Friend WithEvents ucrFactorGrid As ucrFactor
-    Friend WithEvents ucrInputColumnName As ucrInputComboBox
-    Friend WithEvents lblNewColumnName As Label
+    Friend WithEvents ucrSaveNewColumn As ucrSave
 End Class

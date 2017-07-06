@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,8 +11,9 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 Imports RDotNet
 
@@ -50,16 +51,12 @@ Public Class dlgCalculator
 
     Private Sub SetDefaults()
         ucrCalc.ucrSaveResultInto.SetPrefix("Calc")
-        ucrCalc.ucrSaveResultInto.Reset()
-        ucrCalc.ucrInputCalOptions.Reset()
-        ucrCalc.ucrSelectorForCalculations.Reset()
         ucrCalc.ucrInputCalOptions.SetName("Basic")
+        ucrCalc.Reset()
         ucrCalc.chkShowArguments.Checked = False
         ucrCalc.chkSaveResultInto.Checked = True
         SaveResults()
         ucrCalc.ucrSelectorForCalculations.bUseCurrentFilter = False
-        ucrCalc.cmdDoy.Enabled = False
-        ucrCalc.cmdDek.Enabled = False
         ucrBase.Visible = True
     End Sub
 
@@ -123,7 +120,7 @@ Public Class dlgCalculator
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs)
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         TestOKEnabled()
     End Sub
