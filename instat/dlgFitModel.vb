@@ -19,13 +19,9 @@ Imports instat.Translations
 Public Class dlgFitModel
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Public clsRCIFunction, clsRConvert, clsAutoPlot, clsVisReg As New RFunction
-    Private clsFormulaOperator As New ROperator
-    Private clsFormulaFunction As New RFunction
-    Private clsSummaryFunction As New RFunction
-    Private clsAnovaFunction As New RFunction
-    Private clsConfint As New RFunction
-    Private clsRestpvalFunction, clsLM As New RFunction
+    Public clsFormulaOperator As New ROperator
+
+    Public clsRestpvalFunction, clsLM, clsConfint, clsAnovaFunction, clsSummaryFunction, clsFormulaFunction, clsRCIFunction, clsRConvert, clsAutoPlot, clsVisReg As New RFunction
 
     Public bResetSubDialog As Boolean = False
     Public bResetOptionsSubDialog As Boolean = False
@@ -46,10 +42,10 @@ Public Class dlgFitModel
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverResponseVar.SetRCode(clsRConvert, bReset)
-        ucrConvertToVariate.SetRCode(clsFormulaOperator)
-        ucrReceiverExpressionFitModel.SetRCode(clsFormulaOperator)
-        ucrSelectorByDataFrameAddRemoveForFitModel.SetRCode(clsLM)
-        ucrModelName.SetRCode(clsLM)
+        ucrConvertToVariate.SetRCode(clsFormulaOperator, bReset)
+        ucrReceiverExpressionFitModel.SetRCode(clsFormulaOperator, bReset)
+        ucrSelectorByDataFrameAddRemoveForFitModel.SetRCode(clsLM, bReset)
+        ucrModelName.SetRCode(clsLM, bReset)
     End Sub
 
     Private Sub UpdatePreview()
@@ -146,13 +142,15 @@ Public Class dlgFitModel
         'Anova + Pvalue
         clsRestpvalFunction = clsRegressionDefaults.clsDefaultRaovPValueFunction.Clone
         clsRestpvalFunction.AddParameter("", clsRFunctionParameter:=clsLM)
-
+        clsRestpvalFunction.iCallType = 2
         'sdgSimpleRegOptions.SetRModelFunction(ucrBase.clsRsyntax.clsBaseFunction)
 
         sdgSimpleRegOptions.SetRDataFrame(ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames)
 
         ucrConvertToVariate.Visible = False
         ResponseConvert()
+
+        ChooseRFunction()
         ' sdgSimpleRegOptions.chkDisplayCLimits.Enabled = True
         sdgSimpleRegOptions.lblConfLevel.Enabled = True
         'sdgSimpleRegOptions.nudDisplayCLevel.Enabled = True
@@ -317,13 +315,11 @@ Public Class dlgFitModel
         clsVisReg.AddParameter("fit", clsRFunctionParameter:=clsLM)
         clsAutoPlot.AddParameter("object", clsRFunctionParameter:=clsLM)
     End Sub
-
     Public Sub ucrFamily_cboDistributionsIndexChanged() Handles ucrFamily.ControlValueChanged
         ChooseRFunction()
     End Sub
 
     Private Sub ucrReceiverResponseVar_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverResponseVar.ControlContentsChanged
-        ResponseConvert()
         TestOKEnabled()
     End Sub
 
@@ -332,12 +328,11 @@ Public Class dlgFitModel
     End Sub
 
     Private Sub ucrReceiverExpressionFitModel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpressionFitModel.ControlValueChanged, ucrReceiverResponseVar.ControlValueChanged
-        ChooseRFunction()
+        ResponseConvert()
         UpdatePreview()
     End Sub
 
     Private Sub ucrConvertToVariate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrConvertToVariate.ControlValueChanged
-        ChooseRFunction()
         ResponseConvert()
         TestOKEnabled()
     End Sub
