@@ -48,7 +48,6 @@ Public Class dlgPrincipalComponentAnalysis
         ucrBase.iHelpTopicID = 422
         ucrBase.clsRsyntax.iCallType = 0
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        ComponentsMinimum()
 
         'ucrReceiver
         ucrReceiverMultiplePCA.SetParameter(New RParameter("X", 0))
@@ -242,67 +241,15 @@ Public Class dlgPrincipalComponentAnalysis
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrBasePCA_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        'sdgPrincipalComponentAnalysis.PCAOptions()
-        ' this is wrong. just here for now.
-        If sdgPrincipalComponentAnalysis.ucrChkEigenvalues.Checked Then
-            'frmMain.clsRLink.RunScript(clsREigenValues.ToScript(), 2)
-        End If
-        If sdgPrincipalComponentAnalysis.ucrChkEigenvectors.Checked Then
-            'frmMain.clsRLink.RunScript(clsREigenVectors.ToScript(), 2)
-        End If
-        If sdgPrincipalComponentAnalysis.ucrChkRotation.Checked Then
-            'frmMain.clsRLink.RunScript(clsRRotation.ToScript(), 2)
-        End If
-        If sdgPrincipalComponentAnalysis.rdoScreePlot.Checked Then
-            'frmMain.clsRLink.RunScript(clsRScreePlot.GetScript(), 3)
-        ElseIf sdgPrincipalComponentAnalysis.rdoVariablesPlot.Checked Then
-            'frmMain.clsRLink.RunScript(clsRVariablesPlot.GetScript(), 3)
-        ElseIf sdgPrincipalComponentAnalysis.rdoIndividualsPlot.Checked Then
-            'frmMain.clsRLink.RunScript(clsRIndividualsPlot.GetScript(), 3)
-        ElseIf sdgPrincipalComponentAnalysis.rdoBiplot.Checked Then
-            'frmMain.clsRLink.RunScript(clsRBiplot.GetScript(), 3)
-        ElseIf sdgPrincipalComponentAnalysis.rdoBarPlot.Checked Then
-            'frmMain.clsRLink.RunScript(clsRBarPlot.ToScript, 3)
-        End If
-    End Sub
-
     Private Sub cmdPCAOptions_Click(sender As Object, e As EventArgs) Handles cmdPCAOptions.Click
         sdgPrincipalComponentAnalysis.SetRFunction(ucrBase.clsRsyntax, clsREigenValues, clsREigenVectors, clsRRotation, clsRScreePlotFunction, clsRVariablesPlotFunction, clsRIndividualsPlotFunction, clsRBiplotFunction, clsRFactor, bResetSubdialog)
         bResetSubdialog = False
         sdgPrincipalComponentAnalysis.ShowDialog()
     End Sub
 
-    Private Sub ComponentsMinimum()
-
-    End Sub
-
     Private Sub ucrSelectorPCA_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorPCA.ControlValueChanged
         strTempFunction = ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem
     End Sub
-
-
-    Private Sub SetUp()
-        'AssignName()
-        'clsREigenValues.AddParameter("data_name", Chr(34) & ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-        'clsREigenValues.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
-
-        'clsREigenVectors.AddParameter("data_name", Chr(34) & ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-        'clsREigenVectors.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
-
-        'clsRRotationCoord.AddParameter("data_name", Chr(34) & ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-        'clsRRotationCoord.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
-        'clsRRotationEig.AddParameter("data_name", Chr(34) & ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-        'clsRRotationEig.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
-    End Sub
-
-    'Public Sub AssignName()
-    'If ucrSaveResult.IsComplete Then
-    'strModelName = ucrSaveResult.GetText()
-    'Else
-    'strModelName = "last_CCA"
-    'End If
-    'End Sub
 
     Private Sub ucrSaveResult_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlValueChanged
         strModelName = ucrSaveResult.GetText
@@ -333,13 +280,7 @@ Public Class dlgPrincipalComponentAnalysis
                 ucrNudNumberOfComp.Value = ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count
             End If
         End If
-        'ComponentsMinimum()
-        '        sdgPrincipalComponentAnalysis.Dimensions()
     End Sub
-
-    '  Private Sub nudComponents_TextChanged(sender As Object, e As EventArgs)
-    '     sdgPrincipalComponentAnalysis.Dimensions()
-    '  End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlContentsChanged, ucrReceiverMultiplePCA.ControlContentsChanged, ucrNudNumberOfComp.ControlContentsChanged
         TestOKEnabled()

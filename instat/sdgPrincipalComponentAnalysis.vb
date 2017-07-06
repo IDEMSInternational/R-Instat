@@ -34,15 +34,17 @@ Public Class sdgPrincipalComponentAnalysis
         Dim dctLabelOptionsChoice As New Dictionary(Of String, String)
         Dim dctOptionsForLabel As New Dictionary(Of String, String)
 
+        ucrChkEigenvalues.AddRSyntaxContainsFunctionNamesCondition(True, {frmMain.clsRLink.strInstatDataObject & "$get_from_model"})
         ucrChkEigenvalues.SetParameter(New RParameter("value1", 2))
         ucrChkEigenvalues.SetText("Eigenvalues")
         ucrChkEigenvalues.SetValueIfChecked(Chr(34) & "eig" & Chr(34))
 
-
+        ucrChkEigenvectors.AddRSyntaxContainsFunctionNamesCondition(True, {frmMain.clsRLink.strInstatDataObject & "$get_from_model"})
         ucrChkEigenvectors.SetParameter(New RParameter("value1", 2))
         ucrChkEigenvectors.SetText("Eigenvectors")
         ucrChkEigenvectors.SetValueIfChecked(Chr(34) & "ind" & Chr(34))
 
+        ucrChkRotation.AddRSyntaxContainsFunctionNamesCondition(True, {frmMain.clsRLink.strInstatDataObject & "$get_from_model"})
         ucrChkRotation.SetParameter(New RParameter("MARGIN", 1))
         ucrChkRotation.SetText("Rotation")
         ucrChkRotation.SetValueIfChecked(2)
@@ -148,6 +150,9 @@ Public Class sdgPrincipalComponentAnalysis
         ucrPnlGraphics.AddToLinkedControls(ucrReceiverFactor, {rdoBarPlot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrReceiverFactor.SetLinkedDisplayControl(lblFactorVariable)
         bControlsInitialised = True
+
+        'TODO: disabled for now because it has bugs
+        rdoBarPlot.Enabled = False
     End Sub
 
     Public Sub SetRFunction(clsNewRsyntax As RSyntax, clsNewREigenValues As RFunction, clsNewREigenVectors As RFunction, clsNewRRotation As RFunction, clsNewScreePlotFunction As RFunction, clsNewVariablesPlotFunction As RFunction, clsNewIndividualsPlotFunction As RFunction, clsNewBiplotFunction As RFunction, clsNewBarPlotFunction As RFunction, Optional bReset As Boolean = False)
@@ -291,7 +296,7 @@ Public Class sdgPrincipalComponentAnalysis
     Private Sub DisplayOptions()
         'Dim dctOptionsForLabel As Dictionary(Of String, String)
         If rdoScreePlot.Checked Then
-            'lblChoiceScree.Text = "Choice: "
+            'lblChoiceScree.Text = "Choice:  "
             'rdoOne.Text = "Bar"
             'rdoTwo.Text = "Line"
             'ucrLabel.SetItems({"variance", "eigenvalue"})
