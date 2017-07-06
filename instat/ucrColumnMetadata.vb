@@ -164,4 +164,10 @@ Public Class ucrColumnMetadata
         grdVariables.Enabled = True
         Cursor = Cursors.Default
     End Sub
+
+    Private Sub grdVariables_VisibleChanged(sender As Object, e As EventArgs) Handles grdVariables.VisibleChanged
+        If grdVariables.Visible Then
+            grdVariables.SheetTabWidth = Math.Max(grdVariables.SheetTabWidth, 300)
+        End If
+    End Sub
 End Class
