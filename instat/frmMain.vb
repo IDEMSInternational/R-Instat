@@ -864,7 +864,7 @@ Public Class frmMain
         Dim bClose As DialogResult = DialogResult.Yes
 
         If e.CloseReason = CloseReason.UserClosing Then
-            bClose = MsgBox("Are you sure you want to exit R-Instat?", MessageBoxButtons.YesNo, "Exit")
+            bClose = MsgBox("Are you sure you want to exit R-Instat?" & Environment.NewLine & "Any unsaved changes will be lost.", MessageBoxButtons.YesNo, "Exit")
         End If
         If bClose = DialogResult.Yes Then
             Try
@@ -1634,5 +1634,14 @@ Public Class frmMain
             dlgTwoWayFrequencies.strDefaultColumnVariable = Nothing
         End If
         dlgTwoWayFrequencies.ShowDialog()
+    End Sub
+
+    Private Sub mnuFileCloseData_Click(sender As Object, e As EventArgs) Handles mnuFileCloseData.Click
+        Dim bClose As DialogResult
+
+        bClose = MsgBox("Are you sure you want to close you data?" & Environment.NewLine & "Any unsaved changes will be lost.", MessageBoxButtons.YesNo, "Close Data")
+        If bClose = DialogResult.Yes Then
+            clsRLink.CloseData()
+        End If
     End Sub
 End Class
