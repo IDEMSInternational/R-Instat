@@ -1,4 +1,20 @@
-dgPrincipalComponentAnalysis
+' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+Partial Class sdgPrincipalComponentAnalysis
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -31,26 +47,29 @@ dgPrincipalComponentAnalysis
         Me.rdoBarPlot = New System.Windows.Forms.RadioButton()
         Me.rdoIndividualsPlot = New System.Windows.Forms.RadioButton()
         Me.grpScree = New System.Windows.Forms.GroupBox()
-        Me.ucrSelectorFactor = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrChkIncludePercentage = New instat.ucrCheck()
         Me.ucrNudDim2 = New instat.ucrNud()
         Me.ucrNudDim = New instat.ucrNud()
-        Me.ucrLabel = New instat.ucrInputComboBox()
         Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
         Me.lblFactorVariable = New System.Windows.Forms.Label()
         Me.lblChoiceScree = New System.Windows.Forms.Label()
         Me.grpGeom = New System.Windows.Forms.GroupBox()
+        Me.ucrSelectorFactor = New instat.ucrSelectorByDataFrameAddRemove()
         Me.rdoBoth = New System.Windows.Forms.RadioButton()
         Me.rdoTwo = New System.Windows.Forms.RadioButton()
         Me.rdoOne = New System.Windows.Forms.RadioButton()
         Me.ucrPnlGeom = New instat.UcrPanel()
         Me.lblDim = New System.Windows.Forms.Label()
+        Me.ucrInputLabel2 = New instat.ucrInputComboBox()
+        Me.ucrInputLabel1 = New instat.ucrInputComboBox()
         Me.rdoBiplot = New System.Windows.Forms.RadioButton()
         Me.rdoVariablesPlot = New System.Windows.Forms.RadioButton()
         Me.rdoScreePlot = New System.Windows.Forms.RadioButton()
         Me.ucrPnlGraphics = New instat.UcrPanel()
         Me.tbSave = New System.Windows.Forms.TabPage()
         Me.ucrSdgButtons = New instat.ucrButtonsSubdialogue()
+        Me.lblGeom = New System.Windows.Forms.Label()
+        Me.lblLabel = New System.Windows.Forms.Label()
         Me.tbRegOptions.SuspendLayout()
         Me.tbDisplay.SuspendLayout()
         Me.tbGraphics.SuspendLayout()
@@ -109,6 +128,7 @@ dgPrincipalComponentAnalysis
         '
         'tbGraphics
         '
+        Me.tbGraphics.Controls.Add(Me.ucrSelectorFactor)
         Me.tbGraphics.Controls.Add(Me.rdoNoPlot)
         Me.tbGraphics.Controls.Add(Me.rdoBarPlot)
         Me.tbGraphics.Controls.Add(Me.rdoIndividualsPlot)
@@ -161,32 +181,24 @@ dgPrincipalComponentAnalysis
         '
         'grpScree
         '
-        Me.grpScree.Controls.Add(Me.ucrSelectorFactor)
+        Me.grpScree.Controls.Add(Me.lblLabel)
+        Me.grpScree.Controls.Add(Me.lblGeom)
         Me.grpScree.Controls.Add(Me.ucrChkIncludePercentage)
         Me.grpScree.Controls.Add(Me.ucrNudDim2)
         Me.grpScree.Controls.Add(Me.ucrNudDim)
-        Me.grpScree.Controls.Add(Me.ucrLabel)
         Me.grpScree.Controls.Add(Me.ucrReceiverFactor)
         Me.grpScree.Controls.Add(Me.lblFactorVariable)
         Me.grpScree.Controls.Add(Me.lblChoiceScree)
         Me.grpScree.Controls.Add(Me.grpGeom)
         Me.grpScree.Controls.Add(Me.lblDim)
+        Me.grpScree.Controls.Add(Me.ucrInputLabel2)
+        Me.grpScree.Controls.Add(Me.ucrInputLabel1)
         Me.grpScree.Location = New System.Drawing.Point(10, 156)
         Me.grpScree.Name = "grpScree"
         Me.grpScree.Size = New System.Drawing.Size(365, 192)
         Me.grpScree.TabIndex = 34
         Me.grpScree.TabStop = False
         Me.grpScree.Text = "Plot Options"
-        '
-        'ucrSelectorFactor
-        '
-        Me.ucrSelectorFactor.bShowHiddenColumns = False
-        Me.ucrSelectorFactor.bUseCurrentFilter = True
-        Me.ucrSelectorFactor.Location = New System.Drawing.Point(10, 18)
-        Me.ucrSelectorFactor.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorFactor.Name = "ucrSelectorFactor"
-        Me.ucrSelectorFactor.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorFactor.TabIndex = 3
         '
         'ucrChkIncludePercentage
         '
@@ -220,18 +232,9 @@ dgPrincipalComponentAnalysis
         Me.ucrNudDim.TabIndex = 19
         Me.ucrNudDim.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrLabel
-        '
-        Me.ucrLabel.AddQuotesIfUnrecognised = True
-        Me.ucrLabel.IsReadOnly = False
-        Me.ucrLabel.Location = New System.Drawing.Point(55, 101)
-        Me.ucrLabel.Name = "ucrLabel"
-        Me.ucrLabel.Size = New System.Drawing.Size(137, 21)
-        Me.ucrLabel.TabIndex = 18
-        '
         'ucrReceiverFactor
         '
-        Me.ucrReceiverFactor.frmParent = Me
+        Me.ucrReceiverFactor.frmParent = Nothing
         Me.ucrReceiverFactor.Location = New System.Drawing.Point(228, 50)
         Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
@@ -273,6 +276,16 @@ dgPrincipalComponentAnalysis
         Me.grpGeom.TabStop = False
         Me.grpGeom.Tag = "Geom"
         Me.grpGeom.Text = "Geom"
+        '
+        'ucrSelectorFactor
+        '
+        Me.ucrSelectorFactor.bShowHiddenColumns = False
+        Me.ucrSelectorFactor.bUseCurrentFilter = True
+        Me.ucrSelectorFactor.Location = New System.Drawing.Point(185, 38)
+        Me.ucrSelectorFactor.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorFactor.Name = "ucrSelectorFactor"
+        Me.ucrSelectorFactor.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorFactor.TabIndex = 3
         '
         'rdoBoth
         '
@@ -320,6 +333,24 @@ dgPrincipalComponentAnalysis
         Me.lblDim.Size = New System.Drawing.Size(97, 13)
         Me.lblDim.TabIndex = 15
         Me.lblDim.Text = "Dimensions to Plot:"
+        '
+        'ucrInputLabel2
+        '
+        Me.ucrInputLabel2.AddQuotesIfUnrecognised = True
+        Me.ucrInputLabel2.IsReadOnly = False
+        Me.ucrInputLabel2.Location = New System.Drawing.Point(55, 101)
+        Me.ucrInputLabel2.Name = "ucrInputLabel2"
+        Me.ucrInputLabel2.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputLabel2.TabIndex = 22
+        '
+        'ucrInputLabel1
+        '
+        Me.ucrInputLabel1.AddQuotesIfUnrecognised = True
+        Me.ucrInputLabel1.IsReadOnly = False
+        Me.ucrInputLabel1.Location = New System.Drawing.Point(55, 101)
+        Me.ucrInputLabel1.Name = "ucrInputLabel1"
+        Me.ucrInputLabel1.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputLabel1.TabIndex = 18
         '
         'rdoBiplot
         '
@@ -379,6 +410,24 @@ dgPrincipalComponentAnalysis
         Me.ucrSdgButtons.Size = New System.Drawing.Size(142, 30)
         Me.ucrSdgButtons.TabIndex = 1
         '
+        'lblGeom
+        '
+        Me.lblGeom.AutoSize = True
+        Me.lblGeom.Location = New System.Drawing.Point(12, 106)
+        Me.lblGeom.Name = "lblGeom"
+        Me.lblGeom.Size = New System.Drawing.Size(38, 13)
+        Me.lblGeom.TabIndex = 23
+        Me.lblGeom.Text = "Geom:"
+        '
+        'lblLabel
+        '
+        Me.lblLabel.AutoSize = True
+        Me.lblLabel.Location = New System.Drawing.Point(10, 106)
+        Me.lblLabel.Name = "lblLabel"
+        Me.lblLabel.Size = New System.Drawing.Size(36, 13)
+        Me.lblLabel.TabIndex = 24
+        Me.lblLabel.Text = "Label:"
+        '
         'sdgPrincipalComponentAnalysis
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -425,7 +474,7 @@ dgPrincipalComponentAnalysis
     Friend WithEvents lblDim As Label
     Friend WithEvents ucrReceiverFactor As ucrReceiverSingle
     Friend WithEvents grpScree As GroupBox
-    Friend WithEvents ucrLabel As ucrInputComboBox
+    Friend WithEvents ucrInputLabel1 As ucrInputComboBox
     Friend WithEvents ucrChkRotation As ucrCheck
     Friend WithEvents ucrChkEigenvectors As ucrCheck
     Friend WithEvents ucrChkEigenvalues As ucrCheck
@@ -435,4 +484,7 @@ dgPrincipalComponentAnalysis
     Friend WithEvents ucrPnlGraphics As UcrPanel
     Friend WithEvents ucrChkIncludePercentage As ucrCheck
     Friend WithEvents rdoNoPlot As RadioButton
+    Friend WithEvents ucrInputLabel2 As ucrInputComboBox
+    Friend WithEvents lblLabel As Label
+    Friend WithEvents lblGeom As Label
 End Class

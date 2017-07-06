@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class dlgPrincipalComponentAnalysis
     Public bFirstLoad As Boolean = True
@@ -21,6 +22,7 @@ Public Class dlgPrincipalComponentAnalysis
     Private bResetSubdialog As Boolean = False
     'Public ExplanatoryVariables
     Public strModelName As String = ""
+    Public strTempFunction As String
     Private clsPCAFunction As New RFunction
     Private clsREigenValues, clsREigenVectors, clsRRotation, clsRRotationCoord, clsRRotationEig As New RFunction
     Private clsRScreePlotFunction, clsRScreePlotTheme, clsRVariablesPlotFunction, clsRVariablesPlotTheme, clsRIndividualsPlotFunction, clsRIndividualsPlotTheme, clsRBiplotFunction, clsRBiplotTheme, clsRBarPlotFunction As New RFunction
@@ -202,6 +204,17 @@ Public Class dlgPrincipalComponentAnalysis
         clsRBarPlot.AddParameter(iPosition:=0, clsROperatorParameter:=clsRBarPlot0)
         clsRBarPlot.AddParameter(clsRFunctionParameter:=clsRBarPlotFacet)
 
+        clsREigenValues.AddParameter("data_name", Chr(34) & strTempFunction & Chr(34))
+        clsREigenValues.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
+
+        clsREigenVectors.AddParameter("data_name", Chr(34) & strTempFunction & Chr(34))
+        clsREigenVectors.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
+
+        clsRRotationCoord.AddParameter("data_name", Chr(34) & strTempFunction & Chr(34))
+        clsRRotationCoord.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
+        clsRRotationEig.AddParameter("data_name", Chr(34) & strTempFunction & Chr(34))
+        clsRRotationEig.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
+        ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsPCAFunction)
         bResetSubdialog = True
     End Sub
@@ -271,30 +284,46 @@ Public Class dlgPrincipalComponentAnalysis
         End If
     End Sub
 
+    Private Sub ucrSelectorPCA_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorPCA.ControlValueChanged
+        strTempFunction = ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem
+    End Sub
+
+
     Private Sub SetUp()
-        AssignName()
-        clsREigenValues.AddParameter("data_name", Chr(34) & ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-        clsREigenValues.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
+        'AssignName()
+        'clsREigenValues.AddParameter("data_name", Chr(34) & ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+        'clsREigenValues.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
 
-        clsREigenVectors.AddParameter("data_name", Chr(34) & ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-        clsREigenVectors.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
+        'clsREigenVectors.AddParameter("data_name", Chr(34) & ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+        'clsREigenVectors.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
 
-        clsRRotationCoord.AddParameter("data_name", Chr(34) & ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-        clsRRotationCoord.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
-        clsRRotationEig.AddParameter("data_name", Chr(34) & ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-        clsRRotationEig.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
+        'clsRRotationCoord.AddParameter("data_name", Chr(34) & ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+        'clsRRotationCoord.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
+        'clsRRotationEig.AddParameter("data_name", Chr(34) & ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+        'clsRRotationEig.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
     End Sub
 
-    Public Sub AssignName()
-        If ucrSaveResult.IsComplete Then
-            strModelName = ucrSaveResult.GetText()
+    'Public Sub AssignName()
+    'If ucrSaveResult.IsComplete Then
+    'strModelName = ucrSaveResult.GetText()
+    'Else
+    'strModelName = "last_CCA"
+    'End If
+    'End Sub
+
+    Private Sub ucrSaveResult_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlValueChanged
+        strModelName = ucrSaveResult.GetText
+        If ucrSaveResult.ucrChkSave.Checked Then
+            clsREigenValues.AddParameter("model_name", Chr(34) & strTempFunction & Chr(34))
+            clsREigenVectors.AddParameter("model_name", Chr(34) & strTempFunction & Chr(34))
+            'clsRRotationCoord.AddParameter("model_name", Chr(34) & strTempFunction & Chr(34))
+            clsRRotationEig.AddParameter("model_name", Chr(34) & strTempFunction & Chr(34))
         Else
-            strModelName = "last_CCA"
+            clsREigenValues.AddParameter("model_name", Chr(34) & "last_PCA" & Chr(34))
+            clsREigenVectors.AddParameter("model_name", Chr(34) & "last_PCA" & Chr(34))
+            clsRRotationEig.AddParameter("model_name", Chr(34) & "last_PCA" & Chr(34))
+            'clsRRotationCoord.AddParameter("model_name", Chr(34) & "last_CCA" & Chr(34))
         End If
-    End Sub
-
-    Private Sub ucrSaveResult_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlValueChanged, ucrSelectorPCA.ControlValueChanged
-        SetUp()
     End Sub
 
     Private Sub ucrReceiverMultiplePCA_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultiplePCA.ControlValueChanged, ucrNudNumberOfComp.ControlValueChanged
@@ -309,4 +338,5 @@ Public Class dlgPrincipalComponentAnalysis
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlContentsChanged, ucrReceiverMultiplePCA.ControlContentsChanged, ucrNudNumberOfComp.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
 End Class

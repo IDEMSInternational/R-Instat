@@ -28,15 +28,11 @@ Public Class sdgPrincipalComponentAnalysis
 
     Private Sub sdgPrincipalComponentAnalysis_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        If bFirstLoad Then
-            InitialiseDialog()
-            SetDefaults()
-            bFirstLoad = False
-        End If
     End Sub
 
     Private Sub InitialiseControls()
-        Dim dctLabelOptions As New Dictionary(Of String, String)
+        Dim dctLabelOptionsChoice As New Dictionary(Of String, String)
+        Dim dctOptionsForLabel As New Dictionary(Of String, String)
 
         ucrChkEigenvalues.SetParameter(New RParameter("value1", 2))
         ucrChkEigenvalues.SetText("Eigenvalues")
@@ -81,12 +77,23 @@ Public Class sdgPrincipalComponentAnalysis
         ucrChkIncludePercentage.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkIncludePercentage.SetRDefault("FALSE")
 
-        ucrLabel.SetParameter(New RParameter("choice"))
-        dctLabelOptions.Add("Variance", Chr(34) & "variance" & Chr(34))
-        dctLabelOptions.Add("Eigenvalue", Chr(34) & "eigenvalue" & Chr(34))
+        ucrInputLabel1.SetParameter(New RParameter("choice"))
+        dctLabelOptionsChoice.Add("Variance", Chr(34) & "variance" & Chr(34))
+        dctLabelOptionsChoice.Add("Eigenvalue", Chr(34) & "eigenvalue" & Chr(34))
         ' our default is variance. not sure r-default. check.
-        ucrLabel.SetDropDownStyleAsNonEditable()
-        ucrLabel.SetItems(dctLabelOptions)
+        ucrInputLabel1.SetDropDownStyleAsNonEditable()
+        ucrInputLabel1.SetItems(dctLabelOptionsChoice)
+
+        ucrInputLabel2.SetParameter(New RParameter("label"))
+        dctOptionsForLabel.Add("All", Chr(34) & "all" & Chr(34))
+        dctOptionsForLabel.Add("Individuals", Chr(34) & "ind" & Chr(34))
+        dctOptionsForLabel.Add("Supplementary Individuals", Chr(34) & "ind.sup" & Chr(34))
+        dctOptionsForLabel.Add("Qualitative Supplementary Variables", Chr(34) & "quali" & Chr(34))
+        dctOptionsForLabel.Add("Quantitative Supplementary Variables", Chr(34) & "quanti.sup" & Chr(34))
+        dctOptionsForLabel.Add("Variables", Chr(34) & "var" & Chr(34))
+        dctOptionsForLabel.Add("None", Chr(34) & "none" & Chr(34))
+        ucrInputLabel2.SetItems(dctOptionsForLabel)
+        ucrInputLabel2.SetRDefault("all")
 
         ucrReceiverFactor.SetParameter(New RParameter("factor_col"))
         ucrReceiverFactor.SetParameterIsRFunction()
@@ -94,11 +101,13 @@ Public Class sdgPrincipalComponentAnalysis
         ucrReceiverFactor.SetDataType("factor")
         ucrReceiverFactor.SetMeAsReceiver()
 
-        ucrPnlGraphics.AddToLinkedControls(ucrPnlGeom, {rdoScreePlot, rdoVariablesPlot, rdoIndividualsPlot, rdoBiplot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlGraphics.AddToLinkedControls(ucrInputLabel2, {rdoVariablesPlot, rdoIndividualsPlot, rdoBiplot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="all")
+        ucrInputLabel2.SetLinkedDisplayControl(lblLabel)
+        ucrPnlGraphics.AddToLinkedControls(ucrPnlGeom, {rdoScreePlot, rdoVariablesPlot, rdoIndividualsPlot, rdoBiplot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoBoth)
         ucrPnlGeom.SetLinkedDisplayControl(grpGeom)
 
-        ucrPnlGraphics.AddToLinkedControls(ucrLabel, {rdoScreePlot, rdoVariablesPlot, rdoIndividualsPlot, rdoBiplot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrLabel.SetLinkedDisplayControl(lblChoiceScree)
+        ucrPnlGraphics.AddToLinkedControls(ucrInputLabel1, {rdoScreePlot, rdoVariablesPlot, rdoIndividualsPlot, rdoBiplot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Variance")
+        ucrInputLabel1.SetLinkedDisplayControl(lblChoiceScree)
 
         ucrPnlGraphics.AddToLinkedControls(ucrChkIncludePercentage, {rdoScreePlot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
@@ -106,7 +115,7 @@ Public Class sdgPrincipalComponentAnalysis
         ucrPnlGraphics.AddToLinkedControls(ucrNudDim2, {rdoVariablesPlot, rdoIndividualsPlot, rdoBiplot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrNudDim.SetLinkedDisplayControl(lblDim)
 
-        ucrPnlGraphics.AddToLinkedControls(ucrSelectorFactor, {rdoBarPlot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlGraphics.AddToLinkedControls(ucrSelectorFactor, {rdoBarPlot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoNoPlot)
         ucrPnlGraphics.AddToLinkedControls(ucrReceiverFactor, {rdoBarPlot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrReceiverFactor.SetLinkedDisplayControl(lblFactorVariable)
         bControlsInitialised = True
@@ -129,21 +138,20 @@ Public Class sdgPrincipalComponentAnalysis
         ucrPnlGeom.AddAdditionalCodeParameterPair(clsRVariablesPlotFunction, clsNewRParameter:=New RParameter("Geom"), iAdditionalPairNo:=1)
         ucrPnlGeom.AddAdditionalCodeParameterPair(clsRIndividualsPlotFunction, clsNewRParameter:=New RParameter("Geom"), iAdditionalPairNo:=2)
         ucrPnlGeom.AddAdditionalCodeParameterPair(clsRBiplotFunction, clsNewRParameter:=New RParameter("Geom"), iAdditionalPairNo:=3)
-        ucrPnlGeom.SetRCode(clsRScreePlotFunction, bReset)
+        'ucrPnlGeom.SetRCode(clsRScreePlotFunction, bReset)
 
-        ucrLabel.AddAdditionalCodeParameterPair(clsRVariablesPlotFunction, New RParameter("label"), iAdditionalPairNo:=1)
-        ucrLabel.AddAdditionalCodeParameterPair(clsRIndividualsPlotFunction, New RParameter("label"), iAdditionalPairNo:=2)
-        ucrLabel.AddAdditionalCodeParameterPair(clsRBiplotFunction, New RParameter("label"), iAdditionalPairNo:=3)
-        ucrLabel.SetRCode(clsRScreePlotFunction, bReset)
+        'ucrInputLabel2.AddAdditionalCodeParameterPair(clsRVariablesPlotFunction, New RParameter("label"), iAdditionalPairNo:=1)
+        'ucrInputLabel2.AddAdditionalCodeParameterPair(clsRIndividualsPlotFunction, New RParameter("label"), iAdditionalPairNo:=2)
+        'ucrInputLabel2.AddAdditionalCodeParameterPair(clsRBiplotFunction, New RParameter("label"), iAdditionalPairNo:=3)
 
+        ucrInputLabel1.SetRCode(clsRScreePlotFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLabel2.SetRCode(clsRVariablesPlotFunction, bReset, bCloneIfNeeded:=True)
         ucrReceiverFactor.SetRCode(clsRFactor, bReset, bCloneIfNeeded:=True)
         ucrChkIncludePercentage.SetRSyntax(clsRsyntax, bReset)
         ucrChkEigenvalues.SetRSyntax(clsRsyntax, bReset)
         ucrChkEigenvectors.SetRSyntax(clsRsyntax, bReset)
         ucrChkRotation.SetRSyntax(clsRsyntax, bReset)
         ucrPnlGraphics.SetRSyntax(clsRsyntax, bReset)
-        ucrLabel.SetRCode(clsRVariablesPlotFunction, bReset)
-        ucrPnlGeom.SetRSyntax(clsRsyntax, bReset)
     End Sub
 
     Private Sub ucrChkEigenvalues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEigenvalues.ControlValueChanged
@@ -185,21 +193,22 @@ Public Class sdgPrincipalComponentAnalysis
             clsRsyntax.RemoveFromAfterCodes(clsRBarPlot)
         End If
     End Sub
+
     Private Sub InitialiseDialog()
         'ucrNudDim.Minimum = 1
         'ucrNudDim2.Minimum = 1
     End Sub
 
     Public Sub SetDefaults()
-        ucrSelectorFactor.Focus()
-        ucrChkIncludePercentage.Checked = False
-        rdoScreePlot.Checked = True
+        'ucrSelectorFactor.Focus()
+        'ucrChkIncludePercentage.Checked = False
+        'rdoScreePlot.Checked = True
         'ucrNudDim.Value = 1
         'ucrNudDim2.Value = 2
-        rdoBoth.Checked = True
-        Dimensions()
-        DisplayOptions()
-        ucrSelectorFactor.Reset()
+        'rdoBoth.Checked = True
+        'Dimensions()
+        'DisplayOptions()
+        'ucrSelectorFactor.Reset()
     End Sub
 
     'When to run the various options in the "Display" tab and "Graphics" tab
@@ -256,9 +265,9 @@ Public Class sdgPrincipalComponentAnalysis
     Private Sub DisplayOptions()
         'Dim dctOptionsForLabel As Dictionary(Of String, String)
         If rdoScreePlot.Checked Then
-            lblChoiceScree.Text = "Choice: "
-            rdoOne.Text = "Bar"
-            rdoTwo.Text = "Line"
+            'lblChoiceScree.Text = "Choice: "
+            'rdoOne.Text = "Bar"
+            'rdoTwo.Text = "Line"
             'ucrLabel.SetItems({"variance", "eigenvalue"})
             'ucrLabel.SetName("variance")
             'dctOptionsForLabel.Add("Variance", Chr(34) & "variance" & Chr(34))
@@ -272,23 +281,23 @@ Public Class sdgPrincipalComponentAnalysis
             'dctOptionsForLabel.Add("Quantitative Supplementary Variables", Chr(34) & "quanti.sup" & Chr(34))
             'dctOptionsForLabel.Add("Variables", Chr(34) & "var" & Chr(34))
             'dctOptionsForLabel.Add("None", Chr(34) & "none" & Chr(34))
-            'ucrLabel.SetItems(dctOptionsForLabel)
+            'ucrInputLabel1.SetItems(dctOptionsForLabel)
             ' selected item is ALL
 
             'ucrLabel.SetItems({"all", "ind.sup", "quali", "quanti.sup", "var", "ind", "none"})
-            lblDim.Visible = True
-            lblChoiceScree.Text = "Label:"
-            rdoTwo.Text = "Text"
+            'lblDim.Visible = True
+            'lblChoiceScree.Text = "Label:"
+            'rdoTwo.Text = "Text"
             If rdoVariablesPlot.Checked Then
-                rdoOne.Text = "Arrow"
+                'rdoOne.Text = "Arrow"
             Else
-                rdoOne.Text = "Point"
+                'rdoOne.Text = "Point"
             End If
         End If
     End Sub
 
     Private Sub rdoPlotItems_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBoth.CheckedChanged, rdoOne.CheckedChanged, rdoTwo.CheckedChanged
-        GeomChecked()
+        'GeomChecked()
     End Sub
 
     'Public Sub ucrReceiverFactor_SelectionChanged() Handles ucrReceiverFactor.SelectionChanged
@@ -296,50 +305,50 @@ Public Class sdgPrincipalComponentAnalysis
     'End Sub
 
     Private Sub rdoPlots_CheckedChanged(sender As Object, e As EventArgs) Handles rdoScreePlot.CheckedChanged, rdoBarPlot.CheckedChanged, rdoBiplot.CheckedChanged, rdoVariablesPlot.CheckedChanged, rdoIndividualsPlot.CheckedChanged
-        DisplayOptions()
-        GeomChecked()
+        ' DisplayOptions()
+        'GeomChecked()
     End Sub
 
     ' One of the options in the "Graphics" tab is what should be plotted on the graph. These options can change depending on which radio button is selected. This sub is about running the correct code for each graphic options
-    Private Sub GeomChecked()
-        If rdoScreePlot.Checked Then
-            If rdoBoth.Checked Then
-                clsRScreePlotFunction.AddParameter("geom", "c(" & Chr(34) & "bar" & Chr(34) & "," & Chr(34) & "line" & Chr(34) & ")")
-            ElseIf rdoOne.Checked Then
-                clsRScreePlotFunction.AddParameter("geom", Chr(34) & "bar" & Chr(34))
-            ElseIf rdoTwo.Checked Then
-                clsRScreePlotFunction.AddParameter("geom", Chr(34) & "line" & Chr(34))
-            End If
-        ElseIf rdoVariablesPlot.Checked Then
-            If rdoBoth.Checked Then
-                clsRVariablesPlotFunction.AddParameter("geom", "c(" & Chr(34) & "arrow" & Chr(34) & "," & Chr(34) & "text" & Chr(34) & ")")
-            ElseIf rdoOne.Checked Then
-                clsRVariablesPlotFunction.AddParameter("geom", Chr(34) & "arrow" & Chr(34))
-            ElseIf rdoTwo.Checked Then
-                clsRVariablesPlotFunction.AddParameter("geom", Chr(34) & "text" & Chr(34))
-            End If
-        ElseIf rdoIndividualsPlot.Checked Then
-            If rdoBoth.Checked Then
-                clsRIndividualsPlotFunction.AddParameter("geom", "c(" & Chr(34) & "point" & Chr(34) & "," & Chr(34) & "text" & Chr(34) & ")")
-            ElseIf rdoOne.Checked Then
-                clsRIndividualsPlotFunction.AddParameter("geom", Chr(34) & "point" & Chr(34))
-            ElseIf rdoTwo.Checked Then
-                clsRIndividualsPlotFunction.AddParameter("geom", Chr(34) & "text" & Chr(34))
-            End If
-        ElseIf rdoBiplot.Checked Then
-            If rdoBoth.Checked Then
-                clsRBiplotFunction.AddParameter("geom", "c(" & Chr(34) & "point" & Chr(34) & "," & Chr(34) & "text" & Chr(34) & ")")
-            ElseIf rdoOne.Checked Then
-                clsRBiplotFunction.AddParameter("geom", Chr(34) & "point" & Chr(34))
-            ElseIf rdoTwo.Checked Then
-                clsRBiplotFunction.AddParameter("geom", Chr(34) & "text" & Chr(34))
-            Else
-                clsRBiplotFunction.RemoveParameterByName("geom")
-            End If
-        Else
-            clsRScreePlotFunction.RemoveParameterByName("geom")
-        End If
-    End Sub
+    'Private Sub GeomChecked()
+    '    If rdoScreePlot.Checked Then
+    '        If rdoBoth.Checked Then
+    '            clsRScreePlotFunction.AddParameter("geom", "c(" & Chr(34) & "bar" & Chr(34) & "," & Chr(34) & "line" & Chr(34) & ")")
+    '        ElseIf rdoOne.Checked Then
+    '            clsRScreePlotFunction.AddParameter("geom", Chr(34) & "bar" & Chr(34))
+    '        ElseIf rdoTwo.Checked Then
+    '            clsRScreePlotFunction.AddParameter("geom", Chr(34) & "line" & Chr(34))
+    '        End If
+    '    ElseIf rdoVariablesPlot.Checked Then
+    '        If rdoBoth.Checked Then
+    '            clsRVariablesPlotFunction.AddParameter("geom", "c(" & Chr(34) & "arrow" & Chr(34) & "," & Chr(34) & "text" & Chr(34) & ")")
+    '        ElseIf rdoOne.Checked Then
+    '            clsRVariablesPlotFunction.AddParameter("geom", Chr(34) & "arrow" & Chr(34))
+    '        ElseIf rdoTwo.Checked Then
+    '            clsRVariablesPlotFunction.AddParameter("geom", Chr(34) & "text" & Chr(34))
+    '        End If
+    '    ElseIf rdoIndividualsPlot.Checked Then
+    '        If rdoBoth.Checked Then
+    '            clsRIndividualsPlotFunction.AddParameter("geom", "c(" & Chr(34) & "point" & Chr(34) & "," & Chr(34) & "text" & Chr(34) & ")")
+    '        ElseIf rdoOne.Checked Then
+    '            clsRIndividualsPlotFunction.AddParameter("geom", Chr(34) & "point" & Chr(34))
+    '        ElseIf rdoTwo.Checked Then
+    '            clsRIndividualsPlotFunction.AddParameter("geom", Chr(34) & "text" & Chr(34))
+    '        End If
+    '    ElseIf rdoBiplot.Checked Then
+    '        If rdoBoth.Checked Then
+    '            clsRBiplotFunction.AddParameter("geom", "c(" & Chr(34) & "point" & Chr(34) & "," & Chr(34) & "text" & Chr(34) & ")")
+    '        ElseIf rdoOne.Checked Then
+    '            clsRBiplotFunction.AddParameter("geom", Chr(34) & "point" & Chr(34))
+    '        ElseIf rdoTwo.Checked Then
+    '            clsRBiplotFunction.AddParameter("geom", Chr(34) & "text" & Chr(34))
+    '        Else
+    '            clsRBiplotFunction.RemoveParameterByName("geom")
+    '        End If
+    '    Else
+    '        clsRScreePlotFunction.RemoveParameterByName("geom")
+    '    End If
+    'End Sub
 
     'Private Sub VariablesPlot()
     '    clsRVariablesPlotFunction.AddParameter("axes", "c(" & ucrNudDim.Value & "," & ucrNudDim2.Value & ")")
