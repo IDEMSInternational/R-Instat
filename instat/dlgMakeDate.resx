@@ -127,8 +127,8 @@ Day of the year
 
 Month Options
 %m- Month (decimal number)
-%b-Abbreviated month	
-%B-  Full month
+%b- Abbreviated month	
+%B- Full month
 
 Year Options
 %Y- Year (4-digits)

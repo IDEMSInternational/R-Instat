@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgMakeDate
     Public clsPaste As New RFunction
@@ -65,23 +64,23 @@ Public Class dlgMakeDate
         ucrInputComboBoxMonthTwo.SetDropDownStyleAsNonEditable()
 
         ucrInputFormat.SetParameter(New RParameter("format", 1))
-        dctDateFormat.Add("Year-Month-Day", Chr(34) & "%Y-%m-%d" & Chr(34))
-        dctDateFormat.Add("Day-Month-Year", Chr(34) & "%d-%m-%Y" & Chr(34))
-        dctDateFormat.Add("Day-Year-Month", Chr(34) & "%d-%Y-%m" & Chr(34))
-        dctDateFormat.Add("Day/Month(abbr)/Year(abbr)", Chr(34) & "%d/%b/%y" & Chr(34))
-        dctDateFormat.Add("Day/Month(Full name)/Year(abbr)", Chr(34) & "%d/%B/%y" & Chr(34))
-        dctDateFormat.Add("Day/Month(Full Name)/Year(Full Name)", Chr(34) & "%d/%B/%Y" & Chr(34))
+        dctDateFormat.Add("Year(4-digits)-Month-Day", Chr(34) & "%Y-%m-%d" & Chr(34))
+        dctDateFormat.Add("Day-Month-Year(4-digits)", Chr(34) & "%d-%m-%Y" & Chr(34))
+        dctDateFormat.Add("Day-Year(4-digits)-Month", Chr(34) & "%d-%Y-%m" & Chr(34))
+        dctDateFormat.Add("Month-day-Year(4-digits)", Chr(34) & "%m-%d-%Y" & Chr(34))
 
-        dctDateFormat.Add("Month-day-Year", Chr(34) & "%m-%d-%Y" & Chr(34))
-        dctDateFormat.Add("Year/Month/Day", Chr(34) & "%Y/%m/%d" & Chr(34))
-        dctDateFormat.Add("Day/Month/Year", Chr(34) & "%d/%m/%Y" & Chr(34))
-        dctDateFormat.Add("Day/Year/Month", Chr(34) & "%d/%Y/%m" & Chr(34))
-        dctDateFormat.Add("Month/day/Year", Chr(34) & "%m/%d/%Y" & Chr(34))
+        dctDateFormat.Add("Year(4-digits)/Month/Day", Chr(34) & "%Y/%m/%d" & Chr(34))
+        dctDateFormat.Add("Day/Month/Year(4-digits)", Chr(34) & "%d/%m/%Y" & Chr(34))
+        dctDateFormat.Add("Day/Year/Month(4-digits)", Chr(34) & "%d/%Y/%m" & Chr(34))
+        dctDateFormat.Add("Month/day/Year(4-digits)", Chr(34) & "%m/%d/%Y" & Chr(34))
 
-        dctDateFormat.Add("Day-Month(abbr)-Year(abbr)", Chr(34) & "%d-%b-%y" & Chr(34))
-        dctDateFormat.Add("Day-Month(Full name)-Year(abbr)", Chr(34) & "%d-%B-%y" & Chr(34))
-        dctDateFormat.Add("Day-Month(Full Name)-Year(Full Name)", Chr(34) & "%d-%B-%Y" & Chr(34))
+        dctDateFormat.Add("Day-Month(abbr)-Year(2-digits)", Chr(34) & "%d-%b-%y" & Chr(34))
+        dctDateFormat.Add("Day-Month(Full name)-Year(2-digits)", Chr(34) & "%d-%B-%y" & Chr(34))
+        dctDateFormat.Add("Day-Month(Full Name)-Year(4-digits)", Chr(34) & "%d-%B-%Y" & Chr(34))
 
+        dctDateFormat.Add("Day/Month(abbr)/Year((2-digits))", Chr(34) & "%d/%b/%y" & Chr(34))
+        dctDateFormat.Add("Day/Month(Full name)/Year(2-digits)", Chr(34) & "%d/%B/%y" & Chr(34))
+        dctDateFormat.Add("Day/Month(Full Name)/Year(4-digits)", Chr(34) & "%d/%B/%Y" & Chr(34))
 
         ucrInputFormat.SetItems(dctDateFormat)
         ucrInputFormat.SetDropDownStyleAsEditable(bAdditionsAllowed:=True)
@@ -91,7 +90,6 @@ Public Class dlgMakeDate
         dctdateorigin.Add("Gregorian", Chr(34) & "1600-03-01" & Chr(34))
         ucrInputOrigin.SetItems(dctdateorigin)
         ucrInputOrigin.SetDropDownStyleAsNonEditable()
-
 
         ucrInputYearOption.SetParameter(New RParameter("year_format", 6))
         dctYearItems.Add("4 Digit", Chr(34) & "%Y" & Chr(34))
@@ -244,11 +242,6 @@ Public Class dlgMakeDate
         clsDateFunction = New RFunction
         clsMakeYearDay = New RFunction
         clsMakeYearMonthDay = New RFunction
-        clsHelp = New RFunction
-
-        clsHelp.SetRCommand("help")
-        clsHelp.AddParameter("topic", "strptime")
-        clsHelp.AddParameter("package", Chr(34) & "base" & Chr(34))
 
         clsDateFunction.SetRCommand("as.Date")
         clsMakeYearDay.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_date_yeardoy")
@@ -381,7 +374,14 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
-               frmMain.clsRLink.RunScript(clsHelp.ToScript())
+        Dim clsHelp As New RFunction
+        clsHelp.SetPackageName("utils")
+        clsHelp.SetRCommand("help")
+        clsHelp.AddParameter("topic", Chr(34) & "strptime" & Chr(34))
+        clsHelp.AddParameter("package", Chr(34) & "base" & Chr(34))
+        clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
+        frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Date-time Conversion Functions to and from Character", bSeparateThread:=False)
+
     End Sub
 
     Private Sub ucrPnlFormat_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFormat.ControlValueChanged, ucrInputFormat.ControlValueChanged, ucrInputOrigin.ControlValueChanged
