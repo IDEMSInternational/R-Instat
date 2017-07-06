@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,16 +11,16 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
-Imports instat
+
 Imports instat.Translations
 
 Public Class dlgOneVariableGraph
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
-
+    Dim clsOneVarGraph As New RFunction
     Private Sub dlgOneVariableGraph_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -37,22 +37,21 @@ Public Class dlgOneVariableGraph
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
+        clsOneVarGraph = New RFunction
 
         ucrSelectorOneVarGraph.Reset()
         ucrSaveGraph.Reset()
 
         'Define the default RFunction
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$graph_one_variable")
-        clsDefaultFunction.AddParameter("numeric", Chr(34) & "geom_boxplot" & Chr(34))
-        clsDefaultFunction.AddParameter("categorical", Chr(34) & "geom_bar" & Chr(34))
-        clsDefaultFunction.AddParameter("output", Chr(34) & "facets" & Chr(34))
-        clsDefaultFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        clsOneVarGraph.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$graph_one_variable")
+        clsOneVarGraph.AddParameter("numeric", Chr(34) & "geom_boxplot" & Chr(34))
+        clsOneVarGraph.AddParameter("categorical", Chr(34) & "geom_bar" & Chr(34))
+        clsOneVarGraph.AddParameter("output", Chr(34) & "facets" & Chr(34))
+        clsOneVarGraph.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneVarGraph.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
         ' Set default RFunction as the base function
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        ucrBase.clsRsyntax.SetBaseRFunction(clsOneVarGraph)
         bResetSubdialog = True
-        TestOkEnabled()
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
@@ -64,7 +63,7 @@ Public Class dlgOneVariableGraph
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
 
-        ucrPnlOutput.SetParameter(New RParameter("get_area_point"))
+        ucrPnlOutput.SetParameter(New RParameter("output"))
         ucrPnlOutput.AddRadioButton(rdoFacets, Chr(34) & "facets" & Chr(34))
         ucrPnlOutput.AddRadioButton(rdoCombine, Chr(34) & "combine" & Chr(34))
         ucrPnlOutput.AddRadioButton(rdoSingleGraphs, Chr(34) & "single" & Chr(34))

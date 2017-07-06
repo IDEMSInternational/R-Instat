@@ -1,6 +1,22 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class ucrGeom
-    Inherits System.Windows.Forms.UserControl
+    Inherits instat.ucrCore
 
     'UserControl overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()> _
@@ -22,42 +38,41 @@ Partial Class ucrGeom
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.cboGeomList = New System.Windows.Forms.ComboBox()
         Me.lblTypeofLayer = New System.Windows.Forms.Label()
+        Me.ucrInputGeoms = New instat.ucrInputComboBox()
         Me.SuspendLayout()
-        '
-        'cboGeomList
-        '
-        Me.cboGeomList.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.cboGeomList.FormattingEnabled = True
-        Me.cboGeomList.Location = New System.Drawing.Point(3, 24)
-        Me.cboGeomList.Name = "cboGeomList"
-        Me.cboGeomList.Size = New System.Drawing.Size(164, 21)
-        Me.cboGeomList.TabIndex = 0
         '
         'lblTypeofLayer
         '
         Me.lblTypeofLayer.AutoSize = True
         Me.lblTypeofLayer.Location = New System.Drawing.Point(4, 4)
         Me.lblTypeofLayer.Name = "lblTypeofLayer"
-        Me.lblTypeofLayer.Size = New System.Drawing.Size(109, 13)
+        Me.lblTypeofLayer.Size = New System.Drawing.Size(112, 13)
         Me.lblTypeofLayer.TabIndex = 1
-        Me.lblTypeofLayer.Text = "Type of Layer(Geom):"
+        Me.lblTypeofLayer.Text = "Type of Layer (Geom):"
         Me.lblTypeofLayer.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        '
+        'ucrInputGeoms
+        '
+        Me.ucrInputGeoms.AddQuotesIfUnrecognised = True
+        Me.ucrInputGeoms.IsReadOnly = False
+        Me.ucrInputGeoms.Location = New System.Drawing.Point(7, 22)
+        Me.ucrInputGeoms.Name = "ucrInputGeoms"
+        Me.ucrInputGeoms.Size = New System.Drawing.Size(151, 21)
+        Me.ucrInputGeoms.TabIndex = 2
         '
         'ucrGeom
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrInputGeoms)
         Me.Controls.Add(Me.lblTypeofLayer)
-        Me.Controls.Add(Me.cboGeomList)
         Me.Name = "ucrGeom"
-        Me.Size = New System.Drawing.Size(182, 50)
+        Me.Size = New System.Drawing.Size(168, 50)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents cboGeomList As ComboBox
     Friend WithEvents lblTypeofLayer As Label
+    Friend WithEvents ucrInputGeoms As ucrInputComboBox
 End Class

@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,13 +11,26 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports System.ComponentModel
-Imports instat
 
 Public Class ucrInputComboBox
     Dim strItemsType As String = ""
+
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        bAllowNonConditionValues = False
+    End Sub
+
+    'temporary event which is only raised when index is changed
+    'NameChanged raised any time value is set (even if it's the same)
+    Public Event SelectionIndexChanged()
 
     Private Sub cboInput_Validating(sender As Object, e As CancelEventArgs) Handles cboInput.Validating
         Dim strCurrent As String
@@ -26,7 +39,7 @@ Public Class ucrInputComboBox
         If bAutoChangeOnLeave Then
             If Not IsValid(strCurrent) Then
                 'TODO This message should contain the same message from ValidateText()
-                'Select Case MsgBox(Chr(34) & strCurrent & Chr(34) & " is an invalid name." & vbNewLine & "Would you like it to be automatically corrected?", vbYesNo, "Invalid Name")
+                'Select Case MsgBox(Chr(34) & strCurrent & Chr(34) & " is an invalid name." & Environment.NewLine & "Would you like it to be automatically corrected?", vbYesNo, "Invalid Name")
                 '    Case MsgBoxResult.Yes
                 '        SetName(frmMain.clsRLink.MakeValidText(strCurrent))
                 '    Case Else
@@ -55,6 +68,11 @@ Public Class ucrInputComboBox
         FillItemTypes()
     End Sub
 
+    Public Sub SetItemsTypeAsTables()
+        strItemsType = "Tables"
+        FillItemTypes()
+    End Sub
+
     Public Sub SetItemsTypeAsGraphs()
         strItemsType = "Graphs"
         FillItemTypes()
@@ -72,17 +90,22 @@ Public Class ucrInputComboBox
                     frmMain.clsRLink.FillColumnNames(ucrDataFrameSelector.cboAvailableDataFrames.Text, cboColumns:=cboInput)
                 End If
             Case "Data Frames"
+                'TODO not yet implemented
             Case "Models"
                 If ucrDataFrameSelector IsNot Nothing Then
                     cboInput.Items.Clear()
                     cboInput.Items.AddRange(frmMain.clsRLink.GetModelNames(ucrDataFrameSelector.cboAvailableDataFrames.Text).ToArray)
+                End If
+            Case "Tables"
+                If ucrDataFrameSelector IsNot Nothing Then
+                    cboInput.Items.Clear()
+                    cboInput.Items.AddRange(frmMain.clsRLink.GetTableNames(ucrDataFrameSelector.cboAvailableDataFrames.Text).ToArray)
                 End If
             Case "Graphs"
                 If ucrDataFrameSelector IsNot Nothing Then
                     cboInput.Items.Clear()
                     cboInput.Items.AddRange(frmMain.clsRLink.GetGraphNames(ucrDataFrameSelector.cboAvailableDataFrames.Text).ToArray())
                 End If
-
             Case "Filters"
                 If ucrDataFrameSelector IsNot Nothing Then
                     cboInput.Items.Clear()
@@ -120,30 +143,52 @@ Public Class ucrInputComboBox
         Return cboInput.Text
     End Function
 
-    Public Sub SetItems(strItems As String(), Optional bClearExisting As Boolean = True)
-        If bClearExisting Then
-            cboInput.Items.Clear()
+    Public Sub SetItems(Optional strItems As String() = Nothing, Optional bClearExisting As Boolean = True, Optional bAddConditions As Boolean = False, Optional bAddQuotes As Boolean = True)
+        Dim dctValues As New Dictionary(Of String, String)
+        If bAddConditions Then
+            For Each strTemp As String In strItems
+                If bAddQuotes Then
+                    dctValues.Add(strTemp, Chr(34) & strTemp & Chr(34))
+                Else
+                    dctValues.Add(strTemp, strTemp)
+                End If
+            Next
+            SetItems(dctValues, bClearExisting)
+        Else
+            If bClearExisting Then
+                cboInput.Items.Clear()
+            End If
+            If strItems IsNot Nothing Then
+                cboInput.Items.AddRange(strItems)
+            End If
+            AdjustComboBoxWidth(cboInput)
         End If
-        cboInput.Items.AddRange(strItems)
-        AdjustComboBoxWidth(cboInput)
     End Sub
 
-    Public Sub SetItems(dctItemParameterValuePairs As Dictionary(Of String, String), Optional bClearExisting As Boolean = True)
+    Public Sub SetItems(dctItemParameterValuePairs As Dictionary(Of String, String), Optional bClearExisting As Boolean = True, Optional bSetCondtions As Boolean = True)
         Dim kvpTemp As KeyValuePair(Of String, String)
 
         If bClearExisting Then
             cboInput.Items.Clear()
             dctDisplayParameterValues.Clear()
         End If
-        If GetParameter() Is Nothing Then
-            MsgBox("Developer error: Parameter must be set before items can be set. Modify setup for " & Name & " so that the parameter is set first.")
+        If bSetCondtions Then
+            If GetParameter() Is Nothing Then
+                MsgBox("Developer error: Parameter must be set before items can be set. Modify setup for " & Name & " so that the parameter is set first.")
+            End If
         End If
         For Each kvpTemp In dctItemParameterValuePairs
             cboInput.Items.Add(kvpTemp.Key)
             dctDisplayParameterValues.Add(kvpTemp.Key, kvpTemp.Value)
-            AddParameterValuesCondition(kvpTemp.Key, GetParameter().strArgumentName, kvpTemp.Value)
+            If bSetCondtions Then
+                AddParameterValuesCondition(kvpTemp.Key, GetParameter().strArgumentName, kvpTemp.Value)
+            End If
         Next
         AdjustComboBoxWidth(cboInput)
+    End Sub
+
+    Public Sub AddItems(strItems As String())
+        SetItems(strItems, bClearExisting:=False)
     End Sub
 
     Private Sub cboInput_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cboInput.KeyPress
@@ -167,12 +212,15 @@ Public Class ucrInputComboBox
     End Function
 
     Private Sub ucrInputComboBox_Load(sender As Object, e As EventArgs) Handles Me.Load
-        bAllowNonConditionValues = False
         FillItemTypes()
+        If bFirstLoad Then
+            bFirstLoad = False
+        End If
     End Sub
 
     Private Sub cboInput_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboInput.SelectedIndexChanged
         OnNameChanged()
+        RaiseEvent SelectionIndexChanged()
     End Sub
 
     Private Sub ucrInputComboBox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles Me.KeyPress
@@ -215,7 +263,25 @@ Public Class ucrInputComboBox
         cboCurrent.DropDownWidth = iWidth
     End Sub
 
-    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
-        MyBase.UpdateControl(bReset)
+    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
+        MyBase.UpdateControl(bReset:=bReset, bCloneIfNeeded:=bCloneIfNeeded)
+    End Sub
+
+    Public Sub SetDropDownStyleAsNonEditable()
+        cboInput.DropDownStyle = ComboBoxStyle.DropDownList
+        cboInput.AutoCompleteMode = AutoCompleteMode.None
+        cboInput.AutoCompleteSource = AutoCompleteSource.None
+    End Sub
+
+    Public Sub SetDropDownStyleAsEditable(bAdditionsAllowed As Boolean)
+        cboInput.DropDownStyle = ComboBoxStyle.DropDown
+        cboInput.AutoCompleteMode = AutoCompleteMode.Append
+        cboInput.AutoCompleteSource = AutoCompleteSource.ListItems
+        'TODO implement validation settings for this		
+        If bAdditionsAllowed Then
+
+        Else
+
+        End If
     End Sub
 End Class

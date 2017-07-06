@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,9 +11,10 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 
 Public Class dlgOneWayFrequencies
@@ -22,6 +23,8 @@ Public Class dlgOneWayFrequencies
     Private bResetSubdialog As Boolean = False
     Private clsSjTab As New RFunction
     Private clsSjPlot, clsPlotGrid As New RFunction
+    Public strDefaultDataFrame As String = ""
+    Public strDefaultColumns() As String = Nothing
 
     Private Sub dlgOneWayFrequencies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -33,6 +36,7 @@ Public Class dlgOneWayFrequencies
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetDefaultColumn()
         bReset = False
         TestOkEnabled()
     End Sub
@@ -44,16 +48,20 @@ Public Class dlgOneWayFrequencies
         ucrReceiverOneWayFreq.SetParameterIsRFunction()
         ucrReceiverOneWayFreq.bForceAsDataFrame = True
         ucrReceiverOneWayFreq.Selector = ucrSelectorOneWayFreq
+        ucrReceiverOneWayFreq.strSelectorHeading = "Variables"
+        'temp fix to bug in sjPlot
+        ucrReceiverOneWayFreq.bRemoveLabels = True
 
         ucrReceiverWeights.SetParameter(New RParameter("weight.by", 1))
         ucrReceiverWeights.SetParameterIsRFunction()
         ucrReceiverWeights.Selector = ucrSelectorOneWayFreq
         ucrReceiverWeights.SetDataType("numeric")
+        ucrReceiverWeights.strSelectorHeading = "Numerics"
 
         ucrPnlSort.SetParameter(New RParameter("sort.frq", 3))
         ucrPnlSort.AddRadioButton(rdoNone, Chr(34) & "none" & Chr(34))
-        ucrPnlSort.AddRadioButton(rdoAscending, Chr(34) & "asc" & Chr(34))
-        ucrPnlSort.AddRadioButton(rdoDescending, Chr(34) & "desc" & Chr(34))
+        ucrPnlSort.AddRadioButton(rdoAscendingFrequencies, Chr(34) & "asc" & Chr(34))
+        ucrPnlSort.AddRadioButton(rdoDescendingFrequencies, Chr(34) & "desc" & Chr(34))
         ucrPnlSort.SetRDefault(Chr(34) & "none" & Chr(34))
 
         ucrChkWeights.SetText("Weights")
@@ -66,11 +74,9 @@ Public Class dlgOneWayFrequencies
 
         'setting rdoGraph and rdoTable
         ucrPnlFrequencies.AddFunctionNamesCondition(rdoTable, "sjtab")
-        ucrPnlFrequencies.AddFunctionNamesCondition(rdoGraph, "sjplot")
+        ucrPnlFrequencies.AddFunctionNamesCondition(rdoGraph, "plot_grid")
+        'TODO be able to have conditions across multiple functions
 
-        'setting rdoBoth 
-        ucrPnlFrequencies.AddFunctionNamesCondition(rdoBoth, "sjplot")
-        ucrPnlFrequencies.AddFunctionNamesCondition(rdoBoth, "sjtab")
         ucrPnlFrequencies.AddToLinkedControls(ucrChkFlip, {rdoGraph, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencies.AddToLinkedControls(ucrSaveGraph, {rdoGraph, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
 
@@ -136,13 +142,29 @@ Public Class dlgOneWayFrequencies
 
         ucrReceiverWeights.SetRCode(clsSjTab, bReset)
         ucrReceiverOneWayFreq.SetRCode(clsSjTab, bReset)
-        ucrPnlFrequencies.SetRCode(clsSjTab, bReset)
+        If bReset OrElse Not rdoBoth.Checked Then
+            ucrPnlFrequencies.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        End If
+
         ucrChkWeights.SetRCode(clsSjTab, bReset)
         ucrPnlSort.SetRCode(clsSjTab, bReset)
         ucrChkFlip.SetRCode(clsSjPlot, bReset)
         ucrChkGroupData.SetRCode(clsSjTab, bReset)
         ucrNudGroups.SetRCode(clsSjTab, bReset)
         ucrSaveGraph.SetRCode(clsPlotGrid, bReset)
+    End Sub
+
+    Private Sub SetDefaultColumn()
+        If strDefaultDataFrame <> "" Then
+            ucrSelectorOneWayFreq.SetDataframe(strDefaultDataFrame)
+        End If
+        If strDefaultColumns IsNot Nothing AndAlso strDefaultColumns.Count > 0 Then
+            For Each strVar As String In strDefaultColumns
+                ucrReceiverOneWayFreq.Add(strVar, strDefaultDataFrame)
+            Next
+        End If
+        strDefaultDataFrame = ""
+        strDefaultColumns = Nothing
     End Sub
 
     Private Sub TestOkEnabled()
@@ -158,18 +180,6 @@ Public Class dlgOneWayFrequencies
             End If
         Else
             ucrBase.OKEnabled(False)
-        End If
-    End Sub
-
-    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        If rdoTable.Checked OrElse rdoBoth.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsSjTab)
-            'ucrBase.clsRsyntax.bHTMLOutput = True
-            ucrBase.clsRsyntax.iCallType = 0
-        ElseIf rdoGraph.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsPlotGrid)
-            ' ucrBase.clsRsyntax.bHTMLOutput = False
-            ucrBase.clsRsyntax.iCallType = 3
         End If
     End Sub
 
@@ -217,5 +227,19 @@ Public Class dlgOneWayFrequencies
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWeights.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrNudGroups.ControlContentsChanged, ucrChkGroupData.ControlContentsChanged, ucrReceiverOneWayFreq.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrPnlFrequencies_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFrequencies.ControlValueChanged
+        SetBaseFunction()
+    End Sub
+
+    Private Sub SetBaseFunction()
+        If rdoTable.Checked OrElse rdoBoth.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSjTab)
+            ucrBase.clsRsyntax.iCallType = 0
+        ElseIf rdoGraph.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsPlotGrid)
+            ucrBase.clsRsyntax.iCallType = 3
+        End If
     End Sub
 End Class

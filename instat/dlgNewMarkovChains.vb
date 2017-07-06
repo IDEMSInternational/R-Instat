@@ -1,5 +1,18 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -45,17 +58,21 @@ Public Class dlgNewMarkovChains
         ucrReceiverStation.Selector = ucrSelectorMarkovChains
         ucrReceiverStation.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "station" & Chr(34)})
         ucrReceiverStation.bAutoFill = True
+        ucrReceiverStation.strSelectorHeading = "Factors"
         ucrReceiverDate.Selector = ucrSelectorMarkovChains
         ucrReceiverDate.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "date" & Chr(34)})
         ucrReceiverDate.bAutoFill = True
+        ucrReceiverDate.strSelectorHeading = "Date"
 
         ucrReceiverDOY.Selector = ucrSelectorMarkovChains
         ucrReceiverDOY.bAutoFill = True
+        ucrReceiverDOY.strSelectorHeading = "Numerics"
 
         'ucrReceiverDOY.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "doy" & Chr(34)})
         ucrReceiverRainfall.Selector = ucrSelectorMarkovChains
         ucrReceiverRainfall.AddIncludedMetadataProperty("Climatic_Type", {Chr(34) & "rain" & Chr(34)})
         ucrReceiverRainfall.bAutoFill = True
+        ucrReceiverRainfall.strSelectorHeading = "Numerics"
 
         ucrReceiverAdditionalVariables.Selector = ucrSelectorMarkovChains
         ucrBase.iHelpTopicID = 491
@@ -164,6 +181,7 @@ Public Class dlgNewMarkovChains
         Dim strHarmonic As String = ""
 
         'Calculating RainDay
+        clsLagCombineFunction.SetPackageName("stringr")
         clsLagCombineFunction.SetRCommand("str_c")
         clsGreplFunction.SetRCommand("grepl")
         clsGreplFunction.AddParameter("pattern", Chr(39) & "NA" & Chr(39))

@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
@@ -20,6 +20,9 @@ Public Class dlgTwoWayFrequencies
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
     Private clsSjTab, clsSjPlot As New RFunction
+    Public strDefaultDataFrame As String = ""
+    Public strDefaultColumnVariable As String = ""
+    Public strDefaultRowVariable As String = ""
 
     Private Sub dlgTwoWayFrequencies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -31,7 +34,10 @@ Public Class dlgTwoWayFrequencies
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetDefaultVariables()
         bReset = False
+        'temp needed because of show/hiding bug
+        ChangeLocation()
         TestOkEnabled()
     End Sub
 
@@ -43,11 +49,14 @@ Public Class dlgTwoWayFrequencies
         ucrReceiverRowFactor.Selector = ucrSelectorTwoWayFrequencies
         ucrReceiverWeights.Selector = ucrSelectorTwoWayFrequencies
         ucrReceiverColumnFactor.SetDataType("factor")
+        ucrReceiverColumnFactor.strSelectorHeading = "Factors"
         ucrReceiverWeights.SetDataType("numeric")
+        ucrReceiverWeights.strSelectorHeading = "Numerics"
 
         'setting receivers parameters
         ucrReceiverRowFactor.SetParameter(New RParameter("var.row", 1))
         ucrReceiverRowFactor.SetParameterIsString()
+        ucrReceiverRowFactor.strSelectorHeading = "Variables"
         ucrReceiverRowFactor.bWithQuotes = False
         ucrReceiverRowFactor.SetParameterIncludeArgumentName(False)
 
@@ -112,12 +121,7 @@ Public Class dlgTwoWayFrequencies
 
         ucrPnlFreqDisplay.AddFunctionNamesCondition(rdoTable, "sjtab")
         ucrPnlFreqDisplay.AddFunctionNamesCondition(rdoGraph, "sjplot")
-
-        'Conditions for both requires checks on multiple functions
-        'Not yet implemented so this can cause a bug
-
-        'ucrPnlFreqDisplay.AddFunctionNamesCondition(rdoBoth, "sjtab")
-        'ucrPnlFreqDisplay.AddFunctionNamesCondition(rdoBoth, "sjplot")
+        'TODO conditions for both requires checks on multiple functions
 
         'Setting Display of the group boxes in the dialog
         ucrPnlFreqDisplay.AddToLinkedControls(ucrChkCount, {rdoTable, rdoBoth}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -192,7 +196,9 @@ Public Class dlgTwoWayFrequencies
         ucrChkWeights.SetRCode(clsSjTab, bReset)
         ucrChkFlip.SetRCode(clsSjPlot, bReset)
         ucrPnlFreqType.SetRCode(clsSjPlot, bReset)
-        ucrPnlFreqDisplay.SetRCode(clsSjTab, bReset)
+        If bReset OrElse Not rdoBoth.Checked Then
+            ucrPnlFreqDisplay.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        End If
         ucrSelectorTwoWayFrequencies.SetRCode(clsSjTab, bReset)
         ucrChkCell.SetRCode(clsSjTab, bReset)
         ucrChkColumn.SetRCode(clsSjTab, bReset)
@@ -202,16 +208,19 @@ Public Class dlgTwoWayFrequencies
 
     End Sub
 
-    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        If rdoTable.Checked OrElse rdoBoth.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsSjTab)
-            'ucrBase.clsRsyntax.bHTMLOutput = True
-            ucrBase.clsRsyntax.iCallType = 0
-        ElseIf rdoGraph.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsSjPlot)
-            ' ucrBase.clsRsyntax.bHTMLOutput = False
-            ucrBase.clsRsyntax.iCallType = 3
+    Private Sub SetDefaultVariables()
+        If strDefaultDataFrame <> "" Then
+            ucrSelectorTwoWayFrequencies.SetDataframe(strDefaultDataFrame)
         End If
+        If strDefaultColumnVariable <> "" Then
+            ucrReceiverColumnFactor.Add(strDefaultColumnVariable, strDefaultDataFrame)
+        End If
+        If strDefaultRowVariable <> "" Then
+            ucrReceiverRowFactor.Add(strDefaultRowVariable, strDefaultDataFrame)
+        End If
+        strDefaultDataFrame = ""
+        strDefaultRowVariable = ""
+        strDefaultColumnVariable = ""
     End Sub
 
     Private Sub TestOkEnabled()
@@ -271,13 +280,20 @@ Public Class dlgTwoWayFrequencies
             grpFreqTypeGraph.Location = New Point(358, 166)
             Me.Size = New Size(496, 433)
         Else
+            If rdoGraph.Checked Then
+                grpFreqTypeGraph.Show()
+                grpFreqTypeTable.Hide()
+            ElseIf rdoTable.Checked Then
+                grpFreqTypeGraph.Hide()
+                grpFreqTypeTable.Show()
+            End If
             grpFreqTypeTable.Location = New Point(263, 166)
             grpFreqTypeGraph.Location = New Point(263, 166)
             Me.Size = New Size(437, 433)
         End If
     End Sub
 
-    Private Sub ucrChkFlip_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFlip.ControlValueChanged, ucrPnlFreqDisplay.ControlValueChanged
+    Private Sub FlipAndDisplayTypeControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFlip.ControlValueChanged, ucrPnlFreqDisplay.ControlValueChanged
         Dim clsRowParam As RParameter
         Dim clsColumnParam As RParameter
 
@@ -295,6 +311,7 @@ Public Class dlgTwoWayFrequencies
             ucrReceiverColumnFactor.SetParameter(clsColumnParam)
         End If
         ChangeLocation()
+        SetBaseFunction()
     End Sub
 
     Private Sub ucrPnlFreqType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFreqType.ControlValueChanged
@@ -319,5 +336,17 @@ Public Class dlgTwoWayFrequencies
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumnFactor.ControlContentsChanged, ucrReceiverRowFactor.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub SetBaseFunction()
+        If rdoTable.Checked OrElse rdoBoth.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSjTab)
+            'ucrBase.clsRsyntax.bHTMLOutput = True
+            ucrBase.clsRsyntax.iCallType = 0
+        ElseIf rdoGraph.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSjPlot)
+            ' ucrBase.clsRsyntax.bHTMLOutput = False
+            ucrBase.clsRsyntax.iCallType = 3
+        End If
     End Sub
 End Class

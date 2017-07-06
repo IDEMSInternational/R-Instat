@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class sdgAddNewDistribution
     Inherits System.Windows.Forms.Form
 
@@ -56,7 +72,7 @@ Partial Class sdgAddNewDistribution
         '
         Me.ucrNewDistributions.Location = New System.Drawing.Point(12, 12)
         Me.ucrNewDistributions.Name = "ucrNewDistributions"
-        Me.ucrNewDistributions.Size = New System.Drawing.Size(221, 194)
+        Me.ucrNewDistributions.Size = New System.Drawing.Size(253, 194)
         Me.ucrNewDistributions.TabIndex = 0
         '
         'grpChangeLimits
@@ -165,7 +181,7 @@ Partial Class sdgAddNewDistribution
         'lstAddedDistribution
         '
         Me.lstAddedDistribution.FormattingEnabled = True
-        Me.lstAddedDistribution.Location = New System.Drawing.Point(242, 41)
+        Me.lstAddedDistribution.Location = New System.Drawing.Point(271, 44)
         Me.lstAddedDistribution.Name = "lstAddedDistribution"
         Me.lstAddedDistribution.Size = New System.Drawing.Size(120, 147)
         Me.lstAddedDistribution.TabIndex = 5
@@ -173,7 +189,7 @@ Partial Class sdgAddNewDistribution
         'lblAddedDistribution
         '
         Me.lblAddedDistribution.AutoSize = True
-        Me.lblAddedDistribution.Location = New System.Drawing.Point(239, 25)
+        Me.lblAddedDistribution.Location = New System.Drawing.Point(268, 28)
         Me.lblAddedDistribution.Name = "lblAddedDistribution"
         Me.lblAddedDistribution.Size = New System.Drawing.Size(93, 13)
         Me.lblAddedDistribution.TabIndex = 4

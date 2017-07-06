@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,8 +11,9 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports System.IO
 Imports instat.Translations
 Public Class dlgImportGriddedData
@@ -59,6 +60,7 @@ Public Class dlgImportGriddedData
         'dctDownloadPairs.Add("NOAA_CMORPH_V0PX", Chr(34) & "NOAA_CMORPH_V0PX" & Chr(34))
         dctDownloadPairs.Add("NASA_TRMM_3B42", Chr(34) & "NASA_TRMM_3B42" & Chr(34))
         ucrInputDownloadFrom.SetItems(dctDownloadPairs)
+        ucrInputDownloadFrom.SetDropDownStyleAsNonEditable()
 
         ucrInputDataFile.SetParameter(New RParameter("data_file", 1))
 
@@ -115,6 +117,7 @@ Public Class dlgImportGriddedData
         dctFiles.Add("Monthly NMME deg1p0", Chr(34) & "monthly_NMME_deg1p0" & Chr(34))
         dctFiles.Add("Monthly Precipitation", Chr(34) & "monthly_prcp" & Chr(34))
         ucrInputDataFile.SetItems(dctFiles)
+        ucrInputDataFile.SetDropDownStyleAsNonEditable()
 
         clsRDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_from_iri")
         clsRDefaultFunction.AddParameter("download_from", Chr(34) & "CHIRPS_V2P0" & Chr(34))

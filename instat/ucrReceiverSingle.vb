@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports RDotNet
@@ -46,6 +46,8 @@ Public Class ucrReceiverSingle
     Public Overrides Sub Add(strItem As String, Optional strDataFrame As String = "")
         Dim clsGetDataType As New RFunction
         Dim strCurrentItemType As String
+        Dim expColumnType As SymbolicExpression
+        Dim bRemove As Boolean = False
 
         'Would prefer to have remove selected but that will first clear the receiver
         'This has issues when reading RSyntax and filling receivers e.g. in Specific plot dialogs
@@ -79,7 +81,29 @@ Public Class ucrReceiverSingle
                 If strDataFrame <> "" Then
                     clsGetDataType.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
                     clsGetDataType.AddParameter("column", Chr(34) & strItem & Chr(34))
-                    strCurrDataType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript()).AsCharacter(0)
+                    If ucrSelector IsNot Nothing AndAlso ucrSelector.HasStackedVariables() Then
+                        If strItem = "variable" Then
+                            strCurrDataType = "factor"
+                        ElseIf strItem = "value" Then
+                            strCurrDataType = ""
+                        Else
+                            expColumnType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript(), bSilent:=True)
+                            If expColumnType IsNot Nothing AndAlso expColumnType.Type <> Internals.SymbolicExpressionType.Null Then
+                                strCurrDataType = expColumnType.AsCharacter(0)
+                            Else
+                                strCurrDataType = ""
+                                bRemove = True
+                            End If
+                        End If
+                    Else
+                        expColumnType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript(), bSilent:=True)
+                        If expColumnType IsNot Nothing AndAlso expColumnType.Type <> Internals.SymbolicExpressionType.Null Then
+                            strCurrDataType = expColumnType.AsCharacter(0)
+                        Else
+                            strCurrDataType = ""
+                            bRemove = True
+                        End If
+                    End If
                 End If
             Else
                 strCurrDataType = ""
@@ -87,6 +111,9 @@ Public Class ucrReceiverSingle
             strDataFrameName = strDataFrame
             txtReceiverSingle.Text = strItem
             Selector.AddToVariablesList(strItem)
+            If bRemove Then
+                RemoveSelected()
+            End If
         End If
     End Sub
 
@@ -138,6 +165,10 @@ Public Class ucrReceiverSingle
                         If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
                             clsGetVariablesFunc.AddParameter("force_as_data_frame", "FALSE")
                         End If
+                    End If
+                    If bRemoveLabels Then
+                        'temp fix to bug in sjPlot needing labels removed for factor columns
+                        clsGetVariablesFunc.AddParameter("remove_labels", "TRUE")
                     End If
                     If bUseFilteredData Then
                         If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
@@ -206,6 +237,7 @@ Public Class ucrReceiverSingle
         OnSelectionChanged()
     End Sub
 
+    'TODO make these global options
     Public Overrides Sub SetColor()
         txtReceiverSingle.BackColor = Color.Aqua
     End Sub
@@ -228,7 +260,9 @@ Public Class ucrReceiverSingle
             Selector.RemoveFromVariablesList("variable")
         Else
             Me.Enabled = True
-            RemoveSelected()
+            If txtReceiverSingle.Text = "variable" Then
+                RemoveSelected()
+            End If
         End If
     End Sub
 
@@ -244,10 +278,6 @@ Public Class ucrReceiverSingle
         RemoveSelected()
     End Sub
 
-    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
-        MyBase.UpdateControl(bReset)
-    End Sub
-
     Private Sub Selector_DataFrameChanged() Handles ucrSelector.DataFrameChanged
         CheckAutoFill()
     End Sub
@@ -255,11 +285,9 @@ Public Class ucrReceiverSingle
     Public Sub CheckAutoFill()
         If bAutoFill Then
             If Selector IsNot Nothing Then
-                If lstIncludedMetadataProperties.Count > 0 OrElse lstExcludedMetadataProperties.Count > 0 OrElse Selector.lstIncludedMetadataProperties.Count > 0 OrElse Selector.lstIncludedMetadataProperties.Count Then
-                    SetMeAsReceiver()
-                    If Selector.lstAvailableVariable.Items.Count = 1 Then
-                        Add(Selector.lstAvailableVariable.Items(0).Text, Selector.strCurrentDataFrame)
-                    End If
+                SetMeAsReceiver()
+                If Selector.lstAvailableVariable.Items.Count = 1 Then
+                    Add(Selector.lstAvailableVariable.Items(0).Text, Selector.strCurrentDataFrame)
                 End If
             End If
         End If
@@ -279,8 +307,17 @@ Public Class ucrReceiverSingle
 
     Private Sub ucrReceiverSingle_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
-            AddHandler ParentForm.Shown, AddressOf ParentForm_Shown
+            If ParentForm IsNot Nothing Then
+                AddHandler ParentForm.Shown, AddressOf ParentForm_Shown
+            End If
             bFirstLoad = False
+            If Selector IsNot Nothing AndAlso Not Selector.CurrentReceiver.Equals(Me) Then
+                RemoveColor()
+            End If
         End If
+    End Sub
+
+    Public Overrides Sub SetTextColour(clrNew As Color)
+        txtReceiverSingle.ForeColor = clrNew
     End Sub
 End Class

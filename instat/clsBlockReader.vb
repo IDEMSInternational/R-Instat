@@ -1,18 +1,19 @@
-﻿' Instat+R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
 ' the Free Software Foundation, either version 3 of the License, or
 ' (at your option) any later version.
 '
-' This program is distributed in the hope that it will be useful, 
+' This program is distributed in the hope that it will be useful,
 ' but WITHOUT ANY WARRANTY; without even the implied warranty of
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Public Class BlockReader
     'This class enables to take a block of R-Instat generated R Script, and translate it into a strComment and a list of RParameters containing the full description of the different R Commands in the R Script. 
     'Task: would need to identify the main R command, the assignTo methods and the secondary R commands. 'Warning, blocks are for the moment blocks of RunScript. So secondary R Commands are not in the same block as main R command. Need to work on this from different points of view: RSyntax, RunScript, Output and Block Selection.
@@ -21,7 +22,7 @@ Public Class BlockReader
     '[17:09:37] François Renaud: Also for the moment secondary and main R commands generated within a dialogue are in separate blocks, but this needs to be addressed from the point of view of RSyntax, Runscript, Output and BlockSelector before BlockReader get's edited.
     '[1711:29] Danny Parsons: yes that will all be In RSyntax
     '[17:11:50] Danny Parsons: although we will Then need a way To remove output from a block As there will be output between commands
-    '[17:20:11] François Renaud: aiaa, yes, that's true. Ok, I m thinking, maybe the easiest is to have different layers, runscript blocks and dialogue blocks. Output's can be padded with another type of symbol as vbcrlf or we could even imagine to have signatures provided by each dialogue... this would facilitate the repopulation of the dialogue when clicking on a block.
+    '[17:20:11] François Renaud: aiaa, yes, that's true. Ok, I m thinking, maybe the easiest is to have different layers, runscript blocks and dialogue blocks. Output's can be padded with another type of symbol as Environment.NewLine or we could even imagine to have signatures provided by each dialogue... this would facilitate the repopulation of the dialogue when clicking on a block.
 
     Private strComment As String 'The comment that is part of the block. 'Warning: only one comment per bloc for now... will need to go over this when secondary R-commands are taken in the same block.
     Private lstRCommands As List(Of RParameter) 'The list of RParameters that store the information about the RCommands.
@@ -52,7 +53,7 @@ Public Class BlockReader
     Public Sub ReadBlock(strBlockText As String)
         'This sub reads the block of text coming from the output window. 'need more commenting
         Dim lstLines As String()
-        lstLines = strBlockText.Split(vbCrLf)
+        lstLines = strBlockText.Split(Environment.NewLine)
         If lstRCommands Is Nothing Then
             lstRCommands = New List(Of RParameter)
         End If

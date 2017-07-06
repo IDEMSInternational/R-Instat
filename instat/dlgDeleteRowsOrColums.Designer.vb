@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgDeleteRowsOrColums
     Inherits System.Windows.Forms.Form
 
@@ -24,21 +40,23 @@ Partial Class dlgDeleteRowsOrColums
     Private Sub InitializeComponent()
         Me.lblNumberofRows = New System.Windows.Forms.Label()
         Me.lblColumnsToDelete = New System.Windows.Forms.Label()
-        Me.lblRowNames = New System.Windows.Forms.Label()
-        Me.ucrNudRowsToDelete = New instat.ucrNud()
-        Me.ucrSelectorForDeleteColumns = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverForColumnsToDelete = New instat.ucrReceiverMultiple()
-        Me.ucrDataFrameLengthForDeleteRows = New instat.ucrDataFrameLength()
-        Me.ucrBase = New instat.ucrButtons()
+        Me.lblFrom = New System.Windows.Forms.Label()
         Me.rdoColumns = New System.Windows.Forms.RadioButton()
         Me.rdoRows = New System.Windows.Forms.RadioButton()
+        Me.lblTo = New System.Windows.Forms.Label()
+        Me.ucrNudTo = New instat.ucrNud()
         Me.ucrPnlColumnsOrRows = New instat.UcrPanel()
+        Me.ucrDataFrameLengthForDeleteRows = New instat.ucrDataFrameLength()
+        Me.ucrNudFrom = New instat.ucrNud()
+        Me.ucrSelectorForDeleteColumns = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverForColumnsToDelete = New instat.ucrReceiverMultiple()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
         'lblNumberofRows
         '
         Me.lblNumberofRows.AutoSize = True
-        Me.lblNumberofRows.Location = New System.Drawing.Point(7, 133)
+        Me.lblNumberofRows.Location = New System.Drawing.Point(7, 108)
         Me.lblNumberofRows.Name = "lblNumberofRows"
         Me.lblNumberofRows.Size = New System.Drawing.Size(89, 13)
         Me.lblNumberofRows.TabIndex = 6
@@ -55,64 +73,15 @@ Partial Class dlgDeleteRowsOrColums
         Me.lblColumnsToDelete.Tag = "Columns_to_Delete"
         Me.lblColumnsToDelete.Text = "Columns to Delete:"
         '
-        'lblRowNames
+        'lblFrom
         '
-        Me.lblRowNames.AutoSize = True
-        Me.lblRowNames.Location = New System.Drawing.Point(9, 166)
-        Me.lblRowNames.Name = "lblRowNames"
-        Me.lblRowNames.Size = New System.Drawing.Size(78, 13)
-        Me.lblRowNames.TabIndex = 8
-        Me.lblRowNames.Tag = ""
-        Me.lblRowNames.Text = "Row to Delete:"
-        '
-        'ucrNudRowsToDelete
-        '
-        Me.ucrNudRowsToDelete.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRowsToDelete.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudRowsToDelete.Location = New System.Drawing.Point(100, 163)
-        Me.ucrNudRowsToDelete.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudRowsToDelete.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRowsToDelete.Name = "ucrNudRowsToDelete"
-        Me.ucrNudRowsToDelete.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudRowsToDelete.TabIndex = 9
-        Me.ucrNudRowsToDelete.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrSelectorForDeleteColumns
-        '
-        Me.ucrSelectorForDeleteColumns.bShowHiddenColumns = False
-        Me.ucrSelectorForDeleteColumns.bUseCurrentFilter = True
-        Me.ucrSelectorForDeleteColumns.Location = New System.Drawing.Point(9, 54)
-        Me.ucrSelectorForDeleteColumns.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorForDeleteColumns.Name = "ucrSelectorForDeleteColumns"
-        Me.ucrSelectorForDeleteColumns.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorForDeleteColumns.TabIndex = 3
-        '
-        'ucrReceiverForColumnsToDelete
-        '
-        Me.ucrReceiverForColumnsToDelete.frmParent = Me
-        Me.ucrReceiverForColumnsToDelete.Location = New System.Drawing.Point(254, 104)
-        Me.ucrReceiverForColumnsToDelete.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverForColumnsToDelete.Name = "ucrReceiverForColumnsToDelete"
-        Me.ucrReceiverForColumnsToDelete.Selector = Nothing
-        Me.ucrReceiverForColumnsToDelete.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverForColumnsToDelete.strNcFilePath = ""
-        Me.ucrReceiverForColumnsToDelete.TabIndex = 5
-        Me.ucrReceiverForColumnsToDelete.ucrSelector = Nothing
-        '
-        'ucrDataFrameLengthForDeleteRows
-        '
-        Me.ucrDataFrameLengthForDeleteRows.Location = New System.Drawing.Point(100, 129)
-        Me.ucrDataFrameLengthForDeleteRows.Name = "ucrDataFrameLengthForDeleteRows"
-        Me.ucrDataFrameLengthForDeleteRows.Size = New System.Drawing.Size(55, 24)
-        Me.ucrDataFrameLengthForDeleteRows.TabIndex = 7
-        Me.ucrDataFrameLengthForDeleteRows.ucrDataFrameSelector = Nothing
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 243)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 10
+        Me.lblFrom.AutoSize = True
+        Me.lblFrom.Location = New System.Drawing.Point(7, 143)
+        Me.lblFrom.Name = "lblFrom"
+        Me.lblFrom.Size = New System.Drawing.Size(67, 13)
+        Me.lblFrom.TabIndex = 8
+        Me.lblFrom.Tag = ""
+        Me.lblFrom.Text = "Delete From:"
         '
         'rdoColumns
         '
@@ -148,6 +117,28 @@ Partial Class dlgDeleteRowsOrColums
         Me.rdoRows.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.rdoRows.UseVisualStyleBackColor = True
         '
+        'lblTo
+        '
+        Me.lblTo.AutoSize = True
+        Me.lblTo.Location = New System.Drawing.Point(51, 169)
+        Me.lblTo.Name = "lblTo"
+        Me.lblTo.Size = New System.Drawing.Size(23, 13)
+        Me.lblTo.TabIndex = 10
+        Me.lblTo.Tag = ""
+        Me.lblTo.Text = "To:"
+        '
+        'ucrNudTo
+        '
+        Me.ucrNudTo.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTo.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudTo.Location = New System.Drawing.Point(100, 165)
+        Me.ucrNudTo.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudTo.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTo.Name = "ucrNudTo"
+        Me.ucrNudTo.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudTo.TabIndex = 11
+        Me.ucrNudTo.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'ucrPnlColumnsOrRows
         '
         Me.ucrPnlColumnsOrRows.Location = New System.Drawing.Point(97, 11)
@@ -155,18 +146,69 @@ Partial Class dlgDeleteRowsOrColums
         Me.ucrPnlColumnsOrRows.Size = New System.Drawing.Size(214, 29)
         Me.ucrPnlColumnsOrRows.TabIndex = 0
         '
+        'ucrDataFrameLengthForDeleteRows
+        '
+        Me.ucrDataFrameLengthForDeleteRows.Location = New System.Drawing.Point(100, 104)
+        Me.ucrDataFrameLengthForDeleteRows.Name = "ucrDataFrameLengthForDeleteRows"
+        Me.ucrDataFrameLengthForDeleteRows.Size = New System.Drawing.Size(55, 24)
+        Me.ucrDataFrameLengthForDeleteRows.TabIndex = 7
+        Me.ucrDataFrameLengthForDeleteRows.ucrDataFrameSelector = Nothing
+        '
+        'ucrNudFrom
+        '
+        Me.ucrNudFrom.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFrom.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudFrom.Location = New System.Drawing.Point(100, 139)
+        Me.ucrNudFrom.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudFrom.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFrom.Name = "ucrNudFrom"
+        Me.ucrNudFrom.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudFrom.TabIndex = 9
+        Me.ucrNudFrom.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrSelectorForDeleteColumns
+        '
+        Me.ucrSelectorForDeleteColumns.bShowHiddenColumns = False
+        Me.ucrSelectorForDeleteColumns.bUseCurrentFilter = True
+        Me.ucrSelectorForDeleteColumns.Location = New System.Drawing.Point(9, 43)
+        Me.ucrSelectorForDeleteColumns.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorForDeleteColumns.Name = "ucrSelectorForDeleteColumns"
+        Me.ucrSelectorForDeleteColumns.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorForDeleteColumns.TabIndex = 3
+        '
+        'ucrReceiverForColumnsToDelete
+        '
+        Me.ucrReceiverForColumnsToDelete.frmParent = Me
+        Me.ucrReceiverForColumnsToDelete.Location = New System.Drawing.Point(254, 104)
+        Me.ucrReceiverForColumnsToDelete.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverForColumnsToDelete.Name = "ucrReceiverForColumnsToDelete"
+        Me.ucrReceiverForColumnsToDelete.Selector = Nothing
+        Me.ucrReceiverForColumnsToDelete.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverForColumnsToDelete.strNcFilePath = ""
+        Me.ucrReceiverForColumnsToDelete.TabIndex = 5
+        Me.ucrReceiverForColumnsToDelete.ucrSelector = Nothing
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(9, 243)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 12
+        '
         'dlgDeleteRowsOrColums
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(415, 299)
+        Me.ClientSize = New System.Drawing.Size(416, 299)
+        Me.Controls.Add(Me.lblTo)
+        Me.Controls.Add(Me.ucrNudTo)
         Me.Controls.Add(Me.rdoColumns)
         Me.Controls.Add(Me.rdoRows)
         Me.Controls.Add(Me.ucrPnlColumnsOrRows)
         Me.Controls.Add(Me.ucrDataFrameLengthForDeleteRows)
-        Me.Controls.Add(Me.lblRowNames)
+        Me.Controls.Add(Me.lblFrom)
         Me.Controls.Add(Me.lblNumberofRows)
-        Me.Controls.Add(Me.ucrNudRowsToDelete)
+        Me.Controls.Add(Me.ucrNudFrom)
         Me.Controls.Add(Me.ucrSelectorForDeleteColumns)
         Me.Controls.Add(Me.lblColumnsToDelete)
         Me.Controls.Add(Me.ucrReceiverForColumnsToDelete)
@@ -189,9 +231,11 @@ Partial Class dlgDeleteRowsOrColums
     Friend WithEvents ucrSelectorForDeleteColumns As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverForColumnsToDelete As ucrReceiverMultiple
     Friend WithEvents lblColumnsToDelete As Label
-    Friend WithEvents lblRowNames As Label
-    Friend WithEvents ucrNudRowsToDelete As ucrNud
+    Friend WithEvents lblFrom As Label
+    Friend WithEvents ucrNudFrom As ucrNud
     Friend WithEvents rdoColumns As RadioButton
     Friend WithEvents rdoRows As RadioButton
     Friend WithEvents ucrPnlColumnsOrRows As UcrPanel
+    Friend WithEvents lblTo As Label
+    Friend WithEvents ucrNudTo As ucrNud
 End Class

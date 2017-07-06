@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports RDotNet
@@ -81,11 +81,13 @@ Public Class ucrReceiverMultiple
         MyBase.Remove(strItems)
         Dim strTempItem As String
 
-        For Each strTempItem In strItems
-            lstSelectedVariables.Items.RemoveByKey(strTempItem)
-            Selector.RemoveFromVariablesList(strTempItem)
-        Next
-        OnSelectionChanged()
+        If strItems.Count > 0 Then
+            For Each strTempItem In strItems
+                lstSelectedVariables.Items.RemoveByKey(strTempItem)
+                Selector.RemoveFromVariablesList(strTempItem)
+            Next
+            OnSelectionChanged()
+        End If
     End Sub
 
     Public Overrides Sub Clear()
@@ -135,6 +137,10 @@ Public Class ucrReceiverMultiple
                         If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
                             clsGetVariablesFunc.AddParameter("force_as_data_frame", "FALSE")
                         End If
+                    End If
+                    If bRemoveLabels Then
+                        'temp fix to bug in sjPlot needing labels removed for factor columns
+                        clsGetVariablesFunc.AddParameter("remove_labels", "TRUE")
                     End If
                     If bUseFilteredData Then
                         If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
@@ -346,6 +352,7 @@ Public Class ucrReceiverMultiple
         Dim strDataTypes As New List(Of String)
         Dim strDataFrame As String
         Dim strCurrentType As String
+        Dim expTypes As SymbolicExpression
 
         If Selector IsNot Nothing Then
             If bTypeSet Then
@@ -360,7 +367,10 @@ Public Class ucrReceiverMultiple
                 clsGetDataType.AddParameter("property", "data_type_label")
                 clsGetDataType.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
                 clsGetDataType.AddParameter("column", GetVariableNames())
-                strDataTypes = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript()).AsCharacter.ToList()
+                expTypes = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript(), bSilent:=True)
+                If expTypes IsNot Nothing AndAlso expTypes.Type <> Internals.SymbolicExpressionType.Null Then
+                    strDataTypes = expTypes.AsCharacter.ToList()
+                End If
                 If bUnique Then
                     strDataTypes = strDataTypes.Distinct().ToList()
                 End If

@@ -1,4 +1,20 @@
-﻿Imports instat
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Imports instat
 
 Public Class ucrSave
     Public bFirstLoad As Boolean = True
@@ -29,6 +45,8 @@ Public Class ucrSave
         ucrChkSave.bIsActiveRControl = False
         ucrInputComboSave.bIsActiveRControl = False
         ucrInputTextSave.bIsActiveRControl = False
+        ucrInputComboSave.bUpdateRCodeFromControl = True
+        ucrInputTextSave.bUpdateRCodeFromControl = True
     End Sub
 
     Private Sub SetDefaults()
@@ -46,16 +64,11 @@ Public Class ucrSave
         bShowLabel = True
         bShowCheckBox = False
         LabelOrCheckboxSettings()
-        If bIsComboBox Then
-            iTemp = lblSaveText.Location.X + lblSaveText.Size.Width - ucrInputComboSave.Location.X
-            If iTemp > 0 Then
-                ucrInputComboSave.Width = ucrInputComboSave.Size.Width - iTemp
-            End If
-        Else
-            iTemp = lblSaveText.Location.X + lblSaveText.Size.Width - ucrInputTextSave.Location.X
-            If iTemp > 0 Then
-                ucrInputTextSave.Width = ucrInputComboSave.Size.Width - iTemp
-            End If
+        'Do for both in case text/combo not set yet, or will change at run time
+        iTemp = lblSaveText.Location.X + lblSaveText.Size.Width - ucrInputComboSave.Location.X
+        If iTemp > 0 Then
+            ucrInputComboSave.Width = ucrInputComboSave.Size.Width - iTemp
+            ucrInputTextSave.Width = ucrInputComboSave.Width
         End If
     End Sub
 
@@ -146,6 +159,10 @@ Public Class ucrSave
                 ucrInputComboSave.SetDefaultTypeAsModel()
                 ucrInputComboSave.SetItemsTypeAsModels()
                 ucrInputTextSave.SetDefaultTypeAsModel()
+            Case "table"
+                ucrInputComboSave.SetDefaultTypeAsTable()
+                ucrInputComboSave.SetItemsTypeAsTables()
+                ucrInputTextSave.SetDefaultTypeAsTable()
             Case Else
                 MsgBox("Developer error: unrecognised save type: " & strType)
         End Select
@@ -165,6 +182,10 @@ Public Class ucrSave
 
     Public Sub SetSaveTypeAsModel()
         SetSaveType("model")
+    End Sub
+
+    Public Sub SetSaveTypeAsTable()
+        SetSaveType("table")
     End Sub
 
     Public Sub Reset()
@@ -260,6 +281,8 @@ Public Class ucrSave
                                 clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempGraph:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
                             Case "model"
                                 clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempModel:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
+                            Case "table"
+                                clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempTable:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
                         End Select
                     Else
                         clsTempCode.RemoveAssignTo()
@@ -273,7 +296,7 @@ Public Class ucrSave
         OnControlContentsChanged()
     End Sub
 
-    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
+    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
         Dim clsMainRCode As RCodeStructure
 
         clsMainRCode = GetRCode()
@@ -346,4 +369,12 @@ Public Class ucrSave
     Public Sub AddAdditionalRCode(clsNewRCode As RCodeStructure, Optional iAdditionalPairNo As Integer = -1)
         AddAdditionalCodeParameterPair(clsNewRCode, Nothing, iAdditionalPairNo)
     End Sub
+
+    Public Function UserTyped() As Boolean
+        If bIsComboBox Then
+            Return ucrInputComboSave.bUserTyped
+        Else
+            Return ucrInputTextSave.bUserTyped
+        End If
+    End Function
 End Class

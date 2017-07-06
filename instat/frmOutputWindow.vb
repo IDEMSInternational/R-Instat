@@ -1,4 +1,19 @@
-﻿
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports System.ComponentModel
 Imports System.Globalization
 Imports System.Threading
@@ -44,8 +59,8 @@ Public Class frmOutputWindow
     Private Sub mnuContextRTB_Opening(sender As Object, e As CancelEventArgs) Handles mnuContextRTB.Opening
         'This sub checks whether or not Copy Image should be enabled. It is enabled if one of the selected block is an "1 image paragraph".
         'Could add SaveImageRTB enabled when it exists.
-        For Each block As Windows.Documents.Block In ucrRichTextBox.rtbOutput.Document.Blocks
-            If ucrRichTextBox.rtbOutput.Selection.Contains(block.ContentStart) AndAlso ucrRichTextBox.rtbOutput.Selection.Contains(block.ContentEnd) AndAlso TypeOf (block) Is Windows.Documents.Paragraph AndAlso CType(block, Windows.Documents.Paragraph).Inlines.Count = 1 AndAlso TypeOf (CType(block, Windows.Documents.Paragraph).Inlines.FirstInline) Is Windows.Documents.InlineUIContainer Then
+        For Each block As System.Windows.Documents.Block In ucrRichTextBox.rtbOutput.Document.Blocks
+            If ucrRichTextBox.rtbOutput.Selection.Contains(block.ContentStart) AndAlso ucrRichTextBox.rtbOutput.Selection.Contains(block.ContentEnd) AndAlso TypeOf (block) Is System.Windows.Documents.Paragraph AndAlso CType(block, System.Windows.Documents.Paragraph).Inlines.Count = 1 AndAlso TypeOf (CType(block, System.Windows.Documents.Paragraph).Inlines.FirstInline) Is System.Windows.Documents.InlineUIContainer Then
                 CopyImageRTB.Enabled = True
                 Exit Sub
             End If
@@ -65,12 +80,12 @@ Public Class frmOutputWindow
 
     Private Sub CopyImageRTB_Click(sender As Object, e As EventArgs) Handles CopyImageRTB.Click
         'Copies the first selected image into the clipboard.
-        Dim prphTemp As Windows.Documents.Paragraph
-        Dim conImage As Windows.Documents.InlineUIContainer
-        For Each block As Windows.Documents.Block In ucrRichTextBox.rtbOutput.Document.Blocks
-            If TypeOf (block) Is Windows.Documents.Paragraph Then
+        Dim prphTemp As System.Windows.Documents.Paragraph
+        Dim conImage As System.Windows.Documents.InlineUIContainer
+        For Each block As System.Windows.Documents.Block In ucrRichTextBox.rtbOutput.Document.Blocks
+            If TypeOf (block) Is System.Windows.Documents.Paragraph Then
                 prphTemp = block
-                If ucrRichTextBox.rtbOutput.Selection.Contains(block.ContentStart) AndAlso prphTemp.Inlines.Count = 1 AndAlso TypeOf (prphTemp.Inlines.FirstInline) Is Windows.Documents.InlineUIContainer Then
+                If ucrRichTextBox.rtbOutput.Selection.Contains(block.ContentStart) AndAlso prphTemp.Inlines.Count = 1 AndAlso TypeOf (prphTemp.Inlines.FirstInline) Is System.Windows.Documents.InlineUIContainer Then
                     conImage = prphTemp.Inlines.FirstInline
                     ucrRichTextBox.CopyUIElementToClipboard(conImage.Child)
                     Exit Sub

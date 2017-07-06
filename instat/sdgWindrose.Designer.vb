@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class sdgWindrose
     Inherits System.Windows.Forms.Form
 
@@ -38,7 +54,7 @@ Partial Class sdgWindrose
         'lblNoofDirections
         '
         Me.lblNoofDirections.AutoSize = True
-        Me.lblNoofDirections.Location = New System.Drawing.Point(13, 28)
+        Me.lblNoofDirections.Location = New System.Drawing.Point(11, 18)
         Me.lblNoofDirections.Name = "lblNoofDirections"
         Me.lblNoofDirections.Size = New System.Drawing.Size(89, 13)
         Me.lblNoofDirections.TabIndex = 0
@@ -47,28 +63,28 @@ Partial Class sdgWindrose
         'lblNoOfSpeeds
         '
         Me.lblNoOfSpeeds.AutoSize = True
-        Me.lblNoOfSpeeds.Location = New System.Drawing.Point(13, 86)
+        Me.lblNoOfSpeeds.Location = New System.Drawing.Point(11, 71)
         Me.lblNoOfSpeeds.Name = "lblNoOfSpeeds"
         Me.lblNoOfSpeeds.Size = New System.Drawing.Size(78, 13)
-        Me.lblNoOfSpeeds.TabIndex = 2
+        Me.lblNoOfSpeeds.TabIndex = 4
         Me.lblNoOfSpeeds.Text = "No. of Speeds:"
         '
         'lblCalmWind
         '
         Me.lblCalmWind.AutoSize = True
-        Me.lblCalmWind.Location = New System.Drawing.Point(13, 57)
+        Me.lblCalmWind.Location = New System.Drawing.Point(11, 45)
         Me.lblCalmWind.Name = "lblCalmWind"
         Me.lblCalmWind.Size = New System.Drawing.Size(61, 13)
-        Me.lblCalmWind.TabIndex = 4
+        Me.lblCalmWind.TabIndex = 2
         Me.lblCalmWind.Text = "Calm Wind:"
         '
         'lblSpeedCuts
         '
         Me.lblSpeedCuts.AutoSize = True
-        Me.lblSpeedCuts.Location = New System.Drawing.Point(13, 115)
+        Me.lblSpeedCuts.Location = New System.Drawing.Point(11, 98)
         Me.lblSpeedCuts.Name = "lblSpeedCuts"
         Me.lblSpeedCuts.Size = New System.Drawing.Size(65, 13)
-        Me.lblSpeedCuts.TabIndex = 2
+        Me.lblSpeedCuts.TabIndex = 6
         Me.lblSpeedCuts.Text = "Speed Cuts:"
         '
         'ucrInputSpeedCuts
@@ -76,40 +92,40 @@ Partial Class sdgWindrose
         Me.ucrInputSpeedCuts.AddQuotesIfUnrecognised = True
         Me.ucrInputSpeedCuts.IsMultiline = False
         Me.ucrInputSpeedCuts.IsReadOnly = False
-        Me.ucrInputSpeedCuts.Location = New System.Drawing.Point(130, 115)
+        Me.ucrInputSpeedCuts.Location = New System.Drawing.Point(103, 94)
         Me.ucrInputSpeedCuts.Name = "ucrInputSpeedCuts"
         Me.ucrInputSpeedCuts.Size = New System.Drawing.Size(109, 21)
-        Me.ucrInputSpeedCuts.TabIndex = 6
+        Me.ucrInputSpeedCuts.TabIndex = 7
         '
         'ucrNudCalmWind
         '
         Me.ucrNudCalmWind.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudCalmWind.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudCalmWind.Location = New System.Drawing.Point(130, 57)
+        Me.ucrNudCalmWind.Location = New System.Drawing.Point(103, 42)
         Me.ucrNudCalmWind.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudCalmWind.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudCalmWind.Name = "ucrNudCalmWind"
         Me.ucrNudCalmWind.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudCalmWind.TabIndex = 5
+        Me.ucrNudCalmWind.TabIndex = 3
         Me.ucrNudCalmWind.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudNoOfSpeeds
         '
         Me.ucrNudNoOfSpeeds.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNoOfSpeeds.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNoOfSpeeds.Location = New System.Drawing.Point(130, 86)
+        Me.ucrNudNoOfSpeeds.Location = New System.Drawing.Point(103, 68)
         Me.ucrNudNoOfSpeeds.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNoOfSpeeds.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNoOfSpeeds.Name = "ucrNudNoOfSpeeds"
         Me.ucrNudNoOfSpeeds.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudNoOfSpeeds.TabIndex = 3
+        Me.ucrNudNoOfSpeeds.TabIndex = 5
         Me.ucrNudNoOfSpeeds.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudNoOfDirections
         '
         Me.ucrNudNoOfDirections.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNoOfDirections.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNoOfDirections.Location = New System.Drawing.Point(130, 28)
+        Me.ucrNudNoOfDirections.Location = New System.Drawing.Point(103, 16)
         Me.ucrNudNoOfDirections.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNoOfDirections.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNoOfDirections.Name = "ucrNudNoOfDirections"
@@ -119,34 +135,34 @@ Partial Class sdgWindrose
         '
         'ucrButtonsSdgWindrose
         '
-        Me.ucrButtonsSdgWindrose.Location = New System.Drawing.Point(51, 183)
+        Me.ucrButtonsSdgWindrose.Location = New System.Drawing.Point(36, 155)
         Me.ucrButtonsSdgWindrose.Name = "ucrButtonsSdgWindrose"
         Me.ucrButtonsSdgWindrose.Size = New System.Drawing.Size(142, 30)
-        Me.ucrButtonsSdgWindrose.TabIndex = 7
+        Me.ucrButtonsSdgWindrose.TabIndex = 10
         '
         'lblTheme
         '
         Me.lblTheme.AutoSize = True
-        Me.lblTheme.Location = New System.Drawing.Point(13, 144)
+        Me.lblTheme.Location = New System.Drawing.Point(12, 124)
         Me.lblTheme.Name = "lblTheme"
         Me.lblTheme.Size = New System.Drawing.Size(43, 13)
-        Me.lblTheme.TabIndex = 2
+        Me.lblTheme.TabIndex = 8
         Me.lblTheme.Text = "Theme:"
         '
         'ucrInputTheme
         '
         Me.ucrInputTheme.AddQuotesIfUnrecognised = True
         Me.ucrInputTheme.IsReadOnly = False
-        Me.ucrInputTheme.Location = New System.Drawing.Point(130, 144)
+        Me.ucrInputTheme.Location = New System.Drawing.Point(103, 121)
         Me.ucrInputTheme.Name = "ucrInputTheme"
         Me.ucrInputTheme.Size = New System.Drawing.Size(109, 21)
-        Me.ucrInputTheme.TabIndex = 8
+        Me.ucrInputTheme.TabIndex = 9
         '
         'sdgWindrose
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(259, 220)
+        Me.ClientSize = New System.Drawing.Size(230, 190)
         Me.Controls.Add(Me.ucrInputTheme)
         Me.Controls.Add(Me.lblTheme)
         Me.Controls.Add(Me.lblSpeedCuts)

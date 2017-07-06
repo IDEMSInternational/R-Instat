@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgWaterBalance
     Inherits System.Windows.Forms.Form
 
@@ -36,6 +52,7 @@ Partial Class dlgWaterBalance
         Me.lblTo = New System.Windows.Forms.Label()
         Me.lblRainfall = New System.Windows.Forms.Label()
         Me.lblEvaporation = New System.Windows.Forms.Label()
+        Me.ucrSaveWaterBalance = New instat.ucrSave()
         Me.ucrInputEvaporation = New instat.ucrInputTextBox()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
@@ -43,7 +60,6 @@ Partial Class dlgWaterBalance
         Me.ucrReceiverRainfall = New instat.ucrReceiverSingle()
         Me.ucrSelectorForWaterBalance = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSaveWaterBalance = New instat.ucrSave()
         Me.grpRainParameters.SuspendLayout()
         CType(Me.nudWBLessThan, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudCapacity, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -194,6 +210,13 @@ Partial Class dlgWaterBalance
         Me.lblEvaporation.TabIndex = 24
         Me.lblEvaporation.Text = "Evaporation:"
         '
+        'ucrSaveWaterBalance
+        '
+        Me.ucrSaveWaterBalance.Location = New System.Drawing.Point(9, 324)
+        Me.ucrSaveWaterBalance.Name = "ucrSaveWaterBalance"
+        Me.ucrSaveWaterBalance.Size = New System.Drawing.Size(276, 24)
+        Me.ucrSaveWaterBalance.TabIndex = 27
+        '
         'ucrInputEvaporation
         '
         Me.ucrInputEvaporation.AddQuotesIfUnrecognised = True
@@ -212,7 +235,9 @@ Partial Class dlgWaterBalance
         Me.ucrReceiverYear.Name = "ucrReceiverYear"
         Me.ucrReceiverYear.Selector = Nothing
         Me.ucrReceiverYear.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverYear.strNcFilePath = ""
         Me.ucrReceiverYear.TabIndex = 18
+        Me.ucrReceiverYear.ucrSelector = Nothing
         '
         'ucrReceiverDate
         '
@@ -222,7 +247,9 @@ Partial Class dlgWaterBalance
         Me.ucrReceiverDate.Name = "ucrReceiverDate"
         Me.ucrReceiverDate.Selector = Nothing
         Me.ucrReceiverDate.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverDate.strNcFilePath = ""
         Me.ucrReceiverDate.TabIndex = 14
+        Me.ucrReceiverDate.ucrSelector = Nothing
         '
         'ucrReceiverDOY
         '
@@ -232,7 +259,9 @@ Partial Class dlgWaterBalance
         Me.ucrReceiverDOY.Name = "ucrReceiverDOY"
         Me.ucrReceiverDOY.Selector = Nothing
         Me.ucrReceiverDOY.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverDOY.strNcFilePath = ""
         Me.ucrReceiverDOY.TabIndex = 20
+        Me.ucrReceiverDOY.ucrSelector = Nothing
         '
         'ucrReceiverRainfall
         '
@@ -242,7 +271,9 @@ Partial Class dlgWaterBalance
         Me.ucrReceiverRainfall.Name = "ucrReceiverRainfall"
         Me.ucrReceiverRainfall.Selector = Nothing
         Me.ucrReceiverRainfall.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverRainfall.strNcFilePath = ""
         Me.ucrReceiverRainfall.TabIndex = 16
+        Me.ucrReceiverRainfall.ucrSelector = Nothing
         '
         'ucrSelectorForWaterBalance
         '
@@ -260,13 +291,6 @@ Partial Class dlgWaterBalance
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 23
-        '
-        'ucrSaveWaterBalance
-        '
-        Me.ucrSaveWaterBalance.Location = New System.Drawing.Point(9, 324)
-        Me.ucrSaveWaterBalance.Name = "ucrSaveWaterBalance"
-        Me.ucrSaveWaterBalance.Size = New System.Drawing.Size(276, 24)
-        Me.ucrSaveWaterBalance.TabIndex = 27
         '
         'dlgWaterBalance
         '
@@ -292,8 +316,8 @@ Partial Class dlgWaterBalance
         Me.MinimizeBox = False
         Me.Name = "dlgWaterBalance"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Tag = "Water_Balance"
-        Me.Text = "Water Balance"
+        Me.Tag = ""
+        Me.Text = "End of Rains"
         Me.grpRainParameters.ResumeLayout(False)
         Me.grpRainParameters.PerformLayout()
         CType(Me.nudWBLessThan, System.ComponentModel.ISupportInitialize).EndInit()

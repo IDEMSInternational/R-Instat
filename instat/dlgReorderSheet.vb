@@ -16,41 +16,58 @@
 
 Imports instat.Translations
 Public Class dlgReorderSheet
-    Public bFirstLoad As Boolean = True
-    Private Sub dlgReorderSheet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private bReset As Boolean = True
+    Private bFirstLoad As Boolean = True
+    Private clsReorderDataFrame As New RFunction
+    Private Sub dlgReorderDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
-            initialiseDialog()
+            InitialiseDialog()
+            bFirstLoad = False
         End If
-        ucrSheetsToReorder.loadList()
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
+        bReset = False
         TestOkEnabled()
     End Sub
 
-    Private Sub initialiseDialog()
-        ucrBase.clsRsyntax.SetFunction(frmMain.clsRLink.strInstatDataObject & "$reorder_dataframes")
-        ucrSheetsToReorder.setDataType("data frame")
+    Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 62
+
+        ucrDataFrameToReorder.SetParameter(New RParameter("data_frames_order", 0))
+        ucrDataFrameToReorder.setDataType("data frame")
+    End Sub
+
+    Private Sub SetDefaults()
+        clsReorderDataFrame = New RFunction
+
+        ucrDataFrameToReorder.Reset()
+
+        clsReorderDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$reorder_dataframes")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsReorderDataFrame)
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrSheetsToReorder.isEmpty Then
+        If Not ucrDataFrameToReorder.isEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
-
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        ucrSheetsToReorder.ResetText()
+        SetDefaults()
+        SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrSheetsToReoder_OrderChanged() Handles ucrSheetsToReorder.OrderChanged
-        If Not ucrSheetsToReorder.isEmpty Then
-            ucrBase.clsRsyntax.AddParameter("data_frames_order", ucrSheetsToReorder.GetVariableNames)
-        Else
-            ucrBase.clsRsyntax.RemoveParameter("data_frames_order")
-        End If
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameToReorder.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class

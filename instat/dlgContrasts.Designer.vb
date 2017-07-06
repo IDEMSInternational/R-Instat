@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgContrasts
     Inherits System.Windows.Forms.Form
 
@@ -35,28 +51,28 @@ Partial Class dlgContrasts
         'lblFactorReceiver
         '
         Me.lblFactorReceiver.AutoSize = True
-        Me.lblFactorReceiver.Location = New System.Drawing.Point(243, 20)
+        Me.lblFactorReceiver.Location = New System.Drawing.Point(260, 48)
         Me.lblFactorReceiver.Name = "lblFactorReceiver"
         Me.lblFactorReceiver.Size = New System.Drawing.Size(93, 13)
-        Me.lblFactorReceiver.TabIndex = 3
+        Me.lblFactorReceiver.TabIndex = 1
         Me.lblFactorReceiver.Text = "Selected Variable:"
         '
         'lblSelectContrastName
         '
         Me.lblSelectContrastName.AutoSize = True
-        Me.lblSelectContrastName.Location = New System.Drawing.Point(244, 78)
+        Me.lblSelectContrastName.Location = New System.Drawing.Point(260, 99)
         Me.lblSelectContrastName.Name = "lblSelectContrastName"
         Me.lblSelectContrastName.Size = New System.Drawing.Size(113, 13)
-        Me.lblSelectContrastName.TabIndex = 14
+        Me.lblSelectContrastName.TabIndex = 3
         Me.lblSelectContrastName.Text = "Select Contrast Name:"
         '
         'lblDefineContrast
         '
         Me.lblDefineContrast.AutoSize = True
-        Me.lblDefineContrast.Location = New System.Drawing.Point(442, 13)
+        Me.lblDefineContrast.Location = New System.Drawing.Point(445, 20)
         Me.lblDefineContrast.Name = "lblDefineContrast"
         Me.lblDefineContrast.Size = New System.Drawing.Size(92, 13)
-        Me.lblDefineContrast.TabIndex = 16
+        Me.lblDefineContrast.TabIndex = 5
         Me.lblDefineContrast.Text = "Define a Contrast:"
         '
         'grdLayoutForContrasts
@@ -72,25 +88,30 @@ Partial Class dlgContrasts
         Me.grdLayoutForContrasts.SheetTabNewButtonVisible = True
         Me.grdLayoutForContrasts.SheetTabVisible = True
         Me.grdLayoutForContrasts.SheetTabWidth = 60
+        Me.grdLayoutForContrasts.ShowScrollEndSpacing = True
         Me.grdLayoutForContrasts.Size = New System.Drawing.Size(333, 207)
-        Me.grdLayoutForContrasts.TabIndex = 19
+        Me.grdLayoutForContrasts.TabIndex = 6
         '
         'ucrInputContrastName
         '
+        '        Me.ucrInputContrastName.AddQuotesIfUnrecognised = True
         Me.ucrInputContrastName.IsReadOnly = False
-        Me.ucrInputContrastName.Location = New System.Drawing.Point(244, 93)
+        Me.ucrInputContrastName.Location = New System.Drawing.Point(260, 114)
         Me.ucrInputContrastName.Name = "ucrInputContrastName"
         Me.ucrInputContrastName.Size = New System.Drawing.Size(120, 21)
-        Me.ucrInputContrastName.TabIndex = 13
+        Me.ucrInputContrastName.TabIndex = 4
         '
         'ucrReceiverForContrasts
         '
-        Me.ucrReceiverForContrasts.Location = New System.Drawing.Point(244, 36)
+        Me.ucrReceiverForContrasts.frmParent = Me
+        Me.ucrReceiverForContrasts.Location = New System.Drawing.Point(260, 63)
         Me.ucrReceiverForContrasts.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverForContrasts.Name = "ucrReceiverForContrasts"
         Me.ucrReceiverForContrasts.Selector = Nothing
         Me.ucrReceiverForContrasts.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverForContrasts.strNcFilePath = ""
         Me.ucrReceiverForContrasts.TabIndex = 2
+        Me.ucrReceiverForContrasts.ucrSelector = Nothing
         '
         'ucrSelectorForContrast
         '
@@ -100,14 +121,14 @@ Partial Class dlgContrasts
         Me.ucrSelectorForContrast.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorForContrast.Name = "ucrSelectorForContrast"
         Me.ucrSelectorForContrast.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorForContrast.TabIndex = 1
+        Me.ucrSelectorForContrast.TabIndex = 0
         '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(13, 200)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 60)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.TabIndex = 7
         '
         'dlgContrasts
         '

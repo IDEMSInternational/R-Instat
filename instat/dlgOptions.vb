@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.ComponentModel
@@ -19,6 +19,8 @@ Imports System.Globalization
 Imports System.Threading
 Imports instat.Translations
 Imports System.IO
+Imports instat
+
 Public Class dlgOptions
     Public strCurrLanguageCulture As String
     Public strOutputWindowDisplay As String
@@ -45,9 +47,18 @@ Public Class dlgOptions
     Private Sub InitialiseDialog()
         'ucrBase.iHelpTopicID = 336
         Dim strPreviewText As String
-        nudMaxRows.Maximum = Integer.MaxValue
-        nudMaxRows.Increment = 10
-        strPreviewText = "R-Instat 2016"
+        ucrNudMaxRows.Maximum = Integer.MaxValue
+        ucrNudMaxRows.Increment = 10
+        ucrNudMaxCols.Maximum = Integer.MaxValue
+        ucrNudMaxCols.Increment = 1
+        ucrNudMinutes.Maximum = Integer.MaxValue
+        ucrNudMinutes.Increment = 1
+        ucrNudMinutes.Minimum = 1
+        ucrNudWaitSeconds.Minimum = 1
+        ucrNudWaitSeconds.Maximum = Integer.MaxValue
+        ucrNudWaitSeconds.Increment = 0.5
+
+        strPreviewText = "R-Instat 2017"
         rtbCommandPreview.Text = strPreviewText
         rtbCommentPreview.Text = strPreviewText
         rtbOutputPreview.Text = strPreviewText
@@ -56,35 +67,55 @@ Public Class dlgOptions
         rdoFrench.Enabled = False
         rdoKiswahili.Enabled = False
         rdoSpanish.Enabled = False
-        nudDigits.Minimum = 0
-        nudDigits.Maximum = 22
+        ucrNudDigits.SetMinMax(0, 22)
+        ucrChkIncludeCommentsbyDefault.SetText("Include Comments by Default")
+        ucrChkShowRCommandsinOutputWindow.SetText(" Show R Commands in Output Window")
+        ucrChkShowSignifStars.SetText("Show stars on summary tables for coefficients")
+        ucrChkShowDataonGrid.SetText("Display dialog's selected data frame in grid")
+        ucrChkIncludeDefaultParams.SetText("Include Default Parameter Values in R Commands")
+        ucrChkAutoSave.SetText("Auto save a backup of data")
+        ucrChkShowWaitDialog.SetText("Show waiting dialog when command takes longer than")
+        ucrChkAutoSave.AddToLinkedControls(ucrNudMinutes, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudMinutes.SetLinkedDisplayControl(lblMinutes)
+        ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinOutputWindow)
+        ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinRViewer)
+        ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinSeparateWindows)
+        ucrPnlLanguage.AddRadioButton(rdoKiswahili)
+        ucrPnlLanguage.AddRadioButton(rdoEnglish)
+        ucrPnlLanguage.AddRadioButton(rdoSpanish)
+        ucrPnlLanguage.AddRadioButton(rdoFrench)
     End Sub
 
     Private Sub LoadInstatOptions()
-        chkIncludeDefaultParams.Checked = frmMain.clsInstatOptions.bIncludeRDefaultParameters
+        ucrChkIncludeDefaultParams.Checked = frmMain.clsInstatOptions.bIncludeRDefaultParameters
+        ucrChkAutoSave.Checked = frmMain.clsInstatOptions.bAutoSaveData
         SetOutputFont(frmMain.clsInstatOptions.fntOutput, frmMain.clsInstatOptions.clrOutput)
         SetCommandFont(frmMain.clsInstatOptions.fntScript, frmMain.clsInstatOptions.clrScript)
         SetCommentFont(frmMain.clsInstatOptions.fntComment, frmMain.clsInstatOptions.clrComment)
         SetEditorFont(frmMain.clsInstatOptions.fntEditor, frmMain.clsInstatOptions.clrEditor)
-        nudMaxRows.Value = frmMain.clsInstatOptions.iMaxRows
-        nudPreviewRows.Value = frmMain.clsInstatOptions.iPreviewRows
-        txtComment.Text = frmMain.clsInstatOptions.strComment
+        ucrNudMaxRows.Value = frmMain.clsInstatOptions.iMaxRows
+        ucrNudMaxCols.Value = frmMain.clsInstatOptions.iMaxCols
+        ucrNudMinutes.Value = frmMain.clsInstatOptions.iAutoSaveDataMinutes
+        ucrNudPreviewRows.Value = frmMain.clsInstatOptions.iPreviewRows
+        ucrInputComment.SetName(frmMain.clsInstatOptions.strComment)
         ucrWorkingDirectory.SetName(frmMain.clsInstatOptions.strWorkingDirectory)
-        chkIncludeCommentsbyDefault.Checked = frmMain.clsInstatOptions.bIncludeCommentDefault
-        chkShowRCommandsinOutputWindow.Checked = frmMain.clsInstatOptions.bCommandsinOutput
-        nudDigits.Value = frmMain.clsInstatOptions.iDigits
-        chkShowSignifStars.Checked = frmMain.clsInstatOptions.bShowSignifStars
-
+        ucrChkIncludeCommentsbyDefault.Checked = frmMain.clsInstatOptions.bIncludeCommentDefault
+        ucrChkShowRCommandsinOutputWindow.Checked = frmMain.clsInstatOptions.bCommandsinOutput
+        ucrNudDigits.Value = frmMain.clsInstatOptions.iDigits
+        ucrChkShowSignifStars.Checked = frmMain.clsInstatOptions.bShowSignifStars
+        ucrChkShowDataonGrid.Checked = frmMain.clsInstatOptions.bChangeDataFrame
+        ucrChkShowWaitDialog.Checked = frmMain.clsInstatOptions.bShowWaitDialog
+        ucrNudWaitSeconds.Value = frmMain.clsInstatOptions.iWaitTimeDelaySeconds
         Select Case frmMain.clsInstatOptions.strLanguageCultureCode
             Case "en-GB"
                 rdoEnglish.Checked = True
-            ' temp disabled as not functioning
-            'Case "fr-FR"
-            '    rdoFrench.Checked = True
-            'Case "sw-KE"
-            '    rdoKiswahili.Checked = True
-            'Case "es-ES"
-            '    rdoSpanish.Checked = True
+                ' temp disabled as not functioning
+                'Case "fr-FR"
+                '    rdoFrench.Checked = True
+                'Case "sw-KE"
+                '    rdoKiswahili.Checked = True
+                'Case "es-ES"
+                '    rdoSpanish.Checked = True
             Case Else
                 rdoEnglish.Checked = True
         End Select
@@ -99,21 +130,27 @@ Public Class dlgOptions
     End Sub
 
     Private Sub SetInstatOptions()
-        frmMain.clsInstatOptions.bIncludeRDefaultParameters = chkIncludeDefaultParams.Checked
+        frmMain.clsInstatOptions.bIncludeRDefaultParameters = ucrChkIncludeDefaultParams.Checked
+        frmMain.clsInstatOptions.bAutoSaveData = ucrChkAutoSave.Checked
         frmMain.clsInstatOptions.SetFormatOutput(fntOutput, clrOutput)
         frmMain.clsInstatOptions.SetFormatComment(fntComment, clrComment)
         frmMain.clsInstatOptions.SetFormatScript(fntCommand, clrCommand)
         frmMain.clsInstatOptions.SetFormatEditor(fntEditor, clrEditor)
-        frmMain.clsInstatOptions.SetComment(txtComment.Text)
-        frmMain.clsInstatOptions.SetPreviewRows(nudPreviewRows.Value)
-        frmMain.clsInstatOptions.SetMaxRows(nudMaxRows.Value)
+        frmMain.clsInstatOptions.SetComment(ucrInputComment.GetText)
+        frmMain.clsInstatOptions.SetPreviewRows(ucrNudPreviewRows.Value)
+        frmMain.clsInstatOptions.SetMaxRows(ucrNudMaxRows.Value)
+        frmMain.clsInstatOptions.SetMaxCols(ucrNudMaxCols.Value)
+        frmMain.clsInstatOptions.SetAutoSaveData(ucrNudMinutes.Value)
         frmMain.clsInstatOptions.SetLanguageCultureCode(strCurrLanguageCulture)
         frmMain.clsInstatOptions.SetWorkingDirectory(strWorkingDirectory)
         frmMain.clsInstatOptions.SetGraphDisplayOption(strGraphDisplayOption)
-        frmMain.clsInstatOptions.bIncludeCommentDefault = chkIncludeCommentsbyDefault.Checked
-        frmMain.clsInstatOptions.SetCommandInOutpt(chkShowRCommandsinOutputWindow.Checked)
-        frmMain.clsInstatOptions.SetDigits(nudDigits.Value)
-        frmMain.clsInstatOptions.SetSignifStars(chkShowSignifStars.Checked)
+        frmMain.clsInstatOptions.bIncludeCommentDefault = ucrChkIncludeCommentsbyDefault.Checked
+        frmMain.clsInstatOptions.SetCommandInOutpt(ucrChkShowRCommandsinOutputWindow.Checked)
+        frmMain.clsInstatOptions.SetDigits(ucrNudDigits.Value)
+        frmMain.clsInstatOptions.SetSignifStars(ucrChkShowSignifStars.Checked)
+        frmMain.clsInstatOptions.SetChangeDataFrame(ucrChkShowDataonGrid.Checked)
+        frmMain.clsInstatOptions.SetShowWaitDialog(ucrChkShowWaitDialog.Checked)
+        frmMain.clsInstatOptions.SetWaitTimeDelaySeconds(ucrNudWaitSeconds.Value)
     End Sub
 
     Private Sub SetView()
@@ -173,6 +210,11 @@ Public Class dlgOptions
     End Sub
 
     Private Sub cmdApply_Click(sender As Object, e As EventArgs) Handles cmdApply.Click
+        Cursor = Cursors.WaitCursor
+        cmdApply.Enabled = False
+        cmdOk.Enabled = False
+        cmdCancel.Enabled = False
+        cmdHelp.Enabled = False
         SetInstatOptions()
         autoTranslate(Me)
 
@@ -204,10 +246,15 @@ Public Class dlgOptions
             autoTranslate(frmVariables)
         End If
         'disables the command after running it
+        cmdApply.Enabled = True
+        cmdOk.Enabled = True
+        cmdCancel.Enabled = True
+        cmdHelp.Enabled = True
         ApplyEnabled(False)
+        Cursor = Cursors.Default
     End Sub
 
-    Private Sub LanguageChanged(sender As Object, e As EventArgs) Handles rdoKiswahili.CheckedChanged, rdoEnglish.CheckedChanged, rdoFrench.CheckedChanged, rdoSpanish.CheckedChanged
+    Private Sub ucrPnlLanguage_ControlValueChanged() Handles ucrPnlLanguage.ControlValueChanged
         If rdoKiswahili.Checked Then
             strCurrLanguageCulture = "sw-KE"
         ElseIf rdoFrench.Checked Then
@@ -217,10 +264,6 @@ Public Class dlgOptions
         ElseIf rdoSpanish.Checked Then
             strCurrLanguageCulture = "es-ES"
         End If
-        ApplyEnabled(True)
-    End Sub
-
-    Private Sub txtComment_TextChanged(sender As Object, e As EventArgs) Handles txtComment.TextChanged
         ApplyEnabled(True)
     End Sub
 
@@ -278,35 +321,7 @@ Public Class dlgOptions
 
     End Sub
 
-    Private Sub nudNoLines_ValueChanged(sender As Object, e As EventArgs) Handles nudPreviewRows.TextChanged
-        ApplyEnabled(True)
-    End Sub
-
-    Private Sub chkIncludeDefaultParams_CheckedChanged(sender As Object, e As EventArgs) Handles chkIncludeDefaultParams.CheckedChanged
-        ApplyEnabled(True)
-    End Sub
-
-    Private Sub nudMaxRows_TextChanged(sender As Object, e As EventArgs) Handles nudMaxRows.TextChanged
-        ApplyEnabled(True)
-    End Sub
-
-    Private Sub rdoDisplayinOutputWindow_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDisplayinOutputWindow.CheckedChanged, rdoDisplayinSeparateWindows.CheckedChanged, rdoDisplayinRViewer.CheckedChanged
-        If rdoDisplayinOutputWindow.Checked Then
-            strGraphDisplayOption = "view_output_window"
-        ElseIf rdoDisplayinSeparateWindows.Checked Then
-            strGraphDisplayOption = "view_separate_window"
-        ElseIf rdoDisplayinRViewer.Checked Then
-            strGraphDisplayOption = "view_R_viewer"
-        End If
-
-        ApplyEnabled(True)
-    End Sub
-
-    Private Sub chkDefault_CheckedChanged(sender As Object, e As EventArgs) Handles chkIncludeCommentsbyDefault.CheckedChanged
-        ApplyEnabled(True)
-    End Sub
-
-    Private Sub chkShowRCommandsinOutputWindow_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowRCommandsinOutputWindow.CheckedChanged
+    Private Sub AllControls_ControlValueChanged() Handles ucrNudMaxCols.ControlValueChanged, ucrNudMinutes.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged, ucrChkAutoSave.ControlValueChanged, ucrChkShowWaitDialog.ControlValueChanged, ucrNudWaitSeconds.ControlValueChanged
         ApplyEnabled(True)
     End Sub
 
@@ -324,6 +339,18 @@ Public Class dlgOptions
         rtbOutputPreview.SelectionLength = 0
     End Sub
 
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
+        Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "336")
+    End Sub
+
+    Private Sub ucrChkAutoSave_ControlValueChanged() Handles ucrChkAutoSave.ControlValueChanged
+        If ucrChkAutoSave.Checked Then
+            lblEvery.Visible = True
+        Else
+            lblEvery.Visible = False
+        End If
+    End Sub
+
     Private Sub cmdFactoryReset_Click(sender As Object, e As EventArgs) Handles cmdFactoryReset.Click
         Dim msgFactoryReset = MsgBox("Are you sure you want to reset to factory defaults?", MessageBoxButtons.YesNo, "Factory Reset")
         If msgFactoryReset = DialogResult.Yes Then
@@ -333,6 +360,16 @@ Public Class dlgOptions
         End If
     End Sub
 
+    Private Sub ucrPnlGraphDisplay_ControlValueChanged() Handles ucrPnlGraphDisplay.ControlValueChanged
+        If rdoDisplayinOutputWindow.Checked Then
+            strGraphDisplayOption = "view_output_window"
+        ElseIf rdoDisplayinSeparateWindows.Checked Then
+            strGraphDisplayOption = "view_separate_window"
+        ElseIf rdoDisplayinRViewer.Checked Then
+            strGraphDisplayOption = "view_R_viewer"
+        End If
+        ApplyEnabled(True)
+    End Sub
     Private Sub SetCommandFont(fntNew As Font, clrNew As Color)
         fntCommand = fntNew
         clrCommand = clrNew
@@ -365,11 +402,8 @@ Public Class dlgOptions
         End If
     End Sub
 
-    Private Sub nudDigits_ValueChanged(sender As Object, e As EventArgs) Handles nudDigits.ValueChanged
-        ApplyEnabled(True)
-    End Sub
-
-    Private Sub chkShowSignifStars_CheckedChanged(sender As Object, e As EventArgs) Handles chkShowSignifStars.CheckedChanged
-        ApplyEnabled(True)
+    Private Sub ucrChkShowWaitDialog_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkShowWaitDialog.ControlValueChanged
+        ucrNudWaitSeconds.Enabled = ucrChkShowWaitDialog.Checked
+        lblWaitSeconds.Enabled = ucrChkShowWaitDialog.Checked
     End Sub
 End Class

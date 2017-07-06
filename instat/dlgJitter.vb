@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
@@ -40,6 +40,15 @@ Public Class dlgJitter
         'ucrReceiver
         ucrReceiverJitter.Selector = ucrSelectorForJitter
         ucrReceiverJitter.SetMeAsReceiver()
+
+        ucrReceiverJitter.strSelectorHeading = "Numerics"
+        ucrBase.clsRsyntax.SetOperation("+")
+        clsRunif.SetRCommand("runif")
+        ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRunif)
+        ucrInputNewColumnName.SetItemsTypeAsColumns()
+        ucrInputNewColumnName.SetDefaultTypeAsColumn()
+        ucrInputNewColumnName.SetDataFrameSelector(ucrSelectorForJitter.ucrAvailableDataFrames)
+
         ucrReceiverJitter.SetIncludedDataTypes({"numeric"})
         ucrReceiverJitter.SetParameterIsRFunction()
 
@@ -158,7 +167,10 @@ Public Class dlgJitter
         ucrBase.clsRsyntax.SetOperatorParameter(1, clsRFunc:=ucrReceiverJitter.GetVariables)
     End Sub
 
-    Private Sub ucrForTestOK_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverJitter.ControlContentsChanged, ucrInputNewColName.ControlContentsChanged, ucrPnlDistance.ControlContentsChanged, ucrInputMaximumDistanceFromZero.ControlContentsChanged, ucrInputMaximum.ControlContentsChanged, ucrInputMinimum.ControlContentsChanged
-        TestOKEnabled()
+
+    Private Sub ucrSelectorForJitter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForJitter.ControlValueChanged
+        LengthOfDataset()
+
     End Sub
+
 End Class

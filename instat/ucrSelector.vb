@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports RDotNet
@@ -30,7 +30,8 @@ Public Class ucrSelector
     Public lstExcludedMetadataProperties As List(Of KeyValuePair(Of String, String()))
     Private strType As String
     Private bShowHiddenCols As Boolean = False
-
+    Private WithEvents ucrLinkedSelector As ucrSelector
+    Public bIsStacked As Boolean = False
     'Does the selector have its own parameter
     'Usually False as the parameter comes from the data frame selector
     Public bHasOwnParameter As Boolean = False
@@ -82,8 +83,9 @@ Public Class ucrSelector
             Else
                 frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=strType, lstIncludedDataTypes:=lstCombinedMetadataLists(0), lstExcludedDataTypes:=lstCombinedMetadataLists(1), strHeading:=CurrentReceiver.strSelectorHeading, strDataFrameName:=strCurrentDataFrame, strExcludedItems:=strExclud, strDatabaseQuery:=CurrentReceiver.strDatabaseQuery, strNcFilePath:=CurrentReceiver.strNcFilePath)
             End If
-        Else
-            frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=strType, lstIncludedDataTypes:=lstIncludedMetadataProperties, lstExcludedDataTypes:=lstExcludedMetadataProperties, strDataFrameName:=strCurrentDataFrame)
+            'Removed as probably don't need to load when no current receiver
+            'Else
+            'frmMain.clsRLink.FillListView(lstAvailableVariable, strType:=strType, lstIncludedDataTypes:=lstIncludedMetadataProperties, lstExcludedDataTypes:=lstExcludedMetadataProperties, strDataFrameName:=strCurrentDataFrame)
         End If
     End Sub
 
@@ -120,7 +122,7 @@ Public Class ucrSelector
     End Sub
 
     Public Sub AddAll()
-        If CurrentReceiver IsNot Nothing AndAlso (lstAvailableVariable.SelectedItems.Count > 0) Then
+        If CurrentReceiver IsNot Nothing Then
             SelectAll()
             Add()
         End If
@@ -152,6 +154,7 @@ Public Class ucrSelector
     'End Sub
 
     Public Sub ShowDataOptionsDialog()
+        sdgDataOptions.SetCurrentDataFrame(strCurrentDataFrame, False)
         sdgDataOptions.ShowDialog()
         SetDataOptionsSettings()
     End Sub
@@ -192,14 +195,28 @@ Public Class ucrSelector
         SelectAll()
     End Sub
 
-    Public Sub AddToVariablesList(strVariable As String)
-        lstVariablesInReceivers.Add(strVariable)
-        RaiseEvent VariablesInReceiversChanged()
+    Public Sub SetLinkedSelector(ucrNewLinkedSelector As ucrSelector)
+        ucrLinkedSelector = ucrNewLinkedSelector
     End Sub
 
-    Public Sub RemoveFromVariablesList(strVariable As String)
-        lstVariablesInReceivers.Remove(strVariable)
-        RaiseEvent VariablesInReceiversChanged()
+    Public Sub AddToVariablesList(strVariable As String, Optional strDataFrame As String = "")
+        If strDataFrame = "" OrElse strDataFrame = strCurrentDataFrame Then
+            lstVariablesInReceivers.Add(strVariable)
+            If ucrLinkedSelector IsNot Nothing Then
+                ucrLinkedSelector.AddToVariablesList(strVariable, strCurrentDataFrame)
+            End If
+            RaiseEvent VariablesInReceiversChanged()
+        End If
+    End Sub
+
+    Public Sub RemoveFromVariablesList(strVariable As String, Optional strDataFrame As String = "")
+        If strDataFrame = "" OrElse strDataFrame = strCurrentDataFrame Then
+            lstVariablesInReceivers.Remove(strVariable)
+            If ucrLinkedSelector IsNot Nothing Then
+                ucrLinkedSelector.RemoveFromVariablesList(strVariable, strCurrentDataFrame)
+            End If
+            RaiseEvent VariablesInReceiversChanged()
+        End If
     End Sub
 
     Public Sub AddIncludedMetadataProperty(strProperty As String, strInclude As String())
@@ -323,9 +340,34 @@ Public Class ucrSelector
         lstAvailableVariable.EndUpdate()
     End Sub
 
-    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
+    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
         If bHasOwnParameter Then
-            MyBase.UpdateControl(bReset)
+            MyBase.UpdateControl(bReset:=bReset, bCloneIfNeeded:=bCloneIfNeeded)
         End If
     End Sub
+
+    Private Sub SelectionMenuStrip_VisibleChanged(sender As Object, e As EventArgs) Handles SelectionMenuStrip.VisibleChanged
+        If SelectionMenuStrip.Visible Then
+            If CurrentReceiver IsNot Nothing Then
+                AddSelectedToolStripMenuItem.Enabled = True
+                If TypeOf CurrentReceiver Is ucrReceiverSingle Then
+                    AddAllToolStripMenuItem.Enabled = False
+                    SelectAllToolStripMenuItem.Enabled = False
+                ElseIf TypeOf CurrentReceiver Is ucrReceiverMultiple Then
+                    AddAllToolStripMenuItem.Enabled = True
+                    SelectAllToolStripMenuItem.Enabled = True
+                Else
+                    MsgBox("Current receiver is neither ucrReceiverSingle or ucrReceiverMultiple. Cannot determine visibility of menu items.")
+                End If
+            Else
+                AddSelectedToolStripMenuItem.Enabled = False
+                AddAllToolStripMenuItem.Enabled = False
+                SelectAllToolStripMenuItem.Enabled = False
+            End If
+        End If
+    End Sub
+
+    Public Function HasStackedVariables() As Boolean
+        Return bIsStacked OrElse (ucrLinkedSelector IsNot Nothing AndAlso ucrLinkedSelector.bIsStacked)
+    End Function
 End Class

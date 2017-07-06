@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgJitter
     Inherits System.Windows.Forms.Form
 
@@ -37,6 +53,37 @@ Partial Class dlgJitter
         Me.grpMaximumAndMinimumValues.SuspendLayout()
         Me.SuspendLayout()
         '
+
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(10, 246)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 6
+        '
+        'ucrSelectorForJitter
+        '
+        Me.ucrSelectorForJitter.bShowHiddenColumns = False
+        Me.ucrSelectorForJitter.bUseCurrentFilter = True
+        Me.ucrSelectorForJitter.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorForJitter.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorForJitter.Name = "ucrSelectorForJitter"
+        Me.ucrSelectorForJitter.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorForJitter.TabIndex = 0
+        '
+        'ucrReceiverJitter
+        '
+        Me.ucrReceiverJitter.frmParent = Me
+        Me.ucrReceiverJitter.Location = New System.Drawing.Point(249, 43)
+        Me.ucrReceiverJitter.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverJitter.Name = "ucrReceiverJitter"
+        Me.ucrReceiverJitter.Selector = Nothing
+        Me.ucrReceiverJitter.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverJitter.strNcFilePath = ""
+        Me.ucrReceiverJitter.TabIndex = 2
+        Me.ucrReceiverJitter.ucrSelector = Nothing
+        '
+
         'lblSelectedVariable
         '
         Me.lblSelectedVariable.AutoSize = True
@@ -148,10 +195,14 @@ Partial Class dlgJitter
         '
         'ucrInputNewColName
         '
-        Me.ucrInputNewColName.Location = New System.Drawing.Point(10, 219)
-        Me.ucrInputNewColName.Name = "ucrInputNewColName"
-        Me.ucrInputNewColName.Size = New System.Drawing.Size(261, 24)
-        Me.ucrInputNewColName.TabIndex = 8
+
+        Me.ucrInputNewColumnName.AddQuotesIfUnrecognised = True
+        Me.ucrInputNewColumnName.IsReadOnly = False
+        Me.ucrInputNewColumnName.Location = New System.Drawing.Point(115, 219)
+        Me.ucrInputNewColumnName.Name = "ucrInputNewColumnName"
+        Me.ucrInputNewColumnName.Size = New System.Drawing.Size(193, 21)
+        Me.ucrInputNewColumnName.TabIndex = 5
+
         '
         'dlgJitter
         '

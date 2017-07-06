@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class sdgImportFromClimSoft
     Inherits System.Windows.Forms.Form
 
@@ -40,7 +56,7 @@ Partial Class sdgImportFromClimSoft
         Me.ucrInputDatabaseName.AddQuotesIfUnrecognised = True
         Me.ucrInputDatabaseName.IsMultiline = False
         Me.ucrInputDatabaseName.IsReadOnly = False
-        Me.ucrInputDatabaseName.Location = New System.Drawing.Point(101, 12)
+        Me.ucrInputDatabaseName.Location = New System.Drawing.Point(103, 21)
         Me.ucrInputDatabaseName.Name = "ucrInputDatabaseName"
         Me.ucrInputDatabaseName.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputDatabaseName.TabIndex = 1
@@ -48,7 +64,7 @@ Partial Class sdgImportFromClimSoft
         'lblDatabaseName
         '
         Me.lblDatabaseName.AutoSize = True
-        Me.lblDatabaseName.Location = New System.Drawing.Point(10, 15)
+        Me.lblDatabaseName.Location = New System.Drawing.Point(12, 24)
         Me.lblDatabaseName.Name = "lblDatabaseName"
         Me.lblDatabaseName.Size = New System.Drawing.Size(87, 13)
         Me.lblDatabaseName.TabIndex = 0
@@ -59,7 +75,7 @@ Partial Class sdgImportFromClimSoft
         Me.ucrInputHost.AddQuotesIfUnrecognised = True
         Me.ucrInputHost.IsMultiline = False
         Me.ucrInputHost.IsReadOnly = False
-        Me.ucrInputHost.Location = New System.Drawing.Point(101, 46)
+        Me.ucrInputHost.Location = New System.Drawing.Point(103, 48)
         Me.ucrInputHost.Name = "ucrInputHost"
         Me.ucrInputHost.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputHost.TabIndex = 3
@@ -67,7 +83,7 @@ Partial Class sdgImportFromClimSoft
         'lblHost
         '
         Me.lblHost.AutoSize = True
-        Me.lblHost.Location = New System.Drawing.Point(10, 50)
+        Me.lblHost.Location = New System.Drawing.Point(12, 52)
         Me.lblHost.Name = "lblHost"
         Me.lblHost.Size = New System.Drawing.Size(32, 13)
         Me.lblHost.TabIndex = 2
@@ -78,7 +94,7 @@ Partial Class sdgImportFromClimSoft
         Me.ucrInputPort.AddQuotesIfUnrecognised = True
         Me.ucrInputPort.IsMultiline = False
         Me.ucrInputPort.IsReadOnly = False
-        Me.ucrInputPort.Location = New System.Drawing.Point(101, 80)
+        Me.ucrInputPort.Location = New System.Drawing.Point(103, 75)
         Me.ucrInputPort.Name = "ucrInputPort"
         Me.ucrInputPort.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputPort.TabIndex = 5
@@ -86,7 +102,7 @@ Partial Class sdgImportFromClimSoft
         'lblPort
         '
         Me.lblPort.AutoSize = True
-        Me.lblPort.Location = New System.Drawing.Point(10, 85)
+        Me.lblPort.Location = New System.Drawing.Point(12, 79)
         Me.lblPort.Name = "lblPort"
         Me.lblPort.Size = New System.Drawing.Size(29, 13)
         Me.lblPort.TabIndex = 4
@@ -97,15 +113,14 @@ Partial Class sdgImportFromClimSoft
         Me.ucrInputUserName.AddQuotesIfUnrecognised = True
         Me.ucrInputUserName.IsMultiline = False
         Me.ucrInputUserName.IsReadOnly = False
-        Me.ucrInputUserName.Location = New System.Drawing.Point(101, 114)
+        Me.ucrInputUserName.Location = New System.Drawing.Point(103, 102)
         Me.ucrInputUserName.Name = "ucrInputUserName"
         Me.ucrInputUserName.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputUserName.TabIndex = 7
         '
         'lblUserName
         '
         Me.lblUserName.AutoSize = True
-        Me.lblUserName.Location = New System.Drawing.Point(10, 119)
+        Me.lblUserName.Location = New System.Drawing.Point(12, 106)
         Me.lblUserName.Name = "lblUserName"
         Me.lblUserName.Size = New System.Drawing.Size(58, 13)
         Me.lblUserName.TabIndex = 6
@@ -114,7 +129,7 @@ Partial Class sdgImportFromClimSoft
         'lblConnection
         '
         Me.lblConnection.AutoSize = True
-        Me.lblConnection.Location = New System.Drawing.Point(162, 148)
+        Me.lblConnection.Location = New System.Drawing.Point(162, 134)
         Me.lblConnection.Name = "lblConnection"
         Me.lblConnection.Size = New System.Drawing.Size(78, 13)
         Me.lblConnection.TabIndex = 9
@@ -122,14 +137,14 @@ Partial Class sdgImportFromClimSoft
         '
         'ucrBaseSdgClimSoft
         '
-        Me.ucrBaseSdgClimSoft.Location = New System.Drawing.Point(72, 178)
+        Me.ucrBaseSdgClimSoft.Location = New System.Drawing.Point(57, 168)
         Me.ucrBaseSdgClimSoft.Name = "ucrBaseSdgClimSoft"
         Me.ucrBaseSdgClimSoft.Size = New System.Drawing.Size(142, 30)
         Me.ucrBaseSdgClimSoft.TabIndex = 10
         '
         'cmdEnterPassword
         '
-        Me.cmdEnterPassword.Location = New System.Drawing.Point(10, 148)
+        Me.cmdEnterPassword.Location = New System.Drawing.Point(12, 130)
         Me.cmdEnterPassword.Name = "cmdEnterPassword"
         Me.cmdEnterPassword.Size = New System.Drawing.Size(107, 22)
         Me.cmdEnterPassword.TabIndex = 8
@@ -140,7 +155,7 @@ Partial Class sdgImportFromClimSoft
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(289, 220)
+        Me.ClientSize = New System.Drawing.Size(257, 203)
         Me.Controls.Add(Me.ucrBaseSdgClimSoft)
         Me.Controls.Add(Me.lblConnection)
         Me.Controls.Add(Me.cmdEnterPassword)

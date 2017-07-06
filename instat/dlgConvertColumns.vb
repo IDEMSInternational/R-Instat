@@ -1,5 +1,5 @@
-﻿'Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
@@ -127,14 +127,6 @@ Public Class dlgConvertColumns
             rdoCharacter.Enabled = True
             rdoInteger.Enabled = True
             rdoNumeric.Enabled = True
-        End If
-    End Sub
-
-    Private Sub ucrChkSpecifyDecimalsToDisplay_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSpecifyDecimalsToDisplay.ControlValueChanged
-        If ucrChkSpecifyDecimalsToDisplay.Checked Then
-            ucrReceiverColumnsToConvert.SetDataType("numeric")
-        Else
-            ucrReceiverColumnsToConvert.SetIncludedDataTypes({"integer", "numeric", "character", "ordered", "factor"})
         End If
     End Sub
 
