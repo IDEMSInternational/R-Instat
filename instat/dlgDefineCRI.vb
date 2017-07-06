@@ -62,7 +62,7 @@ Public Class dlgDefineCRI
         ucrReceiverRedFlag.Selector = ucrSelectorCRI
         ucrReceiverRedFlag.SetMeAsReceiver()
         ucrReceiverRedFlag.SetIncludedDataTypes({"numeric", "logical", "factor"})
-        ucrReceiverRedFlag.AddIncludedMetadataProperty("Is_Corruption_Index", {"TRUE"})
+        ucrReceiverRedFlag.AddIncludedMetadataProperty("Is_CRI_Component", {"TRUE"})
 
         'ucrChk
         ucrChkScaleNumeric.SetText("Scale Numeric Variables")
@@ -228,7 +228,7 @@ Public Class dlgDefineCRI
             For j As Integer = 0 To ucrGridWeights.grdFactorData.CurrentWorksheet.RowCount - 1
                 clsTempFactorOp = New ROperator
                 clsTempFactorOp.SetOperation("*")
-                clsTempFactorOp.AddParameter("factor_level" & j, "(" & ucrReceiverRedFlag.GetVariableNames(False) & "==" & Chr(39) & ucrGridWeights.grdFactorData.CurrentWorksheet(j, 0) & Chr(39) & ")", iPosition:=1)
+                clsTempFactorOp.AddParameter("factor_level" & j, "(" & ucrReceiverRedFlag.GetVariableNames(False) & "==" & Chr(39) & ucrGridWeights.grdFactorData.CurrentWorksheet(j, 1) & Chr(39) & ")", iPosition:=1)
                 clsTempFactorOp.AddParameter("level_weight" & j, ucrGridWeights.grdFactorData.CurrentWorksheet(j, iWeightColumn), iPosition:=1)
                 clsTempOp.AddParameter("factor_comp" & j, clsROperatorParameter:=clsTempFactorOp, iPosition:=j)
             Next
