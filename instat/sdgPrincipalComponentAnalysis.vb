@@ -33,32 +33,34 @@ Public Class sdgPrincipalComponentAnalysis
     Private Sub InitialiseControls()
         Dim dctLabelOptionsChoice As New Dictionary(Of String, String)
         Dim dctOptionsForLabel As New Dictionary(Of String, String)
-
-        ucrChkEigenvalues.AddRSyntaxContainsFunctionNamesCondition(True, {frmMain.clsRLink.strInstatDataObject & "$get_from_model"})
-        ucrChkEigenvalues.AddRSyntaxContainsFunctionNamesCondition(False, {frmMain.clsRLink.strInstatDataObject & "$get_from_model"}, False)
-        ucrChkEigenvalues.AddRSyntaxContainsFunctionNamesCondition(False, {frmMain.clsRLink.strInstatDataObject & "$get_from_model"}, False)
         ucrChkEigenvalues.SetParameter(New RParameter("value1", 2))
         ucrChkEigenvalues.SetText("Eigenvalues")
         ucrChkEigenvalues.SetValueIfChecked(Chr(34) & "eig" & Chr(34))
+        ucrChkEigenvalues.AddParameterPresentCondition(True, "value1")
+        ucrChkEigenvalues.AddParameterPresentCondition(False, "value1", False)
 
-        ucrChkEigenvectors.AddRSyntaxContainsFunctionNamesCondition(True, {frmMain.clsRLink.strInstatDataObject & "$get_from_model"})
-        ucrChkEigenvectors.AddRSyntaxContainsFunctionNamesCondition(False, {frmMain.clsRLink.strInstatDataObject & "$get_from_model"}, False)
-        ucrChkEigenvectors.AddRSyntaxContainsFunctionNamesCondition(False, {frmMain.clsRLink.strInstatDataObject & "$get_from_model"}, False)
+        'ucrChkEigenvectors.AddRSyntaxContainsFunctionNamesCondition(True, {frmMain.clsRLink.strInstatDataObject & "$get_from_model"})
+        'ucrChkEigenvectors.AddRSyntaxContainsFunctionNamesCondition(False, {frmMain.clsRLink.strInstatDataObject & "$get_from_model"}, False)
+        'ucrChkEigenvectors.AddRSyntaxContainsFunctionNamesCondition(False, {frmMain.clsRLink.strInstatDataObject & "$get_from_model"}, False)
         ucrChkEigenvectors.SetParameter(New RParameter("value1", 2))
         ucrChkEigenvectors.SetText("Eigenvectors")
         ucrChkEigenvectors.SetValueIfChecked(Chr(34) & "ind" & Chr(34))
+        ucrChkEigenvectors.AddParameterPresentCondition(True, "value1")
+        ucrChkEigenvectors.AddParameterPresentCondition(False, "value1", False)
 
-        ucrChkRotation.AddRSyntaxContainsFunctionNamesCondition(True, {frmMain.clsRLink.strInstatDataObject & "$get_from_model"})
-        ucrChkRotation.AddRSyntaxContainsFunctionNamesCondition(False, {frmMain.clsRLink.strInstatDataObject & "$get_from_model"}, False)
-        ucrChkRotation.AddRSyntaxContainsFunctionNamesCondition(False, {frmMain.clsRLink.strInstatDataObject & "$get_from_model"}, False)
+        'ucrChkRotation.AddRSyntaxContainsFunctionNamesCondition(True, {frmMain.clsRLink.strInstatDataObject & "$get_from_model"})
+        'ucrChkRotation.AddRSyntaxContainsFunctionNamesCondition(False, {frmMain.clsRLink.strInstatDataObject & "$get_from_model"}, False)
+        'ucrChkRotation.AddRSyntaxContainsFunctionNamesCondition(False, {frmMain.clsRLink.strInstatDataObject & "$get_from_model"}, False)
         ucrChkRotation.SetParameter(New RParameter("MARGIN", 1))
         ucrChkRotation.SetText("Rotation")
         ucrChkRotation.SetValueIfChecked(2)
+        ucrChkRotation.AddParameterPresentCondition(True, "MARGIN")
+        ucrChkRotation.AddParameterPresentCondition(False, "MARGIN", False)
 
         ucrNudDim.SetMinMax(1, 2)
         ucrNudDim2.SetMinMax(1, 2)
 
-        ucrPnlGraphics.AddRadioButton(rdoNoPlot)
+        'ucrPnlGraphics.AddRadioButton(rdoNoPlot)
         ucrPnlGraphics.AddRadioButton(rdoScreePlot)
         ucrPnlGraphics.AddRadioButton(rdoVariablesPlot)
         ucrPnlGraphics.AddRadioButton(rdoIndividualsPlot)
@@ -70,11 +72,7 @@ Public Class sdgPrincipalComponentAnalysis
         ucrPnlGraphics.AddRSyntaxContainsFunctionNamesCondition(rdoIndividualsPlot, {"fviz_pca_ind"})
         ucrPnlGraphics.AddRSyntaxContainsFunctionNamesCondition(rdoBiplot, {"fviz_pca_biplot"})
         ucrPnlGraphics.AddRSyntaxContainsFunctionNamesCondition(rdoBarPlot, {"ggplot"})
-        ucrPnlGraphics.AddRSyntaxContainsFunctionNamesCondition(rdoNoPlot, {"fviz_screeplot", "fviz_pca_var", "fviz_pca_ind", "fviz_pca_biplot", "ggplot"}, False)
-
-        ucrPnlScreePlot.AddRadioButton(rdoBar)
-        ucrPnlScreePlot.AddRadioButton(rdoLine)
-        ucrPnlScreePlot.AddRadioButton(rdoBothScree)
+        ' ucrPnlGraphics.AddRSyntaxContainsFunctionNamesCondition(rdoNoPlot, {"fviz_screeplot", "fviz_pca_var", "fviz_pca_ind", "fviz_pca_biplot", "ggplot"}, False)
 
         ucrPnlScreePlot.SetParameter(New RParameter("geom"))
         ucrPnlScreePlot.AddRadioButton(rdoBar, Chr(34) & "bar" & Chr(34))
@@ -85,19 +83,10 @@ Public Class sdgPrincipalComponentAnalysis
         ucrPnlScreePlot.AddParameterPresentCondition(rdoLine, Chr(34) & "line" & Chr(34))
         ucrPnlScreePlot.AddParameterPresentCondition(rdoBothScree, "c(" & Chr(34) & "bar" & Chr(34) & "," & Chr(34) & "line" & Chr(34) & ")")
 
-
-        ucrPnlVariablesPlot.AddRadioButton(rdoArrow)
-        ucrPnlVariablesPlot.AddRadioButton(rdoTextVariable)
-        ucrPnlVariablesPlot.AddRadioButton(rdoBothVariables)
-
         ucrPnlVariablesPlot.SetParameter(New RParameter("geom"))
         ucrPnlVariablesPlot.AddRadioButton(rdoArrow, Chr(34) & "arrow" & Chr(34))
-        ucrPnlVariablesPlot.AddRadioButton(rdoTextVariable, Chr(34) & "text" & Chr(34))
+        ucrPnlVariablesPlot.AddRadioButton(rdoTextVariables, Chr(34) & "text" & Chr(34))
         ucrPnlVariablesPlot.AddRadioButton(rdoBothVariables, "c(" & Chr(34) & "arrow" & Chr(34) & "," & Chr(34) & "text" & Chr(34) & ")")
-
-        ucrPnlIndividualPlot.AddRadioButton(rdoPoint)
-        ucrPnlIndividualPlot.AddRadioButton(rdoTextIndividual)
-        ucrPnlIndividualPlot.AddRadioButton(rdoBothIndividual)
 
         ucrPnlIndividualPlot.SetParameter(New RParameter("geom"))
         ucrPnlIndividualPlot.AddRadioButton(rdoPoint, Chr(34) & "point" & Chr(34))
@@ -112,6 +101,9 @@ Public Class sdgPrincipalComponentAnalysis
         ucrPnlGraphics.AddToLinkedControls(ucrPnlIndividualPlot, {rdoIndividualsPlot, rdoBiplot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoBothIndividual)
         ucrPnlGraphics.AddToLinkedControls(ucrPnlScreePlot, {rdoScreePlot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoBothScree)
         ucrPnlGraphics.AddToLinkedControls(ucrPnlVariablesPlot, {rdoVariablesPlot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoBothVariables)
+        ucrPnlIndividualPlot.SetLinkedDisplayControl(GrpIndividualPlot)
+        ucrPnlScreePlot.SetLinkedDisplayControl(grpGeom)
+        ucrPnlVariablesPlot.SetLinkedDisplayControl(grpVariablePlot)
 
         ucrInputLabel1.SetParameter(New RParameter("choice"))
         dctLabelOptionsChoice.Add("Variance", Chr(34) & "variance" & Chr(34))
@@ -143,7 +135,7 @@ Public Class sdgPrincipalComponentAnalysis
         ucrPnlGraphics.AddToLinkedControls(ucrPnlScreePlot, {rdoScreePlot, rdoVariablesPlot, rdoIndividualsPlot, rdoBiplot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoBothScree)
         ucrPnlScreePlot.SetLinkedDisplayControl(grpGeom)
 
-        ucrPnlGraphics.AddToLinkedControls(ucrInputLabel1, {rdoScreePlot, rdoVariablesPlot, rdoIndividualsPlot, rdoBiplot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Variance")
+        ucrPnlGraphics.AddToLinkedControls(ucrInputLabel1, {rdoScreePlot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Variance")
         ucrInputLabel1.SetLinkedDisplayControl(lblChoice)
 
         ucrPnlGraphics.AddToLinkedControls(ucrChkIncludePercentage, {rdoScreePlot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
@@ -152,7 +144,7 @@ Public Class sdgPrincipalComponentAnalysis
         ucrPnlGraphics.AddToLinkedControls(ucrNudDim2, {rdoVariablesPlot, rdoIndividualsPlot, rdoBiplot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrNudDim.SetLinkedDisplayControl(lblDim)
 
-        ucrPnlGraphics.AddToLinkedControls(ucrSelectorFactor, {rdoBarPlot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoNoPlot)
+        ucrPnlGraphics.AddToLinkedControls(ucrSelectorFactor, {rdoBarPlot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrPnlGraphics.AddToLinkedControls(ucrReceiverFactor, {rdoBarPlot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrReceiverFactor.SetLinkedDisplayControl(lblFactorVariable)
         bControlsInitialised = True
@@ -175,32 +167,45 @@ Public Class sdgPrincipalComponentAnalysis
         clsRBiplotFunction = clsNewBiplotFunction
         clsRFactor = clsNewBarPlotFunction
 
-        ucrPnlScreePlot.SetRSyntax(clsRsyntax, bReset)
-        ucrPnlVariablesPlot.SetRSyntax(clsRsyntax, bReset)
-        ucrPnlIndividualPlot.SetRSyntax(clsRsyntax, bReset,)
+        ucrPnlScreePlot.SetRCode(clsRScreePlotFunction, bReset)
+        ucrPnlVariablesPlot.SetRCode(clsRVariablesPlotFunction, bReset)
+        ucrPnlIndividualPlot.SetRCode(clsRIndividualsPlotFunction, bReset,)
         ucrInputLabel1.SetRCode(clsRScreePlotFunction, bReset, bCloneIfNeeded:=True)
         ucrInputLabel2.SetRCode(clsRVariablesPlotFunction, bReset, bCloneIfNeeded:=True)
         ucrReceiverFactor.SetRCode(clsRFactor, bReset, bCloneIfNeeded:=True)
         ucrChkIncludePercentage.SetRSyntax(clsRsyntax, bReset)
-        ucrChkEigenvalues.SetRSyntax(clsRsyntax, bReset)
-        ucrChkEigenvectors.SetRSyntax(clsRsyntax, bReset)
-        ucrChkRotation.SetRSyntax(clsRsyntax, bReset)
+        ucrChkEigenvalues.SetRCode(clsREigenValues, bReset)
+        ucrChkEigenvectors.SetRCode(clsREigenVectors, bReset)
+        ucrChkRotation.SetRCode(clsRRotation, bReset)
         ucrPnlGraphics.SetRSyntax(clsRsyntax, bReset)
+
+        If bReset Then
+            tbRegOptions.SelectedIndex = 0
+        End If
     End Sub
 
     Private Sub ucrChkEigenvalues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEigenvalues.ControlValueChanged
-        clsRsyntax.AddToAfterCodes(clsREigenValues, iPosition:=1)
-        clsREigenValues.iCallType = 2
+        If ucrChkEigenvalues.Checked Then
+            clsRsyntax.AddToAfterCodes(clsREigenValues, iPosition:=1)
+        Else
+            clsRsyntax.RemoveFromAfterCodes(clsREigenValues)
+        End If
     End Sub
 
     Private Sub ucrChkEigenvectors_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkEigenvectors.ControlValueChanged
-        clsRsyntax.AddToAfterCodes(clsREigenVectors, iPosition:=2)
-        clsREigenVectors.iCallType = 2
+        If ucrChkEigenvectors.Checked Then
+            clsRsyntax.AddToAfterCodes(clsREigenVectors, iPosition:=2)
+        Else
+            clsRsyntax.RemoveFromAfterCodes(clsREigenVectors)
+        End If
     End Sub
 
     Private Sub ucrChkRotation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkRotation.ControlValueChanged
-        clsRsyntax.AddToAfterCodes(clsRRotation, iPosition:=3)
-        clsRRotation.iCallType = 2
+        If ucrChkRotation.Checked Then
+            clsRsyntax.AddToAfterCodes(clsRRotation, iPosition:=3)
+        Else
+            clsRsyntax.RemoveFromAfterCodes(clsRRotation)
+        End If
     End Sub
 
     Private Sub ucrPnlGraphics_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGraphics.ControlValueChanged
@@ -214,12 +219,6 @@ Public Class sdgPrincipalComponentAnalysis
             clsRsyntax.AddToAfterCodes(clsRBiplotFunction, iPosition:=6)
         ElseIf rdoBarPlot.Checked Then
             clsRsyntax.AddToAfterCodes(clsRBarPlot, iPosition:=6)
-        ElseIf rdoNoPlot.Checked Then
-            clsRsyntax.RemoveFromAfterCodes(clsRScreePlotFunction)
-            clsRsyntax.RemoveFromAfterCodes(clsRVariablesPlotFunction)
-            clsRsyntax.RemoveFromAfterCodes(clsRIndividualsPlotFunction)
-            clsRsyntax.RemoveFromAfterCodes(clsRBiplotFunction)
-            clsRsyntax.RemoveFromAfterCodes(clsRBarPlot)
         End If
     End Sub
 
@@ -253,41 +252,4 @@ Public Class sdgPrincipalComponentAnalysis
             End If
         End If
     End Sub
-
-    ' In the "Graphics" tab, the groupbox regarding plot options changes depending what graph is chosen.
-    ' Additionally, some label names change depending which is selected. This sub is about these changes.
-    Private Sub DisplayOptions()
-        'Dim dctOptionsForLabel As Dictionary(Of String, String)
-        If rdoScreePlot.Checked Then
-            'lblChoiceScree.Text = "Choice:  "
-            'rdoOne.Text = "Bar"
-            'rdoTwo.Text = "Line"
-            'ucrLabel.SetItems({"variance", "eigenvalue"})
-            'ucrLabel.SetName("variance")
-            'dctOptionsForLabel.Add("Variance", Chr(34) & "variance" & Chr(34))
-            'dctOptionsForLabel.Add("Eigenvalue", Chr(34) & "eigenvalue" & Chr(34))
-            'ucrLabel.SetItems(dctOptionsForLabel)
-        Else
-            'dctOptionsForLabel.Add("All", Chr(34) & "all" & Chr(34))
-            'dctOptionsForLabel.Add("Individuals", Chr(34) & "ind" & Chr(34))
-            'dctOptionsForLabel.Add("Supplementary Individuals", Chr(34) & "ind.sup" & Chr(34))
-            'dctOptionsForLabel.Add("Qualitative Supplementary Variables", Chr(34) & "quali" & Chr(34))
-            'dctOptionsForLabel.Add("Quantitative Supplementary Variables", Chr(34) & "quanti.sup" & Chr(34))
-            'dctOptionsForLabel.Add("Variables", Chr(34) & "var" & Chr(34))
-            'dctOptionsForLabel.Add("None", Chr(34) & "none" & Chr(34))
-            'ucrInputLabel1.SetItems(dctOptionsForLabel)
-            ' selected item is ALL
-
-            'ucrLabel.SetItems({"all", "ind.sup", "quali", "quanti.sup", "var", "ind", "none"})
-            'lblDim.Visible = True
-            'lblChoiceScree.Text = "Label:"
-            'rdoTwo.Text = "Text"
-            If rdoVariablesPlot.Checked Then
-                'rdoOne.Text = "Arrow"
-            Else
-                'rdoOne.Text = "Point"
-            End If
-        End If
-    End Sub
-
 End Class
