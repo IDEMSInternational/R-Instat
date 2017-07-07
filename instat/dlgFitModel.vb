@@ -14,15 +14,14 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgFitModel
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Public clsFormulaOperator As New ROperator
 
-    Public clsRestpvalFunction, clsLM, clsConfint, clsAnovaFunction, clsSummaryFunction, clsFormulaFunction, clsRCIFunction, clsRConvert, clsAutoPlot, clsVisReg As New RFunction
-
+    Public clsRestpvalFunction, clsFamilyFunction, clsLM, clsConfint, clsAnovaFunction, clsSummaryFunction, clsFormulaFunction, clsRCIFunction, clsRConvert, clsAutoPlot, clsVisReg As New RFunction
+    Public bResetModelOptions As Boolean = False
     Public bResetSubDialog As Boolean = False
     Public bResetOptionsSubDialog As Boolean = False
 
@@ -46,6 +45,7 @@ Public Class dlgFitModel
         ucrReceiverExpressionFitModel.SetRCode(clsFormulaOperator, bReset)
         ucrSelectorByDataFrameAddRemoveForFitModel.SetRCode(clsLM, bReset)
         ucrModelName.SetRCode(clsLM, bReset)
+        ucrFamily.SetRCode(clsFamilyFunction, bReset)
     End Sub
 
     Private Sub UpdatePreview()
@@ -85,7 +85,7 @@ Public Class dlgFitModel
 
         ucrBase.iHelpTopicID = 371
         ucrFamily.SetGLMDistributions()
-
+        ucrFamily.SetFunctionIsDistFunction()
 
     End Sub
 
@@ -103,6 +103,8 @@ Public Class dlgFitModel
         clsConfint = New RFunction
         clsAnovaFunction = New RFunction
         clsVisReg = New RFunction
+        clsFamilyFunction = New RFunction
+
 
         ucrSelectorByDataFrameAddRemoveForFitModel.Reset()
         ucrReceiverResponseVar.SetMeAsReceiver()
@@ -120,6 +122,9 @@ Public Class dlgFitModel
 
 
         ucrInputModelPreview.IsReadOnly = True
+
+        clsFamilyFunction = ucrFamily.clsCurrRFunction
+        clsLM.AddParameter("family", clsRFunctionParameter:=clsFamilyFunction)
 
         clsLM = clsRegressionDefaults.clsDefaultLmFunction.Clone
         clsLM.AddParameter("formula", clsROperatorParameter:=clsFormulaOperator, iPosition:=1)
@@ -151,7 +156,6 @@ Public Class dlgFitModel
 
         sdgSimpleRegOptions.SetRDataFrame(ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames)
 
-        ucrConvertToVariate.Visible = False
         ResponseConvert()
 
         ChooseRFunction()
@@ -167,10 +171,11 @@ Public Class dlgFitModel
         ucrBase.clsRsyntax.SetBaseRFunction(clsLM)
         ucrBase.clsRsyntax.AddToAfterCodes(clsAnovaFunction, 1)
         ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, 2)
+        bResetModelOptions = True
     End Sub
 
     Private Sub TestOKEnabled()
-        If (Not ucrReceiverResponseVar.IsEmpty()) AndAlso (Not ucrReceiverExpressionFitModel.IsEmpty()) Then
+        If (Not ucrReceiverResponseVar.IsEmpty()) AndAlso (Not ucrReceiverExpressionFitModel.IsEmpty()) AndAlso Not ucrFamily.ucrInputDistributions.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -255,7 +260,10 @@ Public Class dlgFitModel
     End Sub
 
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
+        sdgModelOptions.SetRCodeForControls(ucrFamily, clsFamilyFunction, bResetModelOptions)
         sdgModelOptions.ShowDialog()
+        bResetModelOptions = False
+
         ucrFamily.ucrInputDistributions.cboInput.SelectedIndex = ucrFamily.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = sdgModelOptions.ucrDistributionChoice.clsCurrDistribution.strNameTag)
     End Sub
 
@@ -300,14 +308,6 @@ Public Class dlgFitModel
         End If
     End Sub
 
-    Private Sub AssignModelName()
-        If ucrModelName.ucrChkSave.Checked AndAlso Not ucrModelName.IsComplete Then
-            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
-        Else
-            ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        End If
-    End Sub
-
     Public Sub ChooseRFunction()
         clsRCIFunction.SetRCommand(ucrFamily.clsCurrDistribution.strGLMFunctionName)
         clsFormulaFunction.AddParameter("x", clsRFunctionParameter:=clsLM)
@@ -323,10 +323,6 @@ Public Class dlgFitModel
 
     Private Sub ucrReceiverResponseVar_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverResponseVar.ControlContentsChanged
         TestOKEnabled()
-    End Sub
-
-    Private Sub ucrModelName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrModelName.ControlContentsChanged
-        AssignModelName()
     End Sub
 
     Private Sub ucrReceiverExpressionFitModel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpressionFitModel.ControlValueChanged, ucrReceiverResponseVar.ControlValueChanged
