@@ -141,6 +141,7 @@ Public Class dlgPrincipalComponentAnalysis
         clsRScreePlotFunction.SetRCommand("fviz_screeplot")
         clsRScreePlotFunction.iCallType = 3
         clsRScreePlotFunction.AddParameter("X", clsRFunctionParameter:=clsPCAFunction)
+
         clsRScreePlotTheme.SetPackageName("ggplot2")
         clsRScreePlotTheme.SetRCommand("theme_minimal")
         clsRScreePlot.AddOperatorParameter(True, clsRFunc:=clsRScreePlotFunction)
@@ -212,9 +213,10 @@ Public Class dlgPrincipalComponentAnalysis
         ucrBase.clsRsyntax.SetBaseRFunction(clsPCAFunction)
         ucrBase.clsRsyntax.AddToAfterCodes(clsRScreePlotFunction, iPosition:=1)
         ucrBase.clsRsyntax.AddToAfterCodes(clsREigenValues, iPosition:=2)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsREigenVectors, iPosition:=2)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsRRotation, iPosition:=2)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsREigenVectors, iPosition:=3)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsRRotation, iPosition:=4)
         bResetSubdialog = True
+        clsRRotationEig.AddParameter("data_name", Chr(34) & ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)

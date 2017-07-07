@@ -139,7 +139,6 @@ Partial Class sdgPrincipalComponentAnalysis
         '
         'tbGraphics
         '
-        Me.tbGraphics.Controls.Add(Me.ucrSelectorFactor)
         Me.tbGraphics.Controls.Add(Me.rdoBarPlot)
         Me.tbGraphics.Controls.Add(Me.rdoIndividualsPlot)
         Me.tbGraphics.Controls.Add(Me.grpScree)
@@ -160,7 +159,7 @@ Partial Class sdgPrincipalComponentAnalysis
         '
         Me.ucrSelectorFactor.bShowHiddenColumns = False
         Me.ucrSelectorFactor.bUseCurrentFilter = True
-        Me.ucrSelectorFactor.Location = New System.Drawing.Point(189, -22)
+        Me.ucrSelectorFactor.Location = New System.Drawing.Point(2, 16)
         Me.ucrSelectorFactor.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorFactor.Name = "ucrSelectorFactor"
         Me.ucrSelectorFactor.Size = New System.Drawing.Size(222, 180)
@@ -190,6 +189,7 @@ Partial Class sdgPrincipalComponentAnalysis
         '
         'grpScree
         '
+        Me.grpScree.Controls.Add(Me.ucrSelectorFactor)
         Me.grpScree.Controls.Add(Me.GrpIndividualPlot)
         Me.grpScree.Controls.Add(Me.grpVariablePlot)
         Me.grpScree.Controls.Add(Me.lblLabel)
@@ -320,7 +320,7 @@ Partial Class sdgPrincipalComponentAnalysis
         'lblLabel
         '
         Me.lblLabel.AutoSize = True
-        Me.lblLabel.Location = New System.Drawing.Point(14, 134)
+        Me.lblLabel.Location = New System.Drawing.Point(10, 104)
         Me.lblLabel.Name = "lblLabel"
         Me.lblLabel.Size = New System.Drawing.Size(36, 13)
         Me.lblLabel.TabIndex = 24
@@ -465,7 +465,7 @@ Partial Class sdgPrincipalComponentAnalysis
         '
         Me.ucrInputLabel2.AddQuotesIfUnrecognised = True
         Me.ucrInputLabel2.IsReadOnly = False
-        Me.ucrInputLabel2.Location = New System.Drawing.Point(54, 131)
+        Me.ucrInputLabel2.Location = New System.Drawing.Point(55, 101)
         Me.ucrInputLabel2.Name = "ucrInputLabel2"
         Me.ucrInputLabel2.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputLabel2.TabIndex = 22

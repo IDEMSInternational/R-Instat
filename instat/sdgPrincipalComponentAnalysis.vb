@@ -90,8 +90,8 @@ Public Class sdgPrincipalComponentAnalysis
         ucrChkIncludePercentage.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkIncludePercentage.SetRDefault("FALSE")
 
-        ucrPnlGraphics.AddToLinkedControls(ucrPnlIndividualPlot, {rdoIndividualsPlot, rdoBiplot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoBothIndividual)
         ucrPnlGraphics.AddToLinkedControls(ucrPnlScreePlot, {rdoScreePlot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoBothScree)
+        ucrPnlGraphics.AddToLinkedControls(ucrPnlIndividualPlot, {rdoIndividualsPlot, rdoBiplot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoBothIndividual)
         ucrPnlGraphics.AddToLinkedControls(ucrPnlVariablesPlot, {rdoVariablesPlot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoBothVariables)
         ucrPnlIndividualPlot.SetLinkedDisplayControl(GrpIndividualPlot)
         ucrPnlScreePlot.SetLinkedDisplayControl(grpGeom)
@@ -141,7 +141,7 @@ Public Class sdgPrincipalComponentAnalysis
         ucrReceiverFactor.SetLinkedDisplayControl(lblFactorVariable)
         bControlsInitialised = True
 
-        'TODO: disabled for now because it has bugs
+        'TODO: disabled for now because it has a bug
         rdoBarPlot.Enabled = False
     End Sub
 
@@ -159,6 +159,12 @@ Public Class sdgPrincipalComponentAnalysis
         clsRBiplotFunction = clsNewBiplotFunction
         clsRFactor = clsNewBarPlotFunction
 
+        ucrInputLabel2.AddAdditionalCodeParameterPair(clsRVariablesPlotFunction, New RParameter("label"), iAdditionalPairNo:=1)
+        ucrInputLabel2.AddAdditionalCodeParameterPair(clsRIndividualsPlotFunction, New RParameter("label"), iAdditionalPairNo:=2)
+        ucrInputLabel2.AddAdditionalCodeParameterPair(clsRBiplotFunction, New RParameter("label"), iAdditionalPairNo:=3)
+
+        ucrPnlIndividualPlot.AddAdditionalCodeParameterPair(clsNewBiplotFunction, New RParameter("geom"), iAdditionalPairNo:=1)
+
         ucrPnlScreePlot.SetRCode(clsRScreePlotFunction, bReset)
         ucrPnlVariablesPlot.SetRCode(clsRVariablesPlotFunction, bReset)
         ucrPnlIndividualPlot.SetRCode(clsRIndividualsPlotFunction, bReset,)
@@ -170,7 +176,7 @@ Public Class sdgPrincipalComponentAnalysis
         ucrChkEigenvectors.SetRCode(clsREigenVectors, bReset)
         ucrChkRotation.SetRCode(clsRRotation, bReset)
         ucrPnlGraphics.SetRSyntax(clsRsyntax, bReset)
-
+        Dimensions()
         If bReset Then
             tbRegOptions.SelectedIndex = 0
         End If
@@ -203,14 +209,34 @@ Public Class sdgPrincipalComponentAnalysis
     Private Sub ucrPnlGraphics_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlGraphics.ControlValueChanged
         If rdoScreePlot.Checked Then
             clsRsyntax.AddToAfterCodes(clsRScreePlotFunction, iPosition:=4)
+            clsRsyntax.RemoveFromAfterCodes(clsRVariablesPlotFunction)
+            clsRsyntax.RemoveFromAfterCodes(clsRIndividualsPlotFunction)
+            clsRsyntax.RemoveFromAfterCodes(clsRBiplotFunction)
+            clsRsyntax.RemoveFromAfterCodes(clsRBarPlot)
         ElseIf rdoVariablesPlot.Checked Then
             clsRsyntax.AddToAfterCodes(clsRVariablesPlotFunction, iPosition:=5)
+            clsRsyntax.RemoveFromAfterCodes(clsRScreePlotFunction)
+            clsRsyntax.RemoveFromAfterCodes(clsRIndividualsPlotFunction)
+            clsRsyntax.RemoveFromAfterCodes(clsRBiplotFunction)
+            clsRsyntax.RemoveFromAfterCodes(clsRBarPlot)
         ElseIf rdoIndividualsPlot.Checked Then
             clsRsyntax.AddToAfterCodes(clsRIndividualsPlotFunction, iPosition:=6)
+            clsRsyntax.RemoveFromAfterCodes(clsRVariablesPlotFunction)
+            clsRsyntax.RemoveFromAfterCodes(clsRScreePlotFunction)
+            clsRsyntax.RemoveFromAfterCodes(clsRBiplotFunction)
+            clsRsyntax.RemoveFromAfterCodes(clsRBarPlot)
         ElseIf rdoBiplot.Checked Then
             clsRsyntax.AddToAfterCodes(clsRBiplotFunction, iPosition:=6)
+            clsRsyntax.RemoveFromAfterCodes(clsRVariablesPlotFunction)
+            clsRsyntax.RemoveFromAfterCodes(clsRIndividualsPlotFunction)
+            clsRsyntax.RemoveFromAfterCodes(clsRScreePlotFunction)
+            clsRsyntax.RemoveFromAfterCodes(clsRBarPlot)
         ElseIf rdoBarPlot.Checked Then
             clsRsyntax.AddToAfterCodes(clsRBarPlot, iPosition:=6)
+            clsRsyntax.RemoveFromAfterCodes(clsRVariablesPlotFunction)
+            clsRsyntax.RemoveFromAfterCodes(clsRIndividualsPlotFunction)
+            clsRsyntax.RemoveFromAfterCodes(clsRBiplotFunction)
+            clsRsyntax.RemoveFromAfterCodes(clsRScreePlotFunction)
         End If
     End Sub
 
