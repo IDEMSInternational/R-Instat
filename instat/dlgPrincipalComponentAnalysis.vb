@@ -19,8 +19,6 @@ Public Class dlgPrincipalComponentAnalysis
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
-    'Public ExplanatoryVariables
-    'Public strModelName As String = ""
     Private clsPCAFunction As New RFunction
     Private clsREigenValues, clsREigenVectors, clsRRotation, clsRRotationCoord, clsRRotationEig As New RFunction
     Private clsRScreePlotFunction, clsRScreePlotTheme, clsRVariablesPlotFunction, clsRVariablesPlotTheme, clsRIndividualsPlotFunction, clsRIndividualsPlotTheme, clsRBiplotFunction, clsRBiplotTheme, clsRBarPlotFunction As New RFunction
@@ -182,7 +180,6 @@ Public Class dlgPrincipalComponentAnalysis
         clsRBiplot.SetOperatorParameter(False, clsRFunc:=clsRBiplotTheme)
 
         ' Barplot
-
         clsRBarPlot0.SetOperation("+")
         clsRBarPlot.SetOperation("+")
         clsRFactor.SetRCommand("cbind")
@@ -210,17 +207,6 @@ Public Class dlgPrincipalComponentAnalysis
         clsRBarPlot0.AddParameter(clsRFunctionParameter:=clsRBarPlotGeom)
         clsRBarPlot.AddParameter(iPosition:=0, clsROperatorParameter:=clsRBarPlot0)
         clsRBarPlot.AddParameter(clsRFunctionParameter:=clsRBarPlotFacet)
-
-        'clsREigenValues.AddParameter("data_name", Chr(34) & strTempFunction & Chr(34))
-        '  clsREigenValues.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
-
-        'clsREigenVectors.AddParameter("data_name", Chr(34) & strTempFunction & Chr(34))
-        ' clsREigenVectors.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
-
-        'clsRRotationCoord.AddParameter("data_name", Chr(34) & strTempFunction & Chr(34))
-        '  clsRRotationCoord.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
-        'clsRRotationEig.AddParameter("data_name", Chr(34) & ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
-        'clsRRotationEig.AddParameter("model_name", Chr(34) & strModelName & Chr(34))
         modelname()
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsPCAFunction)
@@ -296,11 +282,11 @@ Public Class dlgPrincipalComponentAnalysis
         End If
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlContentsChanged, ucrReceiverMultiplePCA.ControlContentsChanged, ucrNudNumberOfComp.ControlContentsChanged
-        TestOKEnabled()
-    End Sub
-
     Private Sub ucrSelectorPCA_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorPCA.ControlValueChanged
         clsRRotationEig.AddParameter("data_name", Chr(34) & ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+    End Sub
+
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlContentsChanged, ucrReceiverMultiplePCA.ControlContentsChanged, ucrNudNumberOfComp.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class

@@ -39,18 +39,12 @@ Public Class sdgPrincipalComponentAnalysis
         ucrChkEigenvalues.AddParameterPresentCondition(True, "value1")
         ucrChkEigenvalues.AddParameterPresentCondition(False, "value1", False)
 
-        'ucrChkEigenvectors.AddRSyntaxContainsFunctionNamesCondition(True, {frmMain.clsRLink.strInstatDataObject & "$get_from_model"})
-        'ucrChkEigenvectors.AddRSyntaxContainsFunctionNamesCondition(False, {frmMain.clsRLink.strInstatDataObject & "$get_from_model"}, False)
-        'ucrChkEigenvectors.AddRSyntaxContainsFunctionNamesCondition(False, {frmMain.clsRLink.strInstatDataObject & "$get_from_model"}, False)
         ucrChkEigenvectors.SetParameter(New RParameter("value1", 2))
         ucrChkEigenvectors.SetText("Eigenvectors")
         ucrChkEigenvectors.SetValueIfChecked(Chr(34) & "ind" & Chr(34))
         ucrChkEigenvectors.AddParameterPresentCondition(True, "value1")
         ucrChkEigenvectors.AddParameterPresentCondition(False, "value1", False)
 
-        'ucrChkRotation.AddRSyntaxContainsFunctionNamesCondition(True, {frmMain.clsRLink.strInstatDataObject & "$get_from_model"})
-        'ucrChkRotation.AddRSyntaxContainsFunctionNamesCondition(False, {frmMain.clsRLink.strInstatDataObject & "$get_from_model"}, False)
-        'ucrChkRotation.AddRSyntaxContainsFunctionNamesCondition(False, {frmMain.clsRLink.strInstatDataObject & "$get_from_model"}, False)
         ucrChkRotation.SetParameter(New RParameter("MARGIN", 1))
         ucrChkRotation.SetText("Rotation")
         ucrChkRotation.SetValueIfChecked(2)
@@ -60,7 +54,6 @@ Public Class sdgPrincipalComponentAnalysis
         ucrNudDim.SetMinMax(1, 2)
         ucrNudDim2.SetMinMax(1, 2)
 
-        'ucrPnlGraphics.AddRadioButton(rdoNoPlot)
         ucrPnlGraphics.AddRadioButton(rdoScreePlot)
         ucrPnlGraphics.AddRadioButton(rdoVariablesPlot)
         ucrPnlGraphics.AddRadioButton(rdoIndividualsPlot)
@@ -72,7 +65,6 @@ Public Class sdgPrincipalComponentAnalysis
         ucrPnlGraphics.AddRSyntaxContainsFunctionNamesCondition(rdoIndividualsPlot, {"fviz_pca_ind"})
         ucrPnlGraphics.AddRSyntaxContainsFunctionNamesCondition(rdoBiplot, {"fviz_pca_biplot"})
         ucrPnlGraphics.AddRSyntaxContainsFunctionNamesCondition(rdoBarPlot, {"ggplot"})
-        ' ucrPnlGraphics.AddRSyntaxContainsFunctionNamesCondition(rdoNoPlot, {"fviz_screeplot", "fviz_pca_var", "fviz_pca_ind", "fviz_pca_biplot", "ggplot"}, False)
 
         ucrPnlScreePlot.SetParameter(New RParameter("geom"))
         ucrPnlScreePlot.AddRadioButton(rdoBar, Chr(34) & "bar" & Chr(34))
