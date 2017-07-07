@@ -57,13 +57,13 @@ Public Class dlgPrincipalComponentAnalysis
         ucrReceiverMultiplePCA.SetMeAsReceiver()
 
         'ucrCheckBox
-        ucrChkScaleData.SetParameter(New RParameter("scale.unit", 1))
+        ucrChkScaleData.SetParameter(New RParameter("scale.unit", 2))
         ucrChkScaleData.SetText("Scale Data")
         ucrChkScaleData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkScaleData.SetRDefault("TRUE")
 
         'ucrNud
-        ucrNudNumberOfComp.SetParameter(New RParameter("ncp", 2))
+        ucrNudNumberOfComp.SetParameter(New RParameter("ncp", 3))
         ucrNudNumberOfComp.SetRDefault(5)
 
         'ucrSaveResult
@@ -116,6 +116,7 @@ Public Class dlgPrincipalComponentAnalysis
         clsREigenValues.AddParameter("value1", Chr(34) & "eig" & Chr(34))
         clsREigenValues.iCallType = 2
 
+
         clsREigenVectors.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
         clsREigenVectors.AddParameter("value1", Chr(34) & "ind" & Chr(34))
         clsREigenVectors.AddParameter("value2", Chr(34) & "coord" & Chr(34))
@@ -127,6 +128,8 @@ Public Class dlgPrincipalComponentAnalysis
 
         clsRRotationEig.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
         clsRRotationEig.AddParameter("value1", Chr(34) & "eig" & Chr(34))
+        clsRRotationEig.AddParameter("data_name", Chr(34) & ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+        clsRRotationEig.AddParameter("model_name", Chr(34) & ucrSaveResult.GetText & Chr(34))
 
         clsRRotation.SetRCommand("sweep")
         clsRRotation.AddParameter("x", clsRFunctionParameter:=clsRRotationCoord)
@@ -208,15 +211,14 @@ Public Class dlgPrincipalComponentAnalysis
         clsRBarPlot0.AddParameter(clsRFunctionParameter:=clsRBarPlotGeom)
         clsRBarPlot.AddParameter(iPosition:=0, clsROperatorParameter:=clsRBarPlot0)
         clsRBarPlot.AddParameter(clsRFunctionParameter:=clsRBarPlotFacet)
-        modelname()
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsPCAFunction)
         ucrBase.clsRsyntax.AddToAfterCodes(clsRScreePlotFunction, iPosition:=1)
         ucrBase.clsRsyntax.AddToAfterCodes(clsREigenValues, iPosition:=2)
         ucrBase.clsRsyntax.AddToAfterCodes(clsREigenVectors, iPosition:=3)
         ucrBase.clsRsyntax.AddToAfterCodes(clsRRotation, iPosition:=4)
+        Modelname()
         bResetSubdialog = True
-        clsRRotationEig.AddParameter("data_name", Chr(34) & ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
@@ -227,7 +229,9 @@ Public Class dlgPrincipalComponentAnalysis
         ucrSelectorPCA.SetRCode(clsREigenValues, bReset)
         ucrReceiverMultiplePCA.SetRCode(clsPCAFunction, bReset)
         ucrSaveResult.SetRCode(clsPCAFunction, bReset)
-
+        ucrChkScaleData.SetRCode(clsPCAFunction, bReset)
+        ucrNudNumberOfComp.SetRCode(clsPCAFunction, bReset)
+        Modelname()
     End Sub
 
     Private Sub TestOKEnabled() ' add in if the sdg has a clear nud, etc
@@ -250,7 +254,7 @@ Public Class dlgPrincipalComponentAnalysis
         sdgPrincipalComponentAnalysis.ShowDialog()
     End Sub
 
-    Private Sub modelname()
+    Private Sub Modelname()
         If ucrSaveResult.ucrChkSave.Checked Then
             clsREigenValues.AddParameter("model_name", Chr(34) & ucrSaveResult.GetText & Chr(34))
             clsREigenVectors.AddParameter("model_name", Chr(34) & ucrSaveResult.GetText & Chr(34))
@@ -259,13 +263,13 @@ Public Class dlgPrincipalComponentAnalysis
         Else
             clsREigenValues.AddParameter("model_name", Chr(34) & "last_PCA" & Chr(34))
             clsREigenVectors.AddParameter("model_name", Chr(34) & "last_PCA" & Chr(34))
-            clsRRotationEig.AddParameter("model_name", Chr(34) & "last_PCA" & Chr(34))
             clsRRotationCoord.AddParameter("model_name", Chr(34) & "last_PCA" & Chr(34))
+            clsRRotationEig.AddParameter("model_name", Chr(34) & "last_PCA" & Chr(34))
         End If
     End Sub
 
     Private Sub ucrSaveResult_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlValueChanged
-        modelname()
+        Modelname()
     End Sub
 
     Private Sub ucrReceiverMultiplePCA_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultiplePCA.ControlValueChanged, ucrNudNumberOfComp.ControlValueChanged

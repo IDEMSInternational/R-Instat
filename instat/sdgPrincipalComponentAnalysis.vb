@@ -51,7 +51,9 @@ Public Class sdgPrincipalComponentAnalysis
         ucrChkRotation.AddParameterPresentCondition(True, "MARGIN")
         ucrChkRotation.AddParameterPresentCondition(False, "MARGIN", False)
 
-        ucrNudDim.SetMinMax(1, 2)
+        'ucrNudDim1.SetParameter(New RParameter("axes"))
+        ucrNudDim1.SetMinMax(1, 2)
+        'ucrNudDim2.SetParameter(New RParameter("axes"))
         ucrNudDim2.SetMinMax(1, 2)
 
         ucrPnlGraphics.AddRadioButton(rdoScreePlot)
@@ -132,17 +134,18 @@ Public Class sdgPrincipalComponentAnalysis
 
         ucrPnlGraphics.AddToLinkedControls(ucrChkIncludePercentage, {rdoScreePlot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
-        ucrPnlGraphics.AddToLinkedControls(ucrNudDim, {rdoVariablesPlot, rdoIndividualsPlot, rdoBiplot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlGraphics.AddToLinkedControls(ucrNudDim1, {rdoVariablesPlot, rdoIndividualsPlot, rdoBiplot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrPnlGraphics.AddToLinkedControls(ucrNudDim2, {rdoVariablesPlot, rdoIndividualsPlot, rdoBiplot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrNudDim.SetLinkedDisplayControl(lblDim)
+        ucrNudDim1.SetLinkedDisplayControl(lblDim)
 
         ucrPnlGraphics.AddToLinkedControls(ucrSelectorFactor, {rdoBarPlot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrPnlGraphics.AddToLinkedControls(ucrReceiverFactor, {rdoBarPlot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrReceiverFactor.SetLinkedDisplayControl(lblFactorVariable)
         bControlsInitialised = True
 
-        'TODO: disabled for now because it has a bug
+        'TODO: disabled for now because it has a bugs
         rdoBarPlot.Enabled = False
+        'ucrChkRotation.Enabled = False
     End Sub
 
     Public Sub SetRFunction(clsNewRsyntax As RSyntax, clsNewREigenValues As RFunction, clsNewREigenVectors As RFunction, clsNewRRotation As RFunction, clsNewScreePlotFunction As RFunction, clsNewVariablesPlotFunction As RFunction, clsNewIndividualsPlotFunction As RFunction, clsNewBiplotFunction As RFunction, clsNewBarPlotFunction As RFunction, Optional bReset As Boolean = False)
@@ -171,11 +174,16 @@ Public Class sdgPrincipalComponentAnalysis
         ucrInputLabel1.SetRCode(clsRScreePlotFunction, bReset, bCloneIfNeeded:=True)
         ucrInputLabel2.SetRCode(clsRVariablesPlotFunction, bReset, bCloneIfNeeded:=True)
         ucrReceiverFactor.SetRCode(clsRFactor, bReset, bCloneIfNeeded:=True)
-        ucrChkIncludePercentage.SetRSyntax(clsRsyntax, bReset)
+        ucrChkIncludePercentage.SetRCode(clsRScreePlotFunction, bReset)
         ucrChkEigenvalues.SetRCode(clsREigenValues, bReset)
         ucrChkEigenvectors.SetRCode(clsREigenVectors, bReset)
         ucrChkRotation.SetRCode(clsRRotation, bReset)
         ucrPnlGraphics.SetRSyntax(clsRsyntax, bReset)
+
+        'Not sure how this can be passed by the control.
+        clsRVariablesPlotFunction.AddParameter("axes", "c(" & ucrNudDim1.Value & ", " & ucrNudDim2.Value & ")")
+        clsRIndividualsPlotFunction.AddParameter("axes", "c(" & ucrNudDim1.Value & "," & ucrNudDim2.Value & ")")
+        clsRBiplotFunction.AddParameter("axes", "c(" & ucrNudDim1.Value & "," & ucrNudDim2.Value & ")")
         Dimensions()
         If bReset Then
             tbRegOptions.SelectedIndex = 0
@@ -251,20 +259,20 @@ Public Class sdgPrincipalComponentAnalysis
             ' otherwise, if the row length is larger than the number of components, then the maximum dimensions can only be as much as the component value selected in the main dialog.
             If dlgPrincipalComponentAnalysis.ucrSelectorPCA.ucrAvailableDataFrames.iDataFrameLength <= dlgPrincipalComponentAnalysis.ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count Then
                 If dlgPrincipalComponentAnalysis.ucrSelectorPCA.ucrAvailableDataFrames.iDataFrameLength <= dlgPrincipalComponentAnalysis.ucrNudNumberOfComp.Value Then
-                    ucrNudDim.Maximum = dlgPrincipalComponentAnalysis.ucrSelectorPCA.ucrAvailableDataFrames.iDataFrameLength - 1
+                    ucrNudDim1.Maximum = dlgPrincipalComponentAnalysis.ucrSelectorPCA.ucrAvailableDataFrames.iDataFrameLength - 1
                     ucrNudDim2.Maximum = dlgPrincipalComponentAnalysis.ucrSelectorPCA.ucrAvailableDataFrames.iDataFrameLength - 1
                 Else
-                    ucrNudDim.Maximum = dlgPrincipalComponentAnalysis.ucrNudNumberOfComp.Value
+                    ucrNudDim1.Maximum = dlgPrincipalComponentAnalysis.ucrNudNumberOfComp.Value
                     ucrNudDim2.Maximum = dlgPrincipalComponentAnalysis.ucrNudNumberOfComp.Value
                 End If
             Else
                 ' Firstly, if the column length is shorter than the number of rows, and then if the column length is shorter than the components value selected in the main dialog, the data frame length maximum can only be as much as the column length
                 ' otherwise, if the column length is larger than the number of components, then the maximum dimensions selected can only be as much as the component value selected in the main dialog.
                 If dlgPrincipalComponentAnalysis.ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count <= dlgPrincipalComponentAnalysis.ucrNudNumberOfComp.Value Then
-                    ucrNudDim.Maximum = dlgPrincipalComponentAnalysis.ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count
+                    ucrNudDim1.Maximum = dlgPrincipalComponentAnalysis.ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count
                     ucrNudDim2.Maximum = dlgPrincipalComponentAnalysis.ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count
                 Else
-                    ucrNudDim.Maximum = dlgPrincipalComponentAnalysis.ucrNudNumberOfComp.Value
+                    ucrNudDim1.Maximum = dlgPrincipalComponentAnalysis.ucrNudNumberOfComp.Value
                     ucrNudDim2.Maximum = dlgPrincipalComponentAnalysis.ucrNudNumberOfComp.Value
                 End If
             End If

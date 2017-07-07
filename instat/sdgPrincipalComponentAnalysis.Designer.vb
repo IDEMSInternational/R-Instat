@@ -43,10 +43,10 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.ucrChkEigenvectors = New instat.ucrCheck()
         Me.ucrChkEigenvalues = New instat.ucrCheck()
         Me.tbGraphics = New System.Windows.Forms.TabPage()
-        Me.ucrSelectorFactor = New instat.ucrSelectorByDataFrameAddRemove()
         Me.rdoBarPlot = New System.Windows.Forms.RadioButton()
         Me.rdoIndividualsPlot = New System.Windows.Forms.RadioButton()
         Me.grpScree = New System.Windows.Forms.GroupBox()
+        Me.ucrSelectorFactor = New instat.ucrSelectorByDataFrameAddRemove()
         Me.GrpIndividualPlot = New System.Windows.Forms.GroupBox()
         Me.rdoTextIndividual = New System.Windows.Forms.RadioButton()
         Me.rdoPoint = New System.Windows.Forms.RadioButton()
@@ -61,7 +61,7 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.lblChoice = New System.Windows.Forms.Label()
         Me.ucrChkIncludePercentage = New instat.ucrCheck()
         Me.ucrNudDim2 = New instat.ucrNud()
-        Me.ucrNudDim = New instat.ucrNud()
+        Me.ucrNudDim1 = New instat.ucrNud()
         Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
         Me.lblFactorVariable = New System.Windows.Forms.Label()
         Me.lblChoiceScree = New System.Windows.Forms.Label()
@@ -155,16 +155,6 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.tbGraphics.Text = "Graphics"
         Me.tbGraphics.UseVisualStyleBackColor = True
         '
-        'ucrSelectorFactor
-        '
-        Me.ucrSelectorFactor.bShowHiddenColumns = False
-        Me.ucrSelectorFactor.bUseCurrentFilter = True
-        Me.ucrSelectorFactor.Location = New System.Drawing.Point(2, 16)
-        Me.ucrSelectorFactor.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorFactor.Name = "ucrSelectorFactor"
-        Me.ucrSelectorFactor.Size = New System.Drawing.Size(222, 180)
-        Me.ucrSelectorFactor.TabIndex = 3
-        '
         'rdoBarPlot
         '
         Me.rdoBarPlot.AutoSize = True
@@ -196,7 +186,7 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.grpScree.Controls.Add(Me.lblChoice)
         Me.grpScree.Controls.Add(Me.ucrChkIncludePercentage)
         Me.grpScree.Controls.Add(Me.ucrNudDim2)
-        Me.grpScree.Controls.Add(Me.ucrNudDim)
+        Me.grpScree.Controls.Add(Me.ucrNudDim1)
         Me.grpScree.Controls.Add(Me.ucrReceiverFactor)
         Me.grpScree.Controls.Add(Me.lblFactorVariable)
         Me.grpScree.Controls.Add(Me.lblChoiceScree)
@@ -210,6 +200,16 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.grpScree.TabIndex = 34
         Me.grpScree.TabStop = False
         Me.grpScree.Text = "Plot Options"
+        '
+        'ucrSelectorFactor
+        '
+        Me.ucrSelectorFactor.bShowHiddenColumns = False
+        Me.ucrSelectorFactor.bUseCurrentFilter = True
+        Me.ucrSelectorFactor.Location = New System.Drawing.Point(6, 9)
+        Me.ucrSelectorFactor.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorFactor.Name = "ucrSelectorFactor"
+        Me.ucrSelectorFactor.Size = New System.Drawing.Size(222, 180)
+        Me.ucrSelectorFactor.TabIndex = 3
         '
         'GrpIndividualPlot
         '
@@ -355,17 +355,17 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.ucrNudDim2.TabIndex = 20
         Me.ucrNudDim2.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrNudDim
+        'ucrNudDim1
         '
-        Me.ucrNudDim.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudDim.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudDim.Location = New System.Drawing.Point(106, 80)
-        Me.ucrNudDim.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudDim.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudDim.Name = "ucrNudDim"
-        Me.ucrNudDim.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudDim.TabIndex = 19
-        Me.ucrNudDim.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDim1.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDim1.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudDim1.Location = New System.Drawing.Point(106, 80)
+        Me.ucrNudDim1.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudDim1.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDim1.Name = "ucrNudDim1"
+        Me.ucrNudDim1.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudDim1.TabIndex = 19
+        Me.ucrNudDim1.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrReceiverFactor
         '
@@ -592,7 +592,7 @@ Partial Class sdgPrincipalComponentAnalysis
     Friend WithEvents ucrChkEigenvectors As ucrCheck
     Friend WithEvents ucrChkEigenvalues As ucrCheck
     Friend WithEvents ucrNudDim2 As ucrNud
-    Friend WithEvents ucrNudDim As ucrNud
+    Friend WithEvents ucrNudDim1 As ucrNud
     Friend WithEvents ucrPnlScreePlot As UcrPanel
     Friend WithEvents ucrPnlGraphics As UcrPanel
     Friend WithEvents ucrChkIncludePercentage As ucrCheck
