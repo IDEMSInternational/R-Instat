@@ -39,25 +39,9 @@ Public Class dlgFitModel
         TestOKEnabled()
     End Sub
 
-    Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverResponseVar.SetRCode(clsRConvert, bReset)
-        ucrConvertToVariate.SetRCode(clsFormulaOperator, bReset)
-        ucrReceiverExpressionFitModel.SetRCode(clsFormulaOperator, bReset)
-        ucrSelectorByDataFrameAddRemoveForFitModel.SetRCode(clsLM, bReset)
-        ucrModelName.SetRCode(clsLM, bReset)
-        ucrFamily.SetRCode(clsFamilyFunction, bReset)
-    End Sub
-
-    Private Sub UpdatePreview()
-        If Not ucrReceiverResponseVar.IsEmpty AndAlso Not ucrReceiverExpressionFitModel.IsEmpty Then
-            ucrInputModelPreview.SetName(clsFormulaOperator.ToScript())
-        Else
-            ucrInputModelPreview.SetName("")
-        End If
-    End Sub
-
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.iCallType = 2
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         ucrModelName.SetDataFrameSelector(ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames)
         ucrModelName.SetPrefix("gen_model")
@@ -89,6 +73,15 @@ Public Class dlgFitModel
 
     End Sub
 
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrReceiverResponseVar.SetRCode(clsRConvert, bReset)
+        ucrConvertToVariate.SetRCode(clsFormulaOperator, bReset)
+        ucrReceiverExpressionFitModel.SetRCode(clsFormulaOperator, bReset)
+        ucrSelectorByDataFrameAddRemoveForFitModel.SetRCode(clsLM, bReset)
+        ucrModelName.SetRCode(clsLM, bReset)
+        ucrFamily.SetRCode(clsFamilyFunction, bReset)
+    End Sub
+
     Private Sub SetDefaults()
         clsFormulaOperator = New ROperator
 
@@ -105,7 +98,6 @@ Public Class dlgFitModel
         clsVisReg = New RFunction
         clsFamilyFunction = New RFunction
 
-
         ucrSelectorByDataFrameAddRemoveForFitModel.Reset()
         ucrReceiverResponseVar.SetMeAsReceiver()
         ucrSelectorByDataFrameAddRemoveForFitModel.Focus()
@@ -118,9 +110,8 @@ Public Class dlgFitModel
         ucrReceiverExpressionFitModel.Selector = ucrSelectorByDataFrameAddRemoveForFitModel
         ucrReceiverResponseVar.Selector = ucrSelectorByDataFrameAddRemoveForFitModel
         ucrReceiverResponseVar.SetMeAsReceiver()
+
         ucrInputModelPreview.SetName("")
-
-
         ucrInputModelPreview.IsReadOnly = True
 
         clsFamilyFunction = ucrFamily.clsCurrRFunction
@@ -143,6 +134,13 @@ Public Class dlgFitModel
         'ANOVA
         clsAnovaFunction = clsRegressionDefaults.clsDefaultAnovaFunction.Clone
         clsAnovaFunction.iCallType = 2
+
+        'FitModel
+        clsVisReg.SetPackageName("visreg")
+        clsVisReg.SetRCommand("visreg")
+        clsVisReg.AddParameter("type", Chr(34) & "conditional" & Chr(34))
+        clsVisReg.AddParameter("gg", "TRUE")
+        clsVisReg.iCallType = 3
 
         'Confidence Interval
         clsConfint = clsRegressionDefaults.clsDefaultConfint.Clone
@@ -174,6 +172,14 @@ Public Class dlgFitModel
         bResetModelOptions = True
     End Sub
 
+    Private Sub UpdatePreview()
+        If Not ucrReceiverResponseVar.IsEmpty AndAlso Not ucrReceiverExpressionFitModel.IsEmpty Then
+            ucrInputModelPreview.SetName(clsFormulaOperator.ToScript())
+        Else
+            ucrInputModelPreview.SetName("")
+        End If
+    End Sub
+
     Private Sub TestOKEnabled()
         If (Not ucrReceiverResponseVar.IsEmpty()) AndAlso (Not ucrReceiverExpressionFitModel.IsEmpty()) AndAlso Not ucrFamily.ucrInputDistributions.IsEmpty Then
             ucrBase.OKEnabled(True)
@@ -181,10 +187,12 @@ Public Class dlgFitModel
             ucrBase.OKEnabled(False)
         End If
     End Sub
+
     'Private Sub ucrReceiverExpressionFitModel_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverExpressionFitModel.SelectionChanged
     '    clsLM.AddParameter(strParameterValue:=ucrReceiverExpressionFitModel.GetVariableNames(False))
     '    TestOKEnabled()
     'End Sub
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
@@ -268,13 +276,11 @@ Public Class dlgFitModel
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        sdgSimpleRegOptions.SetRCode(ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewAutoplot:=clsAutoPlot, clsNewConfint:=clsConfint, bReset:=bResetOptionsSubDialog)
+        sdgSimpleRegOptions.SetRCode(ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewAutoplot:=clsAutoPlot, clsNewVisReg:=clsVisReg, clsNewConfint:=clsConfint, bReset:=bResetOptionsSubDialog)
         sdgSimpleRegOptions.ShowDialog()
         bResetOptionsSubDialog = False
 
     End Sub
-
-
 
     Public Sub ResponseConvert()
         If Not ucrReceiverResponseVar.IsEmpty Then
@@ -317,6 +323,7 @@ Public Class dlgFitModel
         clsVisReg.AddParameter("fit", clsRFunctionParameter:=clsLM)
         clsAutoPlot.AddParameter("object", clsRFunctionParameter:=clsLM)
     End Sub
+
     Public Sub ucrFamily_cboDistributionsIndexChanged() Handles ucrFamily.ControlValueChanged
         ChooseRFunction()
     End Sub

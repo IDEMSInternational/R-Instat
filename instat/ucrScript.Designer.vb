@@ -53,6 +53,7 @@ Partial Class ucrScript
         Me.txtScript.Multiline = True
         Me.txtScript.Name = "txtScript"
         Me.txtScript.ReadOnly = True
+        Me.txtScript.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.txtScript.Size = New System.Drawing.Size(411, 267)
         Me.txtScript.TabIndex = 0
         '
