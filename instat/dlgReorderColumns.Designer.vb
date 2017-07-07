@@ -47,7 +47,7 @@ Partial Class dlgReorderColumns
         'lblColumns
         '
         Me.lblColumns.AutoSize = True
-        Me.lblColumns.Location = New System.Drawing.Point(159, 9)
+        Me.lblColumns.Location = New System.Drawing.Point(170, 13)
         Me.lblColumns.Name = "lblColumns"
         Me.lblColumns.Size = New System.Drawing.Size(103, 13)
         Me.lblColumns.TabIndex = 1
@@ -55,10 +55,10 @@ Partial Class dlgReorderColumns
         '
         'ucrReorderColumns
         '
-        Me.ucrReorderColumns.Location = New System.Drawing.Point(157, 25)
+        Me.ucrReorderColumns.Location = New System.Drawing.Point(170, 25)
         Me.ucrReorderColumns.Name = "ucrReorderColumns"
         Me.ucrReorderColumns.Size = New System.Drawing.Size(211, 195)
-        Me.ucrReorderColumns.TabIndex = 4
+        Me.ucrReorderColumns.TabIndex = 2
         Me.ucrReorderColumns.ucrDataFrameList = Nothing
         Me.ucrReorderColumns.ucrReceiver = Nothing
         '
@@ -73,7 +73,7 @@ Partial Class dlgReorderColumns
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 223)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 209)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 3
@@ -82,11 +82,11 @@ Partial Class dlgReorderColumns
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(414, 278)
+        Me.ClientSize = New System.Drawing.Size(415, 266)
+        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrReorderColumns)
         Me.Controls.Add(Me.ucrDataFrameSelect)
         Me.Controls.Add(Me.lblColumns)
-        Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False

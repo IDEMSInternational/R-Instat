@@ -45,25 +45,26 @@ Partial Class dlgReorderDataFrame
         '
         'lblDataFrameToReorder
         '
-        Me.lblDataFrameToReorder.Location = New System.Drawing.Point(10, 22)
+        Me.lblDataFrameToReorder.AutoSize = True
+        Me.lblDataFrameToReorder.Location = New System.Drawing.Point(10, 13)
         Me.lblDataFrameToReorder.Name = "lblDataFrameToReorder"
-        Me.lblDataFrameToReorder.Size = New System.Drawing.Size(132, 12)
+        Me.lblDataFrameToReorder.Size = New System.Drawing.Size(123, 13)
         Me.lblDataFrameToReorder.TabIndex = 0
         Me.lblDataFrameToReorder.Text = "Data Frames to Reorder:"
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 248)
+        Me.ucrBase.Location = New System.Drawing.Point(13, 210)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 2
         '
         'ucrDataFrameToReorder
         '
-        Me.ucrDataFrameToReorder.Location = New System.Drawing.Point(10, 42)
+        Me.ucrDataFrameToReorder.Location = New System.Drawing.Point(10, 25)
         Me.ucrDataFrameToReorder.Name = "ucrDataFrameToReorder"
         Me.ucrDataFrameToReorder.Size = New System.Drawing.Size(209, 195)
-        Me.ucrDataFrameToReorder.TabIndex = 3
+        Me.ucrDataFrameToReorder.TabIndex = 1
         Me.ucrDataFrameToReorder.ucrDataFrameList = Nothing
         Me.ucrDataFrameToReorder.ucrReceiver = Nothing
         '
@@ -71,17 +72,18 @@ Partial Class dlgReorderDataFrame
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 306)
-        Me.Controls.Add(Me.ucrDataFrameToReorder)
+        Me.ClientSize = New System.Drawing.Size(422, 269)
         Me.Controls.Add(Me.lblDataFrameToReorder)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.ucrDataFrameToReorder)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgReorderDataFrame"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Reoder Data Frames"
+        Me.Text = "Reorder Data Frames"
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

@@ -18,6 +18,7 @@ Imports instat.Translations
 Public Class dlgReorderObjects
     Public bFirstLoad As Boolean = True
     Public bReset As Boolean = True
+    Private clsDefaultFunction As New RFunction
 
     Private Sub dlgReorderObject_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -57,21 +58,21 @@ Public Class dlgReorderObjects
     End Sub
 
     Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
+        clsDefaultFunction = New RFunction
         ucrDataFrameReorder.Reset()
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$reorder_objects")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+    End Sub
+
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeforControls(True)
         TestOKEnabled()
-    End Sub
-
-    Private Sub SetRCodeforControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub ucrReorderObjects_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReorderObjects.ControlContentsChanged
