@@ -970,4 +970,9 @@ Public Class ucrCalculator
             Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TableOfContents)
         End If
     End Sub
+
+    Public Sub SetAsCurrentReceiver()
+        ucrReceiverForCalculation.Selector = ucrSelectorForCalculations
+        ucrReceiverForCalculation.SetMeAsReceiver()
+    End Sub
 End Class

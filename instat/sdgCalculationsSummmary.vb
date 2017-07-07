@@ -19,6 +19,7 @@ Public Class sdgCalculationsSummmary
 
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
+    Private bRCodeSet As Boolean = True
     Private clsCalculationFunction As New RFunction
     Private clsParentCalculationFunction As New RFunction
     Private lstSubCalcFunctions As New List(Of KeyValuePair(Of String, RFunction))
@@ -32,7 +33,7 @@ Public Class sdgCalculationsSummmary
 
     Private Sub sdgCalculationsSummmary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        If bControlsInitialised Then
+        If Not bControlsInitialised Then
             InitialiseControls()
         End If
         If bFirstLoad Then
@@ -58,9 +59,6 @@ Public Class sdgCalculationsSummmary
         ucrPnlSave.AddRadioButton(rdoSaveCalcAndResult, "2")
         ucrPnlSave.AddRadioButton(rdoDoNotSave, "0")
 
-        clsSubCalcsList.SetRCommand("list")
-        clsManipulationsList.SetRCommand("list")
-
         ucrManipulations.lstAvailableData.View = View.List
 
         'temp until working
@@ -73,17 +71,17 @@ Public Class sdgCalculationsSummmary
         cmdManipDuplicate.Enabled = False
         cmdSubCalcEdit.Enabled = False
         cmdSubCalcDuplicate.Enabled = False
+        bControlsInitialised = True
     End Sub
 
     Public Sub SetDefaults()
         ucrSelectorBy.Reset()
         ucrCalcSummary.ucrSelectorForCalculations.Reset()
 
-        iSubCalcCount = 1
-        iManipCount = 1
+        iSubCalcCount = 0
+        iManipCount = 0
 
         'rdoDoNotSave.Checked = True
-        SetSaveOption()
 
         'lstSubCalcs.Items.Clear()
         'lstSubCalcFunctions.Clear()
@@ -97,6 +95,9 @@ Public Class sdgCalculationsSummmary
         Me.Text = "Add Sub Calculation"
         lstType.Add("Calculation", Chr(34) & "calculation" & Chr(34))
         lstType.Add("Summary", Chr(34) & "summary" & Chr(34))
+        lstType.Add("By", Chr(34) & "by" & Chr(34))
+        lstType.Add("Filter", Chr(34) & "filter" & Chr(34))
+        lstType.Add("Combine", Chr(34) & "combination" & Chr(34))
         ucrInputType.SetItems(lstType)
     End Sub
 
@@ -104,6 +105,15 @@ Public Class sdgCalculationsSummmary
         Dim lstType As New Dictionary(Of String, String)
 
         Me.Text = "Add Manipulation"
+        lstType.Add("By", Chr(34) & "by" & Chr(34))
+        lstType.Add("Filter", Chr(34) & "filter" & Chr(34))
+        ucrInputType.SetItems(lstType)
+    End Sub
+
+    Private Sub SetIsCalculation()
+        Dim lstType As New Dictionary(Of String, String)
+
+        Me.Text = "Add Calculation"
         lstType.Add("Calculation", Chr(34) & "calculation" & Chr(34))
         lstType.Add("Summary", Chr(34) & "summary" & Chr(34))
         lstType.Add("By", Chr(34) & "by" & Chr(34))
@@ -112,21 +122,24 @@ Public Class sdgCalculationsSummmary
         ucrInputType.SetItems(lstType)
     End Sub
 
-    Private Sub SetIsCalculation()
-        Dim lstType As New Dictionary(Of String, String)
-
-        Me.Text = "Add Calculation"
-        lstType.Add("By", Chr(34) & "by" & Chr(34))
-        lstType.Add("Filter", Chr(34) & "filter" & Chr(34))
-        lstType.Add("Sort", Chr(34) & "sort" & Chr(34))
-        ucrInputType.SetItems(lstType)
-    End Sub
-
     Public Sub Setup(clsNewCalculationFunction As RFunction, clsNewParentCalculationFunction As RFunction, Optional bNewIsSubCalc As Boolean = False, Optional bNewIsManipulation As Boolean = False, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
         clsCalculationFunction = clsNewCalculationFunction
+        If clsCalculationFunction.ContainsParameter("manipulations") AndAlso clsCalculationFunction.GetParameter("manipulations").clsArgumentCodeStructure IsNot Nothing Then
+            clsManipulationsList = clsCalculationFunction.GetParameter("manipulations").clsArgumentCodeStructure
+        Else
+            clsManipulationsList = New RFunction
+            clsManipulationsList.SetRCommand("list")
+        End If
+        If clsCalculationFunction.ContainsParameter("sub_calculations") AndAlso clsCalculationFunction.GetParameter("sub_calculations").clsArgumentCodeStructure IsNot Nothing Then
+            clsSubCalcsList = clsCalculationFunction.GetParameter("sub_calculations").clsArgumentCodeStructure
+        Else
+            clsSubCalcsList = New RFunction
+            clsSubCalcsList.SetRCommand("list")
+        End If
+
         clsParentCalculationFunction = clsNewParentCalculationFunction
         bIsManipulation = bNewIsManipulation
         bIsSubCalc = bNewIsSubCalc
@@ -140,75 +153,99 @@ Public Class sdgCalculationsSummmary
         If bReset Then
             SetDefaults()
         End If
-        SetType()
         'Which one?
         SetRCodeForControls(bReset)
         DisplayOptions()
-        ucrReceiverByOrSort.SetMeAsReceiver()
-        ucrCalcSummary.ucrReceiverForCalculation.SetMeAsReceiver()
+        lstSubCalcs.Clear()
+        For Each clsTempParam As RParameter In clsSubCalcsList.clsParameters
+            lstSubCalcs.Items.Add(clsTempParam.clsArgumentCodeStructure.clsParameters.Find(Function(x) x.strArgumentName = "name").strArgumentValue.Trim(Chr(34)))
+        Next
+        ucrManipulations.lstAvailableData.Clear()
+        For Each clsTempParam As RParameter In clsSubCalcsList.clsParameters
+            If clsTempParam.clsArgumentCodeStructure IsNot Nothing Then
+                ucrManipulations.lstAvailableData.Items.Add(clsTempParam.clsArgumentCodeStructure.clsParameters.Find(Function(x) x.strArgumentName = "name").strArgumentValue.Trim(Chr(34)))
+            End If
+        Next
+        UpdateSubCalculations()
+        UpdateManipulations()
     End Sub
 
     Private Sub SetRCodeForControls(Optional bReset As Boolean = False)
+        bRCodeSet = False
         ucrInputType.SetRCode(clsCalculationFunction, bReset, bCloneIfNeeded:=True)
         ucrInputResultName.SetRCode(clsCalculationFunction, bReset, bCloneIfNeeded:=True)
         ucrInputCalculationName.SetRCode(clsCalculationFunction, bReset, bCloneIfNeeded:=True)
+        ucrPnlSave.SetRCode(clsCalculationFunction, bReset, bCloneIfNeeded:=True)
+        bRCodeSet = True
     End Sub
 
     Private Sub DisplayOptions()
-        If ucrInputType.GetText = "calculation" OrElse ucrInputType.GetText = "summary" Then
-            ucrSelectorBy.Visible = False
-            ucrReceiverByOrSort.Visible = False
-            lblReceiverLabel.Visible = False
-            ucrCalcSummary.Visible = True
-            If ucrInputType.GetText = "calculation" Then
-                ucrCalcSummary.ucrInputCalOptions.SetName("Basic")
-            Else
-                ucrCalcSummary.ucrInputCalOptions.SetName("Statistics")
+        If bRCodeSet Then
+            If ucrInputType.GetText = "Calculation" OrElse ucrInputType.GetText = "Summary" Then
+                ucrSelectorBy.Visible = False
+                ucrReceiverByOrSort.Visible = False
+                lblReceiverLabel.Visible = False
+                ucrCalcSummary.Visible = True
+                If ucrInputType.GetText = "calculation" Then
+                    ucrCalcSummary.ucrInputCalOptions.SetName("Basic")
+                Else
+                    ucrCalcSummary.ucrInputCalOptions.SetName("Statistics")
+                End If
+                ucrDefineFilter.Visible = False
+                rdoSaveCalcAndResult.Enabled = True
+                ucrInputResultName.Enabled = True
+                ucrCalcSummary.SetAsCurrentReceiver()
+            ElseIf ucrInputType.GetText = "By" Then
+                ucrSelectorBy.Visible = True
+                ucrReceiverByOrSort.Visible = True
+                ucrReceiverByOrSort.SetDataType("factor")
+                lblReceiverLabel.Text = "By Factors:"
+                lblReceiverLabel.Visible = True
+                ucrCalcSummary.Visible = False
+                clsCalculationFunction.RemoveParameterByName("function_exp")
+                ucrDefineFilter.Visible = False
+                If rdoSaveCalcAndResult.Checked Then
+                    rdoSaveCalculation.Checked = True
+                End If
+                rdoSaveCalcAndResult.Enabled = False
+                ucrInputResultName.Enabled = False
+                ucrReceiverByOrSort.SetMeAsReceiver()
+            ElseIf ucrInputType.GetText = "Filter" Then
+                ucrSelectorBy.Visible = False
+                ucrReceiverByOrSort.Visible = False
+                lblReceiverLabel.Visible = False
+                ucrCalcSummary.Visible = False
+                ucrDefineFilter.Visible = True
+                If rdoSaveCalcAndResult.Checked Then
+                    rdoSaveCalculation.Checked = True
+                End If
+                rdoSaveCalcAndResult.Enabled = False
+                ucrInputResultName.Enabled = False
+                ucrDefineFilter.ucrFilterByReceiver.SetMeAsReceiver()
+            ElseIf ucrInputType.GetText = "Sort" Then
+                ucrSelectorBy.Visible = True
+                ucrReceiverByOrSort.Visible = True
+                ucrReceiverByOrSort.RemoveIncludedMetadataProperty("class")
+                lblReceiverLabel.Text = "Sort by:"
+                lblReceiverLabel.Visible = True
+                ucrCalcSummary.Visible = False
+                clsCalculationFunction.RemoveParameterByName("function_exp")
+                ucrDefineFilter.Visible = False
+                If rdoSaveCalcAndResult.Checked Then
+                    rdoSaveCalculation.Checked = True
+                End If
+                rdoSaveCalcAndResult.Enabled = False
+                ucrInputResultName.Enabled = False
+                ucrReceiverByOrSort.SetMeAsReceiver()
+            ElseIf ucrInputType.GetText = "Combine" Then
+                ucrSelectorBy.Visible = False
+                ucrReceiverByOrSort.Visible = False
+                lblReceiverLabel.Visible = False
+                ucrCalcSummary.Visible = False
+                ucrDefineFilter.Visible = False
+                rdoSaveCalcAndResult.Enabled = True
+                ucrInputResultName.Enabled = False
             End If
-            ucrDefineFilter.Visible = False
-            rdoSaveCalcAndResult.Enabled = True
-            ucrInputResultName.Enabled = True
-        ElseIf ucrInputType.GetText = "by" Then
-            ucrSelectorBy.Visible = True
-            ucrReceiverByOrSort.Visible = True
-            ucrReceiverByOrSort.SetDataType("factor")
-            lblReceiverLabel.Text = "By Factors:"
-            lblReceiverLabel.Visible = True
-            ucrCalcSummary.Visible = False
-            clsCalculationFunction.RemoveParameterByName("function_exp")
-            ucrDefineFilter.Visible = False
-            If rdoSaveCalcAndResult.Checked Then
-                rdoSaveCalculation.Checked = True
-            End If
-            rdoSaveCalcAndResult.Enabled = False
-            ucrInputResultName.Enabled = False
-        ElseIf ucrInputType.GetText = "filter" Then
-            ucrSelectorBy.Visible = False
-            ucrReceiverByOrSort.Visible = False
-            lblReceiverLabel.Visible = False
-            ucrCalcSummary.Visible = False
-            ucrDefineFilter.Visible = True
-            If rdoSaveCalcAndResult.Checked Then
-                rdoSaveCalculation.Checked = True
-            End If
-            rdoSaveCalcAndResult.Enabled = False
-            ucrInputResultName.Enabled = False
-        ElseIf ucrInputType.GetText = "sort" Then
-            ucrSelectorBy.Visible = True
-            ucrReceiverByOrSort.Visible = True
-            ucrReceiverByOrSort.RemoveIncludedMetadataProperty("class")
-            lblReceiverLabel.Text = "Sort by:"
-            lblReceiverLabel.Visible = True
-            ucrCalcSummary.Visible = False
-            clsCalculationFunction.RemoveParameterByName("function_exp")
-            ucrDefineFilter.Visible = False
-            If rdoSaveCalcAndResult.Checked Then
-                rdoSaveCalculation.Checked = True
-            End If
-            rdoSaveCalcAndResult.Enabled = False
-            ucrInputResultName.Enabled = False
-        Else
-            ' combine options
         End If
     End Sub
 
@@ -217,19 +254,27 @@ Public Class sdgCalculationsSummmary
     Private Sub cmdSubCalcAdd_Click(sender As Object, e As EventArgs) Handles cmdSubCalcAdd.Click
         Dim clsSubCalcFunction As New RFunction
         Dim sdgSubCalc As New sdgCalculationsSummmary
+        Dim strCalcName As String
 
+        iSubCalcCount = iSubCalcCount + 1
+        strCalcName = "sub_cal" & iSubCalcCount
         clsSubCalcFunction.SetRCommand("instat_calculation$new")
-        'sdgSubCalc.SetAsSubCalculation()
-        'sdgSubCalc.SetCalculationFunction(clsSubCalcFunction)
+        clsSubCalcFunction.AddParameter("name", Chr(34) & strCalcName & Chr(34))
+        clsSubCalcFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34))
+        clsSubCalcFunction.AddParameter("save", "0")
+
+        sdgSubCalc.Setup(clsNewCalculationFunction:=clsSubCalcFunction, clsNewParentCalculationFunction:=clsCalculationFunction, bNewIsSubCalc:=True, bNewIsManipulation:=False, bReset:=True)
         sdgSubCalc.ShowDialog()
-        If clsSubCalcFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "name") = -1 Then
-            clsSubCalcFunction.AddParameter("name", Chr(34) & "sub_calc" & iSubCalcCount & Chr(34))
-            clsSubCalcFunction.SetAssignTo("sub_calc" & iSubCalcCount)
-            iSubCalcCount = iSubCalcCount + 1
+        If clsSubCalcFunction.ContainsParameter("name") Then
+            strCalcName = clsSubCalcFunction.GetParameter("name").strArgumentValue.Trim(Chr(34))
+        Else
+            clsSubCalcFunction.AddParameter("name", Chr(34) & strCalcName & Chr(34))
         End If
-        lstSubCalcs.Items.Add(clsSubCalcFunction.clsParameters.Find(Function(x) x.strArgumentName = "name").strArgumentValue.Trim(Chr(34)))
-        lstSubCalcFunctions.Add(New KeyValuePair(Of String, RFunction)(lstSubCalcs.Items(lstSubCalcs.Items.Count - 1).Text, clsSubCalcFunction.Clone()))
-        UpdateSubCalcs()
+        clsSubCalcFunction.SetAssignTo(strCalcName)
+        lstSubCalcs.Items.Add(strCalcName)
+        lstSubCalcFunctions.Add(New KeyValuePair(Of String, RFunction)(strCalcName, clsSubCalcFunction.Clone()))
+        clsSubCalcsList.AddParameter(strCalcName, clsRFunctionParameter:=clsSubCalcFunction)
+        UpdateSubCalculations()
     End Sub
 
     ' We want to have that this opens a dialog which only shows filter and by as options in type
@@ -238,8 +283,8 @@ Public Class sdgCalculationsSummmary
         Dim sdgManip As New sdgCalculationsSummmary
 
         clsManipFunction.SetRCommand("instat_calculation$new")
-        sdgManip.SetAsManipulation()
-        sdgManip.SetCalculationFunction(clsManipFunction)
+        'sdgManip.SetAsManipulation()
+        'sdgManip.SetCalculationFunction(clsManipFunction)
         sdgManip.ShowDialog()
         If clsManipFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "name") = -1 Then
             clsManipFunction.AddParameter("name", Chr(34) & "manipulation" & iManipCount & Chr(34))
@@ -252,20 +297,11 @@ Public Class sdgCalculationsSummmary
     End Sub
 
     Private Sub ucrType_NameChanged() Handles ucrInputType.NameChanged
-        SetType()
-    End Sub
-
-    Private Sub SetType()
         DisplayOptions()
-        If ucrInputType.IsEmpty Then
-            clsCalculationFunction.RemoveParameterByName("type")
-        Else
-            clsCalculationFunction.AddParameter("type", Chr(34) & ucrInputType.GetText() & Chr(34))
-        End If
     End Sub
 
     Private Sub ucrCalcSummary_SelectionChanged() Handles ucrCalcSummary.SelectionChanged
-        If {"calculation", "summary"}.Contains(ucrInputType.GetText()) Then
+        If {"Calculation", "Summary"}.Contains(ucrInputType.GetText()) Then
             If Not ucrCalcSummary.ucrReceiverForCalculation.IsEmpty Then
                 clsCalculationFunction.AddParameter("function_exp", Chr(34) & ucrCalcSummary.ucrReceiverForCalculation.GetText() & Chr(34))
             Else
@@ -280,26 +316,8 @@ Public Class sdgCalculationsSummmary
         End If
     End Sub
 
-    Private Sub ucrCalculationName_NameChanged() Handles ucrInputCalculationName.NameChanged
-        If ucrInputCalculationName.IsEmpty Then
-            clsCalculationFunction.RemoveParameterByName("name")
-            clsCalculationFunction.RemoveAssignTo()
-        Else
-            clsCalculationFunction.AddParameter("name", Chr(34) & ucrInputCalculationName.GetText() & Chr(34))
-            clsCalculationFunction.SetAssignTo(ucrInputCalculationName.GetText())
-        End If
-    End Sub
-
-    Private Sub ucrColumnName_NameChanged() Handles ucrInputResultName.NameChanged
-        If ucrInputResultName.IsEmpty Then
-            clsCalculationFunction.RemoveParameterByName("result_name")
-        Else
-            clsCalculationFunction.AddParameter("result_name", Chr(34) & ucrInputResultName.GetText() & Chr(34))
-        End If
-    End Sub
-
     Private Sub ucrReceiverBy_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverByOrSort.SelectionChanged
-        If {"by", "sort"}.Contains(ucrInputType.GetText()) Then
+        If {"By", "Sort"}.Contains(ucrInputType.GetText()) Then
             If ucrReceiverByOrSort.IsEmpty Then
                 clsCalculationFunction.RemoveParameterByName("calculated_from")
             Else
@@ -337,31 +355,6 @@ Public Class sdgCalculationsSummmary
         End If
     End Sub
 
-    Private Sub UpdateSubCalcs()
-        clsSubCalcsList.ClearParameters()
-        For i As Integer = 0 To lstSubCalcFunctions.Count - 1
-            clsSubCalcsList.AddParameter(i, clsRFunctionParameter:=lstSubCalcFunctions(i).Value.Clone(), bIncludeArgumentName:=False)
-        Next
-        If lstSubCalcFunctions.Count > 0 Then
-            clsCalculationFunction.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubCalcsList, bIncludeArgumentName:=False)
-        Else
-            clsCalculationFunction.RemoveParameterByName("sub_calculations")
-        End If
-    End Sub
-
-    Private Sub UpdateManipulations()
-        clsManipulationsList.ClearParameters()
-        For i As Integer = 0 To lstManipulationFunctions.Count - 1
-            clsManipulationsList.AddParameter(i, clsRFunctionParameter:=lstManipulationFunctions(i).Value.Clone(), bIncludeArgumentName:=False)
-        Next
-
-        If lstManipulationFunctions.Count > 0 Then
-            clsCalculationFunction.AddParameter("manipulations", clsRFunctionParameter:=clsManipulationsList)
-        Else
-            clsCalculationFunction.RemoveParameterByName("manipulations")
-        End If
-    End Sub
-
     Private Sub cmdManipDelete_Click(sender As Object, e As EventArgs) Handles cmdManipDelete.Click
         Dim iIndex As Integer
 
@@ -370,6 +363,7 @@ Public Class sdgCalculationsSummmary
             ucrManipulations.lstAvailableData.Items.Remove(lviTemp)
             lstManipulationFunctions.RemoveAt(iIndex)
         Next
+        UpdateManipulations()
     End Sub
 
     Private Sub cmdSubCalcDelete_Click(sender As Object, e As EventArgs) Handles cmdSubCalcDelete.Click
@@ -380,6 +374,19 @@ Public Class sdgCalculationsSummmary
             lstSubCalcs.Items.Remove(lviTemp)
             lstSubCalcFunctions.RemoveAt(iIndex)
         Next
+        UpdateSubCalculations()
+    End Sub
+
+    Private Sub UpdateSubCalculations()
+        If clsSubCalcsList.clsParameters.Count > 0 Then
+            clsCalculationFunction.AddParameter("sub_calculations", clsRFunctionParameter:=clsSubCalcsList)
+        End If
+    End Sub
+
+    Private Sub UpdateManipulations()
+        If clsManipulationsList.clsParameters.Count > 0 Then
+            clsCalculationFunction.AddParameter("manipulations", clsRFunctionParameter:=clsManipulationsList)
+        End If
     End Sub
 
     Private Sub ucrBaseSubDialog_ClickReturn(sender As Object, e As EventArgs) Handles ucrBaseSubDialog.ClickReturn
