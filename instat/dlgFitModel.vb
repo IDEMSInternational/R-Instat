@@ -58,6 +58,7 @@ Public Class dlgFitModel
 
     Private Sub InitialiseDialog()
         ucrBase.clsRsyntax.iCallType = 2
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         ucrModelName.SetDataFrameSelector(ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames)
         ucrModelName.SetPrefix("gen_model")
@@ -143,6 +144,13 @@ Public Class dlgFitModel
         'ANOVA
         clsAnovaFunction = clsRegressionDefaults.clsDefaultAnovaFunction.Clone
         clsAnovaFunction.iCallType = 2
+
+        'FitModel
+        clsVisReg.SetPackageName("visreg")
+        clsVisReg.SetRCommand("visreg")
+        clsVisReg.AddParameter("type", Chr(34) & "conditional" & Chr(34))
+        clsVisReg.AddParameter("gg", "TRUE")
+        clsVisReg.iCallType = 3
 
         'Confidence Interval
         clsConfint = clsRegressionDefaults.clsDefaultConfint.Clone
@@ -268,7 +276,7 @@ Public Class dlgFitModel
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        sdgSimpleRegOptions.SetRCode(ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewAutoplot:=clsAutoPlot, clsNewConfint:=clsConfint, bReset:=bResetOptionsSubDialog)
+        sdgSimpleRegOptions.SetRCode(ucrBase.clsRsyntax, clsNewFormulaFunction:=clsFormulaFunction, clsNewAnovaFunction:=clsAnovaFunction, clsNewRSummaryFunction:=clsSummaryFunction, clsNewAutoplot:=clsAutoPlot, clsNewVisReg:=clsVisReg, clsNewConfint:=clsConfint, bReset:=bResetOptionsSubDialog)
         sdgSimpleRegOptions.ShowDialog()
         bResetOptionsSubDialog = False
 
