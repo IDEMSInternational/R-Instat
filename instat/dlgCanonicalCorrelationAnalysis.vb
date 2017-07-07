@@ -20,7 +20,6 @@ Public Class dlgCanonicalCorrelationAnalysis
     Private bResetSubdialog As Boolean = False
     Private bReset As Boolean = True
     Private clsDefaultFunction, clsRCanCorFunction, clsRXCoefFunction, clsRYCoefFunction, clsRGraphicsFunction As New RFunction
-    Private strTempFunction, strXvarFunction, strYvarFunction, strTempFunc As String
 
     Private Sub dlgCanonicalCorrelationAnalysis_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -91,10 +90,6 @@ Public Class dlgCanonicalCorrelationAnalysis
         clsRGraphicsFunction.SetRCommand("ggpairs")
         clsRGraphicsFunction.iCallType = 3
 
-        '   clsRGraphicsFunction.AddParameter("data", clsRFunctionParameter:=strTempFunc)
-        clsRYCoefFunction.AddParameter("data_name", Chr(34) & strTempFunc & Chr(34))
-        clsRXCoefFunction.AddParameter("data_name", Chr(34) & strTempFunc & Chr(34))
-        clsRCanCorFunction.AddParameter("data_name", Chr(34) & strTempFunc & Chr(34))
         clsRCanCorFunction.AddParameter("value1", Chr(34) & "cor" & Chr(34))
         clsRXCoefFunction.AddParameter("value1", Chr(34) & "xcoef" & Chr(34))
         clsRYCoefFunction.AddParameter("value1", Chr(34) & "ycoef" & Chr(34))
@@ -126,18 +121,16 @@ Public Class dlgCanonicalCorrelationAnalysis
     End Sub
 
     Private Sub cmdCCAOptions_Click(sender As Object, e As EventArgs) Handles cmdCCAOptions.Click
-        sdgCanonicalCorrelation.SetRFunction(ucrBase.clsRsyntax, clsRCanCorFunction, clsRXCoefFunction, clsRYCoefFunction, clsRGraphicsFunction, strTempFunction, strXvarFunction, strYvarFunction, strTempFunc, bResetSubdialog)
+        sdgCanonicalCorrelation.SetRFunction(ucrBase.clsRsyntax, clsRCanCorFunction, clsRXCoefFunction, clsRYCoefFunction, clsRGraphicsFunction, bResetSubdialog)
         bResetSubdialog = False
         sdgCanonicalCorrelation.ShowDialog()
     End Sub
 
     Private Sub ucrSaveResult_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlValueChanged
-        strTempFunction = ucrSaveResult.GetText
-
         If ucrSaveResult.ucrChkSave.Checked Then
-            clsRCanCorFunction.AddParameter("model_name", Chr(34) & strTempFunction & Chr(34))
-            clsRXCoefFunction.AddParameter("model_name", Chr(34) & strTempFunction & Chr(34))
-            clsRYCoefFunction.AddParameter("model_name", Chr(34) & strTempFunction & Chr(34))
+            clsRCanCorFunction.AddParameter("model_name", Chr(34) & ucrSaveResult.GetText & Chr(34))
+            clsRXCoefFunction.AddParameter("model_name", Chr(34) & ucrSaveResult.GetText & Chr(34))
+            clsRYCoefFunction.AddParameter("model_name", Chr(34) & ucrSaveResult.GetText & Chr(34))
         Else
             clsRCanCorFunction.AddParameter("model_name", Chr(34) & "last_CCA" & Chr(34))
             clsRXCoefFunction.AddParameter("model_name", Chr(34) & "last_CCA" & Chr(34))
@@ -145,16 +138,10 @@ Public Class dlgCanonicalCorrelationAnalysis
         End If
     End Sub
 
-    Private Sub ucrReceiverXvariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverXVariables.ControlValueChanged
-        strXvarFunction = ucrReceiverXVariables.GetVariableNames()
-    End Sub
-
-    Private Sub ucrReceiverYvariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYVariables.ControlValueChanged
-        strYvarFunction = ucrReceiverYVariables.GetVariableNames()
-    End Sub
-
     Private Sub ucrSelectorCCA_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorCCA.ControlValueChanged
-        strTempFunc = ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem
+        clsRYCoefFunction.AddParameter("data_name", Chr(34) & ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+        clsRXCoefFunction.AddParameter("data_name", Chr(34) & ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+        clsRCanCorFunction.AddParameter("data_name", Chr(34) & ucrSelectorCCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
     End Sub
 
     Private Sub ucrSaveResult_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlContentsChanged, ucrReceiverXVariables.ControlContentsChanged, ucrReceiverYVariables.ControlContentsChanged

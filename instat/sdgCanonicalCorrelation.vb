@@ -19,7 +19,6 @@ Public Class sdgCanonicalCorrelation
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
     Public clsRCanCorFunction, clsRXCoefFunction, clsRYCoefFunction, clsRGraphicsFunction As New RFunction
-    Public strTempFunction, strXvarFunction, strYvarFunction, strTempFunc As String
     Private clsRSyntax As RSyntax
     Private Sub sdgCanonicalCorrelation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -44,7 +43,7 @@ Public Class sdgCanonicalCorrelation
         ucrChkPairwisePlot.AddToLinkedControls(ucrPnlVariables, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoXVariables)
     End Sub
 
-    Public Sub SetRFunction(clsNewRSyntax As RSyntax, clsNewRCanCorFunction As RFunction, clsNewRXCoefFunction As RFunction, clsNewRYCoefFunction As RFunction, clsNewRGraphicsFunction As RFunction, strNewTempFunction As String, strNewXvarFunction As String, strNewYvarFunction As String, strNewTempFun As String, Optional bReset As Boolean = False)
+    Public Sub SetRFunction(clsNewRSyntax As RSyntax, clsNewRCanCorFunction As RFunction, clsNewRXCoefFunction As RFunction, clsNewRYCoefFunction As RFunction, clsNewRGraphicsFunction As RFunction, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
@@ -54,10 +53,6 @@ Public Class sdgCanonicalCorrelation
         clsRXCoefFunction = clsNewRXCoefFunction
         clsRYCoefFunction = clsNewRYCoefFunction
         clsRGraphicsFunction = clsNewRGraphicsFunction
-        strTempFunction = strNewTempFunction
-        strXvarFunction = strNewXvarFunction
-        strYvarFunction = strNewYvarFunction
-        strTempFunc = strNewTempFun
 
         ucrChkCanonicalCorrelations.SetRSyntax(clsRSyntax, bReset)
         ucrChkCoefficients.SetRSyntax(clsRSyntax, bReset)
@@ -87,10 +82,10 @@ Public Class sdgCanonicalCorrelation
     Private Sub ucrChkPairwisePlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPairwisePlot.ControlValueChanged, ucrPnlVariables.ControlValueChanged
         If ucrChkPairwisePlot.Checked Then
             If rdoXVariables.Checked Then
-                clsRGraphicsFunction.AddParameter("columns", strXvarFunction)
+                clsRGraphicsFunction.AddParameter("columns", dlgCanonicalCorrelationAnalysis.ucrReceiverXVariables.GetVariableNames)
                 clsRSyntax.AddToAfterCodes(clsRGraphicsFunction, iPosition:=2)
             ElseIf rdoYVariables.Checked Then
-                clsRGraphicsFunction.AddParameter("columns", strYvarFunction)
+                clsRGraphicsFunction.AddParameter("columns", dlgCanonicalCorrelationAnalysis.ucrReceiverYVariables.GetVariableNames)
                 clsRSyntax.AddToAfterCodes(clsRGraphicsFunction, iPosition:=2)
             Else
                 clsRSyntax.RemoveFromAfterCodes(clsRGraphicsFunction)
