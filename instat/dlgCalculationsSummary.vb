@@ -41,6 +41,7 @@ Public Class dlgCalculationsSummary
     Private Sub SetDefaults()
         lstCalculations.Items.Clear()
         dctCalculations.Clear()
+        ucrBase.clsRsyntax.ClearCodes()
         iCalcCount = 0
     End Sub
 
@@ -54,28 +55,33 @@ Public Class dlgCalculationsSummary
         Dim clsNewCalculationFunction As New RFunction
         Dim strCalcName As String
         Dim clsApplyCalculation = New RFunction
-        Dim iCallType As Integer
 
         iCalcCount = iCalcCount + 1
         strCalcName = "calc" & iCalcCount
 
         clsApplyCalculation.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
-        clsApplyCalculation.AddParameter("calc", clsRFunctionParameter:=clsNewCalculationFunction.Clone())
+        clsApplyCalculation.AddParameter("calc", clsRFunctionParameter:=clsNewCalculationFunction)
 
         clsNewCalculationFunction.SetRCommand("instat_calculation$new")
         clsNewCalculationFunction.AddParameter("name", Chr(34) & strCalcName & Chr(34))
-        clsNewCalculationFunction.SetAssignTo(strCalcName)
+        clsNewCalculationFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34))
+        clsNewCalculationFunction.AddParameter("save", "2")
 
         dctCalculations.Add(strCalcName, clsNewCalculationFunction)
         sdgCalculationsSummmary.Setup(clsNewCalculationFunction:=clsNewCalculationFunction, clsNewParentCalculationFunction:=Nothing, bNewIsSubCalc:=False, bNewIsManipulation:=False, bReset:=True)
         sdgCalculationsSummmary.ShowDialog()
+        If clsNewCalculationFunction.ContainsParameter("name") Then
+            strCalcName = clsNewCalculationFunction.GetParameter("name").strArgumentValue.Trim(Chr(34))
+        End If
+        clsNewCalculationFunction.SetAssignTo(strCalcName)
+
         lstCalculations.Items.Add(strCalcName)
 
         If clsNewCalculationFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "save") <> -1 AndAlso clsNewCalculationFunction.GetParameter("save").strArgumentValue = "2" Then
-            iCallType = 0
+            clsApplyCalculation.iCallType = 0
             clsApplyCalculation.AddParameter("display", "FALSE")
         Else
-            iCallType = 2
+            clsApplyCalculation.iCallType = 2
             clsApplyCalculation.AddParameter("display", "TRUE")
         End If
 
@@ -89,10 +95,20 @@ Public Class dlgCalculationsSummary
         For Each lviTemp As ListViewItem In lstCalculations.SelectedItems
             iIndex = lstCalculations.Items.IndexOf(lviTemp)
             lstCalculations.Items.Remove(lviTemp)
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(dctCalculations(lviTemp.Text))
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(RSyntaxCodeContaining(dctCalculations(lviTemp.Text)))
             dctCalculations.Remove(lviTemp.Text)
         Next
     End Sub
+
+    Private Function RSyntaxCodeContaining(clsCalcFunction As RFunction) As RFunction
+        For Each clsApplyFunc As RFunction In ucrBase.clsRsyntax.lstBeforeCodes
+            'TODO better way to check this
+            If clsApplyFunc.ContainsParameter("calc") AndAlso clsApplyFunc.GetParameter("calc").clsArgumentCodeStructure IsNot Nothing AndAlso clsApplyFunc.GetParameter("calc").clsArgumentCodeStructure.strAssignTo = clsCalcFunction.strAssignTo Then
+                Return clsApplyFunc
+            End If
+        Next
+        Return Nothing
+    End Function
 
     Private Sub lstLayers_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstCalculations.SelectedIndexChanged
         SetEnabledStatusButtons()
