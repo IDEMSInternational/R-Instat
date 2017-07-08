@@ -67,9 +67,9 @@ Public Class sdgCalculationsSummmary
         ucrCalcSummary.cmdTry.Visible = False
         ucrCalcSummary.ucrInputTryMessage.Visible = False
 
-        cmdManipEdit.Enabled = False
+        ucrManipulations.bIsDataType = False
+
         cmdManipDuplicate.Enabled = False
-        cmdSubCalcEdit.Enabled = False
         cmdSubCalcDuplicate.Enabled = False
         bControlsInitialised = True
     End Sub
@@ -116,6 +116,8 @@ Public Class sdgCalculationsSummmary
     End Sub
 
     Public Sub Setup(clsNewCalculationFunction As RFunction, clsNewParentCalculationFunction As RFunction, Optional bNewIsSubCalc As Boolean = False, Optional bNewIsManipulation As Boolean = False, Optional bReset As Boolean = False)
+        Dim strFuncExp As String
+
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
@@ -149,12 +151,21 @@ Public Class sdgCalculationsSummmary
         'Which one?
         SetRCodeForControls(bReset)
         DisplayOptions()
+        If clsCalculationFunction.ContainsParameter("function_exp") Then
+            strFuncExp = clsCalculationFunction.GetParameter("function_exp").strArgumentValue
+        Else
+            strFuncExp = ""
+        End If
+        If ucrInputType.GetText = "Calculation" OrElse ucrInputType.GetText = "Summary" Then
+            ucrCalcSummary.ucrReceiverForCalculation.Clear()
+            ucrCalcSummary.ucrReceiverForCalculation.AddToReceiverAtPosition(strFuncExp.Trim(Chr(34)), 0)
+        End If
         lstSubCalcs.Clear()
         For Each clsTempParam As RParameter In clsSubCalcsList.clsParameters
             lstSubCalcs.Items.Add(clsTempParam.clsArgumentCodeStructure.clsParameters.Find(Function(x) x.strArgumentName = "name").strArgumentValue.Trim(Chr(34)))
         Next
         ucrManipulations.lstAvailableData.Clear()
-        For Each clsTempParam As RParameter In clsSubCalcsList.clsParameters
+        For Each clsTempParam As RParameter In clsManipulationsList.clsParameters
             If clsTempParam.clsArgumentCodeStructure IsNot Nothing Then
                 ucrManipulations.lstAvailableData.Items.Add(clsTempParam.clsArgumentCodeStructure.clsParameters.Find(Function(x) x.strArgumentName = "name").strArgumentValue.Trim(Chr(34)))
             End If
@@ -387,6 +398,26 @@ Public Class sdgCalculationsSummmary
     Private Sub UpdateManipulations()
         If clsManipulationsList.clsParameters.Count > 0 Then
             clsCalculationFunction.AddParameter("manipulations", clsRFunctionParameter:=clsManipulationsList)
+        End If
+    End Sub
+
+    Private Sub lstSubCalcs_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstSubCalcs.SelectedIndexChanged
+        If lstSubCalcs.SelectedItems.Count > 0 Then
+            cmdSubCalcEdit.Enabled = True
+            cmdSubCalcDelete.Enabled = True
+        Else
+            cmdSubCalcEdit.Enabled = False
+            cmdSubCalcDelete.Enabled = False
+        End If
+    End Sub
+
+    Private Sub ucrManipulations_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ucrManipulations.SelectedIndexChanged
+        If ucrManipulations.lstAvailableData.SelectedItems.Count > 0 Then
+            cmdManipEdit.Enabled = True
+            cmdManipDelete.Enabled = True
+        Else
+            cmdManipEdit.Enabled = False
+            cmdManipDelete.Enabled = False
         End If
     End Sub
 End Class

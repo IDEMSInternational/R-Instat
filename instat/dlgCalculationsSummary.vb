@@ -47,7 +47,6 @@ Public Class dlgCalculationsSummary
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 513
-        cmdEdit.Enabled = False
         cmdDuplicate.Enabled = False
     End Sub
 
@@ -114,5 +113,34 @@ Public Class dlgCalculationsSummary
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         TestOKEnabled()
+    End Sub
+
+    Private Sub cmdEdit_Click(sender As Object, e As EventArgs) Handles cmdEdit.Click
+        Dim clsSelectedCalculationFunction As RFunction
+        Dim strCalcName As String
+        Dim clsApplyCalculation As RFunction
+
+        If lstCalculations.SelectedItems.Count = 1 Then
+            clsSelectedCalculationFunction = dctCalculations(lstCalculations.SelectedItems(0).Text)
+
+            sdgCalculationsSummmary.Setup(clsNewCalculationFunction:=clsSelectedCalculationFunction, clsNewParentCalculationFunction:=Nothing, bNewIsSubCalc:=False, bNewIsManipulation:=False, bReset:=True)
+            sdgCalculationsSummmary.ShowDialog()
+            If clsSelectedCalculationFunction.ContainsParameter("name") Then
+                strCalcName = clsSelectedCalculationFunction.GetParameter("name").strArgumentValue.Trim(Chr(34))
+            Else
+                strCalcName = lstCalculations.SelectedItems(0).Text
+            End If
+            clsSelectedCalculationFunction.SetAssignTo(strCalcName)
+            lstCalculations.SelectedItems(0).Text = strCalcName
+            clsApplyCalculation = ucrBase.clsRsyntax.lstBeforeCodes.Find(Function(x) x.Tag = strCalcName)
+            If clsSelectedCalculationFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "save") <> -1 AndAlso clsSelectedCalculationFunction.GetParameter("save").strArgumentValue = "2" Then
+                clsApplyCalculation.iCallType = 0
+                clsApplyCalculation.AddParameter("display", "FALSE")
+            Else
+                clsApplyCalculation.iCallType = 2
+                clsApplyCalculation.AddParameter("display", "TRUE")
+            End If
+            TestOKEnabled()
+        End If
     End Sub
 End Class
