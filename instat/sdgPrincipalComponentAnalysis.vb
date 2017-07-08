@@ -73,10 +73,6 @@ Public Class sdgPrincipalComponentAnalysis
         ucrPnlScreePlot.AddRadioButton(rdoLine, Chr(34) & "line" & Chr(34))
         ucrPnlScreePlot.AddRadioButton(rdoBothScree, "c(" & Chr(34) & "bar" & Chr(34) & "," & Chr(34) & "line" & Chr(34) & ")")
 
-        ucrPnlScreePlot.AddParameterPresentCondition(rdoBar, Chr(34) & "bar" & Chr(34))
-        ucrPnlScreePlot.AddParameterPresentCondition(rdoLine, Chr(34) & "line" & Chr(34))
-        ucrPnlScreePlot.AddParameterPresentCondition(rdoBothScree, "c(" & Chr(34) & "bar" & Chr(34) & "," & Chr(34) & "line" & Chr(34) & ")")
-
         ucrPnlVariablesPlot.SetParameter(New RParameter("geom"))
         ucrPnlVariablesPlot.AddRadioButton(rdoArrow, Chr(34) & "arrow" & Chr(34))
         ucrPnlVariablesPlot.AddRadioButton(rdoTextVariables, Chr(34) & "text" & Chr(34))
@@ -92,10 +88,6 @@ Public Class sdgPrincipalComponentAnalysis
         ucrChkIncludePercentage.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkIncludePercentage.SetRDefault("FALSE")
 
-        ucrPnlGraphics.AddToLinkedControls(ucrPnlScreePlot, {rdoScreePlot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoBothScree)
-        ucrPnlGraphics.AddToLinkedControls(ucrPnlIndividualPlot, {rdoIndividualsPlot, rdoBiplot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoBothIndividual)
-        ucrPnlGraphics.AddToLinkedControls(ucrPnlVariablesPlot, {rdoVariablesPlot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoBothVariables)
-        ucrPnlIndividualPlot.SetLinkedDisplayControl(GrpIndividualPlot)
         ucrPnlScreePlot.SetLinkedDisplayControl(grpGeom)
         ucrPnlVariablesPlot.SetLinkedDisplayControl(grpVariablePlot)
 
@@ -124,9 +116,13 @@ Public Class sdgPrincipalComponentAnalysis
         ucrReceiverFactor.SetDataType("factor")
         ucrReceiverFactor.SetMeAsReceiver()
 
+        ucrPnlGraphics.AddToLinkedControls(ucrPnlScreePlot, {rdoScreePlot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoBothScree)
+        ucrPnlGraphics.AddToLinkedControls(ucrPnlVariablesPlot, {rdoVariablesPlot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoBothVariables)
+        ucrPnlGraphics.AddToLinkedControls(ucrPnlIndividualPlot, {rdoIndividualsPlot, rdoBiplot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoBothIndividual)
+        ucrPnlIndividualPlot.SetLinkedDisplayControl(GrpIndividualPlot)
+
         ucrPnlGraphics.AddToLinkedControls(ucrInputLabel2, {rdoVariablesPlot, rdoIndividualsPlot, rdoBiplot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="all")
         ucrInputLabel2.SetLinkedDisplayControl(lblLabel)
-        ucrPnlGraphics.AddToLinkedControls(ucrPnlScreePlot, {rdoScreePlot, rdoVariablesPlot, rdoIndividualsPlot, rdoBiplot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoBothScree)
         ucrPnlScreePlot.SetLinkedDisplayControl(grpGeom)
 
         ucrPnlGraphics.AddToLinkedControls(ucrInputLabel1, {rdoScreePlot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Variance")
@@ -142,7 +138,6 @@ Public Class sdgPrincipalComponentAnalysis
         ucrPnlGraphics.AddToLinkedControls(ucrReceiverFactor, {rdoBarPlot}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrReceiverFactor.SetLinkedDisplayControl(lblFactorVariable)
         bControlsInitialised = True
-
         'TODO: disabled for now because it has a bugs
         rdoBarPlot.Enabled = False
         'ucrChkRotation.Enabled = False
@@ -166,19 +161,20 @@ Public Class sdgPrincipalComponentAnalysis
         ucrInputLabel2.AddAdditionalCodeParameterPair(clsRIndividualsPlotFunction, New RParameter("label"), iAdditionalPairNo:=2)
         ucrInputLabel2.AddAdditionalCodeParameterPair(clsRBiplotFunction, New RParameter("label"), iAdditionalPairNo:=3)
 
-        ucrPnlIndividualPlot.AddAdditionalCodeParameterPair(clsNewBiplotFunction, New RParameter("geom"), iAdditionalPairNo:=1)
+        ucrPnlIndividualPlot.AddAdditionalCodeParameterPair(clsRBiplotFunction, New RParameter("geom"), iAdditionalPairNo:=1)
+        ucrPnlScreePlot.AddAdditionalCodeParameterPair(clsRScreePlotFunction, New RParameter("geom"), iAdditionalPairNo:=2)
 
-        ucrPnlScreePlot.SetRCode(clsRScreePlotFunction, bReset)
-        ucrPnlVariablesPlot.SetRCode(clsRVariablesPlotFunction, bReset)
-        ucrPnlIndividualPlot.SetRCode(clsRIndividualsPlotFunction, bReset,)
-        ucrInputLabel1.SetRCode(clsRScreePlotFunction, bReset, bCloneIfNeeded:=True)
+        ucrPnlVariablesPlot.SetRCode(clsRVariablesPlotFunction, bReset, bCloneIfNeeded:=True)
+        ucrPnlIndividualPlot.SetRCode(clsRIndividualsPlotFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLabel1.SetRSyntax(clsRsyntax, bReset, bCloneIfNeeded:=True)
         ucrInputLabel2.SetRCode(clsRVariablesPlotFunction, bReset, bCloneIfNeeded:=True)
         ucrReceiverFactor.SetRCode(clsRFactor, bReset, bCloneIfNeeded:=True)
-        ucrChkIncludePercentage.SetRCode(clsRScreePlotFunction, bReset)
-        ucrChkEigenvalues.SetRCode(clsREigenValues, bReset)
-        ucrChkEigenvectors.SetRCode(clsREigenVectors, bReset)
-        ucrChkRotation.SetRCode(clsRRotation, bReset)
+        ucrChkIncludePercentage.SetRCode(clsRScreePlotFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkEigenvalues.SetRCode(clsREigenValues, bReset, bCloneIfNeeded:=True)
+        ucrChkEigenvectors.SetRCode(clsREigenVectors, bReset, bCloneIfNeeded:=True)
+        ucrChkRotation.SetRCode(clsRRotation, bReset, bCloneIfNeeded:=True)
         ucrPnlGraphics.SetRSyntax(clsRsyntax, bReset)
+        ucrPnlScreePlot.SetRSyntax(clsRsyntax, bReset)
 
         'Not sure how this can be passed by the control.
         clsRVariablesPlotFunction.AddParameter("axes", "c(" & ucrNudDim1.Value & ", " & ucrNudDim2.Value & ")")
@@ -246,6 +242,14 @@ Public Class sdgPrincipalComponentAnalysis
             clsRsyntax.RemoveFromAfterCodes(clsRBiplotFunction)
             clsRsyntax.RemoveFromAfterCodes(clsRScreePlotFunction)
         End If
+        'If rdoScreePlot.Checked Then
+        '    grpGeom.Visible = True
+        '    ucrPnlScreePlot.Visible = True
+        'ElseIf rdoIndividualsPlot.Checked Then
+        '    ucrPnlIndividualPlot.Visible = True
+        'ElseIf rdoVariablesPlot.Checked OrElse rdoBiplot.Checked Then
+        '    ucrPnlVariablesPlot.Visible = True
+        'End If
     End Sub
 
     ' Here, the minimum and maximum dimensions selected rely on a few things
