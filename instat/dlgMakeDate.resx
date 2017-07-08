@@ -117,4 +117,29 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="txtTextDateFormats.Text" xml:space="preserve">
+    <value>Examples of formats to use in R
+Day of the month
+%d- Day of the Month
+
+Day of the year
+%j- Decimal day of the year	
+
+Month Options
+%m- Month (Number 1-12)
+%b- Abbreviated month	
+%B- Full month
+
+Year Options
+%Y- Year (4-digits)
+%y- Year (2-digits)
+
+Examples
+Day/Month/Year (24/12/1993)
+%d/%m/%Y
+Month:Day:Year (12:24:93)
+%m:%d:%y
+Year-Month-Day (1993-Dec-1993)
+%Y-%b-%Y</value>
+  </data>
 </root>
