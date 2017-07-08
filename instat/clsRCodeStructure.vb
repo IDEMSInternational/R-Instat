@@ -428,6 +428,7 @@ Public Class RCodeStructure
         clsTempCode.bExcludeAssignedFunctionOutput = bExcludeAssignedFunctionOutput
         clsTempCode.bClearFromGlobal = bClearFromGlobal
         clsTempCode.bToScriptAsRString = bToScriptAsRString
+        clsTempCode.Tag = Tag
         For Each clsRParam In clsParameters
             clsTempCode.AddParameter(clsRParam.Clone)
         Next
