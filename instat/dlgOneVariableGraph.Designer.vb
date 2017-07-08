@@ -166,7 +166,7 @@ Partial Class dlgOneVariableGraph
         '
         Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 266)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(294, 24)
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(255, 24)
         Me.ucrSaveGraph.TabIndex = 6
         '
         'dlgOneVariableGraph
