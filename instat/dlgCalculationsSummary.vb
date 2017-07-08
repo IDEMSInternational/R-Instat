@@ -67,16 +67,15 @@ Public Class dlgCalculationsSummary
         clsNewCalculationFunction.AddParameter("type", Chr(34) & "calculation" & Chr(34))
         clsNewCalculationFunction.AddParameter("save", "2")
 
-        dctCalculations.Add(strCalcName, clsNewCalculationFunction)
         sdgCalculationsSummmary.Setup(clsNewCalculationFunction:=clsNewCalculationFunction, clsNewParentCalculationFunction:=Nothing, bNewIsSubCalc:=False, bNewIsManipulation:=False, bReset:=True)
         sdgCalculationsSummmary.ShowDialog()
         If clsNewCalculationFunction.ContainsParameter("name") Then
             strCalcName = clsNewCalculationFunction.GetParameter("name").strArgumentValue.Trim(Chr(34))
         End If
         clsNewCalculationFunction.SetAssignTo(strCalcName)
-
+        dctCalculations.Add(strCalcName, clsNewCalculationFunction)
         lstCalculations.Items.Add(strCalcName)
-
+        clsApplyCalculation.Tag = strCalcName
         If clsNewCalculationFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "save") <> -1 AndAlso clsNewCalculationFunction.GetParameter("save").strArgumentValue = "2" Then
             clsApplyCalculation.iCallType = 0
             clsApplyCalculation.AddParameter("display", "FALSE")
@@ -95,20 +94,10 @@ Public Class dlgCalculationsSummary
         For Each lviTemp As ListViewItem In lstCalculations.SelectedItems
             iIndex = lstCalculations.Items.IndexOf(lviTemp)
             lstCalculations.Items.Remove(lviTemp)
-            ucrBase.clsRsyntax.RemoveFromBeforeCodes(RSyntaxCodeContaining(dctCalculations(lviTemp.Text)))
+            ucrBase.clsRsyntax.RemoveFromBeforeCodes(ucrBase.clsRsyntax.lstBeforeCodes.Find(Function(x) x.Tag = lviTemp.Text))
             dctCalculations.Remove(lviTemp.Text)
         Next
     End Sub
-
-    Private Function RSyntaxCodeContaining(clsCalcFunction As RFunction) As RFunction
-        For Each clsApplyFunc As RFunction In ucrBase.clsRsyntax.lstBeforeCodes
-            'TODO better way to check this
-            If clsApplyFunc.ContainsParameter("calc") AndAlso clsApplyFunc.GetParameter("calc").clsArgumentCodeStructure IsNot Nothing AndAlso clsApplyFunc.GetParameter("calc").clsArgumentCodeStructure.strAssignTo = clsCalcFunction.strAssignTo Then
-                Return clsApplyFunc
-            End If
-        Next
-        Return Nothing
-    End Function
 
     Private Sub lstLayers_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstCalculations.SelectedIndexChanged
         SetEnabledStatusButtons()

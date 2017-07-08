@@ -80,13 +80,6 @@ Public Class sdgCalculationsSummmary
 
         iSubCalcCount = 0
         iManipCount = 0
-
-        'rdoDoNotSave.Checked = True
-
-        'lstSubCalcs.Items.Clear()
-        'lstSubCalcFunctions.Clear()
-        'ucrManipulations.Reset()
-        'lstManipulationFunctions.Clear()
     End Sub
 
     Private Sub SetIsSubCalc()
@@ -280,19 +273,27 @@ Public Class sdgCalculationsSummmary
     ' We want to have that this opens a dialog which only shows filter and by as options in type
     Private Sub cmdManipAdd_Click(sender As Object, e As EventArgs) Handles cmdManipAdd.Click
         Dim clsManipFunction As New RFunction
-        Dim sdgManip As New sdgCalculationsSummmary
+        Dim sdgSubCalc As New sdgCalculationsSummmary
+        Dim strCalcName As String
 
+        iManipCount = iManipCount + 1
+        strCalcName = "manip" & iManipCount
         clsManipFunction.SetRCommand("instat_calculation$new")
-        'sdgManip.SetAsManipulation()
-        'sdgManip.SetCalculationFunction(clsManipFunction)
-        sdgManip.ShowDialog()
-        If clsManipFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "name") = -1 Then
-            clsManipFunction.AddParameter("name", Chr(34) & "manipulation" & iManipCount & Chr(34))
-            clsManipFunction.SetAssignTo("manipulation" & iManipCount)
-            iManipCount = iManipCount + 1
+        clsManipFunction.AddParameter("name", Chr(34) & strCalcName & Chr(34))
+        clsManipFunction.AddParameter("type", Chr(34) & "by" & Chr(34))
+        clsManipFunction.AddParameter("save", "0")
+
+        sdgSubCalc.Setup(clsNewCalculationFunction:=clsManipFunction, clsNewParentCalculationFunction:=clsCalculationFunction, bNewIsSubCalc:=False, bNewIsManipulation:=True, bReset:=True)
+        sdgSubCalc.ShowDialog()
+        If clsManipFunction.ContainsParameter("name") Then
+            strCalcName = clsManipFunction.GetParameter("name").strArgumentValue.Trim(Chr(34))
+        Else
+            clsManipFunction.AddParameter("name", Chr(34) & strCalcName & Chr(34))
         End If
-        ucrManipulations.lstAvailableData.Items.Add(clsManipFunction.clsParameters.Find(Function(x) x.strArgumentName = "name").strArgumentValue.Trim(Chr(34)))
-        lstManipulationFunctions.Add(New KeyValuePair(Of String, RFunction)(ucrManipulations.lstAvailableData.Items(ucrManipulations.lstAvailableData.Items.Count - 1).Text, clsManipFunction.Clone()))
+        clsManipFunction.SetAssignTo(strCalcName)
+        ucrManipulations.lstAvailableData.Items.Add(strCalcName)
+        lstManipulationFunctions.Add(New KeyValuePair(Of String, RFunction)(strCalcName, clsManipFunction.Clone()))
+        clsManipulationsList.AddParameter(strCalcName, clsRFunctionParameter:=clsManipFunction)
         UpdateManipulations()
     End Sub
 
@@ -386,16 +387,6 @@ Public Class sdgCalculationsSummmary
     Private Sub UpdateManipulations()
         If clsManipulationsList.clsParameters.Count > 0 Then
             clsCalculationFunction.AddParameter("manipulations", clsRFunctionParameter:=clsManipulationsList)
-        End If
-    End Sub
-
-    Private Sub ucrBaseSubDialog_ClickReturn(sender As Object, e As EventArgs) Handles ucrBaseSubDialog.ClickReturn
-        If clsParentCalculationFunction IsNot Nothing Then
-            If bIsManipulation Then
-                clsParentCalculationFunction.AddParameter("")
-            ElseIf bIsSubCalc Then
-
-            End If
         End If
     End Sub
 End Class
