@@ -60,11 +60,11 @@ Partial Class sdgOneVarGraph
         Me.tbcOneVarGraph.AccessibleName = ""
         Me.tbcOneVarGraph.Controls.Add(Me.tbpTypes)
         Me.tbcOneVarGraph.Controls.Add(Me.tbpDisplay)
-        Me.tbcOneVarGraph.Location = New System.Drawing.Point(13, 17)
+        Me.tbcOneVarGraph.Location = New System.Drawing.Point(5, 7)
         Me.tbcOneVarGraph.Margin = New System.Windows.Forms.Padding(0)
         Me.tbcOneVarGraph.Name = "tbcOneVarGraph"
         Me.tbcOneVarGraph.SelectedIndex = 0
-        Me.tbcOneVarGraph.Size = New System.Drawing.Size(653, 401)
+        Me.tbcOneVarGraph.Size = New System.Drawing.Size(245, 168)
         Me.tbcOneVarGraph.TabIndex = 0
         '
         'tbpTypes
@@ -73,11 +73,10 @@ Partial Class sdgOneVarGraph
         Me.tbpTypes.Controls.Add(Me.lblNumeric)
         Me.tbpTypes.Controls.Add(Me.ucrInputCategorical)
         Me.tbpTypes.Controls.Add(Me.ucrInputNumeric)
-        Me.tbpTypes.Location = New System.Drawing.Point(10, 48)
-        Me.tbpTypes.Margin = New System.Windows.Forms.Padding(8, 7, 8, 7)
+        Me.tbpTypes.Location = New System.Drawing.Point(4, 22)
         Me.tbpTypes.Name = "tbpTypes"
-        Me.tbpTypes.Padding = New System.Windows.Forms.Padding(8, 7, 8, 7)
-        Me.tbpTypes.Size = New System.Drawing.Size(633, 343)
+        Me.tbpTypes.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.tbpTypes.Size = New System.Drawing.Size(237, 142)
         Me.tbpTypes.TabIndex = 0
         Me.tbpTypes.Text = "Types"
         Me.tbpTypes.UseVisualStyleBackColor = True
@@ -85,40 +84,40 @@ Partial Class sdgOneVarGraph
         'lblCategorical
         '
         Me.lblCategorical.AutoSize = True
-        Me.lblCategorical.Location = New System.Drawing.Point(27, 126)
-        Me.lblCategorical.Margin = New System.Windows.Forms.Padding(8, 0, 8, 0)
+        Me.lblCategorical.Location = New System.Drawing.Point(10, 53)
         Me.lblCategorical.Name = "lblCategorical"
-        Me.lblCategorical.Size = New System.Drawing.Size(168, 32)
-        Me.lblCategorical.TabIndex = 4
+        Me.lblCategorical.Size = New System.Drawing.Size(63, 13)
+        Me.lblCategorical.TabIndex = 2
         Me.lblCategorical.Text = "Categorical:"
         '
         'lblNumeric
         '
         Me.lblNumeric.AutoSize = True
-        Me.lblNumeric.Location = New System.Drawing.Point(27, 52)
-        Me.lblNumeric.Margin = New System.Windows.Forms.Padding(8, 0, 8, 0)
+        Me.lblNumeric.Location = New System.Drawing.Point(10, 22)
         Me.lblNumeric.Name = "lblNumeric"
-        Me.lblNumeric.Size = New System.Drawing.Size(128, 32)
-        Me.lblNumeric.TabIndex = 4
+        Me.lblNumeric.Size = New System.Drawing.Size(49, 13)
+        Me.lblNumeric.TabIndex = 0
         Me.lblNumeric.Text = "Numeric:"
         '
         'ucrInputCategorical
         '
+        Me.ucrInputCategorical.AddQuotesIfUnrecognised = True
         Me.ucrInputCategorical.IsReadOnly = False
-        Me.ucrInputCategorical.Location = New System.Drawing.Point(203, 119)
-        Me.ucrInputCategorical.Margin = New System.Windows.Forms.Padding(56, 41, 56, 41)
+        Me.ucrInputCategorical.Location = New System.Drawing.Point(76, 50)
+        Me.ucrInputCategorical.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputCategorical.Name = "ucrInputCategorical"
-        Me.ucrInputCategorical.Size = New System.Drawing.Size(365, 50)
+        Me.ucrInputCategorical.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputCategorical.TabIndex = 3
         '
         'ucrInputNumeric
         '
+        Me.ucrInputNumeric.AddQuotesIfUnrecognised = True
         Me.ucrInputNumeric.IsReadOnly = False
-        Me.ucrInputNumeric.Location = New System.Drawing.Point(203, 45)
-        Me.ucrInputNumeric.Margin = New System.Windows.Forms.Padding(56, 41, 56, 41)
+        Me.ucrInputNumeric.Location = New System.Drawing.Point(76, 19)
+        Me.ucrInputNumeric.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputNumeric.Name = "ucrInputNumeric"
-        Me.ucrInputNumeric.Size = New System.Drawing.Size(365, 50)
-        Me.ucrInputNumeric.TabIndex = 3
+        Me.ucrInputNumeric.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputNumeric.TabIndex = 1
         '
         'tbpDisplay
         '
@@ -126,70 +125,72 @@ Partial Class sdgOneVarGraph
         Me.tbpDisplay.Controls.Add(Me.ucrChkFreeScaleAxisforFacets)
         Me.tbpDisplay.Controls.Add(Me.ucrChkSpecifyLayout)
         Me.tbpDisplay.Controls.Add(Me.lblNumberofColumns)
-        Me.tbpDisplay.Location = New System.Drawing.Point(10, 48)
-        Me.tbpDisplay.Margin = New System.Windows.Forms.Padding(8, 7, 8, 7)
+        Me.tbpDisplay.Location = New System.Drawing.Point(4, 22)
         Me.tbpDisplay.Name = "tbpDisplay"
-        Me.tbpDisplay.Padding = New System.Windows.Forms.Padding(8, 7, 8, 7)
-        Me.tbpDisplay.Size = New System.Drawing.Size(633, 343)
+        Me.tbpDisplay.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.tbpDisplay.Size = New System.Drawing.Size(237, 142)
         Me.tbpDisplay.TabIndex = 1
         Me.tbpDisplay.Text = "Display"
         Me.tbpDisplay.UseVisualStyleBackColor = True
         '
         'ucrNudNumberofColumns
         '
-        Me.ucrNudNumberofColumns.Location = New System.Drawing.Point(301, 110)
-        Me.ucrNudNumberofColumns.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrNudNumberofColumns.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumberofColumns.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudNumberofColumns.Location = New System.Drawing.Point(113, 46)
+        Me.ucrNudNumberofColumns.Margin = New System.Windows.Forms.Padding(8, 7, 8, 7)
+        Me.ucrNudNumberofColumns.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudNumberofColumns.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberofColumns.Name = "ucrNudNumberofColumns"
-        Me.ucrNudNumberofColumns.Size = New System.Drawing.Size(115, 48)
-        Me.ucrNudNumberofColumns.TabIndex = 8
+        Me.ucrNudNumberofColumns.Size = New System.Drawing.Size(43, 20)
+        Me.ucrNudNumberofColumns.TabIndex = 2
+        Me.ucrNudNumberofColumns.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrChkFreeScaleAxisforFacets
         '
         Me.ucrChkFreeScaleAxisforFacets.Checked = False
-        Me.ucrChkFreeScaleAxisforFacets.Location = New System.Drawing.Point(29, 179)
-        Me.ucrChkFreeScaleAxisforFacets.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrChkFreeScaleAxisforFacets.Location = New System.Drawing.Point(11, 75)
+        Me.ucrChkFreeScaleAxisforFacets.Margin = New System.Windows.Forms.Padding(8, 7, 8, 7)
         Me.ucrChkFreeScaleAxisforFacets.Name = "ucrChkFreeScaleAxisforFacets"
-        Me.ucrChkFreeScaleAxisforFacets.Size = New System.Drawing.Size(267, 48)
-        Me.ucrChkFreeScaleAxisforFacets.TabIndex = 7
+        Me.ucrChkFreeScaleAxisforFacets.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkFreeScaleAxisforFacets.TabIndex = 3
         Me.ucrChkFreeScaleAxisforFacets.Tag = ""
         '
         'ucrChkSpecifyLayout
         '
         Me.ucrChkSpecifyLayout.Checked = False
-        Me.ucrChkSpecifyLayout.Location = New System.Drawing.Point(27, 38)
-        Me.ucrChkSpecifyLayout.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrChkSpecifyLayout.Location = New System.Drawing.Point(10, 16)
+        Me.ucrChkSpecifyLayout.Margin = New System.Windows.Forms.Padding(8, 7, 8, 7)
         Me.ucrChkSpecifyLayout.Name = "ucrChkSpecifyLayout"
-        Me.ucrChkSpecifyLayout.Size = New System.Drawing.Size(267, 48)
-        Me.ucrChkSpecifyLayout.TabIndex = 6
+        Me.ucrChkSpecifyLayout.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkSpecifyLayout.TabIndex = 0
         Me.ucrChkSpecifyLayout.Tag = ""
         '
         'lblNumberofColumns
         '
         Me.lblNumberofColumns.AutoSize = True
-        Me.lblNumberofColumns.Location = New System.Drawing.Point(21, 114)
-        Me.lblNumberofColumns.Margin = New System.Windows.Forms.Padding(8, 0, 8, 0)
+        Me.lblNumberofColumns.Location = New System.Drawing.Point(8, 48)
         Me.lblNumberofColumns.Name = "lblNumberofColumns"
-        Me.lblNumberofColumns.Size = New System.Drawing.Size(273, 32)
-        Me.lblNumberofColumns.TabIndex = 4
+        Me.lblNumberofColumns.Size = New System.Drawing.Size(102, 13)
+        Me.lblNumberofColumns.TabIndex = 1
         Me.lblNumberofColumns.Text = "Number of Columns:"
         '
         'ucrButtonsOneVarGraph
         '
-        Me.ucrButtonsOneVarGraph.Location = New System.Drawing.Point(24, 422)
-        Me.ucrButtonsOneVarGraph.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
+        Me.ucrButtonsOneVarGraph.Location = New System.Drawing.Point(52, 181)
+        Me.ucrButtonsOneVarGraph.Margin = New System.Windows.Forms.Padding(8, 7, 8, 7)
         Me.ucrButtonsOneVarGraph.Name = "ucrButtonsOneVarGraph"
-        Me.ucrButtonsOneVarGraph.Size = New System.Drawing.Size(387, 72)
+        Me.ucrButtonsOneVarGraph.Size = New System.Drawing.Size(145, 30)
         Me.ucrButtonsOneVarGraph.TabIndex = 1
         '
         'sdgOneVarGraph
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(16.0!, 31.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(675, 515)
+        Me.ClientSize = New System.Drawing.Size(253, 216)
         Me.Controls.Add(Me.ucrButtonsOneVarGraph)
         Me.Controls.Add(Me.tbcOneVarGraph)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Margin = New System.Windows.Forms.Padding(8, 7, 8, 7)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgOneVarGraph"
