@@ -97,7 +97,9 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrReceiverFirstVar.Name = "ucrReceiverFirstVar"
         Me.ucrReceiverFirstVar.Selector = Nothing
         Me.ucrReceiverFirstVar.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverFirstVar.strNcFilePath = ""
         Me.ucrReceiverFirstVar.TabIndex = 2
+        Me.ucrReceiverFirstVar.ucrSelector = Nothing
         '
         'ucrReceiverSecondVar
         '
@@ -107,7 +109,9 @@ Partial Class dlgDescribeTwoVariable
         Me.ucrReceiverSecondVar.Name = "ucrReceiverSecondVar"
         Me.ucrReceiverSecondVar.Selector = Nothing
         Me.ucrReceiverSecondVar.Size = New System.Drawing.Size(120, 87)
+        Me.ucrReceiverSecondVar.strNcFilePath = ""
         Me.ucrReceiverSecondVar.TabIndex = 4
+        Me.ucrReceiverSecondVar.ucrSelector = Nothing
         '
         'ucrSelectorDescribeTwoVar
         '
@@ -121,7 +125,7 @@ Partial Class dlgDescribeTwoVariable
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 230)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 250)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 9
@@ -129,7 +133,7 @@ Partial Class dlgDescribeTwoVariable
         'ucrChkSaveResult
         '
         Me.ucrChkSaveResult.Checked = False
-        Me.ucrChkSaveResult.Location = New System.Drawing.Point(10, 198)
+        Me.ucrChkSaveResult.Location = New System.Drawing.Point(10, 224)
         Me.ucrChkSaveResult.Name = "ucrChkSaveResult"
         Me.ucrChkSaveResult.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkSaveResult.TabIndex = 5
@@ -137,7 +141,7 @@ Partial Class dlgDescribeTwoVariable
         'ucrChkOmitMissing
         '
         Me.ucrChkOmitMissing.Checked = False
-        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(137, 198)
+        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(10, 198)
         Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
         Me.ucrChkOmitMissing.Size = New System.Drawing.Size(143, 20)
         Me.ucrChkOmitMissing.TabIndex = 6
@@ -146,7 +150,7 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(426, 288)
+        Me.ClientSize = New System.Drawing.Size(419, 309)
         Me.Controls.Add(Me.ucrChkSaveResult)
         Me.Controls.Add(Me.ucrChkOmitMissing)
         Me.Controls.Add(Me.lbMultipleVariables)
