@@ -42,6 +42,7 @@ Public Class dlgMakeDate
     Private Sub InitialiseDialog()
         'helpID
         ucrBase.iHelpTopicID = 461
+        txtTextDateFormats.ReadOnly = True
 
         Dim dctYearItems As New Dictionary(Of String, String)
         Dim dctMonthItems As New Dictionary(Of String, String)
