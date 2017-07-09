@@ -93,7 +93,7 @@ Public Class ucrSelector
         Dim lstVars As New List(Of String)
 
         For Each tplTemp As Tuple(Of String, String) In lstVariablesInReceivers
-            lstVars.Add(tplTemp.Item2)
+            lstVars.Add(tplTemp.Item1)
         Next
         Return lstVars
     End Function
