@@ -70,6 +70,8 @@ Public Class dlgCalculationsSummary
         sdgCalculationsSummmary.ShowDialog()
         If clsNewCalculationFunction.ContainsParameter("name") Then
             strCalcName = clsNewCalculationFunction.GetParameter("name").strArgumentValue.Trim(Chr(34))
+        Else
+            clsNewCalculationFunction.AddParameter("name", Chr(34) & strCalcName & Chr(34))
         End If
         clsNewCalculationFunction.SetAssignTo(strCalcName)
         dctCalculations.Add(strCalcName, clsNewCalculationFunction)
@@ -105,8 +107,10 @@ Public Class dlgCalculationsSummary
     Private Sub SetEnabledStatusButtons()
         If lstCalculations.SelectedItems.Count > 0 Then
             cmdDelete.Enabled = True
+            cmdEdit.Enabled = True
         Else
             cmdDelete.Enabled = False
+            cmdEdit.Enabled = False
         End If
     End Sub
 
@@ -123,14 +127,14 @@ Public Class dlgCalculationsSummary
         If lstCalculations.SelectedItems.Count = 1 Then
             clsSelectedCalculationFunction = dctCalculations(lstCalculations.SelectedItems(0).Text)
 
-            sdgCalculationsSummmary.Setup(clsNewCalculationFunction:=clsSelectedCalculationFunction, clsNewParentCalculationFunction:=Nothing, bNewIsSubCalc:=False, bNewIsManipulation:=False, bReset:=True)
+            sdgCalculationsSummmary.Setup(clsNewCalculationFunction:=clsSelectedCalculationFunction, clsNewParentCalculationFunction:=Nothing, bNewIsSubCalc:=False, bNewIsManipulation:=False, bReset:=False, bEnableName:=False)
             sdgCalculationsSummmary.ShowDialog()
             If clsSelectedCalculationFunction.ContainsParameter("name") Then
                 strCalcName = clsSelectedCalculationFunction.GetParameter("name").strArgumentValue.Trim(Chr(34))
             Else
+                clsSelectedCalculationFunction.AddParameter("name", Chr(34) & lstCalculations.SelectedItems(0).Text & Chr(34))
                 strCalcName = lstCalculations.SelectedItems(0).Text
             End If
-            clsSelectedCalculationFunction.SetAssignTo(strCalcName)
             lstCalculations.SelectedItems(0).Text = strCalcName
             clsApplyCalculation = ucrBase.clsRsyntax.lstBeforeCodes.Find(Function(x) x.Tag = strCalcName)
             If clsSelectedCalculationFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "save") <> -1 AndAlso clsSelectedCalculationFunction.GetParameter("save").strArgumentValue = "2" Then
@@ -140,6 +144,7 @@ Public Class dlgCalculationsSummary
                 clsApplyCalculation.iCallType = 2
                 clsApplyCalculation.AddParameter("display", "TRUE")
             End If
+            clsApplyCalculation.AddParameter("calc", clsRFunctionParameter:=clsSelectedCalculationFunction)
             TestOKEnabled()
         End If
     End Sub
