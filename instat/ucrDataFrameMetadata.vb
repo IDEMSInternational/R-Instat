@@ -39,6 +39,7 @@ Public Class ucrDataFrameMetadata
         grdCurrSheet = grdMetaData.CurrentWorksheet
         grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
         grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
+        grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToFillSerial, False)
         grdCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
     End Sub
 
@@ -100,7 +101,7 @@ Public Class ucrDataFrameMetadata
                 strComment = "Edited data frame metadata value"
             End If
             Try
-                frmMain.clsRLink.RunScript(strScript, strComment:=strComment)
+                RunScriptFromDataFrameMetadata(strScript, strComment:=strComment)
             Catch
                 e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
             End Try
@@ -141,5 +142,13 @@ Public Class ucrDataFrameMetadata
         If grdCurrSheet IsNot Nothing Then
             grdCurrSheet.SelectAll()
         End If
+    End Sub
+
+    Private Sub RunScriptFromDataFrameMetadata(strScript As String, Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing)
+        Cursor = Cursors.WaitCursor
+        grdMetaData.Enabled = False
+        frmMain.clsRLink.RunScript(strScript:=strScript, iCallType:=iCallType, strComment:=strComment, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+        grdMetaData.Enabled = True
+        Cursor = Cursors.Default
     End Sub
 End Class

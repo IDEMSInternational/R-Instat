@@ -42,8 +42,7 @@ Public Class ucrColumnMetadata
     Private Sub grdVariables_CurrentWorksheetChanged(sender As Object, e As EventArgs) Handles grdVariables.CurrentWorksheetChanged, Me.Load, grdVariables.WorksheetInserted
         grdCurrSheet = grdVariables.CurrentWorksheet
         grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
-        'grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, True)
-        grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
+        grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToFillSerial, False)
         grdCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
     End Sub
 
@@ -107,7 +106,7 @@ Public Class ucrColumnMetadata
                 strComment = "Edited variables metadata value"
             End If
             Try
-                frmMain.clsRLink.RunScript(strScript, strComment:=strComment)
+                RunScriptFromColumnMetadata(strScript, strComment:=strComment)
             Catch
                 e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
             End Try
@@ -155,6 +154,20 @@ Public Class ucrColumnMetadata
     Public Sub SelectAllText()
         If grdCurrSheet IsNot Nothing Then
             grdCurrSheet.SelectAll()
+        End If
+    End Sub
+
+    Private Sub RunScriptFromColumnMetadata(strScript As String, Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing)
+        Cursor = Cursors.WaitCursor
+        grdVariables.Enabled = False
+        frmMain.clsRLink.RunScript(strScript:=strScript, iCallType:=iCallType, strComment:=strComment, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
+        grdVariables.Enabled = True
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub grdVariables_VisibleChanged(sender As Object, e As EventArgs) Handles grdVariables.VisibleChanged
+        If grdVariables.Visible Then
+            grdVariables.SheetTabWidth = Math.Max(grdVariables.SheetTabWidth, 300)
         End If
     End Sub
 End Class
