@@ -23,21 +23,34 @@ Public Class ucrCalculator
     Public Event SaveResultsCheckedChanged()
     Public Event TryCommadClick()
     Public bFirstLoad As Boolean = True
+    Public bControlsInitialised As Boolean = False
+
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        InitialiseControls()
+    End Sub
 
     Private Sub ucrCalculator_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
-            InitialiseControl()
+            If Not bControlsInitialised Then
+                InitialiseControls()
+            End If
             bFirstLoad = False
         End If
     End Sub
 
-    Public Sub InitialiseControl()
+    Public Sub InitialiseControls()
         ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Statistics", "Strings (Character Columns)", "Probability", "Dates", "Rows"}) ' "Rows" is a temp. name
         ucrInputCalOptions.SetDropDownStyleAsNonEditable()
         ucrReceiverForCalculation.Selector = ucrSelectorForCalculations
         cmdTry.Enabled = False
         cmdDoy.Enabled = False ' temp
         cmdDek.Enabled = False ' temp
+        bControlsInitialised = True
     End Sub
 
     Public Sub Reset()

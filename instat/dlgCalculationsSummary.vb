@@ -73,6 +73,7 @@ Public Class dlgCalculationsSummary
         Else
             clsNewCalculationFunction.AddParameter("name", Chr(34) & strCalcName & Chr(34))
         End If
+        'TODO This will cause problems if names are not unique
         clsNewCalculationFunction.SetAssignTo(strCalcName)
         dctCalculations.Add(strCalcName, clsNewCalculationFunction)
         lstCalculations.Items.Add(strCalcName)
@@ -126,26 +127,29 @@ Public Class dlgCalculationsSummary
 
         If lstCalculations.SelectedItems.Count = 1 Then
             clsSelectedCalculationFunction = dctCalculations(lstCalculations.SelectedItems(0).Text)
-
-            sdgCalculationsSummmary.Setup(clsNewCalculationFunction:=clsSelectedCalculationFunction, clsNewParentCalculationFunction:=Nothing, bNewIsSubCalc:=False, bNewIsManipulation:=False, bReset:=False, bEnableName:=False)
-            sdgCalculationsSummmary.ShowDialog()
-            If clsSelectedCalculationFunction.ContainsParameter("name") Then
-                strCalcName = clsSelectedCalculationFunction.GetParameter("name").strArgumentValue.Trim(Chr(34))
+            If clsSelectedCalculationFunction.ContainsParameter("type") AndAlso {"by", "filter"}.Contains(clsSelectedCalculationFunction.GetParameter("type").strArgumentValue.Trim(Chr(34))) Then
+                MsgBox("Sorry, editing 'by' and 'filter' calculations is not yet implemented", MsgBoxStyle.Information, "Cannot edit")
             Else
-                clsSelectedCalculationFunction.AddParameter("name", Chr(34) & lstCalculations.SelectedItems(0).Text & Chr(34))
-                strCalcName = lstCalculations.SelectedItems(0).Text
+                sdgCalculationsSummmary.Setup(clsNewCalculationFunction:=clsSelectedCalculationFunction, clsNewParentCalculationFunction:=Nothing, bNewIsSubCalc:=False, bNewIsManipulation:=False, bReset:=False, bEnableName:=False)
+                sdgCalculationsSummmary.ShowDialog()
+                If clsSelectedCalculationFunction.ContainsParameter("name") Then
+                    strCalcName = clsSelectedCalculationFunction.GetParameter("name").strArgumentValue.Trim(Chr(34))
+                Else
+                    clsSelectedCalculationFunction.AddParameter("name", Chr(34) & lstCalculations.SelectedItems(0).Text & Chr(34))
+                    strCalcName = lstCalculations.SelectedItems(0).Text
+                End If
+                lstCalculations.SelectedItems(0).Text = strCalcName
+                clsApplyCalculation = ucrBase.clsRsyntax.lstBeforeCodes.Find(Function(x) x.Tag = strCalcName)
+                If clsSelectedCalculationFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "save") <> -1 AndAlso clsSelectedCalculationFunction.GetParameter("save").strArgumentValue = "2" Then
+                    clsApplyCalculation.iCallType = 0
+                    clsApplyCalculation.AddParameter("display", "FALSE")
+                Else
+                    clsApplyCalculation.iCallType = 2
+                    clsApplyCalculation.AddParameter("display", "TRUE")
+                End If
+                clsApplyCalculation.AddParameter("calc", clsRFunctionParameter:=clsSelectedCalculationFunction)
+                TestOKEnabled()
             End If
-            lstCalculations.SelectedItems(0).Text = strCalcName
-            clsApplyCalculation = ucrBase.clsRsyntax.lstBeforeCodes.Find(Function(x) x.Tag = strCalcName)
-            If clsSelectedCalculationFunction.clsParameters.FindIndex(Function(x) x.strArgumentName = "save") <> -1 AndAlso clsSelectedCalculationFunction.GetParameter("save").strArgumentValue = "2" Then
-                clsApplyCalculation.iCallType = 0
-                clsApplyCalculation.AddParameter("display", "FALSE")
-            Else
-                clsApplyCalculation.iCallType = 2
-                clsApplyCalculation.AddParameter("display", "TRUE")
-            End If
-            clsApplyCalculation.AddParameter("calc", clsRFunctionParameter:=clsSelectedCalculationFunction)
-            TestOKEnabled()
         End If
     End Sub
 End Class
