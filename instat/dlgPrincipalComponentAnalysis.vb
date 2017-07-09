@@ -110,7 +110,7 @@ Public Class dlgPrincipalComponentAnalysis
         clsPCAFunction.SetRCommand("PCA")
         clsPCAFunction.AddParameter("ncp", 2)
         clsPCAFunction.AddParameter("graph", "FALSE") ' I don't know what this is for, but it's in there?
-        clsPCAFunction.SetAssignTo(ucrSaveResult.GetText, strTempModel:=ucrSaveResult.GetText, strTempDataframe:=ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
+        clsPCAFunction.SetAssignTo("last_PCA", strTempModel:="last_PCA", strTempDataframe:=ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem)
 
         clsREigenValues.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_from_model")
         clsREigenValues.AddParameter("value1", Chr(34) & "eig" & Chr(34))
@@ -134,7 +134,6 @@ Public Class dlgPrincipalComponentAnalysis
         clsRRotation.AddParameter("STATS", "sqrt(" & clsRRotationEig.ToScript.ToString & "[,1])")
         clsRRotation.AddParameter("FUN", " '/'")
         clsRRotation.iCallType = 2
-
 
         ' Scree Function
         clsRScreePlot.SetOperation("+")
@@ -222,9 +221,8 @@ Public Class dlgPrincipalComponentAnalysis
     Private Sub SetRCodeforControls(bReset As Boolean)
         ucrSelectorPCA.AddAdditionalCodeParameterPair(clsREigenVectors, ucrSelectorPCA.GetParameter, iAdditionalPairNo:=1)
         ucrSelectorPCA.AddAdditionalCodeParameterPair(clsRRotationCoord, ucrSelectorPCA.GetParameter, iAdditionalPairNo:=2)
-        ucrSelectorPCA.AddAdditionalCodeParameterPair(clsRRotationEig, ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem, iAdditionalPairNo:=3)
+        ucrSelectorPCA.AddAdditionalCodeParameterPair(clsRRotationEig, ucrSelectorPCA.GetParameter, iAdditionalPairNo:=3)
 
-        'ucrSelectorPCA.SetRCode(clsRRotation, bReset)
         ucrSelectorPCA.SetRCode(clsREigenValues, bReset)
         ucrReceiverMultiplePCA.SetRCode(clsPCAFunction, bReset)
         ucrSaveResult.SetRCode(clsPCAFunction, bReset)
@@ -266,10 +264,6 @@ Public Class dlgPrincipalComponentAnalysis
         End If
     End Sub
 
-    Private Sub ucrSaveResult_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveResult.ControlValueChanged
-        'Modelname()
-    End Sub
-
     Private Sub ucrReceiverMultiplePCA_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultiplePCA.ControlValueChanged, ucrNudNumberOfComp.ControlValueChanged
         If ucrReceiverMultiplePCA.IsEmpty Then
             ucrNudNumberOfComp.Minimum = 0
@@ -287,7 +281,7 @@ Public Class dlgPrincipalComponentAnalysis
     End Sub
 
     Private Sub ucrSelectorPCA_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorPCA.ControlValueChanged
-        'clsRRotationEig.AddParameter("data_name", Chr(34) & ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
+        clsRRotationEig.AddParameter("data_name", Chr(34) & ucrSelectorPCA.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34))
         Modelname()
     End Sub
 

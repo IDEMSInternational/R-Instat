@@ -51,9 +51,7 @@ Public Class sdgPrincipalComponentAnalysis
         ucrChkRotation.AddParameterPresentCondition(True, "MARGIN")
         ucrChkRotation.AddParameterPresentCondition(False, "MARGIN", False)
 
-        'ucrNudDim1.SetParameter(New RParameter("axes"))
         ucrNudDim1.SetMinMax(1, 2)
-        'ucrNudDim2.SetParameter(New RParameter("axes"))
         ucrNudDim2.SetMinMax(1, 2)
 
         ucrPnlGraphics.AddRadioButton(rdoScreePlot)
@@ -140,7 +138,6 @@ Public Class sdgPrincipalComponentAnalysis
         bControlsInitialised = True
         'TODO: disabled for now because it has a bugs
         rdoBarPlot.Enabled = False
-        'ucrChkRotation.Enabled = False
     End Sub
 
     Public Sub SetRFunction(clsNewRsyntax As RSyntax, clsNewREigenValues As RFunction, clsNewREigenVectors As RFunction, clsNewRRotation As RFunction, clsNewScreePlotFunction As RFunction, clsNewVariablesPlotFunction As RFunction, clsNewIndividualsPlotFunction As RFunction, clsNewBiplotFunction As RFunction, clsNewBarPlotFunction As RFunction, Optional bReset As Boolean = False)
@@ -162,7 +159,6 @@ Public Class sdgPrincipalComponentAnalysis
         ucrInputLabel2.AddAdditionalCodeParameterPair(clsRBiplotFunction, New RParameter("label"), iAdditionalPairNo:=3)
 
         ucrPnlIndividualPlot.AddAdditionalCodeParameterPair(clsRBiplotFunction, New RParameter("geom"), iAdditionalPairNo:=1)
-        ucrPnlScreePlot.AddAdditionalCodeParameterPair(clsRScreePlotFunction, New RParameter("geom"), iAdditionalPairNo:=2)
 
         ucrPnlVariablesPlot.SetRCode(clsRVariablesPlotFunction, bReset, bCloneIfNeeded:=True)
         ucrPnlIndividualPlot.SetRCode(clsRIndividualsPlotFunction, bReset, bCloneIfNeeded:=True)
@@ -174,7 +170,7 @@ Public Class sdgPrincipalComponentAnalysis
         ucrChkEigenvectors.SetRCode(clsREigenVectors, bReset, bCloneIfNeeded:=True)
         ucrChkRotation.SetRCode(clsRRotation, bReset, bCloneIfNeeded:=True)
         ucrPnlGraphics.SetRSyntax(clsRsyntax, bReset)
-        ucrPnlScreePlot.SetRSyntax(clsRsyntax, bReset)
+        ucrPnlScreePlot.SetRCode(clsRScreePlotFunction, bReset)
 
         'Not sure how this can be passed by the control.
         clsRVariablesPlotFunction.AddParameter("axes", "c(" & ucrNudDim1.Value & ", " & ucrNudDim2.Value & ")")
@@ -242,14 +238,6 @@ Public Class sdgPrincipalComponentAnalysis
             clsRsyntax.RemoveFromAfterCodes(clsRBiplotFunction)
             clsRsyntax.RemoveFromAfterCodes(clsRScreePlotFunction)
         End If
-        'If rdoScreePlot.Checked Then
-        '    grpGeom.Visible = True
-        '    ucrPnlScreePlot.Visible = True
-        'ElseIf rdoIndividualsPlot.Checked Then
-        '    ucrPnlIndividualPlot.Visible = True
-        'ElseIf rdoVariablesPlot.Checked OrElse rdoBiplot.Checked Then
-        '    ucrPnlVariablesPlot.Visible = True
-        'End If
     End Sub
 
     ' Here, the minimum and maximum dimensions selected rely on a few things
