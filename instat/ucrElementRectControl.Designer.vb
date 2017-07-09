@@ -74,7 +74,7 @@ Partial Class ucrElementRectControl
         Me.ucrRectFill.Location = New System.Drawing.Point(105, 93)
         Me.ucrRectFill.Name = "ucrRectFill"
         Me.ucrRectFill.Size = New System.Drawing.Size(137, 21)
-        Me.ucrRectFill.TabIndex = 98
+        Me.ucrRectFill.TabIndex = 7
         '
         'ucrRectColors
         '
@@ -83,7 +83,7 @@ Partial Class ucrElementRectControl
         Me.ucrRectColors.Location = New System.Drawing.Point(105, 68)
         Me.ucrRectColors.Name = "ucrRectColors"
         Me.ucrRectColors.Size = New System.Drawing.Size(137, 21)
-        Me.ucrRectColors.TabIndex = 95
+        Me.ucrRectColors.TabIndex = 5
         '
         'ucrChkRectFill
         '
@@ -91,7 +91,7 @@ Partial Class ucrElementRectControl
         Me.ucrChkRectFill.Location = New System.Drawing.Point(6, 94)
         Me.ucrChkRectFill.Name = "ucrChkRectFill"
         Me.ucrChkRectFill.Size = New System.Drawing.Size(88, 20)
-        Me.ucrChkRectFill.TabIndex = 94
+        Me.ucrChkRectFill.TabIndex = 6
         '
         'ucrChkRectSize
         '
@@ -99,7 +99,7 @@ Partial Class ucrElementRectControl
         Me.ucrChkRectSize.Location = New System.Drawing.Point(8, 19)
         Me.ucrChkRectSize.Name = "ucrChkRectSize"
         Me.ucrChkRectSize.Size = New System.Drawing.Size(88, 20)
-        Me.ucrChkRectSize.TabIndex = 93
+        Me.ucrChkRectSize.TabIndex = 0
         '
         'ucrChkRectLineType
         '
@@ -107,7 +107,7 @@ Partial Class ucrElementRectControl
         Me.ucrChkRectLineType.Location = New System.Drawing.Point(8, 44)
         Me.ucrChkRectLineType.Name = "ucrChkRectLineType"
         Me.ucrChkRectLineType.Size = New System.Drawing.Size(88, 20)
-        Me.ucrChkRectLineType.TabIndex = 92
+        Me.ucrChkRectLineType.TabIndex = 2
         '
         'ucrChkRectColour
         '
@@ -115,7 +115,7 @@ Partial Class ucrElementRectControl
         Me.ucrChkRectColour.Location = New System.Drawing.Point(6, 69)
         Me.ucrChkRectColour.Name = "ucrChkRectColour"
         Me.ucrChkRectColour.Size = New System.Drawing.Size(88, 20)
-        Me.ucrChkRectColour.TabIndex = 91
+        Me.ucrChkRectColour.TabIndex = 4
         '
         'ucrNudRectSize
         '
@@ -126,7 +126,7 @@ Partial Class ucrElementRectControl
         Me.ucrNudRectSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudRectSize.Name = "ucrNudRectSize"
         Me.ucrNudRectSize.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudRectSize.TabIndex = 89
+        Me.ucrNudRectSize.TabIndex = 1
         Me.ucrNudRectSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrInputRectLineType
@@ -137,7 +137,7 @@ Partial Class ucrElementRectControl
         Me.ucrInputRectLineType.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputRectLineType.Name = "ucrInputRectLineType"
         Me.ucrInputRectLineType.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputRectLineType.TabIndex = 88
+        Me.ucrInputRectLineType.TabIndex = 3
         '
         'ucrElementRectControl
         '
