@@ -22,7 +22,6 @@ Public Class sdgCalculationsSummmary
     Private bRCodeSet As Boolean = True
     Private clsCalculationFunction As New RFunction
     Private clsParentCalculationFunction As New RFunction
-    Private lstManipulationFunctions As New Dictionary(Of String, RFunction)
     Dim clsSubCalcsList As New RFunction
     Dim clsManipulationsList As New RFunction
     Dim iSubCalcCount As Integer = 0
@@ -71,6 +70,10 @@ Public Class sdgCalculationsSummmary
         ucrCalcSummary.ucrInputTryMessage.Visible = False
 
         ucrManipulations.bIsDataType = False
+        ucrManipulations.cmdBottom.Enabled = False
+        ucrManipulations.cmdDown.Enabled = False
+        ucrManipulations.cmdTop.Enabled = False
+        ucrManipulations.cmdUp.Enabled = False
 
         cmdManipDuplicate.Enabled = False
         cmdSubCalcDuplicate.Enabled = False
@@ -80,6 +83,7 @@ Public Class sdgCalculationsSummmary
     Public Sub SetDefaults()
         ucrSelectorBy.Reset()
         ucrCalcSummary.ucrSelectorForCalculations.Reset()
+        ucrDefineFilter.ucrSelectorForFitler.Reset()
 
         iSubCalcCount = 0
         iManipCount = 0
@@ -120,6 +124,7 @@ Public Class sdgCalculationsSummmary
 
     Public Sub Setup(clsNewCalculationFunction As RFunction, clsNewParentCalculationFunction As RFunction, Optional bNewIsSubCalc As Boolean = False, Optional bNewIsManipulation As Boolean = False, Optional bReset As Boolean = False, Optional bEnableName As Boolean = True)
         Dim strFuncExp As String
+        Dim strFirstDataFrame As String
 
         If Not bControlsInitialised Then
             InitialiseControls()
@@ -151,8 +156,18 @@ Public Class sdgCalculationsSummmary
         If bReset Then
             SetDefaults()
         End If
-        'Which one?
+        tbSummaryCalcs.SelectedIndex = 0
         SetRCodeForControls(bReset)
+        strFirstDataFrame = GetFirstCalculatedFromDataFrame()
+        If strFirstDataFrame <> "" Then
+            ucrCalcSummary.ucrSelectorForCalculations.SetDataframe(strFirstDataFrame)
+            ucrDefineFilter.ucrSelectorForFitler.SetDataframe(strFirstDataFrame)
+            ucrSelectorBy.SetDataframe(strFirstDataFrame)
+        Else
+            ucrCalcSummary.ucrSelectorForCalculations.Reset()
+            ucrDefineFilter.ucrSelectorForFitler.Reset()
+            ucrSelectorBy.Reset()
+        End If
         DisplayOptions()
         If clsCalculationFunction.ContainsParameter("function_exp") Then
             strFuncExp = clsCalculationFunction.GetParameter("function_exp").strArgumentValue
@@ -186,6 +201,20 @@ Public Class sdgCalculationsSummmary
         ucrPnlSave.SetRCode(clsCalculationFunction, bReset, bCloneIfNeeded:=True)
         bRCodeSet = True
     End Sub
+
+    Private Function GetFirstCalculatedFromDataFrame() As String
+        Dim strCalcFrom As String
+        Dim strDataFrame As String = ""
+
+        If clsCalculationFunction.ContainsParameter("calculated_from") Then
+            strCalcFrom = clsCalculationFunction.GetParameter("calculated_from").strArgumentValue
+            If strCalcFrom.StartsWith("list(") Then
+                strDataFrame = strCalcFrom.Substring(5)
+                strDataFrame = strDataFrame.Substring(0, strDataFrame.IndexOf(" "))
+            End If
+        End If
+        Return strDataFrame
+    End Function
 
     Private Sub DisplayOptions()
         If bRCodeSet Then
@@ -278,7 +307,8 @@ Public Class sdgCalculationsSummmary
         Else
             clsSubCalcFunction.AddParameter("name", Chr(34) & strCalcName & Chr(34))
         End If
-        clsSubCalcFunction.SetAssignTo(strCalcName)
+        'Cannot assign because names might not be unique
+        'clsSubCalcFunction.SetAssignTo(strCalcName)
         lstSubCalcs.Items.Add(strCalcName)
         clsSubCalcsList.AddParameter(strCalcName, clsRFunctionParameter:=clsSubCalcFunction)
         UpdateSubCalculations()
@@ -304,9 +334,9 @@ Public Class sdgCalculationsSummmary
         Else
             clsManipFunction.AddParameter("name", Chr(34) & strCalcName & Chr(34))
         End If
-        clsManipFunction.SetAssignTo(strCalcName)
+        'Cannot assign because names might not be unique
+        'clsManipFunction.SetAssignTo(strCalcName)
         ucrManipulations.lstAvailableData.Items.Add(strCalcName)
-        lstManipulationFunctions.Add(strCalcName, clsManipFunction.Clone())
         clsManipulationsList.AddParameter(strCalcName, clsRFunctionParameter:=clsManipFunction)
         UpdateManipulations()
     End Sub
@@ -382,7 +412,6 @@ Public Class sdgCalculationsSummmary
         For Each lviTemp As ListViewItem In ucrManipulations.lstAvailableData.SelectedItems
             iIndex = ucrManipulations.lstAvailableData.Items.IndexOf(lviTemp)
             ucrManipulations.lstAvailableData.Items.Remove(lviTemp)
-            lstManipulationFunctions.Remove(lviTemp.Text)
         Next
         UpdateManipulations()
     End Sub
@@ -442,11 +471,14 @@ Public Class sdgCalculationsSummmary
         Dim sdgSubCalc As New sdgCalculationsSummmary
 
         If lstSubCalcs.SelectedItems.Count = 1 Then
-
             clsSelectedSubCalcFunction = GetSubCalc(lstSubCalcs.SelectedItems(0).Text)
             If clsSelectedSubCalcFunction IsNot Nothing Then
-                sdgSubCalc.Setup(clsNewCalculationFunction:=clsSelectedSubCalcFunction, clsNewParentCalculationFunction:=clsCalculationFunction, bNewIsSubCalc:=True, bNewIsManipulation:=False, bReset:=False, bEnableName:=False)
-                sdgSubCalc.ShowDialog()
+                If clsSelectedSubCalcFunction.ContainsParameter("type") AndAlso {"by", "filter"}.Contains(clsSelectedSubCalcFunction.GetParameter("type").strArgumentValue.Trim(Chr(34))) Then
+                    MsgBox("Sorry, editing 'by' and 'filter' calculations is not yet implemented", MsgBoxStyle.Information, "Cannot edit")
+                Else
+                    sdgSubCalc.Setup(clsNewCalculationFunction:=clsSelectedSubCalcFunction, clsNewParentCalculationFunction:=clsCalculationFunction, bNewIsSubCalc:=True, bNewIsManipulation:=False, bReset:=False, bEnableName:=False)
+                    sdgSubCalc.ShowDialog()
+                End If
             Else
                 MsgBox("Sorry, cannot find sub calculation for editing", MsgBoxStyle.Information, "Cannot edit")
             End If
@@ -456,6 +488,38 @@ Public Class sdgCalculationsSummmary
     Private Function GetSubCalc(strName As String) As RFunction
         Dim clsTempFunc As RFunction
         For Each clsParam In clsSubCalcsList.clsParameters
+            If clsParam IsNot Nothing AndAlso clsParam.bIsFunction AndAlso clsParam.clsArgumentCodeStructure IsNot Nothing Then
+                clsTempFunc = clsParam.clsArgumentCodeStructure
+                If clsTempFunc.ContainsParameter("name") AndAlso clsTempFunc.GetParameter("name").strArgumentValue.Trim(Chr(34)) = strName Then
+                    Return clsTempFunc
+                End If
+            End If
+        Next
+        Return Nothing
+    End Function
+
+    Private Sub cmdManipEdit_Click(sender As Object, e As EventArgs) Handles cmdManipEdit.Click
+        Dim clsSelectedManipulationFunction As RFunction
+        Dim sdgManipulation As New sdgCalculationsSummmary
+
+        If ucrManipulations.lstAvailableData.SelectedItems.Count = 1 Then
+            clsSelectedManipulationFunction = GetManipulation(ucrManipulations.lstAvailableData.SelectedItems(0).Text)
+            If clsSelectedManipulationFunction IsNot Nothing Then
+                If clsSelectedManipulationFunction.ContainsParameter("type") AndAlso {"by", "filter"}.Contains(clsSelectedManipulationFunction.GetParameter("type").strArgumentValue.Trim(Chr(34))) Then
+                    MsgBox("Sorry, editing 'by' and 'filter' calculations is not yet implemented", MsgBoxStyle.Information, "Cannot edit")
+                Else
+                    sdgManipulation.Setup(clsNewCalculationFunction:=clsSelectedManipulationFunction, clsNewParentCalculationFunction:=clsCalculationFunction, bNewIsSubCalc:=False, bNewIsManipulation:=True, bReset:=False, bEnableName:=False)
+                    sdgManipulation.ShowDialog()
+                End If
+            Else
+                MsgBox("Sorry, cannot find sub calculation for editing", MsgBoxStyle.Information, "Cannot edit")
+            End If
+        End If
+    End Sub
+
+    Private Function GetManipulation(strName As String) As RFunction
+        Dim clsTempFunc As RFunction
+        For Each clsParam In clsManipulationsList.clsParameters
             If clsParam IsNot Nothing AndAlso clsParam.bIsFunction AndAlso clsParam.clsArgumentCodeStructure IsNot Nothing Then
                 clsTempFunc = clsParam.clsArgumentCodeStructure
                 If clsTempFunc.ContainsParameter("name") AndAlso clsTempFunc.GetParameter("name").strArgumentValue.Trim(Chr(34)) = strName Then
