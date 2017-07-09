@@ -41,18 +41,18 @@ Partial Class dlgPrincipalComponentAnalysis
         Me.lblExplanatoryVariables = New System.Windows.Forms.Label()
         Me.cmdPCAOptions = New System.Windows.Forms.Button()
         Me.lblComponents = New System.Windows.Forms.Label()
+        Me.ucrChkScaleData = New instat.ucrCheck()
+        Me.ucrSaveResult = New instat.ucrSave()
+        Me.ucrNudNumberOfComp = New instat.ucrNud()
         Me.ucrReceiverMultiplePCA = New instat.ucrReceiverMultiple()
         Me.ucrSelectorPCA = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrNudNumberOfComp = New instat.ucrNud()
-        Me.ucrSaveResult = New instat.ucrSave()
-        Me.ucrChkScaleData = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblExplanatoryVariables
         '
         Me.lblExplanatoryVariables.AutoSize = True
-        Me.lblExplanatoryVariables.Location = New System.Drawing.Point(247, 45)
+        Me.lblExplanatoryVariables.Location = New System.Drawing.Point(247, 19)
         Me.lblExplanatoryVariables.Name = "lblExplanatoryVariables"
         Me.lblExplanatoryVariables.Size = New System.Drawing.Size(111, 13)
         Me.lblExplanatoryVariables.TabIndex = 1
@@ -61,9 +61,9 @@ Partial Class dlgPrincipalComponentAnalysis
         '
         'cmdPCAOptions
         '
-        Me.cmdPCAOptions.Location = New System.Drawing.Point(302, 204)
+        Me.cmdPCAOptions.Location = New System.Drawing.Point(270, 262)
         Me.cmdPCAOptions.Name = "cmdPCAOptions"
-        Me.cmdPCAOptions.Size = New System.Drawing.Size(106, 23)
+        Me.cmdPCAOptions.Size = New System.Drawing.Size(136, 23)
         Me.cmdPCAOptions.TabIndex = 6
         Me.cmdPCAOptions.Tag = "PCA_Options..."
         Me.cmdPCAOptions.Text = "Options..."
@@ -72,21 +72,48 @@ Partial Class dlgPrincipalComponentAnalysis
         'lblComponents
         '
         Me.lblComponents.AutoSize = True
-        Me.lblComponents.Location = New System.Drawing.Point(247, 154)
+        Me.lblComponents.Location = New System.Drawing.Point(234, 194)
         Me.lblComponents.Name = "lblComponents"
         Me.lblComponents.Size = New System.Drawing.Size(121, 13)
         Me.lblComponents.TabIndex = 3
         Me.lblComponents.Tag = "Number_of_Components"
         Me.lblComponents.Text = "Number of Components:"
         '
+        'ucrChkScaleData
+        '
+        Me.ucrChkScaleData.Checked = False
+        Me.ucrChkScaleData.Location = New System.Drawing.Point(250, 228)
+        Me.ucrChkScaleData.Name = "ucrChkScaleData"
+        Me.ucrChkScaleData.Size = New System.Drawing.Size(156, 20)
+        Me.ucrChkScaleData.TabIndex = 5
+        '
+        'ucrSaveResult
+        '
+        Me.ucrSaveResult.Location = New System.Drawing.Point(10, 263)
+        Me.ucrSaveResult.Name = "ucrSaveResult"
+        Me.ucrSaveResult.Size = New System.Drawing.Size(255, 24)
+        Me.ucrSaveResult.TabIndex = 7
+        '
+        'ucrNudNumberOfComp
+        '
+        Me.ucrNudNumberOfComp.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumberOfComp.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudNumberOfComp.Location = New System.Drawing.Point(356, 191)
+        Me.ucrNudNumberOfComp.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudNumberOfComp.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumberOfComp.Name = "ucrNudNumberOfComp"
+        Me.ucrNudNumberOfComp.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudNumberOfComp.TabIndex = 4
+        Me.ucrNudNumberOfComp.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'ucrReceiverMultiplePCA
         '
         Me.ucrReceiverMultiplePCA.frmParent = Me
-        Me.ucrReceiverMultiplePCA.Location = New System.Drawing.Point(247, 60)
+        Me.ucrReceiverMultiplePCA.Location = New System.Drawing.Point(247, 34)
         Me.ucrReceiverMultiplePCA.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultiplePCA.Name = "ucrReceiverMultiplePCA"
         Me.ucrReceiverMultiplePCA.Selector = Nothing
-        Me.ucrReceiverMultiplePCA.Size = New System.Drawing.Size(120, 88)
+        Me.ucrReceiverMultiplePCA.Size = New System.Drawing.Size(138, 128)
         Me.ucrReceiverMultiplePCA.strNcFilePath = ""
         Me.ucrReceiverMultiplePCA.TabIndex = 2
         Me.ucrReceiverMultiplePCA.ucrSelector = Nothing
@@ -95,7 +122,7 @@ Partial Class dlgPrincipalComponentAnalysis
         '
         Me.ucrSelectorPCA.bShowHiddenColumns = False
         Me.ucrSelectorPCA.bUseCurrentFilter = True
-        Me.ucrSelectorPCA.Location = New System.Drawing.Point(10, 10)
+        Me.ucrSelectorPCA.Location = New System.Drawing.Point(10, 19)
         Me.ucrSelectorPCA.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorPCA.Name = "ucrSelectorPCA"
         Me.ucrSelectorPCA.Size = New System.Drawing.Size(210, 180)
@@ -103,43 +130,16 @@ Partial Class dlgPrincipalComponentAnalysis
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 233)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 299)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 8
-        '
-        'ucrNudNumberOfComp
-        '
-        Me.ucrNudNumberOfComp.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNumberOfComp.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNumberOfComp.Location = New System.Drawing.Point(370, 151)
-        Me.ucrNudNumberOfComp.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudNumberOfComp.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNumberOfComp.Name = "ucrNudNumberOfComp"
-        Me.ucrNudNumberOfComp.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudNumberOfComp.TabIndex = 4
-        Me.ucrNudNumberOfComp.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrSaveResult
-        '
-        Me.ucrSaveResult.Location = New System.Drawing.Point(10, 204)
-        Me.ucrSaveResult.Name = "ucrSaveResult"
-        Me.ucrSaveResult.Size = New System.Drawing.Size(255, 24)
-        Me.ucrSaveResult.TabIndex = 7
-        '
-        'ucrChkScaleData
-        '
-        Me.ucrChkScaleData.Checked = False
-        Me.ucrChkScaleData.Location = New System.Drawing.Point(250, 175)
-        Me.ucrChkScaleData.Name = "ucrChkScaleData"
-        Me.ucrChkScaleData.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkScaleData.TabIndex = 5
         '
         'dlgPrincipalComponentAnalysis
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(426, 290)
+        Me.ClientSize = New System.Drawing.Size(419, 356)
         Me.Controls.Add(Me.ucrChkScaleData)
         Me.Controls.Add(Me.ucrSaveResult)
         Me.Controls.Add(Me.ucrNudNumberOfComp)
