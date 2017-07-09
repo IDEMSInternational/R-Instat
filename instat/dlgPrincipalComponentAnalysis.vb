@@ -24,7 +24,7 @@ Public Class dlgPrincipalComponentAnalysis
     Private clsRScreePlotFunction, clsRScreePlotTheme, clsRVariablesPlotFunction, clsRVariablesPlotTheme, clsRIndividualsPlotFunction, clsRIndividualsPlotTheme, clsRBiplotFunction, clsRBiplotTheme, clsRBarPlotFunction As New RFunction
     Private clsRFactor, clsRMelt, clsRBarPlotGeom, clsRBarPlotAes, clsRBarPlotFacet As New RFunction
     Private clsRScreePlot, clsRVariablesPlot, clsRIndividualsPlot, clsRBiplot As New RSyntax
-    Dim clsRBarPlot, clsRBarPlot0 As New ROperator
+    Dim clsRBarPlot, clsRBarPlot0, clsRScreePlotOp As New ROperator
     ' call all classes in the sub dialog
 
     Private Sub dlgPrincipalComponentAnalysis_oad(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -83,7 +83,7 @@ Public Class dlgPrincipalComponentAnalysis
         clsRRotationEig = New RFunction
         clsRRotationCoord = New RFunction
         clsRScreePlotTheme = New RFunction
-        clsRScreePlot = New RSyntax
+        clsRScreePlotOp = New ROperator
         clsRScreePlotFunction = New RFunction
         clsRVariablesPlotFunction = New RFunction
         clsRVariablesPlotTheme = New RFunction
@@ -136,7 +136,7 @@ Public Class dlgPrincipalComponentAnalysis
         clsRRotation.iCallType = 2
 
         ' Scree Function
-        clsRScreePlot.SetOperation("+")
+        clsRScreePlotOp.SetOperation("+")
         clsRScreePlotFunction.SetPackageName("factoextra")
         clsRScreePlotFunction.SetRCommand("fviz_screeplot")
         clsRScreePlotFunction.iCallType = 3

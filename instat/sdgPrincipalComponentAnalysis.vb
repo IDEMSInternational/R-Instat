@@ -66,22 +66,22 @@ Public Class sdgPrincipalComponentAnalysis
         ucrPnlGraphics.AddRSyntaxContainsFunctionNamesCondition(rdoBiplot, {"fviz_pca_biplot"})
         ucrPnlGraphics.AddRSyntaxContainsFunctionNamesCondition(rdoBarPlot, {"ggplot"})
 
-        ucrPnlScreePlot.SetParameter(New RParameter("geom"))
+        ucrPnlScreePlot.SetParameter(New RParameter("geom", 3))
         ucrPnlScreePlot.AddRadioButton(rdoBar, Chr(34) & "bar" & Chr(34))
         ucrPnlScreePlot.AddRadioButton(rdoLine, Chr(34) & "line" & Chr(34))
         ucrPnlScreePlot.AddRadioButton(rdoBothScree, "c(" & Chr(34) & "bar" & Chr(34) & "," & Chr(34) & "line" & Chr(34) & ")")
 
-        ucrPnlVariablesPlot.SetParameter(New RParameter("geom"))
+        ucrPnlVariablesPlot.SetParameter(New RParameter("geom", 3))
         ucrPnlVariablesPlot.AddRadioButton(rdoArrow, Chr(34) & "arrow" & Chr(34))
         ucrPnlVariablesPlot.AddRadioButton(rdoTextVariables, Chr(34) & "text" & Chr(34))
         ucrPnlVariablesPlot.AddRadioButton(rdoBothVariables, "c(" & Chr(34) & "arrow" & Chr(34) & "," & Chr(34) & "text" & Chr(34) & ")")
 
-        ucrPnlIndividualPlot.SetParameter(New RParameter("geom"))
+        ucrPnlIndividualPlot.SetParameter(New RParameter("geom", 3))
         ucrPnlIndividualPlot.AddRadioButton(rdoPoint, Chr(34) & "point" & Chr(34))
         ucrPnlIndividualPlot.AddRadioButton(rdoTextIndividual, Chr(34) & "text" & Chr(34))
         ucrPnlIndividualPlot.AddRadioButton(rdoBothIndividual, "c(" & Chr(34) & "point" & Chr(34) & "," & Chr(34) & "text" & Chr(34) & ")")
 
-        ucrChkIncludePercentage.SetParameter(New RParameter("addlabels"))
+        ucrChkIncludePercentage.SetParameter(New RParameter("addlabels", 4))
         ucrChkIncludePercentage.SetText("Include Percentages")
         ucrChkIncludePercentage.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkIncludePercentage.SetRDefault("FALSE")
@@ -89,14 +89,14 @@ Public Class sdgPrincipalComponentAnalysis
         ucrPnlScreePlot.SetLinkedDisplayControl(grpGeom)
         ucrPnlVariablesPlot.SetLinkedDisplayControl(grpVariablePlot)
 
-        ucrInputLabel1.SetParameter(New RParameter("choice"))
+        ucrInputLabel1.SetParameter(New RParameter("choice", 5))
         dctLabelOptionsChoice.Add("Variance", Chr(34) & "variance" & Chr(34))
         dctLabelOptionsChoice.Add("Eigenvalue", Chr(34) & "eigenvalue" & Chr(34))
         ' our default is variance. not sure r-default. check.
         ucrInputLabel1.SetDropDownStyleAsNonEditable()
         ucrInputLabel1.SetItems(dctLabelOptionsChoice)
 
-        ucrInputLabel2.SetParameter(New RParameter("label"))
+        ucrInputLabel2.SetParameter(New RParameter("label", 6))
         dctOptionsForLabel.Add("All", Chr(34) & "all" & Chr(34))
         dctOptionsForLabel.Add("Individuals", Chr(34) & "ind" & Chr(34))
         dctOptionsForLabel.Add("Supplementary Individuals", Chr(34) & "ind.sup" & Chr(34))
@@ -108,7 +108,7 @@ Public Class sdgPrincipalComponentAnalysis
         ucrInputLabel2.SetRDefault("all")
         ucrInputLabel2.SetDropDownStyleAsNonEditable()
 
-        ucrReceiverFactor.SetParameter(New RParameter("factor_col"))
+        ucrReceiverFactor.SetParameter(New RParameter("factor_col", 7))
         ucrReceiverFactor.SetParameterIsRFunction()
         ucrReceiverFactor.Selector = ucrSelectorFactor
         ucrReceiverFactor.SetDataType("factor")
