@@ -104,20 +104,21 @@ Public Class ucrVariablesAsFactor
     Public Function GetIDVarNamesFromSelector(Optional bWithQuotes As Boolean = True) As String
         Dim strIDVars As String
         Dim arrTemp(Selector.lstVariablesInReceivers.Count - 1) As String
-        Dim lstVariablesFromSelector As List(Of String)
+        Dim lstVariablesFromSelector As New List(Of Tuple(Of String, String))
 
-        Array.Copy(Selector.lstVariablesInReceivers.ToArray, arrTemp, arrTemp.Length)
-        lstVariablesFromSelector = arrTemp.ToList()
-
-        For i = 0 To ucrMultipleVariables.lstSelectedVariables.Items.Count - 1
-            lstVariablesFromSelector.Remove(ucrMultipleVariables.lstSelectedVariables.Items(i).Text)
+        For Each tplTemp As Tuple(Of String, String) In Selector.lstVariablesInReceivers
+            lstVariablesFromSelector.Add(New Tuple(Of String, String)(tplTemp.Item1, tplTemp.Item2))
         Next
-        lstVariablesFromSelector.RemoveAll(Function(x) x = "value")
+
+        For Each itmTemp As ListViewItem In ucrMultipleVariables.lstSelectedVariables.Items
+            lstVariablesFromSelector.Remove(lstVariablesFromSelector.Find(Function(x) x.Item1 = itmTemp.Text))
+        Next
+        lstVariablesFromSelector.RemoveAll(Function(x) x.Item1 = "value")
         If lstVariablesFromSelector.Count = 1 Then
             If bWithQuotes Then
-                strIDVars = Chr(34) & lstVariablesFromSelector(0) & Chr(34)
+                strIDVars = Chr(34) & lstVariablesFromSelector(0).Item1 & Chr(34)
             Else
-                strIDVars = lstVariablesFromSelector(0)
+                strIDVars = lstVariablesFromSelector(0).Item1
             End If
         ElseIf lstVariablesFromSelector.Count > 1 Then
             strIDVars = "c("
@@ -125,11 +126,11 @@ Public Class ucrVariablesAsFactor
                 If i > 0 Then
                     strIDVars = strIDVars & ","
                 End If
-                If lstVariablesFromSelector(i) <> "" Then
+                If lstVariablesFromSelector(i).Item1 <> "" Then
                     If bWithQuotes Then
-                        strIDVars = strIDVars & Chr(34) & lstVariablesFromSelector(i) & Chr(34)
+                        strIDVars = strIDVars & Chr(34) & lstVariablesFromSelector(i).Item1 & Chr(34)
                     Else
-                        strIDVars = strIDVars & lstVariablesFromSelector(i)
+                        strIDVars = strIDVars & lstVariablesFromSelector(i).Item1
                     End If
                 End If
             Next

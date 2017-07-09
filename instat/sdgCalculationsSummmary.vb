@@ -22,8 +22,7 @@ Public Class sdgCalculationsSummmary
     Private bRCodeSet As Boolean = True
     Private clsCalculationFunction As New RFunction
     Private clsParentCalculationFunction As New RFunction
-    Private lstSubCalcFunctions As New List(Of KeyValuePair(Of String, RFunction))
-    Private lstManipulationFunctions As New List(Of KeyValuePair(Of String, RFunction))
+    Private lstManipulationFunctions As New Dictionary(Of String, RFunction)
     Dim clsSubCalcsList As New RFunction
     Dim clsManipulationsList As New RFunction
     Dim iSubCalcCount As Integer = 0
@@ -39,6 +38,8 @@ Public Class sdgCalculationsSummmary
         If bFirstLoad Then
             bFirstLoad = False
         End If
+        SetEnabledSubCalcsButtons()
+        SetEnabledManipulationsButtons()
     End Sub
 
     Private Sub InitialiseControls()
@@ -60,6 +61,8 @@ Public Class sdgCalculationsSummmary
         ucrPnlSave.AddRadioButton(rdoDoNotSave, "0")
 
         ucrManipulations.lstAvailableData.View = View.List
+
+        ucrCalcSummary.ucrReceiverForCalculation.bResetWhenSelectorResets = False
 
         'temp until working
         ucrCalcSummary.chkSaveResultInto.Visible = False
@@ -115,7 +118,7 @@ Public Class sdgCalculationsSummmary
         ucrInputType.SetItems(lstType)
     End Sub
 
-    Public Sub Setup(clsNewCalculationFunction As RFunction, clsNewParentCalculationFunction As RFunction, Optional bNewIsSubCalc As Boolean = False, Optional bNewIsManipulation As Boolean = False, Optional bReset As Boolean = False)
+    Public Sub Setup(clsNewCalculationFunction As RFunction, clsNewParentCalculationFunction As RFunction, Optional bNewIsSubCalc As Boolean = False, Optional bNewIsManipulation As Boolean = False, Optional bReset As Boolean = False, Optional bEnableName As Boolean = True)
         Dim strFuncExp As String
 
         If Not bControlsInitialised Then
@@ -157,7 +160,7 @@ Public Class sdgCalculationsSummmary
             strFuncExp = ""
         End If
         If ucrInputType.GetText = "Calculation" OrElse ucrInputType.GetText = "Summary" Then
-            ucrCalcSummary.ucrReceiverForCalculation.Clear()
+            ucrCalcSummary.ucrReceiverForCalculation.cboExpression.Text = ""
             ucrCalcSummary.ucrReceiverForCalculation.AddToReceiverAtPosition(strFuncExp.Trim(Chr(34)), 0)
         End If
         lstSubCalcs.Clear()
@@ -170,6 +173,7 @@ Public Class sdgCalculationsSummmary
                 ucrManipulations.lstAvailableData.Items.Add(clsTempParam.clsArgumentCodeStructure.clsParameters.Find(Function(x) x.strArgumentName = "name").strArgumentValue.Trim(Chr(34)))
             End If
         Next
+        ucrInputCalculationName.Enabled = bEnableName
         UpdateSubCalculations()
         UpdateManipulations()
     End Sub
@@ -190,7 +194,7 @@ Public Class sdgCalculationsSummmary
                 ucrReceiverByOrSort.Visible = False
                 lblReceiverLabel.Visible = False
                 ucrCalcSummary.Visible = True
-                If ucrInputType.GetText = "calculation" Then
+                If ucrInputType.GetText = "Calculation" Then
                     ucrCalcSummary.ucrInputCalOptions.SetName("Basic")
                 Else
                     ucrCalcSummary.ucrInputCalOptions.SetName("Statistics")
@@ -276,7 +280,6 @@ Public Class sdgCalculationsSummmary
         End If
         clsSubCalcFunction.SetAssignTo(strCalcName)
         lstSubCalcs.Items.Add(strCalcName)
-        lstSubCalcFunctions.Add(New KeyValuePair(Of String, RFunction)(strCalcName, clsSubCalcFunction.Clone()))
         clsSubCalcsList.AddParameter(strCalcName, clsRFunctionParameter:=clsSubCalcFunction)
         UpdateSubCalculations()
     End Sub
@@ -303,7 +306,7 @@ Public Class sdgCalculationsSummmary
         End If
         clsManipFunction.SetAssignTo(strCalcName)
         ucrManipulations.lstAvailableData.Items.Add(strCalcName)
-        lstManipulationFunctions.Add(New KeyValuePair(Of String, RFunction)(strCalcName, clsManipFunction.Clone()))
+        lstManipulationFunctions.Add(strCalcName, clsManipFunction.Clone())
         clsManipulationsList.AddParameter(strCalcName, clsRFunctionParameter:=clsManipFunction)
         UpdateManipulations()
     End Sub
@@ -333,23 +336,29 @@ Public Class sdgCalculationsSummmary
             If ucrReceiverByOrSort.IsEmpty Then
                 clsCalculationFunction.RemoveParameterByName("calculated_from")
             Else
-                clsCalculationFunction.AddParameter("calculated_from", CreateCalcFromList(ucrReceiverByOrSort.GetVariableNamesAsList(), ucrSelectorBy))
+                clsCalculationFunction.AddParameter("calculated_from", CreateCalcFromList(ucrSelectorBy.lstVariablesInReceivers, ucrSelectorBy))
             End If
         End If
     End Sub
 
     'Need to do this instead of with RFunctions because the calculated_from list can have multiple items with the same label
-    Private Function CreateCalcFromList(lstVariables As List(Of String), ucrCurrentSelector As ucrSelectorByDataFrame) As String
+    Private Function CreateCalcFromList(lstVariables As List(Of Tuple(Of String, String)), ucrCurrentSelector As ucrSelectorByDataFrame) As String
         Dim strCalcFromList As String
         Dim strColumn As String
+        Dim strDataFrame As String
 
         strCalcFromList = "list("
         For i = 0 To lstVariables.Count - 1
-            strColumn = lstVariables(i)
+            strColumn = lstVariables(i).Item1
+            If lstVariables(i).Item1 = "" Then
+                strDataFrame = ucrCurrentSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text
+            Else
+                strDataFrame = lstVariables(i).Item2
+            End If
             If i > 0 Then
                 strCalcFromList = strCalcFromList & ","
             End If
-            strCalcFromList = strCalcFromList & ucrCurrentSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text & " = " & Chr(34) & strColumn & Chr(34)
+            strCalcFromList = strCalcFromList & strDataFrame & " = " & Chr(34) & strColumn & Chr(34)
         Next
         strCalcFromList = strCalcFromList & ")"
         Return strCalcFromList
@@ -362,7 +371,7 @@ Public Class sdgCalculationsSummmary
                 clsCalculationFunction.RemoveParameterByName("calculated_from")
             Else
                 clsCalculationFunction.AddParameter("function_exp", Chr(34) & ucrDefineFilter.ucrFilterPreview.GetText() & Chr(34))
-                clsCalculationFunction.AddParameter("calculated_from", CreateCalcFromList(ucrDefineFilter.GetFilteredVariables(False), ucrDefineFilter.ucrSelectorForFitler))
+                clsCalculationFunction.AddParameter("calculated_from", CreateCalcFromList(ucrDefineFilter.ucrSelectorForFitler.lstVariablesInReceivers, ucrDefineFilter.ucrSelectorForFitler))
             End If
         End If
     End Sub
@@ -373,7 +382,7 @@ Public Class sdgCalculationsSummmary
         For Each lviTemp As ListViewItem In ucrManipulations.lstAvailableData.SelectedItems
             iIndex = ucrManipulations.lstAvailableData.Items.IndexOf(lviTemp)
             ucrManipulations.lstAvailableData.Items.Remove(lviTemp)
-            lstManipulationFunctions.RemoveAt(iIndex)
+            lstManipulationFunctions.Remove(lviTemp.Text)
         Next
         UpdateManipulations()
     End Sub
@@ -384,7 +393,6 @@ Public Class sdgCalculationsSummmary
         For Each lviTemp As ListViewItem In lstSubCalcs.SelectedItems
             iIndex = lstSubCalcs.Items.IndexOf(lviTemp)
             lstSubCalcs.Items.Remove(lviTemp)
-            lstSubCalcFunctions.RemoveAt(iIndex)
         Next
         UpdateSubCalculations()
     End Sub
@@ -402,6 +410,10 @@ Public Class sdgCalculationsSummmary
     End Sub
 
     Private Sub lstSubCalcs_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstSubCalcs.SelectedIndexChanged
+        SetEnabledSubCalcsButtons()
+    End Sub
+
+    Private Sub SetEnabledSubCalcsButtons()
         If lstSubCalcs.SelectedItems.Count > 0 Then
             cmdSubCalcEdit.Enabled = True
             cmdSubCalcDelete.Enabled = True
@@ -412,6 +424,10 @@ Public Class sdgCalculationsSummmary
     End Sub
 
     Private Sub ucrManipulations_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ucrManipulations.SelectedIndexChanged
+        SetEnabledManipulationsButtons()
+    End Sub
+
+    Private Sub SetEnabledManipulationsButtons()
         If ucrManipulations.lstAvailableData.SelectedItems.Count > 0 Then
             cmdManipEdit.Enabled = True
             cmdManipDelete.Enabled = True
@@ -420,4 +436,33 @@ Public Class sdgCalculationsSummmary
             cmdManipDelete.Enabled = False
         End If
     End Sub
+
+    Private Sub cmdSubCalcEdit_Click(sender As Object, e As EventArgs) Handles cmdSubCalcEdit.Click
+        Dim clsSelectedSubCalcFunction As RFunction
+        Dim sdgSubCalc As New sdgCalculationsSummmary
+
+        If lstSubCalcs.SelectedItems.Count = 1 Then
+
+            clsSelectedSubCalcFunction = GetSubCalc(lstSubCalcs.SelectedItems(0).Text)
+            If clsSelectedSubCalcFunction IsNot Nothing Then
+                sdgSubCalc.Setup(clsNewCalculationFunction:=clsSelectedSubCalcFunction, clsNewParentCalculationFunction:=clsCalculationFunction, bNewIsSubCalc:=True, bNewIsManipulation:=False, bReset:=False, bEnableName:=False)
+                sdgSubCalc.ShowDialog()
+            Else
+                MsgBox("Sorry, cannot find sub calculation for editing", MsgBoxStyle.Information, "Cannot edit")
+            End If
+        End If
+    End Sub
+
+    Private Function GetSubCalc(strName As String) As RFunction
+        Dim clsTempFunc As RFunction
+        For Each clsParam In clsSubCalcsList.clsParameters
+            If clsParam IsNot Nothing AndAlso clsParam.bIsFunction AndAlso clsParam.clsArgumentCodeStructure IsNot Nothing Then
+                clsTempFunc = clsParam.clsArgumentCodeStructure
+                If clsTempFunc.ContainsParameter("name") AndAlso clsTempFunc.GetParameter("name").strArgumentValue.Trim(Chr(34)) = strName Then
+                    Return clsTempFunc
+                End If
+            End If
+        Next
+        Return Nothing
+    End Function
 End Class

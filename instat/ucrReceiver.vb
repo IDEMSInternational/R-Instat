@@ -49,6 +49,10 @@ Public Class ucrReceiver
     'Should columns be forced as a data frame object when bParameterIsRFunction = True
     Public bForceAsDataFrame As Boolean = False
 
+    'Currently no distinction in between selector resetting and data frame changed
+    'Need option to not reset receiver when data frame changed e.g. calculations dialog
+    Public bResetWhenSelectorResets As Boolean = True
+
     Public Sub New()
         ' This call is required by the designer.
         InitializeComponent()
@@ -296,7 +300,9 @@ Public Class ucrReceiver
     End Sub
 
     Protected Overridable Sub Selector_ResetAll() Handles ucrSelector.ResetReceivers
-        Clear()
+        If bResetWhenSelectorResets Then
+            Clear()
+        End If
     End Sub
 
     Protected Overrides Function ProcessCmdKey(ByRef msg As Message, keyData As Keys) As Boolean
