@@ -42,11 +42,13 @@ Public Class dlgMakeDate
     Private Sub InitialiseDialog()
         'helpID
         ucrBase.iHelpTopicID = 461
+        txtTextDateFormats.ReadOnly = True
+
         Dim dctYearItems As New Dictionary(Of String, String)
         Dim dctMonthItems As New Dictionary(Of String, String)
         Dim dctMonthTwoItems As New Dictionary(Of String, String)
         Dim dctDateFormat As New Dictionary(Of String, String)
-        Dim dctdateorigin As New Dictionary(Of String, String)
+        Dim dctDateOrigin As New Dictionary(Of String, String)
         'Dim dctDayItemsDOY As New Dictionary(Of String, String)
         'Dim dctDayItemsDOY As New Dictionary(Of String, String)
 
@@ -86,9 +88,9 @@ Public Class dlgMakeDate
         ucrInputFormat.SetDropDownStyleAsEditable(bAdditionsAllowed:=True)
 
         ucrInputOrigin.SetParameter(New RParameter("origin", 1))
-        dctdateorigin.Add("Excel", Chr(34) & "1899-12-30" & Chr(34))
-        dctdateorigin.Add("Gregorian", Chr(34) & "1600-03-01" & Chr(34))
-        ucrInputOrigin.SetItems(dctdateorigin)
+        dctDateOrigin.Add("Excel", Chr(34) & "1899-12-30" & Chr(34))
+        dctDateOrigin.Add("Gregorian", Chr(34) & "1600-03-01" & Chr(34))
+        ucrInputOrigin.SetItems(dctDateOrigin)
         ucrInputOrigin.SetDropDownStyleAsNonEditable()
 
         ucrInputYearOption.SetParameter(New RParameter("year_format", 6))
@@ -116,7 +118,6 @@ Public Class dlgMakeDate
         'dctDayItemsDOY.Add("By Month", Chr(34) & "%d" & Chr(34))
         'dctDayItemsDOY.Add("By Year", Chr(34) & "%j" & Chr(34))
         'ucrInputDay.SetItems(dctDayItemsDOY)
-
 
         'ucrReceiver
         ucrReceiverForDate.Selector = ucrSelectorMakeDate
@@ -233,15 +234,15 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub SetDefaults()
+        clsDateFunction = New RFunction
+        clsMakeYearDay = New RFunction
+        clsMakeYearMonthDay = New RFunction
+
         'reset
         ucrSaveDate.Reset()
         ucrSelectorMakeDate.Reset()
         ucrInputFormat.Reset()
         ucrInputOrigin.Reset()
-
-        clsDateFunction = New RFunction
-        clsMakeYearDay = New RFunction
-        clsMakeYearMonthDay = New RFunction
 
         clsDateFunction.SetRCommand("as.Date")
         clsMakeYearDay.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_date_yeardoy")
@@ -276,31 +277,7 @@ Public Class dlgMakeDate
         ucrReceiverDayThree.SetRCode(clsMakeYearMonthDay, bReset)
         ucrSelectorMakeDate.SetRCode(clsMakeYearMonthDay, bReset)
         ucrSelectorMakeDate.SetRCode(clsMakeYearDay, bReset)
-        GroupBoxDisplayOnReOpen()
-    End Sub
-
-    Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
-        strSelectedColumn = strColumn
-        strSelectedDataFrame = strDataFrame
-        bUseSelectedColumn = True
-    End Sub
-
-    Private Sub SelectorHeader()
-        If rdoDefaultFormat.Checked Then
-            ucrReceiverForDate.strSelectorHeading = "Factors"
-        ElseIf rdoSpecifyOrigin.Checked
-            ucrReceiverForDate.strSelectorHeading = "Numerics"
-        Else
-            ucrReceiverForDate.strSelectorHeading = "Variables"
-        End If
-    End Sub
-
-    Private Sub SetDefaultColumn()
-        rdoSingleColumn.Checked = True
-        SetRCodeForControls(True)
-        ucrSelectorMakeDate.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem = strSelectedDataFrame
-        ucrReceiverForDate.Add(strSelectedColumn, strSelectedDataFrame)
-        bUseSelectedColumn = False
+        GroupBoxDisplayOnReopen()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -330,8 +307,48 @@ Public Class dlgMakeDate
         End If
     End Sub
 
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOKEnabled()
+    End Sub
+
     Private Sub ucrBase_ClickOk_(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         SetHistory()
+    End Sub
+
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
+        Dim clsHelp As New RFunction
+        clsHelp.SetPackageName("utils")
+        clsHelp.SetRCommand("help")
+        clsHelp.AddParameter("topic", Chr(34) & "strptime" & Chr(34))
+        clsHelp.AddParameter("package", Chr(34) & "base" & Chr(34))
+        clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
+        frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Date-Time Conversion Functions to and from Character", bSeparateThread:=False)
+    End Sub
+
+    Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
+        strSelectedColumn = strColumn
+        strSelectedDataFrame = strDataFrame
+        bUseSelectedColumn = True
+    End Sub
+
+    Private Sub SelectorHeader()
+        If rdoDefaultFormat.Checked Then
+            ucrReceiverForDate.strSelectorHeading = "Factors"
+        ElseIf rdoSpecifyOrigin.Checked Then
+            ucrReceiverForDate.strSelectorHeading = "Numerics"
+        Else
+            ucrReceiverForDate.strSelectorHeading = "Variables"
+        End If
+    End Sub
+
+    Private Sub SetDefaultColumn()
+        rdoSingleColumn.Checked = True
+        SetRCodeForControls(True)
+        ucrSelectorMakeDate.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem = strSelectedDataFrame
+        ucrReceiverForDate.Add(strSelectedColumn, strSelectedDataFrame)
+        bUseSelectedColumn = False
     End Sub
 
     Private Sub SetHistory()
@@ -341,28 +358,10 @@ Public Class dlgMakeDate
         End If
     End Sub
 
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
-        SetRCodeForControls(True)
-        TestOKEnabled()
-    End Sub
-
-    Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDate.ControlValueChanged
-        If rdoSingleColumn.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsDateFunction)
-        ElseIf rdoTwoColumns.Checked
-            ucrBase.clsRsyntax.SetBaseRFunction(clsMakeYearDay)
-        Else
-            ucrBase.clsRsyntax.SetBaseRFunction(clsMakeYearMonthDay)
-        End If
-        SetReceivers()
-        SetRCodeForControls(False)
-    End Sub
-
     Private Sub SetReceivers()
         If rdoSingleColumn.Checked Then
             ucrReceiverForDate.SetMeAsReceiver()
-        ElseIf rdoTwoColumns.Checked
+        ElseIf rdoTwoColumns.Checked Then
             grpFormats.Hide()
             cmdHelp.Visible = False
             ucrReceiverYearTwo.SetMeAsReceiver()
@@ -373,19 +372,15 @@ Public Class dlgMakeDate
         End If
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDayTwo.ControlContentsChanged, ucrSaveDate.ControlContentsChanged, ucrReceiverYearTwo.ControlContentsChanged, ucrReceiverForDate.ControlContentsChanged, ucrReceiverYearThree.ControlContentsChanged, ucrReceiverMonthThree.ControlContentsChanged, ucrReceiverDayThree.ControlContentsChanged
-        TestOKEnabled()
-    End Sub
-
-    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
-        Dim clsHelp As New RFunction
-        clsHelp.SetPackageName("utils")
-        clsHelp.SetRCommand("help")
-        clsHelp.AddParameter("topic", Chr(34) & "strptime" & Chr(34))
-        clsHelp.AddParameter("package", Chr(34) & "base" & Chr(34))
-        clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
-        frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Date-time Conversion Functions to and from Character", bSeparateThread:=False)
-
+    'Temporary fix: This should be deleted since - this should be automatic
+    Private Sub GroupBoxDisplayOnReopen()
+        If rdoSingleColumn.Checked Then
+            grpSingleColumn.Visible = True
+        ElseIf rdoTwoColumns.Checked Then
+            grpTwoColumns.Visible = True
+        Else
+            grpThreeColumns.Visible = True
+        End If
     End Sub
 
     Private Sub ucrPnlFormat_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFormat.ControlValueChanged, ucrInputFormat.ControlValueChanged, ucrInputOrigin.ControlValueChanged
@@ -395,7 +390,7 @@ Public Class dlgMakeDate
             ucrReceiverForDate.SetIncludedDataTypes({"character", "factor"})
             ucrBase.clsRsyntax.RemoveParameter("format")
             ucrBase.clsRsyntax.RemoveParameter("origin")
-        ElseIf rdoSpecifyOrigin.Checked
+        ElseIf rdoSpecifyOrigin.Checked Then
             grpFormats.Hide()
             cmdHelp.Visible = False
             ucrReceiverForDate.SetIncludedDataTypes({"numeric"})
@@ -407,14 +402,19 @@ Public Class dlgMakeDate
         SelectorHeader()
     End Sub
 
-    'Temporary fix: This should be deleted since - this should be automatic
-    Private Sub GroupBoxDisplayOnReOpen()
+    Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDate.ControlValueChanged
         If rdoSingleColumn.Checked Then
-            grpSingleColumn.Visible = True
+            ucrBase.clsRsyntax.SetBaseRFunction(clsDateFunction)
         ElseIf rdoTwoColumns.Checked Then
-            grpTwoColumns.Visible = True
+            ucrBase.clsRsyntax.SetBaseRFunction(clsMakeYearDay)
         Else
-            grpThreeColumns.Visible = True
+            ucrBase.clsRsyntax.SetBaseRFunction(clsMakeYearMonthDay)
         End If
+        SetReceivers()
+        SetRCodeForControls(False)
+    End Sub
+
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDayTwo.ControlContentsChanged, ucrSaveDate.ControlContentsChanged, ucrReceiverYearTwo.ControlContentsChanged, ucrReceiverForDate.ControlContentsChanged, ucrReceiverYearThree.ControlContentsChanged, ucrReceiverMonthThree.ControlContentsChanged, ucrReceiverDayThree.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class

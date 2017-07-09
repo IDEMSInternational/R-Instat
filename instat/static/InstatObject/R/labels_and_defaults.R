@@ -63,4 +63,4 @@ table_label="table"
 #link labels
 keyed_link_label="keyed_link"
 
-max_labels_display=10
+max_labels_display=4

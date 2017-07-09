@@ -63,7 +63,7 @@ Public Class dlgOneVariableGraph
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
 
-        ucrPnlOutput.SetParameter(New RParameter("get_area_point"))
+        ucrPnlOutput.SetParameter(New RParameter("output"))
         ucrPnlOutput.AddRadioButton(rdoFacets, Chr(34) & "facets" & Chr(34))
         ucrPnlOutput.AddRadioButton(rdoCombine, Chr(34) & "combine" & Chr(34))
         ucrPnlOutput.AddRadioButton(rdoSingleGraphs, Chr(34) & "single" & Chr(34))
