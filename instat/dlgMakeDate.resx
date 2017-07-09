@@ -140,6 +140,6 @@ Day/Month/Year (24/12/1993)
 Month:Day:Year (12:24:93)
 %m:%d:%y
 Year-Month-Day (1993-Dec-24)
-%Y-%b-%Y</value>
+%Y-%b-%d</value>
   </data>
 </root>
