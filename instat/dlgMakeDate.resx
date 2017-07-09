@@ -139,7 +139,7 @@ Day/Month/Year (24/12/1993)
 %d/%m/%Y
 Month:Day:Year (12:24:93)
 %m:%d:%y
-Year-Month-Day (1993-Dec-1993)
+Year-Month-Day (1993-Dec-24)
 %Y-%b-%Y</value>
   </data>
 </root>
