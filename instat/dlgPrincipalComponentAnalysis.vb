@@ -248,7 +248,7 @@ Public Class dlgPrincipalComponentAnalysis
     End Sub
 
     Private Sub TestOKEnabled() ' add in if the sdg has a clear nud, etc
-        If ucrSaveResult.IsComplete AndAlso Not ucrReceiverMultiplePCA.IsEmpty() AndAlso ucrNudNumberOfComp.GetText <> "" Then
+        If ucrSaveResult.IsComplete AndAlso ucrReceiverMultiplePCA.lstSelectedVariables.Items.Count > 1 AndAlso ucrNudNumberOfComp.GetText <> "" Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
