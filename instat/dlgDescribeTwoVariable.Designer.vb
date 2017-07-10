@@ -52,28 +52,28 @@ Partial Class dlgDescribeTwoVariable
         '
         'cmdSummaries
         '
-        Me.cmdSummaries.Location = New System.Drawing.Point(300, 198)
+        Me.cmdSummaries.Location = New System.Drawing.Point(305, 222)
         Me.cmdSummaries.Name = "cmdSummaries"
         Me.cmdSummaries.Size = New System.Drawing.Size(105, 23)
         Me.cmdSummaries.TabIndex = 7
         Me.cmdSummaries.Tag = "Summaries"
-        Me.cmdSummaries.Text = "Summaries..."
+        Me.cmdSummaries.Text = "Summaries"
         Me.cmdSummaries.UseVisualStyleBackColor = True
         '
         'cmdDisplayOptions
         '
-        Me.cmdDisplayOptions.Location = New System.Drawing.Point(300, 198)
+        Me.cmdDisplayOptions.Location = New System.Drawing.Point(304, 221)
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
         Me.cmdDisplayOptions.Size = New System.Drawing.Size(105, 23)
         Me.cmdDisplayOptions.TabIndex = 8
         Me.cmdDisplayOptions.Tag = "Display_Options"
-        Me.cmdDisplayOptions.Text = "Display Options..."
+        Me.cmdDisplayOptions.Text = "Display Options"
         Me.cmdDisplayOptions.UseVisualStyleBackColor = True
         '
         'lblFirstVariable
         '
         Me.lblFirstVariable.AutoSize = True
-        Me.lblFirstVariable.Location = New System.Drawing.Point(285, 45)
+        Me.lblFirstVariable.Location = New System.Drawing.Point(268, 45)
         Me.lblFirstVariable.Name = "lblFirstVariable"
         Me.lblFirstVariable.Size = New System.Drawing.Size(70, 13)
         Me.lblFirstVariable.TabIndex = 1
@@ -82,7 +82,7 @@ Partial Class dlgDescribeTwoVariable
         '
         'lbMultipleVariables
         '
-        Me.lbMultipleVariables.Location = New System.Drawing.Point(285, 90)
+        Me.lbMultipleVariables.Location = New System.Drawing.Point(268, 90)
         Me.lbMultipleVariables.Name = "lbMultipleVariables"
         Me.lbMultipleVariables.Size = New System.Drawing.Size(100, 15)
         Me.lbMultipleVariables.TabIndex = 3
@@ -92,7 +92,7 @@ Partial Class dlgDescribeTwoVariable
         'ucrReceiverFirstVar
         '
         Me.ucrReceiverFirstVar.frmParent = Me
-        Me.ucrReceiverFirstVar.Location = New System.Drawing.Point(285, 60)
+        Me.ucrReceiverFirstVar.Location = New System.Drawing.Point(268, 60)
         Me.ucrReceiverFirstVar.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFirstVar.Name = "ucrReceiverFirstVar"
         Me.ucrReceiverFirstVar.Selector = Nothing
@@ -104,7 +104,7 @@ Partial Class dlgDescribeTwoVariable
         'ucrReceiverSecondVar
         '
         Me.ucrReceiverSecondVar.frmParent = Me
-        Me.ucrReceiverSecondVar.Location = New System.Drawing.Point(285, 105)
+        Me.ucrReceiverSecondVar.Location = New System.Drawing.Point(268, 105)
         Me.ucrReceiverSecondVar.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSecondVar.Name = "ucrReceiverSecondVar"
         Me.ucrReceiverSecondVar.Selector = Nothing
@@ -150,7 +150,7 @@ Partial Class dlgDescribeTwoVariable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 309)
+        Me.ClientSize = New System.Drawing.Size(415, 309)
         Me.Controls.Add(Me.ucrChkSaveResult)
         Me.Controls.Add(Me.ucrChkOmitMissing)
         Me.Controls.Add(Me.lbMultipleVariables)
