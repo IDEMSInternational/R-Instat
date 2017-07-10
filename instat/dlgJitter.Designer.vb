@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgJitter
     Inherits System.Windows.Forms.Form
 
@@ -56,12 +72,15 @@ Partial Class dlgJitter
         '
         'ucrReceiverJitter
         '
+        Me.ucrReceiverJitter.frmParent = Me
         Me.ucrReceiverJitter.Location = New System.Drawing.Point(249, 43)
         Me.ucrReceiverJitter.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverJitter.Name = "ucrReceiverJitter"
         Me.ucrReceiverJitter.Selector = Nothing
         Me.ucrReceiverJitter.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverJitter.strNcFilePath = ""
         Me.ucrReceiverJitter.TabIndex = 2
+        Me.ucrReceiverJitter.ucrSelector = Nothing
         '
         'lblSelectedVariable
         '
@@ -87,6 +106,8 @@ Partial Class dlgJitter
         '
         'ucrInputMaximum
         '
+        Me.ucrInputMaximum.AddQuotesIfUnrecognised = True
+        Me.ucrInputMaximum.IsMultiline = False
         Me.ucrInputMaximum.IsReadOnly = False
         Me.ucrInputMaximum.Location = New System.Drawing.Point(7, 120)
         Me.ucrInputMaximum.Name = "ucrInputMaximum"
@@ -95,6 +116,8 @@ Partial Class dlgJitter
         '
         'ucrInputMinimum
         '
+        Me.ucrInputMinimum.AddQuotesIfUnrecognised = True
+        Me.ucrInputMinimum.IsMultiline = False
         Me.ucrInputMinimum.IsReadOnly = False
         Me.ucrInputMinimum.Location = New System.Drawing.Point(7, 94)
         Me.ucrInputMinimum.Name = "ucrInputMinimum"
@@ -103,6 +126,8 @@ Partial Class dlgJitter
         '
         'ucrInputMaximumDistanceFromZero
         '
+        Me.ucrInputMaximumDistanceFromZero.AddQuotesIfUnrecognised = True
+        Me.ucrInputMaximumDistanceFromZero.IsMultiline = False
         Me.ucrInputMaximumDistanceFromZero.IsReadOnly = False
         Me.ucrInputMaximumDistanceFromZero.Location = New System.Drawing.Point(7, 43)
         Me.ucrInputMaximumDistanceFromZero.Name = "ucrInputMaximumDistanceFromZero"
@@ -142,6 +167,7 @@ Partial Class dlgJitter
         '
         'ucrInputNewColumnName
         '
+        Me.ucrInputNewColumnName.AddQuotesIfUnrecognised = True
         Me.ucrInputNewColumnName.IsReadOnly = False
         Me.ucrInputNewColumnName.Location = New System.Drawing.Point(115, 219)
         Me.ucrInputNewColumnName.Name = "ucrInputNewColumnName"

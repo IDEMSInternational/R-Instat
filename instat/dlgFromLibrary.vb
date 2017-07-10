@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,8 +11,9 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 Imports RDotNet
 
@@ -49,7 +50,7 @@ Public Class dlgFromLibrary
         lstCollection.HideSelection = False
 
         'This is now a static list because packages are not loaded in R.
-        lstAvailablePackages = {"agridat", "candisc", "CircStats", "circular", "climdex.pcic", "DAAG", "datasets", "dplyr", "EnvStats", "Evapotranspiration", "extRemes", "factoextra", "FactoMineR", "faraway", "fitdistrplus", "GGally", "ggplot2", "ggthemes", "htmlTable", "lme4", "lubridate", "openair", "plotly", "plotrix", "plyr", "reshape2", "sjmisc", "stringr", "survival"}.ToList()
+        lstAvailablePackages = {"agridat", "candisc", "CircStats", "circular", "climdex.pcic", "DAAG", "dae", "datasets", "dplyr", "EnvStats", "Evapotranspiration", "extRemes", "factoextra", "FactoMineR", "faraway", "fitdistrplus", "gapminder", "GGally", "ggplot2", "ggthemes", "htmlTable", "lme4", "lubridate", "openair", "plotly", "plotrix", "plyr", "reshape2", "sjmisc", "stringr", "survival"}.ToList()
         'TODO possibly don't want to be running this much R code in initialse.
         '     alternatively have to make sure all packages have some data
         For i = lstAvailablePackages.Count - 1 To 0 Step -1
@@ -193,7 +194,7 @@ Public Class dlgFromLibrary
         clsHelp.AddParameter("topic", Chr(34) & lstCollection.SelectedItems(0).Text & Chr(34))
         clsHelp.AddParameter("package", Chr(34) & ucrInputPackages.cboInput.SelectedItem & Chr(34))
         clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
-        frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:=" dlgOpenFromLibrary Opening help page for" & " " & lstCollection.SelectedItems(0).Text & " " & "dataset")
+        frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:=" dlgOpenFromLibrary Opening help page for" & " " & lstCollection.SelectedItems(0).Text & " " & "dataset", bSeparateThread:=False)
     End Sub
 
     Private Sub EnableHelp()

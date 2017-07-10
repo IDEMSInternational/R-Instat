@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,16 +11,16 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgOneVarUseModel
     Public bfirstload As Boolean = True
     Public bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
-    Public clsRBootFunction, clsQuantileFunction, clsSeqFunction, clsReceiver, clsRPlotFunction As New RFunction
+    Public clsRBootFunction, clsQuantileFunction, clsSeqFunction, clsReceiver, clsRPlotAllFunction, clsRplotPPfunction, clsRplotCDFfunction, clsRplotQQfunction, clsRplotDensfunction, clsRplotCIfunction As New RFunction
+    Private clsRSyntax As RSyntax
     'temp fix to deciding if plot should be included
     'won't be needed once RSyntax can contain multiple functions
     Private bPlot As Boolean
@@ -51,12 +51,11 @@ Public Class dlgOneVarUseModel
         ucrReceiverObject.SetParameterIsRFunction()
         ucrReceiverObject.SetMeAsReceiver()
         ucrReceiverObject.strSelectorHeading = "Models"
-
         ucrReceiverObject.SetItemType("model")
 
+        ucrChkProduceBootstrap.AddRSyntaxContainsFunctionNamesCondition(True, {"bootdist"})
+        ucrChkProduceBootstrap.AddRSyntaxContainsFunctionNamesCondition(False, {"bootdist"}, False)
         ucrChkProduceBootstrap.AddToLinkedControls(ucrSaveObjects, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=False)
-        ucrChkProduceBootstrap.AddParameterValueFunctionNamesCondition(True, "x", "bootdist", True)
-        ucrChkProduceBootstrap.AddParameterValueFunctionNamesCondition(False, "x", "bootdist", False)
         ucrChkProduceBootstrap.SetText("Produce Bootstrap")
 
         'This part is temporary for now
@@ -80,18 +79,50 @@ Public Class dlgOneVarUseModel
         clsRBootFunction = New RFunction
         clsQuantileFunction = New RFunction
         clsSeqFunction = New RFunction
-        clsRPlotFunction = New RFunction
+        clsRPlotAllFunction = New RFunction
+        clsRplotPPfunction = New RFunction
+        clsRplotCDFfunction = New RFunction
+        clsRplotQQfunction = New RFunction
+        clsRplotDensfunction = New RFunction
+        clsRplotCIfunction = New RFunction
+        ' clsRNoPlotfunction = New RFunction
 
         ucrSelectorUseModel.Reset()
         ucrSaveObjects.Enabled = False ' temporary
         ucrSaveObjects.Reset()
         ucrNewDataFrameName.Reset()
 
-        clsRPlotFunction.SetPackageName("graphics")
-        clsRPlotFunction.SetRCommand("plot")
+        clsRPlotAllFunction.SetPackageName("graphics")
+        clsRPlotAllFunction.SetRCommand("plot")
+        clsRPlotAllFunction.iCallType = 3
 
-        'default for running plot
-        bPlot = True
+        clsRplotCDFfunction.SetPackageName("fitdistrplus")
+        clsRplotCDFfunction.SetRCommand("cdfcomp")
+        clsRplotCDFfunction.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34))
+        clsRplotCDFfunction.iCallType = 3
+
+        clsRplotQQfunction.SetPackageName("fitdistrplus")
+        clsRplotQQfunction.SetRCommand("qqcomp")
+        clsRplotQQfunction.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34))
+        clsRplotQQfunction.iCallType = 3
+
+        clsRplotDensfunction.SetPackageName("fitdistrplus")
+        clsRplotDensfunction.SetRCommand("denscomp")
+        clsRplotDensfunction.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34))
+        clsRplotDensfunction.iCallType = 3
+
+        clsRplotPPfunction.SetPackageName("fitdistrplus")
+        clsRplotPPfunction.SetRCommand("ppcomp")
+        clsRplotPPfunction.AddParameter("plotstyle", Chr(34) & "ggplot" & Chr(34))
+        clsRplotPPfunction.iCallType = 3
+
+        clsRplotCIfunction.SetPackageName("fitdistrplus")
+        clsRplotCIfunction.SetRCommand("CIcdfplot")
+        clsRplotCIfunction.iCallType = 3
+
+        'Temporary as we think of how to implement No plot option
+        '  clsRNoPlotfunction.SetRCommand("")
+
         clsSeqFunction.SetRCommand("seq")
         clsSeqFunction.AddParameter("from", 0)
         clsSeqFunction.AddParameter("to", 1)
@@ -104,21 +135,30 @@ Public Class dlgOneVarUseModel
         clsRBootFunction.SetRCommand("bootdist")
         clsRBootFunction.AddParameter("bootmethod", Chr(34) & "nonparam" & Chr(34))
         clsRBootFunction.AddParameter("niter", 1001)
-
-        ucrBase.clsRsyntax.SetBaseRFunction(clsQuantileFunction)
+        clsRBootFunction.iCallType = 2
 
         clsQuantileFunction.SetAssignTo(ucrNewDataFrameName.GetText, strTempModel:="last_model", strTempDataframe:=ucrSelectorUseModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
         'clsRBootFunction.SetAssignTo(ucrSaveObjects.GetText, strTempModel:="last_bootstrap", strTempDataframe:=ucrSelectorUseModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        ucrBase.clsRsyntax.ClearCodes()
+        ucrBase.clsRsyntax.AddToAfterCodes(clsRPlotAllFunction, iPosition:=1)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsQuantileFunction)
+
         bResetSubdialog = True
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
+        ucrReceiverObject.SetRCode(clsRPlotAllFunction, bReset)
         ucrReceiverObject.AddAdditionalCodeParameterPair(clsRBootFunction, New RParameter("f", 0), iAdditionalPairNo:=1)
-        ucrReceiverObject.AddAdditionalCodeParameterPair(clsRPlotFunction, New RParameter("x", 0), iAdditionalPairNo:=2)
+        ucrReceiverObject.AddAdditionalCodeParameterPair(clsQuantileFunction, New RParameter("x", 0), iAdditionalPairNo:=2)
+        ucrReceiverObject.AddAdditionalCodeParameterPair(clsRplotPPfunction, New RParameter("ft", 0), iAdditionalPairNo:=3)
+        ucrReceiverObject.AddAdditionalCodeParameterPair(clsRplotCDFfunction, New RParameter("ft", 0), iAdditionalPairNo:=4)
+        ucrReceiverObject.AddAdditionalCodeParameterPair(clsRplotQQfunction, New RParameter("ft", 0), iAdditionalPairNo:=5)
+        ucrReceiverObject.AddAdditionalCodeParameterPair(clsRplotDensfunction, New RParameter("ft", 0), iAdditionalPairNo:=6)
         ucrChkProduceBootstrap.SetRCode(clsRBootFunction, bReset)
+        ucrChkProduceBootstrap.SetRSyntax(ucrBase.clsRsyntax, bReset)
         ucrNewDataFrameName.SetRCode(clsQuantileFunction, bReset)
         ucrSaveObjects.SetRCode(clsRBootFunction, bReset)
-        ucrReceiverObject.SetRCode(clsQuantileFunction, bReset)
+
     End Sub
 
     Private Sub TestOKEnabled()
@@ -135,19 +175,20 @@ Public Class dlgOneVarUseModel
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
-        If ucrChkProduceBootstrap.Checked Then
-            frmMain.clsRLink.RunScript(clsRBootFunction.ToScript(), iCallType:=2)
-        End If
-    End Sub
 
-    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        If bPlot Then
-            frmMain.clsRLink.RunScript(clsRPlotFunction.ToScript(), iCallType:=3)
-        Else
+    'Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
+    '    If ucrChkProduceBootstrap.Checked Then
+    '        frmMain.clsRLink.RunScript(clsRBootFunction.ToScript(), iCallType:=2)
+    '    End If
+    'End Sub
 
-        End If
-    End Sub
+    'Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+    '    If bPlot Then
+    '        frmMain.clsRLink.RunScript(clsRPlotFunction.ToScript(), iCallType:=3)
+    '    Else
+
+    '    End If
+    'End Sub
 
     '  Private Sub AssignSaveObjects()
     ' If chkSaveBootstrap.Checked AndAlso Not ucrSaveObjects.IsEmpty Then
@@ -158,19 +199,22 @@ Public Class dlgOneVarUseModel
     'End Sub
 
     Private Sub cmdFitModel_Click(sender As Object, e As EventArgs) Handles cmdFitModelandBootstrap.Click
-        sdgOneVarUseModFit.SetRFunction(clsSeqFunction, clsRBootFunction, clsQuantileFunction, clsReceiver, clsRPlotFunction, bResetSubdialog)
+        sdgOneVarUseModFit.SetRcode(ucrBase.clsRsyntax, clsSeqFunction, clsRBootFunction, clsQuantileFunction, clsReceiver, clsRPlotAllFunction, clsRplotPPfunction, clsRplotCDFfunction, clsRplotQQfunction, clsRplotDensfunction, clsRplotCIfunction, bResetSubdialog)
         bPlot = Not sdgOneVarUseModFit.rdoNoPlot.Checked
-        bResetSubdialog = False
         sdgOneVarUseModFit.ShowDialog()
         sdgOneVarUseModFit.SetPlotOptions()
+        bResetSubdialog = False
     End Sub
 
     Private Sub ucrChkProduceBootstrap_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkProduceBootstrap.ControlValueChanged
         If ucrChkProduceBootstrap.Checked Then
             clsQuantileFunction.AddParameter("x", clsRFunctionParameter:=clsRBootFunction)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsRBootFunction, iPosition:=0)
         Else
             clsQuantileFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverObject.GetVariables())
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsRBootFunction)
         End If
+        ucrBase.clsRsyntax.SetBaseRFunction(clsQuantileFunction)
         sdgOneVarUseModFit.SetPlotOptions()
     End Sub
 
@@ -178,7 +222,4 @@ Public Class dlgOneVarUseModel
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrReceiverObject_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverObject.ControlValueChanged
-        clsReceiver = ucrReceiverObject.GetVariables()
-    End Sub
 End Class
