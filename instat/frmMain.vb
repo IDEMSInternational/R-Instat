@@ -474,7 +474,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareSheetColumnMetadata_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameColumnMetadata.Click
-        mnuViewColumnMetadata.Checked = Not mnuViewColumnMetadata.Checked
+        mnuViewColumnMetadata.Checked = True
         UpdateLayout()
     End Sub
 
