@@ -43,8 +43,12 @@ Public Class dlgDescribeTwoVariable
         ucrSelectorDescribeTwoVar.SetParameter(New RParameter("data_name", 0))
         ucrSelectorDescribeTwoVar.SetParameterIsString()
 
+        ucrReceiverFirstVar.SetParameter(New RParameter("factors", 2))
+        ucrReceiverFirstVar.SetParameterIsString()
         ucrReceiverFirstVar.Selector = ucrSelectorDescribeTwoVar
 
+        ucrReceiverSecondVar.SetParameter(New RParameter("columns_to_summarise", 1))
+        ucrReceiverSecondVar.SetParameterIsString()
         ucrReceiverSecondVar.Selector = ucrSelectorDescribeTwoVar
         ucrReceiverSecondVar.SetSingleTypeStatus(True)
 
@@ -93,13 +97,6 @@ Public Class dlgDescribeTwoVariable
 
         clsRCustomSummary.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
         clsRCustomSummary.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList)
-
-        'why are these being called here? I understand that the parameter names change for them, but why does that mean to call it in set defaults?
-        ucrReceiverFirstVar.SetParameter(New RParameter("factors", 2))
-        ucrReceiverFirstVar.SetParameterIsString()
-
-        ucrReceiverSecondVar.SetParameter(New RParameter("columns_to_summarise", 1))
-        ucrReceiverSecondVar.SetParameterIsString()
 
         clsRCustomSummary.AddParameter("store_results", "FALSE", iPosition:=4)
         clsRCustomSummary.AddParameter("drop", "TRUE", iPosition:=5)
