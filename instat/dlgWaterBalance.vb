@@ -535,8 +535,8 @@ Public Class dlgWaterBalance
 
     End Sub
 
-    Private Sub TestOKEnabled() ' fix this and call it
-        If Not ucrReceiverRainfall.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty Then ' AndAlso nudCapacity.Text <> "" AndAlso nudFrom.Text <> "" AndAlso nudTo.Text <> "" AndAlso Not ucrInputEvaporation.IsEmpty AndAlso nudWBLessThan.Text <> "" AndAlso ucrSaveWaterBalance.IsComplete Then
+    Private Sub TestOKEnabled()
+        If (ucrChkEndOfRains.Checked OrElse ucrChkEndOfSeason.Checked) AndAlso Not ucrReceiverRainfall.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso ucrNudFrom.GetText <> "" AndAlso ucrNudTo.GetText <> "" Then 'AndAlso ((ucrChkEndOfSeason.Checked AndAlso ucrNudCapacity.GetText <> "" AndAlso ucrNudWBLessThan.GetText <> "" AndAlso ucrInputWBColName.IsEmpty AndAlso ((ucrChkEvaporationAsReceiver.Checked AndAlso Not ucrReceiverEvaporation.IsEmpty) OrElse (Not ucrChkEvaporationAsReceiver.Checked AndAlso Not ucrInputEvaporation.IsEmpty))) OrElse Not ucrChkEndOfSeason.Checked) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -588,5 +588,9 @@ Public Class dlgWaterBalance
         DayBoundaries()
         EndRainRollingSum()
         EndSeason()
+    End Sub
+
+    Private Sub ucrChkEndOfRains_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkEndOfRains.ControlContentsChanged, ucrChkEndOfSeason.ControlContentsChanged, ucrReceiverRainfall.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrNudTo.ControlContentsChanged, ucrNudFrom.ControlContentsChanged, ucrNudCapacity.ControlContentsChanged, ucrNudWBLessThan.ControlContentsChanged, ucrInputWBColName.ControlContentsChanged, ucrChkEvaporationAsReceiver.ControlContentsChanged, ucrInputEvaporation.ControlContentsChanged, ucrReceiverEvaporation.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class
