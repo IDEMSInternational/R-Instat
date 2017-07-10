@@ -97,14 +97,14 @@ Partial Class dlgScatterPlot
         Me.ucrChkLineofBestFit.Location = New System.Drawing.Point(10, 260)
         Me.ucrChkLineofBestFit.Name = "ucrChkLineofBestFit"
         Me.ucrChkLineofBestFit.Size = New System.Drawing.Size(173, 20)
-        Me.ucrChkLineofBestFit.TabIndex = 10
+        Me.ucrChkLineofBestFit.TabIndex = 8
         '
         'ucrSaveScatterPlot
         '
         Me.ucrSaveScatterPlot.Location = New System.Drawing.Point(10, 285)
         Me.ucrSaveScatterPlot.Name = "ucrSaveScatterPlot"
-        Me.ucrSaveScatterPlot.Size = New System.Drawing.Size(250, 24)
-        Me.ucrSaveScatterPlot.TabIndex = 8
+        Me.ucrSaveScatterPlot.Size = New System.Drawing.Size(255, 24)
+        Me.ucrSaveScatterPlot.TabIndex = 9
         '
         'ucrSelectorForScatter
         '
@@ -157,7 +157,7 @@ Partial Class dlgScatterPlot
         Me.ucrBase.Location = New System.Drawing.Point(10, 312)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 9
+        Me.ucrBase.TabIndex = 10
         '
         'dlgScatterPlot
         '
