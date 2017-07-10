@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class ucrElementLineControl
     Inherits System.Windows.Forms.UserControl
 
@@ -47,7 +63,7 @@ Partial Class ucrElementLineControl
         Me.grpTickMarks.Location = New System.Drawing.Point(3, 0)
         Me.grpTickMarks.Name = "grpTickMarks"
         Me.grpTickMarks.Size = New System.Drawing.Size(246, 119)
-        Me.grpTickMarks.TabIndex = 41
+        Me.grpTickMarks.TabIndex = 0
         Me.grpTickMarks.TabStop = False
         Me.grpTickMarks.Text = "Element Line"
         '
@@ -58,7 +74,7 @@ Partial Class ucrElementLineControl
         Me.ucrLineColors.Location = New System.Drawing.Point(105, 68)
         Me.ucrLineColors.Name = "ucrLineColors"
         Me.ucrLineColors.Size = New System.Drawing.Size(137, 21)
-        Me.ucrLineColors.TabIndex = 87
+        Me.ucrLineColors.TabIndex = 5
         '
         'ucrChkLineLineEnd
         '
@@ -66,7 +82,7 @@ Partial Class ucrElementLineControl
         Me.ucrChkLineLineEnd.Location = New System.Drawing.Point(8, 94)
         Me.ucrChkLineLineEnd.Name = "ucrChkLineLineEnd"
         Me.ucrChkLineLineEnd.Size = New System.Drawing.Size(88, 20)
-        Me.ucrChkLineLineEnd.TabIndex = 54
+        Me.ucrChkLineLineEnd.TabIndex = 6
         '
         'ucrChkLineSize
         '
@@ -74,7 +90,7 @@ Partial Class ucrElementLineControl
         Me.ucrChkLineSize.Location = New System.Drawing.Point(8, 19)
         Me.ucrChkLineSize.Name = "ucrChkLineSize"
         Me.ucrChkLineSize.Size = New System.Drawing.Size(88, 20)
-        Me.ucrChkLineSize.TabIndex = 53
+        Me.ucrChkLineSize.TabIndex = 0
         '
         'ucrChkLineLineType
         '
@@ -82,7 +98,7 @@ Partial Class ucrElementLineControl
         Me.ucrChkLineLineType.Location = New System.Drawing.Point(8, 44)
         Me.ucrChkLineLineType.Name = "ucrChkLineLineType"
         Me.ucrChkLineLineType.Size = New System.Drawing.Size(88, 20)
-        Me.ucrChkLineLineType.TabIndex = 52
+        Me.ucrChkLineLineType.TabIndex = 2
         '
         'ucrChkLineColour
         '
@@ -90,7 +106,7 @@ Partial Class ucrElementLineControl
         Me.ucrChkLineColour.Location = New System.Drawing.Point(8, 69)
         Me.ucrChkLineColour.Name = "ucrChkLineColour"
         Me.ucrChkLineColour.Size = New System.Drawing.Size(88, 20)
-        Me.ucrChkLineColour.TabIndex = 51
+        Me.ucrChkLineColour.TabIndex = 4
         '
         'ucrInputLineLineEnd
         '
@@ -100,7 +116,7 @@ Partial Class ucrElementLineControl
         Me.ucrInputLineLineEnd.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputLineLineEnd.Name = "ucrInputLineLineEnd"
         Me.ucrInputLineLineEnd.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputLineLineEnd.TabIndex = 32
+        Me.ucrInputLineLineEnd.TabIndex = 7
         '
         'ucrNudLineSize
         '
@@ -111,7 +127,7 @@ Partial Class ucrElementLineControl
         Me.ucrNudLineSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudLineSize.Name = "ucrNudLineSize"
         Me.ucrNudLineSize.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudLineSize.TabIndex = 30
+        Me.ucrNudLineSize.TabIndex = 1
         Me.ucrNudLineSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrInputLineLineType
@@ -122,7 +138,7 @@ Partial Class ucrElementLineControl
         Me.ucrInputLineLineType.Margin = New System.Windows.Forms.Padding(21, 17, 21, 17)
         Me.ucrInputLineLineType.Name = "ucrInputLineLineType"
         Me.ucrInputLineLineType.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputLineLineType.TabIndex = 26
+        Me.ucrInputLineLineType.TabIndex = 3
         '
         'ucrElementLineControl
         '
