@@ -474,8 +474,8 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareSheetColumnMetadata_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameColumnMetadata.Click
-        frmVariables.Visible = True
-        frmVariables.BringToFront()
+        mnuViewColumnMetadata.Checked = True
+        UpdateLayout()
     End Sub
 
     Private Sub mnuPrepareSheetInsertColumnsRows_Click(sender As Object, e As EventArgs) Handles mnuPrepareDataFrameInsertColumnsRows.Click

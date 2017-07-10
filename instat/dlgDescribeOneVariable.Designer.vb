@@ -38,7 +38,6 @@ Partial Class dlgDescribeOneVariable
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.cmdSummaries = New System.Windows.Forms.Button()
         Me.lblSelectedVariable = New System.Windows.Forms.Label()
         Me.ucrBaseDescribeOneVar = New instat.ucrButtons()
         Me.ucrReceiverDescribeOneVar = New instat.ucrReceiverMultiple()
@@ -48,17 +47,8 @@ Partial Class dlgDescribeOneVariable
         Me.ucrChkCustomise = New instat.ucrCheck()
         Me.lblMaxSum = New System.Windows.Forms.Label()
         Me.ucrNudMaxSum = New instat.ucrNud()
+        Me.cmdSummaries = New System.Windows.Forms.Button()
         Me.SuspendLayout()
-        '
-        'cmdSummaries
-        '
-        Me.cmdSummaries.Location = New System.Drawing.Point(305, 189)
-        Me.cmdSummaries.Name = "cmdSummaries"
-        Me.cmdSummaries.Size = New System.Drawing.Size(76, 23)
-        Me.cmdSummaries.TabIndex = 4
-        Me.cmdSummaries.Tag = "Summaries"
-        Me.cmdSummaries.Text = "Summaries..."
-        Me.cmdSummaries.UseVisualStyleBackColor = True
         '
         'lblSelectedVariable
         '
@@ -103,7 +93,7 @@ Partial Class dlgDescribeOneVariable
         Me.ucrChkOmitMissing.Checked = False
         Me.ucrChkOmitMissing.Location = New System.Drawing.Point(10, 235)
         Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
-        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(166, 20)
         Me.ucrChkOmitMissing.TabIndex = 7
         '
         'ucrChkSaveResult
@@ -111,7 +101,7 @@ Partial Class dlgDescribeOneVariable
         Me.ucrChkSaveResult.Checked = False
         Me.ucrChkSaveResult.Location = New System.Drawing.Point(10, 262)
         Me.ucrChkSaveResult.Name = "ucrChkSaveResult"
-        Me.ucrChkSaveResult.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkSaveResult.Size = New System.Drawing.Size(166, 20)
         Me.ucrChkSaveResult.TabIndex = 8
         '
         'ucrChkCustomise
@@ -128,14 +118,14 @@ Partial Class dlgDescribeOneVariable
         Me.lblMaxSum.Location = New System.Drawing.Point(7, 210)
         Me.lblMaxSum.Name = "lblMaxSum"
         Me.lblMaxSum.Size = New System.Drawing.Size(133, 13)
-        Me.lblMaxSum.TabIndex = 0
+        Me.lblMaxSum.TabIndex = 5
         Me.lblMaxSum.Text = "Max Factor Levels Shown:"
         '
         'ucrNudMaxSum
         '
         Me.ucrNudMaxSum.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxSum.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMaxSum.Location = New System.Drawing.Point(139, 207)
+        Me.ucrNudMaxSum.Location = New System.Drawing.Point(140, 208)
         Me.ucrNudMaxSum.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMaxSum.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaxSum.Name = "ucrNudMaxSum"
@@ -143,11 +133,22 @@ Partial Class dlgDescribeOneVariable
         Me.ucrNudMaxSum.TabIndex = 6
         Me.ucrNudMaxSum.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
+        'cmdSummaries
+        '
+        Me.cmdSummaries.AutoSize = True
+        Me.cmdSummaries.Location = New System.Drawing.Point(305, 189)
+        Me.cmdSummaries.Name = "cmdSummaries"
+        Me.cmdSummaries.Size = New System.Drawing.Size(77, 23)
+        Me.cmdSummaries.TabIndex = 4
+        Me.cmdSummaries.Tag = "Summaries"
+        Me.cmdSummaries.Text = "Summaries..."
+        Me.cmdSummaries.UseVisualStyleBackColor = True
+        '
         'dlgDescribeOneVariable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(416, 341)
+        Me.ClientSize = New System.Drawing.Size(415, 345)
         Me.Controls.Add(Me.lblMaxSum)
         Me.Controls.Add(Me.ucrNudMaxSum)
         Me.Controls.Add(Me.ucrChkCustomise)
@@ -170,7 +171,6 @@ Partial Class dlgDescribeOneVariable
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents cmdSummaries As Button
     Friend WithEvents lblSelectedVariable As Label
     Friend WithEvents ucrBaseDescribeOneVar As ucrButtons
     Friend WithEvents ucrReceiverDescribeOneVar As ucrReceiverMultiple
@@ -180,4 +180,5 @@ Partial Class dlgDescribeOneVariable
     Friend WithEvents ucrChkCustomise As ucrCheck
     Friend WithEvents lblMaxSum As Label
     Friend WithEvents ucrNudMaxSum As ucrNud
+    Friend WithEvents cmdSummaries As Button
 End Class
