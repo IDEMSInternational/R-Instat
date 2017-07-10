@@ -23,6 +23,7 @@ Public Class dlgMakeDate
     Private strSelectedColumn As String = ""
     Private strSelectedDataFrame As String = ""
     Private clsDateFunction, clsMakeYearDay, clsHelp, clsMakeYearMonthDay As New RFunction
+
     Private Sub dlgMakeDate_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -40,6 +41,13 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub InitialiseDialog()
+        clsHelp = New RFunction
+        clsHelp.SetPackageName("utils")
+        clsHelp.SetRCommand("help")
+        clsHelp.AddParameter("topic", Chr(34) & "strptime" & Chr(34))
+        clsHelp.AddParameter("package", Chr(34) & "base" & Chr(34))
+        clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
+
         'helpID
         ucrBase.iHelpTopicID = 461
         txtTextDateFormats.ReadOnly = True
@@ -66,23 +74,26 @@ Public Class dlgMakeDate
         ucrInputComboBoxMonthTwo.SetDropDownStyleAsNonEditable()
 
         ucrInputFormat.SetParameter(New RParameter("format", 1))
-        dctDateFormat.Add("Year(4-digits)-Month-Day", Chr(34) & "%Y-%m-%d" & Chr(34))
-        dctDateFormat.Add("Day-Month-Year(4-digits)", Chr(34) & "%d-%m-%Y" & Chr(34))
-        dctDateFormat.Add("Day-Year(4-digits)-Month", Chr(34) & "%d-%Y-%m" & Chr(34))
-        dctDateFormat.Add("Month-day-Year(4-digits)", Chr(34) & "%m-%d-%Y" & Chr(34))
+        dctDateFormat.Add("Year(4-digit)-Month-Day", Chr(34) & "%Y-%m-%d" & Chr(34))
+        dctDateFormat.Add("Year(4-digit)/Month/Day", Chr(34) & "%Y/%m/%d" & Chr(34))
+        dctDateFormat.Add("Year(4-digit)-Month(Full Name)-Day", Chr(34) & "%Y-%B-%d" & Chr(34))
+        dctDateFormat.Add("Year(4-digit)/Month(Full Name)/Day", Chr(34) & "%Y/%B/%d" & Chr(34))
+        dctDateFormat.Add("Year(4-digit)-Month(abbr)-Day", Chr(34) & "%Y-%b-%d" & Chr(34))
+        dctDateFormat.Add("Year(4-digit)/Month(abbr)/Day", Chr(34) & "%Y/%b/%d" & Chr(34))
 
-        dctDateFormat.Add("Year(4-digits)/Month/Day", Chr(34) & "%Y/%m/%d" & Chr(34))
-        dctDateFormat.Add("Day/Month/Year(4-digits)", Chr(34) & "%d/%m/%Y" & Chr(34))
-        dctDateFormat.Add("Day/Year/Month(4-digits)", Chr(34) & "%d/%Y/%m" & Chr(34))
-        dctDateFormat.Add("Month/day/Year(4-digits)", Chr(34) & "%m/%d/%Y" & Chr(34))
+        dctDateFormat.Add("Day-Month-Year(4-digit)", Chr(34) & "%d-%m-%Y" & Chr(34))
+        dctDateFormat.Add("Day/Month/Year(4-digit)", Chr(34) & "%d/%m/%Y" & Chr(34))
+        dctDateFormat.Add("Day-Month(Full Name)-Year(4-digit)", Chr(34) & "%d-%B-%Y" & Chr(34))
+        dctDateFormat.Add("Day/Month(Full Name)/Year(4-digit)", Chr(34) & "%d/%B/%Y" & Chr(34))
+        dctDateFormat.Add("Day-Month(abbr)-Year(4-digit)", Chr(34) & "%d-%b-%Y" & Chr(34))
+        dctDateFormat.Add("Day/Month(abbr)/Year(4-digit)", Chr(34) & "%d/%b/%Y" & Chr(34))
 
-        dctDateFormat.Add("Day-Month(abbr)-Year(2-digits)", Chr(34) & "%d-%b-%y" & Chr(34))
-        dctDateFormat.Add("Day-Month(Full name)-Year(2-digits)", Chr(34) & "%d-%B-%y" & Chr(34))
-        dctDateFormat.Add("Day-Month(Full Name)-Year(4-digits)", Chr(34) & "%d-%B-%Y" & Chr(34))
-
-        dctDateFormat.Add("Day/Month(abbr)/Year((2-digits))", Chr(34) & "%d/%b/%y" & Chr(34))
-        dctDateFormat.Add("Day/Month(Full name)/Year(2-digits)", Chr(34) & "%d/%B/%y" & Chr(34))
-        dctDateFormat.Add("Day/Month(Full Name)/Year(4-digits)", Chr(34) & "%d/%B/%Y" & Chr(34))
+        dctDateFormat.Add("Month-Day-Year(4-digit)", Chr(34) & "%m-%d-%Y" & Chr(34))
+        dctDateFormat.Add("Month/Day/Year(4-digit)", Chr(34) & "%m/%d/%Y" & Chr(34))
+        dctDateFormat.Add("Month(Full Name)-Day-Year(4-digit)", Chr(34) & "%B-%d-%Y" & Chr(34))
+        dctDateFormat.Add("Month(Full Name)/Day/Year(4-digit)", Chr(34) & "%B/%d/%Y" & Chr(34))
+        dctDateFormat.Add("Month(abbr)-Day-Year(4-digit)", Chr(34) & "%b-%d-%Y" & Chr(34))
+        dctDateFormat.Add("Month(abbr)/Day/Year(4-digit)", Chr(34) & "%b/%d/%Y" & Chr(34))
 
         ucrInputFormat.SetItems(dctDateFormat)
         ucrInputFormat.SetDropDownStyleAsEditable(bAdditionsAllowed:=True)
@@ -188,7 +199,7 @@ Public Class dlgMakeDate
         ucrReceiverForDate.SetLinkedDisplayControl(grpSingleColumn)
 
         ''linking up ucrinputs for format and origin
-        ucrPnlFormat.AddToLinkedControls(ucrInputFormat, {rdoSpecifyFormat}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Year-Month-Day")
+        ucrPnlFormat.AddToLinkedControls(ucrInputFormat, {rdoSpecifyFormat}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Year(4-digit)-Month-Day")
         ucrPnlFormat.AddToLinkedControls(ucrInputOrigin, {rdoSpecifyOrigin}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Excel")
 
         'when rdoTwoColumn is checked
@@ -318,13 +329,7 @@ Public Class dlgMakeDate
     End Sub
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
-        Dim clsHelp As New RFunction
-        clsHelp.SetPackageName("utils")
-        clsHelp.SetRCommand("help")
-        clsHelp.AddParameter("topic", Chr(34) & "strptime" & Chr(34))
-        clsHelp.AddParameter("package", Chr(34) & "base" & Chr(34))
-        clsHelp.AddParameter("help_type", Chr(34) & "html" & Chr(34))
-        frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Date-Time Conversion Functions to and from Character", bSeparateThread:=False)
+        frmMain.clsRLink.RunScript(clsHelp.ToScript, strComment:="Display Help page for Date-Time Conversion Functions", bSeparateThread:=False)
     End Sub
 
     Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
@@ -335,7 +340,7 @@ Public Class dlgMakeDate
 
     Private Sub SelectorHeader()
         If rdoDefaultFormat.Checked Then
-            ucrReceiverForDate.strSelectorHeading = "Factors"
+            ucrReceiverForDate.strSelectorHeading = "Characters"
         ElseIf rdoSpecifyOrigin.Checked Then
             ucrReceiverForDate.strSelectorHeading = "Numerics"
         Else
