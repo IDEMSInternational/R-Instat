@@ -162,8 +162,8 @@ Public Class dlgPrincipalComponentAnalysis
         clsRVariablesPlot.SetOperatorParameter(True, clsRFunc:=clsRVariablesPlotFunction)
         clsRVariablesPlot.SetOperatorParameter(False, clsRFunc:=clsRVariablesPlotTheme)
         clsRVariablesPlotFunctionValue.SetRCommand("c")
-        clsRVariablesPlotFunctionValue.AddParameter("first_dim", 1, bIncludeArgumentName:=False)
-        clsRVariablesPlotFunctionValue.AddParameter("second_dim", 2, bIncludeArgumentName:=False)
+        clsRVariablesPlotFunctionValue.AddParameter("first_dim", 1, bIncludeArgumentName:=False, iPosition:=0)
+        clsRVariablesPlotFunctionValue.AddParameter("second_dim", 2, bIncludeArgumentName:=False, iPosition:=1)
         clsRVariablesPlotFunction.AddParameter("axes", clsRFunctionParameter:=clsRVariablesPlotFunctionValue, iPosition:=1)
 
         ' Individual Plot
@@ -177,8 +177,8 @@ Public Class dlgPrincipalComponentAnalysis
         clsRIndividualsPlot.SetOperatorParameter(True, clsRFunc:=clsRIndividualsPlotFunction)
         clsRIndividualsPlot.SetOperatorParameter(False, clsRFunc:=clsRIndividualsPlotTheme)
         clsRIndividualsFunctionValue.SetRCommand("c")
-        clsRIndividualsFunctionValue.AddParameter("first_dim", 1, bIncludeArgumentName:=False)
-        clsRIndividualsFunctionValue.AddParameter("second_dim", 2, bIncludeArgumentName:=False)
+        clsRIndividualsFunctionValue.AddParameter("first_dim", 1, bIncludeArgumentName:=False, iPosition:=0)
+        clsRIndividualsFunctionValue.AddParameter("second_dim", 2, bIncludeArgumentName:=False, iPosition:=1)
         clsRIndividualsPlotFunction.AddParameter("axes", clsRFunctionParameter:=clsRIndividualsFunctionValue, iPosition:=1)
 
         ' Biplot
@@ -192,8 +192,8 @@ Public Class dlgPrincipalComponentAnalysis
         clsRBiplot.SetOperatorParameter(True, clsRFunc:=clsRBiplotFunction)
         clsRBiplot.SetOperatorParameter(False, clsRFunc:=clsRBiplotTheme)
         clsRBiplotFunctionValue.SetRCommand("c")
-        clsRBiplotFunctionValue.AddParameter("first_dim", 1, bIncludeArgumentName:=False)
-        clsRBiplotFunctionValue.AddParameter("second_dim", 2, bIncludeArgumentName:=False)
+        clsRBiplotFunctionValue.AddParameter("first_dim", 1, bIncludeArgumentName:=False, iPosition:=0)
+        clsRBiplotFunctionValue.AddParameter("second_dim", 2, bIncludeArgumentName:=False, iPosition:=1)
         clsRBiplotFunction.AddParameter("axes", clsRFunctionParameter:=clsRBiplotFunctionValue, iPosition:=1)
 
         ' Barplot

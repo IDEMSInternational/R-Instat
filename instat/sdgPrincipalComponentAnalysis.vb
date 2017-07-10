@@ -53,10 +53,10 @@ Public Class sdgPrincipalComponentAnalysis
         ucrChkRotation.AddParameterPresentCondition(True, "MARGIN")
         ucrChkRotation.AddParameterPresentCondition(False, "MARGIN", False)
 
-        ucrNudDim1.SetParameter(New RParameter("first_dim", 0))
+        ucrNudDim1.SetParameter(New RParameter("first_dim", 0, bNewIncludeArgumentName:=False))
         ucrNudDim1.SetMinMax(1, 2)
 
-        ucrNudDim2.SetParameter(New RParameter("second_dim", 0))
+        ucrNudDim2.SetParameter(New RParameter("second_dim", 1, bNewIncludeArgumentName:=False))
         ucrNudDim2.SetMinMax(1, 2)
 
         ucrPnlGraphics.AddRadioButton(rdoScreePlot)
@@ -165,9 +165,9 @@ Public Class sdgPrincipalComponentAnalysis
         ucrInputLabel2.AddAdditionalCodeParameterPair(clsRVariablesPlotFunction, New RParameter("label"), iAdditionalPairNo:=1)
         ucrInputLabel2.AddAdditionalCodeParameterPair(clsRIndividualsPlotFunction, New RParameter("label"), iAdditionalPairNo:=2)
         ucrInputLabel2.AddAdditionalCodeParameterPair(clsRBiplotFunction, New RParameter("label"), iAdditionalPairNo:=3)
-        ucrNudDim1.AddAdditionalCodeParameterPair(clsRIndividualsPlotFunctionValue, New RParameter("first_dim", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrNudDim1.AddAdditionalCodeParameterPair(clsRVariablesPlotFunctionValue, New RParameter("first_dim", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrNudDim1.AddAdditionalCodeParameterPair(clsRBiplotFunctionValue, New RParameter("first_dim", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
-        ucrNudDim2.AddAdditionalCodeParameterPair(clsRIndividualsPlotFunctionValue, New RParameter("second_dim", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrNudDim2.AddAdditionalCodeParameterPair(clsRVariablesPlotFunctionValue, New RParameter("second_dim", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrNudDim2.AddAdditionalCodeParameterPair(clsRBiplotFunctionValue, New RParameter("second_dim", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
         ucrPnlIndividualPlot.AddAdditionalCodeParameterPair(clsRBiplotFunction, New RParameter("geom"), iAdditionalPairNo:=1)
 
@@ -182,10 +182,8 @@ Public Class sdgPrincipalComponentAnalysis
         ucrChkRotation.SetRCode(clsRRotation, bReset, bCloneIfNeeded:=True)
         ucrPnlGraphics.SetRSyntax(clsRsyntax, bReset)
         ucrPnlScreePlot.SetRCode(clsRScreePlotFunction, bReset)
-
-        'Not sure how this can be passed by the control.
-        ucrNudDim1.SetRCode(clsRVariablesPlotFunctionValue, bReset, bCloneIfNeeded:=True)
-        ucrNudDim2.SetRCode(clsRVariablesPlotFunctionValue, bReset, bCloneIfNeeded:=True)
+        ucrNudDim1.SetRCode(clsRIndividualsPlotFunctionValue, bReset, bCloneIfNeeded:=True)
+        ucrNudDim2.SetRCode(clsRIndividualsPlotFunctionValue, bReset, bCloneIfNeeded:=True)
 
         Dimensions()
         If bReset Then
