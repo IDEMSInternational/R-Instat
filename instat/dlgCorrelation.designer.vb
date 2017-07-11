@@ -73,7 +73,7 @@ Partial Class dlgCorrelation
         Me.lblFirstColumn.Location = New System.Drawing.Point(258, 75)
         Me.lblFirstColumn.Name = "lblFirstColumn"
         Me.lblFirstColumn.Size = New System.Drawing.Size(67, 13)
-        Me.lblFirstColumn.TabIndex = 4
+        Me.lblFirstColumn.TabIndex = 5
         Me.lblFirstColumn.Tag = "First_column"
         Me.lblFirstColumn.Text = "First Column:"
         '
@@ -83,7 +83,7 @@ Partial Class dlgCorrelation
         Me.lblSecondColumn.Location = New System.Drawing.Point(258, 127)
         Me.lblSecondColumn.Name = "lblSecondColumn"
         Me.lblSecondColumn.Size = New System.Drawing.Size(85, 13)
-        Me.lblSecondColumn.TabIndex = 6
+        Me.lblSecondColumn.TabIndex = 8
         Me.lblSecondColumn.Tag = "Second_column"
         Me.lblSecondColumn.Text = "Second Column:"
         '
@@ -281,7 +281,7 @@ Partial Class dlgCorrelation
         Me.ucrReceiverMultipleColumns.Selector = Nothing
         Me.ucrReceiverMultipleColumns.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverMultipleColumns.strNcFilePath = ""
-        Me.ucrReceiverMultipleColumns.TabIndex = 9
+        Me.ucrReceiverMultipleColumns.TabIndex = 7
         Me.ucrReceiverMultipleColumns.ucrSelector = Nothing
         '
         'ucrReceiverSecondColumn
@@ -293,7 +293,7 @@ Partial Class dlgCorrelation
         Me.ucrReceiverSecondColumn.Selector = Nothing
         Me.ucrReceiverSecondColumn.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverSecondColumn.strNcFilePath = ""
-        Me.ucrReceiverSecondColumn.TabIndex = 7
+        Me.ucrReceiverSecondColumn.TabIndex = 9
         Me.ucrReceiverSecondColumn.ucrSelector = Nothing
         '
         'ucrReceiverFirstColumn
@@ -305,7 +305,7 @@ Partial Class dlgCorrelation
         Me.ucrReceiverFirstColumn.Selector = Nothing
         Me.ucrReceiverFirstColumn.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverFirstColumn.strNcFilePath = ""
-        Me.ucrReceiverFirstColumn.TabIndex = 5
+        Me.ucrReceiverFirstColumn.TabIndex = 6
         Me.ucrReceiverFirstColumn.ucrSelector = Nothing
         '
         'ucrSelectorCorrelation
@@ -331,7 +331,7 @@ Partial Class dlgCorrelation
         Me.lblSelectedVariables.Location = New System.Drawing.Point(258, 75)
         Me.lblSelectedVariables.Name = "lblSelectedVariables"
         Me.lblSelectedVariables.Size = New System.Drawing.Size(53, 13)
-        Me.lblSelectedVariables.TabIndex = 8
+        Me.lblSelectedVariables.TabIndex = 4
         Me.lblSelectedVariables.Tag = ""
         Me.lblSelectedVariables.Text = "Variables:"
         '
@@ -339,7 +339,7 @@ Partial Class dlgCorrelation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(461, 436)
+        Me.ClientSize = New System.Drawing.Size(461, 431)
         Me.Controls.Add(Me.lblSelectedVariables)
         Me.Controls.Add(Me.ucrSaveModel)
         Me.Controls.Add(Me.ucrNudConfidenceInterval)
