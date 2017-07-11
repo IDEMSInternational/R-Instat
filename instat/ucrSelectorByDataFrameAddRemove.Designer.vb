@@ -28,6 +28,7 @@ Partial Class ucrSelectorByDataFrameAddRemove
         '
         'ucrAvailableDataFrames
         '
+        Me.ucrAvailableDataFrames.bUseCurrentFilter = True
         Me.ucrAvailableDataFrames.TabIndex = 0
         '
         'lstAvailableVariable
@@ -58,6 +59,7 @@ Partial Class ucrSelectorByDataFrameAddRemove
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.bUseCurrentFilter = True
         Me.Controls.Add(Me.btnDataOptions)
         Me.Controls.Add(Me.btnAdd)
         Me.Name = "ucrSelectorByDataFrameAddRemove"
