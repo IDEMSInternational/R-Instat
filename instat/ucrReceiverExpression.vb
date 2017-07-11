@@ -66,7 +66,7 @@ Public Class ucrReceiverExpression
             kvpItem = New KeyValuePair(Of String, String)(strDataFrame, strItem)
             AddToItemsInExpressionList(kvpItem)
             AddToReceiverAtCursorPosition(strItem)
-            Selector.AddToVariablesList(strItem)
+            Selector.AddToVariablesList(strItem, strDataFrame)
             OnSelectionChanged()
         End If
     End Sub
@@ -101,7 +101,7 @@ Public Class ucrReceiverExpression
         If cboExpression.Enabled Then
             If Selector IsNot Nothing Then
                 For Each kvpItem In lstItemsInExpression
-                    Selector.RemoveFromVariablesList(kvpItem.Value)
+                    Selector.RemoveFromVariablesList(kvpItem.Value, kvpItem.Key)
                 Next
             End If
             cboExpression.Text = ""
