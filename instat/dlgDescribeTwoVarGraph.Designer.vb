@@ -50,9 +50,9 @@ Partial Class dlgDescribeTwoVarGraph
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(10, 193)
+        Me.cmdOptions.Location = New System.Drawing.Point(10, 197)
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(98, 23)
+        Me.cmdOptions.Size = New System.Drawing.Size(120, 23)
         Me.cmdOptions.TabIndex = 5
         Me.cmdOptions.Tag = "Options..."
         Me.cmdOptions.Text = "Options"
@@ -122,7 +122,7 @@ Partial Class dlgDescribeTwoVarGraph
         '
         Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 230)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(294, 24)
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(255, 24)
         Me.ucrSaveGraph.TabIndex = 6
         '
         'dlgDescribeTwoVarGraph
