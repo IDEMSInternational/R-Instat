@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgScatterPlot
     Inherits System.Windows.Forms.Form
 
@@ -81,14 +97,14 @@ Partial Class dlgScatterPlot
         Me.ucrChkLineofBestFit.Location = New System.Drawing.Point(10, 260)
         Me.ucrChkLineofBestFit.Name = "ucrChkLineofBestFit"
         Me.ucrChkLineofBestFit.Size = New System.Drawing.Size(173, 20)
-        Me.ucrChkLineofBestFit.TabIndex = 10
+        Me.ucrChkLineofBestFit.TabIndex = 8
         '
         'ucrSaveScatterPlot
         '
         Me.ucrSaveScatterPlot.Location = New System.Drawing.Point(10, 285)
         Me.ucrSaveScatterPlot.Name = "ucrSaveScatterPlot"
-        Me.ucrSaveScatterPlot.Size = New System.Drawing.Size(250, 24)
-        Me.ucrSaveScatterPlot.TabIndex = 8
+        Me.ucrSaveScatterPlot.Size = New System.Drawing.Size(255, 24)
+        Me.ucrSaveScatterPlot.TabIndex = 9
         '
         'ucrSelectorForScatter
         '
@@ -141,7 +157,7 @@ Partial Class dlgScatterPlot
         Me.ucrBase.Location = New System.Drawing.Point(10, 312)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 9
+        Me.ucrBase.TabIndex = 10
         '
         'dlgScatterPlot
         '

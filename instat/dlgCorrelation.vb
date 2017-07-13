@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
@@ -80,9 +80,8 @@ Public Class dlgCorrelation
         ucrPnlMethod.SetRDefault(Chr(34) & "pearson" & Chr(34))
 
         ucrPnlCompletePairwise.SetParameter(New RParameter("use", 5))
-        ucrPnlCompletePairwise.AddRadioButton(rdoCompleteRowsOnly, Chr(34) & "pairwise.complete.obs" & Chr(34))
-        ucrPnlCompletePairwise.AddRadioButton(rdoPairwise, Chr(34) & "complete.obs" & Chr(34))
-        ucrPnlCompletePairwise.SetRDefault(Chr(34) & "pairwise.complete.obs" & Chr(34))
+        ucrPnlCompletePairwise.AddRadioButton(rdoPairwise, Chr(34) & "pairwise.complete.obs" & Chr(34))
+        ucrPnlCompletePairwise.AddRadioButton(rdoCompleteRowsOnly, Chr(34) & "complete.obs" & Chr(34))
 
         'ucrChk
         ucrChkCorrelationMatrix.SetText("Correlation Matrix")
@@ -216,10 +215,11 @@ Public Class dlgCorrelation
         End If
     End Sub
 
+    ' this is here because otherwise the panel cannot be set up correctly if you reopen the dialog when on the 2-variable rdo button
     Private Sub ucrPnlPairwise_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlCompletePairwise.ControlValueChanged
-        If rdoCompleteRowsOnly.Checked Then
+        If rdoPairwise.Checked Then
             clsCorrelationFunction.AddParameter("use", Chr(34) & "pairwise.complete.obs" & Chr(34))
-        ElseIf rdoPairwise.Checked Then
+        ElseIf rdoCompleteRowsOnly.Checked Then
             clsCorrelationFunction.AddParameter("use", Chr(34) & "complete.obs" & Chr(34))
         End If
     End Sub

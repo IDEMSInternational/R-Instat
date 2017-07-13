@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,8 +11,9 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 Imports System.Text.RegularExpressions
 
@@ -21,7 +22,7 @@ Public Class dlgDefineCorruption
     Private bReset As Boolean = True
     Dim clsTypesFunction As New RFunction
     Dim lstReceivers As New List(Of ucrReceiverSingle)
-    Dim lstRecognisedTypes As New List(Of KeyValuePair(Of String, List(Of String)))
+    Dim dctRecognisedTypes As New Dictionary(Of String, List(Of String))
     Private bResetSubdialog As Boolean = False
 
     Private Sub dlgDefineCorruption_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -34,35 +35,29 @@ Public Class dlgDefineCorruption
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        ReopenDialog()
         autoTranslate(Me)
         AutoFillReceivers()
-    End Sub
-
-    Private Sub ReopenDialog()
-
     End Sub
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 499
 
-        Dim kvpCountry As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("country", {"country"}.ToList())
-        Dim kvpRegion As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("region", {"region"}.ToList())
-        Dim kvpProcuringAuthority As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("procuring_authority", {"anb_name"}.ToList())
-        Dim kvpAwardDate As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("award_date", {"award_date"}.ToList())
-        Dim kvpSignatureDate As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("signature_date", {"sign_date"}.ToList())
-        Dim kvpContractTitle As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("contract_title", {"ca_title"}.ToList())
-        Dim kvpContractSector As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("contract_sector", {"cft_sector"}.ToList())
-        Dim kvpProcurementCategory As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("procurement_category", {"ca_type"}.ToList())
-        Dim kvpNoBidsReceived As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("no_bids_received", {"ca_nrbidsrec"}.ToList())
-        Dim kvpNoBidsConsidered As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("no_bids_considered", {"ca_nrbidscons"}.ToList())
-        Dim kvpProcedureType As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("method_type", {"cft_methodtype"}.ToList())
-        Dim kvpWinnerName As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("winner_name", {"w_name"}.ToList())
-        Dim kvpWinnerCountry As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("winner_country", {"w_country"}.ToList())
-        Dim kvpContractValue As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("original_contract_value", {"ca_contract_value"}.ToList())
-        Dim kvpFiscalYear As KeyValuePair(Of String, List(Of String)) = New KeyValuePair(Of String, List(Of String))("fiscal_year", {"fyear"}.ToList())
+        dctRecognisedTypes.Add("country", {"country"}.ToList())
+        dctRecognisedTypes.Add("region", {"region"}.ToList())
+        dctRecognisedTypes.Add("procuring_authority", {"anb_name", "procuring_authority"}.ToList())
+        dctRecognisedTypes.Add("award_date", {"award_date"}.ToList())
+        dctRecognisedTypes.Add("signature_date", {"sign_date", "signature_date"}.ToList())
+        dctRecognisedTypes.Add("contract_title", {"ca_title", "contract_title"}.ToList())
+        dctRecognisedTypes.Add("contract_sector", {"cft_sector", "contract_sector"}.ToList())
+        dctRecognisedTypes.Add("procurement_category", {"ca_type", "procurement_category"}.ToList())
+        dctRecognisedTypes.Add("no_bids_received", {"ca_nrbidsrec", "no_bids_received"}.ToList())
+        dctRecognisedTypes.Add("no_bids_considered", {"ca_nrbidscons", "no_bids_considered"}.ToList())
+        dctRecognisedTypes.Add("method_type", {"cft_methodtype", "method_type"}.ToList())
+        dctRecognisedTypes.Add("winner_name", {"w_name", "winner_name"}.ToList())
+        dctRecognisedTypes.Add("winner_country", {"w_country", "winner_country"}.ToList())
+        dctRecognisedTypes.Add("original_contract_value", {"ca_contract_value", "original_contract_value"}.ToList())
+        dctRecognisedTypes.Add("fiscal_year", {"fyear", "fiscal_year"}.ToList())
 
-        lstRecognisedTypes.AddRange({kvpCountry, kvpRegion, kvpProcuringAuthority, kvpAwardDate, kvpSignatureDate, kvpContractTitle, kvpContractSector, kvpProcurementCategory, kvpNoBidsReceived, kvpNoBidsConsidered, kvpProcedureType, kvpWinnerName, kvpWinnerCountry, kvpContractValue, kvpFiscalYear})
         lstReceivers.AddRange({ucrReceiverCountry, ucrReceiverRegion, ucrReceiverProcuringAuthority, ucrReceiverAwardDate, ucrReceiverSignatureDate, ucrReceiverContractTitle, ucrReceiverContractSector,
                               ucrReceiverProcurementCategory, ucrReceiverNoBids, ucrReceiverNoConsideredBids, ucrReceiverProcedureType, ucrReceiverWinnerName, ucrReceiverWinnerCountry, ucrReceiverContractValue, ucrReceiverFiscalYear})
 
@@ -90,6 +85,12 @@ Public Class dlgDefineCorruption
         ucrChkAutoGenerate.SetParameter(New RParameter("auto_generate", 1))
         ucrChkAutoGenerate.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
+        'temp disabled
+        cmdCalculatedColumns.Enabled = False
+        cmdCountryLevel.Enabled = False
+        ucrChkAutoGenerate.Enabled = False
+        ucrChkAutoGenerate.Checked = False
+
         sdgCorruptionCountryLevelColumns.ucrCountryLevelSelector.SetDataframe(ucrDefineCorruptionSelector.ucrAvailableDataFrames.strCurrDataFrame, bEnableDataframe:=False)
         sdgCorruptionCalculatedColumns.ucrCalculatedColumnsSelector.SetDataframe(ucrDefineCorruptionSelector.ucrAvailableDataFrames.strCurrDataFrame, bEnableDataframe:=False)
         SetRSelector()
@@ -100,11 +101,11 @@ Public Class dlgDefineCorruption
 
         ucrDefineCorruptionSelector.Reset()
         ucrReceiverCountry.SetMeAsReceiver()
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$define_as_corruption")
-        clsDefaultFunction.AddParameter("auto_generate", "TRUE")
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$define_as_procurement")
+        clsDefaultFunction.AddParameter("auto_generate", "FALSE")
         clsTypesFunction.SetRCommand("c")
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
-        ucrBase.clsRsyntax.AddParameter("country_types", clsRFunctionParameter:=clsTypesFunction)
+        ucrBase.clsRsyntax.AddParameter("primary_types", clsRFunctionParameter:=clsTypesFunction)
 
         bResetSubdialog = True
         AutoFillReceivers()
@@ -114,7 +115,8 @@ Public Class dlgDefineCorruption
         ucrDefineCorruptionSelector.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         sdgCorruptionCountryLevelColumns.ucrCountryLevelSelector.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         sdgCorruptionCalculatedColumns.ucrCalculatedColumnsSelector.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrChkAutoGenerate.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        'temp disabled
+        'ucrChkAutoGenerate.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         SetRCodesforReceivers(bReset)
     End Sub
 
@@ -149,7 +151,7 @@ Public Class dlgDefineCorruption
         Dim lstRecognisedValues As List(Of String)
         Dim ucrCurrentReceiver As ucrReceiver
         Dim bFound As Boolean = False
-
+        Dim strSelectorVariable As String
         ucrCurrentReceiver = ucrDefineCorruptionSelector.CurrentReceiver
 
         For Each ucrTempReceiver As ucrReceiver In lstReceivers
@@ -158,8 +160,9 @@ Public Class dlgDefineCorruption
 
             If lstRecognisedValues.Count > 0 Then
                 For Each lviTempVariable As ListViewItem In ucrDefineCorruptionSelector.lstAvailableVariable.Items
+                    strSelectorVariable = Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]|", String.Empty)
                     For Each strValue As String In lstRecognisedValues
-                        If Regex.Replace(lviTempVariable.Text.ToLower(), "[^\w]|_", String.Empty).Contains(strValue) Then
+                        If strSelectorVariable.Contains(strValue) Then
                             ucrTempReceiver.Add(lviTempVariable.Text, ucrDefineCorruptionSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
                             bFound = True
                             Exit For
@@ -180,13 +183,9 @@ Public Class dlgDefineCorruption
 
     Private Function GetRecognisedValues(strVariable As String) As List(Of String)
         Dim lstValues As New List(Of String)
-
-        For Each kvpTemp As KeyValuePair(Of String, List(Of String)) In lstRecognisedTypes
-            If kvpTemp.Key = strVariable Then
-                lstValues = kvpTemp.Value
-                Exit For
-            End If
-        Next
+        If dctRecognisedTypes.ContainsKey(strVariable) Then
+            lstValues = dctRecognisedTypes(strVariable)
+        End If
         Return lstValues
     End Function
 

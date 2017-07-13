@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,8 +11,9 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 Public Class sdgDescribeDisplay
     Public bControlsInitialised As Boolean = False
@@ -22,32 +23,32 @@ Public Class sdgDescribeDisplay
     End Sub
 
     Public Sub InitialiseControls()
+        ucrChkAddMargins.SetParameter(New RParameter("addmargins", 2), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkAddMargins.SetText("Add Margins")
-        ucrChkAddMargins.SetParameter(New RParameter("addmargins"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkAddMargins.SetRDefault("FALSE")
 
-        ucrChkPercentages.SetText("Percentages")
-        ucrChkPercentages.SetParameter(New RParameter("percentages"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        ucrChkPercentages.SetRDefault("FALSE")
-
+        ucrChkProportions.SetParameter(New RParameter("proportions", 3), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkProportions.SetText("Proportions")
-        ucrChkProportions.SetParameter(New RParameter("proportions"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkProportions.SetRDefault("FALSE")
 
+        ucrChkPercentages.SetParameter(New RParameter("percentages", 4), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkPercentages.SetText("Percentages")
+        ucrChkPercentages.SetRDefault("FALSE")
+
+        ucrChkTranspose.SetParameter(New RParameter("transpose", 5), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkTranspose.SetText("Transpose")
-        ucrChkTranspose.SetParameter(New RParameter("transpose"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkTranspose.SetRDefault("FALSE")
 
-        ucrChkSignifLevel.SetText("Significance Level")
-        ucrChkSignifLevel.SetParameter(New RParameter("sign_level"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
-        ucrChkSignifLevel.SetRDefault("FALSE")
-
+        ucrChkSignifStars.SetParameter(New RParameter("signif.stars", 2), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkSignifStars.SetText("Significance Stars")
-        ucrChkSignifStars.SetParameter(New RParameter("signif.stars"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkSignifStars.SetRDefault("FALSE")
 
+        ucrChkSignifLevel.SetParameter(New RParameter("sign_level", 3), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+        ucrChkSignifLevel.SetText("Significance Level")
+        ucrChkSignifLevel.SetRDefault("FALSE")
+
+        ucrChkMeans.SetParameter(New RParameter("means", 4), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkMeans.SetText("Means")
-        ucrChkMeans.SetParameter(New RParameter("means"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkMeans.SetRDefault("FALSE")
     End Sub
 
@@ -57,13 +58,13 @@ Public Class sdgDescribeDisplay
         End If
         clsRFreqDispOptions = clsNewFreqRFunction
         clsRAnovaDispOptions = clsNewAnovaRFunction
-        ucrChkAddMargins.SetRCode(clsRFreqDispOptions, bReset)
-        ucrChkTranspose.SetRCode(clsRFreqDispOptions, bReset)
-        ucrChkProportions.SetRCode(clsRFreqDispOptions, bReset)
-        ucrChkPercentages.SetRCode(clsRFreqDispOptions, bReset)
-        ucrChkMeans.SetRCode(clsRAnovaDispOptions, bReset)
-        ucrChkSignifStars.SetRCode(clsRAnovaDispOptions, bReset)
-        ucrChkSignifLevel.SetRCode(clsRAnovaDispOptions, bReset)
+        ucrChkAddMargins.SetRCode(clsRFreqDispOptions, bReset, bCloneIfNeeded:=True)
+        ucrChkTranspose.SetRCode(clsRFreqDispOptions, bReset, bCloneIfNeeded:=True)
+        ucrChkProportions.SetRCode(clsRFreqDispOptions, bReset, bCloneIfNeeded:=True)
+        ucrChkPercentages.SetRCode(clsRFreqDispOptions, bReset, bCloneIfNeeded:=True)
+        ucrChkMeans.SetRCode(clsRAnovaDispOptions, bReset, bCloneIfNeeded:=True)
+        ucrChkSignifStars.SetRCode(clsRAnovaDispOptions, bReset, bCloneIfNeeded:=True)
+        ucrChkSignifLevel.SetRCode(clsRAnovaDispOptions, bReset, bCloneIfNeeded:=True)
         GrpBoxEnable()
     End Sub
 

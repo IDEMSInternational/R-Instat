@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat
@@ -25,6 +25,8 @@ Public Class ucrReorder
     Dim selectedIndex As Integer
     Dim itemsCount As Integer
     Public bWithQuotes As Boolean = True
+    Public bIsDataType As Boolean = True
+    Public Event SelectedIndexChanged(sender As Object, e As EventArgs)
 
     Public Sub New()
 
@@ -52,7 +54,7 @@ Public Class ucrReorder
                 lstAvailableData.Columns.Add("Objects")
         End Select
         lstAvailableData.Columns(0).Width = -2
-        loadList()
+        LoadList()
     End Sub
 
     Private Sub cmdUp_Click(sender As Object, e As EventArgs) Handles cmdUp.Click
@@ -158,40 +160,42 @@ Public Class ucrReorder
 
     Public Sub setDataframes(dfDataframes As ucrDataFrame)
         ucrDataFrameList = dfDataframes
-        loadList()
+        LoadList()
     End Sub
 
     Public Sub setReceiver(dfSingle As ucrReceiverSingle)
         ucrReceiver = dfSingle
-        loadList()
+        LoadList()
     End Sub
 
-    Public Sub loadList()
-        Dim vecNames As CharacterVector
-        Select Case strDataType
-            Case "column"
-                If ucrDataFrameList IsNot Nothing AndAlso ucrDataFrameList.cboAvailableDataFrames.Text <> "" Then
-                    vecNames = frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_column_names(data_name = " & Chr(34) & ucrDataFrameList.cboAvailableDataFrames.SelectedItem & Chr(34) & ")").AsCharacter
-                End If
-            Case "factor"
-                'Using Contains means ordered factors will also be shown.
-                If ucrReceiver IsNot Nothing AndAlso Not ucrReceiver.IsEmpty() AndAlso ucrReceiver.strCurrDataType.Contains("factor") Then
-                    vecNames = frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_column_factor_levels(data_name = " & Chr(34) & ucrReceiver.GetDataName() & Chr(34) & ", col_name = " & ucrReceiver.GetVariableNames() & ")").AsCharacter
-                End If
-            Case "data frame"
-                vecNames = frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_data_names()").AsCharacter
-            Case "metadata"
-                If ucrDataFrameList IsNot Nothing AndAlso ucrDataFrameList.cboAvailableDataFrames.Text <> "" Then
-                    vecNames = frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_metadata_fields(data_name = " & Chr(34) & ucrDataFrameList.cboAvailableDataFrames.Text & Chr(34) & ")").AsCharacter
-                End If
-            Case "object"
-                If ucrDataFrameList IsNot Nothing AndAlso ucrDataFrameList.cboAvailableDataFrames.Text <> "" Then
-                    vecNames = frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_object_names(data_name = " & Chr(34) & ucrDataFrameList.cboAvailableDataFrames.Text & Chr(34) & ")").AsCharacter
-                End If
-            Case Else
-                vecNames = Nothing
-        End Select
-        FillListView(vecNames)
+    Public Sub LoadList()
+        Dim vecNames As CharacterVector = Nothing
+        If bIsDataType Then
+            Select Case strDataType
+                Case "column"
+                    If ucrDataFrameList IsNot Nothing AndAlso ucrDataFrameList.cboAvailableDataFrames.Text <> "" Then
+                        vecNames = frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_column_names(data_name = " & Chr(34) & ucrDataFrameList.cboAvailableDataFrames.SelectedItem & Chr(34) & ")").AsCharacter
+                    End If
+                Case "factor"
+                    'Using Contains means ordered factors will also be shown.
+                    If ucrReceiver IsNot Nothing AndAlso Not ucrReceiver.IsEmpty() AndAlso ucrReceiver.strCurrDataType.Contains("factor") Then
+                        vecNames = frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_column_factor_levels(data_name = " & Chr(34) & ucrReceiver.GetDataName() & Chr(34) & ", col_name = " & ucrReceiver.GetVariableNames() & ")").AsCharacter
+                    End If
+                Case "data frame"
+                    vecNames = frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_data_names()").AsCharacter
+                Case "metadata"
+                    If ucrDataFrameList IsNot Nothing AndAlso ucrDataFrameList.cboAvailableDataFrames.Text <> "" Then
+                        vecNames = frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_metadata_fields(data_name = " & Chr(34) & ucrDataFrameList.cboAvailableDataFrames.Text & Chr(34) & ")").AsCharacter
+                    End If
+                Case "object"
+                    If ucrDataFrameList IsNot Nothing AndAlso ucrDataFrameList.cboAvailableDataFrames.Text <> "" Then
+                        vecNames = frmMain.clsRLink.RunInternalScriptGetValue(frmMain.clsRLink.strInstatDataObject & "$get_object_names(data_name = " & Chr(34) & ucrDataFrameList.cboAvailableDataFrames.Text & Chr(34) & ")").AsCharacter
+                    End If
+                Case Else
+                    vecNames = Nothing
+            End Select
+            FillListView(vecNames)
+        End If
     End Sub
 
     Private Sub FillListView(vecNames As CharacterVector)
@@ -219,11 +223,11 @@ Public Class ucrReorder
     End Sub
 
     Private Sub ucrDataFrameList_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrDataFrameList.DataFrameChanged
-        loadList()
+        LoadList()
     End Sub
 
     Private Sub ucrReceiver_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiver.SelectionChanged
-        loadList()
+        LoadList()
     End Sub
 
     'to update this to check if the order has changed
@@ -270,7 +274,6 @@ Public Class ucrReorder
     End Sub
 
     Private Sub ucrReorder_OrderChanged() Handles Me.OrderChanged
-
         OnControlValueChanged()
     End Sub
 
@@ -279,5 +282,13 @@ Public Class ucrReorder
             clsTempParam = New RParameter
         End If
         clsTempParam.SetArgumentValue(GetVariableNames(bWithQuotes))
+    End Sub
+
+    Private Sub ucrReorder_Load(sender As Object, e As EventArgs) Handles Me.Load
+        LoadList()
+    End Sub
+
+    Private Sub lstAvailableData_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstAvailableData.SelectedIndexChanged
+        RaiseEvent SelectedIndexChanged(sender, e)
     End Sub
 End Class
